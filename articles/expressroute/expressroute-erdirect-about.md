@@ -1,18 +1,18 @@
 ---
 title: À propos d’Azure ExpressRoute Direct
-description: Cette page propose une vue d’ensemble d’ExpressRoute Direct.
+description: Découvrez les principales fonctionnalités d’Azure ExpressRoute Direct, ainsi que les informations nécessaires pour l’intégration à ExpressRoute Direct, comme les références (SKU) disponibles et les exigences techniques.
 services: expressroute
-author: jaredr80
+author: duongau
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 08/12/2019
-ms.author: jaredro
-ms.openlocfilehash: f26fdd75e0a6c6228d329a8b9be4743072ae54c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 0365fd8d0d04b7d144ca6826d3d5eff976558eb3
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74083607"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202148"
 ---
 # <a name="about-expressroute-direct"></a>À propose de ExpressRoute Direct
 
@@ -44,7 +44,7 @@ Vous devez commencer par inscrire votre abonnement pour pouvoir utiliser Express
 
 ## <a name="expressroute-direct-circuits"></a>Circuits ExpressRoute Direct
 
-Microsoft Azure ExpressRoute vous permet d’étendre vos réseaux locaux au cloud de Microsoft via une connexion privée assurée par un fournisseur de connectivité. Avec ExpressRoute, vous pouvez établir des connexions aux services cloud Microsoft, tels que Microsoft Azure et Office 365.
+Microsoft Azure ExpressRoute vous permet d’étendre vos réseaux locaux au cloud de Microsoft via une connexion privée assurée par un fournisseur de connectivité. Avec ExpressRoute, vous pouvez établir des connexions aux services de cloud computing Microsoft, comme Microsoft Azure et Microsoft 365.
 
 Chaque emplacement de peering dispose d’un accès au réseau global Microsoft, à n’importe quelle région d’une zone géopolitique par défaut et à toutes les régions du monde à l’aide d’un circuit premium.  
 
@@ -73,7 +73,7 @@ ExpressRoute Direct prend en charge des scénarios d’ingestion massive de donn
     * Vous devez ajouter la balise VLAN externe (STAG) en fonction de l’ID de VLAN spécifié par Microsoft - *Applicable uniquement sur QinQ*
     * Doit prendre en charge plusieurs sessions BGP (VLAN) par port et par appareil
     * Connectivité IPv4 et IPv6. *Pour IPv6, aucune sous-interface supplémentaire n’est créée. L’adresse IPv6 sera ajoutée à la sous-interface existante*. 
-    * Facultatif : Prise en charge du protocole [Bidirectional Forwarding Detection (BFD)](https://docs.microsoft.com/azure/expressroute/expressroute-bfd), qui est configurée par défaut sur l’ensemble des peerings privés et des circuits ExpressRoute
+    * Facultatif : Prise en charge du protocole [Bidirectional Forwarding Detection (BFD)](./expressroute-bfd.md), qui est configurée par défaut sur l’ensemble des peerings privés et des circuits ExpressRoute
 
 ## <a name="vlan-tagging"></a>Balisage VLAN
 

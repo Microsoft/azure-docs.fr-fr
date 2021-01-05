@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 07/16/2019
 ms.author: erhopf
-ms.openlocfilehash: a87bdd7a55036e8b70f0bc5816d2b587c1569202
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 698a1d52af6c2472d6c025851ead1a0b6a6dff82
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77168138"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95015339"
 ---
 # <a name="speech-devices-sdk-microphone-array-recommendations"></a>Recommandations sur le réseau de microphones pour le SDK Speech Devices
 
@@ -27,7 +27,7 @@ Le SDK Speech Devices fonctionne mieux avec un réseau de microphones conçu con
 
 Les géométries de réseau suivantes sont recommandées pour une utilisation avec la pile audio Microsoft. La localisation des sources sonores et le rejet du bruit ambiant sont améliorés avec un plus grand nombre de microphones, selon les applications spécifiques, les scénarios utilisateur et le facteur de forme de l’appareil.
 
-|     | Tableau circulaire |     | Tableau linéaire |     |
+| Micros & Geometrie | Tableau circulaire | Tableau circulaire | Tableau linéaire | Tableau linéaire |
 | --- | -------------- | --- | ------------ | --- |
 |     | <img src="media/speech-devices-sdk/7-mic-c.png" alt="7 mic circular array" width="150"/> | <img src="media/speech-devices-sdk/4-mic-c.png" alt="4 mic circular array" width="150"/> | <img src="media/speech-devices-sdk/4-mic-l.png" alt="4 mic linear array" width="150"/> | <img src="media/speech-devices-sdk/2-mic-l.png" alt="2 mic linear array" width="150"/> |
 | \# Micros | 7 | 4 | 4 | 2 |
@@ -97,7 +97,7 @@ Les directives suivantes concernant l'architecture sont nécessaires lors de l'i
 | Horloge d’échantillonnage      | L'audio de l'appareil doit être exempt de gigue et de parasites, avec une faible dérive |
 | Fonctionnalité d’enregistrement   | L'appareil doit être capable d'enregistrer simultanément des flux Raw de canaux individuels |
 | USB                 | Tous les périphériques d'entrée audio USB doivent définir des descripteurs conformément à la spécification [USB Audio Devices Rev3 Spec](https://www.usb.org/document-library/usb-audio-devices-rev-30-and-adopters-agreement) |
-| Géométrie du microphone | Les pilotes doivent implémenter correctement les [descripteurs de géométrie du réseau de microphones](https://docs.microsoft.com/windows-hardware/drivers/audio/ksproperty-audio-mic-array-geometry) |
+| Géométrie du microphone | Les pilotes doivent implémenter correctement les [descripteurs de géométrie du réseau de microphones](/windows-hardware/drivers/audio/ksproperty-audio-mic-array-geometry) |
 | Détectabilité     | Les appareils ne doivent avoir ni matériel ou microprogramme non détectable ou non contrôlable, ni algorithmes de traitement audio non linéaires basés sur un logiciel tiers de/vers l'appareil |
 | Format de capture      | Les formats de capture doivent utiliser une fréquence d’échantillonnage minimale de 16 kHz et une profondeur recommandée de 24 bits |
 

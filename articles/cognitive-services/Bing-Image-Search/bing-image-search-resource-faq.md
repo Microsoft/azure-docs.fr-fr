@@ -10,14 +10,19 @@ ms.subservice: bing-image-search
 ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: aahi
-ms.openlocfilehash: 6841e573446103466e2719797da9e4161b70b5a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e8502b1d01e0f3fbf5d42e924511cc978690bce4
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68881700"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96342190"
 ---
 # <a name="frequently-asked-questions-faq-about-the-bing-image-search-api"></a>Forum Aux Questions (FAQ) portant sur l’API Recherche d’images Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Trouvez les réponses aux questions fréquemment posées sur les concepts, codes et scénarios relatifs à l’API Recherche d’images Bing pour Microsoft Cognitive Services sur Azure.
 
@@ -25,7 +30,7 @@ Trouvez les réponses aux questions fréquemment posées sur les concepts, codes
 
 Les en-têtes suivants peuvent se produire dans les réponses de l’API Recherche d’images Bing.
 
-| `Attribute`         | `Description` |
+| Attribut           | Description   |
 | ------------------- | ------------- |
 | `X-MSEdge-ClientID` |L’ID unique que Bing a affecté à l’utilisateur |
 | `BingAPIs-Market`   |Le marché qui a été utilisé pour répondre à la requête |
@@ -35,19 +40,22 @@ Il est particulièrement important de conserver l’identifiant du client et de 
 
 Toutefois, lorsque vous appelez l’API Recherche d’images Bing depuis JavaScript, les fonctionnalités de sécurité intégrées de votre navigateur (CORS) peuvent vous empêcher d’accéder aux valeurs de ces en-têtes.
 
-Pour accéder aux en-têtes, vous pouvez effectuer la requête d’API Recherche d’images Bing via un proxy CORS. La réponse émanant d’un proxy de ce type a un en-tête `Access-Control-Expose-Headers` qui met les en-têtes de réponse sur liste verte et les rend disponibles pour JavaScript.
+Pour accéder aux en-têtes, vous pouvez effectuer la requête d’API Recherche d’images Bing via un proxy CORS. La réponse provenant d’un proxy de ce type a un en-tête `Access-Control-Expose-Headers` qui filtre les en-têtes de réponse et les rend accessibles à JavaScript.
 
 Il est facile d’installer un proxy CORS pour autoriser [l’application du didacticiel](tutorial-bing-image-search-single-page-app.md) à accéder aux en-têtes clients facultatifs. Tout d’abord, [installez Node.js](https://nodejs.org/en/download/) si ce n’est pas déjà fait. Entrez alors la commande suivante dans l’invite de commandes.
 
-    npm install -g cors-proxy-server
+```console
+npm install -g cors-proxy-server
+```
 
-Ensuite, remplacez le point de terminaison de l’API Recherche d’images Bing dans le fichier HTML par :
-
-    http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search
+Ensuite, remplacez le point de terminaison de l’API Recherche d’images Bing dans le fichier HTML par :\
+`http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search`
 
 Enfin, lancez le proxy CORS avec la commande suivante :
 
-    cors-proxy-server
+```console
+cors-proxy-server
+```
 
 Laissez la fenêtre de commande ouverte pendant que vous utilisez l’application du tutoriel ; si vous fermez la fenêtre, le proxy s’arrête. Dans la section des en-têtes HTTP (qui peut être développée) sous les résultats de la recherche, vous pouvez maintenant voir l’en-tête `X-MSEdge-ClientID` (entre autres) et vérifier qu’il est identique pour toutes les requêtes.
 
@@ -65,4 +73,4 @@ Votre question concerne-t-elle une fonctionnalité manquante ? Demandez-la ou vo
 
 ## <a name="see-also"></a>Voir aussi
 
- [Stack Overflow : Cognitive Services](https://stackoverflow.com/questions/tagged/bing-api)
+ [Stack Overflow : Cognitive Services](https://stackoverflow.com/questions/tagged/bing-api)

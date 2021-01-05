@@ -5,12 +5,13 @@ ms.topic: conceptual
 author: TimothyMothra
 ms.author: tilee
 ms.date: 04/23/2019
-ms.openlocfilehash: 4cfa136585611e81a4060c5544d5dc464b32f12c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 690304ecef80d988f9a554cd10ce4689f5c72133
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537438"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89070137"
 ---
 # <a name="get-started-with-azure-monitor-application-insights-agent-for-on-premises-servers"></a>Bien démarrer avec Azure Monitor Application Insights Agent pour les serveurs locaux
 
@@ -71,18 +72,19 @@ Enable-ApplicationInsightsMonitoring -InstrumentationKey xxxxxxxx-xxxx-xxxx-xxxx
 
  Affichez vos données de télémétrie :
 
-- [Explorez les métriques](../../azure-monitor/platform/metrics-charts.md) pour surveiller les performances et l’utilisation.
-- [Effectuez des recherches dans les événements et les journaux](../../azure-monitor/app/diagnostic-search.md) pour diagnostiquer les problèmes.
-- [Utilisez la fonctionnalité Analytics](../../azure-monitor/app/analytics.md) pour des requêtes plus élaborées.
-- [Créez des tableaux de bord](../../azure-monitor/app/overview-dashboard.md).
+- [Explorez les métriques](../platform/metrics-charts.md) pour surveiller les performances et l’utilisation.
+- [Effectuez des recherches dans les événements et les journaux](./diagnostic-search.md) pour diagnostiquer les problèmes.
+- [Utilisez la fonctionnalité Analytics](../log-query/log-query-overview.md) pour des requêtes plus élaborées.
+- [Créez des tableaux de bord](./overview-dashboard.md).
 
  Ajoutez des données de télémétrie :
 
 - [Créez des tests web](monitor-web-app-availability.md) pour vous assurer que votre site reste actif.
-- [Ajoutez la télémétrie de client web](../../azure-monitor/app/javascript.md) pour afficher les exceptions à partir du code de la page web et activer le suivi des appels.
-- [Ajoutez le kit de développement logiciel (SDK) Application Insights à votre code](../../azure-monitor/app/asp-net.md) afin de pouvoir insérer un suivi et journaliser les appels.
+- [Ajoutez la télémétrie de client web](./javascript.md) pour afficher les exceptions à partir du code de la page web et activer le suivi des appels.
+- [Ajoutez le kit de développement logiciel (SDK) Application Insights à votre code](./asp-net.md) afin de pouvoir insérer un suivi et journaliser les appels.
 
 En faire plus avec Application Insights Agent :
 
 - Examinez les [instructions détaillées](status-monitor-v2-detailed-instructions.md) pour obtenir une explication des commandes répertoriées ici.
 - Utilisez notre guide pour [résoudre les problèmes](status-monitor-v2-troubleshoot.md) d’Application Insights Agent.
+

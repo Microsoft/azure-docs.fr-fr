@@ -6,18 +6,31 @@ author: Daya-Patil
 manager: carmonm
 ms.topic: article
 ms.service: site-recovery
-ms.date: 10/16/2019
+ms.date: 6/4/2020
 ms.author: dapatil
-ms.openlocfilehash: bf32809f426f3bfcabd08ec3bd95e76202aa8f84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: feb4f6a24653aca8da825af90341c8016255e8b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72433413"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86133805"
 ---
 # <a name="azure-site-recovery-deployment-planner-version-history"></a>Historique des versions du Planificateur de déploiement Azure Site Recovery
 
 Cet article fournit un historique de toutes les versions du Planificateur de déploiement Azure Site Recovery, et décrit les correctifs et limitations connues de chaque version ainsi que leurs dates de publication.
+
+## <a name="version-252"></a>Version 2.52
+
+**Date de publication : 4 juin 2020**
+
+**Correctifs :**
+
+- Ajout de la prise en charge de vCenter 7.0
+- Ajout de la prise en charge des systèmes d’exploitation suivants :
+
+    - SUSE Linux Enterprise 15 (avec toutes les versions mineures)
+    - Red Hat Enterprise Linux 8 (avec toutes les versions mineures)
+
 
 ## <a name="version-251"></a>Version 2.51
 
@@ -156,7 +169,7 @@ En savoir plus sur la [Prise en charge des disques volumineux sur Azure Site Rec
 
 **Limitations connues :**
 
-- Prend en charge uniquement les scénarios de récupération d’urgence de VMware sur Azure. Pour les scénarios de récupération d’urgence de Hyper-V sur Azure, servez-vous de l’[outil de planification de la capacité Hyper-V](./site-recovery-capacity-planning-for-hyper-v-replication.md).
+- Prend en charge uniquement les scénarios de récupération d’urgence de VMware sur Azure. Pour les scénarios de récupération d’urgence de Hyper-V sur Azure, servez-vous de l’[outil de planification de la capacité Hyper-V](./hyper-v-deployment-planner-overview.md).
 - Ne prend pas en charge l’opération GetThroughput dans les régions Microsoft Azure US Government et Chine.
 - L’outil ne peut pas profiler de machines virtuelles si le serveur vCenter possède au moins deux machines virtuelles ayant le même nom ou la même adresse IP sur plusieurs hôtes ESXi.
 Dans cette version, l’outil ignore le profilage des noms ou adresses IP des machines virtuelles en double dans le fichier VMListFile. La solution de contournement consiste à profiler des machines virtuelles à l’aide d’un hôte ESXi au lieu du serveur vCenter. Veillez à n’exécuter qu’une seule instance par hôte ESXi.

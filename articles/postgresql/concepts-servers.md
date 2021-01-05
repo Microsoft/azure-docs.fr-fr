@@ -1,17 +1,17 @@
 ---
 title: Serveurs - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article indique les éléments à prendre en considération et fournit des instructions pour configurer et gérer Azure Database pour PostgreSQL - Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: lfittl-msft
+ms.author: lufittl
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: d86170a53b4bfbe712bbca12db4d6063214aba21
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c8ae129cbad56e3bb63e055f9d843cac1da22fb1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74768161"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91710462"
 ---
 # <a name="azure-database-for-postgresql---single-server"></a>Azure Database pour PostgreSQL - Serveur unique
 Cet article présente des considérations et des instructions relatives à l’utilisation d’Azure Database pour PostgreSQL - Serveur unique.

@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory dans BorrowBox | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et BorrowBox.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: dd8e4178-9a63-492a-bd48-782e94e404af
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/21/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: b11ce4ba21a6fd4db047c75104729737956699c4
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b73131285c7436e2108a64a136f241724a29b5c6
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73157636"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672438"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-borrowbox"></a>Didacticiel : Intégration d’Azure Active Directory dans BorrowBox
 
@@ -32,7 +27,7 @@ L’intégration de BorrowBox dans Azure AD offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à BorrowBox (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -69,7 +64,7 @@ Pour configurer l’intégration de BorrowBox dans Azure AD, vous devez ajouter 
 
 4. Dans la zone de recherche, tapez **BorrowBox**, sélectionnez **BorrowBox** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![BorrowBox dans la liste des résultats](common/search-new-app.png)
+    ![BorrowBox dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -105,11 +100,11 @@ Pour configurer l’authentification unique Azure AD auprès de BorrowBox, effec
 
 4. Dans la section **Configuration SAML de base**, l’utilisateur n’a rien à faire, car l’application est déjà intégrée à Azure.
 
-    ![Informations d’authentification unique dans Domaine et URL [Nom de l’application]](common/preintegrated.png)
+    ![[Capture d’écran montrant Configuration SAML de base.] Informations d’authentification unique dans Domaine et URL](common/preintegrated.png)
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL [Nom de l’application]](common/metadata-upload-additional-signon.png)
+    ![[Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.] Informations d’authentification unique dans Domaine et URL](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://fe.bolindadigital.com/wldcs_bol_fo/b2i/mainPage.html?b2bSite=<ID>`
 
@@ -155,7 +150,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -194,18 +189,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 Dans cette section, un utilisateur nommé Britta Simon est créé dans BorrowBox. BorrowBox prend en charge l’attribution d’utilisateurs juste-à-temps, une option activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. S’il n’existe pas encore d’utilisateur dans BorrowBox, il en est créé un après l’authentification.
 
 > [!Note]
-> Si vous devez créer un utilisateur manuellement, contactez l’ [équipe de support technique BorrowBox](mailto:borrowbox@bolinda.com).
+> Si vous devez créer un utilisateur manuellement, contactez l’[équipe du support technique de BorrowBox](mailto:borrowbox@bolinda.com).
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette BorrowBox dans le volet d’accès doit vous connecter automatiquement à l’application BorrowBox pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette BorrowBox dans le volet d’accès doit vous connecter automatiquement à l’application BorrowBox pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

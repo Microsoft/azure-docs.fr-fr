@@ -1,21 +1,16 @@
 ---
 title: Déboguer localement du code Azure Data Lake Analytics
 description: Découvrez comment utiliser Azure Data Lake Tools pour Visual Studio pour tester et déboguer des travaux U-SQL sur votre station de travail locale.
-services: data-lake-analytics
-author: yanancai
-ms.author: yanacai
-ms.reviewer: jasonwhowell
-ms.assetid: 66dd58b1-0b28-46d1-aaae-43ee2739ae0a
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
-ms.topic: conceptual
-ms.workload: big-data
+ms.topic: how-to
 ms.date: 07/03/2018
-ms.openlocfilehash: 0827311218202de447e5cf27356e00c4da020e94
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1c7218deac9efba6df6c1284f2578a744e768284
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61472989"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221024"
 ---
 # <a name="debug-azure-data-lake-analytics-code-locally"></a>Déboguer localement du code Azure Data Lake Analytics
 
@@ -42,8 +37,10 @@ Vous pouvez déboguer des assemblys C# sans les envoyer ou les inscrire sur le s
 1. Créez un projet d’assembly C#, puis générez-le pour obtenir le fichier **DLL** de sortie.
 2. Inscrivez le fichier **DLL** à l’aide d’une instruction U-SQL :
 
-        CREATE ASSEMBLY assemblyname FROM @"..\..\path\to\output\.dll";
-        
+   ```sql
+   CREATE ASSEMBLY assemblyname FROM @"..\..\path\to\output\.dll";
+   ```
+   
 3. Définissez des points d'arrêt dans le code C#.
 4. Sélectionnez **F5** pour déboguer le script en faisant référence au fichier **DLL** C# localement.
 

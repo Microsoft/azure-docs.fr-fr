@@ -3,21 +3,26 @@ title: Modéliser et partitionner des données sur Azure Cosmos DB à l’aide 
 description: Découvrez comment modéliser et partitionner un exemple concret à l’aide de l’API de base d’Azure Cosmos DB
 author: ThomasWeiss
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 05/23/2019
 ms.author: thweiss
-ms.openlocfilehash: 10f8ffd90215a21ca03e112aea463d444c623d06
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: c3cdc0a9fb9fa236fae37a52194f446278a42f72
+ms.sourcegitcommit: 9706bee6962f673f14c2dc9366fde59012549649
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75445393"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94616244"
 ---
 # <a name="how-to-model-and-partition-data-on-azure-cosmos-db-using-a-real-world-example"></a>Guide pratique pour modéliser et partitionner des données sur Azure Cosmos DB à l’aide d’un exemple concret
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article s’appuie sur plusieurs concepts Azure Cosmos DB tels que la [modélisation des données](modeling-data.md), le [partitionnement](partitioning-overview.md) et le [débit provisionné](request-units.md) pour illustrer comment aborder un exercice concret de conception de données.
 
 Si vous travaillez habituellement avec des bases de données relationnelles, vous avez probablement développé des habitudes et des intuitions sur la façon de concevoir un modèle de données. En raison des contraintes spécifiques, mais également des atouts uniques d’Azure Cosmos DB, la plupart de ces bonnes pratiques ne se traduisent pas correctement et peuvent vous faire dériver vers des solutions non optimales. L’objectif de cet article est de vous guider tout au long du processus de modélisation d’un cas d’utilisation concret sur Azure Cosmos DB, de la modélisation des éléments à la colocalisation d’entités et au partitionnement de conteneur.
+
+[Téléchargez ou affichez un code source généré par la communauté](https://github.com/jwidmer/AzureCosmosDbBlogExample) qui illustre les concepts de cet article. Cet exemple de code a été fourni par un contributeur de la communauté et l’équipe Azure Cosmos DB ne prend pas en charge sa maintenance.
 
 ## <a name="the-scenario"></a>Scénario
 
@@ -65,10 +70,12 @@ Nous commençons avec deux conteneurs : `users` et `posts`.
 
 Ce conteneur stocke uniquement des éléments utilisateur :
 
-    {
-      "id": "<user-id>",
-      "username": "<username>"
-    }
+```json
+{
+    "id": "<user-id>",
+    "username": "<username>"
+}
+```
 
 Nous partitionnons ce conteneur par `id`, ce qui signifie que chaque partition logique figurant dans ce conteneur contiendra un seul élément.
 
@@ -76,32 +83,34 @@ Nous partitionnons ce conteneur par `id`, ce qui signifie que chaque partition l
 
 Ce conteneur héberge les publications, les commentaires et les mentions « j’aime » :
 
-    {
-      "id": "<post-id>",
-      "type": "post",
-      "postId": "<post-id>",
-      "userId": "<post-author-id>",
-      "title": "<post-title>",
-      "content": "<post-content>",
-      "creationDate": "<post-creation-date>"
-    }
+```json
+{
+    "id": "<post-id>",
+    "type": "post",
+    "postId": "<post-id>",
+    "userId": "<post-author-id>",
+    "title": "<post-title>",
+    "content": "<post-content>",
+    "creationDate": "<post-creation-date>"
+}
 
-    {
-      "id": "<comment-id>",
-      "type": "comment",
-      "postId": "<post-id>",
-      "userId": "<comment-author-id>",
-      "content": "<comment-content>",
-      "creationDate": "<comment-creation-date>"
-    }
+{
+    "id": "<comment-id>",
+    "type": "comment",
+    "postId": "<post-id>",
+    "userId": "<comment-author-id>",
+    "content": "<comment-content>",
+    "creationDate": "<comment-creation-date>"
+}
 
-    {
-      "id": "<like-id>",
-      "type": "like",
-      "postId": "<post-id>",
-      "userId": "<liker-id>",
-      "creationDate": "<like-creation-date>"
-    }
+{
+    "id": "<like-id>",
+    "type": "like",
+    "postId": "<post-id>",
+    "userId": "<liker-id>",
+    "creationDate": "<like-creation-date>"
+}
+```
 
 Nous partitionnons ce conteneur par `postId`, ce qui signifie que chaque partition logique dans ce conteneur contiendra une seule publication, ainsi que tous les commentaires et toutes les mentions « j’aime » relatifs à cette publication.
 
@@ -122,7 +131,7 @@ Il est maintenant temps d’évaluer les performances et l’extensibilité de n
 
 Cette demande est simple à implémenter car il suffit de créer ou de mettre à jour un élément dans le conteneur `users`. Les demandes seront correctement réparties sur toutes les partitions grâce à la clé de partition `id`.
 
-![Écriture d’un seul élément dans le conteneur d’utilisateurs](./media/how-to-model-partition-example/V1-C1.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-C1.png" alt-text="Écriture d’un seul élément dans le conteneur d’utilisateurs" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -132,7 +141,7 @@ Cette demande est simple à implémenter car il suffit de créer ou de mettre à
 
 La récupération d’un utilisateur s’effectue en lisant l’élément correspondant à partir du conteneur `users`.
 
-![Récupération d’un seul élément dans le conteneur d’utilisateurs](./media/how-to-model-partition-example/V1-Q1.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q1.png" alt-text="Récupération d’un seul élément dans le conteneur d’utilisateurs" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -142,7 +151,7 @@ La récupération d’un utilisateur s’effectue en lisant l’élément corres
 
 Similaire à **[C1]** , il suffit d’écrire dans le conteneur `posts`.
 
-![Écriture d’un seul élément dans le conteneur de publications](./media/how-to-model-partition-example/V1-C2.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-C2.png" alt-text="Écriture d’un seul élément dans le conteneur de publications" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -152,7 +161,7 @@ Similaire à **[C1]** , il suffit d’écrire dans le conteneur `posts`.
 
 Nous commençons par extraire le document correspondant à partir du conteneur `posts`. Mais ce n’est pas suffisant. Conformément à notre spécification, nous devons également agréger le nom d’utilisateur de l’auteur de la publication et les nombres de commentaires et de mentions « j’aime » que possède la publication, ce qui nécessite l’exécution de 3 requêtes SQL supplémentaires.
 
-![Récupération d’une publication et agrégation de données supplémentaires](./media/how-to-model-partition-example/V1-Q2.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q2.png" alt-text="Récupération d’une publication et agrégation de données supplémentaires" border="false":::
 
 Chaque requête supplémentaire est filtrée en fonction de la clé de partition de son conteneur respectif, ce qui est exactement ce que nous voulons pour optimiser les performances et l’extensibilité. Mais nous devons finalement effectuer quatre opérations pour retourner une publication unique, donc nous améliorerons cela dans une prochaine itération.
 
@@ -164,7 +173,7 @@ Chaque requête supplémentaire est filtrée en fonction de la clé de partition
 
 Tout d’abord, nous devons récupérer les publications souhaitées à l’aide d’une requête SQL qui extrait les publications correspondant à cet utilisateur particulier. Mais nous devons également émettre des requêtes supplémentaires pour agréger le nom d’utilisateur de l’auteur et les nombres de commentaires et de mentions « j’aime ».
 
-![Récupération de toutes les publications d’un utilisateur et agrégation des données supplémentaires](./media/how-to-model-partition-example/V1-Q3.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q3.png" alt-text="Récupération de toutes les publications d’un utilisateur et agrégation des données supplémentaires" border="false":::
 
 Cette implémentation présente de nombreux inconvénients :
 
@@ -179,7 +188,7 @@ Cette implémentation présente de nombreux inconvénients :
 
 Un commentaire est créé en écrivant l’élément correspondant dans le conteneur `posts`.
 
-![Écriture d’un seul élément dans le conteneur de publications](./media/how-to-model-partition-example/V1-C2.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-C2.png" alt-text="Écriture d’un seul élément dans le conteneur de publications" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -189,7 +198,7 @@ Un commentaire est créé en écrivant l’élément correspondant dans le conte
 
 Nous commençons avec une requête qui extrait tous les commentaires pour cette publication et une fois encore, nous devons également agréger les noms d’utilisateur séparément pour chaque commentaire.
 
-![Récupération de tous les commentaires d’une publication et agrégation des données supplémentaires](./media/how-to-model-partition-example/V1-Q4.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q4.png" alt-text="Récupération de tous les commentaires d’une publication et agrégation des données supplémentaires" border="false":::
 
 La requête principale filtre les données sur la clé de partition du conteneur, mais l’agrégation séparée des noms d’utilisateur pénalise les performances globales. Nous améliorerons cela par la suite.
 
@@ -201,7 +210,7 @@ La requête principale filtre les données sur la clé de partition du conteneur
 
 Tout comme pour **[C3]** , nous créons l’élément correspondant dans le conteneur `posts`.
 
-![Écriture d’un seul élément dans le conteneur de publications](./media/how-to-model-partition-example/V1-C2.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-C2.png" alt-text="Écriture d’un seul élément dans le conteneur de publications" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -211,7 +220,7 @@ Tout comme pour **[C3]** , nous créons l’élément correspondant dans le cont
 
 Tout comme pour **[Q4]** , nous interrogeons les mentions « j’aime » de la publication, puis agrégeons leurs noms d’utilisateur.
 
-![Récupération de toutes les mentions « j’aime » d’une publication et agrégation des données supplémentaires](./media/how-to-model-partition-example/V1-Q5.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q5.png" alt-text="Récupération de toutes les mentions « j’aime » d’une publication et agrégation des données supplémentaires" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -221,7 +230,7 @@ Tout comme pour **[Q4]** , nous interrogeons les mentions « j’aime » de la
 
 Nous extrayons les publications les plus récentes en interrogeant le conteneur `posts` trié dans l’ordre décroissant de la date de création, puis agrégeons les noms d’utilisateur et les nombres de commentaires et de mentions « j’aime » pour chaque publication.
 
-![Récupération des publications les plus récentes et agrégation des données supplémentaires](./media/how-to-model-partition-example/V1-Q6.png)
+:::image type="content" source="./media/how-to-model-partition-example/V1-Q6.png" alt-text="Récupération des publications les plus récentes et agrégation des données supplémentaires" border="false":::
 
 Une fois encore, notre requête initiale ne filtre pas les données sur la clé de partition du conteneur `posts`, ce qui déclenche une distribution ramifiée coûteuse. La situation est encore pire ici, car nous ciblons un jeu de résultats beaucoup plus grand et trions les résultats avec une clause `ORDER BY`, ce qui rend le processus plus coûteux en termes d’unités de requête.
 
@@ -244,39 +253,43 @@ La raison pour laquelle nous devons émettre des demandes supplémentaires dans 
 
 Dans notre exemple, nous allons modifier les éléments de publication pour ajouter le nom d’utilisateur de l’auteur de la publication, le nombre de commentaires et le nombre de mentions « j’aime » :
 
-    {
-      "id": "<post-id>",
-      "type": "post",
-      "postId": "<post-id>",
-      "userId": "<post-author-id>",
-      "userUsername": "<post-author-username>",
-      "title": "<post-title>",
-      "content": "<post-content>",
-      "commentCount": <count-of-comments>,
-      "likeCount": <count-of-likes>,
-      "creationDate": "<post-creation-date>"
-    }
+```json
+{
+    "id": "<post-id>",
+    "type": "post",
+    "postId": "<post-id>",
+    "userId": "<post-author-id>",
+    "userUsername": "<post-author-username>",
+    "title": "<post-title>",
+    "content": "<post-content>",
+    "commentCount": <count-of-comments>,
+    "likeCount": <count-of-likes>,
+    "creationDate": "<post-creation-date>"
+}
+```
 
 Nous allons également modifier chaque élément de commentaire et de mention « j’aime » pour ajouter le nom d’utilisateur de l’utilisateur qui l’a créé :
 
-    {
-      "id": "<comment-id>",
-      "type": "comment",
-      "postId": "<post-id>",
-      "userId": "<comment-author-id>",
-      "userUsername": "<comment-author-username>",
-      "content": "<comment-content>",
-      "creationDate": "<comment-creation-date>"
-    }
+```json
+{
+    "id": "<comment-id>",
+    "type": "comment",
+    "postId": "<post-id>",
+    "userId": "<comment-author-id>",
+    "userUsername": "<comment-author-username>",
+    "content": "<comment-content>",
+    "creationDate": "<comment-creation-date>"
+}
 
-    {
-      "id": "<like-id>",
-      "type": "like",
-      "postId": "<post-id>",
-      "userId": "<liker-id>",
-      "userUsername": "<liker-username>",
-      "creationDate": "<like-creation-date>"
-    }
+{
+    "id": "<like-id>",
+    "type": "like",
+    "postId": "<post-id>",
+    "userId": "<liker-id>",
+    "userUsername": "<liker-username>",
+    "creationDate": "<like-creation-date>"
+}
+```
 
 ### <a name="denormalizing-comment-and-like-counts"></a>Dénormalisation des nombres de commentaires et de mentions « j’aime »
 
@@ -318,7 +331,7 @@ Cette procédure stockée accepte l’ID de la publication et le corps du nouvea
 - remplace la publication
 - ajoute le nouveau commentaire
 
-Comme les procédures stockées sont exécutées en tant que transactions atomiques, il est garanti que la valeur de `commentCount` et le nombre réel de commentaires seront toujours synchronisés.
+Comme les procédures stockées sont exécutées en tant que transactions atomiques, la valeur de `commentCount` et le nombre réel de commentaires seront toujours synchronisés.
 
 Bien entendu, nous appelons une procédure stockée similaire lors de l’ajout de nouvelles mentions « j’aime » pour incrémenter `likeCount`.
 
@@ -328,7 +341,7 @@ Les noms d’utilisateur requièrent une approche différente, car les utilisate
 
 Dans notre exemple, nous utilisons le flux de modification du conteneur `users` pour réagir chaque fois que les utilisateurs mettent à jour leurs noms d’utilisateur. Lorsque cela se produit, nous propageons la modification en appelant une autre procédure stockée sur le conteneur `posts` :
 
-![Dénormalisation des noms d’utilisateur dans le conteneur de publications](./media/how-to-model-partition-example/denormalization-1.png)
+:::image type="content" source="./media/how-to-model-partition-example/denormalization-1.png" alt-text="Dénormalisation des noms d’utilisateur dans le conteneur de publications" border="false":::
 
 ```javascript
 function updateUsernames(userId, username) {
@@ -368,7 +381,7 @@ Cette procédure stockée accepte l’ID et le nouveau nom d’utilisateur de l�
 
 Maintenant que notre dénormalisation est en place, il nous suffit d’extraire un seul élément pour traiter cette demande.
 
-![Récupération d’un seul élément dans le conteneur de publications](./media/how-to-model-partition-example/V2-Q2.png)
+:::image type="content" source="./media/how-to-model-partition-example/V2-Q2.png" alt-text="Récupération d’un seul élément dans le conteneur de publications" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -378,7 +391,7 @@ Maintenant que notre dénormalisation est en place, il nous suffit d’extraire 
 
 Ici encore, nous pouvons faire l’économie des demandes supplémentaires qui extrayaient les noms d’utilisateur et obtenir au final une seule requête qui filtre les données sur la clé de partition.
 
-![Récupération de tous les commentaires d’une publication](./media/how-to-model-partition-example/V2-Q4.png)
+:::image type="content" source="./media/how-to-model-partition-example/V2-Q4.png" alt-text="Récupération de tous les commentaires d’une publication" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -388,7 +401,7 @@ Ici encore, nous pouvons faire l’économie des demandes supplémentaires qui e
 
 La situation est exactement la même lors de l’énumération des mentions « j’aime ».
 
-![Récupération de toutes les mentions « j’aime » d’une publication](./media/how-to-model-partition-example/V2-Q5.png)
+:::image type="content" source="./media/how-to-model-partition-example/V2-Q5.png" alt-text="Récupération de toutes les mentions « j’aime » d’une publication" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -402,7 +415,7 @@ En examinant les améliorations de nos performances globales, nous constatons qu
 
 Cette demande bénéficie déjà des améliorations introduites dans V2, ce qui permet de faire l’économie de requêtes supplémentaires.
 
-![Récupération de toutes les publications d’un utilisateur](./media/how-to-model-partition-example/V2-Q3.png)
+:::image type="content" source="./media/how-to-model-partition-example/V2-Q3.png" alt-text="Diagramme qui affiche la requête permettant de répertorier les publications d’un utilisateur sous forme abrégée." border="false":::
 
 Mais la requête restante ne filtre toujours pas les données sur la clé de partition du conteneur `posts`.
 
@@ -417,25 +430,27 @@ Nous allons donc introduire un deuxième niveau de dénormalisation en dupliquan
 
 Le conteneur `users` contient maintenant 2 types d’éléments :
 
-    {
-      "id": "<user-id>",
-      "type": "user",
-      "userId": "<user-id>",
-      "username": "<username>"
-    }
+```json
+{
+    "id": "<user-id>",
+    "type": "user",
+    "userId": "<user-id>",
+    "username": "<username>"
+}
 
-    {
-      "id": "<post-id>",
-      "type": "post",
-      "postId": "<post-id>",
-      "userId": "<post-author-id>",
-      "userUsername": "<post-author-username>",
-      "title": "<post-title>",
-      "content": "<post-content>",
-      "commentCount": <count-of-comments>,
-      "likeCount": <count-of-likes>,
-      "creationDate": "<post-creation-date>"
-    }
+{
+    "id": "<post-id>",
+    "type": "post",
+    "postId": "<post-id>",
+    "userId": "<post-author-id>",
+    "userUsername": "<post-author-username>",
+    "title": "<post-title>",
+    "content": "<post-content>",
+    "commentCount": <count-of-comments>,
+    "likeCount": <count-of-likes>,
+    "creationDate": "<post-creation-date>"
+}
+```
 
 Notez les points suivants :
 
@@ -444,11 +459,11 @@ Notez les points suivants :
 
 Pour réaliser cette dénormalisation, nous utilisons une fois encore le flux de modification. Cette fois-ci, nous réagissons sur le flux de modification du conteneur `posts` pour distribuer toute publication nouvelle ou mise à jour vers le conteneur `users`. Et comme l’énumération des publications ne nécessite pas de retourner leur contenu complet, nous pouvons les tronquer dans ce processus.
 
-![Dénormalisation des publications dans le conteneur des utilisateurs](./media/how-to-model-partition-example/denormalization-2.png)
+:::image type="content" source="./media/how-to-model-partition-example/denormalization-2.png" alt-text="Dénormalisation des publications dans le conteneur des utilisateurs" border="false":::
 
 Maintenant, nous pouvons router notre requête vers le conteneur `users` et filtrer les données sur la clé de partition du conteneur.
 
-![Récupération de toutes les publications d’un utilisateur](./media/how-to-model-partition-example/V3-Q3.png)
+:::image type="content" source="./media/how-to-model-partition-example/V3-Q3.png" alt-text="Récupération de toutes les publications d’un utilisateur" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -458,30 +473,32 @@ Maintenant, nous pouvons router notre requête vers le conteneur `users` et filt
 
 Nous devons faire face à une situation similaire ici : même après avoir fait l’économie des requêtes supplémentaires rendues inutiles par la dénormalisation introduite dans V2, la requête restante ne filtre pas les données sur la clé de partition du conteneur :
 
-![Récupération des publications les plus récentes](./media/how-to-model-partition-example/V2-Q6.png)
+:::image type="content" source="./media/how-to-model-partition-example/V2-Q6.png" alt-text="Diagramme qui montre la requête pour lister les x publications les plus récentes créées sous forme abrégée." border="false":::
 
 En suivant la même approche, l’optimisation des performances et de l’extensibilité de cette demande exige que cette dernière s’applique à une seule partition. Cela est concevable, car nous n’avons à retourner qu’un nombre limité d’éléments. Pour remplir la page d’accueil de notre plateforme de création de blogs, il nous suffit d’obtenir les 100 publications les plus récentes, sans avoir à paginer le jeu de données complet.
 
 Ainsi, pour optimiser cette dernière demande, nous allons introduire un troisième conteneur dans notre conception, entièrement dédié au traitement de cette demande. Nous allons dénormaliser nos publications dans ce nouveau conteneur `feed` :
 
-    {
-      "id": "<post-id>",
-      "type": "post",
-      "postId": "<post-id>",
-      "userId": "<post-author-id>",
-      "userUsername": "<post-author-username>",
-      "title": "<post-title>",
-      "content": "<post-content>",
-      "commentCount": <count-of-comments>,
-      "likeCount": <count-of-likes>,
-      "creationDate": "<post-creation-date>"
-    }
+```json
+{
+    "id": "<post-id>",
+    "type": "post",
+    "postId": "<post-id>",
+    "userId": "<post-author-id>",
+    "userUsername": "<post-author-username>",
+    "title": "<post-title>",
+    "content": "<post-content>",
+    "commentCount": <count-of-comments>,
+    "likeCount": <count-of-likes>,
+    "creationDate": "<post-creation-date>"
+}
+```
 
 Ce conteneur est partitionné par `type`, lequel sera toujours `post` dans nos éléments. Cela garantit que tous les éléments figurant dans ce conteneur seront placés dans la même partition.
 
 Pour réaliser cette dénormalisation, il nous suffit de raccorder le pipeline de flux de modification que nous avons précédemment introduit pour distribuer les publications vers ce nouveau conteneur. Il est important de garder à l’esprit qu’il faut s’assurer de ne stocker que les 100 publications les plus récentes. Sinon, le contenu du conteneur peut croître au-delà de la taille maximale d’une partition. Pour cela, il convient d’appeler un [post-déclencheur](stored-procedures-triggers-udfs.md#triggers) chaque fois qu’un document est ajouté dans le conteneur :
 
-![Dénormalisation des publications dans le conteneur de flux](./media/how-to-model-partition-example/denormalization-3.png)
+:::image type="content" source="./media/how-to-model-partition-example/denormalization-3.png" alt-text="Dénormalisation des publications dans le conteneur de flux" border="false":::
 
 Voici le corps du post-déclencheur qui tronque la collection :
 
@@ -532,7 +549,7 @@ function truncateFeed() {
 
 L’étape finale consiste à rediriger la requête vers le nouveau conteneur `feed` :
 
-![Récupération des publications les plus récentes](./media/how-to-model-partition-example/V3-Q6.png)
+:::image type="content" source="./media/how-to-model-partition-example/V3-Q6.png" alt-text="Récupération des publications les plus récentes" border="false":::
 
 | **Latence** | **Frais en RU (unités de requête)** | **Performances** |
 | --- | --- | --- |
@@ -573,6 +590,6 @@ Le flux de modification que nous utilisons pour distribuer des mises à jour aux
 
 Après cette introduction à la modélisation et au partitionnement des données pratiques, vous pouvez consulter les articles suivants pour passer en revue les concepts que nous avons abordés :
 
-- [Utiliser des bases de données, des conteneurs et des éléments](databases-containers-items.md)
+- [Utiliser des bases de données, des conteneurs et des éléments](account-databases-containers-items.md)
 - [Partitioning in Azure Cosmos DB](partitioning-overview.md) (Partitionnement dans Azure Cosmos DB)
 - [Flux de modification dans Azure Cosmos DB](change-feed.md)

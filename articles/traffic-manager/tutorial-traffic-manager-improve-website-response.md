@@ -2,21 +2,21 @@
 title: 'Tutoriel : Améliorer la réponse d’un site web avec Azure Traffic Manager'
 description: Cet article de didacticiel explique comment créer un profil Traffic Manager pour développer un site web très réactif.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 Customer intent: As an IT Admin, I want to route traffic so I can improve website response by choosing the endpoint with lowest latency.
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/23/2018
-ms.author: rohink
-ms.openlocfilehash: f7778b60a5e84f5d8900b8e37bfa655a7915d403
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 10/19/2020
+ms.author: duau
+ms.openlocfilehash: d8262a80fac42f103d571523c75c5064d5d43949
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77136385"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003818"
 ---
 # <a name="tutorial-improve-website-response-using-traffic-manager"></a>Tutoriel : Améliorer la réponse d’un site web à l’aide de Traffic Manager
 
@@ -203,13 +203,13 @@ Dans cette section, vous pouvez voir Traffic Manager en action.
 5. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Si vous recevez l’avertissement, sélectionnez **Oui** ou **Continuer** pour poursuivre le processus de connexion.
 1. Dans un navigateur web sur la machine virtuelle *myVMEastUS*, tapez le nom DNS de votre profil Traffic Manager pour afficher votre site web. Comme la machine virtuelle se trouve dans la région **USA Est**, vous êtes dirigé vers le site web hébergé sur le serveur IIS *myIISVMEastUS* le plus proche qui se trouve dans la région **USA Est**.
 
-   ![Tester le profil Traffic Manager](./media/tutorial-traffic-manager-improve-website-response/eastus-traffic-manager-test.png)
+   ![Capture d’écran montrant le profil « Traffic Manager » dans un navigateur web.](./media/tutorial-traffic-manager-improve-website-response/eastus-traffic-manager-test.png)
 
 2. Connectez-vous à la machine virtuelle *myVMWestEurope* située dans la région **Europe Ouest** en suivant les étapes 1 à 5, puis accédez au nom de domaine du profil Traffic Manager à partir de cette machine virtuelle. Comme la machine virtuelle se trouve dans la région **Europe Ouest**, vous êtes désormais dirigé vers le site web hébergé sur le serveur IIS *myIISVMWestEurope* le plus proche, qui se trouve dans la région **Europe Ouest**.
 
    ![Tester le profil Traffic Manager](./media/tutorial-traffic-manager-improve-website-response/westeurope-traffic-manager-test.png)
 
-## <a name="delete-the-traffic-manager-profile"></a>Supprimer le profil Traffic Manager
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Lorsque vous n’en avez plus besoin, supprimez les groupes de ressources (**ResourceGroupTM1** et **ResourceGroupTM2**). Pour ce faire, sélectionnez le groupe de ressources (**ResourceGroupTM1** ou **ResourceGroupTM2**), puis **Supprimer**.
 

@@ -11,13 +11,13 @@ metadata:
   ms.collection: collection
   author: spelluru
   ms.author: spelluru
-  ms.date: 03/13/2020
-  ms.openlocfilehash: 24f3c35b41effaaad7aa3058c4a3d3af13739a01
-  ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+  ms.date: 06/23/2020
+  ms.openlocfilehash: 06cce3f999b329d41c7ef7e5f381f55fdaee8054
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/01/2020
-  ms.locfileid: "80520312"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88933747"
 landingContent:
 - title: À propos d’Event Hubs
   linkLists:
@@ -84,13 +84,13 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: .NET Core
-      url: get-started-dotnet-standard-send-v2.md
+      url: event-hubs-dotnet-standard-getstarted-send.md
     - text: Java
       url: event-hubs-java-get-started-send.md
     - text: Python
-      url: get-started-python-send-v2.md
+      url: event-hubs-python-get-started-send.md
     - text: JavaScript
-      url: get-started-node-send-v2.md
+      url: event-hubs-node-get-started-send.md
     - text: Apache Kafka
       url: event-hubs-quickstart-kafka-enabled-event-hubs.md#send-and-receive-messages-with-kafka-in-event-hubs
     - text: Apache Storm (réception uniquement)
@@ -132,7 +132,7 @@ landingContent:
     - text: Utilisation d’un modèle Resource Manager
       url: event-hubs-resource-manager-namespace-event-hub-enable-capture.md
     - text: Activer la capture à partir d’une application Python
-      url: get-started-capture-python-v2.md
+      url: event-hubs-capture-python.md
 - title: Traiter des événements
   linkLists:
   - linkListType: tutorial
@@ -142,7 +142,7 @@ landingContent:
     - text: Traiter des événements Event Hubs pour Apache Kafka à l’aide de Stream Analytics
       url: event-hubs-kafka-stream-analytics.md
     - text: Diffuser en continu des données dans Azure Databricks à l’aide d’Event Hubs
-      url: ../azure-databricks/databricks-stream-from-eventhubs.md
+      url: /azure/databricks/scenarios/databricks-stream-from-eventhubs
 - title: Surveillance et gestion
   linkLists:
   - linkListType: how-to-guide

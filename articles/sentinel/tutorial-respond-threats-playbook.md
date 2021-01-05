@@ -1,6 +1,6 @@
 ---
 title: 'Tutoriel : Exécuter un playbook dans Azure Sentinel'
-description: 'Tutoriel : Cet article décrit comment exécuter un playbook dans Azure Sentinel.'
+description: Utilisez ce tutoriel pour vous aider à utiliser des playbooks de sécurité dans Azure Sentinel, afin de définir des réponses automatisées aux menaces liées aux problèmes de sécurité.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -16,12 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/18/2019
 ms.author: yelevin
-ms.openlocfilehash: f6adcb978dbe540d3bdd352089d4dde407d0fb4c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b6fd26b4965b92f5f06a008d67e2d585fd1b41b7
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77585082"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94652074"
 ---
 # <a name="tutorial-set-up-automated-threat-responses-in-azure-sentinel"></a>Tutoriel : Configurer des réponses automatisées aux menaces dans Azure Sentinel
 
@@ -39,7 +39,7 @@ Ce didacticiel vous aide à utiliser des playbooks de sécurité dans Azure Sent
 
 ## <a name="what-is-a-security-playbook-in-azure-sentinel"></a>Qu’est-ce qu’un playbook de sécurité dans Azure Security ?
 
-Un playbook de sécurité est une collection de procédures qui peut être exécutée à partir d’Azure Sentinel en réponse à une alerte. Un playbook de sécurité peut vous aider à automatiser et à orchestrer votre réponse. Vous pouvez l’exécuter manuellement ou le configurer pour qu’il s’exécute automatiquement lors du déclenchement d’alertes spécifiques. Les playbooks de sécurité dans Azure Sentinel reposent sur [Azure Logic Apps](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps). Cela signifie que vous bénéficiez de la puissance, des possibilités de personnalisation et des modèles intégrés de Logic Apps. Chaque playbook est créé pour l’abonnement de votre choix. Cependant, la page Playbooks affiche tous les playbooks de tous les abonnements sélectionnés.
+Un playbook de sécurité est une collection de procédures qui peut être exécutée à partir d’Azure Sentinel en réponse à une alerte. Un playbook de sécurité peut vous aider à automatiser et à orchestrer votre réponse. Vous pouvez l’exécuter manuellement ou le configurer pour qu’il s’exécute automatiquement lors du déclenchement d’alertes spécifiques. Les playbooks de sécurité dans Azure Sentinel reposent sur [Azure Logic Apps](../logic-apps/logic-apps-overview.md). Cela signifie que vous bénéficiez de la puissance, des possibilités de personnalisation et des modèles intégrés de Logic Apps. Chaque playbook est créé pour l’abonnement de votre choix. Cependant, la page Playbooks affiche tous les playbooks de tous les abonnements sélectionnés.
 
 > [!NOTE]
 > Les playbooks tirant parti d’Azure Logic Apps, des frais sont applicables. Consultez la page sur la tarification [d’Azure Logic Apps](https://azure.microsoft.com/pricing/details/logic-apps/) pour en savoir plus.
@@ -60,7 +60,7 @@ Les playbooks de sécurité peuvent être exécutés manuellement ou automatique
 Pour créer un playbook de sécurité dans Azure Security, procédez comme suit :
 
 1. Ouvrez le tableau de bord **Azure Sentinel**.
-2. Sous **Administration**, sélectionnez **Playbooks**.
+2. Sous **Configuration**, sélectionnez **Playbooks**.
 
    ![Application logique](./media/tutorial-respond-threats-playbook/playbookimg.png)
 
@@ -72,7 +72,7 @@ Pour créer un playbook de sécurité dans Azure Security, procédez comme suit
 
 5. Dans le [**Concepteur d’application logique**](../logic-apps/logic-apps-overview.md), sélectionnez le modèle à utiliser. Si vous sélectionnez un modèle nécessitant des informations d’identification, vous devez les lui fournir. Vous pouvez également créer un playbook vide à partir de rien. Sélectionnez **Application logique vide**. 
 
-   ![Concepteur d’application logique](./media/tutorial-respond-threats-playbook/playbook-template.png)
+   ![Capture d’écran montrant le panneau Application logique vide.](./media/tutorial-respond-threats-playbook/playbook-template.png)
 
 6. Vous accédez au Concepteur d’application logique où vous pouvez créer ou modifier le modèle. Pour plus d’informations sur la création d’un playbook avec [Logic Apps](../logic-apps/logic-apps-create-logic-apps-from-templates.md).
 
@@ -118,5 +118,3 @@ Pour automatiser les réponses :
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans ce didacticiel, vous avez appris à exécuter un playbook dans Azure Sentinel. Consultez l’article expliquant [comment rechercher des menaces de façon proactive à l’aide d’Azure Sentinel](hunting.md).
-
-

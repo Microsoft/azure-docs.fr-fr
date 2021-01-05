@@ -48,6 +48,22 @@
           href: tutorial-dr-drill-azure.md
         - name: Basculer vers Azure
           href: vmware-azure-tutorial-failover-failback.md
+    - name: Reprise d’activité Azure VMware Solution sur Azure
+      items:
+        - name: Préparer Azure
+          href: avs-tutorial-prepare-azure.md
+        - name: Préparer Azure VMware Solution
+          href: avs-tutorial-prepare-avs.md
+        - name: Configurer la réplication
+          href: avs-tutorial-replication.md
+        - name: Exécuter une simulation de récupération d'urgence
+          href: avs-tutorial-dr-drill-azure.md
+        - name: Basculer vers Azure
+          href: avs-tutorial-failover.md
+        - name: Reprotéger des machines virtuelles
+          href: avs-tutorial-reprotect.md
+        - name: Effectuer une restauration automatique à partir d’Azure
+          href: avs-tutorial-failback.md
     - name: Récupération d’urgence de machine virtuelle Hyper-V vers Azure
       items:
         - name: Préparer Azure
@@ -62,6 +78,8 @@
           href: tutorial-dr-drill-azure.md
         - name: Basculer vers Azure
           href: hyper-v-azure-failover-failback-tutorial.md
+        - name: Activer la réplication locale avec des points de terminaison privés
+          href: ./hybrid-how-to-enable-replication-private-endpoints.md
     - name: Migrer vers Azure
       items:
         - name: Préparer Azure pour la réplication d’un site local
@@ -158,6 +176,10 @@
           href: hyper-v-vmm-secondary-support-matrix.md
         - name: Architecture de machines virtuelles Hyper-V vers un site secondaire
           href: hyper-v-vmm-architecture.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
     - name: Récupération d’urgence depuis Azure vers Azure
@@ -186,6 +208,8 @@
               href: azure-to-azure-how-to-enable-replication-s2d-vms.md
             - name: Activer la réplication pour un disque ajouté
               href: azure-to-azure-enable-replication-added-disk.md
+            - name: Activer la réplication avec des points de terminaison privés
+              href: ./azure-to-azure-how-to-enable-replication-private-endpoints.md
             - name: Exclure des disques
               href: azure-to-azure-exclude-disks.md
             - name: Reprotéger les machines virtuelles Azure après le basculement
@@ -242,6 +266,8 @@
               href: vmware-azure-set-up-target.md
             - name: Configurer les paramètres de réplication
               href: vmware-azure-set-up-replication.md
+            - name: Activer la réplication locale avec des points de terminaison privés
+              href: ./hybrid-how-to-enable-replication-private-endpoints.md
             - name: Déployer le service Mobilité
               items:
                 - name: Vue d’ensemble et installation du service Mobilité
@@ -308,6 +334,8 @@
               href: physical-azure-set-up-source.md
             - name: Configurer l’environnement cible
               href: vmware-azure-set-up-target.md
+            - name: Activer la réplication locale avec des points de terminaison privés
+              href: ./hybrid-how-to-enable-replication-private-endpoints.md
             - name: Déployer le service Mobilité
               items:
                 - name: À propos de l’installation du service Mobilité
@@ -403,9 +431,9 @@
         - name: "Dynamics\_AX"
           href: site-recovery-dynamicsax.md
         - name: RDS
-          href: 'site-recovery-workload.md#protect-remote-desktop-services'
+          href: site-recovery-workload.md#protect-remote-desktop-services
         - name: Exchange
-          href: 'site-recovery-workload.md#protect-exchange'
+          href: site-recovery-workload.md#protect-exchange
         - name: SAP
           href: site-recovery-sap.md
         - name: Serveur de fichiers
@@ -415,7 +443,7 @@
         - name: "Citrix\_XenApp et XenDesktop"
           href: site-recovery-citrix-xenapp-and-xendesktop.md
         - name: Autres charges de travail
-          href: 'site-recovery-workload.md#workload-summary'
+          href: site-recovery-workload.md#workload-summary
     - name: Récupération d'urgence vers un site secondaire
       items:
         - name: Machines virtuelles VMware/serveurs physiques
@@ -458,6 +486,8 @@
       href: site-recovery-monitor-and-troubleshoot.md
     - name: Superviser Site Recovery avec les journaux Azure Monitor
       href: monitor-log-analytics.md
+    - name: Supervision des modèles d’attrition sur les machines virtuelles
+      href: monitoring-high-churn.md
     - name: Surveiller les serveurs de processus
       href: vmware-physical-azure-monitor-process-server.md
 - name: Dépannage
@@ -509,7 +539,7 @@
 - name: Rubriques connexes
   items:
     - name: Azure Automation
-      href: /azure/automation/
+      href: ../automation/index.yml
 - name: Ressources
   items:
     - name: Feuille de route Azure
@@ -517,7 +547,7 @@
     - name: Blog
       href: 'https://azure.microsoft.com/blog/tag/azure-site-recovery/'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-site-recovery.html'
+      href: /answers/topics/azure-site-recovery.html
     - name: Parcours d’apprentissage
       href: /learn/azure/
     - name: Tarifs

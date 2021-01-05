@@ -1,21 +1,21 @@
 ---
-title: 'Démarrage rapide : Utiliser Azure Cache for Redis avec des applications .NET'
+title: 'Démarrage rapide : Utiliser Azure Cache pour Redis dans le .NET Framework'
 description: Dans ce guide de démarrage rapide, apprenez à accéder au cache Azure pour Redis à partir de vos applications .NET
 author: yegu-ms
 ms.author: yegu
 ms.service: cache
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.custom: mvc
-ms.date: 03/11/2020
-ms.openlocfilehash: 6384416c2feef3c9a9517bce08374a7667eb5d6b
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-csharp, mvc
+ms.date: 06/18/2020
+ms.openlocfilehash: 762fdf0aab0077cfbf8beceeb432dc85695e4176
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79369044"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002452"
 ---
-# <a name="quickstart-use-azure-cache-for-redis-with-a-net-framework-application"></a>Démarrage rapide : Utiliser le cache Azure pour Redis avec une application .NET Framework
+# <a name="quickstart-use-azure-cache-for-redis-in-net-framework"></a>Démarrage rapide : Utiliser Azure Cache pour Redis dans le .NET Framework
 
 Dans ce guide de démarrage rapide, vous allez incorporer le cache Azure pour Redis dans une application .NET Framework pour avoir accès à un cache sécurisé et dédié accessible à partir de n’importe quelle application dans Azure. Vous utiliserez spécifiquement le client [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis) avec du code C# dans une application console .NET.
 
@@ -36,7 +36,7 @@ Modifiez le fichier *CacheSecrets.config* et ajoutez le contenu suivant :
 
 ```xml
 <appSettings>
-    <add key="CacheConnection" value="<cache-name>.redis.cache.windows.net,abortConnect=false,ssl=true,password=<access-key>"/>
+    <add key="CacheConnection" value="<cache-name>.redis.cache.windows.net,abortConnect=false,ssl=true,allowAdmin=true,password=<access-key>"/>
 </appSettings>
 ```
 
@@ -77,8 +77,7 @@ Dans Visual Studio, ouvrez votre fichier *App.config* et mettez-le à jour pour 
         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.1" />
     </startup>
 
-    <appSettings file="C:\AppSecrets\CacheSecrets.config"></appSettings>  
-
+    <appSettings file="C:\AppSecrets\CacheSecrets.config"></appSettings>
 </configuration>
 ```
 
@@ -93,24 +92,24 @@ using System.Configuration;
 
 La connexion au cache Azure pour Redis est gérée par la classe `ConnectionMultiplexer`. Cette classe doit être partagée et réutilisée dans votre application cliente. Ne créez pas une nouvelle connexion pour chaque opération. 
 
-Ne stockez jamais d’informations d’identification dans du code source. Pour garder cet exemple simple, j’utilise uniquement un fichier de configuration externe des secrets. Une meilleure approche serait d’utiliser [Azure Key Vault avec des certificats](https://docs.microsoft.com/rest/api/keyvault/certificate-scenarios).
+Ne stockez jamais d’informations d’identification dans du code source. Pour garder cet exemple simple, j’utilise uniquement un fichier de configuration externe des secrets. Une meilleure approche serait d’utiliser [Azure Key Vault avec des certificats](/rest/api/keyvault/certificate-scenarios).
 
 Dans *Program.cs*, ajoutez les membres suivants à la classe `Program` de votre application console :
 
 ```csharp
-        private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-        {
-            string cacheConnection = ConfigurationManager.AppSettings["CacheConnection"].ToString();
-            return ConnectionMultiplexer.Connect(cacheConnection);
-        });
+private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+{
+    string cacheConnection = ConfigurationManager.AppSettings["CacheConnection"].ToString();
+    return ConnectionMultiplexer.Connect(cacheConnection);
+});
 
-        public static ConnectionMultiplexer Connection
-        {
-            get
-            {
-                return lazyConnection.Value;
-            }
-        }
+public static ConnectionMultiplexer Connection
+{
+    get
+    {
+        return lazyConnection.Value;
+    }
+}
 ```
 
 
@@ -123,43 +122,52 @@ La valeur du appSetting *CacheConnection* est utilisé pour faire référence à
 Ajoutez le code suivant pour la procédure `Main` de la classe `Program` pour votre application console :
 
 ```csharp
-        static void Main(string[] args)
-        {
-            // Connection refers to a property that returns a ConnectionMultiplexer
-            // as shown in the previous example.
-            IDatabase cache = Connection.GetDatabase();
+static void Main(string[] args)
+{
+    // Connection refers to a property that returns a ConnectionMultiplexer
+    // as shown in the previous example.
+    IDatabase cache = Connection.GetDatabase();
 
-            // Perform cache operations using the cache object...
+    // Perform cache operations using the cache object...
 
-            // Simple PING command
-            string cacheCommand = "PING";
-            Console.WriteLine("\nCache command  : " + cacheCommand);
-            Console.WriteLine("Cache response : " + cache.Execute(cacheCommand).ToString());
+    // Simple PING command
+    string cacheCommand = "PING";
+    Console.WriteLine("\nCache command  : " + cacheCommand);
+    Console.WriteLine("Cache response : " + cache.Execute(cacheCommand).ToString());
 
-            // Simple get and put of integral data types into the cache
-            cacheCommand = "GET Message";
-            Console.WriteLine("\nCache command  : " + cacheCommand + " or StringGet()");
-            Console.WriteLine("Cache response : " + cache.StringGet("Message").ToString());
+    // Simple get and put of integral data types into the cache
+    cacheCommand = "GET Message";
+    Console.WriteLine("\nCache command  : " + cacheCommand + " or StringGet()");
+    Console.WriteLine("Cache response : " + cache.StringGet("Message").ToString());
 
-            cacheCommand = "SET Message \"Hello! The cache is working from a .NET console app!\"";
-            Console.WriteLine("\nCache command  : " + cacheCommand + " or StringSet()");
-            Console.WriteLine("Cache response : " + cache.StringSet("Message", "Hello! The cache is working from a .NET console app!").ToString());
+    cacheCommand = "SET Message \"Hello! The cache is working from a .NET console app!\"";
+    Console.WriteLine("\nCache command  : " + cacheCommand + " or StringSet()");
+    Console.WriteLine("Cache response : " + cache.StringSet("Message", "Hello! The cache is working from a .NET console app!").ToString());
 
-            // Demonstrate "SET Message" executed as expected...
-            cacheCommand = "GET Message";
-            Console.WriteLine("\nCache command  : " + cacheCommand + " or StringGet()");
-            Console.WriteLine("Cache response : " + cache.StringGet("Message").ToString());
+    // Demonstrate "SET Message" executed as expected...
+    cacheCommand = "GET Message";
+    Console.WriteLine("\nCache command  : " + cacheCommand + " or StringGet()");
+    Console.WriteLine("Cache response : " + cache.StringGet("Message").ToString());
 
-            // Get the client list, useful to see if connection list is growing...
-            cacheCommand = "CLIENT LIST";
-            Console.WriteLine("\nCache command  : " + cacheCommand);
-            Console.WriteLine("Cache response : \n" + cache.Execute("CLIENT", "LIST").ToString().Replace("id=", "id="));
+    // Get the client list, useful to see if connection list is growing...
+    // Note that this requires the allowAdmin=true
+    cacheCommand = "CLIENT LIST";
+    Console.WriteLine("\nCache command  : " + cacheCommand);
+    var endpoint = (System.Net.DnsEndPoint) Connection.GetEndPoints()[0];
+    var server = Connection.GetServer(endpoint.Host, endpoint.Port);
 
-            lazyConnection.Value.Dispose();
-        }
+    var clients = server.ClientList(); 
+    Console.WriteLine("Cache response :");
+    foreach (var client in clients)
+    {
+        Console.WriteLine(client.Raw);
+    }
+
+    lazyConnection.Value.Dispose();
+}
 ```
 
-Le cache Azure pour Redis dispose d’un nombre configurable de bases de données (16 par défaut) pouvant être utilisées pour séparer de manière logique les données dans un cache Azure pour Redis. Le code se connecte à la base de données par défaut, DB 0. Pour plus d’informations, consultez les sections [What are Redis databases?](cache-faq.md#what-are-redis-databases) (Que sont les bases de données Redis ?) et [Configuration du serveur Redis par défaut](cache-configure.md#default-redis-server-configuration).
+Le cache Azure pour Redis dispose d’un nombre configurable de bases de données (16 par défaut) pouvant être utilisées pour séparer de manière logique les données dans un cache Azure pour Redis. Le code se connecte à la base de données par défaut, DB 0. Pour plus d’informations, consultez les sections [What are Redis databases?](cache-development-faq.md#what-are-redis-databases) (Que sont les bases de données Redis ?) et [Configuration du serveur Redis par défaut](cache-configure.md#default-redis-server-configuration).
 
 Les éléments de cache peuvent être stockés et extraits en utilisant les méthodes `StringSet` et `StringGet`.
 
@@ -193,35 +201,35 @@ using Newtonsoft.Json;
 Ajoutez la définition de classe `Employee` suivante à *Program.cs* :
 
 ```csharp
-        class Employee
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
-            public int Age { get; set; }
+class Employee
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
 
-            public Employee(string EmployeeId, string Name, int Age)
-            {
-                this.Id = EmployeeId;
-                this.Name = Name;
-                this.Age = Age;
-            }
-        }
+    public Employee(string EmployeeId, string Name, int Age)
+    {
+        this.Id = EmployeeId;
+        this.Name = Name;
+        this.Age = Age;
+    }
+}
 ```
 
-Au bas de la procédure `Main()` dans *Program.cs*et avant l’appel à `Dispose()`, ajoutez les lignes de code suivantes à mettre en cache et récupérez un objet .NET sérialisé :
+Au bas de la procédure `Main()` dans *Program.cs* et avant l’appel à `Dispose()`, ajoutez les lignes de code suivantes à mettre en cache et récupérez un objet .NET sérialisé :
 
 ```csharp
-            // Store .NET object to cache
-            Employee e007 = new Employee("007", "Davide Columbo", 100);
-            Console.WriteLine("Cache response from storing Employee .NET object : " + 
-                cache.StringSet("e007", JsonConvert.SerializeObject(e007)));
+    // Store .NET object to cache
+    Employee e007 = new Employee("007", "Davide Columbo", 100);
+    Console.WriteLine("Cache response from storing Employee .NET object : " + 
+    cache.StringSet("e007", JsonConvert.SerializeObject(e007)));
 
-            // Retrieve .NET object from cache
-            Employee e007FromCache = JsonConvert.DeserializeObject<Employee>(cache.StringGet("e007"));
-            Console.WriteLine("Deserialized Employee .NET object :\n");
-            Console.WriteLine("\tEmployee.Name : " + e007FromCache.Name);
-            Console.WriteLine("\tEmployee.Id   : " + e007FromCache.Id);
-            Console.WriteLine("\tEmployee.Age  : " + e007FromCache.Age + "\n");
+    // Retrieve .NET object from cache
+    Employee e007FromCache = JsonConvert.DeserializeObject<Employee>(cache.StringGet("e007"));
+    Console.WriteLine("Deserialized Employee .NET object :\n");
+    Console.WriteLine("\tEmployee.Name : " + e007FromCache.Name);
+    Console.WriteLine("\tEmployee.Id   : " + e007FromCache.Id);
+    Console.WriteLine("\tEmployee.Age  : " + e007FromCache.Age + "\n");
 ```
 
 Appuyez sur **Ctrl + F5** pour générer et exécuter l’application console pour tester la sérialisation des objets .NET. 
@@ -260,4 +268,7 @@ Dans ce guide de démarrage rapide, vous avez appris à utiliser le cache Azure 
 > [!div class="nextstepaction"]
 > [Créer une application web ASP.NET qui utilise un cache Azure pour Redis.](./cache-web-app-howto.md)
 
+Vous souhaitez optimiser et réduire vos coûts de cloud ?
 
+> [!div class="nextstepaction"]
+> [Démarrer l’analyse des coûts avec Cost Management](../cost-management-billing/costs/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn)

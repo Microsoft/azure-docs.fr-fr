@@ -4,19 +4,19 @@ description: Créer une stratégie d’accès conditionnel personnalisée pour d
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 04/02/2020
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 60d0ad0a1c0a1b4d13ce4d386df22406a8ab8e51
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6e6185c4bde71285fc163cae2af46f64ba052195
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81617621"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994755"
 ---
 # <a name="conditional-access-require-mfa-for-all-users"></a>Accès conditionnel : Exiger MFA pour tous les utilisateurs
 
@@ -31,7 +31,7 @@ Les instructions de cet article aideront votre organisation à créer une strat�
 Les stratégies d’accès conditionnel sont des outils puissants. Nous vous recommandons donc d’exclure les comptes suivants de votre stratégie :
 
 * Comptes **d’accès d’urgence** ou **de secours** pour empêcher le verrouillage du compte sur l’ensemble du locataire. Dans le scénario improbable où tous les administrateurs seraient verrouillés hors de votre locataire, votre compte administratif d’accès d’urgence peut être utilisé pour vous connecter au locataire et prendre les mesures nécessaires pour récupérer l’accès.
-   * Pour plus d’informations, consultez l’article [Gérer des comptes d’accès d’urgence dans Azure AD](../users-groups-roles/directory-emergency-access.md).
+   * Pour plus d’informations, consultez l’article [Gérer des comptes d’accès d’urgence dans Azure AD](../roles/security-emergency-access.md).
 * Les **comptes de service** et les **principaux de service**, comme le compte de synchronisation Azure AD Connect. Les comptes de service sont des comptes non interactifs qui ne sont pas liés à un utilisateur particulier. Ils sont généralement utilisés par les services principaux autorisant l’accès par programme aux applications, mais ils sont également utilisés pour se connecter aux systèmes à des fins administratives. Les comptes de service comme ceux-ci doivent être exclus, car l’authentification MFA ne peut pas être effectuée par programme. Les appels effectués par les principaux de service ne sont pas bloqués par l’accès conditionnel.
    * Si votre organisation utilise ces comptes dans des scripts ou du code, envisagez de les remplacer par des [identités managées](../managed-identities-azure-resources/overview.md). Pour contourner provisoirement le problème, vous pouvez exclure ces comptes spécifiques de la stratégie de base.
 
@@ -53,7 +53,7 @@ Les étapes suivantes vous aideront à créer une stratégie d’accès conditio
    1. Sélectionnez **Terminé**.
 1. Sous **Applications ou actions cloud** > **Inclure**, sélectionnez **Toutes les applications cloud**.
    1. Sous **Exclure**, sélectionnez toutes les applications ne nécessitant pas d’authentification multifacteur.
-1. Sous **Conditions** > **Applications clientes (préversion)** , définissez **Configurer** sur **Oui**, puis sélectionnez **Terminé**.
+1. Sous **Conditions** > **Applications clientes (préversion)** > **Sélectionnez les applications clientes auxquelles cette stratégie s’applique**, laissez toutes les valeurs par défaut sélectionnées et sélectionnez **Terminé**.
 1. Sous **Contrôles d’accès** > **Accorder**, sélectionnez **Accorder l'accès**, **Requérir l’authentification multifacteur**, et sélectionnez **Sélectionner**.
 1. Confirmez vos paramètres et réglez **Activer la stratégie** sur **Activé**.
 1. Sélectionnez **Créer** pour créer votre stratégie.
@@ -76,6 +76,6 @@ Dans l’exemple de stratégie ci-dessus, une organisation peut choisir de ne pa
 
 [Stratégies d’accès conditionnel courantes](concept-conditional-access-policy-common.md)
 
-[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-report-only.md)
+[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-insights-reporting.md)
 
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)

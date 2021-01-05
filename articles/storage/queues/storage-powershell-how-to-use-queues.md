@@ -1,19 +1,20 @@
 ---
 title: Effectuer des opérations de Stockage File d’attente Azure dans PowerShell
-description: Guide pratique pour effectuer des opérations sur un Stockage File d’attente Azure avec PowerShell
+description: Effectuez des opérations sur Stockage File d’attente Azure avec PowerShell. Grâce à Stockage File d’attente Azure, vous pouvez stocker un grand nombre de messages accessibles par HTTP/HTTPS.
 author: mhopkins-msft
 ms.author: mhopkins
 ms.date: 05/15/2019
 ms.service: storage
 ms.subservice: queues
-ms.topic: conceptual
-ms.reviewer: cbrooks
-ms.openlocfilehash: 96828a854c340b89c26023ce60f9c85dd1bb4cdd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.reviewer: dineshm
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: a2f1229ab8a292b06dfc43b95d9047ed8d233523
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80473913"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93345701"
 ---
 # <a name="perform-azure-queue-storage-operations-with-azure-powershell"></a>Effectuer des opérations sur Stockage File d’attente Azure avec Azure PowerShell
 
@@ -21,12 +22,12 @@ Les files d’attente de stockage Azure sont un service permettant de stocker un
 
 > [!div class="checklist"]
 >
-> * Créer une file d’attente
-> * Récupérer une file d’attente
-> * Ajouter un message
-> * Lire un message
-> * Supprimer un message
-> * Suppression d'une file d'attente
+> - Créer une file d’attente
+> - Récupérer une file d’attente
+> - Ajouter un message
+> - Lire un message
+> - Supprimer un message
+> - Suppression d'une file d'attente
 
 Ce guide pratique nécessite le module Az Azure PowerShell version 0.7 ou ultérieure. Exécutez `Get-Module -ListAvailable Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps).
 
@@ -85,7 +86,7 @@ $queueName = "howtoqueue"
 $queue = New-AzStorageQueue –Name $queueName -Context $ctx
 ```
 
-Pour plus d’informations sur les conventions d’affectation de noms pour le service de File d’attente Azure, consultez la page [Affectation de noms pour les files d’attente et les métadonnées](https://msdn.microsoft.com/library/azure/dd179349.aspx).
+Pour plus d’informations sur les conventions d’affectation de noms pour le service de File d’attente Azure, consultez la page [Affectation de noms pour les files d’attente et les métadonnées](/rest/api/storageservices/Naming-Queues-and-Metadata).
 
 ## <a name="retrieve-a-queue"></a>Récupérer une file d’attente
 
@@ -103,7 +104,7 @@ Get-AzStorageQueue -Context $ctx | Select-Object Name
 
 ## <a name="add-a-message-to-a-queue"></a>Ajout d'un message à une file d'attente
 
-Les opérations ayant un impact sur les messages réels dans la file d’attente utilisent la bibliothèque cliente de stockage .NET exposée dans PowerShell. Pour ajouter un message à une file d’attente, créez une instance de l’objet de message, la classe [Microsoft.Azure.Storage.Queue.CloudQueueMessage](https://docs.microsoft.com/java/api/com.microsoft.azure.storage.queue.cloudqueuemessage). Appelez ensuite la méthode [AddMessage](https://docs.microsoft.com/java/api/com.microsoft.azure.storage.queue.cloudqueue.addmessage) . Un CloudQueueMessage peut être créé à partir d'une chaîne (au format UTF-8) ou d'un tableau d'octets.
+Les opérations ayant un impact sur les messages réels dans la file d’attente utilisent la bibliothèque cliente de stockage .NET exposée dans PowerShell. Pour ajouter un message à une file d’attente, créez une instance de l’objet de message, la classe [Microsoft.Azure.Storage.Queue.CloudQueueMessage](/java/api/com.microsoft.azure.storage.queue.cloudqueuemessage). Appelez ensuite la méthode [AddMessage](/java/api/com.microsoft.azure.storage.queue.cloudqueue.addmessage) . Un CloudQueueMessage peut être créé à partir d'une chaîne (au format UTF-8) ou d'un tableau d'octets.
 
 L’exemple suivant montre comment ajouter un message à votre file d’attente.
 
@@ -126,7 +127,7 @@ Si vous utilisez [l’Explorateur Stockage Azure](https://storageexplorer.com), 
 
 ## <a name="read-a-message-from-the-queue-then-delete-it"></a>Lire un message de la file d’attente, puis le supprimer
 
-Les messages sont lus, dans la mesure du possible, dans l’ordre du premier entré, premier sorti. Nous n’offrons aucune garantie. Quand vous lisez le message de la file d’attente, il devient invisible à tous les autres processus ciblant la file d’attente. De cette façon, si votre code ne parvient pas à traiter un message à cause d’une défaillance matérielle ou logicielle, une autre instance de votre code peut obtenir le même message et réessayer.  
+Les messages sont lus, dans la mesure du possible, dans l’ordre du premier entré, premier sorti. Nous n’offrons aucune garantie. Quand vous lisez le message de la file d’attente, il devient invisible à tous les autres processus ciblant la file d’attente. De cette façon, si votre code ne parvient pas à traiter un message à cause d’une défaillance matérielle ou logicielle, une autre instance de votre code peut obtenir le même message et réessayer.
 
 Cette **période d’invisibilité** définit la durée d’invisibilité du message avant qu’il ne redevienne disponible pour traitement. La valeur par défaut est 30 secondes.
 
@@ -184,17 +185,17 @@ Cet article sur les procédures vous a présenté les bases de la gestion de Sto
 
 > [!div class="checklist"]
 >
-> * Créer une file d’attente
-> * Récupérer une file d’attente
-> * Ajouter un message
-> * Lire le message suivant
-> * Supprimer un message
-> * Suppression d'une file d'attente
+> - Créer une file d’attente
+> - Récupérer une file d’attente
+> - Ajouter un message
+> - Lire le message suivant
+> - Supprimer un message
+> - Suppression d'une file d'attente
 
 ### <a name="microsoft-azure-powershell-storage-cmdlets"></a>Applets de commande Microsoft Azure PowerShell - Stockage
 
-* [Applets de commande PowerShell - Stockage](/powershell/module/az.storage)
+- [Applets de commande PowerShell - Stockage](/powershell/module/az.storage)
 
 ### <a name="microsoft-azure-storage-explorer"></a>Explorateur Stockage Microsoft Azure
 
-* [Microsoft Azure Storage Explorer](../../vs-azure-tools-storage-manage-with-storage-explorer.md?toc=%2fazure%2fstorage%2fqueues%2ftoc.json) est une application autonome et gratuite de Microsoft qui vous permet d’exploiter visuellement les données de Stockage Azure sur Windows, macOS et Linux.
+- [Microsoft Azure Storage Explorer](../../vs-azure-tools-storage-manage-with-storage-explorer.md?toc=%2fazure%2fstorage%2fqueues%2ftoc.json) est une application autonome et gratuite de Microsoft qui vous permet d’exploiter visuellement les données de Stockage Azure sur Windows, macOS et Linux.

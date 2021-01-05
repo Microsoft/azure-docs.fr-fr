@@ -7,7 +7,12 @@
 - name: Démarrages rapides
   items:
     - name: Configurer des alertes pour des évènements Service Health
-      href: ../azure-monitor/platform/alerts-activity-log-service-notifications.md
+      items:
+        - name: Portail Azure
+          href: alerts-activity-log-service-notifications-portal.md
+        - name: Modèle ARM
+          displayName: Resource Manager
+          href: alerts-activity-log-service-notifications-arm.md
 - name: Concepts
   items:
     - name: Page de l’état Azure
@@ -19,7 +24,7 @@
 - name: Procédure
   items:
     - name: Configurer des alertes pour des évènements Service Health
-      href: alerts-activity-log-service-notifications.md
+      href: ./alerts-activity-log-service-notifications-portal.md
     - name: Afficher les notifications Service Health dans le portail Azure
       href: service-notifications.md
     - name: Envoyer des alertes aux systèmes externes par Webhook
@@ -30,9 +35,9 @@
       href: service-health-alert-webhook-pagerduty.md
     - name: Envoyer des alertes à OpsGenie
       href: service-health-alert-webhook-opsgenie.md
-    - name: Récupérer les événements d’intégrité avec REST
-      href: service-health-rest.md
-    - name: Configurer des alertes pour des évènements d’intégrité des ressources
+    - name: Configurer des alertes d’intégrité de ressources avec le portail Azure
+      href: resource-health-alert-monitor-guide.md
+    - name: Configurer les alertes Resource Health à l’aide de modèles Resource Manager
       href: resource-health-alert-arm-template-guide.md
 - name: Informations de référence
   items:

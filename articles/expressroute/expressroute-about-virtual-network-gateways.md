@@ -2,17 +2,17 @@
 title: À propos des passerelles de réseau virtuel ExpressRoute - Azure | Microsoft Docs
 description: En savoir plus sur les passerelles de réseau virtuel pour ExpressRoute. Cet article comprend des informations sur les types et les références SKU de passerelle.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 10/14/2019
-ms.author: mialdrid
-ms.openlocfilehash: 58e75e4efecf390c4c1449b7ec59684554fa7516
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: b721a9b8d8bdff3f3aaf05f15857c00347e7abb4
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236373"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202376"
 ---
 # <a name="about-expressroute-virtual-network-gateways"></a>À propos des passerelles de réseau virtuel ExpressRoute
 
@@ -88,8 +88,8 @@ Pour accéder à des ressources techniques supplémentaires et connaître les ex
 
 | **Classique** | **Resource Manager** |
 | --- | --- |
-| [PowerShell](https://docs.microsoft.com/powershell/module/servicemanagement/azure/?view=azuresmps-4.0.0#azure) |[PowerShell](https://docs.microsoft.com/powershell/module/az.network#networking) |
-| [REST API](https://msdn.microsoft.com/library/jj154113.aspx) |[REST API](https://msdn.microsoft.com/library/mt163859.aspx) |
+| [PowerShell](/powershell/module/servicemanagement/azure.service/?view=azuresmps-4.0.0#azure) |[PowerShell](/powershell/module/az.network#networking) |
+| [REST API](/previous-versions/azure/reference/jj154113(v=azure.100)) |[REST API](/rest/api/virtual-network/) |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

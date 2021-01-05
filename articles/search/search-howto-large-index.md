@@ -2,52 +2,112 @@
 title: Indexer des grands jeux de données avec des indexeurs intégrés
 titleSuffix: Azure Cognitive Search
 description: Stratégies pour l’indexation de grands volumes de données ou pour l’indexation gourmande en ressources via le mode de traitement par lots, la gestion des ressources, et des techniques d’indexation planifiée, parallèle et distribuée.
-manager: nitinme
-author: HeidiSteen
-ms.author: heidist
+manager: liamca
+author: dereklegenzoff
+ms.author: delegenz
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 12/17/2019
-ms.openlocfilehash: 4ad5e961e390b60784355ff3bc72aca4a2f73e11
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/25/2020
+ms.openlocfilehash: b4f54aff78526ba52e56ed9f4cf1feddf40fa69b
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77190965"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94358390"
 ---
 # <a name="how-to-index-large-data-sets-in-azure-cognitive-search"></a>Comment indexer des grands ensembles de données dans la Recherche cognitive Azure
+
+Recherche cognitive Azure prend en charge [deux approches de base](search-what-is-data-import.md) pour importer des données dans un index de recherche : *envoyer (push)* les données dans l’index par programme ou pointer un [indexeur Recherche cognitive Azure](search-indexer-overview.md) vers une source de données prise en charge pour *extraire (pull)* les données.
 
 Au fur et à mesure que les volumes de données augmentent ou que les besoins en traitement évoluent, vous trouverez peut-être que les stratégies d’indexation simples ou par défaut ne sont plus adaptées. Pour la Recherche cognitive Azure, il existe plusieurs approches pour prendre en charge les grands jeux de données, allant de la façon dont une demande de chargement de données est structurée à l’utilisation d’un indexeur spécifique à la source pour les charges de travail planifiées et distribuées.
 
 Les mêmes techniques s’appliquent également aux processus à exécution longue. En particulier, les étapes décrites dans [Indexation parallèle](#parallel-indexing) sont utiles pour l’indexation gourmande en ressources, comme l’analyse d’images ou le traitement en langage naturel dans un [pipeline d’enrichissement de l’IA](cognitive-search-concept-intro.md).
 
-Les sections suivantes décrivent trois techniques d’indexation de grandes quantités de données.
+Les sections suivantes décrivent des techniques d’indexation de grandes quantités de données à l’aide de l’API Push et des indexeurs.
 
-## <a name="option-1-pass-multiple-documents"></a>Option 1 : Transférer plusieurs documents
+## <a name="use-the-push-api"></a>Utiliser l’API Push
 
-Un des mécanismes les plus simples pour l’indexation d’un grand jeu de données consiste à soumettre plusieurs documents ou enregistrements dans une même demande. Tant que la charge utile entière est inférieure à 16 Mo, une demande peut gérer jusqu’à 1 000 documents dans une opération de chargement en bloc. Ces limites s’appliquent que vous utilisiez l’[API REST d’ajout de documents](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) ou la [méthode Index](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.documentsoperationsextensions.index?view=azure-dotnet) du SDK .NET. Pour l’une ou l’autre des API, vous devez empaqueter 1 000 documents dans le corps de chaque requête.
+Lors de l’envoi de données dans un index à l’aide de l’[API REST Ajouter des documents](/rest/api/searchservice/addupdate-or-delete-documents) ou de la [méthode IndexDocuments](/dotnet/api/azure.search.documents.searchclient.indexdocuments), diverses considérations importantes affectent la vitesse d’indexation. Ces facteurs sont décrits dans la section ci-dessous, et vont de la définition de la capacité de service aux optimisations du code.
 
-L’indexation par lot est implémentée pour les demandes individuelles avec REST ou .NET, ou via des indexeurs. Quelques indexeurs fonctionnent avec des limites différentes. Plus précisément, l’indexation des objets blob Azure définit la taille des lots à 10 documents en fonction de la taille moyenne des documents la plus élevée. Pour les indexeurs basés sur l’[API REST de création d’un indexeur](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer), vous pouvez définir l’argument `BatchSize` pour personnaliser ce paramètre de façon à le faire mieux correspondre aux caractéristiques de vos données. 
+Pour plus d’informations et des exemples de code illustrant l’indexation de modèle d’émission, consultez [Tutoriel : Optimiser les vitesses d’indexation](tutorial-optimize-indexing-push-api.md).
+
+### <a name="capacity-of-your-service"></a>Capacité de votre service
+
+Dans un premier temps, examinez les caractéristiques et les [limites](search-limits-quotas-capacity.md) du niveau auquel vous avez approvisionné le service. L’un des principaux facteurs de différenciation parmi les niveaux tarifaires est la taille et la vitesse des partitions, qui ont un impact direct sur la vitesse d’indexation. Si vous avez approvisionné votre service de recherche à un niveau insuffisant pour la charge de travail, la mise à niveau vers un nouveau niveau peut être la solution la plus simple et la plus efficace pour augmenter le débit d’indexation.
+
+Une fois que vous êtes satisfait du niveau, l’étape suivante peut être d’augmenter le nombre de partitions. Vous pouvez réajuster l’allocation de partition vers le bas après une exécution d’indexation initiale afin de réduire le coût global d’exécution du service.
+
+> [!NOTE]
+> L’ajout de réplicas supplémentaires peut également augmenter les vitesses d’indexation, mais cela n’est pas garanti. En revanche, les réplicas supplémentaires augmentent le volume de requêtes que votre service de recherche peut gérer. Les réplicas sont également un composant clé pour l’obtention d’un contrat [SLA](https://azure.microsoft.com/support/legal/sla/search/v1_0/).
+>
+> Avant d’ajouter des partitions/réplicas ou de procéder à une mise à niveau vers un niveau supérieur, prenez en compte des paramètres tels que le coût et le temps d’allocation. L’ajout de partitions peut augmenter considérablement la vitesse d’indexation, mais l’ajout/la suppression peut prendre de 15 minutes à plusieurs heures. Pour plus d'informations, consultez la documentation sur le [réglage de capacité](search-capacity-planning.md).
+>
+
+### <a name="review-index-schema"></a>Réviser le schéma d’index
+
+Le schéma de votre index joue un rôle important dans l’indexation des données. Plus vous avez de champs, plus les propriétés que vous définissez (par exemple *Possibilité de recherche*, *À choix multiples*, *Filtrable*) contribuent à augmenter le temps d’indexation. En général, vous devez uniquement créer et spécifier les champs dont vous avez réellement besoin dans un index de recherche.
 
 > [!NOTE]
 > Pour réduire la taille du document, évitez d’ajouter des données non interrogeables à un index. Les images et autres données binaires ne peuvent pas faire l’objet de recherches directes et ne doivent pas être stockées dans l’index. Pour intégrer des données non interrogeables dans les résultats de la recherche, vous devez définir un champ sans possibilité de recherche qui stocke une référence d’URL vers la ressource.
 
-## <a name="option-2-add-resources"></a>Option n°2 : Ajout de ressources
+### <a name="check-the-batch-size"></a>Vérifier la taille de lot
 
-Les services qui sont provisionnés à un des [niveaux tarifaires standard](search-sku-tier.md) ont souvent des capacités sous-utilisées pour le stockage et les charges de travail (requêtes ou indexation), ce qui fait de l’[augmentation du nombre de partitions et de réplicas](search-capacity-planning.md) une solution évidente pour prendre en charge les grands jeux de données. Pour optimiser les résultats, vous avez besoin des deux ressources : les partitions pour le stockage et les réplicas pour le travail d’ingestion des données.
+Un des mécanismes les plus simples pour l’indexation d’un grand jeu de données consiste à soumettre plusieurs documents ou enregistrements dans une même demande. Tant que la charge utile entière est inférieure à 16 Mo, une demande peut gérer jusqu’à 1 000 documents dans une opération de chargement en bloc. Ces limites s’appliquent que vous utilisiez l’[API REST d’ajout de documents](/rest/api/searchservice/addupdate-or-delete-documents) ou la [méthode IndexDocuments](/dotnet/api/azure.search.documents.searchclient.indexdocuments) du SDK .NET. Pour l’une ou l’autre des API, vous devez empaqueter 1 000 documents dans le corps de chaque requête.
 
-L’augmentation des réplicas et des partitions est un événement facturable qui augmente les coûts, mais à moins d’indexer en continu sous une charge maximale, vous pouvez procéder à une mise à l’échelle pour la durée du processus d’indexation, puis baisser de nouveau les niveaux de ressources une fois l’indexation terminée.
+L’indexation de documents par lots améliorera considérablement les performances d’indexation. La détermination de la taille de lot optimale pour vos données est un composant clé de l’optimisation des vitesses d’indexation. Les deux principaux facteurs qui influencent la taille de lot optimale sont les suivants :
 
-## <a name="option-3-use-indexers"></a>Option 3 : Utiliser des indexeurs
++ Le schéma de votre index
++ La taille de vos données
+
+Étant donné que la taille de lot optimale dépend de votre index et de vos données, la meilleure approche consiste à tester différentes tailles de lot pour déterminer ce qui produit les vitesses d’indexation les plus rapides pour votre scénario. Ce [tutoriel](tutorial-optimize-indexing-push-api.md) fournit des exemples de code pour tester les tailles de lot à l’aide du kit de développement logiciel (SDK) .NET. 
+
+### <a name="number-of-threadsworkers"></a>Nombre de threads/rôles de travail
+
+Pour tirer pleinement parti des vitesses d’indexation de Recherche cognitive Azure, vous devrez probablement utiliser plusieurs threads pour envoyer simultanément des demandes d’indexation par lot au service.  
+
+Le nombre optimal de threads est déterminé par :
+
++ Le niveau de votre service de recherche
++ Nombre de partitions
++ La taille de vos lots
++ Le schéma de votre index
+
+Vous pouvez modifier cet exemple et effectuer des tests avec différents nombres de threads pour déterminer le nombre de threads optimal pour votre scénario. Toutefois, tant que plusieurs threads s’exécutent simultanément, vous devriez être en mesure de bénéficier de la majeure partie des gains d’efficacité. 
+
+> [!NOTE]
+> Au fur et à mesure que vous augmentez le niveau de votre service de recherche ou que vous augmentez les partitions, vous devez également augmenter le nombre de threads simultanés.
+
+Au fur et à mesure que les requêtes atteignent le service de recherche, vous pouvez rencontrer des [codes d’état HTTP](/rest/api/searchservice/http-status-codes) indiquant que la demande n’a pas abouti. Pendant l’indexation, deux codes d’état HTTP courants sont :
+
++ **503 Service indisponible** : Cette erreur signifie que le système est surchargé et que votre requête ne peut pas être traitée pour le moment.
++ **207 Multi-état** : Cette erreur signifie que certains documents ont réussi, mais qu’au moins un a échoué.
+
+### <a name="retry-strategy"></a>Stratégie de nouvelle tentative
+
+En cas d’échec, les requêtes doivent être retentées à l’aide d’une [stratégie de nouvelle tentative d’interruption exponentielle](/dotnet/architecture/microservices/implement-resilient-applications/implement-retries-exponential-backoff).
+
+Le kit de développement logiciel (SDK) .NET de Recherche cognitive Azure retente automatiquement lors des erreurs 503 et autres requêtes ayant échoué, mais vous devez implémenter votre propre logique pour réessayer en cas de code 207. Des outils open source tels que [Polly](https://github.com/App-vNext/Polly) peuvent également être utilisés pour mettre en œuvre une stratégie de nouvelle tentative.
+
+### <a name="network-data-transfer-speeds"></a>Vitesses de transfert de données réseau
+
+La vitesse de transfert des données peut être un facteur limitatif lors de l’indexation des données. L’indexation de données à partir de votre environnement Azure est un moyen simple d’accélérer l’indexation.
+
+## <a name="use-indexers-pull-api"></a>Utiliser des indexeurs (API pull)
 
 Les [indexeurs](search-indexer-overview.md) sont utilisés pour analyser le contenu pouvant être recherché dans les sources de données Azure prises en charge. Bien qu’ils ne soient pas spécifiquement destinés à l’indexation à grande échelle, plusieurs fonctionnalités des indexeurs sont particulièrement utiles pour prendre en charge les grands jeux de données :
 
 + Les planificateurs vous permettent de diviser l’indexation pour l’effectuer à intervalles réguliers : vous pouvez ainsi la répartir dans le temps.
 + L’indexation planifiée peut reprendre au dernier point d’arrêt connu. Si une source de données n’est pas entièrement parcourue dans une fenêtre de 24 heures, l’indexeur reprend l’indexation au deuxième jour, là où elle s’était arrêtée.
-+ Le partitionnement des données en sources de données individuelles plus petites permet le traitement parallèle. Vous pouvez séparer les données sources en composants plus petits, par exemple en plusieurs conteneurs dans un stockage Blob Azure, puis créer plusieurs [objets de source de données](https://docs.microsoft.com/rest/api/searchservice/create-data-source) correspondants dans la Recherche cognitive Azure, qui peuvent être indexés en parallèle.
++ Le partitionnement des données en sources de données individuelles plus petites permet le traitement parallèle. Vous pouvez séparer les données sources en composants plus petits, par exemple en plusieurs conteneurs dans un stockage Blob Azure, puis créer plusieurs [objets de source de données](/rest/api/searchservice/create-data-source) correspondants dans la Recherche cognitive Azure, qui peuvent être indexés en parallèle.
 
 > [!NOTE]
 > Les indexeurs sont spécifiques à une source de données : l’utilisation d’une approche par indexeur est donc viable seulement pour des sources de données sélectionnées sur Azure : [SQL Database](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md), [Stockage Blob](search-howto-indexing-azure-blob-storage.md), [Stockage Table](search-howto-indexing-azure-tables.md), [Cosmos DB](search-howto-index-cosmosdb.md).
+
+### <a name="check-the-batchsize-argument-on-create-indexer"></a>Vérifier l’argument batchSize sur Créer un indexeur
+
+Comme avec l’API Push, les indexeurs vous permettent de configurer le nombre d’éléments par lot. Pour les indexeurs basés sur l’[API REST de création d’un indexeur](/rest/api/searchservice/Create-Indexer), vous pouvez définir l’argument `batchSize` pour personnaliser ce paramètre de façon à le faire mieux correspondre aux caractéristiques de vos données. 
+
+Les tailles de lot par défaut sont spécifiques à la source de données. Azure SQL Database et Azure Cosmos DB ont une taille de lot par défaut de 1 000. À l’inverse, l’indexation des objets blob Azure définit la taille des lots à 10 documents en fonction de la taille moyenne des documents la plus élevée. 
 
 ### <a name="scheduled-indexing"></a>Indexation planifiée
 
@@ -55,7 +115,7 @@ La planification des indexeurs est un mécanisme important pour le traitement de
 
 Par conception, l’indexation planifiée démarre à intervalles spécifiques. En général, les tâches sont entièrement exécutées, puis redémarrées au prochain intervalle planifié. Toutefois, si le traitement n’est pas terminé à la fin de l’intervalle, l’indexeur s’arrête (car le délai de traitement a expiré). Au prochain intervalle, le traitement reprend là où il s’était arrêté, le système gardant en mémoire l’endroit où la tâche doit redémarrée. 
 
-En pratique, pour les charges d’index réparties sur plusieurs jours, vous pouvez définir une fenêtre d’exécution de 24 heures pour l’indexeur. Quand l’indexation reprend pour le cycle suivant de 24 heures, elle redémarre au dernier document valide connu. De cette façon, un indexeur peut s’exécuter sur un backlog de documents pendant plusieurs jours jusqu’à ce que tous les documents non traités soient traités. Pour plus d’informations sur cette approche, consultez [Indexation de grands jeux de données dans Stockage Blob Azure](search-howto-indexing-azure-blob-storage.md#indexing-large-datasets). Pour plus d’informations sur la définition de planifications en général, voir [API REST de création d’indexeur](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer) ou [Comment planifier des indexeurs pour la Recherche cognitive Azure](search-howto-schedule-indexers.md).
+En pratique, pour les charges d’index réparties sur plusieurs jours, vous pouvez définir une fenêtre d’exécution de 24 heures pour l’indexeur. Quand l’indexation reprend pour le cycle suivant de 24 heures, elle redémarre au dernier document valide connu. De cette façon, un indexeur peut s’exécuter sur un backlog de documents pendant plusieurs jours jusqu’à ce que tous les documents non traités soient traités. Pour plus d’informations sur la définition de planifications en général, voir [API REST de création d’indexeur](/rest/api/searchservice/Create-Indexer) ou [Comment planifier des indexeurs pour la Recherche cognitive Azure](search-howto-schedule-indexers.md).
 
 <a name="parallel-indexing"></a>
 
@@ -68,8 +128,8 @@ Pour des besoins ponctuels d’indexation gourmande en ressources, comme la reco
 Un traitement parallèle se déroule comme suit :
 
 + Répartissez vos données sources entre plusieurs conteneurs ou plusieurs dossiers virtuels au sein du même conteneur. 
-+ Mappez chaque petit jeu de données à sa propre [source de données](https://docs.microsoft.com/rest/api/searchservice/create-data-source), appairée à son propre [indexeur](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
-+ Pour la recherche cognitive, référencez le même [ensemble de compétences](https://docs.microsoft.com/rest/api/searchservice/create-skillset) dans chaque définition d’indexeur.
++ Mappez chaque petit jeu de données à sa propre [source de données](/rest/api/searchservice/create-data-source), appairée à son propre [indexeur](/rest/api/searchservice/create-indexer).
++ Pour la recherche cognitive, référencez le même [ensemble de compétences](/rest/api/searchservice/create-skillset) dans chaque définition d’indexeur.
 + Écrivez dans le même index de recherche cible. 
 + Planifiez une exécution simultanée de tous les indexeurs.
 
@@ -82,7 +142,7 @@ Pour les indexeurs, la capacité de traitement est plus ou moins basée sur un s
 
 1. Dans le [portail Azure](https://portal.azure.com), sur la page **Vue d’ensemble** de votre tableau de bord de service de recherche, vérifiez le **niveau tarifaire** pour vous assurer qu’il est compatible avec l’indexation parallèle. Les niveaux De base et Standard fournissent plusieurs réplicas.
 
-2. Sous **Paramètres** > **Échelle**, [augmentez le nombre de réplicas](search-capacity-planning.md) pour le traitement parallèle : un réplica supplémentaire pour chaque charge de travail d’indexeur. Conservez-en un nombre suffisant pour le volume de requêtes existant. Sacrifier les charges de travail de requête au profit de l’indexation n’est pas judicieux.
+2. Vous pouvez exécuter autant d’indexeurs en parallèle que le nombre d’unités de recherche dans votre service. Sous **Paramètres** > **Échelle**, [augmentez le nombre de réplicas](search-capacity-planning.md) ou de partitions pour le traitement parallèle : un réplica ou une partition supplémentaire pour chaque charge de travail d’indexeur. Conservez-en un nombre suffisant pour le volume de requêtes existant. Sacrifier les charges de travail de requête au profit de l’indexation n’est pas judicieux.
 
 3. Répartissez les données dans plusieurs conteneurs à un niveau qui est accessible par les indexeurs Recherche cognitive Azure. Placez-les par exemple dans plusieurs tables dans Azure SQL Database, dans différents conteneurs du stockage Blob Azure ou dans plusieurs collections. Définissez un objet de source de données pour chaque table ou conteneur.
 

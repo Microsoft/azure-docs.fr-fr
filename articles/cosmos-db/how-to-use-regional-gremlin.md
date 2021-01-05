@@ -1,25 +1,28 @@
 ---
 title: Points de terminaison régionaux pour la base de données de graphes Azure Cosmos DB
 description: Découvrir comment se connecter au point de terminaison de base de données de graphes le plus proche pour votre application
-author: luisbosquez
-ms.author: lbosq
+author: christopheranderson
+ms.author: chrande
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/09/2019
-ms.openlocfilehash: 7aa1e0aa6bbbee9d40eb0d48318a8e2908a75f9d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 3e30252d8f5e80538139f8100f1070385c1b6016
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78897862"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93361785"
 ---
 # <a name="regional-endpoints-for-azure-cosmos-db-graph-account"></a>Points de terminaison régionaux pour le compte de graphe Azure Cosmos DB
-Comme la base de données de graphes Azure Cosmos DB est [globalement distribuée](distribute-data-globally.md), les applications peuvent utiliser plusieurs points de terminaison de lecture. Les applications qui ont besoin d’un accès en écriture dans plusieurs emplacements doivent activer la fonctionnalité [multimaître](how-to-multi-master.md).
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
+
+Comme la base de données de graphes Azure Cosmos DB est [globalement distribuée](distribute-data-globally.md), les applications peuvent utiliser plusieurs points de terminaison de lecture. Les applications qui ont besoin d’un accès en écriture dans plusieurs localisations doivent activer la fonctionnalité [Écritures multirégions](how-to-multi-master.md).
 
 Raisons pour lesquelles choisir plusieurs régions :
-1. **Scalabilité de la lecture horizontale** : à mesure que la charge de l’application augmente, il peut être prudent de router le trafic en lecture vers des régions Azure différentes.
-2. **Latence plus faible** : vous pouvez réduire la surcharge de latence du réseau de chaque traversée en routant le trafic en lecture et en écriture vers la région Azure la plus proche.
+1. **Scalabilité de la lecture horizontale**  : à mesure que la charge de l’application augmente, il peut être prudent de router le trafic en lecture vers des régions Azure différentes.
+2. **Latence plus faible**  : vous pouvez réduire la surcharge de latence du réseau de chaque traversée en routant le trafic en lecture et en écriture vers la région Azure la plus proche.
 
 Les exigences en matière de **résidence des données** sont obtenues en définissant une stratégie Azure Resource Manager sur le compte Cosmos DB. Le client peut limiter les régions dans lesquelles Cosmos DB réplique les données.
 
@@ -43,7 +46,7 @@ Le CNAME de compte de base de données globale pointe toujours vers une région 
 
 Le panneau Vue d’ensemble du Portail Azure constitue le moyen le plus simple d’obtenir la liste des régions pour le compte de graphe Azure Cosmos DB. Cela fonctionne pour les applications qui ne changent pas souvent de régions ou qui ont un moyen de mettre à jour la liste par le biais de la configuration de l’application.
 
-![Récupérer des régions du compte de graphe Cosmos DB à partir du portail](./media/how-to-use-regional-gremlin/get-end-point-portal.png )
+:::image type="content" source="./media/how-to-use-regional-gremlin/get-end-point-portal.png " alt-text="Récupérer des régions du compte de graphe Cosmos DB à partir du portail":::
 
 L’exemple ci-dessous illustre les principes généraux d’accès à un point de terminaison Gremlin régional. L’application doit prendre en compte le nombre de régions auxquelles envoyer le trafic et le nombre de clients Gremlin correspondants à instancier.
 

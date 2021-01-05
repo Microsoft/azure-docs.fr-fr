@@ -5,20 +5,20 @@ services: azure-monitor
 author: rboucher
 tags: azure-service-management
 ms.topic: include
-ms.date: 02/07/2019
+ms.date: 10/01/2020
 ms.author: robb
 ms.custom: include file
-ms.openlocfilehash: 2922a1fb92f3df07429d3463b8bf639f336776af
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 610713286e3cb7a084b2e81260797d4cac0ddad7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67305277"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91639260"
 ---
 | Ressource | Limite par défaut | Limite maximale |
 | --- | --- | --- |
 | Envoi de l’application Azure | 10 actions d’application Azure par groupe d’actions. | Appelez le support technique. |
-| Email | 1,000 actions d’e-mail par groupe d’actions.<br>pas plus de 100 e-mails par heure.<br>Consultez également [Informations de limitation du débit](../articles/azure-monitor/platform/alerts-rate-limiting.md). | Appelez le support technique. |
+| Email | 1,000 actions d’e-mail par groupe d’actions.<br>pas plus de 100 e-mails par heure.<br>Consultez également [Informations de limitation du débit](../articles/azure-monitor/platform/alerts-rate-limiting.md). | Identique à la valeur par défaut |
 | ITSM | 10 actions ITSM (gestion des services informatiques) par groupe d’actions. | Appelez le support technique. | 
 | Application logique | 10 actions d’application logique par groupe d’actions. | Appelez le support technique. |
 | Runbook | 10 actions de runbook par groupe d’actions. | Appelez le support technique. |

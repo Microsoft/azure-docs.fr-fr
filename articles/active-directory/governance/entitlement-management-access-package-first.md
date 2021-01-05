@@ -3,7 +3,7 @@ title: Tutoriel – Créer un package d’accès – Gestion des droits d’util
 description: Ce tutoriel pas à pas vous explique comment créer votre premier package d’accès dans la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: barclayn
 manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.subservice: compliance
-ms.date: 03/30/2020
-ms.author: ajburnle
+ms.date: 09/30/2020
+ms.author: barclayn
 ms.reviewer: markwahl-msft
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c2d31ef46dfba31a8f217f68e8d5f98b67d58da5
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: 2e8d68643b5cc0002467f738dd60343fb2c42dc6
+ms.sourcegitcommit: 8c3a656f82aa6f9c2792a27b02bbaa634786f42d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80410597"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97631281"
 ---
 # <a name="tutorial-create-your-first-access-package-in-azure-ad-entitlement-management"></a>Tutoriel : Créer votre premier package d’accès dans la gestion des droits d’utilisation Azure AD
 
@@ -29,7 +29,7 @@ La gestion de l’accès à toutes les ressources dont les employés ont besoin,
 
 Dans ce tutoriel, vous travaillez pour Woodgrove Bank en tant qu’administrateur informatique. Vous êtes chargé de créer un package de ressources pour une campagne marketing en veillant à ce que les utilisateurs internes puissent demander l’accès à ces ressources en libre-service. Les demandes ne doivent pas être approuvées, et l’accès de l’utilisateur est valide 30 jours. Dans ce tutoriel, les ressources de la campagne marketing représentent simplement une appartenance à un groupe unique, mais vous pouvez avoir un ensemble de groupes, d’applications ou de sites SharePoint Online.
 
-![Présentation du scénario](./media/entitlement-management-access-package-first/elm-scenario-overview.png)
+![Diagramme illustrant la vue d’ensemble du scénario.](./media/entitlement-management-access-package-first/elm-scenario-overview.png)
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -41,6 +41,8 @@ Dans ce tutoriel, vous allez apprendre à :
 Pour obtenir une démonstration pas à pas du processus de déploiement de la gestion des droits d'utilisation d’Azure Active Directory, notamment la création de votre premier package d’accès, regardez la vidéo suivante :
 
 >[!VIDEO https://www.youtube.com/embed/zaaKvaaYwI4]
+
+Vous pouvez également créer un package d’accès par programme à l’aide de Microsoft Graph. Pour obtenir un tutoriel qui montre comment créer un package d’accès par programme, consultez [API de gestion des droits d’utilisation](/graph/tutorial-access-package-api?view=graph-rest-beta).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -106,9 +108,9 @@ Un *package d’accès* est un bundle de ressources dont une équipe ou un proje
 
 9. Dans le volet Sélectionner les groupes, recherchez le groupe **Marketing resources** créé précédemment et sélectionnez-le.
 
-    Par défaut, des groupes sont présents à l’intérieur et à l’extérieur du catalogue **Général**. Quand vous sélectionnez un groupe à l’extérieur du catalogue **Général**, il est ajouté au catalogue **Général**.
+     Par défaut, des groupes sont présents à l’intérieur du catalogue Général. Quand vous sélectionnez un groupe à l’extérieur du catalogue Général (vous le voyez si vous cochez la case de l’option **Tout afficher**), il est ajouté au catalogue Général.
 
-    ![Nouveau package d’accès - Onglet Rôles des ressources](./media/entitlement-management-access-package-first/resource-roles-select-groups.png)
+    ![Capture d’écran montrant l’onglet « Nouveau package d’accès - Rôles des ressources » et la fenêtre « Sélectionner des groupes ».](./media/entitlement-management-access-package-first/resource-roles-select-groups.png)
 
 10. Cliquez sur **Sélectionner** pour ajouter le groupe à la liste.
 
@@ -116,9 +118,14 @@ Un *package d’accès* est un bundle de ressources dont une équipe ou un proje
 
     ![Nouveau package d’accès - Onglet Rôles des ressources](./media/entitlement-management-access-package-first/resource-roles.png)
 
+    >[!IMPORTANT]
+    >Les groupes avec attribution de rôle ajoutés à un package d’accès sont indiqués à l’aide du sous-type **Attribuables aux rôles**. Pour plus d’informations sur les groupes attribuables aux rôles Azure AD, reportez-vous à [Créer un groupe avec attribution de rôle](../roles/groups-create-eligible.md) dans Azure Active Directory. Si vous ne voyez aucun groupe avec attribution de rôle à ajouter ou si vous ne pouvez pas l’ajouter, vérifiez que vous possédez le rôle d’annuaire Azure AD et le rôle de gestion des droits d’utilisation requis. Vous devrez peut-être demander à un utilisateur doté des rôles requis d’ajouter la ressource à votre catalogue. Pour plus d’informations, consultez [Rôles requis pour ajouter des ressources à un catalogue](entitlement-management-delegate.md#required-roles-to-add-resources-to-a-catalog).
+
     >[!NOTE]
-    > Quand vous utilisez des [groupes dynamiques](../users-groups-roles/groups-create-rule.md), vous ne voyez pas d’autres rôles disponibles en plus du propriétaire. C'est la procédure normale.
+    > Quand vous utilisez des [groupes dynamiques](../enterprise-users/groups-create-rule.md), vous ne voyez pas d’autres rôles disponibles en plus du propriétaire. C'est la procédure normale.
     > ![Vue d’ensemble du scénario](./media/entitlement-management-access-package-first/dynamic-group-warning.png)
+    
+
 
 12. Cliquez sur **Suivant** pour ouvrir l’onglet **Requêtes**.
 

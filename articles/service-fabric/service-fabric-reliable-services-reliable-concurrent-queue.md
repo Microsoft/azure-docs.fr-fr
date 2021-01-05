@@ -3,15 +3,15 @@ title: ReliableConcurrentQueue dans Azure Service Fabric
 description: ReliableConcurrentQueue est une file d’attente à débit élevé qui permet des mises en file d’attente et retraits de file d’attente parallèles.
 ms.topic: conceptual
 ms.date: 5/1/2017
-ms.openlocfilehash: a7115db8259fde0e87e53557ecef730f8e82d2fd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 423ef3d1898176d7c25c596ad186a9c000108aa4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75462725"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997118"
 ---
 # <a name="introduction-to-reliableconcurrentqueue-in-azure-service-fabric"></a>Présentation de ReliableConcurrentQueue dans Azure Service Fabric
-Une file d’attente simultanée fiable est une file d’attente asynchrone, transactionnelle et répliquée, qui permet d’effectuer des opérations de mise en file d’attente et de retrait de file d’attente avec un niveau élevé de simultanéité. Elle est conçue pour offrir un débit élevé et une latence faible en assouplissant la séquence stricte de premier entré, premier sorti fournie par une [file d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx), et fournit à la place un classement selon le principe de l’effort optimal.
+Une file d’attente simultanée fiable est une file d’attente asynchrone, transactionnelle et répliquée, qui permet d’effectuer des opérations de mise en file d’attente et de retrait de file d’attente avec un niveau élevé de simultanéité. Elle est conçue pour offrir un débit élevé et une latence faible en assouplissant la séquence stricte de premier entré, premier sorti fournie par une [file d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1), et fournit à la place un classement selon le principe de l’effort optimal.
 
 ## <a name="apis"></a>API
 
@@ -21,11 +21,11 @@ Une file d’attente simultanée fiable est une file d’attente asynchrone, tra
 | bool TryDequeue(out T result)  | Task< ConditionalValue < T > > TryDequeueAsync(ITransaction tx)  |
 | int Count()                    | long Count()                                                     |
 
-## <a name="comparison-with-reliable-queue"></a>Comparaison avec un [File d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx)
+## <a name="comparison-with-reliable-queue"></a>Comparaison avec un [File d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1)
 
-Une file d’attente simultanée fiable est proposée en guise d’alternative à une [file d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx). Elle doit être utilisée dans les cas où la séquence stricte de premier entré, premier sorti n’est pas requise, celle-ci nécessitant un compromis sur le plan de la simultanéité.  Une [File d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx) utilise des verrous pour appliquer la séquence de premier entré, premier sorti, avec au plus une transaction autorisée pour la mise en file d’attente et une transaction autorisée pour le retrait de file d’attente à la fois. En comparaison, une file d’attente simultanée fiable assouplit la contrainte de séquence et permet qu’un nombre quelconque de transactions simultanées entrelacent leurs opérations de mise en file d’attente et de retrait de file d’attente. Un classement selon le principe de l’effort optimal est fourni, mais l’ordre relatif de deux valeurs dans une file d’attente simultanée fiable ne peut jamais être garanti.
+Une file d’attente simultanée fiable est proposée en guise d’alternative à une [file d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1). Elle doit être utilisée dans les cas où la séquence stricte de premier entré, premier sorti n’est pas requise, celle-ci nécessitant un compromis sur le plan de la simultanéité.  Une [File d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1) utilise des verrous pour appliquer la séquence de premier entré, premier sorti, avec au plus une transaction autorisée pour la mise en file d’attente et une transaction autorisée pour le retrait de file d’attente à la fois. En comparaison, une file d’attente simultanée fiable assouplit la contrainte de séquence et permet qu’un nombre quelconque de transactions simultanées entrelacent leurs opérations de mise en file d’attente et de retrait de file d’attente. Un classement selon le principe de l’effort optimal est fourni, mais l’ordre relatif de deux valeurs dans une file d’attente simultanée fiable ne peut jamais être garanti.
 
-Une file d’attente simultanée fiable offre un débit supérieur et une latence moindre qu’une [file d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx) chaque fois que plusieurs transactions simultanées effectuent des mises en file d’attente ou des retraits de file d’attente.
+Une file d’attente simultanée fiable offre un débit supérieur et une latence moindre qu’une [file d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1) chaque fois que plusieurs transactions simultanées effectuent des mises en file d’attente ou des retraits de file d’attente.
 
 Un exemple de cas d’utilisation de ReliableConcurrentQueue est le scénario de la [File d’attente des messages](https://en.wikipedia.org/wiki/Message_queue). Dans ce scénario, un ou plusieurs producteurs de messages créent et ajoutent des éléments à la file d’attente, et un ou plusieurs consommateurs de messages extraient des messages de la file d’attente et les traitent. Plusieurs producteurs et consommateurs peuvent travailler de façon indépendante, en utilisant des transactions simultanées pour traiter la file d’attente.
 
@@ -338,6 +338,6 @@ using (var txn = this.StateManager.CreateTransaction())
 * [Notifications Reliable Services](service-fabric-reliable-services-notifications.md)
 * [Sauvegarde et restauration de Reliable Services (récupération d’urgence)](service-fabric-reliable-services-backup-restore.md)
 * [Configuration du Gestionnaire d’état fiable](service-fabric-reliable-services-configuration.md)
-* [Prise en main des services API Web de Service Fabric](service-fabric-reliable-services-communication-webapi.md)
-* [Utilisation avancée du modèle de programmation de Reliable Services](service-fabric-reliable-services-advanced-usage.md)
-* [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+* [Prise en main des services API Web de Service Fabric](./service-fabric-reliable-services-communication-aspnetcore.md)
+* [Utilisation avancée du modèle de programmation de Reliable Services](./service-fabric-reliable-services-lifecycle.md)
+* [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)

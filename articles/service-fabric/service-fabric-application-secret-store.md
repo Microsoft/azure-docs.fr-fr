@@ -3,16 +3,19 @@ title: Banque de secrets centrale Azure Service Fabric
 description: Cet article explique comment utiliser la banque de secrets centrale (CSS, Central Secrets Store) dans Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 07/25/2019
-ms.openlocfilehash: c48be8945326f0f11ded7c5700cd70043830e4db
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: e9fd435803ad5354b0eb2d4f5de50009a8cbbfe2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83197764"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88869753"
 ---
 # <a name="central-secrets-store-in-azure-service-fabric"></a>Banque de secrets centrale dans Azure Service Fabric 
 Cet article explique comment utiliser la banque de secrets centrale (CSS, Central Secrets Store) dans Azure Service Fabric pour créer des secrets dans des applications Service Fabric. CSS est une banque de secrets locale qui garde chiffrées et en mémoire les données sensibles que sont notamment les mots de passe, les jetons et les clés.
 
+  > [!NOTE] 
+  > Lors de la première activation de la CSS avant la version 7.1 de SF CU3 (mise à jour cumulative 3), l'activation peut échouer et laisser la CSS dans un état non sain permanent si : la CSS est activée sur un cluster authentifié par Windows ; la CSS est activée sur n'importe quel cluster mais que `EncryptionCertificateThumbprint` est déclaré de manière incorrecte ou que le certificat correspondant n'est pas installé / placé dans la liste de contrôle d'accès sur les nœuds. Pour le cluster d'authentification Windows, passez à la version 7.1 CU3 avant de continuer. Pour les autres clusters, veuillez vérifier ces invariants ou passer à la version 7.1 CU3.
+  
 ## <a name="enable-central-secrets-store"></a>Activer la banque de secrets centrale
 Ajoutez le script suivant à la configuration de votre cluster sous `fabricSettings` pour activer CSS. Nous vous recommandons d’utiliser un certificat autre qu’un certificat de cluster pour CSS. Vérifiez que le certificat de chiffrement est installé sur tous les nœuds et que `NetworkService` dispose d’une autorisation de lecture sur la clé privée du certificat.
   ```json

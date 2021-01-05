@@ -11,14 +11,14 @@ ms.topic: conceptual
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/19/2020
+ms.date: 12/10/2020
 ms.author: memildin
-ms.openlocfilehash: 48869140ba8cd1a9598562b0057b0005d8fcd9c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ecfb4bdbd523dd1514333a2185186eab0a7e4aaa
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81758029"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97032675"
 ---
 # <a name="integrate-security-solutions-in-azure-security-center"></a>Intégrer des solutions de sécurité dans Azure Security Center
 Ce document vous aide à gérer les solutions de sécurité déjà connectées à Azure Security Center et à en ajouter de nouvelles.
@@ -30,20 +30,17 @@ Security Center simplifie l’activation des solutions de sécurité intégrées
 - **Détections intégrées** : les événements de sécurité des solutions de partenaire sont automatiquement collectés, agrégés et affichés dans le cadre des alertes et des incidents de Security Center. Ces événements sont également fusionnés avec les détections d’autres sources pour fournir des fonctions de détection de menaces avancées.
 - **Gestion et surveillance unifiées de l’intégrité** : Les clients peuvent utiliser des événements d’intégrité intégrés pour surveiller facilement les solutions des partenaires. La gestion de base offre un accès facile à la configuration avancée avec la solution de partenaire.
 
-Les solutions de sécurité intégrées incluent l’évaluation des vulnérabilités par [Qualys](https://www.qualys.com/public-cloud/#azure) et [Rapid7](https://www.rapid7.com/products/insightvm/), et le pare-feu d’applications web Application Gateway de Microsoft.
+Les solutions de sécurité intégrées incluent actuellement l’évaluation des vulnérabilités par [Qualys](https://www.qualys.com/public-cloud/#azure), [Rapid7](https://www.rapid7.com/products/insightvm/) et [Microsoft Azure Web Application Firewall sur Azure Application Gateway](../web-application-firewall/ag/ag-overview.md).
 
 > [!NOTE]
 > Security Center n’installe pas l’agent Log Analytics sur les appliances virtuelles de partenaire, car la plupart des fournisseurs de sécurité n’autorisent pas l’exécution d’agents externes sur leurs appliances.
 
-Pour en savoir plus sur l’intégration des outils d’analyse des vulnérabilités de Qualys, y compris un analyseur intégré disponible pour les clients de niveau standard, consultez : 
-
-- [Analyseur de vulnérabilité intégré pour machines virtuelles](built-in-vulnerability-assessment.md).
-- [Déploiement d’une solution de partenaire d’analyse des vulnérabilités](partner-vulnerability-assessment.md).
+Pour en savoir plus sur l’intégration des outils d’analyse des vulnérabilités de Qualys, y compris un analyseur intégré disponible pour les clients Azure Defender, consultez [Évaluation des vulnérabilités de vos machines virtuelles Azure](deploy-vulnerability-assessment-vm.md).
 
 Security Center offre également une analyse des vulnérabilités pour les éléments suivants :
 
-* Bases de données SQL : consultez [Explorer les rapports d’évaluation des vulnérabilités dans le tableau de bord de l’évaluation des vulnérabilités](security-center-iaas-advanced-data.md#explore-vulnerability-assessment-reports).
-* Images Azure Container Registry : consultez [Intégration d’Azure Container Registry à Security Center (préversion)](azure-container-registry-integration.md).
+* Bases de données SQL : consultez [Explorer les rapports d’évaluation des vulnérabilités dans le tableau de bord de l’évaluation des vulnérabilités](defender-for-sql-usage.md#explore-vulnerability-assessment-reports).
+* Images Azure Container Registry – Consultez [Analyse des vulnérabilités dans les images avec Azure Defender pour les registres de conteneurs](defender-for-container-registries-usage.md)
 
 ## <a name="how-security-solutions-are-integrated"></a>Comment sont intégrées les solutions de sécurité
 Les solutions de sécurité Azure déployées à partir de Security Center sont automatiquement connectées. Vous pouvez également connecter d’autres sources de données de sécurité, notamment des ordinateurs s’exécutant en local ou dans d’autres clouds.
@@ -88,10 +85,10 @@ Sélectionnez **AFFICHAGE** pour obtenir des informations et des options supplé
 
 ### <a name="discovered-solutions"></a>Solutions découvertes
 
-Security Center découvre automatiquement les solutions exécutées dans Azure mais qui ne sont pas connectées à Security Center. Elles sont ensuite affichées dans la section **Solutions découvertes**. Ces solutions incluent les solutions Azure, telles qu’[Azure AD Identity Protection](https://docs.microsoft.com/azure/active-directory/active-directory-identityprotection), et les solutions partenaires.
+Security Center découvre automatiquement les solutions exécutées dans Azure mais qui ne sont pas connectées à Security Center. Elles sont ensuite affichées dans la section **Solutions découvertes**. Ces solutions incluent les solutions Azure, telles qu’[Azure AD Identity Protection](../active-directory/identity-protection/overview-identity-protection.md), et les solutions partenaires.
 
 > [!NOTE]
-> Le niveau Standard de Security Center est requis au niveau de l’abonnement pour la fonctionnalité de découverte des solutions. Consultez [Tarification](security-center-pricing.md) pour en savoir plus sur les niveaux tarifaires.
+> Activez **Azure Defender** au niveau de l’abonnement pour la fonctionnalité Solutions découvertes. Consultez [Tarification](security-center-pricing.md) pour en savoir plus sur les niveaux tarifaires.
 >
 
 Sélectionnez **CONNECTER** sous une solution pour l’intégrer à Security Center et être notifié des alertes de sécurité.
@@ -108,5 +105,5 @@ La section **Ajouter des sources de données** comprend d’autres sources de do
 
 Dans cet article, vous avez appris à intégrer des solutions de partenaires dans Security Center. Pour accéder à des informations connexes, voir les articles suivants :
 
-* [Exporter les alertes et recommandations de sécurité](continuous-export.md). Découvrez comment configurer une intégration avec Azure Sentinel ou tout autre SIEM.
+* [Exporter en continu les données Security Center](continuous-export.md). Découvrez comment configurer une intégration avec Azure Sentinel ou tout autre SIEM.
 * [Surveillance de l’intégrité de la sécurité dans Security Center](security-center-monitoring.md). découvrez comment surveiller l’intégrité de vos ressources Azure.

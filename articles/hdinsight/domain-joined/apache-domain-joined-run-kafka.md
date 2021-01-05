@@ -6,13 +6,13 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: tutorial
-ms.date: 09/04/2019
-ms.openlocfilehash: 58c5b3bdd6d50f2e512cccffe78bd4e70805d729
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 05/19/2020
+ms.openlocfilehash: d2780b3456a802904800b894f6849544cfee4e61
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78204733"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010127"
 ---
 # <a name="tutorial-configure-apache-kafka-policies-in-hdinsight-with-enterprise-security-package-preview"></a>Tutoriel : Configurer des stratégies Apache Kafka dans HDInsight avec le Pack Sécurité Entreprise (préversion)
 
@@ -48,7 +48,7 @@ Créez une stratégie Ranger pour **sales_user** et **marketing_user**.
 
 1. Ouvrez **l’interface utilisateur de l’administrateur Ranger**.
 
-2. Sélectionnez **\<nom_cluster>_kafka** sous **Kafka**. Il est possible qu’une stratégie préconfigurée figure dans la liste.
+2. Sélectionnez **\<ClusterName>_kafka** sous **Kafka**. Il est possible qu’une stratégie préconfigurée figure dans la liste.
 
 3. Sélectionnez **Ajouter une nouvelle stratégie**, puis entrez les valeurs suivantes :
 
@@ -117,8 +117,8 @@ Pour créer les deux rubriques, `salesevents` et `marketingspend` :
 1. Exécutez les commandes suivantes :
 
    ```bash
-   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/config/kafka_client_jaas.conf kafka-producer-consumer.jar create salesevents $KAFKABROKERS
-   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/config/kafka_client_jaas.conf kafka-producer-consumer.jar create marketingspend $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar create salesevents $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar create marketingspend $KAFKABROKERS
    ```
 
 ## <a name="test-the-ranger-policies"></a>Tester les stratégies Ranger
@@ -131,13 +131,7 @@ En fonction des stratégies Ranger configurées, **sales_user** peut produire/co
    ssh sales_user1@CLUSTERNAME-ssh.azurehdinsight.net
    ```
 
-2. Exécutez la commande suivante :
-
-   ```bash
-   export KAFKA_OPTS="-Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/config/kafka_client_jaas.conf"
-   ```
-
-3. Utiliser les noms du répartiteur de la section précédente pour définir les variables d’environnement suivantes :
+2. Utiliser les noms du répartiteur de la section précédente pour définir les variables d’environnement suivantes :
 
    ```bash
    export KAFKABROKERS=<brokerlist>:9092
@@ -145,47 +139,80 @@ En fonction des stratégies Ranger configurées, **sales_user** peut produire/co
 
    Exemple : `export KAFKABROKERS=wn0-khdicl.contoso.com:9092,wn1-khdicl.contoso.com:9092`
 
-4. Suivez l’étape 3 de la section **Générer et déployer l’exemple** dans [Tutoriel : Utiliser les API de producteur et de consommateur Apache Kafka](../kafka/apache-kafka-producer-consumer-api.md#build-and-deploy-the-example) pour vérifier que `kafka-producer-consumer.jar` est également accessible à **sales_user**.
+3. Suivez l’étape 3 de la section **Générer et déployer l’exemple** dans [Tutoriel : Utiliser les API de producteur et de consommateur Apache Kafka](../kafka/apache-kafka-producer-consumer-api.md#build-and-deploy-the-example) pour vérifier que `kafka-producer-consumer.jar` est également accessible à **sales_user**.
 
-**Remarque :  Pour ce tutoriel, utilisez le fichier kafka-producer-consumer.jar qui se trouve sous le projet « DomainJoined-Producer-Consumer » (à ne pas confondre avec celui du projet Producer-Consumer, qui est destiné aux scénarios non joints à un domaine).**
+   > [!NOTE]  
+   > Pour ce tutoriel, utilisez le fichier kafka-producer-consumer.jar qui se trouve sous le projet « DomainJoined-Producer-Consumer » (à ne pas confondre avec celui du projet Producer-Consumer, qui est destiné aux scénarios non joints à un domaine).
 
-5. Vérifiez que **sales_user1** peut produire à destination de la rubrique `salesevents` en exécutant la commande suivante :
+4. Vérifiez que **sales_user1** peut produire à destination de la rubrique `salesevents` en exécutant la commande suivante :
 
    ```bash
-   java -jar kafka-producer-consumer.jar producer salesevents $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar producer salesevents $KAFKABROKERS
    ```
 
-6. Exécutez la commande suivante pour consommer ce qui provient de la rubrique `salesevents` :
+5. Exécutez la commande suivante pour consommer ce qui provient de la rubrique `salesevents` :
 
    ```bash
-   java -jar kafka-producer-consumer.jar consumer salesevents $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar consumer salesevents $KAFKABROKERS
    ```
 
    Vérifiez que vous pouvez lire les messages.
 
-7. Vérifiez que **sales_user1** ne peut pas produire à destination de la rubrique `marketingspend` en exécutant ce qui suit dans la même fenêtre ssh :
+6. Vérifiez que **sales_user1** ne peut pas produire à destination de la rubrique `marketingspend` en exécutant ce qui suit dans la même fenêtre ssh :
 
    ```bash
-   java -jar kafka-producer-consumer.jar producer marketingspend $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar producer marketingspend $KAFKABROKERS
    ```
 
    Une erreur d’autorisation se produit et elle peut être ignorée.
 
-8. Notez que **marketing_user1** ne peut pas consommer ce qui provient de la rubrique `salesevents`.
+7. Notez que **marketing_user1** ne peut pas consommer ce qui provient de la rubrique `salesevents`.
 
-   Répétez les étapes 1 à 4 ci-dessus, mais cette fois en tant que **marketing_user1**.
+   Répétez les étapes 1 à 3 ci-dessus, mais cette fois en tant que **marketing_user1**.
 
    Exécutez la commande suivante pour consommer ce qui provient de la rubrique `salesevents` :
 
    ```bash
-   java -jar kafka-producer-consumer.jar consumer salesevents $KAFKABROKERS
+   java -jar -Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf kafka-producer-consumer.jar consumer salesevents $KAFKABROKERS
    ```
 
    Les messages précédents ne sont pas visibles.
 
-9. Consultez les événements d’accès de l’audit à partir de l’interface utilisateur de Ranger.
+8. Consultez les événements d’accès de l’audit à partir de l’interface utilisateur de Ranger.
 
    ![Événements d’accès d’audit de stratégie de l’interface utilisateur Ranger ](./media/apache-domain-joined-run-kafka/apache-ranger-admin-audit.png)
+   
+## <a name="produce-and-consume-topics-in-esp-kafka-by-using-the-console"></a>Produire et consommer des rubriques dans ESP Kafka en utilisant la console
+
+> [!NOTE]
+> Vous ne pouvez pas utiliser des commandes de console pour créer des rubriques. Vous devez plutôt utiliser le code Java présenté dans la section précédente. Pour plus d’informations, consultez [Créer des rubriques dans un cluster Kafka avec ESP](#create-topics-in-a-kafka-cluster-with-esp).
+
+Pour produire et consommer des rubriques dans ESP Kafka en utilisant la console :
+
+1. Utilisez `kinit` avec le nom d’utilisateur de l’utilisateur. Entrez le mot de passe quand vous y êtes invité.
+
+   ```bash
+   kinit sales_user1
+   ```
+
+2. Définissez des variables d’environnement :
+
+   ```bash
+   export KAFKA_OPTS="-Djava.security.auth.login.config=/usr/hdp/current/kafka-broker/conf/kafka_client_jaas.conf"
+   export KAFKABROKERS=<brokerlist>:9092
+   ```
+
+3. Produisez des messages dans la rubrique `salesevents` :
+
+   ```bash
+   /usr/hdp/current/kafka-broker/bin/kafka-console-producer.sh --topic salesevents --broker-list $KAFKABROKERS --security-protocol SASL_PLAINTEXT
+   ```
+
+4. Consommez des messages provenant de la rubrique `salesevents` :
+
+   ```bash
+   /usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --topic salesevents --from-beginning --bootstrap-server $KAFKABROKERS --security-protocol SASL_PLAINTEXT
+   ```
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

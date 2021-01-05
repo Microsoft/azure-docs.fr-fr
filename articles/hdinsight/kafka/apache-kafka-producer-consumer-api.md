@@ -7,13 +7,13 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: tutorial
-ms.date: 10/08/2019
-ms.openlocfilehash: 5a7d4d1917f65cd3d836db83600937a3e3d89de6
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 05/19/2020
+ms.openlocfilehash: b942fb321d2bceef64930bea0c660f66747508b6
+ms.sourcegitcommit: 3e8058f0c075f8ce34a6da8db92ae006cc64151a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79223596"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92629304"
 ---
 # <a name="tutorial-use-the-apache-kafka-producer-and-consumer-apis"></a>Tutoriel : Utiliser les API de producteur et de consommateur Apache Kafka
 
@@ -34,13 +34,13 @@ Pour plus d’informations sur les API, consultez la documentation Apache sur l�
 ## <a name="prerequisites"></a>Prérequis
 
 * Apache Kafka sur un cluster HDInsight. Pour découvrir comment créer un cluster, consultez [Démarrer avec Apache Kafka sur HDInsight](apache-kafka-get-started.md).
-* [Kit de développeur Java (JDK) version 8](https://aka.ms/azure-jdks) ou un équivalent, tel qu’OpenJDK.
+* [Kit de développeur Java (JDK) version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) ou un équivalent, tel qu’OpenJDK.
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 * Un client SSH tel que Putty. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
 ## <a name="understand-the-code"></a>Comprendre le code
 
-L’exemple d’application se trouve sur [https://github.com/Azure-Samples/hdinsight-kafka-java-get-started](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started), dans le sous-répertoire `Producer-Consumer`. Si vous utilisez un cluster Kafka où est activé le **Pack Sécurité Entreprise**, vous devez utiliser la version de l’application qui est située dans le sous-répertoire `DomainJoined-Producer-Consumer`.
+L’exemple d’application se trouve sur [https://github.com/Azure-Samples/hdinsight-kafka-java-get-started](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started), dans le sous-répertoire `Producer-Consumer`. Si vous utilisez un cluster Kafka où est activé le **Pack Sécurité Entreprise** , vous devez utiliser la version de l’application qui est située dans le sous-répertoire `DomainJoined-Producer-Consumer`.
 
 L’application se compose principalement de quatre fichiers :
 * `pom.xml`: ce fichier définit les dépendances du projet, la version Java et les méthodes d’empaquetage.
@@ -73,7 +73,7 @@ Les points importants à comprendre dans le fichier `pom.xml` sont les suivants 
 
 ### <a name="producerjava"></a>Producer.java
 
-Le producteur communique avec les hôtes du répartiteur Kafka (nœuds de travail) et envoie des données dans une rubrique Kafka. L’extrait de code suivant provient du fichier [Producer.java](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/blob/master/Producer-Consumer/src/main/java/com/microsoft/example/Producer.java) du [référentiel GitHub](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started) et montre comment définir les propriétés du producteur :
+Le producteur communique avec les hôtes du répartiteur Kafka (nœuds de travail) et envoie des données dans une rubrique Kafka. L’extrait de code suivant provient du fichier [Producer.java](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/blob/master/Producer-Consumer/src/main/java/com/microsoft/example/Producer.java) dans le [dépôt GitHub](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started), et montre comment définir les propriétés du producteur. Pour les clusters Sécurité Entreprise, une propriété supplémentaire doit être ajoutée "properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");"
 
 ```java
 Properties properties = new Properties();
@@ -87,7 +87,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
 ### <a name="consumerjava"></a>Consumer.java
 
-Le consommateur communique avec les hôtes de répartition Kafka (nœuds de travail) et lit les enregistrements dans une boucle. L’extrait de code suivant provenant du fichier [Consumer.java](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/blob/master/Producer-Consumer/src/main/java/com/microsoft/example/Consumer.java) définit les propriétés du consommateur :
+Le consommateur communique avec les hôtes de répartition Kafka (nœuds de travail) et lit les enregistrements dans une boucle. L’extrait de code suivant provenant du fichier [Consumer.java](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/blob/master/Producer-Consumer/src/main/java/com/microsoft/example/Consumer.java) définit les propriétés du consommateur. Pour les clusters Sécurité Entreprise, une propriété supplémentaire doit être ajoutée "properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");"
 
 ```java
 KafkaConsumer<String, String> consumer;
@@ -115,22 +115,32 @@ Le fichier [Run.java](https://github.com/Azure-Samples/hdinsight-kafka-java-get-
 
 ## <a name="build-and-deploy-the-example"></a>Générer et déployer l’exemple
 
+### <a name="use-pre-built-jar-files"></a>Utiliser des fichiers JAR prédéfinis
+
+Téléchargez les fichiers jar à partir de l’[Exemple Kafka bien démarrer avec Azure](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/tree/master/Prebuilt-Jars). Si le **Pack Sécurité Entreprise** est activé dans votre cluster, utilisez kafka-producer-consumer-esp.jar. Utilisez la commande ci-dessous pour copier les fichiers jar dans votre cluster.
+
+```cmd
+scp kafka-producer-consumer*.jar sshuser@CLUSTERNAME-ssh.azurehdinsight.net:kafka-producer-consumer.jar
+```
+
+### <a name="build-the-jar-files-from-code"></a>Générer les fichiers JAR à partir du code
+
 Si vous souhaitez ignorer cette étape, vous pouvez télécharger les fichiers jar prédéfinis à partir du sous-répertoire `Prebuilt-Jars`. Téléchargez kafka-producer-consumer.jar. Si le **Pack Sécurité Entreprise** est activé dans votre cluster, utilisez kafka-producer-consumer-esp.jar. Effectuez l’étape 3 pour copier le fichier jar dans votre cluster HDInsight.
 
 1. Téléchargez et extrayez les exemples à partir de [https://github.com/Azure-Samples/hdinsight-kafka-java-get-started](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started).
 
-2. Configurez votre répertoire actuel sur l’emplacement du répertoire `hdinsight-kafka-java-get-started\Producer-Consumer`. Si vous utilisez un cluster Kafka où est activé le **Pack Sécurité Entreprise**, vous devez définir l’emplacement sur le sous-répertoire `DomainJoined-Producer-Consumer`. Exécutez la commande suivante pour générer l’application :
+2. Configurez votre répertoire actuel sur l’emplacement du répertoire `hdinsight-kafka-java-get-started\Producer-Consumer`. Si vous utilisez un cluster Kafka où est activé le **Pack Sécurité Entreprise** , vous devez définir l’emplacement sur le sous-répertoire `DomainJoined-Producer-Consumer`. Exécutez la commande suivante pour générer l’application :
 
     ```cmd
     mvn clean package
     ```
 
-    Cette commande crée un répertoire nommé `target`, qui contient un fichier nommé `kafka-producer-consumer-1.0-SNAPSHOT.jar`.
+    Cette commande crée un répertoire nommé `target`, qui contient un fichier nommé `kafka-producer-consumer-1.0-SNAPSHOT.jar`. Pour les clusters avec Pack Sécurité Entreprise activé, le fichier sera `kafka-producer-consumer-esp-1.0-SNAPSHOT.jar`
 
 3. Remplacez `sshuser` par l’utilisateur SSH de votre cluster, puis remplacez `CLUSTERNAME` par le nom de votre cluster. Entrez la commande suivante pour copier le fichier `kafka-producer-consumer-1.0-SNAPSHOT.jar` dans votre cluster HDInsight. Lorsque vous y êtes invité, entrez le mot de passe de l’utilisateur SSH.
 
     ```cmd
-    scp ./target/kafka-producer-consumer-1.0-SNAPSHOT.jar sshuser@CLUSTERNAME-ssh.azurehdinsight.net:kafka-producer-consumer.jar
+    scp ./target/kafka-producer-consumer*.jar sshuser@CLUSTERNAME-ssh.azurehdinsight.net:kafka-producer-consumer.jar
     ```
 
 ## <a name="run-the-example"></a><a id="run"></a> Exécuter l’exemple
@@ -169,6 +179,7 @@ Si vous souhaitez ignorer cette étape, vous pouvez télécharger les fichiers 
 
     ```bash
     java -jar kafka-producer-consumer.jar consumer myTest $KAFKABROKERS
+    scp ./target/kafka-producer-consumer*.jar sshuser@CLUSTERNAME-ssh.azurehdinsight.net:kafka-producer-consumer.jar
     ```
 
     Les enregistrements lus et le nombre d’enregistrements s’affichent.
@@ -202,7 +213,13 @@ La consommation par les clients au sein du même groupe est gérée par le biais
 > [!IMPORTANT]  
 > Il ne peut pas y avoir plus d’instances de consommateurs dans un groupe de consommateurs que de partitions. Dans cet exemple, un groupe de consommateurs peut contenir jusqu’à huit consommateurs puisque c’est le nombre de partitions de la rubrique. Vous pouvez également disposer de plusieurs groupes de consommateurs, chacun ne dépassant pas huit consommateurs.
 
-Les enregistrements stockés dans Kafka le sont dans l’ordre de réception au sein d’une partition. Pour obtenir la livraison chronologique des enregistrements *dans une partition*, créez un groupe de consommateurs où le nombre d’instances de consommateurs correspond au nombre de partitions. Pour obtenir la livraison chronologique des enregistrements *dans la rubrique*, créez un groupe de consommateurs avec une seule instance de consommateur.
+Les enregistrements stockés dans Kafka le sont dans l’ordre de réception au sein d’une partition. Pour obtenir la livraison chronologique des enregistrements *dans une partition* , créez un groupe de consommateurs où le nombre d’instances de consommateurs correspond au nombre de partitions. Pour obtenir la livraison chronologique des enregistrements *dans la rubrique* , créez un groupe de consommateurs avec une seule instance de consommateur.
+
+## <a name="common-issues-faced"></a>Problèmes courants rencontrés
+
+1. **La création de rubriques échoue** Si le Pack Sécurité Entreprise est activé sur votre cluster, utilisez les [fichiers JAR prédéfinis pour le producteur et le consommateur](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/blob/master/Prebuilt-Jars/kafka-producer-consumer-esp.jar). Le fichier jar du Pack Sécurité Entreprise peut être généré à partir du code dans le [sous-répertoire `DomainJoined-Producer-Consumer`](https://github.com/Azure-Samples/hdinsight-kafka-java-get-started/tree/master/DomainJoined-Producer-Consumer). Les propriétés producteur et consommateur sont dotées d’une propriété supplémentaire `CommonClientConfigs.SECURITY_PROTOCOL_CONFIG` pour les clusters dont le Pack Sécurité Entreprise est activé.
+
+2. **Échec dans les clusters dont le Pack Sécurité Entreprise est activé**  : Si les opérations de production et de consommation échouent et que vous utilisez un cluster dont le Pack Sécurité Entreprise est activé, vérifiez que l’utilisateur `kafka` est présent dans toutes les stratégies Ranger. S’il ne l’est pas, ajoutez-le à toutes les stratégies Ranger.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

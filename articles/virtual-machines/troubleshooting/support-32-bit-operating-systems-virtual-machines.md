@@ -13,16 +13,16 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 09/18/2019
 ms.author: v-miegge
-ms.openlocfilehash: e5c8bc2fe64d489c9e8490a63f4d7c4680f21ce0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 91e5ca10e97e8fc1646367ac6d575d6813f3a291
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71846393"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87079857"
 ---
 # <a name="support-for-32-bit-operating-systems-in-azure-virtual-machines"></a>Prise en charge pour les systèmes d’exploitation 32 bits sur des machines virtuelles Azure
 
-Désormais, Microsoft Azure permet aux utilisateurs de déployer leurs propres systèmes d’exploitation Windows 32 bits sur Azure. Le contrat de support est arrivé à expiration pour certains de ces systèmes d’exploitation. Aussi, il se peut que Microsoft n’offre plus de support pour ces systèmes. De même, aucun support n’est proposé pour les systèmes d’exploitation Linux ou BSD (Berkeley Software Distribution) exécutés sur une machine virtuelle Microsoft Azure.
+Désormais, Microsoft Azure permet aux utilisateurs de déployer leurs propres systèmes d’exploitation Windows 32 bits sur Azure. Seuls les disques durs virtuels spécialisés sont pris en charge ; les images généralisées ne fonctionnent pas dans Azure. Le contrat de support est arrivé à expiration pour certains de ces systèmes d’exploitation. Aussi, il se peut que Microsoft n’offre plus de support pour ces systèmes. De même, aucun support n’est proposé pour les systèmes d’exploitation Linux ou BSD (Berkeley Software Distribution) exécutés sur une machine virtuelle Microsoft Azure.
 
 ## <a name="more-information"></a>Informations complémentaires
 
@@ -34,8 +34,8 @@ Pour plus d’informations sur les systèmes d’exploitation pris en charge sur
 ## <a name="references"></a>References
 
 * [En savoir plus sur les mises à jour de sécurité étendues gratuites pour Windows Server 2008/R2 dans Azure](https://www.microsoft.com/cloud-platform/windows-server-2008)
-* [En savoir plus sur la prise en charge des images Windows Server 2008 SP2 32 bits spécialisées dans Azure](https://docs.microsoft.com/windows-server/get-started/uploading-specialized-ws08-image-to-azure)
-* [En savoir plus sur la prise en charge de la migration d’images Windows Server 2008 vers Azure à l’aide d’Azure Site Recovery](https://docs.microsoft.com/azure/site-recovery/migrate-tutorial-windows-server-2008)
+* [En savoir plus sur la prise en charge des images Windows Server 2008 SP2 32 bits spécialisées dans Azure](/windows-server/get-started/uploading-specialized-ws08-image-to-azure)
+* [En savoir plus sur la prise en charge de la migration d’images Windows Server 2008 vers Azure à l’aide d’Azure Site Recovery](../../site-recovery/migrate-tutorial-windows-server-2008.md)
 * [En savoir plus sur les systèmes d’exploitation pris en charge par l’extension Azure](https://support.microsoft.com/help/4078134/azure-extension-supported-operating-systems)
 * [En savoir plus sur l’exécution de Windows Server 2003 sur Microsoft Azure](https://support.microsoft.com/help/3206074/running-windows-server-2003-on-microsoft-azure)
 

@@ -1,20 +1,21 @@
 ---
 title: Tutoriel - Ajouter des fonctions de modèle
-description: Ajoutez des fonctions de modèle à votre modèle Azure Resource Manager pour élaborer des valeurs.
+description: Ajoutez des fonctions de modèle à votre modèle Azure Resource Manager (modèle ARM) pour construire des valeurs.
 author: mumian
 ms.date: 03/27/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: e4984b286bf031b66272919a487d09a90f972ce0
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: ''
+ms.openlocfilehash: 52b5bd0650b3a069adc3ef7f101c48a4674deaab
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80410979"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107105"
 ---
 # <a name="tutorial-add-template-functions-to-your-arm-template"></a>Tutoriel : Ajouter des fonctions de modèle à votre modèle ARM
 
-Dans ce tutoriel, vous allez apprendre à ajouter des [fonctions de modèle](template-functions.md) à votre modèle Azure Resource Manager (ARM). Vous utilisez des fonctions pour élaborer des valeurs de façon dynamique. Outre ces fonctions de modèle fournies par le système, vous pouvez aussi créer des [fonctions définies par l’utilisateur](./template-user-defined-functions.md). Ce tutoriel dure environ **7 minutes**.
+Dans ce tutoriel, vous allez apprendre à ajouter des [fonctions de modèle](template-functions.md) à votre modèle Azure Resource Manager (modèle ARM). Vous utilisez des fonctions pour élaborer des valeurs de façon dynamique. Outre ces fonctions de modèle fournies par le système, vous pouvez aussi créer des [fonctions définies par l’utilisateur](./template-user-defined-functions.md). Ce tutoriel dure environ **7 minutes**.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -32,11 +33,11 @@ L’emplacement du compte de stockage est codé en dur sur **USA Est**. Toutefoi
 
 ## <a name="use-function"></a>Utiliser une fonction
 
-Si vous avez suivi le tutoriel précédent de cette série, vous vous êtes déjà servi d’une fonction. Quand vous avez ajouté  **"[parameters('storageName')]"** , vous avez utilisé la fonction [parameters](template-functions-deployment.md#parameters). Les crochets indiquent que la syntaxe à l’intérieur des crochets est une [expression de modèle](template-expressions.md). Resource Manager résout la syntaxe au lieu de la traiter en tant que valeur littérale.
+Si vous avez suivi le tutoriel précédent de cette série, vous vous êtes déjà servi d’une fonction. Quand vous avez ajouté `"[parameters('storageName')]"`, vous avez utilisé la fonction [parameters](template-functions-deployment.md#parameters). Les crochets indiquent que la syntaxe à l’intérieur des crochets est une [expression de modèle](template-expressions.md). Resource Manager résout la syntaxe au lieu de la traiter en tant que valeur littérale.
 
 Les fonctions ajoutent de la flexibilité à votre modèle en obtenant de manière dynamique des valeurs pendant le déploiement. Dans ce tutoriel, vous utilisez une fonction pour obtenir l’emplacement du groupe de ressources que vous utilisez pour le déploiement.
 
-L’exemple suivant met en évidence les modifications à apporter pour ajouter un paramètre appelé **location**.  La valeur par défaut du paramètre appelle la fonction [resourceGroup](template-functions-resource.md#resourcegroup). Cette fonction retourne un objet avec des informations sur le groupe de ressources utilisé pour le déploiement. L’une des propriétés de l’objet est une propriété d’emplacement. Lorsque vous utilisez la valeur par défaut, l’emplacement du compte de stockage est le même que celui du groupe de ressources. Les ressources à l’intérieur d’un groupe de ressources n’ont pas à partager le même emplacement. Vous pouvez également fournir un autre emplacement lorsque cela est nécessaire.
+L’exemple suivant met en évidence les modifications à apporter pour ajouter un paramètre appelé `location`. La valeur par défaut du paramètre appelle la fonction [resourceGroup](template-functions-resource.md#resourcegroup). Cette fonction retourne un objet avec des informations sur le groupe de ressources utilisé pour le déploiement. L’une des propriétés de l’objet est une propriété d’emplacement. Lorsque vous utilisez la valeur par défaut, l’emplacement du compte de stockage est le même que celui du groupe de ressources. Les ressources à l’intérieur d’un groupe de ressources n’ont pas à partager le même emplacement. Vous pouvez également fournir un autre emplacement lorsque cela est nécessaire.
 
 Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
@@ -46,7 +47,7 @@ Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
 Dans les tutoriels précédents, vous avez créé un compte de stockage dans la région USA Est, mais votre groupe de ressources a été créé dans USA Centre. Pour les besoins de ce tutoriel, votre compte de stockage est créé dans la même région que le groupe de ressources. Utilisez la valeur par défaut pour location, afin de ne pas avoir à fournir cette valeur de paramètre. Vous devez indiquer un nouveau nom pour le compte de stockage, car vous créez un compte de stockage à un autre emplacement. Par exemple, utilisez **store2** comme préfixe au lieu de **store1**.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -73,7 +74,7 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="verify-deployment"></a>Vérifier le déploiement
 

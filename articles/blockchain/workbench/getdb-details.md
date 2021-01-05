@@ -2,14 +2,14 @@
 title: Obtenir des détails sur la base de données Azure Blockchain Workbench
 description: Découvrez comment obtenir des informations sur la base de données Azure Blockchain Workbench Preview et le serveur de base de données.
 ms.date: 09/05/2019
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: mmercuri
-ms.openlocfilehash: 2b3190a9d042be8ead1ff3d5ef48d4a2a19e8963
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 898360d8e22803e17ff4da7d3b63f5595cad47ba
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74324689"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015483"
 ---
 # <a name="get-information-about-your-azure-blockchain-workbench-database"></a>Obtenir des informations sur votre base de données Azure Blockchain Workbench
 
@@ -31,7 +31,7 @@ Pour se connecter à la base de données :
 1. Connectez-vous au portail Azure avec un compte détenant des autorisations de **propriétaire** pour les ressources Azure Blockchain Workbench.
 2. Dans le volet de navigation de gauche, sélectionnez **Groupes de ressources**.
 3. Choisissez le nom du groupe de ressources correspondant à votre déploiement Blockchain Workbench.
-4. Sélectionnez **Type** pour trier la liste des ressources, puis votre **serveur SQL**. La liste triée dans la capture d’écran suivante montre les deux bases de données SQL : « master » et l’autre qui utilise « lhgn » en tant que **préfixe ressource**.
+4. Sélectionnez **Type** pour trier la liste des ressources, puis votre **serveur SQL**. La liste triée dans la capture d’écran suivante montre les deux bases de données, « master » et l’autre qui utilise « lhgn » en tant que **Préfixe de ressource**.
 
    ![Liste des ressources Blockchain Workbench triées](./media/getdb-details/sorted-workbench-resource-list.png)
 

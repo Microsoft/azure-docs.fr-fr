@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Définir et récupérer un certificat dans Azure Key Vault'
+title: 'Démarrage rapide : Définir et voir les certificats Azure Key Vault - Azure CLI'
 description: Démarrage rapide montrant comment définir et récupérer un certificat dans Azure Key Vault à l’aide d’Azure CLI
 services: key-vault
 author: msmbaldwin
@@ -8,34 +8,25 @@ tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
 ms.topic: quickstart
-ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019
+ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019, devx-track-azurecli
 ms.date: 09/03/2019
 ms.author: mbaldwin
-ms.openlocfilehash: d8107d26405423da6bb5d85ab79b83edce95d179
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 55a25f4f40668172aa8a9c80dd08d9fafcef78af
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81419613"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94516474"
 ---
 # <a name="quickstart-set-and-retrieve-a-certificate-from-azure-key-vault-using-azure-cli"></a>Démarrage rapide : Définir et récupérer un certificat dans Azure Key Vault à l’aide d’Azure CLI
 
 Dans ce guide de démarrage rapide, vous créez un coffre de clés dans Azure Key Vault avec Azure CLI. Azure Key Vault est un service cloud qui fonctionne comme un magasin des secrets sécurisé. Vous pouvez stocker des clés, des mots de passe, des certificats et d’autres secrets en toute sécurité. Pour plus d’informations sur Key Vault, consultez la [présentation](../general/overview.md). Azure CLI vous permet de créer et gérer des ressources Azure à l’aide de commandes ou de scripts. Une fois que vous avez terminé, vous allez stocker un certificat.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
-
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite au minimum la version 2.0.4 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
-
-Pour vous connecter à Azure à l’aide de l’interface CLI, vous pouvez taper la commande suivante :
-
-```azurecli
-az login
-```
-
-Pour plus d’informations sur les options de connexion par le biais de l’interface CLI, consultez [Se connecter avec Azure CLI](/cli/azure/authenticate-azure-cli?view=azure-cli-latest)
+ - Ce guide de démarrage rapide nécessite la version 2.0.4 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -74,7 +65,7 @@ Tapez les commandes ci-dessous pour créer un certificat auto-signé avec une st
 az keyvault certificate create --vault-name "Contoso-Vault2" -n ExampleCertificate -p "$(az keyvault certificate get-default-policy)"
 ```
 
-Vous pouvez maintenant référencer ce certificat que vous avez ajouté à Azure Key Vault à l’aide de son URI. Utilisez **https://Contoso-Vault2.vault.azure.net/certificates/ExampleCertificate** pour obtenir la version actuelle. 
+Vous pouvez maintenant référencer ce certificat que vous avez ajouté à Azure Key Vault à l’aide de son URI. Utilisez **« https://Contoso-Vault2.vault.azure.net/certificates/ExampleCertificate  »** pour obtenir la version actuelle. 
 
 Pour voir le certificat stocké précédemment :
 

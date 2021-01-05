@@ -11,18 +11,18 @@ Customer intent: I need to diagnose virtual machine (VM) network routing problem
 ms.assetid: ''
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: network-watcher
 ms.workload: infrastructure
 ms.date: 04/20/2018
 ms.author: damendo
 ms.custom: ''
-ms.openlocfilehash: b5a636471eab188dc8648761afedd81694331953
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 362157f023f7ed4d2da81962acd32e2da968193e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76834703"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84738785"
 ---
 # <a name="diagnose-a-virtual-machine-network-routing-problem---azure-powershell"></a>Diagnostiquer un problème de routage réseau d’une machine virtuelle - Azure PowerShell
 

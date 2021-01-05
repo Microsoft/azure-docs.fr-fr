@@ -4,12 +4,12 @@ description: Découvrez comment créer une application logique qui s’appuie su
 ms.topic: conceptual
 ms.subservice: alerts
 ms.date: 05/27/2019
-ms.openlocfilehash: 9042ed8ddbb698192e638fa7538f74561574c262
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1eb96248f68923da5ff5223f57fac1bffaf4ed04
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77668228"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000417"
 ---
 # <a name="how-to-integrate-the-common-alert-schema-with-logic-apps"></a>Comment intégrer le schéma d’alerte courant à Logic Apps
 
@@ -17,19 +17,19 @@ Cet article explique comment créer une application logique qui s’appuie sur l
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Le [schéma d'alerte courant](https://aka.ms/commonAlertSchemaDocs) fournit un schéma JSON standardisé et extensible pour tous vos différents types d'alerte. Le schéma d'alerte courant est plus utile lorsqu'il est exploité par programmation, via des webhooks, des runbooks et des applications logiques. Dans cet article, nous montrons comment une simple application logique peut être créée pour gérer toutes vos alertes. Les mêmes principes peuvent être appliqués à d'autres méthodes programmatiques. L'application logique décrite dans cet article crée des variables bien définies pour les champs [« essentiels »](alerts-common-schema-definitions.md#essentials), et comment gérer une logique spécifique de type [alerte](alerts-common-schema-definitions.md#alert-context).
+Le [schéma d'alerte courant](./alerts-common-schema.md) fournit un schéma JSON standardisé et extensible pour tous vos différents types d'alerte. Le schéma d'alerte courant est plus utile lorsqu'il est exploité par programmation, via des webhooks, des runbooks et des applications logiques. Dans cet article, nous montrons comment une simple application logique peut être créée pour gérer toutes vos alertes. Les mêmes principes peuvent être appliqués à d'autres méthodes programmatiques. L'application logique décrite dans cet article crée des variables bien définies pour les champs [« essentiels »](alerts-common-schema-definitions.md#essentials), et comment gérer une logique spécifique de type [alerte](alerts-common-schema-definitions.md#alert-context).
 
 
 ## <a name="prerequisites"></a>Prérequis 
 
 Pour suivre cet article, le lecteur doit être familiarisé avec les concepts suivants : 
-* Configuration des règles d’alerte ([métrique](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric), [journal](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-log), [journal d’activité](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log))
-* Configuration de [groupes d’actions](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups)
-* Activation du [schéma d’alerte courant](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema#how-do-i-enable-the-common-alert-schema) depuis des groupes d’actions
+* Configuration des règles d’alerte ([métrique](./alerts-metric.md), [journal](./alerts-log.md), [journal d’activité](./alerts-activity-log.md))
+* Configuration de [groupes d’actions](./action-groups.md)
+* Activation du [schéma d’alerte courant](./alerts-common-schema.md#how-do-i-enable-the-common-alert-schema) depuis des groupes d’actions
 
 ## <a name="create-a-logic-app-leveraging-the-common-alert-schema"></a>Créer une application logique reposant sur le schéma d’alerte courant
 
-1. Appliquez les [procédures suivantes pour créer votre application logique](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups-logic-app). 
+1. Appliquez les [procédures suivantes pour créer votre application logique](./action-groups-logic-app.md). 
 
 1.  Sélectionnez le déclencheur : **Lors de la réception d’une requête HTTP**.
 
@@ -130,13 +130,12 @@ Pour suivre cet article, le lecteur doit être familiarisé avec les concepts su
       if(equals(triggerBody()?['data']?['essentials']?['monitoringService'],'Application Insights'),triggerBody()?['data']?['alertContext']?['SearchResults'],'NA')
     ```
     
-     En savoir plus sur [l’écriture d’expressions d’application logique](https://docs.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#logical-comparison-functions).
+     En savoir plus sur [l’écriture d’expressions d’application logique](../../logic-apps/workflow-definition-language-functions-reference.md#logical-comparison-functions).
 
     
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [En savoir plus sur les groupes d’actions](../../azure-monitor/platform/action-groups.md).
-* [Découvrez-en plus sur le schéma d’alerte commun](https://aka.ms/commonAlertSchemaDocs).
-
+* [En savoir plus sur les groupes d’actions](./action-groups.md).
+* [Découvrez-en plus sur le schéma d’alerte commun](./alerts-common-schema.md).

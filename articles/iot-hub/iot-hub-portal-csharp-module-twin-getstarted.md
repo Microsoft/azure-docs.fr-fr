@@ -9,13 +9,13 @@ services: iot-hub
 ms.devlang: csharp
 ms.topic: conceptual
 ms.date: 08/20/2019
-ms.custom: amqp
-ms.openlocfilehash: a3258de2ed7269ab50e6feca3c421d55de5a9d91
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: amqp, devx-track-csharp
+ms.openlocfilehash: 0d16d7a6dbf903ae790015c12e3d34e4a2a553d3
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81759784"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92139350"
 ---
 # <a name="get-started-with-iot-hub-module-identity-and-module-twin-using-the-portal-and-net-device"></a>Prise en main de l’identité de module et du jumeau de module IoT Hub à l’aide du portail et d’un appareil .NET
 
@@ -190,4 +190,4 @@ Pour continuer la prise en main de IoT Hub et explorer les autres scénarios IoT
 
 * [Bien démarrer avec le jumeau de module et l’identité de module IoT Hub à l’aide d’une sauvegarde .NET et d’un appareil .NET](iot-hub-csharp-csharp-module-twin-getstarted.md)
 
-* [Bien démarrer avec IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Bien démarrer avec IoT Edge](../iot-edge/quickstart-linux.md)

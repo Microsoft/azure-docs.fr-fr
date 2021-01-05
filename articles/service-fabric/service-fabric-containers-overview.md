@@ -2,13 +2,13 @@
 title: Vue d’ensemble de Service Fabric et des conteneurs
 description: Voici une vue d’ensemble de Service Fabric et de la méthode à suivre pour déployer des applications de microservices au moyen de conteneurs. Cet article fournit une vue d’ensemble de l’utilisation de conteneurs et des fonctionnalités disponibles dans Service Fabric.
 ms.topic: conceptual
-ms.date: 8/8/2018
-ms.openlocfilehash: 884cefa3d6a60f55269afac73c40b9f6b21518f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 7/9/2020
+ms.openlocfilehash: cd0ec7dd2247fdd791df362fa34542178c17df4d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75458220"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87091655"
 ---
 # <a name="service-fabric-and-containers"></a>Service Fabric et conteneurs
 
@@ -53,7 +53,7 @@ Pour suivre un tutoriel Linux, voir [Créer votre première application conteneu
 
 #### <a name="windows-server-containers"></a>Conteneurs Windows Server
 
-Windows Server 2016 fournit deux types de conteneurs, qui proposent des niveaux d’isolation différents. Les conteneurs Windows Server sont similaires aux conteneurs Docker, en ce sens qu’ils offrent tous l’isolation des systèmes de fichiers et des espaces de noms, alors qu’ils partagent le noyau avec l’hôte sur lequel ils s’exécutent. Sur Linux, cette isolation est généralement fournie via des espaces de noms et cgroups. Les conteneurs Windows Server se comportent de la même manière.
+Windows Server 2016 et versions ultérieures fournissent deux types de conteneurs qui proposent des niveaux d’isolation différents. Les conteneurs Windows Server sont similaires aux conteneurs Docker, en ce sens qu’ils offrent tous l’isolation des systèmes de fichiers et des espaces de noms, alors qu’ils partagent le noyau avec l’hôte sur lequel ils s’exécutent. Sur Linux, cette isolation est généralement fournie via des espaces de noms et cgroups. Les conteneurs Windows Server se comportent de la même manière.
 
 Les conteneurs Windows avec la prise en charge Hyper-V présentent un niveau d’isolation et de sécurité plus élevé, car aucun d’entre eux ne partage le noyau du système d’exploitation avec les autres conteneurs, ou avec l’hôte. Avec ce niveau élevé d’isolation en matière de sécurité, les conteneurs compatibles Hyper-V sont destinés à des scénarios multilocataires, potentiellement hostiles.
 Pour suivre un tutoriel Windows, voir [Créer votre première application conteneur Service Fabric sur Windows](service-fabric-get-started-containers.md).
@@ -65,7 +65,7 @@ La figure suivante illustre les différents types de virtualisation et niveaux d
 
 Voici des exemples pour lesquels le conteneur est un bon choix :
 
-* **Opération lift-and-shift pour IIS** : vous pouvez placer une application [ASP.NET MVC](https://www.asp.net/mvc) existante dans un conteneur au lieu de la faire migrer sur ASP.NET Core. Ces applications ASP.NET MVC dépendent des services Internet (IIS, Internet Information Services). Vous pouvez empaqueter ces applications dans des images de conteneur à partir de l’image IIS créée au préalable, puis les déployer avec Service Fabric. Pour plus d’informations sur les conteneurs Windows, consultez la page [Images conteneurs sur Windows Server](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/quick-start-windows-server).
+* **Opération lift-and-shift pour IIS** : vous pouvez placer une application [ASP.NET MVC](https://www.asp.net/mvc) existante dans un conteneur au lieu de la faire migrer sur ASP.NET Core. Ces applications ASP.NET MVC dépendent des services Internet (IIS, Internet Information Services). Vous pouvez empaqueter ces applications dans des images de conteneur à partir de l’image IIS créée au préalable, puis les déployer avec Service Fabric. Pour plus d’informations sur les conteneurs Windows, consultez la page [Images conteneurs sur Windows Server](/virtualization/windowscontainers/quick-start/quick-start-windows-server).
 
 * **Mélange de conteneurs et de microservices Service Fabric** : Utilisez une image de conteneur existante pour une partie de votre application. Par exemple, vous pouvez utiliser le [conteneur NGINX](https://hub.docker.com/_/nginx/) pour le système frontal web de votre application et les services avec état pour les calculs les plus intenses du back-end.
 
@@ -73,7 +73,10 @@ Voici des exemples pour lesquels le conteneur est un bon choix :
 
 ## <a name="service-fabric-support-for-containers"></a>Prise en charge des conteneurs par Service Fabric
 
-Service Fabric prend en charge le déploiement de conteneurs Docker sur Linux, et celui de conteneurs Windows Server sur Windows Server 2016 avec une prise en charge du mode d’isolation Hyper-V. 
+Service Fabric prend en charge le déploiement de conteneurs Docker sur Linux, et celui de conteneurs Windows Server sur Windows Server 2016 et versions ultérieures avec une prise en charge du mode d’isolation Hyper-V.
+
+> [!NOTE]
+> Les conteneurs ne sont pas pris en charge sur les clusters Service Fabric locaux à nœud unique (ni les clusters Linux sur OneBox, ni les clusters Windows sur les installations Service Fabric locales).
 
 Service Fabric fournit un [modèle d’application](service-fabric-application-model.md) dans lequel un conteneur représente un hôte d’application sur lequel sont placés plusieurs réplicas de service. Service Fabric prend également en charge un [scénario d’exécutables invités](service-fabric-guest-executables-introduction.md), dans lequel vous n’utilisez pas les modèles de programmation Service Fabric intégrés, mais empaquetez plutôt une application existante, écrite à l’aide de n’importe quel langage ou framework, à l’intérieur d’un conteneur. Ce scénario est le cas d’utilisation courant pour les conteneurs.
 
@@ -90,7 +93,7 @@ Service Fabric propose plusieurs fonctionnalités de gestion des conteneurs, cel
 * Possibilité de définir des identifiants de sécurité sur le conteneur.
 * Différents modes de mise en réseau pour les conteneurs.
 
-Pour une vue d’ensemble complète de la prise en charge des conteneurs sur Azure, par exemple la création d’un cluster Kubernetes avec Azure Kubernetes Service, la création d’un registre Docker privé dans Azure Container Registry, et bien plus encore, voir [Azure for Containers](https://docs.microsoft.com/azure/containers/).
+Pour une vue d’ensemble complète de la prise en charge des conteneurs sur Azure, par exemple la création d’un cluster Kubernetes avec Azure Kubernetes Service, la création d’un registre Docker privé dans Azure Container Registry, et bien plus encore, voir [Azure for Containers](../containers/index.yml).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -98,6 +101,6 @@ Dans cet article, vous avez découvert la prise en charge offerte par Service Fa
 
 [Créer sa première application conteneur Service Fabric sous Linux](service-fabric-get-started-containers-linux.md)  
 [Créer sa première application conteneur Service Fabric sous Windows](service-fabric-get-started-containers.md)  
-[En savoir plus sur les conteneurs Windows](https://docs.microsoft.com/virtualization/windowscontainers/about/)
+[En savoir plus sur les conteneurs Windows](/virtualization/windowscontainers/about/)
 
 [Image1]: media/service-fabric-containers/Service-Fabric-Types-of-Isolation.png

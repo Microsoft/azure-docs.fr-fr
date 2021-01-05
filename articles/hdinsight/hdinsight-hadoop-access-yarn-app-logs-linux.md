@@ -9,11 +9,11 @@ ms.topic: conceptual
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/23/2020
 ms.openlocfilehash: 726cf362e62f0ef914dfaea090a08c224bd5d8d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82192499"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001947"
 ---
 # <a name="access-apache-hadoop-yarn-application-logs-on-linux-based-hdinsight"></a>Accéder aux journaux des applications Apache Hadoop YARN dans HDInsight basé sur Linux
 

@@ -5,14 +5,16 @@ ms.date: 03/24/2020
 ms.topic: conceptual
 description: Décrit la préparation de votre projet avec Azure Dev Spaces
 keywords: azds.yaml, Azure Dev Spaces, Dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs
-ms.openlocfilehash: 24a54fffdc8e94493d2a4a9aeb1c5f02dcd192b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d2da69dd8a8c2683ff584dfd0ffc61cb023f2ece
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80241315"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91968155"
 ---
 # <a name="how-preparing-a-project-for-azure-dev-spaces-works"></a>Préparation d’un projet pour Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
 
 Azure Dev Spaces vous offre plusieurs façons de parcourir et de déboguer rapidement des applications Kubernetes et de collaborer avec votre équipe sur un cluster Azure Kubernetes Service (AKS). Dev Spaces peut générer des fichiers Dockerfiles et des graphiques Helm pour votre projet. Dev Spaces crée et utilise également un fichier de configuration pour déployer, exécuter et déboguer vos applications Kubernetes dans AKS. Tous ces fichiers contiennent le code de votre application et peuvent être ajoutés à votre système de contrôle de version.
 
@@ -98,17 +100,4 @@ Le fichier `azds.yaml` généré par la commande `prep` est conçu pour fonction
 
 Pour en savoir plus sur l’exécution de code dans votre espace de développement, consultez [Comment fonctionne l’exécution de votre code avec Azure Dev Spaces][how-it-works-up].
 
-Pour commencer à utiliser Azure Dev Spaces pour préparer votre projet pour Azure Dev Spaces, consultez les guides de démarrage rapide suivants :
-
-* [Itérer et déboguer rapidement avec Visual Studio Code et Java][quickstart-java]
-* [Itérer et déboguer rapidement avec Visual Studio Code et .NET][quickstart-netcore]
-* [Itérer et déboguer rapidement avec Visual Studio Code et Node.js][quickstart-node]
-* [Itérer et déboguer rapidement avec Visual Studio et .NET Core][quickstart-vs]
-* [Utilisation de l’interface CLI pour développer une application sur Kubernetes][quickstart-cli]
-
 [how-it-works-up]: how-dev-spaces-works-up.md
-[quickstart-cli]: quickstart-cli.md
-[quickstart-java]: quickstart-java.md
-[quickstart-netcore]: quickstart-netcore.md
-[quickstart-node]: quickstart-nodejs.md
-[quickstart-vs]: quickstart-netcore-visualstudio.md

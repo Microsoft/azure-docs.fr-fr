@@ -7,18 +7,18 @@ author: mmacy
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: overview
+ms.topic: how-to
 ms.workload: identity
 ms.date: 08/28/2019
 ms.author: marsma
 ms.reviewer: jak
 ms.custom: aaddev
-ms.openlocfilehash: 1291563a39e3cf3acd4b343302be8b150bf794ca
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 95bd7b5ac325ef5484bd01284c46489acb919a32
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80883506"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85830347"
 ---
 # <a name="using-redirect-uris-with-the-microsoft-authentication-library-for-ios-and-macos"></a>Utilisation des URI de redirection avec la bibliothèque d’authentification Microsoft pour iOS et macOS
 
@@ -40,10 +40,12 @@ Les URI de redirection doivent être différents pour chaque application iOS. Le
 
 Si nous considérons l’inscription d’application suivante dans le portail Azure :
 
-    Client ID: ABCDE-12345 (this is a single client ID)
-    RedirectUris: msauth.com.contoso.app1://auth, msauth.com.contoso.app2://auth, msauth.com.contoso.app3://auth
+* ID client : `ABCDE-12345` (il s’agit d’un ID client unique)
+* RedirectUris : `msauth.com.contoso.app1://auth`, `msauth.com.contoso.app2://auth`, `msauth.com.contoso.app3://auth`
 
-App1 utilise la redirection `msauth.com.contoso.app1://auth`, App2 utilise `msauth.com.contoso.app2://auth` et App3 utilise `msauth.com.contoso.app1://auth`.
+App1 utilise la redirection `msauth.com.contoso.app1://auth`.\
+App2 utilise `msauth.com.contoso.app2://auth`.\
+App3 utilise `msauth.com.contoso.app1://auth`.
 
 ### <a name="migrating-from-adal-to-msal"></a>Migration d’ADAL vers MSAL
 
@@ -70,7 +72,6 @@ Lorsque vous avez migré vers MSAL du code qui utilisait la bibliothèque d’au
         </dict>
     </array>
     ```
-    
 
 MSAL vérifie si votre URI de redirection s’inscrit correctement et retourne une erreur si ce n’est pas le cas.
     

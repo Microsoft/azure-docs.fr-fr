@@ -1,25 +1,15 @@
 ---
 title: Connexions hybrides Azure Relay - Requêtes HTTP dans .NET
 description: Écrivez une application console C# pour des requêtes HTTP de connexions hybrides Azure Relay dans .NET.
-services: service-bus-relay
-documentationcenter: .net
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: d1386900-b942-4abf-acfc-38d2ef826253
-ms.service: service-bus-relay
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 11/01/2018
-ms.author: spelluru
-ms.openlocfilehash: 7c984876c4338b4f6802ba55752c8f612c390e94
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: devx-track-csharp
+ms.date: 06/23/2020
+ms.openlocfilehash: 7a11abb984da3601a4d6aa921224e01f94d0871c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204332"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88922580"
 ---
 # <a name="get-started-with-relay-hybrid-connections-http-requests-in-net"></a>Bien démarrer avec les requêtes HTTP de connexions hybrides Relay dans .NET
 [!INCLUDE [relay-selector-hybrid-connections](../../includes/relay-selector-hybrid-connections.md)]

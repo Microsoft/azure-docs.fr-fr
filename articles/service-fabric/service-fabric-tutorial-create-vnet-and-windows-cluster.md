@@ -4,16 +4,16 @@ description: Dans ce tutoriel, vous allez découvrir comment déployer un cluste
 ms.topic: tutorial
 ms.date: 07/22/2019
 ms.custom: mvc
-ms.openlocfilehash: 2d170057a85a8e223fa9d1bc2bfc17e0c284afcd
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: a7390858e55a456ec5fb2f851be1a7443be97082
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80756035"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86245039"
 ---
 # <a name="tutorial-deploy-a-service-fabric-cluster-running-windows-into-an-azure-virtual-network"></a>Tutoriel : Déployer un cluster Service Fabric exécutant Windows sur un réseau virtuel Azure
 
-Ce tutoriel est la première partie d’une série d’étapes. Vous allez découvrir comment déployer un cluster Azure Service Fabric exécutant Windows dans un [réseau virtuel Azure](../virtual-network/virtual-networks-overview.md) et un [groupe de sécurité réseau](../virtual-network/virtual-networks-nsg.md) à l’aide de PowerShell et d’un modèle. Quand vous avez terminé, vous disposez d’un cluster en cours d’exécution dans le cloud sur lequel vous pouvez déployer des applications. Pour créer un cluster Linux qui utilise Azure CLI, consultez [Créer un cluster Linux sécurisé sur Azure](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
+Ce tutoriel est la première partie d’une série d’étapes. Vous allez découvrir comment déployer un cluster Azure Service Fabric exécutant Windows dans un [réseau virtuel Azure](../virtual-network/virtual-networks-overview.md) et un [groupe de sécurité réseau](../virtual-network/virtual-network-vnet-plan-design-arm.md) à l’aide de PowerShell et d’un modèle. Quand vous avez terminé, vous disposez d’un cluster en cours d’exécution dans le cloud sur lequel vous pouvez déployer des applications. Pour créer un cluster Linux qui utilise Azure CLI, consultez [Créer un cluster Linux sécurisé sur Azure](service-fabric-tutorial-create-vnet-and-linux-cluster.md).
 
 Ce didacticiel décrit un scénario de production. Si vous souhaitez créer un petit cluster à des fins de test, consultez [Créer un cluster de test](./scripts/service-fabric-powershell-create-secure-cluster-cert.md).
 
@@ -48,7 +48,7 @@ Avant de commencer ce tutoriel :
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 * Installez le [Kit de développement logiciel (SDK) Service Fabric et le module PowerShell](service-fabric-get-started.md).
-* Installez [Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+* Installez [Azure PowerShell](/powershell/azure/install-az-ps).
 * Passez en revue les concepts clés des [clusters Azure](service-fabric-azure-clusters-overview.md).
 * [Planifiez et préparez](service-fabric-cluster-azure-deployment-preparation.md) un déploiement de cluster de production.
 
@@ -73,8 +73,8 @@ Dans la ressource **Microsoft.servicefabric/clusters**, un cluster Windows est c
 * Sécurisation par certificat (configurable dans les paramètres du modèle)
 * [Proxy inverse](service-fabric-reverseproxy.md) activé
 * [Service DNS](service-fabric-dnsservice.md) activé
-* [Niveau de durabilité](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster) Bronze (configurable dans les paramètres du modèle)
-* [Niveau de fiabilité](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) Silver (configurable dans les paramètres du modèle)
+* [Niveau de durabilité](service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster) Bronze (configurable dans les paramètres du modèle)
+* [Niveau de fiabilité](service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster) Silver (configurable dans les paramètres du modèle)
 * Point de terminaison de connexion client : 19000 (configurable dans les paramètres du modèle)
 * point de terminaison de passerelle HTTP : 19080 (configurable dans les paramètres du modèle)
 
@@ -111,7 +111,7 @@ Les règles de trafic entrant suivantes sont activées dans la ressource **Micro
 Si d’autres ports de l’application sont nécessaires, vous devez ajuster les ressources **Microsoft.Network/loadBalancers** et **Microsoft.Network/networkSecurityGroups** pour autoriser le trafic entrant.
 
 ### <a name="windows-defender"></a>Windows Defender
-Par défaut, le [programme antivirus Windows Defender](/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016) est installé sur Windows Server 2016 et fonctionne correctement. L’interface utilisateur est installée par défaut sur certaines références SKU, mais elle n’est pas obligatoire. Pour tous les types de nœuds ou groupes de machines virtuelles identiques déclarés dans le modèle, l’[extension Azure VM Antimalware](/azure/virtual-machines/extensions/iaas-antimalware-windows) est utilisée pour exclure les répertoires et les processus Service Fabric :
+Par défaut, le [programme antivirus Windows Defender](/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016) est installé sur Windows Server 2016 et fonctionne correctement. L’interface utilisateur est installée par défaut sur certaines références SKU, mais elle n’est pas obligatoire. Pour tous les types de nœuds ou groupes de machines virtuelles identiques déclarés dans le modèle, l’[extension Azure VM Antimalware](../virtual-machines/extensions/iaas-antimalware-windows.md) est utilisée pour exclure les répertoires et les processus Service Fabric :
 
 ```json
 {
@@ -145,8 +145,8 @@ Le fichier de paramètres [azuredeploy.parameters.json][parameters] déclare de 
 
 **Paramètre** | **Exemple de valeur** | **Remarques** 
 |---|---|---|
-|adminUsername|vmadmin| Nom d’utilisateur administrateur pour les machines virtuelles de cluster. [Conditions requises pour les noms d’utilisateur de la machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-username-requirements-when-creating-a-vm). |
-|adminPassword|Password#1234| Mot de passe d’administrateur pour les machines virtuelles de cluster. [Conditions requises pour les mots de passe de la machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm).|
+|adminUsername|vmadmin| Nom d’utilisateur administrateur pour les machines virtuelles de cluster. [Conditions requises pour les noms d’utilisateur de la machine virtuelle](../virtual-machines/windows/faq.md#what-are-the-username-requirements-when-creating-a-vm). |
+|adminPassword|Password#1234| Mot de passe d’administrateur pour les machines virtuelles de cluster. [Conditions requises pour les mots de passe de la machine virtuelle](../virtual-machines/windows/faq.md#what-are-the-password-requirements-when-creating-a-vm).|
 |clusterName|mysfcluster123| Nom du cluster. Peut contenir seulement des lettres et des chiffres. Le nom peut contenir entre 3 et 23 caractères.|
 |location|southcentralus| Emplacement du cluster. |
 |certificateThumbprint|| <p>La valeur doit être vide si vous créez un certificat auto-signé ou si vous fournissez un fichier de certificat.</p><p>Pour utiliser un certificat existant déjà chargé dans un coffre de clés, renseignez la valeur d’empreinte du certificat SHA-1. Par exemple, « 6190390162C988701DB5676EB81083EA608DCCF3 ».</p> |
@@ -703,7 +703,7 @@ Get-ServiceFabricClusterHealth
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Les autres articles de cette série de tutoriels utilisent le cluster que vous avez créé. Si vous ne passez pas immédiatement à l’article suivant, vous souhaiterez peut-être [supprimer le cluster](service-fabric-cluster-delete.md) pour éviter de subir des frais.
+Les autres articles de cette série de tutoriels utilisent le cluster que vous avez créé. Si vous ne passez pas immédiatement à l’article suivant, vous souhaiterez peut-être [supprimer le cluster](./service-fabric-tutorial-delete-cluster.md) pour éviter de subir des frais.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

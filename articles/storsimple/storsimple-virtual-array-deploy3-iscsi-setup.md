@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/25/2019
 ms.author: alkohli
-ms.openlocfilehash: 4560ca2b07826e2a071f515f147dfab8cbec3624
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6289f335234c9b7efec02a18e12b40a1140c1b3f
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228089"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94956549"
 ---
 # <a name="deploy-storsimple-virtual-array--set-up-as-an-iscsi-server-via-azure-portal"></a>Déploiement de StorSimple Virtual Array - Configuration d’un serveur iSCSI via le portail Azure
 
@@ -37,7 +37,7 @@ Les procédures décrites ici prennent de 30 minutes à 1 heure environ. Les inf
 
 Avant de configurer votre solution StorSimple Virtual Array, assurez-vous que :
 
-* Vous avez configuré un tableau virtuel et vous êtes connecté à celui-ci, comme décrit dans [Déploiement de StorSimple Virtual Array - Configuration d’un tableau virtuel dans Hyper-V](storsimple-ova-deploy2-provision-hyperv.md) ou [Déploiement de StorSimple Virtual Array - Configuration d’un tableau virtuel dans VMware](storsimple-virtual-array-deploy2-provision-vmware.md).
+* Vous avez configuré un tableau virtuel et vous êtes connecté à celui-ci, comme décrit dans [Déploiement de StorSimple Virtual Array - Configuration d’un tableau virtuel dans Hyper-V](./storsimple-virtual-array-deploy2-provision-hyperv.md) ou [Déploiement de StorSimple Virtual Array - Configuration d’un tableau virtuel dans VMware](storsimple-virtual-array-deploy2-provision-vmware.md).
 * Vous disposez de la clé d’inscription du service StorSimple Device Manager que vous avez créé pour gérer les instances StorSimple Virtual Array. Pour plus d'informations, consultez **Étape 2 : Obtention de la clé d'inscription** dans [Déploiement de StorSimple Virtual Array - Préparation du portail](storsimple-virtual-array-deploy1-portal-prep.md#step-2-get-the-service-registration-key).
 * S’il s’agit de la deuxième baie virtuelle (ou d’une baie ultérieure) que vous inscrivez auprès d’un service StorSimple Device Manager existant, vous devez disposer de la clé de chiffrement des données du service. Cette clé a été générée lorsque le premier appareil a été correctement inscrit auprès de ce service. Si vous avez perdu cette clé, consultez la rubrique **Obtenir la clé de chiffrement des données de service** dans [Utiliser l’interface utilisateur web pour gérer votre StorSimple Virtual Array](storsimple-ova-web-ui-admin.md#get-the-service-data-encryption-key).
 
@@ -125,7 +125,7 @@ Utilisez la procédure détaillée ci-dessous pour configurer votre solution Sto
 11. Accédez au panneau **Appareils** de votre service. Si vous avez beaucoup de ressources, cliquez sur **Toutes les ressources**, cliquez sur votre nom de service (recherchez-le si nécessaire), puis cliquez sur **Appareils**.
 12. Sur la page **Appareils** , vérifiez que l’appareil s’est bien connecté au service en vérifiant son état. L’état de l’appareil doit être **Prêt pour la configuration**.
     
-    ![enregistrer un appareil](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis1m.png)
+    ![Déployer l’appareil](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis1m.png)
 
 ## <a name="step-2-configure-the-device-as-iscsi-server"></a>Étape 2 : Configurer l’appareil en tant que serveur iSCSI
 
@@ -138,7 +138,7 @@ Pour exécuter la configuration d’appareil requise, procédez comme suit dans 
     ![Configurer l’appareil en tant que serveur iSCSI](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis1m.png) 
 2. Cliquez sur l’appareil. Un message de bannière s’affiche pour vous indiquer que l’appareil est prêt pour la configuration.
    
-    ![Configurer l’appareil en tant que serveur iSCSI](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis2m.png)  
+    ![Configurer l’appareil en tant que serveur iSCSI 2](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis2m.png)  
 3. Cliquez sur **Configurer** dans la barre de commandes de l’appareil. Le panneau **Configurer** s’affiche. Dans le panneau **Configurer**, procédez comme suit :
    
    * Le nom du serveur iSCSI est automatiquement renseigné.
@@ -146,13 +146,13 @@ Pour exécuter la configuration d’appareil requise, procédez comme suit dans 
    * Spécifiez une clé de chiffrement de 32 caractères et enregistrez-la dans une application de gestion des clés pour référence ultérieure.
    * Spécifiez un compte de stockage à utiliser avec votre appareil. Dans cet abonnement, vous pouvez sélectionnez un compte de stockage existant, ou cliquer sur **Ajouter** afin de choisir un compte d’un abonnement différent.
      
-     ![Configurer l’appareil en tant que serveur iSCSI](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis4m.png)
+     ![Configurer l’appareil en tant que serveur iSCSI 3](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis4m.png)
 4. Cliquez sur **Configurer** afin de terminer la configuration du serveur iSCSI.
    
-    ![Configurer l’appareil en tant que serveur iSCSI](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis5m.png) 
+    ![Configurer l’appareil en tant que serveur iSCSI 4](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis5m.png) 
 5. Vous serez tenu informé de l’avancement de la création du serveur iSCSI. Une fois que le serveur iSCSI est créé, le panneau **Appareils** est mis à jour et l’état d’appareil correspondant est **En ligne**.
    
-    ![Configurer l’appareil en tant que serveur iSCSI](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis9m.png)
+    ![Configurer l’appareil en tant que serveur iSCSI 5](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis9m.png)
 
 ## <a name="step-3-add-a-volume"></a>Étape 3 : Ajout d’un volume
 
@@ -169,17 +169,17 @@ Pour exécuter la configuration d’appareil requise, procédez comme suit dans 
      
      La configuration d’un volume à plusieurs niveaux est légère. Lorsque vous créez un volume à plusieurs niveaux, environ 10 % de l'espace sont configurés au niveau local et 90 % dans le cloud. Par exemple, si vous avez configuré un volume de 1 To, 100 Go résident dans l'espace local et 900 Go sont utilisés dans le cloud lorsque les données sont stockées en niveaux. Cela implique que si vous n'avez plus d'espace local sur l’appareil, vous ne pouvez pas configurer un partage à plusieurs niveaux (car les 10 % ne seront pas disponibles).
      
-     ![Ajout d’un volume](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis12.png)
+     ![Ajouter un volume 2](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis12.png)
    * Cliquez sur **Hôtes connectés**, sélectionnez un enregistrement de contrôle d’accès correspondant à l’initiateur iSCSI que vous souhaitez connecter à ce volume, puis cliquez sur **Sélectionner**. <br><br> 
 3. Pour ajouter un hôte connecté, cliquez sur **Ajouter nouveau**, saisissez un nom pour l’hôte et son nom complet iSCSI, puis cliquez sur **Ajouter**. Si vous ne possédez pas le nom qualifié, accédez à l'[Annexe A : Obtention du nom qualifié d’un hôte Windows Server](#appendix-a-get-the-iqn-of-a-windows-server-host).
    
-      ![Ajout d’un volume](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis15m.png)
+      ![Ajouter un volume 3](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis15m.png)
 4. Lorsque vous avez terminé de configurer votre volume, cliquez sur **OK**. Un volume est créé avec les paramètres spécifiés ; une notification s’affiche. Par défaut, la surveillance et la sauvegarde seront activées pour le volume.
    
-     ![Ajout d’un volume](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis18m.png)
+     ![Ajouter un volume 4](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis18m.png)
 5. Pour vérifier que le volume a été créé, accédez au panneau **Volumes**. Le volume devrait y apparaître.
    
-   ![Ajout d’un volume](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis20m.png)
+   ![Ajouter un volume 5](./media/storsimple-virtual-array-deploy3-iscsi-setup/deployis20m.png)
 
 ## <a name="step-4-mount-initialize-and-format-a-volume"></a>Étape 4 : Monter, initialiser et formater un volume
 
@@ -245,7 +245,4 @@ Procédez comme suit pour obtenir le nom qualifié iSCSI (IQN) d'un hôte Window
 3. Enregistrez cette chaîne.
 
 <!--Reference link-->
-[1]: https://technet.microsoft.com/library/ee338480(WS.10).aspx
-
-
-
+[1]: /previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee338480(v=ws.10)

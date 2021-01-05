@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 03/19/2018
 ms.author: liydu
-ms.openlocfilehash: 6bebe8ac6b9869466938600d6267fd0062c84477
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3649ac786c07459695a1e6ca6ad52620e23d59f
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75977299"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148806"
 ---
 # <a name="door-monitor----using-azure-functions-and-sendgrid-send-email-when-a-door-is-opened"></a>Moniteur de porte : envoyer un e-mail quand une porte est ouverte à l’aide d’Azure Functions et SendGrid           
 
@@ -171,7 +171,7 @@ La chaîne de connexion qui est récupérée à partir de l’étape [Provisionn
 
 VS Code commence ensuite à vérifier et à charger l’ébauche de projet Arduino sur le DevKit.
 
-![device-upload](media/iot-hub-arduino-iot-devkit-az3166-door-monitor/device-upload.png)
+![Capture d’écran représentant la vérification et le chargement de l’ébauche de projet Arduino dans Visual Studio Code.](media/iot-hub-arduino-iot-devkit-az3166-door-monitor/device-upload.png)
 
 Le DevKit redémarre et commence à exécuter le code.
 
@@ -197,7 +197,4 @@ Si vous rencontrez des problèmes, consultez le [FAQ sur le DevKit IoT](https://
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous avez appris à connecter un appareil DevKit à votre accélérateur de solution de supervision à distance Azure IoT et à utiliser le service SendGrid pour envoyer un e-mail. Voici les prochaines étapes suggérées :
-
-* [Vue d’ensemble des accélérateurs de solution de supervision à distance Azure IoT](https://docs.microsoft.com/azure/iot-suite/)
-* [Connecter un appareil DevKit IoT MXChip à votre application Azure IoT Central](/azure/iot-central/core/howto-connect-devkit)
+Vous avez appris à connecter un appareil DevKit à votre accélérateur de solution de supervision à distance Azure IoT et à utiliser le service SendGrid pour envoyer un e-mail. Voici l’étape suivante suggérée : [Vue d’ensemble des accélérateurs de solution de supervision à distance Azure IoT](/azure/iot-suite/)

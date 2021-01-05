@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: tagore
-ms.openlocfilehash: 2549cb0408c9dad3e92f2cec9625757de45a10dc
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: b617ba8db8f9dbb1c25ac34aa879613c29c723b7
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82086247"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96340286"
 ---
 # <a name="sizes-for-cloud-services"></a>Tailles de services cloud
 Cette rubrique décrit les tailles et options disponibles pour les instances de rôle de Cloud Services (rôles web et rôles de travail). Il expose également les points à prendre en considération pour le déploiement quand vous planifiez l'utilisation de ces ressources. Chaque taille a un identifiant que vous placez dans votre [fichier de définition de service](cloud-services-model-and-package.md#csdef). Les prix pour chaque taille sont disponibles sur la page de [tarification des Services Cloud](https://azure.microsoft.com/pricing/details/cloud-services/).
@@ -36,7 +36,7 @@ La taille de la machine virtuelle a une incidence sur la tarification. La taille
 
 Les considérations ci-dessous peuvent vous aider à choisir une taille :
 
-* Les tailles A8 à A11 et celles de la série H sont également appelées *instances nécessitant beaucoup de ressources système*. Le matériel qui exécute ces tailles a été conçu et optimisé pour les applications nécessitant beaucoup de ressources système et réseau, notamment les applications en cluster pour des calculs complexes, la modélisation et les simulations. La série A8-A11 utilise un processeur Intel Xeon E5-2670 cadencé à 2,6 GHZ, et la série H un processeur Intel Xeon E5-2667 v3 cadencé à 3,2 GHz. Pour plus d’informations et pour connaître les éléments à prendre en considération sur l’utilisation de ces tailles, consultez [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+* Les tailles A8 à A11 et celles de la série H sont également appelées *instances nécessitant beaucoup de ressources système*. Le matériel qui exécute ces tailles a été conçu et optimisé pour les applications nécessitant beaucoup de ressources système et réseau, notamment les applications en cluster pour des calculs complexes, la modélisation et les simulations. La série A8-A11 utilise un processeur Intel Xeon E5-2670 cadencé à 2,6 GHZ, et la série H un processeur Intel Xeon E5-2667 v3 cadencé à 3,2 GHz. Pour plus d’informations et pour connaître les éléments à prendre en considération sur l’utilisation de ces tailles, consultez [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 * Les séries Dv3, Dv2, D et G sont idéales pour les applications qui exigent des processeurs plus rapides, de meilleures performances de disque local, ou qui ont des exigences de mémoire plus élevées. Elles offrent une combinaison puissante pour de nombreuses applications professionnelles.
 * Certains hôtes physiques des centres de données Azure ne prennent pas en charge les tailles de machines virtuelles élevées, comme A5 à A11. Ainsi, vous pouvez obtenir le message d’erreur **Échec de la configuration de la machine virtuelle {nom de la machine}** ou **Échec de la création de la machine virtuelle {nom de la machine}** pendant le redimensionnement d’une machine virtuelle existante, la création d’une machine virtuelle dans un réseau virtuel créé avant le 16 avril 2013 ou l’ajout d’une nouvelle machine virtuelle à un service cloud existant. Consultez [Erreur : « Échec de la configuration de la machine virtuelle »](https://social.msdn.microsoft.com/Forums/9693f56c-fcd3-4d42-850e-5e3b56c7d6be/error-failed-to-configure-virtual-machine-with-a5-a6-or-a7-vm-size?forum=WAVirtualMachinesforWindows) (en anglais) sur le forum d’assistance pour découvrir les solutions de contournement pour chaque scénario de déploiement.
 * Il se peut également que votre abonnement limite le nombre de cœurs que vous pouvez déployer dans certaines familles de taille. Pour augmenter un quota, contactez le support technique Azure.
@@ -88,7 +88,7 @@ Les tableaux ci-après indiquent les tailles et les capacités qu’elles offren
 | A7              | 8         | 56           | 2040                 | 4 / Élevée |
 
 ## <a name="a-series---compute-intensive-instances"></a>Série A - Instances de calcul intensif
-Pour plus d’informations et pour connaître les éléments à prendre en considération sur l’utilisation de ces tailles, consultez [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Pour plus d’informations et pour connaître les éléments à prendre en considération sur l’utilisation de ces tailles, consultez [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 | Taille            | Cœurs d’unité centrale | Mémoire : Gio  | Stockage temporaire : Gio       | Cartes réseau (max)/Bande passante réseau |
 |---------------- | --------- | ------------ | -------------------- | ---------------------------- |
@@ -217,7 +217,4 @@ Get-AzureRoleSize | where SupportedByWebWorkerRoles -eq $true | select InstanceS
 
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur l’ [abonnement Azure et les limites, quotas et contraintes des services](../azure-resource-manager/management/azure-subscription-service-limits.md).
-* En savoir plus sur les [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) pour les charges de travail HPC.
-
-
-
+* En savoir plus sur les [Tailles de machines virtuelles de calcul haute performance](../virtual-machines/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) pour les charges de travail HPC.

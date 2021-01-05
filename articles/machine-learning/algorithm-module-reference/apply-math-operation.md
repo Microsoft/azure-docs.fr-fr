@@ -9,24 +9,24 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 09/09/2019
-ms.openlocfilehash: 2b4d6939aa1db4b8321c792898ed421c0d16cc99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 04ce45f428604275696d83938708bcee0c6c023f
+ms.sourcegitcommit: f5580dd1d1799de15646e195f0120b9f9255617b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456741"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91536764"
 ---
 # <a name="apply-math-operation"></a>Appliquer une opération mathématique
 
-Cet article décrit un module du concepteur Azure Machine Learning (préversion).
+Cet article décrit un module du concepteur Azure Machine Learning.
 
 Utilisez le module Appliquer une opération mathématique pour créer des calculs et les appliquer aux colonnes numériques du jeu de données d’entrée. 
 
-Les opérations mathématiques prises en charge comprennent des fonctions arithmétiques courantes comme la multiplication et la division, des fonctions trigonométriques, une variété de fonctions d’arrondi et des fonctions spéciales utilisées dans la science des données, comme les fonctions gamma et d’erreur.  
+Parmi les opérations mathématiques figurent des fonctions arithmétiques, des fonctions trigonométriques, des fonctions d’arrondi et des fonctions spéciales utilisées en science des données, comme les fonctions gamma et les fonctions d’erreur.  
 
 Une fois que vous avez défini une opération et exécuté le pipeline, les valeurs sont ajoutées à votre jeu de données. Selon la façon dont vous configurez le module, vous pouvez :
 
-+ Ajouter les résultats à votre jeu de données. Particulièrement utile pour vérifier le résultat de l’opération.
++ Ajoutez les résultats à votre jeu de données (utile pour vérifier le résultat de l’opération).
 + Remplacer les valeurs de colonne par les nouvelles valeurs calculées.
 + Générer une nouvelle colonne pour les résultats et ne pas afficher les données d’origine. 
 
@@ -42,7 +42,7 @@ Recherchez l’opération dont vous avez besoin dans les catégories suivantes 
   
 -   [Opérations](#arithmetic-operations)  
   
-     La catégorie **Opérations** comprend les fonctions mathématiques de base : addition, soustraction, multiplication et division. Vous pouvez utiliser des colonnes ou des constantes. Par exemple, vous pouvez ajouter la valeur de la colonne A à la valeur de la colonne B. Vous pouvez également soustraire une constante, par exemple, une moyenne calculée précédemment, de chaque valeur de la colonne A.  
+     La catégorie **Opérations** comprend des fonctions mathématiques de base : addition, soustraction, multiplication et division. Vous pouvez utiliser des colonnes ou des constantes. Par exemple, vous pouvez ajouter la valeur de la colonne A à la valeur de la colonne B. Vous pouvez également soustraire une constante, par exemple, une moyenne calculée précédemment, de chaque valeur de la colonne A.  
   
 -   [Arrondi](#rounding-operations)  
   
@@ -55,7 +55,7 @@ Recherchez l’opération dont vous avez besoin dans les catégories suivantes 
 -   [Trigonométrie](#trigonometric-functions)  
   
      La catégorie **Trigonométrie** comprend toutes les fonctions trigonométriques standard. Par exemple, vous pouvez convertir des radians en degrés, ou des fonctions de calcul comme la tangente en radians ou degrés.
-     Ces fonctions sont unaires, ce qui signifie qu’elles prennent une seule colonne de valeurs comme entrée, appliquent la fonction trigonométrique et retournent une colonne de valeurs en résultat.  Par conséquent, vous devez vérifier que la colonne d’entrée a le type approprié et qu’elle contient le type de valeur qui convient pour l’opération spécifiée.   
+     Ces fonctions sont unaires, ce qui signifie qu’elles prennent une seule colonne de valeurs comme entrée, appliquent la fonction trigonométrique et retournent une colonne de valeurs en résultat. Vérifiez que la colonne d’entrée est du bon type et qu’elle contient le type de valeur qui convient pour l’opération spécifiée.   
 
 ## <a name="how-to-configure-apply-math-operation"></a>Comment configurer le module Appliquer une opération mathématique  
 
@@ -74,7 +74,7 @@ Chaque instance de ce module peut exécuter un seul type d’opération à la fo
     - Toute colonne que vous choisissez doit avoir un type de données numérique. 
     - La plage de données doit être valide pour l’opération mathématique sélectionnée. Sinon, une erreur ou un résultat NaN (autre qu’un nombre) peut se produire. Par exemple, Ln(-1,0) est une opération non valide qui génère la valeur `NaN`.
   
-1.  Cliquez sur **Catégorie** pour sélectionner le **type** de l’opération mathématique à effectuer.
+1.  Sélectionnez **Catégorie** pour sélectionner le **type** de l’opération mathématique à effectuer.
     
 1. Choisissez une opération spécifique dans la liste de cette catégorie.
   
@@ -92,10 +92,10 @@ Chaque instance de ce module peut exécuter un seul type d’opération à la fo
 
 Si vous générez les résultats à l’aide des options **Append** ou **ResultOnly**, les en-têtes de colonne du jeu de données retourné indiquent l’opération et les colonnes qui ont été utilisées. Par exemple, si vous comparez deux colonnes à l’aide de l’opérateur **Equals**, les résultats ressemblent à ceci :  
   
--   **Equals(Col2_Col1)** , qui indique que vous avez testé Col2 sur Col1.  
--   **Equals(Col2_$10)** , qui indique que vous avez comparé la colonne 2 à la constante 10.  
+-   **Equals(Col2_Col1)**, qui indique que vous avez testé Col2 sur Col1.  
+-   **Equals(Col2_$10)**, qui indique que vous avez comparé la colonne 2 à la constante 10.  
 
-Même si vous utilisez l’option **InPlace**, les données sources ne sont pas supprimées ou modifiées. La colonne du jeu de données d’origine est toujours disponible dans le concepteur. Pour voir les données d’origine, vous pouvez connecter le module [Ajouter des colonnes](add-columns.md) et le joindre à la sortie du module **Appliquer une opération mathématique**.  
+Même avec l’option **Inplace**, les données sources ne sont pas supprimées ni modifiées. La colonne du jeu de données d’origine est toujours disponible dans le concepteur. Pour voir les données d’origine, vous pouvez connecter le module [Ajouter des colonnes](add-columns.md) et le joindre à la sortie du module **Appliquer une opération mathématique**.  
     
 ## <a name="basic-math-operations"></a>Opérations mathématiques de base 
 
@@ -113,7 +113,7 @@ Retourne une tangente inverse à quatre quadrants.
 
 Sélectionnez les colonnes qui contiennent les coordonnées de point. Pour le deuxième argument, qui correspond à la coordonnée x, vous pouvez également spécifier une constante.  
 
-Correspond à la fonction ATAN2 dans Matlab.  
+Correspond à la fonction ATAN2 en MATLAB.  
 
 ### <a name="conj"></a>Conj
 
@@ -124,11 +124,11 @@ Retourne le conjugué des valeurs de la colonne sélectionnée.
 Retourne la racine cube des valeurs de la colonne sélectionnée.  
 
 ### <a name="doublefactorial"></a>DoubleFactorial  
- Calcule la factorielle double des valeurs de la colonne sélectionnée. La factorielle double est une extension de la fonction factorielle normale et est indiquée sous la forme x!!.  
+ Calcule la factorielle double des valeurs de la colonne sélectionnée. La factorielle double est une extension de la fonction factorielle normale, dont la notation est `x!!`.  
 
 ### <a name="eps"></a>Eps
 
-Retourne la taille de l’écart entre la valeur actuelle et le plus grand nombre suivant à double précision. Correspond à la fonction EPS dans Matlab.  
+Retourne la taille de l’écart entre la valeur actuelle et le plus grand nombre suivant à double précision. Correspond à la fonction EPS en MATLAB.  
   
 ### <a name="exp"></a>Exp
 
@@ -170,11 +170,11 @@ Vous pouvez spécifier la base (le deuxième argument) en choisissant une consta
 
 ### <a name="log10"></a>Log10
 
-Retourne les valeurs de logarithme de base 10 pour la colonne sélectionnée.  
+Retourne les valeurs logarithmiques de base 10 pour la colonne sélectionnée.  
 
 ### <a name="log2"></a>Log2
 
-Retourne les valeurs de logarithme de base 2 pour la colonne sélectionnée.  
+Retourne les valeurs logarithmiques de base 2 pour la colonne sélectionnée.  
 
 ### <a name="nthroot"></a>NthRoot
 Retourne la racine énième de la valeur, à l’aide d’une valeur n que vous spécifiez.  
@@ -235,11 +235,11 @@ Retourne True si les valeurs du **Jeu de colonnes** sont inférieures ou égales
 
 ### <a name="notequalto"></a>NotEqualTo
 
-Retourne True si les valeurs du **Jeu de colonnes** ne sont pas égales à la constante ou à la colonne de comparaison, et retourne False si elles le sont.  
+Renvoie True si les valeurs figurant dans **Jeu de colonnes** ne sont pas égales à la constante ou à la colonne de comparaison, et False dans le cas contraire.  
 
 ### <a name="pairmax"></a>PairMax
 
-Retourne la valeur supérieure : la valeur du **Jeu de colonnes** ou la valeur de la constante ou de la colonne de comparaison.  
+Renvoie la valeur supérieure entre celle figurant dans **Jeu de colonnes** ou celle figurant dans la colonne de constantes ou de comparaison.  
 
 ### <a name="pairmin"></a>PairMin
 
@@ -272,7 +272,7 @@ Divise les valeurs du **Jeu de colonnes** par une constante ou par les valeurs d
 
 ### <a name="multiply"></a>Multiplier
 
-Multiplie les valeurs du **Jeu de colonnes** par les valeurs de constante ou de colonne spécifiées.  
+Multiplie les valeurs figurant dans le **Jeu de colonnes** par la constante ou les valeurs de colonne spécifiées.  
 
 ### <a name="subtract"></a>Soustraire
 
@@ -288,51 +288,51 @@ Le concepteur Azure Machine Learning prend en charge diverses opérations d’ar
 
 ### <a name="ceiling"></a>Ceiling
 
-Retourne le plafond des valeurs du **Jeu de colonnes**.  
+Renvoie la valeur plafond des valeurs figurant dans le **jeu de colonnes**.  
 
 ### <a name="ceilingpower2"></a>CeilingPower2
 
-Retourne le plafond élevé au carré des valeurs du **Jeu de colonnes**.  
+Renvoie la valeur plafond élevée au carré des valeurs figurant dans le **jeu de colonnes**.  
 
 ### <a name="floor"></a>Floor
 
-Retourne le plancher des valeurs du **Jeu de colonnes**, à la précision spécifiée.  
+Renvoie la valeur plancher des valeurs figurant dans le **jeu de colonnes**, selon la précision spécifiée.  
 
 ### <a name="mod"></a>Mod
 
-Retourne la partie fractionnaire des valeurs du **Jeu de colonnes**, à la précision spécifiée.  
+Renvoie la partie fractionnaire des valeurs figurant dans le **jeu de colonnes**, selon la précision spécifiée.  
 
 ### <a name="quotient"></a>Quotient
 
-Retourne la partie fractionnaire des valeurs du **Jeu de colonnes**, à la précision spécifiée.  
+Renvoie la partie fractionnaire des valeurs figurant dans le **jeu de colonnes**, selon la précision spécifiée.  
 
-### <a name="remainder"></a>Remainder
+### <a name="remainder"></a>Reste
 
-Retourne le reste des valeurs du **Jeu de colonnes**.  
+Renvoie le reste des valeurs figurant dans le **jeu de colonnes**.  
 
 ### <a name="rounddigits"></a>RoundDigits
 
-Retourne les valeurs du **Jeu de colonnes**, arrondies par la règle 4/5 au nombre de chiffres spécifié.  
+Renvoie les valeurs figurant dans le **jeu de colonnes**, arrondies selon la règle des 4/5 au nombre de chiffres spécifié.  
 
 ### <a name="rounddown"></a>RoundDown
 
-Retourne les valeurs du **Jeu de colonnes**, arrondies au nombre de chiffres spécifié inférieur.  
+Renvoie les valeurs figurant dans le **jeu de colonnes**, arrondies à la valeur inférieure comportant le nombre de chiffres spécifié.  
 
 ### <a name="roundup"></a>RoundUp
 
-Retourne les valeurs du **Jeu de colonnes**, arrondies au nombre de chiffres spécifié supérieur.  
+Renvoie les valeurs figurant dans le **jeu de colonnes**, arrondies à la valeur supérieure comportant le nombre de chiffres spécifié.  
 
 ### <a name="toeven"></a>ToEven
 
-Retourne les valeurs du **Jeu de colonnes** arrondies au nombre entier pair le plus proche.  
+Renvoie les valeurs figurant dans **Jeu de colonnes**, arrondies au nombre pair entier le plus proche.  
 
 ### <a name="toodd"></a>ToOdd
 
-Retourne les valeurs du **Jeu de colonnes** arrondies au nombre entier impair le plus proche.  
+Renvoie les valeurs figurant dans **Jeu de colonnes**, arrondies au nombre impair entier le plus proche.  
 
 ### <a name="truncate"></a>Tronquer
 
-Tronque les valeurs du **Jeu de colonnes** en supprimant tous les chiffres non autorisés par la précision spécifiée.  
+Tronque les valeurs figurant dans **Jeu de colonnes** en supprimant tous les chiffres non autorisés par la précision spécifiée.  
   
 ## <a name="special-math-functions"></a>Fonctions mathématiques spéciales
 
@@ -360,7 +360,7 @@ La fonction d’erreur (également appelée fonction d’erreur de Gauss) est un
 
 Retourne la valeur de la fonction d’erreur complémentaire.  
 
-Erfc est défini par 1 – erf(x).  
+`Erfc` est défini par 1 – erf(x).  
 
 ### <a name="erfscaled"></a>ErfScaled
 
@@ -370,7 +370,7 @@ La version normalisée de la fonction d’erreur peut être utilisée pour évit
 
 ### <a name="erfinverse"></a>ErfInverse
 
-Retourne la valeur de la fonction erf inverse.  
+Retourne la valeur de la fonction `erf` inverse.  
 
 ### <a name="exponentialintegralein"></a>ExponentialIntegralEin
 
@@ -536,7 +536,7 @@ Calcule la sécante des valeurs de colonne, en degrés.
 
 Calcule la sécante hyperbolique des valeurs de colonne.  
 
-### <a name="sign"></a>Sign (Signer)
+### <a name="sign"></a>Signer
 
 Retourne le signe des valeurs de colonne.  
 

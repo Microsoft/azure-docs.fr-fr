@@ -3,12 +3,12 @@ title: Automatiser les processus Azure Application Insights en utilisant Logic A
 description: Découvrez comment automatiser rapidement des processus reproductibles en ajoutant le connecteur Application Insights à votre application logique.
 ms.topic: conceptual
 ms.date: 03/11/2019
-ms.openlocfilehash: 4a0944e661932d86fac75f78c4faf5be751806c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6406c2e6fb933c561a8ae54009499768c81a204
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79473164"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90970868"
 ---
 # <a name="automate-application-insights-processes-by-using-logic-apps"></a>Automatiser les processus Application Insights en utilisant Logic Apps
 
@@ -19,7 +19,7 @@ Vous devez exécuter à plusieurs reprises les mêmes requêtes sur vos données
 
 Avec cette intégration, vous pouvez automatiser de nombreux processus sans écrire la moindre ligne de code. Vous pouvez créer une application logique avec le connecteur Application Insights pour automatiser rapidement tous les processus Application Insights. 
 
-Vous pouvez également ajouter des actions. La fonctionnalité Logic Apps d’Azure App Service met à votre disposition des centaines d’actions possibles. Par exemple, en utilisant une application logique, vous pouvez automatiquement envoyer une notification par e-mail ou créer un bogue dans Azure DevOps. Vous pouvez également utiliser l’un des nombreux [modèles](https://docs.microsoft.com/azure/logic-apps/logic-apps-use-logic-app-templates) disponibles pour contribuer à accélérer le processus de création de votre application logique. 
+Vous pouvez également ajouter des actions. La fonctionnalité Logic Apps d’Azure App Service met à votre disposition des centaines d’actions possibles. Par exemple, en utilisant une application logique, vous pouvez automatiquement envoyer une notification par e-mail ou créer un bogue dans Azure DevOps. Vous pouvez également utiliser l’un des nombreux [modèles](../../logic-apps/logic-apps-create-logic-apps-from-templates.md) disponibles pour contribuer à accélérer le processus de création de votre application logique. 
 
 ## <a name="create-a-logic-app-for-application-insights"></a>Créer une application logique pour Application Insights
 
@@ -53,7 +53,7 @@ Dans ce didacticiel, vous allez apprendre à créer une application logique qui 
 
 Pour cette étape, vous avez besoin d’un ID d’application et d’une clé d’API pour votre ressource. Vous pouvez les récupérer sur le portail Azure, comme illustré dans le schéma suivant :
 
-![ID d’application dans le portail Azure](./media/automate-with-logic-apps/5apiaccess.png)
+![Capture d’écran montrant la page accès d’API dans le portail Azure avec le bouton Créer une clé API sélectionné.](./media/automate-with-logic-apps/5apiaccess.png)
 
 ![ID d’application dans le portail Azure](./media/automate-with-logic-apps/6apikey.png)
 
@@ -103,7 +103,7 @@ Lorsque vous créez vos propres requêtes, vérifiez qu’elles fonctionnent cor
     
    d. Cliquez sur la liste déroulante **Ajouter un nouveau paramètre**, puis sélectionnez Pièces jointes et Est au format HTML.
 
-      ![Configuration d’Office 365 Outlook](./media/automate-with-logic-apps/10emailbody.png)
+      ![Capture d’écran montrant la fenêtre Envoyer un e-mail avec la zone Corps en surbrillance et le menu Contenu dynamique avec le Corps en surbrillance sur le côté droit.](./media/automate-with-logic-apps/10emailbody.png)
 
       ![Configuration d’Office 365 Outlook](./media/automate-with-logic-apps/11emailparameter.png)
 
@@ -130,14 +130,10 @@ Lorsque votre application logique s’exécute, les destinataires que vous avez 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez la création de [requêtes Analytics](../../azure-monitor/log-query/get-started-queries.md).
-- Découvrez plus en détail les [applications logiques](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps).
+- Découvrez la création de [requêtes Analytics](../log-query/get-started-queries.md).
+- Découvrez plus en détail les [applications logiques](../../logic-apps/logic-apps-overview.md).
 
 
 
 <!--Link references-->
-
-
-
-
 

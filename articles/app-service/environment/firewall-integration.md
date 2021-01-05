@@ -4,21 +4,21 @@ description: Découvrez comment s’intégrer au pare-feu Azure pour sécuriser 
 author: ccompy
 ms.assetid: 955a4d84-94ca-418d-aa79-b57a5eb8cb85
 ms.topic: article
-ms.date: 03/31/2020
+ms.date: 09/24/2020
 ms.author: ccompy
-ms.custom: seodec18
-ms.openlocfilehash: 4c25c64268b38e5929c73891f7c48e79b9b8593e
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.custom: seodec18, references_regions
+ms.openlocfilehash: e5f9cd361d4f130d725f608614159d67fb7b56d1
+ms.sourcegitcommit: daab0491bbc05c43035a3693a96a451845ff193b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82856046"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93026358"
 ---
 # <a name="locking-down-an-app-service-environment"></a>Verrouiller un environnement App Service
 
 L’environnement ASE (App Service Environment) présente des dépendances externes auxquelles il doit accéder pour fonctionner correctement. L’environnement ASE se trouve dans le réseau virtuel Azure (VNet) des clients. Les clients doivent autoriser le trafic des dépendances de l’environnement ASE, ce qui représente un problème pour ceux qui souhaitent verrouiller tous les sorties provenant de leur réseau virtuel.
 
-Un certain nombre de points de terminaison entrants sont utilisés pour gérer un environnement ASE. Le trafic de gestion entrant ne peut pas être envoyé via un dispositif de pare-feu. Les adresses sources de ce trafic sont connues et publiées dans le document [Adresses de gestion App Service Environment](https://docs.microsoft.com/azure/app-service/environment/management-addresses). Une balise de service nommée AppServiceManagement peut également être utilisée avec les groupes de sécurité réseau afin de sécuriser le trafic entrant.
+Un certain nombre de points de terminaison entrants sont utilisés pour gérer un environnement ASE. Le trafic de gestion entrant ne peut pas être envoyé via un dispositif de pare-feu. Les adresses sources de ce trafic sont connues et publiées dans le document [Adresses de gestion App Service Environment](./management-addresses.md). Une balise de service nommée AppServiceManagement peut également être utilisée avec les groupes de sécurité réseau afin de sécuriser le trafic entrant.
 
 Les dépendances sortantes de l’environnement ASE sont presque entièrement définies avec des noms FQDN, qui n’ont pas d’adresses statiques derrière eux. L’absence d’adresses statiques signifie que les groupes de sécurité réseau ne peuvent pas être utilisés pour verrouiller le trafic sortant d’un environnement ASE. Les adresses changent assez souvent et il n’est donc pas possible de définir des règles basées sur la résolution actuelle et de les utiliser pour créer des groupes NSG. 
 
@@ -55,21 +55,21 @@ Les étapes pour verrouiller les sorties de votre environnement ASE existant ave
 
    ![sélectionner les points de terminaison de service][2]
   
-1. Créez un sous-réseau nommé AzureFirewallSubnet dans le réseau virtuel où se trouve votre environnement ASE. Créez le pare-feu Azure en vous aidant des instructions fournies dans la [documentation sur le pare-feu Azure](https://docs.microsoft.com/azure/firewall/).
+1. Créez un sous-réseau nommé AzureFirewallSubnet dans le réseau virtuel où se trouve votre environnement ASE. Créez le pare-feu Azure en vous aidant des instructions fournies dans la [documentation sur le pare-feu Azure](../../firewall/index.yml).
 
 1. Dans Interface utilisateur du pare-feu Azure > Règles > Collection de règles d’application, sélectionnez Ajouter une collection de règles d’application. Choisissez un nom, une priorité et l’action Autoriser. Dans la section Balises FQDN, entrez un nom, définissez les adresses sources sur * et sélectionnez les balises FQDN App Service Environment et Windows Update. 
    
    ![Ajouter une règle d’application][1]
    
-1. Dans Interface utilisateur du pare-feu Azure > Règles > Collection de règles de réseau, sélectionnez Ajouter une collection de règles de réseau. Choisissez un nom, une priorité et l’action Autoriser. Dans la section Règles, sous Adresses IP, entrez un nom, sélectionnez **N’importe lequel**, définissez les adresses sources et de destination sur *, et définissez les ports sur 123. Cette règle permet au système de synchroniser l’horloge à l’aide de NTP. Créez une autre règle de la même manière en définissant cette fois le port 12000 pour faciliter l’identification des éventuels problèmes système. 
+1. Dans Interface utilisateur du pare-feu Azure > Règles > Collection de règles de réseau, sélectionnez Ajouter une collection de règles de réseau. Choisissez un nom, une priorité et l’action Autoriser. Dans la section Règles, sous Adresses IP, entrez un nom, sélectionnez **N’importe lequel** comme protocole, définissez les adresses source et de destination sur *, et définissez les ports sur 123. Cette règle permet au système de synchroniser l’horloge à l’aide de NTP. Créez une autre règle de la même manière en définissant cette fois le port 12000 pour faciliter l’identification des éventuels problèmes système. 
 
    ![Ajouter une règle de réseau NTP][3]
    
-1. Dans Interface utilisateur du pare-feu Azure > Règles > Collection de règles de réseau, sélectionnez Ajouter une collection de règles de réseau. Choisissez un nom, une priorité et l’action Autoriser. Dans la section Règles, sous Balises de service, indiquez un nom, sélectionnez un protocole **Quelconque**, définissez * sur Adresses sources, sélectionnez une balise de service AzureMonitor et définissez les ports sur 80, 443. Cette règle permet au système de fournir à Azure Monitor des informations d'intégrité et des métriques.
+1. Dans Interface utilisateur du pare-feu Azure > Règles > Collection de règles de réseau, sélectionnez Ajouter une collection de règles de réseau. Choisissez un nom, une priorité et l’action Autoriser. Dans la section Règles, sous Balises de service, indiquez un nom, sélectionnez un protocole **Quelconque** , définissez * sur Adresses sources, sélectionnez une balise de service AzureMonitor et définissez les ports sur 80, 443. Cette règle permet au système de fournir à Azure Monitor des informations d'intégrité et des métriques.
 
    ![Ajouter une règle de réseau de balise de service NTP][6]
    
-1. Créez une table de routage avec les adresses de gestion provenant des [adresses de gestion App Service Environment]( https://docs.microsoft.com/azure/app-service/environment/management-addresses) avec un tronçon suivant Internet. Les entrées de la table de routage sont nécessaires pour éviter des problèmes de routage asymétrique. Ajoutez des routes pour les dépendances d’adresse IP indiquées ci-dessous dans les dépendances d’adresse IP avec un tronçon suivant Internet. Ajoutez une route d’appliance virtuelle à votre table de routage pour 0.0.0.0/0 avec comme tronçon suivant l’adresse IP privée de votre pare-feu Azure. 
+1. Créez une table de routage avec les adresses de gestion provenant des [adresses de gestion App Service Environment]( ./management-addresses.md) avec un tronçon suivant Internet. Les entrées de la table de routage sont nécessaires pour éviter des problèmes de routage asymétrique. Ajoutez des routes pour les dépendances d’adresse IP indiquées ci-dessous dans les dépendances d’adresse IP avec un tronçon suivant Internet. Ajoutez une route d’appliance virtuelle à votre table de routage pour 0.0.0.0/0 avec comme tronçon suivant l’adresse IP privée de votre pare-feu Azure. 
 
    ![Créer une table de routage][4]
    
@@ -77,7 +77,7 @@ Les étapes pour verrouiller les sorties de votre environnement ASE existant ave
 
 #### <a name="deploying-your-ase-behind-a-firewall"></a>Déployer votre environnement ASE derrière un pare-feu
 
-Les étapes à suivre pour déployer votre environnement ASE derrière un pare-feu sont les mêmes que celles pour configurer votre environnement ASE existant avec un pare-feu Azure, sauf que vous devez créer votre sous-réseau ASE, puis effectuer les étapes précédentes. Pour créer votre environnement ASE dans un sous-réseau existant, utilisez un modèle Resource Manager, comme décrit dans [Créer un ASE à l’aide d’un modèle Azure Resource Manager](https://docs.microsoft.com/azure/app-service/environment/create-from-template).
+Les étapes à suivre pour déployer votre environnement ASE derrière un pare-feu sont les mêmes que celles pour configurer votre environnement ASE existant avec un pare-feu Azure, sauf que vous devez créer votre sous-réseau ASE, puis effectuer les étapes précédentes. Pour créer votre environnement ASE dans un sous-réseau existant, utilisez un modèle Resource Manager, comme décrit dans [Créer un ASE à l’aide d’un modèle Azure Resource Manager](./create-from-template.md).
 
 ## <a name="application-traffic"></a>Trafic des applications 
 
@@ -88,7 +88,7 @@ Les étapes ci-dessus permettent à votre environnement ASE de fonctionner sans 
 
 Si vos applications ont des dépendances, celles-ci doivent être ajoutées à votre pare-feu Azure. Créez des règles d’application pour autoriser le trafic HTTP/HTTPS et des règles de réseau pour tout le reste. 
 
-Si vous connaissez la plage d’adresses d’où provient le trafic de demande de vos applications, vous pouvez l’ajouter dans la table de routage qui est affectée à votre sous-réseau ASE. Si la plage d’adresses est grande ou non spécifiée, vous pouvez utiliser une appliance réseau comme la passerelle Application Gateway qui vous donnera une adresse à ajouter à votre table de routage. Pour plus d’informations sur la configuration d’une passerelle d’application avec votre environnement ASE ILB, lisez [Intégration de votre environnement App Service ILB à une passerelle d’application](https://docs.microsoft.com/azure/app-service/environment/integrate-with-application-gateway)
+Si vous connaissez la plage d’adresses d’où provient le trafic de demande de vos applications, vous pouvez l’ajouter dans la table de routage qui est affectée à votre sous-réseau ASE. Si la plage d’adresses est grande ou non spécifiée, vous pouvez utiliser une appliance réseau comme la passerelle Application Gateway qui vous donnera une adresse à ajouter à votre table de routage. Pour plus d’informations sur la configuration d’une passerelle d’application avec votre environnement ASE ILB, lisez [Intégration de votre environnement App Service ILB à une passerelle d’application](./integrate-with-application-gateway.md)
 
 Cette utilisation de la passerelle Application Gateway est un exemple de configuration de votre système. Si vous aviez suivi ce chemin, vous auriez dû ajouter une route dans la table de routage du sous-réseau ASE pour permettre le retour direct du trafic envoyé à Application Gateway. 
 
@@ -96,9 +96,11 @@ Cette utilisation de la passerelle Application Gateway est un exemple de configu
 
 Le Pare-feu Azure peut envoyer des journaux d’activité aux services Stockage Azure, Event Hub ou Azure Monitor. Pour intégrer votre application avec n’importe quelle destination prise en charge, accédez au portail Pare-feu Azure &gt; Journaux de diagnostic, puis activez les journaux d’activité pour la destination choisie. Si vous intégrez des journaux d’activité Azure Monitor, vous pouvez suivre dans les journaux d’activité tout le trafic envoyé au Pare-feu Azure. Pour voir le trafic refusé, ouvrez votre portail d’espace de travail Log Analytics &gt; Journaux d’activité et entrez une requête comme celle-ci 
 
-    AzureDiagnostics | where msg_s contains "Deny" | where TimeGenerated >= ago(1h)
- 
-L’intégration de votre pare-feu Azure à des journaux d’activité Azure Monitor est utile quand vous préparez une application sans connaître toutes ses dépendances. Pour en savoir plus sur les journaux d’activité Azure Monitor, consultez [Analyser les données de journal d’activité dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/log-query-overview).
+```kusto
+AzureDiagnostics | where msg_s contains "Deny" | where TimeGenerated >= ago(1h)
+```
+
+L’intégration de votre pare-feu Azure à des journaux d’activité Azure Monitor est utile quand vous préparez une application sans connaître toutes ses dépendances. Pour en savoir plus sur les journaux d’activité Azure Monitor, consultez [Analyser les données de journal d’activité dans Azure Monitor](../../azure-monitor/log-query/log-query-overview.md).
  
 ## <a name="dependencies"></a>Les dépendances
 
@@ -153,6 +155,9 @@ Avec un pare-feu Azure, tout ce qui suit est automatiquement configuré avec les
 |wdcpalt.microsoft.com:443 |
 |wdcp.microsoft.com:443 |
 |ocsp.msocsp.com:443 |
+|ocsp.msocsp.com:80 |
+|oneocsp.microsoft.com:80 |
+|oneocsp.microsoft.com:443 |
 |mscrl.microsoft.com:443 |
 |mscrl.microsoft.com:80 |
 |crl.microsoft.com:443 |
@@ -160,6 +165,7 @@ Avec un pare-feu Azure, tout ce qui suit est automatiquement configuré avec les
 |www.thawte.com:443 |
 |crl3.digicert.com:80 |
 |ocsp.digicert.com:80 |
+|ocsp.digicert.com:443 |
 |csc3-2009-2.crl.verisign.com:80 |
 |crl.verisign.com:80 |
 |ocsp.verisign.com:80 |
@@ -220,6 +226,7 @@ Avec un pare-feu Azure, tout ce qui suit est automatiquement configuré avec les
 |rteventservice.trafficmanager.net:443 |
 |ctldl.windowsupdate.com:80 |
 |ctldl.windowsupdate.com:443 |
+|global-dsms.dsms.core.windows.net:443 |
 
 #### <a name="wildcard-httphttps-dependencies"></a>Dépendances HTTP/HTTPS avec caractères génériques 
 
@@ -246,8 +253,11 @@ Avec un pare-feu Azure, tout ce qui suit est automatiquement configuré avec les
 |download.mono-project.com:80 |
 |packages.treasuredata.com:80|
 |security.ubuntu.com:80 |
+|oryx-cdn.microsoft.io:443 |
 | \*.cdn.mscr.io:443 |
+| \*.data.mcr.microsoft.com:443 |
 |mcr.microsoft.com:443 |
+|\*.data.mcr.microsoft.com:443 |
 |packages.fluentbit.io:80 |
 |packages.fluentbit.io:443 |
 |apt-mo.trafficmanager.net:80 |
@@ -265,7 +275,7 @@ Avec un pare-feu Azure, tout ce qui suit est automatiquement configuré avec les
 
 ## <a name="us-gov-dependencies"></a>Dépendances du gouvernement des États-Unis
 
-Pour les environnements ASE des régions US Gov, suivez les instructions contenues à la section [Configuration du pare-feu Azure avec votre environnement ASE](https://docs.microsoft.com/azure/app-service/environment/firewall-integration#configuring-azure-firewall-with-your-ase) de ce document afin de configurer un Pare-feu Azure avec votre environnement ASE.
+Pour les environnements ASE des régions US Gov, suivez les instructions contenues à la section [Configuration du pare-feu Azure avec votre environnement ASE](#configuring-azure-firewall-with-your-ase) de ce document afin de configurer un Pare-feu Azure avec votre environnement ASE.
 
 Si vous souhaitez utiliser un appareil autre que Pare-feu Azure dans US Gov 
 
@@ -346,10 +356,9 @@ Linux n’est pas disponible dans les régions US Gov, et n'est dès lors pas r�
 |management.core.usgovcloudapi.net:80 |
 |management.usgovcloudapi.net:80 |
 |maupdateaccountff.blob.core.usgovcloudapi.net:80 |
-|mscrl.microsoft.com
-|ocsp.digicert.0 |
-|ocsp.msocsp.co|
-|ocsp.verisign.0 |
+|mscrl.microsoft.com:80
+|ocsp.digicert.com:80 |
+|ocsp.verisign.com:80 |
 |rteventse.trafficmanager.net:80 |
 |settings-n.data.microsoft.com:80 |
 |shavamafestcdnprod1.azureedge.net:80 |
@@ -388,6 +397,7 @@ Linux n’est pas disponible dans les régions US Gov, et n'est dès lors pas r�
 |definitionupdates.microsoft.com:443 |
 |download.windowsupdate.com:443 |
 |fairfax.warmpath.usgovcloudapi.net:443 |
+|gcs.monitoring.core.usgovcloudapi.net:443 |
 |flighting.cp.wd.microsoft.com:443 |
 |gcwsprodgmdm2billing.queue.core.usgovcloudapi.net:443 |
 |gcwsprodgmdm2billing.table.core.usgovcloudapi.net:443 |
@@ -407,6 +417,9 @@ Linux n’est pas disponible dans les régions US Gov, et n'est dès lors pas r�
 |mscrl.microsoft.com:443 |
 |ocsp.digicert.com:443 |
 |ocsp.msocsp.com:443 |
+|ocsp.msocsp.com:80 |
+|oneocsp.microsoft.com:80 |
+|oneocsp.microsoft.com:443 |
 |ocsp.verisign.com:443 |
 |rteventservice.trafficmanager.net:443 |
 |settings-win.data.microsoft.com:443 |
@@ -418,6 +431,7 @@ Linux n’est pas disponible dans les régions US Gov, et n'est dès lors pas r�
 |www.microsoft.com:443 |
 |www.msftconnecttest.com:443 |
 |www.thawte.com:443 |
+|global-dsms.dsms.core.usgovcloudapi.net:443 |
 
 <!--Image references-->
 [1]: ./media/firewall-integration/firewall-apprule.png

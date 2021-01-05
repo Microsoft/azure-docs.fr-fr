@@ -1,26 +1,26 @@
 ---
-title: Inscrire un appareil X.509 auprès du service Azure Device Provisioning avec C#
+title: Démarrage rapide – Inscrire un appareil X.509 auprès du service Azure Device Provisioning à l’aide de C#
 description: Ce démarrage rapide utilise des inscriptions de groupe. Dans ce guide de démarrage rapide, vous inscrivez des appareils X.509 auprès du service Azure IoT Hub Device Provisioning (DPS) avec C#.
 author: wesmc7777
 ms.author: wesmc
-ms.date: 11/08/2019
+ms.date: 09/28/2020
 ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
-ms.custom: mvc
-ms.openlocfilehash: 64bc3921a606ab3211173b46b268ded53952c8bb
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-csharp
+ms.openlocfilehash: 9fc34532818a742ef67e4b2532966874d083199d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75434657"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94959847"
 ---
 # <a name="quickstart-enroll-x509-devices-to-the-device-provisioning-service-using-c"></a>Démarrage rapide : inscrire des appareils X.509 auprès du service Device Provisioning à l’aide de C#
 
 [!INCLUDE [iot-dps-selector-quick-enroll-device-x509](../../includes/iot-dps-selector-quick-enroll-device-x509.md)]
 
-Ce démarrage rapide montre comment utiliser C# pour créer par programmation un [Groupe d’inscriptions](concepts-service.md#enrollment-group) qui utilise des certificats racine ou intermédiaire d’autorité de certification X.509. Le groupe d’inscription est créé avec le [SDK Microsoft Azure IoT pour .NET](https://github.com/Azure/azure-iot-sdk-csharp) et un exemple d’application C# .NET Core. Un groupe d’inscription contrôle l’accès au service d’approvisionnement pour les appareils qui partagent un certificat de signature commun dans leur chaîne de certificats. Pour en savoir plus, voir [Contrôle de l’accès des appareils au service de provisionnement avec des certificats X.509](./concepts-security.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates). Pour plus d’informations sur l’utilisation d’une infrastructure de clé publique (PKI) basée sur le certificat X.509 avec Azure IoT Hub et le service Device Provisioning, consultez [Vue d’ensemble d’un certificat d’autorité de certification X.509](https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview). 
+Ce démarrage rapide montre comment utiliser C# pour créer par programmation un [Groupe d’inscriptions](concepts-service.md#enrollment-group) qui utilise des certificats racine ou intermédiaire d’autorité de certification X.509. Le groupe d’inscription est créé avec le [SDK Microsoft Azure IoT pour .NET](https://github.com/Azure/azure-iot-sdk-csharp) et un exemple d’application C# .NET Core. Un groupe d’inscription contrôle l’accès au service d’approvisionnement pour les appareils qui partagent un certificat de signature commun dans leur chaîne de certificats. Pour en savoir plus, voir [Contrôle de l’accès des appareils au service de provisionnement avec des certificats X.509](./concepts-x509-attestation.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates). Pour plus d’informations sur l’utilisation d’une infrastructure de clé publique (PKI) basée sur le certificat X.509 avec Azure IoT Hub et le service Device Provisioning, consultez [Vue d’ensemble d’un certificat d’autorité de certification X.509](../iot-hub/iot-hub-x509ca-overview.md). 
 
 Ce guide de démarrage rapide suppose que vous avez déjà créé un hub IoT et une instance du service Device Provisioning. Si vous n’avez pas encore créé ces ressources, suivez le guide de démarrage rapide [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md) avant de continuer cet article.
 
@@ -44,7 +44,7 @@ Le [SDK C Azure IoT](https://github.com/Azure/azure-iot-sdk-c) contient des outi
 > Utilisez les certificats créés avec les outils du SDK seulement pour le test de développements.
 > N’utilisez pas ces certificats en production.
 > Ils contiennent des mots de passe codés en dur, comme *1234*, qui expirent après 30 jours.
-> Pour en savoir plus sur l’obtention de certificats appropriés pour la production, consultez [Guide pratique pour obtenir un certificat d’autorité de certification X.509](https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview#how-to-get-an-x509-ca-certificate) dans la documentation Azure IoT Hub.
+> Pour en savoir plus sur l’obtention de certificats appropriés pour la production, consultez [Guide pratique pour obtenir un certificat d’autorité de certification X.509](../iot-hub/iot-hub-x509ca-overview.md#how-to-get-an-x509-ca-certificate) dans la documentation Azure IoT Hub.
 >
 
 Pour utiliser ces outils de test pour générer des certificats, effectuez les étapes suivantes :
@@ -79,7 +79,7 @@ Pour l’exemple de ce démarrage rapide, vous avez besoin de la chaîne de conn
 
 ## <a name="create-the-enrollment-group-sample"></a>Créer un exemple de groupe d’inscription 
 
-Cette section montre comment créer une application console .NET Core qui ajoute un groupe d’inscription à votre service de provisionnement. Avec quelques modifications, vous pouvez également suivre ces étapes pour créer une application console [Windows IoT Core](https://developer.microsoft.com/en-us/windows/iot) pour ajouter le groupe d’inscription. Pour en savoir plus sur le développement avec IoT Core, consultez la [Documentation pour développeurs Windows IoT Core](https://docs.microsoft.com/windows/iot-core/).
+Cette section montre comment créer une application console .NET Core qui ajoute un groupe d’inscription à votre service de provisionnement. Avec quelques modifications, vous pouvez également suivre ces étapes pour créer une application console [Windows IoT Core](https://developer.microsoft.com/en-us/windows/iot) pour ajouter le groupe d’inscription. Pour en savoir plus sur le développement avec IoT Core, consultez la [Documentation pour développeurs Windows IoT Core](/windows/iot-core/).
 
 1. Ouvrez Visual Studio et sélectionnez **Créer un projet**. Dans **Créer un projet**, choisissez le modèle de projet **Application console (.NET Core)** pour C#, puis sélectionnez **Suivant**.
 
@@ -159,12 +159,15 @@ Cette section montre comment créer une application console .NET Core qui ajoute
    }
    ```
 
-1. Enfin, remplacez le corps de la méthode `Main` par les lignes suivantes :
+1. Enfin, remplacez la méthode `Main` par les lignes suivantes :
 
    ```csharp
-   RunSample().GetAwaiter().GetResult();
-   Console.WriteLine("\nHit <Enter> to exit ...");
-   Console.ReadLine();
+    static async Task Main(string[] args)
+    {
+        await RunSample();
+        Console.WriteLine("\nHit <Enter> to exit ...");
+        Console.ReadLine();
+    }
    ```
 
 1. Générez la solution.

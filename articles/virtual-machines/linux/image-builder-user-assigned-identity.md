@@ -5,20 +5,20 @@ author: cynthn
 ms.author: cynthn
 ms.date: 05/02/2019
 ms.topic: how-to
-ms.service: virtual-machines-linux
+ms.service: virtual-machines
 ms.subservice: imaging
-ms.openlocfilehash: d8e897d2736202f1fb6c5cb8a6497c5c886acef8
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: f5734d4b1871dd285fc83a72631f7d645e0b72ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792426"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91307260"
 ---
 # <a name="create-an-image-and-use-a-user-assigned-managed-identity-to-access-files-in-azure-storage"></a>Créer une image et utiliser une identité managée affectée par l’utilisateur pour accéder aux fichiers dans le stockage Azure 
 
 Le générateur d’images Azure prend en charge l’utilisation de scripts ou la copie de fichiers à partir de plusieurs emplacements, tels que GitHub et le stockage Azure etc. Pour utiliser ces modèles, ceux-ci doivent avoir été accessibles en externe au générateur d’images Azure, toutefois vous pouvez protéger les objets Blob Azure Storage à l’aide de jetons SAS.
 
-Cet article montre comment créer une image personnalisée à l’aide d’Azure VM Image Builder, où le service utilise une [identité managée attribuée par l’utilisateur](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) pour accéder aux fichiers dans le stockage Azure pour la personnalisation de l’image, sans avoir à rendre les fichiers publiquement accessibles, ou pour la configuration de jetons SAS.
+Cet article montre comment créer une image personnalisée à l’aide d’Azure VM Image Builder, où le service utilise une [identité managée attribuée par l’utilisateur](../../active-directory/managed-identities-azure-resources/overview.md) pour accéder aux fichiers dans le stockage Azure pour la personnalisation de l’image, sans avoir à rendre les fichiers publiquement accessibles, ou pour la configuration de jetons SAS.
 
 Dans l’exemple ci-dessous, vous créez deux groupes de ressources, dont l’un est utilisé pour l’image personnalisée et l’autre héberge un compte de stockage Azure contenant un fichier de script. Cela simule un scénario réel, où vous pouvez avoir des artefacts de build, ou des fichiers image dans différents comptes de stockage, en dehors du générateur d’images. Vous allez créer une identité affectée par l’utilisateur, puis accorder ces autorisations de lecture sur le fichier de script. Toutefois, vous ne définirez pas d’accès public à ce fichier. Vous allez ensuite utiliser l’outil de personnalisation de l’interpréteur de commandes pour télécharger et exécuter ce script à partir du compte de stockage.
 
@@ -42,9 +42,11 @@ az feature show --namespace Microsoft.VirtualMachineImages --name VirtualMachine
 
 Vérifiez votre inscription.
 
+
 ```azurecli-interactive
 az provider show -n Microsoft.VirtualMachineImages | grep registrationState
-
+az provider show -n Microsoft.KeyVault | grep registrationState
+az provider show -n Microsoft.Compute | grep registrationState
 az provider show -n Microsoft.Storage | grep registrationState
 ```
 
@@ -52,7 +54,8 @@ Si elle n’est pas inscrite, exécutez la commande suivante :
 
 ```azurecli-interactive
 az provider register -n Microsoft.VirtualMachineImages
-
+az provider register -n Microsoft.Compute
+az provider register -n Microsoft.KeyVault
 az provider register -n Microsoft.Storage
 ```
 
@@ -90,6 +93,37 @@ az group create -n $imageResourceGroup -l $location
 az group create -n $strResourceGroup -l $location
 ```
 
+Créez une identité affectée par l’utilisateur et définir des autorisations sur le groupe de ressources.
+
+Image Builder utilise l’[identité de l’utilisateur](../../active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm.md#user-assigned-managed-identity) fourni pour injecter l’image dans le groupe de ressources. Dans cet exemple, vous allez créer une définition de rôle Azure qui dispose des actions granulaires pour distribuer l’image. La définition de rôle sera ensuite affectée à l’identité de l’utilisateur.
+
+```console
+# create user assigned identity for image builder to access the storage account where the script is located
+idenityName=aibBuiUserId$(date +'%s')
+az identity create -g $imageResourceGroup -n $idenityName
+
+# get identity id
+imgBuilderCliId=$(az identity show -g $imageResourceGroup -n $idenityName | grep "clientId" | cut -c16- | tr -d '",')
+
+# get the user identity URI, needed for the template
+imgBuilderId=/subscriptions/$subscriptionID/resourcegroups/$imageResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$idenityName
+
+# download preconfigured role definition example
+curl https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/solutions/12_Creating_AIB_Security_Roles/aibRoleImageCreation.json -o aibRoleImageCreation.json
+
+# update the definition
+sed -i -e "s/<subscriptionID>/$subscriptionID/g" aibRoleImageCreation.json
+sed -i -e "s/<rgName>/$imageResourceGroup/g" aibRoleImageCreation.json
+
+# create role definitions
+az role definition create --role-definition ./aibRoleImageCreation.json
+
+# grant role definition to the user assigned identity
+az role assignment create \
+    --assignee $imgBuilderCliId \
+    --role "Azure Image Builder Service Image Creation Role" \
+    --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
+```
 
 Créez le stockage et copiez-y l’exemple de script à partir de GitHub.
 
@@ -116,35 +150,16 @@ az storage blob copy start \
     --source-uri https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/quickquickstarts/customizeScript.sh
 ```
 
-
-
-Accordez au générateur d’images l’autorisation de créer des ressources dans le groupe de ressources d’image. La valeur `--assignee` est l’ID d’inscription d’application du service Générateur d’images. 
+Accordez au générateur d’images l’autorisation de créer des ressources dans le groupe de ressources d’image. La valeur `--assignee` est l’ID de l’identité de l’utilisateur.
 
 ```azurecli-interactive
-az role assignment create \
-    --assignee cf32a0cc-373c-47c9-9156-0db11f6a6dfc \
-    --role Contributor \
-    --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
-```
-
-
-## <a name="create-user-assigned-managed-identity"></a>Créer une identité managée affectée par l’utilisateur
-
-Créer l’identité et affecter des autorisations pour le compte de stockage de script. Pour plus d’informations, voir [Identité managée affectée par l’utilisateur](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm#user-assigned-managed-identity).
-
-```azurecli-interactive
-# Create the user assigned identity 
-identityName=aibBuiUserId$(date +'%s')
-az identity create -g $imageResourceGroup -n $identityName
-# assign the identity permissions to the storage account, so it can read the script blob
-imgBuilderCliId=$(az identity show -g $imageResourceGroup -n $identityName | grep "clientId" | cut -c16- | tr -d '",')
 az role assignment create \
     --assignee $imgBuilderCliId \
     --role "Storage Blob Data Reader" \
     --scope /subscriptions/$subscriptionID/resourceGroups/$strResourceGroup/providers/Microsoft.Storage/storageAccounts/$scriptStorageAcc/blobServices/default/containers/$scriptStorageAccContainer 
-# create the user identity URI
-imgBuilderId=/subscriptions/$subscriptionID/resourcegroups/$imageResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$identityName
 ```
+
+
 
 
 ## <a name="modify-the-example"></a>Modifier l’exemple
@@ -223,6 +238,13 @@ Vous devriez voir que l’image a été personnalisée avec un Message du jour d
 Lorsque vous avez terminé, vous pouvez supprimer les ressources si elles ne sont plus nécessaires.
 
 ```azurecli-interactive
+
+az role definition delete --name "$imageRoleDefName"
+```azurecli-interactive
+az role assignment delete \
+    --assignee $imgBuilderCliId \
+    --role "$imageRoleDefName" \
+    --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
 az identity delete --ids $imgBuilderId
 az resource delete \
     --resource-group $imageResourceGroup \
@@ -234,4 +256,4 @@ az group delete -n $strResourceGroup
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous avez des problèmes d’utilisation de générateur d’images Azure, consultez [Résolution des problèmes](https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md?toc=%2fazure%2fvirtual-machines%context%2ftoc.json).
+Si vous avez des problèmes d’utilisation de générateur d’images Azure, consultez [Résolution des problèmes](image-builder-troubleshoot.md?toc=%2fazure%2fvirtual-machines%context%2ftoc.json).

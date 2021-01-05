@@ -3,7 +3,7 @@ title: Tutoriel `:` Utiliser une identité managée pour accéder à Azure Data
 description: Un didacticiel qui vous montre comment utiliser une identité managée attribuée par le système d’une machine virtuelle Linux pour accéder à Azure Data Lake Store.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
@@ -13,14 +13,14 @@ ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 01/10/2020
-ms.author: markvi
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a0fe442741ae0b8fa817c9ea177ff244a413720e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d465419dfe36fd5dd67abdef22a6f54fba69a98e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75888513"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89267460"
 ---
 # <a name="tutorial-use-a-linux-vm-system-assigned-managed-identity-to-access-azure-data-lake-store"></a>Didacticiel : Utiliser une identité managée attribuée par le système de la machine virtuelle Linux pour accéder à Azure Data Lake Store
 
@@ -40,7 +40,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 ## <a name="grant-access"></a>Accorder l'accès
 
-Cette section montre comment accorder à votre machine virtuelle l’accès à des fichiers et des dossiers dans Azure Data Lake Store. Pour cette étape, vous pouvez utiliser une instance Data Lake Store existante ou bien en créer une. Pour créer une nouvelle instance Data Lake Store via le portail Azure, suivez ce [Démarrage rapide de Azure Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal). Des procédures de démarrage rapide utilisant Azure CLI et Azure PowerShell sont également décrites dans la [Documentation Azure Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview).
+Cette section montre comment accorder à votre machine virtuelle l’accès à des fichiers et des dossiers dans Azure Data Lake Store. Pour cette étape, vous pouvez utiliser une instance Data Lake Store existante ou bien en créer une. Pour créer une nouvelle instance Data Lake Store via le portail Azure, suivez ce [Démarrage rapide de Azure Data Lake Store](../../data-lake-store/data-lake-store-get-started-portal.md). Des procédures de démarrage rapide utilisant Azure CLI et Azure PowerShell sont également décrites dans la [Documentation Azure Data Lake Store](../../data-lake-store/data-lake-store-overview.md).
 
 Dans Data Lake Store, créez un dossier et autorisez l’identité managée attribuée par le système de la machine virtuelle Linux à lire, écrire et exécuter des fichiers dans ce dossier :
 
@@ -56,18 +56,18 @@ Dans Data Lake Store, créez un dossier et autorisez l’identité managée attr
 10. Comme à l’étape 5, sélectionnez **Ajouter**. Dans le champ **Sélectionner**, saisissez le nom de votre machine virtuelle. Sélectionnez votre machine virtuelle à partir des résultats de recherche, puis cliquez sur **Sélectionner**.
 11. Comme à l’étape 6, cliquez sur **Sélectionner les autorisations**. Cliquez sur **Lire**, **Écrire** et **Exécuter**, ajoutez **Ce dossier**, et ajoutez en tant qu’**Une entrée d’autorisation d’accès et une entrée d’autorisation par défaut**. Sélectionnez **OK**.  L’autorisation doit être ajoutée avec succès.
 
-Les identités managées des ressources Azure peuvent désormais effectuer toutes les opérations sur les fichiers du dossier que vous avez créé. Pour plus d’informations sur la gestion de l’accès à Data Lake Store, lisez cet article sur le [Contrôle d’accès dans Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-access-control).
+Les identités managées des ressources Azure peuvent désormais effectuer toutes les opérations sur les fichiers du dossier que vous avez créé. Pour plus d’informations sur la gestion de l’accès à Data Lake Store, lisez cet article sur le [Contrôle d’accès dans Data Lake Store](../../data-lake-store/data-lake-store-access-control.md).
 
 ## <a name="get-an-access-token"></a>Obtention d’un jeton d’accès 
 
-Cette section montre comment obtenir un jeton d’accès et appeler le système de fichiers Data Lake Store. Azure Data Lake Store prenant en charge Azure AD Authentication en mode natif, il peut accepter directement des jetons d’accès obtenus à l’aide d’identités managées attribuées par le système pour les ressources Azure. Pour s’authentifier sur le système de fichiers de Data Lake Store, vous envoyez un jeton d’accès émis par Azure AD pour votre point de terminaison de système de fichiers de Data Lake Store. Le jeton d’accès est un en-tête d’autorisation au format « Porteur \<ACCESS_TOKEN_VALUE\> ».  Pour en savoir plus sur la prise en charge de Data Lake Store pour Azure AD Authentication, lire [Authentification auprès de Data Lake Store à l’aide de Azure Active Directory](https://docs.microsoft.com/azure/data-lake-store/data-lakes-store-authentication-using-azure-active-directory).
+Cette section montre comment obtenir un jeton d’accès et appeler le système de fichiers Data Lake Store. Azure Data Lake Store prenant en charge Azure AD Authentication en mode natif, il peut accepter directement des jetons d’accès obtenus à l’aide d’identités managées attribuées par le système pour les ressources Azure. Pour s’authentifier sur le système de fichiers de Data Lake Store, vous envoyez un jeton d’accès émis par Azure AD pour votre point de terminaison de système de fichiers de Data Lake Store. Le jeton d’accès est un en-tête d’autorisation au format « Porteur \<ACCESS_TOKEN_VALUE\> ».  Pour en savoir plus sur la prise en charge de Data Lake Store pour Azure AD Authentication, lire [Authentification auprès de Data Lake Store à l’aide de Azure Active Directory](../../data-lake-store/data-lakes-store-authentication-using-azure-active-directory.md).
 
 Dans ce didacticiel, vous vous authentifiez sur l’API REST du système de fichiers de Data Lake Store à l’aide de cURL pour effectuer des requêtes REST.
 
 > [!NOTE]
 > Les kits de développement logiciel (SDK) clients du système de fichiers de Data Lake Store ne gèrent pas encore les identités managées pour les ressources Azure.
 
-Pour effectuer cette procédure, vous avez besoin d’un client SSH. Si vous utilisez Windows, vous pouvez utiliser le client SSH dans le [Sous-système Windows pour Linux](https://msdn.microsoft.com/commandline/wsl/about). Si vous avez besoin d’aide pour configurer les clés de votre client SSH, consultez [Comment utiliser les clés SSH avec Windows sur Azure](../../virtual-machines/linux/ssh-from-windows.md), ou [Comment créer et utiliser une paire de clés publique et privée SSH p.ur les machines virtuelles Linux dans Azure](../../virtual-machines/linux/mac-create-ssh-keys.md).
+Pour effectuer cette procédure, vous avez besoin d’un client SSH. Si vous utilisez Windows, vous pouvez utiliser le client SSH dans le [Sous-système Windows pour Linux](/windows/wsl/about). Si vous avez besoin d’aide pour configurer les clés de votre client SSH, consultez [Comment utiliser les clés SSH avec Windows sur Azure](../../virtual-machines/linux/ssh-from-windows.md), ou [Comment créer et utiliser une paire de clés publique et privée SSH p.ur les machines virtuelles Linux dans Azure](../../virtual-machines/linux/mac-create-ssh-keys.md).
 
 1. Dans le portail, accédez à votre machine virtuelle Linux. Dans **Vue d’ensemble**, sélectionnez **Connecter**.  
 2. Connectez-vous à la machine virtuelle à l’aide du client SSH de votre choix. 
@@ -155,4 +155,4 @@ Pour effectuer cette procédure, vous avez besoin d’un client SSH. Si vous uti
 Dans ce didacticiel, vous avez appris à utiliser une identité managée attribuée par le système de la machine virtuelle Linux pour accéder à Azure Data Lake Store. Pour en savoir plus sur Azure Data Lake Store, consultez :
 
 > [!div class="nextstepaction"]
->[Azure Data Lake Store](/azure/data-lake-store/data-lake-store-overview)
+>[Azure Data Lake Store](../../data-lake-store/data-lake-store-overview.md)

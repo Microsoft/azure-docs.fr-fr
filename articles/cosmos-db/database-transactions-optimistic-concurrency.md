@@ -4,21 +4,23 @@ description: Cet article décrit les transactions de base de données et le cont
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 12/04/2019
 ms.reviewer: sngun
-ms.openlocfilehash: d453bb4071c4a6972e01b8f7e90375181caf6d01
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bdfbe5106f220a9fe4a3568709187b9071bc7917
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74806522"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93334274"
 ---
 # <a name="transactions-and-optimistic-concurrency-control"></a>Transactions et contrôle d’accès concurrentiel optimiste
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Les transactions de base de données offrent un modèle de programmation prédictif et sécurisé pour gérer les modifications simultanées des données. Les bases de données relationnelles classiques, telles que SQL Server, vous permettent d’écrire la logique métier à l’aide de procédures stockées et/ou de déclencheurs, et de l’envoyer au serveur pour une exécution directe dans le moteur de base de données. Avec les bases de données relationnelles classiques, vous êtes amené à traiter deux langages de programmation différents : le langage de programmation d’application non transactionnel (JavaScript, Python, C#, Java, etc.) et le langage de programmation transactionnel (par exemple, T-SQL) exécuté en mode natif par la base de données.
 
-Le moteur de base de données dans Azure Cosmos DB prend en charge les transactions entièrement conformes à ACID (atomicité, cohérence, isolation, durabilité) avec isolement de capture instantanée. Toutes les opérations de base de données dans l’étendue de la [partition logique](partition-data.md) d’un conteneur sont exécutées par le biais de transactions dans le moteur de base de données qui est hébergé par le réplica de la partition. Ces opérations comprennent à la fois les opérations d’écriture (mise à jour d’un ou de plusieurs éléments dans la partition logique) et de lecture. Le tableau suivant illustre différents types de transactions et d’opérations :
+Le moteur de base de données dans Azure Cosmos DB prend en charge les transactions entièrement conformes à ACID (atomicité, cohérence, isolation, durabilité) avec isolement de capture instantanée. Toutes les opérations de base de données dans l’étendue de la [partition logique](partitioning-overview.md) d’un conteneur sont exécutées par le biais de transactions dans le moteur de base de données qui est hébergé par le réplica de la partition. Ces opérations comprennent à la fois les opérations d’écriture (mise à jour d’un ou de plusieurs éléments dans la partition logique) et de lecture. Le tableau suivant illustre différents types de transactions et d’opérations :
 
 | **opération**  | **Type d’opération** | **Transaction à un seul ou plusieurs éléments** |
 |---------|---------|---------|
@@ -55,13 +57,14 @@ Les mises à jour simultanées d’un élément sont soumises au contrôle d’a
 
 Chaque élément stocké dans un conteneur Azure Cosmos dispose d’une propriété `_etag` définie par le système. La valeur de `_etag` est automatiquement générée et mise à jour par le serveur chaque fois que l’élément est mis à jour. La propriété `_etag` peut être utilisée avec l’en-tête de requête `if-match` fourni par le client pour permettre au serveur de déterminer si un élément peut être mis à jour de manière conditionnelle. Si la valeur de l’en-tête `if-match` correspond à la valeur de `_etag` au niveau du serveur, l’élément est alors mis à jour. Si la valeur de l’en-tête de requête `if-match` n’est plus actuelle, le serveur rejette l’opération avec un message de réponse de type « HTTP 412 Échec de la condition préalable ». Le client peut alors réextraire l’élément pour acquérir sa version actuelle sur le serveur ou remplacer la version de l’élément sur le serveur par sa propre valeur `_etag` pour l’élément. De plus, la propriété `_etag` peut être utilisée avec l’en-tête `if-none-match` pour déterminer si la nouvelle extraction d’une ressource est nécessaire.
 
-La valeur `_etag` de l’élément change chaque fois que l’élément est mis à jour. Pour les opérations de remplacement d’élément, `if-match` doit être exprimé explicitement dans le cadre des options de requête. Pour obtenir un exemple, consultez l’exemple de code dans [GitHub](https://github.com/Azure/azure-cosmos-dotnet-v3/blob/master/Microsoft.Azure.Cosmos.Samples/Usage/ItemManagement/Program.cs#L578-L674). Les valeurs `_etag` sont implicitement vérifiées pour tous les éléments écrits affectés par la procédure stockée. Si un conflit est détecté, la procédure stockée restaure la transaction et lève une exception. Avec cette méthode, l’ensemble ou aucune des écritures dans la procédure stockée sont appliquées de façon atomique. Il s’agit d’un signal à l’application pour réappliquer les mises à jour et réessayer la demande du client d’origine.
+La valeur `_etag` de l’élément change chaque fois que l’élément est mis à jour. Pour les opérations de remplacement d’élément, `if-match` doit être exprimé explicitement dans le cadre des options de requête. Pour obtenir un exemple, consultez l’exemple de code dans [GitHub](https://github.com/Azure/azure-cosmos-dotnet-v3/blob/master/Microsoft.Azure.Cosmos.Samples/Usage/ItemManagement/Program.cs#L676-L772). Les valeurs `_etag` sont implicitement vérifiées pour tous les éléments écrits affectés par la procédure stockée. Si un conflit est détecté, la procédure stockée restaure la transaction et lève une exception. Avec cette méthode, l’ensemble ou aucune des écritures dans la procédure stockée sont appliquées de façon atomique. Il s’agit d’un signal à l’application pour réappliquer les mises à jour et réessayer la demande du client d’origine.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez plus en détail les transactions de base de données et le contrôle d’accès concurrentiel optimiste dans les articles suivants :
 
-- [Utilisation des bases de données, des conteneurs et des éléments Azure Cosmos](databases-containers-items.md)
+- [Utilisation des bases de données, des conteneurs et des éléments Azure Cosmos](account-databases-containers-items.md)
 - [Niveaux de cohérence](consistency-levels.md)
 - [Types de conflits et stratégies de résolution](conflict-resolution-policies.md)
+- [Utilisation de TransactionalBatch](transactional-batch.md)
 - [Procédures stockées, déclencheurs et fonctions définies par l’utilisateur](stored-procedures-triggers-udfs.md)

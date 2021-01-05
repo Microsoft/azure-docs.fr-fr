@@ -4,19 +4,19 @@ description: Découvrez comment simuler la détection des risques dans Identity 
 services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
-ms.topic: conceptual
-ms.date: 10/18/2019
+ms.topic: how-to
+ms.date: 06/05/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e50e406e74c0b78f41830c4ea7c5b10830002ed3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7eafeaf59757fcda978fa89b4bc2f9882b769e48
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72886692"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94835898"
 ---
 # <a name="simulating-risk-detections-in-identity-protection"></a>Simuler la détection des risques dans Identity Protection
 
@@ -40,7 +40,7 @@ Pour plus d’informations sur chaque détection de risque, voir l’article [Qu
 L’exécution de la procédure ci-après requiert l’utilisation des éléments suivants :
 
 - [Navigateur Tor](https://www.torproject.org/projects/torbrowser.html.en) afin de simuler des adresses IP anonymes. Vous devrez peut-être utiliser une machine virtuelle si votre organisation restreint l’utilisation du navigateur Tor.
-- Compte de test non encore inscrit à Azure Multi-Factor Authentication.
+- Compte de test non encore inscrit à Azure AD Multi-Factor Authentication.
 
 **Pour simuler une connexion depuis une adresse IP anonyme, procédez comme suit**:
 
@@ -61,7 +61,7 @@ La procédure ci-après utilise les éléments nouvellement créés suivants :
 L’exécution de la procédure ci-après requiert l’utilisation d’un compte d’utilisateur présentant :
 
 - un historique de connexions d’au moins 30 jours ;
-- Azure Multi-Factor Authentication activée.
+- Fonctionnalité Azure AD Multi-Factor Authentication activée.
 
 **Pour simuler une connexion depuis un emplacement non connu, procédez comme suit**:
 

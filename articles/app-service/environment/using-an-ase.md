@@ -4,15 +4,15 @@ description: Apprenez à créer, publier et mettre à l’échelle des applicati
 author: ccompy
 ms.assetid: a22450c4-9b8b-41d4-9568-c4646f4cf66b
 ms.topic: article
-ms.date: 3/26/2020
+ms.date: 5/10/2020
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 4565580feeddc2df8f6ed3011302016bb39977b4
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: e4653419d974db2e597111487c64682c75ffc40b
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80586133"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97826002"
 ---
 # <a name="use-an-app-service-environment"></a>Utiliser un environnement App Service
 
@@ -122,15 +122,22 @@ L’URL du Gestionnaire de contrôle des services est utilisée pour accéder à
 
 ### <a name="dns-configuration"></a>Configuration DNS 
 
-Lorsque vous utilisez un environnement ASE externe, les applications effectuées dans votre ASE sont inscrites auprès d’Azure DNS. Avec un environnement ASE ILB, vous devez gérer votre propre service DNS. 
+Lorsque vous utilisez un environnement ASE externe, les applications effectuées dans votre ASE sont inscrites auprès d’Azure DNS. Il n’est pas nécessaire de passer par d’autres étapes dans un ASE externe pour que vos applications soient disponibles publiquement. Avec un environnement ASE ILB, vous devez gérer votre propre service DNS. Vous pouvez effectuer cette opération sur votre propre serveur DNS ou avec des zones privées Azure DNS.
 
-Pour configurer DNS avec votre environnement ASE ILB :
+Pour configurer DNS sur votre propre serveur DNS avec votre ASE ILB :
 
-    create a zone for <ASE name>.appserviceenvironment.net
-    create an A record in that zone that points * to the ILB IP address
-    create an A record in that zone that points @ to the ILB IP address
-    create a zone in <ASE name>.appserviceenvironment.net named scm
-    create an A record in the scm zone that points * to the ILB IP address
+1. créez une zone pour &lt;nom ASE&gt;.appserviceenvironment.net
+1. créez un enregistrement A dans cette zone qui pointe * vers l’adresse IP ILB
+1. créez un enregistrement A dans cette zone qui pointe @ vers l’adresse IP ILB
+1. créez une zone dans le scm nommé &lt;nom ASE&gt;.appserviceenvironment.net
+1. créez un enregistrement A dans la zone scm qui pointe * vers l’adresse IP ILB
+
+Pour configurer DNS dans les zones privées Azure DNS :
+
+1. créez une zone privée Azure DNS nommée &lt;nom ASE&gt;.appserviceenvironment.net
+1. créez un enregistrement A dans cette zone qui pointe * vers l’adresse IP ILB
+1. créez un enregistrement A dans cette zone qui pointe @ vers l’adresse IP ILB
+1. créez un enregistrement A dans cette zone qui pointe *.scm vers l’adresse IP ILB
 
 Les paramètres DNS du suffixe de domaine par défaut de votre ASE ne limitent pas vos applications à être accessibles uniquement par ces noms. Vous pouvez définir un nom de domaine personnalisé sans validation sur vos applications dans un environnement ASE ILB. Si vous souhaitez ensuite créer une zone nommée *contoso.net*, vous pouvez le faire et la pointer vers l’adresse IP ILB. Le nom de domaine personnalisé fonctionne pour les demandes d’application, mais pas pour le site GCL. Le site GCL est disponible uniquement pour *&lt;appname&gt;.scm.&lt;asename&gt;.appserviceenvironment.net*. 
 
@@ -156,7 +163,7 @@ Les points de terminaison de publication pour les applications d’un environnem
 
 ## <a name="storage"></a>Stockage
 
-Un ASE dispose de 1 To de stockage pour toutes les applications qu’il contient. Par défaut, un plan App Service dans la référence SKU de tarification isolée a une limite de 250 Go. Si vous avez au moins cinq plans App Service, veillez à ne pas dépasser la limite de 1 To de l’ASE. Si vous avez besoin de plus que la limite de 250 Go dans un plan App Service, contactez le support pour fixer la limite du plan App Service à un maximum de 1 To. Lorsque la limite du plan est ajustée, il existe toujours une limite de 1 To pour tous les plans App Service dans l’ASE.
+Un ASE dispose de 1 To de stockage pour toutes les applications qu’il contient. Un plan App Service dans la référence SKU de tarification isolée a une limite de 250 Go. Dans un environnement ASE, 250 Go de stockage sont ajoutés par le plan App Service dans la limite de 1 To. Vous pouvez avoir plus de quatre plans App Service, mais aucun espace de stockage supplémentaire n’est ajouté au-delà de 1 To.
 
 ## <a name="logging"></a>Journalisation
 
@@ -189,7 +196,7 @@ Si vous effectuez une intégration avec Log Analytics, vous pouvez voir les jour
 
 **Création d’une alerte**
 
-Pour créer une alerte concernant vos journaux, suivez les instructions de la section [Créer, afficher et gérer des alertes de journal à l’aide d’Azure Monitor][logalerts]. En bref :
+Pour créer une alerte concernant vos journaux, suivez les instructions de la section [Créer, afficher et gérer des alertes de journal à l’aide d’Azure Monitor](../../azure-monitor/platform/alerts-log.md). En bref :
 
 * Ouvrez la page Alertes dans votre portail ASE
 * Sélectionnez **Nouvelle règle d’alerte**
@@ -245,6 +252,30 @@ Pour supprimer un environnement ASE :
 
 1. Sélectionnez **OK**.
 
+## <a name="ase-cli"></a>Interface CLI avec ASE
+
+Il existe des fonctionnalités de ligne de commande permettant d’administrer un environnement ASE.  Les commandes CLI az sont indiquées ci-dessous.
+
+```azurecli
+C:\>az appservice ase --help
+
+Group
+    az appservice ase : Manage App Service Environments v2.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    create         : Create app service environment.
+    delete         : Delete app service environment.
+    list           : List app service environments.
+    list-addresses : List VIPs associated with an app service environment.
+    list-plans     : List app service plans associated with an app service environment.
+    show           : Show details of an app service environment.
+    update         : Update app service environment.
+
+For more specific examples, use: az find "az appservice ase"
+```
+
+
+
 <!--Image references-->
 [1]: ./media/using_an_app_service_environment/usingase-appcreate.png
 [2]: ./media/using_an_app_service_environment/usingase-pricingtiers.png
@@ -261,7 +292,7 @@ Pour supprimer un environnement ASE :
 [ASENetwork]: ./network-info.md
 [UsingASE]: ./using-an-ase.md
 [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
+[NSGs]: ../../virtual-network/network-security-groups-overview.md
 [ConfigureASEv1]: app-service-web-configure-an-app-service-environment.md
 [ASEv1Intro]: app-service-app-service-environment-intro.md
 [Functions]: ../../azure-functions/index.yml
@@ -271,5 +302,5 @@ Pour supprimer un environnement ASE :
 [Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/
 [AppDeploy]: ../deploy-local-git.md
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
-[AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
+[AppGW]: ../../web-application-firewall/ag/ag-overview.md
 [logalerts]: ../../azure-monitor/platform/alerts-log.md

@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: ''
 ms.date: 03/16/2020
 ms.author: tagore
-ms.openlocfilehash: 9338ad86595771c1c70d243250c2d57af5eb7858
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: ae284a6afa1f2e396aef8177229c344b569be6ec
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83683789"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92075669"
 ---
 # <a name="troubleshooting-applications-that-dont-support-tls-12"></a>Résolution des problèmes liés aux applications qui ne prennent pas en charge TLS 1.2
 Cet article décrit comment activer les anciens protocoles TLS (TLS 1.0 et 1.1) et appliquer les suites de chiffrement héritées pour prendre en charge les protocoles supplémentaires sur les rôles web et worker du service cloud Windows Server 2019. 
@@ -25,7 +25,7 @@ Cet article décrit comment activer les anciens protocoles TLS (TLS 1.0 et 1.1)
 Parallèlement à nos mesures visant à déprécier TLS 1.0 et TLS 1.1, nous comprenons que certains clients aient besoin de prendre en charge les anciens protocoles et suites de chiffrement dans le but de planifier correctement leur dépréciation.  Bien nous ne recommandions pas de réactiver ces valeurs héritées, les conseils suivants sont destinés aux clients qui peuvent en avoir besoin. Nous encourageons les clients à évaluer le risque de régression avant d’implémenter les changements décrits dans cet article. 
 
 > [!NOTE]
-> La version de système d’exploitation invité Family 6 applique TLS 1.2 en désactivant explicitement TLS 1.0 et 1.1 et en définissant un ensemble spécifique de suites de chiffrement. Pour plus d’informations sur les familles de systèmes d’exploitation invités, consultez [Actualités concernant les versions de SE invité](https://docs.microsoft.com/azure/cloud-services/cloud-services-guestos-update-matrix#family-6-releases).
+> La version de système d’exploitation invité Family 6 applique TLS 1.2 en désactivant explicitement TLS 1.0 et 1.1 et en définissant un ensemble spécifique de suites de chiffrement. Pour plus d’informations sur les familles de systèmes d’exploitation invités, consultez [Actualités concernant les versions de SE invité](./cloud-services-guestos-update-matrix.md#family-6-releases).
 
 
 ## <a name="dropping-support-for-tls-10-tls-11-and-older-cipher-suites"></a>Fin de la prise en charge de TLS 1.0/TLS 1.1 et des anciennes suites de chiffrement 
@@ -362,4 +362,3 @@ Maintenant que les étapes ci-dessus ont été effectuées, publiez la mise à j
 
 Vous pouvez utiliser [SSLLabs](https://www.ssllabs.com/) pour valider l’état TLS de vos points de terminaison. 
 
- 

@@ -1,22 +1,23 @@
 ---
 title: Se connecter à Synapse SQL avec Visual Studio et SSDT, et l’interroger
-description: Utilisez Visual Studio pour interroger le pool SQL à l’aide d’Azure Synapse Analytics.
+description: Utilisez Visual Studio pour interroger le pool SQL dédié à l’aide d’Azure Synapse Analytics.
 services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 5e725df5c875f23d82da1fda19bcdf28db548fc8
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: ef8e2a3d1a6b78e8f2b6b9a900ed2485c1a4a5d7
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426625"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451588"
 ---
 # <a name="connect-to-synapse-sql-with-visual-studio-and-ssdt"></a>Se connecter à Synapse SQL avec Visual Studio et SSDT
+
 > [!div class="op_single_selector"]
 > * [Azure Data Studio](get-started-azure-data-studio.md)
 > * [Power BI](get-started-power-bi-professional.md)
@@ -26,22 +27,22 @@ ms.locfileid: "81426625"
 > 
 > 
 
-Utilisez Visual Studio pour interroger le pool SQL à l’aide d’Azure Synapse Analytics. Cette méthode utilise l’extension SQL Server Data Tools (SSDT) dans Visual Studio 2019. 
+Utilisez Visual Studio pour interroger le pool SQL dédié à l’aide d’Azure Synapse Analytics. Cette méthode utilise l’extension SQL Server Data Tools (SSDT) dans Visual Studio 2019. 
 
-### <a name="supported-tools-for-sql-on-demand-preview"></a>Outils pris en charge pour SQL à la demande (préversion)
-
-Visual Studio n’est actuellement pas pris en charge pour SQL à la demande (préversion). Toutefois, Azure Data Studio (préversion) est un outil entièrement pris en charge. SQL Server Management Studio est partiellement pris en charge à partir de la version 18.4 et possède des fonctionnalités limitées comme la connexion et l’interrogation.
+> [!NOTE]
+> Le pool SQL serverless n’est pas pris en charge par SSDT.
 
 ## <a name="prerequisites"></a>Prérequis
+
 Pour utiliser ce tutoriel, vous devez disposer des composants suivants :
 
-* Un pool SQL existant. Si vous n’en avez pas, consultez [Créer un pool SQL](../sql-data-warehouse/create-data-warehouse-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) pour respecter ce prérequis.
+* Un pool SQL dédié existant. Si vous n’en avez pas, consultez [Créer un pool SQL dédié](../sql-data-warehouse/create-data-warehouse-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) pour respecter ce prérequis.
 * SSDT pour Visual Studio. Si vous avez Visual Studio, vous disposez probablement déjà de ce composant. Pour obtenir des instructions et des options d’installation, consultez [Installation de Visual Studio et/ou SSDT](../sql-data-warehouse/sql-data-warehouse-install-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
-* Le nom complet du serveur SQL. Pour le trouver, consultez [Se connecter à un pool SQL](connect-overview.md).
+* Le nom complet du serveur SQL. Pour rechercher le nom du serveur, consultez [Se connecter à un pool SQL dédié](connect-overview.md).
 
-## <a name="1-connect-to-sql-pool"></a>1. Se connecter à un pool SQL
+## <a name="1-connect-to-a-dedicated-sql-pool"></a>1. Se connecter à un pool SQL dédié
 1. Ouvrez Visual Studio 2019.
-2. Ouvrez l’Explorateur d’objets SQL Server. Pour ce faire, sélectionnez **Affichage** > **Explorateur d’objets SQL Server**.
+2. Ouvrez l'Explorateur d’objets SQL Server en sélectionnant **Afficher** > **Explorateur d’objets SQL Server**.
    
     ![Explorateur d’objets SQL Server](./media/get-started-visual-studio/open-ssdt.png)
 3. Cliquez sur l’icône **Ajouter SQL Server** .
@@ -71,7 +72,7 @@ Maintenant qu’une connexion à votre base de données a été établie, vous a
     ```sql
     SELECT COUNT(*) FROM dbo.FactInternetSales;
     ```
-4. Exécute la requête. Pour ce faire, cliquez sur la flèche verte ou utilisez le raccourci `CTRL`+`SHIFT`+`E`.
+4. Exécutez la requête en cliquant sur la flèche verte ou utilisez le raccourci : `CTRL`+`SHIFT`+`E`.
    
     ![Exécuter une requête](./media/get-started-visual-studio/run-query.png)
 5. Passez en revue les résultats de la requête. Dans cet exemple, la table FactInternetSales a 60 398 lignes.
@@ -80,5 +81,5 @@ Maintenant qu’une connexion à votre base de données a été établie, vous a
 
 ## <a name="next-steps"></a>Étapes suivantes
 Maintenant que vous pouvez vous connecter et exécuter des requêtes, essayez de [visualiser les données avec Power BI](get-started-power-bi-professional.md).
-Pour configurer votre environnement pour l’authentification Azure Active Directory, consultez [S'authentifier auprès d'un pool SQL](../sql-data-warehouse/sql-data-warehouse-authentication.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
+Pour configurer votre environnement pour l’authentification Azure Active Directory, consultez [S’authentifier auprès d’un pool SQL dédié](../sql-data-warehouse/sql-data-warehouse-authentication.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
  

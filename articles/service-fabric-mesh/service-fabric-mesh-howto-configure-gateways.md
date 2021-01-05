@@ -1,17 +1,17 @@
 ---
 title: Configurer une passerelle pour router les demandes
 description: Découvrez comment configurer la passerelle qui gère le trafic entrant de votre ou vos applications exécutées sur Service Fabric Mesh.
-author: dkkapur
+author: georgewallace
 ms.topic: conceptual
 ms.date: 11/28/2018
-ms.author: dekapur
+ms.author: gwallace
 ms.custom: mvc, devcenter
-ms.openlocfilehash: ec408403d4baa0f211c6bfe867a15c96513693cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa3ac9d8835cd17387346bb29b3e7c30f286cd1f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75461952"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91839722"
 ---
 # <a name="configure-a-gateway-resource-to-route-requests"></a>Configurer une ressource Passerelle pour router les demandes
 
@@ -219,8 +219,8 @@ Voici à quoi ressemble une configuration complète d’une ressource Passerelle
 ```
 
 Cette passerelle est configurée pour une application Linux, "meshAppLinux", qui se compose d’au moins deux services, "helloWorldService" et "counterService", qui écoute sur le port 80. En fonction de la structure de l’URL de la demande entrante, elle route la demande vers l’un de ces services. 
-* "\<IPAddress>: 80/helloWorld/\<requête\>" dirigerait une requête vers le "helloWorldListener" du helloWorldService. 
-* "\<IPAddress>: 80/counter/\<requête\>" dirigerait une requête vers le "counterListener" du counterService. 
+* « \<IPAddress>:80/helloWorld/\<request\> » dirigerait une demande vers le « helloWorldListener » du helloWorldService. 
+* « \<IPAddress>:80/counter/\<request\> » dirigerait une demande vers le « counterListener » du counterService. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Déployer l’[exemple d’entrée](https://github.com/Azure-Samples/service-fabric-mesh/tree/2018-09-01-preview/templates/ingress) pour voir les passerelles en action

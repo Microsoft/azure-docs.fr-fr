@@ -8,12 +8,12 @@ ms.service: internet-peering
 ms.topic: include
 ms.date: 11/27/2019
 ms.author: prmitiki
-ms.openlocfilehash: e50f53c65c330265d3d9ec1b1804a7910b632b1d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3507aacc68de25f7368cbe3cda917077564c56eb
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81678862"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96356242"
 ---
 1. Accédez à **Groupes de ressources** et sélectionnez le groupe de ressources que vous avez sélectionné lors de la création de la ressource **Peering**. Utilisez la case **Filtre** si la liste des groupes de ressources est trop longue.
 
@@ -23,7 +23,7 @@ ms.locfileid: "81678862"
 1. Sélectionnez la ressource **Peering** que vous avez créée.
 
     > [!div class="mx-imgBorder"]
-    > ![Affichage des ressources de peering](../media/setup-direct-get-open.png)
+    > ![La page Vue d’ensemble est sélectionnée dans le volet gauche. Elle affiche des informations sur PeeringResourceGroup. Dans la liste Peering, AshburnPeering est encadré.](../media/setup-direct-get-open.png)
 
 1. La page **Vue d’ensemble** affiche des informations générales, comme illustré ici.
 

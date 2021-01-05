@@ -7,17 +7,18 @@ ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 04/08/2020
 ms.reviewer: sngun
-ms.custom: seodec18
-ms.openlocfilehash: e36e95aeb25c83ccd94f11e25bfe9f1b8f7bfdad
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.custom: seodec18, "seo-nov-2020"
+ms.openlocfilehash: c8c479050b434904de57397e5e7d73594090e031
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80984859"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94336129"
 ---
 # <a name="change-feed-in-azure-cosmos-db"></a>Flux de modification dans Azure Cosmos DB
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
-Dans Azure Cosmos DB, le flux de modification écoute les modifications apportées à un conteneur Azure Cosmos. Il renvoie ensuite la liste chronologique de documents qui ont été modifiés, dans l’ordre dans lequel ils ont été modifiés. Les modifications sont conservées et peuvent être traitées de manière asynchrone et incrémentielle, puis réparties sur un ou plusieurs consommateurs pour un traitement en parallèle.
+Le flux de modification dans Azure Cosmos DB est un enregistrement persistant des modifications apportées à un conteneur dans l’ordre dans lequel elles se produisent. Dans Azure Cosmos DB, le flux de modification écoute les modifications apportées à un conteneur Azure Cosmos. Il renvoie ensuite la liste chronologique de documents qui ont été modifiés, dans l’ordre dans lequel ils ont été modifiés. Les modifications conservées peuvent être traitées de manière asynchrone et incrémentielle, puis réparties sur un ou plusieurs consommateurs pour un traitement en parallèle.
 
 Apprenez-en davantage sur les [modèles de conception de flux de modification](change-feed-design-patterns.md).
 
@@ -56,7 +57,7 @@ Si une propriété de durée de vie (TTL) est définie sur -1 pour un élément,
 
 ### <a name="change-feed-and-_etag-_lsn-or-_ts"></a>Flux de modification et formats _etag, _lsn ou _ts
 
-Le format _etag est un format interne. Vous ne devez pas vous y fier, car il peut être modifié à tout moment. Le format _ts correspond à un horodatage de modification ou de création. Vous pouvez utiliser les données _ts à des fins de comparaison chronologique. Le format _lsn est un ID de lot qui est ajouté uniquement pour le flux de modification. Il représente l’ID de transaction. De nombreux éléments peuvent avoir un même _lsn. L’étiquette d’entité (ETag) de FeedResponse est différente du _etag que vous voyez dans l’élément. _etag est un identificateur interne utilisé pour le contrôle de l’accès concurrentiel, qui indique la version du document, alors que l’ETag est utilisé pour le séquencement du flux.
+Le format _etag est un format interne. Vous ne devez pas vous y fier, car il peut être modifié à tout moment. Le format _ts correspond à un horodatage de modification ou de création. Vous pouvez utiliser les données _ts à des fins de comparaison chronologique. Le format _lsn est un ID de lot qui est ajouté uniquement pour le flux de modification. Il représente l’ID de transaction. De nombreux éléments peuvent avoir un même _lsn. L’étiquette d’entité (ETag) de FeedResponse est différente du _etag que vous voyez dans l’élément. _etag est un identificateur interne utilisé pour le contrôle d’accès concurrentiel. La propriété _etag indique la version de l’élément, tandis que la propriété ETag est utilisée pour le séquençage du flux.
 
 ## <a name="working-with-change-feed"></a>Utilisation du flux de modification
 
@@ -67,7 +68,7 @@ Vous pouvez utiliser le flux de modification à l’aide des options suivantes 
 
 Le flux de modification est disponible pour chacune des clés de partition logique du conteneur, et il peut être distribué vers un ou plusieurs consommateurs en vue d’un traitement parallèle, comme indiqué dans l’image ci-dessous.
 
-![Traitement distribué du flux de modification d’Azure Cosmos DB](./media/change-feed/changefeedvisual.png)
+:::image type="content" source="./media/change-feed/changefeedvisual.png" alt-text="Traitement distribué du flux de modification d’Azure Cosmos DB" border="false":::
 
 ## <a name="features-of-change-feed"></a>Fonctionnalités du flux de modification
 

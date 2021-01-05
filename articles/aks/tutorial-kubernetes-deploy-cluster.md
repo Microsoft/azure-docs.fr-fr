@@ -3,14 +3,14 @@ title: Didacticiel Kubernetes sur Azure – Déployer un cluster
 description: Dans ce didacticiel Azure Kubernetes Service (AKS), vous créez un cluster AKS et utilisez kubectl pour vous connecter au nœud principal Kubernetes.
 services: container-service
 ms.topic: tutorial
-ms.date: 02/25/2020
-ms.custom: mvc
-ms.openlocfilehash: 609ac66ca27d5cad7dd2fb295c3a2a721a1cda16
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 09/30/2020
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 0e034ebede39a3fd9046ced9716323d0c7d874df
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81392690"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94684068"
 ---
 # <a name="tutorial-deploy-an-azure-kubernetes-service-aks-cluster"></a>Tutoriel : Déployer un cluster Azure Kubernetes Service (AKS)
 
@@ -31,9 +31,11 @@ Ce didacticiel nécessite l’exécution de l’interface de ligne de commande A
 
 ## <a name="create-a-kubernetes-cluster"></a>Créer un cluster Kubernetes
 
-Les clusters AKS peuvent utiliser les contrôles d’accès en fonction des rôles Kubernetes (RBAC). Ces contrôles vous permettent de définir l’accès aux ressources en fonction des rôles attribués aux utilisateurs. Des autorisations sont combinées si plusieurs rôles sont attribués à un utilisateur, et les autorisations peuvent être limitées à un seul espace de noms ou accordées à l’ensemble du cluster. Par défaut, l’interface de ligne de commande Azure active automatiquement RBAC lorsque vous créez un cluster AKS.
+Les clusters AKS peuvent utiliser le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes). Ces contrôles vous permettent de définir l’accès aux ressources en fonction des rôles attribués aux utilisateurs. Des autorisations sont combinées si plusieurs rôles sont attribués à un utilisateur, et les autorisations peuvent être limitées à un seul espace de noms ou accordées à l’ensemble du cluster. Par défaut, l’interface Azure CLI active automatiquement RBAC Kubernetes lorsque vous créez un cluster AKS.
 
-Créez un cluster AKS à l’aide de [az aks create][]. L’exemple suivant crée un cluster nommé *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup*. Vous avez créé ce groupe de ressources dans le [tutoriel précédent][aks-tutorial-prepare-acr]. Pour permettre à un cluster AKS d’interagir avec d’autres ressources Azure, un principal de service Azure Active Directory est automatiquement créé, dans la mesure où vous n’en avez pas spécifié. Ici, ce principal de service [se voit accorder le droit d’extraire des images][container-registry-integration] à partir de l’instance Azure Container Registry (ACR) que vous avez créée dans le tutoriel précédent. Notez que vous pouvez utiliser une [identité managée](use-managed-identity.md) au lieu d’un principal de service pour une gestion simplifiée.
+Créez un cluster AKS à l’aide de [az aks create][]. L’exemple suivant crée un cluster nommé *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup*. Vous avez créé ce groupe de ressources dans le [tutoriel précédent][aks-tutorial-prepare-acr] dans la région *eastus*. L’exemple suivant ne spécifie pas de région ; le cluster AKS est donc également créé dans la région *eastus*. Pour plus d’informations sur les limites de ressources et la disponibilité des régions pour AKS, consultez [Quotas, restrictions de taille de machine virtuelle et disponibilité des régions dans Azure Kubernetes Service (AKS)][quotas-skus-regions].
+
+Pour permettre à un cluster AKS d’interagir avec d’autres ressources Azure, un principal de service Azure Active Directory est automatiquement créé, dans la mesure où vous n’en avez pas spécifié. Ici, ce principal de service [se voit accorder le droit d’extraire des images][container-registry-integration] à partir de l’instance Azure Container Registry (ACR) que vous avez créée dans le tutoriel précédent. Notez que vous pouvez utiliser une [identité managée](use-managed-identity.md) au lieu d’un principal de service pour une gestion simplifiée.
 
 ```azurecli
 az aks create \
@@ -108,3 +110,4 @@ Passez au didacticiel suivant pour savoir comment déployer une application dans
 [az aks get-credentials]: /cli/azure/aks#az-aks-get-credentials
 [azure-cli-install]: /cli/azure/install-azure-cli
 [container-registry-integration]: ./cluster-container-registry-integration.md
+[quotas-skus-regions]: quotas-skus-regions.md

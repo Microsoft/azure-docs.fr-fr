@@ -13,13 +13,15 @@ ms.custom:
 - seo-java-august2019
 - seo-java-september2019
 - mqtt
+- devx-track-java
+- devx-track-azurecli
 ms.date: 05/26/2020
-ms.openlocfilehash: 225b9407bff4294288bb4834cbb0d919698b78c6
-ms.sourcegitcommit: 64fc70f6c145e14d605db0c2a0f407b72401f5eb
+ms.openlocfilehash: 76326d0b68a3ff71bf95c09147d003e769e103db
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "83873152"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844640"
 ---
 # <a name="quickstart-send-telemetry-to-an-azure-iot-hub-and-read-it-with-a-java-application"></a>Démarrage rapide : Envoyer de la télémétrie à un hub IoT Azure et la lire avec une application Java
 
@@ -31,35 +33,27 @@ Dans ce guide de démarrage rapide, vous envoyez des données de télémétrie �
 
 * Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 
-* Java SE Development Kit 8. Dans [Prise en charge à long terme de Java pour Azure et Azure Stack](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable), sous **Prise en charge à long terme**, sélectionnez **Java 8**.
+* Java SE Development Kit 8. Dans [Prise en charge à long terme de Java pour Azure et Azure Stack](/java/azure/jdk/?view=azure-java-stable), sous **Prise en charge à long terme**, sélectionnez **Java 8**.
+
+    Vous pouvez vérifier la version actuelle de Java sur votre machine de développement à l’aide de la commande suivante :
+
+    ```cmd/sh
+    java -version
+    ```
 
 * [Apache Maven 3](https://maven.apache.org/download.cgi).
 
+    Vous pouvez vérifier la version actuelle de Maven sur votre machine de développement à l’aide de la commande suivante :
+
+    ```cmd/sh
+    mvn --version
+    ```
+
 * [Un exemple de projet Java](https://github.com/Azure-Samples/azure-iot-samples-java/archive/master.zip).
 
-* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-Vous pouvez vérifier la version actuelle de Java sur votre machine de développement à l’aide de la commande suivante :
-
-```cmd/sh
-java -version
-```
-
-Vous pouvez vérifier la version actuelle de Maven sur votre machine de développement à l’aide de la commande suivante :
-
-```cmd/sh
-mvn --version
-```
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-### <a name="add-azure-iot-extension"></a>Ajouter une extension Azure IoT
-
-Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et du service IoT Hub Device Provisioning (DPS) à Azure CLI.
-
-```azurecli-interactive
-az extension add --name azure-iot
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 

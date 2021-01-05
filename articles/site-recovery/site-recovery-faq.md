@@ -2,14 +2,14 @@
 title: Questions générales sur le service Azure Site Recovery
 description: Cet article traite des questions générales fréquemment posées sur Azure Site Recovery.
 ms.topic: conceptual
-ms.date: 1/24/2020
+ms.date: 7/14/2020
 ms.author: raynew
-ms.openlocfilehash: a9d0ae4a6e60a72bbb1148aca1a75c44506b2e9e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3da86eead5b927a2a71d7b1a28bc5966bf5f8840
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229069"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92369435"
 ---
 # <a name="general-questions-about-azure-site-recovery"></a>Questions générales sur Azure Site Recovery
 
@@ -22,11 +22,16 @@ Cet article résume les questions fréquentes sur Azure Site Recovery. Pour des 
 ## <a name="general"></a>Général
 
 ### <a name="what-does-site-recovery-do"></a>À quoi sert Site Recovery ?
+
 Site Recovery contribue à mettre en œuvre la stratégie de continuité d’activité et de récupération d’urgence (BCDR) de votre entreprise en coordonnant et en automatisant la réplication de machines virtuelles Azure entre des régions, de machines virtuelles et serveurs physiques locaux sur Azure et de machines locales sur un centre de données secondaire. [Plus d’informations](site-recovery-overview.md)
 
 ### <a name="can-i-protect-a-virtual-machine-that-has-a-docker-disk"></a>Puis-je protéger une machine virtuelle dotée d’un disque Docker ?
 
 Non, ce scénario n’est pas pris en charge.
+
+### <a name="what-does-site-recovery-do-to-ensure-data-integrity"></a>Que fait Site Recovery pour garantir l'intégrité des données ?
+
+Site Recovery prend différentes mesures pour garantir l'intégrité des données. Une connexion sécurisée est établie entre tous les services à l'aide du protocole HTTPS. Vous êtes ainsi assuré qu'aucun programme malveillant ou aucune entité extérieure n'altérera les données. Une autre mesure consiste à utiliser des sommes de contrôle. Le transfert de données entre la source et la cible est exécuté en calculant les sommes de contrôle des données entre elles. Cela permet de garantir la cohérence des données transférées.
 
 ## <a name="service-providers"></a>Fournisseurs de services
 
@@ -51,7 +56,7 @@ Non, les données sont répliquées vers le stockage Azure de votre abonnement. 
 Oui.
 
 ### <a name="what-platforms-do-you-currently-support"></a>Quelles plates-formes prenez-vous en charge, actuellement ?
-Nous prenons en charge Azure Pack et le système Cloud Platform, ainsi que les déploiements basés sur System Center (2012 et versions supérieures). [En savoir plus](https://technet.microsoft.com/library/dn850370.aspx) sur l’intégration d’Azure Pack et de Site Recovery.
+Nous prenons en charge Azure Pack et le système Cloud Platform, ainsi que les déploiements basés sur System Center (2012 et versions supérieures). [En savoir plus](/previous-versions/azure/windows-server-azure-pack/dn850370(v=technet.10)) sur l’intégration d’Azure Pack et de Site Recovery.
 
 ### <a name="do-you-support-single-azure-pack-and-single-vmm-server-deployments"></a>Prenez-vous en charge les déploiements uniques de serveurs VMM et Azure Pack ?
 Oui, vous pouvez répliquer des machines virtuelles Hyper-V vers Azure, ou entre des sites du fournisseur de service.  Notez que si vous répliquez entre des sites du fournisseur de services, l’intégration de runbooks Azure n’est pas disponible.
@@ -66,7 +71,7 @@ Consultez les [détails de la tarification Site Recovery](https://azure.microsof
 
 Vous pouvez utiliser la [calculatrice de prix](https://aka.ms/asr_pricing_calculator) pour estimer les coûts d’utilisation de Site Recovery.
 
-Pour obtenir une estimation détaillée des coûts, exécutez l’outil Planificateur de déploiement pour [VMware](https://aka.ms/siterecovery_deployment_planner) ou [Hyper-V](https://aka.ms/asr-deployment-planner) et utilisez le [rapport d’estimation des coûts](https://aka.ms/asr_DP_costreport).
+Pour obtenir une estimation détaillée des coûts, exécutez l’outil Planificateur de déploiement pour [VMware](./site-recovery-deployment-planner.md) ou [Hyper-V](https://aka.ms/asr-deployment-planner) et utilisez le [rapport d’estimation des coûts](./site-recovery-vmware-deployment-planner-cost-estimation.md).
 
 
 ### <a name="managed-disks-are-now-used-to-replicate-vmware-vms-and-physical-servers-do-i-incur-additional-charges-for-the-cache-storage-account-with-managed-disks"></a>Les disques managés sont à présent utilisés pour répliquer des machines virtuelles VMware et des serveurs physiques. Des frais supplémentaires sont-ils facturés pour le compte de stockage de cache avec des disques managés ?
@@ -100,19 +105,37 @@ Le logiciel Site Recovery est certifié conforme aux normes ISO 27001:2013, 2701
 Oui. Quand vous créez un coffre Site Recovery dans une région, nous vérifions que toutes les métadonnées dont nous avons besoin pour activer et coordonner la réplication et le basculement restent au sein de cette région.
 
 ### <a name="does-site-recovery-encrypt-replication"></a>Site Recovery chiffre-t-il la réplication ?
-Pour la réplication de machines virtuelles et de serveurs physiques entre des sites locaux, le chiffrement en transit est pris en charge. Pour la réplication de machines virtuelles et de serveurs physiques vers Azure, le chiffrement en transit et le [chiffrement au repos (dans Azure)](https://docs.microsoft.com/azure/storage/storage-service-encryption) sont tous deux pris en charge.
+Pour la réplication de machines virtuelles et de serveurs physiques entre des sites locaux, le chiffrement en transit est pris en charge. Pour la réplication de machines virtuelles et de serveurs physiques vers Azure, le chiffrement en transit et le [chiffrement au repos (dans Azure)](../storage/common/storage-service-encryption.md) sont tous deux pris en charge.
 
-### <a name="how-can-i-enforce-tls-12-on-all-on-premises-azure-site-recovery-components"></a>Comment puis-je appliquer le protocole TLS 1.2 sur tous les composants Azure Site Recovery locaux ?
+### <a name="does-azure-to-azure-site-recovery-use-tls-12-for-all-communications-across-microservices-of-azure"></a>Le scénario Azure vers Azure Site Recovery utilise-t-il TLS 1.2 pour toutes les communications entre les microservices d’Azure ?
+Oui, le protocole TLS 1.2 est appliqué par défaut pour le scénario Azure vers Azure Site Recovery. 
+
+### <a name="how-can-i-enforce-tls-12-on-vmware-to-azure-and-physical-server-to-azure-site-recovery-scenarios"></a>Comment appliquer TLS 1.2 dans les scénarios VMware vers Azure et serveur physique vers Azure Site Recovery ?
 Les agents de mobilité installés sur les éléments répliqués communiquent avec le serveur de traitement uniquement sur TLS 1.2. Toutefois, la communication entre le serveur de configuration et Azure, et entre le serveur de processus et Azure, peut se faire sur TLS 1.1 ou 1.0. Suivez les [instructions](https://support.microsoft.com/en-us/help/3140245/update-to-enable-tls-1-1-and-tls-1-2-as-default-secure-protocols-in-wi) pour appliquer le protocole TLS 1.2 sur tous les serveurs de configuration et serveurs de processus configurés par vous-même.
 
+### <a name="how-can-i-enforce-tls-12-on-hyperv-to-azure-site-recovery-scenarios"></a>Comment appliquer le protocole TLS 1.2 dans les scénarios HyperV vers Azure Site Recovery ?
+Toutes les communications entre les microservices d’Azure Site Recovery se produisent sur le protocole TLS 1.2. Site Recovery utilise le dernier protocole TLS disponible ainsi que des fournisseurs de sécurité configurés dans le système d’exploitation. Vous devez activer explicitement le protocole TLS 1.2 dans le registre, afin que Site Recovery puisse commencer à utiliser TLS 1.2 pour la communication avec les services. 
+
+### <a name="how-can-i-enforce-restricted-access-on-my-storage-accounts-which-are-accessed-by-site-recovery-service-for-readingwriting-replication-data"></a>Comment appliquer un accès restreint sur mes comptes de stockage, auxquels Site Recovery Service accède pour lire/écrire des données de réplication ?
+Vous pouvez activer l’identité managée du coffre Recovery Services en accédant au paramètre *Identité* . Une fois le coffre inscrit auprès d’Azure Active Directory, accédez à vos comptes de stockage et attribuez les rôles suivantes au coffre :
+
+- Comptes de stockage basés sur Resource Manager (type Standard) :
+  - [Contributeur](../role-based-access-control/built-in-roles.md#contributor)
+  - [Contributeur aux données Blob du stockage](../role-based-access-control/built-in-roles.md#storage-blob-data-contributor)
+- Comptes de stockage basés sur Resource Manager (type Premium) :
+  - [Contributeur](../role-based-access-control/built-in-roles.md#contributor)
+  - [Propriétaire des données Blob du stockage](../role-based-access-control/built-in-roles.md#storage-blob-data-owner)
+- Comptes de stockage Classic :
+  - [Contributeur de compte de stockage classique](../role-based-access-control/built-in-roles.md#classic-storage-account-contributor)
+  - [Rôle de service d’opérateur de clé de compte de stockage classique](../role-based-access-control/built-in-roles.md#classic-storage-account-key-operator-service-role)
 
 ## <a name="disaster-recovery"></a>Récupération d'urgence
 
 ### <a name="what-can-site-recovery-protect"></a>Que peut protéger Site Recovery ?
-* **Machines virtuelles Azure** : Site Recovery peut répliquer n’importe quelle charge de travail exécutée sur une machine virtuelle Azure prise en charge.
-* **Machines virtuelles Hyper-V** : Site Recovery peut protéger toute charge de travail en cours d’exécution sur une machine virtuelle Hyper-V.
-* **Serveurs physiques** : Site Recovery peut protéger les serveurs physiques exécutant Windows ou Linux.
-* **Machines virtuelles VMware** : Site Recovery peut protéger toute charge de travail en cours d’exécution dans une machine virtuelle VMware.
+* **Machines virtuelles Azure**  : Site Recovery peut répliquer n’importe quelle charge de travail exécutée sur une machine virtuelle Azure prise en charge.
+* **Machines virtuelles Hyper-V**  : Site Recovery peut protéger toute charge de travail en cours d’exécution sur une machine virtuelle Hyper-V.
+* **Serveurs physiques**  : Site Recovery peut protéger les serveurs physiques exécutant Windows ou Linux.
+* **Machines virtuelles VMware**  : Site Recovery peut protéger toute charge de travail en cours d’exécution dans une machine virtuelle VMware.
 
 ### <a name="what-workloads-can-i-protect-with-site-recovery"></a>Quelles charges de travail puis-je protéger avec Site Recovery ?
 Vous pouvez utiliser Site Recovery pour protéger la plupart des charges de travail en cours d’exécution sur une machine virtuelle ou un serveur physique pris(e) en charge. Site Recovery assure la prise en charge de la réplication compatible avec les applications afin qu’elles puissent être récupérées dans un état intelligent. Site Recovery s’intègre aux applications Microsoft, notamment à SharePoint, Exchange, Dynamics, SQL Server et Active Directory, et fonctionne en étroite collaboration avec les principaux fournisseurs, notamment Oracle, SAP, IBM et Red Hat. [En savoir plus](site-recovery-workload.md) sur la protection des charges de travail.
@@ -123,7 +146,7 @@ Oui. Lorsque vous utilisez Site Recovery pour coordonner la réplication et le b
 
 ### <a name="is-disaster-recovery-supported-for-azure-vms"></a>La reprise d’activité après sinistre est-elle prise en charge pour les machines virtuelles Azure ?
 
-Oui, Site Recovery prend en charge la reprise d’activité après sinistre pour les machines virtuelles Azure entre des régions Azure. [Lisez les questions fréquentes](azure-to-azure-common-questions.md) sur la reprise d’activité après sinistre des machines virtuelles Azure.
+Oui, Site Recovery prend en charge la reprise d’activité après sinistre pour les machines virtuelles Azure entre des régions Azure. [Lisez les questions fréquentes](azure-to-azure-common-questions.md) sur la reprise d’activité après sinistre des machines virtuelles Azure. Si vous souhaitez effectuer une réplication entre deux régions Azure sur le même continent, utilisez notre offre DR Azure vers Azure. Vous n’avez pas besoin de configurer le serveur de configuration/serveur de processus ni les connexions ExpressRoute.
 
 ### <a name="is-disaster-recovery-supported-for-vmware-vms"></a>La reprise d’activité après sinistre est-elle prise en charge pour les machines virtuelles VMware ?
 
@@ -132,7 +155,7 @@ Oui, Site Recovery prend en charge la reprise d’activité après sinistre des 
 ### <a name="is-disaster-recovery-supported-for-hyper-v-vms"></a>La reprise d’activité après sinistre est-elle prise en charge pour les machines virtuelles Hyper-V ?
 Oui, Site Recovery prend en charge la reprise d’activité après sinistre des machines virtuelles Hyper-V locales. [Lisez les questions fréquentes](hyper-v-azure-common-questions.md) sur la reprise d’activité après sinistre des machines virtuelles Hyper-V.
 
-## <a name="is-disaster-recovery-supported-for-physical-servers"></a>La reprise d’activité après sinistre est-elle prise en charge pour les serveurs physiques ?
+### <a name="is-disaster-recovery-supported-for-physical-servers"></a>La reprise d’activité après sinistre est-elle prise en charge pour les serveurs physiques ?
 Oui, Site Recovery prend en charge la reprise d’activité après sinistre des serveurs physiques locaux exécutant Windows et Linux dans Azure ou dans un site secondaire. En savoir plus sur la configuration requise pour la reprise d’activité après sinistre vers [Azure](vmware-physical-azure-support-matrix.md#replicated-machines) et [vers un site secondaire](vmware-physical-secondary-support-matrix.md#replicated-vm-support).
 Notez que les serveurs physiques sont exécutés en tant que machines virtuelles dans Azure après le basculement. La restauration automatique à partir d’Azure sur un serveur physique local n’est actuellement pas prise en charge. Vous pouvez uniquement effectuer la restauration automatique d’une machine virtuelle VMware.
 
@@ -188,8 +211,108 @@ Les disques dynamiques sont pris en charge lors de la réplication des machines 
 Oui. Pour plus d’informations sur la limitation de bande passante, consultez les articles suivants :
 
 * [Planification de la capacité pour la réplication de machines virtuelles VMware et de serveurs physiques](site-recovery-plan-capacity-vmware.md)
-* [Planification de la capacité pour la réplication de machines virtuelles Hyper-V dans Azure](site-recovery-capacity-planning-for-hyper-v-replication.md)
+* [Planification de la capacité pour la réplication de machines virtuelles Hyper-V dans Azure](./hyper-v-deployment-planner-overview.md)
 
+### <a name="can-i-enable-replication-with-app-consistency-in-linux-servers"></a>Puis-je activer la réplication avec la cohérence des applications dans les serveurs Linux ? 
+Oui. Azure Site Recovery pour le système d’exploitation Linux prend en charge les scripts personnalisés des applications à des fins de cohérence. Le script personnalisé avec options pré et post-script sera utilisé par l’agent Mobilité Azure Site Recovery durant la cohérence des applications. Voici les étapes pour activer cela.
+
+1. Connectez-vous en tant qu’utilisateur racine à l’ordinateur.
+2. Basculez le répertoire sur l’emplacement d’installation de l’agent Mobilité Azure Site Recovery. La valeur par défaut est « /usr/local/ASR »<br>
+    `# cd /usr/local/ASR`
+3. Remplacez le répertoire par « VX/scripts » sous l’emplacement d’installation<br>
+    `# cd VX/scripts`
+4. Créez un script d’interpréteur de commandes bash nommé « customscript.sh » avec des autorisations d’exécution pour l’utilisateur racine.<br>
+    a. Le script doit prendre en charge les options de ligne de commande « --pre » et « --post » (notez les doubles tirets)<br>
+    b. Lorsque le script est appelé avec l’option pre, il doit geler l’entrée/la sortie de l’application et, lorsqu’il est appelé avec l’option post, il doit libérer l’entrée/la sortie de l’application.<br>
+    c. Exemple de modèle -<br>
+
+    `# cat customscript.sh`<br>
+
+```
+    #!/bin/bash
+
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 [--pre | --post]"
+        exit 1
+    elif [ "$1" == "--pre" ]; then
+        echo "Freezing app IO"
+        exit 0
+    elif [ "$1" == "--post" ]; then
+        echo "Thawed app IO"
+        exit 0
+    fi
+```
+
+5. Ajoutez les commandes permettant de geler et de libérer l’entrée/la sortie dans les étapes pre et post pour les applications nécessitant une cohérence des applications. Vous pouvez choisir d’ajouter un autre script spécifiant ceux-ci et l’appeler à partir de « customscript.sh » avec les options pre et post.
+
+>[!Note]
+>La version de l’agent Site Recovery doit être 9.24 ou une version ultérieure pour prendre en charge les scripts personnalisés.
+
+## <a name="replication-policy"></a>Stratégie de réplication
+
+### <a name="what-is-a-replication-policy"></a>Qu’est-ce qu’une stratégie de réplication ?
+
+Une stratégie de réplication définit les paramètres de l’historique de rétention des points de récupération. La stratégie définit également la fréquence des captures instantanées de cohérence des applications. Par défaut, Azure Site Recovery crée une nouvelle stratégie de réplication avec les paramètres par défaut suivants :
+
+- 24 heures pour l’historique de rétention des points de récupération.
+- 4 heures pour la fréquence des captures instantanées cohérentes au niveau application.
+
+### <a name="what-is-a-crash-consistent-recovery-point"></a>Qu’est-ce qu’un point de récupération cohérent en cas d’incident ?
+
+Un point de récupération de cohérence en cas d’incident contient les données sur disque comme si vous aviez débranché le cordon d’alimentation du serveur lors de la capture instantanée. Le point de récupération de cohérence en cas d’incident n’inclut rien de ce qui était en mémoire lors de la capture instantanée.
+
+Aujourd’hui, la plupart des applications peuvent récupérer correctement à partir de captures instantanées cohérentes en cas d’incident. Un point de récupération cohérent en cas d’incident ne suffit généralement pas pour des systèmes d’exploitation de base de données et des applications telles que des serveurs de fichiers, des serveurs DHCP et des serveurs d’impression.
+
+### <a name="what-is-the-frequency-of-crash-consistent-recovery-point-generation"></a>Quelle est la fréquence de génération de points de récupération cohérents en cas d’incident ?
+
+Site Recovery crée un point de récupération cohérent en cas d’incident toutes les 5 minutes.
+
+### <a name="what-is-an-application-consistent-recovery-point"></a>Qu’est-ce qu’un point de récupération cohérent au niveau application ?
+
+Les points de récupération cohérents au niveau application sont créés à partir de captures instantanées cohérentes au niveau application. Des points de récupération de cohérence des applications capturent les mêmes données que des captures instantanées de cohérence en cas d’incident, ainsi que de toutes les données en mémoire et toutes les transactions en cours.
+
+En raison de leur contenu supplémentaire, les captures instantanées de cohérence des applications sont davantage sollicitées et prennent le plus de temps. Les points de récupération cohérent au niveau application sont recommandés pour des systèmes d’exploitation de base de données et des applications telles que SQL Server.
+
+### <a name="what-is-the-impact-of-application-consistent-recovery-points-on-application-performance"></a>Quel est l’impact des points de récupération cohérents au niveau de l'application sur les performances de cette dernière ?
+
+Les points de récupération de cohérence des applications capturent toutes les données en mémoire et en cours. Étant donné que les points de récupération capturent ces données, ils nécessitent une infrastructure telle que VSS sur Windows pour suspendre l’application. Si le processus de capture est fréquent, cela peut affecter les performances lorsque la charge de travail est déjà occupée. Nous déconseillons d’utiliser une fréquence faible pour les points de récupération de cohérence des applications en lien avec des charges de travail autres que de bases de données. Même pour une charge de travail de base de données, une heure suffit.
+
+### <a name="what-is-the-minimum-frequency-of-application-consistent-recovery-point-generation"></a>Quelle est la fréquence minimale de génération de points de récupération cohérents en cas d’incident sur les applications ?
+
+Site Recovery peut créer un point de récupération de cohérence des applications généré à une fréquence minimale d’une heure.
+
+### <a name="how-are-recovery-points-generated-and-saved"></a>Comment les points de récupération sont-ils générés et enregistrés ?
+
+Pour comprendre comment Site Recovery génère les points de récupération, voyons un exemple de stratégie de réplication. Cette stratégie de réplication utilise un point de récupération avec une fenêtre de rétention de 24 heures et une capture instantanée de cohérence des applications à la fréquence d’une heure.
+
+Site Recovery crée un point de récupération cohérent en cas d’incident toutes les 5 minutes. Vous ne pouvez pas modifier cette fréquence. Pour la dernière heure, vous pouvez choisir parmi 12 points de cohérence en cas d’incident et 1 point de cohérence des applications. Au fil du temps, au-delà de la dernière heure, Site Recovery élague les points de récupération pour n’en enregistrer qu’un seul par heure.
+
+La capture d’écran suivante illustre cet exemple. Dans la capture d’écran :
+
+- Au cours de la dernière heure, la fréquence des points de récupération est de 5 minutes.
+- Au-delà de la dernière heure, Site Recovery ne conserve qu’un seul point de récupération.
+
+   ![Liste des points de récupération générés](./media/azure-to-azure-troubleshoot-errors/recoverypoints.png)
+
+### <a name="how-far-back-can-i-recover"></a>Jusqu’à quand peut remonter la récupération ?
+
+Le point de récupération le plus ancien que vous pouvez utiliser remonte à 72 heures.
+
+### <a name="i-have-a-replication-policy-of-24-hours-what-will-happen-if-a-problem-prevents-site-recovery-from-generating-recovery-points-for-more-than-24-hours-will-my-previous-recovery-points-be-lost"></a>J’ai une stratégie de réplication de 24 heures. Que se passe-t-il si un problème empêche Site Recovery de générer des points de récupération pendant plus de 24 heures ? Mes points de récupération antérieurs sont-ils perdus ?
+
+Non, Site Recovery conserve tous vos points de récupération antérieurs. En fonction de la fenêtre de rétention des points de récupération, Site Recovery ne remplace le point le plus ancien que s’il génère de nouveaux points. En raison de ce problème, Site Recovery ne peut pas générer de nouveaux points de récupération. Tant qu’il n’y a pas de nouveaux points de récupération, tous les anciens points subsistent une fois la fenêtre de rétention atteinte.
+
+### <a name="after-replication-is-enabled-on-a-vm-how-do-i-change-the-replication-policy"></a>Une fois la réplication activée sur une machine virtuelle, comment modifier la stratégie de réplication ?
+
+Accédez à **Coffre Site Recovery** > **Infrastructure Site Recovery** > **Stratégies de réplication** . Sélectionnez la stratégie à modifier, modifiez-la, puis enregistrez les modifications. Toute modification s’applique également à toutes les réplications existantes.
+
+### <a name="are-all-the-recovery-points-a-complete-copy-of-the-vm-or-a-differential"></a>Tous les points de récupération sont-ils une copie complète ou différentielle de la machine virtuelle ?
+
+Le premier point de récupération qui est généré possède la copie complète. Les points de récupération successifs ont des modifications d’ordre différentiel.
+
+### <a name="does-increasing-the-retention-period-of-recovery-points-increase-the-storage-cost"></a>L’accroissement de la période de rétention des points de récupération augmente-t-elle le coût de stockage ?
+
+Si vous allongez la période de rétention de 24 à 72 heures, Site Recovery enregistre les points de récupération pendant 48 heures supplémentaires. Cette durée supplémentaire occasionne des frais de stockage. Par exemple, un point de récupération unique peut avoir des modifications différentielles de 10 Go avec un coût par Go de 0,16 USD par mois. Les frais supplémentaires sont alors de 1,60 × 48 USD par mois.
 
 
 ## <a name="failover"></a>Basculement
@@ -211,7 +334,7 @@ Pour automatiser les processus, vous pouvez utiliser Orchestrator ou Operations 
 
 * [Découvrez plus d’informations](site-recovery-create-recovery-plans.md) sur les plans de récupération.
 * [En savoir plus](site-recovery-failover.md) sur le basculement.
-* [En savoir plus](site-recovery-failback-azure-to-vmware.md) sur la restauration automatique de serveurs physiques et de machines virtuelles VMware
+* [En savoir plus](./vmware-azure-failback.md) sur la restauration automatique de serveurs physiques et de machines virtuelles VMware
 
 ### <a name="if-my-on-premises-host-is-not-responding-or-crashed-can-i-fail-back-to-a-different-host"></a>Si mon hôte local ne répond pas ou est bloqué, puis-je effectuer une restauration automatique vers un hôte différent ?
 Oui, vous pouvez utiliser la récupération à un autre emplacement pour la restauration automatique vers un hôte différent depuis Azure.
@@ -236,4 +359,3 @@ Oui. Vous pouvez automatiser les flux de travail Site Recovery à l’aide de l�
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Lisez la [Vue d’ensemble de Microsoft Azure Site Recovery](site-recovery-overview.md)
-

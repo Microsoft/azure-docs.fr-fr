@@ -1,23 +1,23 @@
 ---
 title: Présentation des connecteurs de proxy d’application Azure AD | Microsoft Docs
-description: Couvre les bases sur les connecteurs de proxy d’application Azure AD.
+description: Présentation des connecteurs de proxy d’application Azure AD.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 11/15/2018
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3737603360d3fce9d6e11e6c4ce9b2de58f76a6d
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 8086bd2a193ac52e76bf8da245063163ab2ea2f9
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583110"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97591053"
 ---
 # <a name="understand-azure-ad-application-proxy-connectors"></a>Présentation des connecteurs de proxy d’application Azure AD
 
@@ -37,7 +37,7 @@ Vous avez besoin d’un serveur exécutant Windows Server 2012 R2 ou ultérie
 TLS 1.2 doit être activé sur le serveur Windows Server avant l’installation du connecteur de proxy d’application. Pour activer TLS 1.2 sur le serveur :
 
 1. Définissez les clés de Registre suivantes :
-    
+
     ```
     [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2]
     [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client] "DisabledByDefault"=dword:00000000 "Enabled"=dword:00000001
@@ -49,7 +49,7 @@ TLS 1.2 doit être activé sur le serveur Windows Server avant l’installation 
 
 Pour plus d’informations sur la configuration réseau requise pour le serveur du connecteur, consultez [Prise en main du proxy d’application et de l’installation d’un connecteur](application-proxy-add-on-premises-application.md).
 
-## <a name="maintenance"></a>Maintenance 
+## <a name="maintenance"></a>Maintenance
 
 Les connecteurs et le service se chargent de toutes les tâches de haut niveau de disponibilité. Vous pouvez les ajouter ou supprimer de manière dynamique. Chaque fois qu’une nouvelle requête arrive, elle est acheminée vers un des connecteurs actuellement disponibles. Si un connecteur est temporairement indisponible, il ne répond pas à ce trafic.
 
@@ -104,7 +104,7 @@ En général, plus il y a d’utilisateurs, plus l’ordinateur doit avoir des c
 > [!NOTE]
 > L’utilisation d’une machine utilisant 4, 8 ou 16 cœurs n’entraîne pas de grandes différences au niveau des TPS maximales. La principale différence entre ces machines se situe au niveau de la latence attendue.
 >
-> Ce tableau est également axé sur les performances attendues d’un connecteur en fonction du type de machine sur laquelle il est installé. Pour les seuils de limitation du service proxy d’application, consultez [Restrictions et limites du service](https://docs.microsoft.com/azure/active-directory/users-groups-roles/directory-service-limits-restrictions).
+> Ce tableau est également axé sur les performances attendues d’un connecteur en fonction du type de machine sur laquelle il est installé. Pour les seuils de limitation du service proxy d’application, consultez [Restrictions et limites du service](../enterprise-users/directory-service-limits-restrictions.md).
 
 ## <a name="security-and-networking"></a>Sécurité et mise en réseau
 
@@ -155,14 +155,17 @@ Les certificats utilisés sont spécifiques au service de proxy d’application.
 
 Après le premier renouvellement de certificat réussi, le service du connecteur de proxy d’application Azure AD (service réseau) n’a pas l’autorisation de supprimer l’ancien certificat du magasin de la machine locale. Si le certificat a expiré ou s’il n’est plus utilisé par le service, vous pouvez le supprimer sans problème.
 
-Pour éviter les problèmes de renouvellement de certificat, vérifiez que la communication réseau du connecteur vers les [destinations documentées](https://docs.microsoft.com/azure/active-directory/manage-apps/application-proxy-add-on-premises-application#prepare-your-on-premises-environment) est activée.
+Pour éviter les problèmes de renouvellement de certificat, vérifiez que la communication réseau du connecteur vers les [destinations documentées](./application-proxy-add-on-premises-application.md#prepare-your-on-premises-environment) est activée.
 
 Si un connecteur n’est pas connecté au service pendant plusieurs mois, ses certificats ont peut-être expiré. Dans ce cas, désinstallez et réinstallez le connecteur pour déclencher l’inscription. Vous pouvez exécuter les commandes PowerShell suivantes :
 
 ```
 Import-module AppProxyPSModule
-Register-AppProxyConnector
+Register-AppProxyConnector -EnvironmentName "AzureCloud"
 ```
+
+Pour les administrations, utilisez `-EnvironmentName "AzureUSGovernment"`. Pour plus de détails, consultez [Installer l’agent pour le cloud Azure Government](../hybrid/reference-connect-government-cloud.md#install-the-agent-for-the-azure-government-cloud).
+
 Pour en savoir plus sur la façon de vérifier le certificat et de résoudre les problèmes, consultez [Vérifier la prise en charge du certificat de confiance du proxy d’application par la machine et les composants back-end](application-proxy-connector-installation-problem.md#verify-machine-and-backend-components-support-for-application-proxy-trust-certificate).
 
 ## <a name="under-the-hood"></a>Sous le capot
@@ -175,9 +178,9 @@ et les compteurs de performances Windows.
 
 ![Ajouter des compteurs au connecteur avec l’Analyseur de performances](./media/application-proxy-connectors/performance-monitor.png)
 
-Les connecteurs ont des journaux d’activité de session et admin. Les journaux d’activité admin incluent les événements principaux et leurs erreurs. Les journaux d’activité de session incluent toutes les transactions et les détails de traitement.
+Les connecteurs ont des journaux de **session** et d’**administration**. Le journal d’**administration** inclut les événements principaux et leurs erreurs. Le journal de **session** contient toutes les transactions et les détails de leur traitement.
 
-Pour afficher les journaux d’activité, accédez l’Observateur d’événements, ouvrez le menu **Affichage**, puis activez **Afficher les journaux d’activité d’analyse et de débogage**. Ensuite, permettez-leur de lancer la collecte d’événements. Ces journaux d’activité n’apparaissent pas dans le proxy d’application web dans Windows Server 2012 R2, car les connecteurs sont basés sur une version plus récente.
+Pour voir les journaux, ouvrez l’**Observateur d’événements** et accédez à **Journaux des applications et des services** > **Microsoft** > **AadApplicationProxy** > **Connecteur**. Pour rendre le journal de **session** visible, dans le menu **Affichage**, sélectionnez **Afficher les journaux d’analyse et de débogage**. Le journal de **session** est généralement utilisé pour la résolution des problèmes. Il est désactivé par défaut. Activez-le pour commencer à collecter des événements, et désactivez-le lorsqu’il n’est plus nécessaire.
 
 Vous pouvez examiner l’état du service dans la fenêtre Services. Le connecteur se compose de deux services Windows : le connecteur lui-même et le programme de mise à jour. Tous deux doivent s’exécuter en permanence.
 

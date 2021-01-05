@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: ece25e95bbbe9f1a1fa591c29ea9ffda0fefd369
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 066a6489e6244369453ec5d9f21d5e1e83fcd6c8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78187676"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85201748"
 ---
 # <a name="integer-claims-transformations"></a>Transformations de revendications d’entier
 
@@ -35,7 +35,7 @@ Convertit un type de données long en type de données string.
 
 Dans cet exemple, la revendication `numericUserId` avec un type de valeur long est convertie en revendication `UserId` avec un type de valeur chaîne.
 
-```XML
+```xml
 <ClaimsTransformation Id="CreateUserId" TransformationMethod="ConvertNumberToStringClaim">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="numericUserId" TransformationClaimType="inputClaim" />

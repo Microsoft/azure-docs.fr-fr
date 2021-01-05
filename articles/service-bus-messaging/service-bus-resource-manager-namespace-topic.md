@@ -1,25 +1,19 @@
 ---
 title: Créer une rubrique d’espace de noms Azure Service Bus en utilisant un modèle
 description: 'Démarrage rapide : Créer un espace de noms Service Bus par rubrique et abonnement à l’aide d’un modèle Azure Resource Manager'
-services: service-bus-messaging
 documentationcenter: .net
 author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: d3d55200-5c60-4b5f-822d-59974cafff0e
-ms.service: service-bus-messaging
-ms.devlang: tbd
 ms.topic: quickstart
 ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 01/16/2020
+ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: c94b670a33f7640d2d6f428287b3ba0fab766bc5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 706432c039bc38e9799828ae752d6ad0c92ffde3
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80384872"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97704603"
 ---
 # <a name="quickstart-create-a-service-bus-namespace-with-topic-and-subscription-using-an-azure-resource-manager-template"></a>Démarrage rapide : Créer un espace de noms Service Bus par rubrique et abonnement à l’aide d’un modèle Azure Resource Manager
 
@@ -150,7 +144,7 @@ New-AzureResourceGroupDeployment -Name \<deployment-name\> -ResourceGroupName \<
 ## <a name="azure-cli"></a>Azure CLI
 
 ```azurecli-interactive
-az group deployment create \<my-resource-group\> --name \<my-deployment-name\> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
+az deployment group create \<my-resource-group\> --name \<my-deployment-name\> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-and-subscription/azuredeploy.json>
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -163,6 +157,6 @@ Maintenant que vous avez créé et déployé des ressources à l’aide d’Azur
 [Authoring Azure Resource Manager templates]: ../azure-resource-manager/templates/template-syntax.md
 [Azure Quickstart Templates]: https://azure.microsoft.com/documentation/templates/?term=service+bus
 [Learn more about Service Bus topics and subscriptions]: service-bus-queues-topics-subscriptions.md
-[Using Azure PowerShell with Azure Resource Manager]: ../azure-resource-manager/powershell-azure-resource-manager.md
-[Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
+[Using Azure PowerShell with Azure Resource Manager]: ../azure-resource-manager/management/manage-resources-powershell.md
+[Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: ../azure-resource-manager/management/manage-resources-cli.md
 [Service Bus namespace with topic and subscription]: https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-topic-and-subscription/

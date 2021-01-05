@@ -9,12 +9,12 @@ ms.topic: include
 ms.date: 08/02/2019
 ms.author: cshoe
 ms.custom: include file
-ms.openlocfilehash: fa3888d28c52625684676036def7e2920b77b5ca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4a879c4041fe317955a07eda9dd8a3ef9f542275
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77201970"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998830"
 ---
 Vous pouvez utiliser les types de paramètres suivants pour l’objet blob déclencheur :
 
@@ -22,7 +22,6 @@ Vous pouvez utiliser les types de paramètres suivants pour l’objet blob décl
 * `TextReader`
 * `string`
 * `Byte[]`
-* Un objet POCO sérialisable au format JSON
 * `ICloudBlob`<sup>1</sup>
 * `CloudBlockBlob`<sup>1</sup>
 * `CloudPageBlob`<sup>1</sup>
@@ -32,4 +31,4 @@ Vous pouvez utiliser les types de paramètres suivants pour l’objet blob décl
 
 Si vous essayez de lier à un des types de SDK Stockage et obtenez un message d’erreur, vérifiez que vous avez une référence à [la bonne version du SDK Stockage](../articles/azure-functions/functions-bindings-storage-blob.md#azure-storage-sdk-version-in-functions-1x).
 
-La liaison avec `string`, `Byte[]` ou POCO est recommandée uniquement si la taille de l’objet blob est petite, car tout le contenu de l’objet blob est chargé en mémoire. En général, il est préférable d’utiliser un type `Stream` ou `CloudBlockBlob`. Pour plus d’informations, consultez [Concurrence et utilisation de la mémoire](../articles/azure-functions/functions-bindings-storage-blob-trigger.md#concurrency-and-memory-usage) plus loin dans cet article.
+La liaison à `string` ou `Byte[]` est recommandée uniquement si la taille de l’objet blob est petite, car tout le contenu de l’objet blob est chargé en mémoire. En général, il est préférable d’utiliser un type `Stream` ou `CloudBlockBlob`. Pour plus d’informations, consultez [Concurrence et utilisation de la mémoire](../articles/azure-functions/functions-bindings-storage-blob-trigger.md#concurrency-and-memory-usage) plus loin dans cet article.

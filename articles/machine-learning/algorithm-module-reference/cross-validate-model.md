@@ -1,7 +1,7 @@
 ---
 title: 'Modèle de validation croisée : sur le module Modifier les métadonnées'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Modèle de validation croisée dans Azure Machine Learning afin d’effectuer une validation croisée des estimations de paramètre pour les modèles de classification ou de régression en partitionnant les données.
+description: Utilisez le module Modèle de validation croisée dans le concepteur Azure Machine Learning afin d’effectuer une validation croisée des estimations de paramètre pour les modèles de classification ou de régression.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/11/2020
-ms.openlocfilehash: 7550bb7c6bbf7602245f9a9f1ac006ce693b36a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4099ecf6e6bcc6654391e54292878393fb22914
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477644"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421343"
 ---
 # <a name="cross-validate-model"></a>Modèle de validation croisée
 
-Cet article décrit comment utiliser le module Modèle de validation croisée dans le concepteur Azure Machine Learning (préversion). La *validation croisée* est une technique souvent utilisée en machine learning pour évaluer la variabilité d’un jeu de données et la fiabilité de tout modèle entraîné avec ces données.  
+Cet article décrit comment utiliser le module Modèle de validation croisée dans le concepteur Azure Machine Learning. La *validation croisée* est une technique souvent utilisée en machine learning pour évaluer la variabilité d’un jeu de données et la fiabilité de tout modèle entraîné avec ces données.  
 
 Le module Modèle de validation croisée prend comme entrée un jeu de données étiqueté ainsi qu’un modèle de classification ou de régression non entraîné. Il divise le jeu de données en un certain nombre de sous-ensembles (*échantillons*), crée un modèle sur chaque échantillon, puis retourne un jeu de statistiques de justesse pour chaque échantillon. En comparant les statistiques de justesse pour tous les replis, vous pouvez interpréter la qualité du jeu de données. Vous pouvez alors déterminer si le modèle est sensible aux variations des données.  
 

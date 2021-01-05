@@ -2,19 +2,21 @@
 title: Livres blancs à propos des concepts Azure Cosmos DB
 description: Obtenez la liste des livres blancs pour Azure Cosmos DB, ces livres blancs décrivent en détail les concepts.
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 author: SnehaGunda
 ms.author: sngun
 ms.topic: conceptual
 ms.date: 12/02/2019
 ms.custom: seodec18
-ms.openlocfilehash: adbbdf39875e67552de2f797b94eae89e0aba409
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b9ad69114dedfdec151480b97ceccc279bcbd683
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74869780"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340394"
 ---
 # <a name="azure-cosmos-db-whitepapers"></a>Livres blancs sur Azure Cosmos DB
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 Les livres blancs vous permettent d’explorer plus en profondeur les concepts Azure Cosmos DB. Cet article contient une liste de livres blancs disponibles pour Azure Cosmos DB.
 

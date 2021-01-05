@@ -1,22 +1,37 @@
 ---
-title: Diagnostiquer et résoudre les problèmes du kit SDK Java Async Azure Cosmos DB
-description: Utilisez des fonctionnalités telles que la journalisation côté client et d’autres outils tiers pour identifier, diagnostiquer et résoudre les problèmes liés à Azure Cosmos DB.
-author: moderakh
+title: Diagnostiquer et résoudre les problèmes du Kit SDK Java asynchrone v2 pour Azure Cosmos DB
+description: Utilisez des fonctionnalités telles que la journalisation côté client et d’autres outils tiers pour identifier, diagnostiquer et résoudre des problèmes liés à Azure Cosmos DB dans le Kit SDK Java asynchrone v2.
+author: anfeldma-ms
 ms.service: cosmos-db
-ms.date: 04/30/2019
-ms.author: moderakh
+ms.date: 05/11/2020
+ms.author: anfeldma
 ms.devlang: java
 ms.subservice: cosmosdb-sql
 ms.topic: troubleshooting
 ms.reviewer: sngun
-ms.openlocfilehash: 572139743c66546622450cef8f8a0fa264d24779
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: b39a74bd06f942cf21d201c8cef48bc6dfc57d46
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65519976"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96548084"
 ---
-# <a name="troubleshoot-issues-when-you-use-the-java-async-sdk-with-azure-cosmos-db-sql-api-accounts"></a>Résoudre les problèmes quand vous utilisez le SDK Java Async avec des comptes d’API SQL Azure Cosmos DB
+# <a name="troubleshoot-issues-when-you-use-the-azure-cosmos-db-async-java-sdk-v2-with-sql-api-accounts"></a>Résoudre les problèmes liés à l’utilisation du Kit SDK Java asynchrone v2 pour Azure Cosmos DB avec des comptes d’API SQL
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
+> [!div class="op_single_selector"]
+> * [Kit SDK Java v4](troubleshoot-java-sdk-v4-sql.md)
+> * [Kit SDK Java asynchrone v2](troubleshoot-java-async-sdk.md)
+> * [.NET](troubleshoot-dot-net-sdk.md)
+> 
+
+> [!IMPORTANT]
+> Il ne s’agit *pas* du Kit de développement logiciel (SDK) Java pour Azure Cosmos DB le plus récent. Vous devez mettre à niveau votre projet vers le [Kit de développement logiciel (SDK) Java v4 pour Azure Cosmos DB](sql-api-sdk-java-v4.md), puis lire le [Guide de résolution des problèmes](troubleshoot-java-sdk-v4-sql.md) du Kit de développement logiciel (SDK) Java v4 pour Azure Cosmos DB. Pour la mise à niveau, suivez les instructions fournies dans les guides [Migrer vers le Kit de développement logiciel (SDK) Java v4 pour Azure Cosmos DB](migrate-java-v4-sdk.md) et [Reactor vs RxJava](https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples/blob/main/reactor-rxjava-guide.md). 
+>
+> Cet article traite de la résolution des problèmes liés uniquement au Kit SDK Java asynchrone v2 pour Azure Cosmos DB. Pour plus d’informations, consultez les [Notes de publication](sql-api-sdk-async-java.md), le [Référentiel Maven](https://mvnrepository.com/artifact/com.microsoft.azure/azure-cosmosdb) et les [Conseils sur les performances](performance-tips-async-java.md) en lien avec le Kit SDK Java asynchrone v2 pour Azure Cosmos DB.
+>
+
 Cet article traite des problèmes courants, des solutions de contournement, des étapes de diagnostic et des outils quand vous utilisez le [SDK Java Async](sql-api-sdk-async-java.md) avec des comptes d’API SQL Azure Cosmos DB.
 Le SDK Java Async fournit la représentation logique côté client pour accéder à l’API SQL Azure Cosmos DB. Cet article décrit les outils et les approches qui peuvent vous aider si vous rencontrez des problèmes.
 
@@ -49,13 +64,13 @@ La quantité maximale de fichiers ouverts autorisée, qui sont identifiés comme
 
 ##### <a name="azure-snat-pat-port-exhaustion"></a><a name="snat"></a>Insuffisance de ports Azure SNAT (PAT)
 
-Si votre application est déployée sur Machine virtuelle Azure sans adresse IP publique, par défaut les [ports Azure SNAT](https://docs.microsoft.com/azure/load-balancer/load-balancer-outbound-connections#preallocatedports) établissent des connexions avec n’importe quel point de terminaison en dehors de votre machine virtuelle. Le nombre de connexions autorisées de la machine virtuelle au point de terminaison Azure Cosmos DB est limité par la [configuration Azure SNAT](https://docs.microsoft.com/azure/load-balancer/load-balancer-outbound-connections#preallocatedports).
+Si votre application est déployée sur Machine virtuelle Azure sans adresse IP publique, par défaut les [ports Azure SNAT](../load-balancer/load-balancer-outbound-connections.md#preallocatedports) établissent des connexions avec n’importe quel point de terminaison en dehors de votre machine virtuelle. Le nombre de connexions autorisées de la machine virtuelle au point de terminaison Azure Cosmos DB est limité par la [configuration Azure SNAT](../load-balancer/load-balancer-outbound-connections.md#preallocatedports).
 
  Les ports Azure SNAT sont utilisés uniquement quand votre machine virtuelle a une adresse IP privée et qu’un processus à partir de la machine virtuelle tente de se connecter avec une adresse IP publique. Il existe deux solutions de contournement pour éviter la limitation Azure SNAT :
 
-* Ajoutez votre point de terminaison de service Azure Cosmos DB au sous-réseau de votre réseau virtuel Machines virtuelles Azure. Pour plus d’informations, consultez [Points de terminaison de service de réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-overview). 
+* Ajoutez votre point de terminaison de service Azure Cosmos DB au sous-réseau de votre réseau virtuel Machines virtuelles Azure. Pour plus d’informations, consultez [Points de terminaison de service de réseau virtuel](../virtual-network/virtual-network-service-endpoints-overview.md). 
 
-    Quand le point de terminaison de service est activé, les requêtes ne sont plus envoyées d’une adresse IP publique à Azure Cosmos DB. Au lieu de cela, les identités du réseau virtuel et du sous-réseau sont envoyées. Cette modification peut entraîner des problèmes de pare-feu si seules les adresses IP publiques sont autorisées. Si vous utilisez un pare-feu, quand vous activez le point de terminaison de service, ajoutez un sous-réseau au pare-feu à l’aide de [Listes de contrôle d’accès de réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-networks-acl).
+    Quand le point de terminaison de service est activé, les requêtes ne sont plus envoyées d’une adresse IP publique à Azure Cosmos DB. Au lieu de cela, les identités du réseau virtuel et du sous-réseau sont envoyées. Cette modification peut entraîner des problèmes de pare-feu si seules les adresses IP publiques sont autorisées. Si vous utilisez un pare-feu, quand vous activez le point de terminaison de service, ajoutez un sous-réseau au pare-feu à l’aide de [Listes de contrôle d’accès de réseau virtuel](/previous-versions/azure/virtual-network/virtual-networks-acl).
 * Assignez une adresse IP publique à votre machine virtuelle Azure.
 
 ##### <a name="cant-reach-the-service---firewall"></a><a name="cant-connect"></a>Impossible d’atteindre le service - pare-feu
@@ -80,6 +95,9 @@ Le SDK utilise la bibliothèque d’E/S [Netty](https://netty.io/) pour communiq
 Les threads d’E/S de Netty sont destinés à être utilisés uniquement pour les tâches d’E/S non bloquantes de Netty. Le SDK retourne le résultat d’appel de l’API sur l’un des threads d’E/S de Netty au code de l’application. Si l’application effectue une opération de longue durée après avoir reçu les résultats sur le thread Netty, le SDK risque de ne pas avoir suffisamment de threads d’E/S pour effectuer ses tâches d’E/S internes. Ce type de codage d’application peut entraîner un débit faible, une latence élevée et des échecs `io.netty.handler.timeout.ReadTimeoutException`. La solution de contournement consiste à basculer le thread quand vous savez que l’opération prendra de temps.
 
 Par exemple, examinons l’extrait de code suivant. Il se peut que vous effectuiez un travail de longue durée qui prend plus de quelques millisecondes sur le thread Netty. Dans ce cas, vous risquez de passer dans un état où aucun thread d’E/S Netty n’est présent pour traiter les tâches d’E/S. Vous obtenez alors un échec ReadTimeoutException.
+
+### <a name="async-java-sdk-v2-maven-commicrosoftazureazure-cosmosdb"></a><a id="asyncjava2-readtimeout"></a>Kit SDK Java asynchrone v2 (Maven com.microsoft.azure::azure-cosmosdb)
+
 ```java
 @Test
 public void badCodeWithReadTimeoutException() throws Exception {
@@ -131,13 +149,19 @@ public void badCodeWithReadTimeoutException() throws Exception {
     assertThat(failureCount.get()).isGreaterThan(0);
 }
 ```
-   La solution de contournement consiste à changer le thread sur lequel vous effectuez le travail qui prend du temps. Définissez une instance singleton du planificateur pour votre application.
-   ```java
+La solution de contournement consiste à changer le thread sur lequel vous effectuez le travail qui prend du temps. Définissez une instance singleton du planificateur pour votre application.
+
+### <a name="async-java-sdk-v2-maven-commicrosoftazureazure-cosmosdb"></a><a id="asyncjava2-scheduler"></a>Kit SDK Java asynchrone v2 (Maven com.microsoft.azure::azure-cosmosdb)
+
+```java
 // Have a singleton instance of an executor and a scheduler.
 ExecutorService ex  = Executors.newFixedThreadPool(30);
 Scheduler customScheduler = rx.schedulers.Schedulers.from(ex);
-   ```
-   Vous devrez peut-être effectuer des tâches qui prennent du temps, par exemple des E/S bloquantes ou des tâches qui nécessitent beaucoup de ressources de calcul. Dans ce cas, basculez vers un thread de travail fourni par votre `customScheduler` à l’aide de l’API `.observeOn(customScheduler)`.
+```
+Vous devrez peut-être effectuer des tâches qui prennent du temps, par exemple des E/S bloquantes ou des tâches qui nécessitent beaucoup de ressources de calcul. Dans ce cas, basculez vers un thread de travail fourni par votre `customScheduler` à l’aide de l’API `.observeOn(customScheduler)`.
+
+### <a name="async-java-sdk-v2-maven-commicrosoftazureazure-cosmosdb"></a><a id="asyncjava2-applycustomscheduler"></a>Kit SDK Java asynchrone v2 (Maven com.microsoft.azure::azure-cosmosdb)
+
 ```java
 Observable<ResourceResponse<Document>> createObservable = client
         .createDocument(getCollectionLink(), docDefinition, null, false);
@@ -253,5 +277,3 @@ De nombreuses connexions au point de terminaison Azure Cosmos DB peuvent se trou
 [Enable client SDK logging]: #enable-client-sice-logging
 [Limite de connexion sur un ordinateur hôte]: #connection-limit-on-host
 [Insuffisance de ports Azure SNAT (PAT)]: #snat
-
-

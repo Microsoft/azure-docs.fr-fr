@@ -2,16 +2,17 @@
 title: Actualiser avec Logic Apps pour les modèles Azure Analysis Services | Microsoft Docs
 description: Cet article explique comment coder l’actualisation asynchrone pour Azure Analysis Services avec Azure Logic Apps.
 author: chrislound
-ms.service: analysis-services
+ms.service: azure-analysis-services
 ms.topic: conceptual
 ms.date: 10/30/2019
 ms.author: chlound
-ms.openlocfilehash: 78bc629598c0635b7760285d0507b7a85a4ab551
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: references_regions
+ms.openlocfilehash: 8a8d434fca7cab4432f38fc64093cf1fe060bd5f
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79126890"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92019084"
 ---
 # <a name="refresh-with-logic-apps"></a>Actualiser avec Logic Apps
 
@@ -26,7 +27,7 @@ Tous les appels doivent être authentifiés avec un jeton Azure Active Directory
 ## <a name="design-the-logic-app"></a>Concevoir l’application logique
 
 > [!IMPORTANT]
-> Les exemples suivants supposent que le pare-feu Azure Analysis Services est désactivé. Si le pare-feu est activé, l’adresse IP publique de l’initiateur de la requête doit figurer sur la liste verte dans le pare-feu Azure Analysis Services. Pour en savoir plus sur les plages d’adresses IP Azure Logic Apps par région, consultez [Limites et informations de configuration pour Azure Logic Apps](../logic-apps/logic-apps-limits-and-config.md#configuration).
+> Les exemples suivants supposent que le pare-feu Azure Analysis Services est désactivé. Si le pare-feu est activé, l’adresse IP publique de l’initiateur de la demande doit être ajoutée à la liste approuvée dans le pare-feu Azure Analysis Services. Pour en savoir plus sur les plages d’adresses IP Azure Logic Apps par région, consultez [Limites et informations de configuration pour Azure Logic Apps](../logic-apps/logic-apps-limits-and-config.md#configuration).
 
 ### <a name="prerequisites"></a>Conditions préalables requises
 
@@ -52,9 +53,9 @@ Cette étape est remplie avec l’URL HTTP POST une fois que l’application log
 
 2. Ajoutez une nouvelle étape et recherchez **HTTP**.  
 
-   ![Ajouter une activité HTTP](./media/analysis-services-async-refresh-logic-app/9.png)
+   ![Capture d’écran de la section « Choisir une action » avec la vignette « HTTP » sélectionnée](./media/analysis-services-async-refresh-logic-app/9.png)
 
-   ![Ajouter une activité HTTP](./media/analysis-services-async-refresh-logic-app/10.png)
+   ![Capture d’écran de la fenêtre « HTTP » avec la vignette « HTTP – HTTP » sélectionnée](./media/analysis-services-async-refresh-logic-app/10.png)
 
 3. Sélectionnez **HTTP** pour ajouter cette action.
 
@@ -97,15 +98,15 @@ Si vous ne prévoyez pas d’utiliser un outil d’orchestration tel que Data Fa
 
 À l’aide de l’exemple ci-dessus, supprimez la première activité et remplacez-la par une activité **Planification**.
 
-![Activité de planification](./media/analysis-services-async-refresh-logic-app/12.png)
+![Capture d’écran de la page « Logic Apps » avec la vignette « Planification » sélectionnée](./media/analysis-services-async-refresh-logic-app/12.png)
 
-![Activité de planification](./media/analysis-services-async-refresh-logic-app/13.png)
+![Capture d’écran de la page « Déclencheurs »](./media/analysis-services-async-refresh-logic-app/13.png)
 
 Cet exemple utilise **Périodicité**.
 
 Une fois que l’activité a été ajoutée, configurez l’intervalle et la fréquence, puis ajoutez un nouveau paramètre et choisissez **Aux heures indiquées**.
 
-![Activité de planification](./media/analysis-services-async-refresh-logic-app/16.png)
+![Capture d’écran de la section « Périodicité » avec le paramètre « À ces heures » sélectionné](./media/analysis-services-async-refresh-logic-app/16.png)
 
 Sélectionnez les heures souhaitées.
 
@@ -116,4 +117,4 @@ Enregistrez l’application logique.
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Exemples](analysis-services-samples.md)  
-[REST API](https://docs.microsoft.com/rest/api/analysisservices/servers)
+[REST API](/rest/api/analysisservices/servers)

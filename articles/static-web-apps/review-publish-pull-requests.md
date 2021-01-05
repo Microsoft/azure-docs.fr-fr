@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: conceptual
 ms.date: 05/08/2020
 ms.author: yolasors
-ms.openlocfilehash: 61c5917c1e4cb9dbf96e90af9a30777ea7c2e66c
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: f8f2e352ae458e3e2825c9701437ea652ba07375
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594108"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91825666"
 ---
 # <a name="review-pull-requests-in-pre-production-environments-in-azure-static-web-apps-preview"></a>Passer en revue les demandes de tirage (pull request) dans les environnements de préproduction dans Azure Static Web Apps (préversion)
 
@@ -51,11 +51,11 @@ Commencez par modifier votre référentiel. Vous pouvez le faire directement sur
 
 1. Accédez à votre dossier _app_ et modifiez du texte. Par exemple, vous pouvez modifier un titre ou un paragraphe. Lorsque vous avez trouvé le fichier que vous souhaitez modifier, cliquez sur **Edit** pour effectuer la modification.
 
-    :::image type="content" source="./media/review-publish-pull-requests/edit-file.png" alt-text="Bouton Edit pour modifier un fichier dans l’interface de GitHub":::
+    :::image type="content" source="./media/review-publish-pull-requests/edit-file.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 1. Une fois votre modification effectuée, cliquez sur **Commit changes** pour valider les modifications apportées à la branche.
 
-    :::image type="content" source="./media/review-publish-pull-requests/commit-changes.png" alt-text="Bouton Commit changes dans l’interface de GitHub":::
+    :::image type="content" source="./media/review-publish-pull-requests/commit-changes.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 ## <a name="create-a-pull-request"></a>Créer une demande de tirage (pull request)
 
@@ -63,13 +63,13 @@ Ensuite, créez une requête de tirage (pull request) à partir de cette modific
 
 1. Dans votre projet GitHub, ouvrez l’onglet **Pull request** (Demande de tirage).
 
-    :::image type="content" source="./media/review-publish-pull-requests/tab.png" alt-text="Onglet Pull request (Demande de tirage) d’un référentiel GitHub":::
+    :::image type="content" source="./media/review-publish-pull-requests/tab.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 1. Cliquez sur le bouton **Compare & pull request** (Comparer et demander un tirage) de votre branche.
 
 1. Vous pouvez éventuellement entrer des informations sur vos modifications, puis cliquer sur **Create pull request** (Créer une demande de tirage).
 
-    :::image type="content" source="./media/review-publish-pull-requests/open.png" alt-text="Création d’une demande de tirage dans GitHub":::
+    :::image type="content" source="./media/review-publish-pull-requests/open.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 Vous pouvez affecter des réviseurs et ajouter des commentaires pour discuter de vos modifications si nécessaire.
 
@@ -82,7 +82,7 @@ Une fois la demande de tirage créée, le workflow de déploiement [GitHub Actio
 
 Lorsque le workflow a terminé la génération et le déploiement de votre application, le bot GitHub ajoute un commentaire à votre demande de tirage contenant l’URL de l’environnement de préproduction. Vous pouvez cliquer sur ce lien pour afficher vos modifications indexées.
 
-:::image type="content" source="./media/review-publish-pull-requests/bot-comment.png" alt-text="Commentaire de demande de tirage avec l’URL de préproduction":::
+:::image type="content" source="./media/review-publish-pull-requests/bot-comment.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 Cliquez sur l’URL générée pour voir les modifications.
 
@@ -96,7 +96,7 @@ Une fois les modifications approuvées, vous pouvez publier vos modifications en
 
 Cliquez sur **Merge pull request** (Fusionner la demande de tirage) :
 
-:::image type="content" source="./media/review-publish-pull-requests/merge.png" alt-text="Bouton Merge pull request (Fusionner la demande de tirage) dans l’interface de GitHub":::
+:::image type="content" source="./media/review-publish-pull-requests/merge.png" alt-text="Créer une branche à l’aide de l’interface GitHub":::
 
 La fusion copie vos modifications dans la branche suivie (la branche de « production »). Ensuite, le workflow de déploiement démarre sur la branche suivie et les modifications sont publiées après la nouvelle génération de votre application.
 

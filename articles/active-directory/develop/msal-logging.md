@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 11/11/2019
 ms.author: marsma
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 58697cc535357710c6889f05060b5e04e129ae7d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: b53a12db9203121d12a69c10aaa81bceab5c1754
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77084881"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97584253"
 ---
 # <a name="logging-in-msal-applications"></a>Journalisation dans les applications MSAL
 
@@ -142,15 +142,15 @@ var msalConfig = {
     auth: {
         clientId: "<Enter your client id>",
     },
-     system: {
-             logger: new Msal.Logger(
-                                loggerCallback ,{
-                                     level: Msal.LogLevel.Verbose,
-                                     piiLoggingEnabled: false,
-                                     correlationId: '1234'
-                                }
-                        )
-     }
+    system: {
+        logger: new Msal.Logger(
+            loggerCallback , {
+                level: Msal.LogLevel.Verbose,
+                piiLoggingEnabled: false,
+                correlationId: '1234'
+            }
+        )
+    }
 }
 
 var UserAgentApplication = new Msal.UserAgentApplication(msalConfig);

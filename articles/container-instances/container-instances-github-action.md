@@ -2,20 +2,20 @@
 title: Déployer une instance de conteneur par action GitHub
 description: Configurez une action GitHub qui automatise les étapes de création, de transmission et de déploiement d’une image conteneur pour Azure Container Instances.
 ms.topic: article
-ms.date: 03/18/2020
-ms.custom: ''
-ms.openlocfilehash: 13397cee8197afc65b93c587ae1505e59cfdebc1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/20/2020
+ms.custom: github-actions-azure, devx-track-azurecli
+ms.openlocfilehash: 0068b9869e5ef7a3b6c0fd21c1b69cdae1d4ab4b
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80258037"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96454819"
 ---
 # <a name="configure-a-github-action-to-create-a-container-instance"></a>Configurer une action GitHub pour créer une instance de conteneur
 
 [GitHub Actions](https://help.github.com/actions/getting-started-with-github-actions/about-github-actions) est une suite de fonctionnalités dans GitHub permettant d’automatiser vos workflows de développement logiciel dans le même emplacement que celui où vous stockez le code et collaborez sur les demandes de tirage (pull requests) et les problèmes.
 
-Utilisez l’action GitHub [Déployer sur Azure Container Instances](https://github.com/azure/aci-deploy) pour automatiser le déploiement d’un conteneur dans Azure Container Instances. L’action vous permet de définir les propriétés d’une instance de conteneur similaire à celles de la commande [az container create][az-container-create].
+Utilisez l’action GitHub [Déployer sur Azure Container Instances](https://github.com/azure/aci-deploy) pour automatiser le déploiement d’un seul conteneur sur Azure Container Instances. L’action vous permet de définir les propriétés d’une instance de conteneur similaire à celles de la commande [az container create][az-container-create].
 
 Cet article explique comment configurer un workflow dans un référentiel GitHub qui effectue les actions suivantes :
 
@@ -25,8 +25,8 @@ Cet article explique comment configurer un workflow dans un référentiel GitHub
 
 Cet article présente deux méthodes de configuration du workflow :
 
-* Configurez vous-même un workflow dans un référentiel GitHub à l’aide de l’action Déployer sur Azure Container Instances et d’autres actions.  
-* Utilisez la commande `az container app up` de l’extension [Déployer sur Azure](https://github.com/Azure/deploy-to-azure-cli-extension) dans l’interface de ligne de commande Azure. Cette commande simplifie la création du workflow GitHub et des étapes de déploiement.
+* [Configurer le workflow GitHub](#configure-github-workflow) : créez un workflow dans un dépôt GitHub à l’aide de l’action Déployer sur Azure Container Instances et d’autres actions.  
+* [Utiliser l’extension CLI](#use-deploy-to-azure-extension) : utilisez la commande `az container app up` de l’extension [Déployer sur Azure](https://github.com/Azure/deploy-to-azure-cli-extension) dans l’interface de ligne de commande Azure. Cette commande simplifie la création du workflow GitHub et des étapes de déploiement.
 
 > [!IMPORTANT]
 > L’action GitHub pour Azure Container Instances est actuellement en préversion. Les préversions sont à votre disposition, à condition que vous acceptiez les [conditions d’utilisation supplémentaires][terms-of-use]. Certains aspects de cette fonctionnalité sont susceptibles d’être modifiés avant la mise à disposition générale.
@@ -53,10 +53,10 @@ Cet article présente deux méthodes de configuration du workflow :
 
 Dans le workflow GitHub, vous devez fournir des informations d’identification Azure pour l’authentification auprès d’Azure CLI. L’exemple suivant crée un principal de service avec le rôle Contributeur étendu au groupe de ressources de votre registre de conteneurs.
 
-Tout d’abord, récupérez l’ID de ressource de votre groupe de ressources. Substituez le nom de votre groupe dans la commande [az group show][az-acr-show] suivante :
+Tout d’abord, récupérez l’ID de ressource de votre groupe de ressources. Substituez le nom de votre groupe dans la commande [az group show][az-group-show] suivante :
 
 ```azurecli
-groupId=$(az group show \
+$groupId=$(az group show \
   --name <resource-group-name> \
   --query id --output tsv)
 ```
@@ -91,7 +91,7 @@ Enregistrez la sortie JSON, car elle est utilisée à une étape ultérieure. No
 
 ### <a name="update-service-principal-for-registry-authentication"></a>Mettre à jour le principal du service pour l’authentification du registre
 
-Mettez à jour les informations d’identification du principal du service Azure pour autoriser les autorisations push et pull sur votre registre de conteneurs. Cette étape permet au workflow GitHub d’utiliser le principal du service pour [s’authentifier auprès de votre registre de conteneurs](../container-registry/container-registry-auth-service-principal.md). 
+Mettez à jour les informations d’identification du principal du service Azure pour autoriser les accès push et pull (envoi et tirage) à votre registre de conteneurs. Cette étape permet au workflow GitHub d’utiliser le principal du service pour [s’authentifier auprès de votre registre de conteneurs](../container-registry/container-registry-auth-service-principal.md) ainsi que d’envoyer et d’extraire une image Docker. 
 
 Récupérez l’ID de ressource de votre registre de conteneurs. Substituez le nom de votre registre dans la commande [az acr show][az-acr-show] suivante :
 
@@ -118,8 +118,8 @@ az role assignment create \
 
 |Secret  |Valeur  |
 |---------|---------|
-|`AZURE_CREDENTIALS`     | La totalité de la sortie JSON issue de la création du principal de service |
-|`REGISTRY_LOGIN_SERVER`   | Nom du serveur de connexion de votre registre (tout en minuscules). Exemple : *myregistry.azure.cr.io*        |
+|`AZURE_CREDENTIALS`     | Étape de création de la totalité de la sortie JSON à partir du principal de service |
+|`REGISTRY_LOGIN_SERVER`   | Nom du serveur de connexion de votre registre (tout en minuscules). Exemple : *myregistry.azurecr.io*        |
 |`REGISTRY_USERNAME`     |  `clientId` de la sortie JSON issue de la création du principal de service       |
 |`REGISTRY_PASSWORD`     |  `clientSecret` de la sortie JSON issue de la création du principal de service |
 | `RESOURCE_GROUP` | Nom du groupe de ressources que vous avez utilisé pour définir l’étendue du principal de service |
@@ -177,7 +177,7 @@ Une fois que vous avez validé le fichier du workflow, le workflow est déclench
 
 ![Afficher la progression du workflow](./media/container-instances-github-action/github-action-progress.png)
 
-Pour plus d’informations sur l’affichage de l’état et des résultats de chaque étape de workflow, consultez [Gestion d’une exécution de workflow](https://help.github.com/actions/configuring-and-managing-workflows/managing-a-workflow-run).
+Pour plus d’informations sur l’affichage de l’état et des résultats de chaque étape de workflow, consultez [Gestion d’une exécution de workflow](https://help.github.com/actions/configuring-and-managing-workflows/managing-a-workflow-run). Si le workflow ne se termine pas, consultez [Consultation des journaux pour diagnostiquer les défaillances](https://docs.github.com/actions/configuring-and-managing-workflows/managing-a-workflow-run#viewing-logs-to-diagnose-failures).
 
 Une fois le workflow terminé, récupérez des informations sur l’instance de conteneur nommée *aci-sampleapp* en exécutant la commande [az container show][az-container-show]. Substituez le nom de votre groupe de ressources : 
 
@@ -237,7 +237,7 @@ az container app up \
 
 ### <a name="command-progress"></a>Progression de la commande
 
-* Lorsque vous y êtes invité, fournissez vos informations d’identification GitHub ou fournissez un [jeton d’accès personnel (PAT) GitHub](https://help.github.com/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) doté des étendues *référentiel* et *utilisateur* pour vous authentifier auprès de votre registre. Si vous fournissez des informations d’identification GitHub, la commande crée un PAT pour vous.
+* Lorsque vous y êtes invité, fournissez vos informations d’identification GitHub ou un [jeton d’accès personnel (PAT) GitHub](https://help.github.com/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) doté des étendues *dépôt* et *utilisateur* pour vous authentifier auprès de votre compte GitHub. Si vous fournissez des informations d’identification GitHub, la commande crée un PAT pour vous. Suivez les invites supplémentaires pour configurer le workflow.
 
 * La commande crée des secrets de référentiel pour le workflow :
 
@@ -258,11 +258,29 @@ Workflow succeeded
 Your app is deployed at:  http://acr-build-helloworld-node.eastus.azurecontainer.io:8080/
 ```
 
+Pour afficher l’état du workflow et les résultats de chaque étape dans l’interface utilisateur GitHub, consultez [Gestion d’une exécution de workflow](https://help.github.com/actions/configuring-and-managing-workflows/managing-a-workflow-run).
+
 ### <a name="validate-workflow"></a>Valider le workflow
 
-Le workflow déploie une instance de conteneur Azure avec le nom de base de votre référentiel GitHub, dans le cas présent : *acr-build-helloworld-node*. Dans votre navigateur, vous pouvez accéder au lien fourni pour afficher l’application web en cours d’exécution. Si votre application écoute sur un port autre que le port 8080, spécifiez-le à la place dans l’URL.
+Le workflow déploie une instance de conteneur Azure avec le nom de base de votre référentiel GitHub, dans le cas présent : *acr-build-helloworld-node*. Une fois le workflow terminé, récupérez des informations sur l’instance de conteneur nommée *acr-build-helloworld-node* en exécutant la commande [az container show][az-container-show]. Substituez le nom de votre groupe de ressources : 
 
-Pour afficher l’état du workflow et les résultats de chaque étape dans l’interface utilisateur GitHub, consultez [Gestion d’une exécution de workflow](https://help.github.com/actions/configuring-and-managing-workflows/managing-a-workflow-run).
+```azurecli
+az container show \
+  --resource-group <resource-group-name> \
+  --name acr-build-helloworld-node \
+  --query "{FQDN:ipAddress.fqdn,ProvisioningState:provisioningState}" \
+  --output table
+```
+
+Le résultat se présente ainsi :
+
+```console
+FQDN                                                   ProvisioningState
+---------------------------------                      -------------------
+acr-build-helloworld-node.westus.azurecontainer.io     Succeeded
+```
+
+Une fois l’instance approvisionnée, accédez au nom de domaine complet du conteneur dans votre navigateur pour afficher l’application web en cours d’exécution.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

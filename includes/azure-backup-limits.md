@@ -8,11 +8,11 @@ ms.topic: include
 ms.date: 12/07/2018
 ms.author: dacurwin
 ms.custom: include file
-ms.openlocfilehash: 2fd03c70cffa4efcb30518ebe6c54ca899869e16
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7cf6e0c53337b7d4b08b694040c4f0b151a41103
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75751601"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95562169"
 ---
-Pour obtenir le résumé des paramètres et des limites du support de Sauvegarde Azure, consultez [Tableaux de prise en charge de Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-support-matrix).
+Pour obtenir le résumé des paramètres et des limites du support de Sauvegarde Azure, consultez [Tableaux de prise en charge de Sauvegarde Azure](../articles/backup/backup-support-matrix.md).

@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: 6af5fa944ef399756f9e890ddd77a7f5f32e2bfb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ef720a14617b4131474d50875701d0ef27df4151
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76903017"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86245503"
 ---
 # <a name="sfctl-settings-telemetry"></a>sfctl settings telemetry
 Configurez les paramètres locaux de télémétrie pour cette instance de sfctl.
@@ -60,4 +60,4 @@ sfctl settings telemetry set_telemetry --on
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

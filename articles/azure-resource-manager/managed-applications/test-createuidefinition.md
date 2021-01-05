@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 08/06/2019
 ms.author: tomfitz
-ms.openlocfilehash: e2d075a58872f9337c7d1faa642a48047e2f9ddf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f76d3b81c2d5425f7bb91c5c86a79faa097794e3
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78250182"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96434998"
 ---
 # <a name="test-your-portal-interface-for-azure-managed-applications"></a>Tester votre interface de portail pour Applications managées Azure
 
@@ -104,4 +104,4 @@ Maintenant que vous avez vérifié que votre interface de portail fonctionne com
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Après avoir validé votre interface du portail, découvrez comment [rendre disponible votre application gérée Azure dans la Place de marché](publish-marketplace-app.md).
+Après avoir validé votre interface du portail, découvrez comment [rendre disponible votre application gérée Azure dans la Place de marché](../../marketplace/create-new-azure-apps-offer.md).

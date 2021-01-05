@@ -9,13 +9,13 @@ ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: overview
 ms.date: 04/13/2020
-ms.author: metan
-ms.openlocfilehash: c4dae18a5040d475c246d244ea7702ccfdf85cd9
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.author: metang
+ms.openlocfilehash: 80da6776412e0df7b5b9ae5759ac770c04673992
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81538365"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92631068"
 ---
 # <a name="language-support-for-immersive-reader"></a>Prise en charge linguistique pour le Lecteur immersif
 
@@ -30,19 +30,21 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Arabe (Arabie saoudite) | ar-SA |
 | Bulgare | bg |
 | Bulgare (Bulgarie) | bg-BG |
-| Catalan | ca-ES |
+| Catalan | ca |
+| Catalan (Catalogne) | ca-ES |
 | Chinois | zh |
 | Chinois (Chine) | zh-CN |
 | Chinois (Hong Kong R.A.S.) | zh-HK |
-| Chinois (Macao) | zh-MO |
+| Chinese (Macao (R.A.S.)) | zh-MO |
 | Chinese (Singapore) | zh-SG |
 | Chinois (Taïwan) | zh-TW |
 | Chinois (simplifié) | zh-Hans |
 | Chinois simplifié (Chine) | zh-Hans-CN |
 | Chinois simplifié (Singapour) | zh-Hans-SG |
-| Chinois traditionnel | zh-Hant-CN |
-| Chinois traditionnel (Hong Kong) | zh-Hant-HK |
-| Chinois traditionnel (Macao) | zh-Hant-MO |
+| Chinois traditionnel | zh-Hant |
+| Chinois traditionnel (Chine) | zh-Hant-CN |
+| Chinois traditionnel (Hong Kong R.A.S.) | zh-Hant-HK |
+| Chinois traditionnel (Macao R.A.S.) | zh-Hant-MO |
 | Chinois traditionnel (Taïwan) | zh-Hant-TW |
 | Croate | hr |
 | Croate (Croatie) | hr-HR |
@@ -103,7 +105,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Slovaque | sk |
 | Slovaque (Slovaquie) | sk-SK |
 | Slovène | sl |
-| Slovène (Slovénie) | sl-SL |
+| Slovène (Slovénie) | sl-SI |
 | Espagnol | es |
 | Espagnol (Amérique latine) | es-419 |
 | Espagnol (Mexique) | es-MX |
@@ -126,25 +128,28 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Langage | Tag |
 |----------|-----|
 | Afrikaans | af |
+| Arabe | ar |
 | Arabe (égyptien) | ar-EG |
 | Arabe (Arabie saoudite) | ar-SA |
 | Bangla | bn |
 | Bosniaque | bs |
 | Bulgare | bg |
 | Bulgare (Bulgarie) | bg-BG |
-| Catalan | ca-ES |
+| Catalan | ca |
+| Catalan (Catalogne) | ca-ES |
 | Chinois | zh |
 | Chinois (Chine) | zh-CN |
 | Chinois (Hong Kong R.A.S.) | zh-HK |
-| Chinois (Macao) | zh-MO |
+| Chinese (Macao (R.A.S.)) | zh-MO |
 | Chinese (Singapore) | zh-SG |
 | Chinois (Taïwan) | zh-TW |
 | Chinois (simplifié) | zh-Hans |
 | Chinois simplifié (Chine) | zh-Hans-CN |
 | Chinois simplifié (Singapour) | zh-Hans-SG |
-| Chinois traditionnel | zh-Hant-CN |
-| Chinois traditionnel (Hong Kong) | zh-Hant-HK |
-| Chinois traditionnel (Macao) | zh-Hant-MO |
+| Chinois traditionnel | zh-Hant |
+| Chinois traditionnel (Chine) | zh-Hant-CN |
+| Chinois traditionnel (Hong Kong R.A.S.) | zh-Hant-HK |
+| Chinois traditionnel (Macao R.A.S.) | zh-Hant-MO |
 | Chinois traditionnel (Taïwan) | zh-Hant-TW |
 | Croate | hr |
 | Croate (Croatie) | hr-HR |
@@ -152,6 +157,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Tchèque (République tchèque) | cs-CZ |
 | Danois | da |
 | Danois (Danemark) | da-DK |
+| Dari (Afghanistan) | prs |
 | Néerlandais | nl |
 | Néerlandais (Pays-Bas) | nl-NL |
 | Anglais | en |
@@ -176,6 +182,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Allemand (Autriche) | de-AT |
 | Allemand (Allemagne) | de-DE |
 | Allemand (Suisse)| de-CH |
+| Gujarati | gu |
 | Grec | el |
 | Grec (Grèce) | el-GR |
 | Haïtien (créole) | ht |
@@ -198,6 +205,8 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Kiswahili | sw |
 | Coréen | ko |
 | Coréen (Corée) | ko-KR |
+| Kurde (central) | ku |
+| Kurde (Nord) | kmr |
 | Letton | lv |
 | Lituanien | lt |
 | Malgache | mg |
@@ -206,8 +215,11 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Malayalam | ml |
 | Maltais | mt |
 | Maori | mi |
+| Marathi | mr |
 | Norvégien Bokmal| nb |
 | Norvégien Bokmal (Norvège) | nb-NO |
+| Odia | ou |
+| Pachtou (Afghanistan) | ps |
 | Persan | fa |
 | Polonais | pl |
 | Polonais (Pologne) | pl-PL |
@@ -227,7 +239,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Slovaque | sk |
 | Slovaque (Slovaquie) | sk-SK |
 | Slovène | sl |
-| Slovène (Slovénie) | sl-SL |
+| Slovène (Slovénie) | sl-SI |
 | Espagnol | es |
 | Espagnol (Amérique latine) | es-419 |
 | Espagnol (Mexique) | es-MX |
@@ -257,18 +269,20 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 
 | Langage | Tag |
 |----------|-----|
+| Arabe | ar |
 | Arabe (égyptien) | ar-EG |
 | Arabe (Arabie saoudite) | ar-SA |
 | Basque | eu |
 | Bulgare | bg |
 | Bulgare (Bulgarie) | bg-BG |
-| Catalan | ca-ES |
+| Catalan | ca |
+| Catalan (Catalogne) | ca-ES |
 | Chinois (simplifié) | zh-Hans |
 | Chinois simplifié (Chine) | zh-Hans-CN |
 | Chinois simplifié (Singapour) | zh-Hans-SG |
 | Chinois traditionnel | zh-Hant-CN |
-| Chinois traditionnel (Hong Kong) | zh-Hant-HK |
-| Chinois traditionnel (Macao) | zh-Hant-MO |
+| Chinois traditionnel (Hong Kong R.A.S.) | zh-Hant-HK |
+| Chinois traditionnel (Macao R.A.S.) | zh-Hant-MO |
 | Chinois traditionnel (Taïwan) | zh-Hant-TW |
 | Croate | hr |
 | Croate (Croatie) | hr-HR |
@@ -338,7 +352,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Slovaque | sk |
 | Slovaque (Slovaquie) | sk-SK |
 | Slovène | sl |
-| Slovène (Slovénie) | sl-SL |
+| Slovène (Slovénie) | sl-SI |
 | Espagnol | es |
 | Espagnol (Amérique latine) | es-419 |
 | Espagnol (Mexique) | es-MX |
@@ -365,7 +379,8 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Basque | eu |
 | Bulgare | bg |
 | Bulgare (Bulgarie) | bg-BG |
-| Catalan | ca-ES |
+| Catalan | ca |
+| Catalan (Catalogne) | ca-ES |
 | Croate | hr |
 | Croate (Croatie) | hr-HR |
 | Tchèque | cs |
@@ -423,7 +438,7 @@ Cet article liste les langues prises en charge pour les fonctionnalités du Lect
 | Slovaque | sk |
 | Slovaque (Slovaquie) | sk-SK |
 | Slovène | sl |
-| Slovène (Slovénie) | sl-SL |
+| Slovène (Slovénie) | sl-SI |
 | Espagnol | es |
 | Espagnol (Amérique latine) | es-419 |
 | Espagnol (Mexique) | es-MX |

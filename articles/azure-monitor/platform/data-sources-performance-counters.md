@@ -1,25 +1,28 @@
 ---
-title: Collecter et analyser les compteurs de performances dans Azure Monitor | Microsoft Docs
+title: Collecter des sources de données de performance Windows et Linux avec l’agent Log Analytics dans Azure Monitor
 description: Azure Monitor collecte les compteurs de performances pour analyser les performances sur les agents Windows et Linux.  Cet article explique comment configurer la collecte des compteurs de performances sur les agents Windows et Linux, comment ils sont stockés dans l’espace de travail et comment les analyser dans le portail Azure.
 ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 11/28/2018
-ms.openlocfilehash: 446beca9b8491fb252a1e3284a9ec9a0e6dabef5
-ms.sourcegitcommit: d9cd51c3a7ac46f256db575c1dfe1303b6460d04
+ms.date: 10/21/2020
+ms.openlocfilehash: 533d4a83ea73b98e26a57febc077a607bcb25465
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82739362"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532298"
 ---
-# <a name="windows-and-linux-performance-data-sources-in-azure-monitor"></a>Sources de données de performance Windows et Linux dans Azure Monitor
-Les compteurs de performances dans Windows et Linux fournissent des informations sur les performances des composants matériels, systèmes d’exploitation et applications.  Azure Monitor peut non seulement collecter les compteurs de performances à intervalles réguliers pour effectuer une analyse en temps quasi réel, mais aussi agréger les données de performances pour réaliser des analyses à plus long terme et créer des rapports.
+# <a name="collect-windows-and-linux-performance-data-sources-with-log-analytics-agent"></a>Collecter des sources de données de performance Windows et Linux avec l’agent Log Analytics
+Les compteurs de performances dans Windows et Linux fournissent des informations sur les performances des composants matériels, systèmes d’exploitation et applications.  Azure Monitor peut non seulement collecter les compteurs de performances des agents Log Analytics à intervalles réguliers pour effectuer une analyse en temps quasi réel, mais aussi agréger les données de performances pour réaliser des analyses à plus long terme et créer des rapports.
+
+> [!IMPORTANT]
+> Cet article traite de la collecte de données de performances avec l’[agent Log Analytics](log-analytics-agent.md), qui est un des agents utilisés par Azure Monitor. D’autres agents collectent des données différentes et sont configurés différemment. Pour obtenir la liste des agents disponibles et les données qu’ils peuvent collecter, consultez [Vue d’ensemble des agents Azure Monitor](agents-overview.md).
 
 ![Compteurs de performance](media/data-sources-performance-counters/overview.png)
 
 ## <a name="configuring-performance-counters"></a>Configuration des compteurs de performances
-Configurez les compteurs de performances dans le [menu Données des Paramètres avancés](agent-data-sources.md#configuring-data-sources).
+Configurez les compteurs de performances à partir du [menu Données dans les paramètres avancés](agent-data-sources.md#configuring-data-sources) de l’espace de travail Log Analytics.
 
 Lorsque vous configurez initialement des compteurs de performances Windows ou Linux pour un nouvel espace de travail, vous avez la possibilité de créer rapidement plusieurs compteurs communs.  Ils s’affichent avec une case à cocher en regard.  Vérifiez que les compteurs que vous voulez créer sont cochés, puis cliquez sur **Ajouter les compteurs de performances sélectionnés**.
 
@@ -35,7 +38,7 @@ Pour les compteurs de performances Windows, vous pouvez choisir une instance sp�
 
 ![Configurer des compteurs de performances Windows](media/data-sources-performance-counters/configure-windows.png)
 
-Suivez cette procédure pour ajouter un nouveau compteur de performances Windows à collecter.
+Suivez cette procédure pour ajouter un nouveau compteur de performances Windows à collecter. Notez que les compteurs de performances Windows v2 ne sont pas pris en charge.
 
 1. Tapez le nom du compteur dans la zone de texte, au format *objet(instance)\compteur*.  Lorsque vous commencez à taper, la liste des compteurs correspondants s’affiche.  Vous pouvez soit choisir un compteur dans cette liste, soit taper le nom de votre choix.  Vous pouvez également retourner toutes les instances d’un compteur particulier en spécifiant *objet\compteur*.  
 
@@ -47,28 +50,29 @@ Suivez cette procédure pour ajouter un nouveau compteur de performances Windows
 
 ### <a name="linux-performance-counters"></a>Compteurs de performances Linux
 
-![Configurer des compteurs de performances Linux](media/data-sources-performance-counters/configure-linux.png)
+![Configurer des compteurs de performances Linux](media/data-sources-performance-counters/configure-linux-1.png)
 
 Suivez cette procédure pour ajouter un nouveau compteur de performances Linux à collecter.
 
-1. Par défaut, toutes les modifications de configuration sont automatiquement transmises à l’ensemble des agents.  Pour les agents Linux, un fichier de configuration est envoyé au collecteur de données Fluentd.  Si vous souhaitez modifier ce fichier manuellement sur chaque agent Linux, désélectionnez la case *Appliquer la configuration ci-dessous à mes machines Linux* et suivez les instructions ci-dessous.
-2. Tapez le nom du compteur dans la zone de texte, au format *objet(instance)\compteur*.  Lorsque vous commencez à taper, la liste des compteurs correspondants s’affiche.  Vous pouvez soit choisir un compteur dans cette liste, soit taper le nom de votre choix.  
-3. Cliquez sur **+** , ou appuyez sur **Entrée** pour ajouter le compteur à la liste des autres compteurs de l’objet.
-4. Tous les compteurs d’un objet utilisent le même **Intervalle d’échantillonnage**.  La valeur par défaut est 10 secondes.  Vous pouvez configurer jusqu’à 1 800 secondes (30 minutes) si vous souhaitez réduire l’espace de stockage requis pour les données de performances collectées.
-5. Après avoir ajouté les compteurs souhaités, cliquez sur le bouton **Enregistrer** en haut de l’écran pour enregistrer la configuration.
+1. Tapez le nom du compteur dans la zone de texte, au format *objet(instance)\compteur*.  Lorsque vous commencez à taper, la liste des compteurs correspondants s’affiche.  Vous pouvez soit choisir un compteur dans cette liste, soit taper le nom de votre choix.  
+1. Cliquez sur **+** , ou appuyez sur **Entrée** pour ajouter le compteur à la liste des autres compteurs de l’objet.
+1. Tous les compteurs d’un objet utilisent le même **Intervalle d’échantillonnage**.  La valeur par défaut est 10 secondes.  Vous pouvez configurer jusqu’à 1 800 secondes (30 minutes) si vous souhaitez réduire l’espace de stockage requis pour les données de performances collectées.
+1. Après avoir ajouté les compteurs souhaités, cliquez sur le bouton **Enregistrer** en haut de l’écran pour enregistrer la configuration.
 
 #### <a name="configure-linux-performance-counters-in-configuration-file"></a>Configuration des compteurs de performances Linux dans le fichier de configuration
-Au lieu de configurer les compteurs de performances Linux à l’aide du portail Azure, vous pouvez modifier les fichiers de configuration sur l’agent Linux.  Les mesures de performances à collecter sont contrôlées par la configuration dans **/etc/opt/microsoft/omsagent/\<workspace id\>/conf/omsagent.conf**.
+Au lieu de configurer les compteurs de performances Linux à l’aide du portail Azure, vous pouvez modifier les fichiers de configuration sur l’agent Linux.  Les mesures de performances à collecter sont contrôlées par la configuration du fichier **/etc/opt/microsoft/omsagent/\<workspace id\>/conf/omsagent.conf**.
 
 Chaque objet, ou catégorie, de mesures de performances à collecter doit être défini dans le fichier de configuration comme un seul élément `<source>` . La syntaxe suit le modèle suivant.
 
-    <source>
-      type oms_omi  
-      object_name "Processor"
-      instance_regex ".*"
-      counter_name_regex ".*"
-      interval 30s
-    </source>
+```xml
+<source>
+    type oms_omi  
+    object_name "Processor"
+    instance_regex ".*"
+    counter_name_regex ".*"
+    interval 30s
+</source>
+```
 
 
 Les paramètres de cet élément sont décrits dans le tableau suivant.
@@ -142,37 +146,39 @@ Le tableau suivant répertorie les objets et compteurs que vous pouvez indiquer 
 
 La configuration par défaut des mesures de performances est la suivante.
 
-    <source>
-      type oms_omi
-      object_name "Physical Disk"
-      instance_regex ".*"
-      counter_name_regex ".*"
-      interval 5m
-    </source>
+```xml
+<source>
+    type oms_omi
+    object_name "Physical Disk"
+    instance_regex ".*"
+    counter_name_regex ".*"
+    interval 5m
+</source>
 
-    <source>
-      type oms_omi
-      object_name "Logical Disk"
-      instance_regex ".*
-      counter_name_regex ".*"
-      interval 5m
-    </source>
+<source>
+    type oms_omi
+    object_name "Logical Disk"
+    instance_regex ".*"
+    counter_name_regex ".*"
+    interval 5m
+</source>
 
-    <source>
-      type oms_omi
-      object_name "Processor"
-      instance_regex ".*
-      counter_name_regex ".*"
-      interval 30s
-    </source>
+<source>
+    type oms_omi
+    object_name "Processor"
+    instance_regex ".*"
+    counter_name_regex ".*"
+    interval 30s
+</source>
 
-    <source>
-      type oms_omi
-      object_name "Memory"
-      instance_regex ".*"
-      counter_name_regex ".*"
-      interval 30s
-    </source>
+<source>
+    type oms_omi
+    object_name "Memory"
+    instance_regex ".*"
+    counter_name_regex ".*"
+    interval 30s
+</source>
+```
 
 ## <a name="data-collection"></a>Collecte de données
 Azure Monitor collecte tous les compteurs de performances spécifiés selon l’intervalle d’échantillonnage spécifié sur tous les agents où le compteur est installé.  Les données ne sont pas agrégées, et les données brutes sont disponibles dans toutes les vues de requête de journal pendant la durée spécifiée par votre espace de travail d’analytique des journaux d’activité.
@@ -184,7 +190,7 @@ Les enregistrements de performances sont de type **Perf** et leurs propriétés 
 |:--- |:--- |
 | Computer |Ordinateur sur lequel l’événement a été collecté. |
 | CounterName |Nom du compteur de performances. |
-| CounterPath |Chemin d’accès complet du compteur au format \\\\\<ordinateur>\\objet(instance)\\. |
+| CounterPath |Chemin complet du compteur au format \\\\\<Computer>\\objet(instance)\\compteur. |
 | CounterValue |Valeur numérique du compteur. |
 | InstanceName |Nom de l’instance de l’événement.  Vide si aucune instance. |
 | ObjectName |Nom de l’objet de performance. |
@@ -194,7 +200,7 @@ Les enregistrements de performances sont de type **Perf** et leurs propriétés 
 ## <a name="sizing-estimates"></a>Tailles estimées
  La collecte d’un compteur toutes les 10 secondes correspond environ à 1 Mo par jour et par instance.  La formule suivante vous permet d’estimer l’espace de stockage requis pour un compteur particulier.
 
-    1 MB x (number of counters) x (number of agents) x (number of instances)
+> 1 Mo × (nombre de compteurs) × (nombre d’agents) × (nombre d’instances)
 
 ## <a name="log-queries-with-performance-records"></a>Requêtes de journal avec des enregistrements de performances
 Le tableau suivant fournit plusieurs exemples de requêtes qui extraient des enregistrements de performances.

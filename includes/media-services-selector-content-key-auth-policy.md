@@ -4,18 +4,18 @@ ms.service: media-services
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: juliako
-ms.openlocfilehash: 1badb3c2aa072be9e0cd544408d9292bda7fe6ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a2e8745f602f93ecc6ed840f21a85cf4d12026ba
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177149"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96025582"
 ---
 > [!div class="op_single_selector"]
 > * [Portail](../articles/media-services/previous/media-services-portal-configure-content-key-auth-policy.md)
 > * [.NET](../articles/media-services/previous/media-services-dotnet-configure-content-key-auth-policy.md)
 > * [REST API](../articles/media-services/previous/media-services-rest-configure-content-key-auth-policy.md)
-> * [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
+> * [Java](https://github.com/rnrneverdies/azure-sdk-for-media-services-java-samples)
 > 
 > 
 

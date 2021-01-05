@@ -1,17 +1,17 @@
 ---
 title: Utiliser des scripts AzureRM PowerShell pour gérer les appareils StorSimple
-description: Découvrez comment utiliser des scripts Azure Resource Manager pour automatiser des travaux StorSimple
+description: Apprenez à utiliser les scripts basés sur le kit de développement logiciel (SDK) Azure Resource Manager pour gérer votre appareil de la gamme StorSimple 8000.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/03/2017
 ms.author: alkohli
-ms.openlocfilehash: 03a5ef49b2d58d351d882b30b5d11e4a5ba90264
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3339f883d177366a64187e0c090752527802c8d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77471956"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968772"
 ---
 # <a name="use-azure-resource-manager-sdk-based-scripts-to-manage-storsimple-devices"></a>Utiliser des scripts basés sur le kit de développement logiciel (SDK) Azure Resource Manager pour gérer les appareils StorSimple
 
@@ -54,10 +54,10 @@ Cette section utilise un exemple de script et décrit en détail les différente
 Avant de commencer, assurez-vous de satisfaire les exigences suivantes :
 
 *   Azure PowerShell installé. Pour installer les modules Azure PowerShell :
-    * Dans un environnement Windows, suivez les étapes décrites dans [Install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azure/azurerm/install-azurerm-ps) (Installer et configurer Azure PowerShell). Vous pouvez installer Azure PowerShell sur votre hôte Windows Server pour votre StorSimple si vous utilisez un.
-    * Dans un environnement Linux ou MacOS, suivez les étapes décrites dans [Install and configure Azure PowerShell on macOS and Linux](https://docs.microsoft.com/powershell/azure/azurerm/install-azurermps-maclinux) (Installer et configurer Azure PowerShell sur MacOS ou Linux).
+    * Dans un environnement Windows, suivez les étapes décrites dans [Install and configure Azure PowerShell](/powershell/azure/install-az-ps) (Installer et configurer Azure PowerShell). Vous pouvez installer Azure PowerShell sur votre hôte Windows Server pour votre StorSimple si vous utilisez un.
+    * Dans un environnement Linux ou MacOS, suivez les étapes décrites dans [Install and configure Azure PowerShell on macOS and Linux](/powershell/azure/install-az-ps) (Installer et configurer Azure PowerShell sur MacOS ou Linux).
 
-Pour plus d’informations sur l’utilisation d’Azure PowerShell, consultez [Getting started with Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps) (Prise en main d’Azure PowerShell).
+Pour plus d’informations sur l’utilisation d’Azure PowerShell, consultez [Getting started with Azure PowerShell](/powershell/azure/get-started-azureps) (Prise en main d’Azure PowerShell).
 
 ### <a name="run-azure-powershell-script"></a>Exécuter le script Azure PowerShell
 

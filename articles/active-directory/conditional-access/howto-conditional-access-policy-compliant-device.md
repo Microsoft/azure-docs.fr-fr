@@ -4,19 +4,19 @@ description: Créer une stratégie d’accès conditionnel personnalisée pour e
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 03/25/2020
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cc6bd486c1e8338eaf875c7026764c80d49e2f05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c98269f9851272e8caa9b26ae0c57ed13e9a99f2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295204"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89049126"
 ---
 # <a name="conditional-access-require-compliant-devices"></a>Accès conditionnel : Exiger un appareil conforme
 
@@ -44,7 +44,7 @@ Les étapes suivantes vous aideront à créer une stratégie d’accès conditio
 1. Sous **Applications ou actions cloud** > **Inclure**, sélectionnez **Toutes les applications cloud**.
    1. Si vous devez exclure des applications spécifiques de votre stratégie, vous pouvez les choisir dans l'onglet **Exclure** sous **Sélectionner les applications cloud exclues**, puis choisir **Sélectionner**.
    1. Sélectionnez **Terminé**.
-1. Sous **Conditions** > **Applications clientes (préversion)** , définissez **Configurer** sur **Oui**, puis sélectionnez **Terminé**.
+1. Sous **Conditions** > **Applications clientes (préversion)**  > **Sélectionner les applications clientes auxquelles cette stratégie s’applique**, laissez toutes les valeurs par défaut sélectionnées et sélectionnez **Terminé**.
 1. Sous **Contrôles d’accès** > **Accorder**, sélectionnez **Exiger que l’appareil soit marqué comme conforme**.
    1. Sélectionnez **Sélectionner**.
 1. Confirmez vos paramètres et réglez **Activer la stratégie** sur **Activé**.
@@ -61,7 +61,7 @@ Sur des systèmes Windows 7, iOS, Android, macOS, et dans certains navigateurs 
 
 [Stratégies d’accès conditionnel courantes](concept-conditional-access-policy-common.md)
 
-[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-report-only.md)
+[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-insights-reporting.md)
 
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)
 

@@ -3,8 +3,8 @@ title: Options avancées de signature de certificat de jeton SAML pour les appli
 description: Découvrez comment utiliser les options avancées de signature de certificats dans le jeton SAML pour les applications pré-intégrées dans Azure Active Directory
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/25/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: jeedes
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dc911ff06208b1fd0af7651c8274a45c958bf0cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 79bc43bb2fa99f95a462dcc4c68d27840199b45c
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77159197"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658534"
 ---
 # <a name="advanced-certificate-signing-options-in-the-saml-token-for-gallery-apps-in-azure-active-directory"></a>Options avancées de signature de certificats dans le jeton SAML pour les applications de galerie dans Azure Active Directory
 
@@ -75,5 +75,5 @@ Ensuite, modifiez les options de signature de certificat dans le jeton SAML pour
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Configurer l’authentification unique pour les applications ne faisant pas partie de la galerie d’applications Azure Active Directory](configure-federated-single-sign-on-non-gallery-applications.md)
-* [Résoudre les erreurs d’authentification unique basée sur SAML](../azuread-dev/howto-v1-debug-saml-sso-issues.md)
+* [Configurer l’authentification unique pour les applications ne faisant pas partie de la galerie d’applications Azure Active Directory](./configure-saml-single-sign-on.md)
+* [Résoudre les erreurs d’authentification unique basée sur SAML](./debug-saml-sso-issues.md)

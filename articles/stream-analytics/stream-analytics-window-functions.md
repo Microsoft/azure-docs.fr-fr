@@ -6,21 +6,21 @@ ms.author: jeanb
 ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: conceptual
-ms.date: 06/11/2019
-ms.openlocfilehash: 872eec62e7a629d76533aa6c9906cbdb64c32236
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.date: 09/16/2020
+ms.openlocfilehash: 4765c0c43cfd9760eb5b4392604bfaeedc69c388
+ms.sourcegitcommit: df66dff4e34a0b7780cba503bb141d6b72335a96
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80745559"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96511438"
 ---
 # <a name="introduction-to-stream-analytics-windowing-functions"></a>Présentation des fonctions de fenêtrage de Stream Analytics
 
 Dans les scénarios de streaming en temps réel, il est courant d’effectuer des opérations sur les données contenues dans des fenêtres temporelles. Stream Analytics a une prise en charge native des fonctions de fenêtrage, permettant aux développeurs de créer des travaux de traitement de flux complexes avec un minimum d’effort.
 
-Quatre types de fenêtres temporelles sont disponibles : [**bascule**](https://docs.microsoft.com/stream-analytics-query/tumbling-window-azure-stream-analytics), [**récurrente**](https://docs.microsoft.com/stream-analytics-query/hopping-window-azure-stream-analytics), [**glissante**](https://docs.microsoft.com/stream-analytics-query/sliding-window-azure-stream-analytics) et [**session**](https://docs.microsoft.com/stream-analytics-query/session-window-azure-stream-analytics).  Vous utilisez les fonctions de fenêtre dans la clause [**GROUP BY**](https://docs.microsoft.com/stream-analytics-query/group-by-azure-stream-analytics) de la syntaxe de requête dans vos travaux Stream Analytics. Vous pouvez également agréger des événements sur plusieurs fenêtres avec la fonction [**Windows()** ](https://docs.microsoft.com/stream-analytics-query/windows-azure-stream-analytics).
+Cinq types de fenêtres temporelles sont disponibles : [**bascule**](/stream-analytics-query/tumbling-window-azure-stream-analytics), [**récurrente**](/stream-analytics-query/hopping-window-azure-stream-analytics), [**glissante**](/stream-analytics-query/sliding-window-azure-stream-analytics), [**session**](/stream-analytics-query/session-window-azure-stream-analytics) et [**d’instantané**](/stream-analytics-query/snapshot-window-azure-stream-analytics).  Vous utilisez les fonctions de fenêtre dans la clause [**GROUP BY**](/stream-analytics-query/group-by-azure-stream-analytics) de la syntaxe de requête dans vos travaux Stream Analytics. Vous pouvez également agréger des événements sur plusieurs fenêtres avec la fonction [**Windows()**](/stream-analytics-query/windows-azure-stream-analytics).
 
-Toutes les opérations de [fenêtrage](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics) renvoient les résultats à la **fin** de la fenêtre. La sortie de la fenêtre sera un événement unique qui dépendra de la fonction d’agrégation utilisée. L’événement de sortie aura l’horodatage de la fin de la fenêtre et toutes les fonctions de fenêtrage sont définies avec une longueur fixe. 
+Toutes les opérations de [fenêtrage](/stream-analytics-query/windowing-azure-stream-analytics) renvoient les résultats à la **fin** de la fenêtre. Notez que lorsque vous démarrez une tâche Stream Analytics, vous pouvez spécifier l’*heure de début de la sortie de la tâche* et le système extrait automatiquement les événements précédents dans les flux entrants pour générer la première fenêtre à l’heure spécifiée : par exemple, lorsque vous démarrez avec l’option *Maintenant*, elle commence immédiatement à émettre des données. La sortie de la fenêtre sera un événement unique qui dépendra de la fonction d’agrégation utilisée. L’événement de sortie aura l’horodatage de la fin de la fenêtre et toutes les fonctions de fenêtrage sont définies avec une longueur fixe. 
 
 ![Concepts des fonctions de fenêtrage de Stream Analytics](media/stream-analytics-window-functions/stream-analytics-window-functions-conceptual.png)
 
@@ -30,12 +30,13 @@ Les fonctions de fenêtre bascule sont utilisées pour segmenter un flux de donn
 ![Fenêtre bascule Stream Analytics](media/stream-analytics-window-functions/stream-analytics-window-functions-tumbling-intro.png)
 
 ## <a name="hopping-window"></a>Fenêtre récurrente
-Les fonctions de fenêtre récurrente font des bonds d’une durée fixe dans le temps. Il peut être facile de les considérer comme des fenêtres bascules pouvant se chevaucher : par conséquent, les événements peuvent appartenir au jeu de résultats de plusieurs fenêtres récurrentes. Pour créer une fenêtre récurrente identique à une fenêtre bascule, spécifiez une taille de bond égale à la taille de la fenêtre. 
+Les fonctions de fenêtre récurrente font des bonds d’une durée fixe dans le temps. Il peut être facile de les considérer comme des fenêtres bascule qui peuvent se chevaucher et être émises plus souvent que la taille de la fenêtre. Les événements peuvent appartenir à plusieurs jeux de résultats de fenêtres récurrentes. Pour créer une fenêtre récurrente identique à une fenêtre bascule, spécifiez une taille de bond égale à la taille de la fenêtre. 
 
 ![Fenêtre récurrente Stream Analytics](media/stream-analytics-window-functions/stream-analytics-window-functions-hopping-intro.png)
 
 ## <a name="sliding-window"></a>Fenêtre glissante
-Les fonctions de fenêtre glissante, à la différence des fenêtres bascules ou récurrentes, ne génèrent une sortie **que** lorsqu’un événement se produit. Chaque fenêtre a au moins un événement et avance en permanence d’un ε (epsilon). Comme pour les fenêtres récurrentes, les événements peuvent appartenir à plusieurs fenêtres glissantes.
+
+Les fenêtres glissantes, à la différence des fenêtres bascules ou récurrentes, génèrent des événements uniquement pour les points temporels où le contenu de la fenêtre change réellement. En d’autres termes, lorsqu’un événement entre dans la fenêtre ou la quitte. Par conséquent, chaque fenêtre affiche au moins un événement. Comme pour les fenêtres récurrentes, les événements peuvent appartenir à plusieurs fenêtres glissantes.
 
 ![Fenêtre glissante Stream Analytics](media/stream-analytics-window-functions/stream-analytics-window-functions-sliding-intro.png)
 
@@ -50,11 +51,15 @@ Si des événements continuent à se produire durant le délai d’expiration sp
 
 Lorsqu’une clé de partition est fournie, les événements sont regroupés par la clé et la fenêtre de session est appliquée indépendamment à chaque groupe. Ce partitionnement est utile lorsque vous avez besoin de fenêtres de session différentes pour différents utilisateurs ou appareils.
 
+## <a name="snapshot-window"></a>Fenêtre d’instantané
+
+Les fenêtres d’instantanés regroupent les événements qui ont le même horodatage. Contrairement à d’autres types de fenêtrage, qui requièrent une fonction de fenêtre spécifique [par exemple, [SessionWindow()](/stream-analytics-query/session-window-azure-stream-analytics)], vous pouvez appliquer une fenêtre d’instantané en ajoutant System.Timestamp() à la clause GROUP BY.
+
+![Fenêtre d’instantané Stream Analytics](media/stream-analytics-window-functions/snapshot.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

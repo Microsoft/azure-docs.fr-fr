@@ -4,15 +4,15 @@ description: Déplacez une machine virtuelle vers un autre abonnement ou groupe 
 author: cynthn
 ms.service: virtual-machines
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/12/2018
 ms.author: cynthn
-ms.openlocfilehash: ebcd5f166fd1876f67121787c23d23860c9fa4b6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: db4c7e0126616e2d8bd120e7430c70b89c5cf36d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "78944599"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87291107"
 ---
 # <a name="move-a-vm-to-another-subscription-or-resource-group"></a>Déplacer une machine virtuelle vers un autre abonnement ou groupe de ressources
 Cet article vous explique comment déplacer une machine virtuelle entre des groupes de ressources ou des abonnements. Le déplacement d’une machine virtuelle entre abonnements peut être pratique si vous avez créé une machine virtuelle dans un abonnement personnel, et que vous souhaitez à présent la déplacer vers l’abonnement de votre entreprise.

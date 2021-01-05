@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 03/25/2020
+ms.date: 10/12/2020
 ms.author: jingwang
-ms.openlocfilehash: 2557ce7be44f0505b96df06cd2b44a2fa3ce3fdb
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0b10a4de78c44e4c0a113a1f1a46c316b13a1f78
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414220"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96902156"
 ---
 # <a name="copy-activity-in-azure-data-factory"></a>Activité de copie dans Azure Data Factory
 
@@ -55,7 +55,7 @@ Pour copier des données d’une source vers un récepteur, le service qui exéc
 
 Vous pouvez utiliser l’activité de copie pour copier des fichiers en l'état entre deux banques de données de fichiers, auquel cas les données sont copiées efficacement sans sérialisation ou désérialisation. En outre, vous avez la possibilité d'analyser ou de générer des fichiers d’un format donné. Vous pouvez notamment effectuer ce qui suit :
 
-* Copier des données à partir d’une base de données SQL Server locale et écrire dans Azure Data Lake Storage Gen2 au format Parquet.
+* Copier des données à partir d'une base de données SQL Server et écrire dans Azure Data Lake Storage Gen2 au format Parquet.
 * Copier des fichiers au format texte (CSV) à partir d’un système de fichiers local et les écrire dans le stockage d’objets BLOB Azure au format Avro.
 * Copier des fichiers compressés à partir d’un système de fichiers local, les décompresser à la volée et écrire les fichiers extraits dans Azure Data Lake Storage Gen2.
 * Copier des données au format de texte compressé Gzip (CSV) à partir du stockage Blob Azure et les écrire dans Azure SQL Database.
@@ -186,10 +186,11 @@ Pour plus d’informations sur la façon dont l’activité de copie met en corr
 En plus de copier des données d’une banque de données source vers un récepteur, vous pouvez également configurer l’ajout de colonnes de données supplémentaires à copier dans le récepteur. Par exemple :
 
 - Lors de la copie à partir d’une source basée sur un fichier, enregistrez le chemin d’accès relatif du fichier dans une colonne supplémentaire pour savoir de quel fichier proviennent les données.
-- Ajoutez une colonne avec l’expression ADF pour joindre des variables système ADF telles que le nom ou l’ID du pipeline ou stocker une autre valeur dynamique provenant de la sortie de l’activité en amont.
+- Dupliquez la colonne source spécifiée comme une autre colonne. 
+- Ajoutez une colonne avec l’expression ADF, pour joindre des variables système ADF telles que le nom ou l’ID du pipeline, ou stocker une autre valeur dynamique provenant de la sortie de l’activité en amont.
 - Ajoutez une colonne avec une valeur statique pour répondre à votre besoin de consommation en aval.
 
-Vous pouvez trouver la configuration suivante dans l’onglet source de l’activité de copie : 
+Vous pouvez trouver la configuration suivante dans l’onglet source de l’activité de copie. Vous pouvez également mapper ces colonnes supplémentaires dans l’activité de copie [Mappage de schéma](copy-activity-schema-and-type-mapping.md#schema-mapping) comme d’habitude en utilisant les noms de colonne que vous avez définis. 
 
 ![Ajouter des colonnes supplémentaires dans l’activité de copie](./media/copy-activity-overview/copy-activity-add-additional-columns.png)
 
@@ -200,7 +201,7 @@ Pour le configurer par programmation, ajoutez la propriété `additionalColumns`
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
-| additionalColumns | Ajoutez des colonnes de données supplémentaires à copier dans le récepteur.<br><br>Chaque objet sous le tableau `additionalColumns` représente une colonne supplémentaire. `name` définit le nom de la colonne et `value` indique la valeur des données de cette colonne.<br><br>Les valeurs de données autorisées sont :<br>-  **`$$FILEPATH`**  : une variable réservée indique de stocker le chemin d’accès relatif des fichiers sources dans le chemin d’accès du dossier spécifié dans le jeu de données. Appliquer à la source basée sur un fichier.<br>- **Expression**<br>- **Valeur statique** | Non |
+| additionalColumns | Ajoutez des colonnes de données supplémentaires à copier dans le récepteur.<br><br>Chaque objet sous le tableau `additionalColumns` représente une colonne supplémentaire. `name` définit le nom de la colonne et `value` indique la valeur des données de cette colonne.<br><br>Les valeurs de données autorisées sont :<br>-  **`$$FILEPATH`**  : une variable réservée indique de stocker le chemin d’accès relatif des fichiers sources dans le chemin d’accès du dossier spécifié dans le jeu de données. Appliquer à la source basée sur un fichier.<br>-  **`$$COLUMN:<source_column_name>`**  : un modèle de variable réservée indique de dupliquer la colonne source spécifiée comme une autre colonne.<br>- **Expression**<br>- **Valeur statique** | Non |
 
 **Exemple :**
 
@@ -218,6 +219,10 @@ Pour le configurer par programmation, ajoutez la propriété `additionalColumns`
                     {
                         "name": "filePath",
                         "value": "$$FILEPATH"
+                    },
+                    {
+                        "name": "newColName",
+                        "value": "$$COLUMN:SourceColumnA"
                     },
                     {
                         "name": "pipelineName",
@@ -241,13 +246,33 @@ Pour le configurer par programmation, ajoutez la propriété `additionalColumns`
 ]
 ```
 
+## <a name="auto-create-sink-tables"></a>Créer automatiquement des tables de récepteur
+
+Lors de la copie de données dans SQL Database/Azure Synapse Analytics, si la table de destination n’existe pas, l’activité de copie prend en charge sa création automatique en fonction des données sources. Elle vise à vous aider à commencer rapidement à charger les données et à évaluer SQL Database/Azure Synapse Analytics. Après l’ingestion des données, vous pouvez examiner et ajuster le schéma de la table de récepteur en fonction de vos besoins.
+
+Cette fonctionnalité est prise en charge lors de la copie de données à partir de n’importe quelle source vers les magasins de données récepteurs suivants. Vous pouvez trouver l’option sur l’*interface utilisateur de création ADF* –> *Récepteur d’activité de copie* –> *Option de table* –> *Créer automatiquement une table*, ou via la propriété `tableOption` dans la charge utile de récepteur d’activité de copie.
+
+- [Azure SQL Database](connector-azure-sql-database.md)
+- [Azure SQL Database Managed Instance](connector-azure-sql-managed-instance.md)
+- [Azure Synapse Analytics](connector-azure-sql-data-warehouse.md)
+- [SQL Server](connector-sql-server.md)
+
+![Créer des tables de récepteur](media/copy-activity-overview/create-sink-table.png)
+
 ## <a name="fault-tolerance"></a>Tolérance de panne
 
 Par défaut, l’activité de copie arrête la copie des données et retourne un échec lorsque les lignes de données sources sont incompatibles avec les lignes de données du récepteur. Pour que la copie aboutisse, vous pouvez configurer l’activité de copie afin d’ignorer et de journaliser les lignes incompatibles et de copier uniquement les données compatibles. Pour plus d’informations, consultez [Tolérance de panne de l’activité de copie](copy-activity-fault-tolerance.md).
+
+## <a name="data-consistency-verification"></a>Vérification de la cohérence des données
+
+Lorsque vous déplacez des données du magasin source au magasin de destination, l’activité de copie d’Azure Data Factory vous offre la possibilité de faire une vérification supplémentaire de la cohérence des données pour vous assurer que les données sont non seulement copiées du magasin source au magasin de destination, mais également que leur cohérence entre les deux magasins de données est vérifiée. Une fois que des fichiers incohérents ont été détectés pendant le déplacement des données, vous pouvez soit abandonner l’activité de copie, soit continuer à copier le reste en activant le paramètre de tolérance de panne afin d’ignorer les fichiers incohérents. Vous pouvez récupérer les noms de fichiers ignorés en activant le paramètre de journal de session dans l’activité de copie. Consultez [Vérification de la cohérence des données dans l’activité de copie](copy-activity-data-consistency.md) pour plus d’informations.
+
+## <a name="session-log"></a>Journal de session
+Vous pouvez journaliser les noms de fichiers copiés, ce qui peut vous aider à mieux vous assurer que les données sont non seulement bien copiées du magasin source vers le magasin de destination, mais qu’elles sont également cohérentes entre les deux magasins en examinant les journaux de session de l’activité de copie. Consultez [Journal de session dans l’activité de copie](copy-activity-log.md) pour plus de détails.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Voir les procédures de démarrage rapide, didacticiels et exemples suivants :
 
 - [Copier des données d’un emplacement vers un autre dans le même compte de stockage Blob Azure](quickstart-create-data-factory-dot-net.md)
 - [Copier des données de stockage Blob Azure vers Azure SQL Database](tutorial-copy-data-dot-net.md)
-- [Copier des données depuis une base de données SQL Server locale vers Azure](tutorial-hybrid-copy-powershell.md)
+- [Copier des données d'une base de données SQL Server vers Azure](tutorial-hybrid-copy-powershell.md)

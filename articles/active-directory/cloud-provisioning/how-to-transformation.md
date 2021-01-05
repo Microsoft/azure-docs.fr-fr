@@ -5,15 +5,15 @@ author: billmath
 ms.author: billmath
 manager: davba
 ms.date: 12/02/2019
-ms.topic: article
+ms.topic: how-to
 ms.prod: windows-server-threshold
 ms.technology: identity-adfs
-ms.openlocfilehash: ec12927b40096b7ff04fae6b7cbc69a7bc11e8f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a15a25ce4fbe1a43c2a5065bf88f5c40c5865721
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75549293"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85360688"
 ---
 # <a name="transformations"></a>Transformations
 

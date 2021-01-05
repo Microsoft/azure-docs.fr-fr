@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 11/19/2019
-ms.openlocfilehash: c29baf3cdda998a2ab78c84f3311b84d37086bcd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0dfde6fef7cc91edf2101095018bc031d392c4ed
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477423"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90898172"
 ---
 # <a name="train-clustering-model"></a>Entraîner un modèle de clustering
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour entraîner un modèle de clustering.
 

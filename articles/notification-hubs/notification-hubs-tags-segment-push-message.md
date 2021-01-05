@@ -16,12 +16,13 @@ ms.date: 12/09/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 12/04/2019
-ms.openlocfilehash: 2432ac41645e373ea3a87ff7e69ef02a4e30c81d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4ff8225522e79e2be40682fb5e4823777dde2aa0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80062309"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88998300"
 ---
 # <a name="routing-and-tag-expressions"></a>Routage et expressions de balise
 

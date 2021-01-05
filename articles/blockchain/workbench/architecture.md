@@ -4,12 +4,12 @@ description: Présentation de l’architecture Azure Blockchain Workbench Previe
 ms.date: 09/05/2019
 ms.topic: conceptual
 ms.reviewer: brendal
-ms.openlocfilehash: aa972e8ae486d181f0c48df72ec89c925c940451
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1fff70ef2eeb1dc27d33769fd48fe5923f56717b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74324893"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021603"
 ---
 # <a name="azure-blockchain-workbench-architecture"></a>Architecture Azure Blockchain Workbench
 
@@ -43,12 +43,12 @@ Pour plus d'informations, consultez les [exemples d'applications clientes Azure 
 
 ## <a name="gateway-service-api"></a>API de service de passerelle
 
-Blockchain Workbench inclut une API de service de passerelle basée sur REST. Lorsque vous écrivez dans un blockchain, l’API génère des messages et les transmet à un répartiteur d’événements. Lorsque l’API demande des données, les demandes sont envoyées à la base de données SQL off-chain. La base de données SQL contient un réplica des métadonnées et données on-chain qui fournit des informations relatives à la configuration et au contexte pour les contrats intelligents pris en charge. Les demandes renvoient les données requises à partir du réplica off-chain dans un format spécifié par les métadonnées pour le contrat.
+Blockchain Workbench inclut une API de service de passerelle basée sur REST. Lorsque vous écrivez dans un blockchain, l’API génère des messages et les transmet à un répartiteur d’événements. Lorsque l’API demande des données, les demandes sont envoyées à la base de données off-chain. La base de données contient un réplica des métadonnées et données on-chain qui fournit des informations relatives à la configuration et au contexte pour les contrats intelligents pris en charge. Les demandes renvoient les données requises à partir du réplica off-chain dans un format spécifié par les métadonnées pour le contrat.
 
 Les développeurs peuvent accéder à l’API de service de passerelle pour créer ou intégrer les solutions blockchain sans dépendre des applications clientes Blockchain Workbench.
 
 > [!NOTE]
-> Pour activer l’accès authentifié à l’API, deux applications clientes sont inscrites dans Azure Active Directory. Azure Active Directory requiert des inscriptions d’applications distinctes pour chaque type d’application (native et web). 
+> Pour activer l’accès authentifié à l’API, deux applications clientes sont inscrites dans Azure Active Directory. Azure Active Directory requiert des inscriptions d’applications distinctes pour chaque type d’application (native et web).
 
 ## <a name="message-broker-for-incoming-messages"></a>Répartiteur de messages pour les messages entrants
 
@@ -70,7 +70,7 @@ Les messages de la technologie de registre distribué (DLT, Distributed Ledger T
 
 ### <a name="database-consumer"></a>Consommateur de bases de données
 
-Le consommateur de base de données prend des messages de Service Bus et envoie (push) les données à une base de données jointe, comme la base de données SQL.
+Le consommateur de base de données prend des messages de Service Bus et envoie (push) les données à une base de données jointe, comme une base de données dans Azure SQL Database.
 
 ### <a name="storage-consumer"></a>Consommateur de stockage
 
@@ -91,11 +91,11 @@ Des routeurs et registres de transaction prennent les transactions signées et l
 Un observateur DLT surveille les événements se produisant sur les blockchains joints à Blockchain Workbench.
 Les événements reflètent les informations relatives aux individus et aux systèmes. Par exemple, la création d’instances de contrat, l’exécution de transactions, ainsi que les modifications d’état. Les événements sont capturés et envoyés au répartiteur de messages sortants pour qu’ils puissent être utilisés par les consommateurs en aval.
 
-Par exemple, le consommateur SQL surveille des événements, les utilise et remplit la base de données SQL avec les valeurs incluses. La copie active la recréation d’un réplica des données on-chain dans un magasin off-chain.
+Par exemple, le consommateur SQL surveille des événements, les utilise et remplit la base de données avec les valeurs incluses. La copie active la recréation d’un réplica des données on-chain dans un magasin off-chain.
 
-## <a name="azure-sql-database"></a>Base de données Azure SQL
+## <a name="azure-sql-database"></a>Azure SQL Database
 
-La base de données Azure SQL jointe à Blockchain Workbench stocke les définitions de contrat, les métadonnées de configuration et un réplica compatible SQL des données stockées dans le blockchain. Ces données peuvent facilement être interrogées, visualisées ou analysées en accédant directement à la base de données. Les développeurs et les autres utilisateurs peuvent utiliser la base de données pour créer des rapports, effectuer des analyses ou d’autres intégrations orientées données. Par exemple, les utilisateurs peuvent visualiser des données de transaction à l’aide de Power BI.
+La base de données jointe à Blockchain Workbench stocke les définitions de contrat, les métadonnées de configuration et un réplica compatible SQL des données stockées dans le blockchain. Ces données peuvent facilement être interrogées, visualisées ou analysées en accédant directement à la base de données. Les développeurs et les autres utilisateurs peuvent utiliser la base de données pour créer des rapports, effectuer des analyses ou d’autres intégrations orientées données. Par exemple, les utilisateurs peuvent visualiser des données de transaction à l’aide de Power BI.
 
 Ce stockage off-chain offre aux organisations professionnelles la possibilité d’interroger des données dans SQL plutôt que dans un registre blockchain. En outre, en effectuant une standardisation sur un schéma standard indépendant des piles de la technologie blockchain, le stockage off-chain permet de réutiliser les rapports et les autres artefacts entre les projets, scénarios et organisations.
 
@@ -116,4 +116,4 @@ Azure Monitor fournit des informations sur l’intégrité du réseau blockchain
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Déployer Azure Blockchain Workbench](../../blockchain-workbench/blockchain-workbench-deploy.md)
+> [Déployer Azure Blockchain Workbench](./deploy.md)

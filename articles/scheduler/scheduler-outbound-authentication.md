@@ -9,10 +9,10 @@ ms.reviewer: klam, estfan
 ms.topic: article
 ms.date: 08/15/2016
 ms.openlocfilehash: 0a8d79af9f45731971cb1be1f39fc193f9d0f0d9
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80878967"
 ---
 # <a name="outbound-authentication-for-azure-scheduler"></a>Authentification sortante pour Azure Scheluler

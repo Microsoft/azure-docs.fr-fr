@@ -8,12 +8,12 @@ ms.service: data-lake-store
 ms.topic: conceptual
 ms.date: 03/26/2018
 ms.author: yagupta
-ms.openlocfilehash: a009f212bd8baaa353d602dc6090aeeccddd4936
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f924cb7462f7f8c9939ec261b7ef200ceb8ea70b
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60878392"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92109151"
 ---
 # <a name="encryption-of-data-in-azure-data-lake-storage-gen1"></a>Chiffrement des données dans Azure Data Lake Storage Gen1
 
@@ -33,7 +33,7 @@ De même, les données en transit (ou données en mouvement) sont toujours chiff
 
 Le chiffrement pour Data Lake Storage Gen1 est configuré au moment de la création du compte et est toujours activé par défaut. Vous pouvez gérer les clés vous-même ou autoriser Data Lake Storage Gen1 à les gérer pour vous (option par défaut).
 
-Pour plus d’informations, consultez [Prise en main](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal).
+Pour plus d’informations, consultez [Prise en main](./data-lake-store-get-started-portal.md).
 
 ## <a name="how-encryption-works-in-data-lake-storage-gen1"></a>Fonctionnement du chiffrement dans Data Lake Storage Gen1
 
@@ -52,8 +52,8 @@ Dans ces deux modes, la clé de chiffrement principale est sécurisée en la sto
 
 Voici une brève comparaison des fonctionnalités fournies par les deux modes de gestion des MEK.
 
-|  | Clés gérées par le service | Clés gérées par le client |
-| --- | --- | --- |
+| Question | Clés gérées par le service | Clés gérées par le client |
+| -------- | -------------------- | --------------------- |
 |Comment les données sont stockées ?|Toujours chiffrées avant d’être stockées.|Toujours chiffrées avant d’être stockées.|
 |Où est stockée la clé de chiffrement principale ?|Key Vault|Key Vault|
 |Des clés de chiffrement sont-elles stockées en dehors de Key Vault ? |Non|Non|
@@ -105,9 +105,9 @@ Le schéma suivant illustre ces concepts :
 
 ## <a name="key-rotation"></a>Rotation des clés
 
-Lorsque vous utilisez des clés gérées par le client, vous pouvez effectuer une rotation de la MEK. Pour savoir comment configurer un compte Data Lake Storage Gen1 avec des clés gérées par le client, voir [Prise en main](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal).
+Lorsque vous utilisez des clés gérées par le client, vous pouvez effectuer une rotation de la MEK. Pour savoir comment configurer un compte Data Lake Storage Gen1 avec des clés gérées par le client, voir [Prise en main](./data-lake-store-get-started-portal.md).
 
-### <a name="prerequisites"></a>Conditions préalables requises
+### <a name="prerequisites"></a>Prérequis
 
 Au moment où vous avez configuré le compte Data Lake Storage Gen1, vous avez choisi d’utiliser vos propres clés. Cette option ne peut pas être modifiée une fois le compte créé. Les étapes ci-dessous supposent que vous utilisez des clés gérées par le client (c’est-à-dire que vous avez choisi vos propres clés dans Key Vault).
 
@@ -135,4 +135,4 @@ Notez que si vous utilisez les options par défaut pour le chiffrement, vos donn
 Cette opération doit prendre moins de deux minutes et aucune interruption de service due à la rotation des clés n’est attendue. Une fois l’opération terminée, la nouvelle version de la clé est utilisée.
 
 > [!IMPORTANT]
-> Une fois l’opération de rotation des clés terminée, l’ancienne version de la clé n’est plus utilisée activement pour chiffrer vos données.  Toutefois, dans de rares cas d’échec inattendu dans lesquels des copies redondantes de vos données sont affectées, les données peuvent être restaurées à partir d’une sauvegarde qui utilise toujours l’ancienne clé. Pour garantir que vos données sont accessibles dans ces rares cas, conservez une copie de la version précédente de votre clé de chiffrement. Pour obtenir de meilleures pratiques sur la planification de votre récupération d’urgence, voir [Conseils sur la récupération d’urgence des données dans Data Lake Storage Gen1](data-lake-store-disaster-recovery-guidance.md). 
+> Une fois l’opération de rotation des clés terminée, l’ancienne version de la clé n’est plus utilisée activement pour chiffrer vos données.  Toutefois, dans de rares cas d’échec inattendu dans lesquels des copies redondantes de vos données sont affectées, les données peuvent être restaurées à partir d’une sauvegarde qui utilise toujours l’ancienne clé. Pour garantir que vos données sont accessibles dans ces rares cas, conservez une copie de la version précédente de votre clé de chiffrement. Pour obtenir de meilleures pratiques sur la planification de votre récupération d’urgence, voir [Conseils sur la récupération d’urgence des données dans Data Lake Storage Gen1](data-lake-store-disaster-recovery-guidance.md).

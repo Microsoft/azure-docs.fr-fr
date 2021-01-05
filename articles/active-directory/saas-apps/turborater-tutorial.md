@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec TurboRater | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et TurboRater.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: abb116b8-8024-4cc6-bc81-f32ef490ea17
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 3/8/2019
 ms.author: jeedes
-ms.openlocfilehash: 3777cf09ec669fe3df6bca13f6960f53c689767c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7483e7a9300088d07e85d238ad897522d59c5464
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67088275"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92519382"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-turborater"></a>Didacticiel : Intégration d’Azure Active Directory à TurboRater
 
@@ -32,7 +28,7 @@ Cette intégration vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs de se connecter automatiquement à TurboRater (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure.
 
-Pour obtenir des détails sur l’intégration d’applications SaaS (software as a service) avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour obtenir des détails sur l’intégration d’applications SaaS (software as a service) avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -56,7 +52,7 @@ Pour configurer l’intégration de TurboRater dans Azure AD, vous devez ajouter
 
     ![Option Azure Active Directory](common/select-azuread.png)
 
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications** .
 
     ![Option Applications d’entreprise](common/enterprise-applications.png)
 
@@ -64,13 +60,13 @@ Pour configurer l’intégration de TurboRater dans Azure AD, vous devez ajouter
 
     ![Option Nouvelle application](common/add-new-app.png)
 
-1. Dans la zone Rechercher, entrez **TurboRater**. Dans les résultats de recherche, sélectionnez **TurboRater**, puis **Ajouter** pour ajouter l’application.
+1. Dans la zone Rechercher, entrez **TurboRater** . Dans les résultats de recherche, sélectionnez **TurboRater** , puis **Ajouter** pour ajouter l’application.
 
     ![TurboRater dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD auprès de TurboRater, en ayant recours à un utilisateur de test appelé **B Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur TurboRater associé.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD auprès de TurboRater, en ayant recours à un utilisateur de test appelé **B Simon** . Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur TurboRater associé.
 
 Pour configurer et tester l’authentification unique Azure AD avec TurboRater, vous devez suivre les indications des sections suivantes :
 
@@ -87,19 +83,19 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD auprès de TurboRater, effectuez les étapes suivantes :
 
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **TurboRater**, sélectionnez **Authentification unique**.
+1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **TurboRater** , sélectionnez **Authentification unique** .
 
     ![Configurer l’option d’authentification unique](common/select-sso.png)
 
-1. Dans le volet **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** pour activer l’authentification unique.
+1. Dans le volet **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** pour activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-1. Dans le volet **Configurer l’authentification unique avec SAML**, sélectionnez **Modifier** (icône de crayon) pour ouvrir le volet **Configuration SAML de base**.
+1. Dans le volet **Configurer l’authentification unique avec SAML** , sélectionnez **Modifier** (icône de crayon) pour ouvrir le volet **Configuration SAML de base** .
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans le volet **Configuration SAML de base**, procédez comme suit :
+1. Dans le volet **Configuration SAML de base** , procédez comme suit :
 
     ![Informations d’authentification unique des URL et du domaine TurboRater](common/idp-intiated.png)
 
@@ -117,11 +113,11 @@ Pour configurer l’authentification unique Azure AD auprès de TurboRater, effe
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur et l’URL de réponse réels. Pour obtenir ces valeurs, contactez [l’équipe de support technique TurboRater](https://www.getitc.com/support). Vous pouvez aussi vous référer aux modèles figurant dans le volet **Configuration SAML de base** sur le portail Azure.
 
-1. Dans le volet **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, sélectionnez **Télécharger** pour télécharger le fichier **XML de métadonnées de fédération** à partir des options données et enregistrez-le sur votre ordinateur.
+1. Dans le volet **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , sélectionnez **Télécharger** pour télécharger le fichier **XML de métadonnées de fédération** à partir des options données et enregistrez-le sur votre ordinateur.
 
     ![Option de téléchargement du fichier XML de métadonnées de fédération](common/metadataxml.png)
 
-1. Dans la section **Configurer TurboRater**, copiez les URL dont vous avez besoin :
+1. Dans la section **Configurer TurboRater** , copiez les URL dont vous avez besoin :
 
    * **URL de connexion**
    * **Identificateur Azure AD**
@@ -137,23 +133,23 @@ Pour configurer l’authentification unique côté TurboRater, vous devez envoye
 
 Dans cette section, créez un utilisateur de test nommé Britta Simon dans le portail Azure.
 
-1. Dans le portail Azure, dans le volet gauche, sélectionnez **Azure Active Directory**   > **Utilisateurs** > **Tous les utilisateurs**.
+1. Dans le portail Azure, dans le volet gauche, sélectionnez **Azure Active Directory**   > **Utilisateurs** > **Tous les utilisateurs** .
 
     ![Options Utilisateurs et « Tous les utilisateurs »](common/users.png)
 
-1. En haut de l’écran, sélectionnez **+ Nouvel utilisateur**.
+1. En haut de l’écran, sélectionnez **+ Nouvel utilisateur** .
 
     ![Option Nouvel utilisateur](common/new-user.png)
 
-1. Dans le volet **Utilisateur**, effectuez les étapes suivantes :
+1. Dans le volet **Utilisateur** , effectuez les étapes suivantes :
 
     ![Volet Utilisateur](common/user-properties.png)
 
-    1. Dans la zone **Nom**, entrez **BSimon**.
+    1. Dans la zone **Nom** , entrez **BSimon** .
   
-    1. Dans la zone **Nom d’utilisateur**, entrez **BSimon\@\<votre_domaine_d’entreprise>.\<extension>** . Par exemple **BSimon\@contoso.com**.
+    1. Dans la zone **Nom d’utilisateur** , entrez **BSimon\@\<yourcompanydomain>.\<extension>** . Par exemple **BSimon\@contoso.com** .
 
-    1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
+    1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe** .
 
     1. Sélectionnez **Create** (Créer).
 
@@ -161,27 +157,27 @@ Dans cette section, créez un utilisateur de test nommé Britta Simon dans le po
 
 Dans cette section, vous allez autoriser B. Simon à utiliser l’authentification unique Azure en lui accordant l’accès à TurboRater.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise** > **Toutes les applications** > **TurboRater**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** > **Toutes les applications** > **TurboRater** .
 
     ![Volet Applications d’entreprise](common/enterprise-applications.png)
 
-1. Dans la liste des applications, sélectionnez **TurboRater**.
+1. Dans la liste des applications, sélectionnez **TurboRater** .
 
     ![TurboRater dans la liste des applications](common/all-applications.png)
 
-1. Dans le volet gauche, sous **GÉRER**, sélectionnez **Utilisateurs et groupes**.
+1. Dans le volet gauche, sous **GÉRER** , sélectionnez **Utilisateurs et groupes** .
 
     ![Option « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **+ Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans le volet **Ajouter une attribution**.
+1. Sélectionnez **+ Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans le volet **Ajouter une attribution** .
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-1. Dans le volet **Utilisateurs et groupes**, sélectionnez **B Simon** dans la liste **Utilisateurs**, puis choisissez **Sélectionner** au bas du volet.
+1. Dans le volet **Utilisateurs et groupes** , sélectionnez **B Simon** dans la liste **Utilisateurs** , puis choisissez **Sélectionner** au bas du volet.
 
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans le volet **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste. Au bas du volet, choisissez **Sélectionner**.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans le volet **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste. Au bas du volet, choisissez **Sélectionner** .
 
-1. Dans le volet **Ajouter une attribution**, sélectionnez **Attribuer**.
+1. Dans le volet **Ajouter une attribution** , sélectionnez **Attribuer** .
 
 ### <a name="create-a-turborater-test-user"></a>Créer un utilisateur de test TurboRater
 
@@ -191,12 +187,12 @@ Dans cette section, vous allez créer un utilisateur appelé B Simon dans TurboR
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à partir du portail Mes applications.
 
-Quand vous sélectionnez **TurboRater** sur le portail Mes applications, vous devez être connecté automatiquement à l’abonnement TurboRater pour lequel vous avez configuré l’authentification unique. Pour plus d’informations sur le portail Mes applications, consultez [Accéder aux applications du portail Mes applications et les utiliser](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez **TurboRater** sur le portail Mes applications, vous devez être connecté automatiquement à l’abonnement TurboRater pour lequel vous avez configuré l’authentification unique. Pour plus d’informations sur le portail Mes applications, consultez [Accéder aux applications du portail Mes applications et les utiliser](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Liste de tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+* [Liste de tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-* [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+* [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-* [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+* [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

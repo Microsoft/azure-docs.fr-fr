@@ -9,10 +9,10 @@ ms.date: 04/06/2020
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: 0b185d545e129c941d5df2e8ce86ee684174b666
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81008331"
 ---
 Pour l’instant, seuls les disques Ultra et les disques SSD Premium peuvent activer des disques partagés. Des tailles de disque différentes peuvent avoir une limite `maxShares` différente, que vous ne pouvez pas dépasser lors de la définition de la valeur `maxShares`. Pour les disques SSD Premium, les tailles de disque qui prennent en charge le partage de leurs disques sont P15 et supérieures.

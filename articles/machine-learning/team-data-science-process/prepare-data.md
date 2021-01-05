@@ -12,11 +12,11 @@ ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
 ms.openlocfilehash: caedcf313ab809e9607907545f26ca1b62bbeca7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720042"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012405"
 ---
 # <a name="tasks-to-prepare-data-for-enhanced-machine-learning"></a>Tâches de préparation des données pour l'apprentissage automatique amélioré
 Le prétraitement et le nettoyage des données sont des tâches importantes qui doivent intervenir avant d’utiliser un jeu de données pour la formation de modèles. Les données brutes sont souvent bruyantes, peu fiables et incomplètes. Leur utilisation pour la modélisation peut générer des résultats trompeurs. Ces tâches font partie du processus TDSP (Team Data Science Process) et suivent généralement l'exploration initiale d'un jeu de données utilisé pour découvrir et planifier le traitement préliminaire requis. Pour plus d'instructions sur le processus TDSP, consultez les étapes décrites dans le [processus TDSP (Team Data Science Process)](overview.md).

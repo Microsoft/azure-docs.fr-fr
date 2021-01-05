@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9a3e2df956aaa4f9fd0af83dd2a18e04d731c714
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1a17f52e519a84c58c9ed5b75259cc0b96d0a175
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74232340"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88949172"
 ---
 # <a name="azure-active-directory-identity-protection-glossary"></a>Glossaire d’Azure Active Directory Identity Protection
 
@@ -160,4 +160,4 @@ Configuration ou condition dans Azure Active Directory qui rend l’annuaire vul
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Azure Active Directory Identity Protection](../active-directory-identityprotection.md)
+- [Azure Active Directory Identity Protection](./overview-identity-protection.md)

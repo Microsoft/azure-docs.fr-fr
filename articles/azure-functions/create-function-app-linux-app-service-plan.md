@@ -1,14 +1,14 @@
 ---
 title: Créer une application de fonction sur Linux à l’aide du portail Azure
-description: Apprenez à créer votre première fonction Azure pour une exécution sans serveur à l’aide du portail Azure.
+description: Découvrez comment créer votre première fonction Azure sur Linux à l’aide du Portail Azure.
 ms.topic: how-to
 ms.date: 04/29/2020
-ms.openlocfilehash: 5aae60900a61c28f6c53f89b8e273daccb047eef
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 20390239ed58e42749e9a3bae472a2f3f6324bb2
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83116015"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96181252"
 ---
 # <a name="create-a-function-app-on-linux-in-an-azure-app-service-plan"></a>Créer une application de fonction dans un plan App Service sur Linux
 
@@ -83,7 +83,7 @@ Créez ensuite une fonction dans la nouvelle Function App.
 Cette section vous montre comment créer une fonction dans votre nouvelle application de fonction dans le portail.
 
 > [!NOTE]
-> L’expérience de développement du portail peut être utile pour tester Azure Functions. Pour la plupart des scénarios, envisagez de développer vos fonctions localement et de publier le projet dans votre application de fonction à l’aide de [Visual Studio Code](functions-create-first-function-vs-code.md#create-an-azure-functions-project) ou d’[Azure Functions Core Tools](functions-run-local.md#create-a-local-functions-project).  
+> L’expérience de développement du portail peut être utile pour tester Azure Functions. Pour la plupart des scénarios, envisagez de développer vos fonctions localement et de publier le projet dans votre application de fonction à l’aide de [Visual Studio Code](./create-first-function-vs-code-csharp.md#create-an-azure-functions-project) ou d’[Azure Functions Core Tools](functions-run-local.md#create-a-local-functions-project).  
 
 1. Dans le menu de gauche de la fenêtre **Fonctions**, sélectionnez **Fonctions**, puis **Ajouter** dans le menu supérieur. 
  

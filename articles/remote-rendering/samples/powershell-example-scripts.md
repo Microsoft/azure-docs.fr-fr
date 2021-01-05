@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/12/2020
 ms.topic: sample
-ms.openlocfilehash: c45d2fc34ccbab6d813f12563678d036f9f35753
-ms.sourcegitcommit: df8b2c04ae4fc466b9875c7a2520da14beace222
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: cb8cc98a020cb382a6941c1e410eab4543594629
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80891490"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009753"
 ---
 # <a name="example-powershell-scripts"></a>Exemples de scripts PowerShell
 
@@ -21,26 +22,32 @@ Azure Remote Rendering fournit les deux API REST suivantes :
 
 Le [dépôt d’exemples ARR](https://github.com/Azure/azure-remote-rendering) contient des exemples de scripts situés dans le dossier *Scripts* qui permettent d’interagir avec les API REST du service. Cet article décrit leur utilisation.
 
+> [!TIP]
+> Il existe également un [outil basé sur l’interface utilisateur appelé ARRT](azure-remote-rendering-asset-tool.md), qui permet d’interagir avec le service, ce qui constitue une alternative pratique à l’utilisation de scripts. ![ARRT](./media/azure-remote-rendering-asset-tool.png "Capture d’écran ARRT")
+
+> [!CAUTION]
+> Une fréquence trop élevée d’appels aux fonctions de l’API REST provoque la limitation du serveur, qui retourne une défaillance. Dans ce cas, l’ID de code d’échec HTTP est 429 (« trop de demandes »). En règle générale, il doit y avoir un délai de **5 à 10 secondes entre les appels successifs**.
+
 ## <a name="prerequisites"></a>Prérequis
 
-Pour exécuter les exemples de scripts, vous avez besoin d’une configuration fonctionnelle d’[Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
+Pour exécuter les exemples de scripts, vous avez besoin d’une configuration fonctionnelle d’[Azure PowerShell](/powershell/azure/).
 
 1. Installez Azure PowerShell :
-    1. Ouvrir PowerShell avec des droits d’administrateur
+    1. Ouvrez une fenêtre PowerShell avec des droits d’administrateur.
     1. Exécutez l’instruction suivante : `Install-Module -Name Az -AllowClobber`
 
-1. Si vous recevez des erreurs concernant l’exécution des scripts, vérifiez que votre [stratégie d’exécution](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6) est correctement configurée :
-    1. Ouvrir PowerShell avec des droits d’administrateur
+1. Si vous recevez des erreurs concernant l’exécution des scripts, vérifiez que votre [stratégie d’exécution](/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6) est correctement configurée :
+    1. Ouvrez une fenêtre PowerShell avec des droits d’administrateur.
     1. Exécutez l’instruction suivante : `Set-ExecutionPolicy -ExecutionPolicy Unrestricted`
 
 1. [Préparer un compte de stockage Azure](../how-tos/conversion/blob-storage.md#prepare-azure-storage-accounts)
 
 1. Connectez-vous à l’abonnement qui contient votre compte Azure Remote Rendering :
-    1. Ouvrez PowerShell.
+    1. Ouvrez une fenêtre PowerShell.
     1. Exécutez `Connect-AzAccount`, puis suivez les instructions à l’écran.
 
-> [!NOTE]
-> Si votre organisation a plusieurs abonnements, vous devrez peut-être spécifier les arguments SubscriptionId et Tenant. Pour plus d’informations, consultez la [documentation sur Connect-AzAccount](https://docs.microsoft.com/powershell/module/az.accounts/connect-azaccount).
+    > [!NOTE]
+    > Si votre organisation a plusieurs abonnements, vous devrez peut-être spécifier les arguments SubscriptionId et Tenant. Pour plus d’informations, consultez la [documentation sur Connect-AzAccount](/powershell/module/az.accounts/connect-azaccount).
 
 1. Téléchargez le dossier *Scripts* à partir du [dépôt GitHub Azure Remote Rendering](https://github.com/Azure/azure-remote-rendering).
 
@@ -76,6 +83,9 @@ Pour exécuter les exemples de scripts, vous avez besoin d’une configuration f
 > [!CAUTION]
 > Veillez à placer correctement les barres obliques inverses dans le chemin LocalAssetDirectoryPath en utilisant des barres obliques inverses doubles (« \\\\ »). Vous pouvez utiliser des barres obliques (« / ») dans tous les autres chemins tels que inputFolderPath et inputAssetPath.
 
+> [!CAUTION]
+> Les valeurs facultatives doivent être renseignées ; sinon, vous devez supprimer entièrement la clé et la valeur. Par exemple, si vous n’utilisez pas le paramètre `"outputAssetFileName"`, supprimez toute la ligne dans `arrconfig.json`.
+
 ### <a name="accountsettings"></a>accountSettings
 
 Pour `arrAccountId` et `arrAccountKey`, consultez [Créer un compte Azure Remote Rendering](../how-tos/create-an-account.md).
@@ -83,9 +93,9 @@ Pour `region`, consultez la [liste des régions disponibles](../reference/region
 
 ### <a name="renderingsessionsettings"></a>renderingSessionSettings
 
-Cette structure doit être remplie si vous souhaitez exécuter **RenderingSession.ps1**.
+Cette structure doit être remplie si vous souhaitez exécuter **RenderingSession.ps1** :
 
-- **vmSize :** sélectionnez la taille de la machine virtuelle. Sélectionnez *Standard* ou *Premium*. Arrêtez les sessions de rendu lorsque vous n’en avez plus besoin.
+- **vmSize :** sélectionnez la taille de la machine virtuelle. Sélectionnez [*standard*](../reference/vm-sizes.md) ou [*premium*](../reference/vm-sizes.md). Arrêtez les sessions de rendu lorsque vous n’en avez plus besoin.
 - **maxLeaseTime :** durée souhaitée du bail pour la machine virtuelle. Celle-ci sera arrêtée lorsque le bail expirera. La durée du bail peut être prolongée (voir ci-dessous).
 
 ### <a name="assetconversionsettings"></a>assetConversionSettings
@@ -199,13 +209,13 @@ L’utilisation d’un compte de stockage lié est la meilleure façon d’utili
 
 Avec cette opération, vous pouvez :
 
-1. Charger le fichier local à partir de `assetConversionSettings.localAssetDirectoryPath` dans le conteneur d’objets blob d’entrée
-1. Générer un URI SAS pour le conteneur d’entrée
-1. Générer un URI SAS pour le conteneur de sortie
-1. Appeler l’[API REST de conversion des modèles](../how-tos/conversion/conversion-rest-api.md) pour lancer la [conversion du modèle](../how-tos/conversion/model-conversion.md)
-1. Interroger l’état de la conversion jusqu’à la réussite ou l’échec de celle-ci
-1. Afficher les informations concernant l’emplacement du fichier converti (compte de stockage, conteneur de sortie, chemin du fichier dans le conteneur)
-1. Afficher l’URI SAS du modèle converti dans le conteneur d’objets blob de sortie
+1. Charger le fichier local à partir de `assetConversionSettings.localAssetDirectoryPath` dans le conteneur d’objets blob d’entrée.
+1. Générer un URI SAS pour le conteneur d’entrée.
+1. Générer un URI SAS pour le conteneur de sortie.
+1. Appeler l’[API REST de conversion des modèles](../how-tos/conversion/conversion-rest-api.md) pour lancer la [conversion du modèle](../how-tos/conversion/model-conversion.md).
+1. Interroger l’état de la conversion jusqu’à la réussite ou l’échec de celle-ci.
+1. Afficher les informations concernant l’emplacement du fichier converti (compte de stockage, conteneur de sortie, chemin du fichier dans le conteneur).
+1. Afficher l’URI SAS du modèle converti dans le conteneur d’objets blob de sortie.
 
 ### <a name="additional-command-line-options"></a>Options supplémentaires de la ligne de commande
 
@@ -246,7 +256,7 @@ Par exemple, vous pouvez combiner plusieurs options de la façon suivante :
 
 Si vous souhaitez exécuter uniquement certaines étapes du processus, vous pouvez procéder de la façon suivante :
 
-Chargez uniquement les données à partir du LocalAssetDirectoryPath donné :
+Chargez uniquement les données à partir du LocalAssetDirectoryPath donné.
 
 ```PowerShell
 .\Conversion.ps1 -Upload

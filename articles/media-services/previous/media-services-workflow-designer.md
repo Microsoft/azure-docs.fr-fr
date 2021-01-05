@@ -15,14 +15,17 @@ ms.topic: article
 ms.date: 03/20/2019
 ms.author: anilmur
 ms.reviewer: juliako;johndeu
-ms.openlocfilehash: 4dceb558532305c6d2e84563e25ab05508423090
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a53027ec1f775c240164f67e7ee0473a44690964
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72801943"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89262683"
 ---
-# <a name="create-advanced-encoding-workflows-with-workflow-designer"></a>Créer des flux de travail d’encodage avancé avec le Concepteur de flux de travail  
+# <a name="create-advanced-encoding-workflows-with-workflow-designer"></a>Créer des flux de travail d’encodage avancé avec le Concepteur de flux de travail
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 ## <a name="overview"></a>Vue d’ensemble
 Le **Concepteur de flux de travail** est un outil de bureau Windows qui permet de concevoir et de générer des flux de travail personnalisés à encoder avec **Media Encoder Premium Workflow**.
 À l'aide de la puissance de l'outil de conception de flux de travail, vous pouvez concevoir et créer des flux de travail complexes qui seront exécutés dans **Media Encoder Premium**.  

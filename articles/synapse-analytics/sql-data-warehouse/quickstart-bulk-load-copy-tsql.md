@@ -6,21 +6,21 @@ author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
-ms.date: 04/08/2020
+ms.subservice: sql-dw
+ms.date: 11/20/2020
 ms.author: kevin
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: d39b3085a802ca0ff745ab1f63f4a8fba966ea48
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 83b5804888379316b855c36f803f646cec102d9e
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81115001"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95024583"
 ---
 # <a name="quickstart-bulk-load-data-using-the-copy-statement"></a>Démarrage rapide : Charger en masse des données à l’aide de l’instruction COPY
 
-Dans ce guide de démarrage rapide, vous allez charger en masse des données dans votre pool SQL au moyen de l’[instruction COPY](https://docs.microsoft.com/sql/t-sql/statements/copy-into-transact-sql?view=azure-sqldw-latest) simple et flexible pour l’ingestion de données à débit élevé. L’instruction COPY est l’utilitaire de chargement recommandé, car il vous permet de charger des données de manière fluide et flexible en fournissant des fonctionnalités pour :
+Dans ce guide de démarrage rapide, vous allez charger en masse des données dans votre pool SQL dédié au moyen de l’[instruction COPY](https://docs.microsoft.com/sql/t-sql/statements/copy-into-transact-sql?view=azure-sqldw-latest) simple et flexible pour l’ingestion de données à débit élevé. L’instruction COPY est l’utilitaire de chargement recommandé, car il vous permet de charger des données de manière fluide et flexible en fournissant des fonctionnalités pour :
 
 - Autoriser le chargement aux utilisateurs avec privilèges plus restreints, sans avoir besoin d’autorisations CONTROL strictes sur l’entrepôt de données
 - Tirer parti uniquement d’une instruction T-SQL sans avoir à créer d’objets de base de données supplémentaires
@@ -34,7 +34,35 @@ Dans ce guide de démarrage rapide, vous allez charger en masse des données dan
 
 ## <a name="prerequisites"></a>Prérequis
 
-Ce guide de démarrage rapide part du principe que vous disposez déjà d’un pool SQL. Si aucun pool SQL n’a été créé, utilisez le démarrage rapide [Créer et se connecter - Portail](create-data-warehouse-portal.md).
+Ce guide de démarrage rapide part du principe que vous disposez déjà d’un pool SQL dédié. Si aucun pool SQL dédié n’a été créé, utilisez le guide démarrage rapide [Créer et se connecter - Portail](create-data-warehouse-portal.md).
+
+## <a name="set-up-the-required-permissions"></a>Configurer les autorisations nécessaires
+
+```sql
+-- List the permissions for your user
+select  princ.name
+,       princ.type_desc
+,       perm.permission_name
+,       perm.state_desc
+,       perm.class_desc
+,       object_name(perm.major_id)
+from    sys.database_principals princ
+left join
+        sys.database_permissions perm
+on      perm.grantee_principal_id = princ.principal_id
+where name = '<yourusername>';
+
+--Make sure your user has the permissions to CREATE tables in the [dbo] schema
+GRANT CREATE TABLE TO <yourusername>;
+GRANT ALTER ON SCHEMA::dbo TO <yourusername>;
+
+--Make sure your user has ADMINISTER DATABASE BULK OPERATIONS permissions
+GRANT ADMINISTER DATABASE BULK OPERATIONS TO <yourusername>
+
+--Make sure your user has INSERT permissions on the target table
+GRANT INSERT ON <yourtable> TO <yourusername>
+
+```
 
 ## <a name="create-the-target-table"></a>Créer la table cible
 

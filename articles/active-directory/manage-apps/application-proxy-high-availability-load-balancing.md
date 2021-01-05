@@ -3,8 +3,8 @@ title: Haute disponibilité et équilibrage de charge – Proxy d’application 
 description: Fonctionnement de la distribution du trafic avec votre déploiement de proxy d’application. Contient des conseils pour optimiser les performances du connecteur et utiliser l’équilibrage de charge pour les serveurs principaux.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 10/08/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 992075378737552e890bd2d6fed3c519e6c62aa7
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 403fa4cab94ad6149e388b10acccd9d5e7a2b7a8
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312946"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658160"
 ---
 # <a name="high-availability-and-load-balancing-of-your-application-proxy-connectors-and-applications"></a>Haute disponibilité et équilibrage de charge de vos applications et connecteurs de proxy d’application
 
@@ -39,7 +39,7 @@ Les connecteurs établissent leurs connexions en fonction des principes de haute
 
 1. Un utilisateur sur un appareil client tente d’accéder à une application locale publiée par le biais du proxy d’application.
 2. La requête passe par un Azure Load Balancer pour déterminer quelle instance de service de proxy d’application doit la prendre en charge. Par région, des dizaines d’instances sont disponibles pour accepter la requête. Cette méthode permet de répartir uniformément le trafic entre les instances de service.
-3. La requête est envoyée à [Service Bus](https://docs.microsoft.com/azure/service-bus-messaging/).
+3. La requête est envoyée à [Service Bus](../../service-bus-messaging/index.yml).
 4. Service Bus signale à un connecteur disponible. Le connecteur récupère ensuite la requête à partir de Service Bus.
    - À l’étape 2, les requêtes sont dirigées vers différentes instances du service de proxy d’application, de sorte que les connexions sont plus susceptibles d’être effectuées avec différents connecteurs. Par conséquent, les connecteurs sont presque uniformément utilisés au sein du groupe.
 5. Le connecteur transmet la requête au serveur principal de l’application. L’application renvoie ensuite la réponse au connecteur.
@@ -98,4 +98,4 @@ Reportez-vous à la documentation de votre fournisseur de logiciels pour compren
 - [Activer l’authentification unique](application-proxy-configure-single-sign-on-with-kcd.md)
 - [Activer l’accès conditionnel](application-proxy-integrate-with-sharepoint-server.md)
 - [Résoudre les problèmes rencontrés avec le proxy d’application](application-proxy-troubleshoot.md)
-- [Découvrir comment l’architecture Azure AD prend en charge la haute disponibilité](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-architecture)
+- [Découvrir comment l’architecture Azure AD prend en charge la haute disponibilité](../fundamentals/active-directory-architecture.md)

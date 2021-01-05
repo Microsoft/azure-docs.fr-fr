@@ -1,17 +1,17 @@
 ---
 title: Gérer les points de terminaison de réseau virtuel - Portail Azure - Azure Database for MariaDB
 description: Créer et gérer des règles et points de terminaison de service de réseau virtuel Azure Database for MariaDB à l’aide du portail Azure
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/18/2020
-ms.openlocfilehash: 61a8337536f55ceda9bef5b7eaa67a37644d2aca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5eaa7821c61010b322d8f9032c439df28c297f3d
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79530595"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94540873"
 ---
 # <a name="create-and-manage-azure-database-for-mariadb-vnet-service-endpoints-and-vnet-rules-by-using-the-azure-portal"></a>Créer et gérer des points de terminaison de service de réseau virtuel et des règles de réseau virtuel Azure Database for MariaDB à l’aide du portail Azure
 
@@ -43,7 +43,7 @@ Les règles et points de terminaison de service de réseau virtuel étendent l�
     
    Pour sécuriser les ressources du service Azure pour un réseau virtuel, l’utilisateur doit disposer des autorisations sur « Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/ » pour les sous-réseaux à ajouter. Cette autorisation est incluse par défaut dans les rôles d’administrateur de service fédérés et peut être modifiée en créant des rôles personnalisés.
     
-   Apprenez-en davantage sur les [rôles intégrés](https://docs.microsoft.com/azure/active-directory/role-based-access-built-in-roles) et l’affectation d’autorisations spécifiques aux [rôles personnalisés](https://docs.microsoft.com/azure/active-directory/role-based-access-control-custom-roles).
+   Apprenez-en davantage sur les [rôles intégrés](../role-based-access-control/built-in-roles.md) et l’affectation d’autorisations spécifiques aux [rôles personnalisés](../role-based-access-control/custom-roles.md).
     
    Les réseaux virtuels et les ressources du service Azure peuvent être dans des abonnements identiques ou différents. Si le réseau virtuel et les ressources de service Azure se trouvent dans différents abonnements, les ressources doivent être sous le même locataire Active Directory (AD). Assurez-vous que le fournisseur de ressources **Microsoft.Sql** est inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
 

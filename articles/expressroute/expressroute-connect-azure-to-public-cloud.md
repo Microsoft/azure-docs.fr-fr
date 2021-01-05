@@ -2,17 +2,17 @@
 title: Connexion d’Azure à des clouds publics | Microsoft Docs
 description: Décrire les différentes façons de connecter Azure à d’autres clouds publics
 services: expressroute
-author: osamazia
+author: duongau
 ms.service: expressroute
 ms.topic: article
 ms.date: 07/24/2019
-ms.author: osamaz
-ms.openlocfilehash: b8a454c2a104dfe8545cf734bf0b020b8f749bb1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: fb4c34345ab902e243f22eae06fd5ea174fd2992
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73889623"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202189"
 ---
 # <a name="connecting-azure-with-public-clouds"></a>Connexion d’Azure à des clouds publics
 
@@ -34,7 +34,7 @@ Les fournisseurs Layer3 sont communément appelés fournisseurs VPN IP ou VPN MP
  
 Lors de la connexion via le fournisseur Layer3, Microsoft publiera des itinéraires VNET clients auprès du fournisseur de services via le protocole BGP. Le fournisseur peut avoir deux implémentations différentes.
 
-![](media/expressroute-connect-azure-to-public-cloud/azure-to-public-clouds-l3.png)
+![Diagramme qui affiche un fournisseur Layer3.](media/expressroute-connect-azure-to-public-cloud/azure-to-public-clouds-l3.png)
 
 Le fournisseur peut insérer chaque fournisseur de cloud dans un VRF distinct si le trafic provenant de tous les fournisseurs de cloud est amené à accéder au routeur du client. Si le client exécute le protocole BGP avec le fournisseur de services, ces itinéraires seront de nouveau publiés sur d’autres fournisseurs de cloud par défaut. 
 
@@ -45,7 +45,7 @@ Chaque cloud public présente une limite de préfixe différente. Par conséquen
 ### <a name="layer2-provider-and-direct-connection"></a>Fournisseur Layer2 et connexion directe
 
 Bien que la connectivité physique dans les deux modèles soit différente, au niveau Layer3, le protocole BGP est établi directement entre MSEE et le routeur du client. Pour ExpressRoute Direct, le client se connecte directement à MSEE. Dans le cas de Layer2, le fournisseur de services étend le VLAN des sites clients vers le cloud. Les clients exécutent le protocole BGP sur le réseau Layer2 pour connecter leurs contrôleurs de domaine au cloud.
-![](media/expressroute-connect-azure-to-public-cloud/azure-to-public-clouds-l2.png)
+![Diagramme qui montre un fournisseur Layer2 et une connexion directe.](media/expressroute-connect-azure-to-public-cloud/azure-to-public-clouds-l2.png)
 Dans les deux cas, le client aura des connexions point à point à chacun des clouds publics. Le client établira une connexion BGP distincte à chaque cloud public. Les itinéraires reçus par un fournisseur de cloud seront publiés sur d’autres fournisseurs de cloud par défaut. Dans la mesure où chaque fournisseur de cloud présente une limite de préfixe différente, le client doit prendre en compte ces limites lors de la publication des itinéraires. Le client peut utiliser les boutons BGP habituels avec Microsoft tout en publiant des itinéraires à partir d’autres clouds publics.
 
 ## <a name="direct-connection-with-expressroute"></a>Connexion directe avec ExpressRoute
@@ -64,8 +64,5 @@ Pour toute question complémentaire sur ExpressRoute et la connectivité des ré
 Consultez [Configurer une connexion directe entre Azure et Oracle Cloud][ER-OCI] pour la connectivité entre Azure et Oracle
 
 <!--Link References-->
-[ER-FAQ]: https://docs.microsoft.com/azure/expressroute/expressroute-faqs
-[ER-OCI]: https://docs.microsoft.com/azure/virtual-machines/workloads/oracle/configure-azure-oci-networking
-
-
-
+[ER-FAQ]: ./expressroute-faqs.md
+[ER-OCI]: ../virtual-machines/workloads/oracle/configure-azure-oci-networking.md

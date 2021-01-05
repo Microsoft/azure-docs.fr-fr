@@ -9,12 +9,12 @@ ms.topic: troubleshooting
 ms.date: 01/30/2020
 ms.author: jlian
 ms.custom: amqp
-ms.openlocfilehash: 20d39b1f5a11f20eb5d12f34337787b382c820f6
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 70b9be6fdb500d9f877659a12e6fdc0e206ea964
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758742"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92538219"
 ---
 # <a name="409002-linkcreationconflict"></a>409002 LinkCreationConflict
 
@@ -22,7 +22,7 @@ Cet article décrit les causes et solutions des erreurs **409002 LinkCreationCon
 
 ## <a name="symptoms"></a>Symptômes
 
-L’erreur **409002 LinkCreationConflict** est consignée dans les journaux de diagnostic, ainsi que la déconnexion d’appareil ou l’échec de message cloud-à-appareil. 
+L'erreur **409002 LinkCreationConflict** apparaît dans les journaux, avec la déconnexion de l'appareil ou l'échec de message cloud-à-appareil.
 
 <!-- When using AMQP? -->
 

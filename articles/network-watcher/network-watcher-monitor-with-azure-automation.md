@@ -7,17 +7,17 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 74c9f44ff5fbbbb50bba1594d371633fd49857eb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: af671996722524de9af1a90ae8dfde27f814c8c2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76845038"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011810"
 ---
 # <a name="monitor-vpn-gateways-with-network-watcher-troubleshooting"></a>Surveiller les passerelles VPN à l’aide de la résolution des problèmes Network Watcher
 
@@ -42,7 +42,7 @@ Avant de réaliser ce scénario, vous devez disposer des éléments suivants :
 
 - Un compte Azure Automation dans Azure. Assurez-vous que le compte automation a les derniers modules et qu’il a également le module AzureRM.Network. Le module AzureRM.Network est disponible dans la galerie des modules pour l’ajouter à votre compte automation.
 - Vous devez avoir configuré des informations d’identification dans Azure Automation. Pour en savoir plus, consultez l’article [Sécurité dans Azure Automation](../automation/automation-security-overview.md).
-- Un serveur SMTP valide (Office 365, votre messagerie locale ou une autre) et les informations d’identification définies dans Azure Automation.
+- Un serveur SMTP valide (Microsoft 365, votre messagerie locale ou autre) et les informations d'identification définies dans Azure Automation.
 - Une passerelle de réseau virtuel configurée dans Azure.
 - Un compte de stockage existant avec un conteneur existant pour y stocker les journaux d’activité.
 
@@ -51,7 +51,7 @@ Avant de réaliser ce scénario, vous devez disposer des éléments suivants :
 
 ### <a name="create-the-runbook"></a>Créer le runbook
 
-La première étape de configuration de l’exemple consiste à créer le runbook. Cet exemple utilise un compte d’identification. Pour en savoir plus sur les comptes d’identification, consultez l’article [Authentifier des Runbooks avec un compte d’identification Azure](../automation/automation-create-runas-account.md).
+La première étape de configuration de l’exemple consiste à créer le runbook. Cet exemple utilise un compte d’identification. Pour en savoir plus sur les comptes d’identification, consultez l’article [Authentifier des Runbooks avec un compte d’identification Azure](../automation/manage-runas-account.md).
 
 ### <a name="step-1"></a>Étape 1
 
@@ -85,7 +85,7 @@ Utilisez le code suivant et cliquez sur **Enregistrer**.
 
 ```powershell
 # Set these variables to the proper values for your environment
-$o365AutomationCredential = "<Office 365 account>"
+$automationCredential = "<work or school account>"
 $fromEmail = "<from email address>"
 $toEmail = "<to email address>"
 $smtpServer = "<smtp.office365.com>"
@@ -99,8 +99,8 @@ $storageAccountName = "<storage account name>"
 $storageAccountResourceGroup = "<resource group name>"
 $storageAccountContainer = "<container name>"
 
-# Get credentials for Office 365 account
-$cred = Get-AutomationPSCredential -Name $o365AutomationCredential
+# Get credentials for work or school account
+$cred = Get-AutomationPSCredential -Name $automationCredential
 
 # Get the connection "AzureRunAsConnection "
 $servicePrincipalConnection=Get-AutomationConnection -Name $runAsConnectionName

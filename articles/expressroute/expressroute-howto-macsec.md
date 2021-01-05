@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Configurer MACsec'
 description: Cet article vous aide à configurer MACsec pour sécuriser les connexions entre vos routeurs de périphérie et les routeurs de périphérie de Microsoft.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/22/2019
-ms.author: cherylmc
-ms.openlocfilehash: 572147ca43e9a4dea9d9601dfa1dac8ba1c97ed0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.openlocfilehash: 8ee7f42a4b05def7c2239c7a1e5bcef54f6f7e50
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81458230"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89395772"
 ---
 # <a name="configure-macsec-on-expressroute-direct-ports"></a>Configurer MACsec sur les ports ExpressRoute Direct
 
@@ -47,7 +47,7 @@ Pour commencer la configuration, connectez-vous à votre compte Azure et sélect
     $keyVault = New-AzKeyVault -Name "your_key_vault_name" -ResourceGroupName "your_resource_group" -Location "resource_location" -EnableSoftDelete 
     ```
 
-    Si vous avez déjà un coffre de clés ou un groupe de ressources, vous pouvez les réutiliser. Dans ce cas, vous devez impérativement activer la [fonctionnalité de **suppression réversible**](../key-vault/general/overview-soft-delete.md) sur votre coffre de clés existant. Si la suppression réversible n’est pas activée, vous pouvez l’activer à l’aide des commandes suivantes :
+    Si vous avez déjà un coffre de clés ou un groupe de ressources, vous pouvez les réutiliser. Dans ce cas, vous devez impérativement activer la [fonctionnalité de **suppression réversible**](../key-vault/general/soft-delete-overview.md) sur votre coffre de clés existant. Si la suppression réversible n’est pas activée, vous pouvez l’activer à l’aide des commandes suivantes :
 
     ```azurepowershell-interactive
     ($resource = Get-AzResource -ResourceId (Get-AzKeyVault -VaultName "your_existing_keyvault").ResourceId).Properties | Add-Member -MemberType "NoteProperty" -Name "enableSoftDelete" -Value "true"

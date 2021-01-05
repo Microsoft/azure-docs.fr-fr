@@ -10,10 +10,10 @@ ms.topic: include
 ms.date: 01/14/2020
 ms.author: trbye
 ms.openlocfilehash: a7c91775411f100a92dfcb0a7199dd4b25f6eca4
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
+ms.lasthandoff: 04/28/2020
 ms.locfileid: "81400523"
 ---
 Dans ce guide de démarrage rapide, vous allez utiliser le [kit de développement logiciel (SDK) Speech](~/articles/cognitive-services/speech-service/speech-sdk.md) pour reconnaître la voix à partir d’un fichier audio. Une fois les prérequis remplis, la reconnaissance vocale à partir d’un fichier se fait en quelques étapes seulement :

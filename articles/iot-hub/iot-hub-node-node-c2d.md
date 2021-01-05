@@ -12,12 +12,13 @@ ms.date: 06/16/2017
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: a1e0e3623692321e5c69e4b9c5a26ff82a1c47a0
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+- devx-track-js
+ms.openlocfilehash: e398138f12c38e5235a0004679d9574dbde607db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732356"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91446887"
 ---
 # <a name="send-cloud-to-device-messages-with-iot-hub-nodejs"></a>Envoi de messages cloud à appareil avec IoT Hub (Node.js)
 
@@ -45,13 +46,13 @@ Vous trouverez des informations supplémentaires sur les messages cloud-à-appar
 > IoT Hub offre la prise en charge de Kits de développement logiciel (SDK) pour plusieurs plateformes d’appareils et plusieurs langages (notamment C, Java, Python et Javascript) par le biais des Kits Azure IoT device SDK. Pour obtenir des instructions détaillées sur la façon de connecter votre appareil au code de ce didacticiel, et à Azure IoT Hub de manière générale, consultez le [Centre de développement Azure IoT](https://azure.microsoft.com/develop/iot).
 >
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Node.j version 10.0.x ou ultérieure. L’article [Préparer votre environnement de développement](https://github.com/Azure/azure-iot-sdk-node/tree/master/doc/node-devbox-setup.md) décrit l’installation de Node.js pour ce didacticiel sur Windows ou sur Linux.
 
 * Un compte Azure actif. (Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial) en quelques minutes seulement.)
 
-* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="receive-messages-in-the-simulated-device-app"></a>Recevoir des messages dans l’application d’appareil simulé
 
@@ -76,11 +77,20 @@ Dans cette section, vous modifiez l’application d’appareil simulé créée d
     });
     ```
 
-    Dans cet exemple, l'appareil appelle la fonction **complete** afin de notifier IoT Hub qu'il a traité le message. L'appel de la fonction **complete** n'est pas nécessaire et peut être omis si vous utilisez le transport MQTT. En revanche, il est obligatoire pour HTTPS et AMQP.
+Dans cet exemple, l'appareil appelle la fonction **complete** afin de notifier IoT Hub qu'il a traité le message et que celui-ci peut être supprimé de la file d'attente de l'appareil. L'appel de la fonction **complete** n'est pas nécessaire et peut être omis si vous utilisez le transport MQTT. En revanche, il est obligatoire pour AMQP et HTTPS.
+
+Avec AMQP et HTTPS, mais pas MQTT, l'appareil peut également :
+
+* abandonner un message - IoT Hub conserve alors le message dans la file d'attente de l'appareil pour un traitement ultérieur ;
+* rejeter un message, ce qui le supprime définitivement de la file d'attente de l'appareil.
+
+S'il se produit un événement qui empêche l'appareil de traiter, d'abandonner ou de rejeter le message, IoT Hub le met à nouveau en file d'attente après un délai d'attente déterminé. C'est la raison pour laquelle la logique de traitement des messages de l'application pour périphérique doit être *idempotente* pour qu'un message identique reçu plusieurs fois produise le même résultat.
+
+Pour plus d'informations sur la façon dont IoT Hub traite les messages cloud-à-appareil, y compris sur le cycle de vie des messages cloud-à-appareil, consultez [Envoyer des messages cloud-à-appareil à partir d'un hub IoT](iot-hub-devguide-messages-c2d.md).
   
-   > [!NOTE]
-   > Si vous utilisez HTTPS au lieu de MQTT ou d’AMQP comme moyen de transport, l’instance **DeviceClient** vérifie les messages à partir d’IoT Hub peu fréquemment (moins de toutes les 25 minutes). Pour plus d’informations sur les différences entre la prise en charge de MQTT, d’AMQP et de HTTPS ainsi que la limitation d’IoT Hub, consultez le [Guide du développeur IoT Hub](iot-hub-devguide-messaging.md).
-   >
+> [!NOTE]
+> Si vous utilisez HTTPS plutôt que MQTT ou AMQP comme moyen de transport, l'instance **DeviceClient** ne vérifie pas très souvent les messages provenant d'IoT Hub (au minimum toutes les 25 minutes). Pour plus d'informations sur les différences de prise en charge entre MQTT, AMQP et HTTPS, consultez [Conseils sur les communications cloud-à-appareil](iot-hub-devguide-c2d-guidance.md) et [Choisir un protocole de communication](iot-hub-devguide-protocols.md).
+>
 
 ## <a name="get-the-iot-hub-connection-string"></a>Obtenir la chaîne de connexion du hub IoT
 

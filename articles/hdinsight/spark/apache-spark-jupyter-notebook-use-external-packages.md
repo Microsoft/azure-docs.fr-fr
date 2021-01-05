@@ -5,21 +5,17 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 11/22/2019
-ms.openlocfilehash: cec94b2ecb18bc9e8cceb24a21967a3c829d78a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 772b136c00dc9c20f8bc35d7ebb324175a56e885
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74561729"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90061714"
 ---
 # <a name="use-external-packages-with-jupyter-notebooks-in-apache-spark-clusters-on-hdinsight"></a>Utilisation de packages externes avec les blocs-notes Jupyter dans des clusters Apache Spark sur HDInsight
-
-> [!div class="op_single_selector"]
-> * [À l’aide de la commande magique de cellule](apache-spark-jupyter-notebook-use-external-packages.md)
-> * [À l’aide d’une action de script](apache-spark-python-package-installation.md)
 
 Découvrez comment configurer un bloc-notes [Jupyter Notebook](https://jupyter.org/) dans un cluster Apache Spark sur HDInsight pour utiliser des packages Apache **Maven** externes bénéficiant de la contribution de la communauté, qui ne sont pas inclus dans le cluster.
 
@@ -27,7 +23,7 @@ Vous pouvez rechercher le [référentiel Maven](https://search.maven.org/) pour 
 
 Dans cet article, vous allez apprendre à utiliser le package [spark-csv](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar) avec le bloc-notes Jupyter.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Un cluster Apache Spark sur HDInsight. Pour obtenir des instructions, consultez [Création de clusters Apache Spark dans Azure HDInsight](apache-spark-jupyter-spark-sql.md).
 
@@ -67,37 +63,45 @@ Dans cet article, vous allez apprendre à utiliser le package [spark-csv](https:
 
     c. Concaténez les trois valeurs séparées par deux-points ( **:** ).
 
-        com.databricks:spark-csv_2.11:1.5.0
+    ```scala
+    com.databricks:spark-csv_2.11:1.5.0
+    ```
 
 1. Exécutez la cellule de code avec la commande magique `%%configure` . Cela configurera la session Livy sous-jacente pour utiliser le package fourni. Dans les cellules suivantes du bloc-notes, vous pouvez maintenant utiliser le package, comme indiqué ci-dessous.
 
-        val df = spark.read.format("com.databricks.spark.csv").
-        option("header", "true").
-        option("inferSchema", "true").
-        load("wasb:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+    ```scala
+    val df = spark.read.format("com.databricks.spark.csv").
+    option("header", "true").
+    option("inferSchema", "true").
+    load("wasb:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+    ```
 
     Pour HDInsight 3.4 et versions antérieures, utilisez l’extrait de code suivant.
 
-        val df = sqlContext.read.format("com.databricks.spark.csv").
-        option("header", "true").
-        option("inferSchema", "true").
-        load("wasb:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+    ```scala
+    val df = sqlContext.read.format("com.databricks.spark.csv").
+    option("header", "true").
+    option("inferSchema", "true").
+    load("wasb:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+    ```
 
 1. Vous pouvez ensuite exécuter les extraits de code, comme illustré ci-dessous, pour afficher les données issues du tableau de données créé lors de l’étape précédente.
 
-        df.show()
+    ```scala
+    df.show()
    
-        df.select("Time").count()
+    df.select("Time").count()
+    ```
 
 ## <a name="see-also"></a><a name="seealso"></a>Voir aussi
 
-* [Vue d’ensemble : Apache Spark sur Azure HDInsight](apache-spark-overview.md)
+* [Vue d’ensemble : Apache Spark sur Azure HDInsight](apache-spark-overview.md)
 
 ### <a name="scenarios"></a>Scénarios
 
-* [Apache Spark avec BI : effectuer une analyse interactive des données à l’aide de Spark dans HDInsight avec des outils BI](apache-spark-use-bi-tools.md)
-* [Apache Spark avec Machine Learning : Utiliser Spark dans HDInsight pour analyser la température d’un bâtiment à l’aide de données issues des systèmes de chauffage, de ventilation et de climatisation](apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark avec Machine Learning : Utiliser Spark dans HDInsight pour prédire les résultats d’une inspection alimentaire](apache-spark-machine-learning-mllib-ipython.md)
+* [Apache Spark avec BI : effectuer une analyse interactive des données à l’aide de Spark sur HDInsight avec des outils décisionnels](apache-spark-use-bi-tools.md)
+* [Apache Spark avec Machine Learning : utiliser Spark dans HDInsight pour l’analyse de la température de bâtiments à l’aide des données des systèmes HVAC](apache-spark-ipython-notebook-machine-learning.md)
+* [Apache Spark avec Machine Learning : utiliser Spark dans HDInsight pour prédire les résultats de l’inspection d’aliments](apache-spark-machine-learning-mllib-ipython.md)
 * [Analyse des journaux de site web à l’aide d’Apache Spark dans HDInsight](apache-spark-custom-library-website-log-analysis.md)
 
 ### <a name="create-and-run-applications"></a>Création et exécution d’applications

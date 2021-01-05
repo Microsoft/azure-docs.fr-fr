@@ -3,12 +3,13 @@ title: Créer une application Azure Service Fabric Reliable Actors Java sur Linu
 description: Découvrez comment créer et déployer une application Java Service Fabric Reliable Actors en cinq minutes.
 ms.topic: conceptual
 ms.date: 06/18/2018
-ms.openlocfilehash: 4d09666bad7b4e03b8598191d99a9db717c277d4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-java
+ms.openlocfilehash: 7d87b72437f86d7dc1ca4e3cf9f3d67609691c70
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82193562"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97655949"
 ---
 # <a name="create-your-first-java-service-fabric-reliable-actors-application-on-linux"></a>Création de votre première application Java Service Fabric Reliable Actors
 > [!div class="op_single_selector"]
@@ -38,7 +39,7 @@ Pour prendre en main Reliable Actors, il vous suffit de comprendre quelques conc
 * **Enregistrement d’acteur**. Comme avec les Reliable Services, un service Reliable Actor doit être enregistré avec le runtime Service Fabric. En outre, le type d’acteur doit être enregistré auprès du runtime de l’acteur.
 * **Interface d’acteur**. L’interface d’acteur est utilisée pour définir une interface publique fortement typée d’un acteur. Dans la terminologie du modèle Reliable Actor, l’interface d’acteur définit les types de messages que l’acteur peut comprendre et traiter. L’interface d’acteur est utilisée par d’autres acteurs et applications clientes pour « envoyer » (de façon asynchrone) des messages à l’acteur. Reliable Actors peut implémenter plusieurs interfaces.
 * **Classe ActorProxy**. La classe ActorProxy est utilisée par des applications clientes pour appeler les méthodes exposées par le biais de l’interface d’acteur. La classe ActorProxy fournit deux fonctionnalités importantes :
-  
+
   * Résolution de noms : Elle est en mesure de localiser l’acteur dans le cluster (rechercher le nœud du cluster dans lequel il est hébergé).
   * Gestion des échecs : Elle peut retenter les appels de méthode et résoudre de nouveau l’emplacement de l’acteur après une défaillance qui nécessite le déplacement de l’acteur vers un autre nœud du cluster, par exemple.
 
@@ -159,9 +160,9 @@ Le service de l’acteur doit être enregistré avec un type de service dans le 
 public class HelloWorldActorHost {
 
 private static final Logger logger = Logger.getLogger(HelloWorldActorHost.class.getName());
-    
+
 public static void main(String[] args) throws Exception {
-        
+
         try {
 
             ActorRuntime.registerActorAsync(HelloWorldActorImpl.class, (context, actorType) -> new FabricActorService(context, actorType, (a,b)-> new HelloWorldActorImpl(a,b)), Duration.ofSeconds(10));
@@ -220,7 +221,7 @@ Les acteurs ne font rien seuls, ils ont besoin d’un autre service ou client po
 1. Exécutez le script à l’aide de l’utilitaire watch pour afficher la sortie du service d’acteur.  Le script de test appelle la méthode `setCountAsync()` sur l’acteur pour incrémenter un compteur, appelle la méthode `getCountAsync()` sur l’acteur pour obtenir la nouvelle valeur du compteur et affiche cette valeur dans la console.
 
    Sous MAC OS X, vous devez copier le dossier HelloWorldTestClient vers certains emplacements situés dans le conteneur en exécutant les commandes supplémentaires suivantes.    
-    
+
     ```bash
      docker cp HelloWorldTestClient [first-four-digits-of-container-ID]:/home
      docker exec -it [first-four-digits-of-container-ID] /bin/bash

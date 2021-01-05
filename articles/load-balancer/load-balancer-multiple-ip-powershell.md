@@ -7,18 +7,18 @@ documentationcenter: na
 author: asudbring
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
-ms.custom: seodec18
+ms.topic: how-to
+ms.custom: seodec18, devx-track-azurecli
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
 ms.author: allensu
-ms.openlocfilehash: 6ac9e362314cc45e6adbdcf1390f70cbe6b05de8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a78bfc2b4f0c372c915647c0afa40263079af8e5
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74075960"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746059"
 ---
 # <a name="load-balancing-on-multiple-ip-configurations-using-powershell"></a>Équilibrage de charge sur plusieurs configurations IP avec PowerShell
 
@@ -38,7 +38,7 @@ Cet article décrit comment utiliser Azure Load Balancer avec plusieurs adresses
 
 Pour accomplir le scénario décrit dans cet article, suivez les étapes ci-dessous :
 
-1. Installez Azure PowerShell. Pour plus d’informations sur l’installation de la version la plus récente d’Azure PowerShell, la sélection de votre abonnement et la connexion à votre compte, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview).
+1. Installez Azure PowerShell. Pour plus d’informations sur l’installation de la version la plus récente d’Azure PowerShell, la sélection de votre abonnement et la connexion à votre compte, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/).
 2. Créez un groupe de ressources à l’aide des paramètres suivants :
 
     ```powershell
@@ -46,7 +46,7 @@ Pour accomplir le scénario décrit dans cet article, suivez les étapes ci-dess
     $myResourceGroup = "contosofabrikam"
     ```
 
-    Pour plus d’informations, voir l’Étape 2 de [Créer un groupe de ressources](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json).
+    Pour plus d’informations, voir l’Étape 2 de [Créer un groupe de ressources](../virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm.md?toc=%2fazure%2fload-balancer%2ftoc.json).
 
 3. [Créez un groupe à haute disponibilité](../virtual-machines/windows/tutorial-availability-sets.md?toc=%2fazure%2fload-balancer%2ftoc.json) pour contenir vos machines virtuelles. Pour ce scénario, utilisez la commande suivante :
 
@@ -54,14 +54,14 @@ Pour accomplir le scénario décrit dans cet article, suivez les étapes ci-dess
     New-AzAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset" -Location "West Central US"
     ```
 
-4. Suivez les instructions des étapes 3 à 5 de l’article [Créer une machine virtuelle Windows](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json) pour préparer la création d’une machine virtuelle avec une seule carte réseau. Exécutez l’étape 6.1, puis procédez comme suit au lieu de suivre l’étape 6.2 :
+4. Suivez les instructions des étapes 3 à 5 de l’article [Créer une machine virtuelle Windows](../virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm.md?toc=%2fazure%2fload-balancer%2ftoc.json) pour préparer la création d’une machine virtuelle avec une seule carte réseau. Exécutez l’étape 6.1, puis procédez comme suit au lieu de suivre l’étape 6.2 :
 
     ```powershell
     $availset = Get-AzAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset"
     New-AzVMConfig -VMName "VM1" -VMSize "Standard_DS1_v2" -AvailabilitySetId $availset.Id
     ```
 
-    Accomplissez ensuite les étapes 6.3 à 6.8 de l’article [Créer une machine virtuelle Windows](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json).
+    Accomplissez ensuite les étapes 6.3 à 6.8 de l’article [Créer une machine virtuelle Windows](../virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm.md?toc=%2fazure%2fload-balancer%2ftoc.json).
 
 5. Ajoutez une deuxième configuration IP à chacune des machines virtuelles. Suivez les instructions de l’article [Affecter plusieurs adresses IP aux machines virtuelles](../virtual-network/virtual-network-multiple-ip-addresses-powershell.md#add). Utilisez les paramètres de configuration suivants :
 

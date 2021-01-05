@@ -10,12 +10,13 @@ ms.subservice: face-api
 ms.topic: sample
 ms.date: 05/01/2019
 ms.author: sbowles
-ms.openlocfilehash: dc0964e40e9214e414d865c06006f1d36e97eeb2
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b35b66615bd5c577dd73faca77d3ea20468442f8
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76169784"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92913515"
 ---
 # <a name="example-use-the-large-scale-feature"></a>Exemple : Utilisez la fonctionnalité à grande échelle
 
@@ -231,7 +232,7 @@ Exemple de flux de travail :
 
 Si une latence relativement longue est acceptable, il n'est pas nécessaire de déclencher l'opération Former juste après l'ajout de nouvelles données. Au lieu de cela, elle peut être séparée de la logique principale et déclenchée régulièrement. Cette stratégie convient aux scénarios dynamiques présentant une latence acceptable. Elle peut être appliquée à des scénarios statiques pour réduire la fréquence de formation.
 
-Supposons qu'il existe une fonction `TrainLargePersonGroup` semblable à `TrainLargeFaceList`. Voici un exemple d'implémentation standard de la formation autonome sur un objet LargePersonGroup en appelant la classe [`Timer`](https://msdn.microsoft.com/library/system.timers.timer(v=vs.110).aspx) dans `System.Timers` :
+Supposons qu'il existe une fonction `TrainLargePersonGroup` semblable à `TrainLargeFaceList`. Voici un exemple d'implémentation standard de la formation autonome sur un objet LargePersonGroup en appelant la classe [`Timer`](/dotnet/api/system.timers.timer) dans `System.Timers` :
 
 ```csharp
 private static void Main()
@@ -259,7 +260,7 @@ private static void TrainTimerOnElapsed(string largePersonGroupId, int timeInter
 }
 ```
 
-Pour plus d'informations sur la gestion des données et les implémentations relatives à l'identification, consultez [Ajouter des visages](how-to-add-faces.md) et [Identifier des visages sur une image](HowtoIdentifyFacesinImage.md).
+Pour plus d’informations sur la gestion des données et les implémentations relatives à l’identification, consultez [Ajouter des visages](how-to-add-faces.md).
 
 ## <a name="summary"></a>Résumé
 
@@ -270,7 +271,7 @@ Dans ce guide, vous avez appris à migrer le code PersonGroup ou FaceList exista
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Suivez un guide pratique pour savoir comment ajouter des visages à un groupe PersonGroup ou exécuter l’opération d’identification sur un groupe PersonGroup.
+Suivez un guide pratique pour savoir comment ajouter des visages à un groupe PersonGroup ou écrire un script pour exécuter l’opération d’identification sur un groupe PersonGroup.
 
 - [Ajouter des visages](how-to-add-faces.md)
-- [Identifier des visages sur une image](HowtoIdentifyFacesinImage.md)
+- [Démarrage rapide : Bibliothèque de client Visage](../Quickstarts/client-libraries.md)

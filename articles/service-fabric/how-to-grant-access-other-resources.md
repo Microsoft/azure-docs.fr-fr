@@ -3,14 +3,14 @@ title: Accorder à une application l’accès à d’autres ressources Azure
 description: Cet article explique comment accorder à votre application Service Fabric avec identité managée l’accès à d’autres ressources Azure prenant en charge l’authentification basée sur Azure Active Directory.
 ms.topic: article
 ms.date: 12/09/2019
-ms.openlocfilehash: 3b1feab1e67e993df771564a1a7c1aba4236b2c0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c7560294fbf6d122396b6a5a8ffd3ee93bc89048
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614791"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507453"
 ---
-# <a name="granting-a-service-fabric-applications-managed-identity-access-to-azure-resources-preview"></a>Accorder à l’identité managée d’une application Service Fabric l’accès à des ressources Azure (préversion)
+# <a name="granting-a-service-fabric-applications-managed-identity-access-to-azure-resources"></a>Accorder à l’identité managée d’une application Service Fabric l’accès à des ressources Azure
 
 Pour que l’application puisse utiliser son identité managée et accéder à d’autres ressources, les autorisations doivent être accordées à cette identité sur la ressource Azure protégée faisant l’objet d’un accès. L’octroi d’autorisations est généralement une action de gestion sur le « plan de contrôle » du service Azure propriétaire de la ressource protégée routée via Azure Resource Manager, ce qui permet d’appliquer toute vérification d’accès en fonction du rôle applicable.
 
@@ -102,7 +102,7 @@ Et pour les identités managées attribuées par le système :
     }
 ```
 
-Pour plus d’informations, consultez [Coffres - Mettre à jour la stratégie d’accès](https://docs.microsoft.com/rest/api/keyvault/vaults/updateaccesspolicy).
+Pour plus d’informations, consultez [Coffres - Mettre à jour la stratégie d’accès](/rest/api/keyvault/vaults/updateaccesspolicy).
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Déployer une application Azure Service Fabric avec une identité managée attribuée par le système](./how-to-deploy-service-fabric-application-system-assigned-managed-identity.md)

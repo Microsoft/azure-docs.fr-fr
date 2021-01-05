@@ -1,35 +1,35 @@
 ---
 title: Écrire des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur dans Azure Cosmos DB
 description: Découvrez comment écrire des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur dans Azure Cosmos DB
-author: markjbrown
+author: timsander1
 ms.service: cosmos-db
-ms.topic: conceptual
-ms.date: 10/31/2019
-ms.author: mjbrown
-ms.openlocfilehash: 4dee017323bda5fc08598a9b24cadd11516807cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
+ms.date: 06/16/2020
+ms.author: tisande
+ms.custom: devx-track-js
+ms.openlocfilehash: 18cedad34a6ca7d9a0ba18cd01c082f2878380a8
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75441731"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339816"
 ---
 # <a name="how-to-write-stored-procedures-triggers-and-user-defined-functions-in-azure-cosmos-db"></a>Comment écrire des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Azure Cosmos DB fournit une exécution transactionnelle avec langage intégré de JavaScript qui vous permet d’écrire des **procédures stockées**, des **déclencheurs** et des **fonctions définies par l’utilisateur**. Lorsque vous utilisez l’API SQL dans Azure Cosmos DB, vous pouvez définir les procédures stockées, les déclencheurs et les fonctions définies par l’utilisateur dans le langage JavaScript. Vous pouvez écrire votre logique dans JavaScript et l’exécuter dans le moteur de base de données. Vous pouvez créer et exécuter des déclencheurs, des procédures stockées et des fonctions définies par l’utilisateur à l’aide du [Portail Azure](https://portal.azure.com/), de [l’API de requête avec langage intégré JavaScript dans Azure Cosmos DB](javascript-query-api.md) et des [Kits de développement logiciel (SDK) clients de l’API SQL Cosmos DB](sql-api-dotnet-samples.md). 
+Azure Cosmos DB fournit une exécution transactionnelle avec langage intégré de JavaScript qui vous permet d’écrire des **procédures stockées** , des **déclencheurs** et des **fonctions définies par l’utilisateur**. Lorsque vous utilisez l’API SQL dans Azure Cosmos DB, vous pouvez définir les procédures stockées, les déclencheurs et les fonctions définies par l’utilisateur dans le langage JavaScript. Vous pouvez écrire votre logique dans JavaScript et l’exécuter dans le moteur de base de données. Vous pouvez créer et exécuter des déclencheurs, des procédures stockées et des fonctions définies par l’utilisateur à l’aide du [Portail Azure](https://portal.azure.com/), de [l’API de requête avec langage intégré JavaScript dans Azure Cosmos DB](javascript-query-api.md) et des [Kits de développement logiciel (SDK) clients de l’API SQL Cosmos DB](sql-api-dotnet-samples.md). 
 
 Pour appeler une procédure stockée, un déclencheur, une fonction définie par l’utilisateur, vous devez les inscrire. Pour plus d’informations, consultez [How to register and use stored procedures, triggers, and user-defined functions in Azure Cosmos DB](how-to-use-stored-procedures-triggers-udfs.md) (Comment inscrire et utiliser des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur dans Azure Cosmos DB).
 
 > [!NOTE]
 > Pour les conteneurs partitionnés, lorsque vous exécutez une procédure stockée, vous devez fournir une valeur de clé de partition dans les options de requête. Les procédures stockées se limitent toujours à une clé de partition. Les éléments qui ont une valeur de clé de partition différente ne seront pas visibles dans la procédure stockée. Cela s’applique également aux déclencheurs.
-
 > [!Tip]
-> Cosmos prend en charge le déploiement de conteneurs avec des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur. Pour plus d’informations, consultez [Créer un conteneur Azure Cosmos DB avec des fonctionnalités côté serveur.](manage-sql-with-resource-manager.md#create-sproc)
+> Cosmos prend en charge le déploiement de conteneurs avec des procédures stockées, des déclencheurs et des fonctions définies par l’utilisateur. Pour plus d’informations, consultez [Créer un conteneur Azure Cosmos DB avec des fonctionnalités côté serveur.](./manage-with-templates.md#create-sproc)
 
 ## <a name="how-to-write-stored-procedures"></a><a id="stored-procedures"></a>Comment écrire des procédures stockées
 
 Les procédures stockées sont écrites à l’aide de JavaScript ; elles peuvent créer, mettre à jour, lire, interroger et supprimer des éléments à l’intérieur d’un conteneur Azure Cosmos. Les procédures stockées sont enregistrées par collection, et elles peuvent s’appliquer à tout document ou pièce jointe figurant dans cette collection.
-
-**Exemple**
 
 Voici une simple procédure stockée qui renvoie une réponse « Hello World ».
 
@@ -51,29 +51,50 @@ Une fois écrite, la procédure stockée doit être inscrite auprès d’une col
 
 ### <a name="create-an-item-using-stored-procedure"></a><a id="create-an-item"></a>Créer un élément à l’aide de la procédure stockée
 
-Quand vous créez un élément à l’aide d’une procédure stockée, il est inséré dans le conteneur Azure Cosmos et un ID pour le nouvel élément est retourné. La création d’un élément est une opération asynchrone, et varie selon les fonctions de rappel JavaScript. La fonction de rappel présente deux paramètres : un pour l’objet d’erreur en cas d’échec de l’opération et un autre pour une valeur renvoyée, ici l’objet créé. À l’intérieur du rappel, vous pouvez gérer l’exception ou générer une erreur. Si aucun rappel n’est fourni et qu’une erreur se produit, le runtime d’Azure Cosmos DB génère une erreur. 
+Quand vous créez un élément à l’aide d’une procédure stockée, il est inséré dans le conteneur Azure Cosmos et un ID pour le nouvel élément est retourné. La création d’un élément est une opération asynchrone, et varie selon les fonctions de rappel JavaScript. La fonction de rappel présente deux paramètres : un pour l’objet d’erreur en cas d’échec de l’opération et un autre pour une valeur renvoyée, ici l’objet créé. À l’intérieur du rappel, vous pouvez gérer l’exception ou générer une erreur. Si aucun rappel n’est fourni et qu’une erreur se produit, le runtime d’Azure Cosmos DB génère une erreur.
 
 La procédure stockée inclut également un paramètre pour définir la description ; il s’agit d’une valeur booléenne. Lorsque le paramètre est défini sur true et si la description est manquante, la procédure stockée génère une exception. Sinon, le reste de la procédure stockée continue de s’exécuter.
 
-L’exemple de procédure stockée suivant prend un nouvel élément Azure Cosmos en tant qu’entrée, l’insère dans le conteneur Azure Cosmos et retourne l’ID de l’élément qui vient d’être créé. Dans cet exemple, nous utilisons l’exemple ToDoList de l’article [Démarrage rapide : Développer une application web .NET avec Azure Cosmos DB à l’aide de l’API SQL et du portail Azure](create-sql-api-dotnet.md)
+L’exemple de procédure stockée suivant prend un nouvel élément Azure Cosmos en tant qu’entrée, l’insère dans le conteneur Azure Cosmos et retourne le nombre des éléments insérés. Dans cet exemple, nous utilisons l’exemple ToDoList de l’article [Démarrage rapide : Développer une application web .NET avec Azure Cosmos DB à l’aide de l’API SQL et du portail Azure](create-sql-api-dotnet.md)
 
 ```javascript
-function createToDoItem(itemToCreate) {
+function createToDoItems(items) {
+    var collection = getContext().getCollection();
+    var collectionLink = collection.getSelfLink();
+    var count = 0;
 
-    var context = getContext();
-    var container = context.getCollection();
+    if (!items) throw new Error("The array is undefined or null.");
 
-    var accepted = container.createDocument(container.getSelfLink(),
-        itemToCreate,
-        function (err, itemCreated) {
-            if (err) throw new Error('Error' + err.message);
-            context.getResponse().setBody(itemCreated.id)
-        });
-    if (!accepted) return;
+    var numItems = items.length;
+
+    if (numItems == 0) {
+        getContext().getResponse().setBody(0);
+        return;
+    }
+
+    tryCreate(items[count], callback);
+
+    function tryCreate(item, callback) {
+        var options = { disableAutomaticIdGeneration: false };
+
+        var isAccepted = collection.createDocument(collectionLink, item, options, callback);
+
+        if (!isAccepted) getContext().getResponse().setBody(count);
+    }
+
+    function callback(err, item, options) {
+        if (err) throw err;
+        count++;
+        if (count >= numItems) {
+            getContext().getResponse().setBody(count);
+        } else {
+            tryCreate(items[count], callback);
+        }
+    }
 }
 ```
 
-### <a name="arrays-as-input-parameters-for-stored-procedures"></a>Tableaux en tant que paramètres d’entrée pour les procédures stockées 
+### <a name="arrays-as-input-parameters-for-stored-procedures"></a>Tableaux en tant que paramètres d’entrée pour les procédures stockées
 
 Quand vous définissez une procédure stockée dans le Portail Azure, les paramètres d’entrée sont toujours envoyés sous forme de chaîne à la procédure stockée. Même si vous passez un tableau de chaînes sous forme d’entrée, le tableau est converti en chaîne et envoyé à la procédure stockée. Pour contourner cela, vous pouvez définir une fonction à l’intérieur de votre procédure stockée pour que la chaîne soit analysée en tant que tableau. Le code suivant montre comment analyser un paramètre d’entrée de chaîne sous forme de tableau :
 
@@ -102,12 +123,12 @@ function tradePlayers(playerId1, playerId2) {
     var player1Document, player2Document;
 
     // query for players
-    var filterQuery = 
-    {     
+    var filterQuery =
+    {
         'query' : 'SELECT * FROM Players p where p.id = @playerId1',
         'parameters' : [{'name':'@playerId1', 'value':playerId1}] 
     };
-            
+
     var accept = container.queryDocuments(container.getSelfLink(), filterQuery, {},
         function (err, items, responseOptions) {
             if (err) throw new Error("Error" + err.message);
@@ -115,10 +136,10 @@ function tradePlayers(playerId1, playerId2) {
             if (items.length != 1) throw "Unable to find both names";
             player1Item = items[0];
 
-            var filterQuery2 = 
-            {     
+            var filterQuery2 =
+            {
                 'query' : 'SELECT * FROM Players p where p.id = @playerId2',
-                'parameters' : [{'name':'@playerId2', 'value':playerId2}] 
+                'parameters' : [{'name':'@playerId2', 'value':playerId2}]
             };
             var accept2 = container.queryDocuments(container.getSelfLink(), filterQuery2, {},
                 function (err2, items2, responseOptions2) {
@@ -208,6 +229,56 @@ function bulkImport(items) {
             tryCreate(items[count], callback);
         }
     }
+}
+```
+
+### <a name="async-await-with-stored-procedures"></a><a id="async-promises"></a>Attente asynchrone avec des procédures stockées
+
+Voici un exemple de procédure stockée qui utilise Async-await avec des promesses à l’aide d’une fonction d’assistance. La procédure stockée interroge un élément et le remplace.
+
+```javascript
+function async_sample() {
+    const ERROR_CODE = {
+        NotAccepted: 429
+    };
+
+    const asyncHelper = {
+        queryDocuments(sqlQuery, options) {
+            return new Promise((resolve, reject) => {
+                const isAccepted = __.queryDocuments(__.getSelfLink(), sqlQuery, options, (err, feed, options) => {
+                    if (err) reject(err);
+                    resolve({ feed, options });
+                });
+                if (!isAccepted) reject(new Error(ERROR_CODE.NotAccepted, "replaceDocument was not accepted."));
+            });
+        },
+
+        replaceDocument(doc) {
+            return new Promise((resolve, reject) => {
+                const isAccepted = __.replaceDocument(doc._self, doc, (err, result, options) => {
+                    if (err) reject(err);
+                    resolve({ result, options });
+                });
+                if (!isAccepted) reject(new Error(ERROR_CODE.NotAccepted, "replaceDocument was not accepted."));
+            });
+        }
+    };
+
+    async function main() {
+        let continuation;
+        do {
+            let { feed, options } = await asyncHelper.queryDocuments("SELECT * from c", { continuation });
+
+            for (let doc of feed) {
+                doc.newProp = 1;
+                await asyncHelper.replaceDocument(doc);
+            }
+
+            continuation = options.continuation;
+        } while (continuation);
+    }
+
+    main().catch(err => getContext().abort(err));
 }
 ```
 

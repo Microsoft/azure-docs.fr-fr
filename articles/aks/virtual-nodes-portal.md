@@ -4,22 +4,24 @@ description: Découvrez comment utiliser le Portail Azure pour créer un cluster
 services: container-service
 ms.topic: conceptual
 ms.date: 05/06/2019
-ms.openlocfilehash: 7fa547ca8a3907669c9e7671b11fe3a6307d97f4
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.custom: references_regions, devx-track-azurecli
+ms.openlocfilehash: 7d49499b39c562aeff20d163fc86401d8c1f4a06
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83773421"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94579162"
 ---
 # <a name="create-and-configure-an-azure-kubernetes-services-aks-cluster-to-use-virtual-nodes-in-the-azure-portal"></a>Créer et configurer un cluster Azure Kubernetes Service (AKS) pour utiliser des nœuds virtuels sur le Portail Azure
 
-Pour déployer rapidement des charges de travail dans un cluster Azure Kubernetes Service (AKS), vous pouvez utiliser des nœuds virtuels. Les nœuds virtuels assurent un approvisionnement rapide des pods et sont facturés à la seconde d’exécution. Dans un scénario de mise à l’échelle, il n’est pas nécessaire d’attendre que le gestionnaire de mise à l’échelle automatique du cluster Kubernetes déploie des nœuds de calcul de machine virtuelle pour exécuter les pods supplémentaires. Les nœuds virtuels sont uniquement pris en charge avec les nœuds et pods Linux.
+Cet article explique comment utiliser le portail Azure pour créer et configurer les ressources de réseau virtuel et un cluster AKS avec des nœuds virtuels activés.
 
-Cet article explique comment créer et configurer les ressources de réseau virtuel et un cluster AKS avec des nœuds virtuels activés.
+> [!NOTE]
+> [Cet article](virtual-nodes.md) vous donne une vue d’ensemble de la disponibilité par région et des limitations pour utiliser des nœuds virtuels.
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Les nœuds virtuels permettent la communication réseau entre les pods qui s’exécutent dans Azure Container Instances (ACI) et le cluster AKS. Pour que cette communication ait lieu, un sous-réseau de réseau virtuel est créé et des permissions déléguées sont assignées. Les nœuds virtuels ne fonctionnent qu’avec des clusters AKS créés à l’aide d’un réseau *avancé*. Par défaut, les clusters AKS sont créés avec un réseau *de base*. Cet article vous montre comment créer un réseau virtuel et des sous-réseaux, puis déployer un cluster AKS qui utilise un réseau avancé.
+Les nœuds virtuels permettent la communication réseau entre les pods qui s’exécutent dans Azure Container Instances (ACI) et le cluster AKS. Pour que cette communication ait lieu, un sous-réseau de réseau virtuel est créé et des permissions déléguées sont assignées. Les nœuds virtuels ne fonctionnent qu’avec des clusters AKS créés avec un réseau *avancé* (Azure CNI). Par défaut, les clusters AKS sont créés avec un réseau *simple* (kubenet). Cet article vous montre comment créer un réseau virtuel et des sous-réseaux, puis déployer un cluster AKS qui utilise un réseau avancé.
 
 Si vous n’avez pas encore utilisé ACI, inscrivez le fournisseur de services avec votre abonnement. Vous pouvez vérifier l’état d’inscription du fournisseur d’ACI à l’aide de la commande [az provider list][az-provider-list], comme dans l’exemple suivant :
 
@@ -40,33 +42,6 @@ Si le fournisseur apparaît *NotRegistered* (Non-inscrit), inscrivez-le à l’a
 ```azurecli-interactive
 az provider register --namespace Microsoft.ContainerInstance
 ```
-
-## <a name="regional-availability"></a>Disponibilité régionale
-
-Les régions suivantes sont prises en charge pour les déploiements de nœuds virtuels :
-
-* Australie Est (australiaeast)
-* USA Centre (centralus)
-* USA Est (eastus)
-* USA Est 2 (eastus2)
-* Japon Est (japaneast)
-* Europe Nord (Europe du Nord)
-* Asie Sud-Est (southeastasia)
-* USA Centre-Ouest (westcentralus)
-* Europe Ouest (Europe occidentale)
-* USA Ouest (ouest des USA)
-* USA Ouest 2 (westus2)
-
-## <a name="known-limitations"></a>Limitations connues
-Le fonctionnement des nœuds virtuel dépend fortement de l’ensemble de fonctionnalités d’ACI. Les scénarios suivants ne sont pas encore pris en charge avec les nœuds virtuels
-
-* Utilisation du principal du service pour extraire des images ACR. Une [solution de contournement](https://github.com/virtual-kubelet/azure-aci/blob/master/README.md#private-registry) consiste à utiliser les [Secrets Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line)
-* [Limitations du réseau virtuel](../container-instances/container-instances-vnet.md), dont le peering de réseaux virtuels, les stratégies réseau Kubernetes et le trafic sortant vers Internet avec les groupes de sécurité réseau.
-* Initialiser les conteneurs
-* [Alias d’hôte](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)
-* [Arguments](../container-instances/container-instances-exec.md#restrictions) pour exécution dans ACI
-* [DaemonSets](concepts-clusters-workloads.md#statefulsets-and-daemonsets) ne déploiera pas de pods dans le nœud virtuel
-* Les nœuds virtuels prennent en charge la planification des pods Linux. Vous pouvez installer manuellement le fournisseur d’[ACI Virtual Kubelet](https://github.com/virtual-kubelet/azure-aci) open source pour planifier des conteneurs Windows Server sur ACI. 
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -144,7 +119,7 @@ spec:
     spec:
       containers:
       - name: aci-helloworld
-        image: microsoft/aci-helloworld
+        image: mcr.microsoft.com/azuredocs/aci-helloworld
         ports:
         - containerPort: 80
       nodeSelector:
@@ -234,10 +209,10 @@ Les nœuds virtuels constituent l’un des composants d’une solution de mise �
 [acr-aks-secrets]: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 
 <!-- LINKS - internal -->
-[aks-network]: ./networking-overview.md
+[aks-network]: ./configure-azure-cni.md
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [aks-hpa]: tutorial-kubernetes-scale.md
 [aks-cluster-autoscaler]: cluster-autoscaler.md
 [aks-basic-ingress]: ingress-basic.md
-[az-provider-list]: /cli/azure/provider#az-provider-list
-[az-provider-register]: /cli/azure/provider?view=azure-cli-latest#az-provider-register
+[az-provider-list]: /cli/azure/provider?view=azure-cli-latest#az-provider-list
+[az-provider-register]: /cli/azure/provider?view=azure-cli-latest&preserve-view=true#az-provider-register

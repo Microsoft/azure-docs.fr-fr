@@ -1,33 +1,38 @@
 ---
 title: Démarrage rapide – Utiliser Java pour créer une base de données de documents à l’aide d’Azure Cosmos DB
 description: Ce guide de démarrage rapide présente un exemple de code Java que vous pouvez utiliser pour vous connecter à l’API SQL d’Azure Cosmos DB et pour l’interroger.
-author: SnehaGunda
+author: anfeldma-ms
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: java
 ms.topic: quickstart
-ms.date: 10/31/2019
-ms.author: sngun
-ms.custom: seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 1d818957daa53efc856a345a4886e814fdaab6f3
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.date: 09/22/2020
+ms.author: anfeldma
+ms.custom: seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 4b62b591c408f663fd28d5077af924f785ee66c8
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858145"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93090407"
 ---
 # <a name="quickstart-build-a-java-app-to-manage-azure-cosmos-db-sql-api-data"></a>Démarrage rapide : Créer une application Java pour gérer les données de l’API SQL d’Azure Cosmos DB
-
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET V3](create-sql-api-dotnet.md)
 > * [.NET V4](create-sql-api-dotnet-V4.md)
-> * [Java](create-sql-api-java.md)
+> * [Kit SDK Java v4](create-sql-api-java.md)
+> * [Spring Data v3](create-sql-api-spring-data.md)
 > * [Node.JS](create-sql-api-nodejs.md)
 > * [Python](create-sql-api-python.md)
 > * [Xamarin](create-sql-api-xamarin-dotnet.md)
 
-Dans ce guide de démarrage rapide, vous allez créer et gérer un compte d’API SQL Azure Cosmos DB à partir du portail Azure et avec une application Java clonée à partir de GitHub. Vous allez d’abord créer un compte d’API SQL Azure Cosmos DB à l’aide du portail Azure, puis une application Java en utilisant le SDK Java SQL. Vous ajouterez ensuite des ressources à votre compte Cosmos DB à l’aide de l’application Java. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
+Dans ce guide de démarrage rapide, vous allez créer et gérer un compte d’API SQL Azure Cosmos DB à partir du portail Azure et avec une application Java clonée à partir de GitHub. Vous allez d’abord créer un compte d’API SQL Azure Cosmos DB à l’aide du portail Azure, puis une application Java en utilisant le SDK Java SQL. Vous ajouterez ensuite des ressources à votre compte Cosmos DB à l’aide de l’application Java. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et d’interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
+
+> [!IMPORTANT]  
+> Ce guide de démarrage rapide s’applique uniquement au SDK Java v4 Azure Cosmos DB. Pour plus d’informations, consultez les [Notes de publication](sql-api-sdk-java-v4.md) du SDK Java v4 Azure Cosmos DB, le [Référentiel Maven](https://mvnrepository.com/artifact/com.azure/azure-cosmos), les [conseils en matière de performances](performance-tips-java-sdk-v4-sql.md) du SDK Java v4 Azure Cosmos DB et le [guide de dépannage](troubleshoot-java-sdk-v4-sql.md) du SDK Java v4 Azure Cosmos DB. Si vous utilisez actuellement une version antérieure à v4, consultez le guide [Migrer votre application pour utiliser le SDK Java v4 Azure Cosmos DB](migrate-java-v4-sdk.md) pour obtenir de l’aide sur la mise à niveau vers v4.
+>
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -38,15 +43,15 @@ Dans ce guide de démarrage rapide, vous allez créer et gérer un compte d’AP
 
 ## <a name="introductory-notes"></a>Remarques d’introduction
 
-*Structure d’un compte Cosmos DB.* Quels que soient l’API et le langage de programmation, un *compte* Cosmos DB contient zéro, une ou plusieurs *bases de données*, une *base de données* contient zéro, un ou plusieurs *conteneurs* et un *conteneur* contient zéro, un ou plusieurs éléments, comme illustré dans le schéma ci-dessous :
+*Structure d’un compte Cosmos DB.* Quels que soient l’API et le langage de programmation, un *compte* Cosmos DB contient zéro, une ou plusieurs *bases de données* , une *base de données* contient zéro, un ou plusieurs *conteneurs* et un *conteneur* contient zéro, un ou plusieurs éléments, comme illustré dans le schéma ci-dessous :
 
-![Entités du compte Azure Cosmos](./media/databases-containers-items/cosmos-entities.png)
+:::image type="content" source="./media/account-databases-containers-items/cosmos-entities.png" alt-text="Entités du compte Azure Cosmos" border="false":::
 
-Pour en savoir plus sur les bases de données, les conteneurs et les éléments, consultez [cette page](databases-containers-items.md). Certaines propriétés importantes sont définies au niveau du conteneur, notamment le *débit provisionné* et la *clé de partition*. 
+Pour en savoir plus sur les bases de données, les conteneurs et les éléments, consultez [cette page](account-databases-containers-items.md). Certaines propriétés importantes sont définies au niveau du conteneur, notamment le *débit provisionné* et la *clé de partition*. 
 
-Le débit provisionné est mesuré en unités de requête (*RU*), pour lesquelles un prix est fixé. Il s’agit d’un facteur déterminant du coût d’exploitation du compte. Vous pouvez choisir un débit provisionné par conteneur ou par base de données. Toutefois, il est généralement préférable de spécifier le débit au niveau du conteneur. Pour en savoir plus sur le provisionnement du débit consultez [cette page](set-throughput.md).
+Le débit provisionné est mesuré en unités de requête ( *RU* ), pour lesquelles un prix est fixé. Il s’agit d’un facteur déterminant du coût d’exploitation du compte. Vous pouvez choisir un débit provisionné par conteneur ou par base de données. Toutefois, il est généralement préférable de spécifier le débit au niveau du conteneur. Pour en savoir plus sur le provisionnement du débit consultez [cette page](set-throughput.md).
 
-À mesure que des éléments sont insérés dans un conteneur Cosmos DB, la base de données croît horizontalement : les capacités de stockage et de calcul augmentent pour assurer le traitement des requêtes. Les capacités de stockage et de calcul sont ajoutées par unités séparées appelées *partitions*. Vous devez choisir dans vos documents un champ qui sera la clé de partition qui mappe chaque document à une partition. Les partitions sont gérées de la façon suivante : à chaque partition est attribuée une section relativement équivalente de la plage de valeurs de clé de partition. Il est donc recommandé de choisir une clé de partition relativement aléatoire ou distribuée uniformément. Dans le cas contraire, un plus grand nombre de requêtes sera adressé à certaines partitions (*partitions à chaud*) et un nombre de requêtes sensiblement inférieur sera adressé à d’autres partitions (*partitions à froid*). Cette situation doit être évitée. Pour en savoir plus sur le partitionnement, consultez [cette page](partitioning-overview.md).
+À mesure que des éléments sont insérés dans un conteneur Cosmos DB, la base de données croît horizontalement : les capacités de stockage et de calcul augmentent pour assurer le traitement des requêtes. Les capacités de stockage et de calcul sont ajoutées par unités séparées appelées *partitions*. Vous devez choisir dans vos documents un champ qui sera la clé de partition qui mappe chaque document à une partition. Les partitions sont gérées de la façon suivante : à chaque partition est attribuée une section relativement équivalente de la plage de valeurs de clé de partition. Il est donc recommandé de choisir une clé de partition relativement aléatoire ou distribuée uniformément. Dans le cas contraire, un plus grand nombre de requêtes sera adressé à certaines partitions ( *partitions à chaud* ) et un nombre de requêtes sensiblement inférieur sera adressé à d’autres partitions ( *partitions à froid* ). Cette situation doit être évitée. Pour en savoir plus sur le partitionnement, consultez [cette page](partitioning-overview.md).
 
 ## <a name="create-a-database-account"></a>Création d’un compte de base de données
 

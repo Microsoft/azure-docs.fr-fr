@@ -7,15 +7,15 @@ ms.author: kartup
 manager: dcscontentpm
 ms.date: 10/25/2019
 ms.service: storage
-ms.subservice: common
+ms.subservice: files
 services: storage
 tags: ''
-ms.openlocfilehash: d3a3763a8964810626bcdc47da230a9ee406f1f8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3d4f10745d90ccd83e7251af40d3e92a230f2fcd
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74196477"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94629680"
 ---
 # <a name="azure-file-share--failed-to-delete-files-from-azure-file-share"></a>Partage de fichiers Azure : échec de suppression de fichiers du partage de fichiers Azure
 
@@ -34,7 +34,7 @@ Quota insuffisant pour traiter cette commande
 
 ## <a name="cause"></a>Cause
 
-L’erreur 1816 se produit lorsque vous atteignez la limite de descripteurs ouverts simultanément autorisés pour un fichier sur l’ordinateur où le partage de fichiers est en cours de montage. Pour plus d’informations, voir la [Liste de contrôle des performances et de l’extensibilité de Stockage Azure](https://docs.microsoft.com/azure/storage/blobs/storage-performance-checklist).
+L’erreur 1816 se produit lorsque vous atteignez la limite de descripteurs ouverts simultanément autorisés pour un fichier sur l’ordinateur où le partage de fichiers est en cours de montage. Pour plus d’informations, voir la [Liste de contrôle des performances et de l’extensibilité de Stockage Azure](../blobs/storage-performance-checklist.md).
 
 ## <a name="resolution"></a>Résolution
 
@@ -44,7 +44,7 @@ Réduisez le nombre de descripteurs ouverts simultanément en fermant certains d
 
 ### <a name="install-the-latest-azure-powershell-module"></a>Installer le module Azure PowerShell
 
-* [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps)
+* [Installer le module Azure PowerShell](/powershell/azure/install-az-ps)
 
 ### <a name="connect-to-azure"></a>Connectez-vous à Azure :
 

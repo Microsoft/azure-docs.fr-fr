@@ -6,25 +6,29 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
 ms.date: 11/21/2019
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.custom: seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fceaa203944074b0c3fcf5cb6254f1e87ac16cba
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b3778ea68edf1fbbb41efb899749e6f35b39bae
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480978"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96742287"
 ---
 # <a name="directory-integration-between-azure-mfa-server-and-active-directory"></a>Intégration d'annuaires entre le serveur Azure MFA et Active Directory
 
 Utilisez la section Intégration de répertoires du serveur Azure MFA pour l’intégrer à Active Directory ou un autre répertoire LDAP. Vous pouvez configurer des attributs pour correspondre au schéma du répertoire et configurer la synchronisation automatique des utilisateurs.
 
 > [!IMPORTANT]
-> À compter du 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui veulent demander à leurs utilisateurs de procéder à une authentification multifacteur doivent utiliser la fonction Azure Multi-Factor Authentication basée sur le cloud. Les clients existants qui ont activé MFA Server avant le 1er juillet peuvent télécharger la dernière version et les futures mises à jour, et générer des informations d’identification d’activation comme d’habitude.
+> Depuis le 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui souhaitent imposer une authentification multifacteur lors des événements de connexion doivent utiliser la fonctionnalité d’authentification multifacteur Azure AD basée sur le cloud.
+>
+> Pour commencer à utiliser l’authentification multifacteur basée sur le cloud, consultez [Tutoriel : Événements de connexion utilisateur sécurisés avec l’authentification multifacteur Azure AD](tutorial-enable-azure-mfa.md).
+>
+> Les clients existants qui ont activé le serveur MFA avant le 1er juillet 2019 peuvent télécharger la dernière version, les futures mises à jour et générer des informations d’identification d’activation comme d’habitude.
 
 ## <a name="settings"></a>Paramètres
 
@@ -80,7 +84,7 @@ Les attributs peuvent être entrés manuellement et ne doivent pas nécessaireme
 | --- | --- |
 | Identificateur unique |Entrez le nom de l'attribut qui sert d'identificateur unique pour le conteneur, le groupe de sécurité et les enregistrements utilisateur.  Dans Active Directory, il s'agit généralement de objectGUID. Les autres implémentations LDAP peuvent utiliser entryUUID ou autre paramètre similaire.  La valeur par défaut est objectGUID. |
 | Type d'identificateur unique |Sélectionnez le type de l'attribut d'identificateur unique.  Dans Active Directory, l'attribut objectGUID est du type GUID. Les autres implémentations LDAP peuvent utiliser Chaîne ou Tableau d’octets ASCII.  La valeur par défaut est GUID. <br><br>Il est important de définir correctement ce type dans la mesure où les éléments de synchronisation sont référencés par leur identificateur unique. Le type d’identificateur unique est utilisé pour trouver directement l’objet dans le répertoire.  La définition de ce type sur Chaîne alors que le répertoire stocke la valeur sous forme de tableau d’octets de caractères ASCII empêche la synchronisation de fonctionner correctement. |
-| Nom unique |Entrez le nom de l'attribut qui contient le nom unique de chaque enregistrement.  Dans Active Directory, il s'agit généralement de distinguishedName. Les autres implémentations LDAP peuvent utiliser entryDN ou autre paramètre similaire.  La valeur par défaut est distinguishedName. <br><br>Si un attribut contenant seulement le nom unique n’existe pas, l’attribut ads path peut être utilisé.  La partie « LDAP://\<server\>/ » du chemin d’accès est automatiquement supprimée. Seul le nom unique de l’objet est conservé. |
+| Nom unique |Entrez le nom de l'attribut qui contient le nom unique de chaque enregistrement.  Dans Active Directory, il s'agit généralement de distinguishedName. Les autres implémentations LDAP peuvent utiliser entryDN ou autre paramètre similaire.  La valeur par défaut est distinguishedName. <br><br>Si un attribut contenant seulement le nom unique n’existe pas, l’attribut ads path peut être utilisé.  La partie « LDAP://\<server\>/ » du chemin d’accès est automatiquement supprimée. Seul le nom unique de l’objet est conservé. |
 | Nom du conteneur |Entrez le nom de l'attribut qui contient le nom d'un enregistrement de conteneur.  La valeur de cet attribut s’affiche dans la hiérarchie de conteneur lors de l’importation à partir d’Active Directory ou l’ajout d’éléments de synchronisation.  La valeur par défaut est name. <br><br>Si des conteneurs différents utilisent des attributs différents pour leurs noms, séparez les attributs de nom de conteneur par des points-virgules.  Le premier attribut de nom de conteneur trouvé sur un objet de conteneur est utilisé pour afficher son nom. |
 | Nom de groupe de sécurité |Entrez le nom de l'attribut qui contient le nom d'un enregistrement de groupe de sécurité.  La valeur de cet attribut s’affiche dans la liste des groupes de sécurité lors de l’importation à partir d’Active Directory ou lors de l’ajout d’éléments de synchronisation.  La valeur par défaut est name. |
 | Nom d’utilisateur |Entrez le nom de l'attribut qui contient le nom d'utilisateur dans un enregistrement utilisateur.  La valeur de cet attribut est utilisée comme nom d’utilisateur du serveur MFA.  Un deuxième attribut peut être spécifié en tant que sauvegarde.  Le deuxième attribut n’est utilisé que si le premier attribut ne contient pas de valeur pour l’utilisateur.  Les valeurs par défaut sont userPrincipalName et sAMAccountName. |

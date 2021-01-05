@@ -7,10 +7,10 @@ ms.subservice: ''
 ms.topic: conceptual
 ms.date: 02/07/2020
 ms.openlocfilehash: 7bfa831332451718c0c9c05023b90104d2b8b02b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77658708"
 ---
 # <a name="azure-monitor-view-designer-to-workbooks-conversion-options"></a>Concepteur de vues Azure Monitor - Options de conversion en classeurs

@@ -7,12 +7,13 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 12/01/2016
 ms.author: memccror
-ms.openlocfilehash: a1945aad12eb34bad1b593878779e1ceb0dae686
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: c2cec08d86760694ec3c41a98af62c6b86e0a4c9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68359047"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89071089"
 ---
 # <a name="how-to-scale-a-cloud-service-in-powershell"></a>Mise à l’échelle d’un service cloud dans PowerShell
 

@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Apptio | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Apptio.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: b23eba91-7698-47e7-ae75-0ceafd739965
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/29/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: d353aad9f0ecf871410dd94b0081381a0b1304c6
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 48d24fecad109809bb3a2d18fc724e5d438cb813
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83647330"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588350"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-apptio"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Apptio
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous découvrez comment intégrer Apptio à Azure Active Direc
 * Autoriser les utilisateurs à se connecter automatiquement à Apptio avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -87,7 +82,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     Dans la zone de texte **Identificateur**, tapez une URL :  `urn:federation:apptio`
 
-1. La revendication de rôle est préconfigurée. Vous n’avez donc pas à la configurer, mais vous devez toujours créer les rôles dans Azure AD en suivant les instructions de cet [article](https://docs.microsoft.com/azure/active-directory/develop/active-directory-enterprise-app-role-management).
+1. La revendication de rôle est préconfigurée. Vous n’avez donc pas à la configurer, mais vous devez toujours créer les rôles dans Azure AD en suivant les instructions de cet [article](../develop/active-directory-enterprise-app-role-management.md).
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -133,20 +128,20 @@ Pour configurer l’authentification unique côté **Apptio**, vous devez envoye
 
 ### <a name="create-apptio-test-user"></a>Créer un utilisateur de test Apptio
 
-Dans cette section, vous créez un utilisateur appelé B.Simon dans Apptio. Contactez l’ [équipe du support technique Apptio](https://www.apptio.com/resources/customer-support/) pour ajouter des utilisateurs à la plateforme Apptio. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous créez un utilisateur appelé B.Simon dans Apptio. Collaborez avec l’[équipe du support technique Apptio](https://www.apptio.com/resources/customer-support/) pour ajouter des utilisateurs dans la plate-forme Apptio. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Apptio dans le volet d’accès, vous devez vous connecter automatiquement à l’application Apptio pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Apptio dans le volet d’accès, vous devez vous connecter automatiquement à l’application Apptio pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Apptio avec Azure AD](https://aad.portal.azure.com/)

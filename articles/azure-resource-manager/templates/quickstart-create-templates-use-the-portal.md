@@ -1,20 +1,20 @@
 ---
 title: Déployer un modèle - Portail Azure
-description: Découvrez comment créer votre premier modèle Azure Resource Manager à l’aide du portail Azure et comment le déployer.
+description: Découvrez comment créer votre premier modèle ARM (Azure Resource Manager) à l’aide du portail Azure, et comment le déployer.
 author: mumian
-ms.date: 06/12/2019
+ms.date: 06/29/2020
 ms.topic: quickstart
 ms.author: jgao
-ms.openlocfilehash: dd3d9caa8184b8637b509fc3318851751b211405
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: bdbcecc247a4b5318ba44b92befa7e90ac47aa8c
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80131869"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349620"
 ---
 # <a name="quickstart-create-and-deploy-arm-templates-by-using-the-azure-portal"></a>Démarrage rapide : Créer et déployer des modèles ARM à l’aide du portail Azure
 
-Découvrez comment générer un modèle ARM (Azure Resource Manager) à l’aide du portail Azure. Découvrez également le processus de modification et de déploiement du modèle à partir du portail. Les modèles ARM sont des fichiers JSON qui définissent les ressources nécessaires au déploiement de votre solution. Pour comprendre les concepts associés au déploiement et à la gestion de vos solutions Azure, consultez [Vue d’ensemble du déploiement de modèles](overview.md).
+Découvrez comment générer un modèle ARM (Azure Resource Manager) à l’aide du portail Azure, ainsi que le processus de modification et de déploiement du modèle à partir du portail. Les modèles ARM sont des fichiers JSON qui définissent les ressources nécessaires au déploiement de votre solution. Pour comprendre les concepts associés au déploiement et à la gestion de vos solutions Azure, consultez [Vue d’ensemble du déploiement de modèles](overview.md).
 
 ![Schéma du portail de démarrage rapide du modèle Resource Manager](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-export-deploy-template-portal.png)
 
@@ -57,14 +57,14 @@ De nombreux développeurs de modèles expérimentés utilisent cette méthode po
 
     Le volet principal affiche le modèle. Il s’agit d’un fichier JSON avec six éléments de niveau supérieur : `schema`, `contentVersion`, `parameters`, `variables`, `resources` et `output`. Pour plus d’informations, consultez [Comprendre la structure et la syntaxe des modèles ARM](./template-syntax.md)
 
-    Il existe six paramètres définis. Un d’eux est appelé **storageAccountName**. La deuxième partie en surbrillance dans la capture d’écran précédente montre comment référencer ce paramètre dans le modèle. Dans la section suivante, vous modifiez le modèle pour utiliser un nom généré pour le compte de stockage.
+    Huit paramètres sont définis. Un d’eux est appelé **storageAccountName**. La deuxième partie en surbrillance dans la capture d’écran précédente montre comment référencer ce paramètre dans le modèle. Dans la section suivante, vous modifiez le modèle pour utiliser un nom généré pour le compte de stockage.
 
     Dans le modèle, une ressource Azure est définie. Le type est `Microsoft.Storage/storageAccounts`. Examinez la façon dont la ressource est définie, et la structure de la définition.
 1. Sélectionnez **Télécharger** en haut de l’écran.
 1. Ouvrez le fichier zip téléchargé, puis enregistrez **template.json** sur votre ordinateur. Dans la section suivante, vous utilisez un outil de déploiement de modèle pour modifier le modèle.
 1. Sélectionnez l’onglet **Paramètre** pour afficher les valeurs que vous avez fournies pour les paramètres. Notez ces valeurs, vous en aurez besoin dans la section suivante lors du déploiement du modèle.
 
-    ![Générer un modèle depuis le portail](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-template-parameters.png)
+    ![Capture d’écran qui met en évidence l’onglet Paramètres qui affiche les valeurs que vous avez fournies.](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-create-storage-account-template-parameters.png)
 
     À l’aide du fichier de modèle et du fichier de paramètres, vous pouvez créer une ressource, dans ce tutoriel, un compte de stockage Azure.
 
@@ -77,12 +77,10 @@ Le portail Azure peut être utilisé pour effectuer des modifications de base du
 
 Azure requiert que chaque service Azure ait un nom unique. Le déploiement peut échouer si vous avez entré un nom de compte de stockage déjà existant. Pour éviter ce problème, modifiez le modèle pour utiliser un appel de fonction de modèle `uniquestring()` pour générer un nom de compte de stockage unique.
 
-1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
-1. Dans **Rechercher sur la Place de marché**, tapez **déploiement de modèle**, puis appuyez sur **Entrée**.
-1. Sélectionnez **Déploiement de modèle**.
+1. Dans le menu du portail Azure, dans la zone de recherche, tapez **déployer**, puis sélectionnez **Déployer un modèle personnalisé**.
 
     ![Bibliothèque des modèles Azure Resource Manager](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-template-library.png)
-1. Sélectionnez **Create** (Créer).
+
 1. Sélectionnez **Générer votre propre modèle dans l’éditeur**.
 1. Sélectionnez **Charger le fichier**, puis suivez les instructions pour charger le fichier template.json téléchargé dans la section précédente.
 1. Apportez les trois modifications suivantes au modèle :
@@ -107,66 +105,75 @@ Azure requiert que chaque service Azure ait un nom unique. Le déploiement peut 
 
      ```json
      {
-       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+       "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
        "contentVersion": "1.0.0.0",
        "parameters": {
-           "location": {
-               "type": "string"
-           },
-           "accountType": {
-               "type": "string"
-           },
-           "kind": {
-               "type": "string"
-           },
-           "accessTier": {
-               "type": "string"
-           },
-           "supportsHttpsTrafficOnly": {
-               "type": "bool"
-           }
+         "location": {
+           "type": "string"
+         },
+         "accountType": {
+           "type": "string"
+         },
+         "kind": {
+           "type": "string"
+         },
+         "accessTier": {
+           "type": "string"
+         },
+         "minimumTlsVersion": {
+           "type": "string"
+         },
+         "supportsHttpsTrafficOnly": {
+          "type": "bool"
+         },
+         "allowBlobPublicAccess": {
+           "type": "bool"
+         }
        },
        "variables": {
-           "storageAccountName": "[concat(uniqueString(subscription().subscriptionId), 'storage')]"
+         "storageAccountName": "[concat(uniqueString(subscription().subscriptionId), 'storage')]"
        },
        "resources": [
-           {
-               "name": "[variables('storageAccountName')]",
-               "type": "Microsoft.Storage/storageAccounts",
-               "apiVersion": "2018-07-01",
-               "location": "[parameters('location')]",
-               "properties": {
-                   "accessTier": "[parameters('accessTier')]",
-                   "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]"
-               },
-               "dependsOn": [],
-               "sku": {
-                   "name": "[parameters('accountType')]"
-               },
-               "kind": "[parameters('kind')]"
-           }
+         {
+           "name": "[variables('storageAccountName')]",
+           "type": "Microsoft.Storage/storageAccounts",
+           "apiVersion": "2019-06-01",
+           "location": "[parameters('location')]",
+           "properties": {
+             "accessTier": "[parameters('accessTier')]",
+             "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
+             "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+             "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]"
+           },
+           "dependsOn": [],
+           "sku": {
+             "name": "[parameters('accountType')]"
+           },
+           "kind": "[parameters('kind')]",
+           "tags": {}
+         }
        ],
        "outputs": {}
      }
      ```
+
 1. Sélectionnez **Enregistrer**.
 1. Saisissez les valeurs suivantes :
 
     |Nom|Valeur|
     |----|----|
     |**Groupe de ressources**|Sélectionnez le nom du groupe de ressources que vous avez créé dans la dernière section. |
+    |**Région**|Sélectionnez l’emplacement du groupe de ressources. Par exemple, **USA Centre**. |
     |**Lieu**|Sélectionnez un emplacement pour le compte de stockage. Par exemple, **USA Centre**. |
     |**Type de compte**|entrez **Standard_LRS** pour ce démarrage rapide. |
     |**Type**|entrez **StorageV2** pour ce démarrage rapide. |
     |**Niveau d’accès**|entrez **chaud** pour ce démarrage rapide. |
-    |**Seul le trafic HTTPS est activé**| Pour ce guide de démarrage rapide, sélectionnez **true**. |
-    |**J’accepte les termes et conditions mentionnés ci-dessus**|(sélection)|
+    |**Version TLS minimale**|Entrez **TLS1_0**. |
+    |**Prend en charge le trafic HTTPS uniquement**| Pour ce guide de démarrage rapide, sélectionnez **true**. |
+    |**Autoriser l’accès public aux objets blob**| Pour ce guide de démarrage rapide, sélectionnez **false**. |
 
-    Voici une capture d’écran d’un exemple de déploiement :
-
-    ![Déploiement de modèles Azure Resource Manager](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-deploy.png)
-
-1. Sélectionnez **Achat**.
+1. Sélectionnez **Revoir + créer**.
+1. Sélectionnez **Create** (Créer).
 1. Sélectionnez l’icône représentant une cloche (notifications) en haut de l’écran pour afficher l’état du déploiement. **Déploiement en cours** doit s’afficher. Attendez la fin du déploiement.
 
     ![Notification de déploiement de modèles Azure Resource Manager](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-template-tutorial-portal-notification.png)

@@ -8,18 +8,18 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 12/4/2019
+ms.date: 08/20/2020
 ms.author: panosper
-ms.openlocfilehash: a279aebdd19ebd3a41ddad0c1c279937e00838c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 32f6a9dae1a5b0be604b53d814ebc85cb7813b91
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77168459"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353763"
 ---
 # <a name="speech-to-text-frequently-asked-questions"></a>Forum aux questions sur la reconnaissance vocale
 
-Si vous ne trouvez pas de réponses à vos questions dans ce FAQ, consultez les [autres options de support](support.md).
+Si vous ne trouvez pas de réponses à vos questions dans ce FAQ, consultez les [autres options de support](../cognitive-services-support-options.md?context=%2fazure%2fcognitive-services%2fspeech-service%2fcontext%2fcontext%253fcontext%253d%2fazure%2fcognitive-services%2fspeech-service%2fcontext%2fcontext).
 
 ## <a name="general"></a>Général
 
@@ -29,7 +29,7 @@ Si vous ne trouvez pas de réponses à vos questions dans ce FAQ, consultez les 
 
 **Q : Par où commencer si je souhaite utiliser un modèle de référence ?**
 
-**R** : Commencez par obtenir une [clé d’abonnement](get-started.md). Si vous voulez adresser des appels REST à des modèles de référence pré-déployés, consultez les informations sur les [API REST](rest-apis.md). Si vous voulez utiliser des WebSockets, téléchargez le [Kit de développement logiciel (SDK)](speech-sdk.md).
+**R** : Commencez par obtenir une [clé d’abonnement](overview.md#try-the-speech-service-for-free). Si vous voulez adresser des appels REST à des modèles de référence pré-déployés, consultez les informations sur les [API REST](./overview.md#reference-docs). Si vous voulez utiliser des WebSockets, téléchargez le [Kit de développement logiciel (SDK)](speech-sdk.md).
 
 **Q : Dois-je toujours générer un modèle vocal personnalisé ?**
 
@@ -71,11 +71,11 @@ Si vous avez adapté et déployé un modèle de référence V1.0, ce déploiemen
 
 **Q : Mes requêtes sont-elles journalisées ?**
 
-**R** : Lorsque vous créez un déploiement, vous avez le choix de désactiver le traçage. Dans ce cas, les contenus audio et transcriptions ne sont pas journalisés. Autrement, les demandes sont généralement journalisées dans un stockage sécurisé dans Azure.
+**R** : Par défaut, les demandes ne sont pas journalisées (ni audio, ni transcription). Si nécessaire, vous pouvez sélectionner *Journaliser le contenu à partir de ce point de terminaison* lorsque vous [créez un point de terminaison personnalisé](./how-to-custom-speech-train-model.md) pour activer le suivi. Les demandes seront alors consignées dans Azure, dans un stockage sécurisé.
 
 **Q : Mes requêtes sont-elles limitées ?**
 
-**R** : L’API REST limite les requêtes à 25 par période de 5 secondes. Pour plus de détails, consultez nos pages sur la [Reconnaissance vocale](speech-to-text.md).
+**R** : Consultez [Quotas et limites des services Speech](speech-services-quotas-and-limits.md).
 
 **Q : Comment suis-je facturé pour l’audio à deux canaux ?**
 
@@ -85,45 +85,14 @@ Si vous avez adapté et déployé un modèle de référence V1.0, ce déploiemen
 > Si vous rencontrez des problèmes de confidentialité qui vous empêchent d’utiliser le service vocal personnalisé, contactez l’un des canaux de support.
 
 ## <a name="increasing-concurrency"></a>Augmentation du niveau de concurrence
+Consultez [Quotas et limites des services Speech](speech-services-quotas-and-limits.md).
 
-**Q : Que faire si j’ai besoin pour mon modèle déployé d’une concurrence plus élevée que ce que propose le portail ?**
-
-**R** : Vous pouvez augmenter l’échelle de votre modèle par incréments de 20 requêtes simultanées.
-
-À l’aide des informations nécessaires, créez une demande de support dans le [portail de support Azure](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview). Ne postez pas les informations sur les canaux publics (GitHub, StackOverflow...) qui sont mentionnés dans la [page de support](support.md).
-
-Pour augmenter la concurrence d’un ***modèle personnalisé***, nous avons besoin des informations suivantes :
-
-- la région dans laquelle le modèle est déployé,
-- l’ID de point de terminaison du modèle déployé :
-  - Accédez au [portail Custom Speech](https://aka.ms/customspeech).
-  - Connectez-vous (si nécessaire).
-  - Sélectionnez votre projet et votre déploiement.
-  - Sélectionnez le point de terminaison pour lequel vous avez besoin d’augmenter la concurrence.
-  - Copiez le `Endpoint ID`.
-
-Pour augmenter la concurrence d’un ***modèle de base***, nous avons besoin des informations suivantes :
-
-- La région de votre service,
-
-et
-
-- un jeton d’accès pour votre abonnement (voir [ici](https://docs.microsoft.com/azure/cognitive-services/speech-service/rest-speech-to-text#how-to-get-an-access-token))
-
-or
-
-- l’ID de ressource de votre abonnement :
-  - Accédez au [portail Azure](https://portal.azure.com).
-  - sélectionnez `Cognitive Services` dans la zone de recherche,
-  - parmi les services affichés, sélectionnez le service vocal pour lequel vous souhaitez augmenter la concurrence,
-  - Affichez les `Properties` de ce service.
-  - copiez le `Resource ID` complet.
 
 ## <a name="importing-data"></a>Importation de données
 
 **Q : Quelle est la limite de taille d’un jeu de données, et pourquoi ?**
 
-**R** : La limite de taille actuelle d’un jeu de données est de 2 Go. Cette limite découle de la restriction de taille de fichier pour le chargement HTTP.
+**R** : Cette limite découle de la restriction de taille de fichier pour le chargement HTTP. Consultez [Quotas et limites des services Speech](speech-services-quotas-and-limits.md) pour la limite réelle.
 
 **Q : Puis-je zipper mes fichiers texte afin de charger des fichiers plus volumineux ?**
 
@@ -183,17 +152,17 @@ or
 
 **R** : Le chargement d’une liste de mots a pour effet d’ajouter des mots au vocabulaire, mais n’enseigne pas au système la manière dont ceux-ci sont généralement utilisés. En fournissant des énoncés complets ou partiels (phrases ou expressions que les utilisateurs sont susceptibles de prononcer), le modèle linguistique peut apprendre les mots nouveaux ainsi que la façon dont ils sont utilisés. Le modèle linguistique personnalisé convient, non seulement pour l’ajout de mots au système, mais aussi pour l’ajustement de la probabilité d’occurrence de mots connus pour votre application. Fournir des énoncés complets permet au système de mieux apprendre.
 
-## <a name="tenant-model-custom-speech-with-office-365-data"></a>Modèle de locataire (Custom Speech avec des données Office 365)
+## <a name="tenant-model-custom-speech-with-microsoft-365-data"></a>Modèle de locataire (Custom Speech avec des données Microsoft 365)
 
 **Q : Quelles sont les informations incluses dans le modèle de locataire et comment sont-elles créées ?**
 
-**R :** Un modèle de locataire est créé à l’aide d’un [groupe public](https://support.office.com/article/learn-about-office-365-groups-b565caa1-5c40-40ef-9915-60fdb2d97fa2) d’e-mails et de documents qui peuvent être consultés par toute personne de votre organisation.
+**R :** Un modèle de locataire est créé à l’aide d’un [groupe public](https://support.microsoft.com/office/learn-about-microsoft-365-groups-b565caa1-5c40-40ef-9915-60fdb2d97fa2) d’e-mails et de documents qui peuvent être consultés par toute personne de votre organisation.
 
 **Q : Quelles sont les améliorations apportées par le modèle de locataire aux expériences de reconnaissance vocale ?**
 
-**R :** Une fois le modèle de locataire activé, créé et publié, celui-ci permet d’améliorer les capacités de reconnaissance de toutes les applications d’entreprise basées sur le service Speech, qui transmettent également un jeton AAD d’utilisateur indiquant l’appartenance à l’entreprise.
+**R :** Une fois le modèle de locataire activé, créé et publié, celui-ci permet d’améliorer les capacités de reconnaissance de toutes les applications d’entreprise basées sur le service Speech, qui transmettent également un jeton Azure AD d’utilisateur indiquant l’appartenance à l’entreprise.
 
-La création d’un modèle de locataire pour vos applications Speech ne modifie pas les expériences de reconnaissance vocale intégrées à Office 365, telles que Dictée et Sous-titrage PowerPoint.
+La création d'un modèle de locataire pour vos applications Speech ne modifie pas les expériences de reconnaissance vocale intégrées à Microsoft 365, telles que Dictée et Sous-titrage PowerPoint.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

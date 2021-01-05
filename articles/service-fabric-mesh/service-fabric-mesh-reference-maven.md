@@ -5,12 +5,13 @@ author: suhuruli
 ms.author: suhuruli
 ms.date: 11/26/2018
 ms.topic: reference
-ms.openlocfilehash: bcc3fb7c6c3adce0997d0960c4d98227089b048b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: 3a1aa004f47ba700ef4b96004dfe5b835788dcc7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75459024"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87372465"
 ---
 # <a name="maven-plugin-for-service-fabric-mesh"></a>Plug-in Maven pour Service Fabric Mesh
 

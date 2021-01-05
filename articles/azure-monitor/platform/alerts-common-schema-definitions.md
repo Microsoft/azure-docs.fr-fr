@@ -5,16 +5,16 @@ author: ofirmanor
 ms.topic: conceptual
 ms.subservice: alerts
 ms.date: 03/14/2019
-ms.openlocfilehash: 7f0c99899b647c677025dbb38480b4d7f64c24fa
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 2442d90adf224de68ff49e0f0ea98f2c9f3e5546
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83739986"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507249"
 ---
 # <a name="common-alert-schema-definitions"></a>Définitions de schéma d’alerte courant
 
-Cet article décrit les [définitions de schéma d’alerte courant](https://aka.ms/commonAlertSchemaDocs) pour Azure Monitor, y compris pour les webhooks, Azure Logic Apps, Azure Functions et les runbooks Azure Automation. 
+Cet article décrit les [définitions de schéma d’alerte courant](./alerts-common-schema.md) pour Azure Monitor, y compris pour les webhooks, Azure Logic Apps, Azure Functions et les runbooks Azure Automation. 
 
 Chaque instance d’alerte décrit la ressource affectée et la cause de l’alerte. Ces instances sont décrites dans le schéma commun dans les sections suivantes :
 * **Informations de base** : ensemble de champs standardisés, commun à tous les types d’alerte, qui décrivent quelle ressource est concernée par l’alerte ainsi que des métadonnées d’alerte courantes supplémentaires (par exemple, la gravité ou un description). 
@@ -149,7 +149,7 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
 ### <a name="log-alerts"></a>Alertes de journal
 
 > [!NOTE]
-> Pour des alertes de journal contenant une charge utile d’objet d’e-mail ou de JSON personnalisée définie, l’activation du schéma commun a pour effet de rétablir le schéma d’objet d’e-mail et/ou de charge utile décrit ci-après. Les alertes sur lesquelles le schéma commun est activé ont une limite de taille maximale de 256 Ko par alerte. Les résultats de la recherche ne sont pas incorporés dans la charge utile des alertes de journal si la taille de l’alerte dépasse ce seuil. Vous pouvez le déterminer cela en vérifiant l’indicateur `IncludeSearchResults`. Lorsque les résultats de recherche ne sont pas inclus, il est recommandé d’utiliser la requête de recherche conjointement avec l’[API Log Analytics](https://docs.microsoft.com/rest/api/loganalytics/dataaccess/query/get). 
+> Pour des alertes de journal contenant une charge utile d’objet d’e-mail ou de JSON personnalisée définie, l’activation du schéma commun a pour effet de rétablir le schéma d’objet d’e-mail et/ou de charge utile décrit ci-après. Les alertes sur lesquelles le schéma commun est activé ont une limite de taille maximale de 256 Ko par alerte. Les résultats de la recherche ne sont pas incorporés dans la charge utile des alertes de journal si la taille de l’alerte dépasse ce seuil. Vous pouvez le déterminer cela en vérifiant l’indicateur `IncludeSearchResults`. Lorsque les résultats de la recherche ne sont pas inclus, vous devez utiliser `LinkToFilteredSearchResultsAPI` et `LinkToSearchResultsAPI` pou accéder aux résultats de la requête avec l’[API Log Analytics](/rest/api/loganalytics/dataaccess/query/get).
 
 #### <a name="monitoringservice--log-analytics"></a>`monitoringService` = `Log Analytics`
 
@@ -157,13 +157,16 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
 ```json
 {
   "alertContext": {
-    "SearchQuery": "search * \n| where Type == \"Heartbeat\" \n| where Category == \"Direct Agent\" \n| where TimeGenerated > ago(30m) ",
+    "SearchQuery": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m), Computer",
     "SearchIntervalStartTimeUtc": "3/22/2019 1:36:31 PM",
     "SearchIntervalEndtimeUtc": "3/22/2019 1:51:31 PM",
     "ResultCount": 2,
-    "LinkToSearchResults": "https://portal.azure.com#@72f988bf-86f1-41af-91ab-2d7cd011db47/blade/Microsoft_OperationsManagementSuite_Workspace/AnalyticsBlade/initiator/AnalyticsShareLinkToQuery/isQueryEditorVisible/true/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%<subscription ID>%2FresourceGroups%2Fpipelinealertrg%2Fproviders%2FMicrosoft.OperationalInsights%2Fworkspaces%2FINC-OmsAlertRunner%22%7D%5D%7D/query/search%20%2A%20%0A%7C%20where%20Type%20%3D%3D%20%22Heartbeat%22%20%0A%7C%20where%20Category%20%3D%3D%20%22Direct%20Agent%22%20%0A%7C%20where%20TimeGenerated%20%3E%20%28datetime%282019-03-22T13%3A51%3A31.0000000%29%20-%2030m%29%20%20/isQuerybase64Compressed/false/timespanInIsoFormat/2019-03-22T13%3a36%3a31.0000000Z%2f2019-03-22T13%3a51%3a31.0000000Z",
+    "LinkToSearchResults": "https://portal.azure.com/#Analyticsblade/search/index?_timeInterval.intervalEnd=2018-03-26T09%3a10%3a40.0000000Z&_timeInterval.intervalDuration=3600&q=Usage",
+    "LinkToFilteredSearchResultsUI": "https://portal.azure.com/#Analyticsblade/search/index?_timeInterval.intervalEnd=2018-03-26T09%3a10%3a40.0000000Z&_timeInterval.intervalDuration=3600&q=Usage",
+    "LinkToSearchResultsAPI": "https://api.loganalytics.io/v1/workspaces/workspaceID/query?query=Heartbeat&timespan=2020-05-07T18%3a11%3a51.0000000Z%2f2020-05-07T18%3a16%3a51.0000000Z",
+    "LinkToFilteredSearchResultsAPI": "https://api.loganalytics.io/v1/workspaces/workspaceID/query?query=Heartbeat&timespan=2020-05-07T18%3a11%3a51.0000000Z%2f2020-05-07T18%3a16%3a51.0000000Z",
     "SeverityDescription": "Warning",
-    "WorkspaceId": "2a1f50a7-ef97-420c-9d14-938e77c2a929",
+    "WorkspaceId": "12345a-1234b-123c-123d-12345678e",
     "SearchIntervalDurationMin": "15",
     "AffectedConfigurationItems": [
       "INC-Gen2Alert"
@@ -171,6 +174,12 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
     "SearchIntervalInMinutes": "15",
     "Threshold": 10000,
     "Operator": "Less Than",
+    "Dimensions": [
+      {
+        "name": "Computer",
+        "value": "INC-Gen2Alert"
+      }
+    ],
     "SearchResults": {
       "tables": [
         {
@@ -181,7 +190,7 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
               "type": "string"
             },
             {
-              "name": "Id",
+              "name": "Computer",
               "type": "string"
             },
             {
@@ -202,18 +211,18 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
             ]
           ]
         }
-      ],
-      "dataSources": [
-        {
-          "resourceId": "/subscriptions/a5ea27e2-7482-49ba-90b3-60e7496dd873/resourcegroups/nrt-tip-kc/providers/microsoft.operationalinsights/workspaces/nrt-tip-kc",
-          "tables": [
-            "Heartbeat"
-          ]
-        }
       ]
     },
-    "IncludeSearchResults": "True",
-    "AlertType": "Number of results"
+    "dataSources": [
+      {
+        "resourceId": "/subscriptions/a5ea55e2-7482-49ba-90b3-60e7496dd873/resourcegroups/test/providers/microsoft.operationalinsights/workspaces/test",
+        "tables": [
+          "Heartbeat"
+        ]
+      }
+    ],
+  "IncludeSearchResults": "True",
+  "AlertType": "Metric measurement"
   }
 }
 ```
@@ -224,16 +233,25 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
 ```json
 {
   "alertContext": {
-    "SearchQuery": "search *",
+    "SearchQuery": "requests | where resultCode == \"500\" | summarize AggregatedValue = Count by bin(Timestamp, 5m), IP",
     "SearchIntervalStartTimeUtc": "3/22/2019 1:36:33 PM",
     "SearchIntervalEndtimeUtc": "3/22/2019 1:51:33 PM",
     "ResultCount": 2,
-    "LinkToSearchResults": "https://portal.azure.com#@72f988bf-86f1-41af-91ab-2d7cd011db47/blade/Microsoft_OperationsManagementSuite_Workspace/AnalyticsBlade/initiator/AnalyticsShareLinkToQuery/isQueryEditorVisible/true/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%<subscription ID>%2FresourceGroups%2FPipeLineAlertRG%2Fproviders%2Fmicrosoft.insights%2Fcomponents%2FWEU-AIRunner%22%7D%5D%7D/query/search%20%2A/isQuerybase64Compressed/false/timespanInIsoFormat/2019-03-22T13%3a36%3a33.0000000Z%2f2019-03-22T13%3a51%3a33.0000000Z",
+    "LinkToSearchResults": "https://portal.azure.com/AnalyticsBlade/subscriptions/12345a-1234b-123c-123d-12345678e/?query=search+*+&timeInterval.intervalEnd=2018-03-26T09%3a10%3a40.0000000Z&_timeInterval.intervalDuration=3600&q=Usage",
+    "LinkToFilteredSearchResultsUI": "https://portal.azure.com/AnalyticsBlade/subscriptions/12345a-1234b-123c-123d-12345678e/?query=search+*+&timeInterval.intervalEnd=2018-03-26T09%3a10%3a40.0000000Z&_timeInterval.intervalDuration=3600&q=Usage",
+    "LinkToSearchResultsAPI": "https://api.applicationinsights.io/v1/apps/0MyAppId0/metrics/requests/count",
+    "LinkToFilteredSearchResultsAPI": "https://api.applicationinsights.io/v1/apps/0MyAppId0/metrics/requests/count",
     "SearchIntervalDurationMin": "15",
     "SearchIntervalInMinutes": "15",
     "Threshold": 10000,
     "Operator": "Less Than",
     "ApplicationId": "8e20151d-75b2-4d66-b965-153fb69d65a6",
+    "Dimensions": [
+      {
+        "name": "IP",
+        "value": "1.1.1.1"
+      }
+    ],
     "SearchResults": {
       "tables": [
         {
@@ -248,7 +266,7 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
               "type": "string"
             },
             {
-              "name": "TimeGenerated",
+              "name": "Timestamp",
               "type": "datetime"
             }
           ],
@@ -268,7 +286,7 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
       ],
       "dataSources": [
         {
-          "resourceId": "/subscriptions/a5ea27e2-7482-49ba-90b3-60e7496dd873/resourcegroups/nrt-tip-kc/providers/microsoft.operationalinsights/workspaces/nrt-tip-kc",
+          "resourceId": "/subscriptions/a5ea27e2-7482-49ba-90b3-52e7496dd873/resourcegroups/test/providers/microsoft.operationalinsights/workspaces/test",
           "tables": [
             "Heartbeat"
           ]
@@ -276,7 +294,49 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
       ]
     },
     "IncludeSearchResults": "True",
-    "AlertType": "Number of results"
+    "AlertType": "Metric measurement"
+  }
+}
+```
+
+#### <a name="monitoringservice--log-alerts-v2"></a>`monitoringService` = `Log Alerts V2`
+
+**Exemples de valeurs**
+```json
+{
+  "alertContext": {
+    "properties": null,
+    "conditionType": "LogQueryCriteria",
+    "condition": {
+      "windowSize": "PT10M",
+      "allOf": [
+        {
+          "searchQuery": "Heartbeat",
+          "metricMeasure": null,
+          "targetResourceTypes": "['Microsoft.Compute/virtualMachines']",
+          "operator": "LowerThan",
+          "threshold": "1",
+          "timeAggregation": "Count",
+          "dimensions": [
+            {
+              "name": "Computer",
+              "value": "TestComputer"
+            }
+          ],
+          "metricValue": 0.0,
+          "failingPeriods": {
+            "numberOfEvaluationPeriods": 1,
+            "minFailingPeriodsToAlert": 1
+          },
+          "linkToSearchResultsUI": "https://portal.azure.com#@12345a-1234b-123c-123d-12345678e/blade/Microsoft_Azure_Monitoring_Logs/LogsBlade/source/Alerts.EmailLinks/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%212345a-1234b-123c-123d-12345678e%2FresourceGroups%2FContoso%2Fproviders%2FMicrosoft.Compute%2FvirtualMachines%2FContoso%22%7D%5D%7D/q/eJzzSE0sKklKTSypUSjPSC1KVQjJzE11T81LLUosSU1RSEotKU9NzdNIAfJKgDIaRgZGBroG5roGliGGxlYmJlbGJnoGEKCpp4dDmSmKMk0A/prettify/1/timespan/2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z",
+          "linkToFilteredSearchResultsUI": "https://portal.azure.com#@12345a-1234b-123c-123d-12345678e/blade/Microsoft_Azure_Monitoring_Logs/LogsBlade/source/Alerts.EmailLinks/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%212345a-1234b-123c-123d-12345678e%2FresourceGroups%2FContoso%2Fproviders%2FMicrosoft.Compute%2FvirtualMachines%2FContoso%22%7D%5D%7D/q/eJzzSE0sKklKTSypUSjPSC1KVQjJzE11T81LLUosSU1RSEotKU9NzdNIAfJKgDIaRgZGBroG5roGliGGxlYmJlbGJnoGEKCpp4dDmSmKMk0A/prettify/1/timespan/2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z",
+          "linkToSearchResultsAPI": "https://api.loganalytics.io/v1/subscriptions/12345a-1234b-123c-123d-12345678e/resourceGroups/Contoso/providers/Microsoft.Compute/virtualMachines/Contoso/query?query=Heartbeat%7C%20where%20TimeGenerated%20between%28datetime%282020-07-09T13%3A44%3A34.0000000%29..datetime%282020-07-09T13%3A54%3A34.0000000%29%29&timespan=2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z",
+          "linkToFilteredSearchResultsAPI": "https://api.loganalytics.io/v1/subscriptions/12345a-1234b-123c-123d-12345678e/resourceGroups/Contoso/providers/Microsoft.Compute/virtualMachines/Contoso/query?query=Heartbeat%7C%20where%20TimeGenerated%20between%28datetime%282020-07-09T13%3A44%3A34.0000000%29..datetime%282020-07-09T13%3A54%3A34.0000000%29%29&timespan=2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z"
+        }
+      ],
+      "windowStartTime": "2020-07-07T13:54:34Z",
+      "windowEndTime": "2020-07-09T13:54:34Z"
+    }
   }
 }
 ```
@@ -294,7 +354,7 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
         "scope": "/subscriptions/<subscription ID>/resourceGroups/PipeLineAlertRG/providers/Microsoft.Compute/virtualMachines/WCUS-R2-ActLog"
       },
       "channels": "Operation",
-      "claims": "{\"aud\":\"https://management.core.windows.net/\",\"iss\":\"https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/\",\"iat\":\"1553260826\",\"nbf\":\"1553260826\",\"exp\":\"1553264726\",\"aio\":\"42JgYNjdt+rr+3j/dx68v018XhuFAwA=\",\"appid\":\"e9a02282-074f-45cf-93b0-50568e0e7e50\",\"appidacr\":\"2\",\"http://schemas.microsoft.com/identity/claims/identityprovider\":\"https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/\",\"http://schemas.microsoft.com/identity/claims/objectidentifier\":\"9778283b-b94c-4ac6-8a41-d5b493d03aa3\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier\":\"9778283b-b94c-4ac6-8a41-d5b493d03aa3\",\"http://schemas.microsoft.com/identity/claims/tenantid\":\"72f988bf-86f1-41af-91ab-2d7cd011db47\",\"uti\":\"v5wYC9t9ekuA2rkZSVZbAA\",\"ver\":\"1.0\"}",
+      "claims": "{\"aud\":\"https://management.core.windows.net/\",\"iss\":\"https://sts.windows.net/12345a-1234b-123c-123d-12345678e/\",\"iat\":\"1553260826\",\"nbf\":\"1553260826\",\"exp\":\"1553264726\",\"aio\":\"42JgYNjdt+rr+3j/dx68v018XhuFAwA=\",\"appid\":\"e9a02282-074f-45cf-93b0-50568e0e7e50\",\"appidacr\":\"2\",\"http://schemas.microsoft.com/identity/claims/identityprovider\":\"https://sts.windows.net/12345a-1234b-123c-123d-12345678e/\",\"http://schemas.microsoft.com/identity/claims/objectidentifier\":\"9778283b-b94c-4ac6-8a41-d5b493d03aa3\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier\":\"9778283b-b94c-4ac6-8a41-d5b493d03aa3\",\"http://schemas.microsoft.com/identity/claims/tenantid\":\"12345a-1234b-123c-123d-12345678e\",\"uti\":\"v5wYC9t9ekuA2rkZSVZbAA\",\"ver\":\"1.0\"}",
       "caller": "9778283b-b94c-4ac6-8a41-d5b493d03aa3",
       "correlationId": "8ee9c32a-92a1-4a8f-989c-b0ba09292a91",
       "eventSource": "Administrative",
@@ -425,17 +485,17 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
     "operationName": "Microsoft.ServiceHealth/maintenance/action",
     "operationId": "<GUID>",
     "properties": {
-      "title": "Azure SQL DW Scheduled Maintenance Pending",
-      "service": "SQL Data Warehouse",
+      "title": "Azure Synapse Analytics Scheduled Maintenance Pending",
+      "service": "Azure Synapse Analytics",
       "region": "East US",
       "communication": "<MESSAGE>",
       "incidentType": "Maintenance",
       "trackingId": "<GUID>",
       "impactStartTime": "2019-06-26T04:00:00Z",
       "impactMitigationTime": "2019-06-26T12:00:00Z",
-      "impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"East US\"}],\"ServiceName\":\"SQL Data Warehouse\"}]",
-      "impactedServicesTableRows": "<tr>\r\n<td align='center' style='padding: 5px 10px; border-right:1px solid black; border-bottom:1px solid black'>SQL Data Warehouse</td>\r\n<td align='center' style='padding: 5px 10px; border-bottom:1px solid black'>East US<br></td>\r\n</tr>\r\n",
-      "defaultLanguageTitle": "Azure SQL DW Scheduled Maintenance Pending",
+      "impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"East US\"}],\"ServiceName\":\"Azure Synapse Analytics\"}]",
+      "impactedServicesTableRows": "<tr>\r\n<td align='center' style='padding: 5px 10px; border-right:1px solid black; border-bottom:1px solid black'>Azure Synapse Analytics</td>\r\n<td align='center' style='padding: 5px 10px; border-bottom:1px solid black'>East US<br></td>\r\n</tr>\r\n",
+      "defaultLanguageTitle": "Azure Synapse Analytics Scheduled Maintenance Pending",
       "defaultLanguageContent": "<MESSAGE>",
       "stage": "Planned",
       "communicationId": "<GUID>",
@@ -481,6 +541,5 @@ Chaque instance d’alerte décrit la ressource affectée et la cause de l’ale
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Apprenez-en davantage sur le [schéma d’alerte courant](https://aka.ms/commonAlertSchemaDocs).
-- Découvrez [comment créer une application logique qui utilise le schéma d’alerte courant pour gérer toutes vos alertes](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations). 
-
+- Apprenez-en davantage sur le [schéma d’alerte courant](./alerts-common-schema.md).
+- Découvrez [comment créer une application logique qui utilise le schéma d’alerte courant pour gérer toutes vos alertes](./alerts-common-schema-integrations.md).

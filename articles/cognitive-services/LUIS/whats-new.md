@@ -1,14 +1,16 @@
 ---
 title: 'Nouveauté : service Language Understanding (LUIS)'
 description: Cet article est régulièrement mis à jour avec des informations nouvelles sur l’API Language Understanding Azure Cognitive Services.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: overview
-ms.date: 05/08/2020
-ms.openlocfilehash: d7ef989d04132dedc79d2408b7083b57d8c926b0
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 06/15/2020
+ms.openlocfilehash: fffe337a59ff343164a155fcd0f4d5616a32bf41
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592795"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91334614"
 ---
 # <a name="whats-new-in-language-understanding"></a>Nouveauté du service Language Understanding
 
@@ -16,17 +18,37 @@ Découvrir les nouveautés du service. Ces éléments incluent des notes de publ
 
 ## <a name="release-notes"></a>Notes de publication
 
+### <a name="june-2020"></a>Juin 2020
+
+* Kit SDK [Preview 3.0 Authoring](luis-migration-authoring-entities.md)
+    * Version 3.2.0-preview.3 - [.NET - NuGet](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring/)
+    * Version 4.0.0-preview.3 - [JS - NPM](https://www.npmjs.com/package/@azure/cognitiveservices-luis-authoring)
+* Application des pratiques DevOps avec LUIS
+    * Concepts
+        * [Pratiques DevOps pour LUIS](luis-concept-devops-sourcecontrol.md)
+        * [Workflows d’intégration continue et de livraison continue pour LUIS DevOps](luis-concept-devops-automation.md)
+        * [Test de LUIS DevOps](luis-concept-devops-testing.md)
+    * Procédures
+        * [Appliquer DevOps au développement d’applications LUIS à l’aide de GitHub Actions](luis-how-to-devops-with-github.md)
+    * [Dépôt GitHub code complet](https://github.com/Azure-Samples/LUIS-DevOps-Template)
+
 ### <a name="may-2020---build"></a>Mai 2020 – //Build
 
 * Publié en tant que **version en disposition générale** :
     * [Conteneur Language Understanding](luis-container-howto.md)
     * La préversion du portail est promue en [version actuelle du portail](https://www.luis.ai), la version [précédente](https://previous.luis.ai) du portail reste toujours disponible
-    * Nouvelle expérience de création d’entités issues du Machine Learning
-    * [Processus de mise à niveau](migrate-from-composite-entity.md) des entités composites et simples aux entités issues du Machine Learning
+    * Nouvelle expérience de création d’entités issues du machine learning
+    * [Processus de mise à niveau](migrate-from-composite-entity.md) des entités composites et simples aux entités issues du machine learning
     * Prise en charge du [paramètre de normalisation des variantes de mot](how-to-application-settings-portal.md)
 * Modifications apportées aux API de création
-    * Schéma d’application 7.x pour les entités issues du Machine Learning imbriquées
+    * Schéma d’application 7.x pour les entités issues du machine learning imbriquées
     * [Migration vers la fonctionnalité requise](luis-migration-authoring-entities.md#api-change-constraint-replaced-with-required-feature)
+* Nouvelles ressources pour les développeurs
+    * [Outils d’intégration continue](developer-reference-resource.md#continuous-integration-tools)
+    * Atelier : découvrir les bonnes pratiques pour la [_compréhension du langage naturel_ à l’aide de LUIS](developer-reference-resource.md#workshops)
+* [Clés gérées par le client](luis-encryption-of-data-at-rest.md) : chiffrez toutes les données que vous utilisez dans LUIS à l’aide de votre propre clé
+* [Présentation de l’IA](https://channel9.msdn.com/Shows/AI-Show/New-Features-in-Language-Understanding) (vidéo) : découvrez les nouvelles fonctionnalités de LUIS
+
 
 
 ### <a name="march-2020"></a>Mars 2020
@@ -48,13 +70,13 @@ Découvrir les nouveautés du service. Ces éléments incluent des notes de publ
     * Les [entités prédéfinies](luis-reference-prebuilt-entities.md#italian-entity-support) italiennes (âge, devise, dimension, nombre et résolution de pourcentage) ont changé depuis la version V2.
 * Amélioration de l’expérience utilisateur dans le [portail preview.luis.ai](https://preview.luis.ai) (expérience d’étiquetage remaniée pour permettre la génération et le débogage de modèles complexes). Essayez les tutoriels du portail en préversion :
     * [Intentions uniquement](tutorial-intents-only.md)
-    * [Entité issue du Machine Learning décomposable](tutorial-machine-learned-entity.md)
+    * [Entité issue du machine learning décomposable](tutorial-machine-learned-entity.md)
 * Fonctionnalités avancées de compréhension de la langue ([génération de modèles linguistiques sophistiqués](luis-concept-entity-types.md) avec moins d’efforts).
 * Définition de fonctionnalités de machine learning au niveau du modèle et activation de modèles à utiliser en tant que signaux pour d’autres modèles, comme l’utilisation d’entités en tant que fonctionnalités pour des intentions et d’autres entités.
 * Nouvelles [limites](luis-limits.md) étendues (maximum plus élevé pour les listes d’expressions et le nombre total d’expressions, ainsi que nouveau modèle en tant que limites de fonctionnalité)
 * Extraction d’informations à partir de texte au format de structure hiérarchique profonde, qui rend les applications de conversation plus puissantes.
 
-    ![image d’entité issue de l’apprentissage automatique](./media/whats-new/deep-entity-extraction-example.png)
+    ![Image d’entité issue du machine learning](./media/whats-new/deep-entity-extraction-example.png)
 
 ### <a name="september-3-2019"></a>3 septembre 2019
 
@@ -93,7 +115,7 @@ Les fonctionnalités suivantes ont été publiées lors de la conférence Build�
 
 [Bot Framework](https://blog.botframework.com/)
 
-## <a name="videos"></a>Videos
+## <a name="videos"></a>Vidéos
 
 ### <a name="2019-ignite-videos"></a>Vidéos Ignite 2019
 

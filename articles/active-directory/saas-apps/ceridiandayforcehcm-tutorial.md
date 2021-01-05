@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Ceridian Dayforce HCM | Microsoft docs'
 description: Découvrez comment configurer l'authentification unique entre Azure Active Directory et Ceridian Dayforce HCM.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 7adf1eb3-d063-45d6-96a8-fd53b329b3f3
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/02/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: f488f22535c290b5fecbd0ffa9f8867f0b715bac
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b2241ff6841a5b3f536419336dc4f4fd888663d9
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158684"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673067"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-ceridian-dayforce-hcm"></a>Didacticiel : Intégration d’Azure Active Directory à Ceridian Dayforce HCM
 
@@ -32,7 +27,7 @@ L’intégration de Ceridian Dayforce HCM à Azure AD vous offre les avantages s
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Ceridian Dayforce HCM (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Ceridian Dayforce HCM à Azure AD, vous dev
 
 4. Dans la zone de recherche, tapez **Ceridian Dayforce HCM**, sélectionnez **Ceridian Dayforce HCM** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Ceridian Dayforce HCM figurant dans la liste des résultats](common/search-new-app.png)
+    ![Ceridian Dayforce HCM figurant dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -132,19 +127,19 @@ Pour configurer l’authentification unique Azure AD avec Ceridian Dayforce HCM
 
 5. L’application Ceridian Dayforce HCM attend les assertions SAML dans un format spécifique. Configurez les revendications suivantes pour cette application. Vous pouvez gérer les valeurs de ces attributs à partir de la section **Attributs utilisateur** sur la page d’intégration des applications. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Attributs utilisateur**.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant User Attributes avec l’icône Edit sélectionnée.](common/edit-attribute.png)
 
 6. Dans la section **Revendications des utilisateurs** de la boîte de dialogue **Attributs utilisateur**, configurez le jeton SAML comme sur l’image ci-dessus et procédez comme suit :
-    
+
     | Name | Attribut source|
     | ---------| --------- |
     | name  | user.extensionattribute2 |
 
     a. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](common/new-save-attribute.png)
+    ![Capture d’écran montrant User claims avec l’option permettant d’ajouter une nouvelle revendication.](common/new-save-attribute.png)
 
-    ![image](common/new-attribute-details.png)
+    ![Capture d’écran montrant la boîte de dialogue Manage user claims où vous pouvez entrer les valeurs décrites.](common/new-attribute-details.png)
 
     b. Dans la zone de texte **Attribut**, indiquez le nom d’attribut pour cette ligne.
 
@@ -193,7 +188,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -229,19 +224,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-ceridian-dayforce-hcm-test-user"></a>Créer un utilisateur de test Ceridian Dayforce HCM
 
-Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Ceridian Dayforce HCM. Pour ajouter les utilisateurs dans la plateforme Ceridian Dayforce HCM, contactez l’ [équipe du support technique Ceridian Dayforce HCM](https://www.ceridian.com/support). Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Ceridian Dayforce HCM. Pour ajouter les utilisateurs dans la plateforme Ceridian Dayforce HCM, contactez l’[équipe du support technique Ceridian Dayforce HCM](https://www.ceridian.com/support). Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Ceridian Dayforce HCM dans le volet d’accès, vous devez être automatiquement connecté l’application Ceridian Dayforce HCM pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Ceridian Dayforce HCM dans le volet d’accès, vous devez être automatiquement connecté l’application Ceridian Dayforce HCM pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

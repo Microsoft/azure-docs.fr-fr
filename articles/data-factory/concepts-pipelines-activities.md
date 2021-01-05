@@ -3,18 +3,18 @@ title: Pipelines et activités dans Azure Data Factory
 description: Découvrez les pipelines et les activités dans Azure Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 11/19/2019
-ms.openlocfilehash: ad4ffa71480a5af06c31872cbafcaab7719c55e0
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: ceaced5860976b0fa9f84903804700f778ed9550
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418335"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500074"
 ---
 # <a name="pipelines-and-activities-in-azure-data-factory"></a>Pipelines et activités dans Azure Data Factory
 
@@ -30,7 +30,7 @@ Une fabrique de données peut avoir un ou plusieurs pipelines. Un pipeline const
 
 Les activités d’un pipeline définissent les actions à effectuer sur les données. Par exemple, vous pouvez utiliser une activité de copie pour copier des données d’un serveur SQL Server local dans un stockage Blob Azure. Ensuite, utilisez une activité de flux de données ou une activité de Databricks Notebook pour traiter et transformer les données du stockage Blob en pool Azure Synapse Analytics sur lesquelles les solutions de création de rapports décisionnelles sont créées.
 
-Data Factory a trois groupes d’activités : les [activités de déplacement des données](copy-activity-overview.md), les [activités de transformation des données](transform-data.md) et les [activités de contrôle](control-flow-web-activity.md). Une activité peut inclure zéro ou plusieurs [jeux de données](concepts-datasets-linked-services.md) d’entrée et produire un ou plusieurs [jeux de données](concepts-datasets-linked-services.md) de sortie. Le diagramme suivant montre la relation entre le pipeline, l’activité et le jeu de données dans Data Factory :
+Data Factory a trois groupes d’activités : les [activités de déplacement des données](copy-activity-overview.md), les [activités de transformation des données](transform-data.md) et les [activités de contrôle](#control-flow-activities). Une activité peut inclure zéro ou plusieurs [jeux de données](concepts-datasets-linked-services.md) d’entrée et produire un ou plusieurs [jeux de données](concepts-datasets-linked-services.md) de sortie. Le diagramme suivant montre la relation entre le pipeline, l’activité et le jeu de données dans Data Factory :
 
 ![Relation entre le jeu de données, l’activité et le pipeline](media/concepts-pipelines-activities/relationship-between-dataset-pipeline-activity.png)
 
@@ -56,8 +56,8 @@ Activités de transformation des données | Environnement de calcul
 [MapReduce](transform-data-using-hadoop-map-reduce.md) | HDInsight [Hadoop]
 [Diffusion en continu Hadoop](transform-data-using-hadoop-streaming.md) | HDInsight [Hadoop]
 [Spark](transform-data-using-spark.md) | HDInsight [Hadoop]
-[Activités Machine Learning : exécution par lot et ressource de mise à jour](transform-data-using-machine-learning.md) | Azure VM
-[Procédure stockée](transform-data-using-stored-procedure.md) | SQL Azure, Azure SQL Data Warehouse ou SQL Server
+[Activités Azure Machine Learning Studio (classique) : exécution par lot et ressource de mise à jour](transform-data-using-machine-learning.md) | Azure VM
+[Procédure stockée](transform-data-using-stored-procedure.md) | Azure SQL, Azure Synapse Analytics ou SQL Server
 [U-SQL](transform-data-using-data-lake-analytics.md) | Service Analytique Azure Data Lake
 [Activité personnalisée](transform-data-using-dotnet-custom-activity.md) | Azure Batch
 [Databricks Notebook](transform-data-databricks-notebook.md) | Azure Databricks
@@ -146,7 +146,7 @@ Tag | Description | Obligatoire
 name | Nom de l’activité. Spécifiez un nom qui représente l’action effectuée par l’activité. <br/><ul><li>Nombre maximal de caractères : 55</li><li>Doit commencer par une lettre, un chiffre ou un trait de soulignement (\_)</li><li>Les caractères suivants ne sont pas autorisés : « . », « + », « ? », « / », « < », « > », « * », « % », « & », « : », \" | Oui</li></ul>
 description | Texte décrivant la raison motivant l’activité ou son utilisation | Oui
 type | Type de l’activité. Consultez les sections [Activités de déplacement des données](#data-movement-activities), [Activités de transformation des données](#data-transformation-activities) et [Activités de contrôle](#control-flow-activities) pour en savoir plus sur les différents types d’activités. | Oui
-linkedServiceName | Nom du service lié utilisé par l’activité.<br/><br/>Une activité peut nécessiter que vous spécifiiez le service lié à l’environnement de calcul requis. | Oui pour l’activité HDInsight, l’activité de calcul de score du lot Azure Machine Learning et l’activité de procédure stockée. <br/><br/>Non pour toutes les autres
+linkedServiceName | Nom du service lié utilisé par l’activité.<br/><br/>Une activité peut nécessiter que vous spécifiiez le service lié à l’environnement de calcul requis. | Oui pour l’activité HDInsight, l’activité de calcul de score du lot Azure Machine Learning Studio (classique) et l’activité de procédure stockée. <br/><br/>Non pour toutes les autres
 typeProperties | Les propriétés de la section typeProperties dépendent de chaque type d’activité. Pour afficher les propriétés de type d’une activité, cliquez sur les liens vers l’activité dans la section précédente. | Non
 policy | Stratégies affectant le comportement d’exécution de l’activité. Cette propriété inclut un comportement de délai d'expiration et de nouvelle tentative. Si aucune valeur n'est spécifiée, les valeurs par défaut sont utilisées. Pour plus d’informations, consultez la section [Stratégie d’activité](#activity-policy). | Non
 dependsOn | Cette propriété est utilisée pour définir des dépendances des activités, et la manière dont les activités suivantes dépendent des activités précédentes. Pour plus d’informations, consultez l’article [Dépendance des activités](#activity-dependency) | Non
@@ -265,10 +265,10 @@ Par exemple, si un pipeline contient Activité A -> Activité B, les différents
     }
 }
 
-`"
+```
 
-## Sample copy pipeline
-In the following sample pipeline, there is one activity of type **Copy** in the **activities** section. In this sample, the [copy activity](copy-activity-overview.md) copies data from an Azure Blob storage to an Azure SQL database.
+## <a name="sample-copy-pipeline"></a>Exemple de pipeline de copie
+Dans l’exemple de pipeline suivant, il existe une activité de type **Copy** in the **d’activités** . Dans cet exemple, l’[activité de copie](copy-activity-overview.md) copie des données d’un stockage Blob Azure vers une base de données dans Azure SQL Database.
 
 ```json
 {

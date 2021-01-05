@@ -5,16 +5,14 @@ author: HiteshMadan
 manager: rajarv
 ms.author: himad
 ms.reviewer: spelluru
-ms.date: 10/06/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: a6f033af34088081090251f2e5e7cd4a07ce43cc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0ae2261f8278c4d5e1944b01a9731afd293df20b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76841745"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171633"
 ---
 # <a name="output-batching"></a>Traitement par lot des sorties
 

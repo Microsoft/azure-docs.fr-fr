@@ -1,26 +1,23 @@
 ---
-title: Accélération des requêtes Azure Data Lake Storage (préversion)
-description: L’accélération des requêtes (préversion) est une nouvelle capacité d’Azure Data Lake Storage qui permet aux applications et aux infrastructures d’analytique d’optimiser considérablement le traitement des données en extrayant uniquement les données requises pour une opération de traitement.
+title: Accélération des requêtes Azure Data Lake Storage
+description: L’accélération des requêtes permet aux applications et aux infrastructures d’analytique d’optimiser considérablement le traitement des données en extrayant uniquement les données requises pour une opération de traitement.
 author: normesta
 ms.topic: conceptual
 ms.author: normesta
 ms.reviewer: jamesbak
-ms.date: 04/21/2020
+ms.date: 09/09/2020
 ms.service: storage
 ms.subservice: data-lake-storage-gen2
-ms.openlocfilehash: 42eec4a0796a7f07c7e7d1c35571d9d4ddcf69d7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: dc1d217dba64c36aa219abbd4d2220a494347689
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176700"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912754"
 ---
-# <a name="azure-data-lake-storage-query-acceleration-preview"></a>Accélération des requêtes Azure Data Lake Storage (préversion)
+# <a name="azure-data-lake-storage-query-acceleration"></a>Accélération des requêtes Azure Data Lake Storage
 
 L’accélération des requêtes (préversion) est une nouvelle capacité d’Azure Data Lake Storage qui permet aux applications et aux infrastructures d’analytique d’optimiser considérablement le traitement des données en extrayant uniquement les données requises pour effectuer une opération donnée. Cela permet de réduire le temps et la puissance de traitement nécessaires pour obtenir un aperçu essentiel des données stockées.
-
-> [!NOTE]
-> La fonctionnalité d’accélération des requêtes est disponible en préversion publique dans les régions Canada Centre et France Centre. Pour passer en revue les limitations, consultez l’article [Problèmes connus](data-lake-storage-known-issues.md). Pour vous inscrire à la préversion, voir [ce formulaire](https://aka.ms/adls/qa-preview-signup).  
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -53,7 +50,7 @@ Le diagramme suivant illustre la façon dont une application typique utilise l�
 
 L’accélération des requêtes optimise les performances en réduisant la quantité de données transférées et traitées par votre application.
 
-Pour calculer une valeur agrégée, les applications récupèrent généralement **toutes** les données à partir d’un fichier, puis traitent et filtrent les données localement. Une analyse des modèles d’entrée/sortie pour les charges de travail analytiques révèle que les applications n’ont généralement besoin que de 20 % des données qu’elles lisent pour effectuer un calcul donné. Cette statistique est vraie même après l’application de techniques telles que l’[élagage de partition](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-optimize-hive-query#hive-partitioning). Cela signifie que 80 % de ces données sont inutilement transférées via le réseau, analysées et filtrées par des applications. Ce modèle, conçu essentiellement pour supprimer les données inutiles, entraîne un coût de calcul significatif.  
+Pour calculer une valeur agrégée, les applications récupèrent généralement **toutes** les données à partir d’un fichier, puis traitent et filtrent les données localement. Une analyse des modèles d’entrée/sortie pour les charges de travail analytiques révèle que les applications n’ont généralement besoin que de 20 % des données qu’elles lisent pour effectuer un calcul donné. Cette statistique est vraie même après l’application de techniques telles que l’[élagage de partition](../../hdinsight/hdinsight-hadoop-optimize-hive-query.md#hive-partitioning). Cela signifie que 80 % de ces données sont inutilement transférées via le réseau, analysées et filtrées par des applications. Ce modèle, conçu essentiellement pour supprimer les données inutiles, entraîne un coût de calcul significatif.  
 
 Même si Azure dispose d’un réseau de pointe, tant en termes de débit que de latence, le transfert inutile de données sur ce réseau reste coûteux pour les performances des applications. En filtrant les données indésirables pendant la demande de stockage, l’accélération des requêtes élimine ce coût.
 
@@ -77,8 +74,5 @@ Malgré la modification apportée au modèle de facturation, le modèle de tarif
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Formulaire d’inscription à l’accélération des requêtes](https://aka.ms/adls/qa-preview-signup)    
-- [Filtrer des données à l’aide de l’accélération des requêtes Azure Data Lake Storage (préversion)](data-lake-storage-query-acceleration-how-to.md)
-- [Informations de référence sur l’accélération des requêtes en langage SQL (préversion)](query-acceleration-sql-reference.md)
-
-
+- [Filtrer des données à l’aide de l’accélération des requêtes d’Azure Data Lake Storage](data-lake-storage-query-acceleration-how-to.md)
+- [Informations de référence sur l’accélération des requêtes en langage SQL](query-acceleration-sql-reference.md)

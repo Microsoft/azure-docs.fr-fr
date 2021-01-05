@@ -1,24 +1,22 @@
 ---
-title: Publier des applications intégrées dans Windows Virtual Desktop – Azure
-description: Comment publier des applications intégrées dans Windows Virtual Desktop.
-services: virtual-desktop
+title: Publier des applications intégrées dans Windows Virtual Desktop (classique) – Azure
+description: Comment publier des applications intégrées dans Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: a02bf514ff76f5528bc46f0a60642163c9278ebf
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 80cd1a4c92441fb17ce0a66814ff0a39a92fb287
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614178"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88005565"
 ---
-# <a name="publish-built-in-apps-in-windows-virtual-desktop"></a>Publier des applications intégrées dans Windows Virtual Desktop
+# <a name="publish-built-in-apps-in-windows-virtual-desktop-classic"></a>Publier des applications intégrées dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../publish-apps.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../publish-apps.md).
 
 Cet article explique comment publier des applications dans votre environnement Windows Virtual Desktop.
 
@@ -29,7 +27,7 @@ Pour publier une application intégrée :
 1. Connectez-vous à l’une des machines virtuelles de votre pool hôte.
 2. Obtenez le **PackageFamilyName** de l’application que vous souhaitez publier en suivant les instructions fournies dans [cet article](/powershell/module/appx/get-appxpackage?view=win10-ps/).
 3. Enfin, exécutez l’applet de commande suivante en remplaçant `<PackageFamilyName>` par le **PackageFamilyName** que vous avez trouvé à l’étape précédente :
-   
+
    ```powershell
    New-RdsRemoteApp <tenantname> <hostpoolname> <appgroupname> -Name <remoteappname> -FriendlyName <remoteappname> -FilePath "shell:appsFolder\<PackageFamilyName>!App"
    ```
@@ -46,7 +44,7 @@ Une fois que vous avez publié une application, elle a l’icône d’applicatio
 Le processus que vous utilisez pour publier Microsoft Edge est un peu différent du processus de publication pour d’autres applications. Pour publier Microsoft Edge avec la page d’accueil par défaut, exécutez l’applet de commande suivante :
 
 ```powershell
-New-RdsRemoteApp <tenantname> <hostpoolname> <appgroupname> -Name <remoteappname> -FriendlyName <remoteappname> -FilePath "shell:Appsfolder\Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge" 
+New-RdsRemoteApp <tenantname> <hostpoolname> <appgroupname> -Name <remoteappname> -FriendlyName <remoteappname> -FilePath "shell:Appsfolder\Microsoft.MicrosoftEdge_8wekyb3d8bbwe!MicrosoftEdge"
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

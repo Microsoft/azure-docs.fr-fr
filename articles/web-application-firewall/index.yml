@@ -9,15 +9,15 @@ metadata:
   ms.topic: landing-page
   author: vhorne
   ms.author: victorh
-  ms.date: 03/27/2020
-  ms.openlocfilehash: 023755687ccee87a3e08cb3a089ad56f196bcbff
-  ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+  ms.date: 09/02/2020
+  ms.openlocfilehash: 31896c34c8bfc265dd16b5b6d317e211b310260f
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81536554"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89396741"
 landingContent:
-- title: Vue d’ensemble
+- title: À propos du pare-feu d’applications web
   linkLists:
   - linkListType: overview
     links:
@@ -29,6 +29,14 @@ landingContent:
       url: ./afds/afds-overview.md
     - text: Pare-feu d’applications web sur Azure CDN
       url: ./cdn/cdn-overview.md
+  - linkListType: concept
+    links:
+    - text: Questions fréquentes (FAQ) - Application Gateway
+      url: ./ag/application-gateway-waf-faq.md
+    - text: Questions fréquentes (FAQ) - Front Door
+      url: ./afds/waf-faq.md
+    - text: Nouveautés
+      url: https://azure.microsoft.com/updates/?category=networking&query=Web%20Application%20Firewall
 - title: Bien démarrer
   linkLists:
   - linkListType: tutorial

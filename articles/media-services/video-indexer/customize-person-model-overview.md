@@ -9,13 +9,13 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
-ms.author: anzaman
-ms.openlocfilehash: 3fabba98cb137975da749411ca9accb5a951742d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kumud
+ms.openlocfilehash: 613ad2d0ab90bef016e80a33be12b71cba5e2f71
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73838292"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87047055"
 ---
 # <a name="customize-a-person-model-in-video-indexer"></a>Personnaliser un modèle de personne dans Video Indexer
 

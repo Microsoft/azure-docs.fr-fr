@@ -4,15 +4,15 @@ description: Cet article explique comment configurer le protocole TLS de bout en
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 4/8/2019
+ms.topic: how-to
+ms.date: 06/09/2020
 ms.author: victorh
-ms.openlocfilehash: 481cbda1d35f7d630dabca00fd01677f542447c2
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 47891dfa7fc0c9b30ccdbf2ed7710125eb36e4a3
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312500"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397805"
 ---
 # <a name="configure-end-to-end-tls-by-using-application-gateway-with-powershell"></a>Configurer le protocole TLS de bout en bout avec Application Gateway en utilisant PowerShell
 
@@ -20,7 +20,7 @@ ms.locfileid: "81312500"
 
 Azure Application Gateway prend en charge le chiffrement de bout en bout du trafic. Application Gateway arrête la connexion TLS/SSL au niveau de la passerelle d’application. La passerelle applique ensuite les règles d'acheminement au trafic, rechiffre le paquet, puis transfère celui-ci au serveur principal approprié selon les règles d'acheminement définies. Toute réponse du serveur web passe par le même processus vers l’utilisateur final.
 
-Application Gateway prend en charge la définition d’options TLS personnalisées. La passerelle prend également en charge la désactivation des versions suivantes du protocole : **TLSv1.0**, **TLSv1.1** et **TLSv1.2**, ainsi que la définition des suites de chiffrement à utiliser et leur ordre de préférence. Pour en savoir plus sur les options TLS configurables, consultez cette [vue d’ensemble de la stratégie TLS](application-gateway-SSL-policy-overview.md).
+Application Gateway prend en charge la définition d’options TLS personnalisées. La passerelle prend également en charge la désactivation des versions suivantes du protocole : **TLSv1.0** , **TLSv1.1** et **TLSv1.2** , ainsi que la définition des suites de chiffrement à utiliser et leur ordre de préférence. Pour en savoir plus sur les options TLS configurables, consultez cette [vue d’ensemble de la stratégie TLS](application-gateway-SSL-policy-overview.md).
 
 > [!NOTE]
 > SSL 2.0 et SSL 3.0 sont désactivés par défaut et ne peuvent pas être activés. Ces protocoles sont considérés comme non sécurisés et ne peuvent pas être utilisés avec Application Gateway.
@@ -33,8 +33,8 @@ Dans ce scénario, vous allez apprendre à créer une passerelle d’application
 
 Ce scénario va :
 
-* créer un groupe de ressources nommé **appgw-rg** ;
-* créer un réseau virtuel nommé **appgwvnet** avec un espace d’adressage de **10.0.0.0/16** ;
+* créer un groupe de ressources nommé **appgw-rg**  ;
+* créer un réseau virtuel nommé **appgwvnet** avec un espace d’adressage de **10.0.0.0/16**  ;
 * créer deux sous-réseaux appelés **appgwsubnet** et **appsubnet** ;
 * créer une petite passerelle d’application prenant en charge le chiffrement TLS de bout en bout qui limite les versions de protocole TLS et les suites de chiffrement.
 
@@ -167,14 +167,16 @@ Tous les éléments de configuration sont définis avant la création de la pass
    > [!NOTE]
    > La sonde par défaut obtient la clé publique de la liaison TLS *par défaut* sur l’adresse IP du serveur principal et compare la valeur de clé publique reçue à celle que vous fournissez ici. 
    > 
-   > Si vous utilisez des en-têtes d’hôte et une indication du nom du serveur (SNI) sur le serveur principal, la clé publique récupérée n’est pas nécessairement le site vers lequel vous souhaitez que le trafic soit dirigé. En cas de doute, visitez https://127.0.0.1/ sur les serveurs principaux pour confirmer le certificat utilisé pour la liaison TLS *par défaut*. Utilisez la clé publique de cette demande dans cette section. Si vous utilisez des en-têtes d’hôte et une indication du nom du serveur (SNI) sur les liaisons HTTPS et que vous ne recevez pas une réponse et un certificat à partir d’une demande de navigateur manuelle vers https://127.0.0.1/ sur les serveurs principaux, vous devez configurer une liaison TLS par défaut sur ceux-ci. Si vous ne le faites pas, les sondes échouent et le serveur principal ne figure pas dans la liste approuvée.
+   > Si vous utilisez des en-têtes d’hôte et une indication du nom du serveur (SNI) sur le serveur principal, la clé publique récupérée n’est pas nécessairement le site vers lequel vous souhaitez que le trafic soit dirigé. En cas de doute, visitez https://127.0.0.1/ sur les serveurs principaux pour confirmer le certificat utilisé pour la liaison TLS *par défaut*. Utilisez la clé publique de cette demande dans cette section. Si vous utilisez des en-têtes d’hôte et une indication du nom du serveur (SNI) sur les liaisons HTTPS et que vous ne recevez pas une réponse et un certificat à partir d’une demande de navigateur manuelle vers https://127.0.0.1/ sur les serveurs principaux, vous devez configurer une liaison TLS par défaut sur ceux-ci. Si vous ne le faites pas, les sondes échouent et le serveur principal n’est pas approuvé.
+   
+   Pour plus d’informations sur SNI dans Application Gateway, consultez [Présentation de la terminaison TLS et du chiffrement TLS de bout en bout avec Application Gateway](ssl-overview.md).
 
    ```powershell
    $authcert = New-AzApplicationGatewayAuthenticationCertificate -Name 'allowlistcert1' -CertificateFile C:\cert.cer
    ```
 
    > [!NOTE]
-   > Le certificat fourni dans l’étape précédente doit être la clé publique du certificat .pfx présent sur le serveur principal. Exportez le certificat (pas le certificat racine) installé sur le serveur principal au format .CER (Claim, Evidence, and Reasoning) et utilisez-le dans cette étape. Cette étape permet d’ajouter le serveur principal à la liste approuvée par la passerelle d’application.
+   > Le certificat fourni dans l’étape précédente doit être la clé publique du certificat .pfx présent sur le serveur principal. Exportez le certificat (pas le certificat racine) installé sur le serveur principal au format .CER (Claim, Evidence, and Reasoning) et utilisez-le dans cette étape. Cette étape autorise le serveur principal avec la passerelle d’application.
 
    Si vous utilisez la référence SKU Application Gateway v2, créez un certificat racine approuvé au lieu d’un certificat d’authentification. Pour plus d’informations, consultez [Présentation du chiffrement TLS de bout en bout sur la passerelle Application Gateway](ssl-overview.md#end-to-end-tls-with-the-v2-sku) :
 
@@ -200,7 +202,7 @@ Tous les éléments de configuration sont définis avant la création de la pass
    $rule = New-AzApplicationGatewayRequestRoutingRule -Name 'rule01' -RuleType basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
    ```
 
-10. Configurez la taille d’instance de la passerelle Application Gateway. Les tailles disponibles sont **Standard\_Small**, **Standard\_Medium** et **Standard\_Large**.  Pour la capacité, les valeurs disponibles vont de **1** à **10**.
+10. Configurez la taille d’instance de la passerelle Application Gateway. Les tailles disponibles sont **Standard\_Small** , **Standard\_Medium** et **Standard\_Large**.  Pour la capacité, les valeurs disponibles vont de **1** à **10**.
 
     ```powershell
     $sku = New-AzApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
@@ -217,7 +219,7 @@ Tous les éléments de configuration sont définis avant la création de la pass
     - **TLSV1_1**
     - **TLSV1_2**
     
-    L’exemple suivant définit la version de protocole minimale sur **TLSv1_2** et active **TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256**, **TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384** et **TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256** uniquement.
+    L’exemple suivant définit la version de protocole minimale sur **TLSv1_2** et active **TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256** , **TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384** et **TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256** uniquement.
 
     ```powershell
     $SSLPolicy = New-AzApplicationGatewaySSLPolicy -MinProtocolVersion TLSv1_2 -CipherSuite "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256", "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384", "TLS_RSA_WITH_AES_128_GCM_SHA256" -PolicyType Custom
@@ -310,7 +312,7 @@ Les étapes précédentes vous ont guidé dans la création d’une application 
    $gw = Get-AzApplicationGateway -Name AdatumAppGateway -ResourceGroupName AdatumAppGatewayRG
    ```
 
-2. Définissez une stratégie TLS. Dans l’exemple suivant, **TLSv1.0** et **TLSv1.1** sont désactivées et les suites de chiffrement **TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256**, **TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384** et **TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256** sont les seules autorisées.
+2. Définissez une stratégie TLS. Dans l’exemple suivant, **TLSv1.0** et **TLSv1.1** sont désactivées et les suites de chiffrement **TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256** , **TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384** et **TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256** sont les seules autorisées.
 
    ```powershell
    Set-AzApplicationGatewaySSLPolicy -MinProtocolVersion TLSv1_2 -PolicyType Custom -CipherSuite "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256", "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384", "TLS_RSA_WITH_AES_128_GCM_SHA256" -ApplicationGateway $gw
@@ -357,6 +359,6 @@ DnsSettings              : {
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le renforcement de la sécurité de vos applications web avec un pare-feu d’applications web via Application Gateway, consultez [Vue d’ensemble du pare-feu d’applications web](application-gateway-webapplicationfirewall-overview.md).
+Pour plus d’informations sur le renforcement de la sécurité de vos applications web avec un pare-feu d’applications web via Application Gateway, consultez [Vue d’ensemble du pare-feu d’applications web](../web-application-firewall/ag/ag-overview.md).
 
 [scenario]: ./media/application-gateway-end-to-end-SSL-powershell/scenario.png

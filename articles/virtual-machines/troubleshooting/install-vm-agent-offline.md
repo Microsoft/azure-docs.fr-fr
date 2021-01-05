@@ -11,14 +11,14 @@ ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.topic: article
-ms.date: 10/31/2018
+ms.date: 07/06/2020
 ms.author: genli
-ms.openlocfilehash: 8ea85b560f35c79b3d5066d794f587345810b5d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 456aa225fa8eed47ca794c54e61b77a30c93fa9a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77920856"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002610"
 ---
 # <a name="install-the-azure-virtual-machine-agent-in-offline-mode"></a>Installer l’agent de machine virtuelle Azure en mode hors connexion 
 
@@ -63,14 +63,12 @@ Procédez comme suit pour installer l’agent de machine virtuelle en mode hors 
 
     2. Exportez les registres suivants :
         - HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet001\Services\WindowsAzureGuestAgent
-        - HKEY_LOCAL_MACHINE\BROKENSYSTEM\\ControlSet001\Services\WindowsAzureTelemetryService
         - HKEY_LOCAL_MACHINE\BROKENSYSTEM\ControlSet001\Services\RdAgent
 
 8.  Utilisez les fichiers existants de la machine virtuelle de dépannage comme référentiel pour l’installation de l’agent de machine virtuelle. Suivez les étapes ci-dessous :
 
     1. À partir de la machine virtuelle de dépannage, exportez les sous-clés suivantes au format du Registre (.reg) : 
         - HKEY_LOCAL_MACHINE  \SYSTEM\ControlSet001\Services\WindowsAzureGuestAgent
-        - HKEY_LOCAL_MACHINE  \SYSTEM\ControlSet001\Services\WindowsAzureTelemetryService
         - HKEY_LOCAL_MACHINE  \SYSTEM\ControlSet001\Services\RdAgent
 
           ![Exporter les sous-clés du Registre](./media/install-vm-agent-offline/backup-reg.png)
@@ -81,9 +79,8 @@ Procédez comme suit pour installer l’agent de machine virtuelle en mode hors 
 
     3. Importez les fichiers du Registre dans le référentiel en double-cliquant sur chaque fichier du Registre.
 
-    4. Vérifiez que les trois sous-clés suivantes sont importées avec succès dans la ruche **BROKENSYSTEM** :
+    4. Vérifiez que les deux sous-clés suivantes sont bien importées dans la ruche **BROKENSYSTEM** :
         - WindowsAzureGuestAgent
-        - WindowsAzureTelemetryService
         - RdAgent
 
     5. Copiez le dossier d’installation de l’agent de machine virtuelle actif vers le disque du système d’exploitation attaché : 

@@ -1,21 +1,16 @@
 ---
 title: Créer un Event Hub à l'aide d'Azure CLI - Azure Event Hubs | Microsoft Docs
 description: Ce démarrage rapide décrit la création d’un Event Hub à l’aide d’Azure CLI puis l’envoi et la réception des événements à l’aide de Java.
-services: event-hubs
-author: spelluru
-manager: timlt
-ms.service: event-hubs
-ms.devlang: java
 ms.topic: quickstart
-ms.custom: seodec18
-ms.date: 02/11/2020
+ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: 92fd7d15ee5bc54cc41b78f4ba0d078d3f8fac6b
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 9a47548fb1f94ac7fe9b561e798b010fa9176e9e
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77162631"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566297"
 ---
 # <a name="quickstart-create-an-event-hub-using-azure-cli"></a>Démarrage rapide : créer un Event Hub à l’aide d’Azure CLI
 
@@ -23,22 +18,15 @@ Azure Event Hubs est une plateforme de diffusion de données volumineuses et un 
 
 Dans ce démarrage rapide, vous créez un Event Hub à l’aide d’Azure CLI.
 
-## <a name="prerequisites"></a>Conditions préalables requises
-Pour suivre ce guide de démarrage rapide, vous devez avoir un abonnement Azure. Si vous n’en avez pas, [créez un compte gratuit][] avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser Azure CLI localement, vous devez exécuter Azure CLI version 2.0.4 ou ultérieure pour ce tutoriel. Exécutez `az --version` pour vérifier votre version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.4 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
-## <a name="sign-in-to-azure"></a>Connexion à Azure
+## <a name="set-the-subscription-context"></a>Définir le contexte de l’abonnement
 
 Les étapes suivantes ne sont pas obligatoires si vous exécutez des commandes dans Cloud Shell. Si vous utilisez l’interface CLI localement, effectuez les étapes suivantes pour vous connecter à Azure et définir votre abonnement actuel :
-
-Exécutez la commande ci-après pour vous connecter à Azure :
-
-```azurecli-interactive
-az login
-```
 
 Définissez le contexte d’abonnement actuel. Remplacez `MyAzureSub` par le nom de l’abonnement Azure que vous souhaitez utiliser :
 
@@ -76,15 +64,15 @@ Félicitations ! Vous avez utilisé Azure CLI pour créer un espace de noms Even
 
 Dans cet article, vous avez créé un groupe de ressources, un espace de noms Event Hubs et un Event Hub. Pour obtenir des instructions pas à pas sur l’envoi d’événements à un hub d’événements ou leur réception à partir d’un hub d’événements, consultez les tutoriels **Envoyer et recevoir des événements** : 
 
-- [.NET Core](get-started-dotnet-standard-send-v2.md)
-- [Java](get-started-java-send-v2.md)
-- [Python](get-started-python-send-v2.md)
-- [JavaScript](get-started-java-send-v2.md)
+- [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
+- [Java](event-hubs-java-get-started-send.md)
+- [Python](event-hubs-python-get-started-send.md)
+- [JavaScript](event-hubs-node-get-started-send.md)
 - [Go](event-hubs-go-get-started-send.md)
 - [C (envoi uniquement)](event-hubs-c-getstarted-send.md)
 - [Apache Storm (réception uniquement)](event-hubs-storm-getstarted-receive.md)
 
-[créez un compte gratuit]: https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio
+[create a free account]: https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio
 [Install the Azure CLI]: /cli/azure/install-azure-cli
 [az group create]: /cli/azure/group#az_group_create
 [fully qualified domain name]: https://wikipedia.org/wiki/Fully_qualified_domain_name

@@ -38,6 +38,21 @@
           href: infrastructure-integrity.md
         - name: Protection de données
           href: protection-customer-data.md
+    - name: Intégrité et sécurité de la plateforme
+      href: platform.md
+      items:
+        - name: Sécurité de microprogramme
+          href: firmware.md
+        - name: Démarrage sécurisé
+          href: secure-boot.md
+        - name: Démarrage mesuré et attestation de l’hôte
+          href: measured-boot-host-attestation.md
+        - name: Project Cerberus
+          href: project-cerberus.md
+        - name: Chiffrement au repos
+          href: encryption-atrest.md
+        - name: Sécurité de l’hyperviseur
+          href: hypervisor.md
     - name: Isolation dans le cloud Azure
       href: isolation-choices.md
 - name: Gestion des identités
@@ -49,21 +64,27 @@
     - name: Liste de contrôle de sécurité
       href: steps-secure-identity.md
     - name: Choisir sans mot de passe
-      href: ad-passwordless.md
+      href: ../../active-directory/authentication/concept-authentication-passwordless.md
 - name: Sécurité du réseau
   items:
     - name: Présentation de la sécurité
       href: network-overview.md
     - name: Meilleures pratiques
       href: network-best-practices.md
-    - name: Protection DDOS
-      href: ddos-best-practices.md
+    - name: Bonnes pratiques pour la protection DDoS
+      href: ../../ddos-protection/fundamental-best-practices.md
+    - name: Base de référence de sécurité pour DDoS Protection
+      href: ddos-protection-security-baseline.md
+    - name: DNS non résolu et prise de contrôle des sous-domaines
+      href: subdomain-takeover.md
     - name: Architecture réseau hybride sécurisée
-      href: 'https://docs.microsoft.com/azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?toc=/azure/security/toc.json&bc=/azure/security/breadcrumb/toc.json'
+      href: /azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?bc=%2fazure%2fsecurity%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsecurity%2ftoc.json
 - name: Sécurité IaaS
   items:
     - name: Microsoft Antimalware
       href: antimalware.md
+    - name: Exemples de code Microsoft Antimalware
+      href: antimalware-code-samples.md
     - name: Vue d’ensemble de la sécurité des machines virtuelles
       href: virtual-machines-overview.md
     - name: Meilleures pratiques - Charges de travail IaaS
@@ -74,26 +95,34 @@
   items:
     - name: Chiffrement et sécurité des données
       href: encryption-overview.md
+    - name: Double chiffrement
+      href: double-encryption.md
+    - name: Changements des certificats TLS
+      href: tls-certificate-changes.md
     - name: Chiffrement de disque
       items:
         - name: Meilleures pratiques
           href: data-encryption-best-practices.md
         - name: Chiffrement des données au repos
           href: encryption-atrest.md
+        - name: Modèles de chiffrement des données
+          href: encryption-models.md
         - name: Azure Disk Encryption pour les machines virtuelles
           href: azure-disk-encryption-vms-vmss.md
     - name: Sécurité de la base de données
       items:
         - name: Vue d’ensemble
-          href: ../../sql-database/sql-database-security-overview.md
+          href: ../../azure-sql/database/security-overview.md
         - name: Meilleures pratiques
-          href: ../../sql-database/sql-database-security-best-practice.md
+          href: ../../azure-sql/database/security-best-practice.md
         - name: Liste de contrôle de sécurité
           href: database-security-checklist.md
     - name: Guide sur la sécurité du stockage
-      href: 'https://docs.microsoft.com/azure/storage/common/storage-security-guide?toc=/azure/security/toc.json&bc=/azure/security/breadcrumb/toc.json'
+      href: ../../storage/blobs/security-recommendations.md?bc=%2fazure%2fsecurity%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsecurity%2ftoc.json
     - name: Customer Lockbox
       href: customer-lockbox-overview.md
+    - name: Base de référence de sécurité pour Customer Lockbox
+      href: customer-lockbox-security-baseline.md
 - name: Application
   items:
     - name: PaaS
@@ -139,3 +168,5 @@
       href: event-support-ticket.md
     - name: Test de pénétration
       href: pen-testing.md
+    - name: Domaines Azure
+      href: azure-domains.md

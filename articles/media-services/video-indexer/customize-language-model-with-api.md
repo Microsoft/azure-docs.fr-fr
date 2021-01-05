@@ -9,13 +9,13 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
 ms.date: 02/04/2020
-ms.author: anzaman
-ms.openlocfilehash: 19067bbbaf93c9abc9a9220b09dd482ce9115655
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kumud
+ms.openlocfilehash: f373afae03357ffb65eb459f806fe441e29b21b9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80127975"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87047080"
 ---
 # <a name="customize-a-language-model-with-the-video-indexer-api"></a>Personnaliser un modèle de langage avec l’API Video Indexer
 

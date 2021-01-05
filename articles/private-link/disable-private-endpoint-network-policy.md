@@ -4,15 +4,15 @@ description: Découvrez comment désactiver les stratégies réseau pour les poi
 services: private-link
 author: malopMSFT
 ms.service: private-link
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/16/2019
 ms.author: allensu
-ms.openlocfilehash: b5ab62e7ab57d32a11a45713519633034deb6a5b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a4c04033f3fb5ff523f0d80bb6c978955f4c9ec2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75453016"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84737510"
 ---
 # <a name="disable-network-policies-for-private-endpoints"></a>Désactiver les stratégies réseau pour les points de terminaison privés
 

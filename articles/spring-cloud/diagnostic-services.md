@@ -6,14 +6,17 @@ ms.service: spring-cloud
 ms.topic: conceptual
 ms.date: 01/06/2020
 ms.author: brendm
-ms.openlocfilehash: 83b223ab2195516492d55ac85be6e7db0dffbd98
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-java
+ms.openlocfilehash: 11f5fcd74b228fa2d57658f5c268e3bebc3c7e93
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176785"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499524"
 ---
 # <a name="analyze-logs-and-metrics-with-diagnostics-settings"></a>Analyser les journaux et les métriques avec les paramètres de diagnostic
+
+**Cet article s'applique à :** ✔️ Java ✔️ C#
 
 La fonctionnalité de diagnostic d’Azure Spring Cloud vous permet d’analyser les journaux et les métriques à l’aide d’un des services suivants :
 
@@ -24,7 +27,7 @@ La fonctionnalité de diagnostic d’Azure Spring Cloud vous permet d’analyser
 Choisissez la catégorie de journal et de métrique que vous souhaitez analyser.
 
 > [!TIP]
-> Vous souhaitez simplement diffuser vos journaux en continu ? Voyez cette [commande Azure CLI](https://docs.microsoft.com/cli/azure/ext/spring-cloud/spring-cloud/app?view=azure-cli-latest#ext-spring-cloud-az-spring-cloud-app-logs) !
+> Vous souhaitez simplement diffuser vos journaux en continu ? Voyez cette [commande Azure CLI](/cli/azure/ext/spring-cloud/spring-cloud/app?preserve-view=true&view=azure-cli-latest#ext-spring-cloud-az-spring-cloud-app-logs) !
 
 ## <a name="logs"></a>Journaux d’activité
 
@@ -35,9 +38,9 @@ Choisissez la catégorie de journal et de métrique que vous souhaitez analyser.
 
 ## <a name="metrics"></a>Mesures
 
-Pour obtenir la liste complète des métriques, voir [Mesures Spring Cloud](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-concept-metrics#user-metrics-options).
+Pour obtenir la liste complète des métriques, voir [Mesures Spring Cloud](./spring-cloud-concept-metrics.md#user-metrics-options).
 
-Pour commencer, activez l’un de ces services pour recevoir les données. Pour en savoir plus sur la configuration de Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](../azure-monitor/log-query/get-started-portal.md).
+Pour commencer, activez l’un de ces services pour recevoir les données. Pour en savoir plus sur la configuration de Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md).
 
 ## <a name="configure-diagnostics-settings"></a>Configurer les paramètres de diagnostic
 
@@ -107,7 +110,7 @@ Il existe plusieurs méthodes pour afficher les journaux et les métriques, comm
 > [!NOTE]
 > `==` respecte la casse, mais pas `=~`.
 
-Pour en savoir plus sur le langage de requête qui est utilisé dans Log Analytics, consultez [Requêtes de journal Azure Monitor](../azure-monitor/log-query/query-language.md).
+Pour en savoir plus sur le langage de requête qui est utilisé dans Log Analytics, consultez [Requêtes de journal Azure Monitor](/azure/data-explorer/kusto/query/).
 
 ### <a name="use-your-storage-account"></a>Utiliser votre compte de stockage
 
@@ -128,11 +131,11 @@ Pour en savoir plus sur l’envoi d’informations de diagnostic à un compte de
 1. Pour consulter les journaux d’application, recherchez un hub d’événements appelé **insights-logs-applicationconsole**.
 1. Pour consulter les métriques des applications, recherchez un hub d’événements appelé **insights-metrics-pt1m**.
 
-Pour en savoir plus sur l’envoi d’informations de diagnostic à un hub d’événements, consultez [Diffusion des données de Diagnostics Azure dans le chemin réactif à l’aide d’Event Hubs](https://docs.microsoft.com/azure/azure-monitor/platform/diagnostics-extension-stream-event-hubs).
+Pour en savoir plus sur l’envoi d’informations de diagnostic à un hub d’événements, consultez [Diffusion des données de Diagnostics Azure dans le chemin réactif à l’aide d’Event Hubs](../azure-monitor/platform/diagnostics-extension-stream-event-hubs.md).
 
 ## <a name="analyze-the-logs"></a>Analyser les journaux
 
-Azure Log Analytics s’exécute avec un moteur Kusto afin que vous puissiez interroger vos journaux à des fins d’analyse. Pour obtenir une présentation rapide de l’interrogation des journaux à l’aide de Kusto, passez en revue le [tutoriel sur Log Analytics](../azure-monitor/log-query/get-started-portal.md).
+Azure Log Analytics s’exécute avec un moteur Kusto afin que vous puissiez interroger vos journaux à des fins d’analyse. Pour obtenir une présentation rapide de l’interrogation des journaux à l’aide de Kusto, passez en revue le [tutoriel sur Log Analytics](../azure-monitor/log-query/log-analytics-tutorial.md).
 
 Les journaux d’application fournissent des informations critiques et des journaux d’activité détaillés sur l’intégrité de votre application, ses performances, et bien plus encore. Les sections suivantes présentent quelques requêtes simples pour vous aider à comprendre les états actuels et passés de votre application.
 
@@ -174,3 +177,35 @@ AppPlatformLogsforSpring
 ### <a name="learn-more-about-querying-application-logs"></a>En savoir plus sur l’interrogation des journaux d’application
 
 Azure Monitor fournit une prise en charge étendue de l’interrogation des journaux d’application à l’aide de Log Analytics. Pour plus d’informations sur ce service, consultez [Bien démarrer avec les requêtes de journal dans Azure Monitor](../azure-monitor/log-query/get-started-queries.md). Pour plus d’informations sur la création de requêtes pour analyser vos journaux d’application, consultez [Vue d’ensemble des requêtes de journal dans Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
+
+## <a name="frequently-asked-questions-faq"></a>Forum Aux Questions (FAQ)
+
+### <a name="how-to-convert-multi-line-java-stack-traces-into-a-single-line"></a>Comment convertir des traces de pile Java à plusieurs lignes en une ligne unique ?
+
+Il existe une solution de contournement pour convertir les traces de pile à plusieurs lignes en une ligne unique. Vous pouvez modifier la sortie du journal Java pour remettre en forme les messages de trace de pile, en remplaçant les caractères de saut de ligne par un jeton. Si vous utilisez la bibliothèque Logback Java, vous pouvez remettre en forme les messages de trace de pile en ajoutant `%replace(%ex){'[\r\n]+', '\\n'}%nopex` comme suit :
+
+```xml
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                level: %level, message: "%logger{36}: %msg", exceptions: "%replace(%ex){'[\r\n]+', '\\n'}%nopex"%n
+            </pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
+```
+Vous pouvez ensuite remplacer le jeton par des caractères de saut de ligne dans Log Analytics comme indiqué ci-dessous :
+
+```sql
+AppPlatformLogsforSpring
+| extend Log = array_strcat(split(Log, '\\n'), '\n')
+```
+Vous pourrez peut-être appliquer la même stratégie pour d’autres bibliothèques de journaux Java.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+* [Démarrage rapide : Déployer votre première application Azure Spring Cloud](spring-cloud-quickstart.md)

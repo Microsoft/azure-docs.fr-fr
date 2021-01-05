@@ -7,12 +7,13 @@ ms.service: static-web-apps
 ms.topic: conceptual
 ms.date: 05/08/2020
 ms.author: cshoe
-ms.openlocfilehash: 273ab5c20cf41b7305d72f1bfef5deeeb046c49a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-js
+ms.openlocfilehash: d5a1d810c357aa83b8069023b00d76352da124df
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83595138"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844793"
 ---
 # <a name="accessing-user-information-in-azure-static-web-apps-preview"></a>Accès aux informations utilisateur dans Azure Static Web Apps - Préversion
 
@@ -63,6 +64,10 @@ console.log(getUserInfo());
 
 ## <a name="api-functions"></a>Fonctions de l’API
 
+Les fonctions d’API disponibles dans Static Web Apps via le serveur principal Azure Functions ont accès aux mêmes informations utilisateur qu’une application cliente. Si l’API reçoit des informations identifiables par l’utilisateur, elle ne vérifie pas si l’utilisateur est authentifié ou s’il correspond à un rôle requis. Les règles de contrôle d’accès sont définies dans le fichier [`routes.json`](routes.md).
+
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
 Les données du principal du client sont transmises aux fonctions API dans l’en-tête de demande `x-ms-client-principal`. Les données du principal du client sont envoyées en tant que chaîne codée en [base64](https://www.wikipedia.org/wiki/Base64)contenant un objet JSON sérialisé.
 
 L’exemple de fonction suivant montre comment lire et retourner des informations utilisateur.
@@ -91,8 +96,54 @@ async function getUser() {
   return clientPrincipal;
 }
 
-console.log(getUser());
+console.log(await getUser());
 ```
+
+# <a name="c"></a>[C#](#tab/csharp)
+
+Dans une fonction C#, les informations utilisateur sont disponibles dans l’en-tête `x-ms-client-principal` qui peut être désérialisé dans un objet `ClaimsPrincipal` ou dans votre propre type personnalisé. Le code suivant montre comment décompresser l’en-tête dans un type intermédiaire, `ClientPrincipal`, qui est ensuite converti en instance `ClaimsPrincipal`.
+
+```csharp
+  public static class StaticWebAppsAuth
+  {
+    private class ClientPrincipal
+    {
+        public string IdentityProvider { get; set; }
+        public string UserId { get; set; }
+        public string UserDetails { get; set; }
+        public IEnumerable<string> UserRoles { get; set; }
+    }
+
+    public static ClaimsPrincipal Parse(HttpRequest req)
+    {
+        var principal = new ClientPrincipal();
+
+        if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
+        {
+            var data = header[0];
+            var decoded = Convert.FromBase64String(data);
+            var json = Encoding.ASCII.GetString(decoded);
+            principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+        principal.UserRoles = principal.UserRoles?.Except(new string[] { "anonymous" }, StringComparer.CurrentCultureIgnoreCase);
+
+        if (!principal.UserRoles?.Any() ?? true)
+        {
+            return new ClaimsPrincipal();
+        }
+
+        var identity = new ClaimsIdentity(principal.IdentityProvider);
+        identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, principal.UserId));
+        identity.AddClaim(new Claim(ClaimTypes.Name, principal.UserDetails));
+        identity.AddClaims(principal.UserRoles.Select(r => new Claim(ClaimTypes.Role, r)));
+
+        return new ClaimsPrincipal(identity);
+    }
+  }
+```
+
+---
 
 <sup>1</sup> L’API [fetch](https://caniuse.com/#feat=fetch) et l’opérateur [await](https://caniuse.com/#feat=mdn-javascript_operators_await) ne sont pas pris en charge dans Internet Explorer.
 

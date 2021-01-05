@@ -7,12 +7,12 @@ author: NumberByColors
 ms.author: daviste
 ms.date: 09/19/2018
 ms.reviewer: mbullwin
-ms.openlocfilehash: 06bdedf1dac92a2010718ffd3eb5c6e43bb51e6c
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: bf8ea45f37e421d70a68c4a6e138f5203e92d78f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83798125"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87045781"
 ---
 # <a name="monitor-resource-groups-with-azure-monitor-preview"></a>Surveiller les groupes de ressources avec Azure Monitor (préversion)
 
@@ -46,10 +46,10 @@ La page d’informations sur le groupe de ressources fournit d’autres outils d
 
    |         |          |
    | ---------------- |:-----|
-   | [**Alertes**](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)      |  Affichez, créez et gérez vos alertes. |
-   | [**Métriques**](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-metrics) | Visualisez et explorez vos données basées sur des métriques.    |
-   | [**Journaux d’activité**](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-activity-logs) | Événements au niveau abonnement qui se sont produits dans Azure.  |
-   | [**Mise en correspondance d’applications**](https://docs.microsoft.com/azure/application-insights/app-insights-app-map) | Accédez à la topologie de votre application distribuée pour identifier des goulots d’étranglement ou des points de défaillance en lien avec les performances. |
+   | [**Alertes**](../platform/alerts-overview.md)      |  Affichez, créez et gérez vos alertes. |
+   | [**Métriques**](../platform/data-platform.md) | Visualisez et explorez vos données basées sur des métriques.    |
+   | [**Journaux d’activité**](../platform/platform-logs-overview.md) | Événements au niveau abonnement qui se sont produits dans Azure.  |
+   | [**Mise en correspondance d’applications**](../app/app-map.md) | Accédez à la topologie de votre application distribuée pour identifier des goulots d’étranglement ou des points de défaillance en lien avec les performances. |
 
 ## <a name="failures-and-performance"></a>Échecs et performances
 
@@ -117,6 +117,6 @@ Azure Monitor pour les groupes de ressources s’appuie sur le système Azure Mo
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Classeurs Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/workbooks-overview)
-- [Azure Resource Health](https://docs.microsoft.com/azure/service-health/resource-health-overview)
-- [Alertes Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)
+- [Classeurs Azure Monitor](../platform/workbooks-overview.md)
+- [Azure Resource Health](../../service-health/resource-health-overview.md)
+- [Alertes Azure Monitor](../platform/alerts-overview.md)

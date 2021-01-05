@@ -1,20 +1,20 @@
 ---
 title: 'Démarrage rapide : Diriger le trafic web à l’aide de PowerShell'
 titleSuffix: Azure Application Gateway
-description: Découvrez comment utiliser Azure PowerShell pour créer une passerelle d’application Azure qui dirige le trafic web vers les machines virtuelles d’un pool backend.
+description: Dans ce guide de démarrage rapide, découvrez comment utiliser Azure PowerShell pour créer une passerelle d’application Azure qui dirige le trafic web vers les machines virtuelles d’un pool de back-ends.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: quickstart
-ms.date: 04/15/2020
+ms.date: 08/27/2020
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: 3e1ca14d967b0e88ea7eb559fd9962a3824ff9b0
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 3f64086ed97594416b5964cf648c857c2f271480
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81406223"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91331095"
 ---
 # <a name="quickstart-direct-web-traffic-with-azure-application-gateway-using-azure-powershell"></a>Démarrage rapide : Diriger le trafic web avec Azure Application Gateway à l’aide d’Azure PowerShell
 
@@ -24,14 +24,14 @@ La passerelle d’application dirige le trafic web des applications vers des res
 
 Vous pouvez également suivre ce guide de démarrage rapide en utilisant [Azure CLI](quick-create-cli.md) ou le [portail Azure](quick-create-portal.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
-
 ## <a name="prerequisites"></a>Prérequis
 
 - Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 - [Azure PowerShell version 1.0.0 ou ultérieure](/powershell/azure/install-az-ps) (si vous exécutez Azure PowerShell localement).
+
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+
+[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="connect-to-azure"></a>Connexion à Azure
 
@@ -53,6 +53,8 @@ Azure a besoin d’un réseau virtuel pour communiquer avec les différentes res
 1. Créez les configurations de sous-réseau en utilisant `New-AzVirtualNetworkSubnetConfig`.
 2. Créez le réseau virtuel à l’aide des configurations de sous-réseau en utilisant `New-AzVirtualNetwork`. 
 3. Créez l’adresse IP publique en utilisant `New-AzPublicIpAddress`. 
+> [!NOTE]
+> Les [stratégies de points de terminaison de service de réseau virtuel](../virtual-network/virtual-network-service-endpoint-policies-overview.md) ne sont pas prises en charge dans un sous-réseau Application Gateway.
 
 ```azurepowershell-interactive
 $agSubnetConfig = New-AzVirtualNetworkSubnetConfig `

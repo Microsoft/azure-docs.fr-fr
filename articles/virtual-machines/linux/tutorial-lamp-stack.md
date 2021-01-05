@@ -15,16 +15,16 @@ ms.devlang: azurecli
 ms.topic: tutorial
 ms.date: 01/30/2019
 ms.author: cynthn
-ms.openlocfilehash: 2a636ae5609d9cb5c81782af5a419a27d7880106
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d0d86e1a9c40eb6860508cf136ab9d466cc28ecd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80154370"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88225901"
 ---
 # <a name="tutorial-install-a-lamp-web-server-on-a-linux-virtual-machine-in-azure"></a>Tutoriel : Installer un serveur web LAMP sur une machine virtuelle Linux dans Azure
 
-Cet article vous guide à travers le déploiement d’un serveur web Apache, de celui de MySQL et de PHP (la pile LAMP) sur une machine virtuelle Ubuntu dans Azure. Si vous préférez le serveur web NGINX, consultez le didacticiel [Pile LEMP](tutorial-lemp-stack.md). Pour voir le serveur LAMP fonctionner, vous pouvez éventuellement installer et configurer un site WordPress. Ce didacticiel vous montre comment effectuer les opérations suivantes :
+Cet article vous guide à travers le déploiement d’un serveur web Apache, de celui de MySQL et de PHP (la pile LAMP) sur une machine virtuelle Ubuntu dans Azure. Pour voir le serveur LAMP fonctionner, vous pouvez éventuellement installer et configurer un site WordPress. Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Créer une machine virtuelle Ubuntu (la lettre « L » dans la pile LAMP)
@@ -35,7 +35,7 @@ Cet article vous guide à travers le déploiement d’un serveur web Apache, de 
 
 Ce programme d’installation est destiné aux tests rapides ou à la preuve de concept. Pour plus d’informations sur la pile LAMP, notamment des recommandations relatives à un environnement de production, consultez la [Documentation Ubuntu](https://help.ubuntu.com/community/ApacheMySQLPHP).
 
-Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
+Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](../../cloud-shell/overview.md), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce didacticiel nécessite que vous exécutiez Azure CLI version 2.0.30 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
 
@@ -105,7 +105,7 @@ Si vous voulez poursuivre le test, créez une page d’informations PHP rapide p
 sudo sh -c 'echo "<?php phpinfo(); ?>" > /var/www/html/info.php'
 ```
 
-À présent, vous pouvez vérifier la page d’informations PHP que vous avez créée. Ouvrez un navigateur web et accédez à `http://yourPublicIPAddress/info.php`. Remplacez l’adresse IP publique de votre machine virtuelle. Elle doit ressembler à cette image.
+À présent, vous pouvez vérifier la page d’informations PHP que vous avez créée. Ouvrez un navigateur et accédez à `http://yourPublicIPAddress/info.php`. Remplacez l’adresse IP publique de votre machine virtuelle. Elle doit ressembler à cette image.
 
 ![Page d’informations PHP][2]
 

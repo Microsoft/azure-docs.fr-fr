@@ -1,19 +1,20 @@
 ---
 title: Relocalisation grossière
 description: En savoir plus sur l’utilisation de la relocalisation grossière pour trouver des ancres près de chez vous.
-author: bucurb
-manager: dacoghl
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: bobuc
-ms.date: 09/18/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: conceptual
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 4c1604eaad1ebdedf6a360a647fe5b9f95c829c6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4a65b2ca4ba9f1912adeaf60df123bcd3c8833bd
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76844392"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95496900"
 ---
 # <a name="coarse-relocalization"></a>Relocalisation grossière
 
@@ -120,13 +121,11 @@ cloudSpatialAnchorSession.LocationProvider(sensorProvider);
 
 Ensuite, vous devez déterminer les capteurs que vous souhaitez utiliser pour la relocalisation grossière. Cette décision est propre à l’application que vous développez, mais les recommandations du tableau suivant doivent vous offrir un bon point de départ :
 
-
-|             | Intérieur | Extérieur |
-|-------------|---------|----------|
-| GPS         | Off | Il en va |
-| WiFi        | Il en va | On (facultatif) |
-| Balises BLE | On (facultatif avec des mises en garde, voir ci-dessous) | Off |
-
+|                 | Intérieur | Extérieur |
+|-----------------|---------|----------|
+| **GPS**         | Off | Il en va |
+| **WiFi**        | Il en va | On (facultatif) |
+| **Balises BLE** | On (facultatif avec des mises en garde, voir ci-dessous) | Off |
 
 ### <a name="enabling-gps"></a>Activation du GPS
 
@@ -658,12 +657,11 @@ Le tableau ci-dessous estime l’espace de recherche attendu pour chaque type de
 
 Le tableau suivant récapitule les données de capteur collectées sur chacune des plates-formes prises en charge, ainsi que tous les avertissements spécifiques de la plateforme :
 
-
-|             | HoloLens | Android | iOS |
-|-------------|----------|---------|-----|
-| GPS         | N/A | Prise en charge via les API [LocationManager][3] (GPS et réseau) | Pris en charge via les API [CLLocationManager][4] |
-| WiFi        | Prise en charge à un débit d’environ une analyse toutes les 3 secondes | Pris en charge. À partir du niveau d’API 28, les analyses Wi-Fi sont limitées à 4 appels toutes les 2 minutes. À partir d’Android 10, la limitation peut être désactivée dans le menu des paramètres du développeur. Pour plus d’informations, consultez la [documentation Android][5]. | Sans objet - Aucune API publique |
-| Balises BLE | Limité à [Eddystone][1] et [iBeacon][2] | Limité à [Eddystone][1] et [iBeacon][2] | Limité à [Eddystone][1] et [iBeacon][2] |
+|                 | HoloLens | Android | iOS |
+|-----------------|----------|---------|-----|
+| **GPS**         | N/A | Prise en charge via les API [LocationManager][3] (GPS et réseau) | Pris en charge via les API [CLLocationManager][4] |
+| **WiFi**        | Prise en charge à un débit d’environ une analyse toutes les 3 secondes | Pris en charge. À partir du niveau d’API 28, les analyses Wi-Fi sont limitées à 4 appels toutes les 2 minutes. À partir d’Android 10, la limitation peut être désactivée dans le menu des paramètres du développeur. Pour plus d’informations, consultez la [documentation Android][5]. | Sans objet - Aucune API publique |
+| **Balises BLE** | Limité à [Eddystone][1] et [iBeacon][2] | Limité à [Eddystone][1] et [iBeacon][2] | Limité à [Eddystone][1] et [iBeacon][2] |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

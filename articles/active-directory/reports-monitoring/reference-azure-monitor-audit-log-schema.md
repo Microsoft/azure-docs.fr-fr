@@ -17,12 +17,12 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d9f58b213e50a021651f35112a48d8f74ae59571
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc7a5e2e45cd3d76c0d8af612291ecaf9893b5b5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68987954"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89231093"
 ---
 # <a name="interpret-the-azure-ad-audit-logs-schema-in-azure-monitor-preview"></a>Interpréter le schéma des journaux d’audit Azure Active Directory dans Azure Monitor (préversion)
 
@@ -179,5 +179,5 @@ Cet article décrit le schéma de journal d’audit Azure Active Directory (Azur
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Interpréter le schéma des journaux d’activité de connexion dans Azure Monitor](reference-azure-monitor-sign-ins-log-schema.md)
-* [Journaux de diagnostics Azure](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs)
+* [Journaux de diagnostics Azure](../../azure-monitor/platform/platform-logs-overview.md)
 * [Questions fréquentes et problèmes connus](concept-activity-logs-azure-monitor.md#frequently-asked-questions)

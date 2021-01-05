@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/22/2019
-ms.openlocfilehash: 0392a05df485b45b1244f4542ed55af1837dca3d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1f0a0dff4eb8a1aad0cd5e142959a636827a541
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477508"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90898488"
 ---
 # <a name="partition-and-sample-module"></a>Module Partition et échantillon
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (préversion).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez le module Partition et échantillon pour effectuer un échantillonnage sur un jeu de données ou pour créer des partitions à partir de votre jeu de données.
 

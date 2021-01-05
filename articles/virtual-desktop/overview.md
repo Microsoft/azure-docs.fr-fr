@@ -1,28 +1,26 @@
 ---
 title: Qu’est-ce que Windows Virtual Desktop ? - Azure
 description: Présentation de Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: overview
-ms.date: 04/10/2020
+ms.date: 09/14/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 927696d029bf1b8742dc0001e03799322f368191
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 0fe9b3ddaee41802ced30e1898b46cefa2566771
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261718"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95023188"
 ---
-# <a name="what-is-windows-virtual-desktop"></a>Qu’est-ce que Windows Virtual Desktop ? 
+# <a name="what-is-windows-virtual-desktop"></a>Qu’est-ce que Windows Virtual Desktop ?
 
 Windows Virtual Desktop est un service de virtualisation de bureau et d’application qui s’exécute dans le cloud.
 
 Voici ce que vous pouvez faire quand vous exécutez Windows Virtual Desktop sur Azure :
 
 * Configurer un déploiement Windows 10 multisession qui délivre une version complète de Windows 10 avec extensibilité
-* Virtualiser Office 365 ProPlus et l’optimiser pour une exécution dans des scénarios virtuels multiutilisateurs
+* Virtualisez les applications Microsoft 365 pour l’entreprise et optimisez-les pour qu’elles s’exécutent dans des scénarios virtuels multi-utilisateurs.
 * Fournir des bureaux virtuels Windows 7 avec Mises à jour de sécurité étendues gratuites
 * Tirer parti de vos applications et bureaux Windows Server et Services Bureau à distance existants sur n’importe quel ordinateur
 * Virtualiser des bureaux et des applications
@@ -48,7 +46,7 @@ Avec Windows Virtual Desktop, vous pouvez configurer un environnement extensible
 
 Vous pouvez déployer et gérer des bureaux virtuels :
 
-* Utilisez les interfaces REST et PowerShell Windows Virtual Desktop pour configurer les pools hôtes, créer des groupes d’applications, affecter des utilisateurs et publier des ressources.
+* Utilisez le portail Azure, les interfaces Windows Virtual Desktop PowerShell et REST pour configurer les pools hôtes, créer des groupes d’applications, affecter des utilisateurs et publier des ressources.
 * Publiez des applications distantes individuelles ou des applications de bureau complètes à partir d’un pool hôte unique, créez des groupes d’applications individuels pour différents groupes d’utilisateurs, ou affectez des utilisateurs à plusieurs groupes d’applications afin de réduire le nombre d’images.
 * Lors de la gestion de votre environnement, utilisez l’accès délégué intégré pour attribuer des rôles et recueillir des données de diagnostics afin de comprendre différentes erreurs dues aux utilisateurs ou à la configuration.
 * Utilisez le nouveau service Diagnostics pour résoudre les problèmes.
@@ -63,107 +61,63 @@ Vous pouvez également affecter et connecter des utilisateurs à vos bureaux vir
 
 Il existe quelques conditions à remplir avant de configurer Windows Virtual Desktop et de connecter vos utilisateurs à leurs bureaux et applications Windows.
 
-Nous prévoyons d’ajouter la prise en charge des systèmes d’exploitation suivants. Par conséquent, vérifiez que vous disposez des [licences appropriées](https://azure.microsoft.com/pricing/details/virtual-desktop/) pour vos utilisateurs, en fonction du poste de travail et des applications que vous envisagez de déployer :
+Nous prenons en charge les systèmes d’exploitation suivants ; ainsi, vérifiez que vous disposez des [licences appropriées](https://azure.microsoft.com/pricing/details/virtual-desktop/) pour vos utilisateurs, en fonction de l’appareil de bureau et des applications que vous envisagez de déployer :
 
 |Système d''exploitation|Licence obligatoire|
 |---|---|
-|Windows 10 Entreprise multisession ou Windows 10 Entreprise|Microsoft 365 E3, E5, A3, A5, F1, Business<br>Windows E3, E5, A3, A5|
-|Windows 7 Entreprise |Microsoft 365 E3, E5, A3, A5, F1, Business<br>Windows E3, E5, A3, A5|
+|Windows 10 Entreprise multisession ou Windows 10 Entreprise|Microsoft 365 E3, E5, A3, A5, F3, Business Premium<br>Windows E3, E5, A3, A5|
+|Windows 7 Entreprise |Microsoft 365 E3, E5, A3, A5, F3, Business Premium<br>Windows E3, E5, A3, A5|
 |Windows Server 2012 R2, 2016, 2019|Licence d’Accès Client (CAL) des services Bureau à distance avec Software Assurance|
 
 Votre infrastructure doit contenir les éléments suivants pour prendre en charge Windows Virtual Desktop :
 
-* Un annuaire [Azure Active Directory](/azure/active-directory/)
-* Un annuaire Windows Server Active Directory synchronisé avec Azure Active Directory. Pour le configurer, utilisez l’un des éléments suivants :
-  * Azure AD Connect (pour les organisations hybrides)
-  * Services de domaine Azure AD (pour les organisations cloud ou hybrides)
-* Un abonnement Azure contenant un réseau virtuel qui contient ou est connecté à l’annuaire Windows Server Active Directory
-  
+* Une instance [Azure Active Directory](../active-directory/index.yml).
+* Un annuaire Windows Server Active Directory synchronisé avec Azure Active Directory. Vous pouvez configurer cela à l’aide d’Azure AD Connect (pour les organisations hybrides) ou d’Azure AD Domain Services (pour les organisations hybrides ou cloud).
+  * Un domaine Windows Server AD synchronisé avec Azure Active Directory. L’utilisateur provient de Windows Server AD et la machine virtuelle Windows Virtual Desktop est jointe au domaine Windows Server AD.
+  * Un domaine Windows Server AD synchronisé avec Azure Active Directory. L’utilisateur provient de Windows Server AD et la machine virtuelle Windows Virtual Desktop est jointe au domaine Azure AD Domain Services.
+  * Un domaine Azure AD Domain Services. L’utilisateur provient d’Azure Active Directory et la machine virtuelle Windows Virtual Desktop est jointe au domaine Azure AD Domain Services.
+* Un abonnement Azure, apparenté au même locataire Azure AD, comprenant un réseau virtuel qui contient l’instance Windows Server Active Directory ou Azure AD DS, ou qui y est connecté.
+
+Conditions utilisateur nécessaires pour se connecter à Windows Virtual Desktop :
+
+* L’utilisateur doit provenir de la même instance Active Directory que celle qui est connectée à Azure AD. Windows Virtual Desktop ne prend pas en charge les comptes B2B ni MSA.
+* L’UPN que vous utilisez pour vous abonner à Windows Virtual Desktop doit se trouver dans le domaine Active Directory auquel la machine virtuelle est jointe.
+
 Les machines virtuelles Azure que vous créez pour Windows Virtual Desktop doivent :
 
-* être [standard jointes à un domaine](../active-directory-domain-services/active-directory-ds-comparison.md) ou [hybrides jointes à AD](../active-directory/devices/hybrid-azuread-join-plan.md). Les machines virtuelles ne peuvent pas être jointes à Azure AD.
+* être [standard jointes à un domaine](../active-directory-domain-services/compare-identity-solutions.md) ou [hybrides jointes à AD](../active-directory/devices/hybrid-azuread-join-plan.md). Les machines virtuelles ne peuvent pas être jointes à Azure AD.
 * exécuter l’une des images de [système d’exploitation prises en charge](#supported-virtual-machine-os-images) suivantes.
 
 >[!NOTE]
 >Si vous avez besoin d’un abonnement Azure, vous pouvez demander un [essai gratuit d’un mois](https://azure.microsoft.com/free/). Si vous utilisez l’essai gratuit d’Azure, vous devez utiliser Azure AD Domain Services pour synchroniser votre annuaire Windows Server Active Directory avec Azure Active Directory.
 
-Les machines virtuelles Azure que vous créez pour Windows Virtual Desktop doivent avoir accès aux URL suivantes :
-
-|Adresse|Port TCP sortant|Objectif|Balise du service|
-|---|---|---|---|
-|*.wvd.microsoft.com|443|Trafic de service|WindowsVirtualDesktop|
-|mrsglobalsteus2prod.blob.core.windows.net|443|Agent et mises à jour de pile SXS|AzureCloud|
-|*.core.windows.net|443|Trafic de l’agent|AzureCloud|
-|*.servicebus.windows.net|443|Trafic de l’agent|AzureCloud|
-|prod.warmpath.msftcloudes.com|443|Trafic de l’agent|AzureCloud|
-|catalogartifact.azureedge.net|443|Place de marché Azure|AzureCloud|
-|kms.core.windows.net|1688|Activation de Windows|Internet|
-
->[!IMPORTANT]
->Dans la plupart des cas, nous vous recommandons d’utiliser les étiquettes de service à la place des URL pour éviter tout problème lié aux services. Il est essentiel de débloquer ces URL pour un déploiement Windows Virtual Desktop fiable. Il n’est pas possible de bloquer l’accès à ces URL, car cela affecterait le fonctionnement du service. Ces URL correspondent seulement aux sites et aux ressources Windows Virtual Desktop, et n’incluent pas les URL d’autres services comme Azure Active Directory.
-
-Le tableau suivant liste les URL facultatives auxquelles vos machines virtuelles Azure peuvent accéder :
-
-|Adresse|Port TCP sortant|Objectif|Étiquette du service|
-|---|---|---|---|
-|*.microsoftonline.com|443|Authentification auprès des services en ligne MS|None|
-|*.events.data.microsoft.com|443|Service de télémétrie|None|
-|www.msftconnecttest.com|443|Détecte si l’interface est connectée à internet|None|
-|*.prod.do.dsp.mp.microsoft.com|443|Windows Update|None|
-|login.windows.net|443|Connexion aux services en ligne MS, Office 365|None|
-|*.sfx.ms|443|Mises à jour pour le logiciel client OneDrive|None|
-|*.digicert.com|443|Vérification de la révocation de certificat|None|
-
-
->[!NOTE]
->Actuellement, Windows Virtual Desktop ne dispose pas d’une liste de plages d’adresses IP que vous pouvez mettre en liste verte pour autoriser le trafic réseau. Pour le moment, seules certaines URL spécifiques peuvent être ajoutées à la liste verte.
->
->Pour obtenir la liste des URL liées à Office, notamment les URL liées à Azure Active Directory obligatoires, consultez [URL et plages d’adresses IP Office 365](/office365/enterprise/urls-and-ip-address-ranges).
->
->Vous devez utiliser le caractère générique (*) pour les URL impliquant du trafic de service. Si vous préférez ne pas utiliser * pour le trafic lié à l’agent, voici comment trouver les URL sans caractères génériques :
->
->1. Inscrivez vos machines virtuelles dans le pool d’hôtes Windows Virtual Desktop.
->2. Ouvrez **Observateur d’événements** et accédez à **Journaux Windows** > **Application** > **WVD-Agent**, puis recherchez l’ID d’événement 3702.
->3. Placez en liste verte les URL que vous trouvez sous l’ID d’événement 3702. Les URL sous l’ID d’événement 3702 sont spécifiques à la région. Vous devez répéter le processus de mise en liste verte avec les URL appropriées pour chaque région où vous voulez déployer vos machines virtuelles.
+Si vous souhaitez obtenir la liste des URL que vous devez débloquer pour que votre déploiement Windows Virtual Desktop fonctionne comme prévu, consultez la [liste des URL sécurisées](safe-url-list.md).
 
 Windows Virtual Desktop comprend les bureaux et applications Windows que vous fournissez aux utilisateurs  ainsi que la solution de gestion, qui est hébergée en tant que service sur Azure par Microsoft. Les bureaux et applications peuvent être déployés sur des machines virtuelles dans n’importe quelle région Azure, et la solution de gestion et les données pour ces machines virtuelles résident aux États-Unis. Cela peut entraîner le transfert des données vers les États-Unis.
 
 Pour bénéficier de performances optimales, vérifiez que votre réseau remplit les conditions suivantes :
 
-* La latence aller-retour entre le réseau du client et la région Azure où les pools hôtes ont été déployés doit être inférieure à 150 ms
+* La latence aller-retour entre le réseau du client et la région Azure où les pools hôtes ont été déployés doit être inférieure à 150 ms Utilisez l’[estimateur d’expérience](https://azure.microsoft.com/services/virtual-desktop/assessment) pour afficher l’intégrité de votre connexion et votre région Azure recommandée.
 * Le trafic réseau peut circuler au-delà des frontières du pays ou de la région lorsque des machines virtuelles qui hébergent des bureaux et des applications se connectent au service de gestion
 * Pour optimiser les performances du réseau, nous vous recommandons de colocaliser les machines virtuelles de l’hôte de session dans la même région Azure que le service de gestion
+
+Vous pouvez consulter une configuration architecturale classique de Windows Virtual Desktop pour l’entreprise dans notre [documentation d’architecture](/azure/architecture/example-scenario/wvd/windows-virtual-desktop).
 
 ## <a name="supported-remote-desktop-clients"></a>Clients Bureau à distance pris en charge
 
 Les clients Bureau à distance suivants prennent en charge Windows Virtual Desktop :
 
-* [Windows Desktop](connect-windows-7-and-10.md)
+* [Windows Desktop](connect-windows-7-10.md)
 * [Web](connect-web.md)
 * [macOS](connect-macos.md)
 * [iOS](connect-ios.md)
-* [Android (préversion)](connect-android.md)
+* [Android](connect-android.md)
+* Client Microsoft Store
 
 > [!IMPORTANT]
 > Windows Virtual Desktop ne prend pas en charge le client RADC (Connexions RemoteApp et Bureau à distance) ni le client MSTSC (Connexion Bureau à distance).
 
-> [!IMPORTANT]
-> Windows Virtual Desktop ne prend pas actuellement en charge le client Bureau à distance à partir du Microsoft Store. La prise en charge de ce client sera ajoutée dans une version ultérieure.
-
-Les clients Bureau à distance doivent avoir accès aux URL suivantes :
-
-|Adresse|Port TCP sortant|Objectif|Client(s)|
-|---|---|---|---|
-|*.wvd.microsoft.com|443|Trafic de service|Tous|
-|*.servicebus.windows.net|443|Résolution des problèmes de données|Tous|
-|go.microsoft.com|443|Microsoft FWLinks|Tous|
-|aka.ms|443|Réducteur d’URL Microsoft|Tous|
-|docs.microsoft.com|443|Documentation|Tous|
-|privacy.microsoft.com|443|Déclaration de confidentialité|Tous|
-|query.prod.cms.rt.microsoft.com|443|Mises à jour de client|Windows Desktop|
-
->[!IMPORTANT]
->L’ouverture de ces URL est essentielle pour une expérience client fiable. Il n’est pas possible de bloquer l’accès à ces URL, car cela affecterait le fonctionnement du service. Ces URL correspondent seulement aux sites et ressources du client, et n’incluent pas les URL d’autres services comme Azure Active Directory.
+Pour connaître les URL que vous devez débloquer pour utiliser les clients, consultez la [liste des URL sécurisées](safe-url-list.md).
 
 ## <a name="supported-virtual-machine-os-images"></a>Images de système d’exploitation de machine virtuelle prises en charge
 
@@ -178,22 +132,24 @@ Windows Virtual Desktop prend en charge les images de système d'exploitation x6
 
 Windows Virtual Desktop ne prend pas en charge les images de système d’exploitation x86 (32 bits), Windows 10 Entreprise N ou Windows 10 Entreprise KN. Windows 7 ne prend pas non plus en charge les solutions de profil VHD ou VHDX hébergées sur le stockage Azure managé en raison d’une limitation de la taille de secteur.
 
-Les options d’automatisation et de déploiement qui sont disponibles dépendent du système d’exploitation et de la version que vous choisissez, comme indiqué dans le tableau suivant : 
+Les options d’automatisation et de déploiement qui sont disponibles dépendent du système d’exploitation et de la version que vous choisissez, comme indiqué dans le tableau suivant :
 
-|Système d’exploitation|Galerie d’images Azure|Déploiement manuel d’une machine virtuelle|Intégration du modèle Azure Resource Manager|Provisionner des pools d’hôtes sur la Place de marché Azure|Mises à jour de l’agent Windows Virtual Desktop|
-|--------------------------------------|:------:|:------:|:------:|:------:|:------:|
-|Windows 10 multisession, version 1903|Oui|Oui|Oui|Oui|Automatique|
-|Windows 10 multisession, version 1809|Oui|Oui|Non|Non|Automatique|
-|Windows 10 Entreprise, version 1903|Oui|Oui|Oui|Oui|Automatique|
-|Windows 10 Entreprise, version 1809|Oui|Oui|Non|Non|Automatique|
-|Windows 7 Entreprise|Oui|Oui|Non|Non|Manuel|
-|Windows Server 2019|Oui|Oui|Non|Non|Automatique|
-|Windows Server 2016|Oui|Oui|Oui|Oui|Automatique|
-|Windows Server 2012 R2|Oui|Oui|Non|Non|Automatique|
+|Système d’exploitation|Galerie d’images Azure|Déploiement manuel d’une machine virtuelle|Intégration du modèle Azure Resource Manager|Provisionner des pools d’hôtes sur la Place de marché Azure|
+|--------------------------------------|:------:|:------:|:------:|:------:|
+|Windows 10 Entreprise (multisession), version 2004|Oui|Oui|Oui|Oui|
+|Windows 10 Entreprise (multisession), version 1909|Oui|Oui|Oui|Oui|
+|Windows 10 Entreprise (multisession), version 1903|Oui|Oui|Non|Non|
+|Windows 10 Entreprise (multisession), version 1809|Oui|Oui|Non|Non|
+|Windows 7 Entreprise|Oui|Oui|Non|Non|
+|Windows Server 2019|Oui|Oui|Non|Non|
+|Windows Server 2016|Oui|Oui|Oui|Oui|
+|Windows Server 2012 R2|Oui|Oui|Non|Non|
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour commencer, vous devez créer un locataire. Pour en savoir plus sur la façon de créer un locataire, passez au tutoriel de création de locataire.
+Si vous utilisez Windows Virtual Desktop (classique), vous pouvez consulter l’article [Créer un locataire dans Windows Virtual Desktop](./virtual-desktop-fall-2019/tenant-setup-azure-active-directory.md) pour vous familiariser avec notre tutoriel.
+
+Si vous utilisez Windows Virtual Desktop avec l’intégration Azure Resource Manager, vous devez créer un pool d’hôtes à la place. Pour commencer, consultez le tutoriel suivant.
 
 > [!div class="nextstepaction"]
-> [Créer un locataire dans Windows Virtual Desktop](tenant-setup-azure-active-directory.md)
+> [Créer un pool d’hôtes avec le portail Azure](create-host-pools-azure-marketplace.md)

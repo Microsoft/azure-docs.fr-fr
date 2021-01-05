@@ -9,13 +9,13 @@ ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 12/03/2019
-ms.author: angle
-ms.openlocfilehash: 3e7d8ee2b156a30b11cda79798a8af8a8ecf4f64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: shlo
+ms.openlocfilehash: 348277d42c543bc45cf98bfeaf7ea8313afe8f6f
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74776620"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95021981"
 ---
 # <a name="disclosure-design-patterns"></a>Modèles de conception de divulgation
 Maintenant que vous avez déterminé le [niveau de divulgation](concepts-disclosure-guidelines.md#disclosure-assessment) adéquat pour votre expérience de voix de synthèse, le moment est venu d’explorer les modèles de conception potentiels.
@@ -184,7 +184,7 @@ Tenez compte des différents modes d’interaction de votre expérience pour inc
 
 La divulgation peut être réalisée implicitement en définissant des attentes précises quant aux capacités de l’assistant numérique. Fournissez des exemples de commandes afin que les utilisateurs puissent apprendre à interagir avec l’assistant numérique et proposez une aide contextuelle pour en savoir plus sur la voix de synthèse dès les premières phases de l’expérience.
 
-![Signaux visuels et commentaires](media/responsible-ai/disclosure-patterns/capability-disclosure.png)<br/>
+![Exemple de réponses par défaut à une conversation que vous pouvez rédiger.](media/responsible-ai/disclosure-patterns/capability-disclosure.png)<br/>
 
 ### <a name="conversational-transparency"></a>Transparence conversationnelle
 
@@ -241,17 +241,17 @@ Utilisez la divulgation comme une opportunité d’échec élégant.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 - [Instructions pour Microsoft Bot](https://www.microsoft.com/research/uploads/prod/2018/11/Bot_Guidelines_Nov_2018.pdf)
-- [Instructions pour la conception de Cortana](https://docs.microsoft.com/cortana/voice-commands/voicecommand-design-guidelines)
-- [Instructions pour la conception de Microsoft Windows UWP Speech](https://docs.microsoft.com/windows/uwp/design/input/speech-interactions)
-- [Instructions pour les commandes vocales de Microsoft Windows Mixed Reality](https://docs.microsoft.com/windows/mixed-reality/voice-design#top-things-users-should-know-about-speech-in-mixed-reality)
+- [Instructions pour la conception de Cortana](/cortana/voice-commands/voicecommand-design-guidelines)
+- [Instructions pour la conception de Microsoft Windows UWP Speech](/windows/uwp/design/input/speech-interactions)
+- [Instructions pour les commandes vocales de Microsoft Windows Mixed Reality](/windows/mixed-reality/voice-design#top-things-users-should-know-about-speech-in-mixed-reality)
 
 ## <a name="reference-docs"></a>Documents de référence
 
-* [Divulgation d’un talent vocal](https://aka.ms/disclosure-voice-talent)
+* [Divulgation d’un talent vocal](/legal/cognitive-services/speech-service/disclosure-voice-talent)
 * [Instructions pour le déploiement responsable de la technologie des voix de synthèse](concepts-guidelines-responsible-deployment-synthetic.md)
 * [Vue d’ensemble du contingentement](concepts-gating-overview.md)
 * [Comment divulguer](concepts-disclosure-guidelines.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Divulgation d’un talent vocal](https://aka.ms/disclosure-voice-talent)
+* [Divulgation d’un talent vocal](/legal/cognitive-services/speech-service/disclosure-voice-talent)

@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 10/11/2019
 ms.author: benoah
-ms.openlocfilehash: a529ac8b7ce16d3ee4463f1b4bc2e8007e5b79b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d80ffb575c6aa15695279584b58288cbc16be43
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73836763"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95024974"
 ---
 # <a name="guidelines-for-responsible-deployment-of-synthetic-voice-technology"></a>Instructions pour le déploiement responsable de la technologie des voix de synthèse
 Voici les instructions de conception générale de Microsoft pour l’utilisation de la technologie des voix de synthèse. Elles ont été développées dans des études menées par Microsoft auprès de voix professionnelles, de consommateurs, ainsi que de personnes ayant des troubles de la parole pour guider le développement responsable des voix de synthèse.
@@ -39,7 +39,7 @@ Dans certains scénarios transactionnels et ambigus (par exemple, un centre d’
 Lorsque vous travaillez avec des voix professionnelles (p. ex. des acteurs) pour créer des voix de synthèse, l’instruction suivante s’applique.
 
 ### <a name="obtain-meaningful-consent-from-voice-talent"></a>Obtenir le consentement explicite des voix professionnelles
-Les voix professionnelles s’attendent à avoir un contrôle sur leur police vocale (comment et où elle sera utilisée) et à être rémunérées chaque fois qu’elle est utilisée. Les propriétaires du système doivent donc obtenir une autorisation écrite explicite de la part des voix professionnelles et établir un contrat clair sur les cas d’utilisation, la durée d’utilisation, la rémunération, etc. Certaines voix professionnelles n’ont pas conscience des utilisations potentiellement malveillantes de la technologie ; les propriétaires du système doivent donc les informer à ce sujet. Pour plus d’informations sur le talent vocal et le consentement, lisez notre [Divulgation d’un talent vocal](https://aka.ms/disclosure-voice-talent).
+Les voix professionnelles s’attendent à avoir un contrôle sur leur police vocale (comment et où elle sera utilisée) et à être rémunérées chaque fois qu’elle est utilisée. Les propriétaires du système doivent donc obtenir une autorisation écrite explicite de la part des voix professionnelles et établir un contrat clair sur les cas d’utilisation, la durée d’utilisation, la rémunération, etc. Certaines voix professionnelles n’ont pas conscience des utilisations potentiellement malveillantes de la technologie ; les propriétaires du système doivent donc les informer à ce sujet. Pour plus d’informations sur le talent vocal et le consentement, lisez notre [Divulgation d’un talent vocal](/legal/cognitive-services/speech-service/disclosure-voice-talent).
 
 
 ## <a name="considerations-for-those-with-speech-disorders"></a>Considérations relatives aux personnes ayant des troubles de la parole
@@ -57,13 +57,13 @@ Les personnes ayant des troubles de la parole souhaitent modifier leur voix de s
 
 ## <a name="reference-docs"></a>Documents de référence
 
-* [Divulgation d’un talent vocal](https://aka.ms/disclosure-voice-talent)
+* [Divulgation d’un talent vocal](/legal/cognitive-services/speech-service/disclosure-voice-talent)
 * [Vue d’ensemble du contingentement](concepts-gating-overview.md)
 * [Comment divulguer](concepts-disclosure-guidelines.md)
 * [Modèles de conception de révélation](concepts-disclosure-patterns.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Divulgation d’un talent vocal](https://aka.ms/disclosure-voice-talent)
+* [Divulgation d’un talent vocal](/legal/cognitive-services/speech-service/disclosure-voice-talent)
 * [Comment divulguer](concepts-disclosure-guidelines.md)
 * [Modèles de conception de révélation](concepts-disclosure-patterns.md)

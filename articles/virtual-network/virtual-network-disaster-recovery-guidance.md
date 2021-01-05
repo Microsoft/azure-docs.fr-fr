@@ -16,10 +16,10 @@ ms.date: 05/16/2016
 ms.author: narayan
 ms.reviewer: aglick
 ms.openlocfilehash: 3f91d24bff0bec540ff0e7964f21c2f47c03638c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67876168"
 ---
 # <a name="virtual-network--business-continuity"></a>Réseau virtuel – Continuité des activités

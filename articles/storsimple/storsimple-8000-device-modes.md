@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.openlocfilehash: e55964beff48df6ce24d99c01975d39b662f1612
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c7b0ea489c1d70ab86d677aad666ea6728fa76b4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60576087"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017081"
 ---
 # <a name="change-the-device-mode-on-your-storsimple-device"></a>Changement du mode de votre appareil StorSimple
 

@@ -4,15 +4,15 @@ description: Dans cet article, vous découvrez comment déployer et configurer u
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.date: 4/10/2019
+ms.date: 12/03/2020
 ms.author: victorh
-ms.topic: conceptual
-ms.openlocfilehash: 7f48012ca1f97c2e28380d95da37863c4bc17f63
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: e39e27dbeb9394d19a9d7fd8791c147e11a56bdb
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73831837"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558881"
 ---
 # <a name="deploy-and-configure-azure-firewall-using-azure-powershell"></a>Déployer et configurer un pare-feu Azure à l’aide de Azure PowerShell
 
@@ -25,31 +25,31 @@ Vous pouvez contrôler l’accès réseau sortant à partir d’un sous-réseau 
 
 Le trafic réseau est soumis aux règles de pare-feu configurées lorsque vous routez votre trafic réseau vers le pare-feu en tant que sous-réseau de passerelle par défaut.
 
-Dans le cadre de cet article, vous créez un seul réseau virtuel simplifié avec trois sous-réseaux pour un déploiement facile. Pour les déploiements de production, un [modèle Hub and Spoke](https://docs.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke), dans lequel le pare-feu est dans son propre réseau virtuel, est recommandé. Les serveurs de la charge de travail se trouvent dans des réseaux virtuels appairés dans la même région avec un ou plusieurs sous-réseaux.
+Dans le cadre de cet article, vous créez un seul réseau virtuel simplifié avec trois sous-réseaux pour un déploiement facile. Pour les déploiements de production, un [modèle Hub and Spoke](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke), dans lequel le pare-feu est dans son propre réseau virtuel, est recommandé. Les serveurs de la charge de travail se trouvent dans des réseaux virtuels appairés dans la même région avec un ou plusieurs sous-réseaux.
 
 * **AzureFirewallSubnet** : le pare-feu est dans ce sous-réseau.
 * **Workload-SN** : le serveur de la charge de travail est dans ce sous-réseau. Le trafic réseau de ce sous-réseau traverse le pare-feu.
-* **Jump-SN** : le serveur « jump » est dans ce sous-réseau. Le serveur de rebond possède une adresse IP publique à laquelle vous pouvez vous connecter à l’aide du Bureau à distance. De là, vous pouvez alors vous connecter (à l’aide d’un autre Bureau à distance) au serveur de la charge de travail.
+* **AzureBastionSubnet** : sous-réseau utilisé pour Azure Bastion, qui est utilisé pour se connecter au serveur de charge de travail. Pour plus d’informations sur Azure Bastion, consultez [Présentation d’Azure Bastion](../bastion/bastion-overview.md).
 
-![Tutoriel relatif à l’infrastructure réseau](media/tutorial-firewall-rules-portal/Tutorial_network.png)
+![Tutoriel relatif à l’infrastructure réseau](media/deploy-ps/tutorial-network.png)
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer un environnement réseau de test
-> * Déployer un pare-feu
-> * Créer un itinéraire par défaut
-> * Configurer une règle d’application pour autoriser l’accès à www.google.com
-> * Configurer une règle de réseau pour autoriser l’accès aux serveurs DNS externes
-> * Tester le pare-feu
+
+* Configurer un environnement réseau de test
+* Déployer un pare-feu
+* Créer un itinéraire par défaut
+* Configurer une règle d’application pour autoriser l’accès à www.google.com
+* Configurer une règle de réseau pour autoriser l’accès aux serveurs DNS externes
+* Tester le pare-feu
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant le [portail Azure](tutorial-firewall-deploy-portal.md).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-Pour cette procédure, vous devez exécuter PowerShell localement. Les modules Azure PowerShell doivent être installés. Exécutez `Get-Module -ListAvailable Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps). Après avoir vérifié la version PowerShell, exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
+Pour cette procédure, vous devez exécuter PowerShell localement. Les modules Azure PowerShell doivent être installés. Exécutez `Get-Module -ListAvailable Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Après avoir vérifié la version PowerShell, exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
 
 ## <a name="set-up-the-network"></a>Configurer le réseau
 
@@ -63,7 +63,7 @@ Le groupe de ressources contient toutes les ressources nécessaires à ce déplo
 New-AzResourceGroup -Name Test-FW-RG -Location "East US"
 ```
 
-### <a name="create-a-vnet"></a>Créer un réseau virtuel
+### <a name="create-a-virtual-network-and-azure-bastion-host"></a>Créer un réseau virtuel et un hôte Azure Bastion
 
 Ce réseau virtuel comporte trois sous-réseaux :
 
@@ -71,48 +71,47 @@ Ce réseau virtuel comporte trois sous-réseaux :
 > La taille du sous-réseau AzureFirewallSubnet est /26. Pour plus d’informations sur la taille du sous-réseau, consultez le [FAQ Pare-feu Azure](firewall-faq.md#why-does-azure-firewall-need-a-26-subnet-size).
 
 ```azurepowershell
+$Bastionsub = New-AzVirtualNetworkSubnetConfig -Name AzureBastionSubnet -AddressPrefix 10.0.0.0/27
 $FWsub = New-AzVirtualNetworkSubnetConfig -Name AzureFirewallSubnet -AddressPrefix 10.0.1.0/26
 $Worksub = New-AzVirtualNetworkSubnetConfig -Name Workload-SN -AddressPrefix 10.0.2.0/24
-$Jumpsub = New-AzVirtualNetworkSubnetConfig -Name Jump-SN -AddressPrefix 10.0.3.0/24
 ```
 Créez maintenant le réseau virtuel :
 
 ```azurepowershell
 $testVnet = New-AzVirtualNetwork -Name Test-FW-VN -ResourceGroupName Test-FW-RG `
--Location "East US" -AddressPrefix 10.0.0.0/16 -Subnet $FWsub, $Worksub, $Jumpsub
+-Location "East US" -AddressPrefix 10.0.0.0/16 -Subnet $Bastionsub, $FWsub, $Worksub
 ```
-
-### <a name="create-virtual-machines"></a>Créer des machines virtuelles
-
-Maintenant créez les machines virtuelles de rebond et de charge de travail, et placez-les dans les sous-réseaux appropriés.
-Lorsque vous y êtes invité, saisissez le nom d’utilisateur et le mot de passe pour la machine virtuelle.
-
-Créez la machine virtuelle Srv-Jump.
+### <a name="create-public-ip-address-for-azure-bastion-host"></a>Créer une adresse IP publique pour l’hôte Azure Bastion
 
 ```azurepowershell
-New-AzVm `
-    -ResourceGroupName Test-FW-RG `
-    -Name "Srv-Jump" `
-    -Location "East US" `
-    -VirtualNetworkName Test-FW-VN `
-    -SubnetName Jump-SN `
-    -OpenPorts 3389 `
-    -Size "Standard_DS2"
+$publicip = New-AzPublicIpAddress -ResourceGroupName Test-FW-RG -Location "East US" `
+   -Name Bastion-pip -AllocationMethod static -Sku standard
 ```
 
-Créez une machine virtuelle de charge de travail sans adresse IP publique.
+### <a name="create-azure-bastion-host"></a>Créer un hôte Azure Bastion
+
+```azurepowershell
+New-AzBastion -ResourceGroupName Test-FW-RG -Name Bastion-01 -PublicIpAddress $publicip -VirtualNetwork $testVnet
+```
+### <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
+
+À présent, créez la machine virtuelle de charge de travail et placez-la dans le sous-réseau approprié.
+Lorsque vous y êtes invité, saisissez le nom d’utilisateur et le mot de passe pour la machine virtuelle.
+
+
+Créez un machine virtuelle de charge de travail.
 Lorsque vous y êtes invité, saisissez le nom d’utilisateur et le mot de passe pour la machine virtuelle.
 
 ```azurepowershell
 #Create the NIC
-$NIC = New-AzNetworkInterface -Name Srv-work -ResourceGroupName Test-FW-RG `
- -Location "East US" -Subnetid $testVnet.Subnets[1].Id 
+$wsn = Get-AzVirtualNetworkSubnetConfig -Name  Workload-SN -VirtualNetwork $testvnet
+$NIC01 = New-AzNetworkInterface -Name Srv-Work -ResourceGroupName Test-FW-RG -Location "East us" -Subnet $wsn
 
 #Define the virtual machine
 $VirtualMachine = New-AzVMConfig -VMName Srv-Work -VMSize "Standard_DS2"
 $VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName Srv-Work -ProvisionVMAgent -EnableAutoUpdate
-$VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $NIC.Id
-$VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2016-Datacenter' -Version latest
+$VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $NIC01.Id
+$VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2019-Datacenter' -Version latest
 
 #Create the virtual machine
 New-AzVM -ResourceGroupName Test-FW-RG -Location "East US" -VM $VirtualMachine -Verbose
@@ -127,7 +126,7 @@ Déployez maintenant le pare-feu dans le réseau virtuel.
 $FWpip = New-AzPublicIpAddress -Name "fw-pip" -ResourceGroupName Test-FW-RG `
   -Location "East US" -AllocationMethod Static -Sku Standard
 # Create the firewall
-$Azfw = New-AzFirewall -Name Test-FW01 -ResourceGroupName Test-FW-RG -Location "East US" -VirtualNetworkName Test-FW-VN -PublicIpName fw-pip
+$Azfw = New-AzFirewall -Name Test-FW01 -ResourceGroupName Test-FW-RG -Location "East US" -VirtualNetwork $testVnet -PublicIpAddress $FWpip
 
 #Save the firewall private IP address for future use
 
@@ -177,7 +176,7 @@ $AppRule1 = New-AzFirewallApplicationRule -Name Allow-Google -SourceAddress 10.0
 $AppRuleCollection = New-AzFirewallApplicationRuleCollection -Name App-Coll01 `
   -Priority 200 -ActionType Allow -Rule $AppRule1
 
-$Azfw.ApplicationRuleCollections = $AppRuleCollection
+$Azfw.ApplicationRuleCollections.Add($AppRuleCollection)
 
 Set-AzFirewall -AzureFirewall $Azfw
 ```
@@ -195,7 +194,7 @@ $NetRule1 = New-AzFirewallNetworkRule -Name "Allow-DNS" -Protocol UDP -SourceAdd
 $NetRuleCollection = New-AzFirewallNetworkRuleCollection -Name RCNet01 -Priority 200 `
    -Rule $NetRule1 -ActionType "Allow"
 
-$Azfw.NetworkRuleCollections = $NetRuleCollection
+$Azfw.NetworkRuleCollections.Add($NetRuleCollection)
 
 Set-AzFirewall -AzureFirewall $Azfw
 ```
@@ -205,24 +204,20 @@ Set-AzFirewall -AzureFirewall $Azfw
 À des fins de test dans cette procédure, configurez les adresses DNS principales et secondaires du serveur. Ceci n’est pas obligatoire pour le pare-feu Azure.
 
 ```azurepowershell
-$NIC.DnsSettings.DnsServers.Add("209.244.0.3")
-$NIC.DnsSettings.DnsServers.Add("209.244.0.4")
-$NIC | Set-AzNetworkInterface
+$NIC01.DnsSettings.DnsServers.Add("209.244.0.3")
+$NIC01.DnsSettings.DnsServers.Add("209.244.0.4")
+$NIC01 | Set-AzNetworkInterface
 ```
 
 ## <a name="test-the-firewall"></a>Tester le pare-feu
 
 Testez maintenant le pare-feu pour vérifier qu’il fonctionne comme prévu.
 
-1. Notez l’adresse IP privée de la machine virtuelle **Srv-Work** :
+1. Connectez-vous à une machine virtuelle **Srv-Work** à l’aide de Bastion, puis ouvrez une session. 
 
-   ```
-   $NIC.IpConfigurations.PrivateIpAddress
-   ```
+   :::image type="content" source="media/deploy-ps/bastion.png" alt-text="Connectez-vous à l’aide de Bastion.":::
 
-1. Connectez un bureau à distance à la machine virtuelle **Srv-Jump**, puis connectez-vous. De là, ouvrez une connexion Bureau à distance à l’adresse IP privée **Srv-Work** et connectez-vous.
-
-3. Sur **SRV-Work**, ouvrez une fenêtre PowerShell et exécutez les commandes suivantes :
+3. Sur **Srv-Work**, ouvrez une fenêtre PowerShell et exécutez les commandes suivantes :
 
    ```
    nslookup www.google.com
@@ -258,4 +253,4 @@ Remove-AzResourceGroup -Name Test-FW-RG
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Tutoriel : Surveiller les journaux d’activité de Pare-feu Azure](./tutorial-diagnostics.md)
+* [Tutoriel : Superviser les journaux d’activité de Pare-feu Azure](./firewall-diagnostics.md)

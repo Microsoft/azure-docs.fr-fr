@@ -5,12 +5,12 @@ author: jjbfour
 ms.topic: tutorial
 ms.date: 06/19/2019
 ms.author: jobreen
-ms.openlocfilehash: b6984bfdf7ec078d02999bccf77f3592cfbcab27
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6e11e08d861538ddf395f522495798546e04ca7c
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75648676"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91948950"
 ---
 # <a name="set-up-azure-functions-for-azure-custom-providers"></a>Configurer Azure Functions pour les fournisseurs personnalisés Azure
 
@@ -51,7 +51,7 @@ Pour configurer la fonction Azure de sorte qu’elle comprenne les méthodes de 
 > [!NOTE]
 > Si votre fichier projet C# ne se trouve pas dans le répertoire du projet, vous pouvez l’y ajouter manuellement. Sinon, il apparaîtra après l’installation de l’extension Microsoft.Azure.WebJobs.Extensions.Storage dans l’application de fonction.
 
-Ensuite, mettez à jour le fichier projet C# en y ajoutant des bibliothèques NuGet. Ces bibliothèques facilitent l’analyse des requêtes entrantes envoyées par les fournisseurs personnalisés. Suivez les étapes pour [ajouter des extensions à partir du portail](../../azure-functions/install-update-binding-extensions-manual.md) et mettez à jour le fichier projet C# pour y ajouter les références de package suivantes :
+Ensuite, mettez à jour le fichier projet C# en y ajoutant des bibliothèques NuGet. Ces bibliothèques facilitent l’analyse des requêtes entrantes envoyées par les fournisseurs personnalisés. Suivez les étapes pour [ajouter des extensions à partir du portail](../../azure-functions/functions-bindings-register.md) et mettez à jour le fichier projet C# pour y ajouter les références de package suivantes :
 
 ```xml
 <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.4" />
@@ -80,4 +80,3 @@ L’élément XML suivant est un exemple de fichier projet C# :
 Dans ce tutoriel, vous avez configuré une application de fonction Azure pour qu’elle fonctionne comme un point de terminaison de fournisseur personnalisé Azure.
 
 Pour savoir comment créer un point de terminaison de fournisseur personnalisé RESTful, consultez [Tutoriel : Création d’un point de terminaison de fournisseur personnalisé RESTful](./tutorial-custom-providers-function-authoring.md).
-

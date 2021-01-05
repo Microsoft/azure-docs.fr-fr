@@ -11,18 +11,18 @@ Customer intent: I want to filter network traffic to virtual machines that perfo
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: ''
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 03/30/2018
 ms.author: kumud
-ms.custom: mvc
-ms.openlocfilehash: 08031bc2ac29ea77374e21c4ce6f7bcf6151bcad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: c0b0d366518b786b33048d2d2f182abd787856ad
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "66730031"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89075101"
 ---
 # <a name="filter-network-traffic-with-a-network-security-group-using-powershell"></a>Filtrer le trafic réseau avec un groupe de sécurité réseau à l’aide de PowerShell
 

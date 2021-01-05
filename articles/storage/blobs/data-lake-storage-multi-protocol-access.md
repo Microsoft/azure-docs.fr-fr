@@ -9,10 +9,10 @@ ms.date: 02/25/2020
 ms.author: normesta
 ms.reviewer: stewu
 ms.openlocfilehash: e3997fc215637175165402a926bffc6ac8d02771
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77914856"
 ---
 # <a name="multi-protocol-access-on-azure-data-lake-storage"></a>Accès multi-protocole pour Azure Data Lake Storage

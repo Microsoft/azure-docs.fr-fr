@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à ClickUp Productivity Platform | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ClickUp Productivity Platform.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 06853edd-e8da-4ad2-a4e6-5555d592cee5
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/21/2019
 ms.author: jeedes
-ms.openlocfilehash: f497955b698d7ca390b40686e94d553a7cd5c948
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 753256adddf8b28518bac45011d582bc7a079629
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80048746"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97670381"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-clickup-productivity-platform"></a>Tutoriel : Intégration d’Azure Active Directory à ClickUp Productivity Platform
 
@@ -31,7 +27,7 @@ L’intégration de ClickUp Productivity Platform à Azure AD vous offre les ava
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à ClickUp Productivity Platform (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -67,7 +63,7 @@ Pour configurer l’intégration de ClickUp Productivity Platform à Azure AD, v
 
 4. Dans la zone de recherche, tapez **ClickUp Productivity Platform**, sélectionnez **ClickUp Productivity Platform** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![ClickUp Productivity Platform dans la liste des résultats](common/search-new-app.png)
+    ![ClickUp Productivity Platform dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -122,25 +118,25 @@ Pour configurer l’authentification unique Azure AD auprès de ClickUp Producti
 
 2. Cliquez sur **User profile** (Profil utilisateur), puis sélectionnez **Settings** (Paramètres).
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure0.png)
+    ![Capture d’écran montrant le locataire ClickUp Productivity avec l’icône de paramètres sélectionnée.](./media/clickup-productivity-platform-tutorial/configure0.png)
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure1.png)
+    ![Capture d’écran montrant les paramètres.](./media/clickup-productivity-platform-tutorial/configure1.png)
 
 3. Sélectionnez **Microsoft**, sous Single Sign-On (SSO) Provider (Fournisseur d’authentification unique (SSO)).
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure2.png)
+    ![Capture d’écran montrant le volet d’authentification avec Microsoft sélectionné.](./media/clickup-productivity-platform-tutorial/configure2.png)
 
 4. Dans la page **Configure Microsoft Single Sign On** (Configurer l’authentification unique de Microsoft), effectuez les étapes suivantes :
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure3.png)
+    ![Capture d’écran montrant la page Configure Microsoft Single Sign On, dans laquelle vous pouvez copier l’ID d’entité et enregistrer l’URL des métadonnées de fédération Azure.](./media/clickup-productivity-platform-tutorial/configure3.png)
 
     a. Cliquez sur **Copy** (Copier) pour copier la valeur de l’ID d’entité et collez-la dans la zone de texte **Identificateur (ID d’entité)** de la section **Configuration SAML de base** du portail Azure.
-    
+
     b. Dans la zone de texte **Azure Federation Metadata URL** (URL des métadonnées de fédération d’application Azure), collez la valeur de l’URL des métadonnées de fédération d’application que vous avez copiée à partir du portail Azure, puis cliquez sur **Save** (Enregistrer).
 
 5. Pour terminer l’installation, cliquez sur **Authenticate With Microsoft to complete setup** (S’authentifier auprès de Microsoft pour terminer l’installation) et authentifiez-vous avec un compte Microsoft.
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure4.png)
+    ![Capture d’écran montrant le bouton Authenticate With Microsoft to complete setup.](./media/clickup-productivity-platform-tutorial/configure4.png)
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
@@ -159,7 +155,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -198,14 +194,14 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 1. Dans une autre fenêtre de navigateur web, connectez-vous à votre locataire ClickUp Productivity Platform en tant qu’administrateur.
 
 2. Cliquez sur **User profile** (Profil utilisateur), puis sélectionnez **People** (Personnes).
-   
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/configure0.png)
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/user1.png)
+    ![Capture d’écran montrant le locataire ClickUp Productivity.](./media/clickup-productivity-platform-tutorial/configure0.png)
+
+    ![Capture d’écran montrant le lien People sélectionné.](./media/clickup-productivity-platform-tutorial/user1.png)
 
 3. Entrez l’adresse e-mail de l’utilisateur dans la zone de texte et cliquez sur **Invite** (Inviter).
 
-    ![Configuration ClickUp Productivity Platform](./media/clickup-productivity-platform-tutorial/user2.png)
+    ![Capture d’écran montrant les paramètres des utilisateurs de l’équipe, où vous pouvez inviter des personnes par e-mail.](./media/clickup-productivity-platform-tutorial/user2.png)
 
     > [!NOTE]
     > L’utilisateur reçoit la notification et doit accepter l’invitation pour activer le compte.
@@ -214,13 +210,12 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette ClickUp Productivity Platform dans le volet d’accès doit vous connecter automatiquement à l’application ClickUp Productivity Platform pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette ClickUp Productivity Platform dans le volet d’accès doit vous connecter automatiquement à l’application ClickUp Productivity Platform pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

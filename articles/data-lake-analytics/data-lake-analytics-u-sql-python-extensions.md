@@ -1,24 +1,21 @@
 ---
 title: Étendre des scripts U-SQL à l’aide de Python dans Azure Data Lake Analytics
 description: Découvrez comment exécuter du code Python dans des scripts U-SQL à l’aide de Azure Data Lake Analytics.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: saveenr
-ms.author: saveenr
-ms.reviewer: jasonwhowell
-ms.assetid: c1c74e5e-3e4a-41ab-9e3f-e9085da1d315
-ms.topic: conceptual
+ms.reviewer: jasonh
+ms.topic: how-to
 ms.date: 06/20/2017
-ms.openlocfilehash: 0a49cbdb4caf474d0628fea3679ce712d37886e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: d81e529d7073e8200c5a1d1fa8f51504b1dc9259
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60813399"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92218440"
 ---
 # <a name="extend-u-sql-scripts-with-python-code-in-azure-data-lake-analytics"></a>Étendre des scripts U-SQL à l’aide de code Python dans Azure Data Lake Analytics
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, vérifiez que les extensions Python sont installées dans votre compte Azure Data Lake Analytics.
 
@@ -26,7 +23,7 @@ Avant de commencer, vérifiez que les extensions Python sont installées dans vo
 * Dans le menu de gauche, sous **Démarrage**, cliquez sur **Exemples de scripts**
 * Cliquez sur **Installer des extensions U-SQL**, puis sur **OK**.
 
-## <a name="overview"></a>Vue d’ensemble 
+## <a name="overview"></a>Vue d’ensemble
 
 Les extensions de Python pour U-SQL permettent aux développeurs d’effectuer une exécution parallèle massive de code Python. L'exemple suivant illustre les étapes de base :
 
@@ -35,38 +32,32 @@ Les extensions de Python pour U-SQL permettent aux développeurs d’effectuer u
 * Les extensions de Python pour U-SQL comprennent un réducteur intégré (`Extension.Python.Reducer`) qui exécute le code Python sur chaque vertex affecté au réducteur
 * Le script U-SQL contient le code Python incorporé qui a une fonction appelée `usqlml_main` qui accepte un tableau de données Pandas en tant qu’entrée et retourne un tableau de données Pandas en tant que sortie.
 
---
-
-    REFERENCE ASSEMBLY [ExtPython];
-
-    DECLARE @myScript = @"
-    def get_mentions(tweet):
-        return ';'.join( ( w[1:] for w in tweet.split() if w[0]=='@' ) )
-
-    def usqlml_main(df):
-        del df['time']
-        del df['author']
-        df['mentions'] = df.tweet.apply(get_mentions)
-        del df['tweet']
-        return df
-    ";
-
-    @t  = 
-        SELECT * FROM 
-           (VALUES
-               ("D1","T1","A1","@foo Hello World @bar"),
-               ("D2","T2","A2","@baz Hello World @beer")
-           ) AS 
-               D( date, time, author, tweet );
-
-    @m  =
-        REDUCE @t ON date
-        PRODUCE date string, mentions string
-        USING new Extension.Python.Reducer(pyScript:@myScript);
-
-    OUTPUT @m
-        TO "/tweetmentions.csv"
-        USING Outputters.Csv();
+```usql
+REFERENCE ASSEMBLY [ExtPython];
+DECLARE @myScript = @"
+def get_mentions(tweet):
+    return ';'.join( ( w[1:] for w in tweet.split() if w[0]=='@' ) )
+def usqlml_main(df):
+    del df['time']
+    del df['author']
+    df['mentions'] = df.tweet.apply(get_mentions)
+    del df['tweet']
+    return df
+";
+@t  =
+    SELECT * FROM
+       (VALUES
+           ("D1","T1","A1","@foo Hello World @bar"),
+           ("D2","T2","A2","@baz Hello World @beer")
+       ) AS date, time, author, tweet );
+@m  =
+    REDUCE @t ON date
+    PRODUCE date string, mentions string
+    USING new Extension.Python.Reducer(pyScript:@myScript);
+OUTPUT @m
+    TO "/tweetmentions.csv"
+    USING Outputters.Csv();
+```
 
 ## <a name="how-python-integrates-with-u-sql"></a>Intégration de Python à U-SQL
 
@@ -77,31 +68,37 @@ Les extensions de Python pour U-SQL permettent aux développeurs d’effectuer u
 
 ### <a name="schemas"></a>Schémas
 
-* Les vecteurs d’index dans Pandas ne sont pas pris en charge dans U-SQL. Tous les tableaux de données d’entrée dans la fonction Python ont toujours un index numérique de 64 bits compris entre 0 et le nombre de lignes moins 1. 
+* Les vecteurs d’index dans Pandas ne sont pas pris en charge dans U-SQL. Tous les tableaux de données d’entrée dans la fonction Python ont toujours un index numérique de 64 bits compris entre 0 et le nombre de lignes moins 1.
 * Les jeux de données U-SQL ne peut pas avoir de noms de colonnes dupliqués
-* Les noms de colonnes de jeux de données U-SQL qui ne sont pas des chaînes. 
+* Les noms de colonnes de jeux de données U-SQL qui ne sont pas des chaînes.
 
 ### <a name="python-versions"></a>Versions de Python
-Seul Python 3.5.1 (compilé pour Windows) est pris en charge. 
+
+Seul Python 3.5.1 (compilé pour Windows) est pris en charge.
 
 ### <a name="standard-python-modules"></a>Modules Python standard
+
 Tous les modules Python standard sont inclus.
 
 ### <a name="additional-python-modules"></a>Modules Python supplémentaires
+
 Outre les bibliothèques Python standard, plusieurs bibliothèques python couramment utilisées sont incluses :
 
-    pandas
-    numpy
-    numexpr
+* pandas
+* numpy
+* numexpr
 
 ### <a name="exception-messages"></a>Messages d’exception
+
 Actuellement, une exception dans le code Python apparaît comme un échec de vertex générique. À l’avenir, les messages d’erreur de tâches U-SQL afficheront le message d’exception Python.
 
 ### <a name="input-and-output-size-limitations"></a>Limitations de taille d’entrée et de sortie
+
 Chaque vertex possède une quantité limitée de mémoire qui lui est assignée. Actuellement, cette limite est de 6 Go pour une mise à jour automatique. Étant donné que les tableaux de données d’entrée et de sortie doivent exister dans la mémoire dans le code Python, la taille totale de l’entrée et de la sortie ne peut pas dépasser 6 Go.
 
-## <a name="see-also"></a>Voir aussi
+## <a name="next-steps"></a>Étapes suivantes
+
 * [Vue d'ensemble de Microsoft Azure Data Lake Analytics](data-lake-analytics-overview.md)
 * [Développer des scripts de U-SQL à l’aide d’outils Data Lake Tools pour Visual Studio](data-lake-analytics-data-lake-tools-get-started.md)
-* [Utilisation des fonctions U-SQL dans les travaux Analytique Data Lake Azure](data-lake-analytics-use-window-functions.md)
+* [Utilisation des fonctions U-SQL dans les travaux Analytique Data Lake Azure](./data-lake-analytics-u-sql-get-started.md)
 * [Utiliser Azure Data Lake Tools pour Visual Studio Code](data-lake-analytics-data-lake-tools-for-vscode.md)

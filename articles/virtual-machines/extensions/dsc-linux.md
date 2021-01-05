@@ -8,27 +8,27 @@ manager: carmonm
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 06/12/2018
 ms.author: robreed
-ms.openlocfilehash: 2f04b5ecb2019a77bbb38e97c3869cc0a9447955
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1d1a5cf67a10a83a227f240fc31d25abfe9c7dd0
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226897"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94955937"
 ---
 # <a name="dsc-extension-for-linux-microsoftostcextensionsdscforlinux"></a>Extension DSC pour Linux (Microsoft.OSTCExtensions.DSCForLinux)
 
 Desired State Configuration (DSC) est une plateforme de gestion que vous pouvez utiliser pour gérer votre infrastructure informatique et de développement avec la configuration en tant que code.
 
 > [!NOTE]
-> L’extension DSC pour Linux et l’[extension de machine virtuelle Azure Monitor pour Linux](/azure/virtual-machines/extensions/oms-linux) sont actuellement en conflit et ne sont pas prises en charge dans une configuration côte à côte. N’utilisez pas les deux solutions sur la même machine virtuelle.
+> L’extension DSC pour Linux et l’[extension de machine virtuelle Azure Monitor pour Linux](./oms-linux.md) sont actuellement en conflit et ne sont pas prises en charge dans une configuration côte à côte. N’utilisez pas les deux solutions sur la même machine virtuelle.
 
 L’extension DSCForLinux est publiée et prise en charge par Microsoft. L’extension installe l’agent DSC et OMI sur des machines virtuelles Azure. L’extension DSC peut également effectuer les actions suivantes :
-
 
 - Enregistrer la machine virtuelle Linux sur un compte Azure Automation pour extraire des configurations depuis le service Azure Automation (Register ExtensionAction).
 - Envoyer (push) des configurations MOF vers la machine virtuelle Linux (Push ExtensionAction).
@@ -36,22 +36,16 @@ L’extension DSCForLinux est publiée et prise en charge par Microsoft. L’ext
 - Installer des modules DSC personnalisés sur la machine virtuelle Linux (Install ExtensionAction).
 - Supprimer des modules DSC personnalisés de la machine virtuelle Linux (Remove ExtensionAction).
 
- 
-
 ## <a name="prerequisites"></a>Prérequis
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-L'extension DSC Linux prend en charge toutes les [distributions Linux approuvées sur Azure](/azure/virtual-machines/linux/endorsed-distros), à l'exception des suivantes :
+Pour les nœuds exécutant Linux, l’extension Linux DSC prend en charge toutes les distributions Linux listées dans la [documentation de DSC PowerShell](/powershell/scripting/dsc/getting-started/lnxgettingstarted).
 
-| Distribution | Version |
-|---|---|
-| Debian | Toutes les versions |
-| Ubuntu| 18,04 |
- 
 ### <a name="internet-connectivity"></a>Connectivité Internet
 
-La machine virtuelle cible doit être connectée à Internet pour pouvoir utiliser l’extension DSCForLinux. Par exemple, l’extension Register nécessite une connectivité au service Automation. D’autres actions telles que Push, Pull et Install nécessitent une connectivité à Stockage Azure et GitHub. Cela dépend des paramètres indiqués par le client.
+La machine virtuelle cible doit être connectée à Internet pour pouvoir utiliser l’extension DSCForLinux. Par exemple, l’extension Register nécessite une connectivité au service Automation.
+D’autres actions telles que Push, Pull et Install nécessitent une connectivité à Stockage Azure et GitHub. Cela dépend des paramètres indiqués par le client.
 
 ## <a name="extension-schema"></a>Schéma d’extensions
 
@@ -63,13 +57,13 @@ Voici tous les paramètres de configuration publique pris en charge :
 * `ResourceName` : (facultatif, chaîne) nom du module de ressources personnalisées.
 * `ExtensionAction` : (facultatif, chaîne) spécifie le rôle d’une extension. Les valeurs valides sont Register, Push, Pull, Install et Remove. Si rien n’est spécifié, l’action par défaut est Push.
 * `NodeConfigurationName` : (facultatif, chaîne) nom d’une configuration de nœud à appliquer.
-* `RefreshFrequencyMins` : (facultatif, entier) spécifie la fréquence (en minutes) à laquelle DSC tente d’obtenir la configuration depuis le serveur Pull. 
+* `RefreshFrequencyMins` : (facultatif, entier) spécifie la fréquence (en minutes) à laquelle DSC tente d’obtenir la configuration depuis le serveur Pull.
        Si la configuration du serveur Pull est différente de la configuration actuelle sur le nœud cible, elle est copiée dans le magasin en attente, puis appliquée.
 * `ConfigurationMode` : (facultatif, chaîne) indique la façon dont DSC applique la configuration. Les valeurs valides sont ApplyOnly, ApplyAndMonitor et ApplyAndAutoCorrect.
 * `ConfigurationModeFrequencyMins` : (facultatif, entier) spécifie la fréquence (en minutes) à laquelle DSC vérifie que la configuration est conforme à l’état souhaité.
 
 > [!NOTE]
-> Si vous utilisez une version antérieure à la version 2.3, le paramètre de mode est le même qu’ExtensionAction. Mode semble être un terme surchargé. Pour éviter toute confusion, ExtensionAction est utilisé à partir de la version 2.3. Pour la compatibilité descendante, l’extension prend en charge à la fois mode et ExtensionAction. 
+> Si vous utilisez une version antérieure à la version 2.3, le paramètre de mode est le même qu’ExtensionAction. Mode semble être un terme surchargé. Pour éviter toute confusion, ExtensionAction est utilisé à partir de la version 2.3. Pour la compatibilité descendante, l’extension prend en charge à la fois mode et ExtensionAction.
 >
 
 ### <a name="protected-configuration"></a>Configuration protégée
@@ -277,7 +271,7 @@ $publicConfig = '{
 
 ## <a name="template-deployment"></a>Déploiement de modèle
 
-Les extensions de machines virtuelles Azure peuvent être déployées avec des modèles Azure Resource Manager. Les modèles sont particulièrement adaptés lorsque vous déployez une ou plusieurs machines virtuelles nécessitant une configuration post-déploiement, comme l’intégration à Azure Automation. 
+Les extensions de machines virtuelles Azure peuvent être déployées avec des modèles Azure Resource Manager. Les modèles sont particulièrement adaptés lorsque vous déployez une ou plusieurs machines virtuelles nécessitant une configuration post-déploiement, comme l’intégration à Azure Automation.
 
 Les exemples de modèles du Gestionnaire des ressources sont [201-dsc-linux-azure-storage-on-ubuntu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-dsc-linux-azure-storage-on-ubuntu) et [201-dsc-linux-public-storage-on-ubuntu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-dsc-linux-public-storage-on-ubuntu).
 
@@ -331,13 +325,13 @@ DSCForLinux Microsoft.OSTCExtensions <version> \
 
 Vous pouvez vous connecter à votre compte Azure en mode Azure Service Management en exécutant la commande suivante :
 
-```powershell>
+```powershell
 Add-AzureAccount
 ```
 
 Et déployez l’extension DSCForLinux en exécutant la commande suivante :
 
-```powershell>
+```powershell
 $vmname = '<vm-name>'
 $vm = Get-AzureVM -ServiceName $vmname -Name $vmname
 $extensionName = 'DSCForLinux'
@@ -370,7 +364,7 @@ Set-AzureVMExtension -ExtensionName $extensionName -VM $vm -Publisher $publisher
 
 Vous pouvez vous connecter à votre compte Azure en mode Azure Resource Manager en exécutant la commande suivante :
 
-```powershell>
+```powershell
 Login-AzAccount
 ```
 
@@ -378,7 +372,7 @@ Pour en savoir plus sur l’utilisation d’Azure PowerShell avec Azure Resource
 
 Vous pouvez déployer l’extension DSCForLinux en exécutant la commande suivante :
 
-```powershell>
+```powershell
 $rgName = '<resource-group-name>'
 $vmName = '<vm-name>'
 $location = '< location>'
@@ -425,7 +419,7 @@ La sortie de l’exécution de l’extension est enregistrée dans le fichier su
 ```
 
 Code d’erreur : 51 correspond soit à une distribution non prise en charge, soit à une action de l’extension non prise en charge.
-Dans certains cas, l’extension Linux DSC ne parvient pas à installer OMI lorsqu’une version plus récente d’OMI existe déjà sur la machine. [Réponse d’erreur : (000003)Passage à une version antérieure interdit]
+Dans certains cas, l’extension Linux DSC ne parvient pas à installer OMI lorsqu’une version plus récente d’OMI existe déjà sur la machine. [error response: (000003)Downgrade not allowed]
 
 
 

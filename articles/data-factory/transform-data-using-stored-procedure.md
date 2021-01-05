@@ -11,12 +11,12 @@ ms.author: abnarain
 manager: shwang
 ms.custom: seo-lt-2019
 ms.date: 11/27/2018
-ms.openlocfilehash: 57bf653aa3f421ae8897c4be661ceef589fcdc06
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f20af5ea9628dd6c8aa732ac1d09625156eed0c4
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418811"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97387539"
 ---
 # <a name="transform-data-by-using-the-sql-server-stored-procedure-activity-in-azure-data-factory"></a>Transformer des données à l’aide de l’activité de procédure stockée SQL Server dans Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -28,18 +28,18 @@ ms.locfileid: "81418811"
 Vous utilisez des activités de transformation dans un [pipeline](concepts-pipelines-activities.md) Data Factory pour transformer et traiter des données brutes en prévisions et en analyses. L’activité de procédure stockée est l’une des activités de transformation prises en charge par Data Factory. Cet article s’appuie sur l’article [Transformer des données](transform-data.md) qui présente une vue d’ensemble de la transformation des données et des activités de transformation prises en charge dans Data Factory.
 
 > [!NOTE]
-> Si vous découvrez Azure Data Factory, lisez la [présentation d’Azure Data Factory](introduction.md) et suivez le [Didacticiel : Transformer des données](tutorial-transform-data-spark-powershell.md) avant de lire cet article. 
+> Si vous découvrez Azure Data Factory, lisez la [présentation d’Azure Data Factory](introduction.md) et suivez le tutoriel : [Tutoriel : Transformer des données](tutorial-transform-data-spark-powershell.md) avant de lire cet article. 
 
 Vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans l’une des banques de données suivantes dans votre entreprise ou sur une machine virtuelle Azure : 
 
 - Azure SQL Database
-- Azure SQL Data Warehouse.
+- Azure Synapse Analytics
 - Base de données SQL Server  Si vous utilisez SQL Server, installez le runtime d’intégration auto-hébergé sur l’ordinateur qui héberge la base de données ou sur un autre ordinateur ayant accès à la base de données. Le runtime d’intégration auto-hébergé est un composant qui connecte des sources de données locales ou se trouvant sur une machine virtuelle Azure à des services cloud de manière gérée et sécurisée. Pour plus d’informations, consultez l’article [Runtime d’intégration auto-hébergé](create-self-hosted-integration-runtime.md).
 
 > [!IMPORTANT]
-> Lorsque vous copiez des données dans Azure SQL Database ou SQL Server, vous pouvez configurer l’élément **SqlSink** dans l’activité de copie pour appeler une procédure stockée en utilisant la propriété **sqlWriterStoredProcedureName**. Pour plus d’informations sur la propriété, consultez les articles suivants sur les connecteurs : [Azure SQL Database](connector-azure-sql-database.md), [SQL Server](connector-sql-server.md). L’appel d’une procédure stockée lors de la copie de données dans Azure SQL Data Warehouse avec une activité de copie n’est pas pris en charge. Toutefois, vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans SQL Data Warehouse. 
+> Lorsque vous copiez des données dans Azure SQL Database ou SQL Server, vous pouvez configurer l’élément **SqlSink** dans l’activité de copie pour appeler une procédure stockée en utilisant la propriété **sqlWriterStoredProcedureName**. Pour plus d’informations sur la propriété, consultez les articles suivants sur les connecteurs : [Azure SQL Database](connector-azure-sql-database.md), [SQL Server](connector-sql-server.md). L’appel d’une procédure stockée lors de la copie de données dans Azure Synapse Analytics à l’aide d’une activité de copie n’est pas pris en charge. Toutefois, vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans Azure Synapse Analytics. 
 >
-> Lors de la copie de données à partir d’Azure SQL Database, SQL Server ou Azure SQL Data Warehouse, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](connector-azure-sql-database.md), [SQL Server](connector-sql-server.md), [Azure SQL Data Warehouse](connector-azure-sql-data-warehouse.md)          
+> Lors de la copie de données à partir d’Azure SQL Database, de SQL Server ou d’Azure Synapse Analytics, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](connector-azure-sql-database.md), [SQL Server](connector-sql-server.md), [Azure Synapse Analytics](connector-azure-sql-data-warehouse.md)          
 
  
 
@@ -73,7 +73,7 @@ Le tableau suivant décrit ces paramètres JSON :
 | name                      | Nom de l’activité                     | Oui      |
 | description               | Texte décrivant la raison motivant l’activité. | Non       |
 | type                      | Pour l’activité de procédure stockée, le type d’activité est **SqlServerStoredProcedure**. | Oui      |
-| linkedServiceName         | Référence au service **Azure SQL Database**, **Azure SQL Data Warehouse** ou **SQL Server** enregistré en tant que service lié dans Data Factory. Pour en savoir plus sur ce service lié, consultez l’article [Services liés de calcul](compute-linked-services.md). | Oui      |
+| linkedServiceName         | Référence au service **Azure SQL Database**, **Azure Synapse Analytics** ou **SQL Server** enregistré en tant que service lié dans Data Factory. Pour en savoir plus sur ce service lié, consultez l’article [Services liés de calcul](compute-linked-services.md). | Oui      |
 | storedProcedureName       | Spécifiez le nom de la procédure stockée à appeler. | Oui      |
 | storedProcedureParameters | Spécifiez les valeurs des paramètres de procédure stockée. Utilisez `"param1": { "value": "param1Value","type":"param1Type" }` pour transmettre les valeurs des paramètres et leur type pris en charge par la source de données. Pour passer la valeur Null en paramètre, utilisez `"param1": { "value": null }` (tout en minuscules). | Non       |
 
@@ -82,15 +82,13 @@ Le type de données que vous spécifiez pour le paramètre est le type Azure Dat
 
 | source de données          | Mappage de type de données |
 | ---------------------|-------------------|
-| Azure SQL Data Warehouse. | https://docs.microsoft.com/azure/data-factory/connector-azure-sql-data-warehouse#data-type-mapping-for-azure-sql-data-warehouse |
+| Azure Synapse Analytics | https://docs.microsoft.com/azure/data-factory/connector-azure-sql-data-warehouse#data-type-mapping-for-azure-sql-data-warehouse |
 | Azure SQL Database   | https://docs.microsoft.com/azure/data-factory/connector-azure-sql-database#data-type-mapping-for-azure-sql-database | 
 | Oracle               | https://docs.microsoft.com/azure/data-factory/connector-oracle#data-type-mapping-for-oracle |
 | SQL Server           | https://docs.microsoft.com/azure/data-factory/connector-sql-server#data-type-mapping-for-sql-server |
 
 
-## <a name="error-info"></a>Informations sur l’erreur
 
-Quand une procédure stockée échoue et que les détails de l’erreur sont retournés, vous ne pouvez pas bien mettre en évidence les informations sur l’erreur directement dans la sortie de l’activité. Cependant, Data Factory injecte tous ses événements d’exécution d’activité dans Azure Monitor. Parmi les événements que Data Factory injecte dans Azure Monitor figurent les détails des erreurs. Vous pouvez, par exemple, configurer des alertes par courrier électronique à partir de ces événements. Pour plus d’informations, consultez [Déclencher des alertes et surveiller les fabriques de données avec Azure Monitor](monitor-using-azure-monitor.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Consultez les articles suivants qui expliquent comment transformer des données par d’autres moyens : 
@@ -102,5 +100,5 @@ Consultez les articles suivants qui expliquent comment transformer des données 
 * [Activité de diffusion en continu Hadoop](transform-data-using-hadoop-streaming.md)
 * [Activité Spark](transform-data-using-spark.md)
 * [Activité personnalisée .NET](transform-data-using-dotnet-custom-activity.md)
-* [Activité d’exécution par lot Machine Learning](transform-data-using-machine-learning.md)
+* [Activité Exécution par lots Azure Machine Learning studio (classique)](transform-data-using-machine-learning.md)
 * [Activité de procédure stockée](transform-data-using-stored-procedure.md)

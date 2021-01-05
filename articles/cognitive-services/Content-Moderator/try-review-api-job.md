@@ -10,16 +10,16 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 10/24/2019
 ms.author: pafarley
-ms.openlocfilehash: 83ee8e0c0583cba72da8702e196f0f38128f8d8a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 924c21037a464770fac13c9b45ddcf261ff5a058
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "72935935"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905142"
 ---
-# <a name="define-and-use-moderation-jobs-rest"></a>Définir et utiliser des travaux de modération (REST)
+# <a name="define-and-use-moderation-jobs-api-console"></a>Définir et utiliser des travaux de modération (console d’API)
 
-Un travail de modération est une forme de wrapper des fonctionnalités de modération du contenu, de flux de travail et de révision. Ce guide explique comment utiliser les API REST pour lancer et vérifier des travaux de modération du contenu. Une fois que vous aurez compris la structure des API, vous pourrez facilement déplacer ces appels vers n’importe quelle plateforme compatible avec REST.
+Un travail de modération est une forme de wrapper des fonctionnalités de modération du contenu, de workflows et de révision. Ce guide explique comment utiliser les API REST pour lancer et vérifier des travaux de modération du contenu. Une fois que vous aurez compris la structure des API, vous pourrez facilement déplacer ces appels vers n’importe quelle plateforme compatible avec REST.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -28,7 +28,7 @@ Un travail de modération est une forme de wrapper des fonctionnalités de modé
 
 ## <a name="create-a-job"></a>Créer un travail
 
-Pour créer un travail de modération, accédez à la page de référence API [Travail – Créer](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) et sélectionnez le bouton de votre région d’abonnement (que vous trouverez dans l’URL du point de terminaison, sur la page **Informations d’identification** de [l’Outil de révision](https://contentmoderator.cognitive.microsoft.com/)). La console d’API, qui permet de construire et d’exécuter des appels d’API REST, se lance.
+Pour créer un travail de modération, accédez à la page de référence d’API [Travail - Créer](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) et sélectionnez le bouton correspondant à la région de votre abonnement. Vous pouvez trouver votre région dans l’URL du point de terminaison dans la page **Informations d’identification** de l’[outil de révision](https://contentmoderator.cognitive.microsoft.com/). La console d’API, qui permet de construire et d’exécuter des appels d’API REST, se lance.
 
 ![Sélection d’une région sur la page Travail – Créer](images/test-drive-job-1.png)
 
@@ -41,7 +41,7 @@ Entrez les valeurs suivantes pour construire l’appel REST :
 - **ContentId** : chaîne d’identificateur personnalisée. cette chaîne est transmise à l'API et retournée via le rappel. Elle est utile pour associer des métadonnées ou des identificateurs internes aux résultats d’un travail de modération.
 - **Workflowname** : nom du flux de travail que vous avez créé (ou « default » pour le flux de travail par défaut).
 - **CallbackEndpoint** : (Facultatif) URL permettant de recevoir les informations de rappel une fois la révision terminée.
-- **Ocp-Apim-Subscription-Key** : votre clé Content Moderator. Vous la trouverez sous l’onglet **Paramètres** de [l’Outil de révision](https://contentmoderator.cognitive.microsoft.com).
+- **Ocp-Apim-Subscription-Key** : votre clé Content Moderator. Vous la trouverez sous l’onglet **Paramètres** de l’[outil de révision](https://contentmoderator.cognitive.microsoft.com).
 
 ### <a name="fill-in-the-request-body"></a>Remplir le corps de la demande
 

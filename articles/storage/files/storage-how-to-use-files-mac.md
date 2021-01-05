@@ -1,30 +1,21 @@
 ---
 title: Montage du partage de fichiers Azure via SMB avec MacOS | Microsoft Docs
-description: Découvrez comment monter un partage de fichiers Azure via SMB avec Mac OS.
-author: RenaShahMSFT
+description: Découvrez comment monter un partage de fichiers Azure via SMB avec macOS à l’aide de Finder ou de Terminal. Azure Files est le système de fichiers cloud facile à utiliser de Microsoft.
+author: roygara
 ms.service: storage
-ms.topic: conceptual
-ms.date: 09/19/2017
-ms.author: renash
+ms.topic: how-to
+ms.date: 09/23/2020
+ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 0e3420e469b117d90efb2949dab828021bfedcb6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 119f4c0ea434bc431b40c905d9142e187b7d9474
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74924706"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91326063"
 ---
 # <a name="mount-azure-file-share-over-smb-with-macos"></a>Montage du partage de fichiers Azure via SMB avec MacOS
-[Azure Files](storage-files-introduction.md) est le système de fichiers cloud facile à utiliser de Microsoft. Les partages de fichiers Azure peuvent être montés avec le protocole standard SMB 3 par macOS El Capitan 10.11 et version supérieure. Cet article expose deux méthodes de montage d’un partage de fichiers Azure sur macOS : l’une avec l’interface utilisateur Finder et l’autre avec Terminal.
-
-> [!Note]  
-> Avant de monter un partage de fichiers Azure via SMB, il est recommandé de désactiver la signature de paquet SMB. Dans le cas contraire, cela risque d’entraîner des dysfonctionnements lors de l’accès au partage de fichiers Azure depuis MacOS. Votre connexion SMB est chiffrée. Cela n’affecte donc pas la sécurité de votre connexion. À partir du terminal, utilisez les commandes suivantes pour désactiver la signature de paquet SMB, conformément à la[rubrique d’aide Apple sur la désactivation de la signature des paquets SMB](https://support.apple.com/HT205926) :  
->    ```
->    sudo -s
->    echo "[default]" >> /etc/nsmb.conf
->    echo "signing_required=no" >> /etc/nsmb.conf
->    exit
->    ```
+[Azure Files](storage-files-introduction.md) est le système de fichiers cloud facile à utiliser de Microsoft. Les partages de fichiers Azure peuvent être montés avec le protocole SMB 3, conforme à la norme du secteur, par macOS High Sierra 10.13 et versions ultérieures. Cet article expose deux méthodes de montage d’un partage de fichiers Azure sur macOS : l’une avec l’interface utilisateur Finder et l’autre avec Terminal.
 
 ## <a name="prerequisites-for-mounting-an-azure-file-share-on-macos"></a>Conditions préalables pour le montage d’un partage de fichiers Azure sous MacOS
 * **Nom du compte de stockage** : Pour monter un partage de fichiers Azure, vous avez besoin du nom du compte de stockage.
@@ -46,10 +37,10 @@ ms.locfileid: "74924706"
     ![Une capture instantanée d’un partage de fichiers Azure monté](./media/storage-how-to-use-files-mac/mount-via-finder-3.png)
 
 ## <a name="mount-an-azure-file-share-via-terminal"></a>Montage d’un partage de fichiers Azure via Terminal
-1. Remplacez  `<storage-account-name>`  par le nom de votre compte de stockage. Lorsque vous y êtes invité, entrez la clé du compte de stockage comme mot de passe. 
+1. Remplacez  `<storage-account-name>`, `<storage-account-key>` et `<share-name>` par les valeurs correspondant à votre environnement.
 
     ```
-    mount_smbfs //<storage-account-name>@<storage-account-name>.file.core.windows.net/<share-name> <desired-mount-point>
+    open smb://<storage-account-name>:<storage-account-key>@<storage-account-name>.file.core.windows.net/<share-name>
     ```
 
 2. **Utilisez le partage de fichiers Azure à votre guise** : Le partage de fichiers Azure est monté sur le point de montage spécifié par la commande précédente.  
@@ -57,9 +48,4 @@ ms.locfileid: "74924706"
     ![Une capture instantanée du partage de fichiers Azure monté](./media/storage-how-to-use-files-mac/mount-via-terminal-1.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
-Consultez ces liens pour en savoir plus sur Azure Files.
-
-* [Rubrique d’aide Apple : connexion au partage de fichiers sur Mac](https://support.apple.com/HT204445)
-* [FORUM AUX QUESTIONS](../storage-files-faq.md)
-* [Résolution des problèmes sur Windows](storage-troubleshoot-windows-file-connection-problems.md)      
-* [Résolution des problèmes sur Linux](storage-troubleshoot-linux-file-connection-problems.md)    
+* [Assistance Apple : Connectez votre Mac à des ordinateurs partagés et des serveurs](https://support.apple.com/guide/mac-help/connect-mac-shared-computers-servers-mchlp1140/mac)

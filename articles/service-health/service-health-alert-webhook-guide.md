@@ -4,12 +4,12 @@ description: Envoyez des notifications personnalisées sur les événements d’
 ms.topic: conceptual
 ms.service: service-health
 ms.date: 3/27/2018
-ms.openlocfilehash: 2609a267bd151354f83482ab16c4b9345aa88cc4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 05b0572c89a29fddc881f9977ee437d1319e6254
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80062855"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86518926"
 ---
 # <a name="use-a-webhook-to-configure-health-notifications-for-problem-management-systems"></a>Utiliser un webhook afin de configurer les notifications d’intégrité pour les systèmes de gestion des problèmes
 
@@ -115,5 +115,5 @@ Procédez comme suit :
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Consultez le [schéma webhook des alertes de journal d’activité](../azure-monitor/platform/activity-log-alerts-webhook.md). 
-- En savoir plus sur les [notifications sur l’intégrité du service](../azure-monitor/platform/service-notifications.md).
+- En savoir plus sur les [notifications sur l’intégrité du service](./service-notifications.md).
 - En savoir plus sur les [groupes d’actions](../azure-monitor/platform/action-groups.md).

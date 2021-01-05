@@ -3,16 +3,17 @@ title: 'Démarrage rapide : Bibliothèque de Stockage Blob Azure v12 - JavaScr
 description: Ce guide de démarrage rapide vous explique comment utiliser la bibliothèque cliente de Stockage Blob Azure version 12 pour JavaScript dans un navigateur. Vous allez créer un conteneur et un objet dans le Stockage Blob. Ensuite, vous allez apprendre à lister tous les objets blob d’un conteneur. Enfin, vous allez apprendre à supprimer des objets blob et à supprimer un conteneur.
 author: mhopkins-msft
 ms.author: mhopkins
-ms.date: 04/18/2020
+ms.date: 07/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: 4d486b8ffc921a5ca2f38bef912ba6dc46ecec40
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: devx-track-js
+ms.openlocfilehash: 998d49e91d38a1f2fdc2503165ee99635e153027
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83634085"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001896"
 ---
 <!-- Customer intent: As a web application developer I want to interface with Azure Blob storage entirely on the client so that I can build a SPA application that is able to upload and delete files on blob storage. -->
 
@@ -20,10 +21,12 @@ ms.locfileid: "83634085"
 
 Le Stockage Blob Azure est optimisé pour stocker de grandes quantités de données non structurées. Les objets blob sont des objets pouvant contenir du texte ou des données binaires, notamment des images, des documents, du contenu multimédia en streaming et des données d’archive. Ce guide de démarrage rapide explique comment gérer les objets blob à l’aide de JavaScript dans un navigateur. Vous allez charger et lister des objets blob, puis créer et supprimer des conteneurs.
 
-[Documentation de référence sur les API](/javascript/api/@azure/storage-blob) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob) | [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob) | [Exemples](https://docs.microsoft.com/azure/storage/common/storage-samples-javascript?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#blob-samples)
+Ressources supplémentaires :
 
-> [!NOTE]
-> Pour une bonne prise en main de la version précédente du kit de développement logiciel (SDK), consultez [Démarrage rapide : Gérer des objets blob avec le SDK JavaScript v10 en Node.js](storage-quickstart-blobs-nodejs-legacy.md).
+* [Documentation de référence de l’API](/javascript/api/@azure/storage-blob)
+* [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob)
+* [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob)
+* [Exemples](../common/storage-samples-javascript.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#blob-samples)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -63,7 +66,7 @@ Cette section vous guide tout au long de la préparation d’un projet à utilis
 
 ### <a name="create-a-cors-rule"></a>Créer une règle CORS
 
-Avant que votre application web puisse accéder à un stockage Blob à partir du client, vous devez configurer votre compte pour activer le [partage des ressources cross-origin](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) (CORS, Cross-Origin Resource Sharing).
+Avant que votre application web puisse accéder à un stockage Blob à partir du client, vous devez configurer votre compte pour activer le [partage des ressources cross-origin](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) (CORS, Cross-Origin Resource Sharing).
 
 Dans le portail Azure, sélectionnez votre compte de stockage. Pour définir une nouvelle règle CORS, accédez à la section **Paramètres**, puis sélectionnez **CORS**. Pour ce démarrage rapide, vous créez une règle CORS ouverte :
 
@@ -73,10 +76,10 @@ Le tableau suivant décrit chaque paramètre CORS et explique les valeurs utilis
 
 |Paramètre  |Valeur  | Description |
 |---------|---------|---------|
-| **ORIGINES AUTORISÉES** | **\*** | Accepte une liste délimitée par des virgules de domaines définis comme origines acceptables. La configuration de la valeur sur `*` autorise tous les domaines à accéder au compte de stockage. |
+| **ORIGINES AUTORISÉES** | **\** _ | Accepte une liste délimitée par des virgules de domaines définis comme origines acceptables. La configuration de la valeur sur `_` autorise tous les domaines à accéder au compte de stockage. |
 | **MÉTHODES AUTORISÉES** | **DELETE**, **GET**, **HEAD**, **MERGE**, **POST**, **OPTIONS** et **PUT** | Répertorie les verbes HTTP autorisés à s’exécuter sur le compte de stockage. Dans le cadre de ce démarrage rapide, sélectionnez toutes les options disponibles. |
-| **EN-TÊTES AUTORISÉS** | **\*** | Définit la liste des en-têtes de requête (y compris les en-têtes avec préfixe) autorisés par le compte de stockage. La configuration de la valeur sur `*` permet l’accès à tous les en-têtes. |
-| **EN-TÊTES EXPOSÉS** | **\*** | Répertorie les en-têtes de réponse autorisés par le compte. La configuration de la valeur sur `*` permet au compte d’envoyer n’importe quel en-tête. |
+| **EN-TÊTES AUTORISÉS** | **\** _ | Définit la liste des en-têtes de requête (y compris les en-têtes avec préfixe) autorisés par le compte de stockage. La configuration de la valeur sur `_` permet l’accès à tous les en-têtes. |
+| **EN-TÊTES EXPOSÉS** | **\** _ | Répertorie les en-têtes de réponse autorisés par le compte. La configuration de la valeur sur `_` permet au compte d’envoyer n’importe quel en-tête. |
 | **ÂGE MAXIMAL** | **86400** | La durée maximale de mise en cache de la requête OPTIONS préliminaire par le navigateur, en secondes. La valeur *86400* autorise le cache pendant une journée entière. |
 
 Après avoir renseigné les champs avec les valeurs indiquées dans ce tableau, cliquez sur le bouton **Enregistrer**.
@@ -285,7 +288,7 @@ Dans le [portail Azure](https://portal.azure.com), vous pouvez vérifier les ré
 #### <a name="step-4---delete-the-container"></a>Étape 4 - Supprimer le conteneur
 
 1. Dans l’application web, sélectionnez **Supprimer le conteneur**. L’état indique que le conteneur a été supprimé.
-2. Dans le portail Azure, sélectionnez le lien **\<nom_compte\> | Conteneurs** en haut à gauche du volet du portail.
+2. Dans le portail Azure, sélectionnez le lien **\<account-name\> | Conteneurs** en haut à gauche du volet du portail.
 3. Sélectionnez **Actualiser**. Le nouveau conteneur disparaît.
 4. Fermez l’application web.
 
@@ -302,7 +305,7 @@ Dans ce guide de démarrage rapide, vous avez appris à charger, à lister et à
 Pour obtenir des tutoriels, des exemples, des guides de démarrage rapide et d’autres documentations, visitez :
 
 > [!div class="nextstepaction"]
-> [Documentation Azure pour JavaScript](/azure/javascript/)
+> [Documentation Azure pour JavaScript](/azure/developer/javascript/)
 
 * Pour plus d’informations, consultez la [bibliothèque cliente Stockage Blob Azure pour JavaScript](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob).
 * Pour voir des exemples d’applications de stockage Blob, passez à [Exemples JavaScript de bibliothèques clientes Stockage Blob Azure V12](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob/samples).

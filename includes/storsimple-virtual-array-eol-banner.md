@@ -8,14 +8,12 @@ ms.topic: include
 ms.date: 07/26/2019
 ms.author: alkohli
 ms.custom: include file
-ms.openlocfilehash: f33174f7c23d0458d952d7606852eb821df7154a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 29beee279e9171971aa333bd89953648932b7b22
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68589950"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995005"
 ---
 > [!IMPORTANT]
-> StorSimple Virtual Array (série 1200) atteindra sa [fin de vie](https://support.microsoft.com/lifecycle/search?alpha=Azure%20StorSimple%201200%20Series) en décembre 2020. Si vous envisagez de nouveaux déploiements de StorSimple Virtual Array, nous vous recommandons d’étudier d’autres solutions comme [Azure File Sync](../articles/storage/files/storage-sync-files-deployment-guide.md) ou des [appareils en ligne Azure Data Box](https://docs.microsoft.com/azure/databox-online/) pour vos charges de travail.
-
-
+> StorSimple Virtual Array (série 1200) atteindra sa [fin de vie](https://support.microsoft.com/lifecycle/search?alpha=Azure%20StorSimple%201200%20Series) en décembre 2020. Si vous envisagez de nouveaux déploiements de StorSimple Virtual Array, nous vous recommandons d’étudier d’autres solutions comme [Azure File Sync](../articles/storage/files/storage-sync-files-deployment-guide.md) ou des [appareils en ligne Azure Data Box](../articles/databox-online/index.yml) pour vos charges de travail.

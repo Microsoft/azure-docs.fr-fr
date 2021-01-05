@@ -7,12 +7,12 @@ ms.service: dns
 ms.topic: article
 ms.date: 9/24/2019
 ms.author: rohink
-ms.openlocfilehash: a951bc07c4a8ed42b1c116332d13674656bbaafd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9eaa320e79f1d595303c6d9fe1399df12cb6c52b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75646793"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954407"
 ---
 # <a name="what-is-a-private-azure-dns-zone"></a>Qu’est-ce qu’une zone Azure DNS privée ?
 
@@ -25,7 +25,7 @@ Vous pouvez également activer la fonctionnalité d’[inscription automatique](
 
 ## <a name="limits"></a>limites
 
-Pour savoir combien de zones DNS privées vous pouvez créer dans un abonnement et combien de jeux d’enregistrements peuvent être pris en charge dans une zone DNS privée, consultez [Limites d’Azure DNS](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-dns-limits).
+Pour savoir combien de zones DNS privées vous pouvez créer dans un abonnement et combien de jeux d’enregistrements peuvent être pris en charge dans une zone DNS privée, consultez [Limites d’Azure DNS](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-dns-limits).
 
 ## <a name="restrictions"></a>Restrictions
 

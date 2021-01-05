@@ -8,17 +8,17 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 12/04/2018
 ms.custom: seodec18
-ms.openlocfilehash: 22112272bb302769e5969cf6995d486438deb41f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 923e8d1ffc3e606c16226b4b2ccbdcfaf4d3e9f1
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75431626"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93123419"
 ---
 # <a name="azure-stream-analytics-output-error-policy"></a>Stratégies d’erreur de sortie d’Azure Stream Analytics
 Cet article décrit les stratégies de gestion des erreurs de sortie qui peuvent être configurées dans Azure Stream Analytics.
 
-Les stratégies de gestion des erreurs de sortie s’appliquent seulement aux erreurs de conversion de données qui se produisent quand l’événement de sortie généré par une tâche Stream Analytics n’est pas conforme au schéma du récepteur cible. Vous pouvez configurer cette stratégie en choisissant **Recommencer** ou **Supprimer**. Dans le portail Azure, quand vous êtes dans une tâche Stream Analytics, sous **Configurer**, sélectionnez **Stratégie d’erreur** pour effectuer votre sélection.
+Les stratégies de gestion des erreurs de sortie s’appliquent seulement aux erreurs de conversion de données qui se produisent quand l’événement de sortie généré par une tâche Stream Analytics n’est pas conforme au schéma du récepteur cible. Vous pouvez configurer cette stratégie en choisissant **Recommencer** ou **Supprimer**. Dans le portail Azure, quand vous êtes dans une tâche Stream Analytics, sous **Configurer** , sélectionnez **Stratégie d’erreur** pour effectuer votre sélection.
 
 ![Emplacement des stratégies d’erreur de sortie d’Azure Stream Analytics](./media/stream-analytics-output-error-policy/stream-analytics-error-policy-locate.png)
 
@@ -34,4 +34,4 @@ Toutes les erreurs temporaires (par exemple les erreurs de réseau) font l’obj
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Guide de dépannage pour Azure Stream Analytics](stream-analytics-troubleshooting-guide.md)
+[Guide de dépannage pour Azure Stream Analytics](./stream-analytics-troubleshoot-query.md)

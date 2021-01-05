@@ -1,0 +1,59 @@
+- name: Microsoft Azure Attestation (préversion)
+  href: index.yml
+- name: Vue d’ensemble
+  items:
+    - name: À propos de Microsoft Azure Attestation
+      href: overview.md
+- name: Démarrages rapides
+  items:
+    - name: Modèle ARM
+      displayName: Resource Manager
+      href: quickstart-template.md
+    - name: PowerShell
+      href: quickstart-powershell.md
+- name: Tutoriels
+  items:
+    - name: Création d’une stratégie d’attestation
+      href: author-sign-policy.md
+    - name: Exemples de code d’attestation SGX
+      href: /samples/browse/?expanded=azure&terms=attestation
+- name: Exemples
+  items:
+    - name: Stratégie d’attestation
+      href: policy-examples.md
+    - name: Certificat du signataire de stratégie
+      href: policy-signer-examples.md
+- name: Concepts
+  items:
+    - name: Concepts de base
+      href: basic-concepts.md
+    - name: Revendications de stratégie d’attestation
+      items:
+        - name: Grammaire des règles de revendication
+          href: claim-rule-grammar.md
+        - name: Ensembles de revendications
+          href: claim-sets.md
+    - name: Workflow
+      href: workflow.md
+    - name: Afficher les journaux d’audit
+      href: audit-logs.md
+- name: Références
+  items:
+    - name: Disponibilité régionale
+      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=azure-attestation'
+    - name: Questions fréquentes (FAQ)
+      href: faq.md
+    - name: REST
+      href: /rest/api/attestation/
+    - name: Azure PowerShell
+      href: /powershell/module/az.attestation/?view=azps-5.0.0#attestation
+    - name: Azure CLI
+      href: /cli/azure/ext/attestation/attestation?view=azure-cli-latest
+    - name: Bibliothèque Azure DCAP pour Windows
+      href: 'https://www.nuget.org/packages/Microsoft.Azure.DCAP/'
+    - name: Bibliothèque Azure DCAP pour Linux
+      href: 'https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/a/az-dcap-client/'
+    - name: Problèmes de dépannage
+      href: troubleshoot-guide.md
+    - name: Protocole d’attestation VBS
+      href: virtualization-based-security-protocol.md

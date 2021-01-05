@@ -1,38 +1,33 @@
 ---
 title: Problèmes de diagnostic de Windows Virtual Desktop – Azure
 description: Comment utiliser la fonctionnalité de diagnostic de Windows Virtual Desktop pour diagnostiquer des problèmes.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
-ms.date: 04/30/2020
+ms.topic: troubleshooting
+ms.date: 09/21/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: cffc6393ef6f5c1a33be615d9d5d4b8729ab711f
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 70676bd1a07acdfcbba071a906b390ed66d70074
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611855"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91279856"
 ---
-# <a name="identify-and-diagnose-issues"></a>Identifier et diagnostiquer les problèmes
+# <a name="identify-and-diagnose-windows-virtual-desktop-issues"></a>Identifier et diagnostiquer les problèmes liés à Windows Virtual Desktop
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/diagnostics-role-service-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/diagnostics-role-service-2019.md).
 
 Windows Virtual Desktop offre une fonctionnalité de diagnostic qui permet à l’administrateur d’identifier les problèmes via une seule interface. Pour en savoir plus sur les fonctionnalités de diagnostic de Windows Virtual Desktop, consultez [Utiliser Log Analytics pour la fonctionnalité de diagnostic](diagnostics-log-analytics.md).
-  
+
 Les connexions qui n’atteignent pas Windows Virtual Desktop ne figureront pas dans les résultats de diagnostic, car le service de rôle de diagnostics fait partie de Windows Virtual Desktop. Des problèmes de connexion à Windows Virtual Desktop peuvent survenir lorsque l’utilisateur rencontre des problèmes de connectivité au réseau.
 
 ## <a name="common-error-scenarios"></a>Scénarios d’erreur courants
 
-Les scénarios d’erreur sont classés en interne au service et en externe à Windows Virtual Desktop.
+La table WVDErrors effectue le suivi des erreurs pour tous les types d’activités. La colonne appelée « ServiceError » fournit un indicateur supplémentaire : « True » ou « False ». Cet indicateur vous signale si l’erreur est liée au service.
 
-* Problème interne : spécifie des scénarios qui ne peuvent pas être atténués par le client et qui doivent être résolus en tant que problèmes de support. Lorsque vous formulez des commentaires via [Windows Virtual Desktop Tech Community](https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop), incluez l’ID de corrélation, puis spécifiez une période approximative de survenance du problème.
-* Problème externe : a trait à scénarios qui peuvent être atténués par le client. Il s’agit de problèmes externes à Windows Virtual Desktop.
+* Si la valeur est « True », l’équipe du service a peut-être déjà étudié ce problème. Si cela impacte l’expérience utilisateur et si l’erreur s’affiche un grand nombre de fois, nous vous recommandons d’envoyer un ticket de support pour Windows Virtual Desktop.
+* Si la valeur est « False », il s’agit peut-être d’une mauvaise configuration que vous pouvez corriger. Le message d’erreur peut vous indiquer par où commencer.
 
 Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer vos administrateurs.
 
@@ -51,7 +46,7 @@ Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer v
 |La dissociation de l’utilisateur du groupe d’applications a échoué|Impossible d’annuler la publication d’un groupe d’applications pour un utilisateur. Vérifiez si l’utilisateur est disponible sur Azure AD. Vérifiez si l’utilisateur fait partie d’un groupe d’utilisateurs sur lequel le groupe d’applications est publié. |
 |Une erreur s’est produite lors de la récupération des emplacements disponibles |Vérifiez l’emplacement de la machine virtuelle utilisée dans l’Assistant Création d’un pool d’hôtes. Si l’image n’est pas disponible dans cet emplacement, ajoutez une image à cet emplacement ou choisissez un autre emplacement de machine virtuelle. |
 
-### <a name="external-connection-error-codes"></a>Codes d’erreur de connexion externe
+### <a name="connection-error-codes"></a>Codes d’erreur de connexion
 
 |Code numérique|Code d'erreur|Solution suggérée|
 |---|---|---|
@@ -65,6 +60,14 @@ Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer v
 |8|ConnectionBroken|La connexion entre le client et passerelle ou serveur a été interrompue. Aucune action n’est nécessaire, sauf si cela se produit de manière inattendue.|
 |14|UnexpectedNetworkDisconnect|La connexion au réseau a été perdue. Demandez à l’utilisateur de se reconnecter.|
 |24|ReverseConnectFailed|La machine virtuelle hôte n’a aucune une ligne directe vers la passerelle Bureau à distance. Vérifiez que l’adresse IP de la passerelle peut être résolue.|
+
+## <a name="error-cant-add-user-assignments-to-an-app-group"></a>Erreur : Impossible d’ajouter des affectations d’utilisateurs à un groupe d’applications
+
+Après l’affectation d’un utilisateur à un groupe d’applications, le portail Azure affiche un avertissement indiquant « Fin de session » ou « Problèmes d’authentification - Extension Microsoft_Azure_WVD ». La page d’affectation n’est alors pas chargée, et ensuite, les pages cessent de se charger dans le portail Azure (par exemple, Azure Monitor, Log Analytics, Service Health, etc.).
+
+**Cause :** Il y a un problème avec la stratégie d’accès conditionnel. Le portail Azure tente d’obtenir un jeton pour Microsoft Graph, qui dépend de SharePoint Online. Le client dispose d’une stratégie d’accès conditionnel appelée « Microsoft Office 365 Data Storage Terms of Use », qui oblige les utilisateurs à accepter les conditions d’utilisation pour accéder au stockage des données. Toutefois, les utilisateurs ne se sont pas encore connectés, donc le portail Azure ne peut pas récupérer le jeton.
+
+**Correctif :** Avant de se connecter au portail Azure, l’administrateur doit d’abord se connecter à SharePoint et accepter les conditions d’utilisation. Ensuite, il devrait être en mesure de se connecter au portail Azure normalement.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -6,14 +6,17 @@ ms.topic: conceptual
 description: Passez en revue et testez les modifications à partir d’une demande de tirage (pull request) directement dans Azure Kubernetes Service avec des actions GitHub et Azure Dev Spaces.
 keywords: Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, Actions GitHub, Helm, service Mesh, routage du service Mesh, kubectl, k8s
 manager: gwallace
-ms.openlocfilehash: a83da0ef3958748831eb0eeda1aa5e91efa7ef2e
-ms.sourcegitcommit: 0450ed87a7e01bbe38b3a3aea2a21881f34f34dd
+ms.custom: devx-track-js, devx-track-azurecli
+ms.openlocfilehash: 9bed61861c80f141270e50b644b32ae42fbe8e77
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80637948"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995560"
 ---
 # <a name="github-actions--azure-kubernetes-service-preview"></a>Actions GitHub & Azure Kubernetes Service (préversion)
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Azure Dev Spaces fournit un flux de travail en utilisant GitHub Actions, qui vous permet de tester les modifications d’une demande de tirage (pull request) directement dans AKS avant de la fusionner dans la branche principale de votre dépôt. Avoir une application en cours d’exécution pour examiner les modifications apportées à une demande de tirage peut accroître la confiance du développeur et des membres de l’équipe. Cette application en cours d’exécution peut également aider les membres de son équipe, tels que les chefs de produits et les concepteurs, à faire partie du processus de révision lors des premières étapes du développement.
 
@@ -169,10 +172,10 @@ az group delete --name MyResourceGroup --yes --no-wait
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment Azure Dev Spaces vous aide à développer des applications plus complexes sur plusieurs conteneurs, et comment vous pouvez simplifier le développement collaboratif en utilisant différentes versions ou branches de votre code dans différents espaces.
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
 
 > [!div class="nextstepaction"]
-> [Développement en équipe dans Azure Dev Spaces][team-quickstart]
+> [Fonctionnement d’Azure Dev Spaces](../how-dev-spaces-works.md)
 
 [azure-cli-installed]: /cli/azure/install-azure-cli?view=azure-cli-latest
 [az-ad-sp-create-for-rbac]: /cli/azure/ad/sp#az-ad-sp-create-for-rbac
@@ -189,4 +192,3 @@ Découvrez comment Azure Dev Spaces vous aide à développer des applications pl
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 [sp-acr]: ../../container-registry/container-registry-auth-service-principal.md
 [sp-aks]: ../../aks/kubernetes-service-principal.md
-[team-quickstart]: ../quickstart-team-development.md

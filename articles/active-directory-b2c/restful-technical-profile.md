@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 03/26/2020
+ms.date: 12/11/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 410f413fc8450c0ee33c3ca95e860a3e8de34107
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 891991fa938ad3dcfacae6d02e40efd6d6e9689e
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80332608"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97386848"
 ---
 # <a name="define-a-restful-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique RESTful dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -30,7 +30,7 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `Prop
 
 L’exemple suivant montre un profil technique RESTful :
 
-```XML
+```xml
 <TechnicalProfile Id="REST-UserMembershipValidator">
   <DisplayName>Validate user input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -41,7 +41,7 @@ L’exemple suivant montre un profil technique RESTful :
 
 L’élément **InputClaims** contient une liste de revendications à envoyer à l’API REST. Vous pouvez également mapper le nom de votre revendication au nom défini dans l’API REST. L’exemple suivant montre le mappage entre votre stratégie et l’API REST. La revendication **givenName** est envoyée à l’API REST en tant que **firstName**, tandis que la revendication **surname** est envoyée en tant que **lastName**. La revendication **email** est définie telle quelle.
 
-```XML
+```xml
 <InputClaims>
   <InputClaim ClaimTypeReferenceId="email" />
   <InputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="firstName" />
@@ -66,7 +66,7 @@ Pour envoyer une charge utile JSON complexe :
 
 L’exemple suivant `TechnicalProfile` envoie un e-mail de vérification à l’aide d’un service de messagerie tiers (dans ce cas, SendGrid).
 
-```XML
+```xml
 <TechnicalProfile Id="SendGrid">
   <DisplayName>Use SendGrid's email API to send the code the the user</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -75,6 +75,7 @@ L’exemple suivant `TechnicalProfile` envoie un e-mail de vérification à l’
     <Item Key="AuthenticationType">Bearer</Item>
     <Item Key="SendClaimsIn">Body</Item>
     <Item Key="ClaimUsedForRequestPayload">sendGridReqBody</Item>
+    <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
   </Metadata>
   <CryptographicKeys>
     <Key Id="BearerAuthenticationToken" StorageReferenceId="B2C_1A_SendGridApiKey" />
@@ -114,21 +115,32 @@ Le profil technique retourne également des revendications, qui ne sont pas reto
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
 | ServiceUrl | Oui | URL du point de terminaison de l’API REST. |
-| AuthenticationType | Oui | Type de l’authentification effectuée par le fournisseur de revendications RESTful. Valeurs possibles : `None`, `Basic`, `Bearer` ou `ClientCertificate`. La valeur `None` indique que l’API REST n’est pas anonyme. La valeur `Basic` indique que l’API REST est sécurisée avec une authentification HTTP de base. Seuls des utilisateurs vérifiés, notamment Azure AD B2C, peuvent accéder à votre API. La valeur `ClientCertificate` (recommandée) indique que l’API REST restreint l’accès à l’aide d’une authentification de certificat client. Seuls des services disposant des certificats appropriés, par exemple Azure AD B2C, peuvent accéder à votre API. La valeur `Bearer` indique que l’API REST restreint l’accès à l’aide d’un jeton du porteur OAuth2 du client. |
+| AuthenticationType | Oui | Type de l’authentification effectuée par le fournisseur de revendications RESTful. Valeurs possibles : `None`, `Basic`, `Bearer`, `ClientCertificate` ou `ApiKeyHeader`. <br /><ul><li>La valeur `None` indique que l’API REST est anonyme. </li><li>La valeur `Basic` indique que l’API REST est sécurisée avec une authentification HTTP de base. Seuls des utilisateurs vérifiés, notamment Azure AD B2C, peuvent accéder à votre API. </li><li>La valeur `ClientCertificate` (recommandée) indique que l’API REST restreint l’accès à l’aide d’une authentification de certificat client. Seuls des services disposant des certificats appropriés, par exemple Azure AD B2C, peuvent accéder à votre API. </li><li>La valeur `Bearer` indique que l’API REST restreint l’accès à l’aide d’un jeton du porteur OAuth2 du client. </li><li>La valeur `ApiKeyHeader` indique que l’API REST est sécurisée par l’en-tête HTTP de la clé API, par exemple *x-functions-key*. </li></ul> |
 | AllowInsecureAuthInProduction| Non| Indique si `AuthenticationType` peut être défini sur `none` dans l’environnement de production (`DeploymentMode` de la stratégie [TrustFrameworkPolicy](trustframeworkpolicy.md) est défini sur `Production` ou n’est pas spécifié). Valeurs possibles : true ou false (par défaut). |
-| SendClaimsIn | Non | Spécifie la façon dont les revendications d’entrée sont envoyées au fournisseur de revendications RESTful. Valeurs possibles : `Body` (par défaut), `Form`, `Header`, ou `QueryString`. La valeur `Body` est la revendication d’entrée envoyée dans le corps de la demande au format JSON. Le valeur `Form` est la revendication d’entrée envoyée dans le corps de la demande, dans un format de valeurs de clé séparées par des perluètes (&). La valeur `Header` est la revendication d’entrée envoyée dans l’en-tête de la demande. La valeur `QueryString` est la revendication d’entrée envoyée dans la chaîne de requête de la demande. Les verbes HTTP appelés par chacune sont les suivants :<br /><ul><li>`Body`: POST</li><li>`Form`: POST</li><li>`Header`: GET</li><li>`QueryString`: GET</li></ul> |
+| SendClaimsIn | Non | Spécifie la façon dont les revendications d’entrée sont envoyées au fournisseur de revendications RESTful. Valeurs possibles : `Body` (par défaut), `Form`, `Header`, `Url` ou `QueryString`. La valeur `Body` est la revendication d’entrée envoyée dans le corps de la demande au format JSON. Le valeur `Form` est la revendication d’entrée envoyée dans le corps de la demande, dans un format de valeurs de clé séparées par des perluètes (&). La valeur `Header` est la revendication d’entrée envoyée dans l’en-tête de la demande. La valeur `Url` correspond à la revendication d’entrée qui est envoyée dans l’URL, par exemple, https://{claim1}.example.com/{claim2}/{claim3}?{claim4}={claim5}. La valeur `QueryString` est la revendication d’entrée envoyée dans la chaîne de requête de la demande. Les verbes HTTP appelés par chacune sont les suivants :<br /><ul><li>`Body`: POST</li><li>`Form`: POST</li><li>`Header`: GET</li><li>`Url`: GET</li><li>`QueryString`: GET</li></ul> |
 | ClaimsFormat | Non | Non utilisé actuellement, peut être ignoré. |
 | ClaimUsedForRequestPayload| Non | Nom d’une revendication de chaîne qui contient la charge utile à envoyer à l’API REST. |
-| DebugMode | Non | Exécute le profil technique en mode débogage. Valeurs possibles : `true` ou `false` (par défaut). En mode débogage, l’API REST peut retourner plus d’informations. Consultez la section [Retour de message d’erreur](#returning-error-message). |
-| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
-| ResolveJsonPathsInJsonTokens  | Non | Indique si le profil technique résout les chemins d’accès JSON. Valeurs possibles : `true` ou `false` (par défaut). Utilisez ces métadonnées pour lire des données issues d’un élément JSON imbriqué. Dans un élément [OutputClaim](technicalprofiles.md#outputclaims), définissez `PartnerClaimType` sur l’élément de chemin d’accès JSON que vous souhaitez générer. Par exemple : `firstName.localized` ou `data.0.to.0.email`.|
+| DebugMode | Non | Exécute le profil technique en mode débogage. Valeurs possibles : `true` ou `false` (par défaut). En mode débogage, l’API REST peut retourner plus d’informations. Consultez la section [Retour de message d’erreur](#returning-validation-error-message). |
+| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+| ResolveJsonPathsInJsonTokens  | Non | Indique si le profil technique résout les chemins d’accès JSON. Valeurs possibles : `true` ou `false` (par défaut). Utilisez ces métadonnées pour lire des données issues d’un élément JSON imbriqué. Dans un élément [OutputClaim](technicalprofiles.md#output-claims), définissez `PartnerClaimType` sur l’élément de chemin d’accès JSON que vous souhaitez générer. Par exemple : `firstName.localized` ou `data.0.to.0.email`.|
 | UseClaimAsBearerToken| Non| Nom de la revendication qui contient le jeton du porteur.|
+
+## <a name="error-handling"></a>Gestion des erreurs
+
+Les métadonnées suivantes peuvent être utilisées pour configurer les messages d’erreur affichés en cas d’échec de l’API REST. Les messages d’erreur peuvent être [localisés](localization-string-ids.md#restful-service-error-messages).
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| DefaultUserMessageIfRequestFailed | Non | Message d’erreur personnalisé par défaut pour toutes les exceptions de l’API REST.|
+| UserMessageIfCircuitOpen | Non | Message d’erreur lorsque l’API REST n’est pas accessible. S’il n’est pas spécifié, la valeur DefaultUserMessageIfRequestFailed est retournée. |
+| UserMessageIfDnsResolutionFailed | Non | Message d’erreur pour l’exception de résolution DNS. S’il n’est pas spécifié, la valeur DefaultUserMessageIfRequestFailed est retournée. | 
+| UserMessageIfRequestTimeout | Non | Message d’erreur lorsque la connexion a expiré. S’il n’est pas spécifié, la valeur DefaultUserMessageIfRequestFailed est retournée. | 
 
 ## <a name="cryptographic-keys"></a>Clés de chiffrement
 
 Si le type d’authentification est défini sur `None`, l’élément **CryptographicKeys** n’est pas utilisé.
 
-```XML
+```xml
 <TechnicalProfile Id="REST-API-SignUp">
   <DisplayName>Validate user's input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -149,7 +161,7 @@ Si le type d’authentification est défini sur `Basic`, l’élément **Cryptog
 
 L’exemple suivant montre un profil technique avec une authentification de base :
 
-```XML
+```xml
 <TechnicalProfile Id="REST-API-SignUp">
   <DisplayName>Validate user's input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -171,7 +183,7 @@ Si le type d’authentification est défini sur `ClientCertificate`, l’éléme
 | --------- | -------- | ----------- |
 | ClientCertificate | Oui | Certificat X509 (jeu de clés RSA) à utiliser pour l’authentification. |
 
-```XML
+```xml
 <TechnicalProfile Id="REST-API-SignUp">
   <DisplayName>Validate user's input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -192,7 +204,7 @@ Si le type d’authentification est défini sur `Bearer`, l’élément **Crypto
 | --------- | -------- | ----------- |
 | BearerAuthenticationToken | Non | Jeton du porteur OAuth 2.0. |
 
-```XML
+```xml
 <TechnicalProfile Id="REST-API-SignUp">
   <DisplayName>Validate user's input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -207,11 +219,32 @@ Si le type d’authentification est défini sur `Bearer`, l’élément **Crypto
 </TechnicalProfile>
 ```
 
-## <a name="returning-error-message"></a>Retour de message d’erreur
+Si le type d’authentification est défini sur `ApiKeyHeader`, l’élément **CryptographicKeys** contient l’attribut suivant :
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| Nom de l’en-tête HTTP, tel que `x-functions-key` ou `x-api-key`. | Oui | Clé utilisée pour l’authentification. |
+
+```xml
+<TechnicalProfile Id="REST-API-SignUp">
+  <DisplayName>Validate user's input data and return loyaltyNumber claim</DisplayName>
+  <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+  <Metadata>
+    <Item Key="ServiceUrl">https://your-app-name.azurewebsites.NET/api/identity/signup</Item>
+    <Item Key="AuthenticationType">ApiKeyHeader</Item>
+    <Item Key="SendClaimsIn">Body</Item>
+  </Metadata>
+  <CryptographicKeys>
+    <Key Id="x-functions-key" StorageReferenceId="B2C_1A_RestApiKey" />
+  </CryptographicKeys>
+</TechnicalProfile>
+```
+
+## <a name="returning-validation-error-message"></a>Renvoi du message d'erreur de validation
 
 Il se peut que votre API REST doive retourner un message d’erreur tel que « Utilisateur introuvable dans le système CRM ». Lorsqu’une erreur se produit, l’API REST doit retourner un message d’erreur HTTP 4xx, par exemple le code d’état de réponse 400 (requête incorrecte) ou 409 (conflit). Le corps de la réponse contient le message d’erreur au format JSON :
 
-```JSON
+```json
 {
   "version": "1.0.0",
   "status": 409,

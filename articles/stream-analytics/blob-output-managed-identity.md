@@ -4,18 +4,18 @@ description: Cet article explique comment utiliser des identités managées afin
 author: cedarbaum
 ms.author: sacedarb
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/11/2020
-ms.openlocfilehash: 13f48a9e0bc3ed8f8c4d5f1b7da4b6c03f54cdf8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f1aad2464e4979ecbf35deceaad4de70e05b3004
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79129971"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96573661"
 ---
-# <a name="use-managed-identity-to-authenticate-your-azure-stream-analytics-job-to-azure-blob-storage-output"></a>Utiliser des identités managées pour authentifier votre travail Azure Stream Analytics dans la sortie du stockage Blob Azure
+# <a name="use-managed-identity-preview-to-authenticate-your-azure-stream-analytics-job-to-azure-blob-storage-output"></a>Utiliser Identité managée (préversion) pour authentifier votre travail Azure Stream Analytics avec la sortie Stockage Blob Azure
 
-L’[authentification par identité managée](../active-directory/managed-identities-azure-resources/overview.md) pour la sortie du stockage Blob Azure donne aux travaux Stream Analytics un accès direct à un compte de stockage au lieu d’utiliser une chaîne de connexion. Outre la sécurité améliorée, cette fonctionnalité vous permet également d’écrire des données dans un compte de stockage dans un réseau virtuel (VNET) au sein d’Azure.
+L’[authentification par identité managée](../active-directory/managed-identities-azure-resources/overview.md) (préversion) pour la sortie Stockage Blob Azure donne aux travaux Stream Analytics un accès direct à un compte de stockage au lieu d’utiliser une chaîne de connexion. Outre la sécurité améliorée, cette fonctionnalité vous permet également d’écrire des données dans un compte de stockage dans un réseau virtuel (VNET) au sein d’Azure.
 
 Cet article vous montre comment activer une identité managée pour une ou des sorties Blob d’un travail Azure Stream Analytics via le portail Azure et un déploiement d’Azure Resource Manager.
 
@@ -33,7 +33,7 @@ Cet article vous montre comment activer une identité managée pour une ou des s
 
 ## <a name="azure-resource-manager-deployment"></a>Déploiement Azure Resource Manager
 
-L’utilisation d’Azure Resource Manager vous permet d’automatiser entièrement le déploiement de votre travail Stream Analytics. Vous pouvez déployer des modèles Resource Manager à l’aide d’Azure PowerShell ou de l’[interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest). Les exemples suivants utilisent l’interface de ligne de commande Azure.
+L’utilisation d’Azure Resource Manager vous permet d’automatiser entièrement le déploiement de votre travail Stream Analytics. Vous pouvez déployer des modèles Resource Manager à l’aide d’Azure PowerShell ou de l’[interface de ligne de commande Azure](/cli/azure/). Les exemples suivants utilisent l’interface de ligne de commande Azure.
 
 
 1. Vous pouvez créer une ressource **Microsoft.StreamAnalytics/streamingjobs** avec une identité managée en incluant la propriété suivante dans la section ressources de votre modèle Resource Manager :
@@ -218,11 +218,15 @@ Pour autoriser l’accès à la totalité du compte, exécutez la commande suiva
 
 Lorsque vous configurez les **pare-feu et les réseaux virtuels** de votre compte de stockage, vous pouvez éventuellement autoriser le trafic réseau à partir d’autres services Microsoft approuvés. Lorsque Stream Analytics s’authentifie à l’aide de l’identité managée, il fournit la preuve que la demande provient d’un service approuvé. Vous trouverez ci-dessous des instructions pour activer cette exception d’accès au réseau virtuel.
 
-1.  Accédez au volet « Pare-feu et réseaux virtuels » dans le volet de configuration du compte de stockage.
-2.  Vérifiez que l’option « Autoriser les services Microsoft approuvés à accéder à ce compte de stockage » est activée.
-3.  Si vous l’avez activée, cliquez sur **Enregistrer**.
+1.    Accédez au volet « Pare-feu et réseaux virtuels » dans le volet de configuration du compte de stockage.
+2.    Vérifiez que l’option « Autoriser les services Microsoft approuvés à accéder à ce compte de stockage » est activée.
+3.    Si vous l’avez activée, cliquez sur **Enregistrer**.
 
    ![Activer l’accès au réseau virtuel](./media/stream-analytics-managed-identities-blob-output-preview/stream-analytics-vnet-exception.png)
+
+## <a name="remove-managed-identity"></a>Supprimer l’identité managée
+
+L’identité gérée créée pour une tâche Stream Analytics est supprimée uniquement lorsque la tâche est supprimée. Il n’existe aucun moyen de supprimer l’identité gérée sans supprimer la tâche. Si vous ne souhaitez plus utiliser l’identité gérée, vous pouvez modifier la méthode d’authentification pour la sortie. L’identité gérée continuera d’exister jusqu’à ce que la tâche soit supprimée, et sera réemployée si vous décidez à nouveau d’utiliser l’authentification d’identité gérée.
 
 ## <a name="limitations"></a>Limites
 Vous trouverez plus bas les limitations actuelles de cette fonctionnalité :

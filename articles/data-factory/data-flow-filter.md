@@ -7,19 +7,21 @@ ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 10/16/2019
-ms.openlocfilehash: 32a40f3d4da93318c6d2ec25295c89a7b53141e4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/26/2020
+ms.openlocfilehash: 8189228d6707812fb943e9925dc2bbf1b6da4972
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81606437"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84112808"
 ---
 # <a name="filter-transformation-in-mapping-data-flow"></a>Transformation de filtre dans un flux de données de mappage
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Les transformations de filtre permettent de filtrer des lignes en fonction d’une condition. Le flux de sortie comprend toutes les lignes qui correspondent à la condition de filtrage. La transformation de filtre est similaire à une clause WHERE dans SQL.
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4xnxN]
 
 ## <a name="configuration"></a>Configuration
 

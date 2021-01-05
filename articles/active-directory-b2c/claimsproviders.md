@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 01/29/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: dfb34085181e0b759d1d77485ff21b5bc59e0de3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1d1928de8c9731b54966e566d4dddf9c01073d41
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78189767"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85201257"
 ---
 # <a name="claimsproviders"></a>ClaimsProviders
 
@@ -23,7 +23,7 @@ ms.locfileid: "78189767"
 
 Un fournisseur de revendications contient un ensemble de [profils techniques](technicalprofiles.md). Chaque fournisseur de revendications doit avoir un ou plusieurs profils techniques déterminant les points de terminaison et les protocoles nécessaires pour communiquer avec lui. Un fournisseur de revendications peut avoir plusieurs profils techniques. Par exemple, plusieurs profils techniques peuvent être définis, car le fournisseur de revendications prend en charge plusieurs protocoles, divers points de terminaison avec des fonctionnalités distinctes ou publie des revendications différentes à divers niveaux d’assurance. Il peut être acceptable de publier des revendications sensibles dans un parcours utilisateur, mais pas dans un autre.
 
-```XML
+```xml
 <ClaimsProviders>
   <ClaimsProvider>
     <Domain>Domain name</Domain>
@@ -57,7 +57,7 @@ L’élément **ClaimsProvider** contient les éléments enfant suivants :
 
 **ClaimsProvider** organise le rapport entre vos profils techniques et le fournisseur de revendications. L’exemple suivant montre le fournisseur de revendications Azure Active Directory avec les profils techniques Azure Active Directory :
 
-```XML
+```xml
 <ClaimsProvider>
   <DisplayName>Azure Active Directory</DisplayName>
   <TechnicalProfiles>
@@ -95,7 +95,7 @@ L’élément **ClaimsProvider** contient les éléments enfant suivants :
 
 L’exemple suivant montre le fournisseur de revendications Facebook avec le profil technique **Facebook-OAUTH**.
 
-```XML
+```xml
 <ClaimsProvider>
   <Domain>facebook.com</Domain>
   <DisplayName>Facebook</DisplayName>

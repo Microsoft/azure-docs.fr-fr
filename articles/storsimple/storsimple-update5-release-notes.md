@@ -8,11 +8,11 @@ ms.topic: conceptual
 ms.date: 11/13/2017
 ms.author: alkohli
 ms.openlocfilehash: 4fed65e12a166c046a0c63d7c4849f86805bbe9c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76275171"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021042"
 ---
 # <a name="storsimple-8000-series-update-5-release-notes"></a>Notes de publication de StorSimple 8000 Series Update 5
 

@@ -2,14 +2,14 @@
 title: Configurer Blockchain Data Manager avec Azure CLI - Azure Blockchain Service
 description: Créez et gérez une instance Blockchain Data Manager pour Azure Blockchain Service avec Azure CLI
 ms.date: 03/30/2020
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: ravastra
-ms.openlocfilehash: e490803fabeed7d6234bd6984acbfb9f5270e0c0
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: f067f4413f6ad8541cd36a7581f9243bed4e195f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81254408"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87023736"
 ---
 # <a name="configure-blockchain-data-manager-using-azure-cli"></a>Configurer Blockchain Data Manager avec Azure CLI
 
@@ -25,7 +25,7 @@ Pour configurer une instance Data Manager Blockchain, vous devez :
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Installez la dernière version d’[Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) et connectez-vous à l’aide de `az login`.
+* Installez la dernière version d’[Azure CLI](/cli/azure/install-azure-cli) et connectez-vous à l’aide de `az login`.
 * Effectuer l’étape [Démarrage rapide : Utilisez Visual Studio Code pour vous connecter à un réseau de consortium Azure Blockchain Service](connect-vscode.md). Le service Azure Blockchain niveau *Standard* est recommandé lors de l’utilisation de Blockchain Data Manager.
 * Créer une [rubrique Event Grid](../../event-grid/custom-event-quickstart-portal.md#create-a-custom-topic)
 * En savoir plus les [Gestionnaires d’événements dans Azure Event Grid](../../event-grid/event-handlers.md)
@@ -36,11 +36,11 @@ Azure Cloud Shell est un interpréteur de commandes interactif et gratuit que vo
 
 Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite d’un bloc de code. Vous pouvez également lancer Cloud Shell dans un onglet distinct du navigateur en accédant à [https://shell.azure.com/bash](https://shell.azure.com/bash). Sélectionnez **Copier** pour copier les blocs de code, collez-les dans Cloud Shell, puis appuyez sur Entrée pour les exécuter.
 
-Si vous préférez installer et utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite au minimum la version 2.0.51 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez l’installer ou le mettre à niveau, consultez [Installation d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Si vous préférez installer et utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite au minimum la version 2.0.51 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez l’installer ou le mettre à niveau, consultez [Installation d’Azure CLI](/cli/azure/install-azure-cli).
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un groupe de ressources avec la commande [az group create](https://docs.microsoft.com/cli/azure/group). Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. L’exemple suivant crée un groupe de ressources nommé *myResourceGroup* à l’emplacement *eastus* :
+Créez un groupe de ressources avec la commande [az group create](/cli/azure/group). Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. L’exemple suivant crée un groupe de ressources nommé *myResourceGroup* à l’emplacement *eastus* :
 
 ```azurecli-interactive
 az group create --name myRG --location eastus
@@ -133,7 +133,7 @@ az resource create \
 
 ### <a name="input-examples"></a>Exemples d’entrée
 
-Exemple de configuration JSON pour créer une ressource d’entrée dans la région *USA Est* connectée au \<membre Blockchain\>.
+Exemple de JSON de configuration permettant de créer une ressource d’entrée dans la région *USA Est* connectée au \<Blockchain member\>.
 
 ``` json
 {
@@ -151,7 +151,7 @@ Exemple de configuration JSON pour créer une ressource d’entrée dans la rég
 |---------|-------------|
 | location | Région dans laquelle créer la ressource d’entrée. |
 | inputType | Type de registre du membre du service Azure Blockchain. **Ethereum** est actuellement pris en charge. |
-| resourceId | Nœud de transaction auquel l’entrée est connectée. Remplacez \<ID d’abonnement\>, \<Groupe de ressources\> et \<Membre Blockchain\> par les valeurs de la ressource de nœud de transaction. L’entrée se connecte au nœud de transaction par défaut pour le membre Azure Blockchain Service. |
+| resourceId | Nœud de transaction auquel l’entrée est connectée. Remplacez \<Subscription ID\>, \<Resource group\> et \<Blockchain member\> par les valeurs de la ressource de nœud de transaction. L’entrée se connecte au nœud de transaction par défaut pour le membre Azure Blockchain Service. |
 
 Créez une entrée nommée *myInput* pour *mywatcher* à l’aide d’une chaîne JSON de configuration.
 
@@ -205,7 +205,7 @@ az resource create \
 
 ### <a name="output-examples"></a>Exemples de sortie
 
-Exemple de configuration JSON pour créer une ressource de sortie dans la région *USA Est* connectée à une rubrique Event Grid dénommée \<event grid topic\>.
+Exemple de JSON de configuration permettant de créer une ressource de sortie dans la région *USA Est* connectée à une rubrique Event Grid nommée \<event grid topic\>.
 
 ``` json
 {
@@ -223,7 +223,7 @@ Exemple de configuration JSON pour créer une ressource de sortie dans la régio
 |---------|-------------|
 | location | Région dans laquelle créer la ressource de sortie. |
 | outputType | Type de sortie. Actuellement, **EventGrid** est pris en charge. |
-| resourceId | Ressource à laquelle la sortie est connectée. Remplacez \<ID d’abonnement\>, \<Groupe de ressources\> et \<Membre Blockchain\> par les valeurs de la ressource Event Grid. |
+| resourceId | Ressource à laquelle la sortie est connectée. Remplacez \<Subscription ID\>, \<Resource group\> et \<Blockchain member\> par les valeurs de la ressource Event Grid. |
 
 Créez une sortie nommée *myoutput* pour *mywatcher* qui se connecte à une rubrique Event Grid à l’aide d’une chaîne de configuration JSON.
 
@@ -348,7 +348,7 @@ az resource invoke-action \
 | Paramètre | Description |
 |-----------|-------------|
 | action | Démarrez l’observateur à l’aide de **start**. |
-| ids | ID de ressource d’observateur. Remplacez \<ID d’abonnement\>, \<Groupe de ressources\> et \<Nom de l’observateur\> par les valeurs de la ressource d’observateur.|
+| ids | ID de ressource d’observateur. Remplacez \<Subscription ID\>, \<Resource group\> et \<Watcher name\> par les valeurs de la ressource d’observateur.|
 
 ### <a name="start-instance-example"></a>Démarrer un exemple d’instance
 
@@ -373,7 +373,7 @@ az resource invoke-action \
 | Paramètre | Description |
 |-----------|-------------|
 | action | Utilisez **stop** pour arrêter l’observateur. |
-| ids | Nom de l’observateur. Remplacez \<ID d’abonnement\>, \<Groupe de ressources\> et \<Nom de l’observateur\> par les valeurs de la ressource d’observateur. |
+| ids | Nom de l’observateur. Remplacez \<Subscription ID\>, \<Resource group\> et \<Watcher name\> par les valeurs de la ressource d’observateur. |
 
 ### <a name="stop-watcher-example"></a>Exemple d’arrêt de l’observateur
 

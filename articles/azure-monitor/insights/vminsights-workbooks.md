@@ -6,16 +6,16 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/12/2020
-ms.openlocfilehash: a6ab126c3a5b0d2a82b17fac42dcc9e20f6aba3f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 43cdb9de111bdea5486e49a56d58d38279b685c7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480451"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95985541"
 ---
 # <a name="create-interactive-reports-azure-monitor-for-vms-with-workbooks"></a>Créer des rapports interactifs Azure Monitor pour machines virtuelles avec des classeurs
 
-Les classeurs regroupent du texte, des  [requêtes de journal](../log-query/query-language.md), des métriques et des paramètres sous la forme de rapports interactifs complets. Les classeurs sont modifiables par tous les membres de l’équipe ayant accès aux mêmes ressources Azure.
+Les classeurs regroupent du texte, des  [requêtes de journal](/azure/data-explorer/kusto/query/), des métriques et des paramètres sous la forme de rapports interactifs complets. Les classeurs sont modifiables par tous les membres de l’équipe ayant accès aux mêmes ressources Azure.
 
 Les classeurs sont utiles pour les scénarios tels que les suivants :
 
@@ -66,7 +66,7 @@ Un classeur est composé de sections comprenant des graphiques, des tableaux, du
 
 Les classeurs présentent deux modes : le **mode d’édition** et le **mode lecture**. Quand un nouveau classeur est lancé pour la première fois, il s’ouvre en **mode d’édition**. Tout le contenu du classeur s’affiche, notamment les étapes et les paramètres qui sont généralement masqués. Le **mode lecture** présente une vue de rapport simplifiée. Le mode lecture vous permet de masquer les éléments complexes de création du rapport, tout en accédant en quelques clics aux paramètres et mécanismes sous-jacents si vous avez besoin de les modifier.
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/workbook-new-workbook-editor-01.png)
+![Capture d’écran de la section de Classeur des machines virtuelles dans Azure Monitor montrant un nouveau classeur en mode d’édition avec les contrôles d’édition mis en évidence.](media/vminsights-workbooks/workbook-new-workbook-editor-01.png)
 
 1. Quand vous avez fini de modifier une section, cliquez sur **Fin de l’édition** en bas à gauche de la section.
 
@@ -102,7 +102,7 @@ Pour inclure des données d’autres espaces de travail Log Analytics ou d’une
 
 Chaque section a ses propres paramètres avancés, accessibles par le biais de l’icône ![Contrôles d’édition de la section Classeurs](media/vminsights-workbooks/006-settings.png) des paramètres située à droite du bouton **Ajouter des paramètres**.
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/007-settings-expanded.png)
+![Capture d’écran de la boîte de dialogue Paramètres avancés dans la section Classeur des machines virtuelles d’Azure Monitor. L’icône qui ouvre la boîte de dialogue est mise en évidence.](media/vminsights-workbooks/007-settings-expanded.png)
 
 |         |          |
 | ---------------- |:-----|
@@ -118,11 +118,11 @@ L’un des classeurs prédéfini, **Trafic TCP**, fournit des informations sur 
 
 La première section du classeur est basée sur les données de requête de journal. La deuxième section est également basée sur les données de requête de journal, mais la sélection d’une ligne dans le premier tableau met à jour de façon interactive le contenu des graphiques :
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/008-workbook-tcp-traffic.png)
+![Capture d’écran de la section Machines virtuelles dans Azure Monitor montrant le trafic TCP du classeur prédéfini.](media/vminsights-workbooks/008-workbook-tcp-traffic.png)
 
 Ce comportement est possible grâce à l’utilisation des paramètres avancés **Quand un élément est sélectionné, exporter un paramètre**, qui sont activés dans la requête de journal du tableau.
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/009-settings-export.png)
+![Capture d’écran de la boîte de dialogue Paramètres avancés pour un classeur de machines virtuelles avec l’option « Quand un élément est sélectionné, exporter un paramètre » activée.](media/vminsights-workbooks/009-settings-export.png)
 
 La deuxième requête de journal utilise alors les valeurs exportées quand une ligne est sélectionnée pour créer un ensemble de valeurs qui sont ensuite utilisés par l’en-tête de section et les graphiques. Si aucune ligne n’est sélectionnée, elle masque l’en-tête de section et les graphiques. 
 
@@ -141,7 +141,7 @@ Les sections de métriques vous offrent un accès complet pour intégrer des don
 
 Voici un exemple de données de machine virtuelle extraites dans un classeur en vue d’afficher les performances du processeur sous forme de grille :
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/010-metrics-grid.png)
+![Capture d’écran de la section Métriques d’un classeur de machine virtuelle dans Azure Monitor. Les performances de l’UC pour chaque machine virtuelle s’affichent sous forme de graphique.](media/vminsights-workbooks/010-metrics-grid.png)
 
 ## <a name="adding-parameter-sections"></a>Ajout de sections de paramètres
 
@@ -162,7 +162,7 @@ Quatre types de paramètres différents sont actuellement pris en charge :
 
 ### <a name="using-a-text-parameter"></a>Utilisation d’un paramètre de texte
 
-La valeur qu’un utilisateur entre dans la zone de texte est directement remplacée dans la requête, sans caractère d’échappement ni guillemets. Si la valeur dont vous avez besoin est une chaîne, le paramètre doit être saisi entre guillemets dans la requête (par exemple **‘{paramètre}’** ).
+La valeur qu’un utilisateur entre dans la zone de texte est directement remplacée dans la requête, sans caractère d’échappement ni guillemets. Si la valeur dont vous avez besoin est une chaîne, le paramètre doit être saisi entre guillemets dans la requête (par exemple **‘{paramètre}’**).
 
 Le paramètre de texte que la valeur entrée dans une zone de texte soit utilisée n’importe où. Cela peut être un nom de tableau, un nom de colonne, un nom de fonction, un opérateur, etc.  Le type de paramètre texte dispose d’un paramètre **Obtenir la valeur par défaut à partir d’une requête Analytics** qui permet au créateur du classeur d’utiliser une requête pour renseigner la valeur par défaut de cette zone de texte.
 
@@ -180,11 +180,11 @@ Si la colonne est de type chaîne, la chaîne null/vide est considérée comme f
 
 Examinons les paramètres présents dans le rapport Vue d’ensemble des connexions. Cliquez sur le symbole de modification en regard de **Direction**.
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/011-workbook-using-dropdown.png)
+![Capture d’écran de la section permettant l’ajout et la modification des paramètres de rapport dans Azure Monitor. L’icône de modification du paramètre Direction est sélectionnée.](media/vminsights-workbooks/011-workbook-using-dropdown.png)
 
 Cette action lance l’élément de menu **Modifier le paramètre**.
 
-![Contrôles d’édition de la section Classeurs d’Azure Monitor pour machines virtuelles](media/vminsights-workbooks/012-workbook-edit-parameter.png)
+![Capture d’écran de la boîte de dialogue Modifier le paramètre. Le nom du paramètre est Direction, le type de paramètre est Liste déroulante et l’option Récupérer les données à partir de JSON est sélectionnée.](media/vminsights-workbooks/012-workbook-edit-parameter.png)
 
 Le code JSON vous permet de générer une table arbitraire contenant des données. Par exemple, le code JSON suivant génère deux valeurs dans la liste déroulante :
 

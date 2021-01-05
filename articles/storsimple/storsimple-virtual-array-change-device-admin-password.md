@@ -9,18 +9,18 @@ editor: ''
 ms.assetid: 11490814-d9fd-4dc7-9c3b-55dd2c23eaf1
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 5308badf439254062a8aefca1840eb21bc234ace
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8bc8846d546faec194617ccb753cdbd105e16bf9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60580364"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85513613"
 ---
 # <a name="change-the-storsimple-virtual-array-device-administrator-password-via-storsimple-device-manager"></a>Modifier le mot de passe administrateur de l’appareil StorSimple Virtual Array via StorSimple Device Manager
 

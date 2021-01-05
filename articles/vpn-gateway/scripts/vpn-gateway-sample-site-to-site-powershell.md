@@ -1,20 +1,20 @@
 ---
 title: Exemple de script Azure PowerShell - Configurer un VPN de site à site | Microsoft Docs
-description: Configurez un VPN de site à site.
+description: Utilisez PowerShell pour créer une passerelle VPN basée sur l'itinéraire et configurez votre périphérique VPN pour ajouter une connectivité de site à site.
 services: vpn-gateway
 documentationcenter: vpn-gateway
-author: anzaman
+author: kumudD
 ms.service: vpn-gateway
 ms.devlang: powershell
 ms.topic: sample
 ms.date: 04/30/2018
 ms.author: alzam
-ms.openlocfilehash: 33a79461e1373657c366623e7ef5dbaf6aecf78f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e37fbcc0a37219c1630e887ac33d003810b15130
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "66113700"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658296"
 ---
 # <a name="create-a-vpn-gateway-and-add-a-site-to-site-connection-using-powershell"></a>Créer une passerelle VPN et ajouter une connexion de site à site à l’aide de PowerShell
 
@@ -105,8 +105,8 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork) | Créer un réseau virtuel. |
 | [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) | Crée une adresse IP publique. |
 | [New-AzVirtualNetworkGatewayIpConfig](/powershell/module/az.network/new-azvirtualnetworkgatewayipconfig) | Crée une configuration IP de la nouvelle passerelle. |
-| [New-AzVirtualNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworkgateway) | Crée une passerelle VPN. |
-| [New-AzLocalNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/new-azlocalnetworkgateway) | Crée une passerelle de réseau local. |
+| [New-AzVirtualNetworkGateway](/powershell/module/az.network/new-azvirtualnetworkgateway) | Crée une passerelle VPN. |
+| [New-AzLocalNetworkGateway](/powershell/module/az.network/new-azlocalnetworkgateway) | Crée une passerelle de réseau local. |
 | [New-AzVirtualNetworkGatewayConnection](/powershell/module/az.network/new-azvirtualnetworkgatewayconnection) | Crée une connexion de site à site. |
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 | [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork) | Définit la configuration de sous-réseau du réseau virtuel. |
@@ -114,4 +114,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

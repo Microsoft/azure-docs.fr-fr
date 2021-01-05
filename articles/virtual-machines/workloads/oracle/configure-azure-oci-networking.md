@@ -1,24 +1,19 @@
 ---
 title: Connecter Azure ExpressRoute à Oracle Cloud Infrastructure | Microsoft Docs
 description: Connecter Azure ExpressRoute à Oracle Cloud Infrastructure (OCI) FastConnect pour activer des solutions d’applications Oracle dans le cloud
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 03/16/2020
-ms.author: borisb
-ms.openlocfilehash: 70556cbbfefd6ad22ef96ee16065209031ea456c
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: rogardle
+ms.reviewer: cynthn
+ms.openlocfilehash: 2717ba307cac82465e0c5df996ef3b668af5e7d4
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683752"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94963706"
 ---
 # <a name="set-up-a-direct-interconnection-between-azure-and-oracle-cloud-infrastructure"></a>Configurer une interconnexion directe entre Azure et Oracle Cloud Infrastructure  
 
@@ -96,7 +91,7 @@ En installant des agents sur les deux clouds, vous pouvez tirer parti d’Azure 
 
 Pour supprimer l’interconnexion, les étapes suivantes doivent être suivies, dans l’ordre indiqué. Si vous ne respectez pas cet ordre, le circuit ExpressRoute passe en « état d’échec ».
 
-1. Supprimez la connexion ExpressRoute. Supprimez la connexion en sélectionnant l’icône **Supprimer** dans la page de votre connexion. Pour plus d’informations, consultez la [Documentation d’ExpressRoute](../../../expressroute/expressroute-howto-linkvnet-portal-resource-manager.md#delete-a-connection-to-unlink-a-vnet).
+1. Supprimez la connexion ExpressRoute. Supprimez la connexion en sélectionnant l’icône **Supprimer** dans la page de votre connexion. Pour plus d’informations, consultez la [Documentation d’ExpressRoute](../../../expressroute/expressroute-howto-linkvnet-portal-resource-manager.md#clean-up-resources).
 1. Supprimez le FastConnect Oracle à partir de la console de cloud Oracle.
 1. Une fois le circuit FastConnect Oracle supprimé, vous pouvez supprimer le circuit Azure ExpressRoute.
 

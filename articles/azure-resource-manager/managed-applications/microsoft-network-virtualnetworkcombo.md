@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/28/2018
 ms.author: tomfitz
-ms.openlocfilehash: 53c9653b44a6c9d26d49d37b351cf6000676e2d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 711f5293b205c1f500c6d9e08154342285ef959b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649661"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87033198"
 ---
 # <a name="microsoftnetworkvirtualnetworkcombo-ui-element"></a>Élément d’interface utilisateur Microsoft.Network.VirtualNetworkCombo
 
@@ -20,11 +20,11 @@ Groupe de contrôles pour la sélection d’un réseau virtuel nouveau ou exista
 
 Lorsque l’utilisateur sélectionne un nouveau réseau virtuel, il peut personnaliser le préfixe de nom et d’adresse de chaque sous-réseau. La configuration des sous-réseaux est facultative.
 
-![Microsoft.Network.VirtualNetworkCombo nouveau](./media/managed-application-elements/microsoft.network.virtualnetworkcombo-new.png)
+![Microsoft.Network.VirtualNetworkCombo nouveau](./media/managed-application-elements/microsoft-network-virtualnetworkcombo-new.png)
 
 Lorsque l’utilisateur sélectionne un réseau virtuel existant, il doit mettre en correspondance chaque sous-réseau nécessaire au modèle de déploiement avec un sous-réseau existant. La configuration des sous-réseaux dans ce cas est requise.
 
-![Microsoft.Network.VirtualNetworkCombo existant](./media/managed-application-elements/microsoft.network.virtualnetworkcombo-existing.png)
+![Microsoft.Network.VirtualNetworkCombo existant](./media/managed-application-elements/microsoft-network-virtualnetworkcombo-existing.png)
 
 ## <a name="schema"></a>schéma
 

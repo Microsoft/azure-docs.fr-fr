@@ -1,7 +1,7 @@
 ---
 title: Configuration des pilotes GPU NVIDIA de la série N Azure pour Windows
 description: Procédure de configuration des pilotes GPU NVIDIA pour les machines virtuelles série N exécutant Windows Serveur ou Windows dans Azure
-author: vikancha
+author: vikancha-MSFT
 manager: jkabat
 ms.service: virtual-machines-windows
 ms.topic: how-to
@@ -10,12 +10,12 @@ ms.workload: infrastructure-services
 ms.date: 09/24/2018
 ms.author: vikancha
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 0b00b2340445e7d103c78c1d8c1ea0e08ecabba5
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 2dccfebed26c8064db697413e7417ae08d69a3ac
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628110"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022033"
 ---
 # <a name="install-nvidia-gpu-drivers-on-n-series-vms-running-windows"></a>Installer les pilotes GPU NVIDIA sur les machines virtuelles de série N exécutant Windows 
 
@@ -23,7 +23,7 @@ Pour tirer parti des fonctionnalités GPU de machines virtuelles de la série N 
 
 Si vous choisissez d’installer manuellement les pilotes GPU NVIDIA, cet article indique les systèmes d'exploitation pris en charge, les pilotes et les étapes d’installation et de vérification. Des informations de configuration manuelle du pilote sont également disponibles pour [les machines virtuelles Linux](../linux/n-series-driver-setup.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
-Pour obtenir les spécifications de base, les capacités de stockage et les informations relatives aux disques, consultez [GPU Windows VM sizes](sizes-gpu.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) (Tailles de machine virtuelle Windows GPU). 
+Pour obtenir les spécifications de base, les capacités de stockage et les informations relatives aux disques, consultez [GPU Windows VM sizes](../sizes-gpu.md?toc=/azure/virtual-machines/windows/toc.json) (Tailles de machine virtuelle Windows GPU). 
 
 [!INCLUDE [virtual-machines-n-series-windows-support](../../../includes/virtual-machines-n-series-windows-support.md)]
 
@@ -53,19 +53,17 @@ Pour interroger l’état de l’appareil GPU, exécutez l’utilitaire de ligne
 
 ## <a name="rdma-network-connectivity"></a>Connectivité réseau RDMA
 
-La connectivité réseau RDMA peut être activée sur des machines virtuelles de série N compatibles RDMA, comme les machines NC24r déployées dans le même groupe à haute disponibilité ou dans un seul groupe de placement au sein d’un groupe de machines virtuelles identiques. L’extension HpcVmDrivers doit être ajoutée pour installer les pilotes d’appareils réseau Windows nécessaires à la connectivité RDMA. Pour ajouter l’extension de machine virtuelle sur une machine virtuelle de série N compatible RDMA, utilisez les cmdlets [Azure PowerShell](/powershell/azure/overview) pour Azure Resource Manager.
+La connectivité réseau RDMA peut être activée sur des machines virtuelles de série N compatibles RDMA, comme les machines NC24r déployées dans le même groupe à haute disponibilité ou dans un seul groupe de placement au sein d’un groupe de machines virtuelles identiques. L’extension HpcVmDrivers doit être ajoutée pour installer les pilotes d’appareils réseau Windows nécessaires à la connectivité RDMA. Pour ajouter l’extension de machine virtuelle sur une machine virtuelle de série N compatible RDMA, utilisez les cmdlets [Azure PowerShell](/powershell/azure/) pour Azure Resource Manager.
 
 Pour installer la dernière version 1.1 de l’extension HpcVMDrivers sur une machine virtuelle existante prenant en charge RDMA et nommée myVM dans la région USA Ouest :
   ```powershell
   Set-AzVMExtension -ResourceGroupName "myResourceGroup" -Location "westus" -VMName "myVM" -ExtensionName "HpcVmDrivers" -Publisher "Microsoft.HpcCompute" -Type "HpcVmDrivers" -TypeHandlerVersion "1.1"
   ```
-  Pour plus d’informations, consultez [Extensions et fonctionnalités de machine virtuelle pour Windows](extensions-features.md).
+  Pour plus d’informations, consultez [Extensions et fonctionnalités de machine virtuelle pour Windows](../extensions/features-windows.md).
 
-Le réseau RDMA prend en charge le trafic MPI (Message Passing Interface) pour les applications exécutées avec [Microsoft MPI](https://docs.microsoft.com/message-passing-interface/microsoft-mpi) ou Intel MPI 5.x. 
+Le réseau RDMA prend en charge le trafic MPI (Message Passing Interface) pour les applications exécutées avec [Microsoft MPI](/message-passing-interface/microsoft-mpi) ou Intel MPI 5.x. 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Les développeurs qui créent des applications avec accélération GPU pour les GPU Tesla NVIDIA peuvent également télécharger et installer le dernier [kit d’outils CUDA](https://developer.nvidia.com/cuda-downloads). Pour plus d’informations, consultez le [Guide d’installation de CUDA](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#axzz4ZcwJvqYi).
-
-

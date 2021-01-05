@@ -8,18 +8,19 @@ ms.service: storage
 ms.topic: how-to
 ms.date: 02/05/2020
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 09558a8d1e4e2dc68cefd2c870f54e008d10b97b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 8150375eff98374e21d200d98c04158b07f1c243
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77083538"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92789690"
 ---
 # <a name="create-an-account-that-supports-customer-managed-keys-for-tables-and-queues"></a>Créer un compte qui prend en charge les clés gérées par le client pour les tables et les files d’attente
 
-Le stockage Azure chiffre toutes les données dans un compte de stockage au repos. Par défaut, Stockage File d’attente et Stockage Table utilisent une clé qui est limitée au service et gérée par Microsoft. Vous pouvez également choisir d’utiliser des clés gérées par le client pour chiffrer les données des files d’attente ou des tables. Pour utiliser des clés gérées par le client avec des files d’attente et des tables, vous devez d’abord créer un compte de stockage qui utilise une clé de chiffrement limitée au compte et non pas au service. Après avoir créé un compte qui utilise la clé de chiffrement de compte pour les données des files d’attente et des tables, vous pouvez configurer des clés gérées par le client avec Azure Key Vault pour ce compte de stockage.
+Le stockage Azure chiffre toutes les données dans un compte de stockage au repos. Par défaut, Stockage File d’attente et Stockage Table utilisent une clé qui est limitée au service et gérée par Microsoft. Vous pouvez également choisir d’utiliser des clés gérées par le client pour chiffrer les données des files d’attente ou des tables. Pour utiliser des clés gérées par le client avec des files d’attente et des tables, vous devez d’abord créer un compte de stockage qui utilise une clé de chiffrement limitée au compte et non pas au service. Après avoir créé un compte qui utilise la clé de chiffrement de compte pour les données des files d’attente et des tables, vous pouvez configurer des clés gérées par le client pour ce compte de stockage.
 
 Cet article explique comment créer un compte de stockage qui s’appuie sur une clé limitée au compte. Une fois le compte créé, Microsoft utilise la clé de compte pour chiffrer les données dans le compte et il gère la clé. Vous pouvez par la suite configurer des clés gérées par le client pour le compte pour tirer parti de ces avantages, notamment la capacité à fournir vos propres clés, de mettre à jour la version de la clé, d’effectuer la rotation des clés et de révoquer les contrôles d’accès.
 
@@ -39,7 +40,7 @@ Afin de vous inscrire pour utiliser la clé de chiffrement de compte avec le Sto
 
 # <a name="powershell"></a>[PowerShell](#tab/powershell)
 
-Pour vous inscrire à l’aide de PowerShell, appelez la commande [Get-AzProviderFeature](/powershell/module/az.resources/get-azproviderfeature).
+Pour vous inscrire à l’aide de PowerShell, appelez la commande [Register-AzProviderFeature](/powershell/module/az.resources/register-azproviderfeature).
 
 ```powershell
 Register-AzProviderFeature -ProviderNamespace Microsoft.Storage `
@@ -214,11 +215,7 @@ L’exemple JSON suivant crée un compte de stockage universel v2 configuré pou
 
 ---
 
-Une fois que vous avez créé un compte qui s’appuie sur la clé de chiffrement de compte, consultez l’un des articles suivants pour configurer les clés gérées par le client avec Azure Key Vault :
-
-- [Configurer des clés gérées par le client avec Azure Key Vault en utilisant le portail Azure](storage-encryption-keys-portal.md)
-- [Configurer des clés gérées par le client avec Azure Key Vault en utilisant PowerShell](storage-encryption-keys-powershell.md)
-- [Configurer des clés gérées par le client avec Azure Key Vault en utilisant Azure CLI](storage-encryption-keys-cli.md)
+Une fois que vous avez créé un compte qui s’appuie sur la clé de chiffrement de compte, vous pouvez configurer les clés gérées par le client qui sont stockées dans Azure Key Vault ou dans un module de sécurité matériel (HSM) géré par Azure Key Vault (préversion). Pour découvrir comment stocker des clés gérées par le client dans un coffre de clés, consultez [Configurer le chiffrement avec des clés gérées par le client stockées dans Azure Key Vault](customer-managed-keys-configure-key-vault.md). Pour découvrir comment stocker des clés gérées par le client dans un HSM managé, consultez [Configurer le chiffrement avec des clés gérées par le client stockées dans un HSM géré par Azure Key Vault (préversion)](customer-managed-keys-configure-key-vault-hsm.md).
 
 ## <a name="verify-the-account-encryption-key"></a>Vérifier la clé de chiffrement de compte
 
@@ -237,7 +234,7 @@ $account.Encryption.Services.Table
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Pour vérifier qu’un service dans un compte de stockage utilise la clé de chiffrement de compte, appelez la commande [az storage account](/cli/azure/storage/account#az-storage-account-show). Cette commande retourne un ensemble de propriétés du compte de stockage et leurs valeurs. Recherchez le champ `keyType` pour chaque service dans la propriété de chiffrement et vérifiez qu’il est défini sur `Account`.
+Pour vérifier qu’un service dans un compte de stockage utilise la clé de chiffrement de compte, appelez la commande [az storage account show](/cli/azure/storage/account#az-storage-account-show). Cette commande retourne un ensemble de propriétés du compte de stockage et leurs valeurs. Recherchez le champ `keyType` pour chaque service dans la propriété de chiffrement et vérifiez qu’il est défini sur `Account`.
 
 ```azurecli
 az storage account show /
@@ -253,5 +250,6 @@ N/A
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Chiffrement du stockage Azure pour les données au repos](storage-service-encryption.md) 
-- [Qu’est-ce qu’Azure Key Vault ?](https://docs.microsoft.com/azure/key-vault/key-vault-overview)
+- [Chiffrement du stockage Azure pour les données au repos](storage-service-encryption.md)
+- [Clés gérées par le client pour le chiffrement du stockage Azure](customer-managed-keys-overview.md)
+- [Qu’est-ce qu’Azure Key Vault ?](../../key-vault/general/overview.md)

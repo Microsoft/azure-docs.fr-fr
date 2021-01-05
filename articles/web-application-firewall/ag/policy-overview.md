@@ -5,23 +5,18 @@ services: web-application-firewall
 ms.topic: article
 author: winthrop28
 ms.service: web-application-firewall
-ms.date: 02/01/2020
+ms.date: 11/20/2020
 ms.author: victorh
-ms.openlocfilehash: fff4fb5707c07098fd7fac261a36909224365cdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 59ca0b85ba2aff29bdb2ad3379c1054041d2b4cb
+ms.sourcegitcommit: 84e3db454ad2bccf529dabba518558bd28e2a4e6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80060267"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96518734"
 ---
 # <a name="azure-web-application-firewall-waf-policy-overview"></a>Vue d'ensemble de la stratégie du pare-feu d’applications web (WAF) Azure
 
 Les stratégies de pare-feu d’applications web contiennent tous les paramètres et configurations WAF. Cela englobe les exclusions, les règles personnalisées, les règles managées, etc. Ces stratégies sont ensuite associées à une passerelle d’application (globale), à un écouteur (par site) ou à une règle basée sur le chemin d’accès (par URI) afin d'être appliquées.
-
-> [!NOTE]
-> Les stratégies de pare-feu d’applications web Azure (WAF) par site et par URI sont en préversion publique.
-> 
-> Cette préversion publique est fournie sans contrat de niveau de service et ne doit pas être utilisée pour les charges de travail de production. Il est possible que certaines fonctionnalités ne soient pas prises en charge, disposent de capacités limitées ou ne soient pas accessibles à tous les emplacements Azure. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Il n'existe aucune limite quant au nombre de stratégies que vous pouvez créer. Lorsque vous créez une stratégie, celle-ci doit être associée à une passerelle d’application pour être appliquée. Elle peut être associée à n’importe quelle combinaison de passerelles d’application, d’écouteurs et de règles basées sur le chemin d’accès.
 
@@ -43,7 +38,7 @@ Pour plus de personnalisation au niveau de l’URI, vous pouvez associer une str
 
 À l'instar des stratégies WAF par site, les stratégies plus spécifiques remplacent les stratégies moins spécifiques. Ainsi, une stratégie par URI sur un mappage de chemin d’URL remplace toute stratégie de WAF par site ou globale de niveau supérieur.
 
-## <a name="example"></a>Exemple
+### <a name="example"></a>Exemple
 
 Imaginons que vous avez trois sites : contoso.com, fabrikam.com et adatum.com derrière la même passerelle d'application. Vous souhaitez qu’un WAF soit appliqué aux trois sites, mais vous avez besoin d’une sécurité renforcée avec adatum.com, car c’est là que les clients accèdent, parcourent et achètent des produits.
 
@@ -53,13 +48,13 @@ Cette stratégie globale est adaptée à contoso.com et fabrikam.com, mais il vo
 
 Il vous faut prêter une attention particulière à l'URI adatum.com/payments. Dès lors, appliquez une autre stratégie à cet URI, laissez toutes les règles activées et supprimez également toutes les exclusions.
 
-Dans cet exemple, vous disposez d’une stratégie globale qui s’applique à deux sites. Vous disposez d'une stratégie par site qui s’applique à un site et d'une stratégie par URI qui s’applique à une règle basée sur le chemin d’accès spécifique. Consultez (insérer un lien ici, le cas échéant) pour savoir comment créer des stratégies par site et par URI pour le PowerShell correspondant à cet exemple.
+Dans cet exemple, vous disposez d’une stratégie globale qui s’applique à deux sites. Vous disposez d'une stratégie par site qui s’applique à un site et d'une stratégie par URI qui s’applique à une règle basée sur le chemin d’accès spécifique. Consultez [Configurer des stratégies WAF par site à l’aide d’Azure PowerShell](per-site-policies.md) pour la commande PowerShell correspondante de cet exemple.
 
 ## <a name="existing-waf-configurations"></a>Configurations WAF existantes
 
-Tous les nouveaux paramètres WAF du pare-feu d’applications web (règles personnalisées, configurations d’ensemble de règles managé, exclusions, etc.) sont présents dans une stratégie WAF. Si vous disposez d’un WAF, ces paramètres peuvent toujours exister dans la configuration de votre WAF. Pour plus d’informations sur l’adoption de la nouvelle stratégie WAF, voir [Migrer une configuration WAF vers une stratégie WAF](https://docs.microsoft.com/azure/web-application-firewall/ag/migrate-policy). 
+Tous les nouveaux paramètres WAF du pare-feu d’applications web (règles personnalisées, configurations d’ensemble de règles managé, exclusions, etc.) sont présents dans une stratégie WAF. Si vous disposez d’un WAF, ces paramètres peuvent toujours exister dans la configuration de votre WAF. Pour plus d’informations sur l’adoption de la nouvelle stratégie WAF, voir [Migrer une configuration WAF vers une stratégie WAF](./migrate-policy.md). 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Créez des stratégies par site et par URI à l’aide d'Azure PowerShell.
+- [Créez des stratégies par site et par URI à l’aide d’Azure PowerShell](per-site-policies.md).

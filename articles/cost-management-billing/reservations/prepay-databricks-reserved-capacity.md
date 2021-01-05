@@ -4,15 +4,16 @@ description: Découvrez comment pré-payer Azure Databricks avec une capacité r
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/12/2020
+ms.subservice: reservations
+ms.topic: how-to
+ms.date: 07/24/2020
 ms.author: banders
-ms.openlocfilehash: b000934bb218c21a454ed04afe4e9a4495e808ab
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b7d7380114046fbeaaf4b6eb2660997d64168715
+ms.sourcegitcommit: 5dbea4631b46d9dde345f14a9b601d980df84897
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77200382"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91368564"
 ---
 # <a name="optimize-azure-databricks-costs-with-a-pre-purchase"></a>Optimiser les coûts de Azure Databricks avec un pré-achat
 
@@ -62,7 +63,7 @@ Vous pouvez acheter des plans Databricks dans le [portail Azure](https://portal.
 Vous pouvez apporter les modifications suivantes à une réservation après achat :
 
 - Mettez à jour l’étendue de la réservation
-- Accès en fonction du rôle
+- Contrôle d’accès en fonction du rôle Azure (Azure RBAC)
 
 Vous ne pouvez pas fractionner ou fusionner l’unité de validation Databricks avant l’achat. Pour plus d’informations sur la gestion des réservations, consultez [Gérer les réservations après l’achat](manage-reserved-vm-instance.md).
 

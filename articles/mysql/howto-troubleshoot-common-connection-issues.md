@@ -2,17 +2,17 @@
 title: Résoudre les problèmes de connexion - Azure Database pour MySQL
 description: Découvrez comment résoudre les problèmes de connexion à Azure Database pour MySQL, notamment les erreurs temporaires nécessitant de nouvelles tentatives, les problèmes de pare-feu et les interruptions.
 keywords: connexion mysql,chaîne de connexion,problèmes de connectivité,erreur temporaire,erreur de connexion
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: troubleshooting
 ms.date: 3/18/2020
-ms.openlocfilehash: e4afcb8756f64ab9b66044a1bf1304427330e365
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: da500087aeb4ad5e2bf516c3d0ce3cceaf8396af
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100887"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000281"
 ---
 # <a name="troubleshoot-connection-issues-to-azure-database-for-mysql"></a>Résoudre les problèmes de connexion à la base de données Azure Database pour MySQL
 

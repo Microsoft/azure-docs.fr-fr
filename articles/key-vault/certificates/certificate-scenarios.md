@@ -3,19 +3,18 @@ title: Prise en main des certificats Key Vault
 description: Les scénarios suivants décrivent plusieurs utilisations principales du service de gestion des certificats Key Vault, notamment les étapes supplémentaires requises pour créer votre premier certificat dans le coffre de clés.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
 ms.topic: conceptual
-ms.date: 01/07/2019
+ms.date: 06/13/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 5881314f0d3c62e7d6181ebd7bb27a5e0e87729a
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 85f17897c0e3089a2d2bc5b172e98fa24e8085ff
+ms.sourcegitcommit: 03c0a713f602e671b278f5a6101c54c75d87658d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427665"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920438"
 ---
 # <a name="get-started-with-key-vault-certificates"></a>Prise en main des certificats Key Vault
 Les scénarios suivants décrivent plusieurs utilisations principales du service de gestion des certificats Key Vault, notamment les étapes supplémentaires requises pour créer votre premier certificat dans le coffre de clés.
@@ -38,7 +37,7 @@ Les certificats sont composés de trois ressources reliées entre elles en tant 
 
 **Étape 1** : fournisseurs d’autorités de certification  
 -   L’embarquement en tant qu’administrateur informatique, administrateur PKI ou toute personne assurant la gestion des comptes auprès des autorités de certification, pour une société donnée (par exemple Contoso) est une condition préalable requise pour utiliser des certificats Key Vault.  
-    Les autorités de certification suivantes sont les fournisseurs actuels associés à Key Vault :  
+    Les autorités de certification suivantes sont les fournisseurs actuels associés à Key Vault. Apprenez-en davantage [ici](./create-certificate.md#partnered-ca-providers).   
     -   DigiCert : Key Vault propose des certificats TSL/SSL OV avec DigiCert.  
     -   GlobalSign : Key Vault propose des certificats TSL/SSL OV avec GlobalSign.  
 
@@ -51,7 +50,7 @@ Les certificats sont composés de trois ressources reliées entre elles en tant 
     -   Fournisseur  
     -   Informations d’identification : informations d’identification du compte d’autorité de certification. Chaque autorité de certification possède ses propres données spécifiques.  
 
-    Pour plus d’informations sur la création de comptes avec des fournisseurs d’autorités de certification, consultez le billet associé sur le [blog Key Vault](https://aka.ms/kvcertsblog).  
+    Pour plus d’informations sur la création de comptes avec des fournisseurs d’autorités de certification, consultez le billet associé sur le [blog Key Vault](/archive/blogs/kv/manage-certificates-via-azure-key-vault).  
 
 **Étape 3.1** : configurez un [contact de certificat](/rest/api/keyvault/setcertificatecontacts/setcertificatecontacts) pour les notifications. Il s’agit du contact de l’utilisateur Key Vault. Key Vault n’applique pas cette étape.  
 
@@ -82,6 +81,9 @@ Remarque : cette procédure (jusqu’à la fin de l’étape 3.1) est une opéra
       -   État : terminé, en échec avec informations sur l’erreur ou annulé.  
       -   Une opération d’annulation peut être lancée en raison du délai de création. L’annulation peut ou non être effective.  
 
+### <a name="network-security-and-access-policies-associated-with-integrated-ca"></a>Stratégies de sécurité et d’accès réseau associées à l’autorité de certification intégrée
+Le service Key Vault envoie des demandes à l’autorité de certification (trafic sortant). Par conséquent, il est entièrement compatible avec les coffres de clés qui se trouvent derrière un pare-feu. Il ne partage pas de stratégies d’accès avec l’autorité de certification. L’autorité de certification doit être configurée de façon à accepter indépendamment les demandes de signature. [Guide d’intégration de l’autorité de certification approuvée](./how-to-integrate-certificate-authority.md)
+
 ## <a name="import-a-certificate"></a>Importation d’un certificat  
  Vous pouvez également importer un certificat dans Key Vault : PFX ou PEM.  
 
@@ -97,15 +99,20 @@ Remarque : cette procédure (jusqu’à la fin de l’étape 3.1) est une opéra
 -   L’utilisateur peut également modifier la stratégie qui est fonctionnelle au moment de l’importation, mais qui contient des erreurs, car aucune information n’a été spécifiée lors de l’importation. Ex. Aucune information sur l’émetteur.  
 
 ### <a name="formats-of-import-we-support"></a>Formats d’importation que nous prenons en charge
+Azure Key Vault prend en charge les fichiers de certificat .pem et .pfx pour l’importation de certificats dans le coffre de clés.
 Nous prenons en charge le type d’importation suivant pour le format de fichier PEM. Un seul certificat encodé en PEM avec une clé non chiffrée encodée en PKCS #8, avec les éléments suivants
 
 -----BEGIN CERTIFICATE----- -----END CERTIFICATE-----
 
 -----BEGIN PRIVATE KEY----- -----END PRIVATE KEY-----
 
-Pour la fusion de certificat, nous prenons en charge 2 formats PEM. Vous pouvez fusionner un seul certificat encodé en PKCS #8 ou un fichier P7B encodé en Base64. -----BEGIN CERTIFICATE----- -----END CERTIFICATE-----
+Quand vous importez le certificat, vous devez vérifier que la clé est incluse dans le fichier. Si vous avez la clé privée ailleurs et dans un autre format, vous devez associer la clé au certificat. Certaines autorités de certification fournissent des certificats dans différents formats. Avant d’importer le certificat, vous devez donc vérifier qu’il est au format .pem ou .pfx. 
 
-Pour l’instant, nous ne prenons pas en charge les clés EC au format PEM.
+### <a name="formats-of-merge-csr-we-support"></a>Formats de fusion de CSR que nous prenons en charge
+AKV prend en charge 2 formats basés sur PEM. Vous pouvez fusionner un seul certificat encodé en PKCS#8 ou un fichier P7B encodé en Base64 (chaîne de certificats signés par l’autorité de certification). 
+
+-----BEGIN CERTIFICATE----- -----END CERTIFICATE-----
+
 
 ## <a name="creating-a-certificate-with-a-ca-not-partnered-with-key-vault"></a>Création d’un certificat auprès d’une autorité de certification non associée à Key Vault  
  Cette méthode permet d’avoir recours à d’autres autorités de certification que les fournisseurs associés à Key Vault. Autrement dit, votre organisation peut utiliser une autorité de certification de son choix.  
@@ -123,4 +130,3 @@ Pour l’instant, nous ne prenons pas en charge les clés EC au format PEM.
   (4) : l’autorité de certification que vous avez choisie répond avec un certificat X509.  
 
   (5) : votre application termine la création du certificat par le biais d’une fusion avec le certificat X509 provenant de votre autorité de certification.
-

@@ -1,20 +1,21 @@
 ---
 title: Déployer des extensions de machine virtuelle avec un modèle
-description: Découvrez comment déployer des extensions de machines virtuelles avec des modèles Azure Resource Manager
+description: Découvrez comment déployer des extensions de machine virtuelle avec des modèles Azure Resource Manager (modèles ARM).
 author: mumian
 ms.date: 04/23/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 06d948b44064f029e00a2ef089077e9b55246545
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9e04006a0908832c623230d89caa62b0985f32e4
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82184960"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97587942"
 ---
 # <a name="tutorial-deploy-virtual-machine-extensions-with-arm-templates"></a>Tutoriel : Déployer des extensions de machine virtuelle avec des modèles ARM
 
-Découvrez comment utiliser des [extensions de machines virtuelles Azure](../../virtual-machines/extensions/features-windows.md) pour exécuter des tâches de configuration et d’automatisation post-déploiement sur des machines virtuelles Azure. De nombreuses extensions de machine virtuelle différentes peuvent être utilisées avec les machines virtuelles Azure. Dans ce tutoriel, vous allez déployer une extension de script personnalisé à partir d’un modèle Azure Resource Manager (ARM) pour exécuter un script PowerShell sur une machine virtuelle Windows.  Le script installe le serveur Web sur la machine virtuelle.
+Découvrez comment utiliser des [extensions de machines virtuelles Azure](../../virtual-machines/extensions/features-windows.md) pour exécuter des tâches de configuration et d’automatisation post-déploiement sur des machines virtuelles Azure. De nombreuses extensions de machine virtuelle différentes peuvent être utilisées avec les machines virtuelles Azure. Dans ce tutoriel, vous allez déployer une extension de script personnalisée à partir d’un modèle Azure Resource Manager (modèle ARM) pour exécuter un script PowerShell sur une machine virtuelle Windows. Le script installe le serveur Web sur la machine virtuelle.
 
 Ce tutoriel décrit les tâches suivantes :
 
@@ -30,18 +31,18 @@ Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https:/
 
 Pour effectuer ce qui est décrit dans cet article, vous avez besoin des éléments suivants :
 
-* Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Utiliser Visual Studio Code pour créer des modèles ARM](use-vs-code-to-create-template.md).
+* Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Démarrage rapide : Créer des modèles ARM avec Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
 * Pour une sécurité optimale, utilisez un mot de passe généré pour le compte administrateur de la machine virtuelle. Voici un exemple pour générer un mot de passe :
 
     ```console
     openssl rand -base64 32
     ```
 
-    Azure Key Vault a été conçu pour protéger les clés et autres secrets de chiffrement. Pour plus d’informations, consultez [Didacticiel : Intégrer Azure Key Vault à un déploiement de modèle ARM](./template-tutorial-use-key-vault.md). Nous vous recommandons également de mettre à jour votre mot de passe tous les trois mois.
+    Azure Key Vault a été conçu pour protéger les clés et autres secrets de chiffrement. Pour plus d’informations, consultez [Didacticiel : Intégrer Azure Key Vault à votre déploiement de modèle ARM](./template-tutorial-use-key-vault.md). Nous vous recommandons également de mettre à jour votre mot de passe tous les trois mois.
 
 ## <a name="prepare-a-powershell-script"></a>Préparer un script PowerShell
 
-Vous pouvez utiliser un script PowerShell inline ou un fichier de script.  Ce tutoriel montre comment utiliser un fichier de script. Un script PowerShell avec le contenu suivant est partagé à partir de [GitHub](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1) :
+Vous pouvez utiliser un script PowerShell inline ou un fichier de script. Ce tutoriel montre comment utiliser un fichier de script. Un script PowerShell avec le contenu suivant est partagé à partir de [GitHub](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1) :
 
 ```azurepowershell
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
@@ -102,24 +103,24 @@ Ajoutez une ressource d’extension de machine virtuelle au modèle existant ave
 }
 ```
 
-Pour plus d’informations sur la définition de cette ressource, consultez les [informations de référence sur les extensions](https://docs.microsoft.com/azure/templates/microsoft.compute/virtualmachines/extensions). Voici quelques éléments importants :
+Pour plus d’informations sur la définition de cette ressource, consultez les [informations de référence sur les extensions](/azure/templates/microsoft.compute/virtualmachines/extensions). Voici quelques éléments importants :
 
-* **nom** : étant donné que la ressource d’extension est une ressource enfant de l’objet de machine virtuelle, le nom doit être composé du préfixe du nom de la machine virtuelle. Consultez [Définition du nom et du type des ressources enfants](child-resource-name-type.md).
-* **dependsOn** : créez la ressource d’extension après avoir créé la machine virtuelle.
-* **fileUris** : il s’agit des emplacements où sont stockés les fichiers de script. Si vous choisissez de ne pas utiliser l’emplacement fourni, vous devez mettre à jour les valeurs.
-* **commandToExecute** : cette commande appelle le script.
+* `name` : étant donné que la ressource d’extension est une ressource enfant de l’objet de machine virtuelle, le nom doit être composé du préfixe du nom de la machine virtuelle. Consultez [Définition du nom et du type des ressources enfants](child-resource-name-type.md).
+* `dependsOn` : créez la ressource d’extension après avoir créé la machine virtuelle.
+* `fileUris` : il s’agit des emplacements où sont stockés les fichiers de script. Si vous choisissez de ne pas utiliser l’emplacement fourni, vous devez mettre à jour les valeurs.
+* `commandToExecute` : cette commande appelle le script.
 
-Pour utiliser un script inline, supprimez **fileUris** et mettez à jour **commandToExecute** sur :
+Pour utiliser un script inline, supprimez `fileUris` et mettez à jour `commandToExecute` comme ceci :
 
 ```powershell
 powershell.exe Install-WindowsFeature -name Web-Server -IncludeManagementTools && powershell.exe remove-item 'C:\\inetpub\\wwwroot\\iisstart.htm' && powershell.exe Add-Content -Path 'C:\\inetpub\\wwwroot\\iisstart.htm' -Value $('Hello World from ' + $env:computername)
 ```
 
-Ce script inline met également à jour le contenu iisstart.html.
+Ce script inline met également à jour le contenu de _iisstart.html_.
 
 Vous devez également ouvrir le port HTTP pour pouvoir accéder au serveur web.
 
-1. Recherchez **securityRules** dans le modèle.
+1. Recherchez `securityRules` dans le modèle.
 1. Ajoutez la règle suivante à côté de **default-allow-3389**.
 
     ```json
@@ -140,7 +141,7 @@ Vous devez également ouvrir le port HTTP pour pouvoir accéder au serveur web.
 
 ## <a name="deploy-the-template"></a>Déployer le modèle
 
-Pour connaître la procédure de déploiement, consultez la section « Déployer le modèle » du [Tutoriel : Créer des modèles ARM avec des ressources dépendantes](./template-tutorial-create-templates-with-dependent-resources.md#deploy-the-template). Nous vous recommandons d’utiliser un mot de passe généré pour le compte administrateur de la machine virtuelle. Consultez la section [Prérequis](#prerequisites) de cet article.
+Pour connaître la procédure de déploiement, consultez la section **Déployer le modèle** du [Tutoriel : Créer des modèles ARM avec des ressources dépendantes](./template-tutorial-create-templates-with-dependent-resources.md#deploy-the-template). Nous vous recommandons d’utiliser un mot de passe généré pour le compte administrateur de la machine virtuelle. Consultez la section [Prérequis](#prerequisites) de cet article.
 
 À partir de Cloud Shell, exécutez la commande suivante pour récupérer l’adresse IP publique de la machine virtuelle :
 

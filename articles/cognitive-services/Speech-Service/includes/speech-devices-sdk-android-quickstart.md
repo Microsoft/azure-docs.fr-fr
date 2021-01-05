@@ -5,37 +5,37 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 02/20/2020
 ms.author: trbye
-ms.openlocfilehash: 57244c2022d06d8f1768dbe8bcc971aa59acd6a9
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: c341ba20ece26e15255faf086e5bd2904fbaa797
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83673133"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95096025"
 ---
-Dans ce guide de démarrage rapide, vous allez découvrir comment utiliser le SDK Speech Devices pour Android pour créer un produit avec reconnaissance vocale ou pour l’utiliser comme appareil de [transcription de conversation](../conversation-transcription-service.md).
+Dans ce guide de démarrage rapide, vous allez découvrir comment utiliser le SDK Speech Devices pour Android pour créer un produit avec reconnaissance vocale ou pour l’utiliser comme appareil de [transcription de conversation](../conversation-transcription.md).
 
-Ce guide nécessite un compte [Azure Cognitive Services](../get-started.md) avec une ressource de service Speech. Si vous n’avez pas de compte, vous pouvez utiliser la [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/) pour obtenir une clé d’abonnement.
+Ce guide nécessite un compte [Azure Cognitive Services](../overview.md#try-the-speech-service-for-free) avec une ressource de service Speech.
 
 Le code source de l’exemple d’application est fourni avec le Kit de développement logiciel (SDK) Speech Devices. Il est également [disponible sur GitHub](https://github.com/Azure-Samples/Cognitive-Services-Speech-Devices-SDK).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer à utiliser le SDK Speech Devices, vous devez :
 
 - Suivre les instructions accompagnant votre [kit de développement](../get-speech-devices-sdk.md) pour mettre l’appareil sous tension.
 
-- Télécharger la dernière version du [SDK Speech Devices](https://aka.ms/sdsdk-download) et extraire le fichier .zip dans votre répertoire de travail.
+- Télécharger la dernière version du [SDK Speech Devices](../speech-devices-sdk.md) et extraire le fichier .zip dans votre répertoire de travail.
 
   > [!NOTE]
   > Ce guide de démarrage rapide part du principe que l’application est extraite dans C:\SDSDK\Android-Sample-Release.
 
-- Pour obtenir une [clé d’abonnement Azure pour le service Speech](../get-started.md)
+- Pour obtenir une [clé d’abonnement Azure pour le service Speech](../overview.md#try-the-speech-service-for-free)
 
-- Si vous envisagez d’utiliser la transcription de conversation, vous devez utiliser un [microphone circulaire](../get-speech-devices-sdk.md) et cette fonctionnalité n’est actuellement disponible que pour les langues « en-US » et « zh-CN » dans les régions « centralus » et « eastasia ». Vous devez disposer d’une clé Speech dans une de ces régions pour utiliser la transcription de conversation.
+- Si vous envisagez d'utiliser la transcription de conversation, vous devez utiliser un [microphone circulaire](../get-speech-devices-sdk.md) et cette fonctionnalité n'est actuellement disponible que pour les langues « en-US » et « zh-CN » dans les régions « centralus » et « eastasia ». Vous devez disposer d’une clé Speech dans une de ces régions pour utiliser la transcription de conversation.
 
-- Si vous envisagez d’utiliser le service Speech pour identifier les intentions (ou les actions) à partir des énoncés utilisateur, vous aurez besoin d’un abonnement [LUIS (Language Understanding Service)](https://docs.microsoft.com/azure/cognitive-services/luis/azureibizasubscription). Pour plus d’informations sur LUIS et la reconnaissance des intentions, consultez [Reconnaître les intentions vocales avec LUIS, C#](https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-recognize-intents-from-speech-csharp).
+- Si vous envisagez d’utiliser le service Speech pour identifier les intentions (ou les actions) à partir des énoncés utilisateur, vous aurez besoin d’un abonnement [LUIS (Language Understanding Service)](../../luis/luis-how-to-azure-subscription.md). Pour plus d’informations sur LUIS et la reconnaissance des intentions, consultez [Reconnaître les intentions vocales avec LUIS, C#](../how-to-recognize-intents-from-speech-csharp.md).
 
-  Vous pouvez [créer un modèle LUIS simple](https://docs.microsoft.com/azure/cognitive-services/luis/) ou utiliser l’exemple de modèle LUIS, LUIS-example.json. L’exemple de modèle LUIS est accessible à partir du [site de téléchargement du Kit de développement logiciel (SDK) Speech Devices](https://aka.ms/sdsdk-luis). Pour charger le fichier JSON de votre modèle dans le [portail LUIS](https://www.luis.ai/home), sélectionnez **Importer une nouvelle application**, puis sélectionnez le fichier JSON.
+  Vous pouvez [créer un modèle LUIS simple](../../luis/index.yml) ou utiliser l’exemple de modèle LUIS, LUIS-example.json. L’exemple de modèle LUIS est accessible à partir du [site de téléchargement du Kit de développement logiciel (SDK) Speech Devices](https://aka.ms/sdsdk-luis). Pour charger le fichier JSON de votre modèle dans le [portail LUIS](https://www.luis.ai/home), sélectionnez **Importer une nouvelle application**, puis sélectionnez le fichier JSON.
 
 - Installez [Android Studio](https://developer.android.com/studio/) et [Vysor](https://vysor.io/download/) sur votre PC.
 
@@ -96,7 +96,7 @@ Pour valider la configuration de votre kit de développement, générez et insta
     Mettez à jour **build.gradle(Module:app)** en ajoutant cette ligne à la section des dépendances. 
     
     ```xml
-    implementation'com.microsoft.cognitiveservices.speech:client-sdk:1.12.0'
+    implementation'com.microsoft.cognitiveservices.speech:client-sdk:1.14.0'
     ```
     
 1. Ajoutez votre clé d’abonnement Speech au code source. Si vous voulez essayer la reconnaissance de l’intention, ajoutez également votre clé d’abonnement au [service Language Understanding](https://azure.microsoft.com/services/cognitive-services/language-understanding-intelligent-service/), ainsi que l’ID de l’application.
@@ -122,11 +122,11 @@ Pour valider la configuration de votre kit de développement, générez et insta
 1. Le mot clé par défaut est « Computer ». Vous pouvez également essayer l’un des autres mots clés fournis, tels que « Machine » ou « Assistant ». Les fichiers de ressources pour ces mots clés alternatifs figurent dans le dossier keyword du Kit de développement logiciel (SDK) Speech Devices. Par exemple, C:\SDSDK\Android-Sample-Release\keyword\Computer contient les fichiers utilisés pour le mot clé signifiant « Computer ».
 
    > [!TIP]
-   > Vous pouvez également [créer un mot clé personnalisé](../speech-devices-sdk-create-kws.md).
+   > Vous pouvez également [créer un mot clé personnalisé](../custom-keyword-basics.md).
 
    Pour utiliser un nouveau mot clé, mettez à jour les deux lignes suivantes dans `MainActivity.java` et copiez l’ensemble de mots clés dans votre application. Par exemple, pour utiliser le mot clé « Machine » du package de mots clés kws-machine.zip :
 
-   - Copiez le package de mots clés dans le dossier « C:\SDSDK\Android-Sample-Release\example\app\src\main\assets\ ».
+   - Copiez le package de mots clés dans le dossier "C:\SDSDK\Android-Sample-Release\example\app\src\main\assets\".
    - Mettez à jour le fichier `MainActivity.java` avec le mot clé et le nom de l’ensemble :
 
      ```java
@@ -162,7 +162,7 @@ Pour valider la configuration de votre kit de développement, générez et insta
 
    ![Exemple d’application et options du Kit de développement logiciel (SDK) Speech Devices](../media/speech-devices-sdk/qsg-8.png)
 
-1. Essayez la nouvelle démonstration de transcription de conversation. Démarrez la transcription avec « Start Session ». Par défaut, tout le monde est invité. Cependant, si vous avez des signatures vocales des participants, vous pouvez les placer dans un fichier `/video/participants.properties` sur l’appareil. Pour générer la signature vocale, consultez [Transcrire des conversations (SDK)](../how-to-use-conversation-transcription-service.md).
+1. Essayez la nouvelle démonstration de transcription de conversation. Démarrez la transcription avec « Start Session ». Par défaut, tout le monde est invité. Cependant, si vous avez des signatures vocales des participants, vous pouvez les placer dans un fichier `/video/participants.properties` sur l'appareil. Pour générer la signature vocale, consultez [Transcrire des conversations (SDK)](../how-to-use-conversation-transcription.md).
 
    ![Application de démonstration de la transcription de conversation](../media/speech-devices-sdk/qsg-15.png)
 

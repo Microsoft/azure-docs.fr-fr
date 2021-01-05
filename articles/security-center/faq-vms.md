@@ -13,19 +13,19 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/25/2020
 ms.author: memildin
-ms.openlocfilehash: 0b7817539a26b7ebfa24efd086edf8b0ef82eae3
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 32023fca15de9d3f9258bc05166c3cff4184ea15
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80436007"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499847"
 ---
 # <a name="faq---questions-about-virtual-machines"></a>FAQ - Questions relatives aux machines virtuelles
 
 
 ## <a name="what-types-of-virtual-machines-are-supported"></a>Quels sont les types de machines virtuelles pris en charge ?
 
-Le monitoring et des recommandations sont disponibles pour les machines virtuelles créées à l’aide des [modèles de déploiement Classic et Resource Manager](../azure-classic-rm.md).
+Le monitoring et des recommandations sont disponibles pour les machines virtuelles créées à l’aide des [modèles de déploiement Classic et Resource Manager](../azure-resource-manager/management/deployment-models.md).
 
 Consultez [Plateformes prises en charge dans Azure Security Center](security-center-os-coverage.md) pour obtenir la liste des plateformes prises en charge.
 
@@ -51,7 +51,7 @@ Les temps de latence des analyses de Security Center en lien avec les vulnérabi
 Généralement, Security Center analyse les nouvelles données toutes les heures et actualise les suggestions en conséquence. 
 
 > [!NOTE]
-> Security Center utilise l'agent Log Analytics pour collecter et stocker les données. Pour en savoir plus, consultez [Migration de plateforme Azure Security Center](security-center-platform-migration.md).
+> Security Center utilise l'agent Log Analytics pour collecter et stocker les données. Pour en savoir plus, consultez [Migration de plateforme Azure Security Center](./security-center-enable-data-collection.md).
 
 
 ## <a name="why-do-i-get-the-message-vm-agent-is-missing"></a>Pourquoi reçois-je le message « Agent de machine virtuelle manquant » ?

@@ -2,17 +2,17 @@
 title: Gérer les erreurs de connectivité temporaires - Azure Database pour PostgreSQL - Serveur unique
 description: Découvrez comment gérer les erreurs de connectivité temporaires pour Azure Database pour PostgreSQL - Serveur unique.
 keywords: connexion postgresql,chaîne de connexion,problèmes de connectivité,erreur temporaire,erreur de connexion
-author: rachel-msft
-ms.author: raagyema
+author: niklarin
+ms.author: nlarin
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: 026a0edf24d349c4b445d6229d3b1ad73decf87d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7c70c82615df111f265604ff0984aa452d68565f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82097827"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91704348"
 ---
 # <a name="handling-transient-connectivity-errors-for-azure-database-for-postgresql---single-server"></a>Gestion des erreurs de connectivité temporaires pour Azure Database pour PostgreSQL - Serveur unique
 

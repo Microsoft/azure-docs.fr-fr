@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 32117d4bfcf0c0af94eced095b94ab0c1b6f88af
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61e32f50e02e45487830c5ea7ff476a0571960f6
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184341"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94953999"
 ---
 # <a name="manage-azure-ad-b2c-with-microsoft-graph"></a>Gérer Azure AD B2C avec Microsoft Graph
 
@@ -36,15 +36,25 @@ Vous pouvez utiliser deux modes de communication lorsque vous utilisez l’API M
 
 * **Interactif** : adapté aux tâches à exécution unique, vous utilisez un compte d’administrateur dans le locataire B2C pour effectuer les tâches de gestion. Ce mode implique qu'un administrateur se connecte à l’aide de ses informations d’identification avant d’appeler l’API Microsoft Graph.
 
-* **Automatisé** : adapté aux tâches planifiées ou exécutées en continu, ce mode utilise un compte de service que vous configurez avec les autorisations requises pour effectuer des tâches de gestion. Vous créez le « compte de service » dans Azure AD B2C en inscrivant une application que vos applications et scripts utilisent à des fins d'authentification à l’aide de leur *ID d’application (client)* et de l’octroi des informations d’identification du client OAuth 2.0. Dans ce cas, l’application, et non plus l'utilisateur administrateur comme décrit dans le mode interactif, appelle l’API Microsoft Graph.
+* **Automatisé** : adapté aux tâches planifiées ou exécutées en continu, ce mode utilise un compte de service que vous configurez avec les autorisations requises pour effectuer des tâches de gestion. Vous créez le « compte de service » dans Azure AD B2C en inscrivant une application que vos applications et scripts utilisent à des fins d’authentification à l’aide de leur *ID d’application (client)* et de l’octroi des **informations d’identification du client OAuth 2.0**. Dans ce cas, l’application, et non plus l'utilisateur administrateur comme décrit dans le mode interactif, appelle l’API Microsoft Graph.
 
 Vous activez le scénario d’interaction **Automatisé** en créant une inscription d’application comme indiqué dans les sections suivantes.
+
+Bien que le flux d’octroi d’informations d’identification du client OAuth 2.0 ne soit pas directement pris en charge par le service d’authentification Azure AD B2C, vous pouvez configurer le flux d’informations d’identification du client à l’aide d’Azure AD et de la Plateforme d’identités Microsoft ou du point de terminaison de jeton pour une application dans votre locataire Azure AD B2C. Un locataire Azure AD B2C partage certaines fonctionnalités avec les locataires d’entreprise Azure AD.
 
 ## <a name="register-management-application"></a>Inscrire une application de gestion
 
 Pour permettre à vos scripts et applications d'interagir avec l’[API Microsoft Graph][ms-graph-api] afin de gérer les ressources Azure AD B2C, vous devez créer une inscription d’application dans votre locataire Azure AD B2C, qui octroie les autorisations d’API requises.
 
-[!INCLUDE [active-directory-b2c-appreg-mgmt](../../includes/active-directory-b2c-appreg-mgmt.md)]
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Sélectionnez l’icône **Annuaire et abonnement** dans la barre d’outils du portail, puis sélectionnez l’annuaire qui contient votre locataire Azure AD B2C.
+1. Dans le portail Azure, recherchez et sélectionnez **Azure AD B2C**.
+1. Sélectionnez **Inscriptions d’applications**, puis **Nouvelle inscription**.
+1. Entrez un **Nom** pour l’application. Par exemple, *managementapp1*.
+1. Sélectionnez **Comptes dans ce répertoire organisationnel uniquement**.
+1. Sous **Autorisations**, décochez la case *Accorder le consentement administrateur aux autorisations openid et offline_access*.
+1. Sélectionnez **Inscription**.
+1. Enregistrez l’**ID d’application (client)** indiqué dans la page d’aperçu de l’application. Vous utiliserez cette valeur ultérieurement.
 
 ### <a name="grant-api-access"></a>Accorder un accès à l’API
 
@@ -73,13 +83,14 @@ Si votre application ou script doit supprimer des utilisateurs ou mettre à jour
 1. Sélectionnez **Ajouter**. La propagation complète des autorisations peut prendre quelques minutes.
 
 ## <a name="next-steps"></a>Étapes suivantes
+Maintenant que vous avez inscrit votre application de gestion et lui avez accordé les autorisations requises, vos applications et services (par exemple, Azure Pipelines) peuvent utiliser ses informations d’identification et autorisations pour interagir avec l’API Microsoft Graph. 
 
-Maintenant que vous avez inscrit votre application de gestion et lui avez accordé les autorisations requises, vos applications et services (par exemple, Azure Pipelines) peuvent utiliser ses informations d’identification et autorisations pour interagir avec l’API Microsoft Graph.
-
+* [Obtenir un jeton d’accès d’Azure AD](/graph/auth-v2-service#4-get-an-access-token)
+* [Utilisez le jeton d’accès pour appeler Microsoft Graph](/graph/auth-v2-service#4-get-an-access-token)
 * [Opérations B2C prises en charge par Microsoft Graph](microsoft-graph-operations.md)
 * [Gérer les comptes d’utilisateur Azure AD B2C avec Microsoft Graph](manage-user-accounts-graph-api.md)
 * [Obtenir les journaux d’audit avec l’API de création de rapports Azure AD](view-audit-logs.md#get-audit-logs-with-the-azure-ad-reporting-api)
 
 <!-- LINKS -->
-[ms-graph]: https://docs.microsoft.com/graph/
+[ms-graph]: /graph/
 [ms-graph-api]: https://docs.microsoft.com/graph/api/overview

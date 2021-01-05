@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 03/04/2020
-ms.openlocfilehash: 2ed7a5b9c81d1b50f80f379a88688b69c49ed382
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 71ef902e909e552ade5174196f291630bc242ca0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78897911"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005365"
 ---
 # <a name="connect-hdinsight-to-your-on-premises-network"></a>Connecter HDInsight à votre réseau local
 
@@ -45,8 +45,8 @@ Dans le schéma suivant, les lignes vertes correspondent à des demandes de ress
 ## <a name="prerequisites"></a>Prérequis
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](./hdinsight-hadoop-linux-use-ssh-unix.md).
-* Si vous utilisez PowerShell, vous aurez besoin du [module AZ](https://docs.microsoft.com/powershell/azure/overview).
-* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+* Si vous utilisez PowerShell, vous aurez besoin du [module AZ](/powershell/azure/).
+* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 ## <a name="create-virtual-network-configuration"></a>Créer la configuration du réseau virtuel
 
@@ -131,29 +131,31 @@ Une fois la machine virtuelle créée, vous recevrez une notification **Déploie
 
 3. Pour configurer Bind afin de transférer les demandes de résolution de noms à votre serveur DNS local, utilisez le texte suivant comme contenu du fichier `/etc/bind/named.conf.options` :
 
-        acl goodclients {
-            10.0.0.0/16; # Replace with the IP address range of the virtual network
-            10.1.0.0/16; # Replace with the IP address range of the on-premises network
-            localhost;
-            localnets;
-        };
+    ```DNS Zone file
+    acl goodclients {
+        10.0.0.0/16; # Replace with the IP address range of the virtual network
+        10.1.0.0/16; # Replace with the IP address range of the on-premises network
+        localhost;
+        localnets;
+    };
 
-        options {
-                directory "/var/cache/bind";
+    options {
+            directory "/var/cache/bind";
 
-                recursion yes;
+            recursion yes;
 
-                allow-query { goodclients; };
+            allow-query { goodclients; };
 
-                forwarders {
-                192.168.0.1; # Replace with the IP address of the on-premises DNS server
-                };
+            forwarders {
+            192.168.0.1; # Replace with the IP address of the on-premises DNS server
+            };
 
-                dnssec-validation auto;
+            dnssec-validation auto;
 
-                auth-nxdomain no;    # conform to RFC1035
-                listen-on { any; };
-        };
+            auth-nxdomain no;    # conform to RFC1035
+            listen-on { any; };
+    };
+    ```
 
     > [!IMPORTANT]  
     > Remplacez les valeurs de la section `goodclients` par la plage d’adresses IP du réseau virtuel et du réseau local. Cette section définit les adresses d’origine des demandes que ce serveur DNS accepte.
@@ -184,11 +186,13 @@ Une fois la machine virtuelle créée, vous recevrez une notification **Déploie
 
 5. Pour configurer Bind afin de résoudre les noms DNS pour les ressources au sein du réseau virtuel, utilisez le texte suivant en tant que contenu du fichier `/etc/bind/named.conf.local` :
 
-        // Replace the following with the DNS suffix for your virtual network
-        zone "icb0d0thtw0ebifqt0g1jycdxd.ex.internal.cloudapp.net" {
-            type forward;
-            forwarders {168.63.129.16;}; # The Azure recursive resolver
-        };
+    ```DNS Zone file
+    // Replace the following with the DNS suffix for your virtual network
+    zone "icb0d0thtw0ebifqt0g1jycdxd.ex.internal.cloudapp.net" {
+        type forward;
+        forwarders {168.63.129.16;}; # The Azure recursive resolver
+    };
+    ```
 
     > [!IMPORTANT]  
     > Vous devez remplacer `icb0d0thtw0ebifqt0g1jycdxd.ex.internal.cloudapp.net` par le suffixe DNS que vous avez récupéré précédemment.
@@ -256,12 +260,14 @@ Un redirecteur conditionnel transfère uniquement les demandes relatives à un s
 
 Le texte suivant est un exemple de configuration de redirecteur conditionnel pour le logiciel DNS **Bind** :
 
-    zone "icb0d0thtw0ebifqt0g1jycdxd.ex.internal.cloudapp.net" {
-        type forward;
-        forwarders {10.0.0.4;}; # The custom DNS server's internal IP address
-    };
+```DNS Zone file
+zone "icb0d0thtw0ebifqt0g1jycdxd.ex.internal.cloudapp.net" {
+    type forward;
+    forwarders {10.0.0.4;}; # The custom DNS server's internal IP address
+};
+```
 
-Pour plus d’informations sur l’utilisation de DNS sur **Windows Server 2016**, consultez la documentation [Add-DnsServerConditionalForwarderZone](https://technet.microsoft.com/itpro/powershell/windows/dnsserver/add-dnsserverconditionalforwarderzone).
+Pour plus d’informations sur l’utilisation de DNS sur **Windows Server 2016**, consultez la documentation [Add-DnsServerConditionalForwarderZone](/powershell/module/dnsserver/add-dnsserverconditionalforwarderzone).
 
 Une fois que vous avez configuré le serveur DNS local, vous pouvez utiliser `nslookup` à partir du réseau local pour vérifier que vous pouvez résoudre les noms dans le réseau virtuel. Par exemple : 
 
@@ -341,6 +347,6 @@ Pour vous connecter directement à HDInsight par le biais du réseau virtuel, pr
 
 * Pour plus d’informations sur les réseaux virtuels Azure, voir [Vue d'ensemble de Réseau virtuel Azure](../virtual-network/virtual-networks-overview.md).
 
-* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/security-overview.md).
+* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).
 
 * Pour plus d’informations sur les routages par l’utilisateur, consultez [Routage définis par l’utilisateur et transfert IP](../virtual-network/virtual-networks-udr-overview.md).

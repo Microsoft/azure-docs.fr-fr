@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 03/26/2020
+ms.date: 10/26/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 2b29b8b0975639e5c5315a55e1382794d7662665
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 14195ad4638c724cf0c8dd46945a0da79ec0e4ec
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80332508"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509698"
 ---
 # <a name="define-a-self-asserted-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique autodéclaré dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -30,7 +30,7 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `Prop
 
 L’exemple suivant montre un profil technique autodéclaré pour l’inscription par e-mail :
 
-```XML
+```xml
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
   <DisplayName>Email signup</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -40,7 +40,7 @@ L’exemple suivant montre un profil technique autodéclaré pour l’inscriptio
 
 Dans un profil technique autodéclaré, vous pouvez utiliser les éléments **InputClaims** et **InputClaimsTransformations** pour prérenseigner la valeur des revendications qui apparaissent dans la page autodéclarée (revendications d’affichage). Par exemple, dans la stratégie de profil de modification, le parcours utilisateur lit d’abord le profil utilisateur à partir du service d’annuaire Azure AD B2C, puis le profil technique autodéclaré définit les revendications d’entrée avec les données utilisateur stockées dans le profil utilisateur. Ces revendications sont collectées à partir du profil utilisateur, puis présentées à l’utilisateur qui peut ensuite modifier les données existantes.
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-ProfileUpdate">
 ...
   <InputClaims>
@@ -71,7 +71,7 @@ L’exemple suivant `TechnicalProfile` illustre l’utilisation de revendication
 * La cinquième revendication d’affichage fait référence au contrôle d’affichage `phoneVerificationControl` qui collecte et vérifie un numéro de téléphone.
 * Les autres revendications d’affichage sont des ClaimTypes à recueillir auprès de l’utilisateur.
 
-```XML
+```xml
 <TechnicalProfile Id="Id">
   <DisplayClaims>
     <DisplayClaim DisplayControlReferenceId="emailVerificationControl" />
@@ -93,7 +93,7 @@ Si vous spécifiez un ou plusieurs éléments **DisplayClaim** dans un profil te
 
 Observez l’exemple suivant, dans lequel une revendication `age` est définie comme revendication de **sortie** dans une stratégie de base. Avant d’ajouter des revendications d’affichage au profil technique auto-déclaré, la revendication `age` est affichée à l’écran pour recueillir des données auprès de l’utilisateur :
 
-```XML
+```xml
 <TechnicalProfile Id="id">
   <OutputClaims>
     <OutputClaim ClaimTypeReferenceId="age" />
@@ -103,7 +103,7 @@ Observez l’exemple suivant, dans lequel une revendication `age` est définie c
 
 Si une stratégie de nœud terminal qui hérite de cette base spécifie par la suite `officeNumber` comme une revendication d’**affichage** :
 
-```XML
+```xml
 <TechnicalProfile Id="id">
   <DisplayClaims>
     <DisplayClaim ClaimTypeReferenceId="officeNumber" />
@@ -140,7 +140,7 @@ Utilisez les revendications de sortie dans les cas suivants :
 
 Dans l’exemple suivant, le profil technique autodéclaré utilise à la fois des revendications d’affichage et des revendications de sortie.
 
-```XML
+```xml
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
   <DisplayName>Email signup</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -175,6 +175,14 @@ Dans l’exemple suivant, le profil technique autodéclaré utilise à la fois d
 </TechnicalProfile>
 ```
 
+### <a name="output-claims-sign-up-or-sign-in-page"></a>Page de connexion ou d’inscription aux revendications de sortie
+
+Dans une page d’inscription et de connexion combinée, notez ce qui suit quand l’utilisation d’un élément [DataUri](contentdefinitions.md#datauri) de définition de contenu spécifie un type de page `unifiedssp` ou `unifiedssd` :
+
+- Seules les revendications de nom d’utilisateur et de mot de passe sont affichées.
+- Les deux premières revendications de sortie doivent être le nom d’utilisateur et le mot de passe (dans cet ordre). 
+- Les autres revendications ne sont pas affichées ; pour celles-ci, vous devez définir la `defaultValue` ou appeler un profil technique de validation de formulaire de revendications. 
+
 ## <a name="persist-claims"></a>Conserver les revendications
 
 L’élément PersistedClaims n’est pas utilisé. Le profil technique autodéclaré ne conserve pas les données dans Azure AD B2C. Au lieu de cela, un appel est effectué à un profil technique de validation qui est responsable de la persistance des données. Par exemple, la stratégie d’inscription utilise le profil technique autodéclaré `LocalAccountSignUpWithLogonEmail` pour recueillir le nouveau profil utilisateur. Le profil technique `LocalAccountSignUpWithLogonEmail` appelle le profil technique de validation pour créer le compte dans Azure AD B2C.
@@ -201,12 +209,14 @@ Vous pouvez également appeler un profil technique d’API REST avec votre logiq
 | setting.showContinueButton | Non | Affiche le bouton Continuer. Les valeurs possibles sont `true` (par défaut) ou `false` |
 | setting.showSignupLink <sup>2</sup>| Non | Affiche le bouton d’inscription. Les valeurs possibles sont `true` (par défaut) ou `false` |
 | setting.forgotPasswordLinkLocation <sup>2</sup>| Non| Affiche le lien du mot de passe oublié. Valeurs possibles : `AfterInput` (par défaut) où le lien est affiché en bas de la page ou `None` supprime le lien du mot de passe oublié.|
-| setting.enableRememberMe <sup>2</sup>| Non| Affiche la case à cocher [Rester connecté](custom-policy-keep-me-signed-in.md). Valeurs possibles : `true` ou `false` (par défaut). |
-| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+| setting.enableRememberMe <sup>2</sup>| Non| Affiche la case à cocher [Rester connecté](session-behavior.md?pivots=b2c-custom-policy#enable-keep-me-signed-in-kmsi). Valeurs possibles : `true` ou `false` (par défaut). |
+| setting.inputVerificationDelayTimeInMilliseconds <sup>3</sup>| Non| Améliore l’expérience utilisateur en attendant que l’utilisateur arrête sa saisie puis en validant la valeur. La valeur par défaut est de 2000 millisecondes. |
+| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
 
 Remarques :
 1. Disponible pour la définition de contenu [DataUri](contentdefinitions.md#datauri) de type `unifiedssp` ou `unifiedssd`.
 1. Disponible pour la définition de contenu [DataUri](contentdefinitions.md#datauri) de type `unifiedssp` ou `unifiedssd`. [Version de mise en page](page-layout.md) 1.1.0 et versions ultérieures.
+1. Disponible pour la [version de mise en page](page-layout.md) 1.2.0 et versions ultérieures.
 
 ## <a name="cryptographic-keys"></a>Clés de chiffrement
 

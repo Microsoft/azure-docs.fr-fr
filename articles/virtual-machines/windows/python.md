@@ -4,15 +4,16 @@ description: Apprenez à utiliser Python pour créer et gérer une machine virtu
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/22/2017
 ms.author: cynthn
-ms.openlocfilehash: b2172d44b4136b51c0ea459868ebd5b0572bb004
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-python
+ms.openlocfilehash: a7117d30eb1774753f21e82ad5f812a7309d8386
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82098066"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96483094"
 ---
 # <a name="create-and-manage-windows-vms-in-azure-using-python"></a>Créer et gérer des machines virtuelles Windows dans Azure à l’aide de Python
 
@@ -31,7 +32,7 @@ Ces étapes prennent environ 20 minutes.
 
 ## <a name="create-a-visual-studio-project"></a>Créer un projet Visual Studio
 
-1. Si vous ne l’avez pas déjà fait, installez [Visual Studio](https://docs.microsoft.com/visualstudio/install/install-visual-studio). Dans la page Charges de travail, sélectionnez **Développement Python**, puis cliquez sur **Installer**. Dans le résumé, vous pouvez voir que **Python 3 64 bits (3.6.0)** est automatiquement sélectionné pour vous. Si vous avez déjà installé Visual Studio, vous pouvez ajouter la charge de travail Python en utilisant le Lanceur de Visual Studio.
+1. Si vous ne l’avez pas déjà fait, installez [Visual Studio](/visualstudio/install/install-visual-studio). Dans la page Charges de travail, sélectionnez **Développement Python**, puis cliquez sur **Installer**. Dans le résumé, vous pouvez voir que **Python 3 64 bits (3.6.0)** est automatiquement sélectionné pour vous. Si vous avez déjà installé Visual Studio, vous pouvez ajouter la charge de travail Python en utilisant le Lanceur de Visual Studio.
 2. Après avoir installé et démarré Visual Studio, cliquez sur **Fichier** > **Nouveau** > **Projet**.
 3. Cliquez sur **Modèles** > **Python** > **Application Python**, entrez *monProjetPython* comme nom pour le projet, sélectionnez l’emplacement du projet, puis cliquez sur **OK**.
 
@@ -164,7 +165,7 @@ Les [groupes à haute disponibilité](tutorial-availability-sets.md) facilitent 
     input('Availability set created. Press enter to continue...')
     ```
 
-Une [adresse IP publique](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) est nécessaire pour communiquer avec la machine virtuelle.
+Une [adresse IP publique](../../virtual-network/public-ip-addresses.md) est nécessaire pour communiquer avec la machine virtuelle.
 
 1. Pour créer une adresse IP publique pour la machine virtuelle, ajoutez la fonction suivante après les variables dans le fichier .py :
 
@@ -463,7 +464,7 @@ Vous pouvez arrêter une machine virtuelle et conserver tous ses paramètres, ma
 
 ### <a name="resize-the-vm"></a>Redimensionner la machine virtuelle
 
-De nombreux aspects du déploiement doivent être pris en considération lors du choix d’une taille pour votre machine virtuelle. Pour plus d’informations, voir [Tailles des machines virtuelles](sizes.md).
+De nombreux aspects du déploiement doivent être pris en considération lors du choix d’une taille pour votre machine virtuelle. Pour plus d’informations, voir [Tailles des machines virtuelles](../sizes.md).
 
 1. Pour modifier la taille de la machine virtuelle, ajoutez la fonction suivante après les variables dans le fichier .py :
 
@@ -491,7 +492,7 @@ De nombreux aspects du déploiement doivent être pris en considération lors du
 
 ### <a name="add-a-data-disk-to-the-vm"></a>Ajouter un disque de données à la machine virtuelle
 
-Des machines virtuelles peuvent disposer d’un ou plusieurs [disques de données](managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) stockés en tant que disques durs virtuels.
+Des machines virtuelles peuvent disposer d’un ou plusieurs [disques de données](../managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) stockés en tant que disques durs virtuels.
 
 1. Pour ajouter un disque de données à la machine virtuelle, ajoutez la fonction suivante après les variables dans le fichier .py : 
 
@@ -565,6 +566,5 @@ Des machines virtuelles peuvent disposer d’un ou plusieurs [disques de donnée
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Si vous rencontrez des problèmes de déploiement, consultez [Résolution des problèmes liés aux déploiements de groupes de ressources avec le portail Azure](../../resource-manager-troubleshoot-deployments-portal.md).
-- En savoir plus sur la [Bibliothèque Python Azure](https://docs.microsoft.com/python/api/overview/azure/?view=azure-python)
-
+- Si vous rencontrez des problèmes de déploiement, consultez [Résolution des problèmes liés aux déploiements de groupes de ressources avec le portail Azure](../../azure-resource-manager/templates/deployment-history.md).
+- En savoir plus sur la [Bibliothèque Python Azure](/python/api/overview/azure/?view=azure-python)

@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 91d3dd2eee6f771df23b72eae7a33122c42f1690
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0ea178655646f7f130476acaffc35c60181968ea
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869329"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87058715"
 ---
 # <a name="access-the-vmware-solution-by-cloudsimple-portal-from-the-azure-portal"></a>Accès au portail VMware Solution by CloudSimple à partir du portail Azure
 
@@ -21,9 +21,9 @@ L’authentification unique est prise en charge pour l’accès au portail Cloud
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Les utilisateurs disposant des rôles **Propriétaire** et **Contributeur** peuvent accéder au portail CloudSimple.  Les rôles doivent être configurés sur le groupe de ressources dans lequel le service CloudSimple est déployé.  Ils peuvent également être configurés sur l’objet de service CloudSimple.  Pour en savoir plus sur la vérification de votre rôle, consultez l’article [Voir les attributions de rôles](https://docs.microsoft.com/azure/role-based-access-control/check-access). Seuls les utilisateurs disposant de rôles **Propriétaire** et **Contributeur** intégrés peuvent accéder au portail CloudSimple.  Les rôles doivent être configurés sur l’abonnement.  Pour en savoir plus sur la vérification de votre rôle, consultez l’article [Voir les attributions de rôles](https://docs.microsoft.com/azure/role-based-access-control/check-access).
+Les utilisateurs disposant des rôles **Propriétaire** et **Contributeur** peuvent accéder au portail CloudSimple.  Les rôles doivent être configurés sur le groupe de ressources dans lequel le service CloudSimple est déployé.  Ils peuvent également être configurés sur l’objet de service CloudSimple.  Pour en savoir plus sur la vérification de votre rôle, consultez l’article [Voir les attributions de rôles](../role-based-access-control/check-access.md). Seuls les utilisateurs disposant de rôles **Propriétaire** et **Contributeur** intégrés peuvent accéder au portail CloudSimple.  Les rôles doivent être configurés sur l’abonnement.  Pour en savoir plus sur la vérification de votre rôle, consultez l’article [Voir les attributions de rôles](../role-based-access-control/check-access.md).
 
-Si vous utilisez un rôle personnalisé, il doit inclure l’une des opérations suivantes sous ```Actions```.  Pour en savoir plus sur les rôles personnalisés, voir [Rôles personnalisés pour les ressources Azure](https://docs.microsoft.com/azure/role-based-access-control/custom-roles).  Si l’une des opérations ne fait pas partie de ```NotActions```, l’utilisateur ne peut pas accéder au portail CloudSimple.
+Si vous utilisez un rôle personnalisé, il doit inclure l’une des opérations suivantes sous ```Actions```.  Pour plus d’informations sur les rôles personnalisés, consultez [Rôles personnalisés Azure](../role-based-access-control/custom-roles.md).  Si l’une des opérations ne fait pas partie de ```NotActions```, l’utilisateur ne peut pas accéder au portail CloudSimple.
 
 ```
 Microsoft.VMwareCloudSimple/*
@@ -71,5 +71,5 @@ Si les autorisations dont vous disposez n’autorisent pas l’accès au portail
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez comment [créer un cloud privé](https://docs.microsoft.com/azure/vmware-cloudsimple/create-private-cloud/).
+* Découvrez comment [créer un cloud privé](./create-private-cloud.md).
 * Apprenez à [configurer un environnement de cloud privé](quickstart-create-private-cloud.md).

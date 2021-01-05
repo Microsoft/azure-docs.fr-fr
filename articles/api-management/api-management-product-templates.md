@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 393563427e936e07315cd44b78cb793d4292b352
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4c8cd4aa3e91c5d69c40e47683818ed8bc9be338
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224837"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86249901"
 ---
 # <a name="product-templates-in-azure-api-management"></a>Modèles Produit dans Gestion des API Azure
 
@@ -31,7 +31,7 @@ Gestion des API Azure vous offre la possibilité de personnaliser le contenu des
 -   [Produit](#Product)  
   
 > [!NOTE]
->  Les exemples de modèles par défaut inclus dans la documentation suivante sont susceptibles d’être modifiés et améliorés de façon régulière. Vous pouvez afficher les modèles dynamiques par défaut dans le portail des développeurs en accédant aux modèles individuels souhaités. Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/).  
+>  Les exemples de modèles par défaut inclus dans la documentation suivante sont susceptibles d’être modifiés et améliorés de façon régulière. Vous pouvez afficher les modèles dynamiques par défaut dans le portail des développeurs en accédant aux modèles individuels souhaités. Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](./api-management-developer-portal-templates.md).  
 
 [!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 
@@ -210,7 +210,7 @@ Gestion des API Azure vous offre la possibilité de personnaliser le contenu des
 |IsDeveloperSubscribed|boolean|Si l’utilisateur actuel est abonné à ce produit.|  
 |SubscriptionState|nombre|État de l’abonnement. Les états possibles sont :<br /><br /> -   `0 - suspended` : l’abonnement est bloqué et l’abonné ne peut appeler aucune API du produit.<br />-   `1 - active` : l’abonnement est actif.<br />-   `2 - expired` : l’abonnement a atteint sa date d’expiration et a été désactivé.<br />-   `3 - submitted` : la demande d’abonnement a été effectuée par le développeur, mais n’a pas encore été approuvée ou rejetée.<br />-   `4 - rejected` : la demande d’abonnement a été refusée par un administrateur.<br />-   `5 - cancelled` : l’abonnement a été annulé par le développeur ou l’administrateur.|  
 |limites|tableau|Cette propriété est déconseillée et ne doit pas être utilisée.|  
-|DelegatedSubscriptionEnabled|boolean|Indique si la [délégation](https://azure.microsoft.com/documentation/articles/api-management-howto-setup-delegation/) est activée pour cet abonnement.|  
+|DelegatedSubscriptionEnabled|boolean|Indique si la [délégation](./api-management-howto-setup-delegation.md) est activée pour cet abonnement.|  
 |DelegatedSubscriptionUrl|string|Si la délégation est activée, indique l’URL de l’abonnement délégué.|  
 |IsAgreed|boolean|Si le produit est associé à un contrat, indique si l’utilisateur actuel a accepté les termes du contrat.|  
 |Abonnements|Collection d’entités [Subscription summary](api-management-template-data-model-reference.md#SubscriptionSummary).|Abonnements au produit.|  

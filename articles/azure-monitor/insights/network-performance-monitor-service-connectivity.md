@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: abshamsft
 ms.author: absha
 ms.date: 02/20/2018
-ms.openlocfilehash: 93f3820b7cf1db85b9ff4cd514fe22efc75a90d9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 18c07266cec68aaf6e95fe4085b9d21244fecff4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226473"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91761037"
 ---
 # <a name="service-connectivity-monitor"></a>Moniteur de connectivité de service
 
@@ -19,8 +19,8 @@ Vous pouvez utiliser la fonctionnalité Moniteur de connectivité de service dan
 
 Vous pouvez effectuer les fonctions suivantes avec Moniteur de connectivité de service : 
 
-- Surveiller la connectivité réseau à vos applications et aux services réseau à partir de plusieurs succursales ou sites. Les applications et services réseau incluent Office 365, Dynamics CRM, les applications métier internes et les bases de données SQL.
-- Utiliser des tests intégrés pour surveiller la connectivité réseau vers les points de terminaison Office 365 et Dynamics 365. 
+- Surveiller la connectivité réseau à vos applications et aux services réseau à partir de plusieurs succursales ou sites. Parmi les applications et services réseau figurent Microsoft 365, Dynamics CRM, les applications métier internes et les bases de données SQL.
+- Utiliser des tests intégrés pour surveiller la connectivité réseau vers les points de terminaison Microsoft 365 et Dynamics 365. 
 - Déterminer le temps de réponse, la latence du réseau et la perte de paquets rencontrée lors de la connexion au point de terminaison.
 - Déterminer si les performances médiocres des applications sont dues au réseau ou à un problème du côté du fournisseur de l’application.
 - Identifier les zones réactives sur le réseau qui peuvent être à l’origine des performances médiocres des applications en affichant la latence de chaque tronçon sur une carte topologique.
@@ -57,7 +57,7 @@ Commencez par créer des tests pour surveiller la connectivité réseau vers les
 
     * Sélectionnez **Web** pour surveiller la connectivité à un service qui répond à des requêtes HTTP/S, comme outlook.office365.com ou bing.com.<br>
     * Sélectionnez **Réseau** pour surveiller la connectivité à un service qui répond à des requêtes TCP, mais pas à des requêtes HTTP/S, comme un serveur SQL, un serveur FTP ou un port SSH. 
-    * Par exemple : Pour créer un test web dans un compte de stockage blob, sélectionnez **Web** et entrez la cible en tant que *yourstorageaccount*.blob.core.windows.net. De même, vous pouvez créer des tests pour d’autres stockages de tables, de files d’attente et Azure Files en utilisant [ce lien.](https://docs.microsoft.com/azure/storage/common/storage-account-overview#storage-account-endpoints)
+    * Par exemple : Pour créer un test web dans un compte de stockage blob, sélectionnez **Web** et entrez la cible en tant que *yourstorageaccount*.blob.core.windows.net. De même, vous pouvez créer des tests pour d’autres stockages de tables, de files d’attente et Azure Files en utilisant [ce lien.](../../storage/common/storage-account-overview.md#storage-account-endpoints)
 4. Si vous ne souhaitez pas effectuer de mesures sur le réseau, telles que la latence du réseau, la perte de paquets et la découverte des topologies, désactivez la case pour **effectuer des mesures sur un réseau**. Cochez-la pour profiter pleinement de la fonctionnalité. 
 5. Dans le champ **Cible**, entrez l’adresse IP, le nom de domaine complet sur lesquels porte la surveillance de la connectivité réseau.
 6. Dans le champ **Numéro de port**, entrez le numéro de port du service cible. 
@@ -99,7 +99,7 @@ Déterminez si les performances médiocres de l’application sont dues au rése
 
 Une fois que vous avez déterminé que le problème provient du réseau, sélectionnez la vue **Topologie** pour identifier le tronçon problématique sur la carte topologique. L’image suivante en contient un exemple. 96 des 105 ms de latence totale entre le nœud et le point de terminaison d’application sont dues au tronçon marqué en rouge. Une fois que vous avez identifié le tronçon problématique, vous pouvez effectuer une action corrective. 
 
-![Tests Moniteur de connectivité de service](media/network-performance-monitor-service-endpoint/service-endpoint-topology.png)
+![Topologie des points de terminaison du Moniteur de connectivité de service](media/network-performance-monitor-service-endpoint/service-endpoint-topology.png)
 
 ## <a name="diagnostics"></a>Diagnostics 
 
@@ -133,4 +133,5 @@ Pour la région US Gov Virginia, seules les URL DOD sont intégrées dans NPM. L
 | MS Teams | gov.teams.microsoft.us | 
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Rechercher dans les journaux d’activité](../../azure-monitor/log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+[Rechercher dans les journaux d’activité](../log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+

@@ -8,16 +8,16 @@ ms.topic: include
 ms.date: 08/17/2018
 ms.author: tomfitz
 ms.custom: include file
-ms.openlocfilehash: ace22a6896a121f5cd8af838c7b0e427bd0287dc
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 579ea74c4767ba1afb6e0128c9f12ff83f7f3998
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "67176745"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97826642"
 ---
-## <a name="enable-event-grid-resource-provider"></a>Activer le fournisseur de ressources Event Grid
+## <a name="enable-the-event-grid-resource-provider"></a>Activer le fournisseur de ressources Event Grid
 
-Si vous n’avez jamais utilisé Event Grid dans votre abonnement Azure, vous devrez peut-être inscrire le fournisseur de ressources Event Grid. Exécutez la commande suivante pour enregistrer le fournisseur :
+Si vous n’avez jamais utilisé Event Grid dans votre abonnement Azure, vous risquez de devoir inscrire le fournisseur de ressources Event Grid. Exécutez la commande suivante pour enregistrer le fournisseur :
 
 ```azurecli-interactive
 az provider register --namespace Microsoft.EventGrid

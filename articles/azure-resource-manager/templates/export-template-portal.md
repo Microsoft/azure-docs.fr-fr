@@ -2,13 +2,13 @@
 title: Exporter le modèle dans le Portail Azure
 description: Utilisez le portail Azure pour exporter un modèle Azure Resource Manager à partir de ressources de votre abonnement.
 ms.topic: conceptual
-ms.date: 12/12/2019
-ms.openlocfilehash: 8cdba58a7a2ba998bac7fc0225ff957047cd69b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/29/2020
+ms.openlocfilehash: ee97953a337bbb7cc9a8d1f042a3beae7bccdcae
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234009"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185689"
 ---
 # <a name="single-and-multi-resource-export-to-a-template-in-azure-portal"></a>Export d’une ressource unique ou de plusieurs ressources vers un modèle dans le portail Azure
 
@@ -49,9 +49,13 @@ Exportez le modèle avant le déploiement ou de l’historique, lorsque :
 
 Lors de l’exportation à partir d’un groupe de ressources ou d’une ressource, le modèle exporté est généré à partir des [schémas publiés](https://github.com/Azure/azure-resource-manager-schemas/tree/master/schemas) pour chaque type de ressource. Parfois, le schéma ne dispose pas de la dernière version d’un type de ressource. Vérifiez votre modèle exporté pour vous assurer qu’il comprend les propriétés dont vous avez besoin. Si nécessaire, modifiez le modèle exporté pour utiliser la version d’API dont vous avez besoin.
 
-La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](https://aka.ms/exportTemplateViaAdf).
+La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](../../data-factory/copy-clone-data-factory.md).
 
-Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](https://aka.ms/migrateclassicresourcetoarm).
+Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](../../virtual-machines/migration-classic-resource-manager-overview.md).
+
+Si vous recevez un avertissement lors de l’exportation d’un modèle qui indique qu’un type de ressource n’a pas été exporté, vous pouvez toujours découvrir les propriétés pour cette ressource. Pour en savoir plus sur les différentes options d’affichage des propriétés des ressources, consultez [Découvrir les propriétés des ressources](view-resources.md). Vous pouvez également consulter l’[API REST Azure](/rest/api/azure/) pour le type de ressource.
+
+Le groupe de ressources pour lequel vous créez le modèle exporté est limité à 200 ressources. Si vous tentez d’exporter un groupe de ressources contenant plus de 200 ressources, le message d’erreur `Export template is not supported for resource groups more than 200 resources` s’affiche.
 
 ## <a name="export-template-from-a-resource-group"></a>Exportation du modèle à partir d’un groupe de ressources
 
@@ -121,5 +125,5 @@ Vous pouvez exporter le modèle qui a été utilisé pour déployer les ressourc
 
 - Découvrez comment exporter des modèles avec [Azure CLI](../management/manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](../management/manage-resource-groups-powershell.md#export-resource-groups-to-templates) ou l'[API REST](/rest/api/resources/resourcegroups/exporttemplate).
 - Pour vous familiariser avec la syntaxe des modèles Resource Manager, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
-- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](/azure/azure-resource-manager/).
+- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](../index.yml).
 - Pour accéder aux schémas liés aux modèles Azure Resource Manager, consultez [Informations de référence sur les modèles](/azure/templates/).

@@ -14,10 +14,10 @@ ms.workload: infrastructure-services
 ms.date: 02/26/2019
 ms.author: vinigam
 ms.openlocfilehash: ccfbb92c27e4508595f19c2ea6900730cde609b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "74666373"
 ---
 # <a name="schema-and-data-aggregation-in-traffic-analytics"></a>Schéma et agrégation de données dans Traffic Analytics
@@ -116,8 +116,8 @@ Le tableau ci-dessous répertorie les champs contenus dans le schéma et expliqu
 | L7Protocol_s  | Nom du protocole | Dérivé du port de destination |
 | FlowDirection_s | * I = Entrant<br> * O = Sortant | Direction du flux entrant/sortant du NSG pour le journal de flux |
 | FlowStatus_s  | * A = Autorisé par la règle NSG <br> * D = Refusé par la règle NSG  | État du flux autorisé/nbloqué par le NSG pour le journal de flux |
-| NSGList_s | \<IDABONNEMENT>\/<NOM_GROUPEDERESSOURCES>\/<NOM_NSG> | NSG (groupe de sécurité réseau) associé au flux |
-| NSGRules_s | \<Valeur d'index 0)>\|\<NOMRÈGLE_NSG>\|\<Direction du flux>\|\<État du flux>\|\<Nombre de flux traités par la règle> |  Règle NSG ayant autorisé ou refusé ce flux |
+| NSGList_s | \<SUBSCRIPTIONID>\/<RESOURCEGROUP_NAME>\/<NSG_NAME> | NSG (groupe de sécurité réseau) associé au flux |
+| NSGRules_s | \<Index value 0)>\|\<NSG_RULENAME>\|\<Flow Direction>\|\<Flow Status>\|\<FlowCount ProcessedByRule> |  Règle NSG ayant autorisé ou refusé ce flux |
 | NSGRule_s | NSG_RULENAME |  Règle NSG ayant autorisé ou refusé ce flux |
 | NSGRuleType_s | * Défini par l’utilisateur * Par défaut |   Type de la règle NSG utilisée par le flux |
 | MACAddress_s | Adresse MAC | Adresse MAC de la carte réseau à laquelle le flux a été capturé |
@@ -127,23 +127,23 @@ Le tableau ci-dessous répertorie les champs contenus dans le schéma et expliqu
 | Region_s | Région Azure pour le réseau virtuel/l’interface réseau/la machine virtuelle dont fait partie l’adresse IP dans le flux | Applicable uniquement pour les types de flux S2S, P2S, AzurePublic, ExternalPublic, MaliciousFlow et UnknownPrivate (types de flux où seul un côté est Azure) |
 | Region1_s | Région Azure | Région Azure pour le réseau virtuel/l’interface réseau/la machine virtuelle dont fait partie l’adresse IP source dans le flux |
 | Region2_s | Région Azure | Région Azure pour le réseau virtuel dont fait partie l’adresse IP de destination dans le flux |
-| NIC_s | \<Nom_groupederessources>\/\<NomInterfaceRéseau> |  Carte réseau associée à la machine virtuelle qui envoie ou reçoit le trafic |
-| NIC1_s | <Nom_groupederessources>/\<NomInterfaceRéseau> | Carte réseau associée à l’adresse IP source dans le flux |
-| NIC2_s | <Nom_groupederessources>/\<NomInterfaceRéseau> | Carte réseau associée à l’adresse IP de destination dans le flux |
-| VM_s | <Nom_groupederessources>\/\<NomInterfaceRéseau> | Machine virtuelle associée à l’interface réseau NIC_s |
-| VM1_s | <Nom_groupederessources>/\<NomMachineVirtuelle> | Machine virtuelle associée à l’adresse IP source dans le flux |
-| VM2_s | <Nom_groupederessources>/\<NomMachineVirtuelle> | Machine virtuelle associée à l’adresse IP de destination dans le flux |
-| Subnet_s | <Nom_GroupeDeRessources>/<Nom_VNET>/\<NomSousRéseau> | Sous-réseau associé à NIC_s |
-| Subnet1_s | <Nom_GroupeDeRessources>/<Nom_VNET>/\<NomSousRéseau> | Sous-réseau associé à l’adresse IP source dans le flux |
-| Subnet2_s | <Nom_GroupeDeRessources>/<Nom_VNET>/\<NomSousRéseau>    | Sous-réseau associé à l’adresse IP de destination dans le flux |
-| ApplicationGateway1_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomPasserelleApplication> | Passerelle d’application associée à l’adresse IP source dans le flux |
-| ApplicationGateway2_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomPasserelleApplication> | Passerelle d’application associée à l’adresse IP de destination dans le flux |
-| LoadBalancer1_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomEquilibreurDeCharge> | Équilibreur de charge associé à l’adresse IP source dans le flux |
-| LoadBalancer2_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomEquilibreurDeCharge> | Équilibreur de charge associé à l’adresse IP de destination dans le flux |
-| LocalNetworkGateway1_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomPasserelleRéseauLocal> | Passerelle de réseau local associée à l’adresse IP source dans le flux |
-| LocalNetworkGateway2_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomPasserelleRéseauLocal> | Passerelle de réseau local associée à l’adresse IP de destination dans le flux |
+| NIC_s | \<resourcegroup_Name>\/\<NetworkInterfaceName> |  Carte réseau associée à la machine virtuelle qui envoie ou reçoit le trafic |
+| NIC1_s | <resourcegroup_Name>/\<NetworkInterfaceName> | Carte réseau associée à l’adresse IP source dans le flux |
+| NIC2_s | <resourcegroup_Name>/\<NetworkInterfaceName> | Carte réseau associée à l’adresse IP de destination dans le flux |
+| VM_s | <resourcegroup_Name>\/\<NetworkInterfaceName> | Machine virtuelle associée à l’interface réseau NIC_s |
+| VM1_s | <resourcegroup_Name>/\<VirtualMachineName> | Machine virtuelle associée à l’adresse IP source dans le flux |
+| VM2_s | <resourcegroup_Name>/\<VirtualMachineName> | Machine virtuelle associée à l’adresse IP de destination dans le flux |
+| Subnet_s | <ResourceGroup_Name>/<VNET_Name>/\<SubnetName> | Sous-réseau associé à NIC_s |
+| Subnet1_s | <ResourceGroup_Name>/<VNET_Name>/\<SubnetName> | Sous-réseau associé à l’adresse IP source dans le flux |
+| Subnet2_s | <ResourceGroup_Name>/<VNET_Name>/\<SubnetName>    | Sous-réseau associé à l’adresse IP de destination dans le flux |
+| ApplicationGateway1_s | \<SubscriptionID>/\<ResourceGroupName>/\<ApplicationGatewayName> | Passerelle d’application associée à l’adresse IP source dans le flux |
+| ApplicationGateway2_s | \<SubscriptionID>/\<ResourceGroupName>/\<ApplicationGatewayName> | Passerelle d’application associée à l’adresse IP de destination dans le flux |
+| LoadBalancer1_s | \<SubscriptionID>/\<ResourceGroupName>/\<LoadBalancerName> | Équilibreur de charge associé à l’adresse IP source dans le flux |
+| LoadBalancer2_s | \<SubscriptionID>/\<ResourceGroupName>/\<LoadBalancerName> | Équilibreur de charge associé à l’adresse IP de destination dans le flux |
+| LocalNetworkGateway1_s | \<SubscriptionID>/\<ResourceGroupName>/\<LocalNetworkGatewayName> | Passerelle de réseau local associée à l’adresse IP source dans le flux |
+| LocalNetworkGateway2_s | \<SubscriptionID>/\<ResourceGroupName>/\<LocalNetworkGatewayName> | Passerelle de réseau local associée à l’adresse IP de destination dans le flux |
 | ConnectionType_s | Valeurs possibles : VNetPeering, VpnGateway et ExpressRoute |    Type de la connexion |
-| ConnectionName_s | \<IDAbonnement>/\<NomGroupeDeRessources>/\<NomConnexion> | Nom de la connexion. Pour flowtype P2S, le format sera <gateway name>_<VPN Client IP> |
+| ConnectionName_s | \<SubscriptionID>/\<ResourceGroupName>/\<ConnectionName> | Nom de la connexion. Pour flowtype P2S, le format sera <gateway name>_<VPN Client IP> |
 | ConnectingVNets_s | Liste de noms de réseau virtuel séparés par un espace | Dans une topologie hub-and-spoke, les réseaux virtuels du hub sont indiqués ici |
 | Country_s | Code de pays à deux lettres (ISO 3166-1 alpha-2) | Champ rempli pour le type de flux ExternalPublic. Toutes les adresses IP indiquées dans le champ PublicIPs_s ont le même code de pays |
 | AzureRegion_s | Emplacements de la région Azure | Champ rempli pour le type de flux AzurePublic. Toutes les adresses IP indiquées dans le champ PublicIPs_s se trouvent dans la même région Azure |
@@ -157,9 +157,9 @@ Le tableau ci-dessous répertorie les champs contenus dans le schéma et expliqu
 | InboundBytes_d |  Octets reçus après avoir été capturés sur l’interface réseau où la règle NSG a été appliquée | Champ rempli uniquement pour la version 2 du schéma des journaux de flux de NSG |
 | OutboundBytes_d | Octets envoyés après avoir été capturés sur l’interface réseau où la règle NSG a été appliquée | Champ rempli uniquement pour la version 2 du schéma des journaux de flux de NSG |
 | CompletedFlows_d  |  | Champ rempli avec des valeurs différentes de zéro uniquement pour la version 2 du schéma des journaux de flux de NSG |
-| PublicIPs_s | <IP_PUBLIQUE>\|\<NOMBRE_FLUX_DÉMARRÉS>\|\<NOMBRE_FLUX_TERMINÉS>\|\<PAQUETS_SORTANTS>\|\<PAQUETS_ENTRANTS>\|\<OCTETS_SORTANTS>\|\<OCTETS_ENTRANTS> | Entrées séparées par des barres |
-| SrcPublicIPs_s | <IP_PUBLIQUE_SOURCE>\|\<NOMBRE_FLUX_DÉMARRÉS>\|\<NOMBRE_FLUX_TERMINÉS>\|\<PAQUETS_SORTANTS>\|\<PAQUETS_ENTRANTS>\|\<OCTETS_SORTANTS>\|\<OCTETS_ENTRANTS> | Entrées séparées par des barres |
-| DestPublicIPs_s | <IP_PUBLIQUE_CIBLE>\|\<NOMBRE_FLUX_DÉMARRÉS>\|\<NOMBRE_FLUX_TERMINÉS>\|\<PAQUETS_SORTANTS>\|\<PAQUETS_ENTRANTS>\|\<OCTETS_SORTANTS>\|\<OCTETS_ENTRANTS> | Entrées séparées par des barres |
+| PublicIPs_s | <PUBLIC_IP>\|\<FLOW_STARTED_COUNT>\|\<FLOW_ENDED_COUNT>\|\<OUTBOUND_PACKETS>\|\<INBOUND_PACKETS>\|\<OUTBOUND_BYTES>\|\<INBOUND_BYTES> | Entrées séparées par des barres |
+| SrcPublicIPs_s | <SOURCE_PUBLIC_IP>\|\<FLOW_STARTED_COUNT>\|\<FLOW_ENDED_COUNT>\|\<OUTBOUND_PACKETS>\|\<INBOUND_PACKETS>\|\<OUTBOUND_BYTES>\|\<INBOUND_BYTES> | Entrées séparées par des barres |
+| DestPublicIPs_s | <DESTINATION_PUBLIC_IP>\|\<FLOW_STARTED_COUNT>\|\<FLOW_ENDED_COUNT>\|\<OUTBOUND_PACKETS>\|\<INBOUND_PACKETS>\|\<OUTBOUND_BYTES>\|\<INBOUND_BYTES> | Entrées séparées par des barres |
 
 ### <a name="notes"></a>Notes
 

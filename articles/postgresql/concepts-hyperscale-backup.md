@@ -7,12 +7,12 @@ ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
 ms.date: 04/28/2020
-ms.openlocfilehash: bcc94b62812f1668bf8c5e5abb268fddf3da1fa5
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 9656e6ab608665e325ac5f772e06df9ac296c521
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82515959"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92485373"
 ---
 # <a name="backup-and-restore-in-azure-database-for-postgresql---hyperscale-citus"></a>Sauvegarde et restauration dans Azure Database pour PostgreSQL - Hyperscale (Citus)
 
@@ -32,10 +32,14 @@ Pour connaître les prix du stockage de sauvegarde, consultez la [page des tarif
 
 ## <a name="restore"></a>Restaurer
 
-Dans Azure Database pour PostgreSQL, la restauration d’un cluster Hyperscale (Citus) crée un cluster à partir des sauvegardes des nœuds d’origine.
+Dans Azure Database pour PostgreSQL, la restauration d’un cluster Hyperscale (Citus) crée un cluster à partir des sauvegardes des nœuds d’origine. 
 
 > [!IMPORTANT]
-> Les clusters Hyperscale (Citus) supprimés ne peuvent pas être restaurés. Si vous supprimez le cluster, tous les nœuds qui appartiennent au cluster sont supprimés et ne peuvent pas être récupérés. À l’issue du déploiement, pour protéger les ressources du cluster d’une suppression accidentelle ou de changements inattendus, les administrateurs peuvent utiliser des [verrous de gestion](/azure/azure-resource-manager/management/lock-resources).
+>Vous pouvez uniquement restaurer le cluster Hyperscale (Citus) au sein du même abonnement et du même groupe de ressources, et avec un nom de cluster différent.
+
+
+> [!IMPORTANT]
+> Les clusters Hyperscale (Citus) supprimés ne peuvent pas être restaurés. Si vous supprimez le cluster, tous les nœuds qui appartiennent au cluster sont supprimés et ne peuvent pas être récupérés. À l’issue du déploiement, pour protéger les ressources du cluster d’une suppression accidentelle ou de changements inattendus, les administrateurs peuvent utiliser des [verrous de gestion](../azure-resource-manager/management/lock-resources.md).
 
 ### <a name="point-in-time-restore-pitr"></a>Restauration à un point dans le temps
 
@@ -61,5 +65,5 @@ Après une restauration à l’aide d’un de ces mécanismes de récupération,
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez-en plus sur les  [zones de disponibilité Azure](/azure/availability-zones/az-overview).
-* Définissez des  [alertes suggérées](/azure/postgresql/howto-hyperscale-alert-on-metric#suggested-alerts) sur des groupes de serveurs Hyperscale (Citus).
+* Découvrez-en plus sur les  [zones de disponibilité Azure](../availability-zones/az-overview.md).
+* Définissez des  [alertes suggérées](./howto-hyperscale-alert-on-metric.md#suggested-alerts) sur des groupes de serveurs Hyperscale (Citus).

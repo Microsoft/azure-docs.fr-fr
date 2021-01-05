@@ -6,12 +6,13 @@ ms.service: azure-functions
 ms.topic: quickstart
 ms.date: 03/25/2020
 ms.author: dglover
-ms.openlocfilehash: e4ac4f669d38f07d9fe4edbd600cc06f135fac03
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: acb4290a90532b38f44a957e33c69f7d2b3f11f8
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80674560"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92104816"
 ---
 # <a name="quickstart-create-your-first-function-with-kotlin-and-maven"></a>Démarrage rapide : Créer votre première fonction avec Kotlin et Maven
 
@@ -23,9 +24,9 @@ Cet article vous guide dans l’utilisation de l’outil en ligne de commande Ma
 
 Pour développer des fonctions en utilisant Kotlin, les éléments suivants doivent être installés :
 
-- [Java Developer Kit (JDK)](https://aka.ms/azure-jdks), version 8
+- [Java Developer Kit (JDK)](/azure/developer/java/fundamentals/java-jdk-long-term-support), version 8
 - [Apache Maven](https://maven.apache.org), version 3.0 ou ultérieure
-- [Azure CLI](https://docs.microsoft.com/cli/azure)
+- [Azure CLI](/cli/azure)
 - [Azure Functions Core Tools](./functions-run-local.md#v2) version 2.6.666 ou ultérieure
 
 > [!IMPORTANT]
@@ -79,7 +80,7 @@ Les identificateurs `com.fabrikam.functions` et `fabrikam-functions` ci-dessous 
 [INFO] Parameter: artifactId, Value: fabrikam-function
 </pre>
 
-Maven crée les fichiers projet dans un nouveau dossier avec le nom de _artifactId_, dans cet exemple `fabrikam-functions`. Le code généré, et prêt à être utilisé, dans le projet est une fonction simple [déclenchée par HTTP](/azure/azure-functions/functions-bindings-http-webhook) qui renvoie le corps de la requête :
+Maven crée les fichiers projet dans un nouveau dossier avec le nom de _artifactId_, dans cet exemple `fabrikam-functions`. Le code généré, et prêt à être utilisé, dans le projet est une fonction simple [déclenchée par HTTP](./functions-bindings-http-webhook.md) qui renvoie le corps de la requête :
 
 ```kotlin
 class Function {

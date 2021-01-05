@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: seoapr2020
 ms.date: 04/17/2020
-ms.openlocfilehash: c65e3ad7ed02ddd4e6ed1d60628a738d333e9a9c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: dc6412a85beba67551e7683c8127a65730f9218f
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189379"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92535465"
 ---
 # <a name="configure-outbound-network-traffic-for-azure-hdinsight-clusters-using-firewall"></a>Configurer le trafic réseau sortant pour les clusters Azure HDInsight à l’aide du pare-feu
 
@@ -23,11 +23,11 @@ Cet article décrit les étapes de sécurisation du trafic sortant de votre clus
 
 Les clusters HDInsight sont normalement déployés dans un réseau virtuel. Le cluster a des dépendances vis-à-vis de services en dehors de ce réseau virtuel.
 
-Plusieurs dépendances requièrent un trafic entrant. Le trafic de gestion entrant ne peut pas être envoyé via un dispositif de pare-feu. Les adresses sources de ce trafic sont connues et publiées [ici](hdinsight-management-ip-addresses.md). Vous pouvez également créer des règles de groupe de sécurité réseau (NSG) avec ces informations pour sécuriser le trafic entrant dans les clusters.
+Le trafic de gestion entrant ne peut pas être envoyé via un pare-feu. Vous pouvez utiliser les balises du service NSG pour le trafic entrant comme indiqué [ici](./hdinsight-service-tags.md). 
 
-Les dépendances de trafic sortant HDInsight sont presque entièrement définies avec des FQDN, qui n’ont pas d’adresses IP statiques sous-jacentes. L’absence d’adresses statiques signifie que les groupes de sécurité réseau (NSG) ne peuvent pas verrouiller le trafic sortant d’un cluster. Les adresses changent suffisamment souvent pour qu’il ne soit pas possible de définir des règles basées sur la résolution de noms actuelle et de les utiliser.
+Les dépendances de trafic sortant HDInsight sont presque entièrement définies avec des FQDN, qui n’ont pas d’adresses IP statiques sous-jacentes. L’absence d’adresses statiques signifie que les groupes de sécurité réseau (NSG) ne peuvent pas verrouiller le trafic sortant d’un cluster. Les adresses IP changent suffisamment souvent pour qu’il ne soit pas possible de définir des règles basées sur la résolution de noms actuelle et de les utiliser.
 
-Sécurisez les adresses sortantes à l’aide d’un pare-feu qui peut contrôler le trafic sortant en fonction des noms de domaine. Le Pare-feu Azure restreint le trafic sortant en fonction du FQDN de la destination ou des [balises FQDN](../firewall/fqdn-tags.md).
+Sécurisez les adresses sortantes à l’aide d’un pare-feu qui peut contrôler le trafic sortant en fonction des FQDN. Le Pare-feu Azure restreint le trafic sortant en fonction du FQDN de la destination ou des [balises FQDN](../firewall/fqdn-tags.md).
 
 ## <a name="configuring-azure-firewall-with-hdinsight"></a>Configuration du pare-feu Azure avec HDInsight
 
@@ -45,7 +45,7 @@ Créez un sous-réseau nommé **AzureFirewallSubnet** dans le réseau virtuel o�
 
 ### <a name="create-a-new-firewall-for-your-cluster"></a>Créer un pare-feu pour votre cluster
 
-Créez un pare-feu nommé **Test-FW01** à l’aide des étapes décrites dans **Déployer le pare-feu**, dans [Tutoriel : Déployer et configurer un pare-feu Azure à l’aide du portail Azure](../firewall/tutorial-firewall-deploy-portal.md#deploy-the-firewall)
+Créez un pare-feu nommé **Test-FW01** à l’aide des étapes décrites dans **Déployer le pare-feu** , dans [Tutoriel : Déployer et configurer un pare-feu Azure à l’aide du portail Azure](../firewall/tutorial-firewall-deploy-portal.md#deploy-the-firewall)
 
 ### <a name="configure-the-firewall-with-application-rules"></a>Configurer le pare-feu avec des règles d’application
 
@@ -53,11 +53,11 @@ Créez un regroupement de règles d’application permettant au cluster d’envo
 
 1. Sélectionnez le nouveau pare-feu **Test-FW01** dans le Portail Azure.
 
-1. Accédez à **Paramètres** > **Règles** > **Collection de règles d’application** > **Ajouter une collection de règles d’application**.
+1. Accédez à **Paramètres** > **Règles** > **Collection de règles d’application** > **Ajouter une collection de règles d’application** .
 
     ![Titre : Ajouter une collection de règles d’application](./media/hdinsight-restrict-outbound-traffic/hdinsight-restrict-outbound-traffic-add-app-rule-collection.png)
 
-1. Dans l’écran **Ajouter une collection de règles d’application**, fournissez les informations suivantes :
+1. Dans l’écran **Ajouter une collection de règles d’application** , fournissez les informations suivantes :
 
     **Section supérieure**
 
@@ -75,23 +75,23 @@ Créez un regroupement de règles d’application permettant au cluster d’envo
 
     **Section des noms de domaine complets cibles**
 
-    | Nom | Adresses sources | `Protocol:Port` | Noms de domaine complets cibles | Notes |
+    | Nom | Adresses sources | Protocole:Port | Noms de domaine complets cibles | Notes |
     | --- | --- | --- | --- | --- |
     | Rule_2 | * | https:443 | login.windows.net | Autorise les activités de connexion Windows |
     | Rule_3 | * | https:443 | login.microsoftonline.com | Autorise les activités de connexion Windows |
-    | Rule_4 | * | https:443,http:80 | storage_account_name.blob.core.windows.net | Remplacez `storage_account_name` par votre nom de compte de stockage réel. Si votre cluster s’appuie sur WASB, ajoutez une règle pour WASB. Pour utiliser UNIQUEMENT les connexions https, veillez à ce que l’option [« Transfert sécurisé requis »](../storage/common/storage-require-secure-transfer.md) soit activée sur le compte de stockage. |
+    | Rule_4 | * | https:443,http:80 | storage_account_name.blob.core.windows.net | Remplacez `storage_account_name` par votre nom de compte de stockage réel. Pour utiliser UNIQUEMENT les connexions https, veillez à ce que l’option [« Transfert sécurisé requis »](../storage/common/storage-require-secure-transfer.md) soit activée sur le compte de stockage. Si vous utilisez un point de terminaison privé pour accéder aux comptes de stockage, cette étape n’est pas nécessaire et le trafic de stockage n’est pas transféré vers le pare-feu.|
 
    ![Titre : Entrer les détails de la collection de règles d’application](./media/hdinsight-restrict-outbound-traffic/hdinsight-restrict-outbound-traffic-add-app-rule-collection-details.png)
 
-1. Sélectionnez **Ajouter**.
+1. Sélectionnez **Ajouter** .
 
 ### <a name="configure-the-firewall-with-network-rules"></a>Configurer le pare-feu avec des règles de réseau
 
 Créez les règles de réseau pour configurer correctement votre cluster HDInsight.
 
-1. Après l’étape précédente, accédez à **Collection de règles de réseau** >  **+ Ajouter une collection de règles de réseau**.
+1. Après l’étape précédente, accédez à **Collection de règles de réseau** >  **+ Ajouter une collection de règles de réseau** .
 
-1. Dans l’écran **Ajouter une collection de règles de réseau**, fournissez les informations suivantes :
+1. Dans l’écran **Ajouter une collection de règles de réseau** , fournissez les informations suivantes :
 
     **Section supérieure**
 
@@ -101,42 +101,32 @@ Créez les règles de réseau pour configurer correctement votre cluster HDInsig
     |Priority|200|
     |Action|Allow|
 
-    **Section des adresses IP**
-
-    | Nom | Protocol | Adresses sources | Adresses de destination | Ports de destination | Notes |
-    | --- | --- | --- | --- | --- | --- |
-    | Rule_1 | UDP | * | * | 123 | Service de temps |
-    | Rule_2 | Quelconque | * | DC_IP_Address_1, DC_IP_Address_2 | * | Si vous utilisez le Pack Sécurité Entreprise (ESP), ajoutez une règle de réseau dans la section Adresses IP permettant la communication avec AAD-DS pour les clusters ESP. Vous pouvez trouver les adresses IP des contrôleurs de domaine dans la section AAD-DS du portail. |
-    | Rule_3 | TCP | * | Adresse IP de votre compte Data Lake Storage | * | Si vous utilisez Azure Data Lake Storage, vous pouvez ajouter une règle de réseau dans la section Adresses IP pour résoudre un problème d’indication du nom du serveur avec ADLS Gen1 et Gen2. Cette option achemine le trafic vers le pare-feu. Cela peut entraîner des coûts plus élevés pour les chargements de données volumineux, mais le trafic est journalisé et peut être audité dans les journaux de pare-feu. Déterminez l’adresse IP de votre compte Data Lake Storage. Vous pouvez utiliser une commande PowerShell comme `[System.Net.DNS]::GetHostAddresses("STORAGEACCOUNTNAME.blob.core.windows.net")` pour convertir le nom de domaine complet en adresse IP.|
-    | Rule_4 | TCP | * | * | 12 000 | (Facultatif) Si vous utilisez Log Analytics, créez une règle de réseau dans la section Adresses IP pour permettre la communication avec votre espace de travail Log Analytics. |
-
     **Section des étiquettes de service**
 
     | Nom | Protocol | Adresses sources | Étiquettes de service | Ports de destination | Notes |
     | --- | --- | --- | --- | --- | --- |
-    | Rule_7 | TCP | * | SQL | 1433 | Configurez une règle de réseau dans la section Balises de service pour SQL qui vous permettra de journaliser et d’auditer le trafic SQL. Si vous avez configuré des points de terminaison de service pour SQL Server sur le sous-réseau HDInsight, le pare-feu sera contourné. |
-
+    | Rule_5 | TCP | * | SQL | 1433 | Si vous utilisez les serveurs SQL par défaut fournis par HDInsight, configurez une règle de réseau dans la section Balises de service pour SQL qui vous permettra de consigner et d’auditer le trafic SQL. Si vous avez configuré des points de terminaison de service pour SQL Server sur le sous-réseau HDInsight, le pare-feu sera contourné. Si vous utilisez un serveur SQL personnalisé pour des metastores Ambari, Oozie, Ranger et Hive, vous devez uniquement autoriser le trafic vers vos propres serveurs SQL personnalisés.|
+    | Rule_6 | TCP | * | Azure Monitor | * | (facultatif) Les clients qui envisagent d’utiliser la fonctionnalité de mise à l’échelle automatique doivent ajouter cette règle. |
+    
    ![Titre : Entrer une collection de règles d’application](./media/hdinsight-restrict-outbound-traffic/hdinsight-restrict-outbound-traffic-add-network-rule-collection.png)
 
-1. Sélectionnez **Ajouter**.
+1. Sélectionnez **Ajouter** .
 
 ### <a name="create-and-configure-a-route-table"></a>Créer et configurer une table de routage
 
 Créez une table de routage avec les entrées suivantes :
 
-* Toutes les adresses IP de [Services de gestion et d’intégrité : Toutes les régions](../hdinsight/hdinsight-management-ip-addresses.md#health-and-management-services-all-regions) avec un type de tronçon suivant **Internet**.
-
-* Deux adresses IP pour la région où le cluster est créé à partir de [Services de gestion et d’intégrité : Régions spécifiques](../hdinsight/hdinsight-management-ip-addresses.md#health-and-management-services-specific-regions) avec un type de tronçon suivant **Internet**.
+* Toutes les adresses IP de [Services de gestion et d’intégrité](../hdinsight/hdinsight-management-ip-addresses.md#health-and-management-services-all-regions) avec le type de tronçon suivant **Internet** . Elle doit inclure 4 adresses IP des régions génériques et 2 adresses IP pour votre région spécifique. Cette règle est requise uniquement si ResourceProviderConnection est défini sur *Entrant* . Si ResourceProviderConnection est défini sur *Sortant* , ces adresses IP ne sont pas nécessaires dans l’UDR. 
 
 * Une route d’appliance virtuelle pour l’adresse IP 0.0.0.0/0 avec comme tronçon suivant l’adresse IP privée de votre pare-feu Azure.
 
 Par exemple, pour configurer la table de routage d’un cluster créé dans la région des États-Unis « USA Est », procédez comme suit :
 
-1. Sélectionnez votre pare-feu Azure **Test-FW01**. Copiez l’**adresse IP privée** figurant dans la page **Vue d’ensemble**. Pour cet exemple, nous utiliserons un **exemple d’adresse 10.0.2.4**.
+1. Sélectionnez votre pare-feu Azure **Test-FW01** . Copiez l’ **adresse IP privée** figurant dans la page **Vue d’ensemble** . Pour cet exemple, nous utiliserons un **exemple d’adresse 10.0.2.4** .
 
-1. Accédez ensuite à **Tous les services** > **Mise en réseau** > **Tables de routage** et **Créer une table de routage**.
+1. Accédez ensuite à **Tous les services** > **Mise en réseau** > **Tables de routage** et **Créer une table de routage** .
 
-1. À partir de votre nouvelle route, accédez à **Paramètres** > **Routes** >  **+ Ajouter**. Ajoutez les routes suivantes :
+1. À partir de votre nouvelle route, accédez à **Paramètres** > **Routes** >  **+ Ajouter** . Ajoutez les routes suivantes :
 
 | Nom de l’itinéraire | Préfixe de l’adresse | Type de tronçon suivant | adresse de tronçon suivant |
 |---|---|---|---|
@@ -150,13 +140,13 @@ Par exemple, pour configurer la table de routage d’un cluster créé dans la r
 
 Terminez la configuration de la table de routage :
 
-1. Affectez la table de routage que vous avez créée à votre sous-réseau HDInsight en sélectionnant **Sous-réseaux** sous **Paramètres**.
+1. Affectez la table de routage que vous avez créée à votre sous-réseau HDInsight en sélectionnant **Sous-réseaux** sous **Paramètres** .
 
-1. Sélectionnez **+ Associer**.
+1. Sélectionnez **+ Associer** .
 
-1. Dans l’écran **Associer un sous-réseau**, sélectionnez le réseau virtuel dans lequel votre cluster a été créé et le **sous-réseau** que vous avez utilisé pour votre cluster HDInsight.
+1. Dans l’écran **Associer un sous-réseau** , sélectionnez le réseau virtuel dans lequel votre cluster a été créé et le **sous-réseau** que vous avez utilisé pour votre cluster HDInsight.
 
-1. Sélectionnez **OK**.
+1. Sélectionnez **OK** .
 
 ## <a name="edge-node-or-custom-application-traffic"></a>Nœud de périphérie ou trafic d’application personnalisée
 
@@ -170,7 +160,7 @@ Si vos applications ont d’autres dépendances, celles-ci doivent être ajouté
 
 ## <a name="logging-and-scale"></a>Journalisation et mise à l’échelle
 
-Le pare-feu Azure peut envoyer des journaux à plusieurs systèmes de stockage différents. Pour obtenir des instructions sur la configuration de la journalisation de votre pare-feu, suivez les étapes décrites dans l’article [Didacticiel : superviser les journaux du Pare-feu Azure et les métriques](../firewall/tutorial-diagnostics.md).
+Le pare-feu Azure peut envoyer des journaux à plusieurs systèmes de stockage différents. Pour obtenir des instructions sur la configuration de la journalisation de votre pare-feu, suivez les étapes décrites dans l’article [Didacticiel : superviser les journaux du Pare-feu Azure et les métriques](../firewall/firewall-diagnostics.md).
 
 Une fois que vous avez terminé la configuration de la journalisation, si vous utilisez Log Analytics, vous pouvez afficher le trafic bloqué à l’aide d’une requête, par exemple :
 
@@ -188,61 +178,7 @@ Après avoir correctement configuré le pare-feu, vous pouvez utiliser le point 
 
 Pour utiliser le point de terminaison public (`https://CLUSTERNAME.azurehdinsight.net`) ou ssh (`CLUSTERNAME-ssh.azurehdinsight.net`), assurez-vous d’avoir les routes appropriées dans la table de routage et les règles de groupe de sécurité réseau pour éviter le problème de routage asymétrique expliqué [ici](../firewall/integrate-lb.md). Plus précisément, dans ce cas, vous devez autoriser l’adresse IP du client dans les règles NSG entrantes et l’ajouter à la table de routage définie par l’utilisateur avec le tronçon suivant défini comme `internet`. Si le routage n’est pas configuré correctement, une erreur d’expiration du délai s’affiche.
 
-## <a name="configure-another-network-virtual-appliance"></a>Configurer une autre appliance virtuelle réseau
-
-> [!Important]
-> Les informations suivantes sont requises **uniquement** si vous souhaitez configurer une appliance virtuelle réseau (NVA) autre que le pare-feu Azure.
-
-Les instructions précédentes vous aideront à configurer le pare-feu Azure pour restreindre le trafic sortant de votre cluster HDInsight. Le pare-feu Azure est automatiquement configuré pour autoriser le trafic dans la plupart des scénarios importants courants. L’utilisation d’une autre appliance virtuelle réseau vous oblige à configurer un certain nombre de fonctionnalités supplémentaires. Gardez les facteurs suivants à l’esprit pendant la configuration de votre appliance virtuelle réseau :
-
-* Les services compatibles avec les points de terminaison de service doivent être configurés avec des points de terminaison de service.
-* Les dépendances d’adresses IP sont destinées au trafic non HTTP/S (à la fois le trafic TCP et UDP).
-* Les points de terminaison HTTP/HTTPS avec des noms FQDN peuvent être placés dans votre dispositif NVA.
-* Les points de terminaison HTTP/HTTPS avec des caractères génériques sont des dépendances qui peuvent varier selon le nombre de qualificateurs.
-* Affectez la table de routage créée à votre sous-réseau HDInsight.
-
-### <a name="service-endpoint-capable-dependencies"></a>Dépendances compatibles avec les points de terminaison de service
-
-| **Point de terminaison** |
-|---|
-| Azure SQL |
-| Stockage Azure |
-| Azure Active Directory |
-
-#### <a name="ip-address-dependencies"></a>Dépendances des adresses IP
-
-| **Point de terminaison** | **Détails** |
-|---|---|
-| \*:123 | Vérification de l’horloge NTP. Le trafic est vérifié à plusieurs points de terminaison sur le port 123 |
-| Adresses IP publiées [ici](hdinsight-management-ip-addresses.md) | Ces adresses IP sont associées au service HDInsight |
-| Adresses IP privées AAD-DS pour les clusters ESP |
-| \*:16800 pour KMS Windows Activation |
-| \*12000 pour Log Analytics |
-
-#### <a name="fqdn-httphttps-dependencies"></a>Dépendances HTTP/HTTPS FQDN
-
-> [!Important]
-> La liste ci-dessous contient seulement quelques-uns des noms FQDN les plus importants. Si vous avez besoin de noms FQDN supplémentaires (principalement Stockage Azure et Azure Service Bus) pour configurer votre appliance virtuelle réseau (NVA), accédez à [ce fichier](https://github.com/Azure-Samples/hdinsight-fqdn-lists/blob/master/HDInsightFQDNTags.json).
-
-| **Point de terminaison**                                                          |
-|---|
-| azure.archive.ubuntu.com:80                                           |
-| security.ubuntu.com:80                                                |
-| ocsp.msocsp.com:80                                                    |
-| ocsp.digicert.com:80                                                  |
-| wawsinfraprodbay063.blob.core.windows.net:443                         |
-| registry-1.docker.io:443                                              |
-| auth.docker.io:443                                                    |
-| production.cloudflare.docker.com:443                                  |
-| download.docker.com:443                                               |
-| us.archive.ubuntu.com:80                                              |
-| download.mono-project.com:80                                          |
-| packages.treasuredata.com:80                                          |
-| security.ubuntu.com:80                                                |
-| azure.archive.ubuntu.com:80                                           |
-| ocsp.msocsp.com:80                                                    |
-| ocsp.digicert.com:80                                                  |
-
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Architecture de réseau virtuel Azure HDInsight](hdinsight-virtual-network-architecture.md)
+* [Configurer une appliance virtuelle réseau](./network-virtual-appliance.md)

@@ -1,17 +1,17 @@
 ---
 title: Advanced Threat Protection - Azure Database for MariaDB
 description: Azure ATP détecte les activités de base de données anormales qui indiquent la présence potentielle de menaces de sécurité pour la base de données.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: 8485907eba75f80c8f0ed4fd0cc7368c6147b9fd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 018ba33271f8a3a81c3b7109607334b076d8609c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79532176"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95977024"
 ---
 # <a name="azure-database-for-mariadb-advanced-threat-protection"></a>Advanced Threat Protection pour Azure Database for MariaDB
 
@@ -42,6 +42,6 @@ Advanced Threat Protection pour Azure Database for MariaDB détecte les activit�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur [Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-intro)
+* En savoir plus sur [Azure Security Center](../security-center/security-center-introduction.md)
 * Pour plus d’informations sur les prix, consultez la page [Tarification d’Azure Database for MariaDB](https://azure.microsoft.com/pricing/details/mariadb/). 
-* Configurer [Azure ATP pour Azure Database for MariaDB](howto-database-threat-protection-portal.md) avec le portail Azure  
+* Configurer [Azure ATP pour Azure Database for MariaDB](howto-database-threat-protection-portal.md) avec le portail Azure

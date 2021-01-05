@@ -1,21 +1,21 @@
 ---
 title: Supprimer un projet Azure Migrate
-description: Décrit comment créer un projet Azure Migrate et ajouter un outil d’évaluation et de migration.
-author: rayne-wiselman
-ms.service: azure-migrate
-ms.topic: article
+description: Cet article vous permettra d'apprendre à supprimer un projet Azure Migrate à l'aide du portail Azure.
+author: ms-psharma
+ms.author: panshar
+ms.manager: abhemraj
+ms.topic: how-to
 ms.date: 10/22/2019
-ms.author: raynew
-ms.openlocfilehash: 55842d36cddb2a7851ff5bd7002c20e9873158f5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: face3d02ee72d1e05c6c08330dae4fffc2fd0e0b
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73510250"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754247"
 ---
 # <a name="delete-an-azure-migrate-project"></a>Supprimer un projet Azure Migrate
 
-Cet article explique comment supprimer un projet [Azure Migrate](migrate-overview.md).
+Cet article explique comment supprimer un projet [Azure Migrate](./migrate-services-overview.md).
 
 
 ## <a name="before-you-start"></a>Avant de commencer

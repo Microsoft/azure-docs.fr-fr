@@ -12,11 +12,11 @@ ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 03/25/2019
 ms.openlocfilehash: 759e35ba353f470ea3abc5f5d4182fa2b2ea0e73
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71212520"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003580"
 ---
 # <a name="deprecated-configure-baidu-cloud-push-settings-for-a-notification-hub-in-the-azure-portal"></a>Dépréciation : Configurer les paramètres de Baidu Cloud Push pour un hub de notification sur le portail Azure
 

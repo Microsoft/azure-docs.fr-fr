@@ -5,15 +5,15 @@ author: billmath
 ms.author: billmath
 manager: daveba
 ms.date: 12/02/2019
-ms.topic: article
+ms.topic: how-to
 ms.prod: windows-server-threshold
 ms.technology: identity-adfs
-ms.openlocfilehash: e41be4b76245f2567015eb0ede317830120ee61a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fa7292d423d8b716ffd75a1a20431fb5a79bbf96
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75549483"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95237338"
 ---
 # <a name="cloud-provisioning-troubleshooting"></a>Résolution des problèmes de provisionnement cloud
 
@@ -47,21 +47,19 @@ Pour vérifier que l’agent est visible par Azure et qu’il est sain, effectue
 1. À gauche, sélectionnez **Azure Active Directory** > **Azure AD Connect** Au centre, sélectionnez **Gérer le provisionnement (préversion)** .
 1. Dans l’écran **Provisionnement Azure AD (préversion)** , sélectionnez **Passer en revue tous les agents**.
 
-   ![Passer en revue tous les agents](media/how-to-install/install7.png)</br>
+   ![Passer en revue tous les agents](media/how-to-install/install-7.png)</br>
  
 1. L’écran **Agents de provisionnement locaux** affiche les agents que vous avez installés. Vérifiez que l’agent en question est présent et qu’il est marqué comme étant *Sain*.
 
-   ![Écran Agents de provisionnement locaux](media/how-to-install/install8.png)</br>
+   ![Écran Agents de provisionnement locaux](media/how-to-install/install-8.png)</br>
 
 ### <a name="verify-the-port"></a>Vérifier le port
 
-Pour vérifier que le service Azure est à l’écoute sur le port 443, et que votre agent peut communiquer avec lui, utilisez l’outil suivant :
-
-https://aadap-portcheck.connectorporttest.msappproxy.net/ 
+Vérifiez que le service Azure est à l’écoute sur le port 443 et que votre agent peut communiquer avec lui. 
 
 Ce test vérifie que vos agents peuvent communiquer avec Azure via le port 443. Ouvrez un navigateur et accédez à l’URL précédents à partir du serveur sur lequel l’agent est installé.
 
-![Vérification de l’accessibilité du port](media/how-to-install/verify2.png)
+![Vérification de l’accessibilité du port](media/how-to-install/verify-2.png)
 
 ### <a name="on-the-local-server"></a>Sur le serveur local
 
@@ -122,44 +120,21 @@ Vous pouvez recevoir un message d’erreur lorsque vous installez l’agent de p
 
 Ce problème est généralement dû à l’incapacité de l’agent à exécuter les scripts d’inscription PowerShell en raison des stratégies d’exécution PowerShell locales.
 
-Pour résoudre ce problème, modifiez les stratégies d’exécution PowerShell sur le serveur. Les stratégies de la machine et de l’utilisateur doivent être définies sur *Undefined* ou *RemoteSigned*. Si elles sont définies sur *Unrestricted*, vous verrez ce message d’erreur. Pour plus d’informations, consultez [Stratégies d’exécution PowerShell](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6). 
+Pour résoudre ce problème, modifiez les stratégies d’exécution PowerShell sur le serveur. Les stratégies de la machine et de l’utilisateur doivent être définies sur *Undefined* ou *RemoteSigned*. Si elles sont définies sur *Unrestricted*, vous verrez ce message d’erreur. Pour plus d’informations, consultez [Stratégies d’exécution PowerShell](/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6). 
 
 ### <a name="log-files"></a>Fichiers journaux
 
-Par défaut, l’agent émet peu de messages d’erreur et d’informations sur la trace de la pile. Vous pouvez trouver ces journaux de suivi dans le dossier *C:\ProgramData\Microsoft\Azure AD Connect Provisioning Agent\Trace*.
+Par défaut, l’agent émet peu de messages d’erreur et d’informations sur la trace de la pile. Vous pouvez trouver ces journaux de suivi dans le dossier **C:\ProgramData\Microsoft\Azure AD Connect Provisioning Agent\Trace**.
 
 Pour obtenir des détails supplémentaires en vue de résoudre les problèmes liés à l’agent, effectuez les étapes suivantes.
 
-1. Arrêtez le service **Agent de provisionnement Microsoft Azure AD Connect**.
-1. Créez une copie du fichier de configuration d’origine : *C:\Program Files\Microsoft Azure AD Connect Provisioning Agent\AADConnectProvisioningAgent.exe.config*.
-1. Remplacez la section `<system.diagnostics>` existante par le code suivant. De cette façon, tous les messages de suivi iront dans le fichier *ProvAgentTrace.log*.
+1.  Installez le module PowerShell AADCloudSyncTools comme décrit [ici](reference-powershell.md#install-the-aadcloudsynctools-powershell-module).
+2. Utilisez l’applet de commande PowerShell `Export-AADCloudSyncToolsLogs` pour capturer les informations.  Vous pouvez utiliser les commutateurs suivants pour affiner votre collecte de données.
+      - SkipVerboseTrace pour exporter uniquement les journaux actuels sans capturer les journaux détaillés (par défaut = false)
+      - TracingDurationMins pour spécifier une durée de capture différente (par défaut = 3 minutes)
+      - OutputPath pour spécifier un autre chemin de sortie (par défaut = les documents de l’utilisateur)
 
-   ```xml
-     <system.diagnostics>
-         <sources>
-         <source name="AAD Connect Provisioning Agent">
-             <listeners>
-             <add name="console"/>
-             <add name="etw"/>
-             <add name="textWriterListener"/>
-             </listeners>
-         </source>
-         </sources>
-         <sharedListeners>
-         <add name="console" type="System.Diagnostics.ConsoleTraceListener" initializeData="false"/>
-         <add name="etw" type="System.Diagnostics.EventLogTraceListener" initializeData="Azure AD Connect Provisioning Agent">
-             <filter type="System.Diagnostics.EventTypeFilter" initializeData="All"/>
-         </add>
-         <add name="textWriterListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="C:/ProgramData/Microsoft/Azure AD Connect Provisioning Agent/Trace/ProvAgentTrace.log"/>
-         </sharedListeners>
-     </system.diagnostics>
-    
-   ```
-1. Démarrez le service **Microsoft Azure AD Connect Provisioning Agent**.
-1. Utilisez la commande suivante pour mettre fin au fichier et déboguer les problèmes. 
-    ```
-    Get-Content “C:/ProgramData/Microsoft/Azure AD Connect Provisioning Agent/Trace/ProvAgentTrace.log” -Wait
-    ```
+
 ## <a name="object-synchronization-problems"></a>Problèmes de synchronisation des objets
 
 La section suivante contient des informations sur la résolution des problèmes de synchronisation d’objet.
@@ -197,7 +172,7 @@ En sélectionnant l’état, vous pouvez voir des informations supplémentaires 
 
   ![Redémarrer le provisionnement](media/how-to-troubleshoot/quarantine3.png)
 
-- Utilisez Microsoft Graph pour [redémarrer le travail de provisionnement](https://docs.microsoft.com/graph/api/synchronization-synchronizationjob-restart?view=graph-rest-beta&tabs=http). Vous bénéficiez d’un contrôle total sur ce que vous redémarrez. Vous pouvez choisir d’effacer les éléments suivants :
+- Utilisez Microsoft Graph pour [redémarrer le travail de provisionnement](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta). Vous bénéficiez d’un contrôle total sur ce que vous redémarrez. Vous pouvez choisir d’effacer les éléments suivants :
   - Les escrows, afin de redémarrer le compteur des escrows dont l’augmentation amène à la mise en quarantaine
   - La mise en quarantaine, afin de retirer l’application de la quarantaine
   - Les filigranes 
@@ -206,10 +181,23 @@ En sélectionnant l’état, vous pouvez voir des informations supplémentaires 
  
   `POST /servicePrincipals/{id}/synchronization/jobs/{jobId}/restart`
 
+## <a name="repairing-the-the-cloud-sync-service-account"></a>Réparation du compte de service Cloud Sync
+Si vous devez réparer le compte de service Cloud Sync, vous pouvez utiliser `Repair-AADCloudSyncToolsAccount`.  
+
+
+   1.  Utilisez les étapes d’installation décrites [ici](reference-powershell.md#install-the-aadcloudsynctools-powershell-module) pour commencer, puis passez aux étapes restantes.
+   2.  À partir d’une session Windows PowerShell avec des privilèges d’administrateur, tapez ou copiez et collez les éléments suivants : 
+    ```
+    Connect-AADCloudSyncTools
+    ```  
+   3. Entrez les informations d’identification de votre administrateur général Azure AD
+   4. Tapez ou collez le code suivant : 
+    ```
+    Repair-AADCloudSyncToolsAccount
+    ```  
+   5. Une fois cette opération terminée, le compte devrait indiquer que le compte a été correctement réparé.
+
 ## <a name="next-steps"></a>Étapes suivantes 
 
 - [Présentation du provisionnement](what-is-provisioning.md)
 - [Présentation du provisionnement cloud Azure AD Connect](what-is-cloud-provisioning.md)
-
-
-

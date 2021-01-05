@@ -3,14 +3,14 @@ title: Traitement des événements fiables Azure Functions
 description: Éviter de rater des messages Event Hub dans Azure Functions
 author: craigshoemaker
 ms.topic: conceptual
-ms.date: 09/12/2019
+ms.date: 10/01/2020
 ms.author: cshoe
-ms.openlocfilehash: e4f35495d8a01146068cffb9159c29c46c3c0d29
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd784bb184ff9432efc569ac9fd40de93eec0b53
+ms.sourcegitcommit: 0d171fe7fc0893dcc5f6202e73038a91be58da03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75561865"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93379585"
 ---
 # <a name="azure-functions-reliable-event-processing"></a>Traitement des événements fiables Azure Functions
 
@@ -50,7 +50,7 @@ Azure Functions consomme les événements Event Hubs en parcourant les étapes s
 
 Ce comportement révèle quelques points importants :
 
-- *Les exceptions non gérées peuvent entraîner une perte de messages.* Les exécutions qui se terminent par une exception continuent à faire avancer le pointeur.
+- *Les exceptions non gérées peuvent entraîner une perte de messages.* Les exécutions qui se terminent par une exception continuent à faire avancer le pointeur.  Définir une [stratégie de nouvelles tentatives](./functions-bindings-error-pages.md#retry-policies-preview) va retarder la progression du pointeur jusqu’à ce que la totalité de la stratégie de nouvelles tentatives ait été évaluée.
 - *Functions garantit au minimum une remise.* Votre code et vos systèmes dépendants ont peut-être besoin de [tenir compte du fait que le même message peut être reçu deux fois](./functions-idempotent.md).
 
 ## <a name="handling-exceptions"></a>Gestion des exceptions
@@ -59,9 +59,9 @@ En règle générale, chaque fonction doit inclure un [bloc try/catch](./functio
 
 ### <a name="retry-mechanisms-and-policies"></a>Mécanismes et stratégies de nouvelle tentative
 
-Certaines exceptions sont transitoires par nature et ne réapparaissent pas quand une opération est retentée un peu plus tard. C’est la raison pour laquelle la première étape consiste toujours de retenter l’opération. Vous pouvez écrire vous-même des règles de traitement des nouvelles tentatives, mais elles sont si banales qu’il existe déjà plusieurs outils disponibles. L’utilisation de ces bibliothèques vous permet de définir des stratégies de nouvelle tentative robustes, qui permettent aussi de mieux préserver l’ordre de traitement.
+Certaines exceptions sont transitoires par nature et ne réapparaissent pas quand une opération est retentée un peu plus tard. C’est la raison pour laquelle la première étape consiste toujours de retenter l’opération.  Vous pouvez exploiter les [stratégies de nouvelles tentatives](./functions-bindings-error-pages.md#retry-policies-preview) de l’application de fonction ou la logique de nouvelle tentative d’auteur pendant l’exécution de la fonction.
 
-L’introduction de bibliothèques de gestion des erreurs dans vos fonctions vous permet de définir des stratégies de nouvelle tentative à la fois basiques et avancées. Par exemple, vous pouvez implémenter une stratégie qui suit un workflow illustré par les règles suivantes :
+L’introduction de comportements de gestion des erreurs dans vos fonctions vous permet de définir des stratégies de nouvelle tentative à la fois basiques et avancées. Par exemple, vous pouvez implémenter une stratégie qui suit un workflow illustré par les règles suivantes :
 
 - Essayez d’insérer un message trois fois (avec un délai éventuel entre les nouvelles tentatives).
 - Si le résultat final de toutes les tentatives est un échec, ajoutez alors un message à une file d’attente afin que le traitement puisse continuer sur le flux.
@@ -69,10 +69,6 @@ L’introduction de bibliothèques de gestion des erreurs dans vos fonctions vou
 
 > [!NOTE]
 > [Polly](https://github.com/App-vNext/Polly) est un exemple de bibliothèque de résilience et de gestion des erreurs temporaires pour les applications C#.
-
-Quand vous utilisez des bibliothèques de classes C# précompilées, des [filtres d’exception](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/try-catch) vous permettent d’exécuter du code chaque fois qu’une exception non gérée se produit.
-
-Des exemples d’utilisation de filtres d’exception sont disponibles dans le dépôt du [SDK Azure WebJobs](https://github.com/Azure/azure-webjobs-sdk/wiki).
 
 ## <a name="non-exception-errors"></a>Erreurs hors exception
 
@@ -91,7 +87,7 @@ Deux éléments sont nécessaires pour implémenter un disjoncteur dans un proce
 
 Les détails de l’implémentation peuvent varier, mais pour partager l’état entre les instances, vous avez besoin d’un mécanisme de stockage. Vous pouvez choisir de stocker l’état dans le stockage Azure, un cache Redis ou tout autre compte accessible par une collection de fonctions.
 
-[Azure Logic Apps](../logic-apps/logic-apps-overview.md) ou des [entités durables](./durable/durable-functions-overview.md) constituent une solution naturelle pour gérer le workflow et l’état du circuit. D’autres services peuvent fonctionner tout aussi bien, mais les applications logiques sont utilisées pour cet exemple. L’utilisation d’applications logiques vous permet de suspendre et de redémarrer l’exécution d’une fonction tout en bénéficiant du contrôle nécessaire pour implémenter le modèle de disjoncteur.
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md) ou les [fonctions durables](./durable/durable-functions-overview.md) constituent une solution naturelle pour gérer le workflow et l’état du circuit. D’autres services peuvent fonctionner tout aussi bien, mais les applications logiques sont utilisées pour cet exemple. L’utilisation d’applications logiques vous permet de suspendre et de redémarrer l’exécution d’une fonction tout en bénéficiant du contrôle nécessaire pour implémenter le modèle de disjoncteur.
 
 ### <a name="define-a-failure-threshold-across-instances"></a>Définir un seuil d’échec entre les instances
 
@@ -123,7 +119,7 @@ Grâce à cette approche, aucun message n’est perdu, tous les messages sont tr
 ## <a name="resources"></a>Ressources
 
 - [Exemples de traitement des événements fiables](https://github.com/jeffhollan/functions-csharp-eventhub-ordered-processing)
-- [Disjoncteur Azure Durable Functions](https://github.com/jeffhollan/functions-durable-actor-circuitbreaker)
+- [Disjoncteur d’entité durable Azure](https://github.com/jeffhollan/functions-durable-actor-circuitbreaker)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

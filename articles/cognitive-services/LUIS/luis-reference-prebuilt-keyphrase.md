@@ -3,20 +3,18 @@ title: Entité prédéfinie keyPhrase - LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie keyPhrase dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 09/27/2019
-ms.author: diberry
-ms.openlocfilehash: 53be1b13f1e2744e143a4be0777e3a8e3135460e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 02a48c8d106795b970d573bb71f52ba92e0a90ac
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270524"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91541983"
 ---
 # <a name="keyphrase-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie keyPhrase pour une application LUIS
 L’entité KeyPhrase extrait une variété d’expressions clés d’un énoncé. Il est inutile d’ajouter des exemples d’énoncés contenant keyPhrase à l’application. L’entité keyPhrase est prise en charge dans de [nombreuses cultures](luis-language-support.md#languages-supported) dans le cadre des fonctionnalités d’[analyse de texte](../text-analytics/overview.md).

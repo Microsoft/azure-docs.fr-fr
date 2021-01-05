@@ -5,12 +5,12 @@ description: Découvrez comment créer et utiliser un équilibreur de charge int
 services: container-service
 ms.topic: article
 ms.date: 03/04/2019
-ms.openlocfilehash: 0789a866ebda270f3e5e8b150e072c7aedea7f04
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: ec8fd1f1b32d5bba6dc4dc756e1f95f4a74f9a96
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790607"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87285881"
 ---
 # <a name="use-an-internal-load-balancer-with-azure-kubernetes-service-aks"></a>Utiliser un équilibreur de charge interne avec Azure Kubernetes Service (AKS)
 
@@ -25,7 +25,9 @@ Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d
 
 Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
 
-Le principal de service du cluster AKS a besoin de l’autorisation de gérer les ressources réseau si vous utilisez un sous-réseau ou un groupe de ressources existant. De façon générale, attribuez le rôle *Contributeur de réseau* au principal de service sur les ressources déléguées. Au lieu d’utiliser le principal de service, vous pouvez utiliser l’identité managée affectée par le système pour les autorisations. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md). Pour plus d’informations sur les autorisations, consultez [Delegate access to other Azure resources][aks-sp] (Déléguer l’accès à d’autres ressources Azure).
+Le principal de service du cluster AKS a besoin de l’autorisation de gérer les ressources réseau si vous utilisez un sous-réseau ou un groupe de ressources existant. Pour plus d’informations, consultez [Utiliser la mise en réseau kubenet avec vos propres plages d’adresses IP dans Azure Kubernetes Service (AKS)][use-kubenet] ou [Configurer un réseau Azure CNI dans Azure Kubernetes Service (AKS)][advanced-networking]. Si vous configurez votre équilibreur de charge dans le but d’utiliser une [adresse IP dans un autre sous-réseau][different-subnet], assurez-vous que le principal de service du cluster AKS dispose également d’un accès en lecture à ce sous-réseau.
+
+Au lieu d’utiliser le principal de service, vous pouvez aussi utiliser l’identité managée affectée par le système pour les autorisations. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md). Pour plus d’informations sur les autorisations, consultez [Delegate access to other Azure resources][aks-sp] (Déléguer l’accès à d’autres ressources Azure).
 
 ## <a name="create-an-internal-load-balancer"></a>Créer un équilibrage de charge interne
 
@@ -54,7 +56,7 @@ kubectl apply -f internal-lb.yaml
 
 Un équilibreur de charge Azure est créé dans le groupe de ressources de nœud et connecté au même réseau virtuel que le cluster AKS.
 
-Quand vous affichez les détails du service, l’adresse IP de l’équilibreur de charge interne apparaît dans la colonne *EXTERNAL-IP*. Dans ce contexte, *Externe* fait référence à l’interface externe de l’équilibreur de charge, pas au fait qu’il reçoit une adresse IP publique externe. Le passage de l’adresse IP de l’état *\<en attente\>* à une adresse IP interne réelle peut prendre une ou deux minutes, comme indiqué dans l’exemple suivant :
+Quand vous affichez les détails du service, l’adresse IP de l’équilibreur de charge interne apparaît dans la colonne *EXTERNAL-IP*. Dans ce contexte, *Externe* fait référence à l’interface externe de l’équilibreur de charge, pas au fait qu’il reçoit une adresse IP publique externe. Le passage de l’adresse IP de l’état *\<pending\>* à une adresse IP interne réelle peut prendre une ou deux minutes, comme indiqué dans l’exemple suivant :
 
 ```
 $ kubectl get service internal-app
@@ -65,7 +67,7 @@ internal-app   LoadBalancer   10.0.248.59   10.240.0.7    80:30555/TCP   2m
 
 ## <a name="specify-an-ip-address"></a>Spécifier une adresse IP
 
-Si vous souhaitez utiliser une adresse IP spécifique avec l’équilibreur de charge interne, ajoutez la propriété *loadBalancerIP* au manifeste YAML de l’équilibreur de charge. L’adresse IP spécifiée doit se trouver dans le même sous-réseau que le cluster AKS et ne doit pas déjà être assignée à une ressource.
+Si vous souhaitez utiliser une adresse IP spécifique avec l’équilibreur de charge interne, ajoutez la propriété *loadBalancerIP* au manifeste YAML de l’équilibreur de charge. Dans ce scénario, l’adresse IP spécifiée doit se trouver dans le même sous-réseau que le cluster AKS et ne doit pas déjà être attribuée à une ressource. Par exemple, vous ne devez pas utiliser une adresse IP dans la plage désignée pour le sous-réseau Kubernetes.
 
 ```yaml
 apiVersion: v1
@@ -91,6 +93,8 @@ $ kubectl get service internal-app
 NAME           TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 internal-app   LoadBalancer   10.0.184.168   10.240.0.25   80:30225/TCP   4m
 ```
+
+Pour plus d’informations sur la configuration de votre équilibreur de charge dans un autre sous-réseau, consultez [Spécifier un autre sous-réseau][different-subnet].
 
 ## <a name="use-private-networks"></a>Utiliser des réseaux privés
 
@@ -153,3 +157,4 @@ En savoir plus sur les services Kubernetes dans la [documentation des services K
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli
 [aks-sp]: kubernetes-service-principal.md#delegate-access-to-other-azure-resources
+[different-subnet]: #specify-a-different-subnet

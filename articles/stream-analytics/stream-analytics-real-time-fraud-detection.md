@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/24/2020
 ms.custom: seodec18
-ms.openlocfilehash: c0b2943e1f0d7f2386ec09da03d297a570eede7a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba216e41672e1d19e552b3f82a2ea65da7d3a435
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80276476"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007084"
 ---
 # <a name="get-started-using-azure-stream-analytics-real-time-fraud-detection"></a>Bien démarrer avec Azure Stream Analytics : Détection des fraudes en temps réel
 
@@ -43,11 +43,11 @@ Avant de commencer, veillez à disposer des éléments qui suivent :
     >[!NOTE]
     >Windows peut bloquer le fichier .zip téléchargé. Si vous ne pouvez pas le décompresser, cliquez avec le bouton droit sur le fichier et sélectionnez **Propriétés**. Si le message « Ce fichier provient d’un autre ordinateur et peut éventuellement être bloqué pour protéger cet ordinateur. » est affiché, sélectionnez l’option **Débloquer**, puis cliquez sur **Appliquer**.
 
-Si vous souhaitez examiner les résultats du travail Stream Analytics, vous avez également besoin d’un outil pour afficher le contenu d’un conteneur de stockage Blob Azure. Si vous utilisez Visual Studio, vous pouvez utiliser [Azure Tools pour Visual Studio](https://docs.microsoft.com/azure/vs-azure-tools-storage-resources-server-explorer-browse-manage) ou [Visual Studio Cloud Explorer](https://docs.microsoft.com/azure/vs-azure-tools-resources-managing-with-cloud-explorer). Vous pouvez également installer des outils autonomes comme l’[Explorateur Stockage Azure](https://storageexplorer.com/) ou [Cerulean](https://www.cerebrata.com/products/cerulean/features/azure-storage). 
+Si vous souhaitez examiner les résultats du travail Stream Analytics, vous avez également besoin d’un outil pour afficher le contenu d’un conteneur de stockage Blob Azure. Si vous utilisez Visual Studio, vous pouvez utiliser [Azure Tools pour Visual Studio](/visualstudio/azure/vs-azure-tools-storage-resources-server-explorer-browse-manage) ou [Visual Studio Cloud Explorer](/visualstudio/azure/vs-azure-tools-resources-managing-with-cloud-explorer). Vous pouvez également installer des outils autonomes comme l’[Explorateur Stockage Azure](https://storageexplorer.com/) ou [Cerulean](https://www.cerebrata.com/products/cerulean/features/azure-storage). 
 
 ## <a name="create-an-azure-event-hubs-to-ingest-events"></a>Créer un concentrateur Azure Event Hubs pour ingérer les événements
 
-Pour analyser un flux de données, *ingérez-le* dans Azure. Pour ingérer des données, il est courant d’utiliser [Azure Event Hubs](../event-hubs/event-hubs-what-is-event-hubs.md), qui vous permet d’ingérer des millions d’événements par seconde, puis de traiter et de stocker les informations d’événement. Pour ce tutoriel, vous allez créer un concentrateur Event Hub, puis indiquer à l’application de génération d’événements d’appel d’envoyer des données d’appel à ce concentrateur. Pour plus d’informations sur les concentrateurs Event Hub, voir la [documentation Azure Service Bus](https://docs.microsoft.com/azure/service-bus/).
+Pour analyser un flux de données, *ingérez-le* dans Azure. Pour ingérer des données, il est courant d’utiliser [Azure Event Hubs](../event-hubs/event-hubs-about.md), qui vous permet d’ingérer des millions d’événements par seconde, puis de traiter et de stocker les informations d’événement. Pour ce tutoriel, vous allez créer un concentrateur Event Hub, puis indiquer à l’application de génération d’événements d’appel d’envoyer des données d’appel à ce concentrateur.
 
 >[!NOTE]
 >Pour consulter une version plus détaillée de cette procédure, voir [Créer un espace de noms Event Hubs et un concentrateur d’événements avec le portail Azure](../event-hubs/event-hubs-create.md). 
@@ -202,7 +202,7 @@ Maintenant que vous disposez d’un flux des événements d’appel, vous pouvez
    |**Paramètre**  |**Valeur suggérée**  |**Description**  |
    |---------|---------|---------|
    |Alias d’entrée  |  CallStream   |  Saisissez un nom pour identifier l’entrée de la tâche.   |
-   |Abonnement   |  \<Votre abonnement\> |  Sélectionnez l’abonnement Azure dans lequel vous avez créé un Event Hub.   |
+   |Abonnement   |  \<Your subscription\> |  Sélectionnez l’abonnement Azure dans lequel vous avez créé un Event Hub.   |
    |Espace de noms Event Hub  |  asa-eh-ns-demo |  Entrez le nom de l’espace de noms Event Hub.   |
    |Nom de l’Event Hub  | asa-eh-frauddetection-demo | Sélectionnez le nom de votre Event Hub.   |
    |Nom de la stratégie du hub d’événements  | asa-policy-manage-demo | Sélectionnez la stratégie d’accès que vous avez créée précédemment.   |
@@ -221,7 +221,7 @@ Une requête simple peut lire simplement toutes les données entrantes. Toutefoi
 
 Les requêtes que vous créez ici affichent uniquement les données transformées à l’écran. Dans une section ultérieure, vous allez configurer un récepteur de sortie et une requête qui écriront les données transformées dans ce récepteur.
 
-Pour plus d’informations sur ce langage, consultez la page [Références sur le langage des requêtes d’Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference).
+Pour plus d’informations sur ce langage, consultez la page [Références sur le langage des requêtes d’Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference).
 
 ### <a name="get-sample-data-for-testing-queries"></a>Obtenir des exemples de données pour tester des requêtes
 
@@ -303,11 +303,11 @@ Pour cette transformation, vous souhaitez une séquence de fenêtres temporelles
     GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
     ```
 
-    Cette requête utilise le mot-clé `Timestamp By` dans la clause `FROM` pour spécifier le champ d’horodatage à utiliser dans le flux d’entrée pour définir la fenêtre bascule. Dans ce cas, la fenêtre divise les données en segments en fonction du champ `CallRecTime` dans chaque enregistrement. (Si aucun champ n’est spécifié, l’opération de fenêtrage utilise l’heure d’arrivée de chaque événement dans le concentrateur Event Hub.) Voir « Heure d’arrivée par rapport à l’heure de l’application » dans [Informations de référence sur le langage de requête Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference). 
+    Cette requête utilise le mot-clé `Timestamp By` dans la clause `FROM` pour spécifier le champ d’horodatage à utiliser dans le flux d’entrée pour définir la fenêtre bascule. Dans ce cas, la fenêtre divise les données en segments en fonction du champ `CallRecTime` dans chaque enregistrement. (Si aucun champ n’est spécifié, l’opération de fenêtrage utilise l’heure d’arrivée de chaque événement dans le concentrateur Event Hub.) Voir « Heure d’arrivée par rapport à l’heure de l’application » dans [Informations de référence sur le langage de requête Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference). 
 
     La projection inclut `System.Timestamp`, qui retourne un horodatage pour la fin de chaque fenêtre. 
 
-    Pour spécifier que vous voulez utiliser une fenêtre bascule, vous utilisez la fonction [TUMBLINGWINDOW](https://docs.microsoft.com/stream-analytics-query/tumbling-window-azure-stream-analytics) dans la clause `GROUP BY`. Dans la fonction, indiquez une unité de temps (d’une microseconde à un jour) et une taille de fenêtre (nombre d’unités). Dans cet exemple, comme la fenêtre bascule est constituée d’intervalles de 5 secondes, vous obtenez un nombre d’appels par pays/région pour chaque période de 5 secondes.
+    Pour spécifier que vous voulez utiliser une fenêtre bascule, vous utilisez la fonction [TUMBLINGWINDOW](/stream-analytics-query/tumbling-window-azure-stream-analytics) dans la clause `GROUP BY`. Dans la fonction, indiquez une unité de temps (d’une microseconde à un jour) et une taille de fenêtre (nombre d’unités). Dans cet exemple, comme la fenêtre bascule est constituée d’intervalles de 5 secondes, vous obtenez un nombre d’appels par pays/région pour chaque période de 5 secondes.
 
 2. Cliquez de nouveau sur **Test**. Dans les résultats, notez que les horodatages indiqués sous **WindowEnd** sont exprimés par incréments de 5 secondes.
 
@@ -372,7 +372,7 @@ Si vous possédez déjà un compte de stockage d’objets blob, vous pouvez l’
    |**Paramètre**  |**Valeur suggérée**  |**Description**  |
    |---------|---------|---------|
    |Alias de sortie  |  CallStream-FraudulentCalls   |  Saisissez un nom pour identifier la sortie de la tâche.   |
-   |Abonnement   |  \<Votre abonnement\> |  Sélectionnez l’abonnement Azure contenant le compte de stockage que vous avez créé. Le compte de stockage peut être dans le même abonnement ou dans un abonnement distinct. Cet exemple suppose que vous avez créé le compte de stockage dans le même abonnement. |
+   |Abonnement   |  \<Your subscription\> |  Sélectionnez l’abonnement Azure contenant le compte de stockage que vous avez créé. Le compte de stockage peut être dans le même abonnement ou dans un abonnement distinct. Cet exemple suppose que vous avez créé le compte de stockage dans le même abonnement. |
    |Compte de stockage  |  asaehstorage |  Entrez le nom du compte de stockage que vous avez créé. |
    |Conteneur  | asa-fraudulentcalls-demo | Choisissez Créer et entrez un nom de conteneur. |
 
@@ -420,7 +420,7 @@ Toutefois, si vous en avez terminé et n’avez pas besoin des ressources que vo
 
 ## <a name="get-support"></a>Obtenir de l’aide
 
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics).
+Pour obtenir de l’aide supplémentaire, consultez notre [page de questions Microsoft Q&A sur Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -432,5 +432,5 @@ Pour plus d’informations sur Stream Analytics en général, consultez les arti
 
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

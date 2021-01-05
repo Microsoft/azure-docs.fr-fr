@@ -7,25 +7,29 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: quickstart
-ms.date: 03/27/2020
-ms.openlocfilehash: 9fb34141d19866a2f49ac164e0d89802cf7818c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/25/2020
+ms.openlocfilehash: adcd07ad370ad9f1301caa41c494a33958743dd8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80369664"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91398406"
 ---
 # <a name="quickstart-use-search-explorer-to-run-queries-in-the-portal"></a>Démarrage rapide : Utiliser l’Explorateur de recherche pour exécuter des requêtes dans le portail
 
-**L’Explorateur de recherche** est un outil de requête intégré utilisé pour exécuter des requêtes sur un index de recherche dans Recherche cognitive Azure. Cet outil facilite l’apprentissage de la syntaxe des requêtes, le test d’une requête ou d’une expression de filtre, ou la vérification des résultats d’actualisation de l’index en vérifiant l’existence de contenu plus récent.
+**L’Explorateur de recherche** est un outil de requête intégré utilisé pour exécuter des requêtes sur un index de recherche dans Recherche cognitive Azure. Cet outil facilite l’apprentissage de la syntaxe des requêtes, le test d’une requête ou d’une expression de filtre, ou la confirmation de l’actualisation des données en vérifiant si du nouveau contenu existe dans l’index.
 
-Ce guide de démarrage rapide utilise **realestate-us-sample-index** pour illustrer l’Explorateur de recherche. Les requêtes sont formulées à l’aide de [l’API REST Search](https://docs.microsoft.com/rest/api/searchservice/), avec les réponses retournées sous forme de documents JSON.
+Ce guide de démarrage rapide utilise un index existant pour illustrer l’explorateur de recherche. Les requêtes sont formulées à l’aide de [l’API REST Search](/rest/api/searchservice/), avec les réponses retournées sous forme de documents JSON.
 
 ## <a name="prerequisites"></a>Prérequis
 
-+ [Créez un service Recherche cognitive Azure](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide.
+Avant de commencer la lecture cet article, vous devez disposer des éléments suivants :
 
-+ **realestate-us-sample-index** est utilisé pour ce guide de démarrage rapide. Parcourez l’Assistant [**Importer des données**](search-import-data-portal.md) pour générer l’index à partir de l’exemple de source de données intégrée.
++ Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/).
+
++ Service Recherche cognitive Azure. [Créez un service](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide. 
+
++ *realestate-us-sample-index* est utilisé pour ce guide de démarrage rapide. Utilisez l’Assistant [**Importer des données**](search-import-data-portal.md) pour créer l’index. Dans la première étape, lorsque vous êtes invité à entrer la source de données, choisissez **Exemples** puis sélectionnez la source de données **realestate-us-sample**. Acceptez tous les paramètres par défaut de l’Assistant pour créer l’index.
 
 ## <a name="start-search-explorer"></a>Démarrer l’Explorateur de recherche
 
@@ -33,11 +37,11 @@ Ce guide de démarrage rapide utilise **realestate-us-sample-index** pour illust
 
 1. Ouvrez l’Explorateur de recherche dans la barre de commandes :
 
-   ![Commande d’accès à l’explorateur de recherche dans le portail](./media/search-explorer/search-explorer-cmd2.png "Commande d’accès à l’explorateur de recherche dans le portail")
+   :::image type="content" source="media/search-explorer/search-explorer-cmd2.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
     Ou utilisez l’onglet **Explorateur de recherche** intégré sur un index ouvert :
 
-   ![Onglet Explorateur de recherche](./media/search-explorer/search-explorer-tab.png "Onglet Explorateur de recherche")
+   :::image type="content" source="media/search-explorer/search-explorer-tab.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="unspecified-query"></a>Requête non spécifiée
 
@@ -51,7 +55,7 @@ La syntaxe équivalente d'une recherche vide est `*` ou `search=*`.
 
    **Résultats**
    
-   ![Exemple de requête vide](./media/search-explorer/search-explorer-example-empty.png "Exemple de requête vide non qualifiée ou vide")
+   :::image type="content" source="media/search-explorer/search-explorer-example-empty.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="free-text-search"></a>Recherche en texte libre
 
@@ -67,7 +71,7 @@ Notez que lorsque vous indiquez des critères de recherche, comme des termes ou 
 
    Vous pouvez utiliser Ctrl+F pour rechercher des termes spécifiques dans les résultats.
 
-   ![Exemple de requête de texte libre](./media/search-explorer/search-explorer-example-freetext.png "Exemple de requête de texte libre")
+   :::image type="content" source="media/search-explorer/search-explorer-example-freetext.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="count-of-matching-documents"></a>Nombre de documents correspondants 
 
@@ -79,7 +83,7 @@ Ajoutez **$count=true** pour obtenir le nombre de correspondances trouvées dans
 
    **Résultats**
 
-   ![Exemple de nombre de documents](./media/search-explorer/search-explorer-example-count.png "Nombre de documents correspondants dans l’index")
+   :::image type="content" source="media/search-explorer/search-explorer-example-count.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="limit-fields-in-search-results"></a>Limiter les champs dans les résultats de la recherche
 
@@ -91,7 +95,7 @@ Ajoutez [ **$select**](search-query-odata-select.md) pour limiter les résultats
 
    **Résultats**
 
-   ![Exemple de limite de champs](./media/search-explorer/search-explorer-example-selectfield.png "Restreindre les champs dans les résultats de la recherche")
+   :::image type="content" source="media/search-explorer/search-explorer-example-selectfield.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="return-next-batch-of-results"></a>Retourner le jeu de résultats suivant
 
@@ -103,7 +107,7 @@ La Recherche cognitive Azure retourne les 50 premières correspondances selon l
 
    **Résultats**
 
-   ![Lot de résultats de recherche](./media/search-explorer/search-explorer-example-topskip.png "Retourner le lot de résultats de recherche suivant")
+   :::image type="content" source="media/search-explorer/search-explorer-example-topskip.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="filter-expressions-greater-than-less-than-equal-to"></a>Filtrer les expressions (supérieur à, inférieur à, égal à)
 
@@ -115,7 +119,7 @@ Utilisez le paramètre [ **$filter**](search-query-odata-filter.md) lorsque vous
    
    **Résultats**
 
-   ![Expression filter](./media/search-explorer/search-explorer-example-filter.png "Filtrer par critère")
+   :::image type="content" source="media/search-explorer/search-explorer-example-filter.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
 ## <a name="order-by-expressions"></a>Expressions OrderBy
 
@@ -127,9 +131,9 @@ Ajoutez [ **$orderby**](search-query-odata-orderby.md) pour trier les résultats
    
    **Résultats**
 
-   ![Expression orderby](./media/search-explorer/search-explorer-example-ordery.png "Changer l’ordre de tri")
+   :::image type="content" source="media/search-explorer/search-explorer-example-ordery.png" alt-text="Commande d’accès à l’explorateur de recherche dans le portail" border="false":::
 
-Les expressions **$filter** et **$orderby** sont des constructions OData. Pour plus d’informations, consultez l’article [Filter OData syntax](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
+Les expressions **$filter** et **$orderby** sont des constructions OData. Pour plus d’informations, consultez l’article [Filter OData syntax](/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
 
 <a name="start-search-explorer"></a>
 
@@ -143,7 +147,7 @@ Dans ce guide de démarrage rapide, vous avez utilisé **l’Explorateur de rech
 
 + Les requêtes de forme libre, semblables à celles que vous entrez dans un navigateur web commercial, permettent de tester une expérience d'utilisateur final. Par exemple, dans le cas de l'exemple d'index realestate intégré, vous pourriez entrer « Seattle apartments lake washington », puis utiliser Ctrl+F pour rechercher des termes dans les résultats de la recherche. 
 
-+ Les expressions de requête et de filtre sont articulées dans une syntaxe prise en charge par la Recherche cognitive Azure. Par défaut, cela correspond à une [syntaxe simple](https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search), mais vous pouvez également utiliser [Lucene complète](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search) pour de plus puissantes requêtes. Les [expressions de filtre](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search) présentent une syntaxe OData.
++ Les expressions de requête et de filtre sont articulées dans une syntaxe prise en charge par la Recherche cognitive Azure. Par défaut, cela correspond à une [syntaxe simple](/rest/api/searchservice/simple-query-syntax-in-azure-search), mais vous pouvez également utiliser [Lucene complète](/rest/api/searchservice/lucene-query-syntax-in-azure-search) pour de plus puissantes requêtes. Les [expressions de filtre](/rest/api/searchservice/odata-expression-syntax-for-azure-search) présentent une syntaxe OData.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -155,7 +159,7 @@ Si vous utilisez un service gratuit, n’oubliez pas que vous êtes limité à t
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur la syntaxe et les structures des requêtes, utilisez Postman ou un outil équivalent pour créer des expressions de requête qui utilisent d’autres parties de l’API. [L’API REST Recherche](https://docs.microsoft.com/rest/api/searchservice/) est particulièrement utile pour l’apprentissage et l’exploration.
+Pour en savoir plus sur la syntaxe et les structures des requêtes, utilisez Postman ou un outil équivalent pour créer des expressions de requête qui utilisent d’autres parties de l’API. [L’API REST Recherche](/rest/api/searchservice/) est particulièrement utile pour l’apprentissage et l’exploration.
 
 > [!div class="nextstepaction"]
 > [Créer une requête de base dans Postman](search-query-simple-examples.md)

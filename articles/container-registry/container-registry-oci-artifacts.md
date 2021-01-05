@@ -4,14 +4,14 @@ description: Envoyer (push) et tirer (pull) des artefacts OCI (Open Container In
 author: SteveLasker
 manager: gwallace
 ms.topic: article
-ms.date: 03/11/2020
+ms.date: 08/12/2020
 ms.author: stevelas
-ms.openlocfilehash: 2c6b66b635a2513ccc19e0352414d18d8389fef1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7c95766cc12b281521fa52ab113fadd4321d0815
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371050"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89485001"
 ---
 # <a name="push-and-pull-an-oci-artifact-using-an-azure-container-registry"></a>Envoyer (push) et tirer (pull) un artefact OCI à l’aide d’un registre de conteneurs Azure
 
@@ -148,6 +148,36 @@ Pour supprimer l’artefact de votre registre de conteneurs Azure, utilisez la c
 az acr repository delete \
     --name myregistry \
     --image samples/artifact:1.0
+```
+
+## <a name="example-build-docker-image-from-oci-artifact"></a>Exemple : Générer l’image Docker à partir de l’artefact OCI
+
+Le code source et les fichiers binaires pour générer une image conteneur peuvent être stockés en tant qu’artefacts OCI dans un registre de conteneurs Azure. Vous pouvez référencer un artefact source comme contexte de génération pour une [tâche ACR](container-registry-tasks-overview.md). Cet exemple montre comment stocker un fichier Dockerfile en tant qu’artefact OCI, puis référencer l’artefact pour générer une image conteneur.
+
+Par exemple, créez un fichier Dockerfile avec une seule ligne :
+
+```bash
+echo "FROM hello-world" > hello-world.dockerfile
+```
+
+Connectez-vous au registre de conteneurs de destination.
+
+```azurecli
+az login
+az acr login --name myregistry
+```
+
+Créez et envoyez un nouvel artefact OCI au registre de destination en utilisant la commande `oras push`. Cet exemple définit le type de média par défaut pour l’artefact.
+
+```bash
+oras push myregistry.azurecr.io/hello-world:1.0 hello-world.dockerfile
+```
+
+Exécutez la commande [az acr build](/cli/azure/acr#az-acr-build) pour générer l’image hello-world en utilisant le nouvel artefact comme contexte de génération :
+
+```azurecli
+az acr build --registry myregistry --file hello-world.dockerfile \
+  oci://myregistry.azurecr.io/hello-world:1.0
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

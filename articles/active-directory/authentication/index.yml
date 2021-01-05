@@ -8,16 +8,16 @@ metadata:
   ms.service: active-directory
   ms.subservice: authentication
   ms.topic: landing-page
-  author: iainfoulds
-  ms.author: iainfou
+  author: justinha
+  ms.author: justinha
   ms.date: 02/11/2020
   ms.collection: M365-identity-device-management
-  ms.openlocfilehash: d06cc6f3c2d0d5033777a2f988d12ba7edb7be9c
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 5cec477161aa9a54e3338bdadc1823715e1f9488
+  ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77484092"
+  ms.lasthandoff: 12/06/2020
+  ms.locfileid: "96741440"
 landingContent:
 - title: À propos de l’authentification
   linkLists:
@@ -51,21 +51,21 @@ landingContent:
       url: howto-sspr-deployment.md
     - text: Activer la réinitialisation de mot de passe à partir de l’écran de connexion Windows
       url: howto-sspr-windows.md
-- title: Activation d’Azure Multi-Factor Authentication
+- title: Activer l’authentification multifacteur Azure AD
   linkLists:
   - linkListType: concept
     links:
-    - text: 'Azure Multi-Factor Authentication : fonctionnement'
+    - text: Comment fonctionne l’authentification multifacteur Azure AD
       url: concept-mfa-howitworks.md
   - linkListType: tutorial
     links:
-    - text: Activation d’Azure Multi-Factor Authentication
+    - text: Activer l’authentification multifacteur Azure AD
       url: tutorial-enable-azure-mfa.md
-    - text: Activer Azure Multi-Factor Authentication en fonction des risques
+    - text: Activer l’authentification multifacteur Azure AD en fonction des risques
       url: tutorial-risk-based-sspr-mfa.md
   - linkListType: deploy
     links:
-    - text: Guide de déploiement pour Azure Multi-Factor Authentication
+    - text: Guide de déploiement pour l’authentification multifacteur Azure AD
       url: howto-mfa-getstarted.md
     - text: Utiliser une extension NPS pour intégrer des applications locales
       url: howto-mfa-nps-extension.md
@@ -80,7 +80,7 @@ landingContent:
   - linkListType: get-started
     links:
     - text: Configurer la liste des mots de passe interdits
-      url: howto-password-ban-bad-configure.md
+      url: ./tutorial-configure-custom-password-protection.md
   - linkListType: how-to-guide
     links:
     - text: Déployer la protection par mot de passe d’Azure AD

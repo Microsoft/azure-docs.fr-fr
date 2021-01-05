@@ -7,13 +7,13 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 29928d78c2cfc2f21def363341f8383c4efa89d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/17/2020
+ms.openlocfilehash: cb5ee7d3549e433fb184b8c55c28b9a28ed89272
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74484119"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011929"
 ---
 # <a name="custom-web-api-skill-in-an-azure-cognitive-search-enrichment-pipeline"></a>Compétence API web personnalisée dans un pipeline d’enrichissement de Recherche cognitive Azure
 
@@ -36,12 +36,12 @@ Les paramètres respectent la casse.
 
 | Nom du paramètre     | Description |
 |--------------------|-------------|
-| URI | URI de l’API web à laquelle la charge utile _JSON_ est envoyée. Seul le schéma d’URI **https** est autorisé |
-| httpMethod | Méthode à utiliser pour envoyer la charge utile. Les méthodes autorisées sont `PUT` ou `POST` |
-| httpHeaders | Collection de paires clé-valeur où les clés représentent les noms d’en-tête et les valeurs représentent les valeurs d’en-tête à envoyer à votre API web avec la charge utile. Les en-têtes suivants sont interdits dans cette collection : `Accept`, `Accept-Charset`, `Accept-Encoding`, `Content-Length`, `Content-Type`, `Cookie`, `Host`, `TE`, `Upgrade`, `Via` |
-| délai d'expiration | (Facultatif) Si spécifié, indique le délai d’expiration pour le client http qui effectue l’appel d’API. Il doit être formaté en tant que valeur « dayTimeDuration » XSD (un sous-ensemble limité d'une valeur de [durée ISO 8601](https://www.w3.org/TR/xmlschema11-2/#dayTimeDuration) ). Par exemple, `PT60S` pour 60 secondes. S’il n’est pas défini, une valeur par défaut de 30 secondes est choisie. Le délai d’expiration peut être défini sur 230 secondes maximum et 1 seconde minimum. |
-| batchSize | (Facultatif) Indique le nombre « d’enregistrements de données » (voir la structure de charge utile _JSON_ ci-dessous) à envoyer par appel d’API. S’il n’est pas défini, une valeur par défaut de 1000 est choisie. Nous vous recommandons d’utiliser ce paramètre pour avoir un compromis entre le débit d’indexation et la charge sur votre API |
-| degreeOfParallelism | (Facultatif) Lorsqu’il est spécifié, indique le nombre d’appels que l’indexeur effectuera en parallèle au point de terminaison que vous avez fourni. Vous pouvez réduire cette valeur si votre point de terminaison échoue avec une charge de requête trop élevée, ou l’augmenter si votre point de terminaison est en mesure d’accepter plus de requêtes et si vous souhaitez augmenter les performances de l’indexeur.  S’il n’est pas défini, une valeur par défaut de 5 secondes est utilisée. Le degreeOfParallelism peut avoir une valeur maximale de 10 et un minimum de 1. |
+| `uri` | URI de l’API web à laquelle la charge utile _JSON_ est envoyée. Seul le schéma d’URI **https** est autorisé |
+| `httpMethod` | Méthode à utiliser pour envoyer la charge utile. Les méthodes autorisées sont `PUT` ou `POST` |
+| `httpHeaders` | Collection de paires clé-valeur où les clés représentent les noms d’en-tête et les valeurs représentent les valeurs d’en-tête à envoyer à votre API web avec la charge utile. Les en-têtes suivants sont interdits dans cette collection : `Accept`, `Accept-Charset`, `Accept-Encoding`, `Content-Length`, `Content-Type`, `Cookie`, `Host`, `TE`, `Upgrade`, `Via` |
+| `timeout` | (Facultatif) Si spécifié, indique le délai d’expiration pour le client http qui effectue l’appel d’API. Il doit être formaté en tant que valeur « dayTimeDuration » XSD (un sous-ensemble limité d'une valeur de [durée ISO 8601](https://www.w3.org/TR/xmlschema11-2/#dayTimeDuration) ). Par exemple, `PT60S` pour 60 secondes. S’il n’est pas défini, une valeur par défaut de 30 secondes est choisie. Le délai d’expiration peut être défini sur 230 secondes maximum et 1 seconde minimum. |
+| `batchSize` | (Facultatif) Indique le nombre « d’enregistrements de données » (voir la structure de charge utile _JSON_ ci-dessous) à envoyer par appel d’API. S’il n’est pas défini, une valeur par défaut de 1000 est choisie. Nous vous recommandons d’utiliser ce paramètre pour avoir un compromis entre le débit d’indexation et la charge sur votre API |
+| `degreeOfParallelism` | (Facultatif) Lorsqu’il est spécifié, indique le nombre d’appels que l’indexeur effectuera en parallèle au point de terminaison que vous avez fourni. Vous pouvez réduire cette valeur si votre point de terminaison échoue avec une charge de requête trop élevée, ou l’augmenter si votre point de terminaison est en mesure d’accepter plus de requêtes et si vous souhaitez augmenter les performances de l’indexeur.  S’il n’est pas défini, une valeur par défaut de 5 secondes est utilisée. Le `degreeOfParallelism` peut avoir une valeur maximale de 10 et un minimum de 1. |
 
 ## <a name="skill-inputs"></a>Entrées de la compétence
 

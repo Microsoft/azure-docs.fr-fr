@@ -9,19 +9,19 @@ editor: ''
 ms.assetid: 6b1a598f-89c0-4244-9b20-f4aaad5233cf
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 05/01/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 309adfbebd4f4b615ac1f4061823ca01f3d3ee15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ad7b0039602add7f4cd3cdd300bd829c4f148a79
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230113"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90084734"
 ---
 # <a name="azure-ad-connect-sync-scheduler"></a>Synchronisation d’Azure AD Connect : Scheduler
 Cette rubrique décrit le planificateur intégré dans Azure AD Connect Sync (moteur de synchronisation).
@@ -39,6 +39,14 @@ Le planificateur supervise deux tâches :
 * **Tâches de maintenance**. Renouvelle les clés et les certificats pour la réinitialisation de mot de passe et le service DRS (Device Registration Service). Vide les anciennes entrées dans le journal des opérations.
 
 Le planificateur est toujours en cours d’exécution, mais il peut être configuré pour exécuter uniquement une tâche, ou bien aucune tâche. Par exemple, si vous avez besoin d’avoir votre propre processus de cycle de synchronisation, vous pouvez désactiver cette tâche dans le planificateur, mais toujours exécuter la tâche de maintenance.
+
+>[!IMPORTANT]
+>Par défaut, un cycle de synchronisation est lancé toutes les 30 minutes. Si vous avez changé le cycle de synchronisation, vous devez vous assurer qu’un cycle de synchronisation est lancé au moins une fois tous les 7 jours. 
+>
+>* Une nouvelle synchronisation delta est requise dans les 7 jours suivant la dernière synchronisation delta.
+>* Une synchronisation delta (après une synchronisation complète) doit être effectuée dans les 7 jours suivant la dernière synchronisation complète.
+>
+>À défaut, vous risquez de rencontrer des problèmes de synchronisation, qui ne pourront être résolus qu’en effectuant une synchronisation complète. Cela s’applique également aux serveurs en préproduction.
 
 ## <a name="scheduler-configuration"></a>Configuration du planificateur
 Pour afficher vos paramètres de configuration en cours, accédez à PowerShell et exécutez `Get-ADSyncScheduler`. Vous obtenez un écran semblable à celui-ci :
@@ -152,18 +160,21 @@ Exemple :  Si vous avez apporté des modifications aux règles de synchronisatio
 ## <a name="stop-the-scheduler"></a>Arrêter le planificateur
 Si le planificateur exécute un cycle de synchronisation, vous devrez l’arrêter. Par exemple, si vous démarrez l’Assistant d’installation et que vous obtenez l’erreur suivante :
 
-![SyncCycleRunningError](./media/how-to-connect-sync-feature-scheduler/synccyclerunningerror.png)
+![Capture d’écran montrant le message d’erreur « Impossible de modifier la configuration ».](./media/how-to-connect-sync-feature-scheduler/synccyclerunningerror.png)
 
 Lorsqu’un cycle de synchronisation est en cours d’exécution, vous ne pouvez pas modifier la configuration. Vous pouvez attendre jusqu’à ce que le planificateur ait terminé le processus, mais vous pouvez également l’arrêter afin d’implémenter immédiatement vos modifications. L’arrêt du cycle en cours n’est pas dangereux, et les modifications en attente seront traitées à la prochaine exécution.
 
 1. Commencez par indiquer au planificateur d’arrêter son cycle en cours à l’aide de l’applet de commande PowerShell `Stop-ADSyncSyncCycle`.
-2. Si vous utilisez une version antérieure à 1.1.281, l’arrêt du planificateur n’empêche pas le connecteur actuel de terminer sa tâche en cours. Pour forcer le connecteur à s’arrêter, prenez les mesures suivantes :  ![StopAConnector](./media/how-to-connect-sync-feature-scheduler/stopaconnector.png)
+2. Si vous utilisez une version antérieure à 1.1.281, l’arrêt du planificateur n’empêche pas le connecteur actuel de terminer sa tâche en cours. Pour forcer le connecteur à s’arrêter, prenez les mesures suivantes : 
+
+   ![Capture d’écran montrant Synchronization Service Manager avec l’option Connecteurs sélectionnée et un connecteur en cours d’exécution mis en évidence avec l’action Arrêter sélectionnée.](./media/how-to-connect-sync-feature-scheduler/stopaconnector.png)
+
    * Démarrez le **Service de synchronisation** depuis le menu Démarrer. Accédez à **Connecteurs**, mettez en surbrillance le connecteur avec l’état **En cours d’exécution** et sélectionnez **Arrêter** dans les actions.
 
 Le planificateur est toujours actif et redémarrera à la prochaine occasion.
 
 ## <a name="custom-scheduler"></a>Planificateur personnalisé
-Les applets de commande décrites dans cette section sont uniquement disponibles dans le build [1.1.130.0](reference-connect-version-history.md#111300) et versions ultérieures.
+Les applets de commande décrites dans cette section sont uniquement disponibles dans le build [1.1.130.0](reference-connect-version-history.md) et versions ultérieures.
 
 Si le planificateur intégré ne satisfait pas à vos exigences, vous pouvez planifier les connecteurs à l'aide de PowerShell.
 

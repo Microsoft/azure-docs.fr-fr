@@ -3,12 +3,12 @@ title: Utilisation des collections fiables
 description: Découvrez les bonnes pratiques liées à l’utilisation des collections fiables dans une application Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 03/10/2020
-ms.openlocfilehash: 94836a37a62e3eeffb94d891980cc02694bd973e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 2d027dc432d1a0a20888bfca4f59bc41866e358d
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81409806"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94651904"
 ---
 # <a name="working-with-reliable-collections"></a>Utilisation des collections fiables
 Service Fabric propose un modèle de programmation avec état disponible pour les développeurs .NET via les collections fiables. Plus précisément, Service Fabric fournit un dictionnaire fiable et des classes de file d’attente fiables. Lorsque vous utilisez ces classes, votre état est partitionné (pour l’évolutivité) répliqué (pour la disponibilité) et traité dans une partition (pour la sémantique ACID). Examinons l'utilisation type d'un objet de dictionnaire fiable afin de découvrir ses fonctionnalités réelles.
@@ -35,6 +35,7 @@ catch (TimeoutException)
 {
    // choose how to handle the situation where you couldn't get a lock on the file because it was 
    // already in use. You might delay and retry the operation
+   await Task.Delay(100);
 }
 ```
 
@@ -42,9 +43,14 @@ Toutes les opérations relatives aux objets de dictionnaires fiables (à l'excep
 
 Dans le code ci-dessus, l'objet ITransaction est transféré vers la méthode AddAsync d'un dictionnaire fiable. En interne, les méthodes de dictionnaire qui acceptent une clé prennent un verrou de lecture/écriture associé à la clé. Si la méthode modifie la valeur de la clé, elle accepte un verrou d'écriture sur la clé, et si elle ne lit qu'à partir de la valeur de la clé, un verrou de lecture est appliqué sur la clé. Puisque AddAsync modifie la valeur de la clé en la remplaçant par la nouvelle valeur transmise, le verrou d'écriture de la clé est appliqué. Par conséquent, si 2 threads (ou plus) tentent d'ajouter des valeurs à la même clé au même moment, un thread acquerra le verrou d'écriture et les autres threads se bloqueront. Par défaut, les méthodes se bloquent pendant 4 secondes maximum pour acquérir le verrou. Après 4 secondes, les méthodes lèvent une exception TimeoutException. Il existe des surcharges de méthode qui vous permettent de transmettre une valeur de délai d'attente explicite si vous le souhaitez.
 
-En règle générale, vous écrivez votre code de manière à réagir à une exception TimeoutException en l’interceptant et en recommençant toute l’opération (comme indiqué dans le code ci-dessus). Dans mon code simple, j'appelle simplement Task.Delay en transmettant 100 millisecondes à chaque fois. Mais, en réalité, vous pouvez juger préférable d’utiliser un type de délai de temporisation exponentiel.
+En règle générale, vous écrivez votre code de manière à réagir à une exception TimeoutException en l’interceptant et en recommençant toute l’opération (comme indiqué dans le code ci-dessus). Dans ce code simple, nous appellons simplement Task.Delay en transmettant 100 millisecondes à chaque fois. Mais, en réalité, vous pouvez juger préférable d’utiliser un type de délai de temporisation exponentiel.
 
-Une fois le verrou acquis, AddAsync ajoute les références d’objet de clé et de valeur à un dictionnaire temporaire interne associé à l’objet ITransaction. De cette manière, vous obtenez une sémantique de type « lecture de vos propres écritures ». Autrement dit, après avoir appelé AddAsync, un appel ultérieur à TryGetValueAsync (à l’aide du même objet ITransaction) renverra la valeur même si vous n’avez pas encore validé la transaction. Ensuite, AddAsync sérialise vos objets de clé et de valeur dans des tableaux d’octets et ajoute ces tableaux d’octets à un fichier journal situé sur le nœud local. Pour finir, AddAsync envoie les tableaux d’octets à tous les réplicas secondaires de manière à leur fournir les mêmes informations de clé/valeur. Même si les informations de clé/valeur ont été écrites dans un fichier journal, les informations ne sont pas considérées comme intégrées au dictionnaire tant que la transaction qui leur est associée n’a pas été validée.
+Une fois le verrou acquis, AddAsync ajoute les références d’objet de clé et de valeur à un dictionnaire temporaire interne associé à l’objet ITransaction. De cette manière, vous obtenez une sémantique de type « lecture de vos propres écritures ». Autrement dit, après avoir appelé AddAsync, un appel ultérieur à TryGetValueAsync à l’aide du même objet ITransaction renverra la valeur même si vous n’avez pas encore validé la transaction.
+
+> [!NOTE]
+> L’appel de TryGetValueAsync avec une nouvelle transaction retourne une référence à la dernière valeur validée. Ne modifiez pas directement cette référence, car cela a pour effet de contourner le mécanisme de persistance et de réplication des modifications. Nous vous recommandons de faire en sorte que les valeurs soient en lecture seule, de sorte que la seule façon de modifier la valeur d’une clé soit d’utiliser des API de dictionnaire fiables.
+
+Ensuite, AddAsync sérialise vos objets de clé et de valeur dans des tableaux d’octets et ajoute ces tableaux d’octets à un fichier journal situé sur le nœud local. Pour finir, AddAsync envoie les tableaux d’octets à tous les réplicas secondaires de manière à leur fournir les mêmes informations de clé/valeur. Même si les informations de clé/valeur ont été écrites dans un fichier journal, les informations ne sont pas considérées comme intégrées au dictionnaire tant que la transaction qui leur est associée n’a pas été validée.
 
 Dans le code ci-dessus, l'appel à CommitAsync permet de valider toutes les opérations de la transaction. Plus précisément, il ajoute des informations de validation au fichier journal situé sur le nœud local et envoie également l’enregistrement de validation à tous les réplicas secondaires. Dès lors qu’un quorum (une majorité) de réplicas a répondu, toutes les modifications apportées aux données sont considérées comme permanentes et tous les verrous associés aux clés qui ont été manipulées à l’aide de l’objet ITransaction sont libérés afin que d’autres threads/transactions puissent manipuler les mêmes clés et les valeurs qui leur sont associées.
 
@@ -214,10 +220,10 @@ En outre, le code de service est mis à niveau à raison d’un domaine de mise 
 Vous pouvez également effectuer ce que l'on appelle communément une mise à niveau en deux phases. Dans le cadre d'une mise à niveau en deux phases, vous mettez à niveau votre service de la V1 vers la V2 : la V2 contient le code capable de prendre en charge les nouvelles modifications du schéma, mais ce code ne s'exécute pas. Lorsque le code V2 lit les données de la V1, il agit sur ces dernières et écrit les données V1. Ensuite, une fois la mise à niveau effectuée sur tous les domaines de mise à niveau, vous pouvez d’une certaine manière signaler aux instances V2 en cours d’exécution que la mise à niveau est terminée (pour ce faire, vous pouvez déployer une mise à niveau de la configuration ; c’est précisément cette opération qui en fait une mise à niveau en deux phases). À présent, les instances V2 peuvent lire les données de V1, les convertir en données V2, les exploiter et les écrire en tant que données V2. Lorsque d’autres instances lisent les données V2, elles n’ont pas besoin de les convertir. Elles les exploitent simplement et écrivent des données V2.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour en savoir plus sur la création de contrats de données à compatibilité ascendante, consultez [Contrats de données à compatibilité ascendante](https://msdn.microsoft.com/library/ms731083.aspx).
+Pour en savoir plus sur la création de contrats de données à compatibilité ascendante, consultez [Contrats de données à compatibilité ascendante](/dotnet/framework/wcf/feature-details/forward-compatible-data-contracts).
 
-Pour découvrir les meilleures pratiques relatives au contrôle de version des contrats de données, consultez [Contrôle de version des contrats de données](https://msdn.microsoft.com/library/ms731138.aspx).
+Pour découvrir les meilleures pratiques relatives au contrôle de version des contrats de données, consultez [Contrôle de version des contrats de données](/dotnet/framework/wcf/feature-details/data-contract-versioning).
 
-Pour savoir comment implémenter des contrats de données à tolérance de version, consultez [Rappels de sérialisation avec tolérance de version](https://msdn.microsoft.com/library/ms733734.aspx).
+Pour savoir comment implémenter des contrats de données à tolérance de version, consultez [Rappels de sérialisation avec tolérance de version](/dotnet/framework/wcf/feature-details/version-tolerant-serialization-callbacks).
 
-Pour savoir comment fournir une structure de données capable d'interagir entre plusieurs versions, consultez [IExtensibleDataObject](https://msdn.microsoft.com/library/system.runtime.serialization.iextensibledataobject.aspx).
+Pour savoir comment fournir une structure de données capable d'interagir entre plusieurs versions, consultez [IExtensibleDataObject](/dotnet/api/system.runtime.serialization.iextensibledataobject?view=netcore-3.1).

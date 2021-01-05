@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure PowerShell - Service de sauvegarde et de restauration| Microsoft Docs
-description: Exemple de script Azure PowerShell - Service de sauvegarde et de restauration
+description: Découvrez comment sauvegarder et restaurer l’instance du service Gestion des API. Consultez un exemple de script et affichez des ressources disponibles supplémentaires.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,16 +12,16 @@ ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: 236384b0f269018e3689888ab9ad5f1a3d9593ed
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d80a63b1a52d1ed7750d1a025eb8f4cd9f254a94
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70074252"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87851067"
 ---
 # <a name="backup-and-restore-service"></a>Service de sauvegarde et de restauration
 
-L’exemple illustré dans cet article vous explique comment sauvegarder et restaurer l’instance du service Gestion des API. 
+L’exemple de script dans cet article montre comment sauvegarder et restaurer l’instance du service Gestion des API. 
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -43,6 +43,6 @@ Remove-AzResourceGroup -Name myResourceGroup
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour la Gestion des API Azure sur la page [Exemples PowerShell](../powershell-samples.md).

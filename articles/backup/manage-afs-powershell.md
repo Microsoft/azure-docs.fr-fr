@@ -3,23 +3,23 @@ title: Gérer les sauvegardes de partage de fichiers Azure avec PowerShell
 description: Découvrez comment PowerShell pour gérer et superviser les partages de fichiers Azure sauvegardés par le service Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 1/27/2020
-ms.openlocfilehash: 6ee5fb92e4a66a9d6db66514f966c3650d3a4f13
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: e2f07e56fb9a8715b1b53165ab5f4b45b4e20ccb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83201965"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89000224"
 ---
 # <a name="manage-azure-file-share-backups-with-powershell"></a>Gérer les sauvegardes de partage de fichiers Azure avec PowerShell
 
 Cet article explique comment utiliser Azure PowerShell pour gérer et superviser les partages de fichiers Azure sauvegardés par le service Sauvegarde Azure.
 
 > [!WARNING]
-> Vérifiez que la version de PowerShell est mise à niveau vers la version minimale pour « Az.RecoveryServices 2.6.0 » pour les sauvegardes AFS. Pour plus d’informations, reportez-vous à [la section](backup-azure-afs-automation.md#important-notice-backup-item-identification) détaillant les conditions de ce changement.
+> Vérifiez que la version de PowerShell est mise à niveau vers la version minimale d’« Az.RecoveryServices 2.6.0 » pour les sauvegardes AFS. Pour plus d’informations, reportez-vous à [la section](backup-azure-afs-automation.md#important-notice-backup-item-identification) détaillant les conditions de ce changement.
 
 ## <a name="modify-the-protection-policy"></a>Modifier la stratégie de protection
 
-Pour modifier la stratégie utilisée pour sauvegarder le partage de fichiers Azure, utilisez [Enable-AzRecoveryServicesBackupProtection](https://docs.microsoft.com/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupprotection?view=azps-1.4.0). Spécifiez l’élément de sauvegarde pertinent et la nouvelle stratégie de sauvegarde.
+Pour modifier la stratégie utilisée pour sauvegarder le partage de fichiers Azure, utilisez [Enable-AzRecoveryServicesBackupProtection](/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupprotection). Spécifiez l’élément de sauvegarde pertinent et la nouvelle stratégie de sauvegarde.
 
 Les exemples suivants modifient la stratégie de protection de **testAzureFS** en remplaçant **dailyafs** par **monthlyafs**.
 
@@ -32,7 +32,7 @@ Enable-AzRecoveryServicesBackupProtection -Item $afsBkpItem -Policy $monthlyafsP
 
 ## <a name="track-backup-and-restore-jobs"></a>Suivi des travaux de sauvegarde et de restauration
 
-Les opérations de sauvegarde et de restauration à la demande retournent un travail assorti d’un ID, comme lorsque vous [exécutez une sauvegarde à la demande](backup-azure-afs-automation.md#trigger-an-on-demand-backup). Utilisez la cmdlet [Get-AzRecoveryServicesBackupJobDetails](https://docs.microsoft.com/powershell/module/az.recoveryservices/get-azrecoveryservicesbackupjob?view=azps-1.4.0) pour suivre l’avancement du travail et obtenir des détails.
+Les opérations de sauvegarde et de restauration à la demande retournent un travail assorti d’un ID, comme lorsque vous [exécutez une sauvegarde à la demande](backup-azure-afs-automation.md#trigger-an-on-demand-backup). Utilisez la cmdlet [Get-AzRecoveryServicesBackupJobDetails](/powershell/module/az.recoveryservices/get-azrecoveryservicesbackupjob) pour suivre l’avancement du travail et obtenir des détails.
 
 ```powershell
 $job = Get-AzRecoveryServicesBackupJob -JobId 00000000-6c46-496e-980a-3740ccb2ad75 -VaultId $vaultID
@@ -71,7 +71,7 @@ Le fait de laisser des points de récupération dans le stockage peut avoir un c
 
 ## <a name="stop-protection-and-retain-recovery-points"></a>Arrêter la protection et conserver les points de récupération
 
-Pour arrêter la protection tout en conservant les données, utilisez la cmdlet [Disable-AzRecoveryServicesBackupProtection](https://docs.microsoft.com/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection?view=azps-3.3.0).
+Pour arrêter la protection tout en conservant les données, utilisez la cmdlet [Disable-AzRecoveryServicesBackupProtection](/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection).
 
 L’exemple suivant arrête la protection du partage de fichiers *afsfileshare*, mais conserve tous les points de récupération :
 
@@ -87,11 +87,11 @@ WorkloadName     Operation         Status         StartTime                 EndT
 afsfileshare     DisableBackup     Completed      1/26/2020 2:43:59 PM      1/26/2020 2:44:21 PM      98d9f8a1-54f2-4d85-8433-c32eafbd793f
 ```
 
-L’attribut Job ID figurant dans la sortie correspond à l’ID du travail créé par le service de sauvegarde pour votre opération d’arrêt de la protection (« stop protection »). Pour obtenir l’état du travail, utilisez la cmdlet [Get-AzRecoveryservicesBackupJob](https://docs.microsoft.com/powershell/module/az.recoveryservices/get-azrecoveryservicesbackupjob?view=azps-3.3.0).
+L’attribut Job ID figurant dans la sortie correspond à l’ID du travail créé par le service de sauvegarde pour votre opération d’arrêt de la protection (« stop protection »). Pour obtenir l’état du travail, utilisez la cmdlet [Get-AzRecoveryservicesBackupJob](/powershell/module/az.recoveryservices/get-azrecoveryservicesbackupjob).
 
 ## <a name="stop-protection-without-retaining-recovery-points"></a>Arrêter la protection sans conserver les points de récupération
 
-Pour arrêter la protection sans conserver les points de récupération, utilisez la cmdlet [Disable-AzRecoveryServicesBackupProtection](https://docs.microsoft.com/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection?view=azps-3.3.0) en ajoutant le paramètre **-RemoveRecoveryPoints**.
+Pour arrêter la protection sans conserver les points de récupération, utilisez la cmdlet [Disable-AzRecoveryServicesBackupProtection](/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection) en ajoutant le paramètre **-RemoveRecoveryPoints**.
 
 L’exemple suivant arrête la protection du partage de fichiers *afsfileshare* sans conserver les points de récupération :
 

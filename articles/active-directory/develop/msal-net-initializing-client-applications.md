@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 04/12/2019
+ms.date: 09/18/2019
 ms.author: marsma
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 57ce6ab31421cd4016f7e204eeabce82f2f7e6a7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 5ec419be5c7549553788d009f09fa3e0fb8655e4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77083990"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91258283"
 ---
 # <a name="initialize-client-applications-using-msalnet"></a>Initialiser des applications clientes avec MSAL.NET
 Cet article décrit l’initialisation d’applications clientes publiques et confidentielles à l’aide de la bibliothèque d’authentification Microsoft pour .NET (MSAL.NET).  Pour en savoir plus sur les types d’applications clientes et les options de configuration d’application, consultez la [vue d’ensemble](msal-client-applications.md).
@@ -137,7 +137,7 @@ Supposons qu’il s’agisse d’une application coeur de métier dédiée uniqu
 ```csharp
 IPublicClientApplication app;
 app = PublicClientApplicationBuilder.Create(clientId)
-        .WithAadAuthority(AzureCloudInstance.AzurePublic, tenantId)
+        .WithAuthority(AzureCloudInstance.AzurePublic, tenantId)
         .Build();
 ```
 
@@ -146,7 +146,7 @@ Le fait que la programmation des clouds nationaux est désormais simplifiée est
 ```csharp
 IPublicClientApplication app;
 app = PublicClientApplicationBuilder.Create(clientId)
-        .WithAadAuthority(AzureCloudInstance.AzureUsGovernment, AadAuthorityAudience.AzureAdMultipleOrgs)
+        .WithAuthority(AzureCloudInstance.AzureUsGovernment, AadAuthorityAudience.AzureAdMultipleOrgs)
         .Build();
 ```
 

@@ -1,19 +1,19 @@
 ---
 title: 'Connecter des réseaux locaux à un réseau virtuel : VPN de site à site : Interface de ligne de commande'
-description: Étapes de création d’une connexion IPsec entre votre réseau local et un réseau virtuel Azure via l’Internet public. Ces étapes vous aideront à créer une connexion de passerelle VPN de site à site à l’aide de l’interface de ligne de commande (CLI).
+description: Créez une connexion de passerelle VPN de site à site IPsec à partir de votre réseau local vers un réseau virtuel Azure via l’Internet public à l’aide de la CLI.
 titleSuffix: Azure VPN Gateway
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 10/18/2018
+ms.topic: how-to
+ms.date: 10/23/2020
 ms.author: cherylmc
-ms.openlocfilehash: 6d28a5a37be2947ea6cc7019d2b3cc73932c60d6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3a29c4522812b728f553bf52543ac3307f0ffbda
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75779091"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94739935"
 ---
 # <a name="create-a-virtual-network-with-a-site-to-site-vpn-connection-using-cli"></a>Créer un réseau virtuel avec une connexion VPN de site à site à l’aide de l’interface de ligne de commande
 
@@ -24,9 +24,6 @@ Cet article vous explique comment utiliser l’interface de ligne de commande Az
 > * [PowerShell](vpn-gateway-create-site-to-site-rm-powershell.md)
 > * [INTERFACE DE LIGNE DE COMMANDE](vpn-gateway-howto-site-to-site-resource-manager-cli.md)
 > * [Portail Azure (classique)](vpn-gateway-howto-site-to-site-classic-portal.md)
-> 
->
-
 
 ![Schéma de connexion intersite d’une passerelle VPN site à site](./media/vpn-gateway-howto-site-to-site-resource-manager-cli/site-to-site-diagram.png)
 
@@ -39,9 +36,8 @@ Vérifiez que vous disposez des éléments ci-dessous avant de commencer votre c
 * Veillez à disposer d’un périphérique VPN compatible et à être entouré d’une personne en mesure de le configurer. Pour plus d’informations sur les périphériques VPN compatibles et la configuration de votre périphérique, consultez l’article [À propos des périphériques VPN](vpn-gateway-about-vpn-devices.md).
 * Vérifiez que vous disposez d’une adresse IPv4 publique exposée en externe pour votre périphérique VPN.
 * Si vous ne maîtrisez pas les plages d’adresses IP situées dans votre configuration de réseau local, vous devez contacter une personne en mesure de vous aider. Lorsque vous créez cette configuration, vous devez spécifier les préfixes des plages d’adresses IP qu’Azure acheminera vers votre emplacement local. Aucun des sous-réseaux de votre réseau local ne peut chevaucher les sous-réseaux du réseau virtuel auquel vous souhaitez vous connecter.
-* Vous pouvez utiliser Azure Cloud Shell pour exécuter vos commandes CLI (instructions ci-dessous). Toutefois, si vous préférez exécuter vos commandes localement, vérifiez que vous avez installé la dernière version des commandes CLI (2.0 ou ultérieure). Pour plus d’informations sur l’installation des commandes CLI, consultez [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli) et [Prise en main d’Azure CLI](/cli/azure/get-started-with-azure-cli). 
- 
-  [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
+* This article requires version 2.0 or later of the Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ### <a name="example-values"></a><a name="example"></a>Exemples de valeurs
 
@@ -50,21 +46,21 @@ Vous pouvez utiliser ces valeurs pour créer un environnement de test ou vous y 
 ```
 #Example values
 
-VnetName                = TestVNet1 
-ResourceGroup           = TestRG1 
-Location                = eastus 
-AddressSpace            = 10.11.0.0/16 
-SubnetName              = Subnet1 
-Subnet                  = 10.11.0.0/24 
-GatewaySubnet           = 10.11.255.0/27 
-LocalNetworkGatewayName = Site2 
+VnetName                = TestVNet1 
+ResourceGroup           = TestRG1 
+Location                = eastus 
+AddressSpace            = 10.11.0.0/16 
+SubnetName              = Subnet1 
+Subnet                  = 10.11.0.0/24 
+GatewaySubnet           = 10.11.255.0/27 
+LocalNetworkGatewayName = Site2 
 LNG Public IP           = <VPN device IP address>
 LocalAddrPrefix1        = 10.0.0.0/24
-LocalAddrPrefix2        = 20.0.0.0/24   
-GatewayName             = VNet1GW 
-PublicIP                = VNet1GWIP 
-VPNType                 = RouteBased 
-GatewayType             = Vpn 
+LocalAddrPrefix2        = 20.0.0.0/24   
+GatewayName             = VNet1GW 
+PublicIP                = VNet1GWIP 
+VPNType                 = RouteBased 
+GatewayType             = Vpn 
 ConnectionName          = VNet1toSite2
 ```
 
@@ -148,7 +144,7 @@ Utilisez les valeurs suivantes :
 Créez la passerelle VPN à l’aide de la commande [az network vnet-gateway create](/cli/azure/network/vnet-gateway). Si vous exécutez cette commande à l’aide du paramètre « --no-wait », vous ne voyez aucun commentaire ni sortie. Ce paramètre permet à la passerelle d’être créée en arrière-plan. La création d’une passerelle prend environ 45 minutes.
 
 ```azurecli-interactive
-az network vnet-gateway create --name VNet1GW --public-ip-address VNet1GWIP --resource-group TestRG1 --vnet TestVNet1 --gateway-type Vpn --vpn-type RouteBased --sku VpnGw1 --no-wait 
+az network vnet-gateway create --name VNet1GW --public-ip-address VNet1GWIP --resource-group TestRG1 --vnet TestVNet1 --gateway-type Vpn --vpn-type RouteBased --sku VpnGw1 --no-wait 
 ```
 
 ## <a name="8-configure-your-vpn-device"></a><a name="VPNDevice"></a>8. Configuration de votre périphérique VPN
@@ -186,7 +182,7 @@ Si vous souhaitez utiliser une autre méthode pour vérifier votre connexion, co
 
 ## <a name="to-connect-to-a-virtual-machine"></a><a name="connectVM"></a>Se connecter à une machine virtuelle
 
-[!INCLUDE [Connect to a VM](../../includes/vpn-gateway-connect-vm-s2s-include.md)]
+[!INCLUDE [Connect to a VM](../../includes/vpn-gateway-connect-vm.md)]
 
 ## <a name="common-tasks"></a><a name="tasks"></a>Tâches courantes
 
@@ -196,10 +192,10 @@ Cette section contient des commandes courantes qui sont utiles lorsque vous trav
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez [Machines virtuelles](https://docs.microsoft.com/azure/).
+* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez [Machines virtuelles](../index.yml).
 * Pour plus d’informations sur le protocole BGP, consultez les articles [Vue d’ensemble du protocole BGP](vpn-gateway-bgp-overview.md) et [Comment configurer BGP](vpn-gateway-bgp-resource-manager-ps.md).
 * Pour plus d’informations sur le tunneling forcé, consultez [Configuration du tunneling forcé à l’aide du modèle de déploiement classique](vpn-gateway-forced-tunneling-rm.md).
 * Pour plus d’informations sur les connexions haut actif-actif, consultez [Configuration haute disponibilité pour la connectivité entre les réseaux locaux et la connectivité entre deux réseaux virtuels](vpn-gateway-highlyavailable.md).
-* Pour obtenir la liste des commandes de mise en réseau de l’interface de ligne de commande Azure, consultez l’article [Interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/network).
+* Pour obtenir la liste des commandes de mise en réseau de l’interface de ligne de commande Azure, consultez l’article [Interface de ligne de commande Azure](/cli/azure/network).
 * Pour en savoir plus sur la création d’une connexion VPN de site à site à l’aide du modèle Azure Resource Manager, consultez [Créer une connexion VPN de site à site](https://azure.microsoft.com/resources/templates/101-site-to-site-vpn-create/).
 * Pour en savoir plus sur la création d’une connexion VPN de réseau virtuel à réseau virtuel à l’aide du modèle Azure Resource Manager, consultez [Déployer une géo-réplication HBase](https://azure.microsoft.com/resources/templates/101-hdinsight-hbase-replication-geo/).

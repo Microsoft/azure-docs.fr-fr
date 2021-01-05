@@ -5,24 +5,25 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/06/2020
 ms.topic: article
-ms.openlocfilehash: 69774c0014aac26c7266620bbe7d06ba37d6023b
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e7550d0f997182b3938285f1d0a360a31bf05177
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758807"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92207459"
 ---
 # <a name="z-fighting-mitigation"></a>Atténuation du Z-fighting
 
-Lorsque deux surfaces se chevauchent, il n’est pas évident de savoir laquelle doit être affichée au-dessus de l’autre. Le résultat varie même selon le pixel, ce qui génère des artefacts dépendants de la vue. Par conséquent, lorsque la caméra ou le maillage se déplace, ces éléments scintillent franchement. Cet artefact est appelé le *z-fighting*. Pour les applications de réalité augmentée (AR) et de réalité virtuelle (VR), le problème est amplifié, car les casques audiovisuels se déplacent bien évidemment en permanence. Afin d’éviter une gêne pour l’utilisateur, la fonctionnalité d’atténuation du z-fighting est disponible dans Azure Remote Rendering.
+Lorsque deux surfaces se chevauchent, il n’est pas évident de savoir laquelle doit être affichée au-dessus de l’autre. Le résultat varie même selon le pixel, ce qui génère des artefacts dépendants de l’affichage de l’appareil photo. Par conséquent, lorsque la caméra ou le maillage se déplace, ces éléments scintillent franchement. Cet artefact est appelé le *z-fighting*. Pour les applications de réalité augmentée (AR) et de réalité virtuelle (VR), le problème est amplifié, car les casques audiovisuels se déplacent bien évidemment en permanence. Afin d’éviter une gêne pour l’utilisateur, la fonctionnalité d’atténuation du z-fighting est disponible dans Azure Remote Rendering.
 
 ## <a name="z-fighting-mitigation-modes"></a>Modes d’atténuation du z-fighting
 
 |Situation                        | Résultats                               |
 |---------------------------------|:-------------------------------------|
-|Z-fighting normal               |![Z-fighting](./media/zfighting-0.png)|
-|Atténuation du z-fighting activée    |![Z-fighting](./media/zfighting-1.png)|
-|Mise en surbrillance du damier activée|![Z-fighting](./media/zfighting-2.png)|
+|Z-fighting normal               |![Aucune priorité déterministe entre les quads rouge et vert](./media/zfighting-0.png)|
+|Atténuation du z-fighting activée    |![Le quad rouge a la priorité](./media/zfighting-1.png)|
+|Mise en surbrillance du damier activée|![Préférence de basculement entre les quads rouge et vert dans le modèle de damier](./media/zfighting-2.png)|
 
 Le code suivant permet l’atténuation du z-fighting :
 
@@ -42,16 +43,15 @@ void EnableZFightingMitigation(AzureSession session, bool highlight)
 ```cpp
 void EnableZFightingMitigation(ApiHandle<AzureSession> session, bool highlight)
 {
-    ApiHandle<ZFightingMitigationSettings> settings = *session->Actions()->ZFightingMitigationSettings();
+    ApiHandle<ZFightingMitigationSettings> settings = session->Actions()->GetZFightingMitigationSettings();
 
     // enabling z-fighting mitigation
-    settings->Enabled(true);
+    settings->SetEnabled(true);
 
     // enabling checkerboard highlighting of z-fighting potential
-    settings->Highlighting(highlight);
+    settings->SetHighlighting(highlight);
 }
 ```
-
 
 > [!NOTE]
 > L’atténuation du z-fighting est un paramètre global qui influe sur tous les maillages affichés.
@@ -75,6 +75,11 @@ L’atténuation du z-fighting est la meilleure solution dont nous disposons. Il
 
 * L’activation de l’atténuation du z-fighting entraîne peu voire pas de surcharge de performances.
 * De plus, l’activation de la superposition du z-fighting entraîne bien une surcharge de performances non négligeable, même si elle peut varier en fonction de la scène.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [RemoteManager.ZFightingMitigationSettings, propriété C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.zfightingmitigationsettings)
+* [RemoteManager::ZFightingMitigationSettings(), C++](/cpp/api/remote-rendering/remotemanager#zfightingmitigationsettings)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

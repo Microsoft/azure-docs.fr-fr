@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 3/13/2020
 ms.author: mayg
-ms.openlocfilehash: 07c1f7f258dbea7bcf7a6e7ea51fdcfdfaa006aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e4f1931aab056306ac5e9f9e9ef402ca26ec2d19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79368721"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86528942"
 ---
 # <a name="about-the-azure-site-recovery-deployment-planner-for-hyper-v-disaster-recovery-to-azure"></a>À propos du planificateur de déploiement Azure Site Recovery pour la récupération d’urgence de Hyper-V sur Azure
 
@@ -70,7 +70,7 @@ L’outil fournit les informations suivantes :
 
 ## <a name="support-matrix"></a>Matrice de prise en charge
 
-| | **VMware vers Azure** |**Hyper-V vers Azure**|**Azure vers Azure**|**Hyper-V vers un site secondaire**|**VMware vers un site secondaire**
+|**Catégories** | **VMware vers Azure** |**Hyper-V vers Azure**|**Azure vers Azure**|**Hyper-V vers un site secondaire**|**VMware vers un site secondaire**
 --|--|--|--|--|--
 Scénarios pris en charge |Oui|Oui|Non|Oui*|Non
 Version prise en charge | vCenter 6.7, 6.5, 6.0 ou 5.5| Windows Server 2016, Windows Server 2012 R2 | N/D |Windows Server 2016, Windows Server 2012 R2|N/D
@@ -90,19 +90,24 @@ L’outil comprend trois phases principales pour Hyper-V : obtention de la list
  |
 
 ## <a name="steps-to-add-servers-into-trustedhosts-list"></a>Étapes d’ajout de serveurs à la liste des hôtes approuvés
-1.  Toutes les hôtes à profiler doivent être répertoriés dans la liste des hôtes approuvés de la machine virtuelle sur laquelle l’outil doit être déployé. Pour ajouter le client à la liste des hôtes approuvés, exécutez la commande suivante à partir d’une session PowerShell avec élévation de privilèges sur la machine virtuelle. La machine virtuelle peut être un Windows Server 2012 R2 ou Windows Server 2016. 
+1. Toutes les hôtes à profiler doivent être répertoriés dans la liste des hôtes approuvés de la machine virtuelle sur laquelle l’outil doit être déployé. Pour ajouter le client à la liste des hôtes approuvés, exécutez la commande suivante à partir d’une session PowerShell avec élévation de privilèges sur la machine virtuelle. La machine virtuelle peut être un Windows Server 2012 R2 ou Windows Server 2016. 
 
-            set-item wsman:\localhost\Client\TrustedHosts -value '<ComputerName>[,<ComputerName>]' -Concatenate
-
-1.  Chaque hôte Hyper-V à profiler doit comporter :
+   ```powershell
+   set-item wsman:\localhost\Client\TrustedHosts -value '<ComputerName>[,<ComputerName>]' -Concatenate
+   ```
+1. Chaque hôte Hyper-V à profiler doit comporter :
 
     a. La machine virtuelle sur laquelle l’outil sera exécuté dans sa liste des hôtes approuvés. Exécutez la commande suivante à partir d’une session PowerShell avec élévation de privilèges sur l’hôte Hyper-V.
 
-            set-item wsman:\localhost\Client\TrustedHosts -value '<ComputerName>[,<ComputerName>]' -Concatenate
+      ```powershell
+      set-item wsman:\localhost\Client\TrustedHosts -value '<ComputerName>[,<ComputerName>]' -Concatenate
+      ```
 
     b. Accès distant PowerShell activé.
 
-            Enable-PSRemoting -Force
+      ```powershell
+      Enable-PSRemoting -Force
+      ```
 
 ## <a name="download-and-extract-the-deployment-planner-tool"></a>Télécharger et extraire l’outil de planification du déploiement
 
@@ -140,4 +145,4 @@ Reportez-vous à la page [Historique des versions du Planificateur de déploieme
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Exécutez le planificateur de déploiement](site-recovery-hyper-v-deployment-planner-run.md).
+* [Exécutez le planificateur de déploiement](./hyper-v-deployment-planner-run.md).

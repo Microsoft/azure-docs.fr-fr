@@ -7,7 +7,7 @@ author: brjohnstmsft
 ms.author: brjohnst
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
+ms.date: 08/05/2020
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,12 +19,12 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: 99ec639b88f3334530243242aadfa0ab52a40df0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 83ab2c6b97435ace0d2bc508cbf522600391b60b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113144"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88926828"
 ---
 # <a name="odata-orderby-syntax-in-azure-cognitive-search"></a>Syntaxe OData $orderby dans Recherche cognitive Azure
 
@@ -50,7 +50,9 @@ Un diagramme de syntaxe interactif est également disponible :
 > [!NOTE]
 > Consultez [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md) pour l’extension EBNF complète.
 
-Chaque clause possède des critères de tri, éventuellement suivis d’un ordre de tri (`asc` pour l’ordre croissant ou `desc` pour l’ordre décroissant). Si vous ne spécifiez pas d’ordre, la valeur par défaut est croissant. Le critère de tri peut être le trajet d’un champ `sortable`, ou un appel à pour les fonctions [`geo.distance`](search-query-odata-geo-spatial-functions.md) ou [`search.score`](search-query-odata-search-score-function.md).
+Chaque clause possède des critères de tri, éventuellement suivis d’un ordre de tri (`asc` pour l’ordre croissant ou `desc` pour l’ordre décroissant). Si vous ne spécifiez pas d’ordre, la valeur par défaut est croissant. Si le champ contient des valeurs Null, celles-ci s’affichent en premier si le tri est `asc` et en dernier si le tri est `desc`.
+
+Le critère de tri peut être le trajet d’un champ `sortable`, ou un appel à pour les fonctions [`geo.distance`](search-query-odata-geo-spatial-functions.md) ou [`search.score`](search-query-odata-search-score-function.md).
 
 Si plusieurs documents ont les mêmes critères de tri et que la fonction `search.score` n’est pas utilisée (par exemple si vous triez sur un champ numérique `Rating` et que trois documents ont une évaluation de 4), les regroupements sont effectués par score des documents en ordre décroissant. Quand les scores des documents sont identiques (par exemple quand aucune requête de recherche en texte intégral n’est spécifiée dans la demande), l’ordre relatif des documents regroupés est indéterminé.
 
@@ -64,23 +66,31 @@ La syntaxe pour `search.score` dans **$orderby** est `search.score()`. La foncti
 
 Tirer les hôtels par ordre croissant sur le tarif de base :
 
+```odata-filter-expr
     $orderby=BaseRate asc
+```
 
 Trier les hôtels par ordre décroissant sur l’évaluation, puis par ordre croissant sur le tarif de base (rappelez-vous que l’ordre croissant est la valeur par défaut) :
 
+```odata-filter-expr
     $orderby=Rating desc,BaseRate
+```
 
 Trier les hôtels par ordre décroissant sur l’évaluation, puis par ordre croissant sur la distance à partir des coordonnées spécifiées :
 
+```odata-filter-expr
     $orderby=Rating desc,geo.distance(Location, geography'POINT(-122.131577 47.678581)') asc
+```
 
 Trier les hôtels par ordre décroissant sur search.score et l’évaluation, puis par ordre croissant sur la distance à partir des coordonnées spécifiées. Entre deux d’hôtels avec des scores ou une évaluation identique, le plus proche est listé en premier :
 
+```odata-filter-expr
     $orderby=search.score() desc,Rating desc,geo.distance(Location, geography'POINT(-122.131577 47.678581)') asc
+```
 
 ## <a name="next-steps"></a>Étapes suivantes  
 
-- [Guide pratique pour utiliser les résultats de la recherche dans la Recherche cognitive Azure](search-pagination-page-layout.md)
+- [Guide pratique pour utiliser les résultats de recherche dans Recherche cognitive Azure](search-pagination-page-layout.md)
 - [Vue d’ensemble du langage d’expression OData pour Recherche cognitive Azure](query-odata-filter-orderby-syntax.md)
-- [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md)
-- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Informations de référence sur la syntaxe d’expression OData pour la Recherche cognitive Azure](search-query-odata-syntax-reference.md)
+- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents)

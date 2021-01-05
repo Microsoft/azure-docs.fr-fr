@@ -11,18 +11,18 @@ Customer intent: I want only resources in a virtual network subnet to access an 
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: ''
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/14/2018
 ms.author: kumud
-ms.custom: ''
-ms.openlocfilehash: 1d0cf65bb39dbda2b7451c50629ff8949c5507cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 92a5ce539cdd61feb57722756ec8722916f346de
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74185535"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89072381"
 ---
 # <a name="restrict-network-access-to-paas-resources-with-virtual-network-service-endpoints-using-powershell"></a>Restreindre l’accès réseau aux ressources PaaS avec des points de terminaison de service de réseau virtuel en utilisant Azure PowerShell
 

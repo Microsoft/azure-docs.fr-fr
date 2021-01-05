@@ -8,25 +8,30 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
-ms.custom: seodec2018, seo-java-july2019, seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 1fdeffb5ee5b1e2d66fbf5586d307cd8d8b78858
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: seodec2018, seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: a7b85b63804d8276ad0a36caaea4602797bb93cc
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76166730"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350566"
 ---
 # <a name="quickstart-use-java-to-search-the-web-with-the-bing-web-search-rest-api-an-azure-cognitive-service"></a>Démarrage rapide : Utiliser Java pour effectuer des recherches sur le web avec l’API REST Recherche Web Bing, un service cognitif d’Azure
 
-Dans ce guide de démarrage rapide, vous allez utiliser une application Java pour effectuer votre premier appel à l’API Recherche Web Bing et recevoir la réponse JSON. Cette application Java envoie une requête de recherche à l’API et affiche la réponse. Alors que cette application est écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Dans ce guide de démarrage rapide, vous allez utiliser une application Java pour effectuer votre premier appel à l’API Recherche Web Bing. Cette application Java envoie une requête de recherche à l’API et affiche la réponse JSON. Bien que cette application soit écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
 
 ## <a name="prerequisites"></a>Prérequis
 
 Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage rapide :
 
-* [JDK 7 ou 8](https://aka.ms/azure-jdks)
+* [JDK 7 ou 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 * [Bibliothèque Gson](https://github.com/google/gson)
 * Une clé d’abonnement
 
@@ -49,7 +54,7 @@ import com.google.gson.JsonParser;
 
 ### <a name="declare-gson-in-the-maven-pom-file"></a>Déclarer Gson dans le fichier POM Maven
 
-Si vous utilisez Maven, déclarez Gson dans le `POM.xml`. Ignorez cette étape si vous avez installé Gson en local.
+Si vous utilisez Maven, déclarez Gson dans POM.xml. Ignorez cette étape si vous avez installé Gson en local.
 
 ```xml
 <dependency>
@@ -61,7 +66,7 @@ Si vous utilisez Maven, déclarez Gson dans le `POM.xml`. Ignorez cette étape s
 
 ## <a name="declare-the-bingwebsearch-class"></a>Déclarer la classe BingWebSearch
 
-Déclarez la classe `BingWebSearch`. Elle inclura la majeure partie du code que nous allons examiner dans ce guide de démarrage rapide, notamment la méthode `main`.  
+Déclarez la classe `BingWebSearch`. Elle inclut la majeure partie du code que nous allons examiner dans ce guide de démarrage rapide, notamment la méthode `main()`.  
 
 ```java
 public class BingWebSearch {
@@ -73,7 +78,13 @@ public class BingWebSearch {
 
 ## <a name="define-variables"></a>Définir des variables
 
-Ce code définit `subscriptionKey`, `host`, `path`, et `searchTerm`. `host` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. Remplacez la valeur `subscriptionKey` par une clé d’abonnement valide à partir de votre compte Azure. N’hésitez pas à personnaliser la requête de recherche en remplaçant la valeur de `searchTerm`. N’oubliez pas d’ajouter ce code à la classe `BingWebSearch` comme indiqué ci-dessus.
+Le code suivant définit les `subscriptionKey`, `host`, `path` et `searchTerm`. Ajoutez ce code à la classe `BingWebSearch` décrite dans la section précédente :
+
+1. Pour la valeur `host`, vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. 
+
+2. Remplacez la valeur `subscriptionKey` par une clé d’abonnement valide à partir de votre compte Azure. 
+
+3. Si vous le souhaitez, vous pouvez personnaliser la requête de recherche en remplaçant la valeur de `searchTerm`. 
 
 ```java
 // Enter a valid subscription key.
@@ -91,7 +102,7 @@ static String searchTerm = "Microsoft Cognitive Services";
 
 ## <a name="construct-a-request"></a>Construire une requête
 
-Cette méthode, qui se trouve dans la classe `BingWebSearch`, construit le `url`, reçoit et analyse la réponse, puis extrait les en-têtes HTTP Bing.  
+La méthode `SearchWeb()`, qui est incluse dans la classe `BingWebSearch`, construit le `url`, reçoit et analyse la réponse, puis extrait les en-têtes HTTP Bing.  
 
 ```java
 public static SearchResults SearchWeb (String searchQuery) throws Exception {
@@ -137,7 +148,7 @@ public static String prettify(String json_text) {
 
 ## <a name="declare-the-main-method"></a>Déclarer la méthode principale
 
-Cette méthode est requise et constitue la première méthode appelée lorsque le programme démarre. Dans cette application, elle inclut le code qui valide le `subscriptionKey`, envoie une requête et imprime la réponse JSON.
+La méthode `main()` est requise et constitue la première méthode appelée quand vous démarrez le programme. Dans cette application, elle inclut le code qui valide le `subscriptionKey`, envoie une requête, puis affiche la réponse JSON.
 
 ```java
 public static void main (String[] args) {
@@ -167,7 +178,7 @@ public static void main (String[] args) {
 
 ## <a name="create-a-container-class-for-search-results"></a>Créer une classe de conteneur pour les résultats de la recherche
 
-La classe de conteneur `SearchResults` est en dehors de la classe `BingWebSearch`. Elle inclut les en-têtes appropriés et les données JSON pour la réponse.
+La classe de conteneur `SearchResults` est définie en dehors de la classe `BingWebSearch`. Elle inclut les en-têtes appropriés et les données JSON pour la réponse.
 
 ```java
 class SearchResults{
@@ -182,7 +193,7 @@ class SearchResults{
 
 ## <a name="put-it-all-together"></a>Assemblage
 
-La dernière étape consiste à compiler votre code et à l’exécuter ! Voici les commandes :
+La dernière étape consiste à compiler votre code et à l’exécuter. Utilisez les commandes suivantes :
 
 ```powershell
 javac BingWebSearch.java -classpath ./gson-2.8.5.jar -encoding UTF-8
@@ -191,7 +202,7 @@ java -cp ./gson-2.8.5.jar BingWebSearch
 
 Si vous souhaitez comparer votre code avec le nôtre, [un exemple de code est disponible sur GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingWebSearchv7.java).
 
-## <a name="sample-response"></a>Exemple de réponse
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
 Les réponses à partir de l’API Recherche Web Bing sont retournées au format JSON. Cet exemple de réponse a été tronqué pour afficher un résultat unique.
 
@@ -320,6 +331,6 @@ Les réponses à partir de l’API Recherche Web Bing sont retournées au format
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel sur l’application à page unique Recherche Web Bing](../tutorial-bing-web-search-single-page-app.md)
+> [Tutoriel sur l’application d’API Recherche Web Bing monopage](../tutorial-bing-web-search-single-page-app.md)
 
-[!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]  
+[!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]

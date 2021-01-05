@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 07/25/2019
 ms.author: alkohli
-ms.openlocfilehash: bdf69a9ff7b3260b47042f296a47826e3c52387b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 71b018da6b54ebf2b45a261378ea521a397159e5
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460645"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94964981"
 ---
 # <a name="storsimple-virtual-array-best-practices"></a>Bonnes pratiques liées à StorSimple Virtual Array
 
@@ -119,7 +119,7 @@ Si votre baie virtuelle est jointe à un domaine, des objets GPO peuvent lui êt
 Par conséquent, nous vous recommandons de :
 
 * vous assurer que votre baie virtuelle figure dans sa propre unité d’organisation (UO) pour Active Directory ;
-* vous assurer qu’aucun objet de stratégie de groupe (GPO) n’est appliqué à votre baie virtuelle. Vous pouvez bloquer l’héritage pour vous assurer que la baie virtuelle (nœud enfant) n’hérite pas automatiquement des objets de stratégie de groupe du parent. Pour plus d'informations, consultez la page [Bloquer l’héritage](https://technet.microsoft.com/library/cc731076.aspx).
+* vous assurer qu’aucun objet de stratégie de groupe (GPO) n’est appliqué à votre baie virtuelle. Vous pouvez bloquer l’héritage pour vous assurer que la baie virtuelle (nœud enfant) n’hérite pas automatiquement des objets de stratégie de groupe du parent. Pour plus d'informations, consultez la page [Bloquer l’héritage](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc731076(v=ws.11)).
 
 ### <a name="networking"></a>Mise en réseau
 La configuration réseau de votre baie virtuelle s’effectue via l’interface utilisateur web locale. Une interface réseau virtuelle est activée via l’hyperviseur dans lequel la baie virtuelle est mise en service. Utilisez la page [Paramètres réseau](storsimple-virtual-array-deploy3-fs-setup.md) pour configurer l’adresse IP, le sous-réseau et la passerelle de l’interface réseau virtuelle.  Vous pouvez également configurer les serveurs DNS principal et secondaire, les paramètres de temps et les paramètres proxy facultatifs de votre appareil. La plus grande partie de la configuration réseau correspond à une installation unique. Examinez la [configuration requise de mise en réseau pour StorSimple](storsimple-ova-system-requirements.md#networking-requirements) avant de déployer la baie virtuelle.
@@ -289,4 +289,3 @@ Il peut être nécessaire de déployer plusieurs baies virtuelles pour prendre e
 
 ## <a name="see-also"></a>Voir aussi
 Découvrez la [gestion de votre baie virtuelle StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md) par le biais du service StorSimple Manager.
-

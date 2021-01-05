@@ -1,19 +1,19 @@
 ---
 title: Résoudre les problèmes de connexion de point à site Azure
 titleSuffix: Azure VPN Gateway
-description: Découvrez comment résoudre les problèmes de connexion de point à site.
+description: Découvrez comment dépanner et résoudre les problèmes courants de connexion point à site et d’autres erreurs et problèmes liés au réseau privé virtuel.
 services: vpn-gateway
 author: chadmath
 ms.service: vpn-gateway
 ms.topic: troubleshooting
 ms.date: 03/26/2020
 ms.author: genli
-ms.openlocfilehash: 5a273ccad0d30ede3f0ed4ee532d61161074d304
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c316aaf02979008b9d2ebc691d54c0fb95a5a52d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188291"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994857"
 ---
 # <a name="troubleshooting-azure-point-to-site-connection-problems"></a>Résolution des problèmes : problèmes de connexion point à site Azure
 
@@ -44,7 +44,7 @@ Pour résoudre ce problème, effectuez les opérations suivantes :
     | AzureClient.pfx  | Utilisateur actuel\Personnel\Certificats |
     | AzureRoot.cer    | Ordinateur local\Autorités de certification racines de confiance|
 
-3. Accédez à C:\Users\<UserName>\AppData\Roaming\Microsoft\Network\Connections\Cm\<GUID>, puis installez manuellement le certificat (fichier *.cer) dans le magasin de l’utilisateur et de l’ordinateur.
+3. Accédez à C:\Utilisateurs\<UserName>\AppData\Roaming\Microsoft\Network\Connections\Cm\<GUID>, puis installez manuellement le certificat (fichier *.cer) dans le magasin de l’utilisateur et de l’ordinateur.
 
 Pour en savoir plus sur la façon d’installer le certificat client, consultez la page [Générer et exporter des certificats pour les connexions de point à site](vpn-gateway-certificates-point-to-site.md).
 
@@ -188,24 +188,26 @@ Ce problème peut se produire si la clé publique de certificat racine que vous 
 
 Vérifiez que les données du certificat ne contiennent pas de caractères non valides, comme des sauts de ligne (retours chariot). La valeur entière doit être une longue ligne. Le texte ci-après est un extrait du certificat :
 
-    -----BEGIN CERTIFICATE-----
-    MIIC5zCCAc+gAwIBAgIQFSwsLuUrCIdHwI3hzJbdBjANBgkqhkiG9w0BAQsFADAW
-    MRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzA2MTUwMjU4NDZaFw0xODA2MTUw
-    MzE4NDZaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEF
-    AAOCAQ8AMIIBCgKCAQEAz8QUCWCxxxTrxF5yc5uUpL/bzwC5zZ804ltB1NpPa/PI
-    sa5uwLw/YFb8XG/JCWxUJpUzS/kHUKFluqkY80U+fAmRmTEMq5wcaMhp3wRfeq+1
-    G9OPBNTyqpnHe+i54QAnj1DjsHXXNL4AL1N8/TSzYTm7dkiq+EAIyRRMrZlYwije
-    407ChxIp0stB84MtMShhyoSm2hgl+3zfwuaGXoJQwWiXh715kMHVTSj9zFechYd7
-    5OLltoRRDyyxsf0qweTFKIgFj13Hn/bq/UJG3AcyQNvlCv1HwQnXO+hckVBB29wE
-    sF8QSYk2MMGimPDYYt4ZM5tmYLxxxvGmrGhc+HWXzMeQIDAQABozEwLzAOBgNVHQ8B
-    Af8EBAMCAgQwHQYDVR0OBBYEFBE9zZWhQftVLBQNATC/LHLvMb0OMA0GCSqGSIb3
-    DQEBCwUAA4IBAQB7k0ySFUQu72sfj3BdNxrXSyOT4L2rADLhxxxiK0U6gHUF6eWz
-    /0h6y4mNkg3NgLT3j/WclqzHXZruhWAXSF+VbAGkwcKA99xGWOcUJ+vKVYL/kDja
-    gaZrxHlhTYVVmwn4F7DWhteFqhzZ89/W9Mv6p180AimF96qDU8Ez8t860HQaFkU6
-    2Nw9ZMsGkvLePZZi78yVBDCWMogBMhrRVXG/xQkBajgvL5syLwFBo2kWGdC+wyWY
-    U/Z+EK9UuHnn3Hkq/vXEzRVsYuaxchta0X2UNRzRq+o706l+iyLTpe6fnvW6ilOi
-    e8Jcej7mzunzyjz4chN0/WVF94MtxbUkLkqP
-    -----END CERTIFICATE-----
+```text
+-----BEGIN CERTIFICATE-----
+MIIC5zCCAc+gAwIBAgIQFSwsLuUrCIdHwI3hzJbdBjANBgkqhkiG9w0BAQsFADAW
+MRQwEgYDVQQDDAtQMlNSb290Q2VydDAeFw0xNzA2MTUwMjU4NDZaFw0xODA2MTUw
+MzE4NDZaMBYxFDASBgNVBAMMC1AyU1Jvb3RDZXJ0MIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEAz8QUCWCxxxTrxF5yc5uUpL/bzwC5zZ804ltB1NpPa/PI
+sa5uwLw/YFb8XG/JCWxUJpUzS/kHUKFluqkY80U+fAmRmTEMq5wcaMhp3wRfeq+1
+G9OPBNTyqpnHe+i54QAnj1DjsHXXNL4AL1N8/TSzYTm7dkiq+EAIyRRMrZlYwije
+407ChxIp0stB84MtMShhyoSm2hgl+3zfwuaGXoJQwWiXh715kMHVTSj9zFechYd7
+5OLltoRRDyyxsf0qweTFKIgFj13Hn/bq/UJG3AcyQNvlCv1HwQnXO+hckVBB29wE
+sF8QSYk2MMGimPDYYt4ZM5tmYLxxxvGmrGhc+HWXzMeQIDAQABozEwLzAOBgNVHQ8B
+Af8EBAMCAgQwHQYDVR0OBBYEFBE9zZWhQftVLBQNATC/LHLvMb0OMA0GCSqGSIb3
+DQEBCwUAA4IBAQB7k0ySFUQu72sfj3BdNxrXSyOT4L2rADLhxxxiK0U6gHUF6eWz
+/0h6y4mNkg3NgLT3j/WclqzHXZruhWAXSF+VbAGkwcKA99xGWOcUJ+vKVYL/kDja
+gaZrxHlhTYVVmwn4F7DWhteFqhzZ89/W9Mv6p180AimF96qDU8Ez8t860HQaFkU6
+2Nw9ZMsGkvLePZZi78yVBDCWMogBMhrRVXG/xQkBajgvL5syLwFBo2kWGdC+wyWY
+U/Z+EK9UuHnn3Hkq/vXEzRVsYuaxchta0X2UNRzRq+o706l+iyLTpe6fnvW6ilOi
+e8Jcej7mzunzyjz4chN0/WVF94MtxbUkLkqP
+-----END CERTIFICATE-----
+```
 
 ## <a name="azure-portal-error-failed-to-save-the-vpn-gateway-and-the-resource-name-is-invalid"></a>Erreur du portail Azure : échec de l’enregistrement de la passerelle VPN. Le nom de la ressource n’est pas valide
 
@@ -261,7 +263,7 @@ Le client est uniquement invité à fournir des informations d’identification 
 
 Pour contourner le problème, désactivez la mise en cache des informations d’identification de domaine à partir de la sous-clé de Registre suivante : 
 
-    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\DisableDomainCreds - Set the value to 1 
+`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\DisableDomainCreds - Set the value to 1`
 
 
 ## <a name="cannot-find-the-point-to-site-vpn-connection-in-windows-after-reinstalling-the-vpn-client"></a>Impossible de trouver la connexion VPN de point à site dans Windows après la réinstallation du client VPN
@@ -272,7 +274,7 @@ Supprimez la connexion VPN de point à site, puis réinstallez le client VPN. Da
 
 ### <a name="solution"></a>Solution
 
-Pour résoudre le problème, supprimez les anciens fichiers de configuration du client VPN à partir de **C:\Users\UserName\AppData\Roaming\Microsoft\Network\Connections\<VirtualNetworkId>** , puis réexécutez le programme d’installation du client VPN.
+Pour résoudre le problème, supprimez les anciens fichiers de configuration du client VPN à partir de **C:\Utilisateurs\NomUtilisateur\AppData\Roaming\Microsoft\Network\Connections\<VirtualNetworkId>** , puis exécutez à nouveau le programme d’installation du client VPN.
 
 ## <a name="point-to-site-vpn-client-cannot-resolve-the-fqdn-of-the-resources-in-the-local-domain"></a>Le client VPN de point à site ne peut pas résoudre le nom de domaine complet des ressources dans le domaine local
 
@@ -296,7 +298,7 @@ Ce problème peut se produire si le client VPN n’obtient pas les itinéraires 
 
 ### <a name="solution"></a>Solution
 
-Pour résoudre ce problème, [réinitialisez la passerelle VPN Azure](vpn-gateway-resetgw-classic.md). Pour s’assurer que les nouvelles routes sont utilisées, les clients VPN point à site doivent être retéléchargés une fois que le peering de réseaux virtuels a été configuré avec succès.
+Pour résoudre ce problème, [réinitialisez la passerelle VPN Azure](./reset-gateway.md). Pour s’assurer que les nouvelles routes sont utilisées, les clients VPN point à site doivent être retéléchargés une fois que le peering de réseaux virtuels a été configuré avec succès.
 
 ## <a name="error-the-revocation-function-was-unable-to-check-revocation-because-the-revocation-server-was-offlineerror-0x80092013"></a>Erreur : « La fonction de révocation n’a pas pu vérifier la révocation, car le serveur de révocation était hors connexion (Erreur 0x80092013) ».
 
@@ -315,7 +317,7 @@ Cette erreur se produit si le serveur RADIUS utilisé pour l’authentification 
 
 ### <a name="solution"></a>Solution
 
-Assurez-vous que le serveur RADIUS est configuré correctement. Pour plus d’informations, consultez [Intégration de l'authentification RADIUS avec le serveur Azure Multi-Factor Authentication](../active-directory/authentication/howto-mfaserver-dir-radius.md).
+Assurez-vous que le serveur RADIUS est configuré correctement. Pour plus d’informations, consultez [Intégration de l'authentification RADIUS avec le serveur Azure AD Multi-Factor Authentication](../active-directory/authentication/howto-mfaserver-dir-radius.md).
 
 ## <a name="error-405-when-you-download-root-certificate-from-vpn-gateway"></a>« Erreur 405 » lorsque vous téléchargez le certificat racine à partir de la passerelle VPN
 
@@ -370,7 +372,7 @@ Ce problème peut être provoqué par des installations précédentes du client 
 
 ### <a name="solution"></a>Solution
 
-Supprimez les anciens fichiers de configuration du client VPN à partir de **C:\Users\UserName\AppData\Roaming\Microsoft\Network\Connections\<VirtualNetworkId>** , puis réexécutez le programme d’installation du client VPN. 
+Supprimez les anciens fichiers de configuration du client VPN à de **C:\Utilisateurs\NomUtilisateur\AppData\Roaming\Microsoft\Network\Connections\<VirtualNetworkId>** , puis réexécutez le programme d’installation du client VPN. 
 
 ## <a name="the-vpn-client-hibernates-or-sleep-after-some-time"></a>Le client VPN se met en veille prolongée ou en veille après un certain temps
 

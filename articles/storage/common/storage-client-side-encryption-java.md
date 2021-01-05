@@ -8,20 +8,21 @@ ms.devlang: java
 ms.topic: article
 ms.date: 05/11/2017
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 32691e0ddcee3f5410b12f07a2fb80806345bc26
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-java
+ms.openlocfilehash: fafce52f9d760fac0d5c3f0ea1be2480547c5d4d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460509"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91817521"
 ---
 # <a name="client-side-encryption-and-azure-key-vault-with-java-for-microsoft-azure-storage"></a>Chiffrement côté client et Azure Key Vault avec Java pour le Stockage Microsoft Azure
 [!INCLUDE [storage-selector-client-side-encryption-include](../../../includes/storage-selector-client-side-encryption-include.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
-La [bibliothèque cliente de stockage Azure pour Java](https://mvnrepository.com/artifact/com.microsoft.azure/azure-storage) prend en charge le chiffrement des données au sein des applications clientes, avant le chargement vers Azure Storage, et le déchiffrement des données pendant leur téléchargement vers le client. La bibliothèque prend également en charge l’intégration au [coffre de clés Azure](https://azure.microsoft.com/services/key-vault/) pour la gestion des clés de compte de stockage.
+La [bibliothèque cliente de stockage Azure pour Java](https://search.maven.org/artifact/com.azure/azure-storage-blob-cryptography) prend en charge le chiffrement des données au sein des applications clientes, avant le chargement vers Azure Storage, et le déchiffrement des données pendant leur téléchargement vers le client. La bibliothèque prend également en charge l’intégration au [coffre de clés Azure](https://azure.microsoft.com/services/key-vault/) pour la gestion des clés de compte de stockage.
 
 ## <a name="encryption-and-decryption-via-the-envelope-technique"></a>Chiffrement et déchiffrement via la technique d’enveloppe
 Les processus de chiffrement et de déchiffrement s’effectuent selon la technique d’enveloppe.  

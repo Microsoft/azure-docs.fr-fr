@@ -1,15 +1,15 @@
 ---
 title: Utiliser Visual Studio Code pour se connecter à Azure Blockchain Service
 description: Se connecter à un réseau du consortium Azure Blockchain Service avec l’extension Kit de développement Azure Blockchain pour Ethereum dans Visual Studio Code
-ms.date: 04/22/2020
+ms.date: 12/04/2020
 ms.topic: quickstart
 ms.reviewer: caleteet
-ms.openlocfilehash: 8b502966317c5d07e89de4ae70ff72b899e963e6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6e94d93d91f25c15743c4c467e31de49fd9da41d
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82084836"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96763296"
 ---
 # <a name="quickstart-use-visual-studio-code-to-connect-to-an-azure-blockchain-service-consortium-network"></a>Démarrage rapide : Utiliser Visual Studio Code pour se connecter à un réseau du consortium Azure Blockchain Service
 
@@ -24,7 +24,6 @@ Dans ce guide de démarrage rapide, vous allez installer et utiliser l’extensi
 * [Azure Blockchain Development Kit pour l’extension Ethereum](https://marketplace.visualstudio.com/items?itemName=AzBlockchain.azure-blockchain)
 * [Node.js 10.15.x ou ultérieur](https://nodejs.org)
 * [Git 2.10.x ou ultérieur](https://git-scm.com)
-* [Python 2.7.15](https://www.python.org/downloads/release/python-2715/) Ajoutez python.exe à votre chemin. La présence de Python version 2.7.15 dans votre chemin est obligatoire pour le kit de développement Azure Blockchain.
 * [Truffle 5.0.0](https://www.trufflesuite.com/docs/truffle/getting-started/installation)
 * [Ganache CLI 6.0.0](https://github.com/trufflesuite/ganache-cli)
 
@@ -40,7 +39,7 @@ Pour plus d’informations sur node-gyp, consultez le [dépôt node-gyp sur GitH
 
 Azure Blockchain Development Kit vérifie que les conditions préalables de votre environnement de développement sont remplies. Pour vérifier votre environnement de développement :
 
-À partir de la palette de commandes VS Code, choisissez **Azure Blockchain : Afficher la page d’accueil**.
+À partir de la palette de commandes VS Code, choisissez **Blockchain : Afficher la page d’accueil**.
 
 Azure Blockchain Development Kit exécute un script de validation qui dure environ une minute. Vous pouvez afficher la sortie en sélectionnant **Terminal > Nouveau terminal**. Dans la barre de menus Terminal, sélectionnez l’onglet **Sortie**, et **Azure Blockchain** dans la liste déroulante. Une validation réussie génère une image semblable à la suivante :
 

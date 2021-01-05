@@ -1,31 +1,25 @@
 ---
 title: Implémenter Oracle Data Guard sur une machine virtuelle Azure Linux | Microsoft Docs
 description: Configurez et exécutez rapidement Oracle Data Guard dans votre environnement Azure.
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: 96528dc34305e77602634110a0153f7623a15c96
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: cc7579b48307325e25d8914ea4c722a9641883f3
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676770"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952146"
 ---
 # <a name="implement-oracle-data-guard-on-an-azure-linux-virtual-machine"></a>Implémenter Oracle Data Guard sur une machine virtuelle Azure Linux 
 
 Azure CLI permet de créer et de gérer des ressources Azure à partir de la ligne de commande ou dans des scripts. Cet article décrit comment utiliser Azure CLI pour déployer une base de données de Oracle Database 12c à partir de l’image de Place de marché Microsoft Azure. L’article montre ensuite, étape par étape, comment installer et configurer Data Guard sur une machine virtuelle Azure.
 
-Avant de commencer, vérifiez qu’Azure CLI est installé. Pour plus d’informations, consultez le [Guide d’installation d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Avant de commencer, vérifiez qu’Azure CLI est installé. Pour plus d’informations, consultez le [Guide d’installation d’Azure CLI](/cli/azure/install-azure-cli).
 
 ## <a name="prepare-the-environment"></a>Préparer l’environnement
 ### <a name="assumptions"></a>Hypothèses
@@ -57,7 +51,7 @@ az group create --name myResourceGroup --location westus
 
 ### <a name="create-an-availability-set"></a>Créer un groupe à haute disponibilité
 
-La création d’un groupe à haute disponibilité est facultative, mais recommandée. Pour plus d’informations, consultez [Instructions pour les groupes à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-availability-sets-guidelines).
+La création d’un groupe à haute disponibilité est facultative, mais recommandée. Pour plus d’informations, consultez [Instructions pour les groupes à haute disponibilité Azure](/previous-versions/azure/virtual-machines/windows/infrastructure-example).
 
 ```azurecli
 az vm availability-set create \

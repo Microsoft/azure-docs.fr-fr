@@ -1,24 +1,23 @@
 ---
 title: Stratégies de lettres mortes et de nouvelles tentatives - Azure Event Grid
 description: Explique comment personnaliser les options de remise des événements pour Event Grid. Définissez une destination de lettres mortes, et spécifiez la durée des nouvelles tentatives de remise.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 10/22/2019
-ms.author: spelluru
-ms.openlocfilehash: caed3c077b4df5da5fd8541b2f7e85ef119604b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/20/2020
+ms.openlocfilehash: 7d8cd74ccfb77bcec45d06071a4f46fb2a640cf8
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72794037"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92460935"
 ---
-# <a name="dead-letter-and-retry-policies"></a>Stratégies de lettres mortes et de nouvelles tentatives
+# <a name="set-dead-letter-location-and-retry-policy"></a>Définir un emplacement de lettres mortes et une stratégie de nouvelles tentatives
 
 Quand vous créez un abonnement aux événements, vous pouvez personnaliser les paramètres de remise des événements. Cet article vous montre comment configurer un emplacement de lettres mortes et personnaliser les paramètres de nouvelle tentative. Pour plus d’informations sur ces fonctionnalités, voir [Remise et nouvelle tentative de remise de messages Event Grid](delivery-and-retry.md).
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+
+> [!NOTE]
+> Pour en savoir plus sur la transmission des messages, les nouvelles tentatives et les lettres mortes, consultez l’article conceptuel : [Distribution et nouvelle tentative de distribution de messages avec Azure Event Grid](delivery-and-retry.md).
 
 ## <a name="set-dead-letter-location"></a>Définir l’emplacement des lettres mortes
 
@@ -99,7 +98,8 @@ az eventgrid event-subscription create \
   --max-delivery-attempts 18
 ```
 
-Si vous définissez `event-ttl` et `max-deliver-attempts`, Event Grid utilise la date de la première expiration pour déterminer quand arrêter la remise des événements.
+> [!NOTE]
+> Si vous définissez `event-ttl` et `max-deliver-attempts`, Event Grid utilise la date de la première expiration pour déterminer quand arrêter la remise des événements. Par exemple, si vous définissez une durée de vie (TTL) de 30 minutes et 10 tentatives de remise maximum. Lorsqu’un événement n’est pas remis après 30 minutes (ou) n’est pas remis après 10 tentatives, selon la première éventualité, l’événement devient lettres mortes.  
 
 ### <a name="powershell"></a>PowerShell
 
@@ -127,7 +127,8 @@ New-AzEventGridSubscription `
   -MaxDeliveryAttempt 18
 ```
 
-Si vous définissez `EventTtl` et `MaxDeliveryAttempt`, Event Grid utilise la date de la première expiration pour déterminer quand arrêter la remise des événements.
+> [!NOTE]
+> Si vous définissez `event-ttl` et `max-deliver-attempts`, Event Grid utilise la date de la première expiration pour déterminer quand arrêter la remise des événements. Par exemple, si vous définissez une durée de vie (TTL) de 30 minutes et 10 tentatives de remise maximum. Lorsqu’un événement n’est pas remis après 30 minutes (ou) n’est pas remis après 10 tentatives, selon la première éventualité, l’événement devient lettres mortes.  
 
 ## <a name="next-steps"></a>Étapes suivantes
 

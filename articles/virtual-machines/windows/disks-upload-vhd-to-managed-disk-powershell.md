@@ -3,17 +3,17 @@ title: Charger un disque dur virtuel sur Azure ou copier un disque d’une régi
 description: Découvrez comment charger un disque dur virtuel sur un disque managé Azure et comment copier un disque managé d’une région à l’autre avec Azure PowerShell via le chargement direct.
 author: roygara
 ms.author: rogarana
-ms.date: 03/27/2020
-ms.topic: article
+ms.date: 06/15/2020
+ms.topic: how-to
 ms.service: virtual-machines
 ms.tgt_pltfrm: linux
 ms.subservice: disks
-ms.openlocfilehash: 6242baf5a541231d367d456450388ef455312780
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 25d8c36cc42c3f1d1cc2a8477a7361ba45bec706
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82182512"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91977916"
 ---
 # <a name="upload-a-vhd-to-azure-or-copy-a-managed-disk-to-another-region---azure-powershell"></a>Charger un disque dur virtuel sur Azure ou copier un disque managé dans une autre région - Azure PowerShell
 
@@ -28,13 +28,13 @@ ms.locfileid: "82182512"
 
 ## <a name="getting-started"></a>Prise en main
 
-Si vous préférez charger des disques via une interface graphique utilisateur, vous pouvez utiliser l’Explorateur Stockage Azure. Pour plus d’informations, consultez : [Utiliser l’Explorateur Stockage Azure pour gérer des disques managés Azure](disks-use-storage-explorer-managed-disks.md)
+Si vous préférez charger des disques via une interface graphique utilisateur, vous pouvez utiliser l’Explorateur Stockage Azure. Pour plus d’informations, consultez : [Utiliser l’Explorateur Stockage Azure pour gérer des disques managés Azure](../disks-use-storage-explorer-managed-disks.md)
 
 Pour charger votre disque dur virtuel sur Azure, vous devez créer un disque managé vide configuré pour ce processus de chargement. Avant de créer ce disque, vous devez prendre connaissance des informations ci-dessous.
 
 Ce type de disque managé présente deux états uniques :
 
-- ReadToUpload, qui signifie que le disque est prêt à recevoir un chargement, mais qu'aucune [signature d'accès partagé](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1) (SAS) n'a été générée.
+- ReadToUpload, qui signifie que le disque est prêt à recevoir un chargement, mais qu'aucune [signature d'accès partagé](../../storage/common/storage-sas-overview.md) (SAS) n'a été générée.
 - ActiveUpload, qui signifie que le disque est prêt à recevoir un chargement et que la SAS a été générée.
 
 > [!NOTE]
@@ -44,9 +44,12 @@ Ce type de disque managé présente deux états uniques :
 
 Avant de pouvoir créer un disque dur standard vide pour le chargement, vous devez connaître la taille de fichier (en octets) du disque dur virtuel que vous voulez charger. L'exemple de code vous la fournira, mais si vous souhaitez effectuer cette opération vous-même, vous pouvez utiliser : `$vhdSizeBytes = (Get-Item "<fullFilePathHere>").length`. Cette valeur est utilisée lors de la spécification du paramètre **-UploadSizeInBytes**.
 
-Ensuite, à partir de votre interpréteur de commandes local, créez un disque HDD Standard vierge pour le chargement en spécifiant le paramètre **Upload** dans **-CreateOption** ainsi que le paramètre **-UploadSizeInBytes** dans la cmdlet [New-AzDiskConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azdiskconfig?view=azps-1.8.0). Ensuite, appelez [New-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/new-azdisk?view=azps-1.8.0) pour créer le disque.
+Ensuite, à partir de votre interpréteur de commandes local, créez un disque HDD Standard vierge pour le chargement en spécifiant le paramètre **Upload** dans **-CreateOption** ainsi que le paramètre **-UploadSizeInBytes** dans la cmdlet [New-AzDiskConfig](/powershell/module/az.compute/new-azdiskconfig?view=azps-1.8.0). Ensuite, appelez [New-AzDisk](/powershell/module/az.compute/new-azdisk?view=azps-1.8.0) pour créer le disque.
 
 Remplacez `<yourdiskname>`, `<yourresourcegroupname>`et `<yourregion>`, puis exécutez les commandes suivantes :
+
+> [!TIP]
+> Si vous créez un disque de système d’exploitation, ajoutez -HyperVGeneration ’<yourGeneration>’ à `New-AzDiskConfig`.
 
 ```powershell
 $vhdSizeBytes = (Get-Item "<fullFilePathHere>").length
@@ -74,7 +77,7 @@ Maintenant que vous disposez d'une SAS pour votre disque managé vierge, vous po
 
 Utilisez AzCopy v10 pour charger votre fichier de disque dur virtuel local sur un disque managé en spécifiant l'URI de la SAS que vous avez générée.
 
-Ce chargement présente le même débit que le disque [HDD Standard](disks-types.md#standard-hdd) correspondant. Par exemple, pour une taille correspondant à S4, vous aurez un débit allant jusqu'à 60 Mio/s. Mais pour une taille correspondant à S70, le débit ira jusqu’à 500 Mio/s.
+Ce chargement présente le même débit que le disque [HDD Standard](../disks-types.md#standard-hdd) correspondant. Par exemple, pour une taille correspondant à S4, vous aurez un débit allant jusqu'à 60 Mio/s. Mais pour une taille correspondant à S70, le débit ira jusqu’à 500 Mio/s.
 
 ```
 AzCopy.exe copy "c:\somewhere\mydisk.vhd" $diskSas.AccessSAS --blob-type PageBlob
@@ -98,6 +101,9 @@ Le script suivant effectue cette opération pour vous. Le processus est similair
 > Vous devez ajouter un décalage de 512 quand vous fournissez la taille en octets d’un disque managé d’Azure. En effet, Azure omet le pied de page lors du retour de la taille du disque. Si vous ne le faites pas, la copie échouera. Le script suivant s’en charge pour vous.
 
 Remplacez `<sourceResourceGroupHere>`, `<sourceDiskNameHere>`, `<targetDiskNameHere>`, `<targetResourceGroupHere>`, `<yourOSTypeHere>` et `<yourTargetLocationHere>` (la valeur d'emplacement pourrait par exemple être uswest2) par vos valeurs, puis exécutez le script suivant afin de copier un disque managé.
+
+> [!TIP]
+> Si vous créez un disque de système d’exploitation, ajoutez -HyperVGeneration ’<yourGeneration>’ à `New-AzDiskConfig`.
 
 ```powershell
 

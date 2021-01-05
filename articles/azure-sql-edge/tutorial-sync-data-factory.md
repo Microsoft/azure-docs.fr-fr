@@ -1,20 +1,20 @@
 ---
-title: Synchroniser des données à partir d’Azure SQL Edge (préversion) à l’aide d’Azure Data Factory
-description: Découvrez comment synchroniser des données entre Azure SQL Edge (préversion) et le Stockage Blob Azure
+title: Synchroniser des données à partir d’Azure SQL Edge à l’aide d’Azure Data Factory
+description: Découvrez comment synchroniser des données entre Azure SQL Edge et Stockage Blob Azure.
 keywords: SQL Edge, synchroniser des données à partir de SQL Edge, fabrique de données SQL Edge
-services: sql-database-edge
-ms.service: sql-database-edge
+services: sql-edge
+ms.service: sql-edge
 ms.topic: tutorial
 author: SQLSourabh
 ms.author: sourabha
 ms.reviewer: sstein
 ms.date: 05/19/2020
-ms.openlocfilehash: 1238505a10214c315bd5f2ceb428cf097b3ef5c6
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: b83201ae864d1f1eb9124af5268360bb1748f6c8
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83593454"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507606"
 ---
 # <a name="tutorial-sync-data-from-sql-edge-to-azure-blob-storage-by-using-azure-data-factory"></a>Tutoriel : Synchroniser des données de SQL Edge sur le Stockage Blob Azure à l’aide d’Azure Data Factory
 
@@ -25,7 +25,7 @@ Ce tutoriel explique comment utiliser Azure Data Factory pour synchroniser des d
 Si vous n’avez pas encore créé de base de données ou de table dans votre déploiement Azure SQL Edge, créez-en une à l’aide de l’une des méthodes suivantes :
 
 * Utilisez [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms/) ou [Azure Data Studio](/sql/azure-data-studio/download/) pour vous connecter à SQL Edge. Exécutez un script SQL pour créer la base de données et la table.
-* Créez une base de données et une table SQL à l’aide de [SQLCMD](/sql/tools/sqlcmd-utility/) en vous connectant directement au module SQL Edge. Pour plus d’informations, consultez [Se connecter au moteur de base de données avec sqlcmd](/sql/ssms/scripting/sqlcmd-connect-to-the-database-engine/).
+* Créez une base de données et une table à l’aide de [SQLCMD](/sql/tools/sqlcmd-utility/) en vous connectant directement au module SQL Edge. Pour plus d’informations, consultez [Se connecter au moteur de base de données avec sqlcmd](/sql/ssms/scripting/sqlcmd-connect-to-the-database-engine/).
 * Utilisez SQLPackage.exe pour déployer un fichier de package DAC sur le conteneur SQL Edge. Vous pouvez automatiser ce processus en spécifiant l’URI du fichier SqlPackage dans le cadre de la configuration des propriétés souhaitées du module. Vous pouvez également utiliser directement l’outil client SqlPackage.exe pour déployer un package DAC sur SQL Edge.
 
     Pour plus d’informations sur le téléchargement de SqlPackage.exe, consultez [Télécharger et installer sqlpackage](/sql/tools/sqlpackage-download/). Voici quelques exemples de commandes pour SqlPackage.exe. Pour plus d’informations, consultez la documentation de SqlPackage.exe.
@@ -59,8 +59,11 @@ Exécutez ces commandes sur l’instance SQL Edge :
     CREATE PROCEDURE usp_write_watermark @timestamp datetime, @TableName varchar(50)  
     AS  
     BEGIN
+    
     UPDATE [dbo].[watermarktable]
-    SET [WatermarkValue] = @timestamp WHERE [TableName] = @TableName
+    SET [WatermarkValue] = @timestamp
+    WHERE [TableName] = @TableName
+
     END
     Go
 ```
@@ -143,7 +146,7 @@ Créez une fabrique de données en suivant les instructions de ce [tutoriel](../
 
 18. Sélectionnez l’activité Copie et vérifiez que vous voyez les propriétés de l’activité dans la fenêtre **Propriétés**.
 
-19. Basculez vers l’onglet **Source** dans la fenêtre**Propriétés**, et effectuez les étapes suivantes :
+19. Basculez vers l’onglet **Source** dans la fenêtre **Propriétés**, et effectuez les étapes suivantes :
 
     1. Dans la zone **Jeu de données source**, sélectionnez **SourceDataset**.
 
@@ -187,7 +190,7 @@ Créez une fabrique de données en suivant les instructions de ce [tutoriel](../
 
 30. Sélectionnez **Activité de procédure stockée** dans le concepteur de pipeline et remplacez son nom par **SPtoUpdateWatermarkActivity**.
 
-31. Passez à l’onglet **Compte SQL** et sélectionnez ***QLDBEdgeLinkedService** sous **Service lié**.
+31. Passez à l’onglet **Compte SQL** et sélectionnez **_QLDBEdgeLinkedService_* sous **Service lié**.
 
 32. Basculez vers l’onglet **Procédure stockée** et effectuez ces étapes :
 

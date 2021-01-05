@@ -1,6 +1,6 @@
 ---
 title: Présentation d’HSM dédié - HSM dédié Azure | Microsoft Docs
-description: La présentation du service HSM dédié Azure offre dans Azure des fonctionnalités de stockage de clés qui répondent à la certification FIPS 140-2 de niveau 3
+description: Azure Dedicated HSM est un service Azure qui permet le stockage de clés de chiffrement dans Azure.
 services: dedicated-hsm
 author: msmbaldwin
 manager: rkarlin
@@ -13,12 +13,12 @@ ms.topic: overview
 ms.custom: mvc, seodec18
 ms.date: 12/07/2018
 ms.author: mbaldwin
-ms.openlocfilehash: dd5ce117645ef2b368bbf8f0e441770d6e746b5b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6eb82400b2f598b4b54da4b238f4bce71d83de6b
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "70881077"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "90970203"
 ---
 # <a name="what-is-azure-dedicated-hsm"></a>Présentation du service HSM dédié Azure
 

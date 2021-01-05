@@ -5,14 +5,15 @@ author: jseb225
 ms.author: jeanb
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
-ms.date: 03/27/2020
-ms.openlocfilehash: 40b57af95f9ea4d4212756634c721ddd55f85d7b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: troubleshooting
+ms.custom: contperf-fy21q1
+ms.date: 06/18/2020
+ms.openlocfilehash: b29e0f99cb4549370be49dc5a1b11d367e30d8c0
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82127748"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97029139"
 ---
 # <a name="troubleshoot-azure-stream-analytics-by-using-resource-logs"></a>Résoudre les problèmes liés à Azure Stream Analytics à l’aide des journaux de ressources
 
@@ -47,7 +48,7 @@ Les journaux d’activité sont activés par défaut et proposent des informatio
 
    ![Résumé des opérations du journal d'activité Stream Analytics](./media/stream-analytics-job-diagnostic-logs/operation-summary.png)
 
-4. Faites défiler jusqu'à la section **Propriétés** du JSON, qui fournit des détails sur l’erreur à l'origine de l'échec de l'opération. Dans cet exemple, cet échec était dû à une erreur d'exécution liée à des valeurs de latitude hors limites. Des incohérences dans les données qui sont traitées par un travail Stream Analytics provoque une erreur de données. Vous pouvez en savoir plus sur les différentes [erreurs de données d’entrée et de sortie, et la raison de leur survenue](https://docs.microsoft.com/azure/stream-analytics/data-errors).
+4. Faites défiler jusqu'à la section **Propriétés** du JSON, qui fournit des détails sur l’erreur à l'origine de l'échec de l'opération. Dans cet exemple, cet échec était dû à une erreur d'exécution liée à des valeurs de latitude hors limites. Des incohérences dans les données qui sont traitées par un travail Stream Analytics provoque une erreur de données. Vous pouvez en savoir plus sur les différentes [erreurs de données d’entrée et de sortie, et la raison de leur survenue](./data-errors.md).
 
    ![Détails d'erreur JSON](./media/stream-analytics-job-diagnostic-logs/error-details.png)
 
@@ -59,23 +60,23 @@ Les journaux d’activité sont activés par défaut et proposent des informatio
 
 Il est vivement conseillé d’activer les journaux de ressources et de les envoyer aux journaux Azure Monitor. Ils sont **désactivés** par défaut. Pour les activer, suivez ces étapes :
 
-1.  Connectez-vous au portail Azure et accédez à votre travail Stream Analytics. Sous **Supervision**, sélectionnez **Journaux de diagnostic**. Ensuite, sélectionnez **Activer les diagnostics**.
+1.  Créez un espace de travail Log Analytics si vous n’en avez pas déjà un. Il est recommandé d’avoir votre espace de travail Log Analytics dans la même région que votre travail Stream Analytics.
+
+2.  Connectez-vous au portail Azure et accédez à votre travail Stream Analytics. Sous **Supervision**, sélectionnez **Journaux de diagnostic**. Ensuite, sélectionnez **Activer les diagnostics**.
 
     ![Navigation du panneau aux journaux de ressources](./media/stream-analytics-job-diagnostic-logs/diagnostic-logs-monitoring.png)  
 
-2.  Créez un **nom** dans **Paramètres de diagnostic** et cochez la case située en regard de **Envoyer à Log Analytics**. Ajoutez ou créez ensuite un **espace de travail Log Analytics**. Cochez les cases **Exécution** et **Création** sous **JOURNAL**, ainsi que **AllMetrics** sous **MÉTRIQUE** . Cliquez sur **Enregistrer**. Il est recommandé d’utiliser un espace de travail Log Analytics dans la même région Azure que votre travail Stream Analytics, afin d’éviter des frais supplémentaires.
+2.  Indiquez un **nom** dans le champ **Nom des paramètres de diagnostic** et cochez les cases **Exécution** et **Création** sous **Journal**, ainsi que **AllMetrics** sous **Métrique**. Sélectionnez ensuite **Envoyer à Log Analytics** et choisissez votre espace de travail. Cliquez sur **Enregistrer**.
 
-    ![Paramètres des journaux de ressources](./media/stream-analytics-job-diagnostic-logs/diagnostic-settings.png)
+    ![Paramètres des journaux de ressources](./media/stream-analytics-job-diagnostic-logs/logs-setup.png)
 
 3. Lorsque votre tâche Stream Analytics démarre, les journaux de ressources sont routés vers votre espace de travail Log Analytics. Pour afficher les journaux de ressources de votre travail, sélectionnez **Journaux** sous la section **Surveillance**.
 
-   ![Journaux de ressources sous Surveillance](./media/stream-analytics-job-diagnostic-logs/diagnostic-logs.png)
+   ![La capture d’écran montre le menu Général avec l’option Journaux sélectionnée.](./media/stream-analytics-job-diagnostic-logs/diagnostic-logs.png)
 
-4. Stream Analytics fournit des requêtes prédéfinies qui vous permettent de rechercher facilement les journaux qui vous intéressent. Les trois catégories sont **Général**, **Erreurs des données d’entrée** et **Erreurs des données de sortie**. Par exemple, pour afficher un résumé de toutes les erreurs de votre travail au cours des sept derniers jours, vous pouvez sélectionner **Exécuter** pour la requête prédéfinie appropriée. 
+4. Stream Analytics fournit des requêtes prédéfinies qui vous permettent de rechercher facilement les journaux qui vous intéressent. Vous pouvez sélectionner n’importe quelle requête prédéfinie dans le volet gauche, puis sélectionner **Exécuter**. Les résultats de la requête s’affichent dans le volet inférieur. 
 
-   ![Journaux de ressources sous Surveillance](./media/stream-analytics-job-diagnostic-logs/logs-categories.png)
-
-   ![Résultats des journaux](./media/stream-analytics-job-diagnostic-logs/logs-result.png)
+   ![La capture d’écran montre l’option Journaux pour un travail Stream Analytics.](./media/stream-analytics-job-diagnostic-logs/logs-example.png)
 
 ## <a name="resource-log-categories"></a>Catégories de journaux de ressources
 
@@ -110,7 +111,7 @@ Les journaux d’activité d’exécution contiennent des informations sur les �
 
 ### <a name="data-errors"></a>Erreurs de données
 
-Toute erreur qui se produit lorsque le travail traite des données est consignée dans cette catégorie de journaux d’activité. La plupart du temps, ces journaux d’activité sont créés au cours des opérations de lecture, de sérialisation et d’écriture des données. Ces journaux d’activité n’incluent pas les erreurs de connectivité. Les erreurs de connectivité sont traitées comme des événements génériques. Vous pouvez en apprendre davantage sur la cause des différentes [erreurs de données d’entrée et de sortie](https://docs.microsoft.com/azure/stream-analytics/data-errors).
+Toute erreur qui se produit lorsque le travail traite des données est consignée dans cette catégorie de journaux d’activité. La plupart du temps, ces journaux d’activité sont créés au cours des opérations de lecture, de sérialisation et d’écriture des données. Ces journaux d’activité n’incluent pas les erreurs de connectivité. Les erreurs de connectivité sont traitées comme des événements génériques. Vous pouvez en apprendre davantage sur la cause des différentes [erreurs de données d’entrée et de sortie](./data-errors.md).
 
 Nom | Description
 ------- | -------
@@ -138,12 +139,9 @@ Nom | Description
 Error | (facultatif) Informations sur l’erreur, en général des informations sur l’exception si celles-ci sont disponibles.
 Message| Message de journal.
 Type | Type de message, correspond à la catégorisation interne des erreurs. Par exemple, **JobValidationError** ou **BlobOutputAdapterInitializationFailure**.
-ID de corrélation : | [GUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) qui identifie de façon unique l’exécution du travail. Toutes les entrées du journal d’exécution générées depuis le démarrage du travail jusqu’à son arrêt ont le même **ID de corrélation**.
+ID de corrélation : | GUID qui identifie de façon unique l’exécution du travail. Toutes les entrées du journal d’exécution générées depuis le démarrage du travail jusqu’à son arrêt ont le même **ID de corrélation**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Présentation de Stream Analytics](stream-analytics-introduction.md)
-* [Prise en main de Stream Analytics](stream-analytics-real-time-fraud-detection.md)
-* [Mise à l’échelle des travaux Stream Analytics](stream-analytics-scale-jobs.md)
-* [Informations de référence sur le langage de requête Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Erreurs de données Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/data-errors)
+* [Erreurs de données Stream Analytics](./data-errors.md)
+* [Informations de référence sur le langage de requête Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)

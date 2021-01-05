@@ -1,32 +1,32 @@
 ---
 title: Utiliser Azure Files avec Linux | Microsoft Docs
-description: Découvrez comment monter un partage de fichiers Azure via SMB sur Linux.
+description: Découvrez comment monter un partage de fichiers Azure via SMB sur Linux. Consultez la liste des conditions requises. Passez en revue les considérations relatives à la sécurité SMB sur les clients Linux.
 author: roygara
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: fcc9876caf0c002650ab30b7eaed7dc44e2f135e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c271107b85e4903153c29b58aadadd37fb051b76
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137737"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022562"
 ---
 # <a name="use-azure-files-with-linux"></a>Utiliser Azure Files avec Linux
 [Azure Files](storage-files-introduction.md) est le système de fichiers cloud facile à utiliser de Microsoft. Les partages de fichiers Azure peuvent être montés dans des distributions Linux à l’aide du [client SMB en mode noyau](https://wiki.samba.org/index.php/LinuxCIFS). Cet article présente deux méthodes de montage d’un partage de fichiers Azure : à la demande avec la commande `mount` et au démarrage en créant une entrée dans `/etc/fstab`.
 
 La méthode recommandée pour monter un partage de fichiers Azure sur Linux est d’utiliser SMB 3.0. Par défaut, Azure Files exige un chiffrement en transit, que seul SMB 3.0 prend en charge. Azure Files prend aussi en charge SMB 2.1, qui ne prend pas en charge le chiffrement en transit, mais des impératifs de sécurité peuvent vous interdire de monter des partages de fichiers Azure avec SMB 2.1 à partir d’une autre région Azure ou de votre environnement local. À moins que votre application ne l’exige précisément, il y a peu de raisons d’utiliser SMB 2.1, puisque les distributions Linux les plus répandues et les plus récentes prennent en charge SMB 3.0 :  
 
-| | SMB 2.1 <br>(Montages sur des machines virtuelles au sein de la même région Azure) | SMB 3.0 <br>(Montages à partir du site local et entre les régions) |
+| Distribution Linux | SMB 2.1 <br>(Montages sur des machines virtuelles au sein de la même région Azure) | SMB 3.0 <br>(Montages à partir du site local et entre les régions) |
 | --- | :---: | :---: |
 | Ubuntu | 14.04+ | 16.04+ |
 | Red Hat Enterprise Linux (RHEL) | 7+ | 7.5+ |
 | CentOS | 7+ |  7.5+ |
-| Debian | 8+ | 10+ |
+| Debian | 8+ | > 10 |
 | OpenSUSE | 13.2+ | 42.3+ |
-| SUSE Linux Enterprise Server | 12+ | 12 SP3+ |
+| SUSE Linux Enterprise Server | 12+ | 12 SP2+ |
 
 Si vous utilisez une distribution Linux non listée dans le tableau ci-dessus, vous pouvez vérifier si votre distribution Linux prend en charge SMB 3.0 avec le chiffrement en vérifiant la version du noyau Linux. SMB 3.0 avec chiffrement a été ajouté à la version 4.11 du noyau Linux. La commande `uname` retourne la version du noyau Linux en cours d’utilisation :
 
@@ -34,7 +34,7 @@ Si vous utilisez une distribution Linux non listée dans le tableau ci-dessus, v
 uname -r
 ```
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Conditions préalables requises
 <a id="smb-client-reqs"></a>
 
 * <a id="install-cifs-utils"></a>**Vérifiez que le package cifs-utils est installé.**  
@@ -47,7 +47,7 @@ uname -r
     sudo apt install cifs-utils
     ```
 
-    Sur **Fedora**, **Red Hat Enterprise Linux 8+** et **CentOS 8 +** , utilisez le gestionnaire de packages `dnf` :
+    Sur **Fedora**, **Red Hat Enterprise Linux 8+** et **CentOS 8 +**, utilisez le gestionnaire de packages `dnf` :
 
     ```bash
     sudo dnf install cifs-utils
@@ -67,9 +67,9 @@ uname -r
 
     Sur les autres distributions, utilisez le gestionnaire de package approprié ou effectuez une [compilation à partir de la source](https://wiki.samba.org/index.php/LinuxCIFS_utils#Download).
 
-* **La dernière version de l’interface de ligne de commande Azure (CLI).** Pour plus d'informations sur l'installation d’Azure CLI, consultez [Installer l’interface de ligne de commande Microsoft Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) et sélectionnez votre système d’exploitation. Si vous préférez utiliser le module Azure PowerShell dans PowerShell 6+, rien ne vous en empêche. Sachez cependant que les instructions ci-dessous s’appliquent à Azure CLI.
+* **La dernière version de l’interface de ligne de commande Azure (CLI).** Pour plus d'informations sur l'installation d’Azure CLI, consultez [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli?view=azure-cli-latest) et sélectionnez votre système d’exploitation. Si vous préférez utiliser le module Azure PowerShell dans PowerShell 6+, rien ne vous en empêche. Sachez cependant que les instructions ci-dessous s’appliquent à Azure CLI.
 
-* **Vérifiez que le port 445 est ouvert** : SMB communique via le port TCP 445. Assurez-vous que votre pare-feu ne bloque pas les ports TCP 445 à partir de la machine cliente.  Remplacez **<your-resource-group>** et **<your-storage-account>**
+* **Vérifiez que le port 445 est ouvert** : SMB communique via le port TCP 445. Assurez-vous que votre pare-feu ne bloque pas les ports TCP 445 de la machine cliente.  Remplacez `<your-resource-group>` et `<your-storage-account>`, puis exécutez le script suivant :
     ```bash
     resourceGroupName="<your-resource-group>"
     storageAccountName="<your-storage-account>"
@@ -114,6 +114,7 @@ Vous pouvez monter le même partage de fichiers Azure sur plusieurs points de mo
 1. **Utilisez la commande de montagne pour monter le partage de fichiers Azure**. Dans l’exemple ci-dessous, les autorisations de dossiers et de fichiers Linux locales sont par défaut 0755, ce qui signifie lecture, écriture et exécution pour le propriétaire (en fonction du propriétaire Linux des fichiers/répertoires), lecture et exécution pour les utilisateurs du groupe propriétaire, et lecture et exécution pour les autres utilisateurs du système. Vous pouvez utiliser les options de montage `uid` et `gid` pour définir l’ID d’utilisateur et l’ID de groupe pour le montage. Vous pouvez aussi utiliser `dir_mode` et `file_mode` pour définir des autorisations personnalisées comme vous le souhaitez. Pour plus d’informations sur la façon de définir les autorisations, consultez la [notation numérique UNIX](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) sur Wikipédia. 
 
     ```bash
+    # This command assumes you have logged in with az login
     httpEndpoint=$(az storage account show \
         --resource-group $resourceGroupName \
         --name $storageAccountName \
@@ -176,6 +177,7 @@ Quand vous avez terminé d’utiliser le partage de fichiers Azure, vous pouvez 
 1. **Utilisez la commande suivante pour ajouter la ligne suivante à `/etc/fstab`**  : Dans l’exemple ci-dessous, les autorisations de dossiers et de fichiers Linux locales sont par défaut 0755, ce qui signifie lecture, écriture et exécution pour le propriétaire (en fonction du propriétaire Linux des fichiers/répertoires), lecture et exécution pour les utilisateurs du groupe propriétaire, et lecture et exécution pour les autres utilisateurs du système. Vous pouvez utiliser les options de montage `uid` et `gid` pour définir l’ID d’utilisateur et l’ID de groupe pour le montage. Vous pouvez aussi utiliser `dir_mode` et `file_mode` pour définir des autorisations personnalisées comme vous le souhaitez. Pour plus d’informations sur la façon de définir les autorisations, consultez la [notation numérique UNIX](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) sur Wikipédia.
 
     ```bash
+    # This command assumes you have logged in with az login
     httpEndpoint=$(az storage account show \
         --resource-group $resourceGroupName \
         --name $storageAccountName \
@@ -205,7 +207,7 @@ Quand vous avez terminé d’utiliser le partage de fichiers Azure, vous pouvez 
     sudo apt update
     sudo apt install autofs
     ```
-    Sur **Fedora**, **Red Hat Enterprise Linux 8+** et **CentOS 8 +** , utilisez le gestionnaire de packages `dnf` :
+    Sur **Fedora**, **Red Hat Enterprise Linux 8+** et **CentOS 8 +**, utilisez le gestionnaire de packages `dnf` :
     ```bash
     sudo dnf install autofs
     ```
@@ -248,22 +250,22 @@ Pour monter un partage de fichiers Azure sur Linux, le port 445 doit être acce
 
 | Distribution | Possibilité de désactivation de SMB 1 |
 |--------------|-------------------|
-| Ubuntu 14.04-16.04 | Non  |
+| Ubuntu 14.04-16.04 | Non |
 | Ubuntu 18.04 | Oui |
 | Ubuntu 19.04+ | Oui |
-| Debian 8-9 | Non  |
+| Debian 8-9 | Non |
 | Debian 10+ | Oui |
 | Fedora 29+ | Oui |
-| CentOS 7 | Non  | 
+| CentOS 7 | Non | 
 | CentOS 8+ | Oui |
-| Red Hat Enterprise Linux 6.x-7.x | Non  |
+| Red Hat Enterprise Linux 6.x-7.x | Non |
 | Red Hat Enterprise Linux 8+ | Oui |
-| openSUSE Leap 15.0 | Non  |
+| openSUSE Leap 15.0 | Non |
 | openSUSE Leap 15.1+ | Oui |
 | openSUSE Tumbleweed | Oui |
-| SUSE Linux Enterprise 11.x-12.x | Non  |
-| SUSE Linux Enterprise 15 | Non  |
-| SUSE Linux Enterprise 15.1 | Non  |
+| SUSE Linux Enterprise 11.x-12.x | Non |
+| SUSE Linux Enterprise 15 | Non |
+| SUSE Linux Enterprise 15.1 | Non |
 
 Vous pouvez vérifier si votre distribution Linux prend en charge le paramètre de module `disable_legacy_dialects` via la commande suivante.
 
@@ -324,5 +326,5 @@ cat /sys/module/cifs/parameters/disable_legacy_dialects
 Consultez ces liens pour en savoir plus sur Azure Files :
 
 * [Planification d’un déploiement Azure Files](storage-files-planning.md)
-* [FORUM AUX QUESTIONS](../storage-files-faq.md)
+* [FORUM AUX QUESTIONS](./storage-files-faq.md)
 * [Dépannage](storage-troubleshoot-linux-file-connection-problems.md)

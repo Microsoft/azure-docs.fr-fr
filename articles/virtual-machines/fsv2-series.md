@@ -1,45 +1,43 @@
 ---
-title: Série Fsv2 – Machines virtuelles Microsoft Azure
+title: Série Fsv2
 description: Spécifications pour les machines virtuelles de la série Fsv2.
-services: virtual-machines
 author: brbell
 ms.service: virtual-machines
-ms.topic: article
+ms.subservice: sizes
+ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: lahugh
-ms.openlocfilehash: f28c6b61aee3c8cbc078db1c2cfb48ed1fba4554
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: jushiman
+ms.openlocfilehash: 039045b613e57ee396201ee93c3962c5970cf02b
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78164846"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91651919"
 ---
 # <a name="fsv2-series"></a>Série Fsv2
 
-La série Fsv2 est basée sur le processeur Intel® Xeon® Platinum 8168. Il est doté d’une fréquence d’horloge turbo tous cœurs prolongée de 3,4 GHz et d’une fréquence turbo monocœur maximale de 3,7 GHz. Les instructions Intel® AVX-512 sont une nouveauté sur les processeurs Intel Scalable. Elles fourniront jusqu’à 2X plus de performances pour les charges de travail de traitement vectoriel pour les opérations en virgule flottante simple ou double précision. En d’autres termes, elles sont très rapides pour les charges de travail de calcul.
+La série Fsv2 s’exécute sur les processeurs Intel® Xeon® Platinum 8272CL (cascade Lake) et les processeurs Intel® Xeon® Platinum 8168 (Skylake). Il est doté d’une fréquence d’horloge turbo tous cœurs prolongée de 3,4 GHz et d’une fréquence turbo monocœur maximale de 3,7 GHz. Les instructions Intel® AVX-512 sont une nouveauté sur les processeurs Intel Scalable. Elles fourniront jusqu’à 2X plus de performances pour les charges de travail de traitement vectoriel pour les opérations en virgule flottante simple ou double précision. En d’autres termes, elles sont très rapides pour les charges de travail de calcul.
 
 Machines virtuelles de la série Fsv2 dotées de la technologie Hyper-Threading d’Intel®.
 
-ACU : 195 - 210
+[ACU](acu.md) : 195 - 210<br>
+[Stockage Premium](premium-storage-performance.md) : Pris en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Générations 1 et 2<br>
+<br>
 
-Premium Storage :  Prise en charge
-
-Mise en cache du Stockage Premium :  Prise en charge
-
-Migration dynamique : Prise en charge
-
-Mises à jour avec préservation de la mémoire : Prise en charge
-
-| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Disques de données max. | Débit de stockage temporaire et mis en cache max. : IOPS/Mbits/s (taille du cache en Gio) | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre de cartes réseau/bande passante réseau attendue (Mbits/s) max. |
-|---|---|---|---|---|---|---|---|
-| Standard_F2s_v2  | 2  | 4   | 16  | 4  | 4 000/31 (32)       | 3 200/47    | 2/875   |
-| Standard_F4s_v2  | 4  | 8   | 32  | 8  | 8 000/63 (64)       | 6 400/95    | 2/1 750  |
-| Standard_F8s_v2  | 8  | 16  | 64  | 16 | 16 000/127 (128)    | 12 800/190  | 4/3 500  |
-| Standard_F16s_v2 | 16 | 32  | 128 | 32 | 32 000/255 (256)    | 25 600/380  | 4/7 000  |
-| Standard_F32s_v2 | 32 | 64  | 256 | 32 | 64 000/512 (512)    | 51 200/750  | 8/14 000 |
-| Standard_F48s_v2 | 48 | 96  | 384 | 32 | 96 000/768 (768)    | 76 800/1 100 | 8/21 000 |
-| Standard_F64s_v2 | 64 | 128 | 512 | 32 | 128 000/1 024 (1 024) | 80 000/1 100 | 8/28 000 |
-| Standard_F72s_v2<sup>1, 2</sup> | 72 | 144 | 576 | 32 | 144 000/1 152 (1 520) | 80 000/1 100 | 8/30 000 |
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Disques de données max. | Débit de stockage temporaire et mis en cache max. : IOPS/Mbits/s (taille du cache en Gio) | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau|Bande passante réseau attendue (Mbit/s) |
+|---|---|---|---|---|---|---|---|---|
+| Standard_F2s_v2  | 2  | 4   | 16  | 4  | 4 000/31 (32)       | 3 200/47    | 2|875   |
+| Standard_F4s_v2  | 4  | 8   | 32  | 8  | 8 000/63 (64)       | 6 400/95    | 2|1750  |
+| Standard_F8s_v2  | 8  | 16  | 64  | 16 | 16 000/127 (128)    | 12 800/190  | 4|3 500  |
+| Standard_F16s_v2 | 16 | 32  | 128 | 32 | 32 000/255 (256)    | 25 600/380  | 4|7000  |
+| Standard_F32s_v2 | 32 | 64  | 256 | 32 | 64 000/512 (512)    | 51 200/750  | 8|14000 |
+| Standard_F48s_v2 | 48 | 96  | 384 | 32 | 96 000/768 (768)    | 76 800/1 100 | 8|21000 |
+| Standard_F64s_v2 | 64 | 128 | 512 | 32 | 128 000/1 024 (1 024) | 80 000/1 100 | 8|28000 |
+| Standard_F72s_v2<sup>1, 2</sup> | 72 | 144 | 576 | 32 | 144 000/1 152 (1 520) | 80 000/1 100 | 8|30000 |
 
 <sup>1</sup> L’utilisation de plus de 64 processeurs virtuels nécessite l’un des systèmes d’exploitation invités pris en charge suivants :
 
@@ -57,7 +55,7 @@ Mises à jour avec préservation de la mémoire : Prise en charge
 
 [!INCLUDE [virtual-machines-common-sizes-table-defs](../../includes/virtual-machines-common-sizes-table-defs.md)]
 
-## <a name="other-sizes"></a>Autres tailles
+## <a name="other-sizes-and-information"></a>Autres tailles et informations
 
 - [Usage général](sizes-general.md)
 - [Mémoire optimisée](sizes-memory.md)
@@ -65,6 +63,11 @@ Mises à jour avec préservation de la mémoire : Prise en charge
 - [Optimisé pour le GPU](sizes-gpu.md)
 - [Calcul haute performance](sizes-hpc.md)
 - [Générations précédentes](sizes-previous-gen.md)
+
+Calculatrice de prix : [Calculatrice de prix](https://azure.microsoft.com/pricing/calculator/)
+
+Pour plus d’informations sur les types de disques : [Types de disques](./disks-types.md#ultra-disk)
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

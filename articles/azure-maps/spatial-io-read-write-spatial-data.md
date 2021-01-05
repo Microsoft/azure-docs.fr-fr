@@ -1,19 +1,20 @@
 ---
 title: Lire et écrire des données spatiales | Microsoft Azure Maps
 description: Découvrez comment lire et écrire des données à l’aide du module d’E/S spatiales, fourni par le Kit de développement logiciel (SDK) web Azure Maps.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 03/01/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 4c47335689401ebce98224992c74c3396821a1dd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 133674e6764e12742f5b238946e943d9b5011cd2
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334152"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891327"
 ---
 # <a name="read-and-write-spatial-data"></a>Lire et écrire des données spatiales
 
@@ -153,38 +154,37 @@ GML est une spécification de fichier XML spatial qui est souvent utilisée comm
 
 La fonction `atlas.io.read` utilise par défaut la fonction `atlas.io.core.GmlReader.read` lorsqu’elle détecte que les données d’entrée sont au format XML, mais que les données ne correspondent pas à l’un des autres formats XML spatiaux pris en charge.
 
-## <a name="next-steps"></a>Étapes suivantes
+Le fonction `GmlReader` analyse les coordonnées qui ont l’un des SRID suivants :
+
+- EPSG: 4326 (recommandé)
+- EPSG:4269, EPSG:4283, EPSG:4258, EPSG:4308, EPSG:4230, EPSG:4272, EPSG:4271, EPSG:4267, EPSG:4608, EPSG:4674 éventuellement avec une petite marge d’erreur.
+- EPSG:3857, EPSG:102100, EPSG:3785, EPSG:900913, EPSG:102113, EPSG:41001, EPSG:54004
+
+## <a name="more-resources"></a>Plus de ressources
 
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
-> [!div class="nextstepaction"]
-> [Fonctions statiques atlas.io](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.io)
+[Fonctions statiques atlas.io](/javascript/api/azure-maps-spatial-io/atlas.io)
 
-> [!div class="nextstepaction"]
-> [SpatialDataSet](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.spatialdataset)
+[SpatialDataSet](/javascript/api/azure-maps-spatial-io/atlas.spatialdataset)
 
-> [!div class="nextstepaction"]
-> [SpatialDataSetStats](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.spatialdatasetstats)
+[SpatialDataSetStats](/javascript/api/azure-maps-spatial-io/atlas.spatialdatasetstats)
 
-> [!div class="nextstepaction"]
-> [GmlReader](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.io.core.gmlreader?view=azure-maps-typescript-latest)
+[GmlReader](/javascript/api/azure-maps-spatial-io/atlas.io.core.gmlreader)
 
-> [!div class="nextstepaction"]
-> [GmlWriter](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.io.core.gmlwriter?view=azure-maps-typescript-latest)
+[GmlWriter](/javascript/api/azure-maps-spatial-io/atlas.io.core.gmlwriter)
 
-> [!div class="nextstepaction"]
-> [Fonctions atlas.io.ogc.WKT](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.io.ogc.wkt)
+[Fonctions atlas.io.ogc.WKT](/javascript/api/azure-maps-spatial-io/atlas.io.ogc.wkt)
+
+[Se connecter à un service WFS](spatial-io-connect-wfs-service.md)
+
+[Exploiter les opérations de base](spatial-io-core-operations.md)
+
+[Détails sur les formats de données pris en charge](spatial-io-supported-data-format-details.md)
+
+
+## <a name="next-steps"></a>Étapes suivantes
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 
-> [!div class="nextstepaction"]
-> [Ajouter une couche OGC](spatial-io-add-ogc-map-layer.md)
-
-> [!div class="nextstepaction"]
-> [Se connecter à un service WFS](spatial-io-connect-wfs-service.md)
-
-> [!div class="nextstepaction"]
-> [Exploiter les opérations de base](spatial-io-core-operations.md)
-
-> [!div class="nextstepaction"]
-> [Détails sur les formats de données pris en charge](spatial-io-supported-data-format-details.md)
+[Ajouter une couche OGC](spatial-io-add-ogc-map-layer.md)

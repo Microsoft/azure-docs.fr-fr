@@ -3,18 +3,18 @@ title: Vue d’ensemble des versions de Durable Functions - Azure Functions
 description: En savoir plus sur les versions de Durable Functions.
 author: cgillum
 ms.topic: conceptual
-ms.date: 10/30/2019
+ms.date: 08/20/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 4a117e7f69647af3ad82f9013bfa40556ccc0dbd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d6662259494bba5747e01c4574186e9030112247
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152888"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88719408"
 ---
 # <a name="durable-functions-versions-overview"></a>Vue d’ensemble des versions de Durable Functions
 
-*Fonctions durables* est une extension d[’Azure Functions](../functions-overview.md) et d[’Azure WebJobs](../../app-service/web-sites-create-web-jobs.md) qui vous permet d’écrire des fonctions avec état dans un environnement sans serveur. L’extension gère l’état, les points de contrôle et les redémarrages à votre place. Si vous n’êtes pas encore familiarisé avec Durable Functions, consultez la [documentation générale](durable-functions-overview.md).
+*Fonctions durables* est une extension d[’Azure Functions](../functions-overview.md) et d[’Azure WebJobs](../../app-service/webjobs-create.md) qui vous permet d’écrire des fonctions avec état dans un environnement sans serveur. L’extension gère l’état, les points de contrôle et les redémarrages à votre place. Si vous n’êtes pas encore familiarisé avec Durable Functions, consultez la [documentation générale](durable-functions-overview.md).
 
 ## <a name="new-features-in-2x"></a>Nouvelles fonctionnalités de la version 2.x
 
@@ -44,7 +44,29 @@ Cette section décrit comment migrer votre extension Durable Functions existante
 
 ### <a name="upgrade-the-extension"></a>Mettre à niveau l’extension
 
-Installez la version 2.x de [l’extension de liaisons Durable Functions](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask) dans votre projet. Pour en savoir plus, consultez [Inscrire des extensions de liaison Azure Functions](../functions-bindings-register.md).
+Installez la dernière version 2.x de l’extension de liaisons Durable Functions dans votre projet.
+
+#### <a name="javascript-python-and-powershell"></a>JavaScript, Python, et PowerShell
+
+Durable Functions 2.x est disponible dans la version 2.x du [pack d’extension Azure Functions](../functions-bindings-register.md#extension-bundles).
+
+Pour mettre à jour la version du pack d’extension dans votre projet, ouvrez host.json et mettez à jour la section `extensionBundle` pour utiliser la version 2.x (`[2.*, 3.0.0)`).
+
+```json
+{
+    "version": "2.0",
+    "extensionBundle": {
+        "id": "Microsoft.Azure.Functions.ExtensionBundle",
+        "version": "[2.*, 3.0.0)"
+    }
+}
+```
+
+#### <a name="net"></a>.NET
+
+Mettez à jour votre projet .NET pour utiliser la dernière version de l’[extension de liaisons Durable Functions](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask).
+
+Pour en savoir plus, consultez [Inscrire des extensions de liaison Azure Functions](../functions-bindings-register.md#local-csharp).
 
 ### <a name="update-your-code"></a>Mettre à jour votre code
 
@@ -82,3 +104,7 @@ Dans le cas où une classe de base abstraite contenait des méthodes virtuelles,
 #### <a name="functionjson-changes-javascript-and-c-script"></a>Modifications de function.json (script JavaScript et C#)
 
 Dans Durable Functions 1.x, la liaison du client d’orchestration utilise un `type` de `orchestrationClient`. La version 2.x utilise `durableClient` à la place.
+
+#### <a name="raise-event-changes"></a>Changements liés au déclenchement d’événements
+
+Dans Durable Functions 1.x, l’appel de l’API de [déclenchement d’événement](durable-functions-external-events.md#send-events) et la spécification d’une instance qui n’existait pas a occasionné un échec silencieux. À partir de 2.x, le déclenchement d’un événement pour une orchestration inexistante entraîne une exception.

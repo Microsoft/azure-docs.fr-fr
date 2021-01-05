@@ -31,7 +31,7 @@
         - name: Présentation d’Azure AD Connect et Connect Health
           href: whatis-azure-ad-connect.md
         - name: Choisir l’authentification appropriée
-          href: 'https://docs.microsoft.com/azure/security/fundamentals/choose-ad-authn'
+          href: ./choose-ad-authn.md
         - name: Synchronisation des identités et résilience d’attribut en double
           href: how-to-connect-syncservice-duplicate-attribute-resiliency.md
     - name: Synchronisation de hachage de mot de passe
@@ -106,6 +106,8 @@
           href: how-to-connect-install-express.md
         - name: Installer la Fédération d’Azure AD Connect ou d’autres paramètres personnalisés
           href: how-to-connect-install-custom.md
+        - name: Importer et exporter des paramètres de configuration
+          href: how-to-connect-import-export-config.md
         - name: Installer Azure AD Connect avec l’authentification directe (PTA)
           href: how-to-connect-pta-quick-start.md
         - name: Installer Azure AD Connect Health
@@ -130,6 +132,8 @@
           href: how-to-connect-install-existing-tenant.md
         - name: Tâches postérieures à l’installation
           href: how-to-connect-post-installation.md
+        - name: "Désinstaller Azure\_AD Connect"
+          href: how-to-connect-uninstall.md
     - name: Planifier et concevoir
       items:
         - name: Principes de conception
@@ -188,6 +192,8 @@
       items:
         - name: Activer l’écriture différée des appareils
           href: how-to-connect-device-writeback.md
+        - name: Activer l’écriture différée des groupes
+          href: how-to-connect-group-writeback.md
         - name: Options de l’appareil
           href: how-to-connect-device-options.md
         - name: Fonctionnalités supplémentaires dans Azure AD Connect
@@ -258,6 +264,8 @@
           href: how-to-connect-health-diagnose-sync-errors.md
         - name: Catalogue d’alertes de Azure AD Connect Health
           href: how-to-connect-health-alert-catalog.md
+        - name: Extraction de données Azure AD Connect Health
+          href: how-to-connect-health-data-retrieval.md
     - name: Gérer la synchronisation d’Azure AD Connect
       items:
         - name: Serveur de préproduction et reprise d’activité après sinistre
@@ -335,7 +343,7 @@
     - name: Historique des versions de l’agent Authentification directe Azure AD
       href: reference-connect-pta-version-history.md
     - name: Historique des versions du connecteur
-      href: reference-connect-sync-connector-version-history.md
+      href: /microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-version-history
     - name: Comptes et autorisations
       href: reference-connect-accounts-permissions.md
     - name: "FAQ\_Azure\_AD\_Connect"
@@ -370,3 +378,5 @@
       href: reference-connect-msexchuserholdpolicies.md
     - name: "Comprendre la disparition des appareils Azure AD Connect\_1.4.xx.x"
       href: reference-connect-device-disappearance.md
+    - name: Archive de l’historique des versions Azure AD Connect
+      href: reference-connect-version-history-archive.md

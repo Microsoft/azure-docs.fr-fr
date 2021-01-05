@@ -1,18 +1,18 @@
 ---
-title: Conseils de gestion des erreurs Azure Functions
-description: Apprenez à gérer les erreurs dans Azure Functions avec des liens vers des erreurs de liaison spécifiques.
+title: Conseils sur la gestion des erreurs et les nouvelles tentatives dans Azure Functions
+description: Apprenez à gérer les erreurs et les événements de nouvelle tentative dans Azure Functions avec des liens vers des erreurs de liaison spécifiques.
 author: craigshoemaker
 ms.topic: conceptual
-ms.date: 09/11/2019
+ms.date: 10/01/2020
 ms.author: cshoe
-ms.openlocfilehash: befdb4a8cceaef18961c1e9297e23ed5d405ff50
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e52babd5b0612b4590f1422a941b25ba30c3f169
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77586187"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93284448"
 ---
-# <a name="azure-functions-error-handling"></a>Gestion d’erreurs d’Azure Functions
+# <a name="azure-functions-error-handling-and-retries"></a>Gestion des erreurs et nouvelles tentatives dans Azure Functions
 
 La gestion des erreurs dans Azure Functions est importante pour éviter des pertes de données, des événements manqués et pour superviser l’intégrité de votre application.
 
@@ -20,7 +20,7 @@ Cet article décrit les stratégies générales de gestion des erreurs, ainsi qu
 
 ## <a name="handling-errors"></a>Gestion des erreurs
 
-[!INCLUDE [bindings errors intro](../../includes/functions-bindings-errors-intro.md)]
+[!INCLUDE [bindings errors intro](../../includes/functions-bindings-errors-retries.md)]
 
 ## <a name="binding-error-codes"></a>Codes d’erreur de liaison
 
@@ -40,4 +40,4 @@ Lors de l’intégration aux services Azure, vous pouvez rencontrer des erreurs 
 
 + [Service Bus](functions-bindings-service-bus-output.md#exceptions-and-return-codes)
 
-+ [Stockage Table](functions-bindings-storage-table.md#exceptions-and-return-codes)
++ [Stockage Table](functions-bindings-storage-table-output.md#exceptions-and-return-codes)

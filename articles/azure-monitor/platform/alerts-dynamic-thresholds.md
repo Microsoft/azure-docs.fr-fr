@@ -5,12 +5,12 @@ author: yanivlavi
 ms.author: yalavi
 ms.topic: conceptual
 ms.date: 02/16/2020
-ms.openlocfilehash: 1d21c7ed93ac2ce2ab61282707d57fbf43e0b71a
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 110d4a3219b4898fa6f138e29f1112d7134f674c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261072"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012337"
 ---
 # <a name="metric-alerts-with-dynamic-thresholds-in-azure-monitor"></a>Alertes de métrique avec seuils dynamiques dans Azure Monitor
 
@@ -98,7 +98,7 @@ Pour les ressources existantes avec des données métriques suffisantes, les seu
 
 ## <a name="dynamic-thresholds-best-practices"></a>Bonnes pratiques concernant les seuils dynamiques
 
-Les seuils dynamiques peuvent être appliqués à toute plateforme ou métrique personnalisée dans Azure Monitor, tout comme ils convenaient pour les métriques d’infrastructure et d’application communes.
+Les seuils dynamiques peuvent être appliqués à la plupart des plateformes ou métriques personnalisées dans Azure Monitor, tout comme ils convenaient pour les métriques d’infrastructure et d’application communes.
 Voici une série de bonnes pratiques sur la façon de configurer des alertes sur certaines de ces métriques à l’aide de seuils dynamiques.
 
 ### <a name="dynamic-thresholds-on-virtual-machine-cpu-percentage-metrics"></a>Seuils dynamiques sur les métriques de pourcentage processeur de machine virtuelle

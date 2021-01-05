@@ -4,15 +4,15 @@ description: Affichez les notifications de maintenance pour les machines virtuel
 author: shants123
 ms.service: virtual-machines
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/19/2019
 ms.author: shants
-ms.openlocfilehash: 46fcc825ac49f0181ac74e9c3e2deaea577f3329
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 09693a09e35503a2a221f8de1903b4218b8766f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77115745"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87082441"
 ---
 # <a name="handling-planned-maintenance-notifications-using-the-portal"></a>Gestion de notifications de maintenance planifiée à l’aide du portail
 
@@ -50,7 +50,7 @@ Vous pouvez utiliser le portail Azure et rechercher les machines virtuelles sur 
 
 ## <a name="notification-and-alerts-in-the-portal"></a>Notification et alertes dans le portail
 
-Azure communique une planification de maintenance planifiée en envoyant un e-mail au propriétaire et au groupe de copropriétaires de l’abonnement. Vous pouvez ajouter des destinataires et des chaînes à cette communication en créant des alertes de journal d’activité Azure. Pour plus d’informations, consultez [Créer des alertes de journal d’activité sur les notifications de service](../azure-monitor/platform/alerts-activity-log-service-notifications.md).
+Azure communique une planification de maintenance planifiée en envoyant un e-mail au propriétaire et au groupe de copropriétaires de l’abonnement. Vous pouvez ajouter des destinataires et des chaînes à cette communication en créant des alertes de journal d’activité Azure. Pour plus d’informations, consultez [Créer des alertes de journal d’activité sur les notifications de service](../service-health/alerts-activity-log-service-notifications-portal.md).
 
 Veillez à définir le **Type d’événement** comme **Maintenance planifiée** et les **Services** comme **Groupes de machines virtuelles identiques** et/ou **machines virtuelles**.
 

@@ -3,18 +3,20 @@ title: Stratégie pour conserver les manifestes sans balise
 description: Découvrez comment activer une stratégie de rétention dans votre registre de conteneurs Azure, pour la suppression automatique de manifestes non étiquetés après une période définie.
 ms.topic: article
 ms.date: 10/02/2019
-ms.openlocfilehash: 912616b6ab95cdff91e70477c7d6de476ccfdfa7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5dda85934bb10cf16fd90381539b892df4f5445c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74454815"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83683455"
 ---
 # <a name="set-a-retention-policy-for-untagged-manifests"></a>Stratégie de rétention pour les manifestes non étiquetés
 
 Azure Container Registry vous donne la possibilité de définir une *stratégie de rétention* pour les manifestes d’image stockés qui n’ont pas d’étiquette associée (*manifestes non étiquetés*). Quand une stratégie de rétention est activée, les manifestes non étiquetés dans le registre sont automatiquement supprimés après un certain nombre de jours que vous définissez. Cette fonctionnalité empêche que le registre se remplisse d’artefacts superflus et vous permet d’économiser des coûts de stockage. Si l’attribut `delete-enabled` d’un manifeste non étiqueté a la valeur `false`, le manifeste ne peut pas être supprimé et la stratégie de conservation ne s’applique pas.
 
 Pour exécuter les exemples de commandes fournis dans cet article, vous pouvez utiliser Azure Cloud Shell ou une installation locale d’Azure CLI. Si vous souhaitez l’utiliser en local, la version 2.0.74 ou une version ultérieure est requise. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][azure-cli].
+
+Une stratégie de rétention est une fonctionnalité des registres de conteneurs **Premium**. Pour plus d’informations sur les niveaux de service de registre, consultez [Niveaux de service d’Azure Container Registry](container-registry-skus.md).
 
 > [!IMPORTANT]
 > Cette fonctionnalité est actuellement en préversion et certaines [limitations s’appliquent](#preview-limitations). Les préversions sont à votre disposition, à condition que vous acceptiez les [conditions d’utilisation supplémentaires][terms-of-use]. Certains aspects de cette fonctionnalité sont susceptibles d’être modifiés avant la mise à disposition générale.
@@ -24,7 +26,6 @@ Pour exécuter les exemples de commandes fournis dans cet article, vous pouvez u
 
 ## <a name="preview-limitations"></a>Limitations de la version préliminaire
 
-* Seul un registre de conteneurs **Premium** peut être configuré avec une stratégie de rétention. Pour plus d’informations sur les niveaux de service de registre, consultez [Références SKU Azure Container Registry](container-registry-skus.md).
 * Vous ne pouvez définir une stratégie de rétention que pour des manifestes non étiquetés.
 * La stratégie de conservation s’applique actuellement uniquement aux manifestes non étiquetés *après* l’activation de la stratégie. Les manifestes non étiquetés figurant dans le registre ne sont pas soumis à cette stratégie. Pour supprimer des manifestes non étiquetés, consultez des exemples dans [Supprimer des images conteneur dans Azure Container Registry](container-registry-delete.md).
 

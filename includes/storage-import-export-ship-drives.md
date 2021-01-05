@@ -9,10 +9,10 @@ ms.date: 04/08/2019
 ms.author: alkohli
 ms.custom: include file
 ms.openlocfilehash: 7ecc36218df23d81c4646612b5474a1465f428eb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/23/2020
 ms.locfileid: "80282475"
 ---
 Il est possible d’utiliser FedEx, UPS ou DHL pour envoyer le colis au centre de données Azure. Si vous souhaitez faire appel à un autre transporteur que FedEx/DHL, contactez l’équipe des opérations Azure Data Box à l’adresse `adbops@microsoft.com`.

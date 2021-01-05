@@ -5,12 +5,13 @@ author: radicmilos
 ms.topic: conceptual
 ms.date: 04/17/2018
 ms.author: miradic
-ms.openlocfilehash: 3d81feaede7658de69e255c32d3a3ef570156f93
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 060bb9dcdd504846c76ab4c782b2857fdddfa394
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793089"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91354800"
 ---
 # <a name="introduction-to-auto-scaling"></a>Introduction à la mise à l’échelle automatique
 La mise à l’échelle automatique est une fonctionnalité supplémentaire de Service Fabric pour mettre dynamiquement à l’échelle vos services selon la charge qu’ils présentent ou leur utilisation des ressources. La mise à l’échelle automatique offre une extensibilité idéale et permet le provisionnement d’instances ou de partitions supplémentaires de votre service à la demande. Tout le processus de mise à l’échelle automatique est automatisé et fluide, et après avoir configuré vos stratégies sur un service, aucune opération de mise à l’échelle manuelle n’est nécessaire au niveau du service. La mise à l’échelle automatique peut être activée au moment de la création du service ou à tout moment par la mise à jour du service.
@@ -50,7 +51,7 @@ Le seul mécanisme qui peut être utilisé avec ce déclencheur est PartitionIns
 * _Nombre maximum d’instances_ définit la limite supérieure de la mise à l’échelle. Si le nombre d’instances de la partition atteint cette limite, la taille du service n’est pas augmentée, quelle que soit la charge. Il est possible d’omettre cette limite en spécifiant la valeur -1 et, dans ce cas, la taille du service est augmentée autant que possible (la limite correspond au nombre de nœuds qui sont disponibles dans le cluster).
 * _Nombre minimum d’instances_ définit la limite inférieure de la mise à l’échelle. Si le nombre d’instances de la partition atteint cette limite, la taille du service n’est pas diminuée, quelle que soit la charge.
 
-## <a name="setting-auto-scaling-policy"></a>Définition de la stratégie de mise à l’échelle automatique
+## <a name="setting-auto-scaling-policy-for-instance-based-scaling"></a>Définition de la stratégie de mise à l'échelle automatique pour la mise à l'échelle basée sur les instances
 
 ### <a name="using-application-manifest"></a>Utilisation du manifeste de l’application
 ``` xml
@@ -132,7 +133,7 @@ Comme avec le mécanisme qui utilise la mise à l’échelle en ajoutant ou supp
 > [!WARNING] 
 > Quand le mécanisme AddRemoveIncrementalNamedPartitionScalingMechanism est utilisé avec des services avec état, Service Fabric ajoute ou supprime des partitions **sans notification ni avertissement**. Le repartitionnement des données n’est pas effectué lorsque le mécanisme de mise à l’échelle est déclenché. Dans le cas d’une opération de scale-out, les nouvelles partitions sont vides alors que dans le cas d’une opération de scale-in, la **partition est supprimée avec toutes les données qu’elle contient**.
 
-## <a name="setting-auto-scaling-policy"></a>Définition de la stratégie de mise à l’échelle automatique
+## <a name="setting-auto-scaling-policy-for-partition-based-scaling"></a>Définition de la stratégie de mise à l'échelle automatique pour la mise à l'échelle basée sur les partitions
 
 ### <a name="using-application-manifest"></a>Utilisation du manifeste de l’application
 ``` xml

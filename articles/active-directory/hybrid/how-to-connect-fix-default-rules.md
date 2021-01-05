@@ -8,17 +8,17 @@ editor: curtand
 ms.reviewer: darora10
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/21/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4626e0149028a140d143fb8d0969a03b732201fa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a0fc1bc3158e04c9b1f677af7ef2375ac3ed2ce7
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79036975"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91320045"
 ---
 # <a name="fix-modified-default-rules-in-azure-ad-connect"></a>Résoudre les règles par défaut modifiées dans Azure AD Connect
 
@@ -73,7 +73,7 @@ Si les extensions ne fonctionnent pas pour vous, essayez d’ajouter deux nouvel
 #### <a name="add-an-inbound-sync-rule"></a>Ajouter une règle de synchronisation entrante
 Une règle de synchronisation entrante signifie que la source de l’attribut est un espace de connecteur et la cible est le métaverse. Par exemple, pour avoir un nouveau flux d’attribut à partir d’Active Directory local vers Azure Active Directory, créez une nouvelle règle de synchronisation entrante. Lancez **l’éditeur de règles de synchronisation**, sélectionnez la direction **Entrante**, puis sélectionnez **Ajouter une nouvelle règle**. 
 
- ![Éditeur de règles de synchronisation](media/how-to-connect-fix-default-rules/default3a.png)
+ ![Capture d’écran montrant l’« éditeur de règles de synchronisation » avec le réglage « Entrante » et le bouton « Ajouter une nouvelle règle » sélectionnés.](media/how-to-connect-fix-default-rules/default3a.png)
 
 Suivez votre propre convention d’affectation de noms pour nommer la règle. Ici, nous utilisons **Personnalisé Entrante à partir d’AD - utilisateur**. Cela signifie que la règle est une règle personnalisée, et une règle entrante à partir de l’espace de connecteur Active Directory vers le métaverse.   
 
@@ -89,7 +89,7 @@ Laissez le champ **Filtre d’étendue** vide. Cela signifie que la règle s’a
 
 Laissez le champ **Règles de jointure** vide. Cela signifie que cette règle utilise la condition de jointure définie dans la règle par défaut standard. Il s’agit d’une autre raison pour ne pas désactiver ou supprimer la règle par défaut standard. S’il n’existe aucune condition de jointure, l’attribut ne circulera pas. 
 
-Ajoutez les transformations appropriées pour votre attribut. Vous pouvez affecter une constante, pour qu’une valeur constante circule vers votre attribut cible. Vous pouvez utiliser un mappage direct entre l’attribut source ou cible. Ou bien, vous pouvez utiliser une expression pour l’attribut. Voici différentes [fonctions d’expression](https://docs.microsoft.com/azure/active-directory/hybrid/reference-connect-sync-functions-reference) que vous pouvez utiliser.
+Ajoutez les transformations appropriées pour votre attribut. Vous pouvez affecter une constante, pour qu’une valeur constante circule vers votre attribut cible. Vous pouvez utiliser un mappage direct entre l’attribut source ou cible. Ou bien, vous pouvez utiliser une expression pour l’attribut. Voici différentes [fonctions d’expression](./reference-connect-sync-functions-reference.md) que vous pouvez utiliser.
 
 #### <a name="add-an-outbound-sync-rule"></a>Ajouter une règle de synchronisation sortante
 Pour lier l’attribut au répertoire cible, vous devez créer une règle sortante. Cela signifie que la source est le métaverse et la cible est le système connecté. Pour créer une règle sortante, démarrez **l’éditeur de règles de synchronisation**, réglez **Direction** sur **Sortant**, puis sélectionnez **Ajouter une nouvelle règle**. 
@@ -102,7 +102,7 @@ Comme avec la règle de trafic entrant, vous pouvez utiliser votre propre conven
 
 Laissez le **filtre d’étendue** et les **règles de jointure** vides. Renseignez la transformation comme étant constante, directe ou une expression. 
 
-Vous savez maintenant comment rendre un nouvel attribut pour un flux d’objet utilisateur à partir d’Active Directory vers Azure Active Directory. Vous pouvez utiliser ces étapes pour mapper tout attribut provenant de n’importe quel objet à la source et à la cible. Pour plus d’informations, consultez [Création de règles de synchronisation personnalisées](how-to-connect-create-custom-sync-rule.md) et [Préparer pour configurer des utilisateurs](https://docs.microsoft.com/office365/enterprise/prepare-for-directory-synchronization).
+Vous savez maintenant comment rendre un nouvel attribut pour un flux d’objet utilisateur à partir d’Active Directory vers Azure Active Directory. Vous pouvez utiliser ces étapes pour mapper tout attribut provenant de n’importe quel objet à la source et à la cible. Pour plus d’informations, consultez [Création de règles de synchronisation personnalisées](how-to-connect-create-custom-sync-rule.md) et [Préparer pour configurer des utilisateurs](/office365/enterprise/prepare-for-directory-synchronization).
 
 ### <a name="override-the-value-of-an-existing-attribute"></a>Remplacer la valeur d’un attribut existant
 Vous souhaiterez peut-être substituer la valeur d’un attribut qui a déjà été mappée. Par exemple, si vous souhaitez toujours définir une valeur null à un attribut dans Azure AD, créez simplement une règle entrante uniquement. Faites que la valeur constante, `AuthoritativeNull`, circule vers l’attribut cible. 
@@ -176,7 +176,7 @@ Sélectionnez **Aperçu...**
 
 Dans la fenêtre d’aperçu, sélectionnez **Générer un aperçu** et **Importer un flux d’attribut** dans le volet gauche.
 
-![PRÉVERSION](media/how-to-connect-fix-default-rules/default14.png)
+![Capture d’écran montrant la fenêtre « Aperçu » avec la rubrique « Importer un flux d’attribut » et le bouton « Générer un aperçu » sélectionnés.](media/how-to-connect-fix-default-rules/default14.png)
  
 Ici, notez que la règle nouvellement ajoutée est exécutée sur l’objet et qu’elle a défini l’attribut `cloudFiltered` sur True.
 
@@ -194,6 +194,3 @@ Pour corriger vos règles et remettre les paramètres par défaut, supprimez la 
 - [Matériel et conditions préalables](how-to-connect-install-prerequisites.md) 
 - [Paramètres Express](how-to-connect-install-express.md)
 - [Paramètres personnalisés](how-to-connect-install-custom.md)
-
-
-

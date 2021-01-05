@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/24/2019
-ms.openlocfilehash: deaa934b257fab74830d75e308a283e7608dc590
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 013eb8215064173e002aea23043bc2e9ba92b525
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75552591"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92545240"
 ---
 # <a name="run-apache-hive-queries-using-powershell"></a>Exécuter des requêtes Apache Hive avec PowerShell
 
@@ -28,7 +28,7 @@ Ce document fournit un exemple d’utilisation de Azure PowerShell pour exécute
 
 * Un cluster Apache Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./apache-hadoop-linux-tutorial-get-started.md).
 
-* Le [module Az](https://docs.microsoft.com/powershell/azure/overview) PowerShell installé.
+* Le [module Az](/powershell/azure/) PowerShell installé.
 
 ## <a name="run-a-hive-query"></a>Exécution d'une tâche Hive
 
@@ -52,16 +52,20 @@ Les étapes suivantes montrent comment utiliser ces cmdlets pour exécuter une t
 
 2. Ouvrez une invite de commandes **Azure PowerShell** . Accédez au répertoire du fichier `hivejob.ps1`, puis utilisez la commande suivante pour exécuter le script :
 
-        .\hivejob.ps1
+    ```azurepowershell
+    .\hivejob.ps1
+    ```
 
     Quand le script s’exécute, vous devez entrer le nom du cluster et les informations d’identification du compte HTTPS/Admin. Vous pouvez également être invité à vous connecter à votre abonnement Azure.
 
 3. Lorsque la tâche est terminée, des informations similaires au texte suivant s’affichent :
 
-        Display the standard output...
-        2012-02-03      18:35:34        SampleClass0    [ERROR] incorrect       id
-        2012-02-03      18:55:54        SampleClass1    [ERROR] incorrect       id
-        2012-02-03      19:25:27        SampleClass4    [ERROR] incorrect       id
+    ```output
+    Display the standard output...
+    2012-02-03      18:35:34        SampleClass0    [ERROR] incorrect       id
+    2012-02-03      18:55:54        SampleClass1    [ERROR] incorrect       id
+    2012-02-03      19:25:27        SampleClass4    [ERROR] incorrect       id
+    ```
 
 4. Comme mentionné précédemment, `Invoke-Hive` peut être utilisé pour exécuter une requête et attendre la réponse. Pour voir comment fonctionne Invoke-Hive, utilisez le script suivant :
 
@@ -69,16 +73,18 @@ Les étapes suivantes montrent comment utiliser ces cmdlets pour exécuter une t
 
     La sortie ressemble au texte suivant :
 
-        2012-02-03    18:35:34    SampleClass0    [ERROR]    incorrect    id
-        2012-02-03    18:55:54    SampleClass1    [ERROR]    incorrect    id
-        2012-02-03    19:25:27    SampleClass4    [ERROR]    incorrect    id
+    ```output
+    2012-02-03    18:35:34    SampleClass0    [ERROR]    incorrect    id
+    2012-02-03    18:55:54    SampleClass1    [ERROR]    incorrect    id
+    2012-02-03    19:25:27    SampleClass4    [ERROR]    incorrect    id
+    ```
 
    > [!NOTE]  
    > Pour les requêtes HiveQL plus longues, vous pouvez utiliser les fichiers de script HiveQL de PowerShell ou la cmdlet **Here-Strings** Azure PowerShell. L’extrait suivant montre comment utiliser la cmdlet `Invoke-Hive` pour exécuter un fichier de script HiveQL. Ce dernier doit être téléchargé vers wasbs://.
    >
    > `Invoke-AzHDInsightHiveJob -File "wasbs://<ContainerName>@<StorageAccountName>/<Path>/query.hql"`
    >
-   > Pour plus d'informations sur **Here-Strings**, consultez la page <a href="https://technet.microsoft.com/library/ee692792.aspx" target="_blank">Utilisation du fichier de script Here-Strings de PowerShell</a>.
+   > Pour plus d’informations sur les chaînes **Here-Strings** , consultez [HERE-STRINGS](/powershell/module/microsoft.powershell.core/about/about_quoting_rules#here-strings).
 
 ## <a name="troubleshooting"></a>Dépannage
 

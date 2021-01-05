@@ -6,12 +6,12 @@ ms.topic: tutorial
 ms.date: 07/22/2019
 ms.author: mikhegn
 ms.custom: mvc
-ms.openlocfilehash: 9951610732cbb1c5884a7b7e830033f427db0ab1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e35b655dc8b735214de891884fe40fb951dd16cd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75646005"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91441281"
 ---
 # <a name="tutorial-deploy-a-service-fabric-application-to-a-cluster-in-azure"></a>Tutoriel : Déployer une application Service Fabric sur un cluster dans Azure
 
@@ -53,7 +53,7 @@ Ouvrez l’application dans Visual Studio en tant qu’administrateur, puis gén
 
 ## <a name="create-a-cluster"></a>Créer un cluster
 
-Maintenant que l’application est prête, créez un cluster Service Fabric et déployez l’application sur celui-ci. Un [cluster Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-deploy-anywhere) est un groupe de machines virtuelles ou physiques connectées au réseau, sur lequel vos microservices sont déployés et gérés.
+Maintenant que l’application est prête, créez un cluster Service Fabric et déployez l’application sur celui-ci. Un [cluster Service Fabric](./service-fabric-deploy-anywhere.md) est un groupe de machines virtuelles ou physiques connectées au réseau, sur lequel vos microservices sont déployés et gérés.
 
 Dans ce tutoriel, vous créez un cluster de test de trois nœuds dans l’IDE Visual Studio, puis vous publiez l’application sur ce cluster. Pour plus d’informations sur la création d’un cluster de production, consultez le [tutoriel sur la création et la gestion d’un cluster](service-fabric-tutorial-create-vnet-and-windows-cluster.md). Vous pouvez également déployer l’application sur un cluster existant que vous avez précédemment créé dans le [portail Azure](https://portal.azure.com), à l’aide de scripts [PowerShell](./scripts/service-fabric-powershell-create-secure-cluster-cert.md) ou [Azure CLI](./scripts/cli-create-cluster.md), ou à partir d’un [modèle azure Resource Manager](service-fabric-tutorial-create-vnet-and-windows-cluster.md).
 
@@ -78,19 +78,19 @@ Dans **Point de terminaison de connexion**, sélectionnez **Créer un cluster**.
 
 Sous l’onglet **Cluster**, entrez le **Nom du cluster** (par exemple, « mytestcluster »), sélectionnez votre abonnement, choisissez une région pour le cluster (par exemple, USA Centre Sud), entrez le nombre de nœuds de cluster (nous recommandons trois nœuds pour un cluster de test), puis entrez un groupe de ressources (par exemple, « mytestclustergroup »). Cliquez sur **Suivant**.
 
-![Créer un cluster](./media/service-fabric-tutorial-deploy-app-to-party-cluster/create-cluster.png)
+![La capture d’écran montre l’onglet Cluster de la boîte de dialogue Créer un cluster Service Fabric.](./media/service-fabric-tutorial-deploy-app-to-party-cluster/create-cluster.png)
 
 Sous l’onglet **Certificat**, entrez le mot de passe et le chemin de sortie du certificat de cluster. Un certificat auto-signé est créé en tant que fichier PFX et enregistré dans le chemin de sortie spécifié.  Le certificat est utilisé pour la sécurité nœud à nœud et client à nœud.  N’utilisez pas un certificat auto-signé pour les clusters de production.  Ce certificat est utilisé par Visual Studio pour l’authentification auprès du cluster et le déploiement d’applications. Sélectionnez **Importer un certificat** pour installer le fichier PFX dans le magasin de certificats CurrentUser\My de votre ordinateur.  Cliquez sur **Suivant**.
 
-![Créer un cluster](./media/service-fabric-tutorial-deploy-app-to-party-cluster/certificate.png)
+![La capture d’écran montre l’onglet Certificat de la boîte de dialogue Créer un cluster Service Fabric.](./media/service-fabric-tutorial-deploy-app-to-party-cluster/certificate.png)
 
 Sous l’onglet **Détail de la machine virtuelle**, entrez le **Nom d’utilisateur** et le **Mot de passe** du compte administrateur du cluster.  Sélectionnez l’**Image de machine virtuelle** pour les nœuds de cluster et la **Taille de machine virtuelle** pour chaque nœud du cluster.  Cliquez sur l’onglet **Avancé**.
 
-![Créer un cluster](./media/service-fabric-tutorial-deploy-app-to-party-cluster/vm-detail.png)
+![La capture d’écran montre l’onglet Détail de la machine virtuelle de la boîte de dialogue Créer un cluster Service Fabric.](./media/service-fabric-tutorial-deploy-app-to-party-cluster/vm-detail.png)
 
 Dans **Ports**, entrez le point de terminaison de service VotingWeb de l’étape précédente (par exemple, 8080).  Une fois le cluster créé, ces ports d’application sont ouverts dans l’équilibreur de charge Azure pour transférer le trafic vers le cluster.  Cliquez sur **Créer** pour créer le cluster, ce qui prend plusieurs minutes.
 
-![Créer un cluster](./media/service-fabric-tutorial-deploy-app-to-party-cluster/advanced.png)
+![La capture d’écran montre l’onglet Avancé de la boîte de dialogue Créer un cluster Service Fabric.](./media/service-fabric-tutorial-deploy-app-to-party-cluster/advanced.png)
 
 ## <a name="publish-the-application-to-the-cluster"></a>Publier l’application sur le cluster
 

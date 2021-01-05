@@ -2,17 +2,17 @@
 title: Passer au protocole OpenVPN ou IKEv2 à partir de SSTP | Passerelle VPN Azure
 description: Cet article vous aide à comprendre les moyens de surmonter la limite de 128 connexions simultanées de SSTP.
 services: vpn-gateway
-author: anzaman
+author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 03/30/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: alzam
-ms.openlocfilehash: 5500d993a4bf3c664f14182d983f9abed8ebb08a
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: e2fa265e580bc0e752498284ed50e398b59423fd
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80398365"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97657139"
 ---
 # <a name="transition-to-openvpn-protocol-or-ikev2-from-sstp"></a>Passer au protocole OpenVPN ou à IKEv2 à partir de SSTP
 
@@ -47,7 +47,7 @@ L’ajout d’IKEv2 à une passerelle VPN SSTP existante n’affecte pas les cli
 
 Pour ajouter IKEv2 à une passerelle existante, accédez simplement à l’onglet « Configuration de point à site » sous la passerelle de réseau virtuel dans le portail et sélectionnez **IKEv2 et SSTP (SSL)** dans la liste déroulante.
 
-![point à site](./media/ikev2-openvpn-from-sstp/sstptoikev2.png "IKEv2")
+![Capture d’écran montrant la page « Configuration de point à site » avec la liste déroulante « Type de tunnel », et l’option « IKEv2 et SSTP(SSL) » sélectionnée.](./media/ikev2-openvpn-from-sstp/sstptoikev2.png "IKEv2")
 
 
 ### <a name="option-2---remove-sstp-and-enable-openvpn-on-the-gateway"></a>Option 2 - Supprimer SSTP et activer OpenVPN sur la passerelle
@@ -58,9 +58,9 @@ Vous pouvez activer OpenVPN en parallèle de IKEv2 si vous le souhaitez. OpenVPN
 
 ![point à site](./media/ikev2-openvpn-from-sstp/sstptoopenvpn.png "OpenVPN")
 
-Une fois la passerelle configurée, les clients existants ne pourront se connecter que lorsque vous aurez [déployé et configuré les clients OpenVPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-openvpn-clients).
+Une fois la passerelle configurée, les clients existants ne pourront se connecter que lorsque vous aurez [déployé et configuré les clients OpenVPN](./vpn-gateway-howto-openvpn-clients.md).
 
-Si vous utilisez Windows 10, vous pouvez également utiliser [Azure VPN Client pour Windows](https://docs.microsoft.com/azure/vpn-gateway/openvpn-azure-ad-client#to-download-the-azure-vpn-client)
+Si vous utilisez Windows 10, vous pouvez également utiliser [Azure VPN Client pour Windows](./openvpn-azure-ad-client.md#to-download-the-azure-vpn-client)
 
 
 ## <a name="frequently-asked-questions"></a>Forum aux questions
@@ -96,41 +96,41 @@ Le fichier zip fournit également les valeurs de certains paramètres importants
 
 **IKEv2**
 
-|**Cipher** | **Intégrité** | **PRF** | **Groupe DH** |
-|---        | ---            | ---        | ---     |
-|GCM_AES256 |    GCM_AES256    | SHA384    | GROUP_24 |
-|GCM_AES256 |    GCM_AES256    | SHA384    | GROUP_14 |
-|GCM_AES256 |    GCM_AES256    | SHA384    | GROUP_ECP384 |
-|GCM_AES256 |    GCM_AES256    | SHA384    | GROUP_ECP256 |
-|GCM_AES256 |    GCM_AES256    | SHA256    | GROUP_24 |
-|GCM_AES256 |    GCM_AES256    | SHA256    | GROUP_14 |
-|GCM_AES256 |    GCM_AES256    | SHA256    | GROUP_ECP384 |
-|GCM_AES256 |    GCM_AES256    | SHA256    | GROUP_ECP256 |
-|AES256     |   SHA384        | SHA384    | GROUP_24 |
-|AES256     |   SHA384        | SHA384    | GROUP_14 |
-|AES256     |   SHA384        | SHA384    | GROUP_ECP384 |
-|AES256     |   SHA384        | SHA384    | GROUP_ECP256 |
-|AES256     |   SHA256        | SHA256    | GROUP_24 |
-|AES256     |   SHA256        | SHA256    | GROUP_14 |
-|AES256     |   SHA256        | SHA256    | GROUP_ECP384 |
-|AES256     |   SHA256        | SHA256    | GROUP_ECP256 |
-|AES256     |   SHA256        | SHA256    | GROUP_2 |
+| **Cipher** | **Intégrité** | **PRF** | **Groupe DH** |
+|--|--|--|--|
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_ECP256 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA384 | SHA384 | GROUP_24 |
+| AES256 | SHA384 | SHA384 | GROUP_14 |
+| AES256 | SHA384 | SHA384 | GROUP_ECP384 |
+| AES256 | SHA384 | SHA384 | GROUP_ECP256 |
+| AES256 | SHA256 | SHA256 | GROUP_24 |
+| AES256 | SHA256 | SHA256 | GROUP_14 |
+| AES256 | SHA256 | SHA256 | GROUP_ECP384 |
+| AES256 | SHA256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA256 | SHA256 | GROUP_2 |
 
 **IPsec**
 
-|**Cipher** | **Intégrité** | **Groupe PFS** |
-|---        | ---            | ---        |
-|GCM_AES256    | GCM_AES256 | GROUP_NONE |
-|GCM_AES256    | GCM_AES256 | GROUP_24 |
-|GCM_AES256    | GCM_AES256 | GROUP_14 |
-|GCM_AES256    | GCM_AES256 | GROUP_ECP384 |
-|GCM_AES256    | GCM_AES256 | GROUP_ECP256 |
-| AES256    | SHA256 | GROUP_NONE |
-| AES256    | SHA256 | GROUP_24 |
-| AES256    | SHA256 | GROUP_14 |
-| AES256    | SHA256 | GROUP_ECP384 |
-| AES256    | SHA256 | GROUP_ECP256 |
-| AES256    | SHA1 | GROUP_NONE |
+| **Cipher** | **Intégrité** | **Groupe PFS** |
+|--|--|--|
+| GCM_AES256 | GCM_AES256 | GROUP_NONE |
+| GCM_AES256 | GCM_AES256 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | GROUP_ECP256 |
+| AES256 | SHA256 | GROUP_NONE |
+| AES256 | SHA256 | GROUP_24 |
+| AES256 | SHA256 | GROUP_14 |
+| AES256 | SHA256 | GROUP_ECP384 |
+| AES256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA1 | GROUP_NONE |
 
 ### <a name="what-tls-policies-are-configured-on-vpn-gateways-for-p2s"></a><a name="TLS policies"></a>Quelles stratégies TLS sont configurées sur les passerelles VPN pour P2S ?
 **TLS**

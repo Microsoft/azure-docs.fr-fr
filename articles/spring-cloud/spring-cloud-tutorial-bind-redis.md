@@ -1,29 +1,32 @@
 ---
-title: Tutoriel - Lier Azure Cache for Redis à votre application Azure Spring Cloud
-description: Ce tutoriel vous montre comment lier Azure Cache pour Redis à votre application Azure Spring Cloud
+title: Lier Azure Cache for Redis à votre application Azure Spring Cloud
+description: Découvrez comment lier Cache Azure pour Redis à votre application Azure Spring Cloud
 author: bmitchell287
 ms.service: spring-cloud
-ms.topic: tutorial
+ms.topic: how-to
 ms.date: 10/31/2019
 ms.author: brendm
-ms.openlocfilehash: 94f7b5a2363b7c53e0f70500e5a0a8cb6f64e611
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-java
+ms.openlocfilehash: ef77ba6e34f2a699c8c4f06fde8cb602ae98c728
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76277516"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90885667"
 ---
 # <a name="bind-azure-cache-for-redis-to-your-azure-spring-cloud-application"></a>Lier Azure Cache for Redis à votre application Azure Spring Cloud 
 
+**Cet article s’applique à :** ✔️ Java
+
 Au lieu de configurer manuellement vos applications Spring Boot, vous pouvez lier automatiquement certains services Azure à vos applications à l’aide d’Azure Spring Cloud. Cet article explique comment lier votre application à Azure Cache for Redis.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Une instance Azure Spring Cloud déployée
 * Une instance du service Cache Azure pour Redis
 * L’extension Azure Spring Cloud pour Azure CLI
 
-Si vous n’avez pas encore déployé d’instance Azure Spring Cloud, suivez les étapes décrites dans ce [guide de démarrage rapide pour déployer une application Spring Cloud](spring-cloud-quickstart-launch-app-portal.md).
+Si vous n’avez pas encore déployé d’instance Azure Spring Cloud, suivez les étapes décrites dans ce [guide de démarrage rapide pour déployer une application Spring Cloud](spring-cloud-quickstart.md).
 
 ## <a name="bind-azure-cache-for-redis"></a>Lier Cache Azure pour Redis
 
@@ -55,7 +58,4 @@ Si vous n’avez pas encore déployé d’instance Azure Spring Cloud, suivez le
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez découvert comment lier votre application Azure Spring Cloud à Azure Cache for Redis. Pour plus d’informations sur la liaison de services à votre application, passez au tutoriel concernant la liaison d’une application à une instance d’Azure Database pour MySQL.
-
-> [!div class="nextstepaction"]
-> [En savoir plus sur la liaison à une instance Azure Database pour MySQL](spring-cloud-tutorial-bind-mysql.md)
+Dans cet article, vous avez découvert comment lier votre application Azure Spring Cloud à Azure Cache pour Redis. Pour en savoir plus sur la liaison de services à votre application, consultez [Lier à une instance Azure Database pour MySQL](spring-cloud-tutorial-bind-mysql.md).

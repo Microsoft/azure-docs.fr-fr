@@ -3,34 +3,29 @@ title: Améliorer le classement de recherche avec des profils de score
 titleSuffix: Azure Cognitive Search
 description: Améliorer le classement par ordre de priorité des scores des résultats de Recherche cognitive Azure en ajoutant des profils de score.
 manager: nitinme
-author: Brjohnstmsft
-ms.author: brjohnst
+author: shmed
+ms.author: ramero
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/28/2019
-translation.priority.mt:
-- de-de
-- es-es
-- fr-fr
-- it-it
-- ja-jp
-- ko-kr
-- pt-br
-- ru-ru
-- zh-cn
-- zh-tw
-ms.openlocfilehash: c702ce72492201413d6c72af9dbf37347e49afdd
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 05/06/2020
+ms.openlocfilehash: 97797e309c32c6ea996d5ae1901b9a266a683173
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82231099"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91537631"
 ---
 # <a name="add-scoring-profiles-to-an-azure-cognitive-search-index"></a>Ajouter des profils de score à un index Recherche cognitive Azure
 
 Un *scoring* détermine un score de recherche pour chaque élément dans un jeu de résultats classés par rang. Un score de recherche est attribué à chaque élément d'un jeu de résultats de recherche. Ils sont ensuite classés du rang le plus élevé au rang le plus bas.
 
  Le service Recherche cognitive Azure utilise un score par défaut pour calculer un score initial, mais vous pouvez personnaliser le calcul à l'aide d'un *profil de score*. Les profils de score vous permettent de mieux contrôler le classement d'éléments dans des résultats de recherche. Par exemple, vous pouvez privilégier des éléments en fonction de leur revenu potentiel, promouvoir des éléments plus récents, voire en favoriser d'autres restés trop longtemps en stock.  
+
+ Le segment vidéo suivant permet d’accéder rapidement au fonctionnement des profils de score dans Recherche cognitive Azure.
+ 
+> [!VIDEO https://www.youtube.com/embed/Y_X6USgvB1g?version=3&start=463&end=970]
+
+## <a name="scoring-profile-definitions"></a>Définitions de profil de score
 
  Un profil de score fait partie de la définition d'index, composée de champs, fonctions et paramètres pondérés.  
 
@@ -66,10 +61,10 @@ Un *scoring* détermine un score de recherche pour chaque élément dans un jeu 
  Pour utiliser ce profil de score, votre requête est formulée de façon à spécifier le profil de la chaîne de caractères de requête. Dans la requête ci-dessous, notez la présence du paramètre de requête `scoringProfile=geo`.  
 
 ```  
-GET /indexes/hotels/docs?search=inn&scoringProfile=geo&scoringParameter=currentLocation--122.123,44.77233&api-version=2019-05-06 
+GET /indexes/hotels/docs?search=inn&scoringProfile=geo&scoringParameter=currentLocation--122.123,44.77233&api-version=2020-06-30 
 ```  
 
- Cette requête effectue une recherche du terme « inn », puis transmet l'emplacement actuel. Notez que cette requête inclut d’autres paramètres, tels que `scoringParameter`. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents).  
+ Cette requête effectue une recherche du terme « inn », puis transmet l'emplacement actuel. Notez que cette requête inclut d’autres paramètres, tels que `scoringParameter`. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents).  
 
  Pour voir un exemple plus détaillé de profil de score, cliquez sur [Exemple](#bkmk_ex)  
 
@@ -82,7 +77,7 @@ Le score de recherche est calculé sur la base de propriétés statistiques des 
 
  Des valeurs de score de recherche peuvent être répétées dans un jeu de résultats. Par exemple, vous pouvez avoir dix éléments dont le score est 1,2, vingt éléments dont le score est 1,0, et vingt éléments dont le score est 0,5. Quand plusieurs correspondances ont le même score de recherche, le classement des éléments ayant le même score n'est ni défini ni stable. Si vous exécutez de nouveau la requête, il se peut que des éléments changent de position. Si deux éléments ont un score identique, il est impossible de prédire celui qui apparaîtra en première position.  
 
-## <a name="when-to-use-custom-scoring"></a>Quand utiliser un calcul de score personnalisé  
+## <a name="when-to-add-scoring-logic"></a>Quand ajouter une logique de notation 
  Quand le classement par défaut produit des résultats trop éloignés de vos objectifs, vous devez créer un ou plusieurs profils de calcul de score. Par exemple, vous pouvez décider que la pertinence de la recherche doit privilégier les éléments récemment ajoutés. De même, il se peut qu'un champ affiche une marge bénéficiaire, ou un autre un revenu potentiel. La volonté de privilégier les correspondances qui génèrent des bénéfices pour votre entreprise peut être un facteur important dans la décision d'utiliser des profils de calcul de score.  
 
  Un classement basé sur la pertinence peut également être mis en œuvre par l'intermédiaire de profils de calcul de score. Songez aux pages de résultats de recherche que vous avez utilisées par le passé, qui vous permettaient de trier par prix, date, évaluation ou pertinence. Dans Recherche cognitive Azure, les profils de calcul de score déterminent l'option « pertinence ». Vous contrôlez la définition de la pertinence en fonction de vos objectifs et du type d'expérience de recherche que vous souhaitez.  
@@ -162,16 +157,16 @@ Le score de recherche est calculé sur la base de propriétés statistiques des 
 
  Commencez par le [Modèle](#bkmk_template) fourni dans cette rubrique.  
 
- Donnez-lui un nom. Les profils de calcul de score sont facultatifs mais, si vous en ajoutez un, le nom est obligatoire. Veillez à respecter les conventions d'affectation des noms pour les champs (commencer par une lettre, en évitant les caractères spéciaux et les mots réservés). Consultez [Règles d'attribution de noms &#40;Recherche cognitive Azure&#41; ](https://docs.microsoft.com/rest/api/searchservice/naming-rules) pour obtenir la liste complète.  
+ Donnez-lui un nom. Les profils de calcul de score sont facultatifs mais, si vous en ajoutez un, le nom est obligatoire. Veillez à respecter les conventions d'affectation des noms pour les champs (commencer par une lettre, en évitant les caractères spéciaux et les mots réservés). Consultez [Règles d'attribution de noms &#40;Recherche cognitive Azure&#41; ](/rest/api/searchservice/naming-rules) pour obtenir la liste complète.  
 
  Le corps du profil de calcul de score est construit à partir de champs et de fonctions pondérés.  
 
 |||  
 |-|-|  
 |**Pondérations**|Spécifiez les paires nom-valeur qui affectent une pondération relative à un champ. Dans l’[exemple](#bkmk_ex), les valeurs de pondération des champs albumTitle, genre et artistName sont respectivement 1,5, 5 et 2. Pourquoi la pondération du champ genre est-elle beaucoup plus élevée que celle des autres champs ? Si la recherche est effectuée sur des données relativement homogènes (comme c'est le cas du « genre » dans le `musicstoreindex`), il se peut que vous ayez besoin d'une variance plus importante dans les pondérations relatives. Par exemple, dans le `musicstoreindex`, « rock » apparaît à la fois comme genre et dans des descriptions de genre formulées de façon identique. Si vous souhaitez que le genre ait une pondération plus élevée que la description du genre, la pondération relative du champ Genre doit être sensiblement plus importante.|  
-|**Fonctions**|Utilisées lorsque des calculs supplémentaires sont nécessaires dans des contextes spécifiques. Les valeurs valides sont `freshness`, `magnitude`, `distance` et `tag`. Chaque fonction a des paramètres qui sont uniques à cette dernière.<br /><br /> -   `freshness` doit être utilisée pour privilégier des résultats en fonction de la nouveauté ou de l’ancienneté d’un élément. Cette fonction peut être utilisée uniquement avec des champs `datetime` (edm.DataTimeOffset). Notez que l’attribut `boostingDuration` est utilisé uniquement avec la fonction `freshness`.<br />-   `magnitude` doit être utilisée pour privilégier des résultats en fonction de l’importance ou de la faiblesse d’une valeur numérique. Parmi les scénarios qui appellent cette fonction figurent la valorisation de la marge bénéficiaire, du prix le plus élevé, du prix le plus bas ou du nombre de téléchargements. Cette fonction peut être utilisée uniquement avec des champs double et integer.<br />     Pour la fonction `magnitude`, vous pouvez inverser la plage (de la valeur la plus élevée à la valeur la plus basse) si vous souhaitez inverser le schéma (par exemple, pour privilégier des éléments dont le prix est plus bas par rapport aux éléments dont le prix est plus élevé). Dans une gamme de prix allant de $100USD à $1USD, vous devez définir `boostingRangeStart` sur 100 et `boostingRangeEnd` sur 1 pour privilégier les éléments dont le prix est plus bas.<br />-   `distance` doit être utilisée pour privilégier des résultats en fonction de la proximité ou de l’emplacement géographique. Cette fonction peut être utilisée uniquement avec des champs `Edm.GeographyPoint` .<br />-   `tag` doit être utilisée pour privilégier des résultats en fonction de balises communes entre des documents et des requêtes de recherche. Cette fonction peut être utilisée uniquement avec les champs `Edm.String` et `Collection(Edm.String)`.<br /><br /> **Règles d'utilisation des fonctions**<br /><br /> Le type de fonction (`freshness`, `magnitude`, `distance`), `tag` doit être en lettres minuscules.<br /><br /> Les fonctions ne peuvent pas contenir de valeurs null ou vides. En particulier, si vous incluez la valeur fieldname, vous devez la spécifier.<br /><br /> Les fonctions ne peuvent être appliquées qu'à des champs filtrables. Consultez [Créer un index &#40;API REST de Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/create-index) pour plus d’informations sur les champs filtrables.<br /><br /> Vous ne pouvez pas appliquer de fonctions à des champs définis dans la collection de champs d'un index.|  
+|**Fonctions**|Utilisées lorsque des calculs supplémentaires sont nécessaires dans des contextes spécifiques. Les valeurs valides sont `freshness`, `magnitude`, `distance` et `tag`. Chaque fonction a des paramètres qui sont uniques à cette dernière.<br /><br /> -   `freshness` doit être utilisée pour privilégier des résultats en fonction de la nouveauté ou de l’ancienneté d’un élément. Cette fonction peut être utilisée uniquement avec des champs `datetime` (edm.DataTimeOffset). Notez que l’attribut `boostingDuration` est utilisé uniquement avec la fonction `freshness`.<br />-   `magnitude` doit être utilisée pour privilégier des résultats en fonction de l’importance ou de la faiblesse d’une valeur numérique. Parmi les scénarios qui appellent cette fonction figurent la valorisation de la marge bénéficiaire, du prix le plus élevé, du prix le plus bas ou du nombre de téléchargements. Cette fonction peut être utilisée uniquement avec des champs double et integer.<br />     Pour la fonction `magnitude`, vous pouvez inverser la plage (de la valeur la plus élevée à la valeur la plus basse) si vous souhaitez inverser le schéma (par exemple, pour privilégier des éléments dont le prix est plus bas par rapport aux éléments dont le prix est plus élevé). Dans une gamme de prix allant de $100USD à $1USD, vous devez définir `boostingRangeStart` sur 100 et `boostingRangeEnd` sur 1 pour privilégier les éléments dont le prix est plus bas.<br />-   `distance` doit être utilisée pour privilégier des résultats en fonction de la proximité ou de l’emplacement géographique. Cette fonction peut être utilisée uniquement avec des champs `Edm.GeographyPoint` .<br />-   `tag` doit être utilisée pour privilégier des résultats en fonction de balises communes entre des documents et des requêtes de recherche. Cette fonction peut être utilisée uniquement avec les champs `Edm.String` et `Collection(Edm.String)`.<br /><br /> **Règles d'utilisation des fonctions**<br /><br /> Le type de fonction (`freshness`, `magnitude`, `distance`), `tag` doit être en lettres minuscules.<br /><br /> Les fonctions ne peuvent pas contenir de valeurs null ou vides. En particulier, si vous incluez la valeur fieldname, vous devez la spécifier.<br /><br /> Les fonctions ne peuvent être appliquées qu'à des champs filtrables. Consultez [Créer un index &#40;API REST de Recherche cognitive Azure&#41;](/rest/api/searchservice/create-index) pour plus d’informations sur les champs filtrables.<br /><br /> Vous ne pouvez pas appliquer de fonctions à des champs définis dans la collection de champs d'un index.|  
 
- Une fois l'index défini, générez-le en chargeant le schéma d'index, puis des documents. Consultez [Créer un index &#40;API REST de Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/create-index) et [Ajouter, mettre à jour ou supprimer des documents &#40;API REST de Recherche cognitive Azure&#41; ](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents) pour obtenir des instructions relatives à ces opérations. Une fois l'index généré, vous disposez d'un profil de calcul de score fonctionnel qui opère avec vos données de recherche.  
+ Une fois l'index défini, générez-le en chargeant le schéma d'index, puis des documents. Consultez [Créer un index &#40;API REST de Recherche cognitive Azure&#41;](/rest/api/searchservice/create-index) et [Ajouter, mettre à jour ou supprimer des documents &#40;API REST de Recherche cognitive Azure&#41; ](/rest/api/searchservice/addupdate-or-delete-documents) pour obtenir des instructions relatives à ces opérations. Une fois l'index généré, vous disposez d'un profil de calcul de score fonctionnel qui opère avec vos données de recherche.  
 
 ##  <a name="template"></a><a name="bkmk_template"></a> Modèle  
  Cette section présente la syntaxe et le modèle de profils de calcul de score. Pour obtenir la description des attributs, consultez [Référence des attributs d'index](#bkmk_indexref) dans la section suivante.  
@@ -249,17 +244,17 @@ Le score de recherche est calculé sur la base de propriétés statistiques des 
 |`freshness`|La fonction de calcul de score freshness permet de modifier les scores de classement d'éléments en fonction des valeurs des champs `DateTimeOffset`. Par exemple, un élément dont la date est plus récente peut être classé plus haut que des éléments plus anciens.<br /><br /> Il est également possible de classer les éléments tels que les événements de calendrier comportant des dates ultérieures afin que les éléments plus proches de la date du jour soient classés plus haut que les éléments plus éloignés dans le temps.<br /><br /> Dans la version de service actuelle, une extrémité de la plage doit être définie sur l'heure réelle. L’autre extrémité est une heure dans le passé selon l’attribut `boostingDuration`. Pour privilégier une plage d’heures à venir, utilisez un attribut `boostingDuration` négatif.<br /><br /> La vitesse à laquelle la valorisation passe d'une plage maximale à une plage minimale est déterminée par l'interpolation appliquée au profil de calcul de score (voir la figure ci-dessous). Pour inverser le facteur de valorisation appliqué, choisissez un facteur inférieur à 1.|  
 |`freshness` &#124; `boostingDuration`|Définit une période d'expiration après laquelle la valorisation s'arrête pour un document spécifique. Pour plus d’informations sur la syntaxe et des exemples, consultez [Set boostingDuration](#bkmk_boostdur) dans la section suivante.|  
 |`distance`|La fonction de calcul de score à distance est utilisée pour affecter le score de documents sur la base de leur proximité ou de l'éloignement par rapport à un emplacement géographique de référence. L’emplacement de référence est indiqué comme partie intégrante de la requête dans un paramètre (à l’aide de l'option de chaîne `scoringParameterquery` ) en tant qu’argument lon,lat.|  
-|`distance` &#124; `referencePointParameter`|Paramètre à transmettre dans des requêtes, à utiliser comme emplacement de référence. `scoringParameter` est un paramètre de requête. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents).|  
+|`distance` &#124; `referencePointParameter`|Paramètre à transmettre dans des requêtes, à utiliser comme emplacement de référence. `scoringParameter` est un paramètre de requête. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents).|  
 |`distance` &#124; `boostingDistance`|Nombre indiquant la distance en kilomètres par rapport à l'emplacement de référence où la valorisation se termine.|  
 |`tag`|La fonction de calcul de score de balises est utilisée pour affecter le score de documents sur la base de balises dans des documents et des requêtes de recherche. Les documents contenant des balises communes avec la requête de recherche seront privilégiés. Les balises pour la requête de recherche sont fournies en tant que paramètre de calcul de score dans chaque requête de recherche (à l’aide de l'option de chaîne `scoringParameterquery`).|  
-|`tag` &#124; `tagsParameter`|Paramètre à transmettre dans des requêtes pour spécifier des balises pour une requête spécifique. `scoringParameter` est un paramètre de requête. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents).|  
+|`tag` &#124; `tagsParameter`|Paramètre à transmettre dans des requêtes pour spécifier des balises pour une requête spécifique. `scoringParameter` est un paramètre de requête. Les paramètres de requête sont décrits dans [Recherche dans des documents &#40;API REST de Recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents).|  
 |`functionAggregation`|facultatif. S'applique uniquement quand des fonctions sont spécifiées. Les valeurs autorisées sont les suivantes : sum (par défaut), average, minimum, maximum et firstMatching. Un score de recherche est une valeur unique calculée à partir de plusieurs variables, notamment plusieurs fonctions. Cet attribut indique comment les valorisations de toutes les fonctions sont combinées en une valorisation agrégée qui est ensuite appliquée au score du document de base. Le score de base dépend de la valeur [tf-idf](http://www.tfidf.com/) calculée à partir du document et de la requête de recherche.|  
 |`defaultScoringProfile`|Lors de l'exécution d'une requête de recherche, le calcul de score par défaut est utilisé ([tf-idf](http://www.tfidf.com/) uniquement) si aucun profil de calcul de score n'est spécifié.<br /><br /> Un nom de profil de calcul de score par défaut peut être défini ici de façon à ce que Recherche cognitive Azure utilise ce profil quand aucun profil spécifique n'est fourni dans la requête de recherche.|  
 
 ##  <a name="set-interpolations"></a><a name="bkmk_interpolation"></a>Définition d'interpolations  
  Les interpolations vous permettent de définir la forme de la pente utilisée pour calculer les scores. Le score allant d'élevé à faible, la pente est toujours décroissante, mais l’interpolation détermine la courbe de la pente descendante. Les interpolations utilisables sont les suivantes :  
 
-|||  
+| Interpolation | Description |  
 |-|-|  
 |`linear`|pour les éléments qui s’inscrivent dans la plage de max à min, la valorisation appliquée décroît de manière constante. L'interpolation de type Linear est l'interpolation par défaut pour un profil de calcul de score.|  
 |`constant`|Pour les éléments qui s'inscrivent dans la plage du début à la fin, une valorisation constante est appliquée aux résultats du classement.|  
@@ -286,6 +281,6 @@ Le score de recherche est calculé sur la base de propriétés statistiques des 
 
 ## <a name="see-also"></a>Voir aussi  
 
-+ [Référence d’API REST](https://docs.microsoft.com/rest/api/searchservice/)   
-+ [Créer une API d’index](https://docs.microsoft.com/rest/api/searchservice/create-index)   
-+ [Kit de développement logiciel (SDK) de Recherche cognitive Azure .NET](https://docs.microsoft.com/dotnet/api/overview/azure/search?view=azure-dotnet)  
++ [Référence d’API REST](/rest/api/searchservice/)
++ [Créer une API d’index](/rest/api/searchservice/create-index)
++ [Kit de développement logiciel (SDK) de Recherche cognitive Azure .NET](/dotnet/api/overview/azure/search?)

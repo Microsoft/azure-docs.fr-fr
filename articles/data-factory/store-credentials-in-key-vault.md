@@ -11,10 +11,10 @@ ms.topic: conceptual
 ms.date: 04/13/2020
 ms.author: jingwang
 ms.openlocfilehash: 22ab4433d84db926733fd0b18035875e63322dda
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81451684"
 ---
 # <a name="store-credential-in-azure-key-vault"></a>Stocker des informations d’identification dans Azure Key Vault

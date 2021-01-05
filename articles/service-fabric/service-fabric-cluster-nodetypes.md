@@ -4,17 +4,16 @@ description: Découvrez la relation entre les types de nœuds Azure Service Fabr
 ms.topic: conceptual
 ms.date: 03/23/2018
 ms.author: pepogors
-ms.custom: sfrev
-ms.openlocfilehash: 03076a711041812f7587aa1c388b0889b49725d2
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 7df7ed9fa1f872cd9554dcf4c8880b7c9d5e53c4
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82787131"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576398"
 ---
 # <a name="azure-service-fabric-node-types-and-virtual-machine-scale-sets"></a>Types de nœuds Azure Service Fabric et groupes de machines virtuelles identiques
 
-Les [groupes de machines virtuelles identiques](/azure/virtual-machine-scale-sets) représentent une ressource de calcul Azure. Vous pouvez utiliser des groupes identiques pour déployer et gérer une collection de machines virtuelles comme un groupe. Chaque type de nœud que vous définissez dans un cluster Azure Service Fabric configure exactement un groupe identique : plusieurs types de nœuds ne peuvent pas être sauvegardés par le même groupe identique et un type de nœud ne doit pas (dans la plupart des cas) être sauvegardé par plusieurs groupes identiques. Une exception à cette règle est observée dans le rare cas de la [mise à l’échelle verticale](service-fabric-best-practices-capacity-scaling.md#vertical-scaling-considerations) d’un type de nœud, lorsque vous avez temporairement deux groupes identiques avec la même valeur `nodeTypeRef`, tandis que les réplicas sont migrés de l’original au groupe identique mis à niveau.
+Les [groupes de machines virtuelles identiques](../virtual-machine-scale-sets/index.yml) représentent une ressource de calcul Azure. Vous pouvez utiliser des groupes identiques pour déployer et gérer une collection de machines virtuelles comme un groupe. Chaque type de nœud que vous définissez dans un cluster Azure Service Fabric configure exactement un groupe identique : plusieurs types de nœuds ne peuvent pas être sauvegardés par le même groupe identique et un type de nœud ne doit pas (dans la plupart des cas) être sauvegardé par plusieurs groupes identiques. Une exception à cette règle est observée dans le rare cas de la [mise à l’échelle verticale](service-fabric-best-practices-capacity-scaling.md#vertical-scaling-considerations) d’un type de nœud, lorsque vous avez temporairement deux groupes identiques avec la même valeur `nodeTypeRef`, tandis que les réplicas sont migrés de l’original au groupe identique mis à niveau.
 
 Le runtime Service Fabric est installé sur chaque machine virtuelle dans le groupe identique par l’extension de machine virtuelle *Microsoft.Azure.ServiceFabric*. Vous pouvez faire monter ou descendre en puissance chaque type de nœud de manière indépendante, modifier la référence SKU du système d’exploitation s’exécutant sur chaque nœud de cluster, avoir différents ensembles de ports ouverts et utiliser différentes métriques de capacité.
 
@@ -32,7 +31,7 @@ Quand vous effectuez un scale-out d’un groupe identique, une nouvelle instance
 
 Si vous avez déployé votre cluster dans le portail Azure ou si vous avez utilisé l’exemple de modèle Azure Resource Manager, toutes les ressources d’un groupe de ressources sont répertoriées. Vous pouvez voir les équilibreurs de charge de chaque groupe identique ou type de nœud. Le nom d’un équilibreur de charge utilise le format suivant : **LB-&lt;nom du type de nœud&gt;** . La figure suivante en propose un exemple (LB-sfcluster4doc-0) :
 
-![Ressources][Resources]
+![Capture d’écran montrant un groupe de ressources avec deux équilibreurs de charge mis en surbrillance.][Resources]
 
 ## <a name="service-fabric-virtual-machine-extension"></a>Extension de machine virtuelle Service Fabric
 

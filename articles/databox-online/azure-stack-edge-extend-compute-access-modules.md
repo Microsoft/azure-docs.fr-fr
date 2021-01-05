@@ -1,28 +1,28 @@
 ---
-title: Gérer le réseau de calcul sur Azure Stack Edge pour accéder aux modules | Microsoft Docs
-description: Décrit comment étendre le réseau de calcul sur Azure Stack Edge pour accéder aux modules au moyen d’une adresse IP externe.
+title: Gérer le réseau de calcul sur Azure Stack Edge Pro pour accéder aux modules | Microsoft Docs
+description: Décrit comment étendre le réseau de calcul sur Azure Stack Edge Pro pour accéder aux modules au moyen d’une adresse IP externe.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/17/2019
 ms.author: alkohli
-ms.openlocfilehash: b352458b768c997f295596a7cbd5e8c02f843a9f
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 19c92deb58ac51aa882e7123b9a90aa3eae627d0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82568754"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90894111"
 ---
-# <a name="enable-compute-network-on-your-azure-stack-edge"></a>Activer le réseau de calcul sur Azure Stack Edge
+# <a name="enable-compute-network-on-your-azure-stack-edge-pro"></a>Activer le réseau de calcul sur Azure Stack Edge Pro
 
-Cet article décrit comment les modules en cours d’exécution sur Azure Stack Edge peuvent accéder au réseau de calcul activé sur l’appareil.
+Cet article décrit comment les modules en cours d’exécution sur Azure Stack Edge Pro peuvent accéder au réseau de calcul activé sur l’appareil.
 
 Pour configurer le réseau, vous devez procédez comme suit :
 
-- Activer une interface réseau sur votre appareil Azure Stack Edge pour le calcul
-- Ajouter un module pour accéder au réseau de calcul sur Azure Stack Edge
+- Activer une interface réseau sur votre appareil Azure Stack Edge Pro pour le calcul
+- Ajouter un module pour accéder au réseau de calcul sur votre appareil Azure Stack Edge Pro
 - Vérifier que le module peut accéder à l’interface réseau activée
 
 Dans ce tutoriel, vous allez utiliser un module d’application de serveur Web pour illustrer le scénario.
@@ -31,8 +31,8 @@ Dans ce tutoriel, vous allez utiliser un module d’application de serveur Web p
 
 Avant de commencer, vous avez besoin des éléments suivants :
 
-- Un appareil Azure Stack Edge configuré.
-- Vous avez terminé l’étape **Configurer le calcul** du [Tutoriel : Transformer des données avec Azure Stack Edge](azure-stack-edge-deploy-configure-compute-advanced.md#configure-compute) sur votre appareil. Votre appareil doit être associé à une ressource IoT Hub, un appareil IoT et un appareil IoT Edge.
+- Un appareil Azure Stack Edge Pro configuré.
+- Vous avez terminé l’étape **Configurer le calcul** du [Tutoriel : Transformer des données avec Azure Stack Edge Pro](azure-stack-edge-deploy-configure-compute-advanced.md#configure-compute) sur votre appareil. Votre appareil doit être associé à une ressource IoT Hub, un appareil IoT et un appareil IoT Edge.
 
 ## <a name="enable-network-interface-for-compute"></a>Activer une interface réseau pour le calcul
 
@@ -55,10 +55,10 @@ Effectuez les étapes suivantes sur votre interface utilisateur web locale pour 
 
 ## <a name="add-webserver-app-module"></a>Ajouter le module d’application de serveur web
 
-Procédez comme suit pour ajouter un module d’application de serveur web sur votre appareil Azure Stack Edge.
+Procédez comme suit pour ajouter un module d’application de serveur web sur votre appareil Azure Stack Edge Pro.
 
-1. Accédez à la ressource IoT Hub associée à votre appareil Azure Stack Edge, puis sélectionnez **Appareil IoT Edge**.
-2. Sélectionnez l’appareil IoT Edge associé à votre appareil Azure Stack Edge. Dans **Détails sur l’appareil**, sélectionnez **Définir des modules**. Dans **Ajouter des modules**, sélectionnez **+ Ajouter** , puis sélectionnez **Module IoT Edge**.
+1. Accédez à la ressource IoT Hub associée à votre appareil Azure Stack Edge Pro, puis sélectionnez **Appareil IoT Edge Pro**.
+2. Sélectionnez l’appareil IoT Edge associé à votre appareil Azure Stack Edge Pro. Dans **Détails sur l’appareil**, sélectionnez **Définir des modules**. Dans **Ajouter des modules**, sélectionnez **+ Ajouter** , puis sélectionnez **Module IoT Edge**.
 3. Dans le panneau **Modules personnalisés IoT Edge** :
 
     1. Spécifiez un **nom** pour le module d’application de serveur web que vous souhaitez déployer.

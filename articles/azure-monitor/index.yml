@@ -8,12 +8,12 @@ metadata:
   author: rboucher
   ms.author: robb
   ms.date: 10/08/2019
-  ms.openlocfilehash: 15a9b1cdbe46baca85959d3e9e5124f706027ec5
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 3fe4dd31fa6132401b09ac80d0c2cbf62b8b83e1
+  ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77667123"
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96905619"
 landingContent:
 - title: À propos d’Azure Monitor
   linkLists:
@@ -23,8 +23,6 @@ landingContent:
       url: overview.md
     - text: Présentation des journaux Azure Monitor et de Log Analytics
       url: platform/data-platform-logs.md
-    - text: Page hub de contenu sur les journaux Azure Monitor et Log Analytics
-      url: azure-monitor-log-hub.md
     - text: Présentation d’Application Insights
       url: app/app-insights-overview.md
     - text: Page hub de contenu sur Application Insights
@@ -44,7 +42,7 @@ landingContent:
     - text: Superviser les métriques et déclencher des alertes
       url: platform/alerts-metric.md
     - text: Analyser les journaux d’activité
-      url: log-query/get-started-portal.md
+      url: ./log-query/log-analytics-tutorial.md
     - text: Machines virtuelles Azure dans Log Analytics
       url: learn/quick-collect-azurevm.md
     - text: Machines virtuelles Linux dans Log Analytics
@@ -58,9 +56,9 @@ landingContent:
   - linkListType: get-started
     links:
     - text: .NET
-      url: learn/quick-monitor-portal.md
+      url: app/asp-net.md
     - text: .NET Core
-      url: learn/dotnetcore-quick-start.md
+      url: app/asp-net-core.md
     - text: Node.js
       url: learn/nodejs-quick-start.md
     - text: Mobile
@@ -71,18 +69,18 @@ landingContent:
   linkLists:
   - linkListType: learn
     links:
-    - text: Formation Pluralsite gratuite - Administrateur Azure
+    - text: Formation Pluralsight gratuite - Administrateur Azure
       url: https://go.microsoft.com/fwlink/?linkid=2012827
 - title: Référence - CLI
   linkLists:
   - linkListType: reference
     links:
-    - text: Métriques, mise à l’échelle automatique, paramètres de diagnostics, alertes
-      url: /cli/azure/monitor?view=azure-cli-latest
+    - text: Groupes d'actions, Journaux d'activité, Mise à l’échelle automatique, Paramètres de diagnostic, Mesures, Étendue de Private Link
+      url: /cli/azure/azure-cli-reference-for-monitor
     - text: Log Analytics
-      url: /cli/azure/ext/log-analytics/monitor?view=azure-cli-latest
+      url: /cli/azure/ext/log-analytics/monitor
     - text: Application Insights
-      url: /cli/azure/ext/application-insights/monitor/app-insights/component?view=azure-cli-latest
+      url: /cli/azure/ext/application-insights/monitor/app-insights
 - title: Référence - PowerShell
   linkLists:
   - linkListType: reference

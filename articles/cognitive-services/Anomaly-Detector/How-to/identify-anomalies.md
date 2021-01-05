@@ -3,19 +3,19 @@ title: Comment utiliser l’API Détecteur d’anomalies sur vos données de sé
 titleSuffix: Azure Cognitive Services
 description: Apprenez à détecter les anomalies dans vos données sous forme de lot ou dans vos données diffusées.
 services: cognitive-services
-author: aahill
+author: mrbullwinkle
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
 ms.topic: conceptual
 ms.date: 10/01/2019
-ms.author: aahi
-ms.openlocfilehash: ca93de71f64efaf21c78b37b9c9aee193d13b28d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: mbullwin
+ms.openlocfilehash: b2cd5e32503953de874ab470ca3f9413d2b37d59
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "71840225"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92014645"
 ---
 # <a name="how-to-use-the-anomaly-detector-api-on-your-time-series-data"></a>Procédure : Utiliser l’API Détecteur d’anomalies sur vos données de série chronologique  
 

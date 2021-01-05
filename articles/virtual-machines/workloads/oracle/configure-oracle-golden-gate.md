@@ -1,25 +1,19 @@
 ---
 title: Implémenter Oracle Golden Gate sur une machine virtuelle Linux Azure | Microsoft Docs
 description: Configurez et exécutez rapidement une base de données Oracle Golden Gate dans votre environnement Azure.
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: ae6bfb0ab0208d0f778476c9f0959b0c0f1d6471
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: 3fff58c240341776a3bb99c059c179cc4f9d96e9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683733"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999142"
 ---
 # <a name="implement-oracle-golden-gate-on-an-azure-linux-vm"></a>Implémenter Oracle Golden Gate sur une machine virtuelle Linux Azure 
 
@@ -27,7 +21,7 @@ L’interface de ligne de commande (CLI) Azure permet de créer et gérer des re
 
 Ce document vous explique pas à pas comment créer, installer et configurer Oracle Golden Gate sur une machine virtuelle Azure. Dans ce didacticiel, deux machines virtuelles sont configurées dans un groupe à haute disponibilité dans une seule région. Le même didacticiel peut être utilisé pour configurer OracleGolden Gate pour des machines virtuelles dans différentes zones de disponibilité dans une même région Azure ou pour la configuration de machines virtuelles dans deux régions différentes.
 
-Avant de commencer, assurez-vous que l’interface de ligne de commande Azure est installée. Pour plus d’informations, consultez le [Guide d’installation de l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Avant de commencer, assurez-vous que l’interface de ligne de commande Azure est installée. Pour plus d’informations, consultez le [Guide d’installation de l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 
 ## <a name="prepare-the-environment"></a>Préparer l’environnement
 
@@ -68,7 +62,7 @@ az group create --name myResourceGroup --location westus
 
 ### <a name="create-an-availability-set"></a>Créer un groupe à haute disponibilité
 
-L’étape suivante est facultative mais recommandée. Pour plus d’informations, consultez [Instructions pour les groupes à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-availability-sets-guidelines).
+L’étape suivante est facultative mais recommandée. Pour plus d’informations, consultez [Instructions pour les groupes à haute disponibilité Azure](/previous-versions/azure/virtual-machines/windows/infrastructure-example).
 
 ```azurecli
 az vm availability-set create \
@@ -449,19 +443,19 @@ Pour installer Oracle Golden Gate, procédez comme suit :
 
 4. Modifiez le répertoire de l’inventaire, puis sélectionnez **Suivant** pour continuer.
 
-   ![Capture d’écran de la page Select Installation (Sélectionner l’installation)](./media/oracle-golden-gate/golden_gate_install_03.png)
+   ![Capture d'écran de la page Sélectionner l'installation qui affiche le répertoire d'installation.](./media/oracle-golden-gate/golden_gate_install_03.png)
 
 5. Dans l’écran **Summary** (Récapitulatif), sélectionnez **Install** (Installer) pour continuer.
 
-   ![Capture d’écran de la page Select Installation (Sélectionner l’installation)](./media/oracle-golden-gate/golden_gate_install_04.png)
+   ![Capture d'écran représentant la page Sélectionner l'installation et le bouton Installer.](./media/oracle-golden-gate/golden_gate_install_04.png)
 
 6. Vous pourriez être invité à exécuter un script en tant que « root ». Dans ce cas, ouvrez une session distincte, ssh vers la machine virtuelle, sudo vers la racine, puis exécutez le script. Sélectionnez **OK** pour continuer.
 
-   ![Capture d’écran de la page Select Installation (Sélectionner l’installation)](./media/oracle-golden-gate/golden_gate_install_05.png)
+   ![Capture d'écran représentant l'emplacement du script et montrant comment exécuter le script de configuration.](./media/oracle-golden-gate/golden_gate_install_05.png)
 
 7. Une fois l’installation terminée, sélectionnez **Close** (Fermer) pour terminer le processus.
 
-   ![Capture d’écran de la page Select Installation (Sélectionner l’installation)](./media/oracle-golden-gate/golden_gate_install_06.png)
+   ![Capture d'écran de la page Sélectionner l'installation qui affiche le bouton Fermer.](./media/oracle-golden-gate/golden_gate_install_06.png)
 
 ### <a name="set-up-service-on-myvm1-primary"></a>Configurer le service sur myVM1 (machine virtuelle principale)
 

@@ -3,18 +3,19 @@ title: Exemple de script Azure CLI - Exporter à partir d’un magasin Azure A
 titleSuffix: Azure App Configuration
 description: Utiliser un script Azure CLI pour exporter la configuration à partir d’Azure App Configuration
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.devlang: azurecli
 ms.topic: sample
 ms.date: 02/19/2020
-ms.author: lcozzens
-ms.openlocfilehash: 3e014504fc1e94c3b323a49b408fa992de00d14a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: alkemper
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: be3fac17ba99194a76b27c78040a76cce43405a0
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77523618"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96931110"
 ---
 # <a name="export-from-an-azure-app-configuration-store"></a>Exporter à partir d’un magasin Azure App Configuration
 
@@ -22,9 +23,9 @@ Cet exemple de script exporte des valeurs de clés à partir d’un magasin Azur
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

@@ -5,15 +5,15 @@ author: mimckitt
 ms.service: virtual-machines-linux
 ms.subservice: security
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: conceptual
 ms.date: 08/02/2017
 ms.author: mimckitt
-ms.openlocfilehash: 6eb571ccc8c996a06d3bdf2dda25860df4dc930f
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 0dcb8531c3aece6ace7cf8ea38f89ebf078c8d59
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759363"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87267708"
 ---
 # <a name="apply-policies-to-linux-vms-with-azure-resource-manager"></a>Appliquer des stratégies aux machines virtuelles Linux avec Azure Resource Manager
 Avec les stratégies, une organisation peut appliquer différentes conventions et règles à travers l'entreprise. L’application du comportement souhaité peut vous aider à atténuer les risques tout en contribuant à la réussite de l'organisation. Dans cet article, nous expliquons comment utiliser les stratégies d’Azure Resource Manager pour définir le comportement souhaité pour les machines virtuelles de votre organisation.

@@ -3,14 +3,14 @@ title: Didacticiel Kubernetes sur Azure - Créer un registre de conteneurs
 description: Dans le cadre de ce didacticiel Azure Kubernetes Service (AKS), vous allez créer une instance Azure Container Registry et y charger un exemple d’image conteneur d’application.
 services: container-service
 ms.topic: tutorial
-ms.date: 12/19/2018
-ms.custom: mvc
-ms.openlocfilehash: 6b8d520a539f69889b1e1bd23d255f3fe19b8717
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 09/30/2020
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: b0f78c3969f3d02c19824fdb6d1e3b786dceb43c
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222526"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747077"
 ---
 # <a name="tutorial-deploy-and-use-azure-container-registry"></a>Didacticiel : Déployer et utiliser Azure Container Registry
 
@@ -60,18 +60,21 @@ Après son exécution, la commande retourne le message *Login Succeeded (Connexi
 
 Pour afficher la liste des images locales actuelles, utilisez la commande [docker images][docker-images] :
 
-```
+```azurecli
 $ docker images
+```
+La sortie de la commande ci-dessus affiche la liste de vos images locales actuelles :
 
-REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
-azure-vote-front             latest              4675398c9172        13 minutes ago      694MB
-redis                        latest              a1b99da73d05        7 days ago          106MB
-tiangolo/uwsgi-nginx-flask   flask               788ca94b2313        9 months ago        694MB
+```
+REPOSITORY                                     TAG                 IMAGE ID            CREATED             SIZE
+mcr.microsoft.com/azuredocs/azure-vote-front   v1                  84b41c268ad9        7 minutes ago       944MB
+mcr.microsoft.com/oss/bitnami/redis            6.0.8               3a54a920bb6c        2 days ago          103MB
+tiangolo/uwsgi-nginx-flask                     python3.6           a16ce562e863        6 weeks ago         944MB
 ```
 
 Pour utiliser l’image conteneur *azure-vote-front* avec ACR, vous devez baliser cette image avec l’adresse du serveur de connexion de votre registre. Cette balise est utilisée pour l’acheminement lors de l’envoi des images de conteneur dans un registre d’images.
 
-Pour obtenir l’adresse du serveur de connexion, utilisez la commande [az acr list][az-acr-list] et exécutez une requête portant sur l’élément *loginServer*, comme suit :
+Pour obtenir l’adresse du serveur de connexion, utilisez la commande [az acr list][az-acr-list] et exécutez une requête portant sur l’élément *loginServer* , comme suit :
 
 ```azurecli
 az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginServer}" --output table
@@ -80,19 +83,23 @@ az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginSe
 À présent, étiquetez votre image *azure-vote-front* locale avec l’adresse *acrLoginServer* du registre de conteneurs. Pour indiquer la version de l’image, ajoutez *:v1* à la fin du nom de l’image :
 
 ```console
-docker tag azure-vote-front <acrLoginServer>/azure-vote-front:v1
+docker tag mcr.microsoft.com/azuredocs/azure-vote-front:v1 <acrLoginServer>/azure-vote-front:v1
 ```
 
-Pour vérifier que les étiquettes sont appliquées, réexécutez la commande [docker images][docker-images]. Une image est balisée avec l’adresse de l’instance ACR et un numéro de version.
+Pour vérifier que les étiquettes sont appliquées, réexécutez la commande [docker images][docker-images].
 
-```
+```azurecli
 $ docker images
+```
 
-REPOSITORY                                           TAG           IMAGE ID            CREATED             SIZE
-azure-vote-front                                     latest        eaf2b9c57e5e        8 minutes ago       716 MB
-mycontainerregistry.azurecr.io/azure-vote-front      v1            eaf2b9c57e5e        8 minutes ago       716 MB
-redis                                                latest        a1b99da73d05        7 days ago          106MB
-tiangolo/uwsgi-nginx-flask                           flask         788ca94b2313        8 months ago        694 MB
+Une image est balisée avec l’adresse de l’instance ACR et un numéro de version.
+
+```
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+mcr.microsoft.com/azuredocs/azure-vote-front    v1                  84b41c268ad9        16 minutes ago      944MB
+mycontainerregistry.azurecr.io/azure-vote-front v1                  84b41c268ad9        16 minutes ago      944MB
+mcr.microsoft.com/oss/bitnami/redis             6.0.8               3a54a920bb6c        2 days ago          103MB
+tiangolo/uwsgi-nginx-flask                      python3.6           a16ce562e863        6 weeks ago         944MB
 ```
 
 ## <a name="push-images-to-registry"></a>Envoyer des images au registre
@@ -159,8 +166,8 @@ Passez au didacticiel suivant pour découvrir comment déployer un cluster Kuber
 <!-- LINKS - internal -->
 [az-acr-create]: /cli/azure/acr
 [az-acr-list]: /cli/azure/acr
-[az-acr-login]: https://docs.microsoft.com/cli/azure/acr#az-acr-login
-[az-acr-list]: https://docs.microsoft.com/cli/azure/acr#az-acr-list
+[az-acr-login]: /cli/azure/acr#az-acr-login
+[az-acr-list]: /cli/azure/acr#az-acr-list
 [az-acr-repository-list]: /cli/azure/acr/repository
 [az-acr-repository-show-tags]: /cli/azure/acr/repository
 [az-group-create]: /cli/azure/group#az-group-create

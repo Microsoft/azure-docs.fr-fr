@@ -13,13 +13,13 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/12/2019
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: d2a6568b0d62c880a688160cf981fb33083ae02e
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.custom: mvc, devx-track-js, devx-track-azurecli
+ms.openlocfilehash: 456c42dc0b25e168744ce283cddbd63b877813ab
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81461478"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747154"
 ---
 # <a name="tutorial---how-to-use-cloud-init-to-customize-a-linux-virtual-machine-in-azure-on-first-boot"></a>Didacticiel : comment utiliser cloud-init pour personnaliser une machine virtuelle Linux dans Azure au premier démarrage
 
@@ -55,9 +55,9 @@ Nous collaborons avec nos partenaires pour que cloud-init soit inclus et fonctio
 ## <a name="create-cloud-init-config-file"></a>Créer un fichier de configuration cloud-init
 Pour voir le cloud-init en action, créez une machine virtuelle qui installe NGINX et exécute une simple application « Hello World » Node.js. La configuration cloud-init suivante installe les packages, crée une application Node.js, puis initialise et démarre l’application.
 
-À l’invite bash ou dans Cloud Shell, créez un fichier nommé *cloud-init.txt*, puis collez la configuration suivante. Par exemple, tapez `sensible-editor cloud-init.txt` pour créer le fichier et voir la liste des éditeurs disponibles. Vérifiez que l’intégralité du fichier cloud-init est copiée, en particulier la première ligne :
+À l’invite bash ou dans Cloud Shell, créez un fichier nommé *cloud-init.txt* , puis collez la configuration suivante. Par exemple, tapez `sensible-editor cloud-init.txt` pour créer le fichier et voir la liste des éditeurs disponibles. Vérifiez que l’intégralité du fichier cloud-init est copiée, en particulier la première ligne :
 
-```bash
+```yaml
 #cloud-config
 package_upgrade: true
 packages:
@@ -102,13 +102,13 @@ runcmd:
 Pour plus d’informations sur les options de configuration de cloud-init, consultez les [exemples de configuration cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/examples.html).
 
 ## <a name="create-virtual-machine"></a>Créer une machine virtuelle
-Pour pouvoir créer une machine virtuelle, vous devez créer un groupe de ressources avec la commande [az group create](/cli/azure/group#az-group-create). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupAutomate* dans l’emplacement *westus*:
+Pour pouvoir créer une machine virtuelle, vous devez créer un groupe de ressources avec la commande [az group create](/cli/azure/group#az-group-create). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupAutomate* dans l’emplacement *westus* :
 
 ```azurecli-interactive
 az group create --name myResourceGroupAutomate --location eastus
 ```
 
-Créez maintenant une machine virtuelle avec la commande [az vm create](/cli/azure/vm#az-vm-create). Utilisez le paramètre `--custom-data` à transmettre dans votre fichier de configuration cloud-init. Indiquez le chemin complet vers la configuration *cloud-init.txt* si vous avez enregistré le fichier en dehors de votre répertoire de travail actuel. L’exemple suivant crée une machine virtuelle nommée *myVM* :
+Créez maintenant une machine virtuelle avec la commande [az vm create](/cli/azure/vm#az-vm-create). Utilisez le paramètre `--custom-data` à transmettre dans votre fichier de configuration cloud-init. Indiquez le chemin complet vers la configuration *cloud-init.txt* si vous avez enregistré le fichier en dehors de votre répertoire de travail actuel. L’exemple suivant crée une machine virtuelle nommée *myVM*  :
 
 ```azurecli-interactive
 az vm create \
@@ -129,7 +129,7 @@ az vm open-port --port 80 --resource-group myResourceGroupAutomate --name myAuto
 ```
 
 ## <a name="test-web-app"></a>Tester l’application web
-Vous pouvez maintenant ouvrir un navigateur web et entrer *http:\/\/\<adresse_IP_publique>* dans la barre d’adresse. Indiquez votre propre adresse IP publique à partir du processus de création de la machine virtuelle. Votre application Node.js apparaît telle que dans l’exemple suivant :
+Vous pouvez maintenant ouvrir un navigateur web et entrer *http:\/\/\<publicIpAddress>* dans la barre d’adresse. Indiquez votre propre adresse IP publique à partir du processus de création de la machine virtuelle. Votre application Node.js apparaît telle que dans l’exemple suivant :
 
 ![Afficher le site NGINX en cours d’exécution](./media/tutorial-automate-vm-deployment/nginx.png)
 
@@ -260,7 +260,7 @@ az vm open-port \
 ```
 
 ### <a name="test-secure-web-app"></a>Tester l’application web sécurisée
-Vous pouvez maintenant ouvrir un navigateur web et entrer *https:\/\/\<adresse_IP_publique>* dans la barre d’adresse. Fournissez votre propre adresse IP publique comme indiqué dans la sortie du processus précédent de création de machine virtuelle. Acceptez l’avertissement de sécurité si vous avez utilisé un certificat auto-signé :
+Vous pouvez maintenant ouvrir un navigateur web et entrer *https:\/\/\<publicIpAddress>* dans la barre d’adresse. Fournissez votre propre adresse IP publique comme indiqué dans la sortie du processus précédent de création de machine virtuelle. Acceptez l’avertissement de sécurité si vous avez utilisé un certificat auto-signé :
 
 ![Accepter l’avertissement de sécurité du navigateur web](./media/tutorial-automate-vm-deployment/browser-warning.png)
 

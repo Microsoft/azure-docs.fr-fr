@@ -10,14 +10,19 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 02/03/2020
 ms.author: aahi
-ms.openlocfilehash: f00ffee47e3eb6366d632d8b6ee9beb01f048442
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 07b0dd68e39f555171e5606b71cd1eec92a4035c
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76983110"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353338"
 ---
 # <a name="call-your-bing-custom-search-instance-from-the-portal"></a>Appeler votre instance de Recherche personnalisée Bing à partir du portail
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Une fois votre expérience de recherche personnalisée configurée, vous pouvez la tester à partir du [portail](https://customsearch.ai) Recherche personnalisée Bing. 
 
@@ -26,7 +31,7 @@ Une fois votre expérience de recherche personnalisée configurée, vous pouvez 
 
 Une fois connecté au [portail](https://customsearch.ai) Recherche personnalisée Bing, sélectionnez votre instance de recherche et cliquez sur l'onglet **Production**. Sous **Points de terminaison**, sélectionnez le point de terminaison d'une API (par exemple, de l'API Web). Les points de terminaison affichés dépendent de votre abonnement.
 
-Pour créer une requête de recherche, entrez les valeurs des paramètres de votre point de terminaison. Notez que les paramètres affichés sur le portail peuvent varier en fonction du point de terminaison choisi. Pour plus d’informations, consultez [Référence sur l’API Recherche personnalisée](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters). Pour modifier l’abonnement utilisée par votre instance de recherche, ajoutez la clé d’abonnement appropriée et mettez à jour les paramètres de mise sur le marché et/ou de langue appropriés.
+Pour créer une requête de recherche, entrez les valeurs des paramètres de votre point de terminaison. Notez que les paramètres affichés sur le portail peuvent varier en fonction du point de terminaison choisi. Pour plus d’informations, consultez [Référence sur l’API Recherche personnalisée](/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters). Pour modifier l’abonnement utilisée par votre instance de recherche, ajoutez la clé d’abonnement appropriée et mettez à jour les paramètres de mise sur le marché et/ou de langue appropriés.
 
 Les paramètres suivants sont importants :
 
@@ -35,7 +40,7 @@ Les paramètres suivants sont importants :
 |---------|---------|
 |Requête     | Terme à rechercher. Uniquement disponible pour les points de terminaison Web, Image, Vidéo et Suggestion automatique |
 |ID de configuration personnalisée | L'ID de configuration de l'instance de Recherche personnalisée sélectionnée. Ce champ est en lecture seule. |
-|Market     | Marché d'où proviendront les résultats. Uniquement disponible pour les points de terminaison Web, Image, Vidéo et Interface utilisateur hébergée.        |
+|Marché     | Marché d'où proviendront les résultats. Uniquement disponible pour les points de terminaison Web, Image, Vidéo et Interface utilisateur hébergée.        |
 |Clé d'abonnement | Clé d'abonnement à utiliser pour le test. Vous pouvez sélectionner une clé dans la liste déroulante ou en entrer une manuellement.          |
 
 Si vous cliquez sur **Paramètres supplémentaires**, les paramètres suivants s’affichent :  
@@ -60,4 +65,4 @@ Vous pouvez modifier l’abonnement associé à votre instance de Recherche pers
 - [Appeler votre vue personnalisée avec NodeJs](./call-endpoint-nodejs.md)
 - [Appeler votre vue personnalisée avec Python](./call-endpoint-python.md)
 
-- [Appeler votre vue personnalisée avec le SDK C#](./sdk-csharp-quick-start.md)
+- [Appeler votre vue personnalisée avec le SDK C#](./quickstarts/client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp)

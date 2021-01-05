@@ -15,11 +15,11 @@ ms.topic: article
 ms.date: 01/05/2016
 ms.author: erikre
 ms.openlocfilehash: f2d653441598a47986913d525057672eed24b435
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60931702"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015420"
 ---
 # <a name="how-to-send-email-using-sendgrid-from-nodejs"></a>Envoi de courrier électronique à l'aide de SendGrid depuis Node.js
 

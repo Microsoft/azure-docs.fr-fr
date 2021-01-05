@@ -1,22 +1,23 @@
 ---
 title: Informations de référence sur la syntaxe du modèle - LUIS
 description: Créez des entités pour extraire les données clés des énoncés de l'utilisateur dans les applications LUIS (Language Understanding). Les données extraites sont utilisées par l’application cliente.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 04/14/2020
-ms.author: diberry
-ms.openlocfilehash: 1665f1ef8a868b011e9e4de8562aeda9edef5ce2
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 3caccd6766226ce68b371856b081b052c1033f71
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585570"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91542187"
 ---
 # <a name="pattern-syntax"></a>Syntaxe du modèle
 
 La syntaxe du modèle est un modèle d’énoncé. Le modèle doit contenir les mots et entités que vous souhaitez faire correspondre, ainsi que les mots et la [ponctuation](luis-reference-application-settings.md#punctuation-normalization) que vous souhaitez ignorer. Ce n’est **pas** une expression régulière.
 
 > [!CAUTION]
-> Les modèles incluent uniquement les parents d’entité issues du Machine Learning, pas les sous-entités.
+> Les modèles incluent uniquement les parents d’entité de Machine Learning, pas les sous-entités.
 
 Les entités des modèles sont placées entre accolades, `{}`. Les modèles peuvent inclure des entités et des entités avec rôles. [Pattern.any](luis-concept-entity-types.md#patternany-entity) est une entité qui n’est utilisée que dans les modèles.
 

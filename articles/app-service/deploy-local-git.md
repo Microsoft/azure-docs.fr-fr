@@ -5,13 +5,13 @@ ms.assetid: ac50a623-c4b8-4dfd-96b2-a09420770063
 ms.topic: article
 ms.date: 06/18/2019
 ms.reviewer: dariac
-ms.custom: seodec18
-ms.openlocfilehash: efe4c07a6231e0b2c95b049db056a4e5d055db98
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 26fd8bc73fad3ea313641fc4b1e0f454ee2c0813
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152990"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347776"
 ---
 # <a name="local-git-deployment-to-azure-app-service"></a>Déploiement Git local vers Azure App Service
 
@@ -31,9 +31,9 @@ Pour suivre les étapes décrites dans ce guide de procédures :
   git clone https://github.com/Azure-Samples/nodejs-docs-hello-world.git
   ```
 
-[!INCLUDE [Prepare repository](../../includes/app-service-deploy-prepare-repo.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [Prepare repository](../../includes/app-service-deploy-prepare-repo.md)]
 
 ## <a name="deploy-with-kudu-build-server"></a>Déployer avec un serveur de builds Kudu
 
@@ -45,7 +45,7 @@ Pour permettre un déploiement Git local pour votre application avec le serveur 
 
 ### <a name="get-the-deployment-url"></a>Obtenir l'URL de déploiement
 
-Pour obtenir l'URL permettant d'activer le déploiement Git local pour une application existante, exécutez [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-local-git) dans Cloud Shell. Remplacez \<app-name> et \<group-name> par les noms de votre application et son groupe de ressources Azure.
+Pour obtenir l'URL permettant d'activer le déploiement Git local pour une application existante, exécutez [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config-local-git) dans Cloud Shell. Remplacez \<app-name> et \<group-name> par les noms de votre application et de son groupe de ressources Azure.
 
 ```azurecli-interactive
 az webapp deployment source config-local-git --name <app-name> --resource-group <group-name>
@@ -54,7 +54,7 @@ az webapp deployment source config-local-git --name <app-name> --resource-group 
 > Si vous utilisez un plan App Service Linux, vous devez ajouter ce paramètre : --runtime python|3.7
 
 
-Pour créer une application Git, vous pouvez également exécuter [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) dans Cloud Shell avec le paramètre `--deployment-local-git`. Remplacez \<app-name>, \<group-name> et \<plan-name> par les noms de votre nouvelle application Git, de son groupe de ressources Azure et de son plan Azure App Service.
+Pour créer une application Git, vous pouvez également exécuter [`az webapp create`](/cli/azure/webapp#az-webapp-create) dans Cloud Shell avec le paramètre `--deployment-local-git`. Remplacez \<app-name>, \<group-name> et \<plan-name> par les noms de votre nouvelle application Git, de son groupe de ressources Azure et de son plan Azure App Service.
 
 ```azurecli-interactive
 az webapp create --name <app-name> --resource-group <group-name> --plan <plan-name> --deployment-local-git
@@ -74,7 +74,7 @@ Utilisez l’URL renvoyée pour déployer votre application à l’étape suivan
 
 ### <a name="deploy-the-web-app"></a>Déployer l’application web
 
-1. Ouvrez une fenêtre de terminal local vers votre référentiel Git local et ajoutez un référentiel distant Azure. Dans la commande suivante, remplacez \<url> par l’URL spécifique à l’utilisateur de déploiement ou l’URL spécifique à l’application que vous avez obtenue à l’étape précédente.
+1. Ouvrez une fenêtre de terminal local vers votre référentiel Git local et ajoutez un référentiel distant Azure. Dans la commande suivante, remplacez \<url> par l’URL de déploiement spécifique de l’utilisateur ou l’URL spécifique de l’application que vous avez obtenue à l’étape précédente.
    
    ```bash
    git remote add azure <url>
@@ -125,7 +125,7 @@ Pour activer le déploiement Git local pour votre application avec Azure Pipelin
    
    ![Copier l’URL du référentiel Git](media/app-service-deploy-local-git/vsts-repo-ready.png)
 
-1. Dans votre fenêtre de terminal local, ajoutez un référentiel distant Azure à votre référentiel Git local. Dans la commande, remplacez \<url> par l’URL du référentiel Git que vous avez obtenu à l’étape précédente.
+1. Dans votre fenêtre de terminal local, ajoutez un référentiel distant Azure à votre référentiel Git local. Dans la commande, remplacez \<url> par l’URL du référentiel Git que vous avez obtenue à l’étape précédente.
    
    ```bash
    git remote add azure <url>
@@ -149,8 +149,8 @@ Les messages d'erreur suivants peuvent s'afficher lorsque vous utilisez Git pour
 ---|---|---|
 |`Unable to access '[siteURL]': Failed to connect to [scmAddress]`|L’application n’est pas opérationnelle.|Démarrez l’application dans le portail Azure. Le déploiement Git n'est pas disponible lorsque l’application web est arrêtée.|
 |`Couldn't resolve host 'hostname'`|Les informations d’adresse du référentiel «Azure» distant ne sont pas correctes.|Utilisez la commande `git remote -v` pour répertorier tous les référentiels distants avec l’URL associée. Vérifiez que l'URL du référentiel distant « azure » est correcte. Si nécessaire, supprimez et recréez ce référentiel distant au moyen de l’URL correcte.|
-|`No refs in common and none specified; doing nothing. Perhaps you should specify a branch such as 'master'.`|Vous n’avez pas spécifié de branche pendant `git push` ou vous n'avez pas défini la valeur `push.default` dans `.gitconfig`.|Réexécutez `git push`, en spécifiant la branche maîtresse : `git push azure master`.|
-|`src refspec [branchname] does not match any.`|Vous avez tenté d’effectuer une transmission de type push sur une autre branche que la branche maîtresse du référentiel distant « azure ».|Réexécutez `git push`, en spécifiant la branche maîtresse : `git push azure master`.|
+|`No refs in common and none specified; doing nothing. Perhaps you should specify a branch such as 'main'.`|Vous n’avez pas spécifié de branche pendant `git push` ou vous n'avez pas défini la valeur `push.default` dans `.gitconfig`.|Réexécutez `git push`, en spécifiant la branche primaire : `git push azure master`.|
+|`src refspec [branchname] does not match any.`|Vous avez tenté d’effectuer une transmission de type push sur une autre branche que la branche primaire du référentiel distant « azure ».|Réexécutez `git push`, en spécifiant la branche maîtresse : `git push azure master`.|
 |`RPC failed; result=22, HTTP code = 5xx.`|Cette erreur peut se produire si vous essayez d’envoyer (push) un dépôt Git volumineux via HTTPS.|Modifiez la configuration Git sur l’ordinateur local pour agrandir le `postBuffer`. Par exemple : `git config --global http.postBuffer 524288000`.|
 |`Error - Changes committed to remote repository but your web app not updated.`|Vous avez déployé une application Node.js contenant un fichier _package.json_ spécifiant des modules obligatoires supplémentaires.|Examinez les messages d'erreur `npm ERR!` préalables à cette erreur pour plus de contexte sur l’échec. Voici les causes connues de cette erreur et les messages `npm ERR!` correspondants :<br /><br />**Fichier package.json incorrect**: `npm ERR! Couldn't read dependencies.`<br /><br />**Un module natif n’a pas de distribution binaire pour Windows** :<br />`npm ERR! \cmd "/c" "node-gyp rebuild"\ failed with 1` <br />or <br />`npm ERR! [modulename@version] preinstall: \make || gmake\ `|
 

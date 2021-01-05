@@ -1,24 +1,22 @@
 ---
-title: Pool d’hôtes Windows Virtual Desktop Azure Resource Manager – Azure
-description: Apprenez à créer un pool d'hôtes dans Windows Virtual Desktop à l'aide d'un modèle Azure Resource Manager.
-services: virtual-desktop
+title: Pool d’hôtes Windows Virtual Desktop (classique) Azure Resource Manager – Azure
+description: Découvrez comment créer un pool d’hôtes dans Windows Virtual Desktop (classique) à l’aide d’un modèle Azure Resource Manager.
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: c24e212f901f0af38a24ab203070f637de860fc7
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: b9999ae92840d79bb19464216c0f28504011b3f3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614194"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008319"
 ---
-# <a name="create-a-host-pool-with-an-azure-resource-manager-template"></a>Créer un pool d’hôtes avec le modèle Azure Resource Manager
+# <a name="create-a-host-pool-in-windows-virtual-desktop-classic-with-an-azure-resource-manager-template"></a>Créer un pool d’hôtes dans Windows Virtual Desktop (classique) à l’aide d’un modèle Azure Resource Manager
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop.
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager.
 
 Les pools d'hôtes sont des ensembles d'une ou de plusieurs machines virtuelles identiques dans des environnements de locataires Windows Virtual Desktop. Chaque pool d’hôtes peut contenir un groupe d’applications avec lequel les utilisateurs peuvent interagir comme ils le feraient sur un ordinateur de bureau physique.
 

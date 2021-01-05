@@ -7,15 +7,14 @@ ms.topic: overview
 ms.date: 04/19/2018
 ms.author: ccompy
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 08a97f0f7b1a6a65feb7a2ec041001f2199ffdf7
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.openlocfilehash: 6fff19498e9ca70991d3190165df70a48136f502
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81770647"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92631136"
 ---
 # <a name="introduction-to-the-app-service-environments"></a>Présentation des environnements App Service #
- 
 ## <a name="overview"></a>Vue d’ensemble ##
 
 L’environnement Azure App Service est une fonctionnalité d’Azure App Service qui fournit un environnement totalement isolé et dédié pour l’exécution sécurisée de vos applications App Service à grande échelle. Cette fonctionnalité peut héberger vos :
@@ -32,7 +31,7 @@ Les environnements App Service (ASE) conviennent aux charges de travail d’app
 * Une isolation et un accès réseau sécurisé.
 * Une utilisation élevée de la mémoire.
 
-Les clients peuvent créer plusieurs environnements App Service au sein d’une même région Azure ou dans plusieurs régions Azure. Grâce à cette souplesse, les environnements ASE sont parfaits pour l’évolution horizontale des niveaux d’application sans état pour la prise en charge de lourdes charges de travail RPS.
+Les clients peuvent créer plusieurs environnements App Service au sein d’une même région Azure ou dans plusieurs régions Azure. Grâce à cette souplesse, les environnements ASE sont parfaits pour la mise à l’échelle horizontale des niveaux d’application sans état pour la prise en charge des charges de travail présentant un niveau élevé de requêtes par seconde.
 
 Les environnements ASE hébergent des applications d’un seul client, et le font sur l’un de leurs réseaux virtuels. Les clients peuvent contrôler précisément le trafic réseau entrant et sortant des applications. Les applications peuvent établir des connexions sécurisées à haute vitesse aux ressources d’entreprise locales par le biais de réseaux privés virtuels.
 
@@ -61,13 +60,13 @@ Un tarif fixe mensuel couvre l’infrastructure d’un environnement App Service
 
 ## <a name="virtual-network-support"></a>Prise en charge des réseaux virtuels ##
 
-La fonctionnalité ASE est un déploiement d’Azure App Service effectué directement dans le réseau virtuel Azure Resource Manager d’un client. Pour en savoir plus sur les réseaux virtuels Azure, consultez le [FAQ sur les réseaux virtuels Azure](https://azure.microsoft.com/documentation/articles/virtual-networks-faq/). Un environnement App Service existe toujours dans un réseau virtuel, et plus précisément un sous-réseau d’un réseau virtuel. Vous pouvez utiliser les fonctionnalités de sécurité des réseaux virtuels pour contrôler les communications réseau entrantes et sortantes de vos applications.
+La fonctionnalité ASE est un déploiement d’Azure App Service effectué directement dans le réseau virtuel Azure Resource Manager d’un client. Pour en savoir plus sur les réseaux virtuels Azure, consultez le [FAQ sur les réseaux virtuels Azure](../../virtual-network/virtual-networks-faq.md). Un environnement App Service existe toujours dans un réseau virtuel, et plus précisément un sous-réseau d’un réseau virtuel. Vous pouvez utiliser les fonctionnalités de sécurité des réseaux virtuels pour contrôler les communications réseau entrantes et sortantes de vos applications.
 
 Un environnement App Service peut être soit accessible sur Internet avec une adresse IP publique, soit accessible en interne avec uniquement une adresse d’équilibreur de charge interne (ILB) Azure.
 
 Les [groupes de sécurité réseau][NSGs] limitent les communications réseau entrantes vers le sous-réseau sur lequel réside l’environnement App Service. Vous pouvez utiliser des groupes de sécurité réseau pour exécuter des applications derrière des appareils et services en amont tels que des pare-feu d’applications web et des fournisseurs SaaS réseau.
 
-Les applications doivent souvent accéder à des ressources d'entreprise telles que des bases de données internes et des services web. Si vous déployez l’environnement App Service sur un réseau virtuel qui a une connexion VPN au réseau local, les applications de l’environnement App Service peuvent accéder aux ressources locales. Cela est vrai, que le réseau privé virtuel soit un VPN [de site à site](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-multi-site) ou un VPN [Azure ExpressRoute](https://azure.microsoft.com/services/expressroute/).
+Les applications doivent souvent accéder à des ressources d'entreprise telles que des bases de données internes et des services web. Si vous déployez l’environnement App Service sur un réseau virtuel qui a une connexion VPN au réseau local, les applications de l’environnement App Service peuvent accéder aux ressources locales. Cela est vrai, que le réseau privé virtuel soit un VPN [de site à site](../../vpn-gateway/vpn-gateway-multi-site.md) ou un VPN [Azure ExpressRoute](https://azure.microsoft.com/services/expressroute/).
 
 Pour plus d’informations sur le fonctionnement des environnements App Service avec des réseaux virtuels et des réseaux locaux, consultez [Considérations sur les réseaux d’environnement App Service][ASENetwork].
 
@@ -91,16 +90,16 @@ Les versions ASEv1 et ASEv2 utilisent un modèle tarifaire différent. Dans ASE
 [ASENetwork]: ./network-info.md
 [UsingASE]: ./using-an-ase.md
 [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
+[NSGs]: ../../virtual-network/network-security-groups-overview.md
 [ConfigureASEv1]: app-service-web-configure-an-app-service-environment.md
 [ASEv1Intro]: app-service-app-service-environment-intro.md
 [webapps]: ../overview.md
-[mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md
+[mobileapps]: /previous-versions/azure/app-service-mobile/app-service-mobile-value-prop
 [Functions]: ../../azure-functions/index.yml
 [Pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [ARMOverview]: ../../azure-resource-manager/management/overview.md
 [ConfigureSSL]: ../configure-ssl-certificate.md
 [Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
-[AppGW]: ../../application-gateway/waf-overview.md
+[AppGW]: ../../web-application-firewall/ag/ag-overview.md
 [ASEAZ]: https://azure.github.io/AppService/2019/12/12/App-Service-Environment-Support-for-Availability-Zones.html

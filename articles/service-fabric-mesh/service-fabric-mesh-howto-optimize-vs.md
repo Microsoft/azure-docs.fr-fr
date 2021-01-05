@@ -1,16 +1,16 @@
 ---
 title: Optimiser Visual Studio pour Azure Service Fabric Mesh
 description: Cet article vous montre comment optimiser les performances de Visual Studio pour les projets Service Fabric Mesh afin que votre première exécution de débogage (F5) soit beaucoup plus rapide.
-author: dkkapur
-ms.author: dekapur
+author: georgewallace
+ms.author: gwallace
 ms.date: 11/29/2018
 ms.topic: conceptual
-ms.openlocfilehash: 40c4e9972a3d83a5dd8247bacac12e9d67a15f66
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa7a959128d3bcdfcce67d3abeac245975339a9f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75497983"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007373"
 ---
 # <a name="optimize-visual-studio-performance-for-service-fabric-mesh-projects"></a>Optimiser les performances de Visual Studio pour les projets Service Fabric Mesh
 

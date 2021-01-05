@@ -3,21 +3,19 @@ title: Concepts d’architecture dans Azure IoT Central | Microsoft Docs
 description: Cet article présente les concepts clés relatifs à l’architecture d’Azure IoT Central
 author: dominicbetts
 ms.author: dobett
-ms.date: 11/27/2019
+ms.date: 12/19/2020
 ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
 manager: philmea
-ms.openlocfilehash: 12ad231d81b6c134ebb8d4902b3f95c978e9622d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c2d5310d1a664aa2e22d4241d8066e41d9c82bd1
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233365"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97796718"
 ---
 # <a name="azure-iot-central-architecture"></a>Architecture d’Azure IoT Central
-
-
 
 Cet article donne une vue d’ensemble de l’architecture d’Azure IoT Central.
 
@@ -54,7 +52,7 @@ IoT Central offre les fonctionnalités suivantes sur les appareils IoT Edge :
   - La télémétrie envoyée par chaque module.
   - Les propriétés signalées par chaque module.
   - Les commandes auxquelles chaque module répond.
-  - Les relations entre un modèle de capacité d’appareil de passerelle IoT Edge et un modèle de capacité d’appareil en aval.
+  - Les relations entre un appareil de passerelle IoT Edge et un appareil en aval.
   - Les propriétés cloud qui ne sont pas stockées sur l’appareil IoT Edge.
   - Personnalisations, tableaux de bord et formulaires qui font partie de votre application IoT Central.
 
@@ -104,7 +102,7 @@ Azure IoT Central utilise Azure IoT Hub comme passerelle cloud pour la connectiv
 - La gestion des appareils.
 - La connectivité sécurisée des appareils.
 
-Pour plus d’informations sur IoT Hub, consultez [Azure IoT Hub](https://docs.microsoft.com/azure/iot-hub/).
+Pour plus d’informations sur IoT Hub, consultez [Azure IoT Hub](../../iot-hub/index.yml).
 
 Pour plus d’informations sur la connectivité des appareils dans Azure IoT Central, consultez [Connectivité des appareils](concepts-get-connected.md).
 
@@ -133,12 +131,12 @@ Dans une application Azure IoT Central, les modèles d’appareil définissent l
 
 ![Architecture des modèles](media/concepts-architecture/template-architecture.png)
 
-Un modèle d’appareil d’application IoT Central contient :
+Un [modèle d’appareil](concepts-device-templates.md) IoT Central contient :
 
-- Les **modèles de capacité d’appareil** spécifient les capacités d'un appareil, notamment les données de télémétrie qu'il envoie, les propriétés qui définissent l'état de l’appareil, et les commandes auxquelles l’appareil répond. Les capacités de l'appareil sont organisées en une ou plusieurs interfaces. Pour plus d’informations sur les modèles de capacité d’appareil, consultez la documentation [IoT Plug-and-Play (préversion)](../../iot-pnp/overview-iot-plug-and-play.md).
+- Un **modèle d’appareil** pour spécifier les capacités d’un appareil, notamment les données de télémétrie qu’il envoie, les propriétés qui définissent l’état de l’appareil et les commandes auxquelles l’appareil répond. Les capacités de l'appareil sont organisées en une ou plusieurs interfaces.
 - Les **propriétés du cloud** spécifient les propriétés que l'IoT Central stocke pour un appareil. Ces propriétés sont uniquement stockées dans IoT Central et ne sont jamais envoyées à un appareil.
 - Les **vues** spécifient les tableaux de bord et les formulaires créés par le concepteur pour permettre à l'opérateur de surveiller et de gérer les appareils.
-- Les **personnalisations** permettent au concepteur de remplacer certaines des définitions du modèle de capacité d’appareil afin de les rendre plus pertinentes pour l'application IoT Central.
+- Les **personnalisations** permettent au concepteur de remplacer certaines des définitions du modèle d’appareil afin de les rendre plus pertinentes pour l’application IoT Central.
 
 Une application peut avoir un ou plusieurs appareils simulés et réels basés sur chaque modèle d’appareil.
 
@@ -152,7 +150,7 @@ Dans une application Azure IoT Central, vous pouvez [créer et exécuter des tra
 
 ## <a name="role-based-access-control-rbac"></a>Contrôle d’accès en fonction du rôle
 
-Un [administrateur peut définir des règles d’accès](howto-manage-users-roles.md) pour une application Azure IoT Central en utilisant un des rôles prédéfinis ou en créant un rôle personnalisé. Les rôles déterminent les zones de l’application auxquelles un utilisateur a accès ainsi que les actions qu’il peut effectuer.
+Chaque application IoT Central possède son propre système RBAC intégré. Un [administrateur peut définir des règles d’accès](howto-manage-users-roles.md) pour une application Azure IoT Central en utilisant un des rôles prédéfinis ou en créant un rôle personnalisé. Les rôles déterminent les zones de l’application auxquelles un utilisateur a accès ainsi que les actions qu’il peut effectuer.
 
 ## <a name="security"></a>Sécurité
 

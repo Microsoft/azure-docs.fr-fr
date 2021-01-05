@@ -8,12 +8,13 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 04/22/2020
-ms.openlocfilehash: b0ebbbb64e173e1501f08f8385b14c365759a804
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 120c30803d1423dc8b1255c65703e84d5938f235
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82116279"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89002519"
 ---
 # <a name="how-to-filter-by-language-in-azure-cognitive-search"></a>Comment filtrer par langue dans la Recherche cognitive Azure 
 
@@ -34,14 +35,14 @@ Dans la Recherche cognitive Azure, les requêtes ciblent un index unique. Les d�
 
 L'exemple suivant est extrait de l'[exemple d’immobilier](search-get-started-portal.md), qui comporte plusieurs champs de chaîne avec du contenu dans différentes langues. Notez les assignations de l’analyseur de langue pour les champs de cet index. Les champs qui contiennent des chaînes produisent de meilleurs résultats en lien avec une recherche en texte intégral quand ils sont associés à un analyseur conçu pour traiter les règles linguistiques de la langue cible.
 
-  ![](./media/search-filters-language/lang-fields.png)
+  ![Capture d’écran montrant l’écran Champs de l’exemple immobilier. Un groupe de champs est mis en surbrillance pour indiquer de quelle façon les attributions de l’analyseur de langue correspondent aux langues des champs en surbrillance.](./media/search-filters-language/lang-fields.png)
 
 > [!Note]
-> Pour des exemples de code montrant des définitions de champ avec des analyseurs de langue, voir [Définir un index (.NET)](https://docs.microsoft.com/azure/search/search-create-index-dotnet) et [Définir un index (REST)](search-create-index-rest-api.md).
+> Pour des exemples de code montrant des définitions de champ avec des analyseurs de langue, voir [Définir un index (.NET)](./search-get-started-dotnet.md) et [Définir un index (REST)](./search-get-started-powershell.md).
 
 ## <a name="build-and-load-an-index"></a>Créer et charger un index
 
-La [création et le remplissage de l’index](https://docs.microsoft.com/azure/search/search-create-index-dotnet) sont une étape intermédiaire (et peut-être évidente) avant la formulation d’une requête. Nous signalons cette étape ici par souci d’exhaustivité. Une manière de déterminer si l’index est disponible consiste à vérifier la liste des index dans le [portail](https://portal.azure.com).
+La [création et le remplissage de l’index](./search-get-started-dotnet.md) sont une étape intermédiaire (et peut-être évidente) avant la formulation d’une requête. Nous signalons cette étape ici par souci d’exhaustivité. Une manière de déterminer si l’index est disponible consiste à vérifier la liste des index dans le [portail](https://portal.azure.com).
 
 ## <a name="constrain-the-query-and-trim-results"></a>Limiter la requête et réduire les résultats
 
@@ -63,7 +64,6 @@ parameters =
 ## <a name="see-also"></a>Voir aussi
 
 + [Filtres dans la Recherche cognitive Azure](search-filters.md)
-+ [Analyseurs de langage](https://docs.microsoft.com/rest/api/searchservice/language-support)
++ [Analyseurs de langage](/rest/api/searchservice/language-support)
 + [Fonctionnement de la recherche en texte intégral dans la Recherche cognitive Azure](search-lucene-query-architecture.md)
-+ [API REST de recherche de documents](https://docs.microsoft.com/rest/api/searchservice/search-documents)
-
++ [API REST de recherche de documents](/rest/api/searchservice/search-documents)

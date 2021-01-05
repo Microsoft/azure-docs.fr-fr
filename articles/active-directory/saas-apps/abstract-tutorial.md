@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Abstract | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Abstract.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 2eb167ab-d769-4661-a8cb-ae371cb63d2a
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 07/16/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 81886fa9165269d89bde8306c5829be41952c190
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e1c3236c4c1957b4d0daee8d30c71f03fb8674dd
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68302585"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97587806"
 ---
 # <a name="tutorial-integrate-abstract-with-azure-active-directory"></a>Tutoriel : Intégrer Abstract à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Abstract à Azure Active Dir
 * Autoriser les utilisateurs à se connecter automatiquement à Abstract avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -135,7 +130,7 @@ Dans cette section, vous allez autoriser B. Simon à utiliser l’authentificat
 1. Dans la liste des applications, sélectionnez **Abstract**.
 1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
 
-   ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
+    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
 1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
@@ -151,7 +146,7 @@ Pour tester l’authentification unique sur Abstract
 
 1. Ouvrez l’[application web Abstract](https://app.abstract.com/).
 2. Accédez à la page **Permissions** (Autorisations) dans la barre latérale gauche.
-3. Cliquez sur **Test with my Account** (Tester avec mon compte). Si le test échoue, [contactez notre équipe de support](https://www.abstract.com/help/contact/).
+3. Cliquez sur **Test with my Account** (Tester avec mon compte). Si le test échoue, [contactez notre équipe de support](https://help.abstract.com/hc/).
 
 >[!Note]
 >Vous devrez vous authentifier auprès d’un compte d’administrateur de l’organisation pour accéder aux paramètres d’authentification unique sur Abstract.
@@ -161,13 +156,12 @@ Ce compte d’administrateur de l’organisation doit être affecté à Abstract
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Abstract dans le volet d’accès, vous devez être connecté automatiquement à l’application Abstract pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Abstract dans le volet d’accès, vous devez être connecté automatiquement à l’application Abstract pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

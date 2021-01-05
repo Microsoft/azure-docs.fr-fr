@@ -1,30 +1,30 @@
 ---
-title: Analyser votre charge de travail
-description: Techniques d’analyse des priorités de requête de votre charge de travail dans Azure Synapse Analytics.
+title: Analyser votre charge de travail pour un pool SQL dédié
+description: Techniques d’analyse des priorités de requête pour un pool SQL dédié dans Azure Synapse Analytics.
 services: synapse-analytics
 author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 6a38fe65b4aedf4f594531f5e9cd8cf9b5dfaac7
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 14c3ad30bac7cec4c11822d825323bb9db2ba440
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631226"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96454540"
 ---
-# <a name="analyze-your-workload-in-azure-synapse-analytics"></a>Analyser la charge de travail dans Azure Synapse Analytics
+# <a name="analyze-your-workload-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Analyser votre charge de travail pour un pool SQL dédié dans Azure Synapse Analytics
 
-Techniques d’analyse des priorités de votre charge de travail SQL Synapse dans Azure Synapse Analytics.
+Techniques d’analyse des priorités de votre charge de travail de pool SQL dédié dans Azure Synapse Analytics. 
 
 ## <a name="resource-classes"></a>Classes de ressources
 
-SQL Synapse fournit des classes de ressources pour attribuer des ressources système aux requêtes.  Pour plus d’informations sur les classes de ressources, consultez [Classes de ressources et gestion des charges de travail](resource-classes-for-workload-management.md).  Les requêtes attendront si la classe de ressources affectée à une requête nécessite plus de ressources que de ressources actuellement disponibles.
+Un pool SQL dédié fournit des classes de ressources pour attribuer des ressources système aux requêtes.  Pour plus d’informations sur les classes de ressources, consultez [Classes de ressources et gestion des charges de travail](resource-classes-for-workload-management.md).  Les requêtes attendront si la classe de ressources affectée à une requête nécessite plus de ressources que de ressources actuellement disponibles.
 
 ## <a name="queued-query-detection-and-other-dmvs"></a>Détection des requêtes en file d’attente et autres vues de gestion dynamique
 
@@ -63,7 +63,7 @@ WHERE   r.name IN ('mediumrc','largerc','xlargerc')
 ;
 ```
 
-Synapse SQL a les types d’attente suivants :
+Un pool SQL dédié a les types d’attente suivants :
 
 * **LocalQueriesConcurrencyResourceType** : requêtes qui figurent à l’extérieur de l’infrastructure d’emplacements de concurrence. Les requêtes DMV et les fonctions système telles que `SELECT @@VERSION` sont des exemples de requête locale.
 * **UserConcurrencyResourceType** : requêtes qui figurent à l’intérieur de l’infrastructure d’emplacements de concurrence. Les requêtes exécutées sur des tables d’utilisateurs finaux sont des exemples de requêtes qui doivent utiliser ce type de ressource.
@@ -153,4 +153,4 @@ FROM    sys.dm_pdw_wait_stats w
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur la gestion de la sécurité et des utilisateurs de base de données, consultez [Sécuriser une base de données dans SQL Synapse](sql-data-warehouse-overview-manage-security.md). Pour plus d’informations sur la façon dont les classes de ressources plus élevées peuvent améliorer la qualité des index columnstore en cluster, consultez [Reconstruire des index pour améliorer la qualité de segment](sql-data-warehouse-tables-index.md#rebuilding-indexes-to-improve-segment-quality).
+Pour plus d’informations sur la gestion de la sécurité et des utilisateurs de base de données, consultez [Sécuriser un pool SQL dédié (anciennement SQL DW)](sql-data-warehouse-overview-manage-security.md). Pour plus d’informations sur la façon dont des classes de ressources plus importantes peuvent améliorer la qualité des index columnstore en cluster, consultez [Reconstruire des index pour améliorer la qualité de segment](sql-data-warehouse-tables-index.md#rebuilding-indexes-to-improve-segment-quality).

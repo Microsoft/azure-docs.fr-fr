@@ -1,0 +1,30 @@
+- name: Azure Automanage
+  href: automanage-virtual-machines.md
+- name: Démarrages rapides
+  expanded: true
+  items:
+    - name: Activer sur les machines virtuelles Azure dans le portail Azure
+      href: quick-create-virtual-machines-portal.md
+- name: Concepts
+  expanded: true
+  items:
+    - name: Machines virtuelles
+      href: automanage-virtual-machines.md
+    - name: Bonnes pratiques pour les machines virtuelles
+      href: virtual-machines-best-practices.md
+- name: Guides pratiques
+  expanded: true
+  items:
+    - name: Créer des préférences personnalisées
+      href: virtual-machines-custom-preferences.md
+    - name: Activer sur des machines virtuelles par le biais d’Azure Policy
+      href: virtual-machines-policy-enable.md
+    - name: Réparer un compte Automanage endommagé
+      href: repair-automanage-account.md
+- name: Ressources
+  expanded: true
+  items:
+    - name: Questions fréquentes (FAQ)
+      href: faq.md
+    - name: Cloud Adoption Framework
+      href: 'https://docs.microsoft.com/azure/cloud-adoption-framework/manage/azure-server-management'

@@ -1,36 +1,36 @@
 ---
 title: Indexation de tables
-description: Recommandations et exemples relatifs à l'indexation de tables dans un pool SQL Synapse.
+description: Recommandations et exemples relatifs à l’indexation de tables dans un pool SQL dédié.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/18/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 8cb4af8faccb68c455928c0d3c5405ef2d3e70df
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.openlocfilehash: fea314d595fb39a1e35dec8ab24533ad4b893f98
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81011019"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96448068"
 ---
-# <a name="indexing-tables-in-synapse-sql-pool"></a>Indexer des tables dans un pool SQL Synapse
+# <a name="indexing-dedicated-sql-pool-tables-in-azure-synapse-analytics"></a>Indexer les tables d’un pool SQL dédié dans Azure Synapse Analytics
 
-Recommandations et exemples relatifs à l'indexation de tables dans un pool SQL Synapse.
+Recommandations et exemples relatifs à l’indexation de tables dans un pool SQL dédié.
 
 ## <a name="index-types"></a>Types d’index
 
-Un pool SQL Synapse propose différentes options d'indexation, comme [les index columnstore en cluster](/sql/relational-databases/indexes/columnstore-indexes-overview?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [les index cluster et les index non cluster](/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), ainsi qu'une option hors index également connue sous le nom de [segment de mémoire](/sql/relational-databases/indexes/heaps-tables-without-clustered-indexes?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).  
+Un pool SQL dédié propose différentes options d’indexation, comme [les index columnstore en cluster](/sql/relational-databases/indexes/columnstore-indexes-overview?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [les index cluster et les index non cluster](/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), ainsi qu’une option hors index également connue sous le nom de [segment de mémoire](/sql/relational-databases/indexes/heaps-tables-without-clustered-indexes?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).  
 
-Pour créer une table dotée d'un index, consultez la documentation [CREATE TABLE (pool SQL Synapse)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
+Pour créer une table dotée d’un index, consultez la documentation [CREATE TABLE (pool SQL dédié)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
 
 ## <a name="clustered-columnstore-indexes"></a>Index columnstore en cluster
 
-Par défaut, un pool SQL Synapse crée un index columnstore en cluster lorsqu'aucune option d'index n'est spécifiée sur une table. Les tables columnstore en cluster offrent le plus haut niveau de compression de données ainsi que les meilleures performances de requête globales.  Les tables columnstore en cluster sont généralement plus performantes que les index en cluster ou les tables de segments de mémoire, et constituent généralement le meilleur choix pour les grandes tables.  Pour ces raisons, les index columnstore en cluster sont le meilleur endroit pour démarrer lorsque vous ne savez pas comment indexer votre table.  
+Par défaut, un pool SQL dédié crée un index columnstore cluster lorsqu’aucune option d’index n’est spécifiée sur une table. Les tables columnstore en cluster offrent le plus haut niveau de compression de données ainsi que les meilleures performances de requête globales.  Les tables columnstore en cluster sont généralement plus performantes que les index en cluster ou les tables de segments de mémoire, et constituent généralement le meilleur choix pour les grandes tables.  Pour ces raisons, les index columnstore en cluster sont le meilleur endroit pour démarrer lorsque vous ne savez pas comment indexer votre table.  
 
 Pour créer une table columnstore en cluster, spécifiez simplement CLUSTERED COLUMNSTORE INDEX dans la clause WITH, ou omettez la clause WITH :
 
@@ -52,7 +52,7 @@ Il existe quelques scénarios où un columnstore en cluster peut ne pas être pa
 
 ## <a name="heap-tables"></a>Tables de segments de mémoire
 
-Lors de l'envoi temporaire de données dans un pool SQL Synapse, vous constaterez peut-être que l'utilisation d'une table de segments de mémoire accélère le processus global. En effet, les charges sur les segments de mémoire sont plus rapides que sur les tables d’index et, dans certains cas, la lecture ultérieure peut être effectuée depuis le cache.  Si vous chargez des données uniquement pour les organiser avant d’exécuter d’autres transformations, le chargement de la table dans la table de segments de mémoire est beaucoup plus rapide que le chargement de données dans une table columnstore en cluster. En outre, le chargement des données dans une [table temporaire](sql-data-warehouse-tables-temporary.md) est plus rapide que le chargement d’une table dans un stockage permanent.  Après le chargement des données, vous pouvez créer des index dans la table pour des performances de requête plus rapides.  
+Lors de l’envoi temporaire de données dans un pool SQL dédié, vous constaterez peut-être que l’utilisation d’une table de segments de mémoire accélère le processus global. En effet, les charges sur les segments de mémoire sont plus rapides que sur les tables d’index et, dans certains cas, la lecture ultérieure peut être effectuée depuis le cache.  Si vous chargez des données uniquement pour les organiser avant d’exécuter d’autres transformations, le chargement de la table dans la table de segments de mémoire est beaucoup plus rapide que le chargement de données dans une table columnstore en cluster. En outre, le chargement des données dans une [table temporaire](sql-data-warehouse-tables-temporary.md) est plus rapide que le chargement d’une table dans un stockage permanent.  Après le chargement des données, vous pouvez créer des index dans la table pour des performances de requête plus rapides.  
 
 Les tables columnstore en cluster commencent à atteindre une compression optimale une fois qu’elles comptent plus de 60 millions de lignes.  Pour les petites tables de recherche de moins de 60 millions de lignes, envisagez d’utiliser un index cluster HEAP pour des performances de requêtes plus rapides. 
 
@@ -204,13 +204,13 @@ Les opérations de mise à jour par lot et d’insertion qui dépassent le seuil
 
 ### <a name="small-or-trickle-load-operations"></a>Opérations de chargement progressives ou légères
 
-Les charges légères entrant dans le pool SQL Synapse sont parfois appelées charges progressives. Elles représentent généralement un flux presque constant de données que le système reçoit. Toutefois, comme ce flux est presque continu, le volume des lignes n’est pas forcément important. La plupart du temps, les données sont bien inférieures au seuil requis pour une charge directe au format columnstore.
+Les charges légères entrant dans le pool SQL dédié sont parfois appelées charges progressives. Elles représentent généralement un flux presque constant de données que le système reçoit. Toutefois, comme ce flux est presque continu, le volume des lignes n’est pas forcément important. La plupart du temps, les données sont bien inférieures au seuil requis pour une charge directe au format columnstore.
 
-Dans ces situations, il est souvent préférable d’envoyer les données dans Azure Blob Storage et de les laisser s’accumuler avant le chargement. Cette technique est souvent appelée *micro-batching*ou micro-traitement par lots.
+Dans ces situations, il est souvent préférable d’envoyer les données dans Azure Blob Storage et de les laisser s’accumuler avant le chargement. Cette technique est souvent appelée *micro-batching* ou micro-traitement par lots.
 
 ### <a name="too-many-partitions"></a>Nombre trop important de partitions
 
-Autre élément à prendre en compte : l’impact du partitionnement sur vos tables columnstore en cluster.  Avant le partitionnement, le pool SQL Synapse divise déjà vos données en 60 bases de données.  Un partitionnement plus approfondi divise vos données.  Si vous partitionnez vos données, tenez compte du fait que **chaque** partition nécessite au moins 1 million de lignes pour bénéficier d’un index columnstore en cluster.  Si vous partitionnez votre table en 100 partitions, cette dernière doit compter au moins 6 milliards de lignes pour bénéficier d’un index columnstore en cluster (60 distributions *100 partitions* 1 million de lignes). Si votre table de 100 partitions ne possède pas 6 milliards de lignes, réduisez le nombre de partitions, ou envisagez plutôt d’utiliser une table de segments de mémoire.
+Autre élément à prendre en compte : l’impact du partitionnement sur vos tables columnstore en cluster.  Avant le partitionnement, le pool SQL dédié divise déjà vos données en 60 bases de données.  Un partitionnement plus approfondi divise vos données.  Si vous partitionnez vos données, tenez compte du fait que **chaque** partition nécessite au moins 1 million de lignes pour bénéficier d’un index columnstore en cluster.  Si vous partitionnez votre table en 100 partitions, cette dernière doit compter au moins 6 milliards de lignes pour bénéficier d’un index columnstore en cluster (60 distributions *100 partitions* 1 million de lignes). Si votre table de 100 partitions ne possède pas 6 milliards de lignes, réduisez le nombre de partitions, ou envisagez plutôt d’utiliser une table de segments de mémoire.
 
 Une fois que les tables ont été chargées avec des données, suivez les étapes ci-dessous pour identifier et reconstruire des tables avec des index columnstore en cluster non optimaux.
 
@@ -252,7 +252,7 @@ ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_CO
 ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE)
 ```
 
-La reconstruction d'un index dans un pool SQL Synapse est une opération hors connexion.  Pour plus d’informations sur la reconstruction d’index, consultez la section ALTER INDEX REBUILD dans [Columnstore Indexes Defragmentation](/sql/relational-databases/indexes/columnstore-indexes-defragmentation?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Défragmentation d’index columnstore) et [ALTER INDEX](/sql/t-sql/statements/alter-index-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
+La reconstruction d’un index dans un pool SQL dédié est une opération hors connexion.  Pour plus d’informations sur la reconstruction d’index, consultez la section ALTER INDEX REBUILD dans [Columnstore Indexes Defragmentation](/sql/relational-databases/indexes/columnstore-indexes-defragmentation?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Défragmentation d’index columnstore) et [ALTER INDEX](/sql/t-sql/statements/alter-index-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
 
 ### <a name="step-3-verify-clustered-columnstore-segment-quality-has-improved"></a>Étape 3 : Vérifier que la qualité de segment columnstore en cluster a été améliorée
 
@@ -283,7 +283,7 @@ AND     [OrderDateKey] <  20010101
 ALTER TABLE [dbo].[FactInternetSales_20000101_20010101] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales] PARTITION 2 WITH (TRUNCATE_TARGET = ON);
 ```
 
-Pour plus d'informations sur la recréation de partitions avec CTAS, consultez [Utilisation de partitions dans un pool SQL Synapse](sql-data-warehouse-tables-partition.md).
+Pour plus d’informations sur la recréation de partitions avec CTAS, consultez [Utilisation de partitions dans un pool SQL dédié](sql-data-warehouse-tables-partition.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,44 +1,44 @@
 ---
 title: Conseils de conception pour les tables répliquées
-description: Recommandations sur la conception de tables répliquées dans SQL Synapse
+description: Suggestions sur la conception de tables répliquées dans un pool Synapse SQL
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/19/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 654aeddbb305124ea00a883dbef9d8b5ad585a36
-ms.sourcegitcommit: a53fe6e9e4a4c153e9ac1a93e9335f8cf762c604
+ms.openlocfilehash: 0cf40990d59aff984226244f520e6f8f937713fd
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80990784"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96456488"
 ---
-# <a name="design-guidance-for-using-replicated-tables-in-sql-analytics"></a>Conseils de conception pour l'utilisation de tables répliquées dans SQL Analytics
+# <a name="design-guidance-for-using-replicated-tables-in-synapse-sql-pool"></a>Conseils de conception pour l'utilisation de tables répliquées dans un pool Synapse SQL
 
-Cet article vous donne des recommandations sur la conception de tables répliquées dans votre schéma SQL Analytics. Utilisez ces recommandations pour améliorer les performances des requêtes en réduisant le déplacement de données et la complexité des requêtes.
+Cet article fournit des suggestions sur la conception de tables répliquées dans votre schéma de pool Synapse SQL. Utilisez ces recommandations pour améliorer les performances des requêtes en réduisant le déplacement de données et la complexité des requêtes.
 
 > [!VIDEO https://www.youtube.com/embed/1VS_F37GI9U]
 
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article suppose que les concepts de distribution et de déplacement de données dans SQL Analytics vous sont familiers.  Pour plus d’informations, consultez l’article sur [l’architecture](massively-parallel-processing-mpp-architecture.md).
+Cet article suppose que les concepts de distribution et de déplacement de données dans un pool SQL vous sont familiers.    Pour plus d’informations, consultez l’article sur [l’architecture](massively-parallel-processing-mpp-architecture.md).
 
-Dans le cadre de la conception d’une table, essayez d’en savoir autant que possible sur vos données et la façon dont elles sont interrogées.  Considérez par exemple les questions suivantes :
+Dans le cadre de la conception d’une table, essayez d’en savoir autant que possible sur vos données et la façon dont elles sont interrogées.    Considérez par exemple les questions suivantes :
 
 - Quelle est la taille de la table ?
 - Quelle est la fréquence d’actualisation de la table ?
-- Est-ce que je dispose de tables de faits et de dimension dans une base de données SQL Analytics ?
+- Est-ce que je dispose de tables de faits et de dimension dans un pool SQL ?
 
 ## <a name="what-is-a-replicated-table"></a>Qu’est-ce qu’une table répliquée ?
 
 Une table répliquée possède une copie complète de la table accessible sur chaque nœud de calcul. La réplication d’une table évite le transfert de données entre des nœuds de calcul avant une jointure ou une agrégation. Étant donné que la table possède plusieurs copies, le fonctionnement des tables répliquées est optimal lorsque la taille de la table est inférieure à 2 Go compressés.  2 Go n’est pas une limite inconditionnelle.  Si les données sont statiques et ne changent pas, vous pouvez répliquer des tables plus volumineuses.
 
-Le diagramme suivant illustre une table répliquée accessible sur chaque nœud de calcul. Dans SQL Analytics, la table répliquée est entièrement copiée dans une base de données de distribution sur chaque nœud de calcul.
+Le diagramme suivant illustre une table répliquée accessible sur chaque nœud de calcul. Dans un pool SQL, la table répliquée est entièrement copiée dans une base de données de distribution sur chaque nœud de calcul.
 
 ![Table répliquée](./media/design-guidance-for-replicated-tables/replicated-table.png "Table répliquée")  
 
@@ -51,9 +51,9 @@ Envisagez d’utiliser une table répliquée dans les cas suivants :
 
 Les tables répliquées ne produisent sans doute pas les meilleurs résultats dans les cas suivants :
 
-- La table est l’objet d’opérations d’insertion, de mise à jour et de suppression fréquentes. Les opérations DLM (langage de manipulation de données) nécessitent une regénération de la table répliquée. La reconstruction fréquente peut diminuer les performances.
-- La base de données SQL Analytics est fréquemment mise à l'échelle. La mise à l'échelle d'une base de données SQL Analytics modifie le nombre de nœuds de calcul, ce qui entraîne une reconstruction de la table répliquée.
-- La table comporte un grand nombre de colonnes, mais les opérations de données n’accèdent généralement qu’à un nombre restreint de colonnes. Dans ce scénario, au lieu de répliquer la table entière, il peut s’avérer plus efficace de distribuer la table et de créer ensuite un index sur les colonnes fréquemment sollicitées. Lorsqu'une requête exige un déplacement de données, SQL Analytics déplace uniquement les données des colonnes demandées.
+- La table est l’objet d’opérations d’insertion, de mise à jour et de suppression fréquentes.  Les opérations DLM (langage de manipulation de données) nécessitent une regénération de la table répliquée.  La reconstruction fréquente peut diminuer les performances.
+- Le pool SQL est fréquemment mis à l’échelle. La mise à l’échelle d’un pool SQL change le nombre de nœuds de calcul, ce qui entraîne une reconstruction de la table répliquée.
+- La table comporte un grand nombre de colonnes, mais les opérations de données n’accèdent généralement qu’à un nombre restreint de colonnes. Dans ce scénario, au lieu de répliquer la table entière, il peut s’avérer plus efficace de distribuer la table et de créer ensuite un index sur les colonnes fréquemment sollicitées. Lorsqu'une requête exige un déplacement des données, le pool SQL déplace uniquement les données des colonnes demandées.
 
 ## <a name="use-replicated-tables-with-simple-query-predicates"></a>Utiliser des tables répliquées avec des prédicats de requête simples
 
@@ -124,9 +124,9 @@ Nous avons recréé les tables `DimDate` et `DimSalesTerritory` en tant que tabl
 
 ## <a name="performance-considerations-for-modifying-replicated-tables"></a>Considérations relatives aux performances pour la modification des tables répliquées
 
-SQL Analytics implémente une table répliquée en conservant une version principale de la table. Il copie la version principale dans la première base de données de distribution sur chaque nœud de calcul. En cas de modification, SQL Analytics met d’abord à jour la version maître, puis reconstruit les tables sur chaque nœud de calcul. Une reconstruction d’une table répliquée implique la copie de la table sur chaque nœud de calcul et la construction des index.  Par exemple, une table répliquée sur un DW2000c a 5 copies des données.  Une copie principale et une copie complète sur chaque nœud de calcul.  Toutes les données sont stockées dans des bases de données de distribution. SQL Analytics utilise ce modèle pour prendre en charge des instructions de modification de données plus rapides et des opérations de mise à l'échelle flexibles.
+Le pool SQL implémente une table répliquée en conservant une version principale de la table. Il copie la version principale dans la première base de données de distribution sur chaque nœud de calcul. En cas de modification, la version de référence est d’abord mise à jour, puis les tables sur chaque nœud de calcul sont reconstruites. Une reconstruction d’une table répliquée implique la copie de la table sur chaque nœud de calcul et la construction des index.  Par exemple, une table répliquée sur un DW2000c a 5 copies des données.  Une copie principale et une copie complète sur chaque nœud de calcul.  Toutes les données sont stockées dans des bases de données de distribution. Le pool SQL utilise ce modèle pour prendre en charge des instructions de modification de données plus rapides et des opérations de mise à l'échelle flexibles.
 
-Les reconstructions sont requises après les événements suivants :
+Les reconstructions asynchrones sont déclenchées par la première requête du tableau répliqué après :
 
 - Des données sont chargées ou modifiées
 - L'instance SQL Synapse est mise à l'échelle à un autre niveau
@@ -141,7 +141,7 @@ La reconstruction ne se produit pas immédiatement après la modification des do
 
 ### <a name="use-indexes-conservatively"></a>Utilisation restrictive des index
 
-Les pratiques d’indexation standard s’appliquent aux tables répliquées. SQL Analytics reconstruit chaque index de table répliquée dans le cadre de la reconstruction. Utilisez les index uniquement lorsque le gain de performances compense le coût de reconstruction des index.
+Les pratiques d’indexation standard s’appliquent aux tables répliquées. Le pool SQL reconstruit chaque index de table répliquée dans le cadre de la reconstruction. Utilisez les index uniquement lorsque le gain de performances compense le coût de reconstruction des index.
 
 ### <a name="batch-data-load"></a>Chargement de données par lots
 
@@ -149,9 +149,9 @@ Lors du chargement de données dans des tables répliquées, essayez de réduire
 
 Par exemple, ce modèle de chargement charge les données à partir de quatre sources et appelle quatre reconstructions.
 
-        Load from source 1.
+- Charger à partir de la source 1.
 - Instruction select qui déclenche la reconstruction 1.
-        Charger à partir de la source 2.
+- Charger à partir de la source 2.
 - Instruction select qui déclenche la reconstruction 2.
 - Charger à partir de la source 3.
 - Instruction select qui déclenche la reconstruction 3.
@@ -174,8 +174,8 @@ Cette requête utilise le DMV [sys.pdw_replicated_table_cache_state](/sql/relati
 
 ```sql
 SELECT [ReplicatedTable] = t.[name]
-  FROM sys.tables t  
-  JOIN sys.pdw_replicated_table_cache_state c  
+  FROM sys.tables t  
+  JOIN sys.pdw_replicated_table_cache_state c  
     ON c.object_id = t.object_id
   JOIN sys.pdw_table_distribution_properties p
     ON p.object_id = t.object_id
@@ -193,7 +193,7 @@ SELECT TOP 1 * FROM [ReplicatedTable]
 
 Pour créer une table répliquée, utilisez l’une de ces instructions :
 
-- [CREATE TABLE (SQL Analytics)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-- [CREATE TABLE AS SELECT (SQL Analytics)](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+- [CREATE TABLE (pool SQL)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+- [CREATE TABLE AS SELECT (pool SQL)](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 
 Pour une vue d’ensemble des tables distribuées, consultez [Tables distribuées](sql-data-warehouse-tables-distribute.md).

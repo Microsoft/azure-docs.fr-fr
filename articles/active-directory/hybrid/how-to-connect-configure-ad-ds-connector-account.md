@@ -6,17 +6,18 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/29/2019
+ms.topic: how-to
+ms.date: 05/18/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: eeb80c3a94e63a886e4a16c0b8fa445b2a8a34e4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 62bfc528886767bc09159ca2a2696c8c9264b307
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72515818"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349937"
 ---
 # <a name="azure-ad-connectconfigure-ad-ds-connector-account-permissions"></a>Azure AD Connect : Configurer les autorisations du compte de connecteur AD DS 
 
@@ -38,12 +39,12 @@ Le tableau suivant récapitule les autorisations nécessaires sur les objets AD 
 | Synchronisation de hachage de mot de passe |<li>Répliquer les changements d’annuaires</li>  <li>Répliquer les changements d’annuaire Tout |
 | Déploiement Exchange hybride |Autorisations de lecture et d’écriture sur les attributs documentés dans [Écriture différée d’Exchange hybride](reference-connect-sync-attributes-synchronized.md#exchange-hybrid-writeback) pour les utilisateurs, les groupes et les contacts. |
 | Dossier public de messagerie Exchange |Autorisations de lecture sur les attributs documentées dans [Dossier public de messagerie Exchange](reference-connect-sync-attributes-synchronized.md#exchange-mail-public-folder) pour les dossiers publics. | 
-| Réécriture du mot de passe |Autorisations de lecture et d’écriture sur les attributs documentés dans [Bien démarrer avec la gestion des mots de passe](../authentication/howto-sspr-writeback.md) pour les utilisateurs. |
+| Réécriture du mot de passe |Autorisations de lecture et d’écriture sur les attributs documentés dans [Bien démarrer avec la gestion des mots de passe](../authentication/tutorial-enable-sspr-writeback.md) pour les utilisateurs. |
 | Écriture différée des appareils |Autorisations de lecture et d’écriture sur les objets et conteneurs d’appareil documentés dans la [réécriture d’appareil](how-to-connect-device-writeback.md). |
-| Écriture différée de groupe |Lire, créer, mettre à jour et supprimer des objets de groupe pour les **groupes Office 365** synchronisés.  Pour plus d’informations, consultez [Écriture différée de groupe](how-to-connect-preview.md#group-writeback).|
+| Écriture différée de groupe |Lire, créer, mettre à jour et supprimer des objets de groupe pour les **groupes Office 365** synchronisés.|
 
 ## <a name="using-the-adsyncconfig-powershell-module"></a>Utilisation du module PowerShell ADSyncConfig 
-Le module ADSyncConfig nécessite les [outils d’administration de serveur distant pour AD DS](https://docs.microsoft.com/windows-server/remote/remote-server-administration-tools), car il dépend des outils et du module PowerShell AD DS. Pour installer les outils d’administration de serveur distant pour AD DS, ouvrez une fenêtre Windows PowerShell avec l’option « Exécuter en tant qu’administrateur » et exécutez la commande suivante : 
+Le module ADSyncConfig nécessite les [outils d’administration de serveur distant pour AD DS](/windows-server/remote/remote-server-administration-tools), car il dépend des outils et du module PowerShell AD DS. Pour installer les outils d’administration de serveur distant pour AD DS, ouvrez une fenêtre Windows PowerShell avec l’option « Exécuter en tant qu’administrateur » et exécutez la commande suivante : 
 
 ``` powershell
 Install-WindowsFeature RSAT-AD-Tools 
@@ -148,7 +149,7 @@ Cette applet de commande définit les autorisations suivantes :
 
  
 ### <a name="configure-ms-ds-consistency-guid-permissions"></a>Configurer les autorisations MS-DS-Consistency-Guid 
-Pour définir les autorisations du compte de connecteur AD DS en utilisant l’attribut ms-Ds-Consistency-Guid comme ancre source (autrement dit l’option « Laisser Azure gérer l’ancre source pour moi »), exécutez : 
+Pour définir les autorisations du compte de connecteur AD DS en utilisant l’attribut ms-Ds-Consistency-Guid comme ancre source (option « Laisser Azure gérer l’ancre source pour moi »), exécutez : 
 
 ``` powershell
 Set-ADSyncMsDsConsistencyGuidPermissions -ADConnectorAccountName <String> -ADConnectorAccountDomain <String> [-SkipAdminSdHolders] [<CommonParameters>] 
@@ -310,4 +311,3 @@ Cette applet de commande définit les autorisations suivantes :
 - [Installation Express](how-to-connect-install-express.md)
 - [Installation personnalisée](how-to-connect-install-custom.md)
 - [Référence ADSyncConfig](reference-connect-adsyncconfig.md)
-

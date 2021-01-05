@@ -4,19 +4,19 @@ description: Utilisez Azure Key Vault pour stocker une chaîne de connexion, des
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
-ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/23/2019
 ms.reviewer: sngun
-ms.openlocfilehash: 225221635f978e3d70cec4ce7e9d78d6b100b4fd
-ms.sourcegitcommit: bc738d2986f9d9601921baf9dded778853489b16
+ms.openlocfilehash: a9bea0664f99a21ac734de666c802e9875ff00b5
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80618769"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97359318"
 ---
 # <a name="secure-azure-cosmos-keys-using-azure-key-vault"></a>Sécuriser les clés Azure Cosmos à l’aide d’Azure Key Vault 
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 >[!IMPORTANT]
 > La solution recommandée pour accéder aux clés Azure Cosmos DB consiste à utiliser une [identité managée attribuée par le système](managed-identity-based-authentication.md). Si votre service ne peut pas tirer parti des identités managées, utilisez la [solution basée sur le certificat](certificate-based-authentication.md). Si la solution d'identité managée et la solution basée sur le certificat ne répondent pas à vos besoins, utilisez la solution de coffre de clés ci-dessous.
@@ -51,7 +51,7 @@ Les étapes suivantes sont nécessaires pour stocker et lire les clés d’accè
    * Entrez un **nom** pour votre secret.
    * Entrez la chaîne de connexion de votre compte Cosmos DB dans le champ **Valeur**. Ensuite, sélectionnez **Créer**.
 
-   ![Créer un secret](./media/access-secrets-from-keyvault/create-a-secret.png)
+   :::image type="content" source="./media/access-secrets-from-keyvault/create-a-secret.png" alt-text="Création d’une clé secrète":::
 
 4. Une fois le secret créé, ouvrez-le et copiez l’identificateur de secret qui se présente sous la forme suivante. Vous utiliserez cet identificateur à la section suivante. 
 
@@ -59,7 +59,7 @@ Les étapes suivantes sont nécessaires pour stocker et lire les clés d’accè
 
 ## <a name="create-an-azure-web-application"></a>Créer une application web Azure
 
-1. Créez une application web Azure ou bien téléchargez l’application à partir du [dépôt GitHub](https://github.com/Azure/azure-cosmosdb-dotnet/tree/master/Demo/keyvaultdemo). Il s’agit d’une application MVC simple.  
+1. Créez une application web Azure ou bien téléchargez l’application à partir du [dépôt GitHub](https://github.com/Azure/azure-cosmos-dotnet-v2/tree/master/Demo/keyvaultdemo). Il s’agit d’une application MVC simple.  
 
 2. Décompressez l’application téléchargée et ouvrez le fichier **HomeController.cs**. Mettez à jour l’ID de secret dans la ligne suivante :
 
@@ -70,11 +70,11 @@ Les étapes suivantes sont nécessaires pour stocker et lire les clés d’accè
 
 5. Une fois l’application déployée, dans le portail Azure, accédez-y et activez son **identité MSI** (Managed Service Identity).  
 
-   ![Identité MSI](./media/access-secrets-from-keyvault/turn-on-managed-service-identity.png)
+   :::image type="content" source="./media/access-secrets-from-keyvault/turn-on-managed-service-identity.png" alt-text="Identité MSI (Managed Service Identity)":::
 
 Si vous exécutez l’application maintenant, vous verrez l’erreur suivante, car vous n’avez pas accordé d’autorisation pour cette application dans Key Vault.
 
-![Application déployée sans accès](./media/access-secrets-from-keyvault/app-deployed-without-access.png)
+:::image type="content" source="./media/access-secrets-from-keyvault/app-deployed-without-access.png" alt-text="Application déployée sans accès":::
 
 ## <a name="register-the-application--grant-permissions-to-read-the-key-vault"></a>Inscrire l’application et accorder des autorisations pour lire le coffre de clés
 
@@ -84,15 +84,15 @@ Dans cette section, vous inscrivez l’application auprès d’Azure Active Dire
 
 2. Ouvrez **Stratégies d’accès**, sélectionnez **+Ajouter un nouveau**, recherchez l’application web que vous avez déployée, sélectionnez les autorisations et sélectionnez **OK**.  
 
-   ![Ajouter une stratégie d’accès](./media/access-secrets-from-keyvault/add-access-policy.png)
+   :::image type="content" source="./media/access-secrets-from-keyvault/add-access-policy.png" alt-text="Ajouter une stratégie d’accès":::
 
 Maintenant, si vous exécutez l’application, vous pouvez lire le secret dans le coffre de clés.
 
-![Application déployée avec un secret](./media/access-secrets-from-keyvault/app-deployed-with-access.png)
+:::image type="content" source="./media/access-secrets-from-keyvault/app-deployed-with-access.png" alt-text="Application déployée avec un secret":::
  
 De même, vous pouvez ajouter un utilisateur pour qu’il accède au coffre de clés. Vous devez vous ajouter vous-même au coffre de clés sélectionnant **Stratégies d’accès**, puis accorder toutes les autorisations dont vous avez besoin pour exécuter l’application à partir de Visual studio. Quand cette application s’exécute à partir de votre bureau, elle prend votre identité.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour configurer un pare-feu pour Azure Cosmos DB, consultez l’article sur la [prise en charge du pare-feu](firewall-support.md).
-* Pour configurer le point de terminaison de service de réseau virtuel, consultez l’article [Sécuriser l’accès à l’aide du point de terminaison de service de réseau virtuel](vnet-service-endpoint.md).
+* Pour configurer un pare-feu pour Azure Cosmos DB, consultez l’article sur la [prise en charge du pare-feu](how-to-configure-firewall.md).
+* Pour configurer le point de terminaison de service de réseau virtuel, consultez l’article [Sécuriser l’accès à l’aide du point de terminaison de service de réseau virtuel](how-to-configure-vnet-service-endpoint.md).

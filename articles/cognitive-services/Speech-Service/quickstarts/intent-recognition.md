@@ -1,24 +1,26 @@
 ---
-title: 'Démarrage rapide : Reconnaître la voix, les intentions et les entités – Service Speech'
+title: Démarrage rapide sur la reconnaissance de l’intention - Service de reconnaissance vocale
 titleSuffix: Azure Cognitive Services
-description: Dans ce guide démarrage rapide, vous utilisez le kit SDK Speech pour effectuer une reconnaissance vocale interactive à partir de données audio capturées depuis un micro.
+description: Dans ce guide de démarrage rapide, vous utilisez la reconnaissance de l’intention pour effectuer une reconnaissance interactive des intentions à partir de données audio capturées depuis un micro.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: quickstart
-ms.date: 01/27/2020
+ms.date: 09/02/2020
 ms.author: erhopf
+ms.custom: devx-track-js, devx-track-csharp, cog-serv-seo-aug-2020
 zone_pivot_groups: programming-languages-set-two-with-js
-ms.openlocfilehash: 96130ea2ac08b51a86c0578fb05b20fadcc74ef8
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+keywords: reconnaissance de l’intention
+ms.openlocfilehash: 8380db20ca3c4896aa37222dd5db450c9843b5ab
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82979658"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91283058"
 ---
-# <a name="quickstart-recognize-speech-intents-and-entities-with-language-understanding-luis"></a>Démarrage rapide : Reconnaître la voix, les intentions et les entités avec LUIS
+# <a name="get-started-with-intent-recognition"></a>Bien démarrer avec la reconnaissance de l’intention
 
 ::: zone pivot="programming-language-csharp"
 [!INCLUDE [Header](../includes/quickstarts/intent-recognition/header.md)]

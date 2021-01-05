@@ -4,16 +4,16 @@ description: Découvrez comment un manifeste de déploiement déclare les module
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 03/26/2020
+ms.date: 10/08/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 6a4b90d8b6fe67de26c8e652e0dc5b62cc27023f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3f6c12b892e01aafd5beecdff14751481cf7fc96
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80545625"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91963395"
 ---
 # <a name="learn-how-to-deploy-modules-and-establish-routes-in-iot-edge"></a>Découvrez comment déployer des modules et établir des itinéraires dans IoT Edge.
 
@@ -38,7 +38,7 @@ Dans les didacticiels Azure IoT Edge, vous générez un manifeste de déploiemen
 
 Deux modules sont nécessaires dans chaque manifeste de déploiement : `$edgeAgent` et `$edgeHub`. Ces modules font partie du runtime IoT Edge qui gère l’appareil IoT Edge et les modules en cours d’exécution sur ce dernier. Pour plus d’informations sur ces modules, consultez [Présentation du runtime Azure IoT Edge et de son architecture](iot-edge-runtime.md).
 
-Outre les deux modules de runtime, vous pouvez ajouter jusqu'à 20 modules de votre choix pour s’exécuter sur un appareil IoT Edge.
+Outre les deux modules de runtime, vous pouvez ajouter jusqu'à 50 modules de votre choix à exécuter sur un appareil IoT Edge.
 
 Un manifeste de déploiement ne contenant que le runtime IoT Edge (edgeAgent et edgeHub) est valide.
 
@@ -46,32 +46,31 @@ Les manifestes de déploiement suivent la structure suivante :
 
 ```json
 {
-    "modulesContent": {
-        "$edgeAgent": { // required
-            "properties.desired": {
-                // desired properties of the Edge agent
-                // includes the image URIs of all modules
-                // includes container registry credentials
-            }
-        },
-        "$edgeHub": { //required
-            "properties.desired": {
-                // desired properties of the Edge hub
-                // includes the routing information between modules, and to IoT Hub
-            }
-        },
-        "module1": {  // optional
-            "properties.desired": {
-                // desired properties of module1
-            }
-        },
-        "module2": {  // optional
-            "properties.desired": {
-                // desired properties of module2
-            }
-        },
-        ...
+  "modulesContent": {
+    "$edgeAgent": { // required
+      "properties.desired": {
+        // desired properties of the IoT Edge agent
+        // includes the image URIs of all deployed modules
+        // includes container registry credentials
+      }
+    },
+    "$edgeHub": { //required
+      "properties.desired": {
+        // desired properties of the IoT Edge hub
+        // includes the routing information between modules, and to IoT Hub
+      }
+    },
+    "module1": {  // optional
+      "properties.desired": {
+        // desired properties of module1
+      }
+    },
+    "module2": {  // optional
+      "properties.desired": {
+        // desired properties of module2
+      }
     }
+  }
 }
 ```
 
@@ -79,40 +78,101 @@ Les manifestes de déploiement suivent la structure suivante :
 
 Définir comment le runtime IoT Edge installe les modules dans votre déploiement. L’agent IoT Edge est le composant de runtime qui gère l’installation, les mises à jour et les rapports d’état d’un appareil IoT Edge. Pour cette raison, le jumeau du module $edgeAgent contient les informations de configuration et de gestion de tous les modules. Ces informations incluent les paramètres de configuration pour l’agent IoT Edge proprement dit.
 
-Pour obtenir une liste complète des propriétés qui peuvent ou doivent être incluses, consultez [Propriétés de l’agent IoT Edge et du hub IoT Edge](module-edgeagent-edgehub.md).
-
 Les propriétés $edgeAgent suivent cette structure :
 
 ```json
-"$edgeAgent": {
-    "properties.desired": {
-        "schemaVersion": "1.0",
+{
+  "modulesContent": {
+    "$edgeAgent": {
+      "properties.desired": {
+        "schemaVersion": "1.1",
         "runtime": {
-            "settings":{
-                "registryCredentials":{ // give the edge agent access to container images that aren't public
-                    }
-                }
+          "settings":{
+            "registryCredentials":{
+              // give the IoT Edge agent access to container images that aren't public
             }
+          }
         },
         "systemModules": {
-            "edgeAgent": {
-                // configuration and management details
-            },
-            "edgeHub": {
-                // configuration and management details
-            }
+          "edgeAgent": {
+            // configuration and management details
+          },
+          "edgeHub": {
+            // configuration and management details
+          }
         },
         "modules": {
-            "module1": { // optional
-                // configuration and management details
-            },
-            "module2": { // optional
-                // configuration and management details
-            }
+          "module1": {
+            // configuration and management details
+          },
+          "module2": {
+            // configuration and management details
+          }
         }
-    }
-},
+      }
+    },
+    "$edgeHub": { ... },
+    "module1": { ... },
+    "module2": { ... }
+  }
+}
 ```
+
+La version 1.1 du schéma de l’agent IoT Edge a été publiée avec la version 1.0.10 de IoT Edge ; elle permet l’ordonnancement du démarrage des modules. Nous vous recommandons d’utiliser la version 1.1 du schéma pour les déploiements de IoT Edge exécutant la version 1.0.10 ou une version plus récente.
+
+### <a name="module-configuration-and-management"></a>Configuration et gestion de module
+
+La liste des propriétés souhaitées de l’agent IoT Edge vous permet de définir les modules qui sont déployés sur un appareil IoT Edge et la façon dont ils doivent être configurés et gérés.
+
+Pour obtenir une liste complète des propriétés souhaitées qui peuvent ou doivent être incluses, consultez [Propriétés de l’agent IoT Edge et du hub IoT Edge](module-edgeagent-edgehub.md).
+
+Par exemple :
+
+```json
+{
+  "modulesContent": {
+    "$edgeAgent": {
+      "properties.desired": {
+        "schemaVersion": "1.1",
+        "runtime": { ... },
+        "systemModules": {
+          "edgeAgent": { ... },
+          "edgeHub": { ... }
+        },
+        "modules": {
+          "module1": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "startupOrder": 2,
+            "settings": {
+              "image": "myacr.azurecr.io/module1:latest",
+              "createOptions": "{}"
+            }
+          },
+          "module2": { ... }
+        }
+      }
+    },
+    "$edgeHub": { ... },
+    "module1": { ... },
+    "module2": { ... }
+  }
+}
+```
+
+Chaque module a une propriété **settings** (paramètres) qui contient le module **image**, une adresse pour l’image conteneur dans un registre de conteneurs, ainsi que **createOptions** pour configurer l’image au démarrage. Pour en savoir plus, consultez [Guide pratique pour configurer les options de création de conteneur pour les modules IoT Edge](how-to-use-create-options.md).
+
+Le module edgeHub et les modules personnalisés ont également trois propriétés qui indiquent à l’agent IoT Edge comment les gérer :
+
+* **État** : Indique si le module doit être en cours d’exécution ou arrêté lors du premier déploiement. Obligatoire.
+* **RestartPolicy**: Indique si l’agent IoT Edge doit redémarrer le module si ce dernier s’arrête et, le cas échéant, quand le redémarrage doit se produire. Obligatoire.
+* **StartupOrder** : *Introduit dans IoT Edge version 1.0.10.* L’ordre dans lequel l’agent IoT Edge doit démarrer les modules lors du premier déploiement. L’ordre est déclaré en entrant des nombres entiers. La valeur 0 désigne le module qui sera démarré en premier. Les nombres suivants désignent les modules qui seront démarrés après lui. Le module edgeAgent n’a pas de valeur de démarrage, car il démarre toujours en premier. Optionnel.
+
+  L’agent de IoT Edge initialise les modules selon l’ordre de la valeur de démarrage, mais n’attend pas que chaque module finisse de démarrer avant de passer à l’étape suivante.
+
+  L’ordre de démarrage est utile si certains modules dépendent d’autres. Par exemple, vous pouvez souhaiter que le module edgeHub démarre en premier afin qu’il soit prêt à acheminer les messages lorsque d’autres modules démarrent. Nous vous recommandons également de démarrer un module de stockage avant les modules qui lui envoient des données. Toutefois, vous devez toujours concevoir vos modules pour gérer les défaillances d’autres modules. Il s’agit de la nature des conteneurs qu’ils peuvent arrêter et redémarrer à tout moment, et autant de fois que nécessaire.
 
 ## <a name="declare-routes"></a>Déclarer des itinéraires
 
@@ -121,17 +181,36 @@ Le hub IoT Edge gère la communication entre les modules, IoT Hub et tous les ap
 Les itinéraires sont déclarés dans les propriétés souhaitées **$edgeHub** avec la syntaxe suivante :
 
 ```json
-"$edgeHub": {
-    "properties.desired": {
+{
+  "modulesContent": {
+    "$edgeAgent": { ... },
+    "$edgeHub": {
+      "properties.desired": {
+        "schemaVersion": "1.1",
         "routes": {
-            "route1": "FROM <source> WHERE <condition> INTO <sink>",
-            "route2": "FROM <source> WHERE <condition> INTO <sink>"
+          "route1": "FROM <source> WHERE <condition> INTO <sink>",
+          "route2": {
+            "route": "FROM <source> WHERE <condition> INTO <sink>",
+            "priority": 0,
+            "timeToLiveSecs": 86400
+          }
         },
-    }
+        "storeAndForwardConfiguration": {
+          "timeToLiveSecs": 10
+        }
+      }
+    },
+    "module1": { ... },
+    "module2": { ... }
+  }
 }
 ```
 
-Chaque itinéraire requiert une source et un récepteur, mais la condition est facultative et peut être utilisée pour filtrer les messages.
+La version 1.1 du schéma du hub IoT Edge a été publiée avec la version 1.0.10 de IoT Edge. Elle permet de hiérarchiser les itinéraires et de leur définir une durée de vie. Nous vous recommandons d’utiliser la version 1.1 du schéma pour les déploiements de IoT Edge exécutant la version 1.0.10 ou une version plus récente.
+
+Chaque itinéraire a besoin d’une *source* d’où proviennent les messages et d’un *récepteur* vers lequel les messages sont envoyés. La *condition* est un élément facultatif que vous pouvez utiliser pour filtrer les messages.
+
+Vous pouvez affecter des *priorités* aux itinéraires dont vous voulez traiter les messages en premier. Cette fonctionnalité est utile dans les scénarios où la connexion en amont est faible ou limitée tandis que vous avez des données critiques qui doivent être prioritaires sur les messages de télémétrie standards.
 
 ### <a name="source"></a>Source
 
@@ -186,6 +265,32 @@ IoT Edge offre la garantie « Au moins une remise ». Le hub IoT Edge stocke les
 
 Le hub IoT Edge stocke les messages jusqu’à l’heure spécifiée dans la propriété `storeAndForwardConfiguration.timeToLiveSecs` des [propriétés souhaitées du hub IoT Edge](module-edgeagent-edgehub.md).
 
+### <a name="priority-and-time-to-live"></a>Priorité et durée de vie
+
+Les itinéraires peuvent être déclarés : soit en utilisant simplement une chaîne pour définir un itinéraire, soit en tant qu’objet qui prend une chaîne de routage, un nombre entier pour définir sa priorité et un nombre entier pour définir sa durée de vie.
+
+Option 1 :
+
+   ```json
+   "route1": "FROM <source> WHERE <condition> INTO <sink>",
+   ```
+
+Option 2, introduite dans la version 1.0.10 de IoT Edge avec la version 1.1 du schéma du hub IoT Edge :
+
+   ```json
+   "route2": {
+     "route": "FROM <source> WHERE <condition> INTO <sink>",
+     "priority": 0,
+     "timeToLiveSecs": 86400
+   }
+   ```
+
+Les valeurs de **priorité** peuvent aller de 0 à 9, mais aussi être inclusives, où 0 est la priorité la plus élevée. Les messages sont mis en file d’attente en fonction de leurs points de terminaison. Tous les messages de priorité 0 ciblant un point de terminaison spécifique sont traités avant le traitement de tous les messages de priorité 1 ciblant le même point de terminaison, et en aval. Si plusieurs itinéraires pour le même point de terminaison ont le même niveau de priorité, leurs messages sont traités selon le principe du « premier arrivé, premier servi ». Si aucune priorité n’est spécifiée, l’itinéraire est affecté à la priorité la plus basse.
+
+La propriété **timeToLiveSecs** hérite de sa valeur à partir de la propriété **storeAndForwardConfiguration** du hub IoT Edge, sauf en cas de définition explicite. La valeur peut être un entier positif.
+
+Pour en savoir plus sur la gestion des files d’attente de priorité, consultez le référentiel GitHub [Priorité et durée de vie d’itinéraire](https://github.com/Azure/iotedge/blob/master/doc/Route_priority_and_TTL.md).
+
 ## <a name="define-or-update-desired-properties"></a>Définir ou mettre à jour les propriétés souhaitées
 
 Le manifeste de déploiement spécifie les propriétés souhaitées pour chaque module déployé sur l’appareil IoT Edge. Les propriétés souhaitées dans le manifeste de déploiement remplacent les propriétés souhaitées actuellement spécifiées dans le jumeau de module.
@@ -203,7 +308,7 @@ L’exemple suivant montre à quoi peut ressembler un document de manifeste de d
   "modulesContent": {
     "$edgeAgent": {
       "properties.desired": {
-        "schemaVersion": "1.0",
+        "schemaVersion": "1.1",
         "runtime": {
           "type": "docker",
           "settings": {
@@ -230,6 +335,7 @@ L’exemple suivant montre à quoi peut ressembler un document de manifeste de d
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
+            "startupOrder": 0,
             "settings": {
               "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
               "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
@@ -242,6 +348,7 @@ L’exemple suivant montre à quoi peut ressembler un document de manifeste de d
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
+            "startupOrder": 2,
             "settings": {
               "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
               "createOptions": "{}"
@@ -252,6 +359,7 @@ L’exemple suivant montre à quoi peut ressembler un document de manifeste de d
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
+            "startupOrder": 1,
             "env": {
               "tempLimit": {"value": "100"}
             },
@@ -265,13 +373,21 @@ L’exemple suivant montre à quoi peut ressembler un document de manifeste de d
     },
     "$edgeHub": {
       "properties.desired": {
-        "schemaVersion": "1.0",
+        "schemaVersion": "1.1",
         "routes": {
-          "sensorToFilter": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filtermodule/inputs/input1\")",
-          "filterToIoTHub": "FROM /messages/modules/filtermodule/outputs/output1 INTO $upstream"
+          "sensorToFilter": {
+            "route": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filtermodule/inputs/input1\")",
+            "priority": 0,
+            "timeToLiveSecs": 1800
+          },
+          "filterToIoTHub": {
+            "route": "FROM /messages/modules/filtermodule/outputs/output1 INTO $upstream",
+            "priority": 1,
+            "timeToLiveSecs": 1800
+          }
         },
         "storeAndForwardConfiguration": {
-          "timeToLiveSecs": 10
+          "timeToLiveSecs": 100
         }
       }
     }

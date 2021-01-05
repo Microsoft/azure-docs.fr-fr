@@ -13,21 +13,23 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/21/2019
 ms.author: juliako
-ms.openlocfilehash: 079094965775c140c0343da98e40fd008995d45a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5b570efa54d99380f2beff5441dc40a3a10b902a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74901185"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89269112"
 ---
 # <a name="dynamic-packaging"></a>l’empaquetage dynamique
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 3](../latest/dynamic-packaging-overview.md)
 > * [Version 2](media-services-dynamic-packaging-overview.md)
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Vous pouvez utiliser Microsoft Azure Media Services pour distribuer de nombreux formats de fichiers sources multimédias, formats de streaming de contenu multimédia et formats de protection de contenu à diverses technologies clientes (par exemple, iOS, XBOX, Silverlight, Windows 8). Ces clients comprennent différents protocoles. Par exemple, iOS nécessite un format HTTP Live Streaming (HLS) V4, tandis que Silverlight et Xbox nécessitent le format Smooth Streaming. Si vous voulez transmettre un ensemble de fichiers MP4 (ISO Base Media 14496-12) ou de fichiers Smooth Streaming à vitesse de transmission adaptative, à des clients qui utilisent le format MPEG DASH, HLS ou Smooth Streaming, nous vous recommandons de tirer profit de l'empaquetage dynamique Media Services.
 
@@ -70,4 +72,3 @@ L’empaquetage dynamique prend en charge les fichiers MP4 qui contiennent des d
 ## <a name="provide-feedback"></a>Fournir des commentaires
 
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

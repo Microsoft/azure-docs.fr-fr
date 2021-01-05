@@ -1,6 +1,6 @@
 ---
 title: Chiffrement - Outil Microsoft de modélisation des menaces - Azure | Microsoft Docs
-description: Mesures de correction des menaces exposées dans l’outil de modélisation des menaces
+description: En savoir plus sur l’atténuation des menaces exposées dans l’outil Threat Modeling Tool, possible grâce au chiffrement. Voir les informations sur l’atténuation et les exemples de code.
 services: security
 documentationcenter: na
 author: jegeib
@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/07/2017
 ms.author: jegeib
-ms.openlocfilehash: c9116472af5b400ded0fea24f98b07bad9d9039b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7af115d8f1244253e461f796c5665609d3b84b21
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68728185"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517442"
 ---
 # <a name="security-frame-cryptography--mitigations"></a>Infrastructure de sécurité : chiffrement | Atténuation des risques 
 
@@ -119,7 +119,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Choisir un algorithme de chiffrement](https://technet.microsoft.com/library/ms345262(v=sql.130).aspx) |
+| **Informations de référence**              | [Choisir un algorithme de chiffrement](/sql/relational-databases/security/encryption/choose-an-encryption-algorithm) |
 | **Étapes** | Les algorithmes de chiffrement définissent les transformations de données qui ne peuvent pas être facilement inversées par les utilisateurs non autorisés. SQL Server permet aux administrateurs et aux développeurs de choisir parmi plusieurs algorithmes, notamment DES, Triple DES, TRIPLE_DES_3KEY, RC2, RC4, RC4 128 bits, DESX, AES 128 bits, AES 192 bits et AES 256 bits. |
 
 ## <a name="ssis-packages-should-be-encrypted-and-digitally-signed"></a><a id="ssis-signed"></a>Les packages SSIS doivent être chiffrés et signés numériquement
@@ -130,7 +130,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Identifier la source de packages à l’aide de signatures numériques](https://msdn.microsoft.com/library/ms141174.aspx), [Limitation des menaces et des risques de vulnérabilité (Integration Services)](https://msdn.microsoft.com/library/bb522559.aspx) |
+| **Informations de référence**              | [Identifier la source de packages à l’aide de signatures numériques](/sql/integration-services/security/identify-the-source-of-packages-with-digital-signatures), [Limitation des menaces et des risques de vulnérabilité (Integration Services)](/sql/integration-services/security/security-overview-integration-services) |
 | **Étapes** | La source d'un package correspond à l'individu ou à l'organisation qui a créé le package. L'exécution d'un package à partir d'une source inconnue ou non approuvée peut être risquée. Pour empêcher la falsification non autorisée des packages SSIS, les signatures numériques doivent être utilisées. En outre, pour garantir la confidentialité des packages lors du stockage/transit, les packages SSIS doivent être chiffrés. |
 
 ## <a name="add-digital-signature-to-critical-database-securables"></a><a id="securables-db"></a>Ajouter une signature numérique aux éléments sécurisables de bases de données critiques
@@ -141,7 +141,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [ADD SIGNATURE (Transact-SQL)](https://msdn.microsoft.com/library/ms181700) |
+| **Informations de référence**              | [ADD SIGNATURE (Transact-SQL)](/sql/t-sql/statements/add-signature-transact-sql) |
 | **Étapes** | Dans les cas où l’intégrité d’un élément sécurisable de base de données critique doit être vérifiée, les signatures numériques doivent être utilisées. Les éléments sécurisables de base de données tels qu’une procédure stockée, une fonction, un assembly ou un déclencheur sont signés numériquement. Vous trouverez ci-dessous un exemple pour lequel cela peut être utile : supposons qu’un éditeur de logiciels indépendant a fourni la prise en charge pour un logiciel fourni à l’un de ses clients. Avant de fournir la prise en charge, l’éditeur de logiciels indépendant souhaitera garantir qu’un élément sécurisable de base de données inclus dans le logiciel n’a pas été falsifié par inadvertance ou par une tentative malveillante. Si l’élément sécurisable est signé numériquement, l’éditeur de logiciels indépendant peut vérifier sa signature numérique et valider son intégrité.| 
 
 ## <a name="use-sql-server-ekm-to-protect-encryption-keys"></a><a id="ekm-keys"></a>Utiliser EKM SQL Server pour protéger les clés de chiffrement
@@ -152,7 +152,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Gestion de clés extensible (EKM)](https://msdn.microsoft.com/library/bb895340), [Gestion de clés extensible à l’aide d’Azure Key Vault (SQL Server)](https://msdn.microsoft.com/library/dn198405) |
+| **Informations de référence**              | [Gestion de clés extensible (EKM)](/sql/relational-databases/security/encryption/extensible-key-management-ekm), [Gestion de clés extensible à l’aide d’Azure Key Vault (SQL Server)](/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server) |
 | **Étapes** | La gestion de clés extensible SQL Server active les clés de chiffrement qui protègent les fichiers de base de données à stocker dans un appareil distant comme une carte à puce, un périphérique USB ou un module EKM/HSM. Elle permet aussi la protection des données pour les administrateurs de base de données (sauf les membres du groupe sysadmin). Les données peuvent être chiffrées à l'aide des clés de chiffrement auxquelles seul l'utilisateur de base de données peut accéder sur le module EKM/HSM externe. |
 
 ## <a name="use-alwaysencrypted-feature-if-encryption-keys-should-not-be-revealed-to-database-engine"></a><a id="keys-engine"></a>Utiliser la fonction AlwaysEncrypted si les clés de chiffrement ne doivent pas être révélées au moteur de base de données
@@ -163,7 +163,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | SQL Azure, OnPrem |
 | **Attributs**              | Version SQL - V12, MsSQL2016 |
-| **Informations de référence**              | [Always Encrypted (moteur de base de données)](https://msdn.microsoft.com/library/mt163865) |
+| **Informations de référence**              | [Always Encrypted (moteur de base de données)](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |
 | **Étapes** | Always Encrypted est une fonction conçue pour protéger les données sensibles, comme les numéros de carte bancaire ou les numéros d’identification (par exemple les numéros de sécurité sociale), stockées dans Azure SQL Database ou les bases de données SQL Server. Always Encrypted permet aux clients de chiffrer les données sensibles des applications clientes et de ne jamais divulguer les clés de chiffrement au moteur de base de données (SQL Database ou SQL Server). Always Encrypted sépare ainsi les utilisateurs qui sont propriétaires des données (et peuvent les afficher) des utilisateurs qui gèrent les données (mais n’y ont pas accès). |
 
 ## <a name="store-cryptographic-keys-securely-on-iot-device"></a><a id="keys-iot"></a>Stocker les clés de chiffrement de façon sécurisée sur IoT Device
@@ -174,7 +174,7 @@ ms.locfileid: "68728185"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | Système d’exploitation d’appareil - Windows IoT Standard, connectivité des appareils - Azure IoT device SDK |
-| **Informations de référence**              | [TPM on Windows IoT Core](https://developer.microsoft.com/windows/iot/docs/tpm) (Module de plateforme sécurisée sur Windows IoT Standard), [TPM on Windows IoT Core](https://docs.microsoft.com/windows/iot-core/secure-your-device/setuptpm) (Module de plateforme sécurisée sur Windows IoT Standard), [Azure IoT Device SDK TPM](https://github.com/Azure/azure-iot-hub-vs-cs/wiki/Device-Provisioning-with-TPM) (Module de plateforme sécurisée Azure IoT Device SDK) |
+| **Informations de référence**              | [TPM on Windows IoT Core](/windows/iot-core/secure-your-device/TPM) (Module de plateforme sécurisée sur Windows IoT Standard), [TPM on Windows IoT Core](/windows/iot-core/secure-your-device/setuptpm) (Module de plateforme sécurisée sur Windows IoT Standard), [Azure IoT Device SDK TPM](https://github.com/Azure/azure-iot-hub-vs-cs/wiki/Device-Provisioning-with-TPM) (Module de plateforme sécurisée Azure IoT Device SDK) |
 | **Étapes** | Clés privées de certificat ou symétriques dans un stockage matériel protégé tel qu’un module de plateforme sécurisée ou des cartes à puce. Windows 10 IoT Standard prend en charge l’utilisateur d’un module de plateforme sécurisée, dont plusieurs types compatibles peuvent être utilisés : https://docs.microsoft.com/windows/iot-core/secure-your-device/tpm#discrete-tpm-dtpm. Il est recommandé d’utiliser un module de plateforme sécurisée de type discret ou micrologiciel. Un module de plateforme sécurisée de type logiciel doit uniquement être utilisé à des fins de développement et de test. Une fois qu’un module de plateforme sécurisée est disponible et que les clés sont approvisionnées dans celui-ci, le code qui génère le jeton doit être écrit sans coder en dur les informations sensibles qu’il contient. | 
 
 ### <a name="example"></a>Exemple

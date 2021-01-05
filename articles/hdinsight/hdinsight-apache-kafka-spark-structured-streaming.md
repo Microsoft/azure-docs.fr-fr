@@ -9,10 +9,10 @@ ms.topic: tutorial
 ms.custom: hdinsightactive,seodec18,seoapr2020
 ms.date: 04/22/2020
 ms.openlocfilehash: 8aa7401a2ee7a0d87736e6b18fc814f983e2afa0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82184195"
 ---
 # <a name="tutorial-use-apache-spark-structured-streaming-with-apache-kafka-on-hdinsight"></a>Tutoriel : Utiliser Apache Spark Structured Streaming avec Apache Kafka sur HDInsight

@@ -3,17 +3,22 @@ title: Supervision des performances des applications web Java - Azure Applicatio
 description: Surveillance étendue des performances et de l’utilisation de votre site web Java avec Application Insights.
 ms.topic: conceptual
 ms.date: 01/10/2019
-ms.openlocfilehash: b047a8dd8c67679a5cc8a45e8be82f9ab5227aa4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+author: MS-jgol
+ms.custom: devx-track-java
+ms.author: jgol
+ms.openlocfilehash: 299e9010b74c8363cacd1c20044d183dc1def6a6
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537540"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601286"
 ---
 # <a name="monitor-dependencies-caught-exceptions-and-method-execution-times-in-java-web-apps"></a>Surveiller les dépendances, les exceptions interceptées et les temps d’exécution des méthodes dans les applications web Java
 
+> [!IMPORTANT]
+> L’approche recommandée pour surveiller des applications Java consiste à utiliser l’instrumentation automatique sans modifier le code. Suivez les instructions pour l’[agent Application Insights agent Java 3.0](./java-in-process-agent.md).
 
-Si vous avez [instrumenté votre application web Java avec Application Insights][java], vous pouvez utiliser l’agent Java pour obtenir des informations plus détaillées, sans pour autant modifier le code :
+Si vous avez [instrumenté votre application web Java avec le Kit de développement logiciel (SDK) Application Insights][java], vous pouvez utiliser l’agent Java pour obtenir des informations plus détaillées, sans pour autant modifier le code :
 
 * **Dépendances :** données sur les appels passés par votre application à destination d’autres composants, dont :
   * Les **appels HTTP sortants** effectués via Apache HttpClient, OkHttp et `java.net.HttpURLConnection` sont capturés.
@@ -120,19 +125,20 @@ Dans la ressource Application Insights, les temps d’exécution cumulés de la 
 
 Pour rechercher des instances de dépendance et d’exception ainsi que des rapports de méthode, ouvrez [Rechercher][diagnostic].
 
-[En savoir plus sur le diagnostic des problèmes de dépendance](../../azure-monitor/app/asp-net-dependencies.md#diagnosis).
+[En savoir plus sur le diagnostic des problèmes de dépendance](./asp-net-dependencies.md#diagnosis).
 
 ## <a name="questions-problems"></a>Des questions ? Des problèmes ?
-* Pas de données ? [Définir les exceptions de pare-feu](../../azure-monitor/app/ip-addresses.md)
+* Pas de données ? [Définir les exceptions de pare-feu](./ip-addresses.md)
 * [Résolution des problèmes Java](java-troubleshoot.md)
 
 <!--Link references-->
 
-[api]: ../../azure-monitor/app/api-custom-events-metrics.md
-[apiexceptions]: ../../azure-monitor/app/api-custom-events-metrics.md#track-exception
-[availability]: ../../azure-monitor/app/monitor-web-app-availability.md
-[diagnostic]: ../../azure-monitor/app/diagnostic-search.md
+[api]: ./api-custom-events-metrics.md
+[apiexceptions]: ./api-custom-events-metrics.md#track-exception
+[availability]: ./monitor-web-app-availability.md
+[diagnostic]: ./diagnostic-search.md
 [eclipse]: app-insights-java-eclipse.md
 [java]: java-get-started.md
 [javalogs]: java-trace-logs.md
-[metrics]: ../../azure-monitor/platform/metrics-charts.md
+[metrics]: ../platform/metrics-charts.md
+

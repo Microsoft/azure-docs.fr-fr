@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=jainr, previous-ms.author=jainr
-ms.openlocfilehash: 42433ec419ac9e02077cd0359e18b5114206f27d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: af7900faff18d526686b80f23b9de3b3bce5ec5c
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721827"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93309601"
 ---
 # <a name="create-cicd-pipelines-for-ai-apps-using-azure-pipelines-docker-and-kubernetes"></a>Créer des pipelines CI/CD pour les applications IA à l’aide d’Azure Pipelines, de Docker et de Kubernetes
 
@@ -34,9 +34,9 @@ Pour utiliser le code source et le tutoriel téléchargés, vous avez besoin de 
 - Le [dépôt du code source](https://github.com/Azure/DevOps-For-AI-Apps) dupliqué sur votre compte GitHub
 - Une [organisation Azure DevOps](/azure/devops/organizations/accounts/create-organization-msa-or-work-student)
 - [Azure CLI](/cli/azure/install-azure-cli)
-- Un [cluster Azure Container Service pour Kubernetes (AKS)](/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster)
+- Un [cluster Azure Container Service pour Kubernetes (AKS)](/previous-versions/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster)
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), pour exécuter des commandes et récupérer la configuration du cluster AKS 
-- Un [compte Azure Container Registry (ACR)](/azure/container-registry/container-registry-get-started-portal)
+- Un [compte Azure Container Registry (ACR)](../../container-registry/container-registry-get-started-portal.md)
 
 ## <a name="cicd-pipeline-summary"></a>Le pipeline CI/CD en quelques mots
 
@@ -62,7 +62,7 @@ Le diagramme et les étapes ci-dessous décrivent l’architecture du pipeline C
 
 ## <a name="see-also"></a>Voir aussi
 
-- [TDSP (Team Data Science Process)](/azure/machine-learning/team-data-science-process/)
-- [Azure Machine Learning (AML)](/azure/machine-learning/)
+- [TDSP (Team Data Science Process)](./index.yml)
+- [Azure Machine Learning (AML)](../index.yml)
 - [Azure DevOps](https://azure.microsoft.com/services/devops/)
-- [Azure Kubernetes Services (AKS)](/azure/aks/intro-kubernetes)
+- [Azure Kubernetes Services (AKS)](../../aks/intro-kubernetes.md)

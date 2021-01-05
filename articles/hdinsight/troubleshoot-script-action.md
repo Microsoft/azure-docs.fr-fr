@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: troubleshooting
 ms.custom: seoapr2020
 ms.date: 04/21/2020
-ms.openlocfilehash: e2a2f6abfd6b7c644e95649f3c9832e4cc986037
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ef9322c17a20ab5bfcf348649a1272dd4f301c5c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188444"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000672"
 ---
 # <a name="troubleshoot-script-actions-in-azure-hdinsight"></a>Résoudre les problèmes liés aux actions de script dans Azure HDInsight
 
@@ -55,7 +55,9 @@ Si la création du cluster échoue en raison d’une erreur de script, les journ
 
 * Toutes les valeurs **stdout** et **stderr** de l’hôte correspondant sont chargées vers le compte de stockage. Il existe un fichier **output-\*.txt** et un fichier **errors-\*.txt** pour chaque action de script. Le fichier **output-*.txt** contient des informations sur l’URI du script exécuté sur l’ordinateur hôte. Le texte suivant constitue un exemple de ces informations :
 
-        'Start downloading script locally: ', u'https://hdiconfigactions.blob.core.windows.net/linuxrconfigactionv01/r-installer-v01.sh'
+    ```output
+    'Start downloading script locally: ', u'https://hdiconfigactions.blob.core.windows.net/linuxrconfigactionv01/r-installer-v01.sh'
+    ```
 
 * Vous pouvez créer plusieurs fois un cluster d’action de script portant le même nom. Dans ce cas, vous pouvez différencier les journaux d’activité correspondants par le nom de dossier **DATE**. Par exemple, la structure de dossiers d’un cluster, **mycluster**, créé à différentes dates ressemble aux entrées de journaux suivantes :
 
@@ -108,10 +110,4 @@ Deux exceptions :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

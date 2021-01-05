@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: troubleshooting
 ms.date: 04/15/2020
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7c840df2c53554519f62a3d1d7a7d8b305187ffb
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 5ba1e280e3c14a24e33246799ca0d7ef8221294f
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81450936"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741692"
 ---
 # <a name="troubleshooting-combined-security-information-registration"></a>Résoudre les problèmes d’inscription des informations de sécurité combinée
 
@@ -157,4 +157,4 @@ Les utilisateurs ne seront plus invités à s’inscrire à l’aide de l’exp�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Apprenez-en davantage sur l'inscription combinée pour la réinitialisation de mot de passe et l’authentification multifacteur Azure en libre-service](concept-registration-mfa-sspr-combined.md)
+* [En savoir plus sur l'inscription combinée de la réinitialisation de mot de passe en libre-service (SSPR) et d'Azure AD Multi-Factor Authentication](concept-registration-mfa-sspr-combined.md)

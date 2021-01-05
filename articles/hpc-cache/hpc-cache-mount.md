@@ -3,15 +3,15 @@ title: Monter un cache Azure HPC Cache
 description: Comment connecter des clients à un service Azure HPC Cache
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
-ms.date: 04/15/2020
+ms.topic: how-to
+ms.date: 09/30/2020
 ms.author: v-erkel
-ms.openlocfilehash: a44232f06b455e20530271723e816c2117b339a0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7f1d8d34d6351fc344fdb101ac8e9a96678df9d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81458357"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91651426"
 ---
 # <a name="mount-the-azure-hpc-cache"></a>Monter le cache Azure HPC Cache
 
@@ -20,7 +20,7 @@ Une fois le cache créé, les clients NFS peuvent y accéder à l’aide d’un
 La commande Mount est composée des éléments suivants :
 
 * L’une des adresses de montage du cache (figurant sur la page de vue d’ensemble du cache)
-* Le chemin d’accès à l’espace de noms virtuel que vous définissez lors de la création de la cible de stockage
+* Un chemin d’espace de noms virtuel que vous définissez pour la cible de stockage (indiqué sur la page Espace de noms du cache)
 * Chemin d’accès local à utiliser sur le client
 * Paramètres de commande qui optimisent la réussite de ce type de montage NFS
 
@@ -79,17 +79,17 @@ Procédez comme suit pour créer la commande de montage.
 
 1. Choisissez le **chemin d’espace de noms virtuel** à utiliser pour le client. Ces chemins d’accès sont liés aux exportations sur le système de stockage back-end.
 
-   ![capture d’écran du champ Chemins d’espaces de noms, avec le sélecteur ouvert](media/mount-select-target.png)
+   ![Capture d’écran montrant le champ « Chemin d’espace de noms virtuel » avec le sélecteur ouvert.](media/mount-select-target.png)
 
-   Vous pouvez afficher et modifier les chemins d’espaces de noms virtuels sur la page Cibles de stockage du portail. Lisez [Ajouter des cibles de stockage](hpc-cache-add-storage.md) pour en savoir plus sur la procédure.
+   Vous pouvez afficher et modifier les chemins d’espaces de noms virtuels sur la page **Espace de noms** du portail. Pour savoir comment procéder, consultez [Configurer l’espace de noms agrégé](add-namespace-paths.md).
 
    Pour en savoir plus sur la fonctionnalité d’espace de noms agrégé d’Azure HPC Cache, lisez [Planifier l’espace de noms agrégé](hpc-cache-namespace.md).
 
 1. Le champ **Commande de montage** de l’étape 3 est automatiquement renseigné avec une commande de montage personnalisée qui utilise l’adresse de montage, le chemin d’espace de noms virtuel et le chemin d’accès client que vous avez définis dans les champs précédents.
 
-   Cliquez sur le symbole de copie à droite du champ pour le copier automatiquement le contenu de celui-ci dans le Presse-papiers.
+   Cliquez sur le symbole de copie à droite du champ pour copier automatiquement le contenu de celui-ci dans le Presse-papiers.
 
-   ![capture d’écran du champ Chemins d’espaces de noms, avec le sélecteur ouvert](media/mount-command-copy.png)
+   ![Capture d’écran du champ Commande de montage du prototype, montrant le texte du survol du bouton « Copier dans le Presse-papiers »](media/mount-command-copy.png)
 
 1. Utilisez la commande de montage copiée sur l’ordinateur client pour le connecter à Azure HPC Cache. Vous pouvez émettre la commande directement à partir de la ligne de commande du client ou inclure la commande de montage dans un modèle ou un script d’installation de client.
 
@@ -115,7 +115,7 @@ Pour garantir un montage robuste du client, passez les paramètres et arguments 
 
 > mount -o hard,proto=tcp,mountproto=tcp,retry=30 ${CACHE_IP_ADDRESS}:/${NAMESPACE_PATH} ${LOCAL_FILESYSTEM_MOUNT_POINT}
 
-| Paramètres recommandés pour la commande mount | |
+| Paramètres recommandés pour la commande mount | Description |
 --- | ---
 ``hard`` | Les montages conditionnels sur un cache Azure HPC Cache sont associés à des échecs d’application et à une perte possible de données.
 ``proto=tcp`` | Cette option prend en charge la gestion appropriée des erreurs réseau NFS.
@@ -124,16 +124,16 @@ Pour garantir un montage robuste du client, passez les paramètres et arguments 
 
 ### <a name="find-mount-command-components"></a>Rechercher les composants de la commande de montage
 
-Si vous souhaitez créer une commande de montage sans utiliser la page **Instructions de montage**, vous pouvez trouver les adresses de montage dans la page **Vue d’ensemble** du cache, et les chemins d’espaces de noms virtuels sur la page **Cibles de stockage**.
+Si vous souhaitez créer une commande de montage sans utiliser la page **Instructions de montage**, vous pouvez trouver les adresses de montage dans la page **Vue d’ensemble** du cache, et les chemins d’espaces de noms virtuels sur la page **Espace de noms**.
 
 ![Capture d’écran de la page Vue d’ensemble de l’instance Azure HPC Cache, avec la liste des adresses de montage mise en surbrillance en bas à droite](media/hpc-cache-mount-addresses.png)
 
 > [!NOTE]
 > Les adresses de montage du cache correspondent aux interfaces réseau du sous-réseau du cache. Dans un groupe de ressources, ces cartes réseau sont répertoriées avec des noms se terminant par `-cluster-nic-` et un nombre. Vous ne devez ni modifier ni supprimer ces interfaces, car cela rendrait le cache indisponible.
 
-Les chemins d’espaces de noms virtuels sont affichés sur chaque page de détails de la cible de stockage. Cliquez sur un nom de cible de stockage pour afficher ses détails, dont les chemins d’accès de l’espace de noms agrégé qui y sont associés.
+Les chemins d’espaces de noms virtuels sont affichés dans la page des paramètres **Espace de noms** du cache.
 
-![capture d’écran de la page de détails d’une cible de stockage (en-tête : « Mettre à jour la cible de stockage »). Une entrée est encadrée et en surbrillance dans la colonne Chemin d’espace de noms virtuel de la table](media/hpc-cache-view-namespace-paths.png)
+![Capture d’écran de la page du portail Paramètres > Espace de noms avec un encadré autour de la première colonne du tableau : « Chemin de l’espace de noms »](media/view-namespace-paths.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

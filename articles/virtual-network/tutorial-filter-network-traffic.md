@@ -15,10 +15,10 @@ ms.workload: infrastructure
 ms.date: 12/13/2018
 ms.author: kumud
 ms.openlocfilehash: b5a136ae05b3cd410ca252b6d5a1df443aff6f7a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75350138"
 ---
 # <a name="tutorial-filter-network-traffic-with-a-network-security-group-using-the-azure-portal"></a>Tutoriel : Filtrer le trafic réseau avec un groupe de sécurité réseau à l’aide du portail Azure

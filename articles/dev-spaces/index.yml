@@ -1,23 +1,33 @@
 ### YamlMime:Landing
 title: Documentation Azure Dev Spaces
-summary: Azure Dev Spaces est une extension AKS qui vous permet d’exécuter et de déboguer facilement votre code dans le contexte d’une application plus grande. Vous pouvez tester votre code de bout en bout, atteindre des points d’arrêt dans le code s’exécutant dans le cluster et partager un cluster de développement entre les membres de l’équipe sans interférence.
+summary: Azure Dev Spaces est en cours de retrait et cessera de fonctionner le 31 octobre 2023.
 metadata:
   title: Documentation Azure Dev Spaces
-  description: Azure Dev Spaces est une extension AKS qui vous permet d’exécuter et de déboguer facilement votre code dans le contexte d’une application plus grande. Vous pouvez tester votre code de bout en bout, atteindre des points d’arrêt dans le code s’exécutant dans le cluster et partager un cluster de développement entre les membres de l’équipe sans interférence.
+  description: Azure Dev Spaces est en cours de retrait et cessera de fonctionner le 31 octobre 2023.
   services: azure-dev-spaces
   ms.service: azure-dev-spaces
   ms.topic: landing-page
   author: zr-msft
   ms.author: zarhoads
   manager: gwallace
-  ms.date: 09/30/2019
-  ms.openlocfilehash: 752482e33573de4e466b7812616d03f04d2cf395
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.date: 10/29/2020
+  ms.openlocfilehash: a3b3ca8c87871b9ae8e1d6a3db32d9e2051215b6
+  ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78196210"
+  ms.lasthandoff: 10/30/2020
+  ms.locfileid: "93072029"
 landingContent:
+- title: Bridge to Kubernetes
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Utiliser Bridge to Kubernetes avec Visual Studio Code
+      url: https://code.visualstudio.com/docs/containers/bridge-to-kubernetes
+    - text: Utiliser Bridge to Kubernetes avec Visual Studio
+      url: /visualstudio/containers/bridge-to-kubernetes
+    - text: Migration vers la solution Bridge to Kubernetes
+      url: migrate-to-bridge-to-kubernetes.md
 - title: À propos d’Azure Dev Spaces
   linkLists:
   - linkListType: overview
@@ -28,43 +38,11 @@ landingContent:
     links:
     - text: Fonctionnement d’Azure Dev Spaces
       url: how-dev-spaces-works.md
-  - linkListType: how-to-guide
-    links:
-    - text: Installation d’Azure Dev Spaces
-      url: how-to/install-dev-spaces.md
-- title: Développement et test de microservices
+- title: Dépanner
   linkLists:
-  - linkListType: quickstart
+  - linkListType: reference
     links:
-    - text: Exécuter et déboguer un microservice
-      url: quickstart-netcore.md
-    - text: Collaborer sur un ensemble de microservices avec une équipe
-      url: quickstart-team-development.md
-  - linkListType: how-to-guide
-    links:
-    - text: Intégrer Dev Spaces dans votre pipeline CI/CD pour de meilleurs tests de bout en bout
-      url: how-to/setup-cicd.md
-- title: Scénarios avancés
-  linkLists:
-  - linkListType: how-to-guide
-    links:
-    - text: Utiliser un flux NuGet personnalisé
-      url: how-to/use-custom-nuget-feed.md
-    - text: Utiliser un référentiel Helm privé
-      url: how-to/use-private-helm-repo.md
-    - text: Interagir avec des conteneurs Windows
-      url: how-to/run-dev-spaces-windows-containers.md
-    - text: Utiliser traefik pour une entrée personnalisée et HTTPS
-      url: how-to/ingress-https-traefik.md
-    - text: Utiliser NGINX pour une entrée personnalisée et HTTPS
-      url: how-to/ingress-https-nginx.md
-- title: Fonctionnalités de préversion
-  linkLists:
-  - linkListType: how-to-guide
-    links:
-    - text: Utiliser GitHub Actions avec Azure Dev Spaces
-      url: how-to/github-actions.md
-    - text: Connecter l’ordinateur de développement à un cluster AKS
-      url: how-to/connect.md
-    - text: Configurer votre cluster Azure Dev Spaces pour utiliser Helm 3
-      url: how-to/helm-3.md
+    - text: Dépannage
+      url: troubleshooting.md
+    - text: Questions fréquentes (FAQ)
+      url: faq.md

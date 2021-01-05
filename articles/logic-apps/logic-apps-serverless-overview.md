@@ -9,10 +9,10 @@ ms.reviewer: klam, estfan, logicappspm
 ms.topic: article
 ms.date: 03/30/2017
 ms.openlocfilehash: 0f20bb5fb249ad6bac862afe2b0e8eee4b32e2a9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75666548"
 ---
 # <a name="azure-serverless-overview-for-building-cloud-based-apps-and-solutions-with-azure-logic-apps-and-azure-functions"></a>Azure serverless : Vue d’ensemble de la création d’applications et de solutions informatiques avec Azure Logic Apps et Azure Functions

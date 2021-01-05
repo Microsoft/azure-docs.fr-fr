@@ -1,6 +1,6 @@
 ---
-title: Copier des données à partir de sources IBM Informix à l’aide d’Azure Data Factory
-description: Découvrez comment copier des données à partir de sources IBM Informix vers des banques de données réceptrices prises en charge à l’aide d’une activité de copie dans un pipeline Azure Data Factory.
+title: Copier des données vers ou à partir d’IBM Informix à l’aide d’Azure Data Factory
+description: Découvrez comment copier des données vers ou à partir d’IBM Informix à l’aide d’une activité de copie dans un pipeline Azure Data Factory.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -9,16 +9,16 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 08/06/2019
+ms.date: 06/28/2020
 ms.author: jingwang
-ms.openlocfilehash: b4fb6662491443db5d10825635cad8496e56e7f3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 93f484bd30de1ba0ca0f7aa5db263243bebc5b09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414975"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85508807"
 ---
-# <a name="copy-data-from-and-to-ibm-informix-data-stores-using-azure-data-factory"></a>Copier des données depuis/vers des magasins de données IBM Informix à l’aide de Azure Data Factory
+# <a name="copy-data-from-and-to-ibm-informix-using-azure-data-factory"></a>Copier des données vers ou à partir d’IBM Informix à l’aide d’Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Cet article explique comment utiliser l’activité de copie dans Azure Data Factory pour copier des données à partir d’un magasin de données IBM Informix. Il s’appuie sur l’article [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
@@ -30,7 +30,7 @@ Ce connecteur Informix est pris en charge pour les activités suivantes :
 - [Activité Copy](copy-activity-overview.md) avec [prise en charge de la matrice source/du récepteur](copy-activity-overview.md)
 - [Activité de recherche](control-flow-lookup-activity.md)
 
-Vous pouvez copier des données de la source Informix vers n’importe quel magasin de données récepteur pris en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
+Vous pouvez copier des données d’une source Informix vers tout magasin de données récepteur pris en charge, ou à partir de tout magasin de données source pris en charge vers un récepteur Informix. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -151,6 +151,48 @@ Pour copier des données à partir d’Informix, les propriétés prises en char
             },
             "sink": {
                 "type": "<sink type>"
+            }
+        }
+    }
+]
+```
+
+### <a name="informix-as-sink"></a>Informix en tant que récepteur
+
+Si vous souhaitez copier des données dans Informix, les propriétés suivantes sont prises en charge dans la section **sink** de l’activité de copie :
+
+| Propriété | Description | Obligatoire |
+|:--- |:--- |:--- |
+| type | La propriété type du récepteur d’activité de copie doit être définie sur : **InformixSink** | Oui |
+| writeBatchTimeout |Temps d’attente pour que l’opération d’insertion de lot soit terminée avant d’expirer.<br/>Valeurs autorisées : timespan. Exemple : “00:30:00” (30 minutes). |Non |
+| writeBatchSize |Insère des données dans la table SQL lorsque la taille du tampon atteint writeBatchSize<br/>Valeurs autorisées : integer (nombre de lignes). |Non (la valeur par défaut est 0, détectée automatiquement) |
+| preCopyScript |Spécifiez une requête SQL pour l’activité de copie à exécuter avant l’écriture de données dans la banque de données à chaque exécution. Vous pouvez utiliser cette propriété pour nettoyer des données préchargées. |Non |
+
+**Exemple :**
+
+```json
+"activities":[
+    {
+        "name": "CopyToInformix",
+        "type": "Copy",
+        "inputs": [
+            {
+                "referenceName": "<input dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "outputs": [
+            {
+                "referenceName": "<Informix output dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "typeProperties": {
+            "source": {
+                "type": "<source type>"
+            },
+            "sink": {
+                "type": "InformixSink"
             }
         }
     }

@@ -1,29 +1,30 @@
 ---
 title: À propos d’Azure Migrate
 description: Découvrez le service Azure Migrate.
+author: ms-psharma
+ms.author: panshar
+ms.manager: abhemraj
 ms.topic: overview
 ms.date: 04/15/2020
 ms.custom: mvc
-ms.openlocfilehash: fe6386346282cf182397f6420c541d629ba0aab3
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.openlocfilehash: b42aa3bfaeaa454b5d870dbae3bce539b682028f
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81768398"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754077"
 ---
 # <a name="about-azure-migrate"></a>À propos d’Azure Migrate
 
 Cet article donne une vue d’ensemble du service Azure Migrate.
 
-Azure Migrate fournit un hub centralisé pour évaluer et migrer les serveurs, l’infrastructure, les applications et les données locales vers Azure.
-
-Azure Migrate fournit les fonctionnalités suivantes :
+Azure Migrate fournit un hub centralisé pour évaluer et migrer les serveurs, l’infrastructure, les applications et les données locales vers Azure. Il procure les éléments suivants :
 
 - **Plateforme de migration unifiée** : un portail unique pour démarrer, exécuter et effectuer le suivi de votre migration vers Azure.
-- **Panoplie d’outils** : panoplie d’outils d’évaluation et de migration. Les outils incluent Azure Migrate : Server Assessment et Azure Migrate : Server Migration. Azure Migrate s’intègre avec d’autres services Azure ainsi qu’avec d’autres outils et offres d’ISV (éditeur de logiciels indépendant).
+- **Panoplie d’outils** : Panoplie d’outils d’évaluation et de migration. Les outils Azure Migrate incluent Azure Migrate : Server Assessment et Azure Migrate : Server Migration. Azure Migrate s’intègre aussi avec d’autres services et outils Azure, et avec des offres d’éditeur de logiciels indépendant.
 - **Évaluation et migration** : dans le hub Azure Migrate, vous pouvez évaluer et migrer les éléments suivants :
-    - **Serveurs** : évaluez les serveurs locaux et migrez-les vers des machines virtuelles Azure.
-    - **Bases de données** : évaluez vos bases de données locales et migrez-les vers Azure SQL Database ou une instance managée Azure SQL Database.
+    - **Serveurs** : Évaluez les serveurs locaux et migrez-les vers des machines virtuelles Azure ou Azure VMware Solution (AVS) (en préversion).
+    - **Bases de données** : Évaluez vos bases de données locales et migrez-les vers Azure SQL Database ou SQL Managed Instance.
     - **Applications web** : évaluez les applications web locales et migrez-les vers Azure App Service à l’aide d’Azure App Service Migration Assistant.
     - **Bureaux virtuels** : évaluez votre infrastructure VDI (infrastructure de bureau virtuel) locale et migrez-la vers Windows Virtual Desktop dans Azure.
     - **Données** : migrez rapidement et à moindre coût de grandes quantités de données vers Azure à l’aide des produits Azure Data Box.
@@ -36,11 +37,11 @@ Le hub Azure Migrate comprend ces outils :
 --- | --- | ---
 **Azure Migrate : Server Assessment** | Évaluez des serveurs. | Découvrez et évaluez les machines virtuelles VMware, les machines virtuelles Hyper-V et les serveurs physiques locaux pour les préparer à une migration vers Azure.
 **Azure Migrate : Server Migration** | Migrez des serveurs. | Migrez des machines virtuelles VMware, des machines virtuelles Hyper-V, des serveurs physiques, d’autres machines virtualisées ainsi que des machines virtuelles de cloud public vers Azure.
-**Assistant de migration des données** | Évaluez les bases de données SQL Server locales pour la migration vers Azure SQL Database, une instance managée Azure SQL Database ou des machines virtuelles Azure exécutant SQL Server. | Assistant Migration de données aide à identifier les problèmes potentiels bloquant la migration. Il identifie les fonctionnalités non prises en charge, les nouvelles fonctionnalités dont vous pouvez bénéficier après la migration, et le chemin approprié pour la migration de base de données. [Plus d’informations](https://docs.microsoft.com/sql/dma/dma-overview?view=sql-server-2017)
-**Azure Database Migration Service** | Migrez des bases de données locales vers des machines virtuelles Azure exécutant SQL Server, Azure SQL Database ou des instances managées Azure SQL Database. | [En savoir plus](https://docs.microsoft.com/azure/dms/dms-overview) sur Database Migration Service.
+**Assistant de migration des données** | Évaluez les bases de données SQL Server pour la migration vers Azure SQL Database, Azure SQL Managed Instance ou des machines virtuelles Azure exécutant SQL Server. | Assistant Migration de données aide à identifier les problèmes potentiels bloquant la migration. Il identifie les fonctionnalités non prises en charge, les nouvelles fonctionnalités dont vous pouvez bénéficier après la migration, et le chemin approprié pour la migration de base de données. [Plus d’informations](/sql/dma/dma-overview?view=sql-server-2017)
+**Azure Database Migration Service** | Migrez des bases de données locales vers des machines virtuelles Azure exécutant SQL Server, Azure SQL Database ou des instances managées SQL. | [En savoir plus](../dms/dms-overview.md) sur Database Migration Service.
 **Movere** | Évaluez des serveurs. | [En savoir plus](#movere) sur Movere.
-**Assistant Migration d’applications web** | Évaluez les applications web locales et migrez-les vers Azure. |  Utilisez Azure App Service Migration Assistant pour évaluer les sites web locaux en vue de leur migration vers Azure App Service.<br/><br/> Utilisez Migration Assistant pour migrer des applications web .NET et PHP vers Azure. [En savoir plus](https://appmigration.microsoft.com/) sur Azure App Service Migration Assistant.
-**Azure Data Box** | Migrez des données hors connexion. | Pour déplacer de grandes quantités de données hors connexion vers Azure, utilisez la gamme de produits Azure Data Box. [Plus d’informations](https://docs.microsoft.com/azure/databox/)
+**Assistant Migration d’applications web** | Évaluez les applications web locales et migrez-les vers Azure. |  utilisez l’Assistant Migration Azure App Service pour évaluer les sites web locaux en vue de leur migration vers Azure App Service.<br/><br/> Utilisez Migration Assistant pour migrer des applications web .NET et PHP vers Azure. [En savoir plus](https://appmigration.microsoft.com/) sur Azure App Service Migration Assistant.
+**Azure Data Box** | Migrez des données hors connexion. | Pour déplacer de grandes quantités de données hors connexion vers Azure, utilisez la gamme de produits Azure Data Box. [Plus d’informations](../databox/index.yml)
 
 > [!NOTE]
 > Si vous êtes dans Azure Government, les outils intégrés externes et les offres d’éditeurs de logiciels indépendants ne peuvent pas envoyer de données à des projets Azure Migrate. Vous pouvez employer les outils de manière indépendante.
@@ -62,12 +63,12 @@ Azure Migrate s’intègre à plusieurs offres d’éditeurs de logiciels indép
 
 ## <a name="azure-migrate-server-assessment-tool"></a>Azure Migrate : Server Assessment
 
-Azure Migrate : Server Assessment découvre et évalue les machines virtuelles VMware et Hyper-V ainsi que les serveurs physiques locaux en vue de leur migration vers Azure.
+Azure Migrate : Server Assessment découvre et évalue les machines virtuelles VMware et Hyper-V ainsi que les serveurs physiques locaux en vue de leur migration vers Azure. 
 
 Voici ce que fait l’outil :
 
 - **Préparé pour Azure** : vous permet d’évaluer si les machines locales sont prêtes pour une migration vers Azure.
-- **Dimensionnement d’Azure** : vous permet d’estimer la taille des machines virtuelles Azure après la migration.
+- **Dimensionnement d’Azure** : estime la taille des machines virtuelles Azure ou le nombre de nœuds Azure VMware après la migration.
 - **Estimation des coûts Azure** : estimez les coûts liés à l’exécution de serveurs locaux dans Azure.
 - **Analyse des dépendances** : identifie les dépendances entre serveurs et les stratégies d’optimisation pour déplacer les serveurs interdépendants vers Azure. Apprenez-en davantage sur Server Assessment avec l’[analyse des dépendances](concepts-dependency-visualization.md).
 
@@ -82,15 +83,12 @@ L’outil d’évaluation de serveur utilise une [appliance Azure Migrate](migra
 
 Azure Migrate : Server Migration vous aide à migrer vers Azure les éléments suivants :
 
-- Machines virtuelles VMware locales
-- Machines virtuelles Hyper-V
-- Serveurs physiques
-- Autres machines virtualisées
-- Machines virtuelles de cloud public
+**Migrer** | **Détails**
+--- | ---
+Machines virtuelles VMware locales | Migrez des machines virtuelles vers Azure à l’aide d’une migration sans agent ou basée sur un agent.<br/><br/> Pour la migration sans agent, Server Migration utilise la même appliance Azure Migrate que celle qui peut également être utilisée par Server Assessment pour la découverte et l’évaluation des machines virtuelles VMware.<br/><br/> Pour la migration basée sur un agent, Server Migration utilise une appliance de réplication.
+Machines virtuelles Hyper-V en local | Migrez des machines virtuelles vers Azure.<br/><br/> Server Migration utilise des agents de fournisseur installés sur l’hôte Hyper-V pour la migration.
+Serveurs physiques locaux | Vous pouvez migrer des machines physiques vers Azure. Vous pouvez également migrer d’autres machines virtualisées et des machines virtuelles à partir d’autres clouds publics, en les traitant comme des serveurs physiques à des fins de migration. | Server Migration utilise une appliance de réplication pour la migration.
 
-Vous pouvez migrer des machines après les avoir évaluées ou les migrer sans les avoir évaluées.
-
-Pour une migration sans agent des machines virtuelles VMware et des machines virtuelles Hyper-V, Server Migration utilise une appliance Azure Migrate que vous déployez localement. L’appliance est également utilisée si vous configurez l’évaluation de serveur. Ceci est décrit dans la section précédente.
 
 ## <a name="selecting-assessment-and-migration-tools"></a>Sélection des outils d’évaluation et de migration
 
@@ -129,5 +127,5 @@ Il existe deux versions du service Azure Migrate.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Essayez nos tutoriels pour évaluer des [machines virtuelles VMware](tutorial-prepare-vmware.md), des [machines virtuelles Hyper-V](tutorial-prepare-hyper-v.md) ou des [serveurs physiques](tutorial-prepare-physical.md).
+- Essayez nos tutoriels pour évaluer des [machines virtuelles VMware](./tutorial-discover-vmware.md), des [machines virtuelles Hyper-V](./tutorial-discover-hyper-v.md) ou des [serveurs physiques](./tutorial-discover-physical.md).
 - [Revoir les questions fréquemment posées](resources-faq.md) sur Azure Migrate.

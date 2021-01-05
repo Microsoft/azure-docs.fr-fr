@@ -1,6 +1,6 @@
 ---
-title: Créer une fabrique de données Azure à l’aide du kit de développement logiciel (SDK) .NET
-description: Créez une fabrique de données Azure pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
+title: Créer une fabrique de données Azure avec le SDK .NET
+description: Créez une fabrique de données Azure et un pipeline à l’aide du SDK .NET pour copier les données d’un emplacement du Stockage Blob Azure vers un autre emplacement.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -11,14 +11,14 @@ ms.workload: data-services
 ms.tgt_pltfrm: ''
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 06/24/2019
+ms.date: 12/18/2020
 ms.author: jingwang
-ms.openlocfilehash: 7f0f18e523368e85d9cea0206e98bb7b1a0e6165
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: c5e35fb8ab6a782ec79f10b1099f6781062c1d7c
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81419372"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97678861"
 ---
 # <a name="quickstart-create-a-data-factory-and-pipeline-using-net-sdk"></a>Démarrage rapide : Créer une fabrique de données et un pipeline avec le kit .NET SDK
 
@@ -28,7 +28,7 @@ ms.locfileid: "81419372"
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Ce guide de démarrage rapide explique comment utiliser le kit SDK .NET pour créer une fabrique de données Azure. Le pipeline que vous créez dans cette fabrique de données **copie** les données d’un dossier vers un autre dossier dans un stockage Blob Azure. Pour suivre un tutoriel sur la **transformation** des données à l’aide d’Azure Data Factory, consultez [Tutoriel : Transformer des données à l’aide de Spark](tutorial-transform-data-spark-portal.md).
+Ce guide de démarrage rapide explique comment utiliser le SDK .NET pour créer une fabrique de données Azure. Le pipeline que vous créez dans cette fabrique de données **copie** les données d’un dossier vers un autre dossier dans un stockage Blob Azure. Pour suivre un tutoriel sur la **transformation** des données à l’aide d’Azure Data Factory, consultez [Tutoriel : Transformer des données à l’aide de Spark](tutorial-transform-data-spark-portal.md).
 
 > [!NOTE]
 > Cet article ne fournit pas de présentation détaillée du service Data Factory. Pour une présentation du service Azure Data Factory, consultez [Présentation d’Azure Data Factory](introduction.md).
@@ -47,9 +47,9 @@ Téléchargez et installez le [Kit de développement logiciel (SDK) .NET Azure](
 
 Dans les sections de la rubrique *Procédure : Utiliser le portail pour créer une application et un principal du service Azure AD pouvant accéder aux ressources*, suivez les instructions pour effectuer ces tâches :
 
-1. Dans [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application), créez une application qui représente l’application .NET que vous créez dans ce didacticiel. Pour l’URL de connexion, vous pouvez fournir une URL factice, comme indiqué dans l’article (`https://contoso.org/exampleapp`).
-2. Dans [Obtenir les valeurs pour la connexion](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in), récupérez l’**ID d’application** et l’**ID de locataire**, puis notez ces valeurs que vous allez utiliser ultérieurement dans ce didacticiel. 
-3. Dans [Certificats et secrets](../active-directory/develop/howto-create-service-principal-portal.md#certificates-and-secrets), récupérez la **clé d’authentification**, puis notez cette valeur que vous allez utiliser ultérieurement dans ce didacticiel.
+1. Dans [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal), créez une application qui représente l’application .NET que vous créez dans ce didacticiel. Pour l’URL de connexion, vous pouvez fournir une URL factice, comme indiqué dans l’article (`https://contoso.org/exampleapp`).
+2. Dans [Obtenir les valeurs pour la connexion](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in), récupérez l’**ID d’application** et l’**ID de locataire**, puis notez ces valeurs que vous allez utiliser ultérieurement dans ce didacticiel. 
+3. Dans [Certificats et secrets](../active-directory/develop/howto-create-service-principal-portal.md#authentication-two-options), récupérez la **clé d’authentification**, puis notez cette valeur que vous allez utiliser ultérieurement dans ce didacticiel.
 4. Dans [Affecter l’application à un rôle](../active-directory/develop/howto-create-service-principal-portal.md#assign-a-role-to-the-application), affectez l’application au rôle **Contributeur** au niveau de l’abonnement de sorte que l’application puisse créer des fabriques de données dans l’abonnement.
 
 ## <a name="create-a-visual-studio-project"></a>Créer un projet Visual Studio
@@ -81,6 +81,7 @@ Créez ensuite une application console .NET en C# dans Visual Studio :
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Microsoft.Azure.Management.ResourceManager;
     using Microsoft.Azure.Management.DataFactory;
     using Microsoft.Azure.Management.DataFactory.Models;
@@ -318,7 +319,7 @@ Console.WriteLine("Pipeline run ID: " + runResponse.RunId);
 
 Créez et démarrez l’application, puis vérifiez l’exécution du pipeline.
 
-La console affiche la progression de la création de la fabrique de données, du service lié, des jeux de données, du pipeline et de l’exécution du pipeline. Elle vérifie ensuite l’état de l’exécution du pipeline. Patientez jusqu’à voir les détails de l’exécution de l’activité de copie avec la taille des données lues/écrites. Utilisez ensuite des outils comme l’[Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/) pour vérifier que les objets blob sont copiés dans « outputBlobPath » à partir de « inputBlobPath » comme vous l’avez spécifié dans les variables.
+La console affiche la progression de la création de la fabrique de données, du service lié, des jeux de données, du pipeline et de l’exécution du pipeline. Elle vérifie ensuite l’état de l’exécution du pipeline. Patientez jusqu’à voir les détails de l’exécution de l’activité de copie avec la taille des données lues/écrites. Utilisez ensuite des outils comme l’[Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/) pour vérifier que les objets blob sont copiés dans « outputBlobPath » depuis « inputBlobPath » comme vous l’avez spécifié dans les variables.
 
 ### <a name="sample-output"></a>Exemple de sortie
 

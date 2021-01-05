@@ -10,14 +10,19 @@ ms.subservice: bing-news-search
 ms.topic: conceptual
 ms.date: 12/18/2019
 ms.author: aahi
-ms.openlocfilehash: f59c924caca86505e9f1e91bf58095b271475794
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ac214f158703fdfeaddfa4052a83481adebda060
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75383717"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348226"
 ---
 # <a name="sending-queries-to-the-bing-news-search-api"></a>Envoyer des requêtes à l’API Recherche d’actualités Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’actualités Bing vous permet de rechercher sur le web des articles d’actualité pertinents. Cet article vous explique comment envoyer des requêtes de recherche à l’API.
 
@@ -35,18 +40,18 @@ La requête doit utiliser le protocole HTTPS.
 
 Nous vous recommandons de générer toutes les requêtes à partir d’un serveur. Si vous diffusez la clé dans le cadre d’une application client, vous prenez le risque qu’un tiers malveillant puisse y accéder. Par ailleurs, en appelant l’API à partir d’un serveur, vous disposez d’un unique point de mise à niveau pour les prochaines versions de l’API.
 
-La requête doit indiquer le paramètre [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête peut également indiquer le paramètre [mkt](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché d’où proviennent les résultats. Pour obtenir la liste des paramètres de requête facultatifs tels que `freshness` et `textDecorations`, consultez la page [Query Parameters](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query-parameters) (Paramètres de requête). Toutes les valeurs de paramètres de requête doivent être codées au format URL.
+La requête doit indiquer le paramètre [q](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête peut également indiquer le paramètre [mkt](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché d’où proviennent les résultats. Pour obtenir la liste des paramètres de requête facultatifs tels que `freshness` et `textDecorations`, consultez la page [Query Parameters](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#query-parameters) (Paramètres de requête). Toutes les valeurs de paramètres de requête doivent être codées au format URL.
 
-La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :
+La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :
 
-- [User-Agent](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#useragent)
-- [X-MSEdge-ClientID](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#clientid)
-- [X-Search-ClientIP](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#clientip)
-- [X-Search-Location](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#location)
+- [User-Agent](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#useragent)
+- [X-MSEdge-ClientID](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#clientid)
+- [X-Search-ClientIP](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#clientip)
+- [X-Search-Location](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#location)
 
 Les en-têtes d’emplacement et d’adresse IP client sont importants, car ils permettent de renvoyer du contenu géolocalisé.
 
-Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#headers).
+Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference#headers).
 
 Vous trouverez ci-dessous une requête d’actualités qui inclut tous les paramètres de requête et les en-têtes suggérés. Si vous appelez l’une des API Bing pour la première fois, n’incluez pas l’en-tête ID client. Indiquez uniquement l’ID client si vous avez précédemment appelé une API Bing et si Bing a renvoyé un ID client pour la combinaison utilisateur/appareil.
 

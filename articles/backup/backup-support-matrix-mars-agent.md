@@ -3,12 +3,12 @@ title: Matrice de prise en charge pour l’agent MARS
 description: Cet article décrit la prise en charge de Sauvegarde Azure quand vous sauvegardez des machines qui exécutent l’agent MARS (Microsoft Azure Recovery Services).
 ms.date: 08/30/2019
 ms.topic: conceptual
-ms.openlocfilehash: 6085bc647c06b5907282460a2d8706b8549e1bc2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 26a47c2648d1307d2e7da2b25455f3f036cbf32d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226049"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997237"
 ---
 # <a name="support-matrix-for-backup-with-the-microsoft-azure-recovery-services-mars-agent"></a>Tableau de prise en charge de la sauvegarde avec l’agent MARS (Microsoft Azure Recovery Services)
 
@@ -30,7 +30,7 @@ Vos options de sauvegarde varient en fonction de l’agent installé. Pour plus 
 **Installation** | **Détails**
 --- | ---
 Télécharger le dernier agent MARS | Vous pouvez télécharger la dernière version de l’agent à partir du coffre ou [le télécharger directement](https://aka.ms/azurebackup_agent).
-Installer directement sur une machine | Vous pouvez installer l’agent MARS directement sur un serveur Windows local ou sur une machine virtuelle Azure qui exécutent un des [systèmes d’exploitation pris en charge](https://docs.microsoft.com/azure/backup/backup-support-matrix-mabs-dpm#supported-mabs-and-dpm-operating-systems).
+Installer directement sur une machine | Vous pouvez installer l’agent MARS directement sur un serveur Windows local ou sur une machine virtuelle Azure qui exécutent un des [systèmes d’exploitation pris en charge](./backup-support-matrix-mabs-dpm.md#supported-mabs-and-dpm-operating-systems).
 Installer sur un serveur de sauvegarde | Quand vous configurez DPM ou MABS pour la sauvegarde sur Azure, vous téléchargez et installez l’agent MARS sur le serveur. Vous pouvez installer l’agent peut être installé sur les [systèmes d’exploitation pris en charge](backup-support-matrix-mabs-dpm.md#supported-mabs-and-dpm-operating-systems) listés dans le tableau de prise en charge des serveurs de sauvegarde.
 
 > [!NOTE]
@@ -54,7 +54,7 @@ Changements d’emplacement | Vous pouvez modifier l’emplacement du cache en a
 
 L’agent MARS doit avoir accès à ces URL :
 
-- <http://www.msftncsi.com/ncsi.txt>
+- `http://www.msftncsi.com/ncsi.txt`
 - *.Microsoft.com
 - *.MicrosoftAzure.com
 - *.MicrosoftOnline.com
@@ -67,9 +67,18 @@ Et à ces adresses IP :
 
 L’accès à toutes les URL et adresses IP listées ci-dessus utilise le protocole HTTPS sur le port 443.
 
+Lors de la sauvegarde des fichiers et des dossiers de machines virtuelles Azure à l’aide de l’agent MARS, le réseau virtuel Azure doit également être configuré pour autoriser l’accès. Si vous utilisez des groupes de sécurité réseau (NSG), utilisez la balise de service *AzureBackup* pour autoriser l’accès sortant vers Sauvegarde Azure. En plus de l’étiquette pour Sauvegarde Azure, vous devez également autoriser la connectivité pour l’authentification et le transfert de données en créant des [règles NSG](../virtual-network/network-security-groups-overview.md#service-tags) similaires pour Azure AD (*AzureActiveDirectory*) et Stockage Azure (*Storage*). Les étapes suivantes décrivent le processus de création d’une règle pour la balise de Sauvegarde Azure :
+
+1. Dans **Tous les services**, accédez à **Groupes de sécurité réseau** et sélectionnez le groupe de sécurité réseau.
+2. Sous **PARAMÈTRES**, sélectionnez **Règles de sécurité de trafic sortant**.
+3. Sélectionnez **Ajouter**. Entrez toutes les informations nécessaires à la création d’une nouvelle règle, comme décrit dans [paramètres de règle de sécurité](../virtual-network/manage-network-security-group.md#security-rule-settings). Vérifiez que l’option **Destination** est définie sur *Balise de service* et l’option **Balise de service de destination** sur *AzureBackup*.
+4. Sélectionnez **Ajouter** pour enregistrer la règle de sécurité de trafic sortant que vous venez de créer.
+
+De même, vous pouvez créer des règles de sécurité de trafic sortant NSG pour Stockage Azure et Azure AD. Pour plus d’informations sur les balises de service, consultez [cet article](../virtual-network/service-tags-overview.md).
+
 ### <a name="azure-expressroute-support"></a>Support Azure ExpressRoute
 
-Vous pouvez sauvegarder vos données sur Azure ExpressRoute avec le Peering publique (disponible pour les anciens circuits) et le Peering Microsoft. La sauvegarde sur le Peering privé n’est pas prise en charge.
+Vous pouvez sauvegarder vos données sur Azure ExpressRoute avec le Peering publique (disponible pour les anciens circuits) et le Peering Microsoft. La sauvegarde sur un peering privé n’est pas prise en charge.
 
 Avec le Peering public : Garantissez l’accès aux domaines/adresses suivants :
 
@@ -79,16 +88,26 @@ Avec le Peering public : Garantissez l’accès aux domaines/adresses suivants�
 - `.microsoftonline.com`
 - `.windows.net`
 
-Avec le Peering Microsoft, sélectionnez les services/régions suivants et les valeurs de communauté pertinentes :
+Avec le peering Microsoft, sélectionnez les services/régions et les valeurs de communauté pertinentes suivants :
 
+- Sauvegarde Azure (en fonction de l’emplacement de votre coffre Recovery Services)
 - Azure Active Directory (12076:5060)
-- Région Microsoft Azure (en fonction de l’emplacement de votre coffre Recovery Services)
 - Stockage Azure (en fonction de l’emplacement de votre coffre Recovery Services)
 
-Pour plus d’informations, consultez [Exigences du routage ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-routing).
+Pour plus d’informations, consultez [Exigences du routage ExpressRoute](../expressroute/expressroute-routing.md#bgp).
 
 >[!NOTE]
 >Le peering public Azure est déconseillé pour les nouveaux circuits.
+
+### <a name="private-endpoint-support"></a>Prise en charge d'un point de terminaison privé
+
+Vous pouvez désormais utiliser des points de terminaison privés pour sauvegarder en toute sécurité les données des serveurs vers votre coffre Recovery Services. Dans la mesure où Azure Active Directory ne prend actuellement pas en charge les points de terminaison privés, l’accès sortant doit être attribué aux adresses IP et aux noms de domaine complets requis pour Azure Active Directory séparément.
+
+Lorsque vous utilisez l’agent MARS pour sauvegarder vos ressources locales, assurez-vous que votre réseau local (contenant vos ressources à sauvegarder) est homologué avec le réseau virtuel Azure qui contient un point de terminaison privé pour le coffre. Vous pouvez ensuite continuer à installer l’agent MARS et configurer la sauvegarde. Toutefois, vous devez vous assurer que toutes les communications pour la sauvegarde s’effectuent uniquement par le biais du réseau homologué.
+
+Si vous supprimez des points de terminaison privés pour le coffre après l’enregistrement d’un agent MARS, vous devez réinscrire le conteneur auprès du coffre. Vous n’avez pas besoin d’arrêter leur protection.
+
+En savoir plus sur les [points de terminaison privés pour Sauvegarde Azure](private-endpoints.md).
 
 ### <a name="throttling-support"></a>Prise en charge de la limitation
 
@@ -116,7 +135,7 @@ Windows 8.1 (Entreprise, Professionnel)| Oui |Non | Vérifier la version serveu
 Windows 8 (Entreprise, Professionnel) | Oui | Non | Vérifier la version serveur correspondante pour la configuration requise concernant les logiciels et les modules
 Windows Server 2016 (Standard, Datacenter, Essentials) | Oui | Oui | - .NET 4.5 <br> - Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0
 Windows Server 2012 R2 (Standard, Datacenter, Foundation, Essentials) | Oui | Oui | - .NET 4.5 <br> - Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0
-Windows Server 2012 (Standard, Datacenter, Foundation) | Oui | Oui |- .NET 4.5 <br> \- Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0 <br> - Deployment Image Servicing and Management (DISM.exe)
+Windows Server 2012 (Standard, Datacenter, Foundation) | Oui | Oui |- .NET 4.5 <br> - Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0 <br> - Deployment Image Servicing and Management (DISM.exe)
 Windows Storage Server 2016/2012 R2/2012 (Standard, Workgroup) | Oui | Non | - .NET 4.5 <br> - Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0
 Windows Server 2019 (Standard, Datacenter, Essentials) | Oui | Oui | - .NET 4.5 <br> - Windows PowerShell <br> - Dernier package redistribuable Microsoft VC + + compatible <br> - Microsoft Management Console (MMC) 3.0
 
@@ -128,7 +147,7 @@ Les systèmes d’exploitation suivants sont en fin de support et il est vivemen
 
 Si des engagements existants empêchent leur mise à niveau, procédez à la migration des serveurs Windows vers des machines virtuelles Azure et tirez parti des sauvegardes de machine virtuelle Azure pour rester protégé. Pour plus d’informations sur la migration de votre serveur Windows, consultez la [page de migration ici](https://azure.microsoft.com/migration/windows-server/).
 
-Pour les environnements locaux ou hébergés où il n’est pas possible de mettre à niveau le système d’exploitation ou de migrer vers Azure, activez les correctifs de sécurité étendus pour les machines de façon à rester protégé et à continuer de bénéficier du support. Notez que seules certaines éditions sont éligibles aux correctifs de sécurité étendus. Pour en savoir plus, consultez la [page des questions fréquentes (FAQ)](https://www.microsoft.com/cloud-platform/extended-security-updates).
+Pour les environnements locaux ou hébergés où il n’est pas possible de mettre à niveau le système d’exploitation ou de migrer vers Azure, activez les correctifs de sécurité étendus pour les machines de façon à rester protégé et à continuer de bénéficier du support. Notez que seules certaines éditions sont éligibles aux correctifs de sécurité étendus. Pour en savoir plus, consultez la [page des questions fréquentes (FAQ)](https://www.microsoft.com/windows-server/extended-security-updates).
 
 | **Système d’exploitation**                                       | **Fichiers/dossiers** | **État du système** | **Configuration requise des logiciels et modules**                           |
 | ------------------------------------------------------------ | ----------------- | ------------------ | ------------------------------------------------------------ |
@@ -145,10 +164,21 @@ Sauvegarde Azure limite la taille des sources de données (fichier ou dossier) p
 **Système d’exploitation** | **Limite de taille**
 --- | ---
 Windows Server 2012 ou version ultérieure |54 400 Go
-Windows Server 2008 R2 SP1 |1 700 Go
+Windows Server 2008 R2 SP1 |1 700 Go
 Windows Server 2008 SP2| 1 700 Go
 Windows 8 ou version ultérieure| 54 400 Go
 Windows 7| 1 700 Go
+
+### <a name="minimum-retention-limits"></a>Limites de rétention minimale
+
+Les durées de rétention minimales pouvant être définies pour les différents points de récupération sont les suivantes :
+
+|Point de récupération |Duration  |
+|---------|---------|
+|Point de récupération quotidien    |   7 jours      |
+|Point de récupération hebdomadaire     |    4 semaines     |
+|Point de récupération mensuel    |   3 mois      |
+|Point de récupération annuel  |      1 an   |
 
 ### <a name="other-limitations"></a>Autres limitations
 

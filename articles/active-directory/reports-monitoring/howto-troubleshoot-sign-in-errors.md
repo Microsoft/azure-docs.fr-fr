@@ -7,19 +7,19 @@ author: MarkusVi
 manager: daveba
 editor: ''
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.subservice: report-monitor
 ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ec5fe7f62e8537a7f687202d365eb37d43b48b78
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4de9f5a21f38f741dcf65d285446d9482716d4f2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74008059"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85608124"
 ---
 # <a name="how-to-troubleshoot-sign-in-errors-using-azure-active-directory-reports"></a>Guide pratique pour résoudre les erreurs de connexion avec les rapports Azure Active Directory
 

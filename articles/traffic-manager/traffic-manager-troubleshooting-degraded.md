@@ -3,21 +3,21 @@ title: Résolution des problèmes liés à l’état détérioré d’Azure Traf
 description: Comment résoudre les profils Traffic Manager lorsque l’état est affiché comme dégradé.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 manager: kumudD
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/03/2017
-ms.author: rohink
-ms.openlocfilehash: 6d720067b619b0d871899f2ac9025a9d8ab24d95
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.openlocfilehash: 83dc432a1f88b443d500bf9a977abfed69211156
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82130765"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003852"
 ---
 # <a name="troubleshooting-degraded-state-on-azure-traffic-manager"></a>Résolution des problèmes liés à l’état détérioré d’Azure Traffic Manager
 
@@ -56,9 +56,11 @@ Invoke-WebRequest 'http://watestsdp2008r2.cloudapp.net/Probe' -MaximumRedirectio
 
 Exemple de sortie :
 
-    StatusCode StatusDescription
-    ---------- -----------------
-           301 Moved Permanently
+```output
+StatusCode StatusDescription
+---------- -----------------
+        301 Moved Permanently
+```
 
 Notez que nous avons reçu une réponse redirigée. Comme indiqué précédemment, tout StatusCode autre que 200 est considéré comme un échec. Traffic Manager modifie l’état du point de terminaison en Hors connexion. Pour résoudre le problème, vérifiez la configuration de site web pour vous assurer que le StatusCode approprié peut être retourné à partir du chemin d’accès de la sonde. Reconfigurez la sonde Traffic Manager pour qu’elle pointe vers un chemin d’accès qui renvoie la valeur 200.
 

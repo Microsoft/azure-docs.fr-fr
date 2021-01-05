@@ -1,29 +1,22 @@
 ---
 title: Créer un espace de noms Azure Service Bus à l’aide d’un modèle
 description: Utiliser un modèle Azure Resource Manager pour créer un espace de noms Service Bus Messaging
-services: service-bus-messaging
 documentationcenter: .net
 author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: dc0d6482-6344-4cef-8644-d4573639f5e4
-ms.service: service-bus-messaging
-ms.devlang: tbd
 ms.topic: article
 ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 06/21/2019
+ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: 5febdd63ab6f854ca3244f8449f6f715a75e735f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1b7aafca331170100ce99c084a11c96c97df7781
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76264473"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88067390"
 ---
 # <a name="create-a-service-bus-namespace-by-using-an-azure-resource-manager-template"></a>Créer un espace de noms Service Bus à l’aide d’un modèle Azure Resource Manager
 
-Découvrez comment déployer un modèle Azure Resource Manager pour créer un espace de noms Service Bus. Vous pouvez utiliser ce modèle pour vos propres déploiements, ou le personnaliser afin qu’il réponde à vos besoins. Pour en savoir plus sur la création de modèles, consultez la [documentation Azure Resource Manager](/azure/azure-resource-manager/).
+Découvrez comment déployer un modèle Azure Resource Manager pour créer un espace de noms Service Bus. Vous pouvez utiliser ce modèle pour vos propres déploiements, ou le personnaliser afin qu’il réponde à vos besoins. Pour en savoir plus sur la création de modèles, consultez la [documentation Azure Resource Manager](../azure-resource-manager/index.yml).
 
 Les modèles suivants sont également disponibles pour la création d’espaces de noms Service Bus :
 

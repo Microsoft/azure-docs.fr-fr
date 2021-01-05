@@ -1,18 +1,14 @@
 ---
 title: Azure Machine Learning en tant que source Event Grid
 description: Décrit les propriétés qui sont fournies pour les événements Espace de travail Machine Learning avec Azure Event Grid
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 04/09/2020
-ms.author: spelluru
-ms.openlocfilehash: f77a76d6acb67c739e0adf186d23e9b16ff7e2ee
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.date: 07/07/2020
+ms.openlocfilehash: fb8cd76829622962b642580bbda7f2a655604c2f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82928871"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87458040"
 ---
 # <a name="azure-machine-learning-as-an-event-grid-source"></a>Azure Machine Learning en tant que source Event Grid
 
@@ -30,7 +26,7 @@ Azure Machine Learning émet les types d’événements suivants :
 | Microsoft.MachineLearningServices.ModelDeployed | Déclenché lorsque le ou les modèles ont été déployés avec succès sur un point de terminaison. |
 | Microsoft.MachineLearningServices.RunCompleted | Déclenché lorsqu’une exécution s’est terminée avec succès. |
 | Microsoft.MachineLearningServices.DatasetDriftDetected | Déclenché lorsqu’un superviseur de dérive de données détecte une dérive. |
-| Microsoft.MachineLearningServices.RunStatusChanged | Déclenché quand un état d’exécution passe à « failed ». |
+| Microsoft.MachineLearningServices.RunStatusChanged | Déclenché quand un état d’exécution change. |
 
 ### <a name="the-contents-of-an-event-response"></a>Le contenu d’une réponse à un événement
 
@@ -99,12 +95,12 @@ Cette section contient un exemple de ce à quoi ces données ressembleraient pou
   "eventTime": "2017-06-26T18:41:00.9584103Z",
   "id": "831e1650-001e-001b-66ab-eeb76e069631",
   "data": {
-    "ExperimentId": "0fa9dfaa-cba3-4fa7-b590-23e48548f5c1",
-    "ExperimentName": "automl-local-regression",
-    "RunId": "AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5",
-    "RunType": null,
-    "RunTags": {},
-    "RunProperties": {
+    "experimentId": "0fa9dfaa-cba3-4fa7-b590-23e48548f5c1",
+    "experimentName": "automl-local-regression",
+    "runId": "AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5",
+    "runType": null,
+    "runTags": {},
+    "runProperties": {
         "runTemplate": "automl_child",
         "pipeline_id": "5adc0a4fe02504a586f09a4fcbb241f9a4012062",
         "pipeline_spec": "{\"objects\": [{\"class_name\": \"StandardScaler\", \"module\": \"sklearn.preprocessing\", \"param_args\": [], \"param_kwargs\": {\"with_mean\": true, \"with_std\": false}, \"prepared_kwargs\": {}, \"spec_class\": \"preproc\"}, {\"class_name\": \"LassoLars\", \"module\": \"sklearn.linear_model\", \"param_args\": [], \"param_kwargs\": {\"alpha\": 0.001, \"normalize\": true}, \"prepared_kwargs\": {}, \"spec_class\": \"sklearn\"}], \"pipeline_id\": \"5adc0a4fe02504a586f09a4fcbb241f9a4012062\"}",
@@ -155,16 +151,16 @@ Cette section contient un exemple de ce à quoi ces données ressembleraient pou
 [{
   "topic": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.MachineLearningServices/workspaces/{workspace-name}",
   "subject": "experiments/0fa9dfaa-cba3-4fa7-b590-23e48548f5c1/runs/AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5",
-  "eventType": "Microsoft.MachineLearningServices.RunCompleted",
+  "eventType": "Microsoft.MachineLearningServices.RunStatusChanged",
   "eventTime": "2017-06-26T18:41:00.9584103Z",
   "id": "831e1650-001e-001b-66ab-eeb76e069631",
   "data": {
-    "ExperimentId": "0fa9dfaa-cba3-4fa7-b590-23e48548f5c1",
-    "ExperimentName": "automl-local-regression",
-    "RunId": "AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5",
-    "RunType": null,
-    "RunTags": {},
-    "RunProperties": {
+    "experimentId": "0fa9dfaa-cba3-4fa7-b590-23e48548f5c1",
+    "experimentName": "automl-local-regression",
+    "runId": "AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5",
+    "runType": null,
+    "runTags": {},
+    "runProperties": {
         "runTemplate": "automl_child",
         "pipeline_id": "5adc0a4fe02504a586f09a4fcbb241f9a4012062",
         "pipeline_spec": "{\"objects\": [{\"class_name\": \"StandardScaler\", \"module\": \"sklearn.preprocessing\", \"param_args\": [], \"param_kwargs\": {\"with_mean\": true, \"with_std\": false}, \"prepared_kwargs\": {}, \"spec_class\": \"preproc\"}, {\"class_name\": \"LassoLars\", \"module\": \"sklearn.linear_model\", \"param_args\": [], \"param_kwargs\": {\"alpha\": 0.001, \"normalize\": true}, \"prepared_kwargs\": {}, \"spec_class\": \"sklearn\"}], \"pipeline_id\": \"5adc0a4fe02504a586f09a4fcbb241f9a4012062\"}",
@@ -179,7 +175,7 @@ Cette section contient un exemple de ce à quoi ces données ressembleraient pou
         "scoring_data_location": "aml://artifact/ExperimentRun/dcid.AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5/outputs/scoring_file_v_1_0_0.py",
         "model_data_location": "aml://artifact/ExperimentRun/dcid.AutoML_ad912b2d-6467-4f32-a616-dbe4af6dd8fc_5/outputs/model.pkl"
     },
-   "RunStatus": "failed"
+   "runStatus": "failed"
    },
   "dataVersion": "",
   "metadataVersion": "1"
@@ -226,12 +222,12 @@ L’objet de données comporte les propriétés suivantes pour chaque type d’�
 
 | Propriété | Type | Description |
 | -------- | ---- | ----------- |
-| ExperimentId | string | ID de l’expérience à laquelle l’exécution appartient. |
-| ExperimentName | string | Nom de l’expérience à laquelle l’exécution appartient. |
-| RunId | string | ID de l’exécution qui a été effectuée. |
-| RunType | string | Type d’exécution de l’exécution terminée. |
-| RunTags | object | Balises de l’exécution terminée. |
-| RunProperties | object | Propriétés de l’exécution terminée. |
+| experimentId | string | ID de l’expérience à laquelle l’exécution appartient. |
+| experimentName | string | Nom de l’expérience à laquelle l’exécution appartient. |
+| runId | string | ID de l’exécution qui a été effectuée. |
+| runType | string | Type d’exécution de l’exécution terminée. |
+| runTags | object | Balises de l’exécution terminée. |
+| runProperties | object | Propriétés de l’exécution terminée. |
 
 ### <a name="microsoftmachinelearningservicesdatasetdriftdetected"></a>Microsoft.MachineLearningServices.DatasetDriftDetected
 
@@ -250,22 +246,22 @@ L’objet de données comporte les propriétés suivantes pour chaque type d’�
 
 | Propriété | Type | Description |
 | -------- | ---- | ----------- |
-| ExperimentId | string | ID de l’expérience à laquelle l’exécution appartient. |
-| ExperimentName | string | Nom de l’expérience à laquelle l’exécution appartient. |
-| RunId | string | ID de l’exécution qui a été effectuée. |
-| RunType | string | Type d’exécution de l’exécution terminée. |
-| RunTags | object | Balises de l’exécution terminée. |
-| RunProperties | object | Propriétés de l’exécution terminée. |
-| RunStatus | string | État de l’exécution. |
+| experimentId | string | ID de l’expérience à laquelle l’exécution appartient. |
+| experimentName | string | Nom de l’expérience à laquelle l’exécution appartient. |
+| runId | string | ID de l’exécution qui a été effectuée. |
+| runType | string | Type d’exécution de l’exécution terminée. |
+| runTags | object | Balises de l’exécution terminée. |
+| runProperties | object | Propriétés de l’exécution terminée. |
+| runStatus | string | État de l’exécution. |
 
 ## <a name="tutorials-and-how-tos"></a>Tutoriels et articles de procédures
 | Intitulé | Description |
 | ----- | ----- |
-| [Consommer des événements Azure Machine Learning](../machine-learning/concept-event-grid-integration.md) | Vue d’ensemble de l’intégration d’Azure Machine Learning avec Event Grid. |
+| [Consommer des événements Azure Machine Learning](../machine-learning/how-to-use-event-grid.md) | Vue d’ensemble de l’intégration d’Azure Machine Learning avec Event Grid. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour une présentation d’Azure Event Grid, consultez [Présentation d’Event Grid](overview.md).
 * Pour plus d’informations sur la création d’un abonnement Azure Event Grid, consultez [Schéma d’abonnement à Event Grid](subscription-creation-schema.md)
-* Pour une introduction à l’utilisation d’Azure Event Grid avec Azure Machine Learning, consultez [Consommer des événements Azure Machine Learning](/azure/machine-learning/concept-event-grid-integration)
-* Pour obtenir un exemple d’utilisation d’Azure Event Grid avec Azure Machine Learning, consultez [Créer des flux de travail Machine Learning basés sur les événements](/azure/machine-learning/how-to-use-event-grid)
+* Pour une introduction à l’utilisation d’Azure Event Grid avec Azure Machine Learning, consultez [Consommer des événements Azure Machine Learning](../machine-learning/how-to-use-event-grid.md)
+* Pour obtenir un exemple d’utilisation d’Azure Event Grid avec Azure Machine Learning, consultez [Créer des flux de travail Machine Learning basés sur les événements](../machine-learning/how-to-use-event-grid.md)

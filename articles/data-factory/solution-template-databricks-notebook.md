@@ -10,13 +10,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/03/2020
-ms.openlocfilehash: 3d55e37078d7bbbcd84684f43ef12810ef01e10e
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 04/27/2020
+ms.openlocfilehash: 1c20508d27d03c00a6842979731fb905bbaa9def
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82627753"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461252"
 ---
 # <a name="transformation-with-azure-databricks"></a>Transformation avec Azure Databricks
 
@@ -28,7 +28,7 @@ Dans ce tutoriel, vous allez créer un pipeline de bout en bout contenant des ac
 
 - **Copie des données** duplique le jeu de données source dans le stockage récepteur, qui est monté en tant que DBFS dans le notebook Azure Databricks. De cette façon, le jeu de données peut directement être consommé par Spark.
 
-- **Notebook** déclenche le notebook Databricks qui transforme le jeu de données. Il ajoute également le jeu de données à un dossier traité ou à Azure SQL Data Warehouse.
+- **Notebook** déclenche le notebook Databricks qui transforme le jeu de données. Le jeu de données est aussi ajouté à un dossier traité ou à Azure Synapse Analytics.
 
 Par souci de simplicité, le modèle de ce didacticiel ne crée pas de déclencheur planifié. Vous pouvez en ajouter un si nécessaire.
 
@@ -56,29 +56,29 @@ Pour importer un notebook **Transformation** dans votre espace de travail Databr
 
    Dans le notebook importé, accédez à la **commande 5** comme indiqué dans l’extrait de code suivant.
 
-   - Remplacez `<storage name>` et `<access key>` par vos propres informations de connexion au stockage.
+   - Remplacez `<storage name>` et `<access key>` par vos propres informations de connexion au stockage.
    - Utilisez le compte de stockage muni du conteneur `sinkdata`.
 
     ```python
-    # Supply storageName and accessKey values  
-    storageName = "<storage name>"  
-    accessKey = "<access key>"  
+    # Supply storageName and accessKey values  
+    storageName = "<storage name>"  
+    accessKey = "<access key>"  
 
-    try:  
-      dbutils.fs.mount(  
-        source = "wasbs://sinkdata\@"+storageName+".blob.core.windows.net/",  
-        mount_point = "/mnt/Data Factorydata",  
-        extra_configs = {"fs.azure.account.key."+storageName+".blob.core.windows.net": accessKey})  
+    try:  
+      dbutils.fs.mount(  
+        source = "wasbs://sinkdata\@"+storageName+".blob.core.windows.net/",  
+        mount_point = "/mnt/Data Factorydata",  
+        extra_configs = {"fs.azure.account.key."+storageName+".blob.core.windows.net": accessKey})  
 
-    except Exception as e:  
-      # The error message has a long stack track. This code tries to print just the relevant line indicating what failed.
+    except Exception as e:  
+      # The error message has a long stack track. This code tries to print just the relevant line indicating what failed.
 
-    import re
-    result = re.findall(r"\^\s\*Caused by:\s*\S+:\s\*(.*)\$", e.message, flags=re.MULTILINE)
-    if result:
-      print result[-1] \# Print only the relevant error message
-    else:  
-      print e \# Otherwise print the whole stack trace.  
+    import re
+    result = re.findall(r"\^\s\*Caused by:\s*\S+:\s\*(.*)\$", e.message, flags=re.MULTILINE)
+    if result:
+      print result[-1] \# Print only the relevant error message
+    else:  
+      print e \# Otherwise print the whole stack trace.  
     ```
 
 1. Générez un **jeton d’accès Databricks** pour permettre à Data Factory d’accéder à Databricks.
@@ -153,6 +153,9 @@ Dans le nouveau pipeline, la plupart des paramètres sont configurés automatiqu
 1. Vérifiez que les **paramètres du pipeline** correspondent à ce qui est illustré dans la capture d’écran suivante : ![Pipeline parameters](media/solution-template-Databricks-notebook/pipeline-parameters.png)
 
 1. Connectez-vous à vos jeux de données.
+
+    >[!NOTE]
+    >Dans les jeux de données ci-dessous, le chemin d’accès du fichier a été automatiquement spécifié dans le modèle. Si des modifications sont nécessaires, veillez à spécifier le chemin d’accès pour **conteneur** et **répertoire** en cas d’erreur de connexion.
 
    - **SourceAvailabilityDataset** : pour vérifier si les données sources sont disponibles.
 

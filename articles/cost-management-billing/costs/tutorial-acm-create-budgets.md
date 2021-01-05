@@ -3,23 +3,24 @@ title: 'Tutoriel : Créer et gérer des budgets Azure'
 description: Ce tutoriel vous aide à planifier et à prendre en compte les coûts de services Azure que vous consommez.
 author: bandersmsft
 ms.author: banders
-ms.date: 04/22/2020
-ms.topic: conceptual
+ms.date: 08/20/2020
+ms.topic: tutorial
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: adwise
 ms.custom: seodec18
-ms.openlocfilehash: e8afa19b6d79ce915ca41f7b0e6b4a203d7daa1b
-ms.sourcegitcommit: 086d7c0cf812de709f6848a645edaf97a7324360
+ms.openlocfilehash: 48cf5aea60f66fa8b24fd09e7304be0077f2fdcf
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82101754"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132803"
 ---
 # <a name="tutorial-create-and-manage-azure-budgets"></a>Tutoriel : Créer et gérer des budgets Azure
 
 Les budgets dans Cost Management vous aident à planifier et à suivre la comptabilité de l’organisation. Avec les budgets, vous pouvez prendre en compte les services Azure que vous consommez ou auxquels vous vous abonnez pendant une période spécifique. Ils vous permettent d’informer les autres utilisateurs de leurs dépenses pour gérer les coûts de manière proactive, ainsi que pour superviser la progression des dépenses. En cas de dépassement des seuils budgétaires que vous avez créés, seules des notifications sont déclenchées. Aucune de vos ressources n’est affectée et votre consommation n’est pas arrêtée. Vous pouvez utiliser des budgets pour comparer et suivre les dépenses lors de l’analyse des coûts.
 
-Les données de coûts et d’utilisation sont généralement disponibles dans un délai de 12 à 16 heures, et les budgets sont évalués par rapport à ces coûts toutes les quatre heures. Les notifications par e-mail sont normalement reçues dans un délai de 12 à 16 heures.
+Les données de coûts et d’utilisation sont généralement disponibles dans un délai de 8 à 24 heures, et les budgets sont évalués par rapport à ces coûts toutes les 12 à 14 heures. Veillez à vous familiariser avec les détails de [Mises à jour et rétention des données de coût et d’utilisation](./understand-cost-mgt-data.md#cost-and-usage-data-updates-and-retention). Quand un seuil budgétaire est atteint, des notifications par e-mail sont normalement envoyées dans l’heure suivant l’évaluation.
 
 Les budgets sont automatiquement réinitialisés à la fin d’une période (mensuelle, trimestrielle ou annuelle) pour le même montant lorsque vous sélectionnez une date d’expiration ultérieure. Étant donné qu’ils sont réinitialisés avec le même montant de budget, vous devez créer des budgets distincts quand les montants budgétisés diffèrent pour des périodes ultérieures.
 
@@ -40,7 +41,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Les budgets sont pris en charge pour les types suivants d’étendues et de types de comptes Azure :
 
-- Étendues du contrôle d’accès en fonction du rôle Azure
+- Étendues de contrôle d’accès en fonction du rôle Azure (Azure RBAC)
     - Groupes d’administration
     - Abonnement
 - Étendues Contrat Entreprise
@@ -71,7 +72,7 @@ Les autorisations, ou étendues, Azure suivantes sont prises en charge par abonn
 - Contributeur et Contributeur Cost Management : peut créer, modifier ou supprimer ses propres budgets. Peut modifier le montant des budgets créés par d’autres utilisateurs.
 - Lecteur et Lecteur Cost Management : peut afficher les budgets pour lesquels ils disposent des autorisations adéquates.
 
-Pour plus d’informations sur l’affectation d’une autorisation d’accès aux données Cost Management, consultez [Affecter une autorisation d’accès aux données Cost Management](../../cost-management/assign-access-acm-data.md).
+Pour plus d’informations sur l’affectation d’une autorisation d’accès aux données Cost Management, consultez [Affecter une autorisation d’accès aux données Cost Management](./assign-access-acm-data.md).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -91,7 +92,7 @@ Sélectionnez **Ajouter**.
 
 Dans la fenêtre **Créer un budget**, assurez-vous que l’étendue affichée est correcte. Choisissez les filtres que vous souhaitez ajouter. Les filtres vous permettent de créer des budgets afférents à des coûts spécifiques, tels que des groupes de ressources dans un abonnement ou un service tel que des machines virtuelles. Tout filtre que vous pouvez utiliser dans l’analyse du coût peut également être appliqué à un budget.
 
-Après avoir identifié votre étendue et vos filtres, tapez un nom de budget. Choisissez ensuite une période de réinitialisation de budget mensuelle, trimestrielle ou annuelle. Cette période de réinitialisation détermine la fenêtre de temps analysée par le budget. Le coût évalué par le budget commence à zéro au début de chaque nouvelle période. Quand vous créez un budget trimestriel, il fonctionne de la même façon qu’un budget mensuel. La différence est que le montant du budget pour le trimestre est divisé de manière équitable entre les trois mois du trimestre. Un montant de budget annuel est divisé de manière équitable entre les 12 mois de l’année civile.
+Après avoir identifié votre étendue et vos filtres, tapez un nom de budget. Choisissez ensuite une période de réinitialisation mensuelle, trimestrielle ou annuelle pour le budget. Cette période de réinitialisation détermine la fenêtre de temps analysée par le budget. Le coût évalué par le budget commence à zéro au début de chaque nouvelle période. Quand vous créez un budget trimestriel, il fonctionne de la même façon qu’un budget mensuel. La différence est que le montant du budget pour le trimestre est divisé de manière équitable entre les trois mois du trimestre. Un montant de budget annuel est divisé de manière équitable entre les 12 mois de l’année civile.
 
 Si vous avez un abonnement de paiement à l’utilisation, MSDN ou Visual Studio, votre période de facturation peut ne pas être alignée sur le mois calendaire. Pour ces types d’abonnements et groupes de ressources, vous pouvez créer un budget aligné sur votre période de facturation ou sur les mois calendaires. Pour créer un budget aligné sur votre période de facturation, sélectionnez une période de réinitialisation : **Mois de facturation**, **Trimestre de facturation** ou **Année de facturation**. Pour créer un budget aligné sur le mois calendaire, sélectionnez une période de réinitialisation : **Mensuelle**, **Trimestrielle** ou **Annuelle**.
 
@@ -101,19 +102,30 @@ Selon les champs choisis dans le budget jusqu’à présent, un graphique s’af
 
 ![Exemple de création de budget avec des données de coût mensuel ](./media/tutorial-acm-create-budgets/monthly-budget01.png)
 
-Après avoir configuré le montant du budget, sélectionnez **Suivant** pour configurer des alertes budgétaires. Les budgets nécessitent au moins un seuil de coût (% du budget) et une adresse e-mail correspondante. Si vous le souhaitez, vous pouvez inclure jusqu’à cinq seuils et cinq adresses e-mail dans un seul budget. Quand un seuil budgétaire est atteint, des notifications par e-mail sont normalement reçues en moins de 20 heures.
+Après avoir configuré le montant du budget, sélectionnez **Suivant** pour configurer des alertes budgétaires. Les budgets nécessitent au moins un seuil de coût (% du budget) et une adresse e-mail correspondante. Si vous le souhaitez, vous pouvez inclure jusqu’à cinq seuils et cinq adresses e-mail dans un seul budget. Quand un seuil budgétaire est atteint, des notifications par e-mail sont normalement envoyées dans l’heure suivant l’évaluation.
 
-Si vous voulez recevoir des e-mails, ajoutez azure-noreply@microsoft.com à votre liste d’expéditeurs approuvés afin que les e-mails ne soient pas placés dans votre dossier de courrier indésirable. Pour plus d'informations sur les notifications, consultez [Utiliser les alertes de coût](../../cost-management/cost-mgt-alerts-monitor-usage-spending.md).
+Si vous voulez recevoir des e-mails, ajoutez azure-noreply@microsoft.com à votre liste d’expéditeurs approuvés afin que les e-mails ne soient pas placés dans votre dossier de courrier indésirable. Pour plus d'informations sur les notifications, consultez [Utiliser les alertes de coût](./cost-mgt-alerts-monitor-usage-spending.md).
 
-Dans l’exemple ci-dessous, une alerte par e-mail est générée quand 90 % du budget sont atteints. Si vous créez un budget avec l’API Budgets, vous pouvez également attribuer des rôles à des personnes pour qu’elles reçoivent des alertes. L’attribution de rôles à des personnes n’est pas prise en charge dans le Portail Azure. Pour plus d’informations sur l’API Budgets d’Azure, consultez [API Budgets](/rest/api/consumption/budgets).
+Dans l’exemple ci-dessous, une alerte par e-mail est générée quand 90 % du budget sont atteints. Si vous créez un budget avec l’API Budgets, vous pouvez également attribuer des rôles à des personnes pour qu’elles reçoivent des alertes. L’attribution de rôles à des personnes n’est pas prise en charge dans le Portail Azure. Pour plus d’informations sur l’API Budgets d’Azure, consultez [API Budgets](/rest/api/consumption/budgets). Si vous souhaitez envoyer une alerte par e-mail dans une autre langue, consultez [Paramètres régionaux pris en charge pour les e-mails d’alerte budgétaire](manage-automation.md#supported-locales-for-budget-alert-emails).
+
+Les limites d’alerte prennent en charge une plage de 0,01 à 1 000 % du seuil budgétaire que vous avez spécifié.
 
 ![Exemple de conditions d’alerte](./media/tutorial-acm-create-budgets/monthly-budget-alert.png)
 
-Après avoir créé un budget, il est indiqué dans l’analyse des coûts. Visualiser votre budget par rapport à la tendance de vos dépenses est une des premières étapes quand vous commencez à [analyser vos coûts et vos dépenses](../../cost-management/quick-acm-cost-analysis.md).
+Après avoir créé un budget, il est indiqué dans l’analyse des coûts. Visualiser votre budget par rapport à la tendance de vos dépenses est une des premières étapes quand vous commencez à [analyser vos coûts et vos dépenses](./quick-acm-cost-analysis.md).
 
 ![Exemple de budget et de dépenses affichés dans l’analyse des coûts](./media/tutorial-acm-create-budgets/cost-analysis.png)
 
 Dans l’exemple précédent, vous avez créé un budget pour un abonnement. Vous pouvez aussi créer un budget pour un groupe de ressources. Si vous voulez créer un budget pour un groupe de ressources, accédez à **Gestion des coûts + facturation** &gt; **Abonnements** &gt; sélectionnez un abonnement > **Groupes de ressource** > sélectionnez un groupe de ressources > **Budgets** > puis **Ajouter** un budget.
+
+### <a name="create-a-budget-for-combined-azure-and-aws-costs"></a>Créer un budget pour les coûts Azure et AWS combinés
+
+Vous pouvez regrouper vos coûts Azure et AWS en affectant un groupe d’administration à votre connecteur, ainsi que ses comptes consolidés et liés. Attribuez vos abonnements Azure au même groupe d’administration. Créez ensuite un budget pour les coûts combinés.
+
+1. Dans Cost Management, sélectionnez **Budgets**.
+1. Sélectionnez **Ajouter**.
+1. Sélectionnez **Modifier l’étendue**, puis sélectionnez le groupe d’administration.
+1. Terminez la création du budget.
 
 ## <a name="costs-in-budget-evaluations"></a>Coûts des évaluations de budget
 
@@ -124,8 +136,7 @@ Si vous souhaitez filtrer les nouveaux coûts afin que les budgets soient évalu
 - Type de serveur de publication : Azure
 - Type de frais : Usage
 
-Les évaluations des coûts budgétaires sont basées sur le coût réel. Elles n’incluent pas l’amortissement. Pour plus d’informations sur les options de filtrage mises à votre disposition dans les budgets, consultez [Comprendre les options de regroupement et de filtrage](quick-acm-cost-analysis.md#understanding-grouping-and-filtering-options).
-
+Les évaluations des coûts budgétaires sont basées sur le coût réel. Elles n’incluent pas l’amortissement. Pour plus d’informations sur les options de filtrage mises à votre disposition dans les budgets, consultez [Comprendre les options de regroupement et de filtrage](group-filter.md).
 
 ## <a name="trigger-an-action-group"></a>Déclencher un groupe d’actions
 
@@ -179,9 +190,14 @@ $ActionGroupId = (Set-AzActionGroup -ResourceGroupName YourResourceGroup -Name T
 
 New-AzConsumptionBudget -Amount 100 -Name TestPSBudget -Category Cost -StartDate 2020-02-01 -TimeGrain Monthly -EndDate 2022-12-31 -ContactEmail test@test.com -NotificationKey Key1 -NotificationThreshold 0.8 -NotificationEnabled -ContactGroup $ActionGroupId
 ```
+
 ## <a name="create-a-budget-with-an-azure-resource-manager-template"></a>Créer un budget avec un modèle Azure Resource Manager
 
 Vous pouvez créer un budget en utilisant un modèle Azure Resource Manager. Pour utiliser le modèle, consultez [Créer un budget avec un modèle Azure Resource Manager](quick-create-budget-template.md).
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous avez créé un budget et que vous ne l’utilisez plus, affichez ses détails et supprimez-le.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

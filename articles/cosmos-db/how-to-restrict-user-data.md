@@ -3,23 +3,27 @@ title: Restreindre l’accès des utilisateurs aux opérations de données uniqu
 description: Découvrez comment restreindre l’accès aux opérations de données uniquement avec Azure Cosmos DB
 author: voellm
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/9/2019
 ms.author: tvoellm
-ms.openlocfilehash: 03cad9e4c3752b5f35be785a6280bf18aaa14860
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61e8ee2cbcd1252704b2d1e220fcfaaff17c2f28
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74980018"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93085987"
 ---
-# <a name="restrict-user-access-to-data-operations-only"></a>Restreindre l’accès des utilisateurs aux opérations de données uniquement
+# <a name="restrict-user-access-to-data-operations-in-azure-cosmos-db"></a>Restreindre l’accès des utilisateurs aux opérations de données dans Azure Cosmos DB
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 Dans Azure Cosmos DB, il existe deux façons d’authentifier vos interactions auprès du service de base de données :
-- En utilisant votre identité Azure Active Directory lors de l’interaction avec le portail Azure
-- En utilisant des [jetons de ressources](secure-access-to-data.md#resource-tokens) ou des [clés](secure-access-to-data.md#master-keys) Azure Cosmos DB lors de l’émission d’appels à partir d’API et de kits SDK
 
-Chaque méthode d’authentification donne accès à différents ensembles d’opérations, qui se chevauchent pour certaines : ![Répartition des opérations par type d’authentification](./media/how-to-restrict-user-data/operations.png)
+- En utilisant votre identité Azure Active Directory lors de l’interaction avec le portail Azure
+- En utilisant des [jetons de ressources](secure-access-to-data.md#resource-tokens) ou des [clés](database-security.md#primary-keys) Azure Cosmos DB lors de l’émission d’appels à partir d’API et de kits SDK
+
+Chaque méthode d’authentification donne accès à différents ensembles d’opérations, qui se chevauchent pour certaines :
+
+:::image type="content" source="./media/how-to-restrict-user-data/operations.png" alt-text="Répartition des opérations par type d’authentification" border="false":::
 
 Dans certains scénarios, vous souhaiterez peut-être limiter le champ d’actions de certains utilisateurs aux opérations de données (c’est-à-dire les requêtes et les demandes CRUD). C’est généralement le cas des développeurs qui n’ont pas besoin de créer ou de supprimer de ressources ou de changer le débit provisionné des conteneurs sur lesquels ils travaillent.
 
@@ -49,7 +53,7 @@ Select-AzSubscription $MySubscriptionId
 
 ## <a name="create-the-custom-azure-active-directory-role"></a>Créer le rôle Azure Active Directory personnalisé
 
-Le script suivant crée une attribution de rôle Azure Active Directory avec un accès « Clé uniquement » pour les comptes Azure Cosmos. Le rôle est basé sur les [rôles personnalisés pour les ressources Azure](../role-based-access-control/custom-roles.md) et les [actions précises pour Azure Cosmos DB](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb). Ces rôles et actions font partie de l’espace de noms Azure Active Directory `Microsoft.DocumentDB`.
+Le script suivant crée une attribution de rôle Azure Active Directory avec un accès « Clé uniquement » pour les comptes Azure Cosmos. Le rôle est basé sur les [rôles personnalisés Azure](../role-based-access-control/custom-roles.md) et les [actions précises pour Azure Cosmos DB](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb). Ces rôles et actions font partie de l’espace de noms Azure Active Directory `Microsoft.DocumentDB`.
 
 1. Tout d’abord, créez un document JSON nommé `AzureCosmosKeyOnlyAccess.json` avec le contenu suivant :
 

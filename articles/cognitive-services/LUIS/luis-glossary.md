@@ -1,16 +1,18 @@
 ---
 title: Glossaire - LUIS
-description: Ce glossaire décrit les termes que vous pourriez rencontrer en utilisant LUIS.
+description: Le glossaire explique les termes que vous pourriez rencontrer en utilisant le service API LUIS.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 05/08/2020
-ms.openlocfilehash: eb823e65acc55dd9d739b31e506ad27f6af9095a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: cc7dac3767ca5c9e2429f4691a458f88ad1af707
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83589667"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151977"
 ---
-# <a name="language-understanding-glossary-of-common-vocabulary-and-concepts"></a>Glossaire des termes et concepts utilisés par LUIS (Language Understanding Intelligent Service)
+# <a name="language-understanding-glossary-of-common-vocabulary-and-concepts"></a>Glossaire Language Understanding des termes et concepts courants
 Ce glossaire décrit les termes que vous pourriez rencontrer lors de l’utilisation de LUIS (Language Understanding Intelligent Service).
 
 ## <a name="active-version"></a>Version active
@@ -38,11 +40,11 @@ La création correspond à la possibilité de créer, de gérer et de déployer 
 
 ### <a name="authoring-key"></a>Clé de création
 
-La [clé de création](luis-concept-keys.md) est utilisée pour créer l’application. Elle n’est pas utilisée pour les requêtes du point de terminaison au niveau de la production. Pour plus d'informations, voir [Limites des clés](luis-limits.md#key-limits).
+La [clé de création](luis-how-to-azure-subscription.md) est utilisée pour créer l’application. et non pour les requêtes du point de terminaison au niveau de la production. Pour plus d'informations, voir [Limites des clés](luis-limits.md#key-limits).
 
 ### <a name="authoring-resource"></a>Ressource de création
 
-Votre [ressource de création](luis-concept-keys.md#azure-resources-for-luis) LUIS est un élément gérable disponible via Azure. La ressource est votre accès aux capacités de création, de formation et de publication associées du service Azure. La ressource comprend les informations d’authentification, d’autorisation et de sécurité dont vous avez besoin pour accéder au service Azure associé.
+Votre [ressource de création](luis-how-to-azure-subscription.md#azure-resources-for-luis) LUIS est un élément gérable disponible via Azure. La ressource est votre accès aux capacités de création, de formation et de publication associées du service Azure. La ressource comprend les informations d’authentification, d’autorisation et de sécurité dont vous avez besoin pour accéder au service Azure associé.
 
 La ressource de création correspond au « genre » Azure `LUIS-Authoring`.
 
@@ -67,7 +69,7 @@ Dans les tests par lots, les points de données représentent les énoncés dans
 
 Dans les tests par lots, les points de données représentent les énoncés dans lesquels votre application a mal prédit l’existence de l’intention/entité cible.
 
-### <a name="precision"></a>Précision
+### <a name="precision"></a>Precision
 Dans les tests par lots, la précision (également appelée coefficient de prévision d'un test positif) est la part d’énoncés pertinents parmi les énoncés récupérés.
 
 Si l’on prend un exemple dans le domaine de l’élevage, un test par lots correspond au nombre de moutons prédits divisé par le nombre total d’animaux (moutons et non-mouton).
@@ -94,11 +96,11 @@ Une [intention](#intent) est un exemple de classifieur.
 
 ## <a name="collaborator"></a>Collaborateur
 
-Le concept d’un collaborateur est le même que celui d’un [contributeur](#contributor). Un collaborateur reçoit l’accès lorsqu’un propriétaire ajoute l’adresse email du collaborateur à une application qui n’est pas contrôlée par le contrôle d’accès en fonction du rôle (ou RBAC, pour « Role-Based Access Control »). Si vous utilisez toujours des collaborateurs, vous devez migrer votre compte LUIS et utiliser les ressources de création de LUIS pour gérer les contributeurs avec le contrôle d’accès en fonction du rôle .
+Le concept d’un collaborateur est le même que celui d’un [contributeur](#contributor). Un collaborateur reçoit l’accès lorsqu’un propriétaire ajoute l’adresse email du collaborateur à une application qui n’est pas contrôlée par le contrôle d’accès en fonction du rôle Azure (ou Azure RBAC, pour « Role-Based Access Control »). Si vous utilisez toujours des collaborateurs, vous devez migrer votre compte LUIS et utiliser les ressources de création de LUIS pour gérer les contributeurs à l’aide d’Azure RBAC.
 
 ## <a name="contributor"></a>Contributeur
 
-Un contributeur n’est pas le [propriétaire](#owner) de l’application, mais il dispose des mêmes autorisations pour ajouter, modifier et supprimer les intentions, les entités et les énoncés. Un contributeur fournit un contrôle d’accès en fonction du rôle à une application LUIS.
+Un contributeur n’est pas le [propriétaire](#owner) de l’application, mais il dispose des mêmes autorisations pour ajouter, modifier et supprimer les intentions, les entités et les énoncés. Un contributeur fournit un contrôle d’accès en fonction du rôle Azure (Azure RBAC) à une application LUIS.
 
 Voir aussi :
 * [Découvrez comment](luis-how-to-collaborate.md#add-contributor-to-azure-authoring-resource) ajouter des contributeurs
@@ -139,9 +141,9 @@ Le schéma d’entité est la structure que vous définissez pour les entités i
 
 ### <a name="entitys-subentity"></a>Sous-entité d’entité
 
-Une sous-entité est une entité enfant d’une entité issue du Machine Learning.
+Une sous-entité est une entité enfant d’une entité de machine-learning.
 
-### <a name="non-machine-learned-entity"></a>Entité non issue du Machine Learning
+### <a name="non-machine-learning-entity"></a>Entité non-machine-learning
 
 Entité qui utilise la correspondance de texte pour extraire les données :
 * Entité de liste
@@ -160,11 +162,11 @@ Une [entité d’expression régulière](reference-entity-regular-expression.md)
 
 Consultez l’entrée Modèle prédéfini pour [entité prédéfinie](#prebuilt-entity)
 
-## <a name="features"></a>Caractéristiques
+## <a name="features"></a>Fonctionnalités
 
 Dans le Machine Learning, une caractéristique est un trait typique qui aide le modèle à reconnaître un concept particulier. Il s’agit d’une indication que LUIS peut utiliser, mais ce n’est pas une règle absolue.
 
-Ce terme est également appelé **[caractéristique issue du Machine Learning](luis-concept-feature.md)** .
+On parle également de **[fonctionnalité de machine learning](luis-concept-feature.md)** .
 
 Ces indicateurs sont utilisés conjointement avec les étiquettes pour apprendre à prédire de nouvelles données. LUIS prend en charge les listes d’expressions et l’utilisation d’autres modèles en tant que caractéristiques.
 
@@ -174,7 +176,7 @@ Une caractéristique requise est un moyen de contraindre la sortie d’un modèl
 
 Prenons un exemple dans lequel vous disposez d’une caractéristique prédéfinie que vous avez marquée comme étant requise sur l’entité « quantité » pour un bot de commande de menu. Lorsque votre bot voit `I want a bajillion large pizzas?`, « bajillion » n’est pas prédit comme une quantité, quel que soit le contexte dans lequel il apparaît. « Bajillion » n’est pas un nombre valide et ne sera pas prédit par l’entité de nombre prédéfinie.
 
-## <a name="intent"></a>Intention
+## <a name="intent"></a>Intentionnel
 
 Une [intention](luis-concept-intent.md) représente une tâche ou une action que l’utilisateur souhaite effectuer. Il s’agit d’un but ou d’un objectif exprimé dans l’énoncé d’un utilisateur, par exemple réserver un vol ou régler une facture. Dans LUIS, l’ensemble d’un énoncé est considéré comme une intention, mais les parties de l’énoncé sont extraites en tant qu’entités
 
@@ -186,7 +188,7 @@ L’étiquetage, ou marquage, est le processus qui consiste à associer un exemp
 Dans LUIS, les intentions dans une application s’excluent mutuellement. Cela signifie que lorsque vous ajoutez un énoncé à une intention, il est considéré comme un exemple _positif_ à cet intention et un exemple _négatif_ pour toutes les autres intentions. Les exemples négatifs ne doivent pas être confondus avec l’intention « None », qui représente les énoncés qui se trouvent en dehors de l’étendue de l’application.
 
 ### <a name="labeling-for-entities"></a>Étiquetage des entités
-Dans LUIS, vous [étiquetez](label-entity-example-utterance.md) un mot ou une expression dans l’énoncé d’un exemple d’intention avec une entité en tant qu’exemple _positif_. L’étiquetage indique l’intention qu’il doit prédire pour cet énoncé. Les énoncés étiquetés sont utilisés pour former l’intention.
+Dans LUIS, vous [étiquetez](label-entity-example-utterance.md) un mot ou une expression dans l’énoncé d’un exemple d’intention avec une entité en tant qu’exemple _positif_ . L’étiquetage indique l’intention qu’il doit prédire pour cet énoncé. Les énoncés étiquetés sont utilisés pour former l’intention.
 
 ## <a name="luis-app"></a>Application LUIS
 
@@ -199,6 +201,10 @@ Un modèle (issu du Machine Learning) est une fonction qui effectue une prédict
 ## <a name="normalized-value"></a>Valeur normalisée
 
 Vous ajoutez des valeurs à vos entités de [liste](#list-entity). Chacune de ces valeurs peut avoir une liste d’un ou plusieurs synonymes. Seule la valeur normalisée est retournée dans la réponse.
+
+## <a name="overfitting"></a>Surajustement
+
+Un surajustement se produit quand le modèle est fixé sur les exemples spécifiques et qu’il n’est pas possible de le généraliser correctement.
 
 ## <a name="owner"></a>Propriétaire
 
@@ -230,7 +236,7 @@ Une prédiction est une requête REST au service de prédiction Azure LUIS qui a
 
 ### <a name="prediction-key"></a>Clé de prédiction
 
-La [clé de prédiction](luis-concept-keys.md) (précédemment appelée clé d’abonnement) est la clé associée au service LUIS que vous avez créé dans Azure, qui autorise votre utilisation du point de terminaison de prédiction.
+La [clé de prédiction](luis-how-to-azure-subscription.md) (précédemment appelée clé d’abonnement) est la clé associée au service LUIS que vous avez créé dans Azure, qui autorise votre utilisation du point de terminaison de prédiction.
 
 Il ne s’agit pas de la clé de création. Si vous avez une clé de point de terminaison de prédiction, vous devrez l’utiliser pour toutes les demandes du point de terminaison au lieu de la clé de création. Vous pouvez voir votre clé de prédiction actuelle au sein de l’URL du point de terminaison en bas de la page des ressources Azure sur le site web LUIS. Il s’agit de la valeur de la paire nom/valeur subscription-key.
 
@@ -240,7 +246,7 @@ Votre ressource de prédiction LUIS est un élément gérable qui est disponible
 
 La ressource de prédiction correspond au « genre » Azure `LUIS`.
 
-### <a name="prediction-score"></a>Score de prédiction
+### <a name="prediction-score"></a>Scores de prédictions
 
 Le [score](luis-concept-prediction-score.md) est un nombre compris entre 0 et 1. Il mesure la confiance du système par rapport au fait qu’un énoncé d’entrée puisse correspondre à une intention. Plus le score est proche de 1, plus le système est confiant en ce qui concerne sa sortie. Plus le score est proche de 0, plus le système est certain que l’entrée ne correspond pas à une sortie attendue. Les scores entre ses deux valeurs signifient que le système ne sait pas vraiment quelle décision prendre.
 
@@ -260,7 +266,7 @@ Le quota LUIS correspond à la limitation du niveau d’abonnement Azure. Il peu
 
 ## <a name="schema"></a>schéma
 
-Votre schéma inclut vos intentions et entités, ainsi que les sous-entités. Le schéma est initialement planifié, puis itéré dans le temps. Le schéma n’inclut pas les paramètres d’application, les caractéristiques ou les exemples de énoncés. 
+Votre schéma inclut vos intentions et entités, ainsi que les sous-entités. Le schéma est initialement planifié, puis itéré dans le temps. Le schéma n’inclut pas les paramètres d’application, les caractéristiques ou les exemples de énoncés.
 
 ## <a name="sentiment-analysis"></a>Analyse des sentiments
 L’analyse des sentiments attribue des valeurs positives ou négatives aux énoncés fournis par [l’Analyse de texte](../text-analytics/overview.md).
@@ -281,7 +287,7 @@ Vous pouvez attribuer une valeur normalisée aux [entités de listes](reference-
 |--|--|
 |Petite| la petite, S|
 |Moyenne| normale, M|
-|grande| large, L|
+|grand| large, L|
 |Très grande| la plus grande, XL|
 
 Le modèle retourne la valeur normalisée de l’entité lorsque l’un des synonymes est visible dans l’entrée.
@@ -299,7 +305,7 @@ Voir [Changer le fuseau horaire de l’entité datetimeV2 prédéfinie](luis-con
 ## <a name="token"></a>par jeton
 Un [jeton](luis-language-support.md#tokenization) est la plus petite unité de texte que LUIS peut reconnaître. Il diffère légèrement d’une langue à l’autre.
 
-Pour l’**anglais**, un jeton est une étendue continue (sans espaces ni ponctuation) de lettres et de chiffres. Un espace N’EST PAS un jeton.
+Pour l’ **anglais** , un jeton est une étendue continue (sans espaces ni ponctuation) de lettres et de chiffres. Un espace N’EST PAS un jeton.
 
 |Expression|Nombre de jetons|Explication|
 |--|--|--|

@@ -1,25 +1,30 @@
 ---
 title: 'Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et PHP'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing.
+description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing et PHP.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 05/06/2020
 ms.author: aahi
-ms.openlocfilehash: 0aa309ba34abdfbe91493498ae6ec49785e0e0d4
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: d5a678da127117f6e7af77fed5ad2ef146908cce
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80238983"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352845"
 ---
 # <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-php"></a>Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et PHP
 
-Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API Suggestion automatique Bing et à obtenir la réponse JSON. Cette simple application PHP envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en PHP, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Suivez ce démarrage rapide pour apprendre à effectuer des appels à l’API Suggestion automatique Bing et à lire la réponse JSON. Cette simple application PHP envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en PHP, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -32,7 +37,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
 1. Créez un nouveau projet PHP dans votre environnement IDE favori.
 2. Ajoutez le code ci-dessous.
 3. Remplacez la valeur `subscriptionKey` par une clé d’accès valide pour votre abonnement.
-4. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+4. Utilisez le point de terminaison global dans le code, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 5. Exécutez le programme.
 
 ```php
@@ -42,8 +47,8 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
 // ;extension=php_openssl.dll
 
 // **********************************************
-// *** Update or verify the following values. ***
-// **********************************************
+// **_ Update or verify the following values. _*_
+// _*********************************************
 
 // Replace the subscriptionKey string value with your valid subscription key.
 $subscriptionKey = 'enter key here';
@@ -80,7 +85,7 @@ echo json_encode (json_decode ($result), JSON_PRETTY_PRINT);
 ?>
 ```
 
-### <a name="response"></a>response
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
 Une réponse correcte est retournée au format JSON, comme dans l’exemple suivant : 
 
@@ -156,4 +161,4 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 ## <a name="see-also"></a>Voir aussi
 
 - [Qu’est-ce que la Suggestion automatique Bing ?](../get-suggested-search-terms.md)
-- [Informations de référence sur l’API Suggestion automatique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)
+- [Informations de référence sur l’API Suggestion automatique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)

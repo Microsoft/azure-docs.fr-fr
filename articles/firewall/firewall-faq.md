@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: conceptual
-ms.date: 05/11/2020
+ms.date: 08/13/2020
 ms.author: victorh
-ms.openlocfilehash: cb065f10664f46578f84e59501d75d510ccb3c6a
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 3e6ea6692a81a06bbf3180904dfb465a88b105d1
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83201584"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94653417"
 ---
 # <a name="azure-firewall-faq"></a>FAQ Pare-feu Azure
 
@@ -22,15 +22,7 @@ Pare-feu Azure est un service de sécurité réseau informatique géré qui prot
 
 ## <a name="what-capabilities-are-supported-in-azure-firewall"></a>Quelles fonctionnalités sont prises en charge dans Pare-feu Azure ?
 
-* Service de pare-feu avec état
-* Haute disponibilité intégrée avec extensibilité sans limites du cloud
-* Filtrage des noms de domaine complets
-* Balises FQDN
-* Règles de filtrage du trafic réseau
-* Prise en charge du mode SNAT sortant
-* Prise en charge du trafic DNAT entrant
-* Création, application et journalisation centralisées de stratégies de connectivité réseau et d’application entre les abonnements et les réseaux virtuels Azure
-* Intégration totale avec Azure Monitor pour la journalisation et l’analytique
+Pour découvrir les fonctionnalités du Pare-feu Azure, consultez [Fonctionnalités du Pare-feu Azure](features.md).
 
 ## <a name="what-is-the-typical-deployment-model-for-azure-firewall"></a>Qu’est le modèle de déploiement type de Pare-feu Azure ?
 
@@ -58,7 +50,7 @@ Pare-feu Azure prend en charge le filtrage du trafic entrant et sortant. La prot
 
 ## <a name="which-logging-and-analytics-services-are-supported-by-the-azure-firewall"></a>Quels sont les services de journalisation et d’analyse pris en charge par Pare-feu d’Azure ?
 
-Pare-feu Azure est intégré à Azure Monitor pour la consultation et l’analyse des journaux d’activité de Pare-feu. Les journaux d’activité peuvent être envoyés à Log Analytics, Stockage Azure ou Event Hubs. Ils peuvent être analysés dans Log Analytics ou par d’autres outils comme Excel et Power BI. Pour plus d’informations, consultez [Didacticiel : Surveiller les journaux d’activité de pare-feu Azure](tutorial-diagnostics.md).
+Pare-feu Azure est intégré à Azure Monitor pour la consultation et l’analyse des journaux d’activité de Pare-feu. Les journaux d’activité peuvent être envoyés à Log Analytics, Stockage Azure ou Event Hubs. Ils peuvent être analysés dans Log Analytics ou par d’autres outils comme Excel et Power BI. Pour plus d’informations, consultez [Didacticiel : Surveiller les journaux d’activité de pare-feu Azure](./firewall-diagnostics.md).
 
 ## <a name="how-does-azure-firewall-work-differently-from-existing-services-such-as-nvas-in-the-marketplace"></a>En quoi Pare-feu Azure fonctionne-t-il différemment des services existants comme les appliances virtuelles réseau sur la Place de marché ?
 
@@ -103,8 +95,10 @@ Set-AzFirewall -AzureFirewall $azfw
 
 $azfw = Get-AzFirewall -Name "FW Name" -ResourceGroupName "RG Name"
 $vnet = Get-AzVirtualNetwork -ResourceGroupName "RG Name" -Name "VNet Name"
-$publicip = Get-AzPublicIpAddress -Name "Public IP Name" -ResourceGroupName " RG Name"
-$azfw.Allocate($vnet,$publicip)
+$publicip1 = Get-AzPublicIpAddress -Name "Public IP1 Name" -ResourceGroupName "RG Name"
+$publicip2 = Get-AzPublicIpAddress -Name "Public IP2 Name" -ResourceGroupName "RG Name"
+$azfw.Allocate($vnet,@($publicip1,$publicip2))
+
 Set-AzFirewall -AzureFirewall $azfw
 ```
 
@@ -129,7 +123,7 @@ Pare-feu Azure ne traduit pas l’adresse réseau source lorsque l’adresse IP 
 
 ## <a name="is-forced-tunnelingchaining-to-a-network-virtual-appliance-supported"></a>Le tunneling/chaînage forcé à une appliance virtuelle réseau est-il pris en charge ?
 
-Le tunneling forcé est pris en charge. Pour plus d’informations, consultez la page [Tunneling forcé du Pare-feu Azure](forced-tunneling.md). 
+Le tunneling forcé est pris en charge lorsque vous créez un nouveau pare-feu. Vous ne pouvez pas configurer un pare-feu existant pour le tunneling forcé. Pour plus d’informations, consultez la page [Tunneling forcé du Pare-feu Azure](forced-tunneling.md).
 
 Le Pare-feu Azure doit avoir une connectivité Internet directe. Si votre AzureFirewallSubnet prend connaissance d’un itinéraire par défaut pour votre réseau local via le protocole BGP, vous devez le remplacer par un UDR 0.0.0.0/0 avec la valeur **NextHopType** définie sur **Internet** pour garantir une connectivité Internet directe.
 
@@ -145,7 +139,9 @@ Non. Les règles NAT ajoutent implicitement une règle de réseau correspondante
 
 ## <a name="how-do-wildcards-work-in-an-application-rule-target-fqdn"></a>Comment fonctionnent les caractères génériques dans un nom de domaine complet cible d’une règle d’application ?
 
-Si vous configurez * **.contoso.com**, cela autorise *anyvalue*.contoso.com, mais pas contoso.com (le domaine apex). Si vous souhaitez autoriser le domaine apex, vous devez explicitement le configurer en tant que nom de domaine complet cible.
+Les caractères génériques ne peuvent être utilisés que sur le côté gauche du FQDN. Par exemple, **_.contoso.com_* et **_contoso.com_*.
+
+Si vous configurez **_.contoso.com_*, cela autorise *toutevaleur*.contoso.com, mais pas contoso.com (l’apex de domaine). Si vous souhaitez autoriser le domaine apex, vous devez explicitement le configurer en tant que nom de domaine complet cible.
 
 ## <a name="what-does-provisioning-state-failed-mean"></a>Que signifie l’*état d’approvisionnement : Échec* ?
 
@@ -176,7 +172,9 @@ La capacité de débit initiale de Pare-feu Azure est de 2,5 à 3 Gbits/s et mo
 
 ## <a name="how-long-does-it-take-for-azure-firewall-to-scale-out"></a>Combien de temps le scale-out du Pare-feu Azure prend-il ?
 
-Le Pare-feu Azure s'adapte progressivement lorsque le débit moyen ou la consommation du processeur atteint 60 %. Cette opération prend de cinq à sept minutes. Lors des tests de performances, veillez à tester pendant au moins 10 à 15 minutes et à initier de nouvelles connexions pour profiter des nœuds de pare-feu nouvellement créés.
+Le Pare-feu Azure s'adapte progressivement lorsque le débit moyen ou la consommation du processeur atteint 60 %. Un débit maximal de déploiement par défaut est d’environ 2,5 à 3 Gbits/s et son scale-out commence lorsqu’il atteint 60 % de cette valeur. Cette opération prend de cinq à sept minutes. 
+
+Lors des tests de performances, veillez à tester pendant au moins 10 à 15 minutes et à initier de nouvelles connexions pour profiter des nœuds de pare-feu nouvellement créés.
 
 ## <a name="does-azure-firewall-allow-access-to-active-directory-by-default"></a>Le Pare-feu Azure autorise-t-il l’accès à Active Directory par défaut ?
 
@@ -187,9 +185,9 @@ Non. Le Pare-feu Azure bloque l’accès à Active Directory par défaut. Pour a
 Oui, vous pouvez utiliser Azure PowerShell pour le faire :
 
 ```azurepowershell
-# Add a Threat Intelligence Whitelist to an Existing Azure Firewall
+# Add a Threat Intelligence allow list to an Existing Azure Firewall
 
-## Create the Whitelist with both FQDN and IPAddresses
+## Create the allow list with both FQDN and IPAddresses
 
 $fw = Get-AzFirewall -Name "Name_of_Firewall" -ResourceGroupName "Name_of_ResourceGroup"
 $fw.ThreatIntelWhitelist = New-AzFirewallThreatIntelWhitelist `
@@ -197,17 +195,34 @@ $fw.ThreatIntelWhitelist = New-AzFirewallThreatIntelWhitelist `
 
 ## Or Update FQDNs and IpAddresses separately
 
-$fw = Get-AzFirewall -Name "Name_of_Firewall" -ResourceGroupName "Name_of_ResourceGroup"
-$fw.ThreatIntelWhitelist.FQDNs = @("fqdn1", "fqdn2", …)
-$fw.ThreatIntelWhitelist.IpAddress = @("ip1", "ip2", …)
+$fw = Get-AzFirewall -Name $firewallname -ResourceGroupName $RG
+$fw.ThreatIntelWhitelist.IpAddresses = @($fw.ThreatIntelWhitelist.IpAddresses + $ipaddresses)
+$fw.ThreatIntelWhitelist.fqdns = @($fw.ThreatIntelWhitelist.fqdns + $fqdns)
+
 
 Set-AzFirewall -AzureFirewall $fw
 ```
 
 ## <a name="why-can-a-tcp-ping-and-similar-tools-successfully-connect-to-a-target-fqdn-even-when-no-rule-on-azure-firewall-allows-that-traffic"></a>Pourquoi un test Ping TCP et des outils similaires peuvent-ils se connecter à un nom de domaine complet cible même si aucune règle n’autorise ce trafic sur le Pare-feu Azure ?
 
-Un test Ping TCP ne se connecte pas réellement au nom de domaine complet cible. En effet, le proxy transparent du Pare-feu Azure écoute le trafic sortant sur le port 80/443. Le test Ping TCP établit une connexion avec le pare-feu, qui supprime ensuite le paquet et consigne la connexion. Ce comportement n’a aucun impact sur la sécurité. Toutefois, pour éviter toute confusion, nous étudions la possibilité de modifier ce comportement.
+Un test Ping TCP ne se connecte pas réellement au nom de domaine complet cible. En effet, le proxy transparent du Pare-feu Azure écoute le trafic sortant sur le port 80/443. Le test Ping TCP établit une connexion avec le pare-feu, qui supprime ensuite le paquet. Ce comportement n’a aucun impact sur la sécurité. Toutefois, pour éviter toute confusion, nous étudions la possibilité de modifier ce comportement.
 
 ## <a name="are-there-limits-for-the-number-of-ip-addresses-supported-by-ip-groups"></a>Le nombre d’adresses IP prises en charge par les groupes IP est-il limité ?
 
 Oui. Pour plus d’informations, consultez [Abonnement Azure et limites, quotas et contraintes de service](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-firewall-limits)
+
+## <a name="can-i-move-an-ip-group-to-another-resource-group"></a>Puis-je déplacer un groupe IP vers un autre groupe de ressources ?
+
+Non, le déplacement d’un groupe IP vers un autre groupe de ressources n’est pas pris en charge actuellement.
+
+## <a name="what-is-the-tcp-idle-timeout-for-azure-firewall"></a>Quel est le délai d’inactivité TCP pour le pare-feu Azure ?
+
+Le comportement standard d’un pare-feu réseau consiste à garantir que les connexions TCP restent actives et à les fermer rapidement en l’absence d’activité. Le délai d’inactivité TCP du pare-feu Azure est de quatre minutes. Ce paramètre n’est pas configurable. Si une période d’inactivité est supérieure à la valeur de délai d’expiration, le maintien de la session TCP ou HTTP n’est pas garanti. Une pratique courante consiste à utiliser TCP keep-alive. Cela permet de maintenir la connexion active pendant une période plus longue. Pour plus d’informations, consultez ces [exemples .NET](/dotnet/api/system.net.servicepoint.settcpkeepalive?view=netcore-3.1#System_Net_ServicePoint_SetTcpKeepAlive_System_Boolean_System_Int32_System_Int32_).
+
+## <a name="can-i-deploy-azure-firewall-without-a-public-ip-address"></a>Puis-je déployer un pare-feu Azure sans adresse IP publique ?
+
+Non. Actuellement, vous devez déployer le pare-feu Azure avec une adresse IP publique.
+
+## <a name="where-does-azure-firewall-store-customer-data"></a>Où le Pare-feu Azure stocke-t-il les données client ?
+
+Le Pare-feu Azure ne déplace pas ni ne stocke les données client en dehors de la région dans laquelle il est déployé.

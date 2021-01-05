@@ -8,18 +8,18 @@ ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
 manager: briz
-ms.openlocfilehash: 624171ffc10a06ac3089b6dceb1683c63c88dbda
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 12860629d78391ed271306daba29a51aeb326c1d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74975276"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531591"
 ---
 # <a name="tpm-attestation"></a>Attestation TPM
 
 Le service IoT Hub Device Provisioning est un service d’assistance pour IoT Hub qui vous permet de configurer l’approvisionnement sans contact des appareils dans un hub IoT spécifié. Avec le service Device Provisioning, vous pouvez approvisionner des millions d’appareils de manière sécurisée.
 
-Cet article décrit le processus d’attestation d’identité lorsque vous utilisez un [TPM](./concepts-device.md). L’acronyme TPM signifie module de plateforme sécurisée, qui désigne un module de sécurité matériel (HSM). Cet article suppose que vous utilisez un microprogramme discret, ou un TPM intégré. Les TPM émulés logiciels sont parfaitement adaptés pour le prototypage ou le test, mais ils n’offrent pas le même niveau de sécurité que les TPM intégrés ou les microprogrammes discrets. Nous vous déconseillons d’utiliser les TPM logiciels en production. Pour plus d’informations sur les types de TPM, consultez la section [Brève introduction au TPM](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf).
+Cet article décrit le processus d’attestation d’identité lorsque vous utilisez un module de plateforme de confiance (TPM). Un TPM est un type de module de sécurité matériel (HSM). Cet article suppose que vous utilisez un microprogramme discret, ou un TPM intégré. Les TPM émulés logiciels sont parfaitement adaptés pour le prototypage ou le test, mais ils n’offrent pas le même niveau de sécurité que les TPM intégrés ou les microprogrammes discrets. Nous vous déconseillons d’utiliser les TPM logiciels en production. Pour plus d’informations sur les types de TPM, consultez la section [Brève introduction au TPM](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf).
 
 Cet article concerne uniquement les appareils utilisant un TPM 2.0 avec la prise en charge de clé HMAC et leurs paires de clés de type EK. Il n’est pas destiné aux appareils utilisant des certificats X.509 pour l’authentification. TPM est une norme ISO du secteur issue de Trusted Computing Group, et vous pouvez en apprendre davantage sur TPM en lisant la [spécification TPM 2.0 complète](https://trustedcomputinggroup.org/tpm-library-specification/) ou la [spécification ISO/IEC 11889](https://www.iso.org/standard/66510.html). Cet article suppose également que vous connaissez les paires de clés privées et publiques, ainsi que la façon dont elles sont utilisées pour le chiffrement.
 
@@ -67,5 +67,5 @@ L’appareil peut ensuite signer un jeton SAP à l’aide de la valeur nonce dé
 
 L’appareil se connecte maintenant à IoT Hub et vous êtes sûr que les clés de vos appareils sont stockées en toute sécurité. Maintenant que vous savez comment le service Device Provisioning vérifie de façon sécurisée l’identité d’un appareil à l’aide d’un TPM, consultez les articles suivants pour en savoir plus :
 
-* [Concepts de provisionnement automatique](./concepts-auto-provisioning.md)
+* [Découvrir plus d’informations sur les concepts du provisionnement](about-iot-dps.md#provisioning-process)
 * [Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure](./quick-setup-auto-provision.md) à l’aide de Kits de développement logiciel (SDK) pour prendre en charge le flux.

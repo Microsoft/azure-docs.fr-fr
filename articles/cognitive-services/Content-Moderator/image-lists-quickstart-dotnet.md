@@ -10,12 +10,13 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 10/24/2019
 ms.author: pafarley
-ms.openlocfilehash: e650529f3adb998ce683354565acdeb3928b50c3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: bec31f830adddfc7251ce36e13ef0bfaa0af7638
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "72931751"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88931707"
 ---
 # <a name="moderate-with-custom-image-lists-in-c"></a>Modérer du contenu avec des listes d’images personnalisées en C#
 
@@ -34,7 +35,7 @@ Cet article fournit des informations et des exemples de code qui vont vous aider
 
 L’application de console pour ce guide simule certaines des tâches que vous pouvez effectuer avec l’API Liste d’images.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer. 
 
 ## <a name="sign-up-for-content-moderator-services"></a>S’inscrire aux services Content Moderator
 

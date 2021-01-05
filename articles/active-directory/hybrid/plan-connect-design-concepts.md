@@ -17,12 +17,12 @@ ms.date: 08/10/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bb41e14a7ecf41a2698a063c3067a98d8acf8f07
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: baa03499cc11bda24ead986dd64621572484cbb1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227901"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279650"
 ---
 # <a name="azure-ad-connect-design-concepts"></a>Principes de conception Azure AD Connect
 L’objectif de ce document est de décrire les principes qui doivent présider à la conception de l’implémentation d’Azure AD Connect. Il s’agit d’une exploration approfondie de certains aspects. Ces concepts sont également décrits brièvement dans d’autres documents.
@@ -165,7 +165,7 @@ Pendant l’analyse (étape 4), si l’attribut est configuré sur un ou plusieu
 ### <a name="impact-on-ad-fs-or-third-party-federation-configuration"></a>Impact sur AD FS d’une configuration de fédération tierce
 Si vous utilisez Azure AD Connect pour gérer un déploiement d’AD FS local, Azure AD Connect met automatiquement à jour les règles de revendication pour utiliser le même attribut AD en tant qu’attribut sourceAnchor. Cela garantit que la revendication ImmutableID générée par ADFS est cohérente avec les valeurs de sourceAnchor exportées vers Azure AD.
 
-Si vous gérez AD FS en dehors d’Azure AD Connect ou si vous utilisez des serveurs de fédération tiers pour l’authentification, vous devez mettre à jour manuellement les règles de revendication pour que la revendication ImmutableID soit cohérente avec les valeurs de sourceAnchor exportées vers Azure AD, comme décrit dans la section [Modifier les règles de revendication AD FS](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-federation-management#modclaims) de l’article. Une fois l’installation terminée, L’Assistant renvoie l’avertissement suivant :
+Si vous gérez AD FS en dehors d’Azure AD Connect ou si vous utilisez des serveurs de fédération tiers pour l’authentification, vous devez mettre à jour manuellement les règles de revendication pour que la revendication ImmutableID soit cohérente avec les valeurs de sourceAnchor exportées vers Azure AD, comme décrit dans la section [Modifier les règles de revendication AD FS](./how-to-connect-fed-management.md#modclaims) de l’article. Une fois l’installation terminée, L’Assistant renvoie l’avertissement suivant :
 
 ![Configuration de fédération tierce](./media/plan-connect-design-concepts/consistencyGuid-03.png)
 
@@ -193,7 +193,7 @@ John est un utilisateur de contoso.com. Vous souhaitez que John utilise l’UPN 
 ### <a name="non-routable-on-premises-domains-and-upn-for-azure-ad"></a>Domaines locaux non routables et UPN pour Azure AD
 Certaines organisations ont des domaines non routables, comme contoso.local, ou de simples domaines à étiquette unique, comme contoso. Dans Azure AD, vous n’êtes pas en mesure de vérifier un domaine non routable. Azure AD Connect peut uniquement se synchroniser sur un domaine vérifié dans Azure AD. Lorsque vous créez un répertoire Azure AD, il crée un domaine routable qui devient le domaine par défaut de votre Azure AD, par exemple contoso.onmicrosoft.com. Par conséquent, il devient nécessaire de vérifier tous les autres domaines routables dans un scénario de ce type, si vous ne souhaitez pas effectuer de synchronisation avec le domaine par défaut onmicrosoft.com.
 
-Pour plus d’informations sur l’ajout et la vérification de domaines, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../active-directory-domains-add-azure-portal.md) .
+Pour plus d’informations sur l’ajout et la vérification de domaines, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../fundamentals/add-custom-domain.md) .
 
 Azure AD Connect détecte si vous exécutez un environnement de domaine non routable et vous avertit en temps utile si vous tentez de poursuivre la configuration rapide. Si votre domaine n’est pas routable, il est probable que les UPN des utilisateurs aient également des suffixes non routables. Par exemple, si votre domaine est contoso.local, Azure AD Connect vous propose d’utiliser des paramètres personnalisés plutôt que la configuration rapide. Avec les paramètres personnalisés, vous êtes en mesure de spécifier l’attribut à utiliser comme UPN pour la connexion à Azure une fois les utilisateurs synchronisés avec Azure AD.
 

@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/25/2020
 ms.author: memildin
-ms.openlocfilehash: e2cc04be5a79009f92e275f9de46df60a8e23c8b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 061b190af6e66cf0c7e8095251a3ef77d9aaf247
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82106574"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92341683"
 ---
 # <a name="faq---general-questions-about-azure-security-center"></a>FAQ - Questions générales sur Azure Security Center
 
@@ -36,15 +36,9 @@ Azure Security Center est disponible avec votre abonnement Microsoft Azure et ac
 Azure Security Center surveille les ressources Azure suivantes :
 
 * Machines virtuelles (VM) (y compris [Cloud Services](../cloud-services/cloud-services-choose-me.md))
-* Groupes identiques de machines virtuelles 
-* Réseaux virtuels Azure
-* Containers
-* Service SQL Azure
-* Compte de Stockage Azure
-* Azure Web Apps (dans [App Service Environment](../app-service/environment/intro.md))
+* Groupes identiques de machines virtuelles
 * Solutions de partenaires intégrées à votre abonnement Azure, par exemple pare-feu d’applications web sur les machines virtuelles et sur App Service Environment
-
-En outre, les machines non-Azure (notamment locales) peuvent également être supervisées par Azure Security Center. Les [ordinateurs Windows](./quick-onboard-windows-computer.md) et les [ordinateurs Linux](./quick-onboard-linux-computer.md) sont pris en charge.
+* [Nombreux services Azure PaaS listés dans la vue d’ensemble du produit](features-paas.md)
 
 
 ## <a name="how-can-i-see-the-current-security-state-of-my-azure-resources"></a>Comment connaître l’état de sécurité actuel de mes ressources Azure ?
@@ -59,7 +53,7 @@ Les stratégies de sécurité activées dans Azure Security Center déterminent 
 
 
 ## <a name="who-can-modify-a-security-policy"></a>Qui peut modifier une stratégie de sécurité ?
-Pour modifier une stratégie de sécurité, vous devez avoir le rôle d’administrateur de la sécurité, de propriétaire ou de collaborateur pour l’abonnement concerné.
+Pour modifier une stratégie de sécurité, vous devez avoir le rôle d’**administrateur de la sécurité** ou de **propriétaire** pour l’abonnement concerné.
 
 Pour savoir comment configurer une stratégie de sécurité, consultez [Définition de stratégies de sécurité dans le Centre de sécurité Azure](tutorial-security-policy.md).
 
@@ -68,13 +62,12 @@ Pour savoir comment configurer une stratégie de sécurité, consultez [Définit
 Le Centre de sécurité Azure analyse l’état de sécurité de vos ressources Azure. Quand des failles de sécurité potentielles sont identifiées, des recommandations sont créées. Les recommandations vous guident tout au long du processus de configuration du contrôle. Voici quelques exemples :
 
 * Approvisionnement d’un logiciel anti-programme malveillant pour identifier et supprimer les programmes malveillants
-* [Groupes de sécurité réseau](../virtual-network/security-overview.md) et règles pour contrôler le trafic vers les machines virtuelles
+* [Groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md) et règles pour contrôler le trafic vers les machines virtuelles
 * Approvisionnement d’un pare-feu d’applications web pour se défendre des attaques ciblant vos applications web
 * Déploiement de mises à jour système manquantes
 * Correction des configurations de système d’exploitation qui ne suivent pas les recommandations
 
 Seules les recommandations qui sont activées dans les stratégies de sécurité sont affichées ici.
-
 
 
 ## <a name="what-triggers-a-security-alert"></a>Qu’est-ce qui déclenche une alerte de sécurité ?
@@ -84,10 +77,6 @@ Azure Security Center collecte, analyse et fusionne automatiquement les données
 * Des programmes malveillants avancés qui sont détectés à l’aide du rapport d’erreurs Windows
 * Des attaques par force brute contre des machines virtuelles
 * Des alertes de sécurité émises par des solutions de sécurité partenaires intégrées, telles que des logiciels anti-programme malveillant ou des pare-feu d’applications web
-
-
-## <a name="why-did-secure-score-values-change"></a>Pourquoi les valeurs du niveau de sécurité ont-elles changé ? <a name="secure-score-faq"></a>
-Depuis février 2019, Security Center a ajusté le score de quelques recommandations, afin de mieux adapter leur niveau de gravité. À la suite de cet ajustement, il est possible que l’ensemble des valeurs des niveaux de sécurité aient changé.  Pour plus d’informations sur le niveau de sécurité, consultez [Calcul des scores de sécurité](security-center-secure-score.md).
 
 
 ## <a name="whats-the-difference-between-threats-detected-and-alerted-on-by-microsoft-security-response-center-versus-azure-security-center"></a>Quelle est la différence entre les menaces détectées et faisant l’objet d’une alerte par Microsoft Security Response Center et par Azure Security Center ?

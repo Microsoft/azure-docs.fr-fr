@@ -1,21 +1,21 @@
 ---
 title: Accéder à Key Vault derrière un pare-feu - Azure Key Vault | Microsoft Docs
-description: Découvrez comment accéder à un coffre de clés à partir d’une application derrière un pare-feu.
+description: Découvrez quels ports, hôtes ou adresses IP ouvrir pour permettre à une application cliente de coffre de clés derrière un pare-feu d’accéder à un coffre de clés.
 services: key-vault
 author: amitbapat
 manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
-ms.topic: tutorial
+ms.topic: how-to
 ms.date: 08/12/2019
 ms.author: ambapat
-ms.openlocfilehash: 07ae08f87c9a3e788944a48f6d5a24e2b076d16f
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: ca5842fb268c20f8ae58eb5f683229c4ae3919f4
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82732323"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289161"
 ---
 # <a name="access-azure-key-vault-behind-a-firewall"></a>Accès à Azure Key Vault derrière un pare-feu
 
@@ -39,11 +39,11 @@ L’application cliente de coffre de clés doit accéder aux points de terminais
 
 | Type de principal | Point de terminaison:port |
 | --- | --- |
-| Utilisateur utilisant un compte Microsoft<br> (Par exemple, user@hotmail.com) |**Mondial :**<br> login.microsoftonline.com:443<br><br> **Azure China :**<br> login.chinacloudapi.cn:443<br><br>**Azure US Government :**<br> login.microsoftonline.us:443<br><br>**Azure Germany :**<br>  login.microsoftonline.de:443<br><br> and <br>login.live.com:443 |
-| Utilisateur ou principal du service utilisant un compte professionnel ou scolaire avec Azure AD (par exemple, user@contoso.com) |**Mondial :**<br> login.microsoftonline.com:443<br><br> **Azure China :**<br> login.chinacloudapi.cn:443<br><br>**Azure US Government :**<br> login.microsoftonline.us:443<br><br>**Azure Germany :**<br>  login.microsoftonline.de:443 |
+| Utilisateur utilisant un compte Microsoft<br> (Par exemple, user@hotmail.com) |**Mondial :**<br> login.microsoftonline.com:443<br><br> **Azure China :**<br> login.chinacloudapi.cn:443<br><br>**Azure US Government :**<br> login.microsoftonline.us:443<br><br>**Azure Germany :**<br> login.microsoftonline.de:443<br><br> and <br>login.live.com:443 |
+| Utilisateur ou principal du service utilisant un compte professionnel ou scolaire avec Azure AD (par exemple, user@contoso.com) |**Mondial :**<br> login.microsoftonline.com:443<br><br> **Azure China :**<br> login.chinacloudapi.cn:443<br><br>**Azure US Government :**<br> login.microsoftonline.us:443<br><br>**Azure Germany :**<br> login.microsoftonline.de:443 |
 | Utilisateur ou principal du service utilisant un compte professionnel ou scolaire, plus Active Directory Federation Services (AD FS) ou un autre point de terminaison fédéré (par exemple, user@contoso.com) |Tous les points de terminaison correspondant à un compte professionnel ou scolaire, plus AD FS ou d’autres points de terminaison fédérés |
 
-D’autres scénarios complexes sont possibles. Pour plus d’informations, reportez-vous à [Azure Active Directory Authentication Flow (Flux d’authentification d’Azure Active Directory)](../../active-directory/develop/authentication-scenarios.md), [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/active-directory-how-to-integrate.md) et [Protocoles d’authentification Active Directory](https://msdn.microsoft.com/library/azure/dn151124.aspx).  
+D’autres scénarios complexes sont possibles. Pour plus d’informations, reportez-vous à [Azure Active Directory Authentication Flow (Flux d’authentification d’Azure Active Directory)](../../active-directory/develop/authentication-vs-authorization.md), [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/active-directory-how-to-integrate.md) et [Protocoles d’authentification Active Directory](/previous-versions/azure/dn151124(v=azure.100)).  
 
 ## <a name="key-vault-management"></a>Gestion de Key Vault
 
@@ -51,12 +51,12 @@ Pour la gestion d’un coffre de clés Key Vault (CRUD et définition de la stra
 
 | Type d’opération | Point de terminaison:port |
 | --- | --- |
-| Opérations du plan de contrôle Key Vault<br>  via Azure Resource Manager |**Mondial :**<br> management.azure.com:443<br><br> **Azure China :**<br> management.chinacloudapi.cn:443<br><br> **Azure US Government :**<br> management.usgovcloudapi.net:443<br><br> **Azure Germany :**<br>  management.microsoftazure.de:443 |
-| API Microsoft Graph |**Mondial :**<br> graph.microsoft.com:443<br><br> **Azure China :**<br> graph.chinacloudapi.cn:443<br><br> **Azure US Government :**<br> graph.microsoft.com:443<br><br> **Azure Germany :**<br>  graph.cloudapi.de:443 |
+| Opérations du plan de contrôle Key Vault<br> via Azure Resource Manager |**Mondial :**<br> management.azure.com:443<br><br> **Azure China :**<br> management.chinacloudapi.cn:443<br><br> **Azure US Government :**<br> management.usgovcloudapi.net:443<br><br> **Azure Germany :**<br> management.microsoftazure.de:443 |
+| API Microsoft Graph |**Mondial :**<br> graph.microsoft.com:443<br><br> **Azure China :**<br> graph.chinacloudapi.cn:443<br><br> **Azure US Government :**<br> graph.microsoft.com:443<br><br> **Azure Germany :**<br> graph.cloudapi.de:443 |
 
 ## <a name="key-vault-operations"></a>Opérations Key Vault
 
-Pour toutes les opérations de gestion et de chiffrement d’objets (clés et secrets), le client de coffre de clés doit accéder au point de terminaison du coffre de clés. Le suffixe DNS du point de terminaison varie en fonction de l’emplacement de votre coffre de clés. Le point de terminaison du coffre de clés est au format *nom du coffre*.*suffixe-dns-spécifique-à-la-région*, comme indiqué dans le tableau ci-dessous.  
+Pour toutes les opérations de gestion et de chiffrement d’objets (clés et secrets), le client de coffre de clés doit accéder au point de terminaison du coffre de clés. Le suffixe DNS du point de terminaison varie en fonction de l’emplacement de votre coffre de clés. Le point de terminaison du coffre de clés est au format *nom du coffre*. *suffixe-dns-spécifique-à-la-région* , comme indiqué dans le tableau ci-dessous.  
 
 | Type d’opération | Point de terminaison:port |
 | --- | --- |
@@ -74,4 +74,4 @@ L’authentification et l’identité (Azure Active Directory) est un service gl
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour toute question concernant Key Vault, rendez-vous sur les [forums Azure Key Vault](https://social.msdn.microsoft.com/forums/azure/home?forum=AzureKeyVault).
+Pour toute question concernant Key Vault, rendez-vous sur la [Page de questions Microsoft Q&A consacrée à Azure Key Vault](/answers/topics/azure-key-vault.html).

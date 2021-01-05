@@ -1,7 +1,7 @@
 ---
 title: Créer un réseau virtuel - Démarrage rapide - Azure CLI
 titlesuffix: Azure Virtual Network
-description: Dans ce démarrage rapide, vous découvrez comment créer un réseau virtuel à l’aide d'Azure CLI. Un réseau virtuel permet à des ressources Azure, comme des machines virtuelles, de communiquer en privé entre elles et avec Internet.
+description: Dans ce démarrage rapide, découvrez comment créer un réseau virtuel à l’aide d’Azure CLI. Un réseau virtuel permet à des ressources Azure de communiquer entre elles et avec Internet.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -13,17 +13,18 @@ ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 01/22/2019
 ms.author: kumud
-ms.openlocfilehash: 2a4c63aeaa303692fa0f2d115a3df0d80cfab0b1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 1feae201738a560c4cdb56f703c4af9a38af86d1
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80235199"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88056786"
 ---
-# <a name="quickstart-create-a-virtual-network-using-the-azure-cli"></a>Démarrage rapide : Créer un réseau virtuel à l’aide d’Azure CLI
+# <a name="quickstart-create-a-virtual-network-using-the-azure-cli"></a>Démarrage rapide : Créer un réseau virtuel à l’aide d’Azure CLI
 
 Un réseau virtuel permet à des ressources Azure, comme des machines virtuelles, de communiquer en privé entre elles et avec Internet. Dans ce guide de démarrage rapide, vous allez apprendre à créer un réseau virtuel. Après avoir créé un réseau virtuel, déployez deux machines virtuelles dans le réseau virtuel. Vous vous connectez alors aux machines virtuelles depuis Internet et vous communiquez en privé sur le nouveau réseau virtuel.
-
+## <a name="prerequisites"></a>Prérequis
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) maintenant.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
@@ -126,6 +127,7 @@ az group delete --name myResourceGroup --yes
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce démarrage rapide, vous avez créé un réseau virtuel par défaut et deux machines virtuelles. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez établi une communication privée entre les deux machines virtuelles. Pour plus d’informations sur les paramètres des réseaux virtuels, consultez [Gérer un réseau virtuel](manage-virtual-network.md).
-
-Azure autorise une communication privée illimitée entre des machines virtuelles. Par défaut, Azure permet uniquement les connexions Bureau à distance entrantes pour les machines virtuelles Windows depuis Internet. Pour en savoir plus sur la configuration des différents types de communications de réseau de machine virtuelle, accédez au tutoriel [Filtrer le trafic réseau](tutorial-filter-network-traffic.md).
+Dans ce démarrage rapide, vous avez créé un réseau virtuel par défaut et deux machines virtuelles. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez établi une communication privée entre les deux machines virtuelles.
+Azure autorise une communication privée illimitée entre des machines virtuelles. Par défaut, Azure permet uniquement les connexions Bureau à distance entrantes pour les machines virtuelles Windows depuis Internet. Passez à l'article suivant pour en savoir plus sur la configuration de différents types de communications réseau de machines virtuelles :
+> [!div class="nextstepaction"]
+> [Filtrer le trafic réseau](tutorial-filter-network-traffic.md)

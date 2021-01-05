@@ -5,15 +5,15 @@ services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: disk
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 06/13/2019
 ms.author: alkohli
-ms.openlocfilehash: 760f5c6c929aa082993683d7a466a71c6484289a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5d977fe0b7459af35f678e77681d3b27c31431cc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67148133"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85849176"
 ---
 # <a name="troubleshoot-data-copy-issues-in-azure-data-box-disk"></a>Résoudre les problèmes de copie de données rencontrés dans Azure Data Box Disk
 
@@ -32,7 +32,9 @@ Cela peut être dû à un système de fichiers qui n’est pas propre.
 
 Le remontage d'un lecteur en lecture-écriture ne fonctionne pas avec la solution Data Box Disk. Ce scénario n'est pas pris en charge avec les lecteurs déchiffrés par dislocker. Vous avez peut-être réussi à remonter le périphérique à l’aide de la commande suivante :
 
-    `# mount -o remount, rw /mnt/DataBoxDisk/mountVol1`
+```
+# mount -o remount, rw /mnt/DataBoxDisk/mountVol1
+```
 
 Bien que le remontage ait réussi, les données ne seront pas conservées.
 

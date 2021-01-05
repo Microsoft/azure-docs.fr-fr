@@ -11,20 +11,20 @@ ms.topic: reference
 ms.date: 03/16/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 1eaf159149bb353b1cf0474aad5bc233decddc5c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d4c538a9292698fecc8b44c055ab201748e292c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79481566"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85202991"
 ---
 # <a name="define-a-validation-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique de validation dans une stratégie personnalisée Azure Active Directory B2C
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Un profil technique de validation est un profil technique ordinaire issu de n’importe quel protocole, comme [Azure Active Directory](active-directory-technical-profile.md) ou une [API REST](restful-technical-profile.md). Le profil technique de validation retourne des revendications de sortie ou un code d’état 4xx HTTP comprenant les données suivantes : Pour plus d’informations, consultez [Retour de message d’erreur](restful-technical-profile.md#returning-error-message).
+Un profil technique de validation est un profil technique ordinaire issu de n’importe quel protocole, comme [Azure Active Directory](active-directory-technical-profile.md) ou une [API REST](restful-technical-profile.md). Le profil technique de validation retourne des revendications de sortie ou un code d’état 4xx HTTP comprenant les données suivantes : Pour plus d’informations, consultez [Retour de message d’erreur](restful-technical-profile.md#returning-validation-error-message).
 
-```JSON
+```json
 {
     "version": "1.0.0",
     "status": 409,
@@ -87,7 +87,7 @@ Les exemples suivants utilisent ces profils techniques de validation :
 2. Le profil technique de validation suivant ne s’exécute pas si la revendication userType n’existe pas, ou si la valeur de userType est `Partner`. Le profil technique de validation tente de lire le profil utilisateur à partir de la base de données client interne et continue si une erreur se produit, par exemple si le service de l’API REST n’est pas disponible ou en cas d’erreur interne.
 3. Le dernier profil technique de validation ne s’exécute pas si la revendication userType n’a pas existé, ou si la valeur de userType est `Customer`. Le profil technique de validation tente de lire le profil utilisateur à partir de la base de données partenaire interne et continue si une erreur se produit, par exemple si le service de l’API REST n’est pas disponible ou en cas d’erreur interne.
 
-```XML
+```xml
 <ValidationTechnicalProfiles>
   <ValidationTechnicalProfile ReferenceId="login-NonInteractive" ContinueOnError="false" />
   <ValidationTechnicalProfile ReferenceId="REST-ReadProfileFromCustomertsDatabase" ContinueOnError="true" >

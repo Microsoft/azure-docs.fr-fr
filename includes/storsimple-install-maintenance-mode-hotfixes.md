@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
 ms.openlocfilehash: 2d0fd904dd704c704662192e1e92fe403f0971c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67177093"
 ---
 #### <a name="to-install-maintenance-mode-hotfixes-via-windows-powershell-for-storsimple"></a>Pour installer les correctifs logiciels en mode Maintenance via Windows PowerShell pour StorSimple

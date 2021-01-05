@@ -5,12 +5,12 @@ ms.topic: conceptual
 ms.author: lazinnat
 author: lazinnat
 ms.date: 06/12/2019
-ms.openlocfilehash: 7a3d2234a140d1fb2eede50e3fe2eef5575da648
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bff846b4b64778d5e40ea7f08f88faf3dde81d9e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81391690"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91371607"
 ---
 # <a name="view-definition-artifact-in-azure-managed-applications"></a>Artefact de définition de vue dans les applications managées Azure
 
@@ -131,7 +131,7 @@ Lorsque vous fournissez cette vue dans **viewDefinition.json**, elle remplace la
 |description|Non|Description de votre application managée.|
 |commandes|Non|Pour le tableau de boutons de barre d’outils supplémentaires de la page Vue d’ensemble, consultez [commandes](#commands).|
 
-![Vue d’ensemble](./media/view-definition/overview.png)
+![La capture d’écran montre la vue d’ensemble d’une application managée avec un contrôle d’action de test pour exécuter une application de démonstration.](./media/view-definition/overview.png)
 
 ## <a name="metrics"></a>Mesures
 
@@ -188,7 +188,7 @@ La vue Métriques vous permet de collecter et d'agréger les données de vos res
 |resourceTagFilter|Non|Tableau de balises de ressource (seront séparées par le mot `or`) pour lesquelles les métriques s'affichent. S’applique en plus du filtre de type de ressource.|
 |resourceType|Oui|Type de ressource pour laquelle les métriques s'affichent.|
 
-![Mesures](./media/view-definition/metrics.png)
+![Capture d’écran montrant une page de surveillance des métriques pour une application managée.](./media/view-definition/metrics.png)
 
 ## <a name="custom-resources"></a>Ressources personnalisées
 
@@ -234,7 +234,7 @@ Dans cette vue, vous pouvez effectuer des opérations GET, PUT, DELETE et POST p
 |commandes|Non|Pour le tableau de boutons de barre d’outils supplémentaires de la page Ressources personnalisées, consultez [commandes](#commands).|
 |colonnes|Non|Tableau de colonnes de la ressource personnalisée. S'il n'est pas défini, la colonne `name` s'affiche par défaut. La colonne doit contenir `"key"` et `"displayName"`. Pour la clé, indiquez la clé de la propriété à afficher dans une vue. Si elle est imbriquée, utilisez un point en tant que séparateur, par exemple, `"key": "name"` ou `"key": "properties.property1"`. Pour le nom d’affichage, indiquez le nom complet de la propriété à afficher dans une vue. Vous pouvez également fournir une propriété `"optional"`. Lorsqu'elle est définie sur true, la colonne est masquée dans une vue par défaut.|
 
-![CustomResources](./media/view-definition/customresources.png)
+![Capture d’écran montrant une page de ressources pour le test du type de ressource personnalisée et l’action de contexte personnalisé de contrôle.](./media/view-definition/customresources.png)
 
 ## <a name="commands"></a>Commandes
 

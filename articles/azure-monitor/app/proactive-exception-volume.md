@@ -3,18 +3,18 @@ title: Augmentation anormale du volume des exceptions – Azure Application Insi
 description: Surveillez les exceptions d’application à l’aide de la détection intelligente dans Azure Application Insights afin de déterminer si le volume des exceptions présente des anomalies.
 ms.topic: conceptual
 ms.date: 12/08/2017
-ms.openlocfilehash: a08fae4774a8afb9959f55ea3196cd1a45c33439
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 00b7a28a51f91c969b41d2ab85b611f6dde51396
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671764"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86499424"
 ---
 # <a name="abnormal-rise-in-exception-volume-preview"></a>Élévation anormale du volume des exceptions (préversion)
 
 Application Insights analyse automatiquement les exceptions levées dans votre application et peut vous avertir si vos données de télémétrie pour les exceptions présentent des anomalies.
 
-Cette fonctionnalité ne requiert aucune configuration spéciale, autre que la [configuration du rapport des exceptions](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net-exceptions#set-up-exception-reporting) pour votre application. Elle est active quand votre application génère suffisamment de données de télémétrie pour les exceptions.
+Cette fonctionnalité ne requiert aucune configuration spéciale, autre que la [configuration du rapport des exceptions](./asp-net-exceptions.md#set-up-exception-reporting) pour votre application. Elle est active quand votre application génère suffisamment de données de télémétrie pour les exceptions.
 
 ## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Quand reçoit-on ce type de notification de détection intelligente ?
 Vous pouvez recevoir ce type de notification si votre application présente une élévation anormale du nombre d’exceptions d’un type spécifique pendant une journée, par rapport à une ligne de base calculée sur les sept jours précédents.

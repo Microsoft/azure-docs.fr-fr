@@ -4,18 +4,18 @@ description: Cet article explique les différentes erreurs de données d’entr�
 author: mamccrea
 ms.author: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
-ms.date: 03/27/2020
-ms.openlocfilehash: 5c5da26935e489a1b9489f63b83af176921c3a5a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: troubleshooting
+ms.date: 08/07/2020
+ms.openlocfilehash: 416e6cb29ab2816d53cb837f72233a9fe098f659
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133807"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011419"
 ---
 # <a name="azure-stream-analytics-data-errors"></a>Erreurs de données Azure Stream Analytics
 
-Les erreurs de données sont des erreurs qui se produisent lors du traitement des données.  Souvent, ces erreurs surviennent pendant les opérations de désérialisation, de sérialisation et d’écriture de données.  Lorsque des erreurs de données se produisent, Stream Analytics écrit des informations détaillées et des exemples d’événements dans les journaux de diagnostic.  Dans certains cas, un résumé de ces informations est également fourni par l’intermédiaire des notifications du portail.
+Les erreurs de données sont des erreurs qui se produisent lors du traitement des données.  Souvent, ces erreurs surviennent pendant les opérations de désérialisation, de sérialisation et d’écriture de données.  Lorsque des erreurs de données se produisent, Stream Analytics écrit des informations détaillées et des exemples d’événements dans les journaux de diagnostic. Activez les journaux de diagnostic dans votre travail pour obtenir ces détails supplémentaires. Dans certains cas, un résumé de ces informations est également fourni par l’intermédiaire des notifications du portail.
 
 Cet article décrit les différents types d’erreurs, leurs causes et les détails des journaux de ressources pour les erreurs de données d’entrée et de sortie.
 
@@ -166,9 +166,9 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 ### <a name="lateinputevent"></a>LateInputEvent
 
 * Cause : La différence entre l’heure de l’application et l’heure d’arrivée est supérieure à la fenêtre de tolérance d’arrivée tardive.
-* Notification de portail fournie : Non 
+* Notification de portail fournie : Non
 * Niveau de journalisation de ressource : Information
-* Impact :  les événements d’entrée tardifs sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](https://docs.microsoft.com/stream-analytics-query/time-skew-policies-azure-stream-analytics).
+* Impact :  les événements d’entrée tardifs sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](/stream-analytics-query/time-skew-policies-azure-stream-analytics).
 * Détails des journaux
    * Heure de l’application et heure d’arrivée. 
    * Charge utile réelle jusqu’à quelques kilo-octets.
@@ -182,9 +182,9 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 ### <a name="earlyinputevent"></a>EarlyInputEvent
 
 * Cause : La différence entre l’heure de l’application et l’heure d’arrivée est supérieure à 5 minutes.
-* Notification de portail fournie : Non 
+* Notification de portail fournie : Non
 * Niveau de journalisation de ressource : Information
-* Impact :  les événements d’entrée précoces sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](https://docs.microsoft.com/stream-analytics-query/time-skew-policies-azure-stream-analytics).
+* Impact :  les événements d’entrée précoces sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](/stream-analytics-query/time-skew-policies-azure-stream-analytics).
 * Détails des journaux
    * Heure de l’application et heure d’arrivée. 
    * Charge utile réelle jusqu’à quelques kilo-octets.
@@ -198,9 +198,9 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 ### <a name="outoforderevent"></a>OutOfOrderEvent
 
 * Cause : L’événement est considéré comme en désordre en raison de la fenêtre de tolérance de désordre définie.
-* Notification de portail fournie : Non 
+* Notification de portail fournie : Non
 * Niveau de journalisation de ressource : Information
-* Impact :  les événements d’entrée dans le désordre sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](https://docs.microsoft.com/stream-analytics-query/time-skew-policies-azure-stream-analytics).
+* Impact :  les événements d’entrée dans le désordre sont traités en fonction du paramètre « Gérer les autres événements » de la section Ordre des événements dans la configuration du travail. Pour plus d’informations, consultez [Stratégies de gestion du temps](/stream-analytics-query/time-skew-policies-azure-stream-analytics).
 * Détails des journaux
    * Charge utile réelle jusqu’à quelques kilo-octets.
 
@@ -212,12 +212,16 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 
 ## <a name="output-data-errors"></a>Erreurs de données de sortie
 
+Selon la configuration, Azure Stream Analytics peut identifier les erreurs de données de sortie avec ou sans requête d’E/S adressée au récepteur de sortie. Par exemple, l’absence d’une colonne obligatoire, telle que `PartitionKey`, lors de l’utilisation de la sortie de Table Azure peut être identifiée sans requête d’E/S. Toutefois, les violations de contrainte dans la sortie SQL requièrent une requête d’E/S.
+
+Il existe plusieurs erreurs de données qui ne peuvent être détectées qu’après un appel au récepteur de sortie, ce qui peut ralentir le traitement. Pour résoudre ce problème, modifiez la configuration de votre travail ou la requête à l’origine de l’erreur de données.
+
 ### <a name="outputdataconversionerrorrequiredcolumnmissing"></a>OutputDataConversionError.RequiredColumnMissing
 
 * Cause : La colonne obligatoire pour la sortie n’existe pas. Par exemple, une colonne définie comme clé de partition de table Azure n’existe pas.
 * Notification de portail fournie : Oui
 * Niveau de journalisation de ressource : Avertissement
-* Impact :  toutes les erreurs de conversion des données de sortie, y compris la colonne nécessaire manquante, sont gérées conformément au paramètre [Stratégie des données de sortie](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-output-error-policy).
+* Impact :  toutes les erreurs de conversion des données de sortie, y compris la colonne nécessaire manquante, sont gérées conformément au paramètre [Stratégie des données de sortie](./stream-analytics-output-error-policy.md).
 * Détails des journaux
    * Nom de la colonne, et identificateur d’enregistrement ou partie de l’enregistrement.
 
@@ -232,7 +236,7 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 * Cause : La valeur de colonne n’est pas conforme à la sortie. Par exemple, le nom de colonne n’est pas une colonne de table Azure valide.
 * Notification de portail fournie : Oui
 * Niveau de journalisation de ressource : Avertissement
-* Impact :  toutes les erreurs de conversion des données de sortie, y compris le nom de colonne non valide, sont gérées conformément au paramètre [Stratégie des données de sortie](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-output-error-policy).
+* Impact :  toutes les erreurs de conversion des données de sortie, y compris le nom de colonne non valide, sont gérées conformément au paramètre [Stratégie des données de sortie](./stream-analytics-output-error-policy.md).
 * Détails des journaux
    * Nom de la colonne, et identificateur d’enregistrement ou partie de l’enregistrement.
 
@@ -247,7 +251,7 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 * Cause : Une colonne ne peut pas être convertie en un type valide dans la sortie. Par exemple, la valeur de colonne est incompatible avec les contraintes ou le type définis dans la table SQL.
 * Notification de portail fournie : Oui
 * Niveau de journalisation de ressource : Avertissement
-* Impact :  toutes les erreurs de conversion des données de sortie, y compris l’erreur de conversion du type, sont gérées conformément au paramètre [Stratégie des données de sortie](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-output-error-policy).
+* Impact :  toutes les erreurs de conversion des données de sortie, y compris l’erreur de conversion du type, sont gérées conformément au paramètre [Stratégie des données de sortie](./stream-analytics-output-error-policy.md).
 * Détails des journaux
    * Nom de la colonne.
    * Identificateur d’enregistrement ou partie de l’enregistrement.
@@ -263,7 +267,7 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 * Cause : La valeur du message est supérieure à la taille de sortie prise en charge. Par exemple, un enregistrement fait plus de 1 Mo pour une sortie Event Hub.
 * Notification de portail fournie : Oui
 * Niveau de journalisation de ressource : Avertissement
-* Impact :  toutes les erreurs de conversion des données de sortie, y compris l’enregistrement qui a dépassé la taille limite, sont gérées conformément au paramètre [Stratégie des données de sortie](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-output-error-policy).
+* Impact :  toutes les erreurs de conversion des données de sortie, y compris l’enregistrement qui a dépassé la taille limite, sont gérées conformément au paramètre [Stratégie des données de sortie](./stream-analytics-output-error-policy.md).
 * Détails des journaux
    * Identificateur d’enregistrement ou partie de l’enregistrement.
 
@@ -278,7 +282,7 @@ Pour connaître le schéma des journaux de diagnostic, consultez la section [Ré
 * Cause : Un enregistrement contient déjà une colonne portant le même nom qu’une colonne système. Par exemple, la sortie CosmosDB avec une colonne nommée ID lorsque la colonne d’ID est une autre colonne.
 * Notification de portail fournie : Oui
 * Niveau de journalisation de ressource : Avertissement
-* Impact :  toutes les erreurs de conversion des données de sortie, y compris la clé en double, sont gérées conformément au paramètre [Stratégie des données de sortie](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-output-error-policy).
+* Impact :  toutes les erreurs de conversion des données de sortie, y compris la clé en double, sont gérées conformément au paramètre [Stratégie des données de sortie](./stream-analytics-output-error-policy.md).
 * Détails des journaux
    * Nom de la colonne.
    * Identificateur d’enregistrement ou partie de l’enregistrement.

@@ -9,12 +9,12 @@ ms.topic: article
 ms.date: 10/31/2018
 ms.author: genli
 ms.custom: seodec18
-ms.openlocfilehash: 021e680a2ca5f7c00f113c4a17421b2648ca6230
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: dfaeee6a6e2a9728d7e63fb5681c487fbbd6139e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159981"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88958995"
 ---
 # <a name="application-performance-faqs-for-web-apps-in-azure"></a>FAQ sur les performances des applications web Azure dans Azure
 
@@ -32,15 +32,15 @@ Plusieurs facteurs peuvent ralentir les performances d’une application. Pour o
 
 ## <a name="how-do-i-troubleshoot-a-high-cpu-consumption-scenario"></a>Comment puis-je résoudre un problème de consommation excessive du processeur ?
 
-Dans certaines situations de consommation excessive du processeur, votre application peut vraiment nécessiter davantage de ressources informatiques. Dans ce cas, vous pouvez évoluer vers un niveau de service supérieur afin que l’application obtienne toutes les ressources dont elle a besoin. Dans d’autres cas, une consommation excessive du processeur peut être due à une boucle incorrecte ou à une méthode de codage. Obtenir un aperçu de ce qui déclenche une consommation excessive du processeur est un processus en deux parties. Créez d’abord un vidage du processus puis analysez ce vidage de processus. Pour plus d’informations, consultez [Capturer et analyser un fichier de vidage en cas de consommation excessive du processeur pour Web Apps](https://blogs.msdn.microsoft.com/asiatech/2016/01/20/how-to-capture-dump-when-intermittent-high-cpu-happens-on-azure-web-app/).
+Dans certaines situations de consommation excessive du processeur, votre application peut vraiment nécessiter davantage de ressources informatiques. Dans ce cas, vous pouvez évoluer vers un niveau de service supérieur afin que l’application obtienne toutes les ressources dont elle a besoin. Dans d’autres cas, une consommation excessive du processeur peut être due à une boucle incorrecte ou à une méthode de codage. Obtenir un aperçu de ce qui déclenche une consommation excessive du processeur est un processus en deux parties. Créez d’abord un vidage du processus puis analysez ce vidage de processus. Pour plus d’informations, consultez [Capturer et analyser un fichier de vidage en cas de consommation excessive du processeur pour Web Apps](/archive/blogs/asiatech/how-to-capture-dump-when-intermittent-high-cpu-happens-on-azure-web-app).
 
 ## <a name="how-do-i-troubleshoot-a-high-memory-consumption-scenario"></a>Comment résoudre les problèmes de consommation excessive de la mémoire ?
 
-Dans certaines situations de consommation excessive de mémoire, votre application peut vraiment nécessiter davantage de ressources informatiques. Dans ce cas, vous pouvez évoluer vers un niveau de service supérieur afin que l’application obtienne toutes les ressources dont elle a besoin. À d’autres moments, un bogue dans le code peut entraîner une fuite de mémoire. Une pratique de codage peut également augmenter la consommation de mémoire. Obtenir un aperçu de ce qui déclenche une consommation excessive de mémoire est un processus en deux parties. Créez d’abord un vidage du processus puis analysez ce vidage de processus. L’outil Crash Diagnoser d’Azure Site Extension Gallery peut effectuer efficacement ces deux étapes. Pour plus d’informations, consultez [Capturer et analyser un fichier de vidage en cas de consommation excessive intermittente de mémoire pour Web Apps](https://blogs.msdn.microsoft.com/asiatech/2016/02/02/how-to-capture-and-analyze-dump-for-intermittent-high-memory-on-azure-web-app/).
+Dans certaines situations de consommation excessive de mémoire, votre application peut vraiment nécessiter davantage de ressources informatiques. Dans ce cas, vous pouvez évoluer vers un niveau de service supérieur afin que l’application obtienne toutes les ressources dont elle a besoin. À d’autres moments, un bogue dans le code peut entraîner une fuite de mémoire. Une pratique de codage peut également augmenter la consommation de mémoire. Obtenir un aperçu de ce qui déclenche une consommation excessive de mémoire est un processus en deux parties. Créez d’abord un vidage du processus puis analysez ce vidage de processus. L’outil Crash Diagnoser d’Azure Site Extension Gallery peut effectuer efficacement ces deux étapes. Pour plus d’informations, consultez [Capturer et analyser un fichier de vidage en cas de consommation excessive intermittente de mémoire pour Web Apps](/archive/blogs/asiatech/how-to-capture-and-analyze-dump-for-intermittent-high-memory-on-azure-web-app).
 
 ## <a name="how-do-i-automate-app-service-web-apps-by-using-powershell"></a>Comment automatiser les applications web App Service à l’aide de PowerShell ?
 
-Vous pouvez utiliser les applets de commande PowerShell pour gérer et mettre à jour des applications web App Service. Dans notre billet de blog [Automatiser des applications web hébergées dans Azure App Service à l’aide de PowerShell](https://blogs.msdn.microsoft.com/puneetgupta/2016/03/21/automating-webapps-hosted-in-azure-app-service-through-powershell-arm-way/), nous expliquons comment utiliser des applets de commande PowerShell basée sur Azure Resource Manager pour automatiser des tâches courantes. Ce billet de blog fournit également un exemple de code pour diverses tâches de gestion des applications web. Pour des descriptions et la syntaxe de toutes les applets de commande des applications web App Service, consultez [Az.Websites](/powershell/module/az.websites).
+Vous pouvez utiliser les applets de commande PowerShell pour gérer et mettre à jour des applications web App Service. Dans notre billet de blog [Automatiser des applications web hébergées dans Azure App Service à l’aide de PowerShell](/archive/blogs/puneetgupta/automating-webapps-hosted-in-azure-app-service-through-powershell-arm-way), nous expliquons comment utiliser des applets de commande PowerShell basée sur Azure Resource Manager pour automatiser des tâches courantes. Ce billet de blog fournit également un exemple de code pour diverses tâches de gestion des applications web. Pour des descriptions et la syntaxe de toutes les applets de commande des applications web App Service, consultez [Az.Websites](/powershell/module/az.websites).
 
 ## <a name="how-do-i-view-my-web-apps-event-logs"></a>Comment afficher les journaux des événements de mon application web ?
 
@@ -81,7 +81,7 @@ Trois conditions peuvent provoquer cette erreur :
 * L’application web a été arrêtée dans le portail.
 * L’application web a atteint une limite de quota de ressources qui peut s’appliquer à un plan de service de mise à l’échelle gratuit ou partagé.
 
-Pour voir ce qui provoque l’erreur et résoudre le problème, suivez les étapes de la rubrique [Web Apps : « Erreur 403 - Cette application web est arrêtée »](https://blogs.msdn.microsoft.com/waws/2016/01/05/azure-web-apps-error-403-this-web-app-is-stopped/).
+Pour voir ce qui provoque l’erreur et résoudre le problème, suivez les étapes de la rubrique [Web Apps : « Erreur 403 - Cette application web est arrêtée »](/archive/blogs/waws/azure-web-apps-error-403-this-web-app-is-stopped).
 
 ## <a name="where-can-i-learn-more-about-quotas-and-limits-for-various-app-service-plans"></a>Où puis-je obtenir plus d’informations sur les quotas et les limites des différents plans App Service ?
 
@@ -167,7 +167,7 @@ Les tâches WebJob sont conçues pour le traitement en arrière-plan. Vous pouve
 
 Un problème connu avec une [version de Kestrel](https://github.com/aspnet/KestrelHttpServer/issues/1182) antérieure peut amener une application ASP.NET Core 1.0 hébergée dans App Service à cesser de répondre par intermittence. Le message suivant peut également apparaître : « L’application CGI spécifiée a rencontré une erreur et le serveur a mis fin au processus. »
 
-Ce problème est résolu dans Kestrel version 1.0.2. Cette version est incluse dans la mise à jour ASP.NET Core 1.0.3. Pour résoudre ce problème, veillez à mettre à jour les dépendances de votre application afin d’utiliser Kestrel 1.0.2. Vous pouvez également utiliser une des deux solutions de contournement décrites dans le billet de blog [ASP.NET Core 1.0 slow perf issues in App Service web apps](https://blogs.msdn.microsoft.com/waws/2016/12/11/asp-net-core-slow-perf-issues-on-azure-websites).
+Ce problème est résolu dans Kestrel version 1.0.2. Cette version est incluse dans la mise à jour ASP.NET Core 1.0.3. Pour résoudre ce problème, veillez à mettre à jour les dépendances de votre application afin d’utiliser Kestrel 1.0.2. Vous pouvez également utiliser une des deux solutions de contournement décrites dans le billet de blog [ASP.NET Core 1.0 slow perf issues in App Service web apps](/archive/blogs/waws/asp-net-core-slow-perf-issues-on-azure-websites).
 
 
 ## <a name="i-cant-find-my-log-files-in-the-file-structure-of-my-web-app-how-can-i-find-them"></a>Impossible de trouver mes fichiers journaux dans la structure de fichiers de mon application web. Comment puis-je les trouver ?
@@ -188,4 +188,4 @@ Pour plus d’informations sur les connexions sortantes dans votre application w
 
 ## <a name="how-do-i-use-visual-studio-to-remote-debug-my-app-service-web-app"></a>Comment utiliser Visual Studio pour déboguer à distance mon application web App Service ?
 
-Pour obtenir une procédure détaillée montrant comment déboguer votre application web à l’aide de Visual Studio, consultez [Déboguer à distance votre application web App Service](https://blogs.msdn.microsoft.com/benjaminperkins/2016/09/22/remote-debug-your-azure-app-service-web-app/).
+Pour obtenir une procédure détaillée montrant comment déboguer votre application web à l’aide de Visual Studio, consultez [Déboguer à distance votre application web App Service](/archive/blogs/benjaminperkins/remote-debug-your-azure-app-service-web-app).

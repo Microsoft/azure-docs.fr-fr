@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: tutorial
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.date: 04/14/2020
-ms.openlocfilehash: a601d54ebda074a25a988ac2a115f6418dd5c7ee
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.openlocfilehash: d24c63e3a2989173e718cd27fa43cecc50181047
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81390258"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533493"
 ---
 # <a name="tutorial-use-apache-hbase-in-azure-hdinsight"></a>Tutoriel : Utiliser Apache HBase dans Azure HDInsight
 
@@ -32,7 +32,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-* Bash. Les exemples de cet article utilisent l’interpréteur de commandes Bash sur Windows 10 pour les commandes curl. Pour connaître les étapes d’installation, consultez [Guide d’installation de sous-systèmes Windows pour Linux sur Windows 10](https://docs.microsoft.com/windows/wsl/install-win10).  Il est également possible d’utiliser d’autres [interpréteurs de commandes Unix](https://www.gnu.org/software/bash/).  Les exemples avec curl, avec de légères modifications, peuvent fonctionner sur une invite de commandes Windows.  Vous pouvez utiliser l’applet de commande Windows PowerShell [Invoke-RestMethod](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-restmethod).
+* Bash. Les exemples de cet article utilisent l’interpréteur de commandes Bash sur Windows 10 pour les commandes curl. Pour connaître les étapes d’installation, consultez [Guide d’installation de sous-systèmes Windows pour Linux sur Windows 10](/windows/wsl/install-win10).  Il est également possible d’utiliser d’autres [interpréteurs de commandes Unix](https://www.gnu.org/software/bash/).  Les exemples avec curl, avec de légères modifications, peuvent fonctionner sur une invite de commandes Windows.  Vous pouvez utiliser l’applet de commande Windows PowerShell [Invoke-RestMethod](/powershell/module/microsoft.powershell.utility/invoke-restmethod).
 
 ## <a name="create-apache-hbase-cluster"></a>Créer un cluster Apache HBase
 
@@ -42,7 +42,7 @@ La procédure suivante utilise un modèle Azure Resource Manager pour créer un 
 
     <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-hdinsight-hbase-linux%2Fazuredeploy.json" target="_blank"><img src="./media/apache-hbase-tutorial-get-started-linux/hdi-deploy-to-azure1.png" alt="Deploy to Azure button for new cluster"></a>
 
-2. Dans la boîte de dialogue **Déploiement personnalisé**, entrez les valeurs suivantes :
+2. Dans la boîte de dialogue **Déploiement personnalisé** , entrez les valeurs suivantes :
 
     |Propriété |Description |
     |---|---|
@@ -50,14 +50,14 @@ La procédure suivante utilise un modèle Azure Resource Manager pour créer un 
     |Resource group|Créez un groupe d’administration Azure Resource ou utilisez un groupe existant.|
     |Emplacement|Spécifiez l’emplacement du groupe de ressources. |
     |ClusterName|Entrez un nom pour le cluster HBase.|
-    |ID de connexion et mot de passe du cluster|Le nom de connexion par défaut est **admin**.|
-    |Nom d’utilisateur et mot de passe SSH|Le nom d’utilisateur par défaut est **sshuser**.|
+    |ID de connexion et mot de passe du cluster|Le nom de connexion par défaut est **admin** .|
+    |Nom d’utilisateur et mot de passe SSH|Le nom d’utilisateur par défaut est **sshuser** .|
 
     Tous les autres paramètres sont facultatifs.  
 
     Chaque cluster possède une dépendance de compte Stockage Azure. Après avoir supprimé un cluster, les données restent dans le compte de stockage. Le nom du compte de stockage par défaut du cluster est le nom du cluster suivi du suffixe « store ». Il est codé en dur dans la section des variables du modèle.
 
-3. Sélectionnez **J’accepte les conditions générales mentionnées ci-dessus**, puis sélectionnez **Acheter**. La création d’un cluster prend environ 20 minutes.
+3. Sélectionnez **J’accepte les conditions générales mentionnées ci-dessus** , puis sélectionnez **Acheter** . La création d’un cluster prend environ 20 minutes.
 
 Après la suppression d’un cluster HBase, vous pouvez créer un autre cluster HBase à l’aide du même conteneur d’objets blob par défaut. Le nouveau cluster utilise les tables HBase créées dans le cluster d’origine. Pour éviter toute incohérence, nous vous recommandons de désactiver les tables HBase avant de supprimer le cluster.
 
@@ -138,16 +138,25 @@ HBase propose plusieurs méthodes pour charger des données dans des tables.  Po
 
 Vous trouverez un exemple de fichier de données dans un conteneur de blobs public, `wasb://hbasecontacts\@hditutorialdata.blob.core.windows.net/contacts.txt`.  Le contenu du fichier de données est le suivant :
 
-    8396    Calvin Raji      230-555-0191    230-555-0191    5415 San Gabriel Dr.
-    16600   Karen Wu         646-555-0113    230-555-0192    9265 La Paz
-    4324    Karl Xie         508-555-0163    230-555-0193    4912 La Vuelta
-    16891   Jonn Jackson     674-555-0110    230-555-0194    40 Ellis St.
-    3273    Miguel Miller    397-555-0155    230-555-0195    6696 Anchor Drive
-    3588    Osa Agbonile     592-555-0152    230-555-0196    1873 Lion Circle
-    10272   Julia Lee        870-555-0110    230-555-0197    3148 Rose Street
-    4868    Jose Hayes       599-555-0171    230-555-0198    793 Crawford Street
-    4761    Caleb Alexander  670-555-0141    230-555-0199    4775 Kentucky Dr.
-    16443   Terry Chander    998-555-0171    230-555-0200    771 Northridge Drive
+`8396    Calvin Raji      230-555-0191    230-555-0191    5415 San Gabriel Dr.`
+
+`16600   Karen Wu         646-555-0113    230-555-0192    9265 La Paz`
+
+`4324    Karl Xie         508-555-0163    230-555-0193    4912 La Vuelta`
+
+`16891   Jonn Jackson     674-555-0110    230-555-0194    40 Ellis St.`
+
+`3273    Miguel Miller    397-555-0155    230-555-0195    6696 Anchor Drive`
+
+`3588    Osa Agbonile     592-555-0152    230-555-0196    1873 Lion Circle`
+
+`10272   Julia Lee        870-555-0110    230-555-0197    3148 Rose Street`
+
+`4868    Jose Hayes       599-555-0171    230-555-0198    793 Crawford Street`
+
+`4761    Caleb Alexander  670-555-0141    230-555-0199    4775 Kentucky Dr.`
+
+`16443   Terry Chander    998-555-0171    230-555-0200    771 Northridge Drive`
 
 Si vous le souhaitez, vous pouvez créer un fichier texte et le télécharger dans votre propre compte de stockage. Pour obtenir des instructions, consultez [Charger des données pour des tâches Apache Hadoop dans HDInsight](../hdinsight-upload-data.md).
 
@@ -198,9 +207,51 @@ Vous pouvez interroger les données des tables HBase à l’aide d’[Apache Hiv
 
 1. Pour quitter votre connexion SSH, utilisez `exit`.
 
+### <a name="separate-hive-and-hbase-clusters"></a>Séparer les clusters Hive et HBase
+
+La requête Hive pour accéder aux données HBase n’a pas besoin d’être exécutée à partir du cluster HBase. Tout cluster fourni avec Hive (y compris Spark, Hadoop, HBase ou Interactive Query) peut être utilisé pour interroger des données HBase, à condition que les étapes suivantes soient effectuées :
+
+1. Les deux clusters doivent être attachés aux mêmes réseau et sous-réseau virtuels
+2. Copie de `/usr/hdp/$(hdp-select --version)/hbase/conf/hbase-site.xml` depuis les nœuds principaux du cluster HBase sur les nœuds principaux du cluster Hive
+
+### <a name="secure-clusters"></a>Clusters sécurisés
+
+Les données HBase peuvent également être interrogées à partir de Hive, au moyen de HBase activé pour ESP : 
+
+1. Lorsque vous suivez un modèle à plusieurs clusters, les deux clusters doivent être activés pour ESP. 
+2. Pour autoriser Hive à interroger des données HBase, assurez-vous que l’utilisateur `hive` est autorisé à accéder aux données HBase via le plug-in Apache Ranger pour HBase
+3. Lorsque vous utilisez des clusters distincts activés pour ESP, le contenu de `/etc/hosts` à partir des nœuds principaux du cluster HBase doit être ajouté à `/etc/hosts` des nœuds principaux du cluster Hive. 
+> [!NOTE]
+> Après la mise à l’échelle d’un des clusters, `/etc/hosts` doit être ajouté à nouveau
+
 ## <a name="use-hbase-rest-apis-using-curl"></a>Utilisation des API REST HBase à l’aide de Curl
 
 L’API REST est sécurisée à l’aide de l’ [authentification de base](https://en.wikipedia.org/wiki/Basic_access_authentication). Vous devrez toujours effectuer les demandes à l’aide du protocole Secure HTTP (HTTPS) pour vous assurer que vos informations d’identification sont envoyées en toute sécurité au serveur.
+
+1. Pour activer les API REST HBase dans le cluster HDInsight, ajoutez le script de démarrage personnalisé suivant à la section **Action de script** . Vous pouvez ajouter le script de démarrage lorsque vous créez le cluster ou après sa création. Pour **Type de nœud** , sélectionnez **Serveurs de région** afin de vous assurer que le script s’exécute uniquement dans les serveurs de région HBase.
+
+
+    ```bash
+    #! /bin/bash
+
+    THIS_MACHINE=`hostname`
+
+    if [[ $THIS_MACHINE != wn* ]]
+    then
+        printf 'Script to be executed only on worker nodes'
+        exit 0
+    fi
+
+    RESULT=`pgrep -f RESTServer`
+    if [[ -z $RESULT ]]
+    then
+        echo "Applying mitigation; starting REST Server"
+        sudo python /usr/lib/python2.7/dist-packages/hdinsight_hbrest/HbaseRestAgent.py
+    else
+        echo "Rest server already running"
+        exit 0
+    fi
+    ```
 
 1. Pour faciliter l’utilisation, définissez la variable d’environnement. Modifiez les commandes ci-dessous en remplaçant `MYPASSWORD` par le mot de passe de connexion au cluster. Remplacez `MYCLUSTERNAME` par le nom de votre cluster HBase. Entrez ensuite les commandes.
 
@@ -262,14 +313,14 @@ Pour plus d’informations sur HBase Rest, voir le [Guide de référence Apache 
 > Thrift n’est pas pris en charge par HBase dans HDInsight.
 >
 > Lorsque vous utilisez Curl ou toute autre communication REST avec WebHCat, vous devez authentifier les demandes en fournissant le nom d'utilisateur et le mot de passe de l'administrateur du cluster HDInsight. Vous devez également utiliser le nom du cluster dans l’URI (Uniform Resource Identifier) utilisé pour envoyer les demandes au serveur :
-> 
->   
->        curl -u <UserName>:<Password> \
->        -G https://<ClusterName>.azurehdinsight.net/templeton/v1/status
->   
->    Vous devez recevoir une réponse similaire à celle-ci :
->   
->        {"status":"ok","version":"v1"}
+>
+> `curl -u <UserName>:<Password> \`
+>
+> `-G https://<ClusterName>.azurehdinsight.net/templeton/v1/status`
+>
+> Vous devez recevoir une réponse similaire à celle-ci :
+>
+> `{"status":"ok","version":"v1"}`
 
 ## <a name="check-cluster-status"></a>Vérification du statut du cluster
 
@@ -279,9 +330,9 @@ HBase dans HDInsight est livré avec une interface utilisateur web pour la surve
 
 1. Connectez-vous à l’interface utilisateur web d’Ambari sur `https://CLUSTERNAME.azurehdinsight.net`, où `CLUSTERNAME` est le nom de votre cluster HBase.
 
-1. Dans le menu de gauche, sélectionnez **HBase**.
+1. Dans le menu de gauche, sélectionnez **HBase** .
 
-1. Sélectionnez **Liens rapides** en haut de la page, pointez vers le lien de nœud Zookeeper actif, puis sélectionnez **HBase Master UI**.  L’interface utilisateur est ouverte dans un autre onglet de navigateur :
+1. Sélectionnez **Liens rapides** en haut de la page, pointez vers le lien de nœud Zookeeper actif, puis sélectionnez **HBase Master UI** .  L’interface utilisateur est ouverte dans un autre onglet de navigateur :
 
    ![Interface utilisateur HMaster Apache HBase HDInsight](./media/apache-hbase-tutorial-get-started-linux/hdinsight-hbase-hmaster-ui.png)
 
@@ -298,10 +349,10 @@ HBase dans HDInsight est livré avec une interface utilisateur web pour la surve
 Pour éviter toute incohérence, nous vous recommandons de désactiver les tables HBase avant de supprimer le cluster. Vous pouvez utiliser la commande HBase `disable 'Contacts'`. Si vous ne comptez pas continuer à utiliser cette application, effectuez les étapes suivantes pour supprimer le cluster HBase que vous avez créé :
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
-1. Dans la zone **Recherche** située en haut, tapez **HDInsight**.
-1. Sous **Services**, sélectionnez **Clusters HDInsight**.
+1. Dans la zone **Recherche** située en haut, tapez **HDInsight** .
+1. Sous **Services** , sélectionnez **Clusters HDInsight** .
 1. Dans la liste des clusters HDInsight qui s’affiche, cliquez sur les points de suspension **...** à côté du cluster que vous avez créé pour ce tutoriel.
-1. Cliquez sur **Supprimer**. Cliquez sur **Oui**.
+1. Cliquez sur **Supprimer** . Cliquez sur **Oui** .
 
 ## <a name="next-steps"></a>Étapes suivantes
 

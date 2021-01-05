@@ -2,25 +2,20 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec Jobscience | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Jobscience.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.assetid: 77282dcc-bbe2-4728-953d-adb4ab6a713b
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/12/2017
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 23d2694aa4936090367cf881379f81911ae70f9d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5a104dcd6ccf500c115359a1b72c67b85359a802
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81870540"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002185"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-jobscience"></a>Tutoriel : Intégration d’Azure Active Directory à Jobscience
 
@@ -66,19 +61,19 @@ Pour configurer l’intégration de Jobscience à Azure AD, vous devez ajouter J
 
 1. Accédez à **Applications d’entreprise**. Accédez ensuite à **Toutes les applications**.
 
-    ![Applications][2]
+    ![Capture d’écran montrant le portail Azure avec Application d'entreprise sélectionné sous Gérer, avec Toutes les applications sélectionné.][2]
     
 1. Pour ajouter l’application, cliquez sur le bouton **Nouvelle application** en haut de la boîte de dialogue.
 
-    ![Applications][3]
+    ![Capture d’écran montrant Nouvelle application sélectionnée.][3]
 
 1. Dans la zone de recherche, entrez **Jobscience**.
 
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/tutorial_jobscience_search.png)
+    ![Capture d’écran montrant Ajouter à partir de la galerie avec jobscience entré.](./media/jobscience-tutorial/tutorial_jobscience_search.png)
 
 1. Dans le volet de résultats, sélectionnez **Jobscience**, puis cliquez sur **Ajouter** pour ajouter l’application.
 
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/tutorial_jobscience_addfromgallery.png)
+    ![Capture d’écran montrant les résultats qui incluaient Jobscience.](./media/jobscience-tutorial/tutorial_jobscience_addfromgallery.png)
 
 ##  <a name="configuring-and-testing-azure-ad-single-sign-on"></a>Configuration et test de l’authentification unique Azure AD
 Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Jobscience avec un utilisateur de test appelé « Britta Simon ».
@@ -103,15 +98,15 @@ Dans cette section, vous allez activer l’authentification unique Azure AD dans
 
 1. Dans le portail Azure, sur la page d’intégration de l’application **Jobscience**, cliquez sur **Authentification unique**.
 
-    ![Configure Single Sign-On][4]
+    ![Capture d’écran montrant Authentification unique sélectionné sous Gérer dans le portail Azure.][4]
 
 1. Dans la boîte de dialogue **Authentification unique**, pour le **Mode**, sélectionnez **Authentification basée sur SAML** pour activer l’authentification unique.
  
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_jobscience_samlbase.png)
+    ![Capture d’écran montrant le mode Authentification basée sur SAML sélectionné.](./media/jobscience-tutorial/tutorial_jobscience_samlbase.png)
 
 1. Dans la section **Domaine et URL Jobscience**, procédez comme suit :
 
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_jobscience_url.png)
+    ![Capture d’écran montrant l’URL de connexion.](./media/jobscience-tutorial/tutorial_jobscience_url.png)
 
     Dans la zone de texte **URL d’authentification**, tapez une URL en utilisant le modèle suivant : `http://<company name>.my.salesforce.com`
     
@@ -120,21 +115,21 @@ Dans cette section, vous allez activer l’authentification unique Azure AD dans
  
 1. Dans la section **Certificat de signature SAML**, cliquez sur **Téléchargez le certificat (Base64)** puis enregistrez le fichier du certificat sur votre ordinateur.
 
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_jobscience_certificate.png) 
+    ![Capture d’écran montrant le volet Certificat de signature SAML où vous pouvez télécharger un certificat.](./media/jobscience-tutorial/tutorial_jobscience_certificate.png) 
 
 1. Cliquez sur le bouton **Enregistrer** .
 
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_general_400.png)
+    ![Capture d’écran montrant le bouton Enregistrer.](./media/jobscience-tutorial/tutorial_general_400.png)
 
 1. Dans la section **Configuration de Jobscience**, cliquez sur **Configurer Jobscience** pour ouvrir la fenêtre **Configurer l’authentification**. Copiez **l’URL de déconnexion, l’ID d’entité SAML et l’URL du service d’authentification unique SAML** à partir de la **section Référence rapide.**
 
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_jobscience_configure.png) 
+    ![Capture d’écran montrant la fenêtre de configuration de Jobscience.](./media/jobscience-tutorial/tutorial_jobscience_configure.png) 
 
 1. Connectez-vous au site d’entreprise Jobscience en tant qu’administrateur.
 
 1. Accédez à **Setup**.
    
-   ![Paramétrage](./media/jobscience-tutorial/IC784358.png "Programme d’installation")
+   ![Capture d’écran montrant l’élément Setup pour votre entreprise.](./media/jobscience-tutorial/IC784358.png "Programme d’installation")
 
 1. Dans le volet de navigation gauche, dans la section **Administer**, cliquez sur **Domain Management** pour développer la section associée, puis cliquez sur **My Domain** pour ouvrir la page **My Domain**. 
    
@@ -146,7 +141,7 @@ Dans cette section, vous allez activer l’authentification unique Azure AD dans
 
 1. Sur le site d’entreprise Jobscience, cliquez sur **Security Controls**, puis sur **Single Sign-On Settings**.
     
-    ![Contrôles de sécurité](./media/jobscience-tutorial/ic784364.png "Security Controls")
+    ![Capture d’écran montrant Single Sign-On Settings sélectionné dans Security Controls.](./media/jobscience-tutorial/ic784364.png "Security Controls")
 
 1. Dans la section **Single Sign-On Settings** , procédez comme suit :
     
@@ -184,15 +179,15 @@ Dans cette section, vous allez activer l’authentification unique Azure AD dans
 
 1. Dans la section **Login Page Branding** de la page **My Domain**, cliquez sur **Edit**.
     
-    ![Personnalisation de la page de connexion](./media/jobscience-tutorial/ic767826.png "Personnalisation de la page de connexion")
+    ![Capture d’écran montrant la section Login Page Branding avec le bouton Edit.](./media/jobscience-tutorial/ic767826.png "Personnalisation de la page de connexion")
 
 1. Le nom des **SAML SSO Settings** s’affiche dans la section **Authentication Service** de la page **Login Page Branding**. Sélectionnez-le, puis cliquez sur **Save**.
     
-    ![Personnalisation de la page de connexion](./media/jobscience-tutorial/ic784366.png "Personnalisation de la page de connexion")
+    ![Capture d’écran montrant la section Login Page Branding avec PPE et Save sélectionnés.](./media/jobscience-tutorial/ic784366.png "Personnalisation de la page de connexion")
 
 1. Pour obtenir l’URL d’authentification unique initiée par le fournisseur de services , cliquez sur **Single Sign On settings** dans la section **Security Controls**.
 
-    ![Contrôles de sécurité](./media/jobscience-tutorial/ic784368.png "Security Controls")
+    ![Capture d’écran montrant Administer Security Controls avec Single Sign-On Settings sélectionné.](./media/jobscience-tutorial/ic784368.png "Security Controls")
     
     Cliquez sur le profil d’authentification unique créé à l’étape précédente. Cette page affiche l’URL d’authentification unique de votre entreprise (par exemple, `https://companyname.my.salesforce.com?so=companyid`).    
 
@@ -209,19 +204,19 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
 1. Dans le panneau de navigation gauche du **portail Azure**, cliquez sur l’icône **Azure Active Directory**.
 
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/create_aaduser_01.png) 
+    ![Capture d’écran montrant l’icône Azure AD dans le portail Azure.](./media/jobscience-tutorial/create_aaduser_01.png) 
 
 1. Pour afficher la liste des utilisateurs, accédez à **Utilisateurs et groupes**, puis cliquez sur **Tous les utilisateurs**.
     
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/create_aaduser_02.png) 
+    ![Capture d’écran montrant Utilisateurs et groupes sélectionné dans le menu Gérer, avec Tous les utilisateurs sélectionné.](./media/jobscience-tutorial/create_aaduser_02.png) 
 
 1. Pour ouvrir la boîte de dialogue **Utilisateur**, cliquez sur **Ajouter** en haut de la boîte de dialogue.
  
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/create_aaduser_03.png) 
+    ![Capture d’écran montrant le bouton Ajouter pour ouvrir la boîte de dialogue Utilisateur.](./media/jobscience-tutorial/create_aaduser_03.png) 
 
 1. Dans la boîte de dialogue **Utilisateur**, procédez comme suit :
  
-    ![Création d’un utilisateur de test Azure AD](./media/jobscience-tutorial/create_aaduser_04.png) 
+    ![Capture d’écran montrant la boîte de dialogue Utilisateur où vous pouvez entrer les valeurs à cette étape.](./media/jobscience-tutorial/create_aaduser_04.png) 
 
     a. Dans la zone de texte **Nom**, entrez **BrittaSimon**.
 
@@ -245,7 +240,7 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Jobscience, vous dev
 
 1. Accédez à Setup.
    
-   ![Paramétrage](./media/jobscience-tutorial/ic784358.png "Programme d’installation")
+   ![Capture d’écran montrant l’élément Setup.](./media/jobscience-tutorial/ic784358.png "Programme d’installation")
 1. Accédez à **Manage Users \> Users**.
    
    ![Utilisateurs](./media/jobscience-tutorial/ic784369.png "Utilisateurs")
@@ -278,25 +273,25 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Jobscience, vous dev
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Jobscience.
 
-![Affecter des utilisateurs][200] 
+![Capture d’écran montrant le nom complet d’un compte.][200] 
 
 **Pour affecter Britta Simon à Jobscience, procédez comme suit :**
 
 1. Dans le portail Azure, ouvrez la vue des applications, accédez à la vue des répertoires, accédez à **Applications d’entreprise**, puis cliquez sur **Toutes les applications**.
 
-    ![Affecter des utilisateurs][201] 
+    ![Capture d’écran montrant Applications d’entreprise dans le menu du portail Azure avec Toutes les applications sélectionné.][201] 
 
 1. Dans la liste des applications, sélectionnez **Jobscience**.
 
-    ![Configure Single Sign-On](./media/jobscience-tutorial/tutorial_jobscience_app.png) 
+    ![Capture d’écran montrant Jobscience sélectionné.](./media/jobscience-tutorial/tutorial_jobscience_app.png) 
 
 1. Dans le menu de gauche, cliquez sur **Utilisateurs et groupes**.
 
-    ![Affecter des utilisateurs][202] 
+    ![Capture d’écran montrant Utilisateurs et groupes sélectionné dans le menu du portail Azure.][202] 
 
 1. Cliquez sur le bouton **Ajouter**. Ensuite, sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une affectation**.
 
-    ![Affecter des utilisateurs][203]
+    ![Capture d’écran montrant le bouton Ajouter, qui permet d’ajouter des affectations.][203]
 
 1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste des utilisateurs.
 
@@ -309,7 +304,7 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
 Si vous cliquez sur la mosaïque Jobscience dans le volet d’accès, vous devez vous connecter automatiquement à votre application Jobscience.
-Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/active-directory-saas-access-panel-introduction.md).
+Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -329,4 +324,3 @@ Pour plus d’informations sur le panneau d’accès, consultez [Présentation d
 [201]: ./media/jobscience-tutorial/tutorial_general_201.png
 [202]: ./media/jobscience-tutorial/tutorial_general_202.png
 [203]: ./media/jobscience-tutorial/tutorial_general_203.png
-

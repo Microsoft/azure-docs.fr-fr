@@ -1,15 +1,15 @@
 ---
 author: mdgattuso
-ms.service: cost-management-billing
+ms.service: cdn
 ms.topic: include
 ms.date: 04/29/2019
 ms.author: magattus
-ms.openlocfilehash: 7dd97fa49931168b9a42b5c9ac7887b84298a5f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41cbc888f40505e010537b75463b72be72b50d57
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335050"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85839038"
 ---
 | Ressource | Limite |
 | --- | --- |

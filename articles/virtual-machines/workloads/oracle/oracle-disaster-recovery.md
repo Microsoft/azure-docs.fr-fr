@@ -1,25 +1,19 @@
 ---
 title: Vue d’ensemble du scénario de récupération d’urgence Oracle dans votre environnement Azure | Documents Microsoft
 description: Scénario de récupération d’urgence pour une base de données Oracle Database 12c dans votre environnement Azure
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: adf4c54d4f43f806ae985f7c1523303cf574b4c1
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: b8da0b5c55b291af42d9a30db23d6f55f7c0bf2d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687468"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022783"
 ---
 # <a name="disaster-recovery-for-an-oracle-database-12c-database-in-an-azure-environment"></a>Récupération d’urgence pour une base de données Oracle Database 12c dans votre environnement Azure
 
@@ -49,7 +43,7 @@ Voici un résumé de la configuration Azure :
 - Jumpbox, service d’application, base de données et passerelle VPN sur des sous-réseaux distincts
 - Le groupe de sécurité réseau est appliqué sur les sous-réseaux d’application et de base de données
 
-![Capture d’écran de la page de topologie de récupération d’urgence](./media/oracle-disaster-recovery/oracle_topology_01.png)
+![Diagramme illustrant les sites principaux et de récupération d’urgence sur Azure.](./media/oracle-disaster-recovery/oracle_topology_01.png)
 
 ## <a name="scenario-2-primary-site-on-premises-and-dr-site-on-azure"></a>Scénario 2 : site principal local et site de récupération d’urgence sur Azure
 
@@ -75,10 +69,10 @@ Voici un résumé de la configuration Azure :
 - Une règle/stratégie de groupe de sécurité réseau pour autoriser le port TCP entrant 1521 (ou un port défini par l’utilisateur)
 - Une stratégie/règle de groupe de sécurité réseau pour limiter l’accès du réseau virtuel à l’adresse IP/aux adresses locales (base de données ou application) uniquement
 
-![Capture d’écran de la page de topologie de récupération d’urgence](./media/oracle-disaster-recovery/oracle_topology_02.png)
+![Diagramme montrant les connexions directes entre un site local et un site sur Azure, nécessitant des ports TCP ouverts sur le pare-feu.](./media/oracle-disaster-recovery/oracle_topology_02.png)
 
 ### <a name="approach-2-site-to-site-vpn"></a>Approche 2 : VPN de site à site
-La meilleure approche consiste à utiliser des VPN de site à site. Pour plus d’informations sur la configuration d’un VPN, consultez [Créer un réseau virtuel avec une connexion VPN de Site à Site à l’aide de CLI](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli).
+La meilleure approche consiste à utiliser des VPN de site à site. Pour plus d’informations sur la configuration d’un VPN, consultez [Créer un réseau virtuel avec une connexion VPN de Site à Site à l’aide de CLI](../../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli.md).
 
 #### <a name="topology"></a>Topologie
 
@@ -100,7 +94,7 @@ Voici un résumé de la configuration Azure :
 - [Concevoir et mettre en œuvre une base de données Oracle sur Azure](oracle-design.md)
 - [Implémenter Oracle Data Guard sur une machine virtuelle Linux Azure](configure-oracle-dataguard.md)
 - [Implémenter Oracle Golden Gate sur une machine virtuelle Linux Azure](configure-oracle-golden-gate.md)
-- [Sauvegarde et récupération Oracle](oracle-backup-recovery.md)
+- [Sauvegarde et récupération Oracle](./oracle-overview.md)
 
 
 ## <a name="next-steps"></a>Étapes suivantes

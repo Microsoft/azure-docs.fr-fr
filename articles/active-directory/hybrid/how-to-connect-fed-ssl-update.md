@@ -9,19 +9,19 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/09/2018
 ms.subservice: hybrid
 author: billmath
 ms.custom: seohack1
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8cc768162d98402fe52b52b2826a9dbf2840a581
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 451b50e70b98849dfc4654566d09a5a961abe451
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331733"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279905"
 ---
 # <a name="update-the-tlsssl-certificate-for-an-active-directory-federation-services-ad-fs-farm"></a>Mettre à jour le certificat TLS/SSL pour une batterie de serveurs Active Directory Federation Services (AD FS)
 
@@ -34,7 +34,7 @@ Vous pouvez effectuer l’intégralité de l’opération de mise à jour du cer
 
 
 >[!NOTE]
->Pour en savoir plus sur les certificats utilisés par AD FS, consultez l’article [Présentation des certificats utilisés par les services ADFS (Active Directory Federation Services)](https://technet.microsoft.com/library/cc730660.aspx).
+>Pour en savoir plus sur les certificats utilisés par AD FS, consultez l’article [Présentation des certificats utilisés par les services ADFS (Active Directory Federation Services)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc730660(v=ws.11)).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -109,4 +109,3 @@ Après avoir terminé la configuration, Azure AD Connect affiche le message qui 
 
 - [Fédération avec Azure AD Connect](how-to-connect-fed-whatis.md)
 - [Gestion des services AD FS (Active Directory Federation Services) et personnalisation avec Azure AD Connect](how-to-connect-fed-management.md)
-

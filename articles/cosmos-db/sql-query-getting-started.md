@@ -3,32 +3,53 @@ title: Bien démarrer avec les requêtes SQL dans Azure Cosmos DB
 description: Découvrez comment utiliser des requêtes SQL pour interroger des données à partir d’Azure Cosmos DB. Vous pouvez charger des exemples de données dans un conteneur dans Azure Cosmos DB et les interroger.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 06/21/2019
+ms.date: 11/04/2020
 ms.author: tisande
-ms.openlocfilehash: 1d24261edea843fa928ad00e3ce7babcb84acd3b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c78e15a0656abd510bbc241d39ffd026afddfd96
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74873333"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353661"
 ---
 # <a name="getting-started-with-sql-queries"></a>Bien démarrer avec les requêtes SQL
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Les comptes d’API SQL Azure Cosmos DB prennent en charge l’interrogation d’éléments en utilisant le langage SQL (Structured Query Language) comme langage de requête JSON. Les objectifs de conception du langage de requête Azure Cosmos DB sont les suivants :
+Dans les comptes d’API SQL Azure Cosmos DB, il existe deux façons de lire des données :
 
-* Prendre en charge SQL, un des langages de requête les plus connus et les plus populaires, au lieu d’inventer un nouveau langage de requête. Le langage SQL fournit un modèle de programmation formel pour créer des requêtes élaborées sur les éléments JSON.  
+**Lectures de points** : vous pouvez effectuer une recherche de clé/valeur sur un *ID d’élément* unique et une clé de partition. La combinaison de la clé de partition et de l’*ID d’élément* représente la clé et l’élément proprement dit représente la valeur. Pour un document de 1 Ko, les lectures de points coûtent généralement 1 [unité de requête](request-units.md) avec une latence inférieure à 10 ms. Les lectures de points retournent un seul élément.
 
-* Utiliser le modèle de programmation de JavaScript comme base pour le langage de requête. Le système de type, l’évaluation d’expression et l’appel de fonction de JavaScript sont les racines de l’API SQL. Ces racines donnent un modèle de programmation naturel pour les fonctionnalités telles que les projections relationnelles, la navigation hiérarchique entre les éléments JSON, les jointures réflexives, les requêtes spatiales et l’appel de fonctions définies par l’utilisateur écrites entièrement en JavaScript.
+Voici quelques exemples montrant comment effectuer des **lectures de points** avec chaque SDK :
+
+- [Kit de développement logiciel (SDK) .NET](/dotnet/api/microsoft.azure.cosmos.container.readitemasync?preserve-view=true&view=azure-dotnet)
+- [Kit SDK Java](/java/api/com.azure.cosmos.cosmoscontainer.readitem?preserve-view=true&view=azure-java-stable#com_azure_cosmos_CosmosContainer__T_readItem_java_lang_String_com_azure_cosmos_models_PartitionKey_com_azure_cosmos_models_CosmosItemRequestOptions_java_lang_Class_T__)
+- [Kit de développement logiciel (SDK) Node.js](/javascript/api/@azure/cosmos/item?preserve-view=true&view=azure-node-latest#read-requestoptions-)
+- [Kit de développement logiciel (SDK) Python](/python/api/azure-cosmos/azure.cosmos.containerproxy?preserve-view=true&view=azure-python#read-item-item--partition-key--populate-query-metrics-none--post-trigger-include-none----kwargs-)
+
+**Requêtes SQL** : vous pouvez interroger des données en écrivant des requêtes avec le langage SQL (Structured Query Language) comme langage de requête JSON. Les requêtes coûtent toujours au moins 2,3 unités de requête et, en général, ont une latence plus élevée et plus variable que les lectures de points. Les requêtes peuvent retourner de nombreux éléments.
+
+La plupart des charges de travail de lecture intensive sur Azure Cosmos DB utilisent une combinaison de lectures de points et de requêtes SQL. Si vous avez simplement besoin de lire un seul élément, les lectures de points sont moins chères et plus rapides que les requêtes. Les lectures de points n’ont pas besoin d’utiliser le moteur d’interrogation pour accéder aux données qu’elles peuvent lire directement. Bien entendu, il n’est pas possible pour toutes les charges de travail de lire exclusivement les données à l’aide des lectures de points. Par conséquent, la prise en charge de SQL comme langage de requête et l’[indexation indépendante du schéma](index-overview.md) offrent un moyen plus souple d’accéder à vos données.
+
+Voici quelques exemples montrant comment effectuer des **requêtes SQL** avec chaque SDK :
+
+- [Kit de développement logiciel (SDK) .NET](./sql-api-dotnet-v3sdk-samples.md#query-examples)
+- [Kit SDK Java](./sql-api-java-sdk-samples.md#query-examples)
+- [Kit de développement logiciel (SDK) Node.js](./sql-api-nodejs-samples.md#item-examples)
+- [Kit de développement logiciel (SDK) Python](./sql-api-python-samples.md#item-examples)
+
+Le reste de cette documentation montre comment commencer à écrire des requêtes SQL dans Azure Cosmos DB. Les requêtes SQL peuvent être exécutées via le SDK ou le portail Azure.
 
 ## <a name="upload-sample-data"></a>Charger l’exemple de données
 
-Dans votre compte Cosmos DB de l’API SQL, créez un conteneur appelé `Families`. Créez deux éléments JSON simples dans le conteneur. Vous pouvez exécuter la plupart des exemples de requêtes dans la documentation de requête Azure Cosmos DB à l’aide de ce jeu de données.
+Dans votre compte Cosmos DB de l’API SQL, ouvrez [Explorateur de données](./data-explorer.md) pour créer un conteneur appelé `Families`. Une fois qu’il a été créé, utilisez le navigateur de structures de données pour le trouver et l’ouvrir. Dans votre conteneur `Families`, l’option `Items` se trouve juste en dessous du nom du conteneur. Ouvrez cette option. Un bouton s’affiche dans la barre de menus, au centre de l’écran, pour créer un « nouvel élément ». Vous allez utiliser cette fonctionnalité pour créer les éléments JSON ci-dessous.
 
 ### <a name="create-json-items"></a>Créer des éléments JSON
 
-Le code suivant crée deux éléments JSON simples sur les familles. Les éléments JSON simples pour les familles Andersen et Wakefield incluent les parents, les enfants et leurs animaux de compagnie, l’adresse et les informations d’inscription. Le premier élément se compose de chaînes, de nombres, de valeurs booléennes, de tableaux et de propriétés imbriquées.
+Les deux éléments JSON suivants sont des documents concernant les familles Andersen et Wakefield. Ils comprennent les parents, les enfants, ainsi que leurs animaux, leur adresse et leurs informations d’inscription. 
 
+Le premier élément se compose de chaînes, de nombres, de valeurs booléennes, de tableaux et de propriétés imbriquées :
 
 ```json
 {
@@ -52,7 +73,7 @@ Le code suivant crée deux éléments JSON simples sur les familles. Les éléme
 }
 ```
 
-Le deuxième élément utilise `givenName` et `familyName` au lieu de `firstName` et `lastName`.
+Le deuxième élément utilise `givenName` et `familyName` au lieu de `firstName` et `lastName` :
 
 ```json
 {
@@ -72,7 +93,7 @@ Le deuxième élément utilise `givenName` et `familyName` au lieu de `firstName
             { "givenName": "Shadow" }
         ]
       },
-      { 
+      {
         "familyName": "Miller",
          "givenName": "Lisa",
          "gender": "female",
@@ -88,7 +109,7 @@ Le deuxième élément utilise `givenName` et `familyName` au lieu de `firstName
 
 Appliquez quelques requêtes sur les données JSON pour comprendre certains aspects clés du langage de requête SQL d’Azure Cosmos DB.
 
-La requête suivante retourne les éléments dont le champ `id` correspond à `AndersenFamily`. Comme il s’agit d’une requête `SELECT *`, son résultat est l’élément JSON complet. Pour plus d’informations sur la syntaxe SELECT, consultez [Instruction SELECT](sql-query-select.md). 
+La requête suivante retourne les éléments dont le champ `id` correspond à `AndersenFamily`. Comme il s’agit d’une requête `SELECT *`, son résultat est l’élément JSON complet. Pour plus d’informations sur la syntaxe SELECT, consultez [Instruction SELECT](sql-query-select.md).
 
 ```sql
     SELECT *
@@ -96,7 +117,7 @@ La requête suivante retourne les éléments dont le champ `id` correspond à `
     WHERE f.id = "AndersenFamily"
 ```
 
-Voici le résultat de la requête : 
+Voici le résultat de la requête :
 
 ```json
     [{

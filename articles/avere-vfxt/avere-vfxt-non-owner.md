@@ -3,15 +3,15 @@ title: Solution de contournement pour les utilisateurs d’Avere vFXT non propri
 description: Découvrez une solution de contournement pour permettre aux utilisateurs sans autorisation de propriétaire sur l’abonnement de déployer Avere vFXT pour Azure
 author: ekpgh
 ms.service: avere-vfxt
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/19/2019
 ms.author: rohogue
-ms.openlocfilehash: 1b411fe465a67f8ea5421ac0dc93348b4e92e8ec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0d9b1060ee35af6cbc2e1b95b0f7813072c52d2e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76153273"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85505373"
 ---
 # <a name="authorize-non-owners-to-deploy-avere-vfxt"></a>Autoriser les utilisateurs non propriétaires à déployer Avere vFXT
 

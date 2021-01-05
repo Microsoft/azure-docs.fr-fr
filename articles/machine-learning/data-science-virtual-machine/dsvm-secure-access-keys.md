@@ -10,20 +10,20 @@ author: vijetajo
 ms.author: vijetaj
 ms.topic: conceptual
 ms.date: 05/08/2018
-ms.openlocfilehash: 1cb0c5094d49eac5a1c8f63406a28d2927d8fa94
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d5604e42c2c27463e10c136ccd18c3c21846fc5a
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477321"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93309150"
 ---
 # <a name="store-access-credentials-securely-on-an-azure-data-science-virtual-machine"></a>Stocker des informations d’identification d’accès en toute sécurité sur une machine virtuelle de science des données (DSVM) Azure
 
 Il est courant que le code des applications cloud contienne des informations d’identification pour l’authentification auprès des services cloud. La gestion et la sécurisation de ces informations d’identification est un défi bien connu dans la création d’applications cloud. Dans l’idéal, les informations d’identification ne doivent jamais s’afficher sur les stations de travail de développement ou ne sont jamais archivées dans le contrôle de code source.
 
-La fonctionnalité des [identités managées pour les ressources Azure](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview) simplifie la résolution de ce problème en fournissant aux services Azure une identité managée automatiquement dans Azure AD (Azure Active Directory). Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code.
+La fonctionnalité des [identités managées pour les ressources Azure](../../active-directory/managed-identities-azure-resources/overview.md) simplifie la résolution de ce problème en fournissant aux services Azure une identité managée automatiquement dans Azure AD (Azure Active Directory). Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code.
 
-Un moyen de sécuriser des informations d’identification consiste à utiliser Windows Installer (MSI) en combinaison avec [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/), un service Azure managé permettant de stocker les clés de chiffrement et les secrets en toute sécurité. Vous pouvez accéder à un coffre de clés à l’aide de l’identité managée et y récupérer les secrets et les clés de chiffrement autorisés.
+Un moyen de sécuriser des informations d’identification consiste à utiliser Windows Installer (MSI) en combinaison avec [Azure Key Vault](../../key-vault/index.yml), un service Azure managé permettant de stocker les clés de chiffrement et les secrets en toute sécurité. Vous pouvez accéder à un coffre de clés à l’aide de l’identité managée et y récupérer les secrets et les clés de chiffrement autorisés.
 
 La documentation sur les identités managées pour les ressources Azure et Key Vault contient des informations complètes et détaillées sur ces services. Le reste de cet article décrit l’utilisation de base de MSI et de Key Vault sur Data Science Virtual Machine (DSVM) pour accéder à des ressources Azure. 
 

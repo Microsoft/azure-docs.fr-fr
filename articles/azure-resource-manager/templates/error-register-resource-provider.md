@@ -3,12 +3,13 @@ title: Erreurs d’inscription du fournisseur de ressources
 description: Décrit comment résoudre les erreurs d’inscription de fournisseurs de ressources Azure quand vous déployez des ressources avec Azure Resource Manager.
 ms.topic: troubleshooting
 ms.date: 02/15/2019
-ms.openlocfilehash: a9182be53cc91240a62ab201efc53d674f7cf427
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 143cf03a33739f43a29af94fc2f8a336fb3aef8f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89076665"
 ---
 # <a name="resolve-errors-for-resource-provider-registration"></a>Résoudre les erreurs d’inscription de fournisseurs de ressources
 

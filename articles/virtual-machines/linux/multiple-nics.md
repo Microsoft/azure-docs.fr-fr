@@ -4,16 +4,16 @@ description: Découvrez comment créer une machine virtuelle Linux dotée de plu
 author: cynthn
 ms.service: virtual-machines-linux
 ms.subservice: networking
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 06/07/2018
 ms.author: cynthn
-ms.openlocfilehash: ecbff4beadd9d10a8489c89cc322c0bb67ec5f40
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 86910ece57d8fb72ade0c67a9e6787023c4283f3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79231993"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87836919"
 ---
 # <a name="how-to-create-a-linux-virtual-machine-in-azure-with-multiple-network-interface-cards"></a>Guide de création d’une machine virtuelle Linux dans Azure avec plusieurs cartes d’interface réseau
 
@@ -79,7 +79,7 @@ az network nic create \
 ```
 
 ## <a name="create-a-vm-and-attach-the-nics"></a>Créer une machine virtuelle et attacher les cartes réseau
-Lorsque vous créez la machine virtuelle, spécifiez les cartes réseau que vous avez créées avec `--nics`. Vous devez également faire attention en définissant la taille de la machine virtuelle. Il existe des limites pour le nombre maximal de cartes réseau que vous pouvez ajouter à une machine virtuelle. En savoir plus sur les [tailles des machines virtuelles Linux](sizes.md).
+Lorsque vous créez la machine virtuelle, spécifiez les cartes réseau que vous avez créées avec `--nics`. Vous devez également faire attention en définissant la taille de la machine virtuelle. Il existe des limites pour le nombre maximal de cartes réseau que vous pouvez ajouter à une machine virtuelle. En savoir plus sur les [tailles des machines virtuelles Linux](../sizes.md).
 
 Créez une machine virtuelle avec la commande [az vm create](/cli/azure/vm). L’exemple suivant crée une machine virtuelle nommée *myVM* :
 
@@ -97,7 +97,7 @@ az vm create \
 Ajoutez des tables de routage au SE invité en suivant la procédure décrite dans [Configurer plusieurs cartes réseau dans un système d’exploitation invité](#configure-guest-os-for-multiple-nics).
 
 ## <a name="add-a-nic-to-a-vm"></a>Ajout d’une carte réseau à une machine virtuelle existante
-Les étapes précédentes ont permis de créer une machine virtuelle avec plusieurs cartes réseau. Vous pouvez également ajouter des cartes réseau à une machine virtuelle existante avec l’interface Azure CLI. Comme le nombre de cartes réseau prises en charge varie suivant la [taille des machines virtuelles](sizes.md) , pensez à dimensionner la vôtre en conséquence. Si nécessaire, vous pouvez [redimensionner une machine virtuelle](change-vm-size.md).
+Les étapes précédentes ont permis de créer une machine virtuelle avec plusieurs cartes réseau. Vous pouvez également ajouter des cartes réseau à une machine virtuelle existante avec l’interface Azure CLI. Comme le nombre de cartes réseau prises en charge varie suivant la [taille des machines virtuelles](../sizes.md) , pensez à dimensionner la vôtre en conséquence. Si nécessaire, vous pouvez [redimensionner une machine virtuelle](change-vm-size.md).
 
 Créez une autre carte réseau avec [az network nic create](/cli/azure/network/nic). L’exemple suivant crée une carte réseau nommée *myNic3* connectée au sous-réseau principal et au groupe de sécurité réseau créés lors des étapes précédentes :
 
@@ -167,7 +167,7 @@ Les modèles Azure Resource Manager utilisent des fichiers JSON déclaratifs pou
 }
 ```
 
-En savoir plus sur la [création de plusieurs instances à l’aide de *copy*](../../resource-group-create-multiple.md). 
+En savoir plus sur la [création de plusieurs instances à l’aide de *copy*](../../azure-resource-manager/templates/copy-resources.md). 
 
 Vous pouvez également utiliser `copyIndex()` pour ajouter ensuite un numéro à un nom de ressource permettant de créer `myNic1`, `myNic2`, etc. Voici un exemple d’ajout de la valeur d’index :
 
@@ -242,6 +242,6 @@ ping bing.com -c 4 -I eth1
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-Vérifiez les [tailles des machines virtuelles Linux](sizes.md) si vous créez une machine virtuelle avec plusieurs cartes réseau. Faites attention au nombre maximal de cartes réseau pris en charge par chaque taille de machine virtuelle.
+Vérifiez les [tailles des machines virtuelles Linux](../sizes.md) si vous créez une machine virtuelle avec plusieurs cartes réseau. Faites attention au nombre maximal de cartes réseau pris en charge par chaque taille de machine virtuelle.
 
 Pour sécuriser davantage vos machines virtuelles, utilisez l’accès aux machines virtuelles juste-à-temps. Cette fonctionnalité ouvre les règles de groupe de sécurité réseau pour le trafic SSH en cas de besoin et pour une période de temps définie. Pour plus d’informations, consultez [Gérer l’accès Juste à temps à la machine virtuelle](../../security-center/security-center-just-in-time.md).

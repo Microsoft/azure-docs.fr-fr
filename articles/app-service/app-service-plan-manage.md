@@ -6,12 +6,12 @@ ms.assetid: 4859d0d5-3e3c-40cc-96eb-f318b2c51a3d
 ms.topic: article
 ms.date: 10/24/2019
 ms.custom: seodec18
-ms.openlocfilehash: d40f5db65ce9ca90ae978bac4491bdebccc2a328
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: bb0765a1d7934d60f787ed277dd3bd1f9bc1359b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811709"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88962942"
 ---
 # <a name="manage-an-app-service-plan-in-azure"></a>Gérer un plan App Service dans Azure
 
@@ -82,7 +82,7 @@ La commande **Cloner l’application** figure dans la section **Outils de dével
 
 Pour faire évoluer le niveau tarifaire d’un plan App Service, consultez [Scalabilité verticale d’une application dans Azure](manage-scale-up.md).
 
-Pour effectuer un scale-out du nombre d’instances d’une application, consultez [Mise à l’échelle manuelle ou automatique du nombre d’instances](../monitoring-and-diagnostics/insights-how-to-scale.md).
+Pour effectuer un scale-out du nombre d’instances d’une application, consultez [Mise à l’échelle manuelle ou automatique du nombre d’instances](../azure-monitor/platform/autoscale-get-started.md).
 
 <a name="delete"></a>
 

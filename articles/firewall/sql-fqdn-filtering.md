@@ -4,40 +4,33 @@ description: Dans cet article, vous allez apprendre à configurer des noms de do
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.topic: article
-ms.date: 07/19/2019
+ms.topic: how-to
+ms.date: 06/18/2020
 ms.author: victorh
-ms.openlocfilehash: 858cfc9a8c15f1e33e688bb5086a58f194e7173f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7256f94b8e8376cf98a279d085a131a4ce84826f
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79501501"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658620"
 ---
 # <a name="configure-azure-firewall-application-rules-with-sql-fqdns"></a>Configurer des règles d’application de pare-feu Azure avec des noms de domaine complets SQL
-
-> [!IMPORTANT]
-> Les règles d’application de pare-feu Azure avec des noms de domaine complets SQL sont actuellement en préversion publique.
-> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge.
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Vous pouvez maintenant configurer des règles d’application de pare-feu Azure avec des noms de domaine complets SQL. Cela vous permet de limiter l’accès à partir de vos réseaux virtuels aux seules instances de serveur SQL spécifiées.
 
 Grâce aux noms de domaine complets SQL, vous pouvez filtrer le trafic :
 
-- À partir de vos réseaux virtuels pour une Azure SQL Database ou un Azure SQL Data Warehouse. Par exemple : Autoriser uniquement l’accès à *sql-server1.database.windows.net*.
+- De votre réseaux virtuels à une instance Azure SQL Database ou Azure Synapse Analytics. Par exemple : Autoriser uniquement l’accès à *sql-server1.database.windows.net*.
 - Envoi local vers Azure SQL Managed Instances ou IaaS SQL en cours d’exécution dans vos réseaux virtuels.
 - Envoi rayon à rayon vers Azure SQL Managed Instances ou IaaS SQL en cours d’exécution dans vos réseaux virtuels.
 
-Dans la préversion publique, le filtrage de nom de domaine complet SQL est pris en charge uniquement en [mode proxy](https://docs.microsoft.com/azure/sql-database/sql-database-connectivity-architecture#connection-policy) (port 1433). Si vous utilisez SQL dans le mode de redirection par défaut, vous pouvez filtrer les accès à l’aide de la balise de service SQL dans le cadre des [règles de réseau](overview.md#network-traffic-filtering-rules).
+Le filtrage FQDN SQL est pris en charge uniquement en [mode proxy](../azure-sql/database/connectivity-architecture.md#connection-policy) (port 1433). Si vous utilisez SQL dans le mode de redirection par défaut, vous pouvez filtrer les accès à l’aide de la balise de service SQL dans le cadre des [règles de réseau](features.md#network-traffic-filtering-rules).
 Si vous utilisez des ports qui ne sont pas par défaut pour le trafic IaaS SQL, vous pouvez configurer ces ports dans les règles d’application de pare-feu.
-
-Les règles d’applications avec des noms de domaine complets SQL sont actuellement disponibles dans toutes les régions via le portail Azure, Azure CLI, REST et les modèles.
 
 ## <a name="configure-using-azure-cli"></a>Configurer à l’aide d’Azure CLI
 
 1. Déployer un [pare-feu Azure à l’aide de Azure CLI](deploy-cli.md).
-2. Si vous filtrez le trafic vers Azure SQL Database, SQL Data Warehouse ou SQL Managed Instance, assurez-vous que le mode de connectivité SQL est défini sur **Proxy**. Pour savoir comment modifier de mode de connectivité SQL, voir [Paramètres de connectivité Azure SQL](https://docs.microsoft.com/azure/sql-database/sql-database-connectivity-settings#change-connection-policy-via-azure-cli).
+2. Si vous filtrez le trafic vers Azure SQL Database, Azure Synapse Analytics ou SQL Managed Instance, assurez-vous que le mode de connectivité SQL est défini sur **Proxy**. Pour savoir comment modifier de mode de connectivité SQL, voir [Paramètres de connectivité Azure SQL](../azure-sql/database/connectivity-settings.md#change-the-connection-policy-via-the-azure-cli).
 
    > [!NOTE]
    > Le mode *proxy* de SQL peut entraîner une plus grande latence par rapport au mode de *redirection*. Si vous souhaitez continuer à utiliser le mode de redirection, qui est le mode par défaut pour les clients se connectant à Azure, vous pouvez filtrer l’accès en utilisant la [balise de service](service-tags.md) SQL dans les [règles de réseau](tutorial-firewall-deploy-portal.md#configure-a-network-rule) du pare-feu.
@@ -59,7 +52,7 @@ Les règles d’applications avec des noms de domaine complets SQL sont actuelle
 
 ## <a name="configure-using-the-azure-portal"></a>Configurer à l’aide du portail Azure
 1. Déployer un [pare-feu Azure à l’aide de Azure CLI](deploy-cli.md).
-2. Si vous filtrez le trafic vers Azure SQL Database, SQL Data Warehouse ou SQL Managed Instance, assurez-vous que le mode de connectivité SQL est défini sur **Proxy**. Pour savoir comment modifier de mode de connectivité SQL, voir [Paramètres de connectivité Azure SQL](https://docs.microsoft.com/azure/sql-database/sql-database-connectivity-settings#change-connection-policy-via-azure-cli).  
+2. Si vous filtrez le trafic vers Azure SQL Database, Azure Synapse Analytics ou SQL Managed Instance, assurez-vous que le mode de connectivité SQL est défini sur **Proxy**. Pour savoir comment modifier de mode de connectivité SQL, voir [Paramètres de connectivité Azure SQL](../azure-sql/database/connectivity-settings.md#change-the-connection-policy-via-the-azure-cli).  
 
    > [!NOTE]
    > Le mode *proxy* de SQL peut entraîner une plus grande latence par rapport au mode de *redirection*. Si vous souhaitez continuer à utiliser le mode de redirection, qui est le mode par défaut pour les clients se connectant à Azure, vous pouvez filtrer l’accès en utilisant la [balise de service](service-tags.md) SQL dans les [règles de réseau](tutorial-firewall-deploy-portal.md#configure-a-network-rule) du pare-feu.
@@ -70,4 +63,4 @@ Les règles d’applications avec des noms de domaine complets SQL sont actuelle
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur le proxy de SQL et sur les modes de redirection, consultez [Architecture de connectivité de base de données SQL Azure](../sql-database/sql-database-connectivity-architecture.md).
+Pour en savoir plus sur le proxy de SQL et sur les modes de redirection, consultez [Architecture de connectivité de base de données SQL Azure](../azure-sql/database/connectivity-architecture.md).

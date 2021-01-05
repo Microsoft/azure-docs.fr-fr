@@ -3,15 +3,15 @@ title: Résolution des problèmes des cibles de stockage NFS Azure HPC Cache
 description: Conseils pour éviter et résoudre les erreurs de configuration et d’autres problèmes susceptibles de provoquer un échec lors de la création d’une cible de stockage NFS.
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 03/18/2020
-ms.author: rohogue
-ms.openlocfilehash: 72b6b0b78da23fd0891c0571c9137fefbfb0b077
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: v-erkel
+ms.openlocfilehash: efa163a2c10a7dc93bf5d26865a0e7eb43f11dea
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186615"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87082764"
 ---
 # <a name="troubleshoot-nas-configuration-and-nfs-storage-target-issues"></a>Résolution des problèmes de configuration NAS et des cibles de stockage NFS
 
@@ -20,7 +20,7 @@ Cet article apporte des solutions à certaines erreurs de configuration courante
 Cet article explique comment vérifier les ports et autoriser l’accès racine à un système NAS. Il contient également des informations détaillées sur des problèmes moins courants susceptibles de provoquer l’échec de la création de cibles de stockage NFS.
 
 > [!TIP]
-> Avant de suivre ce guide, consultez [Prérequis des cibles de stockage NFS](hpc-cache-prereqs.md#nfs-storage-requirements).
+> Avant de suivre ce guide, consultez [Prérequis des cibles de stockage NFS](hpc-cache-prerequisites.md#nfs-storage-requirements).
 
 Si la solution à votre problème n’est pas indiquée ici, veuillez [ouvrir un ticket de support](hpc-cache-support-ticket.md) pour que le Support technique et Service Microsoft puisse examiner et résoudre le problème avec vous.
 

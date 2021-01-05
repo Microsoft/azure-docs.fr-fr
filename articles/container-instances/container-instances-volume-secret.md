@@ -2,13 +2,13 @@
 title: Monter le volume secret pour le groupe de conteneurs
 description: Découvrez comment monter un volume secret pour stocker des informations sensibles et y accéder à partir de vos instances de conteneur
 ms.topic: article
-ms.date: 04/03/2020
-ms.openlocfilehash: 756828e71174246450245938595c8872afc62961
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.date: 07/02/2020
+ms.openlocfilehash: ea82ba5994feaf102d4622eada284df431e004d0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80657153"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169559"
 ---
 # <a name="mount-a-secret-volume-in-azure-container-instances"></a>Monter un volume secret dans Azure Container Instances
 
@@ -62,7 +62,7 @@ Lorsque vous déployez avec un modèle YAML, les valeurs de secret doivent être
 Le modèle YAML suivant définit un groupe de conteneurs avec un seul conteneur montant un volume *secret* sur `/mnt/secrets`. Le volume secret a deux fichiers contenant des secrets, « mysecret1 » et « mysecret2 ».
 
 ```yaml
-apiVersion: '2018-10-01'
+apiVersion: '2019-12-01'
 location: eastus
 name: secret-volume-demo
 properties:

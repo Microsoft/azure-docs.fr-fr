@@ -4,15 +4,15 @@ description: Cet article vous guide dans la configuration de BGP avec une passer
 services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 09/25/2018
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: yushwang
-ms.openlocfilehash: 42a07ac00fd8a26918164f6547bf57c2b021d14c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a69ce0592b79be0868dd7c15ac054910eee75fc7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75863612"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89393596"
 ---
 # <a name="how-to-configure-bgp-on-an-azure-vpn-gateway-by-using-cli"></a>Configurer BGP sur une passerelle VPN Azure à l’aide de CLI
 
@@ -303,4 +303,4 @@ Une fois ces étapes effectuées, la connexion est établie au bout de quelques 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour connaître les différentes étapes, consultez [Créer une machine virtuelle](../virtual-machines/virtual-machines-windows-hero-tutorial.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour connaître les différentes étapes, consultez [Créer une machine virtuelle](../virtual-machines/windows/quick-create-portal.md).

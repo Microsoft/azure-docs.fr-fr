@@ -3,15 +3,15 @@ title: Configurer des clés gérées par le client pour chiffrer les données au
 description: Créez et gérez vos propres clés de chiffrement afin de sécuriser les données au repos pour les environnements de service d’intégration (ISE) dans Azure Logic Apps.
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, rarayudu, logicappspm
+ms.reviewer: mijos, rarayudu, logicappspm
 ms.topic: conceptual
-ms.date: 03/11/2020
-ms.openlocfilehash: 7314559849f0b2019820ec3cb4fb10c684d330d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/20/2020
+ms.openlocfilehash: 0057a4671dbc63bf53bafa8d2d742d4edcda1e5e
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81458435"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741046"
 ---
 # <a name="set-up-customer-managed-keys-to-encrypt-data-at-rest-for-integration-service-environments-ises-in-azure-logic-apps"></a>Configurer des clés gérées par le client afin de chiffrer les données au repos pour les environnements de service d’intégration (ISE) dans Azure Logic Apps
 
@@ -27,11 +27,15 @@ Cette rubrique montre comment configurer et spécifier votre propre clé de chif
 
 * Vous pouvez spécifier une clé gérée par le client *uniquement quand vous créez votre ISE*, pas après. Vous ne pouvez pas désactiver cette clé après la création de votre environnement ISE. Actuellement, il n’existe pas de prise en charge pour faire pivoter une clé gérée par le client pour un ISE.
 
-* Pour prendre en charge les clés gérées par le client, il faut que l’[identité managée affectée par le système](../active-directory/managed-identities-azure-resources/overview.md#how-does-the-managed-identities-for-azure-resources-work) de votre ISE soit activée. Cette identité permet à l’ISE d’authentifier l’accès aux ressources dans d’autres locataires Azure Active Directory (Azure AD) afin que vous n’ayez pas à vous connecter avec vos informations d’identification.
+* Pour prendre en charge les clés gérées par le client, votre ISE nécessite que vous activiez l’[identité managée affectée par le système ou par l’utilisateur](../active-directory/managed-identities-azure-resources/overview.md#managed-identity-types). Cette identité permet à votre ISE d’authentifier l’accès à des ressources sécurisées, comme des machines virtuelles et d’autres systèmes ou services, qui se trouvent à l’intérieur d’un réseau virtuel Azure ou y sont connectées. De cette façon, vous n’êtes pas obligé de vous connecter avec vos informations d’identification.
 
-* Actuellement, pour créer un ISE qui prend en charge les clés gérées par le client et dont l’identité affectée par le système est activée, vous devez appeler l’API REST Logic Apps à l’aide d’une requête PUT HTTPS.
+* Actuellement, pour créer un ISE qui prend en charge les clés gérées par le client et dont le type d’identité managée est activé, vous devez appeler l’API REST Logic Apps à l’aide d’une requête PUT HTTPS.
 
-* Dans les *30 minutes* qui suivent l’envoi de la requête PUT HTTPS qui crée votre ISE, vous devez [accorder à l’identité attribuée par le système de votre ISE l’accès au coffre de clés](#identity-access-to-key-vault). Si vous ne le faites pas, la création de l’ISE échoue et génère une erreur d’autorisation.
+* Vous devez [accorder un accès au coffre de clés à l’identité managée de votre ISE](#identity-access-to-key-vault), mais le minutage dépend de l’identité managée que vous utilisez.
+
+  * **Identité managée affectée par le système** : Dans les *30 minutes qui suivent* l’envoi de la requête PUT HTTPS qui crée votre ISE, vous devez [accorder à l’identité managée de votre ISE l’accès au coffre de clés](#identity-access-to-key-vault). Si vous ne le faites pas, la création de l’ISE échoue et vous recevez une erreur d’autorisation.
+
+  * **Identité managée affectée par l’utilisateur** : Avant d’envoyer la requête PUT HTTPS qui crée votre ISE, [accordez à l’identité managée de votre ISE l’accès au coffre de clés](#identity-access-to-key-vault).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -39,7 +43,7 @@ Cette rubrique montre comment configurer et spécifier votre propre clé de chif
 
 * Un coffre de clés Azure pour lequel les propriétés **Suppression réversible** et **Ne pas vider** sont activées
 
-  Pour plus d’informations sur l’activation de ces propriétés, consultez [Vue d’ensemble de la suppression réversible d’Azure Key Vault](../key-vault/general/overview-soft-delete.md) et [Configurer des clés gérées par le client avec Azure Key Vault](../storage/common/storage-encryption-keys-portal.md). Si vous ne connaissez pas Azure Key Vault, découvrez [comment créer un coffre de clés](../key-vault/secrets/quick-create-portal.md#create-a-vault) à l’aide du portail Azure ou à l’aide de la commande Azure PowerShell [New-AzKeyVault](https://docs.microsoft.com/powershell/module/az.keyvault/new-azkeyvault).
+  Pour plus d’informations sur l’activation de ces propriétés, consultez [Vue d’ensemble de la suppression réversible d’Azure Key Vault](../key-vault/general/soft-delete-overview.md) et [Configurer des clés gérées par le client avec Azure Key Vault](../storage/common/customer-managed-keys-configure-key-vault.md). Si vous découvrez [Azure Key Vault](../key-vault/general/overview.md), apprenez à créer un coffre de clés à l’aide du [portail Azure](../key-vault/general/quick-create-portal.md), d’[Azure CLI](../key-vault/general/quick-create-cli.md) ou d’[Azure PowerShell](../key-vault/general/quick-create-powershell.md).
 
 * Dans votre coffre de clés, une clé créée avec les valeurs de propriétés suivantes :
 
@@ -52,11 +56,11 @@ Cette rubrique montre comment configurer et spécifier votre propre clé de chif
 
   ![Créez votre clé de chiffrement gérée par le client](./media/customer-managed-keys-integration-service-environment/create-customer-managed-key-for-encryption.png)
 
-  Pour plus d’informations, consultez [Configurer des clés gérées par le client avec Azure Key Vault](../storage/common/storage-encryption-keys-portal.md) ou la commande Azure PowerShell [Add-AzKeyVaultKey](https://docs.microsoft.com/powershell/module/az.keyvault/Add-AzKeyVaultKey).
+  Pour plus d’informations, consultez [Configurer des clés gérées par le client avec Azure Key Vault](../storage/common/customer-managed-keys-configure-key-vault.md) ou la commande Azure PowerShell [Add-AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey).
 
 * Un outil que vous pouvez utiliser pour créer votre ISE en appelant l’API REST Logic Apps avec une requête PUT HTTPS. Par exemple, vous pouvez utiliser [Postman](https://www.getpostman.com/downloads/) ou créer une application logique qui effectue cette tâche
 
-<a name="enable-support-key-system-identity"></a>
+<a name="enable-support-key-managed-identity"></a>
 
 ## <a name="create-ise-with-key-vault-and-managed-identity-support"></a>Créer un ISE avec coffre de clés et prise en charge des identités managées
 
@@ -65,7 +69,7 @@ Pour créer votre ISE en appelant l’API REST Logic Apps, émettez cette requê
 `PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}?api-version=2019-05-01`
 
 > [!IMPORTANT]
-> Avec l’API REST version 2019-05-01 de Logic Apps, vous devez émettre votre propre requête PUT HTTP pour les connecteurs ISE.
+> Avec l’API REST version 2019-05-01 de Logic Apps, vous devez émettre votre propre requête PUT HTTPS pour les connecteurs ISE.
 
 Le déploiement prend généralement deux heures maximum. Parfois, le déploiement peut prendre jusqu’à quatre heures. Pour suivre l'état du déploiement, accédez au [portail Azure](https://portal.azure.com) et sélectionnez l'icône Notifications sur la barre d'outils Azure. Le volet Notifications s'ouvre alors.
 
@@ -88,7 +92,7 @@ Dans l’en-tête de la requête, incluez les propriétés suivantes :
 
 Dans le corps de la requête, activez la prise en charge de ces éléments supplémentaires en spécifiant leurs informations dans votre définition d’ISE :
 
-* L’identité managée affectée par le système que votre ISE utilise pour accéder à votre coffre de clés
+* L’identité managée que votre ISE utilise pour accéder à votre coffre de clés
 * Votre coffre de clés et la clé gérée par le client que vous souhaitez utiliser
 
 #### <a name="request-body-syntax"></a>Syntaxe du corps de la demande
@@ -97,7 +101,7 @@ Voici la syntaxe du corps de la requête, qui décrit les propriétés à utilis
 
 ```json
 {
-   "id": "/subscriptions/{Azure-subscription-ID/resourceGroups/{Azure-resource-group}/providers/Microsoft.Logic/integrationServiceEnvironments/{ISE-name}",
+   "id": "/subscriptions/{Azure-subscription-ID}/resourceGroups/{Azure-resource-group}/providers/Microsoft.Logic/integrationServiceEnvironments/{ISE-name}",
    "name": "{ISE-name}",
    "type": "Microsoft.Logic/integrationServiceEnvironments",
    "location": "{Azure-region}",
@@ -106,7 +110,14 @@ Voici la syntaxe du corps de la requête, qui décrit les propriétés à utilis
       "capacity": 1
    },
    "identity": {
-      "type": "SystemAssigned"
+      "type": <"SystemAssigned" | "UserAssigned">,
+      // When type is "UserAssigned", include the following "userAssignedIdentities" object:
+      "userAssignedIdentities": {
+         "/subscriptions/{Azure-subscription-ID}/resourceGroups/{Azure-resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{user-assigned-managed-identity-object-ID}": {
+            "principalId": "{principal-ID}",
+            "clientId": "{client-ID}"
+         }
+      }
    },
    "properties": {
       "networkConfiguration": {
@@ -153,7 +164,13 @@ Cet exemple de corps de requête montre les exemples de valeurs :
    "type": "Microsoft.Logic/integrationServiceEnvironments",
    "location": "WestUS2",
    "identity": {
-      "type": "SystemAssigned"
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+         "/subscriptions/********************/resourceGroups/Fabrikam-RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/*********************************": {
+            "principalId": "*********************************",
+            "clientId": "*********************************"
+         }
+      }
    },
    "sku": {
       "name": "Premium",
@@ -197,9 +214,13 @@ Cet exemple de corps de requête montre les exemples de valeurs :
 
 ## <a name="grant-access-to-your-key-vault"></a>Accorder l’accès à votre coffre de clés
 
-Dans les *30 minutes* qui suivent l’envoi de la requête PUT HTTP qui crée votre ISE, vous devez ajouter une stratégie d’accès à votre coffre de clés pour l’identité attribuée par le système de votre ISE. Si vous ne le faites pas, la création de votre ISE échoue et vous recevez une erreur d’autorisation. 
+Bien que le minutage diffère en fonction de l’identité managée que vous utilisez, vous devez [accorder un accès au coffre de clés à l’identité managée de votre ISE](#identity-access-to-key-vault).
 
-Pour cette tâche, vous pouvez utiliser la commande Azure PowerShell [Set-AzKeyVaultAccessPolicy](https://docs.microsoft.com/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy) ou effectuer ces étapes dans le portail Azure :
+* **Identité managée affectée par le système** : Dans les *30 minutes qui suivent* l’envoi de la requête PUT HTTP qui crée votre ISE, vous devez ajouter une stratégie d’accès à votre coffre de clés pour l’identité managée affectée par le système de votre ISE. Si vous ne le faites pas, la création de votre ISE échoue et vous recevez une erreur d’autorisation.
+
+* **Identité managée affectée par l’utilisateur** : Avant d’envoyer la requête PUT HTTPS qui crée votre ISE, ajoutez une stratégie d’accès à votre coffre de clés pour l’identité managée affectée par l’utilisateur de votre ISE.
+
+Pour cette tâche, vous pouvez utiliser la commande Azure PowerShell [Set-AzKeyVaultAccessPolicy](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy) ou effectuer ces étapes dans le portail Azure :
 
 1. Dans le [portail Azure](https://portal.azure.com), ouvrez votre coffre de clés Azure.
 
@@ -225,7 +246,7 @@ Pour cette tâche, vous pouvez utiliser la commande Azure PowerShell [Set-AzKeyV
 
    1. Quand vous en avez terminé avec le volet **Stratégies d’accès**, sélectionnez **Enregistrer**.
 
-Pour plus d’informations, consultez [Fournir une authentification Key Vault avec une identité managée](../key-vault/general/managed-identity.md#grant-your-app-access-to-key-vault).
+Pour plus d’informations, consultez [Guide pratique pour s’authentifier auprès de Key Vault](../key-vault/general/authentication.md) et [Attribuer une stratégie d’accès Key Vault](../key-vault/general/assign-access-policy-portal.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

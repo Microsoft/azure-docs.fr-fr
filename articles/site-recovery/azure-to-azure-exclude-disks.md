@@ -5,12 +5,12 @@ author: sideeksh
 manager: rochakm
 ms.topic: how-to
 ms.date: 02/18/2019
-ms.openlocfilehash: 7355233bb7241571e3f3820aafac6952af245654
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a21460279420c46b11c43615ae5ecc7bfa81de4d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75973676"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86135805"
 ---
 # <a name="exclude-disks-from-powershell-replication-of-azure-vms"></a>Exclure des disques de la réplication Powershell de machines virtuelles Azure
 
@@ -25,14 +25,14 @@ Avant de commencer :
 
 - Assurez-vous que vous comprenez [l’architecture et les composants de récupération d’urgence](azure-to-azure-architecture.md).
 - Vérifiez les [exigences de prise en charge](azure-to-azure-support-matrix.md) pour tous les composants.
-- Assurez-vous que vous disposez du module AzureRm PowerShell « Az ». Pour installer ou mettre à jour powerShell, consultez la section relative à [l’installation du module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps).
+- Assurez-vous que vous disposez du module AzureRm PowerShell « Az ». Pour installer ou mettre à jour powerShell, consultez la section relative à [l’installation du module Azure PowerShell](/powershell/azure/install-az-ps).
 - Assurez-vous d’avoir créé un coffre Recovery Services et des machines virtuelles protégées au moins une fois. Si tel n’est pas le cas, suivez le processus décrit dans [Configurer la récupération d’urgence pour les machines virtuelles Azure à l’aide d’Azure PowerShell](azure-to-azure-powershell.md).
 - Si vous recherchez des informations sur l’ajout de disques à une machine virtuelle Azure compatible avec la réplication, [consultez cet article](azure-to-azure-enable-replication-added-disk.md).
 
 ## <a name="why-exclude-disks-from-replication"></a>Pourquoi exclure des disques de la réplication ?
 Vous devrez peut-être exclure les disques de la réplication, car :
 
-- Votre machine virtuelle a atteint les [Limites d’Azure Site Recovery pour répliquer les données](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-support-matrix).
+- Votre machine virtuelle a atteint les [Limites d’Azure Site Recovery pour répliquer les données](./azure-to-azure-support-matrix.md).
 
 - Les données hautement évolutives sur le disque exclu ne sont pas importantes ou n’ont pas besoin d’être répliquées.
 

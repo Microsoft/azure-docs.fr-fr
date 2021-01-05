@@ -9,11 +9,11 @@ ms.topic: article
 ms.date: 10/21/2019
 ms.author: ramamill
 ms.openlocfilehash: 16214fa07b14c8db2f32fa2c69739b7fa3dc1907
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74083953"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008473"
 ---
 # <a name="set-up-a-process-server-in-azure-for-failback"></a>Configurer un serveur de processus dans Azure à des fins de restauration automatique
 

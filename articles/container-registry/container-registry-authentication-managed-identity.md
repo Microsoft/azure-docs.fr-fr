@@ -3,12 +3,12 @@ title: Authentifier avec l’identité gérée
 description: Donnez accès aux images de votre registre de conteneurs privé à l’aide d’une identité managée Azure affectée par l’utilisateur ou par le système.
 ms.topic: article
 ms.date: 01/16/2019
-ms.openlocfilehash: 9b8bed78629d3a9739ec00772ad5c8216a04c122
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9a144f0e865cfc9bf857752eed65dbe5cda88bd9
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74456495"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91253460"
 ---
 # <a name="use-an-azure-managed-identity-to-authenticate-to-an-azure-container-registry"></a>Utiliser une identité managée Azure pour s’authentifier auprès d’un registre de conteneurs Azure 
 
@@ -79,6 +79,7 @@ ssh azureuser@publicIpAddress
 Exécutez la commande suivante pour installer Docker sur la machine virtuelle :
 
 ```bash
+sudo apt update
 sudo apt install docker.io -y
 ```
 
@@ -229,6 +230,8 @@ Un message `Login succeeded` devrait apparaître. Vous pouvez maintenant exécut
 ```
 docker pull mycontainerregistry.azurecr.io/aci-helloworld:v1
 ```
+> [!NOTE]
+> Les identités de service géré affectées par le système peuvent être utilisées pour interagir avec des instances Azure Container Registry et App Service peut utiliser des identités de service géré affectées par le système. Toutefois, vous ne pouvez pas les combiner, car App Service ne peut pas utiliser MSI pour communiquer avec Azure Container Registry. La seule méthode consiste à activer l’administrateur sur Azure Container Registry et à utiliser le nom d’utilisateur/mot de passe de l’administrateur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -239,7 +242,7 @@ Dans cet article, vous avez découvert les identités managées avec Azure Conta
 > * autoriser cette identité à accéder à un registre de conteneurs Azure ;
 > * utiliser l’identité managée pour accéder au registre et tirer (pull) une image conteneur.
 
-* En savoir plus sur les [identités managées pour les ressources Azure](/azure/active-directory/managed-identities-azure-resources/).
+* En savoir plus sur les [identités managées pour les ressources Azure](../active-directory/managed-identities-azure-resources/index.yml).
 
 
 <!-- LINKS - external -->

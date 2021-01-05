@@ -16,12 +16,12 @@ ms.date: 05/31/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a08120b98c7a08bca50453df59df313b1645c5c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3365a58a0c667ca55b74a5120cdd7a78ad0abc79
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331269"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997781"
 ---
 # <a name="azure-ad-connect-user-sign-in-options"></a>Options de connexion de l’utilisateur via Azure AD Connect
 Azure Active Directory (Azure AD) Connect permet à vos utilisateurs de se connecter aux ressources cloud et locales à l’aide des mêmes mots de passe. Cet article décrit les concepts clés pour chaque modèle d’identité afin de vous aider à choisir l’identité que vous souhaitez utiliser pour vous connecter à Azure AD.
@@ -47,9 +47,9 @@ Azure AD prend en charge les méthodes d’authentification suivantes :
    * **Authentification directe (PTA)** : cette option est similaire à la synchronisation de hachage de mot de passe, mais elle permet une validation simple du mot de passe à l’aide d’agents de logiciel sur site pour les organisations disposant de stratégies de conformité et de sécurité renforcées.
 * **Authentification fédérée** : quand vous choisissez cette méthode d’authentification, Azure AD délègue le processus d’authentification à un système d’authentification approuvée distinct, par exemple AD FS ou un système de fédération tiers, pour valider la connexion de l’utilisateur. 
 
-Pour la plupart des organisations qui souhaitent juste activer l’authentification utilisateur pour Office 365, les applications SaaS et d’autres ressources basées sur Azure AD, l’option de synchronisation de hachage de mot de passe par défaut est recommandée.
+Pour la plupart des organisations qui souhaitent simplement permettre aux utilisateurs de se connecter à Microsoft 365, aux applications SaaS et à d'autres ressources basées sur Azure AD, nous recommandons l'option de synchronisation de hachage de mot de passe par défaut.
  
-Pour plus d’informations sur le choix d’une méthode d’authentification, consultez [Choisir la méthode d’authentification adaptée à votre solution d’identité hybride Azure Active Directory](../../security/fundamentals/choose-ad-authn.md).
+Pour plus d’informations sur le choix d’une méthode d’authentification, consultez [Choisir la méthode d’authentification adaptée à votre solution d’identité hybride Azure Active Directory](./choose-ad-authn.md).
 
 ### <a name="password-hash-synchronization"></a>Synchronisation de hachage de mot de passe
 Avec la synchronisation de hachage de mot de passe, les hachages des mots de passe utilisateur sont synchronisés de votre annuaire Active Directory local vers Azure AD. Lorsque les mots de passe sont modifiés ou réinitialisés localement, les hachages des nouveaux mots de passe sont immédiatement synchronisés avec Azure AD afin que vos utilisateurs puissent toujours utiliser le même mot de passe pour les ressources cloud comme pour les ressources locales. Les mots de passe ne sont jamais envoyés à Azure AD ni stockés dans Azure AD sous forme de texte clair. Vous pouvez utiliser la synchronisation de hachage de mot de passe avec la réécriture de mot de passe pour permettre la réinitialisation de mot de passe libre-service dans Azure AD.
@@ -139,12 +139,12 @@ La page de connexion AD Azure répertorie le(s) suffixe(s) UPN défini(s) pour A
 Vous pouvez cliquer sur le bouton Actualiser pour extraire à nouveau le dernier état des domaines personnalisés à partir d’Azure AD.
 
 ### <a name="selecting-the-attribute-for-the-user-principal-name-in-azure-ad"></a>Sélection d’un attribut pour le nom d’utilisateur principal dans Azure AD
-L’attribut userPrincipalName est utilisé par les utilisateurs lorsqu’ils se connectent à Azure AD et Office 365. Vous devez vérifier les domaines (également nommés « Suffixe UPN ») utilisés dans Azure AD avant la synchronisation des utilisateurs.
+L'attribut userPrincipalName est utilisé par les utilisateurs lorsqu'ils se connectent à Azure AD et Microsoft 365. Vous devez vérifier les domaines (également nommés « Suffixe UPN ») utilisés dans Azure AD avant la synchronisation des utilisateurs.
 
 Nous vous recommandons fortement de conserver l’userPrincipalName de l’attribut par défaut. Si cet attribut ne peut pas être acheminé ni vérifié, vous pouvez sélectionner un autre attribut (par exemple une adresse de messagerie électronique) comme attribut contenant l’ID de connexion. Il s’agit de l’ID secondaire. La valeur de l’attribut ID secondaire doit suivre la norme RFC 822. Vous pouvez utiliser un ID secondaire avec l’authentification unique par mot de passe et avec l’authentification unique de fédération comme solution de connexion.
 
 > [!NOTE]
-> L’utilisation d’un ID secondaire n’est pas compatible avec toutes les charges de travail Office 365. Pour plus d’informations, consultez [Configuration d’un ID secondaire de connexion](https://technet.microsoft.com/library/dn659436.aspx).
+> L'utilisation d'un ID secondaire n'est pas compatible avec certaines charges de travail Microsoft 365. Pour plus d’informations, consultez [Configuration d’un ID secondaire de connexion](/windows-server/identity/ad-fs/operations/configuring-alternate-login-id).
 >
 >
 
@@ -179,7 +179,7 @@ Après la configuration initiale d’Azure AD Connect dans l’Assistant, vous p
 
 Sur la page suivante, vous devrez fournir les informations d’identification pour Azure AD.
 
-![Se connecter à Azure AD](./media/plan-connect-user-signin/changeusersignin2.png)
+![Capture d’écran montrant où vous devez saisir les informations d’identification pour Azure AD.](./media/plan-connect-user-signin/changeusersignin2.png)
 
 Dans la page **Connexion de l’utilisateur**, sélectionnez la connexion d’utilisateur souhaitée.
 

@@ -1,15 +1,16 @@
 ---
 title: Modifications de point de terminaison de prédiction dans l’API V3
 description: Les API V3 de point de terminaison de prédiction de requête ont évolué. Servez-vous de ce guide pour comprendre comment migrer vers les API de point de terminaison de version 3.
-ms.topic: conceptual
-ms.date: 04/14/2020
-ms.author: diberry
-ms.openlocfilehash: 4b6d28b24ffc6c0a848d1c7a34e863da0606d936
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.service: cognitive-services
+ms.subservice: language-understanding
+ms.topic: how-to
+ms.date: 06/30/2020
+ms.openlocfilehash: 59cf250a9db5a1f6759495c1b5a3c48cb07cde15
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81530383"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95018784"
 ---
 # <a name="prediction-endpoint-changes-for-v3"></a>Modifications de point de terminaison de prédiction pour V3
 
@@ -59,7 +60,7 @@ Si vous savez qu’aucune de vos applications clientes ou intégrations (Bot Fra
 
 ### <a name="bing-spell-check"></a>Vérification orthographique Bing
 
-Cette API n’est pas prise en charge dans le point de terminaison de prédiction V3. Continuez à utiliser le point de terminaison de prédiction d’API V2 pour les corrections orthographiques. Si vous avez besoin de la correction orthographique quand vous utilisez l’API V3, faites en sorte que l’application cliente appelle l’API [Vérification orthographique Bing](https://docs.microsoft.com/azure/cognitive-services/bing-spell-check/overview), puis remplacez le texte par l’orthographe correcte, avant d’envoyer le texte à l’API LUIS.
+Cette API n’est pas prise en charge dans le point de terminaison de prédiction V3. Continuez à utiliser le point de terminaison de prédiction d’API V2 pour les corrections orthographiques. Si vous avez besoin de la correction orthographique quand vous utilisez l’API V3, faites en sorte que l’application cliente appelle l’API [Vérification orthographique Bing](../bing-spell-check/overview.md), puis remplacez le texte par l’orthographe correcte, avant d’envoyer le texte à l’API LUIS.
 
 ## <a name="bot-framework-and-azure-bot-service-client-applications"></a>Applications clientes Bot Framework et Azure Bot Service
 
@@ -73,16 +74,9 @@ L’API de prédiction V2 ne sera pas déconseillée pendant au moins 9 mois apr
 
 ### <a name="changes-by-slot-name-and-version-name"></a>Modifications par nom d’emplacement et nom de version
 
-Le format de l’appel HTTP de point de terminaison V3 a évolué.
+Le [format de l’appel HTTP de point de terminaison](developer-reference-resource.md#rest-endpoints) V3 a évolué.
 
 Si vous souhaitez interroger par version, vous devez d’abord [publier via l’API](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c3b) avec `"directVersionPublish":true`. Interrogez le point de terminaison qui fait référence à l’ID de version plutôt qu’au nom d’emplacement.
-
-|VERSION DE L’API DE PRÉDICTION|MÉTHODE|URL|
-|--|--|--|
-|V3|GET|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/slots/<b>{SLOT-NAME}</b>/predict?query=<b>{QUERY}</b>|
-|V3|POST|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/slots/<b>{SLOT-NAME}</b>/predict|
-|V2|GET|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/versions/<b>{VERSION-ID}</b>/predict?query=<b>{QUERY}</b>|
-|V2|POST|https://<b>{REGION}</b>.api.cognitive.microsoft.com/luis/<b>prediction</b>/<b>v3.0</b>/apps/<b>{APP-ID}</b>/versions/<b>{VERSION-ID}</b>/predict|
 
 |Valeurs valides pour `SLOT-NAME`|
 |--|
@@ -93,17 +87,7 @@ Si vous souhaitez interroger par version, vous devez d’abord [publier via l’
 
 ### <a name="query-string-changes"></a>Modifications de la chaîne de requête
 
-L’API V3 possède de différents paramètres de chaîne de requête.
-
-|Nom de paramètre|Type|Version|Default|Objectif|
-|--|--|--|--|--|
-|`log`|boolean|V2 et V3|false|Stocker la requête dans un fichier journal. La valeur par défaut est false.|
-|`query`|string|V3 uniquement|Pas de valeur par défaut. Obligatoire dans la demande GET.|**Dans V2**, l’énoncé à prédire se trouve dans le paramètre `q`. <br><br>**Dans V3**, la fonctionnalité est transmise dans le paramètre `query`.|
-|`show-all-intents`|boolean|V3 uniquement|false|Retourner toutes les intentions avec le score correspondant dans l’objet **prediction.intents**. Les intentions sont retournées en tant qu’objets dans un objet `intents` parent. Cela permet un accès programmatique sans qu’il soit nécessaire de rechercher l’intention dans un tableau : `prediction.intents.give`. Dans V2, elles étaient retournées dans un tableau. |
-|`verbose`|boolean|V2 et V3|false|**Dans V2**, quand la valeur est true, cela signifie que toutes les intentions prédites ont été retournées. Si vous avez besoin de toutes les intentions prédites, utilisez le paramètre `show-all-intents` de V3.<br><br>**Dans V3**, ce paramètre fournit uniquement les détails des métadonnées d’entité de la prédiction d’entité.  |
-|`timezoneOffset`|string|V2|-|Fuseau horaire appliqué aux entités datetimeV2.|
-|`datetimeReference`|string|V3|-|[Fuseau horaire](luis-concept-data-alteration.md#change-time-zone-of-prebuilt-datetimev2-entity) appliqué aux entités datetimeV2. Remplace `timezoneOffset` dans V2.|
-
+[!INCLUDE [V3 query params](./includes/v3-prediction-query-params.md)]
 
 ### <a name="v3-post-body"></a>Corps de POST V3
 
@@ -290,4 +274,4 @@ L’API V2 ne sera pas déconseillée pendant au moins 9 mois après la préver
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez la documentation de l’API V3 pour mettre à jour les appels REST existants vers les API de [point de terminaison](https://aka.ms/luis-api-v3) LUIS.
+Consultez la documentation de l’API V3 pour mettre à jour les appels REST existants vers les API de [point de terminaison](https://westcentralus.dev.cognitive.microsoft.com/docs/services/luis-endpoint-api-v3-0/operations/5cb0a9459a1fe8fa44c28dd8) LUIS.

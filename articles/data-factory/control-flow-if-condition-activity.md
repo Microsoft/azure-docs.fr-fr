@@ -3,25 +3,25 @@ title: Activité IfCondition dans Azure Data Factory | Microsoft Docs
 description: L’activité IfCondition vous permet de contrôler le flux de traitement en fonction d’une condition.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 9b491c4f0cc99395c44d989bf19fa2a7b03da696
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 150efe87565b1949dc1ed29b03af69c26f84a896
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417166"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499456"
 ---
 # <a name="if-condition-activity-in-azure-data-factory"></a>Activité IfCondition dans Azure Data Factory | Microsoft Docs
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
-L’activité IfCondition fournit les mêmes fonctionnalités qu’une instruction «if » dans les langages de programmation. La condition évalue un ensemble d’activités si l’expression retourne `true` et un autre ensemble d’activités si elle retourne `false`. 
+L’activité IfCondition fournit les mêmes fonctionnalités qu’une instruction «if » dans les langages de programmation. La condition évalue un ensemble d'activités si l'expression renvoie `true` et un autre ensemble d'activités si elle renvoie `false`. 
 
 ## <a name="syntax"></a>Syntaxe
 
@@ -246,7 +246,7 @@ Le pipeline définit **folderPath** sur la valeur de paramètre **outputPath1** 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Ces commandes supposent que vous avez enregistré les fichiers JSON dans le dossier C:\ADF. 
+Ces commandes supposent que vous avez enregistré les fichiers JSON dans le dossier : C:\ADF. 
 
 ```powershell
 Connect-AzAccount

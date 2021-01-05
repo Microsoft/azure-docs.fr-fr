@@ -1,6 +1,6 @@
 ---
-title: Démarrage rapide du bureau Windows pour la plateforme d’identités Microsoft
-description: Découvrez comment une application .NET du bureau Windows (XAML) peut obtenir un jeton d’accès et appeler une API protégée par un point de terminaison de la plateforme d’identités Windows.
+title: 'Démarrage rapide : Connecter des utilisateurs et appeler Microsoft Graph dans une application de bureau UWP | Azure'
+description: Dans ce guide de démarrage rapide, découvrez comment une application .NET du bureau Windows (XAML) peut obtenir un jeton d’accès et appeler une API protégée par un point de terminaison de la plateforme d’identités Microsoft.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -11,18 +11,24 @@ ms.workload: identity
 ms.date: 12/12/2019
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: e3674f7686679c27ad732fcaa92620703b91b5fc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: bc7c6022f8ed95a69dcb877252fd8c5eff49ce28
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82112607"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97030482"
 ---
 # <a name="quickstart-acquire-a-token-and-call-microsoft-graph-api-from-a-windows-desktop-app"></a>Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application de bureau Windows
 
-Dans ce démarrage rapide, vous allez apprendre comment concevoir une application de bureau Windows .NET (WPF) capable de connecter des comptes personnels, professionnels et scolaires, d’obtenir un jeton d’accès et d’appeler l’API Microsoft Graph. (Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour une illustration.)
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment une application .NET du bureau Windows (WPF) peut connecter des utilisateurs et obtenir un jeton d’accès pour appeler l’API Microsoft Graph. 
+
+Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour obtenir une illustration.
 
 > [!div renderon="docs"]
+> ## <a name="prerequisites"></a>Prérequis
+>
+> * [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) avec la charge de travail [plateforme Windows universelle de développement](/windows/uwp/get-started/get-set-up) installée
+>
 > ## <a name="register-and-download-your-quickstart-app"></a>Inscrire et télécharger votre application de démarrage rapide
 > Vous disposez de deux options pour démarrer votre application de démarrage rapide :
 > * [Express] [Option 1 : Inscrire et configurer automatiquement votre application, puis télécharger votre exemple de code](#option-1-register-and-auto-configure-your-app-and-then-download-your-code-sample)
@@ -39,16 +45,17 @@ Dans ce démarrage rapide, vous allez apprendre comment concevoir une applicatio
 > #### <a name="step-1-register-your-application"></a>Étape 1 : Inscrivez votre application
 > Pour inscrire votre application et ajouter manuellement les informations d’inscription de l’application à votre solution, procédez comme suit :
 >
-> 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-> 1. Si votre compte vous propose un accès à plusieurs locataires, sélectionnez votre compte en haut à droite et définissez votre session de portail sur le locataire Azure AD souhaité.
-> 1. Accédez au panneau [Inscriptions d’applications](https://aka.ms/MobileAppReg) pour Azure Active Directory sur le portail Azure.
-> 1. Sélectionnez **Nouvelle inscription**.
->      - Dans la section **Nom**, saisissez un nom d’application cohérent qui s’affichera pour les utilisateurs de l’application, par exemple `Win-App-calling-MsGraph`.
->      - Dans la section **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft (par exemple, Skype, Xbox, Outlook.com)** .
->      - Sélectionnez **Inscrire** pour créer l’application.
-> 1. Dans la liste des pages de l’application, sélectionnez **Authentification**.
-> 1. Dans la section **URI de redirection** | **URI de redirection suggérés pour les clients publics (mobile, bureau)** , utilisez **https://login.microsoftonline.com/common/oauth2/nativeclient** .
-> 1. Sélectionnez **Enregistrer**.
+> 1. Connectez-vous au [portail Azure](https://portal.azure.com).
+> 1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+> 1. Recherchez et sélectionnez **Azure Active Directory**.
+> 1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+> 1. Entrez un **nom** pour votre application (par exemple, `Win-App-calling-MsGraph`). Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
+> 1. Dans la section **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft (par exemple, Skype, Xbox, Outlook.com)** .
+> 1. Sélectionnez **Inscrire** pour créer l’application.
+> 1. Sous **Gérer**, sélectionnez **Authentification**.
+> 1. Sélectionnez **Ajouter une plateforme** > **Applications de bureau et mobiles**.
+> 1. Dans la section **URI de redirection**, sélectionnez `https://login.microsoftonline.com/common/oauth2/nativeclient`.
+> 1. Sélectionnez **Configurer**.
 
 > [!div class="sxs-lookup" renderon="portal"]
 > #### <a name="step-1-configure-your-application-in-azure-portal"></a>Étape 1 : Configurer votre application dans le portail Azure
@@ -66,7 +73,7 @@ Dans ce démarrage rapide, vous allez apprendre comment concevoir une applicatio
 
 > [!div class="sxs-lookup" renderon="portal"]
 > Exécutez le projet à l’aide de Visual Studio 2019.
-> [!div renderon="portal" id="autoupdate" class="nextstepaction"]
+> [!div renderon="portal" id="autoupdate" class="sxs-lookup nextstepaction"]
 > [Téléchargez l’exemple de code](https://github.com/Azure-Samples/active-directory-dotnet-desktop-msgraph-v2/archive/msal3x.zip).
 
 > [!div class="sxs-lookup" renderon="portal"]
@@ -128,7 +135,7 @@ PublicClientApplicationBuilder.Create(ClientId)
                 .Build();
 ```
 
-> |Où : ||
+> |Où : | Description |
 > |---------|---------|
 > | `ClientId` | Est l’**ID d’application (client)** de l’application inscrite dans le portail Azure. Vous pouvez retrouver cette valeur dans la page **Vue d’ensemble** de l’application dans le portail Azure. |
 
@@ -150,7 +157,7 @@ authResult = await App.PublicClientApp.AcquireTokenInteractive(_scopes)
                                       .ExecuteAsync();
 ```
 
-> |Où :||
+> |Où :| Description |
 > |---------|---------|
 > | `_scopes` | Contient les étendues demandées, comme `{ "user.read" }` pour Microsoft Graph ou `{ "api://<Application ID>/access_as_user" }` pour les API web personnalisées. |
 
@@ -165,7 +172,7 @@ authResult = await App.PublicClientApp.AcquireTokenSilent(scopes, firstAccount)
                                       .ExecuteAsync();
 ```
 
-> |Où : ||
+> |Où : | Description |
 > |---------|---------|
 > | `scopes` | Contient les étendues demandées, comme `{ "user.read" }` pour Microsoft Graph ou `{ "api://<Application ID>/access_as_user" }` pour les API web personnalisées. |
 > | `firstAccount` | Spécifie le premier utilisateur dans le cache (MSAL prend en charge plusieurs utilisateurs dans une seule application). |
@@ -177,4 +184,4 @@ authResult = await App.PublicClientApp.AcquireTokenSilent(scopes, firstAccount)
 Essayez le didacticiel de bureau Windows pour apprendre à créer, étape par étape, des applications et des fonctionnalités, y compris une explication complète de ce démarrage rapide.
 
 > [!div class="nextstepaction"]
-> [Didacticiel pour appeler l’API Graph](https://docs.microsoft.com/azure/active-directory/develop/guidedsetups/active-directory-windesktop)
+> [Didacticiel pour appeler l’API Graph](./tutorial-v2-windows-desktop.md)

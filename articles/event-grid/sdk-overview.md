@@ -1,19 +1,14 @@
 ---
 title: Kits SDK Azure Event Grid
 description: Décrit les Kits de développement logiciel (SDK) d’Azure Event Grid. Ils assurent la gestion, la publication et la consommation.
-services: event-grid
-author: spelluru
-manager: timlt
-ms.service: event-grid
 ms.topic: reference
-ms.date: 01/19/2019
-ms.author: spelluru
-ms.openlocfilehash: 7f05665f4bcc5449c1a81fa24582b333b0a944e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2019
+ms.openlocfilehash: 5e93448ef703be88583cd59ae5eee9d1993c4054
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60822842"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91322527"
 ---
 # <a name="event-grid-sdks-for-management-and-publishing"></a>Kits SDK Event Grid de gestion et de publication
 
@@ -34,12 +29,15 @@ Les Kits SDK de gestion permettent de créer, de mettre à jour et de supprimer 
 
 Les kits SDK de plan de données permettent de publier des événements sur des rubriques tout en gérant l’authentification, la formation de l’événement et la publication asynchrone sur le point de terminaison spécifié. Ils vous permettent également de consommer des événements internes. Voici les Kits SDK actuellement disponibles :
 
-* [.NET](https://www.nuget.org/packages/Microsoft.Azure.EventGrid)
-* [Go](https://github.com/Azure/azure-sdk-for-go)
-* [Java](https://mvnrepository.com/artifact/com.microsoft.azure/azure-eventgrid)
-* [Nœud](https://www.npmjs.com/package/azure-eventgrid)
-* [Python](https://pypi.python.org/pypi/azure-eventgrid)
-* [Ruby](https://rubygems.org/gems/azure_event_grid)
+| Langage de programmation | Kit SDK | 
+| -------------------- | ---------- | ---------- | 
+| .NET | Kit de développement logiciel (SDK) stable : [Microsoft.Azure.EventGrid](https://www.nuget.org/packages/Microsoft.Azure.EventGrid)<p>Kit de développement logiciel (SDK) en préversion : [Azure.Messaging.EventGrid](https://www.nuget.org/packages/Azure.Messaging.EventGrid/) |
+| Java | Kit de développement logiciel (SDK) stable : [azure-eventgrid](https://mvnrepository.com/artifact/com.microsoft.azure/azure-eventgrid)<p>Kit de développement logiciel (SDK) en préversion : [azure-messaging-eventgrid](https://search.maven.org/artifact/com.azure/azure-messaging-eventgrid/)</p> |  
+| Python | [azure-eventgrid](https://pypi.org/project/azure-eventgrid/#history) (voir les versions stables et préversions les plus récentes dans la page **Historique des versions**) |
+| JavaScript | [@azure/eventgrid](https://www.npmjs.com/package/@azure/eventgrid/) (basculer sur l’onglet **Versions** pour voir les packages de version stable et bêta les plus récents). | 
+| Go | [Kit de développement logiciel (SDK) Azure pour Go](https://github.com/Azure/azure-sdk-for-go) | | 
+| Ruby | [azure_event_grid](https://rubygems.org/gems/azure_event_grid) | | 
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

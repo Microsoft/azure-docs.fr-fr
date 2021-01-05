@@ -2,35 +2,34 @@
 title: Guide pratique pour interroger des journaux à partir d’Azure Monitor pour conteneurs | Microsoft Docs
 description: Azure Monitor pour conteneurs collecte des métriques et des données de journal. Cet article décrit les enregistrements correspondants et inclut des exemples de requêtes.
 ms.topic: conceptual
-ms.date: 03/26/2020
-ms.openlocfilehash: ff7cbff708b794847d8be69ca8f829e622d7c7ab
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/01/2020
+ms.openlocfilehash: 9bfa63a49da33289b8c811007f210e6546579d9d
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80333479"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97033559"
 ---
 # <a name="how-to-query-logs-from-azure-monitor-for-containers"></a>Guide pratique pour interroger des journaux à partir d’Azure Monitor pour conteneurs
 
-Azure Monitor pour conteneurs collecte des métriques de performances, les données d’inventaire et des informations concernant l’état d’intégrité à partir d’hôtes de conteneur et de conteneurs, puis les transfère à l’espace de travail Log Analytics dans Azure Monitor. Les données sont collectées toutes les trois minutes. Ces données sont disponibles pour la [requête](../../azure-monitor/log-query/log-query-overview.md) dans Azure Monitor. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
+Azure Monitor pour conteneurs collecte des métriques de performances, des données d’inventaire et des informations sur l’état d’intégrité à partir d’hôtes de conteneur et de conteneurs. Les données sont collectées toutes les trois minutes et transférées à l’espace de travail Log Analytics dans Azure Monitor. Ces données sont disponibles pour la [requête](../log-query/log-query-overview.md) dans Azure Monitor. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
 
 ## <a name="container-records"></a>Enregistrements de conteneur
 
-Le tableau suivant présente des exemples d’enregistrements collectés par Azure Monitor pour les conteneurs et les types de données qui s’affichent dans les résultats de recherche dans les journaux :
+Le tableau suivant présente en détail les enregistrements collectés par Azure Monitor pour conteneurs. Pour obtenir la liste des descriptions de colonne, consultez la référence pour les tables [ContainerInventory](/azure/azure-monitor/reference/tables/containerinventory) et [ContainerLog](/azure/azure-monitor/reference/tables/containerlog).
 
-| Type de données | Type de données dans Recherche de journaux | Champs |
-| --- | --- | --- |
-| Performances des hôtes et des conteneurs | `Perf` | Computer, ObjectName, CounterName &#40;%Processor Time, Disk Reads MB, Disk Writes MB, Memory Usage MB, Network Receive Bytes, Network Send Bytes, Processor Usage sec, Network&#41;, CounterValue, TimeGenerated, CounterPath, SourceSystem |
-| Inventaire de conteneur | `ContainerInventory` | TimeGenerated, Computer, container name, ContainerHostname, Image, ImageTag, ContainerState, ExitCode, EnvironmentVar, Command, CreatedTime, StartedTime, FinishedTime, SourceSystem, ContainerID, ImageID |
-| Journal de conteneur | `ContainerLog` | TimeGenerated, Computer, image ID, container name, LogEntrySource, LogEntry, SourceSystem, ContainerID |
-| Inventaire du nœud de conteneur | `ContainerNodeInventory`| TimeGenerated, Computer, ClassName_s, DockerVersion_s, OperatingSystem_s, Volume_s, Network_s, NodeRole_s, OrchestratorType_s, InstanceID_g, SourceSystem|
-| Inventaire des pods dans un cluster Kubernetes | `KubePodInventory` | TimeGenerated, Computer, ClusterId, ContainerCreationTimeStamp, PodUid, PodCreationTimeStamp, ContainerRestartCount, PodRestartCount, PodStartTime, ContainerStartTime, ServiceName, ControllerKind, ControllerName, ContainerStatus, ContainerStatusReason, ContainerID, ContainerName, Name, PodLabel, Namespace, PodStatus, ClusterName, PodIp, SourceSystem |
-| Inventaire de la partie des nœuds d’un cluster Kubernetes | `KubeNodeInventory` | TimeGenerated, Computer, ClusterName, ClusterId, LastTransitionTimeReady, Labels, Status, KubeletVersion, KubeProxyVersion, CreationTimeStamp, SourceSystem | 
-| Événements Kubernetes | `KubeEvents` | TimeGenerated, Computer, ClusterId_s, FirstSeen_t, LastSeen_t, Count_d, ObjectKind_s, Namespace_s, Name_s, Reason_s, Type_s, TimeGenerated_s, SourceComponent_s, ClusterName_s, Message,  SourceSystem | 
-| Services dans le cluster Kubernetes | `KubeServices` | TimeGenerated, ServiceName_s, Namespace_s, SelectorLabels_s, ClusterId_s, ClusterName_s, ClusterIP_s, ServiceType_s, SourceSystem | 
-| Métriques de performances de la partie des nœuds du cluster Kubernetes | Perf &#124; where ObjectName == "K8SNode" | Computer, ObjectName, CounterName &#40;cpuAllocatableBytes, memoryAllocatableBytes, cpuCapacityNanoCores, memoryCapacityBytes, memoryRssBytes, cpuUsageNanoCores, memoryWorkingsetBytes, restartTimeEpoch&#41;, CounterValue, TimeGenerated, CounterPath, SourceSystem | 
-| Métriques de performances de la partie des conteneurs du cluster Kubernetes | Perf &#124; where ObjectName == "K8SContainer" | CounterName &#40; cpuRequestNanoCores, memoryRequestBytes, cpuLimitNanoCores, memoryWorkingSetBytes, restartTimeEpoch, cpuUsageNanoCores, memoryRssBytes&#41;, CounterValue, TimeGenerated, CounterPath, SourceSystem | 
-| Métriques personnalisées |`InsightsMetrics` | Computer, Name, Namespace, Origin, SourceSystem, Tags<sup>1</sup>, TimeGenerated, Type, Va, _ResourceId | 
+| Données | Source de données | Type de données | Champs |
+|------|-------------|-----------|--------|
+| Inventaire de conteneur | Kubelet | `ContainerInventory` | TimeGenerated, Computer, Name, ContainerHostname, Image, ImageTag, ContainerState, ExitCode, EnvironmentVar, Command, CreatedTime, StartedTime, FinishedTime, SourceSystem, ContainerID, ImageID |
+| Journal de conteneur | Docker | `ContainerLog` | TimeGenerated, Computer, image ID, Name, LogEntrySource, LogEntry, SourceSystem, ContainerID |
+| Inventaire du nœud de conteneur | API Kube | `ContainerNodeInventory`| TimeGenerated, Computer, ClassName_s, DockerVersion_s, OperatingSystem_s, Volume_s, Network_s, NodeRole_s, OrchestratorType_s, InstanceID_g, SourceSystem|
+| Inventaire des pods dans un cluster Kubernetes | API Kube | `KubePodInventory` | TimeGenerated, Computer, ClusterId, ContainerCreationTimeStamp, PodUid, PodCreationTimeStamp, ContainerRestartCount, PodRestartCount, PodStartTime, ContainerStartTime, ServiceName, ControllerKind, ControllerName, ContainerStatus, ContainerStatusReason, ContainerID, ContainerName, Name, PodLabel, Namespace, PodStatus, ClusterName, PodIp, SourceSystem |
+| Inventaire de la partie des nœuds d’un cluster Kubernetes | API Kube | `KubeNodeInventory` | TimeGenerated, Computer, ClusterName, ClusterId, LastTransitionTimeReady, Labels, Status, KubeletVersion, KubeProxyVersion, CreationTimeStamp, SourceSystem | 
+| Événements Kubernetes | API Kube | `KubeEvents` | TimeGenerated, Computer, ClusterId_s, FirstSeen_t, LastSeen_t, Count_d, ObjectKind_s, Namespace_s, Name_s, Reason_s, Type_s, TimeGenerated_s, SourceComponent_s, ClusterName_s, Message,  SourceSystem | 
+| Services dans le cluster Kubernetes | API Kube | `KubeServices` | TimeGenerated, ServiceName_s, Namespace_s, SelectorLabels_s, ClusterId_s, ClusterName_s, ClusterIP_s, ServiceType_s, SourceSystem | 
+| Métriques de performances de la partie des nœuds du cluster Kubernetes | Les métriques d’utilisation proviennent de cAdvisor et les limites de l’API Kube. | Perf &#124; where ObjectName == "K8SNode" | Computer, ObjectName, CounterName &#40;cpuAllocatableNanoCores, memoryAllocatableBytes, cpuCapacityNanoCores, memoryCapacityBytes, memoryRssBytes, cpuUsageNanoCores, memoryWorkingsetBytes, restartTimeEpoch&#41;, CounterValue, TimeGenerated, CounterPath, SourceSystem | 
+| Métriques de performances de la partie des conteneurs du cluster Kubernetes | Les métriques d’utilisation proviennent de cAdvisor et les limites de l’API Kube. | Perf &#124; where ObjectName == "K8SContainer" | CounterName &#40; cpuRequestNanoCores, memoryRequestBytes, cpuLimitNanoCores, memoryWorkingSetBytes, restartTimeEpoch, cpuUsageNanoCores, memoryRssBytes&#41;, CounterValue, TimeGenerated, CounterPath, SourceSystem | 
+| Métriques personnalisées ||`InsightsMetrics` | Computer, Name, Namespace, Origin, SourceSystem, Tags<sup>1</sup>, TimeGenerated, Type, Va, _ResourceId | 
 
 <sup>1</sup> La propriété *Tags* représente [plusieurs dimensions](../platform/data-platform-metrics.md#multi-dimensional-metrics) pour la métrique correspondante. Pour plus d’informations sur les métriques collectées et stockées dans la table `InsightsMetrics`, ainsi qu’une description des propriétés des enregistrements, consultez [InsightsMetrics Overview](https://github.com/microsoft/OMS-docker/blob/vishwa/june19agentrel/docs/InsightsMetrics.md).
 
@@ -105,10 +104,10 @@ Pour examiner les erreurs de récupération ou de configuration, l’exemple de 
 KubeMonAgentEvents | where Level != "Info" 
 ```
 
-La sortie indiquera des résultats similaires à ce qui suit :
+Les résultats obtenus sont similaires à ceux de l’exemple suivant :
 
 ![Enregistrer les résultats de requête des événements d’information à partir de l’agent](./media/container-insights-log-search/log-query-example-kubeagent-events.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Azure Monitor pour conteneurs n’inclut pas d’un ensemble prédéfini d’alertes. Pour savoir comment créer les alertes recommandées pour une utilisation élevée du processeur et de la mémoire, consultez [Créer des alertes de performances avec Azure Monitor pour conteneurs](container-insights-alerts.md). 
+Azure Monitor pour conteneurs n’inclut pas d’un ensemble prédéfini d’alertes. Pour savoir comment créer les alertes recommandées pour une utilisation élevée du processeur et de la mémoire, consultez [Créer des alertes de performances avec Azure Monitor pour conteneurs](./container-insights-log-alerts.md).

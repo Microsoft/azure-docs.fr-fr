@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: troubleshooting
 ms.workload: identity
-ms.date: 05/16/2019
+ms.date: 05/18/2020
 ms.author: nacanuma
 ms.reviewer: saeeda
 ms.custom: aaddev
-ms.openlocfilehash: 5ae2dee68ec0da8e8a00d4f01583461462bc196c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a471504b88791b5bfb6ce6cc7c81d60bfbe5028
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76696093"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83772078"
 ---
 # <a name="known-issues-on-internet-explorer-and-microsoft-edge-browsers-msaljs"></a>Problèmes connus sur les navigateurs Internet Explorer et Microsoft Edge (MSAL.js)
 
@@ -63,7 +63,7 @@ Notez que cela ne résout pas le problème de navigation InPrivate, car tant le 
 
 ## <a name="issues-due-to-popup-blockers"></a>Problèmes dus à des bloqueurs de fenêtres contextuelles
 
-Parfois, des fenêtres contextuelles sont bloquées dans IE ou Microsoft Edge, par exemple quand une deuxième fenêtre contextuelle s’affiche lors de l’authentification multifacteur. Une alerte s’affiche dans le navigateur, qui vous permet de décider si la fenêtre contextuelle doit s’afficher une seule fois ou toujours. Si vous choisissez d’autoriser l’affichage de la fenêtre, le navigateur l’ouvre automatiquement et retourne un descripteur `null` approprié. Par conséquent, la bibliothèque ne contient pas de descripteur pour la fenêtre contextuelle, et il n’existe aucun moyen de fermer celle-ci. Ce problème ne se produit pas dans Chrome quand il vous invite à autoriser les fenêtres contextuelles, parce qu’il n’ouvre pas automatiquement de fenêtre contextuelle.
+Parfois, des fenêtres contextuelles sont bloquées dans IE ou Microsoft Edge, par exemple quand une deuxième fenêtre contextuelle s’affiche lors de l’[authentification multifacteur](../authentication/concept-mfa-howitworks.md). Une alerte s’affiche dans le navigateur, qui vous permet de décider si la fenêtre contextuelle doit s’afficher une seule fois ou toujours. Si vous choisissez d’autoriser l’affichage de la fenêtre, le navigateur l’ouvre automatiquement et retourne un descripteur `null` approprié. Par conséquent, la bibliothèque ne contient pas de descripteur pour la fenêtre contextuelle, et il n’existe aucun moyen de fermer celle-ci. Ce problème ne se produit pas dans Chrome quand il vous invite à autoriser les fenêtres contextuelles, parce qu’il n’ouvre pas automatiquement de fenêtre contextuelle.
 
 Pour **éviter ce problème**, les développeurs doivent autoriser les fenêtres contextuelles dans IE et Microsoft Edge avant de commencer à utiliser leur application.
 

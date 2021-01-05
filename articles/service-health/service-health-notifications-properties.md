@@ -3,14 +3,14 @@ title: Qu’est-ce qu’une notification Azure Service Health ?
 description: Les notifications Service Health vous permettent de voir les messages relatifs à l’intégrité du service publiés par Microsoft Azure.
 ms.topic: conceptual
 ms.date: 4/12/2018
-ms.openlocfilehash: e40538ac98bbc7b79311d4fb0da7568d56a84e18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4f2b4a0779d775ed5be5bfa28831cccc68c33caf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77653966"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86529010"
 ---
-# <a name="view-service-health-notifications-by-using-the-azure-portal"></a>Afficher les notifications Service Health dans le portail Azure
+# <a name="use-the-azure-portal-to-view-service-health-notifications"></a>Utiliser le portail Azure pour afficher les notifications d’intégrité du service
 
 Les notifications Service Health sont publiées par Azure et contiennent des informations sur les ressources de votre abonnement. Ces notifications constituent une sous-classe des événements du journal d’activité, et figurent également dans le journal d’activité. Selon leur classe, les notifications Service Health peuvent être fournies à titre d’information ou nécessiter une action de votre part.
 

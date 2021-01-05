@@ -4,8 +4,6 @@
   items:
     - name: À propos de Web Apps
       href: overview.md
-    - name: Découvrez App Service sur Linux
-      href: containers/app-service-linux-intro.md
     - name: À propos d’App Service Environments
       href: environment/intro.md
     - name: Comparer les options d’hébergement
@@ -13,34 +11,67 @@
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: Créer une application .NET Core
-      href: app-service-web-get-started-dotnet.md
-    - name: Créer une application .NET Framework
-      href: app-service-web-get-started-dotnet-framework.md
-    - name: Créer une application Node.js
-      href: app-service-web-get-started-nodejs.md
-    - name: Créer une application PHP
-      href: app-service-web-get-started-php.md
-    - name: Créer une application Java
-      href: app-service-web-get-started-java.md
-    - name: Créer un site HTML statique
-      href: app-service-web-get-started-html.md
-    - name: Exécuter un conteneur Windows
-      href: app-service-web-get-started-windows-container.md
+    - name: ASP.NET Core
+      href: quickstart-dotnetcore.md
+    - name: ASP.NET
+      href: quickstart-dotnet-framework.md
+    - name: Node.js
+      href: quickstart-nodejs.md
+    - name: PHP
+      href: quickstart-php.md
+    - name: Java
+      href: quickstart-java.md
+    - name: Python
+      href: quickstart-python.md
+    - name: Ruby
+      href: quickstart-ruby.md
+    - name: Site HTML statique
+      href: quickstart-html.md
+    - name: Modèle ARM
+      displayName: Resource Manager
+      href: quickstart-arm-template.md
+    - name: Conteneur personnalisé
+      href: quickstart-custom-container.md
+    - name: Application pour plusieurs conteneurs
+      href: quickstart-multi-container.md
 - name: Tutoriels
   items:
+    - name: Sécuriser les accès d’application au stockage et à Microsoft Graph
+      items:
+        - name: Vue d’ensemble
+          href: scenario-secure-app-overview.md
+        - name: Configurer l’authentification App Service
+          href: scenario-secure-app-authentication-app-service.md
+        - name: Sécuriser les accès d’application au stockage
+          href: scenario-secure-app-access-storage.md
+        - name: Sécuriser les accès d’application à Microsoft Graph en tant qu’utilisateur
+          href: scenario-secure-app-access-microsoft-graph-as-user.md
+        - name: Sécuriser les accès d’application à Microsoft Graph en tant qu’application
+          href: scenario-secure-app-access-microsoft-graph-as-app.md
+        - name: Nettoyer les ressources
+          href: scenario-secure-app-clean-up-resources.md
     - name: Application avec base de données
       items:
-        - name: .NET Core avec SQL DB
-          href: app-service-web-tutorial-dotnetcore-sqldb.md
-        - name: .NET Framework avec SQL DB
+        - name: ASP.NET Core avec SQL DB
+          href: tutorial-dotnetcore-sqldb-app.md
+        - name: ASP.NET avec SQL DB
           href: app-service-web-tutorial-dotnet-sqldatabase.md
         - name: PHP avec MySQL
-          href: app-service-web-tutorial-php-mysql.md
+          href: tutorial-php-mysql-app.md
         - name: Node.js avec MongoDB
-          href: app-service-web-tutorial-nodejs-mongodb-app.md
-    - name: Personnaliser Windows (conteneur)
-      href: app-service-web-tutorial-windows-containers-custom-fonts.md
+          href: tutorial-nodejs-mongodb-app.md
+        - name: Ruby avec Postgres
+          href: tutorial-ruby-postgres-app.md
+        - name: Python avec Postgres
+          href: tutorial-python-postgresql-app.md
+        - name: Java avec Spring Data
+          href: tutorial-java-spring-cosmosdb.md
+    - name: Conteneurs personnalisés
+      items:
+        - name: Déployer depuis un ACR
+          href: tutorial-custom-container.md
+        - name: Application pour plusieurs conteneurs
+          href: tutorial-multi-container-app.md
     - name: Accéder à la base de données SQL en toute sécurité
       href: app-service-web-tutorial-connect-msi.md
     - name: Héberger des API RESTful
@@ -52,9 +83,11 @@
     - name: Ajouter un CDN
       href: ../cdn/cdn-add-to-web-app.md?toc=%2fazure%2fcdn%2ftoc.json
     - name: Authentification des utilisateurs
-      href: app-service-web-tutorial-auth-aad.md
+      href: tutorial-auth-aad.md
     - name: Envoyer un e-mail ou un tweet
       href: tutorial-send-email.md
+    - name: Résoudre les erreurs
+      href: tutorial-troubleshoot-monitor.md
 - name: Exemples
   items:
     - name: Azure CLI
@@ -63,9 +96,8 @@
       href: samples-powershell.md
     - name: Modèles Resource Manager
       href: samples-resource-manager-templates.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
+    - name: Terraform
+      href: samples-terraform.md
 - name: Concepts
   items:
     - name: Plans App Service
@@ -82,8 +114,11 @@
           href: overview-authentication-authorization.md
         - name: Système d’exploitation et mise à jour corrective du runtime
           href: overview-patch-os-runtime.md
-        - name: Contrôles de sécurité intégrés
-          href: app-service-security-controls.md
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
         - name: Présentation de la sécurité
           href: overview-security.md
     - name: Fonctionnalités réseau
@@ -112,10 +147,22 @@
       items:
         - name: Configurer les paramètres courants
           href: configure-common.md
+        - name: Configurer ASP.NET
+          href: configure-language-dotnet-framework.md
+        - name: Configurer ASP.NET Core
+          href: configure-language-dotnetcore.md
+        - name: Configurer Node.js
+          href: configure-language-nodejs.md
         - name: Configurer PHP
-          href: web-sites-php-configure.md
+          href: configure-language-php.md
+        - name: Configurer Python
+          href: configure-language-python.md
         - name: Configurer Java
           href: configure-language-java.md
+        - name: Configurer Ruby
+          href: configure-language-ruby.md
+        - name: Configurer un conteneur personnalisé
+          href: configure-custom-container.md
         - name: Se connecter à des ressources locales
           href: web-sites-integrate-with-vnet.md
         - name: Configurer Stockage Azure (conteneur)
@@ -134,10 +181,14 @@
               href: deploy-content-sync.md
             - name: Déployer en continu
               href: deploy-continuous-deployment.md
+            - name: CI/CD des conteneurs personnalisés
+              href: deploy-ci-cd-custom-container.md
             - name: Déployer à partir de Git local
               href: deploy-local-git.md
-            - name: Déployer avec GitHub Actions
+            - name: GitHub Actions
               href: deploy-github-actions.md
+            - name: GitHub Actions pour les conteneurs
+              href: deploy-container-github-action.md
             - name: Déployer avec un modèle
               href: deploy-complex-application-predictably.md
         - name: Définir les informations d’identification de déploiement
@@ -170,6 +221,10 @@
               href: configure-authentication-provider-microsoft.md
             - name: S’authentifier avec Twitter
               href: configure-authentication-provider-twitter.md
+            - name: S’authentifier auprès d’un fournisseur OpenID Connect (préversion)
+              href: configure-authentication-provider-openid-connect.md
+            - name: S’authentifier en utilisant Se connecter avec Apple (préversion)
+              href: configure-authentication-provider-apple.md
         - name: Authentification avancée
           href: app-service-authentication-how-to.md
         - name: Restriction de l’accès
@@ -188,7 +243,7 @@
       items:
         - name: Faire monter en puissance la capacité du serveur
           href: manage-scale-up.md
-        - name: Configurer le niveau PremiumV2
+        - name: Configurer le niveau PremiumV3
           href: app-service-configure-premium-tier.md
         - name: Effectuer un scale-out de plusieurs instances
           href: ../azure-monitor/platform/autoscale-get-started.md?toc=%2fazure%2fapp-service%2ftoc.json
@@ -202,6 +257,8 @@
           href: troubleshoot-diagnostic-logs.md
         - name: Obtenir des événements de ressource
           href: get-resource-events.md
+        - name: Ouvrir une session SSH sur un conteneur Linux
+          href: configure-linux-open-ssh-session.md
     - name: Gérer l’application
       items:
         - name: Gérer le plan d’hébergement
@@ -216,12 +273,14 @@
           href: app-service-web-app-cloning.md
         - name: Restaurer un service d’application supprimé
           href: app-service-undelete.md
+        - name: Restaurer à partir d’une région en panne
+          href: manage-disaster-recovery.md
     - name: Déplacer une application
       items:
         - name: Déplacer d’une région à l’autre
           href: manage-move-across-regions.md
         - name: Déplacer des abonnements
-          href: '../azure-resource-manager/management/move-resource-group-and-subscription.md?toc=%2fazure%2fapp-service%2ftoc.json#checklist-before-moving-resources'
+          href: ../azure-resource-manager/management/move-resource-group-and-subscription.md?toc=%2fazure%2fapp-service%2ftoc.json#checklist-before-moving-resources
     - name: Exécuter des tâches en arrière-plan
       items:
         - name: Créer WebJobs
@@ -237,11 +296,14 @@
     - name: Azure CLI
       href: /cli/azure/appservice
     - name: Azure PowerShell
-      href: '/powershell/module/az.websites/#app_service'
+      href: /powershell/module/az.websites/#app_service
     - name: API REST
       href: /rest/api/appservice/
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.web/allversions
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Blog App Service
@@ -253,7 +315,7 @@
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/app-service/'
     - name: Informations sur les quotas
-      href: '../azure-resource-manager/management/azure-subscription-service-limits.md#app-service-limits'
+      href: ../azure-resource-manager/management/azure-subscription-service-limits.md#app-service-limits
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=app-service'
     - name: Guides de l’Assistant Migration
@@ -262,12 +324,12 @@
       href: app-service-best-practices.md
     - name: Exemples
       href: 'https://azure.microsoft.com/resources/samples/?service=app-service'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=app-service'
     - name: Livres de recettes
       items:
         - name: Architectures de référence
-          href: 'https://docs.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/basic-web-app'
+          href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app
         - name: Scripts de déploiement
           href: 'https://azure.microsoft.com/documentation/scripts/'
     - name: Dépannage

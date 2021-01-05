@@ -9,10 +9,10 @@ ms.date: 09/04/2019
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: 4604616cd4f2d6c75c272586df1331fc405061cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "70737489"
 ---
 ## <a name="error-conditionheadersnotsupported-from-a-web-application-using-azure-files-from-browser"></a>Erreur ConditionHeadersNotSupported sur une application web utilisant Azure Files à partir du navigateur

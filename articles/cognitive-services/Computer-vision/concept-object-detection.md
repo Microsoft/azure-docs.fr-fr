@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 04/17/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: 3957e15a09bd7e7ecd814d169451af3241108b64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4269209017ecc0afa740bc3ed56cbdcbd915201e
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80131675"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96533840"
 ---
 # <a name="detect-common-objects-in-images"></a>Détecter des objets courants dans des images
 
@@ -97,7 +97,6 @@ Les limites de la détection d'objet doivent impérativement être prises en com
 
 ## <a name="use-the-api"></a>Utilisation de l’API
 
-La fonctionnalité de détection d'objet fait partie de l'API [Analyser l'image](https://westcentralus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa). Vous pouvez appeler cette API via un SDK natif ou via des appels REST. Incluez `Objects` dans le paramètre de requête **visualFeatures**. Ensuite, lorsque vous obtenez la réponse JSON complète, analysez simplement la chaîne de contenu de la section `"objects"`.
+La fonctionnalité de détection d'objet fait partie de l'API [Analyser l'image](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b). Vous pouvez appeler cette API via un SDK natif ou via des appels REST. Incluez `Objects` dans le paramètre de requête **visualFeatures**. Ensuite, lorsque vous obtenez la réponse JSON complète, analysez simplement la chaîne de contenu de la section `"objects"`.
 
-* [Démarrage rapide : SDK .NET Vision par ordinateur](./quickstarts-sdk/client-library.md?pivots=programming-language-csharp)
-* [Démarrage rapide : Analyser une image (API REST)](./quickstarts/csharp-analyze.md)
+* [Démarrage rapide : API REST ou bibliothèques de client Vision par ordinateur](./quickstarts-sdk/client-library.md?pivots=programming-language-csharp)

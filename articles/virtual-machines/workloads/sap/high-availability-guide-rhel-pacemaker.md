@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 08/17/2018
+ms.date: 12/01/2020
 ms.author: radeltch
-ms.openlocfilehash: 21c551721815847eea4cb1435298ea6f7bf37966
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b111dae035e7a055628642fe7c460734199ff608
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231161"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96486340"
 ---
 # <a name="setting-up-pacemaker-on-red-hat-enterprise-linux-in-azure"></a>Configuration de Pacemaker sur Red Hat Entreprise Linux dans Azure
 
@@ -66,7 +67,9 @@ Commencez par lire les notes et publications SAP suivantes :
 * Documentation RHEL spécifique à Azure :
   * [Stratégies de prise en charge des clusters à haute disponibilité RHEL - Machines virtuelles Microsoft Azure en tant que membres du cluster](https://access.redhat.com/articles/3131341)
   * [Installation et configuration d’un cluster à haute disponibilité Red Hat Enterprise Linux 7.4 (et versions ultérieures) sur Microsoft Azure](https://access.redhat.com/articles/3252491)
+  * [Considérations relatives à l’adoption de RHEL 8 - Haute disponibilité et clusters](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/high-availability-and-clusters_considerations-in-adopting-rhel-8)
   * [Configure SAP S/4HANA ASCS/ERS with Standalone Enqueue Server 2 (ENSA2) in Pacemaker on RHEL 7.6](https://access.redhat.com/articles/3974941) (Configurer SAP S/4HANA ASC/ERS avec le serveur de file d’attente autonome 2 (ENSA2) dans Pacemaker sur RHEL 7.6)
+  * [Offres RHEL pour SAP sur Azure](https://access.redhat.com/articles/5456301)
 
 ## <a name="cluster-installation"></a>Installation du cluster
 
@@ -78,7 +81,7 @@ Commencez par lire les notes et publications SAP suivantes :
 
 Les éléments suivants sont précédés de **[A]** (applicable à tous les nœuds), de **[1]** (applicable uniquement au nœud 1) ou de **[2]** (applicable uniquement au nœud 2).
 
-1. **[A]** Inscrire
+1. **[A]** Inscrire. Cette étape n’est pas requise si vous utilisez des images RHEL SAP compatibles avec la haute disponibilité.  
 
    Inscrivez vos machines virtuelles et les attacher à un pool qui contient des référentiels pour RHEL 7.
 
@@ -88,9 +91,9 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    sudo subscription-manager attach --pool=&lt;pool id&gt;
    </code></pre>
 
-   Notez qu’en attachant un pool à une image PAYG RHEL de la Place de marché Azure, vous serez doublement facturés pour votre utilisation de RHEL : une fois pour l’image PAYG et une fois pour le droit d’utilisation de RHEL dans le pool que vous attachez. Pour limiter ceci, Azure fournit désormais des images RHEL BYOS. Des informations supplémentaires sont disponibles [ici](../redhat/byos.md).
+   En attachant un pool à une image PAYG RHEL de la Place de marché Azure, vous serez doublement facturé pour votre utilisation de RHEL : une fois pour l’image PAYG et une fois pour le droit d’utilisation de RHEL dans le pool que vous attachez. Pour limiter ceci, Azure fournit désormais des images RHEL BYOS. Des informations supplémentaires sont disponibles [ici](../redhat/byos.md).  
 
-1. **[A]** Activer RHEL pour les référentiels SAP
+1. **[A]** Activer RHEL pour les référentiels SAP. Cette étape n’est pas requise si vous utilisez des images RHEL SAP compatibles avec la haute disponibilité.  
 
    Pour installer les packages requis, activez les référentiels suivants.
 
@@ -108,6 +111,7 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
 
    > [!IMPORTANT]
    > Nous vous recommandons d’utiliser les versions suivantes de l’agent de clôture Azure (ou versions ultérieures) pour que les clients bénéficient d’un délai de basculement plus rapide, en cas d’échec d’un arrêt de ressource ou si les nœuds de cluster ne peuvent plus communiquer les uns avec les autres :  
+   > RHEL 7.7 et version ultérieure utilisent la dernière version disponible du package fence-agents  
    > RHEL 7.6 : fence-agents-4.2.1-11.el7_6.8  
    > RHEL 7.5 : fence-agents-4.0.11-86.el7_5.8  
    > RHEL 7.4 : fence-agents-4.0.11-66.el7_4.12  
@@ -120,12 +124,16 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    </code></pre>
 
    > [!IMPORTANT]
-   > Si vous devez mettre à jour l’agent de clôture Azure et si vous utilisez un rôle personnalisé, mettez à jour ce rôle personnalisé en y ajoutant l’action **powerOff**. Pour plus d’informations, consultez [Créer un rôle personnalisé pour l’agent de clôture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-rhel-pacemaker#1-create-a-custom-role-for-the-fence-agent).  
+   > Si vous devez mettre à jour l’agent de clôture Azure et si vous utilisez un rôle personnalisé, mettez à jour ce rôle personnalisé en y ajoutant l’action **powerOff**. Pour plus d’informations, consultez [Créer un rôle personnalisé pour l’agent de clôture](#1-create-a-custom-role-for-the-fence-agent).  
 
 1. **[A]** Configurer la résolution de nom d’hôte
 
    Vous pouvez utiliser un serveur DNS ou modifier le fichier /etc/hosts sur tous les nœuds. Cet exemple montre comment utiliser le fichier /etc/hosts.
-   Remplacez l’adresse IP et le nom d’hôte dans les commandes suivantes. L’avantage d’utiliser/etc/hosts réside dans le fait que votre cluster devient indépendant du serveur DNS, ce qui peut aussi être un point de défaillance unique.
+   Remplacez l’adresse IP et le nom d’hôte dans les commandes suivantes.  
+
+   >[!IMPORTANT]
+   > Si vous utilisez des noms d’hôte dans la configuration du cluster, il est essentiel de disposer d’une résolution de nom d’hôte fiable. Les communications de cluster échouent, si les noms ne sont pas disponibles et peuvent entraîner des retards de basculement de cluster.
+   > L’avantage d’utiliser/etc/hosts réside dans le fait que votre cluster devient indépendant du serveur DNS, ce qui peut aussi être un point de défaillance unique.  
 
    <pre><code>sudo vi /etc/hosts
    </code></pre>
@@ -161,15 +169,23 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
 
 1. **[1]** Créer le cluster Pacemaker
 
-   Exécutez les commandes suivantes pour authentifier les nœuds et créer le cluster. Définissez le jeton sur 30000 pour autoriser la maintenance avec préservation de la mémoire. Pour plus d’informations, consultez [cet article pour Linux][virtual-machines-linux-maintenance].
-
+   Exécutez les commandes suivantes pour authentifier les nœuds et créer le cluster. Définissez le jeton sur 30000 pour autoriser la maintenance avec préservation de la mémoire. Pour plus d’informations, consultez [cet article pour Linux][virtual-machines-linux-maintenance].  
+   
+   Si vous créez un cluster sur **RHEL 7.x**, utilisez les commandes suivantes :  
    <pre><code>sudo pcs cluster auth <b>prod-cl1-0</b> <b>prod-cl1-1</b> -u hacluster
    sudo pcs cluster setup --name <b>nw1-azr</b> <b>prod-cl1-0</b> <b>prod-cl1-1</b> --token 30000
    sudo pcs cluster start --all
+   </code></pre>
 
-   # Run the following command until the status of both nodes is online
+   Si vous créez un cluster sur **RHEL 8.x**, utilisez les commandes suivantes :  
+   <pre><code>sudo pcs host auth <b>prod-cl1-0</b> <b>prod-cl1-1</b> -u hacluster
+   sudo pcs cluster setup <b>nw1-azr</b> <b>prod-cl1-0</b> <b>prod-cl1-1</b> totem token=30000
+   sudo pcs cluster start --all
+   </code></pre>
+
+   Surveillez l’état du cluster en exécutant la commande suivante :  
+   <pre><code> # Run the following command until the status of both nodes is online
    sudo pcs status
-
    # Cluster name: nw1-azr
    # WARNING: no stonith devices and stonith-enabled is not false
    # Stack: corosync
@@ -184,16 +200,26 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    #
    # No resources
    #
-   #
    # Daemon Status:
    #   corosync: active/disabled
    #   pacemaker: active/disabled
    #   pcsd: active/enabled
    </code></pre>
 
-1. **[A]** Définir les votes attendus
+1. **[A]** Définir les votes attendus. 
+   
+   <pre><code># Check the quorum votes 
+    pcs quorum status
+    # If the quorum votes are not set to 2, execute the next command
+    sudo pcs quorum expected-votes 2
+   </code></pre>
 
-   <pre><code>sudo pcs quorum expected-votes 2
+   >[!TIP]
+   > Si vous créez un cluster à plusieurs nœuds qui est un cluster avec plus de deux nœuds, ne définissez pas la valeur 2 aux votes.    
+
+1. **[1]** Autoriser les actions de clôture simultanées
+
+   <pre><code>sudo pcs property set concurrent-fencing=true
    </code></pre>
 
 ## <a name="create-stonith-device"></a>Créer l’appareil STONITH
@@ -202,7 +228,7 @@ L’appareil STONITH utilise un principal de service pour l’autorisation sur M
 
 1. Accédez à <https://portal.azure.com>
 1. Ouvrez le panneau Azure Active Directory  
-   Accédez aux propriétés et notez l’ID de répertoire. Il s’agit de **l’ID du locataire**.
+   Accédez aux propriétés et notez l’ID du répertoire. Il s’agit de **l’ID du locataire**.
 1. Cliquez sur Inscriptions d’applications
 1. Cliquez sur Nouvelle inscription
 1. Entrez un nom, sélectionnez « Comptes dans cet annuaire d’organisation uniquement » 
@@ -210,32 +236,37 @@ L’appareil STONITH utilise un principal de service pour l’autorisation sur M
    L’URL de connexion n’est pas utilisée et peut être une URL valide
 1. Sélectionnez Certificats et secrets, puis sélectionnez Nouveau secret client
 1. Entrez une description pour la nouvelle clé, sélectionnez « N’expire jamais » et cliquez sur Ajouter
-1. Notez la valeur. Cette valeur est utilisée comme **mot de passe** pour le principal de service
+1. Définissez la valeur d’un nœud. Cette valeur est utilisée comme **mot de passe** pour le principal de service
 1. Sélectionnez Vue d’ensemble. Notez l’ID de l’application. Cet identifiant est utilisé comme nom d’utilisateur (**ID de connexion** dans la procédure ci-dessous) du principal de service
 
 ### <a name="1-create-a-custom-role-for-the-fence-agent"></a>**[1]**  Créer un rôle personnalisé pour l’agent d’isolation
 
-Par défaut, le principal de service ne possède pas les autorisations d’accéder à vos ressources Azure. Vous devez accorder au principal du service les autorisations de démarrer et d’arrêter (mettre hors tension) toutes les machines virtuelles du cluster. Si vous n’avez pas encore créé le rôle personnalisé, vous pouvez le créer à l’aide de [PowerShell](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-powershell) ou de l’[interface de ligne de commande Azure](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-cli).
+Par défaut, le principal de service ne possède pas les autorisations d’accéder à vos ressources Azure. Vous devez accorder au principal du service les autorisations de démarrer et d’arrêter (mettre hors tension) toutes les machines virtuelles du cluster. Si vous n’avez pas encore créé le rôle personnalisé, vous pouvez le créer à l’aide de [PowerShell](../../../role-based-access-control/role-assignments-powershell.md) ou de l’[interface de ligne de commande Azure](../../../role-based-access-control/role-assignments-cli.md).
 
 Utilisez le contenu suivant pour le fichier d’entrée. Vous devez adapter le contenu à vos abonnements, c’est-à-dire remplacer c276fc76-9cd4-44c9-99a7-4fd71546436e et e91d47c4-76f3-4271-a796-21b4ecfe3624 par les ID de vos abonnements. Si vous n’avez qu’un seul abonnement, supprimez la deuxième entrée dans AssignableScopes.
 
 ```json
 {
-  "Name": "Linux Fence Agent Role",
-  "Id": null,
-  "IsCustom": true,
-  "Description": "Allows to power-off and start virtual machines",
-  "Actions": [
-    "Microsoft.Compute/*/read",
-    "Microsoft.Compute/virtualMachines/powerOff/action",
-    "Microsoft.Compute/virtualMachines/start/action"
-  ],
-  "NotActions": [
-  ],
-  "AssignableScopes": [
-    "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
-    "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624"
-  ]
+    "properties": {
+        "roleName": "Linux Fence Agent Role",
+        "description": "Allows to power-off and start virtual machines",
+        "assignableScopes": [
+            "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
+            "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Compute/*/read",
+                    "Microsoft.Compute/virtualMachines/powerOff/action",
+                    "Microsoft.Compute/virtualMachines/start/action"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
 }
 ```
 
@@ -262,17 +293,31 @@ Une fois que vous avez modifié les autorisations pour les machines virtuelles, 
 sudo pcs property set stonith-timeout=900
 </code></pre>
 
-Utilisez la commande suivante pour configurer l’appareil d’isolation.
-
 > [!NOTE]
 > L’option ’pcmk_host_map’ est requise dans la commande UNIQUEMENT si les noms d’hôte RHEL et les noms de nœud Azure ne sont PAS identiques. Consultez la section en gras dans les commandes.
 
-<pre><code>sudo pcs stonith create rsc_st_azure fence_azure_arm login="<b>login ID</b>" passwd="<b>password</b>" resourceGroup="<b>resource group</b>" tenantId="<b>tenant ID</b>" subscriptionId="<b>subscription id</b>" <b>pcmk_host_map="prod-cl1-0:10.0.0.6;prod-cl1-1:10.0.0.7"</b> power_timeout=240 pcmk_reboot_timeout=900</code></pre>
+Pour RHEL **7.x**, utilisez la commande suivante pour configurer l’appareil de clôture :    
+<pre><code>sudo pcs stonith create rsc_st_azure fence_azure_arm login="<b>login ID</b>" passwd="<b>password</b>" resourceGroup="<b>resource group</b>" tenantId="<b>tenant ID</b>" subscriptionId="<b>subscription id</b>" <b>pcmk_host_map="prod-cl1-0:10.0.0.6;prod-cl1-1:10.0.0.7"</b> \
+power_timeout=240 pcmk_reboot_timeout=900 pcmk_monitor_timeout=120 pcmk_monitor_retries=4 pcmk_action_limit=3 \
+op monitor interval=3600
+</code></pre>
+
+Pour RHEL **8.x**, utilisez la commande suivante pour configurer l’appareil de clôture :  
+<pre><code>sudo pcs stonith create rsc_st_azure fence_azure_arm username="<b>login ID</b>" password="<b>password</b>" resourceGroup="<b>resource group</b>" tenantId="<b>tenant ID</b>" subscriptionId="<b>subscription id</b>" <b>pcmk_host_map="prod-cl1-0:10.0.0.6;prod-cl1-1:10.0.0.7"</b> \
+power_timeout=240 pcmk_reboot_timeout=900 pcmk_monitor_timeout=120 pcmk_monitor_retries=4 pcmk_action_limit=3 \
+op monitor interval=3600
+</code></pre>
+
+> [!IMPORTANT]
+> Les opérations de surveillance et de clôture sont désérialisées. Par conséquent, s’il y a une opération de surveillance plus longue et un événement de clôture simultanés, il n’y a aucun délai pour le basculement du cluster en raison de l’opération de surveillance en cours d’exécution.  
 
 ### <a name="1-enable-the-use-of-a-stonith-device"></a>**[1]** Activer l’utilisation d’un appareil STONITH
 
 <pre><code>sudo pcs property set stonith-enabled=true
 </code></pre>
+
+> [!TIP]
+>L’agent d’isolation Azure requiert une connectivité sortante vers les points de terminaison publics comme indiqué, ainsi que des solutions possibles évoquées dans [Connectivité de point de terminaison public pour les machines virtuelles utilisant un équilibreur de charge interne standard](./high-availability-guide-standard-load-balancer-outbound-connections.md).  
 
 ## <a name="next-steps"></a>Étapes suivantes
 

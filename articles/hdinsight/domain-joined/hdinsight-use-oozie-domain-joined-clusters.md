@@ -6,16 +6,16 @@ ms.author: omidm
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
-ms.custom: hdinsightactive,seodec18
-ms.date: 12/09/2019
-ms.openlocfilehash: 9ef54707f7fac3dd1328e29f6d05f62c1dee2561
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: hdinsightactive,seodec18,seoapr2020
+ms.date: 05/14/2020
+ms.openlocfilehash: 71432dc2dd09381d39ca646d45c7f2bdd96012c6
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78194901"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97653433"
 ---
-# <a name="run-apache-oozie-in-hdinsight-hadoop-clusters-with-enterprise-security-package"></a>Exécuter Apache Oozie dans des clusters HDInsight Hadoop avec le Pack Sécurité Entreprise
+# <a name="run-apache-oozie-in-azure-hdinsight-clusters-with-enterprise-security-package"></a>Exécuter Apache Oozie dans des clusters Azure HDInsight avec le Pack Sécurité Entreprise
 
 Apache Oozie est un workflow et un système de coordination qui gère les tâches Apache Hadoop. Oozie est intégré dans la pile Hadoop et prend en charge les travaux suivants :
 
@@ -51,7 +51,7 @@ Pour en savoir plus sur Secure Shell (SSH), consultez la page [Se connecter à H
     curl -I -u [DomainUserName@Domain.com]:[DomainUserPassword] https://<clustername>.azurehdinsight.net
     ```
 
-    Le code de réponse d’état**200 OK** indique la réussite de l’inscription. Si vous recevez une erreur 401 (inscription non autorisée), vérifiez le nom d’utilisateur et le mot de passe.
+    Le code de réponse d’état **200 OK** indique la réussite de l’inscription. Si vous recevez une erreur 401 (inscription non autorisée), vérifiez le nom d’utilisateur et le mot de passe.
 
 ## <a name="define-the-workflow"></a>Définition du flux de travail
 
@@ -231,8 +231,8 @@ Les définitions des workflows Oozie sont écrites en hPDL (langage de définiti
    ```
 
    - Utilisez l'URI `adl://home` de la propriété `nameNode` si vous disposez d'Azure Data Lake Storage Gen1 comme espace de stockage en cluster principal. Si vous utilisez le service Stockage Blob Azure, remplacez cette valeur par `wasb://home`. Si vous utilisez Azure Data Lake Storage Gen2, remplacez cette valeur par `abfs://home`.
-   - Remplacez `domainuser` par le nom d’utilisateur de votre domaine.  
-   - Remplacez `ClusterShortName` par le nom court du cluster. Par exemple, si le nom du cluster est https:// *[exemple de lien]* sechadoopcontoso.azurehdisnight.net, le `clustershortname` est les six premiers caractères du cluster : **sechad**.  
+   - Remplacez `domainuser` par le nom d’utilisateur de votre domaine.
+   - Remplacez `ClusterShortName` par le nom court du cluster. Par exemple, si le nom du cluster est https:// *[exemple de lien]* sechadoopcontoso.azurehdisnight.net, le `clustershortname` est les six premiers caractères du cluster : **sechad**.
    - Remplacez `jdbcurlvalue` par l’URL JDBC de la configuration Hive. Par exemple, jdbc:hive2://headnodehost:10001/;transportMode=http.
    - Pour enregistrer le fichier, sélectionnez Ctrl + X, entrez `Y`, puis sélectionnez **Entrée**.
 
@@ -313,17 +313,17 @@ CoordAction ID: -
 
 Actions
 ------------------------------------------------------------------------------------------------
-ID                      Status  Ext ID          ExtStatus   ErrCode
+ID                        Status    Ext ID            ExtStatus                 ErrCode
 ------------------------------------------------------------------------------------------------
-0000015-180626011240801-oozie-oozi-W@:start:    OK  -           OK      -
+0000015-180626011240801-oozie-oozi-W@:start:    OK    -                         OK             -
 ------------------------------------------------------------------------------------------------
-0000015-180626011240801-oozie-oozi-W@mr-test    OK  job_1529975666160_0051  SUCCEEDED   -
+0000015-180626011240801-oozie-oozi-W@mr-test    OK    job_1529975666160_0051    SUCCEEDED      -
 ------------------------------------------------------------------------------------------------
-0000015-180626011240801-oozie-oozi-W@myHive2    OK  job_1529975666160_0053  SUCCEEDED   -
+0000015-180626011240801-oozie-oozi-W@myHive2    OK    job_1529975666160_0053    SUCCEEDED      -
 ------------------------------------------------------------------------------------------------
-0000015-180626011240801-oozie-oozi-W@myHive OK  job_1529975666160_0055  SUCCEEDED   -
+0000015-180626011240801-oozie-oozi-W@myHive    OK     job_1529975666160_0055    SUCCEEDED      -
 ------------------------------------------------------------------------------------------------
-0000015-180626011240801-oozie-oozi-W@end    OK  -           OK      -
+0000015-180626011240801-oozie-oozi-W@end       OK     -                         OK             -
 -----------------------------------------------------------------------------------------------
 ```
 

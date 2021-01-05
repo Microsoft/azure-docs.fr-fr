@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory avec PrinterLogic SaaS | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et PrinterLogic SaaS.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: b3a1c5ba-3aa1-4eea-9cb1-cc32a8b132a6
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/16/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: cbaef9cfb972e202d45fcb7a7dfdd512cd542ae7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 683f765b898d485f74652386025ac7e3556f8477
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75470424"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97607930"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-printerlogic-saas"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory avec PrinterLogic SaaS
 
@@ -31,7 +26,7 @@ Ce tutoriel explique comment intégrer PrinterLogic SaaS avec Azure Active Direc
 * Permettre à vos utilisateurs de se connecter automatiquement à PrinterLogic SaaS avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,11 +39,8 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
-
-
 * PrinterLogic SaaS prend en charge l’authentification unique lancée par **le fournisseur de services et le fournisseur d’identité**.
 * PrinterLogic SaaS prend en charge le provisionnement d’utilisateurs **juste-à-temps**.
-
 
 ## <a name="adding-printerlogic-saas-from-the-gallery"></a>Ajout de PrinterLogic SaaS à partir de la galerie
 
@@ -60,7 +52,6 @@ Pour configurer l’intégration de PrinterLogic SaaS dans Azure AD, vous devez
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
 1. Dans la section **Ajouter à partir de la galerie**, tapez **PrinterLogic SaaS** dans la zone de recherche.
 1. Sélectionnez **PrinterLogic SaaS** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
-
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-printerlogic-saas"></a>Configurer et tester l’authentification unique Azure AD pour PrinterLogic SaaS
 
@@ -106,10 +97,10 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     | Nom | Attribut source |
     | ---------| ------------ |
-    | Role     | user.assignedroles |
+    | Role | user.assignedroles |
 
     > [!NOTE]
-    > Cliquez [ici](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-app-role-management) pour savoir comment configurer un rôle dans Azure AD.
+    > Cliquez [ici](../develop/active-directory-enterprise-app-role-management.md) pour savoir comment configurer un rôle dans Azure AD.
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **Certificat (en base64)** , puis sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -161,15 +152,14 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans PrinterL
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette PrinterLogic SaaS dans le volet d’accès, vous devez être connecté automatiquement à l’application PrinterLogic SaaS pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette PrinterLogic SaaS dans le volet d’accès, vous devez être connecté automatiquement à l’application PrinterLogic SaaS pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer PrinterLogic SaaS avec Azure AD](https://aad.portal.azure.com/)
-

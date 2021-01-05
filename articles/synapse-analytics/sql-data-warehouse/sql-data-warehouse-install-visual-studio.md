@@ -8,16 +8,16 @@ author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 05/11/2020
 ms.author: kevin
 ms.reviewer: igorstan
-ms.openlocfilehash: 9f36fb952b21b058fb50dc567f714e8bdb665d6c
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 456d7eb0cabd7ebede6415e3ce92d7403ecef7ef
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200310"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97368752"
 ---
 # <a name="getting-started-with-visual-studio-2019"></a>Prise en main de Visual Studio 2019
 
@@ -40,10 +40,12 @@ Certaines mises en production de fonctionnalités Synapse SQL peuvent ne pas pr
 
 
 - [Gestion des charges de travail](sql-data-warehouse-workload-management.md) : classifieurs et groupes de charge de travail
-- [Sécurité au niveau des lignes](/sql/relational-databases/security/row-level-security?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+- [Sécurité au niveau des lignes](/sql/relational-databases/security/row-level-security?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (y compris les fonctions table)
   - Envoyez un [ticket de support ou votez](https://feedback.azure.com/forums/307516-sql-data-warehouse/suggestions/39040057-ssdt-row-level-security) pour obtenir la fonctionnalité prise en charge.
-- [Masquage des données dynamiques](/sql/relational-databases/security/dynamic-data-masking?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest#defining-a-dynamic-data-mask)
-   - Envoyez un [ticket de support ou votez](https://feedback.azure.com/forums/307516-sql-data-warehouse/suggestions/39040048-ssdt-support-dynamic-data-masking) pour obtenir la fonctionnalité prise en charge.
+  - Envoyez un [ticket de support ou votez](https://feedback.azure.com/forums/307516-sql-data-warehouse/suggestions/39040048-ssdt-support-dynamic-data-masking) pour obtenir la fonctionnalité prise en charge.
+- Tables avec une [colonne d’identité](https://docs.microsoft.com/sql/t-sql/statements/create-table-transact-sql-identity-property?view=sql-server-ver15)
+- Certaines fonctionnalités T-SQL, telles que :
+   - La clause *WITHIN GROUP* de la fonction de chaîne [STRING_AGG](/sql/t-sql/functions/string-agg-transact-sql).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

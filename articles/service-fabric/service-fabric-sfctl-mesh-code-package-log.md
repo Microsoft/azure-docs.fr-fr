@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: f8665e75e4c921a3305c9965601e2ee0825c8995
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ac1d85a1a498f9f6fcd0a03f8f819d1cdfcac33
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76906052"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86257296"
 ---
 # <a name="sfctl-mesh-code-package-log"></a>sfctl mesh code-package-log
 Obtenez les journaux d’activité concernant le conteneur du package de code spécifié pour le réplica de service donné.
@@ -49,4 +49,4 @@ Obtenez les journaux d’activité concernant le conteneur du package de code sp
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

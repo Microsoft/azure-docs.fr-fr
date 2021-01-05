@@ -16,12 +16,12 @@ ms.subservice: report-monitor
 ms.date: 05/13/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
-ms.openlocfilehash: b3db86137207ae726c7befc393f62590fd1456d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c7cc68c84cc9f137ba5b51206526ff96111fe9a
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74008260"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93122739"
 ---
 # <a name="usage-and-insights-report-in-the-azure-active-directory-portal"></a>Rapport d’utilisation et d’insights dans le portail Azure Active Directory
 
@@ -42,10 +42,10 @@ Pour accéder aux données du rapport d’utilisation et d’insights, vous avez
 ## <a name="access-the-usage-and-insights-report"></a>Accès au rapport d’utilisation et d’insights
 
 1. Accédez au [portail Azure](https://portal.azure.com).
-2. Sélectionnez le rapport correspondant, **Azure Active Directory**, puis choisissez **Applications d’entreprise**.
-3. Dans la section **Activité**, sélectionnez **Utilisation et insights** pour ouvrir le rapport. 
+2. Sélectionnez le rapport correspondant, **Azure Active Directory** , puis choisissez **Applications d’entreprise**.
+3. Dans la section **Activité** , sélectionnez **Utilisation et insights** pour ouvrir le rapport. 
 
-![Rapport d’utilisation et d’insights](./media/concept-usage-insights-report/main-menu.png)
+![Capture d’écran montrant l’option Utilisation et insights sélectionnée dans la section Activité.](./media/concept-usage-insights-report/main-menu.png)
                                      
 
 ## <a name="use-the-report"></a>Utiliser le rapport
@@ -58,7 +58,7 @@ Vous pouvez également définir le focus sur une application spécifique. Sélec
 
 Lorsque vous sélectionnez un jour dans le graphique d’utilisation des applications, vous obtenez une liste détaillée des activités de connexion pour l’application.  
 
-![Rapport d’utilisation et d’insights](./media/concept-usage-insights-report/usage-and-insights-report.png)
+![Capture d’écran montrant l’option Utilisation & insights pour l’activité Application, dans laquelle vous pouvez sélectionner une plage et afficher l’activité de connexion pour différentes applications.](./media/concept-usage-insights-report/usage-and-insights-report.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

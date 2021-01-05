@@ -10,12 +10,12 @@ ms.custom: mvc
 ms.topic: tutorial
 ms.service: active-directory
 ms.subservice: B2C
-ms.openlocfilehash: 59670cda68f54e4c0b20b361f0688e6766acba61
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 8eca6297a704e1ef478c09baf227cf622d6890bb
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78183372"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94953149"
 ---
 # <a name="tutorial-grant-access-to-a-nodejs-web-api-from-a-desktop-app-using-azure-active-directory-b2c"></a>Tutoriel : Accorder l’accès à une API web Node.js depuis une application de bureau à l’aide d’Azure Active Directory B2C
 
@@ -51,17 +51,11 @@ Pour appeler une API web protégée à partir d’une application client native,
 
 Dans le didacticiel des conditions requises, vous avez inscrit une application cliente native appelée *nativeapp1*. Les étapes suivantes configurent l’inscription de cette application native avec les étendues d’API que vous avez exposées pour *webapi1* dans la section précédente. Cela permet à l’application de bureau d’obtenir un jeton d’accès de la part d’Azure AD B2C que l’API web peut utiliser pour vérifier et fournir un accès délimité à ses ressources. Vous configurez et exécutez les exemples de code de l’application de bureau et de l’API web plus loin dans le didacticiel.
 
-#### <a name="applications"></a>[Applications](#tab/applications/)
+Pour inscrire une application dans votre locataire Azure AD B2C, vous pouvez utiliser notre nouvelle expérience unifiée **Inscriptions d’applications** ou notre expérience héritée **Applications (héritées)** . [En savoir plus sur la nouvelle expérience](./app-registrations-training-guide.md).
 
-1. Sélectionnez **Applications**, puis *nativeapp1*.
-1. Sélectionnez **Accès aux API**, puis **Ajouter**.
-1. Dans la liste déroulante **Sélectionner une API**, sélectionnez *webapi1*.
-1. Dans la liste déroulante **Sélectionner des étendues**, sélectionnez les étendues que vous avez définies précédemment. Par exemple, *demo.read* et *demo.write*.
-1. Sélectionnez **OK**.
+#### <a name="app-registrations"></a>[Inscriptions des applications](#tab/app-reg-ga/)
 
-#### <a name="app-registrations-preview"></a>[Inscriptions d’applications (préversion)](#tab/app-reg-preview/)
-
-1. Sélectionnez **Inscriptions d’applications (préversion)** , puis sélectionnez l’application cliente native qui doit avoir accès à l’API. Par exemple, *nativeapp1*.
+1. Sélectionnez **Inscriptions d’applications**, puis sélectionnez l’application cliente native qui doit avoir accès à l’API. Par exemple, *nativeapp1*.
 1. Sous **Gérer**, sélectionnez **Autorisations de l’API**.
 1. Sous **Autorisations configurées**, sélectionnez **Ajouter une autorisation**.
 1. Sélectionnez l’onglet **Mes API**.
@@ -72,6 +66,14 @@ Dans le didacticiel des conditions requises, vous avez inscrit une application c
 1. Sélectionnez le compte administrateur actuellement connecté ou connectez-vous avec un compte de votre locataire Azure AD B2C qui possède au minimum le rôle *Administrateur d’application cloud*.
 1. Sélectionnez **Accepter**.
 1. Sélectionnez **Actualiser**, puis vérifiez que la mention « Accordé pour ... » apparaît dans **État** pour les deux étendues. La propagation des autorisations peut prendre quelques minutes.
+
+#### <a name="applications-legacy"></a>[Applications (héritées)](#tab/applications-legacy/)
+
+1. Sélectionnez **Applications (héritées)** , puis *nativeapp1*.
+1. Sélectionnez **Accès aux API**, puis **Ajouter**.
+1. Dans la liste déroulante **Sélectionner une API**, sélectionnez *webapi1*.
+1. Dans la liste déroulante **Sélectionner des étendues**, sélectionnez les étendues que vous avez définies précédemment. Par exemple, *demo.read* et *demo.write*.
+1. Sélectionnez **OK**.
 
 * * *
 

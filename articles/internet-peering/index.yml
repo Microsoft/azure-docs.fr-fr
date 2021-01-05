@@ -11,12 +11,12 @@ metadata:
   author: prmitiki
   ms.author: prmitiki
   ms.date: 11/27/2019
-  ms.openlocfilehash: 83549a56b3fb81c66827d1e9f87718467fb1098a
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: df16eb3da78608660ce9fb279f3258dc0879cdb4
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "75773517"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "84247085"
 landingContent:
 - title: À propos du peering Internet
   linkLists:
@@ -50,6 +50,8 @@ landingContent:
       url: howto-exchange-portal.md
     - text: Convertir un peering Exchange existant en ressource Azure en utilisant le portail
       url: howto-legacy-exchange-portal.md
+    - text: Créer ou modifier un peering Exchange avec un serveur de routage à l’aide du portail
+      url: how-to-exchange-route-server-portal.md
 - title: Peering direct
   linkLists:
   - linkListType: how-to-guide

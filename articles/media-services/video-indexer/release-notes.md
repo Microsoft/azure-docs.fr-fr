@@ -10,14 +10,14 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.workload: na
 ms.topic: article
-ms.date: 04/20/2020
+ms.date: 10/30/2020
 ms.author: juliako
-ms.openlocfilehash: 8a9c1ba8e6316ea79941fbec1fbd339893afdb35
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9f7bf41bd864f6780eee00938f35bb34d2336eb5
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131209"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93145750"
 ---
 # <a name="azure-media-services-video-indexer-release-notes"></a>Notes de publication d’Azure Media Services Video Indexer
 
@@ -29,6 +29,79 @@ Pour vous informer des développements les plus récents, cet article détaille 
 * Problèmes connus
 * Résolution des bogues
 * Fonctionnalités dépréciées
+
+## <a name="october-2020"></a>Octobre 2020
+
+### <a name="animated-character-identification-improvements"></a>Améliorations de l’identification des caractères animés  
+
+Video Indexer prend en charge la détection, le regroupement et la reconnaissance de personnages dans le contenu animé via l’intégration à Cognitive Services Custom Vision. Nous avons ajouté à cet algorithme IA une amélioration majeure au niveau de la détection et de la reconnaissance des caractères ; la précision des insights et les caractères identifiés s’en trouvent ainsi considérablement enrichis.
+
+### <a name="planned-video-indexer-website-authenticatication-changes"></a>Changements planifiés relatifs à l’authentification sur le site web Video Indexer
+
+À partir du 1er janvier 2021, vous ne pourrez plus vous inscrire ni vous connecter au site web [Video Indexer](https://www.videoindexer.ai/) (offre d’essai) par l’intermédiaire de Facebook ou de LinkedIn.
+
+Votre inscription et votre connexion s’effectueront au moyen de l’un de ces fournisseurs : Azure AD, Microsoft et Google.
+
+> [!NOTE]
+> Nous vous conseillons d’exporter votre contenu avant le 1er janvier 2021, car les comptes connectés à LinkedIn et à Facebook seront supprimés, et le contenu ne sera plus accessible.
+
+## <a name="august-2020"></a>Août 2020
+
+### <a name="mobile-design-for-the-video-indexer-website"></a>Conception mobile pour le site web Video Indexer
+
+L’expérience du site web Video Indexer prend désormais en charge les appareils mobiles. L’expérience utilisateur s’adapte à la taille de votre écran mobile (à l’exception des interfaces utilisateur de personnalisation). 
+
+### <a name="accessibility-improvements-and-bug-fixes"></a>Améliorations de l’accessibilité et résolution des bogues 
+
+Dans le cadre des directives WCAG (Web Content Accessibility Guidelines), l’expérience du site web Video Indexer est alignée avec la classe C, conformément aux normes d’accessibilité de Microsoft. Plusieurs bogues et améliorations liés à la navigation au clavier, à l’accès par programme et au lecteur d’écran ont été résolus. 
+
+## <a name="july-2020"></a>Juillet 2020
+
+### <a name="ga-for-multi-language-identification"></a>Disponibilité générale pour l’identification multilingue
+
+L’identification multilingue passe du mode Préversion au mode Disponibilité générale et est prête pour une utilisation en production.
+
+Ce passage du mode Préversion au mode Disponibilité générale n'a aucun impact sur les prix.
+
+### <a name="video-indexer-website-improvements"></a>Améliorations du site web Video Indexer
+
+#### <a name="adjustments-in-the-video-gallery"></a>Réglages dans la galerie de vidéos
+
+Une nouvelle barre de recherche pour la recherche d’insights avec des fonctionnalités de filtrage supplémentaires a été ajoutée. Les résultats de la recherche ont également été améliorés.
+
+Nouvelle vue liste avec possibilité de trier et de gérer des archives vidéo avec plusieurs fichiers.
+
+#### <a name="new-panel-for-easy-selection-and-configuration"></a>Nouveau panneau pour faciliter la sélection et la configuration
+
+Un panneau latéral pour faciliter la sélection et la configuration utilisateur a été ajouté, ce qui permet de créer et de partager un compte, et de définir la configuration, simplement et rapidement.
+
+Le panneau latéral est également utilisé pour les préférences utilisateur et l’aide.
+
+## <a name="june-2020"></a>Juin 2020
+
+### <a name="search-by-topics"></a>Rechercher par sujets
+
+Vous pouvez maintenant utiliser l'API de recherche pour rechercher des vidéos traitant de sujets spécifiques (API uniquement).
+
+Les sujets sont ajoutés dans le cadre du `textScope` (paramètre facultatif). Pour plus d'informations, consultez [API](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Search-Videos).  
+
+### <a name="labels-enhancement"></a>Amélioration des étiquettes
+
+Le créateur d'étiquettes a été mis à niveau et comporte désormais davantage d'étiquettes visuelles identifiables.
+
+## <a name="may-2020"></a>Mai 2020
+
+### <a name="video-indexer-deployed-in-the-east-us"></a>Video Indexer déployé dans la région USA Est
+
+Vous pouvez maintenant créer un compte Video Indexer payant dans la région USA Est.
+ 
+### <a name="video-indexer-url"></a>URL de Video Indexer
+
+Les points de terminaison régionaux de Video Indexer ont tous été unifiés pour démarrer uniquement avec www. Aucun élément d’action n’est requis.
+
+À partir de maintenant, vous atteignez www.videoindexer.ai, qu’il s’agisse d’incorporer des widgets ou de se connecter à des applications web Video Indexer.
+
+En outre, wus.videoindexer.ai est redirigé vers www. Pour plus d’informations, consultez [Incorporer des widgets Video Indexer dans vos applications](video-indexer-embed-widgets.md).
 
 ## <a name="april-2020"></a>Avril 2020
 
@@ -58,14 +131,14 @@ Pour les comptes payants, le champ `Url` pointe actuellement vers une URL intern
 Dans les semaines à venir, nous changerons cela et renverrons l’URL du [site web de Video Indexer](https://www.videoindexer.ai/) pour tous les comptes (version d’évaluation et payante).
 
     N’utilisez pas les URL internes, vous devez utiliser les [API publiques Video Indexer](https://api-portal.videoindexer.ai/).
-* Si vous incorporez des URL Video Indexer dans vos applications et que celles-ci ne pointent pas vers le [site web de Video Indexer](https://www.videoindexer.ai/) ou le [point de terminaison d’API Video indexer](https://api.videoindexer.ai), mais plutôt vers un point de terminaison régional (par exemple, `https://wus2.videoindexer.ai`), régénérez les URL.
+* Si vous incorporez des URL Video Indexer dans vos applications et que celles-ci ne pointent pas vers le [site web de Video Indexer](https://www.videoindexer.ai/) ou le point de terminaison d’API Video indexer (`https://api.videoindexer.ai`), mais vers un point de terminaison régional (par exemple, `https://wus2.videoindexer.ai`), régénérez les URL.
 
    Pour ce faire, vous pouvez soit :
 
     * remplacer l’URL par une URL pointant vers les API du widget Video Indexer (par exemple, le [widget Insights](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Insights-Widget))
     * utiliser le site web de Video Indexer pour générer une nouvelle URL incorporée :
          
-         Appuyez sur **Lire** pour accéder à la page de votre vidéo -> cliquez sur le bouton **&lt;/&gt;Incorporer** -> copiez l’URL dans votre application :
+         Appuyez sur **Lire** pour accéder à la page de votre vidéo -> cliquez sur le bouton **&lt;/&gt;Incorporer**  -> copiez l’URL dans votre application :
    
     Les URL régionales ne sont pas prises en charge et seront bloquées dans les semaines à venir.
 

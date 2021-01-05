@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory dans AirWatch | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et AirWatch.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 96a3bb1c-96c6-40dc-8ea0-060b0c2a62e5
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 07/11/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 772b37816b83c275bae927d825434dc3ca76a35c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cedea9eb4ec47af445b2ae31225a697f3c51b46e
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74231990"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92318921"
 ---
 # <a name="tutorial-integrate-airwatch-with-azure-active-directory"></a>Tutoriel : Intégrer AirWatch à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer AirWatch à Azure Active Dir
 * Permettre à vos utilisateurs de se connecter automatiquement à AirWatch avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -130,7 +125,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Cliquez sur l’onglet **User** (Utilisateur) puis, dans la zone de texte **Base DN** (Nom unique de base), tapez votre nom de domaine et cliquez sur **Save** (Enregistrer).
 
-   ![Utilisateur](./media/airwatch-tutorial/ic791922.png "Utilisateur")
+   ![Capture d’écran mettant en évidence la zone de texte Base DN.](./media/airwatch-tutorial/ic791922.png "Utilisateur")
 
 1. Cliquez sur l’onglet **Server** .
 
@@ -138,7 +133,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Dans la section **LDAP**, effectuez les étapes suivantes :
 
-    ![Charger](./media/airwatch-tutorial/ic791924.png "LDAP")   
+    ![Capture d’écran montrant les modifications que vous devez apporter à la section LDAP.](./media/airwatch-tutorial/ic791924.png "LDAP")   
 
     a. Pour **Directory Type**, sélectionnez **None**.
 
@@ -228,7 +223,7 @@ Pour pouvoir se connecter à AirWatch, les utilisateurs d’Azure AD doivent êt
 
 3. Dans le menu **Users**, cliquez sur **List View**, puis sur **Add > Add User**.
   
-   ![Ajouter un utilisateur](./media/airwatch-tutorial/ic791930.png "Ajouter un utilisateur")
+   ![Capture d’écran mettant en évidence les boutons Add et Add User.](./media/airwatch-tutorial/ic791930.png "Ajouter un utilisateur")
 
 4. Dans la boîte de dialogue **Add / Edit User** , procédez comme suit :
 
@@ -243,12 +238,12 @@ Pour pouvoir se connecter à AirWatch, les utilisateurs d’Azure AD doivent êt
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Quand vous sélectionnez la vignette AirWatch dans le volet d’accès, vous devez être connecté automatiquement à l’application AirWatch pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette AirWatch dans le volet d’accès, vous devez être connecté automatiquement à l’application AirWatch pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

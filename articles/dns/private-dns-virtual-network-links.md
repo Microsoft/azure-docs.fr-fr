@@ -7,12 +7,12 @@ ms.service: dns
 ms.topic: article
 ms.date: 9/24/2019
 ms.author: rohink
-ms.openlocfilehash: 9181ef93dfedbc28b297bef48a0bc37ba6d69798
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5e43ad35cdaad89d5b9f43007bad8782f358c1a6
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75646759"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954339"
 ---
 # <a name="what-is-a-virtual-network-link"></a>Qu’est-ce qu’une liaison de réseau virtuel ?
 
@@ -23,7 +23,7 @@ Vous pouvez lier un réseau virtuel à une zone DNS privée en tant que réseau 
 
 ## <a name="registration-virtual-network"></a>Réseau virtuel d’inscription
 
-Quand vous [créez une liaison](https://docs.microsoft.com/azure/dns/private-dns-getstarted-portal#link-the-virtual-network) entre une zone DNS privée et un réseau virtuel, vous avez la possibilité d’activer l’[inscription automatique](./private-dns-autoregistration.md) des enregistrements DNS pour les machines virtuelles. Si vous choisissez cette option, le réseau virtuel devient un réseau virtuel d’inscription pour la zone DNS privée. Un enregistrement DNS est automatiquement créé pour les machines virtuelles que vous déployez dans le réseau. Des enregistrements DNS sont créés pour les machines virtuelles que vous avez déjà déployées dans le réseau virtuel. Du côté du réseau virtuel, la zone DNS privée devient la zone d’inscription pour ce réseau virtuel.
+Quand vous [créez une liaison](./private-dns-getstarted-portal.md#link-the-virtual-network) entre une zone DNS privée et un réseau virtuel, vous avez la possibilité d’activer l’[inscription automatique](./private-dns-autoregistration.md) des enregistrements DNS pour les machines virtuelles. Si vous choisissez cette option, le réseau virtuel devient un réseau virtuel d’inscription pour la zone DNS privée. Un enregistrement DNS est automatiquement créé pour les machines virtuelles que vous déployez dans le réseau. Des enregistrements DNS sont créés pour les machines virtuelles que vous avez déjà déployées dans le réseau virtuel. Du côté du réseau virtuel, la zone DNS privée devient la zone d’inscription pour ce réseau virtuel.
 Une zone DNS privée peut avoir plusieurs réseaux virtuels d’inscription, mais chaque réseau virtuel peut être associé à une seule zone d’inscription.
 
 ## <a name="resolution-virtual-network"></a>Réseau virtuel de résolution
@@ -33,7 +33,7 @@ Une zone DNS privée peut avoir plusieurs réseaux virtuels de résolution et un
 
 ## <a name="limits"></a>limites
 
-Pour savoir combien de réseaux d’inscription et de résolution vous pouvez lier à des zones DNS privées, consultez [Limites d’Azure DNS](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-dns-limits).
+Pour savoir combien de réseaux d’inscription et de résolution vous pouvez lier à des zones DNS privées, consultez [Limites d’Azure DNS](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-dns-limits).
 
 ## <a name="other-considerations"></a>Autres considérations
 
@@ -49,7 +49,7 @@ Pour savoir combien de réseaux d’inscription et de résolution vous pouvez li
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez comment lier un réseau virtuel à une zone DNS privée à l’aide du [portail Azure](https://docs.microsoft.com/azure/dns/private-dns-getstarted-portal#link-the-virtual-network).
+* Découvrez comment lier un réseau virtuel à une zone DNS privée à l’aide du [portail Azure](./private-dns-getstarted-portal.md#link-the-virtual-network).
 
 * Découvrez comment créer une zone privée dans Azure DNS à l’aide [d’Azure PowerShell](./private-dns-getstarted-powershell.md) ou [d’Azure CLI](./private-dns-getstarted-cli.md).
 

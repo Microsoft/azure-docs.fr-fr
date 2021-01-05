@@ -7,15 +7,16 @@ author: tamram
 ms.service: storage
 ms.devlang: dotnet
 ms.topic: how-to
-ms.date: 12/04/2019
+ms.date: 06/16/2020
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 5b8654500fd697685b38e4f51ba1069e0cf6ccfc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8ec35a651d4d3ef9e0877463329a654bc7491f4c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78942905"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023412"
 ---
 # <a name="transfer-data-with-the-data-movement-library"></a>Transférer des données avec la bibliothèque de déplacement de données
 
@@ -525,7 +526,7 @@ public static async Task TransferAzureBlobToAzureBlob(CloudStorageAccount accoun
     ConsoleKeyInfo keyinfo;
     try
     {
-        task = TransferManager.CopyAsync(sourceBlob, destinationBlob, true, null, context, cancellationSource.Token);
+        task = TransferManager.CopyAsync(sourceBlob, destinationBlob, CopyMethod.ServiceSideAsyncCopy, null, context, cancellationSource.Token);
         while(!task.IsCompleted)
         {
             if(Console.KeyAvailable)

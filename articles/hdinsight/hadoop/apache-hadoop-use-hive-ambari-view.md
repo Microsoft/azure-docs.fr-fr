@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/23/2020
-ms.openlocfilehash: 832caaed0816e3dd7d177f634209dea42e5312c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: cc04a891bb32ede6c7bb72a339b728642cf343ed
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82192678"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000519"
 ---
 # <a name="use-apache-ambari-hive-view-with-apache-hadoop-in-hdinsight"></a>Utiliser la vue Apache Ambari Hive avec Apache Hadoop dans HDInsight
 
@@ -75,8 +75,10 @@ Un cluster Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Li
 
 1. Lorsque la requête est terminée, l’onglet **Results** (Résultats) affiche les résultats de l’opération. Le texte suivant est le résultat de la requête :
 
-        loglevel       count
-        [ERROR]        3
+    ```output
+    loglevel       count
+    [ERROR]        3
+    ```
 
     Vous pouvez utiliser l’onglet **JOURNAL** pour afficher les informations de journalisation que le travail a créées.
 

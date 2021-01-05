@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: H1Hack27Feb2017,hdinsightactive,hdiseo17may2017,seoapr2020
+ms.topic: how-to
+ms.custom: H1Hack27Feb2017,hdinsightactive,hdiseo17may2017,seoapr2020,devx-track-java
 ms.date: 04/27/2020
-ms.openlocfilehash: 471d07f4aa5abe7552ff33e767e8783239dd1989
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: 881ec4aa36261958b566dc2d7c4d06475a76bad4
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203877"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92545495"
 ---
 # <a name="create-an-apache-storm-topology-in-java"></a>Créer une topologie Apache Storm en Java
 
@@ -26,7 +26,7 @@ Après avoir suivi les étapes décrites dans ce document, vous pourrez déploye
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Kit de développeur Java (JDK) version 8](https://aka.ms/azure-jdks)
+* [Kit de développeur Java (JDK) version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 
@@ -43,7 +43,7 @@ cd C:\HDI
 
 ## <a name="create-a-maven-project"></a>Création d’un projet Maven
 
-Entrez la commande suivante pour créer un projet Maven nommé **WordCount** :
+Entrez la commande suivante pour créer un projet Maven nommé **WordCount**  :
 
 ```cmd
 mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupId=com.microsoft.example -DartifactId=WordCount -DinteractiveMode=false
@@ -199,9 +199,9 @@ Cette section est utilisée pour ajouter des plug-ins, des ressources et d’aut
 
     [`Apache Maven Compiler Plugin`](https://maven.apache.org/plugins/maven-compiler-plugin/) est un autre plug-in utile, car il sert à modifier les options de compilation. Changez la version de Java que Maven utilise pour la source et la cible de votre application.
 
-  * Pour HDInsight __3.4 ou antérieure__, définissez la source et la cible de la version Java sur __1.7__.
+  * Pour HDInsight __3.4 ou antérieure__ , définissez la source et la cible de la version Java sur __1.7__ .
 
-  * Pour HDInsight __3.5__, définissez la source et la cible de la version Java sur __1.8__.
+  * Pour HDInsight __3.5__ , définissez la source et la cible de la version Java sur __1.8__ .
 
   Ajoutez le texte ci-après à la section `<plugins>` du fichier `pom.xml` pour inclure le plug-in du compilateur Maven Apache. Étant donné que cet exemple spécifie la valeur 1.8, la version cible de HDInsight est 3.5.
 
@@ -237,11 +237,11 @@ Cet exemple ajoute le répertoire des ressources à la racine du projet (`${base
 
 Une topologie Apache Storm basée sur Java comprend trois composants que vous devez créer (ou référencer) en tant que dépendance.
 
-* **Spouts** : ils lisent les données provenant de sources externes et émettent des flux de données dans la topologie.
+* **Spouts**  : ils lisent les données provenant de sources externes et émettent des flux de données dans la topologie.
 
-* **Bolts** : Effectue le traitement des flux de données émis par les spouts ou les autres bolts et émettent un ou plusieurs flux.
+* **Bolts**  : Effectue le traitement des flux de données émis par les spouts ou les autres bolts et émettent un ou plusieurs flux.
 
-* **Topologie** : elle définit l’organisation des spouts et des bolts, et fournit le point d’entrée pour la topologie.
+* **Topologie**  : elle définit l’organisation des spouts et des bolts, et fournit le point d’entrée pour la topologie.
 
 ### <a name="create-the-spout"></a>Création du spout
 
@@ -327,9 +327,9 @@ public class RandomSentenceSpout extends BaseRichSpout {
 
 Les bolts gèrent le traitement des données. Les bolts peuvent tout faire : calculs, persistance, communication avec des composants externes, etc. Cette topologie utilise deux bolts :
 
-* **SplitSentence** : fractionne les phrases émises par **RandomSentenceSpout** en mots.
+* **SplitSentence**  : fractionne les phrases émises par **RandomSentenceSpout** en mots.
 
-* **WordCount** : compte le nombre d’occurrences de chaque mot.
+* **WordCount**  : compte le nombre d’occurrences de chaque mot.
 
 #### <a name="splitsentence"></a>SplitSentence
 
@@ -593,7 +593,7 @@ La section `<Root level="error">` configure le niveau racine de journalisation (
 Pour plus d’informations sur la configuration de la journalisation pour Log4j 2, consultez [https://logging.apache.org/log4j/2.x/manual/configuration.html](https://logging.apache.org/log4j/2.x/manual/configuration.html).
 
 > [!NOTE]  
-> Storm version 0.10.0 et ultérieure utilisent Log4j 2.x. Les versions antérieures de Storm utilisaient Log4j 1.x, qui utilisait un autre format pour la configuration du journal. Pour plus d’informations sur la configuration antérieure, accédez à l’adresse [https://wiki.apache.org/logging-log4j/Log4jXmlFormat](https://wiki.apache.org/logging-log4j/Log4jXmlFormat).
+> Storm version 0.10.0 et ultérieure utilisent Log4j 2.x. Les versions antérieures de Storm utilisaient Log4j 1.x, qui utilisait un autre format pour la configuration du journal. Pour plus d’informations sur la configuration antérieure, accédez à l’adresse [https://cwiki.apache.org/confluence/display/LOGGINGLOG4J/Log4jXmlFormat](https://cwiki.apache.org/confluence/display/LOGGINGLOG4J/Log4jXmlFormat).
 
 ## <a name="test-the-topology-locally"></a>Test local de la topologie
 
@@ -605,13 +605,15 @@ mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCountTopology
 
 Pendant son exécution, la topologie affiche les informations de démarrage. Le texte ci-après est un exemple de sortie de statistiques :
 
-    17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word snow
-    17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word white
-    17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 112 for word seven
-    17:33:27 [Thread-16-count] INFO  com.microsoft.example.WordCount - Emitting a count of 195 for word the
-    17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 113 for word and
-    17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word dwarfs
-    17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word snow
+```output
+17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word snow
+17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word white
+17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 112 for word seven
+17:33:27 [Thread-16-count] INFO  com.microsoft.example.WordCount - Emitting a count of 195 for word the
+17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 113 for word and
+17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word dwarfs
+17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word snow
+```
 
 Cet exemple de journal indique que le mot « and » a été utilisé 113 fois. Le nombre continue à augmenter tant que la topologie s’exécute. Cette augmentation est due au fait que le spout émet continuellement les mêmes phrases.
 

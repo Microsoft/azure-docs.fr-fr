@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 05/07/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 048f7d41bd9d106121859e6b1fc013258067af9c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 790580160ec236d1923dc28b9990d2675c253b44
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885121"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442682"
 ---
 # <a name="a-web-api-that-calls-web-apis-app-registration"></a>Une API web qui appelle des API web : Inscription d'application
 
@@ -28,9 +28,8 @@ Comme l’application web appelle maintenant des API web, elle devient une appli
 
 ## <a name="api-permissions"></a>Autorisations des API
 
-Les applications web appellent des API pour le compte d’utilisateurs pour lesquels le jeton du porteur a été reçu. Elles doivent demander des autorisations déléguées. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder aux API web](quickstart-configure-app-access-web-apis.md#add-permissions-to-access-web-apis).
+Les applications web appellent des API pour le compte d’utilisateurs pour lesquels le jeton du porteur a été reçu. Elles doivent demander des autorisations déléguées. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder à votre API web](quickstart-configure-app-access-web-apis.md#add-permissions-to-access-your-web-api).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Une API web qui appelle des API web : Configuration de code](scenario-web-api-call-api-app-configuration.md)
+Passez à l’article suivant de ce scénario, [Configuration du code de l’application](scenario-web-api-call-api-app-configuration.md).

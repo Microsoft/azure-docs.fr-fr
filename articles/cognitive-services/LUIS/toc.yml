@@ -21,18 +21,8 @@
           displayName: 'assign key, assign resource, add key, add resource, test, deploy, endpoint, query, publish'
     - name: Utiliser le navigateur
       href: luis-get-started-get-intent-from-browser.md
-    - name: Utiliser le SDK
-      items:
-        - name: Création d’une application
-          href: sdk-authoring.md
-        - name: Interroger le point de terminaison de prédiction
-          href: sdk-query-prediction-endpoint.md
-    - name: Utiliser les API REST
-      items:
-        - name: Reconnaître l’intention
-          href: luis-get-started-get-intent-from-rest.md
-        - name: Changer de modèle
-          href: get-started-get-model-rest-apis.md
+    - name: Utiliser les bibliothèques de client et l’API REST
+      href: client-libraries-rest-api.md
 - name: Tutoriels
   items:
     - name: Créer une application décomposable
@@ -46,13 +36,11 @@
       items:
         - name: Corriger des prédictions incertaines
           href: luis-tutorial-review-endpoint-utterances.md
-        - name: Tester des jeux de données par lot
-          href: luis-tutorial-batch-testing.md
         - name: Ajouter des patterns pour améliorer les prédictions
           href: luis-tutorial-pattern.md
     - name: Utiliser avec un bot
       items:
-        - name: 'Avec C#'
+        - name: Avec C#
           href: luis-csharp-tutorial-bf-v4.md
           displayName: 'bot framework, framework, sdk, abs'
         - name: Avec Node.js
@@ -60,6 +48,8 @@
           href: luis-nodejs-tutorial-bf-v4.md
 - name: Concepts
   items:
+    - name: Intelligence artificielle
+      href: artificial-intelligence.md
     - name: Cycle de vie de développement
       href: luis-concept-app-iteration.md
     - name: Planifier votre application
@@ -101,11 +91,6 @@
       items:
         - name: Test interactif
           href: luis-concept-test.md
-        - name: Test par lot
-          href: luis-concept-batch-test.md
-    - name: Clés de création et d'exécution
-      displayName: 'shared, transfer, ownership, author, access, import'
-      href: luis-concept-keys.md
     - name: Gestion des données
       items:
         - name: Modification des données
@@ -125,8 +110,18 @@
         - name: Stratégies de conception
           href: luis-concept-enterprise.md
           displayName: import
+    - name: Application des pratiques DevOps avec LUIS
+      items:
+        - name: Stratégies de contrôle de code source et de branche pour LUIS
+          href: luis-concept-devops-sourcecontrol.md
+        - name: Test pour DevOps
+          href: luis-concept-devops-testing.md
+        - name: Workflows CI/CD
+          href: luis-concept-devops-automation.md
 - name: Guides pratiques
   items:
+    - name: Se connecter au portail LUIS
+      href: sign-in-luis-portal.md
     - name: Démarrer une nouvelle application
       href: luis-how-to-start-new-app.md
       displayName: 'import, export, container'
@@ -186,11 +181,7 @@
         - name: Migrer à partir d’une entité composite
           href: migrate-from-composite-entity.md
         - name: Migrer vers la ressource de création
-          items:
-            - name: Vue d’ensemble
-              href: luis-migration-authoring.md
-            - name: Guide pratique pour migrer
-              href: luis-migration-authoring-steps.md
+          href: luis-migration-authoring.md
         - name: Migrer vers l’API V3
           href: luis-migration-api-v3.md
     - name: Gérer l’application
@@ -200,12 +191,6 @@
           href: luis-how-to-azure-subscription.md
         - name: Paramètres d’application et de version
           href: how-to-application-settings-portal.md
-        - name: Migrer vers la ressource de création
-          items:
-            - name: Vue d’ensemble
-              href: luis-migration-authoring.md
-            - name: Guide pratique pour migrer
-              href: luis-migration-authoring-steps.md
         - name: Créateurs et collaborateurs
           displayName: 'access, transfer, AAD, tenant, Azure AD, consent, RBAC, admin, role-based access control, ownership, import'
           href: luis-how-to-collaborate.md
@@ -226,6 +211,12 @@
           href: luis-migration-api-v3.md
         - name: Migrer vers l’API V2
           href: luis-migration-api-v1-to-v2.md
+    - name: Utiliser les API REST
+      items:
+        - name: Reconnaître l’intention
+          href: luis-get-started-get-intent-from-rest.md
+        - name: Changer de modèle
+          href: get-started-get-model-rest-apis.md
     - name: Utiliser des conteneurs
       items:
         - name: Installer et exécuter des conteneurs
@@ -234,15 +225,19 @@
         - name: Configurer des conteneurs
           href: luis-container-configuration.md
         - name: Utiliser des instances de conteneur
-          href: deploy-luis-on-container-instances.md
+          href: ../containers/azure-container-instance-recipe.md
         - name: Limitations des conteneurs
           href: luis-container-limitations.md
           displayName: 'phrase list recommendations, multi-language, translator, locale, language, English, Chinese, French, German, Italian, Korean, Portuguese, Spanish, Turkish, Keigo, subculture, dictation, speech, Bing Spell Check, foreign words, Hybrid languages, Tokenization, space, special character, compound words, tokens'
+        - name: Documentation sur les conteneurs Cognitive Services
+          href: ../containers/index.yml
+    - name: Utiliser DevOps
+      href: luis-how-to-devops-with-github.md
     - name: Services connexes
       items:
         - name: Azure Bot Service
           href: 'https://dev.botframework.com/'
-        - name: 'C# du SDK Bot Builder 4.x'
+        - name: C# du SDK Bot Builder 4.x
           href: 'https://github.com/Microsoft/botbuilder-dotnet'
         - name: QnA Maker
           href: 'https://qnamaker.ai/'
@@ -266,9 +261,9 @@
         - name: Schéma d’application
           href: app-schema-definition.md
         - name: Azure CLI
-          href: 'https://go.microsoft.com/fwlink/?linkid=2092156'
+          href: /cli/azure/cognitiveservices#az_cognitiveservices_list
         - name: Azure RM PowerShell
-          href: 'https://go.microsoft.com/fwlink/?linkid=2092157'
+          href: /powershell/module/azurerm.cognitiveservices/#cognitive_services
         - name: API REST
           items:
             - name: API REST de création V3 (préversion)
@@ -284,14 +279,14 @@
               href: luis-reference-response-codes.md
         - name: Kits SDK
           items:
-            - name: 'C#'
+            - name: C#
               items:
                 - name: NuGet - création
                   href: 'https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring/'
                 - name: NuGet - runtime
                   href: 'https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime/'
                 - name: Informations de référence
-                  href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/languageunderstanding?view=azure-dotnet'
+                  href: /dotnet/api/overview/azure/cognitiveservices/client/languageunderstanding?view=azure-dotnet
                 - name: Exemples
                   href: 'https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/LUIS'
             - name: Go
@@ -309,7 +304,7 @@
                 - name: Maven - exécution
                   href: 'https://search.maven.org/artifact/com.microsoft.azure.cognitiveservices/azure-cognitiveservices-luis-runtime'
                 - name: Informations de référence
-                  href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/languageunderstanding?view=azure-java-stable'
+                  href: /java/api/overview/azure/cognitiveservices/client/languageunderstanding?view=azure-java-stable
                 - name: Exemples
                   href: 'https://github.com/Azure-Samples/cognitive-services-java-sdk-samples/tree/master/Language/LanguageUnderstanding'
             - name: Node.js
@@ -325,7 +320,7 @@
                 - name: Kit SDK PIP
                   href: 'https://pypi.org/project/azure-cognitiveservices-language-luis/'
                 - name: Informations de référence
-                  href: 'https://docs.microsoft.com/python/api/azure-cognitiveservices-language-luis/index?view=azure-python'
+                  href: /python/api/azure-cognitiveservices-language-luis/index?view=azure-python
                 - name: Exemples
                   href: 'https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/tree/master/samples/language/luis'
     - name: Confidentialité de l'utilisateur
@@ -397,6 +392,8 @@
       href: luis-reference-prebuilt-sentiment.md
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/luis/context/context
     - name: Exemples de code
       href: 'https://github.com/Azure-Samples/cognitive-services-language-understanding'
     - name: Disponibilité régionale
@@ -417,15 +414,12 @@
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Chiffrement
       href: luis-encryption-of-data-at-rest.md
-    - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/LUIS'
-    - name: UserVoice
-      href: 'https://go.microsoft.com/fwlink/?linkid=2092090'
+    - name: Configurer des réseaux virtuels
+      maintainContext: true
+      href: ../cognitive-services-virtual-networks.md
     - name: Recherche
-      href: 'https://docs.microsoft.com/search/index?search=LUIS'
+      href: /search/index?search=LUIS
     - name: Blog
       href: 'https://blog.botframework.com/category/luis/'
-    - name: Base de connaissances
-      href: 'https://cognitive.uservoice.com/knowledgebase/topics/127872-luis-language-understanding-intelligent-service'
 - name: Portail LUIS
   href: 'https://www.luis.ai'

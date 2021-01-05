@@ -7,12 +7,12 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.date: 08/15/2019
-ms.openlocfilehash: 31cdef281b1cb26d01a4690c815e3d3621e2c053
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 156d3ce4b7f8b6eaa297f2cddd0d5a93f382f78e
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233465"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547280"
 ---
 # <a name="outofmemoryerror-exceptions-for-apache-spark-in-azure-hdinsight"></a>Exceptions OutOfMemoryError pour Apache Spark dans Azure HDInsight
 
@@ -60,7 +60,7 @@ La cause la plus probable de cette exception est que le segment de mémoire allo
 
 1. Déterminez le volume maximal de données que l’application Spark va traiter. Estimez ce volume en fonction du volume maximal des données d’entrée, des données intermédiaires produites par la transformation des données d’entrée et des données de sortie produites à partir des données intermédiaires. Si l’estimation initiale n’est pas suffisante, augmentez légèrement le volume, et itérez jusqu'à ce que les erreurs de mémoire diminuent.
 
-1. Assurez-vous que le cluster HDInsight à utiliser dispose de suffisamment de ressources en termes de mémoire et de cœurs pour prendre en charge l’application Spark. Pour le vérifier, accédez à la section Mesures de cluster de l’interface utilisateur YARN du cluster et comparez les valeurs **Mémoire utilisée**/ **Mémoire totale** et les valeurs **VCores utilisées**/ **Total des VCores**.
+1. Assurez-vous que le cluster HDInsight à utiliser dispose de suffisamment de ressources en termes de mémoire et de cœurs pour prendre en charge l’application Spark. Pour le vérifier, accédez à la section Mesures de cluster de l’interface utilisateur YARN du cluster et comparez les valeurs **Mémoire utilisée** / **Mémoire totale** et les valeurs **VCores utilisées** / **Total des VCores** .
 
     ![affichage de la mémoire centrale yarn](./media/apache-spark-ts-outofmemory/yarn-core-memory-view.png)
 
@@ -249,10 +249,10 @@ Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à 
 
 * [Vue d’ensemble de la gestion de la mémoire dans Spark](https://spark.apache.org/docs/latest/tuning.html#memory-management-overview).
 
-* [Débogage d’une application Spark sur des clusters HDInsight](https://blogs.msdn.microsoft.com/azuredatalake/2016/12/19/spark-debugging-101/).
+* [Débogage d’une application Spark sur des clusters HDInsight](/archive/blogs/azuredatalake/spark-debugging-101).
 
 * Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
 
 * Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
 
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support** . Pour plus d’informations, consultez [Création d’une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).

@@ -8,13 +8,13 @@ ms.topic: include
 ms.date: 01/14/2020
 ms.author: markvi
 ms.custom: include file
-ms.openlocfilehash: 6a50faee2d557c39e9bd371caa98a4bcb2016e0f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b907eb1f9240156cdb1d9c9cf44d77d4738aff1a
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75971886"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93135515"
 ---
 Pour désactiver l’identité affectée par le système sur votre machine virtuelle, définissez son état sur **Off**. 
 
-![Créer un nouveau compte de stockage](./media/active-directory-msi-tut-disable/identity.png)
+![Capture d’écran montrant l’onglet « Affecté(e) par le système » d’une machine virtuelle, sous lequel vous pouvez désactiver l’état « Affecté(e) par le système ».](./media/active-directory-msi-tut-disable/identity.png)

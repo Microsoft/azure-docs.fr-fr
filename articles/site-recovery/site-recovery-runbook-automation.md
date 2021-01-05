@@ -1,18 +1,18 @@
 ---
 title: Ajouter des runbooks Azure Automation à des plans de récupération Site Recovery
 description: Apprenez à étendre des plans de récupération avec Azure Automation pour la récupération d'urgence à l'aide d'Azure Site Recovery.
-author: rajani-janaki-ram
-manager: gauravd
+author: Rajeswari-Mamilla
+manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 09/18/2019
-ms.author: rajanaki
-ms.openlocfilehash: ecfe993a137ca63c84438870ec54ac1e6d6707da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: ramamill
+ms.openlocfilehash: a141280338632fdad7053cbbe76c8bdf2797443d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229009"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89424869"
 ---
 # <a name="add-azure-automation-runbooks-to-recovery-plans"></a>Ajouter des runbooks Azure Automation à des plans de récupération
 
@@ -56,6 +56,9 @@ Lorsqu'un script s'exécute, il injecte un contexte de plan de récupération da
 | CloudServiceName |Nom du service cloud Azure sous lequel la machine virtuelle a été créée. |
 | RoleName |Nom de la machine virtuelle Azure. |
 | RecoveryPointId|Timestamp de la récupération de la machine virtuelle. |
+
+>[!Note]
+>La valeur de la variable « FailoverDirection » est « PrimaryToSecondary » en cas de basculement, et « SecondaryToPrimary » en cas de restauration automatique.
 
 L’exemple suivant montre une variable de contexte :
 
@@ -126,7 +129,7 @@ Le blog d'Aman Sharma, [Harvesting Clouds](http://harvestingclouds.com) (Exploit
 
 Vous pouvez utiliser le même script de runbook dans plusieurs plans de récupération en ayant recours à des variables externes. 
 
-- Les [variables Azure Automation](../automation/automation-variables.md) permettent de stocker des paramètres pour l'exécution d'un plan de récupération.
+- Les [variables Azure Automation](../automation/shared-resources/variables.md) permettent de stocker des paramètres pour l'exécution d'un plan de récupération.
 - En ajoutant le nom de plan de récupération en tant que préfixe à la variable, vous pouvez créer des variables individuelles pour chaque plan de récupération. Ensuite, utilisez les variables en tant que paramètres.
 - Vous pouvez modifier un paramètre sans changer le script, mais en modifiant la façon dont le script fonctionne.
 
@@ -196,7 +199,7 @@ Selon les scénarios, vous ne pourrez peut-être pas toujours créer de variable
 - Par exemple, une récupération SharePoint a deux serveurs frontaux. Une application métier n’a qu’un seul serveur frontal.
 - Dans ce scénario, vous ne pouvez pas créer des variables distinctes pour chaque plan de récupération.
 
-Dans l'exemple suivant, nous créons une [variable complexe](https://docs.microsoft.com/powershell/module/servicemanagement/azure/set-azureautomationvariable) sur le compte Azure Automation.
+Dans l'exemple suivant, nous créons une [variable complexe](/powershell/module/servicemanagement/azure.service/set-azureautomationvariable) sur le compte Azure Automation.
 
 Pour ce faire, nous spécifions plusieurs valeurs à l'aide d'Azure PowerShell.
 
@@ -261,9 +264,6 @@ Cette vidéo fournit un autre exemple. Elle montre comment récupérer une appli
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez-en plus sur le [compte d'identification Azure Automation](../automation/automation-create-runas-account.md).
+- Découvrez-en plus sur le [compte d'identification Azure Automation](../automation/manage-runas-account.md).
 - Consultez les [exemples de scripts Azure Automation](https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=User&f%5B0%5D.Value=SC%20Automation%20Product%20Team&f%5B0%5D.Text=SC%20Automation%20Product%20Team).
 - [En savoir plus](site-recovery-failover.md) sur l’exécution des basculements.
-
-
-

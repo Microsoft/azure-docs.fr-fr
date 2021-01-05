@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/20/2020
+ms.topic: how-to
+ms.date: 10/15/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 1f1897a4f58276bbac2a7de673544e592a562562
-ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+ms.openlocfilehash: f6907db7f6e53247a8f2fc0042e8c8e6b081dbd3
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83826670"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97516378"
 ---
 # <a name="secure-your-restful-services"></a>Sécuriser vos services API RESTful 
 
@@ -111,10 +111,10 @@ L’authentification par certificat client est une authentification mutuelle bas
 
 ### <a name="prepare-a-self-signed-certificate-optional"></a>Préparer un certificat auto-signé (facultatif)
 
-Pour les environnements hors production, si vous n’avez pas encore de certificat, vous pouvez utiliser un certificat auto-signé. Sur Windows, vous pouvez utiliser l’applet de commande [New-SelfSignedCertificate](https://docs.microsoft.com/powershell/module/pkiclient/new-selfsignedcertificate) de PowerShell pour générer un certificat.
+Pour les environnements hors production, si vous n’avez pas encore de certificat, vous pouvez utiliser un certificat auto-signé. Sur Windows, vous pouvez utiliser l’applet de commande [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate) de PowerShell pour générer un certificat.
 
 1. Exécutez cette commande PowerShell pour générer un certificat auto-signé. Modifiez l’argument `-Subject` comme il convient pour votre application et le nom de locataire Azure AD B2C. Vous pouvez également ajuster la date de `-NotAfter` pour spécifier un délai d’expiration différent pour le certificat.
-    ```PowerShell
+    ```powershell
     New-SelfSignedCertificate `
         -KeyExportPolicy Exportable `
         -Subject "CN=yourappname.yourtenant.onmicrosoft.com" `
@@ -230,9 +230,9 @@ Une revendication fournit un stockage temporaire de données lors d’une exécu
 
 ### <a name="acquiring-an-access-token"></a>Acquisition d’un jeton d’accès 
 
-Vous pouvez obtenir un jeton d’accès de l’une des manières suivantes : en l’obtenant [auprès d’un fournisseur d’identité fédéré](idp-pass-through-custom.md), en appelant une API REST qui retourne un jeton d’accès, à l’aide d’un [flux ROPC](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth-ropc) ou à l’aide du [flux d’informations d’identification du client](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow).  
+Vous pouvez obtenir un jeton d’accès de l’une des manières suivantes : en l’obtenant [auprès d’un fournisseur d’identité fédéré](idp-pass-through-user-flow.md), en appelant une API REST qui retourne un jeton d’accès, à l’aide d’un [flux ROPC](../active-directory/develop/v2-oauth-ropc.md) ou à l’aide du [flux d’informations d’identification du client](../active-directory/develop/v2-oauth2-client-creds-grant-flow.md).  
 
-L’exemple suivant utilise un profil technique de l’API REST pour soumettre une requête au point de terminaison du jeton Azure AD à l’aide des informations d’identification du client passées en tant qu’authentification de base HTTP. Pour effectuer la configuration dans Azure AD, consultez [Plateforme d’identités Microsoft et flux d’informations d’identification du client OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow). Vous devrez peut-être modifier cette valeur pour l’interface avec votre fournisseur d’identité. 
+L’exemple suivant utilise un profil technique de l’API REST pour soumettre une requête au point de terminaison du jeton Azure AD à l’aide des informations d’identification du client passées en tant qu’authentification de base HTTP. Pour effectuer la configuration dans Azure AD, consultez [Plateforme d’identités Microsoft et flux d’informations d’identification du client OAuth 2.0](../active-directory/develop/v2-oauth2-client-creds-grant-flow.md). Vous devrez peut-être modifier cette valeur pour l’interface avec votre fournisseur d’identité. 
 
 Au niveau de ServiceUrl, remplacez your-tenant-name par le nom de votre locataire Azure AD. Consultez la référence [Profil technique RESTful](restful-technical-profile.md) pour connaître toutes les options disponibles.
 
@@ -285,7 +285,7 @@ Pour prendre en charge l’authentification par jeton du porteur dans votre stra
 
 Une fois les extraits de code ci-dessus ajoutés, votre profil technique doit se présenter comme le code XML suivant :
 
-```XML
+```xml
 <ClaimsProvider>
   <DisplayName>REST APIs</DisplayName>
   <TechnicalProfiles>
@@ -312,7 +312,7 @@ Une fois les extraits de code ci-dessus ajoutés, votre profil technique doit se
 
 ### <a name="add-the-oauth2-bearer-token-policy-key"></a>Ajouter la clé de stratégie de jeton du porteur OAuth2
 
-Créez une clé de stratégie pour stocker la valeur du jeton du porteur.
+Pour configurer un profil technique API REST avec un jeton du porteur OAuth2, obtenez un jeton d’accès à partir du propriétaire de l’API REST. Créez ensuite la clé de chiffrement suivante pour stocker le jeton du porteur.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 1. Veillez à bien utiliser l’annuaire qui contient votre locataire Azure AD B2C. Sélectionnez le filtre **Annuaire + abonnement** dans le menu du haut, puis choisissez votre annuaire Azure AD B2C.
@@ -365,6 +365,69 @@ Voici un exemple de profil technique RESTful configuré avec l’authentificatio
 </ClaimsProvider>
 ```
 
+## <a name="api-key-authentication"></a>Authentification par clé API
+
+La clé API est un identificateur unique utilisé pour authentifier un utilisateur afin d’accéder à un point de terminaison d’API REST. La clé est envoyée dans un en-tête HTTP personnalisé. Par exemple, le [déclencheur HTTP Azure Functions](../azure-functions/functions-bindings-http-webhook-trigger.md#authorization-keys) utilise l’en-tête HTTP `x-functions-key` pour identifier le demandeur.  
+
+### <a name="add-api-key-policy-keys"></a>Ajouter des clés de stratégie de clé API
+
+Pour configurer un profil technique d’API REST avec l’authentification par clé API, créez la clé de chiffrement suivante pour stocker la clé API :
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com/).
+1. Veillez à bien utiliser l’annuaire qui contient votre locataire Azure AD B2C. Sélectionnez le filtre **Annuaire + abonnement** dans le menu du haut, puis choisissez votre annuaire Azure AD B2C.
+1. Choisissez **Tous les services** dans le coin supérieur gauche du portail Azure, puis recherchez et sélectionnez **Azure AD B2C**.
+1. Dans la page de vue d’ensemble, sélectionnez **Infrastructure d’expérience d’identité**.
+1. Sélectionnez **Clés de stratégie**, puis **Ajouter**.
+1. Pour **Options**, sélectionnez **Manuel**.
+1. Dans **Nom**, indiquez **RestApiKey**.
+    Il est possible que le préfixe *B2C_1A_* soit ajouté automatiquement.
+1. Dans la zone **Secret**, entrez la clé de l’API REST.
+1. Pour **Utilisation de la clé**, sélectionnez **Chiffrement**.
+1. Sélectionnez **Create** (Créer).
+
+
+### <a name="configure-your-rest-api-technical-profile-to-use-api-key-authentication"></a>Configurer votre profil technique d’API REST afin d’utiliser l’authentification par clé API
+
+Après avoir créé la clé nécessaire, configurez les métadonnées du profil technique de votre API REST pour référencer les informations d’identification.
+
+1. Dans votre répertoire de travail, ouvrez le fichier de stratégie d’extension (TrustFrameworkExtensions.xml).
+1. Recherchez le profil technique API REST. Par exemple, `REST-ValidateProfile` ou `REST-GetProfile`.
+1. Recherchez l’élément `<Metadata>`.
+1. Définissez *AuthenticationType* sur `ApiKeyHeader`.
+1. Définissez *AllowInsecureAuthInProduction* sur `false`.
+1. Immédiatement après l’élément `</Metadata>` fermant, ajoutez l’extrait de code XML suivant :
+    ```xml
+    <CryptographicKeys>
+        <Key Id="x-functions-key" StorageReferenceId="B2C_1A_RestApiKey" />
+    </CryptographicKeys>
+    ```
+
+L’**ID** de la clé de chiffrement définit l’en-tête HTTP. Dans cet exemple, la clé API est envoyée sous la forme **x-functions-key**.
+
+Voici un exemple de profil technique RESTful configuré pour appeler une application de fonction avec une authentification par clé API :
+
+```xml
+<ClaimsProvider>
+  <DisplayName>REST APIs</DisplayName>
+  <TechnicalProfiles>
+    <TechnicalProfile Id="REST-GetProfile">
+      <DisplayName>Get user extended profile Azure Function web hook</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ServiceUrl">https://your-account.azurewebsites.net/api/GetProfile?code=your-code</Item>
+        <Item Key="SendClaimsIn">Body</Item>
+        <Item Key="AuthenticationType">ApiKeyHeader</Item>
+        <Item Key="AllowInsecureAuthInProduction">false</Item>
+      </Metadata>
+      <CryptographicKeys>
+        <Key Id="x-functions-key" StorageReferenceId="B2C_1A_RestApiKey" />
+      </CryptographicKeys>
+      ...
+    </TechnicalProfile>
+  </TechnicalProfiles>
+</ClaimsProvider>
+```
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Apprenez-en davantage sur le [profil technique RESTful](restful-technical-profile.md) dans le guide de référence IEF. 
+- Apprenez-en davantage sur le [profil technique RESTful](restful-technical-profile.md) dans le guide de référence IEF.

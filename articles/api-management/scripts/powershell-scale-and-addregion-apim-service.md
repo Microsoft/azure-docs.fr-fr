@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure PowerShell - Mettre à l’échelle une instance de service | Microsoft Docs
-description: Exemple de script Azure PowerShell - Mettre à l’échelle une instance de service
+description: Découvrez comment mettre à l’échelle et ajouter des régions à l’instance du service Gestion des API. Consultez un exemple de script et affichez des ressources disponibles supplémentaires.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,12 +12,12 @@ ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: 9bd584c4759d8a4abeae32983fcb60ac8102bb36
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ec54f1dcf3f7f28415646a58c057453985d450f0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70073279"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87902255"
 ---
 # <a name="scale-the-service-instance"></a>Mettre à l’échelle une instance de service
 
@@ -43,6 +43,6 @@ Remove-AzResourceGroup -Name myResourceGroup
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour la Gestion des API Azure sur la page [Exemples PowerShell](../powershell-samples.md).

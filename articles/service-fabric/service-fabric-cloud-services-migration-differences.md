@@ -1,16 +1,14 @@
 ---
 title: Différences entre les services cloud et Service Fabric
 description: Aperçu conceptuel pour apprendre à migrer des applications à partir des services cloud vers Service Fabric.
-author: vturecek
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: vturecek
-ms.openlocfilehash: 283ad2c63bb59771dab7881522e737f773ab1705
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c7e7d346b5a39a262d1d55265becadb1c718cc04
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75463365"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575769"
 ---
 # <a name="learn-about-the-differences-between-cloud-services-and-service-fabric-before-migrating-applications"></a>Découvrez les différences entre les services cloud et Service Fabric avant de migrer les applications.
 Microsoft Azure Service Fabric est la plateforme d’applications cloud nouvelle génération pour les applications distribuées hautement évolutives et fiables. Elle introduit de nombreuses nouvelles fonctionnalités d’empaquetage, de déploiement, de mise à niveau et de gestion des applications cloud distribuées. 
@@ -69,7 +67,7 @@ Avec la communication directe, les niveaux peuvent communiquer directement par l
 
 Service Fabric fournit un mécanisme de découverte de service, appelé service d’affectation de noms, qui peut être utilisé pour résoudre les adresses de point de terminaison des services. 
 
-![Communication directe Service Fabric][6]
+![Diagramme qui montre comment Service Fabric fournit un mécanisme de découverte de service, appelé service d’affectation de noms, qui peut être utilisé pour résoudre les adresses de point de terminaison des services.][6]
 
 ### <a name="queues"></a>Files d’attente
 Pour communiquer entre les niveaux dans des environnements sans état tels que les services cloud, il est courant d’utiliser une file d’attente de stockage externe pour enregistrer durablement les tâches de travail d’un niveau à l’autre. Il est fréquent qu’un niveau web envoie les travaux à un Service Bus ou à une file d’attente Azure où les instances de rôle de travail peuvent enlever les travaux de la file d’attente et les traiter.
@@ -81,7 +79,7 @@ Le même modèle de communication peut être utilisé dans Service Fabric. Cela 
 ![Communication directe Service Fabric][8]
 
 ## <a name="parity"></a>Parité
-[Cloud Services est similaire à Service Fabric en termes de niveau de contrôle et de facilité d’utilisation, mais il s’agit désormais d’un service hérité et Service Fabric est recommandé pour un nouveau développement](https://docs.microsoft.com/azure/app-service/overview-compare) ; voici une comparaison entre les API :
+[Cloud Services est similaire à Service Fabric en termes de niveau de contrôle et de facilité d’utilisation, mais il s’agit désormais d’un service hérité et Service Fabric est recommandé pour un nouveau développement](/azure/architecture/guide/technology-choices/compute-decision-tree) ; voici une comparaison entre les API :
 
 
 | **API Service Cloud** | **API Service Fabric** | **Remarques** |

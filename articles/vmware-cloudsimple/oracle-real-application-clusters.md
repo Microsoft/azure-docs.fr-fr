@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: f657e18d7185d6b3c63ac8f1424da9d36d4189e9
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 980ba86a9916e13dd2ac7639bd06d3ab8546d2f1
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793038"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92424693"
 ---
 # <a name="optimize-your-cloudsimple-private-cloud-for-installing-oracle-rac"></a>Optimiser votre cloud privé CloudSimple pour l’installation d’Oracle RAC
 
@@ -79,7 +79,7 @@ Chaque machine virtuelle Oracle est configurée avec plusieurs disques pour le s
 * Le partage est défini sur **No sharing** (Aucun partage).
 * La redondance est définie sur le stockage à l’aide de stratégies vSAN.  
 
-![Configuration des groupes de disques de données Oracle RAC](media/oracle-vm-os-disks.png)
+![Diagramme illustrant la configuration physique du disque de système d'exploitation Oracle RAC.](media/oracle-vm-os-disks.png)
 
 ### <a name="data-disk-configuration"></a>Configuration des disques de données
 
@@ -148,7 +148,7 @@ La zone de récupération rapide (FRA, Fast Recovery Area) est gérée par le sy
 * Les disques doivent être configurés dans un même groupe de disques ASM.  
 * La redondance ASM est définie sur **External**.
 
-![Configuration des groupes de disques de données Oracle RAC](media/oracle-vm-fra-disks.png)
+![Diagramme illustrant la configuration du groupe de disques votants Oracle RAC.](media/oracle-vm-fra-disks.png)
 
 ## <a name="deploy-cloudsimple-private-cloud-vsphere-cluster"></a>Déployer un cluster vSphere de cloud privé CloudSimple
 
@@ -169,14 +169,14 @@ Pour déployer un cluster vSphere sur votre cloud privé, effectuez les étapes 
 
 Les stratégies vSAN définissent les défaillances à tolérer et l’entrelacement de disques pour les données stockées sur les disques de machines virtuelles.  La stratégie de stockage créée doit être appliquée sur les disques de machines virtuelles lors de la création de la machine virtuelle.
 
-1. [Connectez-vous au client vSphere](https://docs.microsoft.com/azure/vmware-cloudsimple/vcenter-access) de votre cloud privé.
+1. [Connectez-vous au client vSphere](./vcenter-access.md) de votre cloud privé.
 2. Dans le menu supérieur, sélectionnez **Policies and Profiles** (Stratégies et profils).
 3. Dans le menu de gauche, sélectionnez **VM Storage Policies** (Stratégies de stockage de machines virtuelles), puis **Create a VM storage Policy** (Créer une stratégie de stockage de machines virtuelles).
 4. Entrez un nom explicite pour la stratégie, puis cliquez sur **NEXT**.
 5. Dans la section **Policy structure** (Structure de la stratégie), sélectionnez **Enable rules for vSAN storage** (Activer les règles pour le stockage vSAN), puis cliquez sur **NEXT**.
-6. Dans la section **vSAN** > **Availability** (Disponibilité), sélectionnez **None** pour Site disaster tolerance (Tolérance pour la reprise d’activité de site). Pour Failures to tolerate, sélectionnez l’option de mise en miroir RAID (**RAID - Mirroring**) pour la FTT souhaitée.
+6. Dans la section **vSAN** > **Availability** (Disponibilité), sélectionnez **None** pour Site disaster tolerance (Tolérance pour la reprise d’activité de site). Pour Failures to tolerate, sélectionnez l’option de mise en miroir RAID ( **RAID - Mirroring** ) pour la FTT souhaitée.
     ![Paramètres de vSAN](media/oracle-rac-storage-wizard-vsan.png).
-7. Dans la section **Advanced**, sélectionnez le nombre d’agrégations de disques par objet. Pour Object space reservation (Réservation d’espace d’objet), sélectionnez **Thick Provisioned** (Alloué de manière statique). Sélectionnez **Disable object checksum** (Désactiver la somme de contrôle des objets). Cliquez sur **NEXT**.
+7. Dans la section **Advanced** , sélectionnez le nombre d’agrégations de disques par objet. Pour Object space reservation (Réservation d’espace d’objet), sélectionnez **Thick Provisioned** (Alloué de manière statique). Sélectionnez **Disable object checksum** (Désactiver la somme de contrôle des objets). Cliquez sur **NEXT**.
 8. Suivez les instructions à l’écran pour afficher la liste des banques de données vSAN compatibles, passer en revue les paramètres et terminer l’installation.
 
 ## <a name="create-oracle-vms-and-create-shared-vm-disks-for-oracle"></a>Créer des machines virtuelles Oracle et créer des disques de machines virtuelles partagés pour Oracle
@@ -187,7 +187,7 @@ Pour créer une machine virtuelle pour Oracle, clonez une machine virtuelle exis
 
 1. Dans vCenter, cliquez sur l'icône **Hôtes et clusters**. Sélectionnez le cluster que vous avez créé pour Oracle.
 2. Cliquez avec le bouton droit de la souris sur le cluster et sélectionnez **New Virtual Machine** (Nouvelle machine virtuelle).
-3. Sélectionnez **Créer une machine virtuelle**, puis cliquez sur **Suivant**.
+3. Sélectionnez **Créer une machine virtuelle** , puis cliquez sur **Suivant**.
 4. Nommez la machine, sélectionnez l’emplacement de la machine virtuelle Oracle, puis cliquez sur **Next**.
 5. Sélectionnez la ressource de cluster, puis cliquez sur **Next**.
 6. Sélectionnez la banque de données vSAN pour le cluster, puis cliquez sur **Next**.
@@ -196,7 +196,7 @@ Pour créer une machine virtuelle pour Oracle, clonez une machine virtuelle exis
 9. Sélectionnez la taille de disque dur requise pour l’installation du système d’exploitation.
 10. Pour installer l’application sur un autre appareil, cliquez sur **Add new device** (Ajouter un nouvel appareil).
 11. Sélectionnez les options réseau et affectez le groupe de ports distribués créé pour le réseau public.
-12. Pour ajouter des interfaces réseau supplémentaires, cliquez sur **Add new device**, puis sélectionnez le groupe de ports distribués créé pour le réseau privé.
+12. Pour ajouter des interfaces réseau supplémentaires, cliquez sur **Add new device** , puis sélectionnez le groupe de ports distribués créé pour le réseau privé.
 13. Pour New DC/DVD Drive (Nouveau lecteur CD/DVD), sélectionnez le fichier ISO de banques de données qui contient l’image ISO de l’installation de système d’exploitation de votre choix. Sélectionnez le fichier que vous avez chargé précédemment dans le dossier des fichiers ISO et des modèles, puis cliquez sur **OK**.
 14. Vérifiez les paramètres, puis cliquez sur **OK** pour créer la machine virtuelle.
 15. Mettez la machine virtuelle sous tension. Installez le système d’exploitation et toutes les mises à jour requises.
@@ -210,7 +210,7 @@ Oracle utilise un disque partagé pour stocker les fichiers de données, journau
 #### <a name="create-disks-on-the-first-vm"></a>Créer des disques sur la première machine virtuelle
 
 1. Dans vCenter, cliquez avec le bouton droit sur l’une des machines virtuelles Oracle, puis sélectionnez **Edit settings**.
-2. Dans la section New Device, sélectionnez **SCSI controller**, puis cliquez sur **Add**.
+2. Dans la section New Device, sélectionnez **SCSI controller** , puis cliquez sur **Add**.
 3. Dans la section New Device, sélectionnez **New Hard disk** (Nouveau disque dur), puis cliquez sur **Add**.
 4. Développez les propriétés du nouveau disque dur.
 5. Spécifiez la taille du disque dur.
@@ -220,14 +220,14 @@ Oracle utilise un disque partagé pour stocker les fichiers de données, journau
 9. Pour le partage, spécifiez **Multi-writer**.
 10. Pour le nœud d’appareil virtuel, sélectionnez le nouveau contrôleur SCSI créé à l’étape 2.
 
-    ![Créer des disques sur la première machine virtuelle](media/oracle-rac-new-hard-disk.png)
+    ![Capture d'écran mettant en évidence les champs nécessaires à la création de disques sur la première machine virtuelle.](media/oracle-rac-new-hard-disk.png)
 
 Répétez les étapes 2 à 10 pour tous les nouveaux disques requis pour les fichiers de données Oracle, les fichiers journaux et les fichiers journaux de phase de restauration par progression.
 
 #### <a name="attach-disks-to-second-vm"></a>Attacher des disques à la deuxième machine virtuelle
 
 1. Dans vCenter, cliquez avec le bouton droit sur l’une des machines virtuelles Oracle, puis sélectionnez **Edit settings**.
-2. Dans la section New Device, sélectionnez **SCSI controller**, puis cliquez sur **Add**.
+2. Dans la section New Device, sélectionnez **SCSI controller** , puis cliquez sur **Add**.
 3. Dans la section New Device, sélectionnez **Existing Hard disk** (Disque dur existant), puis cliquez sur **Add**.
 4. Accédez à l’emplacement où le disque a été créé pour la première machine virtuelle et sélectionnez le fichier VMDK.
 5. Spécifiez la stratégie de stockage vSAN que vous avez définie précédemment comme stratégie de stockage de la machine virtuelle.

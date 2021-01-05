@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/02/2019
 ms.author: yelevin
-ms.openlocfilehash: 2110d3319cebf693ef06deec26a29fa655e35035
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2465cf74dbf4fbf074aed8f8e4097a236e628425
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77585269"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660642"
 ---
 # <a name="useful-resources-for-working-with-azure-sentinel"></a>Ressources utiles lorsque vous travaillez avec Azure Sentinel
 
@@ -62,7 +62,17 @@ Parmi les opérations prises en charge, voici celles qui peuvent faire l’objet
 Vous pouvez afficher ces données en les transmettant en continu du journal d’activité Azure vers Azure Sentinel, d’où vous pouvez ensuite effectuer des recherches et des analyses à partir de ces données.
 
 1. Connectez la source de données [Activité Azure](connect-azure-activity.md). Une fois cette opération effectuée, les événements d’audit sont transmis en continu à une nouvelle table dans l’écran **Journaux** appelée AzureActivity.
-2. Ensuite, interrogez les données en utilisant KQL, comme vous le feriez avec n’importe quelle autre table.
+
+1. Ensuite, interrogez les données en utilisant KQL, comme vous le feriez avec n’importe quelle autre table.
+
+    Par exemple, pour déterminer qui a été le dernier utilisateur à modifier une règle d’analyse particulière, utilisez la requête suivante (en remplaçant `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` par l’ID de la règle que vous souhaitez vérifier) :
+
+    ```kusto
+    AzureActivity
+    | where OperationNameValue startswith "MICROSOFT.SECURITYINSIGHTS/ALERTRULES/WRITE"
+    | where Properties contains "alertRules/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    | project Caller , TimeGenerated , Properties
+    ```
 
 
 
@@ -82,4 +92,4 @@ Consultez les billets de blog Azure Sentinel dans [TechCommunity](https://techco
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans ce document, vous avez obtenu une liste des ressources qui sont utiles lorsque vous travaillez avec Azure Sentinel. Vous trouverez des informations supplémentaires sur la sécurité et la conformité Azure dans le [Blog sur la sécurité et la conformité Microsoft Azure](https://blogs.msdn.com/b/azuresecurity/).
+Dans ce document, vous avez obtenu une liste des ressources qui sont utiles lorsque vous travaillez avec Azure Sentinel. Vous trouverez des informations supplémentaires sur la sécurité et la conformité Azure dans le [Blog sur la sécurité et la conformité Microsoft Azure](/archive/blogs/azuresecurity/).

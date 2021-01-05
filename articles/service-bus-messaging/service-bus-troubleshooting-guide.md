@@ -1,25 +1,14 @@
 ---
 title: Guide de dépannage pour Azure Service Bus | Microsoft Docs
-description: Cet article fournit la liste des exceptions de messagerie Azure Service Bus et les actions suggérées à entreprendre quand une exception se produit.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: 3d8526fe-6e47-4119-9f3e-c56d916a98f9
-ms.service: service-bus-messaging
-ms.devlang: na
+description: Découvrez des conseils et recommandations pour résoudre certains problèmes que vous pourriez rencontrer lors de l’utilisation d’Azure Service Bus.
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 04/07/2020
-ms.author: aschhab
-ms.openlocfilehash: 63bf035d4e19cc1d64998a6ad533812e71ee71b8
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.date: 09/16/2020
+ms.openlocfilehash: aab7fa53b4af309c68cd91fdb1d25c5771f89828
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80887525"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91261122"
 ---
 # <a name="troubleshooting-guide-for-azure-service-bus"></a>Guide de dépannage pour Azure Service Bus
 Cet article fournit des conseils et des recommandations pour résoudre certains problèmes que vous pourriez rencontrer lors de l’utilisation d’Azure Service Bus. 
@@ -27,7 +16,7 @@ Cet article fournit des conseils et des recommandations pour résoudre certains 
 ## <a name="connectivity-certificate-or-timeout-issues"></a>Problèmes de connectivité, de certificat ou de délai d’expiration
 Aidez-vous des étapes suivantes pour résoudre les problèmes de connectivité, de certificat ou de délai d’expiration pour tous les services sous *.servicebus.windows.net. 
 
-- Accédez à `https://<yournamespace>.servicebus.windows.net/` ou utilisez [wget](https://www.gnu.org/software/wget/). Cet outil facilite les vérifications quand vous rencontrez des problèmes avec le filtrage des adresses IP, le réseau virtuel ou les chaînes de certificats (problème fréquent avec le SDK Java).
+- Accédez à `https://<yournamespace>.servicebus.windows.net/` ou utilisez [wget](https://www.gnu.org/software/wget/). Cet outil facilite les vérifications quand vous rencontrez des problèmes avec le filtrage des adresses IP, le réseau virtuel ou les chaînes de certificats, qui sont courants lors de l’utilisation du Kit de développement logiciel (SDK) Java.
 
     Voici un exemple de message de réussite :
     
@@ -65,29 +54,51 @@ Aidez-vous des étapes suivantes pour résoudre les problèmes de connectivité,
 - Si les étapes précédentes n’ont pas résolu le problème, obtenez une trace réseau et analysez-la à l’aide d’un outil tel que [Wireshark](https://www.wireshark.org/). Contactez le [support Microsoft](https://support.microsoft.com/) si nécessaire. 
 
 ## <a name="issues-that-may-occur-with-service-upgradesrestarts"></a>Problèmes qui peuvent se produire avec les mises à niveau/redémarrages du service
-Les mises à niveau et redémarrages du service principal peuvent avoir l’impact suivant sur vos applications :
 
+### <a name="symptoms"></a>Symptômes
 - Les demandes peuvent être momentanément limitées.
 - Il peut y avoir une chute des messages/demandes entrants.
 - Le fichier journal peut contenir des messages d’erreur.
 - Les applications peuvent être déconnectées du service pendant quelques secondes.
 
-Si le code d’application utilise le kit de développement logiciel (SDK), la stratégie de nouvelle tentative est déjà intégrée et active. L’application se reconnectera sans que cela ait un impact significatif sur l’application/le flux de travail.
+### <a name="cause"></a>Cause
+Les mises à niveau et redémarrages du service principal peuvent causer ces problèmes dans vos applications.
+
+### <a name="resolution"></a>Résolution
+Si le code d’application utilise le Kit de développement logiciel (SDK), la stratégie de nouvelles tentatives est déjà intégrée et active. L’application se reconnectera sans que cela ait un impact significatif sur l’application/le flux de travail.
 
 ## <a name="unauthorized-access-send-claims-are-required"></a>Accès non autorisé : Envoyer les revendications requises
+
+### <a name="symptoms"></a>Symptômes 
 Vous pouvez voir cette erreur lorsque vous tentez d’accéder à une rubrique Service Bus à partir de Visual Studio sur un ordinateur local à l’aide d’une identité gérée affectée par l’utilisateur avec des autorisations d’envoi.
 
 ```bash
 Service Bus Error: Unauthorized access. 'Send' claim\(s\) are required to perform this operation.
 ```
 
-Pour résoudre cette erreur, installez la bibliothèque [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/).  Pour plus d’informations, consultez [Authentification du développement local](..\key-vault\service-to-service-authentication.md#local-development-authentication). 
+### <a name="cause"></a>Cause
+L’identité ne dispose pas des autorisations nécessaires pour accéder à la rubrique Service Bus. 
+
+### <a name="resolution"></a>Résolution
+Pour résoudre cette erreur, installez la bibliothèque [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/).  Pour plus d’informations, consultez [Authentification du développement local](../key-vault/general/service-to-service-authentication.md#local-development-authentication). 
 
 Pour savoir comment affecter des autorisations à des rôles, consultez [Authentifier une identité managée avec Azure Active Directory pour accéder aux ressources Azure Service Bus](service-bus-managed-service-identity.md).
+
+## <a name="service-bus-exception-put-token-failed"></a>Exception Service Bus : Échec du jeton PUT
+
+### <a name="symptoms"></a>Symptômes
+Lorsque vous essayez d’envoyer plus de 1 000 messages à l’aide de la même connexion Service Bus, le message d’erreur suivant s’affiche : 
+
+`Microsoft.Azure.ServiceBus.ServiceBusException: Put token failed. status-code: 403, status-description: The maximum number of '1000' tokens per connection has been reached.` 
+
+### <a name="cause"></a>Cause
+Il existe une limite au nombre de jetons utilisés pour envoyer et recevoir des messages en utilisant une seule connexion à un espace de noms Service Bus. C’est 1 000. 
+
+### <a name="resolution"></a>Résolution
+Ouvrez une nouvelle connexion à l’espace de noms Service Bus pour envoyer plus de messages.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Voir les articles suivants : 
 
 - [Exceptions Azure Resource Manager](service-bus-resource-manager-exceptions.md). Répertorie les exceptions générées lors de l’interaction avec Azure Service Bus à l’aide d’Azure Resource Manager (via des modèles ou des appels directs).
-- [Exceptions de messagerie](service-bus-messaging-exceptions.md). Fournit une liste d’exceptions générées par .NET Framework pour Azure Service Bus. 
-
+- [Exceptions de messagerie](service-bus-messaging-exceptions.md). Fournit une liste d’exceptions générées par .NET Framework pour Azure Service Bus.

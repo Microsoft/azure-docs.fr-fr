@@ -3,25 +3,25 @@ title: 'Tutoriel : Effectuer la migration en ligne de PostgreSQL vers Azure Da
 titleSuffix: Azure Database Migration Service
 description: Découvrez comment effectuer la migration en ligne d’une instance locale de PostgreSQL vers Azure Database pour PostgreSQL à l’aide d’Azure Database Migration Service via Azure CLI.
 services: dms
-author: HJToland3
-ms.author: jtoland
+author: arunkumarthiags
+ms.author: arthiaga
 manager: craigg
 ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
-ms.custom: seo-lt-2019
-ms.topic: article
+ms.custom: seo-lt-2019, devx-track-azurecli
+ms.topic: tutorial
 ms.date: 04/11/2020
-ms.openlocfilehash: e8f79512e132ff4632c067b23ad6e80a76b8d4cf
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: fb303054a3026a305831309413c51c061a68c5d6
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81113886"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608049"
 ---
 # <a name="tutorial-migrate-postgresql-to-azure-db-for-postgresql-online-using-dms-via-the-azure-cli"></a>Tutoriel : Effectuer la migration en ligne de PostgreSQL vers Azure DB pour PostgreSQL via Azure CLI à l’aide de DMS
 
-Vous pouvez utiliser Azure Database Migration Service pour migrer les bases de données d’une instance PostgreSQL locale vers [Azure Database pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/) avec un temps d’arrêt minimal. En d’autres termes, la migration peut être effectuée avec un temps d’arrêt minimal de l’application. Dans ce tutoriel, vous allez migrer l’exemple de base de données **DVD Rental** à partir d’une instance PostgreSQL 9.6 locale vers Azure Database pour PostgreSQL à l’aide de l’activité de migration en ligne dans Azure Database Migration Service.
+Vous pouvez utiliser Azure Database Migration Service pour migrer les bases de données d’une instance PostgreSQL locale vers [Azure Database pour PostgreSQL](../postgresql/index.yml) avec un temps d’arrêt minimal. En d’autres termes, la migration peut être effectuée avec un temps d’arrêt minimal de l’application. Dans ce tutoriel, vous allez migrer l’exemple de base de données **DVD Rental** à partir d’une instance PostgreSQL 9.6 locale vers Azure Database pour PostgreSQL à l’aide de l’activité de migration en ligne dans Azure Database Migration Service.
 
 Dans ce tutoriel, vous allez apprendre à :
 > [!div class="checklist"]
@@ -42,15 +42,15 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Pour suivre ce didacticiel, vous devez effectuer les opérations suivantes :
 
-* Téléchargez et installez [PostgreSQL Community Edition](https://www.postgresql.org/download/) 9.5, 9.6 ou 10. La version du serveur PostgreSQL source doit être 9.5.11, 9.6.7, 10 ou une version ultérieure. Pour plus d’informations, consultez l’article [Versions de bases de données PostgreSQL prises en charge](https://docs.microsoft.com/azure/postgresql/concepts-supported-versions).
+* Téléchargez et installez [PostgreSQL Community Edition](https://www.postgresql.org/download/) 9.5, 9.6 ou 10. La version du serveur PostgreSQL source doit être 9.5.11, 9.6.7, 10 ou une version ultérieure. Pour plus d’informations, consultez l’article [Versions de bases de données PostgreSQL prises en charge](../postgresql/concepts-supported-versions.md).
 
     Notez également que la version cible d'Azure Database pour PostgreSQL doit être égale ou ultérieure à la version PostgreSQL locale. Par exemple, PostgreSQL 9.6 peut migrer uniquement vers Azure Database pour PostgreSQL 9.6, 10 ou 11, et non vers Azure Database pour PostgreSQL 9.5.
 
-* [Créez une instance dans Azure Database pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/quickstart-create-server-database-portal) ou [créez un serveur Azure Database pour PostgreSQL - Hyperscale (Citus)](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal).
-* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) ou un [VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways). Pour plus d’informations sur la création d’un réseau virtuel, consultez la [documentation sur le réseau virtuel](https://docs.microsoft.com/azure/virtual-network/), en particulier les articles sur le démarrage rapide, qui fournissent des informations pas à pas.
+* [Créez une instance dans Azure Database pour PostgreSQL](../postgresql/quickstart-create-server-database-portal.md) ou [créez un serveur Azure Database pour PostgreSQL - Hyperscale (Citus)](../postgresql/quickstart-create-hyperscale-portal.md).
+* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](../expressroute/expressroute-introduction.md) ou un [VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md). Pour plus d’informations sur la création d’un réseau virtuel, consultez la [documentation sur le réseau virtuel](../virtual-network/index.yml), en particulier les articles sur le démarrage rapide, qui fournissent des informations pas à pas.
 
     > [!NOTE]
-    > Pendant la configuration du réseau virtuel, si vous utilisez ExpressRoute avec le peering réseau à Microsoft, ajoutez ces [points de terminaison](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-overview) au sous-réseau où doit être provisionné le service :
+    > Pendant la configuration du réseau virtuel, si vous utilisez ExpressRoute avec le peering réseau à Microsoft, ajoutez ces [points de terminaison](../virtual-network/virtual-network-service-endpoints-overview.md) au sous-réseau où doit être provisionné le service :
     >
     > * Point de terminaison de base de données cible (un point de terminaison SQL ou Cosmos DB, par exemple)
     > * Point de terminaison de stockage
@@ -58,11 +58,11 @@ Pour suivre ce didacticiel, vous devez effectuer les opérations suivantes :
     >
     > Cette configuration est nécessaire car Azure Database Migration Service ne dispose pas d’une connectivité Internet.
 
-* Vérifiez que les règles du groupe de sécurité réseau de votre réseau virtuel ne bloquent pas les ports suivants pour les communications entrantes vers Azure Database Migration Service : 443, 53, 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](https://docs.microsoft.com/azure/virtual-network/virtual-network-vnet-plan-design-arm).
-* Configurez votre [pare-feu Windows pour accéder au moteur de base de données](https://docs.microsoft.com/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
+* Vérifiez que les règles du groupe de sécurité réseau de votre réseau virtuel ne bloquent pas les ports suivants pour les communications entrantes vers Azure Database Migration Service : 443, 53, 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](../virtual-network/virtual-network-vnet-plan-design-arm.md).
+* Configurez votre [pare-feu Windows pour accéder au moteur de base de données](/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
 * Ouvrez votre pare-feu Windows pour permettre à Azure Database Migration Service d’accéder au serveur PostgreSQL source, par défaut le port TCP 5432.
 * Lorsque vous utilisez une appliance de pare-feu devant vos bases de données sources, vous devrez peut-être ajouter des règles de pare-feu pour permettre à Azure Database Migration Service d’accéder aux bases de données sources pour la migration.
-* Créez une [règle de pare-feu](https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure) de niveau serveur pour Azure Database pour PostgreSQL afin de permettre à Azure Database Migration Service d’accéder aux bases de données cibles. Fournissez la plage de sous-réseau du réseau virtuel utilisé pour Azure Database Migration Service.
+* Créez une [règle de pare-feu](../azure-sql/database/firewall-configure.md) de niveau serveur pour Azure Database pour PostgreSQL afin de permettre à Azure Database Migration Service d’accéder aux bases de données cibles. Fournissez la plage de sous-réseau du réseau virtuel utilisé pour Azure Database Migration Service.
 * Il existe deux méthodes pour appeler l’interface CLI :
 
   * Dans l’angle supérieur droit du portail Azure, sélectionnez le bouton Cloud Shell :
@@ -71,9 +71,9 @@ Pour suivre ce didacticiel, vous devez effectuer les opérations suivantes :
 
   * Installez et exécutez l’interface CLI localement. CLI 2.0 est l’outil en ligne de commande pour la gestion des ressources Azure.
 
-       Pour télécharger l’interface CLI, suivez les instructions fournies dans l’article [Installer Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest). Cet article répertorie également les plateformes qui prennent en charge CLI 2.0.
+       Pour télécharger l’interface CLI, suivez les instructions fournies dans l’article [Installer Azure CLI 2.0](/cli/azure/install-azure-cli?view=azure-cli-latest). Cet article répertorie également les plateformes qui prennent en charge CLI 2.0.
 
-       Pour configurer Sous-système Windows pour Linux (WSL), suivez les instructions du [Guide d’installation de Windows 10](https://docs.microsoft.com/windows/wsl/install-win10)
+       Pour configurer Sous-système Windows pour Linux (WSL), suivez les instructions du [Guide d’installation de Windows 10](/windows/wsl/install-win10)
 
 * Activez la réplication logique dans le fichier postgresql.config, puis définissez les paramètres suivants :
 
@@ -100,7 +100,7 @@ Pour compléter tous les objets de base de données tels que les schémas de tab
 
 2. Créez une base de données vide dans votre environnement cible, c’est-à-dire Azure Database pour PostgreSQL.
 
-    Pour plus d’informations sur la création et la connexion d’une base de données, consultez [Créer un serveur Azure Database pour PostgreSQL dans le portail Azure](https://docs.microsoft.com/azure/postgresql/quickstart-create-server-database-portal) ou [Créer un serveur Azure Database pour PostgreSQL - Hyperscale (Citus) dans le portail Azure](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal).
+    Pour plus d’informations sur la création et la connexion d’une base de données, consultez [Créer un serveur Azure Database pour PostgreSQL dans le portail Azure](../postgresql/quickstart-create-server-database-portal.md) ou [Créer un serveur Azure Database pour PostgreSQL - Hyperscale (Citus) dans le portail Azure](../postgresql/quickstart-create-hyperscale-portal.md).
 
 3. Importez le schéma dans la base de données cible que vous avez créée en restaurant le fichier de vidage du schéma.
 
@@ -250,8 +250,8 @@ Pour compléter tous les objets de base de données tels que les schémas de tab
     * Ajoutez l’adresse IP au fichier pg_hba.conf sur la source, comme dans l’entrée suivante :
 
         ```
-        host    all     all     172.16.136.18/10    md5
-        host    replication     postgres    172.16.136.18/10    md5
+        host     all            all        172.16.136.18/10    md5
+        host     replication    postgres   172.16.136.18/10    md5
         ```
 
 5. Ensuite, créez un projet de migration PostgreSQL en exécutant la commande suivante :
@@ -373,28 +373,26 @@ Pour compléter tous les objets de base de données tels que les schémas de tab
     az dms project task show --service-name PostgresCLI --project-name PGMigration --resource-group PostgresDemo --name Runnowtask --expand output --query 'properties.output[].migrationState | [0]' "READY_TO_COMPLETE"
     ```
 
-## <a name="understanding-migration-task-status"></a>Comprendre l’état de la tâche de migration
-
 Dans le fichier de sortie, plusieurs paramètres indiquent la progression de la migration. Par exemple, consultez le fichier de sortie ci-dessous :
 
   ```output
-    "output": [                                 Database Level
+    "output": [                                 // Database Level
           {
-            "appliedChanges": 0,        //Total incremental sync applied after full load
-            "cdcDeleteCounter": 0       // Total delete operation  applied after full load
-            "cdcInsertCounter": 0,      // Total insert operation applied after full load
-            "cdcUpdateCounter": 0,      // Total update operation applied after full load
+            "appliedChanges": 0,         // Total incremental sync applied after full load
+            "cdcDeleteCounter": 0        // Total delete operation  applied after full load
+            "cdcInsertCounter": 0,       // Total insert operation applied after full load
+            "cdcUpdateCounter": 0,       // Total update operation applied after full load
             "databaseName": "inventory",
             "endedOn": null,
             "fullLoadCompletedTables": 2,   //Number of tables completed full load
-            "fullLoadErroredTables": 0, //Number of tables that contain migration error
-            "fullLoadLoadingTables": 0, //Number of tables that are in loading status
-            "fullLoadQueuedTables": 0,  //Number of tables that are in queued status
+            "fullLoadErroredTables": 0,     //Number of tables that contain migration error
+            "fullLoadLoadingTables": 0,     //Number of tables that are in loading status
+            "fullLoadQueuedTables": 0,      //Number of tables that are in queued status
             "id": "db|inventory",
-            "incomingChanges": 0,       //Number of changes after full load
+            "incomingChanges": 0,           //Number of changes after full load
             "initializationCompleted": true,
             "latency": 0,
-            "migrationState": "READY_TO_COMPLETE",  //Status of migration task. READY_TO_COMPLETE means the database is ready for cutover
+            "migrationState": "READY_TO_COMPLETE",    //Status of migration task. READY_TO_COMPLETE means the database is ready for cutover
             "resultType": "DatabaseLevelOutput",
             "startedOn": "2018-07-05T23:36:02.27839+00:00"
           },
@@ -410,25 +408,25 @@ Dans le fichier de sortie, plusieurs paramètres indiquent la progression de la 
             "targetServer": "builddemotarget.postgres.database.azure.com",
             "targetVersion": "Azure Database for PostgreSQL"
           },
-          {                                     Table 1
+          {                                        // Table 1
             "cdcDeleteCounter": 0,
             "cdcInsertCounter": 0,
             "cdcUpdateCounter": 0,
             "dataErrorsCount": 0,
             "databaseName": "inventory",
-            "fullLoadEndedOn": "2018-07-05T23:36:20.740701+00:00",  //Full load completed time
+            "fullLoadEndedOn": "2018-07-05T23:36:20.740701+00:00",    //Full load completed time
             "fullLoadEstFinishTime": "1970-01-01T00:00:00+00:00",
             "fullLoadStartedOn": "2018-07-05T23:36:15.864552+00:00",    //Full load started time
-            "fullLoadTotalRows": 10,                    //Number of rows loaded in full load
-            "fullLoadTotalVolumeBytes": 7056,               //Volume in Bytes in full load
-            "id": "or|inventory|public|actor",          
+            "fullLoadTotalRows": 10,                     //Number of rows loaded in full load
+            "fullLoadTotalVolumeBytes": 7056,            //Volume in Bytes in full load
+            "id": "or|inventory|public|actor",
             "lastModifiedTime": "2018-07-05T23:36:16.880174+00:00",
             "resultType": "TableLevelOutput",
-            "state": "COMPLETED",                   //State of migration for this table
+            "state": "COMPLETED",                       //State of migration for this table
             "tableName": "public.catalog",              //Table name
-            "totalChangesApplied": 0                //Total sync changes that applied after full load
+            "totalChangesApplied": 0                    //Total sync changes that applied after full load
           },
-          {                                     Table 2
+          {                                            //Table 2
             "cdcDeleteCounter": 0,
             "cdcInsertCounter": 50,
             "cdcUpdateCounter": 0,
@@ -446,8 +444,8 @@ Dans le fichier de sortie, plusieurs paramètres indiquent la progression de la 
             "tableName": "public.orders",
             "totalChangesApplied": 0
           }
-        ],                          DMS migration task state
-        "state": "Running", //Migration task state – Running means it is still listening to any changes that might come in                  
+        ],                                      // DMS migration task state
+        "state": "Running",    //Migration task state – Running means it is still listening to any changes that might come in
         "taskType": null
       },
       "resourceGroup": "PostgresDemo",
@@ -462,12 +460,12 @@ Pour garantir la récupération de toutes les données, validez le nombre de lig
 
 ```
 "migrationState": "READY_TO_COMPLETE", //Status of migration task. READY_TO_COMPLETE means database is ready for cutover
- "incomingChanges": 0,  //continue to check for a period of 5-10 minutes to make sure no new incoming changes that need to be applied to the target server
+ "incomingChanges": 0, //continue to check for a period of 5-10 minutes to make sure no new incoming changes that need to be applied to the target server
    "fullLoadTotalRows": 10, //full load for table 1
-    "cdcDeleteCounter": 0,  //delete, insert and update counter on incremental sync after full load
+    "cdcDeleteCounter": 0, //delete, insert and update counter on incremental sync after full load
     "cdcInsertCounter": 50,
     "cdcUpdateCounter": 0,
-     "fullLoadTotalRows": 112,  //full load for table 2
+     "fullLoadTotalRows": 112, //full load for table 2
 ```
 
 1. Effectuez la tâche de migration de base de données de basculement à l’aide de la commande suivante :
@@ -487,6 +485,7 @@ Pour garantir la récupération de toutes les données, validez le nombre de lig
     ```azurecli
     az dms project task show --service-name PostgresCLI --project-name PGMigration --resource-group PostgresDemo --name Runnowtask
     ```
+3. Lorsque l’état de migration de la base de données indique **Terminé**, [recréez des séquences](https://wiki.postgresql.org/wiki/Fixing_Sequences) (le cas échéant) et connectez vos applications à la nouvelle instance cible d’Azure Database pour PostgreSQL.
 
 ## <a name="service-project-task-cleanup"></a>Nettoyage d’un service, d’un projet ou d’une tâche
 
@@ -527,5 +526,5 @@ Si vous avez besoin d’annuler ou de supprimer une tâche, un projet ou un serv
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour plus d’informations sur les problèmes connus et les limitations lors de l’exécution de migrations en ligne vers Azure Database pour PostgreSQL, consultez l’article [Known issues and workarounds with Azure Database for PostgreSQL online migrations](known-issues-azure-postgresql-online.md) (Problèmes connus et solutions de contournement pour les migrations Azure Database pour PostgreSQL en ligne).
-* Pour plus d’informations sur Azure Database Migration Service, consultez l’article [Qu’est-ce qu’Azure Database Migration Service ?](https://docs.microsoft.com/azure/dms/dms-overview).
-* Pour obtenir des informations sur Azure Database pour PostgreSQL, consultez l’article [Qu’est-ce qu’Azure Database pour PostgreSQL ?](https://docs.microsoft.com/azure/postgresql/overview).
+* Pour plus d’informations sur Azure Database Migration Service, consultez l’article [Qu’est-ce qu’Azure Database Migration Service ?](./dms-overview.md).
+* Pour obtenir des informations sur Azure Database pour PostgreSQL, consultez l’article [Qu’est-ce qu’Azure Database pour PostgreSQL ?](../postgresql/overview.md).

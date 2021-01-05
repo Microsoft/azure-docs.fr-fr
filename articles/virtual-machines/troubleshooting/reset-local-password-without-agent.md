@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 04/25/2019
 ms.author: genli
-ms.openlocfilehash: becbf88aeda164f7d916cbc1f1ace89262cc1a3f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4cec8f77cacc5d3492dd6a5f8a8baa060f910763
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77921621"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91650594"
 ---
 # <a name="reset-local-windows-password-for-azure-vm-offline"></a>Réinitialiser un mot de passe Windows local pour la machine virtuelle Azure hors connexion
 Vous pouvez réinitialiser le mot de passe Windows local d’une machine virtuelle dans Azure à l’aide du [portail Azure ou Azure PowerShell](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) à condition que l’agent invité Azure soit installé. Cette méthode est le principal moyen de réinitialiser un mot de passe sur une machine virtuelle Azure. Si l’agent invité Azure ne répond pas ou ne parvient pas à s’installer après chargement d’une image personnalisée, vous pouvez réinitialiser manuellement un mot de passe Windows. Cet article explique comment réinitialiser un mot de passe de compte local en attachant le disque virtuel du système d’exploitation source à une autre machine virtuelle. Les étapes décrites dans cet article ne s’appliquent pas aux contrôleurs de domaine Windows. 
@@ -59,29 +59,22 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
      Version=1
      ```
      
-     ![Créer le fichier gpt.ini](./media/reset-local-password-without-agent/create-gpt-ini.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/create-gpt-ini.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
-4. Créez `scripts.ini` dans `\Windows\System32\GroupPolicy\Machines\Scripts\`. Vérifiez que les dossiers masqués sont affichés. Si nécessaire, créez les dossiers `Machine` ou `Scripts`.
+4. Créez `scripts.ini` dans `\Windows\System32\GroupPolicy\Machine\Scripts\`. Vérifiez que les dossiers masqués sont affichés. Si nécessaire, créez les dossiers `Machine` ou `Scripts`. 
    
    * Ajoutez les lignes suivantes au fichier `scripts.ini` que vous avez créé :
      
      ```
      [Startup]
-     0CmdLine=C:\Windows\System32\FixAzureVM.cmd
+     0CmdLine=FixAzureVM.cmd
      0Parameters=
      ```
      
-     ![Créer scripts.ini](./media/reset-local-password-without-agent/create-scripts-ini.png)
-
-5. Créez `FixAzureVM.cmd` dans `\Windows\System32` avec le contenu suivant, en remplaçant `<username>` et `<newpassword>` par vos propres valeurs :
-   
-    ```
-    net user <username> <newpassword> /add
-    net localgroup administrators <username> /add
-    net localgroup "remote desktop users" <username> /add
+     :::image type="content" source="./media/reset-local-password-without-agent/create-scripts-ini-1.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini" <username> /add
     ```
 
-    ![Créer FixAzureVM.cmd](./media/reset-local-password-without-agent/create-fixazure-cmd.png)
+    :::image type="content" source="./media/reset-local-password-without-agent/create-fixazure-cmd-1.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
    
     Vous devez respecter les exigences de complexité du mot de passe configuré pour votre machine virtuelle lors de la définition du nouveau mot de passe.
 
@@ -93,7 +86,7 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
 
 9. Dans votre session à distance vers la nouvelle machine virtuelle, supprimez les fichiers suivants pour nettoyer l’environnement :
     
-    * Dans %windir%\System32
+    * À partir de %windir%\System32\GroupPolicy\Machine\Scripts\Startup
       * supprimez FixAzureVM.cmd
     * À partir de %windir%\System32\GroupPolicy\Machine\Scripts
       * supprimez scripts.ini
@@ -107,37 +100,37 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
 > [!NOTE]
 > Les étapes ne s’appliquent pas aux contrôleurs de domaine Windows. Elles fonctionnent uniquement sur un serveur autonome ou un serveur qui est membre d’un domaine.
 
-Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure ou Azure PowerShell](https://docs.microsoft.com/previous-versions/azure/virtual-machines/windows/classic/reset-rdp) avant d’effectuer la procédure suivante. Avant de commencer, vérifiez que vous disposez d’une sauvegarde de votre machine virtuelle. 
+Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure ou Azure PowerShell](/previous-versions/azure/virtual-machines/windows/classic/reset-rdp) avant d’effectuer la procédure suivante. Avant de commencer, vérifiez que vous disposez d’une sauvegarde de votre machine virtuelle. 
 
 1. Supprimez la machine virtuelle affectée dans le portail Azure. La suppression de la machine virtuelle ne supprime que les métadonnées, la référence de la machine virtuelle dans Azure. Les disques virtuels sont conservés lors de la suppression de la machine virtuelle :
    
    * Sélectionnez la machine virtuelle dans le portail Azure, puis cliquez sur *Supprimer* :
      
-     ![Supprimer une machine virtuelle existante](./media/reset-local-password-without-agent/delete-vm-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/delete-vm-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
 2. Attachez le disque de système d’exploitation de la machine virtuelle source à la machine virtuelle de dépannage. La machine virtuelle de dépannage doit être dans la même région que le disque de système d’exploitation de la machine virtuelle source (par exemple `West US`) :
    
    1. Sélectionnez la machine virtuelle de dépannage dans le portail Azure. Cliquez sur *Disques* | *Attacher existant* :
      
-      ![Attachement d’un disque existant](./media/reset-local-password-without-agent/disks-attach-existing-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-attach-existing-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
      
    2. Sélectionnez *Fichier VHD*, puis le compte de stockage qui contient votre machine virtuelle source :
      
-      ![Sélectionner le compte de stockage](./media/reset-local-password-without-agent/disks-select-storage-account-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-select-storage-account-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
      
    3. Cochez la case *Afficher les comptes de stockage classiques*, puis sélectionnez le conteneur source. En général, le conteneur source est *disques durs virtuels* :
      
-      ![Sélectionner le conteneur de stockage](./media/reset-local-password-without-agent/disks-select-container-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-select-container-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
-      ![Sélectionner le conteneur de stockage](./media/reset-local-password-without-agent/disks-select-container-vhds-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-select-container-vhds-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
      
    4. Sélectionnez le disque dur virtuel de système d’exploitation à attacher. Cliquez sur *Sélectionner* pour terminer le processus :
      
-      ![Sélectionner le disque virtuel source](./media/reset-local-password-without-agent/disks-select-source-vhd-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-select-source-vhd-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
    5. Cliquer sur Ok pour attacher le disque
 
-      ![Attachement d’un disque existant](./media/reset-local-password-without-agent/disks-attach-okay-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/disks-attach-okay-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
 3. Connectez-vous à la machine virtuelle de dépannage à l’aide du Bureau à distance et vérifiez que le disque de système d’exploitation de la machine virtuelle source est visible :
 
@@ -147,7 +140,7 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
 
    3. Dans l’Explorateur de fichiers, recherchez le disque de données que vous avez attaché. Si le disque dur virtuel de la machine virtuelle source est le seul disque de données attaché à la machine virtuelle de dépannage, il doit s’agir du lecteur F: :
      
-      ![Afficher le disque de données attaché](./media/reset-local-password-without-agent/troubleshooting-vm-file-explorer-classic.png)
+      :::image type="content" source="./media/reset-local-password-without-agent/troubleshooting-vm-file-explorer-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
 4. Créez `gpt.ini` dans `\Windows\System32\GroupPolicy` sur le lecteur de la machine virtuelle source (si le fichier `gpt.ini` existe, renommez-le `gpt.ini.bak`) :
    
@@ -163,29 +156,22 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
      Version=1
      ```
      
-     ![Créer le fichier gpt.ini](./media/reset-local-password-without-agent/create-gpt-ini-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/create-gpt-ini-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
-5. Créez `scripts.ini` dans `\Windows\System32\GroupPolicy\Machines\Scripts\`. Vérifiez que les dossiers masqués sont affichés. Si nécessaire, créez les dossiers `Machine` ou `Scripts`.
+5. Créez `scripts.ini` dans `\Windows\System32\GroupPolicy\Machine\Scripts\`. Vérifiez que les dossiers masqués sont affichés. Si nécessaire, créez les dossiers `Machine` ou `Scripts`.
    
    * Ajoutez les lignes suivantes au fichier `scripts.ini` que vous avez créé :
 
      ```
      [Startup]
-     0CmdLine=C:\Windows\System32\FixAzureVM.cmd
+     0CmdLine=FixAzureVM.cmd
      0Parameters=
      ```
      
-     ![Créer scripts.ini](./media/reset-local-password-without-agent/create-scripts-ini-classic.png)
-
-6. Créez `FixAzureVM.cmd` dans `\Windows\System32` avec le contenu suivant, en remplaçant `<username>` et `<newpassword>` par vos propres valeurs :
-   
-    ```
-    net user <username> <newpassword> /add
-    net localgroup administrators <username> /add
-    net localgroup "remote desktop users" <username> /add
+     :::image type="content" source="./media/reset-local-password-without-agent/create-scripts-ini-classic-1.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini" <username> /add
     ```
 
-    ![Créer FixAzureVM.cmd](./media/reset-local-password-without-agent/create-fixazure-cmd-classic.png)
+    :::image type="content" source="./media/reset-local-password-without-agent/create-fixazure-cmd-1.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
    
     Vous devez respecter les exigences de complexité du mot de passe configuré pour votre machine virtuelle lors de la définition du nouveau mot de passe.
 
@@ -195,17 +181,17 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
    
    2. Sélectionnez le disque de données attaché à l’étape 2, cliquez sur **Détacher**, puis cliquez sur **OK**.
 
-     ![Détacher le disque](./media/reset-local-password-without-agent/data-disks-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/data-disks-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
      
-     ![Détacher le disque](./media/reset-local-password-without-agent/detach-disk-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/detach-disk-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
 8. Créez une machine virtuelle à partir du disque de système d’exploitation de la machine virtuelle source :
    
-     ![Créer une machine virtuelle à partir d’un modèle](./media/reset-local-password-without-agent/create-new-vm-from-template-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/create-new-vm-from-template-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
-     ![Créer une machine virtuelle à partir d’un modèle](./media/reset-local-password-without-agent/choose-subscription-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/choose-subscription-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
-     ![Créer une machine virtuelle à partir d’un modèle](./media/reset-local-password-without-agent/create-vm-classic.png)
+     :::image type="content" source="./media/reset-local-password-without-agent/create-vm-classic.png" alt-text="Capture d’écran montrant les mises à jour apportées au fichier gpt.ini":::
 
 ## <a name="complete-the-create-virtual-machine-experience"></a>Compléter l'expérience Créer une machine virtuelle
 
@@ -213,7 +199,7 @@ Essayez toujours de réinitialiser un mot de passe à l’aide du [portail Azure
 
 2. Dans votre session à distance vers la nouvelle machine virtuelle, supprimez les fichiers suivants pour nettoyer l’environnement :
     
-    * De `%windir%\System32`
+    * De `%windir%\System32\GroupPolicy\Machine\Scripts\Startup\`
       * supprimez `FixAzureVM.cmd`
     * De `%windir%\System32\GroupPolicy\Machine\Scripts`
       * supprimez `scripts.ini`

@@ -6,12 +6,13 @@ ms.service: signalr
 ms.topic: conceptual
 ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: 5608d71c4a91c9b46b8ed7de13c9d4c06a3f195f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-js, devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: 8dd3c60c3d1b714ab75b496a94ba4bd5aec4e43d
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82194599"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558468"
 ---
 # <a name="azure-signalr-service-authentication"></a>Authentification par Azure SignalR Service
 
@@ -40,15 +41,15 @@ Dans ce tutoriel, vous allez apprendre à :
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce didacticiel, vous devez disposer des éléments suivants :
 
-* Compte créé sur [GitHub](https://github.com/)
-* [Git](https://git-scm.com/)
-* [Kit de développement logiciel (SDK) .NET Core](https://www.microsoft.com/net/download/windows)
-* [Azure Cloud Shell configuré](https://docs.microsoft.com/azure/cloud-shell/quickstart)
-* Télécharger ou cloner le référentiel GitHub [AzureSignalR-sample](https://github.com/aspnet/AzureSignalR-samples).
+- Compte créé sur [GitHub](https://github.com/)
+- [Git](https://git-scm.com/)
+- [Kit de développement logiciel (SDK) .NET Core](https://www.microsoft.com/net/download/windows)
+- [Azure Cloud Shell](/azure/cloud-shell/quickstart) configuré pour l’environnement Bash
+- Télécharger ou cloner le référentiel GitHub [AzureSignalR-sample](https://github.com/aspnet/AzureSignalR-samples).
 
 ## <a name="create-an-oauth-app"></a>Créer une application OAuth
 
@@ -67,8 +68,10 @@ Pour suivre ce didacticiel, vous devez disposer des éléments suivants :
 
 4. Une fois le nouvel enregistrement d’application OAuth terminé, ajoutez l’*ID client* et la *Question secrète du client* à l’outil Secret Manager à l’aide des commandes suivantes. Remplacez les paramètres *Your_GitHub_Client_Id* et *Your_GitHub_Client_Secret* par les valeurs de votre application OAuth.
 
-        dotnet user-secrets set GitHubClientId Your_GitHub_Client_Id
-        dotnet user-secrets set GitHubClientSecret Your_GitHub_Client_Secret
+    ```dotnetcli
+    dotnet user-secrets set GitHubClientId Your_GitHub_Client_Id
+    dotnet user-secrets set GitHubClientSecret Your_GitHub_Client_Secret
+    ```
 
 ## <a name="implement-the-oauth-flow"></a>Implémenter le flux OAuth
 
@@ -76,9 +79,11 @@ Pour suivre ce didacticiel, vous devez disposer des éléments suivants :
 
 1. Ajoutez une référence aux derniers packages *Microsoft.AspNetCore.Authentication.Cookies* et *AspNet.Security.OAuth.GitHub*, puis restaurez l’ensemble des packages.
 
-        dotnet add package Microsoft.AspNetCore.Authentication.Cookies -v 2.1.0-rc1-30656
-        dotnet add package AspNet.Security.OAuth.GitHub -v 2.0.0-rc2-final
-        dotnet restore
+    ```dotnetcli
+    dotnet add package Microsoft.AspNetCore.Authentication.Cookies -v 2.1.0-rc1-30656
+    dotnet add package AspNet.Security.OAuth.GitHub -v 2.0.0-rc2-final
+    dotnet restore
+    ```
 
 1. Ouvrez *Startup.cs*, puis ajoutez les instructions `using` pour les espaces de noms suivants :
 
@@ -345,19 +350,25 @@ Dans cette section, vous allez activer l’authentification réelle en ajoutant 
 
 2. Générez l’application à l’aide de l’interface CLI .NET Core, exécutez la commande suivante dans l’interpréteur de commandes :
 
-        dotnet build
+    ```dotnetcli
+    dotnet build
+    ```
 
 3. Une fois la version terminée, exécutez la commande suivante afin d’exécuter l’application web en local :
 
-        dotnet run
+    ```dotnetcli
+    dotnet run
+    ```
 
     Par défaut, l’application est hébergée en local sur le port 5000 :
 
-        E:\Testing\chattest>dotnet run
-        Hosting environment: Production
-        Content root path: E:\Testing\chattest
-        Now listening on: http://localhost:5000
-        Application started. Press Ctrl+C to shut down.
+    ```output
+    E:\Testing\chattest>dotnet run
+    Hosting environment: Production
+    Content root path: E:\Testing\chattest
+    Now listening on: http://localhost:5000
+                    Application started. Press Ctrl+C to shut down.
+    ```
 
 4. Lancez une fenêtre de navigateur, puis accédez à `http://localhost:5000`. Cliquez sur le lien **ici** dans la partie supérieure afin de vous connecter avec GitHub.
 
@@ -373,17 +384,13 @@ Dans cette section, vous allez activer l’authentification réelle en ajoutant 
 
     Maintenant que l’application de conversation exécute l’authentification avec GitHub et stocke les données d’authentification sous forme de cookies, vous avez intérêt à la déployer sur Azure afin de permettre à d’autres utilisateurs de s’authentifier avec leurs comptes et de communiquer à partir d’autres stations de travail.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
 ## <a name="deploy-the-app-to-azure"></a>Déploiement de l’application dans Azure
 
-Dans cette section, vous allez utiliser l’interface de ligne de commande (CLI) d’Azure Cloud Shell afin de créer une application web dans [Azure App Service](https://docs.microsoft.com/azure/app-service/) pour héberger votre application ASP.NET dans Azure. L’application web sera configurée pour l’utilisation du déploiement local Git. L’application web sera également configurée avec votre chaîne de connexion SignalR, les secrets d’application GitHub OAuth et un utilisateur de déploiement.
+Préparer votre environnement pour Azure CLI :
 
-Les étapes de cette section utilisent l’extension *signalr* pour l’interface Azure CLI. Exécutez la commande suivante pour installer l’extension *signalr* pour l’interface Azure CLI :
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-```azurecli-interactive
-az extension add -n signalr
-```
+Dans cette section, vous allez utiliser l’interface de ligne de commande (CLI) Azure afin de créer une application web dans [Azure App Service](../app-service/index.yml) pour héberger votre application ASP.NET dans Azure. L’application web sera configurée pour l’utilisation du déploiement local Git. L’application web sera également configurée avec votre chaîne de connexion SignalR, les secrets d’application GitHub OAuth et un utilisateur de déploiement.
 
 Lorsque vous créez les ressources suivantes, veillez à utiliser le groupe de ressources hébergeant la ressource de votre service SignalR. Cette approche simplifie grandement l’étape de nettoyage que vous exécuterez au moment de la suppression de l’ensemble des ressources. Les exemples fournis supposent que vous avez utilisé le nom de groupe recommandé dans les didacticiels précédents, *SignalRTestResources*.
 
@@ -530,7 +537,7 @@ Pour déployer votre code, exécutez les commandes suivantes dans l’interprét
 4. Déployez votre code sur l’application web dans Azure.
 
     ```bash
-    git push Azure master
+    git push Azure main
     ```
 
     Vous serez invité à vous authentifier pour déployer le code sur Azure. Saisissez le nom d’utilisateur et le mot de passe de l’utilisateur de déploiement créé plus haut.

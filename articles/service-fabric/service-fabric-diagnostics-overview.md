@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 1/17/2019
 ms.author: srrengar
-ms.openlocfilehash: ef77810adfab213845c7824740effc3416d85407
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 25a50a2841a03929804be45be8012f9b5d0457ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236701"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91357129"
 ---
 # <a name="monitoring-and-diagnostics-for-azure-service-fabric"></a>Surveillance et diagnostics pour Azure Service Fabric
 
@@ -39,7 +39,7 @@ Service Fabric fournit un ensemble complet d’événements prêts à l’emploi
 
 * EventStore - EventStore est une fonctionnalité offerte par la plateforme qui fournit les événements de la plateforme Service Fabric disponibles dans Service Fabric Explorer et via l’API REST. Vous pouvez obtenir une vue de capture de ce qui se passe dans votre cluster pour chaque entité (nœud, service, application et requête) basée sur l’heure de l’événement. Vous pouvez en savoir plus sur EventStore dans [Vue d’ensemble d’EventStore](service-fabric-diagnostics-eventstore.md).    
 
-![EventStore](media/service-fabric-diagnostics-overview/eventstore.png)
+![Capture d'écran représentant l'onglet ÉVÉNEMENTS du volet Nœuds et affichant plusieurs événements, dont un événement NodeDown.](media/service-fabric-diagnostics-overview/eventstore.png)
 
 Les diagnostics fournis sont sous la forme d’un ensemble complet d’événements prêts à l’emploi. Ces [événements Service Fabric](service-fabric-diagnostics-events.md) illustrent les actions effectuées par la plateforme sur différentes entités telles que les nœuds, les applications, les services, les partitions, etc. Dans le dernier scénario ci-dessus, si un nœud venait à tomber en panne, la plateforme émettrait un événement `NodeDown` et vous pourriez être informé immédiatement par votre outil de supervision préféré. D’autres exemples courants incluent `ApplicationUpgradeRollbackStarted` ou `PartitionReconfigured` lors d’un basculement. **Les mêmes événements sont disponibles sur les clusters Windows et Linux.**
 
@@ -92,4 +92,4 @@ Quelle que soit la plateforme que vous choisissez, ses points clés doivent incl
 * Découvrez comment configurer les journaux Azure Monitor pour le monitoring des conteneurs dans [Monitoring et diagnostics des conteneurs Windows dans Azure Service Fabric](service-fabric-tutorial-monitoring-wincontainers.md).
 * Consultez des exemples de problèmes de diagnostic et de solutions avec Service Fabric dans l’article [Diagnostiquer des scénarios courants](service-fabric-diagnostics-common-scenarios.md).
 * Découvrez d’autres produits de diagnostic qui s’intègrent à Service Fabric dans l’article [Solutions de partenaires pour la surveillance d’Azure Service Fabric](service-fabric-diagnostics-partners.md).
-* Découvrez les recommandations générales sur la surveillance des ressources Azure : [Bonnes pratiques : Surveillance et diagnostics](https://docs.microsoft.com/azure/architecture/best-practices/monitoring). 
+* Découvrez les recommandations générales sur la surveillance des ressources Azure : [Bonnes pratiques : Surveillance et diagnostics](/azure/architecture/best-practices/monitoring). 

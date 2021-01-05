@@ -12,14 +12,14 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 08/01/2018
-ms.openlocfilehash: 427b7fff7b8f76412d7bd9d63aeb64583637779c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d890f73ea8b2294755b14055cb11904d50160cc4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418964"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014004"
 ---
-# <a name="transform-data-by-running-u-sql-scripts-on-azure-data-lake-analytics"></a>Transformer des données en exécutant des scripts U-SQL sur Azure Data Lake Analytics 
+# <a name="process-data-by-running-u-sql-scripts-on-azure-data-lake-analytics"></a>Traiter des données en exécutant des scripts U-SQL sur Azure Data Lake Analytics 
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-usql-activity.md)
 > * [Version actuelle](transform-data-using-data-lake-analytics.md)
@@ -45,7 +45,7 @@ Le tableau suivant décrit les propriétés génériques utilisées dans la déf
 | **resourceGroupName**    | Nom du groupe de ressources Azure                | Non                                       |
 
 ### <a name="service-principal-authentication"></a>Authentification d’un principal du service
-Le service lié d’Azure Data Lake Analytics a besoin d’une authentification de principal de service pour se connecter au service Azure Data Lake Analytics. Pour utiliser l’authentification d’un principal de service, inscrivez une entité d’application auprès d’Azure Active Directory (Azure AD) et accordez-lui l’accès aux services Data Lake Analytics et Data Lake Store qu’elle utilise. Consultez la page [Authentification de service à service](../data-lake-store/data-lake-store-authenticate-using-active-directory.md) pour des instructions détaillées. Prenez note des valeurs suivantes, qui vous permettent de définir le service lié :
+Le service lié d’Azure Data Lake Analytics a besoin d’une authentification de principal de service pour se connecter au service Azure Data Lake Analytics. Pour utiliser l’authentification d’un principal de service, inscrivez une entité d’application auprès d’Azure Active Directory (Azure AD) et accordez-lui l’accès aux services Data Lake Analytics et Data Lake Store qu’elle utilise. Consultez la page [Authentification de service à service](../data-lake-store/data-lake-store-service-to-service-authenticate-using-active-directory.md) pour des instructions détaillées. Prenez note des valeurs suivantes, qui vous permettent de définir le service lié :
 
 * ID de l'application
 * Clé de l'application 
@@ -198,5 +198,5 @@ Consultez les articles suivants qui expliquent comment transformer des données 
 * [Activité de diffusion en continu Hadoop](transform-data-using-hadoop-streaming.md)
 * [Activité Spark](transform-data-using-spark.md)
 * [Activité personnalisée .NET](transform-data-using-dotnet-custom-activity.md)
-* [Activité d’exécution du lot Machine Learning](transform-data-using-machine-learning.md)
+* [Activité Exécution par lots Azure Machine Learning studio (classique)](transform-data-using-machine-learning.md)
 * [Activité de procédure stockée](transform-data-using-stored-procedure.md)

@@ -11,66 +11,74 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/29/2019
+ms.date: 09/22/2020
 ms.author: memildin
-ms.openlocfilehash: 408b0f020be72b8e6b10dd6c97298afda1b91360
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c0952e0f267f9c2511a2e80fa7106958d8dd0ee5
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225261"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92791883"
 ---
 # <a name="security-recommendations-in-azure-security-center"></a>Recommandations de sécurité dans le Centre de sécurité Azure 
 Cette rubrique explique comment visualiser et comprendre les recommandations d’Azure Security Center pour vous aider à protéger vos ressources Azure.
 
-> [!NOTE]
-> Ce document présente le service à l’aide d’un exemple de déploiement.  Ce document n'est pas un guide pas à pas.
->
 
 ## <a name="what-are-security-recommendations"></a>Quelles sont les recommandations de sécurité ?
 
 Les recommandations sont des actions à effectuer pour sécuriser vos ressources.
 
-Security Center analyse périodiquement l’état de sécurité de vos ressources Azure pour identifier les vulnérabilités de sécurité potentielles. Il fournit ensuite des recommandations sur la façon de les supprimer.
+Security Center analyse périodiquement l’état de sécurité de vos ressources Azure pour identifier les vulnérabilités de sécurité potentielles. Il fournit ensuite des recommandations sur la façon de corriger ces vulnérabilités.
 
 Chaque recommandation vous fournit les informations suivantes :
 
-- Brève description de ce qui est recommandé.
-- Étapes de correction à effectuer pour implémenter la recommandations. <!-- In some cases, Quick Fix remediation is available. -->
-- Ressources nécessitant une action recommandée de votre part.
-- L’**impact du niveau de sécurité**, à savoir la proportion selon laquelle l’implémentation de cette recommandation va augmenter votre niveau de sécurité.
+- Courte description du problème
+- Étapes de correction à effectuer pour implémenter la recommandation
+- Ressources concernées
 
 ## <a name="monitor-recommendations"></a>Surveiller les recommandations <a name="monitor-recommendations"></a>
 
-Azure Security Center analyse l’état de sécurité de vos ressources pour identifier les vulnérabilités potentielles. La vignette **Recommandations** sous **Vue d’ensemble** montre le nombre total de recommandations identifiées par Security Center.
+Azure Security Center analyse l’état de sécurité de vos ressources pour identifier les vulnérabilités potentielles. 
 
-![Vue d’ensemble de Security Center](./media/security-center-recommendations/asc-overview.png)
+1. Dans le menu de Security Center, ouvrez la page **Recommendations** pour voir les recommandations applicables à votre environnement. Les recommandations sont regroupées en contrôles de sécurité.
 
-1. Sélectionnez la **vignette Recommandations** sous **Vue d’ensemble**. La liste **Recommandations** s’ouvre.
+      ![Recommandations regroupées par contrôle de sécurité](./media/security-center-recommendations/view-recommendations.png)
 
-      ![Afficher les recommandations](./media/security-center-recommendations/view-recommendations.png)
+1. Développez un contrôle et sélectionnez une recommandation spécifique pour afficher la page de recommandation détaillée.
 
-    Vous pouvez filtrer les recommandations. Pour filtrer les recommandations, sélectionnez **Filtrer** sur le panneau **Recommandations**. Le panneau **Filtrer** s’ouvre et vous permet d’afficher uniquement certains états ou niveaux de gravité.
+    :::image type="content" source="./media/security-center-recommendations/recommendation-details-page.png" alt-text="Page Détails de la recommandation." lightbox="./media/security-center-recommendations/recommendation-details-page.png":::
 
-   * **RECOMMANDATIONS** : La recommandation.
-   * **IMPACT DU DEGRÉ DE SÉCURISATION** : Score généré par Security Center en utilisant vos recommandations en matière de sécurité et en appliquant des algorithmes avancés pour déterminer le degré d’importance de chaque recommandation. Pour plus d’informations, consultez [Calcul du niveau de sécurité](security-center-secure-score.md#secure-score-calculation).
-   * **RESSOURCE** : Ressources auxquelles s’appliquent les recommandations.
-   * **BARRES D’ÉTAT** :  Donne le niveau de gravité de chaque recommandation :
-       * **Élevé (rouge)**  : Existence d’une vulnérabilité sur une ressource importante (application, machine virtuelle ou groupe de sécurité réseau). Le problème doit être analysé.
-       * **Moyen (Orange)**  : Il existe une vulnérabilité ; des étapes supplémentaires ou non critiques sont requises pour l’éliminer ou pour terminer un processus.
-       * **Faible (bleu)**  : Existence d’une vulnérabilité devant être prise en compte, mais qui ne nécessite pas une attention immédiate. Par défaut, les recommandations de niveau Faible ne sont pas affichées, mais vous pouvez filtrer les recommandations pour les faire apparaître. 
-       * **Sain (vert)**  :
-       * **Non disponible (gris)**  :
+    La page comprend les éléments suivants :
 
-1. Pour voir les détails de chaque recommandation, cliquez sur la recommandation.
+    1. Les boutons **Appliquer** et **Refuser** sur les recommandations prises en charge (voir [Empêcher des configurations incorrectes à l’aide des recommandations Appliquer/Refuser](prevent-misconfigurations.md))
+    1. **Indicateur de gravité**
+    1. **Intervalle d’actualisation** (le cas échéant) 
+    1. **Description**  : courte description du problème.
+    1. **Étapes de correction**  : description des étapes manuelles nécessaires pour corriger le problème de sécurité sur les ressources concernées. Pour obtenir des recommandations avec un « correctif rapide », vous pouvez sélectionner **Afficher la logique de correction** avant d’appliquer la correction suggérée à vos ressources. 
+    1. **Ressources concernées**  : vos ressources sont regroupées dans des onglets :
+        - **Ressources saines**  : ressources pertinentes qui ne sont pas touchées ou sur lesquelles vous avez déjà corrigé le problème.
+        - **Ressources non saines**  : ressources qui sont encore concernées par le problème identifié.
+        - **Ressources non applicables**  : ressources pour lesquelles la recommandation ne peut pas donner de réponse définitive. L’onglet Non applicables comprend également les raisons pour chaque ressource. 
 
-    ![Détails de la recommandation](./media/security-center-recommendations/recommendation-details.png)
+            :::image type="content" source="./media/security-center-recommendations/recommendations-not-applicable-reasons.png" alt-text="Ressources non applicables avec leurs raisons.":::
+    1. Boutons d’action pour corriger la recommandation ou déclencher une application logique.
 
->[!NOTE] 
-> Consultez [Modèles de déploiement classique et Resource Manager](../azure-classic-rm.md) pour les ressources Azure.
+## <a name="preview-recommendations"></a>Recommandations sur la préversion
+
+Les recommandations marquées **Preview (Préversion)** ne sont pas incluses dans les calculs de votre degré de sécurisation.
+
+Elles doivent tout de même être corrigées dans la mesure du possible, ainsi lorsque la période de préversion se termine, elles seront prises en compte dans le calcul.
+
+Exemple de recommandation de préversion :
+
+:::image type="content" source="./media/secure-score-security-controls/example-of-preview-recommendation.png" alt-text="Recommandation portant l’indicateur Preview (Préversion)":::
  
 ## <a name="next-steps"></a>Étapes suivantes
 
-Ce document vous a présenté les recommandations de sécurité du Centre de sécurité. Pour savoir comment implémenter les recommandations :
+Ce document vous a présenté les recommandations de sécurité du Centre de sécurité. Pour obtenir des informations connexes :
 
-* [Implémenter les recommandations](security-center-remediate-recommendations.md) : découvrez comment configurer des stratégies de sécurité pour vos groupes de ressources et abonnements Azure.
+- [Implémenter les recommandations](security-center-remediate-recommendations.md) : découvrez comment configurer des stratégies de sécurité pour vos groupes de ressources et abonnements Azure.
+- [Empêcher des configurations incorrectes à l’aide des recommandations Appliquer/Refuser](prevent-misconfigurations.md).
+- [Automatiser les réponses aux déclencheurs Security Center](workflow-automation.md) : automatiser les réponses aux recommandations.
+- [Exempter une ressource d’une recommandation](exempt-resource.md)
+- [Recommandations de sécurité - Guide de référence](recommendations-reference.md)

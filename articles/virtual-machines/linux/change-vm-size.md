@@ -3,15 +3,15 @@ title: Guide pratique pour redimensionner une machine virtuelle Linux avec Azure
 description: Comment augmenter ou diminuer les capacités d’une machine virtuelle Linux, en en modifiant la taille.
 author: DavidCBerry13
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/10/2017
 ms.author: daberry
-ms.openlocfilehash: cf2716ce5d24aa86e32f6f521134590c671d5011
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: a93b1dcfe803fdead0d741553c45894f1675372b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83120978"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87372261"
 ---
 # <a name="resize-a-linux-virtual-machine-using-azure-cli"></a>Redimensionner une machine virtuelle Linux avec Azure CLI 
 
@@ -50,5 +50,5 @@ Pour une évolutivité supplémentaire, exécutez plusieurs instances de machine
 
 <!-- links -->
 [boot-diagnostics]: https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/
-[scale-set]: ../../virtual-machine-scale-sets/virtual-machine-scale-sets-linux-autoscale.md 
+[scale-set]: ../../virtual-machine-scale-sets/tutorial-autoscale-cli.md 
 [vm-sizes]:sizes.md

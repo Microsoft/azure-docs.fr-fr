@@ -7,27 +7,27 @@ documentationcenter: na
 author: asudbring
 manager: KumudD
 ms.service: virtual-network
+ms.subservice: nat
 Customer intent: As an IT administrator, I want to learn more about how to design virtual networks with NAT gateway resources.
 ms.devlang: na
-ms.topic: overview
+ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 04/27/2020
+ms.date: 09/28/2020
 ms.author: allensu
-ms.openlocfilehash: 6bb53539c105cda99c842b6b0fa236f0e18a85ea
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 62c1b323899f03a043904f4b10d5fe3bb551e0f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82182478"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91441760"
 ---
 # <a name="designing-virtual-networks-with-nat-gateway-resources"></a>Conception de réseaux virtuels avec des ressources de passerelle NAT
 
-Les ressources de passerelle NAT font partie du [service NAT de Réseau virtuel](nat-overview.md) et offrent une connectivité Internet sortante à un ou plusieurs sous-réseaux d’un réseau virtuel. Le sous-réseau du réseau virtuel indique quelle passerelle NAT est utilisée. Le service NAT fournit la traduction d’adresses réseau sources (SNAT) à un sous-réseau.  Les ressources de passerelle NAT spécifient les adresses IP statiques utilisées par les machines virtuelles lors de la création de flux sortants. Les adresses IP statiques proviennent des ressources d’adresses IP publiques, des ressources de préfixes d’adresses IP publiques ou des deux. Si une ressource de préfixe d’adresse IP publique est utilisée, toutes les adresses IP de l’ensemble de la ressource de préfixe d’adresse IP publique sont consommées par une ressource de passerelle NAT. Une ressource de passerelle NAT peut utiliser jusqu’à 16 adresses IP statiques.
-
+Les ressources de passerelle NAT font partie du [service NAT de Réseau virtuel](nat-overview.md) et offrent une connectivité Internet sortante à un ou plusieurs sous-réseaux d’un réseau virtuel. Le sous-réseau du réseau virtuel indique quelle passerelle NAT est utilisée. Le service NAT fournit la traduction d’adresses réseau sources (SNAT) à un sous-réseau.  Les ressources de passerelle NAT spécifient les adresses IP statiques utilisées par les machines virtuelles lors de la création de flux sortants. Les adresses IP statiques proviennent de ressources d’adresses IP publiques, de ressources de préfixes d’adresses IP publiques ou des deux. Si une ressource de préfixe d’adresse IP publique est utilisée, toutes les adresses IP de l’ensemble de la ressource de préfixe d’adresse IP publique sont consommées par une ressource de passerelle NAT. Une ressource de passerelle NAT peut utiliser jusqu’à 16 adresses IP statiques.
 
 <p align="center">
-  <img src="media/nat-overview/flow-direction1.svg" width="256" title="Service NAT de Réseau virtuel pour le trafic sortant vers Internet">
+  <img src="media/nat-overview/flow-direction1.svg" alt="Figure depicts a NAT gateway resource that consumes all IP addresses for a public IP prefix and directs that traffic to and from two subnets of virtual machines and a virtual machine scale set." width="256" title="Service NAT de Réseau virtuel pour le trafic sortant vers Internet">
 </p>
 
 *Figure : Service NAT de Réseau virtuel pour le trafic sortant vers Internet*
@@ -53,7 +53,7 @@ La ressource est conçue pour être simple, comme vous pouvez le voir dans l’e
 Le diagramme suivant montre les références accessibles en écriture entre les différentes ressources Azure Resource Manager.  La flèche indique la direction de la référence, depuis l’emplacement où elle est accessible en écriture. Révision 
 
 <p align="center">
-  <img src="media/nat-overview/flow-map.svg" width="256" title="Modèle objet NAT de Réseau virtuel">
+  <img src="media/nat-overview/flow-map.svg" alt="Figure depicts a NAT receiving traffic from internal subnets and directing it to a public IP and an IP prefix." width="256" title="Modèle objet NAT de Réseau virtuel">
 </p>
 
 *Figure : Modèle objet NAT de Réseau virtuel*
@@ -118,7 +118,7 @@ La passerelle NAT est compatible avec :
 Quand vous développez un nouveau déploiement, commencez avec des références SKU standard.
 
 <p align="center">
-  <img src="media/nat-overview/flow-direction1.svg" width="256" title="Service NAT de Réseau virtuel pour le trafic sortant vers Internet">
+  <img src="media/nat-overview/flow-direction1.svg" alt="Figure depicts a NAT gateway that supports outbound traffic to the internet from a virtual network." width="256" title="Service NAT de Réseau virtuel pour le trafic sortant vers Internet">
 </p>
 
 *Figure : Service NAT de Réseau virtuel pour le trafic sortant vers Internet*
@@ -128,7 +128,7 @@ Le scénario Internet sortant uniquement fourni par la passerelle NAT peut être
 #### <a name="nat-and-vm-with-instance-level-public-ip"></a>Service NAT et machine virtuelle avec une adresse IP publique au niveau de l’instance
 
 <p align="center">
-  <img src="media/nat-overview/flow-direction2.svg" width="300" title="Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance">
+  <img src="media/nat-overview/flow-direction2.svg" alt="Figure depicts a NAT gateway that supports outbound traffic to the internet from a virtual network and inbound traffic with an instance-level public IP." width="300" title="Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance">
 </p>
 
 *Figure : Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance*
@@ -143,7 +143,7 @@ La machine virtuelle utilise la passerelle NAT pour le trafic sortant.  Le trafi
 #### <a name="nat-and-vm-with-public-load-balancer"></a>Service NAT et machine virtuelle avec équilibreur de charge public
 
 <p align="center">
-  <img src="media/nat-overview/flow-direction3.svg" width="350" title="Service NAT de Réseau virtuel et machine virtuelle avec équilibreur de charge public">
+  <img src="media/nat-overview/flow-direction3.svg" alt="Figure depicts a NAT gateway that supports outbound traffic to the internet from a virtual network and inbound traffic with a public load balancer." width="350" title="Service NAT de Réseau virtuel et machine virtuelle avec équilibreur de charge public">
 </p>
 
 *Figure : Service NAT de Réseau virtuel et machine virtuelle avec équilibreur de charge public*
@@ -158,7 +158,7 @@ Toute configuration de trafic sortant à partir d’une règle d’équilibrage 
 #### <a name="nat-and-vm-with-instance-level-public-ip-and-public-load-balancer"></a>Service NAT et machine virtuelle avec une adresse IP publique au niveau de l’instance et un équilibreur de charge public
 
 <p align="center">
-  <img src="media/nat-overview/flow-direction4.svg" width="425" title="Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance et un équilibreur de charge public">
+  <img src="media/nat-overview/flow-direction4.svg" alt="Figure depicts a NAT gateway that supports outbound traffic to the internet from a virtual network and inbound traffic with an instance-level public IP and a public load balancer." width="425" title="Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance et un équilibreur de charge public">
 </p>
 
 *Figure : Service NAT de Réseau virtuel et machine virtuelle avec une adresse IP publique au niveau de l’instance et un équilibreur de charge public*
@@ -181,7 +181,7 @@ Les passerelles NAT ont la priorité sur les scénarios de trafic sortant du sou
 #### <a name="zone-isolation-with-zonal-stacks"></a>Isolation de zone avec des piles zonales
 
 <p align="center">
-  <img src="media/nat-overview/az-directions.svg" width="425" title="NAT de réseau virtuel avec isolation de zone, créant plusieurs « piles zonales » "zonal stacks"">
+  <img src="media/nat-overview/az-directions.svg" alt="Figure depicts three zonal stacks, each of which contains a NAT gateway and a subnet." width="425" title="NAT de réseau virtuel avec isolation de zone, créant plusieurs « piles zonales » "zonal stacks"">
 </p>
 
 *Figure : NAT de réseau virtuel avec isolation de zone, créant plusieurs « piles zonales »*
@@ -198,10 +198,10 @@ Une défaillance dans une zone autre que celle où se trouve votre scénario est
 
 Si votre scénario nécessite des points de terminaison entrants, deux options s’offrent à vous :
 
-| Option | Modèle |  Exemple | Avantage | Inconvénient |
+| Option | Modèle | Exemple | Avantage | Inconvénient |
 |---|---|---|---|---|
 | (1) | **Aligner** les points de terminaison entrants sur les **piles zonales** respectives que vous créez pour le trafic sortant. | Créez un équilibreur de charge standard avec un front-end zonal. | Même modèle d’intégrité et même mode d’échec pour le trafic entrant et sortant. Plus simple à utiliser. | Il peut être nécessaire de masquer les adresses IP individuelles par zone à l’aide d’un nom DNS commun. |
-|  (2) | **Superposer** les piles zonales avec un point de terminaison entrant **entre les zones**. | Créez un équilibreur de charge standard avec un front-end redondant interzone. | Adresse IP unique pour un point de terminaison entrant. | Modèle d’intégrité et modes d’échec variables pour le trafic entrant et sortant.  Plus complexe à utiliser. |
+| (2) | **Superposer** les piles zonales avec un point de terminaison entrant **entre les zones**. | Créez un équilibreur de charge standard avec un front-end redondant interzone. | Adresse IP unique pour un point de terminaison entrant. | Modèle d’intégrité et modes d’échec variables pour le trafic entrant et sortant.  Plus complexe à utiliser. |
 
 >[!NOTE]
 > Une passerelle NAT isolée dans une zone exige que les adresses IP correspondent à la zone de la passerelle NAT. Les ressources de passerelle NAT avec des adresses IP d’une autre zone ou sans zone ne sont pas autorisées.
@@ -209,14 +209,14 @@ Si votre scénario nécessite des points de terminaison entrants, deux options s
 #### <a name="cross-zone-outbound-scenarios-not-supported"></a>Scénarios de trafic sortant entre les zones non pris en charge
 
 <p align="center">
-  <img src="media/nat-overview/az-directions2.svg" width="425" title="NAT de réseau virtuel non compatible avec un sous-réseau couvrant des zones">
+  <img src="media/nat-overview/az-directions2.svg" alt="Figure depicts three zonal stacks, each of which contains a NAT gateway and a subnet, with the connections between to of the gateways and their subnets broken." width="425" title="NAT de réseau virtuel non compatible avec un sous-réseau couvrant des zones">
 </p>
 
 *Figure : NAT de réseau virtuel non compatible avec un sous-réseau couvrant des zones*
 
 Vous ne pouvez pas tenir une promesse zonale avec des ressources de passerelle NAT quand des instances de machine virtuelle sont déployées dans plusieurs zones du même sous-réseau.   Et même plusieurs passerelles NAT zonales étaient attachées à un sous-réseau, l’instance de machine virtuelle ne saurait pas quelle ressource de passerelle NAT sélectionner.
 
-Une promesse zonale n’existe quand a) la zone d’une instance de machine virtuelle et les zones d’une passerelle NAT zonale ne sont pas alignées, ou b) une ressource de passerelle NAT régionale est utilisée avec des instances de machine virtuelle zonales.
+Une promesse zonale n’existe quand a) la zone d’une instance de machine virtuelle et la zone d’une passerelle NAT zonale ne sont pas alignées, ou b) une ressource de passerelle NAT régionale est utilisée avec des instances de machine virtuelle zonales.
 
 Même si le scénario semble fonctionner, son modèle d’intégrité et son mode d’échec ne sont pas définis du point de vue d’une zone de disponibilité. Envisagez plutôt d’utiliser des piles zonales ou de toutes les zones géographiques.
 
@@ -230,7 +230,7 @@ Même si le scénario semble fonctionner, son modèle d’intégrité et son mod
 
 Chaque ressource de passerelle NAT peut fournir un débit maximal de 50 Gbits/s. Vous pouvez diviser vos déploiements entre plusieurs sous-réseaux et affecter à chaque sous-réseau ou groupe de sous-réseaux une passerelle NAT pour un scale-out.
 
-Chaque passerelle NAT peut prendre en charge 64 000 connexions par adresse IP sortante attribuée.  Consultez la section suivante sur la traduction d’adresses réseau sources (SNAT, Source Network Address Translation) pour plus de détails, ainsi que l’[article dédié à la résolution des problèmes](https://docs.microsoft.com/azure/virtual-network/troubleshoot-nat) pour obtenir des conseils de résolution des problèmes spécifiques.
+Chaque passerelle NAT peut prendre en charge 64 000 flux respectivement pour TCP et UDP par adresse IP sortante attribuée.  Consultez la section suivante sur la traduction d’adresses réseau sources (SNAT, Source Network Address Translation) pour plus de détails, ainsi que l’[article dédié à la résolution des problèmes](https://docs.microsoft.com/azure/virtual-network/troubleshoot-nat) pour obtenir des conseils de résolution des problèmes spécifiques.
 
 ## <a name="source-network-address-translation"></a>Traduction d’adresses réseau sources
 
@@ -238,27 +238,39 @@ La traduction d’adresses réseau sources (SNAT) réécrit la source d’un flu
 
 ### <a name="fundamentals"></a>Notions de base
 
-Examinons un exemple de quatre flux pour expliquer le concept de base.  La passerelle NAT utilise une ressource d’adresse IP publique 65.52.0.2.
+Examinons un exemple de quatre flux pour expliquer le concept de base.  La passerelle NAT utilise la ressource d’adresse IP publique 65.52.1.1 et la machine virtuelle établit des connexions à l’adresse 65.52.0.1.
 
 | Flux | Tuple source | Tuple de destination |
 |:---:|:---:|:---:|
 | 1 | 192.168.0.16:4283 | 65.52.0.1:80 |
 | 2 | 192.168.0.16:4284 | 65.52.0.1:80 |
 | 3 | 192.168.0.17.5768 | 65.52.0.1:80 |
-| 4 | 192.168.0.16:4285 | 65.52.0.2:80 |
 
 Ces flux peuvent ressembler à ceci après l’application de PAT :
 
 | Flux | Tuple source | Tuple source après SNAT | Tuple de destination | 
 |:---:|:---:|:---:|:---:|
-| 1 | 192.168.0.16:4283 | 65.52.0.2:234 | 65.52.0.1:80 |
-| 2 | 192.168.0.16:4284 | 65.52.0.2:235 | 65.52.0.1:80 |
-| 3 | 192.168.0.17.5768 | 65.52.0.2:236 | 65.52.0.1:80 |
-| 4 | 192.168.0.16:4285 | 65.52.0.2:237 | 65.52.0.2:80 |
+| 1 | 192.168.0.16:4283 | **65.52.1.1:1234** | 65.52.0.1:80 |
+| 2 | 192.168.0.16:4284 | **65.52.1.1:1235** | 65.52.0.1:80 |
+| 3 | 192.168.0.17.5768 | **65.52.1.1:1236** | 65.52.0.1:80 |
 
-La destination voit que la source du flux est 65.52.0.2 (Tuple source SNAT) avec le port attribué indiqué.  PAT, comme indiqué dans le tableau précédent, est également appelé SNAT de déguisement de port.  Plusieurs sources privées se font passer pour une adresse IP et un port.
+La destination voit que la source du flux est 65.52.0.1 (Tuple source SNAT) avec le port attribué indiqué.  PAT, comme indiqué dans le tableau précédent, est également appelé SNAT de déguisement de port.  Plusieurs sources privées se font passer pour une adresse IP et un port.  
 
-N’utilisez pas de dépendance vis-à-vis de la façon dont les ports sources sont affectés.  L’illustration précédente montre uniquement le concept de base.
+#### <a name="source-snat-port-reuse"></a>réutilisation des ports source (SNAT)
+
+Les passerelles NAT réutilisent de façon opportuniste les ports sources (SNAT).  L’exemple suivant illustre ce concept comme un flux supplémentaire pour l’ensemble de flux précédent.  La machine virtuelle dans l’exemple est un flux vers l’adresse 65.52.0.2.
+
+| Flux | Tuple source | Tuple de destination |
+|:---:|:---:|:---:|
+| 4 | 192.168.0.16:4285 | 65.52.0.2:80 |
+
+Une passerelle NAT translatera probablement le flux 4 vers un port également utilisable pour d’autres destinations.  Pour plus d’informations sur le dimensionnement correct de l’approvisionnement de votre adresse IP, consultez [Mise à l’échelle](https://docs.microsoft.com/azure/virtual-network/nat-gateway-resource#scaling).
+
+| Flux | Tuple source | Tuple source après SNAT | Tuple de destination | 
+|:---:|:---:|:---:|:---:|
+| 4 | 192.168.0.16:4285 | 65.52.1.1:**1234** | 65.52.0.2:80 |
+
+Ne prenez pas de dépendance vis-à-vis de la façon dont les ports sources sont affectés dans l’exemple ci-dessus.  L’illustration précédente montre uniquement le concept de base.
 
 La traduction d’adresses réseau sources (SNAT) fournie par le service NAT diffèrent de [Load Balancer](../load-balancer/load-balancer-outbound-connections.md) sous plusieurs aspects.
 
@@ -267,7 +279,7 @@ La traduction d’adresses réseau sources (SNAT) fournie par le service NAT dif
 NAT fournit des ports SNAT à la demande pour les nouveaux flux de trafic sortant. Tous les ports SNAT disponibles dans l’inventaire sont utilisés par toute machine virtuelle sur les sous-réseaux configurés avec NAT. 
 
 <p align="center">
-  <img src="media/nat-overview/lb-vnnat-chart.svg" width="550" title="SNAT de trafic sortant à la demande du service NAT de Réseau virtuel">
+  <img src="media/nat-overview/lb-vnnat-chart.svg" alt="Figure depicts inventory of all available SNAT ports used by any virtual machine on subnets configured with N A T." width="550" title="SNAT de trafic sortant à la demande du service NAT de Réseau virtuel">
 </p>
 
 *Figure : SNAT de trafic sortant à la demande du service NAT de Réseau virtuel*
@@ -275,7 +287,7 @@ NAT fournit des ports SNAT à la demande pour les nouveaux flux de trafic sortan
 Toute configuration IP d’une machine virtuelle peut créer des flux sortants à la demande si besoin.  Aucune préallocation, par planification d’instance incluant le surprovisionnement du pire cas par instance, n’est nécessaire.  
 
 <p align="center">
-  <img src="media/nat-overview/exhaustion-threshold.svg" width="550" title="Différences dans les scénarios d’épuisement">
+  <img src="media/nat-overview/exhaustion-threshold.svg" alt="Figure depicts inventory of all available SNAT ports used by any virtual machine on subnets configured with N A T with exhaustion threshold." width="550" title="Différences dans les scénarios d’épuisement">
 </p>
 
 *Figure : Différences dans les scénarios d’épuisement*
@@ -291,7 +303,12 @@ La mise à l’échelle NAT est principalement une fonction de gestion de l’in
 
 SNAT mappe des adresses privées à une ou plusieurs adresses IP publiques, en réécrivant l’adresse source et le port source dans les processus. Une ressource de passerelle NAT utilise 64 000 ports (ports SNAT) par adresse IP publique configurée pour cette traduction. Les ressources de passerelle NAT peuvent comprendre jusqu’à 16 adresses IP et 1 million de ports SNAT. Si une ressource de préfixe d’adresse IP publique est fournie, chaque adresse IP présente dans le préfixe fournit un inventaire des ports SNAT. L’ajout d’autres adresses IP publiques augmente les ports SNAT disponibles dans l’inventaire. Les protocoles TCP et UDP sont des inventaires de ports SNAT distincts qui ne sont pas liés.
 
-Les ressources de passerelle NAT réutilisent de façon opportuniste les ports sources. À des fins de mise à l’échelle, vous devez partir du principe que chaque flux nécessite un nouveau port SNAT et mettre à l’échelle le nombre total d’adresses IP disponibles pour le trafic sortant.
+Les ressources de passerelle NAT réutilisent de façon opportuniste les ports sources (SNAT). Au titre de conseil de conception à des fins de mise à l’échelle, vous devez partir du principe que chaque flux nécessite un nouveau port SNAT et mettre à l’échelle le nombre total d’adresses IP disponibles pour le trafic sortant.  Vous devez réfléchir soigneusement à la mise à l’échelle que vous concevez, et approvisionner les quantités d’adresses IP en conséquence.
+
+Les ports SNAT vers différentes destinations sont les plus susceptibles d’être réutilisés quand c’est possible. Et lorsque l’épuisement des ports SNAT approche, les flux peuvent échouer.  
+
+Pour un exemple, consultez [Notions de base de SNAT](https://docs.microsoft.com/azure/virtual-network/nat-gateway-resource#source-network-address-translation).
+
 
 ### <a name="protocols"></a>Protocoles
 
@@ -321,11 +338,9 @@ Un port SNAT peut être réutilisé pour la même adresse IP de destination et l
 
 - NAT est compatible avec des ressources d’adresses IP publiques, de préfixes d’adresses IP publiques et d’équilibreur de charge de la référence SKU standard.   Les ressources de base (par exemple, un équilibreur de charge de base) et tous les produits dérivés de celles-ci ne sont pas compatibles avec NAT.  Les ressources de base doivent être placées sur un sous-réseau non configuré avec NAT.
 - La famille d’adresses IPv4 est prise en charge.  NAT n’interagit pas avec la famille d’adresses IPv6.  NAT ne peut pas être déployé sur un sous-réseau avec un préfixe IPv6.
-- La journalisation des flux de groupe de sécurité réseau n’est pas prise en charge lors de l’utilisation de NAT.
 - NAT ne peut pas s’étendre sur plusieurs réseaux virtuels.
 
-
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Nous aimerions savoir comment nous pouvons améliorer le service. Il vous manque une fonctionnalité ? Envoyez-nous vos suggestions sur [UserVoice for NAT](https://aka.ms/natuservoice).
 
@@ -345,11 +360,9 @@ Nous aimerions savoir comment nous pouvons améliorer le service. Il vous manque
   - [Modèle](./quickstart-create-nat-gateway-template.md)
 * Découvrir l’API de ressource de passerelle NAT
   - [REST API](https://docs.microsoft.com/rest/api/virtualnetwork/natgateways)
-  - [Azure CLI](https://docs.microsoft.com/cli/azure/network/nat/gateway?view=azure-cli-latest)
+  - [Azure CLI](https://docs.microsoft.com/cli/azure/network/nat/gateway)
   - [PowerShell](https://docs.microsoft.com/powershell/module/az.network/new-aznatgateway)
 * Découvrez les [zones de disponibilité](../availability-zones/az-overview.md).
 * Découvrez l’[équilibreur de charge standard](../load-balancer/load-balancer-standard-overview.md).
 * Découvrez les [zones de disponibilité et l’équilibreur de charge standard](../load-balancer/load-balancer-standard-availability-zones.md).
 * [Utilisez UserVoice pour nous faire part des prochains développements dont vous aimeriez bénéficier concernant le service NAT de réseau virtuel](https://aka.ms/natuservoice).
-
-

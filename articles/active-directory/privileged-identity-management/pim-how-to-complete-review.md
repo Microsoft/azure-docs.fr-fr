@@ -7,19 +7,19 @@ author: curtand
 manager: daveba
 editor: ''
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.subservice: pim
 ms.date: 11/08/2019
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fe2d85d605b9ee418a5709ddcdb448c56be1d918
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fa7e8089fbbf2ee653100a05383fdbdc877ffda4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74022280"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84742214"
 ---
 # <a name="complete-an-access-review-of-azure-ad-roles-in-privileged-identity-management"></a>Effectuer une révision d’accès des rôles Azure AD dans Privileged Identity Management
 

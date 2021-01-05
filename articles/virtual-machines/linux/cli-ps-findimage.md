@@ -3,15 +3,15 @@ title: Sélectionner des images de VM Linux avec l’interface de ligne de comma
 description: Découvrez comment utiliser Azure CLI pour déterminer l’éditeur, l’offre, la référence (SKU) et la version d’images de machine virtuelle de la Place de marché.
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/25/2019
 ms.author: cynthn
-ms.openlocfilehash: 0026c70a3a1a6b5e635e6b43e74b557d4218e6d3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 56d2aa9f7aa36808774876ac0f5cfc596887ff26
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79226801"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96906384"
 ---
 # <a name="find-linux-vm-images-in-the-azure-marketplace-with-the-azure-cli"></a>Rechercher des images de machine virtuelle Linux sur la Place de marché Microsoft Azure avec Azure CLI
 
@@ -22,6 +22,45 @@ Parcourez également les offres et images disponibles à l’aide de la vitrine 
 Vérifiez que vous avez installé la dernière version [d’Azure CLI](/cli/azure/install-azure-cli) et que vous êtes connecté à un compte Azure (`az login`).
 
 [!INCLUDE [virtual-machines-common-image-terms](../../../includes/virtual-machines-common-image-terms.md)]
+
+
+## <a name="deploy-from-a-vhd-using-purchase-plan-parameters"></a>Déployer à partir d’un VHD à l’aide des paramètres de plan d’achat
+
+Si vous disposez d’un VHD existant qui a été créé à l’aide d’une image payante de la Place de marché Azure, vous devrez peut-être fournir les informations du plan d’achat lors de la création d’une machine virtuelle à partir de ce VHD. 
+
+Si vous avez toujours la machine virtuelle d’origine, ou une autre machine virtuelle créée à l’aide de la même image, vous pouvez obtenir le nom du plan, l’éditeur et les informations sur le produit en utilisant [az vm get-instance-view](/cli/azure/vm#az_vm_get_instance_view). Cet exemple obtient une machine virtuelle nommée *myVM* dans le groupe de ressources *myResourceGroup*, puis affiche les informations du plan d’achat.
+
+```azurepowershell-interactive
+az vm get-instance-view -g myResourceGroup -n myVM --query plan
+```
+
+Si vous n’avez pas obtenu les informations du plan avant la suppression de la machine virtuelle d’origine, vous pouvez effectuer une [demande de support](https://ms.portal.azure.com/#create/Microsoft.Support). Les techniciens de support auront besoin du nom de la machine virtuelle, de l’ID d’abonnement et de l’horodatage de l’opération de suppression.
+
+Une fois que vous avez les informations du plan, vous pouvez créer la machine virtuelle en utilisant le paramètre `--attach-os-disk` pour spécifier le VHD.
+
+```azurecli-interactive
+az vm create \
+   --resource-group myResourceGroup \
+  --name myNewVM \
+  --nics myNic \
+  --size Standard_DS1_v2 --os-type Linux \
+  --attach-os-disk myVHD \
+  --plan-name planName \
+  --plan-publisher planPublisher \
+  --plan-product planProduct 
+```
+
+## <a name="deploy-a-new-vm-using-purchase-plan-parameters"></a>Déployer une nouvelle machine virtuelle à l’aide des paramètres de plan d’achat
+
+Si vous avez déjà des informations sur l’image, vous pouvez la déployer à l’aide de la commande `az vm create`. Dans cet exemple, nous déployons une machine virtuelle avec l’image RabbitMQ Certified by Bitnami :
+
+```azurecli
+az group create --name myResourceGroupVM --location westus
+
+az vm create --resource-group myResourceGroupVM --name myVM --image bitnami:rabbitmq:rabbitmq:latest --plan-name rabbitmq --plan-product rabbitmq --plan-publisher bitnami
+```
+
+Si vous recevez un message concernant l’acceptation des conditions de l’image, consultez la section [Accepter les conditions](#accept-the-terms) plus loin dans cet article.
 
 ## <a name="list-popular-images"></a>Liste des images populaires
 
@@ -325,7 +364,7 @@ Sortie :
 }
 ```
 
-### <a name="accept-the-terms"></a>Accepter les conditions
+## <a name="accept-the-terms"></a>Accepter les conditions
 
 Pour afficher et accepter les termes du contrat de licence, utilisez la commande [az vm image accept-terms](/cli/azure/vm/image?). Lorsque vous acceptez les termes, vous activez un déploiement par programmation dans votre abonnement. Vous ne devez accepter qu’une fois les conditions par abonnement pour l’image. Par exemple :
 
@@ -350,16 +389,6 @@ La sortie inclut un `licenseTextLink` aux termes du contrat de licence et indiqu
   "signature": "XXXXXXLAZIK7ZL2YRV5JYQXONPV76NQJW3FKMKDZYCRGXZYVDGX6BVY45JO3BXVMNA2COBOEYG2NO76ONORU7ITTRHGZDYNJNXXXXXX",
   "type": "Microsoft.MarketplaceOrdering/offertypes"
 }
-```
-
-### <a name="deploy-using-purchase-plan-parameters"></a>Procéder au déploiement à l’aide des paramètres de plan d’achat
-
-Après avoir accepté les conditions de l’image, vous pouvez déployer une machine virtuelle dans l’abonnement. Pour déployer l’image à l’aide de la commande `az vm create`, fournissez des paramètres pour le plan d’achat en plus d’un URN pour l’image. Par exemple, pour déployer une machine virtuelle avec le RabbitMQ certifié par Bitnami image :
-
-```azurecli
-az group create --name myResourceGroupVM --location westus
-
-az vm create --resource-group myResourceGroupVM --name myVM --image bitnami:rabbitmq:rabbitmq:latest --plan-name rabbitmq --plan-product rabbitmq --plan-publisher bitnami
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

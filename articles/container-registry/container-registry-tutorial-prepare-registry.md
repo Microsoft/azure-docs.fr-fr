@@ -2,18 +2,18 @@
 title: Tutoriel - Créer un registre géorépliqué
 description: Créez un registre de conteneurs Azure, configurez la géoréplication, préparez une image Docker et déployez-la dans le registre. Première partie d’une série en trois parties.
 ms.topic: tutorial
-ms.date: 04/30/2017
+ms.date: 06/30/2020
 ms.custom: seodec18, mvc
-ms.openlocfilehash: 70dc664d27fde3b7cf9fe4e5e3a99c041236ac16
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6abf1b7a524bc7dd28f1704a362749ac84de2389
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222146"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97826082"
 ---
-# <a name="tutorial-prepare-a-geo-replicated-azure-container-registry"></a>Didacticiel : Préparer un registre de conteneurs Azure géorépliqué
+# <a name="tutorial-prepare-a-geo-replicated-azure-container-registry"></a>Tutoriel : Préparer un registre de conteneurs Azure géorépliqué
 
-Un registre de conteneurs Azure est un registre Docker privé déployé dans Azure que vous pouvez conserver dans un réseau proche de vos déploiements. Dans le cadre de cet ensemble de trois articles de didacticiel, vous apprendrez à utiliser la géoréplication pour déployer une application web ASP.NET Core exécutée dans un conteneur Linux dans deux instances [Web App pour conteneurs](../app-service/containers/index.yml). Vous découvrirez comment Azure déploie automatiquement l’image dans chaque instance Web App à partir du référentiel géorépliqué le plus proche.
+Un registre de conteneurs Azure est un registre Docker privé déployé dans Azure que vous pouvez conserver dans un réseau proche de vos déploiements. Dans le cadre de cet ensemble de trois articles de didacticiel, vous apprendrez à utiliser la géoréplication pour déployer une application web ASP.NET Core exécutée dans un conteneur Linux dans deux instances [Web App pour conteneurs](../app-service/index.yml). Vous découvrirez comment Azure déploie automatiquement l’image dans chaque instance Web App à partir du référentiel géorépliqué le plus proche.
 
 Ce didacticiel, première partie d’une série qui en compte trois, explique comment :
 
@@ -37,55 +37,68 @@ Azure Cloud Shell n’inclut pas les composants Docker requis pour effectuer cha
 
 ## <a name="create-a-container-registry"></a>Créer un registre de conteneur
 
+Pour ce tutoriel, vous avez besoin d’un registre de conteneurs Azure dans le niveau de service Premium. Pour créer un nouveau registre de conteneurs Azure, effectuez les étapes de cette section.
+
+> [!TIP]
+> Si vous avez précédemment créé un registre et que vous devez effectuer une mise à niveau, consultez [Changement de niveau](container-registry-skus.md#changing-tiers). 
+
 Connectez-vous au [portail Azure](https://portal.azure.com).
 
 Sélectionnez **Créer une ressource** > **Conteneurs** > **Azure Container Registry**.
 
-![Création d’un registre de conteneur dans le portail Azure][tut-portal-01]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-01.png" alt-text="Création d’un registre de conteneurs dans le portail Azure":::
 
-Configurez votre nouveau registre avec les paramètres suivants :
+Configurez votre nouveau registre avec les paramètres suivants. Sous l’onglet **Informations de base** :
 
-* **Nom du registre** : créez un nom de registre qui est globalement unique dans Azure et contient entre 5 et 50 caractères alphanumériques.
-* **Groupe de ressources** : **Créer** > `myResourceGroup`
+* **Nom du registre** : créez un nom de registre qui est globalement unique dans Azure et contient entre 5 et 50 caractères alphanumériques
+* **Groupe de ressources** : **Créer un nouveau** > `myResourceGroup`
 * **Emplacement** : `West US`
-* **Utilisateur administrateur** : `Enable` (requis pour que Web App pour conteneurs puisse extraire des images)
 * **Référence** : `Premium` (requise pour la géoréplication)
 
-Sélectionnez **Créer** pour déployer l’instance ACR.
+Sélectionnez **Vérifier + créer**, puis **Créer** pour créer l’instance du Registre.
 
-![Création d’un registre de conteneur dans le portail Azure][tut-portal-02]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-02.png" alt-text="Configuration d’un registre de conteneurs dans le portail Azure":::
 
 Dans le reste de ce didacticiel, nous utilisons `<acrName>` en lieu et place du **nom du registre** de conteneurs.
 
 > [!TIP]
 > Comme les registres de conteneurs Azure sont généralement des ressources durables qui sont utilisées dans plusieurs hôtes de conteneur, nous vous recommandons de créer votre registre dans son propre groupe de ressources. Quand vous configurez des registres et des Webhooks géorépliqués, ces ressources supplémentaires sont placées dans le même groupe de ressources.
->
 
 ## <a name="configure-geo-replication"></a>Configuration de la géo-réplication
 
 Maintenant que vous disposez d’un registre Premium, vous pouvez configurer la géoréplication. Votre application web, que vous configurerez dans le didacticiel suivant de manière qu’elle s’exécute dans deux régions, peut ensuite extraire ses images conteneur du registre le plus proche.
 
-Accédez à votre nouveau registre de conteneurs dans le portail Azure, puis sélectionnez **Réplications** sous **SERVICES** :
+Accédez à votre nouveau registre de conteneurs dans le portail Azure, puis sélectionnez **Réplications** sous **Services** :
 
-![Option Réplications du registre de conteneurs dans le portail Azure][tut-portal-03]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-03.png" alt-text="Option Réplications dans l’interface utilisateur du registre de conteneurs du portail Azure":::
 
 Une carte où les régions Azure disponibles pour la géoréplication sont représentées par des hexagones verts s’affiche :
 
- ![Carte des régions dans le portail Azure][tut-map-01]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-map-01.png" alt-text="Carte des régions dans le portail Azure":::
 
 Répliquez votre registre dans la région USA Est en sélectionnant l’hexagone vert correspondant, puis sélectionnez **Créer** sous **Créer une réplication** :
 
- ![Boîte de dialogue Créer une réplication dans le portail Azure][tut-portal-04]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-04.png" alt-text="Interface utilisateur de création d’une réplication dans le portail Azure":::
 
 Une fois la réplication terminée, le portail indique l’état *Prêt* pour les deux régions. Utilisez le bouton **Actualiser** pour actualiser l’état de la réplication. La création et la synchronisation des réplicas peuvent prendre environ une minute.
 
-![Boîte de dialogue État de la réplication dans le portail Azure][tut-portal-05]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-05.png" alt-text="Interface utilisateur de l’état de la réplication dans le portail Azure":::
+
+
+## <a name="enable-admin-account"></a>Activer un compte administrateur
+
+Dans les tutoriels suivants, vous allez déployer une image conteneur du registre directement sur Web App pour conteneurs. Pour activer cette fonctionnalité, vous devez également activer le [compte administrateur](container-registry-authentication.md#admin-account) du Registre.
+
+Accédez à votre nouveau registre de conteneurs dans le portail Azure, puis sélectionnez **Clés d’accès** sous **Paramètres**. Sous **Utilisateur administrateur**, sélectionnez **Activer**.
+
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-portal-06.png" alt-text="Activer le compte administrateur dans le portail Azure":::
+
 
 ## <a name="container-registry-login"></a>Connexion au registre de conteneurs
 
-Maintenant que vous avez configuré la géoréplication, vous allez générer une image conteneur et l’envoyer à votre registre. Vous devez vous connecter à votre instance ACR avant de lui envoyer des images.
+Maintenant que vous avez configuré la géoréplication, vous allez générer une image conteneur et l’envoyer à votre registre. Vous devez vous connecter à votre registre avant de lui envoyer (par push) des images.
 
-Utilisez la commande [az acr login](https://docs.microsoft.com/cli/azure/acr#az-acr-login) pour vous authentifier et mettre en cache les informations d’identification de votre registre. Remplacez `<acrName>` par le nom du registre créé précédemment.
+Utilisez la commande [az acr login](/cli/azure/acr#az-acr-login) pour vous authentifier et mettre en cache les informations d’identification de votre registre. Remplacez `<acrName>` par le nom du registre créé précédemment.
 
 ```azurecli
 az acr login --name <acrName>
@@ -97,7 +110,7 @@ Une fois l’opération terminée, la commande renvoie `Login Succeeded`.
 
 L’exemple de ce didacticiel inclut une petite application web générée avec [ASP.NET Core][aspnet-core]. L’application fournit une page HTML qui affiche la région à partir de laquelle l’image a été déployée par Azure Container Registry.
 
-![Application du didacticiel affichée dans le navigateur][tut-app-01]
+:::image type="content" source="./media/container-registry-tutorial-prepare-registry/tut-app-01.png" alt-text="Application de tutoriel affichée dans le navigateur":::
 
 Utilisez git pour télécharger l’exemple dans un répertoire local et utilisez la commande `cd` pour accéder au répertoire :
 
@@ -110,19 +123,19 @@ Si vous n’avez pas installé `git`, vous pouvez [télécharger l’archive ZIP
 
 ## <a name="update-dockerfile"></a>Mettre à jour le fichier Dockerfile
 
-Le fichier Dockerfile inclus dans l’exemple montre comment le conteneur est généré. La génération du conteneur démarre à partir d’une image [aspnetcore][dockerhub-aspnetcore] officielle. Les fichiers d’application sont ensuite copiés dans le conteneur, les dépendances sont installées, la sortie est compilée à l’aide de l’image [aspnetcore build][dockerhub-aspnetcore-build] officielle et enfin, une image aspnetcore optimisée est générée.
+Le fichier Dockerfile inclus dans l’exemple montre comment le conteneur est généré. La génération du conteneur démarre à partir d’une image de runtime ASP.NET Core officielle. Les fichiers d’application sont ensuite copiés dans le conteneur, les dépendances sont installées, la sortie est compilée à l’aide de l’image de kit SDK .NET Core officielle et, pour finir, une image aspnetcore optimisée est générée.
 
 Le fichier [Dockerfile][dockerfile] se trouve à l’emplacement `./AcrHelloworld/Dockerfile` dans la source clonée.
 
 ```Dockerfile
-FROM microsoft/aspnetcore:2.0 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS base
 # Update <acrName> with the name of your registry
 # Example: uniqueregistryname.azurecr.io
 ENV DOCKER_REGISTRY <acrName>.azurecr.io
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /src
 COPY *.sln ./
 COPY AcrHelloworld/AcrHelloworld.csproj AcrHelloworld/
@@ -174,8 +187,8 @@ Plusieurs lignes de sortie sont affichées pendant la génération de l’image 
 
 ```bash
 Sending build context to Docker daemon  523.8kB
-Step 1/18 : FROM microsoft/aspnetcore:2.0 AS base
-2.0: Pulling from microsoft/aspnetcore
+Step 1/18 : FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS base
+2.2: Pulling from mcr.microsoft.com/dotnet/core/aspnet
 3e17c6eae66c: Pulling fs layer
 
 [...]
@@ -229,18 +242,7 @@ Passez au didacticiel suivant pour déployer votre conteneur dans plusieurs inst
 > [!div class="nextstepaction"]
 > [Déployer une application web à partir d’Azure Container Registry](container-registry-tutorial-deploy-app.md)
 
-<!-- IMAGES -->
-[tut-portal-01]: ./media/container-registry-tutorial-prepare-registry/tut-portal-01.png
-[tut-portal-02]: ./media/container-registry-tutorial-prepare-registry/tut-portal-02.png
-[tut-portal-03]: ./media/container-registry-tutorial-prepare-registry/tut-portal-03.png
-[tut-portal-04]: ./media/container-registry-tutorial-prepare-registry/tut-portal-04.png
-[tut-portal-05]: ./media/container-registry-tutorial-prepare-registry/tut-portal-05.png
-[tut-app-01]: ./media/container-registry-tutorial-prepare-registry/tut-app-01.png
-[tut-map-01]: ./media/container-registry-tutorial-prepare-registry/tut-map-01.png
-
 <!-- LINKS - External -->
 [acr-helloworld-zip]: https://github.com/Azure-Samples/acr-helloworld/archive/master.zip
 [aspnet-core]: https://dot.net
-[dockerhub-aspnetcore]: https://hub.docker.com/r/microsoft/aspnetcore/
-[dockerhub-aspnetcore-build]: https://store.docker.com/community/images/microsoft/aspnetcore-build
 [dockerfile]: https://github.com/Azure-Samples/acr-helloworld/blob/master/AcrHelloworld/Dockerfile

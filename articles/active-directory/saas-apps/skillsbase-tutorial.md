@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Skills Base | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Skills Base.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 237d90c4-8243-4f80-a305-b5ad9204159e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
-ms.openlocfilehash: a088675bc1610daf275bac77ae222f0e664afd67
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 9b712756b6daf7380998bb98f56113cab29ebb59
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67090559"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015160"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-skills-base"></a>Tutoriel : Intégration d’Azure Active Directory à Skills Base
 
@@ -31,7 +27,7 @@ L’intégration de Skills Base à Azure AD vous offre les avantages suivants :
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à Skills Base (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -40,6 +36,9 @@ Pour configurer l’intégration d’Azure AD à Skills Base, vous avez besoin d
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
 * Abonnement à Skills Base pour lequel l’authentification unique est activée
+
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -135,11 +134,11 @@ Pour configurer l’authentification unique Azure AD avec Skills Base, effectuez
 
 3. Dans la page **Authentication** (Authentification), sélectionnez l’authentification unique **SAML 2**.
 
-    ![Authentification unique](./media/skillsbase-tutorial/tutorial_skillsbase_single.png)
+    ![Capture d’écran affichant la page d’authentification, avec l’option SAML 2 sélectionnée pour l’authentification unique.](./media/skillsbase-tutorial/tutorial_skillsbase_single.png)
 
 4. Dans la page **Authentication** (Authentification), effectuez les étapes suivantes :
 
-    ![Authentification unique](./media/skillsbase-tutorial/tutorial_skillsbase_save.png)
+    ![Capture d’écran montrant la page Authentication dans laquelle vous pouvez entrer les valeurs décrites.](./media/skillsbase-tutorial/tutorial_skillsbase_save.png)
 
     a. Cliquez sur le bouton **Update IdP metadata** (Mettre à jour les métadonnées du fournisseur d’identité) situé en regard de l’option **Status** (État), puis collez le code XML de métadonnées que vous avez téléchargé à partir du portail Azure dans la zone de texte spécifiée.
 
@@ -210,12 +209,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans Skills B
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Skills Base dans le volet d’accès, vous devez être connecté automatiquement à l’application Skills Base pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Skills Base dans le volet d’accès, vous devez être connecté automatiquement à l’application Skills Base pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

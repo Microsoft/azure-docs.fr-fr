@@ -5,16 +5,16 @@ author: haroldwongms
 manager: joraio
 ms.service: virtual-machines-linux
 ms.subservice: workloads
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 10/15/2019
 ms.author: haroldw
-ms.openlocfilehash: d7d251370aefdfadc0b77a67f6dad1be2dcb9e9a
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: ed74d0829a8372ea8391fcd331eef2ef3af3dae0
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759433"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97704909"
 ---
 # <a name="deploy-okd-in-azure"></a>Déployer OKD dans Azure
 
@@ -119,12 +119,12 @@ Les paramètres peuvent différer selon les versions. Vérifiez donc quels sont 
 
 
 > [!NOTE] 
-> La commande suivante requiert Azure CLI 2.0.8 ou version ultérieure. Pour vérifier la version d’Azure CLI, exécutez la commande `az --version`. Pour mettre à jour la version de l’interface CLI, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+> La commande suivante requiert Azure CLI 2.0.8 ou version ultérieure. Pour vérifier la version d’Azure CLI, exécutez la commande `az --version`. Pour mettre à jour la version de l’interface CLI, consultez [Installer Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
 
 L’exemple suivant déploie le cluster OKD et toutes les ressources associées dans un groupe de ressources nommé openshiftrg, avec le nom de déploiement myOpenShiftCluster. Le modèle est référencé directement à partir du dépôt GitHub à l’aide d’un fichier de paramètres locaux nommé azuredeploy.parameters.json.
 
 ```azurecli 
-az group deployment create -g openshiftrg --name myOpenShiftCluster \
+az deployment group create -g openshiftrg --name myOpenShiftCluster \
       --template-uri https://raw.githubusercontent.com/Microsoft/openshift-origin/master/azuredeploy.json \
       --parameters @./azuredeploy.parameters.json
 ```

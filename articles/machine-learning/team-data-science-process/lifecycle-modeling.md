@@ -8,15 +8,15 @@ editor: marktab
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 11/17/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 1d3cd61ea3da88c4c5231f22c0e127508591fb8d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4719bd21bc6299373f9dabfe4733541c6fa27b94
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720467"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94740179"
 ---
 # <a name="modeling-stage-of-the-team-data-science-process-lifecycle"></a>Phase de modélisation du cycle de vie du processus TDSP (Team Data Science Process)
 
@@ -53,7 +53,7 @@ Cette étape nécessite une combinaison inédite d’expertise dans le secteur e
 Pour obtenir des conseils techniques sur l’ingénierie des caractéristiques durant l’utilisation des diverses technologies de données Azure, consultez [Feature engineering in the Data Science Process](create-features.md) (Ingénierie des caractéristiques dans le processus de science des données). 
 
 ### <a name="model-training"></a>Apprentissage du modèle
-Selon le type de question auquel vous essayez de réponse, il existe de nombreux algorithmes de modélisation. Pour plus d’informations sur le choix des algorithmes, consultez [Comment choisir les algorithmes dans Microsoft Azure Machine Learning](../studio/algorithm-choice.md). Même si cet article utilise Azure Machine Learning, l’aide qu’il fournit est utile pour tout projet d’apprentissage automatique. 
+Selon le type de question auquel vous essayez de réponse, il existe de nombreux algorithmes de modélisation. Pour plus d’informations sur le choix des algorithmes, consultez [Comment choisir les algorithmes dans Microsoft Azure Machine Learning](../how-to-select-algorithms.md). Même si cet article utilise Azure Machine Learning, l’aide qu’il fournit est utile pour tout projet d’apprentissage automatique. 
 
 Le processus d’apprentissage du modèle comprend les étapes suivantes : 
 
@@ -66,8 +66,6 @@ Le processus d’apprentissage du modèle comprend les étapes suivantes :
 > **Éviter la fuite** : Une fuite de données peut avoir lieu si vous incluez des données extérieures au jeu de données d’apprentissage, qui permet à un modèle ou à un algorithme d’apprentissage automatique d’effectuer des prédictions anormalement correctes. La nervosité qui gagne les scientifiques de données quand ils obtiennent des résultats prédictifs semblant trop beaux pour être vrais est souvent liée à une fuite. Ces dépendances peuvent être difficiles à détecter. Pour éviter toute fuite, il est souvent nécessaire de jongler entre la création d’un jeu de données d’analyse, la création d’un modèle et l’évaluation de la précision des résultats. 
 > 
 > 
-
-Nous fournissons avec le processus TDSP un [outil de modélisation et de création de rapports automatisé](https://github.com/Azure/Azure-TDSP-Utilities/blob/master/DataScienceUtilities/Modeling) capable d’exécuter plusieurs algorithmes et balayages de paramètres pour produire un modèle de référence. Il génère également un rapport de modélisation de base qui résume les performances de chaque combinaison de modèle et de paramètre, y compris l’importance des variables. Ce processus est également itératif, car il peut influer sur l’ingénierie des caractéristiques. 
 
 ## <a name="artifacts"></a>Artefacts
 Les artefacts générés au cours de cette phase sont les suivants :
@@ -90,4 +88,4 @@ Voici les liens vers chaque étape du cycle de vie TDSP :
 
 Nous indiquons des procédures pas à pas complètes qui illustrent toutes les étapes du processus correspondant à des scénarios spécifiques. L’article [Example walkthroughs](walkthroughs.md) (Exemples de procédures pas à pas) contient une liste des scénarios ainsi que des liens et des descriptions de miniatures. Les procédures pas à pas montrent comment combiner les outils et services dans le cloud et sur site dans un flux de travail ou un pipeline pour créer une application intelligente. 
 
-Pour obtenir des exemples sur l’exécution de procédures dans les processus TDSP utilisant Azure Machine Learning Studio, consultez [Utilisation du processus de science des données avec Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/). 
+Pour obtenir des exemples sur l’exécution de procédures dans les processus TDSP utilisant Azure Machine Learning Studio, consultez [Utilisation du processus de science des données avec Azure Machine Learning](./index.yml).

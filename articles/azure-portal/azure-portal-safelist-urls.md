@@ -1,20 +1,14 @@
 ---
 title: Mettre sur liste fiable les URL du portail Microsoft Azure sur votre pare-feu ou serveur proxy
 description: Ajouter ces URL au contournement du serveur proxy pour communiquer avec le portail Microsoft Azure et ses services
-services: azure-portal
-keywords: ''
-author: mgblythe
-ms.author: mblythe
 ms.date: 04/10/2020
 ms.topic: conceptual
-ms.service: azure-portal
-manager: mtillman
-ms.openlocfilehash: 399c64c88e78079432fcf7c09dafd199da83358b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7d9c8222ee85c0c16ec1e1926335ac06e0389797
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81255045"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745874"
 ---
 # <a name="safelist-the-azure-portal-urls-on-your-firewall-or-proxy-server"></a>Mettre sur liste fiable les URL du portail Microsoft Azure sur votre pare-feu ou serveur proxy
 
@@ -34,7 +28,7 @@ Les points de terminaison d’URL à mettre sur liste fiable pour le portail Azu
 *.applicationinsights.io
 *.azure.com
 *.azure.net
-*.azureafd.net
+*.azurefd.net
 *.azure-api.net
 *.azuredatalakestore.net
 *.azureedge.net
@@ -53,6 +47,7 @@ Les points de terminaison d’URL à mettre sur liste fiable pour le portail Azu
 #### <a name="us-government-cloud"></a>[U.S. U.S. Government](#tab/us-government-cloud)
 
 ```
+*.applicationinsights.us
 *.azure.us
 *.loganalytics.us
 *.microsoft.us

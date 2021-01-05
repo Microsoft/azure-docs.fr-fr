@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017,seoapr2020
 ms.date: 04/24/2020
-ms.openlocfilehash: f7f460b01674359847427296e4526fc5771658f0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8c3993d8208a9a9e2ab54be44d88de0b20a2e586
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82191955"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86084713"
 ---
 # <a name="kernels-for-jupyter-notebook-on-apache-spark-clusters-in-azure-hdinsight"></a>Noyaux pour Jupyter Notebook sur des clusters Apache Spark dans Azure HDInsight
 
@@ -59,8 +59,10 @@ Voici quelques avantages liés à l’utilisation des nouveaux noyaux avec bloc-
 
     Par conséquent, vous **n’avez pas** à exécuter d’instructions telles que les suivantes pour définir les contextes :
 
-         sc = SparkContext('yarn-client')
-         sqlContext = HiveContext(sc)
+    ```sql
+    sc = SparkContext('yarn-client')
+    sqlContext = HiveContext(sc)
+    ```
 
     En revanche, vous pouvez utiliser directement les contextes prédéfinis dans votre application.
 
@@ -68,7 +70,7 @@ Voici quelques avantages liés à l’utilisation des nouveaux noyaux avec bloc-
 
     Le tableau suivant répertorie les différentes commandes magiques disponibles par le biais des noyaux.
 
-   | Commande magique |  Exemple | Description |
+   | Commande magique | Exemple | Description |
    | --- | --- | --- |
    | help |`%%help` |Génère une table de toutes les commandes magiques disponibles, accompagnées d’un exemple et d’une description |
    | info |`%%info` |Génère des informations de session pour le point de terminaison Livy actuel |
@@ -88,7 +90,7 @@ Voici quelques avantages liés à l’utilisation des nouveaux noyaux avec bloc-
 
 La commande magique `%%sql` prend en charge différents paramètres qui vous permettent de contrôler le type de sortie que vous recevez quand vous exécutez des requêtes. Le tableau suivant répertorie les paramètres de sortie.
 
-| Paramètre |  Exemple | Description |
+| Paramètre | Exemple | Description |
 | --- | --- | --- |
 | -o |`-o <VARIABLE NAME>` |Utilisez ce paramètre pour conserver le résultat de la requête dans le contexte Python %%local en tant que trame de données [Pandas](https://pandas.pydata.org/) . Le nom de la variable dataframe est le nom de variable que vous spécifiez. |
 | -q |`-q` |Utilisez ce paramètre pour désactiver les visualisations pour la cellule. Si vous ne voulez pas visualiser automatiquement le contenu d’une cellule et préférez simplement capturer le contenu comme une trame de données, utilisez `-q -o <VARIABLE>`. Si vous souhaitez désactiver les visualisations sans capturer les résultats (par exemple, pour exécuter une requête SQL, comme une instruction `CREATE TABLE`), utilisez `-q` sans spécifier d’argument `-o`. |
@@ -98,8 +100,10 @@ La commande magique `%%sql` prend en charge différents paramètres qui vous per
 
 **Exemple :**
 
-    %%sql -q -m sample -r 0.1 -n 500 -o query2
-    SELECT * FROM hivesampletable
+```sql
+%%sql -q -m sample -r 0.1 -n 500 -o query2
+SELECT * FROM hivesampletable
+```
 
 L’instruction ci-dessus effectue les actions suivantes :
 
@@ -121,9 +125,11 @@ Si votre cluster utilise le stockage Azure comme compte de stockage par défaut,
 
 Les blocs-notes sont enregistrés dans le compte de stockage dans un mode compatible avec [Apache Hadoop HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html). Si vous utilisez SSH dans le cluster, vous pouvez exécuter des commandes de gestion des fichiers :
 
-    hdfs dfs -ls /HdiNotebooks                            # List everything at the root directory – everything in this directory is visible to Jupyter from the home page
-    hdfs dfs –copyToLocal /HdiNotebooks                   # Download the contents of the HdiNotebooks folder
-    hdfs dfs –copyFromLocal example.ipynb /HdiNotebooks   # Upload a notebook example.ipynb to the root folder so it's visible from Jupyter
+| Commande | Description |
+|---------|-------------|
+| `hdfs dfs -ls /HdiNotebooks` | # Répertorier tous les éléments du répertoire racine : tout ce qui se trouve dans ce répertoire est visible pour Jupyter à partir de la page d’accueil |
+| `hdfs dfs –copyToLocal /HdiNotebooks` | # Télécharger le contenu du dossier HdiNotebooks|
+| `hdfs dfs –copyFromLocal example.ipynb /HdiNotebooks` | # Télécharger un bloc-notes exemple. ipynb dans le dossier racine afin qu’il soit visible à partir de Jupyter |
 
 Que le cluster utilise le stockage Azure ou Azure Data Lake Storage comme compte de stockage par défaut, les blocs-notes sont aussi enregistrés sur le nœud principal du cluster à l’emplacement `/var/lib/jupyter`.
 
@@ -131,7 +137,7 @@ Que le cluster utilise le stockage Azure ou Azure Data Lake Storage comme compte
 
 Les blocs-notes Jupyter sur clusters Spark HDInsight sont pris en charge uniquement sur Google Chrome.
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Les nouveaux noyaux sont en phase d’évolution et gagneront en maturité avec le temps. Les API pourront donc évoluer au fur et à mesure des évolutions des noyaux. Nous aimerions recevoir vos commentaires concernant l'utilisation de ces nouveaux noyaux. Ce retour nous est utile pour préparer la version finale de ces noyaux. Vous pouvez laisser vos commentaires dans la section **Commentaires** en bas de cet article.
 

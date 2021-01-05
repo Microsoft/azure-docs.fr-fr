@@ -1,5 +1,5 @@
 ---
-title: 'Azure AD Connect : fonctionnalités de la version préliminaire | Microsoft Docs'
+title: 'Azure AD Connect : Fonctionnalités en préversion | Microsoft Docs'
 description: Cette rubrique décrit en détail les fonctionnalités disponibles en version préliminaire dans Azure AD Connect.
 services: active-directory
 documentationcenter: ''
@@ -11,39 +11,24 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 07/13/2017
+ms.topic: how-to
+ms.date: 05/15/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b7def733a80aea1be77825bb9069217f5f43e003
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b543cf4655d0b961a144e9180385a532ae4216d6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230177"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89657105"
 ---
 # <a name="more-details-about-features-in-preview"></a>Plus de détails sur les fonctionnalités de la version préliminaire
 Cette rubrique décrit l’utilisation des fonctionnalités disponibles dans la version préliminaire.
 
-## <a name="group-writeback"></a>Écriture différée de groupe
-L’option pour l’écriture différée de groupe dans les fonctionnalités facultatives permet l’écriture différée de **groupes dans Office 365** vers une forêt avec Exchange installé. Il s’agit d’un nouveau type de groupe qui est toujours contrôlé dans le cloud. Si Exchange est installé sur site, vous pouvez réécrire ces groupes en local afin que les utilisateurs disposant d’une boîte aux lettres Exchange locale puissent envoyer et recevoir des e-mails de la part de ces groupes.
+## <a name="azure-ad-connect-sync-v2-endpoint-api-public-preview"></a>API du point de terminaison V2 pour la synchronisation Azure AD Connect (préversion publique) 
 
-Vous trouverez [ici](https://aka.ms/O365g)d’autres informations sur les groupes Office 365 et la façon de les utiliser.
-
-Un groupe Office 365 est représenté comme un groupe de distribution dans les versions locales d’AD DS. Votre serveur Exchange local doit être au niveau de la mise à jour cumulative 8 d’Exchange 2013 (publiée en mars 2015) ou d’Exchange 2016 pour pouvoir reconnaître ce nouveau type de groupe.
-
-**Notes relatives à la version préliminaire**
-
-* L’attribut de carnet d’adresses n’est pas rempli pour l’instant dans la version préliminaire. Sans cet attribut, le groupe n’est pas visible dans la liste d’adresses globale. Le moyen le plus simple de renseigner cet attribut est d’utiliser l’applet de commande Exchange PowerShell `update-recipient`.
-* Seules les forêts dotées du schéma Exchange constituent des cibles valides pour les groupes. Si aucune version d’Exchange n’est détectée, il est impossible d’activer l’écriture différée de groupe.
-* Seuls les déploiements d’entreprise basés sur une seule forêt Exchange sont actuellement pris en charge. Si vous avez plusieurs organisations Exchange en local, vous avez besoin d’une solution GALSync locale pour que ces groupes s’affichent dans vos autres forêts.
-* La fonctionnalité d’écriture différée de groupe ne prend pas en charge les groupes de sécurité ou les groupes de distribution.
-
-> [!NOTE]
-> L’écriture différée des groupes nécessite un abonnement Azure AD Premium.
-> 
->
+Nous avons déployé un nouveau point de terminaison (API) pour Azure AD Connect, qui améliore les performances des opérations des services de synchronisation pour Azure Active Directory. En utilisant le nouveau point de terminaison V2, vous constaterez des gains de performances perceptibles lors de l’exportation et de l’importation vers Azure AD. Ce nouveau point de terminaison prend également en charge la synchronisation de groupes comptant jusqu’à 250 000 membres. L’utilisation de ce point de terminaison vous permet également de mettre à jour des groupes unifiés Microsoft 365, sans limite d’appartenance maximale, sur votre Active Directory local, quand l’écriture différée de groupe est activée. Pour plus d’informations, consultez [API du point de terminaison V2 pour la synchronisation Azure AD Connect (préversion publique)](how-to-connect-sync-endpoint-api-v2.md).
 
 ## <a name="user-writeback"></a>Écriture différée de l’utilisateur
 > [!IMPORTANT]

@@ -10,18 +10,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 03/22/2020
+ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: jocastel
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 514f8e86d6bd28cc5212e0f0058f00e270f43e35
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6eb44c1efd683b6febe9a355ef72c80cc6f2e40d
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128414"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746624"
 ---
 # <a name="view-reports-and-logs-in-azure-ad-entitlement-management"></a>Afficher les rapports et les journaux dans la gestion des droits d’utilisation Azure AD
 

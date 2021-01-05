@@ -1,21 +1,23 @@
 ---
 title: Indexation dans Azure Cosmos DB
 description: Comprendre le fonctionnement de l’indexation dans Azure Cosmos DB et différents types d’index, tels que Range, Spatial et les index composites pris en charge.
-author: ThomasWeiss
+author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 04/13/2020
-ms.author: thweiss
-ms.openlocfilehash: 684799ee12715c789910accf80aa5b4afec763d4
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.date: 05/21/2020
+ms.author: tisande
+ms.openlocfilehash: 4211f13324b9fda0b0823b2d035eb03863cb686d
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81273237"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339751"
 ---
 # <a name="indexing-in-azure-cosmos-db---overview"></a>Vue d’ensemble de l’indexation dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Azure Cosmos DB est une base de données indépendante des schémas qui vous permet d’itérer sur votre application sans avoir à vous soucier de la gestion des schémas ou des index. Par défaut, Azure Cosmos DB indexe automatiquement toutes les propriétés de tous les éléments de votre [conteneur](databases-containers-items.md#azure-cosmos-containers) sans avoir à définir de schéma ou configurer d’index secondaires.
+Azure Cosmos DB est une base de données indépendante des schémas qui vous permet d’itérer sur votre application sans avoir à vous soucier de la gestion des schémas ou des index. Par défaut, Azure Cosmos DB indexe automatiquement toutes les propriétés de tous les éléments de votre [conteneur](account-databases-containers-items.md#azure-cosmos-containers) sans avoir à définir de schéma ou configurer d’index secondaires.
 
 L’objectif de cet article est d’expliquer comment Azure Cosmos DB indexe les données et comment il utilise les index pour améliorer les performances des requêtes. Il est recommandé de parcourir cette section avant de découvrir comment personnaliser les [stratégies d’indexation](index-policy.md).
 
@@ -41,7 +43,7 @@ Par exemple, tenez compte de cet élément :
 
 Il serait représenté par l’arborescence suivante :
 
-![L’élément précédent représenté sous forme d’arborescence](./media/index-overview/item-as-tree.png)
+:::image type="content" source="./media/index-overview/item-as-tree.png" alt-text="L’élément précédent représenté sous forme d’arborescence" border="false":::
 
 Notez comment les tableaux sont encodés dans l’arborescence : chaque entrée d’un tableau reçoit un nœud intermédiaire étiqueté avec l’index de cette entrée dans le tableau (0, 1, et ainsi de suite).
 
@@ -51,14 +53,14 @@ Azure Cosmos DB transforme les éléments en arborescence car il permet de réf�
 
 Voici les chemins d’accès de chaque propriété de l’élément exemple décrit ci-dessus :
 
-    /locations/0/country: "Germany"
-    /locations/0/city: "Berlin"
-    /locations/1/country: "France"
-    /locations/1/city: "Paris"
-    /headquarters/country: "Belgium"
-    /headquarters/employees: 250
-    /exports/0/city: "Moscow"
-    /exports/1/city: "Athens"
+- /locations/0/country: "Germany"
+- /locations/0/city: "Berlin"
+- /locations/1/country: "France"
+- /locations/1/city: "Paris"
+- /headquarters/country: "Belgium"
+- /headquarters/employees: 250
+- /exports/0/city: "Moscow"
+- /exports/1/city: "Athens"
 
 Lorsqu’un élément est écrit, Azure Cosmos DB indexe efficacement le chemin d’accès de chaque propriété et sa valeur correspondante.
 
@@ -98,10 +100,14 @@ L’index de **plage** est basé sur une structure de type arborescence ordonné
    SELECT * FROM c WHERE IS_DEFINED(c.property)
    ```
 
-- Correspondances de préfixes de chaîne (le mot clé CONTAINS ne tire pas parti de l’index de plage) :
+- Fonctions système String :
 
    ```sql
-   SELECT * FROM c WHERE STARTSWITH(c.property, "value")
+   SELECT * FROM c WHERE CONTAINS(c.property, "value")
+   ```
+
+   ```sql
+   SELECT * FROM c WHERE STRINGEQUALS(c.property, "value")
    ```
 
 - Requêtes `ORDER BY` :
@@ -131,7 +137,7 @@ Les index **spatiaux** permettent d’exécuter des requêtes efficaces sur des 
 - Géospatial dans les requêtes :
 
    ```sql
-   SELECT * FROM container c WHERE ST_WITHIN(c.property, {"type": "Point", "coordinates": [0.0, 10.0] } })
+   SELECT * FROM container c WHERE ST_WITHIN(c.property, {"type": "Point", "coordinates": [0.0, 10.0] })
    ```
 
 - Requêtes d’intersection géospatiale :
@@ -140,7 +146,7 @@ Les index **spatiaux** permettent d’exécuter des requêtes efficaces sur des 
    SELECT * FROM c WHERE ST_INTERSECTS(c.property, { 'type':'Polygon', 'coordinates': [[ [31.8, -5], [32, -5], [31.8, -5] ]]  })  
    ```
 
-Les index spatiaux sont utilisables sur des objets [GeoJSON](geospatial.md) correctement formatés . Les points, les LineStrings, les polygones et les multipolygones sont actuellement pris en charge.
+Les index spatiaux sont utilisables sur des objets [GeoJSON](./sql-query-geospatial-intro.md) correctement formatés . Les points, les LineStrings, les polygones et les multipolygones sont actuellement pris en charge.
 
 ### <a name="composite-indexes"></a>Index composites
 
@@ -170,14 +176,13 @@ Tant qu’un prédicat de filtre utilise un type d’index, le moteur de requêt
 
 * Vous pouvez accélérer les requêtes et éviter les analyses de conteneur complètes lorsque vous utilisez des fonctions qui n’utilisent pas l’index (par exemple, CONTAINS) en ajoutant des prédicats de filtre supplémentaires qui utilisent l’index. L’ordre des clauses de filtre n’est pas important. Le moteur de requête détermine les prédicats les plus sélectifs et exécute la requête en conséquence.
 
-
 ## <a name="querying-with-indexes"></a>Interrogation avec des index
 
 Les chemins d’accès extraits lors de l’indexation des données facilitent la recherche de l’index lors du traitement d’une requête. En faisant correspondre la clause `WHERE` d’une requête avec la liste des chemins d’accès indexés, il est possible d’identifier très rapidement les éléments qui correspondent au prédicat de la requête.
 
-Considérez la requête suivante : `SELECT location FROM location IN company.locations WHERE location.country = 'France'`. Le prédicat de requête (filtrage sur les éléments, où n’importe quelle localisation possède « France » comme pays) correspondrait au chemin surligné en rouge ci-dessous :
+Considérez la requête suivante : `SELECT location FROM location IN company.locations WHERE location.country = 'France'`. Le prédicat de requête (filtrage sur les éléments, où une localisation affiche « France » comme pays/région) correspondrait au chemin mis en évidence en rouge ci-dessous :
 
-![Mise en correspondance d’un chemin d’accès spécifique au sein d’une arborescence](./media/index-overview/matching-path.png)
+:::image type="content" source="./media/index-overview/matching-path.png" alt-text="Mise en correspondance d’un chemin d’accès spécifique au sein d’une arborescence" border="false":::
 
 > [!NOTE]
 > Une clause `ORDER BY` qui commande par une seule propriété a *toujours* besoin d’un index plage et échouera si le chemin d’accès qu’elle référence n’en a pas. De même, une requête `ORDER BY` qui commande selon plusieurs propriétés nécessite *toujours* un index composite.

@@ -1,14 +1,14 @@
 ---
 title: Présentation du cycle de vie d’un blueprint
 description: Découvrez le cycle de vie que traverse une définition de blueprint ainsi que les détails sur chaque phase, notamment la mise à jour et la suppression des affectations blueprint.
-ms.date: 05/06/2020
+ms.date: 08/27/2020
 ms.topic: conceptual
-ms.openlocfilehash: dc024c0e6643420d26bdc92e47fabe647c55ae7b
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: c1de2cf869362154b112c3eef74ed1fb0db3a993
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82864026"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89049704"
 ---
 # <a name="understand-the-lifecycle-of-an-azure-blueprint"></a>Présentation du cycle de vie d’un blueprint Azure
 
@@ -81,14 +81,14 @@ Vous supprimez un blueprint avec le [portail Azure](../create-blueprint-portal.m
 
 Le blueprint peut être attribué à un abonnement à plusieurs endroits du cycle de vie. Quand le mode d’une version du blueprint est **Publié**, cette version peut être affectée à un abonnement. Ce cycle de vie permet d’utiliser et d’attribuer activement des versions d’un blueprint pendant le développement d’une nouvelle version.
 
-Lors de l’affectation des versions de blueprints, il est important de comprendre où elles sont affectées et avec quels paramètres elles ont été affectées. Les paramètres peuvent être statiques ou dynamiques. Pour plus d’informations, consultez [Paramètres statiques et dynamiques](parameters.md).
+Lors de l’affectation des versions de blueprints, il est important de comprendre où elles sont affectées et avec quels paramètres elles ont été affectées. Les paramètres peuvent être statiques ou dynamiques. Pour plus d’informations, consultez [Paramètres statiques et dynamiques](./parameters.md).
 
 ### <a name="updating-assignments"></a>Mise à jour des affectations
 
 Quand un blueprint est affecté, l’affectation peut être mise à jour. Plusieurs raisons peuvent motiver la mise à jour d’une affectation existante, notamment quand il s’agit de :
 
-- Ajouter ou supprimer un [verrouillage de ressource](resource-locking.md)
-- Modifier la valeur de [paramètres dynamiques](parameters.md#dynamic-parameters)
+- Ajouter ou supprimer un [verrouillage de ressource](./resource-locking.md)
+- Modifier la valeur de [paramètres dynamiques](./parameters.md#dynamic-parameters)
 - Mettre à niveau l’affectation vers une version **publiée** plus récente du blueprint
 
 Pour découvrir comment procéder, consultez [Mettre à jour des affectations existantes](../how-to/update-existing-assignments.md)
@@ -97,7 +97,7 @@ Pour découvrir comment procéder, consultez [Mettre à jour des affectations ex
 
 Si le blueprint n’est plus nécessaire, son attribution peut être annulée à partir du groupe d’administration ou de l’abonnement. Lors de la désaffectation d’un plan, voici ce qui se produit :
 
-- Suppression du [verrouillage des ressources de blueprint](resource-locking.md)
+- Suppression du [verrouillage des ressources de blueprint](./resource-locking.md)
 - Suppression de l’objet d’affectation de blueprint
 - (Conditionnel) Si une **identité gérée affectée par le système** a été utilisée, elle est également supprimée
 
@@ -106,8 +106,8 @@ Si le blueprint n’est plus nécessaire, son attribution peut être annulée à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Comprendre comment utiliser les [paramètres statiques et dynamiques](parameters.md).
-- Apprendre à personnaliser l’[ordre de séquencement des blueprints](sequencing-order.md).
-- Découvrir comment utiliser le [verrouillage de ressources de blueprint](resource-locking.md).
+- Comprendre comment utiliser les [paramètres statiques et dynamiques](./parameters.md).
+- Apprendre à personnaliser l’[ordre de séquencement des blueprints](./sequencing-order.md).
+- Découvrir comment utiliser le [verrouillage de ressources de blueprint](./resource-locking.md).
 - Découvrir comment [mettre à jour des affectations existantes](../how-to/update-existing-assignments.md).
 - Résoudre les problèmes durant l’affectation d’un blueprint en suivant les étapes de [dépannage général](../troubleshoot/general.md).

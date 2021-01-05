@@ -1,29 +1,24 @@
 ---
-title: 'Didacticiel : Intégration d’Azure Active Directory à CS Stars | Microsoft Docs'
+title: 'Tutoriel : Intégration d’Azure Active Directory à CS Stars | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et CS Stars.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 5704d151-afb8-40a4-b286-8bacd4f279ee
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/25/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 15b31bf14b01a215d99814ce57eb9cd5f2cb2773
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6dce717e6622d7b322756c239d5728c6fe813ba0
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81869433"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97670084"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-cs-stars"></a>Didacticiel : Intégration d’Azure Active Directory avec CS Stars
+# <a name="tutorial-azure-active-directory-integration-with-cs-stars"></a>Tutoriel : Intégration d’Azure Active Directory à CS Stars
 
 Dans ce didacticiel, vous allez apprendre à intégrer CS Stars à Azure Active Directory (Azure AD).
 L’intégration de CS Stars dans Azure AD vous offre les avantages suivants :
@@ -32,10 +27,10 @@ L’intégration de CS Stars dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à CS Stars (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour configurer l’intégration d’Azure AD avec CS Stars, vous avez besoin des éléments suivants :
 
@@ -68,7 +63,7 @@ Pour configurer l’intégration de CS Stars avec Azure AD, vous devez ajouter 
 
 4. Dans la zone de recherche, tapez **CS Stars**, sélectionnez **CS Stars** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![CS Stars dans la liste des résultats](common/search-new-app.png)
+    ![CS Stars dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -148,7 +143,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -184,19 +179,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-cs-stars-test-user"></a>Créer un utilisateur de test CS Stars
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans CS Stars. Collaborez avec l’ [équipe du support technique CS Stars](https://riskonnect.com/support/) pour ajouter des utilisateurs dans la plateforme CS Stars. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans CS Stars. Collaborez avec l’[équipe du support technique CS Stars](https://riskonnect.com/support/) pour ajouter des utilisateurs dans la plateforme CS Stars. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette CS Stars dans le panneau d’accès doit vous connecter automatiquement à l’application CS Stars pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette CS Stars dans le panneau d’accès doit vous connecter automatiquement à l’application CS Stars pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

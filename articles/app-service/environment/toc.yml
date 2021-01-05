@@ -3,6 +3,8 @@
   items:
     - name: À propos d’App Service Environments
       href: intro.md
+    - name: App Service Environment v3 (préversion)
+      href: overview.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -10,11 +12,13 @@
       href: create-external-ase.md
     - name: "Créer un environnement\_ASE interne"
       href: create-ilb-ase.md
+    - name: Créer un environnement ASEv3 (préversion)
+      href: creation.md
 - name: Tutoriels
   items:
     - name: Intégration avec un WAF
       href: app-service-app-service-environment-web-application-firewall.md
-    - name: Configurer TLS
+    - name: Paramètres personnalisés d’un environnement ASE
       href: app-service-app-service-environment-custom-settings.md
 - name: Exemples
   items:
@@ -28,12 +32,12 @@
       href: network-info.md
     - name: Contrôleurs de domaine géo-distribués
       href: app-service-app-service-environment-geo-distributed-scale.md
-    - name: ASEv1
-      href: app-service-app-service-environment-intro.md
     - name: Diagnostics
       href: ../overview-diagnostics.md
     - name: Certificats
       href: certificates.md
+    - name: Réseau d’un environnement ASEv3 (préversion)
+      href: networking.md
 - name: Guides pratiques
   items:
     - name: Utiliser un environnement ASE
@@ -46,12 +50,18 @@
       href: forced-tunnel-support.md
     - name: Intégration du pare-feu
       href: firewall-integration.md
+    - name: Redondance de zone
+      href: zone-redundancy.md
+    - name: Utilisation d’un environnement ASEv3 (préversion)
+      href: using.md
 - name: Informations de référence
   items:
     - name: Adresses de gestion
       href: management-addresses.md
     - name: Documentation relative à ASEv1
       items:
+        - name: ASEv1
+          href: app-service-app-service-environment-intro.md
         - name: Créer ASEv1
           href: app-service-web-how-to-create-an-app-service-environment.md
         - name: "Configurer un environnement\_ASEv1"
@@ -83,14 +93,14 @@
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/app-service/'
     - name: Informations sur les quotas
-      href: '../../azure-resource-manager/management/azure-subscription-service-limits.md#app-service-limits'
+      href: ../../azure-resource-manager/management/azure-subscription-service-limits.md#app-service-limits
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=app-service'
     - name: Meilleures pratiques
       href: ../app-service-best-practices.md?toc=%2fazure%2fapp-service%2fenvironment%2ftoc.json
     - name: Exemples
       href: 'https://azure.microsoft.com/resources/samples/?service=app-service'
-    - name: Videos
+    - name: Vidéos
       items:
         - name: Vidéos Azure
           href: 'https://azure.microsoft.com/resources/videos/index/?services=app-service'

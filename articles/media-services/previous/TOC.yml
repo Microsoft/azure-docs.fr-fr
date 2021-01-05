@@ -3,8 +3,10 @@
 - name: Vue d’ensemble
   href: media-services-overview.md
   items:
-    - name: Scénarios et disponibilité
+    - name: Scénarios courants
       href: scenarios-and-availability.md
+    - name: Disponibilité régionale
+      href: availability-regions-v-2.md
     - name: Concepts
       href: media-services-concepts.md
 - name: Bien démarrer
@@ -115,8 +117,6 @@
     - name: Encodage de contenu
       href: media-services-encode-asset.md
       items:
-        - name: Comparer des encodeurs
-          href: media-services-compare-encoders.md
         - name: Gérer la vitesse et la simultanéité de votre encodage
           href: media-services-manage-encoding-speed.md
         - name: Media Encoder Standard (MES)
@@ -205,20 +205,6 @@
                   href: media-services-mes-preset-H264-Single-Bitrate-High-Quality-SD-for-Android.md
                 - name: "H264\_– Vitesse de transmission unique\_qualité faible SD pour Android"
                   href: media-services-mes-preset-H264-Single-Bitrate-Low-Quality-SD-for-Android.md
-        - name: Media Encoder Premium Workflow
-          items:
-            - name: Codecs et formats de Media Encoder Premium Workflow
-              href: media-services-premium-workflow-encoder-formats.md
-            - name: Encoder avec Media Encoder Premium Workflow.
-              items:
-                - name: Media Encoder Premium Workflow
-                  href: media-services-encode-with-premium-workflow.md
-                - name: Didacticiels de workflow Media Encoder Premium
-                  href: media-services-media-encoder-premium-workflow-tutorials.md
-                - name: Créer des flux de travail d’encodage avancé avec le Concepteur de flux de travail
-                  href: media-services-workflow-designer.md
-                - name: Workflow Premium avec plusieurs entrées
-                  href: media-services-media-encoder-premium-workflow-multiplefilesinput.md
         - name: Créer une tâche qui génère des segments fMP4
           href: media-services-generate-fmp4-chunks.md
         - name: Processeurs multimédias
@@ -318,33 +304,16 @@
               href: hybrid-design-drm-sybsystem.md
             - name: Conception multi-DRM de référence
               href: media-services-cenc-with-multidrm-access-control.md
-    - name: Analyser
-      href: media-services-analytics-overview.md
+    - name: Analyser le contenu
       items:
-        - name: Analyser les supports à l’aide du portail Azure
-          href: media-services-portal-analyze.md
-        - name: "Traiter avec Indexer\_2"
-          href: media-services-process-content-with-indexer2.md
         - name: Traiter avec Indexer
           href: media-services-index-content.md
-          items:
-            - name: Présélection de tâches
-              href: indexer-task-preset.md
-        - name: Traiter avec Face Detector
-          href: media-services-face-and-emotion-detection.md
-        - name: Traiter avec Motion Detector
-          href: media-services-motion-detection.md
+        - name: Présélection de tâches
+          href: indexer-task-preset.md
         - name: Traiter avec Face Redactor
           href: media-services-face-redaction.md
-          items:
-            - name: Procédure pas à pas de Face Redactor
-              href: media-services-redactor-walkthrough.md
-        - name: Traiter avec Video Thumbnails
-          href: media-services-video-summarization.md
-        - name: Traiter avec OCR
-          href: media-services-video-optical-character-recognition.md
-        - name: Traiter avec Content Moderator
-          href: media-services-content-moderation.md
+        - name: Procédure pas à pas de Face Redactor
+          href: media-services-redactor-walkthrough.md
     - name: Configurer la télémétrie
       href: media-services-telemetry-overview.md
       items:
@@ -445,11 +414,11 @@
     - name: Azure PowerShell (Resource Manager)
       href: /powershell/module/az.media
     - name: Azure PowerShell
-      href: /powershell/module/servicemanagement/azure/?view=azuresmps-3.7.0
+      href: /powershell/module/servicemanagement/azure.service/?view=azuresmps-3.7.0
     - name: .NET
       href: /dotnet/api/microsoft.windowsazure.mediaservices.client
     - name: REST
-      href: 'https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference'
+      href: /rest/api/media/operations/azure-media-services-rest-api-reference
     - name: Spécifications
       items:
         - name: "Ingestion en direct\_- Spécification d’ingestion en direct au format MP4 fragmenté"

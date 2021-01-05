@@ -5,19 +5,19 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdiseo17may2017,seoapr2020
 ms.date: 04/27/2020
-ms.openlocfilehash: e73a8a420c7591a45a62ba38123c6b3368e0f738
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 47262e0dc7247e1d514eeb64512c21ff1ae527ab
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82190637"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92534819"
 ---
 # <a name="upload-data-for-apache-hadoop-jobs-in-hdinsight"></a>Charger des données pour des travaux Apache Hadoop dans HDInsight
 
-HDInsight fournit un système HDFS (Hadoop Distributed File System) pour le Stockage Azure et Azure Data Lake Storage. Ce stockage comprend Gen1 et Gen2. Stockage Azure et Azure Data Lake Storage (Gen1 et Gen2) sont conçus en tant qu’extensions HDFS. Ils permettent à l’ensemble des composants de l’environnement Hadoop de fonctionner directement sur les données qu’il gère. Stockage Azure, Data Lake Storage Gen1, et Gen2 sont des systèmes de fichiers distincts. Les systèmes sont optimisés pour le stockage des données et des calculs sur ces données. Pour connaître les avantages que constitue l’utilisation du stockage Azure, consultez la page [Utilisation du stockage Azure avec HDInsight](hdinsight-hadoop-use-blob-storage.md). Voir aussi [Utiliser Data Lake Storage Gen1 avec HDInsight](hdinsight-hadoop-use-data-lake-store.md) et [Utiliser Data Lake Storage Gen2 avec HDInsight](hdinsight-hadoop-use-data-lake-storage-gen2.md).
+HDInsight fournit un système HDFS (Hadoop Distributed File System) pour le Stockage Azure et Azure Data Lake Storage. Ce stockage comprend Gen1 et Gen2. Stockage Azure et Azure Data Lake Storage (Gen1 et Gen2) sont conçus en tant qu’extensions HDFS. Ils permettent à l’ensemble des composants de l’environnement Hadoop de fonctionner directement sur les données qu’il gère. Stockage Azure, Data Lake Storage Gen1, et Gen2 sont des systèmes de fichiers distincts. Les systèmes sont optimisés pour le stockage des données et des calculs sur ces données. Pour connaître les avantages que constitue l’utilisation du stockage Azure, consultez la page [Utilisation du stockage Azure avec HDInsight](hdinsight-hadoop-use-blob-storage.md). Voir aussi [Utiliser Data Lake Storage Gen1 avec HDInsight](hdinsight-hadoop-use-data-lake-storage-gen1.md) et [Utiliser Data Lake Storage Gen2 avec HDInsight](hdinsight-hadoop-use-data-lake-storage-gen2.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -26,7 +26,7 @@ Notez les prérequis suivants avant de démarrer :
 * Un cluster Azure HDInsight. Pour obtenir des instructions, consultez [Démarrage rapide : Exécuter une tâche Spark sur Azure HDInsight à l’aide du portail Azure](hadoop/apache-hadoop-linux-tutorial-get-started.md).
 * Connaissance des articles suivants :
     * [Utiliser Stockage Azure avec HDInsight](hdinsight-hadoop-use-blob-storage.md)
-    * [Utiliser Data Lake Storage Gen1 avec HDInsight](hdinsight-hadoop-use-data-lake-store.md)
+    * [Utiliser Data Lake Storage Gen1 avec HDInsight](hdinsight-hadoop-use-data-lake-storage-gen1.md)
     * [Utiliser Data Lake Storage Gen2 avec HDInsight](hdinsight-hadoop-use-data-lake-storage-gen2.md)  
 
 ## <a name="upload-data-to-azure-storage"></a>Charger des données sur le Stockage Azure
@@ -62,11 +62,11 @@ Par exemple : `hadoop fs -copyFromLocal data.txt /example/data/data.txt`
 
 Comme le système de fichiers par défaut pour HDInsight se trouve dans le Stockage Azure, /example/data.txt s’y trouve également. Vous pouvez également faire référence au fichier comme ceci :
 
-    wasbs:///example/data/data.txt
+`wasbs:///example/data/data.txt`
 
 or
 
-    wasbs://<ContainerName>@<StorageAccountName>.blob.core.windows.net/example/data/davinci.txt
+`wasbs://<ContainerName>@<StorageAccountName>.blob.core.windows.net/example/data/davinci.txt`
 
 Pour la liste des autres commandes Hadoop qui fonctionnent avec des fichiers, voir [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
 
@@ -88,7 +88,7 @@ Plusieurs applications fournissent également une interface graphique pour utili
 
 ## <a name="mount-azure-storage-as-local-drive"></a>Monter le stockage Azure comme un lecteur Local
 
-Consultez [Monter le stockage Azure comme un lecteur Local](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/09/mount-azure-blob-storage-as-local-drive.aspx).
+Consultez [Monter le stockage Azure comme un lecteur Local](/archive/blogs/bigdatasupport/mount-azure-blob-storage-as-local-drive).
 
 ## <a name="upload-using-services"></a>Effectuer un chargement en utilisant des services
 

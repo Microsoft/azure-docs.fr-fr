@@ -8,11 +8,11 @@ ms.topic: conceptual
 ms.date: 03/02/2018
 tags: connectors
 ms.openlocfilehash: b67d2e860e8c69f6f2f43441144ef2f60ed3a104
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75378447"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999539"
 ---
 # <a name="monitor-and-manage-your-github-repo-by-using-azure-logic-apps"></a>Superviser et gérer votre référentiel GitHub à l’aide d’Azure Logic Apps
 

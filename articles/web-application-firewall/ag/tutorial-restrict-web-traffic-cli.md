@@ -4,15 +4,16 @@ description: Découvrez comment limiter le trafic web avec un pare-feu d’appli
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
-ms.date: 05/21/2020
+ms.date: 08/31/2020
 ms.author: victorh
-ms.topic: overview
-ms.openlocfilehash: a429d1a0f426002595f347794bc1cb97a649d6f6
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.topic: how-to
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: a33114dce47ca3df87b1c6c774289c8a8efcf835
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83770225"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94739851"
 ---
 # <a name="enable-web-application-firewall-using-the-azure-cli"></a>Activer le pare-feu d’applications web à l’aide d’Azure CLI
 
@@ -20,21 +21,20 @@ Vous pouvez limiter le trafic sur une passerelle d’application à l’aide d�
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle d’application avec WAF activé
-> * Créer un groupe de machines virtuelles identiques
-> * Créer un compte de stockage et configurer des diagnostics
+ * Configurer le réseau
+ * Créer une passerelle d’application avec WAF activé
+ * Créer un groupe de machines virtuelles identiques
+ * Créer un compte de stockage et configurer des diagnostics
 
 ![Exemple de pare-feu d’applications web](../media/tutorial-restrict-web-traffic-cli/scenario-waf.png)
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure PowerShell](tutorial-restrict-web-traffic-powershell.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, cet article nécessite l’exécution d’Azure CLI version 2.0.4 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

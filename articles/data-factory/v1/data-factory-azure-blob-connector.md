@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/05/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: eab332f102b9e39981e2d8ed6e84f73fada87a1a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fa6e19fd9759d6e489d0945b5521a2e0ae3881e0
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236593"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462647"
 ---
 # <a name="copy-data-to-or-from-azure-blob-storage-using-azure-data-factory"></a>Échanger des données avec le Stockage Blob Azure à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -31,7 +31,7 @@ ms.locfileid: "79236593"
 Cet article explique comment utiliser l’activité de copie dans Azure Data Factory pour échanger des données avec le Stockage Blob Azure. Il s’appuie sur l’article [Activités de déplacement des données](data-factory-data-movement-activities.md), qui présente une vue d’ensemble du déplacement de données avec l’activité de copie.
 
 ## <a name="overview"></a>Vue d’ensemble
-Vous pouvez copier et coller les données à partir de tout magasin de données source pris en charge vers le Stockage Blob Azure, ou entre ce dernier et tout magasin de données récepteur pris en charge. Le tableau ci-dessous contient la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie. Par exemple, vous pouvez déplacer des données **depuis** une base de données SQL Server ou une base de données Azure SQL **vers** un stockage Blob Azure. Et vous pouvez copier des données **depuis** un stockage Blob Azure **vers** un entrepôt Azure SQL Data Warehouse ou une collection Azure Cosmos DB.
+Vous pouvez copier et coller les données à partir de tout magasin de données source pris en charge vers le Stockage Blob Azure, ou entre ce dernier et tout magasin de données récepteur pris en charge. Le tableau ci-dessous contient la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie. Par exemple, vous pouvez déplacer des données **depuis** une base de données SQL Server ou une base de données dans Azure SQL Database **vers** un stockage Blob Azure. Et vous pouvez copier des données **depuis** le stockage Blob Azure **vers** Azure Synapse Analytics ou une collection Azure Cosmos DB.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -59,8 +59,8 @@ Vous pouvez également utiliser les outils suivants pour créer un pipeline : *
 Que vous utilisiez des outils ou des API, la création d’un pipeline qui déplace les données d’un magasin de données source vers un magasin de données récepteur implique les étapes suivantes :
 
 1. Création d'une **fabrique de données**. Une fabrique de données peut contenir un ou plusieurs pipelines.
-2. Création de **services liés** pour lier les magasins de données d’entrée et de sortie à votre fabrique de données. Par exemple, si vous copiez des données depuis un stockage d’objets blob Azure vers une base de données Azure SQL, vous créez deux services liés pour lier votre compte de stockage Azure et votre base de données Azure SQL à votre fabrique de données. Pour plus d’informations sur les propriétés de service lié qui sont spécifiques au stockage Blob Azure, consultez la section [Propriétés du service lié](#linked-service-properties).
-2. Création de **jeux de données** pour représenter les données d’entrée et de sortie de l’opération de copie. Dans l’exemple mentionné dans la dernière étape, vous créez un jeu de données pour spécifier le conteneur d’objets blob et le dossier qui contient les données d’entrée. Ensuite, vous créez un autre jeu de données pour spécifier la table SQL dans la base de données Azure SQL qui contient les données copiées à partir du stockage Blob. Pour plus d’informations sur les propriétés de jeu de données qui sont spécifiques au stockage Blob Azure, consultez la section [Propriétés du jeu de données](#dataset-properties).
+2. Création de **services liés** pour lier les magasins de données d’entrée et de sortie à votre fabrique de données. Par exemple, si vous copiez des données depuis un stockage d’objets blob Azure vers une base de données Azure SQL Database, vous créez deux services liés pour lier votre compte de stockage Azure et votre base de données Azure SQL Database à votre fabrique de données. Pour plus d’informations sur les propriétés de service lié qui sont spécifiques au stockage Blob Azure, consultez la section [Propriétés du service lié](#linked-service-properties).
+2. Création de **jeux de données** pour représenter les données d’entrée et de sortie de l’opération de copie. Dans l’exemple mentionné dans la dernière étape, vous créez un jeu de données pour spécifier le conteneur d’objets blob et le dossier qui contient les données d’entrée. Vous créez aussi un autre jeu de données pour spécifier la table SQL dans Azure SQL Database qui contient les données copiées depuis le stockage d’objets blob. Pour plus d’informations sur les propriétés de jeu de données qui sont spécifiques au stockage Blob Azure, consultez la section [Propriétés du jeu de données](#dataset-properties).
 3. Création d’un **pipeline** avec une activité de copie qui utilise un jeu de données en tant qu’entrée et un jeu de données en tant que sortie. Dans l’exemple mentionné plus haut, vous utilisez BlobSource comme source et SqlSink comme récepteur pour l’activité de copie. De même, si vous copiez depuis Azure SQL Database vers Stockage Blob Azure, vous utilisez SqlSource et BlobSink dans l’activité de copie. Pour plus d’informations sur les propriétés de l’activité de copie qui sont spécifiques au stockage Blob Azure, consultez la section [Propriétés de l’activité de copie](#copy-activity-properties). Pour plus d’informations sur l’utilisation d’un magasin de données comme source ou comme récepteur, cliquez sur le lien de la section précédente de votre magasin de données.
 
 Lorsque vous utilisez l’Assistant, les définitions JSON de ces entités Data Factory (services liés, jeux de données et pipeline) sont automatiquement créées pour vous. Lorsque vous utilisez des outils/API (à l’exception de l’API .NET), vous devez définir ces entités Data Factory au format JSON.  Pour obtenir des exemples comportant des définitions JSON pour les entités Data Factory utilisées pour copier les données vers ou à partir du Stockage Blob Azure, consultez la section [Exemples JSON](#json-examples-for-copying-data-to-and-from-blob-storage  ) de cet article.
@@ -188,7 +188,7 @@ Examinons comment copier rapidement des données vers/depuis un stockage Blob Az
 2. Cliquez sur **Créer une ressource** en haut à gauche, cliquez sur **Intelligence + analyse**, puis sur **Data Factory**.
 3. Dans le volet **Nouvelle fabrique de données** :  
     1. Entrez **ADFBlobConnectorDF** comme **nom**. Le nom de la fabrique de données Azure doit être un nom global unique. Si l’erreur `*Data factory name “ADFBlobConnectorDF” is not available` s’affiche, changez le nom de la fabrique de données (par exemple, votrenomADFTutorialDataFactory), puis tentez de la recréer. Consultez la rubrique [Data Factory - Règles d’affectation des noms](data-factory-naming-rules.md) pour savoir comment nommer les artefacts Data Factory.
-    2. Sélectionnez votre **abonnement**Azure.
+    2. Sélectionnez votre **abonnement** Azure.
     3. Pour le groupe de ressources, sélectionnez **Utiliser l’existant** pour sélectionner un groupe de ressources existant (ou) sélectionnez **Créer un nouveau** pour entrer le nom d’un groupe de ressources.
     4. Sélectionnez un **emplacement** pour la fabrique de données.
     5. Sélectionnez la case à cocher **Épingler au tableau de bord** en bas du panneau.
@@ -221,14 +221,14 @@ Examinons comment copier rapidement des données vers/depuis un stockage Blob Az
 5. Dans la page **Choose the input file or folder** (Choisir le fichier ou le dossier d’entrée) :
     1. Double-cliquez sur **adfblobcontainer**.
     2. Sélectionnez **input**, puis cliquez sur **Choisir**. Dans cette procédure pas à pas, vous sélectionnez le dossier d’entrée. Vous pouvez également sélectionner à la place le fichier emp.txt dans le dossier.
-        ![Outil de copie - Choisir le fichier ou le dossier d’entrée](./media/data-factory-azure-blob-connector/copy-tool-choose-input-file-or-folder.png)
+        ![Outil de copie - Choisir le fichier ou le dossier d’entrée 1](./media/data-factory-azure-blob-connector/copy-tool-choose-input-file-or-folder.png)
 6. Dans la page **Choose the input file or folder** (Choisir le fichier ou le dossier d’entrée) :
     1. Vérifiez que le **fichier ou dossier** est défini sur **adfblobconnector/input**. Si les fichiers se trouvent dans des sous-dossiers, par exemple, 01/04/2017, 02/04/2017 et ainsi de suite, entrez adfblobconnector/input /{jour}/{mois}/{année} pour le fichier ou le dossier. Si vous appuyez sur TAB hors de la zone de texte, trois listes déroulantes s’affichent. Elles permettent de sélectionner les formats d’année (aaaa), de mois (MM) et de jour (jj).
     2. Ne définissez pas **Copy file recursively (Copier le fichier de façon récursive)** . Sélectionnez cette option pour rechercher de manière récursive dans les dossiers les fichiers à copier vers la destination.
     3. Ne sélectionnez pas l’option **Copie binaire**. Sélectionnez cette option pour effectuer une copie binaire du fichier source vers la destination. Ne sélectionnez pas cette option pour la procédure pas à pas afin de pouvoir afficher d’autres options dans les pages suivantes.
     4. Vérifiez que l’option **Type de compression** est définie sur **Aucune**. Sélectionnez une valeur pour cette option si vos fichiers sources sont compressés dans l’un des formats pris en charge.
     5. Cliquez sur **Suivant**.
-    ![Outil de copie - Choisir le fichier ou le dossier d’entrée](./media/data-factory-azure-blob-connector/chose-input-file-folder.png)
+    ![Outil de copie - Choisir le fichier ou le dossier d’entrée 2](./media/data-factory-azure-blob-connector/chose-input-file-folder.png)
 7. Dans la page **File format settings** (Paramètres de format de fichier), vous pouvez voir les délimiteurs et le schéma qui sont détectés automatiquement par l’Assistant en analysant le fichier.
     1. Vérifiez les options suivantes :  
         a. L’option **Format de fichier** est définie sur **Format du texte**. La liste déroulante contient tous les formats pris en charge. Par exemple : JSON, Avro, ORC, Parquet.
@@ -247,7 +247,7 @@ Examinons comment copier rapidement des données vers/depuis un stockage Blob Az
 9. Dans la page **Specify the Azure Blob storage account** (Spécifier le compte de stockage Blob Azure) :  
     1. Entrez **AzureStorageLinkedService** dans le champ **Nom de la connexion**.
     2. Vérifiez que l’option **À partir des abonnements** est sélectionnée pour **Account selection method** (Méthode de sélection du compte).
-    3. Sélectionnez votre **abonnement**Azure.
+    3. Sélectionnez votre **abonnement** Azure.
     4. Sélectionnez votre compte de stockage Azure.
     5. Cliquez sur **Suivant**.
 10. Dans la page **Choose the output file or folder** (Choisir le fichier ou le dossier de sortie) :  
@@ -548,7 +548,7 @@ Les données sont récupérées à partir d’un nouvel objet blob toutes les he
 ```
 **Jeu de données de sortie SQL Azure :**
 
-L'exemple copie les données dans une table nommée « MyTable » dans une base de données Azure SQL. Créez la table dans votre base de données Azure SQL avec le même nombre de colonnes que le fichier CSV d'objet Blob doit contenir. De nouvelles lignes sont ajoutées à la table toutes les heures.
+L'exemple copie les données dans une table nommée « MyTable » dans Azure SQL Database. Créez la table dans votre base de données SQL avec le même nombre de colonnes que le fichier CSV d'objet Blob doit contenir. De nouvelles lignes sont ajoutées à la table toutes les heures.
 
 ```json
 {

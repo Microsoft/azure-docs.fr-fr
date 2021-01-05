@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 06/25/2018
-ms.openlocfilehash: 94251dfa2d9fa732912ed20d825e64f542d79188
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 97d7d21374062462248e1b86f2bde2fef2d25331
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80055414"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004906"
 ---
 # <a name="optimize-your-environment-with-the-system-center-operations-manager-health-check-preview-solution"></a>Optimisation de votre environnement avec la solution System Center Operations Manager Health Check (préversion)
 
@@ -64,7 +64,7 @@ Les données sont collectées sur le serveur d’administration et transmises à
 
 ## <a name="operations-manager-run-as-accounts-for-log-analytics"></a>Comptes d’identification Operations Manager pour Log Analytics
 
-Log Analytics utilise les packs d’administration pour les charges de travail afin de fournir des services à valeur ajoutée. Chaque charge de travail nécessite des privilèges spécifiques de la charge de travail pour exécuter les packs d’administration dans un contexte de sécurité différent, comme un compte d’utilisateur de domaine. Configurez un compte d’identification Operations Manager avec élévation des informations d’identification. Pour plus d’informations, consultez [Guide pratique pour créer un compte d’identification](https://technet.microsoft.com/library/hh321655(v=sc.12).aspx) dans la documentation Operations Manager.
+Log Analytics utilise les packs d’administration pour les charges de travail afin de fournir des services à valeur ajoutée. Chaque charge de travail nécessite des privilèges spécifiques de la charge de travail pour exécuter les packs d’administration dans un contexte de sécurité différent, comme un compte d’utilisateur de domaine. Configurez un compte d’identification Operations Manager avec élévation des informations d’identification. Pour plus d’informations, consultez [Guide pratique pour créer un compte d’identification](/previous-versions/system-center/system-center-2012-R2/hh321655(v=sc.12)) dans la documentation Operations Manager.
 
 Utilisez les informations suivantes pour définir le compte d'identification Operations Manager pour System Center Operations Manager Health Check.
 
@@ -203,7 +203,7 @@ Chaque recommandation inclut une justification de son importance. Utilisez cette
 
 ## <a name="use-health-check-focus-area-recommendations"></a>Utilisation des recommandations des domaines Health Check
 
-Avant de pouvoir utiliser une solution de contrôle d’intégrité dans Log Analytics, vous devez avoir installé cette solution. Pour en savoir plus sur les solutions d’installation, consultez [Installer une solution de gestion](../../azure-monitor/insights/solutions.md). Une fois le pack installé, vous pouvez afficher un résumé des recommandations à l’aide de la mosaïque System Center Operations Manager Health Check de la page **Vue d’ensemble** pour votre espace de travail dans le portail Azure.
+Avant de pouvoir utiliser une solution de contrôle d’intégrité dans Log Analytics, vous devez avoir installé cette solution. Pour en savoir plus sur les solutions d’installation, consultez [Installer une solution de gestion](./solutions.md). Une fois le pack installé, vous pouvez afficher un résumé des recommandations à l’aide de la mosaïque System Center Operations Manager Health Check de la page **Vue d’ensemble** pour votre espace de travail dans le portail Azure.
 
 Consultez le résumé des évaluations de conformité pour votre infrastructure, puis explorez les recommandations.
 
@@ -229,7 +229,7 @@ Si vous souhaitez ignorer des recommandations, vous pouvez créer un fichier tex
     ```
 
     >[!NOTE]
-    > Si vous avez mis à niveau votre espace de travail vers le [nouveau langage de requête dans Log Analytics](../../azure-monitor/log-query/log-query-overview.md), remplacez la requête ci-dessus par la requête ci-dessous.
+    > Si vous avez mis à niveau votre espace de travail vers le [nouveau langage de requête dans Log Analytics](../log-query/log-query-overview.md), remplacez la requête ci-dessus par la requête ci-dessous.
     >
     > `SCOMAssessmentRecommendationRecommendation | where RecommendationResult == "Failed" | sort by Computer asc | project Computer, RecommendationId, Recommendation`
 
@@ -254,7 +254,7 @@ Si vous souhaitez ignorer des recommandations, vous pouvez créer un fichier tex
     ```
 
     >[!NOTE]
-    > Si vous avez mis à niveau votre espace de travail vers le [nouveau langage de requête dans Log Analytics](../../azure-monitor/log-query/log-query-overview.md), remplacez la requête ci-dessus par la requête ci-dessous.
+    > Si vous avez mis à niveau votre espace de travail vers le [nouveau langage de requête dans Log Analytics](../log-query/log-query-overview.md), remplacez la requête ci-dessus par la requête ci-dessous.
     >
     > `SCOMAssessmentRecommendationRecommendation | where RecommendationResult == "Ignore" | sort by Computer asc | project Computer, RecommendationId, Recommendation`
 
@@ -295,4 +295,5 @@ Si vous souhaitez ignorer des recommandations, vous pouvez créer un fichier tex
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Rechercher dans les journaux d’activité](../../azure-monitor/log-query/log-query-overview.md) pour savoir comment analyser les données et recommandations détaillées de System Center Operations Manager Health Check.
+- [Rechercher dans les journaux d’activité](../log-query/log-query-overview.md) pour savoir comment analyser les données et recommandations détaillées de System Center Operations Manager Health Check.
+

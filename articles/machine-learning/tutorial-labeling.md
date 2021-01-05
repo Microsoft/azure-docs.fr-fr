@@ -10,15 +10,16 @@ ms.author: sgilley
 author: sdgilley
 ms.reviewer: ranku
 ms.date: 04/09/2020
-ms.openlocfilehash: d960c8225cbb22c221ecaec1b7c49b5bb20c1429
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: data4ml
+ms.openlocfilehash: 5aec3d6bb2afeadda64ac19563f8334a6aef3b77
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203639"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347504"
 ---
 # <a name="tutorial-create-a-labeling-project-for-multi-class-image-classification"></a>Tutoriel : Créer un projet d’étiquetage pour la classification d’images multiclasse 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Ce tutoriel vous montre comment gérer le processus d’étiquetage (également appelé balisage) des images à utiliser comme données pour générer des modèles Machine Learning. L’étiquetage des données dans Azure Machine Learning est en préversion publique.
 
@@ -42,7 +43,7 @@ Dans ce tutoriel, vous allez utiliser des images de chats et de chiens.  Comme c
 
 Un espace de travail Azure Machine Learning est une ressource fondamentale du cloud que vous utilisez pour expérimenter, entraîner et déployer des modèles Machine Learning. Il lie votre abonnement Azure et votre groupe de ressources à un objet facile à consommer dans le service.
 
-Vous créez un espace de travail par le biais du portail Azure, une console web pour la gestion de vos ressources Azure.
+Il existe de nombreuses [façons de créer un espace de travail](how-to-manage-workspace.md). Dans ce tutoriel, vous allez créer un espace de travail par le biais du portail Azure, une console web pour la gestion de vos ressources Azure.
 
 [!INCLUDE [aml-create-portal](../../includes/aml-create-in-portal.md)]
 
@@ -77,13 +78,13 @@ Les magasins de données Azure Machine Learning permettent de stocker les inform
 
 ### <a name="create-a-labeling-project"></a>Créer un projet d’étiquetage
 
-Maintenant que vous disposez de votre liste d’étiqueteurs et de l’accès aux données à étiqueter, créez votre projet d’étiquetage.
+Maintenant que vous disposez de l’accès aux données à étiqueter, créez votre projet d’étiquetage.
 
 1. En haut de la page, sélectionnez **Projets**.
 
 1. Sélectionnez **+ Ajouter un projet**.
 
-    ![Création d’un projet](media/tutorial-labeling/create-project.png)
+    :::image type="content" source="media/tutorial-labeling/create-project.png" alt-text="Créer un projet":::
 
 ### <a name="project-details"></a>Détails du projet
 
@@ -110,6 +111,12 @@ Maintenant que vous disposez de votre liste d’étiqueteurs et de l’accès au
 
 1. Sélectionnez **Suivant** pour poursuivre la création du projet.
 
+### <a name="incremental-refresh"></a>Actualisation incrémentielle
+
+Si vous envisagez d’ajouter de nouvelles images à votre jeu de données, l’actualisation incrémentielle recherche ces nouvelles images et les ajoute à votre projet.  Lorsque vous activez cette fonctionnalité, le projet recherche régulièrement de nouvelles images.  Comme vous n’allez pas ajouter de nouvelles images au magasin de données pour ce tutoriel, laissez cette fonctionnalité désactivée.
+
+Sélectionnez **Suivant** pour continuer.
+
 ### <a name="label-classes"></a>Classes d’étiquettes
 
 1. Dans le formulaire **Classes d’étiquettes**, tapez un nom d’étiquette, puis sélectionnez **+ Ajouter une étiquette** pour taper l’étiquette suivante.  Pour ce projet, les étiquettes sont **Cat**, **Dog** et **Uncertain**.
@@ -124,7 +131,7 @@ Maintenant que vous disposez de votre liste d’étiqueteurs et de l’accès au
 
 1. Sélectionnez **Suivant**.
 
-1. Dans le formulaire **Étiquetage assisté par ML**, laissez la case décochée. L’étiquetage assisté par ML requiert plus de données que ce que vous allez utiliser dans ce tutoriel.
+1. Dans la section **Étiquetage assisté par ML**, laissez la case décochée. L’étiquetage assisté par ML requiert plus de données que ce que vous allez utiliser dans ce tutoriel.
 
 1. Sélectionnez **Créer un projet**.
 
@@ -140,9 +147,7 @@ Dans cette partie du tutoriel, vous allez passer du rôle d’*administrateur de
 
 1. Dans [Machine Learning Studio](https://ml.azure.com), sélectionnez **Étiquetage des données** sur le côté gauche pour rechercher votre projet.  
 
-1. Sélectionnez le nom du projet dans la liste.
-
-1. En dessous du nom du projet, sélectionnez **Label data** (Étiqueter les données).
+1. Sélectionnez **Lien d’étiquette** pour le projet.
 
 1. Lisez les instructions, puis sélectionnez **Tâches**.
 

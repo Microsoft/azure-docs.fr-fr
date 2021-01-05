@@ -1,18 +1,18 @@
 ---
 title: Configuration du transfert DNS pour Azure Files | Microsoft Docs
-description: Vue d’ensemble des options de réseau pour Azure Files.
+description: Découvrez comment configurer le transfert DNS pour Azure Files.
 author: roygara
 ms.service: storage
-ms.topic: overview
+ms.topic: how-to
 ms.date: 3/19/2020
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 35dfbcb274721049f2160719222ca89038c93356
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 9abe306668a4b20e42e45c498bf85b540dfaaee5
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80069552"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94630190"
 ---
 # <a name="configuring-dns-forwarding-for-azure-files"></a>Configuration du transfert DNS pour Azure Files
 Azure Files vous permet de créer des points de terminaison privés pour les comptes de stockage contenant vos partages de fichiers. Bien qu’utiles pour une grande variété d’applications, les points de terminaison privés le sont particulièrement lorsque vous devez vous connecter à vos partages de fichiers Azure à partir de votre réseau local, à l’aide d’une connexion VPN ou ExpressRoute avec appairage privé. 
@@ -43,7 +43,7 @@ Avant de pouvoir configurer le transfert DNS vers Azure Files, vous devez dispo
 
 - Un compte de stockage contenant le partage de fichiers Azure que vous souhaitez monter. Pour savoir comment créer un compte de stockage et un partage de fichiers Azure, consultez [Créer un partage de fichiers Azure](storage-how-to-create-file-share.md).
 - Un point de terminaison privé pour le compte de stockage. Pour savoir comment créer un point de terminaison privé pour Azure Files, consultez [Créer un point de terminaison privé](storage-files-networking-endpoints.md#create-a-private-endpoint).
-- La [dernière version](https://docs.microsoft.com/powershell/azure/install-az-ps) du module Azure PowerShell
+- La [dernière version](/powershell/azure/install-az-ps) du module Azure PowerShell
 
 > [!Important]  
 > Ce guide part du principe que vous utilisez le serveur DNS dans Windows Server, dans votre environnement local. Toutes les étapes décrites dans ce guide sont valables pour n’importe quel serveur DNS, et non uniquement le serveur DNS Windows.

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 12/10/2019
-ms.openlocfilehash: 2680304bd73bdbae35b29b89f38ae2665615f5e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3ce104e9340c3e93d64b68dcab6f5bd6d2f62493
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80239919"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020623"
 ---
 # <a name="create-apache-hadoop-clusters-using-the-azure-rest-api"></a>Créer des clusters Apache Hadoop à l’aide de l’API REST Azure
 
@@ -214,12 +214,12 @@ Cet exemple est utilisé dans les étapes de ce document. Remplacez les *valeurs
 
 ## <a name="sign-in-to-your-azure-subscription"></a>Connectez-vous à votre abonnement Azure :
 
-Suivez la procédure décrite dans [Bien démarrer avec Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2) et connectez-vous à votre abonnement en utilisant la commande `az login`.
+Suivez la procédure décrite dans [Bien démarrer avec Azure CLI](/cli/azure/get-started-with-az-cli2) et connectez-vous à votre abonnement en utilisant la commande `az login`.
 
 ## <a name="create-a-service-principal"></a>Créer un principal du service
 
 > [!NOTE]  
-> Ces étapes sont une version abrégée de la section *Créer un principal du service avec un mot de passe - Azure CLI* dans le document [Créer un principal du service pour accéder aux ressources à l’aide de l’interface de ligne de commande (CLI) Azure](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md) . Les étapes suivantes créent un principal de service qui est utilisé pour s’authentifier sur l’API REST Azure.
+> Ces étapes sont une version abrégée de la section *Créer un principal du service avec un mot de passe - Azure CLI* dans le document [Créer un principal du service pour accéder aux ressources à l’aide de l’interface de ligne de commande (CLI) Azure](/cli/azure/create-an-azure-service-principal-azure-cli) . Les étapes suivantes créent un principal de service qui est utilisé pour s’authentifier sur l’API REST Azure.
 
 1. À partir d’une ligne de commande, utilisez la commande suivante pour répertorier vos abonnements Azure.
 

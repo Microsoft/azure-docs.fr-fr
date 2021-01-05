@@ -9,19 +9,19 @@ editor: ''
 ms.assetid: b29c1790-37a3-470f-ab69-3cee824d220d
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 02/27/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bc88640cdff4f716902a80bb149913b961d40ae3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 48584fa4042cf53fa1084e519dca0e64f530ca59
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230097"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90090123"
 ---
 # <a name="azure-ad-connect-staging-server-and-disaster-recovery"></a>Azure AD Connect : Serveur de préproduction et reprise d’activité après sinistre
 Avec un serveur en mode intermédiaire, vous pouvez apporter des modifications à la configuration et visualiser les modifications avant de rendre le serveur actif. Il permet également d’exécuter une importation et la synchronisation complètes afin de vérifier que toutes les modifications sont attendues avant de les appliquer dans un environnement de production.
@@ -57,7 +57,7 @@ Pour appliquer cette méthode, procédez comme suit :
 
 #### <a name="prepare"></a>Préparation
 1. Installez Azure AD Connect, sélectionnez **mode intermédiaire**, puis désélectionnez **Démarrer la synchronisation** sur la dernière page de l’Assistant Installation. Ce mode vous permet d’exécuter manuellement le moteur de synchronisation.
-   ![ReadyToConfigure](./media/how-to-connect-sync-staging-server/readytoconfigure.png)
+   ![Capture d’écran qui montre la page Prêt à configurer dans la boîte de dialogue Azure AD Connect.](./media/how-to-connect-sync-staging-server/readytoconfigure.png)
 2. Déconnectez-vous puis connectez-vous de nouveau et, dans le menu Démarrer, sélectionnez **Service de synchronisation**.
 
 #### <a name="configuration"></a>Configuration
@@ -73,7 +73,7 @@ Vous avez maintenant effectué une exportation intermédiaire vers Azure AD et A
 
 #### <a name="verify"></a>Vérifier
 1. Démarrez une invite de commande et accédez à `%ProgramFiles%\Microsoft Azure AD Sync\bin`
-2. Exécutez : `csexport "Name of Connector" %temp%\export.xml /f:x` le nom du connecteur se trouve dans le service de synchronisation. Le nom est similaire à « contoso.com – AAD » pour Azure AD.
+2. Exécutez : `csexport "Name of Connector" %temp%\export.xml /f:x` le nom du connecteur se trouve dans le service de synchronisation. Le nom est similaire à « contoso.com – Azure AD » pour Azure AD.
 3. Exécutez : `CSExportAnalyzer %temp%\export.xml > %temp%\export.csv` Vous disposez d’un fichier dans %temp% nommé export.csv qui peut être examiné dans Microsoft Excel. Ce fichier contient toutes les modifications sur le point d’être exportées.
 4. Apportez les modifications nécessaires aux données ou à la configuration et réexécutez ces opérations (importer, synchroniser et vérifier) jusqu’à ce que les modifications sur le point d’être exportées soient attendues.
 

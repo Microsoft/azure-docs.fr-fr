@@ -5,26 +5,29 @@ ms.service: time-series-insights
 services: time-series-insights
 author: deepakpalled
 ms.author: dpalled
-manager: cshankar
+manager: diviso
 ms.reviewer: jasonh, kfile
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 09/29/2020
 ms.custom: seodec18
-ms.openlocfilehash: fd34595d5ea942602efc920904ff326fc203c088
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: 4f236679d0662df852581a6a8408ed6bc0d4e3fe
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81380685"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535687"
 ---
-# <a name="understand-data-retention-in-azure-time-series-insights"></a>Comprendre la procédure de conservation des données dans Azure Time Series Insights
+# <a name="understand-data-retention-in-azure-time-series-insights-gen1"></a>Comprendre la procédure de conservation des données dans Azure Time Series Insights Gen1
+
+> [!CAUTION]
+> Il s’agit d’un article Gen1.
 
 Cet article décrit deux paramètres principaux qui affectent la conservation des données dans votre environnement Azure Time Series Insights.
 
 ## <a name="video"></a>Vidéo
 
-### <a name="the-following-video-summarizes-time-series-insights-data-retention-and-how-to-plan-for-itbr"></a>Dans cette vidéo, nous traitons de la conservation des données dans Time Series Insights et de sa planification.</br>
+### <a name="the-following-video-summarizes-azure-time-series-insights-data-retention-and-how-to-plan-for-itbr"></a>Dans cette vidéo, nous traitons de la conservation des données dans Azure Time Series Insights et de sa planification.</br>
 
 > [!VIDEO https://www.youtube.com/embed/03x6zKDQ6DU]
 
@@ -36,15 +39,16 @@ De plus, votre environnement Azure Time Series Insights inclut un paramètre **C
 - **Suspendre l’entrée**
 
 > [!NOTE]
-> Par défaut, lorsque vous créez un nouvel environnement, la conservation est configurée sur **Vidage des données anciennes**. Ce paramètre peut être activé ou désactivé après la création à l’aide du portail Microsoft Azure, sur la page **Configurer** de l’environnement Time Series Insights.
-> * Pour plus d’informations sur la configuration des stratégies de rétention, consultez [Configuration de la conservation des données dans Time Series Insights](time-series-insights-how-to-configure-retention.md).
+> Par défaut, lorsque vous créez un nouvel environnement, la conservation est configurée sur **Vidage des données anciennes**. Ce paramètre peut être activé ou désactivé après la création à l’aide du portail Microsoft Azure, sur la page **Configurer** de l’environnement Azure Time Series Insights.
+>
+> - Pour plus d’informations sur la configuration des stratégies de rétention, consultez [Configuration de la conservation des données dans Azure Time Series Insights](time-series-insights-how-to-configure-retention.md).
 
 Les deux stratégies de rétention des données sont décrites plus en détail ci-dessous.
 
 ## <a name="purge-old-data"></a>Vidage des données anciennes
 
 - **Vidage des anciennes données** est le paramètre par défaut pour les environnements Azure Time Series Insights.  
-- **Supprimer définitivement des données anciennes** est préférable lorsque les utilisateurs souhaitent avoir systématiquement leurs *données les plus récentes* dans leur environnement Time Series Insights.
+- **Supprimer définitivement des données anciennes** est préférable lorsque les utilisateurs souhaitent avoir systématiquement leurs *données les plus récentes* dans leur environnement Azure Time Series Insights.
 - Le paramètre **Vidage des données anciennes** *purge* les données une fois que les limites de l’environnement (durée de conservation, taille ou nombre, selon ce qui se présente en premier) sont atteintes. Par défaut, la conservation est définie sur 30 jours.
 - Les données ingérées les plus anciennes sont vidées en premier (approche « premier arrivé, premier sorti »).
 
@@ -69,8 +73,8 @@ Quand le taux d’entrée quotidien de cet environnement dépasse 0,166 Go par 
 - Il offre une protection contre la perte de données, mais peut créer une opportunité en cas de perte de vos données les plus récentes si l’entrée est suspendue au-delà de la durée de conservation de votre source d’événements.
 - Toutefois, quand la capacité maximale d’un environnement est atteinte, l’environnement suspend l’entrée des données jusqu’à ce que des actions supplémentaires se produisent :
 
-   - Vous augmentez la capacité maximale de l’environnement pour ajouter des unités d’échelle comme décrit dans la section [Mise à l’échelle de votre environnement Time Series Insights](time-series-insights-how-to-scale-your-environment.md).
-   - La période de conservation des données est atteinte et les données sont vidées ; l’environnement est ainsi ramené sous sa capacité maximale.
+  - Vous augmentez la capacité maximale de l’environnement pour ajouter des unités d’échelle comme décrit dans la section [Mise à l’échelle de votre environnement Azure Time Series Insights](time-series-insights-how-to-scale-your-environment.md).
+  - La période de conservation des données est atteinte et les données sont vidées ; l’environnement est ainsi ramené sous sa capacité maximale.
 
 ### <a name="example-three"></a>Troisième exemple
 
@@ -86,16 +90,16 @@ Lorsque l’entrée reprend :
 > [!IMPORTANT]
 > Nous vous conseillons de définir des alertes pour éviter que l’entrée ne soit suspendue. La perte de données est possible, car la conservation par défaut est définie sur 1 jour pour les sources d’événements Azure. Par conséquent, une fois que l’entrée est suspendue, vous perdrez probablement les données les plus récentes, sauf si une action supplémentaire est effectuée. Vous devez augmenter la capacité ou définir le comportement sur **Vider les données anciennes** afin d’éviter la perte de données potentielle.
 
-Dans les Event Hubs concernés, envisagez d’ajuster la propriété **Conservation des messages** afin de minimiser la perte de données lorsque l’entrée est suspendue dans Time Series Insights.
+Dans les Event Hubs concernés, envisagez d’ajuster la propriété **Conservation des messages** afin de minimiser la perte de données lorsque l’entrée est suspendue dans Azure Time Series Insights.
 
 [![Conservation des messages Event Hub.](media/time-series-insights-concepts-retention/event-hub-retention.png)](media/time-series-insights-concepts-retention/event-hub-retention.png#lightbox)
 
-Si aucune propriété n’est configurée sur la source d’événements (`timeStampPropertyName`), Time Series Insights utilise par défaut l’horodatage d’arrivée dans Event Hub comme axe des abscisses. Si le paramètre `timeStampPropertyName` est configuré sur une autre valeur, l’environnement recherche la propriété `timeStampPropertyName` configurée dans le paquet de données lorsque les événements sont analysés.
+Si aucune propriété n’est configurée sur la source d’événements (`timeStampPropertyName`), Azure Time Series Insights utilise par défaut l’horodatage d’arrivée dans Event Hub comme axe des abscisses. Si le paramètre `timeStampPropertyName` est configuré sur une autre valeur, l’environnement recherche la propriété `timeStampPropertyName` configurée dans le paquet de données lorsque les événements sont analysés.
 
-Consultez [Mise à l’échelle de votre environnement Time Series Insights](time-series-insights-how-to-scale-your-environment.md) si vous devez mettre votre environnement à l’échelle pour prendre en charge une capacité supplémentaire ou pour augmenter la durée de conservation.
+Consultez [Mise à l’échelle de votre environnement Azure Time Series Insights](time-series-insights-how-to-scale-your-environment.md) si vous devez mettre votre environnement à l’échelle pour prendre en charge une capacité supplémentaire ou pour augmenter la durée de conservation.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour en savoir plus sur la commutation ou la modification des paramètres de conservation de données, voir [Configuration de la conservation dans Time Series Insights](time-series-insights-how-to-configure-retention.md).
+- Pour en savoir plus sur la commutation ou la modification des paramètres de conservation de données, voir [Configuration de la conservation dans Azure Time Series Insights](time-series-insights-how-to-configure-retention.md).
 
 - En savoir plus sur la [Réduction de la latence dans Azure Time Series Insights](time-series-insights-environment-mitigate-latency.md).

@@ -6,14 +6,14 @@ ms.author: jushiman
 ms.topic: sample
 ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
-ms.date: 03/27/2018
-ms.custom: avverma
-ms.openlocfilehash: 759ebb58afcceade8d52305c6a6a41a782ed4df6
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.date: 06/25/2020
+ms.custom: avverma, devx-track-azurepowershell
+ms.openlocfilehash: 9530f34ee919547049df06fb0974971c3ba4b2a9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83702000"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079623"
 ---
 # <a name="automatically-scale-a-virtual-machine-scale-set-with-powershell"></a>Mettre à l’échelle automatiquement un groupe de machines virtuelles identiques avec PowerShell
 Ce script crée un groupe de machines virtuelles identiques exécutant Windows Server 2016 et utilise des métriques basées sur l’hôte pour mettre à l’échelle automatiquement tandis que la charge du processeur change.
@@ -47,5 +47,5 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 

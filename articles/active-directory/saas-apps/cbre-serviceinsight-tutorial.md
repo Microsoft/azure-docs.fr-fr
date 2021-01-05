@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à CBRE ServiceInsight | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et CBRE ServiceInsight.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 31d7cedf-2b70-4fa4-9b05-80066d2e8bfd
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/29/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 462f44206b4f92629079eb5ae24099eae17291f8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 899132a823cfbbde600de790166ce8923f435725
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "71121393"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92456411"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-cbre-serviceinsight"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à CBRE ServiceInsight
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer CBRE ServiceInsight à Azure
 * Permettre à vos utilisateurs de se connecter automatiquement à CBRE ServiceInsight avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -52,15 +47,15 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 Pour configurer l’intégration de CBRE ServiceInsight à Azure AD, vous devez ajouter CBRE ServiceInsight depuis la galerie à votre liste d’applications SaaS gérées.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
-1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **CBRE ServiceInsight** dans la zone de recherche.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory** .
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications** .
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application** .
+1. Dans la section **Ajouter à partir de la galerie** , tapez **CBRE ServiceInsight** dans la zone de recherche.
 1. Sélectionnez **CBRE ServiceInsight** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-cbre-serviceinsight"></a>Configurer et tester l’authentification unique Azure AD pour CBRE ServiceInsight
 
-Configurez et testez l’authentification unique Azure AD avec CBRE ServiceInsight pour un utilisateur de test nommé **B.Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur CBRE ServiceInsight associé.
+Configurez et testez l’authentification unique Azure AD avec CBRE ServiceInsight pour un utilisateur de test nommé **B.Simon** . Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur CBRE ServiceInsight associé.
 
 Pour configurer et tester l’authentification unique Azure AD avec CBRE ServiceInsight, effectuez les modules suivants :
 
@@ -75,20 +70,20 @@ Pour configurer et tester l’authentification unique Azure AD avec CBRE Service
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans le [Portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **CBRE ServiceInsight**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
+1. Dans le [Portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **CBRE ServiceInsight** , recherchez la section **Gérer** et sélectionnez **Authentification unique** .
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML** .
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la section **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    Dans la zone de texte **URL de connexion**, tapez une URL : `https://adfs4.mainstreamsasp.com/adfs/ls/`
+    Dans la zone de texte **URL de connexion** , tapez une URL : `https://adfs4.mainstreamsasp.com/adfs/ls/`
 
     > [!NOTE]
     > Cette valeur n’est pas la valeur réelle. Mettez à jour la valeur avec l’URL de connexion réelle. Pour obtenir cette valeur, contactez l’[équipe du support technique de CBRE ServiceInsight](mailto:SISupport@cbre.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur le bouton Copier pour copier l’**URL des métadonnées de fédération d’application**, puis enregistrez-la sur votre ordinateur.
+1. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur le bouton Copier pour copier l’ **URL des métadonnées de fédération d’application** , puis enregistrez-la sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/copy-metadataurl.png)
 
@@ -96,35 +91,35 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs** .
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
-   1. Cliquez sur **Créer**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe** .
+   1. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à CBRE ServiceInsight.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
-1. Dans la liste des applications, sélectionnez **CBRE ServiceInsight**.
-1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications** .
+1. Dans la liste des applications, sélectionnez **CBRE ServiceInsight** .
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes** .
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ## <a name="configure-cbre-serviceinsight-sso"></a>Configurer l’authentification unique CBRE ServiceInsight
 
-Pour configurer l’authentification unique côté **CBRE ServiceInsight**, vous devez envoyer l’**URL des métadonnées de fédération de l’application** à [l’équipe du support technique CBRE ServiceInsight](mailto:SISupport@cbre.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **CBRE ServiceInsight** , vous devez envoyer l’ **URL des métadonnées de fédération de l’application** à [l’équipe du support technique CBRE ServiceInsight](mailto:SISupport@cbre.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-cbre-serviceinsight-test-user"></a>Créer l’utilisateur de test CBRE ServiceInsight
 
@@ -134,14 +129,14 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans CBRE Ser
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette CBRE ServiceInsight dans le panneau d’accès doit vous connecter automatiquement à l’application CBRE ServiceInsight pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette CBRE ServiceInsight dans le panneau d’accès doit vous connecter automatiquement à l’application CBRE ServiceInsight pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer CBRE ServiceInsight avec Azure AD](https://aad.portal.azure.com/)

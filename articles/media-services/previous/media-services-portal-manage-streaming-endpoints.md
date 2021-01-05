@@ -15,14 +15,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 57ec22cb02512577f8737718cae9175403fb5603
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 496c5de8f9ead0773dfef7e65051344645ffa9de
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74900877"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93041967"
 ---
-# <a name="manage-streaming-endpoints-with-the-azure-portal"></a>Gérer les points de terminaison de streaming avec le Portail Azure 
+# <a name="manage-streaming-endpoints-with-the-azure-portal"></a>Gérer les points de terminaison de streaming avec le Portail Azure
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article explique comment utiliser le portail Azure pour gérer les points de terminaison de streaming. 
 
@@ -36,9 +38,9 @@ Pour plus d’informations sur la mise à l’échelle du point de terminaison d
 Pour commencer à gérer les points de terminaison de streaming de votre compte, procédez comme suit.
 
 1. Dans le [portail Azure](https://portal.azure.com/), sélectionnez votre compte Azure Media Services.
-2. Dans le panneau **Paramètres**, sélectionnez **Points de terminaison de streaming**.
+2. Dans le panneau **Paramètres** , sélectionnez **Points de terminaison de streaming**.
    
-    ![point de terminaison de diffusion en continu](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints1.png)
+    ![Capture d’écran montrant la page « Media Services » avec des « points de terminaison de streaming » sélectionnés dans le panneau « Paramètres ».](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints1.png)
 
 > [!NOTE]
 > Vous êtes facturé uniquement lorsque votre point de terminaison de streaming est en cours d’exécution.
@@ -57,7 +59,7 @@ Pour ajouter/supprimer un point de terminaison de streaming à l’aide du Porta
 2. Pour supprimer un point de terminaison de streaming, appuyez sur le bouton **Supprimer** .      
 3. Cliquez sur le bouton **Démarrer** pour démarrer le point de terminaison de streaming.
    
-    ![point de terminaison de diffusion en continu](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints2.png)
+    ![Capture d’écran montrant l’action « Point de terminaison » sélectionnée, et le volet « Détails du point de terminaison de streaming » affiché.](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints2.png)
 
 
 ## <a name="configuring-the-streaming-endpoint"></a><a id="configure_streaming_endpoints"></a>Configuration du point de terminaison de diffusion en continu
@@ -67,7 +69,7 @@ Le point de terminaison de streaming vous permet de configurer les propriétés 
 * contrôle de cache
 * Stratégies d’accès intersite
 
-Pour plus d’informations sur ces propriétés, consultez la rubrique [StreamingEndpoint](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint).
+Pour plus d’informations sur ces propriétés, consultez la rubrique [StreamingEndpoint](/rest/api/media/operations/streamingendpoint).
 
 >[!NOTE]
 >Si le CDN est activé, l’accès IP n’est pas disponible. Il l’est uniquement lorsque vous ne disposez pas de CDN.
@@ -79,7 +81,7 @@ Vous pouvez configurer le point de terminaison de streaming en procédant comme 
 
 Vous trouverez une brève description des champs ci-dessous.
 
-![point de terminaison de diffusion en continu](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints4.png)
+![Capture d’écran montrant l’action « Settings » sélectionnée pour le point de terminaison de streaming.](./media/media-services-portal-manage-streaming-endpoints/media-services-manage-streaming-endpoints4.png)
 
 1. Stratégie de cache maximale : permet de configurer la durée de vie du cache pour les ressources traitées par le biais de ce point de terminaison de streaming. Si aucune valeur n’est définie, la valeur par défaut est utilisée. Les valeurs par défaut peuvent également être définies directement dans Azure Storage. Si Azure CDN est activé pour le point de terminaison de streaming, ne définissez pas une valeur de stratégie de cache inférieure à 600 secondes.  
 2. Adresses IP autorisées : permet de définir les adresses IP autorisées à se connecter au point de terminaison de streaming publié. Si aucune adresse IP n'est spécifiée, toutes les adresses IP peuvent se connecter. Les adresses IP peuvent être définies sous forme d’adresse IP unique (par exemple, « 10.0.0.1 »), de plage d’adresses IP constituée d’une adresse IP et d’un masque de sous-réseau CIDR (par exemple, « 10.0.0.1/22 ») ou de plage d’adresses IP constituée d’une adresse IP et d’un masque de sous-réseau au format décimal séparé par des points (par exemple, « 10.0.0.1(255.255.255.0) »).
@@ -97,7 +99,7 @@ Si vous souhaitez activer/désactiver le CDN ultérieurement, votre point de ter
 
 L’intégration du CDN est activée dans tous les centres de données Azure, sauf dans les régions Gouvernement fédéral et Chine.
 
-Une fois qu’elle est activée, la configuration **d’Access Control**, du **nom d’hôte personnalisé et de **l’authentification de signature Akamai** est désactivée.
+Une fois qu’elle est activée, la configuration **d’Access Control** , du **nom d’hôte personnalisé et de **l’authentification de signature Akamai** est désactivée.
  
 > [!IMPORTANT]
 > L’intégration d’Azure Media Services au CDN Azure est implémentée sur le **CDN Azure fourni par Verizon** pour les points de terminaison de streaming Standard. Les points de terminaison de streaming Premium peuvent être configurés à l’aide de l’ensemble des **fournisseurs et niveaux de tarification Azure CDN**. Pour plus d’informations sur les fonctionnalités du CDN Azure, consultez [Vue d’ensemble du réseau de distribution de contenu (CDN)](../../cdn/cdn-overview.md).
@@ -122,4 +124,3 @@ Consultez les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

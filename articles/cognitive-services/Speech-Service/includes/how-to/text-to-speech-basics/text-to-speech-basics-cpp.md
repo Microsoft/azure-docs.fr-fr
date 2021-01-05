@@ -4,16 +4,27 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/25/2020
 ms.author: trbye
-ms.openlocfilehash: c5d954cc2bdda0b1fcb67801fa948e1f56fb0364
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: e95d2adfd4a4a1c9cbecdf068fd9ee5baf8dcc49
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80985969"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94425299"
 ---
+Dans ce guide de démarrage rapide, vous découvrez les modèles de conception courants qui permettent d’utiliser la synthèse vocale au moyen du kit SDK Speech. Vous commencez par créer une configuration et une synthèse de base, puis passez à des exemples plus poussés en matière de développement d’applications personnalisées, notamment :
+
+* Obtention de réponses en tant que flux en mémoire
+* Personnalisation du taux d’échantillonnage de sortie et de la vitesse de transmission
+* Envoi de demandes de synthèse à l’aide de SSML (Speech Synthesis Markup Language)
+* Utilisation de voix neurales
+
+## <a name="skip-to-samples-on-github"></a>Passer aux exemples sur GitHub
+
+Si vous souhaitez passer directement à l’exemple de code, consultez les [exemples de démarrage rapide C++](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/quickstart/cpp/windows/text-to-speech) sur GitHub.
+
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../get-started.md).
+Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free).
 
 ## <a name="install-the-speech-sdk"></a>Installer le Kit de développement logiciel (SDK) Speech
 
@@ -40,19 +51,19 @@ using namespace Microsoft::CognitiveServices::Speech::Audio;
 
 ## <a name="create-a-speech-configuration"></a>Créer une configuration Speech
 
-Pour appeler le service Speech à l’aide du SDK Speech, vous devez créer une classe [`SpeechConfig`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig). Celle-ci comprend des informations sur votre abonnement, telles que votre clé et la région, le point de terminaison, l’hôte ou le jeton d’autorisation associés.
+Pour appeler le service Speech à l’aide du SDK Speech, vous devez créer une classe [`SpeechConfig`](/cpp/cognitive-services/speech/speechconfig). Celle-ci comprend des informations sur votre abonnement, telles que votre clé et la région, le point de terminaison, l’hôte ou le jeton d’autorisation associés.
 
 > [!NOTE]
 > Quand vous procédez à une reconnaissance vocale, une synthèse vocale, une traduction ou une reconnaissance intentionnelle, vous devez toujours créer une configuration.
 
-Vous pouvez initialiser une [`SpeechConfig`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig) de plusieurs façons :
+Vous pouvez initialiser une [`SpeechConfig`](/cpp/cognitive-services/speech/speechconfig) de plusieurs façons :
 
 * Avec un abonnement : transmettez une clé et la région associée.
 * Avec un point de terminaison : transmettez un point de terminaison de service Speech. Une clé ou un jeton d’autorisation est facultatif.
 * Avec un hôte : transmettez une adresse d’hôte. Une clé ou un jeton d’autorisation est facultatif.
 * Avec un jeton d’autorisation : transmettez un jeton d’autorisation et la région associée.
 
-Dans cet exemple, vous allez créer un objet [`SpeechConfig`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig) à partir d’une clé d’abonnement et d’une région. Consultez la page de [prise en charge des régions](https://docs.microsoft.com/azure/cognitive-services/speech-service/regions#speech-sdk) pour rechercher l’identificateur de votre région. Vous pouvez aussi créer un code réutilisable de base à utiliser pour le reste de cet article, que vous modifiez pour différentes personnalisations.
+Dans cet exemple, vous allez créer un objet [`SpeechConfig`](/cpp/cognitive-services/speech/speechconfig) à partir d’une clé d’abonnement et d’une région. Pour obtenir ces informations d’identification, suivez les étapes indiquées dans [Essayer le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free). Vous pouvez aussi créer un code réutilisable de base à utiliser pour le reste de cet article, que vous modifiez pour différentes personnalisations.
 
 ```cpp
 int wmain()
@@ -76,7 +87,7 @@ void synthesizeSpeech()
 
 ## <a name="synthesize-speech-to-a-file"></a>Synthétiser la voix dans un fichier
 
-Ensuite, vous allez créer un objet [`SpeechSynthesizer`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechsynthesizer), qui exécute des conversions de synthèse vocale et des sorties vers des haut-parleurs, des fichiers ou d’autres flux de sortie. [`SpeechSynthesizer`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechsynthesizer) accepte en tant que paramètres l’objet [`SpeechConfig`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig) créé à l’étape précédente et un objet [`AudioConfig`](https://docs.microsoft.com/cpp/cognitive-services/speech/audio-audioconfig) qui spécifie la façon dont les résultats de sortie doivent être gérés.
+Ensuite, vous allez créer un objet [`SpeechSynthesizer`](/cpp/cognitive-services/speech/speechsynthesizer), qui exécute des conversions de synthèse vocale et des sorties vers des haut-parleurs, des fichiers ou d’autres flux de sortie. [`SpeechSynthesizer`](/cpp/cognitive-services/speech/speechsynthesizer) accepte en tant que paramètres l’objet [`SpeechConfig`](/cpp/cognitive-services/speech/speechconfig) créé à l’étape précédente et un objet [`AudioConfig`](/cpp/cognitive-services/speech/audio-audioconfig) qui spécifie la façon dont les résultats de sortie doivent être gérés.
 
 Pour commencer, créez un `AudioConfig` pour écrire automatiquement la sortie dans un fichier `.wav` à l’aide de la fonction `FromWavFileOutput()`.
 
@@ -128,7 +139,7 @@ Il est facile d’apporter cette modification à partir de l’exemple précéde
 > [!NOTE]
 > Le fait de transmettre `NULL` pour `AudioConfig`, au lieu de l’omettre comme dans l’exemple de sortie de haut-parleur précédent, n’aura pas pour effet de lire par défaut l’audio sur l’appareil de sortie actuellement actif.
 
-Cette fois, vous allez enregistrer le résultat dans une variable [`SpeechSynthesisResult`](https://docs.microsoft.com/cpp/cognitive-services/speech/speechsynthesisresult). Le getter `GetAudioData` retourne `byte []` des données de sortie. Vous pouvez utiliser ce `byte []` manuellement ou utiliser la classe [`AudioDataStream`](https://docs.microsoft.com/cpp/cognitive-services/speech/audiodatastream) pour gérer le flux en mémoire. Dans cet exemple, vous allez utiliser la fonction statique `AudioDataStream.FromResult()` pour obtenir un flux à partir du résultat.
+Cette fois, vous allez enregistrer le résultat dans une variable [`SpeechSynthesisResult`](/cpp/cognitive-services/speech/speechsynthesisresult). Le getter `GetAudioData` retourne `byte []` des données de sortie. Vous pouvez utiliser ce `byte []` manuellement ou utiliser la classe [`AudioDataStream`](/cpp/cognitive-services/speech/audiodatastream) pour gérer le flux en mémoire. Dans cet exemple, vous allez utiliser la fonction statique `AudioDataStream.FromResult()` pour obtenir un flux à partir du résultat.
 
 ```cpp
 void synthesizeSpeech() 
@@ -151,11 +162,11 @@ La section suivante montre comment personnaliser les attributs de sortie audio, 
 * Le taux d’échantillonnage
 * La profondeur de bits
 
-Pour changer de format audio, utilisez la fonction `SetSpeechSynthesisOutputFormat()` sur l’objet `SpeechConfig`. Cette fonction attend un `enum` de type [`SpeechSynthesisOutputFormat`](https://docs.microsoft.com/cpp/cognitive-services/speech/microsoft-cognitiveservices-speech-namespace#speechsynthesisoutputformat), dont vous allez vous servir pour sélectionner le format de sortie. Consultez les documents de référence pour obtenir la [liste des formats audio](https://docs.microsoft.com/cpp/cognitive-services/speech/microsoft-cognitiveservices-speech-namespace#speechsynthesisoutputformat) disponibles.
+Pour changer de format audio, utilisez la fonction `SetSpeechSynthesisOutputFormat()` sur l’objet `SpeechConfig`. Cette fonction attend un `enum` de type [`SpeechSynthesisOutputFormat`](/cpp/cognitive-services/speech/microsoft-cognitiveservices-speech-namespace#speechsynthesisoutputformat), dont vous allez vous servir pour sélectionner le format de sortie. Consultez les documents de référence pour obtenir la [liste des formats audio](/cpp/cognitive-services/speech/microsoft-cognitiveservices-speech-namespace#speechsynthesisoutputformat) disponibles.
 
 Il existe diverses options pour les différents types de fichiers, ce qui permet de répondre à vos besoins. Notez que par définition, les formats bruts comme `Raw24Khz16BitMonoPcm` n’incluent pas d’en-têtes audio. N’utilisez les formats bruts que si vous savez que votre implémentation en aval pourra décoder un flux binaire brut ou bien si vous envisagez de créer manuellement des en-têtes en fonction de la profondeur de bits, du taux d’échantillonnage, du nombre de canaux, etc.
 
-Dans cet exemple, vous allez spécifier un format RIFF haute fidélité `Riff24Khz16BitMonoPcm` en définissant `SpeechSynthesisOutputFormat` sur l’objet `SpeechConfig`. Comme dans l’exemple de la section précédente, vous allez utiliser [`AudioDataStream`](https://docs.microsoft.com/cpp/cognitive-services/speech/audiodatastream) pour obtenir un flux en mémoire du résultat, puis l’écrire dans un fichier.
+Dans cet exemple, vous allez spécifier un format RIFF haute fidélité `Riff24Khz16BitMonoPcm` en définissant `SpeechSynthesisOutputFormat` sur l’objet `SpeechConfig`. Comme dans l’exemple de la section précédente, vous allez utiliser [`AudioDataStream`](/cpp/cognitive-services/speech/audiodatastream) pour obtenir un flux en mémoire du résultat, puis l’écrire dans un fichier.
 
 ```cpp
 void synthesizeSpeech() 
@@ -175,10 +186,10 @@ Si vous exécutez à nouveau votre programme, un fichier `.wav` est écrit dans 
 
 ## <a name="use-ssml-to-customize-speech-characteristics"></a>Utiliser SSML pour personnaliser les caractéristiques vocales
 
-Le langage SSML (Speech Synthesis Markup Language) vous permet d’ajuster le pas, la prononciation, la vitesse d’élocution, le volume et d’autres éléments de sortie de la synthèse vocale en soumettant vos demandes à partir d’un schéma XML. Cette section présente quelques exemples d’utilisation pratiques, mais pour des indications plus détaillées, consultez l’[article de procédures SSML](../../../speech-synthesis-markup.md).
+Le langage SSML (Speech Synthesis Markup Language) vous permet d’ajuster la tonalité, la prononciation, la vitesse d’élocution, le volume et d’autres éléments de sortie de la synthèse vocale en soumettant vos demandes à partir d’un schéma XML. Cette section présente quelques exemples d’utilisation pratiques, mais pour des indications plus détaillées, consultez l’[article de procédures SSML](../../../speech-synthesis-markup.md).
 
 Pour commencer à utiliser SSML pour la personnalisation, vous allez apporter une modification simple qui change la voix.
-Tout d’abord, créez un fichier XML pour la configuration SSML dans le répertoire racine de votre projet, à savoir `ssml.xml`. L’élément racine est toujours `<speak>`, et le fait d’intégrer le texte dans un élément `<voice>` vous permet de changer la voix à l’aide du paramètre `name`. Cet exemple change la voix en voix masculine de langue anglaise (Royaume-Uni). Notez que cette voix est une voix **standard**, dont la coût et la disponibilité sont différents de ceux des voix **neurales**. Consultez la [liste complète](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#standard-voices) des voix **standard** prises en charge.
+Tout d’abord, créez un fichier XML pour la configuration SSML dans le répertoire racine de votre projet, à savoir `ssml.xml`. L’élément racine est toujours `<speak>`, et le fait d’intégrer le texte dans un élément `<voice>` vous permet de changer la voix à l’aide du paramètre `name`. Cet exemple change la voix en voix masculine de langue anglaise (Royaume-Uni). Notez que cette voix est une voix **standard** , dont le coût et la disponibilité sont différents de ceux des voix **neuronales**. Consultez la [liste complète](../../../language-support.md#standard-voices) des voix **standard** prises en charge.
 
 ```xml
 <speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="en-US">
@@ -188,7 +199,7 @@ Tout d’abord, créez un fichier XML pour la configuration SSML dans le répert
 </speak>
 ```
 
-Ensuite, vous devez modifier la demande de synthèse vocale de sorte qu’elle fasse référence à votre fichier XML. La demande est presque totalement identique, sauf qu’au lieu d’utiliser la fonction `SpeakTextAsync()`, vous allez utiliser `SpeakSsmlAsync()`. Sachant que cette fonction attend une chaîne XML, vous commencez par charger votre configuration SSML sous forme de chaîne. À partir de là, l’objet obtenu est exactement le même que dans les exemples précédents.
+Ensuite, vous devez changer la demande de synthèse vocale de sorte qu’elle fasse référence à votre fichier XML. La demande est presque totalement identique, sauf qu’au lieu d’utiliser la fonction `SpeakTextAsync()`, vous allez utiliser `SpeakSsmlAsync()`. Sachant que cette fonction attend une chaîne XML, vous commencez par charger votre configuration SSML sous forme de chaîne. À partir de là, l’objet obtenu est exactement le même que dans les exemples précédents.
 
 ```cpp
 void synthesizeSpeech() 
@@ -210,7 +221,7 @@ void synthesizeSpeech()
 }
 ```
 
-Bien que la sortie fonctionne, vous pouvez y apporter quelques autres modifications simples pour obtenir un rendu sonore plus naturel. La vitesse d’élocution générale étant un peu trop rapide, nous allons ajouter une balise `<prosody>` et réduire la vitesse à **90 %** de la vitesse par défaut. De plus, la pause après la virgule dans la phrase est un peu trop courte et n’est pas naturelle à l’oreille. Pour corriger ce problème, ajoutez une balise `<break>` pour ralentir la parole, puis définissez le paramètre de temps sur **200ms**. Réexécutez la synthèse pour observer l’incidence de ces personnalisations sur la sortie.
+Bien que la sortie fonctionne, vous pouvez y apporter d’autres modifications simples pour obtenir un ton plus naturel. La vitesse d’élocution générale étant un peu trop rapide, nous allons ajouter une balise `<prosody>` et réduire la vitesse à **90 %** de la vitesse par défaut. De plus, la pause après la virgule dans la phrase est un peu trop courte et n’est pas naturelle à l’oreille. Pour corriger ce problème, ajoutez une balise `<break>` pour ralentir le débit de parole, puis définissez le paramètre de temps sur **200ms**. Réexécutez la synthèse pour observer l’incidence de ces personnalisations sur la sortie.
 
 ```xml
 <speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="en-US">
@@ -224,12 +235,12 @@ Bien que la sortie fonctionne, vous pouvez y apporter quelques autres modificati
 
 ## <a name="neural-voices"></a>Voix neurales
 
-Les voix neurales sont des algorithmes de synthèse vocale qui reposent sur des réseaux neuronaux profonds. Lorsque vous utilisez une voix neuronale, il est presque impossible de distinguer la voix synthétisée des enregistrements humains. Grâce à la prosodie naturelle quasi humaine et à la bonne articulation des mots, les voix neuronales réduisent considérablement la fatigue d’écoute des utilisateurs qui interagissent avec les systèmes d’intelligence artificielle.
+Les voix neuronales sont des algorithmes de synthèse vocale qui reposent sur des réseaux neuronaux profonds. Lorsque vous utilisez une voix neuronale, il est presque impossible de distinguer la voix synthétisée des enregistrements humains. Grâce à la prosodie naturelle quasi humaine et à la bonne articulation des mots, les voix neuronales réduisent considérablement la fatigue d’écoute des utilisateurs qui interagissent avec les systèmes d’intelligence artificielle.
 
-Pour passer à une voix neurale, remplacez `name` par une des [options de voix neurale](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#neural-voices). Ensuite, ajoutez un espace de noms XML pour `mstts` et intégrez votre texte dans la balise `<mstts:express-as>`. Utilisez le paramètre `style` pour personnaliser le style de parler. Cet exemple utilise le style de parler `cheerful`, mais essayez de le remplacer par `customerservice` ou `chat` pour voir la différence.
+Pour passer à une voix neuronale, remplacez `name` par une des [options de voix neuronale](../../../language-support.md#neural-voices). Ensuite, ajoutez un espace de noms XML pour `mstts` et intégrez votre texte dans la balise `<mstts:express-as>`. Utilisez le paramètre `style` pour personnaliser le style vocal. Cet exemple utilise le style vocal `cheerful`, mais essayez de le remplacer par `customerservice` ou `chat` pour voir la différence.
 
 > [!IMPORTANT]
-> Les voix neurales sont **uniquement** prises en charge pour les ressources vocales créées dans les régions *USA Est*, *Asie Sud-Est* et *Europe Ouest*.
+> Les voix neuronales sont **uniquement** prises en charge pour les ressources vocales créées dans les régions *USA Est* , *Asie Sud-Est* et *Europe Ouest*.
 
 ```xml
 <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-US">

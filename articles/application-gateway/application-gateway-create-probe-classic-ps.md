@@ -1,18 +1,18 @@
 ---
-title: Créer une sonde personnalisée avec PowerShell - Azure Application Gateway
+title: Créer une sonde personnalisée à l’aide du modèle de déploiement personnalisé – Azure Application Gateway
 description: Apprendre à créer une sonde personnalisée pour Application Gateway en utilisant PowerShell dans le modèle de déploiement classique
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/13/2019
 ms.author: victorh
-ms.openlocfilehash: 0ba3e9ae7b5075d1f5457cb2960423ad1c737e94
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 13441899eeb5ca2b7c60977ab2858fe40a398d1a
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312552"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397856"
 ---
 # <a name="create-a-custom-probe-for-azure-application-gateway-classic-by-using-powershell"></a>Créer une sonde personnalisée pour Azure Application Gateway (classique) en utilisant PowerShell
 
@@ -149,7 +149,7 @@ Les paramètres de configuration sont :
 | **Délai d'expiration** | Définit le délai d’expiration d’un contrôle de réponse HTTP.|
 | **Seuil de défaillance sur le plan de l’intégrité** | Le nombre d’échecs de réponses HTTP nécessaires pour marquer l’instance de serveur principal comme *défectueuse*.|
 
-Le nom de la sonde est référencé dans la configuration \<BackendHttpSettings\> pour affecter le pool principal qui va utiliser les paramètres de sonde personnalisée.
+Le nom de la sonde est référencé dans la configuration \<BackendHttpSettings\> pour affecter le pool principal qui utilise les paramètres de sonde personnalisée.
 
 ## <a name="add-a-custom-probe-to-an-existing-application-gateway"></a>Ajoute une sonde personnalisée à une passerelle d’application existante
 
@@ -200,7 +200,6 @@ Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous souhaitez configurer TLS (Transport Layer Security), précédemment connue sous le nom de déchargement SSL (Secure Sockets Layer), consultez [Configurer une passerelle d'application pour le déchargement TLS](application-gateway-ssl.md).
+Si vous souhaitez configurer TLS (Transport Layer Security), précédemment connue sous le nom de déchargement SSL (Secure Sockets Layer), consultez [Configurer une passerelle d'application pour le déchargement TLS](./tutorial-ssl-powershell.md).
 
-Si vous voulez configurer une passerelle Application Gateway à utiliser avec l’équilibreur de charge interne, consultez [Création d’une passerelle Application Gateway avec un équilibrage de charge interne (ILB)](application-gateway-ilb.md).
-
+Si vous voulez configurer une passerelle Application Gateway à utiliser avec l’équilibreur de charge interne, consultez [Création d’une passerelle Application Gateway avec un équilibrage de charge interne (ILB)](./application-gateway-ilb-arm.md).

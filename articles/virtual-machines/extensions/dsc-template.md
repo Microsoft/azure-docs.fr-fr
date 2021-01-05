@@ -8,21 +8,22 @@ tags: azure-resource-manager
 keywords: dsc
 ms.assetid: b5402e5a-1768-4075-8c19-b7f7402687af
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: na
 ms.date: 10/05/2018
 ms.author: robreed
-ms.openlocfilehash: 4ec81ef69f21fc74864e437a3c6de46550a70c18
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.openlocfilehash: e38fcd069fa6a3e8582dcd96b2bd0b4074986de7
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82891658"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94955801"
 ---
 # <a name="desired-state-configuration-extension-with-azure-resource-manager-templates"></a>Extension de configuration d’état souhaité avec des modèles Azure Resource Manager
 
-Cet article décrit le modèle Azure Resource Manager destiné au [gestionnaire de l’extension Configuration d’état souhaité (DSC)](dsc-overview.md). La plupart des exemples utilisent **RegistrationURL** (sous forme de chaîne) et **RegistrationKey** (sous forme de [PSCredential](/dotnet/api/system.management.automation.pscredential)) pour l'intégration à Azure Automation. Pour plus d’informations sur l’obtention de ces valeurs, consultez [Intégration des machines pour la gestion avec Azure Automation State Configuration - Enregistrement sécurisé](/azure/automation/automation-dsc-onboarding#onboarding-securely-using-registration).
+Cet article décrit le modèle Azure Resource Manager destiné au [gestionnaire de l’extension Configuration d’état souhaité (DSC)](dsc-overview.md). La plupart des exemples utilisent **RegistrationURL** (sous forme de chaîne) et **RegistrationKey** (sous forme de [PSCredential](/dotnet/api/system.management.automation.pscredential)) pour l'intégration à Azure Automation. Pour plus d’informations sur l’obtention de ces valeurs, consultez [Intégration des machines pour la gestion avec Azure Automation State Configuration - Enregistrement sécurisé](../../automation/automation-dsc-onboarding.md#enable-machines-securely-using-registration).
 
 > [!NOTE]
 > Vous pouvez rencontrer des exemples de schéma légèrement différents. Le schéma a été modifié dans la version d’octobre 2016. Pour plus d’informations, consultez [Mettre à jour à partir d’un format antérieur](#update-from-a-previous-format).

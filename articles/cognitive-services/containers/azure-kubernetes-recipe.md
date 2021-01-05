@@ -10,24 +10,24 @@ ms.subservice: text-analytics
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: cdd1cf255c943c8dc6d55a5b749b30357bdcd373
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 2a6e7ee125cac66b48e666a766c39813aa38fb1a
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80876723"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968500"
 ---
 # <a name="deploy-the-text-analytics-language-detection-container-to-azure-kubernetes-service"></a>Déployer le conteneur Détection de langue Analyse de texte sur Azure Kubernetes Service
 
 Découvrez comment déployer le conteneur Détection de langue. Cette procédure vous montre comment créer les conteneurs Docker locaux, envoyer (push) les conteneurs à votre propre registre de conteneurs privés, exécuter le conteneur dans un cluster Kubernetes et le tester dans un navigateur web.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Cette procédure nécessite plusieurs outils qui doivent être installés et exécutés localement. N’utilisez pas Azure Cloud Shell.
 
-* Utilisez un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
+* Utilisez un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services) avant de commencer.
 * [Git](https://git-scm.com/downloads) pour votre système d’exploitation, de façon à pouvoir cloner l’[exemple](https://github.com/Azure-Samples/cognitive-services-containers-samples) utilisé dans cette procédure.
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+* [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
 * [Moteur docker](https://www.docker.com/products/docker-engine) ; vérifiez que l’interface CLI Docker fonctionne dans une fenêtre de console.
 * [kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.13.1/bin/windows/amd64/kubectl.exe).
 * Une ressource Azure avec le niveau de tarification approprié. Certains niveaux tarifaires ne fonctionnent pas avec ce conteneur :
@@ -405,15 +405,3 @@ az group delete --name cogserv-container-rg
 
 > [!div class="nextstepaction"]
 > [Conteneurs Cognitive Services](../cognitive-services-container-support.md)
-
-<!--
-kubectl get secrets
-
->az aks browse --resource-group diberry-cogserv-container-rg --name diberry-kubernetes-languagedetection
-
-kubectl proxy
-
-http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy/#!/pod/default/language-frontend-6d65bdb77c-8f4qv?namespace=default
-
-kubectl describe pod language-frontend-6d65bdb77c
--->

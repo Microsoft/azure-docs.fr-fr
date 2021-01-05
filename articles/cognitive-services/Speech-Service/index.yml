@@ -13,12 +13,12 @@ metadata:
   ms.topic: hub-page
   ms.date: 03/24/2020
   ms.author: trbye
-  ms.openlocfilehash: 87190c5cab772e4b8dc04672066e575b10c14533
-  ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+  ms.openlocfilehash: 62eb664d3987a4480be442817397d8969ec3a93e
+  ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/22/2020
-  ms.locfileid: "83800782"
+  ms.lasthandoff: 11/21/2020
+  ms.locfileid: "95018682"
 highlightedContent:
   items:
   - title: Qu’est-ce que le service de reconnaissance vocale ?
@@ -37,43 +37,40 @@ conceptualContent:
   items:
   - title: Reconnaissance vocale
     links:
+    - itemType: overview
+      text: À propos de la reconnaissance vocale
+      url: speech-to-text.md
     - itemType: quickstart
-      text: Reconnaître la voix provenant d’un micro
-      url: quickstarts/speech-to-text-from-microphone.md
-    - itemType: quickstart
-      text: Reconnaître la voix à partir d’un fichier audio
-      url: quickstarts/speech-to-text-from-file.md
-    - itemType: how-to-guide
-      text: Bases de la reconnaissance vocale
-      url: speech-to-text-basics.md
+      text: Commencer avec la reconnaissance vocale
+      url: get-started-speech-to-text.md
+    - itemType: overview
+      text: À propos de Custom Speech
+      url: custom-speech-overview.md
     footerLink:
       text: En savoir plus
       url: index-speech-to-text.yml
   - title: Synthèse vocale
     links:
+    - itemType: overview
+      text: À propos de la synthèse vocale
+      url: text-to-speech.md
     - itemType: quickstart
-      text: Synthétiser la voix vers un haut-parleur
-      url: quickstarts/text-to-speech.md
-    - itemType: quickstart
-      text: Synthétiser la voix vers un fichier audio
-      url: quickstarts/text-to-speech-audio-file.md
+      text: Bien démarrer avec la conversion de texte par synthèse vocale
+      url: get-started-text-to-speech.md
     - itemType: how-to-guide
-      text: Bases de la synthèse vocale
-      url: text-to-speech-basics.md
+      text: Améliorer la synthèse avec SSML
+      url: speech-synthesis-markup.md
     footerLink:
       text: En savoir plus
       url: index-text-to-speech.yml
   - title: Traduction vocale
     links:
+    - itemType: overview
+      text: À propos de la traduction vocale
+      url: speech-translation.md
     - itemType: quickstart
-      text: Traduire la voix en texte
-      url: quickstarts/translate-speech-to-text.md
-    - itemType: quickstart
-      text: Traduire la parole en plusieurs langues
-      url: quickstarts/translate-speech-to-text-multiple-languages.md
-    - itemType: how-to-guide
-      text: Bases de la traduction vocale
-      url: speech-translation-basics.md
+      text: Démarrer avec la traduction vocale
+      url: get-started-speech-translation.md
     footerLink:
       text: En savoir plus
       url: index-speech-translation.yml
@@ -91,7 +88,26 @@ conceptualContent:
     footerLink:
       text: En savoir plus
       url: index-intent-recognition.yml
-  - title: Scénarios de conversation
+  - title: Reconnaissance de l’orateur
+    links:
+    - itemType: overview
+      text: À propos de Reconnaissance de l’orateur
+      url: speaker-recognition-overview.md
+    - itemType: quickstart
+      text: Bien démarrer avec la reconnaissance de l’orateur
+      url: ./get-started-speaker-recognition.md
+    - itemType: how-to-guide
+      text: Informations de référence sur l’API Reconnaissance de l’orateur
+      url: /rest/api/speakerrecognition/
+  - title: Mot clé personnalisé
+    links:
+    - itemType: overview
+      text: À propos de Mot clé personnalisé
+      url: custom-keyword-overview.md
+    - itemType: quickstart
+      text: Bien démarrer avec Mot clé personnalisé
+      url: custom-keyword-basics.md
+  - title: Immersions dans des scénarios
     links:
     - itemType: overview
       text: À propos de la transcription de conversation (réunions)
@@ -99,34 +115,18 @@ conceptualContent:
     - itemType: overview
       text: À propos des conversations multi-appareils (réunions)
       url: multi-device-conversation.md
-    - itemType: how-to-guide
-      text: Transcription de centre d’appel
-      url: call-center-transcription.md
-    footerLink:
-      text: En savoir plus
-      url: index-conversation-scenarios.yml
-  - title: Assistants vocaux
-    links:
     - itemType: overview
       text: À propos des assistants vocaux
       url: voice-assistants.md
     - itemType: quickstart
       text: Créer un assistant vocal à l’aide de commandes personnalisées
       url: custom-commands.md
-    - itemType: get-started
+    - itemType: quickstart
       text: Créer un assistant vocal à l’aide du Bot Framework
       url: direct-line-speech.md
-    footerLink:
-      text: En savoir plus
-      url: index-voice-assistants.yml
-  - title: Reconnaissance de l’orateur
-    links:
     - itemType: how-to-guide
-      text: À propos de Reconnaissance de l’orateur
-      url: ../Speaker-recognition/Home.md
-    - itemType: how-to-guide
-      text: Informations de référence sur l’API Reconnaissance de l’orateur
-      url: https://westus.dev.cognitive.microsoft.com/docs/services/563309b6778daf02acc0a508/operations/5645c3271984551c84ec6797
+      text: Activer la transcription de centre d’appel
+      url: call-center-transcription.md
   - title: Outils
     links:
     - itemType: overview
@@ -180,22 +180,22 @@ tools:
   items:
   - title: C#
     imageSrc: https://docs.microsoft.com/media/logos/logo_Csharp.svg
-    url: https://aka.ms/csspeech/csharpref
+    url: /dotnet/api/microsoft.cognitiveservices.speech
   - title: C++
     imageSrc: https://docs.microsoft.com/media/logos/logo_Cplusplus.svg
-    url: https://aka.ms/csspeech/cppref
+    url: /cpp/cognitive-services/speech/
   - title: Java
     imageSrc: https://docs.microsoft.com/media/logos/logo_java.svg
-    url: https://aka.ms/csspeech/javaref
+    url: /java/api/com.microsoft.cognitiveservices.speech
   - title: JavaScript
     imageSrc: https://docs.microsoft.com/media/logos/logo_js.svg
-    url: https://aka.ms/csspeech/javascriptref
+    url: /javascript/api/microsoft-cognitiveservices-speech-sdk/
   - title: Objective-C et Swift
     imageSrc: https://docs.microsoft.com/media/logos/logo_ios.svg
-    url: https://aka.ms/csspeech/objectivecref
+    url: /objectivec/cognitive-services/speech/
   - title: Python
     imageSrc: https://docs.microsoft.com/media/logos/logo_python.svg
-    url: https://aka.ms/csspeech/pythonref
+    url: /python/api/azure-cognitiveservices-speech/
 additionalContent:
   sections:
   - items:
@@ -211,19 +211,17 @@ additionalContent:
         url: https://signature.centralus.cts.speech.microsoft.com/UI/index.html
     - title: Ressources
       links:
+      - text: Nouveautés dans la documentation
+        url: whats-new.md
       - text: Tarifs
         url: https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/
       - text: Régions
         url: regions.md
       - text: Découvrir
-        url: https://docs.microsoft.com/learn/browse/?products=azure-cognitive-services&term=Speech
+        url: /learn/browse/?products=azure-cognitive-services&term=Speech
     - title: Support
       links:
       - text: Support et aide
-        url: support.md
+        url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context
       - text: Problèmes GitHub
         url: https://github.com/Azure-Samples/cognitive-services-speech-sdk/issues
-      - text: Stack Overflow
-        url: https://aka.ms/SOspeechquestions
-      - text: UserVoice
-        url: https://cognitive.uservoice.com/forums/912208-speech-service

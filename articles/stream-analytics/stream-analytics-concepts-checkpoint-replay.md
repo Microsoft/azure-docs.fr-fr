@@ -8,12 +8,12 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: f5bb2b97d7da770828c2f4f03167483ad2044c79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 10d9053e082a995085fa255cc0d9f63a2b4e2b17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75426403"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84020606"
 ---
 # <a name="checkpoint-and-replay-concepts-in-azure-stream-analytics-jobs"></a>Concepts de point de contrôle et de relecture dans les travaux Azure Stream Analytics
 Cet article décrit les concepts de point de contrôle et de relecture internes dans Azure Stream Analytics ainsi que leur impact sur la récupération de travail. Chaque fois qu’un travail Stream Analytics s’exécute, les informations d’état sont gérées en interne. Ces informations d’état sont régulièrement enregistrées dans un point de contrôle. Dans certains scénarios, les informations de point de contrôle sont utilisées pour la récupération du travail en cas d’échec ou de mise à niveau. Dans d’autres circonstances, le point de contrôle ne peut pas être utilisé pour la récupération et une relecture est nécessaire.
@@ -58,7 +58,7 @@ Pour estimer la longueur du délai suite à une mise à niveau de service, vous 
 
 3. Mesurez le temps entre l’heure de début et la génération de la première sortie. La durée correspond approximativement au retard théorique du travail pendant une mise à niveau de service.
 
-4. Si le délai est trop long, essayez de partitionner votre travail et d’augmenter le nombre d’unités de streaming pour répartir la charge sur davantage de nœuds. Sinon, réduisez la taille des fenêtres dans votre requête et effectuez d’autres agrégations ou un autre traitement avec état sur la sortie produite par le travail Stream Analytics dans le récepteur en aval (par exemple, à l’aide d’Azure SQL Database).
+4. Si le délai est trop long, essayez de partitionner votre travail et d’augmenter le nombre d’unités de streaming pour répartir la charge sur davantage de nœuds. Sinon, réduisez la taille des fenêtres dans votre requête et effectuez d’autres agrégations ou un autre traitement avec état sur la sortie produite par le travail Stream Analytics dans le récepteur en aval (par exemple, avec Azure SQL Database).
 
 Pour assurer la stabilité générale du service pendant la mise à niveau des travaux critiques, exécutez les travaux en double dans des régions Azure appairées. Pour plus d’informations, consultez [Garantir la fiabilité des travaux Stream Analytics pendant les mises à jour de service](stream-analytics-job-reliability.md).
 

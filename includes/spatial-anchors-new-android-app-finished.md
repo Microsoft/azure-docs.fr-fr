@@ -1,17 +1,17 @@
 ---
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.date: 04/03/2019
+ms.date: 11/20/2020
 ms.topic: include
-ms.author: rgarcia
+ms.author: parkerra
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 8bef7b12f4d9d9a63e41441ef22b029b2ee5afd1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d57167a9a4713e268c6864f3f1b3f2b1498b4ddb
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74276941"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95998383"
 ---
 ## <a name="putting-everything-together"></a>Regroupement
 
@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.cloudSession.getConfiguration().setAccountId(/* Copy your account Identifier in here */);
         this.cloudSession.getConfiguration().setAccountKey(/* Copy your account Key in here */);
+        this.cloudSession.getConfiguration().setAccountDomain(/* Copy your account Domain in here */);
         this.cloudSession.start();
     }
     // </initializeSession>
@@ -247,4 +248,4 @@ public class MainActivity extends AppCompatActivity {
 Dans ce tutoriel, vous avez appris à créer une application Android qui intègre la fonctionnalité ARCore avec Azure Spatial Anchors. Pour en savoir plus sur la bibliothèque Azure Spatial Anchors, passez à notre guide sur la création et la localisation des ancres.
 
 > [!div class="nextstepaction"]
-> [Créer et localiser des ancres à l’aide d’Azure Spatial Anchors](/azure/spatial-anchors/create-locate-anchors-overview)
+> [Créer et localiser des ancres à l’aide d’Azure Spatial Anchors](../articles/spatial-anchors/create-locate-anchors-overview.md)

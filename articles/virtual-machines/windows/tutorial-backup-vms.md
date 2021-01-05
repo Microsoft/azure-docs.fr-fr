@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 06/06/2019
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 4b5e4fe585b01670c06d5ff08fb3d221086d94d2
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5dc41522add580b96e178328f47bd88fc1fbf052
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100428"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91397060"
 ---
 # <a name="tutorial-back-up-and-restore-files-for-windows-virtual-machines-in-azure"></a>Didacticiel : sauvegarder et restaurer des fichiers pour des machines virtuelles Windows dans Azure
 
@@ -27,7 +27,7 @@ Vous pouvez protéger vos données en effectuant des sauvegardes à intervalles 
 
 ## <a name="backup-overview"></a>Présentation de la sauvegarde
 
-Lorsque le service Sauvegarde Azure lance une sauvegarde, il déclenche l’extension de sauvegarde pour prendre un instantané à un moment donné. Le service Sauvegarde Azure utilise l’[extension VMSnapshot](https://docs.microsoft.com/azure/virtual-machines/extensions/vmsnapshot-windows). L’extension est installée lors de la première sauvegarde de machine virtuelle si cette machine virtuelle est exécutée. Si la machine virtuelle n’est pas en cours d’exécution, le service Sauvegarde prend un instantané du stockage sous-jacent (car aucune écriture de l’application n’a lieu pendant l’arrêt de la machine virtuelle).
+Lorsque le service Sauvegarde Azure lance une sauvegarde, il déclenche l’extension de sauvegarde pour prendre un instantané à un moment donné. Le service Sauvegarde Azure utilise l’[extension VMSnapshot](../extensions/vmsnapshot-windows.md). L’extension est installée lors de la première sauvegarde de machine virtuelle si cette machine virtuelle est exécutée. Si la machine virtuelle n’est pas en cours d’exécution, le service Sauvegarde prend un instantané du stockage sous-jacent (car aucune écriture de l’application n’a lieu pendant l’arrêt de la machine virtuelle).
 
 Lorsque de la prise d’un instantané de machines virtuelles Windows, le service Sauvegarde se coordonne avec le service VSS pour obtenir un instantané cohérent des disques de la machine virtuelle. Après que le service Sauvegarde Azure a pris l’instantané, les données sont transférées vers le coffre de sauvegarde. Pour optimiser l’efficacité, le service identifie et transfère uniquement les blocs de données qui ont été modifiés depuis la sauvegarde précédente.
 
@@ -59,7 +59,7 @@ Dans cet exemple, vous découvrirez comment récupérer le fichier image qui est
 
 1. Ouvrez un navigateur et connectez-vous à l’adresse IP de la machine virtuelle pour afficher la page IIS par défaut.
 
-    ![Page web IIS par défaut](./media/tutorial-backup-vms/iis-working.png)
+    ![Capture d’écran montrant la page web IIS par défaut.](./media/tutorial-backup-vms/iis-working.png)
 
 1. Connectez-vous à la machine virtuelle.
 1. Sur la machine virtuelle, ouvrez **Explorateur de fichiers**, accédez à \inetpub\wwwroot et supprimez le fichier **iisstart.png**.
@@ -71,15 +71,15 @@ Dans cet exemple, vous découvrirez comment récupérer le fichier image qui est
 1. Dans le menu de gauche, sélectionnez **Machines virtuelles** et cliquez sur la machine virtuelle dans la liste.
 1. Dans le panneau de la machine virtuelle, dans la section **Opérations**, cliquez sur **Sauvegarde**. Le panneau **Sauvegarde** s’ouvre. 
 1. Dans le menu en haut du panneau, sélectionnez **Récupération de fichier**. Le panneau **Récupération de fichier** s’affiche.
-1. Dans **Étape 1 : Sélectionner un point de récupération**, sélectionnez un point de récupération dans la liste déroulante.
-1. Dans **Étape 2 : Télécharger le script pour parcourir et restaurer des fichiers**, cliquez sur le bouton **Télécharger le fichier exécutable**. Copiez le mot de passe pour le fichier et enregistrez-le à un endroit sûr.
+1. À l’**Étape 1 : Sélectionner un point de récupération**, sélectionnez un point de récupération dans la liste déroulante.
+1. À l’**Étape 2 : Télécharger le script pour parcourir et restaurer des fichiers**, cliquez sur le bouton **Télécharger le fichier exécutable**. Copiez le mot de passe pour le fichier et enregistrez-le à un endroit sûr.
 1. Sur votre ordinateur local, ouvrez **Explorateur de fichiers** et accédez à votre dossier**Téléchargements**, puis copiez le fichier .exe téléchargé. Le nom du fichier commence par le nom de votre machine virtuelle. 
 1. Sur votre machine virtuelle (en utilisant la connexion RDP), collez le fichier .exe sur le Bureau. 
 1. Accédez au bureau de votre machine virtuelle et double-cliquez sur le fichier .exe. Une invite de commandes démarre. Le programme monte le point de récupération sous forme de partage de fichiers auquel vous pouvez accéder. Après avoir créé le partage, entrez **q** pour fermer l’invite de commandes.
 1. Sur votre machine virtuelle, ouvrez **Explorateur de fichiers** et accédez à la lettre de lecteur qui a été utilisée pour le partage de fichiers.
 1. Accédez à \inetpub\wwwroot, copiez **iisstart.png** à partir du partage de fichier et collez-le dans \inetpub\wwwroot. Par exemple, copiez F:\inetpub\wwwroot\iisstart.png et collez-le dans c:\inetpub\wwwroot pour récupérer le fichier.
 1. Sur votre ordinateur local, ouvrez l’onglet du navigateur avec lequel vous êtes connecté à l’adresse IP de la machine virtuelle affichant la page IIS par défaut. Appuyez sur CTRL + F5 pour actualiser la page du navigateur. Vous devriez maintenant voir que l’image a été restaurée.
-1. Sur votre ordinateur local, revenez à l’onglet du navigateur pour afficher le portail Azure, puis dans **Étape 3 : Démonter les disques après la récupération**, cliquez sur le bouton **Démonter les disques**. Si vous avez omis cette étape, la connexion au point de montage est automatiquement fermée après 12 heures. Une fois ces 12 heures écoulées, vous devez télécharger un nouveau script pour créer un point de montage.
+1. Sur votre ordinateur local, revenez à l’onglet du navigateur du portail Azure et à l’**Étape 3 : Démonter les disques après la récupération** cliquez sur le bouton **Démonter les disques**. Si vous avez omis cette étape, la connexion au point de montage est automatiquement fermée après 12 heures. Une fois ces 12 heures écoulées, vous devez télécharger un nouveau script pour créer un point de montage.
 
 
 
@@ -98,12 +98,3 @@ Passez au didacticiel suivant pour en savoir plus sur la surveillance des machin
 
 > [!div class="nextstepaction"]
 > [Gouverner les machines virtuelles](tutorial-govern-resources.md)
-
-
-
-
-
-
-
-
-

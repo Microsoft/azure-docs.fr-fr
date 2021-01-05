@@ -5,15 +5,15 @@ services: security-center
 author: memildin
 manager: rkarlin
 ms.service: security-center
-ms.topic: conceptual
+ms.topic: tutorial
 ms.date: 09/10/2019
 ms.author: memildin
-ms.openlocfilehash: f31c084be2fb017c0db521328e4ccdff9dd2aa25
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 1f5db17549c2b95d5dd0dd2f866ca1d1c0e7d8aa
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80810476"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965117"
 ---
 # <a name="planning-and-operations-guide"></a>Guide Planification et opérations
 Ce guide s’adresse aux informaticiens professionnels, aux architectes informatiques, aux analystes de la sécurité des informations et aux administrateurs de cloud qui prévoient d’utiliser Azure Security Center.
@@ -69,14 +69,14 @@ Le Centre de sécurité permet à ces personnes d’assumer ces différentes res
 * Analyse les attaques
 * Collabore avec le propriétaire de la charge de travail de cloud pour mettre en œuvre les solutions
 
-Azure Security Center utilise le [contrôle d’accès en fonction du rôle (RBAC)](../role-based-access-control/role-assignments-portal.md) qui fournit des [rôles intégrés](../role-based-access-control/built-in-roles.md) susceptibles d’être attribués à des utilisateurs, des groupes et des services dans Azure. Lorsqu’un utilisateur ouvre le Centre de sécurité, il voit uniquement les informations relatives aux ressources auxquelles il a accès. Autrement dit, l’utilisateur se voit attribuer le rôle de propriétaire, collaborateur ou lecteur, pour l’abonnement ou le groupe de ressources auquel appartiennent les ressources. Outre ces rôles, il existe deux rôles propres à Security Center :
+Security Center utilise le [contrôle d’accès en fonction du rôle d’Azure (RBAC)](../role-based-access-control/role-assignments-portal.md), qui fournit des [rôles intégrés](../role-based-access-control/built-in-roles.md) susceptibles d’être affectés à des utilisateurs, des groupes et des services dans Azure. Lorsqu’un utilisateur ouvre le Centre de sécurité, il voit uniquement les informations relatives aux ressources auxquelles il a accès. Autrement dit, l’utilisateur se voit attribuer le rôle de propriétaire, collaborateur ou lecteur, pour l’abonnement ou le groupe de ressources auquel appartiennent les ressources. Outre ces rôles, il existe deux rôles propres à Security Center :
 
 - **Lecteur de sécurité** : un utilisateur qui appartient à ce rôle est en mesure d’afficher uniquement les configurations de Security Center, ce qui inclut les recommandations, les alertes, la stratégie et l’intégrité, mais il ne peut pas apporter de modifications.
 - **Administrateur de la sécurité** : il a les mêmes droits que le lecteur de sécurité, mais il peut également mettre à jour la stratégie de sécurité, et rejeter des alertes et des recommandations.
 
 Les rôles de Security Center décrits ci-dessus n’ont pas accès à d’autres zones de service d’Azure (par exemple, stockage, web et mobile, ou Internet des objets).
 
-En considérant les personnes décrites dans le diagramme précédent, voici le RBAC qui serait nécessaire :
+En considérant les personnes décrites dans le diagramme précédent, voici le RBAC Azure qui serait nécessaire :
 
 **Jeff (propriétaire de la charge de travail)**
 
@@ -106,7 +106,7 @@ Autres informations importantes à prendre en compte :
 * Seuls les collaborateurs/propriétaires d’abonnement et les administrateurs de sécurité peuvent modifier une stratégie de sécurité.
 * Seuls les propriétaires et collaborateurs d’abonnement et de groupe de ressources peuvent appliquer les recommandations de sécurité pour une ressource.
 
-Lorsque vous planifiez le contrôle d’accès à l’aide de RBAC dans le Centre de sécurité, veillez à identifier qui dans votre entreprise utilisera le Centre de sécurité, ainsi que les types de tâches qu’ils effectueront, puis configurez RBAC en conséquence.
+Lorsque vous planifiez le contrôle d’accès à l’aide de RBAC Azure dans le Centre de sécurité, veillez à identifier qui dans votre entreprise utilisera le Centre de sécurité, ainsi que les types de tâches qu’ils effectueront, puis configurez RBAC Azure en conséquence.
 
 > [!NOTE]
 > Nous vous recommandons d’attribuer le rôle le moins permissif permettant aux utilisateurs d’effectuer leurs tâches. Par exemple, les utilisateurs qui n’ont besoin que de consulter des informations sur l’état de sécurité des ressources sans effectuer aucune action, telles que l’application des recommandations ou la modification des stratégies, doivent recevoir le rôle de lecteur.
@@ -117,25 +117,25 @@ Lorsque vous planifiez le contrôle d’accès à l’aide de RBAC dans le Centr
 Une stratégie de sécurité définit la configuration souhaitée de vos charges de travail, tout en garantissant leur conformité aux exigences de sécurité réglementaires. Dans Security Center, vous pouvez définir les stratégies de vos abonnements Azure, qui peuvent être adaptées au type de charge de travail ou à la sensibilité des données.
 
 Les stratégies Security Center comprennent les composants suivant :
-- [Collecte des données](https://docs.microsoft.com/azure/security-center/security-center-enable-data-collection) : paramètres de l’approvisionnement d’agent et de la collecte de données.
-- [Stratégie de sécurité](https://docs.microsoft.com/azure/security-center/security-center-policies) : [Azure Policy](../governance/policy/overview.md) qui détermine les contrôles surveillés et recommandés par Security Center. Vous pouvez aussi utiliser une stratégie Azure pour créer des définitions, définir des stratégies supplémentaires et assigner des stratégies à des groupes d’administration.
-- [Notifications par e-mail](https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details) : paramètres des contacts de sécurité et des notifications.
-- [Niveau de tarification](https://docs.microsoft.com/azure/security-center/security-center-pricing) : sélection de tarification gratuite ou standard, qui détermine les fonctionnalités Security Center disponibles pour les ressources visées (à spécifier pour les abonnements, les groupes de ressources et les espaces de travail).
+- [Collecte des données](security-center-enable-data-collection.md) : paramètres de l’approvisionnement d’agent et de la collecte de données.
+- [Stratégie de sécurité](tutorial-security-policy.md) : [Azure Policy](../governance/policy/overview.md) qui détermine les contrôles surveillés et recommandés par Security Center. Vous pouvez aussi utiliser une stratégie Azure pour créer des définitions, définir des stratégies supplémentaires et assigner des stratégies à des groupes d’administration.
+- [Notifications par e-mail](security-center-provide-security-contact-details.md) : paramètres des contacts de sécurité et des notifications.
+- [Niveau tarifaire](security-center-pricing.md) : avec ou sans Azure Defender, qui détermine les fonctionnalités Security Center disponibles pour les ressources ciblées (à spécifier pour les abonnements et les espaces de travail ou les groupes de ressources utilisant l’API).
 
 > [!NOTE]
-> Spécifier un contact de sécurité permettra à Azure de joindre la personne adéquate de votre organisation si un incident survient. Pour plus d’informations sur la mise en œuvre de cette recommandation, consultez [Fournir les détails du contact de sécurité dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details) .
+> Spécifier un contact de sécurité permettra à Azure de joindre la personne adéquate de votre organisation si un incident survient. Pour plus d’informations sur la mise en œuvre de cette recommandation, consultez [Fournir les détails du contact de sécurité dans Azure Security Center](security-center-provide-security-contact-details.md) .
 
 ### <a name="security-policies-definitions-and-recommendations"></a>Définitions et recommandations de stratégies de sécurité
 Security Center crée automatiquement une stratégie de sécurité par défaut, pour chacun de vos abonnements Azure. Vous pouvez modifier la stratégie dans Security Center ou utiliser la stratégie Azure pour créer des définitions, définir des stratégies supplémentaires et assigner des stratégies à des groupes d’administrations (qui peuvent représenter toute l’organisation, une branche commerciale de cette dernière, etc), et surveiller la conformité des stratégies à ces étendues.
 
-Avant de configurer des stratégies de sécurité, examinez chacune des [recommandations de sécurité](https://docs.microsoft.com/azure/security-center/security-center-recommendations)et déterminer si ces stratégies conviennent à vos différents abonnements et groupes de ressources. Il est également important de comprendre l’action à mener concernant les recommandations de sécurité et de connaître la personne de votre organisation chargée de surveiller les nouvelles recommandations et de prendre les mesures nécessaires.
+Avant de configurer des stratégies de sécurité, examinez chacune des [recommandations de sécurité](security-center-recommendations.md)et déterminer si ces stratégies conviennent à vos différents abonnements et groupes de ressources. Il est également important de comprendre l’action à mener concernant les recommandations de sécurité et de connaître la personne de votre organisation chargée de surveiller les nouvelles recommandations et de prendre les mesures nécessaires.
 
 ## <a name="data-collection-and-storage"></a>Collecte et stockage des données
-Azure Security Center utilise l’agent Log Analytics (le même agent que celui utilisé par le service Azure Monitor) pour collecter les données relatives à la sécurité sur vos machines virtuelles. [Les données collectées](https://docs.microsoft.com/azure/security-center/security-center-enable-data-collection) à partir de cet agent seront stockées dans vos espaces de travail Log Analytics.
+Azure Security Center utilise l’agent Log Analytics (le même agent que celui utilisé par le service Azure Monitor) pour collecter les données relatives à la sécurité sur vos machines virtuelles. [Les données collectées](security-center-enable-data-collection.md) à partir de cet agent seront stockées dans vos espaces de travail Log Analytics.
 
 ### <a name="agent"></a>Agent
 
-Une fois l’approvisionnement automatique activé dans la stratégie de sécurité, l’agent Log Analytics (pour [Windows](https://docs.microsoft.com/azure/log-analytics/log-analytics-windows-agents) ou [Linux](https://docs.microsoft.com/azure/log-analytics/log-analytics-linux-agents)) est installé sur toutes les machines virtuelles Azure prises en charge et sur toute nouvelle machine créée. Si l’agent Log Analytics est déjà installé sur la machine virtuelle ou sur l’ordinateur, Azure Security Center utilise cet agent. Les processus de l’agent sont conçus pour être non invasifs et ont un impact minimal sur les performances de la machine Virtuelle.
+Une fois l’approvisionnement automatique activé dans la stratégie de sécurité, l’agent Log Analytics (pour [Windows](../azure-monitor/platform/agent-windows.md) ou [Linux](../azure-monitor/learn/quick-collect-linux-computer.md)) est installé sur toutes les machines virtuelles Azure prises en charge et sur toute nouvelle machine créée. Si l’agent Log Analytics est déjà installé sur la machine virtuelle ou sur l’ordinateur, Azure Security Center utilise cet agent. Les processus de l’agent sont conçus pour être non invasifs et ont un impact minimal sur les performances de la machine Virtuelle.
 
 L’agent Log Analytics pour Windows requiert l’utilisation du port TCP 443. Consultez l’[article sur la résolution des problèmes](security-center-troubleshooting-guide.md) pour plus d’informations.
 
@@ -158,12 +158,12 @@ Dans le portail Azure, vous pouvez parcourir le contenu pour afficher la liste d
 Pour les espaces de travail créés par Azure Security Center, les données sont conservées pendant 30 jours. Pour les espaces de travail existants, la rétention dépend du niveau tarifaire de l’espace de travail. Si vous le souhaitez, vous pouvez aussi utiliser un espace de travail existant.
 
 > [!NOTE]
-> Microsoft s’engage fermement à protéger la confidentialité et la sécurité de ces données. Microsoft adhère aux recommandations strictes de conformité et de sécurité, du codage jusqu'à l'exploitation d'un service. Pour plus d’informations sur la gestion des données et la confidentialité, lisez [Sécurité des données d’Azure Security Center](security-center-data-security.md).
+> Microsoft prend des engagements fermes pour protéger la confidentialité et la sécurité de ces données. Microsoft adhère aux recommandations strictes de conformité et de sécurité, du codage jusqu'à l'exploitation d'un service. Pour plus d’informations sur la gestion des données et la confidentialité, lisez [Sécurité des données d’Azure Security Center](security-center-data-security.md).
 >
 
-## <a name="onboarding-non-azure-resources"></a>Intégration de ressources non Azure
+## <a name="onboard-non-azure-resources"></a>Intégrer des ressources non-Azure
 
-Security Center peut surveiller l’état de sécurité de vos ordinateurs autres qu’Azure, mais vous devez d’abord intégrer ces ressources. Pour en savoir plus sur l’intégration de ressources non Azure, consultez [Intégration dans Azure Security Center Standard pour une sécurité renforcée](https://docs.microsoft.com/azure/security-center/security-center-onboarding#onboard-non-azure-computers).
+Security Center peut surveiller l’état de sécurité de vos ordinateurs autres qu’Azure, mais vous devez d’abord intégrer ces ressources. Pour plus d’informations sur la façon d’intégrer des ressources non-Azure, consultez [Intégrer des ordinateurs non-Azure](quickstart-onboard-machines.md).
 
 ## <a name="ongoing-security-monitoring"></a>Surveillance continue de la sécurité
 Après la configuration initiale et la mise en œuvre des recommandations du Centre de sécurité, l’étape suivante détermine les processus opérationnels de ce dernier.
@@ -175,39 +175,23 @@ La vue d’ensemble sur Security Center offre une vision unifiée de la sécurit
 > [!NOTE]
 > Le Centre de sécurité n’interfère pas avec vos procédures de fonctionnement normales. Il surveille passivement vos déploiements et fournit des recommandations en fonction des stratégies de sécurité activées.
 
-Lorsque vous choisissez pour la première fois d’utiliser Security Center pour votre environnement Azure, veillez à passer en revue toutes les recommandations, ce que vous pouvez faire dans la mosaïque **Recommandations** ou par ressource (**Compute**, **Mise en réseau**, **Stockage et données** et **Application**).
-
-Une fois toutes les recommandations traitées, la section **Prévention** doit être verte pour toutes les ressources concernées. À ce stade, la surveillance continue devient plus facile puisque vous n’effectuerez des actions qu’en fonction des modifications apportées dans les mosaïques de recommandations et d’intégrité de la sécurité des ressources.
-
-La section **Détection** est plus réactive. Ces alertes concernent les problèmes qui surviennent maintenant ou qui existent déjà et ont été détectés par les contrôles d’Azure Security Center et par des systèmes tiers. La mosaïque Alertes de sécurité affiche des graphiques à barres qui indiquent le nombre d'alertes enregistrées chaque jour, ainsi que leur répartition au sein des catégories de gravité (faible, moyenne, élevée). Pour plus d’informations sur les alertes de sécurité, voir [Gestion et résolution des alertes de sécurité dans Azure Security Center](security-center-managing-and-responding-alerts.md).
+Lorsque vous choisissez pour la première fois d’utiliser Security Center pour votre environnement Azure, veillez à passer en revue toutes les recommandations, ce que vous pouvez faire dans la page **Recommandations**.
 
 Prévoyez de consulter l’option Informations sur les menaces dans le cadre de vos opérations de sécurité quotidiennes. Vous pouvez y identifier les menaces de sécurité qui pèsent sur votre environnement. Par exemple, pour déterminer si un ordinateur fait parti d’un botnet.
 
 ### <a name="monitoring-for-new-or-changed-resources"></a>Surveillance des ressources nouvelles ou modifiées
+
 La plupart des environnements Azure sont dynamiques, avec des ressources régulièrement créées, activées, désactivées, reconfigurées et modifiées. Le Centre de sécurité vous offre une visibilité sur l’état de la sécurité de ces nouvelles ressources.
 
 Lorsque vous ajoutez de nouvelles ressources (machines virtuelles, bases de données SQL) dans votre environnement Azure, le Centre de sécurité les détecte automatiquement et commence à surveiller leur sécurité. Cela inclut également les rôles Web et les rôles de travail PaaS. Si la collecte de données est activée dans la [stratégie de sécurité](tutorial-security-policy.md), des fonctionnalités de surveillance supplémentaires sont activées automatiquement pour vos machines virtuelles.
 
-![Principaux aspects](./media/security-center-planning-and-operations-guide/security-center-planning-and-operations-guide-fig3-newUI.png)
-
-1. Pour les machines virtuelles, cliquez sur **Calcul et applications**, sous la section **Hygiène de sécurité des ressources**. Les problèmes liés à l’activation des données ou aux recommandations associées s’affichent dans l’onglet **Présentation** et dans la section **Recommandations relatives à la surveillance**.
-2. Consultez les **recommandations** pour découvrir les éventuels risques de sécurité identifiés pour la nouvelle ressource.
-3. Il est très courant, lors de l’ajout de nouvelles machines virtuelles à votre environnement, que seul le système d’exploitation soit installé initialement. Le propriétaire de la ressource peut avoir besoin de temps pour déployer d’autres applications qui seront utilisées par ces machines virtuelles.  L’idéal est de connaître le but de cette charge de travail. Va-t-il s’agir d’un serveur d’applications ? Selon la nature de cette nouvelle charge de travail, vous pouvez activer la **stratégie de sécurité**appropriée, ce qui constitue la troisième étape de cette charge de travail.
-4. Lorsque de nouvelles ressources sont ajoutées à votre environnement Azure, il est possible que de nouvelles alertes s’affichent dans la vignette **Alertes de sécurité**. Recherchez les nouvelles alertes dans cette vignette et suivez les recommandations.
-
-Vous devez également superviser régulièrement les ressources existantes pour rechercher les modifications de configuration qui peuvent être à l’origine de risques de sécurité, d’alertes de sécurité et de dérive par rapport aux bases de référence recommandées. Commencez dans le tableau de bord du Centre de sécurité. À partir de là, consultez régulièrement trois zones principales.
-
-![Opérations](./media/security-center-planning-and-operations-guide/security-center-planning-and-operations-guide-fig4-newUI.png)
-
-1. Le panneau **Prévention** vous permet d’accéder rapidement à vos principales ressources. Utilisez cette option pour surveiller les éléments Compute, Mise en réseau, Stockage et donnée, et Applications.
-2. Le panneau **Recommandations** vous permet de consulter les recommandations du Centre de sécurité. La supervision continue peut signaler que vous n’avez aucune recommandation aujourd’hui, ce qui est normal puisque vous les avez toutes traitées pendant la configuration initiale du Centre de sécurité. Voilà pourquoi cette section peut ne pas afficher de nouvelles informations tous les jours et ne doit être consultée qu’en cas de besoin.
-3. La section **Détection** peut changer très fréquemment ou très rarement. Passez toujours en revue les alertes de sécurité et prenez des mesures en fonction des recommandations du Centre de sécurité.
+Vous devez également superviser régulièrement les ressources existantes pour rechercher les modifications de configuration qui peuvent être à l’origine de risques de sécurité, d’alertes de sécurité et de dérive par rapport aux bases de référence recommandées. 
 
 ### <a name="hardening-access-and-applications"></a>Renforcement des applications et de l’accès
 
-Dans le cadre de vos opérations de sécurité, vous devez entreprendre des mesures préventives pour restreindre l’accès aux machines virtuelles, et contrôler les applications exécutées sur ces dernières. En verrouillant le trafic entrant de vos machines virtuelles, vous réduisez l’exposition aux attaques et fournissez en même temps un accès simple pour se connecter aux machines virtuelles si nécessaire. Utilisez la fonctionnalité d’accès [juste-à-temps à la machine virtuelle](https://docs.microsoft.com/azure/security-center/security-center-just-in-time) pour durcir l’accès à vos machines virtuelles.
+Dans le cadre de vos opérations de sécurité, vous devez entreprendre des mesures préventives pour restreindre l’accès aux machines virtuelles, et contrôler les applications exécutées sur ces dernières. En verrouillant le trafic entrant de vos machines virtuelles, vous réduisez l’exposition aux attaques et fournissez en même temps un accès simple pour se connecter aux machines virtuelles si nécessaire. Utilisez la fonctionnalité d’accès [juste-à-temps à la machine virtuelle](security-center-just-in-time.md) pour durcir l’accès à vos machines virtuelles.
 
-Vous pouvez utiliser les [contrôles d’application adaptatifs](https://docs.microsoft.com/azure/security-center/security-center-adaptive-application) pour limiter le nombre d’applications qui peuvent s’exécuter sur vos machines virtuelles hébergées dans Azure. Parmi d’autres avantages, cela permet de renforcer la protection de vos machines virtuelles contre les logiciels malveillants. À l’aide de l’apprentissage automatique, Security Center analyse les processus en cours d’exécution dans la machine virtuelle pour vous aider à créer des règles de mise en liste verte.
+Vous pouvez utiliser les [contrôles d’application adaptatifs](security-center-adaptive-application.md) pour limiter le nombre d’applications qui peuvent s’exécuter sur vos machines virtuelles hébergées dans Azure. Parmi d’autres avantages, cela permet de renforcer la protection de vos machines virtuelles contre les logiciels malveillants. À l’aide de l’apprentissage automatique, Security Center analyse les processus en cours d’exécution dans la machine virtuelle pour vous aider à créer des règles de liste d'autorisation.
 
 
 ## <a name="incident-response"></a>Réponse aux incidents
@@ -215,7 +199,7 @@ Le Centre de sécurité détecte les menaces et vous les signale dès qu’elles
 
 Même si cet article ne vise pas à vous aider à créer votre propre plan de réponse aux incidents, nous allons utiliser le cycle de vie Microsoft Azure Security Response in the Cloud comme base pour les étapes de réponse aux incidents. Les étapes sont présentées dans le diagramme suivant :
 
-![Activité suspecte](./media/security-center-planning-and-operations-guide/security-center-planning-and-operations-guide-fig5-1.png)
+![Étapes de la réponse aux incidents dans le cycle de vie du cloud](./media/security-center-planning-and-operations-guide/security-center-planning-and-operations-guide-fig5-1.png)
 
 > [!NOTE]
 > Vous pouvez utiliser le document [Computer Security Incident Handling Guide](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf) (Guide de gestion des incidents de sécurité informatique) du NIST (National Institute of Standards and Technology) comme référence pour vous aider à créer votre plan.
@@ -233,13 +217,11 @@ L’exemple suivant montre une activité RDP suspecte :
 
 ![Activité suspecte](./media/security-center-planning-and-operations-guide/security-center-planning-and-operations-guide-fig5-ga.png)
 
-Cette page affiche des informations sur l’heure de l’attaque, le nom d’hôte source, la machine virtuelle cible, et détaille une procédure recommandée. Parfois, aucune information ne sera disponible concernant la source de l’attaque. Pour plus d’informations sur ce type de comportement, voir [Missing Source Information in Azure Security Center Alerts](https://blogs.msdn.microsoft.com/azuresecurity/2016/03/25/missing-source-information-in-azure-security-center-alerts/) (Informations sur la source manquantes dans les alertes Azure Security Center).
+Cette page affiche des informations sur l’heure de l’attaque, le nom d’hôte source, la machine virtuelle cible, et détaille une procédure recommandée. Parfois, aucune information ne sera disponible concernant la source de l’attaque. Pour plus d’informations sur ce type de comportement, voir [Missing Source Information in Azure Security Center Alerts](/archive/blogs/azuresecurity/missing-source-information-in-azure-security-center-alerts) (Informations sur la source manquantes dans les alertes Azure Security Center).
 
-Depuis cette page, vous pouvez aussi lancer un examen pour mieux comprendre la chronologie de l’attaque et comment elle s’est produite, les systèmes potentiellement compromis, les informations d’identification utilisées, et pour voir une représentation graphique de l’ensemble de la chaîne d’attaque.
+Une fois le système compromis identifié, vous pouvez exécuter une [automatisation de workflow](workflow-automation.md) déjà créée. Il s’agit d’une collection de procédures qui peuvent être exécutées à partir de Security Center une fois qu’elles ont été déclenchées par une alerte.
 
-Une fois le système compromis identifié, vous pouvez exécuter une [automatisation de workflow](workflow-automation.md) précédemment créée. Il s’agit d’une collection de procédures qui peuvent être exécutées à partir de Security Center une fois qu’elles ont été déclenchées par une alerte.
-
-La vidéo [How to Leverage the Azure Security Center & Microsoft Operations Management Suite for an Incident Response](https://channel9.msdn.com/Blogs/Taste-of-Premier/ToP1703) (Comment tirer profit d’Azure Security Center et de Microsoft Operations Management Suite pour répondre aux incidents) présente des démonstrations pouvant vous aider à comprendre comment Azure Security Center peut être utilisé dans chacune de ces étapes.
+La vidéo [How to Leverage the Azure Security Center & Microsoft Operations Management Suite for an Incident Response](https://channel9.msdn.com/Blogs/Taste-of-Premier/ToP1703) présente des démonstrations montrant comment Azure Security Center peut être utilisé dans chacune de ces étapes.
 
 > [!NOTE]
 > Consultez l’article [Gestion et résolution des alertes de sécurité dans le Centre de sécurité Azure](security-center-managing-and-responding-alerts.md) pour plus d’informations sur l’utilisation des fonctionnalités d’Azure Security Center afin de vous aider lors du processus de réponse aux incidents.
@@ -251,6 +233,6 @@ Dans ce document, vous avez vu comment planifier l’adoption du Centre de sécu
 
 * [Gestion et résolution des alertes de sécurité dans le Centre de sécurité Azure](security-center-managing-and-responding-alerts.md)
 * [Surveillance de l’intégrité de la sécurité dans Azure Security Center](security-center-monitoring.md) : découvrez comment surveiller l’intégrité de vos ressources Azure.
-* [Surveillance des solutions de partenaire avec Azure Security Center](security-center-partner-solutions.md) : découvrez comment surveiller l’état d’intégrité de vos solutions de partenaire.
+* [Surveillance des solutions de partenaire avec Azure Security Center](./security-center-partner-integration.md) : découvrez comment surveiller l’état d’intégrité de vos solutions de partenaire.
 * [FAQ d’Azure Security Center](faq-general.md) : découvrez les réponses aux questions les plus souvent posées à propos de l’utilisation de ce service.
-* [Blog sur la sécurité Azure](https://blogs.msdn.com/b/azuresecurity/) : accédez à des billets de blog sur la sécurité et la conformité Azure.
+* [Blog sur la sécurité Azure](/archive/blogs/azuresecurity/) : accédez à des billets de blog sur la sécurité et la conformité Azure.

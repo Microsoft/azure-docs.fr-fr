@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.reviewer: veyalla
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 57b9d46918414cef9e8cbcffb941b98c98f985ff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 42c79526288fb7e05959ac60cddc6f468656ffd4
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80240344"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91972541"
 ---
 # <a name="communicate-with-edgeagent-using-built-in-direct-methods"></a>Communiquer avec edgeAgent à l’aide de méthodes directes intégrées
 
@@ -69,13 +69,14 @@ Dans le portail Azure, appelez la méthode avec le nom de la méthode `RestartMo
 
 ![Appeler la méthode directe ’RestartModule’ dans le portail Azure](./media/how-to-edgeagent-direct-method/restartmodule-direct-method.png)
 
-## <a name="experimental-methods"></a>Méthodes expérimentales
+## <a name="diagnostic-direct-methods"></a>Méthodes directes de diagnostic
 
-De nouvelles options de méthode directe sont disponibles en tant que fonctionnalités expérimentales à tester, notamment :
+* [GetModuleLogs](how-to-retrieve-iot-edge-logs.md#retrieve-module-logs) : Récupérez les journaux de module en les intégrant dans la réponse de la méthode directe.
+* [UploadModuleLogs](how-to-retrieve-iot-edge-logs.md#upload-module-logs) : Récupérez les journaux de module et chargez-les dans le Stockage Blob Azure.
+* [UploadSupportBundle](how-to-retrieve-iot-edge-logs.md#upload-support-bundle-diagnostics) : Récupérez les journaux de module à l’aide d’un bundle de support et chargez un fichier zip dans le Stockage Blob Azure.
+* [GetTaskStatus](how-to-retrieve-iot-edge-logs.md#get-upload-request-status) : Vérifiez l’état d’une requête de chargement de journaux ou de bundle de support.
 
-* [UploadLogs](https://github.com/Azure/iotedge/blob/master/doc/built-in-logs-pull.md) : Récupérez les journaux de module et chargez-les dans le Stockage Blob Azure.
-* [GetTaskStatus](https://github.com/Azure/iotedge/blob/master/doc/built-in-logs-pull.md#gettaskstatus) : Vérifiez l’état d’une demande de chargement des journaux.
-* [GetLogs](https://github.com/Azure/iotedge/blob/master/doc/built-in-logs-pull.md#getlogs) : Récupérez les journaux de module en les intégrant dans la réponse de la méthode directe.
+Ces méthodes directes de diagnostic sont disponibles à partir de la version 1.0.10.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

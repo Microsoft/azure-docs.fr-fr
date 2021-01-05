@@ -11,13 +11,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 10/25/2019
-ms.openlocfilehash: 1a5a2682198f9ce9f5cb39f21e244c723ca513d9
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 07/17/2020
+ms.openlocfilehash: 1f0fb1ee8580c0c7f6eb30228b65e0a3780ef0a8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416662"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87076806"
 ---
 # <a name="copy-data-from-salesforce-marketing-cloud-using-azure-data-factory"></a>Copier des données de Salesforce Marketing Cloud avec Azure Data Factory
 
@@ -34,7 +34,7 @@ Ce connecteur Salesforce Marketing Cloud est pris en charge pour les activités 
 
 Il est possible de copier des données de Salesforce Marketing Cloud vers n’importe quel magasin de données récepteur pris en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Le connecteur Salesforce Marketing Cloud prend en charge l’authentification OAuth 2. Il repose sur l’[API REST Salesforce Marketing Cloud](https://developer.salesforce.com/docs/atlas.en-us.mc-apis.meta/mc-apis/index-api.htm).
+Le connecteur Salesforce Marketing Cloud prend en charge l’authentification OAuth 2 ainsi que les types de packages hérités et améliorés. Le connecteur repose sur l’[API REST Salesforce Marketing Cloud](https://developer.salesforce.com/docs/atlas.en-us.mc-apis.meta/mc-apis/index-api.htm).
 
 >[!NOTE]
 >Ce connecteur ne prend pas en charge la récupération d'objets personnalisés ou d'extensions de données personnalisées.
@@ -52,13 +52,17 @@ Les propriétés prises en charge pour le service lié Salesforce Marketing Clou
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type doit être définie sur : **SalesforceMarketingCloud** | Oui |
+| connectionProperties | Groupe de propriétés qui définit la façon de se connecter à Salesforce Marketing Cloud. | Oui |
+| ***Sous `connectionProperties`:*** | | |
+| authenticationType | spécifie la méthode d’authentification à utiliser. Valeurs autorisées : `Enhanced sts OAuth 2.0` ou `OAuth_2.0`.<br><br>Le package hérité Salesforce Marketing Cloud prend uniquement en charge `OAuth_2.0`, tandis que le package amélioré nécessite `Enhanced sts OAuth 2.0`. <br>Depuis le 1er août 2019, Salesforce Marketing Cloud a supprimé la possibilité de créer des packages hérités. Tous les nouveaux packages sont des packages améliorés. | Oui |
+| host | Pour le package amélioré, l’hôte doit être votre [sous-domaine](https://developer.salesforce.com/docs/atlas.en-us.mc-apis.meta/mc-apis/your-subdomain-tenant-specific-endpoints.htm) qui est représenté par une chaîne de 28 caractères commençant par les lettres « mc », par exemple `mc563885gzs27c5t9-63k636ttgm`. <br>Pour le package hérité, spécifiez `www.exacttargetapis.com`. | Oui |
 | clientId | ID client associé à l’application Salesforce Marketing Cloud.  | Oui |
-| clientSecret | Clé secrète client associée à l’application Salesforce Marketing Cloud. Vous pouvez choisir de marquer ce champ comme SecureString pour le stocker en toute sécurité dans le fichier de définition d'application, ou stocker le mot de passe dans Azure Key Vault et laisser l'activité de copie ADF en tirer (pull) les données lors de la copie. Pour plus d'informations, consultez la page [Stocker des informations d'identification dans Key Vault](store-credentials-in-key-vault.md). | Oui |
+| clientSecret | Clé secrète client associée à l’application Salesforce Marketing Cloud. Vous pouvez choisir de marquer ce champ comme SecureString pour le stocker en toute sécurité dans le fichier de définition d’application, ou stocker le secret dans Azure Key Vault et laisser l’activité de copie ADF en tirer (pull) les données lors de la copie. Pour plus d’informations, consultez la page [Stocker des informations d’identification dans Key Vault](store-credentials-in-key-vault.md). | Oui |
 | useEncryptedEndpoints | Indique si les points de terminaison de la source de données sont chiffrés suivant le protocole HTTPS. La valeur par défaut est true.  | Non |
 | useHostVerification | Indique si le nom d’hôte du certificat du serveur doit correspondre à celui du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
-| usePeerVerification | Indique si l’identité du serveur doit être vérifiée en cas de connexion TLS. La valeur par défaut est true.  | Non |
+| usePeerVerification | Indique s’il faut vérifier l’identité du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
 
-**Exemple :**
+**Exemple : utilisation de l’authentification OAuth 2 du service STS amélioré pour le package amélioré** 
 
 ```json
 {
@@ -66,14 +70,66 @@ Les propriétés prises en charge pour le service lié Salesforce Marketing Clou
     "properties": {
         "type": "SalesforceMarketingCloud",
         "typeProperties": {
-            "clientId" : "<clientId>",
+            "connectionProperties": {
+                "host": "<subdomain e.g. mc563885gzs27c5t9-63k636ttgm>",
+                "authenticationType": "Enhanced sts OAuth 2.0",
+                "clientId": "<clientId>",
+                "clientSecret": {
+                     "type": "SecureString",
+                     "value": "<clientSecret>"
+                },
+                "useEncryptedEndpoints": true,
+                "useHostVerification": true,
+                "usePeerVerification": true
+            }
+        }
+    }
+}
+
+```
+
+**Exemple : utilisation de l’authentification OAuth 2 pour le package hérité** 
+
+```json
+{
+    "name": "SalesforceMarketingCloudLinkedService",
+    "properties": {
+        "type": "SalesforceMarketingCloud",
+        "typeProperties": {
+            "connectionProperties": {
+                "host": "www.exacttargetapis.com",
+                "authenticationType": "OAuth_2.0",
+                "clientId": "<clientId>",
+                "clientSecret": {
+                     "type": "SecureString",
+                     "value": "<clientSecret>"
+                },
+                "useEncryptedEndpoints": true,
+                "useHostVerification": true,
+                "usePeerVerification": true
+            }
+        }
+    }
+}
+
+```
+
+Si vous utilisiez le service lié Salesforce Marketing Cloud avec la charge utile suivante, il reste pris en charge tel quel, mais nous vous suggérons d’utiliser le nouveau à l’avenir, qui ajoute la prise en charge du package amélioré.
+
+```json
+{
+    "name": "SalesforceMarketingCloudLinkedService",
+    "properties": {
+        "type": "SalesforceMarketingCloud",
+        "typeProperties": {
+            "clientId": "<clientId>",
             "clientSecret": {
                  "type": "SecureString",
                  "value": "<clientSecret>"
             },
-            "useEncryptedEndpoints" : true,
-            "useHostVerification" : true,
-            "usePeerVerification" : true
+            "useEncryptedEndpoints": true,
+            "useHostVerification": true,
+            "usePeerVerification": true
         }
     }
 }

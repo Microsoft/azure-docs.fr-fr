@@ -1,16 +1,17 @@
 ---
 title: Ajout de rapports d’intégrité Service Fabric personnalisés
 description: Explique comment envoyer des rapports d’intégrité personnalisés à des entités d’intégrité Azure Service Fabric. Fournit des recommandations pour la conception et la mise en œuvre de rapports d’intégrité de qualité.
-author: oanapl
+author: georgewallace
 ms.topic: conceptual
 ms.date: 2/28/2018
-ms.author: oanapl
-ms.openlocfilehash: d00f740085b15bdb5fe698a069d97f168507f31f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: gwallace
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 6df434610a8f595ecca7f16e31f8a302373b02f9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75451583"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001862"
 ---
 # <a name="add-custom-service-fabric-health-reports"></a>Ajout de rapports d’intégrité Service Fabric personnalisés
 Azure Service Fabric introduit un [modèle d’intégrité](service-fabric-health-introduction.md) conçu pour signaler des conditions de cluster et d’application défectueuses sur des entités spécifiques. Le modèle d’intégrité utilise des **rapporteurs d’intégrité** (composants système et agents de surveillance). L’objectif consiste en un diagnostic et une réparation simples et rapides. Les enregistreurs du service doivent penser en amont à l’intégrité. Toute condition pouvant avoir une incidence sur l’intégrité doit être signalée, surtout si cela peut aider à signaler des problèmes proches de la racine. Pour ce qui est du débogage et des investigations, les informations sur l’intégrité peuvent faire gagner du temps et économiser des efforts. L’utilité est particulièrement flagrante une fois que le service est en cours d’exécution, à l’échelle dans le cloud (privé ou Azure).
@@ -38,7 +39,7 @@ Comme mentionné auparavant, la création de rapports peut être effectuée à p
 > 
 > 
 
-Lorsque la conception de la création des rapports d’intégrité est claire, l’envoi de rapports d’intégrité est simple. Vous pouvez utiliser [FabricClient](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient) pour créer un rapport sur l’intégrité, si le cluster n’est pas [sécurisé](service-fabric-cluster-security.md) ou si le client d’infrastructure possède des privilèges d’administrateur. La génération de rapports peut se faire au moyen de l’API avec [FabricClient.HealthManager.ReportHealth](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.healthclient.reporthealth), via PowerShell ou REST. Des boutons de configuration regroupent les rapports afin d’améliorer les performances.
+Lorsque la conception de la création des rapports d’intégrité est claire, l’envoi de rapports d’intégrité est simple. Vous pouvez utiliser [FabricClient](/dotnet/api/system.fabric.fabricclient) pour créer un rapport sur l’intégrité, si le cluster n’est pas [sécurisé](service-fabric-cluster-security.md) ou si le client d’infrastructure possède des privilèges d’administrateur. La génération de rapports peut se faire au moyen de l’API avec [FabricClient.HealthManager.ReportHealth](/dotnet/api/system.fabric.fabricclient.healthclient.reporthealth), via PowerShell ou REST. Des boutons de configuration regroupent les rapports afin d’améliorer les performances.
 
 > [!NOTE]
 > L’intégrité de rapport est synchrone, et représente uniquement le travail de validation côté client. Même si le rapport est accepté par le client de contrôle d’intégrité ou les objets `Partition` ou `CodePackageActivationContext`, cela ne signifie pas qu’il est appliqué dans le magasin. Il est envoyé de manière asynchrone et éventuellement regroupé avec d’autres rapports. Le traitement sur le serveur peut encore échouer, car un numéro de séquence est périmé, l’entité sur laquelle le rapport doit être appliqué a été supprimée, etc.
@@ -58,7 +59,7 @@ Les rapports d’intégrité sont envoyés au gestionnaire d’intégrité par l
 > 
 
 La mise en mémoire tampon sur le client prend en compte l’unicité des rapports. Par exemple, si un rapporteur incorrect génère 100 rapports par seconde sur la même propriété de la même entité, ces rapports sont remplacés par la dernière version. La file d’attente du client contient tout au plus un rapport de ce type. Si le traitement par lots est configuré, les rapports envoyés au gestionnaire d’intégrité sont au nombre de un par intervalle d’envoi. Il s’agit du dernier rapport ajouté, qui reflète l’état le plus récent de l’entité.
-Spécifiez les paramètres de configuration lors de la création de l’élément `FabricClient`, via la transmission de [FabricClientSettings](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclientsettings) avec les valeurs souhaitées pour les entrées relatives à l’intégrité.
+Spécifiez les paramètres de configuration lors de la création de l’élément `FabricClient`, via la transmission de [FabricClientSettings](/dotnet/api/system.fabric.fabricclientsettings) avec les valeurs souhaitées pour les entrées relatives à l’intégrité.
 
 L’exemple suivant permet de créer un client Fabric et d’indiquer que les rapports doivent être envoyés dès qu’ils sont ajoutés. En cas de délais d’attente et d’erreurs pouvant donner lieu à une nouvelle tentative, les nouvelles tentatives ont lieu toutes les 40 secondes.
 
@@ -72,7 +73,7 @@ var clientSettings = new FabricClientSettings()
 var fabricClient = new FabricClient(clientSettings);
 ```
 
-Nous recommandons de conserver le paramètre par défaut du client Fabric, qui définit `HealthReportSendInterval` sur 30 secondes. Ce paramètre garantit des performances optimales en raison du traitement par lots. Pour les rapports critiques qui doivent être envoyés dès que possible, utilisez `HealthReportSendOptions` avec Immediate `true` dans l’API [FabricClient.HealthClient.ReportHealth](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.healthclient.reporthealth). Les rapports immédiats ignorent l’intervalle du traitement par lots. Utilisez cet indicateur avec précaution ; nous souhaitons tirer parti du traitement par lots du client de contrôle d’intégrité chaque fois que cela est possible. L’envoi immédiat est également utile lors de la fermeture du client Fabric (par exemple, quand le processus a déterminé l’état non valide et doit s’arrêter afin d’éviter des effets secondaires). Il garantit un envoi au mieux des rapports cumulés. Lorsqu’un rapport est ajouté avec l’indicateur « Immediate », le client de contrôle d’intégrité constitue un lot de tous les rapports cumulés depuis le dernier envoi.
+Nous recommandons de conserver le paramètre par défaut du client Fabric, qui définit `HealthReportSendInterval` sur 30 secondes. Ce paramètre garantit des performances optimales en raison du traitement par lots. Pour les rapports critiques qui doivent être envoyés dès que possible, utilisez `HealthReportSendOptions` avec Immediate `true` dans l’API [FabricClient.HealthClient.ReportHealth](/dotnet/api/system.fabric.fabricclient.healthclient.reporthealth). Les rapports immédiats ignorent l’intervalle du traitement par lots. Utilisez cet indicateur avec précaution ; nous souhaitons tirer parti du traitement par lots du client de contrôle d’intégrité chaque fois que cela est possible. L’envoi immédiat est également utile lors de la fermeture du client Fabric (par exemple, quand le processus a déterminé l’état non valide et doit s’arrêter afin d’éviter des effets secondaires). Il garantit un envoi au mieux des rapports cumulés. Lorsqu’un rapport est ajouté avec l’indicateur « Immediate », le client de contrôle d’intégrité constitue un lot de tous les rapports cumulés depuis le dernier envoi.
 
 Il est possible de spécifier les mêmes paramètres lors de la création d’une connexion à un cluster via Powershell. L’exemple suivant démarre une connexion à un cluster local :
 
@@ -114,12 +115,12 @@ Pour REST, les rapports sont envoyés à la passerelle Service Fabric qui a un c
 ## <a name="report-from-within-low-privilege-services"></a>Création de rapports depuis les services à faibles privilèges
 Si les services Service Fabric n’ont aucun accès administrateur au cluster, vous pouvez créer des rapports sur l’intégrité des entités à partir du contexte actuel via `Partition` ou `CodePackageActivationContext`.
 
-* Pour les services sans état, utilisez [IStatelessServicePartition.ReportInstanceHealth](https://docs.microsoft.com/dotnet/api/system.fabric.istatelessservicepartition.reportinstancehealth) pour créer un rapport sur l’instance de service actuelle.
-* Pour les services avec état, utilisez [IStatefulServicePartition.ReportReplicaHealth](https://docs.microsoft.com/dotnet/api/system.fabric.istatefulservicepartition.reportreplicahealth) pour créer un rapport sur le réplica en cours.
-* Utilisez [IServicePartition.ReportPartitionHealth](https://docs.microsoft.com/dotnet/api/system.fabric.iservicepartition.reportpartitionhealth) pour créer un rapport sur l’entité de partition actuelle.
-* Utilisez [CodePackageActivationContext.ReportApplicationHealth](https://docs.microsoft.com/dotnet/api/system.fabric.codepackageactivationcontext.reportapplicationhealth) pour créer un rapport sur l’application en cours.
-* Utilisez [CodePackageActivationContext.ReportDeployedApplicationHealth](https://docs.microsoft.com/dotnet/api/system.fabric.codepackageactivationcontext.reportdeployedapplicationhealth) pour créer un rapport sur l’application en cours déployée sur le nœud actuel.
-* Utilisez [CodePackageActivationContext.ReportDeployedServicePackageHealth](https://docs.microsoft.com/dotnet/api/system.fabric.codepackageactivationcontext.reportdeployedservicepackagehealth) afin de créer un rapport sur un package de services pour l’application déployée sur le nœud actuel.
+* Pour les services sans état, utilisez [IStatelessServicePartition.ReportInstanceHealth](/dotnet/api/system.fabric.istatelessservicepartition.reportinstancehealth) pour créer un rapport sur l’instance de service actuelle.
+* Pour les services avec état, utilisez [IStatefulServicePartition.ReportReplicaHealth](/dotnet/api/system.fabric.istatefulservicepartition.reportreplicahealth) pour créer un rapport sur le réplica en cours.
+* Utilisez [IServicePartition.ReportPartitionHealth](/dotnet/api/system.fabric.iservicepartition.reportpartitionhealth) pour créer un rapport sur l’entité de partition actuelle.
+* Utilisez [CodePackageActivationContext.ReportApplicationHealth](/dotnet/api/system.fabric.codepackageactivationcontext.reportapplicationhealth) pour créer un rapport sur l’application en cours.
+* Utilisez [CodePackageActivationContext.ReportDeployedApplicationHealth](/dotnet/api/system.fabric.codepackageactivationcontext.reportdeployedapplicationhealth) pour créer un rapport sur l’application en cours déployée sur le nœud actuel.
+* Utilisez [CodePackageActivationContext.ReportDeployedServicePackageHealth](/dotnet/api/system.fabric.codepackageactivationcontext.reportdeployedservicepackagehealth) afin de créer un rapport sur un package de services pour l’application déployée sur le nœud actuel.
 
 > [!NOTE]
 > En interne, `Partition` et `CodePackageActivationContext` contiennent un client de contrôle d’intégrité configuré avec les paramètres par défaut. Comme indiqué pour le [client de contrôle d’intégrité](service-fabric-report-health.md#health-client), les rapports sont traités par lots et envoyés sur un minuteur. Les objets doivent être maintenus actifs pour avoir une chance d’envoyer le rapport.
@@ -206,7 +207,7 @@ public static void SendReport(object obj)
 ```
 
 ### <a name="powershell"></a>PowerShell
-Envoyez les rapports d’intégrité avec **Send-ServiceFabric*EntityType*HealthReport**.
+Envoyez les rapports d’intégrité avec **Send-ServiceFabric *EntityType* HealthReport**.
 
 L’exemple suivant montre la création de rapports réguliers sur les valeurs du processeur sur un nœud. Les rapports doivent être envoyés toutes les 30 secondes, et ont une durée de vie de deux minutes. S’ils expirent, cela signifie que le rapporteur rencontre des problèmes, et le nœud est évalué au moment de l’erreur. Quand l’utilisation du processeur dépasse un seuil, le rapport a un état d’avertissement. Quand l’utilisation du processeur reste supérieure à un seuil plus longtemps que le délai configuré, une erreur est rapportée. Autrement, le rapporteur envoie un état d’intégrité OK.
 
@@ -290,7 +291,7 @@ HealthEvents          :
 ```
 
 ### <a name="rest"></a>REST
-Envoyez des rapports d’intégrité à l’aide de REST, avec les demandes POST accédant à l’entité choisie et dont le corps présente une description du rapport d’intégrité. Par exemple, découvrez comment envoyer des [rapports REST sur l’intégrité du cluster](https://docs.microsoft.com/rest/api/servicefabric/report-the-health-of-a-cluster) ou des [rapports REST sur l’intégrité du service](https://docs.microsoft.com/rest/api/servicefabric/report-the-health-of-a-service). Toutes les entités sont prises en charge.
+Envoyez des rapports d’intégrité à l’aide de REST, avec les demandes POST accédant à l’entité choisie et dont le corps présente une description du rapport d’intégrité. Par exemple, découvrez comment envoyer des [rapports REST sur l’intégrité du cluster](/rest/api/servicefabric/report-the-health-of-a-cluster) ou des [rapports REST sur l’intégrité du service](/rest/api/servicefabric/report-the-health-of-a-service). Toutes les entités sont prises en charge.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Grâce aux données d’intégrité, les enregistreurs de service et les administrateurs de cluster/d’application peuvent réfléchir à des façons de consommer les informations. Par exemple, ils peuvent configurer des alertes basées sur l’état d’intégrité pour intercepter des problèmes graves avant qu’ils provoquent des pannes. Les administrateurs peuvent également configurer des systèmes de réparation pour résoudre les problèmes automatiquement.
@@ -306,4 +307,3 @@ Grâce aux données d’intégrité, les enregistreurs de service et les adminis
 [Surveiller et diagnostiquer les services localement](service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
 
 [Mise à niveau des applications Service Fabric](service-fabric-application-upgrade.md)
-

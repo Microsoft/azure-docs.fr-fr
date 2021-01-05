@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, logicappspm
 ms.topic: overview
 ms.date: 08/01/2019
-ms.openlocfilehash: 9356cecb22672ae15505d14b5ac73d5baeef09e0
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: adf15904d4490647074d6e2b46ac7e9e871dd388
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77191367"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "86536400"
 ---
 # <a name="b2b-enterprise-integration-solutions-with-azure-logic-apps-and-enterprise-integration-pack"></a>Solutions d’intégration d’entreprise B2B avec Azure Logic Apps et Enterprise Integration Pack
 
@@ -42,7 +42,7 @@ Avant de pouvoir commencer à générer des workflows d’application logique B2
 
 * Pour créer des mappages et des schémas, vous pouvez utiliser [Microsoft Azure Logic Apps Enterprise Integration Tools pour Visual Studio 2015 2.0](https://aka.ms/vsmapsandschemas) et Visual Studio 2015.
 
-Après avoir créé un compte d’intégration et ajouté vos artefacts, vous pouvez commencer à générer des workflows B2B avec ces artefacts en créant une application logique dans le portail Azure. Si vous débutez avec les applications logiques, essayez de [créer une application logique de base](../logic-apps/quickstart-create-first-logic-app-workflow.md). Pour utiliser ces artefacts, veillez à lier d’abord votre compte d’intégration à votre application logique. Ainsi, votre application logique peut accéder à votre compte d’intégration. Vous pouvez également créer, gérer et déployer des applications logiques à l’aide de Visual Studio ou de [PowerShell](https://docs.microsoft.com/powershell/module/az.logicapp).
+Après avoir créé un compte d’intégration et ajouté vos artefacts, vous pouvez commencer à générer des workflows B2B avec ces artefacts en créant une application logique dans le portail Azure. Si vous débutez avec les applications logiques, essayez de [créer une application logique de base](../logic-apps/quickstart-create-first-logic-app-workflow.md). Pour utiliser ces artefacts, veillez à lier d’abord votre compte d’intégration à votre application logique. Ainsi, votre application logique peut accéder à votre compte d’intégration. Vous pouvez également créer, gérer et déployer des applications logiques à l’aide de Visual Studio ou de [PowerShell](/powershell/module/az.logicapp).
 
 Voici les étapes élémentaires pour commencer à générer des applications logiques B2B :
 

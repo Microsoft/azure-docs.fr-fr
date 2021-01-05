@@ -5,31 +5,31 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: tutorial
 ms.date: 12/02/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 356a05d4d92f17ceb66ff0208153ec3eac736757
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b6acaa76d21cb1321feb5466c4fb7a9bacfa846
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74795364"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348107"
 ---
 # <a name="tutorial-basic-active-directory-environment"></a>Tutoriel : Environnement Azure Active Directory simple
 
 Ce tutoriel vous guide dans la création d’un environnement Active Directory simple. 
 
-![Créer](media/tutorial-single-forest/diagram1.png)
+![Schéma illustrant un environnement Azure AD de base.](media/tutorial-single-forest/diagram1.png)
 
 Vous pouvez utiliser l’environnement que vous créez dans le tutoriel pour tester divers aspects des scénarios d’identité hybride et en faire un prérequis pour certains tutoriels.  Si vous disposez déjà d’un environnement Active Directory existant, vous pouvez l’utiliser comme substitut.  Ces informations sont fournies aux personnes qui commencent à partir de rien.
 
 Ce tutoriel se compose des éléments suivants
 ## <a name="prerequisites"></a>Prérequis
 Voici les conditions préalables requises pour suivre ce didacticiel.
-- Un ordinateur où [Hyper-V](https://docs.microsoft.com/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](https://docs.microsoft.com/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](https://docs.microsoft.com/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
-- Une [carte réseau externe](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
+- Un ordinateur où [Hyper-V](/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
+- Une [carte réseau externe](/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
 - Un [abonnement Azure](https://azure.microsoft.com/free)
 - Une copie de Windows Server 2016
 - [Microsoft .NET Framework 4.7.1](https://www.microsoft.com/download/details.aspx?id=56115)
@@ -200,7 +200,7 @@ Vous devez à présent créer un locataire Azure AD pour synchroniser vos utili
 2. Cliquez sur l’**icône plus (+)** et recherchez **Azure Active Directory**.
 3. Dans la liste des résultats, sélectionnez sur **Azure Active Directory**.
 4. Sélectionnez **Create** (Créer).</br>
-![Créer](media/tutorial-single-forest/create1.png)</br>
+![Capture d’écran montrant la page Azure Active Directory dans le portail Azure.](media/tutorial-single-forest/create1.png)</br>
 5. Indiquez le **nom de l’organisation** avec le **nom de domaine initial**. Sélectionnez ensuite **Créer**. Votre annuaire est alors créé.
 6. Une fois cette opération terminée, cliquez sur **ce lien** pour gérer l’annuaire.
 
@@ -208,7 +208,7 @@ Vous devez à présent créer un locataire Azure AD pour synchroniser vos utili
 Maintenant que vous disposez d’un locataire Azure AD, vous allez créer un compte d’administrateur général.  Pour créer le compte d’administrateur général, procédez comme suit.
 
 1.  Sous **Gérer**, sélectionnez **Utilisateurs**.</br>
-![Créer](media/tutorial-single-forest/administrator1.png)</br>
+![Capture d’écran montrant le menu « Vue d’ensemble » avec l’option « Utilisateurs » sélectionnée.](media/tutorial-single-forest/administrator1.png)</br>
 2.  Sélectionnez **Tous les utilisateurs**, puis **+ Nouvel utilisateur**.
 3.  Renseignez un nom et un nom d’utilisateur pour cet utilisateur. Il s’agit de votre administrateur général pour le locataire. Vous devez également définir le **rôle d’annuaire** sur **Administrateur général**. Vous pouvez également afficher le mot de passe temporaire. Lorsque vous avez terminé, sélectionnez **Créer**.</br>
 ![Créer](media/tutorial-single-forest/administrator2.png)</br>
@@ -331,7 +331,7 @@ Maintenant que la machine virtuelle a été créée et renommée, et qu’elle d
 
     ```powershell
     # Filename:    3_InstallAD_CP.ps1
-    # Description: Creates an on-premises AD envrionment.  This is part of
+    # Description: Creates an on-premises AD environment.  This is part of
     #              the Azure AD Connect password hash sync tutorial.
     #
     # DISCLAIMER:

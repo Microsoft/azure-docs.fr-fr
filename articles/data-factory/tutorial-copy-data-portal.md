@@ -1,6 +1,6 @@
 ---
 title: Utiliser le portail Azure pour créer un pipeline de fabrique de données
-description: Ce didacticiel fournit des instructions détaillées sur l’utilisation d’un portail Azure pour créer une fabrique de données avec un pipeline. Le pipeline utilise l’activité de copie pour copier des données du Stockage Blob Azure vers une base de données Azure SQL.
+description: Ce didacticiel fournit des instructions détaillées sur l’utilisation d’un portail Azure pour créer une fabrique de données avec un pipeline. Le pipeline utilise l’activité de copie pour copier des données du stockage Blob Azure vers Azure SQL Database.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,23 +10,23 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019
-ms.date: 04/13/2020
+ms.date: 12/14/2020
 ms.author: jingwang
-ms.openlocfilehash: 655a98ef1b6b8b2d4086b472ee7ce4d67346e5ca
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 34eb34a86948a2b4c043d5d9b58b50958855e449
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418709"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508712"
 ---
-# <a name="copy-data-from-azure-blob-storage-to-a-sql-database-by-using-azure-data-factory"></a>Copier des données à partir d’un stockage Blob Azure vers une base de données SQL en utilisant Azure Data Factory
+# <a name="copy-data-from-azure-blob-storage-to-a-database-in-azure-sql-database-by-using-azure-data-factory"></a>Copier des données à partir d’un stockage Blob Azure vers une base de données dans Azure SQL Database en utilisant Azure Data Factory
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce didacticiel, vous créez une fabrique de données à l’aide de l’interface utilisateur (IU) d’Azure Data Factory. Le pipeline de cette fabrique de données copie les données du Stockage Blob Azure vers Azure SQL Database. Le modèle de configuration de ce didacticiel s’applique à la copie depuis un magasin de données de fichiers vers un magasin de données relationnelles. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs, consultez le tableau [Magasins de données pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
+Dans ce didacticiel, vous créez une fabrique de données à l’aide de l’interface utilisateur (IU) d’Azure Data Factory. Le pipeline de cette fabrique de données copie les données du stockage Blob Azure vers une base de données dans Azure SQL Database. Le modèle de configuration de ce didacticiel s’applique à la copie depuis un magasin de données de fichiers vers un magasin de données relationnelles. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs, consultez le tableau [Magasins de données pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
 > [!NOTE]
-> - Si vous débutez avec Data Factory, consultez [Présentation d’Azure Data Factory](introduction.md).
+> Si vous débutez avec Data Factory, consultez [Présentation d’Azure Data Factory](introduction.md).
 
 Dans ce tutoriel, vous effectuerez les étapes suivantes :
 
@@ -41,7 +41,7 @@ Dans ce tutoriel, vous effectuerez les étapes suivantes :
 ## <a name="prerequisites"></a>Prérequis
 * **Abonnement Azure**. Si vous n’avez pas d’abonnement Azure, créez un [compte Azure gratuit](https://azure.microsoft.com/free/) avant de commencer.
 * **Compte Azure Storage**. Vous utilisez le stockage Blob comme magasin de données *source*. Si vous ne possédez pas de compte de stockage, consultez l’article [Créer un compte de stockage Azure](../storage/common/storage-account-create.md) pour découvrir comment en créer un.
-* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données *récepteur*. Si vous ne disposez pas d’une base de données Azure SQL, consultez [Créer une base de données SQL](../sql-database/sql-database-get-started-portal.md) pour découvrir comment en créer une.
+* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données *récepteur*. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md) pour savoir comme en créer une.
 
 ### <a name="create-a-blob-and-a-sql-table"></a>Créer un objet blob et une table SQL
 
@@ -61,7 +61,7 @@ Dans ce tutoriel, vous effectuerez les étapes suivantes :
 
 #### <a name="create-a-sink-sql-table"></a>Créer une table SQL de récepteur
 
-1. Utilisez le script SQL suivant pour créer la table **dbo.emp** dans votre base de données SQL :
+1. Utilisez le script SQL suivant pour créer la table **dbo.emp** dans votre base de données :
 
     ```sql
     CREATE TABLE dbo.emp
@@ -75,31 +75,33 @@ Dans ce tutoriel, vous effectuerez les étapes suivantes :
     CREATE CLUSTERED INDEX IX_emp_ID ON dbo.emp (ID);
     ```
 
-1. Autorisez les services Azure à accéder au serveur SQL. Vérifiez que le paramètre **Autoriser l’accès aux services Azure** est **ACTIVÉ** pour votre serveur SQL afin que Data Factory puisse écrire des données sur votre serveur SQL. Pour vérifier et activer ce paramètre, accédez à votre serveur SQL Azure > Vue d’ensemble > Définir le pare-feu serveur > définissez l’option **Autoriser l’accès aux services Azure** sur **Activé**.
+1. Autorisez les services Azure à accéder au serveur SQL. Vérifiez que le paramètre **Autoriser l’accès aux services Azure** est **ACTIVÉ** pour votre serveur SQL afin que Data Factory puisse écrire des données sur votre serveur SQL. Pour vérifier et activer ce paramètre, accédez au serveur SQL logique > Vue d’ensemble > Définir le pare-feu serveur > définissez l’option **Autoriser l’accès aux services Azure** sur **Activé**.
 
 ## <a name="create-a-data-factory"></a>Créer une fabrique de données
 À cette étape, vous allez créer une fabrique de données et démarrer l’interface utilisateur de Data Factory afin de créer un pipeline dans la fabrique de données.
 
 1. Ouvrez **Microsoft Edge** ou **Google Chrome**. L’interface utilisateur de Data Factory n’est actuellement prise en charge que par les navigateurs web Microsoft Edge et Google Chrome.
-2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Analytics** > **Data Factory**.
-3. Sur la page **Nouvelle fabrique de données**, entrez **ADFTutorialDataFactory** dans le champ **Nom**.
+2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Intégration** > **Data Factory**.
+3. Dans la page **Créer une fabrique de données**, sous l’onglet **De base**, sélectionnez l’**Abonnement** Azure dans lequel vous voulez créer la fabrique de données.
+4. Pour **Groupe de ressources**, réalisez l’une des opérations suivantes :
+
+    a. Sélectionnez un groupe de ressources existant dans la liste déroulante.
+
+    b. Sélectionnez **Créer**, puis entrez le nom d’un nouveau groupe de ressources.
+    
+    Pour plus d’informations sur les groupes de ressources, consultez [Utilisation des groupes de ressources pour gérer vos ressources Azure](../azure-resource-manager/management/overview.md). 
+5. Sous **Région**, sélectionnez l’emplacement de la fabrique de données. Seuls les emplacements pris en charge sont affichés dans la liste déroulante. Les magasins de données (comme Stockage Azure et SQL Database) et les services de calcul (comme Azure HDInsight) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
+6. Sous **Nom**, entrez **ADFTutorialDataFactory**.
 
    Le nom de la fabrique de données Azure doit être un nom *global unique*. Si vous recevez un message d’erreur concernant la valeur du nom, saisissez un autre nom pour la fabrique de données. (par exemple, yournameADFTutorialDataFactory). Consultez l’article [Azure Data Factory - Règles d’affectation des noms](naming-rules.md) pour savoir comment nommer les règles Data Factory.
 
      ![Nouvelle fabrique de données](./media/doc-common-process/name-not-available-error.png)
-4. Sélectionnez l’**abonnement** Azure dans lequel vous voulez créer la fabrique de données.
-5. Pour **Groupe de ressources**, réalisez l’une des opérations suivantes :
 
-    a. Sélectionnez **Utiliser l’existant**, puis sélectionnez un groupe de ressources existant dans la liste déroulante.
-
-    b. Sélectionnez **Créer**, puis entrez le nom d’un groupe de ressources. 
-         
-    Pour plus d’informations sur les groupes de ressources, consultez [Utilisation des groupes de ressources pour gérer vos ressources Azure](../azure-resource-manager/management/overview.md). 
-6. Sous **Version**, sélectionnez **V2**.
-7. Sous **Emplacement**, sélectionnez l’emplacement de la fabrique de données. Seuls les emplacements pris en charge sont affichés dans la liste déroulante. Les magasins de données (comme Stockage Azure et SQL Database) et les services de calcul (comme Azure HDInsight) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
-8. Sélectionnez **Create** (Créer).
-9. Une fois la création terminée, vous voyez apparaître l’avis dans le centre de notifications. Sélectionnez **Accéder à la ressource** pour accéder à la page de la fabrique de données.
-10. Sélectionnez **Créer et surveiller** pour lancer l’interface utilisateur de Data Factory dans un onglet séparé.
+7. Sous **Version**, sélectionnez **V2**.
+8. Sélectionnez l’onglet **Configuration Git** dans la partie supérieure, puis cochez la case **Configurer Git plus tard**.
+9. Sélectionnez **Vérifier + créer**, puis **Créer** une fois la validation réussie.
+10. Une fois la création terminée, vous voyez apparaître l’avis dans le centre de notifications. Sélectionnez **Accéder à la ressource** pour accéder à la page de la fabrique de données.
+11. Sélectionnez **Créer et surveiller** pour lancer l’interface utilisateur d’Azure Data Factory dans un onglet séparé.
 
 
 ## <a name="create-a-pipeline"></a>Créer un pipeline
@@ -114,7 +116,8 @@ Dans ce didacticiel, vous commencez par créer le pipeline. Puis vous créez des
 1. Dans la page **Prise en main**, cliquez sur **Créer un pipeline**.
 
    ![Création d’un pipeline](./media/doc-common-process/get-started-page.png)
-1. Dans l’onglet **Général** du pipeline, entrez **CopyPipeline** pour le **Nom** du pipeline.
+
+1. Dans le volet Général, sous **Propriétés**, spécifiez **CopyPipeline** comme **Nom**. Réduisez ensuite le panneau en cliquant sur l’icône Propriétés en haut à droite.
 
 1. Dans la boîte à outils **Activités**, développez la catégorie **Déplacer et transformer**, puis faites glisser l’activité **Copier les données** de la boîte à outils vers l’aire du concepteur de pipeline. Spécifiez **CopyFromBlobToSql** pour le **Nom**.
 
@@ -123,8 +126,8 @@ Dans ce didacticiel, vous commencez par créer le pipeline. Puis vous créez des
 ### <a name="configure-source"></a>Configurer la source
 
 >[!TIP]
->Dans ce tutoriel, vous utilisez une *clé de compte* comme type d’authentification pour votre magasin de données source, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *URI SAS*, un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](https://docs.microsoft.com/azure/data-factory/connector-azure-blob-storage#linked-service-properties).
->Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](https://docs.microsoft.com/azure/data-factory/store-credentials-in-key-vault).
+>Dans ce tutoriel, vous utilisez une *clé de compte* comme type d’authentification pour votre magasin de données source, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *URI SAS*, un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](./connector-azure-blob-storage.md#linked-service-properties).
+>Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](./store-credentials-in-key-vault.md).
 
 1. Accédez à l’onglet **Source**. Sélectionnez **+ Nouveau** pour créer un jeu de données source.
 
@@ -146,14 +149,14 @@ Dans ce didacticiel, vous commencez par créer le pipeline. Puis vous créez des
 
 ### <a name="configure-sink"></a>Configurer le récepteur
 >[!TIP]
->Dans ce tutoriel, vous utilisez l’*authentification SQL* comme type d’authentification pour votre magasin de données récepteur, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](https://docs.microsoft.com/azure/data-factory/connector-azure-sql-database#linked-service-properties).
->Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](https://docs.microsoft.com/azure/data-factory/store-credentials-in-key-vault).
+>Dans ce tutoriel, vous utilisez l’*authentification SQL* comme type d’authentification pour votre magasin de données récepteur, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](./connector-azure-sql-database.md#linked-service-properties).
+>Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](./store-credentials-in-key-vault.md).
 
 1. Accédez à l’onglet **Récepteur**, puis sélectionnez **+ Nouveau** pour créer un jeu de données récepteur.
 
 1. Dans la boîte de dialogue **Nouveau jeu de données**, entrez « SQL » dans la zone de recherche pour filtrer les connecteurs, sélectionnez **Azure SQL Database**, puis **Continuer**. Dans ce didacticiel, vous copiez des données vers une base de données SQL.
 
-1. Dans la boîte de dialogue **Définir les propriétés**, entrez **OutputSqlDataset** comme nom. Dans la liste déroulante **Service lié**, sélectionnez **+ Nouveau**. Un jeu de données doit être associé à un service lié. Le service lié comporte la chaîne de connexion utilisée par Data Factory pour établir la connexion à la base de données SQL lors de l’exécution. Le jeu de données spécifie le conteneur, le dossier et le fichier (facultatif) dans lequel les données sont copiées.
+1. Dans la boîte de dialogue **Définir les propriétés**, entrez **OutputSqlDataset** comme nom. Dans la liste déroulante **Service lié**, sélectionnez **+ Nouveau**. Un jeu de données doit être associé à un service lié. Le service lié comporte la chaîne de connexion utilisée par Data Factory pour établir la connexion à SQL Database lors de l’exécution. Le jeu de données spécifie le conteneur, le dossier et le fichier (facultatif) dans lequel les données sont copiées.
 
 1. Dans la boîte de dialogue **Nouveau service lié (Azure SQL Database)** , effectuez les étapes suivantes :
 
@@ -161,7 +164,7 @@ Dans ce didacticiel, vous commencez par créer le pipeline. Puis vous créez des
 
     b. Sous **Nom du serveur**, sélectionnez votre instance SQL Server.
 
-    c. Sous **Nom de la base de données**, sélectionnez votre base de données SQL.
+    c. Sous **Nom de la base de données**, sélectionnez votre base de données.
 
     d. Sous **Nom d’utilisateur**, entrez le nom de l’utilisateur.
 
@@ -208,7 +211,7 @@ Dans cette étape, vous déclenchez manuellement le pipeline que vous avez publi
 
     [![Superviser des exécutions d’activités](./media/tutorial-copy-data-portal/view-activity-runs-inline-and-expended.png)](./media/tutorial-copy-data-portal/view-activity-runs-inline-and-expended.png#lightbox)
 
-1. Vérifiez que deux lignes supplémentaires sont ajoutées à la table **emp** dans la base de données SQL.
+1. Vérifiez que deux lignes supplémentaires sont ajoutées à la table **emp** dans la base de données.
 
 ## <a name="trigger-the-pipeline-on-a-schedule"></a>Déclencher le pipeline selon une planification
 Dans cette planification, vous créez un déclencheur de planificateur pour le pipeline. Le déclencheur exécute le pipeline selon la planification spécifiée, par exemple toutes les heures ou tous les jours. Ici, vous définissez le déclencheur pour s’exécuter toutes les minutes jusqu’à la date/heure de fin spécifiée.
@@ -223,19 +226,17 @@ Dans cette planification, vous créez un déclencheur de planificateur pour le p
 
     a. Sous **Nom**, entrez **RunEveryMinute**.
 
-    b. Sous **Fin**, sélectionnez **On Date**.
+    b. Mettez à jour la **date de début** de votre déclencheur. Si la date est antérieure aux date et heure actuelles, le déclencheur prend effet dès la publication de la modification. 
 
-    c. Sous **Fin à**, sélectionnez la liste déroulante.
+    c. Sous **Fuseau horaire**, sélectionnez la liste déroulante.
 
-    d. Sélectionnez le **jour actuel**. Par défaut, le jour de fin est défini sur le jour suivant.
+    d. Définissez la **périodicité** sur **Toutes les minutes**.
 
-    e. Mettez à jour la partie **Heure de fin** en choisissant quelques minutes après la date/heure actuelle. Le déclencheur n’est activé qu’après avoir publié les modifications. Si vous le définissez à quelques minutes d’intervalle mais ne publiez pas, vous ne voyez pas d’exécution du déclencheur.
+    e. Cochez la case **Spécifier une date de fin** et mettez à jour la partie **Fin le** pour qu’elle se situe quelques minutes après les date et heure actuelles. Le déclencheur n’est activé qu’après avoir publié les modifications. Si vous le définissez à quelques minutes d’intervalle mais ne publiez pas, vous ne voyez pas d’exécution du déclencheur.
 
-    f. Sélectionnez **OK**.
+    f. Pour l’option **Activé**, sélectionnez **Oui**.
 
-    g. Pour l’option **Activé**, sélectionnez **Oui**.
-
-    h. Sélectionnez **OK**.
+    g. Sélectionnez **OK**.
 
     > [!IMPORTANT]
     > Chaque exécution de pipeline coûte de l’argent. Il est donc important de définir correctement la date de fin.

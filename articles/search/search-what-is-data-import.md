@@ -7,21 +7,25 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: cc3f38e9bb96ce76263a3124f8bfdc49dc638bfd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/05/2020
+ms.openlocfilehash: b57d55e91918ba612ad42acd5e6059ae0dbd0090
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236785"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93422448"
 ---
 # <a name="data-import-overview---azure-cognitive-search"></a>Vue d’ensemble de l’importation des données - Recherche cognitive Azure
 
 Dans Recherche cognitive Azure, les requêtes s’exécutent sur le contenu chargé et enregistré dans un [index de recherche](search-what-is-an-index.md). Cet article examine les deux méthodes de base pour remplir un index : *envoyer* (push) les données dans l’index par programme ou pointer un [indexeur Recherche cognitive Azure](search-indexer-overview.md) vers une source de données prise en charge pour *extraire* les données.
 
-Ces deux approches ont pour objectif de *charger des données* depuis une source de données externe vers un index Recherche cognitive Azure. Recherche cognitive Azure vous permet de créer un index vide, mais ce dernier ne pourra être interrogé qu’après envoi (push) ou extraction des données.
+Ces deux approches ont pour objectif de charger des données depuis une source de données externe vers un index Recherche cognitive Azure. Recherche cognitive Azure vous permet de créer un index vide, mais ce dernier ne pourra être interrogé qu’après envoi (push) ou extraction des données.
+
+> [!NOTE]
+> Si l’[enrichissement en IA](cognitive-search-concept-intro.md) est une condition de la solution, vous devez utiliser le modèle d’extraction (indexeurs) pour charger un index. Le traitement externe est pris en charge uniquement par le biais de compétences liées à un indexeur.
 
 ## <a name="pushing-data-to-an-index"></a>Envoyer des données à un index
+
 Le modèle d’envoi (push), utilisé pour envoyer vos données à Recherche cognitive Azure par programme, constitue l’approche la plus flexible. Tout d’abord, il n’y a pas de restrictions sur le type de source de données. Tout jeu de données composé de documents JSON peut être envoyé (push) à un index Recherche cognitive Azure, en supposant que chaque document dans le jeu de données possède des champs mappés sur des champs définis dans votre schéma d’index. En second lieu, il n’y a aucune restriction sur la fréquence d’exécution. Vous pouvez transmettre des modifications à un index aussi souvent que vous le souhaitez. Pour les applications ayant des exigences à très faible latence (par exemple, si vous devez synchroniser les opérations de recherche avec les bases de données d’inventaire dynamiques), le modèle d’émission est la seule option.
 
 Cette approche est plus flexible que le modèle d’extraction, car vous pouvez charger des documents individuellement ou par lots (jusqu’à 1 000 par lot ou 16 Mo, quelle que soit la limite atteinte en premier). Le modèle d’envoi (push) vous permet également de charger des documents dans Recherche cognitive Azure indépendamment de l’emplacement des données.
@@ -30,12 +34,12 @@ Cette approche est plus flexible que le modèle d’extraction, car vous pouvez 
 
 Vous pouvez utiliser les API suivantes pour charger un ou plusieurs documents dans un index :
 
-+ [Ajout, mise à jour ou suppression de documents (API REST)](https://docs.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents)
-+ [classe indexAction](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexaction?view=azure-dotnet) ou [classe indexBatch](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexbatch?view=azure-dotnet) 
++ [Ajout, mise à jour ou suppression de documents (API REST)](/rest/api/searchservice/AddUpdate-or-Delete-Documents)
++ [Classe IndexDocumentsAction](/dotnet/api/azure.search.documents.models.indexdocumentsaction) ou [classe IndexDocumentsBatch](/dotnet/api/azure.search.documents.models.indexdocumentsbatch) 
 
 Il n’existe actuellement aucune prise en charge de l’outil de diffusion de données via le portail.
 
-Pour une présentation de chaque méthode, consultez [Guide de démarrage rapide : Créer un index Recherche cognitive Azure à l’aide de PowerShell](search-create-index-rest-api.md) ou [Guide de démarrage rapide C# : Créer un index Recherche cognitive Azure à l’aide du Kit de développement logiciel (SDK) .NET](search-get-started-dotnet.md).
+Pour une présentation de chaque méthode, consultez [Guide de démarrage rapide : Créer un index Recherche cognitive Azure à l’aide de PowerShell](./search-get-started-powershell.md) ou [Guide de démarrage rapide C# : Créer un index Recherche cognitive Azure à l’aide du Kit de développement logiciel (SDK) .NET](search-get-started-dotnet.md).
 
 <a name="indexing-actions"></a>
 
@@ -55,34 +59,34 @@ Dans le kit de développement logiciel (SDK) .NET, empaquetez vos données dans 
 | `mergeOrUpload` |Cette action est similaire à celle d’une action `merge` s’il existe déjà dans l’index un document comportant la clé spécifiée. Dans le cas contraire, elle exécutera une action `upload` avec un nouveau document. |une clé, ainsi que tout autre champ que vous souhaitez définir |- |
 | `delete` |Cette action supprime de l’index le document spécifié. |clé uniquement |Tous les champs que vous spécifiez en dehors du champ de clé sont ignorés. Si vous souhaitez supprimer un champ individuel dans un document, utilisez plutôt `merge` et définissez simplement le champ de manière explicite sur la valeur null. |
 
-## <a name="decide-which-indexing-action-to-use"></a>Déterminer l’action d’indexation à utiliser
-Pour importer des données à l’aide du kit de développement logiciel (SDK) .NET, (upload, merge, delete et mergeOrUpload). Selon le type d’action que vous allez choisir, seuls certains champs doivent être inclus dans chaque document :
-
-
 ### <a name="formulate-your-query"></a>Formuler votre requête
-Deux méthodes permettent d’effectuer une [recherche dans un index à l’aide de l’API REST](https://docs.microsoft.com/rest/api/searchservice/Search-Documents). L’une consiste à émettre une requête HTTP POST, dans laquelle vos paramètres de requête sont définis dans un objet JSON contenu dans le corps de la requête. L’autre consiste à émettre une requête HTTP GET, dans laquelle vos paramètres de requête seront définis à l’intérieur de l’URL de requête. Notez que les limites en matière de taille des paramètres de requête sont [plus souples](https://docs.microsoft.com/rest/api/searchservice/Search-Documents) pour la méthode POST que pour la méthode GET. Pour cette raison, nous vous recommandons d’utiliser POST, à moins que la situation justifie l’utilisation de GET.
 
-Pour les méthodes POST et GET, vous devez indiquer dans l’URL de la demande le *nom de votre service*, le *nom de l’index* ainsi que la *version d’API* appropriée (la version actuelle de l’API est celle du `2019-05-06` au moment de la publication de ce document). Pour la méthode GET, vous renseignez les paramètres de requête au niveau de la *chaîne de requête* à la fin de l’URL. Voici le format URL à utiliser :
+Deux méthodes permettent d’effectuer une [recherche dans un index à l’aide de l’API REST](/rest/api/searchservice/Search-Documents). L’une consiste à émettre une requête HTTP POST, dans laquelle vos paramètres de requête sont définis dans un objet JSON contenu dans le corps de la requête. L’autre consiste à émettre une requête HTTP GET, dans laquelle vos paramètres de requête seront définis à l’intérieur de l’URL de requête. Notez que les limites en matière de taille des paramètres de requête sont [plus souples](/rest/api/searchservice/Search-Documents) pour la méthode POST que pour la méthode GET. Pour cette raison, nous vous recommandons d’utiliser POST, à moins que la situation justifie l’utilisation de GET.
 
+Pour POST et GET, vous devez fournir votre *nom de service* , *nom d’index* et une *version de l’API* dans l’URL de la demande. 
+
+Pour la méthode GET, vous renseignez les paramètres de requête au niveau de la *chaîne de requête* à la fin de l’URL. Voici le format URL à utiliser :
+
+```http
     https://[service name].search.windows.net/indexes/[index name]/docs?[query string]&api-version=2019-05-06
+```
 
-La méthode POST suit un format identique, mais seule la version d’API figure dans les paramètres de chaîne de requête.
-
+La méthode POST suit un format identique, mais seule `api-version` dans les paramètres de chaîne de requête.
 
 ## <a name="pulling-data-into-an-index"></a>Extraction de données dans un index
-Le modèle d’extraction analyse une source de données prise en charge et charge automatiquement les données dans votre index. Dans Recherche cognitive Azure, cette fonctionnalité est implémentée via des *indexeurs*, actuellement disponibles pour ces plateformes :
+
+Le modèle d’extraction analyse une source de données prise en charge et charge automatiquement les données dans votre index. Dans Recherche cognitive Azure, cette fonctionnalité est implémentée via des *indexeurs* , actuellement disponibles pour ces plateformes :
 
 + [Stockage Blob](search-howto-indexing-azure-blob-storage.md)
 + [Stockage Table](search-howto-indexing-azure-tables.md)
-+ [Azure Cosmos DB](https://aka.ms/documentdb-search-indexer)
-+ [Base de données Azure SQL et SQL Server sur les machines virtuelles Azure](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
++ [Azure Cosmos DB](search-howto-index-cosmosdb.md)
++ [Azure SQL Database, SQL Managed Instance et SQL Server sur des machines virtuelles Azure](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
 
-Les indexeurs connectent un index à une source de données (généralement une table, une vue ou une structure équivalente) et mappent les champs source aux champs équivalents de l’index. Pendant l’exécution, l’ensemble de lignes est automatiquement transformé en JSON et chargé dans l’index spécifié. Tous les indexeurs prennent en charge la planification de sorte que vous puissiez spécifier la fréquence à laquelle les données sont à actualiser. La plupart des indexeurs fournissent le suivi des modifications si la source de données le prend en charge. En suivant les modifications et les suppressions effectuées dans les documents existants, et en reconnaissant les nouveaux documents, les indexeurs suppriment la nécessité de gérer activement les données de votre index. 
-
+Les indexeurs connectent un index à une source de données (généralement une table, une vue ou une structure équivalente) et mappent les champs source aux champs équivalents de l’index. Pendant l’exécution, l’ensemble de lignes est automatiquement transformé en JSON et chargé dans l’index spécifié. Tous les indexeurs prennent en charge la planification de sorte que vous puissiez spécifier la fréquence à laquelle les données sont à actualiser. La plupart des indexeurs fournissent le suivi des modifications si la source de données le prend en charge. En suivant les modifications et les suppressions effectuées dans les documents existants, et en reconnaissant les nouveaux documents, les indexeurs suppriment la nécessité de gérer activement les données de votre index.
 
 ### <a name="how-to-pull-data-into-an-azure-cognitive-search-index"></a>Comment extraire des données dans un index Recherche cognitive Azure
 
-La fonctionnalité de l’indexeur est exposée dans le [Portail Azure](search-import-data-portal.md), ainsi que dans [l’API REST](/rest/api/searchservice/Indexer-operations) et le [Kit de développement logiciel (SDK) .NET](/dotnet/api/microsoft.azure.search.indexersoperationsextensions). 
+La fonctionnalité de l’indexeur est exposée dans le [Portail Azure](search-import-data-portal.md), ainsi que dans [l’API REST](/rest/api/searchservice/Indexer-operations) et le [Kit de développement logiciel (SDK) .NET](/dotnet/api/azure.search.documents.indexes.searchindexerclient).
 
 Grâce au portail, Recherche cognitive Azure peut générer un schéma d’index par défaut pour vous en lisant les métadonnées du jeu de données source. Vous pouvez modifier l’index généré jusqu’à ce que l’index soit traité, après quoi les seules modifications de schéma autorisées sont celles qui ne nécessitent pas la réindexation. Si les modifications que vous souhaitez apporter impactent directement le schéma, vous devez reconstruire l’index. 
 

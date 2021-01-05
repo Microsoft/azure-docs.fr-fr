@@ -1,15 +1,15 @@
 ---
 title: Bien démarrer avec PowerShell
 description: Brève présentation des applets de commande Azure PowerShell à utiliser pour gérer les ressources Batch.
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/15/2019
-ms.custom: seodec18
-ms.openlocfilehash: b768fac7fa6fe0f4821a4fbaf5fa11414b10f81d
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.custom: seodec18, devx-track-azurepowershell
+ms.openlocfilehash: 3c152733ee3a75732d119db16f7db7c266740fdb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82995316"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079844"
 ---
 # <a name="manage-batch-resources-with-powershell-cmdlets"></a>Gérer les ressources Batch avec les applets de commande PowerShell
 
@@ -21,7 +21,7 @@ Cet article est basé sur les applets de commande du module Az Batch 1.0.0. Nou
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Installez and configurez le module Azure PowerShell](/powershell/azure/overview). Pour installer un module Azure Batch spécifique, comme un module en pré-mise en production, consultez [PowerShell Gallery](https://www.powershellgallery.com/packages/Az.Batch/1.0.0).
+* [Installez and configurez le module Azure PowerShell](/powershell/azure/). Pour installer un module Azure Batch spécifique, comme un module en pré-mise en production, consultez [PowerShell Gallery](https://www.powershellgallery.com/packages/Az.Batch/1.0.0).
 
 * Exécutez l’applet de commande **Connect-AzAccount** pour vous connecter à votre abonnement (les applets de commande Azure Batch font partie du module Azure Resource Manager) :
 
@@ -114,7 +114,7 @@ Si vous utilisez plusieurs de ces applets de commande, en plus de transmettre un
 
 ### <a name="create-a-batch-pool"></a>Créer un pool Batch
 
-Lors de la création ou de la mise à jour d’un pool Batch, sélectionnez une configuration de services cloud ou une configuration de machine virtuelle correspondant au système d’exploitation dans les nœuds de calcul (consultez la [vue d’ensemble des fonctionnalités de Batch](batch-api-basics.md#pool)). En spécifiant la configuration des services cloud, vos nœuds de calcul sont mis en image avec l’une des [versions de système d’exploitation invité d’Azure](../cloud-services/cloud-services-guestos-update-matrix.md#releases). En spécifiant la configuration de la machine virtuelle, vous pouvez spécifier l’image d’une des machines virtuelles Linux ou Windows qui figurent dans la [Place de marché de machines virtuelles Azure][vm_marketplace], ou bien fournir une image personnalisée que vous aurez préparée.
+Lors de la création ou de la mise à jour d’un pool Batch, sélectionnez une configuration de services cloud ou une configuration de machine virtuelle correspondant au système d’exploitation dans les nœuds de calcul (voir [Nœuds et pools](nodes-and-pools.md#configurations)). En spécifiant la configuration des services cloud, vos nœuds de calcul sont mis en image avec l’une des [versions de système d’exploitation invité d’Azure](../cloud-services/cloud-services-guestos-update-matrix.md#releases). En spécifiant la configuration de la machine virtuelle, vous pouvez spécifier l’image d’une des machines virtuelles Linux ou Windows qui figurent dans la [Place de marché de machines virtuelles Azure][vm_marketplace], ou bien fournir une image personnalisée que vous aurez préparée.
 
 Si vous exécutez **New-AzBatchPool**, passez les paramètres du système d’exploitation dans un objet PSCloudServiceConfiguration ou PSVirtualMachineConfiguration. Par exemple, l’extrait de code suivant crée un pool Batch avec des nœuds de calcul de taille Standard_A1 dans la configuration de machine virtuelle, dont l’image est créée avec Ubuntu Server 18.04-LTS. Ici, le paramètre **VirtualMachineConfiguration** spécifie la variable *$configuration* comme objet PSVirtualMachineConfiguration. Le paramètre **BatchContext** spécifie une variable *$context* définie au préalable en tant qu’objet BatchAccountContext.
 
@@ -247,9 +247,10 @@ $appPackageReference.ApplicationId = "MyBatchApplication"
 $appPackageReference.Version = "1.0"
 ```
 
-Créez maintenant le pool et spécifiez l’objet de référence du package comme argument dans l’option `ApplicationPackageReferences` :
+Créez maintenant la configuration et le pool. Cet exemple utilise le paramètre **CloudServiceConfiguration** avec un objet de type `PSCloudServiceConfiguration` initialisé dans `$configuration`, qui définit **OSFamily** sur `6` pour « Windows Server 2019 » et **OSVersion** sur `*`. Spécifiez l’objet de référence du package comme argument dans l’option `ApplicationPackageReferences` :
 
 ```powershell
+$configuration = New-Object -TypeName "Microsoft.Azure.Commands.Batch.Models.PSCloudServiceConfiguration" -ArgumentList @(6,"*")  # 6 = OSFamily 'Windows Server 2019'
 New-AzBatchPool -Id "PoolWithAppPackage" -VirtualMachineSize "Small" -CloudServiceConfiguration $configuration -BatchContext $context -ApplicationPackageReferences $appPackageReference
 ```
 

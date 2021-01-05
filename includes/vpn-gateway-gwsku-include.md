@@ -9,11 +9,11 @@ ms.date: 11/12/2019
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 8087025810214f3edbb74e628698eb69558f3500
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74085237"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010807"
 ---
 Lorsque vous créez une passerelle de réseau virtuel, vous devez spécifier la référence SKU de passerelle que vous voulez utiliser. Sélectionnez la référence SKU qui répond à vos besoins en fonction des types de charges de travail, des débits, des fonctionnalités et des contrats de niveau de service. Pour connaître les références SKU des passerelles de réseau virtuel dans les Zones de disponibilité Azure, voir [Références SKU des passerelles pour les Zones de disponibilité Azure](../articles/vpn-gateway/about-zone-redundant-vnet-gateways.md).
 

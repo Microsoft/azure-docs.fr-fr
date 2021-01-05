@@ -1,22 +1,22 @@
 ---
 title: 'Modèle : Déployer des ressources avec une définition de stratégie'
-description: Ce modèle Azure Policy fournit un exemple de déploiement de ressources à l’aide d’une définition de stratégie.
-ms.date: 01/31/2020
+description: Ce modèle Azure Policy fournit un exemple de déploiement de ressources à l’aide d’une définition de stratégie deployIfNotExists.
+ms.date: 08/17/2020
 ms.topic: sample
-ms.openlocfilehash: a8b6528afbd21c7c667e48965574c9b48c403654
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0a9eec54954b8963f38b3f19a0d0cabffe1092e5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77169987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89649975"
 ---
 # <a name="azure-policy-pattern-deploy-resources"></a>Modèle Azure Policy : Déployer des ressources
 
-L’effet [deployIfNotExists](../concepts/effects.md#deployifnotexists) permet de déployer un [modèle Azure Resource Manager](../../../azure-resource-manager/templates/overview.md) lors de la création ou de la mise à jour d’une ressource qui n’est pas conforme. Cette approche peut être préférable à l’utilisation de l’effet [deny](../concepts/effects.md#deny), car elle permet de continuer à créer des ressources tout en garantissant que les modifications nécessaires sont apportées afin de les rendre conformes.
+L’effet [deployIfNotExists](../concepts/effects.md#deployifnotexists) permet de déployer un [modèle Azure Resource Manager](../../../azure-resource-manager/templates/overview.md) (modèle ARM) lors de la création ou de la mise à jour d’une ressource qui n’est pas conforme. Cette approche peut être préférable à l’utilisation de l’effet [deny](../concepts/effects.md#deny), car elle permet de continuer à créer des ressources tout en garantissant que les modifications nécessaires sont apportées afin de les rendre conformes.
 
 ## <a name="sample-policy-definition"></a>Exemple de définition de stratégie
 
-Cette définition de stratégie utilise l’opérateur **field** pour évaluer le `type` de la ressource créée ou mise à jour. Quand cette ressource est un _Microsoft.Network/virtualNetworks_, la stratégie recherche un observateur réseau à l’emplacement de la ressource nouvelle ou mise à jour. Si aucun observateur réseau correspondant n’est trouvé, le modèle Resource Manager est déployé pour créer la ressource manquante.
+Cette définition de stratégie utilise l’opérateur **field** pour évaluer le `type` de la ressource créée ou mise à jour. Quand cette ressource est un _Microsoft.Network/virtualNetworks_, la stratégie recherche un observateur réseau à l’emplacement de la ressource nouvelle ou mise à jour. Si aucun observateur réseau correspondant n’est trouvé, le modèle ARM est déployé pour créer la ressource manquante.
 
 :::code language="json" source="~/policy-templates/patterns/pattern-deploy-resources.json":::
 

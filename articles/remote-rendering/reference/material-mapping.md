@@ -5,12 +5,12 @@ author: jakrams
 ms.author: jakras
 ms.date: 02/11/2020
 ms.topic: reference
-ms.openlocfilehash: ce287ed94066aac4b900d2ddb02579a54b8550f6
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 8313243bf680ea1a1d63f2719b647149a04935a9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80678951"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024042"
 ---
 # <a name="material-mapping-for-model-formats"></a>Mappage de matériaux pour les formats de modèle
 
@@ -22,7 +22,7 @@ Cet article répertorie les mappages précis utilisés pour convertir les matér
 
 Presque tous les éléments de la spécification glTF 2.0 sont pris en charge dans Azure Remote Rendering, à l’exception de *EmissiveFactor* et *EmissiveTexture*.
 
-Le tableau suivant montre le mappage :
+La table qui suit affiche le mappage :
 
 | glTF | Azure Remote Rendering |
 |:-------------------|:--------------------------|
@@ -54,7 +54,6 @@ Les textures incorporées dans les fichiers *\*.bin* ou *\*.glb* sont prises en 
 En plus de l’ensemble de fonctionnalités de base, Azure Remote Rendering prend en charge les extensions glTF suivantes :
 
 * [MSFT_packing_occlusionRoughnessMetallic](https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/MSFT_packing_occlusionRoughnessMetallic/README.md)
-* [MSFT_texture_dds](https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/MSFT_texture_dds/README.md)
 * [KHR_materials_unlit](https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_materials_unlit/README.md) : Correspond aux [matériaux couleur](../overview/features/color-materials.md). Pour les matériaux *émissifs*, il est recommandé d’utiliser cette extension.
 * [KHR_materials_pbrSpecularGlossiness](https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness/README.md) : Au lieu de textures d’ébauche métallique, vous pouvez fournir des textures diffuse-specular-glossiness. L’implémentation d’Azure Remote Rendering suit directement les formules de conversion de l’extension.
 
@@ -114,7 +113,7 @@ La formule de luminosité est décrite dans cette [spécification](http://www.it
 
 La valeur `Roughness` est calculée à partir des `Specular` et `ShininessExponent` à l’aide de [cette formule](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf). La formule est une approximation de roughness effectuée à partir de l’exposant spéculaire Phong :
 
-```Cpp
+```cpp
 Roughness = sqrt(2 / (ShininessExponent * SpecularIntensity + 2))
 ```
 
@@ -125,6 +124,7 @@ La valeur `Metalness` est calculée à partir des valeurs de `Diffuse` et de `Sp
 L’idée ici est que nous résolvons l’équation : Ax<sup>2</sup> + Bx + C = 0.
 Fondamentalement, les surfaces diélectriques réfléchissent environ 4 % de la lumière de manière spéculaire, le reste l’étant de manière diffuse. Les surfaces métalliques ne reflètent aucune lumière de manière diffuse, mais toutes de manière spéculaire.
 Cette formule présente quelques inconvénients, car il n’existe aucun moyen de faire la distinction entre des surfaces brillantes métalliques et plastiques. La plupart du temps, nous supposons que la surface a des propriétés métalliques. Par conséquent, il peut arriver que des surfaces en plastique/caoutchouc brillants ne présentent pas l’aspect prévu.
+
 ```cpp
 dielectricSpecularReflectance = 0.04
 oneMinusSpecularStrength = 1 - SpecularStrength
@@ -144,7 +144,7 @@ Metalness = clamp(value, 0.0, 1.0);
 Comme décrit dans la section Metalness, les surfaces diélectriques reflètent environ 4 % de la lumière.  
 L’idée ici est d’effectuer une interpolation linéaire entre les couleurs `Dielectric` et `Metal` en utilisant la valeur `Metalness` en tant que facteur. Si la valeur de metalness est `0.0`, selon la valeur de specular, soit il s’agit d’une couleur foncée (si la valeur de specular est élevée), soit la valeur de diffuse ne change pas (si aucune valeur de specular n’est présente). Si la valeur de metalness est élevée, la couleur diffuse disparaît en faveur d’une couleur spéculaire.
 
-```Cpp
+```cpp
 dielectricSpecularReflectance = 0.04
 oneMinusSpecularStrength = 1 - SpecularStrength
 

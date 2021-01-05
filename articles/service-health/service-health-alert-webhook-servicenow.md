@@ -3,12 +3,13 @@ title: Envoyer des alertes sur l’intégrité de service avec ServiceNow
 description: Obtenir des notifications personnalisées sur les événements d’intégrité du service sur votre instance ServiceNow.
 ms.topic: conceptual
 ms.date: 06/10/2019
-ms.openlocfilehash: 3daae05aabff571010d043cf5602847e95ea29f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: f120e9d950cc349d0331a476dbfbfe9d7e599f0c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77654101"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000638"
 ---
 # <a name="send-azure-service-health-alerts-with-servicenow-using-webhooks"></a>Envoyer des alertes Azure Service Health avec ServiceNow à l’aide de webhooks
 
@@ -140,13 +141,14 @@ Cet article vous explique comment intégrer les alertes sur l’intégrité du s
      ![Chemin d’accès à l’API de base dans ServiceNow](./media/webhook-alerts/servicenow-base-api-path.png)
 
 1.  Votre URL d’intégration complète ressemble à ce qui suit :
-        
-         https://<yourInstanceName>.service-now.com/<baseApiPath>?apiKey=<secret>
 
+    ```http
+    https://<yourInstanceName>.service-now.com/<baseApiPath>?apiKey=<secret>
+    ```
 
 ## <a name="create-an-alert-using-servicenow-in-the-azure-portal"></a>Créer une alerte à l’aide de ServiceNow dans le portail Azure
 ### <a name="for-a-new-action-group"></a>Pour un nouveau groupe d’action :
-1. Suivez les étapes 1 à 8 de [cet article](../azure-monitor/platform/alerts-activity-log-service-notifications.md) pour créer une alerte avec un nouveau groupe d’actions.
+1. Suivez les étapes 1 à 8 de [cet article](./alerts-activity-log-service-notifications-portal.md) pour créer une alerte avec un nouveau groupe d’actions.
 
 1. À définir dans la liste des **Actions** :
 
@@ -194,5 +196,5 @@ Cet article vous explique comment intégrer les alertes sur l’intégrité du s
 ## <a name="next-steps"></a>Étapes suivantes
 - Découvrez comment [configurer des notifications de Webhook pour les systèmes de gestion de problème existants](service-health-alert-webhook-guide.md).
 - Consultez le [schéma webhook des alertes de journal d’activité](../azure-monitor/platform/activity-log-alerts-webhook.md). 
-- En savoir plus sur les [notifications sur l’intégrité du service](../azure-monitor/platform/service-notifications.md).
+- En savoir plus sur les [notifications sur l’intégrité du service](./service-notifications.md).
 - En savoir plus sur les [groupes d’actions](../azure-monitor/platform/action-groups.md).

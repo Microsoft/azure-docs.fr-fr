@@ -14,21 +14,23 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 95d8d819aa1b418b4a7ec736cef64cb989f7e37b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a541e1b068ec3667120bbb31e65ca7bc35febadb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74885634"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89265913"
 ---
 # <a name="streaming-endpoints-overview"></a>Vue d’ensemble des points de terminaison de streaming  
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Dans Microsoft Azure Media Services (AMS), un **point de terminaison de streaming** représente un service de streaming qui peut fournir du contenu directement à une application de lecteur cliente ou à un réseau de distribution de contenu (CDN) pour être redistribué. Media Services fournit également une intégration transparente au CDN Azure. Le flux sortant d’un service StreamingEndpoint peut être un flux dynamique, une vidéo à la demande ou un téléchargement progressif de votre ressource dans votre compte Media Services. Chaque compte Azure Media Services comprend une valeur de point de terminaison de streaming par défaut. Vous pouvez créer d’autres points de terminaison de streaming sous votre compte. Il existe deux versions du point de terminaison de streaming : 1.0 et 2.0. À compter du 10 janvier 2017, les nouveaux comptes AMS incluront la version 2.0 du point de terminaison de streaming **par défaut**. Les autres points de terminaison que vous ajoutez à ce compte seront également de la version 2.0. Cette modification n’aura aucune incidence sur les comptes existants ; les points de terminaison de streaming existants auront la version 1.0 et pourront être mis à niveau vers la version 2.0. Avec cette modification, il y aura des changements de comportement, de facturation et de fonctionnalités (pour plus d’informations, consultez la section **Types et versions de streaming** ci-dessous).
 
-Azure Media Services a ajouté les propriétés suivantes à l’entité de point de terminaison de streaming : **CdnProvider**, **CdnProfile**, **StreamingEndpointVersion**. Pour une présentation détaillée de ces propriétés, consultez [ceci](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint). 
+Azure Media Services a ajouté les propriétés suivantes à l’entité de point de terminaison de streaming : **CdnProvider**, **CdnProfile**, **StreamingEndpointVersion**. Pour une présentation détaillée de ces propriétés, consultez [ceci](/rest/api/media/operations/streamingendpoint). 
 
 Lorsque vous créez un compte Azure Media Services, un point de terminaison de streaming par défaut est créé pour vous dans l’état **Arrêté**. Il n’est pas possible de supprimer le point de terminaison de streaming par défaut. En fonction de la disponibilité d’Azure CDN dans la région ciblée, le point de terminaison de streaming par défaut qui vient d’être créé comprendra également l’intégration du fournisseur CDN « StandardVerizon ». 
                 
@@ -122,4 +124,3 @@ Consultez les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

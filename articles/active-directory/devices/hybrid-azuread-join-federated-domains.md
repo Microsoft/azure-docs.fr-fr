@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: devices
 ms.topic: tutorial
-ms.date: 05/14/2019
+ms.date: 05/20/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1a61c89199c89f09b5cc0e553dbbf48655ad1b6a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cc2f7d3ce5f8329038fea4ecbb5242015fb3fd0d
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222966"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96860131"
 ---
 # <a name="tutorial-configure-hybrid-azure-active-directory-join-for-federated-domains"></a>Tutoriel : Configurer la jointure hybride Azure Active Directory pour des domaines fédérés
 
@@ -26,7 +26,7 @@ Comme n’importe quel utilisateur de votre organisation, un appareil est une id
 - jointure Azure AD hybride ;
 - inscription Azure AD.
 
-En intégrant vos appareils à Azure AD, vous optimisez la productivité des utilisateurs via SSO (authentification unique) parmi vos ressources cloud et locales. En parallèle, vous pouvez sécuriser l’accès à vos ressources cloud et locales à l’aide de l’[accès conditionnel](../active-directory-conditional-access-azure-portal.md).
+En intégrant vos appareils à Azure AD, vous optimisez la productivité des utilisateurs via SSO (authentification unique) parmi vos ressources cloud et locales. En parallèle, vous pouvez sécuriser l’accès à vos ressources cloud et locales à l’aide de l’[accès conditionnel](../conditional-access/howto-conditional-access-policy-compliant-device.md).
 
 Un environnement fédéré doit disposer d’un fournisseur d’identité qui prend en charge les exigences suivantes : Si vous disposez d’un environnement fédéré utilisant les services de fédération Active Directory (AD FS), les exigences ci-dessous sont déjà prises en charge.
 
@@ -81,11 +81,14 @@ Pour permettre le bon fonctionnement de la jonction Azure AD Hybride, les appar
 - Le STS (service d’émission de jeton de sécurité) de votre organisation (pour les domaines fédérés)
 - `https://autologon.microsoftazuread-sso.com` (si vous utilisez ou prévoyez d’utiliser l’authentification unique fluide)
 
+> [!WARNING]
+> Si votre organisation utilise des serveurs proxy qui interceptent le trafic SSL dans des scénarios de protection contre la perte de données ou de restrictions de locataire Azure AD par exemple, veillez à exclure le trafic à destination de « https://device.login.microsoftonline.com  » de l’inspection TLS. Faute d’exclure « https://device.login.microsoftonline.com  », l’authentification par certificat client peut être sujette à des interférences, ce qui occasionne des problèmes d’inscription d’appareil et d’accès conditionnel en fonction de l’appareil.
+
 À partir de Windows 10 1803, en cas d’échec de la jonction Azure AD Hybride instantanée pour un environnement fédéré utilisant AD FS, nous utilisons Azure AD Connect afin de synchroniser l’objet ordinateur dans Azure AD, qui est ensuite utilisé pour effectuer l’inscription de l’appareil à une jonction Azure AD Hybride. Vérifiez qu’Azure AD Connect a synchronisé les objets ordinateur des appareils qui doivent devenir membres d’Azure AD Hybride. Si les objets ordinateur appartiennent à des unités d’organisation spécifiques, vous devez également configurer ces unités d’organisation pour qu’elles se synchronisent dans Azure AD Connect. Pour en savoir plus sur la synchronisation des objets ordinateur à l’aide d’Azure AD Connect, consultez [Configurer le filtrage à l’aide d’Azure AD Connect](../hybrid/how-to-connect-sync-configure-filtering.md#organizational-unitbased-filtering).
 
 Si votre organisation nécessite un accès à Internet via un proxy sortant, Microsoft recommande d’[implémenter le protocole WPAD (Web Proxy AutoDiscovery)](/previous-versions/tn-archive/cc995261(v%3dtechnet.10)) pour permettre aux ordinateurs Windows 10 de s’inscrire en tant qu’appareils auprès d’Azure AD. Si vous rencontrez des problèmes pour configurer et gérer le protocole WPAD, consultez la [résolution des problèmes de détection automatique](/previous-versions/tn-archive/cc302643(v=technet.10)). 
 
-Si vous n’utilisez pas WPAD et si vous souhaitez configurer des paramètres de proxy sur votre ordinateur, vous pouvez le faire à partir de Windows 10 1709. Pour plus d’informations, consultez [Configurer les paramètres WinHTTP à l’aide d’un GPO (objet de stratégie de groupe)](https://blogs.technet.microsoft.com/netgeeks/2018/06/19/winhttp-proxy-settings-deployed-by-gpo/).
+Si vous n’utilisez pas WPAD et si vous souhaitez configurer des paramètres de proxy sur votre ordinateur, vous pouvez le faire à partir de Windows 10 1709. Pour plus d’informations, consultez [Configurer les paramètres WinHTTP à l’aide d’un GPO (objet de stratégie de groupe)](/archive/blogs/netgeeks/winhttp-proxy-settings-deployed-by-gpo).
 
 > [!NOTE]
 > Si vous configurez les paramètres du proxy sur votre ordinateur à l’aide des paramètres WinHTTP, les ordinateurs qui ne peuvent pas se connecter au proxy configuré ne pourront pas non plus se connecter à Internet.
@@ -178,25 +181,69 @@ Le programme d’installation crée une tâche planifiée sur le système, qui s
 
 ## <a name="verify-the-registration"></a>Vérifier l’inscription
 
-Pour vérifier l’état de l’inscription d’un appareil dans votre locataire Azure, vous pouvez utiliser l’applet de commande **[Get-MsolDevice](/powershell/msonline/v1/get-msoldevice)** dans le [module Azure Active Directory PowerShell](/powershell/azure/install-msonlinev1?view=azureadps-2.0).
+Voici trois méthodes pour rechercher et vérifier l’état de l’appareil :
+
+### <a name="locally-on-the-device"></a>Localement sur l’appareil
+
+1. Ouvrez Windows PowerShell.
+2. Entrez `dsregcmd /status`.
+3. Vérifiez que **AzureAdJoined** et **DomainJoined** ont la valeur **OUI**.
+4. Vous pouvez utiliser le **DeviceId** et comparer l’état du service à l’aide du portail Azure ou de PowerShell.
+
+### <a name="using-the-azure-portal"></a>Utilisation du portail Azure
+
+1. Accédez à la page des appareils à l’aide d’un [lien direct](https://portal.azure.com/#blade/Microsoft_AAD_IAM/DevicesMenuBlade/Devices).
+2. Pour plus d’informations sur la localisation d’un appareil, consultez [Gérer les identités de l’appareil à l’aide du portail Microsoft Azure](./device-management-azure-portal.md).
+3. Si la colonne **Inscrit** indique **En attente**, cela signifie que la jonction Azure AD Hybride n’a pas été effectuée complètement. Dans les environnements fédérés, cela peut se produire uniquement si l’inscription a échoué et qu’AAD Connect est configuré pour synchroniser les appareils.
+4. Si la colonne **Inscrit** contient une **date/heure**, cela signifie que la jonction Azure AD Hybride a été effectuée correctement.
+
+### <a name="using-powershell"></a>Utilisation de PowerShell
+
+Vérifiez l’état d’inscription de l’appareil dans votre locataire Azure à l’aide de **[Get-MsolDevice](/powershell/module/msonline/get-msoldevice)** . Cette applet de commande figure dans le [module Azure Active Directory PowerShell](/powershell/azure/active-directory/install-msonlinev1).
 
 Quand vous utilisez l’applet de commande **Get-MSolDevice** pour vérifier les détails du service :
 
 - Un objet dont l’**ID d’appareil** correspond à l’ID défini sur le client Windows doit exister.
-- La valeur de **DeviceTrustType** doit être **Domain Joined**. Ce paramètre équivaut à l’état **Joint à une version hybride d’Azure AD** sous **Appareils** dans le portail Azure AD.
-- Pour les appareils utilisés dans l’accès conditionnel, la valeur de **Enabled** doit être **True** et celle de **DeviceTrustLevel** doit être **Managed**.
-
-**Pour vérifier les détails du service** :
+- La valeur pour **DeviceTrustType** est **Joint au domaine**. Ce paramètre équivaut à l’état **Joint à une version hybride d’Azure AD** dans la page **Appareils** du portail Azure AD.
+- Pour les appareils utilisés dans l’accès conditionnel, la valeur pour **Activé** est **True** et celle pour **DeviceTrustLevel** est **Géré**.
 
 1. Ouvrez Windows PowerShell en tant qu’administrateur.
-1. Entrez `Connect-MsolService` pour vous connecter à votre locataire Azure.  
-1. Entrez `get-msoldevice -deviceId <deviceId>`.
-1. Vérifiez que le paramètre **Enabled** est défini sur **True**.
+2. Entrez `Connect-MsolService` pour vous connecter à votre locataire Azure.
+
+#### <a name="count-all-hybrid-azure-ad-joined-devices-excluding-pending-state"></a>Compter tous les appareils joints Azure AD Hybride (sauf ceux qui sont à l’état **En attente**)
+
+```azurepowershell
+(Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}).count
+```
+
+#### <a name="count-all-hybrid-azure-ad-joined-devices-with-pending-state"></a>Compter tous les appareils joints Azure AD Hybride qui sont à l’état **En attente**
+
+```azurepowershell
+(Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (-not([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}).count
+```
+
+#### <a name="list-all-hybrid-azure-ad-joined-devices"></a>Lister tous les appareils joints Azure AD Hybride
+
+```azurepowershell
+Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}
+```
+
+#### <a name="list-all-hybrid-azure-ad-joined-devices-with-pending-state"></a>Lister tous les appareils joints Azure AD Hybride qui sont à l’état **En attente**
+
+```azurepowershell
+Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (-not([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}
+```
+
+#### <a name="list-details-of-a-single-device"></a>Lister les détails d’un seul appareil :
+
+1. Entrez `get-msoldevice -deviceId <deviceId>` (il s’agit du **DeviceId** obtenu localement sur l’appareil).
+2. Vérifiez que le paramètre **Enabled** est défini sur **True**.
 
 ## <a name="troubleshoot-your-implementation"></a>Résoudre les problèmes liés à votre implémentation
 
 Si vous rencontrez des problèmes durant l’exécution d’une jonction Azure AD Hybride pour des appareils Windows appartenant à un domaine, consultez :
 
+- [Dépannage des appareils à l’aide de la commande dsregcmd](./troubleshoot-device-dsregcmd.md)
 - [Résolution des problèmes de jonction Azure AD Hybride pour les appareils Windows actuels](troubleshoot-hybrid-join-windows-current.md)
 - [Résolution des problèmes de jonction Azure AD Hybride pour les appareils Windows de niveau inférieur](troubleshoot-hybrid-join-windows-legacy.md)
 

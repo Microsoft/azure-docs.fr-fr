@@ -1,20 +1,22 @@
 ---
 title: Utiliser des jetons de ressource Azure Cosmos DB avec le SDK Gremlin
 description: Découvrez comment créer des jetons de ressource et les utiliser pour accéder à la base de données de graphe.
-author: luisbosquez
-ms.author: lbosq
+author: christopheranderson
+ms.author: chrande
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/06/2019
-ms.openlocfilehash: 42f3c7f3351bddab429489dccf28587549d76e18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 22c048b748806404ccfa580e660552a1744f3781
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78897845"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93361691"
 ---
 # <a name="use-azure-cosmos-db-resource-tokens-with-the-gremlin-sdk"></a>Utiliser des jetons de ressource Azure Cosmos DB avec le SDK Gremlin
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
 
 Cet article explique comment utiliser des [jetons de ressource Azure Cosmos DB](secure-access-to-data.md) pour accéder à la base de données de graphe via le SDK Gremlin.
 
@@ -24,11 +26,11 @@ Le SDK Apache TinkerPop Gremlin ne dispose pas d’une API à utiliser pour cré
 
 La hiérarchie du modèle d’objets au-dessus des jetons de ressource est illustrée dans le plan suivant :
 
-- **Compte Azure Cosmos DB** : entité de plus haut niveau à laquelle est associé un DNS (par exemple `contoso.gremlin.cosmos.azure.com`).
+- **Compte Azure Cosmos DB**  : entité de plus haut niveau à laquelle est associé un DNS (par exemple `contoso.gremlin.cosmos.azure.com`).
   - **Base de données Azure Cosmos DB**
     - **Utilisateur**
       - **Permission**
-        - **Jeton** : propriété d’un objet d’autorisation qui indique les actions autorisées ou refusées.
+        - **Jeton**  : propriété d’un objet d’autorisation qui indique les actions autorisées ou refusées.
 
 Un jeton de ressource utilise le format suivant : `"type=resource&ver=1&sig=<base64 string>;<base64 string>;"`. Cette chaîne est opaque pour les clients et doit être utilisée telle quelle, sans modification ni interprétation.
 
@@ -36,7 +38,7 @@ Un jeton de ressource utilise le format suivant : `"type=resource&ver=1&sig=<ba
 // Notice that document client is created against .NET SDK endpoint, rather than Gremlin.
 DocumentClient client = new DocumentClient(
   new Uri("https://contoso.documents.azure.com:443/"), 
-  "<master key>", 
+  "<primary key>", 
   new ConnectionPolicy 
   {
     EnableEndpointDiscovery = false, 
@@ -62,7 +64,7 @@ Vous pouvez utiliser des jetons de ressource directement comme propriété « p
 // You can obtain the token for a given permission by using the Azure Cosmos DB SDK, or you can pass it into the application as a command line argument or configuration value.
 string resourceToken = GetResourceToken();
 
-// Configure the Gremlin server to use a resource token rather than a master key.
+// Configure the Gremlin server to use a resource token rather than a primary key.
 GremlinServer server = new GremlinServer(
   "contoso.gremlin.cosmosdb.azure.com",
   port: 443,
@@ -102,5 +104,5 @@ Avec un seul compte Gremlin, vous pouvez émettre un nombre illimité de jetons.
 Une erreur courante que les applications rencontrent quand elles utilisent des jetons de ressource est « Autorisations insuffisantes fournies dans l’en-tête d’autorisation pour la demande correspondante. Réessayez avec un autre en-tête d’autorisation. » Cette erreur est retournée quand une traversée Gremlin tente d’écrire une arête ou un sommet, mais que le jeton de ressource accorde seulement des autorisations *Lecture*. Inspectez votre traversée pour voir si elle contient une des étapes suivantes : *.addV()* , *.addE()* , *.drop()* ou *.property()* .
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Contrôle d’accès en fonction du rôle (RBAC)](role-based-access-control.md) dans Azure Cosmos DB
+* [Contrôle d’accès en fonction du rôle Azure (Azure RBAC)](role-based-access-control.md) dans Azure Cosmos DB
 * [Découvrir comment sécuriser l’accès aux données](secure-access-to-data.md) dans Azure Cosmos DB

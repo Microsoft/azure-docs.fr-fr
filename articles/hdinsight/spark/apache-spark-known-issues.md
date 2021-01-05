@@ -8,12 +8,12 @@ ms.custom: hdinsightactive
 ms.topic: troubleshooting
 ms.date: 08/15/2019
 ms.author: hrasheed
-ms.openlocfilehash: 2c153d818136c5d8804dae72004dfaf17fd1bf7a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1dbf6478a62675c8b514298007a7663239d8f7cf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73494524"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86084640"
 ---
 # <a name="known-issues-for-apache-spark-cluster-on-hdinsight"></a>Problèmes connus du cluster Apache Spark sur Azure HDInsight
 
@@ -30,13 +30,17 @@ Pour contourner ce problème, suivez la procédure ci-dessous :
 
 2. Exécutez la commande suivante pour rechercher l’ID d’application des tâches interactives démarrées via Livy.
 
-        yarn application –list
+   ```bash
+   yarn application –list
+   ```
 
     Par défaut, le nom attribué à une tâche est « Livy » si celle-ci a été démarrée avec une session interactive Livy, sans qu’un nom ait été explicitement spécifié. Pour la session Livy démarrée par [Jupyter Notebook](https://jupyter.org/), le nom de la tâche commence par `remotesparkmagics_*`.
 
 3. Exécutez la commande suivante pour mettre fin à ces tâches.
 
-        yarn application –kill <Application ID>
+   ```bash
+   yarn application –kill <Application ID>
+   ```
 
 L’exécution des nouvelles tâches commence alors.
 

@@ -2,19 +2,17 @@
 title: Fichier Include
 description: Fichier Include
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.date: 02/14/2020
 ms.topic: include
 ms.custom: include file
-ms.author: diberry
-ms.openlocfilehash: 0f5ee8b1f575c3caa8e1e2608444ea853c51d53f
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 1eb01d7cf5d1fbdfe913bbcabaea8a24c816f4ec
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77371850"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91545282"
 ---
-Pour cet article, vous pouvez utiliser le compte [LUIS](../luis-concept-keys.md#starter-key) gratuit et sa clé de démarrage afin de créer votre application LUIS.
+Pour cet article, vous pouvez utiliser le compte [LUIS](../luis-how-to-azure-subscription.md#starter-key) gratuit et sa clé de démarrage afin de créer votre application LUIS.

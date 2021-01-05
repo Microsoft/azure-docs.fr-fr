@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 03/30/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 887c9432f04cce775e045bb6da83f0af4a4a4bce
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 46f04c55b40d4f1bdbbf5fd55eb648d1d3294056
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80396887"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97108414"
 ---
 # <a name="predicates-and-predicatevalidations"></a>Predicates et PredicateValidations
 
@@ -81,7 +81,7 @@ La méthode IsLengthRange vérifie si la longueur d’une valeur de revendicatio
 
 L’exemple suivant montre une méthode IsLengthRange avec les paramètres `Minimum` et `Maximum` qui spécifient la plage de la longueur de la chaîne :
 
-```XML
+```xml
 <Predicate Id="IsLengthBetween8And64" Method="IsLengthRange" HelpText="The password must be between 8 and 64 characters.">
   <Parameters>
     <Parameter Id="Minimum">8</Parameter>
@@ -96,11 +96,11 @@ La méthode MatchesRegex vérifie si une valeur de revendication de chaîne corr
 
 | Paramètre | Obligatoire | Description |
 | ------- | ----------- | ----------- |
-| RegularExpression | Oui | Modèle d'expression régulière à mettre en correspondance. |
+| RegularExpression | Oui | Modèle d’expression régulière à mettre en correspondance. |
 
 L’exemple suivant montre une méthode `MatchesRegex` avec le paramètre `RegularExpression` qui spécifie une expression régulière :
 
-```XML
+```xml
 <Predicate Id="PIN" Method="MatchesRegex" HelpText="The password must be numbers only.">
   <Parameters>
     <Parameter Id="RegularExpression">^[0-9]+$</Parameter>
@@ -118,7 +118,7 @@ La méthode IncludesCharacters vérifie si une valeur de revendication de chaîn
 
 L’exemple suivant montre une méthode `IncludesCharacters` avec le paramètre `CharacterSet` qui spécifie le jeu de caractères :
 
-```XML
+```xml
 <Predicate Id="Lowercase" Method="IncludesCharacters" HelpText="a lowercase letter">
   <Parameters>
     <Parameter Id="CharacterSet">a-z</Parameter>
@@ -137,7 +137,7 @@ La méthode IsDateRange vérifie si une valeur de revendication de date est dans
 
 L’exemple suivant montre une méthode `IsDateRange` avec les paramètres `Minimum` et `Maximum` qui spécifient la plage de dates avec le format `yyyy-mm-dd` et `Today`.
 
-```XML
+```xml
 <Predicate Id="DateRange" Method="IsDateRange" HelpText="The date must be between 1970-01-01 and today.">
   <Parameters>
     <Parameter Id="Minimum">1970-01-01</Parameter>
@@ -152,7 +152,7 @@ Alors que les prédicats définissent la validation à effectuer par rapport à 
 
 L’élément **PredicatesValidations** doit apparaître directement après l’élément **Predicates** dans l’élément [BuildingBlocks](buildingblocks.md).
 
-```XML
+```xml
 <PredicateValidations>
   <PredicateValidation Id="">
     <PredicateGroups>
@@ -239,7 +239,7 @@ Avec **Predicates** et **PredicateValidationsInput**, vous pouvez contrôler les
 - **AllowedAADCharacters** à l’aide de la méthode `MatchesRegex` valide le fait que le mot de passe fourni contenait uniquement des caractère non valides.
 - **DisallowedWhitespace** à l’aide de la méthode `MatchesRegex` valide le fait que le mot de passe ne commence pas ou ne se termine pas par un espace.
 
-```XML
+```xml
 <Predicates>
   <Predicate Id="IsLengthBetween8And64" Method="IsLengthRange" HelpText="The password must be between 8 and 64 characters.">
     <Parameters>
@@ -294,10 +294,10 @@ Avec **Predicates** et **PredicateValidationsInput**, vous pouvez contrôler les
 Après avoir défini les validations de base, vous pouvez les combiner et créer un ensemble de stratégies de mot de passe utilisable dans votre stratégie :
 
 - **SimplePassword** valide DisallowedWhitespace, AllowedAADCharacters et IsLengthBetween8And64
-- **StrongPassword** valide DisallowedWhitespace, AllowedAADCharacters et IsLengthBetween8And64. Le dernier groupe `CharacterClasses` exécute un jeu supplémentaire de prédicats avec `MatchAtLeast` défini sur 3. Le mot de passe de l'utilisateur doit comprendre 8 à 16 caractères, et trois des caractères suivants : minuscule, majuscule, chiffre ou symbole.
+- **StrongPassword** valide DisallowedWhitespace, AllowedAADCharacters et IsLengthBetween8And64. Le dernier groupe `CharacterClasses` exécute un jeu supplémentaire de prédicats avec `MatchAtLeast` défini sur 3. Le mot de passe de l’utilisateur doit comprendre entre 8 et 16 caractères et trois des caractères suivants : minuscule, majuscule, nombre ou symbole.
 - **CustomPassword** valide uniquement DisallowedWhitespace, AllowedAADCharacters. Ainsi, l’utilisateur peut fournir n’importe quel mot de passe de n’importe quelle longueur, tant que les caractères sont valides.
 
-```XML
+```xml
 <PredicateValidations>
   <PredicateValidation Id="SimplePassword">
     <PredicateGroups>
@@ -367,7 +367,7 @@ Après avoir défini les validations de base, vous pouvez les combiner et créer
 
 Dans votre type de revendication, ajoutez l’élément **PredicateValidationReference** et spécifiez l’identificateur en tant que l’une des validations de prédicat, comme SimplePassword, StrongPassword ou CustomPassword.
 
-```XML
+```xml
 <ClaimType Id="password">
   <DisplayName>Password</DisplayName>
   <DataType>string</DataType>
@@ -386,7 +386,7 @@ Le schéma suivant montre comment les éléments sont organisés quand Azure AD 
 
 Avec les éléments **Predicates** et **PredicateValidations**, vous pouvez contrôler les valeurs de date minimale et maximale de **UserInputType** en utilisant un `DateTimeDropdown`. Pour ce faire, créez un **Predicate** avec la méthode `IsDateRange` et spécifiez les paramètres minimal et maximal.
 
-```XML
+```xml
 <Predicates>
   <Predicate Id="DateRange" Method="IsDateRange" HelpText="The date must be between 01-01-1980 and today.">
     <Parameters>
@@ -399,7 +399,7 @@ Avec les éléments **Predicates** et **PredicateValidations**, vous pouvez cont
 
 Ajoutez un **PredicateValidation** avec une référence au prédicat `DateRange`.
 
-```XML
+```xml
 <PredicateValidations>
   <PredicateValidation Id="CustomDateRange">
     <PredicateGroups>
@@ -413,9 +413,9 @@ Ajoutez un **PredicateValidation** avec une référence au prédicat `DateRange`
 </PredicateValidations>
 ```
 
-Dans votre type de revendication, ajoutez un élément**PredicateValidationReference** et spécifiez l’identificateur en tant que `CustomDateRange`.
+Dans votre type de revendication, ajoutez un élément **PredicateValidationReference** et spécifiez l’identificateur en tant que `CustomDateRange`.
 
-```XML
+```xml
 <ClaimType Id="dateOfBirth">
   <DisplayName>Date of Birth</DisplayName>
   <DataType>date</DataType>
@@ -428,4 +428,4 @@ Dans votre type de revendication, ajoutez un élément**PredicateValidationRefer
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment [configurer la complexité du mot de passe avec des stratégies personnalisées dans Azure Active Directory B2C](custom-policy-password-complexity.md) à l’aide de validations de prédicat.
+- Découvrez comment [configurer la complexité du mot de passe avec des stratégies personnalisées dans Azure Active Directory B2C](password-complexity.md) à l’aide de validations de prédicat.

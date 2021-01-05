@@ -5,12 +5,13 @@ author: jakrams
 ms.author: jakras
 ms.date: 02/21/2020
 ms.topic: conceptual
-ms.openlocfilehash: 509375459d019ead5a7992b808044a75e2666393
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8f2adc846247c4f06c9356f482501fd01c5463bf
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758858"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202682"
 ---
 # <a name="remote-rendering-sessions"></a>Sessions Remote Rendering
 
@@ -40,10 +41,10 @@ Chaque session se compose de plusieurs phases.
 
 Quand vous demandez à ARR de [créer une session](../how-tos/session-rest-api.md#create-a-session), il commence par retourner un [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) de session. Cet UUID vous permet de demander des informations sur la session. L’UUID est conservé pendant 30 jours de même que certaines informations de base sur la session. Vous pouvez donc demander ces informations même après l’arrêt de la session. À ce stade, l’**état de la session** indiqué est **Démarrage**.
 
-Ensuite, Azure Remote Rendering tente de trouver un serveur qui peut héberger votre session. Deux paramètres sont pris en compte pour cette recherche. Tout d’abord, ARR ne réserve que des serveurs de votre [région](../reference/regions.md). En effet, la latence du réseau entre régions peut être trop élevée pour garantir une expérience correcte. Le deuxième facteur est la *taille* souhaitée que vous avez spécifiée. Chaque région inclut un nombre limité de serveurs pouvant répondre à une demande de taille *Standard* ou *Premium*. Ainsi, si tous les serveurs de la taille demandée sont en cours d’utilisation dans votre région, la création de la session échoue. Vous pouvez [demander](../how-tos/session-rest-api.md#get-sessions-properties) la raison de l’échec.
+Ensuite, Azure Remote Rendering tente de trouver un serveur qui peut héberger votre session. Deux paramètres sont pris en compte pour cette recherche. Tout d’abord, ARR ne réserve que des serveurs de votre [région](../reference/regions.md). En effet, la latence du réseau entre régions peut être trop élevée pour garantir une expérience correcte. Le deuxième facteur est la *taille* souhaitée que vous avez spécifiée. Chaque région inclut un nombre limité de serveurs pouvant répondre à une demande de taille [*Standard*](../reference/vm-sizes.md) ou [*Premium*](../reference/vm-sizes.md). Ainsi, si tous les serveurs de la taille demandée sont en cours d’utilisation dans votre région, la création de la session échoue. Vous pouvez [demander](../how-tos/session-rest-api.md#get-sessions-properties) la raison de l’échec.
 
 > [!IMPORTANT]
-> Si vous demandez une taille de machine virtuelle *Standard* et que la demande échoue en raison d’une forte sollicitation, cela ne signifie pas qu’une demande de serveur *Premium* échouera également. Si vous disposez de cette option, vous pouvez donc essayer de revenir à une machine virtuelle *Premium*.
+> Si vous demandez une taille de serveur *Standard* et que la demande échoue en raison d’une forte sollicitation, cela ne signifie pas qu’une demande de serveur *Premium* échouera également. Si vous disposez de cette option, vous pouvez donc essayer de revenir à un serveur *Premium*.
 
 Quand le service trouve un serveur adéquat, il doit copier la machine virtuelle appropriée sur celui-ci pour en faire un hôte Azure Remote Rendering. Cette opération prend plusieurs minutes. Ensuite, la machine virtuelle est démarrée et l’**état de la session** devient **Prêt**.
 
@@ -72,11 +73,11 @@ Une session peut également être arrêtée en raison d’une défaillance.
 Dans tous les cas, la facturation prend fin dès lors qu’une session est arrêtée.
 
 > [!WARNING]
-> Le fait que vous soyez connecté ou non à une session (et pendant combien de temps) n’affecte pas la facturation. Ce que vous payez pour le service dépend de la *durée de la session* (c’est-à-dire de la durée pendant laquelle un serveur vous est exclusivement réservé) et des capacités matérielles demandées (taille de la machine virtuelle). Si vous démarrez une session, que vous vous connectez pendant cinq minutes et que vous n’arrêtez pas la session (qui continue de s’exécuter jusqu’à ce que son bail expire), vous serez facturé pour toute la durée de bail de la session. La *durée de bail maximale* peut, quant à elle, être considérée comme un filet de sécurité. Vous pouvez demander une session avec une durée de bail de huit heures, puis l’utiliser seulement pendant cinq minutes. Ceci n’a pas d’importance si vous arrêtez la session manuellement par la suite.
+> Le fait que vous soyez connecté ou non à une session (et pendant combien de temps) n’affecte pas la facturation. Ce que vous payez pour le service dépend de la *durée de la session* (c’est-à-dire de la durée pendant laquelle un serveur vous est exclusivement réservé) et des capacités matérielles demandées ([taille allouée](../reference/vm-sizes.md)). Si vous démarrez une session, que vous vous connectez pendant cinq minutes et que vous n’arrêtez pas la session (qui continue de s’exécuter jusqu’à ce que son bail expire), vous serez facturé pour toute la durée de bail de la session. La *durée de bail maximale* peut, quant à elle, être considérée comme un filet de sécurité. Vous pouvez demander une session avec une durée de bail de huit heures, puis l’utiliser seulement pendant cinq minutes. Ceci n’a pas d’importance si vous arrêtez la session manuellement par la suite.
 
 #### <a name="extend-a-sessions-lease-time"></a>Prolonger la durée du bail d’une session
 
-Vous pouvez [prolonger la durée du bail](../how-tos/session-rest-api.md#update-a-session) d’une session active si vous en avez besoin plus longtemps.
+Vous pouvez [prolonger la durée du bail](../how-tos/session-rest-api.md#modify-and-query-session-properties) d’une session active si vous en avez besoin plus longtemps.
 
 ## <a name="example-code"></a>Exemple de code
 
@@ -107,6 +108,8 @@ while (true)
     {
         break;
     }
+    // REST calls must not be issued too frequently, otherwise the server returns failure code 429 ("too many requests"). So we insert the recommended delay of 10s
+    await Task.Delay(TimeSpan.FromSeconds(10));
 }
 
 if (sessionProperties.Status != RenderingSessionStatus.Ready)
@@ -143,6 +146,15 @@ La durée de vie d’une machine virtuelle n’est pas liée à l’instance `Az
 L’ID de session persistant peut être demandé avec `AzureSession.SessionUUID()` et mis en cache localement. Avec cet ID, une application peut appeler `AzureFrontend.OpenSession` pour se lier à cette session.
 
 Quand `AzureSession.IsConnected` a la valeur true, `AzureSession.Actions` retourne une instance de `RemoteManager`, qui contient les fonctions permettant de [charger des modèles](models.md), de manipuler des [entités](entities.md) et de [demander des informations](../overview/features/spatial-queries.md) sur la scène rendue.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [AzureSession, classe C#](/dotnet/api/microsoft.azure.remoterendering.azuresession)
+* [AzureFrontend.CreateNewRenderingSessionAsync(), C#](/dotnet/api/microsoft.azure.remoterendering.azurefrontend.createnewrenderingsessionasync)
+* [AzureFrontend.OpenRenderingSession(), C#](/dotnet/api/microsoft.azure.remoterendering.azurefrontend.openrenderingsession)
+* [AzureSession, classe C++](/cpp/api/remote-rendering/azuresession)
+* [AzureFrontend::CreateNewRenderingSessionAsync, C++](/cpp/api/remote-rendering/azurefrontend#createnewrenderingsessionasync)
+* [AzureFrontend::OpenRenderingSession, C++](/cpp/api/remote-rendering/azurefrontend#openrenderingsession)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

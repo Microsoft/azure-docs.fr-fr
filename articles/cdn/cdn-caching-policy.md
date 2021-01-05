@@ -11,15 +11,15 @@ ms.service: media-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/04/2017
 ms.author: juliako
-ms.openlocfilehash: dc0482fbcbb1c9d1618ec18e1f48b03f686a6573
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5807d38e22d8cecf40b5ad4262f9e4662b77ec4c
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74892575"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92779133"
 ---
 # <a name="manage-azure-cdn-caching-policy-in-azure-media-services"></a>Gérer la stratégie de mise en cache CDN dans Azure Media Services
 Azure Media Services fournit la diffusion en continu adaptative HTTP et le téléchargement progressif. La diffusion en continu HTTP est hautement évolutive de par les avantages de mise en cache dans le proxy et les couches CDN, et la mise en cache côté client. Les points de terminaison de la diffusion en continu fournissent des fonctionnalités générales de diffusion en continu et de configuration pour les en-têtes HTTP du cache. Les points de terminaison de diffusion en continu définissent le contrôle de cache HTTP : les en-têtes max-age et Expires. Pour plus d'informations sur les en-têtes de cache HTTP, rendez-vous sur le site [W3.org](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
@@ -40,10 +40,9 @@ Vous pouvez utiliser le portail Azure ou des API d’Azure Media Services pour
 
 1. Pour configurer les en-têtes de cache à l'aide du portail Azure, reportez-vous à la section [Gestion des points de terminaison de diffusion en continu](../media-services/previous/media-services-portal-manage-streaming-endpoints.md) de la page relative à la configuration du point de terminaison de diffusion en continu.
 2. API REST d'Azure Media Services, [StreamingEndpoint](/rest/api/media/operations/streamingendpoint#StreamingEndpointCacheControl).
-3. Kit de développement logiciel (SDK) .NET Azure Media Services, [Propriétés StreamingEndpointCacheControl](https://go.microsoft.com/fwlink/?LinkId=615302).
+3. Kit de développement logiciel (SDK) .NET Azure Media Services, [Propriétés StreamingEndpointCacheControl](/dotnet/api/microsoft.windowsazure.mediaservices.client.streamingendpointcachecontrol).
 
 ## <a name="cache-configuration-precedence-order"></a>Ordre de priorité de la configuration du cache
 1. La valeur configurée du cache Azure Media Services remplace la valeur par défaut.
 2. S'il n'existe aucune configuration manuelle, les valeurs par défaut s'appliquent.
 3. Des en-têtes de cache de 2 secondes s’appliquent par défaut aux fichiers manifestes de diffusion en continu en direct (ou sélections) quelle que soit la configuration d'Azure Media ou d’Azure Storage, et elles sont irremplaçables.
-

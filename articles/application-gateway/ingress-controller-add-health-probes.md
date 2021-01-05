@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur l’ajout de sondes d’in
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 5d0543a3a43d53e462a6406312faddf37d2653c6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c8b8b0090877db7abc8fae0e44f928e8b10dcf5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73795590"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84808005"
 ---
 # <a name="add-health-probes-to-your-service"></a>Ajouter des sondes d’intégrité à votre service
 Par défaut, le contrôleur d’entrée approvisionne une sonde HTTP GET pour les pods exposés.
@@ -47,7 +47,7 @@ spec:
 
 Référence de l’API Kubernetes :
 * [Sondes de conteneur](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-* [Action HttpGet](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#httpgetaction-v1-core)
+* [Action HttpGet](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#httpgetaction-v1-core)
 
 > [!NOTE]
 > * `readinessProbe` et `livenessProbe` sont pris en charge lors d’une configuration avec `httpGet`.

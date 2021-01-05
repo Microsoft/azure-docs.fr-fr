@@ -1,21 +1,22 @@
 ---
 title: Opérations DDL dans l’API Cassandra Azure Cosmos DB à partir de Spark
 description: Cet article décrit en détail les opérations DDL d’espace de clés et de table dans l’API Cassandra Azure Cosmos DB à partir de Spark.
-author: kanshiG
-ms.author: govindk
+author: TheovanKraay
+ms.author: thvankra
 ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-ms.topic: conceptual
-ms.date: 09/24/2018
-ms.openlocfilehash: c0df05eff5dc84ef24e1ed5afcaf705d99f447ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 10/07/2020
+ms.openlocfilehash: 73d31fff362807937cbd87b8e1313cf601909802
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77622571"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93092175"
 ---
 # <a name="ddl-operations-in-azure-cosmos-db-cassandra-api-from-spark"></a>Opérations DDL dans l’API Cassandra Azure Cosmos DB à partir de Spark
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Cet article décrit en détail les opérations DDL d’espace de clés et de table dans l’API Cassandra Azure Cosmos DB à partir de Spark.
 
@@ -92,8 +93,7 @@ DESCRIBE keyspaces;
 ### <a name="create-a-table"></a>Créer une table
 
 ```scala
-val cdbConnector = CassandraConnector(sc)
-cdbConnector.withSessionDo(session => session.execute("CREATE TABLE IF NOT EXISTS books_ks.books(book_id TEXT PRIMARY KEY,book_author TEXT, book_name TEXT,book_pub_year INT,book_price FLOAT) WITH cosmosdb_provisioned_throughput=4000 , WITH default_time_to_live=630720000;"))
+cdbConnector.withSessionDo(session => session.execute("CREATE TABLE IF NOT EXISTS books_ks1.books(book_id TEXT,book_author TEXT, book_name TEXT,book_pub_year INT,book_price FLOAT, PRIMARY KEY(book_id,book_pub_year)) WITH cosmosdb_provisioned_throughput=4000 , WITH default_time_to_live=630720000;"))
 ```
 
 #### <a name="validate-in-cqlsh"></a>Valider dans cqlsh

@@ -3,15 +3,15 @@ title: PowerShell pour la gestion des appareils StorSimple
 description: Découvrez comment gérer votre appareil StorSimple à l’aide de Windows PowerShell for StorSimple.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2018
 ms.author: alkohli
-ms.openlocfilehash: 7d59f00d655bc7b2395c46713a56f52c61ffa42c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 65e9657c3948d8ce5883cd33ca8720f501352105
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76277107"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995423"
 ---
 # <a name="use-windows-powershell-for-storsimple-to-administer-your-device"></a>Utiliser Windows PowerShell pour StorSimple pour appliquer votre appareil
 
@@ -28,8 +28,8 @@ Après avoir lu cet article, vous pourrez :
 * Obtenez de l’aide dans Windows PowerShell for StorSimple.
 
 > [!NOTE]
-> * Les applets de commande de Windows PowerShell pour StorSimple vous permettent de gérer votre appareil StorSimple depuis une console série ou à distance via l’accès distant Windows PowerShell. Pour plus d’informations sur chacune des applets de commande individuelles qui peuvent être utilisés dans cette interface, consultez les [informations de référence sur les applets de commande pour Windows PowerShell pour StorSimple](https://technet.microsoft.com/library/dn688168.aspx).
-> * Les applets de commande d’Azure PowerShell StorSimple sont une autre collection d’applets de commande qui vous permettent d’automatiser des tâches de niveau service et de migration StorSimple à partir de la ligne de commande. Pour plus d’informations sur les applets de commande d’Azure PowerShell pour StorSimple, consultez [Informations de référence sur les applets de commande d’Azure StorSimple](https://docs.microsoft.com/powershell/module/servicemanagement/azure/?view=azuresmps-4.0.0&viewFallbackFrom=azuresmps-3.7.0#azure).
+> * Les applets de commande de Windows PowerShell pour StorSimple vous permettent de gérer votre appareil StorSimple depuis une console série ou à distance via l’accès distant Windows PowerShell. Pour plus d’informations sur chacune des applets de commande individuelles qui peuvent être utilisés dans cette interface, consultez les [informations de référence sur les applets de commande pour Windows PowerShell pour StorSimple](/powershell/module/hcs/?viewFallbackFrom=winserverr2-ps).
+> * Les applets de commande d’Azure PowerShell StorSimple sont une autre collection d’applets de commande qui vous permettent d’automatiser des tâches de niveau service et de migration StorSimple à partir de la ligne de commande. Pour plus d’informations sur les applets de commande d’Azure PowerShell pour StorSimple, consultez [Informations de référence sur les applets de commande d’Azure StorSimple](/powershell/module/servicemanagement/azure.service/?view=azuresmps-4.0.0&viewFallbackFrom=azuresmps-3.7.0#azure).
 
 
 Vous pouvez accéder à Windows PowerShell pour StorSimple selon une des méthodes suivantes :
@@ -105,11 +105,11 @@ Vous pouvez choisir parmi les paramètres suivants :
      > [!NOTE]
      > Il s’agit de l’option préférée si vous avez oublié le mot de passe administrateur et que vous ne pouvez pas vous connecter via l’option 1 ou 2.
 
-4. **Changer la langue** : cette option vous permet de changer la langue d’affichage de l’interface Windows PowerShell. Les langues prises en charge sont : anglais, japonais, russe, français, coréen du sud, espagnol, italien, allemand, chinois et portugais (Brésil).
+4. **Changer la langue** : cette option vous permet de changer la langue d’affichage de l’interface Windows PowerShell. Les langues prises en charge sont : anglais, japonais, russe, français, coréen du sud, espagnol, italien, allemand, chinois et portugais.
 
 ## <a name="connect-remotely-to-storsimple-using-windows-powershell-for-storsimple"></a>Se connecter à distance à StorSimple en utilisant Windows PowerShell pour StorSimple
 
-Vous pouvez utiliser l’accès distant Windows PowerShell pour vous connecter à votre appareil StorSimple. Quand vous vous connectez de cette façon, vous ne voyez pas de menu. (Vous voyez un menu seulement si vous utilisez la console série sur l’appareil pour vous connecter. La connexion à distance permet d’accéder directement à l’équivalent de « option 1 : accès complet » de la console série.) Avec l’accès distant Windows PowerShell, vous vous connectez à une instance d’exécution spécifique. Vous pouvez également spécifier la langue d’affichage.
+Vous pouvez utiliser l’accès distant Windows PowerShell pour vous connecter à votre appareil StorSimple. Quand vous vous connectez de cette façon, vous ne voyez pas de menu. (Vous voyez un menu seulement si vous utilisez la console série sur l’appareil pour vous connecter. La connexion à distance permet d’accéder directement à l’équivalent de « option 1 : accès complet » de la console série.) Avec l’accès distant Windows PowerShell, vous vous connectez à une instance d’exécution spécifique. Vous pouvez également spécifier la langue d’affichage.
 
 La langue d’affichage est indépendante de la langue que vous définissez à l’aide de l’option **Changer la langue** dans le menu de la console série. PowerShell à distance récupère automatiquement les paramètres régionaux de l’appareil à partir duquel vous vous connectez si ces paramètres ne sont pas spécifiés.
 
@@ -178,4 +178,3 @@ Vous pouvez facilement mettre à jour l’aide de l’interface Windows PowerShe
 ## <a name="next-steps"></a>Étapes suivantes
 
 Si vous rencontrez des problèmes avec votre appareil StorSimple lors de l’exécution d’un des flux de travail ci-dessus, consultez la rubrique [Outils de résolution des problèmes de déploiement de StorSimple](storsimple-8000-troubleshoot-deployment.md#tools-for-troubleshooting-storsimple-deployments).
-

@@ -1,17 +1,17 @@
 ---
 title: Résoudre les problèmes de performances des requêtes - Azure Database pour MySQL
 description: Découvrez comment utiliser l’instruction EXPLAIN pour résoudre les problèmes de performances des requêtes dans Azure Database pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: troubleshooting
 ms.date: 3/18/2020
-ms.openlocfilehash: 6b27e47339b80cc46290065c4d17150a301f2534
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 81ec7e6f822f24f2b9e6ca4298e9668358c78149
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80067837"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94540754"
 ---
 # <a name="how-to-use-explain-to-profile-query-performance-in-azure-database-for-mysql"></a>Guide pratique pour utiliser l’instruction EXPLAIN visant à profiler les performances des requêtes dans Azure Database pour MySQL
 **EXPLAIN** est un outil pratique pour optimiser les requêtes. L’instruction EXPLAIN permet d’obtenir des informations sur la façon dont les instructions SQL sont exécutées. La sortie suivante présente un exemple d’exécution d’une instruction EXPLAIN.
@@ -54,10 +54,10 @@ possible_keys: id
 ```
 
 La nouvelle instruction EXPLAIN montre que MySQL utilise à présent un index pour limiter le nombre de lignes à 1, ce qui réduit nettement le temps de recherche.
- 
+ 
 ## <a name="covering-index"></a>Index de couverture
 Un index de couverture se compose de toutes les colonnes d’une requête dans l’index pour réduire l’extraction de valeurs dans les tables de données. En voici une illustration dans l’instruction **GROUP BY**.
- 
+ 
 ```sql
 mysql> EXPLAIN SELECT MAX(c1), c2 FROM tb1 WHERE c2 LIKE '%100' GROUP BY c1\G
 *************************** 1. row ***************************
@@ -76,10 +76,10 @@ possible_keys: NULL
 ```
 
 Comme le montre la sortie, MySQL n’utilise pas d’index, car il n’en existe aucun qui convienne. Elle indique aussi *Using temporary; Using file sort*, ce qui signifie que MySQL crée une table temporaire pour satisfaire la clause **GROUP BY**.
- 
+ 
 Le simple fait de créer un index dans la colonne **c2** n’apporte aucune différence, et MySQL doit quand même créer une table temporaire :
 
-```sql 
+```sql 
 mysql> ALTER TABLE tb1 ADD KEY (c2);
 mysql> EXPLAIN SELECT MAX(c1), c2 FROM tb1 WHERE c2 LIKE '%100' GROUP BY c1\G
 *************************** 1. row ***************************
@@ -99,7 +99,7 @@ possible_keys: NULL
 
 Dans ce cas, il est possible de créer un **index couvert** dans **c1** et **c2**, moyennant quoi la valeur de **c2** est directement ajoutée dans l’index pour éliminer toute recherche de données supplémentaire.
 
-```sql 
+```sql 
 mysql> ALTER TABLE tb1 ADD KEY covered(c1,c2);
 mysql> EXPLAIN SELECT MAX(c1), c2 FROM tb1 WHERE c2 LIKE '%100' GROUP BY c1\G
 *************************** 1. row ***************************
@@ -120,7 +120,7 @@ possible_keys: covered
 Comme le montre l’exemple d’instruction EXPLAIN ci-dessus, MySQL utilise maintenant l’index couvert et empêche la création d’une table temporaire. 
 
 ## <a name="combined-index"></a>Index combiné
-Un index combiné est constitué de plusieurs colonnes et peut être considéré comme un tableau de lignes triées en concaténant les valeurs des colonnes indexées. Cette méthode peut être utile dans une instruction **GROUP BY**.
+Un index combiné est constitué de plusieurs colonnes et peut être considéré comme un tableau de lignes triées en concaténant les valeurs des colonnes indexées.  Cette méthode peut être utile dans une instruction **GROUP BY**.
 
 ```sql
 mysql> EXPLAIN SELECT c1, c2 from tb1 WHERE c2 LIKE '%100' ORDER BY c1 DESC LIMIT 10\G
@@ -141,7 +141,7 @@ possible_keys: NULL
 
 MySQL effectue une opération de *tri de fichiers* qui est relativement lente, en particulier quand le tri porte sur un grand nombre de lignes. Pour optimiser cette requête, un index combiné peut être créé dans les deux colonnes qui font l’objet du tri.
 
-```sql 
+```sql 
 mysql> ALTER TABLE tb1 ADD KEY my_sort2 (c1, c2);
 mysql> EXPLAIN SELECT c1, c2 from tb1 WHERE c2 LIKE '%100' ORDER BY c1 DESC LIMIT 10\G
 *************************** 1. row ***************************
@@ -160,11 +160,11 @@ possible_keys: NULL
 ```
 
 L’instruction EXPLAIN montre à présent que MySQL peut utiliser l’index combiné pour empêcher un nouveau tri, car l’index est déjà trié.
- 
+ 
 ## <a name="conclusion"></a>Conclusion
- 
+ 
 L’utilisation de l’instruction EXPLAIN et de différents types d’index peut améliorer considérablement les performances. Le fait de disposer d’un index dans la table ne signifie pas nécessairement que MySQL pourra l’utiliser pour vos requêtes. Validez toujours vos hypothèses en utilisant EXPLAIN et optimisez vos requêtes en utilisant des index.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Pour consulter les réponses d’homologues aux questions qui vous préoccupent le plus ou pour poster une nouvelle question/réponse, visitez le [forum MSDN](https://social.msdn.microsoft.com/forums/security/en-US/home?forum=AzureDatabaseforMySQL) ou [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-database-mysql).
+- Pour consulter les réponses d’homologues aux questions qui vous préoccupent le plus ou pour poster une nouvelle question/réponse, visitez la [page de questions Microsoft Q&A](/answers/topics/azure-database-mysql.html) ou [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-database-mysql).

@@ -6,14 +6,14 @@ services: internet-peering
 author: prmitiki
 ms.service: internet-peering
 ms.topic: overview
-ms.date: 11/27/2019
+ms.date: 12/15/2020
 ms.author: prmitiki
-ms.openlocfilehash: 576bc3e37711851acd7d6c7ac811a10e40080710
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 8f960e58d47963cbb239d498af52e7adfc77caa9
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75908911"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97586864"
 ---
 # <a name="internet-peering-overview"></a>Présentation du peering Internet
 
@@ -53,4 +53,4 @@ Pour obtenir des réponses aux questions fréquemment posées sur le peering, co
 
 * Pour plus d’informations sur les étapes de configuration d’un peering direct avec Microsoft, suivez la [procédure pas à pas de configuration d’un peering direct](walkthrough-direct-all.md).
 * Pour plus d’informations sur les étapes de configuration d’un peering Exchange avec Microsoft, suivez la [procédure pas à pas de configuration d’un peering Exchange](walkthrough-exchange-all.md).
-* En savoir plus sur les autres [fonctionnalités de mise en réseau](https://docs.microsoft.com/azure/networking/networking-overview) clés d’Azure.
+* En savoir plus sur les autres [fonctionnalités de mise en réseau](../networking/networking-overview.md) clés d’Azure.

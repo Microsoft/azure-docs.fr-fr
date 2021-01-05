@@ -7,17 +7,17 @@ documentationcenter: virtual-network
 author: RDhillon
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 02/21/2020
 ms.author: rdhillon
-ms.openlocfilehash: d26fd2fec5f9d5ab8e9d82ff2c6bd83b11c72e99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bdf0e87c92a55d0dbb5bbe34334a6de4580cb350
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77651169"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004957"
 ---
 # <a name="create-change-or-delete-service-endpoint-policy-using-the-azure-portal"></a>Créer, changer ou supprimer une stratégie de point de terminaison de service à l’aide du portail Azure
 

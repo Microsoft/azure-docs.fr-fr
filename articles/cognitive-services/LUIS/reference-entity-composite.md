@@ -3,26 +3,24 @@ title: Type d’entité composite - LUIS
 titleSuffix: Azure Cognitive Services
 description: Une entité composite est constituée d’autres entités (prédéfinies, simples, expressions régulières et listes). Les entités distinctes forment une entité entière.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 04/14/2020
-ms.author: diberry
-ms.openlocfilehash: bac37e91933d16f36f2d8917760968122a4f5619
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 3d936555a4d9a9c80718a24ba892c762f5a8354a
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588902"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608390"
 ---
 # <a name="composite-entity"></a>Entité composite
 
 Une entité composite est constituée d’autres entités (prédéfinies, simples, expressions régulières et listes). Les entités distinctes forment une entité entière.
 
 > [!CAUTION]
-> Cette entité est **déconseillée**. Vous devez migrer vers l’[entité issue du Machine Learning](reference-entity-machine-learned-entity.md).
+> Cette entité est **déconseillée**. Vous devez migrer vers l’[entité de machine-learning](reference-entity-machine-learned-entity.md).
 
 **Cette entité convient bien lorsque les données :**
 
@@ -173,7 +171,6 @@ Il s’agit du JSON si `verbose=true` est défini dans la chaîne de requête :
 ```
 
 * * *
-
 
 |Objet de données|Nom de l’entité|Valeur|
 |--|--|--|

@@ -1,25 +1,23 @@
 ---
 title: Partage de conteneurs de profil FSLogix Windows Virtual Desktop - Azure
 description: Guide pratique pour configurer un conteneur de profils FSLogix pour un pool d’hôtes Windows Virtual Desktop à l’aide d’un partage de fichiers basé sur une machine virtuelle.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/20/2019
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 96b593f544aa4bbf126c06747a01902581f5ffb4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 35b692033cc16f276b48bc6d973b27d994c1082a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226989"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88002576"
 ---
 # <a name="create-a-profile-container-for-a-host-pool-using-a-file-share"></a>Créer un conteneur de profils pour un pool hôte à l’aide d’un partage de fichiers
 
 Le service Windows Virtual Desktop offre des conteneurs de profils FSLogix en tant que solution de profil utilisateur recommandée. Nous recommandons de ne pas utiliser la solution Disque de profil utilisateur (UPD), qui sera déconseillée dans les futures versions de Windows Virtual Desktop.
 
-Cet article vous indique comment configurer un partage de conteneur de profils FSLogix pour un pool d’hôtes à l’aide d’un partage de fichiers basé sur machine virtuelle. Pour plus d’informations sur FSLogix, consultez le [site FSLogix](https://docs.fslogix.com/).
+Cet article vous indique comment configurer un partage de conteneur de profils FSLogix pour un pool d’hôtes à l’aide d’un partage de fichiers basé sur machine virtuelle. Nous vous recommandons fortement d’utiliser Azure Files au lieu du partage de fichiers. Pour plus d’informations sur FSLogix, consultez le [site FSLogix](https://docs.fslogix.com/).
 
 >[!NOTE]
 >Si vous recherchez des éléments de comparaison sur les différentes options de stockage pour les conteneurs de profil FSLogix sur Azure, consultez [Options de stockage pour les conteneurs de profil FSLogix](store-fslogix-profile.md).
@@ -66,7 +64,7 @@ Pour configurer les machines virtuelles avec le logiciel FSLogix, procédez comm
 6. Créez une clé nommée **Profils**.
 7. Créez les valeurs suivantes pour la clé Profils :
 
-| Name                | Type               | Données/Valeur                        |
+| Nom                | Type               | Données/Valeur                        |
 |---------------------|--------------------|-----------------------------------|
 | activé             | DWORD              | 1                                 |
 | VHDLocations        | Valeur à chaînes multiples | « Chemin d’accès réseau pour le partage de fichiers »     |

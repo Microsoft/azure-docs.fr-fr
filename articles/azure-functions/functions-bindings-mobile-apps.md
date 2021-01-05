@@ -3,21 +3,22 @@ title: Liaisons Mobile Apps pour Azure Functions
 description: Découvrez comment utiliser des liaisons Azure Mobile Apps dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 11/21/2017
 ms.author: cshoe
-ms.openlocfilehash: 3f16f2ef077a1fc3c82075aaf7b7685f941d0a31
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 5ea58cc3d9f3615a74249b36f3f9ffb79caddda1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82559580"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88212244"
 ---
 # <a name="mobile-apps-bindings-for-azure-functions"></a>Liaisons Mobile Apps pour Azure Functions 
 
 > [!NOTE]
 > Les liaisons Azure Mobile Apps sont disponibles uniquement pour Azure Functions 1.x. Elles ne sont pas prises en charge dans Azure Functions 2.x et ultérieur.
 
-Cet article explique comment utiliser des liaisons [Azure Mobile Apps](../app-service-mobile/app-service-mobile-value-prop.md) dans Azure Functions. Azure Functions prend en charge des liaisons d’entrée et de sortie pour Mobile Apps.
+Cet article explique comment utiliser des liaisons [Azure Mobile Apps](/previous-versions/azure/app-service-mobile/app-service-mobile-value-prop) dans Azure Functions. Azure Functions prend en charge des liaisons d’entrée et de sortie pour Mobile Apps.
 
 Les liaisons Mobile Apps vous permettent de lire et mettre à jour des tables de données dans des applications mobiles.
 

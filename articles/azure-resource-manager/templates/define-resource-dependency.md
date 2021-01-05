@@ -3,16 +3,16 @@ title: Définir l’ordre de déploiement des ressources
 description: Décrit la procédure permettant de définir une ressource comme dépendante d’une autre ressource au cours du déploiement afin de garantir le déploiement des ressources dans l'ordre adéquat.
 ms.topic: conceptual
 ms.date: 12/03/2019
-ms.openlocfilehash: 764b718416e1185f56c7eb6b8335792a5822f212
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 84cea915565ec6ac9872681e1d4173abacb46ac4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535466"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85255209"
 ---
 # <a name="define-the-order-for-deploying-resources-in-arm-templates"></a>Définir l’ordre de déploiement des ressources dans les modèles ARM
 
-Quand vous déployez une ressource, vous devez éventuellement vous assurer au préalable que d’autres ressources existent. Par exemple, vous avez besoin d’un serveur SQL avant de déployer une base de données SQL. Vous définissez cette relation en marquant une seule ressource comme dépendante de l'autre ressource. Pour définir une dépendance, vous devez utiliser l’élément **dependsOn** ou la fonction **reference**.
+Quand vous déployez une ressource, vous devez éventuellement vous assurer au préalable que d’autres ressources existent. Par exemple, vous avez besoin d’un serveur SQL logique avant de déployer une base de données. Vous définissez cette relation en marquant une seule ressource comme dépendante de l'autre ressource. Pour définir une dépendance, vous devez utiliser l’élément **dependsOn** ou la fonction **reference**.
 
 Resource Manager évalue les dépendances entre les ressources et les déploie dans leur ordre dépendant. Quand les ressources ne dépendent pas les unes des autres, Resource Manager les déploie en parallèle. Vous devez uniquement définir des dépendances pour les ressources qui sont déployées dans le même modèle.
 
@@ -59,7 +59,7 @@ La propriété de ressources vous permet de vous permet de spécifier les ressou
 
 Chaque ressource parente accepte uniquement certains types de ressources comme ressources enfants. Les types de ressource acceptés sont spécifiés dans le [schéma de modèle](https://github.com/Azure/azure-resource-manager-schemas) de la ressource parente. Le nom du type de ressource enfant inclut le nom du type de ressource parente. Par exemple, **Microsoft.Web/sites/config** et **Microsoft.Web/sites/extensions** sont deux ressources enfants de **Microsoft.Web/sites**.
 
-L'exemple suivant montre un serveur SQL et une base de données SQL. Notez qu'une dépendance explicite est définie entre la base de données SQL et le serveur SQL, même si la base de données est un enfant du serveur.
+L’exemple suivant montre un serveur SQL et une base de données. Notez qu’une dépendance explicite est définie entre la base de données et le serveur, même si la base de données est un enfant du serveur.
 
 ```json
 "resources": [

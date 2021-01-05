@@ -9,14 +9,14 @@ ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
 ms.custom: mvc
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 02/20/2020
-ms.openlocfilehash: a664f12843585ac7524cf8d51aef156d15d32504
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bf6e61ef3dfb1c50166cf17168b4deeb21e958d7
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77650979"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962907"
 ---
 # <a name="faq-about-using-azure-database-migration-service"></a>Questions fréquentes (FAQ) sur l’utilisation d’Azure Database Migration Service
 
@@ -32,7 +32,7 @@ Azure Database Migration Service est un service complètement managé conçu pou
 * Investissement continu dans les migrations sans problèmes.
 
 **Q. Quelles sont les paires sources/cibles actuellement prises en charge par Azure Database Migration Service ?**
-Le service prend actuellement en charge différentes paires sources/cibles, ou différents scénarios de migration. Pour obtenir la liste complète des états de chaque scénario de migration disponible, consultez l’article [État des scénarios de migration pris en charge par Azure Database Migration Service](https://docs.microsoft.com/azure/dms/resource-scenario-status).
+Le service prend actuellement en charge différentes paires sources/cibles, ou différents scénarios de migration. Pour obtenir la liste complète des états de chaque scénario de migration disponible, consultez l’article [État des scénarios de migration pris en charge par Azure Database Migration Service](./resource-scenario-status.md).
 
 D’autres scénarios de migration sont disponibles en préversion et nécessitent l’envoi d’une demande via le site DMS Preview. Pour obtenir la liste complète des scénarios en préversion et vous inscrire pour participer à une de ces offres, consultez le [site DMS Preview](https://aka.ms/dms-preview/).
 
@@ -49,7 +49,7 @@ Vous pouvez utiliser Azure Database Migration Service pour effectuer des migrati
 Azure Database Migration Service est la méthode recommandée pour la migration de bases de données à grande échelle vers Microsoft Azure. Pour plus d’informations sur la façon dont Azure Database Migration Service se distingue des autres outils de migration de bases de données Microsoft et pour obtenir des recommandations sur l’utilisation du service pour différents scénarios, consultez le billet de blog [Differentiating Microsoft’s Database Migration Tools and Services](https://techcommunity.microsoft.com/t5/microsoft-data-migration/differentiating-microsoft-s-database-migration-tools-and/ba-p/368529).
 
 **Q. Comment Azure Database Migration Service se distingue du produit Azure Migrate ?**
-Azure Migrate facilite la migration de machines virtuelles locales vers Azure IaaS. Le service évalue la pertinence de la migration et le dimensionnement en fonction des performances, et fournit des estimations de coût pour l’exécution de vos machines locales dans Azure. Azure Migrate est particulièrement utile pour les migrations de type lift-and-shift des charges de travail basées sur des machines virtuelles locales vers des machines virtuelles IaaS Azure. Cependant, contrairement à Azure Database Migration Service, Azure Migrate n’est pas un service de migration de bases de données spécialisée pour les plateformes de base de données relationnelle PaaS Azure, comme Azure SQL Database ou Azure SQL Database Managed Instance.
+Azure Migrate facilite la migration de machines virtuelles locales vers Azure IaaS. Le service évalue la pertinence de la migration et le dimensionnement en fonction des performances, et fournit des estimations de coût pour l’exécution de vos machines locales dans Azure. Azure Migrate est particulièrement utile pour les migrations de type lift-and-shift des charges de travail basées sur des machines virtuelles locales vers des machines virtuelles IaaS Azure. Cependant, contrairement à Azure Database Migration Service, Azure Migrate n'est pas un service de migration de bases de données spécialisé pour les plateformes de base de données relationnelle PaaS Azure, comme Azure SQL Database ou Azure SQL Managed Instance.
 
 ## <a name="setup"></a>Programme d’installation
 
@@ -58,11 +58,11 @@ Il existe plusieurs prérequis pour garantir qu’Azure Database Migration Servi
 
 Les conditions préalables associées à Azure Database Migration Service communes à tous les scénarios de migration pris en charge incluent le besoin de :
 
-* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) ou un [VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways).
-* Assurez-vous que les règles de groupe de sécurité de votre réseau virtuel ne bloquent pas les ports de communication suivants : 443, 53, 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg).
+* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](../expressroute/expressroute-introduction.md) ou un [VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md).
+* Assurez-vous que les règles de groupe de sécurité de votre réseau virtuel ne bloquent pas les ports de communication suivants : 443, 53, 5671 à 5672, 9350 à 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](../virtual-network/virtual-network-vnet-plan-design-arm.md).
 * Lorsque vous utilisez une appliance de pare-feu devant vos bases de données sources, vous devrez peut-être ajouter des règles de pare-feu pour permettre à Azure Database Migration Service d’accéder aux bases de données sources pour la migration.
 
-Pour obtenir la liste de tous les prérequis permettant des scénarios de migration spécifiques à l’aide d’Azure Database Migration Service, consultez les tutoriels associés dans la [documentation](https://docs.microsoft.com/azure/dms/dms-overview) d’Azure Database Migration Service sur docs.microsoft.com.
+Pour obtenir la liste de tous les prérequis permettant des scénarios de migration spécifiques à l’aide d’Azure Database Migration Service, consultez les tutoriels associés dans la [documentation](./dms-overview.md) d’Azure Database Migration Service sur docs.microsoft.com.
 
 **Q. Comment trouver l’adresse IP d’Azure Database Migration Service afin de créer une liste d’autorisations pour les règles de pare-feu utilisées pour accéder à ma base de données source pour la migration ?**
 Vous devrez peut-être ajouter des règles de pare-feu autorisant Azure Database Migration Service à accéder à votre base de données source pour la migration. L’adresse IP du service est dynamique, mais si vous utilisez ExpressRoute, cette adresse est attribuée en privé par votre réseau d’entreprise. Le moyen le plus simple d’identifier l’adresse IP appropriée est de regarder dans le même groupe de ressources que votre ressource Azure Database Migration Service provisionnée et y rechercher l’interface réseau associée. Généralement, le nom de la ressource d’interface réseau commence par le préfixe de la carte réseau, et est suivi d’une séquence de caractères et de chiffres unique (par exemple, NIC-jj6tnztnmarpsskr82rbndyp). En sélectionnant cette ressource d’interface réseau, vous pouvez voir l’adresse IP devant être incluse dans la liste d’autorisations sur la page du portail Azure de présentation des ressources.
@@ -86,7 +86,7 @@ Vous pouvez également déterminer le port écouté par SQL Server en interrogea
 ```
 
 **Q. Comment configurer un Réseau virtuel Microsoft Azure ?**
-Même si plusieurs didacticiels Microsoft peuvent vous présenter le processus de configuration d’un réseau virtuel, la documentation officielle est disponible dans l’article [Réseau virtuel Azure](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview).
+Même si plusieurs didacticiels Microsoft peuvent vous présenter le processus de configuration d’un réseau virtuel, la documentation officielle est disponible dans l’article [Réseau virtuel Azure](../virtual-network/virtual-networks-overview.md).
 
 ## <a name="usage"></a>Usage
 
@@ -96,7 +96,7 @@ Lors d’une migration de base de données classique et simple, vous effectuez l
 1. Créer des bases de données cibles.
 2. Évaluer vos bases de données sources.
     * Pour les migrations homogènes, évaluez vos bases de données existantes avec [DMA](https://www.microsoft.com/download/details.aspx?id=53595).
-    * Pour les migrations hétérogènes (à partir de sources concurrentes), évaluez vos bases de données existantes avec [SSMA](https://aka.ms/get-ssma). Vous utilisez également SSMA pour convertir des objets de base de données et migrer le schéma vers votre plateforme cible.
+    * Pour les migrations hétérogènes (à partir de sources concurrentes), évaluez vos bases de données existantes avec [SSMA](/sql/ssma/sql-server-migration-assistant). Vous utilisez également SSMA pour convertir des objets de base de données et migrer le schéma vers votre plateforme cible.
 3. Créer une instance Azure Database Migration Service.
 4. Créer un projet de migration spécifiant la ou les bases de données sources, la ou les bases de données cibles, et les tables à migrer.
 5. Démarrer le chargement complet.

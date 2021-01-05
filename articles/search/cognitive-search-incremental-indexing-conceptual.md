@@ -1,5 +1,5 @@
 ---
-title: Enrichissement incrémentiel (préversion)
+title: Concepts d’enrichissement incrémentiel (préversion)
 titleSuffix: Azure Cognitive Search
 description: Mettez en cache le contenu intermédiaire et les modifications incrémentielles du pipeline d’enrichissement par IA dans le stockage Azure pour protéger les investissements dans les documents traités existants. Cette fonctionnalité est actuellement disponible en préversion publique.
 manager: nitinme
@@ -7,20 +7,33 @@ author: Vkurpad
 ms.author: vikurpad
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 01/09/2020
-ms.openlocfilehash: 09003c26ead9108d07ae339fcf64235c246474a4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/18/2020
+ms.openlocfilehash: 9fb76c5c96795b8092c86e22acbab4ea5963b42e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024141"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90971634"
 ---
-# <a name="introduction-to-incremental-enrichment-and-caching-in-azure-cognitive-search"></a>Présentation de l’enrichissement incrémentiel et de la mise en cache dans Recherche cognitive Azure
+# <a name="incremental-enrichment-and-caching-in-azure-cognitive-search"></a>Enrichissement incrémentiel et mise en cache dans Recherche cognitive Azure
 
 > [!IMPORTANT] 
-> L’enrichissement incrémentiel est actuellement en version préliminaire publique. Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). L’[API REST version 2019-05-06-Preview](search-api-preview.md) fournit cette fonctionnalité. Il n’y a pas de prise en charge de portail ou de SDK .NET pour l’instant.
+> L’enrichissement incrémentiel est actuellement en version préliminaire publique. Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). 
+> [Les préversions de l'API REST](search-api-preview.md) offrent cette fonctionnalité. Il n’y a pas de prise en charge de portail ou de SDK .NET pour l’instant.
 
-L’enrichissement incrémentiel ajoute la mise en cache et l’état à un pipeline d’enrichissement, en préservant votre investissement existant et tout en modifiant uniquement les documents affectés par une modification particulière. Cela permet non seulement de préserver votre investissement financier dans le traitement (en particulier la reconnaissance optique des caractères et le traitement des images), mais également d’améliorer l’efficacité d’un système. Quand des structures et du content sont mis en cache, un indexeur peut déterminer les compétences qui ont changé et exécuter uniquement celles qui ont été modifiées, ainsi que toutes les compétences dépendantes en aval. 
+*L’enrichissement incrémentiel* est une fonctionnalité qui cible des [ensembles de compétences](cognitive-search-working-with-skillsets.md). Elle tire parti du Stockage Azure pour enregistrer la sortie de traitement émise par un pipeline d’enrichissement en vue d’une réutilisation dans de futures exécutions de l’indexeur. Dans la mesure du possible, l’indexeur réutilise toute sortie mise en cache qui est toujours valide. 
+
+L’enrichissement incrémentiel permet non seulement de préserver votre investissement financier dans le traitement (en particulier la reconnaissance optique des caractères et le traitement des images), mais aussi d’améliorer l’efficacité d’un système. Quand des structures et du content sont mis en cache, un indexeur peut déterminer les compétences qui ont changé et exécuter uniquement celles qui ont été modifiées, ainsi que toutes les compétences dépendantes en aval. 
+
+Un flux de travail qui utilise une mise en cache incrémentielle comprend les étapes suivantes :
+
+1. [Créer ou identifier un compte de stockage Azure](../storage/common/storage-account-create.md) pour stocker le cache.
+1. [Activer l’enrichissement incrémentiel](search-howto-incremental-index.md) dans l’indexeur.
+1. [Créer un indexeur](/rest/api/searchservice/create-indexer) (et un [ensemble de compétences](/rest/api/searchservice/create-skillset)) pour appeler le pipeline. Lors du traitement, les étapes d’enrichissement sont enregistrées pour chaque document dans le stockage d’objets blob en vue d’une utilisation ultérieure.
+1. Testez votre code, puis, après avoir apporté des modifications, utilisez la commande [Mettre à jour l’ensemble de compétences](/rest/api/searchservice/update-skillset) pour modifier une définition.
+1. [Exécutez l’indexeur](/rest/api/searchservice/run-indexer) pour appeler le pipeline, en extrayant la sortie mise en cache pour un traitement plus rapide et plus économique.
+
+Pour plus d’informations sur les étapes et les considérations à prendre en compte lors de l’utilisation d’un indexeur existant, consultez [Configurer l’enrichissement incrémentiel](search-howto-incremental-index.md).
 
 ## <a name="indexer-cache"></a>Cache d’indexeur
 
@@ -82,7 +95,7 @@ Ce paramètre garantit que seules les mises à jour de la définition de l’ens
 L’exemple suivant illustre une requête de mise à jour de l’ensemble de compétences avec le paramètre :
 
 ```http
-PUT https://customerdemos.search.windows.net/skillsets/callcenter-text-skillset?api-version=2019-05-06-Preview&disableCacheReprocessingChangeDetection=true
+PUT https://customerdemos.search.windows.net/skillsets/callcenter-text-skillset?api-version=2020-06-30-Preview&disableCacheReprocessingChangeDetection=true
 ```
 
 ### <a name="bypass-data-source-validation-checks"></a>Ignorer les vérifications de validation de la source de données
@@ -90,14 +103,14 @@ PUT https://customerdemos.search.windows.net/skillsets/callcenter-text-skillset?
 La plupart des modifications apportées à la définition de source de données invalident le cache. Toutefois, dans les scénarios où vous savez qu’une modification ne doit pas invalider le cache, par exemple, la modification d’une chaîne de connexion ou la rotation de la clé sur le compte de stockage, ajoutez le paramètre `ignoreResetRequirement` à la mise à jour de la source de données. La définition de ce paramètre sur `true` permet à la validation se poursuivre sans déclencher de réinitialisation qui entraînerait la reconstruction de tous les objets et leur remplissage complet.
 
 ```http
-PUT https://customerdemos.search.windows.net/datasources/callcenter-ds?api-version=2019-05-06-Preview&ignoreResetRequirement=true
+PUT https://customerdemos.search.windows.net/datasources/callcenter-ds?api-version=2020-06-30-Preview&ignoreResetRequirement=true
 ```
 
 ### <a name="force-skillset-evaluation"></a>Forcer l’évaluation des ensembles de compétences
 
 L’objectif du cache est d’éviter les traitements inutiles, mais supposons que vous apportiez une modification à une compétence que l’indexeur ne détecte pas (par exemple, en modifiant un texte dans du code externe, par exemple une compétence personnalisée).
 
-Dans ce cas, vous pouvez utiliser les [compétences de réinitialisation](https://docs.microsoft.com/rest/api/searchservice/2019-05-06-preview/reset-skills) pour forcer le retraitement d’une compétence en particulier, y compris les compétences en aval qui dépendent du résultat de cette compétence. Cette API accepte la requête POST avec une liste de compétences qui doit être invalidée et marquée pour retraitement. Après avoir réinitialisé les compétences, exécutez l’indexeur pour appeler le pipeline.
+Dans ce cas, vous pouvez utiliser les [compétences de réinitialisation](/rest/api/searchservice/preview-api/reset-skills) pour forcer le retraitement d’une compétence en particulier, y compris les compétences en aval qui dépendent du résultat de cette compétence. Cette API accepte la requête POST avec une liste de compétences qui doit être invalidée et marquée pour retraitement. Après avoir réinitialisé les compétences, exécutez l’indexeur pour appeler le pipeline.
 
 ## <a name="change-detection"></a>Détection des changements
 
@@ -138,23 +151,23 @@ Le traitement incrémentiel évalue la définition de votre ensemble de compéte
 
 ## <a name="api-reference"></a>Informations de référence sur l'API
 
-La version `2019-05-06-Preview` de l’API REST fournit un enrichissement incrémentiel par le biais de propriétés supplémentaires sur des indexeurs, des ensembles de compétences et des sources de données. En plus de la documentation de référence, consultez [Configurer la mise en cache pour l’enrichissement incrémentiel](search-howto-incremental-index.md) pour plus d’informations sur la façon d’appeler les API.
+La version `2020-06-30-Preview` de l’API REST fournit un enrichissement incrémentiel par le biais de propriétés supplémentaires sur des indexeurs. Des ensembles de compétences et des sources de données peuvent utiliser la version généralement disponible. En plus de la documentation de référence, consultez [Configurer la mise en cache pour l’enrichissement incrémentiel](search-howto-incremental-index.md) pour plus d’informations sur la façon d’appeler les API.
 
-+ [Créer un indexeur (api-version=2019-05-06-Preview)](https://docs.microsoft.com/rest/api/searchservice/2019-05-06-preview/create-indexer) 
++ [Créer un indexeur (api-version=2020-06-30-Preview)](/rest/api/searchservice/create-indexer) 
 
-+ [Mettre à jour un indexeur (api-version=2019-05-06-Preview)](https://docs.microsoft.com/rest/api/searchservice/2019-05-06-preview/update-indexer) 
++ [Mettre à jour un indexeur (api-version=2020-06-30-Preview)](/rest/api/searchservice/update-indexer) 
 
-+ [Mettre à jour un ensemble de compétences (api-version=2019-05-06-Preview)](https://docs.microsoft.com/rest/api/searchservice/2019-05-06-preview/update-skillset) (nouveau paramètre d’URI sur la requête)
++ [Mettre à jour un ensemble de compétences (api-version=2020-06-30)](/rest/api/searchservice/update-skillset) (nouveau paramètre d’URI sur la requête)
 
-+ [Réinitialiser les compétences (api-version=2019-05-06-Preview)](https://docs.microsoft.com/rest/api/searchservice/2019-05-06-preview/reset-skills)
++ [Réinitialiser les compétences (api-version=2020-06-30)](/rest/api/searchservice/preview-api/reset-skills)
 
-+ Indexeurs de base de données (SQL Azure, Cosmos DB). Certains indexeurs récupèrent les données par le biais de requêtes. Pour les requêtes qui récupèrent des données, [Mettre à jour la source de données](https://docs.microsoft.com/rest/api/searchservice/update-data-source) prend en charge un nouveau paramètre de requête **ignoreResetRequirement**, qui doit avoir la valeur `true` quand votre action de mise à jour ne doit pas invalider le cache. 
++ Indexeurs de base de données (SQL Azure, Cosmos DB). Certains indexeurs récupèrent les données par le biais de requêtes. Pour les requêtes qui récupèrent des données, [Mettre à jour la source de données](/rest/api/searchservice/update-data-source) prend en charge un nouveau paramètre de requête **ignoreResetRequirement**, qui doit avoir la valeur `true` quand votre action de mise à jour ne doit pas invalider le cache. 
 
   Utilisez **ignoreResetRequirement** avec modération, car cela peut entraîner une incohérence involontaire de vos données, qui n’est pas facilement détectée.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-L’enrichissement incrémentiel est une fonctionnalité puissante qui étend le suivi aux ensembles de compétences et à l’enrichissement par IA. L’enrichissement incrémentiel permet de réutiliser le contenu traité existant au fur et à mesure que vous itérez au sein de la conception de compétences.
+L’enrichissement incrémentiel est une fonctionnalité puissante qui étend le suivi aux ensembles de compétences et à l’enrichissement par IA. L'enrichissement incrémentiel permet de réutiliser le contenu traité existant au fur et à mesure que vous itérez au sein de la conception de compétences.
 
 En guise d’étape suivante, activez la mise en cache sur un indexeur existant ou ajoutez un cache lors de la définition d’un nouvel indexeur.
 

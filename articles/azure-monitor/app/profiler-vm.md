@@ -6,26 +6,26 @@ author: cweining
 ms.author: cweining
 ms.date: 11/08/2019
 ms.reviewer: mbullwin
-ms.openlocfilehash: 7c5dfe6ed08df01f78346c76fd5a35e7d64ab520
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f514dd7b54ac091535aeab43a8a7d2a645b50a09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671577"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87315816"
 ---
 # <a name="profile-web-apps-running-on-an-azure-virtual-machine-or-a-virtual-machine-scale-set-by-using-application-insights-profiler"></a>Profiler des applications web s’exécutant sur une machine virtuelle Azure ou un groupe de machines virtuelles identiques avec Application Insights Profiler
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 Vous pouvez également déployer Azure Application Insights Profiler sur ces services :
-* [Azure App Service](../../azure-monitor/app/profiler.md?toc=/azure/azure-monitor/toc.json)
+* [Azure App Service](./profiler.md?toc=%2fazure%2fazure-monitor%2ftoc.json)
 * [Azure Cloud Services](profiler-cloudservice.md?toc=/azure/azure-monitor/toc.json)
-* [Azure Service Fabric](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
+* [Azure Service Fabric](?toc=%2fazure%2fazure-monitor%2ftoc.json)
 
 ## <a name="deploy-profiler-on-a-virtual-machine-or-a-virtual-machine-scale-set"></a>Déployer Profiler sur une machine virtuelle ou un groupe de machines virtuelles identiques
 Cet article vous montre comment exécuter Application Insights Profiler sur votre machine virtuelle Azure ou votre groupe de machines virtuelles identiques Azure. Profiler est installé avec l’extension Diagnostics Azure pour machines virtuelles. Configurez l’extension pour exécuter Profiler et générez le SDK Application Insights dans votre application.
 
-1. Ajoutez le Kit de développement logiciel (SDK) Application Insights SDK à votre [application ASP.NET](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net).
+1. Ajoutez le Kit de développement logiciel (SDK) Application Insights SDK à votre [application ASP.NET](./asp-net.md).
 
    Pour voir les profils de vos demandes, vous devez envoyer les données de télémétrie des demandes à Application Insights.
 
@@ -67,12 +67,12 @@ Cet article vous montre comment exécuter Application Insights Profiler sur votr
 
 1. Si l’application souhaitée s’exécute avec [IIS](https://www.microsoft.com/web/downloads/platform.aspx), activez la fonctionnalité Windows `IIS Http Tracing`.
 
-   a. Établissez un accès à distance à l’environnement, puis utilisez la fenêtre [Ajouter des fonctionnalités Windows]( https://docs.microsoft.com/iis/configuration/system.webserver/tracing/). Sinon, exécutez la commande suivante dans PowerShell (comme administrateur) :  
+   a. Établissez un accès à distance à l’environnement, puis utilisez la fenêtre [Ajouter des fonctionnalités Windows](/iis/configuration/system.webserver/tracing/). Sinon, exécutez la commande suivante dans PowerShell (comme administrateur) :  
 
     ```powershell
     Enable-WindowsOptionalFeature -FeatureName IIS-HttpTracing -Online -All
     ```  
-   b. Si l’établissement de l’accès à distance est un problème, vous pouvez utiliser [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) pour exécuter la commande suivante :  
+   b. Si l’établissement de l’accès à distance est un problème, vous pouvez utiliser [Azure CLI](/cli/azure/get-started-with-azure-cli) pour exécuter la commande suivante :  
 
     ```powershell
     az vm run-command invoke -g MyResourceGroupName -n MyVirtualMachineName --command-id RunPowerShellScript --scripts "Enable-WindowsOptionalFeature -FeatureName IIS-HttpTracing -Online -All"
@@ -117,3 +117,4 @@ Nous n’envisageons pas de prendre en charge Application Insights Profiler pour
 [resourceexplorerput]: ./media/profiler-vm/resource-explorer-put.png
 [resourceexplorersinksconfig]: ./media/profiler-vm/resource-explorer-sinks-config.png
 [wadextension]: ./media/profiler-vm/wad-extension.png
+

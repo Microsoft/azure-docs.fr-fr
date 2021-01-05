@@ -17,12 +17,12 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5dbfca54227895de53b984dcf5c7a1f8c5fbf51d
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: af448d5d28c5add39176500b988824b17f85b9fb
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83647397"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96861967"
 ---
 # <a name="get-started-with-the-azure-active-directory-reporting-api"></a>Prise en main de l’API de création de rapports Azure Active Directory
 
@@ -32,7 +32,7 @@ En utilisant l’API Microsoft Graph pour les rapports Azure AD, vous pouvez obt
 
 Cet article fournit une vue d’ensemble de l’API de création de rapports, et indique notamment comment y accéder.
 
-Si vous rencontrez des problèmes, consultez [Comment obtenir une assistance pour Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-troubleshooting-support-howto).
+Si vous rencontrez des problèmes, consultez [Comment obtenir une assistance pour Azure Active Directory](../fundamentals/active-directory-troubleshooting-support-howto.md).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -47,9 +47,9 @@ Pour plus d’instructions, consultez les [prérequis à l’accès à l’API d
 
 ## <a name="api-endpoints"></a>Points de terminaison d’API 
 
-Le point de terminaison de l’API Microsoft Graph pour les journaux d’audit est `https://graph.microsoft.com/v1.0/auditLogs/directoryAudits` et le point de terminaison de l’API Microsoft Graph pour les connexions est `https://graph.microsoft.com/v1.0/auditLogs/signIns`. Pour plus d’informations, consultez les [informations de référence sur l’API d’audit](https://developer.microsoft.com/graph/docs/api-reference/v1.0/resources/directoryaudit) et [sur l’API de connexion](https://developer.microsoft.com/graph/docs/api-reference/v1.0/resources/signIn).
+Le point de terminaison de l’API Microsoft Graph pour les journaux d’audit est `https://graph.microsoft.com/v1.0/auditLogs/directoryAudits` et le point de terminaison de l’API Microsoft Graph pour les connexions est `https://graph.microsoft.com/v1.0/auditLogs/signIns`. Pour plus d’informations, consultez les [informations de référence sur l’API d’audit](/graph/api/resources/directoryaudit) et [sur l’API de connexion](/graph/api/resources/signIn).
 
-De plus, vous pouvez utiliser l’[API Identity Protection relative aux détections d’événements à risque](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/identityriskevent) pour accéder par programmation aux détections de sécurité à l’aide de Microsoft Graph. Pour plus d’informations, consultez [Prise en main d’Azure Active Directory Identity Protection et de Microsoft Graph](../identity-protection/graph-get-started.md). 
+De plus, vous pouvez utiliser l’[API Identity Protection relative aux détections d’événements à risque](/graph/api/resources/identityriskevent?view=graph-rest-beta) pour accéder par programmation aux détections de sécurité à l’aide de Microsoft Graph. Pour plus d’informations, consultez [Prise en main d’Azure Active Directory Identity Protection et de Microsoft Graph](../identity-protection/howto-identity-protection-graph-api.md). 
   
 ## <a name="apis-with-microsoft-graph-explorer"></a>API avec l'Afficheur Microsoft Graph
 
@@ -70,5 +70,3 @@ Pour plus d’instructions, consultez [Obtenir des données à l’aide de l’A
  * [Configuration requise pour accéder à l’API de création de rapports](howto-configure-prerequisites-for-reporting-api.md) 
  * [Obtenir des données à l’aide de l’API Génération de rapports Azure AD avec des certificats](tutorial-access-api-with-certificates.md)
  * [Résoudre les erreurs dans l’API de création de rapports Azure AD](troubleshoot-graph-api.md)
-
-

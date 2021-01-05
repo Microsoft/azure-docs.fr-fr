@@ -2,7 +2,6 @@
 title: Tester votre application LUIS
 titleSuffix: Azure Cognitive Services
 description: Le test est le processus consistant à fournir des exemples d’énoncés à LUIS et obtenir une réponse des intentions et des entités reconnues par LUIS.
-author: diberry
 manager: nitinme
 services: cognitive-services
 ms.custom: seodec18
@@ -10,19 +9,18 @@ ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 10/10/2019
-ms.author: diberry
-ms.openlocfilehash: 25b360f90a0920aad2ea5e68cda31a68be5d37a9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ef63bf68fec592b768986a1329663508443c514b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73486674"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535846"
 ---
 # <a name="testing-example-utterances-in-luis"></a>Test d’exemples d’énoncés dans LUIS
 
 Le test est le processus consistant à fournir des exemples d’énoncés à LUIS et obtenir une réponse des intentions et des entités reconnues par LUIS. 
 
-Vous pouvez tester LUIS de manière interactive, un énoncé à la fois, ou fournir un lot d’énoncés. Pendant le test, vous pouvez comparer la réponse de prédiction du modèle actif actuel à la réponse de prédiction du modèle publié. 
+Vous pouvez tester LUIS de manière interactive, un énoncé à la fois, ou fournir un ensemble d'énoncés. Pendant le test, vous pouvez comparer la réponse de prédiction du modèle actif actuel à la réponse de prédiction du modèle publié. 
 
 <a name="A-test-score"></a>
 <a name="Score-all-intents"></a>

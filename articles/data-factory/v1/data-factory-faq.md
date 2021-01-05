@@ -3,20 +3,20 @@ title: Azure Data Factory - Forum aux Questions
 description: Forum aux Questions sur Azure Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 1b042c0279e458cf83bd5c81147f4b1f25d7687d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 57f2beef3dc14a47480950bf9e3bdf35a1fd6ce8
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645138"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495818"
 ---
 # <a name="azure-data-factory---frequently-asked-questions"></a>Azure Data Factory - Forum aux Questions
 > [!NOTE]
@@ -70,9 +70,9 @@ Le tableau suivant fournit une liste d’environnements de calcul pris en charge
 | --- | --- |
 | [Cluster HDInsight à la demande](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) ou [votre propre cluster HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) |[DotNet](data-factory-use-custom-activities.md), [Hive](data-factory-hive-activity.md), [Pig](data-factory-pig-activity.md), [MapReduce](data-factory-map-reduce.md), [Diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md) |
 | [Azure Batch](data-factory-compute-linked-services.md#azure-batch-linked-service) |[DotNet](data-factory-use-custom-activities.md) |
-| [Azure Machine Learning](data-factory-compute-linked-services.md#azure-machine-learning-linked-service) |[Activités Machine Learning : exécution par lot et ressource de mise à jour](data-factory-azure-ml-batch-execution-activity.md) |
+| [Azure Machine Learning Studio (classique)](data-factory-compute-linked-services.md#azure-machine-learning-studio-classic-linked-service) |[Activités Studio (classique) : exécution par lot et ressource de mise à jour](data-factory-azure-ml-batch-execution-activity.md) |
 | [Service Analytique Azure Data Lake](data-factory-compute-linked-services.md#azure-data-lake-analytics-linked-service) |[Langage U-SQL du service Analytique Data Lake](data-factory-usql-activity.md) |
-| [Azure SQL](data-factory-compute-linked-services.md#azure-sql-linked-service), [Azure SQL Data Warehouse](data-factory-compute-linked-services.md#azure-sql-data-warehouse-linked-service), [SQL Server](data-factory-compute-linked-services.md#sql-server-linked-service) |[Procédure stockée](data-factory-stored-proc-activity.md) |
+| [Azure SQL](data-factory-compute-linked-services.md#azure-sql-linked-service), [Azure Synapse Analytics](data-factory-compute-linked-services.md#azure-synapse-analytics-linked-service), [SQL Server](data-factory-compute-linked-services.md#sql-server-linked-service) |[Procédure stockée](data-factory-stored-proc-activity.md) |
 
 ### <a name="how-does-azure-data-factory-compare-with-sql-server-integration-services-ssis"></a>Comparaison d’Azure Data Factory avec SQL Server Integration Services (SSIS) 
 Consultez la présentation [Azure Data Factory et SSIS](https://www.sqlbits.com/Sessions/Event15/Azure_Data_Factory_vs_SSIS) faite par l’un de nos MVP (Most Valued Professional), Reza Rad. Certains des changements récents Data Factory peuvent ne pas figurer dans le jeu de diapositives. Nous ajoutons continuellement des fonctionnalités à Azure Data Factory. Nous ajoutons continuellement des fonctionnalités à Azure Data Factory. Nous intégrerons ces mises à jour dans la comparaison des technologies d’intégration de données de Microsoft un peu plus tard cette année.   
@@ -205,4 +205,4 @@ Si vous voulez vraiment arrêter immédiatement toutes les exécutions, le seul 
 [adf-pricing-details]: https://go.microsoft.com/fwlink/?LinkId=517777
 [hdinsight-supported-regions]: https://azure.microsoft.com/pricing/details/hdinsight/
 [hdinsight-alternate-storage]: https://social.technet.microsoft.com/wiki/contents/articles/23256.using-an-hdinsight-cluster-with-alternate-storage-accounts-and-metastores.aspx
-[hdinsight-alternate-storage-2]: https://blogs.msdn.com/b/cindygross/archive/2014/05/05/use-additional-storage-accounts-with-hdinsight-hive.aspx
+[hdinsight-alternate-storage-2]: /archive/blogs/cindygross/use-additional-storage-accounts-with-hdinsight-hive

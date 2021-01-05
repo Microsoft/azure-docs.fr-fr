@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/17/2020
-ms.openlocfilehash: 2da0cd2ede33abe8ebbe3616192349112fb24bae
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: f9f95a5e85ec4eebf82cca707476750595331d73
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83797500"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95522666"
 ---
 # <a name="visualizing-data-from-azure-monitor"></a>Visualisation des données à partir d’Azure Monitor
 Cet article récapitule les méthodes disponibles pour visualiser les métriques et les données de journal stockées dans Azure Monitor.
@@ -19,9 +19,9 @@ Cet article récapitule les méthodes disponibles pour visualiser les métriques
 Les visualisations telles que les diagrammes ou graphiques peuvent vous aider à analyser vos données de supervision pour explorer des problèmes en profondeur et identifier des modèles. En fonction de l’outil que vous utilisez, vous pouvez également avoir la possibilité de partager les visualisations avec d’autres utilisateurs à l’intérieur et en dehors de votre organisation.
 
 ## <a name="workbooks"></a>Workbooks
-Les [classeurs](../azure-monitor/platform/workbooks-overview.md) sont des documents interactifs qui fournissent des insights détaillés sur vos données, et favorisent l’investigation et la collaboration au sein de l’équipe. Parmi les exemples typiques d’utilisation des classeurs citons les guides de résolution des problèmes et les bilans d’incidents.
+Les [classeurs](./platform/workbooks-overview.md) sont des documents interactifs qui fournissent des insights détaillés sur vos données, et favorisent l’investigation et la collaboration au sein de l’équipe. Parmi les exemples typiques d’utilisation des classeurs citons les guides de résolution des problèmes et les bilans d’incidents.
 
-![Classeur](media/visualizations/workbook.png)
+![Schéma illustrant des captures d’écran de plusieurs pages d’un classeur, notamment Analyse des consultations de page, Utilisation et Temps passé sur la page.](media/visualizations/workbook.png)
 
 ### <a name="advantages"></a>Avantages
 - Prend en charge les métriques et les journaux d’activité.
@@ -39,13 +39,17 @@ Les [classeurs](../azure-monitor/platform/workbooks-overview.md) sont des docume
 ## <a name="azure-dashboards"></a>Tableaux de bord Azure
 Les [tableaux de bord Azure](../azure-portal/azure-portal-dashboards.md) constituent la principale technologie de création de tableaux de bord pour Azure. Ils sont particulièrement efficaces pour fournir un panorama unique de vos infrastructure et services Azure, ce qui vous permet d’identifier rapidement les problèmes importants.
 
-![tableau de bord](media/visualizations/dashboard.png)
+![Capture d’écran montrant un exemple de tableau de bord Azure avec des informations personnalisables.](media/visualizations/dashboard.png)
+
+Voici une procédure vidéo expliquant la création de tableaux de bord.
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4AslH]
 
 ### <a name="advantages"></a>Avantages
 - Intégration approfondie à Azure. Les visualisations peuvent être épinglées aux tableaux de bord à partir de plusieurs pages Azure, notamment Metrics Explorer, Log Analytics et Application Insights.
 - Prend en charge les métriques et les journaux d’activité.
 - Combinez des données provenant de plusieurs sources, notamment une sortie [Metrics Explorer](platform/metrics-charts.md), des [requêtes de journal](log-query/log-query-overview.md) ainsi que des [cartes](app/app-map.md) et des données de disponibilité dans Application Insights.
-- Possibilité de définir des tableaux de bord personnels ou partagés. Intégré à [l’authentification basée sur les rôles (RBAC)](../role-based-access-control/overview.md) Azure.
+- Possibilité de définir des tableaux de bord personnels ou partagés. Intégration avec le [contrôle d’accès Azure en fonction du rôle (Azure RBAC)](../role-based-access-control/overview.md).
 - Actualisation automatique. L’actualisation des métriques a lieu selon un intervalle de temps de cinq minutes au minimum. Les journaux sont actualisés toutes les heures, avec une option d’actualisation manuelle à la demande en cliquant sur l’icône d’actualisation d’une visualisation donnée ou en actualisant le tableau de bord complet.
 - Les tableaux de bord de métriques sont paramétrés avec un horodatage et des paramètres personnalisés.
 - Options de disposition flexibles.
@@ -84,7 +88,7 @@ Les [tableaux de bord Azure](../azure-portal/azure-portal-dashboards.md) constit
 ## <a name="grafana"></a>Grafana
 [Grafana](https://grafana.com/) est une plateforme ouverte qui convient parfaitement dans les tableaux de bord opérationnels. Elle est particulièrement utile pour détecter, isoler et trier les incidents opérationnels. Vous pouvez ajouter le [plug-in de source de données Azure Monitor pour Grafana](platform/grafana-plugin.md) à votre abonnement Azure afin qu’il visualise vos données de métriques Azure.
 
-![Grafana](media/visualizations/grafana.png)
+![Capture d’écran montrant des visualisations Grafana.](media/visualizations/grafana.png)
 
 ### <a name="advantages"></a>Avantages
 - Visualisations riches.
@@ -116,7 +120,7 @@ Vous pouvez accéder aux données dans les journaux et aux métriques dans Azure
 Les [affichages dans Azure Monitor](platform/view-designer.md) vous permettent de créer des visualisations personnalisées avec les données de journal stockées. Les [solutions de supervision](insights/solutions.md) s’en servent pour présenter les données qu’elles collectent.
 
 
-![Affichage](media/visualizations/view.png)
+![Capture d’écran montrant une vignette Solution de supervision de conteneur et la vue détaillée Azure Monitor qui s’ouvre lorsque vous la sélectionnez.](media/visualizations/view.png)
 
 ### <a name="advantages"></a>Avantages
 - Visualisations riches des données de journal.
@@ -137,7 +141,7 @@ Les [affichages dans Azure Monitor](platform/view-designer.md) vous permettent d
 - Découvrez les [données collectées par Azure Monitor](platform/data-platform.md).
 - Découvrez les [tableaux de bord Azure](../azure-portal/azure-portal-dashboards.md).
 - Découvrez les [affichages dans Azure Monitor](platform/view-designer.md).
-- Découvrez les [classeurs](../azure-monitor/platform/workbooks-overview.md).
-- Découvrez [l’importation de données de journal dans Power BI](../azure-monitor/platform/powerbi.md).
-- Découvrez le [plug-in de source de données Azure Monitor pour Grafana](../azure-monitor/platform/grafana-plugin.md).
+- Découvrez les [classeurs](./platform/workbooks-overview.md).
+- Découvrez [l’importation de données de journal dans Power BI](./platform/powerbi.md).
+- Découvrez le [plug-in de source de données Azure Monitor pour Grafana](./platform/grafana-plugin.md).
 

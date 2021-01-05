@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 04/14/2020
 ms.author: mbaldwin
 ms.custom: security-benchmark
-ms.openlocfilehash: 993793d21e6253188dfc199d8701cbe117503517
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: fb4c4c5a0cf6610af17aabc562c42d2e0eb4e6a4
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81408435"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94409091"
 ---
 # <a name="security-control-incident-response"></a>Contrôle de sécurité : Réponse aux incidents
 
@@ -42,9 +42,9 @@ Security Center attribue un niveau de gravité à chaque alerte pour vous aider 
 
 En outre, marquez clairement les abonnements (par ex. production, non-production) à l’aide d’étiquettes et créez un système de nommage pour identifier et classer clairement les ressources Azure, en particulier celles qui traitent des données sensibles.  Il vous incombe de hiérarchiser le traitement des alertes en fonction de la criticité des ressources et de l’environnement Azure où l’incident s’est produit.
 
-- [Alertes de sécurité dans le Centre de sécurité Azure](https://docs.microsoft.com/azure/security-center/security-center-alerts-overview)
+- [Alertes de sécurité dans le Centre de sécurité Azure](../../security-center/security-center-alerts-overview.md)
 
-- [Organisation des ressources Azure à l’aide de catégories](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Organisation des ressources Azure à l’aide de catégories](../../azure-resource-manager/management/tag-resources.md)
 
 ## <a name="103-test-security-response-procedures"></a>10.3 : Tester les procédures de réponse de sécurité
 
@@ -64,7 +64,7 @@ Effectuez des exercices pour tester les capacités de réponse aux incidents de 
 
 Microsoft utilisera les informations de contact pour le signalement d’incidents de sécurité pour vous contacter si le centre de réponse aux incidents de sécurité Microsoft (MSRC, Microsoft Security Response Center) découvre que vos données ont été consultées de manière illégale ou par un tiers non autorisé. Examinez les incidents après les faits pour vous assurer que les problèmes sont résolus.
 
-- [Comment définir le contact de sécurité d’Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details)
+- [Comment définir le contact de sécurité d’Azure Security Center](../../security-center/security-center-provide-security-contact-details.md)
 
 ## <a name="105-incorporate-security-alerts-into-your-incident-response-system"></a>10.5 : Intégrer des alertes de sécurité à votre système de réponse aux incidents
 
@@ -74,9 +74,9 @@ Microsoft utilisera les informations de contact pour le signalement d’incident
 
 Exportez vos alertes et recommandations Azure Security Center en utilisant la fonctionnalité d’exportation continue pour identifier les risques pesant sur les ressources Azure. L’exportation continue vous permet d’exporter les alertes et les recommandations manuellement, ou automatiquement de manière continue. Vous pouvez utiliser le connecteur de données Azure Security Center pour diffuser en continu les alertes vers Azure Sentinel.
 
-- [Comment configurer l’exportation continue](https://docs.microsoft.com/azure/security-center/continuous-export)
+- [Comment configurer l’exportation continue](../../security-center/continuous-export.md)
 
-- [Comment envoyer des alertes à Azure Sentinel](https://docs.microsoft.com/azure/sentinel/connect-azure-security-center)
+- [Comment envoyer des alertes à Azure Sentinel](../../sentinel/connect-azure-security-center.md)
 
 ## <a name="106-automate-the-response-to-security-alerts"></a>10.6 : Automatiser la réponse aux alertes de sécurité
 
@@ -86,7 +86,7 @@ Exportez vos alertes et recommandations Azure Security Center en utilisant la fo
 
 Utilisez la fonctionnalité d’automatisation de workflow d’Azure Security Center pour déclencher automatiquement des réponses via « Logic Apps » aux alertes et aux recommandations de sécurité afin de protéger vos ressources Azure.
 
-- [Comment configurer l’automatisation des workflows et Logic Apps](https://docs.microsoft.com/azure/security-center/workflow-automation)
+- [Comment configurer l’automatisation des workflows et Logic Apps](../../security-center/workflow-automation.md)
 
 
 ## <a name="next-steps"></a>Étapes suivantes

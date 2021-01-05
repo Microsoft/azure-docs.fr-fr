@@ -1,32 +1,34 @@
 ---
 title: Création de filtres avec l’API REST Media Services Azure v3
-description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Media Services crée des manifestes dynamiques pour obtenir cette diffusion sélective.
+description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Media Services v3 crée des manifestes dynamiques pour obtenir cette diffusion sélective.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
-ms.topic: article
-ms.date: 06/13/2019
-ms.author: juliako
-ms.openlocfilehash: f9134dd3bc926e6e2f454e5187e03365e91ed22a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: c1d7bf933b487c40d571f1912341b5ef771e4e67
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75780332"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90527324"
 ---
 # <a name="creating-filters-with-media-services-rest-api"></a>Créer des filtres avec l’API REST Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Quand vous transmettez votre contenu à un client (événements de streaming en direct ou vidéo à la demande), le fichier manifeste de l’élément multimédia par défaut ne permet pas toujours au client d’interagir avec le contenu comme il le voudrait. Avec Azure Media Services, vous pouvez définir des filtres de compte et d’élément multimédia à appliquer à votre contenu. 
 
 Pour obtenir une description détaillée de cette fonctionnalité et des scénarios dans lesquels elle est utilisée, consultez [Manifestes dynamiques](filters-dynamic-manifest-overview.md) et [Filtres](filters-concept.md).
 
-Cette rubrique explique comment définir un filtre pour un élément multimédia Vidéo à la demande et utiliser les API REST pour créer des [Filtres de compte](https://docs.microsoft.com/rest/api/media/accountfilters) et des [Filtres d’élément multimédia](https://docs.microsoft.com/rest/api/media/assetfilters). 
+Cette rubrique explique comment définir un filtre pour un élément multimédia Vidéo à la demande et utiliser les API REST pour créer des [Filtres de compte](/rest/api/media/accountfilters) et des [Filtres d’élément multimédia](/rest/api/media/assetfilters). 
 
 > [!NOTE]
 > Veillez à consulter [presentationTimeRange](filters-concept.md#presentationtimerange).
@@ -97,7 +99,7 @@ Sélectionnez **Envoyer**.
 
 Le filtre a été créé.
 
-Pour plus d’informations, voir [Créer ou mettre à jour](https://docs.microsoft.com/rest/api/media/accountfilters/createorupdate). Voir aussi [Exemples de filtres JSON](https://docs.microsoft.com/rest/api/media/accountfilters/createorupdate#create-an-account-filter).
+Pour plus d’informations, voir [Créer ou mettre à jour](/rest/api/media/accountfilters/createorupdate). Voir aussi [Exemples de filtres JSON](/rest/api/media/accountfilters/createorupdate#create-an-account-filter).
 
 ## <a name="create-asset-filters"></a>Créer des filtres d’élément multimédia  
 
@@ -115,13 +117,13 @@ Sélectionnez **Envoyer**.
 
 Le filtre d’élément multimédia a été créé.
 
-Pour savoir comment créer ou mettre à jour des filtres d’élément multimédia, voir [Créer ou mettre à jour](https://docs.microsoft.com/rest/api/media/assetfilters/createorupdate). Voir aussi [Exemples de filtres JSON](https://docs.microsoft.com/rest/api/media/assetfilters/createorupdate#create-an-asset-filter). 
+Pour savoir comment créer ou mettre à jour des filtres d’élément multimédia, voir [Créer ou mettre à jour](/rest/api/media/assetfilters/createorupdate). Voir aussi [Exemples de filtres JSON](/rest/api/media/assetfilters/createorupdate#create-an-asset-filter). 
 
 ## <a name="associate-filters-with-streaming-locator"></a>Associer des filtres à un localisateur de streaming
 
 Vous pouvez spécifier une liste de filtres de comptes ou de ressources qui s’appliquent à votre localisateur de streaming. Le [packager dynamique (point de terminaison de streaming)](dynamic-packaging-overview.md) applique cette liste de filtres avec ceux spécifiés par votre client dans l’URL. Cette combinaison génère un [manifeste dynamique](filters-dynamic-manifest-overview.md) qui est basé sur les filtres spécifiés dans l’URL ainsi que sur ceux que vous spécifiez dans le localisateur de streaming. Nous vous recommandons d’utiliser cette fonctionnalité si vous voulez appliquer des filtres, mais que vous ne voulez pas exposer les noms de filtre dans l’URL.
 
-Pour créer des filtres et les associer à un localisateur de streaming à l’aide de REST, utilisez l’API [Créer un localisateur de streaming](https://docs.microsoft.com/rest/api/media/streaminglocators/create) et spécifiez `properties.filters` dans le [corps de la demande](https://docs.microsoft.com/rest/api/media/streaminglocators/create#request-body).
+Pour créer des filtres et les associer à un localisateur de streaming à l’aide de REST, utilisez l’API [Créer un localisateur de streaming](/rest/api/media/streaminglocators/create) et spécifiez `properties.filters` dans le [corps de la demande](/rest/api/media/streaminglocators/create#request-body).
                                 
 ## <a name="stream-using-filters"></a>Effectuer un streaming à l’aide de filtres
 

@@ -7,21 +7,21 @@ author: KumudD
 manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/18/2020
+ms.date: 12/02/2020
 ms.author: mnayak
-ms.openlocfilehash: 5d56b276e44a1dbdffb66270e04763ea729628ef
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: ef1e33a2e43f26dcaf794b2ed81f27d39639b52d
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594918"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96533976"
 ---
 # <a name="configure-routing-preference-for-a-public-ip-address-using-the-azure-portal"></a>Configurer une préférence de routage pour une adresse IP publique à l’aide du portail Azure
 
-Cet article montre comment configurer une préférence de routage via un réseau de fournisseur de services Internet (option **Internet**) pour une adresse IP publique à l’aide du portail Azure. Une fois l’adresse IP publique créée, vous pouvez l’associer aux ressources Azure suivantes pour les trafics entrant et sortant via Internet :
+Cet article montre comment configurer une [préférence de routage](https://docs.microsoft.com/azure/virtual-network/routing-preference-overview) via un réseau de fournisseur de services Internet (option **Internet**) pour une adresse IP publique à l’aide du portail Azure. Une fois l’adresse IP publique créée, vous pouvez l’associer aux ressources Azure suivantes pour les trafics entrant et sortant via Internet :
 
 * Machine virtuelle
 * Jeu de mise à l’échelle de machine virtuelle
@@ -37,12 +37,6 @@ Par défaut, la préférence de routage pour l’adresse IP publique est défini
 > Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) maintenant.
-
-## <a name="register-the-feature-for-your-subscription"></a>Inscrire la fonctionnalité pour votre abonnement
-La fonctionnalité de préférence de routage est actuellement en préversion. Inscrivez la fonctionnalité de votre abonnement à l’aide d’Azure PowerShell comme suit :
-```azurepowershell
-Register-AzProviderFeature -FeatureName AllowRoutingPreferenceFeature -ProviderNamespace Microsoft.Network
-```
 
 ## <a name="create-a-public-ip-address-with-a-routing-preference"></a>Créer une adresse IP publique avec une préférence de routage
 1. Connectez-vous au [portail Azure](https://preview.portal.azure.com/).

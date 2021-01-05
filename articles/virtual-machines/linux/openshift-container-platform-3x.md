@@ -5,16 +5,16 @@ author: haroldwongms
 manager: mdotson
 ms.service: virtual-machines-linux
 ms.subservice: workloads
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 04/05/2020
 ms.author: haroldw
-ms.openlocfilehash: 7d6cd4c6ce7991ae83f6f4a1dd6d8b86fe7eedbc
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: fab8f88a39730411503af273902a53f169e3fe57
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81757884"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97703733"
 ---
 # <a name="deploy-openshift-container-platform-311-in-azure"></a>Déployer OpenShift Container Platform 3.11 dans Azure
 
@@ -307,12 +307,12 @@ Les paramètres peuvent différer selon les versions. Vérifiez quels sont les p
 ### <a name="deploy-using-azure-cli"></a>Déployer à l’aide d’Azure CLI
 
 > [!NOTE] 
-> La commande suivante requiert Azure CLI 2.0.8 ou version ultérieure. Pour vérifier la version d’Azure CLI, exécutez la commande `az --version`. Pour mettre à jour la version de l’interface CLI, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latesti).
+> La commande suivante requiert Azure CLI 2.0.8 ou version ultérieure. Pour vérifier la version d’Azure CLI, exécutez la commande `az --version`. Pour mettre à jour la version de l’interface CLI, consultez [Installer Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latesti).
 
 L’exemple suivant déploie le cluster OpenShift et toutes les ressources associées dans un groupe de ressources nommé openshiftrg, avec le nom de déploiement myOpenShiftCluster. Le modèle est référencé directement à partir du dépôt GitHub, et un fichier de paramètres locaux nommé azuredeploy.parameters.json est utilisé.
 
 ```azurecli 
-az group deployment create -g openshiftrg --name myOpenShiftCluster \
+az deployment group create -g openshiftrg --name myOpenShiftCluster \
       --template-uri https://raw.githubusercontent.com/Microsoft/openshift-container-platform/master/azuredeploy.json \
       --parameters @./azuredeploy.parameters.json
 ```

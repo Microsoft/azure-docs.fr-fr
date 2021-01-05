@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 09/05/2018
 ms.author: tomfitz
-ms.openlocfilehash: 61e1c9fe07fdd29ebc00e7e3491472d073bc4e5d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c4eb3972be85ac7e291380f64127c20424b0d0f0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649821"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87004276"
 ---
 # <a name="microsoftcommonfileupload-ui-element"></a>Élément d’interface utilisateur Microsoft.Common.FileUpload
 
@@ -18,7 +18,7 @@ Contrôle qui permet à un utilisateur de spécifier un ou plusieurs fichiers à
 
 ## <a name="ui-sample"></a>Exemple d’interface utilisateur
 
-![Microsoft.Common.FileUpload](./media/managed-application-elements/microsoft.common.fileupload.png)
+![Microsoft.Common.FileUpload](./media/managed-application-elements/microsoft-common-fileupload.png)
 
 ## <a name="schema"></a>schéma
 
@@ -83,7 +83,7 @@ Lorsque vous testez un élément CreateUiDefinition, certains navigateurs (comme
 - `constraints.accept` spécifie les types de fichiers qui figurent dans la boîte de dialogue du navigateur. Consultez la [spécification HTML5](https://html.spec.whatwg.org/multipage/input.html#attr-input-accept) pour connaître les valeurs autorisées. La valeur par défaut est **null**.
 - Si `options.multiple` est défini sur **true**, l’utilisateur est autorisé à sélectionner plusieurs fichiers dans la boîte de dialogue du fichier du navigateur. La valeur par défaut est **false**.
 - Cet élément prend en charge le chargement de fichiers dans deux modes basés sur la valeur de `options.uploadMode`. Si **file** est spécifié, la sortie a le contenu du fichier sous la forme d’un objet blob. Si **url** est spécifié, le fichier est chargé sur un emplacement temporaire et la sortie a l’URL de l’objet blob. Les objets blob temporaires sont purgés après 24 heures. La valeur par défaut est **file**.
-- Un fichier chargé est protégé. L’URL de sortie inclut un [jeton SAS](../../storage/common/storage-dotnet-shared-access-signature-part-1.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) pour accéder au fichier durant le déploiement.
+- Un fichier chargé est protégé. L’URL de sortie inclut un [jeton SAS](../../storage/common/storage-sas-overview.md?toc=/azure/storage/blobs/toc.json) pour accéder au fichier durant le déploiement.
 - La valeur de `options.openMode` détermine la façon dont le fichier est lu. Si le fichier doit être du texte brut, spécifiez **text** ; sinon, spécifiez **binary**. La valeur par défaut est **text**.
 - Si `options.uploadMode` est défini sur **file** et `options.openMode` sur **binary**, la sortie est codée en base64.
 - `options.encoding` spécifie l’encodage à utiliser lors de la lecture du fichier. La valeur par défaut est **UTF-8**et est utilisée uniquement lorsque `options.openMode` est défini sur **text**.

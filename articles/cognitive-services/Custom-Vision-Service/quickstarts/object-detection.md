@@ -1,21 +1,24 @@
 ---
-title: 'Démarrage rapide : Créer une détection d’objets avec le SDK Custom Vision'
-description: 'Démarrage rapide : Créer un projet, ajouter des étiquettes, charger des images, entraîner un projet et détecter des objets à l’aide du SDK Custom Vision'
+title: 'Démarrage rapide : Détection d’objets avec la bibliothèque de client Custom Vision'
+titleSuffix: Azure Cognitive Services
+description: 'Démarrage rapide : Créer un projet de détection d’objets, ajouter des étiquettes, charger des images, entraîner votre projet et détecter des objets à l’aide de la bibliothèque de client Custom Vision.'
 author: PatrickFarley
 ms.author: pafarley
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: quickstart
-ms.date: 04/27/2020
+ms.date: 10/25/2020
+ms.custom: devx-track-python, devx-track-js, devx-track-csharp, cog-serv-seo-aug-2020
+keywords: vision personnalisée
 zone_pivot_groups: programming-languages-set-one
-ms.openlocfilehash: 68ea934e366caa4a6575a39f42156e5c3380ea10
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 4f0efa450e6c2471f2643e63b3ea36287d7d83d1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82135022"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021276"
 ---
-# <a name="quickstart-create-an-object-detection-project-with-the-custom-vision-sdk"></a>Démarrage rapide : Créer un projet de détection d’objets avec le SDK Custom Vision
+# <a name="quickstart-create-an-object-detection-project-with-the-custom-vision-client-library"></a>Démarrage rapide : Créer un projet de détection d’objets avec la bibliothèque de client Custom Vision
 
 ::: zone pivot="programming-language-csharp"
 [!INCLUDE [C# quickstart](../includes/quickstarts/csharp-tutorial-od.md)]

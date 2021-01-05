@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 03/24/2020
+ms.date: 09/23/2020
 ms.author: jingwang
-ms.openlocfilehash: 5ce1b85394a7bb604841f7fb941bdebf12c0bca2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a96b04df56dc7d5ea26463073d673275b8a4a8c4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414148"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015075"
 ---
 #  <a name="preserve-metadata-and-acls-using-copy-activity-in-azure-data-factory"></a>Conserver les métadonnées et les listes de contrôle d'accès à l'aide de l'outil Copier l'activité d'Azure Data Factory
 
@@ -26,14 +26,16 @@ Lorsque vous utilisez l'outil Copier l'activité d'Azure Data Factory pour copie
 
 ## <a name="preserve-metadata-for-lake-migration"></a><a name="preserve-metadata"></a> Conserver les métadonnées pour la migration entre lacs
 
-Lorsque vous migrez des données d'un lac de données vers un autre, comme [Amazon S3](connector-amazon-simple-storage-service.md), [Azure Blob](connector-azure-blob-storage.md) et [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md), vous pouvez choisir de conserver les métadonnées des fichiers avec les données.
+Lorsque vous migrez des données d’un lac de données vers un autre, tel que [Amazon S3](connector-amazon-simple-storage-service.md), [Azure Blob](connector-azure-blob-storage.md), [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md) et [Stockage Fichier Azure](connector-azure-file-storage.md), vous pouvez choisir de conserver les métadonnées de fichier avec les données.
 
 L'outil Copier l'activité prend en charge la conservation des attributs suivants lors de la copie des données :
 
 - **Toutes les métadonnées spécifiées par le client** 
 - Et les **cinq propriétés système intégrées au magasin de données** suivantes : `contentType`, `contentLanguage` (sauf pour Amazon S3), `contentEncoding`, `contentDisposition`, `cacheControl`.
 
-Si vous copiez des fichiers en l'état d'Amazon S3/Azure Data Lake Storage Gen2/Azure Blob vers Azure Data Lake Storage Gen2/Azure Blob au format binaire, vous trouverez l'option **Conserver** sous **Copier l'activité** > **onglet Paramètres** pour la création de l'activité ou sur la page **Paramètres** de l'outil Copier des données.
+**Gérer les différences dans les métadonnées :** Amazon S3 et Stockage Microsoft Azure autorisent des jeux de caractères différents dans les clés des métadonnées spécifiées par le client. Quand vous choisissez de conserver les métadonnées en utilisant la copie d’activité, ADF remplace automatiquement les caractères non valides par « _ ».
+
+Si vous copiez des fichiers en l’état d’Amazon S3/Azure Data Lake Storage Gen2/Stockage Blob Azure/Stockage Fichier Azure vers Azure Data Lake Storage Gen2/Stockage Blob Azure/Stockage Fichier Azure au format binaire, vous pouvez trouver l’option **Conserver** sous l’onglet **Activité de copie** > **Paramètres** pour la création d’activité ou la page **Paramètres** de l’outil Copier des données.
 
 ![Copier l'activité - Conserver les métadonnées](./media/copy-activity-preserve-metadata/copy-activity-preserve-metadata.png)
 

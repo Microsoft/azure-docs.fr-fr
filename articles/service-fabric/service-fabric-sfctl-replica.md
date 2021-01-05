@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: f6ad0b4c08ac8d710340fe654a068d0a3804e58f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3ed1ecca686471e052f07e945738ad1a49e68464
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76905808"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260308"
 ---
 # <a name="sfctl-replica"></a>sfctl replica
 Permet de gérer les réplicas qui font partie des partitions de service.
@@ -231,4 +231,4 @@ Redémarre un réplica de service d’un service persistant exécuté sur un nœ
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande (CLI) Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

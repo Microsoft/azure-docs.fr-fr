@@ -11,12 +11,12 @@ ms.workload: integration
 ms.topic: article
 ms.date: 06/20/2018
 ms.author: apimpm
-ms.openlocfilehash: 8c1c96fdb1f4f42c7592791881b855f74d411171
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41a97c639d9148f2bff3e4f530363ea05a65a7b8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70018291"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018243"
 ---
 # <a name="automatically-scale-an-azure-api-management-instance"></a>Mettre à l’échelle automatiquement une instance du service Gestion des API Azure  
 
@@ -125,10 +125,11 @@ Suivez les étapes ci-dessous pour configurer la mise à l’échelle automatiqu
     > [!NOTE]
     > Le scale-out d’une instance du service Gestion des API Azure est limité quant au nombre d’unités. La limite dépend d’un niveau de service.
 
-    ![Règle de scale-in dans Azure Monitor](media/api-management-howto-autoscale/07.png)
+    ![Capture d’écran indiquant où définir le nombre maximal d’unités du service Gestion des API Azure.](media/api-management-howto-autoscale/07.png)
 
 13. Cliquez sur **Enregistrer**. Votre mise à l’échelle automatique a été configurée.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-+ [Comment déployer une instance de service Gestion des API Azure dans plusieurs régions Azure](api-management-howto-deploy-multi-region.md)
+- [Comment déployer une instance de service Gestion des API Azure dans plusieurs régions Azure](api-management-howto-deploy-multi-region.md)
+- [Optimiser et réduire les dépenses liées au cloud](../cost-management-billing/costs/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn)

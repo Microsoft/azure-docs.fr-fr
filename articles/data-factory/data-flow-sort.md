@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 04/14/2020
 ms.openlocfilehash: 26852ec77194714c8236856b7cb496170bf0d777
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81606337"
 ---
 # <a name="sort-transformation-in-mapping-data-flow"></a>Transformation de tri dans le flux de données de mappage

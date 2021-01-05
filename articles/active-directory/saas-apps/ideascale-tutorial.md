@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec IdeaScale | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et IdeaScale.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: e16dda6b-fdf9-43cc-9bbb-a523f085a8af
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/20/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 81594e6a21372f2b4dacedbda638cc87bad966db
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ef04bf9f6d9ca6ff5089d2826c05a5acfb759b04
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74227563"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001658"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-ideascale"></a>Didacticiel : Intégration d’Azure Active Directory à IdeaScale
 
@@ -32,7 +27,7 @@ L’intégration d’IdeaScale à Azure AD vous offre les avantages suivants :
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à IdeaScale (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -110,10 +105,10 @@ Pour configurer l’authentification unique Azure AD avec IdeaScale, effectuez 
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant :
     
-    | |
-    |--|
-    | `http://<companyname>.ideascale.com`  |
-    | `https://<companyname>.ideascale.com` |
+    ```http
+    http://<companyname>.ideascale.com
+    https://<companyname>.ideascale.com
+    ```
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez [l’équipe de support technique IdeaScale](https://support.ideascale.com/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
@@ -142,7 +137,7 @@ Pour configurer l’authentification unique Azure AD avec IdeaScale, effectuez 
 
 3. Accédez à **Security \> Single Signon Settings**.
 
-    ![Paramètres de l’authentification unique](./media/ideascale-tutorial/ic790848.png "Paramètres de l’authentification unique")
+    ![Capture d’écran montrant Single Signon Settings sélectionné dans le menu Security.](./media/ideascale-tutorial/ic790848.png "Paramètres de l’authentification unique")
 
 4. Pour **Single-Signon Type**, sélectionnez **SAML 2.0**.
 
@@ -150,7 +145,7 @@ Pour configurer l’authentification unique Azure AD avec IdeaScale, effectuez 
 
 5. Dans la page de boîte de dialogue **Paramètres de l’authentification unique** , procédez comme suit :
 
-    ![Paramètres de l’authentification unique](./media/ideascale-tutorial/ic790850.png "Paramètres de l’authentification unique")
+    ![Capture d’écran montrant la boîte de dialogue Single Signon Settings.](./media/ideascale-tutorial/ic790850.png "Paramètres de l’authentification unique")
 
     a. Dans la zone de texte **SAML IdP Entity ID** (Identificateur d’entité du fournisseur d’identité SAML), collez la valeur de l’**identificateur Azure AD** que vous avez copiée à partir du portail Azure.
 
@@ -247,13 +242,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à IdeaScale, vous deve
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette IdeaScale dans le panneau d’accès doit vous connecter automatiquement à l’application IdeaScale pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette IdeaScale dans le panneau d’accès doit vous connecter automatiquement à l’application IdeaScale pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

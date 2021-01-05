@@ -1,23 +1,23 @@
 ---
 title: Créer, modifier ou supprimer une table de routage Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment créer, modifier ou supprimer une table de routage.
+description: Découvrez où trouver des informations sur le routage du trafic de réseau virtuel et comment créer, modifier ou supprimer une table de route.
 services: virtual-network
 documentationcenter: na
 author: KumudD
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/19/2020
 ms.author: kumud
-ms.openlocfilehash: b30c912319104726069ae98920f0bc825d7358cb
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 664e3851370be812cd7a0e58cf9beb1fddb5d991
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82182852"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87291000"
 ---
 # <a name="create-change-or-delete-a-route-table"></a>Créer, modifier ou supprimer une table de routage
 

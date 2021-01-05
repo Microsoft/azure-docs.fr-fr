@@ -2,13 +2,13 @@
 title: Lier des modèles pour déploiement
 description: Décrit comment utiliser des modèles liés dans un modèle Azure Resource Manager afin de créer une solution de modèle modulaire. Indique comment transmettre des valeurs de paramètres, spécifier un fichier de paramètres et créer dynamiquement des URL.
 ms.topic: conceptual
-ms.date: 04/29/2020
-ms.openlocfilehash: f71d8cc62daf68b158bed444da1446e016194b56
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.date: 12/07/2020
+ms.openlocfilehash: 1e2ccc57b42f8072c9aa28612d534507b9a674ed
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82609304"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852096"
 ---
 # <a name="using-linked-and-nested-templates-when-deploying-azure-resources"></a>Utilisation de modèles liés et imbriqués durant le déploiement de ressources Azure
 
@@ -16,10 +16,12 @@ Pour déployer des solutions complexes, vous pouvez diviser votre modèle en plu
 
 Pour les solutions petites et moyennes, un modèle unique est plus facile à comprendre et à gérer. Vous pouvez voir toutes les ressources et valeurs dans un même fichier. Pour des scénarios avancés, les modèles liés permettent de diviser la solution en composants ciblés. Vous pouvez facilement réutiliser ces modèles pour d’autres scénarios.
 
-Pour obtenir un tutoriel, consultez [Tutoriel : Créer des modèles Azure Resource Manager liés](template-tutorial-create-linked-templates.md).
+Pour obtenir un tutoriel, consultez [Tutoriel : Créer des modèles Azure Resource Manager liés](./deployment-tutorial-linked-template.md).
 
 > [!NOTE]
-> Pour les modèles liés ou imbriqués, vous pouvez uniquement utiliser le mode de déploiement [Incremental](deployment-modes.md).
+> Pour les modèles liés ou imbriqués, vous pouvez définir le mode de déploiement seulement sur [Incrémentiel](deployment-modes.md). Toutefois, le modèle principal peut être déployé en mode complet. Si vous déployez le modèle principal en mode complet, et que le modèle lié ou imbriqué cible le même groupe de ressources, les ressources déployées dans le modèle lié ou imbriqué sont incluses dans l’évaluation pour le déploiement en mode complet. La collection combinée de ressources déployées dans le modèle principal et les modèles liés ou imbriqués est comparée aux ressources existantes dans le groupe de ressources. Les ressources qui ne sont pas incluses dans cette collection combinée sont supprimées.
+>
+> Si le modèle lié ou imbriqué cible un groupe de ressources différent, ce déploiement utilise le mode incrémentiel.
 >
 
 ## <a name="nested-template"></a>Modèle imbriqué
@@ -34,9 +36,9 @@ Pour imbriquer un modèle, ajoutez une [ressource de déploiement](/azure/templa
   "variables": {},
   "resources": [
     {
-      "name": "nestedTemplate1",
-      "apiVersion": "2019-10-01",
       "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "nestedTemplate1",
       "properties": {
         "mode": "Incremental",
         "template": {
@@ -63,13 +65,13 @@ L’exemple suivant déploie un compte de stockage au moyen d’un modèle imbri
   },
   "resources": [
     {
-      "name": "nestedTemplate1",
-      "apiVersion": "2019-10-01",
       "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "nestedTemplate1",
       "properties": {
         "mode": "Incremental",
         "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "resources": [
             {
@@ -132,7 +134,7 @@ Le modèle suivant montre la façon dont sont résolues les expressions de modè
         },
         "mode": "Incremental",
         "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "variables": {
             "exampleVar": "from nested template"
@@ -160,7 +162,7 @@ Le modèle suivant montre la façon dont sont résolues les expressions de modè
 
 La valeur de `exampleVar` varie en fonction de la valeur de la propriété `scope` dans `expressionEvaluationOptions`. Le tableau suivant montre les résultats pour les deux portées.
 
-| `expressionEvaluationOptions` `scope` | Output |
+| Étendue `expressionEvaluationOptions` | Output |
 | ----- | ------ |
 | interne | from nested template |
 | externe (ou par défaut) | from parent template |
@@ -169,7 +171,7 @@ L’exemple suivant déploie un serveur SQL et récupère un secret de coffre de
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -232,7 +234,7 @@ L’exemple suivant déploie un serveur SQL et récupère un secret de coffre de
           }
         },
         "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "parameters": {
             "adminLogin": {
@@ -281,7 +283,7 @@ L’exemple suivant déploie un serveur SQL et récupère un secret de coffre de
 
 ## <a name="linked-template"></a>Modèle lié
 
-Pour lier un modèle, ajoutez une [ressource de déploiement](/azure/templates/microsoft.resources/deployments) à votre modèle principal. Dans la propriété **templateLink**, spécifiez l’URI du modèle à inclure. L’exemple suivant établit un lien vers un modèle qui déploie un nouveau compte de stockage.
+Pour lier un modèle, ajoutez une [ressource de déploiement](/azure/templates/microsoft.resources/deployments) à votre modèle principal. Dans la propriété **templateLink**, spécifiez l’URI du modèle à inclure. L’exemple suivant établit un lien vers un modèle qui se trouve dans un compte de stockage.
 
 ```json
 {
@@ -308,15 +310,17 @@ Pour lier un modèle, ajoutez une [ressource de déploiement](/azure/templates/m
 }
 ```
 
-Lors du référencement d’un modèle lié, la valeur de `uri` ne doit pas être un fichier local ou un fichier disponible uniquement sur votre réseau local. Vous devez fournir une valeur d’URI téléchargeable utilisant le protocole **http** ou **https**. 
+Lors du référencement d’un modèle lié, la valeur de `uri` ne peut pas être un fichier local ou un fichier disponible uniquement sur votre réseau local. Azure Resource Manager doit être en mesure d’accéder au modèle. Fournissez une valeur d’URI téléchargeable utilisant le protocole **http** ou **https**. 
 
-> [!NOTE]
->
-> Vous pouvez référencer des modèles à l’aide de paramètres qui, en fin de compte, sont résolus en une solution qui utilise **http** ou **https**, par exemple, à l’aide du paramètre `_artifactsLocation`, comme suit : `"uri": "[concat(parameters('_artifactsLocation'), '/shared/os-disk-parts-md.json', parameters('_artifactsLocationSasToken'))]",`
+Vous pouvez référencer des modèles à l’aide de paramètres qui incluent **http** ou **https**. Par exemple, un modèle courant consiste à utiliser le paramètre `_artifactsLocation`. Vous pouvez définir le modèle lié avec une expression telle que la suivante :
 
+```json
+"uri": "[concat(parameters('_artifactsLocation'), '/shared/os-disk-parts-md.json', parameters('_artifactsLocationSasToken'))]"
+```
 
+Si vous établissez un lien vers un modèle dans GitHub, utilisez l’URL brute. Le format du lien est le suivant : `https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/get-started-with-templates/quickstart-template/azuredeploy.json`. Pour obtenir le lien brut, sélectionnez **Brut**.
 
-Resource Manager doit être en mesure d’accéder au modèle. Une possibilité consiste à placer votre modèle lié dans un compte de stockage et à utiliser l’URI de cet élément.
+:::image type="content" source="./media/linked-templates/select-raw.png" alt-text="Sélectionner une URL brute":::
 
 ### <a name="parameters-for-linked-template"></a>Paramètres du modèle lié
 
@@ -358,7 +362,7 @@ Pour passer des valeurs de paramètre inline, utilisez la propriété **paramete
       "contentVersion":"1.0.0.0"
      },
      "parameters": {
-      "StorageAccountName":{"value": "[parameters('StorageAccountName')]"}
+      "storageAccountName":{"value": "[parameters('storageAccountName')]"}
     }
    }
   }
@@ -366,6 +370,21 @@ Pour passer des valeurs de paramètre inline, utilisez la propriété **paramete
 ```
 
 Vous ne pouvez pas utiliser à la fois des paramètres inline et un lien vers un fichier de paramètres. Si `parametersLink` et `parameters` sont spécifiés tous les deux, le déploiement échoue.
+
+## <a name="template-specs"></a>Spécifications de modèle
+
+Au lieu de gérer vos modèles liés sur un point de terminaison accessible, vous pouvez créer une [spécification de modèle](template-specs.md) qui empaquette le modèle principal et ses modèles liés dans une même entité que vous pouvez déployer. La spécification de modèle est une ressource de votre abonnement Azure. Elle facilite le partage sécurisé du modèle avec les utilisateurs de votre organisation. Vous utilisez le contrôle d’accès Azure en fonction du rôle (Azure RBAC) pour accorder l’accès à la spécification de modèle. Actuellement, cette fonctionnalité est uniquement disponible en tant que version préliminaire.
+
+Pour plus d'informations, consultez les pages suivantes :
+
+- [Tutoriel : Créer une spec de modèle avec des modèles liés](./template-specs-create-linked.md).
+- [Tutoriel : Déployer une spec de modèle en tant que modèle lié](./template-specs-deploy-linked-template.md).
+
+## <a name="dependencies"></a>Les dépendances
+
+Comme pour d’autres types de ressources, vous pouvez définir des dépendances entre les modèles liés. Si les ressources d’un modèle lié doivent être déployées avant les ressources d’un deuxième modèle lié, définissez le deuxième modèle comme dépendant du premier.
+
+:::code language="json" source="~/resourcemanager-templates/azure-resource-manager/linkedtemplates/linked-dependency.json" highlight="10,22,24":::
 
 ## <a name="contentversion"></a>contentVersion
 
@@ -425,7 +444,7 @@ L’exemple de modèle suivant montre comment utiliser copy avec un modèle imbr
     "scope": "inner"
     },
     "template": {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "resources": [
       {
@@ -459,156 +478,19 @@ Lors de l’obtention d’une propriété de sortie à partir d’un modèle li�
 
 Les exemples suivants montrent comment faire référence à un modèle lié pour récupérer une valeur de sortie. Le modèle lié retourne un message simple.  Tout d’abord, le modèle lié :
 
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {},
-  "variables": {},
-  "resources": [],
-  "outputs": {
-    "greetingMessage": {
-      "value": "Hello World",
-      "type" : "string"
-    }
-  }
-}
-```
+:::code language="json" source="~/resourcemanager-templates/azure-resource-manager/linkedtemplates/helloworld.json":::
 
 Le modèle principal déploie le modèle lié et obtient la valeur retournée. Remarquez qu’il fait référence à la ressource de déploiement par son nom et qu’il utilise le nom de la propriété retournée par le modèle lié.
 
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {},
-  "variables": {},
-  "resources": [
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2019-10-01",
-      "name": "linkedTemplate",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[uri(deployment().properties.templateLink.uri, 'helloworld.json')]",
-          "contentVersion": "1.0.0.0"
-        }
-      }
-    }
-  ],
-  "outputs": {
-    "messageFromLinkedTemplate": {
-      "type": "string",
-      "value": "[reference('linkedTemplate').outputs.greetingMessage.value]"
-    }
-  }
-}
-```
-
-Comme pour d’autres types de ressources, vous pouvez définir des dépendances entre le modèle lié et d’autres ressources. Lorsque d’autres ressources requièrent une valeur de sortie provenant du modèle lié, veillez à ce que celui-ci soit déployé avant les ressources. Sinon, lorsque le modèle lié s’appuie sur d’autres ressources, vérifiez que celles-ci sont déployées avant le modèle lié.
+:::code language="json" source="~/resourcemanager-templates/azure-resource-manager/linkedtemplates/helloworldparent.json" highlight="10,23":::
 
 L’exemple suivant montre un modèle qui déploie une adresse IP publique et retourne l’ID de ressource de la ressource Azure de cette adresse IP publique :
 
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "publicIPAddresses_name": {
-      "type": "string"
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "apiVersion": "2018-11-01",
-      "name": "[parameters('publicIPAddresses_name')]",
-      "location": "eastus",
-      "properties": {
-        "publicIPAddressVersion": "IPv4",
-        "publicIPAllocationMethod": "Dynamic",
-        "idleTimeoutInMinutes": 4
-      },
-      "dependsOn": []
-    }
-  ],
-  "outputs": {
-    "resourceID": {
-      "type": "string",
-      "value": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_name'))]"
-    }
-  }
-}
-```
+:::code language="json" source="~/resourcemanager-templates/azure-resource-manager/linkedtemplates/public-ip.json" highlight="27":::
 
 Pour utiliser l’adresse IP publique du modèle précédent lors du déploiement d’un équilibreur de charge, établissez un lien vers le modèle et déclarez une dépendance vis-à-vis de la ressource `Microsoft.Resources/deployments`. L’adresse IP publique sur l’équilibreur de charge est définie sur la valeur de sortie du modèle lié.
 
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "loadBalancers_name": {
-      "defaultValue": "mylb",
-      "type": "string"
-    },
-    "publicIPAddresses_name": {
-      "defaultValue": "myip",
-      "type": "string"
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
-      "type": "Microsoft.Network/loadBalancers",
-      "apiVersion": "2018-11-01",
-      "name": "[parameters('loadBalancers_name')]",
-      "location": "eastus",
-      "properties": {
-        "frontendIPConfigurations": [
-          {
-            "name": "LoadBalancerFrontEnd",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                // this is where the output value from linkedTemplate is used
-                "id": "[reference('linkedTemplate').outputs.resourceID.value]"
-              }
-            }
-          }
-        ],
-        "backendAddressPools": [],
-        "loadBalancingRules": [],
-        "probes": [],
-        "inboundNatRules": [],
-        "outboundNatRules": [],
-        "inboundNatPools": []
-      },
-      // This is where the dependency is declared
-      "dependsOn": [
-        "linkedTemplate"
-      ]
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2019-10-01",
-      "name": "linkedTemplate",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[uri(deployment().properties.templateLink.uri, 'publicip.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters":{
-          "publicIPAddresses_name":{"value": "[parameters('publicIPAddresses_name')]"}
-        }
-      }
-    }
-  ]
-}
-```
+:::code language="json" source="~/resourcemanager-templates/azure-resource-manager/linkedtemplates/public-ip-parentloadbalancer.json" highlight="28,41":::
 
 ## <a name="deployment-history"></a>Historique de déploiement
 
@@ -620,7 +502,7 @@ Vous pouvez utiliser ces entrées distinctes dans l’historique pour récupére
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "publicIPAddresses_name": {
@@ -658,7 +540,7 @@ Le modèle suivant est lié au modèle précédent. Il crée trois adresses IP p
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
   },
@@ -721,11 +603,14 @@ Le fichier de paramètres peut également être limité à l’accès avec un je
 
 Vous ne pouvez pas établir un lien vers un modèle dans un compte de stockage derrière un [pare-feu Stockage Azure](../../storage/common/storage-network-security.md).
 
+> [!IMPORTANT]
+> Plutôt que de sécuriser votre modèle avec un jeton SAS, envisagez de créer une [spécification de modèle](template-specs.md). La spécification de modèle stocke de façon sécurisée le modèle principal et ses modèles liés en tant que ressource dans votre abonnement Azure. Vous utilisez Azure RBAC pour accorder l'accès aux utilisateurs qui doivent déployer le modèle.
+
 L’exemple suivant montre comment passer un jeton SAP lors de la liaison à un modèle :
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
   "containerSasToken": { "type": "securestring" }
@@ -795,7 +680,7 @@ Les exemples suivants montrent des utilisations courantes des modèles liés.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour obtenir un tutoriel, consultez [Tutoriel : Créer des modèles Azure Resource Manager liés](template-tutorial-create-linked-templates.md).
+* Pour obtenir un tutoriel, consultez [Tutoriel : Créer des modèles Azure Resource Manager liés](./deployment-tutorial-linked-template.md).
 * Pour obtenir des informations sur la définition de l’ordre de déploiement de vos ressources, consultez [Définition de dépendances dans les modèles Azure Resource Manager](define-resource-dependency.md).
 * Pour savoir comment définir une seule ressource mais également créer de nombreuses instances de cette dernière, consultez [Création de plusieurs instances de ressources dans Azure Resource Manager](copy-resources.md).
 * Pour connaître les étapes de configuration d’un modèle dans un compte de stockage et de génération d’un jeton SAP, consultez [Déployer des ressources avec des modèles Resource Manager et Azure PowerShell](deploy-powershell.md) ou [Déployer des ressources avec des modèles Resource Manager et l’interface de ligne de commande Azure](deploy-cli.md).

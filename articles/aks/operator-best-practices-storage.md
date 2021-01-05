@@ -5,12 +5,12 @@ description: Découvrir les meilleures pratiques relatives au stockage, au chiff
 services: container-service
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: 843b775f7761af7cd40140c9bf34768d63eb5a50
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: 722fe393ad7637be20360463a4c3b6234224a036
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80877896"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88653968"
 ---
 # <a name="best-practices-for-storage-and-backups-in-azure-kubernetes-service-aks"></a>Meilleures pratiques relatives au stockage et aux sauvegardes dans Azure Kubernetes Service (AKS)
 
@@ -88,7 +88,7 @@ Pour plus d’informations sur les options de classe de stockage, consultez les 
 
 ## <a name="secure-and-back-up-your-data"></a>Sécuriser et sauvegarder vos données
 
-**Conseils sur les meilleures pratiques** : sauvegardez vos données à l’aide d’un outil adapté à votre type de stockage, tel que Velero ou Azure Site Recovery. Vérifiez l’intégrité et la sécurité de ces sauvegardes.
+**Conseils sur les meilleures pratiques** : sauvegardez vos données à l’aide d’un outil adapté à votre type de stockage, tel que Velero ou Sauvegarde Azure. Vérifiez l’intégrité et la sécurité de ces sauvegardes.
 
 Lorsque vos applications stockent et exploitent des données conservées sur des disques ou dans des fichiers, vous devez effectuer des sauvegardes ou des captures instantanées régulières de ces données. Les disques Azure peuvent utiliser des technologies de capture instantanée intégrées. Vous aurez peut-être besoin de rechercher vos applications pour vider les écritures sur le disque avant d’effectuer l’opération de capture instantanée. [Velero][velero] peut sauvegarder des volumes persistants avec des ressources de cluster et des configurations supplémentaires. Si vous ne pouvez pas [supprimer l’état de vos applications][remove-state], sauvegardez les données à partir de volumes persistants et testez régulièrement les opérations de restauration pour vérifier l’intégrité des données et les processus nécessaires.
 
@@ -104,12 +104,12 @@ Cet article se concentre sur les meilleures pratiques de stockage dans AKS. Pour
 
 <!-- LINKS - Internal -->
 [aks-concepts-storage]: concepts-storage.md
-[vm-sizes]: ../virtual-machines/linux/sizes.md
+[vm-sizes]: ../virtual-machines/sizes.md
 [dynamic-disks]: azure-disks-dynamic-pv.md
 [dynamic-files]: azure-files-dynamic-pv.md
 [reclaim-policy]: concepts-storage.md#storage-classes
 [aks-concepts-storage-pvcs]: concepts-storage.md#persistent-volume-claims
 [aks-concepts-storage-classes]: concepts-storage.md#storage-classes
-[managed-disks]: ../virtual-machines/linux/managed-disks-overview.md
+[managed-disks]: ../virtual-machines/managed-disks-overview.md
 [best-practices-multi-region]: operator-best-practices-multi-region.md
 [remove-state]: operator-best-practices-multi-region.md#remove-service-state-from-inside-containers

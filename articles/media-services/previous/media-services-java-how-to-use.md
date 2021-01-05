@@ -14,17 +14,20 @@ ms.devlang: java
 ms.topic: conceptual
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: fedec6ea764394d36f5b4d7c883f7cb9f9520a29
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: 8a95ee631797c4dcca87f3506a6cf29245328159
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64869022"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89263448"
 ---
-# <a name="get-started-with-the-java-client-sdk-for-azure-media-services"></a>Prise en main du Kit de développement logiciel du client Java pour Azure Media Services  
+# <a name="get-started-with-the-java-client-sdk-for-azure-media-services"></a>Prise en main du Kit de développement logiciel du client Java pour Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Ce didacticiel explique comment implémenter un service de base de diffusion de contenu vidéo avec l’application Azure Media Services (AMS) à l’aide du Kit de développement logiciel Java.
 
@@ -42,7 +45,7 @@ Pour commencer à utiliser le Kit de développement logiciel Java pour Media Ser
 
 Par exemple, si vous utilisez l’outil de compilation `gradle`, ajoutez la dépendance suivante à votre fichier `build.gradle` :
 
-    compile group: 'com.microsoft.azure', name: 'azure-media', version: '0.9.8'
+`compile group: 'com.microsoft.azure', name: 'azure-media', version: '0.9.8'`
 
 >[!IMPORTANT]
 >En commençant par le package `azure-media`, version `0.9.8`, le kit de développement logiciel a ajouté la prise en charge de l’authentification Azure Active Directory (AAD) et a supprimé la prise en charge de l’authentification d’Azure Access Control Service (ACS). Nous vous recommandons de migrer vers le modèle d’authentification Azure AD dès que possible. Pour obtenir des informations détaillées sur la migration, lisez l’article [Accéder à l’API Azure Media Services avec l’authentification Azure AD](media-services-use-aad-auth-to-access-ams-api.md).
@@ -65,7 +68,7 @@ Le code se connecte à l’API Azure Media Services à l’aide de l’authentif
 * `clientKey`: Clé du client de l’application Azure AD
 * `restApiEndpoint`: Point de terminaison de l’API REST du compte Azure Media Services
 
-Vous pouvez créer une application Azure AD et obtenir les valeurs de configuration précédentes à partir du portail Azure. Pour plus d’informations, consultez la rubrique **Authentification d’un principal de service** sous [Prise en main de l’authentification Azure AD à l’aide du portail Azure](https://docs.microsoft.com/azure/media-services/media-services-portal-get-started-with-aad).
+Vous pouvez créer une application Azure AD et obtenir les valeurs de configuration précédentes à partir du portail Azure. Pour plus d’informations, consultez la rubrique **Authentification d’un principal de service** sous [Prise en main de l’authentification Azure AD à l’aide du portail Azure](./media-services-portal-get-started-with-aad.md).
 
 Le code repose également sur un fichier vidéo stocké localement. Vous devez modifier le code pour fournir votre propre fichier local à télécharger.
 
@@ -320,6 +323,5 @@ Pour obtenir une documentation Javadoc sur Media Services, voir [Bibliothèques 
 
 [Azure Media Services SDK Maven Package]: https://mvnrepository.com/artifact/com.microsoft.azure/azure-media/latest
 [Azure Java Developer Center]: https://azure.microsoft.com/develop/java/
-[Azure for Java developers]: https://docs.microsoft.com/java/azure/
-[Media Services Client Development]: https://msdn.microsoft.com/library/windowsazure/dn223283.aspx
-
+[Azure for Java developers]: /java/azure/
+[Media Services Client Development]: /previous-versions/azure/dn223283(v=azure.100)

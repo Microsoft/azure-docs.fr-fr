@@ -3,23 +3,23 @@ title: Actions de menu MMC du Gestionnaire d’instantanés StorSimple | Microso
 description: Explique comment utiliser les actions de menu standard de la console Microsoft Management Console (MMC) du gestionnaire d’instantanés StorSimple.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 78ef81af-0d3a-4802-be54-ad192f9ac8a6
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
-ms.author: twooley
-ms.openlocfilehash: ced075395c4f2a51308d5d3b0cbe4c0153a17816
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 01064c3668b673baea7aedd9a65c92b03c48dc10
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75931481"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90056001"
 ---
 # <a name="use-the-mmc-menu-actions-in-storsimple-snapshot-manager"></a>Utilisez les actions du menu MMC dans Gestionnaire d’instantanés StorSimple
 

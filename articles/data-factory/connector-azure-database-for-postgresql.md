@@ -10,13 +10,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 09/16/2019
-ms.openlocfilehash: b85e72ae6698cd9fa018c940e158bfcf25279ed5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/26/2020
+ms.openlocfilehash: 11e0d3336f085ccae9a7fb83ed050d69a15ce42b
+ms.sourcegitcommit: 192f9233ba42e3cdda2794f4307e6620adba3ff2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81410465"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96296503"
 ---
 # <a name="copy-data-to-and-from-azure-database-for-postgresql-by-using-azure-data-factory"></a>Copier des données vers et depuis Azure Database pour PostgreSQL avec Azure Data Factory
 
@@ -76,7 +76,7 @@ Voici un exemple de chaîne de connexion typique : `Server=<server>.postgres.dat
 
 **Exemple** :
 
-***Stockage du mot de passe dans Azure Key Vault***
+**_Stockage du mot de passe dans Azure Key Vault_* _
 
 ```json
 {
@@ -85,13 +85,13 @@ Voici un exemple de chaîne de connexion typique : `Server=<server>.postgres.dat
         "type": "AzurePostgreSql",
         "typeProperties": {
             "connectionString": "Server=<server>.postgres.database.azure.com;Database=<database>;Port=<port>;UID=<username>;",
-            "password": { 
-                "type": "AzureKeyVaultSecret", 
-                "store": { 
-                    "referenceName": "<Azure Key Vault linked service name>", 
-                    "type": "LinkedServiceReference" 
-                }, 
-                "secretName": "<secretName>" 
+            "password": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<Azure Key Vault linked service name>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<secretName>" 
             }
         }
     }
@@ -102,7 +102,7 @@ Voici un exemple de chaîne de connexion typique : `Server=<server>.postgres.dat
 
 Pour obtenir la liste complète des sections et propriétés disponibles pour la définition de jeux de données, consultez [Jeux de données dans Azure Data Factory](concepts-datasets-linked-services.md). Cette section fournit la liste des propriétés prises en charge par le jeu de données Azure Database pour PostgreSQL.
 
-Pour copier des données d’Azure Database pour PostgreSQL, affectez la valeur **AzurePostgreSqlTable** à la propriété type du jeu de données. Les propriétés prises en charge sont les suivantes :
+Pour copier des données d’Azure Database pour PostgreSQL, affectez la valeur _*AzurePostgreSqlTable** à la propriété type du jeu de données. Les propriétés prises en charge sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
@@ -136,7 +136,7 @@ Pour copier des données d’Azure Database pour PostgreSQL, affectez la valeur 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type de la source de l’activité de copie doit être définie sur **AzurePostgreSqlSource** | Oui |
-| query | Utiliser la requête SQL personnalisée pour lire les données. Par exemple : `"SELECT * FROM MyTable"` | Non (si la propriété tableName du jeu de données est spécifiée) |
+| query | Utiliser la requête SQL personnalisée pour lire les données. Par exemple, `SELECT * FROM mytable` ou `SELECT * FROM "MyTable"`. Notez que dans PostgreSQL, le nom de l’entité est traité comme insensible à la casse s’il n’est pas placé entre guillemets. | Non (si la propriété tableName du jeu de données est spécifiée) |
 
 **Exemple** :
 
@@ -160,7 +160,7 @@ Pour copier des données d’Azure Database pour PostgreSQL, affectez la valeur 
         "typeProperties": {
             "source": {
                 "type": "AzurePostgreSqlSource",
-                "query": "<custom query e.g. SELECT * FROM MyTable>"
+                "query": "<custom query e.g. SELECT * FROM mytable>"
             },
             "sink": {
                 "type": "<sink type>"

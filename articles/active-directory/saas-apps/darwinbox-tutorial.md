@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à Darwinbox | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Darwinbox.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3614b11f-e3de-4abf-8e29-22a3c4971ee8
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/23/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 91b1be75b06b4281ee5d03675d9d33db00a5aaf7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 70c77caebfd8f9bfd36c7384255cf7b66416a379
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70013794"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012031"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-darwinbox"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à Darwinbox
 
@@ -30,8 +25,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Darwinbox à Azure Active Di
 * Contrôler dans Azure AD qui a accès à Darwinbox.
 * Permettre à vos utilisateurs de se connecter automatiquement à Darwinbox avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
-
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -39,6 +33,9 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 * Un abonnement Azure AD Si vous ne disposez d’aucun abonnement, vous pouvez obtenir [un compte gratuit](https://azure.microsoft.com/free/).
 * Un abonnement Darwinbox pour lequel l’authentification unique (SSO) est activée.
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
+
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -83,12 +80,12 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
 
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<SUBDOMAIN>.darwinbox.in/`
+   1. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<SUBDOMAIN>.darwinbox.in/`
 
-    b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://<SUBDOMAIN>.darwinbox.in/adfs/module.php/saml/sp/metadata.php/<CUSTOMID>`
+   1. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://<SUBDOMAIN>.darwinbox.in/adfs/module.php/saml/sp/metadata.php/<CUSTOMID>`
 
-    > [!NOTE]
-    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez l’[équipe de support technique de Darwinbox](https://darwinbox.com/contact-us.php). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+      > [!NOTE]
+      > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez l’[équipe de support technique de Darwinbox](https://darwinbox.com/contact-us.php). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -134,21 +131,42 @@ Pour configurer l’authentification unique côté **Darwinbox**, vous devez env
 
 ### <a name="create-darwinbox-test-user"></a>Créer un utilisateur de test Darwinbox
 
-Dans cette section, vous créez un utilisateur appelé B.Simon dans Darwinbox. Collaborez avec l’ [équipe du support technique Darwinbox](https://darwinbox.com/contact-us.php) pour ajouter des utilisateurs sur la plateforme Darwinbox. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous créez un utilisateur appelé B.Simon dans Darwinbox. Collaborez avec l’[équipe du support technique Darwinbox](https://darwinbox.com/contact-us.php) pour ajouter des utilisateurs sur la plateforme Darwinbox. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Darwinbox dans le volet d’accès doit vous connecter automatiquement à l’application Darwinbox pour laquelle vous avez configuré l’authentification unique (SSO). Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Darwinbox dans le volet d’accès doit vous connecter automatiquement à l’application Darwinbox pour laquelle vous avez configuré l’authentification unique (SSO). Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
+
+## <a name="test-sso-for-darwinbox-mobile"></a>Tester l’authentification unique pour Darwinbox (mobile)
+
+1. Ouvrez l’application mobile Darwinbox. Cliquez sur **Entrer l’URL de l’organisation**, entrez l’URL de votre organisation dans la zone de texte, puis cliquez sur le bouton fléché.
+
+    ![Capture d’écran montrant l’application mobile « Darwinbox » avec l’option « Enter Organization URL » sélectionnée, un exemple d’organisation et le bouton avec une flèche en évidence.](media/darwinbox-tutorial/DarwinboxMobile01.jpg)
+
+1. Si vous avez plusieurs domaines, cliquez sur votre domaine.
+
+    ![Capture d’écran montrant l’écran « Choose your domain » avec un exemple de domaine sélectionné.](media/darwinbox-tutorial/DarwinboxMobile02.jpg)
+
+1. Entrez l’e-mail de votre Azure AD dans l’application Darwinbox, puis cliquez sur **Suivant**.
+
+    ![Capture d’écran montrant l’écran « Sign in » avec le bouton « Next » en évidence.](media/darwinbox-tutorial/DarwinboxMobile03.jpg)
+
+1. Entrez le mot de passe de votre Azure AD dans l’application Darwinbox, puis cliquez sur **Se connecter**.
+
+    ![Capture d’écran montrant l’écran « Enter password » avec le bouton « Next » en évidence.](media/darwinbox-tutorial/DarwinboxMobile04.jpg)
+
+1. Une fois la connexion réussie, la page d’accueil de l’application s’affiche.
+
+    ![Application mobile Darwinbox](media/darwinbox-tutorial/DarwinboxMobile05.jpg)
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Darwinbox avec Azure AD](https://aad.portal.azure.com/)
-

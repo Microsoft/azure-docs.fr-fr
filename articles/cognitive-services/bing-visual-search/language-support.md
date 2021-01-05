@@ -10,14 +10,19 @@ ms.subservice: bing-visual-search
 ms.topic: conceptual
 ms.date: 09/25/2018
 ms.author: scottwhi
-ms.openlocfilehash: b17341bc234ff3dfecc2c6dcd84ef77116a95d61
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6d93b6d024fc966f3b260602f4798a2d77669a35
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "68883543"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96501156"
 ---
 # <a name="language-and-region-support-for-the-bing-visual-search-api"></a>Langages et régions pris en charge par l’API Recherche visuelle Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche visuelle Bing prend en charge plus d’une trentaine de pays/région, dont beaucoup possèdent plusieurs langues. Chaque demande doit inclure le pays/la région et la langue choisis par l’utilisateur. Le fait de connaître le marché de l’utilisateur aide Bing à renvoyer les résultats appropriés. Si vous n’indiquez rien, Bing fait au mieux pour déterminer le pays/la région et la langue de l’utilisateur. Étant donné que les résultats peuvent contenir des liens vers Bing, le fait de connaître le pays/la région et la langue aide à créer une meilleure expérience pour l’utilisateur Bing s’il clique sur des liens Bing.
 
@@ -57,7 +62,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Corée du Sud|KR|
 |Malaisie|MY|
 |Mexique|MX|
-|Pays-bas|NL|
+|Pays-Bas|NL|
 |Nouvelle-Zélande|NZ|
 |Norvège|Non|
 |Chine|CN|
@@ -72,7 +77,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Suisse|CH|
 |Taïwan|TW|
 |Turquie|TR|
-|United Kingdom|Go|
+|Royaume-Uni|Go|
 |États-Unis|US|
 
 
@@ -101,7 +106,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Corée du Sud|Coréen|ko-KR|
 |Malaisie|Anglais|en-MY|
 |Mexique|Espagnol|es-MX|
-|Pays-bas|Néerlandais|nl-NL|
+|Pays-Bas|Néerlandais|nl-NL|
 |Nouvelle-Zélande|Anglais|en-NZ|
 |Chine|Chinois|zh-CN|
 |Pologne|Polonais|pl-PL|
@@ -116,6 +121,6 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Suisse|Allemand|de-CH|
 |Taïwan|Chinois traditionnel|zh-TW|
 |Turquie|Turc|tr-TR|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |États-Unis|Anglais|fr-FR|
 |États-Unis|Espagnol|es-US|

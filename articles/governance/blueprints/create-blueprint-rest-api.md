@@ -1,18 +1,18 @@
 ---
 title: "Démarrage rapide : Créer un blueprint avec l'API REST"
 description: Dans ce guide de démarrage rapide, vous allez utiliser Azure Blueprints pour créer, définir et déployer des artefacts avec l’API REST.
-ms.date: 02/26/2020
+ms.date: 10/14/2020
 ms.topic: quickstart
-ms.openlocfilehash: ec84e8396ad65aa01f73414b971f27bc95396e2f
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: aa25a65b20b295045b52a49c8c47fb8849c3cba3
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83745090"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92056972"
 ---
 # <a name="quickstart-define-and-assign-an-azure-blueprint-with-rest-api"></a>Démarrage rapide : Définir et affecter un blueprint Azure avec l’API REST
 
-Un utilisateur qui sait comment créer et affecter des blueprints peut définir des modèles courants et développer des configurations réutilisables et rapides à déployer en fonction de modèles Resource Manager, de stratégies, d’exigences en matière de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprint pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation, notamment :
+Un utilisateur qui sait comment créer et affecter des blueprints peut définir des modèles courants et développer des configurations réutilisables et rapides à déployer en fonction de modèles Azure Resource Manager (modèles ARM), de stratégies, d’exigences en matière de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprint pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation, notamment :
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -329,7 +329,7 @@ Dans chaque URI d’API REST, vous devez remplacer les variables utilisées par 
 - Remplacer `{YourMG}` par l’ID de votre groupe d’administration
 - Remplacer `{subscriptionId}` par votre ID d’abonnement
 
-1. Octroyez au principal de service Azure Blueprint le rôle **Propriétaire** sur l’abonnement cible. L’ID d’application est statique (`f71766dc-90d9-4b7d-bd9d-4499c4331c3f`), mais l’ID de principal de service varie en fonction du locataire. Vous pouvez demander les détails de votre locataire à l’aide de l’API REST suivante. Elle utilise [l’API Graph Azure Active Directory](../../active-directory/develop/active-directory-graph-api.md) qui a une autorisation différente.
+1. Octroyez au principal de service Azure Blueprint le rôle **Propriétaire** sur l’abonnement cible. L’ID d’application est statique (`f71766dc-90d9-4b7d-bd9d-4499c4331c3f`), mais l’ID de principal de service varie en fonction du locataire. Vous pouvez demander les détails de votre locataire à l’aide de l’API REST suivante. Elle utilise [l’API Graph Azure Active Directory](../../active-directory/develop/active-directory-graph-api.md), qui a une autorisation différente.
 
    - URI de l’API REST
 

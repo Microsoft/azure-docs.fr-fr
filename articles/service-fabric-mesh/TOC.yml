@@ -82,11 +82,9 @@
     - name: Informations de référence sur l’interface CLI Service Fabric Mesh
       href: /cli/azure/ext/mesh
     - name: API REST de ressource client Service Fabric
-      href: '/rest/api/servicefabric/sfclient-index#service-fabric-resource-model'
+      href: /rest/api/servicefabric/sfclient-index#service-fabric-resource-model
     - name: Informations de référence sur l’interface CLI Maven Service Fabric
       href: service-fabric-mesh-reference-maven.md
-    - name: Modèle Resource Manager
-      href: /azure/templates/microsoft.servicefabricmesh/allversions
 - name: Ressources
   items:
     - name: Questions courantes
@@ -97,7 +95,7 @@
       href: 'https://azure.microsoft.com/roadmap/?category=service-fabric-mesh'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/search?q=service-fabric-mesh'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=service-fabric'
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=service-fabric-mesh'

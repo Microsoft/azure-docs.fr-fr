@@ -10,14 +10,16 @@ ms.topic: quickstart
 ms.custom:
 - mvc
 - mqtt
+- 'Role: Cloud Development'
+- devx-track-azurecli
 ms.date: 04/10/2019
 ms.author: wesmc
-ms.openlocfilehash: 4fbebfe2ec554c7c9c2f85a5657daeeee8dae31a
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 7311c7e700edbf8565a449ecbd045a91846e72c3
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83727078"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844759"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-and-read-it-with-a-back-end-application-c"></a>Démarrage rapide : Envoyer des données de télémétrie d’un appareil à un hub IoT et les lire avec une application back-end (C)
 
@@ -29,9 +31,7 @@ Le guide de démarrage rapide utilise un exemple d’application C à partir du 
 
 Cet article est écrit pour Windows, mais vous pouvez également suivre ce guide de démarrage rapide sur Linux.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -39,14 +39,9 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 * Installez la dernière version de [Git](https://git-scm.com/download/).
 
-* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-
-* Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et du service IoT Hub Device Provisioning (DPS) à Azure CLI.
-
-   ```azurecli-interactive
-   az extension add --name azure-iot
-   ```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
@@ -62,7 +57,7 @@ Pour les environnements suivants, vous pouvez utiliser le SDK en installant les 
 
 * **Arduino** : si vous développez sur Arduino, vous pouvez exploiter la bibliothèque Azure IoT disponible dans le Gestionnaire de bibliothèques de l'IDE Arduino. Pour plus d’informations, consultez [La bibliothèque Azure IoT Hub pour Arduino](https://github.com/azure/azure-iot-arduino).
 
-* **iOS** : le SDK IoT Hub Device SDK est disponible sous la forme de CocoaPods pour le développement d’appareils Mac et iOS. Pour plus d’informations, consultez [Exemples iOS pour Microsoft Azure IoT](https://cocoapods.org/pods/AzureIoTHubClient).
+* **iOS** : le kit SDK IoT Hub Device SDK est disponible en tant que CocoaPods pour le développement d’appareils iOS et Mac. Pour plus d’informations, consultez [Exemples iOS pour Microsoft Azure IoT](https://cocoapods.org/pods/AzureIoTHubClient).
 
 Dans cette section, en revanche, vous allez préparer un environnement de développement pour cloner et générer le [kit Azure IoT C SDK](https://github.com/Azure/azure-iot-sdk-c) à partir de GitHub. Le kit SDK sur GitHub comprend l’exemple de code utilisé dans ce guide de démarrage rapide.
 
@@ -95,7 +90,7 @@ Dans cette section, en revanche, vous allez préparer un environnement de dével
     cmake ..
     ```
 
-    Si `cmake` ne trouve pas votre compilateur C++, vous risquez de rencontrer des erreurs de build lors de l'exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](https://docs.microsoft.com/dotnet/framework/tools/developer-command-prompt-for-vs). 
+    Si `cmake` ne trouve pas votre compilateur C++, vous risquez de rencontrer des erreurs de build lors de l'exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](/dotnet/framework/tools/developer-command-prompt-for-vs). 
 
     Une fois la génération terminée, les dernières lignes de sortie doivent ressembler à la sortie suivante :
 
@@ -119,7 +114,7 @@ Dans cette section, en revanche, vous allez préparer un environnement de dével
 
 ## <a name="register-a-device"></a>Inscrire un appareil
 
-Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dans cette section, vous allez utiliser Azure Cloud Shell avec l'[extension IoT](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour inscrire un appareil simulé.
+Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dans cette section, vous allez utiliser Azure Cloud Shell avec l'[extension IoT](/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour inscrire un appareil simulé.
 
 1. Exécutez les commandes suivantes dans Azure Cloud Shell pour créer l’identité d’appareil.
 
@@ -188,7 +183,7 @@ L’application d’appareil simulé se connecte à un point de terminaison spé
 
 ## <a name="read-the-telemetry-from-your-hub"></a>Lire les données de télémétrie envoyées par votre hub
 
-Dans cette section, vous allez utiliser Azure Cloud Shell avec l'[extension IoT](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour surveiller les messages envoyés par l'appareil simulé.
+Dans cette section, vous allez utiliser Azure Cloud Shell avec l'[extension IoT](/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour surveiller les messages envoyés par l'appareil simulé.
 
 1. À l’aide d’Azure Cloud Shell, exécutez la commande suivante pour vous connecter et lire les messages à partir de votre hub IoT :
 
@@ -211,4 +206,4 @@ Dans ce guide de démarrage rapide, vous avez configuré un hub IoT, inscrit un 
 Pour en apprendre davantage sur le développement avec le kit Azure IoT Hub C SDK, continuez avec le guide pratique suivant :
 
 > [!div class="nextstepaction"]
-> [Développer avec le kit Azure IoT Hub C SDK](iot-hub-devguide-develop-for-constrained-devices.md)
+> [Développer avec le kit SDK C Azure IoT Hub](iot-hub-devguide-develop-for-constrained-devices.md)

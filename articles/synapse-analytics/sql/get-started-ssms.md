@@ -1,5 +1,5 @@
 ---
-title: 'SSMS : Se connecter et interroger SQL Server'
+title: Se connecter à Synapse SQL avec SQL Server Management Studio (SSMS)
 description: Utilisez SQL Server Management Studio (SSMS) pour vous connecter et interroger Synapse SQL dans Azure Synapse Analytics.
 services: synapse-analytics
 author: azaricstefan
@@ -7,14 +7,14 @@ ms.service: synapse-analytics
 ms.topic: overview
 ms.subservice: ''
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 704da86fd1d816dbf5d6cd9cf67dfee53fce2622
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: da698a1a8d91273321d4633abd683a06cb4cf403
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81419633"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451630"
 ---
 # <a name="connect-to-synapse-sql-with-sql-server-management-studio-ssms"></a>Se connecter à Synapse SQL avec SQL Server Management Studio (SSMS)
 > [!div class="op_single_selector"]
@@ -26,30 +26,33 @@ ms.locfileid: "81419633"
 > 
 > 
 
-Vous pouvez utiliser [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics par le biais de SQL à la demande (préversion) ou des ressources du pool SQL. 
+Vous pouvez utiliser [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics via le pool SQL serverless ou des ressources du pool SQL dédié. 
 
-### <a name="supported-tools-for-sql-on-demand-preview"></a>Outils pris en charge pour SQL à la demande (préversion)
+### <a name="supported-tools-for-serverless-sql-pool"></a>Outils pris en charge pour le pool SQL serverless
 
-La suite d’outils SSMS est partiellement prise en charge à partir de la version 18.5, avec des fonctionnalités limitées telles que la connexion et l’interrogation. [Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio) est entièrement pris en charge.
+[Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio) est entièrement pris en charge à compter de la version 1.18.0. SSMS est partiellement pris en charge à partir de la version 18.5 ; vous pouvez l’utiliser pour vous connecter et interroger uniquement.
 
+> [!NOTE]
+> Si une connexion AAD a une connexion ouverte pendant plus d’une heure au moment de l’exécution de la requête, toute requête qui s’appuie sur AAD échoue. Cela comprend l’interrogation du stockage à l’aide du transfert AAD et d’instructions qui interagissent avec AAD (par exemple, CREATE EXTERNAL PROVIDER). Cela affecte tous les outils qui maintiennent la connexion ouverte, comme dans l’éditeur de requête de SSMS et ADS. Les outils qui ouvrent de nouvelles connexions pour exécuter une requête ne sont pas affectés, par exemple Synapse Studio.
+> Vous pouvez redémarrer SSMS ou vous connecter et vous déconnecter dans ADS pour atténuer ce problème. .
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, vérifiez que les conditions préalables suivantes sont remplies :  
 
 * [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms). 
-* Pour le pool SQL, vous avez besoin d’un entrepôt de données existant. Pour en créer un, consultez la page [Créer un pool SQL](../quickstart-create-sql-pool.md). Pour SQL à la demande, un tel entrepôt est déjà provisionné dans votre espace de travail au moment de la création. 
-* Le nom complet du serveur SQL Server. Pour le trouver, consultez [Se connecter à Synapse SQL](connect-overview.md).
+* Pour le pool SQL dédié, vous avez besoin d’un entrepôt de données existant. Pour en créer un, consultez [Créer un pool SQL dédié](../quickstart-create-sql-pool-portal.md). Pour le pool SQL serverless, il en est déjà provisionné un sous le nom de « Built-in » dans votre espace de travail au moment de la création. 
+* Le nom complet du serveur SQL Server. Pour trouver ce nom, consultez [Se connecter à Synapse SQL](connect-overview.md).
 
 ## <a name="connect"></a>Se connecter
 
-### <a name="sql-pool"></a>Pool SQL
+### <a name="dedicated-sql-pool"></a>Pool SQL dédié
 
-Pour vous connecter à Synapse SQL au moyen d’un pool SQL, suivez ces étapes : 
+Pour vous connecter à Synapse SQL en utilisant un pool SQL dédié, suivez ces étapes : 
 
 1. Ouvrez SQL Server Management Studio (SSMS). 
-1. Dans la boîte de dialogue **Se connecter au serveur**, renseignez les champs, puis sélectionnez **Se connecter** : 
+1. Dans la boîte de dialogue **Se connecter au serveur**, renseignez les champs et sélectionnez **Se connecter** : 
   
-    ![Se connecter au serveur](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/connect-object-explorer1.png)
+    ![Se connecter au serveur 1](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/connect-object-explorer1.png)
    
    * **Nom du serveur** : Saisissez le **nom du serveur** précédemment identifié.
    * **Authentification** :  Choisissez un type d’authentification, tel que **Authentification SQL Server** ou **Authentification intégrée à Active Directory**.
@@ -57,69 +60,69 @@ Pour vous connecter à Synapse SQL au moyen d’un pool SQL, suivez ces étapes�
 
 1. Développez votre serveur Azure SQL Server dans l’**Explorateur d’objets**. Vous pouvez afficher les bases de données associées au serveur, telles que l’exemple de base de données AdventureWorksDW. Vous pouvez développer la base de données pour afficher les tables :
    
-    ![Explorer AdventureWorksDW](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/explore-tables.png)
+    ![Explorer AdventureWorksDW 1](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/explore-tables.png)
 
 
-### <a name="sql-on-demand-preview"></a>SQL à la demande (préversion)
+### <a name="serverless-sql-pool"></a>Pool SQL serverless
 
-Pour vous connecter à Synapse SQL à l’aide de SQL à la demande, suivez ces étapes : 
+Pour vous connecter à Synapse SQL en utilisant un pool SQL serverless, suivez ces étapes : 
 
 1. Ouvrez SQL Server Management Studio (SSMS).
-1. Dans la boîte de dialogue **Se connecter au serveur**, renseignez les champs, puis sélectionnez **Se connecter** : 
+1. Dans la boîte de dialogue **Se connecter au serveur**, renseignez les champs et sélectionnez **Se connecter** : 
    
-    ![Se connecter au serveur](./media/get-started-ssms/connect-object-explorer1.png)
+    ![Se connecter au serveur 2](./media/get-started-ssms/connect-object-explorer1.png)
    
    * **Nom du serveur** : Saisissez le **nom du serveur** précédemment identifié.
    * **Authentification** : Choisissez un type d’authentification, tel que **Authentification SQL Server** ou **Authentification intégrée à Active Directory** :
    * **Nom d’utilisateur** et **Mot de passe** : Entrez votre nom d’utilisateur et votre mot de passe si l’authentification SQL Server a été sélectionnée plus haut.
-   * Cliquez sur **Connecter**.
+   * Sélectionnez **Connecter**.
 
 4. Pour voir plus d’informations, développez votre serveur SQL Azure. Vous pouvez afficher les bases de données associées au serveur. Développez la *démonstration* pour voir le contenu dans votre exemple de base de données.
    
-    ![Explorer AdventureWorksDW](./media/get-started-ssms/explore-tables.png)
+    ![Explorer AdventureWorksDW 2](./media/get-started-ssms/explore-tables.png)
 
 
 ## <a name="run-a-sample-query"></a>Exécuter un exemple de requête
 
-### <a name="sql-pool"></a>Pool SQL
+### <a name="dedicated-sql-pool"></a>Pool SQL dédié
 
 À présent qu’une connexion de base de données a été établie, vous pouvez interroger les données.
 
 1. Cliquez avec le bouton droit sur votre base de données dans l’Explorateur d’objets SQL Server.
 2. Sélectionnez **Nouvelle requête**. Une nouvelle fenêtre de requête s’ouvre.
    
-    ![Nouvelle requête](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/new-query.png)
+    ![Nouvelle requête 1](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/new-query.png)
 3. Copiez la requête T-SQL suivante dans la fenêtre de requête :
    
     ```sql
     SELECT COUNT(*) FROM dbo.FactInternetSales;
     ```
-4. Exécute la requête. Pour ce faire, cliquez sur `Execute` ou utilisez le raccourci `F5`.
+4. Exécutez la requête en sélectionnant `Execute` ou utilisez le raccourci : `F5`.
    
-    ![Exécuter une requête](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/execute-query.png)
-5. Passez en revue les résultats de la requête. Dans cet exemple, la table FactInternetSales a 60 398 lignes.
+    ![Exécuter la requête 1](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/execute-query.png)
+5. Passez en revue les résultats de la requête. Dans l’exemple suivant, la table FactInternetSales contient 60 398 lignes.
    
-    ![Résultats de la requête](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/results.png)
+    ![Résultats de la requête 1](../sql-data-warehouse/media/sql-data-warehouse-query-ssms/results.png)
 
-### <a name="sql-on-demand"></a>SQL à la demande
+### <a name="serverless-sql-pool"></a>Pool SQL serverless
 
 À présent que vous avez établi une connexion de base de données, vous pouvez interroger les données.
 
 1. Cliquez avec le bouton droit sur votre base de données dans l’Explorateur d’objets SQL Server.
 2. Sélectionnez **Nouvelle requête**. Une nouvelle fenêtre de requête s’ouvre.
    
-    ![Nouvelle requête](./media/get-started-ssms/new-query.png)
+    ![Nouvelle requête 2](./media/get-started-ssms/new-query.png)
 3. Copiez la requête T-SQL suivante dans la fenêtre de requête :
    
     ```sql
     SELECT COUNT(*) FROM demo.dbo.usPopulationView
     ```
-4. Exécute la requête. Pour ce faire, cliquez sur `Execute` ou utilisez le raccourci `F5`.
+4. Exécutez la requête en sélectionnant `Execute` ou utilisez le raccourci : `F5`.
    
-    ![Exécuter une requête](./media/get-started-ssms/execute-query.png)
+    ![Exécuter la requête 2](./media/get-started-ssms/execute-query.png)
 5. Passez en revue les résultats de la requête. Dans cet exemple, la vue usPopulationView contient 3664512 lignes.
    
-    ![Résultats de la requête](./media/get-started-ssms/results.png)
+    ![Résultats de la requête 2](./media/get-started-ssms/results.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 Maintenant que vous pouvez vous connecter et exécuter des requêtes, essayez de [visualiser les données avec Power BI](get-started-power-bi-professional.md).

@@ -1,9 +1,9 @@
 ---
 ms.openlocfilehash: 8ebb10f955be8f3004fdbdc595ea0fefc0d2b7ea
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67176776"
 ---
 ## <a name="update-properties"></a>Mettre à jour des propriétés

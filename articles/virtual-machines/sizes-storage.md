@@ -1,25 +1,20 @@
 ---
 title: Tailles des machines virtuelles Azure – Stockage | Microsoft Docs
 description: Répertorie les différentes tailles optimisées pour le stockage disponibles pour les machines virtuelles dans Azure. Liste des informations sur le nombre de processeurs virtuels, de disques de données et de cartes réseau, ainsi que sur le débit de stockage et la bande passante réseau pour les tailles disponibles dans cette série.
-services: virtual-machines
+ms.subservice: sizes
 documentationcenter: ''
 author: sasha-melamed
-manager: gwallace
-editor: ''
-tags: azure-resource-manager,azure-service-management
-ms.assetid: ''
 ms.service: virtual-machines
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 02/03/2020
-ms.author: jonbeck
-ms.openlocfilehash: 5a611dc288fc18a14f6000689f9f9b49d4b3feb8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: jushiman
+ms.openlocfilehash: 5af7b3373993dce1939ecd7534140e58db688579
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77913334"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87835576"
 ---
 # <a name="storage-optimized-virtual-machine-sizes"></a>Tailles de machine virtuelle à stockage optimisé
 
@@ -41,3 +36,5 @@ La [série Lsv2](lsv2-series.md) offre un stockage NVMe local directement mapp�
 Lisez-en davantage sur les [Unités de calcul Azure (ACU)](acu.md) pour découvrir comment comparer les performances de calcul entre les références Azure.
 
 Découvrez comment optimiser les performances sur les machines virtuelles de la série Lsv2 pour [Windows](windows/storage-performance.md) ou [Linux](linux/storage-performance.md).
+
+Pour plus d’informations sur la façon dont Azure nomme ses machines virtuelles, consultez [Conventions de nommage des tailles de machines virtuelles Azure](./vm-naming-conventions.md).

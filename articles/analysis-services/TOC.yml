@@ -30,9 +30,9 @@
     - name: Automatisation à l’aide de principaux de service
       href: analysis-services-service-principal.md
     - name: Bibliothèques clientes
-      href: analysis-services-data-providers.md
+      href: /analysis-services/client-libraries?view=azure-analysis-services-current&preserve-view=true
     - name: Niveau de compatibilité
-      href: 'https://docs.microsoft.com/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services'
+      href: /analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services?view=azure-analysis-services-current&preserve-view=true
     - name: Connexion à des sources de données locales
       href: analysis-services-gateway.md
     - name: Connexion aux serveurs
@@ -71,10 +71,12 @@
           href: ../active-directory/develop/howto-authenticate-service-principal-powershell.md
         - name: Ajouter un principal de service au rôle d’administrateur de serveur
           href: analysis-services-addservprinc-admins.md
+        - name: Déplacer d’une région à l’autre
+          href: move-between-regions.md
     - name: Modèle
       items:
         - name: Modélisation tabulaire
-          href: 'https://docs.microsoft.com/analysis-services/tabular-models/tabular-models-ssas'
+          href: /analysis-services/tabular-models/tabular-models-ssas
         - name: Déploiement depuis Visual Studio
           href: analysis-services-deploy.md
         - name: Actualiser avec l’API REST
@@ -106,13 +108,13 @@
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.analysisservices/servers
     - name: DAX
-      href: 'https://docs.microsoft.com/dax/data-analysis-expressions-dax-reference'
+      href: /dax/data-analysis-expressions-dax-reference
     - name: Power Query M
-      href: 'https://docs.microsoft.com/powerquery-m/power-query-m-reference'
+      href: /powerquery-m/power-query-m-reference
     - name: Langage TMSL (Tabular Model Scripting Language)
-      href: 'https://docs.microsoft.com/bi-reference/tmsl/tabular-model-scripting-language-tmsl-reference'
+      href: /analysis-services/tmsl/tabular-model-scripting-language-tmsl-reference?view=azure-analysis-services-current&preserve-view=true
     - name: Modèle d’objet tabulaire (TOM)
-      href: 'https://docs.microsoft.com/bi-reference/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo'
+      href: /analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=azure-analysis-services-current&preserve-view=true
     - name: Limites de ressource et d’objet
       href: analysis-services-capacity-limits.md
 - name: Ressources
@@ -120,11 +122,9 @@
     - name: Exemples
       href: analysis-services-samples.md
     - name: Blog de l’équipe Analysis Services
-      href: 'https://blogs.msdn.microsoft.com/analysisservices/'
-    - name: Page de questions Microsoft Q&A sur Azure Analysis Services
-      href: 'https://docs.microsoft.com/answers/topics/azure-analysis-services.html'
-    - name: Feuille de route Azure
-      href: 'https://azure.microsoft.com/roadmap/?category=intelligence-analytics'
+      href: 'https://powerbi.microsoft.com/blog/category/analysis-services/'
+    - name: Mises à jour Azure
+      href: 'https://azure.microsoft.com/updates/?query=Analysis%20Services'
     - name: État Azure
       href: 'https://azure.microsoft.com/status/'
     - name: Commentaires
@@ -135,5 +135,5 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-analysis-services'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=analysis-services&sort=newest'

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,hdiseo17may2017
+ms.topic: how-to
+ms.custom: hdinsightactive,hdiseo17may2017, devx-track-java
 ms.date: 11/20/2019
-ms.openlocfilehash: 73a2a612a4eeb4a59f12abf0660fffb092f0547f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1e0c16ee7aa66847cc6f3f4618b8090b7ce86663
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74327206"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533782"
 ---
 # <a name="use-a-java-udf-with-apache-hive-in-hdinsight"></a>Utiliser une fonction UDF Java avec Apache Hive dans HDInsight
 
@@ -22,7 +22,7 @@ Découvrez comment créer une fonction définie par l’utilisateur basée sur J
 ## <a name="prerequisites"></a>Conditions préalables requises
 
 * Un cluster Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./apache-hadoop-linux-tutorial-get-started.md).
-* [Kit de développeur Java (JDK) version 8](https://aka.ms/azure-jdks)
+* [Kit de développeur Java (JDK) version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 * Le [schéma d’URI](../hdinsight-hadoop-linux-information.md#URI-and-scheme) de votre principal espace de stockage de clusters. Il s’agirait de wasb:// pour Stockage Azure, de abfs:// pour Azure Data Lake Storage Gen2 ou de adl:// pour Azure Data Lake Storage Gen1. Si le transfert sécurisé est activé pour le stockage Azure, l’URI sera `wasbs://`.  Voir aussi [transfert sécurisé](../../storage/common/storage-require-secure-transfer.md).
 
@@ -234,26 +234,30 @@ Dans les commandes ci-dessous, remplacez `sshuser` par le nom d’utilisateur r�
 
     Cette requête sélectionne l’état de la table, convertit la chaîne en minuscules, puis l’affiche avec le nom non modifié. Le résultat ressemble au texte suivant :
 
-        +---------------+---------------+--+
-        |  exampleudf   |     state     |
-        +---------------+---------------+--+
-        | california    | California    |
-        | pennsylvania  | Pennsylvania  |
-        | pennsylvania  | Pennsylvania  |
-        | pennsylvania  | Pennsylvania  |
-        | colorado      | Colorado      |
-        | colorado      | Colorado      |
-        | colorado      | Colorado      |
-        | utah          | Utah          |
-        | utah          | Utah          |
-        | colorado      | Colorado      |
-        +---------------+---------------+--+
+    ```output
+    +---------------+---------------+--+
+    |  exampleudf   |     state     |
+    +---------------+---------------+--+
+    | california    | California    |
+    | pennsylvania  | Pennsylvania  |
+    | pennsylvania  | Pennsylvania  |
+    | pennsylvania  | Pennsylvania  |
+    | colorado      | Colorado      |
+    | colorado      | Colorado      |
+    | colorado      | Colorado      |
+    | utah          | Utah          |
+    | utah          | Utah          |
+    | colorado      | Colorado      |
+    +---------------+---------------+--+
+    ```
 
 ## <a name="troubleshooting"></a>Dépannage
 
 Quand vous exécutez le travail hive, vous pouvez rencontrer une erreur similaire au texte suivant :
 
-    Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
+```output
+Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
+```
 
 Ce problème peut être causé par les fins de ligne dans le fichier Python. De nombreux éditeurs Windows utilisent par défaut CRLF comme fin de ligne, mais les applications Linux utilisent généralement LF.
 

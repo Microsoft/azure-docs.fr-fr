@@ -1,32 +1,27 @@
 ---
-title: 'Didacticiel : configurer Jive pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Jive.
+title: 'Tutoriel : Configurer Jive pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
+description: Découvrez les étapes à effectuer dans Jive et Azure AD pour approvisionner et déprovisionner automatiquement des comptes utilisateur d’Azure AD vers Jive.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.assetid: 6fbfdbe7-d66c-4305-9fea-76d6a6a92830
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 01/26/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 602eed65745eea1fd9096508c442a27ea79bcba9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ebee5d986007e07d497056620f0cfc437b2da4d1
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057732"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94356397"
 ---
-# <a name="tutorial-configure-jive-for-automatic-user-provisioning"></a>Didacticiel : configurer Jive pour l’approvisionnement automatique d’utilisateurs
+# <a name="tutorial-configure-jive-for-automatic-user-provisioning"></a>Tutoriel : Configurer Jive pour l’approvisionnement automatique d’utilisateurs
 
 L’objectif de ce didacticiel est de vous montrer les étapes à effectuer dans Jive et Azure AD pour approvisionner et retirer automatiquement des comptes utilisateur d’Azure AD vers Jive.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Le scénario décrit dans ce didacticiel part du principe que vous disposez des éléments suivants :
 
@@ -40,7 +35,7 @@ Azure Active Directory utilise un concept appelé « affectations » pour dét
 
 Avant de configurer et d’activer le service d’approvisionnement, vous devez déterminer quels utilisateurs et/ou groupes dans Azure AD représentent les utilisateurs qui ont besoin d’accéder à votre application Jive. Une fois que vous avez choisi, vous pouvez affecter ces utilisateurs à votre application Jive en suivant les instructions fournies ici :
 
-[Affecter un utilisateur ou un groupe à une application d’entreprise](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
+[Affecter un utilisateur ou un groupe à une application d’entreprise](../manage-apps/assign-user-or-group-access-portal.md)
 
 ### <a name="important-tips-for-assigning-users-to-jive"></a>Conseils importants pour l’affectation d’utilisateurs à Jive
 
@@ -68,11 +63,11 @@ Dans le cadre de cette procédure, vous devez fournir un jeton de sécurité à 
 
 1. Définissez le **Mode d’approvisionnement** sur **Automatique**. 
 
-    ![approvisionnement](./media/jive-provisioning-tutorial/provisioning.png)
+    ![Capture d’écran montrant la page d’approvisionnement Jive, avec le Mode d’approvisionnement défini sur Automatique et d’autres valeurs que vous pouvez définir.](./media/jive-provisioning-tutorial/provisioning.png)
 
-1. Dans la section **Informations d’identification de l’administrateur**, fournissez les paramètres de configuration suivants :
+1. Dans la section **Informations d’identification de l’administrateur** , fournissez les paramètres de configuration suivants :
    
-    a. Dans la zone de texte **Nom d’utilisateur admin Jive**, tapez le nom d’un compte Jive auquel le profil **System Administrator** est attribué dans Jive.com.
+    a. Dans la zone de texte **Nom d’utilisateur admin Jive** , tapez le nom d’un compte Jive auquel le profil **System Administrator** est attribué dans Jive.com.
    
     b. Dans la zone de texte **Mot de passe de l’admin Jive** , tapez le mot de passe de ce compte.
    
@@ -80,17 +75,17 @@ Dans le cadre de cette procédure, vous devez fournir un jeton de sécurité à 
       
       > [!NOTE]
       > L’URL de locataire Jive est celle utilisée par votre organisation pour se connecter à Jive.  
-      > En règle générale, l’URL a le format suivant : **www.\<organisation\>.jive.com**.          
+      > En général, l’URL a le format suivant : **www.\<organization\>.jive.com**.          
 
 1. Dans le portail Azure, cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à votre application Jive.
 
-1. Entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification**, puis cochez la case se trouvant en dessous.
+1. Entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification** , puis cochez la case se trouvant en dessous.
 
 1. Cliquez sur **Enregistrer.**
 
 1. Dans la section Mappages, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Jive**.
 
-1. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés d’Azure AD vers Jive. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes utilisateur dans Jive pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
+1. Dans la section **Mappages des attributs** , passez en revue les attributs utilisateur qui sont synchronisés d’Azure AD vers Jive. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes utilisateur dans Jive pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
 
 1. Pour activer le service d’approvisionnement Azure AD pour Jive, définissez le paramètre **État d’approvisionnement** sur **Activé** dans la section Paramètres.
 

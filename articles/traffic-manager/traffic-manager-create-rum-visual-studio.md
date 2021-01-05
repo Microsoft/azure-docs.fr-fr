@@ -3,22 +3,21 @@ title: Mesures utilisateur réelles avec Visual Studio Mobile Center – Azure T
 description: Configurez votre application mobile développée à l’aide de Visual Studio Mobile Center pour envoyer des mesures d’utilisateurs réels à Traffic Manager.
 services: traffic-manager
 documentationcenter: traffic-manager
-author: rohinkoul
-manager: twooley
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 03/16/2018
-ms.author: rohink
-ms.custom: ''
-ms.openlocfilehash: 3106334e1fb3e3000cbd09e00e413b34a1b55e54
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.custom: devx-track-js
+ms.openlocfilehash: c49672ad38ac8cf80214d03870b5876d741e76ec
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76939183"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994874"
 ---
 # <a name="how-to-send-real-user-measurements-to-traffic-manager-with-visual-studio-mobile-center"></a>Comment envoyer les mesures des utilisateurs réels à Traffic Manager avec Visual Studio Mobile Center
 

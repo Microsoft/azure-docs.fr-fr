@@ -7,14 +7,14 @@ ms.service: storage
 ms.topic: how-to
 ms.date: 11/26/2019
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 5cef0e94a43b3ef16d45f7f43658f962e07b5345
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6d0392cd8e94ba8a9026f557b90e740fbed7f50c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74707593"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84809088"
 ---
 # <a name="check-the-encryption-status-of-a-blob"></a>Vérifier l’état de chiffrement d’un objet blob
 

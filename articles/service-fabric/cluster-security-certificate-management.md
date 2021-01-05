@@ -4,12 +4,12 @@ description: En savoir plus sur la gestion des certificats dans un cluster Servi
 ms.topic: conceptual
 ms.date: 04/10/2020
 ms.custom: sfrev
-ms.openlocfilehash: ecdeb5c9e30c176e2f3525f8efeb861d9210b202
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: aba681157d71f94914462b8d9fc13b90d4d6b153
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195732"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88653662"
 ---
 # <a name="certificate-management-in-service-fabric-clusters"></a>Gestion des certificats dans des clusters Service Fabric
 
@@ -21,7 +21,7 @@ Aspects abordés sous ce titre :
 * Rôles et entités impliqués dans la gestion des certificats
 * Parcours d’un certificat
 * Présentation d’un exemple approfondi
-* Dépannage et foire aux questions
+* Résolution des problèmes et forum aux questions
 
 Mais, avant tout chose, il convient de souligner que cet article s’efforce de conjuguer une approche théorique avec des exemples pratiques qui nécessitent des services, technologies et autres ressources spécifiques. Étant donné qu’une partie importante de l’audience est composée de personnel interne de Microsoft, nous faisons référence aux services, technologies et produits spécifiques de Microsoft Azure. N’hésitez pas à demander des éclaircissements ou des conseils dans la section des commentaires lorsque des détails spécifiques de Microsoft ne s’appliquent pas dans votre cas.
 
@@ -76,21 +76,22 @@ Ces étapes sont illustrées ci-dessous. Notez les différences d’approvisionn
 ![Approvisionnement de certificats déclarés par nom commun d’objet][Image2]
 
 ### <a name="certificate-enrollment"></a>Inscription de certificat
-Ce sujet est traité en détail dans la [documentation sur Key Vault](../key-vault/create-certificate.md). Nous en incluons ici un résumé par souci de continuité et pour faciliter l’accès aux informations. En continuant dans le contexte d’Azure et en utilisant Azure Key Vault comme service de gestion des secrets, un demandeur de certificat autorisé doit disposer au moins d’autorisations de gestion des certificats sur le coffre, accordées par le propriétaire de celui-ci. Le demandeur doit alors s’inscrire dans un certificat comme suit :
-    - Il crée une stratégie de certificat dans Azure Key Vault (AKV) qui spécifie le domaine ou l’objet du certificat, l’émetteur souhaité, le type et la longueur de la clé, l’utilisation prévue de la clé, etc. (pour plus de détails, voir [Certificats dans Azure Key Vault](../key-vault/certificate-scenarios.md)). 
+Ce sujet est traité en détail dans la [documentation sur Key Vault](../key-vault/certificates/create-certificate.md). Nous en incluons ici un résumé par souci de continuité et pour faciliter l’accès aux informations. En continuant dans le contexte d’Azure et en utilisant Azure Key Vault comme service de gestion des secrets, un demandeur de certificat autorisé doit disposer au moins d’autorisations de gestion des certificats sur le coffre, accordées par le propriétaire de celui-ci. Le demandeur doit alors s’inscrire dans un certificat comme suit :
+    - Il crée une stratégie de certificat dans Azure Key Vault (AKV) qui spécifie le domaine ou l’objet du certificat, l’émetteur souhaité, le type et la longueur de la clé, l’utilisation prévue de la clé, etc. (pour plus de détails, voir [Certificats dans Azure Key Vault](../key-vault/certificates/certificate-scenarios.md)). 
     - Il crée un certificat dans le même coffre avec la stratégie spécifiée ci-dessus, ce qui a pour effet de générer une paire de clés en tant qu’objets de coffre, ainsi qu’une demande de signature de certificat signée avec la clé privée, qui est ensuite transmise à l’émetteur désigné pour signature.
     - Lorsque l’émetteur (autorité de certification) répond avec le certificat signé, le résultat est fusionné dans le coffre et le certificat est disponible pour les opérations suivantes :
       - sous {vaultUri}/certificates/{name}, le certificat comprenant la clé publique et les métadonnées
       - sous {vaultUri}/keys/{name}, la clé privée du certificat, disponible pour les opérations de chiffrement (envelopper/désenvelopper, signer/vérifier)
-      - sous {vaultUri}/secrets/{name}, le certificat avec sa clé privée, disponible pour téléchargement en tant que fichier pfx ou pem non protégé. Rappelez-vous qu’un certificat de coffre est, en fait, une ligne chronologique d’instances de certificat partageant une stratégie. Les versions des certificats sont créées en fonction des attributs de durée de vie et de renouvellement de la stratégie. Il est fortement recommandé d’éviter que des certificats de coffre partagent des objets ou domaines/noms DNS. Dans un cluster, il peut être perturbant d’approvisionner des instances de certificat à partir de différents certificats de coffre avec des objets identiques mais d’autres attributs sensiblement différents, tels que l’émetteur, les utilisations de clés, etc.
+      - sous {vaultUri}/secrets/{Name}, le certificat avec sa clé privée, disponible pour le téléchargement en tant que fichier pfx ou pem non protégé  
+    Rappelez-vous qu’un certificat de coffre est, en fait, une ligne chronologique d’instances de certificat partageant une stratégie. Les versions des certificats sont créées en fonction des attributs de durée de vie et de renouvellement de la stratégie. Il est fortement recommandé d’éviter que des certificats de coffre partagent des objets ou domaines/noms DNS. Dans un cluster, il peut être perturbant d’approvisionner des instances de certificat à partir de différents certificats de coffre avec des objets identiques mais d’autres attributs sensiblement différents, tels que l’émetteur, les utilisations de clés, etc.
 
-À ce stade, il existe dans le coffre un certificat prêt pour utilisation .
+À ce stade, il existe dans le coffre un certificat prêt pour utilisation. Ultérieurement :
 
 ### <a name="certificate-provisioning"></a>Approvisionnement du certificat
 Nous avons évoqué un « agent d’approvisionnement », qui est l’entité qui récupère le certificat avec sa clé privée dans le coffre, et l’installe sur chacun des hôtes du cluster (n’oubliez pas que Service Fabric ne fournit pas de certificats). Dans notre contexte, le cluster sera hébergé sur une collection de machines virtuelles Azure ou dans des groupes de machines virtuelles identiques. Dans Azure, l’approvisionnement d’un certificat à partir d’un coffre vers une machine virtuelle ou un groupe de machines virtuelles identiques est possible grâce aux mécanismes ci-dessous, en supposant, comme ci-dessus, que l’agent d’approvisionnement ait préalablement reçu du propriétaire du coffre des autorisations « get » sur le celui-ci : 
   - Mécanisme ad hoc : un opérateur récupère le certificat dans le coffre (comme pfx/PKCS n°12 ou pem), et l’installe sur chaque nœud.
   - En tant que « secret » du groupe de machines virtuelles identiques pendant le déploiement. En utilisant son identité interne pour le compte de l’opérateur, le service de calcul récupère le certificat à partir d’un coffre activé pour le déploiement de modèle, et l’installe sur chaque nœud du groupe de machines virtuelles identiques ([comme décrit ici](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#certificates)). Notez que cela permet l’approvisionnement uniquement de secrets dont les versions sont gérées.
-  - En utilisant l’[extension de machine virtuelle de Key Vault](../virtual-machines/extensions/key-vault-windows.md). Cela permet d’approvisionner les certificats à l’aide de déclarations sans version, avec un rafraîchissement périodique des certificats observés. Dans ce cas, la machine virtuelle ou le groupe de machines virtuelles identiques devraient avoir une [identité managée](../virtual-machines/windows/security-policy.md#managed-identities-for-azure-resources), c’est-à-dire une identité autorisée à accéder aux coffres contenant les certificats observés.
+  - En utilisant l’[extension de machine virtuelle de Key Vault](../virtual-machines/extensions/key-vault-windows.md). Cela permet d’approvisionner les certificats à l’aide de déclarations sans version, avec un rafraîchissement périodique des certificats observés. Dans ce cas, la machine virtuelle ou le groupe de machines virtuelles identiques devraient avoir une [identité managée](../virtual-machines/security-policy.md#managed-identities-for-azure-resources), c’est-à-dire une identité autorisée à accéder aux coffres contenant les certificats observés.
 
 Le mécanisme ad-hoc n’étant pas recommandé pour plusieurs raisons, allant de la sécurité à la disponibilité, nous n’en dirons pas davantage ici. Pour plus de détails, consultez [Certificats dans des groupes de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#certificates).
 
@@ -114,7 +115,7 @@ Dans les deux cas, le certificat après rotation est approvisionné sur tous les
 
 Cela se traduit par les observations importantes suivantes :
   - Le certificat de renouvellement peut être ignoré si sa date d’expiration est antérieure à celle du certificat actuellement utilisé.
-  - La disponibilité du cluster ou des applications hébergées prend le pas sur la directive de rotation du certificat. Le cluster finit par converger sur le nouveau certificat, mais sans timing garanti, avec les conséquences ci-après.
+  - La disponibilité du cluster ou des applications hébergées prend le pas sur la directive de rotation du certificat. Le cluster finit par converger sur le nouveau certificat, mais sans garantie de timing. Résultat :
   - Il peut ne pas être immédiatement évident pour l’observateur que le certificat après rotation a complètement remplacé son prédécesseur. La seule façon de s’en assurer (pour les certificats de cluster) est de redémarrer les machines hôtes. Notez qu’il ne suffit pas de redémarrer les nœuds Service Fabric, car les composants en mode noyau qui forment des connexions de bail dans un cluster ne seront pas affectés. Notez également que le redémarrage de la machine virtuelle ou du groupe de machines virtuelles identiques peut entraîner une perte temporaire de disponibilité (pour des certificats d’application, il suffit de redémarrer les instances d’application respectives).
   - L’introduction d’un certificat avec clé régénérée qui ne respecte pas les règles de validation peut effectivement anéantir le cluster. L’exemple le plus courant de cela est le cas d’un émetteur inattendu : les certificats de cluster sont déclarés par nom commun de l’objet avec épinglage de l’émetteur, mais le certificat après rotation a été émis par un émetteur nouveau ou non déclaré.     
 
@@ -209,7 +210,7 @@ Comme mentionné précédemment, un certificat approvisionné en tant que secret
 
 Tous les extraits suivants doivent être déployés de manière concomitante. Ils sont répertoriés individuellement pour une analyse et des explications ad hoc.
 
-Commencez par définir une identité attribuée par l’utilisateur (les valeurs par défaut sont incluses à titre d’exemples). Pour obtenir des informations à jour, consultez la [documentation officielle](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-arm#create-a-user-assigned-managed-identity) :
+Commencez par définir une identité attribuée par l’utilisateur (les valeurs par défaut sont incluses à titre d’exemples). Pour obtenir des informations à jour, consultez la [documentation officielle](../active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-arm.md#create-a-user-assigned-managed-identity) :
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -240,7 +241,7 @@ Commencez par définir une identité attribuée par l’utilisateur (les valeurs
   ]}
 ```
 
-Accordez ensuite à cette identité l’accès aux secrets du coffre. Pour obtenir des informations à jour, consultez la [documentation officielle](https://docs.microsoft.com/rest/api/keyvault/vaults/updateaccesspolicy) :
+Accordez ensuite à cette identité l’accès aux secrets du coffre. Pour obtenir des informations à jour, consultez la [documentation officielle](/rest/api/keyvault/vaults/updateaccesspolicy) :
 ```json
   "resources":
   [{
@@ -265,7 +266,7 @@ Accordez ensuite à cette identité l’accès aux secrets du coffre. Pour obten
 À l’étape suivante, nous allons :
   - attribuer l’identité affectée par l’utilisateur au groupe de machines virtuelles identiques ;
   - déclarer la dépendance du groupe de machines virtuelles identiques de la création de l’identité managée et du résultat de l’octroi de l’accès au coffre ;
-  - déclarer l’extension de machine virtuelle de KeyVault, en exigeant qu’elle récupère les certificats observés au démarrage ([documentation officielle](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)) ;
+  - déclarer l’extension de machine virtuelle de KeyVault, en exigeant qu’elle récupère les certificats observés au démarrage ([documentation officielle](../virtual-machines/extensions/key-vault-windows.md)) ;
   - mettre à jour la définition de l’extension de machine virtuelle de Service Fabric pour qu’elle dépende de l’extension de machine virtuelle de KeyVault et convertisse le certificat de cluster en nom commun (nous apportons ces modifications en une seule étape, car elles relèvent de la même ressource).
 
 ```json
@@ -419,15 +420,15 @@ L’extension de machine virtuelle de KeyVault, en tant qu’agent d’approvisi
 #### <a name="certificate-linking-explained"></a>Explication du lien de certificat
 Vous avez peut-être remarqué l’indicateur « linkOnRenewal » de l’extension de machine virtuelle de KeyVault, et le fait qu’il est défini sur false. Nous abordons ici en profondeur le comportement contrôlé par cet indicateur et ses conséquences sur le fonctionnement d’un cluster. Notez que ce comportement est spécifique de Windows.
 
-En fonction de sa [définition](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows#extension-schema) :
+En fonction de sa [définition](../virtual-machines/extensions/key-vault-windows.md#extension-schema) :
 ```json
 "linkOnRenewal": <Only Windows. This feature enables auto-rotation of SSL certificates, without necessitating a re-deployment or binding.  e.g.: false>,
 ```
 
-Les certificats utilisés pour établir une connexion TLS sont généralement [acquis en tant que descripteur](https://docs.microsoft.com/windows/win32/api/sspi/nf-sspi-acquirecredentialshandlea) via le fournisseur SSP (Security Support Provider) du canal S. Autrement dit, le client n’accède pas directement à la clé privée du certificat proprement dit. Le canal S prend en charge la redirection (liaison) des informations d’identification sous la forme d’une extension de certificat ([CERT_RENEWAL_PROP_ID](https://docs.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certsetcertificatecontextproperty#cert_renewal_prop_id)) : si cette propriété est définie, sa valeur représente l’empreinte du certificat de « renouvellement », de sorte que le canal S tente à la place de charger le certificat lié. En fait, il parcourt cette liste liée (et, espérons-le, acyclique) jusqu’à ce qu’il se retrouve avec le certificat « final » (sans marque de renouvellement). Utilisée judicieusement, cette fonctionnalité limite efficacement la perte de disponibilité due à l’expiration de certificats (par exemple). Dans d’autres cas, elle peut occasionner des pannes difficiles à diagnostiquer et à atténuer. Le canal S exécute le balayage des certificats sur leurs propriétés de renouvellement de façon inconditionnelle, sans tenir compte de l’objet, des émetteurs ou de tout autre attribut spécifique participant à la validation du certificat obtenu par le client. Il est possible, en effet, que le certificat obtenu n’ait pas de clé privée associée, ou que la clé n’ait pas été mise en liste ACL pour son utilisateur potentiel. 
+Les certificats utilisés pour établir une connexion TLS sont généralement [acquis en tant que descripteur](/windows/win32/api/sspi/nf-sspi-acquirecredentialshandlea) via le fournisseur SSP (Security Support Provider) du canal S. Autrement dit, le client n’accède pas directement à la clé privée du certificat proprement dit. Le canal S prend en charge la redirection (liaison) des informations d’identification sous la forme d’une extension de certificat ([CERT_RENEWAL_PROP_ID](/windows/win32/api/wincrypt/nf-wincrypt-certsetcertificatecontextproperty#cert_renewal_prop_id)) : si cette propriété est définie, sa valeur représente l’empreinte du certificat de « renouvellement », de sorte que le canal S tente à la place de charger le certificat lié. En fait, il parcourt cette liste liée (et, espérons-le, acyclique) jusqu’à ce qu’il se retrouve avec le certificat « final » (sans marque de renouvellement). Utilisée judicieusement, cette fonctionnalité limite efficacement la perte de disponibilité due à l’expiration de certificats (par exemple). Dans d’autres cas, elle peut occasionner des pannes difficiles à diagnostiquer et à atténuer. Le canal S exécute le balayage des certificats sur leurs propriétés de renouvellement de façon inconditionnelle, sans tenir compte de l’objet, des émetteurs ou de tout autre attribut spécifique participant à la validation du certificat obtenu par le client. Il est possible, en effet, que le certificat obtenu n’ait pas de clé privée associée, ou que la clé n’ait pas été mise en liste ACL pour son utilisateur potentiel. 
  
 Si la liaison est activée, l’extension de machine virtuelle de KeyVault, lors de la récupération d’un certificat observé à partir du coffre, tente de trouver des certificats existants correspondants afin de les lier via la propriété d’extension de renouvellement. La correspondance est (exclusivement) basée sur l’autre nom de l’objet (SAN ) et fonctionne comme illustré ci-dessous.
-Supposons deux certificats existants, comme suit : A: CN = “Accessoires d’Alice”, SAN = {“alice.universalexports.com”}, renewal = ‘’ B: CN = “bits de Bob”, SAN = {“bob.universalexports.com”, “bob.universalexports.net”}, renewal = ‘’
+Supposons deux certificats existants, comme suit : A : CN = “Accessoires d’Alice”, SAN = {“alice.universalexports.com”}, renewal = ‘’ B: CN = “bits de Bob”, SAN = {“bob.universalexports.com”, “bob.universalexports.net”}, renewal = ‘’
  
 Supposons qu’un certificat C soit récupéré par l’extension de machine virtuelle de KeyVault : CN = “Programme malveillant de Mallory”, SAN = {“alice.universalexports.com”, “bob.universalexports.com”, “mallory.universalexports.com”}
  
@@ -491,4 +492,3 @@ Pour les infrastructures de clé publique internes de Microsoft, veuillez consul
 
 [Image1]:./media/security-cluster-certificate-mgmt/certificate-journey-thumbprint.png
 [Image2]:./media/security-cluster-certificate-mgmt/certificate-journey-common-name.png
-

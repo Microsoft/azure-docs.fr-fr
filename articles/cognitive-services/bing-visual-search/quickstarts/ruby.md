@@ -1,52 +1,59 @@
 ---
 title: 'Démarrage rapide : Obtenir des insights sur des images avec l’API REST et Ruby - Recherche visuelle Bing'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment charger une image dans l’API Recherche visuelle Bing pour récupérer des insights sur celle-ci.
+description: Découvrez comment charger une image à l’aide de l’API Recherche visuelle Bing et Ruby, puis récupérez des insights sur l’image.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-visual-search
 ms.topic: quickstart
-ms.date: 12/17/2019
+ms.date: 05/22/2020
 ms.author: aahi
-ms.openlocfilehash: e19f582084bec6915f95cf16fd8571b8d99da6fd
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: d907e10484b1873974ec9707d0aec1a89ab9eb50
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75379638"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499024"
 ---
 # <a name="quickstart-get-image-insights-using-the-bing-visual-search-rest-api-and-ruby"></a>Démarrage rapide : Obtenir des insights sur les images à l’aide de l’API REST Recherche visuelle Bing et de Ruby
 
-Ce démarrage rapide utilise le langage de programmation Ruby pour appeler la recherche visuelle Bing et afficher les résultats. Une requête POST charge une image sur le point de terminaison d’API. Les résultats incluent des URL et des informations descriptives à propos des images similaires à l’image chargée.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche visuelle Bing à l’aide du langage de programmation Ruby. Une requête POST charge une image sur le point de terminaison d’API. Les résultats incluent des URL et des informations descriptives à propos des images similaires à l’image chargée.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour exécuter ce démarrage rapide :
-
-* Installez [Ruby 2.4 ou version ultérieure](https://www.ruby-lang.org/en/downloads/)
-* Obtenez une clé d’abonnement :
+* Installez [Ruby 2.4 ou version ultérieure](https://www.ruby-lang.org/en/downloads/).
+* Obtenez une clé d’abonnement.
 
 [!INCLUDE [cognitive-services-bing-visual-search-signup-requirements](../../../../includes/cognitive-services-bing-visual-search-signup-requirements.md)]
 
 ## <a name="project-and-required-modules"></a>Projet et modules requis
 
-Créez un projet Ruby dans votre éditeur ou IDE. Importez `net/http`, `uri` et `json` pour gérer le texte JSON de résultats. La bibliothèque `base64` est utilisée pour encoder la chaîne du nom de fichier : 
+Créez un projet Ruby dans votre éditeur ou IDE. Importez `net/http`, `uri` et `json` pour gérer le texte JSON de résultats. Importez la bibliothèque `base64`, qui encode la chaîne de nom de fichier. 
 
-```
+```ruby
 require 'net/https'
 require 'uri'
 require 'json'
 require 'base64'
-
 ```
 
 ## <a name="define-variables"></a>Définir des variables
 
-Le code suivant affecte les variables obligatoires. Vérifiez que le point de terminaison est correct et remplacez la valeur `accessKey` par une clé d’abonnement de votre compte Azure.  `batchNumber` est un GUID nécessaire pour les limites de début et de fin des données POST.  La variable `fileName` identifie le fichier image pour la requête POST.  Le bloc `if` teste la présence d’une clé d’abonnement valide.
+Le code suivant déclare la fonction principale et attribue les variables obligatoires : 
 
-```
+1. Vérifiez que le point de terminaison est correct et remplacez la valeur `accessKey` par une clé d’abonnement valide à partir de votre compte Azure. 
+2. Pour `batchNumber`, attribuez un GUID, qui est nécessaire pour les limites de début et de fin des données POST. 
+3. Pour `fileName`, attribuez le fichier image à utiliser pour la requête POST. 
+4. Utilisez un bloc `if` pour tester la présence d’une clé d’abonnement valide.
+
+```ruby
 accessKey = "ACCESS-KEY"
 uri  = "https://api.cognitive.microsoft.com"
 path = "/bing/v7.0/images/visualsearch"
@@ -63,40 +70,40 @@ end
 
 ## <a name="form-data-for-post-request"></a>Données de formulaire pour une requête POST
 
-Les données d’image à envoyer avec POST sont entourées de limites de début et de fin. Les fonctions suivantes définissent les limites :
+1. Entourez les données d’image à envoyer avec POST de limites de début et de fin. Les fonctions suivantes définissent les limites :
 
-```
-def BuildFormDataStart(batNum, fileName)
-    startBoundary = "--batch_" + batNum
-    return startBoundary + "\r\n" + "Content-Disposition: form-data; name=\"image\"; filename=" + "\"" + fileName + "\"" + "\r\n\r\n"   
-end
+   ```ruby
+   def BuildFormDataStart(batNum, fileName)
+       startBoundary = "--batch_" + batNum
+       return startBoundary + "\r\n" + "Content-Disposition: form-data; name=\"image\"; filename=" + "\"" + fileName + "\"" + "\r\n\r\n"    
+   end
 
-def BuildFormDataEnd(batNum)
-    return "\r\n\r\n" + "--batch_" + batNum + "--" + "\r\n"
-end
-```
+   def BuildFormDataEnd(batNum)
+       return "\r\n\r\n" + "--batch_" + batNum + "--" + "\r\n"
+   end
+   ```
 
-Construisez ensuite l’URI du point de terminaison et un tableau destiné à contenir le corps de la requête POST.  Utilisez la fonction précédente pour charger la limite de début dans le tableau. Lire le fichier image dans le tableau. Ensuite, lisez la limite de fin dans le tableau :
+2. Construisez l’URI du point de terminaison et un tableau destiné à contenir le corps de la requête POST. Utilisez la fonction précédente pour charger la limite de début dans le tableau. Lisez le fichier image dans le tableau, puis lisez la limite de fin dans le tableau.
 
-```
-uri = URI(uri + path)
-print uri
-print "\r\n\r\n"
+   ```ruby
+   uri = URI(uri + path)
+   print uri
+   print "\r\n\r\n"
 
-post_body = []
+   post_body = []
 
-post_body << BuildFormDataStart(batchNumber, fileName)
+   post_body << BuildFormDataStart(batchNumber, fileName)
 
-post_body << File.read(fileName) #Base64.encode64(File.read(fileName))
+   post_body << File.read(fileName) #Base64.encode64(File.read(fileName))
 
-post_body << BuildFormDataEnd(batchNumber)
-```
+   post_body << BuildFormDataEnd(batchNumber)
+   ```
 
 ## <a name="create-the-http-request"></a>Créer la requête HTTP
 
-Définissez l’en-tête `Ocp-Apim-Subscription-Key`.  Créez la requête. Ensuite, assignez l’en-tête et le type de contenu. Joignez le corps de POST créé précédemment à la requête :
+Définissez l’en-tête `Ocp-Apim-Subscription-Key`. Créez la requête, puis attribuez l’en-tête et le type de contenu. Joignez à la requête le corps de POST que vous avez créé.
 
-```
+```ruby
 header = {'Ocp-Apim-Subscription-Key': accessKey}
 request = Net::HTTP::Post.new(uri)  # , 'ImageKnowledge' => 'ImageKnowledge'
 
@@ -108,9 +115,9 @@ request.body = post_body.join
 
 ## <a name="request-and-response"></a>Requête et réponse
 
-Ruby envoie la requête et reçoit la réponse avec la ligne de code suivante :
+Ruby envoie la requête et reçoit la réponse avec le code suivant :
 
-```
+```ruby
 response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
    http.request(request)
 end
@@ -121,7 +128,7 @@ end
 
 Affichez les en-têtes de la réponse et utilisez la bibliothèque JSON pour mettre en forme la sortie :
 
-```
+```ruby
 puts "\nRelevant Headers:\n\n"
 response.each_header do |key, value|
     if key.start_with?("bingapis-") or key.start_with?("x-msedge-") then
@@ -134,11 +141,11 @@ puts JSON::pretty_generate(JSON(response.body))
 
 ```
 
-## <a name="results"></a>Résultats
+## <a name="json-response"></a>Réponse JSON
 
 Le code JSON suivant est un segment du résultat :
 
-```
+```JSON
 Relevant Headers:
 
 bingapis-traceid: 6E19E78D4FEC4A61AB4F85977EEDB8E6
@@ -284,5 +291,5 @@ JSON Response:
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Vue d’ensemble de Recherche visuelle Bing](../overview.md)
-> [Créer une application web monopage Recherche visuelle](../tutorial-bing-visual-search-single-page-app.md)
+> [Qu’est-ce que l’API Recherche visuelle Bing ?](../overview.md)
+> [Créer une application web Recherche visuelle monopage](../tutorial-bing-visual-search-single-page-app.md)

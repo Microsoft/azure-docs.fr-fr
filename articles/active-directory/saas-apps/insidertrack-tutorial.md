@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Insider Track | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Insider Track.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 53b6a928-e8a4-4cf1-9952-50cd3f013b7c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/14/2019
 ms.author: jeedes
-ms.openlocfilehash: 414b2862d91f54ed5df96e4e814c7a634dfc7cbe
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 4a1aa913c31b3fc310b23b8eafc47df4ab9a9779
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67100133"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002644"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-insider-track"></a>Tutoriel : Intégration d’Azure Active Directory à Insider Track
 
@@ -31,7 +27,7 @@ L’intégration d’Insider Track dans Azure AD vous offre les avantages suivan
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Insider Track (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -181,18 +177,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-insider-track-test-user"></a>Créer un utilisateur Insider Track
 
-Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Insider Track. Collaborez avec l’ [équipe du support technique d’Insider Track](https://cytecsolutions.com/contact/) pour ajouter des utilisateurs à la plateforme d’Insider Track. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Insider Track. Travailler avec l’[équipe de support technique Insider Track](https://cytecsolutions.com/contact/) pour ajouter des utilisateurs dans la plateforme d’Insider Track. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Insider Track dans le volet d’accès, vous devez être connecté automatiquement à l’application Insider Track pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Insider Track dans le volet d’accès, vous devez être connecté automatiquement à l’application Insider Track pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

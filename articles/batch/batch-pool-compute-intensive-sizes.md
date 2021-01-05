@@ -3,12 +3,12 @@ title: Utiliser des machines virtuelles Azure nécessitant beaucoup de ressource
 description: Découvrez comment tirer parti des tailles de machines virtuelles HPC et GPU dans des pools Azure Batch Apprenez-en davantage sur les dépendances du système d’exploitation et découvrez plusieurs exemples de scénarios.
 ms.topic: how-to
 ms.date: 12/17/2018
-ms.openlocfilehash: 7abe3c9bd689b20f608ad40105c1bb4d7108dbc6
-ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+ms.openlocfilehash: 016da7669c9e6a6586a53d379f9665c9ea048b64
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83779746"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86147330"
 ---
 # <a name="use-rdma-or-gpu-instances-in-batch-pools"></a>Utiliser des instances RDMA ou GPU dans des pools Batch
 
@@ -20,9 +20,9 @@ Pour exécuter certains travaux Batch, vous pouvez tirer parti des tailles de ma
 
 Cet article fournit des conseils et des exemples pour utiliser certaines des tailles spécialisées d’Azure dans les pools Batch. Pour obtenir des informations générales et en savoir plus sur les caractéristiques techniques, consultez :
 
-* Tailles de machines virtuelles de calcul haute performance ([Linux](../virtual-machines/linux/sizes-hpc.md), [Windows](../virtual-machines/windows/sizes-hpc.md)) 
+* Tailles de machines virtuelles de calcul haute performance ([Linux](../virtual-machines/sizes-hpc.md), [Windows](../virtual-machines/sizes-hpc.md)) 
 
-* Tailles de machines virtuelles Linux compatibles GPU ([Linux](../virtual-machines/linux/sizes-gpu.md), [Windows](../virtual-machines/windows/sizes-gpu.md)) 
+* Tailles de machines virtuelles Linux compatibles GPU ([Linux](../virtual-machines/sizes-gpu.md), [Windows](../virtual-machines/sizes-gpu.md)) 
 
 > [!NOTE]
 > Certaines tailles de machines virtuelles peuvent ne pas être disponibles dans les régions où vous créez vos comptes Batch. Pour vérifier la disponibilité d’une taille, consultez [Disponibilité des produits par région](https://azure.microsoft.com/regions/services/) et [Choisir une taille de machine virtuelle pour un pool Batch](batch-pool-vm-sizes.md).
@@ -35,7 +35,7 @@ Les fonctionnalités RDMA ou GPU des tailles nécessitant beaucoup de ressources
 
 | Taille | Fonctionnalité | Systèmes d’exploitation | Logiciels requis | Paramètres de pool |
 | -------- | -------- | ----- |  -------- | ----- |
-| [H16r, H16mr, A8, A9](../virtual-machines/linux/sizes-hpc.md)<br/>[NC24r, NC24rs_v2, NC24rs_v3, ND24rs<sup>*</sup>](../virtual-machines/linux/n-series-driver-setup.md#rdma-network-connectivity) | RDMA | Ubuntu 16.04 LTS ou<br/>HPC basé sur CentOS<br/>(Place de marché Azure) | Intel MPI 5<br/><br/>Pilotes RDMA Linux | Activer la communication entre les nœuds, désactiver l’exécution simultanée des tâches |
+| [H16r, H16mr, A8, A9](../virtual-machines/sizes-hpc.md)<br/>[NC24r, NC24rs_v2, NC24rs_v3, ND24rs<sup>*</sup>](../virtual-machines/linux/n-series-driver-setup.md#rdma-network-connectivity) | RDMA | Ubuntu 16.04 LTS ou<br/>HPC basé sur CentOS<br/>(Place de marché Azure) | Intel MPI 5<br/><br/>Pilotes RDMA Linux | Activer la communication entre les nœuds, désactiver l’exécution simultanée des tâches |
 | [Séries NC, NCv2, NCv3, NDv2](../virtual-machines/linux/n-series-driver-setup.md) | GPU NVIDIA Tesla (varie selon la série) | Ubuntu 16.04 LTS ou<br/>CentOS 7.3 ou 7.4<br/>(Place de marché Azure) | Pilotes NVIDIA CUDA ou CUDA Toolkit | N/A | 
 | [Séries NV, NVv2](../virtual-machines/linux/n-series-driver-setup.md) | GPU NVIDIA Tesla M60 | Ubuntu 16.04 LTS ou<br/>CentOS 7.3<br/>(Place de marché Azure) | Pilotes NVIDIA GRID | N/A |
 
@@ -127,7 +127,7 @@ Pour exécuter des applications CUDA sur un pool de nœuds de contrôleur de ré
 
 ## <a name="example-microsoft-mpi-on-a-windows-h16r-vm-pool"></a>Exemple : Microsoft MPI sur un pool de machines virtuelles H16r Windows
 
-Pour exécuter des applications Windows MPI sur un pool de nœuds de machine virtuelle H16r Azure, vous devez configurer l’extension HpcVmDrivers et installer [Microsoft MPI](https://docs.microsoft.com/message-passing-interface/microsoft-mpi). Voici des exemples d’étapes permettant de déployer une image Windows Server 2016 personnalisée avec les pilotes et logiciels nécessaires :
+Pour exécuter des applications Windows MPI sur un pool de nœuds de machine virtuelle H16r Azure, vous devez configurer l’extension HpcVmDrivers et installer [Microsoft MPI](/message-passing-interface/microsoft-mpi). Voici des exemples d’étapes permettant de déployer une image Windows Server 2016 personnalisée avec les pilotes et logiciels nécessaires :
 
 1. Déployez une machine virtuelle H16r Azure exécutant Windows Server 2016. Par exemple, créez la machine virtuelle dans la région USA Ouest. 
 2. Ajoutez l’extension HpcVmDrivers à la machine virtuelle en [exécutant une commande Azure PowerShell](../virtual-machines/sizes-hpc.md) à partir d’un ordinateur client qui se connecte à votre abonnement Azure, ou bien à l’aide d’Azure Cloud Shell. 
@@ -163,6 +163,6 @@ En utilisant les API Batch ou le portail Azure, créez un pool à l’aide de ce
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour exécuter des travaux MPI sur un pool Azure Batch, consultez les exemples [Windows](batch-mpi.md) ou [Linux](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/).
+* Pour exécuter des travaux MPI sur un pool Azure Batch, consultez les exemples [Windows](batch-mpi.md) ou [Linux](/archive/blogs/windowshpc/introducing-mpi-support-for-linux-on-azure-batch).
 
 * Pour obtenir des exemples de charges de travail GPU sur Batch, consultez les recettes [Batch Shipyard](https://github.com/Azure/batch-shipyard/).

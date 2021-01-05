@@ -3,15 +3,15 @@ title: Déplacer un groupe de sécurité réseau Azure vers une autre région Az
 description: Utilisez un modèle Azure Resource Manager pour déplacer un groupe de sécurité réseau Azure d’une région Azure vers une autre à l’aide d’Azure PowerShell.
 author: asudbring
 ms.service: virtual-network
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/31/2019
 ms.author: allensu
-ms.openlocfilehash: 0cbd8f61cb1b4cb8eae6b30625fb3039ff75adde
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 04abc051cec8a6fb38ce6aa8f5347ae06cb8bd1d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75641466"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019750"
 ---
 # <a name="move-azure-network-security-group-nsg-to-another-region-using-azure-powershell"></a>Déplacer un groupe de sécurité réseau Azure vers une autre région à l’aide d’Azure PowerShell
 
@@ -61,7 +61,7 @@ Les étapes suivantes montrent comment préparer le groupe de sécurité réseau
    Export-AzResourceGroup -ResourceGroupName <source-resource-group-name> -Resource $sourceNSGID -IncludeParameterDefaultValue
    ```
 
-4. Le fichier téléchargé est nommé d’après le groupe de ressources à partir duquel la ressource a été exportée.  Recherchez le fichier nommé **\<resource-group-name>.json** qui a été exporté à partir de la commande, et ouvrez-le dans l’éditeur de votre choix :
+4. Le fichier téléchargé est nommé d’après le groupe de ressources à partir duquel la ressource a été exportée.  Recherchez le fichier **\<resource-group-name>.json** qui a été exporté à partir de la commande et ouvrez-le dans l’éditeur de votre choix :
    
    ```azurepowershell
    notepad <source-resource-group-name>.json
@@ -106,9 +106,9 @@ Les étapes suivantes montrent comment préparer le groupe de sécurité réseau
     Get-AzLocation | format-table
     
     ```
-8. Vous pouvez également modifier d’autres paramètres dans le fichier **\<nom_groupe_de_ressources>.json** ; ces paramètres sont facultatifs en fonction de vos besoins :
+8. Vous pouvez également changer d’autres paramètres dans le fichier **\<resource-group-name>.json** ; ces paramètres sont facultatifs en fonction de vos besoins :
 
-    * **Règles de sécurité** : vous pouvez modifier les règles déployées dans le groupe de sécurité réseau cible en ajoutant ou en supprimant des règles dans la section **securityRules** du fichier **\<nom_groupe_de_ressources>.json** :
+    * **Règles de sécurité** : vous pouvez modifier les règles déployées dans le groupe de sécurité réseau cible en ajoutant ou en supprimant des règles dans la section **securityRules** du fichier **\<resource-group-name>.json** :
 
         ```json
            "resources": [
@@ -144,7 +144,7 @@ Les étapes suivantes montrent comment préparer le groupe de sécurité réseau
             
         ```
 
-        Pour terminer l’ajout ou la suppression des règles dans le groupe de sécurité réseau cible, vous devez également modifier les types de règles personnalisées à la fin du fichier **\<nom_groupe_de_ressources>.json** selon le format de l’exemple ci-dessous :
+        Pour terminer l’ajout ou la suppression des règles dans le groupe de sécurité réseau cible, vous devez également modifier les types de règles personnalisées à la fin du fichier **\<resource-group-name>.json** conformément au format de l’exemple ci-dessous :
 
         ```json
            {
@@ -179,7 +179,7 @@ Les étapes suivantes montrent comment préparer le groupe de sécurité réseau
     New-AzResourceGroup -Name <target-resource-group-name> -location <target-region>
     ```
     
-11. Déployez le fichier **\<nom_groupe_de_ressources>.json** modifié sur le groupe de ressources créé à l’étape précédente à l’aide de [New-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-2.6.0) :
+11. Déployez le fichier **\<resource-group-name>.json** modifié sur le groupe de ressources créé à l’étape précédente à l’aide de [New-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-2.6.0) :
 
     ```azurepowershell-interactive
 

@@ -6,16 +6,17 @@ ms.author: govindk
 ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: 32714e216e59565c787f92bf1e8da62957bc7233
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0471ef799689f67a2079c4fa4a6a53851c626392
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75445626"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93073313"
 ---
 # <a name="table-copy-operations-on-azure-cosmos-db-cassandra-api-from-spark"></a>Opérations de copie de table sur l’API Cassandra Azure Cosmos DB à partir de Spark
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Cet article explique comment copier des données entre des tables dans l’API Cassandra Azure Cosmos DB à partir de Spark. Les commandes décrites dans cet article peuvent également être utilisées pour copier des données à partir de tables Apache Cassandra vers des tables de l’API Cassandra Azure Cosmos DB.
 

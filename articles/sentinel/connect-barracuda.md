@@ -1,6 +1,6 @@
 ---
 title: Connecter des données Barracuda à Azure Sentinel | Microsoft Docs
-description: Découvrez comment connecter des données Barracuda à Azure Sentinel.
+description: Découvrez comment utiliser le connecteur WAF (Web Application Firewall) Barracuda pour connecter des journaux Barracuda avec Azure Sentinel.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/30/2019
 ms.author: yelevin
-ms.openlocfilehash: 4e87bb57e6bdfea6307a166383da9dea187eea4f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f28243be6b4f998e8bdea0ce02da3ceedde23e02
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77588482"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85559119"
 ---
 # <a name="connect-your-barracuda-appliance"></a>Connecter votre appliance Barracuda 
 

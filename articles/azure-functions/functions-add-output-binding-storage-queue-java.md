@@ -2,28 +2,29 @@
 title: Connecter votre fonction Java à Stockage Azure
 description: Découvrez comment connecter une fonction Java déclenchée par HTTP à Stockage Azure à l’aide d’une liaison de sortie de stockage de file d’attente.
 author: KarlErickson
+ms.custom: devx-track-java
 ms.author: karler
 ms.date: 10/14/2019
 ms.topic: quickstart
 zone_pivot_groups: java-build-tools-set
-ms.openlocfilehash: d9815fd27a57acc8b418962e610d2ae1c106edde
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: b4381c4acbea8a3b7d86d9c32aaf9cea24cf15fa
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80673296"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93422652"
 ---
 # <a name="connect-your-java-function-to-azure-storage"></a>Connecter votre fonction Java à Stockage Azure
 
 [!INCLUDE [functions-add-storage-binding-intro](../../includes/functions-add-storage-binding-intro.md)]
 
-Cet article vous montre comment intégrer la fonction que vous avez créée dans l’[article du guide de démarrage rapide précédent](functions-create-first-java-maven.md) à une file d’attente Stockage Azure. La liaison de sortie que vous ajoutez à cette fonction écrit des données d’une requête HTTP dans un message en file d’attente.
+Cet article vous montre comment intégrer la fonction que vous avez créée dans l’[article du guide de démarrage rapide précédent](./create-first-function-cli-java.md?tabs=bash,browser) à une file d’attente Stockage Azure. La liaison de sortie que vous ajoutez à cette fonction écrit des données d’une requête HTTP dans un message en file d’attente.
 
 La plupart des liaisons requièrent une chaîne de connexion stockée que Functions utilise pour accéder au service lié. Pour faciliter cette connexion, vous utilisez le compte de stockage que vous avez créé avec votre application de fonction. La connexion à ce compte est déjà stockée dans un paramètre d’application nommé `AzureWebJobsStorage`.  
 
 ## <a name="prerequisites"></a>Prérequis
 
-Avant de commencer cet article, suivez les étapes de la [partie 1 du guide de démarrage rapide Java](functions-create-first-java-maven.md).
+Avant de commencer cet article, suivez les étapes de la [partie 1 du guide de démarrage rapide Java](./create-first-function-cli-java.md?tabs=bash,browser).
 
 ## <a name="download-the-function-app-settings"></a>Télécharger les paramètres de l’application de fonction
 
@@ -111,7 +112,7 @@ Vous avez mis à jour votre fonction déclenchée via HTTP pour écrire des donn
 Ensuite, vous devez activer la supervision Application Insights pour votre application de fonction :
 
 > [!div class="nextstepaction"]
-> [Activer l’intégration à Application Insights](functions-monitoring.md#manually-connect-an-app-insights-resource)
+> [Activer l’intégration à Application Insights](configure-monitoring.md#add-to-an-existing-function-app)
 
 
 [Azure Storage Explorer]: https://storageexplorer.com/

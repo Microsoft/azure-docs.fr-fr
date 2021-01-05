@@ -4,51 +4,70 @@ description: Découvrez les fonctionnalités et les avantages d’Azure Spring C
 author: bmitchell287
 ms.service: spring-cloud
 ms.topic: overview
-ms.date: 11/4/2019
+ms.date: 12/02/2020
 ms.author: brendm
-ms.openlocfilehash: 4426044b3608be0ded378f4f56cbec6bc1948d75
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-java, contperf-fy21q2
+ms.openlocfilehash: fc3f78131518b4d8740c25ab37c48d4444deef10
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78273256"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97563141"
 ---
 # <a name="what-is-azure-spring-cloud"></a>Qu’est-ce qu’Azure Spring Cloud ?
 
-Azure Spring Cloud permet de déployer facilement des applications de microservices basées sur Spring Boot sur Azure sans aucune modification du code.  Azure Spring Cloud gère le cycle de vie des applications Spring Cloud, ce qui permet aux développeurs de se concentrer sur leur code.  Spring Cloud fournit une gestion du cycle de vie avec une supervision et des diagnostics complets, la gestion des configurations, la découverte de services, l’intégration CI/CD, les déploiements bleus-verts, etc.
+Azure Spring Cloud permet de déployer facilement des applications de microservices Spring Boot sur Azure, et sans aucune modification du code.  Le service gère l’infrastructure des applications Spring Cloud, ce qui permet aux développeurs de se concentrer sur leur code.  Azure Spring Cloud assure la gestion du cycle de vie en utilisant des outils complets, tels que la supervision et les diagnostics, la gestion des configurations, la découverte de services, l’intégration CI/CD, les déploiements bleus-verts, etc.
 
-Composant de l’écosystème Azure, Azure Spring Cloud permet une liaison facile avec d’autres services Azure, notamment le stockage, les bases de données, la supervision, etc.
+## <a name="why-use-azure-spring-cloud"></a>Pourquoi utiliser Azure Spring Cloud ?
 
-Azure Spring Cloud est actuellement disponible en préversion publique. Les offres en préversion publique permettent aux clients de tester les nouvelles fonctionnalités avant leur publication officielle.  Les fonctionnalités et services en préversion publique ne sont pas destinés à une utilisation en contexte de production.  Pour en savoir plus sur le support offert avec les préversions, consultez notre [FAQ](https://azure.microsoft.com/support/faq/) ou soumettez une [demande de support](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request).
+Le déploiement d’applications sur Azure Spring Cloud présente de nombreux avantages.  Vous pouvez :
+* Migrer efficacement les applications Spring existantes et gérer les coûts ainsi que la mise à l’échelle du cloud.
+* Moderniser les applications à l’aide des modèles Spring Cloud pour améliorer l’agilité et la rapidité de livraison.
+* Exécuter Java à l’échelle du cloud et augmenter l’utilisation sans infrastructure complexe.
+* Développer et déployer rapidement sans dépendance de conteneurisation.
+* Superviser efficacement et sans effort les charges de travail de production.
 
-Pour commencer, suivez le guide de démarrage rapide de Spring Cloud en utilisant [Azure CLI](spring-cloud-quickstart-launch-app-cli.md), le [portail Azure](spring-cloud-quickstart-launch-app-portal.md) ou [Maven](spring-cloud-quickstart-launch-app-maven.md).
+Azure Spring Cloud prend en charge les applications Java [Spring Boot](https://spring.io/projects/spring-boot) et ASP.NET Core [Steeltoe](https://steeltoe.io/). La prise en charge de Steeltoe est actuellement en préversion publique. Les offres en préversion publique vous permettent de tester les nouvelles fonctionnalités avant leur publication officielle. Les fonctionnalités et services en préversion publique ne sont pas destinés à une utilisation en contexte de production. Pour plus d’informations, consultez la [FAQ](https://azure.microsoft.com/support/faq/) ou faites une [demande de support](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request).
 
-D’autres exemples sont disponibles sur GitHub : [Exemples Azure Spring Cloud](https://github.com/Azure-Samples/Azure-Spring-Cloud-Samples/tree/master/service-binding-cosmosdb-sql).
+## <a name="service-overview"></a>Présentation du service
 
-## <a name="application-configuration"></a>Configuration de l’application
+Composant de l’écosystème Azure, Azure Spring Cloud permet une liaison facile avec d’autres services Azure, notamment le stockage, les bases de données, la supervision, etc.  
 
-### <a name="spring-cloud-config-server"></a>Serveur de configuration Spring Cloud
+  ![Présentation d’Azure Spring Cloud](media/spring-cloud-principles/azure-spring-cloud-overview.png)
 
-Le serveur de configuration Azure Spring Cloud fournit une configuration externalisée dans un système distribué avec une prise en charge côté serveur et côté client.  Le serveur de configuration fournit un emplacement central pour gérer les propriétés d’une application dans tous les environnements.  Pour plus d’informations, consultez les [informations de référence sur le serveur de configuration Spring Cloud](https://spring.io/projects/spring-cloud-config.md) et effectuez le tutoriel.
+* Azure Spring Cloud est un service entièrement managé pour les applications Spring Boot, ce qui vous permet de vous consacrer pleinement à la création et à l’exécution d’applications sans vous soucier de la gestion de l’infrastructure.
 
-### <a name="enable-bluegreen-deployments"></a>Activer les déploiements bleus/verts
+* Déployez simplement vos fichiers jar ou votre code, et Azure Spring Cloud connectera automatiquement vos applications au runtime du service Spring et au cycle de vie des applications intégrées.
 
-Azure Spring Cloud prend en charge les déploiements bleus/verts pour la publication et la mise à jour du code dans les environnements de production.  Tirer parti de ce modèle de gestion des modifications permet aux développeurs d’implémenter des fonctionnalités et des modifications du code avec la sécurité d’une solution de secours immédiate quand c’est nécessaire.  Azure permet aux développeurs de se concentrer sur l’écriture du code en gérant plusieurs environnements de production, et en facilitant la mise à jour ou l’annulation des modifications du code sans interrompre l’exécution de l’application.  Pour plus d’informations sur les environnements de préproduction et les déploiements bleus/verts, consultez ce [guide pratique](spring-cloud-howto-staging-environment.md).
+* La supervision est simple. Après le déploiement, vous pouvez superviser les performances des applications, corriger les erreurs et améliorer rapidement les applications. 
 
-### <a name="automate-cicd-pipelines"></a>Automatiser les pipelines CI/CD
+* Intégration complète aux écosystèmes et services d’Azure.
 
-Azure Spring Cloud fournit une intégration à Azure DevOps avec Azure CLI.  Avec Azure DevOps, vous pouvez automatiser l’intégration et le déploiement du code sur votre application Spring.  Pour plus d’informations, consultez cet [article](spring-cloud-howto-cicd.md).
+* Azure Spring Cloud est adapté au monde de l’entreprise, avec son infrastructure entièrement managée, une gestion du cycle de vie intégrée et une facilité de supervision.
 
-### <a name="scale-your-application"></a>Mettre à l’échelle votre application
+## <a name="documentation-overview"></a>Vue d’ensemble de la documentation
+Cette documentation inclut des sections expliquant comment bien commencer et tirer parti des services Azure Spring Cloud.
 
-Azure Spring Cloud vous permet de mettre à l’échelle facilement les microservices dans votre tableau de bord Azure Spring Cloud.  Le nombre de processeurs virtuels et la quantité de mémoire disponible pour vos microservices peuvent faire l’objet d’un scale-up ou d’un scale-down en fonction de vos besoins.  La mise à l’échelle prend effet en quelques secondes et ne nécessite pas de modification du code ni de redéploiement.  Pour plus d’informations, suivez ce [tutoriel](spring-cloud-tutorial-scale-manual.md).
-
-## <a name="application-monitoring"></a>Supervision des applications
-
-### <a name="monitor-your-application-using-distributed-tracing-and-azure-app-insights"></a>Superviser votre application avec un suivi distribué et Azure Application Insights
-
-Les outils de suivi distribué de Spring Cloud permettent aux développeurs de déboguer et de superviser les interconnexions complexes entre les microservices dans une application.  En intégrant [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth) au service [Application Insights](../azure-monitor/insights/insights-overview.md) d’Azure, Azure fournit de puissantes fonctionnalités de suivi distribué à partir du portail Azure.  Pour plus d’informations, suivez ce [tutoriel](spring-cloud-tutorial-distributed-tracing.md).
+* Bien démarrer
+    * [Lancer votre première application](spring-cloud-quickstart.md)
+    * [Provisionner un service Azure Spring Cloud](spring-cloud-quickstart-provision-service-instance.md)
+    * [Configurer le serveur de configuration]()
+    * [Créer et déployer des applications](spring-cloud-quickstart-deploy-apps.md)
+    * [Utiliser les journaux, les métriques et le suivi](spring-cloud-quickstart-logs-metrics-tracing.md)
+* Procédures
+    * [Développement](spring-cloud-tutorial-prepare-app-deployment.md) : Préparez une application Java Spring existante pour le déploiement dans Azure Spring Cloud. Lorsqu’il est correctement configuré, Azure Spring Cloud fournit des services robustes pour superviser, mettre à l’échelle et mettre à jour des applications Java Spring Cloud.
+    * [Deploy](spring-cloud-howto-staging-environment.md) : Comment configurer un déploiement intermédiaire à l’aide du modèle de déploiement bleu-vert dans Azure Spring Cloud. Le déploiement bleu/vert est un modèle de livraison continue Azure DevOps qui consiste à garder en service une version existante (bleue) pendant le déploiement d’une nouvelle version (verte).
+    * [Configuration des applications](spring-cloud-howto-start-stop-delete.md) :  Démarrez, arrêtez et supprimez vos applications Azure Spring Cloud. Changez l’état d’une application dans Azure Spring Cloud en utilisant le portail Azure ou l’interface Azure CLI.
+    * [Mise à l’échelle](spring-cloud-tutorial-scale-manual.md) : Mettez à l’échelle une application de microservices à partir du tableau de bord Azure Spring Cloud sur le portail Azure, ou à l’aide des paramètres de mise à l’échelle automatique. Les adresses IP publiques sont disponibles pour communiquer avec des ressources externes, telles que des bases de données, du stockage et des coffres de clés.
+    * [Supervision des applications](spring-cloud-tutorial-distributed-tracing.md) : Outils de suivi distribué pour déboguer et superviser facilement les problèmes complexes. Azure Spring Cloud intègre Azure Spring Cloud Sleuth au service Application Insights d’Azure. Cette intégration fournit une fonctionnalité puissante de suivi distribué qui est disponible dans le portail Azure.
+    * [Applications sécurisées](spring-cloud-howto-enable-system-assigned-managed-identity.md) : Les ressources Azure fournissent une identité managée automatiquement dans Azure Active Directory. Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code.
+    * [Intégration à d’autres services Azure](spring-cloud-tutorial-bind-cosmos.md) : Au lieu de configurer manuellement vos applications Spring Boot, vous pouvez lier automatiquement à vos applications les services Azure sélectionnés, par exemple en liant votre application à une base de données Azure Cosmos DB.
+    * [Automatisation](spring-cloud-howto-cicd.md) : Les outils d’intégration continue et de livraison continue vous permettent de déployer rapidement des mises à jour d’applications existantes avec un minimum d’effort et de risque. Azure DevOps permet d’organiser et de contrôler ces tâches essentielles. 
+    * [Résoudre les problèmes](spring-cloud-howto-self-diagnose-solve.md) : Les diagnostics Azure Spring Cloud offrent une expérience interactive permettant de résoudre les problèmes d’application. Aucune configuration n'est requise. Lorsque vous rencontrez des problèmes, la fonctionnalité de diagnostic Azure Spring Cloud identifie les incidents et vous guide vers les informations qui vous aident au dépannage et à la résolution des problèmes.
+    * [Migration](https://docs.microsoft.com/azure/developer/java/migration/migrate-spring-boot-to-azure-spring-cloud) : Comment migrer une application Spring Cloud ou Spring Boot existante pour l’exécuter sur Azure Spring Cloud.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Lancer votre application Spring Cloud depuis l’interface CLI](spring-cloud-quickstart-launch-app-cli.md)
+Pour commencer, suivez le [guide de démarrage rapide Spring Cloud](spring-cloud-quickstart.md).
+
+Des exemples sont disponibles sur GitHub. [Exemples Azure Spring Cloud](https://github.com/Azure-Samples/Azure-Spring-Cloud-Samples/tree/master/).

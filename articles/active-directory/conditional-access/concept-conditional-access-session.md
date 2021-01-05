@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e99b9b87f939d614679fdecf24c9d36d99bf2938
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a0089d246169ad4215075662500794e7143940e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78671918"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90601807"
 ---
 # <a name="conditional-access-session"></a>Accès conditionnel : session
 
@@ -48,7 +48,7 @@ Le contrôle d’application par accès conditionnel permet de superviser et de 
 
 Pour plus d’informations, consultez l’article [Déployer le contrôle d’application par accès conditionnel pour les applications proposées](/cloud-app-security/proxy-deployment-aad).
 
-## <a name="sign-in-frequency-preview"></a>Fréquence de connexion (préversion)
+## <a name="sign-in-frequency"></a>Fréquence de connexion
 
 La fréquence de connexion définit la durée à l’issue de laquelle un utilisateur est invité à se reconnecter lorsqu’il tente d’accéder à une ressource.
 
@@ -57,7 +57,7 @@ Le paramètre de fréquence de connexion fonctionne avec les applications qui on
 - Word, Excel, PowerPoint Online
 - OneNote Online
 - Office.com
-- Portail d’administration O365
+- Portail d’administration Microsoft 365
 - Exchange Online
 - SharePoint et OneDrive
 - Client web Teams
@@ -66,7 +66,7 @@ Le paramètre de fréquence de connexion fonctionne avec les applications qui on
 
 Pour plus d’informations, consultez l’article [Configurer la gestion de session d’authentification avec l’accès conditionnel](howto-conditional-access-session-lifetime.md#user-sign-in-frequency).
 
-## <a name="persistent-browser-session-preview"></a>Session de navigateur persistante (préversion)
+## <a name="persistent-browser-session"></a>Session de navigateur persistante
 
 Une session de navigateur persistante permet aux utilisateurs de rester connectés après la fermeture et la réouverture de la fenêtre du navigateur.
 

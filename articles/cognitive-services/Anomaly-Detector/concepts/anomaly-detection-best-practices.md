@@ -3,19 +3,19 @@ title: Bonnes pratiques concernant l’utilisation de l’API Détecteur d’ano
 titleSuffix: Azure Cognitive Services
 description: En savoir plus sur les meilleures pratiques lors de la détection d’anomalies avec l’API Détecteur d’anomalies.
 services: cognitive-services
-author: aahill
+author: mrbullwinkle
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
 ms.topic: conceptual
 ms.date: 03/26/2019
-ms.author: aahi
-ms.openlocfilehash: 9407f2fc9375765efb6eb9688b3ebfeef24ba90a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: mbullwin
+ms.openlocfilehash: b02ccea396fc65f9ecfe1d59e953da7440e87951
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67721624"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94363641"
 ---
 # <a name="best-practices-for-using-the-anomaly-detector-api"></a>Bonnes pratiques pour l’utilisation de l’API Détecteur d’anomalies
 
@@ -52,7 +52,7 @@ Voici le même jeu de données avec la détection d’anomalies par lots. Le mod
 
 ## <a name="data-preparation"></a>Préparation des données
 
-L’API Détecteur d’anomalies accepte la série chronologique mise en forme dans un objet de demande JSON. Une série chronologique peut être n’importe quel type de données numériques enregistrées au fil du temps dans l’ordre séquentiel. Vous pouvez envoyer des fenêtres de vos données de série chronologique au point de terminaison de l’API Détecteur d’anomalies pour améliorer les performances de l’API. Le nombre minimum de points de données que vous pouvez envoyer est de 12, et le nombre maximum est de 8 640 points. La [granularité](https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.anomalydetector.models.granularity?view=azure-dotnet-preview) est définie comme la vitesse à laquelle vos données sont échantillonnées. 
+L’API Détecteur d’anomalies accepte la série chronologique mise en forme dans un objet de demande JSON. Une série chronologique peut être n’importe quel type de données numériques enregistrées au fil du temps dans l’ordre séquentiel. Vous pouvez envoyer des fenêtres de vos données de série chronologique au point de terminaison de l’API Détecteur d’anomalies pour améliorer les performances de l’API. Le nombre minimum de points de données que vous pouvez envoyer est de 12, et le nombre maximum est de 8 640 points. La [granularité](/dotnet/api/microsoft.azure.cognitiveservices.anomalydetector.models.granularity?view=azure-dotnet-preview) est définie comme la vitesse à laquelle vos données sont échantillonnées. 
 
 Les points de données envoyés à l’API Détecteur d'anomalies doivent avoir un timestamp de temps universel coordonné (UTC) et une valeur numérique. 
 

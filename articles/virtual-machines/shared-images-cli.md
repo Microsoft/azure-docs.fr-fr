@@ -9,12 +9,13 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: d64b5f94dae7ad0213fa231b5603064ad3647da1
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: ff50f61fe159c518d488da9f9911e40f1ddb8ca3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793869"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87501455"
 ---
 # <a name="create-a-shared-image-gallery-with-the-azure-cli"></a>Créer une galerie d’images partagées avec Azure CLI
 

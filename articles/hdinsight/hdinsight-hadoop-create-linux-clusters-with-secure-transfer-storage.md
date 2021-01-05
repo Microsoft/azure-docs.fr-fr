@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 02/18/2020
-ms.openlocfilehash: c1e5ca8b0bb828e5e8ce896bba6a5278266b118e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 69844a392aa03dc962f8af456996ab51f1adf561
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77560080"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547467"
 ---
 # <a name="apache-hadoop-clusters-with-secure-transfer-storage-accounts-in-azure-hdinsight"></a>Clusters Apache Hadoop avec des comptes de stockage avec transfert sécurisé dans Azure HDInsight
 
@@ -32,13 +32,13 @@ Pour mettre à jour un compte de stockage existant avec le Portail Azure, consul
 
 ### <a name="powershell"></a>PowerShell
 
-Pour la cmdlet PowerShell [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount), vérifiez que le paramètre `-EnableHttpsTrafficOnly` est défini sur `1`.
+Pour la cmdlet PowerShell [New-AzStorageAccount](/powershell/module/az.storage/new-azstorageaccount), vérifiez que le paramètre `-EnableHttpsTrafficOnly` est défini sur `1`.
 
 Pour mettre à jour un compte de stockage existant avec PowerShell, consultez [Exiger un transfert sécurisé avec PowerShell](../storage/common/storage-require-secure-transfer.md#require-secure-transfer-with-powershell).
 
 ### <a name="azure-cli"></a>Azure CLI
 
-Pour la commande Azure CLI [az storage account create](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create), vérifiez que le paramètre `--https-only` est défini sur `true`.
+Pour la commande Azure CLI [az storage account create](/cli/azure/storage/account#az-storage-account-create), vérifiez que le paramètre `--https-only` est défini sur `true`.
 
 Pour mettre à jour un compte de stockage existant avec Azure CLI, consultez [Exiger un transfert sécurisé avec Azure CLI](../storage/common/storage-require-secure-transfer.md#require-secure-transfer-with-azure-cli).
 

@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/26/2019
 ms.author: damaerte
-ms.openlocfilehash: 7490eef7b6203b6bb2623efa4518c7bee5400fb3
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: a052364b06ac1b9b30cef76db10a79e8ed85b9a3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82610766"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89470151"
 ---
 # <a name="features--tools-for-azure-cloud-shell"></a>Fonctionnalités et outils pour Azure Cloud Shell
 
@@ -38,7 +38,7 @@ Cloud Shell authentifie automatiquement et de manière sécurisée l’accès au
 Pour conserver les fichiers entre les sessions, Cloud Shell vous guide à travers le processus d’association d’un partage de fichiers Azure au premier lancement.
 Par la suite, Cloud Shell associera automatiquement votre espace de stockage (monté sous forme de `$HOME\clouddrive`) pour toutes les sessions à venir.
 De plus, votre répertoire `$HOME` est conservé en tant que fichier .img dans votre partage de fichiers Azure.
-Les fichiers en dehors de `$HOME` et de l’état de la machine ne sont pas conservés entre les sessions. Utilisez les bonnes pratiques lors du stockage de secrets comme des clés SSH. [Des tutoriels existent pour la configuration de services comme Azure Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-manage-with-cli2#prerequisites).
+Les fichiers en dehors de `$HOME` et de l’état de la machine ne sont pas conservés entre les sessions. Utilisez les bonnes pratiques lors du stockage de secrets comme des clés SSH. [Des tutoriels existent pour la configuration de services comme Azure Key Vault](../key-vault/general/manage-with-cli2.md#prerequisites).
 
 [Découvrez plus d’informations sur les fichiers persistants dans Cloud Shell.](persisting-shell-storage.md)
 
@@ -46,22 +46,22 @@ Les fichiers en dehors de `$HOME` et de l’état de la machine ne sont pas cons
 
 PowerShell dans Cloud Shell fournit le lecteur Azure (`Azure:`). Vous pouvez basculer vers le lecteur Azure à l'aide de `cd Azure:` et revenir à votre répertoire personnel à l'aide de `cd  ~`.
 Le lecteur Azure facilite la détection et la navigation dans des ressources Azure, comme Calcul, Réseau, ou Stockage, de façon similaire à la navigation dans un système de fichiers.
-Vous pouvez continuer à utiliser les [applets de commande Azure PowerShell](https://docs.microsoft.com/powershell/azure) que vous connaissez pour gérer ces ressources quel que soit le lecteur où vous vous trouvez.
+Vous pouvez continuer à utiliser les [applets de commande Azure PowerShell](/powershell/azure) que vous connaissez pour gérer ces ressources quel que soit le lecteur où vous vous trouvez.
 Toutes les modifications apportées aux ressources Azure, effectuées directement dans le portail Azure ou via des applets de commande Azure PowerShell, sont répercutées dans le lecteur Azure.  Vous pouvez exécuter `dir -Force` pour actualiser vos ressources.
 
-![](media/features-powershell/azure-drive.png)
+![Capture d’écran d’un interpréteur de commandes Azure Cloud Shell initialisé et d’une liste de ressources de répertoire.](media/features-powershell/azure-drive.png)
 
 ### <a name="manage-exchange-online"></a>Gérer Exchange Online
 
 PowerShell dans Cloud Shell contient une build privée du module Exchange Online.  Exécutez `Connect-EXOPSSession` pour obtenir vos cmdlets Exchange.
 
-![](media/features-powershell/exchangeonline.png)
+![Capture d’écran d’un interpréteur de commandes Azure Cloud Shell exécutant les commandes Connect-EXOPSSession et Get-User.](media/features-powershell/exchangeonline.png)
 
  Exécutez `Get-Command -Module tmp_*`
 > [!NOTE]
 > Le nom du module doit commencer par `tmp_`. Si vous avez installé des modules avec le même préfixe, leurs cmdlets seront également visibles. 
 
-![](media/features-powershell/exchangeonlinecmdlets.png)
+![Capture d’écran d’un interpréteur de commandes Azure Cloud Shell exécutant la commande Get-Command -Module tmp_*.](media/features-powershell/exchangeonlinecmdlets.png)
 
 ### <a name="deep-integration-with-open-source-tooling"></a>Étroite intégration à des outils open source
 
@@ -72,19 +72,19 @@ Cloud Shell inclut une authentification préconfigurée pour des outils open sou
 |Category   |Nom   |
 |---|---|
 |Outils Linux            |bash<br> zsh<br> sh<br> tmux<br> dig<br>               |
-|Outils Azure            |[Azure CLI](https://github.com/Azure/azure-cli) et [Azure Classic CLI](https://github.com/Azure/azure-xplat-cli)<br> [AZCopy](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10)<br> [Interface de ligne de commande Azure Functions](https://github.com/Azure/azure-functions-core-tools)<br> [Interface de ligne de commande de Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-cli)<br> [Lot chantier](https://github.com/Azure/batch-shipyard)<br> [blobxfer](https://github.com/Azure/blobxfer)|
+|Outils Azure            |[Azure CLI](https://github.com/Azure/azure-cli) et [Azure Classic CLI](https://github.com/Azure/azure-xplat-cli)<br> [AZCopy](../storage/common/storage-use-azcopy-v10.md)<br> [Interface de ligne de commande Azure Functions](https://github.com/Azure/azure-functions-core-tools)<br> [Interface de ligne de commande de Service Fabric](../service-fabric/service-fabric-cli.md)<br> [Lot chantier](https://github.com/Azure/batch-shipyard)<br> [blobxfer](https://github.com/Azure/blobxfer)|
 |Éditeurs de texte           |code (Éditeur Cloud Shell)<br> Vim<br> nano<br> emacs    |
 |Contrôle de code source         |git                    |
 |Outils de génération            |make<br> maven<br> npm<br> pip         |
 |Containers             |[Machine Docker](https://github.com/docker/machine)<br> [Kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/)<br> [Helm](https://github.com/kubernetes/helm)<br> [CLI DC/OS](https://github.com/dcos/dcos-cli)         |
-|Bases de données              |Client MySQL<br> Client PostgreSQL<br> [Utilitaire sqlcmd](https://docs.microsoft.com/sql/tools/sqlcmd-utility)<br> [mssql-scripter](https://github.com/Microsoft/sql-xplat-cli) |
-|Autres                  |Client iPython<br> [CLI Cloud Foundry](https://github.com/cloudfoundry/cli)<br> [Terraform](https://www.terraform.io/docs/providers/azurerm/)<br> [Ansible](https://www.ansible.com/microsoft-azure)<br> [Chef InSpec](https://www.chef.io/inspec/)<br> [Puppet Bolt](https://puppet.com/docs/bolt/latest/bolt.html)<br> [HashiCorp Packer](https://www.packer.io/)|
+|Bases de données              |Client MySQL<br> Client PostgreSQL<br> [Utilitaire sqlcmd](/sql/tools/sqlcmd-utility)<br> [mssql-scripter](https://github.com/Microsoft/sql-xplat-cli) |
+|Autres                  |Client iPython<br> [CLI Cloud Foundry](https://github.com/cloudfoundry/cli)<br> [Terraform](https://www.terraform.io/docs/providers/azurerm/)<br> [Ansible](https://www.ansible.com/microsoft-azure)<br> [Chef InSpec](https://www.chef.io/inspec/)<br> [Puppet Bolt](https://puppet.com/docs/bolt/latest/bolt.html)<br> [HashiCorp Packer](https://www.packer.io/)<br> [Interface CLI Office 365](https://pnp.github.io/office365-cli/)|
 
 ## <a name="language-support"></a>Support multilingue
 
 |Langage   |Version   |
 |---|---|
-|.NET Core  |2.2.402       |
+|.NET Core  |[3.1.302](https://github.com/dotnet/core/blob/master/release-notes/3.1/3.1.6/3.1.302-download.md)       |
 |Go         |1.9        |
 |Java       |1.8        |
 |Node.js    |8.16.0      |
@@ -94,5 +94,5 @@ Cloud Shell inclut une authentification préconfigurée pour des outils open sou
 ## <a name="next-steps"></a>Étapes suivantes
 [Démarrage rapide de Bash dans Cloud Shell](quickstart.md) <br>
 [Démarrage rapide de PowerShell dans Cloud Shell](quickstart-powershell.md) <br>
-[En savoir plus sur Azure CLI](https://docs.microsoft.com/cli/azure/) <br>
-[En savoir plus sur Azure PowerShell](https://docs.microsoft.com/powershell/azure/) <br>
+[En savoir plus sur Azure CLI](/cli/azure/) <br>
+[En savoir plus sur Azure PowerShell](/powershell/azure/) <br>

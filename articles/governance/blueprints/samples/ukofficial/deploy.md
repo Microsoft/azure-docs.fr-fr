@@ -1,14 +1,14 @@
 ---
 title: Déployer les exemples de blueprint UK OFFICIAL et UK NHS
 description: Étapes de déploiement des exemples de blueprint UK OFFICIAL et UK NHS, y compris les détails du paramètre d’artefact blueprint.
-ms.date: 05/08/2020
+ms.date: 11/02/2020
 ms.topic: sample
-ms.openlocfilehash: 7fa78eab463c9a3202b2ec08e1952e275e51b20d
-ms.sourcegitcommit: ac4a365a6c6ffa6b6a5fbca1b8f17fde87b4c05e
+ms.openlocfilehash: 14e832397c21f183c94720bc71f06530d9caaf14
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/10/2020
-ms.locfileid: "83005598"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93420323"
 ---
 # <a name="deploy-the-uk-official-and-uk-nhs-blueprint-samples"></a>Déployer les exemples de blueprint UK OFFICIAL et UK NHS
 
@@ -27,14 +27,14 @@ Commencez par implémenter l’exemple de blueprint. Pour cela, créez un bluepr
 
 1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
 
-1. Dans la page **Démarrage**à gauche, sélectionnez le bouton **Créer** sous _Créer un blueprint_.
+1. Dans la page **Démarrage** à gauche, sélectionnez le bouton **Créer** sous _Créer un blueprint_.
 
 1. Recherchez l’exemple de blueprint **UK OFFICIAL** ou **UK NHS** sous _Autres exemples_ et sélectionnez **Utiliser cet exemple**.
 
 1. Entrez les _Fonctions de base_ de l’exemple de blueprint :
 
-   - **Nom du blueprint** : Entrez le nom de votre copie de l’exemple de blueprint.
-   - **Emplacement de la définition** : utilisez les points de suspension et sélectionnez le groupe d’administration dans lequel vous souhaitez enregistrer votre copie de l’exemple.
+   - **Nom du blueprint**  : Entrez le nom de votre copie de l’exemple de blueprint.
+   - **Emplacement de la définition**  : utilisez les points de suspension et sélectionnez le groupe d’administration dans lequel vous souhaitez enregistrer votre copie de l’exemple.
 
 1. Sélectionnez l’onglet _Artefacts_ dans le haut de la page ou **Suivant : Artefacts** dans le bas de la page.
 
@@ -48,11 +48,11 @@ Votre copie de l’exemple de blueprint est à présent créée dans votre envir
 
 1. Sélectionnez la page **Définitions de blueprint** à gauche. Utilisez les filtres pour rechercher votre copie de l’exemple de blueprint, puis sélectionnez-la.
 
-1. Sélectionnez **Publier le blueprint** dans le haut de la page. Dans la nouvelle page à droite, indiquez la **Version** de votre copie de l’exemple de blueprint. Cette propriété est utile si vous prévoyez d’effectuer une modification ultérieurement. Dans **Notes de changement**, indiquez par exemple « Première version publiée à partir de l’exemple de blueprint UK OFFICIAL ou UK NHS ». Sélectionnez ensuite **Publier** en bas de la page.
+1. Sélectionnez **Publier le blueprint** dans le haut de la page. Dans la nouvelle page à droite, indiquez la **Version** de votre copie de l’exemple de blueprint. Cette propriété est utile si vous prévoyez d’effectuer une modification ultérieurement. Dans **Notes de changement** , indiquez par exemple « Première version publiée à partir de l’exemple de blueprint UK OFFICIAL ou UK NHS ». Sélectionnez ensuite **Publier** en bas de la page.
 
 ## <a name="assign-the-sample-copy"></a>Affecter la copie de l’exemple
 
-Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peut être affectée à un abonnement dans le groupe d’administration où elle a été enregistrée. C’est à cette étape que les paramètres sont fournis pour que chaque déploiement de la copie de l’exemple de blueprint soit unique.
+Une fois que la copie de l’exemple de blueprint a été **publiée** , elle peut être affectée à un abonnement dans le groupe d’administration où elle a été enregistrée. C’est à cette étape que les paramètres sont fournis pour que chaque déploiement de la copie de l’exemple de blueprint soit unique.
 
 1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
 
@@ -64,11 +64,11 @@ Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peu
 
    - Concepts de base
 
-     - **Abonnements** : Sélectionnez un ou plusieurs des abonnements qui font partie du groupe d’administration où vous avez enregistré votre copie de l’exemple de blueprint. Si vous sélectionnez plusieurs abonnements, une affectation est créée pour chacun d’eux à l’aide des paramètres saisis.
-     - **Nom de l’affectation** : Le nom est prérempli en fonction du nom du blueprint.
+     - **Abonnements**  : Sélectionnez un ou plusieurs des abonnements qui font partie du groupe d’administration où vous avez enregistré votre copie de l’exemple de blueprint. Si vous sélectionnez plusieurs abonnements, une affectation est créée pour chacun d’eux à l’aide des paramètres saisis.
+     - **Nom de l’affectation**  : Le nom est prérempli en fonction du nom du blueprint.
        Changez-le si nécessaire ou laissez-le tel quel.
      - **Emplacement** : Sélectionnez une région dans laquelle créer l’identité managée. Azure Blueprint utilise cette identité managée pour déployer tous les artefacts dans le blueprint affecté. Pour en savoir plus, consultez [Identités managées pour les ressources Azure](../../../../active-directory/managed-identities-azure-resources/overview.md).
-     - **Version de définition du blueprint** : Choisissez une version **publiée** de votre copie de l’exemple de blueprint.
+     - **Version de définition du blueprint**  : Choisissez une version **publiée** de votre copie de l’exemple de blueprint.
 
    - Verrouiller l'affectation
 
@@ -76,7 +76,7 @@ Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peu
 
    - Identité managée
 
-     Conservez l’option par défaut, _Affecté(e) par le système_, pour l’identité managée.
+     Conservez l’option par défaut, _Affecté(e) par le système_ , pour l’identité managée.
 
    - Paramètres d'artefact
 
@@ -93,7 +93,7 @@ Le tableau suivant fournit la liste des paramètres d’artefact de blueprint :
 
 Nom de l’artefact|Type d’artefact|Nom du paramètre|Description|
 |-|-|-|-|
-|Initiative de blueprint pour UK OFFICIAL ou UK NHS|Affectation de rôle |Types de ressources utilisés pour auditer les journaux de diagnostic (Stratégie : Initiative de blueprint pour UK OFFICIAL ou UK NHS) |Liste des types de ressources à auditer si le paramètre de journal de diagnostic n’est pas activé.  Pour connaître les valeurs acceptables, consultez [Services, schémas et catégories pris en charge pour les journaux de diagnostic Azure](../../../../azure-monitor/platform/diagnostic-logs-schema.md). |
+|Initiative de blueprint pour UK OFFICIAL ou UK NHS|Affectation de rôle |Types de ressources utilisés pour auditer les journaux de diagnostic (Stratégie : Initiative de blueprint pour UK OFFICIAL ou UK NHS) |Liste des types de ressources à auditer si le paramètre de journal de diagnostic n’est pas activé.  Pour connaître les valeurs acceptables, consultez [Services, schémas et catégories pris en charge pour les journaux de diagnostic Azure](../../../../azure-monitor/platform/resource-logs-schema.md). |
 |\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Linux |Affectation de rôle |Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Linux pris en charge à ajouter à l’étendue (Policy: \[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Linux) |(Facultatif) La valeur par défaut est _none_. Pour plus d’informations, consultez [Créer un espace de travail Log Analytics dans le portail Azure](../../../../azure-monitor/learn/quick-create-workspace.md). |
 |\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Windows |Affectation de rôle |Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Windows pris en charge à ajouter à l’étendue (Policy: \[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Windows) |(Facultatif) La valeur par défaut est _none_. Pour plus d’informations, consultez [Créer un espace de travail Log Analytics dans le portail Azure](../../../../azure-monitor/learn/quick-create-workspace.md). |
 

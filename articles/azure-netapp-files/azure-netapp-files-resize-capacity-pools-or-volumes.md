@@ -1,6 +1,6 @@
 ---
 title: Redimensionner le pool de capacités ou un volume pour Azure NetApp Files | Microsoft Docs
-description: Décrit comment modifier la taille d’un pool de capacités ou d’un volume.
+description: Apprenez à modifier la taille d’un pool de capacités ou d’un volume. Le redimensionnement du pool de capacités change la capacité Azure NetApp Files achetée.
 services: azure-netapp-files
 documentationcenter: ''
 author: b-juche
@@ -11,15 +11,15 @@ ms.service: azure-netapp-files
 ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 05/14/2019
+ms.topic: how-to
+ms.date: 09/22/2020
 ms.author: b-juche
-ms.openlocfilehash: c58ceef57b984f46b86bb2a8577c53b75082b78b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 62bf154c1dbf1a0d3f12e2cef916b37059ce985b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65794624"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012474"
 ---
 # <a name="resize-a-capacity-pool-or-a-volume"></a>Redimensionner un pool de capacités ou un volume
 Vous pouvez modifier la taille d’un pool de capacités ou d’un volume selon les besoins. 
@@ -40,3 +40,8 @@ Vous pouvez changer la taille d’un volume selon les besoins. La consommation d
 2. Cliquez avec le bouton droit sur le nom du volume ou cliquez sur l’icône « ... » à la fin de la ligne correspondant au volume pour afficher le menu contextuel.
 3. Utilisez les options du menu contextuel pour redimensionner ou pour supprimer le volume.
 
+## <a name="next-steps"></a>Étapes suivantes
+
+- [Configurer un pool de capacité](azure-netapp-files-set-up-capacity-pool.md)
+- [Gérer un pool de capacités de QoS manuel](manage-manual-qos-capacity-pool.md)
+- [Changer dynamiquement le niveau de service d’un volume](dynamic-change-volume-service-level.md) 

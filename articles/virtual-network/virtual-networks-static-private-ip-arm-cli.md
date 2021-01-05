@@ -3,24 +3,25 @@ title: Configurer des adresses IP privées pour des machines virtuelles – Az
 description: Apprenez à configurer des adresses IP privées pour les machines virtuelles à l’aide de l’interface de ligne de commande Azure (CLI).
 services: virtual-network
 documentationcenter: na
-author: KumudD
-manager: twooley
+author: asudbring
+manager: KumudD
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 40b03a1a-ea00-454c-b716-7574cea49ac0
 ms.service: virtual-network
+ms.subservice: ip-services
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/16/2017
-ms.author: kumud
-ms.openlocfilehash: f4643aae0b28861f4ddb99d8dace749e62f930b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: allensu
+ms.openlocfilehash: c34ab73422d8dd41feb9da542ed63fdba060fe3f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78199476"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84708159"
 ---
 # <a name="configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-cli"></a>Configurer des adresses IP privées pour une machine virtuelle à l’aide d’Azure CLI
 
@@ -38,38 +39,7 @@ Pour créer une machine virtuelle nommée *DNS01* dans le sous-réseau *FrontEnd
 
 1. Si vous ne l’avez pas encore fait, installez et configurez la dernière version [d’Azure CLI](/cli/azure/install-azure-cli) et connectez-vous à un compte Azure par le biais de la commande [az login](/cli/azure/reference-index).
 
-2. Créez une adresse IP publique pour la machine virtuelle avec la commande [az network public-ip create](/cli/azure/network/public-ip). La liste affichée après le résultat présente les différents paramètres utilisés.
-
-    > [!NOTE]
-    > Vous pouvez souhaiter ou avoir besoin d’utiliser des valeurs différentes pour vos arguments ici et dans les prochaines étapes, en fonction des exigences de votre environnement.
-
-    ```azurecli
-    az network public-ip create \
-    --name TestPIP \
-    --resource-group TestRG \
-    --location centralus \
-    --allocation-method Static
-    ```
-
-    Sortie attendue :
-
-   ```json
-   {
-        "publicIp": {
-            "idleTimeoutInMinutes": 4,
-            "ipAddress": "52.176.43.167",
-            "provisioningState": "Succeeded",
-            "publicIPAllocationMethod": "Static",
-            "resourceGuid": "79e8baa3-33ce-466a-846c-37af3c721ce1"
-        }
-    }
-    ```
-
-   * `--resource-group` : nom du groupe de ressources dans lequel créer l’adresse IP publique.
-   * `--name` : nom de l’adresse IP publique.
-   * `--location` : région Azure dans laquelle créer l’adresse IP publique.
-
-3. Exécutez la commande [az network nic create](/cli/azure/network/nic) pour créer une carte réseau avec une adresse privée statique. La liste affichée après le résultat présente les différents paramètres utilisés. 
+2. Exécutez la commande [az network nic create](/cli/azure/network/nic) pour créer une carte réseau avec une adresse privée statique. La liste affichée après le résultat présente les différents paramètres utilisés. 
    
     ```azurecli
     az network nic create \
@@ -117,11 +87,11 @@ Pour créer une machine virtuelle nommée *DNS01* dans le sous-réseau *FrontEnd
     
     Paramètres :
 
-    * `--private-ip-address` : adresse IP privée statique pour la carte réseau.
-    * `--vnet-name` : nom du réseau virtuel dans lequel créer la carte réseau.
-    * `--subnet` : nom du sous-réseau virtuel dans lequel créer la carte réseau.
+    * `--private-ip-address`: Adresse IP privée statique pour la carte réseau.
+    * `--vnet-name`: nom du réseau virtuel dans lequel créer la carte réseau.
+    * `--subnet`: nom du sous-réseau virtuel dans lequel créer la carte réseau.
 
-4. Exécutez la commande [azure vm create](/cli/azure/vm/nic) pour créer la machine virtuelle à l’aide de l’adresse IP publique et la carte réseau créées précédemment. La liste affichée après le résultat présente les différents paramètres utilisés.
+3. Exécutez la commande [azure vm create](/cli/azure/vm/nic) pour créer la machine virtuelle à l’aide de l’adresse IP publique et la carte réseau créées précédemment. La liste affichée après le résultat présente les différents paramètres utilisés.
    
     ```azurecli
     az vm create \
@@ -151,7 +121,7 @@ Pour créer une machine virtuelle nommée *DNS01* dans le sous-réseau *FrontEnd
    
    Paramètres autres que les paramètres [az vm create](/cli/azure/vm) de base.
 
-   * `--nics` : nom de la carte réseau à laquelle est associée la machine virtuelle.
+   * `--nics`: nom de la carte réseau à laquelle est associée la machine virtuelle.
    
 Il est recommandé de ne pas assigner statiquement l’IP privée assignée à la machine virtuelle Azure au sein du système d’exploitation d’une machine virtuelle, sauf si nécessaire, par exemple lorsque [vous assignez plusieurs d’adresses IP à une machine virtuelle Windows](virtual-network-multiple-ip-addresses-cli.md). Si vous définissez manuellement l’adresse IP privée dans le système d’exploitation, assurez-vous qu’il s’agit de la même adresse que l’adresse IP privée assignée à [l’interface réseau](virtual-network-network-interface-addresses.md#change-ip-address-settings) Azure, ou vous pouvez perdre la connectivité à la machine virtuelle. En savoir plus sur les paramètres [d’adresse IP privée](virtual-network-network-interface-addresses.md#private).
 

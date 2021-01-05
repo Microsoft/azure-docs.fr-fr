@@ -1,19 +1,17 @@
 ---
 title: Déployer une application Java sur un cluster Service Fabric dans Azure
 description: Dans ce didacticiel, vous allez apprendre à déployer une application Java Service Fabric sur un cluster Azure Service Fabric.
-author: suhuruli
 ms.topic: tutorial
 ms.date: 02/26/2018
-ms.author: suhuruli
-ms.custom: mvc
-ms.openlocfilehash: df6719cad79bdb063c2d4d74892206b6e5bbd414
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-java, devx-track-azurecli
+ms.openlocfilehash: c2e2b2883bfa01d3a36de5d58425449f6f973010
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80292031"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97702155"
 ---
-# <a name="tutorial-deploy-a-java-application-to-a-service-fabric-cluster-in-azure"></a>Didacticiel : Déployer une application Java sur un cluster Service Fabric dans Azure
+# <a name="tutorial-deploy-a-java-application-to-a-service-fabric-cluster-in-azure"></a>Tutoriel : Déployer une application Java sur un cluster Service Fabric dans Azure
 
 Ce troisième didacticiel de la série vous montre comment déployer une application Service Fabric sur un cluster dans Azure.
 
@@ -32,12 +30,12 @@ Cette série de tutoriels vous montre comment effectuer les opérations suivante
 > * [Configurer la surveillance et les diagnostics pour l’application](service-fabric-tutorial-java-elk.md)
 > * [Configurer CI/CD](service-fabric-tutorial-java-jenkins.md)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer ce tutoriel :
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
-* [Installer l’interface de ligne de commande Microsoft Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+* [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli?view=azure-cli-latest)
 * Installez le Kit de développement logiciel (SDK) Service Fabric pour [Mac](service-fabric-get-started-mac.md) ou [Linux](service-fabric-get-started-linux.md)
 * [Installez Python 3](https://wiki.python.org/moin/BeginnersGuide/Download)
 
@@ -116,10 +114,10 @@ Les étapes suivantes créent les ressources nécessaires pour déployer votre a
 10. Créez une ressource Event Hubs à l’aide de la commande suivante. Suivez les invites pour entrer les informations de namespaceName, eventHubName, consumerGroupName, sendAuthorizationRule et receiveAuthorizationRule.
 
     ```azurecli
-    az group deployment create -g [RESOURCE-GROUP-NAME] --template-file eventhubsdeploy.json
+    az deployment group create -g [RESOURCE-GROUP-NAME] --template-file eventhubsdeploy.json
 
     Example:
-    az group deployment create -g testeventhubsrg --template-file eventhubsdeploy.json
+    az deployment group create -g testeventhubsrg --template-file eventhubsdeploy.json
     Please provide string value for 'namespaceName' (? for help): testeventhubnamespace
     Please provide string value for 'eventHubName' (? for help): testeventhub
     Please provide string value for 'consumerGroupName' (? for help): testeventhubconsumergroup

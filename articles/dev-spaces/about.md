@@ -6,18 +6,20 @@ ms.topic: overview
 description: Découvrez comment Azure Dev Spaces fournit aux équipes une expérience de développement Kubernetes rapide et itérative dans les clusters Azure Kubernetes Service
 keywords: Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, kubectl, k8s
 manager: gwallace
-ms.openlocfilehash: 8b22181bcddda9e4156c0e0dbe61d7d813498d96
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9bdd6f48a8f48266b8a9aad003fe6ea43715036c
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80529726"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91978439"
 ---
 # <a name="what-is-azure-dev-spaces"></a>Qu’est-ce qu’Azure Dev Spaces ?
 
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
+
 Azure Dev Spaces fournit aux équipes une expérience de développement Kubernetes rapide et itérative dans les clusters Azure Kubernetes Service (AKS). Azure Dev Spaces vous permet également de tester et déboguer tous les composants de votre application dans AKS avec une configuration minimale de machine de développement, sans répliquer ou simuler des dépendances.
 
-![](media/azure-dev-spaces/collaborate-graphic.gif)
+![Le diagramme montre deux versions d’une application développée indépendamment. Elles sont ensuite combinées en une seule version dans un environnement de développement Azure Dev Spaces.](media/azure-dev-spaces/collaborate-graphic.gif)
 
 ## <a name="how-azure-dev-spaces-simplifies-kubernetes-development"></a>Simplification du développement Kubernetes avec Azure Dev Spaces
 
@@ -38,12 +40,14 @@ Pour plus d’informations sur le fonctionnement d’Azure Dev Spaces, consultez
 
 ## <a name="supported-regions-and-configurations"></a>Régions et configurations prises en charge
 
-Azure Dev Spaces est pris en charge par les clusters AKS dans [certaines régions][supported-regions] uniquement. Azure Dev Spaces prend en charge l’utilisation de l’interface [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) ou de [Visual Studio Code](https://code.visualstudio.com/download) avec l’[extension Azure Dev espaces](https://marketplace.visualstudio.com/items?itemName=azuredevspaces.azds) installée sur Linux, macOS, Windows 8 ou ultérieur pour créer et exécuter vos applications sur AKS. Il prend également en charge l’utilisation de [Visual Studio](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs) installé sur Windows 8 ou version ultérieure. Pour Visual Studio 2019, vous aurez besoin de la charge de travail de développement Azure. Pour Visual Studio 2017, vous aurez besoin de la charge de travail de développement web et [Visual Studio Tools pour Kubernetes](https://aka.ms/get-vsk8stools).
+Azure Dev Spaces est pris en charge par les clusters AKS dans [certaines régions][supported-regions] uniquement. Azure Dev Spaces prend en charge l’utilisation de l’interface [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) ou de [Visual Studio Code](https://code.visualstudio.com/download) avec l’[extension Azure Dev espaces](https://marketplace.visualstudio.com/items?itemName=azuredevspaces.azds) installée sur Linux, macOS, Windows 8 ou ultérieur pour créer et exécuter vos applications sur AKS. Il prend aussi en charge l’utilisation de [Visual Studio 2019](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs) installé sur Windows avec la charge de travail de développement Azure.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Apprenez-en davantage sur le développement rapide et itératif des équipes avec Azure Dev Spaces à l’aide du [Guide de démarrage rapide sur le développement en équipe][team-development-quickstart].
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
+
+> [!div class="nextstepaction"]
+> [Fonctionnement d’Azure Dev Spaces](how-dev-spaces-works.md)
 
 [how-dev-spaces-works]: how-dev-spaces-works.md
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
-[team-development-quickstart]: quickstart-team-development.md

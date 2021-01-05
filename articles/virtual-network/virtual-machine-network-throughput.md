@@ -1,6 +1,6 @@
 ---
 title: Débit réseau des machines virtuelles Azure | Microsoft Docs
-description: Découvrez plus d’informations sur le débit réseau des machines virtuelles Azure.
+description: Apprenez-en davantage sur le débit réseau des machines virtuelles Azure, notamment la façon dont la bande passante est allouée à un ordinateur virtuel.
 services: virtual-network
 documentationcenter: na
 author: steveesp
@@ -15,12 +15,12 @@ ms.workload: infrastructure-services
 ms.date: 4/26/2019
 ms.author: steveesp
 ms.reviewer: kumud, mareat
-ms.openlocfilehash: 47f58b25b082784177910d14ab95d8d242fda71a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f0bad935c7c3d44f57dd171f714f31856bc2089c
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225301"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91361311"
 ---
 # <a name="virtual-machine-network-bandwidth"></a>Bande passante réseau des machines virtuelles
 
@@ -56,15 +56,15 @@ Le transfert de données entre les points de terminaison nécessite la création
 
 Aujourd'hui, la pile de mise en réseau Azure prend en charge 250 000 flux de réseau au total, avec un bon niveau de performance pour les machines virtuelles ayant plus de 8 cœurs d’UC et 100 000 flux au total, avec un bon niveau de performance pour les machines virtuelles ayant moins de 8 cœurs d’UC. Au-delà de cette limite, le niveau de performance du réseau se dégrade normalement en cas de flux supplémentaires jusqu’à une limite inconditionnelle de 500 000 flux au total, à savoir respectivement 250 000 flux entrants et 250 000 flux sortants, après quoi les flux supplémentaires sont supprimés.
 
-||Machines virtuelles avec < 8 cœurs d’UC|Machines virtuelles avec plus de 8 cœurs d’UC|
-|---|---|---|
+| Niveau de performance | Machines virtuelles avec < 8 cœurs d’UC | Machines virtuelles avec plus de 8 cœurs d’UC |
+| ----------------- | --------------------- | --------------------- |
 |<b>Bon niveau de performance</b>|100 000 flux |250 000 flux|
 |<b>Performances dégradées</b>|Plus de 100 000 flux|Plus de 250 000 flux|
 |<b>Limite de flux</b>|500 000 flux|500 000 flux|
 
 Des métriques permettant de suivre le nombre de flux réseau et le taux de création des flux sur votre machine virtuelle ou sur des instances de VMSS sont disponibles dans [Azure Monitor](../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachines).
 
-![azure-monitor-flow-metrics.png](media/virtual-machine-network-throughput/azure-monitor-flow-metrics.png)
+![Capture d’écran montrant la page Métriques d’Azure Monitor avec un graphique en courbes et des totaux pour les flux entrants et sortants.](media/virtual-machine-network-throughput/azure-monitor-flow-metrics.png)
 
 Le taux d’établissement et de fin de connexions peut également affecter le niveau de performance réseau, car l’établissement et la fin des connexions partagent l’UC avec les routines de traitement de paquets. Nous vous recommandons d’évaluer les charges de travail pour les modèles de trafic attendus et d’effectuer un scale-out de manière appropriée en fonction de vos besoins en matière de niveau de performance. 
 

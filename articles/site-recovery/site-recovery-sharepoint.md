@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 6/27/2019
 ms.author: sutalasi
-ms.openlocfilehash: d74e28ce470c23bbc8ee2081532a198c260ccea5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 08e971e52f994ec5fa5663708fa9f173daf33d80
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74706363"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013749"
 ---
 # <a name="set-up-disaster-recovery-for-a-multi-tier-sharepoint-application-for-disaster-recovery-using-azure-site-recovery"></a>Configurer la reprise d’activité pour une application SharePoint multiniveau à l’aide d’Azure Site Recovery
 
@@ -38,8 +38,8 @@ Vous pouvez regarder la vidéo ci-dessous sur la récupération d’une applicat
 
 Avant de commencer, veillez à bien comprendre ce qui suit :
 
-1. [Réplication d’une machine virtuelle dans Azure](site-recovery-vmware-to-azure.md)
-2. [Conception d’un réseau de récupération](site-recovery-network-design.md)
+1. [Réplication d’une machine virtuelle dans Azure](./vmware-azure-tutorial.md)
+2. [Conception d’un réseau de récupération](./concepts-on-premises-to-azure-networking.md)
 3. [Réalisation d’un test de basculement vers Azure](site-recovery-test-failover-to-azure.md)
 4. [Exécution d’un basculement vers Azure](site-recovery-failover.md)
 5. [Réplication d’un contrôleur de domaine](site-recovery-active-directory.md)
@@ -47,7 +47,7 @@ Avant de commencer, veillez à bien comprendre ce qui suit :
 
 ## <a name="sharepoint-architecture"></a>Architecture SharePoint
 
-SharePoint peut être déployée sur un ou plusieurs serveurs à l’aide de rôles de serveur et de topologies à plusieurs niveaux pour implémenter une conception de batterie de serveurs qui répond à des objectifs spécifiques. Une batterie de serveurs SharePoint de grande capacité et à forte demande qui prend en charge un grand nombre d’utilisateurs simultanés et un grand nombre d’éléments de contenu utilise le regroupement de service dans le cadre de sa stratégie d’évolutivité. Cette approche implique d’exécuter les services sur des serveurs dédiés, de regrouper ces services puis d’augmenter la taille des instances des serveurs en tant que groupe. La topologie suivante illustre le regroupement des services et serveurs pour une batterie de serveurs SharePoint à trois niveaux. Reportez-vous à la documentation de SharePoint et aux architectures de gamme de produits pour des instructions détaillées sur les différentes topologies de SharePoint. Vous trouverez plus d’informations sur le déploiement de SharePoint 2013 dans [ce document](https://technet.microsoft.com/library/cc303422.aspx).
+SharePoint peut être déployée sur un ou plusieurs serveurs à l’aide de rôles de serveur et de topologies à plusieurs niveaux pour implémenter une conception de batterie de serveurs qui répond à des objectifs spécifiques. Une batterie de serveurs SharePoint de grande capacité et à forte demande qui prend en charge un grand nombre d’utilisateurs simultanés et un grand nombre d’éléments de contenu utilise le regroupement de service dans le cadre de sa stratégie d’évolutivité. Cette approche implique d’exécuter les services sur des serveurs dédiés, de regrouper ces services puis d’augmenter la taille des instances des serveurs en tant que groupe. La topologie suivante illustre le regroupement des services et serveurs pour une batterie de serveurs SharePoint à trois niveaux. Reportez-vous à la documentation de SharePoint et aux architectures de gamme de produits pour des instructions détaillées sur les différentes topologies de SharePoint. Vous trouverez plus d’informations sur le déploiement de SharePoint 2013 dans [ce document](/SharePoint/sharepoint-server).
 
 
 
@@ -74,7 +74,7 @@ Si vous utilisez un cluster basé sur disque partagé comme n’importe quel niv
 
 ## <a name="replicating-virtual-machines"></a>Réplication des machines virtuelles
 
-Suivez [ce guide](site-recovery-vmware-to-azure.md) pour démarrer la réplication de la machine virtuelle dans Azure.
+Suivez [ce guide](./vmware-azure-tutorial.md) pour démarrer la réplication de la machine virtuelle dans Azure.
 
 * Une fois la réplication terminée, assurez-vous que vous accédez à chaque machine virtuelle de chaque niveau et sélectionnez le même groupe à haute disponibilité dans « Élément répliqué > Paramètres > Propriétés > Calcul et réseau ». Par exemple, si votre niveau web comporte 3 machines virtuelles, vérifiez que les 3 machines virtuelles sont configurées pour faire partie du même groupe à haute disponibilité dans Azure.
 
@@ -99,7 +99,7 @@ Suivez [ce guide](site-recovery-vmware-to-azure.md) pour démarrer la réplicati
 
 ### <a name="dns-and-traffic-routing"></a>Routage du trafic et DNS
 
-Pour les sites accessibles sur Internet, [créez un profil Traffic Manager de type « Priorité »](../traffic-manager/traffic-manager-create-profile.md) dans l’abonnement Azure. Puis, configurez votre profil DNS et Traffic Manager de la manière suivante.
+Pour les sites accessibles sur Internet, [créez un profil Traffic Manager de type « Priorité »](../traffic-manager/quickstart-create-traffic-manager-profile.md) dans l’abonnement Azure. Puis, configurez votre profil DNS et Traffic Manager de la manière suivante.
 
 
 | **Where** | **Source** | **Cible**|
@@ -163,7 +163,7 @@ Vous pouvez déployer les scripts Azure Site Recovery les plus couramment utilis
     * Cette méthode suppose qu’une sauvegarde de l’application de service de recherche a été effectuée avant l’événement catastrophique et que cette sauvegarde est disponible sur le site de récupération d’urgence.
     * Pour y parvenir facilement, il suffit de planifier la sauvegarde (par exemple, une fois par jour) et d’utiliser une procédure de copie pour placer la sauvegarde sur le site de récupération d’urgence. Les procédures de copie peuvent inclure des programmes par script comme AzCopy (Azure Copy) ou la configuration de DFSR (Distributed File Services Replication).
     * Maintenant que la batterie de serveurs SharePoint est en cours d’exécution, parcourez le site Administration centrale pour accéder à « Sauvegarde et restauration » puis sélectionnez Restaurer. La restauration interroge l’emplacement de sauvegarde spécifié (vous devrez peut-être mettre à jour la valeur). Sélectionnez la sauvegarde de l’application de service de recherche que vous voulez restaurer.
-    * La recherche est restaurée. N’oubliez pas que la restauration s’attend à trouver la même topologie (même nombre de serveurs) et les mêmes lettres de lecteur affectées à ces serveurs. Pour plus d’informations, consultez le document [« Restaurer une application de service de recherche dans SharePoint 2013 »](https://technet.microsoft.com/library/ee748654.aspx).
+    * La recherche est restaurée. N’oubliez pas que la restauration s’attend à trouver la même topologie (même nombre de serveurs) et les mêmes lettres de lecteur affectées à ces serveurs. Pour plus d’informations, consultez le document [« Restaurer une application de service de recherche dans SharePoint 2013 »](/SharePoint/administration/restore-a-search-service-application).
 
 
 6. Pour démarrer avec une nouvelle application de service de recherche, suivez les étapes ci-dessous.

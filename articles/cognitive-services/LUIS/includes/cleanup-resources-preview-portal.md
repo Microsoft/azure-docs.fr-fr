@@ -2,19 +2,17 @@
 title: Fichier Include
 description: Fichier Include
 services: cognitive-services
-author: diberry
 manager: cgronlun
-ms.custom: include file
+ms.custom: seodec18
 ms.service: cognitive-services
-ms.subservice: luis
+ms.subservice: language-understanding
 ms.topic: include
 ms.date: 03/02/2020
-ms.author: diberry
-ms.openlocfilehash: c32f919441379f3d5322348e7684538ee8d2039f
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 8ad4000b2a73c8fc14cee09a77fefbea4ff47552
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78250522"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91544879"
 ---
 Lorsque vous n’en avez plus besoin, supprimez l’application LUIS. Pour ce faire, sélectionnez **Mes applications** dans le menu en haut à gauche. Sélectionnez le nom de l’application dans la liste d’applications, puis **Supprimer** dans le menu contextuel. Dans la boîte de dialogue contextuelle **Supprimer l’application**, sélectionnez **OK**.

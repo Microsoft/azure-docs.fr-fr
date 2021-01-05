@@ -1,20 +1,20 @@
 ---
-title: Dépanner les déploiements
-description: Découvrez comment superviser et dépanner les déploiements de modèle Azure Resource Manager. Affiche les journaux d’activité et l’historique des déploiements.
+title: Résoudre les problèmes de déploiement
+description: Découvrez comment superviser les déploiements de modèle Azure Resource Manager (modèle ARM), et résoudre les problèmes de déploiement éventuels. Affiche les journaux d’activité et l’historique des déploiements.
 author: mumian
 ms.date: 01/15/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 737e8a247a232278db73de716647fc5bb890fe39
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 31c4e6383b5eaea2bb66dc1baafa0fbff4918a7c
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82184994"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97589115"
 ---
 # <a name="tutorial-troubleshoot-arm-template-deployments"></a>Tutoriel : Résoudre les problèmes des déploiements de modèles ARM
 
-Découvrez comment corriger les erreurs de déploiement des modèles Azure Resource Manager (ARM). Au cours de ce tutoriel, vous allez configurer deux erreurs dans un modèle, puis apprendre à utiliser les journaux d’activité et l’historique de déploiement pour résoudre les problèmes.
+Découvrez comment résoudre les problèmes rencontrés lors du déploiement d’un modèle Azure Resource Manager (modèle ARM). Au cours de ce tutoriel, vous allez configurer deux erreurs dans un modèle, puis apprendre à utiliser les journaux d’activité et l’historique de déploiement pour résoudre les problèmes.
 
 Il existe deux types d’erreurs liées au déploiement d’un modèle :
 
@@ -37,13 +37,13 @@ Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https:/
 
 Pour effectuer ce qui est décrit dans cet article, vous avez besoin des éléments suivants :
 
-- Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Utiliser Visual Studio Code pour créer des modèles ARM](use-vs-code-to-create-template.md).
+- Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Démarrage rapide : Créer des modèles ARM avec Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
 
 ## <a name="create-a-problematic-template"></a>Créer un modèle problématique
 
 Ouvrez un modèle nommé [Créer un compte de stockage standard](https://azure.microsoft.com/resources/templates/101-storage-account-create/) depuis les [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/), puis configurez deux problèmes.
 
-1. À partir de Visual Studio Code, sélectionnez **Fichier**>**Ouvrir un fichier**.
+1. À partir de Visual Studio Code, sélectionnez **Fichier** > **Ouvrir un fichier**.
 2. Collez l’URL suivante dans **Nom de fichier** :
 
     ```url
@@ -51,16 +51,16 @@ Ouvrez un modèle nommé [Créer un compte de stockage standard](https://azure.m
     ```
 
 3. Sélectionnez **Ouvrir** pour ouvrir le fichier.
-4. Remplacez la ligne **apiVersion** par la ligne suivante :
+4. Remplacez la ligne `apiVersion` par la ligne suivante :
 
     ```json
     "apiVersion1": "2018-07-02",
     ```
 
-    - **apiVersion1** est un nom d’élément non valide. Il s’agit d’une erreur de validation.
-    - La version de l’API doit être « 2018-07-01 ».  Il s’agit d’une erreur de déploiement.
+    - `apiVersion1` est un nom d’élément non valide. Il s’agit d’une erreur de validation.
+    - La version de l’API doit être `"2018-07-01"`.  Il s’agit d’une erreur de déploiement.
 
-5. Sélectionnez **Fichier**>**Enregistrer sous** pour enregistrer le fichier sous le nom **azuredeploy.json** sur votre ordinateur local.
+5. Sélectionnez **Fichier** > **Enregistrer sous** pour enregistrer le fichier sous le nom _azuredeploy.json_ sur votre ordinateur local.
 
 ## <a name="troubleshoot-the-validation-error"></a>Résoudre l’erreur de validation
 
@@ -68,13 +68,13 @@ Reportez-vous à la section [Déployer le modèle](template-tutorial-create-mult
 
 Vous devez obtenir une erreur similaire à la suivante depuis l’interpréteur de commandes :
 
-```
+```azurepowershell
 New-AzResourceGroupDeployment : 4:29:24 PM - Error: Code=InvalidRequestContent; Message=The request content was invalid and could not be deserialized: 'Could not find member 'apiVersion1' on object of type 'TemplateResource'. Path 'properties.template.resources[0].apiVersion1', line 36, position 24.'.
 ```
 
-Le message d’erreur indique que le problème est lié à **apiVersion1**.
+Le message d’erreur indique que le problème est lié à `apiVersion1`.
 
-Utilisez Visual Studio Code pour remédier au problème en remplaçant **apiVersion1** par **apiVersion**, puis enregistrez le modèle.
+Utilisez Visual Studio Code pour remédier au problème en remplaçant `apiVersion1` par `apiVersion`, puis enregistrez le modèle.
 
 ## <a name="troubleshoot-the-deployment-error"></a>Résoudre l’erreur de déploiement
 
@@ -82,7 +82,7 @@ Reportez-vous à la section [Déployer le modèle](template-tutorial-create-mult
 
 Vous devez obtenir une erreur similaire à la suivante depuis l’interpréteur de commandes :
 
-```
+```azurepowershell
 New-AzResourceGroupDeployment : 4:48:50 PM - Resource Microsoft.Storage/storageAccounts 'storeqii7x2rce77dc' failed with message '{
   "error": {
     "code": "NoRegisteredProviderFound",
@@ -96,14 +96,14 @@ Vous trouverez l’erreur de déploiement à partir du portail Azure à l’aide
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 2. Ouvrez le groupe de ressources en sélectionnant **Groupes de ressources**, puis le nom du groupe de ressources. Vous devez voir **1 Échec** sous **Déploiement**.
 
-    ![Tutoriel sur la résolution des problèmes liés à Resource Manager](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error.png)
+    ![Capture d’écran mettant en évidence le déploiement ayant échoué.](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error.png)
 3. Sélectionnez **Détails de l’erreur**.
 
-    ![Tutoriel sur la résolution des problèmes liés à Resource Manager](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error-details.png)
+    ![Capture d’écran mettant en évidence le lien Détails de l’erreur.](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error-details.png)
 
     Le message d’erreur est identique à celui mentionné précédemment :
 
-    ![Tutoriel sur la résolution des problèmes liés à Resource Manager](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error-summary.png)
+    ![Capture d’écran montrant les détails de l’erreur.](./media/template-tutorial-troubleshoot/resource-manager-template-deployment-error-summary.png)
 
 Vous pouvez également rechercher l’erreur dans les journaux d’activité :
 

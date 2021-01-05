@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 12/06/2019
-ms.openlocfilehash: 9ef9eada9b9aec50642a8bf357edab0677868817
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e99d68d31f1da4dcb3ef1086a2bbd90f0ab30410
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74949387"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023123"
 ---
 # <a name="use-c-user-defined-functions-with-apache-hive-and-apache-pig-on-apache-hadoop-in-hdinsight"></a>Utilisation des fonctions définies par l’utilisateur C# avec Apache Hive et Apache Pig sur Apache Hadoop dans HDInsight
 
@@ -30,7 +30,7 @@ Hive et Pig permettent de transmettre des données vers des applications externe
 
     Utilisez n’importe quel IDE souhaité. Nous vous conseillons d’utiliser [Visual Studio](https://www.visualstudio.com/vs) ou [Visual Studio Code](https://code.visualstudio.com/). Dans le cadre de ce document, Visual Studio 2019 a été utilisé.
 
-* Permet de télécharger les fichiers .exe dans le cluster et d’exécuter des tâches Pig et Hive. Nous vous recommandons d’utiliser [Data Lake Tools pour Visual Studio](../../data-lake-analytics/data-lake-analytics-data-lake-tools-install.md), [Azure PowerShell](/powershell/azure) et [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest). La procédure décrite dans ce document utilise les outils Data Lake pour Visual Studio pour charger les fichiers et exécuter l’exemple de requête Hive.
+* Permet de télécharger les fichiers .exe dans le cluster et d’exécuter des tâches Pig et Hive. Nous vous recommandons d’utiliser [Data Lake Tools pour Visual Studio](../../data-lake-analytics/data-lake-analytics-data-lake-tools-install.md), [Azure PowerShell](/powershell/azure) et [Azure CLI](/cli/azure/install-azure-cli). La procédure décrite dans ce document utilise les outils Data Lake pour Visual Studio pour charger les fichiers et exécuter l’exemple de requête Hive.
 
     Pour plus d’informations sur les autres façons d’exécuter des requêtes Hive, consultez [Présentation d’Apache Hive et HiveQL sur Azure HDInsight](hdinsight-use-hive.md).
 
@@ -58,7 +58,7 @@ Pour créer un projet C# pour une fonction définie par l’utilisateur Apache H
 
 3. Dans la fenêtre **Créer un projet**, choisissez le modèle **Application console (.NET Framework)** (version C#). Sélectionnez ensuite **Suivant**.
 
-4. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **Nom de projet***HiveCSharp*, puis accédez à ou créez un **Emplacement** auquel enregistrer le nouveau projet. Sélectionnez ensuite **Créer**.
+4. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **Nom de projet** *HiveCSharp*, puis accédez à ou créez un **Emplacement** auquel enregistrer le nouveau projet. Sélectionnez ensuite **Créer**.
 
 5. Dans l’IDE Visual Studio, remplacez le contenu de *Program.cs* par le code suivant :
 
@@ -125,7 +125,7 @@ Pour créer un projet C# pour une fonction définie par l’utilisateur Apache H
 
 3. Dans la fenêtre **Créer un projet**, choisissez le modèle **Application console (.NET Framework)** (version C#). Sélectionnez ensuite **Suivant**.
 
-4. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **Nom de projet***PigUDF*, puis accédez à ou créez un **Emplacement** auquel enregistrer le nouveau projet. Sélectionnez ensuite **Créer**.
+4. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **Nom de projet** *PigUDF*, puis accédez à ou créez un **Emplacement** auquel enregistrer le nouveau projet. Sélectionnez ensuite **Créer**.
 
 5. Dans l’IDE Visual Studio, remplacez le contenu de *Program.cs* par le code suivant :
 

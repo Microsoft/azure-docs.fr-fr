@@ -1,38 +1,37 @@
 ---
 title: Redirection HTTP vers HTTPS avec l’interface CLI
 titleSuffix: Azure Application Gateway
-description: Apprenez à créer une passerelle d'application et à ajouter un certificat pour un arrêt TLS à l'aide d'Azure CLI.
+description: Découvrez comment créer une redirection HTTP vers HTTPS et ajouter un certificat pour un arrêt TLS à l’aide de l’interface Azure CLI.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/15/2019
+ms.topic: how-to
+ms.date: 09/24/2020
 ms.author: victorh
-ms.openlocfilehash: 6bf8f3b7bfb446db78f0c97a246977fec6cd54cb
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 0d56a1c46f251307755416ef44991ac6f809f330
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312137"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566739"
 ---
 # <a name="create-an-application-gateway-with-http-to-https-redirection-using-the-azure-cli"></a>Créer une passerelle d’application avec redirection de HTTP vers HTTPS à l’aide d’Azure CLI
 
-Vous pouvez utiliser Azure CLI pour créer une [passerelle d'application](overview.md) avec un certificat pour l'arrêt TLS/SSL. Une règle de routage est utilisée pour rediriger le trafic HTTP vers le port HTTPS dans votre passerelle d’application. Dans cet exemple, vous créez également un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md) pour le pool backend de la passerelle d’application qui contient deux instances de machine virtuelle.
+Vous pouvez utiliser Azure CLI pour créer une [passerelle d'application](overview.md) avec un certificat pour l'arrêt TLS/SSL. Une règle de routage est utilisée pour rediriger le trafic HTTP vers le port HTTPS dans votre passerelle d’application. Dans cet exemple, vous créez également un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md) pour le pool backend de la passerelle d’application qui contient deux instances de machine virtuelle.
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Créer un certificat auto-signé
-> * Configurer un réseau
-> * Créer une passerelle d’application avec le certificat
-> * Ajouter un écouteur et une règle de redirection
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+* Créer un certificat auto-signé
+* Configurer un réseau
+* Créer une passerelle d’application avec le certificat
+* Ajouter un écouteur et une règle de redirection
+* Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0.4 ou une version ultérieure pour poursuivre la procédure décrite dans ce guide de démarrage rapide. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite Azure CLI version 2.0.4 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-self-signed-certificate"></a>Créer un certificat auto-signé
 
@@ -131,7 +130,7 @@ az network application-gateway frontend-port create \
 
 ### <a name="add-the-http-listener"></a>Ajouter l’écouteur HTTP
 
-Vous pouvez utiliser l’applet de commande[az network application-gateway http-listener create](/cli/azure/network/application-gateway/http-listener#az-network-application-gateway-http-listener-create) pour ajouter l’écouteur nommé *myListener* à la passerelle d’application.
+Vous pouvez utiliser l’applet de commande [az network application-gateway http-listener create](/cli/azure/network/application-gateway/http-listener#az-network-application-gateway-http-listener-create) pour ajouter l’écouteur nommé *myListener* à la passerelle d’application.
 
 ```azurecli-interactive
 az network application-gateway http-listener create \
@@ -224,13 +223,4 @@ Pour accepter l’avertissement de sécurité si vous avez utilisé un certifica
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce didacticiel, vous avez appris à :
-
-> [!div class="checklist"]
-> * Créer un certificat auto-signé
-> * Configurer un réseau
-> * Créer une passerelle d’application avec le certificat
-> * Ajouter un écouteur et une règle de redirection
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
-
-
+- [Créer une passerelle d’application avec redirection interne à l’aide d’Azure CLI](redirect-internal-site-cli.md)

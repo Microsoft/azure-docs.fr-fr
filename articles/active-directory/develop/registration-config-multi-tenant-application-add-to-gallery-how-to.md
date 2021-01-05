@@ -13,12 +13,12 @@ ms.topic: conceptual
 ms.date: 09/11/2018
 ms.author: ryanwi
 ms.reviewer: jeedes
-ms.openlocfilehash: b8d998d40b9920ccbdaf0079c32a0feb84bba87b
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 0df811f4e8b5d6a95868dfebe192e96fbfa80ed9
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83680268"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169254"
 ---
 # <a name="add-a-multitenant-application-to-the-azure-ad-application-gallery"></a>Ajouter une application mutualisée dans la galerie d’applications Azure AD
 
@@ -29,9 +29,9 @@ Azure Active Directory (Azure AD) est un service d’identité basé sur le clou
 ## <a name="if-your-application-supports-saml-or-openidconnect"></a>Si votre application prend en charge SAML ou OpenIDConnect
 Si vous avez une application mutualisée à répertorier dans la galerie d’applications Azure Active Directory, vous devez d’abord vérifier qu’elle prend en charge l’une des technologies d’authentification unique suivantes :
 
-- **OpenID Connect** : Pour répertorier votre application, créez l’application multilocataire dans Azure AD et implémentez le [framework de consentement Azure AD](https://docs.microsoft.com/azure/active-directory/develop/consent-framework) pour votre application. Envoyez la demande de connexion à un point de terminaison courant afin que n’importe quel client puisse donner son consentement à l’application. Vous pouvez contrôler un accès utilisateur en fonction de l’ID de locataire et de l’UPN de l’utilisateur reçus dans le jeton. Soumettez l’application à l’aide de la procédure décrite dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-app-gallery-listing).
+- **OpenID Connect** : Pour répertorier votre application, créez l’application multilocataire dans Azure AD et implémentez le [framework de consentement Azure AD](./consent-framework.md) pour votre application. Envoyez la demande de connexion à un point de terminaison courant afin que n’importe quel client puisse donner son consentement à l’application. Vous pouvez contrôler un accès utilisateur en fonction de l’ID de locataire et de l’UPN de l’utilisateur reçus dans le jeton. Soumettez l’application à l’aide de la procédure décrite dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](./v2-howto-app-gallery-listing.md).
 
-- **SAML** : Si votre application prend en charge SAML 2.0, l’application peut être répertoriée dans la galerie. Suivez les instructions dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-app-gallery-listing).
+- **SAML** : Si votre application prend en charge SAML 2.0, l’application peut être répertoriée dans la galerie. Suivez les instructions dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](./v2-howto-app-gallery-listing.md).
 
 ## <a name="if-your-application-does-not-support-saml-or-openidconnect"></a>Si votre application ne prend pas en charge SAML ou OpenIDConnect
 Les applications ne prenant pas en charge SAML ou OpenIDConnect peuvent toujours être intégrées dans la galerie d’applications via une technologie d’authentification unique par mot de passe.
@@ -39,12 +39,12 @@ Les applications ne prenant pas en charge SAML ou OpenIDConnect peuvent toujours
 L’authentification unique par mot de passe, également appelée archivage de mot de passe, vous permet de gérer l’accès utilisateur et les mots de passe pour les applications Web qui ne prennent pas en charge la fédération d’identité. Elle est également utile pour les scénarios où plusieurs utilisateurs doivent partager un seul compte, par exemple les comptes d’applications de médias sociaux de votre organisation. 
 
 Si vous souhaitez répertorier votre application avec cette technologie :
-1. Créez une application web qui a une page de connexion HTML pour configurer [l’authentification unique par mot de passe](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis). 
-2. Soumettez la demande comme indiqué dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-app-gallery-listing).
+1. Créez une application web qui a une page de connexion HTML pour configurer [l’authentification unique par mot de passe](../manage-apps/what-is-single-sign-on.md). 
+2. Soumettez la demande comme indiqué dans [Affichage de votre application dans la galerie d’applications Azure Active Directory](./v2-howto-app-gallery-listing.md).
 
 ## <a name="escalations"></a>Escalades
 
 Pour faire remonter un problème, envoyez un e-mail à l’[équipe d’intégration de l’authentification unique Azure AD](<mailto:SaaSApplicationIntegrations@service.microsoft.com>) et nous reviendrons vers vous dès que possible.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Apprenez comment [afficher votre application dans la galerie d’applications Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-app-gallery-listing).
+Apprenez comment [afficher votre application dans la galerie d’applications Azure Active Directory](./v2-howto-app-gallery-listing.md).

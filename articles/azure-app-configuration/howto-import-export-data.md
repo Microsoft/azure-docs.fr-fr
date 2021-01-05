@@ -1,24 +1,24 @@
 ---
 title: Importer ou exporter des données avec Azure App Configuration
-description: Découvrir comment exporter ou importer des données vers ou depuis Azure App Configuration
+description: Découvrez comment exporter ou importer des données de configuration vers ou depuis Azure App Configuration. Échangez des données entre votre magasin App Configuration et votre projet de code.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: conceptual
 ms.date: 02/25/2020
-ms.author: lcozzens
-ms.openlocfilehash: 5b3d6d0561d7d6d6b23cb4f579b0988850da9771
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkemper
+ms.openlocfilehash: 5e4eeb37bb5efa11a656600072e4aa364fc71500
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80056865"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96931790"
 ---
 # <a name="import-or-export-configuration-data"></a>Importer ou exporter des données de configuration
 
 Azure App Configuration prend en charge les opérations d’importation et d’exportation de données. Ces opérations vous permettent d’utiliser des données de configuration en bloc et d’échanger des données entre votre magasin App Configuration et le projet de code. Par exemple, vous pouvez configurer un magasin App Configuration à des fins de test et un autre pour la production. Vous pouvez copier les paramètres d’application pour ne pas avoir à entrer deux fois les mêmes données.
 
-Cet article fournit un guide pour importer et exporter des données avec App Configuration. Si vous souhaitez configurer une synchronisation continue avec votre référentiel GitHub, consultez [GitHub Actions](https://aka.ms/azconfig-gha1).
+Cet article fournit un guide pour importer et exporter des données avec App Configuration. Si vous souhaitez configurer une synchronisation continue avec votre référentiel GitHub, consultez [GitHub Actions](./concept-github-action.md).
 
 ## <a name="import-data"></a>Importer des données
 
@@ -65,4 +65,4 @@ Exportez les données à partir du [portail Azure](https://portal.azure.com) ou 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Créer une application web ASP.NET Core](./quickstart-aspnet-core-app.md)  
+> [Créez une application web ASP.NET Core](./quickstart-aspnet-core-app.md)

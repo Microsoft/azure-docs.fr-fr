@@ -3,32 +3,34 @@ title: Types d’événements en temps réel Azure Media Services | Microsoft Do
 description: Dans Azure Media Services, un événement en direct peut être *Pass-through* ou *Live Encoding*. Cet article contient un tableau détaillé qui compare des types d’événements en direct.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
-ms.topic: article
-ms.date: 06/13/2019
-ms.author: juliako
-ms.openlocfilehash: a28d4d96f643c12eeb6aa542db2c6af06f4fd954
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: c79d45cfac22f41f05071b619c444e7b7ab7956a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78244641"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89397302"
 ---
 # <a name="live-event-types-comparison"></a>Comparaison des types d’événements en direct
 
-Dans Azure Media Services, un [événement en direct](https://docs.microsoft.com/rest/api/media/liveevents) peut être défini sur *Pass-through* (un encodeur live local envoie un flux à vitesse de transmission multiple) ou sur *Live Encoding* (un encodeur live local envoie un flux à vitesse de transmission unique). 
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+Dans Azure Media Services, un [événement en direct](/rest/api/media/liveevents) peut être défini sur *Pass-through* (un encodeur live local envoie un flux à vitesse de transmission multiple) ou sur *Live Encoding* (un encodeur live local envoie un flux à vitesse de transmission unique). 
 
 Cet article compare les fonctionnalités des types d’événements en direct.
 
 ## <a name="types-comparison"></a>Comparaison des types 
 
-Le tableau suivant compare les fonctionnalités des types d’événements en direct. Durant la création, les types sont définis à l’aide de [LiveEventEncodingType](https://docs.microsoft.com/rest/api/media/liveevents/create#liveeventencodingtype) :
+Le tableau suivant compare les fonctionnalités des types d’événements en direct. Durant la création, les types sont définis à l’aide de [LiveEventEncodingType](/rest/api/media/liveevents/create#liveeventencodingtype) :
 
 * **LiveEventEncodingType.None** - Un encodeur live local envoie un flux à débits multiples. Les flux reçus transitent par l’Événement en temps réel sans traitement supplémentaire. Également appelé événement en direct pass-through.
 * **LiveEventEncodingType.Standard** - Un encodeur live local envoie un flux à débit unique à l’Événement en direct, puis Media Services crée des flux à débits multiples. Si la résolution du flux de contribution est de 720p ou plus, la présélection **Default720p** encode un jeu de 6 paires résolution/débits (plus d’informations plus loin dans cet article).
@@ -65,7 +67,7 @@ Le tableau suivant compare les fonctionnalités des types d’événements en di
 
 ## <a name="system-presets"></a>Présélections système
 
-La présélection [presetName](https://docs.microsoft.com/rest/api/media/liveevents/create#liveeventencoding) détermine les résolutions et débits de la sortie émanant de l’encodeur live. Si vous utilisez un encodeur live **Standard** (LiveEventEncodingType.Standard), la présélection *Default720p* spécifie un jeu de 6 paires résolution/débit, comme présenté ci-dessous. Autrement, si vous utilisez un encodeur live **Premium1080p** (LiveEventEncodingType.Premium1080p), la présélection *Default1080p* spécifie le jeu de sortie des paires résolution/débit.
+La présélection [presetName](/rest/api/media/liveevents/create#liveeventencoding) détermine les résolutions et débits de la sortie émanant de l’encodeur live. Si vous utilisez un encodeur live **Standard** (LiveEventEncodingType.Standard), la présélection *Default720p* spécifie un jeu de 6 paires résolution/débit, comme présenté ci-dessous. Autrement, si vous utilisez un encodeur live **Premium1080p** (LiveEventEncodingType.Premium1080p), la présélection *Default1080p* spécifie le jeu de sortie des paires résolution/débit.
 
 > [!NOTE]
 > Vous ne pouvez pas appliquer la présélection Default1080p à un événement réel si elle a été configurée pour l’encodage live Standard. Vous obtiendrez une erreur. Vous obtiendrez également une erreur si vous essayez d’appliquer la présélection Default720p à un encodeur live Premium1080p.
@@ -84,8 +86,7 @@ Si la résolution du flux de contribution est de 720p ou plus, la présélection
 | 200 |340 |192 |30 |Élevé |
 
 > [!NOTE]
-> Si vous avez besoin de personnaliser la présélection d’encodage live, ouvrez un ticket de support sur le Portail Azure. Vous devez spécifier la table de résolution et de débits binaires souhaitée. Vérifiez qu’il n’existe qu’une seule couche à 720p, et au maximum six couches. Spécifiez également que vous demandez une présélection pour un encodeur live Standard.
-> Les valeurs des débits et des résolutions spécifiques peuvent être ajustées au fil du temps
+> Si vous avez besoin de personnaliser la présélection d’encodage live, ouvrez un ticket de support sur le Portail Azure. Vous devez spécifier la table souhaitée pour la résolution vidéo et les débits. La personnalisation du débit d’encodage audio n’est pas prise en charge. Vérifiez qu’il n’existe qu’une seule couche à 720p, et au maximum six couches. Spécifiez également que vous demandez une présélection.
 
 ### <a name="output-video-streams-for-default1080p"></a>Flux de sortie vidéo pour la présélection Default1080p
 
@@ -101,8 +102,7 @@ Si la résolution du flux de contribution est de 1080p, la présélection **Defa
 | 200 |320 |180 |30 |Élevé |
 
 > [!NOTE]
-> Si vous avez besoin de personnaliser la présélection d’encodage live, ouvrez un ticket de support sur le Portail Azure. Vous devez spécifier la table de résolution et de débits binaires souhaitée. Vérifiez qu’il n’existe qu’une seule couche à 1080p, et au maximum six couches. Spécifiez également que vous demandez une présélection pour un encodeur live Premium1080p.
-> Les valeurs des débits et des résolutions spécifiques peuvent être ajustées au fil du temps.
+> Si vous avez besoin de personnaliser la présélection d’encodage live, ouvrez un ticket de support sur le Portail Azure. Vous devez spécifier la table de résolution et de débits binaires souhaitée. Vérifiez qu’il n’existe qu’une seule couche à 1080p, et au maximum 6 couches. Spécifiez également que vous demandez une présélection pour un encodeur live Premium1080p. Les valeurs des débits et des résolutions spécifiques peuvent être ajustées au fil du temps.
 
 ### <a name="output-audio-stream-for-default720p-and-default1080p"></a>Flux de sortie audio pour Default720p et Default1080p
 

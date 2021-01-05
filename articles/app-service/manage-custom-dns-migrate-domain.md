@@ -4,14 +4,14 @@ description: Découvrez comment migrer sans temps d’arrêt vers Azure App Serv
 tags: top-support-issue
 ms.assetid: 10da5b8a-1823-41a3-a2ff-a0717c2b5c2d
 ms.topic: article
-ms.date: 10/21/2019
+ms.date: 08/25/2020
 ms.custom: seodec18
-ms.openlocfilehash: 5c1760c746aca439e19ab5727e5be02f6dbad3cb
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e1b50675bef0f883ff617b3098a742d3491b3c13
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535687"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89484294"
 ---
 # <a name="migrate-an-active-dns-name-to-azure-app-service"></a>Migrer un nom DNS actif vers Azure App Service
 
@@ -29,7 +29,7 @@ Pour suivre cette procédure :
 
 ## <a name="bind-the-domain-name-preemptively"></a>Lier le nom de domaine de manière préemptive
 
-Lorsque vous liez un domaine personnalisé de manière préemptive, vous effectuez les deux opérations suivantes avant d’apporter des modifications à vos enregistrements DNS :
+Lorsque vous liez un domaine personnalisé de manière préemptive, vous effectuez les deux opérations suivantes avant d’apporter des modifications à vos enregistrements DNS existants :
 
 - Vérifier la propriété du domaine
 - Activer le nom de domaine de votre application
@@ -38,54 +38,48 @@ Lorsque vous migrez finalement votre nom DNS personnalisé de l’ancien site à
 
 [!INCLUDE [Access DNS records with domain provider](../../includes/app-service-web-access-dns-records.md)]
 
+### <a name="get-domain-verification-id"></a>Obtenir l’ID de vérification du domaine
+
+Procurez-vous l’ID de vérification du domaine pour votre application en suivant les étapes décrites dans [Obtenir l’ID de vérification du domaine](app-service-web-tutorial-custom-domain.md#get-a-domain-verification-id).
+
 ### <a name="create-domain-verification-record"></a>Créer un enregistrement de vérification de domaine
 
-Pour vérifier la propriété du domaine, ajoutez un enregistrement TXT. L’enregistrement TXT mappe de _awverify.&lt;sousdomaine>_ à _&lt;nomapplication>.azurewebsites.net_. 
-
-L’enregistrement TXT dont vous avez besoin dépend de l’enregistrement DNS que vous souhaitez migrer. Pour des exemples, consultez le tableau suivant (`@` représente généralement le domaine racine) :
+Pour vérifier la propriété du domaine, ajoutez un enregistrement TXT de vérification de domaine. Le nom d’hôte de l’enregistrement TXT dépend du type d’enregistrement DNS que vous souhaitez mapper. Consultez le tableau suivant (`@` représente généralement le domaine racine) :
 
 | Exemple d’enregistrement DNS | Hôte TXT | Valeur TXT |
 | - | - | - |
-| \@ (racine) | _awverify_ | _&lt;nomapplication&gt;.azurewebsites.net_ |
-| www (sous-domaine) | _awverify.www_ | _&lt;nomapplication&gt;.azurewebsites.net_ |
-| \* (caractère générique) | _awverify.\*_ | _&lt;nomapplication&gt;.azurewebsites.net_ |
+| \@ (racine) | _asuid_ | [ID de vérification du domaine pour votre application](app-service-web-tutorial-custom-domain.md#get-a-domain-verification-id) |
+| www (sous-domaine) | _asuid.www_ | [ID de vérification du domaine pour votre application](app-service-web-tutorial-custom-domain.md#get-a-domain-verification-id) |
+| \* (caractère générique) | _asuid_ | [ID de vérification du domaine pour votre application](app-service-web-tutorial-custom-domain.md#get-a-domain-verification-id) |
 
 Dans la page des enregistrements DNS, notez le type d’enregistrement du nom DNS que vous souhaitez migrer. App Service prend en charge les mappages d’enregistrements CNAME et A.
 
 > [!NOTE]
-> Pour certains fournisseurs, tels que CloudFlare, `awverify.*` n’est pas un enregistrement valide. Utilisez `*` uniquement à la place.
-
-> [!NOTE]
 > Les enregistrements `*` génériques ne valideront pas les sous-domaines avec un enregistrement CNAME existant. Vous devrez peut-être créer explicitement un enregistrement TXT pour chaque sous-domaine.
-
 
 ### <a name="enable-the-domain-for-your-app"></a>Activer le domaine pour votre application
 
-Dans le [portail Azure](https://portal.azure.com), dans le volet de navigation gauche de la page de l’application, sélectionnez **Domaines personnalisés**. 
+1. Dans le [portail Azure](https://portal.azure.com), dans le volet de navigation gauche de la page de l’application, sélectionnez **Domaines personnalisés**. 
 
-![Menu Domaines personnalisés](./media/app-service-web-tutorial-custom-domain/custom-domain-menu.png)
+    ![Menu Domaines personnalisés](./media/app-service-web-tutorial-custom-domain/custom-domain-menu.png)
 
-Dans la page **Domaines personnalisés**, sélectionnez l’icône **+** en regard de **Ajouter un nom d’hôte**.
+1. Dans la page **Domaines personnalisés**, sélectionnez **Ajouter un domaine personnalisé**.
 
-![Ajouter un nom d’hôte](./media/app-service-web-tutorial-custom-domain/add-host-name-cname.png)
+    ![Ajouter un nom d’hôte](./media/app-service-web-tutorial-custom-domain/add-host-name-cname.png)
 
-Tapez le nom de domaine complet (FQDN) pour lequel vous avez ajouté l’enregistrement TXT, tel que `www.contoso.com`. Pour un domaine contenant un caractère générique (tel que \*. contoso.com), vous pouvez utiliser n’importe quel nom DNS correspondant à ce domaine contenant un caractère générique. 
+1. Tapez le nom de domaine complet que vous souhaitez migrer, qui correspond à l’enregistrement TXT que vous créez, par exemple `contoso.com`, `www.contoso.com`ou `*.contoso.com`. Sélectionnez **Valider**.
 
-Sélectionnez **Valider**.
+    Le bouton **Ajouter un domaine personnalisé** est activé. 
 
-Le bouton **Ajouter un nom d’hôte** est activé. 
+1. Assurez-vous que l’option **Type d’enregistrement du nom d’hôte** est bien définie sur le type d’enregistrement DNS que vous voulez migrer. Sélectionnez **Ajouter un nom d’hôte**.
 
-Assurez-vous que l’option **Type d’enregistrement du nom d’hôte** est bien définie sur le type d’enregistrement DNS que vous voulez migrer.
+    ![Ajouter un nom DNS à l’application](./media/app-service-web-tutorial-custom-domain/validate-domain-name-cname.png)
 
-Sélectionnez **Ajouter un nom d’hôte**.
+    Un certain temps peut être nécessaire pour que le nouveau nom d’hôte soit reflété sur la page **Domaines personnalisés** de votre application. Essayez d’actualiser le navigateur pour mettre à jour les données.
 
-![Ajouter un nom DNS à l’application](./media/app-service-web-tutorial-custom-domain/validate-domain-name-cname.png)
+    ![Enregistrement CNAME ajouté](./media/app-service-web-tutorial-custom-domain/cname-record-added.png)
 
-Un certain temps peut être nécessaire pour que le nouveau nom d’hôte soit reflété sur la page **Domaines personnalisés** de votre application. Essayez d’actualiser le navigateur pour mettre à jour les données.
-
-![Enregistrement CNAME ajouté](./media/app-service-web-tutorial-custom-domain/cname-record-added.png)
-
-Votre nom DNS personnalisé est à présent activé dans votre application Azure. 
+    Votre nom DNS personnalisé est à présent activé dans votre application Azure. 
 
 ## <a name="remap-the-active-dns-name"></a>Remapper le nom DNS actif
 
@@ -98,8 +92,6 @@ Il ne vous reste plus qu’à remapper votre enregistrement DNS actif pour qu’
 Si vous remappez un enregistrement CNAME, ignorez cette section. 
 
 Pour remapper un enregistrement A, vous avez besoin de l’adresse IP externe de l’application App Service. Celle-ci est affichée dans la page **Domaines personnalisés**.
-
-Fermez la page **Ajouter un nom d’hôte** en sélectionnant **X** dans l’angle supérieur droit. 
 
 Dans la page **Domaines personnalisés**, copiez l’adresse IP de l’application.
 
@@ -121,7 +113,7 @@ Enregistrez vos paramètres.
 
 Les requêtes DNS doivent commencer à trouver votre application App Service immédiatement après la propagation DNS.
 
-## <a name="active-domain-in-azure"></a>Domaine actif dans Azure
+## <a name="migrate-domain-from-another-app"></a>Migrer un domaine à partir d’une autre application
 
 Vous pouvez migrer un domaine personnalisé actif dans Azure, entre des abonnements ou au sein d’un même abonnement. Toutefois, une telle migration sans temps d’arrêt nécessite que l’application source et l’application cible reçoivent le même domaine personnalisé à un moment donné. Par conséquent, vous devez vous assurer que les deux applications ne sont pas déployées sur la même unité de déploiement (en interne appelée espace web). Un nom de domaine ne peut être attribué qu’à une seule application dans chaque unité de déploiement.
 

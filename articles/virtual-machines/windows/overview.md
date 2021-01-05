@@ -8,12 +8,12 @@ ms.topic: overview
 ms.date: 11/14/2019
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 7973ef9c56b70b6b43256db947e7f6f7210c178f
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: 26905b746efb0bfcc877e0fa8fad797672bb6447
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82930435"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96483213"
 ---
 # <a name="windows-virtual-machines-in-azure"></a>Machines virtuelles Windows dans Azure
 
@@ -30,7 +30,7 @@ Les Machines Virtuelles Azure peuvent être utilisées de différentes manières
 Le nombre de machines virtuelles utilisées par votre application peut varier (montée en puissance et augmentation de la charge) pour répondre à vos besoins.
 
 ## <a name="what-do-i-need-to-think-about-before-creating-a-vm"></a>À quoi dois-je penser avant de créer une machine virtuelle ?
-Il existe toujours une multitude de [considérations liées à la conception](https://docs.microsoft.com/azure/architecture/reference-architectures/n-tier/windows-vm) lorsque vous générez une infrastructure d’application dans Azure. Il est important de réfléchir à ces aspects des machines virtuelles avant de commencer :
+Il existe toujours une multitude de [considérations liées à la conception](/azure/architecture/reference-architectures/n-tier/windows-vm) lorsque vous générez une infrastructure d’application dans Azure. Il est important de réfléchir à ces aspects des machines virtuelles avant de commencer :
 
 * le nom de vos ressources d’application,
 * l’emplacement de stockage des ressources,
@@ -48,16 +48,20 @@ Ce tableau présente quelques moyens d’obtenir la liste des emplacements dispo
 | Méthode | Description |
 | --- | --- |
 | Portail Azure |Sélectionnez un emplacement dans la liste lorsque vous créez une machine virtuelle. |
-| Azure PowerShell |Utilisez la commande [Get-AzLocation](https://docs.microsoft.com/powershell/module/az.resources/get-azlocation). |
-| API REST |Utilisez l’opération [Lister les emplacements](https://docs.microsoft.com/rest/api/resources/subscriptions). |
-| Azure CLI |Utilisez l’opération [az account list-locations](https://docs.microsoft.com/cli/azure/account?view=azure-cli-latest). |
+| Azure PowerShell |Utilisez la commande [Get-AzLocation](/powershell/module/az.resources/get-azlocation). |
+| API REST |Utilisez l’opération [Lister les emplacements](/rest/api/resources/subscriptions). |
+| Azure CLI |Utilisez l’opération [az account list-locations](/cli/azure/account?view=azure-cli-latest). |
+
+### <a name="singapore-data-residency"></a>Résidence des données à Singapour
+
+Dans Azure, la fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique. Pour toutes les autres régions, les données client sont stockées dans Zone géographique. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
 
 ## <a name="availability"></a>Disponibilité
 Azure a annoncé un contrat de niveau de service de pointe pour machine virtuelle à instance unique de 99,9 % à condition de déployer la machine virtuelle avec le stockage premium pour tous les disques.  Afin que votre déploiement puisse bénéficier du contrat de niveau de service standard de 99,95 % pour les machines virtuelles, vous devez déployer au moins deux machines virtuelles exécutant votre charge de travail à l’intérieur d’un groupe à haute disponibilité. Un groupe à haute disponibilité assure que vos machines virtuelles sont réparties sur plusieurs domaines d’erreur dans les centres de données Azure et déployées sur des hôtes ayant des fenêtres de maintenance distinctes. La version complète du [contrat SLA Azure](https://azure.microsoft.com/support/legal/sla/virtual-machines/) explique la disponibilité garantie d’Azure dans son ensemble.
 
 
 ## <a name="vm-size"></a>Taille de la machine virtuelle
-La [taille](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) de la machine virtuelle que vous utilisez est déterminée par la charge de travail que vous souhaitez exécuter. La taille que vous choisissez détermine ensuite des facteurs comme la puissance de traitement, la mémoire et la capacité de stockage. Azure propose différentes tailles vous permettant de prendre en charge de nombreux types d'utilisation.
+La [taille](../sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) de la machine virtuelle que vous utilisez est déterminée par la charge de travail que vous souhaitez exécuter. La taille que vous choisissez détermine ensuite des facteurs comme la puissance de traitement, la mémoire et la capacité de stockage. Azure propose différentes tailles vous permettant de prendre en charge de nombreux types d'utilisation.
 
 Azure facture un [prix horaire](https://azure.microsoft.com/pricing/details/virtual-machines/windows/) en fonction de la taille et du système d’exploitation de la machine virtuelle. Pour les heures partielles, Azure facture uniquement les minutes utilisées. Le stockage est facturé séparément.
 
@@ -65,7 +69,7 @@ Azure facture un [prix horaire](https://azure.microsoft.com/pricing/details/virt
 Votre abonnement comporte des [limites de quota](../../azure-resource-manager/management/azure-subscription-service-limits.md) par défaut qui peuvent avoir un impact négatif sur le déploiement d’un grand nombre de machines virtuelles pour votre projet. La limite est de 20 machines virtuelles par région et par abonnement. Les limites peuvent être augmentées en [soumettant un ticket de support demandant leur hausse](../../azure-portal/supportability/resource-manager-core-quotas-request.md).
 
 ### <a name="operating-system-disks-and-images"></a>Images et disques du système d’exploitation
-Les machines virtuelles utilisent des [disques durs virtuels](managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) pour stocker leurs données et leur système d’exploitation (SE). Les disques durs virtuels sont également utilisés pour les images à partir desquelles vous pouvez choisir d'installer un système d'exploitation. 
+Les machines virtuelles utilisent des [disques durs virtuels](../managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) pour stocker leurs données et leur système d’exploitation (SE). Les disques durs virtuels sont également utilisés pour les images à partir desquelles vous pouvez choisir d'installer un système d'exploitation. 
 
 Azure fournit de nombreuses [images Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps?filters=virtual-machine-images%3Bwindows&page=1) à utiliser avec différentes versions et différents types de systèmes d’exploitation Windows Server. Les images Marketplace sont identifiées par l’éditeur d’images, l’offre, la référence (SKU) et la version (la version est généralement spécifiée en dernier). Seuls les systèmes d’exploitation 64 bits sont pris en charge. Pour plus d’informations sur les rôles, fonctionnalités et systèmes d’exploitation invités pris en charge, consultez la rubrique [Prise en charge du logiciel serveur Microsoft pour les machines virtuelles Microsoft Azure](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines).
 
@@ -74,20 +78,20 @@ Ce tableau présente différents moyens de trouver les informations d’une imag
 | Méthode | Description |
 | --- | --- |
 | Portail Azure |Les valeurs sont spécifiées automatiquement pour vous lorsque vous sélectionnez une image à utiliser. |
-| Azure PowerShell |[Get-AzVMImagePublisher](https://docs.microsoft.com/powershell/module/az.compute/get-azvmimagepublisher) -Location *location*<BR>[Get-AzVMImageOffer](https://docs.microsoft.com/powershell/module/az.compute/get-azvmimageoffer) -Location *location* -Publisher *publisherName*<BR>[Get-AzVMImageSku](https://docs.microsoft.com/powershell/module/az.compute/get-azvmimagesku) -Location *location* -Publisher *publisherName* -Offer *offerName* |
-| API REST |[Lister les éditeurs d’images](https://docs.microsoft.com/rest/api/compute/platformimages/platformimages-list-publishers)<BR>[Lister les offres d’images](https://docs.microsoft.com/rest/api/compute/platformimages/platformimages-list-publisher-offers)<BR>[Lister les références d’images](https://docs.microsoft.com/rest/api/compute/platformimages/platformimages-list-publisher-offer-skus) |
-| Azure CLI |[az vm image list-publishers](https://docs.microsoft.com/cli/azure/vm/image?view=azure-cli-latest) --emplacement *location*<BR>[az vm image list-offers](https://docs.microsoft.com/cli/azure/vm/image?view=azure-cli-latest) --emplacement *location* --éditeur *publisherName*<BR>[az vm image list-skus](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest) --emplacement *location* --éditeur *publisherName* --offre *offerName*|
+| Azure PowerShell |[Get-AzVMImagePublisher](/powershell/module/az.compute/get-azvmimagepublisher) -Location *location*<BR>[Get-AzVMImageOffer](/powershell/module/az.compute/get-azvmimageoffer) -Location *location* -Publisher *publisherName*<BR>[Get-AzVMImageSku](/powershell/module/az.compute/get-azvmimagesku) -Location *location* -Publisher *publisherName* -Offer *offerName* |
+| API REST |[Lister les éditeurs d’images](/rest/api/compute/platformimages/platformimages-list-publishers)<BR>[Lister les offres d’images](/rest/api/compute/platformimages/platformimages-list-publisher-offers)<BR>[Lister les références d’images](/rest/api/compute/platformimages/platformimages-list-publisher-offer-skus) |
+| Azure CLI |[az vm image list-publishers](/cli/azure/vm/image?view=azure-cli-latest) --emplacement *location*<BR>[az vm image list-offers](/cli/azure/vm/image?view=azure-cli-latest) --emplacement *location* --éditeur *publisherName*<BR>[az vm image list-skus](/cli/azure/vm?view=azure-cli-latest) --emplacement *location* --éditeur *publisherName* --offre *offerName*|
 
 Vous pouvez choisir de [charger et utiliser votre propre image](upload-generalized-managed.md) ; lorsque vous procédez ainsi, le nom de l’éditeur, l’offre et la référence ne sont pas utilisés.
 
 ### <a name="extensions"></a>Extensions
-Les [extensions](extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) de machines virtuelles étendent les fonctionnalités de votre machine virtuelle par le biais de la configuration post-déploiement et de tâches automatisées.
+Les [extensions](../extensions/features-windows.md?toc=/azure/virtual-machines/windows/toc.json) de machines virtuelles étendent les fonctionnalités de votre machine virtuelle par le biais de la configuration post-déploiement et de tâches automatisées.
 
 Ces tâches courantes peuvent être accomplies à l’aide des extensions :
 
-* **Exécuter des scripts personnalisés** : [l’extension de script personnalisé](extensions-customscript.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) vous permet de configurer des charges de travail sur la machine virtuelle en exécutant votre script pendant l’approvisionnement de la machine virtuelle.
-* **Déployer et gérer des configurations** : [l’extension de configuration d’état souhaité (DSC) PowerShell](extensions-dsc-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) vous permet de configurer DSC sur une machine virtuelle pour gérer les environnements et les configurations.
-* **Collecter les données de diagnostic** : [l’extension des diagnostics Azure](extensions-diagnostics-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) vous permet de configurer la machine virtuelle de sorte qu’elle collecte des données de diagnostics utilisées pour surveiller l’intégrité de votre application.
+* **Exécuter des scripts personnalisés** : [l’extension de script personnalisé](../extensions/custom-script-windows.md?toc=/azure/virtual-machines/windows/toc.json) vous permet de configurer des charges de travail sur la machine virtuelle en exécutant votre script pendant l’approvisionnement de la machine virtuelle.
+* **Déployer et gérer des configurations** : [l’extension de configuration d’état souhaité (DSC) PowerShell](../extensions/dsc-overview.md?toc=/azure/virtual-machines/windows/toc.json) vous permet de configurer DSC sur une machine virtuelle pour gérer les environnements et les configurations.
+* **Collecter les données de diagnostic** : [l’extension des diagnostics Azure](../extensions/diagnostics-template.md?toc=/azure/virtual-machines/windows/toc.json) vous permet de configurer la machine virtuelle de sorte qu’elle collecte des données de diagnostics utilisées pour surveiller l’intégrité de votre application.
 
 ### <a name="related-resources"></a>Ressources associées
 Les ressources de cette table sont utilisées par la machine virtuelle et doivent exister ou être créées lors de sa création.
@@ -95,11 +99,17 @@ Les ressources de cette table sont utilisées par la machine virtuelle et doiven
 | Ressource | Obligatoire | Description |
 | --- | --- | --- |
 | [Groupe de ressources](../../azure-resource-manager/management/overview.md) |Oui |La machine virtuelle doit être contenue dans un groupe de ressources. |
-| [Compte de stockage](../../storage/common/storage-create-storage-account.md) |Oui |La machine virtuelle doit stocker ses disques durs virtuels dans le compte de stockage. |
+| [Compte de stockage](../../storage/common/storage-account-create.md) |Oui |La machine virtuelle doit stocker ses disques durs virtuels dans le compte de stockage. |
 | [Réseau virtuel](../../virtual-network/virtual-networks-overview.md) |Oui |La machine virtuelle doit faire partie d’un réseau virtuel. |
-| [Adresse IP publique](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) |Non |La machine virtuelle peut avoir une adresse IP publique pour être accessible à distance. |
+| [Adresse IP publique](../../virtual-network/public-ip-addresses.md) |Non |La machine virtuelle peut avoir une adresse IP publique pour être accessible à distance. |
 | [Interface réseau](../../virtual-network/virtual-network-network-interface.md) |Oui |La machine virtuelle a besoin de l’interface réseau pour communiquer sur le réseau. |
 | [Disques de données](attach-managed-disk-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) |Non |La machine virtuelle peut comprendre des disques de données pour développer ses capacités de stockage. |
+
+
+## <a name="data-residency"></a>Résidence des données
+
+Dans Azure, la fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique et la région Brésil Sud (État de Sao Paulo) de la zone géographique Brésil. Pour toutes les autres régions, les données client sont stockées dans Zone géographique. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -108,4 +118,3 @@ Créer votre première machine virtuelle
 - [Portail](quick-create-portal.md)
 - [PowerShell](quick-create-powershell.md)
 - [Azure CLI](quick-create-cli.md)
-

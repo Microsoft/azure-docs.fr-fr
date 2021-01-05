@@ -1,22 +1,22 @@
 ---
 title: Créer un modèle - Visual Studio Code
-description: Utilisez Visual Studio Code et l’extension des outils Azure Resource Manager pour travailler sur des modèles Resource Manager.
+description: Utilisez Visual Studio Code et l’extension des outils Azure Resource Manager pour travailler sur des modèles ARM (Azure Resource Manager).
 author: neilpeterson
-ms.date: 04/17/2020
+ms.date: 08/09/2020
 ms.topic: quickstart
 ms.author: nepeters
-ms.openlocfilehash: cd107db5220a96d75092a94736e060ae46672926
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: d8fd44a1e4c1ddfd78b2afa3280bb05c8fde91e3
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81686609"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350141"
 ---
-# <a name="quickstart-create-azure-resource-manager-templates-with-visual-studio-code"></a>Démarrage rapide : Créer des modèles Azure Resource Manager avec Visual Studio Code
+# <a name="quickstart-create-arm-templates-with-visual-studio-code"></a>Démarrage rapide : Créer des modèles ARM avec Visual Studio Code
 
-Les outils Azure Resource Manager pour Visual Studio Code fournissent une prise en charge des langages, des extraits de code de ressources et l’autocomplétion des ressources. Ces outils permettent de créer et de valider des modèles Azure Resource Manager. Dans ce guide de démarrage rapide, vous allez utiliser l’extension qui permet de créer un modèle Azure Resource Manager de zéro. Ainsi, vous découvrirez les fonctionnalités de l’extension telles que les extraits de code des modèles ARM, la validation, l’autocomplétion et la prise en charge des fichiers de paramètres.
+Les outils Azure Resource Manager pour Visual Studio Code fournissent une prise en charge des langages, des extraits de code de ressources et l’autocomplétion des ressources. Ces outils permettent de créer et de valider des modèles ARM (Azure Resource Manager). Dans ce guide de démarrage rapide, vous allez utiliser l’extension qui permet de créer un modèle ARM à partir de zéro. Ainsi, vous découvrirez les fonctionnalités de l’extension telles que les extraits de code des modèles ARM, la validation, l’autocomplétion et la prise en charge des fichiers de paramètres.
 
-Pour suivre ce guide de démarrage rapide, vous avez besoin de [Visual Studio Code](https://code.visualstudio.com/), ainsi que de l’[extension Outils Azure Resource Manager](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools). Vous avez également besoin soit d’[Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest), soit du [module Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-3.7.0), que vous devez authentifier après leur installation.
+Pour suivre ce guide de démarrage rapide, vous avez besoin de [Visual Studio Code](https://code.visualstudio.com/), ainsi que de l’[extension Outils Azure Resource Manager](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools). Vous avez également besoin soit d’[Azure CLI](/cli/azure/?view=azure-cli-latest), soit du [module Azure PowerShell](/powershell/azure/new-azureps-module-az?view=azps-3.7.0), que vous devez authentifier après leur installation.
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
@@ -26,7 +26,7 @@ Dans Visual Studio Code, créez puis ouvrez avec un fichier nommé *azuredeploy.
 
 Sélectionnez `arm!` pour créer un modèle limité à un déploiement de groupe de ressources Azure.
 
-![Image montrant la génération de modèles automatique Azure Resource Manager](./media/quickstart-create-templates-use-visual-studio-code/1.png)
+![Image montrant des extraits de code génération de modèles automatique Azure Resource Manager](./media/quickstart-create-templates-use-visual-studio-code/1.png)
 
 Cet extrait de code crée la base d’un modèle ARM.
 
@@ -54,7 +54,7 @@ Vous pouvez utiliser la touche de **tabulation** pour parcourir les propriétés
 
 ## <a name="completion-and-validation"></a>Autocomplétion et validation
 
-L’une des fonctionnalités les plus puissantes de l’extension est son intégration aux schémas Azure. Les schémas Azure permettent à l’extension de bénéficier de fonctionnalités comme la validation et l’autocomplétion des ressources. Nous allons modifier le compte de stockage pour voir à quoi ressemble la validation et l’autocomplétion. 
+L’une des fonctionnalités les plus puissantes de l’extension est son intégration aux schémas Azure. Les schémas Azure permettent à l’extension de bénéficier de fonctionnalités comme la validation et l’autocomplétion des ressources. Nous allons modifier le compte de stockage pour voir à quoi ressemble la validation et l’autocomplétion.
 
 Tout d’abord, mettez à jour le type de compte de stockage avec une valeur non valide, par exemple `megaStorage`. Notez que cette action génère un avertissement indiquant que `megaStorage` n’est pas une valeur valide.
 
@@ -68,7 +68,7 @@ Pour utiliser les fonctionnalités d’autocomplétion, supprimez `megaStorage`,
 
 À présent, vous allez créer et utiliser un paramètre pour spécifier le nom du compte de stockage.
 
-Placez votre curseur dans le bloc de paramètres, ajoutez un retour chariot, tapez `par`, puis sélectionnez l’extrait de code `arm-param-value`. Cette action ajoute un paramètre générique au modèle.
+Placez votre curseur dans le bloc de paramètres, ajoutez un retour chariot, tapez `"`, puis sélectionnez l’extrait de code `new-parameter`. Cette action ajoute un paramètre générique au modèle.
 
 ![Image montrant un paramètre en train d’être ajouté au modèle ARM](./media/quickstart-create-templates-use-visual-studio-code/9.png)
 
@@ -80,7 +80,7 @@ Le nom d’un compte de stockage Azure doit être constitué de 3 à 24 caract
 
 ![Image montrant l’ajout de minLength et de maxLength à un paramètre de modèle ARM](./media/quickstart-create-templates-use-visual-studio-code/11.png)
 
-Maintenant, dans la ressource de stockage, mettez à jour la propriété Name pour utiliser le paramètre. Pour cela, supprimez le nom actuel. Entrez un guillemet double et un crochet ouvrant (`[`) pour afficher une liste de fonctions de modèle ARM. Sélectionnez *parameters* dans la liste. 
+Maintenant, dans la ressource de stockage, mettez à jour la propriété Name pour utiliser le paramètre. Pour cela, supprimez le nom actuel. Entrez un guillemet double et un crochet ouvrant (`[`) pour afficher une liste de fonctions de modèle ARM. Sélectionnez *parameters* dans la liste.
 
 ![Image montrant l’autocomplétion lors de l’utilisation de paramètres dans les ressources du modèle ARM](./media/quickstart-create-templates-use-visual-studio-code/12.png)
 
@@ -102,7 +102,7 @@ Sélectionnez `New` > `All Parameters`, puis sélectionnez un nom et un emplacem
 
 Cette action crée un fichier de paramètres et le mappe avec le modèle à partir duquel il a été créé. Vous pouvez voir et modifier le mappage actuel entre le modèle et le fichier de paramètres dans la barre d’état Visual Studio Code lorsque vous sélectionnez le modèle en question.
 
-![](./media/quickstart-create-templates-use-visual-studio-code/16.png)
+![Image montrant le mappage de fichier de modèle/paramètre dans la barre d’état de Visual Studio Code.](./media/quickstart-create-templates-use-visual-studio-code/16.png)
 
 Maintenant que le fichier de paramètres a été mappé au modèle, l’extension valide à la fois le modèle et le fichier de paramètres. Pour voir cette validation à l’œuvre, ajoutez une valeur à deux caractères au paramètre `storageAccountName` dans le fichier de paramètres, puis enregistrez le fichier.
 

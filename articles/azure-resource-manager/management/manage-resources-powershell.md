@@ -5,12 +5,12 @@ author: mumian
 ms.topic: conceptual
 ms.date: 02/11/2019
 ms.author: jgao
-ms.openlocfilehash: de6f24ea66ef41b5ee4bfdda5948de9639f10a51
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce3b1d9f8d01e722e4ec5078d92ef4148072da25
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75476651"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185740"
 ---
 # <a name="manage-azure-resources-by-using-azure-powershell"></a>Gérer les ressources Azure à l’aide d’Azure PowerShell
 
@@ -59,11 +59,11 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 
 ## <a name="deploy-a-resource-group-and-resources"></a>Déployer un groupe de ressources et des ressources
 
-Vous pouvez créer un groupe de ressources et y déployer des ressources. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-group-and-resources).
+Vous pouvez créer un groupe de ressources et y déployer des ressources. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-groups).
 
 ## <a name="deploy-resources-to-multiple-subscriptions-or-resource-groups"></a>Déployer des ressources sur plusieurs abonnements ou groupes de ressources
 
-En général, vous déployez toutes les ressources dans votre modèle sur un seul groupe de ressources. Toutefois, il existe des scénarios dans lesquels vous pouvez souhaitez déployer un ensemble de ressources, tout en les plaçant dans différents groupes de ressources ou abonnements. Pour plus d’informations, consultez [Déployer des ressources Azure sur plusieurs abonnements ou groupes de ressources](../templates/cross-resource-group-deployment.md).
+En général, vous déployez toutes les ressources dans votre modèle sur un seul groupe de ressources. Toutefois, il existe des scénarios dans lesquels vous pouvez souhaitez déployer un ensemble de ressources, tout en les plaçant dans différents groupes de ressources ou abonnements. Pour plus d’informations, consultez [Déployer des ressources Azure sur plusieurs abonnements ou groupes de ressources](../templates/deploy-to-resource-group.md).
 
 ## <a name="delete-resources"></a>Supprimer des ressources
 
@@ -133,11 +133,11 @@ Le balisage facilite l’organisation logique des ressources et du groupe de res
 
 ## <a name="manage-access-to-resources"></a>Gérer l’accès aux ressources
 
-Le [contrôle d’accès en fonction du rôle (RBAC)](../../role-based-access-control/overview.md) est la façon dont vous gérez l’accès aux ressources dans Azure. Pour plus d'informations, consultez [Gérer l'accès avec RBAC et Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
+Le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/overview.md) vous permet de gérer l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour vous familiariser avec Azure Resource Manager, consultez [Vue d’ensemble d’Azure Resource Manager](overview.md).
 - Pour vous familiariser avec la syntaxe des modèles Resource Manager, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../templates/template-syntax.md).
-- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](/azure/azure-resource-manager/).
+- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](../index.yml).
 - Pour accéder aux schémas liés aux modèles Azure Resource Manager, consultez [Informations de référence sur les modèles](/azure/templates/).

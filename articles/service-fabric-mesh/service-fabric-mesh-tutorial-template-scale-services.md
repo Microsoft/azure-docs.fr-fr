@@ -1,17 +1,17 @@
 ---
 title: Tutoriel - Mettre à l’échelle une application s’exécutant dans Azure Service Fabric Mesh
 description: Dans ce didacticiel, vous allez découvrir comment mettre à l’échelle les services d’une application en cours d’exécution dans Service Fabric Mesh.
-author: dkkapur
+author: georgewallace
 ms.topic: tutorial
 ms.date: 01/11/2019
-ms.author: dekapur
-ms.custom: mvc, devcenter
-ms.openlocfilehash: 1b9070e826c30bbeafdee4185ea45cfb53d9efd2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: gwallace
+ms.custom: mvc, devcenter, devx-track-azurecli
+ms.openlocfilehash: df28083a0522178b7327d9f6d24029d303e417a1
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75351819"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747870"
 ---
 # <a name="tutorial-scale-an-application-running-in-service-fabric-mesh"></a>Tutoriel : Mettre à l’échelle une application en cours d’exécution dans Service Fabric Mesh
 
@@ -88,7 +88,7 @@ Enregistrez les modifications apportées au fichier de paramètres.  Les paramè
     }
 ```
 
-La propriété *replicaCount* du service WebFrontEnd fait référence au paramètre *frontEndReplicaCount*, tandis que la propriété *replicaCount* du service ToDoService fait référence au paramètre *serviceReplicaCount* :
+La propriété *replicaCount* du service WebFrontEnd fait référence au paramètre *frontEndReplicaCount* , tandis que la propriété *replicaCount* du service ToDoService fait référence au paramètre *serviceReplicaCount* :
 
 ```json
     "services": [

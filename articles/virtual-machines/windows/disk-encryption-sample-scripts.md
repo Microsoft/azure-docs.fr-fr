@@ -4,39 +4,51 @@ description: Cet article constitue l’annexe de Microsoft Azure Disk Encryption
 author: msmbaldwin
 ms.service: virtual-machines-windows
 ms.subservice: security
-ms.topic: article
+ms.topic: how-to
 ms.author: mbaldwin
 ms.date: 08/06/2019
 ms.custom: seodec18
-ms.openlocfilehash: e5e0a970df680df43a7bd303636b3d81bda3e141
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 255e284cf8d54a9be59f09f5613cb2728417d234
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82085703"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92912036"
 ---
 # <a name="azure-disk-encryption-sample-scripts"></a>Exemples de scripts Azure Disk Encryption 
 
 Cet article fournit des exemples de scripts pour la préparation de disques durs virtuels préchiffrés et d’autres tâches.
 
+> [!NOTE]
+> Sauf mention contraire, tous les scripts font référence à la dernière version hors AAD d’ADE.
+
+## <a name="sample-powershell-scripts-for-azure-disk-encryption"></a>Exemples de scripts PowerShell pour Azure Disk Encryption 
+
+
+- **Répertorier toutes les machines virtuelles chiffrées dans votre abonnement**
+
+  Vous pouvez rechercher toutes les machines virtuelles chiffrées avec ADE et la version de l’extension, dans tous les groupes de ressources d’un abonnement, à l’aide de [ce script PowerShell](https://raw.githubusercontent.com/Azure/azure-powershell/master/src/Compute/Compute/Extension/AzureDiskEncryption/Scripts/Find_1passAdeVersion_VM.ps1).
+
+  À l’inverse, ces cmdlets affichent toutes les machines virtuelles chiffrées avec ADE (sans la version de l’extension) :
+
+    ```azurepowershell-interactive
+    $osVolEncrypted = {(Get-AzVMDiskEncryptionStatus -ResourceGroupName $_.ResourceGroupName -VMName $_.Name).OsVolumeEncrypted}
+    $dataVolEncrypted= {(Get-AzVMDiskEncryptionStatus -ResourceGroupName $_.ResourceGroupName -VMName $_.Name).DataVolumesEncrypted}
+    Get-AzVm | Format-Table @{Label="MachineName"; Expression={$_.Name}}, @{Label="OsVolumeEncrypted"; Expression=$osVolEncrypted}, @{Label="DataVolumesEncrypted"; Expression=$dataVolEncrypted}
+    ```
+
+- **Répertorier toutes les instances VMSS chiffrées de votre abonnement**
+    
+    Vous pouvez rechercher toutes les instances VMSS chiffrées avec ADE et la version de l’extension, dans tous les groupes de ressources d’un abonnement, à l’aide de [ce script PowerShell](https://raw.githubusercontent.com/Azure/azure-powershell/master/src/Compute/Compute/Extension/AzureDiskEncryption/Scripts/Find_1passAdeVersion_VMSS.ps1).
  
-
-## <a name="list-vms-and-secrets"></a>Afficher la liste des machines virtuelles et des secrets
-
-Affichez la liste complète des machines virtuelles chiffrées dans votre abonnement :
-
-```azurepowershell-interactive
-$osVolEncrypted = {(Get-AzVMDiskEncryptionStatus -ResourceGroupName $_.ResourceGroupName -VMName $_.Name).OsVolumeEncrypted}
-$dataVolEncrypted= {(Get-AzVMDiskEncryptionStatus -ResourceGroupName $_.ResourceGroupName -VMName $_.Name).DataVolumesEncrypted}
-Get-AzVm | Format-Table @{Label="MachineName"; Expression={$_.Name}}, @{Label="OsVolumeEncrypted"; Expression=$osVolEncrypted}, @{Label="DataVolumesEncrypted"; Expression=$dataVolEncrypted}
-```
-Affichez la liste complète des secrets de chiffrement de disque utilisés pour chiffrer les machines virtuelles dans un coffre de clés :
+- **Répertorier tous les secrets de chiffrement de disque utilisées pour chiffrer les machines virtuelles dans un coffre de clés**
 
 ```azurepowershell-interactive
 Get-AzKeyVaultSecret -VaultName $KeyVaultName | where {$_.Tags.ContainsKey('DiskEncryptionKeyFileName')} | format-table @{Label="MachineName"; Expression={$_.Tags['MachineName']}}, @{Label="VolumeLetter"; Expression={$_.Tags['VolumeLetter']}}, @{Label="EncryptionKeyURL"; Expression={$_.Id}}
 ```
 
-## <a name="the-azure-disk-encryption-prerequisites-scripts"></a>Scripts des prérequis Azure Disk Encryption
+### <a name="using-the-azure-disk-encryption-prerequisites-powershell-script"></a>Utilisation du script PowerShell des prérequis Azure Disk Encryption
+
 Si vous êtes déjà familiarisé avec les prérequis d’Azure Disk Encryption, vous pouvez utiliser le [script PowerShell des prérequis d’Azure Disk Encryption](https://raw.githubusercontent.com/Azure/azure-powershell/master/src/Compute/Compute/Extension/AzureDiskEncryption/Scripts/AzureDiskEncryptionPreRequisiteSetup.ps1 ). Vous trouverez un exemple d’utilisation de ce script PowerShell dans [Démarrage rapide du chiffrement d’une machine virtuelle](disk-encryption-powershell-quickstart.md). Vous pouvez supprimer les commentaires d’une section du script, en commençant à la ligne 211, pour chiffrer tous les disques des machines virtuelles d’un groupe de ressources existant. 
 
 Le tableau suivant présente les paramètres pouvant être utilisés dans le script PowerShell : 
@@ -76,22 +88,30 @@ Configurez le paramètre de stratégie de groupe BitLocker **Chiffrement de lect
 ### <a name="install-bitlocker-feature-components"></a>Installer les composants de fonctionnalité BitLocker
 Pour Windows Server 2012 ou version ultérieure, utilisez la commande suivante :
 
-    dism /online /Enable-Feature /all /FeatureName:BitLocker /quiet /norestart
+```console
+dism /online /Enable-Feature /all /FeatureName:BitLocker /quiet /norestart
+```
 
 Pour Windows Server 2008 R2, utilisez la commande suivante :
 
-    ServerManagerCmd -install BitLockers
+```console
+ServerManagerCmd -install BitLockers
+```
 
 ### <a name="prepare-the-os-volume-for-bitlocker-by-using-bdehdcfg"></a>Préparer le volume du système d’exploitation pour BitLocker à l’aide de `bdehdcfg`
-Pour compresser la partition du système d’exploitation et préparer la machine pour BitLocker, exécutez si nécessaire [bdehdcfg](https://docs.microsoft.com/windows/security/information-protection/bitlocker/bitlocker-basic-deployment) :
+Pour compresser la partition du système d’exploitation et préparer la machine pour BitLocker, exécutez si nécessaire [bdehdcfg](/windows/security/information-protection/bitlocker/bitlocker-basic-deployment) :
 
-    bdehdcfg -target c: shrink -quiet 
+```console
+bdehdcfg -target c: shrink -quiet 
+```
 
 ### <a name="protect-the-os-volume-by-using-bitlocker"></a>Protéger le volume du système d’exploitation à l’aide de BitLocker
-Utilisez la commande [`manage-bde`](https://technet.microsoft.com/library/ff829849.aspx) pour activer le chiffrement sur le volume de démarrage à l’aide d’un protecteur de clé externe. Placez également la clé externe (fichier .bek) sur le disque ou le volume externe. Le chiffrement sera activé sur le volume système/de démarrage au prochain redémarrage.
+Utilisez la commande [`manage-bde`](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/ff829849(v=ws.11)) pour activer le chiffrement sur le volume de démarrage à l’aide d’un protecteur de clé externe. Placez également la clé externe (fichier .bek) sur le disque ou le volume externe. Le chiffrement sera activé sur le volume système/de démarrage au prochain redémarrage.
 
-    manage-bde -on %systemdrive% -sk [ExternalDriveOrVolume]
-    reboot
+```console
+manage-bde -on %systemdrive% -sk [ExternalDriveOrVolume]
+reboot
+```
 
 > [!NOTE]
 > Préparez la machine virtuelle avec un disque dur virtuel de données/de ressources distinct pour obtenir la clé externe à l’aide de BitLocker.
@@ -142,7 +162,7 @@ Utilisez [Set-AzKeyVaultSecret](/powershell/module/az.keyvault/set-azkeyvaultsec
 Utilisez `$secretUrl` à l’étape suivante pour [attacher le lecteur du système d’exploitation sans utiliser de clé de chiffrement à clé](#without-using-a-kek).
 
 ### <a name="disk-encryption-secret-encrypted-with-a-kek"></a>Disque chiffré avec une clé secrète de chiffrement de disque à clé KEK
-Avant de télécharger la clé secrète dans le coffre de clés, vous pouvez éventuellement la chiffrer à l’aide d’une clé de chiffrement à clé. Utilisez [l’API](https://msdn.microsoft.com/library/azure/dn878066.aspx) de retour à la ligne pour chiffrer d’abord la clé secrète à l’aide de la clé de chiffrement à clé. La sortie de cette opération de retour à la ligne est une chaîne d’URL encodée en base64 que vous pouvez ensuite charger comme clé secrète à l’aide de l’applet de commande [`Set-AzKeyVaultSecret`](/powershell/module/az.keyvault/set-azkeyvaultsecret).
+Avant de télécharger la clé secrète dans le coffre de clés, vous pouvez éventuellement la chiffrer à l’aide d’une clé de chiffrement à clé. Utilisez [l’API](/rest/api/keyvault/wrapkey) de retour à la ligne pour chiffrer d’abord la clé secrète à l’aide de la clé de chiffrement à clé. La sortie de cette opération de retour à la ligne est une chaîne d’URL encodée en base64 que vous pouvez ensuite charger comme clé secrète à l’aide de l’applet de commande [`Set-AzKeyVaultSecret`](/powershell/module/az.keyvault/set-azkeyvaultsecret).
 
 ```powershell
     # This is the passphrase that was provided for encryption during the distribution installation

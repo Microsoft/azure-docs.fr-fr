@@ -1,21 +1,21 @@
 ---
 title: 'Démarrage rapide : Créer une clé LUIS'
 titleSuffix: Azure Cognitive Services
-description: Dans ce guide de démarrage rapide, vous allez apprendre à créer une application LUIS et à obtenir une clé.
+description: Dans ce guide de démarrage rapide, vous découvrez comment créer une application LUIS et obtenir une clé.
 services: cognitive-services
 author: trevorbye
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: tutorial
-ms.date: 02/10/2020
+ms.date: 06/25/2020
 ms.author: trbye
-ms.openlocfilehash: df12b51020083489d431d0ebcd7eb506ef97caa2
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: f547b353091cc81816f0974fced8d4dc836d22b2
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81400850"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95023818"
 ---
 # <a name="quickstart-getting-a-luis-endpoint-key"></a>Démarrage rapide : Obtention d’une clé de point de terminaison LUIS
 
@@ -37,7 +37,7 @@ LUIS utilise trois types de clés :
 |Starter|Permet de tester l’application LUIS en utilisant uniquement du texte|
 |Point de terminaison |Autorise l’accès à une application LUIS particulière|
 
-Pour ce tutoriel, vous avez besoin du type de clé du point de terminaison. Ce tutoriel utilise l’exemple d’application domotique LUIS Home Automation, que vous pouvez créer en suivant le guide de démarrage rapide [Utiliser une application domotique prédéfinie](https://docs.microsoft.com/azure/cognitive-services/luis/luis-get-started-create-app). Si vous avez créé votre propre application LUIS, vous pouvez aussi l’utiliser.
+Pour ce tutoriel, vous avez besoin du type de clé du point de terminaison. Ce tutoriel utilise l’exemple d’application domotique LUIS Home Automation, que vous pouvez créer en suivant le guide de démarrage rapide [Utiliser une application domotique prédéfinie](../../luis/luis-get-started-create-app.md). Si vous avez créé votre propre application LUIS, vous pouvez aussi l’utiliser.
 
 Lors de la création d’une application LUIS, une clé de démarrage est générée automatiquement par LUIS pour que vous puissiez tester l’application à l’aide de requêtes de texte. Cette clé n’active pas l’intégration du service Speech et ne fonctionne pas avec ce tutoriel. Créez une ressource LUIS dans le tableau de bord Azure et affectez-la à l’application LUIS. Vous pouvez utiliser le niveau d’abonnement gratuit pour ce tutoriel.
 

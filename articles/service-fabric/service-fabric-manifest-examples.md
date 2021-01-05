@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 06/11/2018
 ms.author: pepogors
 ms.openlocfilehash: 6f44d2ddaac11545a3a3dc52fd20e02263c6ad67
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75451637"
 ---
 # <a name="service-fabric-application-and-service-manifest-examples"></a>Exemples de manifestes de services et d’applications Service Fabric

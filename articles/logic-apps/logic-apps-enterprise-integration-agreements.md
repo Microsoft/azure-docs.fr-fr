@@ -9,11 +9,11 @@ ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 06/22/2019
 ms.openlocfilehash: c8cbfb619c9eed325161503f705bf5c4c0746265
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612331"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95992934"
 ---
 # <a name="create-and-manage-trading-partner-agreements-in-azure-logic-apps"></a>Créer et gérer des contrats de partenariat commercial dans Azure Logic Apps
 

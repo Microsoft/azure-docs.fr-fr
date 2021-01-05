@@ -15,12 +15,12 @@ ms.date: 05/21/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6f5d3125b7b77e8ce7a943f640c44615049ab160
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8f1d1bf35d03f0f7c4d11e4cc7e9b6f98f38d8ab
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60455782"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997696"
 ---
 # <a name="user-privacy-and-azure-ad-connect"></a>Confidentialité des utilisateurs et Azure AD Connect 
 
@@ -43,7 +43,7 @@ Un serveur de synchronisation Azure AD Connect stocke les données de confidenti
 
 Les clients Azure AD Connect doivent respecter les directives suivantes lors de la suppression de données utilisateur :
 1.  Supprimer régulièrement le contenu du dossier où se trouvent les fichiers journaux de l’installation Azure AD Connect (au moins toutes les 48 heures)
-2.  Ce produit peut également créer des journaux d’activité d’événements.  Pour plus d’informations sur les journaux d’activité d’événements, consultez [cette documentation](https://msdn.microsoft.com/library/windows/desktop/aa385780.aspx).
+2.  Ce produit peut également créer des journaux d’activité d’événements.  Pour plus d’informations sur les journaux d’activité d’événements, consultez [cette documentation](/windows/win32/wes/windows-event-log).
 
 Les données relatives à un individu sont automatiquement supprimées de la base de données Azure AD Connect lorsqu’elles sont supprimées du système source dont elles proviennent. L’obtention de la conformité RGPD ne nécessite aucune action de la part des administrateurs.  Toutefois, elle nécessite que les données d’Azure AD Connect soient synchronisées avec votre source de données au moins tous les deux jours.
 

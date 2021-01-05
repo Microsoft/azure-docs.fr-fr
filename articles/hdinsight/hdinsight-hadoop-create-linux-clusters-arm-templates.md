@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 04/07/2020
-ms.openlocfilehash: 67d5481b82b7469c5ae55704768ce494dbc9dca5
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: aa42e9691eac223e7e72da0d792d14262470e15c
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80879137"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92748772"
 ---
 # <a name="create-apache-hadoop-clusters-in-hdinsight-by-using-resource-manager-templates"></a>Créer des clusters Apache Hadoop dans HDInsight avec des modèles Resource Manager
 
@@ -51,11 +51,11 @@ Vous pouvez déployer un modèle Resource Manager à l’aide du portail Azure. 
 
 ## <a name="deploy-using-powershell"></a>Déployer à l’aide de PowerShell
 
-Vous pouvez déployer un modèle Resource Manager à l’aide d’Azure PowerShell. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure PowerShell](../azure-resource-manager/resource-manager-powershell-sas-token.md).
+Vous pouvez déployer un modèle Resource Manager à l’aide d’Azure PowerShell. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure PowerShell](../azure-resource-manager/templates/secure-template-with-sas-token.md).
 
 ## <a name="deploy-using-azure-cli"></a>Déployer à l’aide d’Azure CLI
 
-Vous pouvez déployer un modèle Resource Manager à l’aide d’Azure CLI. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../azure-resource-manager/templates/deploy-cli.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure CLI](../azure-resource-manager/resource-manager-cli-sas-token.md).
+Vous pouvez déployer un modèle Resource Manager à l’aide d’Azure CLI. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../azure-resource-manager/templates/deploy-cli.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure CLI](../azure-resource-manager/templates/secure-template-with-sas-token.md).
 
 ## <a name="deploy-using-the-rest-api"></a>Procéder à un déploiement à l’aide de l’API REST
 
@@ -78,6 +78,6 @@ Cet article vous a présenté différentes méthodes pour créer un cluster HDIn
 * Pour obtenir plus de modèles associés à HDInsight, consultez [Modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/?term=hdinsight).
 * Pour découvrir un exemple de déploiement de ressources par le biais de la bibliothèque cliente .NET, consultez la page [Déployer des ressources avec des bibliothèques .NET et un modèle](../virtual-machines/windows/csharp-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 * Pour obtenir un exemple détaillé de déploiement d’une application, consultez [Approvisionner et déployer des microservices de manière prévisible dans Azure](../app-service/deploy-complex-application-predictably.md).
-* Pour obtenir des instructions sur le déploiement de votre solution dans différents environnements, consultez [Environnements de développement et de test dans Microsoft Azure](../solution-dev-test-environments.md).
+* Pour obtenir des instructions sur le déploiement de votre solution dans différents environnements, consultez [Environnements de développement et de test dans Microsoft Azure](../devtest-labs/devtest-lab-overview.md).
 * Pour en savoir plus sur les sections du modèle Azure Resource Manager, consultez [Création de modèles](../azure-resource-manager/templates/template-syntax.md).
 * Pour obtenir la liste des fonctions que vous pouvez utiliser dans un modèle Azure Resource Manager, voir [Fonctions des modèles](../azure-resource-manager/templates/template-functions.md).

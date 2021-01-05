@@ -3,17 +3,17 @@ title: Convertir un Peering Exchange hérité en ressource Azure à l’aide du 
 titleSuffix: Azure
 description: Convertir un Peering Exchange hérité en ressource Azure à l’aide du Portail Azure
 services: internet-peering
-author: prmitiki
+author: derekolo
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
-ms.author: prmitiki
-ms.openlocfilehash: 87a7a6bca608f1748d3b659eabdc3e941b537377
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 5/21/2020
+ms.author: derekol
+ms.openlocfilehash: 6249d68486af754f2d2980aaed9d5fd8287dcb5e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81678515"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84700159"
 ---
 # <a name="convert-a-legacy-exchange-peering-to-an-azure-resource-by-using-the-azure-portal"></a>Convertir un Peering Exchange hérité en ressource Azure à l’aide du Portail Azure
 
@@ -26,15 +26,30 @@ Si vous préférez, vous pouvez suivre ce guide en utilisant [PowerShell](howto-
 
 ## <a name="convert-a-legacy-exchange-peering-to-an-azure-resource"></a>Convertir un Peering Exchange hérité en ressource Azure
 
-### <a name="sign-in-to-the-portal-and-select-your-subscription"></a>Se connecter au portail et sélectionner votre abonnement
-[!INCLUDE [Account](./includes/account-portal.md)]
+En tant que fournisseur Internet Exchange, vous pouvez créer une requête Peering Exchange en [créant un Peering]( https://go.microsoft.com/fwlink/?linkid=2129593).
 
-### <a name="convert-legacy-exchange-peering"></a><a name=create></a>Convertir le peering Exchange hérité
+1. Dans la page **Créer un Peering**, sur l’onglet **De base**, remplissez les cases comme illustré ici :
 
-Vous pouvez convertir des connexions de Peering héritées à l’aide de la ressource **Peering**.
+   ![Inscrire Peering Service](./media/setup-basics-tab.png)
 
-#### <a name="launch-the-resource-and-configure-basic-settings"></a>Lancer la ressource et configurer les paramètres de base
-[!INCLUDE [direct-peering-basic](./includes/direct-portal-basic.md)]
+* Sélectionnez votre abonnement Azure.
+
+* Pour le groupe de ressources, sélectionnez un groupe de ressources existant dans la liste déroulante ou créez un nouveau groupe en sélectionnant Créer nouveau. Dans cet exemple, ,nous allons créer un nouveau groupe de ressources.
+
+* Le nom correspond au nom de la ressource et vous pouvez le choisir librement.
+
+* La région est sélectionnée automatiquement si vous avez choisi un groupe de ressources existant. Si vous avez choisi de créer un nouveau groupe de ressources, vous devez également choisir la région Azure dans laquelle vous souhaitez que la ressource réside.
+
+  >[!NOTE]
+  >La région dans laquelle un groupe de ressources réside est indépendante de l’emplacement où vous souhaitez créer le Peering avec Microsoft. Toutefois, il est recommandé d’organiser vos ressources de Peering dans des groupes de ressources qui résident dans les régions Azure les plus proches. Par exemple : pour les Peerings à Ashburn, vous pouvez créer un groupe de ressources dans les régions USA Est ou USA Est2.
+
+* Sélectionnez votre ASN dans la boîte **PeerASN**.
+
+  >[!IMPORTANT]  
+  >Vous pouvez uniquement choisir un ASN dont le paramètre ValidationState est « approuvé » avant de soumettre une demande de Peering. Si vous venez d’envoyer votre demande PeerAsn, patientez environ 12 heures pour que l’association ASN soit « approuvée ». Si l’ASN que vous sélectionnez est en attente de validation, un message d’erreur s’affiche. Si vous ne voyez pas l’ASN que vous devez choisir, vérifiez que vous avez sélectionné le bon abonnement. Si c’est le cas, vérifiez si vous avez déjà créé PeerAsn à l’aide de **[l’association du numéro ASN de l’homologue à un abonnement Azure](https://go.microsoft.com/fwlink/?linkid=2129592)** .
+
+* Sélectionnez **Suivant : Configuration** pour continuer.
+
 
 #### <a name="configure-connections-and-submit"></a>Configurer les connexions et les soumettre
 [!INCLUDE [exchange-peering-configuration](./includes/exchange-portal-configuration-legacy.md)]

@@ -1,23 +1,23 @@
 ---
-title: Travailler avec des serveurs proxy locaux existants et Azure AD | Microsoft Docs
-description: Explique comment travailler avec des serveurs proxy locaux existants.
+title: Travailler avec des serveurs proxy locaux existants et Azure Active Directory
+description: Explique comment travailler avec des serveurs proxy locaux existants avec Azure Active Directory.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/07/2020
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0aafb971ca1ce812a68045f7d0c0c2ab7f532133
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.custom: contperf-fy21q2
+ms.openlocfilehash: 808357b95f4de904ead0741d848480d548a2e26a
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80877386"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97030074"
 ---
 # <a name="work-with-existing-on-premises-proxy-servers"></a>Travailler avec des serveurs proxy locaux existants
 
@@ -111,18 +111,19 @@ Il y a quatre aspects à prendre en compte au niveau du proxy sortant :
 
 Autorisez l'accès aux URL suivantes :
 
-| URL | Utilisation |
-| --- | --- |
-| \*.msappproxy.net<br>\*.servicebus.windows.net | Communication entre le connecteur et le service cloud Proxy d'application |
-| mscrl.microsoft.com:80<br>crl.microsoft.com:80<br>ocsp.msocsp.com:80<br>www.microsoft.com:80 | Le connecteur utilise ces URL pour vérifier les certificats |
-| login.windows.net<br>secure.aadcdn.microsoftonline-p.com<br>*.microsoftonline.com<br>* .microsoftonline-p.com<br>*.msauth.net<br>* .msauthimages.net<br>*.msecnd.net<br>* .msftauth.net<br>*.msftauthimages.net<br>* .phonefactor.net<br>enterpriseregistration.windows.net<br>management.azure.com<br>policykeyservice.dc.ad.msft.net<br>ctdl.windowsupdate.com:80 | Le connecteur utilise ces URL lors du processus d'inscription. |
+| URL | Port |  Utilisation |
+| --- | --- | --- |
+| &ast;.msappproxy.net<br>&ast;.servicebus.windows.net | 443/HTTPS | Communication entre le connecteur et le service cloud Proxy d'application |
+| crl3.digicert.com<br>crl4.digicert.com<br>ocsp.digicert.com<br>crl.microsoft.com<br>oneocsp.microsoft.com<br>ocsp.msocsp.com<br> | 80/HTTP | Le connecteur utilise ces URL pour vérifier les certificats. |
+| login.windows.net<br>secure.aadcdn.microsoftonline-p.com<br>&ast;.microsoftonline.com<br>&ast;.microsoftonline-p.com<br>&ast;.msauth.net<br>&ast;.msauthimages.net<br>&ast;.msecnd.net<br>&ast;.msftauth.net<br>&ast;.msftauthimages.net<br>&ast;.phonefactor.net<br>enterpriseregistration.windows.net<br>management.azure.com<br>policykeyservice.dc.ad.msft.net<br>ctldl.windowsupdate.com | 443/HTTPS | Le connecteur utilise ces URL lors du processus d'inscription. |
+| ctldl.windowsupdate.com | 80/HTTP | Le connecteur utilise cette URL lors du processus d'inscription. |
 
-Si votre pare-feu ou proxy vous permet de configurer la mise en liste verte de DN, vous pouvez autoriser les connexions à \*.msappproxy.net et \*.servicebus.windows.net. Si ce n’est pas le cas, vous devez autoriser l’accès aux [plages d’adresses IP du centre de données Azure](https://www.microsoft.com/download/details.aspx?id=41653). Ces dernières sont mises à jour chaque semaine.
+Si votre pare-feu ou proxy vous permet de configurer la mise en liste verte de DN, vous pouvez autoriser les connexions à \*.msappproxy.net et \*.servicebus.windows.net.
 
 Si vous ne pouvez pas autoriser la connectivité par le nom de domaine complet et devez spécifier des plages d’adresses IP à la place, utilisez ces options :
 
 * Autoriser l’accès sortant du connecteur vers toutes les destinations.
-* Autorisez l’accès sortant du connecteur à toutes les [plages d’adresses IP de centre de données Azure](https://www.microsoft.com//download/details.aspx?id=41653). Le problème lié à l’utilisation de la liste de plages d’adresses IP de centre de données Azure est qu’elle est mise à jour chaque semaine. Vous devez mettre un processus en place pour garantir que vos règles d’accès sont mises à jour en conséquence. La seule utilisation d’un sous-ensemble des adresses IP peut entraîner une rupture de votre configuration.
+* Autorisez l’accès sortant du connecteur à toutes les plages d’adresses IP de centre de données Azure. Le problème lié à l’utilisation de la liste de plages d’adresses IP de centre de données Azure est qu’elle est mise à jour chaque semaine. Vous devez mettre un processus en place pour garantir que vos règles d’accès sont mises à jour en conséquence. La seule utilisation d’un sous-ensemble des adresses IP peut entraîner une rupture de votre configuration. Pour télécharger les dernières plages d’adresses IP du centre de données Azure, accédez à [https://download.microsoft.com](https://download.microsoft.com) et recherchez « Balises de service et plages d’adresses IP Azure ». Veillez à sélectionner le cloud approprié. Par exemple, pour connaître les plages d’adresses IP du cloud public, recherchez « Balises de service et plages d’adresses IP Azure – Cloud public ». Vous trouverez le cloud US Government en recherchant « Balises de service et plages d’adresses IP Azure – Cloud US Goverment ».
 
 #### <a name="proxy-authentication"></a>Authentification du proxy
 
@@ -154,6 +155,9 @@ Pour ce faire, suivez les étapes suivantes :
 
 Ces paramètres font en sorte que le connecteur utilise le même proxy de transfert pour la communication avec Azure et avec l’application principale. Si le connecteur pour la communication avec Azure ne requiert pas de proxy de transfert ou requiert un proxy de transfert différent, vous pouvez le configurer en modifiant le fichier ApplicationProxyConnectorService.exe.config, comme décrit dans les sections Proxys sortants de contournement et Utiliser le serveur proxy sortant.
 
+> [!NOTE]
+> Il existe plusieurs façons de configurer le proxy Internet dans le système d’exploitation. Les paramètres de proxy configurés via NETSH WINHTTP (exécutez `NETSH WINHTTP SHOW PROXY` pour vérifier) remplacent les paramètres de proxy que vous avez configurés à l’étape 2. 
+
 Le service de mise à jour du connecteur utilisera également le proxy de la machine. Ce comportement peut être modifié en modifiant le fichier ApplicationProxyConnectorUpdaterService.exe.config.
 
 ## <a name="troubleshoot-connector-proxy-problems-and-service-connectivity-issues"></a>Résoudre les problèmes courants de proxy de connecteur et de connectivité du service
@@ -162,7 +166,10 @@ Vous devriez maintenant voir tout le trafic transitant par le proxy. Si vous ren
 
 Le meilleur moyen d’identifier et de résoudre les problèmes de connectivité de connecteur consiste à prendre une capture réseau au démarrage du service de connecteur. Voici quelques conseils rapides sur la capture et le filtrage de traces réseau.
 
-Vous pouvez utiliser l’outil de surveillance de votre choix. Dans le cadre de cet article, nous avons utilisé Microsoft Message Analyzer. Vous pouvez [le télécharger à partir de Microsoft](https://www.microsoft.com/download/details.aspx?id=44226).
+Vous pouvez utiliser l’outil de surveillance de votre choix. Dans le cadre de cet article, nous avons utilisé Microsoft Message Analyzer.
+
+> [!NOTE]
+> Le 25 novembre 2019, [Microsoft Message Analyzer (MMA) a été mis hors service](https://docs.microsoft.com/openspecs/blog/ms-winintbloglp/dd98b93c-0a75-4eb0-b92e-e760c502394f) et ses packages de téléchargement ont été supprimés des sites microsoft.com.  Aucune fonctionnalité Microsoft n'est actuellement en développement pour remplacer Microsoft Message Analyzer.  Pour bénéficier d'une fonctionnalité similaire, vous devez envisager d'utiliser un outil d'analyse de protocole réseau tiers tel que Wireshark.
 
 Les exemples suivants sont spécifiques de Message Analyser, mais les principes peuvent être appliqués à n’importe quel outil d’analyse.
 
@@ -204,4 +211,4 @@ Si vous voyez d’autres codes de réponse, comme 407 ou 502, cela signifie que 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Présentation des connecteurs de proxy d’application Azure AD](application-proxy-connectors.md)
-* Si vous avez des problèmes de connectivité du connecteur, posez votre question sur le [forum Azure Active Directory](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=WindowsAzureAD&forum=WindowsAzureAD) ou créez un ticket auprès de notre équipe de support.
+* Si vous avez des problèmes de connectivité du connecteur, posez votre question sur la [Page de questions Microsoft Q&A pour Azure Active Directory](/answers/topics/azure-active-directory.html) ou créez un ticket auprès de notre équipe de support.

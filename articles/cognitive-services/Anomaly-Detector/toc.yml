@@ -12,14 +12,6 @@
       items:
         - name: Bibliothèque de client Détecteur d’anomalies
           href: ./quickstarts/client-libraries.md
-    - name: API REST
-      items:
-        - name: 'Utilisation de C#'
-          href: quickstarts/detect-data-anomalies-csharp.md
-        - name: Utilisation de Java
-          href: quickstarts/detect-data-anomalies-java.md
-        - name: Utilisation de Python
-          href: quickstarts/detect-data-anomalies-python.md
 - name: Tutoriels
   items:
     - name: Visualiser les anomalies en lot avec Power BI
@@ -30,6 +22,8 @@
   items:
     - name: Identifier les anomalies de vos données
       href: how-to/identify-anomalies.md
+    - name: Déployer sur IoT Edge
+      href: how-to/deploy-anomaly-detection-on-iot-edge.md
     - name: Utiliser des conteneurs
       items:
         - name: Installer et exécuter des conteneurs
@@ -40,6 +34,8 @@
           displayName: 'docker, container, apikey, billing, log, mount, run, pull, port'
         - name: Utiliser des instances de conteneur
           href: how-to/deploy-anomaly-detection-on-container-instances.md
+        - name: Documentation sur les conteneurs Cognitive Services
+          href: ../containers/index.yml
 - name: Concepts
   items:
     - name: Bonnes pratiques concernant l’API Détecteur d’anomalies
@@ -69,21 +65,13 @@
         - name: Démonstration interactive
           href: 'https://aka.ms/adDemo'
         - name: Sur Jupyter Notebook
-          href: 'https://aka.ms/adNotebook'
+          href: 'https://github.com/Azure-Samples/AnomalyDetector/tree/master/ipython-notebook'
     - name: Livre blanc sur SR-CNN dans KDD 2019
       href: 'https://arxiv.org/abs/1906.03821'
 - name: Ressources
   items:
-    - name: Support
-      items:
-        - name: Obtenir de l’aide
-          href: 'https://aka.ms/adsupport'
-        - name: Stack Overflow
-          href: 'https://aka.ms/adso'
-        - name: MSDN
-          href: 'https://aka.ms/admsdn'
-        - name: User voice
-          href: 'https://aka.ms/aduservoice'
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/anomaly-detector/context/context
     - name: Tarifs
       href: 'https://aka.ms/adpricing'
     - name: Disponibilité régionale

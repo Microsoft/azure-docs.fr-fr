@@ -3,12 +3,12 @@ title: Adresse IP statique pour un groupe de conteneurs
 description: Créer un groupe de conteneurs dans un réseau virtuel et utiliser une passerelle d’application Azure pour exposer une adresse IP front-end statique à une application web conteneurisée
 ms.topic: article
 ms.date: 03/16/2020
-ms.openlocfilehash: 5c3a14f93af3ecc614dc296f0a4d2815d7a64a66
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bc128da0f4c2e92af98781cef45f48f9e8aeab31
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79481787"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260788"
 ---
 # <a name="expose-a-static-ip-address-for-a-container-group"></a>Exposer une adresse IP statique pour un groupe de conteneurs
 
@@ -17,7 +17,7 @@ Cet article illustre une façon d’exposer une adresse IP publique statique pou
 Dans cet article, vous utilisez Azure CLI pour créer les ressources de ce scénario :
 
 * Un réseau virtuel Azure.
-* Un groupe de conteneurs déployé [sur le réseau virtuel (préversion)](container-instances-vnet.md) qui héberge une petite application web
+* Un groupe de conteneurs déployé [sur le réseau virtuel](container-instances-vnet.md) qui héberge une petite application web
 * Une passerelle d’application avec une adresse IP front-end publique, un écouteur pour héberger un site web sur la passerelle et une route vers le groupe de conteneurs back-end
 
 Tant que la passerelle d’application s’exécute et que le groupe de conteneurs expose une adresse IP privée stable dans le sous-réseau délégué du réseau, le groupe de conteneurs est accessible à cette adresse IP publique.
@@ -103,7 +103,7 @@ ACI_IP=$(az container show \
 
 ## <a name="create-application-gateway"></a>Créer une passerelle Application Gateway
 
-Créez une passerelle d’application dans le réseau virtuel, en suivant les étapes décrites dans le [guide de démarrage rapide consacré aux passerelles d’application](../application-gateway/quick-create-cli.md). La commande [az network application-gateway create][az-network-application-gateway-create] suivante crée une passerelle avec une adresse IP front-end publique et une route vers le groupe de conteneurs back-end. Pour plus d’informations sur les paramètres de passerelle, consultez la [documentation Application Gateway](/azure/application-gateway/).
+Créez une passerelle d’application dans le réseau virtuel, en suivant les étapes décrites dans le [guide de démarrage rapide consacré aux passerelles d’application](../application-gateway/quick-create-cli.md). La commande [az network application-gateway create][az-network-application-gateway-create] suivante crée une passerelle avec une adresse IP front-end publique et une route vers le groupe de conteneurs back-end. Pour plus d’informations sur les paramètres de passerelle, consultez la [documentation Application Gateway](../application-gateway/index.yml).
 
 ```azurecli
 az network application-gateway create \

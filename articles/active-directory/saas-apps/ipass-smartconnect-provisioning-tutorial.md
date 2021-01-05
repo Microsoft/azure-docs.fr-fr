@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer iPass SmartConnect pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner des comptes d’utilisateur dans iPass SmartConnect.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 43d6de4a-b3a2-439b-95f2-8883fffded52
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: fb3a5d03f390b88f9856f03bdc97a35b845874ff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 405a7bc3b653ca7bca026d3318763a4922244e88
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057520"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97093704"
 ---
 # <a name="tutorial-configure-ipass-smartconnect-for-automatic-user-provisioning"></a>Tutoriel : Configurer iPass SmartConnect pour l’approvisionnement automatique d’utilisateurs
 
@@ -86,7 +82,7 @@ Avant de configurer iPass SmartConnect pour l’approvisionnement automatique d�
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans iPass SmartConnect en fonction des affectations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
->  Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour iPass SmartConnect en suivant les instructions fournies dans le [didacticiel sur l’authentification unique iPass SmartConnect](ipasssmartconnect-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+>  Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour iPass SmartConnect en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour iPass SmartConnect](ipasssmartconnect-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-ipass-smartconnect-in-azure-ad"></a>Pour configurer l’approvisionnement automatique d’utilisateurs pour iPass SmartConnect dans Azure AD :
 
@@ -100,11 +96,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://openmobile.ipass.com/moservices/scim/v1` dans **URL de locataire**. Entrez le jeton du porteur récupéré précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à iPass SmartConnect. Si la connexion échoue, vérifiez que votre compte iPass SmartConnect dispose des autorisations d’administrateur et réessayez.
 
@@ -118,11 +114,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur iPass SmartConnect**.
 
-    ![Mappages d’utilisateur iPass SmartConnect](media/ipass-smartconnect-provisioning-tutorial/usermapping.png)
+    :::image type="content" source="media/ipass-smartconnect-provisioning-tutorial/usermapping.png" alt-text="Capture d’écran de la section Mappages. Sous Nom, Synchroniser les utilisateurs Azure Active Directory avec iPass SmartConnect est visible." border="false":::
 
 9. Passez en revue les attributs utilisateur qui sont synchronisés d’Azure AD vers iPass SmartConnect dans la section **Mappage d’attributs**. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans iPass SmartConnect pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Mappages d’utilisateur iPass SmartConnect](media/ipass-smartconnect-provisioning-tutorial/userattribute.png)
+    :::image type="content" source="media/ipass-smartconnect-provisioning-tutorial/userattribute.png" alt-text="Capture d’écran de la page Mappages d’attributs. Un tableau liste les attributs Azure Active Directory et iPass SmartConnect et la priorité de correspondance." border="false":::
 
 
 10. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).

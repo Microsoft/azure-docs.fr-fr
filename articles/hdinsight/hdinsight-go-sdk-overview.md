@@ -6,14 +6,14 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
-ms.custom: seodec18
+ms.custom: seodec18, devx-track-azurecli
 ms.date: 01/03/2020
-ms.openlocfilehash: 292496c4d458621213fe62105149ac845d78891e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6fdd7b9e5fda92bd75e54ea5b4aad6a3ba6ecbea
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79479584"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92748759"
 ---
 # <a name="hdinsight-sdk-for-go-preview"></a>HDInsight SDK for Go (préversion)
 
@@ -21,7 +21,7 @@ ms.locfileid: "79479584"
 HDInsight SDK for Go fournit des classes et des fonctions qui vous permettent de gérer vos clusters HDInsight. Il inclut des opérations permettant de créer, supprimer, mettre à jour, répertorier, mettre à l’échelle, exécuter des actions de script, surveiller, obtenir des propriétés des clusters HDInsight, et bien plus encore.
 
 > [!NOTE]  
->Une documentation de référence GoDoc pour ce kit SDK est également [disponible ici](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight).
+>Une documentation de référence GoDoc pour ce kit SDK est également [disponible ici](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2015-03-01-preview/hdinsight).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -39,7 +39,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 Le kit de développement logiciel (SDK) doit d’abord être authentifié avec votre abonnement Azure.  Suivez l’exemple ci-dessous pour créer un principal de service et l’utiliser pour s’authentifier. Une fois cette opération terminée, vous avez une instance de `ClustersClient`, qui contient de nombreuses fonctions (décrites dans les sections suivantes) pouvant être utilisées pour effectuer des opérations de gestion.
 
 > [!NOTE]  
-> Il existe d’autres façons de s’authentifier, en plus de l’exemple suivant, peut-être mieux adaptées à vos besoins. Toutes les fonctions sont décrites ici : [Fonctions d’authentification dans le kit Azure SDK pour Go](https://docs.microsoft.com/azure/go/azure-sdk-go-authorization)
+> Il existe d’autres façons de s’authentifier, en plus de l’exemple suivant, peut-être mieux adaptées à vos besoins. Toutes les fonctions sont décrites ici : [Fonctions d’authentification dans le kit Azure SDK pour Go](/azure/go/azure-sdk-go-authorization)
 
 ### <a name="authentication-example-using-a-service-principal"></a>Exemple d’authentification avec un principal de service
 
@@ -365,7 +365,7 @@ extClient.Authorizer, _ = credentials.Authorizer()
 ### <a name="enable-oms-monitoring"></a>Activer la supervision OMS
 
 > [!NOTE]  
-> Pour activer la supervision OMS, vous devez disposer d’un espace de travail Log Analytics existant. Si vous n’en avez pas déjà créé un, vous pouvez apprendre à le faire ici : [Créer un espace de travail Log Analytics dans le portail Azure](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
+> Pour activer la supervision OMS, vous devez disposer d’un espace de travail Log Analytics existant. Si vous n’en avez pas déjà créé un, vous pouvez apprendre à le faire ici : [Créer un espace de travail Log Analytics dans le portail Azure](../azure-monitor/learn/quick-create-workspace.md).
 
 Pour activer la surveillance OMS sur votre cluster :
 
@@ -394,7 +394,7 @@ extClient.DisableMonitoring(context.Background(), "<Resource Group Name", "Clust
 HDInsight fournit une fonction de configuration intitulée actions de script, qui appelle des scripts personnalisés pour personnaliser le cluster.
 
 > [!NOTE]  
-> Vous pouvez trouver plus d’informations sur l’utilisation des actions de script ici : [Personnaliser des clusters HDInsight Linux à l’aide d’actions de script](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-customize-cluster-linux)
+> Vous pouvez trouver plus d’informations sur l’utilisation des actions de script ici : [Personnaliser des clusters HDInsight Linux à l’aide d’actions de script](./hdinsight-hadoop-customize-cluster-linux.md)
 
 ### <a name="execute-script-actions"></a>Exécuter des actions de script
 
@@ -491,4 +491,4 @@ for (page.NotDone()) {
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Explorez les [documents de référence GoDoc](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight). Les GoDocs fournissent la documentation de référence de toutes les fonctions du kit SDK.
+Explorez les [documents de référence GoDoc](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2015-03-01-preview/hdinsight). Les GoDocs fournissent la documentation de référence de toutes les fonctions du kit SDK.

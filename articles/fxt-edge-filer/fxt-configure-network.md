@@ -6,29 +6,30 @@ ms.author: rohogue
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 06/20/2019
-ms.openlocfilehash: 9b0154889544e0054e309cc5f43851b73b4396b4
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: 4ce7ffc66e0b6164b2e4ca9725b3f26403292a4a
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80754697"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220769"
 ---
 # <a name="tutorial-configure-the-clusters-network-settings"></a>Tutoriel : Configurer les paramètres réseau du cluster
 
-Avant d’utiliser un nouveau cluster Azure FXT Edge Filer, vous devez vérifier et personnaliser plusieurs paramètres réseau pour votre flux de travail. 
+Avant d’utiliser un nouveau cluster Azure FXT Edge Filer, vous devez vérifier et personnaliser plusieurs paramètres réseau pour votre flux de travail.
 
-Ce tutoriel décrit les paramètres réseau que vous devrez peut-être ajuster pour un nouveau cluster. 
+Ce tutoriel décrit les paramètres réseau que vous devrez peut-être ajuster pour un nouveau cluster.
 
-Vous apprendrez à effectuer les opérations suivantes : 
+Vous apprendrez à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
+>
 > * Quels paramètres réseau devront être mis à jour après la création d’un cluster.
-> * Quels cas d’usage Azure FXT Edge Filer nécessitent un serveur Active Directory ou un serveur DNS. 
+> * Quels cas d’usage Azure FXT Edge Filer nécessitent un serveur Active Directory ou un serveur DNS.
 > * Comment configurer le tourniquet DNS (RRDNS) pour équilibrer automatiquement la charge des requêtes des clients sur le cluster FXT.
 
 La durée nécessaire pour effectuer ces étapes dépend du nombre de modifications de configuration nécessaires dans votre système :
 
-* Si vous avez uniquement besoin de lire le tutoriel et de vérifier quelques paramètres, il vous faudra de 10 à 15 minutes. 
+* Si vous avez uniquement besoin de lire le tutoriel et de vérifier quelques paramètres, il vous faudra de 10 à 15 minutes.
 * Si vous avez besoin de configurer le tourniquet DNS, cette tâche peut prendre une heure ou plus.
 
 ## <a name="adjust-network-settings"></a>Ajuster les paramètres réseau
@@ -78,20 +79,20 @@ Si vous avez besoin de charger des certificats sur le cluster, utilisez la page 
 
 Pour chiffrer la communication de gestion de cluster, utilisez la page de paramètres **Cluster** > **General Setup** (Configuration générale) afin de sélectionner le certificat à utiliser pour le protocole TLS d’administration.
 
-> [!Note] 
-> Les clés d’accès au service cloud sont stockés à l’aide de la page de configuration **Cloud Credentials**. La section [Ajouter un Core Filer](fxt-add-storage.md#add-a-core-filer) montre un exemple. Pour plus d’informations, consultez la section [Cloud Credentials](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_cloud_credentials.html) du Guide de configuration de cluster. 
+> [!Note]
+> Les clés d’accès au service cloud sont stockés à l’aide de la page de configuration **Cloud Credentials**. La section [Ajouter un Core Filer](fxt-add-storage.md#add-a-core-filer) montre un exemple. Pour plus d’informations, consultez la section [Cloud Credentials](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_cloud_credentials.html) du Guide de configuration de cluster.
 
 ## <a name="configure-dns-for-load-balancing"></a>Configurer le système DNS pour l’équilibrage de charge
 
-Cette section explique les principes fondamentaux de la configuration d’un tourniquet DNS (RRDNS) pour répartir la charge client parmi toutes les adresses IP exposées aux clients dans votre cluster FXT Edge Filer. 
+Cette section explique les principes fondamentaux de la configuration d’un tourniquet DNS (RRDNS) pour répartir la charge client parmi toutes les adresses IP exposées aux clients dans votre cluster FXT Edge Filer.
 
 ### <a name="decide-whether-or-not-to-use-dns"></a>Décider s’il faut utiliser DNS ou non
 
-L’équilibrage de charge est toujours recommandée, mais vous n’êtes pas obligé de toujours utiliser le système DNS. Par exemple, avec certains types de flux de travail client, il peut être plus judicieux d’utiliser un script pour affecter les adresses IP de cluster uniformément parmi les clients quand ils montent le cluster. Certaines méthodes sont décrites dans [Monter le cluster](fxt-mount-clients.md). 
+L’équilibrage de charge est toujours recommandée, mais vous n’êtes pas obligé de toujours utiliser le système DNS. Par exemple, avec certains types de flux de travail client, il peut être plus judicieux d’utiliser un script pour affecter les adresses IP de cluster uniformément parmi les clients quand ils montent le cluster. Certaines méthodes sont décrites dans [Monter le cluster](fxt-mount-clients.md).
 
-Pour déterminer si vous devez ou non utiliser un serveur DNS, prenez en compte les considérations suivantes : 
+Pour déterminer si vous devez ou non utiliser un serveur DNS, prenez en compte les considérations suivantes :
 
-* Si votre système est sollicité uniquement par des clients NFS, le système DNS n’est pas nécessaire. Il est possible de spécifier toutes les adresses réseau à l’aide d’adresses IP numériques. 
+* Si votre système est sollicité uniquement par des clients NFS, le système DNS n’est pas nécessaire. Il est possible de spécifier toutes les adresses réseau à l’aide d’adresses IP numériques.
 
 * Si votre système prend en charge l’accès SMB (CIFS), un DNS est nécessaire, car vous devez alors spécifier un domaine DNS pour le serveur Active Directory.
 
@@ -110,7 +111,7 @@ Le diagramme présente un vserver de cluster à gauche, et des adresses IP au ce
 
 Chaque adresse IP accessible par un client doit avoir un nom unique, qui est utilisé en interne par le cluster. (Dans ce diagramme, les adresses IP clientes sont nommées vs1-client-IP-* pour plus de clarté, mais dans un environnement de production, vous devrez sans doute utiliser des noms plus courts, comme client*.)
 
-Les clients montent le cluster en utilisant le nom vserver comme argument serveur. 
+Les clients montent le cluster en utilisant le nom vserver comme argument serveur.
 
 Modifiez le fichier ``named.conf`` de votre serveur DNS pour définir l’ordre cyclique des requêtes envoyées à vserver. Cette option garantit que toutes les valeurs disponibles sont utilisées de manière cyclique. Ajoutez une instruction similaire à celle-ci :
 
@@ -136,7 +137,7 @@ update add 11.0.0.10.in-addr.arpa. 86400 PTR vs1-client-IP-11.example.com
 update add 12.0.0.10.in-addr.arpa. 86400 PTR vs1-client-IP-12.example.com
 ```
 
-### <a name="enable-dns-in-the-cluster"></a>Activer le système DNS dans le cluster 
+### <a name="enable-dns-in-the-cluster"></a>Activer le système DNS dans le cluster
 
 Spécifiez le serveur DNS utilisé par le cluster dans la page de paramètres **Cluster** > **Administrative Network**. Cette page contient les paramètres suivants :
 
@@ -148,8 +149,8 @@ Pour plus d’informations, consultez [DNS Settings](<https://azure.github.io/Av
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Il s’agit de la dernière étape de configuration de base pour le cluster Azure FXT Edge Filer. 
+Il s’agit de la dernière étape de configuration de base pour le cluster Azure FXT Edge Filer.
 
 * Apprenez-en davantage sur les voyants et autres indicateurs du système dans [Superviser l’état du matériel](fxt-monitor.md).
-* Apprenez-en davantage sur la façon dont les clients doivent monter le cluster FXT Edge Filer dans [Monter le cluster](fxt-mount-clients.md). 
-* Pour plus d’informations sur l’exploitation et la gestion d’un cluster FXT Edge Filer, consultez le [Guide de configuration de cluster](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/ops_conf_index.html). 
+* Apprenez-en davantage sur la façon dont les clients doivent monter le cluster FXT Edge Filer dans [Monter le cluster](fxt-mount-clients.md).
+* Pour plus d’informations sur l’exploitation et la gestion d’un cluster FXT Edge Filer, consultez le [Guide de configuration de cluster](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/ops_conf_index.html).

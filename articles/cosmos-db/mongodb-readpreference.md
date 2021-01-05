@@ -6,16 +6,18 @@ ms.author: sivethe
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.devlang: nodejs
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/26/2019
-ms.openlocfilehash: 579767a0d535605a2316c35bd413a75474b5a3de
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: devx-track-js
+ms.openlocfilehash: 3c78ad6605e927015d35df12cadf0347dd0337cf
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80409999"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349042"
 ---
 # <a name="how-to-globally-distribute-reads-using-azure-cosmos-dbs-api-for-mongodb"></a>Comment distribuer à l’échelle mondiale des lectures par l’intermédiaire de l’API Azure Cosmos DB pour MongoDB
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 Cet article explique comment distribuer à l’échelle mondiale des opérations de lecture à l’aide des paramètres de [préférence de lecture MongoDB](https://docs.mongodb.com/manual/core/read-preference/) avec l’API Azure Cosmos DB pour MongoDB.
 
@@ -170,6 +172,6 @@ Si vous ne prévoyez pas de continuer à utiliser cette application, supprimez t
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Importer des données MongoDB dans Azure Cosmos DB](mongodb-migrate.md)
+* [Importer des données MongoDB dans Azure Cosmos DB](../dms/tutorial-mongodb-cosmos-db.md?toc=%2fazure%2fcosmos-db%2ftoc.json%253ftoc%253d%2fazure%2fcosmos-db%2ftoc.json)
 * [Configurer une base de données distribuée à l’échelle mondiale avec l’API Azure Cosmos DB pour MongoDB](tutorial-global-distribution-mongodb.md)
 * [Développer localement avec l’émulateur Azure Cosmos DB](local-emulator.md)

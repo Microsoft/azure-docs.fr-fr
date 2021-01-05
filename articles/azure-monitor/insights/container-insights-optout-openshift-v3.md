@@ -3,14 +3,23 @@ title: Comment arrêter la surveillance de votre cluster Azure Red Hat OpenShift
 description: Cet article décrit comment arrêter la surveillance de votre cluster Azure Red Hat OpenShift avec Azure Monitor pour conteneurs.
 ms.topic: conceptual
 ms.date: 04/24/2020
-ms.openlocfilehash: e1d3200af62ad185fa942fa2c8f7f3b4e6bfd89b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7e6ab46940ed29a98b3988c00c92d6c691d6e0f0
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195716"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97695620"
 ---
 # <a name="how-to-stop-monitoring-your-azure-red-hat-openshift-v3-cluster"></a>Comment arrêter la surveillance de votre cluster Azure Red Hat OpenShift v3
+
+>[!IMPORTANT]
+> Azure Red Hat OpenShift 3.11 sera mis hors service en juin 2022.
+>
+> À partir d’octobre 2020, vous ne pourrez plus créer de clusters 3.11.
+> Les clusters 3.11 existants continueront de fonctionner jusqu’en juin 2022, mais ne seront plus pris en charge après cette date.
+>
+> Suivez ce guide pour [Créer un cluster Azure Red Hat OpenShift 4](../../openshift/tutorial-create-cluster.md).
+> Si vous avez des questions spécifiques, [n’hésitez pas à nous contacter](mailto:aro-feedback@microsoft.com).
 
 Une fois que vous avez activé la surveillance de votre cluster Azure Red Hat OpenShift 3.x, vous pouvez arrêter la surveillance à l’aide d’Azure Monitor pour conteneurs si vous décidez de ne plus le surveiller. Cet article explique comment procéder à cela en utilisant le modèle Azure Resource Manager fourni.  
 
@@ -22,7 +31,7 @@ Si vous n’êtes pas familiarisé avec le déploiement de ressources à l’aid
 * [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../../azure-resource-manager/templates/deploy-powershell.md)
 * [Déployer des ressources à l’aide de modèles Resource Manager et de l’interface de ligne de commande Azure](../../azure-resource-manager/templates/deploy-cli.md)
 
-Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI version 2.0.65 ou une version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI version 2.0.65 ou une version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 ### <a name="create-template"></a>Créer un modèle
 
@@ -99,7 +108,7 @@ Exécutez la commande suivante avec Azure CLI sur Linux pour supprimer la soluti
 ```azurecli
 az login   
 az account set --subscription "Subscription Name"
-az group deployment create --resource-group <ResourceGroupName> --template-file ./OptOutTemplate.json --parameters @./OptOutParam.json  
+az deployment group create --resource-group <ResourceGroupName> --template-file ./OptOutTemplate.json --parameters @./OptOutParam.json  
 ```
 
 Le changement de configuration peut prendre quelques minutes. Lorsqu’il est terminé, un message similaire au suivant s’affiche avec les résultats :
@@ -128,4 +137,4 @@ ProvisioningState       : Succeeded
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si l’espace de travail a été créé uniquement pour prendre en charge la surveillance du cluster et qu’il n’est plus nécessaire, vous devez le supprimer manuellement. Si vous n’êtes pas familiarisé avec la suppression d’un espace de travail, consultez la rubrique [Supprimer un espace de travail Azure Log Analytics](../../log-analytics/log-analytics-manage-del-workspace.md).
+Si l’espace de travail a été créé uniquement pour prendre en charge la surveillance du cluster et qu’il n’est plus nécessaire, vous devez le supprimer manuellement. Si vous n’êtes pas familiarisé avec la suppression d’un espace de travail, consultez la rubrique [Supprimer un espace de travail Azure Log Analytics](../platform/delete-workspace.md).

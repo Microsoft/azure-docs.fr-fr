@@ -5,18 +5,17 @@ ms.topic: conceptual
 author: TimothyMothra
 ms.author: tilee
 ms.date: 04/23/2019
-ms.openlocfilehash: 9bb22b12a7b3e972ff144bd121db4288801e2488
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: df8ebd97ed9e34e0fce85a50297c595732057115
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732953"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91761462"
 ---
 # <a name="troubleshooting-application-insights-agent-formerly-named-status-monitor-v2"></a>Résolution des problèmes d’Application Insights Agent (anciennement appelé Status Monitor v2)
 
 Lorsque vous activez la surveillance, vous pouvez rencontrer des problèmes qui empêchent la collecte de données.
 Cet article répertorie tous les problèmes connus et propose des exemples de résolution des problèmes.
-Si vous rencontrez un problème qui n’est pas répertorié ici, vous pouvez nous contacter sur [GitHub](https://github.com/Microsoft/ApplicationInsights-Home/issues).
 
 ## <a name="known-issues"></a>Problèmes connus
 
@@ -55,7 +54,7 @@ Vous pouvez utiliser les outils de résolution des problèmes pour constater un 
 
 ### <a name="conflict-with-iis-shared-configuration"></a>Conflit avec la configuration partagée IIS
 
-Si vous avez un cluster de serveurs web, il se peut que vous utilisiez une [configuration partagée](https://docs.microsoft.com/iis/web-hosting/configuring-servers-in-the-windows-web-platform/shared-configuration_211).
+Si vous avez un cluster de serveurs web, il se peut que vous utilisiez une [configuration partagée](/iis/web-hosting/configuring-servers-in-the-windows-web-platform/shared-configuration_211).
 HttpModule ne peut pas être injecté dans cette configuration partagée.
 Exécutez la commande Enable sur chaque serveur web pour installer la DLL dans chaque GAC (Global Assembly Cache).
 
@@ -72,12 +71,10 @@ Après avoir exécuté la commande Enable, procédez comme suit :
 ### <a name="iis-nested-applications"></a>Applications imbriquées IIS
 
 Nous n’instrumentons pas les applications imbriquées dans IIS dans la version 1.0.
-Ce problème est suivi [ici](https://github.com/microsoft/ApplicationInsights-Home/issues/369).
 
 ### <a name="advanced-sdk-configuration-isnt-available"></a>La configuration du kit de développement logiciel (SDK) avancé n’est pas disponible.
 
 La configuration du kit de développement logiciel (SDK) n’est pas exposée à l’utilisateur final dans la version 1.0.
-Ce problème est suivi [ici](https://github.com/microsoft/ApplicationInsights-Home/issues/375).
 
     
     
@@ -131,7 +128,7 @@ Consultez la [documentation de référence de l’API](status-monitor-v2-api-ref
 
 ### <a name="collect-etw-logs-by-using-perfview"></a>Collecter les journaux ETW à l’aide de PerfView
 
-#### <a name="setup"></a>Programme d’installation
+#### <a name="setup"></a>Installation
 
 1. Télécharger PerfView.exe et PerfView64.exe depuis [GitHub](https://github.com/Microsoft/perfview/releases).
 2. Lancez PerfView64.exe.
@@ -156,4 +153,3 @@ Consultez la [documentation de référence de l’API](status-monitor-v2-api-ref
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Consultez la [documentation de référence de l’API](status-monitor-v2-overview.md#powershell-api-reference) pour en savoir plus sur les paramètres que vous avez omis.
-- Si vous rencontrez un problème qui n’est pas répertorié ici, vous pouvez nous contacter sur [GitHub](https://github.com/Microsoft/ApplicationInsights-Home/issues).

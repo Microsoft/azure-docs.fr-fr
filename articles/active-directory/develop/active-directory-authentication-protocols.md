@@ -13,10 +13,10 @@ ms.author: ryanwi
 ms.custom: aaddev
 ms.reviewer: hirsin
 ms.openlocfilehash: 41ea41b4d7c181dad9246653a68c329387ac5381
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80884679"
 ---
 # <a name="microsoft-identity-platform-authentication-protocols"></a>Protocoles d’authentification de la plateforme Microsoft Identity

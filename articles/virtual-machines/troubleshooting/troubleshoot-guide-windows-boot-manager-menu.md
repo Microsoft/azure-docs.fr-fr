@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: troubleshooting
 ms.date: 03/26/2020
 ms.author: v-mibufo
-ms.openlocfilehash: 5d2fb62870e2c41af635627f5d692f08c67f8394
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2457952051f575306de46e3e8145cc26678a1ef8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80373284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86526536"
 ---
 # <a name="windows-vm-cannot-boot-due-to-windows-boot-manager"></a>Impossible de démarrer une machine virtuelle Windows à cause du Gestionnaire de démarrage Windows
 
@@ -29,7 +29,7 @@ Cet article explique comment résoudre des problèmes où le Gestionnaire de dé
 
 La machine virtuelle est bloquée en attente d’une invite utilisateur et ne peut démarrer que sur commande manuelle.
 
-Lorsque vous utilisez les [Diagnostics de démarrage](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics) pour afficher la capture d’écran de la machine virtuelle, vous voyez sur cette capture d’écran le Gestionnaire de démarrage Windows afficher avec le message *Choisissez un système d’exploitation ou appuyez sur TAB pour choisir un outil :* .
+Lorsque vous utilisez les [Diagnostics de démarrage](./boot-diagnostics.md) pour afficher la capture d’écran de la machine virtuelle, vous voyez sur cette capture d’écran le Gestionnaire de démarrage Windows afficher avec le message *Choisissez un système d’exploitation ou appuyez sur TAB pour choisir un outil :* .
 
 Figure 1
  
@@ -53,7 +53,7 @@ Vue d’ensemble du processus :
 
 Si vous avez accès à une console série, vous disposez de deux méthodes pour obtenir des temps de démarrage plus rapides. Réduisez le temps d’attente *displaybootmenu* ou supprimez complètement l’indicateur.
 
-1. Suivez les instructions pour accéder à la [console série Azure pour Windows](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-windows) afin d’obtenir l’accès à la console textuelle.
+1. Suivez les instructions pour accéder à la [console série Azure pour Windows](./serial-console-windows.md) afin d’obtenir l’accès à la console textuelle.
 
    > [!NOTE]
    > Si vous ne pouvez pas accéder à une console série, passez directement à la section [Créer une machine virtuelle de réparation et y accéder](#create-and-access-a-repair-vm).
@@ -77,7 +77,7 @@ Si vous avez accès à une console série, vous disposez de deux méthodes pour 
 
 ### <a name="create-and-access-a-repair-vm"></a>Créer une machine virtuelle de réparation et y accéder
 
-1. Suivez les [étapes 1 à 3 des commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands) pour préparer une machine virtuelle de réparation.
+1. Suivez les [étapes 1 à 3 des commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md) pour préparer une machine virtuelle de réparation.
 2. Connectez-vous à la machine virtuelle de réparation à l’aide de la connexion Bureau à distance.
 
 ### <a name="configure-for-faster-boot-time-on-a-repair-vm"></a>Configurer un temps de démarrage plus rapide sur une machine virtuelle de réparation
@@ -154,4 +154,4 @@ Pour activer la collecte de l’image mémoire et la console série, exécutez l
 
 ### <a name="rebuild-the-original-vm"></a>Régénérer la machine virtuelle d’origine
 
-Suivez l’[étape 5 des commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands#repair-process-example) pour réassembler la machine virtuelle.
+Suivez l’[étape 5 des commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md#repair-process-example) pour réassembler la machine virtuelle.

@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 10/25/2018
 ms.author: jasonh
 ms.openlocfilehash: de6598e4823c5beb2782524c3a8cd7646e54f402
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67176795"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012802"
 ---
 > [!div class="op_single_selector"]
 > * [Portail](../articles/hdinsight/hdinsight-administer-use-portal-linux.md)

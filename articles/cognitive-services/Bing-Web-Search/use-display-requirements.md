@@ -10,14 +10,19 @@ ms.subservice: bing-web-search
 ms.topic: conceptual
 ms.date: 01/31/2019
 ms.author: aahi
-ms.openlocfilehash: 5575668f164b97142e7c4b2ddb2608c3173426a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4300860039b76bd076f19acfc252f59ef10d462b
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "60499883"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351842"
 ---
 # <a name="bing-search-api-use-and-display-requirements"></a>Conditions d’utilisation et d’affichage de l’API Recherche Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Ces conditions d’utilisation et d’affichage s’appliquent à toute implémentation du contenu et des informations associées provenant des API Recherche Bing suivantes, notamment les relations, les métadonnées et d’autres signaux.
 
@@ -39,7 +44,7 @@ Ces conditions d’utilisation et d’affichage s’appliquent à toute impléme
 |Réponse     | Catégorie des résultats retournés dans une réponse. Par exemple, une réponse de l’API Recherche web Bing peut inclure des réponses appartenant aux catégories de résultats page web, image, vidéo, visuel et actualités. |
 |response     | Toutes les réponses et données associées reçues en réponse à un seul appel à une API Recherche. |
 |Résultats    | Élément d’information dans une réponse. Par exemple, le jeu de données connecté à un article d’actualités est un résultat dans une réponse d’actualités. |
-|API Recherche    | Regroupe les API Recherche personnalisée, Recherche d’entités, Recherche d’images, Recherche d’actualités, Recherche de vidéos, Recherche visuelle, Recherche d’entreprise locale et Recherche web Bing. |
+|API de recherche    | Regroupe les API Recherche personnalisée, Recherche d’entités, Recherche d’images, Recherche d’actualités, Recherche de vidéos, Recherche visuelle, Recherche d’entreprise locale et Recherche web Bing. |
 
 ## <a name="bing-spell-check-and-bing-autosuggest-api-restrictions"></a>Restrictions relatives aux API Vérification orthographique Bing et Suggestion automatique Bing
 
@@ -167,5 +172,4 @@ La sections précédentes des Conditions d’utilisation et d’affichage des AP
 
 ## <a name="gdpr-compliance"></a>Conformité RGPD  
 
-En ce qui concerne les informations personnelles relevant du Règlement général sur la protection des données (RGPD) de l’Union européenne et qui sont traitées lors des appels aux API Recherche, à l’API Vérification orthographique Bing ou à l’API Suggestion automatique Bing, vous comprenez que vous et Microsoft êtes des contrôleurs de données indépendants au regard du RGPD. Vous êtes indépendamment responsables de la conformité au RGPD.  
-
+En ce qui concerne les informations personnelles relevant du Règlement général sur la protection des données (RGPD) de l’Union européenne et qui sont traitées lors des appels aux API Recherche, à l’API Vérification orthographique Bing ou à l’API Suggestion automatique Bing, vous comprenez que vous et Microsoft êtes des contrôleurs de données indépendants au regard du RGPD. Vous êtes indépendamment responsables de la conformité au RGPD.

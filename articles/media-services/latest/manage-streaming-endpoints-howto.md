@@ -3,7 +3,7 @@ title: Gérer les points de terminaison de streaming avec Azure Media Services 
 description: Cet article montre comment gérer les points de terminaison de streaming avec Azure Media Services v3.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 writer: juliako
 manager: femila
 editor: ''
@@ -11,21 +11,24 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 03/11/2020
-ms.author: juliako
-ms.openlocfilehash: 75ba2ad87eabd7ff6b0625ad95ab24a8ae58dd0f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-azurecli, devx-track-csharp
+ms.openlocfilehash: 8d3835d78ec55f120f6b9439aea9c29434e6bd47
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79461042"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289475"
 ---
 # <a name="manage-streaming-endpoints-with--media-services-v3"></a>Gérer les points de terminaison de streaming avec Media Services v3
 
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
 Une fois votre compte Media Services créé, un [point de terminaison de streaming](streaming-endpoint-concept.md) **par défaut** est ajouté à votre compte dans l’état **Arrêté**. Pour démarrer le streaming de votre contenu et tirer parti de l'[empaquetage dynamique](dynamic-packaging-overview.md) et du [chiffrement dynamique](content-protection-overview.md), le point de terminaison de streaming à partir duquel vous souhaitez diffuser du contenu doit se trouver à l'état **En cours d'exécution**.
 
-Cet article vous montre comment exécuter la commande [start](https://docs.microsoft.com/rest/api/media/streamingendpoints/start) sur votre point de terminaison de streaming en utilisant des technologies différentes. 
+Cet article vous montre comment exécuter la commande [start](/rest/api/media/streamingendpoints/start) sur votre point de terminaison de streaming en utilisant des technologies différentes. 
  
 > [!NOTE]
 > Vous êtes facturé uniquement lorsque votre point de terminaison de streaming est en cours d’exécution.
@@ -46,7 +49,7 @@ POST https://management.azure.com/subscriptions/00000000-0000-0000-0000-00000000
 
 Pour plus d'informations, consultez les pages suivantes : 
 
-* Documentation de référence de l’exemple [Démarrer un StreamingEndpoint](https://docs.microsoft.com/rest/api/media/streamingendpoints/start).
+* Documentation de référence de l’exemple [Démarrer un StreamingEndpoint](/rest/api/media/streamingendpoints/start).
 * Le démarrage d’un point de terminaison de streaming est une opération asynchrone. 
 
     Pour plus d’informations sur la manière de superviser les opérations de longue durée, consultez [Opérations de longue durée](media-services-apis-overview.md).
@@ -70,7 +73,7 @@ az ams streaming-endpoint start [--account-name]
                                 [--subscription]
 ```
 
-Pour plus d’informations, consultez [az ams streaming-endpoint start](https://docs.microsoft.com/cli/azure/ams/streaming-endpoint?view=azure-cli-latest#az-ams-streaming-endpoint-start).
+Pour plus d’informations, consultez [az ams streaming-endpoint start](/cli/azure/ams/streaming-endpoint?view=azure-cli-latest#az-ams-streaming-endpoint-start).
 
 ## <a name="use-sdks"></a>Utiliser les kits de développement logiciel
 
@@ -106,4 +109,4 @@ Consultez l’ensemble de l’[exemple de code .NET](https://github.com/Azure-S
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Spécification OpenAPI Media Services v3 (Swagger)](https://github.com/Azure/azure-rest-api-specs/tree/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01)
-* [Opérations de point de terminaison de streaming](https://docs.microsoft.com/rest/api/media/streamingendpoints)
+* [Opérations de point de terminaison de streaming](/rest/api/media/streamingendpoints)

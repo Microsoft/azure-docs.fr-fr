@@ -3,7 +3,7 @@ title: Documentation de Language Understanding (LUIS)
 summary: Découvrez comment le service LUIS (Language Understanding) permet à vos applications de comprendre le sens des propos d’une personne.
 metadata:
   ms.topic: landing-page
-  ms.date: 02/11/2020
+  ms.date: 06/15/2020
   ms.author: nitinme
   author: nitinme
   ms.service: cognitive-services
@@ -12,12 +12,12 @@ metadata:
   title: Documentation Language Understanding (LUIS)
   titleSuffix: Azure Cognitive Services
   description: Le service LUIS (Language Understanding) permet à votre application de comprendre le sens des propos d’une personne. Le service LUIS utilise l’apprentissage automatique pour permettre aux développeurs de créer des applications qui peuvent recevoir une entrée d’utilisateur dans un langage naturel et en extraire du sens.
-  ms.openlocfilehash: f1fab99692fbd02cf3a8b659aad0069ac73ce8e6
-  ms.sourcegitcommit: 086d7c0cf812de709f6848a645edaf97a7324360
+  ms.openlocfilehash: ff928f1879f8cfd356fa020ff6afaa68b72f63c5
+  ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/23/2020
-  ms.locfileid: "82101669"
+  ms.lasthandoff: 11/21/2020
+  ms.locfileid: "95019379"
 landingContent:
 - title: À propos de Language Understanding (LUIS)
   linkLists:
@@ -33,6 +33,8 @@ landingContent:
       url: luis-how-plan-your-app.md
     - text: Conception d’application itérative
       url: luis-concept-app-iteration.md
+    - text: Pratiques DevOps
+      url: luis-concept-devops-sourcecontrol.md
   - linkListType: whats-new
     links:
     - text: Nouveautés
@@ -58,9 +60,9 @@ landingContent:
     - text: 'Portail : Créer une application LUIS'
       url: get-started-portal-build-app.md
     - text: Utilisation du SDK C#
-      url: sdk-authoring.md?pivots=programming-language-csharp
+      url: azure-sdk-quickstart.md?pivots=programming-language-csharp
     - text: Utilisation du SDK Python
-      url: sdk-authoring.md?pivots=programming-language-python
+      url: azure-sdk-quickstart.md?pivots=programming-language-python
   - linkListType: how-to-guide
     links:
     - text: Créer une application LUIS
@@ -68,7 +70,7 @@ landingContent:
     - text: Ajouter une intention avec des exemples d’énoncés
       url: luis-how-to-add-intents.md
     - text: Ajouter des entités
-      url: luis-how-to-add-example-utterances.md
+      url: ./luis-how-to-add-entities.md
     - text: Ajouter une fonctionnalité de liste d’expressions
       url: luis-how-to-add-features.md
 - title: Version, entraînement, test et publication
@@ -76,7 +78,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Contrôle de version
-      url: luis-concept-version.md
+      url: ./luis-concept-app-iteration.md
     - text: Test interactif
       url: luis-concept-test.md
     - text: Test par lot
@@ -86,7 +88,7 @@ landingContent:
     - text: 'Portail : Déployer l’application sur le point de terminaison de prédiction'
       url: get-started-portal-deploy-app.md
     - text: Utiliser le kit de développement logiciel (SDK)
-      url: sdk-authoring.md
+      url: azure-sdk-quickstart.md
   - linkListType: how-to-guide
     links:
     - text: Versionner votre application
@@ -104,19 +106,19 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utiliser le kit de développement logiciel (SDK)
-      url: sdk-query-prediction-endpoint.md
+      url: azure-sdk-quickstart.md
   - linkListType: quickstart
     links:
     - text: Avec C# utilisant REST
-      url: luis-get-started-cs-get-intent.md
+      url: ./luis-get-started-get-intent-from-rest.md
     - text: Avec Go utilisant REST
-      url: luis-get-started-go-get-intent.md
+      url: ./luis-get-started-get-intent-from-rest.md
     - text: Avec Java utilisant REST
-      url: luis-get-started-java-get-intent.md
+      url: ./luis-get-started-get-intent-from-rest.md
     - text: Avec Node.js utilisant REST
-      url: luis-get-started-node-get-intent.md
+      url: ./luis-get-started-get-intent-from-rest.md
     - text: Avec Python utilisant REST
-      url: luis-get-started-python-get-intent.md
+      url: ./luis-get-started-get-intent-from-rest.md
 - title: Informations de référence
   linkLists:
   - linkListType: reference
@@ -135,9 +137,7 @@ landingContent:
   linkLists:
   - linkListType: reference
     links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/luis/context/context
     - text: Dépannage
       url: troubleshooting.md
-    - text: Poser des questions sur Stack Overflow
-      url: https://stackoverflow.com/questions/tagged/LUIS
-    - text: Influencer le service avec UserVoice
-      url: https://cognitive.uservoice.com/forums/551524-luis

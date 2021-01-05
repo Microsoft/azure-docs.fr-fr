@@ -1,26 +1,24 @@
 ---
-title: 'Tutoriel : Sécuriser votre réseau virtuel hub à l’aide de la préversion d’Azure Firewall Manager'
+title: 'Tutoriel : Sécuriser votre réseau virtuel hub à l’aide d’Azure Firewall Manager'
 description: Dans ce tutoriel, vous allez apprendre à sécuriser votre réseau virtuel avec Azure Firewall Manager à l’aide du portail Azure.
 services: firewall-manager
 author: vhorne
 ms.service: firewall-manager
 ms.topic: tutorial
-ms.date: 02/18/2020
+ms.date: 06/30/2020
 ms.author: victorh
-ms.openlocfilehash: cdd416bdb833e4784334a6847d724a7375e2ef8d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3d4d1e65c2200aee178abefb46d3e330acbd3108
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77459951"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023684"
 ---
-# <a name="tutorial-secure-your-hub-virtual-network-using-azure-firewall-manager-preview"></a>Tutoriel : Sécuriser votre réseau virtuel hub à l’aide de la préversion d’Azure Firewall Manager 
-
-[!INCLUDE [Preview](../../includes/firewall-manager-preview-notice.md)]
+# <a name="tutorial-secure-your-hub-virtual-network-using-azure-firewall-manager"></a>Tutoriel : Sécuriser votre réseau virtuel hub à l’aide d’Azure Firewall Manager
 
 Lorsque vous connectez votre réseau local à un réseau virtuel Azure pour créer un réseau hybride, la possibilité de contrôler l’accès à vos ressources réseau Azure représente une part importante dans un plan de sécurité générale.
 
-À l’aide d’Azure Firewall Manager Preview, vous pouvez créer un réseau virtuel hub pour sécuriser le trafic de votre réseau hybride à destination d’adresses IP privées, d’Azure PaaS et d’Internet. Vous pouvez utiliser Azure Firewall Manager pour contrôler l’accès réseau d’un réseau hybride à l’aide de stratégies définissant le trafic réseau autorisé et refusé.
+À l’aide d’Azure Firewall Manager, vous pouvez créer un réseau virtuel hub pour sécuriser le trafic de votre réseau hybride à destination d’adresses IP privées, d’Azure PaaS et d’Internet. Vous pouvez utiliser Azure Firewall Manager pour contrôler l’accès réseau d’un réseau hybride à l’aide de stratégies définissant le trafic réseau autorisé et refusé.
 
 Firewall Manager prend également en charge une architecture de hub virtuel sécurisé. Pour obtenir une comparaison des types d’architectures de hub virtuel sécurisé et de réseau virtuel hub, consultez [Quelles sont les options d’architecture d’Azure Firewall Manager ?](vhubs-and-vnets.md)
 
@@ -413,7 +411,7 @@ Il s’agit d’une machine virtuelle que vous utilisez pour vous connecter au m
 <!---2. Open a Windows PowerShell command prompt on **VM-Onprem**, and ping the private IP for **VM-spoke-01**.
 
    You should get a reply.--->
-3. Ouvrez un navigateur web sur **VM-Onprem** et accédez à http://\<adresse IP privée de VM-spoke-01\>.
+3. Ouvrez un navigateur web sur **VM-Onprem** et accédez à http://\<VM-spoke-01 private IP\>.
 
    La page web **VM-spoke-01** doit s’afficher : ![Page web VM-Spoke-01](media/secure-hybrid-network/vm-spoke-01-web.png)
 
@@ -444,4 +442,4 @@ Vous pouvez garder vos ressources de pare-feu pour le prochain didacticiel, ou, 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Sécuriser votre réseau étendu virtuel à l’aide de la préversion d’Azure Firewall Manager](secure-cloud-network.md)
+> [Tutoriel : Sécuriser votre réseau étendu virtuel avec Azure Firewall Manager](secure-cloud-network.md)

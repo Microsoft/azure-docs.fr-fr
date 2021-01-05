@@ -2,14 +2,14 @@
 title: Notes de publication du serveur de sauvegarde Microsoft Azure v3
 description: Cet article décrit les informations relatives aux problèmes connus et les solutions de contournement pour le serveur de sauvegarde Microsoft Azure (MABS) v3.
 ms.topic: conceptual
-ms.date: 11/22/2018
+ms.date: 06/03/2020
 ms.asset: 0c4127f2-d936-48ef-b430-a9198e425d81
-ms.openlocfilehash: a5c99bcb95fde39bddc9e9db9ab000881c89081a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 87bc415c125a387d98ac88255d77fb1867564acf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82185623"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91254259"
 ---
 # <a name="release-notes-for-microsoft-azure-backup-server"></a>Notes de publication du serveur de sauvegarde Microsoft Azure
 
@@ -54,13 +54,13 @@ Cet article décrit les problèmes connus et les solutions de contournement pour
 
 **Solution de contournement :** effectuez les étapes suivantes pour mettre à niveau vers MABS V3 avec le package d’installation russe :
 
-1. [Sauvegardez](https://docs.microsoft.com/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-2017#SSMSProcedure) votre base de données SQL et désinstallez MABS V2 (choisissez de conserver les données protégées pendant la désinstallation).
+1. [Sauvegardez](/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server#SSMSProcedure) votre base de données SQL et désinstallez MABS V2 (choisissez de conserver les données protégées pendant la désinstallation).
 2. Mettez à niveau vers SQL 2017 (Entreprise) et désinstallez Reporting dans le cadre de la mise à niveau.
-3. [Installez](https://docs.microsoft.com/sql/reporting-services/install-windows/install-reporting-services?view=sql-server-2017#install-your-report-server) SQL Server Reporting Services (SSRS).
-4. [Installez](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) SQL Server Management Studio (SSMS).
-5. Configurer Reporting à l’aide des paramètres indiqués dans [Configuration de SSRS avec SQL 2017](https://docs.microsoft.com/azure/backup/backup-azure-microsoft-azure-backup#upgrade-mabs).
+3. [Installez](/sql/reporting-services/install-windows/install-reporting-services#install-your-report-server) SQL Server Reporting Services (SSRS).
+4. [Installez](/sql/ssms/download-sql-server-management-studio-ssms) SQL Server Management Studio (SSMS).
+5. Configurer Reporting à l’aide des paramètres indiqués dans [Configuration de SSRS avec SQL 2017](./backup-azure-microsoft-azure-backup.md#upgrade-mabs).
 6. [Installez](backup-azure-microsoft-azure-backup.md) MABS V3.
-7. [Restaurez](https://docs.microsoft.com/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-2017) SQL à l’aide de SSMS et exécutez l’outil de synchronisation DPM comme décrit [ici](https://docs.microsoft.com/system-center/dpm/back-up-the-dpm-server?view=sc-dpm-2019#using-dpmsync).
+7. [Restaurez](/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms) SQL à l’aide de SSMS et exécutez l’outil de synchronisation DPM comme décrit [ici](/system-center/dpm/back-up-the-dpm-server#using-dpmsync).
 8. Mettez à jour la propriété « DataBaseVersion » dans la table dbo.tbl_DLS_GlobalSetting à l’aide de la commande suivante :
 
     ```sql
@@ -71,6 +71,40 @@ Cet article décrit les problèmes connus et les solutions de contournement pour
 
 9. Démarrez le service MSDPM.
 
+## <a name="after-installing-ur1-the-mabs-reports-arent-updated-with-new-rdl-files"></a>Après l’installation d’UR1, les rapports MABS ne sont pas mis à jour avec les nouveaux fichiers RDL
+
+**Description** : Avec UR1, le problème de mise en forme du rapport MABS est résolu grâce à la mise à jour des fichiers RDL. Les nouveaux fichiers RDL ne sont pas automatiquement remplacés par les fichiers existants.
+
+**Solution de contournement** : Pour remplacer les fichiers RDL, procédez comme suit :
+
+1. Sur l’ordinateur MABS, ouvrez l’URL du portail web de SQL Reporting Services.
+1. Sur l’URL du portail web, le dossier DPMReports est présent au format **`DPMReports_<GUID>`** .
+
+    >[!NOTE]
+    >Il n’existe toujours qu’un seul dossier avec cette convention d’affectation de noms. Si MABS est mis à niveau à partir d’une version antérieure, il peut également y avoir un autre dossier plus ancien, mais vous ne pourrez pas l’ouvrir.
+
+    ![Dossier DPMReports](./media/backup-mabs-release-notes-v3/dpm-reports-folder.png)
+
+1. Sélectionnez et ouvrez le dossier **`DPMReports_<GUID>`** . Les fichiers de rapport individuels sont répertoriés comme indiqué ci-dessous.
+
+    ![Liste des fichiers de rapport individuels](./media/backup-mabs-release-notes-v3/individual-report-files.png)
+
+1. Sélectionnez les fichiers de rapport qui ne se terminent pas par **Report**, cliquez avec le bouton droit sur **Option**, puis sélectionnez **Gérer**.
+
+    ![Sélectionner Gérer pour les fichiers de rapport](./media/backup-mabs-release-notes-v3/manage-files.png)
+
+1. Dans la nouvelle page, sélectionnez l’option **Remplacer** pour remplacer les fichiers par les fichiers de rapport les plus récents.
+
+    Les fichiers de rapport les plus récents se trouvent sous le chemin d’accès `<MABS Installation Directory>\Program Files\Microsoft Azure Backup Server\DPM\DPM\bin\DpmReports`.
+
+    Par exemple : `C:\Program Files\Microsoft Azure Backup Server\DPM\DPM\bin\DpmReports`
+
+    ![Remplacer les fichiers par les fichiers de rapport les plus récents](./media/backup-mabs-release-notes-v3/replace-files.png)
+
+    Une fois les fichiers remplacés, assurez-vous que les champs **Nom** et **Description** sont intacts et ne sont pas vides.
+
+1. Une fois les fichiers remplacés, redémarrez les services MABS et utilisez les fichiers de rapport.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Nouveautés de MABS V3](backup-mabs-whats-new-mabs.md)
+[Nouveautés dans MABS](backup-mabs-whats-new-mabs.md)

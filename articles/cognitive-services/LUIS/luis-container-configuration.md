@@ -11,12 +11,12 @@ ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: 48a9856c58a815eabcc0b105efcd548e66ddd552
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: a4f2b07edc6c290fa030621a4dc400ab50890bba
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80874209"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96001156"
 ---
 # <a name="configure-language-understanding-docker-containers"></a>Configurer les conteneurs Docker Language Understanding 
 
@@ -29,7 +29,7 @@ Ce conteneur a les paramètres de configuration suivants :
 |Obligatoire|Paramètre|Objectif|
 |--|--|--|
 |Oui|[ApiKey](#apikey-setting)|Utilisé pour le suivi des informations de facturation.|
-|Non|[ApplicationInsights](#applicationinsights-setting)|Vous permet d’ajouter la prise en charge de la télémétrie [Azure Application Insights](https://docs.microsoft.com/azure/application-insights) à votre conteneur.|
+|Non|[ApplicationInsights](#applicationinsights-setting)|Vous permet d’ajouter la prise en charge de la télémétrie [Azure Application Insights](/azure/application-insights) à votre conteneur.|
 |Oui|[Billing](#billing-setting)|Spécifie l’URI de point de terminaison de la ressource de service sur Azure.|
 |Oui|[Eula](#eula-setting)| Indique que vous avez accepté la licence pour le conteneur.|
 |Non|[Fluentd](#fluentd-settings)|Écrire les données des journaux et, éventuellement, des métriques, sur un serveur Fluentd.|

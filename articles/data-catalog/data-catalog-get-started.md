@@ -1,17 +1,17 @@
 ---
-title: Créer un catalogue de données Azure
+title: 'Démarrage rapide : Créer un catalogue de données Azure'
 description: Ce démarrage rapide explique comment créer un catalogue Azure Data Catalog à l’aide du portail Azure.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: quickstart
-ms.date: 08/01/2019
-ms.openlocfilehash: 854760ea0158d356cc5449c9f1fdab6161588640
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 05/26/2020
+ms.openlocfilehash: a7d575b92bff69c13ded70187005ce1db018ea4c
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "68976856"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92152000"
 ---
 # <a name="quickstart-create-an-azure-data-catalog"></a>Démarrage rapide : Créer un catalogue de données Azure
 
@@ -22,6 +22,9 @@ Ce guide de démarrage rapide vous guide dans la création d’un catalogue Azur
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
+
+> [!Note]
+> En raison des exigences de sécurité d’Azure, Azure Data Catalog a appliqué le protocole TLS (Transport Layer Security) 1.2. Les protocoles TLS 1.0 et TLS 1.1 ont été désactivés. Vous pouvez rencontrer des erreurs lors de l’exécution de l’outil d’inscription si votre ordinateur n’est pas mis à jour pour le protocole TLS 1.2. Consultez [Activer le protocole TLS (1.2)](/mem/configmgr/core/plan-design/security/enable-tls-1-2) pour mettre à jour votre ordinateur.
 
 Pour commencer, vous avez besoin des éléments suivants :
 

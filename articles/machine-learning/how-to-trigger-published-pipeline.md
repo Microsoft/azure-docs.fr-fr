@@ -1,22 +1,22 @@
 ---
 title: Déclencher un pipeline ML pour de nouvelles données
 titleSuffix: Azure Machine Learning
-description: Découvrez comment déclencher l’exécution d’un pipeline ML à l’aide d’Azure Logic Apps.
+description: Découvrez comment déclencher l’exécution d’un pipeline Azure Machine Learning en utilisant Azure Logic Apps pour répondre aux nouvelles données.
 services: machine-learning
-author: sanpil
-ms.author: sanpil
+author: NilsPohlmann
+ms.author: nilsp
 ms.service: machine-learning
 ms.subservice: core
 ms.workload: data-services
-ms.topic: conceptual
 ms.date: 02/07/2020
-ms.custom: contperfq4
-ms.openlocfilehash: 32b3e153a98ca7de91e0dd05258414780b39dec4
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.topic: conceptual
+ms.custom: how-to, contperf-fy20q4
+ms.openlocfilehash: 37a18d147d3aca713d0c6bd934e23aa22b2521a5
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82857962"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97028884"
 ---
 # <a name="trigger-a-run-of-a-machine-learning-pipeline-from-a-logic-app"></a>Déclencher une exécution d’un pipeline Machine Learning à partir d’une application logique
 
@@ -94,3 +94,17 @@ Une fois que votre application logique a été provisionnée, effectuez les éta
     > ![Paramètres HTTP](media/how-to-trigger-published-pipeline/http-settings.png)
 
 1. Sélectionnez **Enregistrer**. Votre planification est maintenant prête.
+
+> [!IMPORTANT]
+> Si vous utilisez le contrôle d’accès en fonction du rôle Azure (RBAC Azure) pour gérer l’accès à votre pipeline, [définissez les autorisations de votre scénario de pipeline (entraînement ou scoring)](how-to-assign-roles.md#common-scenarios).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Pour plus d'informations, consultez les pages suivantes :
+
+> [!div class="nextstepaction"]
+> [Utiliser des pipelines Azure Machine Learning pour le scoring par lots](tutorial-pipeline-batch-scoring-classification.md)
+
+* En savoir plus sur les [pipelines](concept-ml-pipelines.md)
+* En savoir plus sur [l’exploration d’Azure Machine Learning avec Jupyter](samples-notebooks.md)
+

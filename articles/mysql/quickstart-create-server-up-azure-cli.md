@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer une base de données Azure Database pour MySQL en utilisant az mysql up'
 description: Guide de démarrage rapide pour créer un serveur Azure Database pour MySQL à l’aide de la commande up dans Azure CLI (interface de ligne de commande).
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 3/18/2020
-ms.custom: mvc
-ms.openlocfilehash: 7b81e88fe6f658fdf4c1857c6082100894c6f2f6
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: d89cc41ed26124ae4ad2e6689be6d59278c3d9da
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80067717"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94542165"
 ---
 # <a name="quickstart-create-an-azure-database-for-mysql-using-a-simple-azure-cli-command---az-mysql-up-preview"></a>Démarrage rapide : Créer un serveur Azure Database pour MySQL à l’aide d’une simple commande Azure CLI - az mysql up (préversion)
 
@@ -28,7 +28,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 Cet article nécessite que vous exécutiez localement Azure CLI version 2.0 ou ultérieure. Pour afficher la version installée, exécutez la commande `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
 
-Vous devrez vous connecter à votre compte à l’aide de la commande [az login](/cli/azure/authenticate-azure-cli?view=interactive-log-in). Notez la propriété **id** depuis la sortie de commande pour le nom d’abonnement correspondant.
+Vous devrez vous connecter à votre compte à l’aide de la commande [az login](/cli/azure/authenticate-azure-cli). Notez la propriété **id** depuis la sortie de commande pour le nom d’abonnement correspondant.
 
 ```azurecli
 az login
@@ -64,7 +64,7 @@ sku-name | GP_Gen5_2 | Nom du la référence SKU. Suit la convention {niveau tar
 backup-retention | 7 | Durée pendant laquelle la sauvegarde doit être conservée. Exprimée en jours.
 geo-redundant-backup | Désactivé | Indique si les sauvegardes géoredondantes doivent être activées ou non pour ce serveur.
 location | westus2 | Emplacement Azure du serveur.
-ssl-enforcement | Désactivé | Indique si le protocole SSL doit être activé ou non pour ce serveur.
+ssl-enforcement | activé | Indique si le protocole SSL doit être activé ou non pour ce serveur.
 storage-size | 5120 | Capacité de stockage du serveur (en mégaoctets).
 version | 5.7 | Version principale de MySQL.
 admin-user | Générée par le système | Nom d’utilisateur du compte administrateur.
@@ -75,7 +75,7 @@ admin-password | Générée par le système | Mot de passe de l’utilisateur Ad
 
 Une fois que votre serveur est créé, il présente les paramètres suivants :
 
-- Une règle de pare-feu appelée « devbox » est créée. Azure CLI tente de détecter l’adresse IP de la machine à partir de laquelle la commande `az mysql up` est exécutée et ajoute cette adresse IP à la liste verte.
+- Une règle de pare-feu appelée « devbox » est créée. Azure CLI tente de détecter l’adresse IP de la machine à partir de laquelle la commande `az mysql up` est exécutée et autorise cette adresse IP.
 - « Autoriser l’accès aux services Azure » est défini sur ACTIVÉ. Ce paramètre configure le pare-feu du serveur pour qu’il accepte les connexions de toutes les ressources Azure, y compris celles qui ne font pas partie de votre abonnement.
 - Le paramètre `wait_timeout` est défini sur 8 heures
 - Une base de données nommée « sampledb » est créée

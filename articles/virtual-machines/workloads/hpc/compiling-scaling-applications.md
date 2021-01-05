@@ -1,23 +1,19 @@
 ---
 title: Mise à l’échelle d’applications HPC - Machines virtuelles Microsoft Azure | Microsoft Docs
 description: Découvrez comment mettre à l’échelle des applications HPC sur des machines virtuelles Azure.
-services: virtual-machines
-documentationcenter: ''
 author: vermagit
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
 ms.service: virtual-machines
-ms.workload: infrastructure-services
+ms.subservice: workloads
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: amverma
-ms.openlocfilehash: 1de7b1412a242e1b658128ba11f482a2d9dc3107
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.reviewer: cynthn
+ms.openlocfilehash: 7e05d64420cd920242a887b206fd38cd4a655509
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594795"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967004"
 ---
 # <a name="scaling-hpc-applications"></a>Mise à l’échelle d’applications HPC
 
@@ -86,4 +82,4 @@ Les suggestions suivantes s’appliquent pour une mise à l’échelle optimale 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur [HPC](https://docs.microsoft.com/azure/architecture/topics/high-performance-computing/) sur Azure.
+En savoir plus sur [HPC](/azure/architecture/topics/high-performance-computing/) sur Azure.

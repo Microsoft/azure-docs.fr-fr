@@ -8,12 +8,13 @@ ms.topic: tutorial
 ms.date: 11/19/2019
 ms.author: normesta
 ms.reviewer: dineshm
-ms.openlocfilehash: 5889afa033b30606f8981ddb826aa192f24efa10
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.custom: devx-track-python
+ms.openlocfilehash: 5fce5871b4bd6c3e2353f7df04018e88b86ec4c7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312912"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912516"
 ---
 # <a name="tutorial-azure-data-lake-storage-gen2-azure-databricks--spark"></a>Tutoriel : Azure Data Lake Storage Gen2, Azure Databricks et Spark
 
@@ -32,22 +33,22 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 * Créez un compte Azure Data Lake Storage Gen2.
 
-  Voir [Créer un compte Azure Data Lake Storage Gen2](data-lake-storage-quickstart-create-account.md).
+  Consultez [Créer un compte de stockage à utiliser avec Azure Data Lake Storage Gen2](create-data-lake-storage-account.md).
 
-* Vérifiez que le [rôle Contributeur aux données Blob du stockage](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac) est attribué à votre compte d’utilisateur.
+* Vérifiez que le [rôle Contributeur aux données Blob du stockage](../common/storage-auth-aad-rbac-portal.md) est attribué à votre compte d’utilisateur.
 
-* Installez AzCopy v10. Consultez [Transférer des données avec AzCopy v10](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
+* Installez AzCopy v10. Consultez [Transférer des données avec AzCopy v10](../common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
 
-* Créer un principal de service. Consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+* Créer un principal de service. Consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](../../active-directory/develop/howto-create-service-principal-portal.md).
 
   Vous devrez faire certaines choses spécifiques pendant que vous suivrez les étapes décrites dans cet article.
 
-  :heavy_check_mark: Au cours des étapes décrites dans la section [Attribuer un rôle à l’application](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) de l’article, veillez à affecter le rôle **Contributeur aux données Blob du stockage** au principal de service.
+  :heavy_check_mark: Au cours des étapes décrites dans la section [Attribuer un rôle à l’application](../../active-directory/develop/howto-create-service-principal-portal.md#assign-a-role-to-the-application) de l’article, veillez à affecter le rôle **Contributeur aux données Blob du stockage** au principal de service.
 
   > [!IMPORTANT]
   > Veillez à attribuer le rôle dans l’étendue du compte de stockage Data Lake Storage Gen2. Vous pouvez attribuer un rôle à l’abonnement ou au groupe de ressources parent, mais des erreurs d’autorisation sont générées tant que ces attributions de rôles ne sont pas propagées au compte de stockage.
 
-  :heavy_check_mark: Au cours des étapes indiquées dans la section [Obtenir les valeurs pour la connexion](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) de l’article, collez les valeurs de l’ID de locataire, de l’ID d’application et du secret client dans un fichier texte. Vous en aurez besoin bientôt.
+  :heavy_check_mark: Au cours des étapes indiquées dans la section [Obtenir les valeurs pour la connexion](../../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in) de l’article, collez les valeurs de l’ID de locataire, de l’ID d’application et du secret client dans un fichier texte. Vous en aurez besoin bientôt.
 
 ### <a name="download-the-flight-data"></a>Téléchargement des données de vol
 

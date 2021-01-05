@@ -3,12 +3,12 @@ title: Créer un cluster à l’aide du nom commun du certificat
 description: Découvrez comment créer un cluster Service Fabric en utilisant un nom commun de certificat à partir d’un modèle.
 ms.topic: conceptual
 ms.date: 09/06/2019
-ms.openlocfilehash: 4a4448c88fa9493979f075f6b9c669927dd1d39e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c852b40d35f936753d3c16420159676da239b6c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614551"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86246433"
 ---
 # <a name="deploy-a-service-fabric-cluster-that-uses-certificate-common-name-instead-of-thumbprint"></a>Déployer un cluster Service Fabric utilisant un nom commun de certificat au lieu d’une empreinte
 Deux certificats ne peuvent pas avoir la même empreinte, ce qui complique la gestion ou le renouvellement des certificats de cluster. Toutefois, plusieurs certificats peuvent avoir le même nom commun ou objet.  Un cluster utilisant des noms communs de certificat facilite grandement la gestion des certificats. Cet article décrit le déploiement d’un cluster Service Fabric pour utiliser le nom commun d’un certificat à la place de son empreinte.
@@ -17,7 +17,7 @@ Deux certificats ne peuvent pas avoir la même empreinte, ce qui complique la ge
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="get-a-certificate"></a>Obtenir un certificat
-Commencez par obtenir un certificat auprès d’une [autorité de certification (AC)](https://wikipedia.org/wiki/Certificate_authority).  Le nom commun du certificat doit être pour votre domaine personnalisé et doit être acheté auprès d’un bureau d’enregistrement de domaine. Par exemple, « azureservicefabricbestpractices.com ». Les personnes qui ne sont pas employées par Microsoft ne peuvent pas approvisionner les certificats pour les domaines Microsoft et vous ne pouvez donc pas utiliser les noms DNS de votre équilibreur de charge ou de Traffic Manager comme noms communs pour votre certificat. Vous devez approvisionner une [zone Azure DNS](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns) si votre domaine personnalisé doit être résolu dans Azure. Vous devez également déclarer le domaine personnalisé que vous possédez comme « managementEndpoint » de votre cluster si vous souhaitez que le portail affiche l’alias de domaine personnalisé pour votre cluster.
+Commencez par obtenir un certificat auprès d’une [autorité de certification (AC)](https://wikipedia.org/wiki/Certificate_authority).  Le nom commun du certificat doit être pour votre domaine personnalisé et doit être acheté auprès d’un bureau d’enregistrement de domaine. Par exemple, « azureservicefabricbestpractices.com ». Les personnes qui ne sont pas employées par Microsoft ne peuvent pas approvisionner les certificats pour les domaines Microsoft et vous ne pouvez donc pas utiliser les noms DNS de votre équilibreur de charge ou de Traffic Manager comme noms communs pour votre certificat. Vous devez approvisionner une [zone Azure DNS](../dns/dns-delegate-domain-azure-dns.md) si votre domaine personnalisé doit être résolu dans Azure. Vous devez également déclarer le domaine personnalisé que vous possédez comme « managementEndpoint » de votre cluster si vous souhaitez que le portail affiche l’alias de domaine personnalisé pour votre cluster.
 
 À des fins de test, vous pouvez obtenir un certificat signé par une autorité de certification auprès d’une autorité de certification ouverte ou gratuite.
 

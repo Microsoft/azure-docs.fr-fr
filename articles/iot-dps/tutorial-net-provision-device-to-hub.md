@@ -8,13 +8,13 @@ ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
-ms.custom: mvc
-ms.openlocfilehash: 9d5b1511ffb48f587d4ee5c5a7d2b0ee9216018f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-csharp
+ms.openlocfilehash: f9a14ee6ee3e10b36d64ec11fc23807efe2bfaf2
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74976772"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966562"
 ---
 # <a name="tutorial-enroll-the-device-to-an-iot-hub-using-the-azure-iot-hub-provisioning-service-client-net"></a>Tutoriel : Inscrire l’appareil à un hub IoT avec le client du service IoT Hub Provisioning (.NET)
 
@@ -42,12 +42,12 @@ Ce didacticiel simule la période du processus de fabrication de matériel ou ju
 Cette étape implique l’ajout des artefacts de sécurité uniques de l’appareil au service Device Provisioning. Ces artefacts de sécurité sont les suivants :
 
 - Pour les appareils TPM :
-    - La *paire de clés de type EK* qui est unique pour chaque simulation ou processeur TPM. Pour plus d’informations, consultez [Comprendre la paire de clés de type EK (Endorsement Key) du module de plateforme sécurisée](https://technet.microsoft.com/library/cc770443.aspx).
+    - La *paire de clés de type EK* qui est unique pour chaque simulation ou processeur TPM. Pour plus d’informations, consultez [Comprendre la paire de clés de type EK (Endorsement Key) du module de plateforme sécurisée](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc770443(v=ws.11)).
     - *L’ID d’enregistrement* qui est utilisé pour identifier un appareil dans l’espace de noms ou l’étendue. Cet ID peut être ou non le même que l’ID de l’appareil. L’ID est obligatoire pour chaque appareil. Pour les appareils basés sur TPM, l’ID d’enregistrement peut être dérivé du module TPM lui-même, par exemple un hachage SHA-256 de la paire de clés de type EK TPM.
 
 - Pour les appareils basés sur X.509 :
-    - Le [certificat X.509 délivré à l’appareil](https://msdn.microsoft.com/library/windows/desktop/bb540819.aspx), sous la forme d’un fichier *.pem* ou *.cer*. Pour une inscription individuelle, vous devez utiliser le *certificat feuille* de votre système X.509, tandis que pour des groupes d’inscriptions, vous devez utiliser le *certificat racine* ou un *certificat du signataire* équivalent.
-    - *L’ID d’enregistrement* qui est utilisé pour identifier un appareil dans l’espace de noms ou l’étendue. Cet ID peut être ou non le même que l’ID de l’appareil. L’ID est obligatoire pour chaque appareil. Pour les appareils basés sur X.509, l’ID d’inscription est dérivé du nom commun du certificat. Pour plus d’informations sur ces exigences, consultez [Concepts d’appareil du service IoT Hub Device Provisioning](https://docs.microsoft.com/azure/iot-dps/concepts-device).
+    - Le [certificat X.509 délivré à l’appareil](/windows/win32/seccertenroll/about-x-509-public-key-certificates), sous la forme d’un fichier *.pem* ou *.cer*. Pour une inscription individuelle, vous devez utiliser le *certificat feuille* de votre système X.509, tandis que pour des groupes d’inscriptions, vous devez utiliser le *certificat racine* ou un *certificat du signataire* équivalent.
+    - *L’ID d’enregistrement* qui est utilisé pour identifier un appareil dans l’espace de noms ou l’étendue. Cet ID peut être ou non le même que l’ID de l’appareil. L’ID est obligatoire pour chaque appareil. Pour les appareils basés sur X.509, l’ID d’inscription est dérivé du nom commun du certificat. Pour plus d’informations sur ces exigences, consultez [Concepts d’appareil du service IoT Hub Device Provisioning](./concepts-service.md).
 
 Il existe deux façons d’inscrire l’appareil auprès du service Device Provisioning :
 

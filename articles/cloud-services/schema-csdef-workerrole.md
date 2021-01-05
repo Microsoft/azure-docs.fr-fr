@@ -14,11 +14,11 @@ caps.latest.revision: 55
 author: tgore03
 ms.author: tagore
 ms.openlocfilehash: 26225442c72fb209bb1ac4cd2bf4777fb39542fb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79534369"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005161"
 ---
 # <a name="azure-cloud-services-definition-workerrole-schema"></a>Schéma WorkerRole de définition d’Azure Cloud Services
 Le rôle de travail Azure est un rôle utile pour le développement généralisé. Il peut également effectuer le traitement en arrière-plan pour un rôle Web.

@@ -15,10 +15,10 @@ ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
 ms.openlocfilehash: 1b80fc997a4b3d2b472717b1ec2f379a4e958d8c
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80422553"
 ---
 # <a name="azure-vm-guest-os-firewall-is-blocking-inbound-traffic"></a>Le pare-feu du système d’exploitation invité des machines virtuelles Azure bloque le trafic entrant

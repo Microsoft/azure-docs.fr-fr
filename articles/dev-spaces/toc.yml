@@ -5,60 +5,10 @@
       items:
         - name: "Qu’est-ce qu’Azure Dev Spaces\_?"
           href: about.md
-    - name: Démarrages rapides
-      items:
-        - name: Développement en équipe
-          href: quickstart-team-development.md
-        - name: Déboguer et itérer
-          items:
-            - name: Utiliser Visual Studio Code et Java
-              href: quickstart-java.md
-            - name: Utiliser Visual Studio Code et .NET Core
-              href: quickstart-netcore.md
-            - name: Utiliser Visual Studio Code et Node.js
-              href: quickstart-nodejs.md
-            - name: Utiliser Visual Studio et .NET Core
-              href: quickstart-netcore-visualstudio.md
-        - name: Développer avec l’interface de ligne de commande
-          href: quickstart-cli.md
-        - name: Développer avec un graphique Helm existant
-          href: quickstart-existing-helm-chart.md
-    - name: Tutoriels
-      items:
-        - name: Java (VS Code & CLI)
-          items:
-            - name: 1 - Prise en main
-              href: get-started-java.md
-            - name: 2 - Développement multiservice
-              href: multi-service-java.md
-            - name: 3 - Développement en équipe
-              href: team-development-java.md
-        - name: .NET Core (VS Code et CLI)
-          items:
-            - name: 1 - Prise en main
-              href: get-started-netcore.md
-            - name: 2 - Développement multiservice
-              href: multi-service-netcore.md
-            - name: 3 - Développement en équipe
-              href: team-development-netcore.md
-        - name: .NET Core (Visual Studio)
-          items:
-            - name: 1 - Prise en main
-              href: get-started-netcore-visualstudio.md
-            - name: 2 - Développement multiservice
-              href: multi-service-netcore-visualstudio.md
-            - name: 3 - Développement en équipe
-              href: team-development-netcore-visualstudio.md
-        - name: Node.js (VS Code et CLI)
-          items:
-            - name: 1 - Prise en main
-              href: get-started-nodejs.md
-            - name: 2 - Développement multiservice
-              href: multi-service-nodejs.md
-            - name: 3 - Développement en équipe
-              href: team-development-nodejs.md
     - name: Concepts
       items:
+        - name: Migrer vers Bridge to Kubernetes
+          href: migrate-to-bridge-to-kubernetes.md
         - name: Fonctionnement de Dev Spaces
           items:
             - name: Vue d’ensemble
@@ -73,8 +23,6 @@
               href: how-dev-spaces-works-routing.md
             - name: Débogage à distance
               href: how-dev-spaces-works-remote-debugging.md
-            - name: Connexion de votre ordinateur de développement à AKS
-              href: how-dev-spaces-works-connect.md
         - name: Fonctionnement de VS Code avec Dev Spaces
           href: how-vs-code-works-with-dev-spaces.md
         - name: Configuration réseau dans différentes topologies réseau
@@ -85,8 +33,6 @@
           href: how-to/install-dev-spaces.md
         - name: Créer un cluster Kubernetes à l’aide d’Azure Cloud Shell
           href: how-to/create-cluster-cloud-shell.md
-        - name: Partager des espaces Azure Dev Spaces
-          href: how-to/share-dev-spaces.md
         - name: Gérer les secrets
           href: how-to/manage-secrets.md
         - name: Utiliser un flux NuGet personnalisé
@@ -101,8 +47,6 @@
           href: how-to/setup-cicd.md
         - name: Utiliser GitHub Actions avec Azure Dev Spaces (préversion)
           href: how-to/github-actions.md
-        - name: Utiliser le plug-in Azure Dev Spaces pour Jenkins
-          href: ../jenkins/tutorial-jenkins-dev-spaces.md
         - name: "Continuité de l’activité et reprise d’activité pour Azure Dev\_Spaces"
           href: how-to/dev-spaces-business-continuity.md
         - name: Interagir avec des conteneurs Windows
@@ -111,8 +55,6 @@
           href: how-to/ingress-https-traefik.md
         - name: Utiliser NGINX pour une entrée personnalisée et HTTPS
           href: how-to/ingress-https-nginx.md
-        - name: Connecter votre ordinateur de développement à un cluster AKS (préversion)
-          href: how-to/connect.md
     - name: Dépannage
       href: troubleshooting.md
     - name: Questions fréquentes (FAQ)

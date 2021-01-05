@@ -3,20 +3,21 @@ title: Exemple de script Azure CLI - Créer un compte Batch - abonnement utilisa
 description: Ce script crée un compte Azure Batch en mode abonnement utilisateur. Ce compte alloue des nœuds de calcul dans votre abonnement.
 ms.topic: sample
 ms.date: 01/29/2018
-ms.openlocfilehash: 9f3919574dd7dcbe932c71dfcea2ac52ec906c6c
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: c9b8ba2ef782dcdc99cb18698175b8b53a53f0dd
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83681887"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93076773"
 ---
 # <a name="cli-example-create-a-batch-account-in-user-subscription-mode"></a>Exemple CLI : créer un compte Batch en mode abonnement utilisateur
 
 Ce script crée un compte Azure Batch en mode abonnement utilisateur. Un compte qui alloue des nœuds de calcul dans votre abonnement doit être authentifié via un jeton Azure Active Directory. Les nœuds de calcul alloués sont pris en compte dans le quota de processeurs virtuels (cœur) de votre abonnement. 
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0.20 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli). 
+- Ce tutoriel nécessite Azure CLI version 2.0.20 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.  
 
 ## <a name="example-script"></a>Exemple de script
 
@@ -38,8 +39,8 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 |---|---|
 | [az role assignment create](/cli/azure/role) | Crée une nouvelle attribution de rôle pour un utilisateur, un groupe ou un principal de service. |
 | [az group create](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
-| [az keyvault create](https://docs.microsoft.com/cli/azure/keyvault#az-keyvault-create) | Crée un coffre de clés. |
-| [az keyvault set-policy](https://docs.microsoft.com/cli/azure/keyvault#az-keyvault-set-policy) | Met à jour la stratégie de sécurité du coffre de clés spécifié. |
+| [az keyvault create](/cli/azure/keyvault#az-keyvault-create) | Crée un coffre de clés. |
+| [az keyvault set-policy](/cli/azure/keyvault#az-keyvault-set-policy) | Met à jour la stratégie de sécurité du coffre de clés spécifié. |
 | [az batch account create](/cli/azure/batch/account#az-batch-account-create) | Crée le compte Batch.  |
 | [az batch account login](/cli/azure/batch/account#az-batch-account-login) | Effectue l’authentification par rapport au compte Batch spécifié pour renforcer les interactions avec la CLI.  |
 | [az group delete](/cli/azure/group#az-group-delete) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |

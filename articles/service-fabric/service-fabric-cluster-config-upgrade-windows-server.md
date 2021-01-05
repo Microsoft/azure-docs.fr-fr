@@ -1,16 +1,14 @@
 ---
 title: Mettre à niveau la configuration d’un cluster autonome
 description: Découvrez comment mettre à niveau la configuration qui exécute un cluster Service Fabric autonome.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 11/09/2018
-ms.author: dekapur
-ms.openlocfilehash: 8d0279cc323f7eee87feb2a596a4c2df0b4667e1
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 3cb1d40f5b32415588d3fd5a108967cfb4c0e534
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790845"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842612"
 ---
 # <a name="upgrade-the-configuration-of-a-standalone-cluster"></a>Mettre à niveau la configuration d’un cluster autonome 
 
@@ -53,7 +51,7 @@ TestConfiguration.ps1 -ClusterConfigFilePath <Path to the new Configuration File
 Certaines configurations ne peuvent pas être mises à niveau, notamment les points de terminaison, le nom du cluster, l’IP du nœud, etc. Cette opération teste le nouveau modèle JSON de configuration de cluster en le comparant à l’ancien modèle, et consigne les erreurs dans la fenêtre PowerShell en cas de problème.
 
 ## <a name="upgrade-the-cluster-configuration"></a>Mettre à niveau la configuration du cluster
-Pour mettre à niveau la configuration du cluster, exécutez [Start-ServiceFabricClusterConfigurationUpgrade](https://docs.microsoft.com/powershell/module/servicefabric/start-servicefabricclusterconfigurationupgrade). La mise à niveau de la configuration est traitée par domaine de mise à niveau.
+Pour mettre à niveau la configuration du cluster, exécutez [Start-ServiceFabricClusterConfigurationUpgrade](/powershell/module/servicefabric/start-servicefabricclusterconfigurationupgrade). La mise à niveau de la configuration est traitée par domaine de mise à niveau.
 
 ```powershell
 Start-ServiceFabricClusterConfigurationUpgrade -ClusterConfigPath <Path to Configuration File>

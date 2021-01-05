@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 03/11/2020
 ms.author: trbye
-ms.openlocfilehash: 7c30ee2ef4a6ab0cd4241cac921a59eeadf5ce17
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 3c2dbaf8f65208126c52617d4b89d901b3670dac
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81401046"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95025172"
 ---
 # <a name="what-is-multi-device-conversation-preview"></a>Qu'est-ce que la conversation multi-appareil (préversion) ?
 
@@ -60,7 +60,7 @@ La transcription et la traduction en temps réel peuvent rendre les conversation
 Vous pouvez également afficher des sous-titres lors des présentations et des conférences, à la fois à l'écran et sur les appareils des membres du public. Une fois que les membres du public ont rejoint la présentation à l'aide du code de conversation, la transcription peut apparaître sur leur appareil, dans la langue de leur choix.
 
 > [!NOTE]
-> Pour consulter un exemple, reportez-vous à [Traducteur de présentations](https://www.microsoft.com/translator/apps/presentation-translator/), un complément PowerPoint qui utilise le service de conversation multi-appareil. Vous pouvez le télécharger [ici](https://www.microsoft.com/download/details.aspx?id=55024).
+> Pour consulter un exemple, reportez-vous à [Traducteur de présentations](https://www.microsoft.com/translator/apps/presentation-translator/), un complément PowerPoint qui utilise le service de conversation multi-appareil. Vous pouvez le télécharger [ici](https://download.cnet.com/s/powerpoint-add-in/).
 
 ## <a name="how-it-works"></a>Fonctionnement
 
@@ -105,7 +105,7 @@ Lorsqu'il crée ou rejoint une conversation, chaque utilisateur doit choisir une
 Il existe deux types de langues : **Reconnaissance vocale** et **Texte uniquement** :
 - Si l'utilisateur choisit une langue de type **Reconnaissance vocale** comme langue principale, il pourra utiliser à la fois l'entrée vocale et l'entrée de texte dans le cadre de la conversation.
 
-- Si l'utilisateur choisit une langue de type **Texte uniquement**, il pourra seulement utiliser l'entrée de texte et envoyer des messages instantanés dans le cadre de la conversation. Les langues de type Texte uniquement sont les langues prises en charge pour la traduction de texte, mais pas pour la reconnaissance vocale. Pour connaître les langues disponibles, consultez la page [Langues prises en charge](supported-languages.md).
+- Si l'utilisateur choisit une langue de type **Texte uniquement**, il pourra seulement utiliser l'entrée de texte et envoyer des messages instantanés dans le cadre de la conversation. Les langues de type Texte uniquement sont les langues prises en charge pour la traduction de texte, mais pas pour la reconnaissance vocale. Pour connaître les langues disponibles, consultez la page [Langues prises en charge](./language-support.md).
 
 Outre sa langue principale, chaque participant peut également spécifier des langues supplémentaires pour traduire la conversation.
 
@@ -119,7 +119,7 @@ Vous trouverez ci-dessous un récapitulatif de ce que l'utilisateur peut faire d
 | Traduire la conversation | ✔️ | ✔️ |
 
 > [!NOTE]
-> Les langues compatibles avec la reconnaissance vocale et la traduction de texte sont répertoriées dans [Langues prises en charge](supported-languages.md).
+> Les langues compatibles avec la reconnaissance vocale et la traduction de texte sont répertoriées dans [Langues prises en charge](./language-support.md).
 
 
 

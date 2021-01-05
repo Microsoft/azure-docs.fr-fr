@@ -7,12 +7,12 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 01/15/2020
 ms.author: ralphe
-ms.openlocfilehash: 11ee22be1de22bfc4206aeb7f4a27449bd70c2bb
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: ecff6b6d7034e8e00c95ddd65d157f95a53afc45
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76267977"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87102655"
 ---
-Si vous préférez vous y mettre tout de suite, affichez ou téléchargez tous les [échantillons C# du Kit de développement logiciel (SDK) Speech](https://aka.ms/speech/github-csharp) sur GitHub. Sinon, commençons.
+Vous pouvez consulter ou télécharger tous les [Exemples C# du kit SDK Speech](https://aka.ms/speech/github-csharp) sur GitHub. 
 

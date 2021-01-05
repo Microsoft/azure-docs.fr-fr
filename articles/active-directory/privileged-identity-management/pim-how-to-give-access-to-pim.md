@@ -7,30 +7,30 @@ author: curtand
 manager: daveba
 editor: ''
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.subservice: pim
-ms.date: 11/08/2019
+ms.date: 08/06/2020
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7424e92f8520d13137b6ac8787523095058a005f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fba46ee5632f7411c433e4bba29201c59c552f21
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74022112"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94835201"
 ---
-# <a name="grant-access-to-other-administrators-to-manage-privileged-identity-management"></a>Accorder l’accès à d’autres administrateurs pour la gestion de Privileged Identity Management
+# <a name="delegate-access-to-privileged-identity-management"></a>Déléguer l’accès à Privileged Identity Management
 
-L’administrateur général qui active Privileged Identity Management (PIM) pour une organisation obtient automatiquement les affectations de rôles et l’accès à PIM. Toutefois, aucun autre membre de votre organisation Azure Active Directory (Azure AD) ne dispose par défaut d’un accès en écriture, y compris les autres administrateurs généraux. Les autres administrateurs généraux, les administrateurs de la sécurité et les lecteurs de sécurité disposent d’un accès en lecture seule à PIM. Pour accorder l’accès à PIM, le premier utilisateur peut affecter d’autres personnes au rôle **Administrateur de rôle privilégié**.
+Pour déléguer l’accès à Privileged Identity Management (PIM), un administrateur général peut affecter d’autres utilisateurs au rôle Administrateur de rôle privilégié. Par défaut, les administrateurs de la sécurité et les lecteurs de sécurité disposent d’un accès en lecture seule à PIM. Pour accorder l’accès à PIM, le premier utilisateur peut affecter d’autres personnes au rôle **Administrateur de rôle privilégié**. Le rôle Administrateur de rôle privilégié est requis pour la gestion des rôles Azure AD uniquement. Les autorisations d’administrateur de rôle privilégié ne sont pas requises pour gérer les paramètres des ressources Azure.
 
 > [!NOTE]
-> La gestion de PIM nécessite une authentification Azure MFA. Les comptes Microsoft ne pouvant pas s’inscrire pour l’authentification Azure MFA, un utilisateur qui se connecte avec un compte Microsoft ne peut pas accéder à PIM.
+> La gestion de Privileged Identity Management nécessite Azure AD Multi-Factor Authentication. Les comptes Microsoft ne pouvant pas s’inscrire à Azure AD Multi-Factor Authentication, un utilisateur qui se connecte avec un compte Microsoft ne peut pas accéder à Privileged Identity Management.
 
 Assurez-vous qu’il y a toujours au moins deux utilisateurs auxquels est affecté le rôle Administrateur de rôle privilégié, au cas où un utilisateur serait verrouillé ou son compte supprimé.
 
-## <a name="grant-access-to-manage-pim"></a>Accorder l’accès pour gérer PIM
+## <a name="delegate-access-to-manage-pim"></a>Déléguer l’accès pour gérer PIM
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 
@@ -46,9 +46,9 @@ Assurez-vous qu’il y a toujours au moins deux utilisateurs auxquels est affect
 
     ![Administrateur de rôle privilégié - Membres](./media/pim-how-to-give-access-to-pim/pim-pra-members.png)
 
-1. Sélectionnez **Ajouter un membre** pour ouvrir le volet Ajouter des membres managés.
+1. Sélectionnez **Ajouter un membre** pour ouvrir le volet **Ajouter des membres managés**.
 
-1. Cliquez sur **Sélectionner des membres** pour ouvrir le volet Sélectionner des membres.
+1. Cliquez sur **Sélectionner des membres** pour ouvrir le volet **Sélectionner des membres**.
 
     ![Administrateur de rôle privilégié - Sélectionner des membres](./media/pim-how-to-give-access-to-pim/pim-pra-select-members.png)
 

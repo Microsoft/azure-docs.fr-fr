@@ -3,14 +3,14 @@ title: Configurer des paramètres d’application de fonction dans Azure
 description: Apprenez à configurer les paramètres d’application Azure Functions.
 ms.assetid: 81eb04f8-9a27-45bb-bf24-9ab6c30d205c
 ms.topic: conceptual
-ms.date: 08/14/2019
-ms.custom: cc996988-fb4f-47
-ms.openlocfilehash: 662a04dbcc39f3fa95b0098eb8fe556b18b3495b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 04/13/2020
+ms.custom: cc996988-fb4f-47, devx-track-azurecli
+ms.openlocfilehash: f597e58c70d6ac9daff753f5c0a54199c2383c42
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234997"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019501"
 ---
 # <a name="manage-your-function-app"></a>Gérer votre application de fonction 
 
@@ -27,9 +27,11 @@ Cet article explique comment configurer et gérer vos applications de fonction.
 
 ## <a name="get-started-in-the-azure-portal"></a>Bien démarrer dans le portail Azure
 
-Commencez par accéder au [Azure portal] et connectez-vous à votre compte Azure. Dans la barre de recherche en haut du portail, tapez le nom de votre Function App et sélectionnez-la dans la liste. Après avoir sélectionné votre Function App, la page suivante s’affiche :
+1. Commencez par accéder au [Azure portal] et connectez-vous à votre compte Azure. Dans la barre de recherche en haut du portail, tapez le nom de votre application de fonction et sélectionnez-la dans la liste. 
 
-![Vue d’ensemble de Function App dans le portail Azure](./media/functions-how-to-use-azure-function-app-settings/azure-function-app-main.png)
+2. Sous **Paramètres** dans le volet gauche, sélectionnez **Configuration**.
+
+    :::image type="content" source="./media/functions-how-to-use-azure-function-app-settings/azure-function-app-main.png" alt-text="Vue d’ensemble de l’application de fonction dans le Portail Azure":::
 
 Vous pouvez accéder à tout ce dont vous avez besoin pour gérer votre application de fonction à partir de la page Vue d’ensemble, en particulier les **[paramètres de l’application](#settings)** et les **[fonctionnalités de la plateforme](#platform-features)** .
 
@@ -69,9 +71,7 @@ Quand vous développez une application de fonction localement, vous devez conser
 
 ## <a name="platform-features"></a>Fonctionnalités de la plate-forme
 
-![Onglet Fonctionnalités de la plate-forme de Function App.](./media/functions-how-to-use-azure-function-app-settings/azure-function-app-features-tab.png)
-
-Les Function Apps s’exécutent dans la plateforme Azure App Service et y sont entretenues. Par conséquent, vos Function Apps ont accès à la plupart des fonctionnalités de la plateforme d’hébergement web principale d’Azure. Dans l’onglet **Fonctionnalités de la plate-forme**, vous pouvez vous accéder aux nombreuses fonctionnalités de la plateforme App Service que vous pouvez utiliser dans vos Function Apps. 
+Les applications de fonction s’exécutent dans la plateforme Azure App Service et y sont entretenues. Par conséquent, vos Function Apps ont accès à la plupart des fonctionnalités de la plateforme d’hébergement web principale d’Azure. Dans le volet de gauche, vous pouvez accéder aux nombreuses fonctionnalités de la plateforme App Service que vous pouvez utiliser dans vos applications de fonction. 
 
 > [!NOTE]
 > Toutes les fonctionnalités App Service ne sont pas disponibles quand une Function App s’exécute dans le cadre du plan d’hébergement Consommation.

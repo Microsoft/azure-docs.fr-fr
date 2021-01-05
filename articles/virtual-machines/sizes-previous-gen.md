@@ -1,25 +1,19 @@
 ---
-title: Tailles des machines virtuelles Linux Azure - Générations précédentes | Microsoft Docs
-description: Répertorie les tailles des générations précédentes disponibles pour les machines virtuelles Linux dans Azure. Répertorie des informations sur le nombre de processeurs virtuels, de disques de données et de cartes réseau, ainsi que sur le débit de stockage et la bande passante réseau pour les tailles disponibles dans cette série.
-services: virtual-machines-linux
-documentationcenter: ''
+title: Tailles des machines virtuelles Azure – Générations précédentes | Microsoft Docs
+description: Répertorie les tailles des générations précédentes disponibles pour les machines virtuelles dans Azure. Répertorie des informations sur le nombre de processeurs virtuels, de disques de données et de cartes réseau, ainsi que sur le débit de stockage et la bande passante réseau pour les tailles disponibles dans cette série.
+services: virtual-machines
+ms.subservice: sizes
 author: mimckitt
-manager: gwallace
-editor: ''
-tags: azure-resource-manager,azure-service-management
-ms.assetid: ''
-ms.service: virtual-machines-linux
-ms.topic: article
-ms.tgt_pltfrm: vm-linux
+ms.topic: conceptual
 ms.workload: infrastructure-services
-ms.date: 02/20/2020
-ms.author: jonbeck
-ms.openlocfilehash: ac49d2da9d05c9677dbb6f5328874ab3a45ff661
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.date: 11/01/2020
+ms.author: mimckitt
+ms.openlocfilehash: 90bc98d63b45e43c9325eed4fe019b18f52d0de8
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82081538"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500289"
 ---
 # <a name="previous-generations-of-virtual-machine-sizes"></a>Tailles de machines virtuelles des générations précédentes
 
@@ -65,7 +59,7 @@ Mise en cache du Stockage Premium :  Prise en charge
 
 MBps = 10^6 octets par seconde, et Gio = 1024^3 octets.
 
-<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou Mbits/s) avec une machine virtuelle de la série Fs peut être limité par le nombre, la taille et la répartition des disques attachés.  Pour plus d’informations, voir la conception pour de hautes performances sous [Windows](windows/premium-storage-performance.md) ou [Linux](linux/premium-storage-performance.md).  
+<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou Mbits/s) avec une machine virtuelle de la série Fs peut être limité par le nombre, la taille et la répartition des disques attachés.  Pour plus d’informations, consultez [Conception pour de hautes performances](premium-storage-performance.md).
 
 
 ## <a name="nvv2-series"></a>Série NVv2
@@ -82,11 +76,9 @@ Chaque GPU dans les instances NVv2 est fourni avec une licence GRID. Cette licen
 | Standard_NV12s_v2 | 12 | 224 | 640  | 2 | 16 | 24 | 8 | 2 | 50  |
 | Standard_NV24s_v2 | 24 | 448 | 1 280 | 4 | 32 | 32 | 8 | 4 | 100 |
 
-[!INCLUDE [virtual-machines-common-sizes-table-defs](../../includes/virtual-machines-common-sizes-table-defs.md)]
-
 ## <a name="older-generations-of-virtual-machine-sizes"></a>Tailles de machines virtuelles des générations antérieures
 
-Cette section fournit des informations sur les tailles de machines virtuelles des anciennes générations. Ces tailles sont toujours prises en charge mais ne peuvent pas recevoir de capacité supplémentaire. Il existe des tailles plus récentes ou alternatives qui sont généralement disponibles. Pour choisir les tailles de machine virtuelle les plus adaptées à vos besoins, voir [Tailles des machines virtuelles Linux dans Azure](linux/sizes.md).  
+Cette section fournit des informations sur les tailles de machines virtuelles des anciennes générations. Ces tailles sont toujours prises en charge mais ne peuvent pas recevoir de capacité supplémentaire. Il existe des tailles plus récentes ou alternatives qui sont généralement disponibles. Pour choisir les tailles de machine virtuelle les plus adaptées à vos besoins, consultez [Tailles des machines virtuelles dans Azure](./sizes.md).  
 
 Pour plus d’informations sur le redimensionnement d’une machine virtuelle Linux, consultez [Redimensionner une machine virtuelle Linux](linux/change-vm-size.md).  
 
@@ -169,13 +161,13 @@ Les tailles A8 à A11 et celles de la série H sont également appelées *inst
 <sup>1</sup>Pour les applications MPI, un réseau principal RDMA dédié est activé par un réseau InfiniBand FDR, qui garantit une très faible latence et une large bande passante.  
 
 > [!NOTE]
-> La mise hors service des machines virtuelles A8-A11 est planifiée pour le mois de mars 2021. Pour plus d’informations, consultez le [Guide de migration HPC](https://azure.microsoft.com/resources/hpc-migration-guide/).
+> La [mise hors service des machines virtuelles A8-A11 est planifiée pour le mois de mars 2021](https://azure.microsoft.com/updates/a8-a11-azure-virtual-machine-sizes-will-be-retired-on-march-1-2021/). Nous vous recommandons vivement de ne pas créer de nouvelles machines virtuelles A8 – A11. Migrez les machines virtuelles A8 – A11 existantes vers des tailles de machines virtuelles hautes performances puissantes et plus récentes telles que H, HB, HC, HBv2, ainsi que des tailles de machines virtuelles de calcul à usage général, telles que D, E et F, pour un meilleur rapport qualité/prix. Pour plus d’informations, consultez le [Guide de migration HPC](https://azure.microsoft.com/resources/hpc-migration-guide/).
 
 <br>
 
 ### <a name="d-series"></a>Série D  
 
-**Recommandation de taille plus récente** : [Série Dv3](dv3-dsv3-series.md)
+**Recommandation de taille plus récente** : [série Dav4](dav4-dasv4-series.md), [série Dv4](dv4-dsv4-series.md) et [série Ddv4](ddv4-ddsv4-series.md)
 
 ACU : 160-250 <sup>1</sup>
 
@@ -196,7 +188,7 @@ Mise en cache du Stockage Premium :  Non pris en charge
 
 ### <a name="d-series---memory-optimized"></a>Série D - à mémoire optimisée  
 
-**Recommandation de taille plus récente** : [Série Dv3](dv3-dsv3-series.md)
+**Recommandation de taille plus récente** : [série Dav4](dav4-dasv4-series.md), [série Dv4](dv4-dsv4-series.md) et [série Ddv4](ddv4-ddsv4-series.md)
 
 ACU : 160-250 <sup>1</sup>
 
@@ -215,7 +207,7 @@ Mise en cache du Stockage Premium :  Non pris en charge
 
 <br>
 
-## <a name="preview-dc-series"></a>Aperçu : Série DC
+### <a name="preview-dc-series"></a>Aperçu : Série DC
 
 **Recommandation de taille plus récente** : [Série DCsv2](dcv2-series.md)
 
@@ -232,12 +224,12 @@ La série DC utilise le processeur Intel XEON E-2176G 3,7 GHz de dernière gén
 
 > [!IMPORTANT]
 >
-> Les machines virtuelles de la série DC sont des [machines virtuelles de 2e génération](./linux/generation-2.md#creating-a-generation-2-vm) et ne prennent en charge que les images `Gen2`.
+> Les machines virtuelles de la série DC sont des [machines virtuelles de 2e génération](./generation-2.md#creating-a-generation-2-vm) et ne prennent en charge que les images `Gen2`.
 
 
 ### <a name="ds-series"></a>Série DS  
 
-**Recommandation de taille plus récente** : [Série Dsv3](dv3-dsv3-series.md)
+**Recommandation de taille plus récente** : [série Dasv4](dav4-dasv4-series.md), [série Dsv4](dv4-dsv4-series.md) et [série Ddsv4](ddv4-ddsv4-series.md)
 
 ACU : 160-250 <sup>1</sup>
 
@@ -258,7 +250,7 @@ Mise en cache du Stockage Premium :  Prise en charge
 
 ### <a name="ds-series---memory-optimized"></a>Série DS - à mémoire optimisée  
 
-**Recommandation de taille plus récente** : [Série Dsv3](dv3-dsv3-series.md)
+**Recommandation de taille plus récente** : [série Dasv4](dav4-dasv4-series.md), [série Dsv4](dv4-dsv4-series.md) et [série Ddsv4](ddv4-ddsv4-series.md)
 
 ACU : 160-250 <sup>1,2</sup>
 
@@ -273,12 +265,14 @@ Mise en cache du Stockage Premium :  Prise en charge
 | Standard_DS13 | 8  | 56  | 112 | 32 | 32 000/256 (288) | 25 600/256 | 8/4 000 |
 | Standard_DS14 | 16 | 112 | 224 | 64 | 64 000/512 (576) | 51 200/512 | 8/8 000 |
 
-<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou Mbits/s) avec une machine virtuelle de la série DS peut être limité par le nombre, la taille et la répartition des disques attachés.  Pour plus d’informations, voir la conception pour de hautes performances sous [Windows](windows/premium-storage-performance.md) ou [Linux](linux/premium-storage-performance.md).
+<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou Mbits/s) avec une machine virtuelle de la série DS peut être limité par le nombre, la taille et la répartition des disques attachés.  Pour plus d’informations, consultez [Conception pour de hautes performances](premium-storage-performance.md).
 <sup>2</sup> La famille de machines virtuelles peut s’exécuter sur l’un des processeurs suivants : Intel Xeon® E5-2660 v2 de 2,2 GHz, Intel Xeon® E5-2673 v3 de 2,4 GHz (Haswell) ou Intel XEON® E5-2673 v4 de 2,3 GHz (Broadwell)  
 
 <br>
 
 ### <a name="ls-series"></a>Série Ls
+
+**Recommandation de taille plus récente** : [Série Lsv2](lsv2-series.md)
 
 La série Ls offre jusqu’à 32 processeurs virtuels, grâce à la [Famille de processeurs Intel® Xeon® E5 v3](https://www.intel.com/content/www/us/en/processors/xeon/xeon-e5-solutions.html). Cette série propose les mêmes performances de processeur que celles de la série G/GS, associées à 8 Gio de mémoire par processeur virtuel.
 
@@ -297,11 +291,13 @@ Mise en cache du Stockage Premium :  Non pris en charge
 | Standard_L16s  | 16 | 128 | 2807 | 64 | 80 000/800 | 20 000/500 | 8/16 000 |
 | Standard_L32s&nbsp;<sup>1</sup> | 32 | 256 | 5630 | 64 | 160 000/1 600 | 40 000/1 000 | 8/20 000 |
 
-Le débit de disque maximal possible avec des machines virtuelles de la série Ls peut être limité par le nombre, la taille et la répartition des disques attachés. Pour plus d’informations, voir la conception pour de hautes performances sous [Windows](windows/premium-storage-performance.md) ou [Linux](linux/premium-storage-performance.md).
+Le débit de disque maximal possible avec des machines virtuelles de la série Ls peut être limité par le nombre, la taille et la répartition des disques attachés. Pour plus d’informations, consultez [Conception pour de hautes performances](premium-storage-performance.md).
 
 <sup>1</sup> L’instance est isolée sur un matériel dédié à un client unique.
 
 ### <a name="gs-series"></a>Série GS
+
+**Recommandation de taille plus récente** : [série Easv4](eav4-easv4-series.md), [série Esv4](ev4-esv4-series.md), [série Edsv4](edv4-edsv4-series.md) et [série M](m-series.md)
 
 ACU : 180 - 240 <sup>1</sup>
 
@@ -317,7 +313,7 @@ Mise en cache du Stockage Premium :  Prise en charge
 | Standard_GS4&nbsp;<sup>3</sup> | 16 | 224 | 448 | 64 | 80 000/800 (2112) | 40 000/1 000 | 8/16 000 |
 | Standard_GS5&nbsp;<sup>2,&nbsp;3</sup> | 32 | 448 |896 | 64 |160 000/1 600 (4224) | 80 000/2 000 | 8/20 000 |
 
-<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou MBps) avec une machine virtuelle de la série GS peut être limité par le nombre, la taille et la répartition des disques attachés. Pour plus d’informations, voir la conception pour de hautes performances sous [Windows](windows/premium-storage-performance.md) ou [Linux](linux/premium-storage-performance.md).
+<sup>1</sup> Le débit de disque maximal possible (E/S par seconde ou MBps) avec une machine virtuelle de la série GS peut être limité par le nombre, la taille et la répartition des disques attachés. Pour plus d’informations, consultez [Conception pour de hautes performances](premium-storage-performance.md).
 
 <sup>2</sup> L’instance est isolée sur un matériel dédié à un client unique.
 
@@ -326,6 +322,8 @@ Mise en cache du Stockage Premium :  Prise en charge
 <br>
 
 ### <a name="g-series"></a>Série G
+
+**Recommandation de taille plus récente** : [série Eav4](eav4-easv4-series.md), [série Ev4](ev4-esv4-series.md), [série Edv4](edv4-edsv4-series.md) et [série M](m-series.md)
 
 ACU : 180 - 240
 
@@ -344,7 +342,7 @@ Mise en cache du Stockage Premium :  Non pris en charge
 <sup>1</sup> L’instance est isolée sur un matériel dédié à un client unique.
 <br>
 
-## <a name="nv-series"></a>Série NV
+### <a name="nv-series"></a>Série NV
 **Recommandation de taille plus récente** : [Série NVv3](nvv3-series.md) et [série NVv4](nvv4-series.md)
 
 Les machines virtuelles de la série NV sont optimisées par des GPU [NVIDIA Tesla M60](https://images.nvidia.com/content/tesla/pdf/188417-Tesla-M60-DS-A4-fnl-Web.pdf) et la technologie NVIDIA GRID pour les applications de bureautique accélérées et les bureaux virtuels où les clients peuvent visualiser leurs données ou simulations. Les utilisateurs peuvent visualiser leurs flux de travail nécessitant beaucoup de graphismes sur les instances NV afin d’obtenir des fonctionnalités graphiques de qualité supérieure et exécuter par ailleurs des charges de travail simple précision comme le codage et le rendu. Les machines virtuelles de la série NV sont également dotées de processeurs Intel Xeon E5-2690 v3 (Haswell).
@@ -368,14 +366,86 @@ Mises à jour avec préservation de la mémoire : Non pris en charge
 1 GPU = une moitié de carte M60.
 <br>
 
-## <a name="other-sizes"></a>Autres tailles
+### <a name="nc-series"></a>Série NC
+**Recommandation de taille plus récente** : [Série NC T4 v3](nct4-v3-series.md)
 
-* [Usage général](sizes-general.md)
-* [Optimisé pour le calcul](sizes-compute.md)
-* [Mémoire optimisée](sizes-memory.md)
-* [Optimisé pour le stockage](sizes-storage.md)
-* [GPU](sizes-gpu.md)
-* [Calcul haute performance](sizes-hpc.md)
+Les machines virtuelles de la série NC sont pilotées par la carte [Tesla K80 de NVIDIA](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/Tesla-K80-BoardSpec-07317-001-v05.pdf) et le processeur Intel Xeon E5-2690 v3 (Haswell). Les utilisateurs peuvent exploiter plus rapidement leurs données en tirant parti de CUDA pour les applications d’exploration énergétique, les simulations de crash, le rendu de lancer de rayon, l’apprentissage profond et plus encore. La configuration NC24r fournit une interface réseau à haut débit et à faible latence optimisée pour les charges de travail d’informatique parallèle fortement couplées.
+
+[Stockage Premium](premium-storage-performance.md) : Non pris en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Non pris en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Génération 1<br>
+<br>
+
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Nombre max de cartes réseau |
+|---|---|---|---|---|---|---|---|
+| Standard_NC6    | 6  | 56  | 340  | 1 | 12 | 24 | 1 |
+| Standard_NC12   | 12 | 112 | 680  | 2 | 24 | 48 | 2 |
+| Standard_NC24   | 24 | 224 | 1440 | 4 | 48 | 64 | 4 |
+| Standard_NC24r* | 24 | 224 | 1440 | 4 | 48 | 64 | 4 |
+
+1 GPU = une moitié de carte K80.
+
+*Prenant en charge RDMA
+
+
+<br>
+
+
+### <a name="ncv2-series"></a>Série NCv2
+**Recommandation de taille plus récente** : [Série NC T4 v3](nct4-v3-series.md) et [Série NC V100 v3](ncv3-series.md)
+
+Les machines virtuelles de série NCv2 sont optimisées par les GPU NVIDIA Tesla P100. Ces GPU peuvent fournir des performances de calcul deux fois supérieures à celles de la série NC. Les clients peuvent tirer parti de ces GPU mis à jour pour les charges de travail HPC traditionnelles telles que la modélisation de gisements, le séquençage de l’ADN, l’analyse des protéines, les simulations de Monte-Carlo, etc. Outre les GPU, les machines virtuelles de la série NCv2 sont également dotées de processeurs Intel Xeon E5-2690 v4 (Broadwell).
+
+La configuration NC24rs v2 fournit une interface réseau à haut débit et à faible latence optimisée pour les charges de travail d’informatique parallèle fortement couplées.
+
+[Stockage Premium](premium-storage-performance.md) : Pris en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Générations 1 et 2<br>
+
+> Pour cette série de machines virtuelles, le quota de processeurs virtuels (cœurs) dans votre abonnement est initialement défini sur 0 dans chaque région. [Demandez une augmentation du quota de processeurs virtuels](../azure-portal/supportability/resource-manager-core-quotas-request.md) pour cette série dans une [région disponible](https://azure.microsoft.com/regions/services/).
+>
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau |
+|---|---|---|---|---|---|---|---|---|
+| Standard_NC6s_v2    | 6  | 112 | 736  | 1 | 16 | 12 | 20 000/200 | 4 |
+| Standard_NC12s_v2   | 12 | 224 | 1474 | 2 | 32 | 24 | 40 000/400 | 8 |
+| Standard_NC24s_v2   | 24 | 448 | 2948 | 4 | 64 | 32 | 80 000/800 | 8 |
+| Standard_NC24rs_v2* | 24 | 448 | 2948 | 4 | 64 | 32 | 80 000/800 | 8 |
+
+1 GPU = une carte P100.
+
+*Prenant en charge RDMA
+
+<br>
+
+### <a name="nd-series"></a>Série ND
+**Recommandation de taille plus récente** : [Série NDv2](ndv2-series.md) et [Série NC V100 v3](ncv3-series.md)
+
+Les machines virtuelles de la série ND sont nouvelles dans la famille de GPU et sont conçues pour les charges de travail d’intelligence artificielle et d’apprentissage profond. Elles offrent d’excellentes performances pour l’apprentissage et l’inférence. Les instances ND sont pilotées par des GPU [Tesla P40 de NVIDIA](https://images.nvidia.com/content/pdf/tesla/184427-Tesla-P40-Datasheet-NV-Final-Letter-Web.pdf) et des processeurs Intel Xeon E5-2690 v4 (Broadwell). Ces instances offrent d’excellentes performances pour les opérations à virgule flottante simple précision, et pour les charges de travail d’intelligence artificielle utilisant Microsoft Cognitive Toolkit, TensorFlow, Caffe et d’autres infrastructures. La série ND offre également une taille de mémoire GPU beaucoup plus importante (24 Go), ce qui permet d’adapter des modèles de réseaux neuronaux beaucoup plus volumineux. À l’instar de la série NC, la série ND offre une configuration avec un réseau à faible latence secondaire et à haut débit grâce à l’accès direct à la mémoire à distance (RDMA), ainsi que la connectivité InfiniBand, de sorte que vous pouvez exécuter des travaux de formation à grande échelle s’étendant sur de nombreux GPU.
+
+[Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Génération 1 et 2<br>
+
+> Pour cette série de machines virtuelles, le quota de processeurs virtuels (cœurs) par région dans votre abonnement est initialement défini sur 0. [Demandez une augmentation du quota de processeurs virtuels](../azure-portal/supportability/resource-manager-core-quotas-request.md) pour cette série dans une [région disponible](https://azure.microsoft.com/regions/services/).
+>
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau |
+|---|---|---|---|---|---|---|---|---|
+| Standard_ND6s    | 6  | 112 | 736  | 1 | 24 | 12 | 20 000/200 | 4 |
+| Standard_ND12s   | 12 | 224 | 1474 | 2 | 48 | 24 | 40 000/400 | 8 |
+| Standard_ND24s   | 24 | 448 | 2948 | 4 | 24 | 32 | 80 000/800 | 8 |
+| Standard_ND24rs* | 24 | 448 | 2948 | 4 | 96 | 32 | 80 000/800 | 8 |
+
+1 GPU = une carte P40.
+
+*Prenant en charge RDMA
+
+<br>
 
 ## <a name="next-steps"></a>Étapes suivantes
 

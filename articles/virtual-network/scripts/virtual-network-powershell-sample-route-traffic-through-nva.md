@@ -1,6 +1,6 @@
 ---
 title: Router le trafic via une appliance virtuelle réseau - Exemple de script Azure PowerShell
-description: Exemple de script Azure PowerShell - Acheminer le trafic via une appliance virtuelle réseau de pare-feu.
+description: Exemple de script Azure PowerShell - Router le trafic via une appliance virtuelle réseau de pare-feu.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -12,12 +12,13 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 03/20/2018
 ms.author: kumud
-ms.openlocfilehash: 9a94249f75fc5b01663268fc4fa8cec016bc96bf
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 19bebb5c1817882dcb641a284332926e51a8dd2f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74091278"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91313992"
 ---
 # <a name="route-traffic-through-a-network-virtual-appliance-script-sample"></a>Exemple de script pour acheminer le trafic via une appliance virtuelle réseau
 
@@ -62,6 +63,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts PowerShell pour réseau virtuel dans [Exemples PowerShell pour réseau virtuel](../powershell-samples.md).

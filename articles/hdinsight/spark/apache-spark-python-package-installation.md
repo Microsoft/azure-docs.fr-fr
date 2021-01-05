@@ -5,23 +5,19 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: seoapr2020
+ms.topic: how-to
+ms.custom: seoapr2020, devx-track-python
 ms.date: 04/29/2020
-ms.openlocfilehash: 13ea1043d05c9f349e25623086c2908e176772a8
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 5a0f9f9f972ec42987d6152c16e4377e399cdba5
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583955"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896410"
 ---
 # <a name="safely-manage-python-environment-on-azure-hdinsight-using-script-action"></a>Gérer en toute sécurité l’environnement Python sur Azure HDInsight avec une action de script
 
-> [!div class="op_single_selector"]
-> * [À l’aide de la commande magique de cellule](apache-spark-jupyter-notebook-use-external-packages.md)
-> * [À l’aide d’une action de script](apache-spark-python-package-installation.md)
-
-HDInsight dispose de deux installations Python intégrées dans le cluster Spark, Anaconda Python 2.7 et Python 3.5. Certains clients peuvent avoir besoin de personnaliser l’environnement Python. Par exemple, en installant des packages Python externes ou une autre version de Python. Nous décrivons ici la meilleure pratique de gestion sûre d’environnements Python pour des clusters Apache Spark sur HDInsight.
+HDInsight dispose de deux installations Python intégrées dans le cluster Spark, Anaconda Python 2.7 et Python 3.5. Les clients peuvent avoir besoin de personnaliser l’environnement Python, par exemple en installant des packages Python externes. Nous décrivons ici la meilleure pratique de gestion sûre d’environnements Python pour des clusters Apache Spark sur HDInsight.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -41,17 +37,17 @@ Deux types de composant open source sont disponibles dans le service HDInsight :
 > [!IMPORTANT]
 > Les composants fournis avec le cluster HDInsight sont entièrement pris en charge. Le support Microsoft vous aide à isoler et à résoudre les problèmes liés à ces composants.
 >
-> Les composants personnalisés bénéficient d’un support commercialement raisonnable pour vous aider à résoudre le problème. La prise en charge de Microsoft peut être en mesure de résoudre le problème, SINON vous pourrez avoir besoin d’associer les chaînes disponibles pour les technologies open source lorsqu’il est possible de recourir à une expertise reconnue concernant cette technologie. Il existe par exemple de nombreux sites communautaires, comme : [Forum MSDN pour HDInsight](https://social.msdn.microsoft.com/Forums/azure/home?forum=hdinsight), `https://stackoverflow.com`. Par ailleurs, des projets Apache ont des sites de projet sur `https://apache.org`.
+> Les composants personnalisés bénéficient d’un support commercialement raisonnable pour vous aider à résoudre le problème. La prise en charge de Microsoft peut être en mesure de résoudre le problème, SINON vous pourrez avoir besoin d’associer les chaînes disponibles pour les technologies open source lorsqu’il est possible de recourir à une expertise reconnue concernant cette technologie. Il existe par exemple de nombreux sites communautaires, comme : [Page de questions Microsoft Q&R sur HDInsight](/answers/topics/azure-hdinsight.html), `https://stackoverflow.com`. Par ailleurs, des projets Apache ont des sites de projet sur `https://apache.org`.
 
 ## <a name="understand-default-python-installation"></a>Présentation de l’installation par défaut de Python
 
 Le cluster HDInsight Spark est créé avec l’installation d’Anaconda. Il existe deux installations Python dans le cluster : Anaconda Python 2.7 et Python 3.5. Le tableau ci-dessous montre les paramètres de Python par défaut pour Spark, livy et Jupyter.
 
-| |Python 2.7|Python 3.5|
+|Paramètre |Python 2.7|Python 3.5|
 |----|----|----|
 |Path|/usr/bin/anaconda/bin|/usr/bin/anaconda/envs/py35/bin|
-|Spark|Défini par défaut sur 2.7|N/A|
-|Livy|Défini par défaut sur 2.7|N/A|
+|Version de Spark|Défini par défaut sur 2.7|Peut remplacer la configuration par 3.5|
+|Version de Livy|Défini par défaut sur 2.7|Peut remplacer la configuration par 3.5|
 |Jupyter|Noyau PySpark|Noyau PySpark3|
 
 ## <a name="safely-install-external-python-packages"></a>Installer en toute sécurité des packages Python externes
@@ -85,7 +81,7 @@ Le cluster HDInsight dépend de l’environnement Python intégré, Python 2.7 
 
     - Ou utilisez le référentiel PyPi, et modifiez `seaborn` et `py35new` en conséquence :
         ```bash
-        sudo /usr/bin/anaconda/env/py35new/bin/pip install seaborn
+        sudo /usr/bin/anaconda/envs/py35new/bin/pip install seaborn
         ```
 
     Utilisez la commande ci-dessous si vous souhaitez installer une bibliothèque avec une version spécifique :
@@ -102,7 +98,7 @@ Le cluster HDInsight dépend de l’environnement Python intégré, Python 2.7 
     - Ou utilisez le référentiel PyPi, et modifiez `numpy==1.16.1` et `py35new` en conséquence :
 
         ```bash
-        sudo /usr/bin/anaconda/env/py35new/bin/pip install numpy==1.16.1
+        sudo /usr/bin/anaconda/envs/py35new/bin/pip install numpy==1.16.1
         ```
 
     Si vous ne connaissez pas le nom de l’environnement virtuel, vous pouvez utiliser SSH pour accéder au nœud principal du cluster et exécuter `/usr/bin/anaconda/bin/conda info -e` pour afficher tous les environnements virtuels.
@@ -132,7 +128,25 @@ Le cluster HDInsight dépend de l’environnement Python intégré, Python 2.7 
 
     4. Enregistrez les modifications, puis redémarrez les services affectés. Ces modifications nécessitent un redémarrage du service Spark2. L’interface utilisateur Ambari affiche un rappel de redémarrage obligatoire. Cliquez sur Redémarrer pour redémarrer tous les services affectés.
 
-        ![Modifier la configuration Spark via Ambari](./media/apache-spark-python-package-installation/ambari-restart-services.png)
+        ![Redémarrer les services](./media/apache-spark-python-package-installation/ambari-restart-services.png)
+
+    5. Définissez deux propriétés sur votre session Spark pour vous assurer que le travail pointe vers la configuration Spark mise à jour : `spark.yarn.appMasterEnv.PYSPARK_PYTHON` et `spark.yarn.appMasterEnv.PYSPARK_DRIVER_PYTHON`. 
+
+        À l’aide du terminal ou d’un notebook, utilisez la fonction `spark.conf.set`.
+
+        ```spark
+        spark.conf.set("spark.yarn.appMasterEnv.PYSPARK_PYTHON", "/usr/bin/anaconda/envs/py35/bin/python")
+        spark.conf.set("spark.yarn.appMasterEnv.PYSPARK_DRIVER_PYTHON", "/usr/bin/anaconda/envs/py35/bin/python")
+        ```
+
+        Si vous utilisez livy, ajoutez les propriétés suivantes au corps de la demande :
+
+        ```
+        “conf” : {
+        “spark.yarn.appMasterEnv.PYSPARK_PYTHON”:”/usr/bin/anaconda/envs/py35/bin/python”,
+        “spark.yarn.appMasterEnv.PYSPARK_DRIVER_PYTHON”:”/usr/bin/anaconda/envs/py35/bin/python”
+        }
+        ```
 
 4. Si vous souhaitez utiliser le nouvel environnement virtuel créé sur Jupyter. Modifiez les configurations Jupyter et redémarrez Jupyter. Exécutez des actions de script sur tous les nœuds d’en-tête avec l’instruction ci-dessous pour associer Jupyter au nouvel environnement virtuel créé. Veillez à modifier le chemin d’accès au préfixe que vous avez spécifié pour votre environnement virtuel. Après l’exécution de cette action de script, redémarrez le service Jupyter via l’interface utilisateur Ambari pour rendre cette modification disponible.
 
@@ -146,7 +160,7 @@ Le cluster HDInsight dépend de l’environnement Python intégré, Python 2.7 
 
 ## <a name="known-issue"></a>Problème connu
 
-Il existe un bogue connu pour Anaconda versions `4.7.11`, `4.7.12` et `4.8.0`. Si vous constatez que vos actions de script se figent à `"Collecting package metadata (repodata.json): ...working..."` et échouent avec `"Python script has been killed due to timeout after waiting 3600 secs"`. Vous pouvez télécharger [ce script](https://gregorysfixes.blob.core.windows.net/public/fix-conda.sh) et l’exécuter en tant qu’actions de script sur tous les nœuds pour résoudre le problème.
+Il existe un bogue connu pour Anaconda versions `4.7.11`, `4.7.12` et `4.8.0`. Il est possible que vos actions de script se figent à l’étape `"Collecting package metadata (repodata.json): ...working..."` et se terminent par l’échec suivant : `"Python script has been killed due to timeout after waiting 3600 secs"`. Vous pouvez télécharger [ce script](https://gregorysfixes.blob.core.windows.net/public/fix-conda.sh) et l’exécuter en tant qu’actions de script sur tous les nœuds pour résoudre le problème.
 
 Pour vérifier votre version d’Anaconda, vous pouvez utiliser le protocole SSH pour le nœud d’en-tête de cluster et exécuter `/usr/bin/anaconda/bin/conda --v`.
 

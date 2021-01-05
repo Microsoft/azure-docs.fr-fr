@@ -5,23 +5,16 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 03/03/2020
+ms.date: 10/20/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: d2cf1a2e2ab9cf2d6e35aa12b5b0f8ddc04ad0e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a66596ecb926c1bf3c6b61cc99e1eb1b56e99158
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78301938"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "92328428"
 ---
-Vous pouvez créer un réseau virtuel avec le modèle de déploiement Resource Manager et le portail Azure en suivant ces étapes. Pour plus d’informations sur les réseaux virtuels, consultez [Présentation du réseau virtuel](../articles/virtual-network/virtual-networks-overview.md).
-
->[!NOTE]
->Quand vous utilisez un réseau virtuel dans le cadre d’une architecture incluant différents locaux, veillez à prendre contact avec votre administrateur de réseau local pour définir une plage d’adresses IP à utiliser spécifiquement pour ce réseau virtuel. Si une plage d’adresses en double existe des deux côtés de la connexion VPN, le trafic sera acheminé de manière inattendue. En outre, si vous souhaitez connecter ce réseau à un autre réseau virtuel, l’espace d’adressage ne peut pas chevaucher celui de l’autre réseau virtuel. Planifiez votre configuration réseau en conséquence.
->
->
-
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 1. Dans **Rechercher dans les ressources, services et documents (G+/)** , tapez *réseau virtuel*.
 
@@ -46,7 +39,6 @@ Vous pouvez créer un réseau virtuel avec le modèle de déploiement Resource M
 
    ![Onglet Adresses IP](./media/vpn-gateway-basic-vnet-rm-portal-include/addresses.png "Onglet Adresses IP")  
    - **Espace d’adressage IPv4** : Un espace d’adressage est créé automatiquement par défaut. Vous pouvez cliquer sur l’espace d’adressage pour le définir selon vos propres valeurs. Vous pouvez également ajouter des espaces d’adressage.
-   - **IPv6** : Si votre configuration nécessite un espace d’adressage IPv6, cochez la case **Ajouter un espace d’adressage IPv6** pour entrer cette information.
    - **Sous-réseau** : Si vous utilisez l’espace d’adressage par défaut, un sous-réseau par défaut est créé automatiquement. Si vous modifiez l’espace d’adressage, vous devez ajouter un sous-réseau. Sélectionnez **+ Ajouter un sous-réseau** pour ouvrir la fenêtre **Ajouter un sous-réseau**. Configurez les paramètres suivants, puis sélectionnez **Ajouter** pour ajouter les valeurs :
       - **Nom du sous-réseau** : dans cet exemple, nous avons nommé le sous-réseau « FrontEnd ».
       - **Plage d’adresses de sous-réseau** : plage d’adresses de ce sous-réseau.

@@ -1,18 +1,14 @@
 ---
 title: Schéma d’abonnement à Azure Event Grid
 description: Cet article décrit les propriétés d’abonnement à un événement avec Azure Event Grid. Schéma d’abonnement à Event Grid.
-services: event-grid
-author: banisadr
-ms.service: event-grid
 ms.topic: reference
-ms.date: 01/23/2020
-ms.author: babanisa
-ms.openlocfilehash: 4bb04d22b762f31a02515549b698030a5267e4cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.openlocfilehash: 21016627e545cc4935b4ac213df675e894c12d95
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720756"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86119070"
 ---
 # <a name="event-grid-subscription-schema"></a>Schéma d’abonnement à Event Grid
 

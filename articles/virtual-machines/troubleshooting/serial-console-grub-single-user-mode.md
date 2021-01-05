@@ -13,19 +13,19 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 08/06/2019
 ms.author: alsin
-ms.openlocfilehash: 06cb3fe5d551ddfc95fcbd37cd9620adebd825c5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5341cc62a7d02c3072df90becf893dec18427ac2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "70883929"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87439545"
 ---
 # <a name="use-serial-console-to-access-grub-and-single-user-mode"></a>Utiliser la console série pour accéder au GRUB et au mode mono-utilisateur
 Le GRand Unified Bootloader (GRUB) est probablement la première chose que vous voyez lorsque vous démarrez une machine virtuelle. Parce qu’il s’affiche avant que le système d’exploitation ne démarre, le GRUB n’est pas accessible par le biais du protocole SSH. Dans GRUB, vous pouvez modifier votre configuration d’amorçage, notamment pour démarrer en mode mono-utilisateur.
 
 Le mode mono-utilisateur est un environnement minimal comportant des fonctionnalités minimales. Il peut être utile pour examiner des problèmes de démarrage, des problèmes de système de fichiers ou des problèmes de réseau. Les services pouvant s’exécuter en arrière-plan sont moins nombreux et, selon le niveau d’exécution, il peut même arriver qu’un système de fichiers ne soit pas monté automatiquement.
 
-Le mode mono-utilisateur est également utile dans les situations où votre machine virtuelle ne peut être configurée que pour accepter uniquement des clés SSH pour la connexion. Dans ce cas, il se peut que vous puissiez utiliser le mode mono-utilisateur pour créer un compte avec authentification par mot de passe. 
+Le mode mono-utilisateur est également utile dans les situations où votre machine virtuelle ne peut être configurée que pour accepter uniquement des clés SSH pour la connexion. Dans ce cas, il se peut que vous puissiez utiliser le mode mono-utilisateur pour créer un compte avec authentification par mot de passe.
 
 > [!NOTE]
 > Le service de la console série autorise uniquement les utilisateurs dotés d’autorisations *contributeur* ou plus à accéder à la console série d’une machine virtuelle.
@@ -37,7 +37,7 @@ Pour passer en mode mono-utilisateur, entrez un GRUB lors de du démarrage de vo
 ## <a name="general-grub-access"></a>Accès général au GRUB
 Pour accéder au GRUB, redémarrez votre machine virtuelle alors que le volet Console série est ouvert. Certaines distributions nécessitent une entrée au clavier pour afficher le GRUB, et d’autres l’affichent automatiquement pendant quelques secondes afin de permettre à l’utilisateur d’effectuer une entrée au clavier pour annuler le délai d’expiration.
 
-Vous devez vous assurer que le GRUB est activé sur votre machine virtuelle afin de pouvoir accéder au mode mono-utilisateur. Selon votre distribution, un travail de configuration peut être nécessaire pour s’assurer que le GRUB est activé. Pour obtenir des informations spécifiques à votre distribution, consultez la section suivante et notre page [Support pour Linux sur Azure](https://blogs.msdn.microsoft.com/linuxonazure/2018/10/23/why-proactively-ensuring-you-have-access-to-grub-and-sysrq-in-your-linux-vm-could-save-you-lots-of-down-time/).
+Vous devez vous assurer que le GRUB est activé sur votre machine virtuelle afin de pouvoir accéder au mode mono-utilisateur. Selon votre distribution, un travail de configuration peut être nécessaire pour s’assurer que le GRUB est activé. Pour obtenir des informations spécifiques de la distribution, consultez la section suivante.
 
 ### <a name="restart-your-vm-to-access-grub-in-serial-console"></a>Redémarrer votre machine virtuelle pour accéder au GRUB dans la console série
 Vous pouvez redémarrer votre machine virtuelle dans la console série en pointant sur le bouton **Redémarrer**, puis en sélectionnant **Redémarrer la machine virtuelle**. Une notification sur le redémarrage s’affiche en bas du volet.
@@ -66,6 +66,9 @@ RHEL est fourni avec le GRUB activé par défaut. Pour entrer dans le GRUB, red�
 
 **Pour RHEL 8**
 
+>[!NOTE]
+> Red Hat recommande l’utilisation de Grubby pour configurer les paramètres de ligne de commande du noyau dans RHEL 8+ et versions ultérieures. Il n’est actuellement pas possible de mettre à jour le délai d’expiration grub et les paramètres de terminal à l’aide de grubby. Pour modifier l’argument GRUB_CMDLINE_LINUX pour toutes les entrées de démarrage, exécutez `grubby --update-kernel=ALL --args="console=ttyS0,115200 console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300"`. Des informations supplémentaires sont disponibles [ici](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/configuring-kernel-command-line-parameters_managing-monitoring-and-updating-the-kernel).
+
 ```
 GRUB_TIMEOUT=5
 GRUB_TERMINAL="serial console"
@@ -90,8 +93,7 @@ L’utilisateur racine est désactivé par défaut. Dans RHEL, le mode mono-util
 1. Basculez vers la racine.
 1. Activez le mot de passe pour l’utilisateur racine en procédant comme suit :
     * Exécutez `passwd root` (définissez un mot de passe racine fort).
-1. Assurez-vous que l’utilisateur racine ne peut se connecter qu’avec ttyS0 en procédant comme suit :  
-    a. Exécutez `edit /etc/ssh/sshd_config` et vérifiez que PermitRootLogIn est réglé sur `no`.  
+1. Assurez-vous que l’utilisateur racine ne peut se connecter qu’avec ttyS0 en procédant comme suit : a. Exécutez `edit /etc/ssh/sshd_config` et vérifiez que PermitRootLogIn est réglé sur `no`.
     b. Exécutez `edit /etc/securetty file` pour autoriser la connexion via ttyS0 uniquement.
 
 Désormais, si le système démarre en mode d’utilisateur unique, vous pouvez vous connecter uniquement avec le mot de passe racine.
@@ -106,14 +108,14 @@ Si vous avez configuré le GRUB et l’accès racine à l’aide des instruction
 1. Recherchez la ligne du noyau. Dans Azure, elle commence par *linux16*.
 1. Appuyez sur Ctrl+E pour accéder à la fin de la ligne.
 1. À la fin de la ligne, ajoutez *systemd.unit=rescue.target*.
-    
+
     Cette action vous fait redémarrer en mode mono-utilisateur. Si vous souhaitez utiliser le mode urgence, ajoutez*systemd.unit=emergency.target* à la fin de la ligne (au lieu de *systemd.unit=rescue.target*).
 
 1. Appuyez sur Ctrl+X pour quitter et redémarrer votre ordinateur avec les paramètres appliqués.
 
    Vous êtes invité à entrer le mot de passe de l’administrateur avant de pouvoir passer en mode mono-utilisateur. Ce mot de passe est celui que vous avez créé avec les instructions précédentes.
 
-    ![](../media/virtual-machines-serial-console/virtual-machine-linux-serial-console-rhel-enter-emergency-shell.gif)
+    ![Image animée montrant une interface de ligne de commande. L’utilisateur sélectionne un serveur, repère la fin de la ligne du noyau, puis entre le texte spécifié.](../media/virtual-machines-serial-console/virtual-machine-linux-serial-console-rhel-enter-emergency-shell.gif)
 
 ### <a name="enter-single-user-mode-without-root-account-enabled-in-rhel"></a>Entrez en mode mono-utilisateur unique sans compte racine activé dans RHEL
 Si vous n’avez pas activé l’utilisateur racine en suivant les instructions précédentes, vous pouvez toujours réinitialiser votre mot de passe racine en procédant comme suit :
@@ -130,14 +132,14 @@ Si vous n’avez pas activé l’utilisateur racine en suivant les instructions 
     Cette action interrompt le processus de démarrage avant que le contrôle ne passe de `initramfs` à `systemd`, comme décrit dans la [documentation Red Hat](https://aka.ms/rhel7rootpassword).
 1. Appuyez sur Ctrl+X pour quitter et redémarrer votre ordinateur avec les paramètres appliqués.
 
-   Après redémarrage, vous êtes amené en mode d’urgence avec un système de fichiers en lecture seule. 
-   
+   Après redémarrage, vous êtes amené en mode d’urgence avec un système de fichiers en lecture seule.
+
 1. Entrez `mount -o remount,rw /sysroot` dans l’interpréteur de commandes pour remonter le système de fichiers racine avec des autorisations de lecture/écriture.
 1. Après avoir démarré en mode mono-utilisateur, saisissez `chroot /sysroot` pour basculer vers la prison `sysroot`.
-1. Vous êtes maintenant à la racine. Vous pouvez réinitialiser votre mot de passe racine en entrant `passwd`, puis suivre les instructions précédentes pour entrer en mode mono-utilisateur. 
+1. Vous êtes maintenant à la racine. Vous pouvez réinitialiser votre mot de passe racine en entrant `passwd`, puis suivre les instructions précédentes pour entrer en mode mono-utilisateur.
 1. Une fois que vous avez terminé, entrez `reboot -f` pour redémarrer.
 
-![](../media/virtual-machines-serial-console/virtual-machine-linux-serial-console-rhel-emergency-mount-no-root.gif)
+![Image animée montrant une interface de ligne de commande. L’utilisateur sélectionne un serveur, repère la fin de la ligne du noyau et entre les commandes spécifiées.](../media/virtual-machines-serial-console/virtual-machine-linux-serial-console-rhel-emergency-mount-no-root.gif)
 
 > [!NOTE]
 > Les instructions précédentes vous amènent dans l’interpréteur de commandes d’urgence, ce qui vous permet d’effectuer des tâches telles que la modification de `fstab`. Toutefois, nous vous suggérons généralement de réinitialiser votre mot de passe racine et de l’utiliser pour passer en mode mono-utilisateur.
@@ -241,7 +243,7 @@ Suivez les instructions pour RHEL ci-dessus afin d’activer le mode mono-utilis
 ## <a name="next-steps"></a>Étapes suivantes
 Pour en savoir plus sur la console série, consultez :
 * [Documentation de la console série Linux](serial-console-linux.md)
-* [Utilisation de la console série pour activer GRUB dans diverses distributions](https://blogs.msdn.microsoft.com/linuxonazure/2018/10/23/why-proactively-ensuring-you-have-access-to-grub-and-sysrq-in-your-linux-vm-could-save-you-lots-of-down-time/)
+* [Utilisation de la console série pour activer GRUB dans diverses distributions](http://linuxonazure.azurewebsites.net/why-proactively-ensuring-you-have-access-to-grub-and-sysrq-in-your-linux-vm-could-save-you-lots-of-down-time/)
 * [Utiliser la console série pour les appels SysRq et NMI](serial-console-nmi-sysrq.md)
 * [Machines virtuelles de console série pour Windows](serial-console-windows.md)
 * [Diagnostics de démarrage](boot-diagnostics.md)

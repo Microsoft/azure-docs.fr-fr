@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: how-to
 ms.date: 04/10/2020
 ms.author: ramamill
-ms.openlocfilehash: ec4d1cfbe0c76c8245c4beeaa7c044d76d917a7a
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 90862a74e5fb6521a95292d50fc5cc11bd0082b5
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81259790"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547654"
 ---
 # <a name="about-the-mobility-service-for-vmware-vms-and-physical-servers"></a>À propos du service Mobilité pour serveurs physiques et machines virtuelles VMware
 
@@ -37,6 +37,7 @@ L’installation Push fait partie intégrante du travail exécuté à partir du 
 
 - Vérifiez que tous les [prérequis](vmware-azure-install-mobility-service.md) de l’installation push sont satisfaits.
 - Assurez-vous que toutes les configurations de serveur répondent aux critères de la [matrice de prise en charge de la récupération d'urgence des machines virtuelles VMware et des serveurs physiques sur Azure](vmware-physical-azure-support-matrix.md).
+- À partir de la version 9.36, pour SUSE Linux Enterprise Server 11 SP3, RHEL 5, CentOS 5, Debian 7, vérifiez que le programme d’installation le plus récent est [disponible sur le serveur de configuration et le serveur de processus Scale-out](#download-latest-mobility-agent-installer-for-suse-11-sp3-rhel-5-debian-7-server)
 
 Le workflow de l’installation push est décrit dans les sections suivantes :
 
@@ -77,16 +78,16 @@ Pendant l’installation push du service Mobility, les étapes suivantes sont ef
 > N’utilisez pas la méthode d’installation de l’interface utilisateur si vous répliquez une machine virtuelle IaaS (infrastructure as a service) Azure d’une région Azure vers une autre. Utilisez l'installation avec [l’invite de commandes](#install-the-mobility-service-using-command-prompt).
 
 1. Copiez le fichier d’installation sur la machine et exécutez-le.
-1. Dans **Option d’installation**, sélectionnez **Installer le service Mobilité**.
+1. Dans **Option d’installation** , sélectionnez **Installer le service Mobilité**.
 1. Sélectionnez l’emplacement d’installation, puis **Installer**.
 
     :::image type="content" source="./media/vmware-physical-mobility-service-install-manual/mobility1.png" alt-text="Page de l’option d’installation du service Mobility":::
 
 1. Surveillez l’installation dans **Progression de l’installation**. Au terme de l’installation, sélectionnez **Passer à la configuration** pour inscrire le service auprès du serveur de configuration.
 
-    :::image type="content" source="./media/vmware-physical-mobility-service-install-manual/mobility3.png" alt-text="Page d’inscription du service Mobility":::
+    :::image type="content" source="./media/vmware-physical-mobility-service-install-manual/mobility3.png" alt-text="Capture d’écran montrant la progression de l’installation et le bouton Poursuivre la configuration actif une fois l’installation terminée.":::
 
-1. Dans **Détails du serveur de configuration**, spécifiez l’adresse IP et la phrase secrète que vous avez configurées.
+1. Dans **Détails du serveur de configuration** , spécifiez l’adresse IP et la phrase secrète que vous avez configurées.
 
     :::image type="content" source="./media/vmware-physical-mobility-service-install-manual/mobility4.png" alt-text="Page d’inscription du service Mobility":::
 
@@ -103,11 +104,11 @@ Pendant l’installation push du service Mobility, les étapes suivantes sont ef
 
 ### <a name="windows-machine"></a>Machine Windows
 
-- À partir d'une invite de commandes, exécutez les commandes suivantes pour copier le programme d’installation dans un dossier local, par exemple _C:\Temp_, sur le serveur que vous souhaitez protéger. Remplacez le nom de fichier du programme d’installation par le nom de fichier réel.
+- À partir d'une invite de commandes, exécutez les commandes suivantes pour copier le programme d’installation dans un dossier local, par exemple _C:\Temp_ , sur le serveur que vous souhaitez protéger. Remplacez le nom de fichier du programme d’installation par le nom de fichier réel.
 
   ```cmd
   cd C:\Temp
-  ren Microsoft-ASR_UA_version_Windows_GA_date_release.exe MobilityServiceInstaller.exe
+  ren Microsoft-ASR_UA*Windows*release.exe MobilityServiceInstaller.exe
   MobilityServiceInstaller.exe /q /x:C:\Temp\Extracted
   cd C:\Temp\Extracted
   ```
@@ -147,7 +148,7 @@ Journaux d’activité de configuration de l’agent | `%ProgramData%\ASRSetupLo
 
 ### <a name="linux-machine"></a>Machine Linux
 
-1. À partir d'une session de terminal, copiez le programme d’installation dans un dossier local, par exemple _/tmp_, sur le serveur que vous souhaitez protéger. Remplacez le nom de fichier du programme d’installation par le nom réel de votre distribution Linux, puis exécutez les commandes.
+1. À partir d'une session de terminal, copiez le programme d’installation dans un dossier local, par exemple _/tmp_ , sur le serveur que vous souhaitez protéger. Remplacez le nom de fichier du programme d’installation par le nom réel de votre distribution Linux, puis exécutez les commandes.
 
    ```shell
    cd /tmp ;
@@ -186,8 +187,8 @@ Syntaxe | `cd /usr/local/ASR/Vx/bin<br/><br/> UnifiedAgentConfigurator.sh -i \<C
 
 ## <a name="azure-virtual-machine-agent"></a>Agent de machine virtuelle Azure
 
-- **Machines virtuelles Windows** : à partir de la version 9.7.0.0 du service Mobilité, l’[agent de machine virtuelle Azure](/azure/virtual-machines/extensions/features-windows#azure-vm-agent) est installé par le programme d’installation du service Mobilité. Ainsi, lorsque la machine bascule vers Azure, la machine virtuelle Azure remplit les conditions préalables à l’installation de l'agent pour utiliser une extension de machine virtuelle.
-- **Machines virtuelles Linux** : l’agent [WALinuxAgent](/azure/virtual-machines/extensions/update-linux-agent) doit être installé manuellement sur la machine virtuelle Azure après le basculement.
+- **Machines virtuelles Windows**  : à partir de la version 9.7.0.0 du service Mobilité, l’ [agent de machine virtuelle Azure](../virtual-machines/extensions/features-windows.md#azure-vm-agent) est installé par le programme d’installation du service Mobilité. Ainsi, lorsque la machine bascule vers Azure, la machine virtuelle Azure remplit les conditions préalables à l’installation de l'agent pour utiliser une extension de machine virtuelle.
+- **Machines virtuelles Linux**  : l’agent [WALinuxAgent](../virtual-machines/extensions/update-linux-agent.md) doit être installé manuellement sur la machine virtuelle Azure après le basculement.
 
 ## <a name="locate-installer-files"></a>Localiser les fichiers d’installation
 
@@ -201,16 +202,62 @@ Accédez au dossier _%ProgramData%\ASR\home\svsystems\pushinstallsvc\repository_
 Fichier d’installation | Système d’exploitation (64 bits uniquement)
 --- | ---
 `Microsoft-ASR_UA_version_Windows_GA_date_release.exe` | Windows Server 2016 </br> Windows Server 2012 R2 </br> Windows Server 2012 </br> Windows Server 2008 R2 SP1
+[À télécharger et à placer manuellement dans ce dossier](#rhel-5-or-centos-5-server) | Red Hat Enterprise Linux (RHEL) 5 </br> CentOS 5
 `Microsoft-ASR_UA_version_RHEL6-64_GA_date_release.tar.gz` | Red Hat Enterprise Linux (RHEL) 6 </br> CentOS 6
 `Microsoft-ASR_UA_version_RHEL7-64_GA_date_release.tar.gz` | Red Hat Enterprise Linux (RHEL) 7 </br> CentOS 7
+`Microsoft-ASR_UA_version_RHEL8-64_GA_date_release.tar.gz` | Red Hat Enterprise Linux (RHEL) 8 </br> CentOS 8
 `Microsoft-ASR_UA_version_SLES12-64_GA_date_release.tar.gz` | SUSE Linux Enterprise Server 12 SP1 </br> Inclut SP2 et SP3.
-`Microsoft-ASR_UA_version_SLES11-SP3-64_GA_date_release.tar.gz` | SUSE Linux Enterprise Server 11 SP3
+[À télécharger et à placer manuellement dans ce dossier](#suse-11-sp3-server) | SUSE Linux Enterprise Server 11 SP3
 `Microsoft-ASR_UA_version_SLES11-SP4-64_GA_date_release.tar.gz` | SUSE Linux Enterprise Server 11 SP4
+`Microsoft-ASR_UA_version_SLES15-64_GA_date_release.tar.gz` | SUSE Linux Enterprise Server 15 
 `Microsoft-ASR_UA_version_OL6-64_GA_date_release.tar.gz` | Oracle Enterprise Linux 6.4 </br> Oracle Enterprise Linux 6.5
+`Microsoft-ASR_UA_version_OL7-64_GA_date_release.tar.gz` | Oracle Enterprise Linux 7 
+`Microsoft-ASR_UA_version_OL8-64_GA_date_release.tar.gz` | Oracle Enterprise Linux 8
 `Microsoft-ASR_UA_version_UBUNTU-14.04-64_GA_date_release.tar.gz` | Ubuntu Linux 14.04
 `Microsoft-ASR_UA_version_UBUNTU-16.04-64_GA_date_release.tar.gz` | Serveur Ubuntu Linux 16.04 LTS
-`Microsoft-ASR_UA_version_DEBIAN7-64_GA_date_release.tar.gz` | Debian 7
+`Microsoft-ASR_UA_version_UBUNTU-18.04-64_GA_date_release.tar.gz` | Serveur Ubuntu Linux 18.04 LTS
+`Microsoft-ASR_UA_version_UBUNTU-20.04-64_GA_date_release.tar.gz` | Serveur Ubuntu Linux 20.04 LTS
+[À télécharger et à placer manuellement dans ce dossier](#debian-7-server) | Debian 7
 `Microsoft-ASR_UA_version_DEBIAN8-64_GA_date_release.tar.gz` | Debian 8
+`Microsoft-ASR_UA_version_DEBIAN9-64_GA_date_release.tar.gz` | Debian 9
+
+## <a name="download-latest-mobility-agent-installer-for-suse-11-sp3-rhel-5-debian-7-server"></a>Télécharger la dernière version du programme d’installation de l’agent de mobilité pour le serveur SUSE 11 SP3, RHEL 5, Debian 7
+
+### <a name="suse-11-sp3-server"></a>Serveur SUSE 11 SP3
+
+**condition préalable à la mise à jour ou à la protection des ordinateurs SUSE Linux Enterprise Server 11 SP3** à partir de la version 9.36 :
+
+1. Vérifiez que le dernier programme d’installation de l’agent de mobilité est téléchargé à partir du Centre de téléchargement Microsoft et placé dans le référentiel du programme d’installation push sur le serveur de configuration et tous les serveurs de processus de montée en puissance parallèle
+2. [Téléchargez](site-recovery-whats-new.md) le dernier programme d’installation de l’agent SUSE Linux Enterprise Server 11 SP3. La dernière version de l’agent de mobilité est la [9.37](https://support.microsoft.com/help/4582666/)
+3. Accédez au serveur de configuration, copiez le programme d’installation de l’agent SUSE Linux Enterprise Server 11 SP3 dans le chemin d'accès INSTALL_DIR\home\svsystems\pushinstallsvc\repository
+1. Après la copie du programme d’installation le plus récent, redémarrez le service InMage PushInstall. 
+1. À présent, accédez aux serveurs de traitement de processus avec montée en charge associés, répétez les étapes 3 et 4.
+1. **Par exemple** , si le chemin d’installation est C:\Program Files (x86) \Microsoft Azure Site Recovery, les répertoires mentionnés ci-dessus seront :
+    1. C:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems\pushinstallsvc\repository
+
+### <a name="rhel-5-or-centos-5-server"></a>Serveur RHEL 5 ou CentOS 5
+
+**condition préalable à la mise à jour ou à la protection des ordinateurs RHEL 5** à partir de la version 9.36 :
+
+1. Vérifiez que le dernier programme d’installation de l’agent de mobilité est téléchargé à partir du Centre de téléchargement Microsoft et placé dans le référentiel du programme d’installation push sur le serveur de configuration et tous les serveurs de processus de montée en puissance parallèle
+2. [Téléchargez](site-recovery-whats-new.md) le programme d'installation de l’agent RHEL 5 ou CentOS 5 le plus récent. La dernière version de l’agent de mobilité est la [9.37](https://support.microsoft.com/help/4582666/)
+3. Accédez au serveur de configuration, copiez le programme d'installation de l’agent RHEL 5 ou CentOS 5 dans le chemin d’accès INSTALL_DIR\home\svsystems\pushinstallsvc\repository
+1. Après la copie du programme d’installation le plus récent, redémarrez le service InMage PushInstall. 
+1. À présent, accédez aux serveurs de traitement de processus avec montée en charge associés, répétez les étapes 3 et 4.
+1. **Par exemple** , si le chemin d’installation est C:\Program Files (x86) \Microsoft Azure Site Recovery, les répertoires mentionnés ci-dessus seront :
+    1. C:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems\pushinstallsvc\repository
+
+## <a name="debian-7-server"></a>Serveur Debian 7
+
+**condition préalable à la mise à jour ou à la protection des ordinateurs Debian 7** à partir de la version 9.36 :
+
+1. Vérifiez que le dernier programme d’installation de l’agent de mobilité est téléchargé à partir du Centre de téléchargement Microsoft et placé dans le référentiel du programme d’installation push sur le serveur de configuration et tous les serveurs de processus de montée en puissance parallèle
+2. [Téléchargez](site-recovery-whats-new.md) le programme d’installation de l’agent Debian 7 le plus récent. La dernière version de l’agent de mobilité est la [9.37](https://support.microsoft.com/help/4582666/)
+3. Accédez au serveur de configuration, copiez le programme d’installation de l’agent Debian 7 dans le chemin d'accès INSTALL_DIR\home\svsystems\pushinstallsvc\repository
+1. Après la copie du programme d’installation le plus récent, redémarrez le service InMage PushInstall. 
+1. À présent, accédez aux serveurs de traitement de processus avec montée en charge associés, répétez les étapes 3 et 4.
+1. **Par exemple** , si le chemin d’installation est C:\Program Files (x86) \Microsoft Azure Site Recovery, les répertoires mentionnés ci-dessus seront :
+    1. C:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems\pushinstallsvc\repository
 
 ## <a name="next-steps"></a>Étapes suivantes
 

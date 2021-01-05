@@ -5,12 +5,12 @@ ms.assetid: 4444dbf7-363c-47e2-b24a-dbd45cb08491
 ms.topic: article
 ms.date: 07/06/2016
 ms.custom: seodec18
-ms.openlocfilehash: 1295080d0eec7a4e88029cdadd85863f5f40d034
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c1b0ce62905424032c2100a1a032fa43ba97578f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74689244"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999397"
 ---
 # <a name="restore-an-app-in-azure"></a>Restauration d'une application dans Azure App Service
 Cet article vous explique comment restaurer une application dans [Azure App Service](../app-service/overview.md) que vous avez précédemment sauvegardée (voir [Sauvegarde de votre application dans Azure](manage-backup.md)). Vous pouvez restaurer votre application avec ses bases de données liées à la demande à un état antérieur ou créer une application à partir de l’une des sauvegardes de votre application d’origine. Azure App Service prend en charge les bases de données suivantes pour la sauvegarde et restauration :
@@ -29,14 +29,14 @@ La restauration à partir de sauvegardes est disponible pour des applications ex
     ![Sélectionner Restaurer maintenant][ChooseRestoreNow]
 2. Dans la page **Restaurer**, sélectionnez tout d’abord la source de la sauvegarde.
    
-    ![](./media/web-sites-restore/021ChooseSource1.png)
+    ![Capture d’écran montrant où sélectionner la source de sauvegarde.](./media/web-sites-restore/021ChooseSource1.png)
    
     L’option de **sauvegarde d’une application** vous montre toutes les sauvegardes existantes de l’application actuelle, et vous pouvez facilement sélectionner une.
     L’option de **stockage** vous permet de sélectionner un fichier ZIP de sauvegarde quelconque à partir de n’importe quel compte de stockage Azure et conteneur existants dans votre abonnement.
     Si vous essayez de restaurer une sauvegarde d’une autre application, utilisez l’option **Stockage** .
 3. Ensuite, spécifiez la destination de la restauration de l'application dans **Destination de restauration**.
    
-    ![](./media/web-sites-restore/022ChooseDestination1.png)
+    ![Capture d’écran montrant où spécifier la destination de la restauration de l’application.](./media/web-sites-restore/022ChooseDestination1.png)
    
    > [!WARNING]
    > Si vous choisissez **Remplacer**, toutes les données existantes dans votre application actuelle seront effacées et remplacées. Avant de cliquer sur **OK**, vérifiez que c'est bien ce que vous voulez faire.
@@ -77,7 +77,7 @@ La page de détails affiche les informations disponibles concernant l’opérati
 
 ## <a name="automate-with-scripts"></a>Automatiser des tâches à l’aide de scripts
 
-Vous pouvez automatiser la gestion des sauvegardes à l’aide de scripts, en utilisant [Azure CLI](/cli/azure/install-azure-cli) ou [Azure PowerShell](/powershell/azure/overview).
+Vous pouvez automatiser la gestion des sauvegardes à l’aide de scripts, en utilisant [Azure CLI](/cli/azure/install-azure-cli) ou [Azure PowerShell](/powershell/azure/).
 
 Pour obtenir des exemples, consultez :
 

@@ -4,12 +4,12 @@ description: Forum aux questions sur Service Fabric, fonctionnalités, cas d’u
 ms.topic: troubleshooting
 ms.date: 08/18/2017
 ms.author: pepogors
-ms.openlocfilehash: bf61858b446c1ac6d4a0210571fffaa721ad0166
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1655a8ed03b1f678cc5dba0a165e0bcca1d2517a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78254883"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87292851"
 ---
 # <a name="commonly-asked-service-fabric-questions"></a>Questions fréquentes sur Service Fabric
 
@@ -22,9 +22,9 @@ Les utilisateurs posent fréquemment des questions sur l’utilisation et les fo
 
 ### <a name="how-do-i-roll-back-my-service-fabric-cluster-certificate"></a>Comment restaurer mon certificat de cluster Service Fabric ?
 
-Restaurer une mise à niveau pour votre application nécessite de détecter les échecs d’intégrité avant que le quorum du cluster Service Fabric ne valide la modification. Les modifications validées peuvent uniquement être restaurées par progression. Le recours à un ingénieur en charge de la remontée d’information via le support technique peut être nécessaire pour récupérer votre cluster, si un changement de certificat cassant non surveillé a été introduit.  La [mise à niveau des applications de Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-upgrade?branch=master) applique des [paramètres de mise à niveau d’application](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-upgrade-parameters?branch=master), et garantit une mise à niveau sans temps d’arrêt.  En suivant notre mode de surveillance recommandé pour la mise à niveau des applications, la progression automatique via les domaines de mise à jour est basée sur la réussite des vérifications d’intégrité. Une restauration automatique a lieu en cas d’échec de la mise à jour d’un service par défaut.
+Restaurer une mise à niveau pour votre application nécessite de détecter les échecs d’intégrité avant que le quorum du cluster Service Fabric ne valide la modification. Les modifications validées peuvent uniquement être restaurées par progression. Le recours à un ingénieur en charge de la remontée d’information via le support technique peut être nécessaire pour récupérer votre cluster, si un changement de certificat cassant non surveillé a été introduit.  La [mise à niveau des applications de Service Fabric](./service-fabric-application-upgrade.md?branch=master) applique des [paramètres de mise à niveau d’application](./service-fabric-application-upgrade-parameters.md?branch=master), et garantit une mise à niveau sans temps d’arrêt.  En suivant notre mode de surveillance recommandé pour la mise à niveau des applications, la progression automatique via les domaines de mise à jour est basée sur la réussite des vérifications d’intégrité. Une restauration automatique a lieu en cas d’échec de la mise à jour d’un service par défaut.
  
-Si votre cluster utilise toujours la propriété classique d’empreinte du certificat dans votre modèle Resource Manager, il est recommandé de [modifier le cluster de l’utilisation de l’empreinte du certificat à l’utilisation du nom commun](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-change-cert-thumbprint-to-cn) pour tirer parti des fonctionnalités modernes de gestion des secrets.
+Si votre cluster utilise toujours la propriété classique d’empreinte du certificat dans votre modèle Resource Manager, il est recommandé de [modifier le cluster de l’utilisation de l’empreinte du certificat à l’utilisation du nom commun](./service-fabric-cluster-change-cert-thumbprint-to-cn.md) pour tirer parti des fonctionnalités modernes de gestion des secrets.
 
 ### <a name="can-i-create-a-cluster-that-spans-multiple-azure-regions-or-my-own-datacenters"></a>Puis-je créer un cluster qui englobe plusieurs régions Azure ou mes propres centres de données ?
 
@@ -36,12 +36,12 @@ Si vous êtes intéressé par ce scénario, nous vous encourageons à nous conta
 
 Voici quelques points importants à prendre en compte : 
 
-1. À l’heure actuelle, la ressource de cluster Service Fabric dans Azure est régionale, comme les groupes de machines virtuelles identiques sur lesquels le cluster est basé. De fait, en cas de défaillance régionale, vous risquez de perdre la possibilité de gérer le cluster via Azure Resource Manager ou le portail Azure. Cela peut se produire même si le cluster continue de s’exécuter et que vous pouvez interagir directement avec lui. En outre, Azure ne permet pas à un même réseau virtuel d’être utilisé par plusieurs régions. Par conséquent, un cluster Azure à plusieurs régions nécessite soit des [adresses IP publiques pour chaque machine virtuelle dans VM Scale Sets](../virtual-machine-scale-sets/virtual-machine-scale-sets-networking.md#public-ipv4-per-virtual-machine), soit des [passerelles VPN Azure](../vpn-gateway/vpn-gateway-about-vpngateways.md). Toutes ces options de réseau ont un impact différent sur les coûts, les performances, et à un certain degré, sur la conception de l’application. Il est donc nécessaire d’analyser et de planifier avec soin avant de configurer un tel environnement.
+1. À l’heure actuelle, la ressource de cluster Service Fabric dans Azure est régionale, comme les groupes de machines virtuelles identiques sur lesquels le cluster est basé. De fait, en cas de défaillance régionale, vous risquez de perdre la possibilité de gérer le cluster via Azure Resource Manager ou le portail Azure. Cela peut se produire même si le cluster continue de s’exécuter et que vous pouvez interagir directement avec lui. En outre, Azure ne permet pas à un même réseau virtuel d’être utilisé par plusieurs régions. Ainsi, un cluster Azure à plusieurs régions nécessite soit des [adresses IP publiques pour chaque machine virtuelle dans les groupes de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-networking.md#public-ipv4-per-virtual-machine), soit des [passerelles VPN Azure](../vpn-gateway/vpn-gateway-about-vpngateways.md). Toutes ces options de réseau ont un impact différent sur les coûts, les performances, et à un certain degré, sur la conception de l’application. Il est donc nécessaire d’analyser et de planifier avec soin avant de configurer un tel environnement.
 2. La maintenance, la gestion et la surveillance de ces machines peuvent devenir complexes, en particulier en cas de répartition sur plusieurs _types_ d’environnements, par exemple, entre différents fournisseurs cloud, ou entre des ressources locales et des ressources Azure. Vérifiez bien que les mises à niveau, la surveillance, la gestion et les diagnostics ont été compris à la fois pour le cluster et les applications avant d’exécuter les charges de travail de production dans un tel environnement. Si vous avez l’habitude de résoudre ces problèmes dans Azure ou dans vos propres centres de données, il est probable que vous puissiez appliquer ces mêmes solutions lors de la création ou de l’exécution de votre cluster Service Fabric. 
 
 ### <a name="do-service-fabric-nodes-automatically-receive-os-updates"></a>Les nœuds Service Fabric reçoivent-ils automatiquement les mises à jour du système d’exploitation ?
 
-Vous pouvez utiliser la fonctionnalité [Mise à jour automatique de l’image de système d’exploitation d’un groupe de machines virtuelles identiques](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade), actuellement en disponibilité générale.
+Vous pouvez utiliser la fonctionnalité [Mise à jour automatique de l’image de système d’exploitation d’un groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade.md), actuellement en disponibilité générale.
 
 Pour les clusters qui ne s’exécutent PAS sur Azure, nous [proposons une application](service-fabric-patch-orchestration-application.md) permettant de corriger les systèmes d’exploitation qui se trouvent sous les nœuds Service Fabric.
 
@@ -59,7 +59,7 @@ Il y a actuellement d’autres problèmes avec les groupes de machines virtuelle
 
 La taille minimale prise en charge pour un cluster Service Fabric exécutant des charges de travail de production est de cinq nœuds. Pour les scénarios de développement, nous prenons en charge un seul nœud (optimisé pour une expérience de développement rapide dans Visual Studio) et les clusters à cinq nœuds.
 
-Nous demandons qu’un cluster de production comporte au moins 5 nœuds pour les trois raisons suivantes :
+Nous demandons qu’un cluster de production comporte au moins cinq nœuds pour les trois raisons suivantes :
 1. Même quand aucun service utilisateur ne s’exécute, un cluster Service Fabric exécute un ensemble de services système avec état, notamment le service de nommage et le service Failover Manager. Ces services système sont essentiels pour que le cluster reste opérationnel.
 2. Nous plaçons toujours un réplica d’un service par nœud : ainsi, la taille du cluster est la limite supérieure pour le nombre de réplicas que peut avoir un service (en fait une partition).
 3. Dans la mesure où une mise à niveau d’un cluster entraîne l’arrêt d’au moins un nœud, nous voulons avoir une réserve d’au moins un nœud : nous voulons donc qu’un cluster de production ait au moins deux nœuds *en plus* du strict minimum. Le strict minimum est la taille du quorum d’un service système, comme expliqué ci-dessous.  
@@ -122,11 +122,11 @@ Non. Les machines virtuelles de faible priorité ne sont pas prises en charge.
 | FabricRM.exe |
 | FileStoreService.exe |
  
-### <a name="how-can-my-application-authenticate-to-keyvault-to-get-secrets"></a>Comment mon application peut-elle s’authentifier auprès de Key Vault pour obtenir des secrets ?
-Les procédés suivants permettent à votre application d’obtenir des informations d’identification pour s’authentifier auprès de Key Vault :
+### <a name="how-can-my-application-authenticate-to-key-vault-to-get-secrets"></a>Comment mon application peut s’authentifier auprès de Key Vault pour obtenir des secrets ?
+Les procédés suivants permettent à votre application d’obtenir des informations d’identification pour s’authentifier auprès de Key Vault :
 
 R. Au cours de votre travail de génération/compression d’applications, vous pouvez extraire un certificat et l’utiliser dans le package de données de votre application SF en vue de l’authentification auprès de Key Vault.
-B. Pour les hôtes MSI d’un groupe de machines virtuelles identiques, vous pouvez développer un élément PowerShell SetupEntryPoint simple pour votre application SF afin d’obtenir [un jeton d’accès à partir du point de terminaison MSI](https://docs.microsoft.com/azure/active-directory/managed-service-identity/how-to-use-vm-token), puis [récupérer vos secrets à partir de Key Vault](/powershell/module/azurerm.keyvault/get-azurekeyvaultsecret).
+B. Pour les hôtes MSI d’un groupe de machines virtuelles identiques, vous pouvez développer un élément PowerShell SetupEntryPoint simple pour votre application SF afin d’obtenir [un jeton d’accès à partir du point de terminaison MSI](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md), puis [récupérer vos secrets à partir de Key Vault](/powershell/module/azurerm.keyvault/get-azurekeyvaultsecret).
 
 ## <a name="application-design"></a>Conception des applications
 
@@ -155,7 +155,7 @@ Par exemple, supposons que vous ayez une collection fiable dans un service de 10
 
 Sachant que chaque objet doit être stocké trois fois (une copie principale et deux réplicas), vous aurez suffisamment de mémoire pour environ 35 millions d’objets dans votre collection lorsqu’elle fonctionnera à pleine capacité. Toutefois, nous vous recommandons d’assurer une résilience à la perte simultanée d’un domaine de défaillance et d’un domaine de mise à niveau, ce qui représente environ 1/3 de la capacité et réduit le nombre à environ 23 millions.
 
-Notez que ce calcul suppose également :
+Ce calcul suppose également :
 
 - Que la répartition des données entre les partitions est à peu près uniforme ou que vous envoyez des métriques de charge à Cluster Resource Manager. Par défaut, Service Fabric équilibre la charge en fonction du nombre de réplicas. Dans l’exemple précédent, 10 réplicas principaux et 20 réplicas secondaires seraient placés sur chaque nœud du cluster. Cela fonctionne bien pour la charge répartie équitablement entre les partitions. Si la charge n’est pas équilibrée, vous devez la signaler afin que le Resource Manager puisse regrouper des réplicas plus petits et autoriser des réplicas plus volumineux à consommer davantage de mémoire sur un nœud individuel.
 
@@ -167,6 +167,12 @@ Notez que ce calcul suppose également :
 
 Comme avec les services fiables, la quantité de données que vous pouvez stocker dans un service d’acteur n’est limitée que par l’espace disque total et la mémoire disponible sur les nœuds de votre cluster. Toutefois, les acteurs sont plus efficaces lorsqu’ils sont utilisés pour encapsuler une petite quantité d’état et de logique métier associée. En règle générale, un acteur doit avoir l’état qui est mesuré en kilo-octets.
 
+
+### <a name="where-does-azure-service-fabric-resource-provider-store-customer-data"></a>Où le fournisseur de ressources Azure Service Fabric stocke les données client ?
+
+Le fournisseur de ressources Azure Service Fabric ne déplace pas ou ne stocke pas les données client hors de la région dans laquelle elles sont déployées.
+
+
 ## <a name="other-questions"></a>Autres questions
 
 ### <a name="how-does-service-fabric-relate-to-containers"></a>Quel est le rapport entre Service Fabric et les conteneurs ?
@@ -177,9 +183,9 @@ Les conteneurs constituent un moyen simple d’encapsuler les services et leurs 
 
 Nous avons des composants de Service Fabric en Open Source ([infrastructure des services fiable](https://github.com/Azure/service-fabric-services-and-actors-dotnet), [infrastructure des acteurs fiable](https://github.com/Azure/service-fabric-services-and-actors-dotnet), [bibliothèques d’intégration ASP.NET Core](https://github.com/Azure/service-fabric-aspnetcore), [Service Fabric Explorer](https://github.com/Azure/service-fabric-explorer) et [l’interface de ligne de commande Service Fabric](https://github.com/Azure/service-fabric-cli)) sur GitHub et acceptons des contributions de communautés à ces projets. 
 
-Nous avons [récemment annoncé](https://blogs.msdn.microsoft.com/azureservicefabric/2018/03/14/service-fabric-is-going-open-source/) que nous prévoyons d’ouvrir la source au runtime Service Fabric. À ce stade, nous avons le [référentiel de Service Fabric](https://github.com/Microsoft/service-fabric/) sur GitHub avec les outils build et de test Linux, ce qui signifie que vous pouvez cloner le référentiel, générer Service Fabric pour Linux, exécuter des tests de base, ouvrir des problèmes et soumettre des requêtes d’extraction. Nous nous efforçons de faire en sorte que l’environnement build Windows migré soit également présent avec un environnement CI complet.
+Nous avons [récemment annoncé](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric) que nous prévoyons d’ouvrir la source au runtime Service Fabric. À ce stade, nous avons le [dépôt de Service Fabric](https://github.com/Microsoft/service-fabric/) sur GitHub avec les outils build et de test Linux, ce qui signifie que vous pouvez cloner le dépôt, générer Service Fabric pour Linux, exécuter des tests de base, ouvrir des problèmes et soumettre des requêtes d’extraction. Nous nous efforçons de faire en sorte que l’environnement build Windows migré soit également présent avec un environnement CI complet.
 
-Consultez le [blog Service Fabric](https://blogs.msdn.microsoft.com/azureservicefabric/) pour en savoir plus.
+Consultez le [blog Service Fabric](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric) pour en savoir plus.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

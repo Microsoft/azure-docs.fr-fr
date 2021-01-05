@@ -5,16 +5,16 @@ services: container-service
 manager: gwallace
 ms.topic: article
 ms.date: 02/25/2020
-ms.openlocfilehash: 514cc25e1959145c65fe60cd3054cec4ed28f44d
-ms.sourcegitcommit: bc738d2986f9d9601921baf9dded778853489b16
+ms.openlocfilehash: 4338f4ce1fe60a3a9002be93feab134dd2601720
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80617422"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87406501"
 ---
 # <a name="authenticate-with-azure-container-registry-from-azure-kubernetes-service"></a>S’authentifier auprès d’Azure Container Registry à partir d’Azure Kubernetes Service
 
-Quand vous utilisez Azure Container Registry (ACR) avec Azure Kubernetes Service (AKS), vous avez besoin d’un mécanisme d’authentification. Cet article fournit des exemples de configuration de l’authentification entre ces deux services Azure. 
+Quand vous utilisez Azure Container Registry (ACR) avec Azure Kubernetes Service (AKS), vous avez besoin d’un mécanisme d’authentification. Cette opération est implémentée via l’interface de ligne de commande et le portail en accordant les autorisations requises à votre ACR. Cet article fournit des exemples de configuration de l’authentification entre ces deux services Azure. 
 
 Vous pouvez configurer l’intégration de AKS à ACR à l’aide de quelques commandes simples avec Azure CLI. Cette intégration attribue le rôle AcrPull au principal de service associé au cluster AKS.
 
@@ -23,7 +23,7 @@ Vous pouvez configurer l’intégration de AKS à ACR à l’aide de quelques co
 Ces exemples requièrent les éléments suivants :
 
 * Le rôle **Propriétaire** ou **Administrateur de compte Azure** sur **l’abonnement Azure**
-* Azure CLI version 2.0.73 ou ultérieure
+* Azure CLI version 2.7.0 ou ultérieure
 
 Pour ne pas devoir utiliser un rôle **Propriétaire** ou **Administrateur de compte Azure**, vous pouvez configurer un principal de service manuellement ou utiliser un principal de service existant afin d'authentifier ACR depuis AKS. Pour plus d’informations, consultez [Authentification ACR à l’aide de principaux de service](../container-registry/container-registry-auth-service-principal.md) ou [S’authentifier à partir de Kubernetes avec un secret de tirage (pull)](../container-registry/container-registry-auth-kubernetes.md).
 
@@ -33,7 +33,7 @@ Vous pouvez configurer l’intégration d’AKS et d’ACR lors de la création 
 
 ```azurecli
 # set this to the name of your Azure Container Registry.  It must be globally unique
-$MYACR=myContainerRegistry
+MYACR=myContainerRegistry
 
 # Run the following line to create an Azure Container Registry if you do not already have one
 az acr create -n $MYACR -g myContainerRegistryResourceGroup --sku basic
@@ -44,7 +44,10 @@ az aks create -n myAKSCluster -g myResourceGroup --generate-ssh-keys --attach-ac
 
 Vous pouvez également spécifier le nom ACR à l’aide d’un ID de ressource ACR, dont le format est :
 
-`/subscriptions/\<subscription-id\>/resourceGroups/\<resource-group-name\>/providers/Microsoft.ContainerRegistry/registries/\<name\>` 
+`/subscriptions/\<subscription-id\>/resourceGroups/\<resource-group-name\>/providers/Microsoft.ContainerRegistry/registries/\<name\>`
+
+> [!NOTE]
+> Si vous utilisez un ACR qui ne se trouve pas dans le même abonnement que votre cluster AKS, utilisez l’ID de ressource ACR pour l’attachement à un cluster AKS ou le détachement d’un cluster AKS.
 
 ```azurecli
 az aks create -n myAKSCluster -g myResourceGroup --generate-ssh-keys --attach-acr /subscriptions/<subscription-id>/resourceGroups/myContainerRegistryResourceGroup/providers/Microsoft.ContainerRegistry/registries/myContainerRegistry
@@ -57,7 +60,7 @@ Cette étape peut prendre plusieurs minutes.
 Intégrez un ACR existant à des clusters AKS existants en fournissant des valeurs valides pour **acr-name** ou **acr-resource-id** comme indiqué ci-dessous.
 
 ```azurecli
-az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acrName>
+az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acr-name>
 ```
 
 ou
@@ -69,7 +72,7 @@ az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acr-resource-id>
 Vous pouvez également supprimer l’intégration entre ACR et un cluster AKS à l’aide de ce qui suit
 
 ```azurecli
-az aks update -n myAKSCluster -g myResourceGroup --detach-acr <acrName>
+az aks update -n myAKSCluster -g myResourceGroup --detach-acr <acr-name>
 ```
 
 or
@@ -86,7 +89,7 @@ Importez une image à partir du hub Docker dans votre instance ACR en exécutant
 
 
 ```azurecli
-az acr import  -n <myContainerRegistry> --source docker.io/library/nginx:latest --image nginx:v1
+az acr import  -n <acr-name> --source docker.io/library/nginx:latest --image nginx:v1
 ```
 
 ### <a name="deploy-the-sample-image-from-acr-to-aks"></a>Déployer l’exemple d’image depuis ACR vers AKS
@@ -97,7 +100,7 @@ Vérifiez que vous disposez des informations d’identification AKS appropriées
 az aks get-credentials -g myResourceGroup -n myAKSCluster
 ```
 
-Créez un fichier appelé **acr-nginx.yaml** contenant les éléments suivants :
+Créez un fichier appelé **acr-nginx.yaml** contenant les éléments suivants. Remplacez le nom de ressource de votre registre par **acr-name**. Exemple : *myContainerRegistry*.
 
 ```yaml
 apiVersion: apps/v1
@@ -118,7 +121,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: <replace this image property with you acr login server, image and tag>
+        image: <acr-name>.azurecr.io/nginx:v1
         ports:
         - containerPort: 80
 ```
@@ -143,5 +146,9 @@ nginx0-deployment-669dfc4d4b-x74kr   1/1     Running   0          20s
 nginx0-deployment-669dfc4d4b-xdpd6   1/1     Running   0          20s
 ```
 
+### <a name="troubleshooting"></a>Dépannage
+* En savoir plus sur les [Diagnostics de l’ACR](../container-registry/container-registry-diagnostics-audit-logs.md)
+* En savoir plus sur l’[Intégrité de l’ACR](../container-registry/container-registry-check-health.md)
+
 <!-- LINKS - external -->
-[AKS AKS CLI]:  https://docs.microsoft.com/cli/azure/aks?view=azure-cli-latest#az-aks-create
+[AKS AKS CLI]: /cli/azure/aks?view=azure-cli-latest#az-aks-create

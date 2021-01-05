@@ -1,6 +1,6 @@
 ---
 title: Transformer des données à l’aide de l’activité Spark
-description: Découvrez comment transformer des données en exécutant des programmes Spark à partir d’un pipeline de fabrique de données Azure et à l’aide de l’activité de Spark.
+description: Découvrez comment transformer des données en exécutant des programmes Spark à partir d’un pipeline Azure Data Factory et à l’aide de l’activité de Spark.
 services: data-factory
 ms.service: data-factory
 ms.workload: data-services
@@ -9,13 +9,13 @@ author: nabhishek
 ms.author: abnarain
 manager: shwang
 ms.custom: seo-lt-2019
-ms.date: 05/31/2018
-ms.openlocfilehash: c39575e8ea60a091124c633f8958ec36e8a61885
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/08/2020
+ms.openlocfilehash: cac64b17e7aad9aa2bf88386f21d5f82b3013fa3
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418845"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566773"
 ---
 # <a name="transform-data-using-spark-activity-in-azure-data-factory"></a>Transformer des données à l’aide d’une activité Spark dans Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -65,7 +65,7 @@ Le tableau suivant décrit les propriétés JSON utilisées dans la définition 
 | description           | Texte décrivant l’activité.  | Non       |
 | type                  | Pour l’activité Spark, le type d’activité est HDinsightSpark. | Oui      |
 | linkedServiceName     | Nom du service lié HDInsight Spark sur lequel s’exécute le programme Spark. Pour en savoir plus sur ce service lié, consultez l’article [Services liés de calcul](compute-linked-services.md). | Oui      |
-| SparkJobLinkedService | Service lié de stockage Azure qui contient le fichier de travail, les dépendances et les journaux d’activité Spark.  Si vous ne spécifiez pas de valeur pour cette propriété, le stockage associé au cluster HDInsight est utilisé. La valeur de cette propriété ne peut être qu’un service lié de Stockage Azure. | Non       |
+| SparkJobLinkedService | Service lié de stockage Azure qui contient le fichier de travail, les dépendances et les journaux d’activité Spark. Seuls les services liés **[Stockage Blob Azure](./connector-azure-blob-storage.md)** et **[ADLS Gen2](./connector-azure-data-lake-storage.md)** sont pris en charge ici. Si vous ne spécifiez pas de valeur pour cette propriété, le stockage associé au cluster HDInsight est utilisé. La valeur de cette propriété ne peut être qu’un service lié de Stockage Azure. | Non       |
 | rootPath              | Conteneur d’objets blob Azure et dossier contenant le fichier Spark. Le nom de fichier respecte la casse. Reportez-vous à la section décrivant la structure des dossiers (section suivante) pour obtenir plus d’informations sur la structure de ce dossier. | Oui      |
 | entryFilePath         | Chemin d’accès relatif au dossier racine du code/package Spark. Le fichier d’entrée doit être un fichier Python ou un fichier .jar. | Oui      |
 | ClassName             | Classe principale Java/Spark de l’application.      | Non       |
@@ -119,5 +119,5 @@ Consultez les articles suivants qui expliquent comment transformer des données 
 * [Activité de diffusion en continu Hadoop](transform-data-using-hadoop-streaming.md)
 * [Activité Spark](transform-data-using-spark.md)
 * [Activité personnalisée .NET](transform-data-using-dotnet-custom-activity.md)
-* [Activité d’exécution du lot Machine Learning](transform-data-using-machine-learning.md)
+* [Activité Exécution par lots Azure Machine Learning studio (classique)](transform-data-using-machine-learning.md)
 * [Activité de procédure stockée](transform-data-using-stored-procedure.md)

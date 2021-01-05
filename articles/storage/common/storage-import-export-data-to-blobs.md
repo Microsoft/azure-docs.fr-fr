@@ -4,20 +4,21 @@ description: Découvrez comment créer des tâches d’importation et d’export
 author: alkohli
 services: storage
 ms.service: storage
-ms.topic: article
-ms.date: 03/12/2020
+ms.topic: how-to
+ms.date: 10/29/2020
 ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: 570c663861361a19190f6fb5d608b6aa029a0885
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: 07f1a6ff5d15ee552680c59c86a194aeabe5b866
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80282492"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96326384"
 ---
 # <a name="use-the-azure-importexport-service-to-import-data-to-azure-blob-storage"></a>Utiliser le service Azure Import/Export pour transférer des données dans le Stockage Blob Azure
 
-Cet article fournit des instructions détaillées sur l’utilisation du service Azure Import/Export pour importer de manière sécurisée de grandes quantités de données dans le Stockage Blob Azure. Pour importer des données dans des objets blob Azure, le service vous demande d’expédier à un centre de données Azure des lecteurs de disque chiffrés contenant vos données.  
+Cet article fournit des instructions détaillées sur l’utilisation du service Azure Import/Export pour importer de manière sécurisée de grandes quantités de données dans le Stockage Blob Azure. Pour importer des données dans des objets blob Azure, le service vous demande d’expédier à un centre de données Azure des lecteurs de disque chiffrés contenant vos données.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -34,12 +35,12 @@ Vous devez respecter les consignes suivantes :
 * [Téléchargez la dernière version 1 de WAImportExport](https://www.microsoft.com/download/details.aspx?id=42659) sur le système Windows. La dernière version de l’outil apporte des mises à jour de sécurité pour autoriser un protecteur externe pour la clé BitLocker, et une nouvelle version de la fonctionnalité du mode de déverrouillage.
 
   * Décompressez le package dans le dossier par défaut : `waimportexportv1`. Par exemple : `C:\WaImportExportV1`.
-* Dotez-vous d’un compte FedEx/DHL. Si vous souhaitez faire appel à un autre transporteur que FedEx/DHL, contactez l’équipe des opérations Azure Data Box à l’adresse `adbops@microsoft.com`.  
+* Dotez-vous d’un compte FedEx/DHL. Si vous souhaitez faire appel à un autre transporteur que FedEx/DHL, contactez l’équipe des opérations Azure Data Box à l’adresse `adbops@microsoft.com`.
   * Le compte doit être valide, doit avoir un solde et doit offrir des fonctionnalités de réexpédition.
   * Générez un numéro de suivi pour le travail d’exportation.
   * Chaque travail doit avoir un numéro de suivi distinct. Plusieurs travaux portant le même numéro de suivi ne sont pas pris en charge.
   * Si vous n’avez pas de compte de transporteur, accédez à :
-    * [Créer un compte FedEX](https://www.fedex.com/en-us/create-account.html), ou
+    * [Créer un compte FedEx](https://www.fedex.com/en-us/create-account.html), ou
     * [Créer un compte DHL](http://www.dhl-usa.com/en/express/shipping/open_account.html).
 
 ## <a name="step-1-prepare-the-drives"></a>Étape 1 : Préparer les lecteurs
@@ -70,7 +71,7 @@ Effectuez les étapes suivantes pour préparer les lecteurs.
 7. Pour préparer le disque, exécutez la commande suivante. **Selon la taille des données, l’opération peut durer plusieurs heures, voire plusieurs jours.**
 
     ```powershell
-    ./WAImportExport.exe PrepImport /j:<journal file name> /id:session#<session number> /t:<Drive letter> /bk:<BitLocker key> /srcdir:<Drive letter>:\ /dstdir:<Container name>/ /blobtype:<BlockBlob or PageBlob> /skipwrite
+    ./WAImportExport.exe PrepImport /j:<journal file name> /id:session<session number> /t:<Drive letter> /bk:<BitLocker key> /srcdir:<Drive letter>:\ /dstdir:<Container name>/ /blobtype:<BlockBlob or PageBlob> /skipwrite
     ```
 
     Un fichier journal est créé dans le même dossier où vous avez exécuté l’outil. Deux autres fichiers sont également créés : un fichier *.xml* (dossier où vous exécutez l’outil) et un fichier *drive-manifest.xml* (dossier où se trouvent les données).
@@ -95,6 +96,8 @@ Effectuez les étapes suivantes pour préparer les lecteurs.
 
 ## <a name="step-2-create-an-import-job"></a>Étape 2 : Créer une tâche d’importation
 
+### <a name="portal"></a>[Portail](#tab/azure-portal)
+
 Effectuez les étapes suivantes pour créer une tâche d’importation dans le portail Azure.
 
 1. Connectez-vous sur https://portal.azure.com/.
@@ -113,7 +116,7 @@ Effectuez les étapes suivantes pour créer une tâche d’importation dans le p
        * Le nom ne peut contenir que des lettres minuscules, des chiffres et des traits d’union.
        * Le nom doit commencer par une lettre et ne doit pas contenir d’espaces.
    * Sélectionnez un abonnement.
-   * Entrez ou sélectionnez un groupe de ressources.  
+   * Entrez ou sélectionnez un groupe de ressources.
 
      ![Créer une tâche d’importation - Étape 1](./media/storage-import-export-data-to-blobs/import-to-blob3.png)
 
@@ -142,6 +145,181 @@ Effectuez les étapes suivantes pour créer une tâche d’importation dans le p
    * Cliquez sur **OK** pour créer la tâche d’importation.
 
      ![Créer une tâche d’importation - Étape 4](./media/storage-import-export-data-to-blobs/import-to-blob6.png)
+
+### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+Exécutez les étapes suivantes pour créer une tâche d’importation dans Azure CLI.
+
+[!INCLUDE [azure-cli-prepare-your-environment-h3.md](../../../includes/azure-cli-prepare-your-environment-h3.md)]
+
+### <a name="create-a-job"></a>Créer un travail
+
+1. Utilisez la commande [az extension add](/cli/azure/extension#az_extension_add) pour ajouter l’extension [az import-export](/cli/azure/ext/import-export/import-export) :
+
+    ```azurecli
+    az extension add --name import-export
+    ```
+
+1. Vous pouvez utiliser un groupe de ressources existant ou en créer un. Exécutez la commande [az group create](/cli/azure/group#az_group_create) pour créer un groupe de ressources :
+
+    ```azurecli
+    az group create --name myierg --location "West US"
+    ```
+
+1. Vous pouvez utiliser un compte de stockage existant ou en créer un nouveau. Pour créer un compte de stockage, exécutez la commande [az storage account create](/cli/azure/storage/account#az_storage_account_create) :
+
+    ```azurecli
+    az storage account create --resource-group myierg --name myssdocsstorage --https-only
+    ```
+
+1. Pour obtenir la liste des emplacements vers lesquels vous pouvez expédier des disques, utilisez la commande [az import-export location list](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_list) :
+
+    ```azurecli
+    az import-export location list
+    ```
+
+1. Pour obtenir les emplacements de votre région, utilisez la commande [az import-export location show](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_show) :
+
+    ```azurecli
+    az import-export location show --location "West US"
+    ```
+
+1. Exécutez la commande [az import-export create](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_create) suivante pour créer un travail d’importation :
+
+    ```azurecli
+    az import-export create \
+        --resource-group myierg \
+        --name MyIEjob1 \
+        --location "West US" \
+        --backup-drive-manifest true \
+        --diagnostics-path waimportexport \
+        --drive-list bit-locker-key=439675-460165-128202-905124-487224-524332-851649-442187 \
+            drive-header-hash= drive-id=AZ31BGB1 manifest-file=\\DriveManifest.xml \
+            manifest-hash=69512026C1E8D4401816A2E5B8D7420D \
+        --type Import \
+        --log-level Verbose \
+        --shipping-information recipient-name="Microsoft Azure Import/Export Service" \
+            street-address1="3020 Coronado" city="Santa Clara" state-or-province=CA postal-code=98054 \
+            country-or-region=USA phone=4083527600 \
+        --return-address recipient-name="Gus Poland" street-address1="1020 Enterprise way" \
+            city=Sunnyvale country-or-region=USA state-or-province=CA postal-code=94089 \
+            email=gus@contoso.com phone=4085555555" \
+        --return-shipping carrier-name=FedEx carrier-account-number=123456789 \
+        --storage-account myssdocsstorage
+    ```
+
+   > [!TIP]
+   > Au lieu de spécifier une adresse de messagerie pour un seul utilisateur, fournissez une adresse de groupe. Cela garantit que vous recevrez des notifications même si un administrateur s’en va.
+
+1. Utilisez la commande [az import-export list](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_list) pour afficher toutes les tâches du groupe de ressources myierg :
+
+    ```azurecli
+    az import-export list --resource-group myierg
+    ```
+
+1. Pour mettre à jour votre travail ou l’annuler, exécutez la commande [az import-export update](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_update) :
+
+    ```azurecli
+    az import-export update --resource-group myierg --name MyIEjob1 --cancel-requested true
+    ```
+
+### <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell)
+
+Exécutez les étapes suivantes pour créer une tâche d’importation dans Azure PowerShell.
+
+[!INCLUDE [azure-powershell-requirements-h3.md](../../../includes/azure-powershell-requirements-h3.md)]
+
+> [!IMPORTANT]
+> Tant que le module PowerShell **Az.ImportExport** est en préversion, vous devez l’installer séparément à l’aide de la cmdlet `Install-Module`. Une fois que ce module PowerShell sera en disponibilité générale, il fera partie intégrante des versions futures du module Az PowerShell et sera disponible par défaut dans Azure Cloud Shell.
+
+```azurepowershell-interactive
+Install-Module -Name Az.ImportExport
+```
+
+### <a name="create-a-job"></a>Créer un travail
+
+1. Vous pouvez utiliser un groupe de ressources existant ou en créer un. Pour créer un groupe de ressources, exécutez la cmdlet [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) :
+
+   ```azurepowershell-interactive
+   New-AzResourceGroup -Name myierg -Location westus
+   ```
+
+1. Vous pouvez utiliser un compte de stockage existant ou en créer un nouveau. Pour créer un compte de stockage, exécutez la cmdlet [New-AzStorageAccount](/powershell/module/az.storage/new-azstorageaccount) :
+
+   ```azurepowershell-interactive
+   New-AzStorageAccount -ResourceGroupName myierg -AccountName myssdocsstorage -SkuName Standard_RAGRS -Location westus -EnableHttpsTrafficOnly $true
+   ```
+
+1. Pour obtenir la liste des emplacements vers lesquels vous pouvez expédier des disques, utilisez la cmdlet [Get-AzImportExportLocation](/powershell/module/az.importexport/get-azimportexportlocation) :
+
+   ```azurepowershell-interactive
+   Get-AzImportExportLocation
+   ```
+
+1. Utilisez la cmdlet `Get-AzImportExportLocation` avec le paramètre `Name` pour obtenir les emplacements de votre région :
+
+   ```azurepowershell-interactive
+   Get-AzImportExportLocation -Name westus
+   ```
+
+1. Exécutez l’exemple [New-AzImportExport](/powershell/module/az.importexport/new-azimportexport) suivant pour créer une tâche d’importation :
+
+   ```azurepowershell-interactive
+   $driveList = @(@{
+     DriveId = '9CA995BA'
+     BitLockerKey = '439675-460165-128202-905124-487224-524332-851649-442187'
+     ManifestFile = '\\DriveManifest.xml'
+     ManifestHash = '69512026C1E8D4401816A2E5B8D7420D'
+     DriveHeaderHash = 'AZ31BGB1'
+   })
+
+   $Params = @{
+      ResourceGroupName = 'myierg'
+      Name = 'MyIEjob1'
+      Location = 'westus'
+      BackupDriveManifest = $true
+      DiagnosticsPath = 'waimportexport'
+      DriveList = $driveList
+      JobType = 'Import'
+      LogLevel = 'Verbose'
+      ShippingInformationRecipientName = 'Microsoft Azure Import/Export Service'
+      ShippingInformationStreetAddress1 = '3020 Coronado'
+      ShippingInformationCity = 'Santa Clara'
+      ShippingInformationStateOrProvince = 'CA'
+      ShippingInformationPostalCode = '98054'
+      ShippingInformationCountryOrRegion = 'USA'
+      ShippingInformationPhone = '4083527600'
+      ReturnAddressRecipientName = 'Gus Poland'
+      ReturnAddressStreetAddress1 = '1020 Enterprise way'
+      ReturnAddressCity = 'Sunnyvale'
+      ReturnAddressStateOrProvince = 'CA'
+      ReturnAddressPostalCode = '94089'
+      ReturnAddressCountryOrRegion = 'USA'
+      ReturnAddressPhone = '4085555555'
+      ReturnAddressEmail = 'gus@contoso.com'
+      ReturnShippingCarrierName = 'FedEx'
+      ReturnShippingCarrierAccountNumber = '123456789'
+      StorageAccountId = '/subscriptions/<SubscriptionId>/resourceGroups/myierg/providers/Microsoft.Storage/storageAccounts/myssdocsstorage'
+   }
+   New-AzImportExport @Params
+   ```
+
+   > [!TIP]
+   > Au lieu de spécifier une adresse de messagerie pour un seul utilisateur, fournissez une adresse de groupe. Cela garantit que vous recevrez des notifications même si un administrateur s’en va.
+
+1. Utilisez la cmdlet [Get-AzImportExport](/powershell/module/az.importexport/get-azimportexport) pour afficher toutes les tâches du groupe de ressources myierg :
+
+   ```azurepowershell-interactive
+   Get-AzImportExport -ResourceGroupName myierg
+   ```
+
+1. Pour mettre à jour votre travail ou l’annuler, exécutez la cmdlet [Update-AzImportExport](/powershell/module/az.importexport/update-azimportexport) :
+
+   ```azurepowershell-interactive
+   Update-AzImportExport -Name MyIEjob1 -ResourceGroupName myierg -CancelRequested
+   ```
+
+---
 
 ## <a name="step-3-optional-configure-customer-managed-key"></a>Étape 3 (facultative) : Configurer une clé gérée par le client
 

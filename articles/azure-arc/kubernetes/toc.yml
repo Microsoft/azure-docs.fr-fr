@@ -1,28 +1,41 @@
-- name: Kubernetes avec Azure Arc
+- name: Documentation de Kubernetes avec Azure Arc
   href: index.yml
 - name: Vue d’ensemble
   items:
-    - name: À propos de Kubernetes avec Azure Arc
+    - name: À propos de Kubernetes avec Arc
       href: overview.md
 - name: Guides pratiques
   items:
-    - name: Opérations de cluster
+    - name: "Se connecter à Azure\_Arc"
       items:
         - name: Connecter un cluster
           href: connect-cluster.md
-        - name: Utiliser GitOps dans des clusters connectés
-          href: use-gitops-connected-cluster.md
-        - name: Utiliser GitOps avec Helm
-          href: use-gitops-with-helm.md
-        - name: Utiliser Azure Policy
-          href: use-azure-policy.md
-        - name: Azure Monitor pour des conteneurs
-          href: deploy-azure-monitor-for-containers.md
-        - name: Installer le module complémentaire Azure Policy
-          href: ../../governance/policy/concepts/policy-for-kubernetes.md?toc=/azure/azure-arc/kubernetes/toc.json
-        - name: Déployer des charges de travail IoT
-          href: deploy-azure-iot-edge-workloads.md
         - name: Intégration d’un principal de service
           href: create-onboarding-service-principal.md
-        - name: Dépannage
-          href: Troubleshooting.md
+    - name: Gérer
+      items:
+        - name: Déployer des configurations avec GitOps
+          href: use-gitops-connected-cluster.md
+        - name: Déployer des graphiques Helm avec GitOps
+          href: use-gitops-with-helm.md
+        - name: Appliquer GitOps avec Azure Policy
+          href: use-azure-policy.md
+        - name: Superviser avec Azure Monitor pour conteneurs
+          href: ../../azure-monitor/insights/container-insights-enable-arc-enabled-clusters.md?toc=/azure/azure-arc/kubernetes/toc.yml
+        - name: Stratégies de contrôle d’admission avec Azure Policy
+          href: ../../governance/policy/concepts/policy-for-kubernetes.md?toc=/azure/azure-arc/kubernetes/toc.yml
+        - name: Déployer des charges de travail IoT
+          href: deploy-azure-iot-edge-workloads.md
+    - name: Dépannage
+      href: Troubleshooting.md
+- name: Informations de référence
+  items:
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: policy-reference.md
+    - name: Azure PowerShell
+      href: /powershell/module/Az.ConnectedKubernetes/
+- name: Ressources
+  items:
+    - name: Démarrage rapide avec Azure Arc
+      href: 'https://github.com/microsoft/azure_arc'

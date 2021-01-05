@@ -1,18 +1,15 @@
 ---
 title: Publier des événements avec des domaines d’événements avec Azure Event Grid
 description: Explique comment gérer de grands ensembles de rubriques dans Azure Event Grid et y publier des événements à l’aide de domaines d’événements.
-services: event-grid
-author: banisadr
-ms.service: event-grid
-ms.author: babanisa
 ms.topic: conceptual
-ms.date: 10/22/2019
-ms.openlocfilehash: 1d07227249806b7d54523af66817a170c19354ee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 277db97211b196c9853470c2d12cc2246a4005b2
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72786558"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92330075"
 ---
 # <a name="manage-topics-and-publish-events-using-event-domains"></a>Gérer des rubriques et publier des événements à l’aide de domaines de l’événement
 
@@ -82,7 +79,7 @@ Notez les paramètres `endpoint` et `id`, dont vous avez besoin pour gérer le d
 
 ## <a name="manage-access-to-topics"></a>Gérer l’accès aux rubriques
 
-La gestion de l’accès aux rubriques est effectuée par le biais d’une [attribution de rôle](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-cli). L’attribution de rôle utilise le contrôle d’accès en fonction du rôle pour limiter les opérations sur les ressources Azure aux utilisateurs autorisés dans une étendue donnée.
+La gestion de l’accès aux rubriques est effectuée par le biais d’une [attribution de rôle](../role-based-access-control/role-assignments-cli.md). L’attribution de rôle utilise le contrôle d’accès en fonction du rôle Azure pour limiter les opérations sur les ressources Azure aux utilisateurs autorisés dans une étendue donnée.
 
 Event Grid a deux rôles intégrés que vous pouvez utiliser pour attribuer à des utilisateurs spécifiques l’accès à différentes rubriques au sein d’un domaine. Ces rôles sont `EventGrid EventSubscription Contributor (Preview)`, qui permet de créer et de supprimer des abonnements, et `EventGrid EventSubscription Reader (Preview)`, qui permet uniquement de répertorier les abonnements aux événements.
 
@@ -139,7 +136,7 @@ New-AzureRmEventGridSubscription `
 
 Si vous avez besoin d’un point de terminaison de test auquel abonner vos événements, vous pouvez toujours déployer une [application web prédéfinie](https://github.com/Azure-Samples/azure-event-grid-viewer) qui affiche les événements entrants. Vous pouvez envoyer vos événements à votre site web de test à l’adresse `https://<your-site-name>.azurewebsites.net/api/updates`.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"  alt="Button to Deploy to Aquent." /></a>
 
 Les autorisations définies pour une rubrique sont stockées dans Azure Active Directory et doivent être supprimées explicitement. La suppression d’un abonnement aux événements ne révoque pas l’accès des utilisateurs à la création d’abonnements aux événements s’ils ont un accès en écriture à une rubrique.
 

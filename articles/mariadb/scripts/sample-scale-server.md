@@ -1,26 +1,28 @@
 ---
 title: Script CLI - Mettre à l’échelle un serveur - Azure Database for MariaDB
 description: Cet exemple de script CLI met à l’échelle un serveur Azure Database for MariaDB pour obtenir un autre niveau de performances, après analyse des métriques.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: sample
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 12/02/2019
-ms.openlocfilehash: 562f265cccf444740c177a41e516f9066188613e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 71a2ad5b8d09812eb999ab75a3522caf5a8dd20a
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74771633"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536623"
 ---
 # <a name="monitor-and-scale-an-azure-database-for-mariadb-server-using-azure-cli"></a>Superviser et mettre à l’échelle une base de données Azure Database for MariaDB à l’aide d’Azure CLI
 Cet exemple de script CLI met à l’échelle le calcul et le stockage d’un serveur Azure Database for MariaDB après interrogation des métriques. Le calcul peut effectuer une opération d’augmentation ou de réduction d'échelle. Le stockage peut uniquement effectuer une opération d’augmentation d'échelle.
 
-[!INCLUDE [cloud-shell-try-it](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-Si vous choisissez d’exécuter l’interface CLI localement, Azure CLI 2.0 ou ultérieur est indispensable pour poursuivre la procédure décrite dans cet article. Pour vérifier la version, exécutez `az --version`. Consultez [Installer Azure CLI]( /cli/azure/install-azure-cli) pour installer ou mettre à niveau votre version d’Azure CLI. 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
+
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 Mettez à jour le script avec votre ID d’abonnement.
@@ -43,5 +45,5 @@ Ce script utilise les commandes décrites dans le tableau suivant :
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur [le calcul et le stockage Azure Database for MariaDB](../concepts-pricing-tiers.md)
-- Pour essayer d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)
+- Essayez d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)
 - En savoir plus sur [Azure CLI](/cli/azure)

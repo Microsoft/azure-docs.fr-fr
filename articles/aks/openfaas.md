@@ -5,13 +5,13 @@ author: justindavies
 ms.topic: conceptual
 ms.date: 03/05/2018
 ms.author: juda
-ms.custom: mvc
-ms.openlocfilehash: 95039573c607f516755f08f1ebad8b968416ec8b
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 319107127b79383fc3b49f0eeb856a0e6c5b09f8
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631471"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747773"
 ---
 # <a name="using-openfaas-on-aks"></a>Utilisation d’OpenFaaS avec AKS
 
@@ -91,7 +91,8 @@ alertmanager-config  1     20s
 NOTES:
 To verify that openfaas has started, run:
 
-  kubectl --namespace=openfaas get deployments -l "release=openfaas, app=openfaas"
+```console
+kubectl --namespace=openfaas get deployments -l "release=openfaas, app=openfaas"
 ```
 
 Une adresse IP publique est créée pour accéder à la passerelle OpenFaaS. Pour récupérer cette adresse IP, utilisez la commande [kubectl get service][kubectl-get]. L’affectation de l’adresse IP au service peut prendre un certain temps.
@@ -131,9 +132,9 @@ echo -n $PASSWORD | ./faas-cli login -g $OPENFAAS_URL -u admin --password-stdin
 
 Maintenant qu’OpenFaaS est opérationnel, créez une fonction à l’aide du portail OpenFaas.
 
-Cliquez sur **Deploy New Function** (Déployer une nouvelle fonction), puis recherchez **Figlet**. Sélectionnez la fonction Figlet, puis cliquez sur **Deploy** (Déployer).
+Cliquez sur **Deploy New Function** (Déployer une nouvelle fonction), puis recherchez **Figlet** . Sélectionnez la fonction Figlet, puis cliquez sur **Deploy** (Déployer).
 
-![Figlet](media/container-service-serverless/figlet.png)
+![Capture d'écran représentant la boîte de dialogue Déployer une nouvelle fonction, avec le texte Figlet sur la ligne de recherche.](media/container-service-serverless/figlet.png)
 
 Utilisez curl pour appeler la fonction. Dans l’exemple suivant, remplacez l’adresse IP par celle de votre passerelle OpenFaas.
 

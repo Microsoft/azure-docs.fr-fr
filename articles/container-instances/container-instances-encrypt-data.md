@@ -3,14 +3,14 @@ title: Chiffrer les données de déploiement
 description: En savoir plus sur le chiffrement des données conservées pour les ressources de vos instances de conteneur et sur la manière de chiffrer les données avec une clé gérée par le client
 ms.topic: article
 ms.date: 01/17/2020
-author: dkkapur
-ms.author: dekapur
-ms.openlocfilehash: ad232c5d9df9f6bfae3a79dbd72e2c68143be949
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: macolso
+ms.author: macolso
+ms.openlocfilehash: 1b73ce5c994231a1c7b2f26ad702f2ad5880ba44
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79080358"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94686274"
 ---
 # <a name="encrypt-deployment-data"></a>Chiffrer les données de déploiement
 
@@ -24,22 +24,22 @@ Dans ACI, les données sont chiffrées et déchiffrées à l’aide du chiffreme
 
 Vous pouvez vous appuyer sur les clés gérées par Microsoft pour le chiffrement de vos données de conteneur, ou vous pouvez gérer le chiffrement avec vos propres clés. Le tableau suivant compare ces options : 
 
-|    |    Clés managées par Microsoft     |     Clés managées par le client     |
+|    |    Clés managées par Microsoft     |     Clés gérées par le client     |
 |----|----|----|
-|    Opérations de chiffrement/déchiffrement    |    Azure    |    Azure    |
-|    Stockage des clés    |    Magasin de clés Microsoft    |    Azure Key Vault    |
-|    Responsabilité de la permutation des clés    |    Microsoft    |    Customer    |
-|    Accès aux clés    |    Microsoft uniquement    |    Microsoft, client    |
+|    **Opérations de chiffrement/déchiffrement**    |    Azure    |    Azure    |
+|    **Stockage des clés**    |    Magasin de clés Microsoft    |    Azure Key Vault    |
+|    **Responsabilité de la permutation des clés**    |    Microsoft    |    Customer    |
+|    **Accès aux clés**    |    Microsoft uniquement    |    Microsoft, client    |
 
 Le reste du document décrit les étapes nécessaires pour chiffrer vos données de déploiement ACI avec votre clé (clé gérée par le client). 
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 ## <a name="encrypt-data-with-a-customer-managed-key"></a>Chiffrer des données avec une clé gérée par le client
 
 ### <a name="create-service-principal-for-aci"></a>Créer un principal de service pour ACI
 
-La première étape consiste à s’assurer que votre[client Azure](https://docs.microsoft.com/azure/active-directory/develop/quickstart-create-new-tenant) dispose d’un principal de service affecté pour accorder des autorisations au service Azure Container Instances. 
+La première étape consiste à s’assurer que votre[client Azure](../active-directory/develop/quickstart-create-new-tenant.md) dispose d’un principal de service affecté pour accorder des autorisations au service Azure Container Instances. 
 
 > [!IMPORTANT]
 > Pour exécuter la commande suivante et créer un principal de service avec succès, vérifiez que vous disposez des autorisations nécessaires pour créer des principaux de service dans votre locataire.
@@ -59,7 +59,7 @@ Si vous n’êtes pas en mesure de créer correctement le principal de service 
 
 ### <a name="create-a-key-vault-resource"></a>Créez une ressource Key Vault
 
-Créez un coffre de clés Azure Key Vault à l’aide du [Portail Azure](https://docs.microsoft.com/azure/key-vault/quick-create-portal#create-a-vault), de l’[interface CLI](https://docs.microsoft.com/azure/key-vault/quick-create-cli) ou de [PowerShell](https://docs.microsoft.com/azure/key-vault/quick-create-powershell). 
+Créez un coffre de clés Azure à l’aide du [portail Azure](../key-vault/general/quick-create-portal.md), d’[Azure CLI](../key-vault/general/quick-create-cli.md) ou d’[Azure PowerShell](../key-vault/general/quick-create-powershell.md).
 
 Pour les propriétés de votre coffre de clés, respectez les recommandations suivantes : 
 * Nom : un nom unique est obligatoire. 
@@ -96,7 +96,7 @@ La stratégie d’accès doit maintenant apparaître dans les stratégies d’ac
 > [!IMPORTANT]
 > Le chiffrement des données de déploiement avec une clé gérée par le client est disponible dans la dernière version de l’API (2019-12-01) qui est en cours de déploiement. Spécifiez cette version d’API dans votre modèle de déploiement. Si vous rencontrez des problèmes, contactez le support Azure.
 
-Une fois la clé du coffre de clés et la stratégie d’accès définies, ajoutez les propriétés suivantes à votre modèle de déploiement ACI. Apprenez-en davantage sur le déploiement de ressources ACI à l’aide d’un modèle dans le [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](https://docs.microsoft.com/azure/container-instances/container-instances-multi-container-group). 
+Une fois la clé du coffre de clés et la stratégie d’accès définies, ajoutez les propriétés suivantes à votre modèle de déploiement ACI. Apprenez-en davantage sur le déploiement de ressources ACI à l’aide d’un modèle dans le [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](./container-instances-multi-container-group.md). 
 * Sous `resources`, définissez `apiVersion` sur `2019-12-01`.
 * Dans la section Propriétés du groupe de conteneurs du modèle de déploiement, ajoutez une propriété `encryptionProperties` contenant les valeurs suivantes :
   * `vaultBaseUrl` : nom DNS de votre coffre de clés. Vous le trouverez dans le panneau de vue d’ensemble de la ressource Coffre de clés dans le portail
@@ -129,7 +129,7 @@ L’extrait de modèle suivant montre ces propriétés supplémentaires pour chi
 ]
 ```
 
-Voici un modèle complet, adapté à partir du modèle proposé dans [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](https://docs.microsoft.com/azure/container-instances/container-instances-multi-container-group). 
+Voici un modèle complet, adapté à partir du modèle proposé dans [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](./container-instances-multi-container-group.md). 
 
 ```json
 {
@@ -233,14 +233,14 @@ Créez un groupe de ressources avec la commande [az group create][az-group-creat
 az group create --name myResourceGroup --location eastus
 ```
 
-Déployez ensuite le modèle avec la commande [az group deployment create][az-group-deployment-create].
+Déployez ensuite le modèle avec la commande [az deployment group create][az-deployment-group-create].
 
 ```azurecli-interactive
-az group deployment create --resource-group myResourceGroup --template-file deployment-template.json
+az deployment group create --resource-group myResourceGroup --template-file deployment-template.json
 ```
 
 Après quelques secondes, vous devriez recevoir une réponse initiale d’Azure. Une fois le déploiement terminé, toutes les données qui y sont associées et qui sont conservées par le service ACI sont chiffrées à l’aide de la clé que vous avez fournie.
 
 <!-- LINKS - Internal -->
 [az-group-create]: /cli/azure/group#az-group-create
-[az-group-deployment-create]: /cli/azure/group/deployment#az-group-deployment-create
+[az-deployment-group-create]: /cli/azure/deployment/group/#az-deployment-group-create

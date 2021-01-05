@@ -3,14 +3,14 @@ title: Gérer des groupes de ressources - Azure PowerShell
 description: Utilisez Azure PowerShell pour gérer vos groupes de ressources dans Azure Resource Manager. Montre comment créer, lister et supprimer des groupes de ressources.
 author: mumian
 ms.topic: conceptual
-ms.date: 02/11/2019
+ms.date: 09/01/2020
 ms.author: jgao
-ms.openlocfilehash: 25e001927d5c06b4a7e5639faaa054ae18b12bb7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e5449dc26197a0aa2e2b0da49ad9e5ca4fb19e82
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226201"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185757"
 ---
 # <a name="manage-azure-resource-manager-resource-groups-by-using-azure-powershell"></a>Gérer des groupes de ressources Azure Resource Manager à l'aide d'Azure PowerShell
 
@@ -31,15 +31,10 @@ Le groupe de ressources stocke des métadonnées sur les ressources. Lorsque vou
 
 ## <a name="create-resource-groups"></a>Créer des groupes de ressources
 
-Le script PowerShell suivant crée un groupe de ressources, puis l'affiche.
+Le script PowerShell suivant crée un groupe de ressources.
 
 ```azurepowershell-interactive
-$resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
-$location = Read-Host -Prompt "Enter the location (i.e. centralus)"
-
-New-AzResourceGroup -Name $resourceGroupName -Location $location
-
-Get-AzResourceGroup -Name $resourceGroupName
+New-AzResourceGroup -Name demoResourceGroup -Location westus
 ```
 
 ## <a name="list-resource-groups"></a>Répertorier les groupes de ressources
@@ -74,11 +69,11 @@ Pour plus d’informations sur l’ordre dans lequel Azure Resource Manager supp
 
 Voir [Déployer des ressources sur un groupe de ressources existant](manage-resources-powershell.md#deploy-resources-to-an-existing-resource-group).
 
-Pour valider le déploiement d'un groupe de ressources, consultez [Test-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/Az.Resources/Test-AzResourceGroupDeployment?view=azps-1.3.0).
+Pour valider le déploiement d'un groupe de ressources, consultez [Test-AzResourceGroupDeployment](/powershell/module/Az.Resources/Test-AzResourceGroupDeployment?view=azps-1.3.0).
 
 ## <a name="deploy-a-resource-group-and-resources"></a>Déployer un groupe de ressources et des ressources
 
-Vous pouvez créer un groupe de ressources et déployer des ressources sur ce groupe à l'aide d'un modèle Resource Manager. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-group-and-resources).
+Vous pouvez créer un groupe de ressources et déployer des ressources sur ce groupe à l'aide d'un modèle Resource Manager. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-groups).
 
 ## <a name="redeploy-when-deployment-fails"></a>Redéploiement en cas d’échec du déploiement
 
@@ -209,19 +204,19 @@ Si vous utilisez le paramètre `-SkipResourceNameParameterization` lors de l’e
 ]
 ```
 
-La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](https://aka.ms/exportTemplateViaAdf).
+La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](../../data-factory/copy-clone-data-factory.md).
 
-Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](https://aka.ms/migrateclassicresourcetoarm).
+Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](../../virtual-machines/migration-classic-resource-manager-overview.md).
 
 Pour plus d’informations, consultez [Export d’une ressource unique ou de plusieurs ressources vers un modèle dans le portail Azure](../templates/export-template-portal.md).
 
 ## <a name="manage-access-to-resource-groups"></a>Gérer l'accès aux groupes de ressources
 
-Le [contrôle d’accès en fonction du rôle (RBAC)](../../role-based-access-control/overview.md) est la façon dont vous gérez l’accès aux ressources dans Azure. Pour plus d'informations, consultez [Gérer l'accès avec RBAC et Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
+Le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/overview.md) vous permet de gérer l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour vous familiariser avec Azure Resource Manager, consultez [Vue d’ensemble d’Azure Resource Manager](overview.md).
 - Pour vous familiariser avec la syntaxe des modèles Resource Manager, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../templates/template-syntax.md).
-- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](/azure/azure-resource-manager/).
+- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](../index.yml).
 - Pour accéder aux schémas liés aux modèles Azure Resource Manager, consultez [Informations de référence sur les modèles](/azure/templates/).

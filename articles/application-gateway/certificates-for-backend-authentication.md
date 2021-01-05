@@ -5,15 +5,15 @@ description: Cet article fournit des exemples sur la manière de convertir un ce
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/14/2019
+ms.topic: how-to
+ms.date: 06/17/2020
 ms.author: absha
-ms.openlocfilehash: 20f588639c54b0a8b7cd304f33b5a9d633a73be6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 874e554063f64ddefce99a223678d64b2e0774c3
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80133044"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397720"
 ---
 # <a name="create-certificates-to-allow-the-backend-with-azure-application-gateway"></a>Créer des certificats pour autoriser le serveur back-end dans Azure Application Gateway
 
@@ -21,10 +21,9 @@ Pour permettre l’utilisation du protocole TLS de bout en bout, Application Gat
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
->
-> - Exporter un certificat d’authentification à partir d’un certificat de serveur back-end (pour le SKU v1)
-> - Exporter un certificat racine approuvé à partir d’un certificat de serveur back-end (pour le SKU v2)
+
+- Exporter un certificat d’authentification à partir d’un certificat de serveur back-end (pour le SKU v1)
+- Exporter un certificat racine approuvé à partir d’un certificat de serveur back-end (pour le SKU v2)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -36,37 +35,37 @@ Un certificat d’authentification est nécessaire pour autoriser les instances 
 
 À partir de votre certificat TLS/SSL, exportez le fichier .cer de clé publique (et non la clé privée). Les étapes suivantes vous aident à exporter le fichier .cer au format X.509 avec codage base 64 (.CER) pour votre certificat :
 
-1. Pour obtenir un fichier .cer du certificat, ouvrez **Gérer les certificats utilisateur**. Recherchez le certificat, généralement dans « Certificats - Utilisateur actuel\Personnel\Certificats », puis cliquez dessus avec le bouton droit. Cliquez sur **Toutes les tâches**, puis cliquez sur **Exporter**. Cette opération ouvre **l’Assistant Exportation de certificat**. Si vous ne trouvez pas le certificat sous Current User\Personal\Certificates, il est possible que vous ayez ouvert par erreur « Certificats – Ordinateur local » et non « Certificats – Utilisateur actuel ». Si vous voulez ouvrir le Gestionnaire de certificats dans le champ d’application utilisateur actuel en utilisant PowerShell, tapez *certmgr* dans la fenêtre de la console.
+1. Pour obtenir un fichier .cer du certificat, ouvrez **Gérer les certificats utilisateur**. Recherchez le certificat, généralement dans « Certificats - Utilisateur actuel\Personnel\Certificats », puis cliquez dessus avec le bouton droit. Cliquez sur **Toutes les tâches** , puis cliquez sur **Exporter**. Cette opération ouvre **l’Assistant Exportation de certificat**. Si vous ne trouvez pas le certificat sous Current User\Personal\Certificates, il est possible que vous ayez ouvert par erreur « Certificats – Ordinateur local » et non « Certificats – Utilisateur actuel ». Si vous voulez ouvrir le Gestionnaire de certificats dans le champ d’application utilisateur actuel en utilisant PowerShell, tapez *certmgr* dans la fenêtre de la console.
 
-   ![Exporter](./media/certificates-for-backend-authentication/export.png)
+   ![Capture d’écran montrant le Gestionnaire de certificats avec l’option Certificats sélectionnée, et un menu contextuel avec les options Toutes les tâches, puis Exporter sélectionnées.](./media/certificates-for-backend-authentication/export.png)
 
 2. Dans l’assistant, cliquez sur **Suivant**.
 
    ![Exportation du certificat](./media/certificates-for-backend-authentication/exportwizard.png)
 
-3. Sélectionnez **Non, ne pas exporter la clé privée**, puis cliquez sur **Suivant**.
+3. Sélectionnez **Non, ne pas exporter la clé privée** , puis cliquez sur **Suivant**.
 
    ![N’exportez pas la clé privée](./media/certificates-for-backend-authentication/notprivatekey.png)
 
-4. Sur la page **Format de fichier d’exportation**, sélectionnez **Codé à base 64 X.509 (.cer).** , puis cliquez sur **Suivant**.
+4. Sur la page **Format de fichier d’exportation** , sélectionnez **Codé à base 64 X.509 (.cer).** , puis cliquez sur **Suivant**.
 
    ![Encodage en base 64](./media/certificates-for-backend-authentication/base64.png)
 
-5. Dans **Fichier à exporter**, cliquez sur **Parcourir** pour accéder à l’emplacement vers lequel vous souhaitez exporter le certificat. Pour la zone **Nom de fichier**, nommez le fichier de certificat. Cliquez ensuite sur **Suivant**.
+5. Dans **Fichier à exporter** , cliquez sur **Parcourir** pour accéder à l’emplacement vers lequel vous souhaitez exporter le certificat. Pour la zone **Nom de fichier** , nommez le fichier de certificat. Cliquez ensuite sur **Suivant**.
 
-   ![...](./media/certificates-for-backend-authentication/browse.png)
+   ![Capture d’écran montrant l’Assistant Exportation de certificat dans lequel vous spécifiez un fichier à exporter.](./media/certificates-for-backend-authentication/browse.png)
 
 6. Cliquez sur **Terminer** pour exporter le certificat.
 
-   ![Finish](./media/certificates-for-backend-authentication/finish.png)
+   ![Capture d’écran montrant l’Assistant Exportation de certificat une fois l’exportation de fichier terminée.](./media/certificates-for-backend-authentication/finish.png)
 
 7. Votre certificat est correctement exporté.
 
-   ![Succès](./media/certificates-for-backend-authentication/success.png)
+   ![Capture d’écran montrant l’Assistant Exportation de certificat affichant un message de réussite.](./media/certificates-for-backend-authentication/success.png)
 
    Le certificat exporté ressemble à ceci :
 
-   ![Exporté](./media/certificates-for-backend-authentication/exported.png)
+   ![Capture d’écran montrant un symbole de certificat.](./media/certificates-for-backend-authentication/exported.png)
 
 8. Si vous ouvrez le certificat exporté à l’aide du Bloc-notes, vous verrez quelque chose de similaire à cet exemple. La section en bleu contient les informations chargées vers Application Gateway. Si vous ouvrez votre certificat avec le Bloc-notes et qu’il ne ressemble pas à celui de l’exemple, cela signifie généralement que vous ne l’avez pas exporté au format X.509 de base 64 (.CER). De plus, si vous voulez utiliser un autre éditeur de texte, notez que certains éditeurs peuvent ajouter une mise en forme non souhaitée en arrière-plan. Cela peut créer des problèmes quand vous chargez le texte de ce certificat sur Azure.
 
@@ -74,11 +73,11 @@ Un certificat d’authentification est nécessaire pour autoriser les instances 
 
 ## <a name="export-trusted-root-certificate-for-v2-sku"></a>Exporter le certificat racine approuvé (pour le SKU v2)
 
-Un certificat racine approuvé est nécessaire pour mettre les instances back-end en liste verte dans le SKU v2 d’Application Gateway. Le certificat racine est un certificat racine au format X.509 avec codage base 64 (.CER) provenant des certificats de serveur back-end. Dans cet exemple, nous allons utiliser un certificat TLS/SSL pour le certificat de serveur back-end, nous allons exporter sa clé publique, puis le certificat racine de l’autorité de certification approuvée à partir de la clé publique au format de codage base64 afin d’obtenir le certificat racine approuvé. Le ou les certificats intermédiaires doivent être regroupés avec le certificat de serveur et installés sur le serveur principal.
+Un certificat racine approuvé est nécessaire pour autoriser les instances de serveur principal dans la référence de passerelle SKU v2. Le certificat racine est un certificat racine au format X.509 avec codage base 64 (.CER) provenant des certificats de serveur back-end. Dans cet exemple, nous allons utiliser un certificat TLS/SSL pour le certificat de serveur back-end, nous allons exporter sa clé publique, puis le certificat racine de l’autorité de certification approuvée à partir de la clé publique au format de codage base64 afin d’obtenir le certificat racine approuvé. Le ou les certificats intermédiaires doivent être regroupés avec le certificat de serveur et installés sur le serveur principal.
 
 Les étapes suivantes vous aident à exporter le fichier .cer de votre certificat :
 
-1. Utilisez les étapes 1 à 9 mentionnées dans la section **Exporter un certificat d’authentification à partir d’un certificat de serveur back-end (pour le SKU v1)** ci-dessus afin d’exporter la clé publique à partir de votre certificat de serveur back-end.
+1. Utilisez les étapes 1 à 8 mentionnées dans la section [Exporter le certificat d’authentification (pour le SKU v1)](#export-authentication-certificate-for-v1-sku) ci-dessus afin d’exporter la clé publique à partir de votre certificat de serveur principal.
 
 2. Une fois la clé publique exportée, ouvrez le fichier.
 
@@ -98,13 +97,12 @@ Les étapes suivantes vous aident à exporter le fichier .cer de votre certifica
 
    ![informations du certificat](./media/certificates-for-backend-authentication/rootcertdetails.png)
 
-5. Accédez à la vue **Détails**, puis cliquez sur **Copier dans un fichier**.
+5. Accédez à la vue **Détails** , puis cliquez sur **Copier dans un fichier**.
 
    ![copier le certificat racine](./media/certificates-for-backend-authentication/rootcertcopytofile.png)
 
-6. À ce stade, vous avez extrait les détails du certificat racine à partir du certificat de serveur back-end. Vous voyez s’ouvrir l’**Assistant Exportation du certificat**. Utilisez à présent les étapes 2 à 9 mentionnées dans la section **Exporter un certificat d’authentification à partir d’un certificat de serveur back-end (pour le SKU v1)** ci-dessus afin d’exporter le certificat racine approuvé au format X.509 avec codage base 64 (.CER).
+6. À ce stade, vous avez extrait les détails du certificat racine à partir du certificat de serveur back-end. Vous voyez s’ouvrir l’ **Assistant Exportation du certificat**. Utilisez à présent les étapes 2 à 9 mentionnées dans la section **Exporter un certificat d’authentification à partir d’un certificat de serveur back-end (pour le SKU v1)** ci-dessus afin d’exporter le certificat racine approuvé au format X.509 avec codage base 64 (.CER).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous disposez maintenant du certificat d’authentification/certificat racine approuvé au format X.509 avec codage base 64 (.CER). Vous pouvez l’ajouter à la passerelle d’application afin de mettre vos serveurs back-end en liste verte pour le chiffrement TLS de bout en bout. Consultez [Configurer le protocole SSL de bout en bout avec Application Gateway en utilisant PowerShell](https://docs.microsoft.com/azure/application-gateway/application-gateway-end-to-end-ssl-powershell).
-
+Vous disposez maintenant du certificat d’authentification/certificat racine approuvé au format X.509 avec codage base 64 (.CER). Vous pouvez l’ajouter à la passerelle d’application afin d’autoriser vos serveurs verte pour le chiffrement TLS de bout en bout. Consultez [Configurer le protocole SSL de bout en bout avec Application Gateway en utilisant PowerShell](./application-gateway-end-to-end-ssl-powershell.md).

@@ -1,6 +1,6 @@
 ---
 title: Prise en charge de HTTP/2 dans Azure CDN | Microsoft Docs
-description: En savoir plus sur la prise en charge de HTTP/2 et de CDN.
+description: Azure Content Delivery Network prend en charge HTTP/2, qui présente des avantages par rapport à HTTP/1, comme le multiplexage et l’accès concurrentiel, la compression des en-têtes et les dépendances de flux.
 services: cdn
 documentationcenter: ''
 author: lichard
@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 5/04/2017
 ms.author: ril
-ms.openlocfilehash: 703623e3f7f314d87417458f3f9a218dfdf45427
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4ed04185da251d9042f6b54a192d0e49ef20ede
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67849974"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92778545"
 ---
 # <a name="http2-support-in-azure-cdn"></a>Prise en charge de HTTP/2 dans Azure CDN
 
@@ -67,4 +67,4 @@ Pour en savoir plus sur les HTTP/2, consultez les ressources suivantes :
 *   [Forum Aux Questions officiel de HTTP/2](https://http2.github.io/faq/)
 *   [Informations sur HTTP/2 d’Akamai](https://http2.akamai.com/)
 
-Pour plus d’informations sur les fonctionnalités disponibles dans Azure CDN, consultez [Vue d’ensemble du réseau de distribution de contenu (CDN) Azure](https://azure.microsoft.com/documentation/articles/cdn-overview/).
+Pour plus d’informations sur les fonctionnalités disponibles dans Azure CDN, consultez [Vue d’ensemble du réseau de distribution de contenu (CDN) Azure](./cdn-overview.md).

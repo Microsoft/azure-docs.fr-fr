@@ -3,19 +3,20 @@ title: Référence du schéma des types d’actions et de déclencheurs
 description: Guide de référence du schéma des types d’actions et de déclencheurs pour le langage de définition du workflow dans Azure Logic Apps
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: jonfan, logicappspm
 ms.topic: conceptual
-ms.date: 01/19/2020
-ms.openlocfilehash: 7e14cc00d1bd716b3e4880e585b05447d2e55e2b
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.date: 09/22/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: 3dbfcacb6ea5922a01d52dfe39189f09f48d4b4a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81257434"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006079"
 ---
 # <a name="schema-reference-guide-for-trigger-and-action-types-in-azure-logic-apps"></a>Guide de référence du schéma des types d’actions et de déclencheurs dans Azure Logic Apps
 
-Ce document de référence décrit les types généraux utilisés pour identifier les déclencheurs et les actions dans la définition de flux de travail sous-jacente de votre application logique, qui est décrite et validée par le [langage de définition du flux de travail](../logic-apps/logic-apps-workflow-definition-language.md). Pour rechercher des déclencheurs et des actions de connecteur spécifiques que vous pouvez utiliser dans vos applications logiques, consultez la liste figurant sous la [présentation des connecteurs](https://docs.microsoft.com/connectors/).
+Ce document de référence décrit les types généraux utilisés pour identifier les déclencheurs et les actions dans la définition de flux de travail sous-jacente de votre application logique, qui est décrite et validée par le [langage de définition du flux de travail](../logic-apps/logic-apps-workflow-definition-language.md). Pour rechercher des déclencheurs et des actions de connecteur spécifiques que vous pouvez utiliser dans vos applications logiques, consultez la liste figurant sous la [présentation des connecteurs](/connectors/).
 
 <a name="triggers-overview"></a>
 
@@ -73,7 +74,7 @@ Chaque type de déclencheur a une interface et des entrées différentes qui dé
 
 | Type de déclencheur | Description | 
 |--------------|-------------| 
-| [**HTTP**](#http-trigger) | Vérifie ou *interroge* n’importe quel point de terminaison. Ce point de terminaison doit être conforme à un contrat de déclencheur spécifique, soit en utilisant un modèle asynchrone « 202 », soit en retournant un tableau. | 
+| [**HTTP**](#http-trigger) | Vérifie ou *interroge* n’importe quel point de terminaison. Ce point de terminaison doit être conforme à un contrat de déclencheur spécifique, soit en utilisant un modèle asynchrone `202`, soit en retournant un tableau. | 
 | [**HTTPWebhook**](#http-webhook-trigger) | Crée un point de terminaison pouvant être appelé pour votre application logique, mais appelle l’URL spécifiée pour inscrire ou désinscrire. |
 | [**Recurrence**](#recurrence-trigger) | Se déclenche selon une planification définie. Vous pouvez définir une date et une heure ultérieures pour déclencher ce déclencheur. En fonction de la fréquence, vous pouvez également spécifier des heures et des jours d’exécution de votre workflow. | 
 | [**Request**](#request-trigger)  | Crée un point de terminaison pouvant être appelé pour votre application logique (également appelé déclencheur « manuel »). Par exemple, consultez [Appeler, déclencher ou imbriquer des workflows via des points de terminaison HTTP](../logic-apps/logic-apps-http-endpoint.md). | 
@@ -159,7 +160,7 @@ Ce déclencheur vérifie ou *interroge* un point de terminaison à l’aide d’
 
 *Exemple*
 
-Cette définition de déclencheur vérifie tous les jours les e-mails dans la boîte de réception d’un compte Office 365 Outlook :
+Cette définition de déclencheur vérifie tous les jours les e-mails dans la boîte de réception d’un compte professionnel ou scolaire :
 
 ```json
 "When_a_new_email_arrives": {
@@ -224,15 +225,15 @@ Ce déclencheur envoie une demande d’abonnement à un point de terminaison à 
 |-------|------|-------------| 
 | <*connection-name*> | String | Nom de la connexion à l’API managée utilisée par le workflow | 
 | <*body-content*> | Objet JSON | Tout contenu de message à envoyer en tant que charge utile à l’API managée | 
-|||| 
+||||
 
 *Facultatif*
 
-| Valeur | Type | Description | 
-|-------|------|-------------| 
-| <*retry-behavior*> | Objet JSON | Personnalise le comportement de nouvelle tentative pour les défaillances intermittentes, qui présentent le code d’état 408, 429 et 5XX, ainsi que les éventuelles exceptions de connectivité. Pour plus d’informations, consultez [Stratégies de relance](../logic-apps/logic-apps-exception-handling.md#retry-policies). | 
-| <*query-parameters*> | Objet JSON | Paramètres de requête à inclure avec l’appel d’API <p>Par exemple, l’objet `"queries": { "api-version": "2018-01-01" }` ajoute `?api-version=2018-01-01` à l’appel. | 
-| <*max-runs*> | Integer | Par défaut, les instances de workflow s’exécutent en même temps (simultanément ou en parallèle) jusqu’à la [limite par défaut](../logic-apps/logic-apps-limits-and-config.md#looping-debatching-limits). Pour changer cette limite en définissant une nouvelle valeur <*count*>, consultez [Changer la concurrence du déclencheur](#change-trigger-concurrency). | 
+| Valeur | Type | Description |
+|-------|------|-------------|
+| <*retry-behavior*> | Objet JSON | Personnalise le comportement de nouvelle tentative pour les défaillances intermittentes, qui présentent le code d’état 408, 429 et 5XX, ainsi que les éventuelles exceptions de connectivité. Pour plus d’informations, consultez [Stratégies de relance](../logic-apps/logic-apps-exception-handling.md#retry-policies). |
+| <*query-parameters*> | Objet JSON | Paramètres de requête à inclure avec l’appel d’API <p>Par exemple, l’objet `"queries": { "api-version": "2018-01-01" }` ajoute `?api-version=2018-01-01` à l’appel. |
+| <*max-runs*> | Integer | Par défaut, les instances de workflow s’exécutent en même temps (simultanément ou en parallèle) jusqu’à la [limite par défaut](../logic-apps/logic-apps-limits-and-config.md#looping-debatching-limits). Pour changer cette limite en définissant une nouvelle valeur <*count*>, consultez [Changer la concurrence du déclencheur](#change-trigger-concurrency). |
 | <*max-runs-queue*> | Integer | Lorsque votre application logique exécute déjà le nombre maximal d’instances, que vous pouvez modifier en fonction de la propriété `runtimeConfiguration.concurrency.runs`, les nouvelles exécutions sont placées dans cette file d’attente jusqu’à la [limite par défaut](../logic-apps/logic-apps-limits-and-config.md#looping-debatching-limits). Pour changer la limite par défaut, consultez [Changer la limite d’exécutions en attente](#change-waiting-runs). | 
 | <*splitOn-expression*> | String | Pour les déclencheurs qui retournent des tableaux, cette expression référence le tableau à utiliser pour que vous puissiez créer et exécuter une instance de workflow pour chaque élément du tableau, au lieu d’utiliser une boucle « for each ». <p>Par exemple, cette expression représente un élément dans le tableau retourné dans le contenu du corps du déclencheur : `@triggerbody()?['value']` |
 | <*operation-option*> | String | Vous pouvez modifier le comportement par défaut en définissant la propriété `operationOptions`. Pour plus d’informations, consultez [Options d’opérations](#operation-options). | 
@@ -269,7 +270,7 @@ Cette définition de déclencheur s’abonne à l’API Office 365 Outlook, fou
 
 ### <a name="http-trigger"></a>Déclencheur HTTP
 
-Ce déclencheur envoie une requête au point de terminaison HTTP ou HTTPS spécifié d’après la planification de périodicité définie. Le déclencheur vérifie ensuite la réponse pour déterminer si le workflow s’exécute.
+Ce déclencheur envoie une requête au point de terminaison HTTP ou HTTPS spécifié d’après la planification de périodicité définie. Le déclencheur vérifie ensuite la réponse pour déterminer si le workflow s’exécute. Pour plus d’informations, consultez [Appeler des points de terminaison de service via HTTP ou HTTPS à partir d’Azure Logic Apps](../connectors/connectors-native-http.md).
 
 ```json
 "HTTP": {
@@ -326,21 +327,21 @@ Ce déclencheur envoie une requête au point de terminaison HTTP ou HTTPS spéci
 *Sorties*
 
 | Élément | Type | Description |
-|---------|------|-------------| 
-| headers | Objet JSON | En-têtes de la réponse | 
-| body | Objet JSON | Corps de la réponse | 
-| Code d’état | Integer | Code d’état de la réponse | 
-|||| 
+|---------|------|-------------|
+| `headers` | Objet JSON | En-têtes de la réponse |
+| `body` | Objet JSON | Corps de la réponse |
+| `status code` | Integer | Code d’état de la réponse |
+||||
 
 *Conditions requises pour les requêtes entrantes*
 
-Pour fonctionner correctement avec votre application logique, le point de terminaison doit être conforme à un modèle ou contrat de déclencheur spécifique, et reconnaître ces propriétés :  
-  
-| response | Obligatoire | Description | 
-|----------|----------|-------------| 
-| Code d’état | Oui | Le code d’état « 200 OK » démarre une exécution. Les autres codes d’état ne démarrent pas d’exécution. | 
-| En-tête Retry-after | Non | Nombre de secondes au bout duquel l’application logique interroge à nouveau le point de terminaison | 
-| En-tête Location | Non | URL à appeler lors du prochain intervalle d’interrogation. Si aucune valeur n’est spécifiée, l’URL d’origine est utilisée. | 
+Pour fonctionner correctement avec votre application logique, le point de terminaison doit être conforme à un modèle ou contrat de déclencheur spécifique, et reconnaître les propriétés de réponse suivantes :
+
+| Propriété | Obligatoire | Description |
+|----------|----------|-------------|
+| Code d’état | Oui | Le code d’état « 200 OK » démarre une exécution. Les autres codes d’état ne démarrent pas d’exécution. |
+| En-tête Retry-after | Non | Nombre de secondes au bout duquel l’application logique interroge à nouveau le point de terminaison |
+| En-tête Location | Non | URL à appeler lors du prochain intervalle d’interrogation. Si aucune valeur n’est spécifiée, l’URL d’origine est utilisée. |
 |||| 
 
 *Exemples de comportements pour différentes requêtes*
@@ -569,7 +570,7 @@ Pour plus d’informations et pour obtenir des exemples pour ce déclencheur, co
 
 Ce déclencheur fait en sorte que votre application logique puisse être appelée en créant un point de terminaison qui peut accepter des requêtes entrantes. Pour ce déclencheur, fournit un schéma JSON qui décrit et valide la charge utile ou les entrées que le déclencheur reçoit de la requête entrante. Le schéma facilite également le référencement des propriétés de déclencheur à partir d’actions ultérieures dans le workflow.
 
-Pour appeler ce déclencheur, vous devez utiliser l’API `listCallbackUrl`, qui est décrite dans l’[API REST de service de workflow](https://docs.microsoft.com/rest/api/logic/workflows). Pour découvrir comment utiliser ce déclencheur en tant que point de terminaison HTTP, consultez [Appeler, déclencher ou imbriquer des workflows via des points de terminaison HTTP](../logic-apps/logic-apps-http-endpoint.md).
+Pour appeler ce déclencheur, vous devez utiliser l’API `listCallbackUrl`, qui est décrite dans l’[API REST de service de workflow](/rest/api/logic/workflows). Pour découvrir comment utiliser ce déclencheur en tant que point de terminaison HTTP, consultez [Appeler, déclencher ou imbriquer des workflows via des points de terminaison HTTP](../logic-apps/logic-apps-http-endpoint.md).
 
 ```json
 "manual": {
@@ -1086,7 +1087,7 @@ Pour l’attribut `includeTrigger`, vous pouvez spécifier les valeurs `true` ou
 
 *Exemple 1*
 
-Cette action exécute le code qui obtient le nom de votre application logique et renvoie le texte « Hello world de \<nom-application-logique> » en tant que résultat. Dans cet exemple, le code référence le nom du flux de travail en accédant à la propriété `workflowContext.workflow.name` via l’objet `workflowContext` en lecture seule. Pour en savoir plus sur l’utilisation de l’objet `workflowContext`, voir [Faire référence aux résultats des actions et du déclencheur dans votre code](../logic-apps/logic-apps-add-run-inline-code.md#workflowcontext).
+Cette action exécute du code qui obtient le nom de votre application logique et retourne le texte « Hello world from \<logic-app-name> » en tant que résultat. Dans cet exemple, le code référence le nom du flux de travail en accédant à la propriété `workflowContext.workflow.name` via l’objet `workflowContext` en lecture seule. Pour en savoir plus sur l’utilisation de l’objet `workflowContext`, voir [Faire référence aux résultats des actions et du déclencheur dans votre code](../logic-apps/logic-apps-add-run-inline-code.md#workflowcontext).
 
 ```json
 "Execute_JavaScript_Code": {
@@ -1100,7 +1101,7 @@ Cette action exécute le code qui obtient le nom de votre application logique et
 
 *Exemple 2*
 
-Cette action exécute le code dans une application logique qui se déclenche lorsqu’un nouvel e-mail arrive sur un compte Office 365 Outlook. L’application logique utilise également une action Envoyer un e-mail d’approbation, qui transfère le contenu de l’e-mail reçu ainsi qu’une requête d’approbation.
+Cette action exécute le code dans une application logique qui se déclenche lorsqu’un nouvel e-mail arrive sur un compte professionnel ou scolaire. L’application logique utilise également une action Envoyer un e-mail d’approbation, qui transfère le contenu de l’e-mail reçu ainsi qu’une requête d’approbation.
 
 Le code extrait les adresses e-mail à partir de la propriété `Body` du déclencheur, et renvoie les adresses avec la valeur de la propriété `SelectedOption` à partir de l’action d’approbation. L’action inclut de manière explicite l’action Envoyer un e-mail d’approbation en tant que dépendance dans l’attribut `explicitDependencies` > `actions`.
 
@@ -1201,7 +1202,7 @@ Cette définition d’action appelle la fonction « GetProductID » créée pr
 
 ### <a name="http-action"></a>Action HTTP
 
-Cette action envoie une requête au point de terminaison HTTP ou HTTPS spécifié et vérifie la réponse pour déterminer si le workflow s’exécute.
+Cette action envoie une requête au point de terminaison HTTP ou HTTPS spécifié et vérifie la réponse pour déterminer si le workflow s’exécute. Pour plus d’informations, consultez [Appeler des points de terminaison de service via HTTP ou HTTPS à partir d’Azure Logic Apps](../connectors/connectors-native-http.md).
 
 ```json
 "HTTP": {
@@ -1637,7 +1638,7 @@ Cette action crée une table CSV ou HTML à partir d’un tableau. Pour les tabl
 
 | Valeur | Type | Description | 
 |-------|------|-------------| 
-| \<CSV *ou* HTML>| String | Format de la table que vous souhaitez créer | 
+| \<CSV *or* HTML>| String | Format de la table que vous souhaitez créer | 
 | <*array*> | Array | Tableau ou expression qui fournit les éléments sources pour la table <p>**Remarque** : Si le tableau source est vide, l’action crée une table vide. | 
 |||| 
 
@@ -2308,6 +2309,9 @@ Cette action de boucle contient des actions qui s’exécutent jusqu’à ce que
 | <*loop-timeout*> | String | Durée d’exécution maximale de la boucle. La valeur par défaut de `timeout` est `PT1H`, qui est le [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) requis. |
 |||| 
 
+> [!NOTE]
+> Si l’expression dépend de la sortie d’une action dans la boucle Until, veillez à prendre en compte les échecs résultant de cette action.
+
 *Exemple*
 
 Cette définition d’action de boucle envoie une requête HTTP à l’URL spécifiée jusqu’à ce que l’une des conditions suivantes soit remplie :
@@ -2395,8 +2399,8 @@ Vous pouvez changer le comportement par défaut pour les déclencheurs et les ac
 
 | Option d’opération | Type | Description | Déclencheur ou action | 
 |------------------|------|-------------|-------------------| 
-| `DisableAsyncPattern` | String | Exécuter des actions basées sur HTTP de manière synchrone plutôt qu’asynchrone. <p><p>Pour définir cette option, consultez [Exécuter des actions de manière synchrone](#asynchronous-patterns). | Actions : <p>[ApiConnection](#apiconnection-action), <br>[HTTP](#http-action), <br>[Réponse](#response-action) | 
-| `OptimizedForHighThroughput` | String | Modifier la [limite par défaut](../logic-apps/logic-apps-limits-and-config.md#throughput-limits) du nombre d’exécutions d’action par tranche de cinq minutes et affecter la [limite maximale](../logic-apps/logic-apps-limits-and-config.md#throughput-limits). <p><p>Pour définir cette option, consultez [Exécuter en mode de débit élevé](#run-high-throughput-mode). | Toutes les actions | 
+| `DisableAsyncPattern` | String | Exécuter des actions basées sur HTTP de manière synchrone plutôt qu’asynchrone. <p><p>Pour définir cette option, consultez [Exécuter des actions de manière synchrone](#disable-asynchronous-pattern). | Actions : <p>[ApiConnection](#apiconnection-action), <br>[HTTP](#http-action), <br>[Réponse](#response-action) | 
+| `IncludeAuthorizationHeadersInOutputs` | String | Pour les applications logiques qui [activent Azure Active Directory Open Authentication (Azure AD OAuth)](../logic-apps/logic-apps-securing-a-logic-app.md#enable-oauth) pour autoriser l’accès aux appels entrants au point de terminaison d’un déclencheur de requête, incluez l’en-tête `Authorization` du jeton d’accès OAuth dans les sorties du déclencheur. Pour plus d’informations, consultez [Inclure l’en-tête « Authorization » dans les sorties du déclencheur de requête](../logic-apps/logic-apps-securing-a-logic-app.md#include-auth-header). | Déclencheurs : <p>[Requête](#request-trigger), <br>[Déclencheur HTTPWebhook](#http-webhook-trigger) | 
 | `Sequential` | String | Exécutez les itérations de boucle « for each » une à la fois, plutôt que toutes en même temps en parallèle. <p>Cette option fonctionne de la même façon que l’affectation de la valeur `1` à la propriété `runtimeConfiguration.concurrency.repetitions`. Vous pouvez définir l’une ou l’autre propriété, mais pas les deux. <p><p>Pour définir cette option, consultez [Exécuter des boucles « for each » séquentiellement](#sequential-for-each).| Action : <p>[Foreach](#foreach-action) | 
 | `SingleInstance` | String | Exécuter le déclencheur pour chaque instance d’application logique de manière séquentielle, et attendre que l’exécution active précédente se termine avant de déclencher l’instance d’application logique suivante. <p><p>Cette option fonctionne de la même façon que l’affectation de la valeur `1` à la propriété `runtimeConfiguration.concurrency.runs`. Vous pouvez définir l’une ou l’autre propriété, mais pas les deux. <p>Pour définir cette option, consultez [Déclencher des instances séquentiellement](#sequential-trigger). | Tous les déclencheurs | 
 ||||
@@ -2414,8 +2418,6 @@ Voici quelques considérations liées à l’activation de la concurrence sur un
 * Lorsque la concurrence est activée, la [limite SplitOn](../logic-apps/logic-apps-limits-and-config.md#looping-debatching-limits) est considérablement réduite pour la [décomposition des tableaux](#split-on-debatch). Si le nombre d'éléments dépasse cette limite, la fonction SplitOn est désactivée.
 
 * Vous ne pouvez pas désactiver la concurrence après avoir activé le contrôle de la concurrence.
-
-* Lorsque la concurrence est activée, la [limite SplitOn](../logic-apps/logic-apps-limits-and-config.md#looping-debatching-limits) est considérablement réduite pour la [décomposition des tableaux](#split-on-debatch). Si le nombre d'éléments dépasse cette limite, la fonction SplitOn est désactivée.
 
 * Quand la concurrence est activée, une instance d’application logique de longue durée peut amener de nouvelles instances d’application logique à entrer dans un état d’attente. Cet état empêche Azure Logic Apps de créer des instances et se produit même quand le nombre d’exécutions simultanées est inférieur au nombre maximal spécifié d’exécutions simultanées.
 
@@ -2653,39 +2655,58 @@ Pour plus d’informations, consultez [Paramètres de configuration d’exécuti
 
 1. Positionnez le curseur **Degré de parallélisme** sur le chiffre `1`.
 
-<a name="asynchronous-patterns"></a>
+<a name="disable-asynchronous-pattern"></a>
 
-### <a name="run-actions-synchronously"></a>Exécuter des actions de manière synchrone
+### <a name="run-actions-in-a-synchronous-operation-pattern"></a>Exécuter des actions dans un modèle d’opération synchrone
 
-Par défaut, toutes les actions basées sur HTTP suivent le modèle d’opération asynchrone standard. Ce modèle spécifie que quand une action basée sur HTTP envoie une requête au point de terminaison spécifié, le serveur distant retourne une réponse « 202 ACCEPTED ». Cette réponse signifie que le serveur a accepté la requête pour le traitement. Le moteur Logic Apps continue à vérifier l’URL spécifiée par l’en-tête d’emplacement de la réponse jusqu’à l’arrêt du traitement, c’est-à-dire toute réponse autre que 202.
+Par défaut, l’action HTTP et les actions APIConnection dans Azure Logic Apps suivent le [*modèle d’opération asynchrone*](/azure/architecture/patterns/async-request-reply) standard, alors que l’action Response suit le *modèle d’opération synchrone*. Le modèle asynchrone spécifie qu’une fois qu’une action a appelé ou envoyé une requête au point de terminaison, au service, au système ou à l’API spécifiée, le récepteur retourne immédiatement une réponse [« 202 ACCEPTED »](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3). Ce code confirme que le récepteur a accepté la requête, mais qu’il n’a pas fini le traitement. La réponse peut inclure un en-tête `location` qui spécifie l’URL et un ID d’actualisation que l’appelant peut utiliser pour interroger ou vérifier en permanence l’état de la requête asynchrone jusqu’à ce que le récepteur arrête le traitement et retourne la réponse de réussite [« 200 OK »](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1) ou une réponse autre qu’une réponse 202. Pour plus d’informations, consultez [L’intégration asynchrone des microservices permet l’autonomie des microservices](/azure/architecture/microservices/design/interservice-communication#synchronous-versus-asynchronous-messaging).
 
-Toutefois, les requêtes ayant un délai d’expiration, pour les actions de longue durée vous pouvez désactiver le comportement asynchrone en ajoutant la propriété `operationOptions` et en lui affectant la valeur `DisableAsyncPattern` sous les entrées de l’action.
+* Dans le concepteur d’application logique, l’action HTTP, les actions APIConnection et l’action Response ont le paramètre **Modèle asynchrone**. Quand il est activé, ce paramètre spécifie que l’appelant n’a pas à attendre la fin du traitement et qu’il peut passer à l’action suivante, tout en continuant de vérifier l’état jusqu’à ce que le traitement s’arrête. S’il est désactivé, ce paramètre spécifie que l’appelant doit attendre la fin du traitement avant de passer à l’action suivante. Pour trouver ce paramètre, effectuez les étapes suivantes :
+
+  1. Dans la barre de titre de l’action HTTP, sélectionnez le bouton de sélection ( **...** ) qui permet d’ouvrir les paramètres de l’action.
+
+  1. Recherchez le paramètre **Modèle asynchrone**.
+
+     ![Paramètre « Modèle asynchrone »](./media/logic-apps-workflow-actions-triggers/asynchronous-pattern-setting.png)
+
+* Dans la définition JSON (JavaScript Object Notation) sous-jacente de l’action, l’action HTTP et les actions APIConnection suivent implicitement le modèle d’opération asynchrone.
+
+Dans certains scénarios, vous pouvez souhaiter qu’une action suive plutôt le modèle synchrone. Par exemple, quand vous utilisez l’action HTTP, vous souhaitez peut-être :
+
+* [Éviter les expirations de délai d’attente HTTP pour les tâches de longue durée](../connectors/connectors-native-http.md#avoid-http-timeouts)
+* [Désactiver la vérification des en-têtes d’emplacement](../connectors/connectors-native-http.md#disable-location-header-check)
+
+Dans ce cas, vous pouvez exécuter une action de manière synchrone en procédant comme indiqué ci-dessous :
+
+* Remplacez la version d’interrogation de l’action par une version de Webhook, le cas échéant.
+
+* Désactivez le comportement asynchrone de l’action en procédant de l’une des façons suivantes :
+
+  * Dans concepteur d’application logique, [désactivez le paramètre **Modèle asynchrone**](#turn-off-asynchronous-pattern-setting).
+
+  * Dans la définition JSON sous-jacente de l’action, [ajoutez l’option d’opération `"DisableAsyncPattern"`](#add-disable-async-pattern-option).
+
+<a name="turn-off-asynchronous-pattern-setting"></a>
+
+#### <a name="turn-off-asynchronous-pattern-setting"></a>Désactiver le paramètre **Modèle asynchrone**
+
+1. Dans le concepteur d’application logique, dans la barre de titre de l’action, sélectionnez le bouton de sélection ( **...** ) qui permet d’ouvrir les paramètres de l’action.
+
+1. Recherchez le paramètre **Modèle asynchrone**, configurez-le sur **Désactivé** s’il est activé, puis sélectionnez **Terminé**.
+
+   ![Désactiver le paramètre « Modèle asynchrone »](./media/logic-apps-workflow-actions-triggers/disable-asynchronous-pattern-setting.png)
+
+<a name="add-disable-async-pattern-option"></a>
+
+#### <a name="disable-asynchronous-pattern-in-actions-json-definition"></a>Désactiver le modèle asynchrone dans la définition JSON de l’action
+
+Dans la définition JSON sous-jacente de l’action, ajoutez la [propriété « operationOptions »](#operation-options) et affectez-lui la valeur `"DisableAsyncPattern"` sous la section `"inputs"` de l’action, par exemple :
 
 ```json
 "<some-long-running-action>": {
    "type": "Http",
    "inputs": { "<action-inputs>" },
    "operationOptions": "DisableAsyncPattern",
-   "runAfter": {}
-}
-```
-
-Pour plus d’informations, consultez [Options d’opérations](#operation-options).
-
-<a name="run-high-throughput-mode"></a>
-
-### <a name="run-in-high-throughput-mode"></a>Exécuter en mode de débit élevé
-
-Pour une définition d’application logique unique, le nombre d’actions qui s’exécutent toutes les cinq minutes présente une [limite par défaut](../logic-apps/logic-apps-limits-and-config.md#throughput-limits). Pour augmenter cette limite à la valeur [maximale](../logic-apps/logic-apps-limits-and-config.md#throughput-limits) possible, affectez la valeur `OptimizedForHighThroughput` à la propriété `operationOptions`. Ce paramètre met votre application logique en mode de « débit élevé ».
-
-> [!NOTE]
-> Le mode de débit élevé est en préversion. Vous pouvez également distribuer une charge de travail sur plusieurs applications logiques si nécessaire.
-
-```json
-"<action-name>": {
-   "type": "<action-type>",
-   "inputs": { "<action-inputs>" },
-   "operationOptions": "OptimizedForHighThroughput",
    "runAfter": {}
 }
 ```

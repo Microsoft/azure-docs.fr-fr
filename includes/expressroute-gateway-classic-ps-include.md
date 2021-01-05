@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 12/13/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 70ac106995324c758bde942d12191a01e3457e6e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c0c05eb88df27ba9e71c0f61bad75457d893a7ce
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67176797"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95561705"
 ---
 > [!NOTE]
 > Ces exemples ne s’appliquent pas aux configurations de coexistence S2S/ExpressRoute.
@@ -25,7 +25,7 @@ Lorsque vous ajoutez une passerelle à un réseau virtuel à l’aide du modèle
 
 ### <a name="download-the-network-configuration-file"></a>Télécharger le fichier de configuration réseau
 
-1. Téléchargez le fichier de configuration réseau à l’aide de la procédure décrite dans l’article [Fichier de configuration réseau](../articles/virtual-network/virtual-networks-using-network-configuration-file.md). Ouvrez le fichier dans un éditeur de texte.
+1. Téléchargez le fichier de configuration réseau à l’aide de la procédure décrite dans l’article [Fichier de configuration réseau](/previous-versions/azure/virtual-network/virtual-networks-using-network-configuration-file). Ouvrez le fichier dans un éditeur de texte.
 2. Ajouter un site réseau local au fichier. Vous pouvez utiliser n’importe quel préfixe d’adresse valide. Vous pouvez ajouter n’importe quelle adresse IP valide pour la passerelle VPN. Les valeurs d’adresse dans cette section ne sont pas utilisées pour les opérations d’ExpressRoute, mais sont requises pour la validation du fichier. Dans l’exemple, « branch1 » est le nom du site. Vous pouvez utiliser un autre nom, mais veillez à utiliser la même valeur dans la section Passerelle du fichier.
 
    ```

@@ -3,12 +3,12 @@ title: Sauvegarder des bases de données SQL Server à l'aide du serveur de sauv
 description: Cet article présente les étapes de configuration de la sauvegarde des bases de données SQL Server à l'aide du serveur de sauvegarde Microsoft Azure.
 ms.topic: conceptual
 ms.date: 03/24/2017
-ms.openlocfilehash: 9cd6a8b76e4618031f4d21dc04a82a78fad0076d
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: 29813741e88ad5f2bc5109be87939abf7cc11502
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159248"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91316917"
 ---
 # <a name="back-up-sql-server-to-azure-by-using-azure-backup-server"></a>Sauvegarder des bases de données SQL Server sur Azure à l'aide du serveur de sauvegarde Azure
 
@@ -20,9 +20,37 @@ Pour sauvegarder une base de données SQL Server et la récupérer à partir d'A
 1. Créez des copies de sauvegarde à la demande dans Azure.
 1. Récupérez la base de données dans Azure.
 
+## <a name="prerequisites-and-limitations"></a>Conditions préalables et limitations
+
+* Si vous disposez d’une base de données avec des fichiers sur un partage de fichiers distant, la protection échouera avec l’ID d’erreur 104. MABS ne prend pas en charge la protection des données SQL Server sur un partage de fichiers distant.
+* MABS ne peut pas protéger les bases de données stockées sur des partages SMB distants.
+* Assurez-vous que les [réplicas de groupe de disponibilité sont configurés en lecture seule](/sql/database-engine/availability-groups/windows/configure-read-only-access-on-an-availability-replica-sql-server).
+* Vous devez explicitement ajouter le compte système **NTAuthority\System** au groupe Sysadmin sur SQL Server.
+* Lorsque vous effectuez une récupération sur l'autre emplacement pour une base de données partiellement autonome, vous devez vous assurer que la fonctionnalité relative aux [bases de données autonomes](/sql/relational-databases/databases/migrate-to-a-partially-contained-database#enable) est activée sur l'instance SQL cible.
+* Lorsque vous effectuez une récupération sur l'autre emplacement pour une base de données de flux de fichiers, vous devez vous assurer que la fonctionnalité relative à la [base de données de flux de fichiers](/sql/relational-databases/blob/enable-and-configure-filestream) est activée sur l'instance SQL cible.
+* Protection pour SQL Server AlwaysOn :
+  * MABS détecte les groupes de disponibilité lors de l'exécution d'une demande au moment de la création d'un groupe de protection.
+  * MABS détecte un basculement et poursuit la protection de la base de données.
+  * MABS prend en charge les configurations de cluster multisites d'une instance de SQL Server.
+* Lorsque vous protégez des bases de données qui utilisent la fonctionnalité AlwaysOn, MABS présente les limitations suivantes :
+  * MABS honorera la stratégie de sauvegarde des groupes de disponibilité définie dans SQL Server en fonction des préférences de sauvegarde, comme suit :
+    * Préférer le réplica secondaire : les sauvegardes doivent être effectuées sur un réplica secondaire, sauf lorsque le réplica principal est le seul réplica en ligne. Si plusieurs réplicas secondaires sont disponibles, le nœud ayant la plus haute priorité de sauvegarde sera sélectionné pour la sauvegarde. Si seul le réplica principal est disponible, la sauvegarde doit être effectuée sur le réplica principal.
+    * Secondaire uniquement : la sauvegarde ne doit pas être effectuée sur le réplica principal. Si le réplica principal est le seul réplica en ligne, la sauvegarde ne doit pas s'effectuer.
+    * Principal : les sauvegardes doivent toujours s'effectuer sur le réplica principal.
+    * Sur n'importe quel réplica : les sauvegardes peuvent s'effectuer sur n'importe quel réplica de disponibilité dans le groupe de disponibilité. Le nœud à sauvegarder dépendra des priorités de sauvegarde pour chacun des nœuds.
+  * Notez les points suivants :
+    * Les sauvegardes peuvent s'effectuer à partir de n'importe quel réplica lisible, c'est-à-dire principal, secondaire synchrone, secondaire asynchrone.
+    * Si un réplica est exclus de la sauvegarde, par exemple si **Exclure des réplicas** est activé ou marqué comme étant non lisible, alors ce réplica ne sera pas sélectionné pour la sauvegarde quelle que soit l'option.
+    * Si plusieurs réplicas sont disponibles et lisibles, alors le nœud ayant la plus haute priorité de sauvegarde sera sélectionné pour la sauvegarde.
+    * Si la sauvegarde échoue sur le nœud sélectionné, alors l'opération de sauvegarde échoue.
+    * La récupération à l'emplacement d'origine n'est pas prise en charge.
+* Problèmes de sauvegarde de SQL Server 2014 ou versions ultérieures :
+  * SQL Server 2014 a ajouté une nouvelle fonctionnalité pour créer une [base de données pour une instance SQL Server locale dans le stockage d’objets BLOB Windows Azure](/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure). MABS ne peut pas être utilisé pour protéger cette configuration.
+  * Il existe certains problèmes connus avec la préférence de sauvegarde « Préférer secondaire » pour l’option SQL AlwaysOn. MABS effectue toujours une sauvegarde de la base de données secondaire. Si aucune base de données secondaire n’est trouvée, la sauvegarde échoue.
+
 ## <a name="before-you-start"></a>Avant de commencer
 
-Avant de commencer, assurez-vous d'avoir [installé et préparé le serveur de sauvegarde Azure](backup-azure-microsoft-azure-backup.md).
+Avant de commencer, assurez-vous d’avoir [installé et préparé le serveur de sauvegarde Azure](backup-azure-microsoft-azure-backup.md).
 
 ## <a name="create-a-backup-policy"></a>Créer une stratégie de sauvegarde
 
@@ -36,7 +64,7 @@ Pour protéger des bases de données SQL Server dans Azure, commencez par créer
 1. Pour le type de groupe de protection, sélectionnez **Serveurs**.
 
     ![Sélectionner le type de groupe de protection Serveurs](./media/backup-azure-backup-sql/pg-servers.png)
-1. Développez l'ordinateur SQL Server sur lequel se trouvent les bases de données que vous souhaitez sauvegarder. Vous accédez aux sources de données qui peuvent être sauvegardées à partir de ce serveur. Développez **Tous les partages SQL**, puis sélectionnez les bases de données que vous souhaitez sauvegarder. Dans cet exemple, nous sélectionnons ReportServer$MSDPM2012 et ReportServer$MSDPM2012TempDB. Sélectionnez **Suivant**.
+1. Développez l'instance de SQL Server sur laquelle se trouvent les bases de données que vous souhaitez sauvegarder. Vous accédez aux sources de données qui peuvent être sauvegardées à partir de ce serveur. Développez **Tous les partages SQL**, puis sélectionnez les bases de données que vous souhaitez sauvegarder. Dans cet exemple, nous sélectionnons ReportServer$MSDPM2012 et ReportServer$MSDPM2012TempDB. Sélectionnez **Suivant**.
 
     ![Sélectionner une base de données SQL Server](./media/backup-azure-backup-sql/pg-databases.png)
 1. Nommez le groupe de protection, puis sélectionnez **Je souhaite une protection en ligne**.

@@ -4,33 +4,33 @@ description: Chargez un disque dur virtuel généralisé sur Azure et utilisez-l
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 12/12/2019
 ms.author: cynthn
-ms.openlocfilehash: b0947d1cc4e53763c0f31444b8f3d27ba45b19a4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 94db8ce46fc240a6c48c0919b6d2c2cd148522ac
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82096406"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91976048"
 ---
 # <a name="upload-a-generalized-vhd-and-use-it-to-create-new-vms-in-azure"></a>Charger un disque dur virtuel généralisé et l’utiliser pour créer des machines virtuelles dans Azure
 
-Cet article vous guide dans l’utilisation de PowerShell pour charger un disque dur virtuel d’une machine virtuelle généralisée sur Azure, créer une image à partir du disque dur virtuel et créer une machine virtuelle à partir de cette image. Vous pouvez charger un disque dur virtuel exporté à partir d’un outil de virtualisation local ou d’un autre cloud. L’utilisation de la fonctionnalité [Disques managés](managed-disks-overview.md) pour la nouvelle machine virtuelle simplifie la gestion de celle-ci et fournit une meilleure disponibilité lorsque la machine virtuelle est placée dans un groupe à haute disponibilité. 
+Cet article vous guide dans l’utilisation de PowerShell pour charger un disque dur virtuel d’une machine virtuelle généralisée sur Azure, créer une image à partir du disque dur virtuel et créer une machine virtuelle à partir de cette image. Vous pouvez charger un disque dur virtuel exporté à partir d’un outil de virtualisation local ou d’un autre cloud. L’utilisation de la fonctionnalité [Disques managés](../managed-disks-overview.md) pour la nouvelle machine virtuelle simplifie la gestion de celle-ci et fournit une meilleure disponibilité lorsque la machine virtuelle est placée dans un groupe à haute disponibilité. 
 
 Pour un exemple de script, consultez [Exemple de script pour charger un disque dur virtuel sur Azure et créer une machine virtuelle](../scripts/virtual-machines-windows-powershell-upload-generalized-script.md).
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
 - Avant de télécharger un disque dur virtuel dans Azure, vous devez apprendre à [préparer un disque dur virtuel Windows à charger sur Azure](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
-- Consultez [Planification de la migration vers la fonctionnalité Disques managés](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks) avant de démarrer la migration vers la [fonctionnalité Disques managés](managed-disks-overview.md).
+- Consultez [Planification de la migration vers la fonctionnalité Disques managés](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks) avant de démarrer la migration vers la [fonctionnalité Disques managés](../managed-disks-overview.md).
 
  
 ## <a name="generalize-the-source-vm-by-using-sysprep"></a>Généraliser la machine virtuelle source en utilisant Sysprep
 
-Si vous ne l’avez pas déjà fait, vous devez exécuter Sysprep sur la machine virtuelle avant de charger le disque dur virtuel sur Azure. Sysprep supprime toutes les informations personnelles de votre compte, entre autres, et prépare la machine de façon à pouvoir l’utiliser comme image. Pour plus d’informations sur Sysprep, consultez la [Vue d’ensemble de Sysprep](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
+Si vous ne l’avez pas déjà fait, vous devez exécuter Sysprep sur la machine virtuelle avant de charger le disque dur virtuel sur Azure. Sysprep supprime toutes les informations personnelles de votre compte, entre autres, et prépare la machine de façon à pouvoir l’utiliser comme image. Pour plus d’informations sur Sysprep, consultez la [Vue d’ensemble de Sysprep](/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
 
-Vérifiez que les rôles serveur exécutés sur la machine sont pris en charge par Sysprep. Pour plus d’informations, consultez [Prise en charge de Sysprep pour les rôles serveur](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles).
+Vérifiez que les rôles serveur exécutés sur la machine sont pris en charge par Sysprep. Pour plus d’informations, consultez [Prise en charge de Sysprep pour les rôles serveur](/windows-hardware/manufacture/desktop/sysprep-support-for-server-roles).
 
 > [!IMPORTANT]
 > Si vous prévoyez d’exécuter Sysprep avant de charger votre disque dur virtuel sur Azure pour la première fois, veillez à [préparer votre machine virtuelle](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
@@ -53,7 +53,7 @@ Vous pouvez désormais charger un disque dur virtuel directement dans un disque 
 
 
 
-Une fois que le disque dur virtuel est chargé sur le disque managé, vous devez utiliser [Get-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/get-azdisk) pour récupérer le disque managé.
+Une fois que le disque dur virtuel est chargé sur le disque managé, vous devez utiliser [Get-AzDisk](/powershell/module/az.compute/get-azdisk) pour récupérer le disque managé.
 
 ```azurepowershell-interactive
 $disk = Get-AzDisk -ResourceGroupName 'myResourceGroup' -DiskName 'myDiskName'
@@ -112,5 +112,4 @@ New-AzVm `
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Connectez-vous à votre nouvelle machine virtuelle. Pour plus d’informations, consultez [Connexion à une machine virtuelle Azure exécutant Windows](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
-
+Connectez-vous à votre nouvelle machine virtuelle. Pour plus d’informations, consultez [Connexion à une machine virtuelle Azure exécutant Windows](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).

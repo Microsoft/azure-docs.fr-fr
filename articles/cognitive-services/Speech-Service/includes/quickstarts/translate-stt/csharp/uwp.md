@@ -1,21 +1,20 @@
 ---
 title: 'Démarrage rapide : Traduire la voix en texte, C# (UWP) - Service Speech'
 titleSuffix: Azure Cognitive Services
-description: TBD
 services: cognitive-services
 author: lisaweixu
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.date: 04/04/2020
-ms.author: erhopf
+ms.author: jhakulin
 ms.topic: include
-ms.openlocfilehash: 62993b2e553630edd228228b4faa82de44997063
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: cdc1bfcc7c2ea0cc51fe830c5218cf10cae7d990
+ms.sourcegitcommit: 152c522bb5ad64e5c020b466b239cdac040b9377
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80671066"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88226238"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
@@ -43,7 +42,7 @@ Ajoutez maintenant le code XAML qui définit l’interface utilisateur de l’ap
 
 1. Dans le gestionnaire `SpeechTranslationFromMicrophone_ButtonClicked` de ce fichier, recherchez la chaîne `YourSubscriptionKey`, puis remplacez-la par la clé de votre abonnement.
 
-1. Dans le gestionnaire `SpeechTranslationFromMicrophone_ButtonClicked`, recherchez la chaîne `YourServiceRegion`, puis remplacez-la par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement. (Par exemple, utilisez `westus` pour l’abonnement d’essai gratuit.)
+1. Dans le gestionnaire `SpeechTranslationFromMicrophone_ButtonClicked`, recherchez la chaîne `YourServiceRegion`, puis remplacez-la par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement.
 
 1. Dans la barre de menus, choisissez **Fichier** > **Enregistrer tout** pour enregistrer vos modifications.
 

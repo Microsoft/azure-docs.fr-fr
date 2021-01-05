@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: f506cc526a824d45ae2d6b7a75e1c1a99dae4d64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87ec59d19fb442293fb7f14d110cf513015ec9f7
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75426457"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130797"
 ---
 # <a name="build-an-iot-solution-by-using-stream-analytics"></a>Créer une solution IoT à l’aide de Stream Analytics
 
@@ -163,7 +163,7 @@ Il existe plusieurs ressources qui peuvent facilement être déployées ensemble
 
    Pour paraphraser le but de la requête, imaginons que vous ayez besoin de compter le nombre de véhicules entrant dans un poste de péage. Un poste de péage autoroutier accueillant un flux continu de véhicules, ces événements d’entrée peuvent être comparés à un flux qui ne s’arrête jamais. Pour quantifier le flux, vous devez définir la « durée » pendant laquelle vous allez effectuer la mesure. Nous pouvons affiner la question de la sorte : « Combien de véhicules passent par le poste de péage en trois minutes ? ». C’est ce qu’on appelle communément le « nombre bascule ».
 
-   Comme vous pouvez le voir, Azure Stream Analytics utilise un langage de requête similaire à SQL et ajoute quelques extensions pour spécifier les aspects de la requête liés au temps.  Pour plus de détails, consultez les constructions de [gestion du temps](https://docs.microsoft.com/stream-analytics-query/time-management-azure-stream-analytics) et de [fenêtrage](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics) utilisées dans la requête.
+   Comme vous pouvez le voir, Azure Stream Analytics utilise un langage de requête similaire à SQL et ajoute quelques extensions pour spécifier les aspects de la requête liés au temps.  Pour plus de détails, consultez les constructions de [gestion du temps](/stream-analytics-query/time-management-azure-stream-analytics) et de [fenêtrage](/stream-analytics-query/windowing-azure-stream-analytics) utilisées dans la requête.
 
 3. Examinez les entrées de l’exemple de tâche TollApp. Seule l’entrée EntryStream est utilisée dans la requête actuelle.
    - L’entrée **EntryStream** est une connexion de l'Event Hub qui met en file d’attente les données représentant chaque passage d’un véhicule par un poste de péage autoroutier. Une application web qui fait partie de l’exemple crée les événements, et ces données sont mises en file d’attente dans cet Event Hub. Notez que cette entrée est interrogée dans la clause FROM de la requête de diffusion en continu.
@@ -178,7 +178,7 @@ Suivez ces étapes pour démarrer la tâche de diffusion en continu :
 
 1. Sur la page **Vue d’ensemble** de la tâche, sélectionnez **Démarrer**.
 
-2. Sur le volet **Démarrer la tâche**, sélectionnez **Maintenant**.
+2. Sur le volet **Démarrer la tâche** , sélectionnez **Maintenant**.
 
 3. Après quelques instants, une fois la tâche en cours d’exécution, sur la page **Vue d’ensemble** de la tâche de diffusion en continu, affichez le graphique **Analyse**. Le graphique doit afficher plusieurs milliers d’événements d’entrée et des dizaines d’événements de sortie.
 
@@ -226,7 +226,7 @@ AND DATEDIFF (minute, EntryStream, ExitStream ) BETWEEN 0 AND 15
 
 6. Sur la page **Vue d’ensemble** de la tâche, sélectionnez **Démarrer**.
 
-7. Sur le volet **Démarrer la tâche**, sélectionnez **Maintenant**.
+7. Sur le volet **Démarrer la tâche** , sélectionnez **Maintenant**.
 
 ### <a name="review-the-total-time-in-the-output"></a>Passer en revue la durée totale de la sortie
 Répétez les étapes décrites dans la section précédente pour passer en revue les données de sortie CosmosDB à partir de la tâche de diffusion en continu. Passez en revue les derniers documents JSON.

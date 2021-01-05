@@ -3,12 +3,12 @@ title: Utiliser une identité gérée avec une application
 description: Comment utiliser des identités managées dans du code d’application Azure Service Fabric pour accéder aux services Azure.
 ms.topic: article
 ms.date: 10/09/2019
-ms.openlocfilehash: 8f1f355d6add16f3b3ec25bc569f9b198a8d6778
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 07f960c01367ab42a434a8c2e1e276d9c5f7bd11
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81461563"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86253641"
 ---
 # <a name="how-to-leverage-a-service-fabric-applications-managed-identity-to-access-azure-services"></a>Tirer parti de l’identité managée d’une application Service Fabric pour accéder aux services Azure
 
@@ -371,7 +371,7 @@ Il est recommandé de retenter les demandes échouées pour cause de limitation 
 | 5 | Attendre 16 seconde et réessayer |
 
 ## <a name="resource-ids-for-azure-services"></a>ID de ressource pour les services Azure
-Consultez [Services Azure prenant en charge l’authentification de Azure AD](../active-directory/managed-identities-azure-resources/services-support-msi.md) pour obtenir une liste des ressources qui prennent en charge Azure AD et leur ID de ressources respectif.
+Consultez [Services Azure prenant en charge l’authentification de Azure AD](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md) pour obtenir une liste des ressources qui prennent en charge Azure AD et leur ID de ressources respectif.
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Déployer une application Azure Service Fabric avec une identité managée attribuée par le système](./how-to-deploy-service-fabric-application-system-assigned-managed-identity.md)

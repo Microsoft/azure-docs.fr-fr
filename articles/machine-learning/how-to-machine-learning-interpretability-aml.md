@@ -1,25 +1,26 @@
 ---
-title: Interpréter et expliquer les modèles de ML dans Python
+title: Interpréter et expliquer les modèles ML dans Python (préversion)
 titleSuffix: Azure Machine Learning
 description: Découvrez comment obtenir des explications sur la façon dont votre modèle de Machine Learning détermine l’importance des fonctionnalités et effectue des prédictions lors de l’utilisation du kit de développement logiciel (SDK) Azure Machine Learning.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
-ms.author: mesameki
-author: mesameki
+ms.author: mithigpe
+author: minthigpen
 ms.reviewer: Luis.Quintanilla
-ms.date: 04/12/2020
-ms.openlocfilehash: 39d2bf0e527d43e2a5fb9437720f249e54b4dff3
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.date: 07/09/2020
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python
+ms.openlocfilehash: c9ee57baf63867e4dca4236d484321586cfb3b17
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82983633"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862341"
 ---
-# <a name="use-the-interpretability-package-to-explain-ml-models--predictions-in-python"></a>Utiliser le package d’interprétabilité pour expliquer les modèles de ML et les prédictions dans Python
+# <a name="use-the-interpretability-package-to-explain-ml-models--predictions-in-python-preview"></a>Utiliser le package d’interprétabilité pour expliquer les modèles ML et les prédictions dans Python (préversion)
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Dans ce guide pratique, vous allez apprendre à effectuer les tâches suivantes en utilisant le package d’interprétabilité du SDK Python Azure Machine Learning :
 
@@ -41,10 +42,9 @@ Pour plus d’informations sur les techniques d’interprétabilité et les mod�
 ## <a name="generate-feature-importance-value-on-your-personal-machine"></a>Générer la valeur d’importance d’une caractéristique sur votre ordinateur personnel 
 L’exemple suivant montre comment utiliser le package d’interprétabilité sur votre ordinateur personnel sans contacter les services Azure.
 
-1. Installez les packages `azureml-interpret` et `azureml-contrib-interpret`.
+1. Installez le package `azureml-interpret`.
     ```bash
     pip install azureml-interpret
-    pip install azureml-contrib-interpret
     ```
 
 2. Entraînez un exemple de modèle dans un notebook Jupyter local.
@@ -128,11 +128,11 @@ Reportez-vous à l’exemple suivant pour vous aider à obtenir les valeurs d’
 
 ```python
 
-# you can use the training data or the test data here
-global_explanation = explainer.explain_global(x_train)
+# you can use the training data or the test data here, but test data would allow you to use Explanation Exploration
+global_explanation = explainer.explain_global(x_test)
 
 # if you used the PFIExplainer in the previous step, use the next line of code instead
-# global_explanation = explainer.explain_global(x_train, true_labels=y_test)
+# global_explanation = explainer.explain_global(x_train, true_labels=y_train)
 
 # sorted feature importance values and feature names
 sorted_global_importance_values = global_explanation.get_ranked_global_values()
@@ -238,15 +238,14 @@ L’exemple suivant montre comment vous pouvez utiliser la classe `ExplanationCl
 * Utilisez `ExplanationClient` dans l’exécution à distance pour télécharger le contexte d’interprétation.
 * Téléchargez le contexte ultérieurement dans un environnement local.
 
-1. Installez les packages `azureml-interpret` et `azureml-contrib-interpret`.
+1. Installez le package `azureml-interpret`.
     ```bash
     pip install azureml-interpret
-    pip install azureml-contrib-interpret
     ```
 1. Créez un script d’entraînement dans un notebook Jupyter local. Par exemple : `train_explain.py`.
 
     ```python
-    from azureml.contrib.interpret.explanation.explanation_client import ExplanationClient
+    from azureml.interpret import ExplanationClient
     from azureml.core.run import Run
     from interpret.ext.blackbox import TabularExplainer
 
@@ -274,12 +273,12 @@ L’exemple suivant montre comment vous pouvez utiliser la classe `ExplanationCl
     #client.upload_model_explanation(global_explanation, top_k=2, comment='global explanation: Only top 2 features')
     ```
 
-1. Configurez une capacité de calcul Machine Learning comme cible de calcul et envoyez votre exécution d’apprentissage. Pour obtenir des instructions, consultez [configuration des cibles de calcul pour l’entraînement des modèles](how-to-set-up-training-targets.md#amlcompute). Vous pourriez également trouver les [exemples de notebook](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model/azure-integration/remote-explanation) utiles.
+1. Configurez une capacité de calcul Machine Learning comme cible de calcul et envoyez votre exécution d’apprentissage. Pour obtenir des instructions, consultez [Créer et gérer des clusters de calcul Azure Machine Learning](how-to-create-attach-compute-cluster.md). Vous pourriez également trouver les [exemples de notebook](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model/azure-integration/remote-explanation) utiles.
 
-1. Téléchargez l’explication dans votre Jupyter Notebook local.
+1. Téléchargez l’explication dans votre notebook Jupyter local.
 
     ```python
-    from azureml.contrib.interpret.explanation.explanation_client import ExplanationClient
+    from azureml.interpret import ExplanationClient
     
     client = ExplanationClient.from_run(run)
     
@@ -331,29 +330,12 @@ Vous pouvez charger le tracé des importances de caractéristique individuelle p
 
 [![Tableau de bord de visualisation - Tracés ICE](./media/how-to-machine-learning-interpretability-aml/ice-plot.png)](./media/how-to-machine-learning-interpretability-aml/ice-plot.png#lightbox)
 
-> [!NOTE]
-> Avant le démarrage du noyau Jupyter, veillez à activer les extensions de widget pour le tableau de bord de visualisation.
-
-* Notebooks Jupyter
-
-    ```shell
-    jupyter nbextension install --py --sys-prefix azureml.contrib.interpret.visualize
-    jupyter nbextension enable --py --sys-prefix azureml.contrib.interpret.visualize
-    ```
-
-* JupyterLab
-
-    ```shell
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
-    jupyter labextension install microsoft-mli-widget
-    ```
-
 Pour charger le tableau de bord de visualisation, utilisez le code suivant.
 
 ```python
 from interpret_community.widget import ExplanationDashboard
 
-ExplanationDashboard(global_explanation, model, x_test)
+ExplanationDashboard(global_explanation, model, datasetX=x_test)
 ```
 
 ### <a name="visualization-in-azure-machine-learning-studio"></a>Visualisation dans Azure Machine Learning Studio
@@ -369,10 +351,10 @@ Suivez un de ces parcours pour accéder au tableau de bord de visualisation dans
   1. Sélectionnez une expérience particulière pour afficher toutes les exécutions de cette expérience.
   1. Sélectionnez une exécution, puis l'onglet **Explications** pour voir le tableau de bord de visualisation des explications.
 
-   [![Tableau de bord de visualisation - Importance de fonctionnalité locale](./media/how-to-machine-learning-interpretability-aml/amlstudio-experiments.png)](./media/how-to-machine-learning-interpretability-aml/amlstudio-experiments.png#lightbox)
+   [![Tableau de bord de visualisation - Importance d’une caractéristique locale dans AzureML Studio au sein des expériences](./media/how-to-machine-learning-interpretability-aml/amlstudio-experiments.png)](./media/how-to-machine-learning-interpretability-aml/amlstudio-experiments.png#lightbox)
 
 * Volet **Modèles**
-  1. Si vous avez enregistré votre modèle d’origine en suivant les étapes décrites dans [Déployer des modèles avec Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-and-where), vous pouvez sélectionner **Modèles** dans le volet gauche pour l’afficher.
+  1. Si vous avez enregistré votre modèle d’origine en suivant les étapes décrites dans [Déployer des modèles avec Azure Machine Learning](./how-to-deploy-and-where.md), vous pouvez sélectionner **Modèles** dans le volet gauche pour l’afficher.
   1. Sélectionnez un modèle, puis l'onglet **Explications** pour voir le tableau de bord de visualisation des explications.
 
 ## <a name="interpretability-at-inference-time"></a>Interprétabilité au moment de l’inférence
@@ -437,7 +419,7 @@ Vous pouvez déployer l’explicatif avec le modèle d’origine et l’utiliser
 
 1. Déployez l’image sur une cible de calcul en procédant comme suit :
 
-   1. Si nécessaire, enregistrez votre modèle de prédiction d’origine en suivant les étapes décrites dans [Déployer des modèles avec Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-and-where).
+   1. Si nécessaire, enregistrez votre modèle de prédiction d’origine en suivant les étapes décrites dans [Déployer des modèles avec Azure Machine Learning](./how-to-deploy-and-where.md).
 
    1. Créez un fichier de scoring.
 
@@ -571,4 +553,3 @@ Vous pouvez déployer l’explicatif avec le modèle d’origine et l’utiliser
 [En savoir plus sur l’interprétation des modèles](how-to-machine-learning-interpretability.md)
 
 [Consultez les exemples de notebooks sur l’interprétabilité d’Azure Machine Learning](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model)
-

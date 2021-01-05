@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble d’Azure Resource Health
-description: Vue d’ensemble d’Azure Resource Health
+description: Découvrez comment Azure Resource Health vous aide à diagnostiquer et à obtenir un support pour les problèmes de service qui affectent vos ressources Azure.
 ms.topic: conceptual
 ms.date: 05/10/2019
-ms.openlocfilehash: 7a1dfe5e93d0e19aeb343d113a24ed882a5b3f69
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 25425eadfaf54ba56cde3b377a44cd85c2b68959
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80159249"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90967881"
 ---
 # <a name="resource-health-overview"></a>Vue d’ensemble de Resource Health
  

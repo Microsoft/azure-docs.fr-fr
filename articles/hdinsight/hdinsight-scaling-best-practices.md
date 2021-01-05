@@ -1,25 +1,25 @@
 ---
 title: Mettre à l’échelle les tailles de cluster - Azure HDInsight
 description: Mettre à l’échelle un cluster Apache Hadoop de façon élastique pour qu’il corresponde à votre charge de travail dans Azure HDInsight
-author: ashishthaps
+author: hrasheed-msft
 ms.author: ashish
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: seoapr2020
 ms.date: 04/29/2020
-ms.openlocfilehash: 2dae0f662eefa7f7b1f56d057cd47f1cb92244ce
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 22ce91a81964ed52830fc19dbbbd52e7f170b0d4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82592058"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022766"
 ---
 # <a name="scale-azure-hdinsight-clusters"></a>Mettre à l’échelle des clusters Azure HDInsight
 
 HDInsight fournit une élasticité avec des options de scale-up ou scale-down du nombre de nœuds Worker dans vos clusters. Cette élasticité vous permet de réduire un cluster après certaines heures ou les week-ends, et de le développer pendant les pics d’activité.
 
-Effectuez un scale-up de votre cluster avant le traitement périodique par lots afin que le cluster dispose des ressources appropriées.  Une fois que le traitement est terminé et que l’utilisation est redescendue, effectuez un scale-down du cluster HDInsight de façon à utiliser moins de nœuds Worker.
+Effectuez un scale-up de votre cluster avant le traitement périodique par lots afin que le cluster dispose des ressources appropriées.   Une fois que le traitement est terminé et que l’utilisation est redescendue, effectuez un scale-down du cluster HDInsight de façon à utiliser moins de nœuds Worker.
 
 Vous pouvez mettre à l’échelle un cluster manuellement en appliquant l’une des méthodes décrites ci-dessous. Vous pouvez également utiliser des options de [mise à l’échelle automatique](hdinsight-autoscale-clusters.md) pour effectuer un scale-up ou un scale-down automatiquement en fonction de certaines métriques.
 
@@ -32,9 +32,9 @@ Microsoft fournit les utilitaires suivants pour la mise à l’échelle des clus
 
 |Utilitaire | Description|
 |---|---|
-|[PowerShell Az](https://docs.microsoft.com/powershell/azure)|[`Set-AzHDInsightClusterSize`](https://docs.microsoft.com/powershell/module/az.hdinsight/set-azhdinsightclustersize) `-ClusterName CLUSTERNAME -TargetInstanceCount NEWSIZE`|
-|[PowerShell AzureRM](https://docs.microsoft.com/powershell/azure/azurerm) |[`Set-AzureRmHDInsightClusterSize`](https://docs.microsoft.com/powershell/module/azurerm.hdinsight/set-azurermhdinsightclustersize) `-ClusterName CLUSTERNAME -TargetInstanceCount NEWSIZE`|
-|[Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) | [`az hdinsight resize`](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-resize) `--resource-group RESOURCEGROUP --name CLUSTERNAME --workernode-count NEWSIZE`|
+|[PowerShell Az](/powershell/azure)|[`Set-AzHDInsightClusterSize`](/powershell/module/az.hdinsight/set-azhdinsightclustersize) `-ClusterName CLUSTERNAME -TargetInstanceCount NEWSIZE`|
+|[PowerShell AzureRM](/powershell/azure/azurerm) |[`Set-AzureRmHDInsightClusterSize`](/powershell/module/azurerm.hdinsight/set-azurermhdinsightclustersize) `-ClusterName CLUSTERNAME -TargetInstanceCount NEWSIZE`|
+|[Azure CLI](/cli/azure/) | [`az hdinsight resize`](/cli/azure/hdinsight#az-hdinsight-resize) `--resource-group RESOURCEGROUP --name CLUSTERNAME --workernode-count NEWSIZE`|
 |[Azure Classic CLI](hdinsight-administer-use-command-line.md)|`azure hdinsight cluster resize CLUSTERNAME NEWSIZE` |
 |[Azure portal](https://portal.azure.com)|Ouvrez le volet de votre cluster HDInsight, sélectionnez **Taille de cluster** dans le menu de gauche, puis, dans le volet Taille de cluster, entrez le nombre de nœuds Worker, puis sélectionnez Enregistrer.|  
 
@@ -43,8 +43,8 @@ Microsoft fournit les utilitaires suivants pour la mise à l’échelle des clus
 Grâce à ces méthodes, vous pouvez monter ou descendre en puissance votre cluster HDInsight en quelques minutes.
 
 > [!IMPORTANT]  
-> * L’interface de ligne de commande Azure Classic est dépréciée et doit uniquement être utilisée avec le modèle de déploiement classique. Pour tous les autres déploiements, utilisez [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest).
-> * Le module PowerShell AzureRM est déconseillé.  Utilisez le [module Az](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-1.4.0) autant que possible.
+> * L’interface de ligne de commande Azure Classic est dépréciée et doit uniquement être utilisée avec le modèle de déploiement classique. Pour tous les autres déploiements, utilisez [Azure CLI](/cli/azure/).
+> * Le module PowerShell AzureRM est déconseillé.  Utilisez le [module Az](/powershell/azure/new-azureps-module-az) autant que possible.
 
 ## <a name="impact-of-scaling-operations"></a>Impact des opérations de mise à l’échelle
 
@@ -106,6 +106,14 @@ L’impact de la modification du nombre de nœuds de données varie en fonction 
 * Kafka
 
     vous devez rééquilibrer les réplicas de partition après les opérations de mise à l’échelle. Pour plus d’informations, consultez le document [Haute disponibilité des données avec Apache Kafka sur HDInsight](./kafka/apache-kafka-high-availability.md).
+
+* LLAP d’Apache Hive
+
+    Après la mise à l’échelle vers `N` nœuds Worker, HDInsight définit automatiquement les configurations suivantes et redémarre Hive.
+
+  * Nombre total maximal de requêtes simultanées : `hive.server2.tez.sessions.per.default.queue = min(N, 32)`
+  * Nombre de nœuds utilisés par le LLAP de Hive : `num_llap_nodes  = N`
+  * Nombre de nœuds pour l’exécution du démon LLAP Hive : `num_llap_nodes_for_llap_daemons = N`
 
 ## <a name="how-to-safely-scale-down-a-cluster"></a>Scale down d’un cluster en toute sécurité
 

@@ -1,7 +1,7 @@
 ---
 title: Mettre à niveau l’API Recherche de vidéos Bing de la version 5 à la version 7
 titleSuffix: Azure Cognitive Services
-description: Permet d’identifier les parties de votre application que vous devez mettre à jour pour utiliser la version 7.
+description: Identifie les parties de votre application Recherche de vidéos Bing que vous devez mettre à jour pour utiliser la version 7.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,14 +10,19 @@ ms.subservice: bing-video-search
 ms.topic: conceptual
 ms.date: 01/31/2019
 ms.author: scottwhi
-ms.openlocfilehash: 5dc4c870ae8dbe9f082456d738836aced1271732
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e47691c82d43a35a7235eb5c3fd3cf7bca081aee
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68500724"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351910"
 ---
 # <a name="video-search-api-upgrade-guide"></a>Guide de mise à niveau de l’API Recherche de vidéos Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Ce guide de mise à niveau identifie les changements entre la version 5 et la version 7 de l’API Recherche de vidéos Bing. Utilisez-le pour identifier les parties de votre application que vous avez besoin de mettre à jour pour utiliser la version 7.
 
@@ -71,11 +76,10 @@ Bloqué|InvalidRequest.Blocked
 
 ### <a name="query-parameters"></a>Paramètres de requête
 
-- Paramètre de requête `modulesRequested` renommé en [modules](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#modulesrequested).  
+- Paramètre de requête `modulesRequested` renommé en [modules](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#modulesrequested).  
 
 ### <a name="object-changes"></a>Modifications d’objet
 
-- Le champ `nextOffsetAddCount` de [Vidéos](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videos) a été renommé en `nextOffset`. La façon d’utiliser le décalage a également changé. Auparavant, vous devez définir le paramètre de requête de [décalage](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#offset) sur la valeur `nextOffset`, ainsi que la valeur de décalage précédente et le nombre de vidéos dans le résultat. À présent, définissez simplement le paramètre de requête `offset` sur la valeur `nextOffset`.  
+- Le champ `nextOffsetAddCount` de [Vidéos](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videos) a été renommé en `nextOffset`. La façon d’utiliser le décalage a également changé. Auparavant, vous devez définir le paramètre de requête de [décalage](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#offset) sur la valeur `nextOffset`, ainsi que la valeur de décalage précédente et le nombre de vidéos dans le résultat. À présent, définissez simplement le paramètre de requête `offset` sur la valeur `nextOffset`.  
   
-- Changement du type de données du champ `relatedVideos` de `Video[]` à [VideosModule](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videosmodule) (voir [VideoDetails](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videodetails)).
-
+- Changement du type de données du champ `relatedVideos` de `Video[]` à [VideosModule](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videosmodule) (voir [VideoDetails](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#videodetails)).

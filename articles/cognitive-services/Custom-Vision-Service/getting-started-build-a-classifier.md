@@ -1,33 +1,35 @@
 ---
-title: 'Démarrage rapide : Créer un classifieur - Service Custom Vision'
+title: 'Démarrage rapide : Créer un classifieur avec le site web Custom Vision'
 titleSuffix: Azure Cognitive Services
-description: Dans ce guide de démarrage rapide, vous allez découvrir comment utiliser le site web Custom Vision pour créer un modèle de classification d’images.
+description: Dans ce guide de démarrage rapide, découvrez comment utiliser le site web Custom Vision pour créer, entraîner et tester un modèle de classification d’images.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: quickstart
-ms.date: 04/14/2020
+ms.date: 09/29/2020
 ms.author: pafarley
-ms.openlocfilehash: 56bdaa324420bf274e7cda8ac1c6506e4bc9ad21
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: cog-serv-seo-aug-2020
+keywords: reconnaissance d’image, application de reconnaissance d’image, vision personnalisée
+ms.openlocfilehash: b57720b9d8fb05a605b9eace279b70b060c18450
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81404055"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91596878"
 ---
-# <a name="quickstart-how-to-build-a-classifier-with-custom-vision"></a>Démarrage rapide : Comment créer un classifieur avec Custom Vision
+# <a name="quickstart-build-a-classifier-with-the-custom-vision-website"></a>Démarrage rapide : Créer un classifieur avec le site web Custom Vision
 
-Dans ce guide de démarrage rapide, vous découvrez comment créer un classifieur via le site web Custom Vision. Une fois que vous avez créé un modèle de classifieur, vous pouvez utiliser le service Custom Vision pour la classification d’images.
+Dans ce guide de démarrage rapide, vous allez découvrir comment utiliser le site web Custom Vision pour créer un modèle de classification d’images. Une fois que vous avez créé un modèle, vous pouvez le tester avec de nouvelles images et l’intégrer finalement à votre propre application de reconnaissance d’images.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
 - Un ensemble d’images avec lequel entraîner votre classifieur. Reportez-vous aux conseils ci-dessous pour le choix des images.
 
-## <a name="create-custom-vision-resources-in-the-azure-portal"></a>Créer des ressources Custom Vision dans le portail Azure
+## <a name="create-custom-vision-resources"></a>Créer des ressources Custom Vision
 
 [!INCLUDE [create-resources](includes/create-resources.md)]
 
@@ -45,7 +47,7 @@ Dans votre navigateur web, accédez à la [page web Custom Vision](https://custo
 1. Entrez un nom et une description pour le projet. Sélectionnez ensuite un groupe de ressources. Si votre compte de connexion est associé à un compte Azure, la liste déroulante Resource Group (Groupe de ressources) affiche tous vos groupes de ressources Azure qui incluent une ressource du service Vision personnalisée. 
 
    > [!NOTE]
-   > Si aucun groupe de ressources n’est disponible, vérifiez que vous vous êtes connecté à [customvision.ai](https://customvision.ai) avec le même compte que celui utilisé pour vous connecter au [portail Azure](https://portal.azure.com/). Vérifiez aussi que vous avez sélectionné le même « Répertoire » dans le portail Custom Vision que celui du portail Azure où se trouvent vos ressources Custom Vision. Dans les deux sites, vous pouvez sélectionner votre répertoire à partir du menu déroulant de compte situé en haut à droite de l’écran. 
+   > Si aucun groupe de ressources n’est disponible, vérifiez que vous vous êtes connecté à [customvision.ai](https://customvision.ai) avec le même compte que celui utilisé pour vous connecter au [portail Azure](https://portal.azure.com/). Vérifiez aussi que vous avez sélectionné le même « Répertoire » dans le site web Custom Vision que celui du portail Azure où se trouvent vos ressources Custom Vision. Dans les deux sites, vous pouvez sélectionner votre répertoire à partir du menu déroulant de compte situé en haut à droite de l’écran. 
 
 1. Sélectionnez __Classification__ sous __Project Types__ (Types de projets). Ensuite, sous __Classification Types__ (Types de classifications), choisissez **Multilabel** (Multi-étiquette) ou **Multiclass** (Multiclasse), en fonction de votre cas d’utilisation. La classification multi-étiquette applique un nombre quelconque de vos étiquettes à une image (zéro ou plus), tandis que la classification multiclasse trie les images et les classe dans une seule catégorie (chaque image que vous soumettez se voit appliquer l’étiquette la plus probable). Vous pourrez changer ultérieurement le type de classification si vous le souhaitez.
 
@@ -54,8 +56,8 @@ Dans votre navigateur web, accédez à la [page web Custom Vision](https://custo
     |Domain|Objectif|
     |---|---|
     |__Générique__| Optimisé pour un large éventail de tâches de classification d’images. Si aucun autre domaine n’est approprié, ou si vous hésitez sur le choix du domaine, sélectionnez le domaine Générique. |
-    |__Food__ (Nourriture)|Optimisé pour les photographies de plats, tels que vous pouvez les voir dans un menu de restaurant. Si vous souhaitez classer des photographies de fruits ou de légumes distincts, utilisez le domaine Food (Nourriture).|
-    |__Landmarks__ (Monuments et sites)|Optimisé pour les monuments et sites reconnaissables, naturels et artificiels. Ce domaine fonctionne mieux lorsque le monument ou le site est clairement visible dans la photographie. Ce domaine fonctionne même si le monument ou le site est légèrement masqué par des personnes placées devant lui.|
+    |__Aliment__|Optimisé pour les photographies de plats, tels que vous pouvez les voir dans un menu de restaurant. Si vous souhaitez classer des photographies de fruits ou de légumes distincts, utilisez le domaine Food (Nourriture).|
+    |__Points de repère__|Optimisé pour les monuments et sites reconnaissables, naturels et artificiels. Ce domaine fonctionne mieux lorsque le monument ou le site est clairement visible dans la photographie. Ce domaine fonctionne même si le monument ou le site est légèrement masqué par des personnes placées devant lui.|
     |__Retail__ (Commerce)|Optimisé pour les images qui se trouvent dans des catalogues de vente ou sur des site Web commerciaux. Si vous souhaitez un classement de grande précision pour des robes, des pantalons et des chemises, utilisez ce domaine.|
     |__Compact Domains__ (Domaines compacts)| Optimisés en fonction des contraintes de la classification en temps réel sur les appareils mobiles. Les modèles générés par les domaines compacts sont exportables pour s’exécuter localement.|
 
@@ -120,3 +122,4 @@ Dans ce guide de démarrage rapide, vous avez découvert comment créer et entra
 > [!div class="nextstepaction"]
 > [Tester et réentraîner un modèle](test-your-model.md)
 
+* [Qu’est-ce que Custom Vision ?](./overview.md)

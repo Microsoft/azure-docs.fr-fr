@@ -1,7 +1,7 @@
 ---
 title: 'Importance de la fonctionnalité de permutation : sur le module Modifier les métadonnées'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Importance de la fonctionnalité de permutation dans Azure Machine Learning pour calculer les scores d’importance des fonctionnalités de permutation des variables de fonctionnalité en fonction d’un modèle formé et d’un jeu de données de test.
+description: Découvrez comment utiliser le module Importance de la fonctionnalité de permutation dans le concepteur pour calculer les scores d’importance des fonctionnalités de permutation des variables de fonctionnalité.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,22 +9,22 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/24/2020
-ms.openlocfilehash: e4511cf4393172e7d2b1ab8a985c76d8f98d4015
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8ae1e79922cc0f34e8b2d1f253fce5078df286d2
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456061"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421241"
 ---
 # <a name="permutation-feature-importance"></a>Importance de la fonctionnalité de permutation
 
-Cet article explique comment utiliser le module Importance de la fonctionnalité de permutation dans Azure Machine Learning Designer (préversion), afin de calculer un ensemble de scores d’importance de fonctionnalité pour votre jeu de données. Vous utilisez ces scores pour vous aider à déterminer les meilleures fonctionnalités à utiliser dans un modèle.
+Cet article explique comment utiliser le module Importance de la fonctionnalité de permutation dans le concepteur Azure Machine Learning, afin de calculer un ensemble de scores d’importance de fonctionnalité pour votre jeu de données. Vous utilisez ces scores pour vous aider à déterminer les meilleures fonctionnalités à utiliser dans un modèle.
 
 Dans ce module, les valeurs des fonctionnalités sont mélangées aléatoirement, une colonne à la fois. Les performances du modèle sont mesurées avant et après. Vous pouvez choisir l’une des métriques standard pour mesurer les performances.
 
 Les scores retournés par le module représentent la *modification* dans les performances d’un modèle formé, après permutation. Les fonctionnalités importantes sont généralement plus sensibles au processus de mélange. Elles génèrent donc des scores d’importance plus élevés. 
 
-Cet article fournit une vue d’ensemble de la fonctionnalité de permutation, de sa base théorique et de ses applications dans le machine learning : [Importance de la fonctionnalité de permutation](https://blogs.technet.com/b/machinelearning/archive/2015/04/14/permutation-feature-importance.aspx).  
+Cet article fournit une vue d’ensemble de la fonctionnalité de permutation, de sa base théorique et de ses applications dans le machine learning : [Importance de la fonctionnalité de permutation](/archive/blogs/machinelearning/permutation-feature-importance).  
 
 ## <a name="how-to-use-permutation-feature-importance"></a>Comment utiliser l’importance de la fonctionnalité de permutation
 
@@ -69,4 +69,4 @@ La raison de cette différence tient au fait que le module Importance de la fonc
   
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

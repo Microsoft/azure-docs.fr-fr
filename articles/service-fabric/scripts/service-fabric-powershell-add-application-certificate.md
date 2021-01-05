@@ -13,13 +13,13 @@ ms.workload: multiple
 ms.topic: sample
 ms.date: 01/18/2018
 ms.author: atsenthi
-ms.custom: mvc
-ms.openlocfilehash: d657ef8d28b36d93bc923036254e446c7be4c2c8
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 0f5a7d49200c7dec08f71f9cb0256630728e4711
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81769519"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90090140"
 ---
 # <a name="add-an-application-certificate-to-a-service-fabric-cluster"></a>Ajouter un certificat d’application à un cluster Service Fabric
 
@@ -27,7 +27,7 @@ Cet exemple de script explique comment créer un certificat dans Key Vault, puis
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure. 
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure. 
 
 ## <a name="create-a-certificate-in-key-vault"></a>Créer un certificat dans Key Vault
 
@@ -81,7 +81,7 @@ $CertConfig = New-AzVmssVaultCertificateConfig -CertificateUrl (Get-AzKeyVaultSe
 $VMSS = Get-AzVmss -ResourceGroupName $ResourceGroupName -VMScaleSetName $VMSSName
 
 # If this KeyVault is already known by the virtual machine scale set, for example if the cluster certificate is deployed from this keyvault, use
-$VMSS.virtualmachineprofile.osProfile.secrets[0].vaultCertificates.Add($certConfig)
+$VMSS.virtualmachineprofile.osProfile.secrets[0].vaultCertificates.Add($CertConfig)
 
 # Otherwise use
 $VMSS = Add-AzVmssSecret -VirtualMachineScaleSet $VMSS -SourceVaultId (Get-AzKeyVault -VaultName $VaultName).ResourceId  -VaultCertificate $CertConfig
@@ -110,6 +110,6 @@ Ce script utilise les commandes suivantes : Chaque commande du tableau renvoie �
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure Service Fabric sur la page [Azure PowerShell Samples](../service-fabric-powershell-samples.md) (Exemples Azure PowerShell).

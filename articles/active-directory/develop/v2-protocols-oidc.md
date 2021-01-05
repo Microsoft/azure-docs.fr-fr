@@ -1,5 +1,6 @@
 ---
-title: Protocole OpenID Connect - Plateforme d’identités Microsoft | Azure
+title: Plateforme d’identités Microsoft et protocole OpenID Connect | Azure
+titleSuffix: Microsoft identity platform
 description: Créez des applications web à l’aide de l’implémentation du protocole d’authentification OpenID Connect issue de la plateforme d’identités Microsoft.
 services: active-directory
 author: hpsin
@@ -8,22 +9,23 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 04/12/2019
+ms.date: 05/22/2020
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: be24c4cfd255b33a38acc1e62763350d3d7e989b
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 71e930898f1f86622357f9e02da69be7bf2f8088
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82688231"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91256583"
 ---
 # <a name="microsoft-identity-platform-and-openid-connect-protocol"></a>Plateforme d’identités Microsoft et protocole OpenID Connect
 
-OpenID Connect est un protocole d’authentification basé sur OAuth 2.0 que vous pouvez utiliser pour connecter de façon sécurisée un utilisateur à une application Web. En utilisant l’implémentation d’OpenID Connect provenant du point de terminaison de la plateforme d’identités Microsoft, vous pouvez ajouter l’accès à la connexion et aux API à vos applications web. Cet article est indépendant du langage. Il explique comment envoyer et recevoir des messages HTTP sans utiliser l’une des bibliothèques open source de Microsoft.
+OpenID Connect (OIDC) est un protocole d’authentification basé sur OAuth 2.0, que vous pouvez utiliser pour connecter de façon sécurisée un utilisateur à une application. En utilisant l’implémentation d’OpenID Connect provenant du point de terminaison de la plateforme d’identités Microsoft, vous pouvez ajouter l’accès à la connexion et aux API à vos applications. Cet article ne tient pas compte du langage. Il explique comment envoyer et recevoir des messages HTTP sans utiliser l’une des [bibliothèques open source de Microsoft](reference-v2-libraries.md).
 
-[OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) étend le protocole *d’autorisation* OAuth 2.0 pour l’utiliser en tant que protocole *d’authentification*, ce qui vous permet de procéder à une authentification unique à l’aide d’OAuth. OpenID Connect introduit le concept de *jeton d'ID*, qui est un jeton de sécurité permettant au client de vérifier l’identité de l’utilisateur. Il permet également les informations de base de profil de l'utilisateur. Comme OpenID Connect étend OAuth 2.0, les applications peuvent acquérir de manière sûre les *jetons d’accès* pouvant être utilisés pour accéder à des ressources sécurisées à l’aide d’un [serveur d’autorisation](active-directory-v2-protocols.md#the-basics). Le point de terminaison de la plateforme d’identités Microsoft permet également aux applications tierces qui sont inscrites auprès d’Azure AD d’émettre des jetons d’accès pour des ressources sécurisées telles que des API web. Pour plus d’informations sur la configuration d’une application pour l’émission de jetons d’accès, consultez [Inscription d’une application avec le point de terminaison de la plateforme d’identités Microsoft](quickstart-register-app.md). Nous recommandons d'utiliser OpenID Connect si vous concevez une [application web](v2-app-types.md#web-apps) hébergée sur un serveur et accessible par le biais d’un navigateur.
+[OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) étend le protocole *d’autorisation* OAuth 2.0 pour l’utiliser en tant que protocole *d’authentification*, ce qui vous permet de procéder à une authentification unique à l’aide d’OAuth. OpenID Connect introduit le concept de *jeton d'ID*, qui est un jeton de sécurité permettant au client de vérifier l’identité de l’utilisateur. Il permet également les informations de base de profil de l'utilisateur. Il présente également le [point de terminaison de UserInfo](userinfo.md), une API qui renvoie des informations sur l’utilisateur. 
+
 
 ## <a name="protocol-diagram-sign-in"></a>Schéma de protocole : Connexion
 
@@ -33,14 +35,11 @@ Le flux de connexion le plus simple se compose des étapes présentées dans le 
 
 ## <a name="fetch-the-openid-connect-metadata-document"></a>Récupérez le document de métadonnées OpenID Connect
 
-OpenID Connect décrit un document de métadonnées qui contient la plupart des informations nécessaires pour qu’une application effectue la connexion. Cela inclut des informations telles que les URL à utiliser et l’emplacement des clés de signature publiques du service. Pour le point de terminaison de la plateforme d’identités Microsoft, voici le document de métadonnées OpenID Connect que vous devez utiliser :
+OpenID Connect décrit un document de métadonnées [(RFC)](https://openid.net/specs/openid-connect-discovery-1_0.html) qui contient la plupart des informations nécessaires à une application pour effectuer la connexion. Cela inclut des informations telles que les URL à utiliser et l’emplacement des clés de signature publiques du service. Pour accéder à ce document, ajoutez le chemin d’accès au document de détection à l’adresse URL de l’autorité :
 
-```
-https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
-```
+Chemin d’accès au document de détection : `/.well-known/openid-configuration`
 
-> [!TIP]
-> Essayez ! Cliquez sur [https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration](https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration) pour voir la configuration des clients `common`.
+Autorité : `https://login.microsoftonline.com/{tenant}/v2.0`
 
 `{tenant}` peut prendre une des quatre valeurs :
 
@@ -51,18 +50,37 @@ https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
 | `consumers` |Seuls les utilisateurs avec un compte personnel Microsoft peuvent se connecter à l’application. |
 | `8eaef023-2b34-4da1-9baa-8bc8c9d6a490` ou `contoso.onmicrosoft.com` | Seuls les utilisateurs d’un locataire Azure AD spécifique (qu’ils soient membres de l’annuaire avec un compte professionnel ou scolaire ou qu’ils soient invités dans l’annuaire avec un compte Microsoft personnel) peuvent se connecter à l’application. Le nom de domaine convivial du client Azure AD ou l’identificateur GUID du client peut être utilisé. Vous pouvez également utiliser le client consommateur `9188040d-6c67-4c5b-b112-36a304b66dad` à la place du client `consumers`.  |
 
-Les métadonnées représentent un simple document JavaScript Objet Notation (JSON). Consultez l’extrait suivant pour obtenir un exemple. Le contenu de l'extrait de code est décrit en détail dans les [spécifications d’OpenID Connect](https://openid.net/specs/openid-connect-discovery-1_0.html#rfc.section.4.2).
+L’autorité diffère d’un cloud national à l’autre, par exemple `https://login.microsoftonline.de` pour l’instance Azure AD Germany. Si vous n’utilisez pas le cloud public, passez en revue les [points de terminaison cloud nationaux](authentication-national-cloud.md#azure-ad-authentication-endpoints) pour trouver celui qui vous convient le mieux. Assurez-vous que le locataire et `/v2.0/` sont présents dans votre requête, afin que vous puissiez utiliser la version 2.0 du point de terminaison.
+
+> [!TIP]
+> Essayez ! Cliquez sur [https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration](https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration) pour voir la configuration de `common`.
+
+### <a name="sample-request"></a>Exemple de requête
+
+Pour appeler le point de terminaison UserInfo pour l’autorité commune sur le cloud public, utilisez ce qui suit :
+
+```http
+GET /common/v2.0/.well-known/openid-configuration
+Host: login.microsoftonline.com
+```
+
+### <a name="sample-response"></a>Exemple de réponse
+
+Les métadonnées représentent un simple document JavaScript Objet Notation (JSON). Consultez l’extrait suivant pour obtenir un exemple. Son contenu est décrit en détail dans les [spécifications d’OpenID Connect](https://openid.net/specs/openid-connect-discovery-1_0.html#rfc.section.4.2).
 
 ```json
 {
-  "authorization_endpoint": "https:\/\/login.microsoftonline.com\/{tenant}\/oauth2\/v2.0\/authorize",
-  "token_endpoint": "https:\/\/login.microsoftonline.com\/{tenant}\/oauth2\/v2.0\/token",
+  "authorization_endpoint": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+  "token_endpoint": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
   "token_endpoint_auth_methods_supported": [
     "client_secret_post",
     "private_key_jwt"
   ],
-  "jwks_uri": "https:\/\/login.microsoftonline.com\/{tenant}\/discovery\/v2.0\/keys",
-
+  "jwks_uri": "https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys",
+  "userinfo_endpoint": "https://graph.microsoft.com/oidc/userinfo",
+  "subject_types_supported": [
+      "pairwise"
+  ],
   ...
 
 }
@@ -97,10 +115,6 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &state=12345
 &nonce=678910
 ```
-
-> [!TIP]
-> Cliquez sur le lien suivant pour exécuter cette requête. Une fois que vous êtes connecté, votre navigateur sera redirigé vers `https://localhost/myapp/`, avec un jeton d’ID dans la barre d’adresse. Notez que cette requête utilise `response_mode=fragment` (pour les besoins du didacticiel uniquement). Nous vous recommandons d'utiliser `response_mode=form_post`.
-> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid&response_mode=fragment&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 | Paramètre | Condition | Description |
 | --- | --- | --- |
@@ -170,36 +184,19 @@ Le tableau suivant décrit les codes d’erreur qui peuvent être retournés dan
 
 ## <a name="validate-the-id-token"></a>Validation du jeton d’ID
 
-La réception du jeton id_token ne suffit pas à authentifier l’utilisateur. Vous devez valider la signature du jeton id_token et vérifier la conformité des revendications du jeton par rapport aux exigences de votre application. Le point de terminaison de la plateforme d’identités Microsoft utilise les [jetons web JSON (JWT)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) et le chiffrement de clés publiques pour signer les jetons et vérifier leur validité.
+La seule réception du jeton id_token ne suffit pas toujours à authentifier l’utilisateur. Vous devrez peut-être aussi valider la signature du jeton id_token et la conformité des revendications du jeton par rapport aux exigences de votre application. Comme toutes les plateformes OIDC, le point de terminaison de la plateforme d’identités Microsoft utilise les [jetons web JSON (JWT)](https://tools.ietf.org/html/rfc7519) et le chiffrement de clés publiques pour signer les jetons d’ID et vérifier leur validité.
 
-Vous pouvez décider de valider le jeton `id_token` dans le code du client, mais une pratique courante consiste à envoyer le jeton `id_token` vers un serveur principal, afin d’y effectuer la validation. Une fois que vous avez validé la signature du jeton id_token, il vous faudra vérifier quelques revendications. Pour plus d’informations, consultez la page de [référence `id_token`](id-tokens.md), notamment les sections [Validation des jetons](id-tokens.md#validating-an-id_token) et [Informations importantes sur la substitution des clés de signature](active-directory-signing-key-rollover.md). Nous vous recommandons d’utiliser une bibliothèque pour analyser et valider les jetons. Il en existe au moins une pour la plupart des langages et plateformes.
+Les applications ne bénéficient pas toutes de la vérification du jeton d’ID ; pour les applications natives et à page unique, par exemple, il est rarement avantageux de valider ce jeton.  Une personne disposant d’un accès physique à l’appareil (ou au navigateur) peut contourner la validation de nombreuses façons, de la modification du trafic web vers l’appareil à la fourniture de jetons et de clés factices, en passant par le débogage pur et simple de l’application, afin d’ignorer la logique de validation.  En revanche, les applications web et les API utilisant un jeton d’ID pour l’autorisation doivent valider le jeton d’ID avec soin, car ils régulent l’accès aux données.
+
+Une fois que vous avez validé la signature du jeton id_token, il vous faudra vérifier quelques revendications. Pour plus d’informations, consultez la page de [référence `id_token`](id-tokens.md), notamment les sections [Validation des jetons](id-tokens.md#validating-an-id_token) et [Informations importantes sur la substitution des clés de signature](active-directory-signing-key-rollover.md). Nous vous recommandons d’utiliser une bibliothèque pour analyser et valider les jetons. Il en existe au moins une pour la plupart des langages et plateformes.
 
 En fonction de votre scénario, vous pouvez également valider des revendications supplémentaires. Voici quelques validations courantes :
 
 * S’assurer que l’utilisateur/l’organisation s’est inscrit pour l’application.
 * S’assurer que l’utilisateur dispose de l’autorisation/des privilèges appropriés.
-* S’assurer de l’utilisation d’une force certaine d’authentification, comme une authentification multifacteur.
+* S’assurer de l’utilisation d’une force certaine d’authentification, comme une [authentification multifacteur](../authentication/concept-mfa-howitworks.md).
 
 Une fois que vous avez validé le jeton id_token, vous pouvez démarrer une session avec l’utilisateur et utiliser les revendications du jeton id_token pour récupérer les informations sur l’utilisateur dans votre application. Ces informations peuvent être utilisées pour l’affichage, les enregistrements, la personnalisation, etc.
-
-## <a name="send-a-sign-out-request"></a>Envoi d’une demande de déconnexion
-
-Si vous souhaitez déconnecter l’utilisateur de votre application, vous ne pouvez pas vous contenter de supprimer les cookies de votre application ou d’arrêter la session de l’utilisateur. Vous devez également rediriger l’utilisateur vers le point de terminaison de la plateforme d’identités Microsoft pour suivre la procédure de déconnexion. Si vous ne le faites pas, l’utilisateur pourra se réauthentifier auprès de votre application sans avoir à saisir de nouveau ses informations d’identification, puisqu’il disposera d’une session d’authentification unique valide avec le point de terminaison de la plateforme d’identités Microsoft.
-
-Vous pouvez rediriger l’utilisateur vers le `end_session_endpoint` répertorié dans le document de métadonnées OpenID Connect :
-
-```HTTP
-GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
-post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-```
-
-| Paramètre | Condition | Description |
-| ----------------------- | ------------------------------- | ------------ |
-| `post_logout_redirect_uri` | Recommandé | URL vers laquelle l’utilisateur est redirigé après sa déconnexion. Si le paramètre n’est pas inclus, un message générique généré par le point de terminaison de la plateforme d’identités Microsoft s’affiche sur l’écran de l’utilisateur. Cette URL doit correspondre exactement à l’un des URI de redirection inscrits pour votre application dans le portail d’inscription des applications. |
-
-## <a name="single-sign-out"></a>Déconnexion unique
-
-Lorsque vous redirigez l’utilisateur vers le point `end_session_endpoint`, le point de terminaison de la plateforme d’identités Microsoft efface la session de l’utilisateur dans le navigateur. Toutefois, l’utilisateur peut rester connecté à d’autres applications qui utilisent des comptes Microsoft pour s’authentifier. Pour permettre à ces applications de déconnecter simultanément l’utilisateur, le point de terminaison de la plateforme d’identités Microsoft envoie une requête HTTP GET au lien `LogoutUrl` inscrit de toutes les applications auxquelles l’utilisateur est actuellement connecté. Les applications doivent répondre à cette requête en effaçant toute session qui identifie l’utilisateur et en renvoyant une réponse `200`. Si vous souhaitez prendre en charge la déconnexion unique dans votre application, vous devez implémenter ce paramètre `LogoutUrl` dans le code de votre application. Vous pouvez définir le paramètre `LogoutUrl` à partir du portail d’inscription des applications.
 
 ## <a name="protocol-diagram-access-token-acquisition"></a>Schéma de protocole : Acquisition de jeton d'accès
 
@@ -209,31 +206,30 @@ Le flux complet de connexion OpenID Connect et d’acquisition des jetons ressem
 
 ![Protocole OpenID Connect : Acquisition de jeton](./media/v2-protocols-oidc/convergence-scenarios-webapp-webapi.svg)
 
-## <a name="get-access-tokens"></a>Obtenir des jetons d’accès
-Pour acquérir des jetons d’accès, modifiez la requête de connexion :
+## <a name="get-an-access-token-to-call-userinfo"></a>Obtenir un jeton d’accès pour appeler UserInfo
+
+Pour obtenir un jeton pour le point de terminaison OIDC UserInfo, modifiez la requête de connexion :
 
 ```HTTP
 // Line breaks are for legibility only.
 
 GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
 client_id=6731de76-14a6-49ae-97bc-6eba6914391e        // Your registered Application ID
-&response_type=id_token%20code
+&response_type=id_token%20token                       // this will return both an id_token and an access token
 &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F       // Your registered redirect URI, URL encoded
 &response_mode=form_post                              // 'form_post' or 'fragment'
-&scope=openid%20                                      // Include both 'openid' and scopes that your app needs
-offline_access%20
-https%3A%2F%2Fgraph.microsoft.com%2Fuser.read
+&scope=openid+profile+email                           // `openid` is required.  `profile` and `email` provide additional information in the UserInfo endpoint the same way they do in an ID token. 
 &state=12345                                          // Any value, provided by your app
 &nonce=678910                                         // Any value, provided by your app
 ```
 
+Vous pouvez également utiliser le [flux de code d’autorisation](v2-oauth2-auth-code-flow.md), le [flux de code de l’appareil](v2-oauth2-device-code.md), ou un [jeton d’actualisation](v2-oauth2-auth-code-flow.md#refresh-the-access-token) à la place de `response_type=token` pour obtenir un jeton pour votre application.
+
 > [!TIP]
-> Cliquez sur le lien suivant pour exécuter cette requête. Une fois que vous êtes connecté, votre navigateur est redirigé vers `https://localhost/myapp/`, avec un jeton d’ID et un code dans la barre d’adresse. Notez que cette requête utilise `response_mode=fragment` pour les besoins du didacticiel uniquement. Nous vous recommandons d'utiliser `response_mode=form_post`.
-> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token%20code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=fragment&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
+> Cliquez sur le lien suivant pour exécuter cette requête. Une fois que vous êtes connecté, votre navigateur est redirigé vers `https://localhost/myapp/`, avec un jeton d’ID et un jeton dans la barre d’adresse. Notez que cette requête utilise `response_mode=fragment` à des fins de démonstration uniquement ; pour une webapp, nous vous recommandons d’utiliser `form_post` pour une plus grande sécurité, le cas échéant. 
+> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token%20token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=fragment&scope=openid+profile+email&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
-En incluant des étendues d’autorisation dans la requête et en utilisant `response_type=id_token code`, le point de terminaison de la plateforme d’identités Microsoft garantit que l’utilisateur a accepté les autorisations indiquées dans le paramètre de requête `scope`. Il renvoie un code d’autorisation à votre application afin de l’échanger contre un jeton d’accès.
-
-### <a name="successful-response"></a>Réponse correcte
+### <a name="successful-token-response"></a>Réponse de jeton correcte
 
 Une réponse correcte utilisant `response_mode=form_post` se présente ainsi :
 
@@ -241,14 +237,23 @@ Une réponse correcte utilisant `response_mode=form_post` se présente ainsi :
 POST /myapp/ HTTP/1.1
 Host: localhost
 Content-Type: application/x-www-form-urlencoded
-
-id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...&state=12345
+ access_token=eyJ0eXAiOiJKV1QiLCJub25jZSI6I....
+ &token_type=Bearer
+ &expires_in=3598
+ &scope=email+openid+profile
+ &id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI....
+ &state=12345
 ```
+
+Les paramètres de la réponse signifient la même chose quel que soit le flux utilisé pour les acquérir.
 
 | Paramètre | Description |
 | --- | --- |
+| `access_token` | Jeton qui sera utilisé pour appeler le point de terminaison UserInfo.|
+| `token_type` | Toujours « Porteur ». |
+| `expires_in`| Temps écoulé jusqu’à l’expiration du jeton d’accès, en secondes. |
+| `scope` | Autorisations d’accès accordées pour le jeton d’accès.  Notez que, comme le point de terminaison UserInfo est hébergé sur Microsoft Graph, des étendues Graph supplémentaires peuvent être répertoriées ici (par exemple, user.read) si elles ont été précédemment accordées à l’application.  Cela est dû au fait qu’un jeton associé à une ressource donnée comprend toujours toutes les autorisations actuellement accordées au client.  |
 | `id_token` | Le jeton d'ID que l’application a demandé. Vous pouvez utiliser le jeton d'ID pour vérifier l’identité de l’utilisateur et démarrer une session avec lui. Pour plus de détails sur les jetons d'ID et leur contenu, consultez la page de [référence `id_tokens`](id-tokens.md). |
-| `code` | Le code d’autorisation demandé par l’application. L’application peut utiliser ce code d’autorisation pour demander un jeton d’accès pour la ressource cible. La durée de vie d’un code d’autorisation est courte. En règle générale, un code d’autorisation expire au bout de 10 minutes environ. |
 | `state` | Si un paramètre d’état est inclus dans la demande, la même valeur doit apparaître dans la réponse. L’application doit vérifier que les valeurs d’état de la demande et de la réponse sont identiques. |
 
 ### <a name="error-response"></a>Réponse d’erreur
@@ -271,3 +276,32 @@ error=access_denied&error_description=the+user+canceled+the+authentication
 Pour obtenir une description des codes d’erreur éventuels et connaître les réponses client recommandées associées, consultez [Codes d’erreur pour les erreurs de point de terminaison d’autorisation](#error-codes-for-authorization-endpoint-errors).
 
 Une fois que vous avez obtenu un code d'autorisation et un jeton d'ID, vous pouvez connecter l’utilisateur et obtenir des jetons d’accès pour son compte. Pour connecter l’utilisateur, vous devez valider le jeton d'ID [exactement comme décrit](id-tokens.md#validating-an-id_token). Pour obtenir des jetons d’accès, suivez la procédure décrite dans la [documentation du flux de code OAuth](v2-oauth2-auth-code-flow.md#request-an-access-token).
+
+### <a name="calling-the-userinfo-endpoint"></a>Appel du point de terminaison UserInfo
+
+Consultez la [documentation relative à UserInfo](userinfo.md#calling-the-api) pour savoir comment appeler le point de terminaison UserInfo avec ce jeton.
+
+## <a name="send-a-sign-out-request"></a>Envoi d’une demande de déconnexion
+
+Si vous souhaitez déconnecter l’utilisateur de votre application, vous ne pouvez pas vous contenter de supprimer les cookies de votre application ou d’arrêter la session de l’utilisateur. Vous devez également rediriger l’utilisateur vers le point de terminaison de la plateforme d’identités Microsoft pour suivre la procédure de déconnexion. Si vous ne le faites pas, l’utilisateur pourra se réauthentifier auprès de votre application sans avoir à saisir de nouveau ses informations d’identification, puisqu’il disposera d’une session d’authentification unique valide avec le point de terminaison de la plateforme d’identités Microsoft.
+
+Vous pouvez rediriger l’utilisateur vers le `end_session_endpoint` répertorié dans le document de métadonnées OpenID Connect :
+
+```HTTP
+GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
+post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+```
+
+| Paramètre | Condition | Description |
+| ----------------------- | ------------------------------- | ------------ |
+| `post_logout_redirect_uri` | Recommandé | URL vers laquelle l’utilisateur est redirigé après sa déconnexion. Si le paramètre n’est pas inclus, un message générique généré par le point de terminaison de la plateforme d’identités Microsoft s’affiche sur l’écran de l’utilisateur. Cette URL doit correspondre exactement à l’un des URI de redirection inscrits pour votre application dans le portail d’inscription des applications. |
+
+## <a name="single-sign-out"></a>Déconnexion unique
+
+Lorsque vous redirigez l’utilisateur vers le point `end_session_endpoint`, le point de terminaison de la plateforme d’identités Microsoft efface la session de l’utilisateur dans le navigateur. Toutefois, l’utilisateur peut rester connecté à d’autres applications qui utilisent des comptes Microsoft pour s’authentifier. Pour permettre à ces applications de déconnecter simultanément l’utilisateur, le point de terminaison de la plateforme d’identités Microsoft envoie une requête HTTP GET au lien `LogoutUrl` inscrit de toutes les applications auxquelles l’utilisateur est actuellement connecté. Les applications doivent répondre à cette requête en effaçant toute session qui identifie l’utilisateur et en renvoyant une réponse `200`. Si vous souhaitez prendre en charge la déconnexion unique dans votre application, vous devez implémenter ce paramètre `LogoutUrl` dans le code de votre application. Vous pouvez définir le paramètre `LogoutUrl` à partir du portail d’inscription des applications.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+* Vérifier la [documentation relative à UserInfo](userinfo.md)
+* Découvrez comment [personnaliser les valeurs d’un jeton](active-directory-claims-mapping.md) en tirant parti des données de vos systèmes locaux. 
+* Découvrez comment [inclure des revendications standard supplémentaires dans des jetons](active-directory-optional-claims.md).  

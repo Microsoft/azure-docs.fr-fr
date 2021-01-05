@@ -5,14 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.date: 04/07/2020
-ms.openlocfilehash: de433d85c2f04a7140fbcb918730218ac3a05e54
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.topic: how-to
+ms.date: 10/20/2020
+ms.custom: devx-track-python
+ms.openlocfilehash: 302f1a081ca44cf6436f2c318b03e227f6640489
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80878627"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001964"
 ---
 # <a name="use-spark--hive-tools-for-visual-studio-code"></a>Utilisez les outils Spark et Hive pour Visual Studio Code
 
@@ -70,11 +71,11 @@ Pour un utilisateur de cloud national, suivez ces étapes pour configurer l’en
 
 ## <a name="connect-to-an-azure-account"></a>Se connecter à un compte Azure
 
-Avant de pouvoir envoyer des scripts à vos clusters à partir de Visual Studio Code, vous devez vous connecter à votre compte Azure ou lier un cluster. Utilisez les informations d’identification de nom d’utilisateur et de mot de passe Apache Ambari ou un compte joint au domaine. Suivez ces étapes pour vous connecter à Azure :
+Pour que vous puissiez envoyer des scripts à vos clusters à partir de Visual Studio Code, l’utilisateur a la possibilité de se connecter à un abonnement Azure ou de [lier un cluster HDInsight](#link-a-cluster). Utilisez le nom d’utilisateur/mot de passe Ambari ou les informations d’identification jointes au domaine de votre cluster ESP pour vous connecter à votre cluster HDInsight. Suivez ces étapes pour vous connecter à Azure :
 
 1. À partir de la barre de menus, accédez à **Afficher** > **Palette de commandes...** , puis entrez **Azure : Sign In** :
 
-    ![Outils Spark et Hive pour la connexion à Visual Studio Code](./media/hdinsight-for-vscode/hdinsight-for-vscode-extension-login.png)
+   ![Outils Spark et Hive pour la connexion à Visual Studio Code](./media/hdinsight-for-vscode/hdinsight-for-vscode-extension-login.png)
 
 2. Suivez les instructions de connexion pour vous connecter à Azure. Une fois que vous êtes connecté, le nom de votre compte Azure apparaît dans la barre d’état, en bas de la fenêtre Visual Studio Code.  
 
@@ -114,8 +115,10 @@ Vous pouvez lier un cluster normal à l’aide d’un nom d’utilisateur [Apach
 3. Entrez le point de terminaison Livy générique. Par exemple, http\://10.172.41.42:18080.
 
 4. Sélectionnez le type d’autorisation **De base** ou **Aucune**.  Si vous sélectionnez **De base** :  
-    &emsp;a. Entrez votre nom d’utilisateur Ambari (**admin** par défaut).  
-    &emsp;b. Entrez votre mot de passe Ambari.
+   
+   1. Entrez votre nom d’utilisateur Ambari (**admin** par défaut).  
+
+   2. Entrez votre mot de passe Ambari.
 
 5. Examinez l’affichage **OUTPUT** (SORTIE).
 
@@ -127,7 +130,7 @@ Vous pouvez lier un cluster normal à l’aide d’un nom d’utilisateur [Apach
 
 3. Examinez l’affichage **OUTPUT** (SORTIE). Cet affichage montre le ou les clusters liés et tous les clusters de votre abonnement Azure :
 
-    ![Définir une configuration de cluster par défaut](./media/hdinsight-for-vscode/list-cluster-result1.png)
+   ![Définir une configuration de cluster par défaut](./media/hdinsight-for-vscode/list-cluster-result1.png)
 
 ## <a name="set-the-default-cluster"></a>Définir le cluster par défaut
 
@@ -153,9 +156,9 @@ Avec les outils Spark et Hive pour Visual Studio Code, vous pouvez envoyer des r
 
 3. Copiez le code suivant et collez-le dans votre fichier Hive, puis enregistrez-le :
 
-    ```hiveql
-    SELECT * FROM hivesampletable;
-    ```
+   ```hiveql
+   SELECT * FROM hivesampletable;
+   ```
 
 4. [Connectez-vous](#connect-to-an-azure-account) à votre compte Azure ou liez un cluster si ce n’est déjà fait.
 
@@ -165,13 +168,16 @@ Avec les outils Spark et Hive pour Visual Studio Code, vous pouvez envoyer des r
 
    ![Résultat de requête interactive Apache Hive](./media/hdinsight-for-vscode/interactive-hive-result.png)
 
-    - Volet **RÉSULTATS** : Vous pouvez enregistrer le résultat complet dans un fichier CSV, JSON ou Excel dans un chemin local ou enregistrer seulement certaines lignes du résultat.
+   - Volet **RÉSULTATS** : Vous pouvez enregistrer le résultat complet dans un fichier CSV, JSON ou Excel dans un chemin local ou enregistrer seulement certaines lignes du résultat.
 
-    - Volet **MESSAGES** : Cliquez sur un numéro de **ligne** pour accéder à la première ligne du script en cours d’exécution.
+   - Volet **MESSAGES** : Cliquez sur un numéro de **ligne** pour accéder à la première ligne du script en cours d’exécution.
 
 ## <a name="submit-interactive-pyspark-queries"></a>Envoyer des requêtes PySpark interactives
 
-Pour envoyer des requêtes PySpark interactives, procédez comme suit :
+Les utilisateurs peuvent exécuter PySpark de manière interactive de plusieurs façons :
+
+### <a name="using-the-pyspark-interactive-command-in-py-file"></a>Commande interactive PySpark dans le fichier PY
+En utilisant la commande interactive PySpark pour envoyer les requêtes, suivez la procédure ci-dessous :
 
 1. Rouvrez le dossier **HDexample** évoqué [précédemment](#open-a-work-folder) s’il est fermé.  
 
@@ -193,31 +199,74 @@ Pour envoyer des requêtes PySpark interactives, procédez comme suit :
         print(sortedCollection[i])
    ```
 
-4. [Connectez-vous](#connect-to-an-azure-account) à votre compte Azure ou liez un cluster si ce n’est déjà fait.
+4. L’invite d’installation du noyau PySpark/Synapse Pyspark s’affiche en bas à droite de la fenêtre. Vous pouvez cliquer sur le bouton **Installer** pour continuer l’installation de PySpark/Synapse Pyspark, ou sur le bouton **Ignorer** pour ignorer cette étape.
 
-5. Sélectionnez l’ensemble du code, cliquez avec le bouton droit sur l’éditeur de script, puis sélectionnez **Spark: PySpark Interactive** pour envoyer la requête. Vous pouvez également utiliser le raccourci Ctrl+Alt+I.
+   ![Capture d’écran montrant une option permettant d’ignorer l’installation de PySpark.](./media/hdinsight-for-vscode/install-the-pyspark-kernel.png)
 
-   ![Menu contextuel pyspark interactive](./media/hdinsight-for-vscode/pyspark-interactive-right-click.png)
+5. Si vous avez besoin de l’installer ultérieurement, vous pouvez accéder à **Fichier** > **Préférence** > **Paramètres**, puis décocher **HDInsight : Activer Ignorer l’installation de PySpark** dans les paramètres. 
+    
+    ![Capture d’écran montrant l’option permettant d’activer l’installation de Pyspark.](./media/hdinsight-for-vscode/enable-skip-pyspark-installation.png)
 
-6. Si vous n’avez pas spécifié de cluster par défaut, sélectionnez le cluster. Après quelques instants, les résultats **Python Interactive** s’affichent sous un nouvel onglet. Les outils vous permettent également d’envoyer un bloc de code au lieu du fichier de script entier à partir du menu contextuel :
+6. Si l’installation réussit à l’étape 4, la zone de message « PySpark a été installé » s’affiche en bas à droite de la fenêtre. Cliquez sur le bouton **Recharger** pour recharger la fenêtre.
 
-   ![Fenêtre Python interactive dans PySpark Interactive](./media/hdinsight-for-vscode/pyspark-interactive-python-interactive-window.png)
+   ![PySpark a été installé](./media/hdinsight-for-vscode/pyspark-kernel-installed-successfully.png)
 
-7. Entrez **%%info**, puis appuyez sur Maj+Entrée pour afficher les informations sur le travail (facultatif) :
+7. Dans la barre de menus, accédez à **Afficher** > **Palette de commandes...** ou utilisez le raccourci **Maj + Ctrl + P**, puis entrez **Python : Sélectionnez Interpréteur pour démarrer le serveur Jupyter**.
 
-   ![informations travail d’affichage interactif pyspark](./media/hdinsight-for-vscode/pyspark-interactive-view-job-information.png)
+   ![sélectionner Interpréteur pour démarrer le serveur Jupyter](./media/hdinsight-for-vscode/select-interpreter-to-start-jupyter-server.png)
 
-8. L’outil prend également en charge la requête **Spark SQL** :
+8. Sélectionnez l’option Python ci-dessous.
 
-   ![Affichage des résultats dans PySpark Interactive](./media/hdinsight-for-vscode/pyspark-ineteractive-select-result.png)
+   ![choisit l’option ci-dessous](./media/hdinsight-for-vscode/choose-the-below-option.png)
+    
+9. Dans la barre de menus, accédez à **Afficher** > **Palette de commandes...** ou utilisez le raccourci **Maj + Ctrl + P**, puis entrez **Développeur : Recharger la fenêtre**.
 
-   L’état de l’envoi s’affiche à gauche de la barre d’état inférieure lors de l’exécution des requêtes. N’envoyez pas d’autres requêtes lorsque l’état est **PySpark Kernel (busy)** .  
+   ![recharger la fenêtre](./media/hdinsight-for-vscode/reload-window.png)
 
-   > [!NOTE]
-   >
-   > Si la case **Python Extension Enabled** n’est pas activée dans les paramètres (elle est activée par défaut), les résultats d’interaction PySpark envoyés utilisent l’ancienne fenêtre :
-   >
-   > ![Extension Python dans Pyspark Interactive désactivée](./media/hdinsight-for-vscode/pyspark-interactive-python-extension-disabled.png)
+10. [Connectez-vous](#connect-to-an-azure-account) à votre compte Azure ou liez un cluster si ce n’est déjà fait.
+
+11. Sélectionnez l’ensemble du code, cliquez avec le bouton droit sur l’éditeur de script, puis sélectionnez **Spark: PySpark Interactive/Synapse : PySpark Interactive** pour envoyer la requête. 
+
+    ![Menu contextuel pyspark interactive](./media/hdinsight-for-vscode/pyspark-interactive-right-click.png)
+
+12. Si vous n’avez pas spécifié de cluster par défaut, sélectionnez le cluster. Après quelques instants, les résultats **Python Interactive** s’affichent sous un nouvel onglet. Cliquez sur PySpark pour choisir le noyau **PySpark/Synapse Pyspark**. Le code s’exécute sans erreur. Si vous souhaitez basculer vers le noyau Synapse Pyspark, il est recommandé de désactiver la configuration automatique dans le portail Azure. Dans le cas contraire, la relance du cluster et la définition du noyau de Synapse peuvent prendre un certain temps lors de la première utilisation. Les outils vous permettent également d’envoyer un bloc de code au lieu du fichier de script entier à partir du menu contextuel :
+
+    ![Fenêtre Python interactive dans PySpark Interactive](./media/hdinsight-for-vscode/pyspark-interactive-python-interactive-window.png)
+
+13. Entrez **%%info**, puis appuyez sur Maj+Entrée pour afficher les informations sur le travail (facultatif) :
+
+    ![informations travail d’affichage interactif pyspark](./media/hdinsight-for-vscode/pyspark-interactive-view-job-information.png)
+
+L’outil prend également en charge la requête **Spark SQL** :
+
+  ![Affichage des résultats interactifs PySpark](./media/hdinsight-for-vscode/pyspark-ineteractive-select-result.png)
+
+
+### <a name="perform-interactive-query-in-py-file-using-a--comment"></a>Requête interactive dans le fichier PY à l’aide d’un commentaire #%%
+
+1. Ajoutez **#%%** avant le code Py pour bénéficier de l’expérience de notebook.
+
+   ![Ajout de #%%](./media/hdinsight-for-vscode/run-cell.png)
+
+2. Cliquer sur **Exécuter la cellule**. Au bout de quelques instants, les résultats Python Interactive s’affichent dans un nouvel onglet. Cliquez sur PySpark pour faire basculer le noyau vers PySpark/Synapse PySpark, puis cliquez à nouveau sur **Exécuter la cellule** pour que le code s’exécute correctement.
+
+   ![Résultats Exécuter la cellule](./media/hdinsight-for-vscode/run-cell-get-results.png)
+
+## <a name="leverage-ipynb-support-from-python-extension"></a>Prise en charge IPYNB de l’extension Python
+
+1. Vous pouvez créer un notebook Jupyter par commande à partir de la palette de commandes ou en créant un fichier .ipynb dans votre espace de travail. Pour plus d’informations, consultez [Utilisation de Jupyter Notebook dans Visual Studio Code](https://code.visualstudio.com/docs/python/jupyter-support).
+
+2. Cliquez sur le bouton **Exécuter la cellule**, suivez les invites pour **Définir le pool Spark par défaut** (il est vivement conseillé de définir un cluster/pool par défaut à chaque ouverture d’un notebook), puis **Rechargez** la fenêtre.
+
+   ![définir le pool Spark par défaut et recharger](./media/hdinsight-for-vscode/set-the-default-spark-pool-and-reload.png)
+
+3. Cliquez sur PySpark pour choisir le noyau **PySpark/Synapse PySpark**, puis cliquez sur **Exécuter la cellule**. Au bout d’un certain temps, le résultat s’affiche.
+
+   ![Résultats Exécuter IPYNB](./media/hdinsight-for-vscode/run-ipynb-file-results.png)
+
+
+> [!NOTE]
+> La version 2020.5.78807 de ms-python et les versions ultérieures ne sont pas prises en charge sur cette extension. Il s’agit d’un [problème connu](#known-issues).
 
 ## <a name="submit-pyspark-batch-job"></a>Envoyer le travail de traitement par lots PySpark
 
@@ -227,36 +276,50 @@ Pour envoyer des requêtes PySpark interactives, procédez comme suit :
 
 3. Copiez le code suivant et collez-le dans le fichier de script :
 
-    ```python
-    from __future__ import print_function
-    import sys
-    from operator import add
-    from pyspark.sql import SparkSession
-    if __name__ == "__main__":
-        spark = SparkSession\
-            .builder\
-            .appName("PythonWordCount")\
-            .getOrCreate()
-    
-        lines = spark.read.text('/HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv').rdd.map(lambda r: r[0])
-        counts = lines.flatMap(lambda x: x.split(' '))\
-                    .map(lambda x: (x, 1))\
-                    .reduceByKey(add)
-        output = counts.collect()
-        for (word, count) in output:
-            print("%s: %i" % (word, count))
-        spark.stop()
-    ```
+   ```python
+   from __future__ import print_function
+   import sys
+   from operator import add
+   from pyspark.sql import SparkSession
+   if __name__ == "__main__":
+       spark = SparkSession\
+           .builder\
+           .appName("PythonWordCount")\
+           .getOrCreate()
+   
+       lines = spark.read.text('/HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv').rdd.map(lambda r: r[0])
+       counts = lines.flatMap(lambda x: x.split(' '))\
+                  .map(lambda x: (x, 1))\
+                   .reduceByKey(add)
+       output = counts.collect()
+       for (word, count) in output:
+           print("%s: %i" % (word, count))
+       spark.stop()
+   ```
 
 4. [Connectez-vous](#connect-to-an-azure-account) à votre compte Azure ou liez un cluster si ce n’est déjà fait.
 
-5. Cliquez avec le bouton droit sur l’éditeur de script, puis sélectionnez **Spark: PySpark Batch**, ou utilisez le raccourci clavier Ctrl+Alt+H.
+5. Cliquez avec le bouton droit sur l’éditeur de script, puis sélectionnez **Spark: PySpark Batch** ou **Synapse: PySpark Batch** _.
 
-6. Sélectionnez un cluster auquel envoyer le travail PySpark :
+6. Sélectionnez un cluster ou un pool Spark auquel envoyer le travail PySpark :
 
    ![Résultat de l’envoi du travail Python](./media/hdinsight-for-vscode/submit-pythonjob-result.png)
 
-Une fois que vous avez envoyé un travail Python, les journaux d’envoi s’affichent dans la fenêtre **OUTPUT** (SORTIE) de Visual Studio Code. Les URL des interfaces utilisateur Spark et Yarn s’affichent également. Vous pouvez ouvrir l’URL dans un navigateur web pour suivre l’état du travail.
+Une fois que vous avez envoyé un travail Python, les journaux d'envoi s'affichent dans la fenêtre _ *OUTPUT** (SORTIE) de Visual Studio Code. Les URL des interfaces utilisateur Spark et Yarn s’affichent également. Si vous soumettez le programme de traitement par lots à un pool Apache Spark, l’URL de l’interface utilisateur de l’historique Spark et l’URL de l’interface utilisateur de l’application de travail Spark sont également affichées. Vous pouvez ouvrir l’URL dans un navigateur web pour suivre l’état du travail.
+
+## <a name="integrate-with-hdinsight-identity-broker-hib"></a>Effectuer l’intégration au broker d’ID HDInsight
+
+### <a name="connect-to-your-hdinsight-esp-cluster-with-id-broker-hib"></a>Se connecter à votre cluster HDInsight ESP avec le broker d’ID
+
+Vous pouvez suivre les étapes habituelles pour vous connecter à l’abonnement Azure afin de vous connecter à votre cluster HDInsight ESP avec le broker d’ID. Après vous être connecté, vous verrez la liste des clusters dans Azure Explorer. Pour plus d’instructions, consultez [Se connecter à votre cluster HDInsight](#connect-to-an-azure-account).
+
+### <a name="run-a-hivepyspark-job-on-an-hdinsight-esp-cluster-with-id-broker-hib"></a>Exécution d’un travail Hive/PySpark sur un cluster HDInsight ESP avec broker d’ID (HIB)
+
+Pour exécuter un travail Hive, vous pouvez suivre la procédure habituelle d’envoi d’un travail à un cluster HDInsight ESP avec le broker d’ID (HIB). Pour plus d’instructions, consultez [Envoi de requêtes Hive interactives et de scripts de commandes par lot Hive](#submit-interactive-hive-queries-and-hive-batch-scripts).
+
+Pour exécuter un travail PySpark interactif, vous pouvez suivre la procédure habituelle d’envoi d’un travail à un cluster HDInsight ESP avec le broker d’ID (HIB). Pour plus d’instructions, consultez [Envoi de requêtes PySpark interactives](#submit-interactive-pyspark-queries).
+
+Pour exécuter un programme de traitement par lots PySpark, vous pouvez suivre la procédure habituelle d’envoi d’un travail à un cluster HDInsight ESP avec le broker d’ID (HIB). Pour plus d’instructions, consultez [Envoi d’un programme de traitement par lots PySpark](#submit-pyspark-batch-job).
 
 ## <a name="apache-livy-configuration"></a>Configuration d’Apache Livy
 
@@ -264,55 +327,60 @@ La configuration [Apache Livy](https://livy.incubator.apache.org/) est prise en 
 
 <a id="triggerlivyconf"></a>**Comment déclencher une configuration Livy**
 
-Méthode 1  
+### <a name="method-1"></a>Méthode 1  
+
 1. Dans la barre de menus, accédez à **Fichier** > **Préférences** > **Paramètres**.
 2. Dans la zone **Paramètres de recherche**, entrez **Envoi de travail HDInsight : Livy Conf** (Envoi de travail HDInsight : configuration de Livy).  
 3. Sélectionnez **Modifier dans settings.json** pour le résultat de recherche approprié.
 
-Méthode 2 - Envoyez un fichier. Vous constatez que le dossier `.vscode` est ajouté automatiquement au dossier de travail. Vous pouvez voir la configuration Livy en sélectionnant **.vscode\settings.json**.
+### <a name="method-2"></a>Méthode 2
 
-+ Paramètres du projet :
+Envoyez un fichier. Vous constatez que le dossier `.vscode` est ajouté automatiquement au dossier de travail. Vous pouvez voir la configuration Livy en sélectionnant **.vscode\settings.json**.
 
-    ![Configuration d’Apache Livy HDInsight](./media/hdinsight-for-vscode/hdi-apache-livy-config.png)
+- Paramètres du projet :
 
-    >[!NOTE]
-    >Pour les paramètres **driverMemory** et **executorMemory**, définissez la valeur et l’unité. Par exemple : 1 g ou 1 024 m.
+  ![Configuration d’Apache Livy HDInsight](./media/hdinsight-for-vscode/hdi-apache-livy-config.png)
 
-+ Configurations Livy prises en charge :
+  >[!NOTE]
+  >Pour les paramètres **driverMemory** et **executorMemory**, définissez la valeur et l’unité. Par exemple : 1 g ou 1 024 m.
 
-    Corps de la requête **POST /batches**
+- Configurations Livy prises en charge :
 
-    | name | description | type |
-    | --- | --- | --- |
-    | fichier | Fichier contenant l’application à exécuter | Chemin (obligatoire) |
-    | proxyUser | Utilisateur dont l’identité doit être empruntée lors de l’exécution du travail | String |
-    | ClassName | Classe principale Java/Spark de l’application | String |
-    | args | Arguments de ligne de commande pour l’application | Liste de chaînes |
-    | jars | Fichiers JAR à utiliser dans cette session | Liste de chaînes | 
-    | pyFiles | Fichiers Python à utiliser dans cette session | Liste de chaînes |
-    | files | Fichiers à utiliser dans cette session | Liste de chaînes |
-    | driverMemory | Quantité de mémoire à utiliser pour le processus du pilote | String |
-    | driverCores | Nombre de cœurs à utiliser pour le processus du pilote | Int |
-    | executorMemory | Quantité de mémoire à utiliser par processus d’exécuteur | String |
-    | executorCores | Nombre de cœurs à utiliser pour chaque exécuteur | Int |
-    | numExecutors | Nombre d’exécuteurs à lancer pour cette session | Int |
-    | archives | Archives à utiliser dans cette session | Liste de chaînes |
-    | queue | Nom de la file d’attente YARN vers laquelle effectuer l’envoi| String |
-    | name | Nom de cette session | String |
-    | conf | Propriétés de configuration de Spark | Mappage clé=valeur |
+  **POST /batches**
+  
+  **Corps de la demande**
 
-    Corps de la réponse   L’objet Batch créé.
+  | name | description | type |
+  | --- | --- | --- |
+  | fichier | Fichier contenant l’application à exécuter | Chemin (obligatoire) |
+  | proxyUser | Utilisateur dont l’identité doit être empruntée lors de l’exécution du travail | String |
+  | ClassName | Classe principale Java/Spark de l’application | String |
+  | args | Arguments de ligne de commande pour l’application | Liste de chaînes |
+  | jars | Fichiers JAR à utiliser dans cette session | Liste de chaînes | 
+  | pyFiles | Fichiers Python à utiliser dans cette session | Liste de chaînes |
+  | files | Fichiers à utiliser dans cette session | Liste de chaînes |
+  | driverMemory | Quantité de mémoire à utiliser pour le processus du pilote | String |
+  | driverCores | Nombre de cœurs à utiliser pour le processus du pilote | Int |
+  | executorMemory | Quantité de mémoire à utiliser par processus d’exécuteur | String |
+  | executorCores | Nombre de cœurs à utiliser pour chaque exécuteur | Int |
+  | numExecutors | Nombre d’exécuteurs à lancer pour cette session | Int |
+  | archives | Archives à utiliser dans cette session | Liste de chaînes |
+  | queue | Nom de la file d’attente YARN vers laquelle effectuer l’envoi| String |
+  | name | Nom de cette session | String |
+  | conf | Propriétés de configuration de Spark | Mappage clé=valeur |
 
-    | name | description | type |
-    | --- | ---| --- |
-    | id | ID de la session | Int |
-    | appId | ID d’application de cette session | String |
-    | appInfo | Informations détaillées sur l’application | Mappage clé=valeur |
-    | log | Lignes du journal | Liste de chaînes |
-    | state |État du lot | String |
+  **Corps de la réponse** : l’objet Batch créé
 
-    > [!NOTE]
-    > La configuration Livy attribuée s’affiche dans le volet de sortie quand vous envoyez le script.
+  | name | description | type |
+  | --- | ---| --- |
+  | id | ID de la session | Int |
+  | appId | ID d’application de cette session | String |
+  | appInfo | Informations détaillées sur l’application | Mappage clé=valeur |
+  | log | Lignes du journal | Liste de chaînes |
+  | state |État du lot | String |
+
+  > [!NOTE]
+  > La configuration Livy attribuée s’affiche dans le volet de sortie quand vous envoyez le script.
 
 ## <a name="integrate-with-azure-hdinsight-from-explorer"></a>Intégrer avec Azure HDInsight à partir de l’Explorateur
 
@@ -339,15 +407,16 @@ Vous pouvez voir un aperçu de la table Hive directement dans vos clusters à l�
    Vous pouvez enregistrer le résultat complet dans un fichier CSV, JSON ou Excel dans un chemin local ou enregistrer seulement certaines lignes du résultat.
 
 - Volet MESSAGES
-   1. Quand le nombre de lignes dans la table est supérieur à 100, le message suivant s’affiche : « Les 100 premières lignes sont affichées dans la table Hive ».
-   2. Quand le nombre de lignes dans la table est inférieur ou égal à 100, le message suivant s’affiche : « 60 lignes sont affichées dans la table Hive ».
-   3. Quand la table est vide, le message suivant s’affiche : « `0 rows are displayed for Hive table.` »
 
-        >[!NOTE]
-        >
-        >Sous Linux, installez xclip pour autoriser la copie des données de table.
-        >
-        >![Spark et Hive pour Visual Studio Code dans Linux](./media/hdinsight-for-vscode/hdinsight-for-vscode-preview-linux-install-xclip.png)
+  1. Quand le nombre de lignes dans la table est supérieur à 100, le message suivant s’affiche : « Les 100 premières lignes sont affichées dans la table Hive ».
+  2. Quand le nombre de lignes dans la table est inférieur ou égal à 100, le message suivant s’affiche : « 60 lignes sont affichées dans la table Hive ».
+  3. Quand la table est vide, le message suivant s’affiche : « `0 rows are displayed for Hive table.` »
+
+     >[!NOTE]
+     >
+     >Sous Linux, installez xclip pour autoriser la copie des données de table.
+     >
+     >![Spark et Hive pour Visual Studio Code dans Linux](./media/hdinsight-for-vscode/hdinsight-for-vscode-preview-linux-install-xclip.png)
 
 ## <a name="additional-features"></a>Fonctionnalités supplémentaires
 
@@ -364,7 +433,7 @@ Les fonctionnalités suivantes sont également prises en charge par Spark et Hiv
 
 ## <a name="reader-only-role"></a>Rôle Lecteur seul
 
-Les utilisateurs auxquels le rôle de lecteur uniquement a été attribué pour le cluster ne peuvent pas envoyer de travaux au cluster HDInsight, ni visualiser la base de données Hive. Vous devez contacter l’administrateur du cluster afin de mettre à niveau votre rôle pour être [**opérateur de cluster HDInsight**](https://docs.microsoft.com/azure/hdinsight/hdinsight-migrate-granular-access-cluster-configurations#add-the-hdinsight-cluster-operator-role-assignment-to-a-user) dans le [portail Azure](https://ms.portal.azure.com/). Si vous disposez d’informations d’identification Ambari valides, vous pouvez lier manuellement le cluster en suivant les instructions ci-après.
+Les utilisateurs auxquels le rôle de lecteur uniquement a été attribué pour le cluster ne peuvent pas envoyer de travaux au cluster HDInsight, ni visualiser la base de données Hive. Vous devez contacter l’administrateur du cluster afin de mettre à niveau votre rôle pour être [**opérateur de cluster HDInsight**](./hdinsight-migrate-granular-access-cluster-configurations.md#add-the-hdinsight-cluster-operator-role-assignment-to-a-user) dans le [portail Azure](https://portal.azure.com/). Si vous disposez d’informations d’identification Ambari valides, vous pouvez lier manuellement le cluster en suivant les instructions ci-après.
 
 ### <a name="browse-the-hdinsight-cluster"></a>Parcourir le cluster HDInsight  
 
@@ -383,11 +452,11 @@ Quand vous envoyez un travail à un cluster HDInsight, vous êtes invité à lie
 
    ![Outils Spark et Hive pour le mot de passe Visual Studio Code](./media/hdinsight-for-vscode/hdi-azure-hdinsight-azure-password.png)
 
-  > [!NOTE]
-  >
-  >Vous pouvez utiliser `Spark / Hive: List Cluster` pour vérifier le cluster lié :
-  >
-  >![Outils Spark et Hive pour lecteur lié Visual Studio Code](./media/hdinsight-for-vscode/list-cluster-result1.png)
+   > [!NOTE]
+   >
+   >Vous pouvez utiliser `Spark / Hive: List Cluster` pour vérifier le cluster lié :
+   >
+   >![Outils Spark et Hive pour lecteur lié Visual Studio Code](./media/hdinsight-for-vscode/list-cluster-result1.png)
 
 ## <a name="azure-data-lake-storage-gen2"></a>Azure Data Lake Storage Gen2
 
@@ -416,6 +485,14 @@ Envoyez un travail à un cluster HDInsight à l’aide de Data Lake Storage Gen2
 ## <a name="sign-out"></a>Se déconnecter  
 
 À partir de la barre de menus, accédez à **Afficher** > **Palette de commandes**, puis entrez **Azure: Se déconnecter**.
+
+## <a name="known-issues"></a>Problèmes connus
+
+### <a name="ms-python-2020578807-version-is-not-supported-on-this-extention"></a>La version 2020.5.78807 de ms-python et les versions ultérieures ne sont pas prises en charge sur cette extension 
+
+« Échec de la connexion au notebook Jupyter » est un problème connu pour la version 2020.5.78807 de Python et les versions ultérieures. Nous recommandons aux utilisateurs d’opter pour la version **[2020.4.76186](https://github.com/microsoft/vscode-python/releases/download/2020.4.76186/ms-python-release.vsix)** de ms-python pour éviter ce problème.
+
+![Problèmes connus](./media/hdinsight-for-vscode/known-issue.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

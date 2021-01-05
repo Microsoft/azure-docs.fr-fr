@@ -6,18 +6,25 @@ ms.author: ofmanor
 ms.topic: reference
 ms.date: 03/16/2020
 ms.subservice: alerts
-ms.openlocfilehash: beb47f961c6f24453bd49aa5807c9d801fc199a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d86c6d8b67546aede86a3fc3c905f6feb40d92db
+ms.sourcegitcommit: dc68a2c11bae2e9d57310d39fbed76628233fd7f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80132328"
+ms.lasthandoff: 09/28/2020
+ms.locfileid: "91403413"
 ---
-# <a name="troubleshooting-problems-in-azure-monitor-alerts"></a>Résolution des problèmes relatifs aux alertes Azure Monitor 
+# <a name="troubleshooting-problems-in-azure-monitor-alerts"></a>Résolution des problèmes relatifs aux alertes Azure Monitor
 
-Cet article décrit les problèmes courants liés aux alertes Azure Monitor.
+Cet article décrit les problèmes courants liés aux alertes et notifications Azure Monitor.
 
 Azure Monitor vous avertit de façon proactive lorsque des conditions significatives sont détectées dans vos données de surveillance. Elles permettent d’identifier et de résoudre les problèmes avant que les utilisateurs de votre système ne les remarquent. Pour plus d’informations sur les alertes, consultez [Vue d’ensemble des alertes dans Microsoft Azure](alerts-overview.md).
+
+Si vous rencontrez un problème lors du déclenchement d’une alerte ou si vous ne parvenez pas à déclencher une alerte, consultez les articles ci-dessous. Vous pouvez consulter les alertes déclenchées dans le portail Azure.
+
+- [Résolution des alertes de métrique Azure Monitor dans Microsoft Azure](alerts-troubleshoot-metric.md)  
+- [Résolution des alertes de journal Azure Monitor dans Microsoft Azure](alerts-troubleshoot-metric.md)
+
+Si l’alerte se déclenche comme prévu en fonction du portail Azure, mais que les notifications qui conviennent n’interviennent pas, utilisez les informations contenues dans la suite de cet article pour y remédier.
 
 ## <a name="action-or-notification-on-my-alert-did-not-work-as-expected"></a>L’action ou la notification sur mon alerte n’a pas fonctionné comme prévu
 
@@ -25,11 +32,11 @@ Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous
 
 ## <a name="did-not-receive-expected-email"></a>L’e-mail attendu n’a pas été reçu
 
-Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous n’avez pas reçu l’e-mail que vous avez configuré, effectuez les vérifications suivantes : 
+Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous n’avez pas reçu l’e-mail que vous avez configuré, effectuez les vérifications suivantes :
 
-1. **L’e-mail a-t-il été supprimé par une [règle d’action](alerts-action-rules.md)** ? 
+1. **L’e-mail a-t-il été supprimé par une [règle d’action](alerts-action-rules.md)** ?
 
-    Vérifiez en cliquant sur l’alerte déclenchée dans le portail, puis examinez l’onglet Historique à la recherche des [groupes d’actions](action-groups.md) supprimés : 
+    Vérifiez en cliquant sur l’alerte déclenchée dans le portail, puis examinez l’onglet Historique à la recherche des [groupes d’actions](action-groups.md) supprimés :
 
     ![Historique de suppression des règles d’action d’alerte](media/alerts-troubleshoot/history-action-rule.png)
 
@@ -44,20 +51,20 @@ Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous
       - azureemail-noreply@microsoft.com
       - alerts-noreply@mail.windowsazure.com
 
-    Il est courant que les listes de distribution internes ou les listes de diffusion bloquent les e-mails des adresses e-mail externes. Vous devez mettre en liste verte les adresses e-mail ci-dessus.  
-    À des fins de test, ajoutez une adresse de messagerie professionnelle ordinaire (pas une liste de diffusion) au groupe d’actions et vérifiez si les alertes arrivent à cet e-mail. 
+    Il est courant que les listes de distribution internes ou les listes de diffusion bloquent les e-mails des adresses e-mail externes. Vous devez autoriser le courrier à partir des adresses e-mail ci-dessus.  
+    À des fins de test, ajoutez une adresse de messagerie professionnelle ordinaire (pas une liste de diffusion) au groupe d’actions et vérifiez si les alertes arrivent à cet e-mail.
 
-1. **L’e-mail a-t-il été traité par des règles de boîte de réception ou un filtre antispam ?** 
+1. **L’e-mail a-t-il été traité par des règles de boîte de réception ou un filtre antispam ?**
 
     Vérifiez qu’il n’existe pas de règles de boîte de réception qui suppriment ces messages ou les déplacent dans un autre dossier. Par exemple, les règles de boîte de réception peuvent intercepter des expéditeurs spécifiques ou des mots spécifiques dans l’objet.
 
     Vérifiez aussi :
-    
-      - les paramètres de courrier indésirable de votre client de messagerie (comme Outlook ou Gmail)
-      - les limites sur l’expéditeur/paramètres de courrier indésirable/paramètres de mise en quarantaine de votre serveur de messagerie (comme Exchange, Office 365 ou G-suite)
-      - les paramètres de votre appliance de sécurité de messagerie, le cas échéant (par exemple, Barracuda ou Cisco). 
 
-1. **Avez-vous été désabonné par erreur du groupe d’actions ?** 
+   - les paramètres de courrier indésirable de votre client de messagerie (comme Outlook ou Gmail)
+      - les limites sur l’expéditeur/paramètres de courrier indésirable/paramètres de mise en quarantaine de votre serveur de messagerie (comme Exchange, Microsoft 365 ou G-suite)
+      - les paramètres de votre appliance de sécurité de messagerie, le cas échéant (par exemple, Barracuda ou Cisco).
+
+1. **Avez-vous été désabonné par erreur du groupe d’actions ?**
 
     Les e-mails d’alerte fournissent un lien pour se désabonner du groupe d’actions. Pour vérifier si vous avez accidentellement annulé votre abonnement à ce groupe d’actions, vous pouvez :
 
@@ -71,7 +78,7 @@ Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous
 
     Pour vous abonner à nouveau : utilisez le lien figurant dans le message de confirmation de résiliation d’abonnement que vous avez reçu ou supprimez l’adresse de messagerie du groupe d’actions, puis rajoutez-la. 
  
-1. **Avez-vous subi une restriction en raison d’un grand nombre d’e-mails allant à une seule adresse e-mail ?** 
+1. **Avez-vous subi une restriction en raison d’un grand nombre d’e-mails allant à une seule adresse e-mail ?**
 
     L’adresse de messagerie est soumise à une [restriction](alerts-rate-limiting.md) de 100 e-mails maximum toutes les heures pour chaque adresse e-mail. Si vous dépassez ce seuil, les notifications par e-mail en trop sont supprimées.  Vérifiez si vous avez reçu un message indiquant que votre adresse e-mail a été temporairement limitée : 
  
@@ -83,7 +90,7 @@ Si vous pouvez voir une alerte déclenchée dans le portail Azure, mais que vous
 
 Si vous pouvez voir une alerte déclenchée dans le portail, mais que vous n’avez pas reçu le SMS, l’appel vocal ou la notification Push, effectuez les vérifications suivantes : 
 
-1. **L’action a-t-elle été supprimée par une [règle d’action ](alerts-action-rules.md)?** 
+1. **L’action a-t-elle été supprimée par une [règle d’action ](alerts-action-rules.md)?**
 
     Vérifiez en cliquant sur l’alerte déclenchée dans le portail, puis examinez l’onglet Historique à la recherche des [groupes d’actions](action-groups.md) supprimés : 
 
@@ -93,14 +100,14 @@ Si vous pouvez voir une alerte déclenchée dans le portail, mais que vous n’a
  
 1. **SMS/voix :  Votre numéro de téléphone est-il correct ?**
 
-   Vérifiez l’action SMS pour rechercher des fautes de frappe dans l’indicatif du pays ou le numéro de téléphone. 
+   Vérifiez l’action SMS pour rechercher des fautes de frappe dans l’indicatif du pays ou le numéro de téléphone.
  
-1. **SMS/voix : votre débit est-il limité ?** 
+1. **SMS/voix : votre débit est-il limité ?**
 
-    Les appels SMS et vocaux sont limités à une seule notification toutes les cinq minutes par numéro de téléphone. Si vous dépassez ce seuil, les notifications sont abandonnées. 
+    Les appels SMS et vocaux sont limités à une seule notification toutes les cinq minutes par numéro de téléphone. Si vous dépassez ce seuil, les notifications sont abandonnées.
 
-      - Appel vocal : vérifiez l’historique des appels et regardez si vous avez un appel différent d’Azure au cours des cinq minutes précédentes. 
-      - SMS : vérifiez dans votre historique SMS s’ils contiennent un message indiquant que votre numéro de téléphone fait l’objet d’une restriction. 
+      - Appel vocal : vérifiez l’historique des appels et regardez si vous avez un appel différent d’Azure au cours des cinq minutes précédentes.
+      - SMS : vérifiez dans votre historique SMS s’ils contiennent un message indiquant que votre numéro de téléphone fait l’objet d’une restriction.
 
     Si vous souhaitez recevoir un grand nombre de notifications sans limitation du taux, envisagez d’utiliser une autre action, comme un webhook, une application logique, une fonction Azure ou un runbook Automation : aucune de ces solutions n’est limitée en volume. 
  
@@ -110,29 +117,29 @@ Si vous pouvez voir une alerte déclenchée dans le portail, mais que vous n’a
 
 1. **Avez-vous bloqué accidentellement les notifications sur votre téléphone ?**
 
-   La plupart des téléphones mobiles vous permettent de bloquer les appels ou SMS de numéros de téléphone ou de codes courts spécifiques, ou de bloquer les notifications Push émanant d’applications spécifiques (telles que les applications mobiles Azure). Pour vérifier si vous avez bloqué accidentellement les notifications sur votre téléphone, recherchez la documentation spécifique à votre système d’exploitation et votre modèle de téléphone, ou testez un autre appareil et un autre numéro de téléphone. 
+   La plupart des téléphones mobiles vous permettent de bloquer les appels ou SMS de numéros de téléphone ou de codes courts spécifiques, ou de bloquer les notifications Push émanant d’applications spécifiques (telles que les applications mobiles Azure). Pour vérifier si vous avez bloqué accidentellement les notifications sur votre téléphone, recherchez la documentation spécifique à votre système d’exploitation et votre modèle de téléphone, ou testez un autre appareil et un autre numéro de téléphone.
 
 ## <a name="expected-another-type-of-action-to-trigger-but-it-did-not"></a>Un autre type d’action à déclencher était attendu, mais cela ne s’est pas produit 
+   
+Si vous pouvez voir une alerte déclenchée dans le portail, mais que son action configurée ne s’est pas déclenchée, procédez comme suit :
 
-Si vous pouvez voir une alerte déclenchée dans le portail, mais que son action configurée ne s’est pas déclenchée, procédez comme suit : 
+1. **L’action a-t-elle été supprimée par une règle d’action ?**
 
-1. **L’action a-t-elle été supprimée par une règle d’action ?** 
-
-    Vérifiez en cliquant sur l’alerte déclenchée dans le portail, puis examinez l’onglet Historique à la recherche des [groupes d’actions](action-groups.md) supprimés : 
+    Vérifiez en cliquant sur l’alerte déclenchée dans le portail, puis examinez l’onglet Historique à la recherche des [groupes d’actions](action-groups.md) supprimés :
 
     ![Historique de suppression des règles d’action d’alerte](media/alerts-troubleshoot/history-action-rule.png)
  
-    Si cela était involontaire, vous pouvez modifier, désactiver ou supprimer la règle d’action. 
+    Si cela était involontaire, vous pouvez modifier, désactiver ou supprimer la règle d’action.
 
 1. **Un webhook a-t-il été déclenché ?**
 
     1. **Les adresses IP source ont-elles été bloquées ?**
     
-       Créez une liste verte des [adresses IP](action-groups.md#action-specific-information) à partir desquelles le webhook sera appelé.
+       Ajoutez les [adresses IP](action-groups.md#action-specific-information) à partir desquelles le webhook sera appelé à votre liste d’adresses IP autorisées.
 
     1. **Votre point de terminaison webhook fonctionne-t-il correctement ?**
 
-       Vérifiez si le point de terminaison du webhook que vous avez configuré est correct et si le point de terminaison fonctionne correctement. Vérifiez vos journaux de webhook ou instrumentez son code pour pouvoir l’examiner (par exemple, enregistrez la charge utile entrante). 
+       Vérifiez si le point de terminaison du webhook que vous avez configuré est correct et si le point de terminaison fonctionne correctement. Vérifiez vos journaux de webhook ou instrumentez son code pour pouvoir l’examiner (par exemple, enregistrez la charge utile entrante).
 
     1. **Appelez-vous Slack ou Microsoft Teams ?**  
     Chacun de ces points de terminaison attend un format JSON spécifique. Suivez [ces instructions](action-groups-logic-app.md) pour configurer une action d’application logique à la place.
@@ -234,13 +241,13 @@ Si vous avez reçu une erreur lors de la tentative de création, de mise à jour
 
 1. **Avez-vous reçu une erreur d’autorisation ?**  
 
-    Vous devez disposer du  [rôle intégré Contributeur d’analyse](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) ou des autorisations spécifiques liées aux règles et aux alertes d’action.
+    Vous devez disposer du  [rôle intégré Contributeur d’analyse](../../role-based-access-control/built-in-roles.md#monitoring-contributor) ou des autorisations spécifiques liées aux règles et aux alertes d’action.
 
 1. **Avez-vous vérifié les paramètres de la règle d’action ?**  
 
-    Consultez la [documentation de la règle d’action](alerts-action-rules.md) ou la commande [PowerShell Set-AzActionRule de la règle d’action](https://docs.microsoft.com/powershell/module/az.alertsmanagement/Set-AzActionRule?view=azps-3.5.0). 
+    Consultez la [documentation de la règle d’action](alerts-action-rules.md) ou la commande [PowerShell Set-AzActionRule de la règle d’action](/powershell/module/az.alertsmanagement/set-azactionrule?view=azps-3.5.0). 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Si vous utilisez une alerte de journal, consultez la section [Résolution des alertes de journal](alert-log-troubleshoot.md).
+- Si vous utilisez une alerte de journal, consultez la section [Résolution des alertes de journal](./alerts-troubleshoot-log.md).
 - Revenez au [portail Azure](https://portal.azure.com) pour vérifier si vous avez résolu votre problème avec les conseils ci-dessus 

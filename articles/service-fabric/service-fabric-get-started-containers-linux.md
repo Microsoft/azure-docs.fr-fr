@@ -3,19 +3,20 @@ title: Créer une application de conteneur Azure Service Fabric sous Linux
 description: Créez votre première application de conteneur Linux sur Microsoft Azure Service Fabric. Concevez une image Docker avec votre application, envoyez l’image vers un registre de conteneurs, créez et déployez une application de conteneur Service Fabric.
 ms.topic: conceptual
 ms.date: 1/4/2019
-ms.openlocfilehash: f2f8c7884323667f843382b02c73a570e58617f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 0481cc2d36f7882bbd8eea9b984c3dc388de5dee
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75457961"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96534078"
 ---
 # <a name="create-your-first-service-fabric-container-application-on-linux"></a>Créer votre première application de conteneur Service Fabric sur Linux
 > [!div class="op_single_selector"]
 > * [Windows](service-fabric-get-started-containers.md)
 > * [Linux](service-fabric-get-started-containers-linux.md)
 
-L’exécution d’une application existante dans un conteneur Linux sur un cluster Service Fabric ne nécessite aucune modification de votre application. Cet article vous accompagne dans la création d’une image Docker contenant une application web [Flask](http://flask.pocoo.org/) Python et le déploiement dans un cluster Service Fabric. Vous allez également partager votre application en conteneur via [Azure Container Registry](/azure/container-registry/). Cet article suppose une connaissance élémentaire de Docker. Pour en savoir plus sur Docker, consultez la [présentation de Docker](https://docs.docker.com/engine/understanding-docker/).
+L’exécution d’une application existante dans un conteneur Linux sur un cluster Service Fabric ne nécessite aucune modification de votre application. Cet article vous accompagne dans la création d’une image Docker contenant une application web [Flask](http://flask.pocoo.org/) Python et le déploiement dans un cluster Service Fabric. Vous allez également partager votre application en conteneur via [Azure Container Registry](../container-registry/index.yml). Cet article suppose une connaissance élémentaire de Docker. Pour en savoir plus sur Docker, consultez la [présentation de Docker](https://docs.docker.com/engine/understanding-docker/).
 
 > [!NOTE]
 > Cet article s’applique à un environnement de développement Linux.  Le runtime du cluster Service Fabric et le runtime de Docker doivent être en cours d’exécution sur le même système d’exploitation.  Vous ne pouvez pas exécuter des conteneurs Linux sur un cluster Windows.
@@ -25,6 +26,8 @@ L’exécution d’une application existante dans un conteneur Linux sur un clus
   * [Outils et SDK Service Fabric](service-fabric-get-started-linux.md).
   * [Docker CE pour Linux](https://docs.docker.com/engine/installation/#prior-releases). 
   * [Interface de ligne de commande de Service Fabric](service-fabric-cli.md)
+
+* Un cluster Linux avec trois nœuds ou plus.
 
 * Un registre dans Azure Container Registry. [Créez un registre de conteneurs](../container-registry/container-registry-get-started-portal.md) dans votre abonnement Azure. 
 
@@ -84,10 +87,17 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 ```
 
-## <a name="build-the-image"></a>Créer l’image
-Exécutez la commande `docker build` pour créer l’image qui exécute votre application web. Ouvrez une fenêtre PowerShell et accédez à *c:\temp\helloworldapp*. Exécutez la commande suivante :
+## <a name="login-to-docker-and-build-the-image"></a>Connexion à Docker et génération de l’image
 
-```bash
+Nous allons maintenant créer l’image qui exécute votre application web. Lorsque vous extrayez des images publiques de Docker (comme `python:2.7-slim` dans notre fichier Dockerfile), il est recommandé de s’authentifier auprès de votre compte Docker Hub au lieu de créer une demande de tirage anonyme.
+
+> [!NOTE]
+> Lorsque vous effectuez des demande de tirage (pull request) anonymes fréquentes, vous pouvez voir des erreurs Docker similaires à `ERROR: toomanyrequests: Too Many Requests.` ou `You have reached your pull rate limit.` Authentifiez-vous auprès de Docker Hub pour éviter ces erreurs. Consultez [Gérer le contenu public à l’aide d’Azure Container Registry](../container-registry/buffer-gate-public-content.md) pour plus d’informations.
+
+Ouvrez une fenêtre PowerShell et accédez au répertoire contenant le fichier Dockerfile. Exécutez ensuite les commande suivantes :
+
+```
+docker login
 docker build -t helloworldapp .
 ```
 
@@ -212,7 +222,7 @@ En démarrant la version 6.1, Service Fabric intègre automatiquement les évén
 
 L’instruction **HEALTHCHECK** qui pointe vers la vérification réalisée pour surveiller l’intégrité du conteneur doit être présente dans le fichier Dockerfile utilisé lors de la génération de l’image conteneur.
 
-![HealthCheckHealthy][1]
+![La capture d’écran montre les détails du package de services déployé NodeServicePackage.][1]
 
 ![HealthCheckUnhealthyApp][2]
 
@@ -410,7 +420,7 @@ Vous pouvez configurer le cluster Service Fabric pour supprimer des images conte
           },
           {
                 "name": "ContainerImagesToSkip",
-                "value": "microsoft/windowsservercore|microsoft/nanoserver|microsoft/dotnet-frameworku|..."
+                "value": "mcr.microsoft.com/windows/servercore|mcr.microsoft.com/windows/nanoserver|mcr.microsoft.com/dotnet/framework/aspnet|..."
           }
           ...
           }

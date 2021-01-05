@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: ff608cac9786ebc0d3908ce4d88fb501e621be6c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b826c986a0af26bb79fb0823e4e8626f0165d460
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224865"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86250020"
 ---
 # <a name="azure-api-management-page-controls"></a>Contrôles de page Gestion des API Azure
 Gestion des API Azure fournit les contrôles suivants à utiliser dans les modèles du portail des développeurs.  
@@ -30,7 +30,7 @@ Pour utiliser un contrôle, placez-le à l’emplacement souhaité dans le modè
   
 Les valeurs des paramètres sont transmises comme partie du modèle de données pour le modèle. Dans la plupart des cas, vous pouvez simplement coller l’exemple fourni pour chaque contrôle afin qu’il fonctionne correctement. Pour plus d’informations sur les valeurs de paramètre, vous pouvez voir la section de modèle de données pour chaque modèle dans lequel un contrôle peut être utilisé.  
 
-Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/).  
+Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](./api-management-developer-portal-templates.md).  
 
 [!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 

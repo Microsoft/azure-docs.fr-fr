@@ -6,16 +6,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 08/13/2019
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 2f65e98cec04991fe9edef1b81bcb3ecc3d93d76
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87ea77540e5fcaac0c4231403473d25ebae46aac
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78186356"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94840251"
 ---
 # <a name="troubleshoot-azure-ad-b2c-custom-policies-and-identity-experience-framework"></a>Résoudre les problèmes liés aux stratégies personnalisées Azure AD B2C et à l’Infrastructure d’expérience d’identité.
 
@@ -64,7 +64,7 @@ Voici quelques-unes des erreurs de validation courantes :
 
 * Pour suivre l’échange de messages entre votre navigateur client et Azure AD B2C, utilisez [Fiddler](https://www.telerik.com/fiddler). Il peut vous aider à obtenir une indication de l’endroit où vos étapes d’orchestration échouent dans le parcours utilisateur.
 
-* En [Mode de développement](troubleshoot-with-application-insights.md), utilisez **Application Insights** pour suivre l’activité de votre parcours utilisateur d’Infrastructure d’expérience d’identité. En **Mode de développement**, vous pouvez observer l’échange de revendications entre l’Infrastructure d’expérience d’identité et les divers fournisseurs de revendications définis par les profils techniques, tels que les fournisseurs d’identité, les services basés sur les API, le répertoire utilisateur Azure AD B2C et d’autres services comme Azure Multi-Factor-Authentication.
+* En [Mode de développement](troubleshoot-with-application-insights.md), utilisez **Application Insights** pour suivre l’activité de votre parcours utilisateur d’Infrastructure d’expérience d’identité. En **Mode de développement**, vous pouvez observer l'échange de revendications entre l'Infrastructure d'expérience d'identité et les divers fournisseurs de revendications définis par les profils techniques, tels que les fournisseurs d'identité, les services basés sur les API, le répertoire utilisateur Azure AD B2C et d'autres services comme Azure AD Multi-Factor-Authentication.
 
 ## <a name="recommended-practices"></a>Pratiques recommandées
 

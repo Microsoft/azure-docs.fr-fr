@@ -8,12 +8,12 @@ ms.date: 01/30/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 7540c5a82220eef61b8f1cf470697315496cd6bf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 81db9c7e729aa0be67a807d9d77a3cccb8f41604
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82127601"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85194788"
 ---
 # <a name="understand-iot-edge-automatic-deployments-for-single-devices-or-at-scale"></a>Comprendre les déploiements automatiques IoT Edge pour un seul ou de nombreux appareils
 
@@ -69,7 +69,7 @@ Exemples de conditions cibles :
 * tags.environment =’prod’
 * tags.environment = ’prod’ AND tags.location = ’westus’
 * tags.environment = ’prod’ OR tags.location = ’westus’
-* tags.operator = ’John’ AND tags.environment = ’prod’ NOT deviceId = ’linuxprod1’
+* tags.operator = 'John' AND tags.environment = 'prod' AND NOT deviceId = 'linuxprod1'
 * properties.reported.devicemodel = '4000x'
 
 Prenez en compte les contraintes suivantes lorsque vous créez une condition cible :

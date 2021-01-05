@@ -1,24 +1,19 @@
 ---
 title: Utiliser Stockage Blob comme magasin de points de contrôle sur Azure Stack Hub (préversion)
 description: Cet article explique comment utiliser Stockage Blob comme magasin de points de contrôle dans Event Hubs sur Azure Stack Hub (préversion).
-services: event-hubs
-documentationcenter: na
-author: spelluru
-ms.service: event-hubs
 ms.topic: how-to
-ms.date: 03/18/2020
-ms.author: spelluru
-ms.openlocfilehash: 2938099383c32eac493e4b4bb620f03c76ca5c44
-ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+ms.date: 06/23/2020
+ms.openlocfilehash: 9da525decfb7b972f05af17c259836d0b17bb21e
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82023648"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95021233"
 ---
 # <a name="use-blob-storage-as-checkpoint-store---event-hubs-on-azure-stack-hub-preview"></a>Utiliser Stockage Blob comme magasin de points de contrôle – Event Hubs sur Azure Stack Hub (préversion)
-Si vous utilisez Stockage Blob Azure comme magasin de points de contrôle dans un environnement qui prend en charge une autre version du Kit de développement logiciel (SDK) Stockage Blob que ceux généralement disponibles sur Azure, vous devez utiliser du code pour remplacer la version de l’API du service de stockage par la version prise en charge par cet environnement. Par exemple, si vous exécutez [Event Hubs sur Azure Stack Hub version 2002](https://docs.microsoft.com/azure-stack/user/event-hubs-overview), la version la plus élevée disponible pour le service Stockage est la version 2017-11-09. Dans ce cas, vous devez utiliser du code pour cibler la version de l’API du service Stockage sur 2017-11-09. Pour obtenir un exemple sur la façon de cibler une version spécifique de l’API Stockage, consultez les exemples suivants sur GitHub : 
+Si vous utilisez Stockage Blob Azure comme magasin de points de contrôle dans un environnement qui prend en charge une autre version du Kit de développement logiciel (SDK) Stockage Blob que ceux généralement disponibles sur Azure, vous devez utiliser du code pour remplacer la version de l’API du service de stockage par la version prise en charge par cet environnement. Par exemple, si vous exécutez [Event Hubs sur Azure Stack Hub version 2002](/azure-stack/user/event-hubs-overview), la version la plus élevée disponible pour le service Stockage est la version 2017-11-09. Dans ce cas, vous devez utiliser du code pour cibler la version de l’API du service Stockage sur 2017-11-09. Pour obtenir un exemple sur la façon de cibler une version spécifique de l’API Stockage, consultez les exemples suivants sur GitHub : 
 
-- [.NET](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample10_RunningWithDifferentStorageVersion.cs)
+- [.NET](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/)
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/eventhubs/azure-messaging-eventhubs-checkpointstore-blob/src/samples/java/com/azure/messaging/eventhubs/checkpointstore/blob/EventProcessorWithCustomStorageVersion.java). 
 - [JavaScript](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples/javascript/receiveEventsWithApiSpecificStorage.js) ou [TypeScript](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples/typescript/src/receiveEventsWithApiSpecificStorage.ts) 
 - Python : [synchrone](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/eventhub/azure-eventhub-checkpointstoreblob/samples/receive_events_using_checkpoint_store_storage_api_version.py), [asynchrone](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/eventhub/azure-eventhub-checkpointstoreblob-aio/samples/receive_events_using_checkpoint_store_storage_api_version_async.py)

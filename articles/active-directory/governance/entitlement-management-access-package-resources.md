@@ -3,25 +3,25 @@ title: Changer les rôles de ressources pour un package d’accès dans la gesti
 description: Découvrez comment changer les rôles de ressources pour un package d’accès existant dans la gestion des droits d’utilisation d’Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/15/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 102bbfbd1c02c93830f5c7fce89fe95d7fde54c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1b6e2ac9d80c1c3bf76b4a3d4c44f0654100670f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230365"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89567416"
 ---
 # <a name="change-resource-roles-for-an-access-package-in-azure-ad-entitlement-management"></a>Changer les rôles de ressources pour un package d’accès dans la gestion des droits d’utilisation d’Azure Active Directory
 
@@ -72,13 +72,13 @@ Vous pouvez configurer la gestion des droits d’utilisation afin d’ajouter au
 - Si un groupe ou une équipe fait partie d’un package d’accès et qu’un utilisateur est affecté à ce package d’accès, l’utilisateur est ajouté à ce groupe ou à cette équipe, s’il n’y figure pas.
 - À l’expiration de l’affectation du package d’accès d’un utilisateur, ce dernier est retiré du groupe ou de l’équipe, sauf si un autre package d’accès incluant ce même groupe ou cette même équipe lui est actuellement affecté.
 
-Vous pouvez sélectionner n’importe quel [groupe de sécurité Azure AD ou groupe Office 365](../fundamentals/active-directory-groups-create-azure-portal.md). Les administrateurs peuvent ajouter n'importe quel groupe à un catalogue ; les propriétaires de catalogue peuvent ajouter n'importe quel groupe au catalogue si ce groupe leur appartient. Gardez à l'esprit les contraintes Azure AD suivantes lors de la sélection d'un groupe :
+Vous pouvez sélectionner n’importe quel [groupe de sécurité Azure AD ou groupe Microsoft 365](../fundamentals/active-directory-groups-create-azure-portal.md). Les administrateurs peuvent ajouter n'importe quel groupe à un catalogue ; les propriétaires de catalogue peuvent ajouter n'importe quel groupe au catalogue si ce groupe leur appartient. Gardez à l'esprit les contraintes Azure AD suivantes lors de la sélection d'un groupe :
 
 - Si un utilisateur, y compris un invité, est ajouté en tant que membre à un groupe ou à une équipe, il peut voir tous les autres membres de ce groupe ou de cette équipe.
 - Azure AD ne peut pas modifier l'appartenance d'un groupe qui a été synchronisé à partir de Windows Server Active Directory à l’aide d’Azure AD Connect ou a été créé dans Exchange Online en tant que groupe de distribution.  
 - L'adhésion à des groupes dynamiques ne peut pas être mise à jour par l'ajout ou la suppression d'un membre, de sorte que l'adhésion à des groupes dynamiques ne convient pas pour la gestion des droits d'utilisation.
 
-Pour plus d’informations, voir [Comparer les groupes](https://docs.microsoft.com/office365/admin/create-groups/compare-groups) et [Groupes Office 365 et Microsoft teams](https://docs.microsoft.com/microsoftteams/office-365-groups).
+Pour plus d’informations, consultez [Comparer les groupes](/office365/admin/create-groups/compare-groups) et [Groupes Microsoft 365 et Microsoft Teams](/microsoftteams/office-365-groups).
 
 1. Sur la page **Ajouter des rôles de ressources à un package d’accès**, cliquez sur **Groupes et équipes** pour ouvrir le volet Sélectionner les groupes.
 
@@ -90,12 +90,12 @@ Pour plus d’informations, voir [Comparer les groupes](https://docs.microsoft.c
 
     Une fois l’équipe ou le groupe sélectionné, la colonne **Sous-type** affiche l’un des sous-types suivants :
 
-    |  |  |
+    | Sous-type | Description |
     | --- | --- |
     | Sécurité | Utilisé pour octroyer l’accès à des ressources. |
     | Distribution | Utilisé pour envoyer des notifications à un groupe de personnes. |
-    | O365 | Groupe Office 365 non activé pour Teams. Utilisé pour la collaboration entre les utilisateurs, à l’intérieur et à l’extérieur de votre organisation. |
-    | Équipe | Groupe Office 365 activé pour Teams. Utilisé pour la collaboration entre les utilisateurs, à l’intérieur et à l’extérieur de votre organisation. |
+    | Microsoft 365 | Groupe Microsoft 365 non activé pour Teams. Utilisé pour la collaboration entre les utilisateurs, à l’intérieur et à l’extérieur de votre organisation. |
+    | Équipe | Groupe Microsoft 365 activé pour Teams. Utilisé pour la collaboration entre les utilisateurs, à l’intérieur et à l’extérieur de votre organisation. |
 
 1. Dans la liste **Rôle**, Sélectionnez **Propriétaire** ou **Membre**.
 
@@ -178,7 +178,7 @@ Azure AD peut automatiquement donner aux utilisateurs l'accès à un site ShareP
 
 Dans le cadre de la gestion des droits d'utilisation, Azure AD traitera plusieurs fois par jour les modifications en masse apportées aux affectations et ressources de vos packages d'accès. Ainsi, si vous effectuez une affectation ou modifiez les rôles de ressources de votre package d'accès, la mise en application de ce changement dans Azure AD peut prendre 24 heures, plus le délai nécessaire pour propager ces modifications à d'autres services en ligne Microsoft ou applications SaaS connectées. Si votre changement n'affecte que quelques objets, quelques minutes suffiront pour l'appliquer à Azure AD, après quoi d'autres composants Azure AD détecteront ce changement et mettront à jour les applications SaaS. Si votre modification affecte des milliers d'objets, elle prendra plus de temps. Par exemple, si vous avez un package d'accès avec 2 applications et 100 affectations d'utilisateurs, et que vous décidez d'ajouter un rôle de site SharePoint à ce package d'accès, un certain délai peut s’écouler avant que tous les utilisateurs fassent partie de ce rôle de site SharePoint. Vous pouvez suivre l'état d'avancement grâce au journal d'audit Azure AD, au journal d’approvisionnement Azure AD et aux journaux d'audit du site SharePoint.
 
-Lorsque vous supprimez un membre d’une équipe, il est également supprimé du groupe Office 365. La suppression de la fonctionnalité de conversation de l’équipe peut être retardée. Pour plus d’informations, consultez l’article [Appartenance au groupe](https://docs.microsoft.com/microsoftteams/office-365-groups#group-membership).
+Lorsque vous supprimez un membre d’une équipe, il est également supprimé du groupe Microsoft 365. La suppression de la fonctionnalité de conversation de l’équipe peut être retardée. Pour plus d’informations, consultez l’article [Appartenance au groupe](/microsoftteams/office-365-groups#group-membership).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

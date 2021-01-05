@@ -10,11 +10,11 @@ ms.service: genomics
 ms.topic: troubleshooting
 ms.date: 12/07/2017
 ms.openlocfilehash: e8806bc4f761214e6740a22093b7e18030fdf881
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76986034"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018322"
 ---
 # <a name="microsoft-genomics-common-questions"></a>Microsoft Genomics : Questions courantes
 

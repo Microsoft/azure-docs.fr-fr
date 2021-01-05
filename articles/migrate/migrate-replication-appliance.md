@@ -1,14 +1,17 @@
 ---
 title: Appliance de réplication Azure Migrate
 description: Apprenez-en davantage sur l’appliance de réplication Azure Migrate pour une migration VMWare basée sur un agent.
+author: anvar-ms
+ms.author: anvar
+ms.manager: bsiva
 ms.topic: conceptual
 ms.date: 01/30/2020
-ms.openlocfilehash: 85641f514fc4367f02901eb1dd394cfa204c3ec4
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.openlocfilehash: ec277bcc3e361561f54e72c54526d65487c113b4
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81535211"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754094"
 ---
 # <a name="replication-appliance"></a>Appliance de réplication
 
@@ -58,8 +61,8 @@ TLS | TLS 1.2 doit être activé.
 MySQL | MySQL doit être installé sur l’appliance.<br/> MySQL doit être installé. Vous pouvez l’installer manuellement ou laisser Site Recovery le faire lors du déploiement de l’appliance.
 Autres applications | N’exécutez pas d’autres applications sur l’appliance de réplication.
 Rôles Windows Server | N’activez pas ces rôles : <br> - Active Directory Domain Services <br>- Internet Information Services <br> - Hyper-V
-Stratégies de groupe | N’activez pas ces stratégies de groupe : <br> - Empêcher l’accès à l’invite de commandes <br> - Empêcher l’accès aux outils de modification du Registre <br> - Logique de confiance pour les pièces jointes <br> - Activer l’exécution des scripts <br> [En savoir plus](https://technet.microsoft.com/library/gg176671(v=ws.10).aspx)
-IIS | - Aucun site web par défaut préexistant <br> - Aucune application/aucun site web préexistants ne doivent écouter le port 443 <br>- Activer [l’authentification anonyme](https://technet.microsoft.com/library/cc731244(v=ws.10).aspx) <br> - Activer le paramètre [FastCGI](https://technet.microsoft.com/library/cc753077(v=ws.10).aspx)
+Stratégies de groupe | N’activez pas ces stratégies de groupe : <br> - Empêcher l’accès à l’invite de commandes <br> - Empêcher l’accès aux outils de modification du Registre <br> - Logique de confiance pour les pièces jointes <br> - Activer l’exécution des scripts <br> [En savoir plus](/previous-versions/windows/it-pro/windows-7/gg176671(v=ws.10))
+IIS | - Aucun site web par défaut préexistant <br> - Aucune application/aucun site web préexistants ne doivent écouter le port 443 <br>- Activer [l’authentification anonyme](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc731244(v=ws.10)) <br> - Activer le paramètre [FastCGI](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753077(v=ws.10))
 **Paramètres réseau** |
 Type d’adresse IP | statique
 Ports | 443 (Orchestration du canal de contrôle)<br>9443 (Transport de données)
@@ -129,7 +132,7 @@ Serveur de traitement | Le serveur de traitement reçoit les données de réplic
     - Le serveur de traitement reçoit les données de réplication, les optimise et les chiffre, puis les envoie au stockage Azure via le port 443 sortant.
 5. Les données de réplication se trouvent tout d’abord dans un compte de stockage de cache dans Azure. Ces journaux sont traités et les données sont stockées dans un disque managé Azure.
 
-![Architecture](./media/migrate-replication-appliance/architecture.png)
+![Le diagramme illustre l’architecture du processus de réplication.](./media/migrate-replication-appliance/architecture.png)
 
 ## <a name="appliance-upgrades"></a>Mises à niveau d’appliance
 

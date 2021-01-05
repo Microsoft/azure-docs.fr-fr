@@ -3,12 +3,12 @@ title: Réponses à des questions fréquentes
 description: 'Réponses aux questions courantes sur : les fonctionnalités de la sauvegarde Azure, y compris les coffres Recovery Services ce qu’il peut sauvegarder, son fonctionnement, son chiffrement, et ses limites. '
 ms.topic: conceptual
 ms.date: 07/07/2019
-ms.openlocfilehash: ee6df940dd36a325d3638c3ad29ebfd8dec713d8
-ms.sourcegitcommit: c8a0fbfa74ef7d1fd4d5b2f88521c5b619eb25f8
+ms.openlocfilehash: d85866e490b2c56abb7de1e94cd0ffaa8f714615
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82801703"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96327149"
 ---
 # <a name="azure-backup---frequently-asked-questions"></a>Sauvegarde Azure - Forum Aux Questions
 
@@ -26,8 +26,8 @@ Vous pouvez inscrire jusqu’à 1 000 machines virtuelles Azure par coffre. Si
 
 ### <a name="how-many-datasourcesitems-can-be-protected-in-a-vault"></a>Combien de sources de données/éléments peuvent être protégés dans un coffre ?
 
-Vous pouvez protéger jusqu’à 2000 sources de données/éléments sur toutes les charges de travail (machine virtuelle IaaS, SQL, AFS, etc.) dans un coffre.
-Par exemple, si vous avez déjà protégé 500 machines virtuelles et 400 partages de fichiers Azure dans le coffre, vous ne pouvez protéger que jusqu’à 1 100 bases de données SQL.
+Vous pouvez protéger un maximum de 2000 sources de données/éléments sur toutes les charges de travail (machine virtuelle IaaS, SQL ou AFS, par exemple) d'un coffre.
+Par exemple, si vous avez déjà protégé 500 machines virtuelles et 400 partages Azure Files dans le coffre, vous ne pouvez y protéger que 1 100 bases de données SQL.
 
 ### <a name="how-many-policies-can-i-create-per-vault"></a>Combien de stratégies puis-je créer par coffre ?
 
@@ -45,14 +45,22 @@ Oui. Pour déplacer un coffre Recovery Services, consultez cet [article](backup-
 
 Non. Les données de sauvegarde stockées dans un coffre ne peuvent pas être déplacées vers un autre coffre.
 
-### <a name="can-i-change-from-grs-to-lrs-after-a-backup"></a>Puis-je passer du stockage GRS au stockage LRS après une sauvegarde ?
+### <a name="can-i-change-the-storage-redundancy-setting-after-a-backup"></a>Puis-je modifier le paramètre de redondance du stockage après une sauvegarde ?
 
-Non. Dans un coffre Recovery Services, vous pouvez uniquement changer les options de stockage avant de commencer le stockage des sauvegardes.
+Le type de réplication de stockage par défaut est défini sur Stockage géoredondant (GRS). Une fois que vous avez configuré la sauvegarde, l’option de modification est désactivée et non modifiable.
+
+![Type de réplication de stockage](./media/backup-azure-backup-faq/storage-replication-type.png)
+
+Si vous avez déjà configuré la sauvegarde et que vous devez passer de GRS à LRS, consultez [Guide pratique pour passer de GRS à LRS après avoir configuré la sauvegarde](backup-create-rs-vault.md#how-to-change-from-grs-to-lrs-after-configuring-backup).
 
 ### <a name="can-i-do-an-item-level-restore-ilr-for-vms-backed-up-to-a-recovery-services-vault"></a>Puis-je effectuer une restauration de niveau élément (ILR) pour les machines virtuelles sauvegardées dans un coffre Recovery Services ?
 
 - La restauration de niveau élément est prise en charge pour les machines virtuelles Azure sauvegardées par la sauvegarde de machine virtuelle Azure. Pour plus d’informations, consultez cet [article](backup-azure-restore-files-from-vm.md)
-- La restauration de niveau élément n’est pas prise en charge pour les points de récupération en ligne des machines virtuelles locales sauvegardées par le serveur de sauvegarde Azure ou System Center DPM.
+- La restauration de niveau élément n’est pas prise en charge pour les points de récupération en ligne des machines virtuelles locales sauvegardées par le serveur de sauvegarde Azure (MABS) ou System Center DPM.
+
+### <a name="how-can-i-move-data-from-the-recovery-services-vault-to-on-premises"></a>Comment déplacer des données du coffre Recovery Services vers un emplacement local ?
+
+L’exportation directe de données du coffre Recovery Services vers un emplacement local à l’aide de Data Box n’est pas prise en charge. Les données doivent être restaurées dans un compte de stockage, puis déplacées vers l’emplacement local via [Data Box](../databox/data-box-overview.md) ou [Import/Export](../storage/common/storage-import-export-service.md).
 
 ## <a name="azure-backup-agent"></a>Agent Azure Backup
 
@@ -107,7 +115,7 @@ Windows 8 ou version ultérieure | 54 400 Go
 Windows 7 |1 700 Go
 Windows Server 2012 ou version ultérieure | 54 400 Go
 Windows Server 2008, Windows Server 2008 R2 | 1 700 Go
-Azure VM | 16 disques de données<br/> Pour vous inscrire à la préversion limitée des machines virtuelles avec plus de 16 disques (jusqu’à 32 disques), écrivez-nous à l’adresse AskAzureBackupTeam@microsoft.com <br><br> Disque de données jusqu’à 32 To
+Azure VM | Consultez la [matrice de prise en charge de la sauvegarde de machines virtuelles Azure](./backup-support-matrix-iaas.md#vm-storage-support)
 
 ### <a name="how-is-the-data-source-size-determined"></a>Comment la taille de la source de données est-elle déterminée ?
 
@@ -116,14 +124,14 @@ Le tableau suivant explique comment la taille de chaque source de données est d
 **Source de données** | **Détails**
 --- | ---
 Volume |Quantité de données sauvegardées à partir d’une machine virtuelle à volume unique.
-Base de données SQL Server |Taille d’une base de données SQL unique sauvegardée.
+Base de données SQL Server |Taille d’une base de données unique sauvegardée.
 SharePoint | Somme des bases de données de contenu et de configuration dans une batterie de serveurs SharePoint sauvegardée.
 Exchange |Somme de toutes les bases de données Exchange sur un serveur Exchange en cours de sauvegarde.
 État système/récupération complète |Chaque copie individuelle de l’état système/récupération complète de l’ordinateur sauvegardée.
 
 ### <a name="is-there-a-limit-on-the-amount-of-data-backed-up-using-a-recovery-services-vault"></a>La quantité de données sauvegardées dans un coffre Recovery Services est-elle limitée ?
 
-Il n’existe aucune limite pour la quantité totale de données que vous pouvez sauvegarder dans un coffre Recovery Services. Les sources de données individuelles (autres que les machines virtuelles Azure) peuvent avoir une taille maximale de 54 400 Go. Pour plus d’informations sur les limites, consultez la [section relative aux limites du coffre dans la matrice de prise en charge](https://docs.microsoft.com/azure/backup/backup-support-matrix#vault-support).
+Il n’existe aucune limite pour la quantité totale de données que vous pouvez sauvegarder dans un coffre Recovery Services. Les sources de données individuelles (autres que les machines virtuelles Azure) peuvent avoir une taille maximale de 54 400 Go. Pour plus d’informations sur les limites, consultez la [section relative aux limites du coffre dans la matrice de prise en charge](./backup-support-matrix.md#vault-support).
 
 ### <a name="why-is-the-size-of-the-data-transferred-to-the-recovery-services-vault-smaller-than-the-data-selected-for-backup"></a>Pourquoi la taille des données transférées dans le coffre Recovery Services est-elle plus réduite que celle des données sélectionnées pour la sauvegarde ?
 
@@ -170,7 +178,7 @@ Les produits avec points de rétention à long terme stockent les données de sa
 - Toutefois, même si ces points *occupent* de l’espace de stockage, ils sont plus faciles et plus rapides à récupérer.
 - Les copies incrémentielles *occupent moins d’espace de stockage* , mais vous devez restaurer une chaîne de données, ce qui rallonge le temps de récupération.
 
-L’architecture de stockage d’Azure Backup vous offre le meilleur des deux en stockant les données de manière optimale pour des restaurations rapides et des coûts de stockage faibles. Cette approche garantit que votre bande passante entrante et sortante est utilisée de façon efficace. La quantité de stockage de données et le temps nécessaire pour récupérer les données sont tous les deux réduits au minimum. En savoir plus sur [les sauvegardes incrémentielles](https://azure.microsoft.com/blog/microsoft-azure-backup-save-on-long-term-storage/).
+L’architecture de stockage d’Azure Backup vous offre le meilleur des deux en stockant les données de manière optimale pour des restaurations rapides et des coûts de stockage faibles. Cette approche garantit que votre bande passante entrante et sortante est utilisée de façon efficace. La quantité de stockage de données et le temps nécessaire pour récupérer les données sont tous les deux réduits au minimum. En savoir plus sur [les sauvegardes incrémentielles](backup-architecture.md#backup-types).
 
 ### <a name="is-there-a-limit-on-the-number-of-recovery-points-that-can-be-created"></a>Le nombre de points de récupération pouvant être créés est-il limité ?
 
@@ -190,8 +198,12 @@ Non. La récupération est gratuite et le trafic sortant ne vous est pas factur�
 
 Lorsqu’une nouvelle stratégie est appliquée, le planning et la rétention de la nouvelle stratégie sont suivis.
 
-- Si la rétention est étendue, les points de récupération existants sont marqués comme à conserver afin qu’ils soient conformes à la nouvelle stratégie.
+- Si la rétention est étendue, les points de récupération existants sont marqués comme étant à conserver, selon la nouvelle stratégie.
 - Si la rétention est réduite, ils sont marqués comme à nettoyer lors de la prochaine tâche de nettoyage et sont ensuite supprimés.
+
+### <a name="how-long-is-data-retained-when-stopping-backups-but-selecting-the-option-to-retain-backup-data"></a>Pendant combien de temps les données sont-elles conservées lors de l’arrêt des sauvegardes, avec l’option de conservation des données de sauvegarde sélectionnée ?
+
+Quand des sauvegardes sont arrêtées et les données conservées, les règles de stratégie existantes pour le nettoyage cessent de s’appliquer et les données sont conservées indéfiniment jusqu’à ce que l’administrateur initialise leur suppression.
 
 ## <a name="encryption"></a>Chiffrement
 
@@ -206,15 +218,15 @@ Oui. Les données dans Azure sont chiffrées au repos.
 - Pour la sauvegarde sur site, le chiffrement au repos est assuré à l’aide de la phrase secrète que vous fournissez lorsque vous sauvegardez sur Azure.
 - Pour les machines virtuelles Azure, les données sont chiffrées au repos à l’aide de Storage Service Encryption (SSE).
 
-Microsoft ne déchiffre les données de sauvegarde à aucun moment.
+À aucun moment Microsoft ne déchiffre les données de sauvegarde.
 
-### <a name="what-is-the-minimum-length-of-encryption-the-key-used-to-encrypt-backup-data"></a>Quelle est la longueur minimale de la clé de chiffrement utilisée pour chiffrer les données de sauvegarde ?
+### <a name="what-is-the-minimum-length-of-the-encryption-key-used-to-encrypt-backup-data"></a>Quelle est la longueur minimale de la clé de chiffrement utilisée pour chiffrer les données de sauvegarde ?
 
-La clé de chiffrement doit comporter au moins 16 caractères lorsque vous utilisez l’agent de sauvegarde Azure. Pour les machines virtuelles Azure, il n’existe aucune limite à la longueur des clés utilisées par Azure KeyVault.
+La clé de chiffrement utilisée par l’agent Microsoft Azure Recovery Services (MARS) est dérivée d’une phrase secrète qui doit comporter au moins 16 caractères. Pour les machines virtuelles Azure, il n’existe aucune limite à la longueur des clés qu’Azure Key Vault utilise.
 
 ### <a name="what-happens-if-i-misplace-the-encryption-key-can-i-recover-the-data-can-microsoft-recover-the-data"></a>Que se passe-t-il si j’ai égaré la clé de chiffrement ? Puis-je récupérer les données ? Microsoft peut-il récupérer les données ?
 
-La clé utilisée pour chiffrer les données de sauvegarde est disponible uniquement sur votre site. Microsoft ne conserve pas de copie dans Azure et n’a pas accès à la clé. Si la clé est égarée, Microsoft ne peut pas récupérer les données de sauvegarde.
+La clé utilisée pour chiffrer les données de sauvegarde est disponible uniquement sur votre site. Microsoft ne conserve pas de copie dans Azure et n'a pas accès à la clé. Si la clé est égarée, Microsoft ne peut pas récupérer les données de sauvegarde.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

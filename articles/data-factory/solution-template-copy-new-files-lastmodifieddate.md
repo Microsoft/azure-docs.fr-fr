@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 3/8/2019
-ms.openlocfilehash: 363af1012b327a55703cc6e35a02dc1f27869bd0
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 99d90e4d93f0e4a70350a5a33a65700c3e14acb4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629063"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000808"
 ---
 # <a name="copy-new-and-changed-files-by-lastmodifieddate-with-azure-data-factory"></a>Copier les fichiers nouveaux et modifiés par LastModifiedDate avec Azure Data Factory
 
@@ -75,7 +75,7 @@ Le modèle définit six paramètres :
     
 7. Vous pouvez maintenant ajouter un déclencheur de fenêtres bascules pour automatiser ce pipeline et lui permettre de copier systématiquement les fichiers nouveaux et modifiés par LastModifiedDate et ce, de manière régulière.  Sélectionnez **Ajouter un déclencheur**, puis **Nouveau/Modifier**.
 
-    ![Vérifier le résultat](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate8.png)
+    ![Capture d’écran mettant en surbrillance l’option de menu Nouveau/Modifier qui s’affiche quand vous sélectionnez Ajouter un déclencheur.](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate8.png)
     
 8. Dans la fenêtre **Ajouter des déclencheurs**, sélectionnez **+ Nouveau**.
 
@@ -103,7 +103,7 @@ Le modèle définit six paramètres :
 
 14. Vérifiez le résultat. Votre pipeline sera déclenché automatiquement toutes les 15 minutes, et seuls les fichiers nouveaux et modifiés à partir du magasin source seront copiés vers le magasin de destination à chaque exécution du pipeline.
 
-    ![Vérifier le résultat](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate15.png)
+    ![Capture d’écran montrant les résultats retournés lors du déclenchement du pipeline.](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate15.png)
     
 ## <a name="next-steps"></a>Étapes suivantes
 

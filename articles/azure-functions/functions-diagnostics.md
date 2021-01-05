@@ -7,10 +7,10 @@ ms.date: 11/01/2019
 ms.author: yunjchoi
 ms.custom: na
 ms.openlocfilehash: fb329273d442c023233fee2e7e01aabe5f5bff8c
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83122361"
 ---
 # <a name="azure-functions-diagnostics-overview"></a>Vue d’ensemble des diagnostics Azure Functions
@@ -31,11 +31,11 @@ Pour démarrer les diagnostics d’Azure Functions :
 
 Lorsque vous sélectionnez la catégorie de la page d’accueil correspondant le mieux au problème rencontré avec votre application de fonction, l’interface interactive des diagnostics Azure Functions, nommée Génie, peut vous aider à diagnostiquer et résoudre le problème. Vous pouvez utiliser les raccourcis de vignette fournis par Génie pour afficher le rapport de diagnostic complet de la catégorie de problème qui vous intéresse. Les raccourcis de vignette vous offrent un moyen d’accès direct aux métriques de diagnostic.
 
-:::image type="content" source="./media/functions-diagnostics/genie.png" alt-text="Génie est l’interface des diagnostics d’Azure Functions." border="false":::
+:::image type="content" source="./media/functions-diagnostics/genie.png" alt-text="Recherchez les diagnostics d’Azure Functions." border="false":::
 
 Après avoir sélectionné une vignette, vous pouvez voir une liste des rubriques relatives au problème décrit dans la vignette. Ces rubriques fournissent des extraits du rapport complet, offrant des informations pertinentes. Sélectionnez les rubriques de votre choix pour examiner les problèmes de façon plus approfondie. En outre, vous pouvez sélectionner **Afficher le rapport complet** pour explorer toutes les rubriques sur une seule page.
 
-:::image type="content" source="./media/functions-diagnostics/preview-of-diagnostic-report.png" alt-text="Préversion du rapport de diagnostic" border="false":::
+:::image type="content" source="./media/functions-diagnostics/preview-of-diagnostic-report.png" alt-text="Recherchez les diagnostics d’Azure Functions." border="false":::
 
 ## <a name="view-a-diagnostic-report"></a>Afficher un rapport de diagnostic
 
@@ -45,9 +45,9 @@ Une fois que vous avez choisi une rubrique, vous pouvez afficher un rapport de d
 
 Pour les fonctions basées sur des scripts, vous pouvez utiliser **Exécution de la fonction et Erreurs** sous **Function App cesse de fonctionner ou signale des erreurs** pour circonscrire la ligne de code provoquant des exceptions ou des erreurs. Cet outil permet de déterminer la cause racine et résoudre les problèmes à partir d’une ligne de code spécifique. Cette option n’est pas disponible pour les fonctions précompilées C# et Java.
 
-:::image type="content" source="./media/functions-diagnostics/diagnostic-report-on-function-execution-errors.png" alt-text="Rapport de diagnostic sur les erreurs d’exécution de fonction" border="false":::
+:::image type="content" source="./media/functions-diagnostics/diagnostic-report-on-function-execution-errors.png" alt-text="Recherchez les diagnostics d’Azure Functions." border="false":::
 
-:::image type="content" source="./media/functions-diagnostics/function-exception.png" alt-text="Affichage de détails d’exception." border="false":::
+:::image type="content" source="./media/functions-diagnostics/function-exception.png" alt-text="Recherchez les diagnostics d’Azure Functions." border="false":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

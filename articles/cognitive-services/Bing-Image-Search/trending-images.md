@@ -12,14 +12,19 @@ ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: scottwhi
 ms.custom: seodec2018
-ms.openlocfilehash: 2936b94d7ba791b1a4e5a9b95aca3ca3ecdb5904
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cf7d1baf895d44730eb913b658ee4c7fe7eb7b11
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "66383429"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96341612"
 ---
 # <a name="get-trending-images-from-the-web"></a>Obtenir des images populaires à partir du web
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Pour obtenir des images qui sont populaires à l’heure actuelle, envoyez la requête GET suivante :  
 
@@ -39,7 +44,7 @@ L’API Images populaires n’est actuellement disponible que sur les marchés s
 - en-AU (anglais, Australie)  
 - zh-CN (chinois, Chine)
 
-La réponse contient un objet [TrendingImages](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#trendingimages) qui classe les images par catégorie. Utilisez l’élément `title` de la catégorie pour grouper les images dans votre expérience utilisateur. Les catégories sont susceptibles de changer tous les jours.  
+La réponse contient un objet [TrendingImages](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#trendingimages) qui classe les images par catégorie. Utilisez l’élément `title` de la catégorie pour grouper les images dans votre expérience utilisateur. Les catégories sont susceptibles de changer tous les jours.  
 
 ```json
 {
@@ -88,9 +93,9 @@ La réponse contient un objet [TrendingImages](https://docs.microsoft.com/rest/a
 }  
 ```  
 
-Chaque vignette contient une image et des options permettant d’obtenir les images associées. Pour obtenir les images associées, vous pouvez utiliser la requête `text` pour appeler l’[API Recherche d’images](./search-the-web.md) et afficher vous-même les images associées. Vous pouvez également utiliser l’URL dans `webSearchUrl` pour rediriger l’utilisateur sur la page des résultats de la recherche d’images Bing qui contient les images associées.
+Chaque vignette contient une image et des options permettant d’obtenir les images associées. Pour obtenir les images associées, vous pouvez utiliser la requête `text` pour appeler l’[API Recherche d’images](./overview.md) et afficher vous-même les images associées. Vous pouvez également utiliser l’URL dans `webSearchUrl` pour rediriger l’utilisateur sur la page des résultats de la recherche d’images Bing qui contient les images associées.
 
-Si vous appelez l’API Recherche d’images pour obtenir les images associées, définissez le paramètre de requête [id](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#id) sur l’ID du champ `id`. En spécifiant l’ID, vous vous assurez que la réponse contient l’image (il s’agit de la première image de la réponse) et les images qui y sont associées. En outre, définissez le paramètre de requête [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference) sur le texte dans le champ `text` de l’objet `query`.
+Si vous appelez l’API Recherche d’images pour obtenir les images associées, définissez le paramètre de requête [id](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#id) sur l’ID du champ `id`. En spécifiant l’ID, vous vous assurez que la réponse contient l’image (il s’agit de la première image de la réponse) et les images qui y sont associées. En outre, définissez le paramètre de requête [q](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference) sur le texte dans le champ `text` de l’objet `query`.
 
 L’exemple suivant illustre l’utilisation de l’ID de l’image pour obtenir les images associées de M. Smith dans la précédente réponse de l’API Images populaires.
 
@@ -101,4 +106,4 @@ X-MSEdge-ClientIP: 999.999.999.999
 X-Search-Location: lat:47.60357;long:-122.3295;re:100  
 X-MSEdge-ClientID: <blobFromPriorResponseGoesHere>  
 Host: api.cognitive.microsoft.com  
-```  
+```

@@ -5,12 +5,12 @@ author: sebastianburckhardt
 ms.topic: conceptual
 ms.date: 10/06/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 01e07eaee705634b03cc4462c4058e290daa8bc2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 88d2a23104b67dae8fd480406eb9171e9f3d5652
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235361"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92740014"
 ---
 # <a name="developers-guide-to-durable-entities-in-net"></a>Guide des entités durables en .NET pour les développeurs
 
@@ -67,7 +67,7 @@ public class Counter
 }
 ```
 
-La fonction `Run` contient le texte réutilisable nécessaire à l’utilisation de la syntaxe basée sur les classes. Il doit s’agir d’une fonction Azure *statique*. Elle s’exécute une fois pour chaque message d’opération traité par l’entité. Quand `DispatchAsync<T>` est appelé et que l’entité n’est pas déjà en mémoire, il construit un objet de type `T` et renseigne ses champs à partir du dernier JSON persistant trouvé dans le stockage (le cas échéant). Il appelle ensuite la méthode avec le nom correspondant.
+La fonction `Run` contient le texte réutilisable nécessaire à l’utilisation de la syntaxe basée sur les classes. Il doit s’agir d’une fonction Azure *statique* . Elle s’exécute une fois pour chaque message d’opération traité par l’entité. Quand `DispatchAsync<T>` est appelé et que l’entité n’est pas déjà en mémoire, il construit un objet de type `T` et renseigne ses champs à partir du dernier JSON persistant trouvé dans le stockage (le cas échéant). Il appelle ensuite la méthode avec le nom correspondant.
 
 > [!NOTE]
 > L’état d’une entité basée sur la classe est **créé implicitement** avant que l’entité ne traite une opération. Il peut être **supprimé explicitement** dans une opération via l’appel de `Entity.Current.DeleteState()`.
@@ -103,9 +103,9 @@ Par exemple, nous pouvons modifier l’entité Counter pour qu’elle démarre u
 ```csharp
     public void Add(int amount) 
     {
-        if (this.Value < 100 && this.Value + amount > 100)
+        if (this.Value < 100 && this.Value + amount >= 100)
         {
-            Entity.Current.StartNewOrchestration("MilestoneReached", Entity.Current.EntityId)
+            Entity.Current.StartNewOrchestration("MilestoneReached", Entity.Current.EntityId);
         }
         this.Value += amount;      
     }
@@ -427,7 +427,7 @@ public class HttpEntity
     [JsonIgnore]
     private readonly HttpClient client;
 
-    public class HttpEntity(IHttpClientFactory factory)
+    public HttpEntity(IHttpClientFactory factory)
     {
         this.client = factory.CreateClient();
     }
@@ -471,7 +471,7 @@ public static void Counter([EntityTrigger] IDurableEntityContext ctx)
             ctx.SetState(0);
             break;
         case "get":
-            ctx.Return(ctx.GetState<int>()));
+            ctx.Return(ctx.GetState<int>());
             break;
         case "delete":
             ctx.DeleteState();

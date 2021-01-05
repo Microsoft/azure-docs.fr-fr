@@ -8,18 +8,19 @@ author: asudbring
 manager: KumundD
 Customer intent: I want to test a NAT Gateway for outbound connectivity for my virtual network.
 ms.service: virtual-network
+ms.subservice: nat
 ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/24/2020
 ms.author: allensu
-ms.openlocfilehash: ceadbb4297ad0c5ce28470dd75b3f3496c9c5152
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: d798725892a9586c17cd7023863fe5cf7df05cb6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82084741"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84417835"
 ---
 # <a name="tutorial-create-a-nat-gateway-using-the-azure-portal-and-test-the-nat-service"></a>Tutoriel : Créer une passerelle NAT avec le portail Azure et tester le service NAT
 
@@ -43,12 +44,12 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | myResourceGroupNAT |
-| **\<nom_réseau_virtuel>** | myVNetsource          |
-| **\<nom_région>**          | USA Est 2      |
-| **\<espace_d’adressage_IPv4>**   | 192.168.0.0/16          |
-| **\<nom_sous-réseau>**          | mySubnetsource        |
-| **\<plage_adresses_sous-réseau>** | 192.168.0.0/24          |
+| **\<resource-group-name>**  | myResourceGroupNAT |
+| **\<virtual-network-name>** | myVNetsource          |
+| **\<region-name>**          | USA Est 2      |
+| **\<IPv4-address-space>**   | 192.168.0.0/16          |
+| **\<subnet-name>**          | mySubnetsource        |
+| **\<subnet-address-range>** | 192.168.0.0/24          |
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 
@@ -166,12 +167,12 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | myResourceGroupNAT |
-| **\<nom_réseau_virtuel>** | myVNetdestination          |
-| **\<nom_région>**          | USA Est 2      |
-| **\<espace_d’adressage_IPv4>**   | 192.168.0.0/16          |
-| **\<nom_sous-réseau>**          | mySubnetdestination        |
-| **\<plage_adresses_sous-réseau>** | 192.168.0.0/24          |
+| **\<resource-group-name>**  | myResourceGroupNAT |
+| **\<virtual-network-name>** | myVNetdestination          |
+| **\<region-name>**          | USA Est 2      |
+| **\<IPv4-address-space>**   | 10.1.0.0/16          |
+| **\<subnet-name>**          | mySubnetdestination        |
+| **\<subnet-address-range>** | 10.1.0.0/24          |
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 
@@ -286,7 +287,7 @@ Vous êtes désormais prêt à tester le service NAT.
 
 Quand vous êtes connecté à la machine virtuelle source, vous pouvez utiliser **curl** et **hey** pour générer des requêtes vers l’adresse IP de destination.
 
-Utilisez curl pour récupérer le fichier de 100 Ko.  Remplacez **\<ip-address-destination>** dans l’exemple ci-dessous par l’adresse IP de destination que vous avez copiée précédemment.  Le paramètre **--output** indique que le fichier récupéré sera ignoré.
+Utilisez curl pour récupérer le fichier de 100 Ko.  Dans l’exemple ci-dessous, remplacez **\<ip-address-destination>** par l’adresse IP de destination que vous avez copiée précédemment.  Le paramètre **--output** indique que le fichier récupéré sera ignoré.
 
 ```bash
 curl http://<ip-address-destination>/100k --output /dev/null

@@ -3,8 +3,8 @@ title: Transformer des données à l’aide d’une activité de diffusion en co
 description: Découvrez comment vous pouvez utiliser l’activité de diffusion en continu Hadoop dans une fabrique de données Azure pour transformer les données en exécutant des programmes de diffusion en continu Hadoop sur votre cluster HDInsight propre/à la demande.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.assetid: 4c3ff8f2-2c00-434e-a416-06dfca2c41ec
@@ -12,12 +12,12 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: a7f07365da699a40f5b51917104a68a62affa3d9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 80f78e3d2e7fdcd8fef53ca0412676a37c6486c2
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74703364"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495597"
 ---
 # <a name="transform-data-using-hadoop-streaming-activity-in-azure-data-factory"></a>Transformer des données à l’aide d’une activité de diffusion en continu Hadoop dans Azure Data Factory
 > [!div class="op_single_selector" title1="Activités de transformation"]
@@ -26,8 +26,8 @@ ms.locfileid: "74703364"
 > * [Activité MapReduce](data-factory-map-reduce.md)
 > * [Activité de diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md)
 > * [Activité Spark](data-factory-spark.md)
-> * [Activité d’exécution par lot Machine Learning](data-factory-azure-ml-batch-execution-activity.md)
-> * [Activité des ressources de mise à jour de Machine Learning](data-factory-azure-ml-update-resource-activity.md)
+> * [Activité Exécution par lots Azure Machine Learning studio (classique)](data-factory-azure-ml-batch-execution-activity.md)
+> * [Activité Mettre à jour une ressource Azure Machine Learning studio (classique)](data-factory-azure-ml-update-resource-activity.md)
 > * [Activité de procédure stockée](data-factory-stored-proc-activity.md)
 > * [Activité U-SQL Data Lake Analytics](data-factory-usql-activity.md)
 > * [Activité personnalisée .NET](data-factory-use-custom-activities.md)

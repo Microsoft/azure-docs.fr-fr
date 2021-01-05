@@ -6,14 +6,14 @@ ms.service: virtual-machines
 author: bobbytreed
 ms.author: robreed
 ms.date: 04/26/2019
-ms.topic: article
+ms.topic: how-to
 manager: carmonm
-ms.openlocfilehash: 80fc33a93d4d83dad1e687b176b39728fc7e8807
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 5baa6d57bd3895640f1654cf7a5ebca52f101cbe
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758603"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91970569"
 ---
 # <a name="run-shell-scripts-in-your-linux-vm-by-using-run-command"></a>Exécuter des scripts shell dans votre machine virtuelle Linux avec Run Command
 
@@ -39,7 +39,7 @@ Les restrictions suivantes s’appliquent lorsque vous utilisez Run Command :
 * Une connectivité sortante à partir de la machine virtuelle est nécessaire pour retourner les résultats du script.
 
 > [!NOTE]
-> Pour fonctionner correctement, Run Command a besoin d’une connectivité (port 443) aux IP publiques Azure. Si l’extension n’a pas accès à ces points de terminaison, il se peut que les scripts s’exécutent correctement, mais qu’ils ne retournent pas les résultats. Si vous bloquez le trafic sur la machine virtuelle, vous pouvez utiliser des [balises de service](../../virtual-network/security-overview.md#service-tags) pour autoriser le trafic à destination des IP publiques Azure en utilisant la balise `AzureCloud`.
+> Pour fonctionner correctement, Run Command a besoin d’une connectivité (port 443) aux IP publiques Azure. Si l’extension n’a pas accès à ces points de terminaison, il se peut que les scripts s’exécutent correctement, mais qu’ils ne retournent pas les résultats. Si vous bloquez le trafic sur la machine virtuelle, vous pouvez utiliser des [balises de service](../../virtual-network/network-security-groups-overview.md#service-tags) pour autoriser le trafic à destination des IP publiques Azure en utilisant la balise `AzureCloud`.
 
 ## <a name="available-commands"></a>Commandes disponibles
 
@@ -59,7 +59,7 @@ The entity was not found in this Azure location
 L’exemple suivant utilise la commande [az vm run-command](/cli/azure/vm/run-command?view=azure-cli-latest#az-vm-run-command-invoke) pour exécuter un script shell sur une machine virtuelle Linux Azure.
 
 ```azurecli-interactive
-az vm run-command invoke -g myResourceGroup -n myVm --command-id RunShellScript --scripts "sudo apt-get update && sudo apt-get install -y nginx"
+az vm run-command invoke -g myResourceGroup -n myVm --command-id RunShellScript --scripts "apt-get update && apt-get install -y nginx"
 ```
 
 > [!NOTE]
@@ -82,17 +82,17 @@ Une fois que vous avez choisi la commande, sélectionnez **Exécuter** pour exé
 
 ### <a name="powershell"></a>PowerShell
 
-L’exemple suivant utilise l’applet de commande [Invoke-AzVMRunCommand](https://docs.microsoft.com/powershell/module/az.compute/invoke-azvmruncommand) pour exécuter un script PowerShell sur une machine virtuelle Azure. Pour la cmdlet, le script référencé dans le paramètre `-ScriptPath` doit se situer au même emplacement qu'elle.
+L’exemple suivant utilise l’applet de commande [Invoke-AzVMRunCommand](/powershell/module/az.compute/invoke-azvmruncommand) pour exécuter un script PowerShell sur une machine virtuelle Azure. Pour la cmdlet, le script référencé dans le paramètre `-ScriptPath` doit se situer au même emplacement qu'elle.
 
 ```powershell-interactive
-Invoke-AzVMRunCommand -ResourceGroupName '<myResourceGroup>' -Name '<myVMName>' -CommandId 'RunPowerShellScript' -ScriptPath '<pathToScript>' -Parameter @{"arg1" = "var1";"arg2" = "var2"}
+Invoke-AzVMRunCommand -ResourceGroupName '<myResourceGroup>' -Name '<myVMName>' -CommandId 'RunShellScript' -ScriptPath '<pathToScript>' -Parameter @{"arg1" = "var1";"arg2" = "var2"}
 ```
 
 ## <a name="limiting-access-to-run-command"></a>Limitation de l’accès à la commande Run
 
-Le listage des commandes d’exécution ou l’affichage des détails d’une commande nécessite l’autorisation `Microsoft.Compute/locations/runCommands/read` au niveau de l’abonnement. Le rôle intégré [Lecteur](../../role-based-access-control/built-in-roles.md#reader) et les niveaux supérieurs disposent de cette autorisation.
+La liste des commandes d’exécution ou l’affichage des détails d’une commande nécessite l’autorisation `Microsoft.Compute/locations/runCommands/read`. Le rôle intégré [Lecteur](../../role-based-access-control/built-in-roles.md#reader) et les niveaux supérieurs disposent de cette autorisation.
 
-L’exécution d’une commande nécessite l’autorisation `Microsoft.Compute/virtualMachines/runCommand/action` au niveau de l’abonnement. Le rôle [Contributeur de machines virtuelles](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) et les niveaux supérieurs disposent de cette autorisation.
+L’exécution d’une commande nécessite l’autorisation `Microsoft.Compute/virtualMachines/runCommand/action`. Le rôle [Contributeur de machines virtuelles](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) et les niveaux supérieurs disposent de cette autorisation.
 
 Vous pouvez utiliser un des [rôles intégrés](../../role-based-access-control/built-in-roles.md) ou créer un [rôle personnalisé](../../role-based-access-control/custom-roles.md) afin d’exécuter Run Command.
 

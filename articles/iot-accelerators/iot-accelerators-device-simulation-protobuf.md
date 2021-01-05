@@ -6,17 +6,15 @@ manager: timlt
 ms.service: iot-accelerators
 services: iot-accelerators
 ms.topic: conceptual
-ms.custom:
-- mvc
-- amqp
+ms.custom: mvc, amqp, devx-track-csharp
 ms.date: 11/06/2018
 ms.author: dobett
-ms.openlocfilehash: c49745b30d2c4acc115a72af095f3e941dc4d509
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 77a795b8f704084b612a2dcbd364b8d5be0a3333
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81684004"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852147"
 ---
 # <a name="serialize-telemetry-using-protocol-buffers"></a>Sérialiser des données de télémétrie à l'aide de Protocol Buffers
 
@@ -42,7 +40,7 @@ Pour suivre les étapes décrites dans ce guide pratique, vous devez disposer de
 * .NET Core. Vous pouvez télécharger [.NET Core pour Mac, Linux ou Windows](https://www.microsoft.com/net/download).
 * Postman. Vous pouvez télécharger [Postman pour Mac, Windows ou Linux](https://www.getpostman.com/apps).
 * Un [hub IoT déployé dans votre abonnement Azure](../iot-hub/iot-hub-create-through-portal.md). Vous avez besoin de la chaîne de connexion du hub IoT pour effectuer les étapes décrites dans ce guide. Vous pouvez obtenir cette chaîne de connexion sur le portail Azure.
-* Une [base de données Cosmos DB déployée dans le cadre de votre abonnement Azure](../cosmos-db/create-sql-api-dotnet.md#create-account) qui utilise l'API SQL et qui est configurée avec une [cohérence forte](../cosmos-db/manage-account.md). Vous avez besoin de la chaîne de connexion de la base de données Cosmos DB pour effectuer les étapes décrites dans ce guide. Vous pouvez obtenir cette chaîne de connexion sur le portail Azure.
+* Une [base de données Cosmos DB déployée dans le cadre de votre abonnement Azure](../cosmos-db/create-sql-api-dotnet.md#create-account) qui utilise l'API SQL et qui est configurée avec une [cohérence forte](../cosmos-db/how-to-manage-database-account.md). Vous avez besoin de la chaîne de connexion de la base de données Cosmos DB pour effectuer les étapes décrites dans ce guide. Vous pouvez obtenir cette chaîne de connexion sur le portail Azure.
 * Un [compte de stockage Azure déployé dans le cadre de votre abonnement Azure](../storage/common/storage-account-create.md). La chaîne de connexion Compte de stockage est requise pour suivre les étapes décrites dans ce guide. Vous pouvez obtenir cette chaîne de connexion sur le portail Azure.
 
 ## <a name="prepare-your-development-environment"></a>Préparer votre environnement de développement
@@ -279,4 +277,4 @@ Rares sont les fonctionnalités IoT Hub qui prennent nativement en charge Protob
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous avez appris à personnaliser Device Simulation afin d'utiliser Protobuf pour l'envoi de données de télémétrie, l'étape suivante consiste à apprendre à [déployer une image personnalisée dans le cloud](iot-accelerators-device-simulation-deploy-image.md).
+Maintenant que vous avez appris à personnaliser la simulation d’appareil afin d’utiliser Protobuf pour l’envoi de données de télémétrie, l’étape suivante consiste à visiter le dépôt GitHub pour en savoir plus sur la [simulation d’appareil](https://github.com/Azure/device-simulation-dotnet).

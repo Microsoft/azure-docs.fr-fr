@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/09/2017
 ms.author: cawa
-ms.openlocfilehash: fe3a8ab5b43c41b7e9f79f92de674515377fa9ec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84f6473c25a5be11eeda7cd2b311d93a7226a78c
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60456724"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96488389"
 ---
 # <a name="using-storage-explorer-with-azure-file-storage"></a>Utilisation de l’Explorateur de stockage avec le Stockage Fichier Azure
 
@@ -31,7 +31,7 @@ Pour pouvoir suivre les étapes de cet article, vous devrez :
 
 - [Télécharger et installer l’Explorateur Stockage](https://www.storageexplorer.com/)
 
-- [Vous connecter à un service ou un compte de stockage Azure](https://docs.microsoft.com//azure/vs-azure-tools-storage-manage-with-storage-explorer#connect-to-a-storage-account-or-service)
+- [Vous connecter à un service ou un compte de stockage Azure](./vs-azure-tools-storage-manage-with-storage-explorer.md#connect-to-a-storage-account-or-service)
 
 ## <a name="create-a-file-share"></a>Créer un partage de fichiers
 
@@ -47,7 +47,7 @@ Les étapes suivantes expliquent comment créer un partage de fichiers dans l’
 
     ![Créer un partage de fichiers](media/vs-azure-tools-storage-explorer-files/image1.png)
 
-1. Une zone de texte apparaît sous le dossier **Partages de fichiers**. Entrez le nom de votre partage de fichiers. Consultez la section relative aux [règles d’affectation des noms de partages de fichiers](https://docs.microsoft.com//azure/storage/storage-dotnet-how-to-use-blobs) pour obtenir la liste des règles et restrictions applicables aux noms de partages de fichiers.
+1. Une zone de texte apparaît sous le dossier **Partages de fichiers**. Entrez le nom de votre partage de fichiers. Consultez la section relative aux [règles d’affectation des noms de partages de fichiers](./storage/blobs/storage-quickstart-blobs-dotnet.md) pour obtenir la liste des règles et restrictions applicables aux noms de partages de fichiers.
 
     ![Affectation d’un nom au partage](media/vs-azure-tools-storage-explorer-files/image2.png)
 
@@ -73,11 +73,11 @@ Les étapes suivantes expliquent comment afficher le contenu d’un partage de f
 
 1. Le volet principal affiche le contenu du partage de fichiers.
     
-    ![Contenu d’un partage de fichiers](media/vs-azure-tools-storage-explorer-files/image5.png)
+    ![Capture d’écran du volet principal pour un partage de fichiers dans l’Explorateur de stockage montrant le contenu du partage.](media/vs-azure-tools-storage-explorer-files/image5.png)
 
 ## <a name="delete-a-file-share"></a>Supprimer un partage de fichiers
 
-Vous pouvez facilement créer et supprimer des partages de fichiers selon vos besoins. (pour savoir comment supprimer des fichiers, reportez-vous à la section [Gestion des fichiers dans un partage de fichiers](https://docs.microsoft.com//azure/vs-azure-tools-storage-explorer-blobs#managing-blobs-in-a-blob-container)).
+Vous pouvez facilement créer et supprimer des partages de fichiers selon vos besoins. (pour savoir comment supprimer des fichiers, reportez-vous à la section [Gestion des fichiers dans un partage de fichiers](./vs-azure-tools-storage-explorer-blobs.md#managing-blobs-in-a-blob-container)).
 
 Les étapes suivantes expliquent comment supprimer un partage de fichiers dans l’Explorateur Stockage :
 
@@ -97,7 +97,7 @@ Les étapes suivantes expliquent comment supprimer un partage de fichiers dans l
 
 ## <a name="copy-a-file-share"></a>Copier un partage de fichiers
 
-L’Explorateur Stockage vous permet de copier un partage de fichiers dans le Presse-papiers, puis de coller ce partage de fichiers dans un autre compte de stockage. (pour savoir comment copier des fichiers, reportez-vous à la section [Gestion des fichiers dans un partage de fichiers](https://docs.microsoft.com//azure/vs-azure-tools-storage-explorer-blobs#managing-blobs-in-a-blob-container)).
+L’Explorateur Stockage vous permet de copier un partage de fichiers dans le Presse-papiers, puis de coller ce partage de fichiers dans un autre compte de stockage. (pour savoir comment copier des fichiers, reportez-vous à la section [Gestion des fichiers dans un partage de fichiers](./vs-azure-tools-storage-explorer-blobs.md#managing-blobs-in-a-blob-container)).
 
 Les étapes suivantes expliquent comment copier un partage de fichiers d’un compte de stockage à un autre.
 
@@ -117,7 +117,7 @@ Les étapes suivantes expliquent comment copier un partage de fichiers d’un co
 
 ## <a name="get-the-sas-for-a-file-share"></a>Obtenir la signature d’accès partagé (SAP) pour un partage de fichiers
 
-Une [signature d’accès partagé (SAP)](https://docs.microsoft.com//azure/storage/storage-dotnet-shared-access-signature-part-1) fournit un accès délégué aux ressources de votre compte de stockage. Cela vous permet d’octroyer à un client des autorisations d’accès limité à des objets de votre compte de stockage pendant une période donnée et avec un ensemble défini d’autorisations, sans partager les clés d’accès de votre compte.
+Une [signature d’accès partagé (SAP)](./storage/common/storage-sas-overview.md) fournit un accès délégué aux ressources de votre compte de stockage. Cela vous permet d’octroyer à un client des autorisations d’accès limité à des objets de votre compte de stockage pendant une période donnée et avec un ensemble défini d’autorisations, sans partager les clés d’accès de votre compte.
 
 Les étapes suivantes expliquent comment créer une signature d’accès partagé pour un partage de fichiers :
 
@@ -191,7 +191,7 @@ Les étapes suivantes expliquent comment gérer les fichiers (et les dossiers) d
 
 1.  Le volet principal affiche le contenu du partage de fichiers.
 
-    ![Contenu d’un partage de fichiers](media/vs-azure-tools-storage-explorer-files/image17.png)
+    ![Capture d’écran du volet principal pour le partage de fichiers myazurefileshare dans l’Explorateur de stockage, montrant le contenu du partage avec le premier dossier sélectionné.](media/vs-azure-tools-storage-explorer-files/image17.png)
 
 1.  Le volet principal affiche le contenu du partage de fichiers.
 

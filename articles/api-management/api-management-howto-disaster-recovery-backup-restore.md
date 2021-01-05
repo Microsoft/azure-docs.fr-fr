@@ -11,14 +11,14 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 02/03/2020
+ms.date: 12/05/2020
 ms.author: apimpm
-ms.openlocfilehash: e74d7dcf8764d167e0080c9d7cca5573bd69ef1d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 25356e7101293fc27d4107b3a618cfc481aee969
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260987"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96779581"
 ---
 # <a name="how-to-implement-disaster-recovery-using-service-backup-and-restore-in-azure-api-management"></a>Comment implémenter une récupération d'urgence à l'aide d'une sauvegarde de service et la récupérer dans Gestion des API Azure
 
@@ -152,7 +152,7 @@ où :
 -   `subscriptionId` : ID de l’abonnement qui contient le service Gestion des API que vous tentez de sauvegarder
 -   `resourceGroupName` : nom du groupe de ressources de votre service Gestion des API Azure
 -   `serviceName` : Nom du service Gestion des API que vous sauvegardez, spécifié au moment de sa création
--   `api-version` : à remplacer par `2018-06-01-preview`
+-   `api-version` : à remplacer par `2019-12-01`
 
 Dans le corps de la demande, spécifiez le nom du compte de stockage Azure cible, la clé d’accès, le nom du conteneur d’objets blob et le nom de la sauvegarde :
 
@@ -169,20 +169,6 @@ Définissez la valeur de l’en-tête de la demande `Content-Type` sur `applicat
 
 La sauvegarde est une opération longue qui peut prendre plusieurs minutes. Si la demande a réussi et que le processus de sauvegarde a commencé, vous recevez le code d’état de réponse `202 Accepted` avec un en-tête `Location`. Envoyez des demandes « GET » à l’URL dans l’en-tête `Location` pour connaître l’état de l’opération. Quand la sauvegarde est en cours, vous continuez à recevoir le code d’état « 202 Accepted ». Un code de réponse `200 OK` indique que l’opération de sauvegarde a réussi.
 
-Tenez compte des contraintes suivantes quand vous faites une demande de sauvegarde ou de restauration :
-
--   Le **conteneur** spécifié dans le corps de la demande **doit exister**.
--   Pendant la sauvegarde, **évitez toutes les modifications de gestion dans le service**, comme mettre à niveau une référence SKU ou la passer à une version antérieure, changer un nom de domaine, etc.
--   La restauration d’une **sauvegarde n’est garantie que pendant 30 jours** à partir du moment de sa création.
--   Les **données d’utilisation** servant à la création des rapports analytiques **ne sont pas incluses** dans la sauvegarde. Utilisez l'[API REST de Gestion des API Azure][azure api management rest api] pour récupérer régulièrement les rapports d'analyse et les conserver en toute sécurité.
--   En outre, les éléments suivants ne font pas partie des données de sauvegarde : les certificats TLS/SSL de domaine personnalisé et tous les certificats intermédiaires ou racines téléchargés par le client, le contenu du portail des développeurs et les paramètres d’intégration du réseau virtuel.
--   La fréquence à laquelle vous effectuez les sauvegardes du service affecte votre objectif de point de récupération. Pour la réduire, nous vous conseillons d’implémenter des sauvegardes régulières et d’effectuer des sauvegardes à la demande quand vous apportez des changements à votre service Gestion des API.
--   Les **changements** de configuration du service (par exemple, les API, les stratégies et l’apparence du portail des développeurs) pendant une opération de sauvegarde **peuvent être exclus de la sauvegarde et être perdus**.
--   **Autorisez** l’accès depuis le plan de contrôle au compte de stockage Azure, si le [pare-feu][azure-storage-ip-firewall] est activé pour celui-ci. Le client doit ouvrir l’ensemble des [adresses IP du plan de contrôle de gestion des API Azure][control-plane-ip-address] sur son compte de stockage utilisé comme destination de sauvegarde ou source de restauration. 
-
-> [!NOTE]
-> Si vous tentez d’effectuer des sauvegardes/restaurations à partir de/vers un service gestion des API en utilisant un compte de stockage sur lequel le [pare-feu][azure-storage-ip-firewall] est activé dans la même région Azure, ceci ne fonctionnera pas. Cela est dû au fait que les demandes adressées à Stockage Azure ne font pas l’objet d’une traduction d’adresse réseau source en adresse IP publique dans Calcul > (Plan de contrôle de gestion des API Azure). La demande de stockage inter-région fera l’objet d’une traduction d’adresse réseau source.
-
 ### <a name="restore-an-api-management-service"></a><a name="step2"> </a>Restauration d’un service Gestion des API
 
 Pour restaurer un service Gestion des API à partir d’une sauvegarde créée précédemment, envoyez la demande HTTP suivante :
@@ -196,7 +182,7 @@ où :
 -   `subscriptionId` : ID de l’abonnement qui contient le service Gestion des API dans lequel vous restaurez une sauvegarde
 -   `resourceGroupName` : Nom du groupe de ressources qui contient le service Gestion des API Azure dans lequel vous restaurez une sauvegarde
 -   `serviceName` : Nom du service Gestion des API en cours de restauration, spécifié au moment de sa création
--   `api-version` : à remplacer par `2018-06-01-preview`
+-   `api-version` : à remplacer par `api-version=2019-12-01`
 
 Dans le corps de la demande, spécifiez l’emplacement du fichier de sauvegarde. C’est-à-dire, ajoutez le nom du compte de stockage Azure, la clé d’accès, le nom du conteneur d’objets blob et le nom de la sauvegarde :
 
@@ -223,18 +209,40 @@ La récupération est une opération de longue durée qui peut prendre jusqu'à 
 > [!NOTE]
 > Vous pouvez aussi effectuer les opérations de sauvegarde et de restauration avec les commandes PowerShell [_Backup-AzApiManagement_](/powershell/module/az.apimanagement/backup-azapimanagement) et [_Restore-AzApiManagement_](/powershell/module/az.apimanagement/restore-azapimanagement), respectivement.
 
+## <a name="constraints-when-making-backup-or-restore-request"></a>Contraintes lors de la création d’une requête de sauvegarde ou de restauration
+
+-   Le **conteneur** spécifié dans le corps de la demande **doit exister**.
+-   Pendant la sauvegarde, **évitez toutes les modifications de gestion dans le service**, comme mettre à niveau une référence SKU ou la passer à une version antérieure, changer un nom de domaine, etc.
+-   La restauration d’une **sauvegarde n’est garantie que pendant 30 jours** à partir du moment de sa création.
+-   Les **changements** de configuration du service (par exemple, les API, les stratégies et l’apparence du portail des développeurs) pendant une opération de sauvegarde **peuvent être exclus de la sauvegarde et être perdus**.
+-   Si le [pare-feu][azure-storage-ip-firewall] est activé sur le compte de stockage Azure, le client doit **autoriser** l’ensemble des [adresses IP du plan de contrôle de Gestion des API Azure][control-plane-ip-address] sur son compte de stockage à des fins de sauvegarde ou de restauration. Le compte de stockage Azure peut se trouver dans n’importe quelle région Azure, à l’exception de celle où se situe le service Gestion des API. Par exemple, si le service Gestion des API se trouve dans la région USA Ouest 2, le compte de stockage Azure peut être dans la région USA Ouest 2 et le client doit ouvrir l’adresse IP 13.64.39.16 du plan de contrôle (adresse IP du plan de contrôle de Gestion des API de la région USA Ouest 2) sur le pare-feu. Cela est dû au fait que les demandes adressées à Stockage Azure ne font pas l’objet d’une traduction d’adresse réseau source en IP publique dans Compute (Plan de contrôle de Gestion des API Azure) dans la même région Azure. La demande de stockage inter-région fera l’objet d’une traduction d’adresse réseau source en IP publique.
+-   [Le partage des ressources Cross-Origin (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) ne doit **pas** être activé sur le service BLOB dans le compte de stockage Azure.
+-   Le **SKU** du service à restaurer **doit correspondre** à celui du service sauvegardé utilisé pour la restauration.
+
+## <a name="what-is-not-backed-up"></a>Éléments non sauvegardés
+-   Les **données d’utilisation** servant à la création des rapports analytiques **ne sont pas incluses** dans la sauvegarde. Utilisez l'[API REST de Gestion des API Azure][azure api management rest api] pour récupérer régulièrement les rapports d'analyse et les conserver en toute sécurité.
+-   Certificats [TLS/SSL de domaine personnalisé](configure-custom-domain.md)
+-   [Certificat d’autorité de certification personnalisé](api-management-howto-ca-certificates.md) qui inclut des certificats intermédiaires ou racines chargés par le client
+-   Paramètres d’intégration du [réseau virtuel](api-management-using-with-vnet.md).
+-   Configuration d’[identité managée](api-management-howto-use-managed-service-identity.md).
+-   Configuration des [diagnostics Azure Monitor](api-management-howto-use-azure-monitor.md).
+-   Paramètres [de chiffrement et des protocoles](api-management-howto-manage-protocols-ciphers.md).
+-   Contenu du [portail des développeurs](api-management-howto-developer-portal.md#is-the-portals-content-saved-with-the-backuprestore-functionality-in-api-management).
+
+La fréquence à laquelle vous effectuez les sauvegardes du service affecte votre objectif de point de récupération. Pour la réduire, nous vous conseillons d’implémenter des sauvegardes régulières et d’effectuer des sauvegardes à la demande quand vous apportez des changements à votre service Gestion des API.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Consultez les ressources suivantes pour accéder à différentes procédures pas à pas relatives au processus de sauvegarde et de restauration.
 
 -   [Répliquer des comptes de gestion des API Azure](https://www.returngis.net/en/2015/06/replicate-azure-api-management-accounts/)
 -   [Automating API Management Backup and Restore with Logic Apps](https://github.com/Azure/api-management-samples/tree/master/tutorials/automating-apim-backup-restore-with-logic-apps) (Automatiser la sauvegarde et la restauration avec Gestion des API avec Logic Apps)
--   [Gestion des API Azure : sauvegarde et restauration de la configuration](https://blogs.msdn.com/b/stuartleeks/archive/2015/04/29/azure-api-management-backing-up-and-restoring-configuration.aspx)
+-   [Gestion des API Azure : sauvegarde et restauration de la configuration](/archive/blogs/stuartleeks/azure-api-management-backing-up-and-restoring-configuration)
     _L’approche détaillée par Stuart ne correspond pas à l’aide officielle mais est intéressante._
 
 [backup an api management service]: #step1
 [restore an api management service]: #step2
-[azure api management rest api]: https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/api-management-rest
+[azure api management rest api]: /rest/api/apimanagement/apimanagementrest/api-management-rest
 [api-management-add-aad-application]: ./media/api-management-howto-disaster-recovery-backup-restore/api-management-add-aad-application.png
 [api-management-aad-permissions]: ./media/api-management-howto-disaster-recovery-backup-restore/api-management-aad-permissions.png
 [api-management-aad-permissions-add]: ./media/api-management-howto-disaster-recovery-backup-restore/api-management-aad-permissions-add.png

@@ -2,36 +2,64 @@
 title: Gérer un cluster Azure Kubernetes Service avec le tableau de bord web
 description: Découvrez comment utiliser le tableau de bord intégré de l’interface utilisateur web de Kubernetes pour gérer un cluster Azure Kubernetes Service (AKS).
 services: container-service
+author: mlearned
 ms.topic: article
-ms.date: 10/08/2018
-ms.openlocfilehash: 15fcf765be0a754575713eebcdaa7d68e1c299b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/03/2020
+ms.author: mlearned
+ms.openlocfilehash: 85f0a42cdfcbea2223d202a9dc35f58746580e85
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77595346"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350124"
 ---
 # <a name="access-the-kubernetes-web-dashboard-in-azure-kubernetes-service-aks"></a>Accéder au tableau de bord web Kubernetes dans Azure Kubernetes Service (AKS)
 
 Kubernetes comprend un tableau de bord web qui peut être utilisé pour les opérations de gestion de base. Ce tableau de bord vous permet d’afficher l’état de santé de base et les métriques concernant vos applications, ainsi que de créer et déployer des services et de modifier les applications existantes. Cet article vous montre comment accéder au tableau de bord Kubernetes à l’aide de l’interface CLI Azure, et fournit des instructions pour certaines opérations de base.
 
-Pour plus d’informations sur le tableau de bord Kubernetes, consultez la section [Tableau de bord de l’interface utilisateur web de Kubernetes][kubernetes-dashboard].
+Pour plus d’informations sur le tableau de bord Kubernetes, consultez la section [Tableau de bord de l’interface utilisateur web de Kubernetes][kubernetes-dashboard]. AKS utilise la version 2.0 ou une version ultérieure du tableau de bord open source.
+
+> [!WARNING]
+> **Le module complémentaire du tableau de bord AKS sera bientôt déconseillé. Utilisez plutôt l’[affichage des ressources Kubernetes dans le portail Azure][kubernetes-portal] (préversion).** 
+> * Le tableau de bord Kubernetes est activé par défaut pour les clusters exécutant une version de Kubernetes antérieure à 1.18.
+> * Le module complémentaire du dashboard est désactivé par défaut pour tous les nouveaux clusters créés sur Kubernetes 1.18 ou une version ultérieure. 
+ > * À partir de la préversion de Kubernetes 1.19, AKS ne prend plus en charge l’installation du module complémentaire kube-dashboard géré. 
+ > * Les clusters existants avec le module complémentaire activé ne seront pas impactés. Les utilisateurs pourront continuer à installer manuellement le tableau de bord open source en tant que logiciel installé par l’utilisateur.
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Les étapes détaillées dans ce document supposent que vous avez créé un cluster AKS et que vous avez établi une connexion `kubectl` avec le cluster. Si vous avez besoin de créer un cluster AKS, consultez le [guide de démarrage rapide AKS][aks-quickstart].
+Les étapes détaillées dans ce document supposent que vous avez créé un cluster AKS et que vous avez établi une connexion `kubectl` avec le cluster. Si vous devez créer un cluster AKS, consultez [Démarrage rapide : Déployer un cluster Azure Kubernetes Service à l’aide d’Azure CLI][aks-quickstart].
 
-Vous devez également avoir installé et configuré Azure CLI version 2.0.46 ou ultérieure. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI version 2.6.0 ou ultérieure doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
+
+## <a name="disable-the-kubernetes-dashboard"></a>Désactiver le tableau de bord Kubernetes
+
+Le module complémentaire kube-dashboard est **activé par défaut sur les clusters antérieurs à K8s 1.18**. Le module complémentaire peut être désactivé en exécutant la commande suivante.
+
+``` azurecli
+az aks disable-addons -g myRG -n myAKScluster -a kube-dashboard
+```
 
 ## <a name="start-the-kubernetes-dashboard"></a>Ouvrir le tableau de bord Kubernetes
 
-Pour ouvrir le tableau de bord Kubernetes, utilisez la commande [az aks browse][az-aks-browse]. L’exemple suivant ouvre le tableau de bord du cluster nommé *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup* :
+> [!WARNING]
+> Le module complémentaire du tableau de bord AKS sera bientôt déconseillé à partir de la version 1.19. Utilisez plutôt l’[affichage des ressources Kubernetes dans le portail Azure][kubernetes-portal] (préversion). 
+> * La commande suivante ouvre l’affichage des ressources du portail Azure à la place du tableau de bord Kubernetes pour la version 1.19 et ultérieures.
+
+Pour ouvrir le tableau de bord Kubernetes sur un cluster, utilisez la commande [az aks browse][az-aks-browse]. Cette commande requiert l’installation sur le cluster du module complémentaire kube-dashboard, qui est inclus par défaut sur les clusters exécutant une version antérieure à Kubernetes 1.18.
+
+L’exemple suivant ouvre le tableau de bord du cluster nommé *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup* :
 
 ```azurecli
 az aks browse --resource-group myResourceGroup --name myAKSCluster
 ```
 
 Cette commande crée un proxy entre votre système de développement et l’API Kubernetes, et ouvre un navigateur web sur le tableau de bord Kubernetes. Si le tableau de bord Kubernetes ne s’ouvre pas dans le navigateur web, copiez et collez l’adresse URL indiquée dans Azure CLI (habituellement `http://127.0.0.1:8001`).
+
+> [!NOTE]
+> Si vous ne voyez pas le tableau de bord sous `http://127.0.0.1:8001`, vous pouvez accéder manuellement aux adresses suivantes. Les clusters de la version 1.16 ou des versions ultérieures utilisent https et requièrent un point de terminaison séparé.
+> * K8s 1.16 ou version supérieure : `http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
+> * K8s 1.15 et versions inférieures : `http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboard:/proxy`
 
 <!--
 ![The login page of the Kubernetes web dashboard](./media/kubernetes-dashboard/dashboard-login.png)
@@ -47,7 +75,7 @@ You have the following options to sign in to your cluster's dashboard:
 > 
 > When setting up authentication for the Kubernetes dashboard, it is recommended that you use a token over the default dashboard service account. A token allows each user to use their own permissions. Using the default dashboard service account may allow a user to bypass their own permissions and use the service account instead.
 > 
-> If you do choose to use the default dashboard service account and your AKS cluster uses RBAC, a *ClusterRoleBinding* must be created before you can correctly access the dashboard. By default, the Kubernetes dashboard is deployed with minimal read access and displays RBAC access errors. A cluster administrator can choose to grant additional access to the *kubernetes-dashboard* service account, however this can be a vector for privilege escalation. You can also integrate Azure Active Directory authentication to provide a more granular level of access.
+> If you do choose to use the default dashboard service account and your AKS cluster uses Kubernetes RBAC, a *ClusterRoleBinding* must be created before you can correctly access the dashboard. By default, the Kubernetes dashboard is deployed with minimal read access and displays Kubernetes RBAC access errors. A cluster administrator can choose to grant additional access to the *kubernetes-dashboard* service account, however this can be a vector for privilege escalation. You can also integrate Azure Active Directory authentication to provide a more granular level of access.
 >
 > To create a binding, use the [kubectl create clusterrolebinding][kubectl-create-clusterrolebinding] command as shown in the following example. **This sample binding does not apply any additional authentication components and may lead to insecure use.**
 >
@@ -55,29 +83,70 @@ You have the following options to sign in to your cluster's dashboard:
 > kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 > ```
 > 
-> You can now access the Kubernetes dashboard in your RBAC-enabled cluster. To start the Kubernetes dashboard, use the [az aks browse][az-aks-browse] command as detailed in the previous step.
+> You can now access the Kubernetes dashboard in your Kubernetes RBAC-enabled cluster. To start the Kubernetes dashboard, use the [az aks browse][az-aks-browse] command as detailed in the previous step.
 >
-> If your cluster does not use RBAC, it is not recommended to create a *ClusterRoleBinding*.
+> If your cluster does not use Kubernetes RBAC, it is not recommended to create a *ClusterRoleBinding*.
 > 
 > For more information on using the different authentication methods, see the Kubernetes dashboard wiki on [access controls][dashboard-authentication].
 
 After you choose a method to sign in, the Kubernetes dashboard is displayed. If you chose to use *token* or *skip*, the Kubernetes dashboard will use the permissions of the currently logged in user to access the cluster.
--->
 
 > [!IMPORTANT]
-> Si votre cluster AKS utilise RBAC, un *ClusterRoleBinding* doit être créé avant de pouvoir accéder correctement au tableau de bord. Par défaut, le tableau de bord Kubernetes est déployé avec un accès en lecture minimal et affiche les erreurs d’accès RBAC. À l’heure actuelle, il ne prend pas en charge les informations d’identification fournies par l’utilisateur pour déterminer le niveau d’accès ; il utilise en revanche les rôles accordés au compte de service. Un administrateur de cluster peut choisir d’accorder un accès supplémentaire au compte de service *kubernetes-dashboard* ; cependant, cela pourrait représenter un vecteur de réaffectation de privilèges. Vous pouvez également intégrer l’authentification Azure Active Directory pour proposer un niveau d’accès plus granulaire.
+> If your AKS cluster uses Kubernetes RBAC, a *ClusterRoleBinding* must be created before you can correctly access the dashboard. By default, the Kubernetes dashboard is deployed with minimal read access and displays Kubernetes RBAC access errors. The Kubernetes dashboard does not currently support user-provided credentials to determine the level of access, rather it uses the roles granted to the service account. A cluster administrator can choose to grant additional access to the *kubernetes-dashboard* service account, however this can be a vector for privilege escalation. You can also integrate Azure Active Directory authentication to provide a more granular level of access.
 > 
-> Pour créer une liaison, utilisez la commande [kubectl create clusterrolebinding][kubectl-create-clusterrolebinding]. L’exemple suivant montre comment créer un exemple de liaison, mais cet exemple de liaison n’applique pas de composants d’authentification supplémentaires et peut conduire à une utilisation à risque. Le tableau de bord Kubernetes est accessible à tous ceux qui ont accès à l’URL. N’exposez pas le tableau de bord Kubernetes publiquement.
+> To create a binding, use the [kubectl create clusterrolebinding][kubectl-create-clusterrolebinding] command. The following example shows how to create a sample binding, however, this sample binding does not apply any additional authentication components and may lead to insecure use. The Kubernetes dashboard is open to anyone with access to the URL. Do not expose the Kubernetes dashboard publicly.
 >
 > ```console
 > kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 > ```
 > 
-> Pour plus d’informations sur l’utilisation des différentes méthodes d’authentification, consultez le wiki du tableau de bord Kubernetes sur le [contrôle des accès][dashboard-authentication].
+> For more information on using the different authentication methods, see the Kubernetes dashboard wiki on [access controls][dashboard-authentication].
+-->
+
+## <a name="sign-in-to-the-dashboard-kubernetes-116"></a>Connectez-vous au tableau de bord (kubernetes 1.16+)
+
+> [!IMPORTANT]
+> À partir de la version [v1.10.1 du tableau de bord Kubernetes](https://github.com/kubernetes/dashboard/releases/tag/v1.10.1) ou de Kubernetes v1.16+, le compte de service « kubernetes-dashboard » ne peut plus être utilisé pour récupérer des ressources en raison d’un [correctif de sécurité dans cette version](https://github.com/kubernetes/dashboard/pull/3400). Par conséquent, les requêtes sans informations d’authentification retournent une [erreur 401 Non autorisé](https://github.com/Azure/AKS/issues/1573#issuecomment-703040998). Un jeton de porteur récupéré à partir d’un compte de service peut toujours être utilisé comme dans cet [exemple de tableau de bord Kubernetes](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#accessing-the-dashboard-ui), mais cela a un impact sur le déroulement de la connexion du module additionnel du tableau de bord par rapport aux versions antérieures.
+>
+>Si vous continuez à exécuter une version antérieure à 1.16, vous pouvez toujours donner des autorisations au compte de service « kubernetes-dashboard », mais cela n’est **pas recommandé** :
+> ```console
+> kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+> ```
+
+L’écran initial présenté requiert un fichier kubeconfig ou un jeton. Les deux options requièrent des autorisations d’accès aux ressources pour afficher ces ressources dans le tableau de bord.
+
+![écran de connexion](./media/kubernetes-dashboard/login.png)
+
+**Utiliser un fichier kubeconfig**
+
+Pour les clusters activés par Azure AD et non activés par Azure AD, un fichier kubeconfig peut être transmis. Vérifiez que les jetons d’accès sont valides. Si vos jetons ont expiré, vous pouvez les actualiser via kubectl.
+
+1. Définir le fichier kubeconfig d’administration avec `az aks get-credentials -a --resource-group <RG_NAME> --name <CLUSTER_NAME>`
+1. Sélectionnez `Kubeconfig`, puis cliquez sur `Choose kubeconfig file` pour ouvrir le sélecteur de fichiers
+1. Sélectionnez votre fichier kubeconfig ($HOME/.Kube/config par défaut)
+1. Cliquez sur `Sign In`
+
+**Utilisation d’un jeton**
+
+1. Pour un **cluster non Azure AD activé**, exécutez `kubectl config view` et copiez le jeton associé au compte d’utilisateur de votre cluster.
+1. Collez dans l’option du jeton lors de la connexion.    
+1. Cliquez sur `Sign In`
+
+Pour les clusters Azure AD activés, récupérez votre jeton AAD avec la commande suivante. Vérifiez que vous avez remplacé le groupe de ressources et le nom du cluster dans la commande.
+
+```
+## Update <RESOURCE_GROUP and <AKS_NAME> with your input.
+
+kubectl config view -o jsonpath='{.users[?(@.name == "clusterUser_<RESOURCE GROUP>_<AKS_NAME>")].user.auth-provider.config.access-token}'
+```
+
+Une fois l’opération réussie, une page similaire à celle ci-dessous s’affiche.
 
 ![Page de présentation du tableau de bord web Kubernetes](./media/kubernetes-dashboard/dashboard-overview.png)
 
 ## <a name="create-an-application"></a>Créer une application
+
+Les étapes suivantes requièrent que l’utilisateur dispose d’autorisations d’accès aux ressources respectives. 
 
 Pour voir comment le tableau de bord Kubernetes peut réduire la complexité des tâches de gestion, nous allons créer une application. Vous pouvez créer une application à partir du tableau de bord Kubernetes en fournissant le texte d’entrée (un fichier YAML) ou en vous aidant d’un assistant graphique.
 
@@ -144,3 +213,4 @@ Pour plus d’informations sur le tableau de bord Kubernetes, consultez le [tabl
 [az-aks-browse]: /cli/azure/aks#az-aks-browse
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [install-azure-cli]: /cli/azure/install-azure-cli
+[kubernetes-portal]: ./kubernetes-portal.md

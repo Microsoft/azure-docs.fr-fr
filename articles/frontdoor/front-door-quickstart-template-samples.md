@@ -1,27 +1,27 @@
 ---
 title: Exemples de modèles Azure Resource Manager - Azure Front Door
-description: Exemples de modèles Azure Resource Manager pour Azure Front Door
+description: Apprenez-en davantage sur les exemples de modèles Resource Manager pour Azure Front Door, notamment les modèles pour la création d’une instance Front Door de base et la configuration de la limitation du débit Front Door.
 services: frontdoor
 documentationcenter: ''
-author: sharad4u
+author: duongau
 ms.service: frontdoor
 ms.topic: sample
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/04/2020
-ms.author: sharadag
-ms.openlocfilehash: 61ce63b15d2126a25b444e97acc8a3ea3964296b
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.author: duau
+ms.openlocfilehash: bac1df020bf2a683fc04a4d05ae73311e149f70c
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80985811"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511771"
 ---
 # <a name="azure-resource-manager-deployment-model-templates-for-front-door"></a>Modèles de déploiement Azure Resource Manager pour Front Door
 
 Le tableau suivant comprend des liens vers des modèles de déploiement Azure Resource Manager pour Azure Front Door. 
 
-| | |
+| Modèle | Description |
 | ---| ---|
 | [Créer une porte d’entrée de base](https://github.com/Azure/azure-quickstart-templates/tree/master/101-front-door-create-basic)| Crée une configuration de porte d’entrée de base avec un seul backend. |
 | [Créer une porte d’entrée avec plusieurs backends et pools de backends, et un routage basé sur les URL](https://github.com/Azure/azure-quickstart-templates/tree/master/101-front-door-create-multiple-backends)| Crée une porte d’entrée avec l’équilibrage de charge configuré pour plusieurs backends du pool de backends, ainsi qu’entre des pools de backends, basé sur les chemins d’URL. |

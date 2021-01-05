@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: troubleshooting
 ms.subservice: compliance
-ms.date: 03/22/2020
+ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: markwahl-msft
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5ddd8e1c64f4db8221937abc54e88d9a884acf3e
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: bca78195d4fb7bb265c4a7fd8d78ea49a35335b6
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207242"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746709"
 ---
 # <a name="troubleshoot-azure-ad-entitlement-management"></a>Résoudre les problèmes de gestion des droits d’utilisation Azure AD
 
@@ -45,9 +45,9 @@ Cet article décrit certains éléments que vous devriez vérifier pour vous aid
 
 * Si des utilisateurs ont déjà été affectés à une ressource que vous souhaitez gérer avec un package d’accès, assurez-vous qu’ils sont affectés au package d’accès avec une stratégie appropriée. Par exemple, vous envisagez d’inclure un groupe dans un package d’accès qui contient déjà des utilisateurs dans le groupe. Si ces utilisateurs dans le groupe nécessitent un accès permanent, ils doivent avoir une stratégie appropriée pour les packages d’accès, afin de ne pas perdre leur accès au groupe. Vous pouvez affecter le package d’accès soit en indiquant aux utilisateurs qu’ils demandent le package d’accès contenant cette ressource, soit en les affectant directement au package d’accès. Pour plus d’informations, consultez [Changer les paramètres de demande et d’approbation pour un package d’accès](entitlement-management-access-package-request-policy.md).
 
-* Lorsque vous supprimez un membre d’une équipe, il est également supprimé du groupe Office 365. La suppression de la fonctionnalité de conversation de l’équipe peut être retardée. Pour plus d’informations, consultez l’article [Appartenance au groupe](https://docs.microsoft.com/microsoftteams/office-365-groups#group-membership).
+* Lorsque vous supprimez un membre d’une équipe, il est également supprimé du groupe Microsoft 365. La suppression de la fonctionnalité de conversation de l’équipe peut être retardée. Pour plus d’informations, consultez l’article [Appartenance au groupe](/microsoftteams/office-365-groups#group-membership).
 
-* Vérifiez que votre annuaire n’est pas en configuration multigéographique. Actuellement, la gestion des droits d’utilisation ne prend pas en charge les emplacements multigéographiques pour SharePoint Online. Les sites SharePoint Online doivent se trouver à l’emplacement géographique par défaut pour être régis par la gestion des droits d’utilisation. Pour plus d’informations, voir [Fonctionnalités multigéographiques dans OneDrive et SharePoint Online](https://docs.microsoft.com/Office365/Enterprise/multi-geo-capabilities-in-onedrive-and-sharepoint-online-in-office-365).
+* Vérifiez que votre annuaire n’est pas en configuration multigéographique. Actuellement, la gestion des droits d’utilisation ne prend pas en charge les emplacements multigéographiques pour SharePoint Online. Les sites SharePoint Online doivent se trouver à l’emplacement géographique par défaut pour être régis par la gestion des droits d’utilisation. Pour plus d’informations, voir [Fonctionnalités multigéographiques dans OneDrive et SharePoint Online](/Microsoft 365/Enterprise/multi-geo-capabilities-in-onedrive-and-sharepoint-online-in-office-365).
 
 ## <a name="access-packages"></a>Packages d’accès
 
@@ -69,13 +69,13 @@ Cet article décrit certains éléments que vous devriez vérifier pour vous aid
 
 * Lorsqu’un utilisateur qui ne figure pas encore dans votre annuaire se connecte au portail Mon Accès pour demander un package d’accès, assurez-vous qu’il s’authentifie à l’aide de son compte professionnel ou scolaire. Le compte professionnel ou scolaire peut être un compte présent dans l’annuaire de ressources, ou dans un annuaire qui est inclus dans l’une des stratégies du package d’accès. Si le compte de l’utilisateur n’est pas un compte professionnel ou scolaire, ou si l’annuaire auquel il s’authentifie n’est pas inclus dans la stratégie, l’utilisateur ne voit pas le package d’accès. Pour plus d’informations, consultez [Demander l’accès à un package d’accès](entitlement-management-request-access.md).
 
-* Si un utilisateur est empêché de se connecter à l’annuaire de ressources, il est dans l’incapacité de demander l’accès dans le portail Mon accès. Avant que l’utilisateur puisse demander l’accès, vous devez supprimer le bloc de connexion du profil de l’utilisateur. Pour supprimer le bloc de connexion, dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Utilisateurs** ; cliquez ensuite sur l’utilisateur concerné, puis sur **Profil**. Modifiez la section **Paramètres** et remplacez **Bloquer la connexion** par **Non**. Pour plus d’informations, consultez [Ajouter ou mettre à jour les informations du profil utilisateur avec Azure Active Directory](../fundamentals/active-directory-users-profile-azure-portal.md).  Vous pouvez également vérifier si l’utilisateur a été bloqué à cause d’une [Stratégie dIdentity Protection](../identity-protection/howto-unblock-user.md).
+* Si un utilisateur est empêché de se connecter à l’annuaire de ressources, il est dans l’incapacité de demander l’accès dans le portail Mon accès. Avant que l’utilisateur puisse demander l’accès, vous devez supprimer le bloc de connexion du profil de l’utilisateur. Pour supprimer le bloc de connexion, dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Utilisateurs** ; cliquez ensuite sur l’utilisateur concerné, puis sur **Profil**. Modifiez la section **Paramètres** et remplacez **Bloquer la connexion** par **Non**. Pour plus d’informations, consultez [Ajouter ou mettre à jour les informations du profil utilisateur avec Azure Active Directory](../fundamentals/active-directory-users-profile-azure-portal.md).  Vous pouvez également vérifier si l’utilisateur a été bloqué à cause d’une [Stratégie dIdentity Protection](../identity-protection/howto-identity-protection-remediate-unblock.md).
 
 * Dans le portail Mon accès, si un utilisateur est en même temps demandeur et approbateur, il ne peut pas voir sa demande pour un package d’accès dans la page **Approbations**. Ce comportement est intentionnel : un utilisateur ne peut pas approuver sa propre demande. Vérifiez que le package d’accès demandé compte des approbateurs supplémentaires configurés sur la stratégie. Pour plus d’informations, consultez [Changer les paramètres de demande et d’approbation pour un package d’accès](entitlement-management-access-package-request-policy.md).
 
 ### <a name="view-a-requests-delivery-errors"></a>Afficher les erreurs de remise d’une requête
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 
@@ -95,13 +95,15 @@ Cet article décrit certains éléments que vous devriez vérifier pour vous aid
 
 Si une erreur est rencontrée après le déclenchement d’une demande de retraitement d’un package d’accès, vous devez patienter pendant que le système retraite la demande. Le système essaie de retraiter à plusieurs reprises et sur une période de plusieurs heures, vous ne pouvez donc pas forcer le retraitement pendant cette période. 
 
-Vous ne pouvez retraiter qu’une demande dont l’état est **Échec de livraison** ou **Partiellement remis** avec une date de fin inférieure à une semaine.
+Vous ne pouvez retraiter qu’une demande dont l’état est **Échec de livraison** ou **Partiellement remis** avec une date de fin inférieure à une semaine. Dans le cas contraire, le bouton **Retraiter** est grisé.
+
+![Bouton Retraiter grisé](./media/entitlement-management-troubleshoot/cancel-reprocess-grayedout.png)
 
 - Si l’erreur est corrigée dans la fenêtre des essais, l’état de la demande passe à **Livraison en cours**. La demande sera retraitée sans aucune action supplémentaire de la part de l’utilisateur.
 
 - Si l’erreur n’a pas été corrigée dans la fenêtre des essais, l’état de la demande peut être **Échec de livraison** ou **Partiellement remis**. Vous pouvez ensuite utiliser le bouton **Retraiter**. Vous aurez sept jours pour retraiter la demande.
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 
@@ -117,9 +119,9 @@ Vous ne pouvez retraiter qu’une demande dont l’état est **Échec de livrais
 
 ### <a name="cancel-a-pending-request"></a>Annuler une demande en attente
 
-Vous pouvez uniquement annuler une requête en attente qui n’a pas encore été autorisée ou dont la livraison a échoué.
+Vous pouvez uniquement annuler une requête en attente qui n’a pas encore été autorisée ou dont la livraison a échoué. Dans le cas contraire, le bouton **Annuler** est grisé.
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 
@@ -144,7 +146,7 @@ Vous pouvez uniquement annuler une requête en attente qui n’a pas encore ét�
     | P1 | Utilisateurs et groupes spécifiques du répertoire OU Organisations connectées spécifiques |
     | P2 | Tous les membres du répertoire (à l’exception des invités) |
     | P3 | Tous les utilisateurs du répertoire (y compris les invités) OU Organisations connectées spécifiques |
-    | P4 | Toutes les organisations connectées OU Tous les utilisateurs (toutes les organisations connectées + tous les nouveaux utilisateurs externes) |
+    | P4 | Toutes les organisations connectées configurées OU Tous les utilisateurs (toutes les organisations connectées + tous les nouveaux utilisateurs externes) |
     
     Si une stratégie se trouve dans une catégorie de priorité plus élevée, les catégories de priorité inférieure sont ignorées. Pour savoir par le biais d’un exemple comment plusieurs stratégies de même priorité sont présentées au demandeur, voir [Sélectionner une stratégie](entitlement-management-request-access.md#select-a-policy).
 

@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 10/18/2019
 ms.author: jennile
 ms.custom: seodec18
-ms.openlocfilehash: df8f68e47776f46ae2d1331f85bd76d6cfe17b80
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d58341979b0bbe0699a5ca293b20394c43cde1d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869944"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88962806"
 ---
 # <a name="azure-app-service-diagnostics-overview"></a>Présentation des diagnostics Azure App Service
 
@@ -20,7 +20,7 @@ Quand vous exécutez une application web, vous souhaitez anticiper tout problèm
 
 Cette fonctionnalité est particulièrement utile quand vous rencontrez des problèmes avec votre application au cours des dernières 24 heures, mais vous pouvez aussi analyser tous les graphiques de diagnostic à tout moment.
 
-Les diagnostics App Service fonctionnent non seulement pour votre application sur Windows, mais également pour les applications exécutées sous [Linux/dans des conteneurs](https://docs.microsoft.com/azure/app-service/containers/app-service-linux-intro), sous [l’environnement App Service](https://docs.microsoft.com/azure/app-service/environment/intro) et dans [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview).
+Les diagnostics App Service fonctionnent non seulement pour votre application sur Windows, mais également pour les applications exécutées sous [Linux/dans des conteneurs](./overview.md#app-service-on-linux), sous [l’environnement App Service](./environment/intro.md) et dans [Azure Functions](../azure-functions/functions-overview.md).
 
 ## <a name="open-app-service-diagnostics"></a>Ouvrir les diagnostics App Service
 
@@ -71,7 +71,7 @@ Le contrôle d’intégrité offre quatre graphiques différents.
 
 ### <a name="investigate-application-code-issues-only-for-windows-app"></a>Examiner les problèmes de code d’application (uniquement pour une application Windows)
 
-Dans la mesure où de nombreux problèmes d’application sont liés à des problèmes au niveau du code, les diagnostics App Service s’intègrent à [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) pour mettre en évidence les exceptions et les problèmes de dépendance qui peuvent être corrélés au temps d’arrêt sélectionné. Application Insights doit être activé séparément.
+Dans la mesure où de nombreux problèmes d’application sont liés à des problèmes au niveau du code, les diagnostics App Service s’intègrent à [Application Insights](../azure-monitor/app/app-insights-overview.md) pour mettre en évidence les exceptions et les problèmes de dépendance qui peuvent être corrélés au temps d’arrêt sélectionné. Application Insights doit être activé séparément.
 
 ![Application Insights](./media/app-service-diagnostics/application-insights-7.png)
 

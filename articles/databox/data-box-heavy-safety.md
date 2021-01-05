@@ -8,12 +8,12 @@ ms.subservice: heavy
 ms.topic: article
 ms.date: 07/08/2019
 ms.author: alkohli
-ms.openlocfilehash: b7562ab6c7ec9c6234ed3fbb867361307b80a638
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d2c7f729f4accf7c9ca212c6e4b4b5d565c3114c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67673063"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021535"
 ---
 # <a name="safely-install-and-operate-your-azure-data-box-heavy"></a>Installer et utiliser en toute sécurité votre Azure Data Box Heavy
 
@@ -156,7 +156,7 @@ Cet appareil est conforme à la section 15 des règlements de la FCC et aux norm
 - Cet appareil ne doit pas causer d’interférences nuisibles.
 - Cet appareil doit accepter toute interférence reçue, y compris les interférences pouvant engendrer un fonctionnement indésirable de l’appareil.
 
-![Canada](./media/data-box-heavy-safety/canada.png)
+![La capture d’écran montre une notification requise pour le Canada.](./media/data-box-heavy-safety/canada.png)
 
 CAN ICES-3(A)/NMB-3(A) Microsoft Corporation, One Microsoft Way, Redmond, WA 98052, États-Unis.
 États-Unis : (800) 426 9400 Canada : (800) 933 4750

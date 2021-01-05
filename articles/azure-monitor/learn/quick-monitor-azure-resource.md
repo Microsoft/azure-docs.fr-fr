@@ -6,12 +6,12 @@ ms.topic: quickstart
 author: bwren
 ms.author: bwren
 ms.date: 12/15/2019
-ms.openlocfilehash: c4b80e62d3800392b847a411dfc66c3278e72bba
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 00cec2ca11b77f6cb9d6c0f3c429931bdcc6f6e4
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77661862"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186131"
 ---
 # <a name="quickstart-monitor-an-azure-resource-with-azure-monitor"></a>Démarrage rapide : Superviser une ressource Azure avec Azure Monitor
 [Azure Monitor](../overview.md) commence à collecter des données des ressources Azure dès le moment de leur création. Ce guide de démarrage rapide décrit brièvement les données qui sont collectées automatiquement pour une ressource particulière et explique comment les afficher dans le portail Azure. Ensuite, vous pouvez ajouter une configuration pour collecter des données supplémentaires. À partir du menu d’Azure Monitor, vous pouvez utiliser les mêmes outils pour accéder aux données collectées pour toutes les ressources dans votre abonnement.
@@ -40,11 +40,11 @@ Le journal d’activité fournit des insights sur les opérations sur chaque res
 1. En haut du menu de votre ressource, sélectionnez **Journal d’activité**.
 2. Le filtre est actuellement appliqué sur les événements liés à votre ressource. Si vous ne voyez aucun événement, essayez de changer le paramètre **Intervalle de temps** pour élargir la plage de temps prise en compte.
 
-    ![Journal d’activité](media/quick-monitor-azure-resource/activity-log-resource.png)
+    ![Capture d’écran du journal d’activité d’une ressource dans le portail Azure, montrant une liste d’opérations pour la ressource générée avec les critères de filtre par défaut.](media/quick-monitor-azure-resource/activity-log-resource.png)
 
 4. Si vous souhaitez voir les événements d’autres ressources dans votre abonnement, modifiez les critères du filtre ou supprimez les propriétés de filtre.
 
-    ![Journal d’activité](media/quick-monitor-azure-resource/activity-log-all.png)
+    ![Capture d’écran du journal d’activité d’une ressource dans le portail Azure, montrant une liste d’opérations pour la ressource générée avec les critères de filtre modifiés.](media/quick-monitor-azure-resource/activity-log-all.png)
 
 
 
@@ -54,20 +54,20 @@ Les métriques sont des valeurs numériques qui décrivent certains aspects de v
 1. Dans la section **Supervision** du menu de votre ressource, sélectionnez **Métriques**. Metrics Explorer s’ouvre avec l’étendue définie sur votre ressource.
 2. Cliquez sur **Ajouter une métrique** pour ajouter une métrique au graphique.
    
-   ![Metrics Explorer](media/quick-monitor-azure-resource/metrics-explorer-01.png)
+   ![Capture d’écran de Metrics Explorer dans le portail Azure, montrant les métriques d’une ressource. La liste déroulante Métriques est ouverte pour l’ajout de nouvelles métriques.](media/quick-monitor-azure-resource/metrics-explorer-01.png)
    
 4. Sélectionnez une valeur **Métrique** dans la liste déroulante, puis une valeur **Agrégation**. Ces valeurs définissent la manière dont les valeurs collectées seront échantillonnées sur chaque intervalle de temps.
 
-    ![Metrics Explorer](media/quick-monitor-azure-resource/metrics-explorer-02.png)
+    ![Capture d’écran de Metrics Explorer dans le portail Azure, montrant les métriques d’une ressource. La liste déroulante Agrégation est ouverte et Avg est sélectionné.](media/quick-monitor-azure-resource/metrics-explorer-02.png)
 
 5. Cliquez sur **Ajouter une métrique** pour ajouter des combinaisons de métrique et d’agrégation supplémentaires au graphique.
 
-    ![Metrics Explorer](media/quick-monitor-azure-resource/metrics-explorer-03.png)
+    ![Capture d’écran de Metrics Explorer dans le portail Azure, montrant les métriques d’une ressource.](media/quick-monitor-azure-resource/metrics-explorer-03.png)
 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans ce guide de démarrage rapide, vous avez affiché le journal d’activité et les métriques pour une ressource Azure qui sont collectées automatiquement par Azure Monitor. Les journaux de ressource fournissent des insights détaillés sur les opérations sur la ressource, mais ils doivent être configurés pour être collectés. Passez au tutoriel pour collecter les journaux de ressource dans un espace de travail Log Analytics et ensuite les analyser à l’aide de requêtes de journal.
+Dans ce guide de démarrage rapide, vous avez affiché le journal d’activité et les métriques pour une ressource Azure qui sont collectées automatiquement par Azure Monitor. Passez au guide de démarrage rapide suivant, qui vous montre comment collecter le journal d’activité dans un espace de travail Log Analytics dans lequel il peut être analysé à l’aide de [requêtes de journal](../log-query/log-query-overview.md).
 
 > [!div class="nextstepaction"]
-> [Collecter et analyser des journaux de ressources avec Azure Monitor](tutorial-resource-logs.md)
+> [Envoyer le journal d’activité Azure à un espace de travail Log Analytics](./quick-collect-activity-log-portal.md)

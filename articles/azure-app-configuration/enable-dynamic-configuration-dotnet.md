@@ -2,22 +2,23 @@
 title: 'Tutoriel .NET Framework : Configuration dynamique dans Azure App Configuration'
 description: Dans ce tutoriel, vous allez apprendre à mettre à jour dynamiquement les données de configuration des applications .NET Framework avec Azure App Configuration.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.devlang: csharp
+ms.custom: devx-track-csharp
 ms.topic: tutorial
-ms.date: 10/21/2019
-ms.author: lcozzens
-ms.openlocfilehash: 7780bdbc92868f62e8d066d171b2a04fe06a981d
-ms.sourcegitcommit: 940e16ff194d5163f277f98d038833b1055a1a3e
+ms.date: 07/24/2020
+ms.author: alkemper
+ms.openlocfilehash: 03940a86176d0bc93c5066977fdc87de5c456060
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80245801"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932759"
 ---
 # <a name="tutorial-use-dynamic-configuration-in-a-net-framework-app"></a>Tutoriel : Utiliser la configuration dynamique dans une application .NET Framework
 
-La bibliothèque cliente .NET App Configuration permet d’effectuer la mise à jour à la demande d’un ensemble de paramètres de configuration, sans entraîner le redémarrage de l’application. Vous pouvez implémenter cette configuration en obtenant d’abord une instance de `IConfigurationRefresher` parmi les options du fournisseur de configuration, puis en appelant `Refresh` sur cette instance, à n’importe quel endroit de votre code.
+La bibliothèque cliente .NET App Configuration permet d’effectuer la mise à jour à la demande d’un ensemble de paramètres de configuration, sans entraîner le redémarrage de l’application. Vous pouvez implémenter cette configuration en obtenant d’abord une instance de `IConfigurationRefresher` parmi les options du fournisseur de configuration, puis en appelant `TryRefreshAsync` sur cette instance, à n’importe quel endroit de votre code.
 
 Pour maintenir les paramètres à jour et éviter trop d’appels au magasin de configuration, un cache est utilisé pour chaque paramètre. Tant que la valeur mise en cache d’un paramètre n’a pas expiré, l’opération d’actualisation ne met pas à jour la valeur, même si celle-ci a été modifiée dans le magasin de configuration. Pour chaque requête, le délai d’expiration par défaut est de 30 secondes. Toutefois, vous pouvez le modifier selon vos besoins.
 
@@ -38,7 +39,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
+7. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
 
     | Clé | Valeur |
     |---|---|
@@ -46,7 +47,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
     Laissez **Étiquette** et **Type de contenu** vides pour l’instant.
 
-7. Sélectionnez **Appliquer**.
+8. Sélectionnez **Appliquer**.
 
 ## <a name="create-a-net-framework-console-app"></a>Créer une application console .NET Framework
 
@@ -95,7 +96,7 @@ Dans ce tutoriel, vous allez apprendre à :
         PrintMessage().Wait();
     }
     ```
-    La méthode `ConfigureRefresh` permet de spécifier les paramètres utilisés pour mettre à jour les données de configuration à l’aide du magasin App Configuration quand une opération d’actualisation est déclenchée. Vous pouvez récupérer une instance de `IConfigurationRefresher` en appelant la méthode `GetRefresher` dans les options fournies à la méthode `AddAzureAppConfiguration`. Vous pouvez aussi utiliser la méthode `Refresh` de cette instance pour déclencher une opération d’actualisation n’importe où dans votre code.
+    La méthode `ConfigureRefresh` permet de spécifier les paramètres utilisés pour mettre à jour les données de configuration à l’aide du magasin App Configuration quand une opération d’actualisation est déclenchée. Vous pouvez récupérer une instance de `IConfigurationRefresher` en appelant la méthode `GetRefresher` dans les options fournies à la méthode `AddAzureAppConfiguration`. Vous pouvez aussi utiliser la méthode `TryRefreshAsync` de cette instance pour déclencher une opération d’actualisation n’importe où dans votre code.
 
     > [!NOTE]
     > Pour un paramètre de configuration, le délai d’expiration du cache par défaut est de 30 secondes. Toutefois, vous pouvez le modifier en appelant la méthode `SetCacheExpiration` de l’initialiseur d’options qui est passé en tant qu’argument à la méthode `ConfigureRefresh`.
@@ -110,7 +111,7 @@ Dans ce tutoriel, vous allez apprendre à :
         // Wait for the user to press Enter
         Console.ReadLine();
 
-        await _refresher.Refresh();
+        await _refresher.TryRefreshAsync();
         Console.WriteLine(_configuration["TestApp:Settings:Message"] ?? "Hello world!");
     }
     ```
@@ -119,11 +120,15 @@ Dans ce tutoriel, vous allez apprendre à :
 
 1. Définissez une variable d’environnement nommée **ConnectionString** et affectez-lui la valeur de la clé d’accès à votre magasin App Configuration. Si vous utilisez l’invite de commandes Windows, exécutez la commande suivante et redémarrez l’invite pour que la modification soit prise en compte :
 
+    ```console
         setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez Windows PowerShell, exécutez la commande suivante :
 
+    ```powershell
         $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```
 
 1. Redémarrez Visual Studio pour que la modification soit prise en compte. 
 

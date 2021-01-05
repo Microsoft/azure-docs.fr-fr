@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : CEILING'
 description: Découvrez la fonction système SQL CEILING dans Azure Cosmos DB, qui retourne le plus petit entier supérieur ou égal à l’expression numérique spécifiée.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 81f113aa51a7f739b506ec7e3eb5bf2cb9f49a03
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c5fdda416aca698b9ad0a68ef050957f32aef31
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302642"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93332404"
 ---
 # <a name="ceiling-azure-cosmos-db"></a>CEILING (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le plus petit nombre entier qui est supérieur ou égal à l'expression numérique spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe

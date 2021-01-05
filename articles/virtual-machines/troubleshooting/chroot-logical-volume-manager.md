@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 11/24/2019
 ms.author: vilibert
-ms.openlocfilehash: 20d710f717a9dff26f46ac7a201a9b694f3fbe84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 390443874ea63a8661ef8baea627015fcf679719
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74684126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002695"
 ---
 # <a name="troubleshooting-a-linux-vm-when-there-is-no-access-to-the-azure-serial-console-and-the-disk-layout-is-using-lvm-logical-volume-manager"></a>Résolution des problèmes d’une machine virtuelle Linux quand il n’y a aucun accès à la console série Azure et que la disposition du disque utilise LVM (Logical Volume Manager)
 
@@ -29,7 +29,7 @@ Ce guide de résolution des problèmes présente un avantage dans les scénarios
 
 Effectuer un instantané de la machine virtuelle concernée. 
 
-L’instantané est ensuite attaché à une machine virtuelle **de secours**. Suivez les instructions décrites [ici](https://docs.microsoft.com/azure/virtual-machines/linux/snapshot-copy-managed-disk#use-azure-portal) sur la façon d’effectuer un **instantané**.
+L’instantané est ensuite attaché à une machine virtuelle **de secours**. Suivez les instructions décrites [ici](../linux/snapshot-copy-managed-disk.md#use-azure-portal) sur la façon d’effectuer un **instantané**.
 
 ## <a name="create-a-rescue-vm"></a>Créer une machine virtuelle de secours
 En règle générale, il est recommandé d’avoir une machine virtuelle de secours dont la version du système d’exploitation est identique ou similaire. Utiliser les mêmes **région** et **groupe de ressources** que la machine virtuelle concernée
@@ -65,13 +65,13 @@ Dans la plupart des scénarios, le disque d’instantané attaché sera vu comme
 
 ![Fdisk](./media/chroot-logical-volume-manager/fdisk-output-sdc.png)
 
-La **\*** indique une partition de démarrage ; les deux partitions doivent être montées.
+La * *\** _ indique une partition de démarrage ; les deux partitions doivent être montées.
 
-Exécutez la commande **lsblk** pour voir les LVM de la machine virtuelle concernée
+Exécutez la commande _ *lsblk** pour voir les LVM de la machine virtuelle concernée
 
 `lsblk`
 
-![Exécuter lsblk](./media/chroot-logical-volume-manager/lsblk-output-mounted.png)
+![Capture d’écran montrant la sortie de la commande lsblk.](./media/chroot-logical-volume-manager/lsblk-output-mounted.png)
 
 
 Vérifiez si les LVM de la machine virtuelle concernée s’affichent.
@@ -143,7 +143,7 @@ mount  /dev/mapper/rootvg-usrlv /rescue/usr
 Les commandes peuvent être utilisées pour installer, supprimer et mettre à jour des logiciels. Détectez un problème sur les machines virtuelles afin de corriger les erreurs.
 
 
-Exécutez la commande lsblk et /rescue est désormais / et /rescue/boot est /boot ![Chrooted](./media/chroot-logical-volume-manager/chrooted.png)
+Exécutez la commande lsblk : /rescue devient /, et /rescue/boot devient /boot. ![Capture d’écran d’une fenêtre de console avec la commande lsblk et son arborescence de sortie](./media/chroot-logical-volume-manager/chrooted.png)
 
 ## <a name="perform-fixes"></a>Effectuer des corrections
 
@@ -169,7 +169,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 *walkthrough*
 
 La commande **grep** répertorie les noyaux dont **grub.cfg** a connaissance.
-![Noyaux](./media/chroot-logical-volume-manager/kernels.png)
+![Capture d’écran d’une fenêtre de console affichant le résultat d’une recherche grep de noyaux](./media/chroot-logical-volume-manager/kernels.png)
 
 **grub2-editenv list** affiche le noyau qui sera chargé au prochain démarrage ![Noyau par défaut](./media/chroot-logical-volume-manager/kernel-default.png)
 
@@ -190,7 +190,7 @@ Exécutez la commande **lvs** pour vérifier quels **volumes logiques** sont dis
 
 Quittez l’environnement **chroot** et montez le **volume logique** requis
 
-![Avancé](./media/chroot-logical-volume-manager/advanced.png)
+![Capture d’écran d’une fenêtre de console avec une commande lvs, puis le montage d’un volume logique](./media/chroot-logical-volume-manager/advanced.png)
 
 À présent, accédez de nouveau à l’environnement **chroot** en exécutant
 
@@ -198,18 +198,18 @@ Quittez l’environnement **chroot** et montez le **volume logique** requis
 
 Tous les volumes logiques doivent être visibles en tant que partitions montées
 
-![Avancé](./media/chroot-logical-volume-manager/chroot-all-mounts.png)
+![Capture d’écran montrant les volumes logiques en tant que partitions montées.](./media/chroot-logical-volume-manager/chroot-all-mounts.png)
 
 Interroger le **noyau** installé
 
-![Avancé](./media/chroot-logical-volume-manager/rpm-kernel.png)
+![Capture d’écran montrant comment interroger le noyau installé.](./media/chroot-logical-volume-manager/rpm-kernel.png)
 
 Si nécessaire, supprimez ou mettez à niveau le **noyau**
 ![Avancé](./media/chroot-logical-volume-manager/rpm-remove-kernel.png)
 
 
 ### <a name="example-3---enable-serial-console"></a>Exemple 3 : activer la console série
-Si l’accès à la console série Azure n’est pas possible, vérifiez les paramètres de configuration GRUB pour votre machine virtuelle Linux et corrigez-les. Vous trouverez des informations détaillées [dans ce document](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-grub-proactive-configuration)
+Si l’accès à la console série Azure n’est pas possible, vérifiez les paramètres de configuration GRUB pour votre machine virtuelle Linux et corrigez-les. Vous trouverez des informations détaillées [dans ce document](./serial-console-grub-proactive-configuration.md)
 
 ### <a name="example-4---kernel-loading-with-problematic-lvm-swap-volume"></a>Exemple 4 : chargement du noyau avec un volume d’échange de LVM problématique
 
@@ -272,6 +272,6 @@ Si la machine virtuelle est en cours d’exécution, l’échange de disque l’
 ## <a name="next-steps"></a>Étapes suivantes
 En savoir plus sur
 
- [Console série Azure]( https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-linux)
+ [Console série Azure]( ./serial-console-linux.md)
 
-[Mode mono-utilisateur](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-grub-single-user-mode)
+[Mode mono-utilisateur](./serial-console-grub-single-user-mode.md)

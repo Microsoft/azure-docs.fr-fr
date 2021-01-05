@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/19/2017
 ms.author: alkohli
-ms.openlocfilehash: cbdad3c68848ce552811ee658bb29df74a6fad19
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5a6cd904d7baa71c8b383022523909ca30000ce8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232145"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85515006"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-storsimple-volume-containers"></a>Utiliser le service StorSimple Device Manager pour gérer les conteneurs de volumes StorSimple
 

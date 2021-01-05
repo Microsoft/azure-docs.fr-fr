@@ -12,12 +12,12 @@ metadata:
   author: Juliako
   ms.author: juliako
   ms.date: 02/18/2020
-  ms.openlocfilehash: 6cd7d5d0ef9bd188b42ca893ffa2bacbda1bdbc8
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 3bcc408014f16c3c60accc5d0e7f3c5bf3652f50
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77589383"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87091728"
 landingContent:
 - title: À propos d’Azure Media Services v2
   linkLists:
@@ -26,7 +26,7 @@ landingContent:
     - text: Vue d’ensemble d’Azure Media Services v2
       url: media-services-overview.md
     - text: Migrer vers Media Services V3
-      url: https://docs.microsoft.com/azure/media-services/latest/migrate-from-v2-to-v3
+      url: ../latest/migrate-from-v2-to-v3.md
   - linkListType: whats-new
     links:
     - text: Nouveautés de Media Services v2

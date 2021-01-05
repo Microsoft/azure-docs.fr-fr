@@ -1,28 +1,28 @@
 ---
-title: Transformer les données
+title: Transformation de données dans le concepteur
 titleSuffix: Azure Machine Learning
-description: Découvrez comment transformer des données dans le concepteur Azure Machine Learning pour créer vos propres jeux de données.
+description: Découvrez comment importer et transformer des données dans le concepteur Azure Machine Learning pour créer vos propres jeux de données.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 author: peterclu
 ms.author: peterlu
-ms.date: 05/04/2020
-ms.custom: designer
-ms.openlocfilehash: 718023424834ffca7a026dc5b3d35b8fb11fe633
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.date: 06/28/2020
+ms.topic: conceptual
+ms.custom: how-to, designer
+ms.openlocfilehash: be2921f88ad2ecf88c555daf8385f1bd6733e836
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83644298"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94554013"
 ---
-# <a name="transform-data-in-azure-machine-learning-designer-preview"></a>Transformer des données dans le concepteur Azure Machine Learning (préversion)
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-enterprise-sku.md)]
+# <a name="transform-data-in-azure-machine-learning-designer"></a>Transformer des données dans le concepteur Azure Machine Learning
+
 
 Cet article explique comment transformer et enregistrer des jeux de données dans le concepteur Azure Machine Learning afin de pouvoir préparer vos propres données afin d’effectuer un apprentissage automatique (Machine Learning).
 
-Vous allez utiliser l’exemple de jeu de données [Adult Census Income Binary Classification](sample-designer-datasets.md) pour préparer deux jeux de données : l’un contenant des informations de recensement d’adultes natifs des USA, et l’autre contenant des informations de recensement d’adultes non natifs des USA.
+Vous allez utiliser l’exemple de jeu de données [Adult Census Income Binary Classification](./samples-designer.md) pour préparer deux jeux de données : l’un contenant des informations de recensement d’adultes natifs des USA, et l’autre contenant des informations de recensement d’adultes non natifs des USA.
 
 Dans cet article, vous apprendrez comment :
 
@@ -31,6 +31,8 @@ Dans cet article, vous apprendrez comment :
 1. Afficher les résultats.
 
 Nous vous recommandons de lire cet article avant l’article sur le [recyclage de modèles de concepteur](how-to-retrain-designer.md). Cet article explique comment utiliser les jeux de données transformés pour effectuer l’apprentissage de plusieurs modèles avec des paramètres de pipeline.
+
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
 
 ## <a name="transform-a-dataset"></a>Transformer un jeu de données
 
@@ -78,7 +80,7 @@ Dans cette section, vous utilisez le module [Split Data](algorithm-module-refere
 
 Votre pipeline doit se présenter comme suit :
 
-![Capture d’écran montrant comment configurer le pipeline et le module Split Data (Fractionner les données)](media/how-to-designer-transform-data/split-data.png).
+:::image type="content" source="./media/how-to-designer-transform-data/split-data.png"alt-text="Capture d’écran montrant comment configurer le pipeline et le module Split Data (Fractionner les données)":::
 
 
 ## <a name="save-the-datasets"></a>Enregistrer les jeux de données
@@ -103,14 +105,14 @@ Maintenant que votre pipeline est configuré pour fractionner les données, vous
     
     **Datastore type** (Type de magasin de données) : Stockage Blob Azure
 
-    **Datastore** (Banque de données) : Sélectionnez un magasin de données existant ou sélectionnez « Nouveau magasin de banques » pour en créer un maintenant.
+    **Banque de données** : Sélectionnez un magasin de données existant ou sélectionnez « Nouveau magasin de banques » pour en créer un maintenant.
 
     **Path** (Chemin d’accès) : `/data/us-income`
 
     **File format** (Format de fichier ) : csv
 
     > [!NOTE]
-    > Cet article part du principe que vous avez accès à un magasin de données inscrit dans l’espace de travail Azure Machine Learning actuel. Pour obtenir des instructions sur la configuration d’un magasin de données, consultez [Se connecter aux services de stockage Azure](how-to-access-data.md#azure-machine-learning-studio).
+    > Cet article part du principe que vous avez accès à un magasin de données inscrit dans l’espace de travail Azure Machine Learning actuel. Pour obtenir des instructions sur la configuration d’un magasin de données, consultez [Se connecter aux services de stockage Azure](how-to-connect-data-ui.md#create-datastores).
 
     Si vous n’avez pas de magasin de banques, vous pouvez en créer un maintenant. À titre d’exemple, cet article enregistre les jeux de données dans le compte de stockage d’objets blob par défaut associé à l’espace de travail. Il enregistre les jeux de données dans le conteneur `azureml` dans un nouveau dossier nommé `data`.
 
@@ -120,7 +122,7 @@ Maintenant que votre pipeline est configuré pour fractionner les données, vous
     
     **Datastore type** (Type de magasin de données) : Stockage Blob Azure
 
-    **Datastore** (Banque de données) : Sélectionnez le même magasin de données comme ci-dessus
+    **Banque de données** : Sélectionnez le même magasin de données comme ci-dessus
 
     **Path** (Chemin) : `/data/non-us-income`
 

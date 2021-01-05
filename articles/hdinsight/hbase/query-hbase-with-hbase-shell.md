@@ -10,10 +10,10 @@ ms.topic: quickstart
 ms.date: 06/12/2019
 ms.author: hrasheed
 ms.openlocfilehash: 572262cbece26171f9a67bf073906fa2dfd4d8e1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "79371067"
 ---
 # <a name="quickstart-query-apache-hbase-in-azure-hdinsight-with-hbase-shell"></a>Démarrage rapide : Exécuter des requêtes Apache HBase dans Azure HDInsight à l'aide de HBase Shell

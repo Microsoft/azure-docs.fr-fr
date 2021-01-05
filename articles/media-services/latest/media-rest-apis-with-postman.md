@@ -3,24 +3,26 @@ title: Configurer Postman pour les appels d’API REST Azure Media Services v3
 description: Cet article vous montre comment configurer Postman afin de l’utiliser pour appeler l’API REST Azure Media Services (AMS).
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 12/05/2019
-ms.author: juliako
-ms.openlocfilehash: 872dad95fc5b536c51e251612f40439da020a059
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: aa10cb207011051c30866a3a3ed693e7113b5882
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75779635"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89297703"
 ---
 # <a name="configure-postman-for-media-services-v3-rest-api-calls"></a>Configurer Postman pour les appels d’API REST Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Ce tutoriel vous montre comment configurer **Postman** afin de l’utiliser pour appeler l’API REST Azure Media Services (AMS). Le tutoriel montre comment importer des fichiers d’environnement et de collection dans **Postman**. La collection contient des définitions groupées de requêtes HTTP qui appellent les API REST de Azure Media Services (AMS). Le fichier d’environnement contient des variables qui sont utilisées par la collection.
 
@@ -28,11 +30,11 @@ Avant de commencer à développer, voir [Développement avec les API Media Servi
 
 ## <a name="prerequisites"></a>Prérequis
 
-- [Créer un compte Media Services](create-account-cli-how-to.md). Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
-- Obtenir les informations nécessaires pour [accéder aux API](access-api-cli-how-to.md)
+- [Créer un compte Media Services](./create-account-howto.md). Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
+- Obtenir les informations nécessaires pour [accéder aux API](./access-api-howto.md)
 - Installez le client REST [Postman](https://www.getpostman.com/) pour exécuter les API REST indiquées dans certains des didacticiels REST AMS. 
 
-    Nous utilisons **Postman** mais n’importe quel outil REST serait approprié. Les autres solutions possibles sont : **Visual Studio Code** avec le plug-in REST ou **Telerik Fiddler**. 
+    Nous utilisons **Postman** mais n’importe quel outil REST serait approprié. Les autres solutions sont : **Visual Studio Code** avec le plug-in REST ou **Telerik Fiddler**. 
 
 > [!IMPORTANT]
 > Examinez les [conventions d’appellation](media-services-apis-overview.md#naming-conventions).
@@ -99,7 +101,6 @@ Avant de commencer à manipuler des ressources AMS v3, vous devez obtenir et dé
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Charger des fichiers dans un compte Media Services - REST](upload-files-rest-how-to.md)
 - [Créer des filtres avec Media Services - REST](filters-dynamic-manifest-rest-howto.md)
 - [API Azure Resource Manager basé sur l’API REST](https://github.com/Azure-Samples/media-services-v3-arm-templates)
 

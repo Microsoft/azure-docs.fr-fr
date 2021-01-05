@@ -1,35 +1,35 @@
 ---
 title: Configuration de l’outil Azure Import-Export v1 | Microsoft Docs
-description: Découvrez comment configurer l’outil de préparation et de réparation de disques pour le service Azure Import/Export. Cela s’applique à la version v1 de l’outil d’importation/exportation.
-author: twooley
+description: Découvrez comment configurer l’outil de préparation et de réparation de disques pour le service Azure Import/Export. Cet article fait référence à la version 1 de l’outil Import/Export.
+author: alkohli
 services: storage
 ms.service: storage
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/15/2017
-ms.author: twooley
+ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: f65220a04a709bae5a6892bfd4105195cee35741
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f9b69cef5741ab609b72f6c2c34e3aa50b45648
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75978414"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92782074"
 ---
-# <a name="setting-up-the-azure-importexport-tool"></a>Configuration de l’outil Azure Import/Export
+# <a name="setting-up-the-azure-importexport-tool-v1"></a>Configuration de l’outil Azure Import/Export v1
 L’outil Microsoft Azure Import/Export est l’outil de préparation et de réparation de disques, que vous pouvez utiliser avec le service Microsoft Azure Import/Export. Vous pouvez utiliser l’outil pour les fonctions suivantes :  
 
--   Avant de créer un travail d’importation, l’outil vous permet de copier des données sur des disques durs que vous allez envoyer à un centre de données Windows Azure.  
+-   Avant de créer un travail d’importation, l’outil vous permet de copier des données sur des disques durs que vous expédiez à un centre de données Windows Azure.  
 
 -   Lorsqu’un travail d’importation est terminé, vous pouvez utiliser cet outil pour réparer les objets blob endommagés, manquants ou en conflit avec d’autres objets blob.  
 
 -   Lorsque vous recevez les disques d’un travail d’exportation, vous pouvez utiliser cet outil pour réparer tous les fichiers endommagés ou manquants sur les disques.  
 
 ## <a name="prerequisites"></a>Prérequis  
-Si vous préparez des disques pour un travail d’importation, vous devez remplir les conditions préalables suivantes :  
+Si vous préparez des disques pour un travail d’importation, vous devrez remplir les conditions préalables suivantes :  
 
 -   Vous devez avoir un abonnement Azure actif.  
 
--   Votre abonnement doit inclure un compte de stockage avec suffisamment d’espace disponible pour stocker les fichiers que vous allez importer.  
+-   Votre abonnement doit inclure un compte de stockage avec suffisamment d’espace disponible pour stocker les fichiers que vous importez.  
 
 -   Vous devez avoir au moins une des clés du compte de stockage.  
 
@@ -39,7 +39,7 @@ Si vous préparez des disques pour un travail d’importation, vous devez rempli
 
 -   BitLocker doit être activé sur l’ordinateur de copie.  
 
--   Vous devez avoir un ou plusieurs disques contenant les données à importer ou des disques durs SATA de 3,5 pouces vides connectés à l’ordinateur de copie.  
+-   Vous devrez avoir un ou plusieurs disques contenant les données à importer ou des disques durs SATA de 3,5 pouces vides connectés à l’ordinateur de copie.  
 
 -   Les fichiers que vous projetez d’importer doivent être accessibles à l’ordinateur de copie, qu’ils soient sur un partage réseau ou un disque dur local.
 
@@ -249,9 +249,8 @@ Examples:
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Préparation des disques durs pour un travail d’importation](../storage-import-export-tool-preparing-hard-drives-import-v1.md)   
-* [Aperçu de l’utilisation des lecteurs pour un travail d’exportation](../storage-import-export-tool-previewing-drive-usage-export-v1.md)   
-* [Consultation de l’état du travail avec les fichiers journaux de copie](../storage-import-export-tool-reviewing-job-status-v1.md)   
-* [Réparation d’un travail d’importation](../storage-import-export-tool-repairing-an-import-job-v1.md)   
-* [Réparation d’un travail d’exportation](../storage-import-export-tool-repairing-an-export-job-v1.md)   
-* [Résolution des problèmes associés à l’outil Azure Import-Export](storage-import-export-tool-troubleshooting-v1.md)
+* [Préparation des disques durs pour un travail d’importation](/previous-versions/azure/storage/common/storage-import-export-tool-preparing-hard-drives-import-v1)   
+* [Aperçu de l’utilisation des lecteurs pour un travail d’exportation](/previous-versions/azure/storage/common/storage-import-export-tool-previewing-drive-usage-export-v1)   
+* [Consultation de l’état du travail avec les fichiers journaux de copie](./storage-import-export-tool-reviewing-job-status-v1.md)   
+* [Réparation d’un travail d’importation](./storage-import-export-tool-repairing-an-import-job-v1.md)   
+* [Réparation d’un travail d’exportation](./storage-import-export-tool-repairing-an-export-job-v1.md)

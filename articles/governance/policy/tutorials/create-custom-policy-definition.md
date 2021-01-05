@@ -1,14 +1,14 @@
 ---
 title: 'Tutoriel : Créer une définition de stratégie personnalisée'
 description: Dans ce tutoriel, vous créez une définition de stratégie personnalisée pour Azure Policy afin d’appliquer des règles métier personnalisées sur vos ressources Azure.
-ms.date: 11/25/2019
+ms.date: 10/05/2020
 ms.topic: tutorial
-ms.openlocfilehash: 7a1eb8abcfbf7513b4620f66c0a7fdbd288f8705
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 24058a2c8428d306c5e53a73393b0d98785831cf
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82190705"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91876292"
 ---
 # <a name="tutorial-create-a-custom-policy-definition"></a>Tutoriel : Créer une définition de stratégie personnalisée
 
@@ -53,7 +53,7 @@ D’après les besoins métier, la ressource Azure à auditer avec Azure Policy 
 Il existe de nombreuses façons de déterminer les propriétés d’une ressource Azure. Dans ce tutoriel, nous les examinons toutes :
 
 - Extension Azure Policy pour VS Code
-- Modèles Resource Manager
+- Modèles Azure Resource Manager (modèles ARM)
   - Exporter une ressource existante
   - Expérience de création
   - Modèles de démarrage rapide (GitHub)
@@ -64,16 +64,19 @@ Il existe de nombreuses façons de déterminer les propriétés d’une ressourc
 
 L’[extension VS Code](../how-to/extension-for-vscode.md#search-for-and-view-resources) peut être utilisée pour parcourir des ressources dans votre environnement et voir les propriétés Resource Manager sur chaque ressource.
 
-### <a name="resource-manager-templates"></a>Modèles Resource Manager
+### <a name="arm-templates"></a>Modèles ARM
 
-Il existe plusieurs façons d’examiner un [modèle Resource Manager](../../../azure-resource-manager/templates/template-tutorial-create-encrypted-storage-accounts.md) qui inclut la propriété à gérer.
+Il existe plusieurs façons d’examiner un [modèle ARM](../../../azure-resource-manager/templates/template-tutorial-use-template-reference.md) qui inclut la propriété à gérer.
 
 #### <a name="existing-resource-in-the-portal"></a>Ressource existante dans le portail
 
 Pour rechercher des propriétés, le plus simple est d’examiner une ressource existante du même type. Vous pouvez aussi comparer les ressources déjà configurées avec le paramètre que vous voulez appliquer.
 Consultez la page **Exporter le modèle** (sous **Paramètres**) dans le portail Azure pour cette ressource spécifique.
 
-:::image type="content" source="../media/create-custom-policy-definition/export-template.png" alt-text="Page de modèle d’exportation sur la ressource existante" border="false":::
+> [!WARNING]
+> Le modèle ARM exporté par le portail Azure ne peut pas être directement relié à la propriété `deployment` pour un modèle ARM dans une définition de stratégie [deployIfNotExists](../concepts/effects.md#deployifnotexists).
+
+:::image type="content" source="../media/create-custom-policy-definition/export-template.png" alt-text="Capture d’écran de la page Exporter le modèle sur une ressource existante dans le portail Azure." border="false":::
 
 Si la ressource est un compte de stockage, vous voyez un modèle semblable à cet exemple :
 
@@ -144,12 +147,11 @@ Ces informations nous indiquent le type de propriété et confirment que **suppo
 
 #### <a name="quickstart-templates-on-github"></a>Modèles de démarrage rapide sur GitHub
 
-Les [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates) sur GitHub ont des centaines de modèles Resource Manager destinés à différentes ressources. Ces modèles peuvent être un excellent moyen de trouver la propriété de ressource que vous recherchez. Certaines propriétés peuvent sembler être celles que vous cherchez, mais contrôlent quelque chose de différent.
+Les [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates) sur GitHub ont des centaines de modèles ARM destinés à différentes ressources. Ces modèles peuvent être un excellent moyen de trouver la propriété de ressource que vous recherchez. Certaines propriétés peuvent sembler être celles que vous cherchez, mais contrôlent quelque chose de différent.
 
 #### <a name="resource-reference-docs"></a>Documentation de référence de la ressource
 
-Pour confirmer que **supportsHttpsTrafficOnly** est la propriété appropriée, consultez la référence du modèle Resource Manager pour la [ressource de compte de stockage](/azure/templates/microsoft.storage/2018-07-01/storageaccounts) sur le fournisseur de stockage.
-L’objet de propriétés a une liste des paramètres valides. Sélectionnez le lien [StorageAccountPropertiesCreateParameters-object](/azure/templates/microsoft.storage/2018-07-01/storageaccounts#storageaccountpropertiescreateparameters-object) pour afficher un tableau des propriétés acceptables. **supportsHttpsTrafficOnly** est présente et la description correspond à ce que nous recherchons pour répondre à nos exigences métier.
+Pour confirmer que **supportsHttpsTrafficOnly** est la propriété appropriée, consultez la référence du modèle ARM pour la [ressource de compte de stockage](/azure/templates/microsoft.storage/2018-07-01/storageaccounts) sur le fournisseur de stockage. L’objet de propriétés a une liste des paramètres valides. Sélectionnez le lien [StorageAccountPropertiesCreateParameters-object](/azure/templates/microsoft.storage/2018-07-01/storageaccounts#storageaccountpropertiescreateparameters-object) pour afficher un tableau des propriétés acceptables. **supportsHttpsTrafficOnly** est présente et la description correspond à ce que nous recherchons pour répondre à nos exigences métier.
 
 ### <a name="azure-resource-explorer"></a>Azure Resource Explorer
 
@@ -171,6 +173,9 @@ Il existe de nombreuses façons de déterminer les alias d’une ressource Azure
 ### <a name="get-aliases-in-vs-code-extension"></a>Obtenir des alias dans l’extension VS Code
 
 L’extension Azure Policy pour l’extension VS Code facilite la navigation dans vos ressources et la [découverte d’alias](../how-to/extension-for-vscode.md#discover-aliases-for-resource-properties).
+
+> [!NOTE]
+> L’extension VS Code expose uniquement les propriétés du mode Resource Manager, et n’affiche pas les propriétés du [mode Fournisseur de ressources](../concepts/definition-structure.md#mode).
 
 ### <a name="azure-cli"></a>Azure CLI
 
@@ -216,7 +221,7 @@ az graph query -q "Resources | where type=~'microsoft.storage/storageaccounts' |
 Search-AzGraph -Query "Resources | where type=~'microsoft.storage/storageaccounts' | limit 1"
 ```
 
-Les résultats sont similaires à ce que nous avons vu dans les modèles Resource Manager et dans Azure Resource Explorer. Cependant, les résultats Azure Resource Graph peuvent également inclure des détails d’[alias](../concepts/definition-structure.md#aliases) en _projetant_ le tableau d’_alias_ :
+Les résultats sont similaires à ce que nous avons vu dans les modèles ARM et dans Azure Resource Explorer. Cependant, les résultats Azure Resource Graph peuvent également inclure des détails d’[alias](../concepts/definition-structure.md#aliases) en _projetant_ le tableau d’_alias_ :
 
 ```kusto
 Resources

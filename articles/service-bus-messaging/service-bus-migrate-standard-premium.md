@@ -1,23 +1,14 @@
 ---
 title: Migrer les espaces de noms Azure Service Bus Standard vers Premium
 description: Guide pour permettre la migration d’espaces de noms Standard Service Bus Azure existants vers le niveau Premium
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/18/2019
-ms.author: aschhab
-ms.openlocfilehash: 27e3260b91bebee14ff12188a7dbd6c7cf76355c
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.date: 06/23/2020
+ms.openlocfilehash: 1ed09a077f086390c658e6650171c552b361008d
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80385025"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "85340753"
 ---
 # <a name="migrate-existing-azure-service-bus-standard-namespaces-to-the-premium-tier"></a>Migrer des espaces de noms Standard Service Bus existants vers le niveau Premium
 

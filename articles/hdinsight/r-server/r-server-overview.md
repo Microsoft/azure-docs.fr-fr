@@ -8,26 +8,26 @@ ms.service: hdinsight
 ms.topic: overview
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/20/2020
-ms.openlocfilehash: 1dd716a279f7a09e7d9152ee34ff5c7bdac201dc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: b3a6fc2ff45d61d63118edc23f40f69f16db9131
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82188240"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92536145"
 ---
 # <a name="what-is-ml-services-in-azure-hdinsight"></a>Qu’est-ce que ML Services dans Azure HDInsight
 
-Microsoft Machine Learning Server vous est proposé comme option de déploiement au moment de créer des clusters HDInsight dans Azure. Le type de cluster qui fournit cette option est appelé **ML Services**. Cette fonctionnalité fournit un accès à la demande à des méthodes d’analytique adaptables et distribuées sur HDInsight.
+Microsoft Machine Learning Server vous est proposé comme option de déploiement au moment de créer des clusters HDInsight dans Azure. Le type de cluster qui fournit cette option est appelé **ML Services** . Cette fonctionnalité fournit un accès à la demande à des méthodes d’analytique adaptables et distribuées sur HDInsight.
 
 ML Services sur HDInsight fournit les dernières fonctionnalités analytiques R pour des jeux de données de toute taille ou presque. Les jeux de données peuvent être chargés dans un stockage Data Lake ou Blob Azure. Vos applications R peuvent utiliser les packages R open source (plus de 8 000 disponibles). Les routines de ScaleR, package analytique Big Data de Microsoft, sont également disponibles.
 
 Le nœud de périphérie offre un emplacement pratique pour la connexion au cluster et l’exécution de vos scripts R. Le nœud de périphérie permet d’exécuter des fonctions distribuées parallélisées de ScaleR sur les différents cœurs du serveur. Vous pouvez également les exécuter sur les différents nœuds du cluster en utilisant Hadoop Map Reduce avec ScaleR. Vous pouvez aussi utiliser des contextes de calcul Apache Spark.
 
-Les modèles ou prévisions résultant des analyses peuvent être téléchargés pour une utilisation locale. Ils peuvent également être `operationalized` ailleurs dans Azure. notamment par le biais d’[Azure Machine Learning Studio (classique)](https://studio.azureml.net) et d’un [service web](../../machine-learning/studio/deploy-a-machine-learning-web-service.md).
+Les modèles ou prévisions résultant des analyses peuvent être téléchargés pour une utilisation locale. Ils peuvent également être `operationalized` ailleurs dans Azure. notamment par le biais d’[Azure Machine Learning Studio (classique)](https://studio.azureml.net) et d’un [service web](../../machine-learning/classic/deploy-a-machine-learning-web-service.md).
 
 ## <a name="get-started-with-ml-services-on-hdinsight"></a>Démarrer avec ML Services sur HDInsight
 
-Pour créer un cluster ML Services dans HDInsight, sélectionnez le type de cluster **ML Services**. Le type de cluster ML Services inclut ML Server sur les nœuds de données et le nœud de périphérie. Le nœud de périphérie sert de zone d’atterrissage pour l’analytique basée sur ML Services. Consultez [Créer des clusters Apache Hadoop à l’aide du portail Azure](../hdinsight-hadoop-create-linux-clusters-portal.md) pour une procédure pas à pas permettant de créer le cluster.
+Pour créer un cluster ML Services dans HDInsight, sélectionnez le type de cluster **ML Services** . Le type de cluster ML Services inclut ML Server sur les nœuds de données et le nœud de périphérie. Le nœud de périphérie sert de zone d’atterrissage pour l’analytique basée sur ML Services. Consultez [Créer des clusters Apache Hadoop à l’aide du portail Azure](../hdinsight-hadoop-create-linux-clusters-portal.md) pour une procédure pas à pas permettant de créer le cluster.
 
 ## <a name="why-choose-ml-services-in-hdinsight"></a>Pourquoi choisir ML Services dans HDInsight ?
 
@@ -35,7 +35,7 @@ ML Services dans HDInsight offre les avantages suivants :
 
 ### <a name="ai-innovation-from-microsoft-and-open-source"></a>Innovation Microsoft et open source en matière d’IA
 
-  ML Services comprend un ensemble distribué et très adaptable d’algorithmes tels que [RevoscaleR](https://docs.microsoft.com/machine-learning-server/r-reference/revoscaler/revoscaler), [revoscalepy](https://docs.microsoft.com/machine-learning-server/python-reference/revoscalepy/revoscalepy-package) et [microsoftML](https://docs.microsoft.com/machine-learning-server/python-reference/microsoftml/microsoftml-package). Ces algorithmes peuvent fonctionner avec des tailles de données supérieures à la taille de la mémoire physique. Ils s’exécutent également sur une large gamme de plateformes de façon distribuée. En savoir plus sur la collection Microsoft de [packages R](https://docs.microsoft.com/machine-learning-server/r-reference/introducing-r-server-r-package-reference) et de [packages Python](https://docs.microsoft.com/machine-learning-server/python-reference/introducing-python-package-reference) inclus avec le produit.
+  ML Services comprend un ensemble distribué et très adaptable d’algorithmes tels que [RevoscaleR](/machine-learning-server/r-reference/revoscaler/revoscaler), [revoscalepy](/machine-learning-server/python-reference/revoscalepy/revoscalepy-package) et [microsoftML](/machine-learning-server/python-reference/microsoftml/microsoftml-package). Ces algorithmes peuvent fonctionner avec des tailles de données supérieures à la taille de la mémoire physique. Ils s’exécutent également sur une large gamme de plateformes de façon distribuée. En savoir plus sur la collection Microsoft de [packages R](/machine-learning-server/r-reference/introducing-r-server-r-package-reference) et de [packages Python](/machine-learning-server/python-reference/introducing-python-package-reference) inclus avec le produit.
   
   ML Services fait le lien entre ces innovations Microsoft et les contributions de la communauté open source (kits d’outils d’IA, R, Python), le tout sur une plateforme unique de niveau entreprise. Quel que soit le package R ou Python de Machine Learning open source, il peut fonctionner aux côtés de n’importe quelle innovation propriétaire de Microsoft.
 
@@ -43,7 +43,7 @@ ML Services dans HDInsight offre les avantages suivants :
 
   Les entreprises qui reposent sur des environnements et des modèles classiques consentent trop de temps et d’efforts à l’opérationnalisation. Cela se traduit par une augmentation des coûts et un allongement des délais, ce qui inclut le temps nécessaire à la traduction des modèles, les itérations pour maintenir leur validité et les tenir à jour, les approbations réglementaires et la gestion des autorisations.
 
-  ML Services offre une [opérationnalisation](https://docs.microsoft.com/machine-learning-server/what-is-operationalization) de niveau entreprise. Quand un modèle Machine Learning est terminé, il suffit de quelques clics pour générer des API de services web. Ces [services web](https://docs.microsoft.com/machine-learning-server/operationalize/concept-what-are-web-services) sont hébergés sur une grille de serveurs dans le cloud et peuvent être intégrés à des applications métier. La possibilité d’effectuer le déploiement sur une grille élastique vous permet d’évoluer en toute transparence en fonction des besoins de votre entreprise, pour la notation par lot et en temps réel. Pour obtenir des instructions, consultez [Rendre opérationnel ML Services sur HDInsight](r-server-operationalize.md).
+  ML Services offre une [opérationnalisation](/machine-learning-server/what-is-operationalization) de niveau entreprise. Quand un modèle Machine Learning est terminé, il suffit de quelques clics pour générer des API de services web. Ces [services web](/machine-learning-server/operationalize/concept-what-are-web-services) sont hébergés sur une grille de serveurs dans le cloud et peuvent être intégrés à des applications métier. La possibilité d’effectuer le déploiement sur une grille élastique vous permet d’évoluer en toute transparence en fonction des besoins de votre entreprise, pour la notation par lot et en temps réel. Pour obtenir des instructions, consultez [Rendre opérationnel ML Services sur HDInsight](r-server-operationalize.md).
 
 <!---
 * **Deep ecosystem engagements to deliver customer success with optimal total cost of ownership**
@@ -60,9 +60,9 @@ ML Services sur HDInsight inclut les fonctionnalités suivantes.
 
 | Catégorie de fonctionnalité | Description |
 |------------------|-------------|
-| Pour R | [Packages R](https://docs.microsoft.com/machine-learning-server/r-reference/introducing-r-server-r-package-reference) pour les solutions écrites en R, avec une distribution open source de R et une infrastructure d’exécution pour l’exécution de script. |
-| Pour Python | [Modules Python](https://docs.microsoft.com/machine-learning-server/python-reference/introducing-python-package-reference) pour les solutions écrites en Python, avec une distribution open source de Python et une infrastructure d’exécution pour l’exécution de script.
-| [Modèles préentraînés](https://docs.microsoft.com/machine-learning-server/install/microsoftml-install-pretrained-models) | Pour une analyse visuelle et une analyse des sentiments sur le texte, prêts pour noter les données que vous fournissez. |
+| Pour R | [Packages R](/machine-learning-server/r-reference/introducing-r-server-r-package-reference) pour les solutions écrites en R, avec une distribution open source de R et une infrastructure d’exécution pour l’exécution de script. |
+| Pour Python | [Modules Python](/machine-learning-server/python-reference/introducing-python-package-reference) pour les solutions écrites en Python, avec une distribution open source de Python et une infrastructure d’exécution pour l’exécution de script.
+| [Modèles préentraînés](/machine-learning-server/install/microsoftml-install-pretrained-models) | Pour une analyse visuelle et une analyse des sentiments sur le texte, prêts pour noter les données que vous fournissez. |
 | [Déploiement et consommation](r-server-operationalize.md) | `Operationalize` votre serveur et déployez des solutions en tant que service web. |
 | [Exécution à distance](r-server-hdinsight-manage.md#connect-remotely-to-microsoft-ml-services) | Démarrez des sessions à distance sur un cluster ML Services de votre réseau à partir de votre station de travail cliente. |
 
@@ -96,7 +96,7 @@ Pour noter à l’aide d’Azure Machine Learning, utilisez le package R Azure M
 
 ### <a name="score-on-premises"></a>Noter localement
 
-Pour noter localement après la création de votre modèle, sérialisez le modèle dans R, téléchargez-le, désérialisez-le, puis utilisez-le pour noter de nouvelles données. Vous pouvez noter les nouvelles données en adoptant l’approche décrite plus haut dans Noter dans HDInsight ou en utilisant des [services web](https://docs.microsoft.com/machine-learning-server/operationalize/concept-what-are-web-services).
+Pour noter localement après la création de votre modèle, sérialisez le modèle dans R, téléchargez-le, désérialisez-le, puis utilisez-le pour noter de nouvelles données. Vous pouvez noter les nouvelles données en adoptant l’approche décrite plus haut dans Noter dans HDInsight ou en utilisant des [services web](/machine-learning-server/operationalize/concept-what-are-web-services).
 
 ## <a name="maintain-the-cluster"></a>Maintenance du cluster
 
@@ -112,9 +112,11 @@ Les packages supplémentaires peuvent être installés à l’aide d’une actio
 
 La mémoire disponible pour ML Services peut être modifiée quand un travail MapReduce est exécuté. Pour modifier un cluster, utilisez l’interface utilisateur d’Apache Ambari pour votre cluster. Pour obtenir des instructions sur l’interface utilisateur d’Ambari, consultez [Gérer des clusters HDInsight à l’aide de l’interface utilisateur web d’Apache Ambari](../hdinsight-hadoop-manage-ambari.md).
 
-La mémoire disponible pour ML Services peut être modifiée à l’aide de commutateurs Hadoop dans l’appel à **RxHadoopMR** :
+La mémoire disponible pour ML Services peut être modifiée à l’aide de commutateurs Hadoop dans l’appel à **RxHadoopMR**  :
 
-    hadoopSwitches = "-libjars /etc/hadoop/conf -Dmapred.job.map.memory.mb=6656"  
+```r
+hadoopSwitches = "-libjars /etc/hadoop/conf -Dmapred.job.map.memory.mb=6656"
+```
 
 ### <a name="scale-your-cluster"></a>Mettre à l’échelle votre cluster
 

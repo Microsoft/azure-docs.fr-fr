@@ -2,17 +2,18 @@
 title: 'Azure HDInsight : Exemples relatifs à Java'
 description: Recherchez des exemples Java sur GitHub pour les tâches courantes à l’aide du SDK HDInsight pour Java.
 author: hrasheed-msft
+ms.custom: devx-track-java
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: sample
 ms.date: 11/29/2019
-ms.openlocfilehash: e277814bda41a70f9ac8ff02b6e8018fba4b6f52
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: c7c89706d749151b5a59667282eb6675fd18dc8c
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74775353"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92535363"
 ---
 # <a name="azure-hdinsight-java-samples"></a>Azure HDInsight : Exemples relatifs à Java
 
@@ -31,7 +32,7 @@ Cet article fournit :
 
 ## <a name="prerequisites"></a>Prérequis
 
-[SDK Azure HDInsight pour Java](https://docs.microsoft.com/java/api/overview/azure/hdinsight#sdk-installation)
+[SDK Azure HDInsight pour Java](/java/api/overview/azure/hdinsight#sdk-installation)
 
 ## <a name="cluster-management---creation"></a>Gestion des clusters - création
 
@@ -44,4 +45,4 @@ Vous pouvez obtenir ces exemples pour Java en clonant le dépôt GitHub [hdinsig
 
 [!INCLUDE [hdinsight-sdk-additional-functionality](../../includes/hdinsight-sdk-additional-functionality.md)]
 
-Des extraits de code pour les fonctionnalités supplémentaires de ce SDK sont disponibles dans la [documentation de référence du SDK HDInsight pour Java](https://docs.microsoft.com/java/api/overview/azure/hdinsight?view=azure-java-preview).
+Des extraits de code pour les fonctionnalités supplémentaires de ce SDK sont disponibles dans la [documentation de référence du SDK HDInsight pour Java](/java/api/overview/azure/hdinsight).

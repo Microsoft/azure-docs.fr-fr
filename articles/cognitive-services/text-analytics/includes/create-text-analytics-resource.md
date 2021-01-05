@@ -6,15 +6,16 @@ services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
+ms.subservice: text-analytics
 ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: 6cd653909e26dc5e0484ca289a1d2ab47e20457f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: daafea59b96cc8da6b78f0733c9f54e0e4d3a8c2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80876410"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009900"
 ---
 ## <a name="create-a-cognitive-services-text-analytics-resource"></a>Créer une ressource Analyse de texte Cognitive Services
 
@@ -25,9 +26,9 @@ ms.locfileid: "80876410"
 
     |Paramètre|Valeur|
     |--|--|
-    |Name|Entrez un nom (entre 2 et 64 caractères).|
-    |Subscription|Sélectionnez l’abonnement approprié.|
-    |Location|Sélectionnez un emplacement proche.|
+    |Nom|Entrez un nom (entre 2 et 64 caractères).|
+    |Abonnement|Sélectionnez l’abonnement approprié.|
+    |Emplacement|Sélectionnez un emplacement proche.|
     |Niveau tarifaire| Entrez **S**, le niveau tarifaire standard.|
     |Resource group|Sélectionnez un groupe de ressources disponible.|
 

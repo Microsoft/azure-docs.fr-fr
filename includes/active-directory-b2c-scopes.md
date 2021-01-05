@@ -5,25 +5,16 @@ ms.subservice: B2C
 ms.topic: include
 ms.date: 10/16/2019
 ms.author: mimart
-ms.openlocfilehash: 9d394b07ff17ab24305b2580efc8bedfc5e7d384
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3ebe1ec4c0292a530e5ef2c754e9b002e931300e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78183373"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994306"
 ---
-#### <a name="applications"></a>[Applications](#tab/applications/)
+#### <a name="app-registrations"></a>[Inscriptions des applications](#tab/app-reg-ga/) 
 
-1. Sélectionnez **Applications**.
-1. Sélectionnez l’application *webapi1* pour ouvrir sa page **Propriétés**.
-1. Sélectionnez **Étendues publiées**. Les étendues publiées peuvent être utilisées pour accorder à une application cliente certaines autorisations d’accès à l’API web.
-1. Pour **ÉTENDUE**, entrez `demo.read` puis, pour **DESCRIPTION**, entrez `Read access to the web API`.
-1. Pour **ÉTENDUE**, entrez `demo.write` puis, pour **DESCRIPTION**, entrez `Write access to the web API`.
-1. Sélectionnez **Enregistrer**.
-
-#### <a name="app-registrations-preview"></a>[Inscriptions d’applications (préversion)](#tab/app-reg-preview/)
-
-1. Sélectionnez **Inscriptions d’applications (préversion)** .
+1. Sélectionnez **Inscriptions d’applications**.
 1. Sélectionnez l’application *webapi1* pour ouvrir sa page **Vue d’ensemble**.
 1. Sous **Gérer**, sélectionnez **Exposer une API**.
 1. A côté d’**URI d’ID d’application**, sélectionnez le lien **Définir**.
@@ -37,3 +28,12 @@ ms.locfileid: "78183373"
     1. **Nom de l’étendue** : `demo.write`
     1. **Nom d’affichage du consentement administrateur** : `Write access to demo API`
     1. **Description du consentement de l’administrateur** : `Allows write access to the demo API`
+
+#### <a name="applications-legacy"></a>[Applications (héritées)](#tab/applications-legacy/)
+
+1. Sélectionnez **Applications (héritées)** .
+1. Sélectionnez l’application *webapi1* pour ouvrir sa page **Propriétés**.
+1. Sélectionnez **Étendues publiées**. Les étendues publiées peuvent être utilisées pour accorder à une application cliente certaines autorisations d’accès à l’API web.
+1. Pour **ÉTENDUE**, entrez `demo.read` puis, pour **DESCRIPTION**, entrez `Read access to the web API`.
+1. Pour **ÉTENDUE**, entrez `demo.write` puis, pour **DESCRIPTION**, entrez `Write access to the web API`.
+1. Sélectionnez **Enregistrer**.

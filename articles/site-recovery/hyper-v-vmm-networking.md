@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: a61f7ff69e648262eb721eb61a98b09dbbee924c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 43942c20a353ff69383f3e721679e4c95ab9d230
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73961422"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87495941"
 ---
 # <a name="set-up-ip-addressing-to-connect-to-a-secondary-on-premises-site-after-failover"></a>Configurer l’adressage IP pour se connecter à un site local secondaire après un basculement
 
@@ -63,11 +63,11 @@ Les graphiques suivants illustrent les sous-réseaux avant et après le basculem
 
 **Avant le basculement**
 
-![Avant le basculement](./media/hyper-v-vmm-networking/network-design2.png)
+![Diagramme montrant les sous-réseaux avant le basculement.](./media/hyper-v-vmm-networking/network-design2.png)
 
 **Après le basculement**
 
-![Après le basculement](./media/hyper-v-vmm-networking/network-design3.png)
+![Diagramme montrant les sous-réseaux après le basculement.](./media/hyper-v-vmm-networking/network-design3.png)
 
 Après le basculement, Site Recovery attribue une adresse IP à chaque interface réseau présent sur la machine virtuelle. L’adresse est allouée depuis le pool d’adresses IP statiques du réseau approprié, pour chaque instance de machine virtuelle.
 
@@ -79,12 +79,12 @@ Après le basculement, Site Recovery attribue une adresse IP à chaque interface
 
 Une fois la protection activée pour une machine virtuelle, vous pouvez utiliser l’exemple de script suivant pour vérifier l’adresse attribuée à la machine virtuelle. Cette adresse IP est définie comme adresse IP de basculement, et est attribuée à la machine virtuelle au moment du basculement :
 
-    ```
-    $vm = Get-SCVirtualMachine -Name <VM_NAME>
-    $na = $vm[0].VirtualNetworkAdapters>
-    $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
-    $ip.address 
-    ```
+```powershell
+$vm = Get-SCVirtualMachine -Name <VM_NAME>
+$na = $vm[0].VirtualNetworkAdapters>
+$ip = Get-SCIPAddress -GrantToObjectID $na[0].id
+$ip.address
+```
 
 ## <a name="use-a-different-ip-address"></a>Utiliser une autre adresse IP
 
@@ -93,7 +93,7 @@ Dans ce scénario, les adresses IP des machines virtuelles basculées sont modif
 - Utilisez des valeurs TTL faibles pour les applications intranet.
 - Utilisez le script suivant dans un plan de récupération Site Recovery, pour une mise à jour en temps voulu du serveur DNS. Vous n’avez pas besoin du script si vous utilisez l’inscription DNS dynamique.
 
-    ```
+    ```powershell
     param(
     string]$Zone,
     [string]$name,
@@ -118,11 +118,11 @@ Dans cet exemple, nous avons des adresses IP différentes entre le site principa
 
 **Avant le basculement**
 
-![Adresse IP différente - avant le basculement](./media/hyper-v-vmm-networking/network-design10.png)
+![Diagramme montrant différentes adresses IP avant le basculement.](./media/hyper-v-vmm-networking/network-design10.png)
 
 **Après le basculement**
 
-![Adresse IP différente - après le basculement](./media/hyper-v-vmm-networking/network-design11.png)
+![Diagramme montrant différentes adresses IP après le basculement.](./media/hyper-v-vmm-networking/network-design11.png)
 
 
 ## <a name="next-steps"></a>Étapes suivantes

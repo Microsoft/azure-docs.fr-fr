@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 02/20/2020
+ms.date: 06/10/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: a12c454906d6c6ff702b7f635a91361bbe3994c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9254b3d19bd840b62d2f5f7023eba9a91e605d1e
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77616884"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967514"
 ---
 # <a name="sap-hana-large-instances-storage-architecture"></a>Architecture de stockage de SAP HANA (grandes instances)
 
@@ -36,8 +37,6 @@ Consultez le tableau suivant pour connaître l’allocation de stockage. La tabl
 | S192 | 4 608 Go | 1 024 Go | 1 536 Go | 1 024 Go |
 | S192m | 11 520 Go | 1 536 Go | 1 792 Go | 1 536 Go |
 | S192xm |  11 520 Go |  1 536 Go |  1 792 Go |  1 536 Go |
-| S224 |  4 224 Go |  512 Go |  1 024 Go |  512 Go |
-| S224m |  8 448 Go |  512 Go |  1 024 Go |  512 Go |
 | S384 | 11 520 Go | 1 536 Go | 1 792 Go | 1 536 Go |
 | S384m | 12 000 Go | 2 050 Go | 2 050 Go | 2 040 Go |
 | S384xm | 16 000 Go | 2 050 Go | 2 050 Go | 2 040 Go |
@@ -47,6 +46,35 @@ Consultez le tableau suivant pour connaître l’allocation de stockage. La tabl
 | S768m | 28 000 Go | 3 100 Go | 2 050 Go | 3 100 Go |
 | S768xm | 40 960 Go | 6 144 Go | 4 096 Go | 6 144 Go |
 | S960m | 36 000 Go | 4 100 Go | 2 050 Go | 4 100 Go |
+| S896m | 33,792 Go | 512 Go | 1 024 Go | 512 Go |
+
+Les références SKU les plus récentes des grandes instances HANA sont fournies avec des configurations de stockage qui ressemblent à ceci :
+
+| Référence SKU de grande instance HANA | hana/data | hana/log | hana/shared | hana/logbackups |
+| --- | --- | --- | --- | --- |
+| S224 | 4 224 Go | 512 Go | 1 024 Go | 512 Go |
+| S224oo | 6,336 Go | 512 Go | 1 024 Go | 512 Go |
+| S224m | 8 448 Go | 512 Go | 1 024 Go | 512 Go |
+| S224om | 8 448 Go | 512 Go | 1 024 Go | 512 Go |
+| S224ooo | 10,560 Go | 512 Go | 1 024 Go | 512 Go |
+| S224oom | 12,672 Go | 512 Go | 1 024 Go | 512 Go |
+| S448 | 8 448 Go | 512 Go | 1 024 Go | 512 Go |
+| S448oo | 12,672 Go | 512 Go | 1 024 Go | 512 Go |
+| S448m | 16,896 Go | 512 Go | 1 024 Go | 512 Go |
+| S448om | 16,896 Go | 512 Go | 1 024 Go | 512 Go |
+| S448ooo | 21,120 Go | 512 Go | 1 024 Go | 512 Go |
+| S448oom | 25,344 Go | 512 Go | 1 024 Go | 512 Go |
+| S672 | 12,672 Go | 512 Go | 1 024 Go | 512 Go |
+| S672oo | 19,008 Go | 512 Go | 1 024 Go | 512 Go |
+| S672m | 25,344 Go | 512 Go | 1 024 Go | 512 Go |
+| S672om | 25,344 Go | 512 Go | 1 024 Go | 512 Go |
+| S672ooo | 31,680 Go | 512 Go | 1 024 Go | 512 Go |
+| S672oom | 38,016 Go | 512 Go | 1 024 Go | 512 Go |
+| S896 | 16,896 Go | 512 Go | 1 024 Go | 512 Go |
+| S896oo | 25,344 Go | 512 Go | 1 024 Go | 512 Go |
+| S896om | 33,792 Go | 512 Go | 1 024 Go | 512 Go |
+| S896ooo | 42,240 Go | 512 Go | 1 024 Go | 512 Go |
+| S896oom | 50,688 Go | 512 Go | 1 024 Go | 512 Go |
 
 
 Les volumes réels déployés peuvent varier légèrement en fonction du déploiement et de l’outil utilisés pour afficher les tailles de volume.
@@ -74,9 +102,9 @@ Consultez [Scénarios HLI pris en charge](hana-supported-scenario.md) pour conna
 
 Il est possible d’héberger plusieurs instances SAP HANA actives sur les unités de grande instance HANA. Afin de fournir les fonctionnalités de captures instantanées du stockage et de récupération d’urgence, une telle configuration requiert un volume défini par instance. Actuellement, les unités de grande instance HANA peuvent être classées comme suit :
 
-- **S72, S72m, S96, S144, S192** : par incrément de 256 Go avec l’unité de départ la plus petite qui fait 256 Go. Des incréments différents, comme 256 Go, 512 Go, etc., peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
-- **S144m et S192m** : par incréments de 256 Go avec la plus petite unité qui fait 512 Go. Des incréments différents, comme 512 Go et 768 Go peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
-- **Classe Type II** : par incréments de 512 Go avec l’unité de départ la plus petite qui fait 2 To. Des incréments différents, comme 512 Go, 1 Go et 1,5 To peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
+- **S72, S72m, S96, S144, S192** : par incréments de 256 Go, l’unité de départ la plus petite étant de 256 Go. Des incréments différents, comme 256 Go, 512 Go, etc., peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
+- **S144m et S192m** : par incréments de 256 Go, l’unité la plus petite étant de 512 Go. Des incréments différents, comme 512 Go et 768 Go peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
+- **Classe Type II** : par incréments de 512 Go, l’unité de départ la plus petite étant de 2 To. Des incréments différents, comme 512 Go, 1 Go et 1,5 To peuvent être combinés jusqu’à la valeur maximale de la mémoire de l’unité.
 
 Voici quelques exemples de ce à quoi peut ressembler l’exécution de plusieurs instances SAP HANA.
 
@@ -96,7 +124,7 @@ Le stockage utilisé pour la grande instance HANA utilise un chiffrement transpa
 Avec les références SKU de classe Type I, le volume sur lequel le numéro d’unité logique de démarrage est stocké est chiffré. Dans les tampons HANA Grande instance Révision 3, à l’aide de la classe Type II des références SKU HANA Grande instance, vous devez chiffrer le numéro d’unité logique de démarrage avec les méthodes du système d’exploitation. Dans les tampons HANA Grande instance Révision 4, à l’aide des unités Type II, le volume dans lequel le numéro d’unité logique de démarrage est stocké et est également chiffré au repos par défaut. 
 
 ## <a name="required-settings-for-larger-hana-instances-on-hana-large-instances"></a>Paramètres requis pour des plus instances HANA plus grandes sur de grandes Instances HANA
-Le stockage utilisé dans les grandes Instances HANA limite la taille des fichiers. La [limite de taille est de 16 To](https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-vsmg%2FGUID-AA1419CF-50AB-41FF-A73C-C401741C847C.html) par fichier. Contrairement aux limitations de taille de fichier dans les systèmes de fichiers EXT3, HANA ne reconnaît pas implicitement la limite de stockage appliquée par le stockage sur de grandes Instances HANA. Par conséquent, HANA ne crée pas automatiquement un nouveau fichier de données lorsque la limite de taille de 16 To est atteinte. Quand HANA tente d’étendre le fichier au-delà de 16 To, il signale des erreurs et le serveur d’index se bloque à la fin.
+Le stockage utilisé dans les grandes Instances HANA limite la taille des fichiers. La [limite de taille est de 16 To](https://docs.netapp.com/ontap-9/index.jsp?topic=%2Fcom.netapp.doc.dot-cm-vsmg%2FGUID-AA1419CF-50AB-41FF-A73C-C401741C847C.html) par fichier. Contrairement aux limitations de taille de fichier dans les systèmes de fichiers EXT3, HANA ne reconnaît pas implicitement la limite de stockage appliquée par le stockage sur de grandes Instances HANA. Par conséquent, HANA ne crée pas automatiquement un nouveau fichier de données quand la limite de taille de 16 To est atteinte. Quand HANA tente d’étendre le fichier au-delà de 16 To, il signale des erreurs et le serveur d’index se bloque à la fin.
 
 > [!IMPORTANT]
 > Afin d’empêcher HANA d’essayer d’augmenter la taille des fichiers de données au-delà de la limite de 16 To imposée par le stockage sur une grande Instance HANA, vous devez définir les paramètres suivants dans le fichier de configuration global.ini de HANA.

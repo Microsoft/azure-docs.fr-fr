@@ -6,17 +6,18 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 11/21/2019
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: jsimmons
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d67d867249286ad1591b441bbe5ea2637971e104
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: edc246a414401c4c1c0248787eda0381fcd63037
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80652610"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741760"
 ---
 # <a name="monitor-and-review-logs-for-on-premises-azure-ad-password-protection-environments"></a>Surveiller les environnements de protection par mot de passe Azure AD locaux et en consulter les journaux d’activité
 
@@ -63,17 +64,21 @@ Les événements discrets pour capturer ces situations sont enregistrés en fonc
 
 Les principaux événements relatifs à la validation de mot de passe sont les suivants :
 
-|   |Modification de mot de passe |Définition de mot de passe|
+| Événement |Modification de mot de passe |Définition de mot de passe|
 | --- | :---: | :---: |
 |Réussite |10014 |10015|
 |Échec (à cause de la stratégie de mot de passe client)| 10016, 30002| 10017, 30003|
 |Échec (à cause de la stratégie de mot de passe Microsoft)| 10016, 30004| 10017, 30005|
 |Échec (à cause des stratégies de mot de passe combinées Microsoft et client)| 10016, 30026| 10017, 30027|
+|Échec (à cause du nom d'utilisateur)| 10016, 30021| 10017, 30022|
 |Réussite d’audit seul (aurait échoué avec la stratégie de mot de passe client)| 10024, 30008| 10025, 30007|
 |Réussite d’audit seul (aurait échoué avec la stratégie de mot de passe Microsoft)| 10024, 30010| 10025, 30009|
 |Réussite d’audit seul (aurait échoué avec les stratégies de mot de passe combinées Microsoft et client)| 10024, 30028| 10025, 30029|
+|Réussite - Mode Audit uniquement (aurait échoué à cause du nom d'utilisateur)| 10016, 30024| 10017, 30023|
 
 Les exemples du tableau ci-dessus qui mentionnent des « stratégies combinées » font référence à des situations où un mot de passe utilisateur comporte au moins un jeton provenant à la fois de la liste des mots de passe interdits de Microsoft et de la liste des mots de passe interdits du client.
+
+Les exemples du tableau ci-dessus qui font référence au « nom d'utilisateur » concernent les situations dans lesquelles le mot de passe d'un utilisateur contient le nom de son compte et/ou l'un de ses noms conviviaux. Dans les deux cas, le mot de passe de l'utilisateur est rejeté si la stratégie est définie sur Appliquer, ou accepté si la stratégie est en mode Audit.
 
 Quand deux événements sont consignés ensemble, ils sont explicitement associés par le même CorrelationId.
 

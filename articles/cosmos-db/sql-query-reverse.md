@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : REVERSE'
 description: Découvrez la fonction système SQL REVERSE dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: a22e1c8a5f4350bd2f966ee48f96368c648a4a1e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d70d65609211ea18f566dbae42aca5231ed2eb7
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302166"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341573"
 ---
 # <a name="reverse-azure-cosmos-db"></a>REVERSE (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne l'ordre inverse d'une valeur de chaîne.  
   
 ## <a name="syntax"></a>Syntaxe

@@ -3,18 +3,21 @@ title: Utiliser le flux de modification Azure Cosmos DB pour visualiser l’Anal
 description: Cet article explique comment une société de distribution peut utiliser le flux de modification pour comprendre les modèles utilisateur, effectuer une analyse des données en temps réel et les visualiser.
 author: SnehaGunda
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.devlang: java
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/28/2019
 ms.author: sngun
-ms.openlocfilehash: c0c1a28dc399d3f176f92e656621fec1bc92dbfc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: e7b75c71d64054e38630677ecd38f8e3e2483c12
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76513490"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97606332"
 ---
 # <a name="use-azure-cosmos-db-change-feed-to-visualize-real-time-data-analytics"></a>Utiliser le flux de modification Azure Cosmos DB pour visualiser l’Analytique données en temps réel
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Le flux de modification Azure Cosmos DB est un mécanisme permettant d’obtenir un flux d’enregistrements continu et incrémentiel à partir d’un conteneur Azure Cosmos à mesure que ces enregistrements sont créés ou modifiés. La prise en charge du flux de modification consiste à identifier les modifications apportées au conteneur. Il renvoie ensuite la liste chronologique de documents qui ont été modifiés, dans l’ordre dans lequel ils ont été modifiés. Pour plus d’informations sur le flux de modification, consultez l’article [Utilisation du support de flux de modification](change-feed.md). 
 
@@ -28,18 +31,18 @@ Si vous souhaitez découvrir une vidéo concernant la solution avant de commence
 ## <a name="solution-components"></a>Composants de la solution
 Le diagramme ci-après illustre le flux de données et les composants impliqués dans la solution :
 
-![Éléments visuels du projet](./media/changefeed-ecommerce-solution/project-visual.png)
+:::image type="content" source="./media/changefeed-ecommerce-solution/project-visual.png" alt-text="Éléments visuels du projet" border="false":::
  
 1. **Génération de données :** le simulateur de données est utilisé pour générer des données de vente au détail qui représentent des événements, tels que la consultation d’un article par un utilisateur, l’ajout d’un article à un panier et l’achat d’un article. Vous pouvez générer un vaste ensemble d’échantillons de données à l’aide du générateur de données. Les échantillons de données générés contiennent des documents au format suivant :
    
-   ```json
-   {      
-     "CartID": 2486,
-     "Action": "Viewed",
-     "Item": "Women's Denim Jacket",
-     "Price": 31.99
-   }
-   ```
+    ```json
+    {
+      "CartID": 2486,
+      "Action": "Viewed",
+      "Item": "Women's Denim Jacket",
+      "Price": 31.99
+    }
+    ```
 
 2. **Cosmos DB :** les données générées sont stockées dans un conteneur Azure Cosmos.  
 
@@ -49,7 +52,7 @@ Le diagramme ci-après illustre le flux de données et les composants impliqués
 
 5. **Event Hub :** le hub d’événements Azure stocke ces événements et les envoie à [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) pour les soumettre à une analyse approfondie.  
 
-6. **Azure Stream Analytics :** Azure Stream Analytics définit les requêtes permettant de traiter les événements et de procéder à l’analytique de données en temps réel. Ces données sont ensuite envoyées à [Microsoft Power BI](https://docs.microsoft.com/power-bi/desktop-what-is-desktop).  
+6. **Azure Stream Analytics :** Azure Stream Analytics définit les requêtes permettant de traiter les événements et de procéder à l’analytique de données en temps réel. Ces données sont ensuite envoyées à [Microsoft Power BI](/power-bi/desktop-what-is-desktop).  
 
 7. **Power BI :** Power BI permet de visualiser les données envoyées par Azure Stream Analytics. Vous pouvez générer un tableau de bord afin de visualiser l’évolution des métriques en temps réel.  
 
@@ -169,7 +172,7 @@ Pour voir la manière dont le flux de modification traite les nouvelles actions 
 
 3. Ajoutez les noms de **collection** et de **base de données**. (Ces noms doivent être définis sur **changefeedlabcollection** et sur **changefeedlabdatabase**, sauf si vous avez choisi d’attribuer des noms différents.)
 
-   ![Mettre à jour les chaînes de connexion](./media/changefeed-ecommerce-solution/update-connection-string.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/update-connection-string.png" alt-text="Mettre à jour les chaînes de connexion":::
  
 4. Enregistrez les modifications dans tous les fichiers modifiés.  
 
@@ -179,7 +182,7 @@ Pour voir la manière dont le flux de modification traite les nouvelles actions 
 
 7. Si vous accédez au [portail Azure](https://portal.azure.com/), puis au compte Cosmos DB dans votre groupe de ressources, et enfin à **Data Explorer**, vous verrez les données aléatoires importées dans votre collection **changefeedlabcollection** .
  
-   ![Données générées dans le portail](./media/changefeed-ecommerce-solution/data-generated-in-portal.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/data-generated-in-portal.png" alt-text="Données générées dans le portail":::
 
 ## <a name="set-up-a-stream-analytics-job"></a>Configurer un travail Stream Analytics
 
@@ -189,7 +192,7 @@ Azure Stream Analytics est un service cloud entièrement géré pour le traiteme
 
 2. Sélectionnez **Entrées** comme illustré ci-dessous.  
 
-   ![Création d’une entrée](./media/changefeed-ecommerce-solution/create-input.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/create-input.png" alt-text="Création d’une entrée":::
 
 3. Sélectionnez **+ Ajouter une entrée de flux**. Dans le menu déroulant, sélectionnez **Event Hub**.  
 
@@ -221,7 +224,7 @@ Azure Stream Analytics est un service cloud entièrement géré pour le traiteme
 
 8. Revenez à **streamjob1**, puis cliquez sur **Modifier la requête**.
 
-   ![Modifier la requête](./media/changefeed-ecommerce-solution/edit-query.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/edit-query.png" alt-text="Modifier la requête":::
  
 9. Collez la requête ci-après dans la fenêtre de requête. La requête **AVERAGE PRICE** calcule le prix moyen de tous les articles consultés par les utilisateurs, de tous les articles ajoutés au panier des utilisateurs et de tous les articles achetés par les utilisateurs. Ce métrique peut aider les sociétés d’e-commerce à déterminer le prix de vente des articles, ainsi que le stock dans lequel investir. Par exemple, si le prix moyen des articles consultés est nettement plus élevé que celui des articles achetés, une société peut choisir d’ajouter des articles moins chers à son stock.
 
@@ -314,7 +317,7 @@ Power BI est une suite d’outils d’analyse métier permettant d’analyser de
 
    Voici un exemple de tableau de bord contenant ces graphiques :
 
-   ![Visualisations](./media/changefeed-ecommerce-solution/visualizations.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/visualizations.png" alt-text="Capture d'écran d'un exemple de tableau de bord contenant des graphiques intitulés Average Price of Items by Action, Unique Visitors, Revenue et Top 5 Items Purchased.":::
 
 ## <a name="optional-visualize-with-an-e-commerce-site"></a>Facultatif : Visualiser les données à l’aide d’un site d’e-commerce
 
@@ -328,13 +331,13 @@ Vous allez à présent découvrir comment utiliser votre nouvel outil d’Analyt
 
 2. Cliquez sur la collection **topItems**, puis sous **Mise à l’échelle et paramètres**, définissez le paramètre **Durée de vie** sur **30 secondes** pour que la collection topItems soit mise à jour toutes les 30 secondes.
 
-   ![Durée de vie](./media/changefeed-ecommerce-solution/time-to-live.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/time-to-live.png" alt-text="Durée de vie":::
 
 3. Afin de remplir la collection **topItems** avec les articles les plus fréquemment achetés, réaccédez à **streamjob1**, puis ajoutez une nouvelle **Sortie**. Sélectionnez **Cosmos DB**.
 
 4. Renseignez les champs obligatoires comme illustré ci-après.
 
-   ![Sortie Cosmos](./media/changefeed-ecommerce-solution/cosmos-output.png)
+   :::image type="content" source="./media/changefeed-ecommerce-solution/cosmos-output.png" alt-text="Sortie Cosmos":::
  
 5. Si vous avez ajouté la requête facultative TOP 5 dans la partie précédente du labo, passez à la partie 5a. Dans le cas contraire, passez à la partie 5b.
 
@@ -394,4 +397,4 @@ Pour supprimer les ressources que vous avez créées dans le cadre de ce labo, a
 
 ## <a name="next-steps"></a>Étapes suivantes 
   
-* Pour plus d’informations sur le flux de modification, consultez l’article [Utilisation du support de flux de modification dans Azure Cosmos DB](change-feed.md). 
+* Pour plus d’informations sur le flux de modification, consultez l’article [Utilisation du support de flux de modification dans Azure Cosmos DB](change-feed.md).

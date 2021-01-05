@@ -1,17 +1,17 @@
 ---
 title: Sécurité - Azure Database for MariaDB
 description: Présente une vue d’ensemble des fonctionnalités de sécurité dans Azure Database for MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: 8f41fe1005e96b428337bc73b9d468962a079596
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8a46f70e3089a8610fa8ca6362bcba6f624e2b1a
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79527824"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541145"
 ---
 # <a name="security-in-azure-database-for-mariadb"></a>Sécurité dans Azure Database for MariaDB
 

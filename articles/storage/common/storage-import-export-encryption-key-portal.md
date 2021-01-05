@@ -5,15 +5,15 @@ services: storage
 author: alkohli
 ms.service: storage
 ms.topic: how-to
-ms.date: 03/12/2020
+ms.date: 05/06/2020
 ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: d3e4535c05ef077d14ef74310459a84af0f02fd5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fb91a490083629101470565a630b659c090e071b
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176326"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843364"
 ---
 # <a name="use-customer-managed-keys-in-azure-key-vault-for-importexport-service"></a>Utiliser des clés gérées par le client dans Azure Key Vault pour le service Import/Export
 
@@ -33,13 +33,13 @@ Avant de commencer, vérifiez les points suivants :
     - [Création d’une tâche d’importation pour les fichiers](storage-import-export-data-to-files.md).
     - [Création d’une tâche d’exportation pour les objets BLOB](storage-import-export-data-from-blobs.md)
 
-2. Vous disposez d’une instance Azure Key Vault existante avec une clé que vous pouvez utiliser pour protéger votre clé BitLocker. Pour savoir comment créer un coffre de clés à l’aide du portail Azure, consultez [Démarrage rapide : Définir et récupérer un secret depuis Azure Key Vault à l’aide du portail Azure](../../key-vault/secrets/quick-create-portal.md).
+2. Vous disposez d’une instance Azure Key Vault existante avec une clé que vous pouvez utiliser pour protéger votre clé BitLocker. Pour savoir comment créer un coffre de clés à l’aide du portail Azure, consultez [Démarrage rapide : Créer un coffre de clés Azure Key Vault à l'aide du portail Azure](../../key-vault/general/quick-create-portal.md).
 
     - Les options **Suppression réversible** et **Ne pas vider** sont définies sur votre instance Key Vault existante. Ces propriétés ne sont pas activées par défaut. Pour activer ces propriétés, consultez les sections intitulées **Activation de la suppression réversible** et **Activation de la protection contre le vidage** dans l’un des articles suivants :
 
-        - [Guide pratique pour utiliser la suppression réversible avec Azure Power​Shell](../../key-vault/general/soft-delete-powershell.md).
-        - [Guide pratique pour utiliser la suppression réversible avec Azure CLI](../../key-vault/general/soft-delete-cli.md).
-    - Le coffre de clés existant doit avoir une clé RSA d’une taille de 2048 ou plus. Pour plus d’informations sur les clés, consultez **Clés Key Vault** dans [À propos des clés, des secrets et des certificats Azure Key Vault](../../key-vault/about-keys-secrets-and-certificates.md#key-vault-keys).
+        - [Guide pratique pour utiliser la suppression réversible avec Azure Power​Shell](../../key-vault/general/key-vault-recovery.md).
+        - [Guide pratique pour utiliser la suppression réversible avec Azure CLI](../../key-vault/general/key-vault-recovery.md).
+    - Le coffre de clés existant doit avoir une clé RSA d’une taille de 2048 ou plus. Pour plus d’informations sur les clés, consultez [À propos des clés](../../key-vault/keys/about-keys.md).
     - Le coffre de clés doit se trouver dans la même région que le compte de stockage pour vos données.  
     - Si vous n’avez pas d’instances Azure Key Vault existantes, vous pouvez également en créer de façon intégrée comme décrit dans la section suivante.
 
@@ -90,9 +90,8 @@ La configuration de la clé gérée par le client pour votre service Import/Expo
 
 Dans le panneau **Chiffrement**, vous pouvez voir le coffre de clés et la clé sélectionnée pour votre clé gérée par le client.
 
-## <a name="disable-keys"></a>Désactiver les clés
-
-Vous pouvez uniquement désactiver les clés gérées par Microsoft et passer à des clés gérées par le client à n’importe quel moment de la tâche d’importation/exportation. Toutefois, vous ne pouvez pas désactiver la clé gérée par le client une fois que vous l’avez créée.
+> [!IMPORTANT]
+> Vous pouvez uniquement désactiver les clés gérées par Microsoft et passer à des clés gérées par le client à n’importe quel moment de la tâche d’importation/exportation. Toutefois, vous ne pouvez pas désactiver la clé gérée par le client une fois que vous l’avez créée.
 
 ## <a name="troubleshoot-customer-managed-key-errors"></a>Résoudre les erreurs pour les clés gérées par le client
 
@@ -100,10 +99,11 @@ Si vous recevez des erreurs liées à votre clé gérée par le client, utilisez
 
 | Code d'erreur     |Détails     | Récupérable ?    |
 |----------------|------------|-----------------|
-| CmkErrorAccessRevoked | Une clé gérée par le client a été appliquée, mais l’accès à la clé est actuellement révoqué. Pour plus d’informations, consultez [Activer l’accès à la clé](https://docs.microsoft.com/rest/api/keyvault/vaults/updateaccesspolicy).                                                      | Oui, vérifier si : <ol><li>Le coffre de clés contient toujours le fichier MSI dans la stratégie d’accès.</li><li>La stratégie d’accès fournit des autorisations pour recevoir, envelopper, désenvelopper.</li><li>Si le coffre de clés se trouve dans un réseau virtuel derrière le pare-feu, vérifiez si **Autoriser les services de confiance Microsoft** est activé.</li></ol>                                                                                            |
-| CmkErrorKeyDisabled      | A appliqué une clé gérée par le client, mais la clé est désactivée. Pour plus d’informations, consultez [Activer la clé](https://docs.microsoft.com/rest/api/keyvault/vaults/createorupdate).                                                                             | Oui, en activant la version de clé     |
-| CmkErrorKeyNotFound      | Application d’une clé gérée par le client, mais impossible de trouver le coffre de clés associé à la clé.<br>Si vous avez supprimé le coffre de clés, vous ne pouvez pas récupérer la clé gérée par le client.  Si vous avez migré le coffre de clés vers un autre locataire, consultez [Modifier l’ID de client du coffre de clés après un déplacement d’abonnement](https://docs.microsoft.com/azure/key-vault/key-vault-subscription-move-fix). |   Si vous avez supprimé le coffre de clés :<ol><li>Oui, s’il s’agit de la durée de la protection contre le vidage, à l’aide des étapes de [Récupérer un coffre de clés](https://docs.microsoft.com/azure/key-vault/general/soft-delete-powershell#recovering-a-key-vault).</li><li>Non au-delà de la durée de la protection contre le vidage.</li></ol><br>Sinon, si le coffre de clés a subi une migration de locataire, oui, il peut être récupéré à l’aide d’une des étapes ci-dessous : <ol><li>Restaurez le coffre de clés sur l’ancien locataire.</li><li>Définissez `Identity = None`, puis redéfinissez la valeur sur `Identity = SystemAssigned`. Cela supprime et recrée l’identité une fois que la nouvelle identité a été créée. Activez les autorisations `Get`, `Wrap` et `Unwrap` sur la nouvelle identité dans la stratégie d’accès du coffre de clés.</li></ol>|
+| CmkErrorAccessRevoked | L’accès à la clé gérée par le client est révoqué.                                                       | Oui, vérifier si : <ol><li>Le coffre de clés contient toujours le fichier MSI dans la stratégie d’accès.</li><li>Les autorisations d’extraction, de renvoi à la ligne et de désencapsulage sont activées pour la stratégie d’accès.</li><li>Si le coffre de clés se trouve dans un réseau virtuel derrière le pare-feu, vérifiez si **Autoriser les services de confiance Microsoft** est activé.</li><li>Vérifiez si le MSI de la ressource du travail a été réinitialisé sur la valeur `None` à l’aide des API.<br>Si oui, redéfinissez la valeur sur `Identity = SystemAssigned`. Cela recrée l’identité pour la ressource du travail.<br>Lorsque la nouvelle identité a été créée, activez autorisations `Get`, `Wrap`, et `Unwrap` sur la nouvelle identité dans la stratégie d’accès du coffre de clés.</li></ol>                                                                                            |
+| CmkErrorKeyDisabled      | La clé gérée par le client est désactivée.                                         | Oui, en activant la version de clé     |
+| CmkErrorKeyNotFound      | Impossible de trouver la clé gérée par le client. | Oui, si la clé a été supprimée mais qu’elle est toujours dans la durée de vidage, en utilisant [Undo-AzKeyVaultKeyRemoval](/powershell/module/az.keyvault/undo-azkeyvaultkeyremoval).<br>ELSE <ol><li>Oui, si le client dispose de la clé sauvegardée et la restaure.</li><li>« NON » dans le cas contraire.</li></ol>
+| CmkErrorVaultNotFound |Le coffre de clés de la clé gérée par le client est introuvable. |   Si le coffre de clés a été supprimé :<ol><li>Oui, s’il s’agit de la durée de la protection contre le vidage, à l’aide des étapes de [Récupérer un coffre de clés](../../key-vault/general/soft-delete-overview.md#key-vault-recovery).</li><li>Non au-delà de la durée de la protection contre le vidage.</li></ol><br>Sinon, si le coffre de clés a été migré sur un autre locataire, oui, il peut être récupéré à l’aide d’une des étapes ci-dessous :<ol><li>Restaurez le coffre de clés sur l’ancien locataire.</li><li>Définissez `Identity = None`, puis redéfinissez la valeur sur `Identity = SystemAssigned`. Cela supprime et recrée l’identité une fois que la nouvelle identité a été créée. Activez les autorisations `Get`, `Wrap` et `Unwrap` sur la nouvelle identité dans la stratégie d’accès du coffre de clés.</li></ol>|
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Qu’est-ce qu’Azure Key Vault ?](https://docs.microsoft.com/azure/key-vault/key-vault-overview)
+- [Qu’est-ce qu’Azure Key Vault ?](../../key-vault/general/overview.md)

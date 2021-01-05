@@ -10,14 +10,20 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 02/12/2019
 ms.author: aahi
-ms.openlocfilehash: 2cc89bf57167db75404c044f58d18ab48edfaf38
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: ca3f9da681c60608b5b196b17191f0b4d549f305
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68854088"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96338365"
 ---
 # <a name="configure-your-hosted-ui-experience"></a>Configurer votre expérience d’interface utilisateur hébergée
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Le service Recherche personnalisée Bing fournit une interface utilisateur hébergée que vous pouvez facilement intégrer à vos applications et pages web en tant qu’extrait de code JavaScript. À l’aide du portail Recherche personnalisée Bing, vous pouvez configurer la mise en page, la couleur et les options de recherche de l’interface utilisateur.
 
@@ -35,12 +41,10 @@ Pour configurer une interface utilisateur hébergée pour vos applications web, 
   
 4. Sélectionnez une disposition.
 
-    |  |  |
-    |---------|---------|
-    |Search bar and results (Barre de recherche et de résultats) : par défaut    | Affiche une zone de recherche avec les résultats de la recherche en dessous.         |
-    |Results only (Résultats uniquement)     | Affiche uniquement les résultats de la recherche, sans zone de recherche. Lorsque vous utilisez cette mise en page, vous devez fournir la requête de recherche (`&q=<query string>`). Ajoutez le paramètre de requête à l’URL de requête dans l’extrait de code JavaScript, ou le lien vers le point de terminaison HTML.        |
-    |Pop-over (Fenêtre superposée glissante)     | Fournit une zone de recherche et affiche les résultats de recherche dans une fenêtre glissante qui vient se superposer à la fenêtre actuelle.        |
-    
+    - Barre de recherche et résultats (par défaut) : Affiche une zone de recherche avec les résultats de la recherche en dessous.
+    - Résultats uniquement : Affiche uniquement les résultats de la recherche, sans zone de recherche. Lorsque vous utilisez cette mise en page, vous devez fournir la requête de recherche (`&q=<query string>`). Ajoutez le paramètre de requête à l’URL de requête dans l’extrait de code JavaScript, ou le lien vers le point de terminaison HTML.
+    - Fenêtre superposée glissante : Fournit une zone de recherche et affiche les résultats de recherche dans une fenêtre glissante qui vient se superposer à la fenêtre actuelle.
+
 5. Sélectionnez un thème de couleur. Vous pouvez personnaliser les couleurs en fonction de votre application en cliquant sur **Customize theme** (Personnaliser le thème). Pour modifier une couleur, entrez la valeur hexadécimale de couleur RVB (par exemple, `#366eb8`), ou cliquez sur l’aperçu de la couleur.
 
    Vous pouvez consulter un aperçu de vos modifications sur le côté droit du portail. En cliquant sur **Reset to default** (Rétablir les valeurs par défaut), vous rétablissez les couleurs par défaut du thème sélectionné.
@@ -50,7 +54,7 @@ Pour configurer une interface utilisateur hébergée pour vos applications web, 
 
 6. Sous **Additional Configurations** (Configurations supplémentaires), fournissez des valeurs en fonction de votre application. Ces paramètres sont facultatifs. Pour voir l’effet de leur application ou de leur suppression, regardez le volet de visualisation situé à droite. Voici les options de configuration disponibles :  
 
-7. Entrez la clé d’abonnement de la recherche, ou sélectionnez-en une dans la liste déroulante. La liste déroulante est remplie avec les clés des abonnements de votre compte Azure. Consultez [Compte d'API Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account).  
+7. Entrez la clé d’abonnement de la recherche, ou sélectionnez-en une dans la liste déroulante. La liste déroulante est remplie avec les clés des abonnements de votre compte Azure. Consultez [Compte d'API Cognitive Services](../cognitive-services-apis-create-account.md).  
 
 8. Si vous avez activé la suggestion automatique, entrez la clé d’abonnement de la suggestion automatique, ou sélectionnez-en une dans la liste déroulante. La liste déroulante est remplie avec les clés des abonnements de votre compte Azure. La Suggestion automatique personnalisée nécessite un niveau d’abonnement spécifique. Pour plus d’informations, consultez les [Tarifs](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/).
 
@@ -78,7 +82,7 @@ Pour consommer l’IU hébergée, soit vous :
   `https://ui.customsearch.ai/hosted?customConfig=YOUR-CUSTOM-CONFIG-ID`  
   
   > [!NOTE]
-  > Ajoutez les paramètres de requête suivants à l’URL selon vos besoins. Pour plus d’informations sur ces paramètres, consultez la référence [API Recherche personnalisée](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters).
+  > Ajoutez les paramètres de requête suivants à l’URL selon vos besoins. Pour plus d’informations sur ces paramètres, consultez la référence [API Recherche personnalisée](/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters).
   >
   > - q
   > - mkt
@@ -92,59 +96,42 @@ Pour obtenir plus d’informations, y compris votre ID de configuration personna
 
 ## <a name="configuration-options"></a>Options de configuration
 
-Vous pouvez configurer le comportement de votre interface utilisateur hébergée en cliquant sur **Configurations supplémentaires**et en fournissant les valeurs de votre choix. Ces paramètres sont facultatifs. Pour voir l’effet de leur application ou de leur suppression, regardez le volet de visualisation situé à droite. 
+Vous pouvez configurer le comportement de votre interface utilisateur hébergée en cliquant sur **Configurations supplémentaires** et en fournissant les valeurs de votre choix. Ces paramètres sont facultatifs. Pour voir l’effet de leur application ou de leur suppression, regardez le volet de visualisation situé à droite. 
 
 ### <a name="web-search-configurations"></a>Configurations de la recherche web :
 
-|  |  |
-|---------|---------|
-|Web results enabled (Résultats web activés)    | Détermine si la recherche sur le Web est activée (si c’est le cas, vous voyez l’onglet Web en haut de la page).        |
-|Enable autosuggest (Activer la suggestion automatique)     | Détermine si la suggestion automatique personnalisée est activée (voir les [Tarifs](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/) pour connaître les frais supplémentaires).        |
-|Web results per page (Résultats web par page)    | Nombre de résultats à afficher pour une recherche sur le Web (le maximum est de 50 résultats par page).        |
-|Image caption (Légende d’image)   | Détermine si des images sont affichées avec les résultats de la recherche|
-
+- Résultats web activés : Détermine si la recherche sur le Web est activée (si c’est le cas, vous voyez l’onglet Web en haut de la page).
+- Activer la suggestion automatique : Détermine si la suggestion automatique personnalisée est activée (voir les [Tarifs](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/) pour connaître les frais supplémentaires).
+- Résultats web par page : Nombre de résultats à afficher pour une recherche sur le Web (le maximum est de 50 résultats par page).
+- Légende d’image : Détermine si des images sont affichées avec les résultats de la recherche
 
 Les configurations suivantes sont affichées si vous cliquez sur **Show advanced configurations** (Afficher les configurations avancées).
 
-
-|  | |
-|---------|---------|
-|Highlight words (Mettre les mots en gras)     | Détermine si les résultats sont affichés avec les termes de la recherche en gras.         |
-|Link target (Cible du lien)    |  Détermine si la page web s’ouvre dans un nouvel onglet de navigateur (vide) ou dans le même onglet de navigateur lorsque l’utilisateur clique sur un résultat de recherche.        |
+- Mettre les mots en surbrillance : Détermine si les résultats sont affichés avec les termes de la recherche en gras.
+- Cible du lien : Détermine si la page web s’ouvre dans un nouvel onglet de navigateur (vide) ou dans le même onglet de navigateur lorsque l’utilisateur clique sur un résultat de recherche.
 
 ### <a name="image-search-configurations"></a>Configurations de la recherche d’images
 
-| | |
-|---------|---------|
-|Image results enabled (Résultats d’images activés)     | Détermine si la recherche d’images est activée (si c’est le cas, vous voyez l’onglet Images en haut de la page).            |
-|Image results per page (Résultats d’images par page)     | Nombre de résultats à afficher pour une recherche d’images (le maximum est de 150 résultats par page).          |
+- Résultats d’images activés : Détermine si la recherche d’images est activée (si c’est le cas, vous voyez l’onglet Images en haut de la page).
+- Résultats d’images par page : Nombre de résultats à afficher pour une recherche d’images (le maximum est de 150 résultats par page).
 
 La configuration suivante est affichée si vous cliquez sur **Show advanced configurations** (Afficher les configurations avancées).  
   
-| | |
-|---------|---------|
-| Enable filters (Activer les filtres)     | Ajoute des filtres dont l’utilisateur peut se servir pour filtrer les images retournées par Bing. Par exemple, l’utilisateur peut filtrer les résultats pour n’afficher que des fichiers GIF animés.|
+- Activer les filtres : Ajoute des filtres dont l’utilisateur peut se servir pour filtrer les images retournées par Bing. Par exemple, l’utilisateur peut filtrer les résultats pour n’afficher que des fichiers GIF animés.
 
 ### <a name="video-search-configurations"></a>Configurations pour la recherche de vidéos
 
-|  | |
-|---------|---------|
-|Video results enabled (Résultats vidéos activés)     | Détermine si la recherche de vidéos est activée (si c’est le cas, vous voyez l’onglet Vidéos en haut de la page).           |
-|Video results per page (Résultats vidéos par page)   | Nombre de résultats à afficher pour une recherche de vidéo (le maximum est de 150 résultats par page).        |
+- Résultats de vidéos activés : Détermine si la recherche de vidéos est activée (si c’est le cas, vous voyez l’onglet Vidéos en haut de la page).
+- Résultats de vidéos par page : Nombre de résultats à afficher pour une recherche de vidéo (le maximum est de 150 résultats par page).
 
 La configuration suivante est affichée si vous cliquez sur **Show advanced configurations** (Afficher les configurations avancées).  
   
-|  | |
-|---------|---------|
-|Enable filters (Activer les filtres)    | Ajoute des filtres dont l’utilisateur peut se servir pour filtrer les vidéos retournées par Bing. Par exemple, l’utilisateur peut filtrer les résultats pour n’afficher que les vidéos ayant une résolution spécifique ou les vidéos découvertes au cours des dernières 24 heures.          |
+- Activer les filtres : Ajoute des filtres dont l’utilisateur peut se servir pour filtrer les vidéos retournées par Bing. Par exemple, l’utilisateur peut filtrer les résultats pour n’afficher que les vidéos ayant une résolution spécifique ou les vidéos découvertes au cours des dernières 24 heures.
 
 ### <a name="miscellaneous-configurations"></a>Configurations diverses
 
-
-| |  |
-|---------|---------|
-|Titre de la page   | Texte affiché dans la zone de titre de la page des résultats de recherche (ne s’applique pas à la disposition de fenêtre superposée glissante).        |
-|Thème de la barre d’outils    | Détermine la couleur d’arrière-plan de la zone de titre de la page des résultats de recherche. |
+- Titre de la page : Texte affiché dans la zone de titre de la page des résultats de recherche (ne s’applique pas à la disposition de fenêtre superposée glissante).
+- Thème de la barre d’outils : Détermine la couleur d’arrière-plan de la zone de titre de la page des résultats de recherche.
 
 Les configurations suivantes sont affichées si vous cliquez sur **Show advanced configurations** (Afficher les configurations avancées).  
 
@@ -166,4 +153,4 @@ Les configurations suivantes s’appliquent uniquement si vous utilisez l’inte
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Utiliser des marqueurs d’ornement pour mettre en surbrillance du texte](../bing-web-search/hit-highlighting.md)
-- [Paginer des pages web](./page-webpages.md)
+- [Paginer des pages web](../bing-web-search/paging-search-results.md)

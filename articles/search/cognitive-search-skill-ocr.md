@@ -7,20 +7,20 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: bdb510113a8d65ac04b54e77158f46d03cccd9de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/17/2020
+ms.openlocfilehash: 8b6a7c3e05b26cbda80ebf1a3fc0d4fed8255e6b
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72791924"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91950803"
 ---
 # <a name="ocr-cognitive-skill"></a>Compétence cognitive OCR
 
-La compétence de **reconnaissance optique de caractères (OCR)** reconnaît le texte imprimé et manuscrit dans des fichiers image. Cette compétence utilise les modèles d’apprentissage automatique fournis par [Vision par ordinateur](https://docs.microsoft.com/azure/cognitive-services/computer-vision/home) dans Cognitive Services. La compétence de **reconnaissance optique de caractères (OCR)** est mappée à la fonctionnalité suivante :
+La compétence de **reconnaissance optique de caractères (OCR)** reconnaît le texte imprimé et manuscrit dans des fichiers image. Cette compétence utilise les modèles Machine Learning fournis par l’API [Vision par ordinateur](../cognitive-services/computer-vision/overview.md) [v3.0](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d986960601faab4bf452005) dans Cognitive Services. La compétence de **reconnaissance optique de caractères (OCR)** est mappée à la fonctionnalité suivante :
 
-+ L'API ["OCR"](../cognitive-services/computer-vision/concept-recognizing-text.md#ocr-optical-character-recognition-api) est utilisée pour les langues autres que l'anglais. 
-+ Pour l'anglais, la nouvelle API ["Read"](../cognitive-services/computer-vision/concept-recognizing-text.md#read-api) est utilisée.
++ Pour l’anglais, l’espagnol, l’allemand, le français, l’italien, le portugais et le néerlandais, la nouvelle API [« Lecture »](../cognitive-services/computer-vision/concept-recognizing-text.md#read-api) est utilisée.
++ Pour toutes les autres langues, l’API [« OCR »](../cognitive-services/computer-vision/concept-recognizing-text.md#ocr-api) est utilisée.
 
 La compétence **OCR** extrait le texte de fichiers d’image. Les formats de fichiers pris en charge sont les suivants :
 
@@ -34,7 +34,7 @@ La compétence **OCR** extrait le texte de fichiers d’image. Les formats de fi
 > [!NOTE]
 > Si vous élargissez le champ en augmentant la fréquence des traitements, en ajoutant des documents supplémentaires ou en ajoutant plusieurs algorithmes d’IA, vous devez [attacher une ressource Cognitive Services facturable](cognitive-search-attach-cognitive-services.md). Des frais s’appliquent durant l’appel des API dans Cognitive Services ainsi que pour l’extraction d’images dans le cadre de la phase de craquage de document de la Recherche cognitive Azure. L’extraction de texte à partir des documents est gratuite.
 >
-> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l’extraction d’images sont présentés sur la [page de tarification du service Recherche cognitive Azure](https://go.microsoft.com/fwlink/?linkid=2042400).
+> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l’extraction d’images sont présentés sur la [page de tarification du service Recherche cognitive Azure](https://azure.microsoft.com/pricing/details/search/).
 
 
 ## <a name="skill-parameters"></a>Paramètres de la compétence
@@ -43,9 +43,9 @@ Les paramètres respectent la casse.
 
 | Nom du paramètre     | Description |
 |--------------------|-------------|
-| detectOrientation | Active la détection automatique de l’orientation de l’image. <br/> Valeurs valides : true, false.|
-|defaultLanguageCode | <p>  Code de langue du texte d’entrée. Les langages pris en charge incluent : <br/> zh-Hans (chinois simplifié) <br/> zh-Hant (chinois traditionnel) <br/>cs (tchèque) <br/>da (danois) <br/>nl (néerlandais) <br/>en (anglais) <br/>fi (finnois)  <br/>fr (français) <br/>  de (allemand) <br/>el (grec) <br/> hu (hongrois) <br/> it (italien) <br/>  ja (japonais) <br/> ko (coréen) <br/> nb (norvégien) <br/>   pl (polonais) <br/> pt (portugais) <br/>  ru (russe) <br/>  es (espagnol) <br/>  sv (suédois) <br/>  tr (turc) <br/> ar (arabe) <br/> ro (roumain) <br/> sr-Cyrl (serbe cyrillique) <br/> sr-Latn (serbe latin) <br/>  sk (slovaque) <br/>  unk (inconnu) <br/><br/> Si le code langue n’est pas spécifié ou est Null, la langue est définie automatiquement sur l’anglais. Si la langue est explicitement définie sur « unk », la langue sera détectée automatiquement. </p> |
-|lineEnding | La valeur à utiliser entre chaque ligne détectée. Valeurs possibles : 'Space','CarriageReturn','LineFeed'.  La valeur par défaut est 'Space' |
+| `detectOrientation`   | Active la détection automatique de l’orientation de l’image. <br/> Valeurs valides : true, false.|
+| `defaultLanguageCode` | <p>   Code de langue du texte d’entrée. Les langages pris en charge incluent : <br/> zh-Hans (chinois simplifié) <br/> zh-Hant (chinois traditionnel) <br/>cs (tchèque) <br/>da (danois) <br/>nl (néerlandais) <br/>en (anglais) <br/>fi (finnois)  <br/>fr (français) <br/>  de (allemand) <br/>el (grec) <br/> hu (hongrois) <br/> it (italien) <br/>  ja (japonais) <br/> ko (coréen) <br/> nb (norvégien) <br/>   pl (polonais) <br/> pt (portugais) <br/>  ru (russe) <br/>  es (espagnol) <br/>  sv (suédois) <br/>  tr (turc) <br/> ar (arabe) <br/> ro (roumain) <br/> sr-Cyrl (serbe cyrillique) <br/> sr-Latn (serbe latin) <br/>  sk (slovaque) <br/>  unk (inconnu) <br/><br/> Si le code langue n’est pas spécifié ou est Null, la langue est définie automatiquement sur l’anglais. Si la langue est explicitement définie sur « unk », la langue sera détectée automatiquement. </p> |
+| `lineEnding` | La valeur à utiliser entre chaque ligne détectée. Valeurs possibles : "Space", "CarriageReturn", "LineFeed".  La valeur par défaut est "Space" |
 
 Auparavant, un paramètre appelé "textExtractionAlgorithm" servait à indiquer si la compétence devait extraire du texte "printed" ou "handwritten".  Ce paramètre est obsolète et inutile car le dernier algorithme de l'API Read est capable d'extraire les deux types de texte à la fois.  Si votre définition de compétence inclut déjà ce paramètre, inutile de le supprimer, mais il ne sera plus utilisé, et les deux types de texte seront dorénavant extraits, quel que soit leur paramétrage.
 
@@ -53,14 +53,14 @@ Auparavant, un paramètre appelé "textExtractionAlgorithm" servait à indiquer 
 
 | Nom d’entrée      | Description                                          |
 |---------------|------------------------------------------------------|
-| image         | Type complexe. Ne fonctionne actuellement qu'avec le champ « /documents/normalized_images », généré par l'indexeur d'objets Blob Azure lorsque ```imageAction``` est défini sur une valeur supérieure à ```none```. Pour plus d’informations, consultez [l’exemple](#sample-output).|
+| `image`         | Type complexe. Ne fonctionne actuellement qu'avec le champ « /documents/normalized_images », généré par l'indexeur d'objets Blob Azure lorsque ```imageAction``` est défini sur une valeur supérieure à ```none```. Pour plus d’informations, consultez [l’exemple](#sample-output).|
 
 
 ## <a name="skill-outputs"></a>Sorties de la compétence
 | Nom de sortie     | Description                   |
 |---------------|-------------------------------|
-| text          | Texte brut extrait de l’image.   |
-| layoutText    | Type complexe qui décrit le texte extrait ainsi que l’emplacement où le texte a été trouvé.|
+| `text`            | Texte brut extrait de l’image.   |
+| `layoutText`    | Type complexe qui décrit le texte extrait ainsi que l’emplacement où le texte a été trouvé.|
 
 
 ## <a name="sample-definition"></a>Exemple de définition
@@ -172,18 +172,22 @@ L’exemple d’ensemble de compétences suivant crée un champ *merged_text*. C
       "insertPostTag": " ",
       "inputs": [
         {
-          "name":"text", "source": "/document/content"
+          "name":"text",
+          "source": "/document/content"
         },
         {
-          "name": "itemsToInsert", "source": "/document/normalized_images/*/text"
+          "name": "itemsToInsert", 
+          "source": "/document/normalized_images/*/text"
         },
         {
-          "name":"offsets", "source": "/document/normalized_images/*/contentOffset"
+          "name":"offsets", 
+          "source": "/document/normalized_images/*/contentOffset"
         }
       ],
       "outputs": [
         {
-          "name": "mergedText", "targetName" : "merged_text"
+          "name": "mergedText", 
+          "targetName" : "merged_text"
         }
       ]
     }
@@ -208,4 +212,4 @@ L’exemple d’ensemble de compétences ci-dessus suppose l’existence d’un 
 + [Compétences prédéfinies](cognitive-search-predefined-skills.md)
 + [Compétence Fusion de texte](cognitive-search-skill-textmerger.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un indexeur (REST)](https://docs.microsoft.com/rest/api/searchservice/create-indexer)
++ [Créer un indexeur (REST)](/rest/api/searchservice/create-indexer)

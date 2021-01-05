@@ -6,12 +6,12 @@ ms.author: dukek
 ms.topic: conceptual
 ms.date: 07/18/2018
 ms.subservice: alerts
-ms.openlocfilehash: 655a3acc44a1418778b37fbef85e5df75d042317
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f76d28018fdf55314593dabc44ef1e9a1dab9494
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78206234"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995095"
 ---
 # <a name="how-to-trigger-complex-actions-with-azure-monitor-alerts"></a>Guide pratique pour déclencher des actions complexes avec des alertes Azure Monitor
 
@@ -19,7 +19,7 @@ Cet article explique comment configurer une application logique pour qu’elle c
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Quand une alerte Azure Monitor se déclenche, elle appelle un [groupe d’actions](../../azure-monitor/platform/action-groups.md). Les groupes d’actions permettent de déclencher une ou plusieurs actions pour avertir les autres en cas d’alerte et y remédier.
+Quand une alerte Azure Monitor se déclenche, elle appelle un [groupe d’actions](./action-groups.md). Les groupes d’actions permettent de déclencher une ou plusieurs actions pour avertir les autres en cas d’alerte et y remédier.
 
 Le processus général est le suivant :
 
@@ -108,9 +108,9 @@ Le processus est similaire si vous souhaitez que l’application logique effectu
 
     ![Action Microsoft Teams](media/action-groups-logic-app/microsoft-teams-actions.png "Action Microsoft Teams")
 
-12. Configurez l’action Microsoft Teams. Le **Concepteur d’applications logiques** vous invite à vous authentifier pour vous connecter à votre compte Office 365. Choisissez l’**ID de l’équipe** et l’**ID du canal** auxquels envoyer le message.
+12. Configurez l’action Microsoft Teams. Le **Concepteur Logic Apps** vous invite à vous authentifier pour vous connecter à votre compte professionnel ou scolaire. Choisissez l’**ID de l’équipe** et l’**ID du canal** auxquels envoyer le message.
 
-13. Configurez le message en utilisant une combinaison de texte statique et de références aux \<champs\> du contenu dynamique. Coupez et collez le texte suivant dans le champ **Message** :
+13. Configurez le message en utilisant une combinaison de texte statique et de références aux \<fields\> du contenu dynamique. Coupez et collez le texte suivant dans le champ **Message** :
 
     ```text
       Activity Log Alert: <eventSource>
@@ -119,7 +119,7 @@ Le processus est similaire si vous souhaitez que l’application logique effectu
       resourceId: <resourceId>
     ```
 
-    Recherchez et remplacez les \<champs\> par des balises de contenu dynamique du même nom.
+    Recherchez et remplacez ensuite les \<fields\> par des balises de contenu dynamique du même nom.
 
     > [!NOTE]
     > Il existe deux champs dynamiques nommés **status**. Ajoutez les deux au message. Utilisez celui du jeu de propriétés **activityLog** et supprimez l’autre. Placez le curseur sur le champ **status** pour voir la référence complète au champ, comme sur la capture d’écran suivante :
@@ -128,7 +128,7 @@ Le processus est similaire si vous souhaitez que l’application logique effectu
 
 14. En haut du **Concepteur d’applications logiques**, sélectionnez **Enregistrer** pour enregistrer votre application logique.
 
-15. Ouvrez votre groupe d’actions existant et ajoutez une action pour référencer l’application logique. Si vous n’avez pas de groupe d’actions, voir [Créer et gérer des groupes d’actions sur le portail Azure](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups) pour en créer un. N’oubliez pas d’enregistrer vos modifications.
+15. Ouvrez votre groupe d’actions existant et ajoutez une action pour référencer l’application logique. Si vous n’avez pas de groupe d’actions, voir [Créer et gérer des groupes d’actions sur le portail Azure](./action-groups.md) pour en créer un. N’oubliez pas d’enregistrer vos modifications.
 
     ![Mettre à jour le groupe d’actions](media/action-groups-logic-app/update-action-group.png "Mettre à jour le groupe d’actions")
 
@@ -294,7 +294,7 @@ Le processus de création d’une alerte de métrique est semblable à celui de 
 Logic Apps propose plusieurs connecteurs qui vous permettent de déclencher des actions dans un large éventail d’applications et de bases de données. Slack, SQL Server, Oracle, Salesforce en sont quelques exemples. Pour plus d’informations sur les connecteurs, consultez [Connecteurs Logic App](../../connectors/apis-list.md).  
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Dans une [vue d’ensemble des alertes du journal d’activité Azure](../../azure-monitor/platform/alerts-overview.md), découvrez comment recevoir des alertes.  
-* Découvrez comment [configurer des alertes lorsqu’une notification Azure Service Health est publiée](../../azure-monitor/platform/alerts-activity-log-service-notifications.md).
-* En savoir plus sur les [groupes d’actions](../../azure-monitor/platform/action-groups.md).
+* Dans une [vue d’ensemble des alertes du journal d’activité Azure](./alerts-overview.md), découvrez comment recevoir des alertes.  
+* Découvrez comment [configurer des alertes lorsqu’une notification Azure Service Health est publiée](../../service-health/alerts-activity-log-service-notifications-portal.md).
+* En savoir plus sur les [groupes d’actions](./action-groups.md).
 

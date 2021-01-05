@@ -2,25 +2,21 @@
 title: 'Didacticiel : intégration d’Azure Active Directory à SciQuest Spend Director| Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et SciQuest Spend Director.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 9fab641b-292e-4bef-91d1-8ccc4f3a0c1f
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 199f531485a6a6c9ea234b35a7dbb88b66b3067c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a828f945c459142febbc2cee7a14d40a3d534435
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67091638"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999856"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-sciquest-spend-director"></a>Didacticiel : Intégration d’Azure Active Directory avec SciQuest Spend Director
 
@@ -31,7 +27,7 @@ L’intégration de SciQuest Spend Director à Azure AD vous offre les avantages
 * Vous pouvez autoriser vos utilisateurs à se connecter automatiquement à SciQuest Spend Director (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -78,7 +74,7 @@ Pour que l’authentification unique fonctionne, un lien entre un utilisateur Az
 Pour configurer et tester l’authentification unique Azure AD avec SciQuest Spend Director, vous avez besoin de suivre les indications des sections suivantes :
 
 1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-single-sign-on)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
-2. **[Configurer l’authentification unique SciQuest Spend Director ](#configure-sciquest-spend-director-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
+2. **[Configurer l’authentification unique SciQuest Spend Director](#configure-sciquest-spend-director-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
 3. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec Britta Simon.
 4. **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique Azure AD.
 5. **[Créer un utilisateur de test SciQuest Spend Director](#create-sciquest-spend-director-test-user)** pour avoir un équivalent de Britta Simon dans SciQuest Spend Director qui soit lié à la représentation de l’utilisateur dans Azure AD.
@@ -199,12 +195,12 @@ Pour que le provisionnement juste-à-temps soit activé, vous devez contacter [l
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette SciQuest Spend Director dans le volet d’accès, vous devez être connecté automatiquement à l’application SciQuest Spend Director pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette SciQuest Spend Director dans le volet d’accès, vous devez être connecté automatiquement à l’application SciQuest Spend Director pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

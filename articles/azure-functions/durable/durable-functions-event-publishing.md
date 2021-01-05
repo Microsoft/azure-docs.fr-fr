@@ -3,16 +3,16 @@ title: Publication de Fonctions durables sur Azure Event Grid (version prélimin
 description: Découvrez comment configurer la publication automatique de l’extension Fonctions durables sur Azure Event Grid.
 ms.topic: conceptual
 ms.date: 04/25/2020
-ms.openlocfilehash: c0106f3754e0cdcbf1f295fbe3f1b5def8dc3ca1
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: e4651dd7548ba76380bfc2d1b314e67d7abe63d9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83124244"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87081744"
 ---
 # <a name="durable-functions-publishing-to-azure-event-grid-preview"></a>Publication de Fonctions durables sur Azure Event Grid (version préliminaire)
 
-Cet article explique comment configurer Durable Functions de façon à publier les événements de cycle de vie d’orchestration (création, achèvement, échec, etc.) sur une [Rubrique Azure Event Grid](https://docs.microsoft.com/azure/event-grid/overview) personnalisée.
+Cet article explique comment configurer Durable Functions de façon à publier les événements de cycle de vie d’orchestration (création, achèvement, échec, etc.) sur une [Rubrique Azure Event Grid](../../event-grid/overview.md) personnalisée.
 
 Voici certains scénarios pour lesquels cette fonctionnalité est utile :
 
@@ -26,7 +26,7 @@ Voici certains scénarios pour lesquels cette fonctionnalité est utile :
 
 * Installez [Microsoft.Azure.WebJobs.Extensions.DurableTask](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask) dans votre projet Durable Functions.
 * Installez l’[émulateur de Stockage Azure](../../storage/common/storage-use-emulator.md) (Windows uniquement) ou utilisez un compte de Stockage Azure existant.
-* Installez [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) ou utilisez [Azure Cloud Shell](../../cloud-shell/overview.md).
+* Installez [Azure CLI](/cli/azure/?view=azure-cli-latest) ou utilisez [Azure Cloud Shell](../../cloud-shell/overview.md).
 
 ## <a name="create-a-custom-event-grid-topic"></a>Créer une rubrique Event Grid personnalisée
 
@@ -132,11 +132,11 @@ Si vous utilisez un compte de Stockage Azure existant, remplacez `UseDevelopment
 
 1. Recherchez **Event Grid**, puis sélectionnez le modèle **Déclencheur Azure Event Grid**. 
 
-    :::image type="content" source="./media/durable-functions-event-publishing/function-select-event-grid-trigger.png" alt-text="Sélectionnez le modèle de déclencheur Event Grid dans le portail Azure." border="true":::
+    :::image type="content" source="./media/durable-functions-event-publishing/function-select-event-grid-trigger.png" alt-text="Ajouter une fonction dans le portail Azure." border="true":::
 
 1. Nommez le nouveau déclencheur, puis sélectionnez **Créer une fonction**.
 
-    :::image type="content" source="./media/durable-functions-event-publishing/function-name-event-grid-trigger.png" alt-text="Nommez le déclencheur Event Grid dans le portail Azure." border="true":::
+    :::image type="content" source="./media/durable-functions-event-publishing/function-name-event-grid-trigger.png" alt-text="Ajouter une fonction dans le portail Azure." border="true":::
 
 
     Une fonction présentant le code suivant est créée :
@@ -168,15 +168,15 @@ Si vous utilisez un compte de Stockage Azure existant, remplacez `UseDevelopment
 
 ### <a name="add-an-event-grid-subscription"></a>Ajouter un abonnement Event Grid
 
-Vous pouvez à présent ajouter un abonnement Event Grid à la rubrique Event Grid que vous avez créée. Pour plus d’informations, consultez [Concepts utilisés dans Azure Event Grid](https://docs.microsoft.com/azure/event-grid/concepts).
+Vous pouvez à présent ajouter un abonnement Event Grid à la rubrique Event Grid que vous avez créée. Pour plus d’informations, consultez [Concepts utilisés dans Azure Event Grid](../../event-grid/concepts.md).
 
 1. Dans votre nouvelle fonction, sélectionnez **Intégration**, puis **Déclencheur Event Grid (eventGridEvent)** . 
 
-    :::image type="content" source="./media/durable-functions-event-publishing/eventgrid-trigger-link.png" alt-text="Sélectionnez le lien du déclencheur Event Grid." border="true":::
+    :::image type="content" source="./media/durable-functions-event-publishing/eventgrid-trigger-link.png" alt-text="Ajouter une fonction dans le portail Azure." border="true":::
 
 1. Sélectionnez **Créer une description Event Grid**.
 
-    :::image type="content" source="./media/durable-functions-event-publishing/create-event-grid-subscription.png" alt-text="Créez l’abonnement Event Grid." border="true":::
+    :::image type="content" source="./media/durable-functions-event-publishing/create-event-grid-subscription.png" alt-text="Ajouter une fonction dans le portail Azure." border="true":::
 
 1. Nommez votre abonnement aux événements et sélectionnez le type de rubrique **Rubriques Event Grid**. 
 
@@ -184,7 +184,7 @@ Vous pouvez à présent ajouter un abonnement Event Grid à la rubrique Event Gr
 
 1. Sélectionnez **Create** (Créer).
 
-    :::image type="content" source="./media/durable-functions-event-publishing/event-grid-subscription-details.png" alt-text="Créer un abonnement Event Grid." border="true":::
+    :::image type="content" source="./media/durable-functions-event-publishing/event-grid-subscription-details.png" alt-text="Ajouter une fonction dans le portail Azure." border="true":::
 
 Vous êtes maintenant prêt à recevoir les événements du cycle de vie.
 

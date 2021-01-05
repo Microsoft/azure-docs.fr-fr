@@ -8,6 +8,8 @@
       href: overview.md
     - name: Comparer les services de messagerie
       href: compare-messaging-services.md
+    - name: Notes de publication
+      href: whats-new.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -38,6 +40,8 @@
       href: custom-event-to-eventhub.md
     - name: Événements du registre de conteneurs
       href: ../container-registry/container-registry-event-grid-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json
+    - name: Gérer les événements Azure Communication Services
+      href: ../communication-services/quickstarts/telephony-sms/handle-sms-events.md?toc=%2fazure%2fevent-grid%2ftoc.json
 - name: Tutoriels
   items:
     - name: M’avertir par e-mail lorsque la machine virtuelle subit des modifications
@@ -46,7 +50,7 @@
       href: resize-images-on-storage-blob-upload-event.md
     - name: Déclencher le runbook Azure Automation
       href: ensure-tags-exists-on-new-virtual-machines.md
-    - name: M’avertir par e-mail lors de l’ajout d’un appareil IoT Hub
+    - name: Envoyer un e-mail quand un appareil IoT Hub se déconnecte
       href: publish-iot-hub-events-to-logic-apps.md
     - name: Répondre aux événements de Service Bus
       href: ../service-bus-messaging/service-bus-to-event-grid-integration-example.md?toc=%2fazure%2fevent-grid%2ftoc.json
@@ -91,7 +95,7 @@
     - name: Modèles Resource Manager
       href: template-samples.md
     - name: Exemples de code
-      href: 'https://docs.microsoft.com/samples/browse/?term=Event%20Grid'
+      href: /samples/browse/?term=Event+Grid
 - name: Concepts
   items:
     - name: Terminologie Event Grid
@@ -102,7 +106,7 @@
       items:
         - name: Vue d’ensemble des rubriques système
           href: system-topics.md
-        - name: Sources d’événement
+        - name: Sources d’événement (éditeurs)
           items:
             - name: Azure App Configuration
               href: event-schema-app-configuration.md
@@ -110,6 +114,8 @@
               href: event-schema-app-service.md
             - name: Stockage Blob Azure
               href: event-schema-blob-storage.md
+            - name: Azure Communication Services
+              href: event-schema-communication-services.md
             - name: Azure Container Registry
               href: event-schema-container-registry.md
             - name: Hubs d'événements Azure
@@ -132,13 +138,15 @@
               href: event-schema-azure-signalr.md
             - name: Abonnements Azure
               href: event-schema-subscriptions.md
-    - name: Rubriques de partenaire
+    - name: Événements partenaire
       items:
-        - name: Vue d’ensemble des rubriques de partenaire
-          href: partner-topics-overview.md
-        - name: Auth0
-          href: auth0-overview.md
-        - name: Devenir partenaire Event Grid
+        - name: Vue d’ensemble des événements partenaire
+          href: partner-events-overview.md
+        - name: Sources d’événement (éditeurs)
+          items:
+            - name: Auth0
+              href: auth0-overview.md
+        - name: Vue d’ensemble de l’intégration de partenaires
           href: partner-onboarding-overview.md
     - name: Domaines d'événements
       href: event-domains.md
@@ -178,9 +186,13 @@
           href: geo-disaster-recovery.md
     - name: Sécurité
       items:
-        - name: Authentification
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
+        - name: Authentifier la remise des événements aux gestionnaires d’événements
           href: security-authentication.md
-        - name: Autorisation
+        - name: Authentifier les clients de publication
+          href: security-authenticate-publishing-clients.md
+        - name: Autoriser l’accès aux ressources Event Grid
           href: security-authorization.md
         - name: Sécurité du réseau
           href: network-security.md
@@ -192,13 +204,27 @@
           href: metrics.md
 - name: Guides pratiques
   items:
+    - name: 'Créer, afficher et gérer des rubriques système'
+      items:
+        - name: Portail Azure
+          href: create-view-manage-system-topics.md
+        - name: Azure CLI
+          href: create-view-manage-system-topics-cli.md
+        - name: "Modèle Azure\_Resource\_Manager"
+          href: create-view-manage-system-topics-arm.md
+    - name: Événements partenaire
+      items:
+        - name: Intégrer comme partenaire
+          href: onboard-partner.md
+        - name: S’abonner aux événements Auth0
+          href: auth0-how-to.md
+    - name: Obtenir des clés d’accès pour des rubriques ou des domaines
+      href: get-access-keys.md
     - name: Envoyer des messages dans une rubrique personnalisée
       href: post-to-custom-topic.md
-    - name: S’abonner aux événements Auth0
-      href: auth0-how-to.md
     - name: Recevoir des événements sur un point de terminaison HTTP
       href: receive-events.md
-    - name: Lettres mortes et nouvelle tentative
+    - name: Définir un emplacement de lettres mortes et une stratégie de nouvelles tentatives
       href: manage-event-delivery.md
     - name: Filtrer les événements
       href: how-to-filter-events.md
@@ -216,15 +242,25 @@
       href: custom-disaster-recovery.md
     - name: Suivre les opérations REST asynchrones
       href: ../azure-resource-manager/management/async-operations.md?toc=%2fazure%2fevent-grid%2ftoc.json
+    - name: Déplacer
+      items:
+        - name: Déplacer les rubriques système d’une région à l’autre
+          href: move-system-topics-across-regions.md
+        - name: Déplacer les rubriques personnalisées d’une région à l’autre
+          href: move-custom-topics-across-regions.md
+        - name: Déplacer les domaines d’une région à l’autre
+          href: move-domains-across-regions.md
+        - name: Déplacer les espaces de noms de partenaires d’une région à l’autre
+          href: move-partner-namespaces-across-regions.md
     - name: Sécuriser
       items:
-        - name: Configurer des points de terminaison privés
+        - name: Publier des événements de façon sécurisée via une liaison privée
           href: configure-private-endpoints.md
-        - name: Configurer le pare-feu IP (préversion)
+        - name: Configurer le pare-feu IP
           href: configure-firewall.md
-        - name: Sécuriser un WebHook avec AAD
+        - name: Sécuriser un webhook avec Azure Active Directory
           href: secure-webhook-delivery.md
-        - name: Remise d’événement avec une identité managée
+        - name: 'Remise d’événement, identité managée et liaison privée'
           href: managed-service-identity.md
     - name: Dépanner
       items:
@@ -232,10 +268,14 @@
           href: enable-diagnostic-logs-topic.md
         - name: Résoudre les erreurs
           href: troubleshoot-errors.md
+        - name: Résoudre les problèmes de connectivité réseau
+          href: troubleshoot-network-connectivity.md
         - name: Résoudre les problèmes de validation d’abonnement
           href: troubleshoot-subscription-validation.md
-        - name: Surveiller la remise d’événement
+        - name: Afficher les mesures
           href: monitor-event-delivery.md
+        - name: Créez des alertes
+          href: set-alerts.md
 - name: Informations de référence
   items:
     - name: Azure CLI
@@ -264,6 +304,9 @@
           href: /azure/templates/microsoft.eventgrid/topics
     - name: Kits SDK
       href: sdk-overview.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Développer vos compétences avec Microsoft Learn

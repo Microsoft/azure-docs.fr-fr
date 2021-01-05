@@ -1,17 +1,17 @@
 ---
 title: Comment fonctionne la migration Hyper-V dans Azure Migrate ?
 description: En savoir plus sur la migration d’Hyper-V avec Azure Migrate
-author: rayne-wiselman
-ms.service: azure-migrate
+author: bsiva
+ms.author: bsiva
+ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 11/19/2019
-ms.author: raynew
-ms.openlocfilehash: 8bca88fc63a7fc04a22d2a68adbe59259b07f50e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 239918cc19eefbef9e3c3f12d5ddd3bb5434b490
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74185873"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96751017"
 ---
 # <a name="how-does-hyper-v-replication-work"></a>Fonctionnement de la réplication Hyper-V
 
@@ -30,7 +30,7 @@ La migration de serveur Azure Migrate est un outil qui permet de migrer des char
 
 ## <a name="architectural-components"></a>Composants architecturaux
 
-![Architecture](./media/hyper-v-replication-architecture/architecture.png)
+![Diagramme montrant un réseau Hyper-V source avec un canal de données HTTPS vers Microsoft Azure, et des détails expliqués dans un tableau.](./media/hyper-v-replication-architecture/architecture.png)
 
 
 
@@ -70,9 +70,9 @@ Vous pouvez limiter la quantité de bande passante utilisée pour télécharger 
 
 
 1. Connectez-vous à l’hôte Hyper-V ou au nœud de cluster.
-2. Exécutez **C:\Program Files\Microsoft Azure Recovery Services Agent\bin\wabadmin.msc**pour ouvrir le composant logiciel enfichable MMC de Windows Sauvegarde Azure.
+2. Exécutez **C:\Program Files\Microsoft Azure Recovery Services Agent\bin\wabadmin.msc** pour ouvrir le composant logiciel enfichable MMC de Windows Sauvegarde Azure.
 3. Dans le composant logiciel enfichable, sélectionnez **Modifier les propriétés**.
-4. Dans**Limitation**, sélectionnez la case **Activer la limitation de la bande passante sur Internet pour les opérations de sauvegarde**. Définissez les limites pour les heures ouvrées et non ouvrées. Les plages valides vont de 512 Kbits/s à 1 023 Mbits/s.
+4. Dans **Limitation**, sélectionnez la case **Activer la limitation de la bande passante sur Internet pour les opérations de sauvegarde**. Définissez les limites pour les heures ouvrées et non ouvrées. Les plages valides vont de 512 Kbits/s à 1 023 Mbits/s.
 I
 
 ### <a name="influence-upload-efficiency"></a>Améliorer l’efficacité du chargement

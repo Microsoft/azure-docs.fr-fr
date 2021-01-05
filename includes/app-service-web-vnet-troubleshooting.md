@@ -4,25 +4,33 @@ ms.service: app-service-web
 ms.topic: include
 ms.date: 02/27/2020
 ms.author: ccompy
-ms.openlocfilehash: 652d42d6e2d9e909c3a03bd82a3a36f91bc73807
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: cec44bbabdb7d528c30a8d3396b819f2eb3c5386
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80419538"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999431"
 ---
 Cette fonctionnalité est facile à configurer, mais il est possible que vous rencontriez des problèmes. Si vous rencontrez des difficultés pour accéder au point de terminaison souhaité, certains utilitaires vous permettent de tester la connectivité à partir de la console de l’application. Vous pouvez utiliser deux consoles : la console Kudu et la console du Portail Azure. Pour accéder à la console Kudu à partir de votre application, accédez à **Outils** > **Kudu**. Vous pouvez également accéder à la console Kudo via le site [nom du site].scm.azurewebsites.net. Une fois le site chargé, accédez à l’onglet **Console de débogage**. Pour accéder à la console hébergée par le Portail Azure à partir de votre application, accédez à **Outils** > **Console**.
 
 #### <a name="tools"></a>Outils
-Les outils **ping**, **nslookup** et **tracert** ne fonctionnent pas dans la console en raison de contraintes de sécurité. Deux outils distincts ont été ajoutés pour les remplacer. Pour tester les fonctionnalités DNS, nous avons ajouté un outil nommé **nameresolver.exe**. La syntaxe est :
+Dans les applications Windows natives, les outils **ping**, **nslookup** et **tracert** ne fonctionnent pas dans la console en raison de contraintes de sécurité (ils fonctionnent dans des [conteneurs Windows personnalisés](../articles/app-service/quickstart-custom-container.md)). Deux outils distincts ont été ajoutés pour les remplacer. Pour tester les fonctionnalités DNS, nous avons ajouté un outil nommé **nameresolver.exe**. La syntaxe est :
 
-    nameresolver.exe hostname [optional: DNS Server]
+```console
+nameresolver.exe hostname [optional: DNS Server]
+```
 
 Vous pouvez utiliser nameresolver pour vérifier les noms d’hôte dont dépend votre application. De cette façon, vous pouvez tester si des éléments de votre serveur DNS sont mal configurés ou si vous n’avez pas accès à votre serveur DNS. Vous pouvez identifier le serveur DNS qu’utilise votre application dans la console en examinant les variables d’environnement WEBSITE_DNS_SERVER et WEBSITE_DNS_ALT_SERVER.
 
+> [!NOTE]
+> nameresolver.exe ne fonctionne pas actuellement dans les conteneurs Windows personnalisés.
+>
+
 Vous pouvez utiliser l’outil suivant pour tester la connectivité TCP avec une combinaison hôte-port. Il s’agit de l’outil **tcpping**, dont la syntaxe est la suivante :
 
-    tcpping.exe hostname [optional: port]
+```console
+tcpping.exe hostname [optional: port]
+```
 
 L’utilitaire **tcpping** vous indique si vous pouvez atteindre un hôte et un port spécifiques. Il ne peut réussir que si une application écoute au niveau de la combinaison hôte-port et si l’accès réseau de votre application à l’hôte et au port spécifiés est disponible.
 
@@ -38,7 +46,7 @@ Si ces éléments ne suffisent pas à résoudre vos problèmes, commencez par vo
 * Votre destination est-elle une adresse non RFC1918 alors que la valeur de WEBSITE_VNET_ROUTE_ALL n’est pas 1 ?
 * Y a-t-il un groupe de sécurité réseau qui bloque la sortie de votre sous-réseau d’intégration ?
 * Si elle transite par Azure ExpressRoute ou un VPN, votre passerelle locale est-elle configurée pour réacheminer le trafic vers Azure ? Si vous pouvez accéder à des points de terminaison dans votre réseau virtuel, mais pas en local, vérifiez vos routes.
-* Disposez-vous d’autorisations suffisantes pour définir la délégation sur le sous-réseau d’intégration ? Durant la configuration de l’intégration au réseau virtuel régional, votre sous-réseau d’intégration est délégué à Microsoft.Web. L’interface utilisateur de l’intégration au réseau virtuel délègue automatiquement le sous-réseau à Microsoft.Web. Si votre compte ne dispose pas d’autorisations de mise en réseau suffisantes pour définir la délégation, vous devez demander à une personne autorisée de configurer les attributs de votre sous-réseau d’intégration de manière à déléguer celui-ci. Pour déléguer manuellement le sous-réseau d’intégration, accédez à l’interface utilisateur du sous-réseau du service Réseau virtuel Azure et définissez la délégation sur Microsoft.Web.
+* Disposez-vous d’autorisations suffisantes pour définir la délégation sur le sous-réseau d’intégration ? Durant la configuration de l’intégration au réseau virtuel régional, votre sous-réseau d’intégration est délégué à Microsoft.Web/serverFarms. L’interface utilisateur de l’intégration au réseau virtuel délègue automatiquement le sous-réseau à Microsoft.Web/serverFarms. Si votre compte ne dispose pas d’autorisations de mise en réseau suffisantes pour définir la délégation, vous devez demander à une personne autorisée de configurer les attributs de votre sous-réseau d’intégration de manière à déléguer celui-ci. Pour déléguer manuellement le sous-réseau d’intégration, accédez à l’interface utilisateur du sous-réseau de Réseau virtuel Microsoft Azure et définissez la délégation sur Microsoft.Web/serverFarms.
 
 **Intégration au réseau virtuel avec passerelle obligatoire**
 * La plage d’adresses de point à site se trouve-t-elle dans les plages RFC 1918 (10.0.0.0 à 10.255.255.255, 172.16.0.0 à 172.31.255.255 ou 192.168.0.0 à 192.168.255.255) ?
@@ -62,7 +70,9 @@ Vous ne savez pas quelle adresse votre application utilise réellement. Cela peu
 
 * Connectez-vous à une machine virtuelle de votre réseau virtuel et essayez d’atteindre la combinaison hôte-port de vos ressources. Pour tester l’accès à TCP, utilisez la commande PowerShell **test-netconnection**. La syntaxe est :
 
-      test-netconnection hostname [optional: -Port]
+```powershell
+test-netconnection hostname [optional: -Port]
+```
 
 * Démarrez une application sur une machine virtuelle, puis testez l’accès à ces hôte et port à partir de la console de votre application en utilisant l’outil **tcpping**.
 

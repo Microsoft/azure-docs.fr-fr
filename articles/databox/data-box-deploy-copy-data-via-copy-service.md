@@ -9,12 +9,12 @@ ms.subservice: pod
 ms.topic: tutorial
 ms.date: 06/18/2019
 ms.author: alkohli
-ms.openlocfilehash: ef0d79cae11a382bcca0ddb61e1d4a04b5db41e9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e664055893bbdef0f7090811b8a160a1b8a4a1fd
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79501882"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92124046"
 ---
 # <a name="tutorial-use-the-data-copy-service-to-copy-data-into-azure-data-box-preview"></a>Tutoriel : Utiliser le service de copie des données pour copier des données dans Azure Data Box (préversion)
 
@@ -50,7 +50,8 @@ Une fois que vous êtes connecté à l’appareil NAS, l’étape suivante cons
 
 * Si les données sont modifiées au moment où elles sont lues par le service de copie des données, vous pouvez constater des échecs ou une altération des données.
 
-* Veillez à conserver une copie des données sources tant que vous n’avez pas la confirmation que le Data Box a transféré vos données dans Stockage Azure.
+> [!IMPORTANT]
+> Veillez à conserver une copie des données sources tant que vous n’avez pas la confirmation que le Data Box a transféré vos données dans Stockage Azure.
 
 Pour copier des données par l’intermédiaire du service de copie des données, vous devez créer une tâche :
 
@@ -70,7 +71,7 @@ Pour copier des données par l’intermédiaire du service de copie des données
     |**Compte de stockage de destination**    |Sélectionnez le compte de stockage cible sur lequel charger les données à partir de la liste.         |
     |**Type de destination**       |Sélectionnez le type du stockage cible dans la liste : **Objet blob de blocs**, **Objet blob de pages** ou **Azure Files**.        |
     |**Conteneur/partage de destination**    |Entrez le nom du conteneur ou du partage de votre compte de stockage de destination dans lequel vous souhaitez charger les données. Le nom peut être un nom de partage ou un nom de conteneur. Par exemple, utilisez `myshare` ou `mycontainer`. Vous pouvez également entrer le nom au format `sharename\directory_name` ou `containername\virtual_directory_name`.        |
-    |**Copier les fichiers correspondant à un modèle**    | Vous pouvez entrer le modèle de correspondance des noms de fichiers de deux façons :<ul><li>**Utiliser des caractères génériques :** seuls `*` et `?` sont pris en charge dans les expressions génériques. Par exemple, l’expression `*.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. De même, `*.dl?` correspond à tous les fichiers ayant l’extension `.dl` ou qui commencent par `.dl`, tels que `.dll`. De la même façon, `*foo` correspond à tous les fichiers dont le nom se termine par `foo`.<br>Vous pouvez entrer l’expression générique directement dans le champ. Par défaut, la valeur que vous entrez dans le champ est traitée comme une expression générique.</li><li>**Utiliser des expressions régulières :** les expressions régulières POSIX sont prises en charge. Par exemple, l’expression régulière `.*\.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. Pour les expressions régulières, fournissez le modèle (`<pattern>`) directement au format `regex(<pattern>)`. Pour plus d’informations sur les expressions régulières, consultez [Langage des expressions régulières - Aide-mémoire](https://docs.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference).</li><ul>|
+    |**Copier les fichiers correspondant à un modèle**    | Vous pouvez entrer le modèle de correspondance des noms de fichiers de deux façons :<ul><li>**Utiliser des caractères génériques :** seuls `*` et `?` sont pris en charge dans les expressions génériques. Par exemple, l’expression `*.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. De même, `*.dl?` correspond à tous les fichiers ayant l’extension `.dl` ou qui commencent par `.dl`, tels que `.dll`. De la même façon, `*foo` correspond à tous les fichiers dont le nom se termine par `foo`.<br>Vous pouvez entrer l’expression générique directement dans le champ. Par défaut, la valeur que vous entrez dans le champ est traitée comme une expression générique.</li><li>**Utiliser des expressions régulières :** les expressions régulières POSIX sont prises en charge. Par exemple, l’expression régulière `.*\.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. Pour les expressions régulières, fournissez le modèle (`<pattern>`) directement au format `regex(<pattern>)`. Pour plus d’informations sur les expressions régulières, consultez [Langage des expressions régulières - Aide-mémoire](/dotnet/standard/base-types/regular-expression-language-quick-reference).</li><ul>|
     |**Optimisation de fichier**              |Lorsque cette fonctionnalité est activée, les fichiers dont la taille est inférieure à 1 Mo sont compressés au cours de l’ingestion. Cette compression accélère la transmission des petits fichiers. Elle permet également un gain de temps significatif lorsque le nombre de fichiers dépasse largement le nombre de répertoires.        |
  
 4. Sélectionnez **Démarrer**. Les entrées sont validées, et si la validation aboutit, le travail démarre. Le démarrage du travail peut prendre quelques minutes.
@@ -150,4 +151,3 @@ Passez au tutoriel suivant pour découvrir comment renvoyer votre appareil Data 
 
 > [!div class="nextstepaction"]
 > [Envoyer votre appareil Azure Data Box à Microsoft](./data-box-deploy-picked-up.md)
-

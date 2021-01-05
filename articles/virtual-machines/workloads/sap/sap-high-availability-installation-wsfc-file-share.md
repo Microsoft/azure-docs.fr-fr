@@ -10,18 +10,19 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: 71296618-673b-4093-ab17-b7a80df6e9ac
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 05/05/2017
+ms.date: 08/04/2020
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: a393c1ac09283f1570908cea72750ed5ae28f81e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c7df3934862efa9798735d0c163f7fb1bac98423
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617331"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94951041"
 ---
 # <a name="install-sap-netweaver-high-availability-on-a-windows-failover-cluster-and-file-share-for-sap-ascsscs-instances-on-azure"></a>Installer la haute disponibilité SAP NetWeaver sur un cluster de basculement Windows et un partage de fichiers pour des instances SAP ASCS/SCS sur Azure
 
@@ -236,8 +237,8 @@ Créez le partage de volume et de fichiers suivant sur le cluster SOFS :
 * Partage de fichiers SAPMNT
 
 * Définiz la sécurité sur le partage de fichiers et le dossier SAPMNT avec un contrôle total pour :
-    * Le groupe d’utilisateurs \<DOMAINE>\SAP_\<SID>_GlobalAdmin
-    * Les objets ordinateur de nœud de cluster SAP ASCS/SCS \<DOMAINE>\ClusterNode1$ et \<DOMAINE>\ClusterNode2$
+    * le groupe d’utilisateurs \<DOMAIN>\SAP_\<SID>_GlobalAdmin ;
+    * les objets ordinateur de nœud de cluster SAP ASCS/SCS \<DOMAIN>\ClusterNode1$ et \<DOMAIN>\ClusterNode2$.
 
 Pour créer un volume CSV avec une résilience en miroir, exécutez la cmdlet PowerShell suivante sur l’un des nœuds de cluster SOFS :
 
@@ -299,7 +300,7 @@ Créez un nom réseau du cluster SAP ASCS/SCS (par exemple, **pr1-ascs [10.0.6.7
 
 Installez une instance ASCS/SCS SAP sur le premier nœud de cluster. Pour installer l’instance, dans l’outil d’installation SAP SWPM, accédez à :
 
-**\<Produit>**  >  **\<SGBD>**  > **Installation** > **Application Server ABAP** (ou **Java**) > **High-Availability System (Système haute disponibilité)**  > **Instance ASCS/SCS** > **First cluster node (Premier nœud de cluster)** .
+**\<Product>**  >  **\<DBMS>**  > **Installation** > **Application Server ABAP** (ou **Java**) > **Système haute disponibilité** > **Instance ASCS/SCS** > **Premier nœud de cluster**.
 
 ### <a name="add-a-probe-port"></a>Ajouter un port de sonde
 
@@ -309,12 +310,12 @@ Configurez le port de sonde SAP-SID-IP (ressource de cluster SAP) à l’aide de
 
 Installez une instance ASCS/SCS SAP sur le deuxième nœud de cluster. Pour installer l’instance, dans l’outil d’installation SAP SWPM, accédez à :
 
-**\<Produit>**  >  **\<SGBD>**  > **Installation** > **Application Server ABAP** (ou **Java**) > **High-Availability System (Système haute disponibilité)**  > **Instance ASCS/SCS** > **Additional cluster node (Nœud de cluster supplémentaire)** .
+**\<Product>**  >  **\<DBMS>**  > **Installation** > **Application Server ABAP** (ou **Java**) > **Système haute disponibilité** > **Instance ASCS/SCS** > **Nœud de cluster supplémentaire**.
 
 
 ## <a name="update-the-sap-ascsscs-instance-profile"></a>Mettre à jour le profil d’instance SAP ASCS/SCS
 
-Mettez à jour les paramètres dans le profil d’instance ASCS/SCS SAP \<SID>_ASCS/SCS\<Nr>_ \<Hôte>.
+Mettez à jour les paramètres dans le profil d’instance ASCS/SCS SAP \<SID>_ASCS/SCS\<Nr>_ \<Host>.
 
 
 | Nom du paramètre | Valeur du paramètre |
@@ -323,6 +324,7 @@ Mettez à jour les paramètres dans le profil d’instance ASCS/SCS SAP \<SID>_A
 | enque/encni/set_so_keepalive  | **true** |
 | service/ha_check_node | **1** |
 
+Le paramètre `enque/encni/set_so_keepalive` est requis uniquement si vous utilisez ENSA1.  
 Redémarrez l’instance SAP ASCS/SCS. Définissez les paramètres `KeepAlive` sur les deux nœuds de cluster SAP ASCS/SCS en suivant les instructions indiquées dans [Set registry entries on the cluster nodes of the SAP ASCS/SCS instance (Définir des entrées de Registre sur les nœuds de cluster de l’instance SAP ASCS/SCS)][high-availability-guide]. 
 
 ## <a name="install-a-dbms-instance-and-sap-application-servers"></a>Installer une instance de SGBD et les serveurs d’applications SAP

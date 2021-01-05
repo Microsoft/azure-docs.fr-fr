@@ -3,20 +3,21 @@ title: Exemple de script Azure CLI - Ajout d’une application dans Batch
 description: Cet exemple de script explique comment ajouter une application à utiliser avec une tâche ou un pool Azure Batch.
 ms.topic: sample
 ms.date: 01/29/2018
-ms.openlocfilehash: 792af55be17551d1635b6821456c6e8e53e9daea
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 414a401168b1b378ed33f4904607243de0267d22
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83681933"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565804"
 ---
 # <a name="cli-example-add-an-application-to-an-azure-batch-account"></a>Exemple CLI : Ajout d’une application à un compte Azure Batch
 
 Ce script explique comment ajouter une application à utiliser avec une tâche ou un pool Azure Batch. Pour configurer une application à ajouter à votre compte Batch, placez votre fichier exécutable et toutes ses éventuelles dépendances dans un fichier .zip. 
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0.20 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite Azure CLI version 2.0.20 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="example-script"></a>Exemple de script
 
@@ -48,4 +49,4 @@ Chaque commande du tableau renvoie à une documentation spécifique.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).

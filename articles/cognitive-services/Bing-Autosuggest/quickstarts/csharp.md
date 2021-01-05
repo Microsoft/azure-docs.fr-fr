@@ -1,25 +1,31 @@
 ---
 title: 'Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et C#'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing.
+description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing et C#.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 05/06/2020
 ms.author: aahi
-ms.openlocfilehash: 6c60516a87dbdc51e19bac5ee9b30f2f1a8b0254
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 812c40ba54ee584a9616b7809960bc0dea0c0e7e
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80239016"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353372"
 ---
 # <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-c"></a>Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et C#
 
-Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API Suggestion automatique Bing et à obtenir la réponse JSON. Cette application C# simple envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en C#, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/dotnet/Search/BingAutosuggestv7.cs).
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Suivez ce démarrage rapide pour apprendre à effectuer des appels à l’API Suggestion automatique Bing et à lire la réponse JSON. Cette application C# simple envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en C#, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/dotnet/Search/BingAutosuggestv7.cs).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -40,7 +46,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
     using System.Text;
     ```
 
-2. Dans une nouvelle classe, créez des variables pour votre hôte d’API et le chemin d’accès, [code marché](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et une requête de recherche partielle. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Dans une nouvelle classe, créez des variables pour votre hôte d’API et le chemin d’accès, [code marché](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et une requête de recherche partielle. Utilisez le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```csharp
     static string host = "https://api.cognitive.microsoft.com";
@@ -65,7 +71,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
     }
     ```
 
-2. Dans la même fonction ci-dessus, créez un URI de requête en combinant votre hôte API et votre chemin d’accès. Ajoutez votre marché au paramètre `?mkt=` et votre requête au paramètre `&query=`. N’oubliez pas d’encoder par URL votre requête. 
+2. Dans la même fonction ci-dessus, créez un URI de requête en combinant votre hôte API et votre chemin d’accès. Ajoutez votre marché au paramètre `mkt=` et votre requête au paramètre `query=`. N’oubliez pas d’encoder par URL votre requête. 
 
     ```csharp
     string uri = host + path + "?mkt=" + market + "&query=" + System.Net.WebUtility.UrlEncode (query);
@@ -166,4 +172,4 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 ## <a name="see-also"></a>Voir aussi
 
 - [Qu’est-ce que la Suggestion automatique Bing ?](../get-suggested-search-terms.md)
-- [Informations de référence sur l’API Suggestion automatique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)
+- [Informations de référence sur l’API Suggestion automatique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)

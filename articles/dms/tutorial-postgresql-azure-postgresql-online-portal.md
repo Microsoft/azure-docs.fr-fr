@@ -3,25 +3,25 @@ title: 'Tutoriel : Migrer PostgreSQL vers Azure DB pour PostgreSQL en ligne via
 titleSuffix: Azure Database Migration Service
 description: Découvrez comment effectuer la migration en ligne d’une instance PostgreSQL locale vers Azure Database pour PostgreSQL à l’aide d’Azure Database Migration Service via le Portail Azure.
 services: dms
-author: HJToland3
-ms.author: jtoland
+author: arunkumarthiags
+ms.author: arthiaga
 manager: craigg
 ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
 ms.custom: seo-lt-2019
-ms.topic: article
+ms.topic: tutorial
 ms.date: 04/11/2020
-ms.openlocfilehash: e01cc1c07d720c4743a03b5001e640f8b851dd5c
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 6b9822e16a9c5604371bd4c8c1e136ce78f29820
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114001"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000774"
 ---
 # <a name="tutorial-migrate-postgresql-to-azure-db-for-postgresql-online-using-dms-via-the-azure-portal"></a>Tutoriel : Migrer PostgreSQL vers Azure DB pour PostgreSQL en ligne via le Portail Azure à l’aide de DMS
 
-Vous pouvez utiliser Azure Database Migration Service pour migrer les bases de données d’une instance PostgreSQL locale vers [Azure Database pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/) avec un temps d’arrêt minimal pour l’application. Dans ce tutoriel, vous allez migrer l’exemple de base de données **DVD Rental** à partir d’une instance PostgreSQL 9.6 locale vers Azure Database pour PostgreSQL à l’aide de l’activité de migration en ligne dans Azure Database Migration Service.
+Vous pouvez utiliser Azure Database Migration Service pour migrer les bases de données d’une instance PostgreSQL locale vers [Azure Database pour PostgreSQL](../postgresql/index.yml) avec un temps d’arrêt minimal pour l’application. Dans ce tutoriel, vous allez migrer l’exemple de base de données **DVD Rental** à partir d’une instance PostgreSQL 9.6 locale vers Azure Database pour PostgreSQL à l’aide de l’activité de migration en ligne dans Azure Database Migration Service.
 
 Dans ce tutoriel, vous allez apprendre à :
 > [!div class="checklist"]
@@ -43,15 +43,15 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Pour suivre ce didacticiel, vous devez effectuer les opérations suivantes :
 
-* Téléchargez et installez [PostgreSQL Community Edition](https://www.postgresql.org/download/) 9.4, 9.5, 9.6 ou 10. La version du serveur PostgreSQL source doit être 9.4, 9.5, 9.6, 10 ou 11. Pour plus d’informations, consultez l’article [Versions de bases de données PostgreSQL prises en charge](https://docs.microsoft.com/azure/postgresql/concepts-supported-versions).
+* Téléchargez et installez [PostgreSQL Community Edition](https://www.postgresql.org/download/) 9.4, 9.5, 9.6 ou 10. La version du serveur PostgreSQL source doit être 9.4, 9.5, 9.6, 10 ou 11. Pour plus d’informations, consultez l’article [Versions de bases de données PostgreSQL prises en charge](../postgresql/concepts-supported-versions.md).
 
     Notez également que la version cible d'Azure Database pour PostgreSQL doit être égale ou ultérieure à la version PostgreSQL locale. Par exemple, PostgreSQL 9.6 peut migrer vers Azure Database pour PostgreSQL 9.6, 10 ou 11, et non vers Azure Database pour PostgreSQL 9.5.
 
-* [Créez un serveur dans Azure Database pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/quickstart-create-server-database-portal) ou [créez un serveur Azure Database pour PostgreSQL – Hyperscale (Citus)](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal).
-* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) ou un [VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways). Pour plus d’informations sur la création d’un réseau virtuel, consultez la [documentation sur le réseau virtuel](https://docs.microsoft.com/azure/virtual-network/), en particulier les articles sur le démarrage rapide, qui fournissent des informations pas à pas.
+* [Créez un serveur dans Azure Database pour PostgreSQL](../postgresql/quickstart-create-server-database-portal.md) ou [créez un serveur Azure Database pour PostgreSQL – Hyperscale (Citus)](../postgresql/quickstart-create-hyperscale-portal.md).
+* Créez un Réseau virtuel Microsoft Azure pour Azure Database Migration Service à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité site à site à vos serveurs sources locaux via [ExpressRoute](../expressroute/expressroute-introduction.md) ou un [VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md). Pour plus d’informations sur la création d’un réseau virtuel, consultez la [documentation sur le réseau virtuel](../virtual-network/index.yml), en particulier les articles sur le démarrage rapide, qui fournissent des informations pas à pas.
 
     > [!NOTE]
-    > Pendant la configuration du réseau virtuel, si vous utilisez ExpressRoute avec le peering réseau à Microsoft, ajoutez ces [points de terminaison](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-overview) au sous-réseau où doit être provisionné le service :
+    > Pendant la configuration du réseau virtuel, si vous utilisez ExpressRoute avec le peering réseau à Microsoft, ajoutez ces [points de terminaison](../virtual-network/virtual-network-service-endpoints-overview.md) au sous-réseau où doit être provisionné le service :
     >
     > * Point de terminaison de base de données cible (un point de terminaison SQL ou Cosmos DB, par exemple)
     > * Point de terminaison de stockage
@@ -59,11 +59,11 @@ Pour suivre ce didacticiel, vous devez effectuer les opérations suivantes :
     >
     > Cette configuration est nécessaire car Azure Database Migration Service ne dispose pas d’une connectivité Internet.
 
-* Vérifiez que les règles du groupe de sécurité réseau (NSG) de votre réseau virtuel ne bloquent pas les ports de communication entrante suivants pour Azure Database Migration Service : 443, 53, 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](https://docs.microsoft.com/azure/virtual-network/virtual-network-vnet-plan-design-arm).
-* Configurez votre [pare-feu Windows pour accéder au moteur de base de données](https://docs.microsoft.com/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
+* Vérifiez que les règles du groupe de sécurité réseau (NSG) de votre réseau virtuel ne bloquent pas les ports de communication entrante suivants pour Azure Database Migration Service : 443, 53, 9354, 445, 12000. Pour plus d’informations sur le filtrage du trafic de groupe de sécurité réseau de réseau virtuel, consultez l’article [Filtrer le trafic avec les groupes de sécurité réseau](../virtual-network/virtual-network-vnet-plan-design-arm.md).
+* Configurez votre [pare-feu Windows pour accéder au moteur de base de données](/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
 * Ouvrez votre pare-feu Windows pour permettre à Azure Database Migration Service d’accéder au serveur PostgreSQL source, par défaut le port TCP 5432.
 * Lorsque vous utilisez une appliance de pare-feu devant vos bases de données sources, vous devrez peut-être ajouter des règles de pare-feu pour permettre à Azure Database Migration Service d’accéder aux bases de données sources pour la migration.
-* Créez une [règle de pare-feu](https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure) de niveau serveur pour Azure Database pour PostgreSQL afin de permettre à Azure Database Migration Service d’accéder aux bases de données cibles. Fournissez la plage de sous-réseau du réseau virtuel utilisé pour Azure Database Migration Service.
+* Créez une [règle de pare-feu](../azure-sql/database/firewall-configure.md) de niveau serveur pour Azure Database pour PostgreSQL afin de permettre à Azure Database Migration Service d’accéder aux bases de données cibles. Fournissez la plage de sous-réseau du réseau virtuel utilisé pour Azure Database Migration Service.
 * Activez la réplication logique dans le fichier postgresql.config, puis définissez les paramètres suivants :
 
   * wal_level = **logical**
@@ -93,7 +93,7 @@ Pour compléter tous les objets de base de données tels que les schémas de tab
 
 2. Créez une base de données vide dans votre environnement cible, c’est-à-dire Azure Database pour PostgreSQL.
 
-    Pour plus d’informations sur la création et la connexion d’une base de données, consultez l’article [Créer un serveur Azure Database pour PostgreSQL dans le Portail Azure](https://docs.microsoft.com/azure/postgresql/quickstart-create-server-database-portal) ou [Créer un serveur Azure Database pour PostgreSQL – Hyperscale (Citus) dans le Portail Azure](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal).
+    Pour plus d’informations sur la création et la connexion d’une base de données, consultez l’article [Créer un serveur Azure Database pour PostgreSQL dans le Portail Azure](../postgresql/quickstart-create-server-database-portal.md) ou [Créer un serveur Azure Database pour PostgreSQL – Hyperscale (Citus) dans le Portail Azure](../postgresql/quickstart-create-hyperscale-portal.md).
 
     > [!NOTE]
     > Une instance Azure Database pour PostgreSQL – Hyperscale (Citus) dispose uniquement d’une base de données unique : **citus**.
@@ -189,7 +189,7 @@ Pour compléter tous les objets de base de données tels que les schémas de tab
 
     Le réseau virtuel fournit à Azure Database Migration Service un accès au serveur PostgreSQL source et à l’instance Azure Database pour PostgreSQL cible.
 
-    Pour plus d’informations sur la création d’un réseau virtuel dans le portail Azure, consultez l’article [Créer un réseau virtuel au moyen du portail Azure](https://aka.ms/DMSVnet).
+    Pour plus d’informations sur la création d’un réseau virtuel dans le portail Azure, consultez l’article [Créer un réseau virtuel au moyen du portail Azure](../virtual-network/quick-create-portal.md).
 
 5. Sélectionnez un niveau tarifaire.
 
@@ -211,7 +211,7 @@ Une fois le service créé, recherchez-le dans le portail Azure, ouvrez-le, puis
 
 2. Dans l’écran **Azure Database Migration Services**, recherchez le nom de l’instance Azure Database Migration Service que vous avez créée et sélectionnez l’instance, puis **+ Nouveau projet de migration**.
 
-3. Dans l’écran **Nouveau projet de migration**, spécifiez un nom pour le projet, dans la zone de texte **Type de serveur source**, sélectionnez **PostgresSQL** et, dans la zone de texte **Type de serveur cible**, sélectionnez **Azure Database pour PostgreSQL**.
+3. Dans l’écran **Nouveau projet de migration**, spécifiez un nom pour le projet, dans la zone de texte **Type de serveur source**, sélectionnez **PostgreSQL** et, dans la zone de texte **Type de serveur cible**, sélectionnez **Azure Database pour PostgreSQL**.
 
 4. Dans la section **Choisir un type d’activité**, sélectionnez **Migration de données en ligne**.
 
@@ -281,10 +281,10 @@ Une fois le chargement complet initial effectué, les bases de données identifi
 
     ![Écran de basculement terminé](media/tutorial-postgresql-to-azure-postgresql-online-portal/dms-complete-cutover.png)
 
-3. Lorsque l’état de migration de la base de données indique **Terminé**, connectez vos applications à la nouvelle instance Azure Database pour PostgreSQL cible.
+3. Lorsque l’état de migration de la base de données indique **Terminé**, [recréez des séquences](https://wiki.postgresql.org/wiki/Fixing_Sequences) (le cas échéant) et connectez vos applications à la nouvelle instance cible d’Azure Database pour PostgreSQL.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour plus d’informations sur les problèmes connus et les limitations lors de l’exécution de migrations en ligne vers Azure Database pour PostgreSQL, consultez l’article [Known issues and workarounds with Azure Database for PostgreSQL online migrations](known-issues-azure-postgresql-online.md) (Problèmes connus et solutions de contournement pour les migrations Azure Database pour PostgreSQL en ligne).
-* Pour plus d’informations sur Azure Database Migration Service, consultez l’article [Qu’est-ce qu’Azure Database Migration Service ?](https://docs.microsoft.com/azure/dms/dms-overview).
-* Pour obtenir des informations sur Azure Database pour PostgreSQL, consultez l’article [Qu’est-ce qu’Azure Database pour PostgreSQL ?](https://docs.microsoft.com/azure/postgresql/overview).
+* Pour plus d’informations sur Azure Database Migration Service, consultez l’article [Qu’est-ce qu’Azure Database Migration Service ?](./dms-overview.md).
+* Pour obtenir des informations sur Azure Database pour PostgreSQL, consultez l’article [Qu’est-ce qu’Azure Database pour PostgreSQL ?](../postgresql/overview.md).

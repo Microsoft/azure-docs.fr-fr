@@ -1,14 +1,16 @@
 ---
 title: Fonctionnement de Personalizer - Personalizer
 description: La _boucle_ Personalizer utilise le Machine Learning pour générer le modèle qui prédit la première action pour votre contenu. L’apprentissage du modèle est effectué exclusivement sur les données que vous lui avez envoyées avec les appels de classement et de récompense.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 02/18/2020
-ms.openlocfilehash: 836c207213ac52a60e27da6fc957418187059023
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cfbe5cf8c19bfafb38f6149391e09350785ebf9c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77623737"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91303605"
 ---
 # <a name="how-personalizer-works"></a>Fonctionnement de Personalizer
 

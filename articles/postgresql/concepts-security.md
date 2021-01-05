@@ -1,17 +1,17 @@
 ---
 title: Sécurité dans Azure Database pour PostgreSQL – Serveur unique
 description: Vue d’ensemble des fonctionnalités de sécurité dans Azure Database pour PostgreSQL – Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 11/22/2019
-ms.openlocfilehash: 02dc9e1ad9ee46b1a400e44b6ef737e70571a17a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: be042a0ec076538cf0f0d155667acea6f1ae19cb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75972582"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91710479"
 ---
 # <a name="security-in-azure-database-for-postgresql---single-server"></a>Sécurité dans Azure Database pour PostgreSQL – Serveur unique
 
@@ -23,7 +23,7 @@ Il existe plusieurs couches de sécurité qui permettent de protéger les donné
 Azure Database pour PostgreSQL sécurise vos données en chiffrant les données en transit à l’aide du protocole TLS (Transport Layer Security). Le chiffrement (SSL/TLS) est appliqué par défaut.
 
 ### <a name="at-rest"></a>Au repos
-Le service Azure Database pour PostgreSQL utilise le module de chiffrement conforme à la norme FIPS 140-2 pour chiffrer le stockage des données au repos. À l’exception des fichiers temporaires créés durant l’exécution des requêtes, toutes les données, notamment les sauvegardes, sont chiffrées sur le disque. Le service utilise le chiffrement AES 256 bits inclus dans le chiffrement de stockage Azure, et les clés sont gérées par le système. Le chiffrement de stockage est toujours activé et ne peut pas être désactivé.
+Le service Azure Database pour PostgreSQL utilise le module de chiffrement conforme à la norme FIPS 140-2 pour chiffrer le stockage des données au repos. Toutes les données, notamment les sauvegardes, sont chiffrées sur le disque, y compris les fichiers temporaires créés durant l’exécution des requêtes. Le service utilise le chiffrement AES 256 bits inclus dans le chiffrement de stockage Azure, et les clés sont gérées par le système. Le chiffrement de stockage est toujours activé et ne peut pas être désactivé.
 
 
 ## <a name="network-security"></a>Sécurité du réseau
@@ -54,6 +54,9 @@ Vous pouvez activer le service [Advanced Threat Protection](concepts-data-access
 
 La fonctionnalité d’[enregistrement d’audit](concepts-audit.md) vous permet de suivre l’activité dans vos bases de données. 
 
+## <a name="migrating-from-oracle"></a>Effectuer une migration depuis Oracle
+
+Oracle prend en charge TDE (Transparent Data Encryption) pour chiffrer les données de table et d’espace disque logique. Dans Azure pour PostgreSQL, les données sont automatiquement chiffrées au niveau de différentes couches. Consultez la section « Au repos » de cette page et reportez-vous également à différents sujets relatifs à la sécurité, notamment les [clés gérées par le client](./concepts-data-encryption-postgresql.md) et [Chiffrement double d’infrastructure](./concepts-infrastructure-double-encryption.md). Vous pouvez également envisager d’utiliser l’extension [pgcrypto](https://www.postgresql.org/docs/11/pgcrypto.html), qui est prise en charge dans [Azure pour PostgreSQL](./concepts-extensions.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Activer des règles de pare-feu pour les [adresses IP](concepts-firewall-rules.md) ou les [réseaux virtuels](concepts-data-access-and-security-vnet.md)

@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Communifire | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Communifire.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: de2a164d-2115-43e7-a9ed-e54f483f4aeb
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/13/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: a9bd5ae486dc31b7e19ffed9561f9cfc9dea4cc4
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 48d09a5ef43e267550dd584a9f6356493887d6d7
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73159395"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673785"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-communifire"></a>Didacticiel : Intégration d’Azure Active Directory à Communifire
 
@@ -32,7 +27,7 @@ L’intégration de Communifire à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à BGS Online (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -70,7 +65,7 @@ Pour configurer l’intégration de Communifire à Azure AD, vous devez ajouter 
 
 4. Dans la zone de recherche, tapez **Communifire**, sélectionnez **Communifire** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Communifire dans la liste des résultats](common/search-new-app.png)
+    ![Communifire dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -106,7 +101,7 @@ Pour configurer l’authentification unique Azure AD avec Communifire, effectuez
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Communifire Domain and URLs (Domaines et URL Communifire)](common/idp-intiated.png)
+    ![Capture d’écran montrant la section « Basic S A M L Configuration » avec l’action « Save », le champ « Identifier » et le champ « Reply URL » mis en évidence.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://<subdomain>.communifire.com`
 
@@ -130,11 +125,11 @@ Pour configurer l’authentification unique Azure AD avec Communifire, effectuez
     ![Modifier le certificat de signature SAML](common/edit-certificate.png)
 
     a. Sélectionnez **Signer la réponse et l’assertion SAML** dans **Option de signature**.
-    
+
     b. Cliquez sur **Enregistrer**.
 
     ![Option de signature Communifire](./media/communifire-tutorial/tutorial-communifire-signing-option.png)
- 
+
 8. Dans la section **Configurer Communifire**, copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
@@ -166,7 +161,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -211,13 +206,12 @@ L’objectif de cette section est de créer un utilisateur appelé Britta Simon 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette Communifire dans le volet d’accès, vous devez être connecté automatiquement à l’application Communifire pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette Communifire dans le volet d’accès, vous devez être connecté automatiquement à l’application Communifire pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

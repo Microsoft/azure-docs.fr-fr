@@ -11,14 +11,14 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 04/04/2019
+ms.date: 10/15/2020
 ms.author: apimpm
-ms.openlocfilehash: 7dfb863da9f06cfc0c81944aa4037933cdd650ad
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 54193c9333c75fd8b973ebe33470fca3617e2f2d
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83649186"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341839"
 ---
 # <a name="how-to-delegate-user-registration-and-product-subscription"></a>Délégation de l'inscription des utilisateurs et des abonnements aux produits
 
@@ -49,8 +49,6 @@ Pour commencer, configurons Gestion des API pour que les demandes soient achemin
 1. Recevoir une demande au format suivant :
    
    > *http:\//www.yourwebsite.com/apimdelegation?operation=SignIn&returnUrl={URL of source page}&salt={string}&sig={string}*
-   > 
-   > 
    
     Paramètres de requête pour cette connexion/inscription :
    
@@ -63,27 +61,26 @@ Pour commencer, configurons Gestion des API pour que les demandes soient achemin
    * Calculez un code de hachage HMAC-SHA512 d’une chaîne basée sur les paramètres de requête **returnUrl** et **salt** ([exemple de code ci-dessous]) :
      
      > HMAC(**salt** + ’\n’ + **returnUrl**)
-     > 
-     > 
+
    * Comparez le code de hachage calculé plus haut avec la valeur du paramètre de requête **sig**. Si les deux codes de hachage correspondent, passez à l'étape suivante. Sinon, rejetez la demande.
 3. Vérifiez que vous recevez une demande de connexion/d’inscription : le paramètre de requête **operation** sera défini sur « **SignIn** ».
 4. Présenter une interface de connexion ou d’inscription à l’utilisateur
 5. Si l'utilisateur s'inscrit, vous devez créer un compte dans Gestion des API. [Créez un utilisateur] avec l'API REST de gestion de Gestion des API. Lors de cette opération, assurez-vous de bien attribuer à l’identifiant utilisateur une valeur identique à celle de votre magasin utilisateur ou un identifiant que vous pouvez suivre.
 6. Lorsque l'utilisateur est bien authentifié :
    
-   * [Demandez un jeton d'authentification unique (SSO)] via l'API REST Gestion des API.
+   * [Demandez un jeton d'accès partagé] via l'API REST Gestion des API
    * Ajoutez un paramètre de requête returnUrl à l'URL SSO reçue de l'appel d'API ci-dessus :
      
-     > par exemple, `https://customer.portal.azure-api.net/signin-sso?token&returnUrl=/return/url` 
-     > 
-     > 
-   * Redirigez l'utilisateur vers l'URL générée.
+     > par exemple, `https://<developer portal domain, for example: contoso.developer.azure-api.net>/signin-sso?token=<URL-encoded token>&returnUrl=<URL-encoded URL, for example: %2Freturn%2Furl>` 
+     
+   * Redirigez l'utilisateur vers l'URL générée
 
 En plus de l’opération **SignIn**, vous pouvez également effectuer la gestion des comptes en suivant les étapes précédentes et en utilisant l’une des opérations suivantes :
 
 * **ChangePassword**
 * **ChangeProfile**
 * **CloseAccount**
+* **SignOut**
 
 Vous devez transmettre les paramètres de requête suivants pour les opérations de gestion de compte.
 
@@ -93,6 +90,7 @@ Vous devez transmettre les paramètres de requête suivants pour les opérations
 * **sig**: code de hachage de sécurité calculé à comparer avec votre propre code de hachage calculé.
 
 ## <a name="delegating-product-subscription"></a><a name="delegate-product-subscription"> </a>Délégation de l’abonnement aux produits
+
 La délégation de l’abonnement aux produits fonctionne de la même manière que la délégation de la connexion/inscription d’un utilisateur. Le processus final se présente comme suit :
 
 1. Le développeur sélectionne un produit dans le portail des développeurs Gestion des API, puis clique sur le bouton d’abonnement.
@@ -114,9 +112,9 @@ Assurez-vous ensuite que le point de terminaison de délégation effectue bien l
      * « Subscribe » : une demande d’abonnement de l’utilisateur à un produit donné avec l’identifiant fourni (voir ci-dessous).
      * « Unsubscribe » : une demande de désabonnement de l’utilisateur pour un produit.
      * « Renew » : une demande de renouvellement d’abonnement (par exemple, susceptible d’expirer).
-   * **productId**: l’ID du produit auquel l’utilisateur demande l’abonnement
+   * **productId** : avec l’opération *Subscribe*, l’ID du produit auquel l’utilisateur demande l’abonnement
    * **subscriptionId** : ID de l’abonnement au produit sur *Unsubscribe* et *Renew*
-   * **userId** : ID de l’utilisateur pour qui la demande est envoyée
+   * **userId** : avec l’opération *Subscribe*, l’ID de l’utilisateur pour qui la demande est envoyée
    * **salt**: chaîne salt spéciale utilisée pour calculer un code de hachage de sécurité.
    * **sig**: code de hachage de sécurité calculé à comparer avec votre propre code de hachage calculé.
 
@@ -129,7 +127,7 @@ Assurez-vous ensuite que le point de terminaison de délégation effectue bien l
      > 
    * Comparez le code de hachage calculé plus haut avec la valeur du paramètre de requête **sig**. Si les deux codes de hachage correspondent, passez à l'étape suivante. Sinon, rejetez la demande.
 3. Traitez l’abonnement au produit en fonction du type d’opération demandé dans **operation** (par exemple, facturation, autres questions, etc.).
-4. Après avoir correctement abonné l’utilisateur au produit de votre côté, abonnez l’utilisateur au produit Gestion des API en [appeler l’API REST pour les abonnements].
+4. Après avoir correctement abonné l’utilisateur au produit de votre côté, abonnez l’utilisateur au produit Gestion des API en [appelant l’API REST pour les abonnements].
 
 ## <a name="example-code"></a><a name="delegate-example-code"> </a> Exemple de code
 
@@ -186,10 +184,10 @@ Pour plus d’informations sur la délégation, regardez la vidéo suivante :
 
 [Delegating developer sign in and sign up]: #delegate-signin-up
 [Delegating product subscription]: #delegate-product-subscription
-[Demandez un jeton d'authentification unique (SSO)]: https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/User/GenerateSsoUrl
-[Créez un utilisateur]: https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/user/createorupdate
-[appeler l’API REST pour les abonnements]: https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/subscription/createorupdate
+[Demandez un jeton d’accès partagé]: /rest/api/apimanagement/2019-12-01/user/getsharedaccesstoken
+[Créez un utilisateur]: /rest/api/apimanagement/2019-12-01/user/createorupdate
+[appelant l’API REST pour les abonnements]: /rest/api/apimanagement/2019-12-01/subscription/createorupdate
 [Next steps]: #next-steps
 [exemple de code ci-dessous]: #delegate-example-code
 
-[api-management-delegation-signin-up]: ./media/api-management-howto-setup-delegation/api-management-delegation-signin-up.png 
+[api-management-delegation-signin-up]: ./media/api-management-howto-setup-delegation/api-management-delegation-signin-up.png

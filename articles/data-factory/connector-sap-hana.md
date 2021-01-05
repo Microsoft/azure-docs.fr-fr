@@ -10,13 +10,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 02/17/2020
-ms.openlocfilehash: 74462b68bea38e4d84219adeedb7c3bb0893bbb4
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 04/22/2020
+ms.openlocfilehash: 92cc94170a01aceaa3e6bd058f4ae6628db04f18
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417238"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87529583"
 ---
 # <a name="copy-data-from-sap-hana-using-azure-data-factory"></a>Copier des données de SAP HANA à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -27,7 +27,7 @@ ms.locfileid: "81417238"
 Cet article décrit comment utiliser l’activité de copie dans Azure Data Factory pour copier des données d’une base de données SAP HANA. Il s’appuie sur l’article [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
 
 >[!TIP]
->Pour en savoir plus sur la prise en charge générale de l’intégration de données SAP par ADF, consultez le livre blanc [Intégration de données SAP à l’aide d’Azure Data Factory](https://github.com/Azure/Azure-DataFactory/blob/master/whitepaper/SAP%20Data%20Integration%20using%20Azure%20Data%20Factory.pdf) offrant une présentation détaillée, une comparaison et des conseils.
+>Pour en savoir plus sur la prise en charge générale de l’intégration de données SAP par ADF, consultez le livre blanc [Intégration de données SAP à l’aide d’Azure Data Factory](https://github.com/Azure/Azure-DataFactory/blob/master/whitepaper/SAP%20Data%20Integration%20using%20Azure%20Data%20Factory.pdf) offrant une présentation détaillée sur chaque connecteur SAP, une comparaison et des conseils.
 
 ## <a name="supported-capabilities"></a>Fonctionnalités prises en charge
 
@@ -46,7 +46,7 @@ Plus précisément, ce connecteur SAP HANA prend en charge ce qui suit :
 - Copie en parallèle à partir d’une source SAP HANA. Pour plus d’informations, consultez la section [Copie en parallèle à partir de SAP HANA](#parallel-copy-from-sap-hana).
 
 > [!TIP]
-> Pour copier des données **vers** une banque de données SAP HANA, utilisez le connecteur ODBC générique. Pour plus de détails, voir [Récepteur SAP HANA](connector-odbc.md#sap-hana-sink). Notez que les services liés pour les connecteurs SAP HANA et ODBC sont de types différents et qu’ils ne peuvent donc pas être réutilisées.
+> Pour copier des données **vers** une banque de données SAP HANA, utilisez le connecteur ODBC générique. Pour plus de détails, voir [Récepteur SAP HANA](#sap-hana-sink). Notez que les services liés pour les connecteurs SAP HANA et ODBC sont de types différents et qu’ils ne peuvent donc pas être réutilisées.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -298,6 +298,34 @@ Lors de la copie de données de SAP HANA, les mappages suivants sont utilisés e
 | VARCHAR            | String                         |
 | timestamp          | DateTime                       |
 | VARBINARY          | Byte[]                         |
+
+## <a name="sap-hana-sink"></a>Récepteur SAP HANA
+
+Actuellement, le connecteur SAP HANA n’est pas pris en charge en tant que récepteur, alors que vous pouvez utiliser un connecteur ODBC générique avec le pilote SAP HANA pour écrire des données dans SAP HANA. 
+
+Suivez les [conditions préalables](#prerequisites) pour configurer le runtime d'intégration auto-hébergé et installer le pilote ODBC SAP HANA en premier. Créez un service lié ODBC pour vous connecter à votre magasin de données SAP HANA comme indiqué dans l’exemple suivant, puis créez le jeu de données et le récepteur d’activités de copie avec le type ODBC en conséquence. Pour en savoir plus, consultez l’article [Connecteur ODBC](connector-odbc.md).
+
+```json
+{
+    "name": "SAPHANAViaODBCLinkedService",
+    "properties": {
+        "type": "Odbc",
+        "typeProperties": {
+            "connectionString": "Driver={HDBODBC};servernode=<HANA server>.clouddatahub-int.net:30015",
+            "authenticationType": "Basic",
+            "userName": "<username>",
+            "password": {
+                "type": "SecureString",
+                "value": "<password>"
+            }
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
 
 ## <a name="lookup-activity-properties"></a>Propriétés de l’activité Lookup
 

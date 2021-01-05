@@ -16,19 +16,19 @@ ms.date: 04/15/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ab51030ad39e1360cabc7d63390af7c1654d2891
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 6ec05c4160c6502904644bf7035bda0bed66cc33
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82082116"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94413188"
 ---
 # <a name="azure-ad-connect-sync-attributes-synchronized-to-azure-active-directory"></a>Synchronisation d’Azure AD Connect : Attributs synchronisés avec Azure Active Directory
 Cette rubrique répertorie les attributs synchronisés par Azure AD Connect Sync.  
 Les attributs sont regroupés selon l’application Azure AD associée.
 
 ## <a name="attributes-to-synchronize"></a>Attributs à synchroniser
-Une question fréquente concerne *la liste des attributs dont la synchronisation est obligatoire*. L’approche recommandée consiste à conserver les attributs par défaut pour qu’une liste d’adresses globale complète puisse être construite dans le cloud et afin de disposer de toutes les fonctionnalités dans les charges de travail Office 365. Dans certains cas, votre organisation ne souhaitera pas synchroniser certains attributs sur le cloud, car ces attributs contiennent des données sensibles ou personnelles, comme dans cet exemple :  
+Une question fréquente concerne *la liste des attributs dont la synchronisation est obligatoire*. L’approche recommandée consiste à conserver les attributs par défaut pour qu’une liste d’adresses globale complète puisse être construite dans le cloud et afin de disposer de toutes les fonctionnalités dans les charges de travail Microsoft 365. Dans certains cas, votre organisation ne souhaitera pas synchroniser certains attributs sur le cloud, car ces attributs contiennent des données sensibles ou personnelles, comme dans cet exemple :  
 ![mauvais attributs](./media/reference-connect-sync-attributes-synchronized/badextensionattribute.png)
 
 Dans ce cas, commencez par la liste des attributs dans cette rubrique et identifiez ceux qui contiennent des informations sensibles ou personnelles et ne peuvent pas être synchronisés. Ensuite, désélectionnez ces attributs lors de l’installation à l’aide de [l’application Azure AD et du filtrage des attributs](how-to-connect-install-custom.md#azure-ad-app-and-attribute-filtering).
@@ -38,7 +38,7 @@ Dans ce cas, commencez par la liste des attributs dans cette rubrique et identif
 >
 >
 
-## <a name="office-365-proplus"></a>Office 365 ProPlus
+## <a name="microsoft-365-apps-for-enterprise"></a>Microsoft 365 Apps for enterprise
 | Nom de l'attribut | Utilisateur | Commentaire |
 | --- |:---:| --- |
 | accountEnabled |X |Détermine si un compte est activé. |
@@ -165,7 +165,7 @@ Dans ce cas, commencez par la liste des attributs dans cette rubrique et identif
 | targetAddress |X |X | | |
 | telephoneAssistant |X |X | | |
 | telephoneNumber |X |X | | |
-| thumbnailPhoto |X |X | | |
+| thumbnailPhoto |X |X | |synchronisé une seule fois d’Azure AD vers Exchange Online, après quoi Exchange Online devient la source d’autorité pour cet attribut, et les modifications ultérieures ne peuvent pas être synchronisées à partir d’un site local. Pour plus d’informations, consultez la ([base de connaissances](https://support.microsoft.com/help/3062745/user-photos-aren-t-synced-from-the-on-premises-environment-to-exchange)).|
 | title |X |X | | |
 | unauthOrig |X |X |X | |
 | usageLocation |X | | |propriété mécanique. Pays/Région de l’utilisateur. Utilisé pour l’attribution de licence. |
@@ -247,7 +247,7 @@ Dans ce cas, commencez par la liste des attributs dans cette rubrique et identif
 | targetAddress |X |X | | |
 | telephoneAssistant |X |X | | |
 | telephoneNumber |X |X | | |
-| thumbnailPhoto |X |X | | |
+| thumbnailPhoto |X |X | |synchronisé une seule fois d’Azure AD vers Exchange Online, après quoi Exchange Online devient la source d’autorité pour cet attribut, et les modifications ultérieures ne peuvent pas être synchronisées à partir d’un site local. Pour plus d’informations, consultez la ([base de connaissances](https://support.microsoft.com/help/3062745/user-photos-aren-t-synced-from-the-on-premises-environment-to-exchange)).|
 | title |X |X | | |
 | unauthOrig |X |X |X | |
 | url |X |X | | |
@@ -298,7 +298,7 @@ Dans ce cas, commencez par la liste des attributs dans cette rubrique et identif
 | st |X |X | | |
 | streetAddress |X |X | | |
 | telephoneNumber |X |X | | |
-| thumbnailPhoto |X |X | | |
+| thumbnailPhoto |X |X | |synchronisé une seule fois d’Azure AD vers Exchange Online, après quoi Exchange Online devient la source d’autorité pour cet attribut, et les modifications ultérieures ne peuvent pas être synchronisées à partir d’un site local. Pour plus d’informations, consultez la ([base de connaissances](https://support.microsoft.com/help/3062745/user-photos-aren-t-synced-from-the-on-premises-environment-to-exchange)).|
 | title |X |X | | |
 | usageLocation |X | | |propriété mécanique. Pays/Région de l’utilisateur. Utilisé pour l’attribution de licence. |
 | userPrincipalName |X | | |Le nom UPN est l’ID de connexion de l’utilisateur. Le plus souvent, identique à la valeur [mail]. |
@@ -373,9 +373,9 @@ Dans ce cas, commencez par la liste des attributs dans cette rubrique et identif
 Ce groupe est un ensemble d'attributs utilisés comme attributs nécessaires au minimum pour une application ou une charge de travail générique. Il peut être utilisé pour des charges de travail non répertoriées dans une section ou pour une application hors applications Microsoft. Il est utilisé explicitement pour les applications suivantes :
 
 * Yammer (seul l’utilisateur est consommé)
-* [Scénarios de collaboration transorganisationnelle B2B (Business-to-Business) hybride proposés par des ressources comme SharePoint](https://go.microsoft.com/fwlink/?LinkId=747036)
+* [Scénarios de collaboration transorganisationnelle B2B (Business-to-Business) hybride proposés par des ressources comme SharePoint](/sharepoint/create-b2b-extranet)
 
-Ce groupe est un ensemble d’attributs qui peut être utilisé si l’annuaire Azure AD n’est pas utilisé pour prendre en charge Office 365, Dynamics ou Intune. Il comporte un petit ensemble d’attributs de base. Notez que l’authentification unique ou le provisionnement de certaines applications tierces requièrent la configuration de la synchronisation des attributs en plus des attributs décrits ici. Les spécifications de l’application sont décrites dans le [tutoriel sur l’application SaaS](../saas-apps/tutorial-list.md) pour chaque application.
+Ce groupe est un ensemble d’attributs qui peut être utilisé si l’annuaire Azure AD n’est pas utilisé pour prendre en charge Microsoft 365, Dynamics ou Intune. Il comporte un petit ensemble d’attributs de base. Notez que l’authentification unique ou le provisionnement de certaines applications tierces requièrent la configuration de la synchronisation des attributs en plus des attributs décrits ici. Les spécifications de l’application sont décrites dans le [tutoriel sur l’application SaaS](../saas-apps/tutorial-list.md) pour chaque application.
 
 | Nom de l'attribut | Utilisateur | Contact | Groupe | Commentaire |
 | --- |:---:|:---:|:---:| --- |
@@ -397,7 +397,7 @@ Ce groupe est un ensemble d’attributs qui peut être utilisé si l’annuaire 
 | userPrincipalName |X | | |Le nom UPN est l’ID de connexion de l’utilisateur. Le plus souvent, identique à la valeur [mail]. |
 
 ## <a name="windows-10"></a>Windows 10
-Un ordinateur (appareil) Windows 10 joint à un domaine synchronisera certains attributs sur Azure AD. Pour plus d'informations sur les scénarios, consultez [Connecter des appareils joints au domaine à Azure AD pour des expériences Windows 10](../active-directory-azureadjoin-devices-group-policy.md). Ces attributs sont toujours synchronisés et Windows 10 n'apparaît pas comme une application que vous pouvez désélectionner. Un ordinateur appartenant au domaine Windows 10 est identifié par l'attribut userCertificate.
+Un ordinateur (appareil) Windows 10 joint à un domaine synchronisera certains attributs sur Azure AD. Pour plus d'informations sur les scénarios, consultez [Connecter des appareils joints au domaine à Azure AD pour des expériences Windows 10](../devices/hybrid-azuread-join-plan.md). Ces attributs sont toujours synchronisés et Windows 10 n'apparaît pas comme une application que vous pouvez désélectionner. Un ordinateur appartenant au domaine Windows 10 est identifié par l'attribut userCertificate.
 
 | Nom de l'attribut | Appareil | Commentaire |
 | --- |:---:| --- |

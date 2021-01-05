@@ -3,12 +3,12 @@ title: Secret Azure Key Vault avec modèle
 description: Montre comment passer une clé secrète à partir d’un coffre de clés en tant que paramètre lors du déploiement.
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: d21a7d727091b427fee59e22db6a77a495a4eab7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: eb57e680090a38a5be725daa7b3a118039aa35f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81458264"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84677863"
 ---
 # <a name="use-azure-key-vault-to-pass-secure-parameter-value-during-deployment"></a>Utiliser Azure Key Vault pour transmettre une valeur de paramètre sécurisée pendant le déploiement
 
@@ -92,7 +92,7 @@ Set-AzKeyVaultAccessPolicy `
 Pour plus d’informations sur la création de coffres de clés et l’ajout des secrets, consultez :
 
 - [Définir et récupérer un secret à l'aide de l'interface de ligne de commande (CLI)](../../key-vault/secrets/quick-create-cli.md)
-- [Définir et récupérer un secret à l'aide de Powershell](../../key-vault/secrets/quick-create-powershell.md)
+- [Définir et récupérer un secret à l’aide de PowerShell](../../key-vault/secrets/quick-create-powershell.md)
 - [Définir et récupérer un secret à l'aide du portail](../../key-vault/secrets/quick-create-portal.md)
 - [Définir et récupérer un secret à l'aide de .NET](../../key-vault/secrets/quick-create-net.md)
 - [Définir et récupérer un secret à l'aide de Node.js](../../key-vault/secrets/quick-create-node.md)
@@ -163,7 +163,7 @@ Le modèle suivant déploie un serveur SQL qui comprend un mot de passe administ
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminLogin": {
@@ -201,7 +201,7 @@ Dans le fichier de paramètres suivant, le secret du coffre de clés doit déjà
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
       "adminLogin": {
@@ -267,7 +267,7 @@ Le modèle suivant crée de façon dynamique l’ID du coffre de clés et le pas
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
       "location": {
@@ -314,7 +314,7 @@ Le modèle suivant crée de façon dynamique l’ID du coffre de clés et le pas
           "scope": "inner"
         },
         "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "parameters": {
             "adminLogin": {

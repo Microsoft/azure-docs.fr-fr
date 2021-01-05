@@ -1,6 +1,6 @@
 ---
 title: Connecter Azure Information Protection à Azure Sentinel
-description: Découvrez comment connecter les données Azure Information Protection dans Azure Sentinel.
+description: Effectuez le streaming des informations de journalisation d’Azure Information Protection vers Azure Sentinel en configurant le connecteur de données Azure Information Protection.
 services: sentinel
 author: yelevin
 manager: rkarlin
@@ -10,12 +10,12 @@ ms.subservice: azure-sentinel
 ms.topic: conceptual
 ms.date: 09/24/2019
 ms.author: yelevin
-ms.openlocfilehash: 396fd7c4289c9d02d451b26f5fb6299acd31e2a4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82ea47037902ce3a9449f71a9edf62cb80863d4b
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77588550"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94655984"
 ---
 # <a name="connect-data-from-azure-information-protection"></a>Connecter des données depuis Azure Information Protection
 
@@ -25,7 +25,7 @@ ms.locfileid: "77588550"
 
 Vous pouvez activer le streaming des informations de journalisation d’[Azure Information Protection](https://azure.microsoft.com/services/information-protection/) vers Azure Sentinel en configurant le connecteur de données Azure Information Protection. Azure Information Protection vous aide à contrôler et à sécuriser toutes vos données sensibles qui sont stockées dans le cloud ou localement.
 
-Si la [création de rapports centralisés pour Azure Information Protection](https://docs.microsoft.com/azure/information-protection/reports-aip) est déjà configurée afin que les informations de journalisation de ce service soient stockées dans le même espace de travail Log Analytics que celui que vous utilisez pour Azure Sentinel, vous pouvez ignorer l’étape de configuration de ce connecteur de données. Les informations de journalisation d’Azure Information Protection sont déjà disponibles dans Azure Sentinel.
+Si la [création de rapports centralisés pour Azure Information Protection](/azure/information-protection/reports-aip) est déjà configurée afin que les informations de journalisation de ce service soient stockées dans le même espace de travail Log Analytics que celui que vous utilisez pour Azure Sentinel, vous pouvez ignorer l’étape de configuration de ce connecteur de données. Les informations de journalisation d’Azure Information Protection sont déjà disponibles dans Azure Sentinel.
 
 En revanche, si les informations de journalisation d’Azure Information Protection sont envoyées vers un espace de travail Log Analytics différent de celui que vous avez sélectionné pour Azure Sentinel, effectuez l’une des opérations suivantes :
 
@@ -35,7 +35,7 @@ En revanche, si les informations de journalisation d’Azure Information Protect
     
     Si vous changez l’espace de travail, les nouvelles données de rapport pour Azure Information Protection seront désormais stockées dans l’espace de travail utilisé pour Azure Sentinel, et les données historiques ne seront pas disponibles dans Azure Sentinel. De plus, si l’espace de travail précédent était configuré pour des requêtes, alertes ou API REST personnalisées, celles-ci doivent être reconfigurées pour l’espace de travail Azure Sentinel afin de pouvoir les utiliser avec Azure Information Protection. Aucune reconfiguration n’est nécessaire pour les clients et services qui utilisent Azure Information Protection.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 - L’un des rôles d’administrateur Azure AD suivants pour votre locataire : 
     - Administrateur Azure Information Protection
@@ -51,23 +51,25 @@ En revanche, si les informations de journalisation d’Azure Information Protect
 
 - Les autorisations de lecture et d’écriture appropriées sur l’espace de travail Log Analytics que vous utilisez pour Azure Sentinel et Azure Information Protection.
 
-- Azure Information Protection a été ajouté au portail Azure. Si vous avez besoin d’aide pour cette étape, consultez [Ajouter Azure Information Protection au portail Azure](https://docs.microsoft.com/azure/information-protection/quickstart-viewpolicy#add-azure-information-protection-to-the-azure-portal).
+- Azure Information Protection a été ajouté au portail Azure. Si vous avez besoin d’aide pour cette étape, consultez [Ajouter Azure Information Protection au portail Azure](/azure/information-protection/quickstart-viewpolicy#add-azure-information-protection-to-the-azure-portal).
 
 ## <a name="connect-to-azure-information-protection"></a>Connexion à Azure Information Protection
 
 Effectuez les étapes suivantes si vous n’avez pas encore configuré d’espace de travail Log Analytics pour Azure Information Protection ou si vous devez changer l’espace de travail dans lequel sont stockées les informations de journalisation d’Azure Information Protection.
 
-1. Dans Azure Sentinel, sélectionnez **Connecteurs de données**, puis **Azure Information Protection (préversion)** .
+1. Dans Azure Sentinel, sélectionnez **Connecteurs de données** > **Azure Information Protection (préversion)** .
 
 2. Sélectionnez **Ouvrir la page du connecteur**.
 
-3. Dans le panneau **Configurer l’analytique (préversion)** , sélectionnez l’espace de travail que vous utilisez actuellement pour Azure Sentinel. Si vous sélectionnez un autre espace de travail, les données de rapport d’Azure Information Protection ne seront pas transmises à Azure Sentinel.
+3. Sous de **configuration**, sélectionnez **Journaux Connecter Azure Information Protection**.
 
-4. Après avoir sélectionné un espace de travail, sélectionnez **OK**. Vous voyez normalement le connecteur **STATUS** passer à l’état **Connected** (Connecté).
+4. Dans le panneau **Configurer l’analytique (préversion)** , sélectionnez l’espace de travail que vous utilisez actuellement pour Azure Sentinel. Si vous sélectionnez un autre espace de travail, les données de rapport d’Azure Information Protection ne sont pas transmises à Azure Sentinel.
 
-5. Les données de rapport d’Azure Information Protection sont stockées dans la table **InformationProtectionLogs_CL** contenue dans l’espace de travail sélectionné. 
+5. Après avoir sélectionné un espace de travail, sélectionnez **OK**. L’**état** du connecteur devient **Connecté**.
+
+6. Les données de rapport d’Azure Information Protection sont stockées dans la table **InformationProtectionLogs_CL** contenue dans l’espace de travail sélectionné. 
     
-    Pour utiliser le schéma approprié dans Azure Monitor pour ces données de rapport, recherchez **InformationProtectionEvents**. Pour plus d’informations sur ces fonctions d’événement, consultez la section [Référence de schéma conviviale pour les fonctions d’événement](https://docs.microsoft.com/azure/information-protection/reports-aip#friendly-schema-reference-for-event-functions) dans la documentation Azure Information Protection.
+    Pour utiliser le schéma approprié dans Azure Monitor pour ces données de rapport, recherchez **InformationProtectionEvents**. Pour plus d’informations sur ces fonctions d’événement, consultez la section [Référence de schéma conviviale pour les fonctions d’événement](/azure/information-protection/reports-aip#friendly-schema-reference-for-event-functions) dans la documentation Azure Information Protection.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

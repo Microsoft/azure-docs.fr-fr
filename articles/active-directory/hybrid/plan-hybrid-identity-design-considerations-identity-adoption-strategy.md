@@ -1,6 +1,6 @@
 ---
 title: 'Conception d’identités hybrides : stratégie d’adoption Azure | Microsoft Docs'
-description: Avec le contrôle d’accès conditionnel, Azure Active Directory vérifie les conditions spécifiques que vous choisissez lors de l’authentification de l’utilisateur et avant d’autoriser l’accès à l’application. Une fois que ces conditions sont remplies, l’utilisateur est authentifié et autorisé à accéder à l’application.
+description: Avec le contrôle par accès conditionnel, Azure AD vérifie les conditions spécifiques que vous choisissez lors de l’authentification de l’utilisateur et avant d’autoriser l’accès à l’application.
 documentationcenter: ''
 services: active-directory
 author: billmath
@@ -17,12 +17,12 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e662d2c6d7939756dee6eb25ca62fef171b7d6d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f52e46ff9cab7d3d150af9fd7b4f1c432bec74b
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67109333"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94836187"
 ---
 # <a name="define-a-hybrid-identity-adoption-strategy"></a>Définir une stratégie d’adoption des identités hybrides
 Dans le cadre de cette tâche, vous définissez la stratégie d’adoption des identités hybrides pour que votre solution d’identités hybrides réponde aux exigences de l’entreprise évoquées dans les articles suivants :
@@ -32,7 +32,7 @@ Dans le cadre de cette tâche, vous définissez la stratégie d’adoption des i
 * [Déterminer les exigences d’authentification multifacteur](plan-hybrid-identity-design-considerations-multifactor-auth-requirements.md)
 
 ## <a name="define-business-needs-strategy"></a>Définir une stratégie de besoins métier
-La première tâche concerne la détermination des besoins métier de l’entreprise.  Cette opération peut être très étendue et vous risquez de vous éloigner des objectifs si vous n’êtes pas prudent.  Commencez par faire simple, mais prévoyez systématiquement une conception qui prendra en charge et facilitera les modifications ultérieures.  Qu’il s’agisse d’une conception simple ou très complexe, Azure Active Directory est la plateforme Microsoft Identity qui prend en charge Office 365, Microsoft Online Services et les applications cloud.
+La première tâche concerne la détermination des besoins métier de l’entreprise.  Cette opération peut être très étendue et vous risquez de vous éloigner des objectifs si vous n’êtes pas prudent.  Commencez par faire simple, mais prévoyez systématiquement une conception qui prendra en charge et facilitera les modifications ultérieures.  Qu’il s’agisse d’une conception simple ou très complexe, Azure Active Directory est la plateforme d’identités Microsoft qui prend en charge Microsoft 365, Microsoft Online Services et les applications cloud.
 
 ## <a name="define-an-integration-strategy"></a>Définir une stratégie d’intégration
 Microsoft possède trois scénarios principaux d’intégration : identités cloud, identités synchronisées et identités fédérées.  Vous devez prévoir d’adopter l’une de ces stratégies d’intégration.  La stratégie choisie peut varier. Il peut y avoir différents éléments à considérer : le type d’expérience utilisateur que vous souhaitez proposer, la présence ou non d’une infrastructure existante et la rentabilité notamment.  
@@ -55,7 +55,7 @@ Le tableau ci-après vous aide à déterminer les avantages et inconvénients de
 | Stratégie | Avantages | Inconvénients |
 | --- | --- | --- |
 | **Identités cloud** |Plus faciles à gérer pour les petites entreprises. <br> Rien à installer en local. Pas de matériel supplémentaire requis.<br>Faciles à désactiver si l’utilisateur quitte l’entreprise |Les utilisateurs doivent se connecter lorsqu’ils accèdent aux charges de travail dans le cloud <br> Les mots de passe peuvent être les mêmes ou non pour les identités cloud et locales |
-| **Synchronisée** |Le mot de passe local authentifie les répertoires locaux et cloud <br>Plus faciles à gérer pour les petites, moyennes et grandes entreprises <br>Les utilisateurs peuvent disposer de l’authentification unique (SSO) pour certaines ressources <br> Méthode Microsoft préférée pour la synchronisation <br> Plus faciles à gérer |Certains clients peuvent rechigner à synchroniser leurs répertoires avec le cloud en raison de la stratégie spécifique de l’entreprise |
+| **Synchronisée** |Le mot de passe local authentifie les répertoires locaux et cloud <br>Plus faciles à gérer pour les petites, moyennes et grandes entreprises <br>Les utilisateurs peuvent disposer de l’authentification unique (SSO) pour certaines ressources <br> Méthode Microsoft préférée pour la synchronisation <br> Plus faciles à gérer |Certains clients peuvent hésiter à synchroniser leurs annuaires avec le cloud en raison de stratégies spécifiques de l’entreprise. |
 | **Adresses IP fédérées** |Les utilisateurs peuvent disposer de l’authentification unique (SSO) <br>Si un utilisateur a achevé sa mission ou quitte l’entreprise, le compte peut immédiatement être désactivé et l’accès révoqué<br> Prise en charge de scénarios avancés qui ne peuvent pas être concrétisés avec l’option Synchronisée |Étapes supplémentaires pour l’installation et la configuration <br> Maintenance plus élevée <br> Peut requérir du matériel supplémentaire pour l’infrastructure STS <br> Peut nécessiter un matériel supplémentaire pour l’installation du serveur de fédération. Requiert des logiciels supplémentaires en cas d’utilisation des services de fédération Active Directory (AD FS). <br> Requiert une installation complète pour l’authentification unique <br> Point de défaillance critique : si le serveur de fédération est arrêté, les utilisateurs ne sont pas en mesure de s’authentifier |
 
 ### <a name="client-experience"></a>Expérience client
@@ -63,7 +63,7 @@ La stratégie que vous utilisez détermine l’expérience de connexion utilisat
 
 **Applications réseau jointes à un domaine et privées**:
 
-|  | Identité synchronisée | Identité fédérée |
+| Application | Identité synchronisée | Identité fédérée |
 | --- | --- | --- |
 | Navigateurs web |Authentification basée sur les formulaires |Authentification unique, parfois requise pour fournir l’ID d’organisation |
 | Outlook |Demander les informations d’identification |Demander les informations d’identification |
@@ -73,7 +73,7 @@ La stratégie que vous utilisez détermine l’expérience de connexion utilisat
 
 **Sources externes ou non fiables** :
 
-|  | Identité synchronisée | Identité fédérée |
+| Application | Identité synchronisée | Identité fédérée |
 | --- | --- | --- |
 | Navigateurs web |Authentification basée sur les formulaires |Authentification basée sur les formulaires |
 | Outlook, Skype Entreprise (Lync), OneDrive Entreprise, abonnement Office |Demander les informations d’identification |Demander les informations d’identification |
@@ -171,12 +171,12 @@ Les éléments ci-après ne sont pas pris en charge et ne doivent pas être choi
 * Les annuaires Azure AD sont isolés par conception. La modification de la configuration d’Azure AD Connect Sync pour lire des données à partir d’un autre annuaire Azure AD pour générer une liste d’adresses globale commune et unifiée entre les annuaires n’est pas prise en charge. L’exportation d’utilisateurs comme contacts vers un autre annuaire Active Directory local avec Azure AD Connect Sync n’est pas prise en charge.
 
 > [!NOTE]
-> Si votre organisation limite la connexion des ordinateurs de votre réseau à Internet, cet article répertorie les points de terminaison (noms de domaine complets, plages d’adresses IPv4 et IPv6) que vous devez inclure dans vos listes d’autorisation sortante et dans votre zone Sites de confiance Internet Explorer d’ordinateurs clients pour garantir que vos ordinateurs peuvent utiliser Office 365. Pour plus d’informations, consultez [URL et plages d’adresses IP Office 365](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2?ui=en-US&rs=en-US&ad=US).
+> Si votre organisation limite la connexion des ordinateurs de votre réseau à Internet, cet article liste les points de terminaison (noms de domaine complets, plages d’adresses IPv4 et IPv6) que vous devez inclure dans vos listes d’autorisation sortante et dans votre zone Sites de confiance Internet Explorer d’ordinateurs clients pour garantir que vos ordinateurs peuvent utiliser Microsoft 365. Pour plus d’informations, consultez [URL et plages d’adresses IP Office 365](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2?ui=en-US&rs=en-US&ad=US).
 > 
 > 
 
 ## <a name="define-multi-factor-authentication-strategy"></a>Définir la stratégie d’authentification multifacteur
-Dans cette tâche, vous allez définir la stratégie d’authentification multifacteur à utiliser.  Azure Multi-Factor Authentication existe en deux versions distinctes.  L’une est basée sur le cloud, et l’autre est locale et utilise le serveur MFA Azure.  En vous appuyant sur l’évaluation effectuée précédemment, vous pouvez déterminer quelle solution est correcte pour votre stratégie.  Utilisez le tableau ci-après pour déterminer l’option de conception répondant le mieux aux exigences de sécurité de votre entreprise :
+Dans cette tâche, vous allez définir la stratégie d’authentification multifacteur à utiliser.  Deux versions distinctes d'Azure AD Multi-Factor Authentication sont disponibles.  L’une est basée sur le cloud, et l’autre est locale et utilise le serveur MFA Azure.  En vous appuyant sur l’évaluation effectuée précédemment, vous pouvez déterminer quelle solution est correcte pour votre stratégie.  Utilisez le tableau ci-après pour déterminer l’option de conception répondant le mieux aux exigences de sécurité de votre entreprise :
 
 Options de conception multifacteur :
 

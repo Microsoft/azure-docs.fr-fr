@@ -1,28 +1,29 @@
 ---
-title: Créer une application d’apprentissage automatique avec Apache Spark MLlib et Azure Synapse Analytics
-description: Découvrez comment utiliser Spark MLlib pour créer une application d’apprentissage automatique qui analyse un jeu de données en utilisant une classification par régression logistique.
+title: 'Tutoriel : Créer une application d’apprentissage automatique avec Apache Spark MLlib'
+description: Tutoriel sur la façon d’utiliser Spark MLlib pour créer une application d’apprentissage automatique qui analyse un jeu de données en utilisant une classification par régression logistique.
 services: synapse-analytics
 author: euangMS
 ms.service: synapse-analytics
-ms.reviewer: jrasnick, carlrab
-ms.topic: conceptual
+ms.reviewer: jrasnick
+ms.topic: tutorial
+ms.subservice: machine-learning
 ms.date: 04/15/2020
 ms.author: euang
-ms.openlocfilehash: 25d11d2cf41f8653c5a54007f121c1251bb24b1f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 50429696c4cbe10c4723f6d4bb9c9499d9b775c5
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82096297"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96450417"
 ---
-# <a name="build-a-machine-learning-app-with-apache-spark-mllib-and-azure-synapse-analytics"></a>Créer une application d’apprentissage automatique avec Apache Spark MLlib et Azure Synapse Analytics
+# <a name="tutorial-build-a-machine-learning-app-with-apache-spark-mllib-and-azure-synapse-analytics"></a>Tutoriel : Créer une application d’apprentissage automatique avec Apache Spark MLlib et Azure Synapse Analytics
 
 Cet article explique comment utiliser Apache Spark [MLlib](https://spark.apache.org/mllib/) pour créer une application d’apprentissage automatique qui effectue une analyse prédictive simple sur un jeu de données ouvert Azure. Spark fournit des bibliothèques d’apprentissage automatique intégrées. Cet exemple utilise un *classification* par régression logistique.
 
-MLLib est une bibliothèque principale Spark qui fournit de nombreux utilitaires pour l’exécution de tâches d’apprentissage automatique. Certains de ces utilitaires conviennent pour les tâches suivantes :
+SparkML et MLlib sont des bibliothèques principales Spark qui fournissent de nombreux utilitaires pour l’exécution de tâches de machine learning. Certains de ces utilitaires conviennent pour les tâches suivantes :
 
-- Classification
-- Régression
+- classification ;
+- régression ;
 - Clustering
 - Modélisation de rubrique
 - Décomposition de valeur singulière (SVD) et analyse des composants principaux (PCA)
@@ -30,9 +31,9 @@ MLLib est une bibliothèque principale Spark qui fournit de nombreux utilitaires
 
 ## <a name="understand-classification-and-logistic-regression"></a>Comprendre la classification et la régression logistique
 
-Une *classification*, tâche d’apprentissage automatique très courante, est le processus de tri de données d’entrée par catégories. Un algorithme de classification doit déterminer comment attribuer des *étiquettes* aux données d’entrée que vous fournissez. Par exemple, on peut imaginer un algorithme apprentissage automatique qui accepte des informations de stock en entrée et divise le stock en deux catégories : ce qu’il faut vendre et ce qu’il faut conserver.
+Une *classification*, tâche de Machine Learning très courante, est le processus de tri de données d’entrée par catégories. Un algorithme de classification doit déterminer comment attribuer des *étiquettes* aux données d’entrée que vous fournissez. Par exemple, on peut imaginer un algorithme apprentissage automatique qui accepte des informations de stock en entrée et divise le stock en deux catégories : ce qu’il faut vendre et ce qu’il faut conserver.
 
-Une *régression logistique* est un algorithme que vous utilisez pour effectuer une classification. L’API de régression logistique de Spark est utile pour la *classification binaire*ou pour classer les données d’entrée dans un des deux groupes. Pour plus d’informations sur la régression logistique, consultez [Wikipedia](https://en.wikipedia.org/wiki/Logistic_regression).
+Une *régression logistique* est un algorithme que vous utilisez pour effectuer une classification. L’API de régression logistique de Spark est utile pour la *classification binaire* ou pour classer les données d’entrée dans un des deux groupes. Pour plus d’informations sur la régression logistique, consultez [Wikipedia](https://en.wikipedia.org/wiki/Logistic_regression).
 
 En résumé, le processus de régression logistique génère une *fonction logistique* qui peut être utilisée pour prédire la probabilité qu’un vecteur d’entrée appartienne à un groupe ou à l’autre.
 
@@ -45,7 +46,7 @@ Dans cet exemple, vous utilisez Spark pour effectuer une analyse prédictive sur
 
 Dans les étapes suivantes, vous allez développer un modèle pour prédire si un voyage particulier inclut ou non un pourboire.
 
-## <a name="create-an-apache-spark-mllib-machine-learning-app"></a>Créer une application de Machine Learning Apache Spark MLlib
+## <a name="create-an-apache-spark--machine-learning-model"></a>Créer un modèle de machine learning Apache Spark
 
 1. Créez un bloc-notes à l’aide du noyau PySpark. Pour obtenir des instructions, consultez [Créer un bloc-notes](../quickstart-apache-spark-notebook.md#create-a-notebook).
 2. Importez les types requis pour cette application. Copiez et collez le code suivant dans une cellule vide, puis appuyez sur **Maj + Entrée** ou exécutez la cellule en utilisant l’icône de lecture bleue à gauche du code.
@@ -54,7 +55,7 @@ Dans les étapes suivantes, vous allez développer un modèle pour prédire si u
     import matplotlib.pyplot as plt
     from datetime import datetime
     from dateutil import parser
-    from pyspark.sql.functions import unix_timestamp
+    from pyspark.sql.functions import unix_timestamp, date_format, col, when
     from pyspark.ml import Pipeline
     from pyspark.ml import PipelineModel
     from pyspark.ml.feature import RFormula
@@ -70,48 +71,32 @@ Dans les étapes suivantes, vous allez développer un modèle pour prédire si u
 
 Étant donné que les données brutes sont au format Parquet, vous pouvez utiliser le contexte Spark pour extraire le fichier en mémoire directement en tant que tramedonnées. Le code ci-dessous utilise les options par défaut, mais il est possible de forcer le mappage des types de données et d’autres attributs de schéma si nécessaire.
 
-1. Exécutez les lignes suivantes pour créer une tramedonnées Spark en collant le code dans une nouvelle cellule. La première section attribue des informations d’accès au stockage Azure à des variables. La deuxième section permet à Spark de lire à distance à partir du stockage d’objets blob. La dernière ligne de code lit le format Parquet, mais aucune donnée n’est chargée à ce stade.
+1. Exécutez les lignes suivantes pour créer une tramedonnées Spark en collant le code dans une nouvelle cellule. Cela récupère les données via l’API Open Datasets. L’extraction de toutes ces données génère environ 1,5 milliard de lignes. Selon la taille de votre pool Apache Spark serverless, les données brutes peuvent être trop volumineuses ou leur exploitation peut prendre trop de temps. Vous pouvez filtrer ces données pour en réduire le volume. L'exemple de code suivant utilise start_date et end_date pour appliquer un filtre qui renvoie un seul mois de données.
 
     ```python
-    # Azure storage access info
-    blob_account_name = "azureopendatastorage"
-    blob_container_name = "nyctlc"
-    blob_relative_path = "yellow"
-    blob_sas_token = r""
+    from azureml.opendatasets import NycTlcYellow
 
-    # Allow SPARK to read from Blob remotely
-    wasbs_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)
-    spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),blob_sas_token)
-
-    # SPARK read parquet, note that it won't load any data yet by now
-    df = spark.read.parquet(wasbs_path)
+    end_date = parser.parse('2018-06-06')
+    start_date = parser.parse('2018-05-01')
+    nyc_tlc = NycTlcYellow(start_date=start_date, end_date=end_date)
+    filtered_df = nyc_tlc.to_spark_dataframe()
     ```
 
-2. L’extraction de toutes ces données génère environ 1,5 milliard de lignes. Selon la taille de votre pool Spark (préversion), les données brutes peuvent être trop volumineuses ou leur exploitation peut prendre trop de temps. Vous pouvez filtrer ces données pour en réduire le volume. Si nécessaire, ajoutez les lignes suivantes afin de filtrer les données jusqu’à obtenir environ 2 millions lignes pour une expérience plus réactive. Utilisez ces paramètres pour extraire une semaine de données.
-
-    ```python
-    # Create an ingestion filter
-    start_date = '2018-05-01 00:00:00'
-    end_date = '2018-05-08 00:00:00'
-
-    filtered_df = df.filter('tpepPickupDateTime > "' + start_date + '" and tpepPickupDateTime < "' + end_date + '"')
-    ```
-
-3. L’inconvénient du filtrage simple est que, du point de vue statistique, il peut introduire un biais dans les données. Une autre approche consiste à utiliser l’échantillonnage intégré dans Spark. Le code suivant réduit le jeu de données à environ 2000 lignes, s’il est appliqué après le code ci-dessus. Cette étape d’échantillonnage peut être utilisée à la place du filtre simple ou conjointement avec celui-ci.
+2. L’inconvénient du filtrage simple est que, du point de vue statistique, il peut introduire un biais dans les données. Une autre approche consiste à utiliser l’échantillonnage intégré dans Spark. Le code suivant réduit le jeu de données à environ 2000 lignes, s’il est appliqué après le code ci-dessus. Cette étape d’échantillonnage peut être utilisée à la place du filtre simple ou conjointement avec celui-ci.
 
     ```python
     # To make development easier, faster and less expensive down sample for now
     sampled_taxi_df = filtered_df.sample(True, 0.001, seed=1234)
     ```
 
-4. Il est désormais possible d’examiner les données pour voir ce qui a été lu. Il est généralement préférable d’examiner les données avec un sous-ensemble plutôt qu’avec le jeu complet en fonction de la taille du jeu de données. Le code suivant permet d’afficher les données de deux façons : la première est basique et la deuxième offre une expérience de grille beaucoup plus riche, ainsi que la possibilité de visualiser les données sous forme graphique.
+3. Il est désormais possible d’examiner les données pour voir ce qui a été lu. Il est généralement préférable d’examiner les données avec un sous-ensemble plutôt qu’avec le jeu complet en fonction de la taille du jeu de données. Le code suivant permet d’afficher les données de deux façons : la première est basique et la deuxième offre une expérience de grille beaucoup plus riche, ainsi que la possibilité de visualiser les données sous forme graphique.
 
     ```python
-    sampled_taxi_df.show(5)
-    display(sampled_taxi_df.show(5))
+    #sampled_taxi_df.show(5)
+    display(sampled_taxi_df)
     ```
 
-5. Selon la taille de la taille du jeu de données généré et la nécessité ou non d’expérimenter ou d’exécuter le bloc-notes plusieurs fois, il peut être préférable de mettre en cache le jeu de données localement dans l’espace de travail. Il existe trois façons d’effectuer une mise en cache explicite :
+4. Selon la taille de la taille du jeu de données généré et la nécessité ou non d’expérimenter ou d’exécuter le bloc-notes plusieurs fois, il peut être préférable de mettre en cache le jeu de données localement dans l’espace de travail. Il existe trois façons d'effectuer une mise en cache explicite :
 
    - enregistrer la tramedonnées localement en tant que fichier ;
    - enregistrer la tramedonnées sous la forme d’une table ou d’un affichage temporaires ;
@@ -125,45 +110,7 @@ La création d’une table ou d’un affichage temporaires fournit différents c
 sampled_taxi_df.createOrReplaceTempView("nytaxi")
 ```
 
-## <a name="understand-the-data"></a>Comprendre les données
-
-En règle générale, à ce stade, vous devez passer par une phase d’*analyse exploratoire des données* afin d’acquérir une compréhension de celles-ci. Le code suivant montre trois visualisations différentes des données relatives aux pourboires, qui conduisent à des conclusions quant à l’état et la qualité de celles-ci.
-
-```python
-# The charting package needs a Pandas dataframe or numpy array do the conversion
-sampled_taxi_pd_df = sampled_taxi_df.toPandas()
-
-# Look at tips by amount count histogram
-ax1 = sampled_taxi_pd_df['tipAmount'].plot(kind='hist', bins=25, facecolor='lightblue')
-ax1.set_title('Tip amount distribution')
-ax1.set_xlabel('Tip Amount ($)')
-ax1.set_ylabel('Counts')
-plt.suptitle('')
-plt.show()
-
-# How many passengers tip'd by various amounts
-ax2 = sampled_taxi_pd_df.boxplot(column=['tipAmount'], by=['passengerCount'])
-ax2.set_title('Tip amount by Passenger count')
-ax2.set_xlabel('Passenger count')
-ax2.set_ylabel('Tip Amount ($)')
-plt.suptitle('')
-plt.show()
-
-# Look at the relationship between fare and tip amounts
-ax = sampled_taxi_pd_df.plot(kind='scatter', x= 'fareAmount', y = 'tipAmount', c='blue', alpha = 0.10, s=2.5*(sampled_taxi_pd_df['passengerCount']))
-ax.set_title('Tip amount by Fare amount')
-ax.set_xlabel('Fare Amount ($)')
-ax.set_ylabel('Tip Amount ($)')
-plt.axis([-2, 80, -2, 20])
-plt.suptitle('')
-plt.show()
-```
-
-![Histogramme](./media/apache-spark-machine-learning-mllib-notebook/apache-spark-mllib-eda-histogram.png)
-![Boîte à moustaches](./media/apache-spark-machine-learning-mllib-notebook/apache-spark-mllib-eda-box-whisker.png)
-![Nuage de points](./media/apache-spark-machine-learning-mllib-notebook/apache-spark-mllib-eda-scatter.png)
-
-## <a name="preparing-the-data"></a>Préparation des données
+## <a name="prepare-the-data"></a>Préparer les données
 
 Les données dans leur forme brute sont souvent inappropriées pour passer directement à un modèle. Une série d’actions sur les données sont nécessaires afin de les rendre utilisables pour le modèle.
 
@@ -172,7 +119,7 @@ Le code ci-après exécute les quatre classes d’opérations suivantes :
 - suppression des valeurs hors normes/incorrectes par filtrage ;
 - suppression des colonnes superflues ;
 - caractérisation, c’est-à-dire création de nouvelles colonnes dérivées des données brutes pour renforcer l’efficacité de fonctionnement du modèle ;
-- étiquetage, car vous effectuez une classification binaire (selon qu’il y a ou non un pourboire associé à une course donnée) nécessitant la conversion du montant du pourboire en valeur 0 ou 1.
+- étiquetage - car vous effectuez une classification binaire (selon qu'il y a ou non un pourboire associé à une course donnée) nécessitant la conversion du montant du pourboire en valeur 0 ou 1.
 
 ```python
 taxi_df = sampled_taxi_df.select('totalAmount', 'fareAmount', 'tipAmount', 'paymentType', 'rateCodeId', 'passengerCount'\
@@ -211,7 +158,7 @@ taxi_featurised_df = taxi_df.select('totalAmount', 'fareAmount', 'tipAmount', 'p
 La dernière tâche consiste à convertir les données étiquetées dans un format qui peut être analysé par régression logistique. L’entrée dans un algorithme de régression logistique doit être un jeu de *paires de vecteurs étiquette-caractéristique*, où le *vecteur caractéristique* est un vecteur de nombres représentant le point d’entrée. Nous devons donc convertir les colonnes catégoriques en nombres. Les colonnes `trafficTimeBins` et `weekdayString` doivent être converties en représentations sous forme d’entiers. Il existe plusieurs approches de la conversion. Celle adoptée dans cet exemple est l’approche courante *OneHotEncoding*.
 
 ```python
-# The sample uses an algorithm that only works with numeric features convert them so they can be consumed
+# Since the sample uses an algorithm that only works with numeric features, convert them so they can be consumed
 sI1 = StringIndexer(inputCol="trafficTimeBins", outputCol="trafficTimeBinsIndex")
 en1 = OneHotEncoder(dropLast=False, inputCol="trafficTimeBinsIndex", outputCol="trafficTimeBinsVec")
 sI2 = StringIndexer(inputCol="weekdayString", outputCol="weekdayIndex")
@@ -221,7 +168,7 @@ en2 = OneHotEncoder(dropLast=False, inputCol="weekdayIndex", outputCol="weekdayV
 encoded_final_df = Pipeline(stages=[sI1, en1, sI2, en2]).fit(taxi_featurised_df).transform(taxi_featurised_df)
 ```
 
-Cela produit une nouvelle tramedonnées avec toutes les colonnes au format approprié pour effectuer l’apprentissage d’un modèle.
+Cette action se traduit par une nouvelle tramedonnées avec toutes les colonnes au format approprié pour effectuer l’apprentissage d’un modèle.
 
 ## <a name="train-a-logistic-regression-model"></a>Effectuer l’apprentissage d’un modèle de régression logistique
 
@@ -238,6 +185,9 @@ train_data_df, test_data_df = encoded_final_df.randomSplit([trainingFraction, te
 ```
 
 Maintenant qu’il y a deux tramedonnées, la tâche suivante consiste à créer la formule modèle et à l’exécuter sur la tramedonnées d’apprentissage, puis à valider par rapport à la tramedonnées de test. Vous devez expérimenter différentes versions de la formule modèle pour voir l’impact de différentes combinaisons.
+
+> [!Note]
+> Pour enregistrer le modèle, vous aurez besoin du rôle Azure « Contributeur aux données blob du stockage ». Sous votre compte de stockage, accédez à Access Control (IAM), puis sélectionnez **Ajouter une attribution de rôle**. Attribuez le rôle Azure « Contributeur aux données blob du stockage » à votre serveur SQL Database. Seuls les membres dotés du privilège Propriétaire peuvent effectuer cette étape. Pour découvrir les divers rôles intégrés Azure, consultez ce [guide](../../role-based-access-control/built-in-roles.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json).
 
 ```python
 ## Create a new LR object for the model
@@ -262,7 +212,7 @@ metrics = BinaryClassificationMetrics(predictionAndLabels)
 print("Area under ROC = %s" % metrics.areaUnderROC)
 ```
 
-La sortie de cette cellule est
+La sortie de cette cellule est :
 
 ```shell
 Area under ROC = 0.9779470729751403
@@ -284,7 +234,7 @@ plt.ylabel('True Positive Rate')
 plt.show()
 ```
 
-![Courbe ROC pour le modèle de régression logistique pourboires](./media/apache-spark-machine-learning-mllib-notebook/apache-spark-mllib-nyctaxi-roc.png "Courbe ROC pour le modèle de régression logistique pourboires")
+![Courbe ROC pour le modèle de régression logistique pourboires](./media/apache-spark-machine-learning-mllib-notebook/nyc-taxi-roc.png)
 
 ## <a name="shut-down-the-spark-instance"></a>Arrêter l’instance Spark
 
@@ -298,7 +248,7 @@ Une fois que vous avez exécuté l’application, arrêtez le bloc-notes pour li
 
 - [Documentation .NET pour Apache Spark](/dotnet/spark?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json)
 - [Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics)
-- [Documentation officielle Apache Spark](https://spark.apache.org/docs/latest/)
+- [Documentation officielle Apache Spark](https://spark.apache.org/docs/2.4.5/)
 
 >[!NOTE]
-> Une partie de la documentation Apache Spark officielle repose sur l’utilisation de la console Spark qui n’est pas disponible sur Azure Synapse Spark. Utilisez les interfaces [notebook](../quickstart-apache-spark-notebook.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) ou [IntelliJ](../spark/intellij-tool-synapse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) à la place.
+> Une partie de la documentation Apache Spark officielle repose sur l’utilisation de la console Spark qui n’est pas disponible sur Azure Synapse Spark. Utilisez à la place les expériences [notebook](../quickstart-apache-spark-notebook.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) ou [IntelliJ](../spark/intellij-tool-synapse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).

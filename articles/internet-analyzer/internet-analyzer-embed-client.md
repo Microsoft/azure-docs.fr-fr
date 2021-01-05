@@ -4,15 +4,15 @@ description: Dans cet article, découvrez comment incorporer le client Internet 
 services: internet-analyzer
 author: mattcalder
 ms.service: internet-analyzer
-ms.topic: quickstart
+ms.topic: how-to
 ms.date: 10/16/2019
 ms.author: mebeatty
-ms.openlocfilehash: f9ecb8d731945847160b49c68c554fafdd7285d9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 0d4b27b85ac7bc61e14a79f29e4e26ec4973ced1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74896380"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84744049"
 ---
 # <a name="embed-the-internet-analyzer-client"></a>Incorporer le client Internet Analyzer
 

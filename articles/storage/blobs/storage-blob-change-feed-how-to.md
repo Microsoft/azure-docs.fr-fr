@@ -1,374 +1,219 @@
 ---
-title: Traiter les journaux de flux de modification dans Stockage Blob Azure (préversion) | Microsoft Docs
+title: Traiter le flux de modification dans Stockage Blob Azure | Microsoft Docs
 description: Découvrez comment traiter les journaux de flux de modification dans une application cliente .NET
 author: normesta
 ms.author: normesta
-ms.date: 11/04/2019
+ms.date: 09/08/2020
 ms.topic: article
 ms.service: storage
 ms.subservice: blobs
 ms.reviewer: sadodd
-ms.openlocfilehash: 75995eeb3f8255cb4c60d5be267f9c343edfea89
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: f0e89fdfba852fc056cf48efd1b92daabb272cf0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74111853"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89568249"
 ---
-# <a name="process-change-feed-in-azure-blob-storage-preview"></a>Flux de modification dans le Stockage Blob Azure (version préliminaire)
+# <a name="process-change-feed-in-azure-blob-storage"></a>Traiter le flux de modification dans Stockage Blob Azure
 
 Le flux de modification fournit des journaux des transactions de toutes les modifications apportées aux objets blob et aux métadonnées d’objets blob dans votre compte de stockage. Cet article explique comment lire les enregistrements de flux de modification à l’aide de la bibliothèque du processeur de flux de modification d’objet blob.
 
-Pour en savoir plus sur le flux de modification, consultez [Flux de modification dans Stockage Blob Azure (préversion)](storage-blob-change-feed.md).
-
-> [!NOTE]
-> Le flux de modification est en préversion publique et est disponible dans les régions **westcentralus** et **westus2**. Pour en savoir plus sur cette fonctionnalité, ainsi que sur les problèmes connus et les limitations, consultez [Prise en charge du flux de modification dans Stockage Blob Azure](storage-blob-change-feed.md). La bibliothèque du processeur de flux de modification est sujette à modification entre maintenant et le moment où cette bibliothèque est généralement disponible.
+Pour en savoir plus sur le flux de modification, consultez [Flux de modification dans Stockage Blob Azure](storage-blob-change-feed.md).
 
 ## <a name="get-the-blob-change-feed-processor-library"></a>Obtenir la bibliothèque du processeur de flux de modification d’objet blob
 
-1. Dans Visual Studio, ajoutez l’URL `https://azuresdkartifacts.blob.core.windows.net/azuresdkpartnerdrops/index.json` à vos sources de package NuGet. 
+1. Ouvrez une fenêtre de commande (par exemple : Windows PowerShell).
+2. À partir du répertoire de votre projet, installez le package NuGet [**Azure.Storage.Blobs.Changefeed**](https://www.nuget.org/packages/Azure.Storage.Blobs.ChangeFeed/).
 
-   Pour en savoir plus, consultez [sources de package](https://docs.microsoft.com/nuget/consume-packages/install-use-packages-visual-studio#package-sources).
-
-2. Dans le gestionnaire de package NuGet, recherchez le package **Microsoft.Azure.Storage.Changefeed**, puis installez-le dans votre projet. 
-
-   Pour savoir comment procéder, consultez [Rechercher et installer un package](https://docs.microsoft.com/nuget/consume-packages/install-use-packages-visual-studio#find-and-install-a-package).
-
-## <a name="connect-to-the-storage-account"></a>Se connecter au compte de stockage
-
-Analysez la chaîne de connexion en appelant la méthode [CloudStorageAccount.TryParse](/dotnet/api/microsoft.azure.storage.cloudstorageaccount.tryparse). 
-
-Ensuite, créez un objet qui représente le stockage d’objets blob dans votre compte de stockage en appelant la méthode [CloudStorageAccount.CreateCloudBlobClient](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.blob.blobaccountextensions.createcloudblobclient).
-
-```cs
-public bool GetBlobClient(ref CloudBlobClient cloudBlobClient, string storageConnectionString)
-{
-    if (CloudStorageAccount.TryParse
-        (storageConnectionString, out CloudStorageAccount storageAccount))
-        {
-            cloudBlobClient = storageAccount.CreateCloudBlobClient();
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-}
+```console
+dotnet add package Azure.Storage.Blobs --version 12.5.1
+dotnet add package Azure.Storage.Blobs.ChangeFeed --version 12.0.0-preview.4
 ```
-
-## <a name="initialize-the-change-feed"></a>Initiliser le flux de modification
-
-Ajoutez les instructions using suivantes au début de votre fichier de code. 
-
-```csharp
-using Avro.Generic;
-using ChangeFeedClient;
-```
-
-Ensuite, créez une instance de la classe **ChangeFeed** en appelant la méthode **GetContainerReference**. Passez le nom du conteneur de flux de modification.
-
-```csharp
-public async Task<ChangeFeed> GetChangeFeed(CloudBlobClient cloudBlobClient)
-{
-    CloudBlobContainer changeFeedContainer =
-        cloudBlobClient.GetContainerReference("$blobchangefeed");
-
-    ChangeFeed changeFeed = new ChangeFeed(changeFeedContainer);
-    await changeFeed.InitializeAsync();
-
-    return changeFeed;
-}
-```
-
-## <a name="reading-records"></a>Lecture des enregistrements
+## <a name="read-records"></a>Lire les enregistrements
 
 > [!NOTE]
 > Le flux de modification est une entité immuable et en lecture seule dans votre compte de stockage. Un nombre quelconque d’applications peut lire et traiter le flux de modification simultanément et de manière indépendante. Les enregistrements ne sont pas supprimés du flux de modification quand une application les lit. L’état de lecture ou d’itération de chaque lecteur de consommation est indépendant et géré uniquement par votre application.
 
-La façon la plus simple de lire des enregistrements consiste à créer une instance de la classe **ChangeFeedReader**. 
-
-Cet exemple itère au sein de tous les enregistrements du flux de modification, puis imprime sur la console quelques valeurs de chaque enregistrement. 
+Cet exemple procède à l'itération de tous les enregistrements du flux de modification, les ajoute à une liste, puis renvoie cette liste à l'appelant.
  
 ```csharp
-public async Task ProcessRecords(ChangeFeed changeFeed)
+public async Task<List<BlobChangeFeedEvent>> ChangeFeedAsync(string connectionString)
 {
-    ChangeFeedReader processor = await changeFeed.CreateChangeFeedReaderAsync();
+    // Get a new blob service client.
+    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-    ChangeFeedRecord currentRecord = null;
-    do
+    // Get a new change feed client.
+    BlobChangeFeedClient changeFeedClient = blobServiceClient.GetChangeFeedClient();
+
+    List<BlobChangeFeedEvent> changeFeedEvents = new List<BlobChangeFeedEvent>();
+
+    // Get all the events in the change feed. 
+    await foreach (BlobChangeFeedEvent changeFeedEvent in changeFeedClient.GetChangesAsync())
     {
-        currentRecord = await processor.GetNextItemAsync();
+        changeFeedEvents.Add(changeFeedEvent);
+    }
 
-        if (currentRecord != null)
-        {
-            string subject = currentRecord.record["subject"].ToString();
-            string eventType = ((GenericEnum)currentRecord.record["eventType"]).Value;
-            string api = ((GenericEnum)((GenericRecord)currentRecord.record["data"])["api"]).Value;
-
-            Console.WriteLine("Subject: " + subject + "\n" +
-                "Event Type: " + eventType + "\n" +
-                "Api: " + api);
-        }
-
-    } while (currentRecord != null);
+    return changeFeedEvents;
 }
 ```
 
-## <a name="resuming-reading-records-from-a-saved-position"></a>Reprise de la lecture des enregistrements à partir d’une position enregistrée
-
-Vous pouvez choisir d’enregistrer votre position de lecture dans votre flux de modification et de reprendre l’itération des enregistrements à un moment ultérieur. Vous pouvez enregistrer l’état de votre itération du flux de modification à tout moment à l’aide de la méthode **ChangeFeedReader.SerializeState()** . L’état est une **chaîne** et votre application peut enregistrer cet état en fonction de la conception de votre application (par exemple, une base de données ou un fichier).
+Cet exemple imprime sur la console quelques valeurs de chaque enregistrement de la liste. 
 
 ```csharp
-    string currentReadState = processor.SerializeState();
+public void showEventData(List<BlobChangeFeedEvent> changeFeedEvents)
+{
+    foreach (BlobChangeFeedEvent changeFeedEvent in changeFeedEvents)
+    {
+        string subject = changeFeedEvent.Subject;
+        string eventType = changeFeedEvent.EventType.ToString();
+        string api = changeFeedEvent.EventData.Api;
+
+        Console.WriteLine("Subject: " + subject + "\n" +
+        "Event Type: " + eventType + "\n" +
+        "Api: " + api);
+    }
+}
 ```
 
-Vous pouvez poursuivre l’itération des enregistrements à partir du dernier état en créant le **ChangeFeedReader** à l’aide de la méthode **CreateChangeFeedReaderFromPointerAsync**.
+## <a name="resume-reading-records-from-a-saved-position"></a>Reprendre la lecture des enregistrements à partir d'une position enregistrée
+
+Vous pouvez choisir d'enregistrer votre position de lecture dans le flux de modification, puis de reprendre ultérieurement l'itération des enregistrements. Vous pouvez enregistrer la position de lecture en obtenant le curseur du flux de modification. Le curseur est une **chaîne** et votre application peut enregistrer cette chaîne de la manière qui convient le mieux à la conception de votre application (par exemple : dans un fichier ou une base de données).
+
+Cet exemple procède à l'itération de tous les enregistrements du flux de modification, les ajoute à une liste et enregistre le curseur. La liste et le curseur sont renvoyés à l'appelant. 
 
 ```csharp
-public async Task ProcessRecordsFromLastPosition(ChangeFeed changeFeed, string lastReadState)
+public async Task<(string, List<BlobChangeFeedEvent>)> ChangeFeedResumeWithCursorAsync
+    (string connectionString,  string cursor)
 {
-    ChangeFeedReader processor = await changeFeed.CreateChangeFeedReaderFromPointerAsync(lastReadState);
+    // Get a new blob service client.
+    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-    ChangeFeedRecord currentRecord = null;
-    do
+    // Get a new change feed client.
+    BlobChangeFeedClient changeFeedClient = blobServiceClient.GetChangeFeedClient();
+    List<BlobChangeFeedEvent> changeFeedEvents = new List<BlobChangeFeedEvent>();
+
+    IAsyncEnumerator<Page<BlobChangeFeedEvent>> enumerator = changeFeedClient
+        .GetChangesAsync(continuation: cursor)
+        .AsPages(pageSizeHint: 10)
+        .GetAsyncEnumerator();
+
+    await enumerator.MoveNextAsync();
+
+    foreach (BlobChangeFeedEvent changeFeedEvent in enumerator.Current.Values)
     {
-        currentRecord = await processor.GetNextItemAsync();
-
-        if (currentRecord != null)
-        {
-            string subject = currentRecord.record["subject"].ToString();
-            string eventType = ((GenericEnum)currentRecord.record["eventType"]).Value;
-            string api = ((GenericEnum)((GenericRecord)currentRecord.record["data"])["api"]).Value;
-
-            Console.WriteLine("Subject: " + subject + "\n" +
-                "Event Type: " + eventType + "\n" +
-                "Api: " + api);
-        }
-
-    } while (currentRecord != null);
+    
+        changeFeedEvents.Add(changeFeedEvent);             
+    }
+    
+    // Update the change feed cursor.  The cursor is not required to get each page of events,
+    // it is intended to be saved and used to resume iterating at a later date.
+    cursor = enumerator.Current.ContinuationToken;
+    return (cursor, changeFeedEvents);
 }
-
 ```
 
 ## <a name="stream-processing-of-records"></a>Traitement des flux de données d’enregistrement
 
-Vous pouvez choisir de traiter les enregistrements de flux de modification à mesure qu’ils arrivent. Voir [Spécifications](storage-blob-change-feed.md#specifications).
+Vous pouvez choisir de traiter les enregistrements du flux de modification à mesure qu'ils sont validés dans le flux de modification. Voir [Spécifications](storage-blob-change-feed.md#specifications). Les événements de modification sont publiés dans le flux de modification à une fréquence de 60 secondes en moyenne. Nous vous recommandons d'interroger les nouvelles modifications en tenant compte de cette fréquence lorsque vous spécifiez votre intervalle d'interrogation.
+
+Cet exemple interroge périodiquement les modifications.  S'il existe des enregistrements de modification, ce code les traite et enregistre le curseur du flux de modification. Ainsi, si le processus est arrêté puis redémarré, l'application peut utiliser le curseur pour reprendre le traitement des enregistrements là où il s'était interrompu. Cet exemple enregistre le curseur dans le fichier de configuration d'une application locale, mais votre application peut l'enregistrer sous la forme qui convient le mieux à votre scénario. 
 
 ```csharp
-public async Task ProcessRecordsStream(ChangeFeed changeFeed, int waitTimeMs)
+public async Task ChangeFeedStreamAsync
+    (string connectionString, int waitTimeMs, string cursor)
 {
-    ChangeFeedReader processor = await changeFeed.CreateChangeFeedReaderAsync();
+    // Get a new blob service client.
+    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
-    ChangeFeedRecord currentRecord = null;
-    while (true)
-    {
-        do
-        {
-            currentRecord = await processor.GetNextItemAsync();
-
-            if (currentRecord != null)
-            {
-                string subject = currentRecord.record["subject"].ToString();
-                string eventType = ((GenericEnum)currentRecord.record["eventType"]).Value;
-                string api = ((GenericEnum)((GenericRecord)currentRecord.record["data"])["api"]).Value;
-
-                Console.WriteLine("Subject: " + subject + "\n" +
-                    "Event Type: " + eventType + "\n" +
-                    "Api: " + api);
-            }
-
-        } while (currentRecord != null);
-
-        await Task.Delay(waitTimeMs);
-    }
-}
-```
-
-## <a name="reading-records-within-a-time-range"></a>Lecture d’enregistrements dans un intervalle de temps
-
-Le flux de modification est organisé en segments horaires en fonction de l’heure de modification de l’événement. Voir [Spécifications](storage-blob-change-feed.md#specifications). Vous pouvez lire des enregistrements à partir de segments de flux de modification qui se trouvent dans un intervalle de temps spécifique.
-
-Cet exemple obtient les heures de début de tous les segments. Ensuite, il itère au sein de cette liste jusqu’à ce que l’heure de début soit postérieure à l’heure du dernier segment consommé ou au-delà de l’heure de fin de la plage souhaitée. 
-
-### <a name="selecting-segments-for-a-time-range"></a>Sélection de segments pour un intervalle de temps
-
-```csharp
-public async Task<List<DateTimeOffset>> GetChangeFeedSegmentRefsForTimeRange
-    (ChangeFeed changeFeed, DateTimeOffset startTime, DateTimeOffset endTime)
-{
-    List<DateTimeOffset> result = new List<DateTimeOffset>();
-
-    DateTimeOffset stAdj = startTime.AddMinutes(-15);
-    DateTimeOffset enAdj = endTime.AddMinutes(15);
-
-    DateTimeOffset lastConsumable = (DateTimeOffset)changeFeed.LastConsumable;
-
-    List<DateTimeOffset> segments = 
-        (await changeFeed.ListAvailableSegmentTimesAsync()).ToList();
-
-    foreach (var segmentStart in segments)
-    {
-        if (lastConsumable.CompareTo(segmentStart) < 0)
-        {
-            break;
-        }
-
-        if (enAdj.CompareTo(segmentStart) < 0)
-        {
-            break;
-        }
-
-        DateTimeOffset segmentEnd = segmentStart.AddMinutes(60);
-
-        bool overlaps = stAdj.CompareTo(segmentEnd) < 0 && 
-            segmentStart.CompareTo(enAdj) < 0;
-
-        if (overlaps)
-        {
-            result.Add(segmentStart);
-        }
-    }
-
-    return result;
-}
-```
-
-### <a name="reading-records-in-a-segment"></a>Lecture d’enregistrements dans un segment
-
-Vous pouvez lire des enregistrements à partir de segments individuels ou de plages de segments.
-
-```csharp
-public async Task ProcessRecordsInSegment(ChangeFeed changeFeed, DateTimeOffset segmentOffset)
-{
-    ChangeFeedSegment segment = new ChangeFeedSegment(segmentOffset, changeFeed);
-    await segment.InitializeAsync();
-
-    ChangeFeedSegmentReader processor = await segment.CreateChangeFeedSegmentReaderAsync();
-
-    ChangeFeedRecord currentRecord = null;
-    do
-    {
-        currentRecord = await processor.GetNextItemAsync();
-
-        if (currentRecord != null)
-        {
-            string subject = currentRecord.record["subject"].ToString();
-            string eventType = ((GenericEnum)currentRecord.record["eventType"]).Value;
-            string api = ((GenericEnum)((GenericRecord)currentRecord.record["data"])["api"]).Value;
-
-            Console.WriteLine("Subject: " + subject + "\n" +
-                "Event Type: " + eventType + "\n" +
-                "Api: " + api);
-        }
-
-    } while (currentRecord != null);
-}
-```
-
-## <a name="read-records-starting-from-a-time"></a>Lecture d’enregistrements à partir d’une heure
-
-Vous pouvez lire les enregistrements du flux de modification à partir d’un segment de départ et jusqu’à la fin. Comme pour lire des enregistrements dans une plage de temps, vous pouvez répertorier les segments et choisir un segment à partir duquel commencer l’itération.
-
-Cet exemple obtient le [DateTimeOffset](https://docs.microsoft.com/dotnet/api/system.datetimeoffset?view=netframework-4.8) du premier segment à traiter.
-
-```csharp
-public async Task<DateTimeOffset> GetChangeFeedSegmentRefAfterTime
-    (ChangeFeed changeFeed, DateTimeOffset timestamp)
-{
-    DateTimeOffset result = new DateTimeOffset();
-
-    DateTimeOffset lastConsumable = (DateTimeOffset)changeFeed.LastConsumable;
-    DateTimeOffset lastConsumableEnd = lastConsumable.AddMinutes(60);
-
-    DateTimeOffset timestampAdj = timestamp.AddMinutes(-15);
-
-    if (lastConsumableEnd.CompareTo(timestampAdj) < 0)
-    {
-        return result;
-    }
-
-    List<DateTimeOffset> segments = (await changeFeed.ListAvailableSegmentTimesAsync()).ToList();
-    foreach (var segmentStart in segments)
-    {
-        DateTimeOffset segmentEnd = segmentStart.AddMinutes(60);
-        if (timestampAdj.CompareTo(segmentEnd) <= 0)
-        {
-            result = segmentStart;
-            break;
-        }
-    }
-
-    return result;
-}
-```
-
-Cet exemple traite les enregistrements de flux de modification à partir du [DateTimeOffset](https://docs.microsoft.com/dotnet/api/system.datetimeoffset?view=netframework-4.8) d’un segment de départ.
-
-```csharp
-public async Task ProcessRecordsStartingFromSegment(ChangeFeed changeFeed, DateTimeOffset segmentStart)
-{
-    TimeSpan waitTime = new TimeSpan(60 * 1000);
-
-    ChangeFeedSegment segment = new ChangeFeedSegment(segmentStart, changeFeed);
-
-    await segment.InitializeAsync();
+    // Get a new change feed client.
+    BlobChangeFeedClient changeFeedClient = blobServiceClient.GetChangeFeedClient();
 
     while (true)
     {
-        while (!await IsSegmentConsumableAsync(changeFeed, segment))
+        IAsyncEnumerator<Page<BlobChangeFeedEvent>> enumerator = changeFeedClient
+        .GetChangesAsync(continuation: cursor).AsPages().GetAsyncEnumerator();
+
+        while (true) 
         {
-            await Task.Delay(waitTime);
-        }
+            var result = await enumerator.MoveNextAsync();
 
-        ChangeFeedSegmentReader reader = await segment.CreateChangeFeedSegmentReaderAsync();
-
-        do
-        {
-            await reader.CheckForFinalizationAsync();
-
-            ChangeFeedRecord currentItem = null;
-            do
+            if (result)
             {
-                currentItem = await reader.GetNextItemAsync();
-                if (currentItem != null)
+                foreach (BlobChangeFeedEvent changeFeedEvent in enumerator.Current.Values)
                 {
-                    string subject = currentItem.record["subject"].ToString();
-                    string eventType = ((GenericEnum)currentItem.record["eventType"]).Value;
-                    string api = ((GenericEnum)((GenericRecord)currentItem.record["data"])["api"]).Value;
+                    string subject = changeFeedEvent.Subject;
+                    string eventType = changeFeedEvent.EventType.ToString();
+                    string api = changeFeedEvent.EventData.Api;
 
                     Console.WriteLine("Subject: " + subject + "\n" +
                         "Event Type: " + eventType + "\n" +
                         "Api: " + api);
                 }
-            } while (currentItem != null);
-
-            if (segment.timeWindowStatus != ChangefeedSegmentStatus.Finalized)
-            {
-                await Task.Delay(waitTime);
+            
+                // helper method to save cursor. 
+                SaveCursor(enumerator.Current.ContinuationToken);
             }
-        } while (segment.timeWindowStatus != ChangefeedSegmentStatus.Finalized);
+            else
+            {
+                break;
+            }
 
-        segment = await segment.GetNextSegmentAsync(); // TODO: What if next window doesn't yet exist?
-        await segment.InitializeAsync(); // Should update status, shard list.
+        }
+        await Task.Delay(waitTimeMs);
     }
+
 }
 
-private async Task<bool> IsSegmentConsumableAsync(ChangeFeed changeFeed, ChangeFeedSegment segment)
+public void SaveCursor(string cursor)
 {
-    if (changeFeed.LastConsumable >= segment.startTime)
-    {
-        return true;
-    }
-    await changeFeed.InitializeAsync();
-    return changeFeed.LastConsumable >= segment.startTime;
+    System.Configuration.Configuration config = 
+        ConfigurationManager.OpenExeConfiguration
+        (ConfigurationUserLevel.None);
+
+    config.AppSettings.Settings.Clear();
+    config.AppSettings.Settings.Add("Cursor", cursor);
+    config.Save(ConfigurationSaveMode.Modified);
 }
 ```
 
->[!TIP]
-> Un segment peut avoir des journaux de flux de modification dans un ou plusieurs *chunkFilePath*. En cas de plusieurs *chunkFilePath*, le système a partitionné en interne les enregistrements en plusieurs partitions pour gérer le débit de publication. Il est garanti que chaque partition du segment contiendra des modifications pour les objets blob mutuellement exclusifs et peut être traitée indépendamment sans enfreindre le classement. Vous pouvez utiliser la classe **ChangeFeedSegmentShardReader** pour itérer au sein des enregistrements au niveau partition si cette solution est la plus efficace pour votre scénario.
+## <a name="reading-records-within-a-time-range"></a>Lecture d’enregistrements dans un intervalle de temps
+
+Vous pouvez lire des enregistrements situés dans un intervalle de temps spécifique. Cet exemple procède à l'itération de tous les enregistrements du flux de modification qui se situent entre 15h00 le 2 mars 2020 et 2h00 le 7 août 2020, les ajoute à une liste, puis renvoie cette liste à l'appelant.
+
+### <a name="selecting-segments-for-a-time-range"></a>Sélection de segments pour un intervalle de temps
+
+```csharp
+public async Task<List<BlobChangeFeedEvent>> ChangeFeedBetweenDatesAsync(string connectionString)
+{
+    // Get a new blob service client.
+    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+    // Get a new change feed client.
+    BlobChangeFeedClient changeFeedClient = blobServiceClient.GetChangeFeedClient();
+    List<BlobChangeFeedEvent> changeFeedEvents = new List<BlobChangeFeedEvent>();
+
+    // Create the start and end time.  The change feed client will round start time down to
+    // the nearest hour, and round endTime up to the next hour if you provide DateTimeOffsets
+    // with minutes and seconds.
+    DateTimeOffset startTime = new DateTimeOffset(2020, 3, 2, 15, 0, 0, TimeSpan.Zero);
+    DateTimeOffset endTime = new DateTimeOffset(2020, 8, 7, 2, 0, 0, TimeSpan.Zero);
+
+    // You can also provide just a start or end time.
+    await foreach (BlobChangeFeedEvent changeFeedEvent in changeFeedClient.GetChangesAsync(
+        start: startTime,
+        end: endTime))
+    {
+        changeFeedEvents.Add(changeFeedEvent);
+    }
+
+    return changeFeedEvents;
+}
+```
+
+L'heure de début que vous indiquez est arrondie à l'heure inférieure, et l'heure de fin est arrondie à l'heure supérieure. Les utilisateurs peuvent donc voir des événements survenus avant l'heure de début et après l'heure de fin. Il est également possible que certains événements survenus entre l'heure de début et l'heure de fin n'apparaissent pas. En effet, des événements peuvent être enregistrés pendant l'heure précédant l'heure de début ou pendant l'heure suivant l'heure de fin.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur les journaux de flux de modification. Voir [Change feed in Azure Blob Storage (Preview)](storage-blob-change-feed.md) (Flux de modification dans le Stockage Blob Azure [version préliminaire])
+En savoir plus sur les journaux de flux de modification. Consultez [Flux de modification dans Stockage Blob Azure](storage-blob-change-feed.md)

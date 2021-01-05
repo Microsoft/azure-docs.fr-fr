@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 01/16/2018
-ms.openlocfilehash: 7999735bf2d182b2811d01172adcfc89cba27dc8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e3b0f92770b48ef5163846e67940efe80fb669a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77662499"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90085346"
 ---
 # <a name="monitor-surface-hubs-with-azure-monitor-to-track-their-health"></a>Effectuer le monitoring de hubs Surface Hub avec Azure Monitor pour suivre leur intégrité
 
@@ -60,7 +60,7 @@ Si vous n’utilisez pas Intune pour gérer votre environnement, vous pouvez ins
 3. Cliquez sur **Cet appareil**, puis, sous **Analyse**, cliquez sur **Configurer les paramètres Log Analytics**.
 4. Sélectionnez **Activer l’analyse**.
 5. Dans la boîte de dialogue Paramètres Log Analytics, entrez **l’ID de l’espace de travail** et la **Clé de l’espace de travail**.  
-   ![settings](./media/surface-hubs/settings.png)
+   ![Screenshot shows the Microsoft Operations Manager Suite settings with Enable monitoring selected and text boxes for Workspace ID and Workspace Key.](./media/surface-hubs/settings.png)
 6. Cliquez sur **OK** pour achever la configuration.
 
 Une confirmation s’affiche, vous indiquant si la configuration a été correctement appliquée à l’appareil. Si c’est le cas, un message indique que l’agent est bien connecté à Azure Monitor. L’appareil commence alors à envoyer des données à Azure Monitor, où vous pouvez les consulter et les exploiter.

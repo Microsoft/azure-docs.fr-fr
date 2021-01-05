@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/20/2018
-ms.openlocfilehash: 2471c29f559df5c347c62ceb4c7fd9b4ae1e5eec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7bdea9239faa4ec66fffa236bea40afd5e628e62
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77657331"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96607141"
 ---
 # <a name="gather-insights-about-your-dns-infrastructure-with-the-dns-analytics-preview-solution"></a>Rassembler des informations sur votre infrastructure DNS avec la solution DNS Analytics (préversion)
 
@@ -38,11 +38,11 @@ Le tableau suivant décrit les sources connectées qui sont prises en charge par
 | [Agents Windows](../platform/agent-windows.md) | Oui | La solution collecte des informations DNS auprès d’agents Windows. |
 | [Agents Linux](../learn/quick-collect-linux-computer.md) | Non | La solution ne collecte aucune information DNS auprès d’agents Linux directs. |
 | [Groupe d’administration de Microsoft System Center Operations Manager](../platform/om-agents.md) | Oui | La solution collecte des informations DNS auprès d’agents dans un groupe d’administration d’Operations Manager connecté. Une connexion directe entre l’agent Operations Manager et Azure Monitor n’est pas obligatoire. Les données sont transférées du groupe d’administration à l’espace de travail Log Analytics. |
-| [Compte Azure Storage](../platform/collect-azure-metrics-logs.md) | Non | Le stockage Azure n’est pas utilisé par la solution. |
+| [Compte Azure Storage](../platform/resource-logs.md#send-to-log-analytics-workspace) | Non | Le stockage Azure n’est pas utilisé par la solution. |
 
 ### <a name="data-collection-details"></a>Détails sur la collecte de données
 
-La solution collecte des données liées aux inventaires DNS et aux événements DNS sur les serveurs DNS sur lesquels un agent Log Analytics est installé. Ces données sont ensuite chargées vers Azure Monitor, puis affichées dans le tableau de bord de la solution. Les données liées aux inventaires, comme le nombre de serveurs, de zones et d’enregistrements de ressources DNS, sont collectées en exécutant les applets de commande PowerShell de DNS. Les données sont mises à jour tous les deux jours. Les données liées aux événements sont collectées quasiment en temps réel à partir des [journaux d’analyse et d’audit](https://technet.microsoft.com/library/dn800669.aspx#enhanc) fournis par le biais de la fonctionnalité améliorée de diagnostics et de journalisation DNS de Windows Server 2012 R2.
+La solution collecte des données liées aux inventaires DNS et aux événements DNS sur les serveurs DNS sur lesquels un agent Log Analytics est installé. Ces données sont ensuite chargées vers Azure Monitor, puis affichées dans le tableau de bord de la solution. Les données liées aux inventaires, comme le nombre de serveurs, de zones et d’enregistrements de ressources DNS, sont collectées en exécutant les applets de commande PowerShell de DNS. Les données sont mises à jour tous les deux jours. Les données liées aux événements sont collectées quasiment en temps réel à partir des [journaux d’analyse et d’audit](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn800669(v=ws.11)#enhanc) fournis par le biais de la fonctionnalité améliorée de diagnostics et de journalisation DNS de Windows Server 2012 R2.
 
 ## <a name="configuration"></a>Configuration
 
@@ -57,13 +57,13 @@ La solution commence la collecte des données sans que vous ne deviez procéder 
 
 Dans le tableau de bord de la solution, cliquez sur **Configuration** pour ouvrir la page Configuration de DNS Analytics. Voici les deux types de modification de configuration que vous pouvez effectuer :
 
-- **Noms de domaine de la liste verte**. La solution ne traite pas toutes les requêtes de recherche. Elle gère une liste verte des suffixes de nom de domaine. Les requêtes de recherche qui résolvent les noms de domaine qui correspondent à des suffixes de noms de domaine de cette liste verte ne sont pas traitées par la solution. Ne pas traiter les noms de domaine figurant dans la liste verte permet d’optimiser les données envoyées à Azure Monitor. La liste verte par défaut inclut des noms de domaine public populaires, tels que www.google.com et www.facebook.com. Vous pouvez afficher la liste par défaut complète à l’aide de la barre de défilement.
+- **Noms de domaine de la liste d’autorisation**. La solution ne traite pas toutes les requêtes de recherche. Elle gère une liste d’autorisation des suffixes de nom de domaine. Les requêtes de recherche qui résolvent les noms de domaine qui correspondent à des suffixes de noms de domaine de cette liste d’autorisation ne sont pas traitées par la solution. Ne pas traiter les noms de domaine figurant dans la liste d’autorisation permet d’optimiser les données envoyées à Azure Monitor. La liste d’autorisation par défaut inclut des noms de domaine public populaires, tels que www.google.com et www.facebook.com. Vous pouvez afficher la liste par défaut complète à l’aide de la barre de défilement.
 
   Vous pouvez modifier la liste pour ajouter un suffixe de nom de domaine pour lequel vous souhaitez afficher les informations de recherche. Vous pouvez supprimer tout suffixe de nom de domaine pour lequel vous ne souhaitez pas afficher les informations de recherche.
 
 - **Seuil de clients communiquant**. Les clients DNS qui dépassent le seuil correspondant au nombre de demandes de recherche sont mis en surbrillance dans le panneau **Clients DNS**. Par défaut, le seuil est défini sur 1 000 et vous pouvez le modifier.
 
-    ![Noms de domaine de la liste verte](./media/dns-analytics/dns-config.png)
+    ![Noms de domaine de la liste d’autorisation](./media/dns-analytics/dns-config.png)
 
 ## <a name="management-packs"></a>Packs d’administration
 
@@ -179,7 +179,7 @@ Sur la page Recherche dans les journaux, vous pouvez créer une requête. Vous p
 
 1. Données de recherches DNS manquantes : Pour résoudre ce problème, essayez de réinitialiser la configuration ou simplement de charger la page de configuration une fois dans le portail. Pour la réinitialisation, il vous suffit de modifier un paramètre en lui affectant une autre valeur, puis de rétablir la valeur d’origine et d’enregistrer la configuration.
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Pour nous faire part de vos commentaires, rendez-vous sur la [page UserVoice de User Analytics](https://aka.ms/dnsanalyticsuservoice) afin de publier des idées sur les fonctionnalités DNS Analytics. 
 

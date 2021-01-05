@@ -1,22 +1,25 @@
 ---
 title: Présentation des jumeaux de module Azure IoT Hub | Microsoft Docs
 description: Guide du développeur - Utiliser des jumeaux de module pour synchroniser les données d’état et de configuration entre IoT Hub et vos appareils
-author: chrissie926
+author: nehsin
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
-ms.date: 02/01/2020
-ms.author: menchi
-ms.openlocfilehash: 5ef6c4de288a764abbe434c5d84fc99e154f7492
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/29/2020
+ms.author: nehsin
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+ms.openlocfilehash: 6e728eaf8335a102e38a3b4b07ab5e504d452294
+ms.sourcegitcommit: 83610f637914f09d2a87b98ae7a6ae92122a02f1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78303594"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91996472"
 ---
 # <a name="understand-and-use-module-twins-in-iot-hub"></a>Comprendre et utiliser les jumeaux de module dans IoT Hub
 
-Cet article suppose que vous avez déjà lu l’article [Comprendre et utiliser les jumeaux d’appareil IoT Hub](iot-hub-devguide-device-twins.md). Dans IoT Hub, sous chaque identité d’appareil, vous pouvez créer jusqu’à 20 identités de module. Chaque identité de module génère implicitement un jumeau de module. À l’image des jumeaux d’appareil, les jumeaux de module sont des documents JSON qui stockent des informations sur l’état des modules (métadonnées, configurations et conditions). Azure IoT Hub conserve un jumeau de module pour chaque module que vous y connectez. 
+Cet article suppose que vous avez déjà lu l’article [Comprendre et utiliser les jumeaux d’appareil IoT Hub](iot-hub-devguide-device-twins.md). Dans IoT Hub, sous chaque identité d’appareil, vous pouvez créer jusqu’à 50 identités de module. Chaque identité de module génère implicitement un jumeau de module. À l’image des jumeaux d’appareil, les jumeaux de module sont des documents JSON qui stockent des informations sur l’état des modules (métadonnées, configurations et conditions). Azure IoT Hub conserve un jumeau de module pour chaque module que vous y connectez. 
 
 Côté appareil, les kits IoT Hub device SDK vous permettent de créer des modules dont chacun ouvre une connexion indépendante à IoT Hub. Cette fonctionnalité vous permet d’utiliser des espaces de noms distincts pour les différents composants de votre appareil. Par exemple, vous disposez d’un distributeur automatique dotés de trois capteurs différents. Chaque capteur est contrôlé par différents services de votre entreprise. Vous pouvez créer un module pour chaque capteur. De cette manière, chaque service ne peut envoyer des travaux ou des méthodes directes qu’au capteur qu’il contrôle, ce qui évite les conflits et les erreurs de l’utilisateur.
 
@@ -236,35 +239,45 @@ Les kits [Azure IoT device SDK](iot-hub-devguide-sdks.md) simplifient l’utilis
 
 Les Tags (balises) ainsi que les propriétés souhaitées (Desired) et signalées (Reported) sont des objets JSON soumis aux restrictions suivantes :
 
-* **Clés** : Toutes les clés dans des objets JSON sont des chaînes UNICODE UTF-8 de 64 octets respectant la casse. Les caractères autorisés excluent les caractères de contrôle UNICODE (segments C0 et C1), ainsi que `.`, SP et `$`.
+* **Clés** : Toutes les clés des objets JSON sont encodées en UTF-8, respectent la casse et mesurent jusqu’à 1 Ko. Les caractères autorisés excluent les caractères de contrôle UNICODE (segments C0 et C1), ainsi que `.`, `$` et SP.
 
-* **Valeurs** : Toutes les valeurs figurant dans les objets JSON peuvent être des types JSON suivants : booléen, nombre, chaîne, objet. Les tableaux ne sont pas autorisés.
+* **Valeurs** : Toutes les valeurs figurant dans les objets JSON peuvent être des types JSON suivants : booléen, nombre, chaîne, objet. Les tableaux sont également pris en charge.
 
     * Les entiers peuvent avoir une valeur minimale de 4503599627370496 et une valeur maximale de 4503599627370495.
 
-    * Les valeurs de chaîne sont encodées au format UTF-8 et peuvent avoir une longueur maximale de 512 octets.
+    * Les valeurs de chaîne sont encodées au format UTF-8 et peuvent avoir une longueur maximale de 4 Ko.
 
-* **Profondeur** : Tous les objets JSON dans les balises ainsi que dans les propriétés souhaitées et signalées, peuvent avoir une profondeur maximale de 5. Par exemple, l’objet suivant est valide :
+* **Profondeur** : La profondeur maximale des objets JSON dans les balises, les propriétés souhaitées et les propriétés signalées est de 10. Par exemple, l’objet suivant est valide :
 
-    ```json
-    {
-        ...
-        "tags": {
-            "one": {
-                "two": {
-                    "three": {
-                        "four": {
-                            "five": {
-                                "property": "value"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        ...
-    }
-    ```
+   ```json
+   {
+       ...
+       "tags": {
+           "one": {
+               "two": {
+                   "three": {
+                       "four": {
+                           "five": {
+                               "six": {
+                                   "seven": {
+                                       "eight": {
+                                           "nine": {
+                                               "ten": {
+                                                   "property": "value"
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       },
+       ...
+   }
+   ```
 
 ## <a name="module-twin-size"></a>Taille de jumeau de module
 

@@ -3,17 +3,19 @@ title: Foire aux questions sur l’API Cassandra pour Azure Cosmos DB
 description: Obtenez des réponses aux questions fréquemment posées sur l’API Cassandra pour Azure Cosmos DB.
 author: TheovanKraay
 ms.service: cosmos-db
+ms.subservice: cosmosdb-cassandra
 ms.topic: conceptual
-ms.date: 04/09/2020
+ms.date: 08/12/2020
 ms.author: thvankra
-ms.openlocfilehash: 7d4618382c31f0b1f2efa42fe87a6efe4bc85319
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 1368a3174af08f557b6d08f298fba015601d568c
+ms.sourcegitcommit: 2e9643d74eb9e1357bc7c6b2bca14dbdd9faa436
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82608249"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96030830"
 ---
 # <a name="frequently-asked-questions-about-the-cassandra-api-in-azure-cosmos-db"></a>Forum aux questions sur l’API Cassandra dans Azure Cosmos DB
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Cet article décrit les différences de fonctionnalités entre Apache Cassandra et l’API Cassandra dans Azure Cosmos DB. Il fournit également des réponses aux questions fréquemment posées sur l’API Cassandra pour Azure Cosmos DB.
 
@@ -75,17 +77,17 @@ Il est essentiel d’identifier les opérations et les volumes à l’origine de
 
 Des indicateurs de performance sont disponibles pour vous montrer l’utilisation du débit au fil des heures, jours et semaines, sur les différentes partitions, ou sous forme agrégée. Pour plus d’informations, consultez la section [Surveillance et débogage à l’aide de métriques dans Azure Cosmos DB](use-metrics.md).
 
-Les journaux de diagnostic sont expliquées dans l’article [Journalisation des diagnostics Azure Cosmos DB](logging.md).
+Les journaux de diagnostic sont expliquées dans l’article [Journalisation des diagnostics Azure Cosmos DB](./monitor-cosmos-db.md).
 
 ### <a name="does-the-primary-key-map-to-the-partition-key-concept-of-azure-cosmos-db"></a>La clé primaire est-elle mappée sur le concept de clé de partition d’Azure Cosmos DB ?
 
-Oui. La clé de partition est utilisée pour placer l’entité au bon endroit. Dans Azure Cosmos DB, elle est utilisée pour trouver la bonne partition logique qui est stockée sur une partition physique. Le concept de partitionnement est également expliqué dans l’article [Partitionner et mettre à l’échelle dans Azure Cosmos DB](partition-data.md). Ce qu’il faut retenir, c’est qu’une partition logique ne doit pas dépasser la limite de 10 Go.
+Oui. La clé de partition est utilisée pour placer l’entité au bon endroit. Dans Azure Cosmos DB, elle est utilisée pour trouver la bonne partition logique qui est stockée sur une partition physique. Le concept de partitionnement est également expliqué dans l’article [Partitionner et mettre à l’échelle dans Azure Cosmos DB](partitioning-overview.md). Ce qu’il faut retenir, c’est qu’une partition logique ne doit pas dépasser la limite de 20 Go.
 
 ### <a name="what-happens-when-i-get-a-notification-that-a-partition-is-full"></a>Que se passe-t-il lorsque j’obtiens une notification indiquant qu’une partition est saturée ?
 
-Azure Cosmos DB est un système basé sur un contrat de niveau de service (SLA). Il offre une mise à l’échelle illimitée, avec des garanties en matière de latence, de débit, de disponibilité et de cohérence. Cet espace de stockage illimité est basé sur un scale-out horizontal des données utilisant le partitionnement comme concept clé. Le concept de partitionnement est également expliqué dans l’article [Partitionner et mettre à l’échelle dans Azure Cosmos DB](partition-data.md).
+Azure Cosmos DB est un système basé sur un contrat de niveau de service (SLA). Il offre une mise à l’échelle illimitée, avec des garanties en matière de latence, de débit, de disponibilité et de cohérence. Cet espace de stockage illimité est basé sur un scale-out horizontal des données utilisant le partitionnement comme concept clé. Le concept de partitionnement est également expliqué dans l’article [Partitionner et mettre à l’échelle dans Azure Cosmos DB](partitioning-overview.md).
 
-Vous devez respecter la limite de 10 Go sur le nombre d’entités ou d’éléments par partition logique. Pour vous assurer que la mise à l’échelle de votre application fonctionne correctement, nous vous recommandons de ne *pas* créer de partition sensible en stockant toutes les informations dans une seule partition et en interrogeant celle-ci. Cette erreur ne peut se produire qu’en présence d’une asymétrie des données, c’est-à-dire si vous en avez trop pour une clé de partition (plus de 10&nbsp;Go). La répartition des données est visible sur le portail de stockage. Pour corriger cette erreur, recréez la table et choisissez une clé principale granulaire (clé de partition), qui permet une meilleure répartition des données.
+Vous devez respecter la limite de 20 Go sur le nombre d’entités ou d’éléments par partition logique. Pour vous assurer que la mise à l’échelle de votre application fonctionne correctement, nous vous recommandons de ne *pas* créer de partition sensible en stockant toutes les informations dans une seule partition et en interrogeant celle-ci. Cette erreur ne peut se produire qu’en présence d’une asymétrie des données, c’est-à-dire si vous en avez trop pour une clé de partition (plus de 20 Go). La répartition des données est visible sur le portail de stockage. Pour corriger cette erreur, recréez la table et choisissez une clé principale granulaire (clé de partition), qui permet une meilleure répartition des données.
 
 ### <a name="can-i-use-the-cassandra-api-as-a-key-value-store-with-millions-or-billions-of-partition-keys"></a>Puis-je utiliser l’API Cassandra en tant que magasin de valeurs de clé contenant des millions ou milliards de clés de partition ?
 
@@ -135,9 +137,9 @@ Oui, TTL est pris en charge.
 
 Azure Cosmos DB est un service de plateforme qui vous permet d’augmenter votre productivité sans vous soucier des opérations de gestion et de surveillance de l’infrastructure. Par exemple, vous n’avez pas à surveiller l’état du nœud, l’état du réplica, le garbage collection et les paramètres du système d’exploitation en amont avec différents outils. Vous devez simplement surveiller le débit relevé dans les métriques accessibles sur le portail pour voir si vous approchez de la limite, et augmenter ou réduire ce débit en conséquence. Vous pouvez :
 
-- Analyser des [contrats de niveau de service](monitor-accounts.md)
+- Analyser des [contrats de niveau de service](./monitor-cosmos-db.md)
 - Utiliser des [métriques](use-metrics.md)
-- Utiliser des [journaux de diagnostic](logging.md)
+- Utiliser des [journaux de diagnostic](./monitor-cosmos-db.md)
 
 ### <a name="which-client-sdks-can-work-with-the-cassandra-api"></a>Quels kits de développement logiciel (SDK) client peuvent fonctionner avec l’API Cassandra ?
 
@@ -159,7 +161,7 @@ Actuellement, Azure Cosmos DB offre une expérience optimisée pour environnemen
 
 Azure Cosmos DB réalise deux sauvegardes complètes gratuites toutes les quatre heures, sur toutes les API. Vous n’avez donc pas besoin de planifier les sauvegardes. 
 
-Si vous souhaitez modifier la rétention et la fréquence, envoyez un e-mail à l’adresse [askcosmosdbcassandra@microsoft.com](mailto:askcosmosdbcassandra@microsoft.com) ou ouvrez un cas de support. Pour en savoir plus sur la fonctionnalité de sauvegarde, consultez l’article [Sauvegarde et restauration en ligne automatiques avec Azure Cosmos DB](../synapse-analytics/sql-data-warehouse/backup-and-restore.md).
+Si vous souhaitez modifier la rétention et la fréquence, envoyez un e-mail à l’adresse [askcosmosdbcassandra@microsoft.com](mailto:askcosmosdbcassandra@microsoft.com) ou ouvrez un cas de support. Pour en savoir plus sur la fonctionnalité de sauvegarde, consultez l’article [Sauvegarde et restauration en ligne automatiques avec Azure Cosmos DB](online-backup-and-restore.md).
 
 ### <a name="how-does-the-cassandra-api-account-handle-failover-if-a-region-goes-down"></a>Comment le compte d’API Cassandra gère-t-il le basculement en cas de défaillance d’une région ?
 
@@ -174,7 +176,7 @@ Non. L’API Cassandra prend en charge les [index secondaires](cassandra-seconda
 
 ### <a name="can-i-use-the-new-cassandra-api-sdk-locally-with-the-emulator"></a>Puis-je utiliser le nouveau kit SDK de l’API Cassandra localement avec l’émulateur ?
 
-Oui, cette méthode est prise en charge. Pour plus d’informations sur la façon de l’activer, consultez l’article [Utiliser l’émulateur Azure Cosmos pour le développement et le test en local](local-emulator.md#cassandra-api).
+Oui, cette méthode est prise en charge. Pour plus d’informations sur la façon de l’activer, consultez l’article [Utiliser l’émulateur Azure Cosmos DB à des fins de développement et de test en local](local-emulator.md#cassandra-api).
 
 
 ### <a name="how-can-i-migrate-data-from-apache-cassandra-clusters-to-azure-cosmos-db"></a>Comment puis-je migrer des données de leurs clusters Apache Cassandra vers Azure Cosmos DB ?
@@ -187,7 +189,7 @@ Pour plus d’informations sur les options de migration, consultez le didacticie
 Partagez vos commentaires via les [commentaires user voice](https://feedback.azure.com/forums/263030-azure-cosmos-db).
 
 [azure-portal]: https://portal.azure.com
-[query]: sql-api-sql-query.md
+[query]: ./sql-query-getting-started.md
 
 ## <a name="next-steps"></a>Étapes suivantes
 

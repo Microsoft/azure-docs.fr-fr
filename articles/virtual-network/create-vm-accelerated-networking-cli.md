@@ -10,18 +10,18 @@ tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/10/2019
 ms.author: gsilva
 ms.custom: ''
-ms.openlocfilehash: 54c4a673e654a0244183a84ffa841d553ae6db51
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bccbfed96dd6cd87bdfe986baf4b52817a160ac0
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82106251"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95533359"
 ---
 # <a name="create-a-linux-virtual-machine-with-accelerated-networking-using-azure-cli"></a>Créer une machine virtuelle Linux avec mise en réseau accélérée à l’aide d’Azure CLI
 
@@ -48,17 +48,17 @@ Les distributions suivantes sont prises en charge sans configuration supplément
 * **RHEL 7.4 ou version ultérieure**
 * **CentOS 7.4 ou version ultérieure**
 * **CoreOS Linux**
-* **Debian « Stretch » with backports kernel**
+* **Debian « Stretch » avec noyau backports, Debian « Buster » ou versions ultérieures**
 * **Oracle Linux 7.4 et versions ultérieures avec Red Hat Compatible Kernel (RHCK)**
 * **Oracle Linux 7.5 et versions ultérieures avec UEK version 5**
-* **FreeBSD 10.4, 11.1 et 12.0**
+* **FreeBSD 10.4, 11.1 & 12.0 ou versions ultérieures**
 
 ## <a name="limitations-and-constraints"></a>Limitations et restrictions
 
 ### <a name="supported-vm-instances"></a>Instances de machines virtuelles prises en charge
 La mise en réseau accélérée est prise en charge dans la plupart des instances d’usage général et optimisées pour le calcul (2 processeurs virtuels ou plus).  Séries prises en charge : D/DSv2 et F/Fs
 
-Dans des instances qui acceptent l’hyperthreading, la mise en réseau accélérée est prise en charge dans des instances de machine virtuelle comptant au minimum 4 processeurs virtuels. Séries prises en charge : D/Dsv3, D/Dsv4, E/Esv3, Ea/Easv4, Fsv2, Lsv2, Ms/Mms et Ms/Mmsv2.
+Dans des instances qui acceptent l’hyperthreading, la mise en réseau accélérée est prise en charge dans des instances de machine virtuelle comptant au minimum 4 processeurs virtuels. Séries prises en charge : D/Dsv3, D/Dsv4, Dd/Ddv4, Da/Dasv4, E/Esv3, E/Esv4, Ed/Edsv4, Ea/Easv4, Fsv2, Lsv2, Ms/Mms et Ms/Mmsv2.
 
 Pour plus d’informations sur les instances de machine virtuelle, consultez la section [Tailles des machines virtuelles Linux](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 

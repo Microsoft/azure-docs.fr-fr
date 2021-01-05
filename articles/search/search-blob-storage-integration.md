@@ -1,39 +1,42 @@
 ---
-title: Ajouter la recherche en texte intégral à Stockage Blob Azure
+title: Rechercher dans le contenu du Stockage Blob Azure
 titleSuffix: Azure Cognitive Search
-description: Extrayez du contenu et ajoutez une structure aux objets blob Azure au moment de créer un index de recherche en texte intégral dans Recherche cognitive Azure.
+description: Apprenez-en davantage sur l’extraction de texte de blobs Azure et la recherche en texte intégral dans un index de Recherche cognitive Azure.
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: af7d04bd74ada296b9f0e0f7c149c2a781cec579
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/23/2020
+ms.openlocfilehash: f61bf635cc61a2153a7bb016ef4b4711d7ba7391
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73496494"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91355293"
 ---
-# <a name="add-full-text-search-to-azure-blob-data-using-azure-cognitive-search"></a>Ajouter la recherche en texte intégral à des données blob Azure à l’aide de Recherche cognitive Azure
+# <a name="search-over-azure-blob-storage-content"></a>Rechercher dans le contenu du Stockage Blob Azure
 
-La recherche dans les différents types de contenu enregistrés dans le Stockage Blob Azure peut constituer un problème difficile à résoudre. Cependant, vous pouvez indexer le contenu de vos objets blob et y effectuer une recherche en quelques clics à l’aide de [Recherche cognitive Azure](search-what-is-azure-search.md). Recherche cognitive Azure propose une intégration prédéfinie qui permet d’effectuer une indexation à partir de Stockage Blob via un [*indexeur Blob*](search-howto-indexing-azure-blob-storage.md) qui ajoute à l’indexation des capacités de reconnaissance des sources de données.
+La recherche dans les différents types de contenu enregistrés dans le Stockage Blob Azure peut constituer un problème difficile à résoudre. Cet article examine le flux de travail de base pour l’extraction de contenu et de métadonnées de blobs et leur envoi à un index de recherche dans le service Recherche cognitive Azure. L’index obtenu peut être interrogé à l’aide d’une recherche en texte intégral.
+
+> [!NOTE]
+> Vous êtes déjà familiarisé avec le flux de travail et la composition ? Votre prochaine étape est [Comment configurer un indexeur de blobs](search-howto-indexing-azure-blob-storage.md).
 
 ## <a name="what-it-means-to-add-full-text-search-to-blob-data"></a>Implications de l’ajout de la recherche en texte intégral aux données blob
 
-Recherche cognitive Azure est un service de recherche cloud qui propose des moteurs d’indexation et de requête qui opèrent sur les index définis par l’utilisateur hébergés dans votre service de recherche. Colocaliser votre contenu recherchable avec le moteur de requête dans le cloud est une nécessité pour offrir aux utilisateurs les performances qu’ils attendent eu égard au délai d’affichage des résultats des requêtes de recherche.
+Le service Recherche cognitive Azure est un service de recherche qui prend en charge les charges de travail d’indexation et de requête sur des index définis par l’utilisateur qui contiennent votre contenu pouvant faire l’objet d’une recherche à distance hébergé dans le cloud. Colocaliser votre contenu pouvant faire l’objet d’une recherche avec le moteur de requête est une nécessité pour offrir aux utilisateurs les performances qu’ils attendent eu égard au délai d’affichage des résultats des requêtes de recherche.
 
-Recherche cognitive Azure s’intègre avec Stockage Blog Azure au niveau de la couche d’indexation. Le contenu de vos objets blob est ainsi importé sous forme de documents de recherche indexés dans des *index inversés* et d’autres structures de requête qui prennent en charge les requêtes de texte en forme libre et les expressions de filtre. Sachant que le contenu de vos objets blob est indexé dans un index de recherche, il est possible de tirer parti de l’ensemble des fonctionnalités de requête de Recherche cognitive Azure pour accéder à ce contenu.
+Le service Recherche cognitive s’intègre avec le service Stockage Blog Azure au niveau de la couche d’indexation. Le contenu de votre blob est ainsi importé sous forme de documents de recherche indexés dans des *index inversés* et d’autres structures de requête qui prennent en charge les requêtes de texte en forme libre et les expressions de filtre. Le contenu de votre blob étant indexé dans un index de recherche, vous pouvez utiliser la panoplie complète des fonctionnalités de requête du service Recherche cognitive Azure pour trouver des informations dans le contenu de votre blob.
 
-Une fois créé et rempli, l’index existe indépendamment de votre conteneur d’objets blob. Vous pouvez néanmoins réexécuter les opérations d’indexation de façon à actualiser l’index avec les modifications apportées au conteneur sous-jacent. Les informations d’horodatage des différents objets blob servent à détecter les modifications. Vous pouvez opter pour une exécution planifiée ou une indexation à la demande en guise de mécanisme d’actualisation.
-
-Les entrées sont vos objets blob, dans un même conteneur, dans Stockage Blob Azure. Les objets blob peuvent correspondre à pratiquement tout type de données texte. Si vos objets blob contiennent des images, vous pouvez ajouter l’[enrichissement par IA à l’indexation d’objets blob](search-blob-ai-integration.md) pour créer et extraire du texte des images.
+Les entrées sont vos objets blob, dans un même conteneur, dans Stockage Blob Azure. Les objets blob peuvent correspondre à pratiquement tout type de données texte. Si vos blobs contiennent des images, vous pouvez ajouter l’[enrichissement par IA à l’indexation d’objets blob](search-blob-ai-integration.md) pour créer et extraire du texte des images.
 
 La sortie est toujours un index Recherche cognitive Azure, utilisé pour la recherche, l’extraction et l’exploration rapides de texte dans les applications clientes. Au milieu se trouve l’architecture proprement dite du pipeline d’indexation. Le pipeline est basé sur la fonctionnalité d’*indexeur*, décrite plus loin dans cet article.
 
-## <a name="start-with-services"></a>Commencer avec les services
+Une fois créé et rempli, l’index existe indépendamment de votre conteneur d’objets blob. Vous pouvez néanmoins réexécuter les opérations d’indexation de façon à actualiser l’index sur la base des documents modifiés. Les informations d’horodatage des différents objets blob servent à détecter les modifications. Vous pouvez opter pour une exécution planifiée ou une indexation à la demande en guise de mécanisme d’actualisation.
 
-Vous avez besoin de Recherche cognitive Azure et de Stockage d’objets blob Azure. Dans Stockage Blob, vous avez besoin d’un conteneur qui fournit le contenu source.
+## <a name="required-resources"></a>Ressources nécessaires
+
+Vous avez besoin des services Recherche cognitive Azure et Stockage Blob Azure. Dans Stockage Blob, vous avez besoin d’un conteneur qui fournit le contenu source.
 
 Vous pouvez commencer directement dans votre page du portail des comptes Stockage. Dans la page de navigation de gauche, sous **Service Blob**, cliquez sur **Ajouter Recherche cognitive Azure** pour créer un nouveau service ou en sélectionner un existant. 
 
@@ -41,7 +44,7 @@ Une fois que vous avez ajouté Recherche cognitive Azure à votre compte de stoc
 
 ## <a name="use-a-blob-indexer"></a>Utiliser un indexeur d’objets blob
 
-Un *indexeur* est un sous-service qui reconnaît les sources de données. Avec sa logique interne, il échantillonne les données, lit les données de métadonnées, extrait les données et les sérialise dans des documents JSON à partir de formats natifs pour être ensuite importées. 
+Un *indexeur* est un sous-service qui reconnaît les sources de données dans Recherche cognitive. Avec sa logique interne, il échantillonne les données, lit les données de métadonnées, extrait les données et les sérialise dans des documents JSON à partir de formats natifs en vue d’une importation ultérieure. 
 
 Dans Stockage Azure, les objets blob sont indexés à l’aide de l’[indexeur de stockage d’objets blob de Recherche cognitive Azure](search-howto-indexing-azure-blob-storage.md). Vous pouvez appeler cet indexeur à partir de l’Assistant **Importation des données**, d’une API REST ou du kit SDK .NET. Dans le code, vous pouvez utiliser cet indexeur en définissant le type et en fournissant des informations de connexion qui incluent un compte Stockage Azure associé à un conteneur d’objets blob. Vous pouvez créer un sous-ensemble de vos objets blob en créant un répertoire virtuel, que vous pouvez ensuite transmettre comme paramètre, ou en filtrant sur une extension de type de fichier.
 
@@ -59,16 +62,22 @@ En exécutant un indexeur d’objets blob sur un conteneur, vous pouvez extraire
 
 Pour faciliter le tri dans les objets blob constitués de tout type de contenu, un scénario courant consiste à indexer les métadonnées personnalisées et les propriétés système pour chaque objet blob. De cette façon, les informations de tous les objets blob sont indexées indépendamment du type de document et stockées dans un index de votre service de recherche. Le nouvel index vous permet alors d’effectuer un tri, un filtrage et une facette dans l’ensemble du contenu du stockage Blob.
 
+> [!NOTE]
+> Les balises d’index d’objet blob sont indexées en mode natif par le service de stockage d’objets blob et exposées pour l’interrogation. Si les attributs clé/valeur de vos objets blob nécessitent des fonctionnalités d’indexation et de filtrage, les balises d’index d’objet blob doivent être exploitées à la place des métadonnées.
+>
+> Pour en savoir plus sur un index d’objets blob, consultez [Gérer et rechercher des données sur le Stockage Blob Azure avec un index d’objets blob](../storage/blobs/storage-manage-find-blobs.md).
+
 ### <a name="indexing-json-blobs"></a>Indexation d’objets JSON
+
 Les indexeurs peuvent être configurés pour extraire le contenu structuré des objets blob qui contiennent des objets JSON. Un indexeur peut lire les objets blob JSON et analyser le contenu structuré dans les champs adaptés d’un document de recherche. Les indexeurs peuvent également extraire les objets blob contenant des objets JSON et mapper chaque élément avec un document de recherche différent. Vous pouvez définir un mode d’analyse pour affecter le type d’objet JSON créé par l’indexeur.
 
 ## <a name="search-blob-content-in-a-search-index"></a>Rechercher du contenu d’objet blob dans un index de recherche 
 
-La sortie d’une indexation est un index de recherche, qui permet une exploration interactive en utilisant des requêtes de texte libre et filtrées dans une application cliente. Pour une exploration et une vérification initiales de contenu, nous vous recommandons de commencer avec l’[Explorateur de recherche](search-explorer.md) sur le portail, qui vous permet d’examiner la structure du document. L’Explorateur de recherche vous permet d’utiliser une [syntaxe de requête simple](query-simple-syntax.md), une [syntaxe de requête complète](query-lucene-syntax.md) et une [syntaxe d’expression de filtre](query-odata-filter-orderby-syntax.md).
+La sortie d’un indexeur est un index de recherche, qui permet une exploration interactive à l’aide de requêtes de texte libre et filtrées dans une application cliente. Pour une exploration et une vérification initiales de contenu, nous vous recommandons de commencer avec l’[Explorateur de recherche](search-explorer.md) sur le portail, qui vous permet d’examiner la structure du document. L’Explorateur de recherche vous permet d’utiliser une [syntaxe de requête simple](query-simple-syntax.md), une [syntaxe de requête complète](query-lucene-syntax.md) et une [syntaxe d’expression de filtre](query-odata-filter-orderby-syntax.md).
 
 Une solution plus permanente consiste à regrouper les entrées de requête et à présenter la réponse sous forme de résultats de recherche dans une application cliente. Le tutoriel C# suivant explique comment créer une application de recherche : [Créer votre première application dans Recherche cognitive Azure](tutorial-csharp-create-first-app.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-+ [Charger, télécharger et répertorier des blobs à l’aide du portail Azure (Stockage blob Azure)](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
-+ [Configurer un indexeur blob (Recherche cognitive Azure)](search-howto-indexing-azure-blob-storage.md) 
++ [Charger, télécharger et répertorier des blobs à l’aide du portail Azure (Stockage blob Azure)](../storage/blobs/storage-quickstart-blobs-portal.md)
++ [Configurer un indexeur blob (Recherche cognitive Azure)](search-howto-indexing-azure-blob-storage.md)

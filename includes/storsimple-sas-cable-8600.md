@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 51e1fd18b52d7e215ba43be540156199fb41778e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f08a6b3f7abfc79bff6baff2a339053905612535
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177097"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96025592"
 ---
 #### <a name="to-attach-the-sas-cables"></a>Attacher les câbles SAS
 1. Identifiez le boîtier principal et le boîtier EBOD Les deux boîtiers peuvent être identifiés en examinant leurs fonds de panier respectifs. Reportez-vous à la figure suivante. 
@@ -22,7 +22,7 @@ ms.locfileid: "67177097"
    |:--- |:--- |
    | 1 |Boîtier principal |
    | 2 |Boîtier EBOD |
-2. Recherchez les numéros de série sur le boîtier principal et le boîtier EBOD. L'étiquette du numéro de série est apposée sur la languette arrière de chaque boîtier. Les numéros de série doivent être identiques sur les deux boîtiers. [support technique Microsoft](../articles/storsimple/storsimple-contact-microsoft-support.md) si les numéros de série ne correspondent pas. Reportez-vous à l'illustration suivante pour rechercher les numéros de série.
+2. Recherchez les numéros de série sur le boîtier principal et le boîtier EBOD. L'étiquette du numéro de série est apposée sur la languette arrière de chaque boîtier. Les numéros de série doivent être identiques sur les deux boîtiers. [support technique Microsoft](../articles/storsimple/storsimple-8000-contact-microsoft-support.md) si les numéros de série ne correspondent pas. Reportez-vous à l'illustration suivante pour rechercher les numéros de série.
    
     ![Vue arrière du boîtier avec emplacement du numéro de série](./media/storsimple-sas-cable-8600/HCSRearviewofenclosureindicatinglocationofserialnumbersticker.png)
    
@@ -51,4 +51,3 @@ ms.locfileid: "67177097"
       | 4 |Contrôleur 1 du boîtier EBOD |
       | 5, 6 |Ports SAS sur le boîtier principal (mention EBOD) |
       | 7, 8 |Ports SAS sur le boîtier EBOD (Port A) |
-

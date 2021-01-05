@@ -1,34 +1,41 @@
 ---
 title: MLflow Tracking pour les expériences ML
 titleSuffix: Azure Machine Learning
-description: Configurez MLflow avec Azure Machine Learning pour consigner les métriques et artefacts de modèles Machine Learning créés dans des clusters Databricks, votre environnement local ou un environnement de machine virtuelle.
+description: Configurez MLflow avec Azure Machine Learning pour enregistrer les métriques et les artefacts de modèles de ML, et déployez vos modèles ML en tant que service web.
 services: machine-learning
-author: rastala
-ms.author: roastala
+author: shivp950
+ms.author: shipatel
 ms.service: machine-learning
 ms.subservice: core
 ms.reviewer: nibaccam
+ms.date: 09/08/2020
 ms.topic: conceptual
-ms.date: 02/03/2020
-ms.custom: seodec18
-ms.openlocfilehash: 95567a177635dc7d7ed03404487e62c76db8bdac
-ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+ms.custom: how-to, devx-track-python
+ms.openlocfilehash: 33ee8944aec043bf2b103ac3958a923b9876b749
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83779123"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660132"
 ---
-# <a name="track-models-metrics-with-mlflow-and-azure-machine-learning-preview"></a>Suivre des métriques de modèle avec MLflow et déployer Azure Machine Learning (préversion)
+# <a name="track-experiment-runs-and-deploy-ml-models-with-mlflow-and-azure-machine-learning-preview"></a>Suivre les exécutions d’expériences et déployer des modèles ML avec MLflow et Azure Machine Learning (préversion)
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+Cet article explique comment activer l’URI de suivi et l’API de journalisation de MLflow, collectivement appelées [MLflow Tracking](https://mlflow.org/docs/latest/quickstart.html#using-the-tracking-api), pour connecter Azure Machine Learning en tant que serveur principal de vos expériences MLflow. 
 
-Cet article montre comment activer l’URI de suivi de MLflow et l’API de journalisation, collectivement appelés [MLflow Tracking](https://mlflow.org/docs/latest/quickstart.html#using-the-tracking-api), pour connecter vos expériences de MLflow et Azure Machine Learning. Cela vous permet de suivre et de journaliser les métriques et artefacts d’expériences dans votre [espace de travail Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/concept-azure-machine-learning-architecture#workspaces). Si vous utilisez déjà MLflow Tracking pour vos expériences, l’espace de travail fournit un emplacement centralisé, sécurisé et scalable pour stocker les métriques et les modèles d’entraînement.
+Les fonctionnalités prises en charge sont les suivantes : 
 
-<!--
-+ Deploy your MLflow experiments as an Azure Machine Learning web service. By deploying as a web service, you can apply the Azure Machine Learning monitoring and data drift detection functionalities to your production models. 
--->
++ Suivre et journaliser les métriques et les artefacts des expériences dans votre [espace de travail Azure Machine Learning](./concept-azure-machine-learning-architecture.md#workspace). Si vous utilisez déjà MLflow Tracking pour vos expériences, l’espace de travail fournit un emplacement centralisé, sécurisé et évolutif pour stocker les métriques et les modèles d’entraînement.
 
-[MLflow](https://www.mlflow.org) est une bibliothèque open source permettant de gérer le cycle de vie de vos expériences de Machine Learning. MLFlow Tracking est un composant de MLflow qui journalise et suit vos artefacts de modèle et métriques d’exécution de formation, quel que soit l’environnement de votre expérience : localement sur votre ordinateur, sur une cible de calcul distante, sur une machine virtuelle ou sur un cluster Azure Databricks. 
++ Soumettre des tâches de formation avec MLflow Projects en utilisant la prise en charge du service principal Azure Machine Learning (version préliminaire). Vous pouvez envoyer des tâches en local en utilisant le suivi Azure Machine Learning ou migrer vos exécutions vers le cloud, par exemple, via une [capacité de calcul Azure Machine Learning](./how-to-create-attach-compute-cluster.md)de calcul.
+
++ Suivre et gérer des modèles dans MLflow et un registre de modèles Azure Machine Learning.
+
++ Déployez vos expériences MLflow en tant que service web Azure Machine Learning. En déployant un service web, vous pouvez appliquer les fonctionnalités de surveillance et de supervision des dérives de données Azure Machine Learning à vos modèles de production. 
+
+[MLflow](https://www.mlflow.org) est une bibliothèque open source permettant de gérer le cycle de vie de vos expériences de Machine Learning. MLFlow Tracking est un composant de MLflow qui journalise et suit vos artefacts de modèle et métriques d’exécution d’apprentissage, quel que soit l’environnement de votre expérience, localement sur votre ordinateur, sur une cible de calcul distante, sur une machine virtuelle ou sur un [cluster Azure Databricks](how-to-use-mlflow-azure-databricks.md). 
+
+>[!NOTE]
+> En tant que bibliothèque open source, MLflow change fréquemment. Ainsi, les fonctionnalités mises à disposition via l’intégration d’Azure Machine Learning et de MLflow doivent être considérées comme une préversion et non entièrement prises en charge par Microsoft.
 
 Le diagramme suivant montre qu’avec MLflow Tracking, vous suivez les métriques d’exécution d’une expérience et vous stockez les artefacts du modèle dans votre espace de travail Azure Machine Learning.
 
@@ -39,12 +46,11 @@ Le diagramme suivant montre qu’avec MLflow Tracking, vous suivez les métrique
 
 ## <a name="compare-mlflow-and-azure-machine-learning-clients"></a>Comparer les clients MLflow et Azure Machine Learning
 
- Le tableau ci-dessous récapitule les différents clients pouvant utiliser Azure Machine Learning et leurs fonctionnalités respectives.
+ Le tableau suivant récapitule les différents clients pouvant utiliser Azure Machine Learning et leurs fonctionnalités respectives.
 
- MLflow Tracking offre des fonctionnalités de stockage de journalisation de métriques et d’artefact qui ne sont autrement disponibles que via le [Kit de développement logiciel (SDK) Python Azure Machine Learning](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py).
+ MLflow Tracking offre des fonctionnalités de stockage de journalisation de métriques et d’artefact qui ne sont autrement disponibles que via le [Kit de développement logiciel (SDK) Python Azure Machine Learning](/python/api/overview/azure/ml/intro?preserve-view=true&view=azure-ml-py).
 
-
-| | MLflow&nbsp;Tracking <!--& Deployment--> | SDK Python Azure Machine Learning |  Interface CLI Azure Machine Learning | Azure Machine Learning Studio|
+| Fonctionnalité | Suivi et déploiement MLflow | SDK Python Azure Machine Learning |  Interface CLI Azure Machine Learning | Azure Machine Learning Studio|
 |---|---|---|---|---|
 | Gérer l'espace de travail |   | ✓ | ✓ | ✓ |
 | Utiliser des magasins de données  |   | ✓ | ✓ | |
@@ -52,31 +58,21 @@ Le diagramme suivant montre qu’avec MLflow Tracking, vous suivez les métrique
 | Charger les artefacts | ✓ | ✓ |   | |
 | Afficher les mesures     | ✓ | ✓ | ✓ | ✓ |
 | Gérer le calcul   |   | ✓ | ✓ | ✓ |
+| Déployer des modèles    | ✓ | ✓ | ✓ | ✓ |
+|Surveiller les performances d'un modèle||✓|  |   |
+| Détecter une dérive de données |   | ✓ |   | ✓ |
 
-<!--| Deploy models    | ✓ | ✓ | ✓ | ✓ |
-|Monitor model performance||✓|  |   |
-| Detect data drift |   | ✓ |   | ✓ |
--->
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Installez MLflow.](https://mlflow.org/docs/latest/quickstart.html)
-* [Installez le kit SDK Azure Machine Learning](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py) sur votre ordinateur local. Le kit SDK assure la connexion permettant à MLflow d’accéder à votre espace de travail.
+* Installez le package `azureml-mlflow`. 
+    * Ce package intègre automatiquement `azureml-core` du [Kit de développement logiciel (SDK) Python Azure Machine Learning](/python/api/overview/azure/ml/install?preserve-view=true&view=azure-ml-py), qui fournit la connectivité nécessaire pour que MLflow accède à votre espace de travail.
 * [Créez un espace de travail Azure Machine Learning](how-to-manage-workspace.md).
 
 ## <a name="track-local-runs"></a>Suivre les exécutions locales
 
 MLflow Tracking avec Azure Machine Learning vous permet de stocker les métriques et artefacts consignés à partir de vos exécutions locales dans votre espace de travail Azure Machine Learning.
 
-Installez le package `azureml-mlflow` pour utiliser MLflow Tracking avec Azure Machine Learning sur vos expériences exécutées localement dans un Jupyter Notebook ou un éditeur de code.
-
-```shell
-pip install azureml-mlflow
-```
-
->[!NOTE]
->L’espace de noms azureml.contrib change fréquemment car nous travaillons à améliorer le service. Par conséquent, tout ce qui est compris dans cet espace de noms doit être considéré comme une préversion et n’est pas entièrement pris en charge par Microsoft.
-
-Importez les classes `mlflow` et [`Workspace`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py) pour accéder à l’URI de suivi de MLflow et configurer votre espace de travail.
+Importez les classes `mlflow` et [`Workspace`](/python/api/azureml-core/azureml.core.workspace%28class%29?preserve-view=true&view=azure-ml-py) pour accéder à l’URI de suivi de MLflow et configurer votre espace de travail.
 
 Dans le code suivant, la méthode `get_mlflow_tracking_uri()` attribue un adresse URI de suivi unique à l’espace de travail, `ws`, et `set_tracking_uri()` pointe le L’URI de suivi de MLflow sur cette adresse.
 
@@ -104,33 +100,26 @@ with mlflow.start_run():
 
 ## <a name="track-remote-runs"></a>Suivre les exécutions à distance
 
-MLflow Tracking avec Azure Machine Learning vous permet de stocker les métriques et artefacts consignés à partir de vos exécutions distantes dans votre espace de travail Azure Machine Learning.
+Les exécutions à distance vous permettent d’effectuer l’apprentissage de vos modèles sur des calculs plus puissants, tels que des machines virtuelles activées par GPU ou des clusters de Capacité de calcul Machine Learning. Pour en savoir plus sur les différentes options de calcul, consultez [Utiliser des cibles de calcul pour l’entraînement des modèles](how-to-set-up-training-targets.md).
 
-Les exécutions à distance vous permettent d’effectuer l’apprentissage de vos modèles sur des calculs plus puissants, tels que des machines virtuelles activées par GPU ou des clusters de Capacité de calcul Machine Learning. Pour en savoir plus sur les différentes options de calcul, voir [Configurer des cibles de calcul pour l’entraînement des modèles](how-to-set-up-training-targets.md).
+MLflow Tracking avec Azure Machine Learning vous permet de stocker les métriques et artefacts consignés à partir de vos exécutions distantes dans votre espace de travail Azure Machine Learning. Toute exécution contenant du code MLflow Tracking aura des métriques journalisées automatiquement dans l’espace de travail. 
 
-Configurez votre environnement de calcul et d’apprentissage avec la classe [`Environment`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.environment.environment?view=azure-ml-py). Incluez les packages pip `mlflow` et `azureml-mlflow` dans la section [`CondaDependencies`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.conda_dependencies.condadependencies?view=azure-ml-py) de l’environnement. Construisez ensuite [`ScriptRunConfig`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.script_run_config.scriptrunconfig?view=azure-ml-py) avec votre calcul à distance en tant que cible de calcul.
+L’exemple d’environnement conda suivant comprend `mlflow` et `azureml-mlflow` en tant que packages pip. 
 
-```Python
-from azureml.core.environment import Environment
-from azureml.core.conda_dependencies import CondaDependencies
-from azureml.core import ScriptRunConfig
 
-exp = Experiment(workspace = 'my_workspace',
-                 name='my_experiment')
-
-mlflow_env = Environment(name='mlflow-env')
-
-cd = CondaDependencies.create(pip_packages=['mlflow', 'azureml-mlflow'])
-
-mlflow_env.python.conda_dependencies = cd
-
-src = ScriptRunConfig(source_directory='./my_script_location', script='my_training_script.py')
-
-src.run_config.target = 'my-remote-compute-compute'
-src.run_config.environment = mlflow_env
+```yaml
+name: sklearn-example
+dependencies:
+  - python=3.6.2
+  - scikit-learn
+  - matplotlib
+  - numpy
+  - pip:
+    - azureml-mlflow
+    - numpy
 ```
 
-Dans votre script d’apprentissage, importez `mlflow` pour utiliser les API de journalisation MLflow et commencez à journaliser vos métriques d’exécution.
+Dans votre script, configurez votre environnement de calcul et d’apprentissage avec la classe [`Environment`](/python/api/azureml-core/azureml.core.environment.environment?preserve-view=true&view=azure-ml-py). Construisez ensuite [`ScriptRunConfig`](/python/api/azureml-core/azureml.core.script_run_config.scriptrunconfig?preserve-view=true&view=azure-ml-py) avec votre calcul à distance en tant que cible de calcul.
 
 ```Python
 import mlflow
@@ -139,86 +128,77 @@ with mlflow.start_run():
     mlflow.log_metric('example', 1.23)
 ```
 
-Avec cette configuration du cycle de calcul et d’apprentissage, utilisez la méthode `Experiment.submit('train.py')` pour soumettre un cycle. Cette méthode définit automatiquement l’URI du suivi MLflow et dirige la journalisation de MLflow vers votre espace de travail.
+Avec cette configuration du cycle de calcul et d’apprentissage, utilisez la méthode `Experiment.submit()` pour soumettre un cycle. Cette méthode définit automatiquement l’URI du suivi MLflow et dirige la journalisation de MLflow vers votre espace de travail.
 
 ```Python
 run = exp.submit(src)
 ```
 
-## <a name="track-azure-databricks-runs"></a>Suivre les exécutions Azure Databricks
+## <a name="train-with-mlflow-projects"></a>Formation avec MLflow Projects
 
-MLflow Tracking avec Azure Machine Learning vous permet de stocker les métriques et artefacts consignés à partir de vos exécutions Azure Databricks dans votre espace de travail Azure Machine Learning.
+Grâce à [MLflow Projects](https://mlflow.org/docs/latest/projects.html), vous pouvez organiser et décrire votre code pour que d’autres scientifiques de données (ou des outils automatisés) puissent l’exécuter. MLflow Projects avec Azure Machine Learning vous permet de suivre et de gérer vos exécutions de formation dans votre espace de travail. 
 
-Pour exécuter vos expériences Mlflow avec Azure Databricks, vous devez d'abord créer un [espace de travail Azure Databricks et un cluster](https://docs.microsoft.com/azure/azure-databricks/quickstart-create-databricks-workspace-portal). Dans votre cluster, veillez à installer la bibliothèque *azureml-mlflow* de PyPi pour vous assurer que votre cluster peut accéder aux fonctions et classes nécessaires.
+Cet exemple montre comment soumettre des projets MLflow en local en utilisant le suivi Azure Machine Learning.
 
-À partir de là, importez votre bloc-notes d’expériences, attachez-le à votre cluster Azure Databricks et exécutez votre expérience. 
+Installez le package `azureml-mlflow` pour utiliser MLflow Tracking avec Azure Machine Learning sur vos expériences exécutées en local. Vos expériences peuvent s’exécuter à l’aide d’un bloc-notes Jupyter ou d’un éditeur de code.
 
-### <a name="install-libraries"></a>Installation des bibliothèques
+```shell
+pip install azureml-mlflow
+```
 
-Pour installer des bibliothèques sur votre cluster, accédez à l'onglet **Bibliothèques**, puis cliquez sur **Installer**
+Importez les classes `mlflow` et [`Workspace`](/python/api/azureml-core/azureml.core.workspace%28class%29?preserve-view=true&view=azure-ml-py) pour accéder à l’URI de suivi de MLflow et configurer votre espace de travail.
 
- ![diagramme de mlflow avec azure machine learning](./media/how-to-use-mlflow/azure-databricks-cluster-libraries.png)
-
-Dans le champ **Package**, tapez azureml-mlflow, puis cliquez sur Installer. Répétez cette étape si nécessaire afin d’installer d'autres packages sur votre cluster pour votre expérience.
-
- ![diagramme de mlflow avec azure machine learning](./media/how-to-use-mlflow/install-libraries.png)
-
-### <a name="set-up-your-notebook-and-workspace"></a>Configurer votre notebook et votre espace de travail
-
-Une fois votre cluster configuré, importez votre notebook d'expériences, ouvrez-le, puis et attachez-y votre cluster.
-
-Le code suivant devrait figurer dans votre notebook d'expériences. Ce code obtient ainsi les détails de votre abonnement Azure pour instancier votre espace de travail. Ce code suppose que vous disposez d’un groupe de ressources existant et d’un espace de travail Azure Machine Learning ; si ce n’est pas le cas, vous pouvez [les créer](how-to-manage-workspace.md). 
-
-```python
+```Python
 import mlflow
-import mlflow.azureml
-import azureml.mlflow
-import azureml.core
-
 from azureml.core import Workspace
-from azureml.mlflow import get_portal_url
 
-subscription_id = 'subscription_id'
+ws = Workspace.from_config()
 
-# Azure Machine Learning resource group NOT the managed resource group
-resource_group = 'resource_group_name' 
-
-#Azure Machine Learning workspace name, NOT Azure Databricks workspace
-workspace_name = 'workspace_name'  
-
-# Instantiate Azure Machine Learning workspace
-ws = Workspace.get(name=workspace_name,
-                   subscription_id=subscription_id,
-                   resource_group=resource_group)
+mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
 ```
 
-#### <a name="connect-your-azure-databricks-and-azure-machine-learning-workspaces"></a>Lier vos espaces de travail Azure Databricks et Azure Machine Learning
+Définissez le nom de l’expérience MLflow avec `set_experiment()` et commencez votre cycle d’apprentissage avec `start_run()`. Utilisez ensuite `log_metric()` pour activer l’API de journalisation de MLflow et commencer la journalisation des métriques de votre cycle de formation.
 
-Dans le [portail Azure](https://ms.portal.azure.com), vous pouvez lier votre espace de travail Azure Databricks (ADB) à un espace de travail Azure Machine Learning (nouveau ou existant). Pour ce faire, accédez à votre espace de travail ADB et sélectionnez le bouton **Link Azure Machine Learning workspace** (Lier l’espace de travail Azure Machine Learning ) en bas à droite. Le fait de lier vos espaces de travail vous permet de suivre vos données d’expérience dans l’espace de travail Azure Machine Learning. 
+```Python
+experiment_name = 'experiment-with-mlflow-projects'
+mlflow.set_experiment(experiment_name)
+```
 
-### <a name="link-mlflow-tracking-to-your-workspace"></a>Lier le suivi MLflow à votre espace de travail
-
-Après avoir instancié votre espace de travail, définissez l'URI de MLflow Tracking. Vous reliez ainsi MLflow Tracking à l'espace de travail Azure Machine Learning. Après la liaison, toutes vos expériences seront consignées dans le service de suivi managé d’Azure Machine Learning.
-
-#### <a name="directly-set-mlflow-tracking-in-your-notebook"></a>Configurer directement le suivi MLflow dans votre notebook
+Créez l’objet de configuration principal pour stocker les informations nécessaires à l’intégration, telles que la cible de calcul et le type d’environnement géré à utiliser.
 
 ```python
-uri = ws.get_mlflow_tracking_uri()
-mlflow.set_tracking_uri(uri)
+backend_config = {"USE_CONDA": False}
 ```
+Ajoutez le package `azureml-mlflow` en tant que dépendance PIP à votre fichier de configuration d’environnement afin d’effectuer le suivi des métriques et des artefacts principaux dans votre espace de travail. 
 
-Dans votre script d’apprentissage, importez mlflow pour utiliser les API de journalisation MLflow et commencez à journaliser vos métriques d’exécution. L'exemple suivant journalise la métrique epoch loss. 
+``` shell
+name: mlflow-example
+channels:
+  - defaults
+  - anaconda
+  - conda-forge
+dependencies:
+  - python=3.6
+  - scikit-learn=0.19.1
+  - pip
+  - pip:
+    - mlflow
+    - azureml-mlflow
+```
+Soumettez l’exécution locale et veillez à définir le paramètre `backend = "azureml" `. Ce paramètre vous permet de soumettre des exécutions en local et bénéficier de la prise en charge supplémentaire du suivi automatique de la sortie, des fichiers journaux, des instantanés et des erreurs imprimées dans votre espace de travail. 
+
+Affichez vos exécutions et métriques dans [Azure Machine Learning Studio](overview-what-is-machine-learning-studio.md). 
+
 
 ```python
-import mlflow 
-mlflow.log_metric('epoch_loss', loss.item()) 
+local_env_run = mlflow.projects.run(uri=".", 
+                                    parameters={"alpha":0.3},
+                                    backend = "azureml",
+                                    use_conda=False,
+                                    backend_config = backend_config, 
+                                    )
+
 ```
-
-#### <a name="automate-setting-mlflow-tracking"></a>Automatiser la configuration du suivi MLflow
-
-Au lieu de définir manuellement l’URI de suivi dans chaque session suivante du notebook d’expérience sur vos clusters, faites-le automatiquement à l’aide de ce [script d’initialisation du cluster de suivi Azure Machine Learning](https://github.com/Azure/MachineLearningNotebooks/blob/3ce779063b000e0670bdd1acc6bc3a4ee707ec13/how-to-use-azureml/azure-databricks/linking/README.md).
-
-Une fois cette configuration effectuée, vous pouvez voir vos données de suivi MLflow dans l’API REST d’Azure Machine Learning et sur tous les clients, ainsi que dans Azure Databricks via l’interface utilisateur MLflow ou en utilisant le client MLflow.
 
 ## <a name="view-metrics-and-artifacts-in-your-workspace"></a>Afficher les métriques et les artefacts dans votre espace de travail
 
@@ -226,58 +206,65 @@ Les métriques et artefacts provenant de la journalisation de MLflow sont conser
 
 ```python
 run.get_metrics()
-ws.get_details()
 ```
 
-<!-- ## Deploy MLflow models as a web service
+## <a name="manage-models"></a>Gérer les modèles 
 
-Deploying your MLflow experiments as an Azure Machine Learning web service allows you to leverage the Azure Machine Learning model management and data drift detection capabilities and apply them to your production models.
+Enregistrez et suivez vos modèles avec le [registre de modèles Azure Machine Learning](concept-model-management-and-deployment.md#register-package-and-deploy-models-from-anywhere) qui prend en charge le registre de modèles MLflow. Les modèles Azure Machine Learning sont alignés avec le schéma de modèle MLflow, ce qui facilite l’exportation et l’importation de ces modèles dans différents flux de travail. Les métadonnées associées à MLflow, telles que l’ID d’exécution, sont également marquées avec le modèle inscrit pour la traçabilité. Les utilisateurs peuvent soumettre des exécutions de formation, enregistrer, mais aussi déployer des modèles produits à partir de MLflow. 
 
-The following diagram demonstrates that with the MLflow deploy API you can deploy your existing MLflow models as an Azure Machine Learning web service, despite their frameworks--PyTorch, Tensorflow, scikit-learn, ONNX, etc., and manage your production models in your workspace.
+Si vous souhaitez déployer et inscrire votre modèle prêt pour la production en une seule étape, consultez [déployer et inscrire des modèles MLflow](#deploy-and-register-mlflow-models).
 
-![mlflow with azure machine learning diagram](./media/how-to-use-mlflow/mlflow-diagram-deploy.png)
+Pour inscrire et afficher un modèle à partir d’une exécution, procédez comme suit :
 
-### Log your model
+1. Une fois l’exécution terminée, appelez la méthode `register_model()`.
 
-Before you can deploy, be sure that your model is saved so you can reference it and its path location for deployment. In your training script, there should be code similar to the following [mlflow.sklearn.log_model()](https://www.mlflow.org/docs/latest/python_api/mlflow.sklearn.html) method, that saves your model to the specified outputs directory. 
+    ```python
+    # the model folder produced from the run is registered. This includes the MLmodel file, model.pkl and the conda.yaml.
+    run.register_model(model_name = 'my-model', model_path = 'model')
+    ```
 
-```python
-# change sklearn to pytorch, tensorflow, etc. based on your experiment's framework 
-import mlflow.sklearn
+1. Affichez le modèle inscrit dans votre espace de travail avec [Azure Machine Learning Studio](overview-what-is-machine-learning-studio.md).
 
-# Save the model to the outputs directory for capture
-mlflow.sklearn.log_model(regression_model, model_save_path)
-```
->[!NOTE]
-> Include the `conda_env` parameter to pass a dictionary representation of the dependencies and environment this model should be run in.
+    Dans l’exemple suivant, le modèle inscrit, `my-model` a des métadonnées de MLflow Tracking marquées. 
 
-### Retrieve model from previous run
+    ![register-mlflow-model](./media/how-to-use-mlflow/registered-mlflow-model.png)
 
-To retrieve the run, you need the run ID and the path in run history of where the model was saved. 
+1. Sélectionnez l’onglet **Artefacts** pour afficher tous les fichiers de modèle qui s’alignent sur le schéma de modèle MLflow (conda.yaml, MLmodel, model.pkl).
 
-```python
-# gets the list of runs for your experiment as an array
-experiment_name = 'experiment-with-mlflow'
-exp = ws.experiments[experiment_name]
-runs = list(exp.get_runs())
+    ![model-schema](./media/how-to-use-mlflow/mlflow-model-schema.png)
 
-# get the run ID and the path in run history
-runid = runs[0].id
-model_save_path = 'model'
-```
+1. Sélectionnez MLmodel pour afficher le fichier MLmodel généré par l’exécution.
 
-### Deploy the model
+    ![MLmodel-schema](./media/how-to-use-mlflow/mlmodel-view.png)
 
-Use the Azure Machine Learning SDK to deploy the model as a web service.
 
-First, specify the deployment configuration. Azure Container Instance (ACI) is a suitable choice for a quick dev-test deployment, while Azure Kubernetes Service (AKS) is suitable for scalable production deployments.
 
-#### Deploy to ACI
+## <a name="deploy-and-register-mlflow-models"></a>Déployer et inscrire des modèles MLflow 
 
-Set up your deployment configuration with the [deploy_configuration()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py#deploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none-) method. You can also add tags and descriptions to help keep track of your web service.
+Le déploiement de vos expériences MLflow en tant que service web Azure Machine Learning vous permet d’exploiter les capacités de gestion de modèles et de détection des dérives de données Azure Machine Learning et de les appliquer à vos modèles de production.
+
+Pour ce faire, vous devez
+
+1. enregistrer votre modèle
+1. Déterminez la configuration de déploiement que vous souhaitez utiliser pour votre scénario.
+
+    1. [Azure Container instance (ACI)](#deploy-to-aci) est un choix approprié pour un déploiement de test rapide.
+    1. [Azure Kubernetes Service (AKS)](#deploy-to-aks) est adapté aux déploiements dans des environnements de production évolutifs.
+
+Le diagramme suivant montre qu’avec l’API de déploiement MLflow, vous pouvez déployer vos modèles MLflow existants en tant que service web Azure Machine Learning, en dépit de leurs frameworks (PyTorch, TensorFlow, scikit-learn, ONNX, etc.) et gérer vos modèles de production dans votre espace de travail.
+
+![ déployer des modèles mlflow avec azure machine learning](./media/how-to-use-mlflow/mlflow-diagram-deploy.png)
+
+
+### <a name="deploy-to-aci"></a>Déployer sur ACI
+
+Configurez votre configuration de déploiement avec la méthode [deploy_configuration()](/python/api/azureml-core/azureml.core.webservice.aciwebservice?preserve-view=true&view=azure-ml-py#&preserve-view=truedeploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none-). Vous pouvez également ajouter des balises et des descriptions pour faciliter le suivi de votre service web.
 
 ```python
 from azureml.core.webservice import AciWebservice, Webservice
+
+# Set the model path to the model folder created by your run
+model_path = "model"
 
 # Configure 
 aci_config = AciWebservice.deploy_configuration(cpu_cores=1, 
@@ -287,7 +274,7 @@ aci_config = AciWebservice.deploy_configuration(cpu_cores=1,
                                                 location='eastus2')
 ```
 
-Then, register and deploy the model by using the Azure Machine Learning SDK [deploy](/python/api/azureml-core/azureml.core.model.model?view=azure-ml-py#deploy-workspace--name--models--inference-config-none--deployment-config-none--deployment-target-none--overwrite-false-) method. 
+Ensuite, inscrivez et déployez le modèle rapidement, grâce à la méthode [deploy](/python/api/azureml-core/azureml.core.model.model?view=azure-ml-py&preserve-view=true#&preserve-view=truedeploy-workspace--name--models--inference-config-none--deployment-config-none--deployment-target-none--overwrite-false-) du Kit de développement logiciel (SDK) Azure Machine Learning. 
 
 ```python
 (webservice,model) = mlflow.azureml.deploy( model_uri='runs:/{}/{}'.format(run.id, model_path),
@@ -299,9 +286,10 @@ Then, register and deploy the model by using the Azure Machine Learning SDK [dep
 
 webservice.wait_for_deployment(show_output=True)
 ```
-#### Deploy to AKS
 
-To deploy to AKS, first create an AKS cluster. Create an AKS cluster using the [ComputeTarget.create()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.computetarget?view=azure-ml-py#create-workspace--name--provisioning-configuration-) method. It may take 20-25 minutes to create a new cluster.
+### <a name="deploy-to-aks"></a>Déployer sur AKS
+
+Pour déployer sur AKS, commencez par créer un cluster AKS. Créez un cluster AKS avec la méthode [ComputeTarget.create()](/python/api/azureml-core/azureml.core.computetarget?preserve-view=true&view=azure-ml-py#&preserve-view=truecreate-workspace--name--provisioning-configuration-). La création d’un cluster peut prendre de 20 à 25 minutes.
 
 ```python
 from azureml.core.compute import AksCompute, ComputeTarget
@@ -309,7 +297,7 @@ from azureml.core.compute import AksCompute, ComputeTarget
 # Use the default configuration (can also provide parameters to customize)
 prov_config = AksCompute.provisioning_configuration()
 
-aks_name = 'aks-mlflow' 
+aks_name = 'aks-mlflow'
 
 # Create the cluster
 aks_target = ComputeTarget.create(workspace=ws, 
@@ -321,7 +309,7 @@ aks_target.wait_for_completion(show_output = True)
 print(aks_target.provisioning_state)
 print(aks_target.provisioning_errors)
 ```
-Set up your deployment configuration with the [deploy_configuration()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.webservice.aciwebservice?view=azure-ml-py#deploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none-) method. You can also add tags and descriptions to help keep track of your web service.
+Configurez votre configuration de déploiement avec la méthode [deploy_configuration()](/python/api/azureml-core/azureml.core.webservice.aciwebservice?preserve-view=true&view=azure-ml-py#&preserve-view=truedeploy-configuration-cpu-cores-none--memory-gb-none--tags-none--properties-none--description-none--location-none--auth-enabled-none--ssl-enabled-none--enable-app-insights-none--ssl-cert-pem-file-none--ssl-key-pem-file-none--ssl-cname-none--dns-name-label-none-). Vous pouvez également ajouter des balises et des descriptions pour faciliter le suivi de votre service web.
 
 ```python
 from azureml.core.webservice import Webservice, AksWebservice
@@ -329,12 +317,18 @@ from azureml.core.webservice import Webservice, AksWebservice
 # Set the web service configuration (using default here with app insights)
 aks_config = AksWebservice.deploy_configuration(enable_app_insights=True, compute_target_name='aks-mlflow')
 
+```
 
-Then, deploy the image by using the Azure Machine Learning SDK [deploy()](Then, register and deploy the model by using the Azure Machine Learning SDK [deploy](/python/api/azureml-core/azureml.core.model.model?view=azure-ml-py#deploy-workspace--name--models--inference-config-none--deployment-config-none--deployment-target-none--overwrite-false-) method. 
+Ensuite, inscrivez et déployez le modèle en une seule étape avec le Kit de développement logiciel (SDK) Azure Machine Learning [deploy()]. Ensuite, inscrivez et déployez le modèle à l’aide de la méthode [deploy](/python/api/azureml-core/azureml.core.model.model?view=azure-ml-py&preserve-view=true#&preserve-view=truedeploy-workspace--name--models--inference-config-none--deployment-config-none--deployment-target-none--overwrite-false-) du Kit de développement logiciel (SDK) Azure Machine Learning. 
 
 ```python
+
 # Webservice creation using single command
 from azureml.core.webservice import AksWebservice, Webservice
+
+# set the model path 
+model_path = "model"
+
 (webservice, model) = mlflow.azureml.deploy( model_uri='runs:/{}/{}'.format(run.id, model_path),
                       workspace=ws,
                       model_name='sklearn-model', 
@@ -346,28 +340,31 @@ from azureml.core.webservice import AksWebservice, Webservice
 webservice.wait_for_deployment()
 ```
 
-The service deployment can take several minutes.
+Le déploiement du service peut prendre plusieurs minutes.
 
-## Clean up resources
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-If you don't plan to use the logged metrics and artifacts in your workspace, the ability to delete them individually is currently unavailable. Instead, delete the resource group that contains the storage account and workspace, so you don't incur any charges:
+Si vous ne prévoyez pas d’utiliser les métriques et artefacts enregistrés dans votre espace de travail, la possibilité de les supprimer individuellement est actuellement indisponible. Au lieu de cela, supprimez le groupe de ressources contenant le compte de stockage et l’espace de travail afin d’éviter des frais supplémentaires :
 
-1. In the Azure portal, select **Resource groups** on the far left.
+1. Dans le portail Azure, sélectionnez **Groupes de ressources** tout à gauche.
 
-   ![Delete in the Azure portal](./media/how-to-use-mlflow/delete-resources.png)
+   ![Supprimer dans le portail Azure](./media/how-to-use-mlflow/delete-resources.png)
 
-1. From the list, select the resource group you created.
+1. À partir de la liste, sélectionnez le groupe de ressources créé.
 
-1. Select **Delete resource group**.
+1. Sélectionnez **Supprimer le groupe de ressources**.
 
-1. Enter the resource group name. Then select **Delete**.
+1. Entrez le nom du groupe de ressources. Puis sélectionnez **Supprimer**.
 
- -->
+## <a name="example-notebooks"></a>Exemples de notebooks
 
- ## <a name="example-notebooks"></a>Exemples de notebooks
+Les [notebooks MLflow avec Azure Machine Learning](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/track-and-monitor-experiments/using-mlflow) illustrent et développent les concepts abordés dans cet article.
 
-Les [notebooks MLflow avec Azure Machine Learning](https://aka.ms/azureml-mlflow-examples) illustrent et développent les concepts abordés dans cet article.
+> [!NOTE]
+> Vous trouverez un référentiel communautaire d’exemples utilisant mlflow sur https://github.com/Azure/azureml-examples.
 
 ## <a name="next-steps"></a>Étapes suivantes
+
 * [Gérez vos modèles](concept-model-management-and-deployment.md).
-* Surveillez la [dérive des données](how-to-monitor-data-drift.md) de vos modèles de production.
+* Surveillez la [dérive des données](./how-to-enable-data-collection.md) de vos modèles de production.
+* [Suivez les exécutions d’Azure Databricks avec MLflow](how-to-use-mlflow-azure-databricks.md).

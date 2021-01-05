@@ -8,18 +8,19 @@ manager: twooley
 tags: azure-resource-manager
 ms.assetid: 11245645-357d-4358-9a14-dd78e367b494
 ms.service: virtual-network
+ms.subservice: ip-services
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/07/2020
 ms.author: kumud
-ms.openlocfilehash: 946926a8a805ec3c53ea3c57dc3eded2462f7673
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c8fdba59a8d31c064745c7a1904204359b386a7f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461546"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015920"
 ---
 # <a name="configure-a-private-ip-address-for-a-vm-using-the-azure-portal"></a>Configurer une adresse IP privée pour une machine virtuelle à l’aide du portail Azure
 

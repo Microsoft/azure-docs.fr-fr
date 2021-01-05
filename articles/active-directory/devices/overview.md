@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: devices
 ms.topic: overview
-ms.date: 03/26/2020
+ms.date: 07/20/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ba0630474224c34eb96429cd7592028362e03381
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 8399f7101697af429b8c073c101dbfea203e98ea
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82024436"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87025589"
 ---
 # <a name="what-is-a-device-identity"></a>Qu’est-ce qu’une identité d’appareil ?
 
@@ -45,9 +45,9 @@ Pour obtenir un appareil à Azure AD, vous avez plusieurs options :
 - **Appareil joints à Azure AD**
    - Les appareils joints à Azure AD appartiennent à une organisation et sont connectés avec un compte Azure AD appartenant à cette organisation. Ils existent uniquement dans le cloud.
       - Windows 10 
-      - Windows Server 2019 (Server Core non pris en charge)
+      - [Machines virtuelles Windows Server 2019 s’exécutant dans Azure](howto-vm-sign-in-azure-ad-windows.md) (Server Core n’est pas pris en charge)
 - **joints à Azure AD hybrides**
-   - Les appareils joints à une version hybride d’Azure AD appartiennent à une organisation et sont connectés avec un compte Azure AD appartenant à cette organisation. Ils existent dans le cloud et en local.
+   - Les appareils joints à une version hybride d’Azure AD appartiennent à une organisation et la connexion à ces appareils s’effectue avec un compte des services de domaine Active Directory appartenant à cette organisation. Ils existent dans le cloud et en local.
       - Windows 7, 8.1 ou 10
       - Windows Server 2008 ou version ultérieure
 

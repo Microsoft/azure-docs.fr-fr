@@ -10,14 +10,19 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 02/12/2019
 ms.author: maheshb
-ms.openlocfilehash: 5b2b8871d868e827532f23c7ef4f14fb00afb5bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 986a7c8f1282b76c2ae94eebcc2c31dc3b3e7cad
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74072804"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352012"
 ---
 # <a name="configure-your-custom-autosuggest-experience"></a>Configurer votre expérience de Suggestion automatique personnalisée
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 La suggestion automatique personnalisée retourne une liste de suggestions de chaînes de requête qui correspondent à votre recherche. Les chaînes de requête suggérées sont basées sur la chaîne de requête partielle qui est fournie par l’utilisateur dans la zone de recherche. La liste contient un maximum de 10 suggestions. 
 
@@ -88,6 +93,6 @@ Si l’utilisateur sélectionne une chaîne de requête suggérée dans la liste
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Obtenir des suggestions personnalisées](./get-custom-suggestions.md)
+- [Obtenir des suggestions personnalisées]()
 - [Rechercher votre instance personnalisée](./search-your-custom-view.md)
 - [Configurer et consommer l’interface utilisateur hébergée personnalisée](./hosted-ui.md)

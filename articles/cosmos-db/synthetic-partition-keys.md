@@ -2,18 +2,20 @@
 title: Créer une clé de partition synthétique dans Azure Cosmos DB
 description: Découvrez comment utiliser des clés de partition synthétiques dans vos conteneurs Azure Cosmos pour distribuer les données et la charge de travail uniformément entre les clés
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 12/03/2019
 author: markjbrown
 ms.author: mjbrown
-ms.openlocfilehash: e8786c2d6e93c18a5bf9856a5555d6b528f842c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6b8bc44f1ba5624c37620205aaa574e618ef395f
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75441216"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340649"
 ---
 # <a name="create-a-synthetic-partition-key"></a>Créer une clé de partition synthétique
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Il est recommandé de disposer d’une clé de partition comportant de nombreuses valeurs distinctes (plusieurs centaines ou plusieurs milliers). L'objectif est de répartir vos données et votre charge de travail de manière uniforme entre les éléments associés à ces valeurs de clé de partition. En l’absence d’une telle propriété dans vos données, vous pouvez construire une *clé de partition synthétique*. Ce document décrit plusieurs techniques de base permettant de générer une clé de partition synthétique pour votre conteneur Cosmos.
 
@@ -58,7 +60,7 @@ Avec cette stratégie, les écritures sont uniformément réparties sur les vale
 
 Pour en savoir plus sur le concept de partitionnement, consultez les articles suivants :
 
-* En savoir plus sur les [partitions logiques](partition-data.md).
+* En savoir plus sur les [partitions logiques](partitioning-overview.md).
 * Découvrez comment [approvisionner le débit sur des conteneurs et bases de données Azure Cosmos](set-throughput.md).
 * Découvrez comment [approvisionner le débit sur un conteneur Azure Cosmos](how-to-provision-container-throughput.md).
 * Découvrez comment [approvisionner le débit sur une base de données Azure Cosmos](how-to-provision-database-throughput.md).

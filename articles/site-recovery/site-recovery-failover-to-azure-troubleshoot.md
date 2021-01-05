@@ -9,12 +9,12 @@ ms.topic: article
 ms.workload: storage-backup-recovery
 ms.date: 01/08/2020
 ms.author: mayg
-ms.openlocfilehash: 54e44a12f593d2074eefe5b2ff890863db3199f7
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: d2a0444483c382da7c54accf7dca49d097671771
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478953"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92371985"
 ---
 # <a name="troubleshoot-errors-when-failing-over-vmware-vm-or-physical-machine-to-azure"></a>Résoudre les erreurs se produisant lors du basculement d’une machine virtuelle VMware ou d'une machine physique vers Azure
 
@@ -46,7 +46,7 @@ Site Recovery n’a pas pu créer de machine virtuelle basculée dans Azure. Cel
 
 Pour afficher une machine dans Azure, l’environnement Azure exige que certains pilotes soient à l’état Démarrage et que des services comme DHCP soient à l’état Démarrage automatique. Au moment du basculement, l’activité d’alimentation convertit donc le type de démarrage des **pilotes atapi, intelide, storflt, vmbus et storvsc** en Démarrage, et celui de certains services comme DHCP en Démarrage automatique. Cette activité peut échouer en raison de problèmes propres à l’environnement. 
 
-Pour modifier manuellement le type de démarrage des pilotes pour **SE invité Windows**, suivez les étapes ci-dessous :
+Pour modifier manuellement le type de démarrage des pilotes pour **SE invité Windows** , suivez les étapes ci-dessous :
 
 1. [Téléchargez](https://download.microsoft.com/download/5/D/6/5D60E67C-2B4F-4C51-B291-A97732F92369/Script-no-hydration.ps1) le script de non-alimentation, puis exécutez-le de la façon suivante. Ce script détermine si la machine virtuelle a besoin d’une alimentation.
 
@@ -54,9 +54,11 @@ Pour modifier manuellement le type de démarrage des pilotes pour **SE invité W
 
     Il donne le résultat suivant si une alimentation est nécessaire :
 
-        REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc           start =  3 expected value =  0
+    ```output
+    REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc           start =  3 expected value =  0
 
-        This system doesn't meet no-hydration requirement.
+    This system doesn't meet no-hydration requirement.
+    ```
 
     Dans le cas où la machine virtuelle remplit l’exigence de non-alimentation, le script donne le résultat « This system meets no-hydration requirement ». Tous les pilotes et services se trouvent à l’état requis par Azure ; l’alimentation n’est pas nécessaire sur la machine virtuelle.
 
@@ -65,28 +67,34 @@ Pour modifier manuellement le type de démarrage des pilotes pour **SE invité W
     `.\Script-no-hydration.ps1 -set`
     
     Il convertit le type de démarrage des pilotes et donne le résultat ci-dessous :
-    
-        REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc           start =  3 expected value =  0 
 
-        Updating registry:  REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc   start =  0 
+    ```output
+    REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc           start =  3 expected value =  0
 
-        This system is now no-hydration compatible. 
+    Updating registry:  REGISTRY::HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\services\storvsc   start =  0
+
+    This system is now no-hydration compatible.
+    ```
 
 ## <a name="unable-to-connectrdpssh-to-the-failed-over-virtual-machine-due-to-grayed-out-connect-button-on-the-virtual-machine"></a>Impossible de se connecter ou d’établir une liaison RDP ou SSH à la machine virtuelle après son basculement, car le bouton Se connecter est grisé
 
+Pour obtenir des instructions détaillées de résolution des problèmes liés à RDP, consultez notre documentation [ici](../virtual-machines/troubleshooting/troubleshoot-rdp-connection.md).
+
+Pour obtenir des instructions détaillées sur la résolution des problèmes liés à SSH, consultez notre documentation [ici](../virtual-machines/troubleshooting/troubleshoot-ssh-connection.md).
+
 Si le bouton **Se connecter** de la machine virtuelle basculée dans Azure est grisé et que vous n’avez pas établi de connexion ExpressRoute ou réseau privé virtuel de site à site à Azure :
 
-1. Accédez à **Machine virtuelle** > **Réseaux**, cliquez sur le nom de l’interface réseau concernée.  ![interface-réseau](media/site-recovery-failover-to-azure-troubleshoot/network-interface.PNG)
-2. Accédez à **Configurations d’adresses IP**, puis cliquez sur le champ Nom de la configuration d’adresse IP souhaitée. ![Configurations d’adresses IP](media/site-recovery-failover-to-azure-troubleshoot/IpConfigurations.png)
-3. Pour activer l’adresse IP publique, cliquez sur **Activer**. ![Activer l’adresse IP](media/site-recovery-failover-to-azure-troubleshoot/Enable-Public-IP.png)
-4. Cliquez sur **Configurer les paramètres requis** > **Créer**. ![Créer](media/site-recovery-failover-to-azure-troubleshoot/Create-New-Public-IP.png)
-5. Entrez le nom de l’adresse publique, choisissez les options par défaut pour **SKU** et **Affectation**, puis cliquez sur **OK**.
-6. Pour enregistrer les modifications, cliquez sur **Enregistrer**.
+1. Accédez à **Machine virtuelle** > **Réseaux** , cliquez sur le nom de l’interface réseau concernée.  ![Capture d'écran représentant la page Réseaux d'une machine virtuelle, sur laquelle le nom de l'interface réseau est sélectionné.](media/site-recovery-failover-to-azure-troubleshoot/network-interface.PNG)
+2. Accédez à **Configurations d’adresses IP** , puis cliquez sur le champ Nom de la configuration d’adresse IP souhaitée. ![Capture d'écran représentant la page Configurations d'adresses IP de l'interface réseau, sur laquelle le nom de la configuration d'adresses IP est sélectionné.](media/site-recovery-failover-to-azure-troubleshoot/IpConfigurations.png)
+3. Pour activer l’adresse IP publique, cliquez sur **Activer** . ![Activer l’adresse IP](media/site-recovery-failover-to-azure-troubleshoot/Enable-Public-IP.png)
+4. Cliquez sur **Configurer les paramètres requis** > **Créer** . ![Créer](media/site-recovery-failover-to-azure-troubleshoot/Create-New-Public-IP.png)
+5. Entrez le nom de l’adresse publique, choisissez les options par défaut pour **SKU** et **Affectation** , puis cliquez sur **OK** .
+6. Pour enregistrer les modifications, cliquez sur **Enregistrer** .
 7. Fermez les panneaux et accédez à la section **Vue d’ensemble** de la machine virtuelle pour vous connecter/établir une liaison RDP.
 
 ## <a name="unable-to-connectrdpssh---vm-connect-button-available"></a>Impossible de se connecter/RDP/SSH – Le bouton Se connecter de la machine virtuelle est disponible
 
-Si le bouton **Se connecter** de la machine virtuelle basculée dans Azure est disponible (s’il n’est pas grisé), cochez **Diagnostics de démarrage** sur votre machine virtuelle et recherchez les erreurs mentionnées dans [cet article](../virtual-machines/windows/boot-diagnostics.md).
+Si le bouton **Se connecter** de la machine virtuelle basculée dans Azure est disponible (s’il n’est pas grisé), cochez **Diagnostics de démarrage** sur votre machine virtuelle et recherchez les erreurs mentionnées dans [cet article](../virtual-machines/troubleshooting/boot-diagnostics.md).
 
 1. Si la machine virtuelle n’a pas démarré, tentez de basculer vers un point de récupération plus ancien.
 2. Si l’application de la machine virtuelle n’est pas disponible, tentez de basculer vers un point de récupération cohérent au niveau application.
@@ -112,17 +120,21 @@ Si vous êtes en mesure de vous connecter à la machine à l’aide du protocole
 
 * Si le système d’exploitation de le la machine est Red Hat ou Oracle Linux 7.*/8.0, exécutez la commande suivante sur la machine virtuelle Azure de basculement avec les autorisations racine. Redémarrez la machine virtuelle après avoir exécuté la commande.
 
-        grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
+  ```console
+  grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
+  ```
 
 * Si le système d’exploitation de le la machine est CentOS 7*, exécutez la commande suivante sur la machine virtuelle Azure de basculement avec les autorisations racine. Redémarrez la machine virtuelle après avoir exécuté la commande.
 
-        grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg
+  ```console
+  grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg
+  ```
 
 ## <a name="unexpected-shutdown-message-event-id-6008"></a>Message d’arrêt inattendu (ID d’événement 6008)
 
 Lors du démarrage d’un machine virtuelle Windows après le basculement, si un message d’arrêt inattendu s’affiche sur la machine virtuelle récupérée, cela indique qu’un état d’arrêt de la machine virtuelle n’a pas été capturé dans le point de récupération utilisé pour le basculement. Cela se produit lorsque vous récupérez à un point où la machine virtuelle n'avait pas été complètement arrêtée.
 
-Il ne s’agit normalement pas d’une source de préoccupation et cela peut généralement être ignoré pour les basculements non planifiés. Si le basculement est planifié, assurez-vous que la machine virtuelle a été correctement arrêtée avant le basculement et patientez suffisamment pour que les données de réplication locales en attente soient envoyées à Azure. Utilisez ensuite l’option **Plus récent** sur l’[écran de basculement](site-recovery-failover.md#run-a-failover) pour que toutes les données en attente sur Azure soient traitées en un point de récupération, qui est ensuite utilisé pour le basculement de la machine virtuelle.
+Il ne s’agit normalement pas d’une source de préoccupation et cela peut généralement être ignoré pour les basculements non planifiés. Si le basculement est planifié, assurez-vous que la machine virtuelle a été correctement arrêtée avant le basculement et patientez suffisamment pour que les données de réplication locales en attente soient envoyées à Azure. Utilisez ensuite l’option **Plus récent** sur l’ [écran de basculement](site-recovery-failover.md#run-a-failover) pour que toutes les données en attente sur Azure soient traitées en un point de récupération, qui est ensuite utilisé pour le basculement de la machine virtuelle.
 
 ## <a name="unable-to-select-the-datastore"></a>Impossible de sélectionner la banque de données
 
@@ -156,7 +168,7 @@ Pour résoudre le problème :
 
 2. Si la sortie des commandes précédentes indique que des paramètres http_proxy ou https_proxy sont définis, utilisez une des méthodes suivantes pour débloquer les communications de la cible maître avec le serveur de configuration :
    
-   - Téléchargez l’[outil PsExec](https://aka.ms/PsExec).
+   - Téléchargez l’[outil PsExec](/sysinternals/downloads/psexec).
    - Utilisez l’outil pour accéder au contexte d’utilisateur système et déterminez si l’adresse du proxy est configurée. 
    - Si le proxy est configuré, ouvrez Internet Explorer dans un contexte d’utilisateur système à l’aide de l’outil PsExec.
   
@@ -170,7 +182,7 @@ Pour résoudre le problème :
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Résoudre les problèmes de [connexion à la machine virtuelle Windows via RDP](../virtual-machines/windows/troubleshoot-rdp-connection.md)
-- Résoudre les problèmes de [connexion à la machine virtuelle Linux via SSH](../virtual-machines/linux/detailed-troubleshoot-ssh-connection.md)
+- Résoudre les problèmes de [connexion à la machine virtuelle Windows via RDP](../virtual-machines/troubleshooting/troubleshoot-rdp-connection.md)
+- Résoudre les problèmes de [connexion à la machine virtuelle Linux via SSH](../virtual-machines/troubleshooting/detailed-troubleshoot-ssh-connection.md)
 
-Si vous avez besoin d’aide supplémentaire, posez votre question sur le [Forum Site Recovery](https://social.msdn.microsoft.com/Forums/azure/home?forum=hypervrecovmgr) ou laissez un commentaire à la fin de ce document. Notre communauté est active et doit être en mesure de vous aider.
+Si vous avez besoin d’aide supplémentaire, posez votre question sur la [Page de questions Microsoft Q&A pour Site Recovery](/answers/topics/azure-site-recovery.html) ou laissez un commentaire à la fin de ce document. Notre communauté est active et doit être en mesure de vous aider.

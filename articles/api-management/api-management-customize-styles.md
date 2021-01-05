@@ -11,15 +11,15 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.custom: mvc
-ms.topic: tutorial
+ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 664686511df8f310295a9f6ed6bc689b3a999544
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0cdad245981ad02d3cdaefba447d131c775e242f
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75430731"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93145767"
 ---
 # <a name="customize-the-style-of-the-developer-portal-pages"></a>Personnaliser le style des pages du portail des développeurs
 
@@ -31,7 +31,7 @@ Les trois façons les plus courantes de personnaliser le portail des développeu
 
 Dans cet article, vous allez apprendre à personnaliser le style des éléments des pages du portail des **développeurs** hérité et à afficher vos modifications.
 
-![Personnaliser le style](./media/modify-developer-portal-style/developer_portal.png)
+![Capture d’écran indiquant l’endroit où modifier vos paramètres dans le portail des développeurs hérité.](./media/modify-developer-portal-style/developer_portal.png)
 
 [!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 
@@ -49,7 +49,7 @@ Dans cet article, vous allez apprendre à personnaliser le style des éléments 
 2. Cliquez sur le bouton **Portail des développeurs (hérité)** en haut de la fenêtre **Vue d’ensemble**.
 3. Sur le côté supérieur gauche de l’écran, une icône composée de deux pinceaux apparaît. Placez le curseur de la souris au-dessus de cette icône pour ouvrir le menu de personnalisation du portail.
 
-    ![Personnaliser le style](./media/modify-developer-portal-style/modify-developer-portal-style01.png)
+    ![Capture d’écran mettant en évidence l’icône avec deux pinceaux.](./media/modify-developer-portal-style/modify-developer-portal-style01.png)
 4. Sélectionnez **Styles** dans le menu pour ouvrir le volet de personnalisation du style.
 
     Tous les éléments que vous pouvez personnaliser à l’aide de **Styles** apparaissent dans la page.

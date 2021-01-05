@@ -1,18 +1,18 @@
 ---
 title: 'Passerelle VPN Azure : Exigences de chiffrement'
-description: Cet article aborde les exigences de chiffrement et les passerelles VPN Azure
+description: En savoir plus sur la configuration des passerelles VPN Azure pour satisfaire les exigences de chiffrement pour les tunnels VPN S2S entre différents locaux et les connexions de réseau virtuel à réseau virtuel d’Azure.
 services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 12/02/2020
 ms.author: yushwang
-ms.openlocfilehash: 93e13592d9c434b159ad4f4c10ef30328941c64e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 47d14c5ee7f6c4816bf15351e9cb28a2aaa72b4c
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75902822"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96546843"
 ---
 # <a name="about-cryptographic-requirements-and-azure-vpn-gateways"></a>À propos des exigences de chiffrement et des passerelles VPN Azure
 
@@ -20,7 +20,7 @@ Cet article explique comment configurer des passerelles VPN Azure pour satisfair
 
 ## <a name="about-ikev1-and-ikev2-for-azure-vpn-connections"></a>À propos des protocoles IKEv1 et IKEv2 pour les connexions Azure VPN
 
-Jusqu’à présent, nous autorisions les connexions IKEv1 uniquement pour les références SKU De base et nous autorisions les connexions IKEv2 pour toutes les autres références SKU de passerelle VPN. À cause de la limitation des références SKU De base à une seule connexion autorisée et à d’autres limitations comme les performances, les clients qui utilisaient des appareils d’ancienne génération prenant uniquement en charge les protocoles IKEv1 avaient une expérience limitée. Pour améliorer l’expérience des clients utilisant les protocoles IKEv1, nous autorisons maintenant les connexions IKEv1 pour toutes les références SKU de passerelle VPN, à l’exception du SKU de base. Pour plus d’informations, consultez [Références SKU de passerelle VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsku).
+Jusqu’à présent, nous autorisions les connexions IKEv1 uniquement pour les références SKU De base et nous autorisions les connexions IKEv2 pour toutes les autres références SKU de passerelle VPN. À cause de la limitation des références SKU De base à une seule connexion autorisée et à d’autres limitations comme les performances, les clients qui utilisaient des appareils d’ancienne génération prenant uniquement en charge les protocoles IKEv1 avaient une expérience limitée. Pour améliorer l’expérience des clients utilisant les protocoles IKEv1, nous autorisons maintenant les connexions IKEv1 pour toutes les références SKU de passerelle VPN, à l’exception du SKU de base. Pour plus d’informations, consultez [Références SKU de passerelle VPN](./vpn-gateway-about-vpn-gateway-settings.md#gwsku).
 
 ![Connexions IKEv1 et IKEv2 pour les passerelles VPN Azure](./media/vpn-gateway-about-compliance-crypto/ikev1-ikev2-connections.png)
 
@@ -29,6 +29,8 @@ Lorsque des connexions IKEv1 et IKEv2 sont utilisées pour la même passerelle V
 ## <a name="about-ipsec-and-ike-policy-parameters-for-azure-vpn-gateways"></a>À propos des paramètres de stratégie IPsec et IKE pour les passerelles VPN Azure
 
 La norme de protocole IPsec et IKE standard prend en charge un vaste éventail d’algorithmes de chiffrement dans différentes combinaisons. Si vous n’exigez pas une combinaison spécifique de paramètres et d’algorithmes de chiffrement, les passerelles VPN Azure utilisent un ensemble de propositions par défaut. Les jeux de stratégies par défaut ont été choisis pour optimiser l’interopérabilité avec un large éventail d’appareils VPN tiers dans des configurations par défaut. Par conséquent, les stratégies et le nombre de propositions ne peuvent pas couvrir toutes les combinaisons d’algorithmes de chiffrement disponibles et de forces de clé disponibles.
+
+### <a name="default-policy"></a>Stratégie par défaut
 
 La stratégie par défaut définie pour la passerelle VPN Azure est listée dans l’article : [À propos des périphériques VPN et des paramètres IPsec/IKE pour les connexions de passerelle VPN site à site](vpn-gateway-about-vpn-devices.md).
 

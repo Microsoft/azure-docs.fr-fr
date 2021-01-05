@@ -1,23 +1,24 @@
 ---
 title: Ajouter une barre d’outils de dessin à une carte | Microsoft Azure Maps
 description: Comment ajouter une barre d’outils de dessin à une carte à l’aide du kit de développement logiciel (SDK) web Azure Maps
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 09/04/2019
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: bebf1ddfbca3aec5a551193609381cf3510bc3ac
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: b00628ec5a9f41b027bf90b93421f3aa1404e97a
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334497"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896393"
 ---
 # <a name="add-a-drawing-tools-toolbar-to-a-map"></a>Ajouter une barre d’outils de dessin à une carte
 
-Cet article explique comment utiliser le module Outils de dessin et afficher la barre d’outils de dessin sur la carte. Le contrôle [DrawingToolbar](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar?view=azure-node-latest) ajoute la barre d’outils de dessin sur la carte. Vous allez apprendre à créer des cartes avec un seul et tous les outils de dessin et à personnaliser le rendu des formes de dessin dans le gestionnaire de dessins.
+Cet article explique comment utiliser le module Outils de dessin et afficher la barre d’outils de dessin sur la carte. Le contrôle [DrawingToolbar](/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar) ajoute la barre d’outils de dessin sur la carte. Vous allez apprendre à créer des cartes avec un seul et tous les outils de dessin et à personnaliser le rendu des formes de dessin dans le gestionnaire de dessins.
 
 ## <a name="add-drawing-toolbar"></a>Ajouter une barre d’outils de dessin
 
@@ -37,7 +38,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Ajouter une barre d’outils de dessin" src="//codepen.io/azuremaps/embed/ZEzLeRg/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Ajouter une barre d’outils de dessin" src="//codepen.io/azuremaps/embed/ZEzLeRg/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez le stylet <a href='https://codepen.io/azuremaps/pen/ZEzLeRg/'>Add drawing toolbar</a> (Ajouter une barre d’outils de dessin) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -61,7 +62,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Ajouter un outil de dessin de polygone" src="//codepen.io/azuremaps/embed/OJLWWMy/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Ajouter un outil de dessin de polygone" src="//codepen.io/azuremaps/embed/OJLWWMy/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez le stylet <a href='https://codepen.io/azuremaps/pen/OJLWWMy/'>Add a polygon drawing tool</a> (Ajouter un outil de dessin de polygone) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -121,7 +122,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Modifier le style de rendu de dessin" src="//codepen.io/azuremaps/embed/OJLWpyj/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Modifier le style de rendu de dessin" src="//codepen.io/azuremaps/embed/OJLWpyj/?height=265&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez la page <a href='https://codepen.io/azuremaps/pen/OJLWpyj/'>Modifier le style de rendu de dessin</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -142,10 +143,10 @@ Découvrez comment utiliser les fonctionnalités supplémentaires du module Outi
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [Map](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map?view=azure-iot-typescript-latest)
+> [Map](/javascript/api/azure-maps-control/atlas.map)
 
 > [!div class="nextstepaction"]
-> [Barre d’outils de dessin](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar?view=azure-node-latest)
+> [Barre d’outils de dessin](/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar)
 
 > [!div class="nextstepaction"]
-> [Gestionnaire de dessins](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager?view=azure-node-latest)
+> [Gestionnaire de dessins](/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager)

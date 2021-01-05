@@ -6,15 +6,15 @@ ms.author: avverma
 ms.topic: troubleshooting
 ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
-ms.date: 11/16/2017
+ms.date: 06/25/2020
 ms.reviwer: jushiman
 ms.custom: avverma
-ms.openlocfilehash: 2ef50704d96cc51881594c778d1a4b109a1eae82
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 11302c301bee466f678d544d0c4838c39cec9c8e
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125143"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91818538"
 ---
 # <a name="troubleshooting-autoscale-with-virtual-machine-scale-sets"></a>Dépannage de la mise à l’échelle automatique avec des jeux de mise à l’échelle de machine virtuelle
 **Problème** : vous avez créé une infrastructure de mise à l’échelle automatique dans Azure Resource Manager à l’aide de groupes de machines virtuelles identiques (par exemple en déployant un modèle comme https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-bottle-autoscale ), vos règles de mise à l’échelle sont définies et fonctionnent très bien, sauf que, quelle que soit la charge placée sur les machines virtuelles, elle n’est pas mise à l’échelle automatiquement.
@@ -23,7 +23,7 @@ ms.locfileid: "83125143"
 Parmi les éléments à prendre en considération :
 
 * De combien de processeurs virtuels chaque machine virtuelle dispose-t-elle et chargez-vous chaque processeur virtuel ?
-  L’exemple de modèle Azure QuickStart précédent a un script do_work.php, qui charge un seul processeur virtuel. Si vous utilisez une machine virtuelle plus volumineuse qu’une machine virtuelle à un seul processeur virtuel telle qu’une machine Standard_A1 ou D1, vous devez exécuter cette charge plusieurs fois. Vérifiez le nombre de processeurs virtuels de vos machines virtuelles en consultant [Tailles des machines virtuelles Windows dans Azure](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+  L’exemple de modèle Azure QuickStart précédent a un script do_work.php, qui charge un seul processeur virtuel. Si vous utilisez une machine virtuelle plus volumineuse qu’une machine virtuelle à un seul processeur virtuel telle qu’une machine Standard_A1 ou D1, vous devez exécuter cette charge plusieurs fois. Vérifiez le nombre de processeurs virtuels de vos machines virtuelles en consultant [Tailles des machines virtuelles Windows dans Azure](../virtual-machines/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 * Combien de machines virtuelles sont dans le groupe de machines virtuelles identique et travaillez-vous sur chacune d’elles ?
   
     La mise à l’échelle augmente uniquement lorsque l’utilisation moyenne du processeur sur **toutes** les machines virtuelles d’un groupe identique dépasse la valeur seuil, sur la période définie dans les règles de mise à l’échelle automatique.
@@ -73,7 +73,7 @@ Parmi les éléments à prendre en considération :
     Si les données ne sont pas visibles, cela implique que le problème provient de l’extension de diagnostic en cours d’exécution sur les machines virtuelles. Si les données sont présentes, cela implique un problème lié à vos règles de mise à l’échelle ou au service Insights. Vérifiez le [statut Azure](https://azure.microsoft.com/status/).
     
     Une fois que vous avez effectué ces étapes, si vous rencontrez toujours des problèmes de mise à l’échelle automatique, vous pouvez essayer les ressources suivantes : 
-    * Lire les forums sur [MSDN](https://social.msdn.microsoft.com/forums/azure/home?forum=WAVirtualMachinesforWindows) ou [Stack Overflow](https://stackoverflow.com/questions/tagged/azure) 
+    * Lisez les forums à partir de la [page de questions Microsoft Q&A ](/answers/topics/azure-virtual-machines.html) ou de [Stack Overflow](https://stackoverflow.com/questions/tagged/azure). 
     * Enregistrez un appel au support. Soyez prêt à partager le modèle et une vue de vos données de performance.
 
 [audit]: ./media/virtual-machine-scale-sets-troubleshoot/image3.png

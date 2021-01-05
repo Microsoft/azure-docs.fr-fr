@@ -6,12 +6,12 @@ author: yunjchoi
 ms.topic: conceptual
 ms.date: 11/04/2019
 ms.author: yunjchoi
-ms.openlocfilehash: 03bb7b786280dfcbb64190adac51b8d001d59c18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e8921152177d3e4534ca9fb48cf209aed6e1b27c
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79126610"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96183360"
 ---
 # <a name="azure-kubernetes-service-diagnostics-preview-overview"></a>Vue d’ensemble des diagnostics d’Azure Kubernetes Service
 
@@ -82,5 +82,7 @@ La gestion de la sécurité et des identités détecte les erreurs d’authentif
 ## <a name="next-steps"></a>Étapes suivantes
 
 Collectez les journaux pour faciliter la résolution des problèmes de votre cluster à l’aide d'[AKS Periscope](https://aka.ms/aksperiscope).
+
+Consultez la [section relative aux pratiques de triage](/azure/architecture/operator-guides/aks/aks-triage-practices) du Guide des opérations AKS (2e journée).
 
 Publiez vos questions ou vos commentaires sur [UserVoice](https://feedback.azure.com/forums/914020-azure-kubernetes-service-aks) en ajoutant « [Diag] » dans le titre.

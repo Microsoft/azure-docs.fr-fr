@@ -8,15 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
-ms.date: 06/04/2019
+ms.date: 05/26/2020
 ms.author: swmachan
-ms.custom: seodec18
-ms.openlocfilehash: aa43312e16b2c1777ab9a1f1668cc4ea9c9d18e4
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 7288087bfe7d2a7bb03ce8a99831ad8b7f5b549f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588460"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83995613"
 ---
 # <a name="how-to-receive-word-alignment-information"></a>Guide pratique pour recevoir des informations concernant l’alignement des mots
 

@@ -3,32 +3,29 @@ title: Vue d’ensemble de Cloudyn dans Azure
 description: Cloudyn est une solution de gestion des coûts multicloud qui vous aide à utiliser Azure et autres ressources cloud.
 author: bandersmsft
 ms.author: banders
-ms.date: 03/12/2020
+ms.date: 10/23/2020
 ms.topic: overview
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.reviewer: benshy
 ms.custom: seodec18
 ROBOTS: NOINDEX
-ms.openlocfilehash: 9e1acee631316ec961af364769daa1f2a3001e72
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 74d171a4c694f6d720ec3882f97d18e43aecc63f
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80065878"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92543285"
 ---
 # <a name="what-is-the-cloudyn-service"></a>Qu’est-ce que le service de Cloudyn ?
 
-Cloudyn, affilié à Microsoft, vous permet de suivre l’utilisation du cloud et les dépenses liées à vos ressources Azure et celles d’autres fournisseurs de services cloud, notamment AWS et Google. Les rapports du tableau de bord vous aident à comprendre la répartition des coûts, de même que la rétrofacturation et la facturation interne. Cloudyn vous permet d’optimiser vos dépenses cloud en identifiant les ressources sous-utilisées que vous pouvez ainsi gérer et ajuster.
+Cloudyn, affilié à Microsoft, vous permet de suivre l’utilisation du cloud et les dépenses liées à vos ressources Azure. Les rapports du tableau de bord vous aident à comprendre la répartition des coûts, de même que la rétrofacturation et la facturation interne. Cloudyn vous permet d’optimiser vos dépenses cloud en identifiant les ressources sous-utilisées que vous pouvez ainsi gérer et ajuster.
 
 Pour regarder une vidéo d’introduction, consultez [Introduction to Azure Cloudyn](https://azure.microsoft.com/resources/videos/azure-cost-management-overview-and-demo/).
  
 Azure Cost Management offre des fonctionnalités similaires à Cloudyn. Azure Cost Management est une solution native de gestion des coûts Azure. Il vous permet d’analyser les coûts, de créer et de gérer des budgets, d’exporter des données, et de consulter des recommandations d’optimisation et d’agir en conséquence pour dépenser moins. Pour plus d’informations, consultez [Azure Cost Management](../cost-management-billing-overview.md).
  
 [!INCLUDE [cloudyn-note](../../../includes/cloudyn-note.md)]
-
-Regardez la [vidéo Azure Cost Management et Cloudyn](https://www.youtube.com/watch?v=15DzKPMBRxM) pour savoir quand utiliser Azure Cost Management ou Cloudyn, en fonction des besoins de votre entreprise.
- 
->[!VIDEO https://www.youtube.com/embed/15DzKPMBRxM]
 
 ## <a name="monitor-usage-and-spending"></a>Surveiller l’utilisation et les dépenses
 
@@ -55,6 +52,4 @@ Si vous avez approvisionné des instances réservées AWS, vous pouvez optimiser
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous en savez un peu plus sur Cloudyn, passez à l’étape suivante, qui consiste à inscrire votre environnement cloud et à commencer à explorer vos données.
-
-- [S’inscrire au programme pour les partenaires CSP et afficher les données de coût](quick-register-csp.md)
+- [Réviser l’utilisation et les coûts](tutorial-review-usage.md)

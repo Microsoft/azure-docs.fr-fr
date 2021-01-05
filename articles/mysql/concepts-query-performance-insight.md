@@ -1,21 +1,21 @@
 ---
 title: Query Performance Insight - Azure Database pour MySQL
 description: Cet article décrit la fonctionnalité Query Performance Insight dans Azure Database pour MySQL
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: a924f51fac6d43ae4a4530ac4f61f2e8b1f4e8c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 5/12/2020
+ms.openlocfilehash: 30457b950e6400c799f35924e7b2ee90d868a465
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79537055"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94535178"
 ---
 # <a name="query-performance-insight-in-azure-database-for-mysql"></a>Query Performance Insight dans Azure Database pour MySQL
 
-**S’applique à :** Azure Database pour MySQL 5.7
+**S’applique à :** Azure Database pour MySQL 5.7, 8.0
 
 L’analyse des performances des requêtes vous aide à identifier rapidement vos requêtes les plus longues, comment elles évoluent au fil du temps et les attentes qui les affectent.
 
@@ -51,7 +51,7 @@ L’onglet **Requêtes longues** montre les 5 requêtes dont la durée moyenne d
 
 Vous pouvez cliquer et faire glisser dans le graphique pour réduire l’affichage à une fenêtre de temps spécifique. Vous pouvez également utiliser les icônes Zoom avant et Zoom arrière pour afficher une période plus courte ou plus longue, respectivement.
 
-![Requêtes longues d’analyse des performances des requêtes](./media/concepts-query-performance-insight/query-performance-insight-landing-page.png) 
+:::image type="content" source="./media/concepts-query-performance-insight/query-performance-insight-landing-page.png" alt-text="Requêtes longues d’analyse des performances des requêtes"::: 
 
 ### <a name="wait-statistics"></a>Statistiques d’attente
 
@@ -64,7 +64,7 @@ Sélectionnez l’onglet **Statistiques sur les attentes** pour voir les visuali
 
 Les requêtes affichées dans la vue des statistiques d’attente sont regroupées en fonction des requêtes qui présentent les temps d’attente les plus longs au cours de l’intervalle indiqué.
 
-![Statistiques sur les attentes de l’analyse des performances des requêtes](./media/concepts-query-performance-insight/query-performance-insight-wait-statistics.png)
+:::image type="content" source="./media/concepts-query-performance-insight/query-performance-insight-wait-statistics.png" alt-text="Statistiques sur les attentes de l’analyse des performances des requêtes":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

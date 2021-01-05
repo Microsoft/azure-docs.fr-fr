@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/19/2017
 ms.author: alkohli
-ms.openlocfilehash: ce49dcaa06288ba9e7a4d232338c727064d59685
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 090797549cc61aa27945114e5ef8b666226b66e2
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232173"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94956991"
 ---
 # <a name="manage-your-storsimple-device-controllers"></a>Gestion de vos contrôleurs d’appareil StorSimple
 
@@ -117,7 +117,7 @@ Pour rétablir les paramètres d’usine de votre appareil Microsoft Azure Sto
    
     `Reset-HcsFactoryDefault`
    
-    Pour réinitialiser un seul contrôleur, utilisez l’applet de commande [Reset-HcsFactoryDefault](https://technet.microsoft.com/library/dn688132.aspx) avec le paramètre `-scope`.)
+    Pour réinitialiser un seul contrôleur, utilisez l’applet de commande [Reset-HcsFactoryDefault](/previous-versions/windows/powershell-scripting/dn688132(v=wps.630)) avec le paramètre `-scope`.)
    
     Le système redémarrera plusieurs fois. Un message s’affichera une fois la réinitialisation terminée. Selon le modèle du système, l’opération peut prendre 45 à 60 minutes pour un appareil 8 100 et 60 à 90 minutes pour un appareil 8 600.
    
@@ -161,4 +161,3 @@ Dans cette section, vous trouverez des réponses à certaines questions fréquem
 ## <a name="next-steps"></a>Étapes suivantes
 * Si vous rencontrez des problèmes avec vos contrôleurs d’appareil StorSimple, que vous ne pouvez pas résoudre en suivant les procédures décrites dans ce didacticiel, [contactez le support technique Microsoft](storsimple-8000-contact-microsoft-support.md).
 * Pour en savoir plus sur l’utilisation du service StorSimple Device Manager, consultez [Utilisation du service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-8000-manager-service-administration.md).
-

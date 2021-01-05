@@ -5,19 +5,19 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 08/13/2019
-ms.openlocfilehash: 92b6737f48d8d8704f461c9adac92284b323b05f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/24/2020
+ms.openlocfilehash: 2a4f24da51b9e9e78c3df3e7d1437a380306e300
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234197"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95975568"
 ---
 # <a name="connect-operations-manager-to-azure-monitor"></a>Connecter Operations Manager à Azure Monitor
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-Pour préserver vos investissements existants dans [System Center Operations Manager](https://docs.microsoft.com/system-center/scom/key-concepts?view=sc-om-1807) et utiliser des fonctionnalités étendues avec Azure Monitor, vous pouvez intégrer Operations Manager à votre espace de travail Log Analytics. Cela vous permet de tirer parti des possibilités qu’offrent les journaux d’activité d’Azure Monitor tout en continuant à utiliser Operations Manager pour :
+Pour préserver vos investissements existants dans [System Center Operations Manager](/system-center/scom/key-concepts?view=sc-om-1807) et utiliser des fonctionnalités étendues avec Azure Monitor, vous pouvez intégrer Operations Manager à votre espace de travail Log Analytics. Cela vous permet de tirer parti des possibilités qu’offrent les journaux d’activité d’Azure Monitor tout en continuant à utiliser Operations Manager pour :
 
 * Surveiller l’intégrité de vos services informatiques avec Operations Manager
 * Conserver l’intégration avec vos solutions ITSM pour la gestion des incidents et des problèmes
@@ -31,7 +31,7 @@ Le diagramme suivant représente la connexion entre les serveurs et agents d'adm
 
 ![oms-operations-manager-integration-diagram](./media/om-agents/oms-operations-manager-connection.png)
 
-Si vos stratégies de sécurité informatiques n’autorisent pas les ordinateurs sur votre réseau à se connecter à Internet, les serveurs d’administration peuvent être configurés pour se connecter à la passerelle Log Analytics afin de recevoir des informations de configuration et d’envoyer les données collectées en fonction des solutions activées. Pour plus d'informations et pour savoir comment configurer votre groupe d'administration Operations Manager afin de communiquer via une passerelle Log Analytics avec Azure Monitor, consultez [Connecter des ordinateurs à Azure Monitor en utilisant la passerelle Log Analytics](../../azure-monitor/platform/gateway.md).  
+Si vos stratégies de sécurité informatiques n’autorisent pas les ordinateurs sur votre réseau à se connecter à Internet, les serveurs d’administration peuvent être configurés pour se connecter à la passerelle Log Analytics afin de recevoir des informations de configuration et d’envoyer les données collectées en fonction des solutions activées. Pour plus d'informations et pour savoir comment configurer votre groupe d'administration Operations Manager afin de communiquer via une passerelle Log Analytics avec Azure Monitor, consultez [Connecter des ordinateurs à Azure Monitor en utilisant la passerelle Log Analytics](./gateway.md).  
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -40,7 +40,7 @@ Avant de commencer, passez en revue les exigences suivantes.
 * Azure Monitor prend uniquement en charge System Center Operations Manager 2016 ou version ultérieure, Operations Manager 2012 SP1 UR6 ou version ultérieure et Operations Manager 2012 R2 UR2 ou version ultérieure. La prise en charge du proxy a été ajoutée dans Operations Manager 2012 SP1 UR7 et Operations Manager 2012 R2 UR3.
 * L'intégration de System Center Operations Manager 2016 au cloud US Government nécessite une mise à jour du pack d'administration Advisor disponible dans le Correctif cumulatif 2 ou version ultérieure. System Center Operations Manager 2012 R2 nécessite une mise à jour du pack d'administration Advisor disponible dans le Correctif cumulatif 3 ou version ultérieure.
 * Tous les agents Operations Manager doivent répondre aux exigences en matière de prise en charge. Vérifiez que chaque agent est au niveau minimum de mise à jour ; sinon, la communication de l’agent Windows échouera, entraînant des erreurs dans le journal des événements Operations Manager.
-* Un espace de travail Log Analytics. Pour plus d’informations, consultez [Présentation de l’espace de travail Log Analytics](design-logs-deployment.md). 
+* Un espace de travail Log Analytics. Pour plus d’informations, consultez [Présentation de l’espace de travail Log Analytics](design-logs-deployment.md).
 * Vous vous authentifiez sur Azure avec un compte qui est membre du [rôle Collaborateur Log Analytics](manage-access.md#manage-access-using-azure-permissions).
 
 * Régions prises en charge : seules les régions Azure suivantes sont prises en charge par System Center Operations Manager pour la connexion à un espace de travail Log Analytics :
@@ -95,7 +95,7 @@ Les informations ci-dessous répertorient les données de configuration de proxy
 
 ### <a name="tls-12-protocol"></a>Protocole TLS 1.2
 
-Pour garantir la sécurité des données en transit vers Azure Monitor, nous vous encourageons vivement à configurer l'agent et le groupe d'administration de façon à utiliser au moins TLS (Transport Layer Security) 1.2. Les versions antérieures de TLS/SSL (Secure Sockets Layer) se sont avérées vulnérables et bien qu’elles fonctionnent encore pour assurer la compatibilité descendante, elles sont **déconseillées**. Pour plus d’informations, passez en revue [Envoi sécurisé de données via TLS 1.2](../../azure-monitor/platform/data-security.md#sending-data-securely-using-tls-12).
+Pour garantir la sécurité des données en transit vers Azure Monitor, nous vous encourageons vivement à configurer l'agent et le groupe d'administration de façon à utiliser au moins TLS (Transport Layer Security) 1.2. Les versions antérieures de TLS/SSL (Secure Sockets Layer) se sont avérées vulnérables et bien qu’elles fonctionnent encore pour assurer la compatibilité descendante, elles sont **déconseillées**. Pour plus d’informations, passez en revue [Envoi sécurisé de données via TLS 1.2](./data-security.md#sending-data-securely-using-tls-12).
 
 ## <a name="connecting-operations-manager-to-azure-monitor"></a>Connecter Operations Manager à Azure Monitor
 
@@ -154,7 +154,7 @@ Si votre serveur proxy requiert une authentification, procédez comme suit pour 
 1. Ouvrez la console Operations Manager, puis sélectionnez l'espace de travail **Administration** .
 1. Sous **Configuration d’identification**, sélectionnez **Profils**.
 1. Ouvrez le profil **Proxy d'identification de System Center Advisor** .
-1. Dans l’Assistant Profil d’identification, cliquez sur Ajouter pour utiliser un compte d’identification. Vous pouvez créer un [compte d’identification](https://technet.microsoft.com/library/hh321655.aspx) ou utiliser un compte existant. Ce compte doit disposer des autorisations suffisantes pour franchir le serveur proxy.
+1. Dans l’Assistant Profil d’identification, cliquez sur Ajouter pour utiliser un compte d’identification. Vous pouvez créer un [compte d’identification](/previous-versions/system-center/system-center-2012-R2/hh321655(v=sc.12)) ou utiliser un compte existant. Ce compte doit disposer des autorisations suffisantes pour franchir le serveur proxy.
 1. Pour définir le compte à gérer, choisissez **Une classe, un groupe ou un objet sélectionné(e)** , cliquez sur **Sélectionner...** puis sur **Groupe...** Pour ouvrir la boîte de dialogue **Recherche de groupes**.
 1. Recherchez le **groupe Microsoft System Center Advisor Monitoring Server**, puis sélectionnez-le. Une fois le groupe sélectionné, cliquez sur **OK** pour fermer la zone **Recherche de groupes**.
 1. Cliquez sur **OK** pour fermer la zone **Ajouter un compte d’identification**.
@@ -173,7 +173,7 @@ Au terme de la configuration, le groupe d'administration Operations Manager éta
 * **Microsoft.SystemCenter.Advisor.MPUpdate** : met à jour les packs d'administration Azure Monitor de base. S’exécute toutes les 12 heures par défaut.
 * **Microsoft.SystemCenter.Advisor.Core.GetIntelligencePacksRule** : met à jour les packs d’administration de solution activés dans votre espace de travail. Par défaut, elle s’exécute toutes les cinq (5) minutes.
 
-Vous pouvez désactiver ces deux règles pour empêcher le téléchargement automatique, ou modifier la fréquence de la synchronisation du serveur d’administration avec Azure Monitor pour déterminer si un nouveau pack d’administration est disponible et doit être téléchargé. Suivez les étapes de la [procédure de remplacement d’une règle ou d’une analyse](https://technet.microsoft.com/library/hh212869.aspx) pour modifier la valeur en secondes du paramètre **Fréquence** afin de changer la fréquence de synchronisation, ou pour modifier le paramètre **Activé** afin de désactiver les règles. Pour le remplacement, ciblez tous les objets de la classe Groupe d’administration Operations Manager.
+Vous pouvez désactiver ces deux règles pour empêcher le téléchargement automatique, ou modifier la fréquence de la synchronisation du serveur d’administration avec Azure Monitor pour déterminer si un nouveau pack d’administration est disponible et doit être téléchargé. Suivez les étapes de la [procédure de remplacement d’une règle ou d’une analyse](/previous-versions/system-center/system-center-2012-R2/hh212869(v=sc.12)) pour modifier la valeur en secondes du paramètre **Fréquence** afin de changer la fréquence de synchronisation, ou pour modifier le paramètre **Activé** afin de désactiver les règles. Pour le remplacement, ciblez tous les objets de la classe Groupe d’administration Operations Manager.
 
 Pour continuer à suivre votre processus habituel de contrôle des modifications pour contrôler les versions du pack d’administration dans votre groupe d’administration de production, vous pouvez désactiver les règles et les activer à des heures auxquelles les mises à jour sont autorisées. Si votre environnement dispose d’un groupe d’administration du développement ou de l’assurance qualité connecté à Internet, vous pouvez configurer ce groupe d’administration avec un espace de travail Log Analytics de façon à ce qu’il prenne en charge ce scénario. Ainsi, vous pourrez examiner et évaluer les versions itératives des packs d'administration Azure Monitor avant de les introduire dans votre groupe d'administration de production.
 
@@ -193,25 +193,15 @@ Pour continuer à suivre votre processus habituel de contrôle des modifications
 
 ## <a name="validate-operations-manager-integration-with-azure-monitor"></a>Validation de l'intégration entre Operations Manager et Azure Monitor
 
-Vous pouvez vérifier que votre intégration entre Azure Monitor et Operations Manager a abouti de différentes manières.
+Utilisez la requête suivante pour obtenir les instances connectées d’Operations Manager :
 
-### <a name="to-confirm-integration-from-the-azure-portal"></a>Pour confirmer l’intégration à partir du portail Azure
-
-1. Dans le portail Azure, cliquez sur **Plus de services** dans l’angle inférieur gauche. Dans la liste de ressources, saisissez **Log Analytics**. Au fur et à mesure de la saisie, la liste est filtrée.
-1. Dans votre liste d’espaces de travail Log Analytics, sélectionnez celui voulu.  
-1. Sélectionnez **Paramètres avancés**, **Sources connectées**, puis **System Center**.
-1. Dans la table, sous la section System Center Operations Manager, vous devriez voir le nom du groupe d’administration avec le nombre d’agents et son état lors de la dernière réception de données.
-
-   ![oms-settings-connectedsources](./media/om-agents/oms-settings-connectedsources.png)
-
-### <a name="to-confirm-integration-from-the-operations-console"></a>Pour confirmer l’intégration à partir de la console Operations
-
-1. Ouvrez la console Operations Manager, puis sélectionnez l'espace de travail **Administration** .
-1. Sélectionnez **Packs d’administration**, puis, dans la zone de texte **Rechercher**, tapez **Advisor** ou **Intelligence**.
-1. En fonction des solutions activées, le pack d’administration correspondant apparaît dans les résultats de recherche.  Par exemple, si vous avez activé la solution de gestion des alertes, le pack d’administration Gestion des alertes Microsoft System Center Advisor figure dans la liste.
-1. À partir de la vue **Analyse**, accédez à la vue **Operations Management Suite\État d’intégrité**.  Sélectionnez un serveur d’administration sous le volet **État du serveur d’administration**. Ensuite, dans le volet **Vue détaillée**, confirmez que la valeur de la propriété **URI du service d’authentification** correspond bien à l’identifiant de l’espace de travail Log Analytics.
-
-   ![oms-opsmgr-mg-authsvcuri-property-ms](./media/om-agents/oms-opsmgr-mg-authsvcuri-property-ms.png)
+```azurepowershell
+union *
+| where isnotempty(MG)
+| where not(ObjectName == 'Advisor Metrics' or ObjectName == 'ManagedSpace')
+| summarize LastData = max(TimeGenerated) by lowerCasedComputerName=tolower(Computer), MG, ManagementGroupName
+| sort by lowerCasedComputerName asc
+```
 
 ## <a name="remove-integration-with-azure-monitor"></a>Suppression de l'intégration à Azure Monitor
 
@@ -354,4 +344,5 @@ Par la suite, pour reconnecter votre groupe d’administration à un espace de t
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour ajouter des fonctionnalités et collecter des données, consultez [Ajouter des solutions Azure Monitor à partir de la Galerie Solutions](../../azure-monitor/insights/solutions.md).
+Pour ajouter des fonctionnalités et collecter des données, consultez [Ajouter des solutions Azure Monitor à partir de la Galerie Solutions](../insights/solutions.md).
+

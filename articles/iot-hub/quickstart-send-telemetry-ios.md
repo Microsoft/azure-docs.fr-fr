@@ -1,6 +1,6 @@
 ---
-title: Démarrage rapide pour envoyer des données de télémétrie à Azure IoT Hub | Microsoft Docs
-description: Dans ce démarrage rapide, vous exécutez un exemple d’application iOS pour envoyer des données de télémétrie simulées à un hub IoT et lire les données de télémétrie provenant du hub IoT à traiter dans le cloud.
+title: Démarrage rapide de l’envoi de télémétrie à Azure IoT Hub (iOS)
+description: Exécutez un exemple d’application iOS pour envoyer une télémétrie simulée à un hub IoT et lire les données de télémétrie provenant du hub IoT à traiter dans le cloud.
 author: wesmc7777
 manager: philmea
 ms.author: wesmc
@@ -10,13 +10,14 @@ ms.topic: quickstart
 ms.custom:
 - mvc
 - mqtt
+- devx-track-azurecli
 ms.date: 04/03/2019
-ms.openlocfilehash: dd6ad0a3bc20821f51fcb4637dd4af18a6c3ec84
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 1a8ba18e1e690e6be2b552bd37605ef638b2b47d
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81769141"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843228"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-ios"></a>Démarrage rapide : Envoyer des données de télémétrie à partir d’un appareil vers un hub IoT (iOS)
 
@@ -26,9 +27,7 @@ IoT Hub est un service Azure qui vous permet de traiter de gros volumes de donn�
 
 Cet article utilise une application Swift prédéfinie pour envoyer des données de télémétrie, et un utilitaire CLI pour lire ces données de télémétrie provenant d’IoT Hub.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -38,16 +37,11 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 - La dernière version de [CocoaPods](https://guides.cocoapods.org/using/getting-started.html).
 
-- Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+- Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-- Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et du service IoT Hub Device Provisioning (DPS) à Azure CLI.
-
-   ```azurecli-interactive
-   az extension add --name azure-iot
-   ```
-
-   [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
+[!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 

@@ -16,12 +16,12 @@ ms.author: curtand
 ms.reviewer: hanki
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 02fbfc83c16cb13376cce820f19b247a7cd7db59
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: fe57a44a5a6fa9a631604d92419fd8f5ebcce50a
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232306"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93394728"
 ---
 # <a name="email-notifications-in-pim"></a>Notifications par e-mail dans PIM
 
@@ -79,10 +79,13 @@ La **vue d’ensemble des rôles principaux** liste les cinq rôles principaux d
 
 ## <a name="email-timing-for-activation-approvals"></a>Chronologie des e-mails pour les approbations d’activation
 
-Lorsque des utilisateurs activent leur rôle et que le paramètre de rôle nécessite une approbation, les approbateurs reçoivent trois e-mails pour chaque approbation :
+Lorsque des utilisateurs activent leur rôle et que le paramètre de rôle nécessite une approbation, les approbateurs reçoivent deux e-mails pour chaque approbation :
 
 - Demande d’approbation ou de refus de la demande d’activation de l’utilisateur (envoyée par le moteur d’approbation des demandes)
 - La demande de l’utilisateur est approuvée (envoyée par le moteur d’approbation des demandes)
+
+En outre, les administrateurs généraux et les administrateurs de rôle privilégié reçoivent un e-mail pour chaque approbation :
+
 - Le rôle de l’utilisateur est activé (envoyé par Privileged Identity Management)
 
 Les deux premiers e-mails envoyés par le moteur d’approbation des demandes peuvent être retardés. Actuellement, 90 % des e-mails prennent trois à dix minutes, mais pour 1 % des clients, ce délai peut s’avérer plus long, jusqu’à quinze minutes.

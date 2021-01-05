@@ -4,26 +4,26 @@ description: Découvrez comment fonctionnent les contrôles personnalisés dans 
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: article
-ms.date: 03/18/2020
+ms.topic: conceptual
+ms.date: 08/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: inbarc
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f8c149279a755eb186a3fdc7891e9b511d18c7f2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e7585c91e42b2d3591532756c1ead9ea60b7035e
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80050552"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94837581"
 ---
 # <a name="custom-controls-preview"></a>Contrôles personnalisés (préversion)
 
 Les contrôles personnalisés sont en préversion dans Azure Active Directory. Quand vous utilisez les contrôles personnalisés, les utilisateurs sont redirigés vers un service compatible pour satisfaire aux exigences d’authentification en dehors d’Azure Active Directory. Pour satisfaire à ce contrôle, le navigateur de l’utilisateur est redirigé vers le service externe, il effectue les opérations d’authentification nécessaires, puis il est redirigé vers Azure Active Directory. Azure Active Directory vérifie la réponse. Si l’utilisateur a été correctement authentifié ou vérifié, il continue dans le flux d’accès conditionnel.
 
 > [!NOTE]
-> Pour plus d’informations sur les changements que nous prévoyons d’apporter à la fonctionnalité Contrôle personnalisé, consultez les [Nouveautés](../fundamentals/whats-new.md#upcoming-changes-to-custom-controls) de février 2020.
+> Pour plus d’informations sur les changements que nous prévoyons d’apporter à la fonctionnalité Contrôle personnalisé, consultez l’article [Archive des nouveautés](../fundamentals/whats-new-archive.md#upcoming-changes-to-custom-controls) de février 2020.
 
 ## <a name="creating-custom-controls"></a>Création de contrôles personnalisés
 
@@ -33,11 +33,11 @@ Copiez les données JSON et collez-les dans la zone de texte correspondante. Ne 
 
 L’option permettant de créer un contrôle personnalisé se trouve dans la section **Gérer** de la page **Accès conditionnel**.
 
-![Control](./media/controls/82.png)
+![Interface de contrôles personnalisés dans l’accès conditionnel](./media/controls/custom-controls-conditional-access.png)
 
 Cliquez sur **Nouveau contrôle personnalisé** pour ouvrir un panneau contenant une zone de texte réservée aux données JSON de votre contrôle.  
 
-![Control](./media/controls/81.png)
+![Nouveau contrôle personnalisé](./media/controls/new-custom-controls-conditional-access.png)
 
 ## <a name="deleting-custom-controls"></a>Suppression de contrôles personnalisés
 
@@ -53,7 +53,7 @@ Pour modifier un contrôle personnalisé, vous devez supprimer le contrôle exis
 
 ## <a name="known-limitations"></a>Limitations connues
 
-Les contrôles personnalisés ne peuvent pas être utilisés avec l’automatisation d’Identity Protection qui nécessite Azure Multi-Factor Authentication, la réinitialisation de mot de passe en libre-service (SSPR) Azure AD, le respect des exigences de revendication Multi-Factor Authentication ou l’élévation de rôles dans Privileged Identity Manager (PIM).
+Les contrôles personnalisés ne peuvent pas être utilisés avec l’automatisation d’Identity Protection qui nécessite Azure AD Multi-Factor Authentication, la réinitialisation de mot de passe en libre-service (SSPR) Azure AD, le respect des exigences de revendication de l’authentification multifacteur, pour l’élévation de rôles dans Privileged Identity Manager (PIM), dans le cadre de l’inscription d’appareils Intune ou lors de la jonction d’appareils à Azure AD.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

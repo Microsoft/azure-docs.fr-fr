@@ -1,17 +1,17 @@
 ---
 title: Créer une application multiservice et la déployer sur Service Fabric Mesh
 description: Dans ce didacticiel, vous allez créer une application de maillage multiservice Azure Service Fabric composée d’un site web ASP.NET Core qui communique avec un service web back-end, la déboguer en local et la publier dans Azure.
-author: dkkapur
+author: georgewallace
 ms.topic: tutorial
 ms.date: 09/18/2018
-ms.author: dekapur
-ms.custom: mvc, devcenter
-ms.openlocfilehash: e3a6ee382208119e46a816790c15ae47f16be57e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: gwallace
+ms.custom: mvc, devcenter, devx-track-csharp
+ms.openlocfilehash: fa15432072f6478100a378fdbdb697556fdf1dc9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75495190"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842544"
 ---
 # <a name="tutorial-create-debug-deploy-and-upgrade-a-multi-service-service-fabric-mesh-app"></a>Tutoriel : Créer, déboguer, déployer et mettre à niveau une application Service Fabric Mesh multiservice
 
@@ -59,7 +59,7 @@ Dans le champ **Nom**, saisissez `todolistapp` et dans le champ **Emplacement**,
 
 Assurez-vous que l’option **Créer un répertoire pour la solution** est activée, puis cliquez sur **OK** pour créer le projet Service Fabric mesh.
 
-![Boîte de dialogue Nouveau projet Service Fabric mesh dans Visual studio](./media/service-fabric-mesh-tutorial-deploy-dotnetcore/visual-studio-new-project.png)
+![Capture d’écran montrant comment créer un projet Service Fabric Mesh](./media/service-fabric-mesh-tutorial-deploy-dotnetcore/visual-studio-new-project.png)
 
 Ensuite, la boîte de dialogue **Nouveau service Service Fabric** s’affiche.
 
@@ -73,7 +73,7 @@ Définissez le champ **Nom du service** sur **WebFrontEnd**. Appuyez sur **OK** 
 
 Ensuite, vous verrez la boîte de dialogue Application web ASP.NET Core. Sélectionnez **Application web**, puis cliquez sur **OK**.
 
-![Nouvelle application de ASP.NET Core dans Visual studio](./media/service-fabric-mesh-tutorial-deploy-dotnetcore/visual-studio-new-aspnetcore-app.png)
+![Capture d’écran mettant en évidence le modèle Application web](./media/service-fabric-mesh-tutorial-deploy-dotnetcore/visual-studio-new-aspnetcore-app.png)
 
 Vous disposez désormais d’une application de maillage Service Fabric. Créez ensuite le modèle pour les informations de tâche.
 

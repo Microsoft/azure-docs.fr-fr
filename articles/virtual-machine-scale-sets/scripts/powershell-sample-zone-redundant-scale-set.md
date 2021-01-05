@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: availability
 ms.date: 04/05/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 0c97206d4e2f0c0484cfd89138dde7e2b0d0c625
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: 89c3d32c1f69fa905272a07751ee64d0491d2d32
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83698631"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89067720"
 ---
 # <a name="create-a-zone-redundant-virtual-machine-scale-set-with-powershell"></a>Créer un groupe de machines virtuelles identiques redondant interzone à l’aide de PowerShell
 Ce script crée un groupe de machines virtuelles identiques exécutant Windows Server 2016 sur plusieurs zones de disponibilité. Une fois que vous avez exécuté le script, vous pouvez accéder à la machine virtuelle via RDP.
@@ -48,4 +48,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

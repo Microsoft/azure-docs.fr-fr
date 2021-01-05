@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 02/16/2017
 ms.author: genli
-ms.openlocfilehash: 1b91a39e1297d8952da67a4f8d3b8568cefe04ce
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bc796b4d9708c18f4d0612e6f3ebde9b2485d2f7
+ms.sourcegitcommit: 30505c01d43ef71dac08138a960903c2b53f2499
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73620562"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92093138"
 ---
 # <a name="troubleshoot-a-linux-vm-by-attaching-the-os-disk-to-a-recovery-vm-with-the-azure-cli"></a>Résoudre les problèmes d’une machine virtuelle Linux en attachant le disque de système d’exploitation à une machine virtuelle de récupération avec Azure CLI
 Si votre machine virtuelle Linux rencontre une erreur de démarrage ou de disque, il vous faudra éventuellement appliquer la procédure de dépannage directement sur le disque dur virtuel. Comme exemple courant, citons une entrée non valide dans `/etc/fstab` qui empêche le bon démarrage de la machine virtuelle. Cet article vous explique comment utiliser l’interface de ligne de commande Azure pour connecter votre disque dur virtuel à une autre machine virtuelle Linux pour corriger les éventuelles erreurs, puis pour régénérer votre machine virtuelle d’origine. 
@@ -36,8 +36,10 @@ Le processus de résolution de problème se présente comme suit :
 
 Pour effectuer ces étapes de dépannage, vous devez installer la dernière version [d’Azure CLI](/cli/azure/install-az-cli2) et vous connecter à un compte Azure avec [az login](/cli/azure/reference-index).
 
+Vous pouvez utiliser les commandes de réparation de machine virtuelle pour automatiser les étapes 1, 2, 3, 4, 6 et 7. Pour obtenir plus de documentation et d’instructions, consultez [Réparer une machine virtuelle Linux à l’aide des commandes de réparation de machine virtuelle Azure](repair-linux-vm-using-azure-virtual-machine-repair-commands.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+
 > [!Important]
-> Les scripts dans cet article s’appliquent uniquement aux machines virtuelles qui utilisent [Disque managé](../linux/managed-disks-overview.md). 
+> Les scripts dans cet article s’appliquent uniquement aux machines virtuelles qui utilisent [Disque managé](../managed-disks-overview.md). 
 
 Dans les exemples suivants, remplacez les noms de paramètres par vos propres valeurs, telles que `myResourceGroup` et `myVM`.
 
@@ -76,28 +78,25 @@ Ce script crée un disque managé portant le nom `myOSDisk` à partir de l’ins
 
 ```azurecli
 #Provide the name of your resource group
-$resourceGroup=myResourceGroup
+$resourceGroup="myResourceGroup"
 
 #Provide the name of the snapshot that will be used to create Managed Disks
-$snapshot=mySnapshot
+$snapshot="mySnapshot"
 
 #Provide the name of the Managed Disk
-$osDisk=myNewOSDisk
+$osDisk="myNewOSDisk"
 
 #Provide the size of the disks in GB. It should be greater than the VHD file size.
 $diskSize=128
 
 #Provide the storage type for Managed Disk. Premium_LRS or Standard_LRS.
-$storageType=Premium_LRS
+$storageType="Premium_LRS"
 
 #Provide the OS type
-$osType=linux
-
-#Provide the name of the virtual machine
-$virtualMachine=myVM
+$osType="linux"
 
 #Get the snapshot Id 
-$snapshotId=(az snapshot show --name $snapshot --resource-group $resourceGroup --query [id] -o tsv)
+$snapshotId=(az snapshot show --name $snapshot --resource-group $resourceGroup --query id -o tsv)
 
 # Create a new Managed Disks using the snapshot Id.
 
@@ -116,10 +115,10 @@ Ce script joint le disque `myNewOSDisk` à la machine virtuelle `MyTroubleshootV
 
 ```azurecli
 # Get ID of the OS disk that you just created.
-$myNewOSDiskid=(az vm show -g myResourceGroupDisk -n myNewOSDisk --query "storageProfile.osDisk.managedDisk.id" -o tsv)
+$myNewOSDiskid=(az disk show -g $resourceGroup -n $osDisk --query id -o tsv)
 
 # Attach the disk to the troubleshooting VM
-az vm disk attach --disk $diskId --resource-group MyResourceGroup --size-gb 128 --sku Standard_LRS --vm-name MyTroubleshootVM
+az vm disk attach --disk $myNewOSDiskid --resource-group $resourceGroup --size-gb $diskSize --sku $storageType --vm-name MyTroubleshootVM
 ```
 ## <a name="mount-the-attached-data-disk"></a>Monter le disque de données associé
 
@@ -196,7 +195,7 @@ Cet exemple arrête la machine virtuelle nommée `myVM` et affecte le disque nom
 az vm stop -n myVM -g myResourceGroup
 
 # Get ID of the OS disk that is repaired.
-$myNewOSDiskid=(az vm show -g myResourceGroupDisk -n myNewOSDisk --query "storageProfile.osDisk.managedDisk.id" -o tsv)
+$myNewOSDiskid=(az vm show -g $resourceGroup -n $osDisk --query id -o tsv)
 
 # Change the OS disk of the affected VM to "myNewOSDisk"
 az vm update -g myResourceGroup -n myVM --os-disk $myNewOSDiskid

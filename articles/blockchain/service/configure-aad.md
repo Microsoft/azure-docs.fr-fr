@@ -2,14 +2,14 @@
 title: Configurer l’accès Azure Active Directory - Azure Blockchain Service
 description: Comment configurer Azure Blockchain Service avec un accès Azure Active Directory
 ms.date: 11/22/2019
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: janders
-ms.openlocfilehash: 682ab282036fcd592e66942d08a84cdce46d8915
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 337d01abc51d310d06aeea3427b770132be4824c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74455852"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85208771"
 ---
 # <a name="how-to-configure-azure-active-directory-access-for-azure-blockchain-service"></a>Guide pratique pour configurer un accès Azure Active Directory pour Azure Blockchain Service
 

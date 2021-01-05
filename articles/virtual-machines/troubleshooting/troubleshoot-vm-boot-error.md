@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 08/28/2019
 ms.author: tiag
-ms.openlocfilehash: c24a840716841d04537ac5b77bcaf26fca4b78cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5a2fd7fcfdae8559bfb39bffff7c73c7082a86aa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77561947"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543280"
 ---
 # <a name="linux-vm-boots-to-grub-rescue"></a>Démarrage de la machine virtuelle Linux sur Grub Rescue
 
@@ -34,8 +34,8 @@ Suivez les étapes d’atténuation ci-dessous en fonction de l’erreur qui s�
 
 * Si vous obtenez l’erreur **Système de fichiers inconnu**, cela peut être dû à la corruption du système de fichiers de la partition de démarrage ou à une configuration incorrecte du noyau.
 
-   * En cas de problèmes liés au système de fichiers, suivez les étapes de l’article [Linux Recovery: Cannot SSH to Linux VM due to file system errors (fsck, inodes)](https://blogs.msdn.microsoft.com/linuxonazure/2016/09/13/linux-recovery-cannot-ssh-to-linux-vm-due-to-file-system-errors-fsck-inodes/).
-   * En cas de problèmes liés au noyau, suivez les étapes de l’article [Linux Recovery: Manually fixing non-boot issues related to Kernel problems](https://blogs.msdn.microsoft.com/linuxonazure/2016/10/09/linux-recovery-manually-fixing-non-boot-issues-related-to-kernel-problems/) ou [Linux Recovery: Fixing non-boot issues related to Kernel problems using chroot](https://blogs.msdn.microsoft.com/linuxonazure/2016/10/09/linux-recovery-fixing-non-boot-issues-related-to-kernel-problems-using-chroot/).
+   * En cas de problèmes liés au système de fichiers, suivez les étapes de l’article [Linux Recovery: Cannot SSH to Linux VM due to file system errors (fsck, inodes)](/archive/blogs/linuxonazure/linux-recovery-cannot-ssh-to-linux-vm-due-to-file-system-errors-fsck-inodes).
+   * Pour les problèmes de noyau, suivez la procédure indiquée dans l’article [Procédure de récupération d’une machine virtuelle Linux Azure à partir de problèmes de démarrage liés au noyau](https://support.microsoft.com/help/4091524/how-recover-azure-linux-vm-from-kernel-related-boot-related-issues) ou [Récupération Linux : Fixing non-boot issues related to Kernel problems using chroot](http://linuxonazure.azurewebsites.net/linux-recovery-fixing-non-boot-issues-related-to-kernel-problems-using-chroot/).
    
 ### <a name="error---file-not-found"></a>Erreur : File not found (Fichier introuvable)
 
@@ -51,7 +51,7 @@ Suivez les étapes d’atténuation ci-dessous en fonction de l’erreur qui s�
 
 ### <a name="error---no-such-partition"></a>Erreur : No such partition (Cette partition n’existe pas)
 
-* Si l’erreur **No such partition** (Cette partition n’existe pas) s’affiche, consultez [Case Scenario : "no such partition" error while trying to start the VM after attempting to extend the OS drive](https://blogs.technet.microsoft.com/shwetanayak/2017/03/12/case-scenario-no-such-partition-error-while-trying-to-start-the-vm-after-attempting-to-extend-the-os-drive/).
+* Si l’erreur **No such partition** (Cette partition n’existe pas) s’affiche, consultez [Case Scenario : "no such partition" error while trying to start the VM after attempting to extend the OS drive](/archive/blogs/shwetanayak/case-scenario-no-such-partition-error-while-trying-to-start-the-vm-after-attempting-to-extend-the-os-drive).
 
 ### <a name="error---grubcfg-file-not-found"></a>Erreur : grub.cfg file not found (Fichier grub.cfg introuvable)
 
@@ -69,4 +69,3 @@ Suivez les étapes d’atténuation ci-dessous en fonction de l’erreur qui s�
 
 * [Vue d’ensemble d’agent de machine virtuelle Azure](../extensions/agent-windows.md)
 * [Extensions et fonctionnalités de machine virtuelle pour Windows](../extensions/features-windows.md)
-

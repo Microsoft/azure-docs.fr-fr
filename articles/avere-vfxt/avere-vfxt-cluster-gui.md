@@ -3,15 +3,15 @@ title: Accéder au Panneau de configuration Avere vFXT - Azure
 description: Comment se connecter au cluster vFXT et au Panneau de configuration Avere basé sur le navigateur pour configurer Avere vFXT
 author: ekpgh
 ms.service: avere-vfxt
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/14/2019
 ms.author: rohogue
-ms.openlocfilehash: fe2fc062f690498f3d1f588887279aa33d2434b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 79e7c5db2a2c445ae740a21744a0bdfe0736c01a
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75416144"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342431"
 ---
 # <a name="access-the-vfxt-cluster"></a>Accéder au cluster vFXT
 
@@ -27,7 +27,7 @@ Il existe deux étapes de base :
 > [!NOTE]
 > Cet article suppose que vous avez défini une adresse IP publique sur le contrôleur de cluster ou sur une autre machine virtuelle à l’intérieur du réseau virtuel de votre cluster. Cet article décrit comment utiliser cette machine virtuelle comme hôte pour accéder au cluster. Si vous utilisez un VPN ou ExpressRoute pour l’accès au réseau virtuel, passez directement à [Se connecter au Panneau de configuration Avere](#connect-to-the-avere-control-panel-in-a-browser).
 
-Avant de vous connecter, vérifiez que la paire de clés publique/privée SSH que vous avez utilisée lors de la création du contrôleur de cluster est installée sur votre ordinateur local. Lisez la documentation sur les clés SSH pour [Windows](https://docs.microsoft.com/azure/virtual-machines/linux/ssh-from-windows) ou pour [Linux](https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys) si vous avez besoin d’aide. Si vous avez utilisé un mot de passe plutôt qu’une clé publique, vous serez invité à l’entrer lors de la connexion.
+Avant de vous connecter, vérifiez que la paire de clés publique/privée SSH que vous avez utilisée lors de la création du contrôleur de cluster est installée sur votre ordinateur local. Lisez la documentation sur les clés SSH pour [Windows](../virtual-machines/linux/ssh-from-windows.md) ou pour [Linux](../virtual-machines/linux/mac-create-ssh-keys.md) si vous avez besoin d’aide. Si vous avez utilisé un mot de passe plutôt qu’une clé publique, vous serez invité à l’entrer lors de la connexion.
 
 ## <a name="create-an-ssh-tunnel"></a>Création d’un tunnel SSH
 

@@ -1,20 +1,20 @@
 ---
 title: Intégration de Git pour Azure Machine Learning
 titleSuffix: Azure Machine Learning
-description: Découvrez comment Azure Machine Learning intègre un dépôt Git local. Lors de l’envoi d’une exécution d’entraînement à partir d’un répertoire local, qui est un dépôt Git, les informations relatives au dépôt, à la branche et à la validation actuelle sont suivies dans le cadre de l’exécution.
+description: Découvrez la façon dont Azure Machine Learning s’intègre à un référentiel Git local pour suivre les informations relatives au référentiel, aux branches et aux validations actuelles dans le cadre d’une exécution de formation.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.author: jordane
 author: jpe316
-ms.date: 03/05/2020
-ms.openlocfilehash: 7cc2e346a35cd1cdf1278b527dc451a903d60f89
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/16/2020
+ms.openlocfilehash: 989fc7cb66cf5381d174a3aad12f84f5b055aab8
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78402826"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94701634"
 ---
 # <a name="git-integration-for-azure-machine-learning"></a>Intégration de Git pour Azure Machine Learning
 
@@ -35,7 +35,89 @@ Nous vous recommandons de cloner le dépôt dans le répertoire de vos utilisate
 
 Vous pouvez cloner n’importe quel dépôt Git auprès duquel vous pouvez vous authentifier (GitHub, Azure Repos, BitBucket, etc.)
 
-Pour obtenir un guide sur l’utilisation de l’interface CLI Git, consultez [cette page](https://guides.github.com/introduction/git-handbook/).
+Pour plus d’informations sur le clonage, consultez le guide d’[utilisation de l’interface CLI Git](https://guides.github.com/introduction/git-handbook/).
+
+## <a name="authenticate-your-git-account-with-ssh"></a>Authentifier votre compte Git avec SSH
+### <a name="generate-a-new-ssh-key"></a>Générer une nouvelle clé SSH
+1) [Ouvrez la fenêtre de terminal](./how-to-run-jupyter-notebooks.md#terminal) sous l’onglet Notebook Azure Machine Learning.
+
+2) Collez le texte ci-dessous, en substituant votre adresse e-mail.
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+Cette opération crée une clé SSH, qui utilise l’e-mail fourni en tant qu’étiquette.
+
+```
+> Generating public/private rsa key pair.
+```
+
+3) Quand vous êtes invité à entrer un fichier dans lequel enregistrer la clé, appuyez sur Entrée. Cette opération accepte l’emplacement de fichier par défaut.
+
+4) Vérifiez que l’emplacement par défaut est « /home/azureuser/.ssh » et appuyez sur Entrée. Sinon, spécifiez l’emplacement « /home/azureuser/.ssh ».
+
+> [!TIP]
+> Assurez-vous que la clé SSH est enregistrée dans « /home/azureuser/.ssh ». Ce fichier est enregistré sur l’instance de calcul et n’est accessible que par le propriétaire de cette instance.
+
+```
+> Enter a file in which to save the key (/home/azureuser/.ssh/id_rsa): [Press enter]
+```
+
+5) À l’invite, tapez une phrase secrète sécurisée. Nous vous recommandons d’ajouter une phrase secrète à votre clé SSH pour renforcer la sécurité.
+
+```
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+```
+
+### <a name="add-the-public-key-to-git-account"></a>Ajouter la clé publique au compte Git
+1) Dans votre fenêtre de terminal, copiez le contenu du fichier de la clé publique. Si vous avez renommé la clé, remplacez id_rsa.pub par le nom de fichier de la clé publique.
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+> [!TIP]
+> **Opérations Copier et Coller dans le terminal**
+> * Windows : `Ctrl-Insert` pour copier et `Ctrl-Shift-v` ou `Shift-Insert` pour coller.
+> * Mac OS : `Cmd-c` pour copier et `Cmd-v` pour coller.
+> * FireFox/IE peuvent ne pas prendre en charge correctement les autorisations de Presse-papiers.
+
+2) Sélectionnez la sortie de la clé et copiez-la dans le Presse-papiers.
+
++ [GitHub](https://docs.github.com/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+
++ [GitLab](https://docs.gitlab.com/ee/ssh/#adding-an-ssh-key-to-your-gitlab-account)
+
++ [Azure DevOps](/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#step-2--add-the-public-key-to-azure-devops-servicestfs) : Démarrez à l’**étape 2**.
+
++ [BitBucket](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/#SetupanSSHkey-ssh2). Démarrez à **étape 4**.
+
+### <a name="clone-the-git-repository-with-ssh"></a>Cloner le dépôt Git avec SSH
+
+1) Copiez l’URL du clonage Git SSH à partir du dépôt Git.
+
+2) Collez l’URL dans la commande `git clone` ci-dessous, pour utiliser votre URL du dépôt Git SSH. Cela ressemble à ce qui suit :
+
+```bash
+git clone git@example.com:GitUser/azureml-example.git
+Cloning into 'azureml-example'...
+```
+
+Une réponse semblable à la suivante s’affiche :
+
+```bash
+The authenticity of host 'example.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.255.112' (RSA) to the list of known hosts.
+```
+
+SSH peut afficher l’empreinte digitale SSH du serveur et vous demander de la vérifier. Vous devez vérifier que l’empreinte digitale affichée correspond à l’une des empreintes digitales de la page de clés publiques SSH.
+
+SSH affiche cette empreinte digitale quand il se connecte à un hôte inconnu pour vous protéger contre les [attaques de l’intercepteur](/previous-versions/windows/it-pro/windows-2000-server/cc959354(v=technet.10)). Une fois que vous avez accepté l’empreinte digitale de l’hôte, SSH ne vous sollicite que si l’empreinte change.
+
+3) Quand vous êtes invité à indiquer si vous souhaitez poursuivre la connexion, tapez `yes`. Git clone le dépôt et configure le dépôt distant d’origine afin qu’il se connecte avec SSH pour les prochaines commandes Git.
 
 ## <a name="track-code-that-comes-from-git-repositories"></a>Suivre le code provenant de dépôts Git
 
@@ -70,12 +152,10 @@ Les informations Git sont stockées dans les propriétés d’une exécution d�
 
 ### <a name="azure-portal"></a>Portail Azure
 
-1. Dans le [portail Azure](https://portal.azure.com), sélectionnez votre espace de travail.
+1. Dans le [portail Studio](https://ml.azure.com), sélectionnez votre espace de travail.
 1. Sélectionnez __Expériences__, puis sélectionnez l’une de vos expériences.
 1. Sélectionnez l’une des exécutions dans la colonne __NUMÉRO D’EXÉCUTION__.
-1. Sélectionnez __Journaux__, puis développez les entrées __logs__ et __azureml__. Sélectionnez le lien qui commence par __###\_azure__.
-
-    ![Entrée ###_azure dans le portail](./media/concept-train-model-git-integration/azure-machine-learning-logs.png)
+1. Sélectionnez __Sorties + Journaux__, puis développez les entrées __logs__ (journaux) et __azureml__. Sélectionnez le lien qui commence par __###\_azure__.
 
 Les informations journalisées contiennent du texte similaire au code JSON suivant :
 
@@ -98,7 +178,7 @@ Les informations journalisées contiennent du texte similaire au code JSON suiva
 
 ### <a name="python-sdk"></a>Kit de développement logiciel (SDK) Python
 
-Après l’envoi d’une exécution d’entraînement, un objet [Run](https://docs.microsoft.com/python/api/azureml-core/azureml.core.run%28class%29?view=azure-ml-py) est retourné. L’attribut `properties` de cet objet contient les informations Git journalisées. Par exemple, le code suivant récupère le hachage de validation :
+Après l’envoi d’une exécution d’entraînement, un objet [Run](/python/api/azureml-core/azureml.core.run%28class%29?preserve-view=true&view=azure-ml-py) est retourné. L’attribut `properties` de cet objet contient les informations Git journalisées. Par exemple, le code suivant récupère le hachage de validation :
 
 ```python
 run.properties['azureml.git.commit']
@@ -112,8 +192,8 @@ Vous pouvez utiliser la commande CLI `az ml run` pour récupérer les propriét�
 az ml run list -e train-on-amlcompute --last 1 -w myworkspace -g myresourcegroup --query '[].properties'
 ```
 
-Pour plus d’informations, consultez la documentation de référence [az ml run](https://docs.microsoft.com/cli/azure/ext/azure-cli-ml/ml/run?view=azure-cli-latest).
+Pour plus d’informations, consultez la documentation de référence [az ml run](/cli/azure/ext/azure-cli-ml/ml/run?preserve-view=true&view=azure-cli-latest).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Configurer et utiliser des cibles de calcul pour l’entraînement de modèles](how-to-set-up-training-targets.md)
+* [Utiliser des cibles de calcul pour la formation des modèles](how-to-set-up-training-targets.md)

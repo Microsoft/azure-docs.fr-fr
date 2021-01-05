@@ -4,15 +4,15 @@ description: Installer un certificat client pour une authentification de certifi
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 01/10/2020
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: 787b8a34ed4b232b9e6cc033e67b1a8162c85f6c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c4d37f67d89ad1b7973a85fb6c2a9f7e818a028
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75902846"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89421660"
 ---
 # <a name="install-client-certificates-for-p2s-certificate-authentication-connections"></a>Installer des certificats client pour des connexions d’authentification par certificat P2S
 

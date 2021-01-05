@@ -1,26 +1,14 @@
 ---
 title: "Démarrage rapide : Recevoir des événements à l'aide d'Apache Storm - Azure Event Hubs"
 description: 'Démarrage rapide : Cet article fournit des informations à propos de l’utilisation d’Apache Storm pour recevoir des événements depuis Azure Event Hubs.'
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: java
-ms.devlang: multiple
 ms.topic: quickstart
-ms.custom: seodec18
-ms.date: 11/05/2019
-ms.author: shvija
-ms.openlocfilehash: 90293da07d3a7ef1c32e5f82d35198d4ffa536b1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.openlocfilehash: 099a3ff1ad57616de0d7929d787b82e9d55c9e00
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73717610"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87087575"
 ---
 # <a name="quickstart-receive-events-from-event-hubs-using-apache-storm"></a>Démarrage rapide : Recevoir des événements d’Event Hubs avec Apache Storm
 
@@ -250,7 +238,7 @@ Vous pouvez en apprendre plus sur Event Hubs en consultant les liens suivants :
 * [FAQ sur les hubs d’événements](event-hubs-faq.md)
 
 <!-- Links -->
-[Event Hubs overview]: event-hubs-what-is-event-hubs.md
+[Event Hubs overview]: ./event-hubs-about.md
 [HDInsight Storm]: ../hdinsight/storm/apache-storm-overview.md
 [exemple HDInsight Storm avec Event Hub]: https://github.com/Azure-Samples/hdinsight-java-storm-eventhub
 

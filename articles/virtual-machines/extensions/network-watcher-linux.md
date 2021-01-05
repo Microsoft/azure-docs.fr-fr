@@ -9,23 +9,24 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 5c81e94c-e127-4dd2-ae83-a236c4512345
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 02/14/2017
 ms.author: mimckitt
-ms.openlocfilehash: 476241ad3d4077f2da0c513e3c989218701232ba
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 870606299ee0e76c7a55578f258e837c4b8a9368
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81255751"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952265"
 ---
 # <a name="network-watcher-agent-virtual-machine-extension-for-linux"></a>Extension de machine virtuelle Agent Network Watcher pour Linux
 
 ## <a name="overview"></a>Vue d’ensemble
 
-[Azure Network Watcher](/azure/network-watcher/) est un service d’analyse, de diagnostic et d’analytique des performances réseau permettant de surveiller les réseaux Azure. L’extension de machine virtuelle de l’agent Network Watcher est obligatoire pour utiliser certaines fonctionnalités Network Watcher sur les machines virtuelles Azure, par exemple la capture du trafic réseau à la demande, et d’autres fonctionnalités avancées.
+[Azure Network Watcher](../../network-watcher/index.yml) est un service d’analyse, de diagnostic et d’analytique des performances réseau permettant de surveiller les réseaux Azure. L’extension de machine virtuelle de l’agent Network Watcher est obligatoire pour utiliser certaines fonctionnalités Network Watcher sur les machines virtuelles Azure, par exemple la capture du trafic réseau à la demande, et d’autres fonctionnalités avancées.
 
 Cet article présente les plateformes et options de déploiement qui sont prises en charge pour l’extension de machine virtuelle de l’agent Network Watcher pour Linux. L’installation de l’agent n’est pas perturbante et ne nécessite pas de redémarrage de la machine virtuelle. Vous pouvez déployer l’extension dans les machines virtuelles que vous déployez. Si la machine virtuelle est déployée par un service Azure, consultez la documentation relative au service pour déterminer si elle autorise l’installation d’extensions dans la machine virtuelle.
 
@@ -49,7 +50,7 @@ L’extension de l’agent Network Watcher peut être configurée pour les distr
 
 ### <a name="internet-connectivity"></a>Connectivité Internet
 
-Une machine virtuelle doit être connectée à Internet pour pouvoir utiliser certaines fonctionnalités de l’agent Network Watcher. Sans la possibilité d’établir des connexions sortantes, certaines fonctionnalités de l’agent Network Watcher risquent de mal fonctionner ou de ne plus être disponibles. Pour obtenir plus d’informations sur les fonctionnalités de Network Watcher nécessaires à l’agent, consultez la [documentation de Network Watcher](/azure/network-watcher/).
+Une machine virtuelle doit être connectée à Internet pour pouvoir utiliser certaines fonctionnalités de l’agent Network Watcher. Sans la possibilité d’établir des connexions sortantes, certaines fonctionnalités de l’agent Network Watcher risquent de mal fonctionner ou de ne plus être disponibles. Pour obtenir plus d’informations sur les fonctionnalités de Network Watcher nécessaires à l’agent, consultez la [documentation de Network Watcher](../../network-watcher/index.yml).
 
 ## <a name="extension-schema"></a>Schéma d’extensions
 
@@ -119,4 +120,4 @@ az vm extension show --name NetworkWatcherAgentLinux --resource-group myResource
 
 ### <a name="support"></a>Support
 
-Si vous avez besoin d’une aide supplémentaire à tout moment dans cet article, vous pouvez vous référer à la [documentation de Network Watcher](/azure/network-watcher/) ou contacter les experts Azure sur les [forums MSDN Azure et Stack Overflow](https://azure.microsoft.com/support/forums/). Vous pouvez également signaler un incident au support Azure. Accédez au [site du support Azure](https://azure.microsoft.com/support/options/) , puis cliquez sur **Obtenir un support**. Pour plus d’informations sur l’utilisation du support Azure, consultez [FAQ du support Microsoft Azure](https://azure.microsoft.com/support/faq/).
+Si vous avez besoin d’une aide supplémentaire à tout moment dans cet article, vous pouvez vous référer à la [documentation de Network Watcher](../../network-watcher/index.yml) ou contacter les experts Azure sur les [forums MSDN Azure et Stack Overflow](https://azure.microsoft.com/support/forums/). Vous pouvez également signaler un incident au support Azure. Accédez au [site du support Azure](https://azure.microsoft.com/support/options/) , puis cliquez sur **Obtenir un support**. Pour plus d’informations sur l’utilisation du support Azure, consultez [FAQ du support Microsoft Azure](https://azure.microsoft.com/support/faq/).

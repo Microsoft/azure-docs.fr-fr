@@ -1,18 +1,19 @@
 ---
-title: Utiliser Shared Image Gallery pour créer un pool personnalisé
-description: Créer un pool Batch avec Shared Image Gallery pour des images personnalisées vers des nœuds de calcul qui contiennent les logiciels et les données dont vous avez besoin pour votre application. Les images personnalisées sont un moyen efficace de configurer les nœuds de calcul pour exécuter vos charges de travail Batch.
-ms.topic: article
-ms.date: 08/28/2019
-ms.openlocfilehash: 1a26aaecc5da0ef348b720919b04d86f8fcfbc70
-ms.sourcegitcommit: 3beb067d5dc3d8895971b1bc18304e004b8a19b3
+title: Création d’un pool d’images personnalisées avec Shared Image Gallery
+description: Les pools d’images personnalisées représentent un moyen efficace de configurer les nœuds de calcul pour exécuter des charges de travail Batch.
+ms.topic: conceptual
+ms.date: 11/18/2020
+ms.custom: devx-track-python, devx-track-azurecli
+ms.openlocfilehash: eb21a9e0d355274142e34fbb5c90a4d293c88ef1
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82743577"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96327302"
 ---
-# <a name="use-the-shared-image-gallery-to-create-a-custom-pool"></a>Utiliser Shared Image Gallery pour créer un pool personnalisé
+# <a name="use-the-shared-image-gallery-to-create-a-custom-image-pool"></a>Création d’un pool d’images personnalisées avec Shared Image Gallery
 
-Quand vous créez un pool Azure Batch à l’aide de Configuration de la machine virtuelle, vous spécifiez une image de machine virtuelle qui fournit le système d’exploitation pour chaque nœud de calcul dans le pool. Vous pouvez créer un pool de machines virtuelles avec une image Place de Marché Azure prise en charge ou créer une image personnalisée avec [Shared Image Gallery](../virtual-machines/windows/shared-image-galleries.md).
+Quand vous créez un pool Azure Batch à l’aide de Configuration de la machine virtuelle, vous spécifiez une image de machine virtuelle qui fournit le système d’exploitation pour chaque nœud de calcul dans le pool. Vous pouvez créer un pool de machines virtuelles en utilisant une image prise en charge de la Place de Marché Azure ou en élaborant une image personnalisée avec une [image Shared Image Gallery](../virtual-machines/windows/shared-image-galleries.md).
 
 ## <a name="benefits-of-the-shared-image-gallery"></a>Avantages de Shared Image Gallery
 
@@ -24,50 +25,56 @@ L’utilisation d’une image partagée réduit le temps de préparation des nœ
 
 Le recours à une image partagée pour votre scénario peut offrir plusieurs avantages :
 
-* **Vous pouvez utiliser les mêmes images dans toutes les régions.** Vous pouvez créer des réplicas d’images partagées dans différentes régions afin que tous vos pools utilisent la même image.
-* **Configurer le système d’exploitation.** Vous pouvez personnaliser la configuration du disque de système d’exploitation de l’image.
-* **Préinstaller des applications.** La préinstallation des applications sur le disque du système d’exploitation est plus efficace et moins sujet aux erreurs que l’installation d’applications après l’approvisionnement des nœuds de calcul à l’aide d’un début de tâche.
-* **Copier de grandes quantités de données en une seule fois.** Intégrez les données statiques à l’image partagée managée en les copiant sur les disques de données d’une image managée. Cette opération ne doit être effectuée qu’une seule fois et rend les données accessibles à chaque nœud du pool.
-* **Augmentez la taille des pools.** Avec Shared Image Gallery, vous pouvez créer des pools plus grands avec vos images personnalisées ainsi qu’avec d’autres réplicas d’image partagée.
-* **Performances supérieures à celles de l'image personnalisée.** À l’aide d’images partagées, le pool atteint jusqu’à 25 % plus rapidement l’état stable et la latence d’inactivité de la machine virtuelle est inférieure à 30 %.
-* **Gestion des versions et regroupement d’images pour une gestion simplifiée.** La définition du regroupement d’images contient des informations sur la raison pour laquelle l’image a été créée, le système d’exploitation concerné et l’utilisation de l’image. Le regroupement d’images simplifie la gestion des images. Pour plus d’informations, consultez les [Définitions d’images](../virtual-machines/windows/shared-image-galleries.md#image-definitions).
+- **Vous pouvez utiliser les mêmes images dans toutes les régions.** Vous pouvez créer des réplicas d’images partagées dans différentes régions afin que tous vos pools utilisent la même image.
+- **Configurer le système d’exploitation.** Vous pouvez personnaliser la configuration du disque de système d’exploitation de l’image.
+- **Préinstaller des applications.** La préinstallation des applications sur le disque du système d’exploitation est plus efficace et moins sujet aux erreurs que l’installation d’applications après l’approvisionnement des nœuds de calcul à l’aide d’un début de tâche.
+- **Copier de grandes quantités de données en une seule fois.** Intégrez les données statiques à l’image partagée managée en les copiant sur les disques de données d’une image managée. Cette opération ne doit être effectuée qu’une seule fois et rend les données accessibles à chaque nœud du pool.
+- **Augmentez la taille des pools.** Avec Shared Image Gallery, vous pouvez créer des pools plus grands avec vos images personnalisées ainsi qu’avec d’autres réplicas d’image partagée.
+- **Amélioration des performances par rapport au recours à une seule image managée comme image personnalisée.** Pour un pool d’images personnalisées Shared Image, le temps nécessaire pour atteindre l’état stable peut être réduit de 25 % et la latence d’inactivité de la machine virtuelle peut être réduite de 30 %.
+- **Gestion des versions et regroupement d’images pour une gestion simplifiée.** La définition du regroupement d’images contient des informations sur la raison pour laquelle l’image a été créée, le système d’exploitation concerné et l’utilisation de l’image. Le regroupement d’images simplifie la gestion des images. Pour plus d’informations, consultez les [Définitions d’images](../virtual-machines/windows/shared-image-galleries.md#image-definitions).
 
 ## <a name="prerequisites"></a>Prérequis
 
 > [!NOTE]
 > Vous devez vous authentifier à l’aide d’Azure AD. Si vous utilisez shared-key-auth, une erreur d’authentification se produit.  
 
-* **Un compte Azure Batch.** Pour créer un compte Batch, consultez les démarrages rapides Batch à l’aide du [portail Azure](quick-create-portal.md) ou de l’[interface de ligne de commande Azure](quick-create-cli.md).
+- **Un compte Azure Batch.** Pour créer un compte Batch, consultez les démarrages rapides Batch à l’aide du [portail Azure](quick-create-portal.md) ou de l’[interface de ligne de commande Azure](quick-create-cli.md).
 
-* **Une image Shared Image Gallery**. Pour créer une image partagée, vous devez disposer d'une image managée ou en créer une. L’image doit être créée à partir d’instantanés du disque de système d’exploitation de la machine virtuelle et, éventuellement, ses disques de données associés. Pour plus d'informations, consultez [Préparer une image managée](#prepare-a-managed-image).
+- **Une image Shared Image Gallery**. Pour créer une image partagée, vous devez disposer d'une image managée ou en créer une. L’image doit être créée à partir d’instantanés du disque de système d’exploitation de la machine virtuelle et, éventuellement, ses disques de données associés.
 
 > [!NOTE]
-> Votre image partagée doit se trouver dans le même abonnement que le compte Batch. Votre image partagée peut se trouver dans différentes régions, à condition qu’elle ait des réplicas dans la même région que votre compte Batch.
+> Si l’image partagée n’est pas dans le même abonnement que le compte Batch, vous devez [inscrire le fournisseur de ressources Microsoft.Batch](../azure-resource-manager/management/resource-providers-and-types.md#register-resource-provider) pour cet abonnement. Les deux abonnements doivent se trouver dans le même locataire Azure AD.
+>
+> L’image peut se trouver dans une autre région, à condition qu’elle ait des réplicas dans la même région que votre compte Batch.
 
-## <a name="prepare-a-managed-image"></a>Préparer une image managée
+Si vous utilisez une application Azure AD pour créer un pool d’images personnalisées avec une image Shared Image Gallery, l’application doit disposer d’un [rôle intégré Azure](../role-based-access-control/rbac-and-directory-admin-roles.md#azure-roles) qui lui donne accès à l’image Shared Image. Vous pouvez accorder cet accès dans le Portail Azure en accédant à l’image Shared Image, en sélectionnant **Contrôle d’accès (IAM)** et en ajoutant une attribution de rôle pour l’application.
 
-Dans Azure, vous pouvez préparer une image managée à partir de ce qui suit :
+## <a name="prepare-a-shared-image"></a>Préparation d’une image Shared Image
 
-* Captures instantanées du système d'exploitation et des disques de données d'une machine virtuelle Azure
-* Machine virtuelle Azure généralisée dotée de disques managés
-* Disque dur virtuel local généralisé chargé dans le cloud
+Dans Azure, il est possible de préparer une image partagée à partir d’une image managée, qui peut être créée à partir de différentes sources :
 
-Pour mettre à l’échelle des pools Batch de manière fiable avec une image personnalisée, nous vous recommandons de créer une image managée *uniquement* à l’aide de la première méthode: en utilisant des captures instantanées des disques de la machine virtuelle. Consultez les étapes suivantes pour préparer une machine virtuelle, prendre un instantané et créer une image à partir de l’instantané.
+- Captures instantanées du système d'exploitation et des disques de données d'une machine virtuelle Azure
+- Machine virtuelle Azure généralisée dotée de disques managés
+- Disque dur virtuel local généralisé chargé dans le cloud
+
+> [!NOTE]
+> Batch prend uniquement en charge les images partagées généralisées ; une image partagée spécialisée ne peut pas être utilisée pour créer un pool.
+
+Les étapes suivantes expliquent comment préparer une machine virtuelle, en prendre une capture instantanée et créer une image à partir de celle-ci.
 
 ### <a name="prepare-a-vm"></a>Préparer une machine virtuelle
 
 Si vous créez une machine virtuelle pour l'image, utilisez une image propriétaire de la Place de Marché Azure prise en charge par Batch comme image de base pour votre image managée. Seules les images propriétaires peuvent être utilisées comme image de base. Pour obtenir la liste complète des références d'image de la Place de marché Azure prises en charge par Azure Batch, consultez l'opération [Lister les références SKU d'agent de nœud](/java/api/com.microsoft.azure.batch.protocol.accounts.listnodeagentskus).
 
 > [!NOTE]
-> Vous ne pouvez pas, comme image de base, utiliser une image de fournisseurs tiers qui comporte des conditions de licence et d’achat supplémentaires. Pour plus d’informations sur ces images de la Place de marché, consultez les recommandations émises pour les machines virtuelles [Linux](../virtual-machines/linux/cli-ps-findimage.md#deploy-an-image-with-marketplace-terms
-) ou [Windows](../virtual-machines/windows/cli-ps-findimage.md#deploy-an-image-with-marketplace-terms
-).
+> Vous ne pouvez pas, comme image de base, utiliser une image de fournisseurs tiers qui comporte des conditions de licence et d’achat supplémentaires. Pour plus d’informations sur ces images de la Place de marché, consultez les recommandations émises pour les machines virtuelles [Linux](../virtual-machines/linux/cli-ps-findimage.md#deploy-an-image-with-marketplace-terms) ou [Windows](../virtual-machines/windows/cli-ps-findimage.md#deploy-an-image-with-marketplace-terms).
 
-* Assurez-vous que la machine virtuelle est créée avec un disque managé. Il s’agit du paramètre de stockage par défaut quand vous créez une machine virtuelle.
-* N’installez pas d’extensions Azure, comme l’extension de script personnalisé, sur la machine virtuelle. Si l’image contient une extension préinstallée, Azure peut rencontrer des problèmes lors du déploiement du pool Batch.
-* Lorsque vous utilisez des disques de données attachés, vous devez monter et formater les disques à partir d'une machine virtuelle pour les utiliser.
-* Vérifiez que l’image du système d’exploitation de base que vous fournissez utilise le lecteur temporaire par défaut. L’agent de nœud Batch s’attend actuellement à ce que le lecteur temporaire par défaut soit utilisé.
-* Une fois que la machine virtuelle s’exécute, connectez-la via le protocole RDP (pour Windows) ou SSH (pour Linux). Le cas échéant, installez les logiciels nécessaires ou copiez les données souhaitées.  
+- Assurez-vous que la machine virtuelle est créée avec un disque managé. Il s’agit du paramètre de stockage par défaut quand vous créez une machine virtuelle.
+- N’installez pas d’extensions Azure, comme l’extension de script personnalisé, sur la machine virtuelle. Si l’image contient une extension préinstallée, Azure peut rencontrer des problèmes lors du déploiement du pool Batch.
+- Lorsque vous utilisez des disques de données attachés, vous devez monter et formater les disques à partir d'une machine virtuelle pour les utiliser.
+- Vérifiez que l’image du système d’exploitation de base que vous fournissez utilise le lecteur temporaire par défaut. L’agent de nœud Batch s’attend actuellement à ce que le lecteur temporaire par défaut soit utilisé.
+- Assurez-vous que le disque du système d'exploitation n'est pas chiffré.
+- Une fois que la machine virtuelle s’exécute, connectez-la via le protocole RDP (pour Windows) ou SSH (pour Linux). Le cas échéant, installez les logiciels nécessaires ou copiez les données souhaitées.  
 
 ### <a name="create-a-vm-snapshot"></a>Créer un instantané de la machine virtuelle
 
@@ -79,7 +86,7 @@ Pour créer une image managée à partir d’un instantané, utilisez les outils
 
 ### <a name="create-a-shared-image-gallery"></a>Créer une galerie Shared Image Gallery
 
-Après avoir créé votre image managée, vous devez créer une galerie Shared Image Gallery pour rendre votre image personnalisée disponible. Pour apprendre à créer une galerie Shared Image Gallery pour vos images, consultez [Créer une galerie Shared Image Gallery avec l'interface de ligne de commande Azure](../virtual-machines/linux/shared-images.md) ou [Créer une galerie Shared Image Gallery à l'aide du portail Azure](../virtual-machines/linux/shared-images-portal.md).
+Après avoir créé votre image managée, vous devez créer une galerie Shared Image Gallery pour rendre votre image personnalisée disponible. Pour apprendre à créer une galerie Shared Image Gallery pour vos images, consultez [Créer une galerie Shared Image Gallery avec l'interface de ligne de commande Azure](../virtual-machines/shared-images-cli.md) ou [Créer une galerie Shared Image Gallery à l'aide du portail Azure](../virtual-machines/linux/shared-images-portal.md).
 
 ## <a name="create-a-pool-from-a-shared-image-using-the-azure-cli"></a>Créer un pool à partir d’une image partagée à l’aide de l’interface de ligne de commande Azure
 
@@ -212,10 +219,11 @@ Effectuez les étapes suivantes pour créer un pool à partir d’une image part
 
 Si vous envisagez de créer un pool avec des centaines ou des milliers de machines virtuelles ou plus à l’aide d’une image partagée, suivez les instructions ci-dessous.
 
-* **Nombre de réplicas de la galerie Shared Image Gallery.**  Pour chaque pool avec un maximum de 600 instances, nous vous recommandons de garder au moins un réplica. Par exemple, si vous créez un pool de 3 000 machines virtuelles, vous devez conserver au moins 5 réplicas de votre image. Nous suggérons toujours de conserver plus de réplicas que le minimum exigé pour de meilleures performances.
+- **Nombre de réplicas de la galerie Shared Image Gallery.**  Pour chaque pool de 300 instances maximum, nous vous recommandons de conserver au moins un réplica. Par exemple, si vous créez un pool de 3 000 machines virtuelles, vous devez conserver au moins 10 réplicas de votre image. Nous suggérons toujours de conserver plus de réplicas que le minimum exigé pour de meilleures performances.
 
-* **Délai d'expiration du redimensionnement.** Si votre pool contient un nombre de nœuds fixe (pas de mise à l'échelle automatique), augmentez la propriété `resizeTimeout` du pool en fonction de la taille de celui-ci. Le délai d’attente de redimensionnement recommandé est d’au moins 15 minutes pour 1 000 machines. Par exemple, le délai d’expiration de redimensionnement recommandé pour un pool de 2 000 machines virtuelles est d’au moins 30 minutes.
+- **Délai d'expiration du redimensionnement.** Si votre pool contient un nombre de nœuds fixe (pas de mise à l'échelle automatique), augmentez la propriété `resizeTimeout` du pool en fonction de la taille de celui-ci. Le délai d’attente de redimensionnement recommandé est d’au moins 15 minutes pour 1 000 machines. Par exemple, le délai d’expiration de redimensionnement recommandé pour un pool de 2 000 machines virtuelles est d’au moins 30 minutes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour obtenir une présentation détaillée de Batch, consultez [Développer des solutions de calcul parallèles à grande échelle avec Batch](batch-api-basics.md).
+- Pour obtenir une vue d’ensemble détaillée de Batch, consultez [Flux de travail et ressources du service Batch](batch-service-workflow-features.md).
+- Découvrez la [Galerie d’images partagées](../virtual-machines/windows/shared-image-galleries.md) (Shared Image Gallery).

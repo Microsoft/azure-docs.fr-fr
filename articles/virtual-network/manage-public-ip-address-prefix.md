@@ -1,24 +1,24 @@
 ---
 title: Créer, changer ou supprimer un préfixe d’adresse IP publique Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment créer, changer ou supprimer un préfixe d’adresse IP publique.
+description: En savoir plus sur les préfixes d’IP publiques et sur la manière de les créer, de les modifier ou de les supprimer. Voir où trouver des informations supplémentaires.
 services: virtual-network
 documentationcenter: na
 author: asudbring
 ms.service: virtual-network
 ms.subservice: ip-services
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/13/2019
 ms.author: allensu
-ms.openlocfilehash: 720496c56cdae69e3b7415ac4d4d05d5796fbff9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3b86f9bcbc863a78fd5f8f748e973a20ea709636
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82146368"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96573168"
 ---
 # <a name="create-change-or-delete-a-public-ip-address-prefix"></a>Créer, changer ou supprimer un préfixe d’adresse IP publique
 
@@ -61,6 +61,9 @@ Les préfixes d’adresse IP publique ont un coût. Pour en savoir plus, consult
 |Interface de ligne de commande|[az network public-ip prefix create](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-create)|
 |PowerShell|[New-AzPublicIpPrefix](/powershell/module/az.network/new-azpublicipprefix)|
 
+>[!NOTE]
+>Dans les régions avec des zones de disponibilité, vous pouvez utiliser des commandes PowerShell ou CLI pour créer un préfixe d’adresse IP publique comme suit : non zonal, associé à une zone spécifique ou pour utiliser la redondance de zone.  Pour l’API version 2020-08-01 ou ultérieure, si un paramètre de zone n’est pas fourni, un préfixe d’adresse IP publique non zonal est créé. Pour les versions d’API antérieures à 2020-08-01, un préfixe d’adresse IP publique redondant interzone est créé. 
+
 ## <a name="create-a-static-public-ip-address-from-a-prefix"></a>Créer une adresse IP publique statique à partir d’un préfixe
 Une fois que vous avez créé un préfixe, vous devez créer des adresses IP statiques à partir du préfixe. Pour ce faire, effectuez les étapes ci-dessous.
 
@@ -88,7 +91,7 @@ Vous pouvez également utiliser l’interface CLI et les commandes PS ci-dessous
 2. Sélectionnez le nom du préfixe d’adresse IP publique que vous voulez voir, dont vous voulez changer les paramètres ou que vous voulez supprimer de la liste.
 3. Choisissez l’une des options suivantes, selon que vous voulez voir le préfixe d’adresse IP publique, le supprimer ou le changer.
    - **Afficher** : La section **Vue d’ensemble** montre les paramètres principaux du préfixe d’adresse IP publique, comme le préfixe.
-   - **Supprimer** : Pour supprimer le préfixe d’adresse IP publique, sélectionnez **Supprimer** dans la section **Vue d’ensemble**. Si les adresses dans le préfixe sont associées à des ressources d’adresse IP publique, vous devez d’abord supprimer les ressources d’adresse IP publique. Consultez [Supprimer une adresse IP publique](virtual-network-public-ip-address.md#view-change-settings-for-or-delete-a-public-ip-address).
+   - **Supprimer** : Pour supprimer le préfixe d’adresse IP publique, sélectionnez **Supprimer** dans la section **Vue d’ensemble**. Si les adresses dans le préfixe sont associées à des ressources d’adresse IP publique, vous devez d’abord supprimer les ressources d’adresse IP publique. Consultez [Supprimer une adresse IP publique](virtual-network-public-ip-address.md#view-modify-settings-for-or-delete-a-public-ip-address).
 
 **Commandes**
 

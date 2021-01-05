@@ -3,12 +3,12 @@ title: Webhooks pour répondre aux actions du registre
 description: Découvrez comment utiliser des webhooks pour déclencher des événements quand des actions d’extraction (pull) ou d’envoi (push) sont exécutées dans l’un des référentiels de votre registre.
 ms.topic: article
 ms.date: 05/24/2019
-ms.openlocfilehash: 5e6fd2d9f4c7727365a8e2fe3893aafebfeb7bd4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1db1098da81e6cf9ecb262c99f705b77af2efd26
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74454374"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004481"
 ---
 # <a name="using-azure-container-registry-webhooks"></a>Utilisation de webhooks Azure Container Registry
 
@@ -16,9 +16,9 @@ Un registre Azure Container Registry stocke et gère des images conteneurs Docke
 
 Pour plus d’informations sur les requêtes de webhook, consultez la [référence de schéma du webhook Azure Container Registry](container-registry-webhook-reference.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* Azure Container Registry : créez un Registre de conteneur dans votre abonnement Azure. Par exemple, utilisez le [portail Azure](container-registry-get-started-portal.md) ou [Azure CLI](container-registry-get-started-azure-cli.md). Les [références (SKU) Azure Container Registry](container-registry-skus.md) ont des quotas de webhooks différents.
+* Azure Container Registry : créez un Registre de conteneur dans votre abonnement Azure. Par exemple, utilisez le [portail Azure](container-registry-get-started-portal.md) ou [Azure CLI](container-registry-get-started-azure-cli.md). Les [niveaux de service d’Azure Container Registry](container-registry-skus.md) ont des quotas de webhooks différents.
 * Interface CLI Docker : pour configurer votre ordinateur local comme hôte Docker et accéder aux commandes de l’interface CLI Docker, installez le [moteur Docker](https://docs.docker.com/engine/installation/).
 
 ## <a name="create-webhook---azure-portal"></a>Créer un webhook - Portail Azure
@@ -32,7 +32,7 @@ Pour plus d’informations sur les requêtes de webhook, consultez la [référen
 | Valeur | Description |
 |---|---|
 | Nom de webhook | Nom que vous voulez donner au webhook. Il peut contenir uniquement des lettres et des chiffres, et doit comporter de 5 à 50 caractères. |
-| Location | Pour un registre [géorépliqué](container-registry-geo-replication.md), spécifiez la région Azure du réplica du Registre. 
+| Emplacement | Pour un registre [géorépliqué](container-registry-geo-replication.md), spécifiez la région Azure du réplica du Registre. 
 | URI de service | URI auquel le webhook doit envoyer des notifications POST. |
 | En-têtes personnalisés | En-têtes que vous souhaitez passer avec la demande POST. Ils doivent être au format « clé : valeur ». |
 | Actions de déclencheur | Actions qui déclenchent le webhook. Les actions incluent l’envoi push d’image, la suppression d’image, l’envoi push de graphique Helm, la suppression du graphique Helm et la mise en quarantaine de d’image. Vous pouvez choisir une ou plusieurs actions pour déclencher le webhook. |
@@ -41,7 +41,7 @@ Pour plus d’informations sur les requêtes de webhook, consultez la [référen
 
 Exemple de formulaire webhook :
 
-![Interface utilisateur de création de webhook ACR dans le portail Azure](./media/container-registry-webhook/webhook.png)
+![Capture d’écran montrant l’interface utilisateur de création d’un webhook ACR dans le portail Azure.](./media/container-registry-webhook/webhook.png)
 
 ## <a name="create-webhook---azure-cli"></a>Créer un webhook - Azure CLI
 
@@ -101,4 +101,4 @@ Pour plus d’informations sur le format et les propriétés des charges utiles 
 
 Outre les événements de webhook du registre natif abordés dans cet article, Azure Container Registry peut émettre des événements vers Event Grid :
 
-[Démarrage rapide : Envoyer des événements de registre de conteneurs à Event Grid](container-registry-event-grid-quickstart.md)
+[Démarrage rapide : Envoyer des événements de registre de conteneurs à Event Grid](container-registry-event-grid-quickstart.md)

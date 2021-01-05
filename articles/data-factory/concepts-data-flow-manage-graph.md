@@ -1,51 +1,64 @@
 ---
-title: Graphes de flux de données
-description: Comment utiliser les graphiques de flux de données de fabrique de données
+title: Gérer le graphique des flux de données de mappage
+description: Gérer et modifier efficacement le graphique des flux de données de mappage
 author: kromerm
 ms.author: makromer
+ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 11/04/2019
-ms.openlocfilehash: 0d357c4c671070a5c5e9d4587e2f90b6628996f4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 09/02/2020
+ms.openlocfilehash: f55364fe0eabae4bb1698bd655cde8d3e01b127a
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605356"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590458"
 ---
-# <a name="mapping-data-flow-graphs"></a>Graphiques de mappage des flux de données
+# <a name="managing-the-mapping-data-flow-graph"></a>Gérer le graphique des flux de données de mappage
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
-La surface de conception de mappage des flux de données est une surface de « construction » où vous créez des flux de données de haut en bas et de gauche à droite. Une boîte à outils est attachée à chaque transformation derrière le signe plus (+). Consacrez-vous à votre logique métier au lieu de connecter des nœuds par les bords dans un environnement DAG de forme libre.
+Les flux de données de mappage sont créés à l'aide d'une aire de conception appelée graphique des flux de données. Dans le graphique, la logique de transformation est construite de gauche à droite, et des flux de données supplémentaires sont ajoutés de haut en bas. Pour ajouter une nouvelle transformation, sélectionnez le signe plus (+) situé dans la partie inférieure droite d’une transformation existante.
 
-Vous trouverez ci-dessous des mécanismes intégrés pour gérer le graphique de flux de données.
+![Canevas](media/data-flow/canvas-2.png)
 
-## <a name="move-nodes"></a>Déplacer des nœuds
+À mesure que vos flux de données gagnent en complexité, utilisez les mécanismes suivants pour gérer efficacement le graphique des flux de données et y naviguer. 
 
-![Options de transformation d’agrégation](media/data-flow/agghead.png "en-tête d’agrégateur")
+## <a name="moving-transformations"></a>Déplacer les transformations
 
-Sans paradigme glisser-déplacer, la façon de déplacer un nœud de transformation consiste à changer le flux entrant. Au lieu de cela, vous allez déplacer les transformations en changeant le « flux entrant ».
+Dans les flux de données de mappage, un ensemble de logiques de transformation connectées s'appelle un **flux**. Le champ **Flux entrant** détermine quel flux de données alimente la transformation en cours. Chaque transformation est associée à un ou deux flux entrants, selon sa fonction, et représente un flux de sortie. Le schéma de sortie des flux entrants détermine quelles métadonnées de colonne peuvent être référencées par la transformation en cours.
 
-## <a name="streams-of-data-inside-of-data-flow"></a>Flux de données à l’intérieur du flux de données
+![Déplacer le nœud](media/data-flow/move-nodes.png "Déplacer le nœud")
 
-Dans Data Flow Azure Data Factory, les flux représentent le flux de données. Dans le volet des paramètres de transformation, le champ « Flux entrant » apparaît. Il vous indique quel flux de données entrant alimente cette transformation. Vous pouvez modifier l’emplacement physique de votre nœud de transformation sur le graphique en cliquant sur le nom du flux entrant et en sélectionnant un autre flux de données. La transformation active ainsi que toutes les transformations ultérieures sur ce flux seront ensuite déplacées vers le nouvel emplacement.
-
-Si vous déplacez une transformation suivie d’une ou plusieurs transformations, le nouvel emplacement du flux de données sera joint par le biais d’une nouvelle branche.
-
-S’il n’y a pas de transformation à la suite du nœud sélectionné, seule la transformation active sera déplacée vers le nouvel emplacement.
+Contrairement aux canevas de pipeline, la modification des transformations de flux de données ne s'effectue pas à l'aide d'un modèle glisser-déposer. Pour modifier le flux entrant ou « déplacer » une transformation, choisissez une autre valeur dans la liste déroulante **Flux entrant**. Toutes les transformations situées en aval se déplacent alors avec la transformation modifiée. Le graphique est automatiquement mis à jour pour afficher le nouveau flux logique. Si vous remplacez le flux entrant par une transformation qui dispose déjà d'une transformation en aval, une nouvelle branche ou un nouveau flux de données parallèle est créé. Découvrez-en plus sur les [nouvelles branches d'un flux de données de mappage](data-flow-new-branch.md).
 
 ## <a name="hide-graph-and-show-graph"></a>Masquer le graphique et afficher le graphique
 
-Il y a un bouton à l’extrême droite du volet de configuration inférieur dans lequel vous pouvez développer le volet inférieur en mode plein écran lorsque vous travaillez sur des configurations de transformation. Cela vous permet d’utiliser les boutons « précédent » et « suivant » pour parcourir les configurations du graphique. Pour revenir à la vue du graphique, cliquez sur le bouton inférieur et revenez à l’écran fractionné.
+Lorsque vous modifiez votre transformation, vous pouvez développer le panneau de configuration pour qu'il occupe la totalité du canevas, ce qui masque le graphique. Cliquez sur le chevron orienté vers le haut sur le côté droit du canevas.
 
-## <a name="search-graph"></a>Graphique de recherche
+![Masquer le graphique](media/data-flow/hide-graph.png "Masquer le graphique")
 
-Vous pouvez effectuer une recherche dans le graphique à l’aide du bouton Rechercher sur l’aire de conception.
+Lorsque le graphique est masqué, vous pouvez vous déplacer entre les transformations d'un flux en cliquant sur **Suivant** ou **Précédent**. Cliquez sur le chevron orienté vers le bas pour afficher le graphique.
 
-![action](media/data-flow/search001.png "Graphique de recherche")
+![Afficher le graphique](media/data-flow/show-graph.png "Afficher le graphique")
+
+## <a name="searching-for-transformations"></a>Rechercher des transformations
+
+Pour trouver rapidement une transformation dans votre graphique, cliquez sur l'icône **Rechercher** au-dessus du paramètre de zoom.
+
+![Capture d’écran montrant le bouton Rechercher.](media/data-flow/search-1.png "Graphique de recherche")
+
+Pour accéder à une transformation, vous pouvez effectuer une recherche par nom de transformation ou par description.
+
+![Capture d’écran montrant la zone de texte de recherche.](media/data-flow/search-2.png "Graphique de recherche")
+
+## <a name="hide-reference-nodes"></a>Masquer les nœuds de référence
+
+Si votre flux de données comporte des transformations de jointure, de recherche, d'existence ou d'union, le flux de données affiche les nœuds de référence de tous les flux entrants. Si vous souhaitez réduire l'espace vertical occupé, vous pouvez réduire vos nœuds de référence. Pour ce faire, cliquez avec le bouton droit sur le canevas, puis sélectionnez **Masquer les nœuds de référence**.
+
+![Masquer les nœuds de référence](media/data-flow/hide-reference-nodes.png "Masquer les nœuds de référence")
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois la conception du flux de données terminée, activez le bouton de débogage et testez-le en mode débogage, directement dans le [concepteur de flux de données](concepts-data-flow-debug-mode.md) ou le [débogage de pipeline](control-flow-execute-data-flow-activity.md).
+Une fois votre logique de flux de données terminée, activez le [mode de débogage](concepts-data-flow-debug-mode.md) et testez-la dans un aperçu des données.

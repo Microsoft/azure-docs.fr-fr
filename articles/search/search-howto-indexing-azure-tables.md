@@ -8,13 +8,13 @@ ms.author: magottei
 ms.devlang: rest-api
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: e8f6c0454497b1cb1d62417e566e9662469c56d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/11/2020
+ms.openlocfilehash: 2c67cd4d071660da2ca5714623695ca434329263
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113003"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91275181"
 ---
 # <a name="how-to-index-tables-from-azure-table-storage-with-azure-cognitive-search"></a>Comment indexer des tables à partir du stockage de tables Azure avec la Recherche cognitive Azure
 
@@ -25,8 +25,8 @@ Cet article montre comment utiliser la Recherche cognitive Azure pour indexer le
 Vous pouvez configurer un indexeur de stockage de tables Azure à l’aide des ressources suivantes :
 
 * [Azure portal](https://ms.portal.azure.com)
-* [API REST](https://docs.microsoft.com/rest/api/searchservice/Indexer-operations) de Recherche cognitive Azure
-* [Kit de développement logiciel (SDK) .NET](https://aka.ms/search-sdk) de Recherche cognitive Azure
+* [API REST](/rest/api/searchservice/Indexer-operations) de Recherche cognitive Azure
+* [Kit de développement logiciel (SDK) .NET](/dotnet/api/overview/azure/search) de Recherche cognitive Azure
 
 Ici, nous vous présentons le flux à l’aide de l’API REST. 
 
@@ -49,7 +49,8 @@ Pour l’indexation des tables, la source de données doit avoir les propriété
 
 Pour créer une source de données :
 
-    POST https://[service name].search.windows.net/datasources?api-version=2019-05-06
+```http
+    POST https://[service name].search.windows.net/datasources?api-version=2020-06-30
     Content-Type: application/json
     api-key: [admin key]
 
@@ -59,19 +60,21 @@ Pour créer une source de données :
         "credentials" : { "connectionString" : "DefaultEndpointsProtocol=https;AccountName=<account name>;AccountKey=<account key>;" },
         "container" : { "name" : "my-table", "query" : "PartitionKey eq '123'" }
     }   
+```
 
-Pour plus d’informations sur l’API Créer une source de données, consultez [Créer une source de données](https://docs.microsoft.com/rest/api/searchservice/create-data-source).
+Pour plus d’informations sur l’API Créer une source de données, consultez [Créer une source de données](/rest/api/searchservice/create-data-source).
 
 <a name="Credentials"></a>
 #### <a name="ways-to-specify-credentials"></a>Manières de spécifier des informations d’identification ####
 
 Vous pouvez fournir les informations d’identification de la table de l’une des manières suivantes : 
 
+- **Chaîne de connexion de l’identité managée** : `ResourceId=/subscriptions/<your subscription ID>/resourceGroups/<your resource group name>/providers/Microsoft.Storage/storageAccounts/<your storage account name>/;` Cette chaîne de connexion ne nécessite pas de clé de compte, mais vous devez suivre les instructions fournies dans [Configurer une connexion à un compte Stockage Azure à l’aide d’une identité managée](search-howto-managed-identities-storage.md).
 - **Chaîne de connexion au compte de stockage avec accès complet** : `DefaultEndpointsProtocol=https;AccountName=<your storage account>;AccountKey=<your account key>` Vous pouvez obtenir la chaîne de connexion sur le portail Azure en sélectionnant le **panneau du compte de stockage** > **Paramètres** > **Clés** (pour les comptes de stockage Classic) ou en sélectionnant **Paramètres** > **Clés d’accès** (pour les comptes de stockage ARM).
 - **Chaîne de connexion de la signature d’accès partagé (SAP) au compte de stockage** : `TableEndpoint=https://<your account>.table.core.windows.net/;SharedAccessSignature=?sv=2016-05-31&sig=<the signature>&spr=https&se=<the validity end time>&srt=co&ss=t&sp=rl` La SAP doit avoir les autorisations de liste et de lecture sur les conteneurs (des tables en l’occurrence) et les objets (des lignes de table).
 -  **Signature d’accès partagé à une table** : `ContainerSharedAccessUri=https://<your storage account>.table.core.windows.net/<table name>?tn=<table name>&sv=2016-05-31&sig=<the signature>&se=<the validity end time>&sp=r` La signature d’accès partagé doit disposer d’autorisations de requête (lecture) sur la table.
 
-Pour plus d’informations sur les signatures d’accès partagé au stockage, consultez [Utilisation des signatures d’accès partagé](../storage/common/storage-dotnet-shared-access-signature-part-1.md).
+Pour plus d’informations sur les signatures d’accès partagé au stockage, consultez [Utilisation des signatures d’accès partagé](../storage/common/storage-sas-overview.md).
 
 > [!NOTE]
 > Si vous utilisez des informations d’identification d’une signature d’accès partagé, vous devez mettre à jour les informations d’identification de la source de données régulièrement avec des signatures renouvelées afin d’éviter leur expiration. Si les informations d’identification d’une signature d’accès partagé expirent, l’indexeur échoue avec un message d’erreur tel que « Les informations d’identification fournies dans la chaîne de connexion sont invalides ou ont expiré. »  
@@ -81,7 +84,8 @@ L’index spécifie les champs d’un document, les attributs et d’autres cons
 
 Pour créer un index :
 
-    POST https://[service name].search.windows.net/indexes?api-version=2019-05-06
+```http
+    POST https://[service name].search.windows.net/indexes?api-version=2020-06-30
     Content-Type: application/json
     api-key: [admin key]
 
@@ -92,15 +96,17 @@ Pour créer un index :
             { "name": "SomeColumnInMyTable", "type": "Edm.String", "searchable": true }
           ]
     }
+```
 
-Pour plus d’informations sur la création d’index, consultez [Création d’un index](https://docs.microsoft.com/rest/api/searchservice/create-index).
+Pour plus d’informations sur la création d’index, consultez [Création d’un index](/rest/api/searchservice/create-index).
 
 ### <a name="step-3-create-an-indexer"></a>Étape 3 : Créer un indexeur
 Un indexeur connecte une source de données à un index de recherche cible et fournit une planification afin d’automatiser l’actualisation des données. 
 
 Une fois l’index et la source de données créés, vous êtes prêt à créer l’indexeur :
 
-    POST https://[service name].search.windows.net/indexers?api-version=2019-05-06
+```http
+    POST https://[service name].search.windows.net/indexers?api-version=2020-06-30
     Content-Type: application/json
     api-key: [admin key]
 
@@ -110,10 +116,11 @@ Une fois l’index et la source de données créés, vous êtes prêt à créer 
       "targetIndexName" : "my-target-index",
       "schedule" : { "interval" : "PT2H" }
     }
+```
 
 Cet indexeur s’exécute toutes les deux heures. (L’intervalle de planification est définie sur « PT2H ».) Pour exécuter un indexeur toutes les 30 minutes, définissez l’intervalle sur « PT30M ». Le plus court intervalle pris en charge est de 5 minutes. La planification est facultative : en cas d’omission, un indexeur ne s’exécute qu’une seule fois lorsqu’il est créé. Toutefois, vous pouvez à tout moment exécuter un indexeur à la demande.   
 
-Pour plus d’informations sur l’API Créer un indexeur, consultez [Créer un indexeur](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
+Pour plus d’informations sur l’API Créer un indexeur, consultez [Créer un indexeur](/rest/api/searchservice/create-indexer).
 
 Pour plus d’informations sur la définition des planifications de l’indexeur, consultez [Comment planifier des indexeurs pour la Recherche cognitive Azure](search-howto-schedule-indexers.md).
 
@@ -126,7 +133,7 @@ Dans la Recherche cognitive Azure, la clé de document identifie un document de 
 Puisque les lignes d’une table ont une clé composée, la Recherche cognitive Azure génère un champ synthétique appelé `Key` qui est une concaténation des valeurs de la clé de partition et de la clé de ligne. Par exemple, si la valeur PartitionKey d’une ligne est `PK1` et que RowKey est `RK1`, alors la valeur du champ `Key` est `PK1RK1`.
 
 > [!NOTE]
-> La valeur `Key` peut contenir des caractères non valides dans les clés de document, par exemple des tirets. Vous pouvez traiter les caractères non valides à l’aide de la [fonction de mappage de champ](search-indexer-field-mappings.md#base64EncodeFunction) `base64Encode`. Si vous procédez ainsi, n’oubliez pas d’utiliser également l’encodage Base64 sécurisé pour les URL lorsque vous transmettez des clés de document dans des appels d’API tels que Recherche.
+> La valeur `Key` peut contenir des caractères non valides dans les clés de document, par exemple des tirets. Vous pouvez traiter les caractères non valides à l’aide de la `base64Encode` [fonction de mappage de champ](search-indexer-field-mappings.md#base64EncodeFunction). Si vous procédez ainsi, n’oubliez pas d’utiliser également l’encodage Base64 sécurisé pour les URL lorsque vous transmettez des clés de document dans des appels d’API tels que Recherche.
 >
 >
 
@@ -135,7 +142,8 @@ Lorsque vous configurez un indexeur de table pour l’exécuter de manière plan
 
 Pour indiquer que certains documents doivent être supprimés de l’index, vous pouvez utiliser une stratégie de suppression réversible. Plutôt que de supprimer une ligne, ajoutez une propriété pour signaler sa suppression, puis configurez une stratégie de détection des suppressions réversibles sur la source de données. Par exemple, la stratégie suivante considère qu’une ligne est supprimée si elle a une propriété `IsDeleted` avec la valeur `"true"` :
 
-    PUT https://[service name].search.windows.net/datasources?api-version=2019-05-06
+```http
+    PUT https://[service name].search.windows.net/datasources?api-version=2020-06-30
     Content-Type: application/json
     api-key: [admin key]
 
@@ -146,6 +154,7 @@ Pour indiquer que certains documents doivent être supprimés de l’index, vous
         "container" : { "name" : "table name", "query" : "<query>" },
         "dataDeletionDetectionPolicy" : { "@odata.type" : "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy", "softDeleteColumnName" : "IsDeleted", "softDeleteMarkerValue" : "true" }
     }   
+```
 
 <a name="Performance"></a>
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
@@ -162,7 +171,7 @@ Voici deux approches possibles pour améliorer les performances d’indexation d
 
 - Si vos données sont partitionnées par date (par exemple, si vous créez une nouvelle partition chaque jour ou chaque semaine), envisagez l’approche suivante : 
     - Utilisez une requête sous la forme : `(PartitionKey ge <TimeStamp>) and (other filters)`. 
-    - Surveillez la progression de l’indexeur avec [l’API Get Indexer Status](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status) et mettez régulièrement à jour la condition `<TimeStamp>` de la requête sur la base de la dernière valeur de limite supérieure réussie. 
+    - Surveillez la progression de l’indexeur avec [l’API Get Indexer Status](/rest/api/searchservice/get-indexer-status) et mettez régulièrement à jour la condition `<TimeStamp>` de la requête sur la base de la dernière valeur de limite supérieure réussie. 
     - Avec cette approche, si vous avez besoin de déclencher une réindexation complète, vous devez réinitialiser la requête de source de données en plus de la réinitialisation de l’indexeur. 
 
 

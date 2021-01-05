@@ -1,5 +1,5 @@
 ---
-title: Provisionner un appareil X.509 simulé auprès du service Azure IoT Hub à l’aide de Python
+title: Démarrage rapide – Provisionner un appareil X.509 simulé auprès d’Azure IoT Hub à l’aide de Python
 description: 'Démarrage rapide : Créer et provisionner un appareil X.509 simulé auprès du service IoT Hub Device Provisioning (DPS) à l’aide du SDK d’appareil Python. Ce démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: python
-ms.custom: mvc
-ms.openlocfilehash: 44f1a2cd3336eeae87878c333fb05d2e6b1f88e8
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-python
+ms.openlocfilehash: 28a65e9e5f85d3c1102875a97ae122a00456c607
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77605396"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001398"
 ---
 # <a name="quickstart-create-and-provision-a-simulated-x509-device-using-python-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et approvisionner un appareil X.509 simulé auprès du service IoT Hub Device Provisioning à l’aide du Python Device SDK
 
@@ -24,7 +24,7 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil X.509 simulé 
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Examen des [concepts de provisionnement automatique](concepts-auto-provisioning.md).
+- Connaissance des concepts liés au [provisionnement](about-iot-dps.md#provisioning-process).
 - Exécution des étapes décrites dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 - Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 - [Visual Studio 2015+](https://visualstudio.microsoft.com/vs/) avec le développement Desktop en C++ .
@@ -87,15 +87,17 @@ Cet article présente les inscriptions individuelles.
 
 3. Dans la fenêtre Sortie, entrez `i` pour l’inscription individuelle lorsque vous y êtes invité. La fenêtre Sortie affiche un certificat X.509 généré localement pour votre appareil simulé. 
     
-    Copiez le premier certificat dans le Presse-papiers. Commencez à la première occurrence de :
+    ```output
+    Copy the first certificate to clipboard. Begin with the first occurrence of:
     
         -----BEGIN CERTIFICATE----- 
         
-    Terminez la copie après la première occurrence de :
+    End you copying after the first occurrence of:
     
         -----END CERTIFICATE-----
         
-    Veillez à inclure ces deux lignes. 
+    Make sure to include both of those lines as well.
+    ``` 
 
     ![Application de l’inscription des appareils Dice](./media/python-quick-create-simulated-device-x509/dice-device-enrollment.png)
  
@@ -159,7 +161,7 @@ Cet article présente les inscriptions individuelles.
 
     ![inscription réussie](./media/python-quick-create-simulated-device-x509/enrollment-success.png)
 
-8. Dans le portail, accédez au IoT Hub lié à votre service d’approvisionnement, ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID de périphérique s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT***activé**. Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
+8. Dans le portail, accédez au IoT Hub lié à votre service d’approvisionnement, ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID de périphérique s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT* **activé**. Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
 
     ![L’appareil est inscrit avec le hub IoT](./media/python-quick-create-simulated-device-x509/registration.png) 
 

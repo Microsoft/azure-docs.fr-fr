@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: c77b700cab4afd411c3a2df824ee8335cb394cda
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 26a3f3ff600de4418ccf6f6b09dea4b091678065
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64868315"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89265726"
 ---
-# <a name="upload-files-into-an-azure-media-services-account-from-azure-storsimple"></a>Charger des fichiers dans un compte Azure Media Services à partir d’Azure StorSimple  
+# <a name="upload-files-into-an-azure-media-services-account-from-azure-storsimple"></a>Charger des fichiers dans un compte Azure Media Services à partir d’Azure StorSimple 
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)] 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 >
 > 
 > Azure StorSimple Data Manager est actuellement disponible en version préliminaire privée. 
@@ -34,7 +36,7 @@ ms.locfileid: "64868315"
 
 Dans Media Services, vous téléchargez vos fichiers numériques dans une ressource. L’élément multimédia peut contenir des fichiers vidéo, des fichiers audio, des images, des collections de miniatures, des pistes textuelles et des légendes (ainsi que les métadonnées concernant ces fichiers). Une fois les fichiers téléchargés, votre contenu est stocké en toute sécurité dans le cloud et peut faire l’objet d’un traitement et d’une diffusion en continu.
 
-[Azure StorSimple](https://docs.microsoft.com/azure/storsimple/) utilise le stockage cloud pour étendre la solution sur site et hiérarchise automatiquement les données sur le stockage local et le stockage cloud. L’appareil StorSimple déduplique et compresse les données avant de les envoyer vers le cloud. Il améliore considérablement l’efficacité d’envoi de fichiers volumineux vers le cloud. Le service [StorSimple Data Manager](../../storsimple/storsimple-data-manager-overview.md) fournit des API vous permettant d’extraire des données à partir de StorSimple et de les présenter sous la forme de ressources AMS.
+[Azure StorSimple](../../storsimple/index.yml) utilise le stockage cloud pour étendre la solution sur site et hiérarchise automatiquement les données sur le stockage local et le stockage cloud. L’appareil StorSimple déduplique et compresse les données avant de les envoyer vers le cloud. Il améliore considérablement l’efficacité d’envoi de fichiers volumineux vers le cloud. Le service [StorSimple Data Manager](../../storsimple/storsimple-data-manager-overview.md) fournit des API vous permettant d’extraire des données à partir de StorSimple et de les présenter sous la forme de ressources AMS.
 
 ## <a name="get-started"></a>Bien démarrer
 

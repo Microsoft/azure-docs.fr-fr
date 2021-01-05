@@ -3,15 +3,15 @@ title: Créer un environnement Linux avec Azure CLI
 description: Créez un stockage, une machine virtuelle Linux, un réseau virtuel et un sous-réseau, un équilibreur de charge, une carte d’interface réseau, une adresse IP publique et un groupe de sécurité réseau à partir de zéro à l’aide de l’interface de ligne de commande Azure.
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 12/14/2017
 ms.author: cynthn
-ms.openlocfilehash: 7ee4674f5e7c04709256459c3417a1379a65aedc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 17d36acfa2de699ff2b22ac16d327ea738519f4a
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78969557"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91975380"
 ---
 # <a name="create-a-complete-linux-virtual-machine-with-the-azure-cli"></a>Créer une machine virtuelle Linux complète avec Azure CLI
 Pour créer rapidement une machine virtuelle dans Azure, vous pouvez utiliser une seule commande Azure CLI qui utilise des valeurs par défaut pour créer toutes les ressources associées requises. Les ressources telles que le réseau virtuel, l’adresse IP publique et les règles de groupe de sécurité réseau sont automatiquement créées. Pour un meilleur contrôle de votre environnement en production, vous pouvez créer ces ressources à l’avance, puis leur ajouter vos machines virtuelles. Cet article vous accompagne dans la création d’une machine virtuelle et de chacune des ressources associées.
@@ -324,7 +324,7 @@ Sortie :
 ```
 
 ## <a name="create-a-virtual-nic"></a>Créer une carte d’interface réseau virtuelle
-La disponibilité des cartes d’interface réseau virtuelles peut être déterminée par programme car vous pouvez définir des règles régissant leur utilisation. En fonction de la [taille de la machine virtuelle](sizes.md), vous pouvez attacher un nombre variable de cartes d’interface réseau virtuelles à une machine virtuelle. Dans la commande [az network nic create](/cli/azure/network/nic) suivante, vous créez une carte d’interface réseau nommée *myNic* et l’associez à votre groupe de sécurité réseau. L’adresse IP publique *myPublicIP* est également associée à la carte d’interface réseau virtuelle.
+La disponibilité des cartes d’interface réseau virtuelles peut être déterminée par programme car vous pouvez définir des règles régissant leur utilisation. En fonction de la [taille de la machine virtuelle](../sizes.md), vous pouvez attacher un nombre variable de cartes d’interface réseau virtuelles à une machine virtuelle. Dans la commande [az network nic create](/cli/azure/network/nic) suivante, vous créez une carte d’interface réseau nommée *myNic* et l’associez à votre groupe de sécurité réseau. L’adresse IP publique *myPublicIP* est également associée à la carte d’interface réseau virtuelle.
 
 ```azurecli
 az network nic create \
@@ -434,7 +434,7 @@ Les domaines d’erreur désignent un groupe de machines virtuelles partageant u
 
 Les domaines de mise à jour indiquent les groupes de machines virtuelles et les équipements physiques sous-jacents pouvant être redémarrés en même temps. Au cours de la maintenance planifiée, l’ordre de redémarrage des domaines de mise à jour peut ne pas être séquentiel, mais un seul domaine de mise à jour est redémarré à la fois.
 
-Azure distribue automatiquement les machines virtuelles sur les domaines d’erreur et de mise à jour lorsque vous les placez dans un groupe à haute disponibilité. Pour plus d’informations, consultez l’article sur la [gestion de la disponibilité des machines virtuelles](manage-availability.md).
+Azure distribue automatiquement les machines virtuelles sur les domaines d’erreur et de mise à jour lorsque vous les placez dans un groupe à haute disponibilité. Pour plus d’informations, consultez l’article sur la [gestion de la disponibilité des machines virtuelles](../manage-availability.md).
 
 Créez un groupe à haute disponibilité pour votre machine virtuelle avec la commande [az vm availability-set create](/cli/azure/vm/availability-set). L’exemple suivant permet de créer un groupe à haute disponibilité nommé *myAvailabilitySet* :
 
@@ -550,13 +550,13 @@ Pour voir le site NGINX par défaut en action, ouvrez votre navigateur web, puis
 ![Site NGINX par défaut sur votre machine virtuelle](media/create-cli-complete/nginx.png)
 
 ## <a name="export-as-a-template"></a>Exporter en tant que modèle
-Que se passe-t-il si vous souhaitez créer un environnement de développement supplémentaire avec les mêmes paramètres ou un environnement de production correspondant ? Resource Manager utilise des modèles JSON qui définissent tous les paramètres pour votre environnement. Vous créez des environnements entiers en faisant référence à ce modèle JSON. Vous pouvez [créer manuellement des modèles JSON](../../resource-group-authoring-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ou exporter un environnement existant qui créera le modèle JSON pour vous. Utilisez la commande [az group export](/cli/azure/group) pour exporter votre groupe de ressources comme suit :
+Que se passe-t-il si vous souhaitez créer un environnement de développement supplémentaire avec les mêmes paramètres ou un environnement de production correspondant ? Resource Manager utilise des modèles JSON qui définissent tous les paramètres pour votre environnement. Vous créez des environnements entiers en faisant référence à ce modèle JSON. Vous pouvez [créer manuellement des modèles JSON](../../azure-resource-manager/templates/template-syntax.md?toc=/azure/virtual-machines/linux/toc.json) ou exporter un environnement existant qui créera le modèle JSON pour vous. Utilisez la commande [az group export](/cli/azure/group) pour exporter votre groupe de ressources comme suit :
 
 ```azurecli
 az group export --name myResourceGroup > myResourceGroup.json
 ```
 
-Cette commande crée le fichier `myResourceGroup.json` dans votre répertoire de travail actuel. Quand vous créez un environnement à partir de ce modèle, vous êtes invité à indiquer tous les noms de ressources. Vous pouvez renseigner ces noms dans votre fichier de modèle en ajoutant le paramètre `--include-parameter-default-value` à la commande `az group export`. Modifiez votre modèle JSON pour spécifier les noms de ressources, ou [créez un fichier parameters.json](../../resource-group-authoring-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) qui spécifie les noms de ressources.
+Cette commande crée le fichier `myResourceGroup.json` dans votre répertoire de travail actuel. Quand vous créez un environnement à partir de ce modèle, vous êtes invité à indiquer tous les noms de ressources. Vous pouvez renseigner ces noms dans votre fichier de modèle en ajoutant le paramètre `--include-parameter-default-value` à la commande `az group export`. Modifiez votre modèle JSON pour spécifier les noms de ressources, ou [créez un fichier parameters.json](../../azure-resource-manager/templates/template-syntax.md?toc=/azure/virtual-machines/linux/toc.json) qui spécifie les noms de ressources.
 
 Pour créer un environnement à partir de votre modèle, utilisez la commande [az group deployment create](/cli/azure/group/deployment) comme suit :
 
@@ -566,7 +566,7 @@ az group deployment create \
     --template-file myResourceGroup.json
 ```
 
-Vous pouvez lire la section contenant [plus de détails sur le déploiement à partir de modèles](../../resource-group-template-deploy-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Découvrez notamment comment mettre à jour des environnements de manière incrémentielle, utiliser le fichier de paramètres et accéder aux modèles à partir d’un emplacement de stockage unique.
+Vous pouvez lire la section contenant [plus de détails sur le déploiement à partir de modèles](../../azure-resource-manager/templates/deploy-cli.md?toc=/azure/virtual-machines/linux/toc.json). Découvrez notamment comment mettre à jour des environnements de manière incrémentielle, utiliser le fichier de paramètres et accéder aux modèles à partir d’un emplacement de stockage unique.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Vous voici en mesure de commencer à utiliser plusieurs composants réseau et machines virtuelles. Vous pouvez utiliser cet exemple d’environnement pour générer votre application en utilisant les composants de base présentés ici.

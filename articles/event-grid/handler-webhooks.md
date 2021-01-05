@@ -1,24 +1,21 @@
 ---
 title: Webhooks en tant que gestionnaires d’événements pour les événements Azure Event Grid
 description: Décrit comment utiliser des webhooks en tant que gestionnaires d’événements pour des événements Azure Event Grid. Les runbooks et applications logiques Azure Automation sont pris en charge en tant que gestionnaires d’événements via des webhooks.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 05/11/2020
-ms.author: spelluru
-ms.openlocfilehash: ba67b1cd93bc1c713648f799090e0b2cd77cff1b
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 07/07/2020
+ms.openlocfilehash: aa20c75789a18b93f787134dffe165e60ff1ab6f
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83596378"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91875799"
 ---
 # <a name="webhooks-automation-runbooks-logic-apps-as-event-handlers-for-azure-event-grid-events"></a>Webhooks, runbooks Automation, applications logiques en tant que gestionnaires d’événements pour les événements Azure Event Grid
 Un gestionnaire d’événements désigne l’endroit où l’événement est envoyé. Le gestionnaire effectue des actions supplémentaires pour traiter l’événement. Plusieurs services Azure sont automatiquement configurés pour gérer les événements. Vous pouvez également utiliser n’importe quel webhook pour la gestion des événements. À cette fin, il n’est pas nécessaire que le webhook soit hébergé dans Azure. Event Grid ne prend en charge que les points de terminaison Webhook HTTPS.
 
 > [!NOTE]
-> Les runbooks et applications logiques Azure Automation sont pris en charge en tant que gestionnaires d’événements via des webhooks. 
+> - Les runbooks et applications logiques Azure Automation sont pris en charge en tant que gestionnaires d’événements via des webhooks. 
+> - Même si vous pouvez utiliser **Webhook** en tant que **type de point de terminaison** pour configurer une fonction Azure en tant que gestionnaire d’événements, utilisez **Azure Function** comme type de point de terminaison. Pour en savoir plus, consultez [Fonction Azure en tant que gestionnaire d’événements](handler-functions.md).
 
 ## <a name="webhooks"></a>webhooks
 Consultez les articles suivants pour obtenir une vue d’ensemble et des exemples d’utilisation de webhooks en tant que gestionnaires d’événements. 
@@ -47,6 +44,27 @@ Utilisez **Logic Apps** pour implémenter des processus d’entreprise afin de t
 | [Tutoriel : Surveiller les modifications d'une machine virtuelle avec Azure Event Grid et Azure Logic Apps](monitor-virtual-machine-changes-event-grid-logic-app.md) | Une application logique surveille les modifications apportées à une machine virtuelle et envoie des e-mails à ce sujet. |
 | [Tutoriel : Envoyer des notifications par e-mail sur des événements Azure IoT Hub à l’aide de Logic Apps](publish-iot-hub-events-to-logic-apps.md) | Une application logique envoie un e-mail de notification chaque fois qu’un appareil est ajouté à votre hub IoT. |
 | [Tutoriel : Répondre aux événements Azure Service Bus reçus via Azure Event Grid à l’aide d’Azure Functions et d’Azure Logic Apps](../service-bus-messaging/service-bus-to-event-grid-integration-example.md?toc=%2fazure%2fevent-grid%2ftoc.json) | Event Grid envoie des messages à partir de la rubrique Service Bus à l’application de fonction et à l’application logique. |
+
+## <a name="rest-example-for-put"></a>Exemple REST (pour PUT)
+
+```json
+{
+    "properties": 
+    {
+        "destination": 
+        {
+            "endpointType": "WebHook",
+            "properties": 
+            {
+                "endpointUrl": "<WEB HOOK URL>",
+                "maxEventsPerBatch": 1,
+                "preferredBatchSizeInKilobytes": 64
+            }
+        },
+        "eventDeliverySchema": "EventGridSchema"
+    }
+}
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour obtenir la liste des gestionnaires d’événements pris en charge, consultez l’article [Gestionnaires d’événements](event-handlers.md). 

@@ -5,12 +5,12 @@ author: shsha-msft
 ms.topic: conceptual
 ms.date: 03/10/2020
 ms.author: shsha
-ms.openlocfilehash: 8483e00f55d0dd49ba57db58b99b237ce0a169e5
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 3be079b97c2660437344f88203fdda06cc6d6740
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427261"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86258967"
 ---
 # <a name="initializer-codepackages"></a>CodePackages initialiseurs
 
@@ -50,7 +50,7 @@ Examinons un exemple complet utilisant des CodePackages initialiseurs.
 > [!IMPORTANT]
 > L’exemple suivant part du principe que vous êtes familiarisé avec la création [d’applications de conteneur Windows à l’aide de Service Fabric et de Docker][containers-getting-started-link].
 >
-> Cet exemple fait référence à mcr.microsoft.com/windows/nanoserver:1809. Les conteneurs Windows Server ne sont pas compatibles avec toutes les versions d’un système d’exploitation hôte. Pour plus d’informations, consultez [Compatibilité des versions avec les conteneurs Windows](https://docs.microsoft.com/virtualization/windowscontainers/deploy-containers/version-compatibility).
+> Cet exemple fait référence à mcr.microsoft.com/windows/nanoserver:1809. Les conteneurs Windows Server ne sont pas compatibles avec toutes les versions d’un système d’exploitation hôte. Pour plus d’informations, consultez [Compatibilité des versions avec les conteneurs Windows](/virtualization/windowscontainers/deploy-containers/version-compatibility).
 
 Le fichier ServiceManifest.xml suivant s’appuie sur l’extrait de code ServiceManifest décrit précédemment. *InitCodePackage0*, *InitCodePackage1* et *WorkloadCodePackage* sont des CodePackages qui représentent des conteneurs. Lors de l’activation, *InitCodePackage0* est exécuté en premier. Il journalise un message dans un fichier et se ferme. Ensuite, *InitCodePackage1* est exécuté. Il journalise également un message dans un fichier et se ferme. Enfin, l’exécution de *WorkloadCodePackage* commence. Il journalise également un message dans un fichier, génère le contenu du fichier sur **stdout** puis effectue un test ping indéfiniment.
 
@@ -151,4 +151,3 @@ Pour accéder à des informations connexes, consultez les articles suivants.
 [application-model-link]: service-fabric-application-model.md
 [hosting-model-link]: service-fabric-hosting-model.md
 [setup-entry-point-link]: service-fabric-run-script-at-service-startup.md
-

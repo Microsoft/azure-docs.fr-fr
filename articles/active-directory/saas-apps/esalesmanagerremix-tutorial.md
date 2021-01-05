@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à E Sales Manager Remix | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et E Sales Manager Remix.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: femila
-ms.reviewer: joflore
-ms.assetid: 89b5022c-0d5b-4103-9877-ddd32b6e1c02
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 06/12/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 167d682bb5ce1266ba6b677f6223c38dd34af9bb
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: c06595b683092abf52300481068daab26394c4cb
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82202394"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995639"
 ---
 # <a name="integrate-azure-active-directory-with-e-sales-manager-remix"></a>Intégrer Azure Active Directory à E Sales Manager Remix
 
@@ -101,9 +96,9 @@ Activez l’authentification unique Azure AD dans le portail Azure, et configure
 
     ![Informations d’authentification unique dans la section relative aux domaine et adresses URL E Sales Manager Remix](./media/esalesmanagerremix-tutorial/tutorial_esalesmanagerremix_url.png)
 
-    a. Dans le champ **URL d’authentification**, entrez une URL dans le format suivant : *https://\<Server-Based-URL>/\<sub-domain>/esales-pc*.
+    a. Dans la zone **URL de connexion**, tapez une URL au format *https://\<Server-Based-URL>/\<sub-domain>/esales-pc*.
 
-    b. Dans le champ **Identificateur**, entrez une URL dans le format suivant : *https://\<Server-Based-URL>/\<sub-domain>/* .
+    b. Dans la zone **Identificateur**, tapez une URL au format *https://\<Server-Based-URL>/\<sub-domain>/* .
 
     c. Notez la valeur **Identificateur** en vue d’une utilisation plus tard dans ce didacticiel.
     
@@ -120,13 +115,13 @@ Activez l’authentification unique Azure AD dans le portail Azure, et configure
 
     La fenêtre **Modifier l’attribut** s’affiche.
 
-1. Copiez les valeurs **Espace de noms** et **Nom**. Générez la valeur dans le modèle *\<Namespace>/\<Name>* , et enregistrez-la en vue d’une utilisation plus tard dans ce didacticiel.
+1. Copiez les valeurs **Espace de noms** et **Nom**. Générez la valeur dans le modèle *\<Namespace>/\<Name>* , et enregistrez-la en vue de son utilisation ultérieure dans ce didacticiel.
 
     ![Fenêtre Modifier l’attribut](./media/esalesmanagerremix-tutorial/configure2.png)
 
 1. Sous **Configuration E Sales Manager Remix**, sélectionnez **Configurer E Sales Manager Remix**.
 
-    ![Configuration d’E Sales Manager Remix](./media/esalesmanagerremix-tutorial/tutorial_esalesmanagerremix_configure.png) 
+    ![Capture d’écran qui montre la section « Configuration d’E Sales Manager Remix » avec l’option « Configurer E Sales Manager Remix ».](./media/esalesmanagerremix-tutorial/tutorial_esalesmanagerremix_configure.png) 
 
     La fenêtre **Configurer l’authentification** s’affiche.
 
@@ -268,7 +263,7 @@ Dans cette section, vous allez tester la configuration de l’authentification u
 
 Lorsque vous cliquez sur la mosaïque E Sales Manager Remix dans le volet d’accès, vous devez être connecté automatiquement à votre application E Sales Manager Remix.
 
-Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/active-directory-saas-access-panel-introduction.md). 
+Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md). 
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -288,4 +283,3 @@ Pour plus d’informations sur le panneau d’accès, consultez [Présentation d
 [201]: ./media/esalesmanagerremix-tutorial/tutorial_general_201.png
 [202]: ./media/esalesmanagerremix-tutorial/tutorial_general_202.png
 [203]: ./media/esalesmanagerremix-tutorial/tutorial_general_203.png
-

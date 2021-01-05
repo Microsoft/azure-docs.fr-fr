@@ -3,20 +3,20 @@ title: Hubs de tâches dans Fonctions durables - Azure
 description: Découvrez ce que représente un hub de tâches dans l’extension Fonctions durables pour Azure Functions. Découvrez comment configurer des hubs de tâches.
 author: cgillum
 ms.topic: conceptual
-ms.date: 11/03/2019
+ms.date: 07/14/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 427ab6c4e0e769ab881af0af3023d514c1b092c6
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.openlocfilehash: 26234039c77601bc1d29beeebd3fcb8461d6d6c9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81604613"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009515"
 ---
 # <a name="task-hubs-in-durable-functions-azure-functions"></a>Hubs de tâches dans Fonctions durables (Azure Functions)
 
 Un *hub de tâches* dans [Fonctions durables](durable-functions-overview.md) est un conteneur logique réservé aux ressources Stockage Azure qui sont utilisées pour les orchestrations. Les fonctions d’orchestrateur et d’activité peuvent interagir entre elles uniquement si elles appartiennent au même hub de tâches.
 
-Si plusieurs applications de fonction partagent un compte de stockage, chaque application de fonction *doit*être configurée avec un nom de hub de tâches distinct. Un compte de stockage peut comporter de multiples hub de tâches. Le diagramme suivant illustre un hub de tâches par application de fonction dans les comptes de stockage partagé et dédié.
+Si plusieurs applications de fonction partagent un compte de stockage, chaque application de fonction *doit* être configurée avec un nom de hub de tâches distinct. Un compte de stockage peut comporter de multiples hub de tâches. Le diagramme suivant illustre un hub de tâches par application de fonction dans les comptes de stockage partagé et dédié.
 
 ![Schéma représentant les comptes de stockage partagé et dédié.](./media/durable-functions-task-hubs/task-hubs-storage.png)
 
@@ -110,12 +110,12 @@ Le code suivant montre comment écrire une fonction recourant à la [liaison du 
 [FunctionName("HttpStart")]
 public static async Task<HttpResponseMessage> Run(
     [HttpTrigger(AuthorizationLevel.Function, methods: "post", Route = "orchestrators/{functionName}")] HttpRequestMessage req,
-    [OrchestrationClient(TaskHub = "%MyTaskHub%")] IDurableOrchestrationClient starter,
+    [DurableClient(TaskHub = "%MyTaskHub%")] IDurableOrchestrationClient starter,
     string functionName,
     ILogger log)
 {
     // Function input comes from the request content.
-    dynamic eventData = await req.Content.ReadAsAsync<object>();
+    object eventData = await req.Content.ReadAsAsync<object>();
     string instanceId = await starter.StartNewAsync(functionName, eventData);
 
     log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
@@ -128,6 +128,19 @@ public static async Task<HttpResponseMessage> Run(
 > L’exemple C# précédent porte sur Durable Functions 2.x. Pour Durable Functions 1.x, vous devez utiliser `DurableOrchestrationContext` au lieu de `IDurableOrchestrationContext`. Pour en savoir plus sur les différences entre les versions, consultez l’article [Versions de Durable Functions](durable-functions-versions.md).
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+La propriété de hub de tâches dans le fichier `function.json` est définie par le biais du paramètre d’application :
+
+```json
+{
+    "name": "input",
+    "taskHub": "%MyTaskHub%",
+    "type": "orchestrationClient",
+    "direction": "in"
+}
+```
+
+# <a name="python"></a>[Python](#tab/python)
 
 La propriété de hub de tâches dans le fichier `function.json` est définie par le biais du paramètre d’application :
 

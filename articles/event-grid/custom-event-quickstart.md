@@ -1,23 +1,15 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements personnalisés avec Event Grid et Azure CLI'
 description: 'Démarrage rapide : Utiliser Azure Event Grid et Azure CLI pour publier une rubrique personnalisée et pour vous abonner aux événements de cette rubrique Les événements sont gérés par une application web.'
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: spelluru
-ms.date: 11/05/2019
+ms.date: 07/07/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom:
-- seodec18
-- seo-javascript-september2019
-- seo-python-october2019
-ms.openlocfilehash: 4dbf3d2be04403d7cafac4ef9d4305c368da68b1
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 0a3d8f5a1614704cea4242ce64ecc6c4504da754
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743070"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97702019"
 ---
 # <a name="quickstart-route-custom-events-to-web-endpoint-with-azure-cli-and-event-grid"></a>Démarrage rapide : Router des événements personnalisés vers un point de terminaison web avec Azure CLI et Event Grid
 
@@ -31,11 +23,9 @@ Une fois que vous avez fini, vous voyez que les données d’événement ont ét
 
 [!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, cet article nécessite l’exécution de la version la plus récente d’Azure CLI (2.0.70 ou ultérieure). Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
-
-Si vous n’utilisez pas Cloud Shell, vous devez d’abord vous connecter à l’aide de `az login`.
+- Cet article nécessite la version 2.0.70 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -70,7 +60,7 @@ Remplacez `<your-site-name>` par un nom unique pour votre application web. Le no
 ```azurecli-interactive
 sitename=<your-site-name>
 
-az group deployment create \
+az deployment group create \
   --resource-group gridResourceGroup \
   --template-uri "https://raw.githubusercontent.com/Azure-Samples/azure-event-grid-viewer/master/azuredeploy.json" \
   --parameters siteName=$sitename hostingPlanName=viewerhost

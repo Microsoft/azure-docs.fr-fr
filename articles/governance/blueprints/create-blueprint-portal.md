@@ -1,18 +1,18 @@
 ---
 title: 'Démarrage rapide : Créer un blueprint dans le portail'
 description: Dans ce guide de démarrage rapide, vous allez utiliser Azure Blueprints pour créer, définir et déployer des artefacts via le portail Azure.
-ms.date: 03/25/2020
+ms.date: 08/27/2020
 ms.topic: quickstart
-ms.openlocfilehash: dd50b1833f16d364a4494483fcccfee017bb982b
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: bb9aeb4d4b96227f7bf7296854c56df4058fbe69
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81381887"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022528"
 ---
-# <a name="quickstart-define-and-assign-a-blueprint-in-the-portal"></a>Démarrage rapide : Définir et affecter un blueprint dans le portail
+# <a name="quickstart-define-and-assign-a-blueprint-in-the-portal"></a>Définir et affecter un blueprint dans le portail :
 
-Lorsque vous apprenez à créer et à affecter des blueprints, vous pouvez définir des modèles courants et développer des configurations réutilisables et rapides à déployer basées sur des modèles Azure Resource Manager, des stratégies, des exigences de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprints pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation. Il s’agit notamment des tâches suivantes :
+Quand vous apprenez à créer et à affecter des blueprints, vous pouvez définir des modèles courants et développer des configurations réutilisables et rapides à déployer basées sur des modèles Azure Resource Manager (modèles ARM), des stratégies, des exigences de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprints pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation. Il s’agit notamment des tâches suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -28,7 +28,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
    Vous pouvez également sélectionner **Créer** dans la page **Démarrage** pour accéder directement à la création d’un blueprint.
 
-   :::image type="content" source="./media/create-blueprint-portal/create-blueprint-button.png" alt-text="Créer un blueprint à partir de la page de définitions de blueprint" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/create-blueprint-button.png" alt-text="Capture d’écran du bouton « Créer un blueprint » dans la page des définitions de blueprint." border="false":::
 
 1. Sélectionnez **Commencer par un blueprint vide** à partir de la carte dans la partie supérieure de la liste des blueprints intégrés.
 
@@ -36,7 +36,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
 1. Dans la zone **Emplacement de définition**, sélectionnez les points de suspension à droite, sélectionnez le [groupe d’administration](../management-groups/overview.md) ou l’abonnement dans lequel enregistrer le blueprint, puis choisissez **Sélectionner**.
 
-1. Vérifiez que les informations sont correctes. Une fois définis, les champs **Nom du blueprint** et **Emplacement de définition** ne peuvent plus être modifiés. Ensuite, sélectionnez **Suivant : Artefacts** en bas de la page ou sur l’onglet **Artefacts** en haut de la page.
+1. Vérifiez que les informations sont correctes. Une fois définis, les champs **Nom du blueprint** et **Emplacement de définition** ne peuvent plus être modifiés. Cliquez sur **Suivant : Artefacts** en bas de la page ou sur l’onglet **Artefacts** en haut de la page.
 
 1. Ajoutez une attribution de rôle au niveau de l’abonnement :
 
@@ -48,7 +48,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
    1. Sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
 
-   :::image type="content" source="./media/create-blueprint-portal/add-role-assignment.png" alt-text="Attribution de rôle pour un artefact de blueprint" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/add-role-assignment.png" alt-text="Capture d’écran des options d’artefact d’attribution de rôle pour l’ajout à une définition de blueprint." border="false":::
 
    > [!NOTE]
    > La plupart des artefacts prennent en charge les paramètres. Un paramètre auquel une valeur est affectée durant la création du blueprint est un _paramètre statique_. Si la valeur est attribuée au paramètre durant l’affectation du blueprint, il s’agit d’un _paramètre dynamique_. Pour plus d’informations, consultez [Paramètres de blueprint](./concepts/parameters.md).
@@ -61,7 +61,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
    1. Définissez le **Type** sur **Intégré**. Dans la zone **Recherche**, entrez **étiquette**.
 
-   1. Cliquez en dehors de la fonction **Rechercher** pour que le filtrage se produise. Sélectionnez **Ajouter l’étiquette et sa valeur par défaut aux groupes de ressources**.
+   1. Enlevez le focus de la fonction **Rechercher** pour appliquer le filtre. Sélectionnez **Ajouter l’étiquette et sa valeur par défaut aux groupes de ressources**.
 
    1. Sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
 
@@ -85,8 +85,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
    1. Sélectionnez **Modèle Azure Resource Manager** comme **type d’artefact**, définissez **Nom complet de l’artefact** sur la valeur **StorageAccount**, et laissez le champ **Description** vide.
 
-   1. Sous l’onglet **Modèle** dans la zone de l’éditeur, collez le modèle Resource Manager suivant.
-      Après avoir collé le modèle, sélectionnez l’onglet **Paramètres** et notez que les paramètres du modèle **storageAccountType** et **location** ont été détectés. Chaque paramètre est automatiquement détecté et renseigné, mais configuré en tant que paramètre dynamique.
+   1. Sous l’onglet **Modèle** dans la zone de l’éditeur, collez le modèle Resource Manager suivant. Après avoir collé le modèle, sélectionnez l’onglet **Paramètres** et notez que les paramètres du modèle **storageAccountType** et **location** ont été détectés. Chaque paramètre est automatiquement détecté et renseigné, mais configuré en tant que paramètre dynamique.
 
       > [!IMPORTANT]
       > Si vous importez le modèle, vérifiez que le fichier est uniquement au format JSON et qu’il ne contient pas de code HTML. Quand vous pointez vers une URL GitHub, vérifiez que vous avez bien sélectionné **RAW** pour obtenir le fichier JSON pur et non celui qui a été wrappé avec du code HTML à des fins d’affichage sur GitHub. Si le modèle importé n’est pas entièrement au format JSON, une erreur se produit.
@@ -144,11 +143,11 @@ La première étape de la définition d’un modèle standard à des fins de con
 
    1. Sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
 
-   :::image type="content" source="./media/create-blueprint-portal/add-resource-manager-template.png" alt-text="Modèle Resource Manager pour l’artefact de blueprint" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/add-resource-manager-template.png" alt-text="Capture d’écran des options d’artefact dz modèle Resource Manager pour l’ajout à une définition de blueprint." border="false":::
 
 1. Votre blueprint terminé doit ressembler à ce qui suit. Notez que chaque artefact a **_x_ paramètres renseignés sur _y_** dans la colonne **Paramètres**. Les paramètres dynamiques sont définis à chaque affectation du blueprint.
 
-   :::image type="content" source="./media/create-blueprint-portal/completed-blueprint.png" alt-text="Définition de blueprint terminé" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/completed-blueprint.png" alt-text="Capture d’écran d’une définition de blueprint complétée avec chaque type d’artefact." border="false":::
 
 1. Une fois tous les artefacts planifiés ajoutés, sélectionnez **Enregistrer le brouillon** en bas de la page.
 
@@ -160,9 +159,9 @@ Dans [Créer un blueprint](#create-a-blueprint), vous n’avez pas fourni de des
 
 1. Dans la liste des blueprints, cliquez avec le bouton droit sur celui précédemment créé, puis sélectionnez **Modifier le blueprint**.
 
-1. Dans **Description du blueprint**, fournissez des informations sur le blueprint et les artefacts qui le composent. Dans ce cas, entrez un texte semblable à celui-ci : **Ce blueprint définit la stratégie des étiquettes et l’attribution de rôle sur l’abonnement, crée un groupe de ressources, et déploie un modèle de ressource et une attribution de rôle sur ce groupe de ressources**.
+1. Dans **Description du blueprint**, fournissez des informations sur le blueprint et les artefacts qui le composent. Dans ce cas, entrez un texte semblable à celui-ci : « Ce blueprint définit la stratégie des étiquettes et l’attribution de rôle sur l’abonnement, crée un groupe de ressources, et déploie un modèle de ressource et une attribution de rôle sur ce groupe de ressources. »
 
-1. Sélectionnez **Suivant : Artefacts** en bas de la page ou sur l’onglet **Artefacts** en haut de la page.
+1. Cliquez sur **Suivant : Artefacts** en bas de la page ou sur l’onglet **Artefacts** en haut de la page.
 
 1. Ajoutez une attribution de rôle sous le groupe de ressources :
 
@@ -176,11 +175,11 @@ Dans [Créer un blueprint](#create-a-blueprint), vous n’avez pas fourni de des
 
    1. Sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
 
-   :::image type="content" source="./media/create-blueprint-portal/add-role-assignment-2.png" alt-text="Deuxième attribution de rôle pour l’artefact de blueprint" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/add-role-assignment-2.png" alt-text="Capture d’écran des options d’artefact de la deuxième attribution de rôle pour l’ajout à une définition de blueprint." border="false":::
 
 1. Votre blueprint terminé doit ressembler à ce qui suit. Remarquez que l’attribution de rôle nouvellement ajoutée montre **1 paramètres renseignés sur 1**. Cela signifie qu’il s’agit d’un paramètre statique.
 
-   :::image type="content" source="./media/create-blueprint-portal/completed-blueprint-2.png" alt-text="Deuxième définition pour le blueprint terminé" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/completed-blueprint-2.png" alt-text="Capture d’écran de la deuxième définition de blueprint complétée avec l’artefact d’attribution de rôle supplémentaire." border="false":::
 
 1. Le blueprint étant désormais à jour, sélectionnez **Enregistrer le brouillon**.
 
@@ -207,7 +206,7 @@ Une fois publié, vous pouvez affecter le blueprint à un abonnement. Affectez l
 
 1. Dans la liste déroulante **Abonnement** de la page **Affecter le blueprint**, sélectionnez les abonnements dans lesquels vous souhaitez déployer ce blueprint.
 
-   Si des offres Entreprise prises en charge sont disponibles à partir de [Facturation Azure](../../billing/index.md), un lien **Créer** est activé sous la zone **Abonnement**. Procédez comme suit :
+   Si des offres Entreprise prises en charge sont disponibles à partir de [Facturation Azure](../../cost-management-billing/index.yml), un lien **Créer** est activé sous la zone **Abonnement**. Procédez comme suit :
 
    1. Sélectionnez le lien **Créer** pour créer un abonnement au lieu d’en sélectionner des existants.
 
@@ -219,7 +218,7 @@ Une fois publié, vous pouvez affecter le blueprint à un abonnement. Affectez l
 
    1. Au bas de la page, sélectionnez **Créer**.
 
-      :::image type="content" source="./media/create-blueprint-portal/assignment-create-subscription.png" alt-text="Créer un abonnement pour une affectation de blueprint" border="false":::
+      :::image type="content" source="./media/create-blueprint-portal/assignment-create-subscription.png" alt-text="Capture d’écran de la fenêtre Créer un abonnement et des options disponibles pour le nouvel abonnement." border="false":::
 
       > [!IMPORTANT]
       > Quand vous sélectionnez **Créer**, le nouvel abonnement est immédiatement créé.
@@ -235,11 +234,11 @@ Une fois publié, vous pouvez affecter le blueprint à un abonnement. Affectez l
 
 1. Pour **Verrouiller l’affectation**, conservez la valeur par défaut **Ne pas verrouiller**. Pour plus d’informations, consultez [Verrouillage des ressources des blueprints](./concepts/resource-locking.md).
 
-   :::image type="content" source="./media/create-blueprint-portal/assignment-locking-mi.png" alt-text="Verrouillage et identités managées pour une affectation" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/assignment-locking-mi.png" alt-text="Capture d’écran des options de verrouillage d’attribution et d’identité managée pour l’affectation de blueprint." border="false":::
 
 1. Sous **Identité managée**, conservez la valeur par défaut **Affecté(e) par le système**.
 
-1. Pour l’attribution de rôle au niveau de l’abonnement **[Groupe d’utilisateurs ou nom de l’application] : Contributeur**, recherchez et sélectionnez un utilisateur, une application ou un groupe.
+1. Pour l’attribution de rôle au niveau de l’abonnement **[groupe d’utilisateurs ou nom d’application] : contributeur**, recherchez et sélectionnez un utilisateur, une application ou un groupe.
 
 1. Pour l’attribution de stratégie au niveau de l’abonnement, définissez **Nom d’étiquette** sur **CostCenter** et **Valeur de l’étiquette** sur **ContosoIT**.
 
@@ -249,7 +248,7 @@ Une fois publié, vous pouvez affecter le blueprint à un abonnement. Affectez l
    > Chaque artefact ajouté sous le groupe de ressources durant la définition du blueprint est mis en retrait de façon à être aligné sur le groupe de ressources ou l’objet avec lequel il sera déployé.
    > Les artefacts qui ne prennent pas de paramètres, ou qui n’ont pas de paramètres devant être définis au moment de l’affectation, sont uniquement listés dans le but de fournir des informations contextuelles.
 
-1. Dans le modèle Azure Resource Manager **StorageAccount**, sélectionnez **Standard_GRS** comme paramètre **storageAccountType**.
+1. Dans le modèle Resource Manager **StorageAccount**, sélectionnez **Standard_GRS** comme paramètre **storageAccountType**.
 
 1. Lisez les informations en bas de page, puis sélectionnez **Affecter**.
 
@@ -266,7 +265,7 @@ Maintenant que le blueprint est affecté à un abonnement, vérifiez la progress
 
 1. Dans la liste des blueprints, cliquez avec le bouton droit sur celui précédemment affecté, puis sélectionnez **Voir les détails de l’affectation**.
 
-   :::image type="content" source="./media/create-blueprint-portal/view-assignment-details.png" alt-text="Option Voir les détails d’affectation dans la page Blueprints affectés" border="false":::
+   :::image type="content" source="./media/create-blueprint-portal/view-assignment-details.png" alt-text="Capture d’écran du menu contextuel d’attribution de blueprint avec l’option « Voir les détails de l’attribution » sélectionnée." border="false":::
 
 1. Dans la page **Affectation de blueprint**, vérifiez que tous les artefacts ont été déployés et qu’aucune erreur ne s’est produite durant le déploiement. Si des erreurs se sont produites, consultez [Dépannage d’un blueprint](./troubleshoot/general.md) pour déterminer la cause du problème.
 

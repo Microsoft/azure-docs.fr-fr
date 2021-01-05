@@ -5,19 +5,19 @@ author: cynthn
 ms.service: virtual-machines-linux
 ms.topic: quickstart
 ms.workload: infrastructure
-ms.date: 10/17/2018
+ms.date: 07/31/2020
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 397fac7609d9527165a1a0a35215a2e2bac23c6d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: e3d400726bfb65b2548bc773ffb460fe1ad426a0
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81759222"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87513449"
 ---
 # <a name="quickstart-create-a-linux-virtual-machine-in-azure-with-powershell"></a>Démarrage rapide : Créer une machine virtuelle Linux dans Azure avec PowerShell
 
-Le module Azure PowerShell est utilisé pour créer et gérer des ressources Azure à partir de la ligne de commande PowerShell ou dans des scripts. Ce guide de démarrage rapide explique comment utiliser le module Azure PowerShell pour déployer une machine virtuelle Linux dans Azure. Ce démarrage rapide utilise l’image du marketplace Ubuntu 16.04 LTS fournie par Canonical. Pour voir votre machine virtuelle en action, vous établirez également une connexion SSH à la machine virtuelle et installez le serveur web NGINX.
+Le module Azure PowerShell est utilisé pour créer et gérer des ressources Azure à partir de la ligne de commande PowerShell ou dans des scripts. Ce guide de démarrage rapide explique comment utiliser le module Azure PowerShell pour déployer une machine virtuelle Linux dans Azure. Ce guide de démarrage rapide utilise l’image de la Place de marché Ubuntu 18.04 LTS fournie par Canonical. Pour voir votre machine virtuelle en action, vous établirez également une connexion SSH à la machine virtuelle et installez le serveur web NGINX.
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -29,21 +29,22 @@ Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite 
 
 ## <a name="create-ssh-key-pair"></a>Créer la paire de clés SSH
 
-Vous aurez besoin d’une paire de clés SSH pour suivre ce guide de démarrage rapide. Si vous disposez déjà d’une paire de clés SSH, vous pouvez ignorer cette étape.
+Utilisez [ssh-keygen](https://www.ssh.com/ssh/keygen/) pour créer une paire de clés SSH. Si vous disposez déjà d’une paire de clés SSH, vous pouvez ignorer cette étape.
 
-Ouvrez un interpréteur de commandes bash et utilisez [ssh-keygen](https://www.ssh.com/ssh/keygen/) pour créer une paire de clés SSH. Si vous n’avez pas d’interpréteur de commandes bash sur votre ordinateur local, vous pouvez utiliser [Azure Cloud Shell](https://shell.azure.com/bash).  
 
 ```azurepowershell-interactive
-ssh-keygen -t rsa -b 2048
+ssh-keygen -m PEM -t rsa -b 4096
 ```
 
-Pour plus d’informations sur la création de paires de clés SSH, notamment l’utilisation de PuTTy, voir [Guide pratique pour utiliser des clés SSH avec Windows](ssh-from-windows.md).
+Vous êtes invité à fournir un nom de fichier pour la paire de clés, ou vous pouvez appuyer sur **Entrée** pour utiliser l’emplacement par défaut de `/home/<username>/.ssh/id_rsa`. Si vous le souhaitez, vous pouvez aussi créer un mot de passe pour les clés.
 
-Si vous créez votre paire de clés SSH à l’aide de Cloud Shell, elle est stockée dans une image de conteneur du [compte de stockage automatiquement créé par Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/persisting-shell-storage). Ne supprimez pas ce compte de stockage, ou le partage de fichiers qu’il contient, tant que vous n’avez pas récupéré vos clés, faute de quoi vous perdrez votre accès à la machine virtuelle. 
+Pour plus d’informations sur la création de paires de clés SSH, consultez [Guide pratique pour utiliser des clés SSH avec Windows](ssh-from-windows.md).
+
+Si vous créez votre paire de clés SSH en utilisant Cloud Shell, elle sera stockée dans un [compte de stockage créé automatiquement par Cloud Shell](../../cloud-shell/persisting-shell-storage.md). Ne supprimez pas ce compte de stockage ou le partage de fichiers qu’il contient tant que vous n’avez pas récupéré vos clés, faute de quoi vous perdrez votre accès à la machine virtuelle. 
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un groupe de ressources Azure avec [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées :
+Créez un groupe de ressources Azure avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées :
 
 ```azurepowershell-interactive
 New-AzResourceGroup -Name "myResourceGroup" -Location "EastUS"
@@ -111,7 +112,7 @@ $nsg = New-AzNetworkSecurityGroup `
   -SecurityRules $nsgRuleSSH,$nsgRuleWeb
 ```
 
-Créez une carte d’interface réseau virtuel avec [New-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface). La carte réseau virtuelle connecte la machine virtuelle à un sous-réseau, un groupe de sécurité réseau et une adresse IP publique.
+Créez une carte d’interface réseau virtuel avec [New-AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface). La carte réseau virtuelle connecte la machine virtuelle à un sous-réseau, un groupe de sécurité réseau et une adresse IP publique.
 
 ```azurepowershell-interactive
 # Create a virtual network card and associate with public IP address and NSG
@@ -147,7 +148,7 @@ Set-AzVMOperatingSystem `
 Set-AzVMSourceImage `
   -PublisherName "Canonical" `
   -Offer "UbuntuServer" `
-  -Skus "16.04-LTS" `
+  -Skus "18.04-LTS" `
   -Version "latest" | `
 Add-AzVMNetworkInterface `
   -Id $nic.Id
@@ -160,7 +161,7 @@ Add-AzVMSshPublicKey `
   -Path "/home/azureuser/.ssh/authorized_keys"
 ```
 
-Combinez maintenant les définitions de configuration précédentes à créer avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) :
+Combinez maintenant les définitions de configuration précédentes à créer avec [New-AzVM](/powershell/module/az.compute/new-azvm) :
 
 ```azurepowershell-interactive
 New-AzVM `
@@ -172,13 +173,13 @@ Quelques minutes sont nécessaires pour le déploiement de votre machine virtuel
 
 ## <a name="connect-to-the-vm"></a>Connexion à la machine virtuelle
 
-Créer une connexion SSH à la machine virtuelle à l’aide de l’adresse IP publique. Pour voir l’adresse IP publique de la machine virtuelle, utilisez l’applet de commande [Get-AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress) :
+Créer une connexion SSH à la machine virtuelle à l’aide de l’adresse IP publique. Pour voir l’adresse IP publique de la machine virtuelle, utilisez l’applet de commande [Get-AzPublicIpAddress](/powershell/module/az.network/get-azpublicipaddress) :
 
 ```azurepowershell-interactive
 Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select "IpAddress"
 ```
 
-Avec le même interpréteur de commandes bash que celui utilisé pour créer votre paire de clés (comme [Azure Cloud Shell](https://shell.azure.com/bash) ou votre interpréteur de commandes bash local), collez la commande de connexion SSH dans l’interpréteur de commandes pour créer une session SSH.
+Avec le même shell que celui que vous avez utilisé pour créer votre paire de clés SSH, collez la commande suivante dans le shell pour créer une session SSH. Remplacez *10.111.12.123* par l’adresse IP de votre machine virtuelle.
 
 ```bash
 ssh azureuser@10.111.12.123
@@ -207,7 +208,7 @@ Utilisez le navigateur web de votre choix pour visualiser la page d’accueil NG
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Lorsque vous n’en avez plus besoin, vous pouvez utiliser la cmdlet [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées :
+Lorsque vous n’en avez plus besoin, vous pouvez utiliser la cmdlet [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées :
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name "myResourceGroup"
@@ -215,7 +216,7 @@ Remove-AzResourceGroup -Name "myResourceGroup"
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Avec ce guide de démarrage rapide, vous avez déployé une machine virtuelle simple, créé un Groupe de sécurité réseau et une règle, et installé un serveur web de base. Pour en savoir plus sur les machines virtuelles Azure, suivez le didacticiel pour les machines virtuelles Linux.
+Avec ce guide de démarrage rapide, vous avez déployé une machine virtuelle simple, créé un groupe de sécurité réseau et une règle, et installé un serveur web de base. Pour en savoir plus sur les machines virtuelles Azure, suivez le didacticiel pour les machines virtuelles Linux.
 
 > [!div class="nextstepaction"]
 > [Didacticiels sur les machines virtuelles Azure Linux](./tutorial-manage-vm.md)

@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=alokkirpal, previous-ms.author=alok
-ms.openlocfilehash: 269cadc50d55c4b986c55f489cecd7fa17922ba8
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: e210c1683d5f14181bc0549e73a892eb91d2e746
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83656548"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93305697"
 ---
 # <a name="machine-learning-anomaly-detection-api"></a>API de détection des anomalies Machine Learning
 
@@ -28,9 +28,9 @@ L’[API de détection des anomalies](https://gallery.azure.ai/MachineLearningAP
 
 Cette API peut détecter les types suivants de schémas anormaux dans les données de séries chronologiques :
 
-* **Tendances positives et négatives** : par exemple, lors de la surveillance de l’utilisation de la mémoire d’un système informatique, une tendance à la hausse peut être digne d’intérêt, car elle est susceptible d’être le signe d’une fuite de mémoire.
-* **Modifications dans la plage dynamique de valeurs** : par exemple, lors de la surveillance des exceptions déclenchées par un service cloud, tout changement de la plage dynamique de valeurs peut indiquer une instabilité de l’intégrité du service.
-* **Pics et creux** : par exemple, quand vous surveillez le nombre d’échecs de connexion pour un service ou le nombre de validations dans un site de e-commerce, les pics ou les creux d’activité peuvent indiquer un comportement anormal.
+* **Tendances positives et négatives**  : par exemple, lors de la surveillance de l’utilisation de la mémoire d’un système informatique, une tendance à la hausse peut être digne d’intérêt, car elle est susceptible d’être le signe d’une fuite de mémoire.
+* **Modifications dans la plage dynamique de valeurs**  : par exemple, lors de la surveillance des exceptions déclenchées par un service cloud, tout changement de la plage dynamique de valeurs peut indiquer une instabilité de l’intégrité du service.
+* **Pics et creux**  : par exemple, quand vous surveillez le nombre d’échecs de connexion pour un service ou le nombre de validations dans un site de e-commerce, les pics ou les creux d’activité peuvent indiquer un comportement anormal.
 
 Ces détecteurs Machine Learning effectuent le suivi de tels changements de valeurs au fil du temps, signalant les changements en continu au sein de leurs valeurs en tant que résultats d’anomalies. Ils ne nécessitent pas de réglage du seuil ad hoc et leurs notations peuvent être utilisées pour contrôler le taux de faux positifs. L’API de détection des anomalies est utile dans plusieurs scénarios, tels que la surveillance des services via le suivi des indicateurs de performance clés au fil du temps, la surveillance de l’utilisation via des mesures comme le nombre de recherches et le nombre de clics, la surveillance des performances via des compteurs comme la mémoire, les processeurs, le nombre de lectures de fichiers, etc. au fil du temps.
 
@@ -46,13 +46,13 @@ L’offre de détection des anomalies inclut des outils utiles pour bien commenc
 -->
 
 ## <a name="api-deployment"></a>Déploiement de l’API
-Pour pouvoir utiliser l’API, vous devez la déployer dans votre abonnement Azure où elle sera hébergée comme un service web Azure Machine Learning.  Vous pouvez effectuer cette opération dans la [galerie Azure AI](https://gallery.azure.ai/MachineLearningAPI/Anomaly-Detection-2).  Cette action déploie deux services web Azure Machine Learning Studio (classique) (et leurs ressources associées) dans votre abonnement Azure : un pour la détection d’anomalies avec détection de saisonnalité et un autre sans détection de saisonnalité.  Une fois le déploiement terminé, vous serez en mesure de gérer vos API à partir de la page des [services web Azure Machine Learning Studio (classique)](https://services.azureml.net/webservices/).  Sur cette page, vous pourrez trouver l’emplacement de vos points de terminaison, de vos clés API, ainsi que les exemples de code pour appeler l’API.  Des instructions plus détaillées sont disponibles [ici](/azure/machine-learning/studio/manage-new-webservice).
+Pour pouvoir utiliser l’API, vous devez la déployer dans votre abonnement Azure où elle sera hébergée comme un service web Azure Machine Learning.  Vous pouvez effectuer cette opération dans la [galerie Azure AI](https://gallery.azure.ai/MachineLearningAPI/Anomaly-Detection-2).  Cette action déploie deux services web Azure Machine Learning Studio (classique) (et leurs ressources associées) dans votre abonnement Azure : un pour la détection d’anomalies avec détection de saisonnalité et un autre sans détection de saisonnalité.  Une fois le déploiement terminé, vous serez en mesure de gérer vos API à partir de la page des [services web Azure Machine Learning Studio (classique)](https://services.azureml.net/webservices/).  Sur cette page, vous pourrez trouver l’emplacement de vos points de terminaison, de vos clés API, ainsi que les exemples de code pour appeler l’API.  Des instructions plus détaillées sont disponibles [ici](../classic/manage-new-webservice.md).
 
 ## <a name="scaling-the-api"></a>Mise à l’échelle de l’API
 Par défaut, votre déploiement est assorti d’un plan de facturation Dev/Test gratuit comprenant 1 000 transactions et 2 heures de calcul par mois.  Vous pouvez mettre à niveau votre plan en fonction de vos besoins.  Vous pouvez retrouver des informations sur la tarification des différents plans [ici](https://azure.microsoft.com/pricing/details/machine-learning/) sous « Tarification des API web de production ».
 
 ## <a name="managing-aml-plans"></a>Gestion des plans AML
-Vous pouvez gérer votre plan de facturation [ici](https://services.azureml.net/plans/).  Le nom du plan doit être basé sur le nom du groupe de ressources que vous avez choisi lors du déploiement de l’API, plus une chaîne unique à votre abonnement.  Vous pouvez retrouver des instructions sur la mise à niveau de votre plan [ici](/azure/machine-learning/studio/manage-new-webservice) dans la section « Gestion des plans de facturation ».
+Vous pouvez gérer votre plan de facturation [ici](https://services.azureml.net/plans/).  Le nom du plan doit être basé sur le nom du groupe de ressources que vous avez choisi lors du déploiement de l’API, plus une chaîne unique à votre abonnement.  Vous pouvez retrouver des instructions sur la mise à niveau de votre plan [ici](../classic/manage-new-webservice.md) dans la section « Gestion des plans de facturation ».
 
 ## <a name="api-definition"></a>Définition de l’API
 Le service web fournit des API REST sur HTTPS qui peuvent être utilisées de différentes façons, notamment une application web ou mobile, R, Python, Excel, etc.  L’envoi des données de séries chronologiques à ce service se fait via un appel d’API REST ; celui-ci exécute une combinaison des trois types de détection d’anomalie décrits ci-dessous.
@@ -63,44 +63,48 @@ Pour appeler l’API, vous devez connaître l’emplacement du point de terminai
 ### <a name="sample-request-body"></a>Exemple de corps de la demande
 La demande contient deux objets : `Inputs` et `GlobalParameters`.  Dans l’exemple de demande ci-dessous, certains paramètres sont envoyés de façon explicite tandis que d’autres ne le sont pas (faites défiler pour voir la liste complète des paramètres de chaque point de terminaison).  Les paramètres qui ne sont pas envoyés de façon explicite dans la demande utilisent les valeurs par défaut indiquées ci-dessous.
 
-    {
-                "Inputs": {
-                        "input1": {
-                                "ColumnNames": ["Time", "Data"],
-                                "Values": [
-                                        ["5/30/2010 18:07:00", "1"],
-                                        ["5/30/2010 18:08:00", "1.4"],
-                                        ["5/30/2010 18:09:00", "1.1"]
-                                ]
-                        }
-                },
-        "GlobalParameters": {
-            "tspikedetector.sensitivity": "3",
-            "zspikedetector.sensitivity": "3",
-            "bileveldetector.sensitivity": "3.25",
-            "detectors.spikesdips": "Both"
-        }
+```json
+{
+            "Inputs": {
+                    "input1": {
+                            "ColumnNames": ["Time", "Data"],
+                            "Values": [
+                                    ["5/30/2010 18:07:00", "1"],
+                                    ["5/30/2010 18:08:00", "1.4"],
+                                    ["5/30/2010 18:09:00", "1.1"]
+                            ]
+                    }
+            },
+    "GlobalParameters": {
+        "tspikedetector.sensitivity": "3",
+        "zspikedetector.sensitivity": "3",
+        "bileveldetector.sensitivity": "3.25",
+        "detectors.spikesdips": "Both"
     }
+}
+```
 
 ### <a name="sample-response"></a>Exemple de réponse
 Pour voir le champ `ColumnNames`, vous devez inclure `details=true` comme paramètre d’URL dans votre demande.  Consultez les tableaux ci-dessous pour connaître la signification de chacun de ces champs.
 
-    {
-        "Results": {
-            "output1": {
-                "type": "table",
-                "value": {
-                    "Values": [
-                        ["5/30/2010 6:07:00 PM", "1", "1", "0", "0", "-0.687952590518378", "0", "-0.687952590518378", "0", "-0.687952590518378", "0"],
-                        ["5/30/2010 6:08:00 PM", "1.4", "1.4", "0", "0", "-1.07030497733224", "0", "-0.884548154298423", "0", "-1.07030497733224", "0"],
-                        ["5/30/2010 6:09:00 PM", "1.1", "1.1", "0", "0", "-1.30229513613974", "0", "-1.173800281031", "0", "-1.30229513613974", "0"]
-                    ],
-                    "ColumnNames": ["Time", "OriginalData", "ProcessedData", "TSpike", "ZSpike", "BiLevelChangeScore", "BiLevelChangeAlert", "PosTrendScore", "PosTrendAlert", "NegTrendScore", "NegTrendAlert"],
-                    "ColumnTypes": ["DateTime", "Double", "Double", "Double", "Double", "Double", "Int32", "Double", "Int32", "Double", "Int32"]
-                }
+```json
+{
+    "Results": {
+        "output1": {
+            "type": "table",
+            "value": {
+                "Values": [
+                    ["5/30/2010 6:07:00 PM", "1", "1", "0", "0", "-0.687952590518378", "0", "-0.687952590518378", "0", "-0.687952590518378", "0"],
+                    ["5/30/2010 6:08:00 PM", "1.4", "1.4", "0", "0", "-1.07030497733224", "0", "-0.884548154298423", "0", "-1.07030497733224", "0"],
+                    ["5/30/2010 6:09:00 PM", "1.1", "1.1", "0", "0", "-1.30229513613974", "0", "-1.173800281031", "0", "-1.30229513613974", "0"]
+                ],
+                "ColumnNames": ["Time", "OriginalData", "ProcessedData", "TSpike", "ZSpike", "BiLevelChangeScore", "BiLevelChangeAlert", "PosTrendScore", "PosTrendAlert", "NegTrendScore", "NegTrendAlert"],
+                "ColumnTypes": ["DateTime", "Double", "Double", "Double", "Double", "Double", "Int32", "Double", "Int32", "Double", "Int32"]
             }
         }
     }
+}
+```
 
 
 ## <a name="score-api"></a>API Score
@@ -193,4 +197,3 @@ L’API exécute tous les détecteurs sur vos données de séries chronologiques
 
 [1]: ./media/apps-anomaly-detection-api/anomaly-detection-score.png
 [2]: ./media/apps-anomaly-detection-api/anomaly-detection-seasonal.png
-

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 01/13/2020
-ms.openlocfilehash: abc3cc8c526e37e18f1e67b109a9a8e15ff8c989
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 407db727f521ea7731f0cbdbdd05c4338c9f452e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302710"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86207726"
 ---
 # <a name="run-mapreduce-jobs-with-apache-hadoop-on-hdinsight-using-rest"></a>Exécuter des tâches MapReduce avec Apache Hadoop sur HDInsight avec REST
 
@@ -61,7 +61,7 @@ Au choix :
 
     La réponse reçue est similaire au JSON suivant :
 
-    ```output
+    ```json
     {"version":"v1","status":"ok"}
     ```
 
@@ -83,9 +83,7 @@ Au choix :
      * **class** : La classe contenant la logique MapReduce
      * **arg** : Les arguments à transmettre à la tâche MapReduce. Dans le cas présent, le fichier texte d’entrée et le répertoire utilisés pour la sortie
 
-    Cette commande doit retourner un ID de tâche qui peut être utilisé pour vérifier le statut de la tâche :
-
-       job_1415651640909_0026
+    Cette commande doit retourner un ID de tâche qui peut être utilisé pour vérifier le statut de la tâche : `job_1415651640909_0026`.
 
 1. Pour vérifier le statut de la tâche, utilisez la commande suivante. Remplacez la valeur de `JOBID` par la **valeur de** réelle renvoyée à l’étape précédente. Revoyez l’emplacement des **jq** si nécessaire.
 
@@ -116,7 +114,7 @@ Au choix :
 
     La réponse reçue est similaire au JSON suivant :
 
-    ```output
+    ```json
     {"version":"v1","status":"ok"}
     ```
 
@@ -146,9 +144,7 @@ Au choix :
     * **class** : La classe contenant la logique MapReduce
     * **arg** : Les arguments à transmettre à la tâche MapReduce. Dans le cas présent, le fichier texte d’entrée et le répertoire utilisés pour la sortie
 
-   Cette commande doit retourner un ID de tâche qui peut être utilisé pour vérifier le statut de la tâche :
-
-       job_1415651640909_0026
+   Cette commande doit retourner un ID de tâche qui peut être utilisé pour vérifier le statut de la tâche : `job_1415651640909_0026`.
 
 1. Pour vérifier le statut de la tâche, utilisez la commande suivante :
 

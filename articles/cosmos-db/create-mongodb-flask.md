@@ -8,14 +8,16 @@ ms.subservice: cosmosdb-mongo
 ms.devlang: python
 ms.topic: quickstart
 ms.date: 12/26/2018
-ms.openlocfilehash: 53d1010f501e59b99c3ba6bac675124cdc5f77a0
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: devx-track-python
+ms.openlocfilehash: 3d066005ac18bf42f913885558bf6f0ee5fc50c4
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83659221"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349161"
 ---
 # <a name="quickstart-build-a-python-app-using-azure-cosmos-dbs-api-for-mongodb"></a>Démarrage rapide : Générer une application Python en utilisant l’API d’Azure Cosmos DB pour MongoDB
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-mongodb-dotnet.md)
@@ -126,7 +128,7 @@ Vous venez de mettre à jour votre application avec toutes les informations néc
 
 ## <a name="deploy-to-azure"></a>Déployer dans Azure
 
-Pour déployer cette application, vous pouvez créer une application web dans Azure et activer le déploiement continu avec une duplication (fork) de ce référentiel GitHub. Suivez ce [didacticiel](https://docs.microsoft.com/azure/app-service/deploy-continuous-deployment) pour configurer le déploiement continu avec GitHub dans Azure.
+Pour déployer cette application, vous pouvez créer une application web dans Azure et activer le déploiement continu avec une duplication (fork) de ce référentiel GitHub. Suivez ce [didacticiel](../app-service/deploy-continuous-deployment.md) pour configurer le déploiement continu avec GitHub dans Azure.
 
 Lors du déploiement sur Azure, vous devez supprimer vos clés d’application et vérifier que la section ci-dessous n’est pas commentée :
 
@@ -136,7 +138,7 @@ Lors du déploiement sur Azure, vous devez supprimer vos clés d’application e
     db.authenticate(name=os.getenv("MONGO_USERNAME"),password=os.getenv("MONGO_PASSWORD"))
 ```
 
-Vous devez ensuite ajouter vos valeurs MONGOURL, MONGO_PASSWORD et MONGO_USERNAME aux paramètres d’application. Vous pouvez suivre ce [didacticiel](https://docs.microsoft.com/azure/app-service/configure-common#configure-app-settings) pour en savoir plus sur les paramètres d’application dans Azure Web Apps.
+Vous devez ensuite ajouter vos valeurs MONGOURL, MONGO_PASSWORD et MONGO_USERNAME aux paramètres d’application. Vous pouvez suivre ce [didacticiel](../app-service/configure-common.md#configure-app-settings) pour en savoir plus sur les paramètres d’application dans Azure Web Apps.
 
 Si vous ne souhaitez pas créer de duplication (fork) de ce dépôt, vous pouvez également sélectionner le bouton **Déployer sur Azure** ci-dessous. Vous devez ensuite aller dans Azure et configurer les paramètres d’application avec vos informations de compte Azure Cosmos DB.
 
@@ -160,4 +162,4 @@ Si vous ne souhaitez pas créer de duplication (fork) de ce dépôt, vous pouvez
 Dans ce guide de démarrage rapide, vous avez appris à créer un compte d’API Azure Cosmos DB pour Mongo DB et à utiliser l’émulateur Azure Cosmos DB pour exécuter une application web To-Do Python Flask clonée à partir de GitHub. Vous pouvez maintenant importer des données supplémentaires dans votre compte Azure Cosmos DB. 
 
 > [!div class="nextstepaction"]
-> [Importer des données MongoDB dans Azure Cosmos DB](mongodb-migrate.md)
+> [Importer des données MongoDB dans Azure Cosmos DB](../dms/tutorial-mongodb-cosmos-db.md?toc=%2fazure%2fcosmos-db%2ftoc.json%253ftoc%253d%2fazure%2fcosmos-db%2ftoc.json)

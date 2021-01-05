@@ -4,12 +4,12 @@ ms.service: app-service-mobile
 ms.topic: include
 ms.date: 08/23/2018
 ms.author: crdun
-ms.openlocfilehash: 6e4168dbfd2963558166ee841e3d9075e82bc6ad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9170e1c5f2e0bc8e4030d892c149717d3ece2d9d
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177741"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601847"
 ---
 > [!div class="op_single_selector"]
 > * [Azure Active Directory](../articles/app-service/configure-authentication-provider-aad.md)
@@ -17,6 +17,8 @@ ms.locfileid: "67177741"
 > * [Google](../articles/app-service/configure-authentication-provider-google.md)
 > * [Compte Microsoft](../articles/app-service/configure-authentication-provider-microsoft.md)
 > * [Twitter](../articles/app-service/configure-authentication-provider-twitter.md)
+> * [Fournisseur OpenID Connect (préversion)](../articles/app-service/configure-authentication-provider-openid-connect.md)
+> * [Se connecter avec Apple (préversion)](../articles/app-service/configure-authentication-provider-apple.md)
 > 
 > 
 

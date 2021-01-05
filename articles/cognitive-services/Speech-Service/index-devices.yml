@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/10/2020
   ms.author: trbye
-  ms.openlocfilehash: 76bb63654778a08244e2207839e12812b7227dff
-  ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+  ms.openlocfilehash: 66b4ec0186864e443babae0c26094bc4f613e67b
+  ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "81401394"
+  ms.lasthandoff: 10/22/2020
+  ms.locfileid: "92756860"
 landingContent:
 - title: À propos du Kit de développement logiciel (SDK) des appareils Speech
   linkLists:
@@ -50,3 +50,9 @@ landingContent:
     links:
     - text: Dépanner
       url: speech-devices-sdk-troubleshooting.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

@@ -1,26 +1,26 @@
 ---
 title: 'Tutoriel : Personnaliser l’interface utilisateur'
 titleSuffix: Azure AD B2C
-description: Découvrez comment personnaliser l’interface utilisateur de vos applications dans Azure Active Directory B2C à l’aide du portail Azure.
+description: Ce tutoriel explique comment personnaliser l’interface utilisateur de vos applications dans Azure Active Directory B2C à l’aide du portail Azure.
 services: B2C
 author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 02/01/2019
+ms.topic: tutorial
+ms.date: 07/30/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: b2b2bc8dd4e60348553228b8b418df252a8c426a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 036e9e6bf58d837c698a6092770ef581f77bc20c
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78186248"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97108244"
 ---
 # <a name="tutorial-customize-the-interface-of-user-experiences-in-azure-active-directory-b2c"></a>Tutoriel : Personnaliser l'interface des expériences utilisateur dans Azure Active Directory B2C
 
-Pour des expériences utilisateur plus courantes telles que l’inscription, la connexion et la modification du profil, vous pouvez utiliser des [flux d’utilisateur](user-flow-overview.md) dans Azure Active Directory B2C (Azure AD B2C). Les informations contenues dans ce tutoriel vous aideront à découvrir comment [personnaliser l’interface utilisateur](customize-ui-overview.md) de ces expériences à l’aide de vos propres fichiers HTML et CSS.
+Pour des expériences utilisateur plus courantes telles que l’inscription, la connexion et la modification du profil, vous pouvez utiliser des [flux d’utilisateur](user-flow-overview.md) dans Azure Active Directory B2C (Azure AD B2C). Les informations contenues dans ce tutoriel vous aideront à découvrir comment [personnaliser l’interface utilisateur](customize-ui-with-html.md) de ces expériences à l’aide de vos propres fichiers HTML et CSS.
 
 Dans cet article, vous apprendrez comment :
 
@@ -139,7 +139,7 @@ Dans ce tutoriel, vous stockez les fichiers que vous avez créés dans le compte
 ## <a name="update-the-user-flow"></a>Mettre à jour le flux d'utilisateurs
 
 1. Choisissez **Tous les services** dans le coin supérieur gauche du portail Azure, puis recherchez et sélectionnez **Azure AD B2C**.
-2. Sélectionnez **Flux d'utilisateurs (stratégies)** , puis choisissez le flux d'utilisateurs *B2C_1_signupsignin1*.
+2. Sélectionnez **Flux d’utilisateurs**, puis le flux utilisateur *B2C_1_signupsignin1*.
 3. Sélectionnez **Mises en page**, puis sous **Page unifiée d'inscription ou de connexion**, cliquez sur **Oui** pour **Utiliser un contenu de page personnalisé**.
 4. Dans **URI la page personnalisée**, entrez l'URI du fichier *custom-ui.html* notée précédemment.
 5. En haut de la page, sélectionnez **Enregistrer**.
@@ -166,4 +166,4 @@ Dans cet article, vous avez appris à effectuer les opérations suivantes :
 > * Tester l’interface utilisateur personnalisée
 
 > [!div class="nextstepaction"]
-> [Personnalisation de la langue dans Azure Active Directory B2C](user-flow-language-customization.md)
+> [Personnaliser l’interface utilisateur dans Azure Active Directory B2C](customize-ui-with-html.md)

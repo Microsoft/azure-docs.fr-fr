@@ -4,12 +4,12 @@ ms.service: databox
 ms.topic: include
 ms.date: 03/04/2019
 ms.author: alkohli
-ms.openlocfilehash: 94c132421f1e113b667341b094acad8047e5f465
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 3312d1ec7c2535e103cf8959599c0d4c3014f520
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82561762"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86218145"
 ---
 1. [Connectez-vous à l’interface PowerShell](#connect-to-the-powershell-interface).
 2. Utilisez `Get-HcsApplianceInfo` pour obtenir les informations pour votre appareil.
@@ -44,15 +44,15 @@ ms.locfileid: "82561762"
     ```
 
     Voici un tableau récapitulant les informations importantes sur les appareils :
-    
-    | Paramètre                             | Description                                                                                                                                                  |   |
-    |--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-    | FriendlyName                   | Nom convivial configuré pour l’appareil via l’interface utilisateur web locale lors du déploiement de l’appareil. Le nom convivial par défaut est le numéro de série de l’appareil.  |   |
-    | SerialNumber                   | Le numéro de série de l’appareil est un numéro unique attribué en usine.                                                                             |   |
-    | Modèle                          | Le modèle de votre appareil Azure Stack Edge ou Data Box Gateway. Le modèle est physique pour Azure Stack Edge et virtuel pour Data Box Gateway.                   |   |
-    | FriendlySoftwareVersion        | Chaîne conviviale qui correspond à la version du logiciel de l’appareil. Pour un système exécutant la préversion, la version conviviale du logiciel serait Data Box Edge 1902. |   |
-    | HcsVersion                     | Version du logiciel HCS exécutée sur votre appareil. Par exemple, la version du logiciel HCS correspondant à Data Box Edge 1902 est 1.4.771.324.            |   |
-    | LocalCapacityInMb              | Capacité totale locale de l’appareil en mégabits.                                                                                                        |   |
-    | IsRegistered                   | Cette valeur indique si votre appareil est activé avec le service.                                                                                         |   |
+
+    | Paramètre | Description |
+    |-----------|-------------|
+    | FriendlyName                   | Nom convivial configuré pour l’appareil via l’interface utilisateur web locale lors du déploiement de l’appareil. Le nom convivial par défaut est le numéro de série de l’appareil.  |
+    | SerialNumber                   | Le numéro de série de l’appareil est un numéro unique attribué en usine.                                                                             |
+    | Modèle                          | Le modèle de votre appareil Azure Stack Edge ou Data Box Gateway. Le modèle est physique pour Azure Stack Edge et virtuel pour Data Box Gateway.                   |
+    | FriendlySoftwareVersion        | Chaîne conviviale qui correspond à la version du logiciel de l’appareil. Pour un système exécutant la préversion, la version conviviale du logiciel serait Data Box Edge 1902. |
+    | HcsVersion                     | Version du logiciel HCS exécutée sur votre appareil. Par exemple, la version du logiciel HCS correspondant à Data Box Edge 1902 est 1.4.771.324.            |
+    | LocalCapacityInMb              | Capacité totale locale de l’appareil en mégabits.                                                                                                        |
+    | IsRegistered                   | Cette valeur indique si votre appareil est activé avec le service.                                                                                         |
 
 

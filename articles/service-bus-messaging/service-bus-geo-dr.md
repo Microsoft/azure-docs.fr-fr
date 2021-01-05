@@ -1,20 +1,14 @@
 ---
 title: Géorécupération d’urgence Azure Service Bus | Microsoft Docs
 description: Utiliser les régions géographiques pour le basculement et la récupération d’urgence dans Azure Service Bus
-services: service-bus-messaging
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 01/23/2019
-ms.author: aschhab
-ms.openlocfilehash: 49748006baf779e6aea4322068ca3bd07a03a0a3
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 06/23/2020
+ms.openlocfilehash: 8c203ed197c1e5bfb15cfb503a04df79b85c630e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82209398"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91372521"
 ---
 # <a name="azure-service-bus-geo-disaster-recovery"></a>Géorécupération d’urgence Azure Service Bus
 
@@ -45,9 +39,9 @@ Cet article emploie les termes suivants :
 
 -  *Espace de noms principal/secondaire* : espaces de noms qui correspondent à l’alias. L’espace de noms principal est « actif » et reçoit les messages (il peut s’agir d’un espace de noms existant ou nouveau). L’espace de noms secondaire est « passif » et ne reçoit pas de messages. Les métadonnées sont synchronisées entre ces deux espaces de noms, qui peuvent ainsi accepter facilement les messages sans aucune modification du code d’application ou de la chaîne de connexion. Pour vous assurer que seul l’espace de noms actif reçoit des messages, vous devez utiliser l’alias. 
 
--  *Métadonnées* : entités telles que des files d’attentes, des rubriques et des abonnements ; incluent également leurs propriétés sur le service associé à l’espace de noms. Notez que seules les entités et leurs paramètres sont automatiquement répliqués. Les messages ne sont pas répliqués.
+-  *Métadonnées* : entités telles que les files d'attentes, les rubriques et les abonnements ; incluent également leurs propriétés sur le service associé à l'espace de noms. Notez que seules les entités et leurs paramètres sont automatiquement répliqués. Les messages ne sont pas répliqués.
 
--  *Basculement* : processus d’activation de l’espace de noms secondaire.
+-  *Basculement* : processus d’activation de l’espace de noms secondaire.
 
 ## <a name="setup"></a>Programme d’installation
 
@@ -146,9 +140,46 @@ Vous pouvez activer les Zones de disponibilité sur les nouveaux espaces de noms
 
 ![3][]
 
+## <a name="private-endpoints"></a>Instances Private Endpoint
+Cette section fournit des informations supplémentaires concernant l’utilisation de la géo-reprise d’activité après sinistre avec des espaces de noms qui utilisent des points de terminaison privés. Pour en savoir plus sur l’utilisation des points de terminaison privés avec Service Bus en général, consultez [Intégrer Azure Service Bus à Azure Private Link](private-link-service.md).
+
+### <a name="new-pairings"></a>Nouveaux pairages
+Si vous tentez de créer un pairage entre un espace de noms principal avec un point de terminaison privé et un espace de noms secondaire sans point de terminaison privé, le pairage échoue. Le pairage ne fonctionnera que si les espaces de noms principal et secondaire ont des points de terminaison privés. Nous vous recommandons d’utiliser les mêmes configurations sur les espaces de noms principal et secondaire, ainsi que sur les réseaux virtuels dans lesquels des points de terminaison privés sont créés. 
+
+> [!NOTE]
+> Lorsque vous tentez d’appairer l’espace de noms principal avec un point de terminaison privé et l’espace de noms secondaire, le processus de validation vérifie uniquement s’il existe un point de terminaison privé sur l’espace de noms secondaire. Il ne vérifie pas si le point de terminaison fonctionne ou fonctionnera après le basculement. Il vous incombe de vous assurer que l’espace de noms secondaire avec un point de terminaison privé fonctionnera comme prévu après le basculement.
+>
+> Pour vérifier que les configurations de point de terminaison privé sont identiques, envoyez une requête [Get queues](/rest/api/servicebus/stable/queues/get) à l’espace de noms secondaire depuis l’extérieur du réseau virtuel et vérifiez que vous recevez un message d’erreur de la part du service.
+
+### <a name="existing-pairings"></a>Pairages existants
+Si un pairage entre les espaces de noms principal et secondaire existe déjà, la création d’un point de terminaison privé sur l’espace de noms principal échoue. Pour résoudre ce problème, commencez par créer un point de terminaison privé sur l’espace de noms secondaire, puis créez-en un pour l’espace de noms principal.
+
+> [!NOTE]
+> Bien que nous autorisions un accès en lecture seule à l’espace de noms secondaire, les mises à jour des configurations de point de terminaison privé sont autorisées. 
+
+### <a name="recommended-configuration"></a>Configuration recommandée
+Lorsque vous créez une configuration de récupération d’urgence pour votre application et Service Bus, vous devez créer des points de terminaison privés pour les espaces de noms Service Bus principal et secondaire sur les réseaux virtuels hébergeant des instances principales et secondaires de votre application.
+
+Supposons que vous disposiez de deux réseaux virtuels, VNET-1 et VNET-2, et d’espaces de noms principal et secondaire, ServiceBus-Namespace1-Primary et ServiceBus-Namespace2-Secondary. Vous devez procéder comme suit : 
+
+- Sur ServiceBus-Namespace1-Primary, créez deux points de terminaison privés qui utilisent des sous-réseaux de VNET-1 et VNET-2.
+- Sur ServiceBus-Namespace2-Secondary, créez deux points de terminaison privés qui utilisent les mêmes sous-réseaux de VNET-1 et VNET-2. 
+
+![Points de terminaison privés et réseaux virtuels](./media/service-bus-geo-dr/private-endpoints-virtual-networks.png)
+
+
+L’avantage de cette approche est que le basculement peut se produire au niveau de la couche Application, indépendamment de l’espace de noms Service Bus. Examinez les scénarios suivants : 
+
+**Basculement de l’application uniquement :** Ici, l’application n’existera pas dans VNET-1, mais passera à VNET-2. Comme les deux points de terminaison privés sont configurés sur VNET-1 et VNET-2 pour les espaces de noms principal et secondaire, l’application fonctionnera normalement. 
+
+**Basculement de l’espace de noms Service Bus uniquement :** Ici encore, étant donné que les deux points de terminaison privés sont configurés sur les deux réseaux virtuels pour les espaces de noms principal et secondaire, l’application fonctionnera normalement. 
+
+> [!NOTE]
+> Pour obtenir des conseils sur la géo-reprise d’activité après sinistre d’un réseau virtuel, consultez [Réseau virtuel : Continuité d’activité](../virtual-network/virtual-network-disaster-recovery-guidance.md).
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez les [informations de référence de l’API REST](/rest/api/servicebus/disasterrecoveryconfigs) sur la géorécupération d’urgence.
+- Consultez les [informations de référence de l’API REST](/rest/api/servicebus/stable/disasterrecoveryconfigs) sur la géorécupération d’urgence.
 - Exécutez [l’exemple de géorécupération d’urgence sur GitHub](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoDR/SBGeoDR2/SBGeoDR2).
 - Consultez [l’exemple d’envoi de messages à un alias](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoDR/TestGeoDR/ConsoleApp1) pour la géorécupération d’urgence.
 

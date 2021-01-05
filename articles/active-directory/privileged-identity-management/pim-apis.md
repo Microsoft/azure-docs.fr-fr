@@ -9,28 +9,26 @@ editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: pim
-ms.topic: overview
+ms.topic: how-to
 ms.date: 01/02/2020
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6da6bffbc54bfa6e9c39ddace665eb7cfec58614
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: bb102c23d80095b8eb79fc25d1c1fd9d7f374fce
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75638661"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91529692"
 ---
 # <a name="microsoft-graph-apis-for-privileged-identity-management-preview"></a>API Microsoft Graph pour Privileged Identity Management (préversion)
 
-Vous pouvez effectuer toutes les tâches Privileged Identity Management à l’aide des [API Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/overview) pour Azure Active Directory. Cet article décrit des concepts importants pour l’utilisation des API Microsoft Graph pour Privileged Identity Management.
+Vous pouvez effectuer les tâches Privileged Identity Management à l’aide des [API Microsoft Graph](/graph/overview) pour Azure Active Directory. Cet article décrit des concepts importants pour l’utilisation des API Microsoft Graph pour Privileged Identity Management.
 
-Pour plus d’informations sur les API Microsoft Graph, consultez la [référence sur les API Azure AD Privileged Identity Management](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/privilegedidentitymanagement_root).
+Pour plus d’informations sur les API Microsoft Graph, consultez la [référence sur les API Azure AD Privileged Identity Management](/graph/api/resources/privilegedidentitymanagement-root?view=graph-rest-beta).
 
 > [!IMPORTANT]
 > Les API sous la version /beta dans Microsoft Graph sont en préversion et susceptibles de changer. L’utilisation de ces API dans les applications de production n’est pas prise en charge.
->
-> Bien que toutes les opérations PIM soient prises en charge par le biais des commandes de notre API Graph, nous utilisons un système différent pour approuver les demandes d’activation. L’API Graph pour les approbations est en cours de développement et sera lancée dans les prochains mois.
 
 ## <a name="required-permissions"></a>Autorisations requises
 
@@ -53,7 +51,7 @@ Si vous utilisez l’Afficheur Graph pour tester vos appels, vous pouvez spécif
 
 1. Cliquez sur **Modifier les autorisations**.
 
-    ![Afficheur Graph - Modifier les autorisations](./media/pim-apis/graph-explorer.png)
+    ![Capture d’écran montrant la page « Afficheur Graph » avec l’action « Modifier les autorisations » sélectionnée.](./media/pim-apis/graph-explorer.png)
 
 1. Cochez les cases en regard des autorisations que vous souhaitez inclure. `PrivilegedAccess.ReadWrite.AzureAD` n’est pas encore disponible dans l’Afficheur Graph.
 
@@ -63,4 +61,4 @@ Si vous utilisez l’Afficheur Graph pour tester vos appels, vous pouvez spécif
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Référence sur les API Azure AD Privileged Identity Management](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/privilegedidentitymanagement_root)
+- [Référence sur les API Azure AD Privileged Identity Management](/graph/api/resources/privilegedidentitymanagement-root?view=graph-rest-beta)

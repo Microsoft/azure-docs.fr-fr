@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: how-to
 ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: f7de3c28463a86852cba03713ca4c500e7ca0339
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b2164f8927e5c3224f8b07c30d057f48fb7bbc32
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80437503"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87495967"
 ---
 # <a name="set-up-disaster-recovery-for-hyper-v-vms-to-a-secondary-on-premises-site"></a>Configurer la récupération d’urgence des machines virtuelles Hyper-V vers un site local secondaire
 
@@ -29,7 +29,7 @@ Cet article vous indique comment configurer la récupération d’urgence vers u
 > * Activer la réplication pour une machine virtuelle
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce scénario :
 
@@ -48,10 +48,10 @@ Le [mappage réseau](hyper-v-vmm-network-mapping.md) effectue un mappage entre l
 
 Préparez les serveurs VMM comme suit :
 
-1. Assurez-vous que vous avez des [réseaux logiques VMM](https://docs.microsoft.com/system-center/vmm/network-logical) sur les serveurs VMM source et cible.
+1. Assurez-vous que vous avez des [réseaux logiques VMM](/system-center/vmm/network-logical) sur les serveurs VMM source et cible.
     - Le réseau logique sur le serveur source doit être associé au cloud source dans lequel se trouvent les hôtes Hyper-V.
     - Le réseau logique sur le serveur cible doit être associé au cloud cible.
-1. Assurez-vous que vous avez des [réseaux de machines virtuelles](https://docs.microsoft.com/system-center/vmm/network-virtual) sur les serveurs VMM source et cible. Les réseaux de machines virtuelles doivent être associés au réseau logique dans chaque emplacement.
+1. Assurez-vous que vous avez des [réseaux de machines virtuelles](/system-center/vmm/network-virtual) sur les serveurs VMM source et cible. Les réseaux de machines virtuelles doivent être associés au réseau logique dans chaque emplacement.
 2. Connectez les machines virtuelles sur les hôtes Hyper-V sources au réseau de machines virtuelles source. 
 
 
@@ -64,7 +64,7 @@ Préparez les serveurs VMM comme suit :
 
 Sélectionnez les éléments à répliquer et l’emplacement de la réplication.
 
-1. Cliquez sur **Site Recovery** > **Étape 1 : Préparez l’infrastructure** > **Objectif de protection**.
+1. Cliquez sur **Site Recovery** > **Étape 1 : préparer l’infrastructure** > **Objectif de protection**.
 2. Sélectionnez **Vers le site de récupération**, puis **Oui, avec Hyper-V**.
 3. Sélectionnez **Oui** pour indiquer que vous utilisez VMM pour gérer les hôtes Hyper-V.
 4. Sélectionnez **Oui** si vous avez un serveur VMM secondaire. Si vous déployez la réplication entre des clouds sur un seul serveur VMM, cliquez sur **Non**. Cliquez ensuite sur **OK**.
@@ -80,7 +80,7 @@ Installez le fournisseur Azure Site Recovery sur les serveurs VMM puis découvre
 4. Téléchargez le fichier d’installation du fournisseur Azure Site Recovery.
 5. Téléchargez la clé d’inscription. Cette clé est nécessaire lorsque vous installez le fournisseur. Une fois générée, la clé reste valide pendant 5 jours.
 
-    ![Configurer la source](./media/hyper-v-vmm-disaster-recovery/source-settings.png)
+    ![Capture d’écran des options permettant de télécharger le fournisseur et la clé d’inscription.](./media/hyper-v-vmm-disaster-recovery/source-settings.png)
 
 6. Installez le fournisseur sur chaque serveur VMM. Vous n’avez besoin de rien installer explicitement sur les hôtes Hyper-V.
 
@@ -94,7 +94,7 @@ Installez le fournisseur Azure Site Recovery sur les serveurs VMM puis découvre
 4. Dans le champ **Installation**, acceptez ou modifiez l’emplacement d’installation par défaut et cliquez sur **Installer**.
 5. Une fois l’installation terminée, cliquez sur **Inscrire** pour inscrire le serveur dans le coffre.
 
-    ![Emplacement d’installation](./media/hyper-v-vmm-disaster-recovery/provider-register.png)
+    ![Capture d’écran de l’écran d’installation du fournisseur, y compris l’emplacement de l’installation.](./media/hyper-v-vmm-disaster-recovery/provider-register.png)
 6. Dans **Vault name**, vérifiez le nom du coffre dans lequel le serveur est enregistré. Cliquez sur **Suivant**.
 7. Sur la page **Connexion proxy**, indiquez la façon dont le fournisseur exécuté sur le serveur VMM se connecte à Azure.
    - Vous pouvez définir la connexion directe, ou via un proxy, du fournisseur à Internet. Spécifiez les paramètres de proxy, si nécessaire.
@@ -115,7 +115,7 @@ Sélectionnez le cloud et le serveur VMM cible :
 1. Cliquez sur **Préparer l’infrastructure** > **Cible** et sélectionnez le serveur VMM cible.
 2. Les clouds VMM synchronisés avec Site Recovery s’affichent. Sélectionnez le cloud cible.
 
-   ![Cible](./media/hyper-v-vmm-disaster-recovery/target-vmm.png)
+   ![Capture d’écran du serveur VMM cible et des sélections du cloud.](./media/hyper-v-vmm-disaster-recovery/target-vmm.png)
 
 
 ## <a name="set-up-a-replication-policy"></a>Configurer une stratégie de réplication
@@ -138,7 +138,7 @@ Avant de commencer, assurez-vous que tous les hôtes qui utilisent la stratégie
 5. Sélectionnez **Supprimer une machine virtuelle de réplica** pour spécifier que la machine virtuelle doit être supprimée si vous désactivez la protection de la machine virtuelle source. Si vous activez ce paramètre et que vous désactivez la protection de la machine virtuelle source, elle est supprimée de la console Site Recovery, les paramètres Site Recovery de VMM sont supprimés de la console VMM et le réplica est supprimé.
 6. Dans **Méthode de réplication initiale**, si vous effectuez une réplication sur le réseau, indiquez si vous souhaitez lancer la réplication initiale ou la planifier. Pour économiser de la bande passante réseau, il peut être intéressant de la planifier en dehors des heures de pointe. Cliquez ensuite sur **OK**.
 
-     ![Stratégie de réplication](./media/hyper-v-vmm-disaster-recovery/replication-policy.png)
+     ![Capture d’écran des options de stratégie de réplication.](./media/hyper-v-vmm-disaster-recovery/replication-policy.png)
      
 7. La nouvelle stratégie est automatiquement associée au cloud VMM. Dans **Stratégie de réplication**, cliquez sur **OK**. 
 

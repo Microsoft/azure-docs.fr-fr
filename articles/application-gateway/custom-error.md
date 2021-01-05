@@ -4,15 +4,15 @@ description: Cet article explique comment créer des pages d’erreur personnali
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/16/2019
 ms.author: victorh
-ms.openlocfilehash: ff11f686287498fe12b31d15a630178bb12035ad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5b34c559c8320961a2e96a663d88001400c572d3
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74129869"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397516"
 ---
 # <a name="create-application-gateway-custom-error-pages"></a>Créer des pages d’erreur personnalisées pour Application Gateway
 
@@ -48,7 +48,7 @@ Après avoir spécifié une page d’erreur, la passerelle d’application la t�
 
 1. Accédez à la passerelle Application Gateway dans le portail et choisissez une passerelle d’application.
 
-    ![ag-overview](media/custom-error/ag-overview.png)
+    ![Capture d'écran représentant la page de présentation d'une passerelle applicative.](media/custom-error/ag-overview.png)
 2. Cliquez sur **Écouteurs** et accédez à un écouteur spécifique sur lequel vous souhaitez spécifier une page d’erreur.
 
     ![Écouteurs Application Gateway](media/custom-error/ag-listener.png)
@@ -65,13 +65,23 @@ Après avoir spécifié une page d’erreur, la passerelle d’application la t�
 
 Vous pouvez utiliser Azure PowerShell pour configurer une page d'erreur personnalisée. Par exemple, une page d'erreur personnalisée globale :
 
-`$updatedgateway = Add-AzApplicationGatewayCustomError -ApplicationGateway $appgw -StatusCode HttpStatus502 -CustomErrorPageUrl $customError502Url`
+```powershell
+$appgw   = Get-AzApplicationGateway -Name <app-gateway-name> -ResourceGroupName <resource-group-name>
+
+$updatedgateway = Add-AzApplicationGatewayCustomError -ApplicationGateway $appgw -StatusCode HttpStatus502 -CustomErrorPageUrl "http://<website-url>"
+```
 
 Ou une page d'erreur au niveau d'un port d'écoute :
 
-`$updatedlistener = Add-AzApplicationGatewayHttpListenerCustomError -HttpListener $listener01 -StatusCode HttpStatus502 -CustomErrorPageUrl $customError502Url`
+```powershell
+$appgw   = Get-AzApplicationGateway -Name <app-gateway-name> -ResourceGroupName <resource-group-name>
 
-Pour plus d'informations, consultez [Add-AzApplicationGatewayCustomError](https://docs.microsoft.com/powershell/module/az.network/add-azapplicationgatewaycustomerror?view=azps-1.2.0) et [Add-AzApplicationGatewayHttpListenerCustomError](https://docs.microsoft.com/powershell/module/az.network/add-azapplicationgatewayhttplistenercustomerror?view=azps-1.3.0).
+$listener01 = Get-AzApplicationGatewayHttpListener -Name <listener-name> -ApplicationGateway $appgw
+
+$updatedlistener = Add-AzApplicationGatewayHttpListenerCustomError -HttpListener $listener01 -StatusCode HttpStatus502 -CustomErrorPageUrl "http://<website-url>"
+```
+
+Pour plus d'informations, consultez [Add-AzApplicationGatewayCustomError](/powershell/module/az.network/add-azapplicationgatewaycustomerror?view=azps-1.2.0) et [Add-AzApplicationGatewayHttpListenerCustomError](/powershell/module/az.network/add-azapplicationgatewayhttplistenercustomerror?view=azps-1.3.0).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -3,26 +3,28 @@ title: Superviser les événements Azure Media Services avec Event Grid à parti
 description: Cet article explique comment s’abonner à Event Grid dans le but de superviser les événements Azure Media Services.
 services: media-services
 documentationcenter: na
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 tags: ''
 keywords: azure media services, flux, diffusion, en direct, hors connexion
 ms.service: media-services
 ms.devlang: multiple
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: multiple
 ms.workload: media
-ms.date: 01/21/2020
-ms.author: juliako
-ms.openlocfilehash: 18503e64dc6f38daab61599153cd0e0fb6fadb20
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 65459dbdf8eaa92525fa20eda158f4beacf58780
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76509221"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89294371"
 ---
 # <a name="create-and-monitor-media-services-events-with-event-grid-using-the-azure-portal"></a>Créer et superviser des événements Azure Media Services avec Event Grid à partir du portail
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Azure Event Grid est un service de gestion d’événements pour le cloud. Ce service utilise les [abonnements aux événements](../../event-grid/concepts.md#event-subscriptions) pour acheminer les messages d’événements vers les abonnés. Les événements Media Services contiennent toutes les informations dont vous avez besoin pour répondre aux modifications de vos données. Vous pouvez identifier un événement Media Services, car la propriété eventType commence par « Microsoft.Media ». Pour plus d’informations, consultez les [schémas d’événement Media Services](media-services-event-schemas.md).
 
@@ -33,7 +35,7 @@ Une fois que vous avez fini, vous voyez que les données d’événement ont ét
 ## <a name="prerequisites"></a>Prérequis 
 
 * Avoir un abonnement Azure actif.
-* Créez un nouveau compte Azure Media Services, comme décrit dans [ce démarrage rapide](create-account-cli-quickstart.md).
+* Créez un nouveau compte Azure Media Services, comme décrit dans [ce démarrage rapide](./create-account-howto.md).
 
 ## <a name="create-a-message-endpoint"></a>Créer un point de terminaison de message
 
@@ -41,7 +43,7 @@ Avant de nous abonner aux événements pour le compte Media Services, créons le
 
 1. Sélectionnez **Déployer sur Azure** pour déployer la solution sur votre abonnement. Dans le portail Azure, indiquez des valeurs pour les paramètres.
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+   [![Image affichant le bouton intitulé « Déployer sur Azure ».](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json)
 
 1. Le déploiement peut prendre quelques minutes. Une fois le déploiement réussi, affichez votre application web pour vérifier qu’elle s’exécute. Dans un navigateur web, accédez à : `https://<your-site-name>.azurewebsites.net`
 

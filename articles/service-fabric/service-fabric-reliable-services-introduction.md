@@ -5,13 +5,12 @@ author: masnider
 ms.topic: conceptual
 ms.date: 3/9/2018
 ms.author: masnider
-ms.custom: sfrev
-ms.openlocfilehash: 58259b0d19d68c468779a579bd9c86e77106c18d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 50b8cae11cef5ee8670e2e0270fd8506b1dad4d4
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77083506"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576534"
 ---
 # <a name="reliable-services-overview"></a>Présentation de Reliable Services
 
@@ -37,7 +36,7 @@ Reliable Services vous offre un modèle de programmation global, simple et puiss
   * utiliser des [collections fiables](service-fabric-reliable-services-reliable-collections.md)
   * accéder à de nombreuses autres fonctionnalités, toutes issues d'un modèle de programmation de première classe dans plusieurs langages de programmation.
 * Un modèle simple pour exécuter votre propre code qui ressemble à d'autres modèles de programmation familiers. Votre code comporte un point d’entrée bien défini, et son cycle de vie est facile à gérer.
-* Un modèle de communication enfichable. Utilisez le transport de votre choix, comme HTTP avec [l’API Web](service-fabric-reliable-services-communication-webapi.md), WebSockets, des protocoles TCP personnalisés, etc. Le modèle Reliable Services fournit de remarquables options prêtes à l’emploi que vous pouvez utiliser. Vous pouvez également définir les vôtres.
+* Un modèle de communication enfichable. Utilisez le transport de votre choix, comme HTTP avec [l’API Web](./service-fabric-reliable-services-communication-aspnetcore.md), WebSockets, des protocoles TCP personnalisés, etc. Le modèle Reliable Services fournit de remarquables options prêtes à l’emploi que vous pouvez utiliser. Vous pouvez également définir les vôtres.
 * Pour les services avec état, le modèle de programmation Reliable Services vous permet de stocker de manière cohérente et fiable votre droit d’état dans votre service à l’aide des [Collections fiables](service-fabric-reliable-services-reliable-collections.md). Les Collections fiables sont un ensemble simple de classes de collection hautement disponibles et fiables, qui sera familier à tous ceux qui ont utilisé les collections C#. Traditionnellement, les services nécessitaient des systèmes externes pour la gestion d’état fiable. Avec les Collections fiables, vous pouvez stocker l’état à proximité du calcul avec la disponibilité élevée et la fiabilité que vous attendez de la part de magasins externes hautement disponibles. De plus, ce modèle permet d’améliorer la latence, car vous effectuez la colocalisation du calcul et de l’état dont il a besoin pour fonctionner.
 
 ## <a name="what-makes-reliable-services-different"></a>Ce qui rend les services Reliable Services différents
@@ -53,7 +52,7 @@ Les services Reliable Services sont différents des services que vous avez peut-
 
 Que votre service soit avec état ou sans état, Reliable Services fournit un cycle de vie simple qui vous permet de rattacher rapidement votre code et de vous lancer.  Pour mettre en place un nouveau service, vous devez implémenter deux méthodes :
 
-* **CreateServiceReplicaListeners/CreateServiceInstanceListeners** : cette méthode correspond à l’emplacement dans lequel le service définit la ou les piles de communication qu’il souhaite utiliser. La pile de communication, par exemple [l’API Web](service-fabric-reliable-services-communication-webapi.md), définit le point de terminaison d’écoute ou les points de terminaison du service (mode d’accès des clients au service). Elle définit également comment les messages qui s’affichent interagissent avec le reste du code de service.
+* **CreateServiceReplicaListeners/CreateServiceInstanceListeners** : cette méthode correspond à l’emplacement dans lequel le service définit la ou les piles de communication qu’il souhaite utiliser. La pile de communication, par exemple [l’API Web](./service-fabric-reliable-services-communication-aspnetcore.md), définit le point de terminaison d’écoute ou les points de terminaison du service (mode d’accès des clients au service). Elle définit également comment les messages qui s’affichent interagissent avec le reste du code de service.
 * **RunAsync** : cette méthode correspond à l’emplacement dans lequel votre service exécute sa logique métier et où il lance les tâches d’arrière-plan qui doivent s’exécuter pendant toute la durée de vie du service. Le jeton d'annulation fourni est un signal indiquant quand ce travail doit s'arrêter. Par exemple, si le service doit extraire des messages d’une file d’attente fiable et les traiter, c’est à cet emplacement que se passe ce travail.
 
 Continuez votre lecture si vous débutez dans l’utilisation de Reliable Services. Si vous recherchez une procédure détaillée du cycle de vie de Reliable Services, consultez [Présentation du cycle de vie de Reliable Services](service-fabric-reliable-services-lifecycle.md).
@@ -68,7 +67,7 @@ Un *service sans état* est un service dans lequel l'état n'est pas conservé a
 
 Prenons pour exemple une calculatrice dépourvue de mémoire et qui reçoit tous les termes et les opérations à effectuer simultanément.
 
-Dans ce cas, la méthode `RunAsync()` (C#) ou `runAsync()` (Java) du service peut être vide, car ce dernier n’a besoin d’effectuer aucun traitement de tâche en arrière-plan. Quand le service Calculatrice est créé, il renvoie un `ICommunicationListener` (C#) ou un `CommunicationListener` (Java) (par exemple [API web](service-fabric-reliable-services-communication-webapi.md)) qui ouvre un point de terminaison d’écoute sur un port. Ce point de terminaison d’écoute se raccorde aux différentes méthodes de calcul (exemple : « Add(n1, n2) ») qui définissent l’API publique de la calculatrice.
+Dans ce cas, la méthode `RunAsync()` (C#) ou `runAsync()` (Java) du service peut être vide, car ce dernier n’a besoin d’effectuer aucun traitement de tâche en arrière-plan. Quand le service Calculatrice est créé, il renvoie un `ICommunicationListener` (C#) ou un `CommunicationListener` (Java) (par exemple [API web](./service-fabric-reliable-services-communication-aspnetcore.md)) qui ouvre un point de terminaison d’écoute sur un port. Ce point de terminaison d’écoute se raccorde aux différentes méthodes de calcul (exemple : « Add(n1, n2) ») qui définissent l’API publique de la calculatrice.
 
 Lorsqu’un appel est effectué à partir d’un client, la méthode appropriée est appelée ; le service Calculatrice effectue les opérations sur les données fournies et renvoie le résultat. Il ne stocke aucun état.
 

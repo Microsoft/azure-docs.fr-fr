@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 02/01/2019
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
-ms.reviewer: sahenry
+ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 348082ad96a5efa4d8f866c3675044edf7b6f8a8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6a764538ebc73927b1d274b2538e123ec90ce60e
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80652151"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741556"
 ---
 # <a name="reporting-options-for-azure-ad-password-management"></a>Options de création de rapports pour la gestion des mots de passe Azure AD
 
@@ -27,7 +27,7 @@ Après le déploiement, de nombreuses organisations souhaitent savoir comment ou
 Les questions suivantes peuvent trouver réponse dans les rapports qui existent dans le [portail Azure](https://portal.azure.com/) :
 
 > [!NOTE]
-> Vous devez être [un administrateur global](../users-groups-roles/directory-assign-admin-roles.md) et vous devez vous abonner pour que ces données soient collectées pour votre organisation. Pour vous abonner, vous devez consulter l’onglet **Rapports** ou les journaux d’audit au moins une fois. Tant que cela n’est pas fait, les données ne sont pas collectées pour votre organisation.
+> Vous devez être [un administrateur global](../roles/permissions-reference.md) et vous devez vous abonner pour que ces données soient collectées pour votre organisation. Pour vous abonner, vous devez consulter l’onglet **Rapports** ou les journaux d’audit au moins une fois. Tant que cela n’est pas fait, les données ne sont pas collectées pour votre organisation.
 >
 
 * Combien de personnes se sont inscrites pour la réinitialisation des mots de passe ?
@@ -51,9 +51,9 @@ Dans l’interface du portail Azure, nous avons amélioré la méthode d’affic
 6. Dans le menu **Filtrer** situé en haut du volet, sélectionnez la liste déroulante **Service** et remplacez-la par le type de service **Gestion des mots de passe en libre-service**.
 7. Si vous le souhaitez, vous pouvez affiner le filtre de la liste en choisissant l’**Activité** spécifique qui vous intéresse.
 
-### <a name="converged-registration-preview"></a>Inscription convergée (préversion)
+### <a name="combined-registration"></a>Inscription combinée
 
-Si vous participez à la préversion publique de l’inscription convergée, les informations relatives à l’activité des utilisateurs dans les journaux d’audit se trouvent dans **Sécurité** > **Méthodes d’authentification**.
+Si vous avez activé l’[inscription combinée](./concept-registration-mfa-sspr-combined.md), les informations relatives à l’activité des utilisateurs dans les journaux d’audit se trouvent sous **Sécurité** > **Méthodes d’authentification**.
 
 ## <a name="description-of-the-report-columns-in-the-azure-portal"></a>Description des colonnes du rapport dans le portail Azure
 
@@ -179,9 +179,9 @@ La liste suivante explique cette activité en détail :
 * [Quelles données sont utilisées par la réinitialisation de mot de passe en libre-service et quelles données vous devez renseigner pour vos utilisateurs ?](howto-sspr-authenticationdata.md)
 * [Quelles méthodes d'authentification sont accessibles aux utilisateurs ?](concept-sspr-howitworks.md#authentication-methods)
 * [Quelles sont les options de stratégie disponibles avec la réinitialisation de mot de passe en libre-service ?](concept-sspr-policy.md)
-* [Quelle est l’écriture différée de mot de passe et pourquoi dois-je m’y intéresser ?](howto-sspr-writeback.md)
+* [Quelle est l’écriture différée de mot de passe et pourquoi dois-je m’y intéresser ?](./tutorial-enable-sspr-writeback.md)
 * [Quelles sont toutes les options disponibles dans la réinitialisation de mot de passe en libre-service et que signifient-elles ?](concept-sspr-howitworks.md)
-* [Je pense qu’il y a une panne quelque part. Comment puis-je résoudre les problèmes de la réinitialisation de mot de passe en libre-service ?](active-directory-passwords-troubleshoot.md)
+* [Je pense qu’il y a une panne quelque part. Comment puis-je résoudre les problèmes de la réinitialisation de mot de passe en libre-service ?](./troubleshoot-sspr.md)
 * [J’ai une question à laquelle je n’ai pas trouvé de réponse ailleurs](active-directory-passwords-faq.md)
 
 [Reporting]: ./media/howto-sspr-reporting/sspr-reporting.png "Exemple de journaux d’audit d’activité SSPR dans Azure AD"

@@ -1,23 +1,23 @@
 ---
 title: Guide de démarrage rapide Azure - Créer un objet blob dans un stockage d’objets à l’aide de PHP | Microsoft Docs
-description: Apprenez rapidement à transférer des objets vers/à partir de Stockage Blob Azure avec PHP
+description: Apprenez rapidement à transférer des objets vers/à partir de Stockage Blob Azure avec PHP. Charger, télécharger et répertorier des objets blob de blocs dans un conteneur dans Stockage Blob Azure.
 author: mhopkins-msft
 ms.author: mhopkins
 ms.date: 11/14/2018
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: 0453d7465479fb1410d1436cc3fa53914633ece5
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: af35927abfa491891dffe2c2397d6daf8c1ccde2
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "68726387"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95543117"
 ---
 #  <a name="transfer-objects-tofrom-azure-blob-storage-using-php"></a>Transférer des objets vers/à partir de Stockage Blob Azure avec PHP
 Dans ce guide de démarrage rapide, vous apprenez à utiliser PHP pour charger, télécharger et lister des objets blob de blocs dans un conteneur de stockage blob Azure. 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 [!INCLUDE [storage-quickstart-prereq-include](../../../includes/storage-quickstart-prereq-include.md)]
 
@@ -91,7 +91,7 @@ La première chose à faire est de créer les références aux objets utilisés 
 Une fois que vous avez l’objet conteneur **blobClient**, vous pouvez créer l’objet blob **Block** qui pointe vers l’objet blob spécifique qui vous intéresse. Vous pouvez ensuite effectuer des opérations de chargement, de téléchargement et de copie.
 
 > [!IMPORTANT]
-> Les noms de conteneurs doivent être en minuscules. Pour plus d’informations sur les noms des conteneurs et des objets blob, consultez [Affectation de noms et références aux conteneurs, objets blob et métadonnées](https://docs.microsoft.com/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata).
+> Les noms de conteneurs doivent être en minuscules. Pour plus d’informations sur les noms des conteneurs et des objets blob, consultez [Affectation de noms et références aux conteneurs, objets blob et métadonnées](/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata).
 
 Dans cette section, vous configurez une instance du client Stockage Azure, instanciez l’objet du service blob, créez un conteneur et définissez les autorisations sur le conteneur pour que les objets blob soient publics. Le conteneur est appelé **quickstartblobs**. 
 
@@ -166,7 +166,7 @@ Vous pouvez obtenir la liste des fichiers du conteneur à l’aide de la méthod
 
 ### <a name="get-the-content-of-your-blobs"></a>Obtenir le contenu de vos objets blob
 
-Obtenez le contenu de vos objets blob à l’aide de la méthode **getBlob()** . Le code suivant affiche le contenu de l’objet blob chargé dans une section précédente.
+Obtenez le contenu de vos objets blob à l’aide de la méthode **getBlob()**. Le code suivant affiche le contenu de l’objet blob chargé dans une section précédente.
 
 ```PHP
     $blob = $blobClient->getBlob($containerName, $fileToUpload);

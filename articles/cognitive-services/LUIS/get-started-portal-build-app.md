@@ -1,14 +1,16 @@
 ---
 title: 'Démarrage rapide : Créer une application dans le portail LUIS'
 description: Dans ce guide de démarrage rapide, vous créez les éléments de base d’une application, les intentions et les entités, et vous les testez avec l’exemple d’énoncé dans le portail LUIS.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: quickstart
-ms.date: 05/19/2020
-ms.openlocfilehash: 7cf55a7891b7e06c18c80d9d359b19e54f0413a9
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.date: 11/30/2020
+ms.openlocfilehash: a5443dce9fc8bc028232f66f45b537a46858f35a
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697282"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436672"
 ---
 # <a name="quickstart-create-a-new-app-in-the-luis-portal"></a>Démarrage rapide : Créer une application dans le portail LUIS
 
@@ -18,21 +20,22 @@ Dans ce guide de démarrage rapide, vous allez créer une application dans le po
 
 ## <a name="create-an-app"></a>Créer une application
 
-1. Sélectionnez **+Nouvelle application pour conversation** dans la barre d’outils du contexte, puis **Nouvelle application pour conversation**.
+Pour créer une application, sélectionnez **+ Nouvelle application**. 
 
-    > [!div class="mx-imgBorder"]
-    > [![Capture d’écran de la création d’une nouvelle application dans le portail LUIS](./media/create-app-in-portal.png)](./media/create-app-in-portal.png#lightbox)
+Dans la fenêtre qui s’affiche, entrez les informations suivantes :
 
-1. Dans la fenêtre indépendante, configurez l’application avec les paramètres suivants, puis sélectionnez **Terminé**.
+|Name  |Description  |
+|---------|---------|
+|Name     | Nom de votre application. Par exemple, « domotique ». Obligatoire.        |
+|culture     | Langage que votre application comprend et parle. Obligatoire.   |
+|Description | Description de votre application. facultatif.
+|Ressource de prédiction | Ressource de prédiction qui recevra les requêtes. facultatif. |
 
-   |Nom du paramètre| Valeur | Objectif|
-   |--|--|--|
-   |Nom|`myEnglishApp`|Nom d’application LUIS unique<br>Obligatoire|
-   |Culture|**Anglais**|Langue des énoncés des utilisateurs, à savoir **en-us**<br>Obligatoire|
-   |Description (Facultatif)|`App made with LUIS Portal`|Description de l’application<br>facultatif|
-   |Ressource de prédiction (Facultatif) |-  |Ne sélectionnez pas. LUIS vous donne une clé de démarrage à utiliser gratuitement, pour la création et 1 000 requêtes de point de terminaison de prédiction. |
+Sélectionnez **Terminé**.
 
-   ![Capture d’écran de la saisie de nouveaux paramètres d’application](./media/get-started-portal-build-app/create-new-app-settings.png)
+>[!NOTE]
+>La culture ne peut pas être modifiée une fois que l’application est créée.
+
 
 ## <a name="create-intents"></a>Créer des intentions
 
@@ -50,7 +53,7 @@ Les deux différentes _intentions_ de l’application sont alignées sur les int
 
 Pour créer des intentions, procédez comme suit :
 
-1. Une fois l’application créée, la page **Intentions** de la section **Build** est affichée. Sélectionnez **Create** (Créer).
+1. Une fois l’application créée, vérifiez que la page **Intentions** de la section **Générer** est affichée. Sélectionnez **Create** (Créer).
 
    [![Capture d’écran de la sélection de l’option « Créer » pour créer une nouvelle intention](./media/get-started-portal-build-app/create-new-intent-button.png)](./media/get-started-portal-build-app/create-new-intent-button.png#lightbox)
 
@@ -58,14 +61,9 @@ Pour créer des intentions, procédez comme suit :
 
 ## <a name="add-an-example-utterance"></a>Ajouter un exemple d’énoncé
 
-Après avoir créé des intentions, vous ajoutez des exemples d'énoncés. Les exemples d'énoncés sont du texte qu’un utilisateur entre dans un bot conversationnel ou une autres application cliente. Ils mappent l’intention du texte de l’utilisateur sur une intention LUIS.
+Après avoir créé des intentions, vous ajoutez des exemples d'énoncés. Les exemples d'énoncés sont du texte qu’un utilisateur entre dans un bot conversationnel ou une autres application cliente. Ils mappent l’intention du texte de l’utilisateur sur une intention LUIS. Dans cet exemple d'intention d’application `FindForm`, les exemples d'énoncés incluent le numéro de formulaire. L’application cliente a besoin du numéro de formulaire pour répondre à la demande l’utilisateur. Il est donc important de l’inclure dans l’énoncé.
 
-Dans cet exemple d'intention d’application `FindForm`, les exemples d'énoncés incluent le numéro de formulaire. L’application cliente a besoin du numéro de formulaire pour répondre à la demande l’utilisateur. Il est donc important de l’inclure dans l’énoncé.
-
-> [!div class="mx-imgBorder"]
-> [![Capture d’écran de la saisie d’exemples d’énoncés pour l’intention FindForm](./media/get-started-portal-build-app/add-example-utterance.png)](./media/get-started-portal-build-app/add-example-utterance.png#lightbox)
-
-Ajoutez les 15 exemples d'énoncés suivants à l’intention `FindForm`.
+Dans la page **Intentions** pour `FindForm`, ajoutez les exemples d’énoncé suivants sous **Exemple d’énoncé** : 
 
 |#|Exemples d’énoncés|
 |--|--|

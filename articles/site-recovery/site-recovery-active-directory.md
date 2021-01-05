@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: mayg
-ms.openlocfilehash: 2cf4f22be2a4407d73fcc7bb340fad647c8aa145
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: 528a24bb64aa8d323b5d63a27af0a52ccdf1abb6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80546514"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86132315"
 ---
 # <a name="set-up-disaster-recovery-for-active-directory-and-dns"></a>Configurer la reprise d’activité pour Active Directory et DNS
 
@@ -25,7 +25,7 @@ Cet article explique comment créer une solution de récupération d’urgence p
 ## <a name="prerequisites"></a>Prérequis
 
 - Si vous procédez à une récupération vers Azure, [préparez les ressources Azure](tutorial-prepare-azure.md), y compris un abonnement, un réseau virtuel Azure, un compte de stockage et un coffre Recovery Services.
-- Vérifiez les [exigences de prise en charge](site-recovery-support-matrix-to-azure.md) pour tous les composants.
+- Vérifiez les [exigences de prise en charge](./vmware-physical-azure-support-matrix.md) pour tous les composants.
 
 ## <a name="replicate-the-domain-controller"></a>Répliquer le contrôleur de domaine
 
@@ -79,7 +79,7 @@ La plupart des applications nécessitent la présence d’un contrôleur de doma
 1. Créez un réseau isolé. Par défaut, tout réseau virtuel que vous créez dans Azure est isolé d’autres réseaux. Nous vous recommandons d’utiliser pour ce réseau la plage d’adresses IP que vous utilisez dans votre réseau de production. N’activez pas la connectivité de site à site sur ce réseau.
 1. Fournissez une adresse IP DNS dans le réseau isolé. Utilisez l’adresse IP que vous prévoyez pour la machine virtuelle du DNS. Si vous répliquez sur Azure, fournissez l’adresse IP de la machine virtuelle utilisée lors du basculement. Pour entrer l’adresse IP, dans la machine virtuelle répliquée, dans les paramètres **Calcul et réseau**, sélectionnez les paramètres **Adresse IP cible**.
 
-   :::image type="content" source="./media/site-recovery-active-directory/azure-test-network.png" alt-text="Réseau de test Azure":::
+   :::image type="content" source="./media/site-recovery-active-directory/azure-test-network.png" alt-text="Réseau Azure":::
 
    > [!TIP]
    > Site Recovery tente de créer les machines virtuelles de test dans un sous-réseau du même nom, et en utilisant l’adresse IP fournie dans les paramètres **Calcul et réseau** de la machine virtuelle. Si aucun sous-réseau du même nom n’est disponible dans le réseau virtuel Azure fourni pour le test de basculement, la machine virtuelle de test est créée dans le sous-réseau en première position dans l’ordre alphabétique.
@@ -118,21 +118,21 @@ Si des dispositifs de protection de la virtualisation sont déclenchés après u
 
 - La valeur **GenerationID** change :
 
-  :::image type="content" source="./media/site-recovery-active-directory/Event2170.png" alt-text="Changement de l’ID de génération":::
+  :::image type="content" source="./media/site-recovery-active-directory/Event2170.png" alt-text="Réseau Azure":::
 
 - La valeur **InvocationID** change :
 
-  :::image type="content" source="./media/site-recovery-active-directory/Event1109.png" alt-text="Changement de l’ID d’appel":::
+  :::image type="content" source="./media/site-recovery-active-directory/Event1109.png" alt-text="Réseau Azure":::
 
 - Le dossier `SYSVOL` et les partages `NETLOGON` ne sont pas disponibles.
 
-  :::image type="content" source="./media/site-recovery-active-directory/sysvolshare.png" alt-text="Partage du dossier SYSVOL":::
+  :::image type="content" source="./media/site-recovery-active-directory/sysvolshare.png" alt-text="Réseau Azure":::
 
-  :::image type="content" source="./media/site-recovery-active-directory/Event13565.png" alt-text="Dossier SYSVOL NtFrs":::
+  :::image type="content" source="./media/site-recovery-active-directory/Event13565.png" alt-text="Réseau Azure":::
 
 - Les bases de données DFSR sont supprimées.
 
-  :::image type="content" source="./media/site-recovery-active-directory/Event2208.png" alt-text="Les bases de données DFSR sont supprimées":::
+  :::image type="content" source="./media/site-recovery-active-directory/Event2208.png" alt-text="Réseau Azure":::
 
 ### <a name="troubleshoot-domain-controller-issues-during-test-failover"></a>Résoudre les problèmes liés au contrôleur de domaine survenant pendant un test de basculement
 

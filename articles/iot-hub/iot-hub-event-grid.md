@@ -11,18 +11,19 @@ ms.author: robinsh
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: a67d90a0888c39938f07c294f8e161ce98fd945a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+- 'Role: Cloud Development'
+ms.openlocfilehash: 0e0ca8a787145fb40087a2d99be85607404eebfa
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81732497"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92152127"
 ---
 # <a name="react-to-iot-hub-events-by-using-event-grid-to-trigger-actions"></a>Réagir aux événements IoT Hub en utilisant Event Grid pour déclencher des actions
 
-Azure IoT Hub s’intègre à Azure Event Grid pour vous permettre d’envoyer des notifications d’événements à d’autres services et de déclencher des processus en aval. Configurez vos applications métier pour écouter les événements IoT Hub, afin de pouvoir réagir aux événements critiques de manière fiable, scalable et sécurisée. Vous pouvez par exemple créer une application qui met à jour une base de données, crée un ticket et remet une notification par e-mail chaque fois qu’un nouvel appareil IoT est inscrit auprès de votre hub IoT.
+Azure IoT Hub s’intègre à Azure Event Grid pour vous permettre d’envoyer des notifications d’événements à d’autres services et de déclencher des processus en aval. Configurez vos applications métier pour écouter les événements IoT Hub, afin de pouvoir réagir aux événements critiques de manière fiable, scalable et sécurisée.  Vous pouvez par exemple créer une application qui met à jour une base de données, crée un ticket et remet une notification par e-mail chaque fois qu’un nouvel appareil IoT est inscrit auprès de votre hub IoT.
 
-[Azure Event Grid](../event-grid/overview.md) est un service de routage d’événement entièrement géré qui utilise le modèle publication-abonnement. Event Grid offre une prise en charge intégrée des services Azure comme [Azure Functions](../azure-functions/functions-overview.md) et [Azure Logic Apps](../logic-apps/logic-apps-what-are-logic-apps.md), et peut fournir des alertes d’événements à des services non-Azure à l’aide de webhooks. Pour obtenir une liste complète des gestionnaires d’événements qui prennent en charge Event Grid, consultez [Présentation d’Azure Event Grid](../event-grid/overview.md).
+[Azure Event Grid](../event-grid/overview.md) est un service de routage d’événement entièrement géré qui utilise le modèle publication-abonnement. Event Grid offre une prise en charge intégrée des services Azure comme [Azure Functions](../azure-functions/functions-overview.md) et [Azure Logic Apps](../logic-apps/logic-apps-overview.md), et peut fournir des alertes d’événements à des services non-Azure à l’aide de webhooks. Pour obtenir une liste complète des gestionnaires d’événements qui prennent en charge Event Grid, consultez [Présentation d’Azure Event Grid](../event-grid/overview.md).
 
 ![Architecture d’Azure Event Grid](./media/iot-hub-event-grid/event-grid-functional-model.png)
 
@@ -72,6 +73,8 @@ L’exemple suivant montre le schéma d’un événement de connexion d’appare
   "metadataVersion": "1"
 }]
 ```
+
+
 
 ### <a name="device-telemetry-schema"></a>Schéma de télémétrie d’appareil
 
@@ -163,6 +166,10 @@ L’exemple suivant montre le schéma d’un événement de création d’appare
 }]
 ```
 
+
+> [!WARNING]
+> Les *données de jumeaux* associées à un événement de création d’appareil sont une configuration par défaut et *ne doivent pas* être utilisées pour la propriété `authenticationType` réelle et autres propriétés d’appareil dans un appareil nouvellement créé. Pour `authenticationType` et les autres propriétés d’un appareil nouvellement créé, utilisez l’API de gestionnaire d’inscription fournie dans les Kits de développement logiciel (SDK) Azure IoT.
+
 Pour obtenir une description détaillée de chaque propriété, consultez [Schéma d’événement Azure Event Grid pour IoT Hub](../event-grid/event-schema-iot-hub.md).
 
 ## <a name="filter-events"></a>Filtrer les événements
@@ -177,17 +184,17 @@ L’objet des événements IoT utilise le format suivant :
 devices/{deviceId}
 ```
 
-Event Grid permet également de filtrer des attributs pour chaque événement, notamment le contenu des données. Ceci vous permet de choisir quels événements sont fournis sur la base de contenus du message de télémétrie. Consultez [Filtrage avancé](../event-grid/event-filtering.md#advanced-filtering) pour afficher des exemples. Pour le filtrage du corps du message de télémétrie, vous devez définir contentType sur **application/json** et contentEncoding sur **UTF-8** dans les [propriétés système](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax#system-properties) de message. Ces deux propriétés sont insensibles à la casse.
+Event Grid permet également de filtrer des attributs pour chaque événement, notamment le contenu des données. Ceci vous permet de choisir quels événements sont fournis sur la base de contenus du message de télémétrie. Consultez [Filtrage avancé](../event-grid/event-filtering.md#advanced-filtering) pour afficher des exemples. Pour le filtrage du corps du message de télémétrie, vous devez définir contentType sur **application/json** et contentEncoding sur **UTF-8** dans les [propriétés système](./iot-hub-devguide-routing-query-syntax.md#system-properties) de message. Ces deux propriétés sont insensibles à la casse.
 
 Pour les événements autres que ceux de télémétrie, tels que DeviceConnected, DeviceDisconnected, DeviceCreated et DeviceDeleted, le filtrage d’Event Grid peut être utilisé lors de la création de l’abonnement. Pour les événements de télémétrie, outre le filtrage dans Event Grid, les utilisateurs peuvent également filtrer sur des jumeaux d’appareil, les propriétés et le corps de message et la requête de routage. 
 
 Lorsque vous vous abonnez à des événements de télémétrie par le biais d’Event Grid, IoT Hub crée un itinéraire de message par défaut pour envoyer des messages de type source de données à Event Grid. Pour plus d’informations sur le routage des messages, consultez [Routage des messages IoT Hub](iot-hub-devguide-messages-d2c.md). Cet itinéraire sera visible dans le portail sous IoT Hub > Routage des messages. Un seul itinéraire vers Event Grid est créé, quel que soit le nombre d’abonnements EG créés pour les événements de télémétrie. Par conséquent, si vous avez besoin de plusieurs abonnements avec des filtres différents, vous pouvez utiliser l’opérateur OR dans ces requêtes sur le même itinéraire. La création et la suppression de l’itinéraire sont contrôlées par le biais de l’abonnement des événements de télémétrie via Event Grid. Vous ne pouvez pas créer ou supprimer un itinéraire vers Event Grid à l’aide du routage des messages IoT Hub.
 
-Pour filtrer les messages avant l’envoi de données de télémétrie, vous pouvez mettre à jour votre [requête de routage](iot-hub-devguide-routing-query-syntax.md). Notez que cette requête de routage ne peut être appliquée au corps du message que s’il est au format JSON. Vous devez également définir contentType sur **application/json** et contentEncoding sur **UTF-8** dans les [propriétés système](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-routing-query-syntax#system-properties) de message.
+Pour filtrer les messages avant l’envoi de données de télémétrie, vous pouvez mettre à jour votre [requête de routage](iot-hub-devguide-routing-query-syntax.md). Notez que cette requête de routage ne peut être appliquée au corps du message que s’il est au format JSON. Vous devez également définir contentType sur **application/json** et contentEncoding sur **UTF-8** dans les [propriétés système](./iot-hub-devguide-routing-query-syntax.md#system-properties) de message.
 
 ## <a name="limitations-for-device-connected-and-device-disconnected-events"></a>Limitations pour les événements d’état de la connexion et de la déconnexion d’appareils
 
-Pour recevoir des événements de l’état de la connexion de l’appareil, un appareil doit effectuer une opération « Envoi de données de télémétrie D2C » « Réception de message C2D » avec IOT Hub. Toutefois, si un appareil utilise le protocole AMQP pour se connecter à IOT Hub, il est recommandé d’effectuer une opération« Réception de message C2D ». Sinon, les notifications d’état de la connexion peuvent être retardées de quelques minutes. Si votre appareil utilise le protocole MQTT, IoT Hub gardera le lien C2D ouvert. Pour AMQP, vous pouvez ouvrir le lien C2D en appelant [l’API Receive Async](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.receiveasync?view=azure-dotnet) pour IoT Hub C# SDK, ou [le client d’appareil pour AMQP](iot-hub-amqp-support.md#device-client).
+Pour recevoir des événements de l’état de la connexion de l’appareil, un appareil doit effectuer une opération « Envoi de données de télémétrie D2C » « Réception de message C2D » avec IOT Hub. Toutefois, si un appareil utilise le protocole AMQP pour se connecter à IOT Hub, il est recommandé d’effectuer une opération« Réception de message C2D ». Sinon, les notifications d’état de la connexion peuvent être retardées de quelques minutes. Si votre appareil utilise le protocole MQTT, IoT Hub gardera le lien C2D ouvert. Pour AMQP, vous pouvez ouvrir le lien C2D en appelant l’API Receive Async pour le Kit de développement logiciel (SDK) C# IoT Hub ou le [client d’appareil pour AMQP](iot-hub-amqp-support.md#device-client).
 
 Le lien D2C est ouvert si vous envoyez des données de télémétrie. 
 
@@ -213,4 +220,4 @@ Les applications qui gèrent des événements IoT Hub doivent suivre ces pratiqu
 
 * [Comparer les différences entre le routage des messages et des événements IoT Hub](iot-hub-event-grid-routing-comparison.md)
 
-* [Découvrez comment utiliser les événements de télémétrie IoT pour implémenter l’analytique spatiale via Azure Maps](../azure-maps/tutorial-iot-hub-maps.md#create-an-azure-function-and-add-an-event-grid-subscription)
+* [Découvrez comment utiliser les événements de télémétrie IoT pour implémenter l’analytique spatiale via Azure Maps](../azure-maps/tutorial-iot-hub-maps.md)

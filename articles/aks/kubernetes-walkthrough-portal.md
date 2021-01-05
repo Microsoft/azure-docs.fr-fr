@@ -4,14 +4,14 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrez comment créer rapidement un cluster Kubernetes, déployer une application et superviser les performances dans AKS (Azure Kubernetes Service) à l’aide du portail Azure.
 services: container-service
 ms.topic: quickstart
-ms.date: 01/21/2020
+ms.date: 10/06/2020
 ms.custom: mvc, seo-javascript-october2019
-ms.openlocfilehash: e4ac5a953b5d88d0074c3cfb7f1bd45331577238
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.openlocfilehash: f4cbfb78ec0900e757683fff35403dfcbd38b391
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81392807"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97824688"
 ---
 # <a name="quickstart-deploy-an-azure-kubernetes-service-aks-cluster-using-the-azure-portal"></a>Démarrage rapide : déployer un cluster AKS (Azure Kubernetes Service) à l’aide du portail Azure
 
@@ -37,21 +37,21 @@ Pour créer un cluster AKS, exécutez les étapes suivantes :
 
 3. Sur la page **Bases**, configurez les options suivantes :
     - **Détails du projet** : Choisissez un **abonnement** Azure, puis sélectionnez ou créez un **groupe de ressources** Azure, comme *myResourceGroup*.
-    - **Détails du cluster** : Entrez un **nom du cluster Kubernetes**, tel que *myAKSCluster*. Sélectionnez une **Région**, une **version de Kubernetes** et le **préfixe du nom DNS** du cluster AKS.
-    - **Pool de nœuds principal** : Sélectionnez une **taille de nœud** de machine virtuelle pour les nœuds AKS. Elle ne sera *pas modifiable* une fois le cluster AKS déployé. 
+    - **Détails du cluster** : Entrez un **nom du cluster Kubernetes**, tel que *myAKSCluster*. Sélectionnez une **région** et une **version de Kubernetes** pour le cluster AKS.
+    - **Pool de nœuds principal** : Sélectionnez une **taille de nœud** de machine virtuelle pour les nœuds AKS. Elle ne sera *pas modifiable* une fois le cluster AKS déployé.
             - Sélectionnez également le nombre de nœuds à déployer dans le cluster. Pour effectuer ce démarrage rapide, définissez le **Nombre de nœuds** à *1*. Le nombre de nœuds est *modifiable* après le déploiement du cluster.
     
     ![Créer un cluster AKS - fournir des informations de base](media/kubernetes-walkthrough-portal/create-cluster-basics.png)
 
-    Sélectionnez **Suivant : Mettre à l’échelle** lorsque vous avez terminé.
+    Sélectionnez **Suivant : Pools de nœuds** à l’issue du processus.
 
-4. Sur la page **Mise à l’échelle**, conservez les options par défaut. Au bas de la page, cliquez sur **Suivant : Authentification**.
+4. Dans la page **Pools de nœuds**, conservez les options par défaut. Au bas de la page, cliquez sur **Suivant : Authentification**.
     > [!CAUTION]
-    > La propagation et la mise en disponibilité des nouveaux principaux de service AAD créés peuvent prendre plusieurs minutes, ce qui entraîne des erreurs « Principal du service introuvable » et des échecs de validation dans le portail Azure. Si vous rencontrez ce problème, consultez [ceci](troubleshooting.md#im-receiving-errors-that-my-service-principal-was-not-found-when-i-try-to-create-a-new-cluster-without-passing-in-an-existing-one) pour obtenir des solutions de contournement.
+    > La propagation et la mise en disponibilité des nouveaux principaux de service AAD créés peuvent prendre plusieurs minutes, ce qui entraîne des erreurs « Principal du service introuvable » et des échecs de validation dans le portail Azure. Si vous rencontrez ce problème, consultez ces [solutions d’atténuation](troubleshooting.md#received-an-error-saying-my-service-principal-wasnt-found-or-is-invalid-when-i-try-to-create-a-new-cluster).
 
 5. Sur la page **Authentification**, configurez les options suivantes :
     - Créez un principal de service en laissant dans le champ **Principal du Service** **(nouveau) le principal du service par défaut**. Ou vous pouvez choisir *Configurer un principal du service* pour utiliser un principal existant. Si vous utilisez un principal du service existant, vous devez indiquer l’ID client SPN et le secret associés.
-    - Activez l’option pour les contrôles d’accès en fonction des rôles Kubernetes (RBAC). Ces options fournissent un contrôle plus précis sur l’accès aux ressources Kubernetes déployées dans votre cluster AKS.
+    - Activez l’option pour les contrôles d’accès en fonction des rôles Kubernetes (RBAC Kubernetes). Ces options fournissent un contrôle plus précis sur l’accès aux ressources Kubernetes déployées dans votre cluster AKS.
 
     Vous pouvez également utiliser une identité managée au lieu d’un principal de service. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md).
 
@@ -71,7 +71,7 @@ Ouvrez Cloud Shell à l’aide du bouton `>_` situé en haut du portail Azure.
 
 Pour configurer `kubectl` afin de vous connecter à votre cluster Kubernetes, exécutez la commande [az aks get-credentials][az-aks-get-credentials]. Cette commande télécharge les informations d’identification et configure l’interface CLI Kubernetes pour les utiliser. L’exemple suivant obtient les informations d’identification du nom du cluster *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup* :
 
-```azurecli-interactive
+```azurecli
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 ```
 
@@ -92,10 +92,7 @@ aks-agentpool-14693408-0   Ready     agent     15m       v1.11.5
 
 Un fichier manifeste Kubernetes définit un état souhaité pour le cluster, notamment les images conteneur à exécuter. Dans ce guide de démarrage rapide, un manifeste est utilisé afin de créer tous les objets nécessaires pour l’exécution de l’application Azure Vote. Ce manifeste inclut deux [déploiements Kubernetes][kubernetes-deployment] : un pour les exemples d’applications Azure Vote Python et l’autre pour une instance Redis. Deux [services Kubernetes][kubernetes-service] sont également créés : un service interne pour l’instance Redis et un service externe pour accéder à l’application Azure Vote à partir d’Internet.
 
-> [!TIP]
-> Dans ce guide de démarrage rapide, vous créez et déployez manuellement vos manifestes d’application sur le cluster AKS. Dans des scénarios plus probables, vous pouvez utiliser [Azure Dev Spaces][azure-dev-spaces] pour itérer et déboguer votre code rapidement, directement dans le cluster AKS. Vous pouvez utiliser les espaces Dev Spaces sur des plateformes de système d’exploitation ainsi que des environnements de développement et collaborer avec les autres personnes de votre équipe.
-
-Dans Cloud Shell, utilisez la commande `nano azure-vote.yaml` ou `vi azure-vote.yaml` pour créer un fichier nommé `azure-vote.yaml`. Ensuite, copiez-y la définition YAML suivante :
+Dans le Cloud Shell, utilisez un éditeur pour créer un fichier nommé `azure-vote.yaml`, tel que `code azure-vote.yaml`, `nano azure-vote.yaml` ou `vi azure-vote.yaml`. Ensuite, copiez-y la définition YAML suivante :
 
 ```yaml
 apiVersion: apps/v1
@@ -116,7 +113,10 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-back
-        image: redis
+        image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
         resources:
           requests:
             cpu: 100m
@@ -156,7 +156,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
-        image: microsoft/azure-vote-front:v1
+        image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
         resources:
           requests:
             cpu: 100m
@@ -232,7 +232,7 @@ Ces données s’afficheront sur le Portail Azure au bout de quelques minutes. P
 
 1. Sous **Supervision** à gauche, choisissez **Insights**.
 1. Dans la partie supérieure, choisissez **+ Ajouter un filtre**.
-1. Sélectionnez *Espace de noms* en guise de propriété, puis choisissez *\<Tout sauf kube-system\>* .
+1. Sélectionnez *Espace de noms* en guise de propriété, puis choisissez *\<All but kube-system\>* .
 1. Choisissez de visualiser les **Conteneurs**.
 
 Les conteneurs *azure-vote-back* et *azure-vote-front* s’affichent, comme illustré dans l’exemple suivant :
@@ -247,7 +247,7 @@ Pour visualiser les journaux relatifs au pod `azure-vote-front`, sélectionnez *
 
 Dès vous n’avez plus besoin du cluster, supprimez la ressource de cluster : toutes les ressources associées seront ainsi supprimées. Vous pouvez effectuer cette opération sur le Portail Azure en cliquant sur le bouton **Supprimer** du tableau de bord du cluster AKS. Vous pouvez aussi exécuter la commande [az aks delete][az-aks-delete] dans Cloud Shell :
 
-```azurecli-interactive
+```azurecli
 az aks delete --resource-group myResourceGroup --name myAKSCluster --no-wait
 ```
 
@@ -280,11 +280,11 @@ Pour en savoir plus sur AKS et parcourir le code complet de l’exemple de dépl
 [kubernetes-concepts]: concepts-clusters-workloads.md
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [az-aks-delete]: /cli/azure/aks#az-aks-delete
-[aks-monitor]: ../monitoring/monitoring-container-health.md
+[aks-monitor]: ../azure-monitor/insights/container-insights-overview.md
 [aks-network]: ./concepts-network.md
 [aks-tutorial]: ./tutorial-kubernetes-prepare-app.md
 [http-routing]: ./http-application-routing.md
 [sp-delete]: kubernetes-service-principal.md#additional-considerations
-[azure-dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/
+[azure-dev-spaces]: ../dev-spaces/index.yml
 [kubernetes-deployment]: concepts-clusters-workloads.md#deployments-and-yaml-manifests
 [kubernetes-service]: concepts-network.md#services

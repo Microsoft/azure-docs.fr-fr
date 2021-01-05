@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Boxcryptor | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Boxcryptor.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: c46aa523-b58c-4a95-a800-db2e5e01c542
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/07/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1017eb02783e2d0d970804fc1a20fd2bdb525637
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 82f6d2a20943c1d8e91c6bfca76a192ee2b7b06e
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158791"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672217"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-boxcryptor"></a>Didacticiel : Intégration d’Azure Active Directory à Boxcryptor
 
@@ -32,7 +27,7 @@ L’intégration de Boxcryptor dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Boxcryptor (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -69,7 +64,7 @@ Pour configurer l’intégration de Boxcryptor avec Azure AD, vous devez ajouter
 
 4. Dans la zone de recherche, tapez **Boxcryptor**, sélectionnez **Boxcryptor** (Boxcryptor) dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Boxcryptor dans la liste des résultats](common/search-new-app.png)
+    ![Boxcryptor dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -146,7 +141,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -182,19 +177,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-boxcryptor-test-user"></a>Créer un utilisateur de test Boxcryptor
 
-Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Boxcryptor. Collaborez avec  [l’équipe du support technique de Boxcryptor](mailto:support@boxcryptor.com)  pour ajouter des utilisateurs, ou le domaine qui doit être mis en liste verte dans la plateforme Boxcryptor. Si le domaine est ajouté par l’équipe, les utilisateurs seront automatiquement approvisionnés sur la plateforme Boxcryptor. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Boxcryptor. Collaborez avec l’[équipe du support technique de Boxcryptor](mailto:support@boxcryptor.com) pour ajouter des utilisateurs, ou le domaine qui doit être mis en liste verte dans la plateforme Boxcryptor. Si le domaine est ajouté par l’équipe, les utilisateurs seront automatiquement approvisionnés sur la plateforme Boxcryptor. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Boxcryptor dans le panneau d’accès doit vous connecter automatiquement à l’application Boxcryptor pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Boxcryptor dans le panneau d’accès doit vous connecter automatiquement à l’application Boxcryptor pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

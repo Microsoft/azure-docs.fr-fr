@@ -3,15 +3,16 @@ title: SDK .NET - Opérations de gestion du système de fichiers sur Data Lake
 description: Utilisez le Kit de développement logiciel (SDK) .NET Azure Data Lake Storage Gen1 pour des opérations de gestion du système de fichiers sur Data Lake Storage Gen1, comme la création de dossiers, etc.
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/03/2020
 ms.author: twooley
-ms.openlocfilehash: 9e52a3cb8d31b5fccc9a0b5a3a76d4e9b43de123
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.custom: devx-track-dotnet
+ms.openlocfilehash: cb6d5fafa8d956c296124c5a20f8a087160961da
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82690960"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92109236"
 ---
 # <a name="filesystem-operations-on-data-lake-storage-gen1-using-the-net-sdk"></a>Opérations de système de fichiers dans Data Lake Storage Gen1 à l’aide du Kit de développement logiciel (SDK) .NET
 
@@ -201,7 +202,7 @@ Voici quelques exemples qui indiquent comment utiliser le Kit de développement 
 ## <a name="see-also"></a>Voir aussi
 
 * [Opérations de gestion du compte sur Data Lake Storage Gen1 à l’aide du SDK .NET](data-lake-store-get-started-net-sdk.md)
-* [Référence SDK .NET Data Lake Storage Gen1](https://docs.microsoft.com/dotnet/api/overview/azure/data-lake-store?view=azure-dotnet)
+* [Référence SDK .NET Data Lake Storage Gen1](/dotnet/api/overview/azure/data-lake-store?view=azure-dotnet)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

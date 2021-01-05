@@ -12,18 +12,18 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/07/2019
 ms.author: allensu
-ms.openlocfilehash: 0a54416a70a8561edfad5915944100e0ce686bbf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5c2072d13cab9839a276c0437747d7075918e78a
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75771255"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94696878"
 ---
 # <a name="multiple-frontends-for-azure-load-balancer"></a>Serveurs frontaux multiples pour Azure Load Balancer
 
 Azure Load Balancer vous permet d’équilibrer la charge des services sur plusieurs ports, plusieurs adresses IP ou les deux. Vous pouvez utiliser les définitions d’équilibrage de charge public et interne pour charger les flux équilibrés sur un ensemble de machines virtuelles.
 
-Cet article décrit les principes de base de cette capacité, les concepts importants et les contraintes. Si vous souhaitez uniquement exposer des services sur une adresse IP, des instructions simplifiées sont disponibles pour les configurations d’équilibreur de charge [publiques](load-balancer-get-started-internet-portal.md) ou [internes](load-balancer-get-started-ilb-arm-portal.md). Les serveurs frontaux multiples s’ajoutent à une configuration de serveur frontal unique. À l’aide des concepts présentés dans cet article, vous pouvez étendre une configuration simplifiée à tout moment.
+Cet article décrit les principes de base de cette capacité, les concepts importants et les contraintes. Si vous souhaitez uniquement exposer des services sur une adresse IP, des instructions simplifiées sont disponibles pour les configurations d’équilibreur de charge [publiques](./quickstart-load-balancer-standard-public-portal.md) ou [internes](./quickstart-load-balancer-standard-internal-portal.md). Les serveurs frontaux multiples s’ajoutent à une configuration de serveur frontal unique. À l’aide des concepts présentés dans cet article, vous pouvez étendre une configuration simplifiée à tout moment.
 
 Lorsque vous définissez Azure Load Balancer, un serveur frontal et une configuration de pool principal sont connectés à des règles. La sonde d’intégrité référencée par la règle est utilisée pour déterminer comment les nouveaux flux sont envoyés à un nœud du pool principal. Le serveur frontal (adresse IP virtuelle aka) est défini par un élément à 3 tuples comprenant une adresse IP (publique ou interne), un protocole de transport (TCP ou UDP) et un numéro de port issu de la règle de l’équilibrage de charge. Le pool principal est une collection de configurations IP de machines virtuelles (partie de la ressource de la carte réseau) qui font référence au pool principal Load Balancer.
 
@@ -64,8 +64,8 @@ Nous définissons deux règles :
 
 | Règle | Mapper le serveur frontal | Au pool principal |
 | --- | --- | --- |
-| 1 |![serveur frontal vert](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 |![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) DIP1:80, ![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) DIP2:80 |
-| 2 |![Adresse IP virtuelle](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 |![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) DIP1:81, ![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) DIP2:81 |
+| 1 |![serveur frontal vert](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 |![backend vert](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) DIP1:80, ![backend vert](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) DIP2:80 |
+| 2 |![Adresse IP virtuelle](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 |![backend violet](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) DIP1:81, ![backend violet](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) DIP2:81 |
 
 Le mappage complet dans Azure Load Balancer se présente désormais comme suit :
 
@@ -102,20 +102,31 @@ Pour chaque machine virtuelle du pool de back-ends, exécutez les commandes suiv
 
 Pour obtenir la liste des noms d’interfaces que vous avez sur votre machine virtuelle, tapez la commande suivante :
 
-    netsh interface show interface 
+```console
+netsh interface show interface 
+```
 
 Pour la carte réseau de machine virtuelle (managée par Azure), tapez la commande suivante :
 
-    netsh interface ipv4 set interface “interfacename” weakhostreceive=enabled
-   (remplacez interfacename par le nom de cette interface)
+```console
+netsh interface ipv4 set interface “interfacename” weakhostreceive=enabled
+```
+
+(remplacez interfacename par le nom de cette interface)
 
 Pour chaque interface de bouclage que vous avez ajoutée, répétez les commandes suivantes :
 
-    netsh interface ipv4 set interface “interfacename” weakhostreceive=enabled 
-   (remplacez interfacename par le nom de cette interface de bouclage)
-     
-    netsh interface ipv4 set interface “interfacename” weakhostsend=enabled 
-   (remplacez interfacename par le nom de cette interface de bouclage)
+```console
+netsh interface ipv4 set interface “interfacename” weakhostreceive=enabled 
+```
+
+(remplacez interfacename par le nom de cette interface de bouclage)
+
+```console
+netsh interface ipv4 set interface “interfacename” weakhostsend=enabled 
+```
+
+(remplacez interfacename par le nom de cette interface de bouclage)
 
 > [!IMPORTANT]
 > La configuration des interfaces de bouclage est effectuée dans le SE invité. Cette configuration n’est pas exécutée ou gérée par Azure. Sans cette configuration, les règles ne fonctionneront pas. Les définitions de sonde d’intégrité utilisent l’adresse IP dédiée de la machine virtuelle, plutôt que l’interface de bouclage représentant le serveur frontal DSR. Par conséquent, votre service doit fournir les réponses de sonde sur un port d’adresse IP dédiée qui reflète l’état du service offert sur l’interface de bouclage représentant le serveur frontal DSR.
@@ -132,8 +143,8 @@ Nous définissons deux règles :
 
 | Règle | Serveur frontal | Mapping au pool principal |
 | --- | --- | --- |
-| 1 |![rule](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 |![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 (dans VM1 et VM2) |
-| 2 |![rule](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 |![Serveur principal](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 (dans VM1 et VM2) |
+| 1 |![règle verte](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 |![backend vert](./media/load-balancer-multivip-overview/load-balancer-rule-green.png) Frontend1:80 (dans VM1 et VM2) |
+| 2 |![règle violette](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 |![backend violet](./media/load-balancer-multivip-overview/load-balancer-rule-purple.png) Frontend2:80 (dans VM1 et VM2) |
 
 Le tableau suivant présente le mappage complet de l’équilibrage de charge :
 
@@ -146,12 +157,13 @@ La destination du flux entrant est l’adresse IP de serveur frontal sur l’int
 
 Notez que cet exemple ne modifie pas le port de destination. Bien qu’il s’agisse d’un scénario d’adresse IP flottante, l’équilibrage de charge Azure prend également en charge la définition d’une règle pour réécrire le port de destination principal afin qu’il soit différent du port de destination frontal.
 
-Le type de règle faisant appel à l’adresse IP flottante constitue la base de plusieurs modèles de configuration d’équilibrage de charge. Un exemple disponible actuellement est la configuration [SQL AlwaysOn avec plusieurs écouteurs](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md) . Au fil du temps, nous documenterons un plus grand nombre de ces scénarios.
+Le type de règle faisant appel à l’adresse IP flottante constitue la base de plusieurs modèles de configuration d’équilibrage de charge. Un exemple disponible actuellement est la configuration [SQL AlwaysOn avec plusieurs écouteurs](../azure-sql/virtual-machines/windows/availability-group-listener-powershell-configure.md) . Au fil du temps, nous documenterons un plus grand nombre de ces scénarios.
 
 ## <a name="limitations"></a>Limites
 
 * Les configurations de serveurs frontaux multiples sont uniquement prises en charge avec les machines virtuelles IaaS.
 * Avec la règle IP flottante, votre application doit utiliser la configuration IP principale pour les flux SNAT sortants. Si votre application se lie à l’adresse IP du serveur frontal configurée sur l’interface de bouclage du SE invité, la SNAT sortant d’Azure n’est pas disponible pour réécrire le flux sortant et le flux échoue.  Passez en revue les [scénarios de sortie](load-balancer-outbound-connections.md).
+* Une adresse IP flottante n’est actuellement pas prise en charge sur des configurations IP secondaires pour des scénarios d’équilibrage de charge interne.
 * Les adresses IP publiques ont une incidence sur la facturation. Pour plus d’informations, voir la page [Tarification des adresses IP](https://azure.microsoft.com/pricing/details/ip-addresses/)
 * Des limites d’abonnement s’appliquent. Pour plus d’informations, voir les [limites de service](../azure-resource-manager/management/azure-subscription-service-limits.md#networking-limits) .
 

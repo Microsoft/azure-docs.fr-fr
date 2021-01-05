@@ -9,10 +9,10 @@ ms.date: 02/21/2018
 ms.author: nzthiago
 ms.custom: include file
 ms.openlocfilehash: eca2d3359614875e5bff0c9bb67f006f0a8cdba1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77198324"
 ---
 ## <a name="function-app-timeout-duration"></a><a name="timeout"></a>Durée du délai d’expiration du conteneur de fonctions 

@@ -1,24 +1,15 @@
 ---
 title: Créer et partager des tableaux de bord dans le portail Azure
 description: Cet article décrit comment créer, personnaliser, publier et partager des tableaux de bord dans le portail Azure.
-services: azure-portal
-documentationcenter: ''
-author: sewatson
-manager: mtillman
 ms.assetid: ff422f36-47d2-409b-8a19-02e24b03ffe7
-ms.service: azure-portal
-ms.devlang: NA
-ms.topic: conceptual
-ms.tgt_pltfrm: NA
-ms.workload: na
+ms.topic: how-to
 ms.date: 03/23/2020
-ms.author: mblythe
-ms.openlocfilehash: e6eda3b522a5b46cd82ef29ae493891a624d3272
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 10c322c9d9d18f7b79a4419bd9efa2e366a5b7c3
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81459285"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745823"
 ---
 # <a name="create-and-share-dashboards-in-the-azure-portal"></a>Créer et partager des tableaux de bord dans le portail Azure
 
@@ -142,7 +133,7 @@ Pour utiliser un tableau de bord existant comme modèle dans un nouveau tableau 
 
 ## <a name="publish-and-share-a-dashboard"></a>Publier et partager un tableau de bord
 
-Quand vous créez un tableau de bord, celui-ci est privé par défaut, ce qui signifie que vous êtes la seule personne à pouvoir le voir. Pour rendre des tableaux de bord visibles par d’autres, vous pouvez les publier et les partager. Pour plus d’informations, consultez [Partager des tableaux de bord Azure en utilisant le contrôle d’accès en fonction du rôle](azure-portal-dashboard-share-access.md).
+Quand vous créez un tableau de bord, celui-ci est privé par défaut, ce qui signifie que vous êtes la seule personne à pouvoir le voir. Pour rendre des tableaux de bord visibles par d’autres, vous pouvez les publier et les partager. Pour plus d’informations, consultez [Partager des tableaux de bord Azure en utilisant le contrôle d’accès en fonction du rôle Azure](azure-portal-dashboard-share-access.md).
 
 ### <a name="open-a-shared-dashboard"></a>Ouvrir un tableau de bord partagé
 
@@ -178,5 +169,5 @@ Pour supprimer définitivement un tableau de bord privé ou partagé, procédez 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Partager des tableaux de bord Azure à l’aide d’un contrôle d’accès en fonction du rôle](azure-portal-dashboard-share-access.md)
+* [Partager des tableaux de bord Azure à l’aide du contrôle d’accès en fonction du rôle Azure](azure-portal-dashboard-share-access.md)
 * [Créer par programmation des tableaux de bord Azure](azure-portal-dashboards-create-programmatically.md)

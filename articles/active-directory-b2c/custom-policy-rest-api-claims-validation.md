@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 03/26/2020
+ms.topic: how-to
+ms.date: 10/15/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: a4902e96cd41a02953b6686b5d52d7912b27809f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 761bc4db7760ef5e84e3fc3c8a5deea5d4508f51
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80330815"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94951925"
 ---
 # <a name="walkthrough-integrate-rest-api-claims-exchanges-in-your-azure-ad-b2c-user-journey-to-validate-user-input"></a>Procédure pas à pas : Intégrer les échanges de revendications de l’API REST dans votre parcours utilisateur Azure AD B2C pour valider une entrée d’utilisateur
 
@@ -65,7 +65,7 @@ En cas d’échec de la validation, l’API REST doit retourner un message d’e
 }
 ```
 
-Cet article ne traite pas de la configuration du point de terminaison d’API REST. Vous avez créé un exemple [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-reference). Vous pouvez accéder au code complet de la fonction Azure sur le site de [GitHub](https://github.com/azure-ad-b2c/rest-api/tree/master/source-code/azure-function).
+Cet article ne traite pas de la configuration du point de terminaison d’API REST. Vous avez créé un exemple [Azure Functions](../azure-functions/functions-reference.md). Vous pouvez accéder au code complet de la fonction Azure sur le site de [GitHub](https://github.com/azure-ad-b2c/rest-api/tree/master/source-code/azure-function).
 
 ## <a name="define-claims"></a>Définir des revendications
 
@@ -93,7 +93,7 @@ Une revendication fournit un stockage temporaire de données lors d’une exécu
 </ClaimType>
 ```
 
-## <a name="configure-the-restful-api-technical-profile"></a>Configurer le profil technique de l’API RESTful 
+## <a name="add-the-restful-api-technical-profile"></a>Ajouter le profil technique de l’API RESTful 
 
 Un [profil technique RESTful](restful-technical-profile.md) prend en charge la création d’une interface avec votre propre service RESTful. Azure Active Directory B2C envoie des données au service RESTful dans une collection `InputClaims` et reçoit des données en retour dans une collection `OutputClaims`. Recherchez l’élément **ClaimsProviders** et ajoutez un fournisseur de revendications comme suit :
 
@@ -105,6 +105,7 @@ Un [profil technique RESTful](restful-technical-profile.md) prend en charge la c
       <DisplayName>Check loyaltyId Azure Function web hook</DisplayName>
       <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
       <Metadata>
+        <!-- Set the ServiceUrl with your own REST API endpoint -->
         <Item Key="ServiceUrl">https://your-account.azurewebsites.net/api/ValidateProfile?code=your-code</Item>
         <Item Key="SendClaimsIn">Body</Item>
         <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
@@ -129,6 +130,17 @@ Un [profil technique RESTful](restful-technical-profile.md) prend en charge la c
 ```
 
 Dans cet exemple, le `userLanguage` sera envoyé au service REST en tant que `lang` au sein de la charge utile JSON. La valeur de la revendication `userLanguage` contient l’ID de langue de l’utilisateur actuel. Pour plus d’informations, consultez [Programmes de résolution de revendication](claim-resolver-overview.md).
+
+### <a name="configure-the-restful-api-technical-profile"></a>Configurer le profil technique de l’API RESTful 
+
+Après avoir déployé votre API REST, définissez les métadonnées du profil technique `REST-ValidateProfile` pour refléter votre propre API REST, notamment :
+
+- **ServiceUrl**. Définissez l’URL du point de terminaison de l’API REST.
+- **SendClaimsIn**. Spécifiez la façon dont les revendications d’entrée sont envoyées au fournisseur de revendications RESTful.
+- **AuthenticationType**. Définissez le type de l’authentification effectuée par le fournisseur de revendications RESTful. 
+- **AllowInsecureAuthInProduction**. Dans un environnement de production, veillez à définir ces métadonnées sur `true`
+    
+Pour plus d’informations sur les configurations, consultez [Métadonnées du profil technique RESTful](restful-technical-profile.md#metadata).
 
 Les commentaires ci -dessus `AuthenticationType` et `AllowInsecureAuthInProduction` indiquent les modifications que vous devez effectuer lorsque vous passez à un environnement de production. Pour savoir comment sécuriser vos API RESTful pour la production, consultez [Sécuriser une API RESTful](secure-rest-api.md).
 

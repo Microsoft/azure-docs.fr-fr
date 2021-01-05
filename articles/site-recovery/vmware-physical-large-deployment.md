@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: a3a2317554f02dc1f1198d8019bbfdb50e3cc71c
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 101e42263e46c5a21f26b0fa9cdeed798525fee9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81409770"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89047076"
 ---
 # <a name="set-up-disaster-recovery-at-scale-for-vmware-vmsphysical-servers"></a>Configurer la récupération d’urgence à grande échelle de machines virtuelles VMware et de serveurs physiques
 
@@ -85,7 +85,7 @@ Nous tenons à nous assurer que les quotas disponibles dans l’abonnement cible
 
 **Tâche** | **Détails** | **Action**
 --- | --- | ---
-**Vérifier les cœurs** | Si les cœurs que compte le quota disponible ne sont pas en nombre égal ou supérieur au nombre total cible au moment du basculement, les basculements échoueront. | Pour les machines virtuelles VMware, vérifiez que l’abonnement cible contient suffisamment de cœurs pour respecter la recommandation du Planificateur de déploiement en matière de cœurs.<br/><br/> Pour les serveurs physiques, vérifiez que les cœurs Azure répondent à vos estimations manuelles.<br/><br/> Pour vérifier les quotas, dans le portail Azure > **Abonnement**, cliquez sur **Utilisation + quotas**.<br/><br/> [Apprenez-en davantage](https://docs.microsoft.com/azure/azure-portal/supportability/resource-manager-core-quotas-request) sur l’augmentation des quotas.
+**Vérifier les cœurs** | Si les cœurs que compte le quota disponible ne sont pas en nombre égal ou supérieur au nombre total cible au moment du basculement, les basculements échoueront. | Pour les machines virtuelles VMware, vérifiez que l’abonnement cible contient suffisamment de cœurs pour respecter la recommandation du Planificateur de déploiement en matière de cœurs.<br/><br/> Pour les serveurs physiques, vérifiez que les cœurs Azure répondent à vos estimations manuelles.<br/><br/> Pour vérifier les quotas, dans le portail Azure > **Abonnement**, cliquez sur **Utilisation + quotas**.<br/><br/> [Apprenez-en davantage](../azure-portal/supportability/resource-manager-core-quotas-request.md) sur l’augmentation des quotas.
 **Vérifier les limites de nombre de basculements** | Le nombre de basculements ne doit pas dépasser les limites de nombre de basculements de Site Recovery. |  Si le nombre de basculements dépasse les limites, vous pouvez ajouter des abonnements pour basculer vers plusieurs abonnements ou augmenter le quota pour un abonnement. 
 
 
@@ -188,7 +188,7 @@ Une fois la réplication lancée pour le premier lot de machines virtuelles, dé
 1. Affectez un administrateur de récupération d’urgence pour surveiller l’état d’intégrité des machines répliquées.
 2. [Surveillez les événements](site-recovery-monitor-and-troubleshoot.md) pour les éléments et l’infrastructure répliqués.
 3. [Surveillez l’intégrité](vmware-physical-azure-monitor-process-server.md) de vos serveurs de processus scale-out.
-4. Inscrivez-vous pour recevoir des [notifications par e-mail](https://docs.microsoft.com/azure/site-recovery/site-recovery-monitor-and-troubleshoot#subscribe-to-email-notifications) concernant les événements, afin de faciliter la surveillance.
+4. Inscrivez-vous pour recevoir des [notifications par e-mail](./site-recovery-monitor-and-troubleshoot.md#subscribe-to-email-notifications) concernant les événements, afin de faciliter la surveillance.
 5. Exécutez des [exercices de récupération d’urgence](site-recovery-test-failover-to-azure.md) pour vous assurer que tout fonctionne comme prévu.
 
 
@@ -205,7 +205,7 @@ Vous pouvez vous préparer au basculement comme suit :
     - Estimer l’objectif de délai de récupération de bout en bout pour vos applications.
     - Estimer l’objectif de point de récupération de bout en bout pour vos applications.
     - Identifier des conflits de plage d’adresses IP.
-    - Nous vous recommandons de ne pas utiliser de réseaux de production pour les exercices, d’éviter d’utiliser les mêmes noms de sous-réseau dans les réseaux de production et de test, et de nettoyer les tests de basculements après chaque exercice.
+    - Nous vous recommandons de ne pas utiliser de réseaux de production pour les exercices et de nettoyer les tests de basculements après chaque exercice.
 
 Pour exécuter un basculement à grande échelle, nous recommandons de procéder comme suit :
 
@@ -214,7 +214,7 @@ Pour exécuter un basculement à grande échelle, nous recommandons de procéder
     - [Découvrez d’autres informations](recovery-plan-overview.md) sur les plans de récupération.
 2. Ajoutez des scripts de runbook Azure Automation aux plans de récupération pour automatiser toutes les tâches manuelles sur Azure. Les tâches typiques incluent la configuration d’équilibreurs de charge, la mise à jour de DNS, etc. [En savoir plus](site-recovery-runbook-automation.md)
 2. Avant le basculement, préparez les machines Windows afin qu’elles soient conformes à l’environnement Azure. Les [limites de nombre de basculements](#plan-azure-subscriptions-and-quotas) sont plus élevées pour les machines conformes. [Apprenez-en davantage](site-recovery-failover-to-azure-troubleshoot.md#failover-failed-with-error-id-170010) sur les runbooks.
-4.  Déclenchez le basculement avec la cmdlet PowerShell [Start-AzRecoveryServicesAsrPlannedFailoverJob](https://docs.microsoft.com/powershell/module/az.recoveryservices/start-azrecoveryservicesasrplannedfailoverjob?view=azps-2.0.0&viewFallbackFrom=azps-1.1.0), ainsi qu’un plan de récupération.
+4.  Déclenchez le basculement avec la cmdlet PowerShell [Start-AzRecoveryServicesAsrPlannedFailoverJob](/powershell/module/az.recoveryservices/start-azrecoveryservicesasrplannedfailoverjob?view=azps-2.0.0&viewFallbackFrom=azps-1.1.0), ainsi qu’un plan de récupération.
 
 
 

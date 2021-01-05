@@ -8,12 +8,12 @@ services: iot-hub
 ms.topic: troubleshooting
 ms.date: 01/30/2020
 ms.author: jlian
-ms.openlocfilehash: 66461b23432a3e8b7ae4ad1fdc078fba9ca05646
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d48474d88a60c73f6094d3b9e65017c23404d8a
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76960282"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92144254"
 ---
 # <a name="412002-devicemessagelocklost"></a>412002 DeviceMessageLockLost
 
@@ -25,7 +25,7 @@ Lorsque vous essayez d’envoyer un message cloud-à-appareil, la demande échou
 
 ## <a name="cause"></a>Cause :
 
-Lorsqu’un appareil reçoit un message cloud vers appareil à partir de la file d’attente (par exemple, à l’aide de [`ReceiveAsync()`](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.client.deviceclient.receiveasync?view=azure-dotnet)), le message est verrouillé par IoT Hub pendant une minute. Si l’appareil tente de compléter le message au terme de ce délai de verrouillage, IoT Hub lève l'exception.
+Lorsqu’un appareil reçoit un message cloud vers appareil à partir de la file d’attente (par exemple, à l’aide de [`ReceiveAsync()`](/dotnet/api/microsoft.azure.devices.client.deviceclient.receiveasync?view=azure-dotnet)), le message est verrouillé par IoT Hub pendant une minute. Si l’appareil tente de compléter le message au terme de ce délai de verrouillage, IoT Hub lève l'exception.
 
 ## <a name="solution"></a>Solution
 

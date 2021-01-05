@@ -1,17 +1,15 @@
 ---
 title: Créer des images conteneur dans Azure Service Fabric
 description: Dans ce tutoriel, vous découvrez comment créer des images conteneurs pour une application Service Fabric à conteneurs multiples.
-author: suhuruli
 ms.topic: tutorial
 ms.date: 07/22/2019
-ms.author: suhuruli
-ms.custom: mvc
-ms.openlocfilehash: fe06da759a1ad42ef5cef888f98c440cdfb9569c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 31b5f870465bc1dff9d6ff7827a4efed084bcf62
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78252782"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92739067"
 ---
 # <a name="tutorial-create-container-images-on-a-linux-service-fabric-cluster"></a>Tutoriel : Créer des images conteneurs sur un cluster Service Fabric Linux
 
@@ -53,7 +51,7 @@ La solution contient deux dossiers et un fichier docker-compose.yml. Le dossier 
 
 ## <a name="create-container-images"></a>Créer des images de conteneur
 
-Dans le répertoire **azure-vote**, exécutez la commande suivante pour créer l’image associée au composant web frontal. Cette commande utilise pour cela le fichier Dockerfile présent dans ce répertoire.
+Dans le répertoire **azure-vote** , exécutez la commande suivante pour créer l’image associée au composant web frontal. Cette commande utilise pour cela le fichier Dockerfile présent dans ce répertoire.
 
 ```bash
 docker build -t azure-vote-front .
@@ -92,13 +90,13 @@ az account set --subscription <subscription_id>
 
 Lorsque vous déployez un registre de conteneurs Azure, il vous faut tout d’abord un groupe de ressources. Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
 
-Créez un groupe de ressources avec la commande **az group create**. Dans cet exemple, un groupe de ressources nommé *myResourceGroup* est créé dans la région *westus*.
+Créez un groupe de ressources avec la commande **az group create** . Dans cet exemple, un groupe de ressources nommé *myResourceGroup* est créé dans la région *westus* .
 
 ```azurecli
 az group create --name <myResourceGroup> --location westus
 ```
 
-Créez un registre de conteneurs Azure à l’aide de la commande **az acr create**. Remplacez \<acrName > par le nom du registre de conteneurs que vous voulez créer dans votre abonnement. Ce nom doit être alphanumérique et unique.
+Créez un registre de conteneurs Azure à l’aide de la commande **az acr create** . Remplacez \<acrName> par le nom du registre de conteneurs que vous voulez créer dans votre abonnement. Ce nom doit être alphanumérique et unique.
 
 ```azurecli
 az acr create --resource-group <myResourceGroup> --name <acrName> --sku Basic --admin-enabled true

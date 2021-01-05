@@ -3,19 +3,18 @@ title: 'Tutoriel : Azure Notebook - Personalizer'
 titleSuffix: Azure Cognitive Services
 description: Ce tutoriel simule un système de boucle Personalizer dans un notebook Azure, qui suggère le type de café que doit commander un client. Les utilisateurs et leurs préférences sont stockés dans un jeu de données d’utilisateurs. Des informations sur le café sont également disponibles et stockées dans un jeu de données de cafés.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
 ms.topic: tutorial
 ms.date: 04/27/2020
-ms.author: diberry
-ms.openlocfilehash: 1f004fe1dae58faaded0b872dcdebdb4e9af66aa
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python
+ms.openlocfilehash: 0cf2aa504fd7a36a55740b3a59eeb3759e67f469
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82193001"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88509907"
 ---
 # <a name="tutorial-use-personalizer-in-azure-notebook"></a>Tutoriel : Utiliser Personalizer dans Azure Notebook
 
@@ -624,7 +623,7 @@ Coffee count 4
 
 ## <a name="validate-new-learning-policy"></a>Valider la nouvelle stratégie d’apprentissage
 
-Revenez au notebook Azure et continuez en exécutant la même boucle, mais seulement pendant 2000 itérations. Actualisez régulièrement le graphique des métriques dans le portail Azure pour voir le nombre total d’appels au service. Quand vous avez environ 4 000 appels, un appel de classement et de récompense pour chaque itération de la boucle, les itérations sont terminées.
+Revenez au fichier Azure Notebooks et continuez en exécutant la même boucle, mais seulement pendant 2000 itérations. Actualisez régulièrement le graphique des métriques dans le portail Azure pour voir le nombre total d’appels au service. Quand vous avez environ 4 000 appels, un appel de classement et de récompense pour chaque itération de la boucle, les itérations sont terminées.
 
 ```python
 # max iterations

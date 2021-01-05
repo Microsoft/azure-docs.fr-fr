@@ -6,12 +6,12 @@ ms.author: yegu
 ms.service: cache
 ms.topic: troubleshooting
 ms.date: 10/18/2019
-ms.openlocfilehash: ace953fcb278604cb64eef463753f0f2622d3d24
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 122c96c95aea794fbba9cab8a9a5b867f9f34b48
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235305"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008965"
 ---
 # <a name="troubleshoot-azure-cache-for-redis-client-side-issues"></a>Résoudre les problèmes côté client liés à Azure Cache pour Redis
 
@@ -43,15 +43,17 @@ Les augmentations de trafic combinées à des paramètres `ThreadPool` insatisfa
 
 Supervisez la façon dont évoluent vos statistiques `ThreadPool` au fil du temps à l’aide d’un [exemple `ThreadPoolLogger`](https://github.com/JonCole/SampleCode/blob/master/ThreadPoolMonitor/ThreadPoolLogger.cs). Pour une analyse plus approfondie, vous pouvez utiliser les messages `TimeoutException` de StackExchange.Redis comme ci-dessous :
 
+```output
     System.TimeoutException: Timeout performing EVAL, inst: 8, mgr: Inactive, queue: 0, qu: 0, qs: 0, qc: 0, wr: 0, wq: 0, in: 64221, ar: 0,
     IOCP: (Busy=6,Free=999,Min=2,Max=1000), WORKER: (Busy=7,Free=8184,Min=2,Max=8191)
+```
 
 Dans l’exception précédente, plusieurs problèmes sont intéressants :
 
 - Notez que dans les sections `IOCP` et `WORKER`, la valeur de `Busy` est supérieure à la valeur de `Min`. Cette différence signifie que vos paramètres `ThreadPool` ont besoin d’être ajustés.
 - Vous pouvez également voir `in: 64221`. Cette valeur indique que 64 211 octets ont été reçus au niveau de la couche de socket du noyau du client, mais qu’ils n’ont pas encore été lus par l’application. En général, cette différence signifie que votre application (par exemple, StackExchange.Redis) ne lit pas les données du réseau aussi rapidement que le serveur les lui envoie.
 
-Vous pouvez [configurer vos paramètres `ThreadPool`](cache-faq.md#important-details-about-threadpool-growth) pour que votre pool de threads puisse rapidement faire l’objet d’un scale-up en cas d’augmentation du trafic.
+Vous pouvez [configurer vos paramètres `ThreadPool`](cache-management-faq.md#important-details-about-threadpool-growth) pour que votre pool de threads puisse rapidement faire l’objet d’un scale-up en cas d’augmentation du trafic.
 
 ## <a name="high-client-cpu-usage"></a>Utilisation importante du processeur du client
 
@@ -82,12 +84,14 @@ Une demande/réponse volumineuse peut entraîner des délais d’expiration. Par
 
 Dans l’exemple suivant, les requêtes A et B sont envoyées rapidement au serveur. Le serveur commence rapidement à envoyer les réponses A et B. En raison des temps de transfert de données, la réponse B doit attendre l’expiration de la réponse A, même si le serveur a répondu rapidement.
 
-    |-------- 1 Second Timeout (A)----------|
-    |-Request A-|
-         |-------- 1 Second Timeout (B) ----------|
-         |-Request B-|
-                |- Read Response A --------|
-                                           |- Read Response B-| (**TIMEOUT**)
+```console
+|-------- 1 Second Timeout (A)----------|
+|-Request A-|
+     |-------- 1 Second Timeout (B) ----------|
+     |-Request B-|
+            |- Read Response A --------|
+                                       |- Read Response B-| (**TIMEOUT**)
+```
 
 Cette demande/réponse est difficile à mesurer. Vous pouvez instrumenter votre code client pour suivre les requêtes et les réponses volumineuses.
 
@@ -105,4 +109,4 @@ Les solutions possibles pour la gestion des réponses volumineuses sont variées
 ## <a name="additional-information"></a>Informations supplémentaires
 
 - [Résoudre les problèmes côté serveur liés à Azure Cache pour Redis](cache-troubleshoot-server.md)
-- [Comment puis-je évaluer et tester les performances de mon cache ?](cache-faq.md#how-can-i-benchmark-and-test-the-performance-of-my-cache)
+- [Comment puis-je évaluer et tester les performances de mon cache ?](cache-management-faq.md#how-can-i-benchmark-and-test-the-performance-of-my-cache)

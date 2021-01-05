@@ -1,16 +1,18 @@
 ---
 title: Terminologie – Personalizer
 description: Personalizer utilise la terminologie de l’apprentissage par renforcement. Ces termes sont utilisés dans le Portail Azure et les API.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 04/23/2020
-ms.openlocfilehash: 3f819ff3305a7c7302eb56c83b98340946613a92
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: cd0d85be5447aad0f2a3c37041e7d5d5d047a468
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83586301"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91777290"
 ---
-# <a name="terminology"></a>Terminologie
+# <a name="personalizer-terminology"></a>Terminologie de Personalizer
 
 Personalizer utilise la terminologie de l’apprentissage par renforcement. Ces termes sont utilisés dans le Portail Azure et les API.
 

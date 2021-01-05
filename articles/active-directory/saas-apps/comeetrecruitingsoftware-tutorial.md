@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec Comeet Recruiting Software | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Comeet Recruiting Software.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 75f51dc9-9525-4ec6-80bf-28374f0c8adf
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/22/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 25a88e3abd7eacc323b5d45fd4fae1304010253b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d458d94a4bee4fce523819af2fd3e555db6e70df
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158554"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672067"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-comeet-recruiting-software"></a>Tutoriel : Intégration d’Azure Active Directory avec Comeet Recruiting Software
 
@@ -32,7 +27,7 @@ L’intégration de Comeet Recruiting Software avec Azure AD vous offre les ava
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à Comeet Recruiting Software (via l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Comeet Recruiting Software dans Azure AD, v
 
 4. Dans la zone de recherche, tapez **Comeet Recruiting Software**, sélectionnez **Comeet Recruiting Software** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Comeet Recruiting Software dans la liste des résultats](common/search-new-app.png)
+    ![Comeet Recruiting Software dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -104,7 +99,7 @@ Pour configurer l’authentification unique Azure AD avec Comeet Recruiting Sof
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL Comeet Recruiting Software](common/idp-intiated.png)
+    ![Capture d’écran montrant la section « Basic S A M L Configuration » avec l’action « Save », le champ « Identifier » et le champ « Reply URL » mis en évidence.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://app.comeet.co/adfs_auth/acs/<UNIQUEID>/`
 
@@ -121,7 +116,7 @@ Pour configurer l’authentification unique Azure AD avec Comeet Recruiting Sof
 
 5. Votre application Comeet Recruiting Software attend les assertions SAML dans un format spécifique. Configurez les revendications suivantes pour cette application. Vous pouvez gérer les valeurs de ces attributs à partir de la section **Attributs utilisateur** sur la page d’intégration des applications. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Attributs utilisateur**.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant la section « Attributs utilisateur » avec le bouton « Modifier » sélectionné.](common/edit-attribute.png)
 
 6. Dans la section **Revendications des utilisateurs** de la boîte de dialogue **Attributs utilisateur**, modifiez les revendications en utilisant l’icône **Modifier** ou ajoutez des revendications en utilisant l’option **Ajouter une nouvelle revendication** pour configurer l’attribut de jeton SAML comme sur l’image ci-dessus et procédez comme suit : 
 
@@ -132,7 +127,7 @@ Pour configurer l’authentification unique Azure AD avec Comeet Recruiting Sof
 
     a. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](common/new-save-attribute.png)
+    ![Capture d’écran montrant la section « User claims » avec les actions « Add new claim » et « Save » mis en évidence.](common/new-save-attribute.png)
 
     ![image](common/new-attribute-details.png)
 
@@ -183,7 +178,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -225,13 +220,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans C
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Comeet Recruiting Software dans le volet d’accès, vous devez être connecté automatiquement à l’application Comeet Recruiting Software pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Comeet Recruiting Software dans le volet d’accès, vous devez être connecté automatiquement à l’application Comeet Recruiting Software pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

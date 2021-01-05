@@ -1,26 +1,26 @@
 ---
-title: Instructions T-SQL
-description: Liens vers la documentation relative aux instructions T-SQL prises en charge dans le pool SQL Synapse.
+title: Instructions T-SQL dans un pool SQL dédié
+description: Liens vers la documentation relative aux instructions T-SQL prises en charge pour un pool SQL dédié dans Azure Synapse Analytics.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 05/01/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 2bc0227f463991f2bd13e323f42d8f45961584b4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 390907eaf529df3f9adfd481e96ff166be543d01
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82143681"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93324634"
 ---
-# <a name="t-sql-statements-supported-in-synapse-sql-pool"></a>Instructions T-SQL prises en charge dans le pool SQL Synapse
+# <a name="t-sql-statements-supported-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Instructions T-SQL prises en charge pour un pool SQL dédié dans Azure Synapse Analytics 
 
-Liens vers la documentation relative aux instructions T-SQL prises en charge dans le pool SQL Synapse.
+Liens vers la documentation relative aux instructions T-SQL prises en charge dans un pool SQL dédié.
 
 ## <a name="data-definition-language-ddl-statements"></a>Instructions du langage de définition de données (DDL)
 
@@ -107,21 +107,21 @@ Liens vers la documentation relative aux instructions T-SQL prises en charge dan
   * [DENY](/sql/t-sql/statements/deny-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
   * [REVOKE](/sql/t-sql/statements/revoke-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [ALTER AUTHORIZATION](/sql/t-sql/statements/alter-authorization-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [ALTER CERTIFICATE](/sql/t-sql/statements/alter-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [ALTER DATABASE ENCRYPTION KEY](/sql/t-sql/statements/alter-database-encryption-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+* [ALTER CERTIFICATE](/sql/t-sql/statements/alter-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
+* [ALTER DATABASE ENCRYPTION KEY](/sql/t-sql/statements/alter-database-encryption-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
 * [ALTER LOGIN](/sql/t-sql/statements/alter-login-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [ALTER MASTER KEY](/sql/t-sql/statements/alter-master-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [ALTER ROLE](/sql/t-sql/statements/alter-role-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [ALTER USER](/sql/t-sql/statements/alter-user-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [BACKUP CERTIFICATE](/sql/t-sql/statements/backup-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+* [BACKUP CERTIFICATE](/sql/t-sql/statements/backup-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
 * [CLOSE MASTER KEY](/sql/t-sql/statements/close-master-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [CREATE CERTIFICATE](/sql/t-sql/statements/create-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [CREATE DATABASE ENCRYPTION KEY](/sql/t-sql/statements/create-database-encryption-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+* [CREATE CERTIFICATE](/sql/t-sql/statements/create-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
+* [CREATE DATABASE ENCRYPTION KEY](/sql/t-sql/statements/create-database-encryption-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
 * [CREATE LOGIN](/sql/t-sql/statements/create-login-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [CREATE MASTER KEY](/sql/t-sql/statements/create-master-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [CREATE ROLE](/sql/t-sql/statements/create-role-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [CREATE USER](/sql/t-sql/statements/create-user-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-* [DROP CERTIFICATE](/sql/t-sql/statements/drop-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+* [DROP CERTIFICATE](/sql/t-sql/statements/drop-certificate-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) (Préversion)
 * [DROP DATABASE ENCRYPTION KEY](/sql/t-sql/statements/drop-database-encryption-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [DROP LOGIN](/sql/t-sql/statements/drop-login-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [DROP MASTER KEY](/sql/t-sql/statements/drop-master-key-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
@@ -131,4 +131,4 @@ Liens vers la documentation relative aux instructions T-SQL prises en charge dan
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations, consultez [Éléments de langage T-SQL dans le pool SQL Synapse](sql-data-warehouse-reference-tsql-language-elements.md) et [Vues système dans le pool SQL Synapse](../sql/reference-tsql-system-views.md).
+Pour obtenir plus d’informations de référence, consultez [Éléments de langage T-SQL dans le pool SQL dédié](sql-data-warehouse-reference-tsql-language-elements.md) et [Vues système dans le pool SQL dédié](../sql/reference-tsql-system-views.md).

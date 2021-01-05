@@ -1,6 +1,6 @@
 ---
 title: Copier de façon incrémentielle plusieurs tables avec PowerShell
-description: Dans ce tutoriel, vous créez un pipeline Azure Data Factory qui copie de façon incrémentielle des données delta de plusieurs tables d’une base de données SQL Server locale dans une base de données Azure SQL.
+description: Dans ce tutoriel, vous créez une fabrique de données Azure Data Factory avec un pipeline qui charge les données delta provenant de plusieurs tables d’une base de données SQL Server vers Azure SQL Database.
 services: data-factory
 ms.author: yexu
 author: dearandyxu
@@ -10,19 +10,19 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019; seo-dt-2019
-ms.date: 01/30/2020
-ms.openlocfilehash: aa4dbfbaff620c25042d2603dab543661ec2cd14
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 06/10/2020
+ms.openlocfilehash: 61a4119947b1412d3e874458e06748fd40a381b4
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81410005"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97510258"
 ---
-# <a name="incrementally-load-data-from-multiple-tables-in-sql-server-to-an-azure-sql-database"></a>Charger de façon incrémentielle des données provenant de plusieurs tables de SQL Server vers une base de données Azure SQL
+# <a name="incrementally-load-data-from-multiple-tables-in-sql-server-to-azure-sql-database-using-powershell"></a>Charger de façon incrémentielle les données de plusieurs tables de SQL Server sur Azure SQL Database avec PowerShell
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce tutoriel, vous créez une fabrique de données Azure Data Factory avec un pipeline qui charge les données delta provenant de plusieurs tables d’une base de données SQL Server locale vers une base de données Azure SQL.    
+Dans ce tutoriel, vous créez une fabrique de données Azure Data Factory avec un pipeline qui charge les données delta provenant de plusieurs tables d’une base de données SQL Server vers Azure SQL Database.    
 
 Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
@@ -69,12 +69,12 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 ## <a name="prerequisites"></a>Prérequis
 
-* **SQL Server**. Dans le cadre de ce tutoriel, vous allez utiliser une base de données SQL Server locale comme magasin de données source. 
-* **Azure SQL Database**. Vous allez utiliser une base de données SQL comme magasin de données récepteur. Si vous ne disposez pas d’une base de données SQL, consultez [Créer une base de données Azure SQL Database](../sql-database/sql-database-get-started-portal.md) pour connaître la procédure à suivre pour en créer une. 
+* **SQL Server**. Dans le cadre de ce tutoriel, vous allez utiliser une base de données SQL Server comme magasin de données source. 
+* **Azure SQL Database**. Vous utilisez une base de données dans Azure SQL Database comme magasin de données récepteur. Si vous n’avez pas de base de données SQL, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md) pour connaître la procédure à suivre pour en créer une. 
 
 ### <a name="create-source-tables-in-your-sql-server-database"></a>Créer des tables sources dans votre base de données SQL Server
 
-1. Ouvrez [SQL Server Management Studio (SSMS)](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) ou [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio), puis connectez-vous à votre base de données SQL Server locale.
+1. Ouvrez [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) ou [Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio), puis connectez-vous à votre base de données SQL Server.
 
 2. Dans **Explorateur de serveurs (SSMS)** ou dans le **volet Connexions (Azure Data Studio)** , cliquez avec le bouton droit sur la base de données, puis choisissez **Nouvelle requête**.
 
@@ -113,11 +113,11 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 ### <a name="create-destination-tables-in-your-azure-sql-database"></a>Créer des tables de destination dans votre base de données Azure SQL
 
-1. Ouvrez [SQL Server Management Studio (SSMS)](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) ou [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio), puis connectez-vous à votre base de données SQL Server locale.
+1. Ouvrez [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) ou [Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio), puis connectez-vous à votre base de données SQL Server.
 
 2. Dans **Explorateur de serveurs (SSMS)** ou dans le **volet Connexions (Azure Data Studio)** , cliquez avec le bouton droit sur la base de données, puis choisissez **Nouvelle requête**.
 
-3. Exécutez la commande SQL suivante sur votre base de données SQL pour créer des tables nommées `customer_table` et `project_table` :  
+3. Exécutez la commande SQL suivante sur votre base de données pour créer des tables nommées `customer_table` et `project_table` :  
 
     ```sql
     create table customer_table
@@ -134,9 +134,9 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
     );
     ```
 
-### <a name="create-another-table-in-the-azure-sql-database-to-store-the-high-watermark-value"></a>Créer une autre table dans la base de données Azure SQL pour stocker la valeur de limite supérieure
+### <a name="create-another-table-in-azure-sql-database-to-store-the-high-watermark-value"></a>Créer une autre table dans Azure SQL Database pour stocker la valeur de limite supérieure
 
-1. Exécutez la commande SQL suivante sur votre base de données SQL pour créer une table sous le nom `watermarktable` pour stocker la valeur de filigrane : 
+1. Exécutez la commande SQL suivante sur votre base de données pour créer une table sous le nom `watermarktable` et y stocker la valeur de limite supérieure : 
     
     ```sql
     create table watermarktable
@@ -159,7 +159,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 ### <a name="create-a-stored-procedure-in-the-azure-sql-database"></a>Créer une procédure stockée dans la base de données Azure SQL 
 
-Exécutez la commande suivante pour créer une procédure stockée dans votre base de données SQL. Cette procédure stockée met à jour la valeur de filigrane après chaque exécution du pipeline. 
+Exécutez la commande suivante pour créer une procédure stockée dans votre base de données. Cette procédure stockée met à jour la valeur de filigrane après chaque exécution du pipeline. 
 
 ```sql
 CREATE PROCEDURE usp_write_watermark @LastModifiedtime datetime, @TableName varchar(50)
@@ -167,17 +167,17 @@ AS
 
 BEGIN
 
-    UPDATE watermarktable
-    SET [WatermarkValue] = @LastModifiedtime 
+UPDATE watermarktable
+SET [WatermarkValue] = @LastModifiedtime 
 WHERE [TableName] = @TableName
 
 END
 
 ```
 
-### <a name="create-data-types-and-additional-stored-procedures-in-the-azure-sql-database"></a>Créer des types de données et des procédures stockées supplémentaires dans la base de données Azure SQL
+### <a name="create-data-types-and-additional-stored-procedures-in-azure-sql-database"></a>Créer des types de données et des procédures stockées supplémentaires dans Azure SQL Database
 
-Exécutez la requête suivante pour créer deux procédures stockées et deux types de données dans votre base de données SQL. Ils sont utilisés pour fusionner les données des tables source dans les tables de destination. 
+Exécutez la requête suivante pour créer deux procédures stockées et deux types de données dans votre base de données. Ils sont utilisés pour fusionner les données des tables source dans les tables de destination. 
 
 Afin de faciliter le démarrage du parcours, nous utilisons directement ces procédures stockées en transmettant les données delta par l’intermédiaire d’une variable de table, puis nous les fusionnons dans le magasin de destination. Faites attention qu’il ne s’attende pas à ce qu’un nombre « élevé » de lignes delta (plus de 100) soient stockées dans la variable de table.  
 
@@ -283,17 +283,17 @@ Notez les points suivants :
 
 * Pour créer des instances Data Factory, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit être membre des rôles Contributeur ou Propriétaire, ou administrateur de l’abonnement Azure.
 
-* Pour obtenir la liste des régions Azure dans lesquelles Data Factory est actuellement disponible, sélectionnez les régions qui vous intéressent dans la page suivante, puis développez **Analytique** pour localiser **Data Factory** : [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/). Les magasins de données (Stockage Azure, SQL Database, etc.) et les services de calcul (Azure HDInsight, etc.) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
+* Pour obtenir la liste des régions Azure dans lesquelles Data Factory est actuellement disponible, sélectionnez les régions qui vous intéressent dans la page suivante, puis développez **Analytique** pour localiser **Data Factory** : [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/). Les magasins de données (Stockage Azure, SQL Database, SQL Managed Instance, etc.) et les services de calcul (Azure HDInsight, etc.) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
 
 [!INCLUDE [data-factory-create-install-integration-runtime](../../includes/data-factory-create-install-integration-runtime.md)]
 
 ## <a name="create-linked-services"></a>Créez des services liés
 
-Vous allez créer des services liés dans une fabrique de données pour lier vos magasins de données et vos services de calcul à la fabrique de données. Dans cette section, vous créez des services liés à votre base de données SQL Server locale et à Azure SQL Database. 
+Vous allez créer des services liés dans une fabrique de données pour lier vos magasins de données et vos services de calcul à la fabrique de données. Dans cette section, vous créez des services liés à votre base de données SQL Server et à votre base de données dans Azure SQL Database. 
 
 ### <a name="create-the-sql-server-linked-service"></a>Créer le service lié SQL Server
 
-Dans cette étape, vous liez votre base de données SQL Server locale à la fabrique de données.
+Dans cette étape, vous liez votre base de données SQL Server à la fabrique de données.
 
 1. Créez un fichier JSON nommé **SqlServerLinkedService.json** dans le dossier C:\ADFTutorials\IncCopyMultiTableTutorial (créez les dossiers locaux s’ils n’existent pas déjà) avec le contenu suivant. Sélectionnez la section appropriée en fonction de l’authentification utilisée pour vous connecter à SQL Server.  
 
@@ -365,14 +365,14 @@ Dans cette étape, vous liez votre base de données SQL Server locale à la fabr
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     LinkedServiceName : SqlServerLinkedService
     ResourceGroupName : <ResourceGroupName>
     DataFactoryName   : <DataFactoryName>
     Properties        : Microsoft.Azure.Management.DataFactory.Models.SqlServerLinkedService
     ```
 
-### <a name="create-the-sql-database-linked-service"></a>Créer le service lié pour base de données SQL
+### <a name="create-the-sql-database-linked-service"></a>Créer le service lié SQL Database
 
 1. Créez un fichier JSON nommé **AzureSQLDatabaseLinkedService.json** dans le dossier C:\ADFTutorials\IncCopyMultiTableTutorial avec le contenu suivant. (Créez le dossier ADF s’il n’existe pas déjà.) Remplacez &lt;servername&gt;, &lt;database name&gt;, &lt;user name&gt; et &lt;password&gt; par le nom de votre serveur de base de données SQL Server, le nom de votre base de données, le nom d’utilisateur et le mot de passe avant d’enregistrer le fichier. 
 
@@ -398,7 +398,7 @@ Dans cette étape, vous liez votre base de données SQL Server locale à la fabr
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     LinkedServiceName : AzureSQLDatabaseLinkedService
     ResourceGroupName : <ResourceGroupName>
     DataFactoryName   : <DataFactoryName>
@@ -773,7 +773,7 @@ Ce pipeline prend une liste de noms de tables comme paramètre. L’**activité 
 
    Voici l'exemple de sortie : 
 
-   ```json
+   ```console
     PipelineName      : IncrementalCopyPipeline
     ResourceGroupName : <ResourceGroupName>
     DataFactoryName   : <DataFactoryName>
@@ -821,11 +821,11 @@ Ce pipeline prend une liste de noms de tables comme paramètre. L’**activité 
 4. Dans la page **Fabrique de données**, sélectionnez **Créer et surveiller** pour lancer Azure Data Factory dans un onglet séparé.
 
 5. Dans la page **Commençons**, sélectionnez **Superviser** sur le côté gauche. 
-![Exécutions de pipeline](media/doc-common-process/get-started-page-monitor-button.png)    
+![Capture d’écran montrant la page de prise en main pour Azure Data Factory.](media/doc-common-process/get-started-page-monitor-button.png)    
 
 6. Vous pouvez voir toutes les exécutions de pipeline et leurs états. Notez que dans l’exemple suivant, l’état d’exécution de pipeline est **Réussite**. Pour vérifier les paramètres transmis au pipeline, sélectionnez le lien dans la colonne **Paramètres**. Si une erreur s’est produite, un lien figure dans la colonne **Erreur**.
 
-    ![Exécutions de pipeline](media/tutorial-incremental-copy-multiple-tables-powershell/monitor-pipeline-runs-4.png)    
+    ![Capture d’écran montrant les exécutions de pipeline pour une fabrique de données incluant votre pipeline.](media/tutorial-incremental-copy-multiple-tables-powershell/monitor-pipeline-runs-4.png)    
 7. Si vous sélectionnez le lien dans la colonne **Actions**, vous voyez toutes les exécutions d’activité du pipeline. 
 
 8. Pour revenir à la vue **Exécutions de pipeline**, sélectionnez **Toutes les exécutions de pipeline**. 
@@ -994,5 +994,3 @@ Passez au tutoriel suivant pour en savoir plus sur la transformation des donnée
 
 > [!div class="nextstepaction"]
 >[Charger de façon incrémentielle des données d’Azure SQL Database dans le stockage Blob Azure à l’aide de la technologie Change Tracking](tutorial-incremental-copy-change-tracking-feature-powershell.md)
-
-

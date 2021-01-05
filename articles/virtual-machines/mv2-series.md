@@ -1,18 +1,18 @@
 ---
 title: Série Mv2 – Machines virtuelles Microsoft Azure
 description: Spécifications pour les machines virtuelles de la série Mv2.
-services: virtual-machines
 author: ayshakeen
 ms.service: virtual-machines
-ms.topic: article
+ms.subservice: sizes
+ms.topic: conceptual
 ms.date: 04/07/2020
-ms.author: lahugh
-ms.openlocfilehash: 7df8dd439008258ea1b4986054660fb0fb9070ce
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.author: jushiman
+ms.openlocfilehash: b4de2ec68d3cd10dfc4e95c6c2232837a7fca626
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204183"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91975754"
 ---
 # <a name="mv2-series"></a>Série Mv2
 
@@ -20,24 +20,22 @@ La série Mv2 offre une plateforme à haut débit et faible latence sur un proce
 
 Machines virtuelles de série Mv2 dotées de la technologie Hyper-Threading d’Intel®
 
-Premium Storage : Prise en charge
+[Stockage Premium](premium-storage-performance.md) : Pris en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Générations 1 et 2<br>
+[Accélérateur d’écriture](./how-to-enable-write-accelerator.md) : Pris en charge<br>
+<br>
 
-Mise en cache du Stockage Premium : Prise en charge
+|Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Disques de données max. | Débit de stockage temporaire et mis en cache max. : IOPS / MBps (taille du cache en Gio) | Débit du disque non mis en cache max. : IOPS / MBps | Nombre max de cartes réseau | Bande passante réseau attendue (Mbit/s) |
+|---|---|---|---|---|---|---|---|---|
+| Standard_M208ms_v2<sup>1</sup> | 208 | 5700 | 4096 | 64 | 80000 / 800 (7040) | 40000 / 1000 | 8 | 16000 |
+| Standard_M208s_v2<sup>1</sup> | 208 | 2 850 | 4096 | 64 | 80000 / 800 (7040) | 40000 / 1000 | 8 | 16000 |
+| Standard_M416ms_v2<sup>1</sup> | 416 | 11400 | 8 192 | 64 | 250000 / 1600 (14080) | 80000 / 2000 | 8 | 32000 |
+| Standard_M416s_v2<sup>1</sup> | 416 | 5700 | 8 192 | 64 | 250000 / 1600 (14080) | 80000 / 2000 | 8 | 32000 |
 
-Migration dynamique : Non pris en charge
-
-Mises à jour avec préservation de la mémoire : Non pris en charge
-
-Accélérateur d’écriture : [Pris en charge](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator)
-
-|Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Disques de données max. | Débit de stockage temporaire et mis en cache max. : IOPS / MBps (taille du cache en Gio) | Débit du disque non mis en cache max. : IOPS / MBps | Nombre max de cartes réseau / Bande passante réseau attendue (MBps) |
-|---|---|---|---|---|---|---|---|
-| Standard_M208ms_v2<sup>1</sup> | 208 | 5700 | 4096 | 64 | 80000 / 800 (7040) | 40000 / 1000 | 8 / 16 000 |
-| Standard_M208s_v2<sup>1</sup> | 208 | 2 850 | 4096 | 64 | 80000 / 800 (7040) | 40000 / 1000 | 8 / 16 000 |
-| Standard_M416ms_v2<sup>1</sup> | 416 | 11400 | 8 192 | 64 | 250000 / 1600 (14080) | 80000 / 2000 | 8 / 32000 |
-| Standard_M416s_v2<sup>1</sup> | 416 | 5700 | 8 192 | 64 | 250000 / 1600 (14080) | 80000 / 2000 | 8 / 32000 |
-
-<sup>1</sup> Les machines virtuelles de la série Mv2 sont uniquement de 2e génération et prennent en charge un sous-ensemble d’images prises en charge de 2e génération. Pour obtenir la liste complète des images prises en charge pour la série Mv2, voir ci-dessous. Si vous utilisez Linux, consultez [Support des machines virtuelles de 2e génération dans Azure](./linux/generation-2.md) pour obtenir des instructions sur la façon de rechercher et sélectionner une image. Si vous utilisez Windows, consultez [Support des machines virtuelles de 2e génération dans Azure](./windows/generation-2.md) pour obtenir des instructions sur la façon de rechercher et sélectionner une image. 
+<sup>1</sup> Les machines virtuelles de la série Mv2 sont uniquement de 2e génération et prennent en charge un sous-ensemble d’images prises en charge de 2e génération. Pour obtenir la liste complète des images prises en charge pour la série Mv2, voir ci-dessous. Si vous utilisez Linux, consultez [Support des machines virtuelles de 2e génération dans Azure](./generation-2.md) pour obtenir des instructions sur la façon de rechercher et sélectionner une image. Si vous utilisez Windows, consultez [Support des machines virtuelles de 2e génération dans Azure](./generation-2.md) pour obtenir des instructions sur la façon de rechercher et sélectionner une image. 
 
 - Windows Server 2019 ou version ultérieure
 - SUSE Linux Enterprise Server 12 SP4 et versions ultérieures ou SUSE Linux Enterprise Server 15 SP1 et versions ultérieures
@@ -48,7 +46,7 @@ Accélérateur d’écriture : [Pris en charge](https://docs.microsoft.com/azur
 
 [!INCLUDE [virtual-machines-common-sizes-table-defs](../../includes/virtual-machines-common-sizes-table-defs.md)]
 
-## <a name="other-sizes"></a>Autres tailles
+## <a name="other-sizes-and-information"></a>Autres tailles et informations
 
 - [Usage général](sizes-general.md)
 - [Mémoire optimisée](sizes-memory.md)
@@ -56,6 +54,11 @@ Accélérateur d’écriture : [Pris en charge](https://docs.microsoft.com/azur
 - [Optimisé pour le GPU](sizes-gpu.md)
 - [Calcul haute performance](sizes-hpc.md)
 - [Générations précédentes](sizes-previous-gen.md)
+
+Calculatrice de prix : [Calculatrice de prix](https://azure.microsoft.com/pricing/calculator/)
+
+Pour plus d’informations sur les types de disques : [Types de disques](./disks-types.md#ultra-disk)
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

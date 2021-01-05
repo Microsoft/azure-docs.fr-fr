@@ -1,6 +1,6 @@
 ---
 title: Exemples Azure PowerShell - Mise en réseau
-description: Exemples Azure PowerShell
+description: En savoir plus sur les exemples Azure PowerShell pour les réseaux virtuels, notamment un exemple de création d’un réseau virtuel pour les applications multiniveaux.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -14,18 +14,18 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 05/24/2017
 ms.author: gwallace
-ms.openlocfilehash: ca6ac145db0536d3cf7e5bcc72a58d72101ab12a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: aa3304cbabb183368f0e47415e64120854f43535
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81459115"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87282073"
 ---
 # <a name="azure-powershell-samples-for-networking"></a>Exemples Azure PowerShell pour la mise en réseau
 
 Le tableau suivant contient des liens vers des scripts créés à l’aide d’Azure PowerShell.
 
-| | |
+| Script | Description |
 |-|-|
 |**Connectivité entre les ressources Azure**||
 | [Créer un réseau virtuel pour les applications multiniveau](./scripts/virtual-network-powershell-sample-multi-tier-application.md?toc=%2fazure%2fnetworking%2ftoc.json) | Crée un réseau virtuel avec des sous-réseaux frontaux et principaux. Le trafic vers le sous-réseau frontal est limité à HTTP, tandis que le trafic vers le sous-réseau principal est limité à SQL, port 1433. |

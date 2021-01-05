@@ -8,25 +8,26 @@ ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
 manager: philmea
-ms.openlocfilehash: 0e3d343c0a68dd527e4e8e8d23e5b3843a216a78
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 994c2c3124d6822f047af942268ad7a401d5a976
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233325"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531557"
 ---
 # <a name="symmetric-key-attestation"></a>Attestation de clé symétrique
 
 Cet article décrit le processus d’attestation d’identité lors de l’utilisation de clés symétriques avec le service Device Provisioning. 
 
-L’attestation de clé symétrique est une approche simple pour authentifier un appareil avec une instance du service Device Provisioning. Cette méthode d’attestation représente une expérience « Hello world » pour les développeurs qui découvrent le provisionnement d’appareils ou n’ont pas d’exigences de sécurité strictes. L’attestation d’appareil avec un [Module de plateforme sécurisée (TPM)](concepts-tpm-attestation.md) ou un [certificat X.509](concepts-security.md#x509-certificates) est plus sécurisée, et elle doit être utilisée là où les exigences de sécurité sont plus strictes.
+L’attestation de clé symétrique est une approche simple pour authentifier un appareil avec une instance du service Device Provisioning. Cette méthode d’attestation représente une expérience « Hello world » pour les développeurs qui découvrent le provisionnement d’appareils ou n’ont pas d’exigences de sécurité strictes. L’attestation d’appareil avec un [Module de plateforme sécurisée (TPM)](concepts-tpm-attestation.md) ou un [certificat X.509](concepts-x509-attestation.md) est plus sécurisée, et elle doit être utilisée là où les exigences de sécurité sont plus strictes.
 
 Les inscriptions de clés symétriques constituent aussi un excellent moyen de démarrer sur le cloud via Azure IoT pour les appareils hérités sont les fonctionnalités de sécurité sont limitées. Pour plus d’informations sur l’attestation de clé symétrique avec des appareils hérités, consultez [Guide pratique pour utiliser des clés symétriques avec des appareils hérités](how-to-legacy-device-symm-key.md).
 
 
 ## <a name="symmetric-key-creation"></a>Création d’une clé symétrique
 
-Par défaut, le service Device Provisioning crée des clés symétriques avec une longueur par défaut de 32 octets quand de nouvelles inscriptions sont enregistrées avec l’option **Générer automatiquement les clés** activée.
+Par défaut, le service Device Provisioning crée des clés symétriques avec une longueur par défaut de 64 octets quand de nouvelles inscriptions sont enregistrées avec l’option **Générer automatiquement les clés** activée.
 
 ![Générer automatiquement des clés symétriques](./media/concepts-symmetric-key-attestation/auto-generate-keys.png)
 
@@ -108,12 +109,12 @@ Considérez le diagramme suivant, qui montre un tableau de clés d’appareil g�
 
 L’identité de chaque appareil est représentée par l’ID d’inscription et par la clé d’appareil dérivée qui est installée en usine. La clé d’appareil n’est jamais copiée vers un autre emplacement et la clé du groupe n’est jamais stockée sur un appareil.
 
-Si les clés d’appareil ne sont pas installés en usine, un [module de sécurité matériel (HSM)](concepts-security.md#hardware-security-module) doit être utilisé pour stocker l’identité de l’appareil de façon sécurisée.
+Si les clés d’appareil ne sont pas installés en usine, un [module de sécurité matériel (HSM)](concepts-service.md#hardware-security-module) doit être utilisé pour stocker l’identité de l’appareil de façon sécurisée.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Maintenant que vous avez une meilleure compréhension de l’attestation de clé symétrique, consultez les articles suivants pour découvrir plus d’informations :
 
 * [Démarrage rapide : provisionner un appareil simulé avec des clés symétriques](quick-create-simulated-device-symm-key.md)
-* [Découvrir plus d’informations sur les concepts du provisionnement automatique](./concepts-auto-provisioning.md)
+* [Découvrir plus d’informations sur les concepts du provisionnement](about-iot-dps.md#provisioning-process)
 * [Bien démarrer avec le provisionnement automatique](./quick-setup-auto-provision.md) 

@@ -9,12 +9,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 01/29/2018
 ms.custom: mqtt
-ms.openlocfilehash: 4e380fdcd72ab21f00272536b9f08145dcb09bc1
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: 03e05eb2bc56a07c2bda3d3fb224012abb3c9e4a
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81728812"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92735938"
 ---
 # <a name="azure-iot-hub-developer-guide"></a>Guide du développeur Azure IoT Hub
 
@@ -52,11 +52,11 @@ Ce guide du développeur IoT Hub inclut les articles suivants :
 
 * L’article [Charger des fichiers à partir d’un appareil](iot-hub-devguide-file-upload.md) décrit comment vous pouvez charger des fichiers à partir d’un appareil. L’article comprend également des informations sur des sujets tels que les notifications qui peuvent être envoyées par le processus de chargement.
 
-* L’article [Gérer les identités des appareils dans IoT Hub](iot-hub-devguide-identity-registry.md) décrit les informations stockées par le registre des identités de chaque IoT Hub. Il explique aussi comment y accéder et le modifier.
+* L’article [Gérer les identités des appareils dans IoT Hub](iot-hub-devguide-identity-registry.md) décrit les informations stockées par le registre des identités de chaque hub IoT. Il explique aussi comment y accéder et le modifier.
 
 * L’article [Contrôler l’accès à IoT Hub](iot-hub-devguide-security.md) décrit le modèle de sécurité utilisé pour autoriser l’accès à la fonctionnalité IoT Hub pour les appareils et les composants du cloud. L’article inclut des informations sur l’utilisation des jetons et des certificats X.509, ainsi que des détails sur les autorisations que vous pouvez accorder.
 
-* L’article [Utiliser des jumeaux d’appareil pour synchroniser l’état et la configuration](iot-hub-devguide-device-twins.md) décrit le concept de *jumeau d’appareil*. L’article décrit également les fonctionnalités exposées par les jumeaux d’appareil, telles que la synchronisation d’un appareil avec son jumeau. L’article inclut des informations sur les données stockées dans un jumeau d’appareil.
+* L’article [Utiliser des jumeaux d’appareil pour synchroniser l’état et la configuration](iot-hub-devguide-device-twins.md) décrit le concept de *jumeau d’appareil* . L’article décrit également les fonctionnalités exposées par les jumeaux d’appareil, telles que la synchronisation d’un appareil avec son jumeau. L’article inclut des informations sur les données stockées dans un jumeau d’appareil.
 
 * L’article [Appeler une méthode directe sur un appareil](iot-hub-devguide-direct-methods.md) décrit le cycle de vie d’une méthode directe. L’article décrit comment appeler des méthodes sur un appareil à partir de votre application backend, et comment gérer la méthode directe sur votre appareil.
 

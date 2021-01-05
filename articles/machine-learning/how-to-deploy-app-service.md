@@ -1,24 +1,25 @@
 ---
 title: Déployer des modèles ML sur Azure App Service (préversion)
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser Azure Machine Learning pour déployer un modèle sur une application web dans Azure App Service.
+description: Découvrez comment utiliser Azure Machine Learning pour déployer un modèle ML formé sur une application web dans Azure App Service.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.author: aashishb
 author: aashishb
 ms.reviewer: larryfr
-ms.date: 08/27/2019
-ms.openlocfilehash: 646254238f83166c53fe94a1821c68ff4dac8f04
-ms.sourcegitcommit: d662eda7c8eec2a5e131935d16c80f1cf298cb6b
+ms.date: 06/23/2020
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python, deploy, devx-track-azurecli
+ms.openlocfilehash: 5f3861d43715ed68116d25206efe4347ea96805c
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82651923"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452143"
 ---
 # <a name="deploy-a-machine-learning-model-to-azure-app-service-preview"></a>Déployer des modèles Machine Learning sur Azure App Service (préversion)
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Découvrez comment déployer un modèle à partir d’Azure Machine Learning en tant qu’application web dans Azure App Service.
 
@@ -27,11 +28,11 @@ Découvrez comment déployer un modèle à partir d’Azure Machine Learning en 
 
 Avec Azure Machine Learning, vous pouvez créer des images Docker à partir de modèles Machine Learning entraînés. Cette image contient un service web qui reçoit des données, les soumet au modèle, puis retourne la réponse. Azure App Service peut être utilisé pour déployer l’image et fournit les fonctionnalités suivantes :
 
-* [Authentification](/azure/app-service/configure-authentication-provider-aad) avancée pour une sécurité améliorée. Les méthodes d’authentification incluent Azure Active Directory et l’authentification multifacteur.
-* [Effectuer une mise à l’échelle automatique](/azure/azure-monitor/platform/autoscale-get-started?toc=%2fazure%2fapp-service%2ftoc.json) sans nécessité de redéploiement.
-* [Prise en charge TLS](/azure/app-service/configure-ssl-certificate-in-code) pour les communications sécurisées entre les clients et le service.
+* [Authentification](../app-service/configure-authentication-provider-aad.md) avancée pour une sécurité améliorée. Les méthodes d’authentification incluent Azure Active Directory et l’authentification multifacteur.
+* [Effectuer une mise à l’échelle automatique](../azure-monitor/platform/autoscale-get-started.md?toc=%2fazure%2fapp-service%2ftoc.json) sans nécessité de redéploiement.
+* [Prise en charge TLS](../app-service/configure-ssl-certificate-in-code.md) pour les communications sécurisées entre les clients et le service.
 
-Pour plus d’informations sur les fonctionnalités fournies par Azure App Service, consultez la [présentation d’App Service](/azure/app-service/overview).
+Pour plus d’informations sur les fonctionnalités fournies par Azure App Service, consultez la [présentation d’App Service](../app-service/overview.md).
 
 > [!IMPORTANT]
 > Si vous avez besoin de la possibilité de consigner les données de scoring utilisées avec votre modèle déployé, ou les résultats de scoring, il est préférable d’effectuer le déploiement vers Azure Kubernetes Service. Pour plus d’informations, consultez [Collecter des données relatives à vos modèles de production](how-to-enable-data-collection.md).
@@ -39,7 +40,7 @@ Pour plus d’informations sur les fonctionnalités fournies par Azure App Servi
 ## <a name="prerequisites"></a>Prérequis
 
 * Un espace de travail Azure Machine Learning. Pour plus d’informations, consultez l’article [Créer un espace de travail](how-to-manage-workspace.md).
-* [Interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+* [Interface de ligne de commande Azure](/cli/azure/install-azure-cli?preserve-view=true&view=azure-cli-latest).
 * Un modèle Machine Learning entraîné inscrit dans votre espace de travail. Si vous n’avez pas de modèle, utilisez le [tutoriel de classification d’image : entraîner un modèle](tutorial-train-models-with-aml.md) pour entraîner et inscrire un modèle.
 
     > [!IMPORTANT]
@@ -53,7 +54,7 @@ Pour plus d’informations sur les fonctionnalités fournies par Azure App Servi
 
 ## <a name="prepare-for-deployment"></a>Préparer le déploiement
 
-Avant le déploiement, vous devez définir ce qui est nécessaire pour exécuter le modèle en tant que service web. La liste suivante décrit les éléments de base nécessaires pour un déploiement :
+Avant le déploiement, vous devez définir ce qui est nécessaire pour exécuter le modèle en tant que service web. La liste suivante décrit les éléments principaux nécessaires pour un déploiement :
 
 * __Script d’entrée__. Ce script accepte les requêtes, évalue la requête à l’aide du modèle et renvoie les résultats.
 
@@ -65,7 +66,7 @@ Avant le déploiement, vous devez définir ce qui est nécessaire pour exécuter
     > [!IMPORTANT]
     > Le Kit de développement logiciel (SDK) Azure Machine Learning n’offre aucun moyen pour le service web d’accéder à votre magasin de données ou à vos jeux de données. Si vous avez besoin du modèle déployé pour accéder aux données stockées en dehors du déploiement, comme dans un compte de stockage Azure, vous devez développer une solution de code personnalisée à l’aide du Kit de développement logiciel (SDK) approprié. Exemple : [Kit de développement logiciel (SDK) Stockage Azure pour Python](https://github.com/Azure/azure-storage-python).
     >
-    > Une autre solution possible pour votre scénario consiste à utiliser les [prédictions par lots](how-to-use-parallel-run-step.md), qui donnent accès aux magasins de travail lors du scoring.
+    > Une autre solution possible pour votre scénario consiste à utiliser les [prédictions par lots](./tutorial-pipeline-batch-scoring-classification.md), qui donnent accès aux magasins de travail lors du scoring.
 
     Pour plus d’informations sur les scripts d’entrée, consultez [Déployer des modèles avec Azure Machine Learning](how-to-deploy-and-where.md).
 
@@ -74,7 +75,7 @@ Avant le déploiement, vous devez définir ce qui est nécessaire pour exécuter
 Ces entités sont encapsulées dans une __configuration d'inférence__. La configuration d’inférence référence le script d’entrée et d’autres dépendances.
 
 > [!IMPORTANT]
-> Lors de la création d’une configuration d’inférence à utiliser avec Azure App Service, vous devez utiliser un objet [Environnement](https://docs.microsoft.com//python/api/azureml-core/azureml.core.environment%28class%29?view=azure-ml-py). Notez que, si vous définissez un environnement personnalisé, vous devez ajouter azureml-defaults avec une version supérieure ou égale à 1.0.45 comme dépendance pip. Ce package contient les fonctionnalités nécessaires pour héberger le modèle en tant que service web. L’exemple suivant illustre la création d’un objet d’environnement et son utilisation avec une configuration d’inférence :
+> Lors de la création d’une configuration d’inférence à utiliser avec Azure App Service, vous devez utiliser un objet [Environnement](/python/api/azureml-core/azureml.core.environment(class)?preserve-view=true&view=azure-ml-py). Notez que, si vous définissez un environnement personnalisé, vous devez ajouter azureml-defaults avec une version supérieure ou égale à 1.0.45 comme dépendance pip. Ce package contient les fonctionnalités nécessaires pour héberger le modèle en tant que service web. L’exemple suivant illustre la création d’un objet d’environnement et son utilisation avec une configuration d’inférence :
 >
 > ```python
 > from azureml.core.environment import Environment
@@ -100,7 +101,7 @@ Pour plus d’informations sur la configuration de l’inférence, consultez [D�
 
 ## <a name="create-the-image"></a>Création de l’image
 
-Pour créer l’image du Docker qui est déployée sur Azure App Service, utilisez [Model.package](https://docs.microsoft.com//python/api/azureml-core/azureml.core.model.model?view=azure-ml-py#package-workspace--models--inference-config-none--generate-dockerfile-false-). L’extrait de code suivant montre comment construire une nouvelle image à partir de la configuration du modèle et de l’inférence :
+Pour créer l’image du Docker qui est déployée sur Azure App Service, utilisez [Model.package](/python/api/azureml-core/azureml.core.model.model?preserve-view=true&view=azure-ml-py). L’extrait de code suivant montre comment construire une nouvelle image à partir de la configuration du modèle et de l’inférence :
 
 > [!NOTE]
 > L’extrait de code suppose que `model` contient un modèle inscrit et que `inference_config` contient la configuration de l’environnement d’inférence. Pour plus d’informations, consultez [Déployer des modèles avec Azure Machine Learning](how-to-deploy-and-where.md).
@@ -270,7 +271,7 @@ print(response.json())
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Découvrez comment configurer votre application web dans la documentation sur [App service sur Linux](/azure/app-service/containers/).
-* Découvrez la mise à l’échelle dans [Bien démarrer avec la mise à l’échelle automatique dans Azure](/azure/azure-monitor/platform/autoscale-get-started?toc=%2fazure%2fapp-service%2ftoc.json).
-* [Utiliser un certificat TLS/SSL dans votre Azure App Service](/azure/app-service/configure-ssl-certificate-in-code).
-* [Configurer votre application App Service pour utiliser une connexion Azure Active Directory](/azure/app-service/configure-authentication-provider-aad).
+* Découvrez la mise à l’échelle dans [Bien démarrer avec la mise à l’échelle automatique dans Azure](../azure-monitor/platform/autoscale-get-started.md?toc=%2fazure%2fapp-service%2ftoc.json).
+* [Utiliser un certificat TLS/SSL dans votre Azure App Service](../app-service/configure-ssl-certificate-in-code.md).
+* [Configurer votre application App Service pour utiliser une connexion Azure Active Directory](../app-service/configure-authentication-provider-aad.md).
 * [Utiliser un modèle ML déployé en tant que service web](how-to-consume-web-service.md)

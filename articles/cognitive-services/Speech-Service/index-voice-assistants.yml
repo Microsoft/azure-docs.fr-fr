@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/10/2020
   ms.author: trbye
-  ms.openlocfilehash: c4b1c6348e834f83e20c612678075405a14f1a9d
-  ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+  ms.openlocfilehash: 8b10f817abf73172018e904eb46d4c9e20b844e2
+  ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "82106200"
+  ms.lasthandoff: 11/21/2020
+  ms.locfileid: "95015385"
 landingContent:
 - title: À propos des assistants vocaux
   linkLists:
@@ -42,34 +42,30 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Créer une application de commandes personnalisées
-      url: quickstart-custom-speech-commands-create-new.md
-    - text: Créer une commande personnalisée avec des paramètres
-      url: quickstart-custom-speech-commands-create-parameters.md
-    - text: Utiliser des commandes personnalisées avec Custom Voice
-      url: quickstart-custom-speech-commands-select-custom-voice.md
-    - text: Utiliser des commandes personnalisées avec le SDK Speech
-      url: quickstart-custom-speech-commands-speech-sdk.md
+    - text: Créer un assistant vocal à l’aide de commandes personnalisées
+      url: quickstart-custom-commands-application.md
   - linkListType: how-to-guide
     links:
-    - text: Effectuer des commandes à partir d’un client
-      url: how-to-custom-speech-commands-fulfill-sdk.md
-    - text: Ajouter une validation des paramètres
-      url: how-to-custom-speech-commands-validations.md
-    - text: Ajouter une confirmation
-      url: how-to-custom-speech-commands-confirmations.md
-    - text: Ajouter une correction en une étape
-      url: how-to-custom-speech-commands-one-step-correction.md
+    - text: Créer une application avec des commandes simples
+      url: how-to-custom-commands-create-application-with-simple-commands.md
+    - text: Ajouter des paramètres à vos commandes
+      url: how-to-custom-commands-add-parameters-to-commands.md
+    - text: Ajouter des validations aux paramètres et des invites de correction
+      url: how-to-custom-commands-add-parameter-configuration.md
+    - text: Intégrer à l’aide du kit de développement logiciel (SDK) Speech
+      url: how-to-custom-commands-setup-speech-sdk.md
+    - text: Configurer un déploiement continu pour votre application Commandes personnalisées à l’aide d’Azure DevOps
+      url: how-to-custom-commands-deploy-cicd.md
 - title: Développer avec Direct Line Speech
   linkLists:
   - linkListType: quickstart
     links:
     - text: C# (UWP)
-      url: quickstart-voice-assistant-csharp-uwp.md
+      url: ./quickstarts/voice-assistants.md?pivots=programming-language-csharp
     - text: Java (Windows, macOS, Linux)
-      url: quickstart-voice-assistant-java-jre.md
+      url: ./quickstarts/voice-assistants.md?pivots=programming-language-java
     - text: Java (Android)
-      url: quickstart-voice-assistant-java-android.md
+      url: ./quickstarts/voice-assistants.md?pivots=programming-language-java
   - linkListType: tutorial
     links:
     - text: Activer les fonctions vocales sur votre bot avec le SDK Speech
@@ -79,8 +75,14 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Créer un mot clé personnalisé
-      url: speech-devices-sdk-create-kws.md
+      url: ./custom-keyword-basics.md
   - linkListType: reference
     links:
     - text: Règles de nommage des mots clés personnalisés
-      url: speech-devices-sdk-kws-guidelines.md
+      url: ./custom-keyword-overview.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

@@ -9,18 +9,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 04/30/2020
+ms.date: 12/22/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6a939eece83b94043f750d6f7f63db290f827da4
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: b5cd7a5737b2d13e63eabbbddd076cfc7aff83ac
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611205"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746794"
 ---
 # <a name="review-access-to-groups-and-applications-in-azure-ad-access-reviews"></a>Réviser l'accès aux groupes et aux applications dans les révisions d'accès Azure AD
 
@@ -33,11 +33,11 @@ Vous pouvez démarrer le processus de révision d’accès à partir de l’e-ma
 - **E-mail** :
 
 >[!IMPORTANT]
-> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Liste verte azure-noreply@microsoft.com pour vous assurer que vous recevez tous les e-mails.
+> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Ajoutez azure-noreply@microsoft.com à votre liste des destinataires approuvés pour vous assurer de recevoir tous les e-mails.
 
 1. Recherchez un e-mail de Microsoft vous invitant à réviser les accès. Voici un exemple d’e-mail vous invitant à réviser l’accès d’un groupe.
 
-    ![Exemple d’e-mail de Microsoft pour la révision d’accès d’un groupe](./media/perform-access-review/access-review-email.png)
+    ![Capture d’écran représentant un exemple d’e-mail de Microsoft pour la révision d’accès à un groupe](./media/perform-access-review/access-review-email.png)
 
 1. Cliquez sur le lien **Commencer une révision d'accès** pour ouvrir la révision d’accès.
 
@@ -54,7 +54,7 @@ Vous pouvez démarrer le processus de révision d’accès à partir de l’e-ma
         > [!NOTE]
         > Si la vignette **Révisions d’accès** n’est pas visible, cela signifie qu’il n’y a pas de révisions d’accès à effectuer pour cette organisation et qu’aucune action n’est nécessaire pour l’instant.
 
-        ![Liste de révisions d’accès en attente pour les applications et les groupes](./media/perform-access-review/access-reviews-list.png)
+        ![Capture d’écran représentant la liste de révisions d’accès en attente pour les applications et les groupes.](./media/perform-access-review/access-reviews-list.png)
 
     1. Cliquez sur le lien **Commencer la révision** associé à la révision d’accès que vous souhaitez effectuer.
 
@@ -99,7 +99,7 @@ Pour rendre les révisions d’accès plus faciles et plus rapides pour vous, no
 
 1. Dans la barre bleue en bas de la page, cliquez sur **Accepter les recommandations**.
 
-    ![Liste de révision d’accès ouverte montrant le bouton Accepter les recommandations](./media/perform-access-review/accept-recommendations.png)
+    ![Capture d’écran représentant la liste de révision d’accès ouverte dans laquelle le bouton « Accepter les recommandations » est sélectionné.](./media/perform-access-review/accept-recommendations.png)
 
     Vous obtenez un résumé des actions recommandées.
 
@@ -129,7 +129,7 @@ Vous pouvez accéder à la nouvelle expérience de réviseur avec l’interface 
 ### <a name="email"></a>E-mail
 
   >[!IMPORTANT]
-> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Liste verte azure-noreply@microsoft.com pour vous assurer que vous recevez tous les e-mails.
+> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Ajoutez azure-noreply@microsoft.com à votre liste des destinataires approuvés pour vous assurer de recevoir tous les e-mails.
 
    1. Recherchez un e-mail de Microsoft vous invitant à réviser les accès. Vous pouvez voir un exemple d’e-mail ci-dessous :
 
@@ -206,4 +206,3 @@ Pour accepter les recommandations pour tous les utilisateurs, assurez-vous qu’
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Effectuer une révision d’accès de groupes ou révisions d’accès des applications dans Azure AD](complete-access-review.md)
-

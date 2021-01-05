@@ -1,7 +1,7 @@
 ---
 title: Forum aux questions de la documentation de Microsoft Security Code Analysis
-description: Cet article contient les questions les plus fréquentes sur l’extension Microsoft Security Code Analysis
-author: vharindra
+description: Pour en savoir plus sur l’extension Analyse du code de sécurité Microsoft, consultez le Forum aux questions (FAQ).
+author: sukhans
 manager: sukhans
 ms.author: terrylan
 ms.date: 07/31/2019
@@ -12,12 +12,12 @@ ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.openlocfilehash: cb04a8e5a6d8c982a35cb5c448e4b6d93825bf73
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f872159e538dc85121a7a6d4d6503fd18a263628
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460220"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543042"
 ---
 # <a name="frequently-asked-questions"></a>Forum aux questions
 Vous avez des questions ? Pour plus d’informations, consultez le forum aux questions suivant.
@@ -106,15 +106,17 @@ Vous trouverez ci-dessous les détails des scénarios de suppression les plus co
 
 La clé de hachage du secret provenant du fichier de sortie de CredScan est nécessaire, comme le montre l’exemple suivant.
 
-        {
-            "tool": "Credential Scanner",
-            "suppressions": [
-            {
-                "hash": "CLgYxl2FcQE8XZgha9/UbKLTkJkUh3Vakkxh2CAdhtY=",
-                "_justification": "Secret used by MSDN sample, it is fake."
-            }
-          ]
-        }
+```js
+{
+    "tool": "Credential Scanner",
+    "suppressions": [
+    {
+        "hash": "CLgYxl2FcQE8XZgha9/UbKLTkJkUh3Vakkxh2CAdhtY=",
+        "_justification": "Secret used by MSDN sample, it is fake."
+    }
+  ]
+}
+```
 
 >[!WARNING]
 > La clé de hachage est générée par une partie de la valeur correspondante ou du contenu correspondant du fichier. Toute révision du code source peut modifier la clé de hachage et désactiver la règle de suppression.
@@ -123,29 +125,31 @@ La clé de hachage du secret provenant du fichier de sortie de CredScan est néc
 
 L’expression du fichier peut correspondre à un nom de fichier. Il peut également s’agir de la partie basename d’un chemin d’accès complet ou d'un nom de fichier. Les caractères génériques ne sont pas pris en charge.
 
-Les exemples suivants montrent comment supprimer le fichier \<InputPath>\src\JS\lib\angular.js
+Les exemples suivants montrent comment supprimer le fichier \<InputPath>\src\JS\lib\angular.js.
 
 Exemples de règles de suppression valides :
 
-- \<InputPath>\src\JS\lib\angular.js - supprime le fichier dans le chemin spécifié
+- \<InputPath>\src\JS\lib\angular.js : supprime le fichier dans le chemin spécifié
 - \src\JS\lib\angular.js
 - \JS\lib\angular.js
 - \lib\angular.js
 - angular.js - supprime les fichiers portant le même nom
 
-        {
-            "tool": "Credential Scanner",
-            "suppressions": [
-            {
-                "file": "\\files\\AdditonalSearcher.xml", 
-                "_justification": "Additional CredScan searcher specific to my team"
-            },
-            {
-                "file": "\\files\\unittest.pfx", 
-                "_justification": "Legitimate UT certificate file with private key"
-            }
-          ]
-        }      
+```js
+{
+    "tool": "Credential Scanner",
+    "suppressions": [
+    {
+        "file": "\\files\\AdditonalSearcher.xml", 
+        "_justification": "Additional CredScan searcher specific to my team"
+    },
+    {
+        "file": "\\files\\unittest.pfx", 
+        "_justification": "Legitimate UT certificate file with private key"
+    }
+  ]
+}
+```
 
 >[!WARNING] 
 > Tous les secrets futurs ajoutés au fichier seront également supprimés automatiquement.
@@ -155,7 +159,7 @@ Exemples de règles de suppression valides :
 Les ressources suivantes vous aident à gérer les secrets et à accéder à des informations sensibles à partir de vos applications :
 
  - [Azure Key Vault](../../key-vault/index.yml)
- - [Azure Active Directory (Azure AD)](../../sql-database/sql-database-aad-authentication.md)
+ - [Azure Active Directory (Azure AD)](../../azure-sql/database/authentication-aad-overview.md)
  - [Azure AD Managed Service Identity (MSI)](https://azure.microsoft.com/blog/keep-credentials-out-of-code-introducing-azure-ad-managed-service-identity/)
  - [Identités managées pour les ressources Azure](../../active-directory/managed-identities-azure-resources/overview.md)
  - [Identités managées dans App Service et Azure Functions](../../app-service/overview-managed-identity.md)
@@ -173,7 +177,7 @@ Un chercheur de contenu est défini comme suit :
 - **Name** : Nom descriptif du chercheur à utiliser dans les fichiers de sortie de Credential Scanner. Nous vous recommandons d’utiliser la convention de nommage avec une casse mixte pour les noms des chercheurs.
 - **RuleId** : ID opaque stable du chercheur :
     - Un chercheur Credential Scanner par défaut se voit attribuer une valeur **RuleId** telle que CSCAN0010, CSCAN0020 ou CSCAN0030. Le dernier chiffre est réservé à la fusion ou à la division des groupes de chercheurs par le biais d’expressions régulières.
-    - La valeur **RuleId** d'un chercheur personnalisé doit disposer de son propre espace de noms. À titre d'exemple, il peut s'agir de ce qui suit : CSCAN-\<Espace de noms\>0010, CSCAN-\<Espace de noms\>0020 et CSCAN-\<Espace de noms\>0030.
+    - La valeur **RuleId** d'un chercheur personnalisé doit disposer de son propre espace de noms. Par exemple : CSCAN-\<Namespace\>0010, CSCAN-\<Namespace\>0020 et CSCAN-\<Namespace\>0030.
     - Le nom complet de chercheur correspond à une combinaison composée d'une valeur **RuleId** et du nom du chercheur. Par exemple : CSCAN0010.KeyStoreFiles and CSCAN0020.Base64EncodedCertificate.
 - **ResourceMatchPattern** : Expression régulière des extensions de fichier à vérifier pour le chercheur.
 - **ContentSearchPatterns** : Tableau de chaînes contenant les déclarations d’expressions régulières à mettre en correspondance. Si aucun modèle de recherche n’est défini, tous les fichiers correspondant à la valeur **ResourceMatchPattern** sont retournés.

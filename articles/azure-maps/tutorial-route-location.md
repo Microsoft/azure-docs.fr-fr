@@ -1,42 +1,46 @@
 ---
 title: 'Tutoriel : Trouver une route vers une position | Microsoft Azure Maps'
-description: Ce tutoriel vous montre comment afficher la route vers une position (point d’intérêt) sur une carte à l’aide du service de routage Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 01/14/2020
+description: Tutoriel expliquant comment trouver une route vers un point d’intérêt. Découvrez comment définir des coordonnées d’adresse et interroger le service Route d’Azure Maps pour obtenir des itinéraires vers ce point.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 09/01/2020
 ms.topic: tutorial
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.custom: mvc
-ms.openlocfilehash: 98c36176ecd2996e5f735c52017162a076ef4bde
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-js
+ms.openlocfilehash: 0004a250173ce6707462b852016d205782479717
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80333757"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896678"
 ---
-# <a name="tutorial-route-to-a-point-of-interest-using-azure-maps"></a>Tutoriel : Établir un itinéraire vers un point d’intérêt avec Azure Maps
+# <a name="tutorial-how-to-display-route-directions-using-azure-maps-route-service-and-map-control"></a>Tutoriel : Comment afficher les directions de route à l’aide du service Route Azure Maps et du contrôle de carte
 
-Ce didacticiel montre comment utiliser votre compte Azure Maps et le SDK Route Service pour rechercher l’itinéraire vers votre point d’intérêt. Dans ce tutoriel, vous allez apprendre à :
+Ce tutoriel vous montre comment utiliser [l’API de service Route](/rest/api/maps/route) Azure Maps et [contrôle de route](./how-to-use-map-control.md) pour afficher les directions de route du point de départ au point d’arrivée. Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
-> * Créer une page web à l’aide de l’API Map Control
-> * Définir les coordonnées d’une adresse
-> * Interroger Route Service afin d’obtenir des indications pour rejoindre un point d’intérêt
+> * Créer et afficher le contrôle de carte sur une page web. 
+> * Définir le rendu d’affichage de l’itinéraire en définissant des [c ouches de symboles](map-add-pin.md) et des [couches de lignes](map-add-line-layer.md).
+> * Créer des objets GeoJSON et les ajouter à la carte pour représenter les points de départ et d’arrivée.
+> * Obtenir des directions de route à partir de points de départ et d’arrivée à l’aide de l’[API Obtenir un itinéraire](/rest/api/maps/route/getroutedirections).
+
+Vous pouvez obtenir le code source complet de l’exemple [ici](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/route.html). Vous pouvez trouver un exemple en direct [ici](https://azuremapscodesamples.azurewebsites.net/?sample=Route%20to%20a%20destination).
 
 ## <a name="prerequisites"></a>Prérequis
 
-Avant de continuer, suivez les instructions mentionnées dans [Créer un compte](quick-demo-map-app.md#create-an-account-with-azure-maps). Vous avez besoin d’un abonnement au niveau tarifaire S1. Effectuez les étapes décrites dans [Obtenir la clé primaire](quick-demo-map-app.md#get-the-primary-key-for-your-account) pour obtenir la clé primaire de votre compte. Pour plus d’informations sur l’authentification dans Azure Maps, voir [Gérer l’authentification dans Azure Maps](how-to-manage-authentication.md).
+1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account)
+2. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement.
 
 <a id="getcoordinates"></a>
 
-## <a name="create-a-new-map"></a>Créer une carte
+## <a name="create-and-display-the-map-control"></a>Créer et afficher le contrôle de carte
 
-Les étapes suivantes vous indiquent comment créer une page HTML statique intégrée avec l’API Map Control.
+Les étapes suivantes vous montrent comment créer et afficher le contrôle de carte dans une page web.
 
-1. Sur votre ordinateur local, créez un fichier et nommez-le **MapRoute.html**.
-2. Ajoutez les composants HTML suivants au fichier :
+1. Sur votre ordinateur local, créez un fichier et nommez-le **MapRoute.html** .
+2. Copiez/collez le balisage HTML suivant dans le fichier.
 
     ```HTML
     <!DOCTYPE html>
@@ -81,7 +85,7 @@ Les étapes suivantes vous indiquent comment créer une page HTML statique inté
     </html>
     ```
 
-    Notez que l’en-tête HTML inclut les fichiers de ressources CSS et JavaScript hébergés par la bibliothèque Azure Map Control. Notez l’événement `onload` sur le corps de la page, qui appelle la fonction `GetMap` lorsque le corps de la page est chargé. Cette fonction est destinée à contenir du code JavaScript inline pour accéder aux API Azure Maps. 
+    L’en-tête HTML inclut les fichiers de ressources CSS et JavaScript hébergés par la bibliothèque Azure Map Control. L’événement `onload` du corps appelle la fonction `GetMap`. À l’étape suivante, nous allons ajouter le code d’initialisation du contrôle de carte.
 
 3. Ajoutez le code JavaScript suivant à la fonction `GetMap`. Remplacez la chaîne `<Your Azure Maps Key>` par la clé primaire copiée à partir de votre compte Maps.
 
@@ -96,17 +100,15 @@ Les étapes suivantes vous indiquent comment créer une page HTML statique inté
    });
    ```
 
-    `atlas.Map` fournit le contrôle d’une carte web visuelle et interactive et est un composant de l’API Azure Map Control.
+4. Enregistrez le fichier et ouvrez-le dans votre navigateur. Un modèle s’affiche.
 
-4. Enregistrez le fichier et ouvrez-le dans votre navigateur. À ce stade, vous disposez d’une carte de base que vous pouvez développer.
+     :::image type="content" source="./media/tutorial-route-location/basic-map.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
-   ![Afficher la carte de base](media/tutorial-route-location/basic-map.png)
+## <a name="define-route-display-rendering"></a>Définir le rendu de l’affichage de l’itinéraire
 
-## <a name="define-how-the-route-will-be-rendered"></a>Définir le rendu de l’itinéraire
+Dans ce tutoriel, nous allons afficher l’itinéraire à l’aide d’une couche de lignes. Les points de départ et d’arrivée seront affichés à l’aide d’un calque de symboles. Pour plus d’informations sur l’ajout de couches de lignes, consultez [Ajouter une couche de lignes à une carte](map-add-line-layer.md). Pour en savoir plus sur les couches de symboles, consultez [Ajouter une couche de symboles à une carte](map-add-pin.md).
 
-Dans ce tutoriel, un itinéraire simple sera affiché à l’aide d’une icône de symbole pour le début et la fin de l’itinéraire et d’une ligne pour le chemin d’accès de l’itinéraire.
-
-1. Une fois la carte initialisée, ajoutez le code JavaScript suivant.
+1. Ajoutez le code JavaScript suivant à la fonction `GetMap`. Ce code implémente le gestionnaire d’événements du contrôle de carte `ready`. Le reste du code de ce tutoriel sera placé dans le gestionnaire d’événements `ready`.
 
     ```JavaScript
     //Wait until the map resources are ready.
@@ -138,10 +140,12 @@ Dans ce tutoriel, un itinéraire simple sera affiché à l’aide d’une icône
         }));
     });
     ```
-    
-    Dans le gestionnaire d’événements `ready` des cartes, une source de données est créée pour stocker le tracé d’itinéraire, ainsi que les points de départ et d’arrivée. Une couche de ligne est créée et jointe à la source de données pour définir le rendu de la ligne d’itinéraire. La ligne de l’itinéraire est affichée dans une belle nuance de bleu. Elle aura une largeur de cinq pixels, des jonctions de lignes arrondies et des majuscules. Lors de l’ajout de la couche sur la carte, un deuxième paramètre avec la valeur `'labels'` est transmis et spécifie le rendu de cette couche sous les étiquettes de carte. Cela garantit que la ligne d’itinéraire ne couvre pas les étiquettes de route. Une couche de symbole est créée et jointe à la source de données. Ce calque spécifie la manière dont les points de départ et d’arrivée sont affichés. Dans le cas présent, des expressions ont été ajoutées pour récupérer les informations d’image d’icône et d’étiquette de texte des propriétés de chaque objet de point. 
-    
-2. Pour ce tutoriel, définissez Microsoft comme point de départ, et une station-service de Seattle comme point de destination. Dans le gestionnaire d’événements `ready` des cartes, ajoutez le code suivant.
+
+    Dans le gestionnaire d’événements `ready` du contrôle de carte, une source de données est créée pour stocker l’itinéraire du point de départ au point d’arrivée. Pour définir le rendu de la ligne d’itinéraire, une couche de lignes est créée et jointe à la source de données.  Pour vous assurer que la ligne d’itinéraire ne couvre pas les étiquettes de route, nous avons transmis un deuxième paramètre avec la valeur de `'labels'`.
+
+    Ensuite, une couche de symbole est créée et jointe à la source de données. Ce calque spécifie comment les points de départ et d’arrivée sont affichés. Des expressions ont été ajoutées pour récupérer les informations d’image d’icône et d’étiquette de texte des propriétés à partir de chaque objet de point. Pour en savoir plus sur les expressions, consultez [Expressions de style basé sur les données](data-driven-style-expressions-web-sdk.md).
+
+2. Définissez Microsoft comme point de départ, et une station-service de Seattle comme point de destination.  Dans le gestionnaire d’événements du contrôle de carte `ready`, ajoutez le code suivant.
 
     ```JavaScript
     //Create the GeoJSON objects which represent the start and end points of the route.
@@ -164,19 +168,24 @@ Dans ce tutoriel, un itinéraire simple sera affiché à l’aide d’une icône
     });
     ```
 
-    Ce code crée deux [objets point GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) pour représenter les points de départ et d’arrivée de l’itinéraire, et ajoute ceux-ci à la source de données. Une propriété `title` et `icon` est ajoutée à chaque point. Le dernier bloc définit la vue de l’appareil photo sur la base de la latitude et de la longitude des points de départ et d’arrivée, à l’aide de la propriété [setCamera](/javascript/api/azure-maps-control/atlas.map#setcamera-cameraoptions---cameraboundsoptions---animationoptions-) de la carte.
+    Ce code crée deux [objets point GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) pour représenter des points de départ et d’arrivée qui sont ensuite ajoutés à la source de données. 
 
-3. Enregistrez le fichier **MapRoute.html** et actualisez votre navigateur. À présent, la carte est centrée sur Seattle, et vous pouvez observer l’épingle bleue marquant le point de départ et l’épingle bleue arrondie marquant le point d’arrivée.
+    Le dernier bloc de code définit la vue de l’appareil photo sur la base de la latitude et de la longitude des points de départ et d’arrivée. Les points de départ et d’arrivée sont ajoutés à la source de données. Le rectangle englobant des points de départ et d’arrivée est calculé à l’aide de la fonction `atlas.data.BoundingBox.fromData`. Ce rectangle englobant est utilisé pour définir la vue de caméra de la carte sur l’itinéraire entier à l’aide de la fonction `map.setCamera`. Une marge intérieure est ajoutée pour compenser les dimensions en pixels des icônes de symbole. Pour plus d’informations sur la propriété setCamera du contrôle de carte setCamera, consultez la propriété [setCamera(CameraOptions | CameraBoundsOptions & AnimationOptions)](/javascript/api/azure-maps-control/atlas.map?view=azure-maps-typescript-latest#setcamera-cameraoptions---cameraboundsoptions---animationoptions-&preserve-view=false).
 
-   ![Voir le point de départ et d’arrivée des routes sur la carte](media/tutorial-route-location/map-pins.png)
+3. Enregistrez **MapRoute.html** et actualisez votre navigateur. La carte est maintenant centrée sur Seattle. La broche bleue en forme de larme marque le point de départ. La broche bleue ronde marque le point d’arrivée.
+
+    :::image type="content" source="./media/tutorial-route-location/map-pins.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
 <a id="getroute"></a>
 
-## <a name="get-directions"></a>Obtenir les directions
+## <a name="get-route-directions"></a>Get Route Directions (Obtenir des directions)
 
-Cette section montre comment utiliser l’API de service d’itinéraire Azure Maps. L’API de service d’itinéraire Azure Maps recherche l’itinéraire entre un point de départ et un point d’arrivée donnés. Ce service comprend des API dédiées à la planification des itinéraires *les plus rapides*, *les plus courts*, *économiques* ou *intéressants* entre deux emplacements. Avec la base de données de trafic historique complète d’Azure, ce service permet également aux utilisateurs de planifier des itinéraires. Les utilisateurs peuvent voir la prédiction des durées d’itinéraire pour n’importe quels jour et heure choisis. Pour plus d’informations, voir [Get route directions](https://docs.microsoft.com/rest/api/maps/route/getroutedirections) (Obtenir les itinéraires). Toutes les fonctionnalités suivantes doivent être ajoutées **dans l’EventListener ready de la carte** pour garantir que les ressources de carte sont accessibles.
+Cette section montre comment utiliser l’API Obtenir des directions Azure Maps pour obtenir des directions d’un point à un autre et l’heure d’arrivée estimée.
 
-1. Dans la fonction GetMap, ajoutez le code suivant au code JavaScript.
+>[!TIP]
+>Le service Route Azure Maps fournit des API afin de planifier des itinéraires basés sur différents types d’itinéraires, par exemple *le plus rapide* , *le plus court* , le plus *économique* ou le plus *intéressant* en fonction de la distance, des conditions de circulation et du mode de transport utilisé. Il permet également aux utilisateurs de planifier des itinéraires futurs en fonction de l’historique des conditions de circulation. Les utilisateurs peuvent voir la prédiction des durées d’itinéraire pour un moment donné. Pour plus d’informations, consultez l’[API Obtenir les itinéraires](/rest/api/maps/route/getroutedirections).
+
+1. Dans la fonction `GetMap`, à l’intérieur du gestionnaire d’événements `ready` du contrôle, ajoutez le code suivant au code JavaScript.
 
     ```JavaScript
     // Use SubscriptionKeyCredential with a subscription key
@@ -189,9 +198,9 @@ Cette section montre comment utiliser l’API de service d’itinéraire Azure M
     var routeURL = new atlas.service.RouteURL(pipeline);
     ```
 
-   `SubscriptionKeyCredential` crée un `SubscriptionKeyCredentialPolicy` pour authentifier les requêtes HTTP auprès d’Azure Maps avec la clé d’abonnement. `atlas.service.MapsURL.newPipeline()` utilise la stratégie `SubscriptionKeyCredential` et crée une instance de [pipeline](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.pipeline?view=azure-maps-typescript-latest). `routeURL` représente une URL des opérations sur l’[itinéraire](https://docs.microsoft.com/rest/api/maps/route) d’Azure Maps.
+   `SubscriptionKeyCredential` crée un `SubscriptionKeyCredentialPolicy` pour authentifier les requêtes HTTP auprès d’Azure Maps avec la clé d’abonnement. `atlas.service.MapsURL.newPipeline()` utilise la stratégie `SubscriptionKeyCredential` et crée une instance de [pipeline](/javascript/api/azure-maps-rest/atlas.service.pipeline). `routeURL` représente une URL des opérations sur l’[itinéraire](/rest/api/maps/route) d’Azure Maps.
 
-2. Après avoir configuré les informations d’identification et l’URL, ajoutez le code JavaScript suivant pour construire l’itinéraire du point de départ au point d’arrivée. `routeURL` demande au service d’itinéraire Azure Maps de calculer des itinéraires. Une collection de fonctionnalités GeoJSON de la réponse est alors extraite à l’aide de la méthode `geojson.getFeatures()` et ajoutée à la source de données.
+2. Après avoir configuré les informations d’identification et l’URL, ajoutez le code suivant dans le gestionnaire d’événements `ready` du contrôle. Ce code construit l’itinéraire du point de départ au point d’arrivée. L’URL `routeURL` demande à l’API de service Route Azure Maps de calculer des itinéraires. Une collection de fonctionnalités GeoJSON de la réponse est alors extraite à l’aide de la méthode `geojson.getFeatures()` et ajoutée à la source de données.
 
     ```JavaScript
     //Start and end point input to the routeURL
@@ -205,26 +214,15 @@ Cette section montre comment utiliser l’API de service d’itinéraire Azure M
     });
     ```
 
-3. Enregistrez le fichier **MapRoute.html** et actualisez votre navigateur web. Dans le cadre d’une connexion efficace avec les API Maps, vous devriez observer une carte similaire au contenu suivant.
+3. Enregistrez le fichier **MapRoute.html** et actualisez votre navigateur web. La carte doit maintenant afficher l’itinéraire du point de départ au point d’arrivée.
 
-    ![Azure Map Control et Route Service](./media/tutorial-route-location/map-route.png)
+     :::image type="content" source="./media/tutorial-route-location/map-route.png" alt-text="Rendu de la carte de base du contrôle de carte":::
+
+Vous pouvez obtenir le code source complet de l’exemple [ici](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/route.html). Vous pouvez trouver un exemple en direct [ici](https://azuremapscodesamples.azurewebsites.net/?sample=Route%20to%20a%20destination).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce didacticiel, vous avez appris à :
-
-> [!div class="checklist"]
-> * Créer une page web à l’aide de l’API Map Control
-> * Définir les coordonnées d’une adresse
-> * Interroger Route Service afin d’obtenir des indications pour rejoindre un point d’intérêt
-
-> [!div class="nextstepaction"]
-> [Afficher le code source complet](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/route.html)
-
-> [!div class="nextstepaction"]
-> [Afficher un exemple en direct](https://azuremapscodesamples.azurewebsites.net/?sample=Route%20to%20a%20destination)
-
-Le didacticiel suivant vous explique comment créer une requête d’itinéraire avec des restrictions comme le mode de déplacement ou le type de chargement, puis affiche les différents itinéraires sur la même carte.
+Le didacticiel suivant vous montre comment créer une requête d’itinéraire avec des restrictions comme le mode de déplacement ou le type de chargement. Vous pouvez ensuite afficher plusieurs itinéraires sur la même carte.
 
 > [!div class="nextstepaction"]
 > [Rechercher des itinéraires pour différents modes de déplacements](./tutorial-prioritized-routes.md)

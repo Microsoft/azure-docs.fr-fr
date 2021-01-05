@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Sprinklr | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Sprinklr.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: b33938a1-25a5-484c-8e75-7dc6de2d534d
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 9e4025d040783bff1cd85fb46d571e3a89967892
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e76386c8c276c6c8c07751474b3718f98af18f4b
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67089661"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92519450"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-sprinklr"></a>Tutoriel : Intégration d’Azure Active Directory à Sprinklr
 
@@ -31,7 +27,7 @@ L’intégration de Sprinklr dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Sprinklr (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -53,11 +49,11 @@ Pour configurer l’intégration de Sprinklr avec Azure AD, vous devez ajouter S
 
 **Pour ajouter Sprinklr à partir de la galerie, procédez comme suit :**
 
-1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
+1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory** .
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez l’option **Toutes les applications** .
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -65,13 +61,13 @@ Pour configurer l’intégration de Sprinklr avec Azure AD, vous devez ajouter S
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **Sprinklr**, sélectionnez **Sprinklr** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **Sprinklr** , sélectionnez **Sprinklr** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
      ![Sprinklr dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Sprinklr, avec un utilisateur de test appelé **Britta Simon**.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Sprinklr, avec un utilisateur de test appelé **Britta Simon** .
 Pour que l’authentification unique fonctionne, une relation entre un utilisateur Azure AD et l’utilisateur Sprinklr associé doit être établie.
 
 Pour configurer et tester l’authentification unique Azure AD avec Sprinklr, vous devez suivre les indications des sections suivantes :
@@ -89,34 +85,34 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD avec Sprinklr, effectuez les étapes suivantes :
 
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Sprinklr**, sélectionnez **Authentification unique**.
+1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Sprinklr** , sélectionnez **Authentification unique** .
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
+2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
+3. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base** .
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
+4. Dans la section **Configuration SAML de base** , effectuez les étapes suivantes :
 
     ![Informations d’authentification unique dans Domaine et URL Sprinklr](common/sp-identifier.png)
 
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<subdomain>.sprinklr.com`
+    a. Dans la zone de texte **URL de connexion** , saisissez une URL au format suivant : `https://<subdomain>.sprinklr.com`
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://<subdomain>.sprinklr.com`
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez l’[équipe de support technique Sprinklr](https://www.sprinklr.com/contact-us/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
+5. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-6. Dans la section **Configurer Sprinklr**, copiez la ou les URL appropriées en fonction de vos besoins.
+6. Dans la section **Configurer Sprinklr** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -130,7 +126,7 @@ Pour configurer l’authentification unique Azure AD avec Sprinklr, effectuez le
 
 1. Dans une autre fenêtre de navigateur web, connectez-vous au site de votre entreprise Sprinklr en tant qu’administrateur.
 
-1. Accédez à **Administration \> Settings**.
+1. Accédez à **Administration \> Settings** .
 
     ![Administration](./media/sprinklr-tutorial/ic782907.png "Administration")
 
@@ -138,19 +134,19 @@ Pour configurer l’authentification unique Azure AD avec Sprinklr, effectuez le
 
     ![Manage Partner](./media/sprinklr-tutorial/ic782908.png "Manage Partner")
 
-1. Cliquez sur **+Add Single Sign Ons**.
+1. Cliquez sur **+Add Single Sign Ons** .
 
-    ![Single Sign-Ons](./media/sprinklr-tutorial/ic782909.png "Single Sign-Ons")
+    ![Capture d’écran montrant le bouton Add Single Sign Ons.](./media/sprinklr-tutorial/ic782909.png "Single Sign-Ons")
 
 1. Dans la page **Single Sign on** , procédez comme suit :
 
-    ![Single Sign-Ons](./media/sprinklr-tutorial/ic782910.png "Single Sign-Ons")
+    ![Capture d’écran montrant la page Single Sign on dans laquelle vous pouvez entrer les valeurs décrites.](./media/sprinklr-tutorial/ic782910.png "Single Sign-Ons")
 
-    a. Dans la zone de texte **Name** (Nom), indiquez le nom de votre configuration (par exemple, *WAADSSOTest*).
+    a. Dans la zone de texte **Name** (Nom), indiquez le nom de votre configuration (par exemple, *WAADSSOTest* ).
 
-    b. Sélectionnez **Enabled**.
+    b. Sélectionnez **Enabled** .
 
-    c. Sélectionnez **Use new SSO Certificate**.
+    c. Sélectionnez **Use new SSO Certificate** .
 
     d. Ouvrez votre certificat codé en base 64 dans le Bloc-notes, copiez son contenu dans le Presse-papiers, puis collez-le dans la zone de texte **Identity provider certificate (Certificat du fournisseur d’identité)** .
 
@@ -160,11 +156,11 @@ Pour configurer l’authentification unique Azure AD avec Sprinklr, effectuez le
 
     g. Dans la zone de texte **Identity Provider Logout URL** (URL de déconnexion du fournisseur d’identité), collez la valeur **URL de déconnexion** que vous avez copiée à partir du portail Azure.
 
-    h. Dans **SAML User ID Type**, sélectionnez **Assertion contains User’s sprinklr.com username**.
+    h. Dans **SAML User ID Type** , sélectionnez **Assertion contains User’s sprinklr.com username** .
 
-    i. Dans **SAML User ID Location**, sélectionnez **User ID is in the Name Identifier element of the Subject statement**.
+    i. Dans **SAML User ID Location** , sélectionnez **User ID is in the Name Identifier element of the Subject statement** .
 
-    j. Cliquez sur **Enregistrer**.
+    j. Cliquez sur **Enregistrer** .
 
     ![SAML](./media/sprinklr-tutorial/ic782911.png "SAML")
 
@@ -172,7 +168,7 @@ Pour configurer l’authentification unique Azure AD avec Sprinklr, effectuez le
 
 L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory** , sélectionnez **Utilisateurs** , puis sélectionnez **Tous les utilisateurs** .
 
     ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
 
@@ -184,81 +180,81 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
+    a. Dans le champ **Nom** , entrez **BrittaSimon** .
   
-    b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon@yourcompanydomain.extension**  
+    b. Dans le champ **Nom d’utilisateur** , tapez **brittasimon@yourcompanydomain.extension**  
     Par exemple : BrittaSimon@contoso.com
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+    c. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ Mot de passe.
 
-    d. Cliquez sur **Créer**.
+    d. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Sprinklr.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **Sprinklr**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , **Toutes les applications** , puis **Sprinklr** .
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
-2. Dans la liste des applications, sélectionnez **Sprinklr**.
+2. Dans la liste des applications, sélectionnez **Sprinklr** .
 
     ![Lien Sprinklr dans la liste des applications](common/all-applications.png)
 
-3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes**.
+3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes** .
 
     ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+4. Cliquez sur le bouton **Ajouter un utilisateur** , puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+5. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+7. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ### <a name="create-sprinklr-test-user"></a>Créer un utilisateur de test Sprinklr
 
 1. Connectez-vous à votre site d’entreprise Sprinklr en tant qu’administrateur.
 
-1. Accédez à **Administration \> Settings**.
+1. Accédez à **Administration \> Settings** .
 
     ![Administration](./media/sprinklr-tutorial/ic782907.png "Administration")
 
 1. Accédez à **Manage Client \> Users** dans le volet gauche.
 
-    ![Paramètres](./media/sprinklr-tutorial/ic782914.png "Paramètres")
+    ![Capture d’écran montrant le bouton Add User dans Settings/Users.](./media/sprinklr-tutorial/ic782914.png "Paramètres")
 
-1. Cliquez sur **Add User**.
+1. Cliquez sur **Add User** .
 
-    ![Paramètres](./media/sprinklr-tutorial/ic782915.png "Paramètres")
+    ![Capture d’écran montrant la boîte de dialogue Edit user dans laquelle vous pouvez entrer les valeurs décrites.](./media/sprinklr-tutorial/ic782915.png "Paramètres")
 
 1. Dans la page **Edit User** , procédez comme suit :
 
     ![Modifier l’utilisateur](./media/sprinklr-tutorial/ic782916.png "Edit User")
 
-    a. Dans les zones de texte **Email**, **First Name** et **Last Name**, saisissez les informations du compte utilisateur Azure AD que vous souhaitez approvisionner.
+    a. Dans les zones de texte **Email** , **First Name** et **Last Name** , saisissez les informations du compte utilisateur Azure AD que vous souhaitez approvisionner.
 
-    b. Sélectionnez **Password Disabled**.
+    b. Sélectionnez **Password Disabled** .
 
-    c. Sélectionner une **Langue**.
+    c. Sélectionner une **Langue** .
 
-    d. Sélectionnez un **Type d’utilisateur**.
+    d. Sélectionnez un **Type d’utilisateur** .
 
-    e. Cliquez sur **Update**.
+    e. Cliquez sur **Update** .
 
     > [!IMPORTANT]
     > **Password Disabled** pour permettre à un utilisateur de se connecter par le biais d’un fournisseur d’identité. 
 
-1. Accédez à **Role**, puis procédez comme suit :
+1. Accédez à **Role** , puis procédez comme suit :
 
     ![Rôles de partenaire](./media/sprinklr-tutorial/ic782917.png "Partner Roles")
 
-    a. Dans la liste **Global**, sélectionnez **ALL_Permissions**.  
+    a. Dans la liste **Global** , sélectionnez **ALL_Permissions** .  
 
-    b. Cliquez sur **Update**.
+    b. Cliquez sur **Update** .
 
 > [!NOTE]
 > Vous pouvez utiliser n’importe quel outil ou API de création de compte utilisateur, fourni par Sprinklr, pour approvisionner des comptes utilisateur AAD.
@@ -267,12 +263,12 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Sprinklr dans le volet d’accès, vous devez être connecté automatiquement à l’application Sprinklr pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Sprinklr dans le volet d’accès, vous devez être connecté automatiquement à l’application Sprinklr pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

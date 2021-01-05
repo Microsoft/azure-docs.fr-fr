@@ -11,19 +11,19 @@ metadata:
   author: PatrickFarley
   ms.author: pafarley
   ms.date: 09/05/2019
-  ms.openlocfilehash: 556af0c505197170a633cf1f949d87f5d2584690
-  ms.sourcegitcommit: edccc241bc40b8b08f009baf29a5580bf53e220c
+  ms.openlocfilehash: 8afce226ab25f066e2f845733d67e9159ad67f56
+  ms.sourcegitcommit: 9706bee6962f673f14c2dc9366fde59012549649
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/24/2020
-  ms.locfileid: "82131328"
+  ms.lasthandoff: 11/13/2020
+  ms.locfileid: "94616805"
 landingContent:
 - title: À propos de Custom Vision
   linkLists:
   - linkListType: overview
     links:
     - text: Qu’est-ce que Custom Vision ?
-      url: home.md
+      url: overview.md
   - linkListType: whats-new
     links:
     - text: Nouveautés
@@ -101,24 +101,22 @@ landingContent:
     - text: API de prédiction
       url: https://go.microsoft.com/fwlink/?linkid=865445
     - text: Kit de développement logiciel (SDK) .NET
-      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet
+      url: /dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet
     - text: Kit de développement logiciel (SDK) Python
-      url: https://docs.microsoft.com/python/api/azure-cognitiveservices-vision-customvision/?view=azure-python
+      url: /python/api/azure-cognitiveservices-vision-customvision/?view=azure-python
     - text: Kit de développement logiciel (SDK) Java
-      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable
+      url: /java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable
     - text: Kit SDK Go (entraînement)
       url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/customvision/training
     - text: Kit SDK Go (prédiction)
       url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+      url: /powershell/module/az.cognitiveservices/#cognitive_services
     - text: Interface de ligne de commande Azure (CLI)
-      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest
+      url: /cli/azure/cognitiveservices?view=azure-cli-latest
 - title: Aide et commentaires
   linkLists:
   - linkListType: reference
     links:
-    - text: UserVoice
-      url: https://cognitive.uservoice.com/forums/598141-custom-vision-service
-    - text: Stack Overflow
-      url: https://stackoverflow.com/questions/tagged/microsoft-cognitive
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/custom-vision-service/context/context

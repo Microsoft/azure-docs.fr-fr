@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à 8x8 | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et 8x8.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: b34a6edf-e745-4aec-b0b2-7337473d64c5
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
-ms.date: 02/20/2020
+ms.date: 10/28/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9c598222978a1c831be6f5e9db9eb87b2d6b6b96
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 81a7efea268600e661981b35f79149fe814ef084
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78968635"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96180674"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-8x8"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à 8x8
 
@@ -30,8 +26,6 @@ Dans ce tutoriel, vous allez apprendre à intégrer 8x8 à Azure Active Director
 * Permettre à vos utilisateurs de se connecter automatiquement à 8x8 avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
-
 ## <a name="prerequisites"></a>Prérequis
 
 Pour commencer, vous devez disposer de ce qui suit :
@@ -39,13 +33,14 @@ Pour commencer, vous devez disposer de ce qui suit :
 * Un abonnement Azure AD Si vous ne disposez d’aucun abonnement, vous pouvez obtenir [un compte gratuit](https://azure.microsoft.com/free/).
 * Un abonnement 8x8.
 
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
+
 ## <a name="scenario-description"></a>Description du scénario
 
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
 * 8x8 prend en charge l’authentification unique lancée par le **fournisseur de services et le fournisseur d’identité**.
-
-* Après avoir configuré 8x8, vous pouvez appliquer le contrôle de session qui protège l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
 
 > [!NOTE]
 > L’identificateur de cette application étant une valeur de chaîne fixe, une seule instance peut être configurée dans un locataire.
@@ -54,18 +49,18 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 Pour configurer l’intégration de 8x8 à Azure AD, vous devez ajouter 8x8 à partir de la galerie à votre liste d’applications SaaS managées.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
+1. Connectez-vous au portail Azure avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
 1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
 1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
 1. Dans la section **Ajouter à partir de la galerie**, tapez **8x8** dans la zone de recherche.
 1. Sélectionnez **8x8** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
-## <a name="configure-and-test-azure-ad-single-sign-on-for-8x8"></a>Configurer et tester l’authentification unique Azure AD pour 8x8
+## <a name="configure-and-test-azure-ad-sso-for-8x8"></a>Configurer et tester l’authentification unique Azure AD pour 8x8
 
 Configurez et testez l’authentification unique Azure AD avec 8x8 pour un utilisateur de test appelé **B.Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur associé dans 8x8.
 
-Pour configurer et tester l’authentification unique Azure AD avec 8x8, suivez les indications des modules ci-après :
+Pour configurer et tester l’authentification unique Azure AD avec 8x8, effectuez les étapes suivantes :
 
 1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-sso)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
     1. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec B. Simon.
@@ -78,7 +73,7 @@ Pour configurer et tester l’authentification unique Azure AD avec 8x8, suivez
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Sur le [Portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **8x8**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
+1. Sur le portail Azure, dans la page d’intégration de l’application **8x8**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
 1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
 1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
@@ -131,24 +126,32 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 La partie suivante de ce tutoriel dépend du type d’abonnement que vous avez avec 8x8.
 
-* Pour les clients 8x8 Editions et X Series qui utilisent le Gestionnaire de configuration pour l’administration, reportez-vous à [Configurer le Gestionnaire de configuration 8x8](#configure-8x8-configuration-manager).
+* Pour les clients 8x8 Editions et X Series qui utilisent le Gestionnaire de configuration pour l’administration, reportez-vous à [Configurer la Console d’administration 8x8](#configure-8x8-admin-console).
 * Pour les clients Virtual Office qui utilisent le responsable de compte pour l’administration, reportez-vous à [Configurer le responsable de compte 8x8](#configure-8x8-account-manager).
 
-### <a name="configure-8x8-configuration-manager"></a>Configurer le Gestionnaire de configuration 8x8
+### <a name="configure-8x8-admin-console"></a>Configurer la Console d’administration 8x8
 
-1. Connectez-vous au [Gestionnaire de configuration](https://vo-cm.8x8.com/) 8x8.
+1. Pour automatiser la configuration dans 8x8, vous devez installer l’**extension de navigateur de connexion sécurisée à Mes applications** en cliquant sur **Installer l’extension**.
+
+    ![Extension My apps](common/install-myappssecure-extension.png)
+
+1. Une fois l’extension ajoutée au navigateur, le fait de cliquer sur **Configurer 8x8** vous redirige vers l’application 8x8. À partir de là, indiquez les informations d’identification de l’administrateur pour vous connecter à 8x8. Cette extension de navigateur configure automatiquement l’application et automatise les étapes 3 à 6.
+
+    ![Configuration](common/setup-sso.png)
+
+1. Si vous voulez configurer 8x8 manuellement, connectez-vous à la [Console d’administration](https://admin.8x8.com/) 8x8 en tant qu’administrateur.
 
 1. Dans la page d’accueil, cliquez sur **Identity Management** (Gestion des identités).
 
-    ![Gestionnaire de configuration 8x8](./media/8x8virtualoffice-tutorial/configure1.png)
+    ![Capture d’écran qui met en évidence la vignette Identity Management.](./media/8x8virtualoffice-tutorial/configure1.png)
 
 1. Activez la case à cocher **Single Sign On (SSO)** (Authentification unique), puis sélectionnez **Microsoft Azure AD**.
 
-    ![Gestionnaire de configuration 8x8](./media/8x8virtualoffice-tutorial/configure2.png)
+    ![Capture d’écran qui met en évidence les options Single Sign on (SSO) et Microsoft Azure AD.](./media/8x8virtualoffice-tutorial/configure2.png)
 
-1. Copiez les trois URL et le certificat de signature à partir de la page **Configurer l’authentification unique avec SAML** dans Azure AD dans la section **Microsoft Azure AD SAML Settings** (Paramètres SAML de Microsoft Azure AD) dans le Gestionnaire de configuration 8x8.
+1. Copiez les trois URL et le certificat de signature à partir de la page **Configurer l’authentification unique avec SAML** dans Azure AD dans la section **Microsoft Azure AD SAML Settings** (Paramètres SAML de Microsoft Azure AD) dans la Console d’administration 8x8.
 
-    ![Gestionnaire de configuration 8x8](./media/8x8virtualoffice-tutorial/configure3.png)
+    ![Console d’administration 8x8](./media/8x8virtualoffice-tutorial/configure3.png)
 
     a. Copiez l’**URL de connexion** dans **IDP Login URL** (URL de connexion IDP).
 
@@ -166,23 +169,23 @@ La partie suivante de ce tutoriel dépend du type d’abonnement que vous avez a
 
 1. Sélectionnez **Virtual Office Account Mgr** (Gestionnaire de compte Virtual Office) dans le volet Applications.
 
-    ![Configurer l’authentification côté application](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_001.png)
+    ![Capture d’écran qui met en évidence la vignette Virtual Office Account Mgr.](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_001.png)
 
 1. Sélectionnez le compte **Entreprise** à gérer, puis cliquez sur le bouton **Se connecter**.
 
-    ![Configurer l’authentification côté application](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_002.png)
+    ![Capture d’écran qui met en évidence l’option Business et le bouton Sign In.](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_002.png)
 
 1. Cliquez sur l’onglet **COMPTES** dans la liste de menu.
 
-    ![Configurer l’authentification côté application](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_003.png)
+    ![Capture d’écran qui met en évidence l’onglet ACCOUNTS dans la liste de menus.](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_003.png)
 
 1. Cliquez sur **Authentification unique** dans la liste des comptes.
 
-    ![Configurer l’authentification côté application](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_004.png)
+    ![Capture d’écran qui met en évidence l’option Single Sign On.](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_004.png)
 
 1. Sélectionnez **Authentification unique** sous la section Méthodes d’authentification, puis cliquez sur **SAML**.
 
-    ![Configurer l’authentification côté application](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_005.png)
+    ![Capture d’écran qui met en évidence SAML sous Single Sign On.](./media/8x8virtualoffice-tutorial/tutorial_8x8virtualoffice_005.png)
 
 1. Dans la section **Authentification unique SAML**, procédez comme suit :
 
@@ -204,20 +207,21 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans 8
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
+Dans cette section, vous allez tester votre configuration de l’authentification unique Azure AD avec les options suivantes. 
 
-Le fait de cliquer sur la vignette 8x8 dans le volet d’accès doit vous connecter automatiquement à l’application 8x8 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+#### <a name="sp-initiated"></a>Lancée par le fournisseur de services :
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+* Cliquez sur **Tester cette application** dans le portail Azure. Cette opération redirige vers l’URL de connexion 8x8, où vous pouvez lancer le processus de connexion.  
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+* Accédez directement à l’URL de connexion 8x8 pour lancer le processus de connexion.
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on)
+#### <a name="idp-initiated"></a>Lancée par le fournisseur d’identité :
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+* Cliquez sur **Tester cette application** dans le portail Azure : vous devez être connecté automatiquement à l’instance de 8x8 pour laquelle vous avez configuré l’authentification unique. 
 
-- [Essayer 8x8 avec Azure AD](https://aad.portal.azure.com/)
+Vous pouvez aussi utiliser le panneau d’accès Microsoft pour tester l’application dans n’importe quel mode. Si, quand vous cliquez sur la vignette 8x8 dans le volet d’accès, le mode Fournisseur de services est configuré, vous êtes redirigé vers la page de connexion de l’application pour lancer le processus de connexion ; s’il s’agit du mode Fournisseur d’identité, vous êtes automatiquement connecté à l’instance de 8x8 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
 
-- [Guide pratique pour protéger 8x8 avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+## <a name="next-steps"></a>Étapes suivantes
+
+Une fois que vous avez configuré 8x8, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).

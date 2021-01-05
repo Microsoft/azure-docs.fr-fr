@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/07/2019
-ms.openlocfilehash: 23d799f84cb3ac3ca911a5669041b0a25394a7ff
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e25299c2ce5d31da8f3caa5b02ab8def816b31ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414776"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91398218"
 ---
 # <a name="migrate-data-from-amazon-s3-to-azure-data-lake-storage-gen2"></a>Migrer des données d’Amazon S3 vers Azure Data Lake Storage Gen2
 
@@ -109,23 +109,23 @@ Le modèle contient deux paramètres :
 
 3. Accédez au modèle **Migrer les données historiques d’AWS S3 vers Azure Data Lake Storage Gen2**. Entrez les connexions à votre table de contrôle externe, AWS S3 en tant que magasin de source de données et Azure Data Lake Storage Gen2 en tant que magasin de destination. Notez que la table de contrôle externe et la procédure stockée font référence à la même connexion.
 
-    ![Créer une nouvelle connexion](media/solution-template-migration-s3-azure/historical-migration-s3-azure1.png)
+    ![Capture d’écran montrant le modèle Migrer les données historiques d’AWS S3 vers Azure Data Lake Storage Gen2.](media/solution-template-migration-s3-azure/historical-migration-s3-azure1.png)
 
 4. Sélectionnez **Utiliser ce modèle**.
 
-    ![Utiliser ce modèle](media/solution-template-migration-s3-azure/historical-migration-s3-azure2.png)
+    ![Capture d’écran mettant en surbrillance le bouton Utiliser ce modèle.](media/solution-template-migration-s3-azure/historical-migration-s3-azure2.png)
     
 5. Vous voyez les 2 pipelines et les 3 jeux de données créés comme illustré dans l’exemple suivant :
 
-    ![Passer en revue le pipeline](media/solution-template-migration-s3-azure/historical-migration-s3-azure3.png)
+    ![Capture d’écran montrant les deux pipelines et trois jeux de données créés à l’aide du modèle.](media/solution-template-migration-s3-azure/historical-migration-s3-azure3.png)
 
 6. Sélectionnez **Déboguer**, entrez les **Paramètres**, puis sélectionnez **Terminer**.
 
-    ![Cliquez sur **Déboguer**](media/solution-template-migration-s3-azure/historical-migration-s3-azure4.png)
+    ![Capture d’écran montrant où sélectionner Déboguer et entrer les paramètres avant de sélectionner Terminer.](media/solution-template-migration-s3-azure/historical-migration-s3-azure4.png)
 
 7. Les résultats ressemblent à l’exemple qui suit :
 
-    ![Vérifier le résultat](media/solution-template-migration-s3-azure/historical-migration-s3-azure5.png)
+    ![Capture d’écran montrant les résultats retournés.](media/solution-template-migration-s3-azure/historical-migration-s3-azure5.png)
 
 
 ### <a name="for-the-template-to-copy-changed-files-only-from-amazon-s3-to-azure-data-lake-storage-gen2"></a>Pour que le modèle copie uniquement les fichiers modifiés d’Amazon S3 vers Azure Data Lake Storage Gen2
@@ -192,7 +192,7 @@ Le modèle contient deux paramètres :
 
 8. Vous pouvez également vérifier les résultats de la table de contrôle à l’aide de la requête *« select * from s3_partition_delta_control_table »* . La sortie est similaire à l’exemple suivant :
 
-    ![Vérifier le résultat](media/solution-template-migration-s3-azure/delta-migration-s3-azure6.png)
+    ![Capture d’écran montrant les résultats de la table de contrôle après exécution de la requête.](media/solution-template-migration-s3-azure/delta-migration-s3-azure6.png)
     
 ## <a name="next-steps"></a>Étapes suivantes
 

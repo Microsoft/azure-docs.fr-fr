@@ -3,23 +3,23 @@ title: Gérer les appareils avec le Gestionnaire d’instantanés StorSimple | 
 description: Décrit comment utiliser le composant logiciel enfichable MMC du Gestionnaire d’instantanés StorSimple pour connecter et gérer des appareils StorSimple.
 services: storsimple
 documentationcenter: ''
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 966ecbe3-a7fa-4752-825f-6694dd949946
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/05/2017
-ms.author: twooley
-ms.openlocfilehash: a037ddc5a43b288349b17dc7d954991a2c634aa3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: dbb7e835d110bcb6cb81fd5425a2aafbb578e692
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228149"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022970"
 ---
 # <a name="use-storsimple-snapshot-manager-to-connect-and-manage-storsimple-devices"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour connecter et gérer des appareils StorSimple
 ## <a name="overview"></a>Vue d’ensemble

@@ -4,15 +4,15 @@ description: Résoudre les problèmes rencontrés par les clients avec les conne
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 11/04/2019
 ms.author: cherylmc
-ms.openlocfilehash: 8871e92f0911c4d3cbcc1772bef1daeb5c70b5d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 56a8514fc2531ba0b18925427814e5bfef7d64bf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74151975"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84988104"
 ---
 # <a name="troubleshoot-an-azure-ad-authentication-vpn-client"></a>Résoudre les problèmes d’un client VPN avec l’authentification Azure AD
 

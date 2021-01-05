@@ -1,25 +1,26 @@
 ---
 title: Tutoriel C# sur l’indexation des données Azure SQL
 titleSuffix: Azure Cognitive Search
-description: Dans ce tutoriel C#, vous vous connectez à une base de données Azure SQL, extrayez des données interrogeables et les chargez dans un index de Recherche cognitive Azure.
+description: Dans ce tutoriel C#, vous vous connectez à Azure SQL Database, extrayez des données interrogeables et les chargez dans un index de Recherche cognitive Azure.
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: tutorial
-ms.date: 02/28/2020
-ms.openlocfilehash: cab996eb7c0bfccf31ed49294c6aa4b3e8cefc8f
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.date: 09/25/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 960657d27be4b9dab9f242428592bbb404a49d86
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82780757"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94697167"
 ---
 # <a name="tutorial-index-azure-sql-data-using-the-net-sdk"></a>Tutoriel : Indexer des données Azure SQL à l’aide du SDK .NET
 
-Configurez un [indexeur](search-indexer-overview.md) pour extraire des données interrogeables d’une base de données Azure SQL, en les envoyant à un index de recherche dans Recherche cognitive Azure. 
+Configurez un [indexeur](search-indexer-overview.md) pour extraire des données interrogeables d’Azure SQL Database, en les envoyant à un index de recherche dans Recherche cognitive Azure. 
 
-Ce tutoriel utilise C# et le [SDK .NET](https://aka.ms/search-sdk) pour effectuer les tâches suivantes :
+Ce tutoriel utilise C# et le [SDK .NET](/dotnet/api/overview/azure/search) pour effectuer les tâches suivantes :
 
 > [!div class="checklist"]
 > * Créer une source de données qui se connecte à une base de données Azure SQL
@@ -56,7 +57,7 @@ Si vous disposez d’une ressource Azure SQL Database, vous pouvez y ajouter la 
 
 1. Recherchez ou créez une **base de données SQL**. Vous pouvez utiliser les valeurs par défaut et le niveau de tarification le moins élevé. Un des avantages lié à la création d’un serveur est de pouvoir spécifier un nom d’utilisateur administrateur et le mot de passe nécessaire pour la création et le chargement des tables lors d’une étape ultérieure.
 
-   ![Page de création de base de données](./media/search-indexer-tutorial/indexer-new-sqldb.png "Nouvelle page de base de données")
+   :::image type="content" source="media/search-indexer-tutorial/indexer-new-sqldb.png" alt-text="Page de création de base de données" border="false":::
 
 1. Cliquez sur **Vérifier + créer** pour déployer le nouveau serveur et la nouvelle base de données. Patientez jusqu’au déploiement du serveur et de la base de données.
 
@@ -68,7 +69,7 @@ Si vous disposez d’une ressource Azure SQL Database, vous pouvez y ajouter la 
 
 1. Sélectionnez le fichier et cliquez sur **Ouvrir**. Le script doit ressembler à la capture d’écran suivante :
 
-   ![Script SQL](./media/search-indexer-tutorial/sql-script.png "Script SQL")
+   :::image type="content" source="media/search-indexer-tutorial/sql-script.png" alt-text="Script SQL" border="false":::
 
 1. Cliquez sur **Exécuter** pour exécuter la requête. Dans le volet Résultats, vous devez voir un message de réussite de la requête pour 3 lignes.
 
@@ -98,7 +99,7 @@ Les appels d’API nécessitent l’URL du service et une clé d’accès. Un se
 
 1. Dans **Paramètres** > **Clés**, obtenez une clé d’administration pour avoir des droits d’accès complets sur le service. Il existe deux clés d’administration interchangeables, fournies pour assurer la continuité de l’activité au cas où vous deviez en remplacer une. Vous pouvez utiliser la clé primaire ou secondaire sur les demandes d’ajout, de modification et de suppression d’objets.
 
-   ![Obtenir un point de terminaison et une clé d’accès HTTP](media/search-get-started-postman/get-url-key.png "Obtenir un point de terminaison et une clé d’accès HTTP")
+   :::image type="content" source="media/search-get-started-rest/get-url-key.png" alt-text="Obtenir un point de terminaison et une clé d’accès HTTP" border="false":::
 
 ## <a name="2---set-up-your-environment"></a>2 - Configurer votre environnement
 
@@ -144,7 +145,7 @@ Un schéma peut également inclure d’autres éléments, y compris des profils 
 
 Le programme principal inclut une logique pour la création d’un client, d’un index, d’une source de données et d’un indexeur. Le code recherche et supprime les ressources existantes du même nom, en supposant que vous pouvez exécuter ce programme plusieurs fois.
 
-L’objet de source de données est configuré avec des paramètres propres aux ressources de base de données Azure SQL, notamment l’[indexation partielle ou incrémentielle](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md#capture-new-changed-and-deleted-rows), pour tirer parti des [fonctionnalités de détection des modifications](https://docs.microsoft.com/sql/relational-databases/track-changes/about-change-tracking-sql-server) d’Azure SQL. La base de données des hôtels de démonstration dans Azure SQL a une colonne « suppression réversible » nommée **IsDeleted**. Quand cette colonne est définie sur true dans la base de données, l’indexeur supprime le document correspondant dans l’index de Recherche cognitive Azure.
+L’objet de source de données est configuré avec des paramètres propres aux ressources Azure SQL Database, notamment l’[indexation partielle ou incrémentielle](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md#capture-new-changed-and-deleted-rows), pour tirer parti des [fonctionnalités intégrées de détection des modifications](/sql/relational-databases/track-changes/about-change-tracking-sql-server) d’Azure SQL. La base de données des hôtels de démonstration dans Azure SQL a une colonne « suppression réversible » nommée **IsDeleted**. Quand cette colonne est définie sur true dans la base de données, l’indexeur supprime le document correspondant dans l’index de Recherche cognitive Azure.
 
   ```csharp
   Console.WriteLine("Creating data source...");
@@ -200,7 +201,7 @@ Un objet de l’indexeur est indépendant de la plateforme, où la configuration
 
 Appuyez sur F5 pour générer et exécuter la solution. Le programme s’exécute en mode débogage. Une fenêtre de console signale l’état de chaque opération.
 
-   ![Sortie de la console](./media/search-indexer-tutorial/console-output.png "Sortie de la console")
+   :::image type="content" source="media/search-indexer-tutorial/console-output.png" alt-text="Sortie de la console" border="false":::
 
 Votre code s’exécute localement dans Visual Studio en se connectant à votre service de recherche sur Azure qui, à son tour, se connecte à Azure SQL Database et récupère le jeu de données. Étant donné le grand nombre d’opérations, il existe plusieurs points de défaillance potentiels. Si une erreur survient, commencez par vérifier les conditions suivantes :
 
@@ -216,7 +217,7 @@ Utilisez le portail Azure pour vérifier la création des objets, puis utilisez 
 
 1. [Connectez-vous au portail Azure](https://portal.azure.com/). Dans la page **Vue d’ensemble** de votre service de recherche, ouvrez chaque liste successivement pour vérifier que l’objet est créé. Sous **Index**, **Indexeurs** et **Sources de données**, vous devez voir « hotels », « azure-sql-indexer » et « azure-sql » respectivement.
 
-   ![Vignettes d’indexeur et de source de données](./media/search-indexer-tutorial/tiles-portal.png)
+   :::image type="content" source="media/search-indexer-tutorial/tiles-portal.png" alt-text="Vignettes d’indexeur et de source de données" border="false":::
 
 1. Sélectionnez l’index hotels. Dans la page hotels, le premier onglet est celui de l’**Explorateur de recherche**. 
 
@@ -224,7 +225,7 @@ Utilisez le portail Azure pour vérifier la création des objets, puis utilisez 
 
    Les trois entrées de votre index sont renvoyées en tant que documents JSON. L’explorateur de recherche renvoie des documents au format JSON afin que vous puissiez afficher l’ensemble de la structure.
 
-   ![Interroger un index](./media/search-indexer-tutorial/portal-search.png "Interroger un index")
+   :::image type="content" source="media/search-indexer-tutorial/portal-search.png" alt-text="Interroger un index" border="false":::
    
 1. Ensuite, entrez une chaîne de recherche : `search=river&$count=true`. 
 
@@ -253,4 +254,4 @@ Vous pouvez rechercher et gérer les ressources dans le portail à l’aide des 
 Maintenant que vous êtes familiarisé avec les principes fondamentaux de l’indexation de SQL Database, examinons de plus près la configuration de l’indexeur.
 
 > [!div class="nextstepaction"]
-> [Configurer un indexeur Azure SQL Database](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
+> [Configurer un indexeur SQL Database](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)

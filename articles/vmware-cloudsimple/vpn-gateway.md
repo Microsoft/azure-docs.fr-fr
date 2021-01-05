@@ -9,11 +9,11 @@ ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
 ms.openlocfilehash: a8b7e238333196381524d189904871fe5933c906
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235781"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91871998"
 ---
 # <a name="set-up-vpn-gateways-on-cloudsimple-network"></a>Configurer des passerelles VPN sur le réseau CloudSimple
 

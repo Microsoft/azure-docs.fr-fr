@@ -1,16 +1,15 @@
 ---
 title: Minuteurs et rappels dans Reliable Actors
 description: Présentation des minuteurs et rappels pour Service Fabric Reliable Actors, avec notamment des conseils sur l’utilisation de chacun d’eux.
-author: vturecek
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: vturecek
-ms.openlocfilehash: 02d6220b31ee9c991e8450759bf46759af6177a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 2b97b15ca4eb287f8d8f2c1af932f22acafae546
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639613"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89016544"
 ---
 # <a name="actor-timers-and-reminders"></a>Minuteries et rappels d’acteur
 Les acteurs peuvent planifier un travail régulier par eux-mêmes en inscrivant des minuteries ou des rappels. Cet article montre comment utiliser des minuteries et des rappels, puis explique les différences entre les deux.
@@ -122,12 +121,17 @@ La période suivante de la minuterie démarre après la fin du rappel. Cela impl
 
 Le runtime Actors enregistre les modifications apportées au Gestionnaire d’état de l’acteur à la fin du rappel. Si une erreur se produit lors de l'enregistrement de l'état, cet objet acteur sera désactivé et une nouvelle instance sera activée.
 
+Contrairement aux [rappels](#actor-reminders), les minuteurs ne peuvent pas être mis à jour. En cas de nouvel appel de `RegisterTimer`, un nouveau minuteur sera inscrit.
+
 Toutes les minuteries sont arrêtées quand l’acteur est désactivé dans le cadre du nettoyage de la mémoire. Aucun rappel de minuterie n’est appelé après cela. En outre, le runtime Actors ne conserve aucune information concernant les minuteries qui étaient exécutées avant la désactivation. C'est à l'acteur d'inscrire toutes les minuteries dont il a besoin lors d'une réactivation ultérieure. Pour plus d’informations, consultez la section sur le [nettoyage de la mémoire d’acteur](service-fabric-reliable-actors-lifecycle.md).
 
 ## <a name="actor-reminders"></a>Rappels d’acteur
-Les rappels sont un mécanisme permettant de déclencher des rappels persistants sur un acteur à certaines heures. Leur fonctionnalité est semblable à celle des minuteries. Toutefois, contrairement aux minuteries, les rappels sont déclenchés en toutes circonstances jusqu’à ce que l’acteur les désinscrive ou qu’il soit supprimé explicitement. Plus précisément, les rappels sont déclenchés lors des désactivations d'acteur et des basculements car le runtime Actors conserve des informations sur les rappels de l'acteur à l’aide du fournisseur d’état d’acteur. Notez que la fiabilité des rappels est liée aux garanties de fiabilité d’état fournies par le fournisseur d’état d’acteur. Cela signifie que pour les acteurs dont la persistance de l’état est définie sur Aucune, les rappels ne sont pas déclenchés après un basculement. 
+Les rappels sont un mécanisme permettant de déclencher des rappels persistants sur un acteur à certaines heures. Leur fonctionnalité est semblable à celle des minuteries. Toutefois, contrairement aux minuteries, les rappels sont déclenchés en toutes circonstances jusqu’à ce que l’acteur les désinscrive ou qu’il soit supprimé explicitement. Plus précisément, les rappels sont déclenchés lors des désactivations d'acteur et des basculements car le runtime Actors conserve des informations sur les rappels de l'acteur à l’aide du fournisseur d’état d’acteur. Contrairement aux minuteurs, les rappels existants peuvent être mis à jour en appelant à nouveau la méthode d’inscription (`RegisterReminderAsync`) à l’aide du même *reminderName*.
 
-Pour inscrire un rappel, un acteur appelle la méthode `RegisterReminderAsync` fournie dans la classe de base, comme illustré dans l’exemple suivant :
+> [!NOTE]
+> La fiabilité des rappels est liée aux garanties de fiabilité d’état fournies par le fournisseur d’état d’acteur. Cela signifie que pour les acteurs dont la persistance de l’état est définie sur *Aucune*, les rappels ne sont pas déclenchés après un basculement.
+
+Pour inscrire un rappel, un acteur appelle la méthode [`RegisterReminderAsync`](/dotnet/api/microsoft.servicefabric.actors.runtime.actorbase.registerreminderasync?view=azure-dotnet#remarks) fournie dans la classe de base, comme illustré dans l’exemple suivant :
 
 ```csharp
 protected override async Task OnActivateAsync()

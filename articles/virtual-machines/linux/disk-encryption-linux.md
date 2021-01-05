@@ -4,16 +4,16 @@ description: Cet article fournit des instructions pour l’activation de Microso
 author: msmbaldwin
 ms.service: virtual-machines-linux
 ms.subservice: security
-ms.topic: article
+ms.topic: conceptual
 ms.author: mbaldwin
 ms.date: 08/06/2019
-ms.custom: seodec18
-ms.openlocfilehash: 74a4c13197863d0d41e183826cafd64976b44431
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 70ebe8ede75935bcc8d8db8729fef165a5616fe7
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792579"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96779802"
 ---
 # <a name="azure-disk-encryption-scenarios-on-linux-vms"></a>Scénarios Azure Disk Encryption sur les machines virtuelles Linux
 
@@ -133,7 +133,7 @@ La syntaxe de la valeur du paramètre key-encryption-key est l’URI complet de 
 - **Désactiver le chiffrement :** pour désactiver le chiffrement, utilisez la commande [az vm encryption disable](/cli/azure/vm/encryption#az-vm-encryption-disable). La désactivation du chiffrement est autorisée seulement sur les volumes de données pour les machines virtuelles Linux.
 
      ```azurecli-interactive
-     az vm encryption disable --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup" --volume-type DATA
+     az vm encryption disable --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup" --volume-type "data"
      ```
 
 ### <a name="enable-encryption-on-an-existing-or-running-linux-vm-using-powershell"></a>Activer le chiffrement sur une machine virtuelle Linux existante ou en cours d’exécution avec PowerShell
@@ -205,20 +205,20 @@ Le tableau suivant répertorie des paramètres du modèle Resource Manager pour 
 | forceUpdateTag | Passez à une valeur unique comme un GUID chaque fois que l’opération doit être exécutée de force. |
 | location | Emplacement pour toutes les ressources. |
 
-Pour plus d’informations sur la configuration du modèle de chiffrement de disque de machine virtuelle Linux, consultez [Azure Disk Encryption pour Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/azure-disk-enc-linux).
+Pour plus d’informations sur la configuration du modèle de chiffrement de disque de machine virtuelle Linux, consultez [Azure Disk Encryption pour Linux](../extensions/azure-disk-enc-linux.md).
 
 ## <a name="use-encryptformatall-feature-for-data-disks-on-linux-vms"></a>Utiliser la fonctionnalité EncryptFormatAll pour les disques de données sur les machines virtuelles Linux
 
 Le paramètre **EncryptFormatAll** réduit le temps de chiffrement des disques de données Linux. Les partitions remplissant certains critères sont formatées, avec leurs systèmes de fichiers actuels, puis remontées à l’emplacement où elles se trouvaient avant l’exécution de la commande. Si vous voulez exclure un disque de données répondant aux critères, vous pouvez le démonter avant d’exécuter la commande.
 
- Après l’exécution de cette commande, tous les lecteurs montés précédemment seront formatés, et la couche de chiffrement sera démarrée sur le lecteur désormais vide. Quand cette option est sélectionnée, le disque temporaire attaché à la machine virtuelle est également chiffré. Si le disque temporaire est réinitialisé, il est reformaté et rechiffré par la solution Azure Disk Encryption dès que l’occasion s’en présente. Quand le disque de ressources est chiffré, l’[Agent Microsoft Azure Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-linux) ne peut pas gérer le disque de ressources ni activer le fichier d’échange, mais ce dernier peut être configuré manuellement.
+ Après l’exécution de cette commande, tous les lecteurs montés précédemment seront formatés, et la couche de chiffrement sera démarrée sur le lecteur désormais vide. Quand cette option est sélectionnée, le disque temporaire attaché à la machine virtuelle est également chiffré. Si le disque temporaire est réinitialisé, il est reformaté et rechiffré par la solution Azure Disk Encryption dès que l’occasion s’en présente. Quand le disque de ressources est chiffré, l’[Agent Microsoft Azure Linux](../extensions/agent-linux.md) ne peut pas gérer le disque de ressources ni activer le fichier d’échange, mais ce dernier peut être configuré manuellement.
 
 >[!WARNING]
 > EncryptFormatAll ne doit pas être utilisé quand des données indispensables se trouvent sur les volumes de données d’une machine virtuelle. Vous pouvez exclure des disques du chiffrement en les démontant. Vous devez d’abord essayer EncryptFormatAll sur une machine virtuelle de test, comprendre le paramètre de la fonctionnalité et son implication, avant de l’essayer sur la machine virtuelle de production. L’option EncryptFormatAll formate le disque de données et toutes ses données seront perdues. Avant de continuer, vérifiez que les disques que vous souhaitez exclure sont correctement démontés. </br></br>
  >Si ce paramètre est défini durant la mise à jour des paramètres de chiffrement, un redémarrage peut se produire avant le chiffrement proprement dit. Dans ce cas, il peut être utile de supprimer du fichier fstab le disque que vous ne voulez pas formater. De même, vous devez ajouter la partition que vous voulez chiffrer-formater au fichier fstab avant de lancer l’opération de chiffrement. 
 
 ### <a name="encryptformatall-criteria"></a>Critères pour EncryptFormatAll
-Ce paramètre fait que la commande parcourt toutes les partitions et les chiffre, à condition qu’elles répondent à **tous** les critères ci-dessous : 
+Ce paramètre fait que la commande parcourt toutes les partitions et les chiffre, à condition qu’elles répondent à **tous** les critères ci-dessous :
 - Elle n’est pas une partition root/de système d’exploitation/de démarrage
 - Elle n’est pas déjà chiffrée
 - Elle n’est pas un volume BEK
@@ -234,7 +234,7 @@ Utilisez la commande [az vm encryption enable](/cli/azure/vm/encryption#az-vm-en
 -  **Chiffrer une machine virtuelle en cours d’exécution avec EncryptFormatAll :**
 
      ```azurecli-interactive
-     az vm encryption enable --resource-group "MyVirtualMachineResourceGroup" --name "MySecureVM" --disk-encryption-keyvault "MySecureVault" --encrypt-format-all
+     az vm encryption enable --resource-group "MyVirtualMachineResourceGroup" --name "MySecureVM" --disk-encryption-keyvault "MySecureVault" --volume-type "data" --encrypt-format-all
      ```
 
 ### <a name="use-the-encryptformatall-parameter-with-a-powershell-cmdlet"></a>Utiliser le paramètre EncryptFormatAll avec une applet de commande PowerShell
@@ -251,43 +251,57 @@ $KeyVault = Get-AzKeyVault -VaultName $KeyVaultName -ResourceGroupName $KVRGname
 $diskEncryptionKeyVaultUrl = $KeyVault.VaultUri;
 $KeyVaultResourceId = $KeyVault.ResourceId;
 
-Set-AzVMDiskEncryptionExtension -ResourceGroupName $VMRGName -VMName $vmName -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $KeyVaultResourceId -EncryptFormatAll
+Set-AzVMDiskEncryptionExtension -ResourceGroupName $VMRGName -VMName $vmName -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $KeyVaultResourceId -VolumeType "data" -EncryptFormatAll
 ```
 
 
 ### <a name="use-the-encryptformatall-parameter-with-logical-volume-manager-lvm"></a>Utiliser le paramètre EncryptFormatAll avec Logical Volume Manager (LVM) 
 Nous recommandons une installation LVM-on-crypt. Pour les exemples suivants, remplacez le chemin de périphérique et les points de montage par ce qui correspond à votre cas d’utilisation. Cette installation peut se faire comme suit :
 
-- Ajoutez les disques de données qui constitueront la machine virtuelle.
-- Formatez, montez et ajoutez ces disques au fichier fstab.
+1.  Ajoutez les disques de données qui constitueront la machine virtuelle.
 
-    1. Choisissez un standard de partition, créez une partition qui couvre la totalité du lecteur, puis formatez-la. Nous utilisons ici des liens symboliques générés par Azure. L’utilisation de liens symboliques évite les problèmes liés à la modification des noms des périphériques. Pour plus d’informations, consultez [Résoudre les problèmes relatifs aux noms des périphériques](troubleshoot-device-names-problems.md).
-    
-         ```azurepowershell-interactive
-         parted /dev/disk/azure/scsi1/lun0 mklabel gpt
-         parted -a opt /dev/disk/azure/scsi1/lun0 mkpart primary ext4 0% 100%
-         
-         mkfs -t ext4 /dev/disk/azure/scsi1/lun0-part1
-         ```
-    
-    1. Montez les disques.
-         
-         `mount /dev/disk/azure/scsi1/lun0-part1 /mnt/mountpoint`
-    
-    1. Ajoutez-les à fstab.
-         
-        `echo "/dev/disk/azure/scsi1/lun0-part1 /mnt/mountpoint ext4 defaults,nofail 0 2" >> /etc/fstab`
-    
-    1. Exécutez l’applet de commande PowerShell Set-AzVMDiskEncryptionExtension avec -EncryptFormatAll pour chiffrer ces disques.
+1. Formatez, montez et ajoutez ces disques au fichier fstab.
 
-       ```azurepowershell-interactive
-       $KeyVault = Get-AzKeyVault -VaultName "MySecureVault" -ResourceGroupName "MySecureGroup"
-           
-       Set-AzVMDiskEncryptionExtension -ResourceGroupName "MySecureGroup" -VMName "MySecureVM" -DiskEncryptionKeyVaultUrl $KeyVault.VaultUri  -DiskEncryptionKeyVaultId $KeyVault.ResourceId -EncryptFormatAll -SkipVmBackup -VolumeType Data
-       ```
+1. Choisissez un standard de partition, créez une partition qui couvre la totalité du lecteur, puis formatez-la. Nous utilisons ici des liens symboliques générés par Azure. L’utilisation de liens symboliques évite les problèmes liés à la modification des noms des périphériques. Pour plus d’informations, consultez [Résoudre les problèmes relatifs aux noms des périphériques](../troubleshooting/troubleshoot-device-names-problems.md).
+    
+    ```bash
+    parted /dev/disk/azure/scsi1/lun0 mklabel gpt
+    parted -a opt /dev/disk/azure/scsi1/lun0 mkpart primary ext4 0% 100%
+    
+    mkfs -t ext4 /dev/disk/azure/scsi1/lun0-part1
+    ```
 
-    1. Configurez le gestionnaire de volumes logiques sur ces nouveaux disques. Notez que les lecteurs chiffrés sont déverrouillés une fois que la machine virtuelle a fini de démarrer. Ainsi, le montage du gestionnaire de volumes logiques devra également être retardé.
+1. Montez les disques :
 
+    ```bash
+    mount /dev/disk/azure/scsi1/lun0-part1 /mnt/mountpoint
+    ````
+    
+    Ajoutez-les au fichier fstab :
+
+    ```bash
+    echo "/dev/disk/azure/scsi1/lun0-part1 /mnt/mountpoint ext4 defaults,nofail 0 2" >> /etc/fstab
+    ```
+    
+1. Exécutez la cmdlet [Set-AzVMDiskEncryptionExtension](/powershell/module/az.compute/set-azvmdiskencryptionextension?view=azps-3.8.0) d’Azure PowerShell avec -EncryptFormatAll pour chiffrer ces disques.
+
+    ```azurepowershell-interactive
+    $KeyVault = Get-AzKeyVault -VaultName "MySecureVault" -ResourceGroupName "MySecureGroup"
+    
+    Set-AzVMDiskEncryptionExtension -ResourceGroupName "MySecureGroup" -VMName "MySecureVM" -DiskEncryptionKeyVaultUrl $KeyVault.VaultUri -DiskEncryptionKeyVaultId $KeyVault.ResourceId -EncryptFormatAll -SkipVmBackup -VolumeType Data
+    ```
+
+    Si vous souhaitez utiliser une clé de chiffrement à clé (KEK), transmettez l’URI de votre KEK et le ResourceID de votre coffre de clés aux paramètres -KeyEncryptionKeyUrl et -KeyEncryptionKeyVaultId, respectivement :
+
+    ```azurepowershell-interactive
+    $KeyVault = Get-AzKeyVault -VaultName "MySecureVault" -ResourceGroupName "MySecureGroup"
+    $KEKKeyVault = Get-AzKeyVault -VaultName "MyKEKVault" -ResourceGroupName "MySecureGroup"
+    $KEK = Get-AzKeyVaultKey -VaultName "myKEKVault" -KeyName "myKEKName"
+    
+    Set-AzVMDiskEncryptionExtension -ResourceGroupName "MySecureGroup" -VMName "MySecureVM" -DiskEncryptionKeyVaultUrl $KeyVault.VaultUri -DiskEncryptionKeyVaultId $KeyVault.ResourceId -EncryptFormatAll -SkipVmBackup -VolumeType Data -KeyEncryptionKeyUrl $$KEK.id -KeyEncryptionKeyVaultId $KEKKeyVault.ResourceId
+    ```
+
+1. Configurez le gestionnaire de volumes logiques sur ces nouveaux disques. Notez que les lecteurs chiffrés sont déverrouillés une fois que la machine virtuelle a fini de démarrer. Ainsi, le montage du gestionnaire de volumes logiques devra également être retardé.
 
 ## <a name="new-vms-created-from-customer-encrypted-vhd-and-encryption-keys"></a>Nouvelles machines virtuelles créées à partir de disques durs virtuels et de clés de chiffrement chiffrés par le client
 Dans ce scénario, vous pouvez activer le chiffrement avec des applets de commande PowerShell ou avec des commandes CLI. 
@@ -318,7 +332,7 @@ Vous pouvez ajouter un nouveau disque de données avec [az vm disk attach](add-d
 
 ### <a name="enable-encryption-on-a-newly-added-disk-with-azure-cli"></a>Activer le chiffrement sur un disque nouvellement ajouté avec Azure CLI
 
- Si la machine virtuelle a déjà été chiffrée avec « All », le paramètre --volume-type doit rester « All ». All inclut les disques de système d’exploitation et de données. Si la machine virtuelle a déjà été chiffrée avec le type de volume « OS », le paramètre --volume-type doit être remplacé par « All » afin que le système d’exploitation et le nouveau disque de données soient inclus. Si la machine virtuelle a été chiffrée avec uniquement le type de volume « Data », le paramètre « Data » peut être conservé comme illustré ci-dessous. L’ajout et l’attachement d’un nouveau disque de données à une machine virtuelle ne constituent pas une préparation suffisante pour le chiffrement. Le disque nouvellement attaché doit aussi être formaté et monté correctement au sein de la machine virtuelle avant l’activation du chiffrement. Sur Linux, le disque doit être monté dans/etc/fstab avec un [nom de l’appareil de bloc persistant](troubleshoot-device-names-problems.md).  
+ Si la machine virtuelle a déjà été chiffrée avec « All », le paramètre --volume-type doit rester « All ». All inclut les disques de système d’exploitation et de données. Si la machine virtuelle a déjà été chiffrée avec le type de volume « OS », le paramètre --volume-type doit être remplacé par « All » afin que le système d’exploitation et le nouveau disque de données soient inclus. Si la machine virtuelle a été chiffrée avec uniquement le type de volume « Data », le paramètre « Data » peut être conservé comme illustré ci-dessous. L’ajout et l’attachement d’un nouveau disque de données à une machine virtuelle ne constituent pas une préparation suffisante pour le chiffrement. Le disque nouvellement attaché doit aussi être formaté et monté correctement au sein de la machine virtuelle avant l’activation du chiffrement. Sur Linux, le disque doit être monté dans/etc/fstab avec un [nom de l’appareil de bloc persistant](../troubleshooting/troubleshoot-device-names-problems.md).  
 
 Contrairement à la syntaxe de PowerShell, l’interface CLI ne nécessite pas que l’utilisateur fournisse une version de séquence unique lors de l’activation du chiffrement. L’interface CLI génère automatiquement et utilise sa propre valeur de version de séquence unique.
 
@@ -374,23 +388,7 @@ Contrairement à la syntaxe de PowerShell, l’interface CLI ne nécessite pas q
 
 
 ## <a name="disable-encryption-for-linux-vms"></a>Désactiver le chiffrement pour les machines virtuelles Linux
-Vous pouvez désactiver le chiffrement avec Azure PowerShell, Azure CLI ou un modèle Resource Manager. 
-
->[!IMPORTANT]
->La désactivation du chiffrement avec Azure Disk Encryption sur les machines virtuelles Linux est prise en charge seulement pour les volumes de données. Elle n’est pas prise en charge sur les volumes de données ou de système d’exploitation si le volume du système d’exploitation a été chiffré.  
-
-- **Désactiver le chiffrement de disque avec Azure PowerShell :** Pour désactiver le chiffrement, utilisez la cmdlet [Disable-AzVMDiskEncryption](/powershell/module/az.compute/disable-azvmdiskencryption). 
-     ```azurepowershell-interactive
-     Disable-AzVMDiskEncryption -ResourceGroupName 'MyVirtualMachineResourceGroup' -VMName 'MySecureVM' [-VolumeType {ALL, DATA, OS}]
-     ```
-
-- **Désactiver le chiffrement avec Azure CLI :** pour désactiver le chiffrement, utilisez la commande [az vm encryption disable](/cli/azure/vm/encryption#az-vm-encryption-disable). 
-     ```azurecli-interactive
-     az vm encryption disable --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup" --volume-type [ALL, DATA, OS]
-     ```
-- **Désactiver le chiffrement avec un modèle Resource Manager :** utilisez le modèle [Désactiver le chiffrement sur une machine virtuelle Linux en cours d’exécution](https://github.com/Azure/azure-quickstart-templates/tree/master/201-decrypt-running-linux-vm-without-aad) pour désactiver le chiffrement.
-     1. Cliquez sur **Déployer dans Azure**.
-     2. Sélectionnez l’abonnement, le groupe de ressources, l’emplacement, les conditions juridiques et le contrat.
+[!INCLUDE [disk-encryption-disable-encryption-cli](../../../includes/disk-encryption-disable-cli.md)]
 
 ## <a name="unsupported-scenarios"></a>Scénarios non pris en charge
 
@@ -398,7 +396,7 @@ Azure Disk Encryption ne fonctionne pas pour les scénarios, fonctionnalités et
 
 - Chiffrement de machines virtuelles de niveau de base ou de machines virtuelles créées par le biais de la méthode de création de machine virtuelle classique
 - Désactivation du chiffrement sur un lecteur de système d’exploitation ou de données d’une machine virtuelle Linux quand le lecteur de système d’exploitation est chiffré
-- Chiffrement du lecteur de système d’exploitation pour des groupes de machines virtuelles identiques
+- Chiffrement du lecteur de système d’exploitation pour des groupes de machines virtuelles identiques.
 - Chiffrement d’images personnalisées sur des machines virtuelles Linux
 - Intégration à un système de gestion de clés local
 - Azure Files (système de fichiers partagés).
@@ -407,11 +405,18 @@ Azure Disk Encryption ne fonctionne pas pour les scénarios, fonctionnalités et
 - Disques de système d’exploitation éphémères.
 - Chiffrement des systèmes de fichiers partagés/distribués comme (liste non exhaustive) : DFS, GFS, DRDB et CephFS.
 - Déplacement d’une machine virtuelle chiffrée vers un autre abonnement.
+- Création d’une image ou d’une capture instantanée d’une machine virtuelle chiffrée et utilisation de celle-ci pour déployer des machines virtuelles supplémentaires.
 - Vidage sur incident du noyau (kdump)
 - Oracle ACFS (ASM Cluster File System).
-- Machines virtuelles Gen2 (consultez : [Prise en charge des machines virtuelles de génération 2 sur Azure](generation-2.md#generation-1-vs-generation-2-capabilities)).
-- Machines virtuelles de la série Lsv2 (consultez : [Série Lsv2](../lsv2-series.md)).
+- Machines virtuelles Gen2 (consultez : [Prise en charge des machines virtuelles de génération 2 sur Azure](../generation-2.md#generation-1-vs-generation-2-capabilities)).
+- Les disques NVMe des machines virtuelles de la série Lsv2 (cf. [Série Lsv2](../lsv2-series.md)).
 - Une machine virtuelle avec des « points de montage imbriqués », autrement dit, avec plusieurs points de montage dans un même chemin d’accès (par exemple, « /1stmountpoint/data/2stmountpoint »).
+- Machine virtuelle avec un lecteur de données monté sur un dossier du système d’exploitation.
+- Machines virtuelles de la série M avec des disques Accélérateur d’écriture.
+- Application d’ADE à une machine virtuelle qui possède des disques chiffrés avec un [chiffrement côté serveur avec des clés gérées par le client](../disk-encryption.md) (SSE + CMK). L’application de SSE + CMK à un disque de données sur une machine virtuelle chiffrée avec ADE est également un scénario non pris en charge.
+- Migration d’une machine virtuelle chiffrée par ADE ou n’a **jamais** été chiffrée avec ADE, pour un [chiffrement côté serveur avec clés gérées par le client](../disk-encryption.md).
+- [Tailles de machine virtuelle Azure sans disque temporaire local](../azure-vms-no-temp-disk.md) ; spécifiquement, Dv4, Dsv4, Ev4 et Esv4.
+- Chiffrement des machines virtuelles dans les clusters de basculement.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

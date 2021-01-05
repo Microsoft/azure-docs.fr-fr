@@ -9,10 +9,10 @@ ms.date: 05/11/2020
 ms.author: heidist
 ms.custom: include file
 ms.openlocfilehash: fe5c8129434ddb4eec2dd25a3f123f28b4db221b
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83682611"
 ---
 Un service de recherche est limité par l’espace disque ou le nombre maximum d’index ou d’indexeurs, selon la limite atteinte en premier. Le tableau suivant décrit les limites de stockage. Pour connaître le nombre maximal d’objets, examinez les [limites par ressource](../articles/search/search-limits-quotas-capacity.md#index-limits).

@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 07/11/2018
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2777675d915d99b8c0e3c2a123b24ab60d41f672
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6fd1bf4f9c463973d70f5289f7a82f372d0156cb
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80653368"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96742543"
 ---
 # <a name="configure-azure-multi-factor-authentication-server-to-work-with-ad-fs-in-windows-server"></a>Configuration du serveur Azure Multi-Factor Authentication pour travailler avec AD FS dans Windows Server
 
@@ -25,7 +25,13 @@ Si vous utilisez Active Directory Federation Services (AD FS) et que vous souhai
 Cet article traite de l’utilisation du serveur Azure Multi-Factor Authentication avec AD FS dans Windows Server 2012 R2 ou Windows Server 2016. Pour plus d’informations, consultez l’article qui explique comment [sécuriser les ressources de cloud et locales à l’aide du serveur Azure Multi-Factor Authentication avec AD FS 2.0](howto-mfaserver-adfs-2.md).
 
 > [!IMPORTANT]
-> À compter du 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui veulent demander à leurs utilisateurs de procéder à une authentification multifacteur doivent utiliser la fonction Azure Multi-Factor Authentication basée sur le cloud. Les clients existants qui ont activé MFA Server avant le 1er juillet peuvent télécharger la dernière version et les futures mises à jour, et générer des informations d’identification d’activation comme d’habitude.
+> Depuis le 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui souhaitent imposer une authentification multifacteur lors des événements de connexion doivent utiliser la fonctionnalité Azure AD Multi-Factor Authentication basée sur le cloud.
+>
+> Pour commencer à utiliser l’authentification multifacteur basée sur le cloud, consultez [Tutoriel : Événements de connexion utilisateur sécurisée avec Azure Multi-Factor Authentication](tutorial-enable-azure-mfa.md).
+>
+> Si vous utilisez une authentification multifacteur basée sur le cloud, consultez [Sécuriser les ressources cloud avec Azure AD Multi-Factor Authentication et AD FS](howto-mfa-adfs.md).
+>
+> Les clients existants qui ont activé le serveur MFA avant le 1er juillet 2019 peuvent télécharger la dernière version, les futures mises à jour et générer des informations d’identification d’activation comme d’habitude.
 
 ## <a name="secure-windows-server-ad-fs-with-azure-multi-factor-authentication-server"></a>Sécuriser Windows Server AD FS avec le serveur Azure Multi-Factor Authentication
 
@@ -84,7 +90,7 @@ Avant de commencer, tenez compte des informations suivantes :
 Procédez comme suit pour modifier le fichier MultiFactorAuthenticationAdfsAdapter.config :
 
 1. Définissez le nœud **UseWebServiceSdk** sur la valeur **true**.  
-2. Définissez le champ **WebServiceSdkUrl** sur l’URL du Kit de développement logiciel (SDK) du service web Multi-Factor Authentication. Par exemple : *https:\/\/contoso.com/\<certificatename>/MultiFactorAuthWebServiceSdk/PfWsSdk.asmx*, où *\<certificatename>* est le nom de votre certificat.  
+2. Définissez le champ **WebServiceSdkUrl** sur l’URL du Kit de développement logiciel (SDK) du service web Multi-Factor Authentication. Par exemple, *https:\/\/contoso.com/\<certificatename>/MultiFactorAuthWebServiceSdk/PfWsSdk.asmx*, où *\<certificatename>certificatename>* est le nom de votre certificat.  
 3. Modifiez le script Register-MultiFactorAuthenticationAdfsAdapter.ps1 en ajoutant `-ConfigurationFilePath &lt;path&gt;` à la fin de la commande `Register-AdfsAuthenticationProvider`, où *&lt;chemin&gt;* correspond au chemin d’accès complet au fichier MultiFactorAuthenticationAdfsAdapter.config file.
 
 ### <a name="configure-the-web-service-sdk-with-a-username-and-password"></a>Configurer le Kit de développement logiciel (SDK) du service web avec un nom d’utilisateur et un mot de passe
@@ -98,7 +104,7 @@ Deux options s’offrent à vous pour configurer le Kit de développement logici
 
 Si vous ne souhaitez pas utiliser de nom d’utilisateur et de mot de passe, procédez comme suit pour configurer le Kit de développement logiciel (SDK) du service web avec un certificat client.
 
-1. Obtenez un certificat client auprès d’une autorité de certification pour le serveur qui exécute le Kit de développement logiciel (SDK) du service web. Découvrez comment [obtenir des certificats clients](https://technet.microsoft.com/library/cc770328.aspx).  
+1. Obtenez un certificat client auprès d’une autorité de certification pour le serveur qui exécute le Kit de développement logiciel (SDK) du service web. Découvrez comment [obtenir des certificats clients](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc770328(v=ws.10)).  
 2. Importez le certificat client dans le magasin de certificats personnels de l’ordinateur local sur le serveur qui exécute le Kit de développement logiciel (SDK) du service web. Assurez-vous que le certificat public de l’autorité de certification se trouve dans le magasin des certificats racines approuvés.  
 3. Exportez les clés publiques et privées du certificat client vers un fichier .pfx.  
 4. Exportez la clé publique au format Base64 vers un fichier .cer.  

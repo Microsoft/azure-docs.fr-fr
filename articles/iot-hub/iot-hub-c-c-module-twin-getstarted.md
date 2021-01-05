@@ -11,12 +11,12 @@ ms.author: menchi
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 3cd4277603b96dd1aa07682dd01a6d0e9c61bd82
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0cc874b4df7052c76fa58388bc982b8ffe3acc23
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81733452"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92142921"
 ---
 # <a name="get-started-with-iot-hub-module-identity-and-module-twin-c"></a>Bien démarrer avec l’identité de module et le jumeau de module IoT Hub (C)
 
@@ -391,4 +391,4 @@ int main(void)
 Pour continuer la prise en main de IoT Hub et explorer les autres scénarios IoT, consultez les articles suivants :
 
 * [Prise en main de la gestion d’appareils](iot-hub-node-node-device-management-get-started.md)
-* [Bien démarrer avec IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Bien démarrer avec IoT Edge](../iot-edge/quickstart-linux.md)

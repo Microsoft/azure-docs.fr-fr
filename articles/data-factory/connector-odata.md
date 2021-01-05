@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 09/04/2019
+ms.date: 10/14/2020
 ms.author: jingwang
-ms.openlocfilehash: c2fe6b6cc7b52dda9f2beffa444f1965723ea92a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 146f9ea918f75e0521209d9db712bdcab76a8e7e
+ms.sourcegitcommit: 93329b2fcdb9b4091dbd632ee031801f74beb05b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81416925"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92096587"
 ---
 # <a name="copy-data-from-an-odata-source-by-using-azure-data-factory"></a>Copier des données d’une source OData à l’aide d’Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -39,7 +39,7 @@ Vous pouvez copier les données d’une source OData dans tout magasin de donn�
 Plus précisément, ce connecteur OData prend en charge ce qui suit :
 
 - OData version 3.0 et 4.0.
-- Copie de données avec une des authentifications suivantes : **Anonyme**, **De base**, **Windows** et **Principal de service AAD**.
+- Copie de données avec une des authentifications suivantes : **Anonyme** , **De base** , **Windows** et **Principal de service AAD** .
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -57,11 +57,12 @@ Les propriétés prises en charge pour le service lié OData sont les suivantes 
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** doit être définie sur **OData**. |Oui |
+| type | La propriété **type** doit être définie sur **OData** . |Oui |
 | url | URL racine du service OData. |Oui |
-| authenticationType | Type d’authentification utilisé pour se connecter à la source OData. Les valeurs autorisées sont les suivantes : **Anonyme**, **De base**, **Windows** et **Principal de service AAD**. L'authentification OAuth par utilisateur n'est pas prise en charge. | Oui |
-| userName | Si vous utilisez l’authentification De base ou Windows, spécifiez un **nom d’utilisateur**. | Non |
-| mot de passe | Spécifiez le **mot de passe** associé au **nom d’utilisateur spécifié**. Vous pouvez marquer ce champ en tant que type **SecureString** pour le stocker de manière sécurisée dans Data Factory. Vous pouvez également [référencer un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Non |
+| authenticationType | Type d’authentification utilisé pour se connecter à la source OData. Les valeurs autorisées sont les suivantes : **Anonyme** , **De base** , **Windows** et **Principal de service AAD** . L'authentification OAuth par utilisateur n'est pas prise en charge. Vous pouvez également configurer des en-têtes d’authentification dans la propriété `authHeader`.| Oui |
+| authHeaders | En-têtes de requête HTTP supplémentaires pour l’authentification.<br/> Par exemple, pour utiliser l’authentification par clé API, vous pouvez sélectionner le type d’authentification « anonyme » et spécifier la clé API dans l’en-tête. | Non |
+| userName | Si vous utilisez l’authentification De base ou Windows, spécifiez un **nom d’utilisateur** . | Non |
+| mot de passe | Spécifiez le **mot de passe** associé au **nom d’utilisateur spécifié** . Vous pouvez marquer ce champ en tant que type **SecureString** pour le stocker de manière sécurisée dans Data Factory. Vous pouvez également [référencer un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Non |
 | servicePrincipalId | Spécifiez l’ID de l’application Azure Active Directory. | Non |
 | aadServicePrincipalCredentialType | Spécifiez le type d’informations d’identification à utiliser pour l’authentification de principal du service. Valeurs autorisées : `ServicePrincipalKey` ou `ServicePrincipalCert`. | Non |
 | servicePrincipalKey | Spécifiez la clé de l’application Azure Active Directory. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Non |
@@ -69,6 +70,7 @@ Les propriétés prises en charge pour le service lié OData sont les suivantes 
 | servicePrincipalEmbeddedCertPassword | Spécifiez le mot de passe de votre certificat si votre certificat est sécurisé par un mot de passe. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md).  | Non|
 | tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. Récupérez-le en pointant la souris dans le coin supérieur droit du Portail Azure. | Non |
 | aadResourceId | Spécifiez la ressource AAD pour laquelle vous demandez une autorisation.| Non |
+| azureCloudType | Pour l’authentification du principal du service, spécifiez le type d’environnement cloud Azure auquel votre application AAD est inscrite. <br/> Les valeurs autorisées sont **AzurePublic** , **AzureChina** , **AzureUsGovernment** et **AzureGermany** . Par défaut, l’environnement cloud de la fabrique de données est utilisé. | Non |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion au magasin de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, l’Azure Integration Runtime par défaut est utilisé. |Non |
 
 **Exemple 1 : Utilisation de l’authentification anonyme**
@@ -196,17 +198,42 @@ Les propriétés prises en charge pour le service lié OData sont les suivantes 
 }
 ```
 
+**Exemple 6 : Utilisation de l’authentification avec une clé API**
+
+```json
+{
+    "name": "ODataLinkedService",
+    "properties": {
+        "type": "OData",
+        "typeProperties": {
+            "url": "<endpoint of OData source>",
+            "authenticationType": "Anonymous",
+            "authHeader": {
+                "APIKey": {
+                    "type": "SecureString",
+                    "value": "<API key>"
+                }
+            }
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
 ## <a name="dataset-properties"></a>Propriétés du jeu de données
 
 Cette section contient la liste des propriétés prises en charge par le jeu de données OData.
 
 Pour obtenir la liste complète des sections et propriétés disponibles pour la définition de jeux de données, consultez [Jeux de données et services liés](concepts-datasets-linked-services.md). 
 
-Pour copier des données à partir d’OData, définissez la propriété **type** du jeu de données sur **ODataResource**. Les propriétés prises en charge sont les suivantes :
+Pour copier des données à partir d’OData, définissez la propriété **type** du jeu de données sur **ODataResource** . Les propriétés prises en charge sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** du jeu de données doit être définie sur **ODataResource**. | Oui |
+| type | La propriété **type** du jeu de données doit être définie sur **ODataResource** . | Oui |
 | path | Chemin de la ressource OData. | Oui |
 
 **Exemple**
@@ -242,8 +269,9 @@ Pour copier des données à partir d’OData, les propriétés prises en charge 
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété de **type** de la source d’activité de copie doit être définie sur **ODataSource**. | Oui |
-| query | Options de requête OData pour filtrer les données. Exemple : `"$select=Name,Description&$top=5"`.<br/><br/>**Remarque** : Le connecteur OData copie des données à partir de l’URL combinée `[URL specified in linked service]/[path specified in dataset]?[query specified in copy activity source]`. Pour plus d’informations, consultez [OData URL components](https://www.odata.org/documentation/odata-version-3-0/url-conventions/). | Non |
+| type | La propriété de **type** de la source d’activité de copie doit être définie sur **ODataSource** . | Oui |
+| query | Options de requête OData pour filtrer les données. Exemple : `"$select=Name,Description&$top=5"`.<br/><br/>**Remarque**  : Le connecteur OData copie des données à partir de l’URL combinée `[URL specified in linked service]/[path specified in dataset]?[query specified in copy activity source]`. Pour plus d’informations, consultez [OData URL components](https://www.odata.org/documentation/odata-version-3-0/url-conventions/). | Non |
+| httpRequestTimeout | Délai d’expiration (valeur **TimeSpan** ) pour l’obtention d’une réponse par la requête HTTP. Cette valeur correspond au délai d’expiration pour l’obtention d’une réponse, et non au délai d’expiration pour la lecture des données de la réponse. Si elle n’est pas spécifiée, la valeur par défaut est **00:30:00** (30 minutes). | Non |
 
 **Exemple**
 
@@ -302,7 +330,7 @@ Lorsque vous copiez des données à partir d’OData, les mappages suivants sont
 | Edm.DateTimeOffset | DateTimeOffset |
 
 > [!NOTE]
-> Les types de données complexes OData (par exemple, **Object**), ne sont pas pris en charge.
+> Les types de données complexes OData (par exemple, **Object** ), ne sont pas pris en charge.
 
 
 ## <a name="lookup-activity-properties"></a>Propriétés de l’activité Lookup

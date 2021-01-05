@@ -2,18 +2,18 @@
 title: Personnaliser les configurations de mise en réseau pour une machine virtuelle de basculement | Microsoft Docs
 description: Fournit une vue d’ensemble de la personnalisation des configurations de mise en réseau pour une machine virtuelle de basculement dans le cadre de la réplication des machines virtuelles Azure avec Azure Site Recovery.
 services: site-recovery
-author: rajani-janaki-ram
+author: sideeksh
 manager: rochakm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 10/21/2019
-ms.author: rajanaki
-ms.openlocfilehash: 96ffa34166797945afc04c66b03fe151d26c65bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: sideeksh
+ms.openlocfilehash: 599ad76f38833e06cc458fd0687921e6975e190b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76292856"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89426365"
 ---
 # <a name="customize-networking-configurations-of-the-target-azure-vm"></a>Personnaliser les configurations réseau de la machine virtuelle Azure cible
 
@@ -27,9 +27,9 @@ Découvrez comment Site Recovery permet la récupération d’urgence pour [ce s
 
 Vous pouvez fournir la configuration des ressources clés suivantes pour la machine virtuelle de basculement lors de la réplication des machines virtuelles Azure :
 
-- [Équilibreur de charge interne](https://docs.microsoft.com/azure/load-balancer/load-balancer-overview)
-- [Adresse IP publique](https://docs.microsoft.com/azure/virtual-network/virtual-network-ip-addresses-overview-arm#public-ip-addresses)
-- [Groupe de sécurité réseau](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group) pour le sous-réseau et pour la carte réseau
+- [Équilibreur de charge interne](../load-balancer/load-balancer-overview.md)
+- [Adresse IP publique](../virtual-network/public-ip-addresses.md)
+- [Groupe de sécurité réseau](../virtual-network/manage-network-security-group.md) pour le sous-réseau et pour la carte réseau
 
 ## <a name="prerequisites"></a>Prérequis
 

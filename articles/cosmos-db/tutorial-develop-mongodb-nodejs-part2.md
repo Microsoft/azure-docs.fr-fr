@@ -10,14 +10,15 @@ ms.date: 12/26/2018
 ms.author: jopapa
 ms.custom: seodec18
 ms.reviewer: sngun
-ms.openlocfilehash: 693222f4c1abd9bda128d18dc4dd67703a245bc8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e3af713d6e120e66a0cde5116f4556bb8caedf55
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75441127"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93097845"
 ---
 # <a name="create-an-angular-app-with-azure-cosmos-dbs-api-for-mongodb---create-a-nodejs-express-app"></a>Créer une application Angular avec l’API d’Azure Cosmos DB pour MongoDB - Créer une application Express Node.js
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 Ce tutoriel en plusieurs parties montre comment créer une application écrite en Node.js avec Express et Angular, puis comment la connecter à votre [compte Cosmos configuré avec l’API de Cosmos DB pour MongoDB](mongodb-introduction.md).
 
@@ -33,7 +34,7 @@ La partie 2 de ce didacticiel est basée sur l’[introduction](tutorial-develo
 
 > [!VIDEO https://www.youtube.com/embed/lIwJIYcGSUg]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer cette partie du didacticiel, assurez-vous d’avoir bien visionné la [vidéo d’introduction](tutorial-develop-mongodb-nodejs.md).
 
@@ -81,9 +82,9 @@ Ce didacticiel requiert les éléments suivants :
 
 ## <a name="build-the-app-using-the-express-framework"></a>Générer l’application à l’aide de l’infrastructure Express
 
-1. Dans Visual Studio Code, dans le volet **Explorateur**, cliquez avec le bouton droit sur le dossier **src**, cliquez sur **Nouveau dossier** et nommez-le nouveau dossier *serveur*.
+1. Dans Visual Studio Code, dans le volet **Explorateur** , cliquez avec le bouton droit sur le dossier **src** , cliquez sur **Nouveau dossier** et nommez-le nouveau dossier *serveur*.
 
-2. Dans le volet **Explorateur**, cliquez avec le bouton droit sur le dossier **serveur**, cliquez sur **Nouveau fichier** et nommez-le *index.js*.
+2. Dans le volet **Explorateur** , cliquez avec le bouton droit sur le dossier **serveur** , cliquez sur **Nouveau fichier** et nommez-le *index.js*.
 
 3. Revenez à l’invite de commandes et utilisez la commande suivante pour installer l’analyseur de corps. Cela aide notre application à analyser les données JSON qui sont transmises aux API.
 
@@ -125,7 +126,7 @@ Ce didacticiel requiert les éléments suivants :
    app.listen(port, () => console.log(`API running on localhost:${port}`));
    ```
 
-5. Dans Visual Studio Code, dans le volet **Explorateur**, cliquez avec le bouton droit sur le dossier **serveur**, puis cliquez sur **Nouveau dossier**. Nommez le nouveau fichier *routes.js*. 
+5. Dans Visual Studio Code, dans le volet **Explorateur** , cliquez avec le bouton droit sur le dossier **serveur** , puis cliquez sur **Nouveau dossier**. Nommez le nouveau fichier *routes.js*. 
 
 6. Copiez le code suivant dans **routes.js**. Ce code :
    * Référence le routeur Express
@@ -147,11 +148,11 @@ Ce didacticiel requiert les éléments suivants :
 
 7. Enregistre tous vos fichiers modifiés. 
 
-8. Dans Visual Studio Code, cliquez sur le bouton **Déboguer**![Icône de débogage dans Visual Studio Code](./media/tutorial-develop-mongodb-nodejs-part2/debug-button.png). Cliquez sur le bouton en forme d’engrenage ![Bouton Engrenage dans Visual Studio Code](./media/tutorial-develop-mongodb-nodejs-part2/gear-button.png). Le fichier launch.json s’ouvre dans Visual Studio Code.
+8. Dans Visual Studio Code, cliquez sur le bouton **Déboguer** :::image type="icon" source="./media/tutorial-develop-mongodb-nodejs-part2/debug-button.png":::, puis cliquez sur le bouton représentant un engrenage :::image type="icon" source="./media/tutorial-develop-mongodb-nodejs-part2/gear-button.png":::. Le fichier launch.json s’ouvre dans Visual Studio Code. 
 
 8. À la ligne 11 du fichier launch.json, remplacez `"${workspaceFolder}\\server"` par `"program": "${workspaceRoot}/src/server/index.js"` et enregistrez le fichier.
 
-9. Cliquez sur le bouton **Démarrer le débogage**![Icône de débogage dans Visual Studio Code](./media/tutorial-develop-mongodb-nodejs-part2/start-debugging-button.png) pour exécuter l’application.
+9. Cliquez sur le bouton **Démarrer le débogage** :::image type="icon" source="./media/tutorial-develop-mongodb-nodejs-part2/start-debugging-button.png"::: pour exécuter l’application.
 
     L’application doit s’exécuter sans erreurs.
 
@@ -163,7 +164,7 @@ Ce didacticiel requiert les éléments suivants :
 
     Cette réponse indique que l’application est active et s’exécute en local. 
 
-    ![Postman affiche la requête et la réponse](./media/tutorial-develop-mongodb-nodejs-part2/azure-cosmos-db-postman.png)
+    :::image type="content" source="./media/tutorial-develop-mongodb-nodejs-part2/azure-cosmos-db-postman.png" alt-text="Postman montrant la demande et la réponse":::
 
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure PowerShell - Configurer une stratégie de limite de débit | Microsoft Docs
-description: Exemple de script Azure PowerShell - Configurer une stratégie de limite de débit
+description: Apprenez à configurer une stratégie de limite de débit avec Azure PowerShell. Découvrez un exemple de script et consultez les ressources supplémentaires disponibles.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,12 +12,12 @@ ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: e9da57ffe89dd6e187b7681024924d4853463ee2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 40bbd520eb265b70f95c6b365b590727af8ea144
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70067363"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87851288"
 ---
 # <a name="set-up-rate-limit-policy"></a>Configurer une stratégie de limite de débit
 
@@ -42,6 +42,6 @@ Remove-AzResourceGroup -Name myResourceGroup
 ```
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour la Gestion des API Azure sur la page [Exemples PowerShell](../powershell-samples.md).

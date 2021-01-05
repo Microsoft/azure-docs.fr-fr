@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: b2a249a40d8c782d54a12df43d33655f3409753c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8597b3e4ffab44672e88374010fa829211fbc18b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73647386"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88507313"
 ---
 # <a name="upload-a-document"></a>Charger un document
 
@@ -37,25 +37,25 @@ Avant de charger vos documents, consultez [l’aide relatives à la convention d
 
     a.  Type de document :
 
-    -  Formation : ces documents seront utilisés pour un ensemble de formation.
-    -  Réglage : ces documents seront utilisés pour un ensemble de réglage.
-    -  Tests : ces documents seront utilisés pour un ensemble de tests.
-    -  Dictionnaire d’expressions : ces documents seront utilisés pour un dictionnaire d’expressions.
-    -  Dictionnaire de phrases : ces documents seront utilisés pour un dictionnaire de phrases.
+    -  Formation : Ces documents seront utilisés pour un ensemble de formation.
+    -  Réglage : Ces documents seront utilisés pour un ensemble de réglage.
+    -  Test : Ces documents seront utilisés pour un ensemble de test.
+    -  Dictionnaire d’expressions : Ces documents seront utilisés pour le dictionnaire d’expressions.
+    -  Dictionnaire de phrases : Ces documents seront utilisés pour le dictionnaire de phrases.
 
     b.  Paire de langues
 
-    c.  Remplacer un document existant : cochez cette case si vous souhaitez remplacer des documents existants portant le même nom.
+    c.  Remplacer un document existant : Cochez cette case pour remplacer des documents existants portant le même nom.
 
     d.  Remplissez la section appropriée pour les données en parallèle ou les données de liste déroulante.
 
     -  Copie parallèle :
-        -  Fichier source : sélectionnez un fichier de langue source sur votre ordinateur local.
-        -  Fichier cible : sélectionnez un fichier de langue cible sur votre ordinateur local.
-        -  Nom du document : utilisé uniquement si vous chargez des fichiers parallèles.
+        -  Fichier source : Sélectionnez un fichier de langue source sur votre ordinateur local.
+        -  Fichier cible : Sélectionnez un fichier de langue cible sur votre ordinateur local.
+        -  Nom du document : Utilisé uniquement si vous chargez des fichiers parallèles.
 
     - Données de liste déroulante :
-        -  Fichier de liste déroulante : sélectionnez le fichier de liste déroulante à partir de votre ordinateur local. Votre fichier de liste déroulante contient à la fois les phrases des langues source et cible. La [convention d’affectation de noms](document-formats-naming-convention.md) est importante pour les fichiers de liste déroulante.
+        -  Fichier de liste déroulante : Sélectionnez le fichier de liste déroulante à partir de votre ordinateur local. Votre fichier de liste déroulante contient à la fois les phrases des langues source et cible. La [convention d’affectation de noms](document-formats-naming-convention.md) est importante pour les fichiers de liste déroulante.
 
     e.  Cliquez sur Charger
 

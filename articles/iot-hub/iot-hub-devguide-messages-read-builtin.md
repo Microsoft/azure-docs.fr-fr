@@ -7,14 +7,16 @@ ms.author: wesmc
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
-ms.date: 08/08/2019
-ms.custom: amqp
-ms.openlocfilehash: fba22324a3c35b861d28ed9b84207ab3a6f9816b
-ms.sourcegitcommit: 64fc70f6c145e14d605db0c2a0f407b72401f5eb
+ms.date: 06/01/2020
+ms.custom:
+- amqp
+- 'Role: Cloud Development'
+ms.openlocfilehash: 4bb33721625f4fc752745ce2b43051c90b3aaa74
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "83872706"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147684"
 ---
 # <a name="read-device-to-cloud-messages-from-the-built-in-endpoint"></a>Lire des messages appareil-à-cloud à partir du point de terminaison intégré
 
@@ -57,25 +59,25 @@ Dans le portail, le champ Point de terminaison compatible Event Hub contient une
 | HostName | abcd1234namespace.servicebus.windows.net |
 | Espace de noms | abcd1234namespace |
 
-Vous pouvez ensuite utiliser n’importe quelle stratégie d’accès partagé bénéficiant d’autorisations **ServiceConnect** pour vous connecter au Event Hub ci-dessus.
+Vous pouvez ensuite choisir une stratégie d’accès partagé dans la liste déroulante, comme illustré dans la capture d’écran ci-dessus. Elle montre uniquement les stratégies qui disposent des autorisations **ServiceConnect** pour se connecter à l’Event Hub spécifié.
 
 Les kits de développement logiciel que vous pouvez utiliser pour vous connecter au point de terminaison compatible Event Hub intégré exposé par IoT Hub sont les suivants :
 
 | Langage | Kit SDK | Exemple |
 | -------- | --- | ------ |
-| .NET | https://github.com/Azure/azure-event-hubs-dotnet | [Démarrage rapide](quickstart-send-telemetry-dotnet.md) |
- Java | https://mvnrepository.com/artifact/com.azure/azure-messaging-eventhubs | [Démarrage rapide](quickstart-send-telemetry-java.md) |
+| .NET | https://www.nuget.org/packages/Azure.Messaging.EventHubs | [Démarrage rapide](quickstart-send-telemetry-dotnet.md) |
+| Java | https://mvnrepository.com/artifact/com.azure/azure-messaging-eventhubs | [Démarrage rapide](quickstart-send-telemetry-java.md) |
 | Node.js | https://www.npmjs.com/package/@azure/event-hubs | [Démarrage rapide](quickstart-send-telemetry-node.md) |
-| Python | https://pypi.org/project/azure-eventhub/ | https://github.com/Azure-Samples/azure-iot-samples-python/tree/master/iot-hub/Quickstarts/read-d2c-messages |
+| Python | https://pypi.org/project/azure-eventhub/ | [Démarrage rapide](quickstart-send-telemetry-python.md) |
 
 Les intégrations de produits que vous pouvez utiliser avec le point de terminaison compatible Event Hub exposé par IoT Hub sont les suivantes :
 
-* [Azure Functions](https://docs.microsoft.com/azure/azure-functions/). Voir [Traitement de données à partir d’IoT Hub avec Azure Functions](https://azure.microsoft.com/resources/samples/functions-js-iot-hub-processing/).
-* [Azure Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/). Voir [Diffuser en continu des données en tant qu’entrées dans Stream Analytics](../stream-analytics/stream-analytics-define-inputs.md#stream-data-from-iot-hub).
-* [Time Series Insights](https://docs.microsoft.com/azure/time-series-insights/). Voir [Ajouter une source d’événement IoT Hub à votre environnement Time Series Insights](../time-series-insights/time-series-insights-how-to-add-an-event-source-iothub.md).
+* [Azure Functions](../azure-functions/index.yml). Voir [Traitement de données à partir d’IoT Hub avec Azure Functions](https://azure.microsoft.com/resources/samples/functions-js-iot-hub-processing/).
+* [Azure Stream Analytics](../stream-analytics/index.yml). Voir [Diffuser en continu des données en tant qu’entrées dans Stream Analytics](../stream-analytics/stream-analytics-define-inputs.md#stream-data-from-iot-hub).
+* [Time Series Insights](../time-series-insights/index.yml). Voir [Ajouter une source d’événement IoT Hub à votre environnement Time Series Insights](../time-series-insights/how-to-ingest-data-iot-hub.md).
 * [Apache Storm spout](../hdinsight/storm/apache-storm-develop-csharp-event-hub-topology.md). Vous pouvez afficher la [source spout](https://github.com/apache/storm/tree/master/external/storm-eventhubs) sur GitHub.
-* [Intégration Apache Spark](../hdinsight/spark/apache-spark-eventhub-streaming.md).
-* [Azure Databricks](https://docs.microsoft.com/azure/azure-databricks/).
+* [Intégration Apache Spark](../hdinsight/spark/apache-spark-ipython-notebook-machine-learning.md).
+* [Azure Databricks](/azure/azure-databricks/).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

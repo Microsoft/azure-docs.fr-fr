@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/05/2016
 ms.author: kumud
-ms.openlocfilehash: 80a9397838e90a2af504125b2dc4c4ef39251d4e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1d2dde4e77a39b114f721cd6d2be250141984e7f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81455360"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86231707"
 ---
 # <a name="virtual-appliance-scenario"></a>Scénario d’appliance virtuelle
 Pour les clients Azure volumineux, il faut souvent fournir une application à deux niveaux exposée à Internet, tout en autorisant l’accès au niveau d’arrière-plan à partir d’un centre de données local. Ce document vous guide dans un scénario utilisant des itinéraires définis par l’utilisateur (UDR), une passerelle VPN et des appliances virtuelles de réseau pour déployer un environnement à deux niveaux conforme aux exigences suivantes :
@@ -33,8 +33,8 @@ Il s’agit d’un scénario de réseau de périmètre standard (également nomm
 
 |  | Avantages | Inconvénients |
 | --- | --- | --- |
-| Groupe de sécurité réseau |Aucun coût. <br/>Intégré dans Azure RBAC. <br/>Il est possible de créer des règles dans les modèles Azure Resource Manager. |Complexité variable dans les environnements de grande taille. |
-| Pare-feu |Contrôle total sur le plan des données. <br/>Gestion centralisée via la console du pare-feu. |Coût de l’appliance de pare-feu. <br/>Non intégré dans Azure RBAC. |
+| **Groupe de sécurité réseau** |Aucun coût. <br/>Intégré dans Azure RBAC. <br/>Il est possible de créer des règles dans les modèles Azure Resource Manager. |Complexité variable dans les environnements de grande taille. |
+| **Pare-feu** |Contrôle total sur le plan des données. <br/>Gestion centralisée via la console du pare-feu. |Coût de l’appliance de pare-feu. <br/>Non intégré dans Azure RBAC. |
 
 La solution ci-dessous utilise des appliances virtuelles de pare-feu pour implémenter un scénario de réseau de périmètre (DMZ)/réseau protégé.
 

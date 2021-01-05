@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 05/01/2019
-ms.openlocfilehash: 02b64d77a4fb1af25e1022de3ac8e4775f916d9e
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 9a95970647a26ea80db9f63fb8523c6a65cc5e06
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261769"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012303"
 ---
 # <a name="set-up-tls-encryption-and-authentication-for-apache-kafka-in-azure-hdinsight"></a>Configurer le chiffrement et l’authentification TLS pour Apache Kafka dans Azure HDInsight
 

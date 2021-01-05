@@ -1,19 +1,14 @@
 ---
 title: Schéma d’événement Azure Event Grid
 description: Décrit les propriétés et les schémas qui sont présents pour tous les événements. Les événements se composent de cinq propriétés de chaîne et d’un objet de données obligatoires.
-services: event-grid
-author: banisadr
-manager: timlt
-ms.service: event-grid
 ms.topic: reference
-ms.date: 01/21/2020
-ms.author: babanisa
-ms.openlocfilehash: 7c45b8f634868024a84f9f3b75bb23031c09b40c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/07/2020
+ms.openlocfilehash: 7ddc7c78c5a9e5ba2a57b21c45fb9fab65056ee9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82114001"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86105878"
 ---
 # <a name="azure-event-grid-event-schema"></a>Schéma d’événement Azure Event Grid
 

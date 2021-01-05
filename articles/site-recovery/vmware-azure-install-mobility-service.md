@@ -6,12 +6,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 03/25/2019
 ms.author: ramamill
-ms.openlocfilehash: a2f4bdb96b8d1ecb23ddcec844726439ec46fff2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 78fddb5b4512883f8e78d6ed53f6e3dbbeba0e4f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74186448"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90524995"
 ---
 # <a name="prepare-source-machine-for-push-installation-of-mobility-agent"></a>Préparer la machine source pour l’installation Push de l’agent de mobilité
 
@@ -25,8 +25,12 @@ Sur chaque ordinateur Windows que vous souhaitez protéger, procédez ainsi :
 1. Créez un compte pouvant être utilisé par le serveur de traitement pour accéder à l’ordinateur. Le compte doit disposer des droits d’administrateur (local ou de domaine). Utilisez ce compte uniquement pour l’installation Push et pour les mises à jour de l’agent.
 2. Si vous n’utilisez pas de compte de domaine, désactivez le contrôle d’accès utilisateur distant sur l’ordinateur local de la façon suivante :
     - Sous la clé de Registre HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System, ajoutez un nouveau DWORD : **LocalAccountTokenFilterPolicy**. Définissez la valeur sur **1**.
-    -  Pour exécuter cette action à l’invite de commandes, exécutez la commande suivante :  
-   `REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d
+    -  Pour exécuter cette action à l’invite de commandes, exécutez la commande suivante :
+    
+       ```
+       REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
+       ```
+
 3. Sur le Pare-feu Windows de l’ordinateur à protéger, sélectionnez **Autoriser une application ou une fonctionnalité à franchir le pare-feu**. Activez **Partage de fichiers et d’imprimantes** et **Windows Management Instrumentation (WMI)** . Pour les ordinateurs qui appartiennent à un domaine, vous pouvez configurer les paramètres de pare-feu avec un objet de stratégie de groupe.
 
    ![Paramètres du pare-feu](./media/vmware-azure-install-mobility-service/mobility1.png)
@@ -59,6 +63,7 @@ Sur chaque ordinateur Linux que vous souhaitez protéger, procédez ainsi :
 11. Dans l’onglet **Gérer les comptes**, sélectionnez **Ajouter un compte**.
 12. Ajoutez le compte que vous venez de créer.
 13. Entrez les informations d’identification utilisées lors de l’activation de la réplication d’un ordinateur.
+1. Étape supplémentaire pour la mise à jour ou la protection des machines SUSE Linux Enterprise Server 11 SP3 ou RHEL 5 ou CentOS 5 ou Debian 7. [Vérifiez que la dernière version est disponible dans le serveur de configuration](vmware-physical-mobility-service-overview.md#download-latest-mobility-agent-installer-for-suse-11-sp3-rhel-5-debian-7-server).
 
 ## <a name="anti-virus-on-replicated-machines"></a>Protection antivirus sur les machines répliquées
 

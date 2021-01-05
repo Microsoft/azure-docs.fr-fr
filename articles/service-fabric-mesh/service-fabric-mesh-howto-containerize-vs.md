@@ -1,16 +1,16 @@
 ---
 title: Conteneuriser une application .NET pour Service Fabric Mesh
 description: Ajoutez la prise en charge de l’orchestration de conteneurs Azure Service Fabric Mesh dans les projets de console et ASP.NET qui utilisent le .NET Framework complet.
-author: dkkapur
-ms.author: dekapur
+author: georgewallace
+ms.author: gwallace
 ms.date: 11/08/2018
 ms.topic: conceptual
-ms.openlocfilehash: d67ea5bb7df5910ec87e69adf3c414c303bf0182
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2fb6aa7d7c655a1ba4b44dabc33e32ce04ae458f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75462037"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96489273"
 ---
 # <a name="containerize-an-existing-net-app-for-service-fabric-mesh"></a>Conteneuriser une application .NET pour Service Fabric Mesh
 
@@ -51,6 +51,12 @@ La boîte de dialogue **Ajouter la prise en charge des orchestrateurs de contene
 ![Boîte de dialogue Ajouter la prise en charge des orchestrateurs de conteneurs dans Visual Studio](./media/service-fabric-mesh-howto-containerize-vs/add-container-orchestration-support.png)
 
 Choisissez **Service Fabric Mesh** dans la liste déroulante, puis cliquez sur **OK**.
+
+
+>[!NOTE]
+> Depuis le 2 novembre 2020, des [limites de taux de téléchargement s’appliquent](https://docs.docker.com/docker-hub/download-rate-limit/) aux requêtes anonymes et authentifiées qui sont envoyées à Docker Hub à partir de comptes de plan Docker Gratuit. Ces limites sont appliquées par adresse IP. Pour plus d’informations, consultez [S’authentifier auprès de Docker Hub](../container-registry/buffer-gate-public-content.md#authenticate-with-docker-hub).
+>
+> Pour éviter tout taux limité, assurez-vous que le `FROM microsoft/aspnet:4.7.2-windowsservercore-1803 AS base` par défaut de votre Dockerfile est remplacé par `FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2-windowsservercore-1803 AS base`.
 
 L’outil vérifie ensuite que Docker est installé, ajoute un fichier Dockerfile à votre projet, puis tire (pull) une image docker pour votre projet.  
 Un projet d’application Service Fabric Mesh est ajouté à votre solution. Il contient vos profils de publication et vos fichiers de configuration Mesh. Le nom du projet est le même que celui de votre projet, mais avec le mot « Application » accolé, par exemple : **eShopLegacyWebFormsApplication**. 

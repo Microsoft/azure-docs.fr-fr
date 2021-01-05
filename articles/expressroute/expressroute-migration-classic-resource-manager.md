@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Migrer des réseaux virtuels classiques vers Resource Manager'
 description: Cette page explique comment migrer des réseaux virtuels associés à ExpressRoute vers Resource Manager après avoir déplacé votre circuit.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/06/2020
-ms.author: cherylmc
-ms.openlocfilehash: 8033c80b72c19a9473ce7ecfaa8fe5a1da9f12ee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 57c439cf8ac52d93d231d6ff33f72a5a942dec6a
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77061310"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351603"
 ---
 # <a name="migrate-expressroute-associated-virtual-networks-from-classic-to-resource-manager"></a>Migrer des réseaux virtuels associés à ExpressRoute d’un déploiement classique vers Resource Manager
 
@@ -22,17 +22,17 @@ Cet article explique comment migrer des réseaux virtuels associés à ExpressRo
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-* Vérifiez que vous disposez des dernières versions des modules Azure PowerShell. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/overview). Pour installer le module PowerShell Service Management (qui est nécessaire pour le modèle de déploiement classique), consultez [Installer le module Azure PowerShell Service Management](/powershell/azure/servicemanagement/install-azure-ps).
+* Vérifiez que vous disposez des dernières versions des modules Azure PowerShell. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/). Pour installer le module PowerShell Service Management (qui est nécessaire pour le modèle de déploiement classique), consultez [Installer le module Azure PowerShell Service Management](/powershell/azure/servicemanagement/install-azure-ps).
 * Veillez à consulter les [conditions préalables](expressroute-prerequisites.md), la [configuration requise pour le routage](expressroute-routing.md) et les [flux de travail](expressroute-workflows.md) avant de commencer la configuration.
 * Examinez les informations fournies sous [Transfert des circuits ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager](expressroute-move.md). Vous devez avoir bien compris les limites et les limitations.
 * Vérifiez que le circuit est totalement opérationnel dans le modèle de déploiement classique.
 * Assurez-vous que vous disposez d’un groupe de ressources créé dans le modèle de déploiement Resource Manager.
 * Passez en revue la documentation de migration de ressources suivante :
 
-    * [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager.md)
-    * [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager-deep-dive.md)
-    * [FAQ : Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager.md)
-    * [Passer en revue les erreurs les plus courantes de la migration et leur prévention](../virtual-machines/windows/migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+    * [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-overview.md)
+    * [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-deep-dive.md)
+    * [FAQ : Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-faq.md)
+    * [Passer en revue les erreurs les plus courantes de la migration et leur prévention](../virtual-machines/migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
 ## <a name="supported-and-unsupported-scenarios"></a>Scénarios pris en charge et non pris en charge
 
@@ -82,7 +82,7 @@ Cette section décrit les étapes à suivre pour migrer un réseau virtuel, une 
    ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager.md)
-* [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager-deep-dive.md)
-* [FAQ : Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager.md)
-* [Passer en revue les erreurs les plus courantes de la migration et leur prévention](../virtual-machines/windows/migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+* [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-overview.md)
+* [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-deep-dive.md)
+* [FAQ : Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../virtual-machines/migration-classic-resource-manager-faq.md)
+* [Passer en revue les erreurs les plus courantes de la migration et leur prévention](../virtual-machines/migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)

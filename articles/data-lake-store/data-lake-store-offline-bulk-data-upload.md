@@ -3,15 +3,15 @@ title: Charger un jeu de données volumineux vers Azure Data Lake Storage Gen1 �
 description: Utiliser le service Import/Export pour copier les données du stockage de blobs Azure vers Azure Data Lake Storage Gen1
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: aa3eb0bcd9ddd2a094563efe326f7af7e9e8708a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d04a5c0e53e9a5db8bba03a5a9e9d95b87a8b5a3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73839310"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85855669"
 ---
 # <a name="use-the-azure-importexport-service-for-offline-copy-of-data-to-data-lake-storage-gen1"></a>Utiliser le service Azure Import/Export pour copier les données dans Data Lake Storage Gen1 hors connexion
 
@@ -19,7 +19,7 @@ Dans cet article, vous allez découvrir comment copier de très grands jeux de d
 
 Le service Azure Import/Export vous aide à transférer de façon plus sécurisée des volumes importants de données vers Stockage Blob Azure en expédiant des disques durs vers un centre de données Azure.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer la lecture cet article, vous devez disposer des éléments suivants :
 
@@ -31,17 +31,16 @@ Avant de commencer la lecture cet article, vous devez disposer des éléments su
 
 Avant d’utiliser le service Import/Export, scindez le fichier de données à transférer **en copies de moins de 200 Go**. L’outil d’importation ne fonctionne pas avec des fichiers de plus de 200 Go. Dans cet article, nous fractionnons le fichier en blocs de 100 Go. Pour ce faire, utilisez [Cygwin](https://cygwin.com/install.html). Cygwin prend en charge les commandes Linux. Dans ce cas, utilisez la commande suivante :
 
-    split -b 100m 319GB.tsv
+```console
+split -b 100m 319GB.tsv
+```
 
 L’opération split crée des fichiers portant les noms suivants.
 
-    319GB.tsv-part-aa
-
-    319GB.tsv-part-ab
-
-    319GB.tsv-part-ac
-
-    319GB.tsv-part-ad
+* *319GB.tsv-part-aa*
+* *319GB.tsv-part-ab*
+* *319GB.tsv-part-ac*
+* *319GB.tsv-part-ad*
 
 ## <a name="get-disks-ready-with-data"></a>Préparer les disques avec les données
 

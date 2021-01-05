@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: deli, jonfan, logicappspm
 ms.topic: conceptual
-ms.date: 05/25/2019
-ms.openlocfilehash: 20f27ebc7b9712d440dc1c67c46cb0385a3f874a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 03/25/2020
+ms.openlocfilehash: a5f01e81564561fe43ef6e55e6e9b3b67d6e1d77
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82234092"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84945611"
 ---
 # <a name="schedule-and-run-recurring-automated-tasks-processes-and-workflows-with-azure-logic-apps"></a>Créer et exécuter des tâches et des workflows récurrents avec Azure Logic Apps
 
@@ -48,13 +48,13 @@ Cet article décrit les capacités des déclencheurs et actions intégrés de ty
 
 ## <a name="schedule-triggers"></a>Planifier des déclencheurs
 
-Vous pouvez démarrer votre workflow d'application logique en utilisant le déclencheur Périodicité ou le déclencheur Fenêtre glissante, qui n'est associé à aucun service ou système spécifique, par exemple Office 365 Outlook ou SQL Server. Ces déclencheurs démarrent et exécutent votre workflow en fonction de la périodicité que vous avez spécifiée lors de la sélection de l’intervalle et de la fréquence, par exemple le nombre de secondes, de minutes et d'heures pour les deux déclencheurs, ou le nombre de jours, de semaines ou de mois pour le déclencheur Périodicité. Vous pouvez également définir la date et l'heure de début ainsi que le fuseau horaire. Chaque fois qu’un déclencheur est activé, Logic Apps crée et exécute une instance de workflow pour votre application logique.
+Vous pouvez démarrer votre workflow d'application logique en utilisant le déclencheur Périodicité ou le déclencheur Fenêtre glissante, qui n'est associé à aucun service ou système spécifique. Ces déclencheurs démarrent et exécutent votre workflow en fonction de la périodicité que vous avez spécifiée lors de la sélection de l’intervalle et de la fréquence, par exemple le nombre de secondes, de minutes, d'heures, de jours, de semaines ou de mois. Vous pouvez également définir la date et l'heure de début ainsi que le fuseau horaire. Chaque fois qu’un déclencheur est activé, Logic Apps crée et exécute une instance de workflow pour votre application logique.
 
 Voici les différences entre ces types déclencheurs :
 
-* **Périodicité** : Exécute votre workflow à intervalles réguliers selon la périodicité que vous avez spécifiée. Si des périodicités sont manquées, le déclencheur Périodicité ne les traite pas, mais redémarre les périodicités selon l'intervalle planifié suivant. Vous pouvez spécifier la date et l'heure de début ainsi que le fuseau horaire. Si vous sélectionnez « Jour », vous pouvez spécifier les heures du jour et les minutes, par exemple, tous les jours à 14h30. Si vous sélectionnez « Semaine », vous pouvez également sélectionner les jours de la semaine, par exemple le mercredi et le samedi. Pour plus d'informations, voir [Créer, planifier et exécuter des tâches et des workflows récurrents avec le déclencheur Périodicité](../connectors/connectors-native-recurrence.md).
+* **Périodicité** : Exécute votre workflow à intervalles réguliers selon la périodicité que vous avez spécifiée. Si des périodicités sont manquées, par exemple en raison d’interruptions ou de désactivation de workflows, le déclencheur Périodicité ne les traite pas, mais redémarre les périodicités selon l’intervalle planifié suivant. Vous pouvez spécifier la date et l'heure de début ainsi que le fuseau horaire. Si vous sélectionnez « Jour », vous pouvez spécifier les heures du jour et les minutes, par exemple, tous les jours à 14h30. Si vous sélectionnez « Semaine », vous pouvez également sélectionner les jours de la semaine, par exemple le mercredi et le samedi. Pour plus d'informations, voir [Créer, planifier et exécuter des tâches et des workflows récurrents avec le déclencheur Périodicité](../connectors/connectors-native-recurrence.md).
 
-* **Fenêtre glissante** : Exécute votre workflow à des intervalles réguliers qui traitent les données en continu. Si des périodicités sont manquées, le déclencheur Fenêtre coulissante revient en arrière et traite les périodicités manquées. Vous pouvez spécifier une date et une heure de début, un fuseau horaire et une durée pour retarder chaque périodicité de votre workflow. Ce déclencheur ne permet pas de spécifier les jours, les semaines et les mois, les heures du jour, les minutes et les jours de la semaine. Pour plus d'informations, voir [Créer, planifier et exécuter des tâches et des workflows récurrents avec le déclencheur Fenêtre glissante](../connectors/connectors-native-sliding-window.md).
+* **Fenêtre glissante** : Exécute votre workflow à des intervalles réguliers qui traitent les données en continu. Si des récurrences sont manquées pour une raison quelconque, par exemple suite à des interruptions ou à des flux de travail désactivés, le déclencheur Fenêtre glissante revient en arrière et traite ces récurrences manquées. Vous pouvez spécifier une date et une heure de début, un fuseau horaire et une durée pour retarder chaque périodicité de votre workflow. Ce déclencheur ne permet pas les planifications avancées, par exemple, les heures spécifiques du jour, les minutes de l'heure et les jours de la semaine. Pour plus d'informations, voir [Créer, planifier et exécuter des tâches et des workflows récurrents avec le déclencheur Fenêtre glissante](../connectors/connectors-native-sliding-window.md).
 
 <a name="schedule-actions"></a>
 

@@ -3,12 +3,12 @@ title: Activer la sauvegarde quand vous créez une machine virtuelle Azure
 description: Explique comment activer la sauvegarde quand vous créez une machine virtuelle Azure avec Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 06/13/2019
-ms.openlocfilehash: 7739109eb8bad88c9b723e67e13adc78c127499a
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: ad81300545686d61f42cdd8684e502c937b4fd43
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80672824"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89377333"
 ---
 # <a name="enable-backup-when-you-create-an-azure-vm"></a>Activer la sauvegarde quand vous créez une machine virtuelle Azure
 
@@ -26,14 +26,14 @@ Si vous n’êtes pas connecté à votre compte, connectez-vous sur le [portail 
 
 ## <a name="create-a-vm-with-backup-configured"></a>Créer une machine virtuelle avec sauvegarde configurée
 
-1. Dans le portail Azure, cliquez sur **Créer une ressource**.
+1. Dans le portail Azure, sélectionnez **Créer une ressource**.
 
-2. Dans la Place de marché Azure, cliquez sur **Calcul**, puis sélectionnez une image de machine virtuelle.
+2. Dans Place de marché Azure, sélectionnez **Calcul**, puis sélectionnez une image de machine virtuelle.
 
-3. Configurez la machine virtuelle conformément aux instructions [Windows](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal) ou [Linux](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-portal).
+3. Configurez la machine virtuelle conformément aux instructions [Windows](../virtual-machines/windows/quick-create-portal.md) ou [Linux](../virtual-machines/linux/quick-create-portal.md).
 
-4. Sous l’onglet **Gestion**, dans **Activer la sauvegarde**, cliquez sur **Activé**.
-5. Sauvegarde Azure sauvegarde dans un coffre Recovery Services. Cliquez sur **Créer** si vous n’avez pas de coffre.
+4. Sous l’onglet **Gestion**, dans **Activer la sauvegarde**, sélectionnez **Activé**.
+5. Sauvegarde Azure sauvegarde dans un coffre Recovery Services. Sélectionnez **Créer** si vous n’avez pas de coffre.
 6. Acceptez le nom de coffre suggéré ou spécifiez le vôtre.
 7. Spécifiez ou créez un groupe de ressources dans lequel se trouvera le coffre. Le groupe de ressources du coffre peut être différent du groupe de ressources de la machine virtuelle.
 
@@ -48,6 +48,9 @@ Si vous n’êtes pas connecté à votre compte, connectez-vous sur le [portail 
 
       ![Stratégie de sauvegarde par défaut](./media/backup-during-vm-creation/daily-policy.png)
 
+>[!NOTE]
+>[SSE et PMK sont les méthodes de chiffrement par défaut](backup-encryption.md) pour les machines virtuelles Azure. Sauvegarde Azure prend en charge la sauvegarde et la restauration de ces machines virtuelles Azure.
+
 ## <a name="azure-backup-resource-group-for-virtual-machines"></a>Groupe de ressources Sauvegarde Azure pour les machines virtuelles
 
 Le service de sauvegarde crée un groupe de ressources (RG) distinct du groupe de ressources de la machine virtuelle afin de stocker la collection de points de restauration (RPC). La RPC héberge les points de récupération instantanée des machines virtuelles managées. Le format de nom par défaut du groupe de ressources créé par le service de sauvegarde est le suivant : `AzureBackupRG_<Geo>_<number>`. Par exemple : *AzureBackupRG_northeurope_1*. Vous pouvez maintenant personnaliser le nom du groupe de ressources créé par Sauvegarde Azure.
@@ -55,15 +58,15 @@ Le service de sauvegarde crée un groupe de ressources (RG) distinct du groupe d
 Points à noter :
 
 1. Vous pouvez utiliser le nom par défaut du groupe de ressources ou le modifier en fonction des besoins de votre entreprise.
-2. Vous fournissez le modèle de nom de groupe de ressources comme entrée lors de la création de la stratégie de sauvegarde de machine virtuelle. Le nom du groupe de ressources doit être au format suivant : `<alpha-numeric string>* n <alpha-numeric string>`. « n » est remplacé par un entier (à partir de 1) et utilisé pour la montée en charge si le premier groupe de ressources est saturé. Un groupe de ressources peut avoir un maximum de 600 RPC.
+2. Vous fournissez le modèle de nom de groupe de ressources comme entrée lors de la création de la stratégie de sauvegarde de machine virtuelle. Le nom du groupe de ressources doit être au format suivant : `<alpha-numeric string>* n <alpha-numeric string>`. « n » est remplacé par un entier (à partir de 1) et utilisé pour la montée en charge si le premier groupe de ressources est saturé. Un groupe de ressources peut avoir un maximum de 600 RPC aujourd’hui.
               ![Choisir un nom lors de la création de la stratégie](./media/backup-during-vm-creation/create-policy.png)
 3. Le modèle doit suivre les règles de nommage des groupes de ressources ci-dessous et la longueur totale ne doit pas dépasser la longueur maximale autorisée pour le nom de groupe de ressources.
-    1. Le nom d’un groupe de ressources accepte uniquement des caractères alphanumériques, des points, des traits de soulignement, des traits d'union et des parenthèses. Il ne peut pas se terminer par un point.
+    1. Le nom d’un groupe de ressources accepte uniquement des caractères alphanumériques, des points, des traits de soulignement, des traits d'union et des parenthèses. Il ne peut pas se terminer sur une période.
     2. Les noms de groupes de ressources peuvent contenir jusqu’à 74 caractères, y compris le nom du groupe de routage et le suffixe.
 4. La première `<alpha-numeric-string>` est obligatoire, tandis que la deuxième après « n » est facultative. Cela s’applique uniquement si vous donnez un nom personnalisé. Si vous n’entrez rien dans les deux zones de texte, le nom par défaut est utilisé.
 5. Vous pouvez modifier le nom du groupe de ressources en modifiant la stratégie si nécessaire. Si le modèle de nom est modifié, les nouveaux RP seront créés dans le nouveau RG. Toutefois, les anciens RP résideront toujours dans l’ancien RG et ne seront pas déplacés, car la collection RP ne prend pas en charge le déplacement des ressources. Les RP finissent par récupérer le garbage collector à l’expiration des points.
 ![Changer le nom lors de la modification de la stratégie](./media/backup-during-vm-creation/modify-policy.png)
-6. Il est conseillé de ne pas verrouiller le groupe de ressources créé pour une utilisation par le service Sauvegarde Microsoft Azure.
+6. Il est conseillé de ne pas verrouiller le groupe de ressources créé pour une utilisation par le service de sauvegarde.
 
 Afin de configurer le groupe de ressources Sauvegarde Azure pour Machines Virtuelles à l’aide de PowerShell, reportez-vous à [Créer un groupe de ressources Sauvegarde Azure lors de la conservation des instantanés](backup-azure-vms-automation.md#creating-azure-backup-resource-group-during-snapshot-retention).
 
@@ -73,8 +76,8 @@ Votre sauvegarde de machine virtuelle s’exécute conformément à votre strat�
 
 Une fois la machine virtuelle créée, effectuez les étapes suivantes :
 
-1. Dans les propriétés de la machine virtuelle, cliquez sur **Sauvegarde**. L’état de la machine virtuelle est « Sauvegarde initiale en attente » jusqu’à ce que la sauvegarde initiale s’exécute.
-2. Cliquez sur **Sauvegarder maintenant** pour exécuter une sauvegarde à la demande.
+1. Dans les propriétés de la machine virtuelle, sélectionnez **Sauvegarde**. L’état de la machine virtuelle est « Sauvegarde initiale en attente » jusqu’à ce que la sauvegarde initiale s’exécute.
+2. Sélectionnez **Sauvegarder maintenant** pour exécuter une sauvegarde à la demande.
 
     ![Exécuter une sauvegarde à la demande](./media/backup-during-vm-creation/run-backup.png)
 

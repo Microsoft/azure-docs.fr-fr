@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à JIRA SAML SSO by Microsoft | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et JIRA SAML SSO by Microsoft.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4b663047-7f88-443b-97bd-54224b232815
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 09/11/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7c6db9ed92161e968b36c75b8bee5a847137c072
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 621bbac6bc9ff3cb147110942060c8268fd86989
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631882"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511176"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-jira-saml-sso-by-microsoft"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à JIRA SAML SSO by Microsoft
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer JIRA SAML SSO by Microsoft �
 * Permettre à vos utilisateurs de se connecter automatiquement à JIRA SAML SSO by Microsoft avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="description"></a>Description
 
@@ -42,10 +37,10 @@ Utilisez votre compte Microsoft Azure Active Directory avec le serveur Atlassian
 Pour configurer l’intégration d’Azure AD à JIRA SAML SSO by Microsoft, vous avez besoin des éléments suivants :
 
 - Un abonnement Azure AD Si vous ne disposez d’aucun abonnement, vous pouvez obtenir [un compte gratuit](https://azure.microsoft.com/free/).
-- JIRA Core et Software 6.4 à 8.8.0 ou JIRA Service Desk 3.0 à 4.8.0 doivent être installés et configurés dans Windows version 64 bits
+- JIRA Core et Software 6.4 à 8.14.0 ou JIRA Service Desk 3.0 à 4.11.1 doivent être installés et configurés dans Windows version 64 bits
 - L’activation du HTTPS dans le serveur JIRA
 - Notez que les versions prises en charge par le plug-in JIRA sont mentionnées dans la section ci-dessous.
-- L’accessibilité du serveur JIRA via Internet (particulièrement pour la page de connexion Azure AD pour l’authentification) et la capacité à recevoir le jeton d’Azure AD
+- L’accessibilité du serveur JIRA via Internet (particulièrement à la page de connexion Azure AD pour l’authentification) et la capacité à recevoir le jeton d’Azure AD
 - La création d’informations d’identification administrateur dans JIRA
 - La désactivation de WebSudo dans JIRA
 - La création d’un utilisateur de test dans l’application serveur JIRA
@@ -58,10 +53,13 @@ Pour commencer, vous devez disposer de ce qui suit :
 * N’utilisez pas votre environnement de production, sauf si cela est nécessaire.
 * Un abonnement JIRA SAML SSO by Microsoft pour lequel l’authentification unique est activée.
 
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
+
 ## <a name="supported-versions-of-jira"></a>Versions de JIRA prises en charge
 
-* JIRA Core et Software : 6.4 à 8.8.0
-* JIRA Service Desk 3.0.0 à 4.8.0
+* JIRA Core et Software : 6.4 à 8.14.0
+* JIRA Service Desk 3.0.0 à 4.11.1
 * JIRA prend également en charge la version 5.2. Pour plus d’informations, cliquez sur [Authentification unique Microsoft Azure Active Directory pour JIRA 5.2](jira52microsoft-tutorial.md).
 
 > [!NOTE]
@@ -158,11 +156,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Pointez sur le roue dentée, puis cliquez sur **Modules complémentaires**.
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/addon1.png)
+    ![Capture d’écran montrant l’élément Add-ons sélectionné dans le menu des paramètres.](./media/jiramicrosoft-tutorial/addon1.png)
 
 3. Téléchargez le plug-in depuis le [Centre de téléchargement Microsoft](https://www.microsoft.com/download/details.aspx?id=56506). Chargez manuellement le plug-in fourni par Microsoft à l’aide du menu **Upload add-on** (Charger le module complémentaire). Le téléchargement du plug-in est couvert dans [Contrat de Services Microsoft](https://www.microsoft.com/servicesagreement/).
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/addon12.png)
+    ![Capture d’écran montrant la section Manage add-ons avec le lien Upload add-on mis en évidence.](./media/jiramicrosoft-tutorial/addon12.png)
 
 4. Pour exécuter le scénario de proxy inverse JIRA ou le scénario d’équilibreur de charge, procédez comme suit :
 
@@ -173,19 +171,19 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     `scheme="https" proxyName="<subdomain.domain.com>" proxyPort="<proxy_port>" secure="true"`
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/reverseproxy1.png)
+    ![Capture d’écran montrant le fichier server.xml dans un éditeur avec la nouvelle ligne ajoutée.](./media/jiramicrosoft-tutorial/reverseproxy1.png)
 
     b. Modifiez l’**URL de base** dans les **paramètres système** en fonction du proxy/de l’équilibreur de charge.
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/reverseproxy2.png)
+    ![Capture d’écran montrant les paramètres d’administration dans lesquels vous pouvez modifier l’URL de base.](./media/jiramicrosoft-tutorial/reverseproxy2.png)
 
 5. Une fois que le plug-in est installé, il s’affiche sous **User Installed** (Installé par l’utilisateur), dans la section **Manage add-ons** (Gérer les modules complémentaires). Cliquez sur **Configurer** pour configurer le nouveau plug-in.
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/addon14.png)
+    ![Capture d’écran montrant la section Azure AD SAML Single Sign-on for Jira, avec l’option Configure sélectionnée.](./media/jiramicrosoft-tutorial/addon14.png)
 
 6. Effectuez les opérations suivantes dans la page de configuration :
 
-    ![Configure Single Sign-On](./media/jiramicrosoft-tutorial/addon54.png)
+    ![Capture d’écran montrant la page de configuration de l’authentification unique Microsoft Azure Active Directory pour JIRA.](./media/jiramicrosoft-tutorial/addon54.png)
 
     > [!TIP]
     > Vérifiez qu’un seul certificat est associé à l’application pour éviter toute erreur liée à la résolution des métadonnées. Si plusieurs certificats sont associés, l’administrateur verra un message d’erreur s’afficher lors de la résolution des métadonnées.
@@ -220,7 +218,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
     1. Cliquez sur **Enregistrer** pour enregistrer les paramètres.
 
        > [!NOTE]
-       > Pour plus d’informations sur l’installation et la résolution des problèmes, consultez le [Guide d’administration du connecteur d’authentification unique MS JIRA](../ms-confluence-jira-plugin-adminguide.md). Il existe également une page [FAQ](../ms-confluence-jira-plugin-faq.md) pour vous aider.
+       > Pour plus d’informations sur l’installation et la résolution des problèmes, consultez le [Guide d’administration du connecteur d’authentification unique MS JIRA](./ms-confluence-jira-plugin-adminguide.md). Il existe également une page [FAQ](./ms-confluence-jira-plugin-adminguide.md) pour vous aider.
 
 ### <a name="create-jira-saml-sso-by-microsoft-test-user"></a>Créer un utilisateur de test JIRA SAML SSO by Microsoft
 
@@ -232,19 +230,19 @@ Pour permettre aux utilisateurs Azure AD de se connecter à un serveur local JIR
 
 2. Pointez sur la roue dentée, puis cliquez sur **Gestion des utilisateurs**.
 
-    ![Ajouter un employé](./media/jiramicrosoft-tutorial/user1.png)
+    ![Capture d’écran montrant l’élément User management sélectionné dans le menu des paramètres.](./media/jiramicrosoft-tutorial/user1.png)
 
 3. Vous êtes redirigé vers la page d’accès administrateur dans laquelle vous entrez le **mot de passe**, puis cliquez sur le bouton **Confirmer**.
 
-    ![Ajouter un employé](./media/jiramicrosoft-tutorial/user2.png)
+    ![Capture d’écran montrant la page Administrator Access dans laquelle vous entrez vos informations d’identification.](./media/jiramicrosoft-tutorial/user2.png)
 
 4. Sous l’onglet **User management** (Gestion des utilisateurs), cliquez sur **Create user** (Créer un utilisateur).
 
-    ![Ajouter un employé](./media/jiramicrosoft-tutorial/user3.png) 
+    ![Capture d’écran montrant l’onglet User management dans lequel vous pouvez créer un utilisateur.](./media/jiramicrosoft-tutorial/user3.png) 
 
 5. Dans la page de boîte de dialogue **Create New User** (Créer un utilisateur), procédez comme suit :
 
-    ![Ajouter un employé](./media/jiramicrosoft-tutorial/user4.png) 
+    ![Capture d’écran montrant la boîte de dialogue Create new user, où vous pouvez entrer les informations à cette étape.](./media/jiramicrosoft-tutorial/user4.png) 
 
     a. Dans la zone de texte **Email address** (Adresse e-mail), tapez l’adresse e-mail d’un utilisateur, par exemple, B.simon@contoso.com.
 
@@ -260,14 +258,14 @@ Pour permettre aux utilisateurs Azure AD de se connecter à un serveur local JIR
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette JIRA SAML SSO by Microsoft dans le volet d’accès, vous devez être connecté automatiquement à l’application JIRA SAML SSO by Microsoft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette JIRA SAML SSO by Microsoft dans le volet d’accès, vous devez être connecté automatiquement à l’application JIRA SAML SSO by Microsoft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer JIRA SAML SSO by Microsoft avec Azure AD](https://aad.portal.azure.com/)

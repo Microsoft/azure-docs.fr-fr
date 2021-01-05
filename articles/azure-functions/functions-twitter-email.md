@@ -4,21 +4,21 @@ description: Créez une fonction qui s’intègre à Azure Logic Apps et à Azur
 author: craigshoemaker
 ms.assetid: 60495cc5-1638-4bf0-8174-52786d227734
 ms.topic: tutorial
-ms.date: 11/06/2018
+ms.date: 04/27/2020
 ms.author: cshoe
-ms.custom: mvc, cc996988-fb4f-47
-ms.openlocfilehash: f6698bcc8125cd00dcb1cd6c86a8d69153242b35
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-csharp, mvc, cc996988-fb4f-47
+ms.openlocfilehash: feb6b36f8e5e7bbec83d8882552484f68abfd56d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82190297"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91537750"
 ---
 # <a name="create-a-function-that-integrates-with-azure-logic-apps"></a>Créer une fonction qui s’intègre avec Azure Logic Apps
 
 Azure Functions s’intègre avec Azure Logic Apps dans le Concepteur d’applications logiques. Cette intégration vous permet d’utiliser la puissance des fonctions dans les orchestrations avec d’autres services Azure et services tiers. 
 
-Ce didacticiel vous montre comment utiliser des fonctions avec Logic Apps et Cognitive Services sur Azure pour exécuter une analyse des sentiments sur les billets Twitter. Une fonction déclenchée via HTTP classe les tweets en vert, jaune ou rouge selon le score de sentiments. Un courrier électronique est envoyé lors de la détection de sentiments négatifs. 
+Ce didacticiel vous montre comment utiliser Azure Functions avec Logic Apps et Cognitive Services sur Azure pour exécuter une analyse des sentiments sur les billets Twitter. Une fonction déclenchée via HTTP classe les tweets en vert, jaune ou rouge selon le score de sentiments. Un courrier électronique est envoyé lors de la détection de sentiments négatifs. 
 
 ![Image : deux premières étapes de l’application dans le Concepteur d’applications logiques](media/functions-twitter-email/00-logic-app-overview.png)
 
@@ -38,7 +38,7 @@ Dans ce tutoriel, vous allez apprendre à :
 + Un compte [Outlook.com](https://outlook.com/) (pour l’envoi de notifications).
 
 > [!NOTE]
-> Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans Logic Apps. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser le connecteur uniquement avec certains services et applications approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification dans votre connecteur Gmail](https://docs.microsoft.com/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
+> Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans Logic Apps. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser le connecteur uniquement avec certains services et applications approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification dans votre connecteur Gmail](/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
 
 + Cet article utilise comme point de départ les ressources créées dans [Créer votre première fonction à partir du portail Azure](functions-create-first-azure-function.md).
 Si vous ne l’avez pas déjà fait, suivez ces étapes pour créer votre Function App.
@@ -74,21 +74,21 @@ Les API Cognitive Services sont disponibles dans Azure en tant que ressources in
 
 ## <a name="create-the-function-app"></a>Créer l’application de fonction
 
-Les fonctions offrent un excellent moyen de se décharger des tâches de traitement dans un flux de travail d’applications logiques. Ce didacticiel utilise une fonction déclenchée via HTTP pour traiter des scores de sentiments de tweet à partir de Cognitive Services et renvoie une valeur de catégorie.  
+Azure Functions offre un excellent moyen de se décharger des tâches de traitement dans un flux de travail d’applications logiques. Ce didacticiel utilise une fonction déclenchée via HTTP pour traiter des scores de sentiments de tweet à partir de Cognitive Services et renvoie une valeur de catégorie.  
 
 [!INCLUDE [Create function app Azure portal](../../includes/functions-create-function-app-portal.md)]
 
-## <a name="create-an-http-triggered-function"></a>Créer une fonction déclenchée via HTTP  
+## <a name="create-an-http-trigger-function"></a>Créer une fonction de déclencheur HTTP  
 
-1. Développez votre Function App, puis cliquez sur le bouton **+** en regard de **Fonctions**. S’il s’agit de la première fonction de votre application de fonction, sélectionnez **Dans le portail**.
+1. Dans le menu de gauche de la fenêtre **Fonctions**, sélectionnez **Fonctions**, puis **Ajouter** dans le menu supérieur.
 
-    ![Page de démarrage rapide des fonctions sur le portail Azure](media/functions-twitter-email/05-function-app-create-portal.png)
+2. Dans la fenêtre **Nouvelle fonction**, sélectionnez **Déclencheur HTTP**.
 
-2. Ensuite, sélectionnez **Webhook + API** et cliquez sur **Créer**. 
+    ![Choisir une fonction de déclencheur HTTP](./media/functions-twitter-email/06-function-http-trigger.png)
 
-    ![Choisir le déclencheur HTTP](./media/functions-twitter-email/06-function-webhook.png)
+3. Dans la page **Nouvelle fonction**, sélectionnez **Créer une fonction**.
 
-3. Remplacez le contenu du fichier `run.csx` par le code suivant, puis cliquez sur **Enregistrer** :
+4. Dans votre nouvelle fonction de déclencheur HTTP, sélectionnez **Code + test** dans le menu de gauche, remplacez le contenu du fichier `run.csx` par le code suivant, puis sélectionnez **Enregistrer** :
 
     ```csharp
     #r "Newtonsoft.Json"
@@ -123,11 +123,12 @@ Les fonctions offrent un excellent moyen de se décharger des tâches de traitem
             : new BadRequestObjectResult("Please pass a value on the query string or in the request body");
     }
     ```
+
     Le code de cette fonction renvoie une catégorie de couleur en fonction du score des sentiments reçu dans la requête. 
 
-4. Pour tester la fonction, cliquez sur **Test** tout à droite pour développer l’onglet de test. Tapez la valeur `0.2` pour le **corps de la requête**, puis cliquez sur **Exécuter**. La valeur **RED** est renvoyée dans le corps de la réponse. 
+5. Pour tester la fonction, sélectionnez **Test** dans le menu supérieur. Sous l’onglet **Entrée**, entrez la valeur `0.2` dans le **Corps**, puis sélectionnez **Exécuter**. La valeur **RED** est renvoyée dans le **contenu de la réponse HTTP** sous l’onglet **Sortie**. 
 
-    ![Testez la fonction dans le portail Azure](./media/functions-twitter-email/07-function-test.png)
+    :::image type="content" source="./media/functions-twitter-email/07-function-test.png" alt-text="Définir les paramètres du proxy":::
 
 Vous disposez maintenant d’une fonction permettant de classer les scores des sentiments. Ensuite, créez une application logique qui intègre votre fonction dans vos API Twitter et Cognitive Services. 
 
@@ -181,7 +182,7 @@ Votre application est maintenant connectée à Twitter. Ensuite, connectez-vous 
 
 2. Dans **Choisir une action**, saisissez **Analyse de texte**, puis cliquez sur l’action **Détecter le sentiment**.
     
-    ![Nouvelle étape, puis Ajouter une action](media/functions-twitter-email/11-detect-sentiment.png)
+    ![Capture d’écran montrant la section « Choisir une action » avec « Analyse de texte » dans la zone de recherche et l’action « Détecter le sentiment » sélectionnée. ](media/functions-twitter-email/11-detect-sentiment.png)
 
 3. Tapez un nom de connexion, comme `MyCognitiveServicesConnection`, collez la clé de votre API Cognitive Services et le point de terminaison Cognitive Services mis de côté dans un éditeur de texte, puis cliquez sur **Créer**.
 
@@ -201,7 +202,7 @@ Maintenant que la détection de sentiment est configurée, vous pouvez ajouter u
   
 4. Sélectionnez l’application de fonction que vous avez créée précédemment.
 
-    ![Sélectionner une fonction](media/functions-twitter-email/15-select-function.png)
+    ![Capture d’écran montrant la section « Choisir une action » avec une application de fonction sélectionnée.](media/functions-twitter-email/15-select-function.png)
 
 5. Sélectionnez la fonction que vous avez créée pour ce didacticiel.
 
@@ -215,7 +216,7 @@ Maintenant que la détection de sentiment est configurée, vous pouvez ajouter u
 
 ## <a name="add-email-notifications"></a>Ajouter des notifications par courrier électronique
 
-La dernière partie du flux de travail consiste à déclencher un courrier électronique lorsque le sentiment est évalué comme _RED_. Cette rubrique utilise un connecteur Outlook.com. Vous pouvez effectuer des étapes similaires pour utiliser un connecteur Gmail ou Office 365 Outlook.   
+La dernière partie du flux de travail consiste à déclencher un courrier électronique lorsque le sentiment est évalué comme _RED_. Cet article utilise un connecteur Outlook.com. Vous pouvez effectuer des étapes similaires pour utiliser un connecteur Gmail ou Office 365 Outlook.   
 
 1. Dans le Concepteur d’applications logiques, cliquez sur **Nouvelle étape** > **Ajouter une condition**. 
 
@@ -227,7 +228,7 @@ La dernière partie du flux de travail consiste à déclencher un courrier élec
 
 3. Dans **SI OUI**, cliquez sur **Ajouter une action**, recherchez `outlook.com`, cliquez sur **Envoyer un e-mail**, puis connectez-vous à votre compte Outlook.com.
 
-    ![Configurez le courrier électronique pour l’action Envoyer un courrier électronique.](media/functions-twitter-email/20-add-outlook.png)
+    ![Capture d’écran montrant la section « IF TRUE » avec « outlook.com » dans la zone de recherche et l’action « Envoyer un e-mail » sélectionnée.](media/functions-twitter-email/20-add-outlook.png)
 
     > [!NOTE]
     > Si vous n’avez pas de compte Outlook.com, vous pouvez choisir un autre connecteur, comme Gmail ou Office 365 Outlook
@@ -303,4 +304,3 @@ Passez au didacticiel suivant pour apprendre à créer une API sans serveur pour
 > [Créer une API sans serveur à l’aide d’Azure Functions](functions-create-serverless-api.md)
 
 Pour plus d’informations sur Logic Apps, voir [Azure Logic Apps](../logic-apps/logic-apps-overview.md).
-

@@ -3,12 +3,12 @@ title: S’authentifier avec un principal de service
 description: Fournir un accès aux images de votre registre de conteneurs privé à l’aide d’un principal du service Azure Active Directory.
 ms.topic: article
 ms.date: 10/04/2019
-ms.openlocfilehash: 37da784c8e95a5f5b924532e4a019552924a1a3f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8d49628576a1c337efaea3e5286fef00e39def17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74455406"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86259137"
 ---
 # <a name="azure-container-registry-authentication-with-service-principals"></a>Authentification Azure Container Registry avec des principaux de service
 
@@ -30,7 +30,7 @@ Par exemple, configurez votre application web pour utiliser un principal de serv
 
 Vous devez utiliser un principal de service pour fournir l’accès au registre dans les **scénarios sans affichage**. Autrement dit, pour toute application, service ou script qui doit envoyer ou extraire des images conteneur de manière automatisée ou sans assistance. Par exemple :
 
-  * *Pull* : déployer des conteneurs à partir d’un registre vers des systèmes d’orchestration, y compris Kubernetes, DC/OS et Docker Swarm. Vous pouvez également procéder à des extractions depuis les registres de conteneurs vers des services Azure connexes, tels que [Azure Kubernetes Service (AKS)](../aks/cluster-container-registry-integration.md), [Azure Container Instances](container-registry-auth-aci.md), [App Service](../app-service/index.yml), [Batch](../batch/index.yml), [Service Fabric](/azure/service-fabric/), etc.
+  * *Pull* : déployer des conteneurs à partir d’un registre vers des systèmes d’orchestration, y compris Kubernetes, DC/OS et Docker Swarm. Vous pouvez également procéder à des extractions depuis les registres de conteneurs vers des services Azure connexes, tels que [Azure Kubernetes Service (AKS)](../aks/cluster-container-registry-integration.md), [Azure Container Instances](container-registry-auth-aci.md), [App Service](../app-service/index.yml), [Batch](../batch/index.yml), [Service Fabric](../service-fabric/index.yml), etc.
 
   * *Push* : générer des images conteneur et les envoyer (push) à un registre en utilisant des solutions d’intégration et de déploiement en continu, comme Azure Pipelines ou Jenkins.
 

@@ -7,12 +7,14 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 09/06/2018
 ms.author: robinsh
-ms.openlocfilehash: c43c142b22709d42416b2dd14dfc78812970916a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+ms.openlocfilehash: 0a54d0c85902915d2ee62acd8a1d38b8db8b221c
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79237393"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92536043"
 ---
 # <a name="create-an-iot-hub-using-the-azure-portal"></a>Création d’un IoT Hub à l’aide du portail Azure
 
@@ -34,19 +36,19 @@ Vous pouvez modifier les paramètres d’un hub IoT existant après sa création
 
 Voici quelques-unes des propriétés que vous pouvez définir pour un hub IoT :
 
-**Tarification et mise à l’échelle** : Vous pouvez utiliser cette propriété pour migrer vers un autre niveau ou pour définir le nombre d’unités IoT Hub. 
+**Tarification et mise à l’échelle**  : Vous pouvez utiliser cette propriété pour migrer vers un autre niveau ou pour définir le nombre d’unités IoT Hub. 
 
-**Surveillance des opérations** : Activez ou désactivez les différentes catégories de surveillance, comme la journalisation pour les événements liés à des messages appareil-à-cloud ou cloud-à-appareil.
+**Surveillance des opérations**  : Activez ou désactivez les différentes catégories de surveillance, comme la journalisation pour les événements liés à des messages appareil-à-cloud ou cloud-à-appareil.
 
-**Filtre IP** : Spécifiez une plage d’adresses IP qui seront acceptées ou rejetées par le hub IoT.
+**Filtre IP**  : Spécifiez une plage d’adresses IP qui seront acceptées ou rejetées par le hub IoT.
 
-**Propriétés** : Fournit la liste des propriétés que vous pouvez copier et utiliser ailleurs, comme l’ID de ressource, le groupe de ressources, l’emplacement, etc.
+**Propriétés**  : Fournit la liste des propriétés que vous pouvez copier et utiliser ailleurs, comme l’ID de ressource, le groupe de ressources, l’emplacement, etc.
 
 ### <a name="shared-access-policies"></a>Stratégies d’accès partagé
 
-Vous pouvez également afficher ou modifier la liste des stratégies d’accès partagé en cliquant sur **Stratégies d’accès partagé** dans la section **Paramètres**. Ces stratégies définissent les autorisations pour que les appareils et les services se connectent au hub IoT. 
+Vous pouvez également afficher ou modifier la liste des stratégies d’accès partagé en cliquant sur **Stratégies d’accès partagé** dans la section **Paramètres** . Ces stratégies définissent les autorisations pour que les appareils et les services se connectent au hub IoT. 
 
-Cliquez sur **Ajouter** pour ouvrir le panneau **Ajouter une stratégie d’accès partagé**.  Vous pouvez entre le nom de la nouvelle stratégie et les autorisations que vous voulez associer à celle-ci, comme illustré dans la figure suivante :
+Cliquez sur **Ajouter** pour ouvrir le panneau **Ajouter une stratégie d’accès partagé** .  Vous pouvez entre le nom de la nouvelle stratégie et les autorisations que vous voulez associer à celle-ci, comme illustré dans la figure suivante :
 
 ![Capture d’écran montrant l’ajout d’une stratégie d’accès partagé](./media/iot-hub-create-through-portal/iot-hub-add-shared-access-policy.png)
 
@@ -72,19 +74,19 @@ Cliquez sur **Routage des messages** sous **Messagerie** pour afficher le volet 
 
 ### <a name="routes"></a>Itinéraires
 
-Routes est le premier onglet du volet Routage des messages. Pour ajouter une nouvelle route, cliquez sur +**Ajouter**. Vous voyez l’écran suivant. 
+Routes est le premier onglet du volet Routage des messages. Pour ajouter une nouvelle route, cliquez sur + **Ajouter** . Vous voyez l’écran suivant. 
 
 ![Capture d’écran montrant l’ajout d’un itinéraire](./media/iot-hub-create-through-portal/iot-hub-add-route-storage-endpoint.png)
 
-Nommez votre hub. Le nom doit être unique au sein de la liste des routes pour ce hub. 
+Nommez votre itinéraire. Le nom de l’itinéraire doit être unique au sein de la liste des routes pour ce hub. 
 
-Pour **Point de terminaison**, vous pouvez en sélectionner un dans la liste déroulante ou en ajouter un nouveau. Dans cet exemple, un compte de stockage et un conteneur sont déjà disponibles. Pour les ajouter comme point de terminaison, cliquez sur +**Ajouter** en regard de la liste déroulante Point de terminaison et sélectionnez **Stockage Blob**. L’écran suivant montre l’endroit où le compte de stockage et le conteneur sont spécifiés.
+Pour **Point de terminaison** , vous pouvez en sélectionner un dans la liste déroulante ou en ajouter un nouveau. Dans cet exemple, un compte de stockage et un conteneur sont déjà disponibles. Pour les ajouter comme point de terminaison, cliquez sur + **Ajouter** en regard de la liste déroulante Point de terminaison et sélectionnez **Stockage Blob** . L’écran suivant montre l’endroit où le compte de stockage et le conteneur sont spécifiés.
 
 ![Capture d’écran montrant l’ajout d’un point de terminaison de stockage pour la règle de routage](./media/iot-hub-create-through-portal/iot-hub-routing-add-storage-endpoint.png)
 
 Cliquez sur **Choisir un conteneur** pour sélectionner le compte de stockage et le conteneur. Une fois que vous avez sélectionné ces champs, vous revenez au volet Point de terminaison. Utilisez les valeurs par défaut pour le reste des champs, puis sélectionnez **Créer** pour créer le point de terminaison pour le compte de stockage et l’ajouter aux règles de routage.
 
-Pour **Source de données**, sélectionnez Messages de télémétrie des appareils. 
+Pour **Source de données** , sélectionnez Messages de télémétrie des appareils. 
 
 Ensuite, ajoutez une requête de routage. Dans cet exemple, les messages qui ont une propriété d’application nommée `level` avec une valeur égale à `critical` sont routés vers le compte de stockage.
 
@@ -94,7 +96,7 @@ Cliquez sur **Enregistrer** pour enregistrer la règle de routage. Vous revenez 
 
 ### <a name="custom-endpoints"></a>Points de terminaison personnalisés
 
-Cliquez sur l’onglet **Points de terminaison personnalisés**. Vous voyez les points de terminaison personnalisés déjà créés. Vous pouvez ajouter ici de nouveaux points de terminaison ou supprimer des points de terminaison existants. 
+Cliquez sur l’onglet **Points de terminaison personnalisés** . Vous voyez les points de terminaison personnalisés déjà créés. Vous pouvez ajouter ici de nouveaux points de terminaison ou supprimer des points de terminaison existants. 
 
 > [!NOTE]
 > Si vous supprimez une route, cela ne supprime pas les points de terminaison affectés à cette route. Pour supprimer un point de terminaison, cliquez sur l’onglet Points de terminaison personnalisés, sélectionnez le point de terminaison que vous voulez supprimer, puis cliquez sur Supprimer.
@@ -110,9 +112,9 @@ Pour voir un exemple complet montrant comment utiliser des points de terminaison
 
 Voici deux façons de rechercher un hub IoT spécifique dans votre abonnement :
 
-1. Si vous connaissez le groupe de ressources auquel appartient le hub IoT, cliquez sur **Groupes de ressources**, puis sélectionnez le groupe de ressources dans la liste. L’écran du groupe de ressources montre toutes les ressources de ce groupe, notamment les hubs IoT. Cliquez sur le hub que vous recherchez.
+1. Si vous connaissez le groupe de ressources auquel appartient le hub IoT, cliquez sur **Groupes de ressources** , puis sélectionnez le groupe de ressources dans la liste. L’écran du groupe de ressources montre toutes les ressources de ce groupe, notamment les hubs IoT. Cliquez sur le hub que vous recherchez.
 
-2. Cliquez sur **Toutes les ressources**. Dans le volet **Toutes les ressources**, une liste déroulante affiche par défaut `All types`. Cliquez sur la liste déroulante et décochez la case `Select all`. Recherchez `IoT Hub` et cochez la case correspondante. Cliquez sur la zone de liste déroulante pour la fermer : les entrées sont alors filtrées, affichant seulement vos hubs IoT.
+2. Cliquez sur **Toutes les ressources** . Dans le volet **Toutes les ressources** , une liste déroulante affiche par défaut `All types`. Cliquez sur la liste déroulante et décochez la case `Select all`. Recherchez `IoT Hub` et cochez la case correspondante. Cliquez sur la zone de liste déroulante pour la fermer : les entrées sont alors filtrées, affichant seulement vos hubs IoT.
 
 ## <a name="delete-the-iot-hub"></a>Supprimez IoT Hub
 
@@ -123,5 +125,4 @@ Pour supprimer un hub IoT, recherchez le hub IoT que vous voulez supprimer, puis
 Suivez ces liens pour en savoir plus sur la gestion de Azure IoT Hub :
 
 * [Routage des messages avec IoT Hub](tutorial-routing.md)
-* [Métriques d’IoT Hub](iot-hub-metrics.md)
-* [Surveillance des opérations](iot-hub-operations-monitoring.md)
+* [Surveiller votre IoT Hub](monitor-iot-hub.md)

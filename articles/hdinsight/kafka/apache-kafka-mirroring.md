@@ -5,19 +5,22 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 11/29/2019
-ms.openlocfilehash: 45977f52226fac0a3e23455ce9457a721947a8cc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4a2be6719fdaaa9dc859df21cc030478e474210
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77425882"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92428251"
 ---
 # <a name="use-mirrormaker-to-replicate-apache-kafka-topics-with-kafka-on-hdinsight"></a>MirrorMaker permet de répliquer des rubriques Apache Kafka avec Kafka sur HDInsight
 
 Découvrez comment utiliser la fonctionnalité de mise en miroir d’Apache Kafka pour répliquer des rubriques sur un cluster secondaire. La mise en miroir peut être exécutée sous la forme d’un processus continu ou être utilisée par intermittence comme une méthode de migration des données d’un cluster à l’autre.
+
+> [!NOTE]
+> Cet article contient des références au terme *liste verte* , un terme que Microsoft n’utilise plus. Lorsque le terme sera supprimé du logiciel, nous le supprimerons de cet article.
 
 Dans cet exemple, la mise en miroir est utilisée pour répliquer des rubriques entre deux clusters HDInsight. Les deux clusters se trouvent dans différents réseaux virtuels dans différents centres de données.
 
@@ -44,11 +47,11 @@ Si vous avez besoin d’effectuer une mise en miroir entre des clusters Kafka su
 
 * **Passerelles** : les réseaux doivent être capables de communiquer au niveau TCP/IP.
 
-* **Adressage du serveur** : Vous pouvez choisir d'adresser vos nœuds de cluster à l’aide de leurs adresses IP ou noms de domaine complets.
+* **Adressage du serveur**  : Vous pouvez choisir d'adresser vos nœuds de cluster à l’aide de leurs adresses IP ou noms de domaine complets.
 
-    * **Adresses IP** : Si vous configurez vos clusters Kafka pour la publication d'adresses IP, vous pouvez configurer la mise en miroir à l'aide des adresses IP des nœuds Broker et Zookeeper.
+    * **Adresses IP**  : Si vous configurez vos clusters Kafka pour la publication d'adresses IP, vous pouvez configurer la mise en miroir à l'aide des adresses IP des nœuds Broker et Zookeeper.
     
-    * **Noms de domaine** : Si vous ne configurez pas vos clusters Kafka pour la publication d’adresses IP, vos clusters doivent pouvoir se connecter entre eux à l’aide de noms de domaine complets (FQDN). Cela implique la configuration d’un serveur DNS (Domain Name System) dans chaque réseau pour l’acheminement des demandes vers les autres réseaux. Lorsque vous créez un réseau virtuel Azure, au lieu d’utiliser le DNS automatique fourni avec le réseau, vous devez spécifier un serveur DNS personnalisé et l’adresse IP du serveur. Après avoir créé le réseau virtuel, vous devez ensuite créer une machine virtuelle Azure qui utilise cette adresse IP, puis y installer et configurer le logiciel DNS.
+    * **Noms de domaine**  : Si vous ne configurez pas vos clusters Kafka pour la publication d’adresses IP, vos clusters doivent pouvoir se connecter entre eux à l’aide de noms de domaine complets (FQDN). Cela implique la configuration d’un serveur DNS (Domain Name System) dans chaque réseau pour l’acheminement des demandes vers les autres réseaux. Lorsque vous créez un réseau virtuel Azure, au lieu d’utiliser le DNS automatique fourni avec le réseau, vous devez spécifier un serveur DNS personnalisé et l’adresse IP du serveur. Après avoir créé le réseau virtuel, vous devez ensuite créer une machine virtuelle Azure qui utilise cette adresse IP, puis y installer et configurer le logiciel DNS.
 
     > [!WARNING]  
     > Créez et configurez le serveur DNS personnalisé avant d’installer HDInsight sur le réseau virtuel. Aucune configuration supplémentaire n’est requise pour HDInsight dans le cadre de l’utilisation du serveur DNS configuré pour le réseau virtuel.
@@ -69,7 +72,7 @@ Cette architecture comporte deux clusters dans différents groupes de ressources
     | kafka-secondary-rg | Centre-Nord des États-Unis |
 
 1. Créez un réseau virtuel **kafka-principal-vnet** dans **kafka-principal-rg**. Conservez les paramètres par défaut.
-1. Créez un réseau virtuel **kafka-secondary-vnet** dans **kafka-secondary-rg**, également avec les paramètres par défaut.
+1. Créez un réseau virtuel **kafka-secondary-vnet** dans **kafka-secondary-rg** , également avec les paramètres par défaut.
 
 1. Créez deux nouveaux clusters Kafka :
 
@@ -82,7 +85,7 @@ Cette architecture comporte deux clusters dans différents groupes de ressources
     1. Sélectionnez le réseau virtuel **kafka-primary-vnet**.
     1. Sélectionnez **Peerings** sous **Paramètres**.
     1. Sélectionnez **Ajouter**.
-    1. Dans l'écran **Ajouter le peering**, entrez les détails comme indiqué dans la capture d’écran ci-dessous.
+    1. Dans l'écran **Ajouter le peering** , entrez les détails comme indiqué dans la capture d’écran ci-dessous.
 
         ![HDInsight Kafka - Ajout de l’appairage de réseau virtuel](./media/apache-kafka-mirroring/hdi-add-vnet-peering.png)
 
@@ -102,7 +105,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
     echo "advertised.listeners=PLAINTEXT://$IP_ADDRESS:9092" >> /usr/hdp/current/kafka-broker/conf/server.properties
     ```
 
-1. Entrez une note dans l'écran **Enregistrer la configuration**, puis cliquez sur **Enregistrer**.
+1. Entrez une note dans l'écran **Enregistrer la configuration** , puis cliquez sur **Enregistrer**.
 1. Si un avertissement de configuration s’affiche, cliquez sur **Continuer**.
 1. Sélectionnez **OK** dans **Enregistrer les modifications de configuration**.
 1. Sélectionnez **Redémarrer** > **Redémarrer tous les éléments affectés** dans la notification **Redémarrage requis**. Sélectionnez **Confirmer le redémarrage**.
@@ -111,18 +114,18 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
 ### <a name="configure-kafka-to-listen-on-all-network-interfaces"></a>Configurez Kafka de manière à écouter sur toutes les interfaces réseau.
     
-1. Restez sur l'onglet **Configurations** sous **Services** > **Kafka**. Dans la section **Kafka Broker**, définissez la propriété **listeners** sur `PLAINTEXT://0.0.0.0:9092`.
+1. Restez sur l'onglet **Configurations** sous **Services** > **Kafka**. Dans la section **Kafka Broker** , définissez la propriété **listeners** sur `PLAINTEXT://0.0.0.0:9092`.
 1. Sélectionnez **Enregistrer**.
-1. Sélectionnez **Redémarrer**, puis **Confirmer le redémarrage**.
+1. Sélectionnez **Redémarrer** , puis **Confirmer le redémarrage**.
 
 ### <a name="record-broker-ip-addresses-and-zookeeper-addresses-for-primary-cluster"></a>Enregistrez les adresses IP Broker et Zookeeper pour le cluster principal.
 
 1. Sélectionnez **Hôtes** dans le tableau de bord Ambari.
-1. Notez les adresses IP Broker et Zookeeper. Les nœuds Broker portent les deux premières lettres du nom d'hôte, **wn**, et les nœuds Zookeeper les deux premières lettres du nom d'hôte **zk**.
+1. Notez les adresses IP Broker et Zookeeper. Les nœuds Broker portent les deux premières lettres du nom d'hôte, **wn** , et les nœuds Zookeeper les deux premières lettres du nom d'hôte **zk**.
 
     ![Apache Ambari - Afficher les adresses IP du nœud](./media/apache-kafka-mirroring/view-node-ip-addresses2.png)
 
-1. Répétez les trois étapes précédentes pour le deuxième cluster **kafka-secondary-cluster** : configurer la publication d’adresses IP, définissez listeners et notez les adresses IP Broker et Zookeeper.
+1. Répétez les trois étapes précédentes pour le deuxième cluster **kafka-secondary-cluster**  : configurer la publication d’adresses IP, définissez listeners et notez les adresses IP Broker et Zookeeper.
 
 ## <a name="create-topics"></a>Création de sujets
 
@@ -157,7 +160,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
     La réponse contient `testtopic`.
 
-1. Utilisez la commande suivante afin d’afficher les informations sur l’hôte Zookeeper pour ce cluster (**principal**) :
+1. Utilisez la commande suivante afin d’afficher les informations sur l’hôte Zookeeper pour ce cluster ( **principal** ) :
 
     ```bash
     echo $PRIMARY_ZKHOSTS
@@ -198,7 +201,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
     Ce fichier détaille les informations de consommateur à utiliser lors de la lecture du cluster principal Kafka. Pour plus d’informations sur la configuration du consommateur, consultez [Consumer Configs](https://kafka.apache.org/documentation#consumerconfigs) (Configurations de consommateur) sur kafka.apache.org.
 
-    Pour enregistrer le fichier, appuyez sur **Ctrl+X**, sur **O**, puis sur **Entrée**.
+    Pour enregistrer le fichier, appuyez sur **Ctrl+X** , sur **O** , puis sur **Entrée**.
 
 1. Avant de configurer le producteur qui communique avec le cluster secondaire, définissez une variable pour les adresses IP Broker du cluster **secondaire**. Utilisez les commandes suivantes pour créer cette variable :
 
@@ -236,7 +239,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
 1. La configuration par défaut pour Kafka sur HDInsight n’autorise pas la création automatique de rubriques. Vous devez utiliser une des options suivantes avant de commencer le processus de mise en miroir :
 
-    * **Créer les rubriques sur le cluster secondaire** : cette option vous permet également de définir le nombre de partitions et le facteur de réplication.
+    * **Créer les rubriques sur le cluster secondaire**  : cette option vous permet également de définir le nombre de partitions et le facteur de réplication.
 
         Vous pouvez créer à l’avance les rubriques avec la commande suivante :
 
@@ -254,13 +257,13 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
         1. Cliquez sur **Services** > **Kafka**. Sélectionnez l’onglet **Configurations** .
         1. Dans le champ __Filter__ (Filtrer), entrez la valeur `auto.create`. Cette option filtre la liste des propriétés et affiche le paramètre `auto.create.topics.enable`.
         1. Définissez la valeur `auto.create.topics.enable` sur true, puis sélectionnez __Save__ (Enregistrer). Ajoutez une note, puis sélectionnez à nouveau __Save__ (Enregistrer).
-        1. Sélectionnez le service __Kafka__, choisissez __Restart__ (Redémarrer), puis __Restart all affected__ (Redémarrer tous les éléments affectés). Lorsque vous y êtes invité, sélectionnez __Confirm Restart All__ (Confirmer le redémarrage).
+        1. Sélectionnez le service __Kafka__ , choisissez __Restart__ (Redémarrer), puis __Restart all affected__ (Redémarrer tous les éléments affectés). Lorsque vous y êtes invité, sélectionnez __Confirm Restart All__ (Confirmer le redémarrage).
 
         ![Kafka - Activer la création automatique des rubriques](./media/apache-kafka-mirroring/kafka-enable-auto-create-topics.png)
 
 ## <a name="start-mirrormaker"></a>Lancement de MirrorMaker
 
-1. À partir de la connexion SSH du cluster **secondaire**, utilisez la commande suivante pour lancer le processus MirrorMaker :
+1. À partir de la connexion SSH du cluster **secondaire** , utilisez la commande suivante pour lancer le processus MirrorMaker :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-run-class.sh kafka.tools.MirrorMaker --consumer.config consumer.properties --producer.config producer.properties --whitelist testtopic --num.streams 4
@@ -277,7 +280,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
     Le consommateur du nœud secondaire attend maintenant de recevoir des messages.
 
-2. À partir de la connexion SSH au cluster **principal**, utilisez la commande suivante pour démarrer un producteur et envoyer des messages à la rubrique :
+2. À partir de la connexion SSH au cluster **principal** , utilisez la commande suivante pour démarrer un producteur et envoyer des messages à la rubrique :
 
     ```bash
     export PRIMARY_BROKERHOSTS=BROKER_IP_ADDRESS1:9092,BROKER_IP_ADDRESS2:9092,BROKER_IP_ADDRESS2:9092
@@ -286,7 +289,7 @@ Configurez la publication d’adresses IP pour permettre à un client de se con
 
      Lorsque vous arrivez sur une ligne vide avec un curseur, tapez quelques messages texte. Les messages sont envoyés à la rubrique sur le cluster **principal**. Lorsque vous avez terminé, utilisez **Ctrl + C** pour terminer le processus de production.
 
-3. À partir de la connexion SSH au cluster **secondaire**, utilisez **Ctrl + C** pour mettre fin au processus MirrorMaker. Plusieurs secondes peuvent être nécessaires pour terminer le processus. Pour vérifier que les messages ont été répliqués vers le cluster secondaire, utilisez la commande suivante :
+3. À partir de la connexion SSH au cluster **secondaire** , utilisez **Ctrl + C** pour mettre fin au processus MirrorMaker. Plusieurs secondes peuvent être nécessaires pour terminer le processus. Pour vérifier que les messages ont été répliqués vers le cluster secondaire, utilisez la commande suivante :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $SECONDARY_ZKHOSTS --topic testtopic --from-beginning

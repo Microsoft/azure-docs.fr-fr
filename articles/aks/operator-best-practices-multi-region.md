@@ -7,16 +7,16 @@ ms.topic: conceptual
 ms.date: 11/28/2018
 ms.author: thfalgou
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 7aa93d8ba21cafddc5511e16fa430b76942b1a6d
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: b53c0002af3680567aabf0955f6bb4e0d99c2ab1
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80668287"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97093432"
 ---
 # <a name="best-practices-for-business-continuity-and-disaster-recovery-in-azure-kubernetes-service-aks"></a>Bonnes pratiques pour la continuité d’activité et la reprise d’activité dans AKS (Azure Kubernetes Services)
 
-Quand vous gérez des clusters dans AKS (Azure Kubernetes Service), le temps de fonctionnement des applications s’avère important. Par défaut, AKS fournit une haute disponibilité en utilisant différents nœuds au sein d'un [groupe de machines virtuelles identiques](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview). Mais ces nœuds multiples ne protègent pas votre système contre une défaillance régionale. Pour optimiser votre temps de fonctionnement, soyez prévoyant pour assurer la continuité de l’activité et faire face à une situation de récupération d’urgence.
+Quand vous gérez des clusters dans AKS (Azure Kubernetes Service), le temps de fonctionnement des applications s’avère important. Par défaut, AKS fournit une haute disponibilité en utilisant différents nœuds au sein d'un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md). Mais ces nœuds multiples ne protègent pas votre système contre une défaillance régionale. Pour optimiser votre temps de fonctionnement, soyez prévoyant pour assurer la continuité de l’activité et faire face à une situation de récupération d’urgence.
 
 Cet article porte essentiellement sur la planification de la continuité d’activité et la récupération d’urgence dans AKS. Vous allez apprendre à effectuer les actions suivantes :
 
@@ -33,8 +33,8 @@ Cet article porte essentiellement sur la planification de la continuité d’act
 
 Un cluster AKS est déployé dans une seule région. Pour protéger votre système contre la défaillance d’une région, déployez votre application sur plusieurs clusters AKS dans différentes régions. Pour savoir à quel emplacement déployer votre cluster AKS, tenez compte des points suivants :
 
-* [**Disponibilité des régions AKS**](https://docs.microsoft.com/azure/aks/quotas-skus-regions#region-availability) : Choisissez des régions proches de vos utilisateurs. AKS s’étend en permanence à de nouvelles régions.
-* [**Régions associées Azure**](https://docs.microsoft.com/azure/best-practices-availability-paired-regions) : Pour votre zone géographique, choisissez deux régions appairées l’une à l’autre. Les régions appairées coordonnent les mises à jour de la plateforme et hiérarchisent les efforts de récupération si nécessaire.
+* [**Disponibilité des régions AKS**](./quotas-skus-regions.md#region-availability) : Choisissez des régions proches de vos utilisateurs. AKS s’étend en permanence à de nouvelles régions.
+* [**Régions associées Azure**](../best-practices-availability-paired-regions.md) : Pour votre zone géographique, choisissez deux régions appairées l’une à l’autre. Les régions appairées coordonnent les mises à jour de la plateforme et hiérarchisent les efforts de récupération si nécessaire.
 * **Disponibilité du service** : Décidez si vos régions appairées doivent avoir un niveau de disponibilité chaud/chaud, chaud/tiède ou chaud/froid. Souhaitez-vous utiliser les deux régions en même temps, avec une région *prête* à commencer à traiter le trafic ? Ou souhaitez-vous une région qui a besoin de temps pour se préparer à assurer cette tâche ?
 
 La disponibilité des régions AKS et les régions appairées sont des questions qui vont de pair. Déployez vos clusters AKS sur des régions appairées qui sont conçues pour gérer ensemble la reprise d’activité. Par exemple, AKS est disponible dans les régions USA Est et USA Ouest. Ces régions sont appairées. Choisissez ces deux régions si vous créez une stratégie AKS de continuité d’activité/récupération d’urgence (BC/DR).
@@ -45,7 +45,7 @@ Quand vous déployez votre application, ajoutez une autre étape à votre pipeli
 
 **Bonne pratique** : Azure Traffic Manager peut diriger les clients vers leur cluster AKS et leur instance d’application les plus proches. Pour optimiser les performances et la redondance, faites transiter l’ensemble du trafic d’application par Traffic Manager avant qu’il parvienne à votre cluster AKS.
 
-Si vous possédez plusieurs clusters AKS dans différentes régions, utilisez Traffic Manager pour contrôler la façon dont le trafic afflue vers les applications qui s’exécutent dans chaque cluster. [Azure Traffic Manager](https://docs.microsoft.com/azure/traffic-manager/) est un équilibreur de charge de trafic DNS qui peut répartir le trafic réseau entre les régions. Utilisez Traffic Manager pour router les utilisateurs selon le temps de réponse des clusters ou en fonction de critères géographiques.
+Si vous possédez plusieurs clusters AKS dans différentes régions, utilisez Traffic Manager pour contrôler la façon dont le trafic afflue vers les applications qui s’exécutent dans chaque cluster. [Azure Traffic Manager](../traffic-manager/index.yml) est un équilibreur de charge de trafic DNS qui peut répartir le trafic réseau entre les régions. Utilisez Traffic Manager pour router les utilisateurs selon le temps de réponse des clusters ou en fonction de critères géographiques.
 
 ![AKS avec Traffic Manager](media/operator-best-practices-bc-dr/aks-azure-traffic-manager.png)
 
@@ -55,15 +55,15 @@ Les clients qui possèdent un seul cluster AKS se connectent généralement à l
 
 Traffic Manager effectue des recherches DNS et retourne le point de terminaison le plus approprié pour un utilisateur. Les profils imbriqués peuvent donner la priorité à un emplacement principal. Par exemple, un utilisateur doit généralement se connecter à sa région géographique la plus proche. Si cette région rencontre un problème, Traffic Manager dirige l’utilisateur vers une région secondaire. Cette approche garantit aux clients qu’ils peuvent se connecter à une instance d’application, même si leur région géographique la plus proche n’est pas disponible.
 
-Pour savoir comment configurer des points de terminaison et le routage, consultez [Configurer la méthode de routage du trafic géographique à l’aide de Traffic Manager](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-configure-geographic-routing-method).
+Pour savoir comment configurer des points de terminaison et le routage, consultez [Configurer la méthode de routage du trafic géographique à l’aide de Traffic Manager](../traffic-manager/traffic-manager-configure-geographic-routing-method.md).
 
-### <a name="layer-7-application-routing-with-azure-front-door-service"></a>Routage d’une application de couche 7 avec Azure Front Door Service
+### <a name="application-routing-with-azure-front-door-service"></a>Routage d’applications avec Azure Front Door Service
 
-Traffic Manager utilise DNS (couche 3) pour former le trafic. [Azure Front Door Service](https://docs.microsoft.com/azure/frontdoor/front-door-overview) propose une option de routage HTTP/HTTPS (couche 7). Les fonctionnalités supplémentaires d'Azure Front Door Service incluent l'arrêt TLS, le domaine personnalisé, le pare-feu d'applications web, la réécriture d'URL et l'affinité de session. Passez en revue les besoins de trafic de votre application pour comprendre la solution qui est la plus adaptée.
+Grâce au protocole anycast basé sur Split TCP, [Azure Front Door Service](../frontdoor/front-door-overview.md) garantit la connexion rapide des utilisateurs finaux au point de présence (POP) Front Door le plus proche. Les fonctionnalités supplémentaires d'Azure Front Door Service incluent l'arrêt TLS, le domaine personnalisé, le pare-feu d'applications web, la réécriture d'URL et l'affinité de session. Passez en revue les besoins de trafic de votre application pour comprendre la solution qui est la plus adaptée.
 
 ### <a name="interconnect-regions-with-global-virtual-network-peering"></a>Interconnecter des régions avec l’appairage de réseau virtuel global
 
-Si les clusters doivent communiquer entre eux, il est possible de connecter les deux réseaux virtuels entre eux via [l’appairage de réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview). Cette technologie interconnecte les réseaux virtuels entre eux pour fournir une bande passante élevée à travers le réseau principal de Microsoft, même entre différentes régions géographiques.
+Si les clusters doivent communiquer entre eux, il est possible de connecter les deux réseaux virtuels entre eux via [l’appairage de réseau virtuel](../virtual-network/virtual-network-peering-overview.md). Cette technologie interconnecte les réseaux virtuels entre eux pour fournir une bande passante élevée à travers le réseau principal de Microsoft, même entre différentes régions géographiques.
 
 Un prérequis pour appairer les réseaux virtuels où des clusters AKS sont en cours d’exécution est d’utiliser le service Load Balancer standard dans votre cluster AKS, de sorte que les services Kubernetes soient accessibles via l’appairage de réseaux virtuels.
 
@@ -83,7 +83,7 @@ Quand vous utilisez la géoréplication Container Registry pour extraire les ima
 * **Plus fiables** : Si une région n’est pas disponible, votre cluster AKS extrait les image auprès d’un registre de conteneurs disponible.
 * **Plus économiques** : Il n’existe aucun frais de sortie de réseau entre les centres de données.
 
-La géoréplication est une fonctionnalité des registres de conteneurs de la référence (SKU) *Premium*. Pour savoir comment configurer la géoréplication, consultez [Géoréplication dans Container Registry](https://docs.microsoft.com/azure/container-registry/container-registry-geo-replication).
+La géoréplication est une fonctionnalité des registres de conteneurs de la référence (SKU) *Premium*. Pour savoir comment configurer la géoréplication, consultez [Géoréplication dans Container Registry](../container-registry/container-registry-geo-replication.md).
 
 ## <a name="remove-service-state-from-inside-containers"></a>Supprimer l’état du service des conteneurs
 
@@ -93,12 +93,12 @@ L’*état du service* correspond aux données en mémoire ou sur disque nécess
 
 L’état peut être externalisé ou colocalisé avec le code qui le manipule. En règle générale, l’état est externalisé au moyen d’une base de données ou d’un autre magasin de données qui s’exécute sur différentes machines du réseau ou en dehors du processus sur la même machine.
 
-Les conteneurs et microservices sont plus résilients quand les processus qui s’y exécutent ne conservent pas l’état. Sachant que les applications contiennent presque toujours un état, utilisez une solution PaaS comme Azure Database pour MySQL, Azure Database pour PostgreSQL ou Azure SQL Database.
+Les conteneurs et microservices sont plus résilients quand les processus qui s’y exécutent ne conservent pas l’état. Sachant que les applications contiennent presque toujours un état, utilisez une solution PaaS comme Azure Cosmos DB, Azure Database pour PostgreSQL, Azure Database pour MySQL ou Azure SQL Database.
 
 Pour créer des applications portables, suivez les recommandations suivantes :
 
 * [The 12 -factor app methodology](https://12factor.net/) (méthodologie des applications à 12 facteurs)
-* [Exécuter une application web dans plusieurs régions Azure](https://docs.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region)
+* [Exécuter une application web dans plusieurs régions Azure](/azure/architecture/reference-architectures/app-service-web-app/multi-region)
 
 ## <a name="create-a-storage-migration-plan"></a>Créer un plan de migration de stockage
 
@@ -113,7 +113,7 @@ Vos applications peuvent utiliser Stockage Azure pour leurs données. Parce que 
 
 Vos applications peuvent nécessiter un stockage persistant même après la suppression d’un pod. Dans Kubernetes, vous pouvez utiliser des volumes persistants pour conserver le stockage de données. Ces volumes persistants sont montés sur une machine virtuelle de nœud, puis exposés aux pods. Les volumes persistants suivent les pods même si ceux-ci sont déplacés vers un autre nœud au sein du même cluster.
 
-La stratégie de réplication que vous utilisez dépend de votre solution de stockage. Les solutions de stockage courantes comme [Gluster](https://docs.gluster.org/en/latest/Administrator%20Guide/Geo%20Replication/), [Ceph](https://docs.ceph.com/docs/master/cephfs/disaster-recovery/), [Rook](https://rook.io/docs/rook/v1.2/ceph-disaster-recovery.html) et [Portworx](https://docs.portworx.com/scheduler/kubernetes/going-production-with-k8s.html#disaster-recovery-with-cloudsnaps) fournissent toutes leurs propres recommandations concernant la récupération d’urgence et la réplication.
+La stratégie de réplication que vous utilisez dépend de votre solution de stockage. Les solutions de stockage courantes comme [Gluster](https://docs.gluster.org/en/latest/Administrator-Guide/Geo-Replication/), [Ceph](https://docs.ceph.com/docs/master/cephfs/disaster-recovery/), [Rook](https://rook.io/docs/rook/v1.2/ceph-disaster-recovery.html) et [Portworx](https://docs.portworx.com/scheduler/kubernetes/going-production-with-k8s.html#disaster-recovery-with-cloudsnaps) fournissent toutes leurs propres recommandations concernant la récupération d’urgence et la réplication.
 
 La stratégie classique consiste à fournir un point de stockage commun où les applications peuvent écrire leurs données. Ces données sont ensuite répliquées entre les régions, puis rendues accessibles localement.
 
@@ -122,7 +122,7 @@ La stratégie classique consiste à fournir un point de stockage commun où les 
 Si vous utilisez Azure Managed Disks, vous pouvez choisir des solutions de réplication et de récupération d’urgence comme :
 
 * [Velero sur Azure](https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure/blob/master/README.md)
-* [Azure Site Recovery](https://azure.microsoft.com/blog/asr-managed-disks-between-azure-regions/)
+* [Azure Backup](../backup/backup-overview.md)
 
 ### <a name="application-based-asynchronous-replication"></a>Réplication asynchrone basée sur l’application
 

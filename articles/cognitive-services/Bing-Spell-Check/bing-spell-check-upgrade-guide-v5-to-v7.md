@@ -1,7 +1,7 @@
 ---
 title: Mise à niveau de l’API Vérification orthographique Bing version 5 vers version 7
 titleSuffix: Azure Cognitive Services
-description: Permet d’identifier les parties de votre application que vous devez mettre à jour pour utiliser la version 7.
+description: Identifie les parties de votre application Vérification orthographique Bing que vous devez mettre à jour pour utiliser la version 7.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,14 +10,19 @@ ms.subservice: bing-spell-check
 ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: scottwhi
-ms.openlocfilehash: 545772a28a67310b12eb55cd1fb14e8d12a95a58
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77910c964ed45c012163e27ca58b092e1972d114
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68500820"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349586"
 ---
 # <a name="spell-check-api-upgrade-guide"></a>Guide de mise à niveau de l’API Vérification orthographique
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Ce guide de mise à niveau identifie les changements entre la version 5 et la version 7 de l’API Vérification orthographique Bing. Utilisez-le pour identifier les parties de votre application que vous avez besoin de mettre à jour pour utiliser la version 7.
 
@@ -72,4 +77,4 @@ Bloqué|InvalidRequest.Blocked
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Conditions d’utilisation et d’affichage](./UseAndDisplayRequirements.md)
+> [Conditions d’utilisation et d’affichage](../bing-web-search/use-display-requirements.md)

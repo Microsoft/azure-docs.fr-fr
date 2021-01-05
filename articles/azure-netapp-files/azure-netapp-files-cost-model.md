@@ -12,18 +12,20 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 05/01/2019
+ms.date: 09/22/2020
 ms.author: b-juche
-ms.openlocfilehash: aea783b818550b8219e1a0498256280f61f678e1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9c4eebae6909c9ef0969bc85bcb9a985db2a7c02
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70995112"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91325604"
 ---
 # <a name="cost-model-for-azure-netapp-files"></a>Modèle de coût pour Azure NetApp Files 
 
-Une bonne compréhension du modèle de coût d’Azure NetApp Files vous aidera à gérer vos dépenses liées à ce service.
+Une bonne compréhension du modèle de coût d’Azure NetApp Files vous aidera à gérer vos dépenses liées à ce service. 
+
+Pour connaître le modèle de coût spécifique à la réplication interrégion, consultez la section [Modèle de coût pour la réplication interrégion](cross-region-replication-introduction.md#cost-model-for-cross-region-replication).
 
 ## <a name="calculation-of-capacity-consumption"></a>Calcul de la consommation de capacité
 
@@ -51,6 +53,8 @@ Le diagramme ci-dessous illustre ces concepts.
 
 Lorsque la capacité totale utilisée d’un pool dépasse la capacité approvisionnée pour ce pool, les écritures de données restent autorisées.  Après la période de grâce (d’une heure), si la capacité utilisée du pool dépasse encore la capacité approvisionnée pour ce pool, la taille du pool est automatiquement augmentée par incréments de 1 Tio jusqu’à ce que la capacité approvisionnée soit supérieure à la capacité totale utilisée.  Par exemple, dans l’illustration ci-dessus, si le volume 3 continue de croître et que la consommation réelle atteint 1,2 Tio, après la période de grâce, le pool est automatiquement redimensionné à 5 Tio.  La capacité approvisionnée pour le pool (5 Tio) dépasse donc la capacité utilisée (4,2 Tio).  
 
+Bien que la taille du pool de capacité augmente automatiquement pour répondre à la demande du volume, elle n’est pas automatiquement réduite quand la taille du volume diminue. Si vous souhaitez réduire la taille du pool de capacité après une diminution de la taille du volume (par exemple, après le nettoyage des données d’un volume), vous devez _manuellement_ réduire la taille du pool de capacité.
+
 ## <a name="manual-changes-of-the-pool-size"></a>Modifications manuelles de la taille d’un pool  
 
 Vous pouvez augmenter ou diminuer manuellement la taille d’un pool. Toutefois, les contraintes suivantes s’appliquent :
@@ -59,6 +63,7 @@ Vous pouvez augmenter ou diminuer manuellement la taille d’un pool. Toutefois,
 * Incrément de 1 Tio après l’achat initial de 4 Tio minimum
 * Incrément de facturation d’une heure minimum
 * Impossibilité d’abaisser la taille de pool approvisionnée à une valeur inférieure à la capacité totale utilisée dans le pool
+* Pour les pools de capacité avec Qualité de service manuelle, la taille du pool ne peut être réduite que si la taille et le niveau de service fournissent plus de débit que le débit réellement attribué à tous les volumes.
 
 ## <a name="behavior-of-maximum-size-pool-overage"></a>Comportement en cas de dépassement de la taille maximale d’un pool   
 
@@ -92,3 +97,4 @@ La consommation de capacité des captures instantanées dans Azure NetApp Files 
 * [Tarification Azure NetApp Files](https://azure.microsoft.com/pricing/details/storage/netapp/)
 * [Niveaux de service pour Azure NetApp Files](azure-netapp-files-service-levels.md)
 * [Limites des ressources pour Azure NetApp Files](azure-netapp-files-resource-limits.md)
+* [Modèle de coût pour la réplication inter-région](cross-region-replication-introduction.md#cost-model-for-cross-region-replication)

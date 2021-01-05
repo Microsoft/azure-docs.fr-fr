@@ -6,17 +6,17 @@ ms.author: robb
 ms.topic: conceptual
 ms.date: 03/09/2020
 ms.subservice: alerts
-ms.openlocfilehash: 5a868167f80aaa735e4fbeab32fd1d308dd6da1f
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 4bb44b7133e5644991d7413f4f824a8b55ffdd75
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114432"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108369"
 ---
 # <a name="create-a-classic-metric-alert-with-a-resource-manager-template"></a>Créer une alerte de mesure classique avec un modèle Resource Manager
+
 > [!WARNING]
-> 
-> Cet article décrit la création **d’alertes de métriques classiques** à l’aide de modèles Resource Manager. Les alertes classiques ont été mises hors service en août 2019 et seront totalement dépréciées en juin 2020. Vous ne pouvez pas créer de nouvelles alertes publiques classiques Azure. Certaines versions régionales d’Azure continuent de proposer cette option, mais nous vous conseillons de créer [des alertes de métriques plus récentes](../../azure-monitor/platform/alerts-metric-near-real-time.md) à l’aide de modèles, si possible. [Cet article](alerts-metric-create-templates.md) fournit des informations détaillées.
+> Cet article décrit comment créer des alertes de métriques classiques plus anciennes. Azure Monitor prend désormais en charge de [nouvelles alertes de métrique quasi en temps réel et une nouvelle expérience d’alertes](./alerts-overview.md). Les alertes classiques ne sont [mises hors service](./monitoring-classic-retirement.md), bien qu’elles soient toujours utilisées pour les ressources qui ne prennent pas encore en charge les nouvelles alertes.
 >
 
 Cet article explique comment vous pouvez utiliser un [modèle Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md) pour configurer les alertes de mesures classiques Azure. Cela vous permet de configurer automatiquement des alertes sur vos ressources lorsqu’elles sont créées pour vous assurer que toutes les ressources sont analysées correctement.
@@ -176,7 +176,7 @@ Pour créer une alerte à l’aide d’un modèle Resource Manager, vous créez 
 }
 ```
 
-Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](https://msdn.microsoft.com/library/azure/dn933805.aspx).
+Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](/rest/api/monitor/alertrules).
 
 ## <a name="resource-manager-template-for-a-resource-with-a-classic-metric-alert"></a>Modèle Resource Manager pour une ressource avec une alerte de métrique classique
 Une alerte sur un modèle Resource Manager est le plus souvent utile lors de la création d’une alerte pendant la création d’une ressource. Par exemple, vous pourriez souhaiter vous assurer qu’une règle « processeur > 80 % » est définie chaque fois que vous déployez une machine virtuelle. Pour ce faire, vous ajoutez la règle d’alerte en tant que ressource dans le tableau des ressources pour votre modèle de machine virtuelle et ajoutez une dépendance à l’aide de la propriété `dependsOn` de l’ID de ressource de machine virtuelle. Voici un exemple complet qui crée une machine virtuelle Windows et ajoute une alerte qui avertit les administrateurs d’abonnement lorsque l’utilisation du processeur dépasse 80 %.
@@ -400,6 +400,5 @@ Une alerte sur un modèle Resource Manager est le plus souvent utile lors de la 
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [En savoir plus sur les alertes](alerts-overview.md)
-* [Ajout de paramètres de diagnostic](../../azure-monitor/platform/diagnostic-settings-template.md) à votre modèle Resource Manager
+* [Ajout de paramètres de diagnostic](../samples/resource-manager-diagnostic-settings.md) à votre modèle Resource Manager
 * Pour les propriétés et la syntaxe JSON, consultez la référence de modèle [Microsoft.Insights/alertrules](/azure/templates/microsoft.insights/alertrules).
-

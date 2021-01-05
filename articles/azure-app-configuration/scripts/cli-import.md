@@ -3,18 +3,19 @@ title: Exemple de script Azure CLI - Importer dans un magasin App Configuratio
 titleSuffix: Azure App Configuration
 description: Utiliser un script Azure CLI – Importation de la configuration dans Azure App Configuration
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.devlang: azurecli
 ms.topic: sample
 ms.date: 02/19/2020
-ms.author: lcozzens
-ms.openlocfilehash: 71d6aafa82f647b9c6164ee9a06b43ed7e9a66af
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: alkemper
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 2a8bd22629bf0aa269125187a77710f6dc9fd93e
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77523593"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96931307"
 ---
 # <a name="import-to-an-azure-app-configuration-store"></a>Importer vers un magasin Azure App Configuration
 
@@ -22,9 +23,9 @@ Cet exemple de script importe des paramètres de paires clé-valeur dans un maga
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande Azure localement, vous devez exécuter Azure CLI version 2.0 ou ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Pour installer ou mettre à niveau Azure CLI, consultez [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

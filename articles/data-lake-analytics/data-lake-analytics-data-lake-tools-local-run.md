@@ -1,21 +1,18 @@
 ---
 title: Exécuter des scripts U-SQL Azure Data Lake sur votre ordinateur local
 description: Découvrez comment utiliser Azure Data Lake Tools pour Visual Studio pour exécuter des travaux U-SQL sur votre ordinateur local.
-services: data-lake-analytics
-author: yanancai
-ms.author: yanacai
-ms.reviewer: jasonwhowell
-ms.assetid: 66dd58b1-0b28-46d1-aaae-43ee2739ae0a
+author: liudan66
+ms.author: liud
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
-ms.topic: conceptual
-ms.workload: big-data
+ms.topic: how-to
 ms.date: 07/03/2018
-ms.openlocfilehash: 42e58125fcbc3ab411c0d7503c42c14c28178428
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f9410cc91174420662bb5efc67c8904b5d5e647
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "62113933"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018985"
 ---
 # <a name="run-u-sql-scripts-on-your-local-machine"></a>Exécuter des scripts U-SQL sur votre ordinateur local
 
@@ -57,7 +54,7 @@ Azure Data Lake Tools pour Visual Studio comprend un moteur d’exécution local
  
 ## <a name="local-runs-with-a-local-machine-account"></a>Exécutions locales avec un compte Local-machine
 
-Le compte **Local-machine** est un compte de calcul local partagé. Il comprend un seul dossier racine de données local qui joue le rôle de compte de magasin local. Par défaut, le dossier racine de données se trouve à l’emplacement **C:\Users\<nom_utilisateur>\AppData\Local\USQLDataRoot**. Il est également configurable via **Outils** > **Data Lake** > **Options et paramètres**.
+Le compte **Local-machine** est un compte de calcul local partagé. Il comprend un seul dossier racine de données local qui joue le rôle de compte de magasin local. Par défaut, le dossier racine de données se trouve à l’emplacement **C:\Users\<username>\AppData\Local\USQLDataRoot**. Il est également configurable via **Outils** > **Data Lake** > **Options et paramètres**.
 
 ![Configurer un dossier racine de données local](./media/data-lake-analytics-data-lake-tools-local-run/data-lake-tools-configure-local-data-root.png)
   

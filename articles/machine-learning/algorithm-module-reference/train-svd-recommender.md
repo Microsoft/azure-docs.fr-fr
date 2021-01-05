@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/22/2020
-ms.openlocfilehash: 417ef716c391126982809574fc16f6681115cac3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a5740e851fbd8f7ba82e179f7e5299d6c7090596
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477406"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90890237"
 ---
 # <a name="train-svd-recommender"></a>Entraîner le générateur de recommandations SVD
 
-Cet article décrit comment utiliser le module Entraîner le générateur de recommandations SVD dans le concepteur Azure Machine Learning (préversion). Utilisez ce module pour entraîner un modèle de recommandation basé sur l’algorithme SVD (décomposition à valeur unique).  
+Cet article décrit comment utiliser le module Entraîner le générateur de recommandations SVD dans le concepteur Azure Machine Learning. Utilisez ce module pour entraîner un modèle de recommandation basé sur l’algorithme SVD (décomposition à valeur unique).  
 
 Le module Entraîner le générateur de recommandations SVD lit un jeu de données de triplets utilisateur-élément-notation. Il retourne un générateur de recommandations SVD formé. Vous pouvez ensuite utiliser le modèle formé pour prédire des évaluations ou générer des recommandations à l’aide du module [Noter le générateur de recommandations SVD](score-svd-recommender.md).  
 

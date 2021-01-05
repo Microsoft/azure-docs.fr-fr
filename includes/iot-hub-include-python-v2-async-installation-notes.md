@@ -9,10 +9,10 @@ ms.date: 03/30/2020
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: dcc34123731a3c60b4e76c9180c2e5c2a7c56b92
-ms.sourcegitcommit: c5661c5cab5f6f13b19ce5203ac2159883b30c0e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80529281"
 ---
 * Un compte Azure actif. (Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes seulement.)

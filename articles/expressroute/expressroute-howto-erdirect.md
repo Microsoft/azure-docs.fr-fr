@@ -1,22 +1,22 @@
 ---
 title: 'Azure ExpressRoute : Configurer ExpressRoute Direct'
-description: Cette page vous permet de configurer ExpressRoute Direct.
+description: Découvrez comment utiliser Azure PowerShell pour configurer Azure ExpressRoute Direct en vue de vous connecter directement au réseau mondial Microsoft.
 services: expressroute
-author: jaredr80
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
-ms.date: 01/22/2020
-ms.author: jaredro
-ms.openlocfilehash: 2722a852b1119ef619bc414bce5cb3a8ff6f8f00
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 09/28/2020
+ms.author: duau
+ms.openlocfilehash: a450c4057b4639206fd1db4b7f44d27c69441f7f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77031610"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91569844"
 ---
 # <a name="how-to-configure-expressroute-direct"></a>Comment configurer ExpressRoute Direct
 
-ExpressRoute Direct vous offre la possibilité de vous connecter directement au réseau mondial Microsoft à partir d’emplacements de peering qui sont distribués stratégiquement dans le monde entier. Pour plus d’informations, consultez [A propos d’ExpressRoute Direct](expressroute-erdirect-about.md).
+ExpressRoute Direct vous offre la possibilité de vous connecter directement au réseau mondial Microsoft à partir de localisations de peering qui sont réparties stratégiquement dans le monde. Pour plus d’informations, consultez [A propos d’ExpressRoute Direct](expressroute-erdirect-about.md).
 
 ## <a name="create-the-resource"></a><a name="resources"></a>Créer la ressource
 
@@ -155,9 +155,22 @@ ExpressRoute Direct vous offre la possibilité de vous connecter directement au 
    Circuits                   : []
    ```
 
-## <a name="change-admin-state-of-links"></a><a name="state"></a>Changer l’état Administrateur de liens
+## <a name="generate-the-letter-of-authorization-loa"></a><a name="authorization"></a>Générer la lettre d’autorisation
 
-  Ce processus doit être utilisé pour effectuer un test de la couche 1, en s’assurant que chaque connexion croisée est correctement reliée dans chaque routeur principal et secondaire.
+Référencez la ressource ExpressRoute Direct récemment créée, entrez le nom du client pour lequel écrire la lettre d’autorisation (facultatif), puis définissez un emplacement de fichier pour stocker le document. Si aucun chemin de fichier n’est référencé, le document est téléchargé dans le répertoire actif.
+
+  ```powershell 
+   New-AzExpressRoutePortLOA -ExpressRoutePort $ERDirect -CustomerName TestCustomerName -Destination "C:\Users\SampleUser\Downloads" 
+   ```
+ **Exemple de sortie**
+
+   ```powershell
+   Written Letter of Authorization To: C:\Users\SampleUser\Downloads\LOA.pdf
+   ```
+
+## <a name="change-admin-state-of-links"></a><a name="state"></a>Changer l’état Administrateur de liens
+   
+Ce processus doit être utilisé pour effectuer un test de la couche 1, en s’assurant que chaque connexion croisée est correctement reliée dans chaque routeur principal et secondaire.
 1. Obtenez des détails sur ExpressRoute Direct.
 
    ```powershell
@@ -227,13 +240,13 @@ ExpressRoute Direct vous offre la possibilité de vous connecter directement au 
 
 ## <a name="create-a-circuit"></a><a name="circuit"></a>Créer un circuit
 
-Par défaut, vous pouvez créer 10 circuits dans l’abonnement où se trouve la ressource ExpressRoute Direct. Ce nombre peut être augmenté par le support. Vous êtes responsable du suivi de la bande passante approvisionnée et utilisée. La bande passante approvisionnée équivaut à la somme de la bande passante de tous les circuits sur la ressource ExpressRoute Direct et la bande passante utilisée équivaut à l’utilisation physique des interfaces physiques sous-jacentes.
+Par défaut, vous pouvez créer 10 circuits dans l’abonnement où se trouve la ressource ExpressRoute Direct. Cette limite peut être augmentée par le support. Vous êtes responsable du suivi de la bande passante approvisionnée et utilisée. La bande passante approvisionnée équivaut à la somme de la bande passante de tous les circuits sur la ressource ExpressRoute Direct et la bande passante utilisée équivaut à l’utilisation physique des interfaces physiques sous-jacentes.
 
-D’autres bandes passantes de circuit peuvent être utilisées sur ExpressRoute Direct, uniquement pour prendre en charge les scénarios décrits ci-dessus. Ces règles sont les suivantes : 40 Gbps et 100 Gbps.
+D’autres bandes passantes de circuit peuvent être utilisées sur ExpressRoute Direct, uniquement pour prendre en charge les scénarios décrits ci-dessus. Les bandes passantes sont de 40 Gbits/s et de 100 Gbits/s.
 
-La valeur du paramètre **SkuTier** peut être Local, Standard ou Premium.
+La valeur de **SkuTier** peut être Local, Standard ou Premium.
 
-Le paramètre **SkuFamily** ne peut avoir que la valeur MeteredData, car un nombre illimité n’est pas possible sur ExpressRoute Direct.
+**SkuFamily** peut uniquement être MeteredData. Un nombre illimité n’est pas pris en charge sur ExpressRoute Direct.
 
 Créez un circuit sur la ressource ExpressRoute Direct.
 

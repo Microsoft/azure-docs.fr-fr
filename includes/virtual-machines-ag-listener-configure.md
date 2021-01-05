@@ -4,12 +4,12 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: cynthn
-ms.openlocfilehash: 73ba78eca710f0b98b2a209494519cb8003e554b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd635d4c0563c35979f8d85c33dfbde35f05f9e6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75466744"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91401027"
 ---
 L’écouteur de groupe de disponibilité est une adresse IP et un nom réseau sur lesquels le groupe de disponibilité de SQL Server écoute. Pour créer l’écouteur de groupe de disponibilité, procédez comme suit :
 
@@ -30,7 +30,7 @@ L’écouteur de groupe de disponibilité est une adresse IP et un nom réseau s
 
     b. Dans le volet **Rôles**, cliquez avec le bouton droit sur le nom du groupe de disponibilité, puis sélectionnez **Ajouter une ressource** > **Point d’accès client**.
 
-   ![Point d’accès client](./media/virtual-machines-ag-listener-configure/92-addclientaccesspoint.png)
+   ![Capture d’écran montrant l’option de menu Point d’accès client.](./media/virtual-machines-ag-listener-configure/92-addclientaccesspoint.png)
 
     c. Dans la zone **Nom**, créez un nom pour ce nouvel écouteur. 
    Le nom du nouvel écouteur est le nom réseau que les applications utilisent pour se connecter aux bases de données dans le groupe de disponibilité de SQL Server.
@@ -50,7 +50,7 @@ L’écouteur de groupe de disponibilité est une adresse IP et un nom réseau s
 
     c. Sous **Adresse IP**, cliquez sur **Adresse IP statique**. Pour l’adresse IP, utilisez l’adresse que vous avez définie pour l’équilibreur de charge sur le portail Azure.
 
-   ![Ressource IP](./media/virtual-machines-ag-listener-configure/96-ipresource.png) 
+   ![Capture d’écran montrant où vous définissez l’adresse IP.](./media/virtual-machines-ag-listener-configure/96-ipresource.png) 
 
     <!-----------------------I don't see this option on server 2016
     1. Disable NetBIOS for this address and click **OK**. Repeat this step for each IP resource if your solution spans multiple Azure VNets. 
@@ -64,7 +64,7 @@ L’écouteur de groupe de disponibilité est une adresse IP et un nom réseau s
 
     c. Dans l’onglet Dépendances, ajoutez le nom de la ressource du point d’accès client (écouteur).
 
-   ![Ressource IP](./media/virtual-machines-ag-listener-configure/97-propertiesdependencies.png) 
+   ![Capture d’écran montrant où ajouter le nom sous l’onglet Dépendances.](./media/virtual-machines-ag-listener-configure/97-propertiesdependencies.png) 
 
     d. Cliquez sur **OK**.
 
@@ -74,7 +74,7 @@ L’écouteur de groupe de disponibilité est une adresse IP et un nom réseau s
 
     b. Dans l’onglet **Ressources**, cliquez avec le bouton droit sur la ressource du point d’accès client sous **Nom du serveur**, puis cliquez sur **Propriétés**. 
 
-   ![Ressource IP](./media/virtual-machines-ag-listener-configure/98-dependencies.png) 
+   ![Capture d’écran montrant l’option de menu Propriétés pour le nom du serveur.](./media/virtual-machines-ag-listener-configure/98-dependencies.png) 
 
     c. Cliquez sur l'onglet **Dépendances** . Vérifiez que l’adresse IP est une dépendance. Si tel n’est pas le cas, définissez une dépendance sur l’adresse IP. Si plusieurs ressources sont répertoriées, vérifiez que les adresses IP ont des dépendances OR (et non des dépendances AND). Cliquez sur **OK**. 
 

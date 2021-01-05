@@ -1,24 +1,25 @@
 ---
-title: Se connecter avec VSTS
-description: Interrogez Azure Synapse Analytics avec Visual Studio.
+title: Se connecter à un pool SQL dédié (anciennement SQL DW) avec VSTS
+description: Interrogez un pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics avec Visual Studio.
 services: synapse-analytics
 author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 08/15/2019
 ms.author: kevin
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 444cb2c8378ad873beb61116c5c4387ad3c59761
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: c55f8483ba54ecf9778693b364603d642ddb3deb
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200354"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452317"
 ---
-# <a name="connect-to-azure-synapse-analytics-with-visual-studio-and-ssdt"></a>Se connecter à Azure Synapse Analytics avec Visual Studio et SSDT
+# <a name="connect-to-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics-with-visual-studio-and-ssdt"></a>Se connecter à un pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics avec Visual Studio et SSDT
+
 > [!div class="op_single_selector"]
 > * [Azure Data Studio](../sql/get-started-azure-data-studio.md)
 > * [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md)
@@ -28,16 +29,16 @@ ms.locfileid: "83200354"
 > 
 > 
 
-Utilisez Visual Studio pour interroger un pool SQL dans Azure Synapse en seulement quelques minutes. Cette méthode utilise l’extension SQL Server Data Tools (SSDT) dans Visual Studio 2019. 
+Utilisez Visual Studio pour interroger un pool SQL dédié (anciennement SQL DW) dans Azure Synapse en seulement quelques minutes. Cette méthode utilise l’extension SQL Server Data Tools (SSDT) dans Visual Studio 2019. 
 
 ## <a name="prerequisites"></a>Prérequis
 Pour utiliser ce didacticiel, vous avez besoin des éléments suivants :
 
-* Un pool SQL existant. Pour en créer un, consultez la page [Créer un pool SQL](create-data-warehouse-portal.md).
+* Un pool SQL dédié existant (anciennement SQL DW). Pour en créer un, consultez [Créer un pool SQL dédié (anciennement SQL DW)](create-data-warehouse-portal.md)
 * SSDT pour Visual Studio. Si vous avez Visual Studio, vous disposez probablement déjà de SSDT pour Visual Studio. Pour obtenir des instructions et des options d’installation, consultez [Installation de Visual Studio et/ou SSDT](sql-data-warehouse-install-visual-studio.md).
-* Le nom complet du serveur SQL. Pour obtenir ces informations, consultez [Se connecter à un pool SQL](../sql/connect-overview.md).
+* Le nom complet du serveur SQL. Pour obtenir ces informations, consultez [Se connecter à un pool SQL dédié (anciennement SQL DW)](sql-data-warehouse-connect-overview.md).
 
-## <a name="1-connect-to-your-sql-pool"></a>1. Vous connecter à votre pool SQL
+## <a name="1-connect-to-your-dedicated-sql-pool-formerly-sql-dw"></a>1. Se connecter au pool SQL dédié (anciennement SQL DW)
 1. Ouvrez Visual Studio 2019.
 2. Ouvrez l'Explorateur d’objets SQL Server en sélectionnant **Afficher** > **Explorateur d’objets SQL Server**.
    
@@ -79,4 +80,4 @@ Maintenant qu’une connexion à votre base de données a été établie, passon
 ## <a name="next-steps"></a>Étapes suivantes
 Maintenant que vous pouvez vous connecter et exécuter des requêtes, essayez de [visualiser les données avec Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md).
 
-Pour configurer votre environnement pour l’authentification Azure Active Directory, consultez [S'authentifier auprès d'un pool SQL](sql-data-warehouse-authentication.md).
+Pour configurer votre environnement pour l’authentification Azure Active Directory, consultez [S’authentifier auprès d’un pool SQL dédié (anciennement SQL DW)](sql-data-warehouse-authentication.md).

@@ -3,25 +3,25 @@ title: Invite de consentement inattendue lors de la connexion à une application
 description: Procédure de dépannage à suivre quand un utilisateur voit une invite de consentement inattendue pour une application intégrée à Azure AD
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.assetid: ''
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 07/11/2017
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 83d043ecef152f977437e21e2caec40d1c40ce0d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa74424dddd7577eb942f72f038f5bd56854abac
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65781146"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94648189"
 ---
 # <a name="unexpected-consent-prompt-when-signing-in-to-an-application"></a>Invite de consentement inattendue lors de la connexion à une application
 
@@ -39,7 +39,7 @@ Divers scénarios entraînent l’affichage d’invites supplémentaires :
 
 * L’utilisateur ayant initialement donné son consentement à l’application était un administrateur, mais il n’a pas donné son consentement au nom de toute l’organisation.
 
-* L’application utilise le [consentement incrémentiel et dynamique](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-compare#incremental-and-dynamic-consent) pour demander des autorisations supplémentaires après le consentement initial. Ce cas de figure se présente souvent quand les fonctionnalités facultatives d’une application nécessitent des autorisations au-delà de celles exigées pour les fonctionnalités de base.
+* L’application utilise le [consentement incrémentiel et dynamique](../azuread-dev/azure-ad-endpoint-comparison.md#incremental-and-dynamic-consent) pour demander des autorisations supplémentaires après le consentement initial. Ce cas de figure se présente souvent quand les fonctionnalités facultatives d’une application nécessitent des autorisations au-delà de celles exigées pour les fonctionnalités de base.
 
 * Le consentement, bien qu’initialement accordé, a été révoqué.
 
@@ -47,8 +47,6 @@ Divers scénarios entraînent l’affichage d’invites supplémentaires :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
--   [Applications, autorisations et consentement dans Azure Active Directory (point de terminaison v1.0)](https://docs.microsoft.com/azure/active-directory/active-directory-apps-permissions-consent)
+-   [Applications, autorisations et consentement dans Azure Active Directory (point de terminaison v1.0)](../develop/quickstart-register-app.md)
 
--   [Étendues, autorisations et consentement dans Azure Active Directory (point de terminaison v2.0)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)
-
-
+-   [Étendues, autorisations et consentement dans Azure Active Directory (point de terminaison v2.0)](../develop/v2-permissions-and-consent.md)

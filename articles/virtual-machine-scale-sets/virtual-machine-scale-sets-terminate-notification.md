@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 02/26/2020
 ms.reviewer: jushiman
-ms.custom: avverma
-ms.openlocfilehash: 695fd03d7c1856ad39b7672d826f85bc4c68a99c
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: avverma, devx-track-azurecli
+ms.openlocfilehash: c4d6de1b3406e6d82bdac5ff9b5c72a2286da988
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125177"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747748"
 ---
 # <a name="terminate-notification-for-azure-virtual-machine-scale-set-instances"></a>Notification d’arrêt des instances de groupe de machines virtuelles identiques Azure
 Les instances de groupe identique peuvent choisir de recevoir des notifications d’arrêt de l’instance et de configurer un délai d’attente prédéfini pour l’opération d’arrêt. La notification d’arrêt est envoyée par le biais d’Azure Metadata Service – [Scheduled Events](../virtual-machines/windows/scheduled-events.md), qui fournit des notifications et un report des opérations ayant un impact, telles que le redémarrage et le redéploiement. La solution ajoute un autre événement (Terminate) à la liste de Scheduled Events, et le délai associé à l’événement d’arrêt dépend de la limite de délai spécifiée par les utilisateurs dans leurs configurations de modèle de groupe identique.
@@ -28,13 +28,13 @@ Il existe plusieurs façons d’activer les notifications d’arrêt sur vos ins
 
 Les étapes suivantes permettent de mettre fin à une notification lors de la création d’un groupe identique. 
 
-1. Accédez à **Groupe de machines virtuelles identiques**.
+1. Accédez à **Groupe de machines virtuelles identiques** .
 1. Sélectionnez **+ Ajouter** pour créer un groupe identique.
-1. Accédez à l’onglet **Gestion**. 
-1. Localisez la section **Arrêt d’instance**.
-1. Pour **Notification d’arrêt d’instance**, sélectionnez **Activée**.
+1. Accédez à l’onglet **Gestion** . 
+1. Localisez la section **Arrêt d’instance** .
+1. Pour **Notification d’arrêt d’instance** , sélectionnez **Activée** .
 1. Pour **Délai d’arrêt (minutes)** , définissez le délai d’expiration par défaut souhaité.
-1. Lorsque vous avez fini de créer le groupe identique, sélectionnez le bouton **Vérifier + créer**. 
+1. Lorsque vous avez fini de créer le groupe identique, sélectionnez le bouton **Vérifier + créer** . 
 
 > [!NOTE]
 > Vous ne pouvez pas définir de notifications d’arrêt sur des groupes identiques existants dans le portail Azure
@@ -63,9 +63,9 @@ PUT on `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provi
 
 ```
 
-Le bloc ci-dessus spécifie un délai d’attente de cinq minutes (comme indiqué par *PT5M*) pour toute opération d’arrêt sur toutes les instances de votre groupe identique. Le champ *notBeforeTimeout* peut prendre n’importe quelle valeur comprise entre 5 et 15 minutes au format ISO 8601. Vous pouvez changer le délai d’attente par défaut pour l’opération d’arrêt en modifiant la propriété *notBeforeTimeout* sous *terminateNotificationProfile* décrite ci-dessus.
+Le bloc ci-dessus spécifie un délai d’attente de cinq minutes (comme indiqué par *PT5M* ) pour toute opération d’arrêt sur toutes les instances de votre groupe identique. Le champ *notBeforeTimeout* peut prendre n’importe quelle valeur comprise entre 5 et 15 minutes au format ISO 8601. Vous pouvez changer le délai d’attente par défaut pour l’opération d’arrêt en modifiant la propriété *notBeforeTimeout* sous *terminateNotificationProfile* décrite ci-dessus.
 
-Après avoir activé *scheduledEventsProfile* sur le modèle de groupe identique et défini *notBeforeTimeout*, mettez à jour chaque instance vers le [modèle le plus récent](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) afin de refléter les modifications.
+Après avoir activé *scheduledEventsProfile* sur le modèle de groupe identique et défini *notBeforeTimeout* , mettez à jour chaque instance vers le [modèle le plus récent](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) afin de refléter les modifications.
 
 > [!NOTE]
 >Les notifications d’arrêt sur les instances de groupe identique peuvent uniquement être activées avec l’API version 2019-03-01 et ultérieures.
@@ -91,7 +91,7 @@ Utilisez l’applet de commande [Update-AzVmss](/powershell/module/az.compute/up
 Update-AzVmss `
   -ResourceGroupName "myResourceGroup" `
   -VMScaleSetName "myScaleSet" `
-  -TerminateScheduledEvents $true
+  -TerminateScheduledEvents $true `
   -TerminateScheduledEventNotBeforeTimeoutInMinutes 15
 ```
 L’exemple ci-dessus active les notifications d’arrêt sur un groupe identique existant et définit un délai d’attente de 15 minutes pour l’événement d’arrêt.
@@ -178,26 +178,26 @@ Voici le code JSON attendu dans le corps de la requête POST. La requête doit c
 
 Vérifiez que chaque machine virtuelle du groupe identique n’approuve que l’EventID correspondant à cette machine virtuelle. Une machine virtuelle peut obtenir son propre nom de machine virtuelle [par le biais de métadonnées d’instance](virtual-machine-scale-sets-instance-ids.md#instance-metadata-vm-name). Ce nom prend la forme « {nom_groupe_identique}_{ID_instance} » et est affiché dans la section « Resources » de la réponse de la requête décrite ci-dessus.
 
-Vous pouvez également vous reporter aux exemples de scripts pour l’interrogation et la réponse aux événements à l’aide de [PowerShell](../virtual-machines/windows/scheduled-events.md#powershell-sample) et [Python](../virtual-machines/linux/scheduled-events.md#python-sample).
+Vous pouvez également vous reporter aux exemples de scripts pour l’interrogation et la réponse aux événements à l’aide de [Python](../virtual-machines/linux/scheduled-events.md#python-sample).
 
 ## <a name="tips-and-best-practices"></a>Conseils et meilleures pratiques
 -   Notifications d’arrêt uniquement sur les opérations de suppression : toutes les opérations de suppression (suppression manuelle ou scale-in lancé par la mise à l’échelle automatique) génèrent des événements Terminate si *scheduledEventsProfile* est activé sur votre groupe identique. Les autres opérations telles que le redémarrage, la réinitialisation, le redéploiement et l’arrêt/désallocation ne génèrent pas d’événements Terminate. Les notifications d’arrêt ne peuvent pas être activées pour les machines virtuelles de faible priorité.
--   Aucune attente obligatoire pour l’expiration : vous pouvez démarrer l’opération d’arrêt à tout moment après la réception de l’événement et avant l’expiration du délai *NotBefore*.
+-   Aucune attente obligatoire pour l’expiration : vous pouvez démarrer l’opération d’arrêt à tout moment après la réception de l’événement et avant l’expiration du délai *NotBefore* .
 -   Suppression obligatoire une fois le délai d’attente atteint : il n’existe aucune possibilité d’étendre la valeur du délai d’expiration après la génération d’un événement. Une fois le délai d’attente atteint, l’événement Terminate en attente est traité et la machine virtuelle est supprimée.
 -   Valeur de délai d’attente modifiable : vous pouvez modifier la valeur du délai d’attente à tout moment avant la suppression d’une instance, en modifiant la propriété *notBeforeTimeout* sur le modèle de groupe identique et en mettant à jour les instances de machine virtuelle vers le dernier modèle.
 -   Approbation de toutes les suppressions en attente : s’il existe sur VM_1 une suppression en attente qui n’est pas approuvée, et que vous avez approuvé un autre événement Terminate sur VM_2, VM_2 n’est pas supprimé tant que l’événement Terminate pour VM_1 n’a pas été approuvé ou que son délai d’attente ne s’est pas écoulé. Une fois que vous avez approuvé l’événement Terminate pour VM_1, VM_1 et VM_2 sont supprimées.
--   Approbation de toutes les suppressions simultanées : si l’on poursuit avec l’exemple ci-dessus, si VM_1 et VM_2 ont le même délai *NotBefore*, les deux événements Terminate doivent être approuvés, sinon aucune des machines virtuelles n’est supprimée avant l’expiration du délai d’attente.
+-   Approbation de toutes les suppressions simultanées : si l’on poursuit avec l’exemple ci-dessus, si VM_1 et VM_2 ont le même délai *NotBefore* , les deux événements Terminate doivent être approuvés, sinon aucune des machines virtuelles n’est supprimée avant l’expiration du délai d’attente.
 
 ## <a name="troubleshoot"></a>Dépanner
 ### <a name="failure-to-enable-scheduledeventsprofile"></a>Impossible d’activer scheduledEventsProfile
 Si vous obtenez une erreur « BadRequest » avec un message d’erreur indiquant que le membre « scheduledEventsProfile » est introuvable sur l’objet de type « VirtualMachineProfile », vérifiez la version de l’API utilisée pour les opérations du groupe identique. La version de l’API de calcul **2019-03-01** ou une version ultérieure est requise. 
 
 ### <a name="failure-to-get-terminate-events"></a>Impossible d’obtenir des événements Terminate
-Si vous n’obtenez aucun événement **Terminate** par le biais de Scheduled Events, vérifiez la version de l’API utilisée pour obtenir les événements. L’API Metadata Service version **2019-01-01** ou ultérieure est requise pour les événements Terminate.
+Si vous n’obtenez aucun événement **Terminate** par le biais de Scheduled Events, vérifiez la version de l’API utilisée pour obtenir les événements. L’API Metadata Service version  **2019-01-01** ou ultérieure est requise pour les événements Terminate.
 >'http://169.254.169.254/metadata/scheduledevents?api-version=2019-01-01 '
 
 ### <a name="getting-terminate-event-with-incorrect-notbefore-time"></a>Obtention d’événement Terminate avec délai NotBefore incorrect  
-Après avoir activé *scheduledEventsProfile* sur le modèle de groupe identique et défini *notBeforeTimeout*, mettez à jour chaque instance vers le [modèle le plus récent](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) afin de refléter les modifications.
+Après avoir activé *scheduledEventsProfile* sur le modèle de groupe identique et défini *notBeforeTimeout* , mettez à jour chaque instance vers le [modèle le plus récent](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) afin de refléter les modifications.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Découvrez comment [déployer votre application](virtual-machine-scale-sets-deploy-app.md) sur des groupes de machines virtuelles identiques.

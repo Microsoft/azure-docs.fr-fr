@@ -1,14 +1,14 @@
 ---
 title: Déployer l’exemple de blueprint FedRAMP High
 description: Étapes de déploiement pour l’exemple de blueprint FedRAMP High, incluant des informations détaillées sur les paramètres d’artefact de blueprint.
-ms.date: 01/31/2020
+ms.date: 10/26/2020
 ms.topic: sample
-ms.openlocfilehash: 91f208105a07770c557b1f273f3420c03b3d6dcb
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5d08eb932748ca01fd5780266248bde4025a3d2b
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "77087302"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92669309"
 ---
 # <a name="deploy-the-fedramp-high-blueprint-sample"></a>Déployer l’exemple de blueprint FedRAMP High
 
@@ -25,16 +25,16 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 Commencez par implémenter l’exemple de blueprint. Pour cela, créez un blueprint dans votre environnement en vous servant de l’exemple comme point de départ.
 
-1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
+1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints** .
 
-1. Dans la page **Démarrage**à gauche, sélectionnez le bouton **Créer** sous _Créer un blueprint_.
+1. Dans la page **Démarrage** à gauche, sélectionnez le bouton **Créer** sous _Créer un blueprint_ .
 
-1. Recherchez l’exemple de blueprint **FedRAMP High** sous _Autres exemples_ et sélectionnez **Utiliser cet exemple**.
+1. Recherchez l’exemple de blueprint **FedRAMP High** sous _Autres exemples_ et sélectionnez **Utiliser cet exemple** .
 
 1. Entrez les _Fonctions de base_ de l’exemple de blueprint :
 
-   - **Nom du blueprint** : Spécifiez un nom pour votre copie de l’exemple de blueprint FedRAMP High.
-   - **Emplacement de la définition** : utilisez les points de suspension et sélectionnez le groupe d’administration dans lequel vous souhaitez enregistrer votre copie de l’exemple.
+   - **Nom du blueprint**  : Spécifiez un nom pour votre copie de l’exemple de blueprint FedRAMP High.
+   - **Emplacement de la définition**  : utilisez les points de suspension et sélectionnez le groupe d’administration dans lequel vous souhaitez enregistrer votre copie de l’exemple.
 
 1. Sélectionnez l’onglet _Artefacts_ dans le haut de la page ou **Suivant : Artefacts** dans le bas de la page.
 
@@ -44,17 +44,17 @@ Commencez par implémenter l’exemple de blueprint. Pour cela, créez un bluepr
 
 Votre copie de l’exemple de blueprint est à présent créée dans votre environnement. Elle est créée en mode **Brouillon** et doit être **publiée** avant de pouvoir être attribuée et déployée. Vous pouvez personnaliser la copie de l’exemple de blueprint en fonction de votre environnement et de vos besoins, mais ces modifications peuvent l’éloigner de son alignement avec les contrôles FedRAMP High.
 
-1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
+1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints** .
 
 1. Sélectionnez la page **Définitions de blueprint** à gauche. Utilisez les filtres pour rechercher votre copie de l’exemple de blueprint, puis sélectionnez-la.
 
-1. Sélectionnez **Publier le blueprint** dans le haut de la page. Dans la nouvelle page à droite, indiquez la **Version** de votre copie de l’exemple de blueprint. Cette propriété est utile si vous prévoyez d’effectuer une modification ultérieurement. Dans **Notes de changement**, indiquez par exemple « Première version publiée à partir de l’exemple de blueprint FedRAMP High ». Sélectionnez ensuite **Publier** en bas de la page.
+1. Sélectionnez **Publier le blueprint** dans le haut de la page. Dans la nouvelle page à droite, indiquez la **Version** de votre copie de l’exemple de blueprint. Cette propriété est utile si vous prévoyez d’effectuer une modification ultérieurement. Dans **Notes de changement** , indiquez par exemple « Première version publiée à partir de l’exemple de blueprint FedRAMP High ». Sélectionnez ensuite **Publier** en bas de la page.
 
 ## <a name="assign-the-sample-copy"></a>Affecter la copie de l’exemple
 
-Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peut être affectée à un abonnement dans le groupe d’administration où elle a été enregistrée. C’est à cette étape que les paramètres sont fournis pour que chaque déploiement de la copie de l’exemple de blueprint soit unique.
+Une fois que la copie de l’exemple de blueprint a été **publiée** , elle peut être affectée à un abonnement dans le groupe d’administration où elle a été enregistrée. C’est à cette étape que les paramètres sont fournis pour que chaque déploiement de la copie de l’exemple de blueprint soit unique.
 
-1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
+1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints** .
 
 1. Sélectionnez la page **Définitions de blueprint** à gauche. Utilisez les filtres pour rechercher votre copie de l’exemple de blueprint, puis sélectionnez-la.
 
@@ -64,11 +64,11 @@ Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peu
 
    - Concepts de base
 
-     - **Abonnements** : Sélectionnez un ou plusieurs des abonnements qui font partie du groupe d’administration où vous avez enregistré votre copie de l’exemple de blueprint. Si vous sélectionnez plusieurs abonnements, une affectation est créée pour chacun d’eux à l’aide des paramètres saisis.
-     - **Nom de l’affectation** : Le nom est prérempli en fonction du nom du blueprint.
+     - **Abonnements**  : Sélectionnez un ou plusieurs des abonnements qui font partie du groupe d’administration où vous avez enregistré votre copie de l’exemple de blueprint. Si vous sélectionnez plusieurs abonnements, une affectation est créée pour chacun d’eux à l’aide des paramètres saisis.
+     - **Nom de l’affectation**  : Le nom est prérempli en fonction du nom du blueprint.
        Changez-le si nécessaire ou laissez-le tel quel.
      - **Emplacement** : Sélectionnez une région dans laquelle créer l’identité managée. Azure Blueprint utilise cette identité managée pour déployer tous les artefacts dans le blueprint affecté. Pour en savoir plus, consultez [Identités managées pour les ressources Azure](../../../../active-directory/managed-identities-azure-resources/overview.md).
-     - **Version de définition du blueprint** : Choisissez une version **publiée** de votre copie de l’exemple de blueprint.
+     - **Version de définition du blueprint**  : Choisissez une version **publiée** de votre copie de l’exemple de blueprint.
 
    - Verrouiller l'affectation
 
@@ -76,7 +76,7 @@ Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peu
 
    - Identité managée
 
-     Conservez l’option par défaut, _Affecté(e) par le système_, pour l’identité managée.
+     Conservez l’option par défaut, _Affecté(e) par le système_ , pour l’identité managée.
 
    - Paramètres d'artefact
 
@@ -85,7 +85,7 @@ Une fois que la copie de l’exemple de blueprint a été **publiée**, elle peu
 1. Une fois tous les paramètres entrés, sélectionnez **Affecter** au bas de la page. L’affectation du blueprint est créée et le déploiement de l’artefact démarre. Le déploiement prend environ une heure. Pour vérifier l’état du déploiement, ouvrez l’affectation du blueprint.
 
 > [!WARNING]
-> Le service Azure Blueprints et les exemples de blueprint intégrés sont **gratuits**. Les ressources Azure sont [facturées par produit](https://azure.microsoft.com/pricing/). Utilisez la [calculatrice de prix](https://azure.microsoft.com/pricing/calculator/) pour estimer le coût d’exécution des ressources déployées par cet exemple de blueprint.
+> Le service Azure Blueprints et les exemples de blueprint intégrés sont **gratuits** . Les ressources Azure sont [facturées par produit](https://azure.microsoft.com/pricing/). Utilisez la [calculatrice de prix](https://azure.microsoft.com/pricing/calculator/) pour estimer le coût d’exécution des ressources déployées par cet exemple de blueprint.
 
 ## <a name="artifact-parameters-table"></a>Tableau des paramètres d’artefact
 
@@ -94,7 +94,7 @@ Le tableau suivant fournit la liste des paramètres d’artefact de blueprint :
 |Nom de l’artefact|Type d’artefact|Nom du paramètre|Description|
 |-|-|-|-|
 |\[Préversion\] : Auditer les contrôles FedRAMP High et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|ID de l’espace de travail Log Analytics pour lequel les machines virtuelles doivent être configurées|Il s’agit de l’ID (GUID) de l’espace de travail Log Analytics pour lequel les machines virtuelles doivent être configurées.|
-|\[Préversion\] : Auditer les contrôles FedRAMP High et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [schémas de journaux de diagnostic Azure Monitor](../../../../azure-monitor/platform/diagnostic-logs-schema.md#supported-log-categories-per-resource-type).|
+|\[Préversion\] : Auditer les contrôles FedRAMP High et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [schémas de journaux de diagnostic Azure Monitor](../../../../azure-monitor/platform/resource-logs-schema.md#service-specific-schemas).|
 |\[Préversion\] : Auditer les contrôles FedRAMP High et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des utilisateurs qui doivent être exclus du groupe Administrateurs de machines virtuelles Windows|Liste séparée par des points-virgules des membres qui doivent être exclus du groupe Administrateurs local. Exemple : Administrator; myUser1; myUser2|
 |\[Préversion\] : Auditer les contrôles FedRAMP High et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des utilisateurs qui doivent être inclus dans le groupe Administrateurs de machines virtuelles Windows|Liste séparée par des points-virgules des membres qui doivent être inclus dans le groupe Administrateurs local. Exemple : Administrator; myUser1; myUser2|
 |\[Préversion\] : Déployer Log Analytics Agent pour Linux VM Scale Sets (VMSS)|Affectation de rôle|Espace de travail Log Analytics pour Linux VM Scale Sets (VMSS)|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|

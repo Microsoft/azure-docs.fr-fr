@@ -5,12 +5,13 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 02/25/2019
 ms.author: srrengar
-ms.openlocfilehash: 48350caef6bdaafda9aff7ac776d67b314aeaf8c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 286c59938413a912c005181fca12f6698a7bc55e
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614398"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93042887"
 ---
 # <a name="query-eventstore-apis-for-cluster-events"></a>Interroger les API EventStore pour rechercher des événements de cluster
 
@@ -110,7 +111,7 @@ Ici, nous pouvons voir qu’entre `2018-04-03T18:00:00Z` et `2018-04-04T18:00:00
 
 ## <a name="query-the-eventstore-programmatically"></a>Interroger l’EventStore par programmation
 
-Vous pouvez également interroger l’EventStore par programmation, via la [bibliothèque de client Service Fabric](https://docs.microsoft.com/dotnet/api/overview/azure/service-fabric?view=azure-dotnet#client-library).
+Vous pouvez également interroger l’EventStore par programmation, via la [bibliothèque de client Service Fabric](/dotnet/api/overview/azure/service-fabric?view=azure-dotnet#client-library).
 
 Une fois que vous avez configuré votre client Service Fabric, vous pouvez rechercher des événements en accédant à l’EventStore de la façon suivante : `sfhttpClient.EventStore.<request>`
 
@@ -191,7 +192,7 @@ Outre les événements du cycle de vie des applications, vous avez également la
 
 *Intégrité des données historiques de tous les services de « myApp » :*
 
-Actuellement, les événements du rapport d’intégrité des services apparaissent comme des événements `DeployedServicePackageNewHealthReport` sous l’application correspondante. Pour voir comment vos services se sont comportés pour « App1 », utilisez la requête suivante : `https://winlrc-staging-10.southcentralus.cloudapp.azure.com:19080/EventsStore/Applications/myapp/$/Events?api-version=6.4&starttimeutc=2017-04-22T17:01:51Z&endtimeutc=2018-04-29T17:02:51Z&EventsTypesFilter=DeployedServicePackageNewHealthReport`
+Actuellement, les événements du rapport d’intégrité des services apparaissent comme des événements `DeployedServicePackageNewHealthReport` sous l’application correspondante. Pour voir comment vos services se sont comportés pour « App1 », utilisez la requête suivante : `https://mycluster.cloudapp.azure.com:19080/EventsStore/Applications/myapp/$/Events?api-version=6.4&starttimeutc=2017-04-22T17:01:51Z&endtimeutc=2018-04-29T17:02:51Z&EventsTypesFilter=DeployedServicePackageNewHealthReport`
 
 *Reconfiguration de la partition :*
 
@@ -200,4 +201,3 @@ Pour voir tous les mouvements de partition qui se sont produits dans votre clust
 *Service de chaos :*
 
 Un événement indiquant quand le service de chaos a été démarré ou arrêté est exposé au niveau du cluster. Pour voir votre utilisation récente du service de chaos, utilisez la requête suivante : `https://mycluster.cloudapp.azure.com:19080/EventsStore/Cluster/Events?api-version=6.4&starttimeutc=2017-04-22T17:01:51Z&endtimeutc=2018-04-29T17:02:51Z&EventsTypesFilter=ChaosStarted,ChaosStopped`
-

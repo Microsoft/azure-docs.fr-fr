@@ -13,18 +13,18 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 10/13/2017
 ms.author: apimpm
-ms.openlocfilehash: 09d51759c07e7dacc25d5b5ffce9698831c37a7d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0f5a10eb2ebc3b3a7c527dd718e37faf03c927bc
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75442365"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92076094"
 ---
 # <a name="use-oauth2-for-authorization-between-the-gateway-and-a-backend"></a>Utiliser OAuth2 pour l’autorisation entre la passerelle et un serveur principal
 
 Cet article présente un exemple de la stratégie de Gestion des API Azure qui montre comment utiliser OAuth2 pour l’autorisation entre la passerelle et un serveur principal. Il montre comment obtenir un jeton d’accès d’AAD et le transférer au serveur principal. 
 
-Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-samples.md).
+Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-reference.md).
 
 Le script suivant utilise les propriétés qui apparaissent dans {{property}}. Pour plus d’informations sur les propriétés et leur utilisation dans les stratégies Gestion des API, consultez [cette](../api-management-howto-properties.md) rubrique.
  
@@ -39,5 +39,4 @@ Collez le code dans le bloc **inbound**.
 En savoir plus sur les stratégies APIM :
 
 + [Stratégies de transformation](../api-management-transformation-policies.md)
-+ [Exemples de stratégie](../policy-samples.md)
-
++ [Exemples de stratégie](../policy-reference.md)

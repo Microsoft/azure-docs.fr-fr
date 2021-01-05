@@ -13,12 +13,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 01/29/2019
   ms.author: aahi
-  ms.openlocfilehash: 468315f79f7d0f9d10013c4068b5bb29436b3166
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: 5b1955d1de44ca66613d4e577f587b193aa31b38
+  ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "79415136"
+  ms.lasthandoff: 12/15/2020
+  ms.locfileid: "97504863"
 landingContent:
 - title: À propos de l’API Analyse de texte
   linkLists:
@@ -41,21 +41,21 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utilisation de C#
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-csharp#sentiment-analysis
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-csharp#sentiment-analysis
     - text: Utilisation de Python
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-python#sentiment-analysis
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-python#sentiment-analysis
     - text: Utilisation de Node.js
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-javascript#sentiment-analysis
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-javascript#sentiment-analysis
     - text: Utilisation de Go
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-go#sentiment-analysis
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-go#sentiment-analysis
     - text: Utilisation de Ruby
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-ruby#sentiment-analysis
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-ruby#sentiment-analysis
   - linkListType: tutorial
     links:
     - text: Intégrer Power BI pour analyser les sentiments des clients
       url: tutorials/tutorial-power-bi-key-phrases.md
     - text: Utiliser Flask pour la traduction de texte, l’analyse de sentiments et la synthèse vocale
-      url: https://docs.microsoft.com/azure/cognitive-services/translator/tutorial-build-flask-app-translation-synthesis?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fcognitive-services%2Ftext-analytics%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json
+      url: ../translator/tutorial-build-flask-app-translation-synthesis.md?bc=%2fazure%2fbread%2ftoc.json&toc=%2fazure%2fcognitive-services%2ftext-analytics%2ftoc.json
   - linkListType: how-to-guide
     links:
     - text: analyse de sentiments
@@ -65,15 +65,15 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utilisation de C#
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-csharp#language-detection
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-csharp#language-detection
     - text: Utilisation de Python
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-python#language-detection
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-python#language-detection
     - text: Utilisation de Node.js
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-javascript#language-detection
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-javascript#language-detection
     - text: Utilisation de Go
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-go#language-detection
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-go#language-detection
     - text: Utilisation de Ruby
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-ruby#language-detection
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-ruby#language-detection
   - linkListType: how-to-guide
     links:
     - text: Détection de la langue
@@ -83,15 +83,15 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utilisation de C#
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-csharp#key-phrase-extraction
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-csharp#key-phrase-extraction
     - text: Utilisation de Python
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-python#key-phrase-extraction
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-python#key-phrase-extraction
     - text: Utilisation de Node.js
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-javascript#key-phrase-extraction
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-javascript#key-phrase-extraction
     - text: Utilisation de Go
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-go#key-phrase-extraction
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-go#key-phrase-extraction
     - text: Utilisation de Ruby
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-ruby#key-phrase-extraction
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-ruby#key-phrase-extraction
   - linkListType: how-to-guide
     links:
     - text: Extraction de mots clés
@@ -101,15 +101,15 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utilisation de C#
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-csharp#named-entity-recognition-ner
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-csharp#named-entity-recognition-ner
     - text: Utilisation de Python
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-python#named-entity-recognition-ner
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-python#named-entity-recognition-ner
     - text: Utilisation de Node.js
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-nodejs#named-entity-recognition-ner
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-nodejs#named-entity-recognition-ner
     - text: Utilisation de Go
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-go#named-entity-recognition-ner
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-go#named-entity-recognition-ner
     - text: Utilisation de Ruby
-      url: quickstarts/text-analytics-sdk.md?pivots=programming-language-ruby#named-entity-recognition-ner
+      url: quickstarts/client-libraries-rest-api.md?pivots=programming-language-ruby#named-entity-recognition-ner
   - linkListType: how-to-guide
     links:
     - text: Reconnaissance d’entité
@@ -121,19 +121,19 @@ landingContent:
     - text: API REST
       url: https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1/operations/56f30ceeeda5650db055a3c7
     - text: Bibliothèque de client .NET
-      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/textanalytics?view=azure-dotnet
+      url: /dotnet/api/overview/azure/ai.textanalytics-readme?view=azure-dotnet
     - text: Bibliothèque de client Python
-      url: https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/textanalytics?view=azure-python
-    - text: Bibliothèque de client Node.js
-      url: https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-textanalytics/?view=azure-node-latest
+      url: /python/api/overview/azure/ai-textanalytics-readme?view=azure-python
+    - text: Bibliothèque cliente JavaScript
+      url: /javascript/api/overview/azure/ai-text-analytics-readme?view=azure-node-latest
     - text: Bibliothèque de client Java
-      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/textanalytics?view=azure-java-stable
+      url: /java/api/overview/azure/ai-textanalytics-readme?view=azure-java-stable
     - text: Bibliothèque de client Go
       url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/textanalytics
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices
+      url: /powershell/module/az.cognitiveservices
     - text: Azure CLI
-      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest
+      url: /cli/azure/cognitiveservices?view=azure-cli-latest
 - title: Utiliser des conteneurs Docker
   linkLists:
   - linkListType: how-to-guide
@@ -142,7 +142,15 @@ landingContent:
       url: how-tos/text-analytics-how-to-install-containers.md
     - text: Configurer les conteneurs Analyse de texte
       url: text-analytics-resource-container-config.md
+    - text: Utiliser le conteneur Analyse de texte pour la santé
+      url: How-tos/text-analytics-for-health.md
     - text: Déployer une instance de conteneur sur Azure
       url: how-tos/text-analytics-how-to-use-container-instances.md
     - text: Déployer un conteneur dans Azure Kubernetes Service (AKS)
       url: how-tos/text-analytics-how-to-use-kubernetes-service.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/text-analytics/context/context

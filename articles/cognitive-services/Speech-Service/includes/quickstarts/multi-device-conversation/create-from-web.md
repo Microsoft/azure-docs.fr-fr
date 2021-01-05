@@ -8,10 +8,10 @@ ms.topic: include
 ms.date: 01/15/2020
 ms.author: ralphe
 ms.openlocfilehash: 9ed32feaf68a7cae4d2a847aac19458fe0e61890
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "76268009"
 ---
 3. Vous devez créer une conversation que vous pourrez rejoindre :

@@ -10,14 +10,15 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 04/27/2020
+ms.date: 12/10/2020
 ms.author: apimpm
-ms.openlocfilehash: cf65cd757655b496ceb87fa1ff8121ac6209d869
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.custom: references_regions
+ms.openlocfilehash: e36f7c6085908630d5e7aa2593fe4d57202d6ee7
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203197"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107649"
 ---
 # <a name="how-to-use-azure-api-management-with-virtual-networks"></a>Utilisation de la gestion des API Azure avec des réseaux virtuels
 Les réseaux virtuels Azure vous permettent de placer vos ressources Azure dans un réseau routable non-Internet dont vous contrôlez l’accès. Ces réseaux peuvent ensuite être connectés à vos réseaux locaux à l’aide de différentes technologies VPN. Pour en savoir plus sur les réseaux virtuels Azure, commencez par consulter la page [Présentation du réseau virtuel Azure](../virtual-network/virtual-networks-overview.md).
@@ -52,7 +53,8 @@ Pour effectuer les étapes décrites dans cet article, vous devez disposer des �
 3. Sélectionnez **Réseau virtuel**.
 4. Configurez l’instance du service Gestion des API à déployer à l’intérieur d’un réseau virtuel.
 
-    ![Menu Réseau virtuel du service Gestion des API][api-management-using-vnet-menu]
+    :::image type="content" source="media/api-management-using-with-vnet/api-management-menu-vnet.png" alt-text="Sélectionnez un réseau virtuel dans Portail Azure.":::
+    
 5. Sélectionnez le type d’accès souhaité :
 
     * **Off** : Il s’agit de la valeur par défaut. Gestion des API n’est pas déployé dans un réseau virtuel.
@@ -72,7 +74,7 @@ Pour effectuer les étapes décrites dans cet article, vous devez disposer des �
 
     Sélectionnez ensuite **Appliquer**. La page **Réseau virtuel** de votre instance Gestion des API est mise à jour avec vos nouveaux choix de réseau virtuel et de sous-réseau.
 
-    ![Sélectionner le VPN][api-management-setup-vpn-select]
+    :::image type="content" source="media/api-management-using-with-vnet/api-management-using-vnet-select.png" alt-text="Paramètres de réseau virtuel dans le portail.":::
 
 7. Dans la barre de navigation supérieure, sélectionnez **Enregistrer**, puis **Appliquer la configuration réseau**.
 
@@ -84,8 +86,9 @@ Pour effectuer les étapes décrites dans cet article, vous devez disposer des �
 > [!IMPORTANT]
 > Si vous supprimez le service Gestion des API à partir d’un réseau virtuel (VNET) ou que vous modifiez celui sur lequel il est déployé, le réseau virtuel précédemment utilisé peut rester verrouillé jusqu’à six heures. Pendant ce temps, vous ne pourrez pas supprimer le réseau virtuel ou y déployer une nouvelle ressource. Ce comportement est vrai pour les clients utilisant api-version 2018-01-01 et ultérieures. Pour les clients utilisant api-version 2019-01-01 et ultérieures, le réseau virtuel est libéré dès que le service Gestion des API associé est supprimé.
 
-## <a name="enable-vnet-connection-using-powershell-cmdlets"></a><a name="enable-vnet-powershell"> </a>Activer la connexion au réseau virtuel à l’aide d’applets de commande PowerShell
-Vous pouvez également activer la connectivité de réseau virtuel à l’aide d’applets de commande PowerShell.
+## <a name="deploy-api-management-into-external-vnet"></a><a name="deploy-apim-external-vnet"> </a>Déployer Gestion des API dans un réseau virtuel externe
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-api-management-create-with-external-vnet%2Fazuredeploy.json)
 
 * **Création d’un service de gestion des API au sein d’un réseau virtuel** : utilisez l’applet de commande [New-AzApiManagement](/powershell/module/az.apimanagement/new-azapimanagement) pour créer un service de gestion des API Azure au sein d’un réseau virtuel.
 
@@ -102,31 +105,31 @@ Voici une liste des problèmes courants de configuration incorrecte qui peuvent 
 * **Configuration du serveur DNS personnalisée** : le service de la gestion des API dépend de plusieurs services Azure. Si la gestion des API est hébergée dans un réseau virtuel comportant un serveur DNS personnalisé, il doit résoudre les noms d’hôte de ces services Azure. Veuillez suivre [ce](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server) guide sur la configuration de serveurs DNS personnalisée. Consultez le tableau des ports ci-dessous et les autres exigences en matière de réseau pour référence.
 
 > [!IMPORTANT]
-> Si vous envisagez d’utiliser des serveurs DNS personnalisés pour le réseau virtuel, vous devez le configurer **avant** d’y déployer un service Gestion des API. Sinon, vous devez mettre à jour le service Gestion des API chaque fois que vous changez les serveurs DNS en exécutant l’[opération Appliquer une configuration réseau](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/ApiManagementService/ApplyNetworkConfigurationUpdates)
+> Si vous envisagez d’utiliser des serveurs DNS personnalisés pour le réseau virtuel, vous devez le configurer **avant** d’y déployer un service Gestion des API. Sinon, vous devez mettre à jour le service Gestion des API chaque fois que vous changez les serveurs DNS en exécutant l’[opération Appliquer une configuration réseau](/rest/api/apimanagement/2019-12-01/apimanagementservice/applynetworkconfigurationupdates)
 
 * **Ports requis pour la gestion des API** : le trafic entrant et sortant dans le sous-réseau où la Gestion des API est déployée peut être contrôlé via [Groupe de sécurité réseau][Network Security Group]. Si ces ports ne sont pas disponibles, la gestion des API risque de ne pas fonctionner correctement et d’être inaccessible. Le blocage d’un ou plusieurs de ces ports constitue un autre problème de configuration courant lorsque vous utilisez la gestion des API dans un réseau virtuel.
 
 <a name="required-ports"> </a> Quand une instance de service Gestion des API est hébergée dans un réseau virtuel, les ports du tableau suivant sont utilisés.
 
-| Port(s) source / de destination | Sens          | Protocole de transfert |   [Balises de service](../virtual-network/security-overview.md#service-tags) <br> Source / Destination   | Objectif (\*)                                                 | Type de réseau virtuel |
+| Port(s) source / de destination | Sens          | Protocole de transfert |   [Balises de service](../virtual-network/network-security-groups-overview.md#service-tags) <br> Source / Destination   | Objectif (\*)                                                 | Type de réseau virtuel |
 |------------------------------|--------------------|--------------------|---------------------------------------|-------------------------------------------------------------|----------------------|
 | * / [80], 443                  | Trafic entrant            | TCP                | INTERNET / VIRTUAL_NETWORK            | Communication client avec Gestion des API                      | Externe             |
 | * / 3443                     | Trafic entrant            | TCP                | ApiManagement / VIRTUAL_NETWORK       | Point de terminaison de gestion pour le Portail Azure et PowerShell         | Externe et interne  |
 | * / 443                  | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / Storage             | **Dépendance sur le Stockage Azure**                             | Externe et interne  |
-| * / 443                  | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureActiveDirectory | [Azure Active Directory](api-management-howto-aad.md) (le cas échéant)                   | Externe et interne  |
+| * / 443                  | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureActiveDirectory | Dépendance vis-à-vis d’[Azure Active Directory](api-management-howto-aad.md) et Azure Key Vault                  | Externe et interne  |
 | * / 1433                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / SQL                 | **Accès aux points de terminaison de SQL Azure**                           | Externe et interne  |
+| * / 433                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureKeyVault                 | **Accès à Azure Key Vault**                           | Externe et interne  |
 | * / 5671, 5672, 443          | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / EventHub            | Dépendance pour le [journal pour la stratégie Event Hub](api-management-howto-log-event-hubs.md) et l’agent de surveillance | Externe et interne  |
 | * / 445                      | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / Storage             | Dépendance du partage de fichiers Azure pour [GIT](api-management-configuration-repository-git.md)                      | Externe et interne  |
-| * / 1886                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureCloud            | Nécessaire pour publier l’état d’intégrité sur Resource Health          | Externe et interne  |
-| * / 443                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureMonitor         | Publier les [journaux de diagnostic et les métriques](api-management-howto-use-azure-monitor.md)                       | Externe et interne  |
-| * / 25                       | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / INTERNET            | Se connecter au relais SMTP pour envoyer des e-mails                    | Externe et interne  |
-| * / 587                      | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / INTERNET            | Se connecter au relais SMTP pour envoyer des e-mails                    | Externe et interne  |
-| * / 25028                    | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / INTERNET            | Se connecter au relais SMTP pour envoyer des e-mails                    | Externe et interne  |
-| * / 6381 - 6383              | Trafic entrant et sortant | TCP                | VIRTUAL_NETWORK / VIRTUAL_NETWORK     | Accéder au service Redims pour les stratégies de [limite de débit](api-management-access-restriction-policies.md#LimitCallRateByKey) entre machines         | Externe et interne  |
-| * / *                         | Trafic entrant            | TCP                | AZURE_LOAD_BALANCER / VIRTUAL_NETWORK | Équilibrage de charge de l’infrastructure Azure                          | Externe et interne  |
+| * / 443, 12000                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureCloud            | Extension Intégrité et surveillance         | Externe et interne  |
+| * / 1886, 443                     | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / AzureMonitor         | Publier les [journaux et métriques de diagnostic](api-management-howto-use-azure-monitor.md), [Resource Health](../service-health/resource-health-overview.md) et [Application Insights](api-management-howto-app-insights.md)                   | Externe et interne  |
+| * / 25, 587, 25028                       | Règle de trafic sortant           | TCP                | VIRTUAL_NETWORK / INTERNET            | Se connecter au relais SMTP pour envoyer des e-mails                    | Externe et interne  |
+| * / 6381 - 6383              | Trafic entrant et sortant | TCP                | VIRTUAL_NETWORK / VIRTUAL_NETWORK     | Accéder au service Redis pour les stratégies de [cache](api-management-caching-policies.md) entre machines         | Externe et interne  |
+| * / 4290              | Trafic entrant et sortant | UDP                | VIRTUAL_NETWORK / VIRTUAL_NETWORK     | Compteurs de synchronisation pour les stratégies de [limite de débit](api-management-access-restriction-policies.md#LimitCallRateByKey) entre machines         | Externe et interne  |
+| * / *                        | Trafic entrant            | TCP                | AZURE_LOAD_BALANCER / VIRTUAL_NETWORK | Équilibrage de charge de l’infrastructure Azure                          | Externe et interne  |
 
 >[!IMPORTANT]
-> Les ports pour lesquels *l’objectif* est indiqué en **gras** sont nécessaires au déploiement du service Gestion des API. Toutefois, le blocage des autres ports entraîne une dégradation de la capacité à utiliser et à surveiller le service en cours d’exécution.
+> Les ports pour lesquels *l’objectif* est indiqué en **gras** sont nécessaires au déploiement du service Gestion des API. Toutefois, le blocage des autres ports entraîne une **dégradation** de la capacité à utiliser et **superviser le service en cours d’exécution et fournir le contrat SLA validé**.
 
 + **Fonctionnalités TLS** : pour activer la génération et la validation de la chaîne de certification TLS/SSL, le service Gestion des API nécessite une connectivité réseau sortante vers ocsp.msocsp.com, mscrl.microsoft.com et crl.microsoft.com. Cette dépendance n’est pas requise si l’un des certificats que vous chargez sur la gestion de API contient la totalité de la chaîne permettant d’accéder à la racine de l’AC.
 
@@ -136,9 +139,9 @@ Voici une liste des problèmes courants de configuration incorrecte qui peuvent 
 
     | Environnement Azure | Points de terminaison                                                                                                                                                                                                                                                                                                                                                              |
     |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | Azure (public)      | <ul><li>gcs.prod.monitoring.core.windows.net (**nouveau**)</li><li>prod.warmpath.msftcloudes.com (**sera déprécié**)</li><li>shoebox2.metrics.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>prod3.metrics.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-black.prod3.metrics.microsoftmetrics.com(**nouveau**)</li><li>prod3-black.prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-black.prod3.metrics.microsoftmetrics.com(**nouveau**)</li><li>prod3-red.prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod.warm.ingestion.msftcloudes.com</li><li>`azure region`.warm.ingestion.msftcloudes.com où `East US 2` est eastus2.warm.ingestion.msftcloudes.com</li></ul> |
-    | Azure Government  | <ul><li>fairfax.warmpath.usgovcloudapi.net</li><li>shoebox2.metrics.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>prod3.metrics.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod5.prod.microsoftmetrics.com</li></ul>                                                                                                                                                                                                                                                |
-    | Azure China 21Vianet     | <ul><li>mooncake.warmpath.chinacloudapi.cn</li><li>shoebox2.metrics.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>prod3.metrics.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod5.prod.microsoftmetrics.com</li></ul>                                                                                                                                                                                                                                                |
+    | Azure (public)      | <ul><li>gcs.prod.monitoring.core.windows.net (**nouveau**)</li><li>prod.warmpath.msftcloudes.com (**sera déprécié**)</li><li>global.prod.microsoftmetrics.com(**nouveau**)</li><li>global.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2.prod.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-black.prod.microsoftmetrics.com(**nouveau**)</li><li>prod3-black.prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-red.prod.microsoftmetrics.com(**nouveau**)</li><li>prod3-red.prod3.metrics.nsatc.net(**à déconseiller**)</li><li>gcs.prod.warm.ingestion.monitoring.azure.com</li></ul> |
+    | Azure Government  | <ul><li>fairfax.warmpath.usgovcloudapi.net</li><li>global.prod.microsoftmetrics.com(**nouveau**)</li><li>global.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2.prod.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-black.prod.microsoftmetrics.com</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.us</li></ul>                                                                                                                                                                                                                                                |
+    | Azure China 21Vianet     | <ul><li>mooncake.warmpath.chinacloudapi.cn</li><li>global.prod.microsoftmetrics.com(**nouveau**)</li><li>global.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2.prod.microsoftmetrics.com(**nouveau**)</li><li>shoebox2.metrics.nsatc.net(**à déconseiller**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com(**nouveau**)</li><li>prod3.metrics.nsatc.net(**à déconseiller**)</li><li>prod3-black.prod.microsoftmetrics.com</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.cn</li></ul>                                                                                                                                                                                                                                                |
 
   >[!IMPORTANT]
   > La modification des clusters ci-dessus avec la zone DNS **.nsatc.net** en **.microsoftmetrics.com** est essentiellement une modification de DNS. L’adresse IP du cluster ne change pas.
@@ -153,6 +156,8 @@ Voici une liste des problèmes courants de configuration incorrecte qui peuvent 
 
 + **Azure Load Balancer** : le fait d’autoriser les demandes entrantes à partir de la balise de service `AZURE_LOAD_BALANCER` n’est pas obligatoire pour la référence SKU `Developer`, puisque nous déployons une seule unité de calcul derrière elle. Toutefois, le trafic entrant à partir de [168.63.129.16](../virtual-network/what-is-ip-address-168-63-129-16.md) devient critique lors de la mise à l’échelle vers une référence SKU supérieure comme `Premium`, car la défaillance de la sonde d’intégrité de Load Balancer fait échouer un déploiement.
 
++ **Application Insights** : Si la surveillance d’[Azure Application Insights](api-management-howto-app-insights.md) est activée sur Gestion des API, nous devons autoriser la connectivité sortante vers le [point de terminaison de télémétrie](../azure-monitor/app/ip-addresses.md#outgoing-ports) à partir du réseau virtuel. 
+
 + **Tunneling forcé du trafic vers le pare-feu local à l’aide d’ExpressRoute ou de l’appliance virtuelle réseau** : une configuration cliente courante consiste à définir un itinéraire par défaut (0.0.0.0/0), ce qui force tout le trafic du sous-réseau délégué de Gestion des API à traverser un pare-feu local ou une appliance virtuelle réseau. Ce flux de trafic interrompt la connectivité avec la gestion des API Azure, car le trafic sortant peut être bloqué sur site, ou faire l’objet d’une opération NAT sur un jeu d’adresses non reconnaissable qui ne fonctionne plus avec différents points de terminaison Azure. La solution vous oblige à faire deux choses :
 
   * Activer les points de terminaison de service sur le sous-réseau où le service Gestion des API est déployé. Les [points de terminaison de service][ServiceEndpoints] doivent être activés pour Azure SQL, Stockage Azure, Azure EventHub et Azure ServiceBus. L’activation des points de terminaison directement à partir du sous-réseau délégué Gestion des API leur permet d’utiliser le réseau principal de Microsoft Azure pour un routage optimal du trafic de service. Si vous utilisez des points de terminaison de service avec le service Gestion des API tunnelisé de force, le trafic des services Azure susmentionnés n’est pas tunnelisé de force. L’autre trafic de dépendance Gestion des API est tunnelisé de force et ne peut pas être perdu, ou le service Gestion des API ne fonctionnerait pas correctement.
@@ -166,7 +171,7 @@ Voici une liste des problèmes courants de configuration incorrecte qui peuvent 
       - CAPTCHA du portail des développeurs
 
 ## <a name="troubleshooting"></a><a name="troubleshooting"> </a>Dépannage
-* **Installation initiale** : si le déploiement initial du service Gestion des API sur un sous-réseau échoue, nous vous recommandons de commencer par déployer une machine virtuelle sur ce sous-réseau. Ensuite, utilisez le Bureau à distance pour vous connecter à la machine virtuelle et confirmez qu’il existe une connectivité à chacune des ressources de votre abonnement Azure mentionnées ci-dessous.
+* **Installation initiale** : si le déploiement initial du service Gestion des API sur un sous-réseau échoue, nous vous recommandons de commencer par déployer une machine virtuelle sur ce sous-réseau. Ensuite, utilisez le Bureau à distance pour vous connecter à la machine virtuelle et vérifiez la connectivité à chacune des ressources de votre abonnement Azure mentionnées ci-dessous
     * Stockage Blob Azure
     * Azure SQL Database
     * Azure Storage Table
@@ -174,7 +179,16 @@ Voici une liste des problèmes courants de configuration incorrecte qui peuvent 
   > [!IMPORTANT]
   > Après avoir validé la connectivité, veillez à supprimer toutes les ressources déployées sur le sous-réseau avant d’y déployer le service Gestion des API.
 
-* **Mises à jour incrémentielles** : quand vous changez votre réseau, consultez [NetworkStatus API](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/networkstatus) pour vérifier que le service de la gestion de l’API n’a pas perdu l’accès aux ressources critiques dont il dépend. L’état de connectivité doit être mis à jour toutes les 15 minutes.
+* **Vérification de l’état de la connectivité réseau** : après avoir déployé Gestion des API dans le sous-réseau, utilisez le portail pour vérifier la connectivité de votre instance aux dépendances telles que Stockage Azure. Dans le menu de gauche du portail, sous **Déploiement et infrastructure**, sélectionnez **État de la connectivité réseau**.
+
+   :::image type="content" source="media/api-management-using-with-vnet/verify-network-connectivity-status.png" alt-text="Vérifier l’état de la connectivité réseau dans le portail":::
+
+    * Sélectionnez **Obligatoire** pour vérifier la connectivité aux services Azure requis pour Gestion des API. Un échec indique que l’instance n’est pas en mesure d’effectuer des opérations de base pour gérer les API.
+    * Sélectionnez **Facultatif** pour vérifier la connectivité aux services facultatifs. Tout échec indique uniquement que la fonctionnalité spécifique ne fonctionnera pas (par exemple, SMTP). Un échec peut entraîner une dégradation de la capacité à utiliser et à surveiller l’instance Gestion des API et à fournir le contrat SLA validé.
+
+Pour résoudre les problèmes de connectivité, consultez [Problèmes courants de configuration du réseau](#network-configuration-issues) et corrigez les paramètres réseau requis.
+
+* **Mises à jour incrémentielles** : quand vous changez votre réseau, consultez [NetworkStatus API](/rest/api/apimanagement/2019-12-01/networkstatus) pour vérifier que le service de la gestion de l’API n’a pas perdu l’accès aux ressources critiques dont il dépend. L’état de connectivité doit être mis à jour toutes les 15 minutes.
 
 * **Liens de navigation de ressources** : pendant le déploiement sur le sous-réseau de réseau virtuel de type Gestionnaire des ressources, le service Gestion des API réserve le sous-réseau, en créant un lien de navigation de ressource. Si le sous-réseau contient déjà une ressource d’un autre fournisseur, le déploiement **échoue**. De même, quand vous déplacez un service Gestion des API vers un autre sous-réseau ou que vous le supprimez, nous supprimons ce lien de navigation de ressource.
 
@@ -201,7 +215,7 @@ Chaque unité d’échelle supplémentaire de Gestion des API requiert deux adre
 
 ## <a name="control-plane-ip-addresses"></a><a name="control-plane-ips"> </a> Adresses IP du plan de contrôle
 
-Les adresses IP sont divisées par **environnement Azure**. Quand vous autorisez des requêtes entrantes, l’adresse IP marquée comme **globale** doit être ajoutée à la liste verte, ainsi que l’adresse IP spécifique de la **région**.
+Les adresses IP sont divisées par **environnement Azure**. Quand vous autorisez des requêtes entrantes, l’adresse IP marquée comme **globale** doit être autorisée, ainsi que l’adresse IP spécifique de la **région**.
 
 | **Environnement Azure**|   **Région**|  **Adresse IP**|
 |-----------------|-------------------------|---------------|
@@ -221,6 +235,7 @@ Les adresses IP sont divisées par **environnement Azure**. Quand vous autorisez
 | Azure (public)| Est du Canada| 52.139.80.117|
 | Azure (public)| Émirats arabes unis Nord| 20.46.144.85|
 | Azure (public)| Brésil Sud| 191.233.24.179|
+| Azure (public)| Brésil Sud-Est| 191.232.18.181|
 | Azure (public)| Asie Sud-Est| 40.90.185.46|
 | Azure (public)| Afrique du Sud Nord| 102.133.130.197|
 | Azure (public)| Centre du Canada| 52.139.20.34|
@@ -265,11 +280,11 @@ Les adresses IP sont divisées par **environnement Azure**. Quand vous autorisez
 | Azure Government| USDoD Est| 52.181.32.192|
 
 ## <a name="related-content"></a><a name="related-content"> </a>Contenu associé
-* [Connexion d’un réseau virtuel au serveur principal à l’aide de la passerelle VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md#s2smulti)
+* [Connexion d’un réseau virtuel au serveur principal à l’aide de la passerelle VPN](../vpn-gateway/design.md#s2smulti)
 * [Connexion d’un réseau virtuel utilisant des modèles de déploiement différents](../vpn-gateway/vpn-gateway-connect-different-deployment-models-powershell.md)
 * [Utilisation de l’inspecteur d’API pour le suivi des appels dans Gestion des API Azure](api-management-howto-api-inspector.md)
 * [Questions fréquentes (FAQ) sur les réseaux virtuels](../virtual-network/virtual-networks-faq.md)
-* [Balises de service](../virtual-network/security-overview.md#service-tags)
+* [Balises de service](../virtual-network/network-security-groups-overview.md#service-tags)
 
 [api-management-using-vnet-menu]: ./media/api-management-using-with-vnet/api-management-menu-vnet.png
 [api-management-setup-vpn-select]: ./media/api-management-using-with-vnet/api-management-using-vnet-select.png
@@ -282,6 +297,6 @@ Les adresses IP sont divisées par **environnement Azure**. Quand vous autorisez
 [Related content]: #related-content
 
 [UDRs]: ../virtual-network/virtual-networks-udr-overview.md
-[Network Security Group]: ../virtual-network/security-overview.md
+[Network Security Group]: ../virtual-network/network-security-groups-overview.md
 [ServiceEndpoints]: ../virtual-network/virtual-network-service-endpoints-overview.md
-[ServiceTags]: ../virtual-network/security-overview.md#service-tags
+[ServiceTags]: ../virtual-network/network-security-groups-overview.md#service-tags

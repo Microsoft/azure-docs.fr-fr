@@ -3,17 +3,18 @@ title: Créer une galerie d’images partagées avec Azure PowerShell
 description: Découvrez comment utiliser Azure PowerShell pour créer une galerie d’images partagées dans Azure
 author: cynthn
 ms.service: virtual-machines
+ms.subservice: imaging
 ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: b7625903c4640fdb17eacd29822fe6203e075826
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 1d135c6fe4e867a9b270e2a5c1b986e1957e7012
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793961"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843840"
 ---
 # <a name="create-a-shared-image-gallery-with-azure-powershell"></a>Créer une galerie d’images partagées avec Azure PowerShell 
 
@@ -21,7 +22,7 @@ Une [galerie d’images partagées](./windows/shared-image-galleries.md) simplif
 
 La galerie d’images partagées vous permet de partager vos images de machine virtuelle personnalisées avec d’autres personnes de votre organisation, dans ou entre les régions, à l’intérieur d’un locataire AAD. Choisissez les images à partager, les régions dans lesquelles vous souhaitez les rendre disponibles et les personnes avec lesquelles vous voulez les partager. Vous pouvez créer plusieurs galeries afin de regrouper logiquement les images partagées. 
 
-La galerie est une ressource de niveau supérieur qui fournit le contrôle d’accès en fonction du rôle (RBAC) complet. Les versions des images peuvent être gérées, et vous pouvez choisir de répliquer chaque version d’image vers un autre ensemble de régions Azure. La galerie fonctionne uniquement avec les images managées.
+La galerie est une ressource de niveau supérieur qui fournit le contrôle d'accès en fonction du rôle Azure (Azure RBAC) complet. Les versions des images peuvent être gérées, et vous pouvez choisir de répliquer chaque version d’image vers un autre ensemble de régions Azure. La galerie fonctionne uniquement avec les images managées.
 
 La fonctionnalité Galerie d’images partagées présente plusieurs types de ressources. 
 

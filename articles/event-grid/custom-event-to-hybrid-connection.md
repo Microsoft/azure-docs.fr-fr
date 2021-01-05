@@ -1,20 +1,15 @@
 ---
 title: 'Tutoriel : Envoyer des événements personnalisés vers une connexion hybride - Event Grid'
 description: 'Tutoriel : Utilisez Azure Event Grid et Azure CLI pour publier une rubrique et pour vous abonner à cet événement. Une connexion hybride est utilisée pour le point de terminaison.'
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: spelluru
-ms.date: 11/05/2019
+ms.date: 07/07/2020
 ms.topic: tutorial
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: 2773d06fdfc606faaab88340fc2ef9685bba21f9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: c709d77827551860cc917c3c84c5a849d9fdc512
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73720703"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566824"
 ---
 # <a name="tutorial-route-custom-events-to-azure-relay-hybrid-connections-with-azure-cli-and-event-grid"></a>Tutoriel : Acheminer des événements personnalisés vers des connexions hybrides Azure Relay avec Azure CLI et Event Grid
 
@@ -22,12 +17,11 @@ Azure Event Grid est un service de gestion d’événements pour le cloud. Les c
 
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article suppose que vous disposez déjà d’une connexion hybride et d’une application d’écouteur. Pour aborder les connexions hybrides, consultez la section [Prise en main des connexions hybrides Relay : .NET](../service-bus-relay/relay-hybrid-connections-dotnet-get-started.md) ou [Prise en main des connexions hybrides Relay : nœud](../service-bus-relay/relay-hybrid-connections-node-get-started.md).
+- Cet article suppose que vous disposez déjà d’une connexion hybride et d’une application d’écouteur. Pour aborder les connexions hybrides, consultez la section [Prise en main des connexions hybrides Relay : .NET](../azure-relay/relay-hybrid-connections-dotnet-get-started.md) ou [Prise en main des connexions hybrides Relay : nœud](../azure-relay/relay-hybrid-connections-node-get-started.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-> [!NOTE]
-> Si vous utilisez Azure CLI sur votre ordinateur local, utilisez Azure CLI version 2.0.56 ou supérieure. Pour des instructions sur l’installation de la version d’Azure CLI la plus récente, consultez [Installer l’interface Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.56 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

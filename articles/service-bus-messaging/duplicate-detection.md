@@ -1,24 +1,14 @@
 ---
 title: Détection des messages dupliqués dans Azure Service Bus | Microsoft Docs
 description: Cet article explique la façon dont vous pouvez détecter les doublons dans les messages Azure Service Bus. Le message en double peut être ignoré et abandonné.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: c109b9fd310a09e5eb4c6d18cc3536e4d8069c0b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: dbca1b4b4f894d35835e7d37e0b4e742a2d3b917
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76760366"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87083886"
 ---
 # <a name="duplicate-detection"></a>Détection des doublons
 
@@ -43,7 +33,7 @@ Pour un processus métier dans lequel plusieurs messages sont envoyés durant le
 
 Dans le portail, activez la fonctionnalité au moment de la création de l’entité en cochant la case **Activer la détection dupliquée**, qui est désélectionnée par défaut. Utilisez le même paramètre pour les rubriques que vous créez.
 
-![][1]
+![Capture d’écran de la boîte de dialogue Créer une file d’attente avec l’option Activer la détection dupliquée sélectionnée et mise en évidence en rouge.][1]
 
 > [!IMPORTANT]
 > Vous ne pouvez pas activer/désactiver la détection des doublons après la création de la file d’attente. Vous ne pouvez le faire qu’au moment de la création de la file d’attente. 
@@ -52,7 +42,7 @@ Par programmation, définissez l’indicateur avec la propriété [QueueDescript
 
 L’historique de la durée de détection des doublons est de 30 secondes par défaut pour les files d’attente et les rubriques, et de sept jours au maximum. Vous pouvez modifier ce paramètre dans la fenêtre des propriétés de file d’attente et de rubrique dans le portail Azure.
 
-![][2]
+![Capture d’écran de la fonctionnalité Service Bus avec le paramètre Propriétés mis en surbrillance et l’option Historique des détections dupliquées délimitée en rouge.][2]
 
 Par programmation, vous pouvez définir la taille de la fenêtre de détection des doublons pendant laquelle les ID des messages sont conservés, à l’aide de la propriété [QueueDescription.DuplicateDetectionHistoryTimeWindow](/dotnet/api/microsoft.servicebus.messaging.queuedescription.duplicatedetectionhistorytimewindow#Microsoft_ServiceBus_Messaging_QueueDescription_DuplicateDetectionHistoryTimeWindow) dans l’API .NET Framework complète. Avec l’API Azure Resource Manager, la valeur se définit avec la propriété [queueProperties.duplicateDetectionHistoryTimeWindow](/azure/templates/microsoft.servicebus/namespaces/queues#property-values).
 

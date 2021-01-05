@@ -1,11 +1,11 @@
-- name: Documentation Stream Analytics
+- name: Documentation sur Azure Stream Analytics
   href: index.yml
 - name: Vue d’ensemble
   items:
-    - name: Qu’est-ce que Stream Analytics ?
+    - name: "Bienvenue dans Stream\_Analytics"
       href: stream-analytics-introduction.md
-    - name: Modèles de solution de bout en bout
-      href: stream-analytics-solution-patterns.md
+    - name: Cluster Stream Analytics
+      href: cluster-overview.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -13,14 +13,21 @@
       items:
         - name: Portail Azure
           href: stream-analytics-quick-create-portal.md
+        - name: Azure CLI
+          href: quick-create-azure-cli.md
         - name: Modèle ARM
+          displayName: Resource Manager
           href: quick-create-azure-resource-manager.md
         - name: PowerShell
           href: stream-analytics-quick-create-powershell.md
         - name: Visual Studio
           href: stream-analytics-quick-create-vs.md
         - name: Visual Studio Code
-          href: quick-create-vs-code.md
+          href: quick-create-visual-studio-code.md
+    - name: Créer un cluster
+      items:
+        - name: Portail Azure
+          href: create-cluster.md
 - name: Tutoriels
   items:
     - name: 1 - Créer/gérer un travail
@@ -29,7 +36,7 @@
       href: stream-analytics-with-azure-functions.md
     - name: 3 - Déployer avec CI/CD dans Azure Pipelines
       href: stream-analytics-tools-visual-studio-cicd-vsts.md
-    - name: '4 - Exécuter une fonction UDF C#'
+    - name: 4 - Exécuter une fonction UDF C#
       href: stream-analytics-edge-csharp-udf.md
     - name: 5 - Créer un désérialiseur .NET personnalisé
       href: custom-deserializer.md
@@ -37,17 +44,23 @@
   items:
     - name: Exemples de code
       href: 'https://azure.microsoft.com/resources/samples/?service=stream-analytics'
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
+    - name: Modèles de solution de bout en bout
+      href: stream-analytics-solution-patterns.md
     - name: Choisir une technologie d’analytique de streaming
       href: streaming-technologies.md
     - name: Choisir un outil de développement de travail
       href: feature-comparison.md
     - name: Développer en local
       href: develop-locally.md
+    - name: Sécurité
+      items:
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
     - name: Types d’entrée pour un travail
       items:
         - name: Vue d’ensemble des entrées
@@ -63,12 +76,34 @@
         - name: Vue d’ensemble des sorties
           href: stream-analytics-define-outputs.md
           displayName: 'adls, sql, blob, event hubs, power bi, table, service bus, cosmos, functions'
-        - name: Sortie vers Cosmos DB
-          href: stream-analytics-documentdb-output.md
-        - name: Sortie vers Azure SQL DB
+        - name: Azure Data Lake Storage Gen 1
+          href: azure-data-lake-storage-gen1-output.md
+        - name: Azure SQL Database
+          href: sql-database-output.md
+        - name: performance de la Base de données SQL
           href: stream-analytics-sql-output-perf.md
+        - name: Azure Synapse Analytics
+          href: azure-synapse-analytics-output.md
+        - name: Stockage Blob et Azure Data Lake Gen 2
+          href: blob-storage-azure-data-lake-gen2-output.md
         - name: Modèles de chemin d’accès personnalisé BLOB
           href: stream-analytics-custom-path-patterns-blob-storage-output.md
+        - name: Event Hubs
+          href: event-hubs-output.md
+        - name: Power BI
+          href: power-bi-output.md
+        - name: Stockage de tables
+          href: table-storage-output.md
+        - name: Files d’attente Service Bus
+          href: service-bus-queues-output.md
+        - name: Rubriques Service Bus
+          href: service-bus-topics-output.md
+        - name: Azure Cosmos DB
+          href: azure-cosmos-db-output.md
+        - name: Optimisation de Cosmos DB
+          href: stream-analytics-documentdb-output.md
+        - name: Azure Functions
+          href: azure-functions-output.md
     - name: Étendre des requêtes avec des fonctions
       items:
         - name: Vue d’ensemble des fonctions
@@ -77,10 +112,12 @@
           href: stream-analytics-javascript-user-defined-functions.md
         - name: UDA JavaScript
           href: stream-analytics-javascript-user-defined-aggregates.md
-        - name: 'C# UDF'
+        - name: C# UDF
           href: stream-analytics-edge-csharp-udf-methods.md
         - name: UDF machine learning
           href: machine-learning-udf.md
+        - name: Déboguer les fonctions UDF
+          href: debug-user-defined-functions.md
     - name: Optimiser votre travail Stream Analytics
       items:
         - name: Comprendre et ajuster les unités de streaming
@@ -110,10 +147,20 @@
       href: stream-analytics-concepts-checkpoint-replay.md
     - name: Stratégie de gestion des erreurs
       href: stream-analytics-output-error-policy.md
-- name: Guides de procédures
+- name: Guides pratiques
   items:
     - name: Gérer
       items:
+        - name: Clusters
+          items:
+            - name: Créer et supprimer des points de terminaison privés
+              href: private-endpoints.md
+            - name: Ajouter et supprimer des tâches
+              href: manage-jobs-cluster.md
+            - name: Mettre à l’échelle la taille du cluster
+              href: scale-cluster.md
+        - name: Travaux de mise à l’échelle automatique
+          href: stream-analytics-autoscale.md
         - name: Mettre à jour les informations d’identification
           href: stream-analytics-login-credentials-inputs-outputs.md
         - name: Configurer des stratégies de tri d’événements
@@ -142,14 +189,19 @@
             - name: Stockage d'objets blob
               href: blob-output-managed-identity.md
               displayName: 'managed identity, identities, authenticate'
+            - name: Event Hubs
+              href: event-hubs-managed-identity.md
+              displayName: 'managed identity, identities, authenticate'
             - name: Power BI
               href: powerbi-output-managed-identity.md
               displayName: 'managed identity, identities, authenticate'
-            - name: Azure SQL DB
+            - name: Azure SQL et Azure Synapse
               href: sql-database-output-managed-identity.md
               displayName: 'managed identity, identities, authenticate'
         - name: Chiffrer vos données
           href: data-protection.md
+        - name: Géo-redondance
+          href: geo-redundancy.md
     - name: Créer des solutions
       items:
         - name: Analyse d’opinions Twitter
@@ -158,6 +210,8 @@
           href: stream-analytics-real-time-fraud-detection.md
         - name: Exécuter des travaux sur IoT Edge
           href: stream-analytics-edge.md
+        - name: Exécuter des travaux sur Azure Stack
+          href: on-azure-stack.md
         - name: Analyse des données de capteur de poste de péage
           href: stream-analytics-build-an-iot-solution-using-stream-analytics.md
         - name: Échange à fréquence élevée
@@ -173,7 +227,7 @@
           href: ../event-hubs/process-data-azure-stream-analytics.md
           maintainContext: true
         - name: Traiter Azure SQL Database
-          href: ../sql-database/sql-database-stream-analytics.md
+          href: ../azure-sql/database/stream-data-stream-analytics-integration.md
           maintainContext: true
         - name: Scénarios géospatiaux
           href: geospatial-scenarios.md
@@ -197,6 +251,14 @@
           href: stream-analytics-cicd-api.md
         - name: Exporter et déployer avec Azure Resource Manager
           href: resource-manager-export.md
+    - name: Intégration et déploiement continus
+      items:
+        - name: Vue d’ensemble du CI/CD
+          href: cicd-overview.md
+        - name: 'Générer, tester et déployer avec PowerShell'
+          href: cicd-tools.md
+        - name: Configurer un pipeline avec Azure DevOps
+          href: set-up-cicd-pipeline.md
     - name: Visual Studio
       items:
         - name: Installer des outils
@@ -221,8 +283,8 @@
           href: visual-studio-code-local-run.md
         - name: Tester localement avec des données actives
           href: visual-studio-code-local-run-live-input.md
-        - name: Configurer un pipeline d'intégration continue (CI)/de livraison continue (CD)
-          href: setup-cicd-vs-code.md
+        - name: Déboguer les requêtes avec un diagramme de travail
+          href: debug-locally-using-job-diagram-vs-code.md
         - name: Explorer les travaux
           href: visual-studio-code-explore-jobs.md
         - name: Champs JobConfig.json
@@ -611,6 +673,11 @@
       href: /rest/api/streamanalytics
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.streamanalytics/allversions
+    - name: Azure CLI
+      href: /cli/azure/ext/stream-analytics/stream-analytics
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Préversions Stream Analytics
@@ -622,7 +689,7 @@
     - name: Forum de commentaires
       href: 'https://feedback.azure.com/forums/270577-azure-stream-analytics'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-stream-analytics.html'
+      href: /answers/topics/azure-stream-analytics.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/stream-analytics/'
     - name: Calculatrice de prix

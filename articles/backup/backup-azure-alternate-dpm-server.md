@@ -3,12 +3,12 @@ title: Récupérer des données depuis un serveur de sauvegarde Azure
 description: Récupérez les données que vous avez protégées dans un coffre Recovery Services depuis n’importe quel serveur de sauvegarde Azure inscrit auprès de ce coffre.
 ms.topic: conceptual
 ms.date: 07/09/2019
-ms.openlocfilehash: 2a89697899fc244848854978de4b25e79ef6f184
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0cce45fbaaedad4cfcee0cda768aae2fa294312b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74173496"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002968"
 ---
 # <a name="recover-data-from-azure-backup-server"></a>Récupérer des données depuis Azure Backup Server
 
@@ -21,7 +21,7 @@ Vous pouvez utiliser Azure Backup Server pour récupérer les données sauvegard
 
 Pour récupérer des données depuis un serveur de sauvegarde Azure :
 
-1. Dans l’onglet **Récupération** de la console de gestion Azure Backup Server, cliquez sur **« Ajouter un DPM externe »** (dans la partie supérieure gauche de l’écran).
+1. Sous l’onglet **Récupération** de la console de gestion du serveur de sauvegarde Azure, sélectionnez **« Ajouter un DPM externe »** (dans la partie supérieure gauche de l’écran).
 
     ![Ajouter un serveur DPM externe](./media/backup-azure-alternate-dpm-server/add-external-dpm.png)
 2. Téléchargez les nouvelles **informations d’identification du coffre** depuis le coffre associé au **serveur de sauvegarde Azure** où les données ont été récupérées, choisissez le serveur de sauvegarde Azure dans la liste des serveurs de sauvegarde Azure inscrits auprès du coffre Recovery Services et saisissez la **phrase secrète de chiffrement** associée au serveur pour lequel les données sont en cours de récupération.
@@ -42,10 +42,10 @@ Pour récupérer des données depuis un serveur de sauvegarde Azure :
     Une liste de fichiers et de dossiers s'affiche dans le volet inférieur, qui peut être parcourue et récupérée sur n'importe quel emplacement.
 
     ![Points de récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/external-dpm-recoverypoint.png)
-5. Cliquez avec le bouton droit sur l’élément approprié, puis cliquez sur **Récupérer**.
+5. Cliquez avec le bouton droit sur l’élément approprié, puis sélectionnez **Récupérer**.
 
     ![Récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/recover.png)
-6. Vérifiez la **sélection à récupérer**. Vérifiez les données et l’heure de la copie de sauvegarde à récupérer, ainsi que la source à partir de laquelle la copie de sauvegarde a été créée. Si la sélection est incorrecte, cliquez sur **Annuler** pour revenir à l'onglet Récupération et sélectionnez le point de récupération approprié. Si la sélection est correcte, cliquez sur **Suivant**.
+6. Vérifiez la **sélection à récupérer**. Vérifiez les données et l’heure de la copie de sauvegarde à récupérer, ainsi que la source à partir de laquelle la copie de sauvegarde a été créée. Si la sélection est incorrecte, sélectionnez **Annuler** pour revenir à l’onglet Récupération et sélectionnez le point de récupération approprié. Si la sélection est correcte, sélectionnez **Suivant**.
 
     ![Résumé de la récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-summary.png)
 7. Sélectionnez **Récupérer à un autre emplacement**. **Rechercher** l'emplacement correct pour la récupération.
@@ -53,16 +53,16 @@ Pour récupérer des données depuis un serveur de sauvegarde Azure :
     ![Emplacement de remplacement de la récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-alternate-location.png)
 8. Choisissez entre les options **Créer une copie**, **Ignorer** et **Remplacer**.
 
-   * **Créer une copie** : crée une copie du fichier en cas de conflit de noms.
+   * **Créer une copie** : crée une copie du fichier en cas de conflit de noms.
    * **Ignorer** : s’il existe un conflit de noms, ne récupère pas le fichier, ce qui laisse le fichier d’origine en place.
-   * **Remplacer** : s’il existe un conflit de noms, remplace la copie existante du fichier.
+   * **Remplacer** : s’il existe un conflit de noms, remplace la copie existante du fichier.
 
      Choisissez l'option appropriée pour **Restaurer la sécurité**. Vous pouvez appliquer les paramètres de sécurité de l'ordinateur de destination sur lequel les données sont récupérées ou les paramètres de sécurité qui étaient applicables au produit au moment de la création du point de récupération.
 
      Indiquez si une **Notification** est envoyée une fois la récupération terminée avec succès.
 
      ![Notifications de la récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-notifications.png)
-9. L’écran **Résumé** répertorie les options sélectionnées jusqu'à présent. Lorsque vous avez cliqué sur **« Récupérer »** , les données seront récupérées sur l'emplacement local approprié.
+9. L’écran **Résumé** répertorie les options sélectionnées jusqu'à présent. Une fois que vous avez sélectionné **Récupérer**, les données sont récupérées à l’emplacement local approprié.
 
     ![Résumé des options de la récupération d’un serveur DPM externe](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-options-summary.png)
 
@@ -72,7 +72,7 @@ Pour récupérer des données depuis un serveur de sauvegarde Azure :
    >
 
     ![Surveillance de la récupération](./media/backup-azure-alternate-dpm-server/monitoring-recovery.png)
-10. Vous pouvez cliquer sur **Effacer le DPM externe** dans l’onglet **Récupération** du serveur DPM pour supprimer l’affichage du serveur DPM externe.
+10. Vous pouvez sélectionner **Effacer le DPM externe** sous l’onglet **Récupération** du serveur DPM pour supprimer l’affichage du serveur DPM externe.
 
     ![Effacer un serveur DPM externe](./media/backup-azure-alternate-dpm-server/clear-external-dpm.png)
 
@@ -83,7 +83,7 @@ Pour récupérer des données depuis un serveur de sauvegarde Azure :
 | 1. |Ce serveur n'est pas enregistré dans le coffre spécifié par les informations d'identification de coffre. |**Cause :** cette erreur apparaît lorsque le fichier des informations d’identification du coffre sélectionné n’appartient pas au coffre Recovery Services associé au serveur de sauvegarde Azure sur lequel la récupération est tentée. <br> **Résolution :** téléchargez le fichier des informations d’identification du coffre Recovery Services pour lequel le serveur de sauvegarde Azure est inscrit. |
 | 2. |Les données récupérables ne sont pas disponibles ou le serveur sélectionné n'est pas un serveur DPM. |**Cause :** aucun autre serveur de sauvegarde Azure n’est inscrit auprès du coffre Recovery Services ou les serveurs n’ont pas encore chargé les métadonnées ou le serveur sélectionné n’est pas un serveur de sauvegarde Azure (utilisant Windows Server ou le Client Windows). <br> **Résolution :** s’il existe d’autres serveurs de sauvegarde Azure inscrits auprès du coffre Recovery Services, assurez-vous que le dernier agent Sauvegarde Azure est installé. <br>S’il existe d’autres serveurs Azure Backup inscrits auprès du coffre Recovery Services, patientez un jour après l’installation pour lancer le processus de récupération. Le travail nocturne chargera les métadonnées de toutes les sauvegardes protégées dans le cloud. Les données seront disponibles pour la récupération. |
 | 3. |Aucun autre serveur DPM n'est inscrit auprès de ce coffre. |**Cause :** aucun autre serveur de sauvegarde Azure n’est enregistré dans le coffre à partir duquel la récupération est tentée.<br>**Résolution :** s’il existe d’autres serveurs de sauvegarde Azure inscrits auprès du coffre Recovery Services, assurez-vous que le dernier agent Sauvegarde Azure est installé.<br>S’il existe d’autres serveurs Azure Backup inscrits auprès du coffre Recovery Services, patientez un jour après l’installation pour lancer le processus de récupération. Le travail nocturne charge les métadonnées de toutes les sauvegardes protégées dans le cloud. Les données seront disponibles pour la récupération. |
-| 4. |La phrase secrète saisie ne correspond pas à la phrase secrète associée au serveur suivant : **\<nom du serveur>** |**Cause :** la phrase secrète de chiffrement utilisée dans le processus de chiffrement des données à partir des données du serveur de sauvegarde Azure en cours de récupération ne correspond pas à la phrase secrète de chiffrement fournie. L'agent ne peut pas déchiffrer les données. Par conséquent, la récupération échoue.<br>**Résolution :** veuillez fournir la phrase secrète de chiffrement associée au serveur de sauvegarde Azure pour lequel les données sont en cours de récupération. |
+| 4. |La phrase secrète de chiffrement fournie ne correspond pas à la phrase secrète associée au serveur suivant : **\<server name>** |**Cause :** la phrase secrète de chiffrement utilisée dans le processus de chiffrement des données à partir des données du serveur de sauvegarde Azure en cours de récupération ne correspond pas à la phrase secrète de chiffrement fournie. L’agent ne peut pas déchiffrer les données, de sorte que la récupération échoue.<br>**Résolution :** fournissez la phrase secrète de chiffrement associée au serveur de sauvegarde Azure pour lequel les données sont récupérées. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

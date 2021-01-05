@@ -10,6 +10,8 @@
 - name: Démarrages rapides
   expaned: true
   items:
+    - name: Utilisation de la bibliothèque cliente
+      href: quickstarts/client-library.md
     - name: Utilisation de l’outil d’étiquetage des exemples
       items:
         - name: Entraîner un modèle personnalisé avec des étiquettes
@@ -32,16 +34,34 @@
               href: quickstarts/curl-receipts.md
             - name: Python
               href: quickstarts/python-receipts.md
+        - name: Utiliser un modèle de carte de visite prédéfini
+          items:
+            - name: Python
+              href: quickstarts/python-business-cards.md
+        - name: Utiliser un modèle de facture prédéfini
+          items:
+            - name: Python
+              href: quickstarts/python-invoices.md
         - name: Obtenir des informations de disposition du texte
           items:
             - name: Python
               href: quickstarts/python-layout.md
-    - name: Utilisation du kit de développement logiciel (SDK) .NET
-      href: quickstarts/dotnet-sdk.md
 - name: Tutoriels
   items:
-    - name: Utiliser Form Recognizer avec Logic Apps
-      href: tutorial-form-recognizer-with-logic-apps.md
+    - name: Utiliser Form Recognizer avec Recherche cognitive
+      href: ../../search/cognitive-search-custom-skill-form.md
+    - name: Utiliser Form Recognizer avec AI Builder
+      href: tutorial-ai-builder.md
+- name: Concepts
+  items:
+    - name: Extraction d’une disposition
+      href: concept-layout.md
+    - name: Reçus
+      href: concept-receipts.md
+    - name: Cartes de visite
+      href: concept-business-cards.md
+    - name: Factures
+      href: concept-invoices.md
 - name: Guides pratiques
   items:
     - name: Créer un jeu de données d’entraînement
@@ -58,24 +78,36 @@
           displayName: 'docker, container, run, billing, apikey, logging'
         - name: Utiliser des instances de conteneur
           href: deploy-form-recognizer-on-container-instances.md
+        - name: Documentation sur les conteneurs Cognitive Services
+          href: ../containers/index.yml
+    - name: Sauvegarder et récupérer des modèles
+      href: disaster-recovery.md
 - name: Informations de référence
   items:
+    - name: Préversion de l’API Form Recognizer v2.1
+      href: 'https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-2/operations/AnalyzeBusinessCardAsync'
     - name: API Form Recognizer v2.0
-      href: 'https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/AnalyzeWithCustomForm'
-    - name: API Form Recognizer v1.0
-      href: 'https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeWithCustomModel'
+      href: 'https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeWithCustomForm'
     - name: Kits SDK
       items:
         - name: .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/formrecognizer?view=azure-dotnet-preview'
+          href: /dotnet/api/overview/azure/ai.formrecognizer-readme
+        - name: Python
+          href: /python/api/azure-ai-formrecognizer/?view=azure-python
+        - name: Java
+          href: /java/api/overview/azure/ai-formrecognizer-readme
+        - name: JavaScript
+          href: /javascript/api/overview/azure/ai-form-recognizer-readme
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/form-recognizer/context/context
     - name: Tarification et limites
-      href: 'https://go.microsoft.com/fwlink/?linkid=2087258'
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/form-recognizer/'
     - name: UserVoice
       href: 'https://go.microsoft.com/fwlink/?linkid=2090535'
     - name: Stack Overflow
-      href: 'https://go.microsoft.com/fwlink/?linkid=2087186'
+      href: 'https://stackoverflow.com/questions/tagged/form-recognizer'
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
     - name: Disponibilité régionale

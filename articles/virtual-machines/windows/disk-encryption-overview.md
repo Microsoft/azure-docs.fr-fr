@@ -4,16 +4,16 @@ description: Cet article fournit des instructions sur l’activation de Microsof
 author: msmbaldwin
 ms.service: virtual-machines-windows
 ms.subservice: security
-ms.topic: article
+ms.topic: conceptual
 ms.author: mbaldwin
 ms.date: 10/05/2019
 ms.custom: seodec18
-ms.openlocfilehash: 8bed34e816207c9f0bd0565abab6af4adbaeb7fd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 27d962a2cf1a1c453d942d320d65b3e9b9a4b959
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82081640"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94357791"
 ---
 # <a name="azure-disk-encryption-for-windows-vms"></a>Azure Disk Encryption pour les machines virtuelles Windows 
 
@@ -33,11 +33,13 @@ Vous pouvez découvrir les notions de base d’Azure Disk Encryption pour Window
 
 ### <a name="supported-vms"></a>Machines virtuelles prises en charge
 
-Les machines virtuelles Windows sont disponibles dans une [gamme de tailles](sizes-general.md). Azure Disk Encryption n’est pas disponible sur les [machines virtuelles De base et de série A](https://azure.microsoft.com/pricing/details/virtual-machines/series/), ni sur celles disposant de moins de 2 Go de mémoire.
+Les machines virtuelles Windows sont disponibles dans une [gamme de tailles](../sizes-general.md). Azure Disk Encryption n’est pas disponible sur les [machines virtuelles De base et de série A](https://azure.microsoft.com/pricing/details/virtual-machines/series/), ni sur celles disposant de moins de 2 Go de mémoire.
 
 Azure Disk Encryption est également disponible pour les machines virtuelles avec stockage premium.
 
-Azure Disk Encryption n’est pas disponible sur les [machines virtuelles de 2e génération](generation-2.md#generation-1-vs-generation-2-capabilities) et les [machines virtuelles de la série Lsv2](../lsv2-series.md). Pour plus d’exceptions, consultez [Azure Disk Encryption : Scénarios non pris en charge](disk-encryption-windows.md#unsupported-scenarios).
+Azure Disk Encryption n’est pas disponible sur les [machines virtuelles de deuxième génération](../generation-2.md#generation-1-vs-generation-2-capabilities). Pour plus d’exceptions, consultez [Azure Disk Encryption : Scénarios non pris en charge](disk-encryption-windows.md#unsupported-scenarios).
+
+Azure Disk Encryption n’est pas disponible sur les images de machine virtuelle sans disque temporaire (Dv4, Dsv4, Ev4 et Esv4).  Voir [Tailles de machine virtuelle Azure sans disque temporaire local](../azure-vms-no-temp-disk.md).
 
 ### <a name="supported-operating-systems"></a>Systèmes d’exploitation pris en charge
 
@@ -79,9 +81,9 @@ Le tableau suivant définit certains termes courants utilisés dans la documenta
 | --- | --- |
 | Azure Key Vault | Key Vault est un service de gestion de clés de chiffrement basé sur des modules de sécurité matériels validés FIPS (Federal Information Processing Standard). Ces normes permettent de protéger vos clés de chiffrement et vos secrets sensibles. Pour plus d’informations, consultez la documentation [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) et [Création et configuration d’un coffre de clés pour Azure Disk Encryption](disk-encryption-key-vault.md). |
 | Azure CLI | [Azure CLI](/cli/azure/install-azure-cli) est optimisé pour gérer et administrer des ressources Azure en ligne de commande.|
-| BitLocker |[BitLocker](https://technet.microsoft.com/library/hh831713.aspx) est une technologie de chiffrement de volume Windows qui permet d’activer le chiffrement de disque sur des machines virtuelles Windows. |
+| BitLocker |[BitLocker](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831713(v=ws.11)) est une technologie de chiffrement de volume Windows qui permet d’activer le chiffrement de disque sur des machines virtuelles Windows. |
 | Clé de chiffrement principale (KEK) | Clé asymétrique (RSA 2048) que vous pouvez utiliser pour protéger ou encapsuler le secret. Vous pouvez fournir une clé protégée par un module de sécurité matériel ou une clé protégée par logiciel. Pour plus d’informations, consultez la documentation [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) et [Création et configuration d’un coffre de clés pour Azure Disk Encryption](disk-encryption-key-vault.md). |
-| Applets de commande PowerShell | Pour plus d’informations, voir [Cmdlets Azure PowerShell](/powershell/azure/overview). |
+| Applets de commande PowerShell | Pour plus d’informations, voir [Cmdlets Azure PowerShell](/powershell/azure/). |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -92,5 +94,3 @@ Le tableau suivant définit certains termes courants utilisés dans la documenta
 - [Script d’interface CLI des prérequis Azure Disk Encryption](https://github.com/ejarvi/ade-cli-getting-started)
 - [Script PowerShell des prérequis Azure Disk Encryption](https://github.com/Azure/azure-powershell/tree/master/src/Compute/Compute/Extension/AzureDiskEncryption/Scripts)
 - [Création et configuration d’un coffre de clés pour Azure Disk Encryption](disk-encryption-key-vault.md)
-
-

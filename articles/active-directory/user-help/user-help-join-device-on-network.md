@@ -12,12 +12,12 @@ ms.topic: end-user-help
 ms.date: 08/03/2018
 ms.author: curtand
 ms.reviewer: jairoc
-ms.openlocfilehash: 6c93f34068cd296cb2d3a59f208fa644cdbf2260
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: efb3ee24add847baf8264eccdf71278be5ee9496
+ms.sourcegitcommit: f5580dd1d1799de15646e195f0120b9f9255617b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83745735"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91536968"
 ---
 # <a name="join-your-work-device-to-your-organizations-network"></a>Joindre votre appareil professionnel au réseau de votre organisation
 Joignez votre appareil Windows 10 professionnel au réseau de votre organisation afin de pouvoir accéder à des ressources potentiellement restreintes.
@@ -27,9 +27,9 @@ Quand vous joignez votre appareil Windows 10 au réseau de votre organisation, l
 
 - Windows inscrit votre appareil sur le réseau de votre organisation, vous permettant d’accéder à vos ressources à l’aide de votre compte personnel. Une fois votre appareil inscrit, Windows le joint au réseau ; vous pouvez alors utiliser le nom d’utilisateur et le mot de passe de votre organisation pour vous connecter et accéder aux ressources restreintes.
 
-- Selon les choix de votre organisation, vous devrez peut-être configurer une vérification en deux étapes à travers [l’authentification multifacteur](multi-factor-authentication-end-user-first-time.md) ou des [informations de sécurité](user-help-security-info-overview.md).
+- Selon les choix de votre organisation, vous devrez peut-être configurer une vérification en deux étapes à travers [l’authentification multifacteur](multi-factor-authentication-end-user-first-time.md) ou des [informations de sécurité](./security-info-setup-signin.md).
 
-- Selon les choix de votre organisation, vous pouvez être automatiquement inscrit dans une solution de gestion des appareils mobiles, comme Microsoft Intune. Pour plus d’informations sur l’inscription dans Microsoft Intune, consultez [Inscrire votre appareil sur Intune](https://docs.microsoft.com/intune-user-help/enroll-your-device-in-intune-all).
+- Selon les choix de votre organisation, vous pouvez être automatiquement inscrit dans une solution de gestion des appareils mobiles, comme Microsoft Intune. Pour plus d’informations sur l’inscription dans Microsoft Intune, consultez [Inscrire votre appareil sur Intune](/intune-user-help/enroll-your-device-in-intune-all).
 
 - Vous suivrez le processus de connexion en utilisant l’authentification automatique avec votre compte professionnel.
 
@@ -48,22 +48,22 @@ Si votre appareil est tout nouveau et n’a pas encore été configuré, vous po
 
 4. Sur votre appareil mobile, approuvez ce dernier afin qu’il puisse accéder à votre compte. 
 
-    ![Écran de notification par appareil mobile](./media/user-help-join-device-on-network/join-device-oobe-mobile.png)
+    ![Capture d’écran représentant l’écran de notification « Entrez votre mot de passe ».](./media/user-help-join-device-on-network/join-device-oobe-mobile.png)
 
 5. Terminez le processus OOBE, notamment en définissant vos paramètres de confidentialité et en configurant Windows Hello (si nécessaire).
 
     Votre appareil est maintenant joint au réseau de votre organisation.
 
-## <a name="to-make-sure-youre-joined"></a>Pour vérifier que vous êtes joint
+## <a name="to-make-sure-youre-joined-new-device"></a>Pour vérifier que vous êtes joint (nouvel appareil)
 Vous pouvez vérifier que vous êtes joint en examinant vos paramètres.
 
 1. Ouvrez **Paramètres**, puis sélectionnez **Comptes**.
 
     ![Comptes dans l’écran Paramètres](./media/user-help-join-device-on-network/join-device-settings-accounts.png)
 
-2. Sélectionnez **Accès Professionnel ou Scolaire** et vérifiez que vous voyez un texte similaire à **Connecté à *\<<votre_organisation>>* Azure AD**.
+2. Sélectionnez **Accès Professionnel ou Scolaire** et vérifiez que vous voyez un texte similaire à **Connecté à *\<your_organization>* Azure AD**.
 
-    ![Écran Accès Professionnel ou Scolaire avec compte contoso connecté](./media/user-help-join-device-on-network/join-device-oobe-verify.png)
+    ![Capture d’écran représentant la fenêtre « Accès Professionnel ou Scolaire » dans laquelle le compte « Connecté à (votre organisation) Azure AD » est sélectionné.](./media/user-help-join-device-on-network/join-device-oobe-verify.png)
 
 
 ## <a name="to-join-an-already-configured-windows-10-device"></a>Pour joindre un appareil Windows 10 déjà configuré
@@ -106,7 +106,7 @@ Vous pouvez vérifier que vous êtes joint en examinant vos paramètres.
 
     ![Comptes dans l’écran Paramètres](./media/user-help-join-device-on-network/join-device-settings-accounts.png)
 
-2. Sélectionnez **Accès Professionnel ou Scolaire** et vérifiez que vous voyez un texte similaire à **Connecté à *\<<votre_organisation>>* Azure AD**.
+2. Sélectionnez **Accès Professionnel ou Scolaire** et vérifiez que vous voyez un texte similaire à **Connecté à *\<your_organization>* Azure AD**.
 
     ![Écran Accès Professionnel ou Scolaire avec compte contoso connecté](./media/user-help-join-device-on-network/join-device-setup-verify.png)
 
@@ -115,4 +115,4 @@ Après avoir joint votre appareil au réseau de votre organisation, vous devriez
 
 - Si votre organisation vous demande d’inscrire votre appareil personnel, tel que votre téléphone, consultez [Inscrire votre appareil personnel sur le réseau de votre organisation](user-help-register-device-on-network.md).
 
-- Si votre organisation est managée à l’aide de Microsoft Intune et que vous avez des questions sur l’inscription, l'ouverture de session ou tout autre problème lié à Intune, consultez l’[aide utilisateur Intune](https://docs.microsoft.com/intune-user-help/use-managed-devices-to-get-work-done).
+- Si votre organisation est managée à l’aide de Microsoft Intune et que vous avez des questions sur l’inscription, l'ouverture de session ou tout autre problème lié à Intune, consultez l’[aide utilisateur Intune](/intune-user-help/use-managed-devices-to-get-work-done).

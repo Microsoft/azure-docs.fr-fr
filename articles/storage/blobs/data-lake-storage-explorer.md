@@ -4,16 +4,16 @@ description: Utilisez l'Explorateur Stockage Azure pour gérer les répertoires,
 author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
-ms.topic: conceptual
-ms.date: 01/23/2019
+ms.topic: how-to
+ms.date: 07/16/2020
 ms.author: normesta
 ms.reviewer: stewu
-ms.openlocfilehash: fca9fa8a964c6c9d69ffbb3036bd4774e0d1bd34
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e46bb87788de27916860720284087643db7153dc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228413"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913400"
 ---
 # <a name="use-azure-storage-explorer-to-manage-directories-files-and-acls-in-azure-data-lake-storage-gen2"></a>Utiliser l'Explorateur Stockage Azure pour gérer les répertoires, les fichiers et les listes de contrôle d'accès dans Azure Data Lake Storage Gen2
 
@@ -23,7 +23,7 @@ Cet article explique comment utiliser [Azure Storage Explorer](https://azure.mic
 
 > [!div class="checklist"]
 > * Un abonnement Azure. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
-> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](data-lake-storage-quickstart-create-account.md) instructions.
+> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](../common/storage-account-create.md) instructions.
 > * Explorateur Stockage Azure installé sur votre ordinateur local. Pour installer l’Explorateur Stockage Azure pour Windows, Macintosh ou Linux, consultez [Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/).
 
 ## <a name="sign-in-to-storage-explorer"></a>Se connecter à l’Explorateur Stockage
@@ -38,9 +38,9 @@ Lors du premier démarrage de l’Explorateur Stockage, la fenêtre **Microsoft 
 
 Sélectionnez **Ajouter un compte Azure**, puis cliquez sur **Connexion..** . Suivez les instructions de connexion à votre compte Azure qui s’affichent à l’écran.
 
-![Fenêtre de connexion à l’Explorateur Stockage Microsoft Azure](media/storage-quickstart-blobs-storage-explorer/connect.png)
+![Capture d’écran montrant l’Explorateur Stockage Microsoft Azure, avec l’option Ajouter un compte Azure et le bouton Se connecter en évidence.](media/storage-quickstart-blobs-storage-explorer/connect.png)
 
-Une fois que la connexion est établie, l’Explorateur Stockage Azure se charge avec l’onglet **Explorateur** affiché. Cette vue vous donne accès à l’ensemble de vos comptes Stockage Azure, ainsi qu’au stockage local configuré via les comptes de l’[émulateur de stockage Azure](../common/storage-use-emulator.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json), [Cosmos DB](../../cosmos-db/storage-explorer.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) ou les environnements [Azure Stack](/azure-stack/user/azure-stack-storage-connect-se?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
+Une fois que la connexion est établie, l’Explorateur Stockage Azure se charge avec l’onglet **Explorateur** affiché. Cette vue vous donne accès à l’ensemble de vos comptes Stockage Azure, ainsi qu’au stockage local configuré via les comptes de l’[émulateur de stockage Azure](../common/storage-use-azurite.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json), [Cosmos DB](../../cosmos-db/storage-explorer.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) ou les environnements [Azure Stack](/azure-stack/user/azure-stack-storage-connect-se?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
 
 ![Fenêtre de connexion à l’Explorateur Stockage Microsoft Azure](media/storage-quickstart-blobs-storage-explorer/mainpage.png)
 
@@ -111,4 +111,4 @@ Vous pouvez gérer les autorisations sur des répertoires individuels, ainsi que
 Découvrez les listes de contrôle d'accès disponibles dans Data Lake Storage Gen2.
 
 > [!div class="nextstepaction"]
-> [Contrôle d’accès dans Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control)
+> [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md)

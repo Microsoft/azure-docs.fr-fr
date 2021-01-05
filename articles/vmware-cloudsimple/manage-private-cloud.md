@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 13496a18f4c99b69a5b8095caf5b74a04d1bba88
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b0aff8298ac2335e5216252eb2cbd5a393cc37d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869297"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86524994"
 ---
 # <a name="manage-private-cloud-resources-and-activity"></a>Gérer les ressources et les activités de cloud privé
 
@@ -37,13 +37,13 @@ Sélectionnez un cloud privé pour avoir accès à des informations et à des ac
 
 ## <a name="private-cloud-summary"></a>Résumé du cloud privé
 
-Affichez un résumé complet du cloud privé sélectionné.  La page de résumé inclut les serveurs DNS déployés sur le cloud privé.  Vous pouvez configurer la redirection DNS des serveurs DNS locaux vers vos serveurs DNS de cloud privé.  Pour plus d’informations sur la redirection DNS, consultez l’article [Configure DNS for name resolution for Private Cloud vCenter from on-premises](https://docs.microsoft.com/azure/vmware-cloudsimple/on-premises-dns-setup/) (Configurer DNS pour la résolution de noms pour Private Cloud vCenter sur site).
+Affichez un résumé complet du cloud privé sélectionné.  La page de résumé inclut les serveurs DNS déployés sur le cloud privé.  Vous pouvez configurer la redirection DNS des serveurs DNS locaux vers vos serveurs DNS de cloud privé.  Pour plus d’informations sur la redirection DNS, consultez l’article [Configure DNS for name resolution for Private Cloud vCenter from on-premises](./on-premises-dns-setup.md) (Configurer DNS pour la résolution de noms pour Private Cloud vCenter sur site).
 
 ![Résumé du cloud privé](media/private-cloud-summary.png)
 
 ### <a name="available-actions"></a>Actions disponibles
 
-* [Lancer le client vSphere](https://docs.microsoft.com/azure/vmware-cloudsimple/vcenter-access). Accédez au serveur vCenter de ce cloud privé.
+* [Lancer le client vSphere](./vcenter-access.md). Accédez au serveur vCenter de ce cloud privé.
 * [Acheter des nœuds](create-nodes.md). Ajoutez des nœuds à ce cloud privé.
 * [Étendre](expand-private-cloud.md). Ajoutez des nœuds à ce cloud privé.
 * **Actualiser**. Mettez à jour les informations de cette page.
@@ -58,10 +58,10 @@ Affichez la liste des réseaux VLAN/sous-réseaux définis pour le cloud privé 
 
 ### <a name="available-actions"></a>Actions disponibles
 
-* [Ajouter des réseaux VLAN/sous-réseaux](https://docs.microsoft.com/azure/vmware-cloudsimple/create-vlan-subnet/). Ajoutez un réseau VLAN/sous-réseau à ce cloud privé.
+* [Ajouter des réseaux VLAN/sous-réseaux](./create-vlan-subnet.md). Ajoutez un réseau VLAN/sous-réseau à ce cloud privé.
 
 Sélectionnez un réseau VLAN/sous-réseau pour avoir accès aux actions suivantes.
-* [Attacher une table de pare-feu](https://docs.microsoft.com/azure/vmware-cloudsimple/firewall/). Attachez une table de pare-feu à ce cloud privé.
+* [Attacher une table de pare-feu](./firewall.md). Attachez une table de pare-feu à ce cloud privé.
 * **Modifier**
 * **Supprimer** (uniquement les réseaux VLAN/sous-réseaux définis par l’utilisateur)
 

@@ -1,16 +1,14 @@
 ---
 title: Préparation du déploiement d’un cluster autonome
 description: Documentation relative à la préparation de l’environnement et la création de la configuration du cluster, à prendre en considération avant de déployer un cluster conçu pour gérer une charge de travail de production.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 9/11/2018
-ms.author: dekapur
-ms.openlocfilehash: 6a00b7d1b72d594c08021982b2448de6275414c8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 277c7e047815b3b4171f7cced203ecbe5b68b155
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75610061"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509170"
 ---
 # <a name="plan-and-prepare-your-service-fabric-standalone-cluster-deployment"></a>Planifier et préparer votre déploiement de cluster Service Fabric autonome
 
@@ -51,7 +49,7 @@ Les clusters de test exécutant des charges de travail avec état doivent avoir 
 
 ## <a name="prepare-the-machines-that-will-serve-as-nodes"></a>Préparer les ordinateurs qui serviront de nœuds
 
-Voici quelques spécifications recommandées pour chaque ordinateur que vous souhaitez ajouter au cluster :
+Voici les spécifications recommandées pour les ordinateurs d’un cluster Service Fabric :
 
 * Un minimum de 16 Go de RAM
 * Un minimum de 40 Go d’espace disque disponible
@@ -59,11 +57,13 @@ Voici quelques spécifications recommandées pour chaque ordinateur que vous sou
 * Connectivité à un ou plusieurs réseaux sécurisés pour tous les ordinateurs
 * Système d’exploitation Windows Server installé (versions valides 2012 R2, 2016, 1709 ou 1803). Les versions 6.4.654.9590 et ultérieures de Service Fabric prennent également en charge Windows Server 2019 et 1809.
 * [.NET Framework 4.5.1 ou version ultérieure](https://www.microsoft.com/download/details.aspx?id=40773), installation complète
-* [Windows PowerShell 3.0](https://msdn.microsoft.com/powershell/scripting/install/installing-windows-powershell)
-* Le [service RemoteRegistry](https://technet.microsoft.com/library/cc754820) doit être exécuté sur tous les ordinateurs
-* Le lecteur d’installation de Service Fabric doit être au format de système de fichiers NTFS.
+* [Windows PowerShell 3.0](/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7)
+* Le [service RemoteRegistry](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc754820(v=ws.11)) doit être exécuté sur tous les ordinateurs
+* **Le lecteur d’installation de Service Fabric doit être un système de fichiers NTFS.**
+* **Les services Windows *Journaux de performances et alertes* et *Journal des événements Windows* doivent [être activés](/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc755249(v=ws.11))** .
 
-L’administrateur de cluster déployant et configurant le cluster doit disposer de [privilèges d’administrateur](https://social.technet.microsoft.com/wiki/contents/articles/13436.windows-server-2012-how-to-add-an-account-to-a-local-administrator-group.aspx) sur chaque ordinateur. Vous ne pouvez pas installer Service Fabric sur un contrôleur de domaine.
+> [!IMPORTANT]
+> L’administrateur de cluster déployant et configurant le cluster doit disposer de [privilèges d’administrateur](https://social.technet.microsoft.com/wiki/contents/articles/13436.windows-server-2012-how-to-add-an-account-to-a-local-administrator-group.aspx) sur chaque ordinateur. Vous ne pouvez pas installer Service Fabric sur un contrôleur de domaine.
 
 ## <a name="download-the-service-fabric-standalone-package-for-windows-server"></a>Télécharger le package autonome Service Fabric pour Windows Server
 [Lien de téléchargement - Package autonome Service Fabric - Windows Server](https://go.microsoft.com/fwlink/?LinkId=730690) et décompressez le package sur un ordinateur de déploiement qui ne fait pas partie du cluster ou sur l’un des ordinateurs qui fera partie de votre cluster.
@@ -103,7 +103,7 @@ Lorsqu’un administrateur de cluster configure un cluster autonome Service Fabr
 5. Si les ordinateurs du cluster ne sont pas accessibles via Internet, définissez les éléments suivants dans la configuration du cluster :
    * Désactiver la télémétrie : sous *Propriétés*, définissez *« enableTelemetry » : false*
    * Désactiver le téléchargement de version Fabric automatique et les notifications indiquant que la prise en charge de la version actuelle touche à sa fin : sous *Propriétés*, définissez *« fabricClusterAutoupgradeEnabled » : false*
-   * De même, si l’accès réseau à Internet est limité à des domaines sur liste verte, les domaines ci-dessous sont nécessaires pour la mise à niveau automatique : go.microsoft.com download.microsoft.com
+   * De même, si l’accès réseau à Internet est limité à des domaines sur liste d’autorisation, les domaines ci-dessous sont nécessaires pour la mise à niveau automatique : go.microsoft.com download.microsoft.com
 
 6. Définissez les exclusions antivirus Service Fabric appropriées :
 
@@ -155,7 +155,7 @@ Passed                     : True
 Actuellement, ce module de test de configuration ne valide pas la configuration de sécurité. Cette opération doit donc être effectuée de manière indépendante.
 
 > [!NOTE]
-> Nous améliorons en permanence ce module afin de le rendre plus fiable. Par conséquent, s’il existe un cas défectueux ou manquant qui, selon vous, n’est pas actuellement détecté par TestConfiguration, faites-le nous savoir via nos [canaux de prise en charge](https://docs.microsoft.com/azure/service-fabric/service-fabric-support).
+> Nous améliorons en permanence ce module afin de le rendre plus fiable. Par conséquent, s’il existe un cas défectueux ou manquant qui, selon vous, n’est pas actuellement détecté par TestConfiguration, faites-le nous savoir via nos [canaux de prise en charge](./service-fabric-support.md).
 >
 >
 

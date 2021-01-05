@@ -3,29 +3,33 @@ title: Analyser les coûts d’Azure avec l’application Power BI
 description: Cet article explique comment installer et utiliser l’application Power BI Azure Cost Management.
 author: bandersmsft
 ms.author: banders
-ms.date: 04/15/2020
-ms.topic: conceptual
+ms.date: 11/09/2020
+ms.topic: how-to
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: benshy
-ms.openlocfilehash: 050df590827b94888c44826ac6391ff79ada1cfc
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 1c5adf58f670f3cadcedbe710568551004b77b78
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81461597"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94413239"
 ---
 # <a name="analyze-cost-with-the-azure-cost-management-power-bi-app-for-enterprise-agreements-ea"></a>Analyser les coûts avec l’application Power BI Azure Cost Management pour les Contrats Entreprise
 
 Cet article explique comment installer et utiliser l’application Power BI Azure Cost Management. L’application vous aide à analyser et à gérer vos coûts Azure dans Power BI. Vous pouvez utiliser l’application pour surveiller les coûts et les tendances d’utilisation, et pour identifier les options d’optimisation des coûts afin de réduire vos dépenses.
 
-Vous téléchargez l’application dans Power BI Desktop. Vous pouvez utiliser l’application telle quelle, ou bien vous pouvez la modifier pour étendre les filtres, les vues et les visualisations par défaut afin de les personnaliser en fonction de vos besoins. Utilisez-la ensuite pour joindre des données supplémentaires pour créer des rapports personnalisés afin d’obtenir des vues holistiques de vos coûts globaux.
+Vous pouvez utiliser l’application telle quelle, ou bien vous pouvez la modifier pour étendre les filtres, les vues et les visualisations par défaut afin de les personnaliser en fonction de vos besoins. Utilisez-la ensuite pour joindre des données supplémentaires pour créer des rapports personnalisés afin d’obtenir des vues holistiques de vos coûts globaux.
 
 L’application Power BI Azure Cost Management prend actuellement en charge seulement les clients avec un [Contrat Entreprise](https://azure.microsoft.com/pricing/enterprise-agreement/).
 
+> [!NOTE]
+> Les applications basées sur un modèle Power BI ne prennent pas en charge le téléchargement du fichier PBIX.
+
 ## <a name="prerequisites"></a>Prérequis
 
-- Une [licence Power BI Pro](/power-bi/service-self-service-signup-for-power-bi) pour installer et utiliser l’application
-- Pour vous connecter à des données, vous devez utiliser un compte [Administrateur d’entreprise](../manage/understand-ea-roles.md)
+- Une [licence Power BI Pro](/power-bi/service-self-service-signup-for-power-bi) est requise pour installer et utiliser l’application.
+- Pour vous connecter aux données, vous devez utiliser un compte [Administrateur d’entreprise](../manage/understand-ea-roles.md). Le rôle Administrateur d’entreprise (lecture seule) est pris en charge.
 
 ## <a name="installation-steps"></a>Procédure d’installation :
 
@@ -43,7 +47,7 @@ Pour installer l’application :
 9. Dans la boîte de dialogue qui apparaît, entrez votre numéro d’inscription Contrat Entreprise pour **BillingProfileIdOrEnrollmentNumber**. Spécifiez le nombre de mois de données à obtenir. Conservez la valeur d’**Étendue** par défaut de **Numéro d’inscription**, puis sélectionnez **Suivant**.  
   ![Entrer les informations d’inscription du Contrat Entreprise](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/ea-number.png)  
 10. La boîte de dialogue suivante se connecte à Azure et obtient les données nécessaires pour les recommandations d’instances réservées. *Laissez les valeurs par défaut comme elles sont configurées* et sélectionnez **Sign in** (Se connecter).  
-  ![Connexion à Azure](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/autofit.png)  
+  ![Capture d’écran illustrant la boîte de dialogue Se connecter à l’application Azure Cost Management avec les valeurs par défaut.](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/autofit.png)  
 11. La dernière étape de l’installation est de se connecter à votre inscription Contrat Entreprise ; elle nécessite un compte [Administrateur d’entreprise](../manage/understand-ea-roles.md). Sélectionnez **Sign in** (Se connecter) pour vous authentifier avec votre inscription Contrat Entreprise. Cette étape lance également une action d’actualisation des données dans Power BI.  
   ![Se connecter à l’inscription Contrat Entreprise](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/ea-auth.png)  
     > [!NOTE]
@@ -84,7 +88,7 @@ Le rapport identifie également les machines virtuelles Windows où Hybrid Benef
 
 Vous pouvez appliquer un filtre sur _chargetype_ pour voir les données de sous-utilisation des instances réservées.
 
-Pour plus d’informations sur les données amorties, consultez [Obtenir les données d’utilisation et de coûts de la réservation pour les Contrats Entreprise](/azure/cost-management-billing/reservations/understand-reserved-instance-usage-ea).
+Pour plus d’informations sur les données amorties, consultez [Obtenir les données d’utilisation et de coûts de la réservation pour les Contrats Entreprise](../reservations/understand-reserved-instance-usage-ea.md).
 
 **RI Savings** (Économies liées aux instances réservées) - Le rapport montre les économies accumulées par les réservations pour l’abonnement, le groupe de ressources et au niveau de la ressource. Il affiche :
 
@@ -128,6 +132,27 @@ Pour plus d’informations sur l’utilisation du rapport, consultez la section 
 
 Si vous rencontrez des problèmes avec l’application Power BI, les informations de dépannage suivantes peuvent vous aider.
 
+### <a name="error-processing-the-data-in-the-dataset"></a>Erreur lors du traitement des données dans le jeu de données
+
+Vous risquez d’obtenir une erreur indiquant :
+
+```
+There was an error when processing the data in the dataset.
+Data source error: {"error":{"code":"ModelRefresh_ShortMessage_ProcessingError","pbi.error":{"code":"ModelRefresh_ShortMessage_ProcessingError","parameters":{},"details":[{"code":"Message","detail":{"type":1,"value":"We cannot convert the value \"Required Field: 'Enr...\" to type List."}}],"exceptionCulprit":1}}} Table: <TableName>.
+```
+
+Un nom de table s’affiche à la place de `<TableName>`.
+
+#### <a name="cause"></a>Cause
+
+La valeur de l’**étendue** par défaut `Enrollment Number` a été modifiée dans la connexion à Cost Management.
+
+#### <a name="solution"></a>Solution
+
+Reconnectez-vous à Cost Management et définissez la valeur de l’**étendue** sur `Enrollment Number`. N’entrez pas le numéro d’inscription de votre organisation, mais tapez plutôt `Enrollment Number` exactement comme il apparaît dans l’image suivante.
+
+![Entrer les informations d’inscription du Contrat Entreprise](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/ea-number.png)  
+
 ### <a name="budgetamount-error"></a>Erreur BudgetAmount
 
 Vous risquez d’obtenir une erreur indiquant :
@@ -139,7 +164,7 @@ Please try again later or contact support. If you contact support, please provid
 Data source error: The 'budgetAmount' column does not exist in the rowset. Table: Budgets.
 ```
 
-#### <a name="cause"></a>Cause :
+#### <a name="cause"></a>Cause
 
 Cette erreur se produit en raison d’un bogue avec les métadonnées sous-jacentes. Le problème est lié à l’absence de budget disponible sous **Gestion des coûts > Budget** dans le portail Azure. La résolution du bogue est en cours de déploiement sur Power BI Desktop et le service Power BI. 
 
@@ -156,7 +181,7 @@ Vous risquez d’obtenir une erreur indiquant :
 Failed to update data source credentials: The credentials provided for the AzureBlobs source are invalid.
 ```
 
-#### <a name="cause"></a>Cause :
+#### <a name="cause"></a>Cause
 
 Cette erreur se produit si vous changez la méthode d’authentification pour la connexion blob AutoFitComboMeter.
 
@@ -164,7 +189,7 @@ Cette erreur se produit si vous changez la méthode d’authentification pour la
 
 1. Connectez-vous à vos données.
 1. Après avoir entré votre inscription EA et le nombre de mois, veillez à conserver la valeur par défaut **Anonyme** pour la méthode d’authentification et **Aucun** pour le paramètre niveau de confidentialité.  
-  ![Connexion à Azure](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/autofit-troubleshoot.png)  
+  ![Capture d’écran illustrant la boîte de dialogue Se connecter à l’application Azure Cost Management avec les valeurs Anonyme et Aucun.](./media/analyze-cost-data-azure-cost-management-power-bi-template-app/autofit-troubleshoot.png)  
 1. Dans la page suivante, définissez **OAuth2** pour la méthode d’authentification et **Aucun** pour le niveau de confidentialité. Ensuite, connectez-vous pour vous authentifier auprès de votre inscription. Cette étape lance également une action d’actualisation des données Power BI.
 
 
@@ -175,16 +200,16 @@ Les informations suivantes récapitulent les données disponibles via l’applic
 | **Informations de référence du tableau** | **Description** |
 | --- | --- |
 | **AutoFitComboMeter** | Données incluses dans l’application pour normaliser la recommandation sur les instances réservées et l’utilisation de la plus petite taille possible dans le groupe de la famille d’instances. |
-| [**Balance summary (Récapitulatif du solde)** ](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary#response) | Récapitulatif du solde pour les Contrats Entreprise. |
+| [**Balance summary (Récapitulatif du solde)**](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary#response) | Récapitulatif du solde pour les Contrats Entreprise. |
 | [**Budgets**](/rest/api/consumption/budgets/get#definitions) | Détails des budgets pour visualiser les coûts réels ou l’utilisation par rapport aux cibles budgétaires existantes. |
-| [**Pricesheets (Listes de prix)** ](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet#see-also) | Tarifs applicables pour le profil de facturation ou l’inscription Contrat Entreprise spécifié. |
-| [**RI charges (Coûts facturés pour les instances réservées)** ](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges#response) | Coûts facturés associés à vos instances réservées au cours des 24 derniers mois. |
-| [**RI recommendations (shared) - Recommandations (partagées) pour les instances réservées**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#response) | Recommandations d’achat d’instances réservées basées sur les tendances d’utilisation de tous vos abonnements pour les 7, 30 ou 60 derniers jours. |
-| [**RI recommendations (single) - Recommandations (abonnement unique) pour les instances réservées**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#response-1) | Recommandations d’achat d’instances réservées basées sur les tendances d’utilisation de votre abonnement unique pour les 7, 30 ou 60 derniers jours. |
-| [**RI usage details (Détails d’utilisation des instances réservées)** ](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#response) | Détails de la consommation pour vos instances réservées existantes au cours du dernier mois. |
-| [**RI usage summary (Récapitulatif de l’utilisation des instances réservées)** ](/rest/api/consumption/reservationssummaries/list) | Pourcentage d’utilisation quotidienne des réservations Azure |
-| [**Usage Details (Détails d’utilisation)** ](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#usage-details-field-definitions) | Ventilation des quantités consommées et des coûts estimés pour le profil de facturation donné dans l’inscription Contrat Entreprise. |
-| [**Usage details amortized (Détails d’utilisation avec amortissement)** ](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#usage-details-field-definitions) | Ventilation des quantités consommées et des coûts amortis estimés pour le profil de facturation donné dans l’inscription Contrat Entreprise. |
+| [**Pricesheets (Listes de prix)**](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet#see-also) | Tarifs applicables pour le profil de facturation ou l’inscription Contrat Entreprise spécifié. |
+| [**RI charges (Coûts facturés pour les instances réservées)**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges#response) | Coûts facturés associés à vos instances réservées au cours des 24 derniers mois. |
+| [**RI recommendations (shared) - Recommandations (partagées) pour les instances réservées**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#response) | Recommandations d’achat d’instances réservées, basées sur les tendances d’utilisation observées dans tous vos abonnements sur les 7 derniers jours. |
+| [**RI recommendations (single) - Recommandations (abonnement unique) pour les instances réservées**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#response-1) | Recommandations d’achat d’instances réservées, basées sur les tendances d’utilisation de votre abonnement unique au cours des 7 derniers jours. |
+| [**RI usage details (Détails d’utilisation des instances réservées)**](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#response) | Détails de la consommation pour vos instances réservées existantes au cours du dernier mois. |
+| [**RI usage summary (Récapitulatif de l’utilisation des instances réservées)**](/rest/api/consumption/reservationssummaries/list) | Pourcentage d’utilisation quotidienne des réservations Azure |
+| [**Usage Details (Détails d’utilisation)**](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#usage-details-field-definitions) | Ventilation des quantités consommées et des coûts estimés pour le profil de facturation donné dans l’inscription Contrat Entreprise. |
+| [**Usage details amortized (Détails d’utilisation avec amortissement)**](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#usage-details-field-definitions) | Ventilation des quantités consommées et des coûts amortis estimés pour le profil de facturation donné dans l’inscription Contrat Entreprise. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

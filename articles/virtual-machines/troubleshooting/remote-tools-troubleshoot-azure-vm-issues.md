@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 01/11/2018
 ms.author: delhan
-ms.openlocfilehash: d29b2b7c2b9194f20afe4c74d117847f0e343b12
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: c5974388c096c9bc8693c5fc2cf918989c6eadd3
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80422601"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96488729"
 ---
 # <a name="use-remote-tools-to-troubleshoot-azure-vm-issues"></a>Utiliser des outils à distance pour résoudre les problèmes de machine virtuelle Azure
 
@@ -31,7 +31,7 @@ Utilisez une [console série pour machines virtuelles Azure](serial-console-wind
 
 ## <a name="remote-cmd"></a>CMD à distance
 
-Téléchargez [PsExec](https://docs.microsoft.com/sysinternals/downloads/psexec). Connectez-vous à la machine virtuelle en exécutant la commande suivante :
+Téléchargez [PsExec](/sysinternals/downloads/psexec). Connectez-vous à la machine virtuelle en exécutant la commande suivante :
 
 ```cmd
 psexec \\<computer>-u user -s cmd
@@ -39,7 +39,7 @@ psexec \\<computer>-u user -s cmd
 
 >[!NOTE]
 >* Cette commande doit être exécutée sur un ordinateur figurant dans le même réseau virtuel.
->* Vous pouvez utiliser DIP ou HostName pour remplacer \<ordinateur>.
+>* Vous pouvez utiliser DIP ou HostName pour remplacer \<computer>.
 >* Le paramètre -s permet de s’assurer que la commande est appelée à l’aide du compte système (autorisation d’administrateur).
 >* PsExec utilise les ports TCP 135 et 445. Par conséquent, ces deux ports doivent être ouverts sur le pare-feu.
 
@@ -180,7 +180,7 @@ Exécutez la commande suivante en fonction de l’emplacement de l’ordinateur 
     Enter-PSSession -ComputerName  "<<CLOUDSERVICENAME.cloudapp.net>>" -port "<<PUBLIC PORT NUMBER>>" -Credential (Get-Credential) -useSSL -SessionOption $Skip
     ```
 
-  * Pour une machine virtuelle Azure Resource Manager, commencez par ajouter un nom DNS à l’adresse IP publique. Pour obtenir des étapes détaillées, consultez [Créer un nom de domaine complet dans le portail Azure pour une machine virtuelle Windows](../windows/portal-create-fqdn.md). Exécutez ensuite la commande suivante :
+  * Pour une machine virtuelle Azure Resource Manager, commencez par ajouter un nom DNS à l’adresse IP publique. Pour obtenir des étapes détaillées, consultez [Créer un nom de domaine complet dans le portail Azure pour une machine virtuelle Windows](../create-fqdn.md). Exécutez ensuite la commande suivante :
 
     ```powershell
     $Skip = New-PSSessionOption -SkipCACheck -SkipCNCheck
@@ -251,9 +251,7 @@ Invoke-Command -ComputerName "<<COMPUTERNAME>" -ScriptBlock {"<<SCRIPT BLOCK>>"}
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour plus d’informations sur l’applet de commande Enter-PSSession, consultez [Enter-PSSession](https://technet.microsoft.com/library/hh849707.aspx).
-- Pour plus d’informations sur l’extension de script personnalisé pour Windows à l’aide du modèle de déploiement classique, consultez [Extension de script personnalisé pour Windows](../extensions/custom-script-classic.md).
+- Pour plus d’informations sur l’applet de commande Enter-PSSession, consultez [Enter-PSSession](/powershell/module/microsoft.powershell.core/enter-pssession?view=powershell-5.1).
+- Pour plus d’informations sur l’extension de script personnalisé pour Windows à l’aide du modèle de déploiement classique, consultez [Extension de script personnalisé pour Windows](../extensions/custom-script-windows.md).
 - PsExec fait partie de la [Suite PSTools](https://download.sysinternals.com/files/PSTools.zip).
-- Pour plus d’informations sur la Suite PSTools, consultez [PSTools](https://docs.microsoft.com/sysinternals/downloads/pstools).
-
-
+- Pour plus d’informations sur la Suite PSTools, consultez [PSTools](/sysinternals/downloads/pstools).

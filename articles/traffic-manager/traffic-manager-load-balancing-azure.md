@@ -3,21 +3,21 @@ title: Utilisation des services d’équilibrage de charge dans Azure | Microso
 description: 'Ce didacticiel vous montre comment créer un scénario à l’aide du portefeuille d’équilibrage de charge Azure : Traffic Manager, Application Gateway et Load Balancer.'
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 manager: kumudD
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/27/2016
-ms.author: rohink
-ms.openlocfilehash: cccd4a6b0b52608a6a17b73688e18f27088df5b0
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.author: duau
+ms.openlocfilehash: 431eaff9da95063648d3e80acb54be9cc5c25bc5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80757190"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021688"
 ---
 # <a name="using-load-balancing-services-in-azure"></a>Utilisation des services d’équilibrage de charge dans Azure
 
@@ -154,7 +154,7 @@ Dans ce scénario, Traffic Manager est connecté à des instances Application 
 
 Dans ce scénario, Load Balancer distribue les connexions de niveau web aux bases de données, au sein d’un cluster à haute disponibilité.
 
-Si votre cluster de bases de données à haute disponibilité utilise SQL Server AlwaysOn, voir [Configurer un ou plusieurs écouteurs de groupe de disponibilité AlwaysOn](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-ps-alwayson-int-listener.md) pour obtenir des instructions pas à pas.
+Si votre cluster de bases de données à haute disponibilité utilise SQL Server AlwaysOn, voir [Configurer un ou plusieurs écouteurs de groupe de disponibilité AlwaysOn](../azure-sql/virtual-machines/windows/availability-group-listener-powershell-configure.md) pour obtenir des instructions pas à pas.
 
 Pour en savoir plus sur la configuration d’un équilibrage de charge interne, voir [Créer un équilibreur de charge interne dans le portail Azure](../load-balancer/load-balancer-get-started-ilb-arm-portal.md).
 

@@ -3,12 +3,12 @@ title: Modèle d’application Azure Service Fabric
 description: Comment modéliser et décrire des applications et des services dans Azure Service Fabric à l’aide de fichiers manifestes d’application et de service.
 ms.topic: conceptual
 ms.date: 2/23/2018
-ms.openlocfilehash: 7179686b7d4ef2df267cb95ece8f83d5fb7682b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84e6b2309fdb206771d4ea01aa03c7f355d6ff19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75551877"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85963731"
 ---
 # <a name="model-an-application-in-service-fabric"></a>Modéliser une application dans Service Fabric
 Cet article fournit une vue d’ensemble du modèle d’application Azure Service Fabric et explique comment définir une application et un service via des fichiers manifestes.
@@ -22,7 +22,7 @@ Un type d'application est une catégorisation d'une application constituée d'un
 
 Les classes (ou « types ») d’applications et de services sont décrits dans des fichiers XML (manifestes d’application et manifestes de service).  Les manifestes décrivent des applications et des services et constituent les modèles par rapport auxquels des applications peuvent être instanciées à partir du magasin d’images du cluster.  Les manifestes sont abordés en détail dans [Manifestes des applications et des services](service-fabric-application-and-service-manifests.md). La définition de schéma pour les fichiers ServiceManifest.xml et ApplicationManifest.xml est installée avec le SDK Service Fabric et les outils sous *C:\Program Files\Microsoft SDKs\Service Fabric\schemas\ServiceFabricServiceModel.xsd*. Le schéma XML est documenté dans [Documentation relative au schéma ServiceFabricServiceModel.xsd](service-fabric-service-model-schema.md).
 
-Le code de différentes instances d’application s’exécute sous forme de processus distincts, même si elles sont hébergées par le même nœud Service Fabric. En outre, le cycle de vie de chaque instance d’application peut être géré (par exemple, mis à jour) de façon indépendante. Comme le montre le diagramme suivant, les types d’application sont composés de types de service, eux-mêmes constitués de packages de code, de configuration et de données. Pour simplifier le diagramme, seuls les packages code/configuration/données pour `ServiceType4` sont affichés, même si chaque type de service inclut tout ou partie de ces types de packages.
+Le code des différentes instances d’application s’exécute sous forme de processus distincts, même si elles sont hébergées par le même nœud Service Fabric. En outre, le cycle de vie de chaque instance d’application peut être géré (par exemple, mis à jour) de façon indépendante. Comme le montre le diagramme suivant, les types d’application sont composés de types de service, eux-mêmes constitués de packages de code, de configuration et de données. Pour simplifier le diagramme, seuls les packages code/configuration/données pour `ServiceType4` sont affichés, même si chaque type de service inclut tout ou partie de ces types de packages.
 
 ![Types d’application service Fabric et types de service][cluster-imagestore-apptypes]
 

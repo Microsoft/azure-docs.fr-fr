@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/13/2019
-ms.openlocfilehash: 5ae9190213f753f8b9440ced52e4d04626af13f9
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: 33cbb9b5ac754969a6a9038db227123bae3a0ea7
+ms.sourcegitcommit: 28c93f364c51774e8fbde9afb5aa62f1299e649e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732994"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822401"
 ---
 # <a name="use-azure-toolkit-for-eclipse-to-create-apache-spark-applications-for-an-hdinsight-cluster"></a>Utiliser Azure Toolkit for Eclipse afin de créer des applications Apache Spark pour un cluster HDInsight
 
@@ -27,7 +27,7 @@ Utilisez HDInsight Tools dans Azure Toolkit for [Eclipse](https://www.eclipse.o
 
 * Cluster Apache Spark sur HDInsight. Pour obtenir des instructions, consultez [Création de clusters Apache Spark dans Azure HDInsight](apache-spark-jupyter-spark-sql.md).
 
-* [Kit de développeur Java (JDK), version 8](https://aka.ms/azure-jdks).
+* [Kit de développeur Java (JDK), version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 
 * [IDE Eclipse](https://www.eclipse.org/downloads/). Cet article utilise l’environnement de développement intégré (IDE) Eclipse pour les développeurs Java.
 
@@ -35,7 +35,7 @@ Utilisez HDInsight Tools dans Azure Toolkit for [Eclipse](https://www.eclipse.o
 
 ### <a name="install-azure-toolkit-for-eclipse"></a>Installer le Kit de ressources Azure pour Eclipse
 
-Pour plus d’informations sur l’installation, voir [Installation du kit de ressources Azure pour Eclipse](https://docs.microsoft.com/azure/developer/java/toolkit-for-eclipse/installation).
+Pour plus d’informations sur l’installation, voir [Installation du kit de ressources Azure pour Eclipse](/azure/developer/java/toolkit-for-eclipse/installation).
 
 ### <a name="install-the-scala-plug-in"></a>Installer le plug-in Scala
 
@@ -50,7 +50,7 @@ Quand vous ouvrez Eclipse, HDInsight Tools détecte automatiquement si vous avez
 1. Sélectionnez l’onglet **Installé**.
 
 1. Vous devez voir au moins :
-    * Azure Toolkit for Eclipse \<version>.
+    * Azure Toolkit for Eclipse \<version>.
     * IDE Scala \<version>.
 
 ## <a name="sign-in-to-your-azure-subscription"></a>Connectez-vous à votre abonnement Azure :
@@ -346,11 +346,11 @@ Il existe deux modes pour soumettre les travaux. Si les informations d’identif
 ### <a name="tools-and-extensions"></a>Outils et extensions
 
 * [Utiliser le kit de ressources Azure pour IntelliJ pour créer et soumettre des applications Spark Scala](apache-spark-intellij-tool-plugin.md)
-* [Utiliser Azure Toolkit for IntelliJ pour déboguer des applications Apache Spark à distance par VPN](../hdinsight-apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
-* [Utiliser Azure Toolkit for IntelliJ pour déboguer des applications Apache Spark à distance par SSH](../hdinsight-apache-spark-intellij-tool-debug-remotely-through-ssh.md)
+* [Utiliser Azure Toolkit for IntelliJ pour déboguer des applications Apache Spark à distance par VPN](./apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
+* [Utiliser Azure Toolkit for IntelliJ pour déboguer des applications Apache Spark à distance par SSH](./apache-spark-intellij-tool-debug-remotely-through-ssh.md)
 * [Utiliser des blocs-notes Apache Zeppelin avec un cluster Apache Spark sur HDInsight](apache-spark-zeppelin-notebook.md)
-* [Noyaux accessibles à Jupyter Notebook dans le cluster Apache Spark pour HDInsight](apache-spark-jupyter-notebook-kernels.md)
-* [Utiliser des packages externes avec les blocs-notes Jupyter](apache-spark-jupyter-notebook-use-external-packages.md)
+* [Noyaux disponibles pour bloc-notes Jupyter dans un cluster Apache Spark pour HDInsight](apache-spark-jupyter-notebook-kernels.md)
+* [Utiliser des packages externes avec des blocs-notes Jupyter](apache-spark-jupyter-notebook-use-external-packages.md)
 * [Install Jupyter on your computer and connect to an HDInsight Spark cluster (Installer Jupyter sur un ordinateur et se connecter au cluster Spark sur HDInsight)](apache-spark-jupyter-notebook-install-locally.md)
 
 ### <a name="managing-resources"></a>Gestion des ressources

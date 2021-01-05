@@ -5,15 +5,15 @@ services: multiple
 author: sharad4u
 ms.service: multiple
 ms.topic: include
-ms.date: 05/09/2019
+ms.date: 10/30/2020
 ms.author: sharadag
 ms.custom: include file
-ms.openlocfilehash: 9397c5f075c1d6653920d19766d5d6a740294ec7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: eb3cc6a37e9116b2a28b72fc7a3779aafb2a1e21
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67330747"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96027186"
 ---
 Les autorités de certification suivantes sont autorisées pour créer son propre certificat :
 
@@ -23,6 +23,7 @@ Les autorités de certification suivantes sont autorisées pour créer son propr
 - AME Infra CA 02
 - Ameroot
 - APCA-DM3P
+- Atos TrustedRoot 2011
 - Autopilot Root CA
 - Baltimore CyberTrust Root
 - Class 3 Public Primary Certification Authority
@@ -31,6 +32,7 @@ Les autorités de certification suivantes sont autorisées pour créer son propr
 - D-TRUST Root Class 3 CA 2 2009
 - DigiCert Cloud Services CA-1
 - DigiCert Global Root CA
+- DigiCert Global Root G2
 - DigiCert High Assurance CA-3
 - DigiCert High Assurance EV Root CA
 - DigiCert SHA2 Extended Validation Server CA
@@ -52,8 +54,13 @@ Les autorités de certification suivantes sont autorisées pour créer son propr
 - GlobalSign Root CA
 - Go Daddy Root Certificate Authority - G2
 - Go Daddy Secure Certificate Authority - G2
+- Let's Encrypt Authority X3
+- Microsec e-Szigno Root CA 2009
 - QuoVadis Root CA2 G3
 - RapidSSL RSA CA 2018
+- Security Communication RootCA1
+- Security Communication RootCA2
+- Security Communication RootCA3
 - Symantec Class 3 EV SSL CA – G3
 - Symantec Class 3 Secure Server CA – G4
 - Symantec Enterprise Mobile Root for Microsoft

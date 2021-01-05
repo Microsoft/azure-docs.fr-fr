@@ -13,12 +13,12 @@ ms.date: 11/19/2019
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: a0677603f02b429c269c0f93ef348b2b1d717a9f
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 8c757f3e067aeac5d8145ca47b2eac145daba574
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82689777"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88272448"
 ---
 # <a name="microsoft-identity-platform-and-the-oauth-20-device-authorization-grant-flow"></a>Plateforme d’identités Microsoft et flux d’octroi d’autorisation d’appareil OAuth 2.0
 
@@ -55,7 +55,7 @@ scope=user.read%20openid%20profile
 | --- | --- | --- |
 | `tenant` | Obligatoire | Peut être /common, /consumers ou /organizations.  Il peut également s’agir du locataire d’annuaire dont vous souhaitez demander une autorisation au format GUID ou de nom convivial.  |
 | `client_id` | Obligatoire | L’**ID (client) d’application** attribué à votre application par l’environnement [Inscriptions d’applications du portail Azure](https://go.microsoft.com/fwlink/?linkid=2083908). |
-| `scope` | Recommandé | Liste séparée par des espaces d’ [étendues](v2-permissions-and-consent.md) pour lesquelles vous souhaitez que l’utilisateur donne son consentement.  |
+| `scope` | Obligatoire | Liste séparée par des espaces d’ [étendues](v2-permissions-and-consent.md) pour lesquelles vous souhaitez que l’utilisateur donne son consentement.  |
 
 ### <a name="device-authorization-response"></a>Réponse d’autorisation d’appareil
 

@@ -1,30 +1,30 @@
 ---
 title: Utilisation du langage SQL dynamique
-description: Conseils pour les solutions de développement utilisant le SQL dynamique dans le pool SQL Synapse.
+description: Conseils pour les solutions de développement utilisant le SQL dynamique pour les pools SQL dédiés dans Azure Synapse Analytics.
 services: synapse-analytics
-author: XiaoyuMSFT
+author: MSTehrani
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
-ms.author: xiaoyul
+ms.author: emtehran
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: a9280bb8153204f86096cf8249ff053bee3f71cc
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.custom: seo-lt-2019, azure-synapse
+ms.openlocfilehash: 52bc7bdc63f754d52bf4a69097c1dd309a6dc3ec
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633524"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462778"
 ---
-# <a name="dynamic-sql-in-synapse-sql-pool"></a>SQL dynamique dans le pool SQL Synapse
+# <a name="dynamic-sql-for-dedicated-sql-pools-in-azure-synapse-analytics"></a>SQL dynamique pour les pools SQL dédiés dans Azure Synapse Analytics
 
-Cet article contient des conseils pour les solutions de développement utilisant le SQL dynamique dans le pool SQL.
+Cet article contient des conseils pour les solutions de développement utilisant le SQL dynamique dans des pools SQL dédiés.
 
 ## <a name="dynamic-sql-example"></a>Exemple de SQL dynamique
 
-Quand vous développez le code d’une application pour un pool SQL, vous pouvez avoir besoin d’utiliser un SQL dynamique de façon à offrir des solutions flexibles, génériques et modulaires. Le pool SQL ne prend pas en charge les types de données blob pour le moment.
+Quand vous développez le code d’une application pour un pool SQL dédié, vous pouvez avoir besoin d’utiliser un SQL dynamique de façon à offrir des solutions flexibles, génériques et modulaires. Actuellement, le pool SQL dédié ne prend pas en charge les types de données blob.
 
 Le fait de ne pas prendre en charge les types de données blob peut limiter la taille de vos chaînes, car les types de données blob incluent les types varchar(max) et nvarchar(max).
 

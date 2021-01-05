@@ -1,21 +1,22 @@
 ---
 title: Appeler des opérations de l’API REST avec l’autorisation de clé partagée
-titleSuffix: Azure Storage
+titleSuffix: Discover how to call Azure Storage REST API operations with Shared Key authorization. Get detailed information about each step of the sample operation.
 description: Utilisez l’API REST Stockage Azure pour effectuer une demande au Stockage Blob à l’aide de l’autorisation de clé partagée.
 services: storage
 author: tamram
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/01/2019
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozge
 ms.subservice: common
-ms.openlocfilehash: f5c6125b850062450516e7fc0b19c2e0d5d6f577
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: f569fdac19c4f765828d24f4d6615fdd7bafef8a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77916062"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89010900"
 ---
 # <a name="call-rest-api-operations-with-shared-key-authorization"></a>Appeler des opérations de l’API REST avec l’autorisation de clé partagée
 
@@ -65,7 +66,7 @@ Consultez la référence de l’opération [ListContainers](/rest/api/storageser
 
 **Méthode de requête** : GET. Ce verbe est la méthode HTTP que vous spécifiez en tant que propriété de l’objet de requête. Les autres valeurs pour ce verbe incluent HEAD, PUT et DELETE en fonction de l’API que vous appelez.
 
-**URI de requête** : `https://myaccount.blob.core.windows.net/?comp=list`.  La requête est créée à partir du point de terminaison du compte de stockage d'objets blob `http://myaccount.blob.core.windows.net` et de la chaîne de ressources `/?comp=list`.
+**URI de requête** : `https://myaccount.blob.core.windows.net/?comp=list`.  La requête est créée à partir du point de terminaison du compte de stockage d'objets blob `https://myaccount.blob.core.windows.net` et de la chaîne de ressources `/?comp=list`.
 
 [Paramètres d’URI](/rest/api/storageservices/List-Containers2#uri-parameters) : Il s’agit de paramètres de requête supplémentaires que vous pouvez utiliser lors de l’appel de ListContainers. Certains de ces paramètres sont *timeout* pour l’appel (en secondes) et *prefix*, utilisé pour le filtrage.
 

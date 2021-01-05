@@ -3,7 +3,7 @@ title: Gérer l’accès invité avec les révisions d’accès - Azure AD
 description: Gérer les utilisateurs invités en tant que membres d’un groupe ou affectés à une application avec les révisions d’accès Azure Active Directory
 services: active-directory
 documentationcenter: ''
-author: msaburnley
+author: barclayn
 manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
@@ -12,21 +12,21 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 12/13/2018
-ms.author: ajburnle
+ms.date: 12/23/2020
+ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8bf2f9503ae704110786a1e73aec3da18c17e4ea
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 76aeb63feb006e6962efeb3687363f18acb59904
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75932422"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746692"
 ---
 # <a name="manage-guest-access-with-azure-ad-access-reviews"></a>Gérer l’accès invité avec les révisions d’accès Azure AD
 
 
-Avec Azure Active Directory (Azure AD), vous pouvez facilement mettre en place une collaboration au-delà des limites de l’organisation à l’aide de la [fonctionnalité B2B d’Azure AD](../b2b/what-is-b2b.md). Les utilisateurs invités depuis d’autres locataires peuvent être [invités par les administrateurs](../b2b/add-users-administrator.md) ou par [d’autres utilisateurs](../b2b/what-is-b2b.md). Cela s’applique également aux identités de réseaux sociaux tels que des comptes Microsoft.
+Avec Azure Active Directory (Azure AD), vous pouvez facilement mettre en place une collaboration au-delà des limites de l’organisation à l’aide de la [fonctionnalité B2B d’Azure AD](../external-identities/what-is-b2b.md). Les utilisateurs invités depuis d’autres locataires peuvent être [invités par les administrateurs](../external-identities/add-users-administrator.md) ou par [d’autres utilisateurs](../external-identities/what-is-b2b.md). Cela s’applique également aux identités de réseaux sociaux tels que des comptes Microsoft.
 
 Vous pouvez également facilement vous assurer que les utilisateurs invités disposent de droits d’accès appropriés. Vous pouvez demander directement aux invités ou bien à un décisionnaire de prendre part à une révision d’accès et de renouveler la certification (ou d’effectuer une « attestation ») pour l’accès invité. Les réviseurs peuvent donner leur avis sur les besoins de chaque utilisateur en matière d’accès continu, en fonction des suggestions d’Azure AD. Lorsqu’une révision d’accès est terminée, vous pouvez effectuer des modifications et supprimer l’accès des invités qui n’en ont plus besoin.
 
@@ -41,7 +41,12 @@ Pour plus d’informations, consultez [Conditions de licence](access-reviews-ove
 
 ## <a name="create-and-perform-an-access-review-for-guests"></a>Créer et exécuter une révision d’accès pour des invités
 
-Tout d’abord, en tant qu’administrateur global ou administrateur utilisateur, accédez à la [page Gouvernance des identités](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/) pour vous assurer que les révisions d’accès sont prêtes pour votre organisation.
+Tout d’abord, un des rôles suivants doit vous être attribué :
+- Administrateur général
+- Administrateur d’utilisateurs
+- (Préversion) Propriétaire de groupe de sécurité AAD ou M365 pour le groupe à examiner
+
+Accédez ensuite à la [page Gouvernance des identités](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/) pour vous assurer que les révisions d’accès sont prêtes pour votre organisation.
 
 Azure AD permet plusieurs scénarios de revue des utilisateurs invités.
 
@@ -120,10 +125,3 @@ Dans certaines organisations, les invités peuvent ne pas être conscients de le
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Créer une révision d’accès de groupes ou d’applications](create-access-review.md)
-
-
-
-
-
-
-

@@ -1,14 +1,16 @@
 ---
 title: Fichiers SharePoint – QnA Maker
 description: Ajoutez des sources de données SharePoint sécurisées à votre base de connaissances afin d’enrichir celle-ci de questions et de réponses pouvant être sécurisées avec Active Directory.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 02/20/2020
-ms.openlocfilehash: 6f05079e39c8afb001bd4ba09d68f435c18efad5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c231ac95841043e5576f064e683dd86d9695b108
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80294880"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353185"
 ---
 # <a name="add-a-secured-sharepoint-data-source-to-your-knowledge-base"></a>Ajouter une source de données SharePoint sécurisée à votre base de connaissances
 
@@ -25,14 +27,14 @@ Si le Gestionnaire de la Base de connaissances QnA Maker n’est pas le Gestionn
 
 ## <a name="add-supported-file-types-to-knowledge-base"></a>Ajouter des types de fichiers pris en charge à la Base de connaissances
 
-Vous pouvez ajouter tout [type de fichier](../Concepts/content-types.md) pris en charge par QnA Maker à partir d’un site SharePoint à votre base de connaissances. Si la ressource de fichier est sécurisée, il se peut que vous deviez accorder des [autorisations](#permissions).
+Vous pouvez ajouter tout [type de fichier](../index.yml) pris en charge par QnA Maker à partir d’un site SharePoint à votre base de connaissances. Si la ressource de fichier est sécurisée, il se peut que vous deviez accorder des [autorisations](#permissions).
 
 1. À partir de la bibliothèque avec le site SharePoint, sélectionnez le menu symbolisé par des points de suspension (`...`) du fichier.
 1. Copiez l’URL du fichier.
 
    ![Obtenez l’URL du fichier SharePoint en sélectionnant le menu symbolisé par des points de suspension du fichier, puis en copiant l’URL.](../media/add-sharepoint-datasources/get-sharepoint-file-url.png)
 
-1. Dans le portail QnA Maker, sur la page **Paramètres**, [ajoutez l’URL](manage-knowledge-bases.md#edit-knowledge-base) à la Base de connaissances.
+1. Dans le portail QnA Maker, sur la page **Paramètres**, ajoutez l’URL à la Base de connaissances.
 
 ### <a name="images-with-sharepoint-files"></a>Images représentant des fichiers SharePoint
 
@@ -154,7 +156,7 @@ Use the following steps to transform the SharePoint URL into a sharing token.
 
 ### Add or update a SharePoint File URI to your knowledge base
 
-Use the **@microsoft.graph.downloadUrl** from the previous section as the `fileuri` in the QnA Maker API for [adding a knowledge base](https://go.microsoft.com/fwlink/?linkid=2092179) or [updating a knowledge base](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/update). The following fields are mandatory: name, fileuri, filename, source.
+Use the **@microsoft.graph.downloadUrl** from the previous section as the `fileuri` in the QnA Maker API for [adding a knowledge base](/rest/api/cognitiveservices/qnamaker4.0/knowledgebase) or [updating a knowledge base](/rest/api/cognitiveservices/qnamaker/knowledgebase/update). The following fields are mandatory: name, fileuri, filename, source.
 
 ```
 {
@@ -186,4 +188,4 @@ Use the **@microsoft.graph.downloadUrl** from the previous section as the `fileu
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Collaborer sur votre Base de connaissances](collaborate-knowledge-base.md)
+> [Collaborer sur votre Base de connaissances](../index.yml)

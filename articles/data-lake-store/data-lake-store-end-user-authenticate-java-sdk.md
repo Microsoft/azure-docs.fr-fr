@@ -3,15 +3,16 @@ title: Authentification des utilisateurs finaux – Java avec Data Lake Sto
 description: Découvrez comment authentifier les utilisateurs finaux avec Data Lake Storage Gen1 à l’aide d’Azure Active Directory et de Java
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
+ms.custom: devx-track-java
 ms.author: twooley
-ms.openlocfilehash: 1e03ad657fd40dce22a17f2fff5b67a65eb3eb52
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: ece996f7edb8d37cea47756c5b7e635e02409b35
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691759"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87318859"
 ---
 # <a name="end-user-authentication-with-azure-data-lake-storage-gen1-using-java"></a>Authentification des utilisateurs finaux avec Azure Data Lake Storage Gen1 à l’aide de Java
 > [!div class="op_single_selector"]
@@ -38,35 +39,41 @@ Dans cet article, vous allez apprendre à utiliser le kit de développement logi
 
 2. Ajoutez les dépendances suivantes à votre fichier Maven **pom.xml**. Ajoutez l’extrait de code suivant avant la balise **\</project>** :
    
-        <dependencies>
-          <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-data-lake-store-sdk</artifactId>
-            <version>2.2.3</version>
-          </dependency>
-          <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>1.7.21</version>
-          </dependency>
-        </dependencies>
+    ```xml
+    <dependencies>
+      <dependency>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-data-lake-store-sdk</artifactId>
+        <version>2.2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-nop</artifactId>
+        <version>1.7.21</version>
+      </dependency>
+    </dependencies>
+    ```
    
     La première dépendance consiste à utiliser le kit de développement logiciel (SDK) Data Lake Storage Gen1 (`azure-data-lake-store-sdk`) à partir du référentiel maven. La seconde dépendance consiste à spécifier le framework de journalisation (`slf4j-nop`) à utiliser pour cette application. Le SDK Data Lake Storage Gen1 utilise la façade de journalisation [SLF4J](https://www.slf4j.org/). Cela vous permet de choisir parmi plusieurs frameworks de journalisation populaires, par exemple Log4j, la journalisation Java, Logback, etc. Vous pouvez aussi n’utiliser aucune journalisation. Pour cet exemple, nous désactivons la journalisation et, par conséquent, nous utilisons la liaison **slf4j-nop**. Vous trouverez [ici](https://www.slf4j.org/manual.html#projectDep) des informations pour utiliser d’autres options de journalisation.
 
 3. Ajoutez les instructions import ci-après à votre application.
 
-        import com.microsoft.azure.datalake.store.ADLException;
-        import com.microsoft.azure.datalake.store.ADLStoreClient;
-        import com.microsoft.azure.datalake.store.DirectoryEntry;
-        import com.microsoft.azure.datalake.store.IfExists;
-        import com.microsoft.azure.datalake.store.oauth2.AccessTokenProvider;
-        import com.microsoft.azure.datalake.store.oauth2.DeviceCodeTokenProvider;
+    ```java
+    import com.microsoft.azure.datalake.store.ADLException;
+    import com.microsoft.azure.datalake.store.ADLStoreClient;
+    import com.microsoft.azure.datalake.store.DirectoryEntry;
+    import com.microsoft.azure.datalake.store.IfExists;
+    import com.microsoft.azure.datalake.store.oauth2.AccessTokenProvider;
+    import com.microsoft.azure.datalake.store.oauth2.DeviceCodeTokenProvider;
+    ```
 
 4. Utilisez l’extrait de code ci-après dans votre application Java afin d’obtenir un jeton pour l’application native Active Directory que vous avez créée précédemment à l’aide de l’élément `DeviceCodeTokenProvider`. Remplacez **FILL-IN-HERE** (à remplir) par les valeurs réelles de l’application native Azure Active Directory.
 
-        private static String nativeAppId = "FILL-IN-HERE";
+    ```java
+    private static String nativeAppId = "FILL-IN-HERE";
             
-        AccessTokenProvider provider = new DeviceCodeTokenProvider(nativeAppId);   
+    AccessTokenProvider provider = new DeviceCodeTokenProvider(nativeAppId);   
+    ```
 
 Le kit de développement logiciel (SDK) Data Lake Storage Gen1 propose des méthodes pratiques pour gérer les jetons de sécurité nécessaires et ainsi communiquer avec le compte Data Lake Storage Gen1. Toutefois, le Kit de développement (SDK) n’impose pas d’utiliser ces seules méthodes. Vous pouvez utiliser tout autre moyen pour obtenir le jeton, par exemple à l’aide du [SDK Azure Active Directory](https://github.com/AzureAD/azure-activedirectory-library-for-java), ou de votre propre code personnalisé.
 

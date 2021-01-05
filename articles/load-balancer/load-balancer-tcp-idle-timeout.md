@@ -1,70 +1,116 @@
 ---
-title: Configuration du délai d’inactivité TCP de l’équilibreur de charge dans Azure
+title: Configurer le délai d’inactivité et la réinitialisation TCP de l’équilibreur de charge
 titleSuffix: Azure Load Balancer
-description: Dans cet article, découvrez comment configurer le délai d’inactivité TCP d’Azure Load Balancer.
+description: Dans cet article, découvrez comment configurer le délai d’inactivité et la réinitialisation TCP d’Azure Load Balancer.
 services: load-balancer
 documentationcenter: na
 author: asudbring
 ms.custom: seodec18
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/09/2020
+ms.date: 10/26/2020
 ms.author: allensu
-ms.openlocfilehash: d0bb73b58aa23e5f7eb784772acf37b05df463ba
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8a6be588544883b77c3ff115c9dba5e6ecd5fbd7
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456826"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747209"
 ---
-# <a name="configure-tcp-idle-timeout-settings-for-azure-load-balancer"></a>Configuration des paramètres de délai d’inactivité et d’expiration TCP pour Azure Load Balancer
+# <a name="configure-tcp-reset-and-idle-timeout-for-azure-load-balancer"></a>Configurer le délai d’inactivité et la réinitialisation TCP pour Azure Load Balancer
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+Azure Load Balancer a la plage de délai d’inactivité suivante :
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+* 4 à 100 minutes pour les règles de trafic sortant
+* 4 à 30 minutes pour les règles d’équilibrage de charge et les règles NAT de trafic entrant
+
+Par défaut, il est défini sur 4 minutes. Si une période d’inactivité est supérieure à la valeur du délai d’expiration, il n’est pas garanti que la session TCP ou HTTP soit maintenue entre le client et votre service. 
+
+Les sections suivantes décrivent comment modifier les paramètres de délai d’inactivité et de réinitialisation TCP pour les ressources d’équilibreur de charge.
+
+## <a name="set-tcp-reset-and-idle-timeout"></a>Définir la réinitialisation TCP et le délai d’inactivité
+---
+# <a name="portal"></a>[**Portail**](#tab/tcp-reset-idle-portal)
+
+Pour définir le délai d’inactivité et la réinitialisation TCP pour un équilibreur de charge, modifiez la règle d’équilibrage de charge. 
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+
+2. Dans le menu de gauche, sélectionnez **Groupes de ressources**.
+
+3. Sélectionnez le groupe de ressources pour votre équilibreur de charge. Dans cet exemple, le groupe de ressources est nommé **myResourceGroup**.
+
+4. Sélectionnez votre équilibreur de charge. Dans cet exemple, l’équilibreur de charge est nommé **myLoadBalancer**.
+
+5. Dans **Paramètres** , sélectionnez **Règles d’équilibrage de charge**.
+
+     :::image type="content" source="./media/load-balancer-tcp-idle-timeout/portal-lb-rules.png" alt-text="Modifier les règles de l’équilibreur de charge." border="true":::
+
+6. Sélectionnez votre règle d’équilibrage de charge. Dans cet exemple, la règle d’équilibrage de charge est nommée **myLBrule**.
+
+7. Dans la règle d’équilibrage de charge, déplacez le curseur dans **Délai d’inactivité (minutes)** sur la valeur du délai d’attente.  
+
+8. Sous **Réinitialisation TCP** , sélectionnez **Activé**.
+
+   :::image type="content" source="./media/load-balancer-tcp-idle-timeout/portal-lb-rules-tcp-reset.png" alt-text="Définir le délai d’inactivité et la réinitialisation TCP." border="true":::
+
+9. Sélectionnez **Enregistrer**.
+
+# <a name="powershell"></a>[**PowerShell**](#tab/tcp-reset-idle-powershell)
+
+Pour définir le délai d’inactivité et la réinitialisation TCP, définissez les valeurs des paramètres de règle d’équilibrage de charge suivants avec [Set-AzLoadBalancer](/powershell/module/az.network/set-azloadbalancer) :
+
+* **IdleTimeoutInMinutes**
+* **EnableTcpReset**
 
 Si vous choisissez d’installer et d’utiliser PowerShell en local, vous devez exécuter le module Azure PowerShell version 5.4.1 ou ultérieure pour les besoins de cet article. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Si vous exécutez PowerShell en local, vous devez également exécuter `Connect-AzAccount` pour créer une connexion avec Azure.
 
-## <a name="tcp-idle-timeout"></a>Délai d’inactivité TCP
-Azure Load Balancer a un paramètre de délai d’inactivité de 4 à 30 minutes. Par défaut, il est défini sur 4 minutes. Si une période d’inactivité est supérieure à la valeur de délai d’expiration, il n’est pas garanti que la session TCP ou HTTP est maintenue entre le client et votre service cloud.
+Remplacez les exemples suivants par les valeurs de vos ressources :
 
-Lorsque la connexion est fermée, votre application cliente peut recevoir le message d’erreur suivant : « Le serveur a clos la connexion sous-jacente : une connexion qui devait être tenue active a été fermée par le serveur. »
+* **myResourceGroup**
+* **myLoadBalancer**
 
-Une pratique courante consiste à utiliser TCP keep-alive. Cela permet de maintenir la connexion active pendant une période plus longue. Pour plus d’informations, consultez ces [exemples .NET](https://msdn.microsoft.com/library/system.net.servicepoint.settcpkeepalive.aspx). avec keep-alive activé, les paquets sont envoyés au cours des périodes d’inactivité sur la connexion. Les paquets keep-alive garantissent que la valeur de délai d’inactivité n’est pas atteinte et que la connexion est maintenue pendant une longue période.
-
-Le paramètre fonctionne uniquement pour les connexions entrantes. Pour éviter la perte de la connexion, configurez TCP keep-alive sur un intervalle inférieur au paramètre de délai d’inactivité ou augmentez la valeur du délai d’inactivité. Pour prendre en charge ces scénarios, la prise en charge d’un délai d’inactivité configurable a été ajoutée.
-
-TCP keep-alive convient aux scénarios où l’autonomie de la batterie n’est pas une contrainte. Il n’est pas recommandé de l’utiliser pour les applications mobiles. L’utilisation de TCP keep-alive depuis une application mobile peut décharger la batterie de l’appareil plus rapidement.
-
-![Délai d’expiration TCP](./media/load-balancer-tcp-idle-timeout/image1.png)
-
-Les sections suivantes décrivent comment modifier les paramètres de délai d’inactivité pour les ressources d’adresses IP publiques et d’équilibreur de charge.
-
-## <a name="configure-the-tcp-timeout-for-your-instance-level-public-ip-to-15-minutes"></a>Configurer le délai d’expiration TCP pour votre adresse IP publique de niveau instance à 15 minutes
-
-```azurepowershell-interactive
-$publicIP = Get-AzPublicIpAddress -Name MyPublicIP -ResourceGroupName MyResourceGroup
-$publicIP.IdleTimeoutInMinutes = "15"
-Set-AzPublicIpAddress -PublicIpAddress $publicIP
+```azurepowershell
+$lb = Get-AzLoadBalancer -Name "myLoadBalancer" -ResourceGroup "myResourceGroup"
+$lb.LoadBalancingRules[0].IdleTimeoutInMinutes = '15'
+$lb.LoadBalancingRules[0].EnableTcpReset = 'true'
+Set-AzLoadBalancer -LoadBalancer $lb
 ```
 
-`IdleTimeoutInMinutes` est facultatif. S’il n’est pas défini, le délai d’expiration par défaut est de 4 minutes. La plage de délai d’expiration acceptable est comprise entre 4 et 30 minutes.
+# <a name="azure-cli"></a>[**Azure CLI**](#tab/tcp-reset-idle-cli)
 
-## <a name="set-the-tcp-timeout-on-a-load-balanced-rule-to-15-minutes"></a>Affecter la valeur 15 minutes au délai d’expiration TCP sur une règle d’équilibrage de charge
+Pour définir le délai d’inactivité et la réinitialisation TCP, utilisez les paramètres suivants pour [az network lb rule update](/cli/azure/network/lb/rule?az_network_lb_rule_update) :
 
-Pour définir le délai d’inactivité d’un équilibreur de charge, la valeur « IdleTimeoutInMinutes » est définie sur la règle d’équilibrage de charge. Par exemple :
+* **--idle-timeout**
+* **--enable-tcp-reset**
 
-```azurepowershell-interactive
-$lb = Get-AzLoadBalancer -Name "MyLoadBalancer" -ResourceGroup "MyResourceGroup"
-$lb | Set-AzLoadBalancerRuleConfig -Name myLBrule -IdleTimeoutInMinutes 15
+Validez votre environnement avant de commencer :
+
+* Connectez-vous au portail Azure et vérifiez que votre abonnement est actif en exécutant la commande `az login`.
+* Vérifiez votre version d’Azure CLI dans un terminal ou une fenêtre de commande en exécutant `az --version`. Pour obtenir la version la plus récente, consultez les [notes de publication les plus récentes](/cli/azure/release-notes-azure-cli?tabs=azure-cli).
+  * Si vous ne disposez pas de la dernière version, mettez à jour votre installation en suivant le [guide d’installation pour votre système d’exploitation ou votre plateforme](/cli/azure/install-azure-cli).
+
+Remplacez les exemples suivants par les valeurs de vos ressources :
+
+* **myResourceGroup**
+* **myLoadBalancer**
+* **myLBrule**
+
+
+```azurecli
+az network lb rule update \
+    --resource-group myResourceGroup \
+    --name myLBrule \
+    --lb-name myLoadBalancer \
+    --idle-timeout 15 \
+    --enable-tcp-reset true
 ```
+---
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Présentation de l’équilibrage de charge interne](load-balancer-internal-overview.md)
+Pour plus d’informations sur le délai d’inactivité et la réinitialisation TCP, consultez [Réinitialisation TCP de l’équilibreur de charge et délai d’inactivité](load-balancer-tcp-reset.md).
 
-[Prise en main de la configuration d’un équilibrage de charge accessible sur Internet](quickstart-create-standard-load-balancer-powershell.md)
-
-[Configuration d'un mode de distribution d'équilibrage de charge](load-balancer-distribution-mode.md)
+Pour plus d’informations sur la configuration du mode de distribution de l’équilibreur de charge, consultez [Configurer un mode de distribution d’équilibrage de charge](load-balancer-distribution-mode.md).

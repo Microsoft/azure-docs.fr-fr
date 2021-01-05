@@ -10,12 +10,12 @@ ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: e50dd636c1bd9403d5eca2157e4e46772418f92c
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 5c76e45f09a0f432d2775eb19d3dcaa668294e6f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592897"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002333"
 ---
 # <a name="language-understanding-luis-container-limitations"></a>Limitations des conteneurs Language Understanding (LUIS)
 
@@ -35,7 +35,7 @@ Vous pouvez utiliser une application LUIS si elle **n’inclut aucune** des dép
 
 Configurations d’application non prises en charge|Détails|
 |--|--|
-|Cultures de conteneur non prises en charge| Néerlandais (`nl-NL`)<br>Japonais (`ja-JP`)<br>L’allemand est uniquement pris en charge avec le [générateur de jetons 1.0.2](luis-language-support.md#custom-tokenizer-versions).|
+|Cultures de conteneur non prises en charge| Le néerlandais (`nl-NL`), le japonais (`ja-JP`) et l’allemand (`de-DE`) sont uniquement pris en charge avec le [générateur de jetons 1.0.2](luis-language-support.md#custom-tokenizer-versions).|
 |Entités non prises en charge pour toutes les cultures|Entité prédéfinie [KeyPhrase](luis-reference-prebuilt-keyphrase.md) pour toutes les cultures|
 |Entités non prises en charge pour la culture anglaise (`en-US`)|Entités prédéfinies [GeographyV2](luis-reference-prebuilt-geographyV2.md)|
 |Préparation vocale|Les dépendances externes ne sont pas prises en charge dans le conteneur.|
@@ -49,6 +49,7 @@ Les conteneurs LUIS prennent en charge un sous-ensemble des [langues prises en c
 | Langage | Paramètres régionaux | Domaine prédéfini | Entité prédéfinie | Recommandations de liste d’expression | \**[Analyse de texte](../text-analytics/language-support.md)<br>(Sentiment et<br>mots clés)|
 |--|--|:--:|:--:|:--:|:--:|
 | Anglais (États-Unis) | `en-US` | ✔️ | ✔️ | ✔️ | ✔️ |
+| Arabe (préversion ; arabe standard moderne) |`ar-AR`|❌|❌|❌|❌|
 | *[Chinois](#chinese-support-notes) |`zh-CN` | ✔️ | ✔️ | ✔️ | ❌ |
 | Français (France) |`fr-FR` | ✔️ | ✔️ | ✔️ | ✔️ |
 | Français (Canada) |`fr-CA` | ❌ | ❌ | ❌ | ✔️ |
@@ -56,9 +57,12 @@ Les conteneurs LUIS prennent en charge un sous-ensemble des [langues prises en c
 | Hindi | `hi-IN`| ❌ | ❌ | ❌ | ❌ |
 | Italien |`it-IT` | ✔️ | ✔️ | ✔️ | ✔️ |
 | Coréen |`ko-KR` | ✔️ | ❌ | ❌ | *Expression clé* uniquement |
+| Marathi | `mr-IN`|❌|❌|❌|❌|
 | Portugais (Brésil) |`pt-BR` | ✔️ | ✔️ | ✔️ | pas toutes les sous-cultures |
 | Espagnol (Espagne) |`es-ES` | ✔️ | ✔️ |✔️|✔️|
 | Espagnol (Mexique)|`es-MX` | ❌ | ❌ |✔️|✔️|
+| Tamoul | `ta-IN`|❌|❌|❌|❌|
+| Télougou | `te-IN`|❌|❌|❌|❌|
 | Turc | `tr-TR` |✔️| ❌ | ❌ | *Sentiment* uniquement |
 
 [!INCLUDE [Chinese language support notes](includes/chinese-language-support-notes.md)]

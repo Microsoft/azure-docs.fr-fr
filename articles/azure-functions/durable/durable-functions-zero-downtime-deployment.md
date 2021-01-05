@@ -5,23 +5,21 @@ author: tsushi
 ms.topic: conceptual
 ms.date: 10/10/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 8e12d58c0077084c181d111b0b017665b74b9157
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: fasttrack-edit
+ms.openlocfilehash: 2c96f2cc37c47c77b82ca86d5fd0295f0c66a896
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74231257"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009481"
 ---
 # <a name="zero-downtime-deployment-for-durable-functions"></a>Déploiement sans temps d’arrêt pour Durable Functions
 
-Pour permettre un bon fonctionnement du [modèle d’exécution fiable](durable-functions-checkpointing-and-replay.md) de Durable Functions, les orchestrations doivent être déterministes, ce qui représente un point supplémentaire à prendre en compte quand vous déployez des mises à jour. Quand un déploiement contient des changements apportés aux signatures de fonction d’activité ou à la logique d’orchestrateur, les instances d’orchestration actives cessent de fonctionner correctement. Cette situation est particulièrement problématique pour les instances d’orchestration de longue durée, qui peuvent représenter des heures ou des jours de travail.
+Pour permettre un bon fonctionnement du [modèle d’exécution fiable](./durable-functions-orchestrations.md) de Durable Functions, les orchestrations doivent être déterministes, ce qui représente un point supplémentaire à prendre en compte quand vous déployez des mises à jour. Quand un déploiement contient des changements apportés aux signatures de fonction d’activité ou à la logique d’orchestrateur, les instances d’orchestration actives cessent de fonctionner correctement. Cette situation est particulièrement problématique pour les instances d’orchestration de longue durée, qui peuvent représenter des heures ou des jours de travail.
 
 Pour éviter ces échecs, vous avez deux options : 
 - Retardez votre déploiement jusqu’à ce que toutes les instances d’orchestration en cours d’exécution soient terminées.
 - Assurez-vous que toutes les instances d’orchestration en cours d’exécution utilisent les versions existantes de vos fonctions. 
-
-> [!NOTE]
-> Cet article fournit des conseils concernant les applications de fonction qui ciblent Durable Functions 1.x. Il n’a pas été mis à jour pour tenir compte des modifications introduites dans Durable Functions 2.x. Pour en savoir plus sur les différences entre les versions d’extension, consultez [Versions de Durable Functions](durable-functions-versions.md).
 
 Le tableau suivant compare les trois stratégies principales qui permettent d’effectuer un déploiement sans temps d’arrêt pour Durable Functions : 
 
@@ -54,9 +52,9 @@ Utilisez la procédure suivante pour mettre en œuvre ce scénario.
 
 1. Pour chaque emplacement, affectez au [paramètre d’application AzureWebJobsStorage](../functions-app-settings.md#azurewebjobsstorage) la chaîne de connexion d’un compte de stockage partagé. Cette chaîne de connexion de compte de stockage est utilisée par le runtime Azure Functions. Ce compte est utilisé par le runtime d’Azure Functions. Il gère les clés de la fonction.
 
-1. Pour chaque emplacement, créez un paramètre d’application, par exemple, `DurableManagementStorage`. Définissez sa valeur en fonction de la chaîne de connexion de différents comptes de stockage. Ces comptes de stockage sont utilisés par l’extension Durable Functions pour l’[exécution fiable](durable-functions-checkpointing-and-replay.md). Utilisez un compte de stockage distinct pour chaque emplacement. Ne marquez pas ce paramètre en tant que paramètre d’emplacement de déploiement.
+1. Pour chaque emplacement, créez un paramètre d’application, par exemple, `DurableManagementStorage`. Définissez sa valeur en fonction de la chaîne de connexion de différents comptes de stockage. Ces comptes de stockage sont utilisés par l’extension Durable Functions pour l’[exécution fiable](./durable-functions-orchestrations.md). Utilisez un compte de stockage distinct pour chaque emplacement. Ne marquez pas ce paramètre en tant que paramètre d’emplacement de déploiement.
 
-1. Dans la [section durableTask du fichier host.json](durable-functions-bindings.md#hostjson-settings) de votre application de fonction, spécifiez `azureStorageConnectionStringName` en tant que nom du paramètre d’application créé à l’étape 3.
+1. Dans la [section durableTask du fichier host.json](durable-functions-bindings.md#hostjson-settings) de votre application de fonction, spécifiez `connectionStringName` (Durable 2.x) ou `azureStorageConnectionStringName` (Durable 1.x) en tant que nom du paramètre d’application créé à l’étape 3.
 
 Le diagramme suivant illustre la configuration décrite pour les emplacements de déploiement et les comptes de stockage. Dans ce scénario de prédéploiement potentiel, la version 2 d’une application de fonction s’exécute dans l’emplacement de production, alors que la version 1 reste dans l’emplacement de préproduction.
 
@@ -73,7 +71,10 @@ Les fragments JSON suivants sont des exemples de paramètres de chaîne de conne
   "version": 2.0,
   "extensions": {
     "durableTask": {
-      "azureStorageConnectionStringName": "DurableManagementStorage"
+      "hubName": "MyTaskHub",
+      "storageProvider": {
+        "connectionStringName": "DurableManagementStorage"
+      }
     }
   }
 }
@@ -97,7 +98,7 @@ Configurez votre pipeline CI/CD pour le déploiement uniquement quand votre appl
 [FunctionName("StatusCheck")]
 public static async Task<IActionResult> StatusCheck(
     [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestMessage req,
-    [OrchestrationClient] DurableOrchestrationClient client,
+    [DurableClient] IDurableOrchestrationClient client,
     ILogger log)
 {
     var runtimeStatus = new List<OrchestrationRuntimeStatus>();
@@ -105,8 +106,8 @@ public static async Task<IActionResult> StatusCheck(
     runtimeStatus.Add(OrchestrationRuntimeStatus.Pending);
     runtimeStatus.Add(OrchestrationRuntimeStatus.Running);
 
-    var status = await client.GetStatusAsync(new DateTime(2015,10,10), null, runtimeStatus);
-    return (ActionResult) new OkObjectResult(new Status() {HasRunning = (status.Count != 0)});
+    var result = await client.ListInstancesAsync(new OrchestrationStatusQueryCondition() { RuntimeStatus = runtimeStatus }, CancellationToken.None);
+    return (ActionResult)new OkObjectResult(new { HasRunning = result.DurableOrchestrationState.Any() });
 }
 ```
 
@@ -174,4 +175,3 @@ Pour plus d’informations, consultez [Gérer des instances dans Durable Functio
 
 > [!div class="nextstepaction"]
 > [Gestion de versions de Durable Functions](durable-functions-versioning.md)
-

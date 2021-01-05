@@ -3,26 +3,22 @@ title: 'Tutoriel : Configurer le provisionnement entrant SuccessFactors dans Az
 description: Découvrez comment configurer le provisionnement entrant de SuccessFactors vers Azure AD.
 services: active-directory
 author: cmmdesai
-documentationcenter: na
-manager: jodadzie
-ms.assetid: fac4f61e-d942-4429-a298-9ba74db95077
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: tutorial
 ms.workload: identity
-ms.date: 12/06/2019
+ms.date: 08/05/2020
 ms.author: chmutali
-ms.openlocfilehash: 09501a80d6ddcbbc9fa6cc08e36f47beb13d1663
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a62943c1a808424ded1a5e46ed115cda332bf7d5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77063220"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020753"
 ---
-# <a name="tutorial-configure-sap-successfactors-to-azure-ad-user-provisioning-preview"></a>Tutoriel : Configurer le provisionnement d’utilisateurs SAP SuccessFactors vers Azure AD (préversion)
-L’objectif de ce tutoriel est de présenter les étapes à effectuer pour provisionner les données utilisateurs de SuccessFactors Employee Central dans Azure Active Directory, avec réécriture facultative de l’adresse e-mail dans SuccessFactors. Cette intégration est en préversion publique et prend en charge la récupération de plus de [70 attributs utilisateur](../app-provisioning/sap-successfactors-attribute-reference.md) à partir de SuccessFactors Employee Central. 
+# <a name="tutorial-configure-sap-successfactors-to-azure-ad-user-provisioning"></a>Tutoriel : Configurer l’approvisionnement d’utilisateur SAP SuccessFactors vers Azure AD
+L’objectif de ce tutoriel est de présenter les étapes à effectuer pour provisionner les données utilisateurs de SuccessFactors Employee Central dans Azure Active Directory, avec réécriture facultative de l’adresse e-mail dans SuccessFactors. 
 
 >[!NOTE]
 >Utilisez ce tutoriel si les utilisateurs que vous souhaitez provisionner à partir de SuccessFactors sont des utilisateurs cloud uniquement qui n’ont pas besoin de compte AD local. Si les utilisateurs n’ont besoin que d’un compte AD local ou ont besoin d’un compte AD et d’un compte Azure AD, consultez le tutoriel sur la façon de [configurer le provisionnement d’utilisateurs SAP SuccessFactors vers Active Directory](sap-successfactors-inbound-provisioning-tutorial.md#overview). 
@@ -33,13 +29,13 @@ Le [service de provisionnement d’utilisateurs Azure Active Directory](../app-p
 
 Les workflows de provisionnement d’utilisateurs SuccessFactors pris en charge par le service de provisionnement d’utilisateurs Azure AD permettent d’automatiser les scénarios de gestion du cycle de vie des identités et des ressources humaines suivants :
 
-* **Nouvelles embauches** : quand un nouvel employé est ajouté à SuccessFactors, un compte d’utilisateur est créé automatiquement dans Azure Active Directory et éventuellement dans Office 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md), avec réécriture de l’adresse e-mail dans SuccessFactors.
+* **Nouvelles embauches** : quand un nouvel employé est ajouté à SuccessFactors, un compte d’utilisateur est créé automatiquement dans Azure Active Directory et éventuellement dans Microsoft 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md), avec réécriture de l’adresse e-mail dans SuccessFactors.
 
-* **Mises à jour du profil et des attributs de l’employé** : quand le dossier d’un employé est mis à jour dans SuccessFactors (par exemple le nom, la fonction ou le responsable), son compte d’utilisateur est mis à jour automatiquement dans Azure Active Directory et éventuellement dans Office 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
+* **Mises à jour du profil et des attributs de l’employé** : quand le dossier d’un employé est mis à jour dans SuccessFactors (par exemple le nom, la fonction ou le responsable), son compte d’utilisateur est mis à jour automatiquement dans Azure Active Directory et éventuellement dans Microsoft 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
 
-* **Résiliations de contrats d’employés** : quand le contrat d’un employé est résilié dans SuccessFactors, son compte d’utilisateur est désactivé automatiquement dans Azure Active Directory et éventuellement dans Office 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
+* **Résiliations de contrats d’employés** : quand le contrat d’un employé est résilié dans SuccessFactors, son compte d’utilisateur est désactivé automatiquement dans Azure Active Directory et éventuellement dans Microsoft 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
 
-* **Employés réembauchés** : quand un employé est réembauché dans SuccessFactors, son ancien compte peut être réactivé ou reprovisionné automatiquement (en fonction de votre préférence) dans Azure Active Directory et éventuellement dans Office 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
+* **Employés réembauchés** : quand un employé est réembauché dans SuccessFactors, son ancien compte peut être réactivé ou reprovisionné automatiquement (en fonction de votre préférence) dans Azure Active Directory et éventuellement dans Microsoft 365 et d’[autres applications SaaS prises en charge par Azure AD](../app-provisioning/user-provisioning.md).
 
 ### <a name="who-is-this-user-provisioning-solution-best-suited-for"></a>À qui cette solution d’attribution d’utilisateurs convient-elle le mieux ?
 
@@ -51,7 +47,7 @@ Cette solution de provisionnement d’utilisateurs SuccessFactors vers Azure Act
 
 * Les organisations qui imposent le provisionnement d’utilisateurs avec des données provenant de [SuccessFactors Employee Central (EC)](https://www.successfactors.com/products-services/core-hr-payroll/employee-central.html).
 
-* les organisations qui utilisent Office 365 pour la messagerie électronique.
+* Organisations utilisant Microsoft 365 pour la messagerie
 
 ## <a name="solution-architecture"></a>Architecture de la solution
 
@@ -79,7 +75,7 @@ La configuration du provisionnement d’utilisateurs piloté par les RH dans le 
 * Transformation d’attributs 
 * Filtres d’étendue
 
-Pour obtenir des instructions complètes sur ces sujets, consultez le [plan de déploiement cloud des RH](../app-provisioning/plan-cloud-hr-provision.md). 
+Pour obtenir des instructions complètes sur ces sujets, consultez le [plan de déploiement cloud des RH](../app-provisioning/plan-cloud-hr-provision.md). Reportez-vous à la [référence sur l’intégration de SAP SuccessFactors](../app-provisioning/sap-successfactors-integration-reference.md) pour en savoir plus sur les entités prises en charge, sur le traitement des détails et sur la personnalisation de l’intégration pour différents scénarios de ressources humaines. 
 
 ## <a name="configuring-successfactors-for-the-integration"></a>Configuration de SuccessFactors pour l’intégration
 
@@ -175,9 +171,9 @@ Cette section décrit les étapes du provisionnement de comptes d’utilisateur 
 
    * **URL du locataire** : entrez le nom du point de terminaison des services de l’API OData SuccessFactors. Entrez uniquement le nom d’hôte du serveur, sans http ou https. Cette valeur doit ressembler à ceci : **nom_serveur_API.successfactors.com**.
 
-   * **E-mail de notification :** entrez votre adresse e-mail et cochez la case « Envoyer un e-mail en cas de défaillance ».
+   * **E-mail de notification :** entrez votre adresse e-mail et activez la case à cocher « Envoyer un e-mail en cas de défaillance ».
     > [!NOTE]
-    > Le service Azure AD Provisioning envoie la notification par e-mail si le travail de provisionnement passe à l’état [Mise en quarantaine](/azure/active-directory/manage-apps/application-provisioning-quarantine-status).
+    > Le service Azure AD Provisioning envoie la notification par e-mail si le travail de provisionnement passe à l’état [Mise en quarantaine](../app-provisioning/application-provisioning-quarantine-status.md).
 
    * Cliquez sur le bouton **Tester la connexion**. Si le test de connexion aboutit, cliquez sur le bouton **Enregistrer**, en haut de l'écran. En cas d’échec, vérifiez que les informations d’identification et l’URL SuccessFactors sont valides.
     >[!div class="mx-imgBorder"]
@@ -280,5 +276,3 @@ Une fois les configurations d’application de provisionnement SuccessFactors ef
 * [Découvrez comment configurer l’authentification unique entre SuccessFactors et Azure Active Directory](successfactors-tutorial.md)
 * [Découvrir comment intégrer d’autres applications SaaS à Azure Active Directory](tutorial-list.md)
 * [Découvrez comment exporter et importer vos configurations de provisionnement](../app-provisioning/export-import-provisioning-configuration.md)
-
-

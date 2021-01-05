@@ -8,20 +8,25 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-entity-search
 ms.topic: quickstart
-ms.date: 12/11/2019
+ms.date: 05/08/2020
 ms.author: aahi
-ms.openlocfilehash: 69e4d992e2ef89b4d3d9408d6e50591fb8166c79
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 407d41c403e0a2d0ad3708f879838e53b5c3d315
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75385777"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351995"
 ---
-# <a name="quickstart-for-bing-entity-search-api-with-ruby"></a>Démarrage rapide pour l’API Recherche d’entités Bing avec Ruby
+# <a name="quickstart-send-a-search-request-to-the-bing-entity-search-rest-api-using-ruby"></a>Démarrage rapide : Envoyer une requête de recherche à l’API REST Recherche d’entités Bing en utilisant Ruby
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche d’entités Bing et voir la réponse JSON. Cette application Ruby simple envoie une requête de recherche d’actualités à l’API, puis affiche la réponse. Le code source de cette application est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/ruby/Search/BingEntitySearchv7.rb).
 
-Alors que cette application est écrite en Ruby, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+Bien que cette application soit écrite en Ruby, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -31,7 +36,7 @@ Alors que cette application est écrite en Ruby, l’API est un service web REST
 
 ## <a name="create-and-initialize-the-application"></a>Créer et initialiser l’application
 
-1. Dans votre IDE ou éditeur de code favori, créez un fichier Ruby d’actualités et importez les packages suivants.
+1. Dans votre IDE ou éditeur de code favori, créez un fichier Ruby d’actualités et importez les packages suivants :
 
     ```ruby
     require 'net/https'
@@ -39,7 +44,7 @@ Alors que cette application est écrite en Ruby, l’API est un service web REST
     require 'json'
     ```
 
-2. Créez des variables pour votre point de terminaison d’API, l’URL de recherche d’actualités, votre clé d’abonnement et une requête de recherche. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Créez des variables pour votre point de terminaison d’API, l’URL de recherche d’actualités, votre clé d’abonnement et la requête de recherche. Vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
     
     ```ruby
     host = 'https://api.cognitive.microsoft.com'
@@ -65,7 +70,7 @@ Alors que cette application est écrite en Ruby, l’API est un service web REST
     request['Ocp-Apim-Subscription-Key'] = subscriptionKey
     ```
 
-3. Envoyer la requête et afficher la réponse
+3. Envoyez la requête et affichez la réponse.
 
     ```ruby
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
@@ -145,5 +150,5 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 > [!div class="nextstepaction"]
 > [Créer une application web monopage](../tutorial-bing-entities-search-single-page-app.md)
 
-* [Qu’est-ce que l’API Recherche d’entités Bing ?](../search-the-web.md)
-* [Informations de référence sur l’API Recherche d’entités Bing](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference)
+* [Qu’est-ce que l’API Recherche d’entités Bing ?](../overview.md)
+* [Informations de référence sur l’API Recherche d’entités Bing](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference).

@@ -5,106 +5,140 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 11/21/2019
-ms.author: iainfou
-author: iainfoulds
+ms.date: 11/11/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: librown
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3412938cfc2ad3fbec293fd33f64e114e14e6f7e
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 35eff46a0470d429c8ec6f364ffa836501c65f47
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81450970"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743596"
 ---
 # <a name="enable-passwordless-sign-in-with-the-microsoft-authenticator-app-preview"></a>Activer la connexion sans mot de passe avec l'application Microsoft Authenticator (préversion)
 
-L’application Microsoft Authenticator vous permet de vous connecter à n’importe quel compte Azure AD sans utiliser de mot de passe. À l’instar de la technologie de [Windows Hello Entreprise](/windows/security/identity-protection/hello-for-business/hello-identity-verification), Microsoft Authenticator a recours à l’authentification par clé pour activer une information d’identification utilisateur qui est liée à un appareil et utilise un code biométrique ou confidentiel. Cette méthode d’authentification peut être utilisée sur n’importe quelle plateforme d’appareil, notamment mobile, et avec une application ou un site Web qui s’intègre avec les bibliothèques d’authentification Microsoft. 
+L’application Microsoft Authenticator vous permet de vous connecter à n’importe quel compte Azure AD sans utiliser de mot de passe. Microsoft Authenticator utilise l’authentification par clé pour activer les informations d’identification de l’utilisateur qui sont liées à un appareil, où l’appareil utilise un code confidentiel ou la biométrie. [Windows Hello Entreprise](/windows/security/identity-protection/hello-for-business/hello-identity-verification) utilise une technologie similaire.
 
-![Exemple de connexion dans un navigateur demandant à l’utilisateur d’approuver la connexion](./media/howto-authentication-passwordless-phone/phone-sign-in-microsoft-authenticator-app.png)
+Cette technologie d’authentification peut être utilisée sur toutes les plateformes d’appareils, y compris sur les appareils mobiles. Cette technologie peut également être utilisée avec n’importe quelle application ou n’importe quel site web qui s’intègre aux bibliothèques d’authentification Microsoft.
 
-Au lieu d’obtenir une invite de mot de passe après avoir entré un nom d’utilisateur, une personne qui a activé la connexion par téléphone dans l’application Microsoft Authenticator voit s’afficher un message lui demandant d’entrer un nombre dans son application. Dans l’application, l’utilisateur doit alors sélectionner le nombre correspondant, choisir Approuver, puis fournir son code confidentiel ou biométrique, ce qui achève l’authentification.
+:::image type="content" border="false" source="./media/howto-authentication-passwordless-phone/phone-sign-in-microsoft-authenticator-app.png" alt-text="Exemple de connexion au navigateur demandant à l’utilisateur d’approuver la connexion.":::
 
-> [!NOTE]
-> Cette fonctionnalité est disponible dans l'application Microsoft Authenticator depuis mars 2017. Il est donc possible que lorsque la stratégie est activée pour un répertoire, les utilisateurs rencontrent ce flux immédiatement et voient un message d'erreur s'ils n'ont pas été activés par la stratégie. Gardez ce point à l’esprit et préparez vos utilisateurs à cette modification.
+Les personnes qui ont activé la connexion par téléphone à partir de l’application Microsoft Authenticator voient un message leur demandant d’appuyer sur un nombre dans leur application. Aucun nom d’utilisateur ou mot de passe n’est demandé. Pour terminer le processus de connexion dans l’application, un utilisateur doit ensuite effectuer les actions suivantes :
+
+1. Choisir le nombre correspondant.
+2. Choisissez **Approuver**.
+3. Fournir son code confidentiel ou sa biométrie.
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Azure Multi-Factor Authentication, avec notifications push autorisées en tant que méthode de vérification 
+Pour utiliser la connexion par téléphone sans mot de passe avec l’application Microsoft Authenticator, les prérequis suivants doivent être satisfaits :
+
+- Azure AD Multi-Factor Authentication, avec notifications Push autorisées en tant que méthode de vérification.
 - Installation de la dernière version de Microsoft Authenticator sur des appareils exécutant iOS 8.0 ou une version ultérieure, ou Android 6.0 ou une version ultérieure.
 
 > [!NOTE]
-> Si vous avez activé l'aperçu de connexion sans mot de passe précédent de l'application Microsoft Authenticator avec Azure AD PowerShell, il était activé pour l'ensemble de votre répertoire. Si vous activez l’utilisation de cette nouvelle méthode, elle remplace la stratégie PowerShell. Nous vous recommandons d'activer cette fonctionnalité pour tous les utilisateurs de votre client hébergé via les nouvelles méthodes d'authentification, sinon les utilisateurs ne figurant pas dans la nouvelle stratégie ne pourront plus se connecter sans mot de passe. 
+> Si vous avez activé la préversion de la connexion sans mot de passe Microsoft Authenticator en utilisant Azure AD PowerShell, elle a été activée pour l’ensemble de votre répertoire. Si vous activez l’utilisation de cette nouvelle méthode, elle remplace la stratégie PowerShell. Nous vous recommandons d’activer cette fonctionnalité pour tous les utilisateurs de votre locataire par le biais du nouveau menu *Méthodes d’authentification*, sinon les utilisateurs ne figurant pas dans la nouvelle stratégie ne pourront plus se connecter sans mot de passe.
 
 ## <a name="enable-passwordless-authentication-methods"></a>Activer les méthodes d’authentification sans mot de passe
 
+Pour utiliser l’authentification sans mot de passe dans Azure AD, activez tout d’abord l’expérience d’inscription combinée, puis activez les utilisateurs pour la méthode sans mot de passe.
+
 ### <a name="enable-the-combined-registration-experience"></a>Activer l’expérience d’inscription combinée
 
-Les fonctionnalités d’inscription pour les méthodes d’authentification sans mot de passe s’appuient sur la fonctionnalité d'inscription combinée. Suivez les étapes de l’article [Activer l’inscription d’informations de sécurité combinées](howto-registration-mfa-sspr-combined.md)pour activer l’inscription combinée.
+Les fonctionnalités d’inscription pour les méthodes d’authentification sans mot de passe s’appuient sur la fonctionnalité d'inscription combinée. Pour permettre aux utilisateurs d’effectuer eux-mêmes l’inscription combinée, suivez les étapes pour [activer l’inscription combinée des informations de sécurité](howto-registration-mfa-sspr-combined.md).
 
 ### <a name="enable-passwordless-phone-sign-in-authentication-methods"></a>Activer les méthodes d’authentification sans mot de passe par téléphone
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com)
-1. Recherchez et sélectionnez *Azure Active Directory*. Sélectionner **Sécurité** > **Méthodes authentification** > **Stratégie des méthodes authentification (Préversion)**
-1. Sous **Authentification sans mot de passe par téléphone**, choisissez les options suivantes
+Azure AD vous permet de choisir les méthodes d’authentification qui peuvent être utilisées pendant le processus de connexion. Les utilisateurs s’inscrivent ensuite pour les méthodes qu’ils souhaitent utiliser.
+
+Pour activer la méthode d’authentification pour la connexion par téléphone sans mot de passe, effectuez les étapes suivantes :
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte d’*administrateur général*.
+1. Recherchez et sélectionnez *Azure Active Directory*, puis accédez à **Sécurité** > **Méthodes d’authentification** > **Stratégie de méthode d’authentification (préversion)**
+1. Sous **Connexion par téléphone sans mot de passe**, choisissez les options suivantes :
    1. **Activer** - Oui ou Non
    1. **Cible** - Tous les utilisateurs ou les utilisateurs sélectionnés
-1. **Enregistrer** pour définir la nouvelle stratégie
+1. Pour appliquer la nouvelle stratégie, sélectionnez **Enregistrer**.
 
-## <a name="user-registration-and-management-of-microsoft-authenticator-app"></a>Inscription des utilisateurs et gestion de l’application Microsoft Authenticator
+## <a name="user-registration-and-management-of-microsoft-authenticator"></a>Inscription des utilisateurs et gestion de Microsoft Authenticator
 
-1. Accédez à [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo).
-1. Connectez-vous si ce n’est pas déjà fait
-1. Ajoutez une application Authenticator en cliquant sur **Ajouter une méthode**, en choisissant **Application Authenticator**, puis en cliquant sur **Ajouter**.
-1. Suivez les instructions pour installer et configurer l’application Microsoft Authenticator sur votre appareil
-1. Cliquez sur **Terminé** pour terminer le processus d’installation de l’application MFA d’Authenticator. 
-1. Dans **Microsoft Authenticator**, choisissez **Activer l’authentification** par téléphone dans le menu déroulant Compte.
-1. Suivez les instructions de l’application pour terminer de vous inscrire à l’authentification sans mot de passe. 
+Les utilisateurs s’inscrivent à la méthode d’authentification sans mot de passe d’Azure AD en procédant comme suit :
 
-Les organisations peuvent diriger leurs utilisateurs l'article [Se connecter à l'aide de votre téléphone et non de votre mot de passe](../user-help/microsoft-authenticator-app-phone-signin-faq.md) pour obtenir une assistance supplémentaire lors de la configuration dans l'application Microsoft Authenticator et de l'activation de l’authentification par téléphone. Pour appliquer ces paramètres, vous devrez peut-être vous déconnecter du locataire et vous y reconnecter. 
+1. Accédez à [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo) .
+1. Connectez-vous, puis ajoutez l’application Authenticator en sélectionnant **Ajouter une méthode > Application d’authentification**, puis **Ajouter**.
+1. Suivez les instructions pour installer et configurer l’application Microsoft Authenticator sur votre appareil.
+1. Sélectionnez **Terminé** pour terminer la configuration d’Authenticator.
+1. Dans **Microsoft Authenticator**, choisissez **Activer la connexion par téléphone** dans le menu déroulant du compte inscrit.
+1. Suivez les instructions de l’application pour terminer de vous inscrire à la connexion sans mot de passe.
+
+Une organisation peut demander à ses utilisateurs de se connecter avec leur téléphone, sans utiliser de mot de passe. Pour plus d’informations sur la configuration de l’application Microsoft Authenticator et sur l’activation de la connexion par téléphone, consultez [Vous connecter à vos comptes à l’aide de l’application Microsoft Authenticator](../user-help/user-help-auth-app-sign-in.md).
+
+> [!NOTE]
+> Les utilisateurs que la stratégie n’autorise pas à utiliser la connexion par téléphone ne sont plus en mesure de l’activer dans l’application Microsoft Authenticator.
 
 ## <a name="sign-in-with-passwordless-credential"></a>Se connecter avec les informations d’identification sans mot de passe
 
-Dans le cadre de la préversion publique, il n’existe aucun moyen d’imposer aux utilisateurs de créer ou d’utiliser cette nouvelle information d’identification. La connexion sans mot de passe n’est proposée à un utilisateur qu’une fois qu’un administrateur a activé son locataire **et** que l’utilisateur a mis à jour son application Microsoft Authenticator pour activer la connexion par téléphone.
+Un utilisateur peut commencer à utiliser la connexion sans mot de passe une fois que toutes les actions suivantes ont été effectuées :
 
-Une fois que vous avez tapé votre nom d' utilisateur sur le Web et que vous avez sélectionné **Suivant**, les utilisateurs reçoivent un nombre et sont invités par l’application Microsoft Authenticator à sélectionner le nombre approprié afin de s’authentifier au lieu d’utiliser leur mot de passe. 
+- Un administrateur a activé le locataire de l’utilisateur.
+- L’utilisateur a mis à jour son application Microsoft Authenticator pour activer la connexion par téléphone.
 
-![Exemple de connexion à un navigateur à l’aide de l’application Microsoft Authenticator](./media/howto-authentication-passwordless-phone/web-sign-in-microsoft-authenticator-app.png)
+La première fois qu’un utilisateur lance le processus de connexion par téléphone, il effectue les étapes suivantes :
+
+1. Entre son nom dans la page de connexion.
+2. Sélectionne **Suivant**.
+3. Le cas échéant, sélectionne **Autres méthodes de connexion**.
+4. Sélectionne **Approuver une demande sur mon application Microsoft Authenticator**.
+
+Un nombre est ensuite présenté à l’utilisateur. L’application invite l’utilisateur à s’authentifier en sélectionnant le nombre approprié au lieu d’entrer un mot de passe.
+
+Une fois que l’utilisateur a utilisé la connexion par téléphone sans mot de passe, l’application continue à le diriger par le biais de cette méthode. Toutefois, l’utilisateur verra l’option permettant de choisir une autre méthode.
+
+:::image type="content" border="false" source="./media/howto-authentication-passwordless-phone/web-sign-in-microsoft-authenticator-app.png" alt-text="Exemple de connexion au navigateur à l’aide de l’application Microsoft Authenticator.":::
 
 ## <a name="known-issues"></a>Problèmes connus
 
-### <a name="user-is-not-enabled-by-policy-but-still-has-passwordless-phone-sign-in-method-in-microsoft-authenticator"></a>L’utilisateur n’est pas autorisé par la stratégie mais peut toujours s’authentifier par téléphone sans mot de passe dans Microsoft Authenticator
+Les problèmes connus suivants existent dans l’expérience en préversion actuelle.
 
-Il est possible qu’un utilisateur ait créé des informations d’identification de connexion par téléphone dans son application Microsoft Authenticator actuelle ou sur un appareil antérieur. Une fois que l’administrateur a activé la stratégie de méthode d’authentification pour l’authentification par téléphone sans mot de passe, tout utilisateur disposant d’une information d’identification inscrite commence à accéder à la nouvelle invite de connexion, qu’il ait ou non activé l’utilisation de la stratégie. Si l’utilisateur n’a pas été autorisé à utiliser les informations d’identification par la stratégie, il verra une erreur s’afficher après avoir terminé le processus d’authentification. 
+### <a name="not-seeing-option-for-passwordless-phone-sign-in"></a>Aucune option pour la connexion par téléphone sans mot de passe n’est visible
 
-L’administrateur peut choisir d’autoriser l’utilisateur à utiliser l’authentification par téléphone, ou l’utilisateur doit supprimer la méthode. Si l’utilisateur n’a plus l’appareil inscrit, il peut accéder à [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo) et le supprimer. S’il utilise toujours Authentificator pour la MFA, ils peuvent choisir **Désactiver l’authentification** par téléphone à partir de Microsoft Authenticator.  
+Dans un scénario, un utilisateur peut avoir une vérification de connexion par téléphone sans mot de passe sans réponse qui est en attente. Pourtant, l’utilisateur peut tenter de se reconnecter. Dans ce cas, il est possible que l’utilisateur ne voie que la possibilité de saisir un mot de passe.
 
-### <a name="ad-fs-integration"></a>Intégration AD FS
+Pour résoudre ce scénario, vous pouvez utiliser les étapes suivantes :
 
-Lorsqu’un utilisateur a activé l’information d’identification sans mot de passe Microsoft Authenticator, l’authentification de cet utilisateur implique toujours par défaut l’envoi d’une notification pour approbation. Cette logique empêche les utilisateurs d’un locataire hybride d’être dirigés vers ADFS pour la vérification de la connexion si ces utilisateurs ne suivent pas une étape supplémentaire consistant à cliquer sur « Utiliser votre mot de passe à la place ». Ce processus contourne également les stratégies d’accès conditionnel locales, ainsi que les flux d’authentification directe. 
+1. Ouvrez l’application Microsoft Authenticator.
+2. Répondez aux invites de notification.
 
-Si la vérification d’authentification par téléphone sans mot de passe est en attente pour un utilisateur et que celui-ci tente de se connecter à nouveau, l’utilisateur peut accéder à ADFS pour saisir un mot de passe à la place.  
+L’utilisateur peut ensuite continuer à utiliser la connexion par téléphone sans mot de passe.
+
+### <a name="federated-accounts"></a>Comptes fédérés
+
+Lorsqu’un utilisateur a activé des informations d’identification sans mot de passe, le processus de connexion Azure AD cesse d’utiliser le login\_hint. Par conséquent, le processus ne dirige plus l’utilisateur vers un emplacement de connexion fédérée.
+
+Cette logique empêche généralement l’utilisateur d’un locataire hybride d’être dirigé vers les services de fédération Active Directory (AD FS) pour la vérification de la connexion. Toutefois, l’utilisateur conserve la possibilité de cliquer sur **Utiliser votre mot de passe à la place**.
 
 ### <a name="azure-mfa-server"></a>Serveur Azure MFA
 
-Les utilisateurs finaux qui sont activés pour MFA par le biais d’un serveur Azure MFA local d’une organisation peuvent toujours créer et utiliser une information d’identification de connexion par téléphone sans mot de passe. Si l’utilisateur tente de mettre à niveau plusieurs installations (supérieures à 5) de Microsoft Authenticator avec cette information d’identification, cette modification peut générer une erreur.  
+Un utilisateur final peut être en mesure d’utiliser l’authentification multifacteur (MFA) via un serveur Azure MFA local. L’utilisateur peut toujours créer et utiliser une seule paire d’informations d’identification de connexion par téléphone.
+
+Si l’utilisateur tente de mettre à niveau plusieurs installations (supérieures à 5) de l’application Microsoft Authenticator avec ces informations d’identification de connexion par téléphone sans mot de passe, cette modification peut générer une erreur.
 
 ### <a name="device-registration"></a>Enregistrement de l’appareil
 
-L’une des conditions requises pour la création de cette information d’identification forte est que l’appareil sur lequel l’application Microsoft Authenticator est installée soit inscrit dans le locataire Azure AD pour un utilisateur individuel. Du fait des restrictions en matière d’inscription d’appareil, un appareil ne peut être inscrit que dans un seul locataire. Cette limite signifie qu’un seul compte professionnel ou scolaire de l’application Microsoft Authenticator peut être activé pour la connexion par téléphone.
+Avant de pouvoir créer des informations d’identification fortes, vous devez remplir les conditions préalables. L’une des conditions requises est que l’appareil sur lequel l’application Microsoft Authenticator est installée doit être inscrite dans le locataire Azure AD pour un utilisateur individuel.
 
-### <a name="intune-mobile-application-management"></a>Gestion des applications mobiles Intune 
-
-Les utilisateurs finaux soumis à une stratégie exigeant une gestion des applications mobiles (GAM) ne peuvent pas inscrire d’informations d’identification sans mot de passe dans l’application Microsoft Authenticator. 
+Actuellement, un appareil ne peut être inscrit que dans un seul locataire. Cette limite signifie qu’un seul compte professionnel ou scolaire de l’application Microsoft Authenticator peut être activé pour la connexion par téléphone.
 
 > [!NOTE]
-> L’inscription de l’appareil n’est pas la même que la gestion des appareils ou « MDM ». Il associe uniquement un ID d’appareil et un ID d’utilisateur dans le répertoire Azure AD.  
+> L’inscription de l’appareil n’est pas la même que la gestion des appareils ou la gestion des périphériques mobiles (GPM). Elle associe uniquement un ID d’appareil et un identifiant utilisateur dans le répertoire Azure AD.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Présentation de l’authentification sans mot de passe](concept-authentication-passwordless.md)
+Pour en savoir plus sur l’authentification Azure AD et les méthodes sans mot de passe, consultez les articles suivants :
 
-[En savoir plus sur l’inscription des appareils](../devices/overview.md#getting-devices-in-azure-ad)
-
-[En savoir plus sur Azure Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)
+- [En savoir plus sur le fonctionnement de l’authentification par mot de passe](concept-authentication-passwordless.md)
+- [En savoir plus sur l’inscription des appareils](../devices/overview.md#getting-devices-in-azure-ad)
+- [En savoir plus sur Azure AD Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)

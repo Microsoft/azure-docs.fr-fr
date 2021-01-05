@@ -11,25 +11,25 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/26/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 983699dfbfe3e8fa332da4810d1514a11029077f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 595cf2c1dbc105634d33b426c67e5123b9751e6e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230121"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996540"
 ---
 # <a name="azure-ad-connect-sync-configure-filtering"></a>Synchronisation d’Azure AD Connect : Configurer le filtrage
-L’utilisation du filtrage vous permet de contrôler les objets de votre annuaire local qui doivent apparaître dans Azure Active Directory (Azure AD). La configuration par défaut concerne l’ensemble des objets présents dans tous les domaines des forêts configurées. En général, il s’agit de la configuration recommandée. Les utilisateurs qui utilisent les charges de travail Office 365, telles qu’Exchange Online et Skype Entreprise, peuvent tirer parti d’une liste d’adresses globale complète pour envoyer des courriers électroniques et appeler tout le monde. La configuration par défaut leur offre la même expérience qu’une implémentation locale d’Exchange ou de Lync.
+L’utilisation du filtrage vous permet de contrôler les objets de votre annuaire local qui doivent apparaître dans Azure Active Directory (Azure AD). La configuration par défaut concerne l’ensemble des objets présents dans tous les domaines des forêts configurées. En général, il s’agit de la configuration recommandée. Les utilisateurs qui utilisent les charges de travail Microsoft 365, telles qu’Exchange Online et Skype Entreprise, peuvent tirer parti d’une liste d’adresses globale complète pour envoyer des courriers électroniques et appeler tout le monde. La configuration par défaut leur offre la même expérience qu’une implémentation locale d’Exchange ou de Lync.
 
 Toutefois, dans certains cas, vous devez apporter certaines modifications à la configuration par défaut. Voici quelques exemples :
 
 * Vous prévoyez d’utiliser la [topologie multi-annuaire Azure AD](plan-connect-topologies.md#each-object-only-once-in-an-azure-ad-tenant). Vous devez alors appliquer un filtre pour déterminer les objets qui sont synchronisés avec un annuaire Azure AD spécifique.
-* Vous exécutez un pilote pour Azure ou Office 365 et souhaitez uniquement disposer d’un sous-ensemble d’utilisateurs dans Azure AD. Dans le petit pilote, il n’est pas impératif de disposer d’une liste d’adresses globale complète pour illustrer la fonctionnalité.
+* Vous exécutez un pilote pour Azure ou Microsoft 365 et souhaitez uniquement disposer d’un sous-ensemble d’utilisateurs dans Azure AD. Dans le petit pilote, il n’est pas impératif de disposer d’une liste d’adresses globale complète pour illustrer la fonctionnalité.
 * Vous disposez d’un grand nombre de comptes de service et d’autres comptes non personnels dont vous ne voulez pas dans Azure AD.
 * Pour des raisons de conformité, vous ne supprimez aucun compte d’utilisateur local. Vous vous contentez de les désactiver. Toutefois, vous souhaitez qu’Azure AD ne comporte que des comptes actifs.
 
@@ -47,7 +47,7 @@ Avant d’apporter des modifications au filtrage, veillez à [désactiver la tâ
 
 Pour vous protéger contre la suppression par inadvertance de nombreux objets, la fonctionnalité « [Prévention des suppressions accidentelles](how-to-connect-sync-feature-prevent-accidental-deletes.md) » est activée par défaut. Si vous supprimez de nombreux objets suite à un filtrage (500 par défaut), vous devez exécuter les étapes décrites dans cet article pour que les suppressions soient appliquées à Azure AD.
 
-Si vous utilisez une version antérieure à novembre 2015 ([1.0.9125](reference-connect-version-history.md#1091250)), que vous modifiez une configuration de filtre et que vous utilisez une synchronisation de hachage du mot de passe, vous devez déclencher une synchronisation complète de tous les mots de passe une fois la configuration terminée. Pour plus d’informations sur le déclenchement d’une synchronisation complète des mots de passe, consultez la section [Déclencher une synchronisation complète de tous les mots de passe](tshoot-connect-password-hash-synchronization.md#trigger-a-full-sync-of-all-passwords). Si vous utilisez la version 1.0.9125 ou une version ultérieure, l’opération standard de **synchronisation complète** détermine également si les mots de passe doivent être ou non synchronisés et si cette étape supplémentaire n’est plus nécessaire.
+Si vous utilisez une version antérieure à novembre 2015 ([1.0.9125](reference-connect-version-history.md)), que vous modifiez une configuration de filtre et que vous utilisez une synchronisation de hachage du mot de passe, vous devez déclencher une synchronisation complète de tous les mots de passe une fois la configuration terminée. Pour plus d’informations sur le déclenchement d’une synchronisation complète des mots de passe, consultez la section [Déclencher une synchronisation complète de tous les mots de passe](tshoot-connect-password-hash-synchronization.md#trigger-a-full-sync-of-all-passwords). Si vous utilisez la version 1.0.9125 ou une version ultérieure, l’opération standard de **synchronisation complète** détermine également si les mots de passe doivent être ou non synchronisés et si cette étape supplémentaire n’est plus nécessaire.
 
 Si des objets **utilisateur** ont été accidentellement supprimés d’Azure AD à la suite d’une erreur de filtrage, vous pouvez recréer ces objets utilisateur dans Azure AD en supprimant vos configurations de filtrage. Vous pouvez ensuite resynchroniser vos annuaires. Cette opération restaure les utilisateurs présents dans la corbeille d’Azure AD. Toutefois, vous ne pouvez pas annuler la suppression d’autres types d’objets. Par exemple, si vous supprimez accidentellement un groupe de sécurité et que ce dernier a été utilisé comme liste de contrôle d’accès (ACL, access-control list) d’une ressource, le groupe et ses ACL ne sont pas récupérables.
 
@@ -109,11 +109,11 @@ Pour définir le filtre de domaine, procédez comme suit :
 
 1. Connectez-vous au serveur qui exécute Azure AD Connect Sync en utilisant un compte membre du groupe de sécurité **ADSyncAdmins** .
 2. Lancez **Service de synchronisation** à partir du menu **Démarrer**.
-3. Sélectionnez **Connecteurs**, puis, dans la liste **Connecteurs**, sélectionnez le connecteur présentant le type **Services de domaine Active Directory**. Dans **Actions**, sélectionnez**Propriétés**.  
+3. Sélectionnez **Connecteurs**, puis, dans la liste **Connecteurs**, sélectionnez le connecteur présentant le type **Services de domaine Active Directory**. Dans **Actions**, sélectionnez **Propriétés**.  
    ![Propriétés du connecteur](./media/how-to-connect-sync-configure-filtering/connectorproperties.png)  
 4. Cliquez sur **Configurer des partitions d’annuaire**.
 5. Dans la liste **Sélectionner des partitions d’annuaire** , sélectionnez et désélectionnez des domaines en fonction de vos besoins. Vérifiez que seules les partitions que vous voulez synchroniser sont sélectionnées.  
-   ![Partitions](./media/how-to-connect-sync-configure-filtering/connectorpartitions.png)  
+   ![Capture d’écran montrant les partitions d’annuaire dans la fenêtre « Propriétés ».](./media/how-to-connect-sync-configure-filtering/connectorpartitions.png)  
    Si vous avez modifié votre infrastructure Active Directory locale et ajouté ou supprimé des domaines dans la forêt, cliquez sur le bouton **Actualiser** pour obtenir une liste mise à jour. Lorsque vous actualisez les données, des informations d’identification vous sont demandées. Fournissez des informations d’identification disposant d’un accès en lecture à Windows Server Active Directory. Il ne s’agit pas nécessairement de l’utilisateur déjà renseigné dans la boîte de dialogue.  
    ![Actualisation requise](./media/how-to-connect-sync-configure-filtering/refreshneeded.png)  
 6. Quand vous avez terminé, fermez la boîte de dialogue **Propriétés** en cliquant sur **OK**. Si vous avez supprimé des domaines de la forêt, un message contextuel vous indique qu’un domaine a été supprimé et que la configuration va être nettoyée.
@@ -166,7 +166,7 @@ Pour configurer le filtrage basé sur l’unité d’organisation, procédez com
 
 1. Connectez-vous au serveur qui exécute Azure AD Connect Sync en utilisant un compte membre du groupe de sécurité **ADSyncAdmins** .
 2. Lancez **Service de synchronisation** à partir du menu **Démarrer**.
-3. Sélectionnez **Connecteurs**, puis, dans la liste **Connecteurs**, sélectionnez le connecteur présentant le type **Services de domaine Active Directory**. Dans **Actions**, sélectionnez**Propriétés**.  
+3. Sélectionnez **Connecteurs**, puis, dans la liste **Connecteurs**, sélectionnez le connecteur présentant le type **Services de domaine Active Directory**. Dans **Actions**, sélectionnez **Propriétés**.  
    ![Propriétés du connecteur](./media/how-to-connect-sync-configure-filtering/connectorproperties.png)  
 4. Cliquez sur **Configurer des partitions d’annuaire**, sélectionnez le domaine que vous voulez configurer, puis cliquez sur **Conteneurs**.
 5. Lorsque vous y êtes invité, fournissez des informations d’identification disposant d’un accès en lecture à votre service d’annuaire Active Directory local. Il ne s’agit pas nécessairement de l’utilisateur déjà renseigné dans la boîte de dialogue.
@@ -202,7 +202,7 @@ Vous pouvez configurer le moteur de synchronisation de façon qu’il ne synchro
 Avec cette configuration, une unité d’organisation qui a été créée sous ManagedObjects n’est pas synchronisée.
 
 ## <a name="attribute-based-filtering"></a>Filtrage par attribut
-Avant d’exécuter ces étapes, vérifiez que vous utilisez la version de novembre 2015 ([1.0.9125](reference-connect-version-history.md#1091250)) ou une version ultérieure.
+Avant d’exécuter ces étapes, vérifiez que vous utilisez la version de novembre 2015 ([1.0.9125](reference-connect-version-history.md)) ou une version ultérieure.
 
 > [!IMPORTANT]
 >Microsoft recommande de ne pas modifier les règles par défaut créés par **Azure AD Connect**. Si vous voulez modifier la règle, clonez-la, puis désactivez la règle d’origine. Apportez les modifications souhaitées à la règle clonée. Notez qu’en procédant ainsi (désactiver la règle d’origine), vous ne bénéficiez pas des résolutions de bogues ou des fonctionnalités activées via cette règle.
@@ -217,7 +217,7 @@ Le filtrage entrant utilise la configuration par défaut dans laquelle l’attri
 Dans le cadre du filtrage entrant, vous utilisez les possibilités de **l’étendue** pour déterminer les objets à synchroniser ou non. C’est à ce stade que vous réalisez des ajustements en fonction des besoins particuliers de votre organisation. Le module d’étendue dispose d’un **groupe** et d’une **clause** pour déterminer les cas dans lesquels une règle de synchronisation figure dans l’étendue. Un groupe contient une ou plusieurs clauses. Il existe un « AND » logique entre plusieurs clauses, et un « OR » logique entre plusieurs groupes.
 
 Intéressons-nous à un exemple :  
-![Portée](./media/how-to-connect-sync-configure-filtering/scope.png)  
+![Capture d’écran montrant un exemple d’ajout de filtres d’étendue.](./media/how-to-connect-sync-configure-filtering/scope.png)  
 Voici la lecture qu’il faut en faire **(service = Informatique) OU (service = Ventes et c = US)** .
 
 Dans les exemples et étapes ci-après, vous vous servez de l’objet utilisateur en guise d’exemple, mais vous pouvez l’utiliser pour tous les types d’objets.
@@ -275,7 +275,7 @@ Dans cet exemple, vous modifiez le filtrage afin que seuls les utilisateurs dont
 1. Connectez-vous au serveur qui exécute Azure AD Connect Sync en utilisant un compte membre du groupe de sécurité **ADSyncAdmins** .
 2. Lancez **Éditeur de règles de synchronisation** à partir du menu **Démarrer**.
 3. Sous **Type de règles**, cliquez sur **Sortant**.
-4. Selon la version de Connect que vous utilisez, trouvez la règle nommée **Out to AAD – User Join** ou **Out to AAD - User Join SOAInAD**, puis cliquez sur **Modifier**.
+4. Selon la version de Connect que vous utilisez, trouvez la règle nommée **Out to Azure AD – User Join** ou **Out to Azure AD - User Join SOAInAD**, puis cliquez sur **Modifier**.
 5. Dans la fenêtre contextuelle, sélectionnez **Oui** pour créer une copie de la règle.
 6. Sur la page **Description**, redéfinissez la zone **Précédence** sur une valeur inutilisée, telle que 50.
 7. Dans la barre de navigation gauche, cliquez sur **Filtre d’étendue**, puis cliquez sur **Ajouter une clause**. Dans la zone **Attribut**, sélectionnez **mail**. Dans la zone **Opérateur**, sélectionnez **ENDSWITH**. Dans **valeur**, tapez **\@contoso.com**, puis cliquez sur **Ajouter une clause**. Dans la zone **Attribut**, sélectionnez **userPrincipalName**. Dans la zone **Opérateur**, sélectionnez **ENDSWITH**. Dans **valeur**, tapez **\@contoso.com**.
@@ -300,7 +300,7 @@ Après la synchronisation, toutes les modifications sont indexées pour l’expo
 
 1. Démarrez une invite de commandes, puis accédez à `%ProgramFiles%\Microsoft Azure AD Sync\bin`.
 2. Exécutez `csexport "Name of Connector" %temp%\export.xml /f:x`.  
-   Le nom du connecteur figure dans le service de synchronisation. Le nom est similaire à « contoso.com – AAD » pour Azure AD.
+   Le nom du connecteur figure dans le service de synchronisation. Le nom est similaire à « contoso.com – Azure AD » pour Azure AD.
 3. Exécutez `CSExportAnalyzer %temp%\export.xml > %temp%\export.csv`.
 4. Vous disposez maintenant d’un fichier dans %temp% nommé export.csv qui peuvent être examiné dans Microsoft Excel. Ce fichier contient toutes les modifications sur le point d’être exportées.
 5. Apportez les modifications nécessaires aux données ou à la configuration, puis réexécutez ces opérations (importer, synchroniser et vérifier) jusqu’à ce que les modifications sur le point d’être exportées soient conformes à vos attentes.

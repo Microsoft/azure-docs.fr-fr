@@ -3,30 +3,24 @@ title: Collaborer avec d’autres personnes - LUIS
 titleSuffix: Azure Cognitive Services
 description: Un propriétaire d’application peut ajouter des contributeurs à la ressource de création. Ces contributeurs peuvent modifier le modèle, l’entraîner et publier l’application.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
-ms.date: 11/19/2019
-ms.author: diberry
-ms.openlocfilehash: 913a2b26f67773d9fafbc0a8430d121fbabb97cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 12/08/2020
+ms.openlocfilehash: d4bde21dd13b562ffbb51b27ef083ee53685397a
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80053456"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97007962"
 ---
 # <a name="add-contributors-to-your-app"></a>Ajouter des contributeurs à votre application
 
-Un propriétaire d’application peut ajouter des contributeurs à des applications. Ces collaborateurs peuvent modifier le modèle, entraîner et publier l’application. 
-
-[!INCLUDE [Manage collaborators and contributors based on migrated or not-migrated apps](./includes/manage-contributor-collaborator-migration.md)]
+Un propriétaire d’application peut ajouter des contributeurs à des applications. Ces contributeurs peuvent modifier le modèle, l’entraîner et publier l’application. Une fois que vous avez [migré](luis-migration-authoring.md) votre compte, les _contributeurs_ sont gérés dans le portail Azure pour la ressource de création, à l’aide de la page **Contrôle d’accès (IAM)** . Ajoutez un utilisateur à l’aide de l’adresse e-mail du collaborateur et du rôle _contributeur_.
 
 ## <a name="add-contributor-to-azure-authoring-resource"></a>Ajouter un contributeur à une ressource de création Azure
-
-La procédure suivante est destinée à tous les utilisateurs qui ont **migré** pour utiliser la ressource de création Azure.
 
 Vous avez migré si votre expérience de création LUIS est liée à une ressource de création dans la page **Gérer -> Ressources Azure** du portail LUIS.
 
@@ -39,36 +33,25 @@ Vous avez migré si votre expérience de création LUIS est liée à une ressour
 
     ![Ajouter l’e-mail de l’utilisateur au rôle contributeur pour Azure AD](./media/luis-how-to-collaborate/add-role-assignment-for-contributor.png)
 
-    Lorsque l’e-mail de l’utilisateur est trouvé, sélectionnez le compte, puis **Enregistrer**. 
+    Lorsque l’e-mail de l’utilisateur est trouvé, sélectionnez le compte, puis **Enregistrer**.
 
     Si vous rencontrez des problèmes avec cette attribution de rôle, voir [Attribution de rôle Azure](../../role-based-access-control/role-assignments-portal.md) et [Résolution des problèmes liés au contrôle d’accès Azure](../../role-based-access-control/troubleshooting.md#problems-with-azure-role-assignments).
 
-## <a name="add-collaborator-to-luis-app"></a>Ajouter un collaborateur à une application LUIS
+## <a name="view-the-app-as-a-contributor"></a>Afficher l’application en tant que contributeur
 
-La procédure suivante est destinée à tous les utilisateurs qui **n’ont pas migré** pour utiliser la ressource de création Azure.
+Une fois que vous avez été ajouté en tant que contributeur, [connectez-vous au portail LUIS](sign-in-luis-portal.md).
 
-Vous n’avez pas opéré de migration si votre expérience de création LUIS n’est pas liée à une ressource de création sur la page **Gérer -> Ressources Azure** du portail LUIS.
+[!INCLUDE [switch azure directories](includes/switch-azure-directories.md)]
 
-Une application possède un seul créateur, son propriétaire, mais peut avoir de nombreux collaborateurs. Pour autoriser des collaborateurs à modifier votre application LUIS, vous devez ajouter l’e-mail qu’ils utilisent pour accéder au portail LUIS à la liste des collaborateurs. Une fois qu’ils sont ajoutés, l’application apparaît dans leur portail LUIS.
+### <a name="users-with-multiple-emails"></a>Utilisateurs avec plusieurs adresses e-mail
 
-1. Sélectionnez **Gérer** dans le menu supérieur droit, puis **Collaborateurs** dans le menu gauche.
-
-1. Sélectionnez **Ajouter un collaborateur** dans la barre d’outils.
-
-1. Entrez l’adresse e-mail utilisée par le collaborateur pour se connecter au portail LUIS.
-
-    ![Ajouter l’adresse e-mail du collaborateur](./media/luis-how-to-collaborate/add-collaborator-pop-up.png)
-
-
-### <a name="users-with-multiple-emails"></a>Utilisateurs avec plusieurs adresses e-mail 
-
-Si vous ajoutez un contributeur/collaborateur à une application LUIS, vous spécifiez son adresse e-mail exacte. Si Azure Active Directory (Azure AD) permet à un utilisateur d’avoir plusieurs comptes de courrier interchangeables, LUIS exige que l’utilisateur se connecte avec l’adresse e-mail spécifiée lors de son ajout en tant que contributeur/collaborateur.
+Si vous ajoutez des contributeurs à une application LUIS, vous spécifiez son adresse e-mail exacte. Si Azure Active Directory (Azure AD) permet à un utilisateur d’avoir plusieurs comptes de courrier interchangeables, LUIS exige que l’utilisateur se connecte avec l’adresse e-mail spécifiée lors de l’ajout du contributeur.
 
 <a name="owner-and-collaborators"></a>
 
 ### <a name="azure-active-directory-resources"></a>Ressources Azure Active Directory
 
-Si vous utilisez [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/) (Azure AD) dans votre organisation, Language Understanding (LUIS) a besoin d’une autorisation pour accéder aux informations sur l'accès de vos utilisateurs quand ils souhaitent utiliser LUIS. Les ressources dont LUIS a besoin sont minimes. 
+Si vous utilisez [Azure Active Directory](../../active-directory/index.yml) (Azure AD) dans votre organisation, Language Understanding (LUIS) a besoin d’une autorisation pour accéder aux informations sur l'accès de vos utilisateurs quand ils souhaitent utiliser LUIS. Les ressources dont LUIS a besoin sont minimes.
 
 La description détaillée s’affiche quand vous tentez de vous inscrire avec un compte qui a un consentement de l’administrateur ou qui n’en a pas besoin, de sorte que le consentement de l’administrateur :
 
@@ -78,25 +61,25 @@ La description détaillée s’affiche quand vous tentez de vous inscrire avec u
 
 ### <a name="azure-active-directory-tenant-user"></a>Utilisateur du locataire Azure Active Directory
 
-LUIS utilise le flux de consentement standard Azure Active Directory (Azure AD). 
+LUIS utilise le flux de consentement standard Azure Active Directory (Azure AD).
 
-L’administrateur de locataire doit travailler directement avec l’utilisateur qui a besoin d’accéder à LUIS dans Azure AD. 
+L’administrateur de locataire doit travailler directement avec l’utilisateur qui a besoin d’accéder à LUIS dans Azure AD.
 
-* D’abord, l’utilisateur se connecte à LUIS, et une boîte de dialogue contextuelle nécessitant l’approbation de l’administrateur s’affiche. L’utilisateur doit contacter l’administrateur de locataire avant de poursuivre. 
+* D’abord, l’utilisateur se connecte à LUIS, et une boîte de dialogue contextuelle nécessitant l’approbation de l’administrateur s’affiche. L’utilisateur doit contacter l’administrateur de locataire avant de poursuivre.
 * Ensuite, l’administrateur de locataire se connecte à LUIS, et une boîte de dialogue contextuelle de flux de consentement s’affiche. C’est avec cette boîte de dialogue que l’administrateur accorde l’autorisation à l’utilisateur. Une fois que l’administrateur a donné son autorisation, l’utilisateur peut poursuivre avec LUIS. Si l’administrateur de locataire ne se connecte pas à LUIS, l’administrateur peut [consentir](https://account.activedirectory.windowsazure.com/r#/applications) à l’accès à LUIS, comme illustré sur la capture d'écran suivante. Notez que la liste est filtrée sur les éléments incluant le nom `LUIS`.
 
 ![Autorisation Azure Active Directory par site web d’application](./media/luis-how-to-collaborate/tenant-permissions.png)
 
 Si l’administrateur de locataire veut uniquement que certaines personnes utilisent LUIS, plusieurs solutions sont possibles :
 * Donnez le « consentement administrateur » (à tous les utilisateurs d’Azure AD), mais affectez ensuite la valeur « Oui » à « Affectation de l’utilisateur obligatoire » sous les propriétés de l’application d’entreprise, et enfin attribuer/ajouter uniquement les utilisateurs souhaités à l’application. Avec cette méthode, l’administrateur offre quand même le « consentement administrateur » à l’application, mais il peut contrôler les utilisateurs en mesure d’y accéder.
-* Une deuxième solution consiste à utiliser l’[API de gestion des identités et des accès Azure AD dans Microsoft Graph](https://docs.microsoft.com/graph/azuread-identity-access-management-concept-overview) pour fournir un consentement à chaque utilisateur spécifique. 
+* Une deuxième solution consiste à utiliser l’[API de gestion des identités et des accès Azure AD dans Microsoft Graph](/graph/azuread-identity-access-management-concept-overview) pour fournir un consentement à chaque utilisateur spécifique.
 
-Découvrez-en plus sur les utilisateurs Azure Active Directory et le consentement : 
+Découvrez-en plus sur les utilisateurs Azure Active Directory et le consentement :
 * [Limiter votre application](../../active-directory/develop/howto-restrict-your-app-to-a-set-of-users.md) à un ensemble d’utilisateurs
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Découvrez [comment utiliser des versions](luis-how-to-manage-versions.md) pour contrôler le cycle de vie de votre application.
-* Découvrez les concepts de [ressource de création](luis-concept-keys.md#authoring-key) et de [contributeurs](luis-concept-keys.md#contributions-from-other-authors).
+* Découvrez les concepts de [ressource de création](luis-how-to-azure-subscription.md#authoring-key) et de [contributeurs](luis-how-to-azure-subscription.md#contributions-from-other-authors).
 * Découvrez [comment créer](luis-how-to-azure-subscription.md) des ressources de création et de runtime.
-* Migrez vers la nouvelle [ressource de création](luis-migration-authoring.md). 
+* Migrez vers la nouvelle [ressource de création](luis-migration-authoring.md).

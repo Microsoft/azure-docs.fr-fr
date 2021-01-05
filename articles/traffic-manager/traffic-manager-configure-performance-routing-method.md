@@ -4,20 +4,20 @@ description: Cet article explique comment configurer Traffic Manager pour router
 services: traffic-manager
 manager: twooley
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2017
-ms.author: rohink
-ms.openlocfilehash: f5e9b7690c28793a35c692a6125a6b11c7a140a4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 46d71a38b79f449084f7353527f2dfb05d5b92a4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938755"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994908"
 ---
 # <a name="configure-the-performance-traffic-routing-method"></a>Configurer la méthode de routage en fonction des performances
 

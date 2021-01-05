@@ -2,15 +2,15 @@
 title: Déclencheurs et liaisons dans Azure Functions
 description: Découvrez comment utiliser des déclencheurs et des liaisons pour connecter Azure Functions aux événements en ligne et aux services cloud.
 author: craigshoemaker
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 02/18/2019
 ms.author: cshoe
-ms.openlocfilehash: d41fd7f66ecef3a563345424d7dc4366e47d3f0e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa0d78d52ec13c91b82e6a8d10720269076f59a1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234861"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353542"
 ---
 # <a name="azure-functions-triggers-and-bindings-concepts"></a>Concepts des déclencheurs et liaisons Azure Functions
 
@@ -73,11 +73,25 @@ Tous les déclencheurs et liaisons ont une propriété `direction` dans le fichi
 
 Lorsque vous utilisez des [attributs dans une bibliothèque de classes](functions-dotnet-class-library.md) pour configurer les déclencheurs et les liaisons, la direction est fournie dans un constructeur d’attribut ou déduite du type du paramètre.
 
+## <a name="add-bindings-to-a-function"></a>Ajouter des liaisons à une fonction
+
+Vous pouvez connecter votre fonction à d’autres services en utilisant des liaisons d’entrée ou de sortie. Ajoutez une liaison en ajoutant ses définitions spécifiques à votre fonction. Pour savoir comment procéder, consultez [Ajouter des liaisons à une fonction existante dans Azure Functions](add-bindings-existing-function.md).  
+
 ## <a name="supported-bindings"></a>Liaisons prises en charge
 
 [!INCLUDE [Full bindings table](../../includes/functions-bindings.md)]
 
 Pour plus d’informations sur les liaisons en préversion ou approuvées pour la production, consultez [Langages pris en charge](supported-languages.md).
+
+## <a name="bindings-code-examples"></a>Exemples de code de liaison
+
+Utilisez le tableau suivant pour trouver des exemples de types de liaisons spécifiques qui vous montrent comment utiliser des liaisons dans vos fonctions. Tout d’abord, choisissez l’onglet du langage qui correspond à votre projet. 
+
+[!INCLUDE [functions-bindings-code-example-chooser](../../includes/functions-bindings-code-example-chooser.md)]
+
+## <a name="custom-bindings"></a>Liaisons personnalisées
+
+Vous pouvez créer des liaisons d’entrée et de sortie personnalisées. Les liaisons doivent être créées dans .NET, mais sont utilisables avec tous les langages pris en charge. Pour plus d’informations sur la création de liaisons personnalisées, consultez [Création de liaisons d’entrée et de sortie personnalisées](https://github.com/Azure/azure-webjobs-sdk/wiki/Creating-custom-input-and-output-bindings).
 
 ## <a name="resources"></a>Ressources
 - [Modèles et expressions de liaison](./functions-bindings-expressions-patterns.md)

@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 08/16/2018
 ms.author: radeltch
-ms.openlocfilehash: 388a2db2c888be541d89c5f4274bd38b37e4ca28
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41699625b7062daa005e6908ce9e4249dd86f1fa
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77591912"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010008"
 ---
 # <a name="glusterfs-on-azure-vms-on-red-hat-enterprise-linux-for-sap-netweaver"></a>GlusterFS sur les machines virtuelles Azure sur Red Hat Enterprise Linux pour SAP NetWeaver
 
@@ -102,7 +103,7 @@ Vous pouvez utiliser un des modèles de démarrage rapide disponibles sur github
 
 ### <a name="deploy-linux-manually-via-azure-portal"></a>Déployer manuellement Linux via le portail Azure
 
-Vous devez tout d’abord créer les machines virtuelles pour ce cluster. Par la suite, vous créez un équilibreur de charge et utilisez les machines virtuelles dans les pools principaux. Nous vous recommandons [Standard Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-overview).  
+Vous devez tout d’abord créer les machines virtuelles pour ce cluster. Par la suite, vous créez un équilibreur de charge et utilisez les machines virtuelles dans les pools principaux. Nous vous recommandons [Standard Load Balancer](../../../load-balancer/load-balancer-overview.md).  
 
 1. Création d’un groupe de ressources
 1. Création d'un réseau virtuel

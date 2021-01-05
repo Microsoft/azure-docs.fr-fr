@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble de l’exemple de blueprint Charge de travail ASE/SQL ISO 27001
 description: Vue d’ensemble et architecture de l’exemple de blueprint Charge de travail App Service Environment/SQL Database ISO 27001.
-ms.date: 01/13/2020
+ms.date: 11/02/2020
 ms.topic: sample
-ms.openlocfilehash: ab6a1b7e5569be39cc3b2934ec9891d5aa5712ca
-ms.sourcegitcommit: 053e5e7103ab666454faf26ed51b0dfcd7661996
+ms.openlocfilehash: 4972aa09e993f8de445cf4bf581f5ad76dbca520
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84012991"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93420374"
 ---
 # <a name="overview-of-the-iso-27001-app-service-environmentsql-database-workload-blueprint-sample"></a>Vue d’ensemble de l’exemple de blueprint Charge de travail App Service Environment/SQL Database ISO 27001
 
@@ -28,8 +28,8 @@ L’exemple de blueprint Charge de travail App Service Environment/SQL Database 
 
 Cet environnement se compose de plusieurs services Azure utilisés pour fournir une infrastructure de charge de travail sécurisée, entièrement supervisée et prête pour les entreprises, basée sur les normes ISO 27001. Cet environnement comporte les éléments suivants :
 
-- Rôle de [contrôle d’accès en fonction du rôle](../../../../role-based-access-control/overview.md) (RBAC) nommé DevOps disposant des droits nécessaires pour déployer et gérer des ressources dans un environnement [Azure App Service Environment](../../../../app-service/environment/intro.md) déployé par l’exemple de blueprint
-- [Stratégies Azure](../../../policy/overview.md) pour verrouiller les services pouvant être déployés dans l’environnement et interdire la création d’une ressource d’adresse IP publique
+- [Rôle Azure](../../../../role-based-access-control/overview.md) nommé DevOps disposant des droits nécessaires pour déployer et gérer des ressources dans un [Azure App Service Environment](../../../../app-service/environment/intro.md) déployé par l’exemple de blueprint
+- Définitions [Azure Policy](../../../policy/overview.md) pour verrouiller les services pouvant être déployés dans l’environnement et interdire la création d’une ressource d’adresse IP publique
 - Un réseau virtuel contenant un seul sous-réseau et appairé à un environnement de [services partagés](../iso27001-shared/index.md) préexistant avec forçage du trafic à travers le pare-feu des [services partagés](../iso27001-shared/index.md) Le réseau virtuel héberge les ressources suivantes :
   - Un [environnement Azure App Service Environment](../../../../app-service/environment/intro.md) utilisable pour héberger une ou plusieurs applications web, API web ou fonctions
   - Une instance [Azure Key Vault](../../../../key-vault/general/overview.md) qui utilise un point de terminaison de service de réseau virtuel pour stocker les secrets utilisés par les applications qui s’exécutent dans l’environnement de la charge de travail

@@ -14,14 +14,16 @@ ms.devlang: ne
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: c0d19d68d016a47762fb5d2646ea6ccf74d3ef75
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 746fe9132dcb06678e2a0a975c8eed0aba6c3fad
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80476557"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89269622"
 ---
 # <a name="working-with-channels-that-receive-multi-bitrate-live-stream-from-on-premises-encoders"></a>Utilisation des canaux recevant un stream multidébit en direct d’encodeurs locaux
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
 > À partir du 12 mai 2018, les canaux en direct ne prendront plus en charge le protocole de réception du flux de transport RTP/MPEG-2. Effectuez la migration à partir de RTP/MPEG-2 vers le protocole de réception RTMP ou MP4 fragmenté (Smooth Streaming).
@@ -194,7 +196,7 @@ Le tableau suivant montre comment les états du canal sont mappés au mode de fa
 ## <a name="closed-captioning-and-ad-insertion"></a><a id="cc_and_ads"></a>Sous-titrage codé et insertion de publicités
 Le tableau suivant présente les normes de sous-titrage et d’insertion de publicités prises en charge.
 
-| standard | Notes |
+| Standard | Notes |
 | --- | --- |
 | CEA-708 et EIA-608 (708/608) |CEA-708 et EIA-608 sont des normes de sous-titrage codé pour les États-Unis et le Canada.<p><p>Actuellement, le sous-titrage est uniquement pris en charge s’il est inclus dans le flux d’entrée encodé. Vous devez utiliser un encodeur multimédia live capable d’insérer des sous-titres 608 ou 708 dans le flux encodé qui est envoyé à Media Services. Media Services distribue le contenu avec les sous-titres insérés à vos utilisateurs. |
 | TTML dans .ismt (pistes textuelles Smooth Streaming) |L'empaquetage dynamique de Media Services permet à vos clients de diffuser du contenu en continu dans l'un des formats suivants : DASH, HLS ou Smooth Streaming. Toutefois, si votre flux est au format MP4 fragmenté (Smooth Streaming) avec des sous-titres dans un fichier .ismt (pistes textuelles Smooth Streaming), vous pouvez distribuer le flux aux clients Smooth Streaming. |
@@ -225,7 +227,8 @@ Voici d’autres considérations liées à l’utilisation des canaux et des com
 ## <a name="media-services-learning-paths"></a>Parcours d’apprentissage de Media Services
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions-and-feedback"></a>Suggestions et commentaires
+
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
 ## <a name="related-topics"></a>Rubriques connexes

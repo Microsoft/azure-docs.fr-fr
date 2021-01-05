@@ -10,14 +10,14 @@ ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
 ms.custom: seo-lt-2019
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 02/20/2020
-ms.openlocfilehash: e7efdb7244e2c7e4651a4507b538123f8d320c1e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 748c3f8e38b98b2cbdcfecdf7d755827230fdb3d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77650773"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962465"
 ---
 # <a name="known-issuesmigration-limitations-with-online-migrations-to-azure-sql-database"></a>Problèmes connus/limitations de migration dans le cadre des migrations en ligne vers Azure SQL Database
 
@@ -54,7 +54,7 @@ Utilisez les étapes suivantes.
 
 **Ressources**
 
-Pour plus d’informations, consultez l’article [Tables temporelles](https://docs.microsoft.com/sql/relational-databases/tables/temporal-tables?view=sql-server-2017).
+Pour plus d’informations, consultez l’article [Tables temporelles](/sql/relational-databases/tables/temporal-tables?view=sql-server-2017).
 
 ### <a name="migration-of-tables-includes-one-or-more-columns-with-the-hierarchyid-data-type"></a>Migration de tables incluant une ou plusieurs colonnes avec le type de données hierarchyid
 
@@ -90,7 +90,7 @@ Utilisez les étapes suivantes.
      select * from sys.triggers where is_disabled =0
      ```
 
-2. Désactivez les déclencheurs sur votre base de données source à l’aide de la procédure fournie dans l’article [DISABLE TRIGGER (Transact-SQL)](https://docs.microsoft.com/sql/t-sql/statements/disable-trigger-transact-sql?view=sql-server-2017).
+2. Désactivez les déclencheurs sur votre base de données source à l’aide de la procédure fournie dans l’article [DISABLE TRIGGER (Transact-SQL)](/sql/t-sql/statements/disable-trigger-transact-sql?view=sql-server-2017).
 
 3. Réexécutez l’activité de migration.
 
@@ -142,7 +142,9 @@ Pour accéder aux détails d’une défaillance spécifique, procédez comme sui
 
 La migration échoue avec un message d’erreur contenant le texte suivant :
 
-     “** encountered a fatal error”, "errorEvents":<Table>.<Column> is of type 'GEOGRAPHY', which is not supported by 'Full Load' under 'Full LOB' support mode."
+```output
+"** encountered a fatal error", "errorEvents":<Table>.<Column> is of type 'GEOGRAPHY', which is not supported by 'Full Load' under 'Full LOB' support mode.
+```
 
 **Solution de contournement**
 
@@ -154,7 +156,9 @@ Bien qu’Azure Database Migration Service prend en charge le type de données g
 
 La migration échoue avec un message d’erreur contenant le texte suivant :
 
-    Migration settings validation error: The edition of the server [Business Intelligence Edition (64-bit)] does not match the supported edition(s) [Enterprise,Standard,Developer].
+```output
+Migration settings validation error: The edition of the server [Business Intelligence Edition (64-bit)] does not match the supported edition(s) [Enterprise,Standard,Developer].
+```
 
 **Solution de contournement**
 

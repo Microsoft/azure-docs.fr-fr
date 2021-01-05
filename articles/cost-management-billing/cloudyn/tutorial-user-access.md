@@ -6,15 +6,16 @@ ms.author: banders
 ms.date: 03/12/2020
 ms.topic: tutorial
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.custom: seodec18
 ms.reviewer: benshy
 ROBOTS: NOINDEX
-ms.openlocfilehash: e8fff8b75ff419cffc7f496f921dcba734109e5a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a3c10d95a57ea81f269af8f8f1cad49fc1c1b845
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79463609"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92131256"
 ---
 # <a name="tutorial-assign-access-to-cloudyn-data"></a>Tutoriel : Autoriser l'accès aux données Cloudyn
 
@@ -134,4 +135,4 @@ Dans ce didacticiel, vous avez appris à :
 Si vous n’avez pas déjà activé l’accès de l’API Azure Resource Manager pour vos comptes, consultez l’article suivant.
 
 > [!div class="nextstepaction"]
-> [Activer des abonnements et comptes Azure](../../cost-management/activate-subs-accounts.md)
+> [Activer des abonnements et comptes Azure](./activate-subs-accounts.md)

@@ -4,12 +4,12 @@ description: Vue d’ensemble des métadonnées de configuration de l’applicat
 ms.date: 12/09/2019
 ms.topic: article
 ms.reviewer: brendal
-ms.openlocfilehash: 661e795f0e85f872b1072a8f641b8938115c5d7a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f0ba19bf1d7fdf05014ac199fae9392b5c3249d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227381"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073070"
 ---
 # <a name="azure-blockchain-workbench-configuration-reference"></a>Référence de configuration Azure Blockchain Workbench
 
@@ -49,7 +49,7 @@ La logique métier d’une application peut être modélisée comme une machine 
 
 | Champ | Description | Obligatoire | Longueur maximale |
 |-------|-------------|:--------:|-----------:|
-| Name | Nom unique du workflow. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la classe de contrat applicable. | Oui | 50 |
+| Nom | Nom unique du workflow. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la classe de contrat applicable. | Oui | 50 |
 | DisplayName | Nom d’affichage convivial du workflow. | Oui | 255 |
 | Description | Description du workflow. | Non | 255 |
 | Initiateurs | Collection d’[ApplicationRoles](#application-roles). Rôles attribués aux utilisateurs qui sont autorisés à créer des contrats dans le workflow. | Oui | |
@@ -203,7 +203,7 @@ Définit les fonctions qui peuvent être exécutées dans le workflow.
 
 | Champ | Description | Obligatoire | Longueur maximale |
 |-------|-------------|:--------:|-----------:|
-| Name | Nom unique de la fonction. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la fonction applicable. | Oui | 50 |
+| Nom | Nom unique de la fonction. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la fonction applicable. | Oui | 50 |
 | DisplayName | Nom d’affichage convivial de la fonction. | Oui | 255 |
 | Description | Description de la fonction | Non | 255 |
 | Paramètres | Collection d’[identificateurs](#identifiers) correspondant aux paramètres de la fonction. | Oui | |
@@ -251,7 +251,7 @@ Collection d’états uniques au sein d’un workflow. Chaque état capture une 
 
 | Champ | Description | Obligatoire | Longueur maximale |
 |-------|-------------|:--------:|-----------:|
-| Name | Nom unique de l’état. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour l’état applicable. | Oui | 50 |
+| Nom | Nom unique de l’état. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour l’état applicable. | Oui | 50 |
 | DisplayName | Nom d’affichage convivial de l’état. | Oui | 255 |
 | Description | Description de l’état. | Non | 255 |
 | PercentComplete | Valeur entière qui apparaît dans l’interface utilisateur Blockchain Workbench pour afficher la progression dans le flux de contrôle de logique métier. | Oui | |
@@ -365,7 +365,7 @@ Les rôles d’application définissent un ensemble de rôles qui peuvent être 
 
 | Champ | Description | Obligatoire | Longueur maximale |
 |-------|-------------|:--------:|-----------:|
-| Name | Nom unique du rôle d’application. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour le rôle applicable. Les noms de type de base sont réservés. Vous ne pouvez pas nommer un rôle d’application de la même manière que [Type](#type)| Oui | 50 |
+| Nom | Nom unique du rôle d’application. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour le rôle applicable. Les noms de type de base sont réservés. Vous ne pouvez pas nommer un rôle d’application de la même manière que [Type](#type)| Oui | 50 |
 | Description | Description du rôle d’application. | Non | 255 |
 
 ### <a name="application-roles-example"></a>Exemple de rôles d’application
@@ -388,7 +388,7 @@ Les identificateurs représentent une collection d’informations utilisées pou
 
 | Champ | Description | Obligatoire | Longueur maximale |
 |-------|-------------|:--------:|-----------:|
-| Name | Nom unique de la propriété ou du paramètre. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la propriété ou le paramètre applicable. | Oui | 50 |
+| Nom | Nom unique de la propriété ou du paramètre. Le contrat intelligent correspondant doit utiliser la même propriété **Name** pour la propriété ou le paramètre applicable. | Oui | 50 |
 | DisplayName | Nom d’affichage convivial pour la propriété ou le paramètre. | Oui | 255 |
 | Description | Description de la propriété ou du paramètre. | Non | 255 |
 | Type | [Type de données](#type) de propriété. | Oui |
@@ -996,5 +996,4 @@ Le fichier de configuration suivant est destiné à l’exemple de transfert de 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Référence de l’API REST Azure Blockchain Workbench](https://docs.microsoft.com/rest/api/azure-blockchain-workbench)
-
+> [Référence de l’API REST Azure Blockchain Workbench](/rest/api/azure-blockchain-workbench)

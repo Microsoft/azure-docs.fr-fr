@@ -12,12 +12,12 @@ ms.date: 04/14/2020
 ms.author: curtand
 ms.reviewer: kasimpso
 ms.custom: user-help, seo-update-azuread-jan
-ms.openlocfilehash: 361e8c63dc036443e527d1027fe3fd0cca784d9a
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: a4dcb6774990c03ce3d55fb6c519b0600a1086f9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83747205"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91536883"
 ---
 # <a name="use-your-phone-number-as-a-user-name-preview"></a>Utiliser votre numéro de téléphone comme nom d’utilisateur (préversion)
 
@@ -52,11 +52,11 @@ Si vous utilisez déjà un numéro de téléphone avec une organisation et si vo
 
 1. Quand la connexion par SMS est disponible, une bannière s’affiche pour vous demander si vous souhaitez activer le numéro de téléphone pour la connexion par SMS :
 
-    [![](media/sms-sign-in-explainer/sms-sign-in-banner.png "Banner to enable SMS sign-in for a phone number")](media/sms-sign-in-explainer/sms-sign-in-banner.png#lightbox)
+    :::image type="content" source="media/sms-sign-in-explainer/sms-sign-in-banner.png" alt-text="Capture d’écran montrant la bannière permettant d’activer la connexion SMS pour un numéro de téléphone avec l’action « Activer » sélectionnée." lightbox="media/sms-sign-in-explainer/sms-sign-in-banner.png":::
 
 1. En outre, un bouton **Activer** apparaît si vous sélectionnez le caret sur la vignette de la méthode par téléphone :
 
-    [![](media/sms-sign-in-explainer/sms-sign-in-phone-method.png "Banner to enable SMS sign-in for a phone number")](media/sms-sign-in-explainer/sms-sign-in-phone-method.png#lightbox)
+    [![Bannière pour activer la connexion par SMS pour un numéro de téléphone](media/sms-sign-in-explainer/sms-sign-in-phone-method.png)](media/sms-sign-in-explainer/sms-sign-in-phone-method.png#lightbox)
 
 1. Pour activer la méthode, sélectionnez **Activer**. Vous êtes invité à confirmer l’action :
 
@@ -68,7 +68,7 @@ Si vous utilisez déjà un numéro de téléphone avec une organisation et si vo
 
 1. Pour supprimer le numéro de téléphone, sélectionnez le bouton Supprimer dans la vignette de la méthode par téléphone de connexion par SMS.
 
-    [![](media/sms-sign-in-explainer/sms-sign-in-delete-method.png "Banner to delete SMS sign-in for a phone number")](media/sms-sign-in-explainer/sms-sign-in-delete-method.png#lightbox)
+    [![Bannière pour supprimer la connexion par SMS pour un numéro de téléphone](media/sms-sign-in-explainer/sms-sign-in-delete-method.png)](media/sms-sign-in-explainer/sms-sign-in-delete-method.png#lightbox)
 
 2. Quand vous êtes invité à confirmer l’action, sélectionnez **OK**.
 

@@ -6,12 +6,12 @@ author: NumberByColors
 ms.author: daviste
 ms.date: 07/17/2017
 ms.reviewer: mbullwin
-ms.openlocfilehash: 09c1899004bd93d0f2365c3bbc000c37459e8d89
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: a81c4f32385cf06238f36ca0162923f93d682807
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83797829"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87323721"
 ---
 # <a name="discover-how-customers-are-using-your-application-with-application-insights-funnels"></a>Découvrir comment les clients utilisent votre application avec les entonnoirs Application Insights
 
@@ -37,7 +37,7 @@ La capture d’écran suivante montre un exemple du type de données que l’out
 ### <a name="funnels-features"></a>Fonctionnalités des entonnoirs
 La capture d’écran précédente inclut cinq zones mises en surbrillance. Il s’agit des fonctionnalités des entonnoirs. La liste suivante explique en détail chaque zone correspondante dans la capture d’écran :
 1. Si votre application est échantillonnée, une bannière d’échantillonnage est affichée. La sélection de la bannière ouvre un volet contextuel, qui explique comment désactiver l’échantillonnage. 
-2. Vous pouvez exporter votre entonnoir vers [Power BI](../../azure-monitor/app/export-power-bi.md ).
+2. Vous pouvez exporter votre entonnoir vers [Power BI](./export-power-bi.md).
 3. Sélectionnez une étape pour plus d’informations sur la droite. 
 4. Le graphique de conversion historique indique les taux de conversion au cours des 90 derniers jours. 
 5. Comprenez mieux vos utilisateurs en accédant à l’outil correspondant. Vous pouvez utiliser des filtres à chaque étape. 
@@ -46,7 +46,7 @@ La capture d’écran précédente inclut cinq zones mises en surbrillance. Il s
   * [Vue d’ensemble de l’utilisation](usage-overview.md)
   * [Utilisateurs, Sessions et Événements](usage-segmentation.md)
   * [Rétention](usage-retention.md)
-  * [Classeurs](../../azure-monitor/platform/workbooks-overview.md)
+  * [Classeurs](../platform/workbooks-overview.md)
   * [Ajouter du contexte utilisateur](usage-send-user-context.md)
-  * [Exporter vers Power BI](../../azure-monitor/app/export-power-bi.md )
+  * [Exporter vers Power BI](./export-power-bi.md)
 

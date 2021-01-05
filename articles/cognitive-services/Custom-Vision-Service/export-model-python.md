@@ -8,18 +8,19 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: tutorial
-ms.date: 04/14/2020
+ms.date: 11/23/2020
 ms.author: pafarley
-ms.openlocfilehash: 6fcbd84b3cda4adace9c1229f5ed03c3dce68fc0
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python
+ms.openlocfilehash: a47475ad55c5e6262dc8ba1a384d89b9721fd2e9
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81404130"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95736423"
 ---
 # <a name="tutorial-run-tensorflow-model-in-python"></a>Didacticiel : exécuter le modèle TensorFlow dans Python
 
-Une fois que vous avez [exporté votre modèle TensorFlow](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/export-your-model) à partir du Service Vision personnalisée, ce démarrage rapide vous montrera comment utiliser ce modèle localement pour classer des images.
+Une fois que vous avez [exporté votre modèle TensorFlow](./export-your-model.md) à partir du Service Vision personnalisée, ce démarrage rapide vous montrera comment utiliser ce modèle localement pour classer des images.
 
 > [!NOTE]
 > Ce tutoriel s’applique seulement aux modèles exportés depuis des projets de classification d’images.
@@ -33,7 +34,7 @@ Pour suivre ce didacticiel, vous devez procéder comme suit :
 
 Ensuite, vous devez installer les packages suivants :
 
-```
+```bash
 pip install tensorflow
 pip install pillow
 pip install numpy
@@ -42,7 +43,7 @@ pip install opencv-python
 
 ## <a name="load-your-model-and-tags"></a>Charger votre modèle et vos étiquettes
 
-Le fichier zip téléchargé contient un fichier model.pb et un fichier labels.txt. Ces fichiers représentent le modèle formé et les étiquettes de classification. La première étape consiste à charger le modèle dans votre projet.
+Le fichier .zip téléchargé contient un fichier _model.pb_ et un fichier _labels.txt_. Ces fichiers représentent le modèle formé et les étiquettes de classification. La première étape consiste à charger le modèle dans votre projet. Ajoutez le code suivant à un nouveau script Python.
 
 ```Python
 import tensorflow as tf
@@ -125,6 +126,8 @@ augmented_image = crop_center(augmented_image, network_input_size, network_input
 
 ```
 
+### <a name="add-helper-functions"></a>Ajouter des fonctions d’assistance
+
 Les étapes ci-dessus utilisent les fonctions d’assistance suivantes :
 
 ```Python
@@ -170,7 +173,7 @@ def update_orientation(image):
     return image
 ```
 
-## <a name="predict-an-image"></a>Prédire une image
+## <a name="classify-an-image"></a>Classer une image
 
 Une fois l’image préparée en tant que tenseur, nous pouvons l’envoyer via le modèle pour une prédiction :
 
@@ -183,14 +186,14 @@ input_node = 'Placeholder:0'
 with tf.compat.v1.Session() as sess:
     try:
         prob_tensor = sess.graph.get_tensor_by_name(output_layer)
-        predictions, = sess.run(prob_tensor, {input_node: [augmented_image] })
+        predictions = sess.run(prob_tensor, {input_node: [augmented_image] })
     except KeyError:
         print ("Couldn't find classification output layer: " + output_layer + ".")
         print ("Verify this a model exported from an Object Detection project.")
         exit(-1)
 ```
 
-## <a name="view-the-results"></a>View the results
+## <a name="display-the-results"></a>Afficher les résultats
 
 Les résultats de l’exécution du tenseur d’image dans le modèle doivent ensuite être mappés aux étiquettes.
 

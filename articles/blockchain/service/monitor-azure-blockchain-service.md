@@ -2,14 +2,14 @@
 title: Supervision d’Azure Blockchain Service (ABS)
 description: Supervision d’Azure Blockchain Service avec Azure Monitor
 ms.date: 01/08/2020
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: v-umha
-ms.openlocfilehash: 6f2a91a8ffce67d3c4008a7587f2787f6446c341
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7300a5dcfb0150e6182636dcb71bacfa68c787db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76293247"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87076926"
 ---
 # <a name="monitor-azure-blockchain-service-through-azure-monitor"></a>Superviser Azure Blockchain Service avec Azure Monitor  
 
@@ -17,20 +17,20 @@ ms.locfileid: "76293247"
 
 ## <a name="what-is-azure-monitor"></a>Qu’est-ce qu’Azure Monitor ?
 
-Azure Blockchain Service crée la supervision des données à l’aide d’Azure Monitor, un service de surveillance de pile complète dans Azure qui fournit un ensemble exhaustif de fonctionnalités permettant de superviser vos ressources Azure. Pour plus d’informations sur Azure Monitor, consultez [Supervision de ressources Azure avec Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/insights/monitor-azure-resource).
+Azure Blockchain Service crée la supervision des données à l’aide d’Azure Monitor, un service de surveillance de pile complète dans Azure qui fournit un ensemble exhaustif de fonctionnalités permettant de superviser vos ressources Azure. Pour plus d’informations sur Azure Monitor, consultez [Supervision de ressources Azure avec Azure Monitor](../../azure-monitor/insights/monitor-azure-resource.md).
  
 
 Les sections suivantes étayent cet article en décrivant les données spécifiques collectées à partir d’Azure Blockchain Service, et en fournissant des exemples pour configurer la collecte de données et analyser ces données avec des outils Azure.
 
 ## <a name="monitor-data-collected-from-azure-blockchain-service"></a>Superviser les données collectées à partir d’Azure Blockchain Service  
 
-Azure Blockchain Service collecte le même type de données de supervision que les autres ressources Azure décrites dans [Données de supervision](https://docs.microsoft.com/azure/azure-monitor/insights/monitor-azure-resource#monitoring-data) à partir de ressources Azure. Consultez [Superviser la référence des données Azure Blockchain Service](#monitor-azure-blockchain-service-data-reference) pour obtenir une référence détaillée des journaux et des métriques créés par Azure Blockchain Service.
+Azure Blockchain Service collecte le même type de données de supervision que les autres ressources Azure décrites dans [Données de supervision](../../azure-monitor/insights/monitor-azure-resource.md#monitoring-data) à partir de ressources Azure. Consultez [Superviser la référence des données Azure Blockchain Service](#monitor-azure-blockchain-service-data-reference) pour obtenir une référence détaillée des journaux et des métriques créés par Azure Blockchain Service.
 
 Dans le portail Azure, la page de présentation de chaque ressource membre Azure Blockchain Service comprend un bref aperçu des transactions, notamment les requêtes gérées et les blocs traités. Certaines de ces données sont collectées automatiquement et disponibles à l’analyse dès lors que vous créez la ressource membre Azure Blockchain Service ; vous pouvez également activer la collecte de données complémentaires par une configuration supplémentaire.
 
 ## <a name="diagnostic-settings"></a>Paramètres de diagnostic  
 
-Les métriques de la plateforme et le journal d’activité sont collectés automatiquement, mais vous devez créer un paramètre de diagnostic pour collecter les journaux des ressources ou les transférer en dehors d’Azure Monitor. Pour plus d’informations sur la création d’un paramètre de diagnostic à l’aide du portail Azure, de l’interface CLI ou de PowerShell, consultez [Créer un paramètre de diagnostic pour collecter des journaux et métriques de plateforme dans Azure](https://docs.microsoft.com/azure/azure-monitor/platform/diagnostic-settings).
+Les métriques de la plateforme et le journal d’activité sont collectés automatiquement, mais vous devez créer un paramètre de diagnostic pour collecter les journaux des ressources ou les transférer en dehors d’Azure Monitor. Pour plus d’informations sur la création d’un paramètre de diagnostic à l’aide du portail Azure, de l’interface CLI ou de PowerShell, consultez [Créer un paramètre de diagnostic pour collecter des journaux et métriques de plateforme dans Azure](../../azure-monitor/platform/diagnostic-settings.md).
 
 Lorsque vous créez un paramètre de diagnostic, vous spécifiez les catégories de journaux à collecter. Les catégories pour Azure Blockchain Service sont listées ci-dessous.
 
@@ -42,13 +42,13 @@ Lorsque vous créez un paramètre de diagnostic, vous spécifiez les catégories
 
 ## <a name="analyze-metric-data"></a>Analyser les données de métriques  
 
-Vous pouvez analyser les métriques pour Azure Blockchain Service avec Metrics Explorer ; accédez à l’onglet Métriques sous la section Surveillance du panneau des ressources ABS. Pour plus d’informations sur l’utilisation de l’outil, consultez [Bien démarrer avec Azure Metrics Explorer](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-getting-started). Les mesures complètes pour Azure Blockchain Service se trouvent dans les métriques standard de l’espace de noms Azure Blockchain Service.
+Vous pouvez analyser les métriques pour Azure Blockchain Service avec Metrics Explorer ; accédez à l’onglet Métriques sous la section Surveillance du panneau des ressources ABS. Pour plus d’informations sur l’utilisation de l’outil, consultez [Bien démarrer avec Azure Metrics Explorer](../../azure-monitor/platform/metrics-getting-started.md). Les mesures complètes pour Azure Blockchain Service se trouvent dans les métriques standard de l’espace de noms Azure Blockchain Service.
 
 Vous pouvez utiliser la dimension de **nœud** lors de l’ajout d’un filtre ou du fractionnement des métriques, ce qui fournit essentiellement des valeurs de métrique par nœuds de transaction et nœuds validateurs du membre ABS.
 
 ## <a name="analyze-log-data"></a>Analyser les données de journal
 
-Voici quelques requêtes qu’il est possible d’entrer dans la zone Recherche dans les journaux. Elles vous aideront à superviser vos membres Azure Blockchain Service. Ces requêtes fonctionnent avec le [nouveau langage](https://docs.microsoft.com/azure/azure-monitor/log-query/log-query-overview).
+Voici quelques requêtes qu’il est possible d’entrer dans la zone Recherche dans les journaux. Elles vous aideront à superviser vos membres Azure Blockchain Service. Ces requêtes fonctionnent avec le [nouveau langage](../../azure-monitor/log-query/log-query-overview.md).
 
 Pour interroger les conditions d’erreur dans les journaux d’application Blockchain, utilisez la requête ci-dessous :
 
@@ -74,7 +74,7 @@ Cet article fournit une référence sur les données de journal et de métrique 
 
 ### <a name="resource-logs"></a>Journaux d’activité de ressources
 
-Tous les journaux de ressources partagent un schéma commun de niveau supérieur, avec quelques propriétés uniques propres au service blockchain. Vous pouvez vous référer à l’article [Schéma de niveau supérieur des journaux de ressources](https://docs.microsoft.com/azure/azure-monitor/platform/diagnostic-logs-schema#top-level-resource-logs-schema) ; les propriétés spécifiques d’Azure Blockchain Service sont présentées de manière détaillée ci-dessous.  
+Tous les journaux de ressources partagent un schéma commun de niveau supérieur, avec quelques propriétés uniques propres au service blockchain. Vous pouvez vous référer à l’article [Schéma de niveau supérieur des journaux de ressources](../../azure-monitor/platform/resource-logs-schema.md#top-level-common-schema) ; les propriétés spécifiques d’Azure Blockchain Service sont présentées de manière détaillée ci-dessous.  
 
 Le tableau suivant liste les propriétés des journaux de proxy Azure Blockchain lorsqu’elles sont collectées dans les journaux Azure Monitor ou le Stockage Azure.  
 
@@ -124,7 +124,7 @@ Le tableau suivant liste les propriétés des journaux d’application Azure Blo
 
 Les tableaux suivants listent les métriques de plateforme collectées pour Azure Blockchain Service. Toutes les métriques se trouvent dans les métriques standard de l’espace de noms **Azure Blockchain Service**.
 
-Pour obtenir la liste de toutes les métriques prises en charge par Azure Monitor (y compris Azure Blockchain Service), consultez [Métriques prises en charge avec Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-supported).
+Pour obtenir la liste de toutes les métriques prises en charge par Azure Monitor (y compris Azure Blockchain Service), consultez [Métriques prises en charge avec Azure Monitor](../../azure-monitor/platform/metrics-supported.md).
 
 ### <a name="blockchain-metrics"></a>Métriques Blockchain
 
@@ -169,4 +169,4 @@ Le tableau suivant liste les métriques de performances qui sont collectées pou
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur [Blockchain Data Manager](https://docs.microsoft.com/azure/blockchain/service/data-manager) pour capturer et transformer des données blockchain à destination d’Azure Event Grid.
+En savoir plus sur [Blockchain Data Manager](./data-manager.md) pour capturer et transformer des données blockchain à destination d’Azure Event Grid.

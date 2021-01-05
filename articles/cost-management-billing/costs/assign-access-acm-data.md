@@ -3,25 +3,26 @@ title: Attribuer une autorisation d’accès aux données Azure Cost Management
 description: Cet article vous explique comment affecter une autorisation aux données Azure Cost Management pour différentes étendues d’accès.
 author: bandersmsft
 ms.author: banders
-ms.date: 04/07/2020
-ms.topic: conceptual
+ms.date: 07/24/2020
+ms.topic: how-to
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: adwise
 ms.custom: secdec18
-ms.openlocfilehash: 0b3ede4dcc4df8bf10ce24b3d74dc5af0424de5a
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: 660b5751e3b3cbc632331e99d797af3392a8aea4
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80879103"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "91371964"
 ---
 # <a name="assign-access-to-cost-management-data"></a>Affecter une autorisation d’accès aux données Cost Management
 
-Pour la plupart des utilisateurs disposant d’un Contrat Entreprise Azure, une combinaison d’autorisations accordées dans le portail Azure et dans le portail Entreprise permet de définir le niveau d’accès d’un utilisateur aux données d’Azure Cost Management. Pour les utilisateurs titulaires d’autres types de comptes Azure, la définition d’un niveau d’accès de l’utilisateur aux données d’Azure Cost Management est plus simple en utilisant le contrôle d’accès en fonction du rôle Azure. Cet article vous explique comment affecter un accès aux données Cost Management. Une fois la combinaison d’autorisations attribuée, l’utilisateur voit les données dans Cost Management en fonction de son étendue d’accès et de l’étendue qu’il a sélectionnée dans le portail Azure.
+Pour la plupart des utilisateurs disposant d’un Contrat Entreprise Azure, une combinaison d’autorisations accordées dans le portail Azure et dans le portail Entreprise permet de définir le niveau d’accès d’un utilisateur aux données d’Azure Cost Management. Pour les utilisateurs titulaires d’autres types de comptes Azure, la définition d’un niveau d’accès de l’utilisateur aux données d’Azure Cost Management est plus simple en utilisant le contrôle d’accès en fonction du rôle Azure (Azure RBAC). Cet article vous explique comment affecter un accès aux données Cost Management. Une fois la combinaison d’autorisations attribuée, l’utilisateur voit les données dans Cost Management en fonction de son étendue d’accès et de l’étendue qu’il a sélectionnée dans le portail Azure.
 
 L’étendue sélectionnée par l’utilisateur est utilisée dans Cost Management pour regrouper les données et contrôler l’accès aux informations sur les coûts. Quand les utilisateurs emploient des étendues, ils n’effectuent pas plusieurs sélections. À la place, ils sélectionnent une étendue plus grande qui englobe les étendues enfants, puis appliquent un filtre pour voir ce qui les intéresse. Il est important de bien comprendre le fonctionnement du regroupement des données, car certaines personnes ne doivent pas accéder à l’étendue parente qui englobe les étendues enfants.
 
-Regardez la vidéo servant [Cost Management - Contrôle d’accès](https://www.youtube.com/watch?v=_uQzQ9puPyM) pour en savoir plus sur l’attribution de l’accès permettant de voir les frais et les coûts du contrôle d’accès en fonction du rôle Azure. Pour regarder d’autres vidéos, consultez la [chaîne YouTube relative à Cost Management](https://www.youtube.com/c/AzureCostManagement).
+Regardez la vidéo [Cost Management - Contrôle d’accès](https://www.youtube.com/watch?v=_uQzQ9puPyM) pour en savoir plus sur l’attribution de l’accès permettant de voir les frais et les coûts du contrôle d’accès en fonction du rôle Azure (Azure RBAC). Pour regarder d’autres vidéos, consultez la [chaîne YouTube relative à Cost Management](https://www.youtube.com/c/AzureCostManagement).
 
 >[!VIDEO https://www.youtube.com/embed/_uQzQ9puPyM]
 
@@ -70,7 +71,7 @@ Pour activer une option dans le portail Azure :
 1. Sous **Paramètres**, sélectionnez l’élément de menu **Stratégies**, puis configurez le paramètre.  
     ![Stratégies d’étendue de facturation avec les options d’affichage des frais](./media/assign-access-acm-data/azure-portal-policies-view-charges.png)
 
-Une fois les options d’affichage des frais activées, la plupart des étendues réclament également une configuration des autorisations avec contrôle d’accès en fonction du rôle (RBAC) sur le Portail Azure.
+Une fois les options d’affichage des frais activées, la plupart des étendues réclament également une configuration des autorisations avec contrôle d’accès en fonction du rôle Azure (Azure RBAC) sur le Portail Azure.
 
 ## <a name="enable-access-to-costs-in-the-ea-portal"></a>Activer l’accès aux coûts dans le portail EA
 
@@ -83,7 +84,7 @@ Pour activer une option dans le portail EA :
 3. Pour les étendues de Cost Management auxquelles vous souhaitez fournir l’accès, activez l’option d’**affichage des frais pour l’administrateur de service** et/ou d’**affichage des frais pour le propriétaire du compte**.  
     ![Onglet Inscription montrant les options d’affichage des frais pour l’administrateur de service et pour le propriétaire du compte](./media/assign-access-acm-data/ea-portal-enrollment-tab.png)
 
-Une fois les options d’affichage des frais activées, la plupart des étendues réclament également une configuration des autorisations avec contrôle d’accès en fonction du rôle (RBAC) sur le Portail Azure.
+Une fois les options d’affichage des frais activées, la plupart des étendues réclament également une configuration des autorisations avec contrôle d’accès en fonction du rôle Azure (Azure RBAC) sur le Portail Azure.
 
 ## <a name="enterprise-administrator-role"></a>Rôle d’administrateur d’entreprise
 
@@ -181,9 +182,9 @@ L’accès à un groupe de ressources requiert au minimum l’autorisation de le
 
 ## <a name="cross-tenant-authentication-issues"></a>Problèmes d’authentification multilocataires
 
-Actuellement, Azure Cost Management assure une prise en charge limitée de l’authentification multilocataires. Dans certaines circonstances, lorsque vous tentez de vous authentifier entre locataires, vous pouvez recevoir une erreur **Accès refusé** dans l’analyse des coûts. Ce problème peut se produire si vous configurez le contrôle d’accès en fonction du rôle (RBAC) pour l’abonnement d’un autre locataire et que vous essayez de voir les données de coût.
+Actuellement, Azure Cost Management assure une prise en charge limitée de l’authentification multilocataires. Dans certaines circonstances, lorsque vous tentez de vous authentifier entre locataires, vous pouvez recevoir une erreur **Accès refusé** dans l’analyse des coûts. Ce problème peut se produire si vous configurez le contrôle d’accès en fonction du rôle Azure (Azure RBAC) pour l’abonnement d’un autre locataire et que vous essayez de voir les données de coût.
 
-*Pour contourner le problème* : Après avoir configuré une contrôle d’accès en fonction du rôle inter-locataires, patientez une heure. Ensuite, essayez d’afficher les coûts dans l’analyse des coûts ou d’accorder l’accès de la gestion des coûts aux utilisateurs figurant dans les deux locataires.  
+*Pour contourner le problème* : Après avoir configuré Azure RBAC inter-locataires, patientez une heure. Ensuite, essayez d’afficher les coûts dans l’analyse des coûts ou d’accorder l’accès de la gestion des coûts aux utilisateurs figurant dans les deux locataires.  
 
 
 ## <a name="next-steps"></a>Étapes suivantes

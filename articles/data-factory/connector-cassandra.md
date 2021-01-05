@@ -12,10 +12,10 @@ ms.topic: conceptual
 ms.date: 08/12/2019
 ms.author: jingwang
 ms.openlocfilehash: 4b7fd2de0762de147ad3ceae0d562a1c78b33dc2
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81417470"
 ---
 # <a name="copy-data-from-cassandra-using-azure-data-factory"></a>Copier des données de Cassandra à l’aide d’Azure Data Factory

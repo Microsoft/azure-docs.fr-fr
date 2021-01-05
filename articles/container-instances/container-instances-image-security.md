@@ -1,15 +1,15 @@
 ---
-title: Sécurité des instances de conteneur
+title: Éléments à prendre en compte pour les instances de conteneur
 description: Recommandations relatives à la sécurisation des images et des secrets pour Azure Container Instances, et éléments à prendre en compte en matière de sécurité sur toutes les plateformes de conteneurs
 ms.topic: article
 ms.date: 01/10/2020
 ms.custom: ''
-ms.openlocfilehash: 87fa28cf9bdb546a5f108284023a9f787645a1fd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 898bdf77bf4b6636e78f5d735fc8650da4fde2b8
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81457992"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148669"
 ---
 # <a name="security-considerations-for-azure-container-instances"></a>Éléments à prendre en compte en matière de sécurité pour Azure Container Instances
 
@@ -18,6 +18,9 @@ Cet article présente les recommandations de sécurité relatives à l'utilisati
 > [!div class="checklist"]
 > * **Recommandations de sécurité** sur la gestion des images et des secrets pour Azure Container Instances
 > * **Considérations relatives à l'écosystème de conteneurs** tout au long du cycle de vie des conteneurs, pour toutes les plateformes de conteneurs
+
+Pour obtenir des recommandations complètes qui vous aideront à améliorer l’état de la sécurité de votre déploiement, consultez la [base de référence de la sécurité Azure pour Container Instances](security-baseline.md).
+
 
 ## <a name="security-recommendations-for-azure-container-instances"></a>Recommandations de sécurité pour Azure Container Instances
 
@@ -31,13 +34,13 @@ Une image conteneur publique ne garantit pas la sécurité. Les images conteneur
 
 Tirez parti de solutions pour analyser des images conteneur dans un registre privé et identifier les vulnérabilités potentielles. Il est important de comprendre l'ampleur de la détection des menaces par les différentes solutions.
 
-Par exemple, Azure Container Registry peut [s'intégrer à Azure Security Center](../security-center/azure-container-registry-integration.md) pour analyser automatiquement toutes les images Linux envoyées (push) vers un registre. Le scanneur Qualys intégré à Azure Security Center détecte les vulnérabilités des images, les classifie et propose des instructions de correction.
+Par exemple, Azure Container Registry peut [s'intégrer à Azure Security Center](../security-center/defender-for-container-registries-introduction.md) pour analyser automatiquement toutes les images Linux envoyées (push) vers un registre. Le scanneur Qualys intégré à Azure Security Center détecte les vulnérabilités des images, les classifie et propose des instructions de correction.
 
 Des solutions de supervision de la sécurité et d'analyse des images telles que [Twistlock](https://azuremarketplace.microsoft.com/marketplace/apps/twistlock.twistlock?tab=Overview) et [Aqua Security](https://azuremarketplace.microsoft.com/marketplace/apps/aqua-security.aqua-security?tab=Overview) sont également disponibles sur la Place de marché Azure.  
 
 ### <a name="protect-credentials"></a>Protéger les informations d'identification
 
-Les conteneurs peuvent s'étendre sur plusieurs clusters et régions Azure. Vous devez donc sécuriser les informations d'identification requises pour les connexions ou l'accès aux API, comme les mots de passe ou les jetons. Veiller à ce que seuls les utilisateurs disposant de privilèges aient accès à ces conteneurs en transit et au repos. Inventoriez tous les secrets relatifs aux informations d'identification, puis demandez aux développeurs d'utiliser les nouveaux outils de gestion des secrets conçus pour les plateformes de conteneurs.  Assurez-vous que votre solution inclut des bases de données chiffrées, le chiffrement TLS pour les données secrètes en transit, et un [contrôle d'accès basé sur le rôle](../role-based-access-control/overview.md) avec privilèges minimum. [Azure Key Vault](../key-vault/general/secure-your-key-vault.md) est un service cloud qui protège les clés et secrets de chiffrement (tels que les certificats, les chaînes de connexion et les mots de passe) de vos applications conteneurisées. Comme il s'agit de données sensibles et stratégiques, sécurisez l'accès à vos coffres de clés afin que seuls les applications et les utilisateurs autorisés y aient accès.
+Les conteneurs peuvent s'étendre sur plusieurs clusters et régions Azure. Vous devez donc sécuriser les informations d'identification requises pour les connexions ou l'accès aux API, comme les mots de passe ou les jetons. Veiller à ce que seuls les utilisateurs disposant de privilèges aient accès à ces conteneurs en transit et au repos. Inventoriez tous les secrets relatifs aux informations d'identification, puis demandez aux développeurs d'utiliser les nouveaux outils de gestion des secrets conçus pour les plateformes de conteneurs.  Assurez-vous que votre solution inclut des bases de données chiffrées, le chiffrement TLS pour les données secrètes en transit, et le [contrôle d'accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/overview.md) avec privilèges minimum. [Azure Key Vault](../key-vault/general/secure-your-key-vault.md) est un service cloud qui protège les clés et secrets de chiffrement (tels que les certificats, les chaînes de connexion et les mots de passe) de vos applications conteneurisées. Comme il s'agit de données sensibles et stratégiques, sécurisez l'accès à vos coffres de clés afin que seuls les applications et les utilisateurs autorisés y aient accès.
 
 ## <a name="considerations-for-the-container-ecosystem"></a>Considérations relatives à l'écosystème de conteneurs
 
@@ -135,11 +138,13 @@ Surveillez l'activité de vos ressources, comme les fichiers, le réseau et les 
 
 Maintenez un journal d'audit précis des accès administratifs à votre écosystème de conteneurs, y compris votre cluster Kubernetes, à votre registre de conteneurs et à vos images conteneur. Ces enregistrements peuvent être nécessaires à des fins d'audit et ils peuvent être utilisés comme preuves médico-légales après un incident de sécurité. Les solutions Azure sont les suivantes :
 
-* [Intégration d'Azure Kubernetes Service à Azure Security Center](../security-center/azure-kubernetes-service-integration.md) pour superviser la configuration de la sécurité de l’environnement de cluster et générer des recommandations de sécurité
+* [Intégration d'Azure Kubernetes Service à Azure Security Center](../security-center/defender-for-kubernetes-introduction.md) pour superviser la configuration de la sécurité de l’environnement de cluster et générer des recommandations de sécurité
 * [Solution Azure Container Monitoring](../azure-monitor/insights/containers.md)
 * Journaux de ressources pour [Azure Container Instances](container-instances-log-analytics.md) et [Azure Container Registry](../container-registry/container-registry-diagnostics-audit-logs.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
+
+* Consultez la [base de référence de la sécurité Azure pour Container Instances](security-baseline.md) pour obtenir des recommandations complètes qui vous aideront à améliorer l’état de la sécurité de votre déploiement.
 
 * Apprenez-en davantage sur l’utilisation d'[Azure Security Center](../security-center/container-security.md) à des fins de détection des menaces en temps réel dans vos environnements conteneurisés.
 

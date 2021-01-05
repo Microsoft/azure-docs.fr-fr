@@ -1,20 +1,15 @@
 ---
 title: Utiliser une vignette Markdown personnalisée sur les tableaux de bord Azure
 description: Découvrez comment ajouter une vignette Markdown à un tableau de bord Azure pour afficher un contenu statique
-services: azure-portal
-keywords: ''
-author: mgblythe
-ms.author: mblythe
 ms.date: 01/08/2020
-ms.topic: conceptual
-ms.service: azure-portal
-manager: mtillman
-ms.openlocfilehash: 74102423461a56bb6fc19c2eb9874f96a76e34e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.custom: devx-track-js
+ms.openlocfilehash: 5121142ecf568aa1ac9a7ec19f7211c6f9a6253f
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76310711"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745755"
 ---
 # <a name="use-a-markdown-tile-on-azure-dashboards-to-show-custom-content"></a>Utiliser une vignette Markdown sur les tableaux de bord Azure pour afficher un contenu personnalisé
 
@@ -47,7 +42,7 @@ Vous pouvez ajouter une vignette Markdown à vos tableaux de bord Azure pour aff
       ![Capture d’écran montrant la saisie de l’URL](./media/azure-portal-markdown-tile/azure-portal-dashboard-markdown-url.png)
 
       > [!NOTE]
-      > Pour renforcer la sécurité, vous pouvez créer un fichier Markdown et le stocker dans un [objet blob de compte de stockage Azure où le chiffrement est activé](../storage/common/storage-service-encryption.md), puis référencer le fichier à l’aide de l’option URL. Le contenu Markdown est chiffré à l’aide des options de chiffrement du compte de stockage. Seuls les utilisateurs disposant d’autorisations d’accès au fichier peuvent voir le contenu Markdown dans le tableau de bord.
+      > Pour renforcer la sécurité, vous pouvez créer un fichier Markdown et le stocker dans un [objet blob de compte de stockage Azure où le chiffrement est activé](../storage/common/storage-service-encryption.md), puis référencer le fichier à l’aide de l’option URL. Le contenu Markdown est chiffré à l’aide des options de chiffrement du compte de stockage. Seuls les utilisateurs disposant d’autorisations d’accès au fichier peuvent voir le contenu Markdown dans le tableau de bord. Il se peut que vous deviez définir une règle de [partage des ressources cross-origin (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) sur le compte de stockage afin que le portail Azure ( _https://portal.azure.com/_ ) puisse accéder au fichier Markdown dans le blob.
 
 1. Sélectionnez **Terminé** pour faire disparaître le volet **Modifier le balisage Markdown**. Votre contenu s’affiche sur la vignette Markdown, que vous pouvez ensuite redimensionner en faisant glisser la poignée vers le coin inférieur droit.
 

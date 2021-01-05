@@ -4,19 +4,19 @@ description: Conversion d’une machine virtuelle Windows qui utilise des disque
 author: roygara
 ms.service: virtual-machines-windows
 ms.subservice: disks
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/12/2018
 ms.author: rogarana
-ms.openlocfilehash: d8069b174b7a69cc2e6c47171159569c56a15563
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 2168b3e3c55eaf06b93358f4623b181f134b4f9e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82081946"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017342"
 ---
 # <a name="convert-a-windows-virtual-machine-from-unmanaged-disks-to-managed-disks"></a>Convertir les disques non managés d’une machine virtuelle Windows en disques managés
 
-Si vos machines virtuelles Windows existantes utilisent des disques non managés, vous pouvez les convertir pour qu’elles utilisent des disques managés par le biais d’[Azure Disques managés](managed-disks-overview.md). Ce processus convertit le disque du système d’exploitation ainsi que tous les autres disques de données attachés.
+Si vos machines virtuelles Windows existantes utilisent des disques non managés, vous pouvez les convertir pour qu’elles utilisent des disques managés par le biais d’[Azure Disques managés](../managed-disks-overview.md). Ce processus convertit le disque du système d’exploitation ainsi que tous les autres disques de données attachés.
 
  
 
@@ -25,7 +25,7 @@ Si vos machines virtuelles Windows existantes utilisent des disques non managés
 
 * Consultez [Planification de la migration vers la fonctionnalité Disques managés](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks).
 
-* Consultez les [questions fréquentes (FAQ) sur la migration vers la fonctionnalité Disques managés](faq-for-disks.md#migrate-to-managed-disks).
+* Consultez les [questions fréquentes (FAQ) sur la migration vers la fonctionnalité Disques managés](../faq-for-disks.md#migrate-to-managed-disks).
 
 [!INCLUDE [virtual-machines-common-convert-disks-considerations](../../../includes/virtual-machines-common-convert-disks-considerations.md)]
 
@@ -35,7 +35,7 @@ Si vos machines virtuelles Windows existantes utilisent des disques non managés
 ## <a name="convert-single-instance-vms"></a>Convertir des machines virtuelles à instance unique
 Cette section explique comment convertir vos machines virtuelles Azure à instance unique à partir de disques non managés vers des disques managés. (Si vos machines virtuelles sont dans un groupe à haute disponibilité, voir la section suivante.) 
 
-1. Libérez la machine virtuelle à l’aide de la cmdlet [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm). L’exemple suivant libère la machine virtuelle nommée `myVM` dans le groupe de ressources nommé `myResourceGroup` : 
+1. Libérez la machine virtuelle à l’aide de la cmdlet [Stop-AzVM](/powershell/module/az.compute/stop-azvm). L’exemple suivant libère la machine virtuelle nommée `myVM` dans le groupe de ressources nommé `myResourceGroup` : 
 
    ```azurepowershell-interactive
    $rgName = "myResourceGroup"
@@ -43,7 +43,7 @@ Cette section explique comment convertir vos machines virtuelles Azure à instan
    Stop-AzVM -ResourceGroupName $rgName -Name $vmName -Force
    ```
 
-2. Convertissez la machine virtuelle pour qu’elle utilise des disques managés à l’aide de la cmdlet [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk). Le processus suivant convertit la machine virtuelle précédente, y compris le disque du système d’exploitation et tous les disques de données, et démarre la machine virtuelle :
+2. Convertissez la machine virtuelle pour qu’elle utilise des disques managés à l’aide de la cmdlet [ConvertTo-AzVMManagedDisk](/powershell/module/az.compute/convertto-azvmmanageddisk). Le processus suivant convertit la machine virtuelle précédente, y compris le disque du système d’exploitation et tous les disques de données, et démarre la machine virtuelle :
 
    ```azurepowershell-interactive
    ConvertTo-AzVMManagedDisk -ResourceGroupName $rgName -VMName $vmName
@@ -55,7 +55,7 @@ Cette section explique comment convertir vos machines virtuelles Azure à instan
 
 Si les machines virtuelles que vous souhaitez convertir pour utiliser des disques managés se trouvent dans un groupe à haute disponibilité, vous devez tout d’abord convertir ce dernier en groupe à haute disponibilité géré.
 
-1. Convertissez le groupe à haute disponibilité à l’aide de la cmdlet [Update-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/update-azavailabilityset). L’exemple suivant met à jour le groupe à haute disponibilité nommé `myAvailabilitySet` dans le groupe de ressources nommé `myResourceGroup` :
+1. Convertissez le groupe à haute disponibilité à l’aide de la cmdlet [Update-AzAvailabilitySet](/powershell/module/az.compute/update-azavailabilityset). L’exemple suivant met à jour le groupe à haute disponibilité nommé `myAvailabilitySet` dans le groupe de ressources nommé `myResourceGroup` :
 
    ```azurepowershell-interactive
    $rgName = 'myResourceGroup'
@@ -72,7 +72,7 @@ Si les machines virtuelles que vous souhaitez convertir pour utiliser des disque
    Update-AzAvailabilitySet -AvailabilitySet $avSet -Sku Aligned
    ```
 
-2. Désallouer et convertir des machines virtuelles dans le groupe à haute disponibilité. Le script suivant libère chaque machine virtuelle à l’aide de la cmdlet [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm), la convertit à l’aide de [ConvertTo-AzVMManagedDisk](https://docs.microsoft.com/powershell/module/az.compute/convertto-azvmmanageddisk) et la redémarre automatiquement dans le cadre du processus de conversion :
+2. Désallouer et convertir des machines virtuelles dans le groupe à haute disponibilité. Le script suivant libère chaque machine virtuelle à l’aide de la cmdlet [Stop-AzVM](/powershell/module/az.compute/stop-azvm), la convertit à l’aide de [ConvertTo-AzVMManagedDisk](/powershell/module/az.compute/convertto-azvmmanageddisk) et la redémarre automatiquement dans le cadre du processus de conversion :
 
    ```azurepowershell-interactive
    $avSet = Get-AzAvailabilitySet -ResourceGroupName $rgName -Name $avSetName
@@ -108,4 +108,3 @@ Lorsque la migration est terminée, la machine virtuelle est arrêtée, puis red
 [Convertir des disques managés standard en premium](convert-disk-storage.md)
 
 Créez une copie en lecture seule d’une machine virtuelle en utilisant des [captures instantanées](snapshot-copy-managed-disk.md).
-

@@ -10,12 +10,12 @@ metadata:
   author: ecfan
   ms.author: estfan; logicappspm
   ms.date: 09/18/2019
-  ms.openlocfilehash: 8c4f701c398e27114844b5a2b95c894044c3a8b2
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: c801c46424f7128577e1426ae5f15a8623359d6a
+  ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "71268870"
+  ms.lasthandoff: 12/08/2020
+  ms.locfileid: "96852759"
 landingContent:
 - title: À propos d’Azure Logic Apps
   linkLists:
@@ -26,15 +26,17 @@ landingContent:
   - linkListType: concept
     links:
     - text: Connecteurs pour Azure Logic Apps
-      url: /azure/connectors/apis-list
+      url: ../connectors/apis-list.md
     - text: Planifier des workflows récurrents
       url: concepts-schedule-automated-recurring-tasks-workflows.md
     - text: Intégration d’entreprise B2B
       url: logic-apps-enterprise-integration-overview.md
+    - text: Intégrité des ressources pour les applications logiques
+      url: healthy-unhealthy-resource.md
   - linkListType: learn
     links:
     - text: Présentation d’Azure Logic Apps
-      url: https://docs.microsoft.com/learn/modules/intro-to-logic-apps/
+      url: /learn/modules/intro-to-logic-apps/
   - linkListType: video
     links:
     - text: Présentation d’Azure Logic Apps
@@ -56,7 +58,7 @@ landingContent:
   - linkListType: learn
     links:
     - text: Router et traiter automatiquement les données
-      url: https://docs.microsoft.com/learn/modules/route-and-process-data-logic-apps
+      url: /learn/modules/route-and-process-data-logic-apps
   - linkListType: tutorial
     links:
     - text: Créer un workflow basé sur une planification
@@ -74,7 +76,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Qu’est-ce qu’une passerelle de données locale ?
-      url: https://docs.microsoft.com/data-integration/gateway/service-gateway-onprem
+      url: /data-integration/gateway/service-gateway-onprem
     - text: Qu’est-ce qu’un environnement de service d’intégration ?
       url: connect-virtual-network-vnet-isolated-environment-overview.md
   - linkListType: how-to-guide
@@ -102,11 +104,11 @@ landingContent:
   - linkListType: learn
     links:
     - text: 'Exemple : Se connecter à un compte d’intégration et déployer avec Azure DevOps'
-      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-an-integration-account-from-azure-logic-apps-and-deploy-by-using-azure-devops-pipelines/
+      url: /samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-an-integration-account-from-azure-logic-apps-and-deploy-by-using-azure-devops-pipelines/
   - linkListType: architecture
     links:
     - text: Intégration d’entreprise de base
-      url: https://docs.microsoft.com/azure/architecture/reference-architectures/enterprise-integration/basic-enterprise-integration
+      url: /azure/architecture/reference-architectures/enterprise-integration/basic-enterprise-integration
 - title: Gérer et sécuriser des applications logiques
   linkLists:
   - linkListType: how-to-guide
@@ -131,14 +133,16 @@ landingContent:
       url: logic-apps-create-azure-resource-manager-templates.md
     - text: Déployer des modèles d’application logique
       url: logic-apps-deploy-azure-resource-manager-templates.md
+    - text: Appeler des applications logiques à partir de Power Automate et Power Apps
+      url: call-from-power-automate-power-apps.md
   - linkListType: learn
     links:
     - text: Créer et déployer avec des modèles Resource Manager
-      url: https://docs.microsoft.com/learn/modules/create-deploy-logic-apps-using-arm-templates/
+      url: /learn/modules/create-deploy-logic-apps-using-arm-templates/
     - text: 'Exemple : Se connecter au stockage Azure et déployer avec Azure DevOps'
-      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-storage-accounts-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
+      url: /samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-storage-accounts-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
     - text: 'Exemple : Se connecter à Azure Service Bus et déployer avec Azure DevOps'
-      url: https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-service-bus-queues-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
+      url: /samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-service-bus-queues-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/
 - title: Informations complémentaires
   linkLists:
   - linkListType: reference
@@ -150,6 +154,6 @@ landingContent:
     - text: Schéma de langage de définition de flux de travail
       url: logic-apps-workflow-definition-language.md
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.logicapp/
+      url: /powershell/module/az.logicapp/
     - text: API REST
-      url: https://docs.microsoft.com/rest/api/logic/
+      url: /rest/api/logic/

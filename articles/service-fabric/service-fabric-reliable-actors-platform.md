@@ -1,16 +1,15 @@
 ---
 title: Reliable Actors dans Service Fabric
 description: Décrit comment les Reliable Actors sont superposés en couches sur des Reliable Services et utilisent les fonctionnalités de la plateforme Service Fabric.
-author: vturecek
 ms.topic: conceptual
 ms.date: 3/9/2018
-ms.author: vturecek
-ms.openlocfilehash: 92c717fa2c82dd147acd3c28333e37ccf8dd2e89
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: c3bd67e0f71e20a8b5a74b4b38e5b423a14dc08d
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236645"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575616"
 ---
 # <a name="how-reliable-actors-use-the-service-fabric-platform"></a>Comment le service Reliable Actors utilise la plateforme Service Fabric
 Cet article décrit le fonctionnement du service Reliable Actors sur la plateforme Azure Service Fabric. La solution Reliable Actors s’exécute dans une infrastructure hébergée dans une implémentation d’un service fiable avec état nommé *service d’acteur*. Le service d’acteur contient tous les composants nécessaires pour gérer le cycle de vie et la distribution des messages destinés à vos acteurs :
@@ -90,7 +89,7 @@ Lorsque vous utilisez des chaînes et des GUID / UUID, les valeurs sont hachée
 ## <a name="next-steps"></a>Étapes suivantes
 * [Gestion des états d’acteur](service-fabric-reliable-actors-state-management.md)
 * [Cycle de vie des acteurs et Garbage Collection](service-fabric-reliable-actors-lifecycle.md)
-* [Documentation de référence de l’API Actors](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.actors?redirectedfrom=MSDN&view=azure-dotnet)
+* [Documentation de référence de l’API Actors](/dotnet/api/microsoft.servicefabric.actors?view=azure-dotnet)
 * [Exemple de code .NET](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started)
 * [Exemple de code Java](https://github.com/Azure-Samples/service-fabric-java-getting-started)
 

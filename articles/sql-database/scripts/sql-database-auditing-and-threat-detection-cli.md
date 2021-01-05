@@ -4,19 +4,19 @@ description: Exemple de script Azure CLI pour configurer l’audit et Advanced T
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
-ms.custom: security
+ms.custom: security, devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: sample
 author: ronitr
 ms.author: ronitr
-ms.reviewer: carlrab, vanto
+ms.reviewer: vanto
 ms.date: 08/05/2019
-ms.openlocfilehash: 9f15c4a8b0410003bccd9fb42aa2c34c42d9b56b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3df43af03fd536dfe50733bb6e10ff43d9f54834
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80061881"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92737105"
 ---
 # <a name="use-cli-to-configure-sql-database-auditing-and-advanced-threat-protection"></a>Utiliser CLI pour configurer l’audit SQL Database et Advanced Threat Protection
 
@@ -52,7 +52,7 @@ az group delete --name $resource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az sql db audit-policy](/cli/azure/sql/db/audit-policy) | Définit la stratégie d’audit d’une base de données. |
 | [az sql db threat-policy](/cli/azure/sql/db/threat-policy) | Définit une stratégie Advanced Threat Protection sur une base de données. |
@@ -61,4 +61,4 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
-Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

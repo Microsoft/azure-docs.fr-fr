@@ -5,22 +5,21 @@ author: tfitzmac
 ms.topic: sample
 ms.date: 10/25/2017
 ms.author: tomfitz
-ms.openlocfilehash: f86eabc30114a3643f5d39297567411e88018378
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: e4145484029539b3f800b2f431edefe56b908bca
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "75648526"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87498631"
 ---
-# <a name="azure-cli-samples"></a>Exemples d’interface de ligne de commande Azure
+# <a name="azure-cli-samples-for-azure-managed-applications"></a>Exemples Azure CLI pour les applications managées Azure
 
 Le tableau suivant contient des liens vers des scripts Bash pour les applications managées Azure qui utilisent Azure CLI.
 
-| | |
-|-|-|
-|**Créer une application managée**||
+| Créer une application gérée | Description |
+| -------------------------- | ----------- |
 | [Créer une définition d’application managée](scripts/managed-application-cli-sample-create-definition.md) | Crée une définition d’application managée dans le catalogue de services.  |
 | [Déployer une application managée](scripts/managed-application-cli-sample-create-application.md) | Déploie une application managée à partir du catalogue de services.  |
-| | |
-|**Mettre à jour un groupe de ressources managé**||
+|**Mettre à jour un groupe de ressources managé**| **Description** |
 | [Obtenir les ressources d’un groupe de ressources managé et redimensionner des machines virtuelles](scripts/managed-application-cli-sample-get-managed-group-resize-vm.md) | Obtient des ressources à partir du groupe de ressources managé et redimensionne les machines virtuelles. |

@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: amberb
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 02/10/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 4c4b105bb4b67e855de27b6a57d2080fde068421
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 766136731cb92b1bd4f0965d4929b1ac5eda14dc
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79237902"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88690491"
 ---
 # <a name="terms-in-your-microsoft-customer-agreement-invoice"></a>Termes de votre facture de Contrat client Microsoft
 

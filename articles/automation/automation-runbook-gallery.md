@@ -1,18 +1,18 @@
 ---
-title: Galeries de runbooks et de modules pour Azure Automation
-description: Des runbooks et des modules de Microsoft et de la communauté sont disponibles pour l’installation et l’utilisation dans votre environnement Azure Automation.  Cet article décrit comment accéder à ces ressources et comment partager vos runbooks dans la galerie.
+title: Utiliser les runbooks et modules Azure Automation dans PowerShell Gallery
+description: Cet article explique comment utiliser les runbooks et les modules de Microsoft et de la communauté dans PowerShell Gallery.
 services: automation
 ms.subservice: process-automation
 ms.date: 03/20/2019
 ms.topic: conceptual
-ms.openlocfilehash: 90b475e275598363314c8f131911fe12650cd3df
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f90d88e49675681a7f73df838ca489a7193955b3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535551"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90087858"
 ---
-# <a name="runbook-and-module-galleries-for-azure-automation"></a>Galeries de runbooks et de modules pour Azure Automation
+# <a name="use-runbooks-and-modules-in-powershell-gallery"></a>Utiliser les runbooks et les modules de PowerShell Gallery
 
 Au lieu de créer vos propres runbooks et modules dans Azure Automation, vous pouvez accéder à des scénarios déjà générés par Microsoft et la communauté. Vous pouvez obtenir des runbooks PowerShell et des [modules](#modules-in-powershell-gallery) à partir de PowerShell Gallery, et à partir des [runbooks Python](#use-python-runbooks) de la galerie du Centre de scripts. Vous pouvez également contribuer à la communauté en partageant les [scénarios que vous développez](#add-a-powershell-runbook-to-the-gallery). 
 
@@ -32,14 +32,14 @@ Seul le portail Azure permet d’importer des runbooks directement à partir de 
 
 Les modules PowerShell contiennent des applets de commande que vous pouvez utiliser dans vos runbooks ; des modules existants que vous pouvez installer dans Azure Automation sont disponibles dans [PowerShell Gallery](https://www.powershellgallery.com). Vous pouvez lancer cette galerie à partir du portail Azure et les installer directement dans Azure Automation. Vous pouvez également les télécharger et les installer manuellement.
 
-## <a name="common-solutions-available-in-powershell-gallery"></a>Solutions courantes disponibles dans PowerShell Gallery
+## <a name="common-scenarios-available-in-powershell-gallery"></a>Scénarios courants disponibles dans PowerShell Gallery
 
-La liste ci-dessous contient quelques runbooks qui fournissent des solutions aux scénarios courants. Pour obtenir la liste complète des runbooks créés par l’équipe Azure Automation, consultez [Profil AzureAutomationTeam](https://www.powershellgallery.com/profiles/AzureAutomationTeam).
+La liste ci-dessous contient quelques runbooks qui fournissent des scénarios courants. Pour obtenir la liste complète des runbooks créés par l’équipe Azure Automation, consultez [Profil AzureAutomationTeam](https://www.powershellgallery.com/profiles/AzureAutomationTeam).
 
    * [Update-ModulesInAutomationToLatestVersion](https://www.powershellgallery.com/packages/Update-ModulesInAutomationToLatestVersion/) : importe la version la plus récente de tous les modules dans un compte Automation à partir de PowerShell Gallery.
    * [Enable-AzureDiagnostics](https://www.powershellgallery.com/packages/Enable-AzureDiagnostics/) : configure Diagnostics Azure et Log Analytics pour recevoir les journaux Azure Automation contenant l’état des travaux et les flux des travaux.
    * [Copy-ItemFromAzureVM](https://www.powershellgallery.com/packages/Copy-ItemFromAzureVM/) : copie un fichier distant à partir d’une machine virtuelle Microsoft Azure.
-   * [Copy-ItemFromAzureVM](https://www.powershellgallery.com/packages/Copy-ItemToAzureVM/) : copie un fichier local vers une machine virtuelle Azure.
+   * [Copy-ItemToAzureVM](https://www.powershellgallery.com/packages/Copy-ItemToAzureVM/) : copie un fichier local vers une machine virtuelle Azure.
 
 ## <a name="import-a-powershell-runbook-from-the-runbook-gallery-with-the-azure-portal"></a>Importer un runbook PowerShell à partir Runbook Gallery avec le portail Azure
 
@@ -101,10 +101,11 @@ Les runbooks Python sont disponibles dans la [galerie du Centre de scripts](http
 
 ## <a name="request-a-runbook-or-module"></a>Demander un runbook ou un module
 
-Vous pouvez envoyer des demandes à [User Voice](https://feedback.azure.com/forums/246290-azure-automation/).  Si vous avez besoin d’aide pour écrire un runbook ou si vous avez une question à propos de PowerShell, publiez une question sur notre [forum](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=azureautomation&filter=alltypes&sort=lastpostdesc).
+Vous pouvez envoyer des demandes à [User Voice](https://feedback.azure.com/forums/246290-azure-automation/).  Si vous avez besoin d’aide pour écrire un runbook ou si vous avez une question à propos de PowerShell, publiez une question sur notre [page de questions Microsoft Q&A](/answers/topics/azure-automation.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour vous familiariser avec les runbooks, consultez [Gérer un runbook dans Azure Automation](manage-runbooks.md).
-* Pour comprendre les différences entre PowerShell et un workflow PowerShell avec les runbooks, consultez [Apprentissage du workflow PowerShell](automation-powershell-workflow.md).
-* Pour plus d’informations sur PowerShell, notamment le langage de référence et les modules d’apprentissage, consultez la [Documentation PowerShell](https://docs.microsoft.com/powershell/scripting/overview).
+* Pour commencer à utiliser un runbook PowerShell, voir [Tutoriel : Créer un runbook PowerShell](learn/automation-tutorial-runbook-textual-powershell.md).
+* Pour savoir comment utiliser des runbooks, voir [Gérer les runbooks dans Azure Automation](manage-runbooks.md).
+* Pour plus d’informations sur PowerShell, consultez la [documentation PowerShell](/powershell/scripting/overview).
+* * Pour obtenir des informations de référence sur les applets de commande PowerShell, consultez [Az.Automation](/powershell/module/az.automation/?view=azps-3.7.0#automation).

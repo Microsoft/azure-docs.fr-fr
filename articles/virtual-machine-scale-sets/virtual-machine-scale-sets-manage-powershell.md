@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 05/29/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 68b5aa21f861009dd78f48428fa0ffdc5b5ae3a3
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: eee4dd7fae872f6b3ddd01f60aba732edc170766
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124867"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91570586"
 ---
 # <a name="manage-a-virtual-machine-scale-set-with-azure-powershell"></a>Gérer un groupe de machines virtuelles identique à l’aide d’Azure PowerShell
 
@@ -45,6 +45,15 @@ Pour afficher des informations supplémentaires sur une instance spécifique de 
 Get-AzVmssVM -ResourceGroupName "myResourceGroup" -VMScaleSetName "myScaleSet" -InstanceId "0"
 ```
 
+Vous pouvez également obtenir des informations détaillées sur *instanceView* pour toutes les instances d’un appel d’API, ce qui peut aider à éviter la limitation des API pour les installations de grande taille.
+
+```powershell
+Get-AzVmssVM -InstanceView -ResourceGroupName "myResourceGroup" -VMScaleSetName "myScaleSet"
+```
+
+```rest
+GET "https://management.azure.com/subscriptions/<sub-id>/resourceGroups/<resourceGroupName>/providers/Microsoft.Compute/virtualMachineScaleSets/<VMSSName>/virtualMachines?api-version=2019-03-01&%24expand=instanceView"
+```
 
 ## <a name="change-the-capacity-of-a-scale-set"></a>Modifier la capacité d’un groupe identique
 Les commandes précédentes montraient plus d’informations sur votre groupe identique et les instances de machine virtuelle. Pour augmenter ou diminuer le nombre d’instances dans le groupe identique, vous pouvez modifier la capacité. Le groupe identique crée ou supprime automatiquement le nombre requis de machines virtuelles, puis configure les machines virtuelles recevoir le trafic d’application.

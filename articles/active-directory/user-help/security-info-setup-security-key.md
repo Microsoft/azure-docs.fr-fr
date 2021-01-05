@@ -11,12 +11,12 @@ ms.subservice: user-help
 ms.topic: end-user-help
 ms.date: 07/18/2019
 ms.author: curtand
-ms.openlocfilehash: 91138f104c787148042b187f4cf59a60bc1448d3
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: c056e439deac71417ff14dcfc3f2c3c95db41946
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83744411"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88797664"
 ---
 # <a name="set-up-a-security-key-as-your-verification-method"></a>Configurer la clé de sécurité comme méthode de vérification
 
@@ -25,7 +25,7 @@ Vous pouvez utiliser des clés de sécurité comme méthode de connexion avec mo
 [!INCLUDE [preview-notice](../../../includes/active-directory-end-user-preview-notice-security-key.md)]
 
 >[!Note]
-> Si vous ne voyez pas l’option de clé de sécurité, il est possible que votre organisation ne vous autorise pas à l’utiliser à des fins de vérification. Dans ce cas, vous devez choisir une autre méthode ou contacter le support technique de votre organisation pour obtenir de l'aide.
+> Si vous ne voyez pas l’option de clé de sécurité, il est possible que votre organisation ne vous autorise pas à l’utiliser à des fins de vérification. Dans ce cas, vous devez choisir une autre méthode ou contacter le support technique de votre organisation pour obtenir de l’aide.
 
 ## <a name="security-verification-versus-password-reset-authentication"></a>Vérification de la sécurité ou authentification avec réinitialisation du mot de passe
 
@@ -158,13 +158,13 @@ Vous pouvez créer un nouveau code confidentiel pour votre clé de sécurité.
 
 ## <a name="additional-security-info-methods"></a>Autres méthodes d’informations de sécurité
 
-Pour enregistrer une clé de sécurité, vous devez avoir au moins une méthode de vérification de sécurité supplémentaire enregistrée. Pour plus d’informations, consultez la [Section vue d’ensemble](security-info-add-update-methods-overview.md). 
+Pour enregistrer une clé de sécurité, vous devez avoir au moins une méthode de vérification de sécurité supplémentaire enregistrée. Pour plus d’informations, consultez la [Section vue d’ensemble](./security-info-setup-auth-app.md). 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour plus d’informations sur les méthodes de vérification sans mot de passe, lisez le blog [Azure AD de Microsoft démarre une préversion publique des clés de sécurité FIDO2, en activant des connexions sans mot de passe](https://www.onmsft.com/news/microsofts-azure-ad-begins-public-preview-of-fido2-security-keys-enabling-passwordless-logins) ou lisez les articles [Qu’est-ce que l’application Microsoft Authenticator ?](user-help-auth-app-overview.md) et [Aperçu Windows Hello](https://www.microsoft.com/windows/windows-hello).
 
-- Plus d’informations sur les [clés de sécurité conformes Microsoft](https://docs.microsoft.com/windows/security/identity-protection/hello-for-business/microsoft-compatible-security-key).
+- Plus d’informations sur les [clés de sécurité conformes Microsoft](/windows/security/identity-protection/hello-for-business/microsoft-compatible-security-key).
 
 - Si vous avez perdu ou oublié votre mot de passe, réinitialisez-le à partir du [portail de réinitialisation de mot de passe](https://passwordreset.microsoftonline.com/), ou suivez les étapes de l’article [Réinitialiser votre mot de passe professionnel ou scolaire](active-directory-passwords-update-your-own-password.md).
 

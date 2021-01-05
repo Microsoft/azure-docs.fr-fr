@@ -5,12 +5,13 @@ author: masnider
 ms.topic: conceptual
 ms.date: 08/26/2019
 ms.author: masnider
-ms.openlocfilehash: 17827342b67d37d9fbeb56654824e004367823ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: cb5820849fb34e232a07d610e1cedeb40c0fcfba
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236725"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89005324"
 ---
 # <a name="scaling-in-service-fabric"></a>Mise à l’échelle dans Service Fabric
 Azure Service Fabric facilite la création d’applications évolutives en gérant les services, les partitions et les réplicas sur les nœuds d’un cluster. L’exécution de nombreuses charges de travail sur un même appareil permet une utilisation maximale des ressources, mais permet également de choisir la façon dont vous mettez à l’échelle vos charges de travail. Cette vidéo Channel 9 décrit comment vous pouvez générer des applications de microservices scalables :
@@ -63,7 +64,7 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 ## <a name="scaling-by-creating-or-removing-new-named-services"></a>En créant ou en supprimant de nouveaux services nommés
 Une instance de service nommée est une instance spécifique d’un type de service (consultez [Cycle de vie d’une application Service Fabric](service-fabric-application-lifecycle.md)) située dans une instance d’application nommée du cluster. 
 
-De nouvelles instances de services nommées peuvent être créées (ou supprimées) si les services sont trop ou trop peu occupés. Ainsi, les demandes sont réparties entre plusieurs instances de services, ce qui permet généralement de diminuer la charge sur les services existants. Lorsque vous créez des services, Service Fabric Cluster Resource Manager les distribue dans le cluster. Les décisions exactes sont régies par les [métriques](service-fabric-cluster-resource-manager-metrics.md) du cluster et d’autres règles de sélection élective. Les services peuvent être créés de différentes façons. Cependant, les méthodes les plus courantes consistent à utiliser des actions d’administration en appelant [`New-ServiceFabricService`](https://docs.microsoft.com/powershell/module/servicefabric/new-servicefabricservice?view=azureservicefabricps), ou à appeler [`CreateServiceAsync`](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.createserviceasync?view=azure-dotnet) par programmation. `CreateServiceAsync` peut même être appelé à partir d’autres services exécutés dans le cluster.
+De nouvelles instances de services nommées peuvent être créées (ou supprimées) si les services sont trop ou trop peu occupés. Ainsi, les demandes sont réparties entre plusieurs instances de services, ce qui permet généralement de diminuer la charge sur les services existants. Lorsque vous créez des services, Service Fabric Cluster Resource Manager les distribue dans le cluster. Les décisions exactes sont régies par les [métriques](service-fabric-cluster-resource-manager-metrics.md) du cluster et d’autres règles de sélection élective. Les services peuvent être créés de différentes façons. Cependant, les méthodes les plus courantes consistent à utiliser des actions d’administration en appelant [`New-ServiceFabricService`](/powershell/module/servicefabric/new-servicefabricservice?view=azureservicefabricps), ou à appeler [`CreateServiceAsync`](/dotnet/api/system.fabric.fabricclient.servicemanagementclient.createserviceasync?view=azure-dotnet) par programmation. `CreateServiceAsync` peut même être appelé à partir d’autres services exécutés dans le cluster.
 
 La création dynamique de services peut être utilisée dans toutes sortes de scénarios et constitue un modèle commun. Prenons par exemple un service avec état représentant un workflow particulier. Les appels représentant le travail vont apparaître dans ce service, et ce dernier va exécuter les étapes du workflow et enregistrer sa progression. 
 
@@ -127,7 +128,7 @@ Mais pourquoi essayer de choisir un seul schéma de partition pour tous les util
 Lorsque vous créez des services devant subir une mise à l’échelle, envisagez le modèle dynamique ci-dessous. Vous aurez peut-être à l’adapter à votre situation :
 
 1. Plutôt que d’essayer de choisir un schéma de partitionnement global à l’avance, créez un « service gestionnaire ».
-2. Le travail de ce service gestionnaire est d’examiner les informations relatives aux clients lorsqu’ils se connectent à votre service. En fonction de ces informations, le service de gestionnaire crée une instance de votre service de stockage de contacts _réel_, _juste pour ce client_. Si une configuration, une isolation ou une mise à niveau particulières sont nécessaires, vous pouvez également décider de rendre disponible une instance d’application pour ce client. 
+2. Le travail de ce service gestionnaire est d’examiner les informations relatives aux clients lorsqu’ils se connectent à votre service. En fonction de ces informations, le service gestionnaire crée une instance de votre service de stockage de contacts _réel_, _juste pour ce client_. Si une configuration, une isolation ou une mise à niveau particulières sont nécessaires, vous pouvez également décider de rendre disponible une instance d’application pour ce client. 
 
 Ce modèle de création dynamique présente de nombreux avantages :
 

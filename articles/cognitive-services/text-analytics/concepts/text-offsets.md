@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 03/09/2020
 ms.author: aahi
 ms.reviewer: jdesousa
-ms.openlocfilehash: 6e404c710a244f06676edf50c3f5c95a7d681e35
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c587bb042601b947b71658bf790e9acdfbdbf742
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218527"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94363780"
 ---
 # <a name="text-offsets-in-the-text-analytics-api-output"></a>Décalages de texte dans la sortie de l’API Analyse de texte
 
@@ -34,11 +34,21 @@ Chaque fois que des décalages sont renvoyés dans la réponse de l’API, par e
 
 ## <a name="extracting-substrings-from-text-with-offsets"></a>Extraction de sous-chaînes d’un texte avec des décalages
 
-Les décalages peuvent occasionner des problèmes lors de l’utilisation de méthodes de sous-chaîne basées sur des caractères, par exemple, la méthode .NET [substring()](https://docs.microsoft.com/dotnet/api/system.string.substring?view=netframework-4.8). Un problème est qu’un décalage peut avoir pour effet qu’une méthode de sous-chaîne se termine au milieu d’un encodage de graphème de plusieurs caractères plutôt qu’à la fin.
+Les décalages peuvent occasionner des problèmes lors de l’utilisation de méthodes de sous-chaîne basées sur des caractères, par exemple, la méthode .NET [substring()](/dotnet/api/system.string.substring?view=netframework-4.8). Un problème est qu’un décalage peut avoir pour effet qu’une méthode de sous-chaîne se termine au milieu d’un encodage de graphème de plusieurs caractères plutôt qu’à la fin.
 
-Dans .NET, envisagez d’utiliser la classe [StringInfo](https://docs.microsoft.com/dotnet/api/system.globalization.stringinfo?view=netframework-4.8), qui vous permet d’utiliser une chaîne comme une série d’éléments textuels, plutôt que d’objets caractères individuels. Vous pouvez également rechercher des bibliothèques de fractionnements de graphèmes dans votre environnement logiciel de prédilection. 
+Dans .NET, envisagez d’utiliser la classe [StringInfo](/dotnet/api/system.globalization.stringinfo?view=netframework-4.8), qui vous permet d’utiliser une chaîne comme une série d’éléments textuels, plutôt que d’objets caractères individuels. Vous pouvez également rechercher des bibliothèques de fractionnements de graphèmes dans votre environnement logiciel de prédilection. 
 
 L’API Analyse de texte retourne également ces éléments textuels pour des raisons de commodité.
+
+## <a name="offsets-in-api-version-31-preview"></a>Décalages dans la version 3.1-preview de l'API
+
+À partir de la version 3.1-preview.1 de l'API, tous les points de terminaison de l'API Analyse de texte qui renverront un décalage prendront en charge le paramètre `stringIndexType`. Ce paramètre ajuste les attributs `offset` et `length` dans la sortie de l'API pour qu'ils correspondent au schéma d'itération de chaîne demandé. Actuellement, trois types sont pris en charge :
+
+1. `textElement_v8` (par défaut) : itération sur les graphèmes, comme défini par la norme [Unicode 8.0.0](https://unicode.org/versions/Unicode8.0.0)
+2. `unicodeCodePoint` : itération sur les [points de code Unicode](http://www.unicode.org/versions/Unicode13.0.0/ch02.pdf#G25564), le schéma par défaut pour Python 3
+3. `utf16CodeUnit` : itération sur les [unités de code UTF-16](https://unicode.org/faq/utf_bom.html#UTF16), le schéma par défaut pour Javascript, Java et .NET
+
+Si le `stringIndexType` demandé correspond à l'environnement de programmation de votre choix, l'extraction de sous-chaîne peut être effectuée à l'aide des méthodes substring ou slice standard. 
 
 ## <a name="see-also"></a>Voir aussi
 

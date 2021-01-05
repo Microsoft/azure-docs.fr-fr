@@ -1,18 +1,18 @@
 ---
 title: Utiliser des paramètres pour créer des blueprints dynamiques
 description: Découvrez les paramètres statiques et dynamiques et comment les utiliser pour créer des blueprints sécurisés et dynamiques.
-ms.date: 04/15/2020
+ms.date: 08/27/2020
 ms.topic: conceptual
-ms.openlocfilehash: e5953617d5fa27098380f3f0e95843c69800f823
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: b6cefe7ec75ec622cb341d8f12edfd9c0cfa66e6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81458486"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89651957"
 ---
 # <a name="creating-dynamic-blueprints-through-parameters"></a>Création de blueprints dynamiques au moyen de paramètres
 
-Un blueprint entièrement défini avec divers artefacts (tels que des groupes de ressources, des modèles Resource Manager, des stratégies ou des attributions de rôles) permet de créer rapidement et de manière cohérente des objets dans Azure. Pour permettre une utilisation flexible de ces conteneurs et modèles de conception réutilisables, Azure Blueprint prend en charge des paramètres. Le paramètre offre, à la fois pendant la définition et l’affectation, la flexibilité nécessaire pour changer les propriétés sur les artefacts déployés par le blueprint.
+Un blueprint entièrement défini avec divers artefacts, tels que des groupes de ressources, des modèles Azure Resource Manager (modèles ARM), des stratégies ou des attributions de rôles, permet de créer rapidement et de manière cohérente des objets dans Azure. Pour permettre une utilisation flexible de ces conteneurs et modèles de conception réutilisables, Azure Blueprint prend en charge des paramètres. Le paramètre offre, à la fois pendant la définition et l’affectation, la flexibilité nécessaire pour changer les propriétés sur les artefacts déployés par le blueprint.
 
 Un exemple simple est l’artefact de groupe de ressources. Quand un groupe de ressources est créé, deux valeurs obligatoires doivent être fournies : le nom et l’emplacement. Lors de l’ajout d’un groupe de ressources à votre blueprint, si les paramètres n’existaient pas, il vous faudrait définir ce nom et cet emplacement pour chaque utilisation du blueprint. Chaque utilisation du blueprint créerait alors des artefacts dans le même groupe de ressources. Les ressources contenues dans ce groupe seraient dupliquées et provoqueraient des conflits.
 
@@ -28,7 +28,7 @@ Les paramètres constituent la solution à ce problème. Azure Blueprints vous p
 
 ### <a name="using-securestring-and-secureobject-parameters"></a>Utilisation de paramètres secureString et secureObject
 
-Bien qu’un _artefact_ de modèle Resource Manager prenne en charge les paramètres de type **secureString** et **secureObject**, Azure Blueprint exige que chacun d’eux soit connecté avec un coffre de clés Azure. Cette mesure de sécurité empêche la pratique risquée consistant à stocker des secrets avec le blueprint, et encourage l’utilisation de modèles sécurisés. Les blueprints Azure prennent en charge cette mesure de sécurité, en détectant l’inclusion de l’un ou l’autre paramètre sécurisé dans un _artefact_ de modèle Resource Manager. Lors de l’affectation, le service invite alors à entrer les propriétés de coffre de clés suivantes pour chaque paramètre sécurisé détecté :
+Bien qu’un _artefact_ de modèle ARM prenne en charge les paramètres de type **secureString** et **secureObject**, Azure Blueprint exige que chacun d’eux soit connecté avec un coffre de clés Azure. Cette mesure de sécurité empêche la pratique risquée consistant à stocker des secrets avec le blueprint, et encourage l’utilisation de modèles sécurisés. Les blueprints Azure prennent en charge cette mesure de sécurité, en détectant l’inclusion de l’un ou l’autre paramètre sécurisé dans un _artefact_ de modèle ARM. Lors de l’affectation, le service invite alors à entrer les propriétés de coffre de clés suivantes pour chaque paramètre sécurisé détecté :
 
 - ID de ressource Key Vault
 - Nom du secret Key Vault
@@ -55,17 +55,17 @@ Une valeur de paramètre définie dans la définition d’un blueprint est appel
 
 1. Sélectionnez **Définitions de blueprint** dans la page de gauche.
 
-1. Cliquez sur un blueprint existant puis sur **Modifier le blueprint** OU cliquez sur **+ Créer un blueprint** et renseignez les informations sous l’onglet **De base**.
+1. Sélectionnez un blueprint existant puis **Modifier le blueprint** OU sélectionnez **+ Créer un blueprint** et renseignez les informations sous l’onglet **De base**.
 
-1. Cliquez sur **Suivant : Artefacts** OU cliquez sur l’onglet **Artefacts**.
+1. Sélectionnez **Suivant : Artefacts** OU sélectionnez l’onglet **Artefacts**.
 
-1. Les artefacts ajoutés au blueprint ayant des options de paramètre comportent la mention **X paramètres renseignés sur Y** dans la colonne **Paramètres**. Cliquez sur la ligne de l’artefact pour modifier ses paramètres.
+1. Les artefacts ajoutés au blueprint ayant des options de paramètre comportent la mention **X paramètres renseignés sur Y** dans la colonne **Paramètres**. Sélectionnez la ligne de l’artefact pour modifier ses paramètres.
 
-   :::image type="content" source="../media/parameters/parameter-column.png" alt-text="Paramètres de blueprint sur une définition de blueprint" border="false":::
+   :::image type="content" source="../media/parameters/parameter-column.png" alt-text="Capture d’écran d’une définition de blueprint et du paramètre « X paramètres renseignés sur Y » en surbrillance." border="false":::
 
-1. La page **Modifier un artefact** affiche des options de valeur appropriées à l’artefact sur lequel vous avez cliqué. Chaque paramètre sur l’artefact a un titre, une zone de valeur et une case à cocher. Décochez la case pour rendre le **paramètre statique**. Dans l’exemple ci-dessous, seul _Emplacement_ est un **paramètre statique**, car la case est décochée, tandis que la case _Nom du groupe de ressources_ est cochée.
+1. La page **Modifier un artefact** affiche des options de valeur appropriées à l’artefact sélectionné. Chaque paramètre sur l’artefact a un titre, une zone de valeur et une case à cocher. Décochez la case pour rendre le **paramètre statique**. Dans l’exemple ci-dessous, seul _Emplacement_ est un **paramètre statique**, car la case est décochée, tandis que la case _Nom du groupe de ressources_ est cochée.
 
-   :::image type="content" source="../media/parameters/static-parameter.png" alt-text="Paramètres statiques de blueprint sur un artefact de blueprint" border="false":::
+   :::image type="content" source="../media/parameters/static-parameter.png" alt-text="Capture d’écran d’une définition de blueprint et du paramètre « X paramètres renseignés sur Y » en surbrillance." border="false":::
 
 #### <a name="setting-static-parameters-from-rest-api"></a>Définition des paramètres statiques à partir de l’API REST
 
@@ -172,15 +172,15 @@ Un **paramètre dynamique** est l’inverse d’un paramètre statique. Ce param
 
 1. Sélectionnez **Définitions de blueprint** dans la page de gauche.
 
-1. Cliquez avec le bouton droit sur le blueprint que vous souhaitez affecter. Sélectionnez **Affecter le blueprint** OU cliquez sur le blueprint que vous souhaitez affecter, puis sur le bouton **Affecter le blueprint**.
+1. Cliquez avec le bouton droit sur le blueprint que vous souhaitez affecter. Sélectionnez **Affecter le blueprint** OU sélectionnez le blueprint que vous souhaitez attribuer, puis utilisez le bouton **Affecter le blueprint**.
 
 1. Sur la page **Affecter le blueprint**, recherchez la section **Paramètres d’artefact**. Chaque artefact contenant au moins un **paramètre dynamique** présente l’artefact et les options de configuration. Indiquez les valeurs requises pour les paramètres avant d’affecter le blueprint. Dans l’exemple ci-dessous, _Name_ est un **paramètre dynamique** qui doit être défini pour terminer l’affectation du blueprint.
 
-   :::image type="content" source="../media/parameters/dynamic-parameter.png" alt-text="Paramètre dynamique de blueprint pendant l'affectation de blueprint" border="false":::
+   :::image type="content" source="../media/parameters/dynamic-parameter.png" alt-text="Capture d’écran d’une définition de blueprint et du paramètre « X paramètres renseignés sur Y » en surbrillance." border="false":::
 
 #### <a name="setting-dynamic-parameters-from-rest-api"></a>Définition des paramètres dynamiques à partir de l’API REST
 
-La définition des **paramètres dynamiques** pendant l’affectation s’effectue en entrant directement la valeur. Au lieu d’utiliser une fonction, telle que [parameters()](../reference/blueprint-functions.md#parameters), la valeur fournie est une chaîne appropriée. Les artefacts pour un groupe de ressources sont définis avec un « nom de modèle » ainsi que des propriétés de **nom** et d’**emplacement**. Tous les autres paramètres pour l’artefact inclus sont définis sous **Paramètres** avec une paire de clés **\<nom\>** et **valeur**. Si le blueprint est configuré pour un paramètre dynamique qui n’est pas fourni lors de l’affectation, celle-ci échoue.
+La définition des **paramètres dynamiques** pendant l’affectation s’effectue en entrant directement la valeur. Au lieu d’utiliser une fonction, telle que [parameters()](../reference/blueprint-functions.md#parameters), la valeur fournie est une chaîne appropriée. Les artefacts pour un groupe de ressources sont définis avec un « nom de modèle » ainsi que des propriétés de **nom** et d’**emplacement**. Tous les autres paramètres de l’artefact inclus sont définis sous **Paramètres** avec une paire de clés **\<name\>** et **value**. Si le blueprint est configuré pour un paramètre dynamique qui n’est pas fourni lors de l’affectation, celle-ci échoue.
 
 - URI de l’API REST
 
@@ -234,8 +234,8 @@ La définition des **paramètres dynamiques** pendant l’affectation s’effect
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Affichez la liste des [fonctions de blueprint](../reference/blueprint-functions.md).
-- En savoir plus sur le [cycle de vie des blueprints](lifecycle.md)
-- Apprendre à personnaliser l’[ordre de séquencement des blueprints](sequencing-order.md).
-- Découvrir comment utiliser le [verrouillage de ressources de blueprint](resource-locking.md).
+- En savoir plus sur le [cycle de vie des blueprints](./lifecycle.md)
+- Apprendre à personnaliser l’[ordre de séquencement des blueprints](./sequencing-order.md).
+- Découvrir comment utiliser le [verrouillage de ressources de blueprint](./resource-locking.md).
 - Découvrir comment [mettre à jour des affectations existantes](../how-to/update-existing-assignments.md).
 - Résoudre les problèmes durant l’affectation d’un blueprint en suivant les étapes de [dépannage général](../troubleshoot/general.md).

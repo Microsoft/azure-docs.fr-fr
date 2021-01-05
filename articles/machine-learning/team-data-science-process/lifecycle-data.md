@@ -8,15 +8,15 @@ editor: marktab
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 11/17/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 3c299e9ec42d63812804b5ff7e50324a2de94200
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fffb52e333bea1b2be11b127a9eab6656dc1d1f5
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720501"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94740326"
 ---
 # <a name="data-acquisition-and-understanding-stage-of-the-team-data-science-process"></a>Acquisition de données et phase de présentation du processus Team Data science Process
 
@@ -48,14 +48,12 @@ Trois tâches principales sont traitées dans cette phase :
 Configurez le processus permettant de déplacer les données des emplacements sources vers les emplacements cibles où vous devez exécuter les opérations d’analyse telles que l’apprentissage et les prédictions. Pour connaître les détails techniques et les options relatifs au déplacement des données avec plusieurs services de données Azure, consultez [Charger des données dans des environnements de stockage à des fins d’analyse](ingest-data.md). 
 
 ### <a name="explore-the-data"></a>Exploration des données
-Avant de former vos modèles, vous devez développer une parfaite compréhension des données. Les jeux de données réels sont souvent parasités, ne contiennent pas certaines valeurs ou comportent une multitude d’autres anomalies. Vous pouvez utiliser la visualisation et la synthèse des données pour auditer la qualité de vos données et fournir les informations nécessaires pour traiter les données en vue de leur modélisation. Ce processus est souvent itératif.
-
-Le processus TDSP fournit un utilitaire automatisé appelé [IDEAR](https://github.com/Azure/Azure-TDSP-Utilities/blob/master/DataScienceUtilities/DataReport-Utils), qui aide à visualiser les données et à préparer des rapports de synthèse de données. Nous vous recommandons de commencer par IDEAR pour explorer les données afin de développer une compréhension initiale des données de manière interactive sans codage. Vous pouvez ensuite écrire du code personnalisé pour l’exploration et la visualisation des données. Pour obtenir de l’aide sur le nettoyage des données, consultez [Tâches de préparation des données pour l’apprentissage automatique amélioré](prepare-data.md).  
+Avant de former vos modèles, vous devez développer une parfaite compréhension des données. Les jeux de données réels sont souvent parasités, ne contiennent pas certaines valeurs ou comportent une multitude d’autres anomalies. Vous pouvez utiliser la visualisation et la synthèse des données pour auditer la qualité de vos données et fournir les informations nécessaires pour traiter les données en vue de leur modélisation. Ce processus est souvent itératif. Pour obtenir de l’aide sur le nettoyage des données, consultez [Tâches de préparation des données pour l’apprentissage automatique amélioré](prepare-data.md).  
 
 Une fois que vous êtes satisfait de la qualité des données nettoyées, l’étape suivante consiste à mieux comprendre les modèles inhérents aux données. Cette analyse des données vous permet de choisir et de développer un modèle prédictif approprié pour votre cible. Recherchez la preuve indiquant à quel point les données sont bien appropriées à la cible. Déterminez ensuite s’il existe des données suffisantes pour passer aux étapes de modélisation suivantes. Là encore, ce processus est souvent itératif. Vous devrez peut-être rechercher de nouvelles sources de données avec des données plus précises ou mieux appropriées pour compléter le jeu de données identifié au cours de la phase précédente. 
 
 ### <a name="set-up-a-data-pipeline"></a>Configurer un pipeline de données
-Outre l’ingestion et le nettoyage initiaux des données, vous devez généralement définir un processus pour noter les nouvelles données ou actualiser les données régulièrement dans le cadre d’un processus de formation continue. Le scoring peut être réalisé avec un pipeline de données ou un workflow. L’article [Déplacement de données à partir d’un serveur SQL local vers Azure SQL Database avec Azure Data Factory](move-sql-azure-adf.md) contient un exemple de configuration d’un pipeline avec [Azure Data Factory](https://azure.microsoft.com/services/data-factory/). 
+Outre l’ingestion et le nettoyage initiaux des données, vous devez généralement définir un processus pour noter les nouvelles données ou actualiser les données régulièrement dans le cadre d’un processus de formation continue. Le scoring peut être réalisé avec un pipeline de données ou un workflow. L’article [Déplacer des données d'une instance SQL Server vers Azure SQL Database avec Azure Data Factory](move-sql-azure-adf.md) contient un exemple de configuration de pipeline avec [Azure Data Factory](https://azure.microsoft.com/services/data-factory/). 
 
 Dans cette étape, vous développez une architecture de la solution du pipeline de données. Vous développez le pipeline parallèlement à l’étape suivante du projet de science des données. Selon les besoins de votre entreprise et les contraintes de vos systèmes existants auxquels cette solution est en cours d’intégration, le pipeline peut être l’une des options suivantes : 
 
@@ -66,7 +64,7 @@ Dans cette étape, vous développez une architecture de la solution du pipeline 
 ## <a name="artifacts"></a>Artefacts
 Voici les livrables de cette phase :
 
-   * [Rapport de qualité des données](https://github.com/Azure/Azure-TDSP-ProjectTemplate/blob/master/Docs/Data_Report/DataSummaryReport.md) : ce rapport contient des synthèses de données, les relations entre chaque attribut et cible, le classement des variables, etc. L’outil [IDEAR](https://github.com/Azure/Azure-TDSP-Utilities/blob/master/DataScienceUtilities/DataReport-Utils) fourni dans le cadre du processus TDSP permet de générer rapidement ce rapport sur n’importe quel jeu de données tabulaire tel qu’un fichier CSV ou une table relationnelle. 
+   * [Rapport de qualité des données](https://github.com/Azure/Azure-TDSP-ProjectTemplate/blob/master/Docs/Data_Report/DataSummaryReport.md) : ce rapport contient des synthèses de données, les relations entre chaque attribut et cible, le classement des variables, etc. 
    * **Architecture de la solution** : il peut s’agir d’un diagramme ou d’une description de votre pipeline de données que vous utilisez pour exécuter une évaluation ou des prédictions sur de nouvelles données une fois que vous avez créé un modèle. Elle contient également le pipeline avec lequel former le modèle en fonction des nouvelles données. Stockez le document dans le répertoire [Project](https://github.com/Azure/Azure-TDSP-ProjectTemplate/tree/master/Docs/Project) quand vous utilisez le modèle de structure de répertoire TDSP.
    * **Décision de point de contrôle** : avant de procéder à l’ingénierie des caractéristiques et à la modélisation complètes, vous pouvez réévaluer le projet afin de déterminer si cela vaut la peine de le poursuivre. Vous pouvez, par exemple, être en mesure de continuer, avoir besoin de collecter des données supplémentaires ou abandonner le projet s’il n’existe pas de données permettant de répondre à la question.
 
@@ -82,4 +80,4 @@ Voici les liens vers chaque étape du cycle de vie TDSP :
 
 Nous fournissons des procédures pas à pas complètes qui illustrent toutes les étapes du processus correspondant à des scénarios spécifiques. L’article [Example walkthroughs](walkthroughs.md) (Exemples de procédures pas à pas) contient une liste des scénarios ainsi que des liens et des descriptions de miniatures. Les procédures pas à pas montrent comment combiner les outils et services dans le cloud et sur site dans un flux de travail ou un pipeline pour créer une application intelligente. 
 
-Pour obtenir des exemples sur l’exécution de procédures dans les processus TDSP utilisant Azure Machine Learning Studio, consultez [Utilisation du processus de science des données avec Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/lifecycle-data).
+Pour obtenir des exemples sur l’exécution de procédures dans les processus TDSP utilisant Azure Machine Learning Studio, consultez [Utilisation du processus de science des données avec Azure Machine Learning]().

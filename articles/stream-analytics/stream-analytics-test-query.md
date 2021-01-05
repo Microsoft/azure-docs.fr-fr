@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/6/2020
 ms.custom: seodec18
-ms.openlocfilehash: de2b99666dbed4eaec3db3e56800e9a7352e10e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8e08c4c34495b58c105560dba9d818be9ebf5e34
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898381"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94490965"
 ---
 # <a name="test-an-azure-stream-analytics-job-in-the-portal"></a>Tester une tâche Azure Stream Analytics sur le portail
 
@@ -79,11 +79,11 @@ Au lieu d’utiliser des données actives, vous pouvez utiliser des exemples de 
 
 4. Pour tester votre requête avec un fichier local, sélectionnez **Charger un exemple d’entrée** dans l’onglet **Aperçu d’entrée**. 
 
-   ![Charger un exemple de fichier Azure Stream Analytics](./media/stream-analytics-test-query/asa-upload-sample-file.png)
+   ![Capture d’écran montrant l’option Charger un exemple d’entrée.](./media/stream-analytics-test-query/asa-upload-sample-file.png)
 
 5. Chargez votre fichier local pour tester la requête. Vous pouvez uniquement charger des fichiers au format JSON, CSV ou AVRO. Sélectionnez **OK**.
 
-   ![Charger un exemple de fichier Azure Stream Analytics](./media/stream-analytics-test-query/asa-upload-sample-json-file.png)
+   ![Capture d’écran montrant la boîte de dialogue Charger un exemple de données dans laquelle vous pouvez sélectionner un fichier.](./media/stream-analytics-test-query/asa-upload-sample-json-file.png)
 
 6. Dès que vous chargez le fichier, vous pouvez également voir le contenu du fichier sous la forme d’un tableau ou au format brut. Si vous sélectionnez **Réinitialiser**, les exemples de données retournent vers les données d’entrée entrantes expliquées dans la section précédente. Vous pouvez charger n’importe quel autre fichier pour tester la requête à tout moment.
 
@@ -97,10 +97,39 @@ Au lieu d’utiliser des données actives, vous pouvez utiliser des exemples de 
 
 10. Après avoir vérifié les résultats affichés dans le navigateur, vous pouvez **Démarrer** le travail.
 
-## <a name="next-steps"></a>Étapes suivantes
-* [Créer une solution IoT à l'aide de Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-build-an-iot-solution-using-stream-analytics) : ce tutoriel vous aidera à créer une solution de bout en bout avec un générateur de données qui simulera le trafic à un poste de péage.
+## <a name="limitations"></a>Limites
 
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
+1.  La stratégie de temps n’est pas prise en charge dans le test du portail :
+
+    * Désordre : tous les événements entrants seront classés.
+    * Arrivée tardive : il n’y aura pas d’événement d’arrivée tardive puisque Stream Analytics ne peut utiliser que des données existantes pour le test.
+   
+2.  Une fonction définie par l’utilisateur en C# n’est pas prise en charge.
+
+3.  Tous les tests sont exécutés avec un travail disposant d’une seule unité de streaming.
+
+4.  La durée du délai d’expiration est d’une minute. Par conséquent, toute requête avec une taille de fenêtre supérieure à une minute ne peut obtenir aucune donnée.
+
+5.  Le machine learning n’est pas pris en charge.
+
+6. L’exemple d’API de données est limité après cinq requêtes exécutées dans une fenêtre de 15 minutes. À l’issue de la fenêtre de 15 minutes, vous pouvez exécuter d’autres exemples de requêtes de données. Cette limitation s’applique au niveau de l’abonnement.
+
+## <a name="troubleshooting"></a>Dépannage
+
+1.  Si vous recevez l’erreur : « Un problème de connectivité réseau s’est produit lors de l’extraction des résultats. Vérifiez les paramètres de votre réseau et de votre pare-feu. », suivez les étapes ci-dessous :
+
+  * Pour vérifier la connexion au service, ouvrez [https://queryruntime.azurestreamanalytics.com/api/home/index](https://queryruntime.azurestreamanalytics.com/api/home/index) dans un navigateur. Si vous ne pouvez pas ouvrir ce lien, mettez à jour les paramètres de votre pare-feu.
+  
+2. Si vous recevez l’erreur : « La taille de la requête est trop grande. Réduisez la taille des données d’entrée, puis réessayez. », suivez les étapes ci-dessous :
+
+  * Réduisez la taille d’entrée : Testez votre requête avec un exemple de fichier de taille inférieure ou sur un intervalle de temps plus court.
+  * Réduisez la taille de la requête : Pour tester une sélection de la requête, sélectionnez-en une partie, puis cliquez sur **Tester la requête sélectionnée**.
+
+
+## <a name="next-steps"></a>Étapes suivantes
+* [Créer une solution IoT à l'aide de Stream Analytics](./stream-analytics-build-an-iot-solution-using-stream-analytics.md) : ce tutoriel vous aidera à créer une solution de bout en bout avec un générateur de données qui simulera le trafic à un poste de péage.
+
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
 
 * [Exemples de requête pour les modes d’utilisation courants dans Stream Analytics](stream-analytics-stream-analytics-query-patterns.md)
 

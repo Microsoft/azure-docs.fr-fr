@@ -8,27 +8,26 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 10/02/2019
 ms.author: robinsh
-ms.openlocfilehash: 2a0394e6e7c17e0a4954bbdddb1d5b2811959746
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8e7a725b78fa828ce1286e212ee7de0205968156
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371577"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92536077"
 ---
 # <a name="import-and-export-iot-hub-device-identities-in-bulk"></a>Importer et exporter des identités d’appareil IoT Hub en bloc
 
 Chaque IoT Hub a un registre des identités que vous pouvez utiliser pour créer des ressources par appareil dans le service. Le registre des identités vous permet également de contrôler l’accès aux points de terminaison orientés appareil. Cet article explique comment importer et exporter les identités des appareils en bloc vers et à partir d’un registre des identités. Pour voir un exemple fonctionnel en C# et découvrir comment utiliser cette fonctionnalité lors du clonage d’un hub dans une autre région, voir [Guide pratique pour cloner un hub IoT](iot-hub-how-to-clone.md).
 
 > [!NOTE]
-> IoT Hub a récemment ajouté la prise en charge des réseaux virtuels dans un nombre limité de régions. Cette fonctionnalité sécurise les opérations d’importation et d’exportation et élimine la nécessité de passer des clés pour l’authentification.  Initialement, la prise en charge des réseaux virtuels est disponible uniquement dans les régions suivantes : *WestUS2*, *EastUS* et *SouthCentralUS*. Pour en savoir plus sur la prise en charge des réseaux virtuels et sur les appels d’API pour l’implémenter, consultez [Prise en charge des réseaux virtuels par IoT Hub](virtual-network-support.md).
+> IoT Hub a récemment ajouté la prise en charge des réseaux virtuels dans un nombre limité de régions. Cette fonctionnalité sécurise les opérations d’importation et d’exportation et élimine la nécessité de passer des clés pour l’authentification.  Initialement, la prise en charge des réseaux virtuels est disponible uniquement dans les régions suivantes : *WestUS2* , *EastUS* et *SouthCentralUS* . Pour en savoir plus sur la prise en charge des réseaux virtuels et sur les appels d’API pour l’implémenter, consultez [Prise en charge des réseaux virtuels par IoT Hub](virtual-network-support.md).
 
 Les opérations d’importation et d’exportation se déroulent dans le cadre de *Tâches* , qui vous permettent d’exécuter des opérations de service en bloc par rapport à un IoT Hub.
 
-La classe **RegistryManager** comprend les méthodes **ExportDevicesAsync** et **ImportDevicesAsync**, qui utilisent l’infrastructure des **tâches**. Ces méthodes vous permettent d’exporter, d’importer et de synchroniser l’intégralité d’un registre des identités IoT hub.
+La classe **RegistryManager** comprend les méthodes **ExportDevicesAsync** et **ImportDevicesAsync** , qui utilisent l’infrastructure des **tâches** . Ces méthodes vous permettent d’exporter, d’importer et de synchroniser l’intégralité d’un registre des identités IoT hub.
 
-Cette rubrique décrit l’utilisation de la classe **RegistryManager** et du système de **tâches** pour effectuer des importations et exportations en bloc d’appareils vers et depuis le registre des identités d’un hub IoT. Vous pouvez également utiliser le service de d’approvisionnement des appareils IoT Hub pour activer l’approvisionnement sans contact et juste-à-temps vers un ou plusieurs hubs IoT sans qu’une intervention humaine soit nécessaire. Pour plus d’informations, consultez la [documentation relative au service d’approvisionnement](/azure/iot-dps).
-
-[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
+Cette rubrique décrit l’utilisation de la classe **RegistryManager** et du système de **tâches** pour effectuer des importations et exportations en bloc d’appareils vers et depuis le registre des identités d’un hub IoT. Vous pouvez également utiliser le service de d’approvisionnement des appareils IoT Hub pour activer l’approvisionnement sans contact et juste-à-temps vers un ou plusieurs hubs IoT sans qu’une intervention humaine soit nécessaire. Pour plus d’informations, consultez la [documentation relative au service d’approvisionnement](../iot-dps/index.yml).
 
 ## <a name="what-are-jobs"></a>Que sont les tâches ?
 
@@ -38,7 +37,7 @@ Les opérations de registre des identités utilisent le système de **tâches** 
 
 * renvoie une grande quantité de données à l’utilisateur.
 
-Au lieu d’avoir un seul appel d’API en attente ou qui se bloque sur le résultat de l’opération, l’opération crée de façon asynchrone un **travail** pour cet IoT Hub. L’opération renvoie alors immédiatement un objet **JobProperties**.
+Au lieu d’avoir un seul appel d’API en attente ou qui se bloque sur le résultat de l’opération, l’opération crée de façon asynchrone un **travail** pour cet IoT Hub. L’opération renvoie alors immédiatement un objet **JobProperties** .
 
 L’extrait de code C# suivant indique comment créer une tâche d’exportation :
 
@@ -49,9 +48,9 @@ JobProperties exportJob = await
 ```
 
 > [!NOTE]
-> Pour utiliser la classe **RegistryManager** dans votre code C#, ajoutez le package NuGet **Microsoft.Azure.Devices** à votre projet. La classe **RegistryManager** se trouve dans l’espace de noms **Microsoft.Azure.Devices**.
+> Pour utiliser la classe **RegistryManager** dans votre code C#, ajoutez le package NuGet **Microsoft.Azure.Devices** à votre projet. La classe **RegistryManager** se trouve dans l’espace de noms **Microsoft.Azure.Devices** .
 
-Vous pouvez utiliser la classe **RegistryManager** pour interroger l’état de la **tâche** à l’aide des métadonnées **JobProperties** retournées. Pour créer une instance de la classe **RegistryManager**, utilisez la méthode **CreateFromConnectionString**.
+Vous pouvez utiliser la classe **RegistryManager** pour interroger l’état de la **tâche** à l’aide des métadonnées **JobProperties** retournées. Pour créer une instance de la classe **RegistryManager** , utilisez la méthode **CreateFromConnectionString** .
 
 ```csharp
 RegistryManager registryManager =
@@ -62,7 +61,7 @@ Pour obtenir la chaîne de connexion de votre IoT Hub dans le portail Azure :
 
 - Accédez à votre hub IoT.
 
-- Sélectionnez **Stratégies d’accès partagé**.
+- Sélectionnez **Stratégies d’accès partagé** .
 
 - Sélectionnez une stratégie en tenant compte des autorisations requises.
 
@@ -110,7 +109,7 @@ La méthode **ExportDevicesAsync** requiert deux paramètres :
      | SharedAccessBlobPermissions.Delete
    ```
 
-* Un *booléen* qui indique si vous souhaitez exclure les clés d’authentification de vos données d’exportation. Si la valeur est **false**, des clés d’authentification sont incluses dans la sortie d’exportation. Dans le cas contraire, les clés sont exportées sous forme de valeur **null**.
+* Un *booléen* qui indique si vous souhaitez exclure les clés d’authentification de vos données d’exportation. Si la valeur est **false** , des clés d’authentification sont incluses dans la sortie d’exportation. Dans le cas contraire, les clés sont exportées sous forme de valeur **null** .
 
 L’extrait de code C# suivant montre comment lancer une tâche d’exportation qui inclut des clés d’authentification de l’appareil dans les données d’exportation, puis comment interroger l’exécution :
 
@@ -135,7 +134,7 @@ while(true)
 }
 ```
 
-La tâche stocke sa sortie dans le conteneur d’objets blob fourni en tant qu’objet blob de blocs portant le nom **devices.txt**. Les données de sortie consistent en des données d’appareil JSON sérialisées, avec un appareil par ligne.
+La tâche stocke sa sortie dans le conteneur d’objets blob fourni en tant qu’objet blob de blocs portant le nom **devices.txt** . Les données de sortie consistent en des données d’appareil JSON sérialisées, avec un appareil par ligne.
 
 L’exemple ci-après illustre les données de sortie :
 
@@ -212,22 +211,22 @@ using (var streamReader = new StreamReader(await blob.OpenReadAsync(AccessCondit
 
 ## <a name="import-devices"></a>Importer des appareils
 
-La méthode **ImportDevicesAsync** de la classe **RegistryManager** vous permet d’effectuer des opérations d’importation et de synchronisation en bloc dans un registre des identités IoT Hub. À la manière de la méthode **ExportDevicesAsync**, la méthode **ImportDevicesAsync** utilise l’infrastructure de **Tâches**.
+La méthode **ImportDevicesAsync** de la classe **RegistryManager** vous permet d’effectuer des opérations d’importation et de synchronisation en bloc dans un registre des identités IoT Hub. À la manière de la méthode **ExportDevicesAsync** , la méthode **ImportDevicesAsync** utilise l’infrastructure de **Tâches** .
 
-Faites attention lors de l’utilisation de la méthode **ImportDevicesAsync**. Celle-ci peut, en plus d’approvisionner de nouveaux appareils dans le registre des identités, mettre à jour et supprimer des appareils existants.
+Faites attention lors de l’utilisation de la méthode **ImportDevicesAsync** . Celle-ci peut, en plus d’approvisionner de nouveaux appareils dans le registre des identités, mettre à jour et supprimer des appareils existants.
 
 > [!WARNING]
-> Il est impossible d’annuler une opération d’importation. Sauvegardez toujours vos données existantes vers un autre conteneur d’objets blob, à l’aide de la méthode **ExportDevicesAsync**, avant de faire des modifications en bloc dans le registre des identités.
+> Il est impossible d’annuler une opération d’importation. Sauvegardez toujours vos données existantes vers un autre conteneur d’objets blob, à l’aide de la méthode **ExportDevicesAsync** , avant de faire des modifications en bloc dans le registre des identités.
 
 La méthode **ImportDevicesAsync** requiert deux paramètres :
 
-* Une *chaîne* qui contient l’URI d’un conteneur d’objets blob [Azure Storage](../storage/index.yml) à utiliser comme *entrée* de la tâche. Cet URI doit contenir un jeton SAP qui accorde l’accès en lecture au conteneur. Ce conteneur doit inclure un objet blob du nom de **devices.txt** contenant les données d’appareil sérialisées pour importation dans le registre des identités. Les données d’importation doivent contenir des informations sur l’appareil au même format JSON que celui utilisé par la tâche **ExportImportDevice** lors de la création d’un objet blob **devices.txt**. Le jeton SAP doit inclure ces autorisations :
+* Une *chaîne* qui contient l’URI d’un conteneur d’objets blob [Azure Storage](../storage/index.yml) à utiliser comme *entrée* de la tâche. Cet URI doit contenir un jeton SAP qui accorde l’accès en lecture au conteneur. Ce conteneur doit inclure un objet blob du nom de **devices.txt** contenant les données d’appareil sérialisées pour importation dans le registre des identités. Les données d’importation doivent contenir des informations sur l’appareil au même format JSON que celui utilisé par la tâche **ExportImportDevice** lors de la création d’un objet blob **devices.txt** . Le jeton SAP doit inclure ces autorisations :
 
    ```csharp
    SharedAccessBlobPermissions.Read
    ```
 
-* Une *chaîne* qui contient l’URI d’un conteneur d’objets blob [Azure Storage](https://azure.microsoft.com/documentation/services/storage/) à utiliser comme *sortie* de la tâche. La tâche crée un objet blob de blocs dans ce conteneur pour stocker toute information d’erreur à partir de la **tâche**d’importation terminée. Le jeton SAP doit inclure ces autorisations :
+* Une *chaîne* qui contient l’URI d’un conteneur d’objets blob [Azure Storage](https://azure.microsoft.com/documentation/services/storage/) à utiliser comme *sortie* de la tâche. La tâche crée un objet blob de blocs dans ce conteneur pour stocker toute information d’erreur à partir de la **tâche** d’importation terminée. Le jeton SAP doit inclure ces autorisations :
 
    ```csharp
    SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.Read 
@@ -244,7 +243,7 @@ JobProperties importJob =
    await registryManager.ImportDevicesAsync(containerSasUri, containerSasUri);
 ```
 
-Cette méthode peut également être utilisée pour importer les données pour la représentation de l’appareil. Le format des données d’entrée est le même que celui indiqué dans la section **ExportDevicesAsync**. De cette façon, vous pouvez réimporter les données exportées. Le **$metadata** est facultatif.
+Cette méthode peut également être utilisée pour importer les données pour la représentation de l’appareil. Le format des données d’entrée est le même que celui indiqué dans la section **ExportDevicesAsync** . De cette façon, vous pouvez réimporter les données exportées. Le **$metadata** est facultatif.
 
 ## <a name="import-behavior"></a>Comportement d’importation
 
@@ -265,12 +264,12 @@ Vous pouvez contrôler le processus d’importation par appareil en utilisant la
 
 | importMode | Description |
 | --- | --- |
-| **createOrUpdate** |Si un appareil n’existe pas avec l’ **ID**spécifié, ce dernier a été inscrit récemment. <br/>Si l’appareil existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, sans tenir compte de la valeur **ETag** . <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
-| **create** |Si un appareil n’existe pas avec l’ **ID**spécifié, ce dernier a été inscrit récemment. <br/>Si l’appareil existe déjà, une erreur est consignée dans le fichier journal. <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
-| **update** |Si un appareil avec **l’ID** spécifié existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, sans tenir compte de la valeur **ETag**. <br/>Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. |
+| **createOrUpdate** |Si un appareil n’existe pas avec l’ **ID** spécifié, ce dernier a été inscrit récemment. <br/>Si l’appareil existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, sans tenir compte de la valeur **ETag** . <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
+| **create** |Si un appareil n’existe pas avec l’ **ID** spécifié, ce dernier a été inscrit récemment. <br/>Si l’appareil existe déjà, une erreur est consignée dans le fichier journal. <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
+| **update** |Si un appareil avec **l’ID** spécifié existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, sans tenir compte de la valeur **ETag** . <br/>Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. |
 | **updateIfMatchETag** |Si un appareil avec **l’ID** spécifié existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, mais uniquement si la valeur **ETag** correspond. <br/>Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. <br/>En cas d’incompatibilité de valeur **ETag** , une erreur est consignée dans le fichier journal. |
-| **createOrUpdateIfMatchETag** |Si un appareil n’existe pas avec l’ **ID**spécifié, ce dernier a été inscrit récemment. <br/>Si un appareil existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, mais uniquement si la valeur **ETag** correspond. <br/>En cas d’incompatibilité de valeur **ETag** , une erreur est consignée dans le fichier journal. <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
-| **delete** |Si un appareil avec **l’ID** spécifié existe déjà, il est supprimé sans tenir compte de la valeur **ETag**. <br/>Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. |
+| **createOrUpdateIfMatchETag** |Si un appareil n’existe pas avec l’ **ID** spécifié, ce dernier a été inscrit récemment. <br/>Si un appareil existe déjà, les informations existantes sont remplacées par les données d’entrée fournies, mais uniquement si la valeur **ETag** correspond. <br/>En cas d’incompatibilité de valeur **ETag** , une erreur est consignée dans le fichier journal. <br> L’utilisateur peut éventuellement spécifier des données de représentation avec les données de l’appareil. L’etag de la représentation, si elle est spécifiée, est traitée indépendamment de l’etag de l’appareil. S’il existe une incompatibilité avec l’etag existant de la représentation, une erreur est consignée dans le fichier journal. |
+| **delete** |Si un appareil avec **l’ID** spécifié existe déjà, il est supprimé sans tenir compte de la valeur **ETag** . <br/>Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. |
 | **deleteIfMatchETag** |Si un appareil avec **l’ID** spécifié existe déjà, il est supprimé, mais uniquement si la valeur **ETag** correspond. Si l’appareil n’existe pas, une erreur est consignée dans le fichier journal. <br/>En cas d’incompatibilité de valeur ETag, une erreur est consignée dans le fichier journal. |
 
 > [!NOTE]
@@ -400,7 +399,7 @@ while(true)
 
 ## <a name="get-the-container-sas-uri"></a>Obtenir l’URI SAS du conteneur
 
-L’exemple de code suivant montre comment générer un [URI de SAP](../storage/common/storage-dotnet-shared-access-signature-part-1.md) avec des autorisations de lecture, d’écriture et de suppression pour un conteneur d’objets blob :
+L’exemple de code suivant montre comment générer un [URI de SAP](../storage/common/storage-sas-overview.md) avec des autorisations de lecture, d’écriture et de suppression pour un conteneur d’objets blob :
 
 ```csharp
 static string GetContainerSasUri(CloudBlobContainer container)
@@ -433,14 +432,13 @@ L’article sur le clonage comporte un exemple fonctionnel, qui se trouve dans l
 
 Pour plus d’informations sur la gestion d’Azure IoT Hub, voir les articles suivants :
 
-* [Métriques d’IoT Hub](iot-hub-metrics.md)
-* [Journaux d’activités IoT Hub](iot-hub-monitor-resource-health.md)
+* [Superviser avec IoT Hub](monitor-iot-hub.md)
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
 * [Guide du développeur d’IoT Hub](iot-hub-devguide.md)
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)
 
 Pour savoir comment utiliser le service d’approvisionnement des appareils IoT Hub afin d’activer l’approvisionnement sans contact et juste-à-temps, consultez : 
 
-* [Service Azure IoT Hub Device Provisioning](/azure/iot-dps)
+* [Service Azure IoT Hub Device Provisioning](../iot-dps/index.yml)

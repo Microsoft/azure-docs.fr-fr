@@ -6,14 +6,14 @@ ms.author: rodrigoa
 ms.service: stream-analytics
 ms.topic: tutorial
 ms.reviewer: mamccrea
-ms.custom: mvc
-ms.date: 03/23/2020
-ms.openlocfilehash: 58d750b47f3f6a2bcfbf23399ca249131e7876ae
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.custom: mvc, devx-track-js
+ms.date: 12/15/2020
+ms.openlocfilehash: 085ac8c2ca7cfafcf0e40152458acf68dd847937
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80235383"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97605528"
 ---
 # <a name="javascript-user-defined-functions-in-azure-stream-analytics"></a>Fonctions JavaScript définies par l’utilisateur dans Azure Stream Analytics
  
@@ -55,7 +55,7 @@ Vous devez ensuite fournir les propriétés suivantes et sélectionner **Enregis
 
 ## <a name="test-and-troubleshoot-javascript-udfs"></a>Tester les fonctions JavaScript définies par l’utilisateur et résoudre les problèmes les concernant 
 
-Vous pouvez tester et déboguer votre logique de fonctions UDF JavaScript dans n’importe quel navigateur. Le débogage et le test de la logique de ces fonctions définies par l’utilisateur ne sont actuellement pas pris en charge dans le portail Stream Analytics. Une fois que la fonction fonctionne comme prévu, vous pouvez l’ajouter au travail Stream Analytics comme indiqué ci-dessus, puis l’appeler directement à partir de votre requête. Vous pouvez tester la logique de votre requête avec la fonction JavaScript définie par l’utilisateur à l’aide des [outils Stream Analytics pour Visual Studio](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-tools-for-visual-studio-install).
+Vous pouvez tester et déboguer votre logique de fonctions UDF JavaScript dans n’importe quel navigateur. Le débogage et le test de la logique de ces fonctions définies par l’utilisateur ne sont actuellement pas pris en charge dans le portail Stream Analytics. Une fois que la fonction fonctionne comme prévu, vous pouvez l’ajouter au travail Stream Analytics comme indiqué ci-dessus, puis l’appeler directement à partir de votre requête. Vous pouvez tester la logique de votre requête avec la fonction JavaScript définie par l’utilisateur à l’aide des [outils Stream Analytics pour Visual Studio](./stream-analytics-tools-for-visual-studio-install.md).
 
 Les erreurs d’exécution JavaScript sont considérées comme irrécupérables et remontées par le biais du journal d’activité. Pour récupérer le journal, dans le portail Azure, accédez à votre travail et sélectionnez **Journal d’activité**.
 
@@ -132,7 +132,98 @@ FROM
     input PARTITION BY PARTITIONID
 ```
 
+### <a name="cast-string-to-json-object-to-process"></a>Convertir une chaîne en objet JSON à traiter
+
+Si vous disposez d’un champ de chaîne JSON que vous souhaitez convertir en objet JSON à des fins de traitement dans une fonction JavaScript définie par l’utilisateur, vous pouvez utiliser la fonction **JSON.parse()** pour créer un objet JSON à utiliser ensuite.
+
+**Définition de la fonction JavaScript définie par l’utilisateur :**
+
+```javascript
+function main(x) {
+var person = JSON.parse(x);  
+return person.name;
+}
+```
+
+**Exemple de requête :**
+```SQL
+SELECT
+    UDF.getName(input) AS Name
+INTO
+    output
+FROM
+    input
+```
+
+### <a name="use-trycatch-for-error-handling"></a>Utiliser try/catch pour la gestion des erreurs
+
+Les blocs try/catch vous aident à identifier les problèmes liés aux données d’entrée incorrectes transmises dans une fonction JavaScript définie par l’utilisateur.
+
+**Définition de la fonction JavaScript définie par l’utilisateur :**
+
+```javascript
+function main(input, x) {
+    var obj = null;
+
+    try{
+        obj = JSON.parse(x);
+    }catch(error){
+        throw input;
+    }
+    
+    return obj.Value;
+}
+```
+
+**Exemple de requête : Transmettez l’intégralité de l’enregistrement en tant que premier paramètre de manière à ce qu’il soit renvoyé en cas d’erreur.**
+```SQL
+SELECT
+    A.context.company AS Company,
+    udf.getValue(A, A.context.value) as Value
+INTO
+    output
+FROM
+    input A
+```
+
+### <a name="tolocalestring"></a>toLocaleString()
+La méthode **toLocaleString** en JavaScript peut être utilisée pour retourner une chaîne sensible au langage qui représente les données de date et d’heure d’où cette méthode est appelée.
+Bien qu’Azure Stream Analtyics accepte uniquement l’heure UTC comme horodatage système, cette méthode peut être utilisée pour convertir l’horodatage système en un autre paramètre régional et fuseau horaire.
+Cette méthode suit le même comportement d’implémentation que celui disponible dans Internet Explorer.
+
+**Définition de la fonction JavaScript définie par l’utilisateur :**
+
+```javascript
+function main(datetime){
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return event.toLocaleDateString('de-DE', options);
+}
+```
+
+**Exemple de requête : Passer une valeur DateTime comme valeur d’entrée**
+```SQL
+SELECT
+    udf.toLocaleString(input.datetime) as localeString
+INTO
+    output
+FROM
+    input
+```
+
+La sortie de cette requête sera la valeur DateTime d’entrée dans **de-DE** avec les options fournies.
+```
+Samstag, 28. Dezember 2019
+```
+
+## <a name="user-logging"></a>Journalisation utilisateur
+Le mécanisme de journalisation vous permet de capturer des informations personnalisées pendant l’exécution d’un travail. Vous pouvez utiliser les données de journal pour déboguer ou évaluer l’exactitude du code personnalisé en temps réel. Ce mécanisme est disponible via la méthode Console.Log().
+
+```javascript
+console.log('my error message');
+```
+
+Vous pouvez accéder aux messages du journal par le biais des [journaux de diagnostic](data-errors.md).
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Fonction définie par l’utilisateur pour le machine learning](https://docs.microsoft.com/azure/stream-analytics/machine-learning-udf)
-* [Fonction définie par l’utilisateur en C#](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-edge-csharp-udf-methods)
+* [Fonction définie par l’utilisateur pour le machine learning](./machine-learning-udf.md)
+* [C# UDF](./stream-analytics-edge-csharp-udf-methods.md)

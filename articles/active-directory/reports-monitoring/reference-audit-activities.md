@@ -17,12 +17,12 @@ ms.date: 01/24/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 86a0e0b3c64554e00a5ba7734af28dc136df643f
-ms.sourcegitcommit: df8b2c04ae4fc466b9875c7a2520da14beace222
+ms.openlocfilehash: 56f9976faf2a803e747bce8b851a3555e6d746b0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80891507"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89231144"
 ---
 # <a name="azure-ad-audit-activity-reference"></a>Référence sur l’activité d’audit Azure AD
 
@@ -35,8 +35,8 @@ L’architecture de création de rapports dans Azure AD comprend les composants 
     - [Journaux d’audit](concept-audit-logs.md) : traçabilité proposée via des journaux d’activité pour toutes les modifications effectuées par diverses fonctionnalités au sein d’Azure AD. 
     
 - **Rapports de sécurité** 
-    - [Connexions risquées](concept-risky-sign-ins.md) : une connexion risquée est une tentative de connexion susceptible de provenir d’un utilisateur autre que le propriétaire légitime d’un compte d’utilisateur. 
-    - [Utilisateurs avec indicateur de risque](concept-user-at-risk.md) : il s’agit d’un compte d’utilisateur susceptible d’être compromis. 
+    - [Connexions risquées](../identity-protection/overview-identity-protection.md) : une connexion risquée est une tentative de connexion susceptible de provenir d’un utilisateur autre que le propriétaire légitime d’un compte d’utilisateur. 
+    - [Utilisateurs avec indicateur de risque](../identity-protection/overview-identity-protection.md) : il s’agit d’un compte d’utilisateur susceptible d’être compromis. 
 
 Cet article répertorie les activités d’audit qui peuvent être enregistrées dans vos journaux d’audit.
 

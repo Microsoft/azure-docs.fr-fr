@@ -8,12 +8,12 @@ ms.devlang: powershell
 ms.topic: sample
 ms.date: 11/19/2019
 ms.author: victorh
-ms.openlocfilehash: 6cb0eafce354ba54dd161fee52efe46677ad2765
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 4158bc07373a2d0aa6fb6ceaf2dce62b50bb6bd7
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74195886"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658364"
 ---
 # <a name="create-an-azure-firewall-test-environment"></a>Créer un environnement de test pour Pare-feu Azure
 
@@ -72,12 +72,11 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 | [New-AzVMConfig](/powershell/module/az.compute/new-azvmconfig) | Crée une configuration de machine virtuelle. Cette configuration inclut des informations telles que le nom de la machine virtuelle, le système d’exploitation et les informations d’identification d’administration. La configuration est utilisée lors de la création de machines virtuelles. |
 | [New-AzVM](/powershell/module/az.compute/new-azvm) | Création d’une machine virtuelle |
 |[Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
-|[New-AzFirewall](https://docs.microsoft.com/powershell/module/az.network/new-azfirewall)| Crée un nouveau pare-feu Azure.|
-|[Get-AzFirewall](https://docs.microsoft.com/powershell/module/az.network/get-azfirewall)|Obtient un objet de pare-feu Azure.|
-|[New-AzFirewallApplicationRule](https://docs.microsoft.com/powershell/module/az.network/new-azfirewallapplicationrule)|Crée une nouvelle règle d’application de pare-feu Azure.|
-|[Set-AzFirewall](https://docs.microsoft.com/powershell/module/az.network/set-azfirewall)|Valide les modifications apportées à l’objet de pare-feu Azure.|
+|[New-AzFirewall](/powershell/module/az.network/new-azfirewall)| Crée un nouveau pare-feu Azure.|
+|[Get-AzFirewall](/powershell/module/az.network/get-azfirewall)|Obtient un objet de pare-feu Azure.|
+|[New-AzFirewallApplicationRule](/powershell/module/az.network/new-azfirewallapplicationrule)|Crée une nouvelle règle d’application de pare-feu Azure.|
+|[Set-AzFirewall](/powershell/module/az.network/set-azfirewall)|Valide les modifications apportées à l’objet de pare-feu Azure.|
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/overview).
-
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/).

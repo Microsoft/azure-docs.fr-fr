@@ -1,6 +1,6 @@
 ---
 title: Créer une applicationde carte accessible avec Azure Maps | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à créer une application avec des fonctionnalités d’accessibilité à l’aide de Microsoft Azure Maps.
+description: En savoir plus sur les considérations relatives à l’accessibilité dans Azure Maps. Découvrez les fonctionnalités disponibles pour rendre les applications cartographiques accessibles et affichez des conseils sur l’accessibilité.
 services: azure-maps
 author: rbrundritt
 ms.author: richbrun
@@ -8,12 +8,12 @@ ms.date: 12/10/2019
 ms.topic: conceptual
 ms.service: azure-maps
 manager: cpendleton
-ms.openlocfilehash: 5fa9e159fa0ac76ce8c585936059fb7f3151c7c4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec88437a0fad3a6bd94a67a5ef5c75b3e506f9e8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79473317"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88006211"
 ---
 # <a name="building-an-accessible-application"></a>Création d’une application accessible
 
@@ -28,6 +28,7 @@ Le SDK web Azure Maps comporte de nombreuses fonctionnalités d’accessibilité
 - Descriptions émises par le lecteur d’écran quand la carte se déplace et que l’utilisateur place le focus sur un contrôle ou une fenêtre indépendante.
 - Prise en charge de la souris, de l’interaction tactile et du clavier.
 - Prise en charge du contraste de couleur accessible dans le style de la carte routière.
+- Prise en charge du contraste élevé.
 
 Vous trouverez [ici](https://cloudblogs.microsoft.com/industry-blog/government/2018/09/11/accessibility-conformance-reports/) des informations complètes sur la conformité de l’accessibilité pour tous les produits Microsoft. Recherchez « Azure Maps web » pour trouver le document spécial pour le SDK web Azure Maps. 
 
@@ -45,6 +46,7 @@ Il existe plusieurs façons d’effectuer des zooms, des panoramiques, des rotat
 - Quand le focus est placé sur la carte, utilisez le signe moins, le trait d’union (`-`) ou le trait de soulignement (`_`) pour faire un zoom arrière d’un niveau.
 - Utilisez le contrôle de zoom avec une souris, une interaction tactile ou les touches Tab/Entrée du clavier.
 - Maintenez le bouton `Shift` enfoncé et appuyez sur la carte à l’aide du bouton gauche de la souris, puis faites glisser pour dessiner une zone dans laquelle faire un zoom sur la carte.
+- En utilisant des pavés tactiles multipoints, faites glisser deux doigts vers le haut pour effectuer un zoom arrière, ou vers le bas pour effectuer un zoom avant.
 
 **Effectuer un panoramique sur la carte**
 

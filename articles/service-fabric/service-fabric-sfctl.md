@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: 56efa15a7de3414f9c535e66bd80c94594cd5038
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fc317345155a6807a20d342e2cefd0701b20f180
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76906224"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86257051"
 ---
 # <a name="sfctl"></a>sfctl
 Commandes permettant de gérer les clusters et entités Service Fabric. Cette version est compatible avec le runtime Service Fabric 7.0.
@@ -40,4 +40,4 @@ Les commandes suivent le modèle nom-verbe. Pour plus d’informations, consulte
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

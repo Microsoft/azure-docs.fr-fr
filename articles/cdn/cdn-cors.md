@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 169de21b6dbdafaaeff64e315daa104f3b6faadd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f7edf790e526329dd285d03a31137a26220e52ee
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74278095"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018645"
 ---
 # <a name="using-azure-cdn-with-cors"></a>Utilisation d’Azure CDN avec CORS
 ## <a name="what-is-cors"></a>Présentation de CORS
@@ -75,14 +75,16 @@ Sur Azure CDN standard de Microsoft, vous pouvez créer une règle dans le [mote
 Sur **Azure CDN Standard fourni par Akamai**, le seul mécanisme autorisant plusieurs origines sans recourir à l’origine avec caractère générique consiste à utiliser la [mise en cache de chaîne de requête](cdn-query-string.md). Activez le paramètre de chaîne de requête pour le point de terminaison CDN, puis utilisez une chaîne de requête unique pour les demandes à partir de chaque domaine autorisé. Ainsi, le CDN met en cache un objet distinct pour chaque chaîne de requête unique. Cette approche n’est pas idéale, toutefois, car plusieurs copies du même fichier sont mises en cache sur le CDN.  
 
 ### <a name="azure-cdn-premium-from-verizon"></a>CDN Azure Premium fourni par Verizon
-À l’aide du moteur de règles Verizon Premium, vous devez [créer une règle](cdn-rules-engine.md) pour vérifier l’en-tête **Origin** dans la demande.  S’il s’agit d’une origine valide, votre règle définit l’en-tête **Access-Control-Allow-Origin** avec l’origine fournie dans la demande.  Si l’origine spécifiée dans l’en-tête **Origin** n’est pas autorisée, votre règle doit omettre l’en-tête **Access-Control-Allow-Origin**, ce qui amène le navigateur à rejeter la demande. 
+À l’aide du moteur de règles Verizon Premium, vous devez [créer une règle](./cdn-verizon-premium-rules-engine.md) pour vérifier l’en-tête **Origin** dans la demande.  S’il s’agit d’une origine valide, votre règle définit l’en-tête **Access-Control-Allow-Origin** avec l’origine fournie dans la demande.  Si l’origine spécifiée dans l’en-tête **Origin** n’est pas autorisée, votre règle doit omettre l’en-tête **Access-Control-Allow-Origin**, ce qui amène le navigateur à rejeter la demande. 
 
 Vous pouvez mettre en place cette procédure de deux façons avec le moteur de règles Premium. Dans les deux cas, l’en-tête **Access-Control-Allow-Origin** issu du serveur d’origine du fichier est ignoré et le moteur de règles du CDN gère entièrement les origines CORS autorisées.
 
 #### <a name="one-regular-expression-with-all-valid-origins"></a>Une expression régulière avec toutes les origines valides
 Dans ce cas, vous allez créer une expression régulière qui inclut toutes les origines que vous souhaitez autoriser : 
 
-    https?:\/\/(www\.contoso\.com|contoso\.com|www\.microsoft\.com|microsoft.com\.com)$
+```http
+https?:\/\/(www\.contoso\.com|contoso\.com|www\.microsoft\.com|microsoft.com\.com)$
+```
 
 > [!TIP]
 > **CDN Azure Premium fourni par Verizon** utilise [PCRE (Perl Compatible Regular Expressions)](https://pcre.org/) comme moteur pour les expressions régulières.  Vous pouvez utiliser un outil tel que [Regular Expressions 101](https://regex101.com/) pour valider votre expression régulière.  Notez que le caractère « / » est valide dans les expressions régulières et n’a pas besoin d’être échappé ; toutefois, échapper ce caractère est une pratique recommandée et attendue par certains validateurs d’expression régulière.
@@ -101,7 +103,4 @@ Au lieu de recourir à des expressions régulières, vous pouvez créer une règ
 > [!TIP]
 > Dans l’exemple ci-dessus, l’utilisation du caractère générique * indique au moteur de règles que HTTP et HTTPS satisfont tous les deux à la condition.
 > 
-> 
-
-
-
+>

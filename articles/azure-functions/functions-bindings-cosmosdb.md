@@ -1,17 +1,17 @@
 ---
 title: Liaisons Azure Cosmos DB pour Azure Functions 1.x
-description: Découvrez comment utiliser des déclencheurs et liaisons Azure Cosmos DB dans Azure Functions.
+description: Découvrez comment utiliser des déclencheurs et liaisons Azure Cosmos DB dans Azure Functions 1.x.
 author: craigshoemaker
 ms.author: cshoe
 ms.topic: reference
 ms.date: 11/21/2017
-ms.custom: seodec18
-ms.openlocfilehash: e30b256d9fa43402c3b2c444aa1a0e0dc16cfdcf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, seodec18
+ms.openlocfilehash: 524df7805207ce517c7ae805fb17de1b041a2248
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235181"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002106"
 ---
 # <a name="azure-cosmos-db-bindings-for-azure-functions-1x"></a>Liaisons Azure Cosmos DB pour Azure Functions 1.x
 
@@ -214,6 +214,8 @@ Le déclencheur n’indique pas si un document a été mis à jour ou inséré, 
 ## <a name="input"></a>Entrée
 
 La liaison d’entrée Azure Cosmos DB utilise l’API SQL pour récupérer un ou plusieurs documents Azure Cosmos DB et les transmet au paramètre d’entrée de la fonction. L’ID du document ou les paramètres de requête peuvent être déterminés en fonction du déclencheur qui appelle la fonction.
+
+## <a name="input---example"></a>Entrée - exemple
 
 # <a name="c"></a>[C#](#tab/csharp)
 
@@ -1147,6 +1149,8 @@ Les mises à jour ne sont pas effectuées automatiquement une fois la fonction t
 
 La liaison de sortie Azure Cosmos DB vous permet d’écrire un nouveau document dans une base de données Azure Cosmos DB en utilisant l’API SQL.
 
+## <a name="output---example"></a>Sortie - exemple
+
 # <a name="c"></a>[C#](#tab/csharp)
 
 Cette section contient les exemples suivants :
@@ -1477,7 +1481,7 @@ Par défaut, lorsque vous écrivez dans le paramètre de sortie de votre fonctio
 
 | Liaison | Informations de référence |
 |---|---|
-| CosmosDB | [Codes d’erreur CosmosDB](https://docs.microsoft.com/rest/api/cosmos-db/http-status-codes-for-cosmosdb) |
+| CosmosDB | [Codes d’erreur CosmosDB](/rest/api/cosmos-db/http-status-codes-for-cosmosdb) |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

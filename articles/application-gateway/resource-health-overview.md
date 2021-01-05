@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: article
 ms.date: 7/9/2019
 ms.author: victorh
-ms.openlocfilehash: db29551a8150b70e797d45fe659482470c8aca2a
-ms.sourcegitcommit: fad3aaac5af8c1b3f2ec26f75a8f06e8692c94ed
+ms.openlocfilehash: 7e30a93f8270cfaf8910130cc1e2633bb80c2b8e
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "67659423"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397170"
 ---
 # <a name="azure-application-gateway-resource-health-overview"></a>Vue d’ensemble du contrôle d’intégrité des ressources pour Azure Application Gateway
 
@@ -31,7 +31,7 @@ L’état **Disponible** signifie que le service n’a pas détecté d’événe
 
 ![État d’intégrité Disponible](media/resource-health-overview/available-full.png)
 
-## <a name="unavailable"></a>Non disponible
+## <a name="unavailable"></a>Indisponible
 
 L’état **Non disponible** signifie que le service a détecté un événement de plateforme ou hors plateforme en cours ayant un impact sur l’intégrité de la passerelle.
 
@@ -43,7 +43,7 @@ Resource Health fournit des détails supplémentaires sur l’événement et le 
 
 ![État Non disponible](media/resource-health-overview/unavailable.png)
 
-## <a name="unknown"></a>Unknown
+## <a name="unknown"></a>Inconnu
 
 L’état d’intégrité **Inconnu** indique que Resource Health n’a reçu aucune information sur cette passerelle depuis plus de 10 minutes. Cet état n’est pas une indication définitive de l’état de la passerelle. Mais c’est un point de données important dans le processus de dépannage.
 
@@ -61,4 +61,4 @@ L’état d’intégrité **Détérioré** indique que votre passerelle a détec
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur la résolution des problèmes du pare-feu d'applications web (WAF) d’Application Gateway, consultez [Résolution des problèmes de pare-feu d'applications web (WAF) pour Azure Application Gateway](web-application-firewall-troubleshoot.md).
+Pour en savoir plus sur la résolution des problèmes du pare-feu d'applications web (WAF) d’Application Gateway, consultez [Résolution des problèmes de pare-feu d'applications web (WAF) pour Azure Application Gateway](../web-application-firewall/ag/web-application-firewall-troubleshoot.md).

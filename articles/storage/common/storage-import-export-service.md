@@ -4,16 +4,16 @@ description: Découvrez comment créer des tâches d’importation et d’export
 author: alkohli
 services: storage
 ms.service: storage
-ms.topic: article
-ms.date: 03/15/2020
+ms.topic: conceptual
+ms.date: 05/06/2020
 ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: eee0fc2797fbe0666a6b848fde574c7807f47cc9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b2918c5842d6470e634518ff9c12f6f04aefc920
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80282441"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88185381"
 ---
 # <a name="what-is-azure-importexport-service"></a>Qu’est-ce que le service Azure Import/Export ?
 
@@ -38,12 +38,12 @@ Le service Azure Import/Export utilise les composants suivants :
 
 * **Service d’importation/exportation** : ce service disponible dans le portail Azure permet à l’utilisateur de créer des travaux d’importation (chargement) et d’exportation (téléchargement) de données et d’en effectuer le suivi.  
 
-* **Outil WAImportExport** : Il s’agit d’un outil en ligne de commande qui :
-  * Prépare vos lecteurs de disque qui sont expédiés pour l’importation.
-  * Facilite la copie de vos données sur le lecteur.
-  * Chiffre les données sur le lecteur avec BitLocker AES 128 bits. Vous pouvez utiliser un protecteur de clé externe pour protéger votre clé BitLocker.
-  * Génère les fichiers journaux de lecteur utilisés lors de la création de l’importation.
-  * Permet d’identifier le nombre de disques requis pour les travaux d’exportation.
+* **Outil WAImportExport** : outil en ligne de commande qui effectue les opérations suivantes :
+  * prépare vos lecteurs de disque expédiés à l’importation ;
+  * facilite la copie de vos données sur le lecteur ;
+  * Chiffre les données sur le lecteur avec BitLocker AES 256 bits. Vous pouvez utiliser un protecteur de clé externe pour protéger votre clé BitLocker.
+  * génère les fichiers journaux de lecteur utilisés lors de la création de l’importation ;
+  * permet d’identifier le nombre de disques requis pour les travaux d’exportation.
 
 > [!NOTE]
 > L’outil WAImportExport est disponible dans deux versions, la version 1 et la version 2. Nous vous recommandons d’utiliser :
@@ -116,22 +116,23 @@ Pour obtenir des instructions pas à pas sur l’exportation de données, consul
 
 Le service Azure Import/Export prend en charge la copie des données vers et depuis tous les comptes de stockage Azure. Vous pouvez expédier des lecteurs de disque aux emplacements suivants. Si votre compte de stockage se trouve dans un emplacement Azure qui n’est pas spécifié ici, un emplacement d’expédition de remplacement est proposé lorsque vous créez le travail.
 
-### <a name="supported-shipping-locations"></a>Lieux d’expédition pris en charge :
+### <a name="supported-shipping-locations"></a>Emplacements d’expédition pris en charge :
 
 |Pays/région  |Pays/région  |Pays/région  |Pays/région  |
 |---------|---------|---------|---------|
-|USA Est    | Europe Nord        | Inde Centre        |US Gov Iowa         |
-|USA Ouest     |Europe Ouest         | Inde Sud        | US DoD Est        |
-|USA Est 2    | Asie Est        |  Inde Ouest        | US DoD Centre        |
-|USA Ouest 2     | Asie Sud-Est        | Canada Centre        | Chine Est         |
-|USA Centre     | Australie Est        | Canada Est        | Chine Nord        |
-|USA Centre Nord     |  Sud-Australie Est       | Brésil Sud        | Royaume-Uni Sud        |
-|USA Centre Sud     | Japon Ouest        |Corée Centre         | Allemagne Centre        |
-|USA Centre-Ouest     |  Japon Est       | US Gov Virginie        | Allemagne Nord-Est        |
+|USA Est    | Europe Nord        | Inde centrale        |US Gov Iowa         |
+|USA Ouest     |Europe Ouest         | Inde Sud        | Est des États-Unis – US DoD        |
+|USA Est 2    | Asie Est        |  Inde Ouest        | Centre des États-Unis – US DoD        |
+|USA Ouest 2     | Asie Sud-Est        | Centre du Canada        | Chine orientale         |
+|USA Centre     | Australie Est        | Est du Canada        | Chine du Nord        |
+|Centre-Nord des États-Unis     |  Sud-Australie Est       | Brésil Sud        | Sud du Royaume-Uni        |
+|États-Unis - partie centrale méridionale     | OuJapon Est        |Centre de la Corée         | Centre de l’Allemagne        |
+|Centre-USA Ouest     |  Japon Est       | Gouvernement américain - Virginie        | Nord-Est de l’Allemagne        |
+|Afrique du Sud Ouest   |  Afrique du Sud Nord |
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
-Les données présentes sur le lecteur doivent être chiffrées à l’aide du chiffrement de lecteur BitLocker AES 128 bits. Ce chiffrement permet de protéger vos données en transit.
+Les données présentes sur le lecteur doivent être chiffrées à l’aide du chiffrement de lecteur BitLocker AES 256 bits. Ce chiffrement permet de protéger vos données en transit.
 
 Pour les travaux d’importation, les lecteurs sont chiffrés de deux manières.  
 

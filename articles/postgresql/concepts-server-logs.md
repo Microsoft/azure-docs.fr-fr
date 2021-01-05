@@ -1,17 +1,17 @@
 ---
 title: Journaux - Azure Database pour PostgreSQL - Serveur unique
 description: Décrit la configuration de la journalisation, le stockage et l’analyse dans Azure Database pour PostgreSQL - Serveur unique
-author: rachel-msft
-ms.author: raagyema
+author: lfittl-msft
+ms.author: lufittl
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 10/25/2019
-ms.openlocfilehash: 70520b464bcb26ff8f1ea10f87bbf30537dc58a0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/25/2020
+ms.openlocfilehash: 2ae3c538c78be8af0fa4569592ac60547e7f5912
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131215"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92481293"
 ---
 # <a name="logs-in-azure-database-for-postgresql---single-server"></a>Journaux dans Azure Database pour PostgreSQL - Serveur unique
 
@@ -23,7 +23,7 @@ L’enregistrement d'audit est mis à disposition via une extension Postgres, pg
 ## <a name="configure-logging"></a>Configuration de la journalisation 
 Vous pouvez configurer la journalisation standard Postgres sur votre serveur avec les paramètres de journalisation. Sur chaque serveur Azure Database pour PostgreSQL, `log_checkpoints` et `log_connections` sont activés par défaut. Il existe d’autres paramètres que vous pouvez définir en fonction de vos besoins de journalisation : 
 
-![Azure Database pour PostgreSQL - Paramètres de journalisation](./media/concepts-server-logs/log-parameters.png)
+:::image type="content" source="./media/concepts-server-logs/log-parameters.png" alt-text="Azure Database pour PostgreSQL - Paramètres de journalisation":::
 
 Pour en savoir plus sur les paramètres de journal Postgres, consultez les sections [Quand journaliser](https://www.postgresql.org/docs/current/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN) et [Que journaliser](https://www.postgresql.org/docs/current/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT) de la documentation Postgres. La plupart des paramètres de journalisation Postgres, mais pas tous, peuvent être configurés dans Azure Database pour PostgreSQL.
 
@@ -57,24 +57,24 @@ Azure Database pour PostgreSQL est intégré aux journaux des paramètres de dia
 
 ### <a name="configure-diagnostic-settings"></a>Configurer les paramètres de diagnostic
 
-Vous pouvez activer les paramètres de diagnostic pour votre serveur Postgres à l’aide du portail Azure, de l’interface CLI, de l’API REST et de PowerShell. La catégorie de journal à sélectionner est **PostgreSQLLogs**. (Il existe d’autres journaux que vous pouvez configurer si vous utilisez le [Magasin des requêtes](concepts-query-store.md).)
+Vous pouvez activer les paramètres de diagnostic pour votre serveur Postgres à l’aide du portail Azure, de l’interface CLI, de l’API REST et de PowerShell. La catégorie de journal à sélectionner est **PostgreSQLLogs** . (Il existe d’autres journaux que vous pouvez configurer si vous utilisez le [Magasin des requêtes](concepts-query-store.md).)
 
 Pour activer les journaux de ressources à l’aide du portail Azure :
 
    1. Sur le portail, accédez à *Paramètres de diagnostic* dans le menu de navigation de votre serveur Postgres.
-   2. Sélectionnez *Ajouter le paramètre de diagnostic*.
+   2. Sélectionnez *Ajouter le paramètre de diagnostic* .
    3. Donnez un nom à ce paramètre. 
    4. Sélectionnez le point de terminaison de votre choix (compte de stockage, hub d’événements, analytique des journaux). 
-   5. Sélectionnez le type de journal **PostgreSQLLogs**.
+   5. Sélectionnez le type de journal **PostgreSQLLogs** .
    7. Enregistrez votre paramètre.
 
 Pour activer les journaux de ressources à l’aide de PowerShell, de l’interface de ligne de commande ou de l’API REST, consultez l’article [Paramètres de diagnostic](../azure-monitor/platform/diagnostic-settings.md).
 
 ### <a name="access-resource-logs"></a>Accéder aux journaux de ressources
 
-La façon dont vous accédez aux journaux dépend du point de terminaison que vous choisissez. Pour le stockage Azure, consultez l’article [Compte de stockage des journaux](../azure-monitor/platform/resource-logs-collect-storage.md). Pour Event Hubs, consultez l’article [Diffusion des journaux Azure](../azure-monitor/platform/resource-logs-stream-event-hubs.md).
+La façon dont vous accédez aux journaux dépend du point de terminaison que vous choisissez. Pour le stockage Azure, consultez l’article [Compte de stockage des journaux](../azure-monitor/platform/resource-logs.md#send-to-azure-storage). Pour Event Hubs, consultez l’article [Diffusion des journaux Azure](../azure-monitor/platform/resource-logs.md#send-to-azure-event-hubs).
 
-Pour les journaux Azure Monitor, les journaux sont envoyés à l’espace de travail que vous avez sélectionné. Les journaux Postgres utilisent le mode de collecte **AzureDiagnostics**, pour qu’ils puissent être interrogés à partir de la table AzureDiagnostics. Les champs de la table sont décrits ci-dessous. En savoir plus sur l’interrogation et la génération d’alertes dans la vue d’ensemble [Interroger les journaux Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
+Pour les journaux Azure Monitor, les journaux sont envoyés à l’espace de travail que vous avez sélectionné. Les journaux Postgres utilisent le mode de collecte **AzureDiagnostics** , pour qu’ils puissent être interrogés à partir de la table AzureDiagnostics. Les champs de la table sont décrits ci-dessous. En savoir plus sur l’interrogation et la génération d’alertes dans la vue d’ensemble [Interroger les journaux Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
 
 Voici des requêtes que vous pouvez essayer pour commencer. Vous pouvez configurer des alertes basées sur les requêtes.
 
@@ -82,6 +82,7 @@ Rechercher tous les journaux Postgres pour un serveur particulier au cours du de
 ```
 AzureDiagnostics
 | where LogicalServerName_s == "myservername"
+| where Category == "PostgreSQLLogs"
 | where TimeGenerated > ago(1d) 
 ```
 
@@ -95,7 +96,7 @@ La requête ci-dessus affiche les résultats au cours des six dernières heures 
 
 ### <a name="log-format"></a>Format de journal
 
-Le tableau suivant décrit les champs du type **PostgreSQLLogs**. En fonction du point de terminaison de sortie choisi, les champs et l’ordre dans lequel ils apparaissent peuvent varier. 
+Le tableau suivant décrit les champs du type **PostgreSQLLogs** . En fonction du point de terminaison de sortie choisi, les champs et l’ordre dans lequel ils apparaissent peuvent varier. 
 
 |**Champ** | **Description** |
 |---|---|

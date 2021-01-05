@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec Clear Review | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Clear Review.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 8264159a-11a2-4a8c-8285-4efea0adac8c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/16/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0f2a0560163f9806053f49944cbec0db2b1a9de8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e971b02fb87440d4833c2eeba8897143f97a20dd
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67105456"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97670482"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-clear-review"></a>Didacticiel : Intégration d’Azure Active Directory avec Clear Review
 
@@ -32,7 +27,7 @@ L’intégration de Clear Review à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Clear Review (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -41,6 +36,9 @@ Pour configurer l’intégration d’Azure AD à Clear Review, vous avez besoin 
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un [compte gratuit](https://azure.microsoft.com/free/)
 * Un abonnement Clear Review pour lequel l’authentification unique est activée
+
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -68,7 +66,7 @@ Pour configurer l’intégration de Clear Review à Azure AD, vous devez ajouter
 
 4. Dans la zone de recherche, tapez **Clear Review**, sélectionnez **Clear Review** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Clear Review dans la liste des résultats](common/search-new-app.png)
+    ![Clear Review dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -104,7 +102,7 @@ Pour configurer l’authentification unique Azure AD avec Clear Review, effectue
 
 4. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL Clear Review](common/idp-intiated.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://<customer name>.clearreview.com/sso/metadata/`
 
@@ -112,7 +110,7 @@ Pour configurer l’authentification unique Azure AD avec Clear Review, effectue
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL Clear Review](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<customer name>.clearreview.com`
 
@@ -121,15 +119,15 @@ Pour configurer l’authentification unique Azure AD avec Clear Review, effectue
 
 6. L’application Clear Review attend les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration d’attributs de jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **nameidentifier** est mappé avec **user.userprincipalname**. L’application Clear Review s’attend à ce que **nameidentifier** soit mappé avec **user.mail**. Vous devez donc modifier le mappage d’attribut en cliquant sur l’icône **Modifier** et modifier le mappage d’attribut.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant User Attributes avec l’icône Edit sélectionnée.](common/edit-attribute.png)
 
 7. Dans la boîte de dialogue **Attributs et revendications de l’utilisateur** , effectuez les étapes suivantes :
 
     a. Cliquez sur l’**icône de modification** à droite de **Valeur de nom d’identificateur**.
 
-    ![image](./media/clearreview-tutorial/attribute02.png)
+    ![Capture d’écran montrant User Attributes & Claims avec l’icône Edit sélectionnée.](./media/clearreview-tutorial/attribute02.png)
 
-    ![image](./media/clearreview-tutorial/attribute01.png)
+    ![Capture d’écran montrant la boîte de dialogue Manage user claims où vous pouvez entrer les valeurs décrites.](./media/clearreview-tutorial/attribute01.png)
 
     b. Dans la liste **Attribut de la source**, sélectionnez la valeur d’attribut **user.givenname** pour cette ligne.
 
@@ -155,15 +153,15 @@ Pour configurer l’authentification unique Azure AD avec Clear Review, effectue
 
 2. Sélectionnez **Admin** dans le volet de navigation de gauche.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/clearreview-tutorial/tutorial_clearreview_app_admin1.png)
+    ![Capture d’écran montrant le site web Clear Review avec Admin sélectionné.](./media/clearreview-tutorial/tutorial_clearreview_app_admin1.png)
 
 3. Dans la section **Intégrations** au bas de la page, cliquez sur le bouton **Change** (Changer) à droite de **Single Sign-On Settings** (Paramètres de l’authentification unique).
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/clearreview-tutorial/tutorial_clearreview_app_admin2.png)
+    ![Capture d’écran montrant le bouton Single Sign-On Change.](./media/clearreview-tutorial/tutorial_clearreview_app_admin2.png)
 
 4. Dans la page **Single Sign On Settings** (Paramètres de l’authentification unique), effectuez les étapes suivantes :
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/clearreview-tutorial/tutorial_clearreview_app_admin3.png)
+    ![Capture d’écran montrant la page Single Sign-on Settings où vous pouvez entrer les informations de cette étape.](./media/clearreview-tutorial/tutorial_clearreview_app_admin3.png)
 
     a. Dans la zone de texte **URL de l’émetteur**, collez la valeur de l’**identifiant Azure AD** que vous avez copiée à partir du portail Azure.
 
@@ -192,7 +190,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -234,13 +232,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans C
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Clear Review dans le volet d’accès, vous devez être connecté automatiquement à l’application Clear Review pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Clear Review dans le volet d’accès, vous devez être connecté automatiquement à l’application Clear Review pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

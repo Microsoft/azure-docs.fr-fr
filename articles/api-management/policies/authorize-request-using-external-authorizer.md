@@ -13,16 +13,16 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 06/06/2018
 ms.author: apimpm
-ms.openlocfilehash: 99bf1068042eb7ab0c43e2a683ca7116d2e426f3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e38d92a13c9a66defc2d5090990b44a889cfd21c
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75442496"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92076230"
 ---
 # <a name="authorize-requests-using-external-authorizer"></a>Autoriser les demandes à l’aide d’un agent d’autorisation externe
 
-Cet article montre un exemple de stratégie de Gestion des API Azure qui explique comment sécuriser l’accès aux API à l’aide d’un agent d’autorisation externe qui encapsule une logique d’authentification/autorisation personnalisée. Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-samples.md).
+Cet article montre un exemple de stratégie de Gestion des API Azure qui explique comment sécuriser l’accès aux API à l’aide d’un agent d’autorisation externe qui encapsule une logique d’authentification/autorisation personnalisée. Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-reference.md).
 
 ## <a name="policy"></a>Stratégie
 
@@ -35,4 +35,4 @@ Collez le code dans le bloc **inbound**.
 En savoir plus sur les stratégies APIM :
 
 + [Politiques de restrictions d’accès](../api-management-access-restriction-policies.md)
-+ [Exemples de stratégie](../policy-samples.md)
++ [Exemples de stratégie](../policy-reference.md)

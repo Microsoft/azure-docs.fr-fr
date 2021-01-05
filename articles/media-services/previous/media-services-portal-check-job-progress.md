@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 86c91582256261d701dc3c73b1bdfdcb6002f6e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3ba8ccf3534cbb4a93983f81095b4ef2c20d6498
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64867220"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93042788"
 ---
 # <a name="monitor-encoding-job-progress-with-the-azure-portal"></a>Surveiller la progression du travail d’encodage avec le Portail Azure
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -32,7 +34,7 @@ Lorsque vous exécutez des travaux, vous avez généralement besoin de faire app
 
 Pour surveiller la progression du travail d’encodage, cliquez sur **Paramètres** (en haut de la page), puis sélectionnez **Travaux**.
 
-![travaux](./media/media-services-portal-vod-get-started/media-services-jobs.png)
+![Capture d’écran montrant l’élément « Travaux » sélectionné dans le menu « Paramètres ».](./media/media-services-portal-vod-get-started/media-services-jobs.png)
 
 Vous pouvez cliquer sur le travail pour afficher plus de détails.
 
@@ -46,4 +48,3 @@ Une fois votre travail d’encodage terminé, vous pouvez publier et lire vos é
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

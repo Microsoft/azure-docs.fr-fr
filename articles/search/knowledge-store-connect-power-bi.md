@@ -1,26 +1,28 @@
 ---
-title: Se connecter à une base de connaissances (préversion) avec Power BI
+title: Se connecter une base de connaissances avec Power BI
 titleSuffix: Azure Cognitive Search
-description: Connectez une base de connaissances Recherche cognitive Azure (préversion) à Power BI à des fins d’analyse et d’exploration.
+description: Connectez une base de connaissances Recherche cognitive Azure à Power BI à des fins d’analyse et d’exploration.
 author: HeidiSteen
 ms.author: heidist
 manager: nitinme
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/26/2019
-ms.openlocfilehash: 4fd71a7f322cb2672eb485f17e4de2619a7c2d2c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/30/2020
+ms.openlocfilehash: 91e75b60f5324288c9f1adac59e31b9c1a1b0e9e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270026"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289169"
 ---
 # <a name="connect-a-knowledge-store-with-power-bi"></a>Connecter une base de connaissances à Power BI
 
-> [!IMPORTANT] 
-> La base de connaissances est actuellement disponible en préversion publique. Les fonctionnalités en préversion sont fournies sans contrat de niveau de service et ne sont pas recommandées pour les charges de travail de production. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). L’[API REST version 2019-05-06-Preview](search-api-preview.md) fournit des fonctionnalités en préversion. La prise en charge du portail est actuellement limitée, et il n’existe pas de prise en charge du kit SDK .NET.
+Cet article explique comment connecter et explorer une base de connaissances à l’aide de Power Query dans l’application Power BI Desktop. Vous pouvez commencer plus rapidement avec des modèles, ou créer un tableau de bord personnalisé à partir de rien. Cette courte vidéo ci-dessous montre comment vous pouvez enrichir votre expérience de vos données à l’aide de Recherche cognitive Azure en association avec Power BI.
 
-Cet article explique comment connecter et explorer une base de connaissances à l’aide de Power Query dans l’application Power BI Desktop. Vous pouvez commencer plus rapidement avec des modèles, ou créer un tableau de bord personnalisé à partir de rien.
+
+> [!VIDEO https://www.youtube.com/embed/XWzLBP8iWqg?version=3&start=593&end=663]
+
+
 
 + Suivez les étapes décrites dans [Créer une base de connaissances dans le portail Azure](knowledge-store-create-portal.md) ou [Créer une base de connaissances Recherche cognitive Azure en utilisant REST](knowledge-store-create-rest.md) pour créer l’exemple de base de connaissances utilisé dans cette procédure pas à pas. Vous aurez également besoin du nom du compte de stockage Azure utilisé pour créer la base de connaissances ainsi que de sa clé d’accès dans le portail Azure.
 
@@ -66,7 +68,7 @@ Cliquez sur **Obtenir le modèle Power BI** dans la page **Ajouter des compéten
 
 1. En haut à droite de la table, cliquez sur l’icône montrant des flèches opposées pour développer le *Contenu*. Une fois que la liste des colonnes s’affiche, sélectionnez toutes les colonnes, puis désélectionnez les colonnes commençant par « métadonnées ». Cliquez sur **OK** pour afficher les colonnes sélectionnées.
 
-   ![Modifier les tables](media/knowledge-store-connect-power-bi/powerbi-expand-content-table.png "Développer le contenu")
+   ![Développer le contenu](media/knowledge-store-connect-power-bi/powerbi-expand-content-table.png "Développer le contenu")
 
 1. Changez le type de données des colonnes suivantes en cliquant en haut à gauche de la colonne sur l’icône ABC-123.
 
@@ -102,7 +104,7 @@ Create new containers in Azure Blob storage and upload each CSV file to its own 
 | Medium (6000 Records)| [HotelReviews_Medium.csv](https://knowledgestoredemo.blob.core.windows.net/hotel-reviews/HotelReviews_Medium.csv?st=2019-07-29T17%3A51%3A30Z&se=2021-07-30T17%3A51%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=LnWLXqFkPNeuuMgnohiz3jfW4ijePeT5m2SiQDdwDaQ%3D)
 | Large (Full dataset 35000 Records) | [HotelReviews_Large.csv](https://knowledgestoredemo.blob.core.windows.net/hotel-reviews/HotelReviews_Large.csv?st=2019-07-29T17%3A51%3A30Z&se=2021-07-30T17%3A51%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=LnWLXqFkPNeuuMgnohiz3jfW4ijePeT5m2SiQDdwDaQ%3D). Be aware that very large data sets are expensive to process. This one costs roughly $1000 U.S dollars.|
 
-In the enrichment step of the wizard, attach a billable [Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) resource, created at the *S0* tier, in the same region as Azure Cognitive Search to use larger data sets. 
+In the enrichment step of the wizard, attach a billable [Cognitive Services](../cognitive-services/cognitive-services-apis-create-account.md) resource, created at the *S0* tier, in the same region as Azure Cognitive Search to use larger data sets. 
 
   ![Create a Cognitive Services resource](media/knowledge-store-connect-power-bi/create-cognitive-service.png "Create a Cognitive Services resource") -->
 

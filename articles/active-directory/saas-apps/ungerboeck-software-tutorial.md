@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec Ungerboeck Software | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Ungerboeck Software.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: bd861069-8a15-4d29-aa26-0d7be3a0a94a
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 06/19/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 69c7a7a8fe0ef346cb26e3b0b4f14d3dae7211b9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ddc83da2836d414ee3fadd23288475a6829018aa
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67372632"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92521779"
 ---
 # <a name="tutorial-integrate-ungerboeck-software-with-azure-active-directory"></a>Tutoriel : Intégrer Ungerboeck Software avec Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce didacticiel, vous allez apprendre à intégrer Ungerboeck Software avec 
 * Autoriser les utilisateurs à se connecter automatiquement à Ungerboeck Software avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -50,9 +45,9 @@ Pour configurer l’intégration de Ungerboeck Software dans Azure AD, vous deve
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
 1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **Ungerboeck Software** dans la zone de recherche.
+1. Dans la section **Ajouter à partir de la galerie** , tapez **Ungerboeck Software** dans la zone de recherche.
 1. Sélectionnez **Ungerboeck Software** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
@@ -72,48 +67,42 @@ Pour configurer et tester l’authentification unique Azure AD avec Ungerboeck S
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Ungerboeck Software**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet pour **Configuration SAML de base** afin de modifier les paramètres.
+1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Ungerboeck Software** , recherchez la section **Gérer** et sélectionnez **Authentification unique**.
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML**.
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet pour **Configuration SAML de base** afin de modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la boîte de dialogue **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la boîte de dialogue **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    1. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<SUBDOMAIN>.ungerboeck.com/prod`
+    1. Dans la zone de texte **URL de connexion** , saisissez une URL au format suivant : `https://<SUBDOMAIN>.ungerboeck.com/prod`
 
     1. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant :
     
-       **Pour l’environnement de production** :
+    *  **Pour l’environnement de production**  :
 
-       | |
-       |-|
-       | `https://<SUBDOMAIN>.ungerboeck.com/prod` |
-       | `https://<SUBDOMAIN>.ungerboeck.net/prod` |
-       | `https://<SUBDOMAIN>.ungerboeck.io/prod` |
-       | |
+       - `https://<SUBDOMAIN>.ungerboeck.com/prod`
+       - `https://<SUBDOMAIN>.ungerboeck.net/prod`
+       - `https://<SUBDOMAIN>.ungerboeck.io/prod`
 
-        **Pour l’environnement de test** :
+   * **Pour l’environnement de test**  :
 
-       | |
-       |-|
-       | `https://<SUBDOMAIN>.ungerboeck.com/test` |
-       | `https://<SUBDOMAIN>.ungerboeck.net/test` |
-       | `https://<SUBDOMAIN>.ungerboeck.io/test` |
-       | |
+     - `https://<SUBDOMAIN>.ungerboeck.com/test`
+     - `https://<SUBDOMAIN>.ungerboeck.net/test`
+     - `https://<SUBDOMAIN>.ungerboeck.io/test`
 
    > [!NOTE]
    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur et l’URL de connexion réels, tel qu’expliqué dans la section **Configurer l’authentification unique Ungerboeck Software** de ce didacticiel.
 
-1. Dans la section **Certificat de signature SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Certificat de signature SAML**.
+1. Dans la section **Certificat de signature SAML** , cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Certificat de signature SAML**.
 
     ![Modifier le certificat de signature SAML](common/edit-certificate.png)
 
-1. Dans la section **Certificat de signature SAML**, copiez l’**empreinte** et enregistrez-la sur votre ordinateur.
+1. Dans la section **Certificat de signature SAML** , copiez l’ **empreinte** et enregistrez-la sur votre ordinateur.
 
     ![Copier la valeur de l’empreinte](common/copy-thumbprint.png)
 
-1. Dans la section **Configurer Ungerboeck Software**, copiez la ou les URL appropriées, selon vos besoins.
+1. Dans la section **Configurer Ungerboeck Software** , copiez la ou les URL appropriées, selon vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -125,50 +114,50 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 ### <a name="configure-ungerboeck-software-sso"></a>Configurer l’authentification unique Ungerboeck Software
 
-Pour configurer l’authentification unique côté **Ungerboeck Software**, vous devez envoyer la **valeur de l’empreinte** et les URL copiées correspondantes à partir du portail Azure à l’[équipe du support technique Ungerboeck Software](mailto:Rhonda.Jannings@ungerboeck.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Ungerboeck Software** , vous devez envoyer la **valeur de l’empreinte** et les URL copiées correspondantes à partir du portail Azure à l’ [équipe du support technique Ungerboeck Software](mailto:Rhonda.Jannings@ungerboeck.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs**.
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe**.
    1. Cliquez sur **Créer**.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B. Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Ungerboeck Software.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 1. Dans la liste des applications, sélectionnez **Ungerboeck Software**.
 1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer**.
 
 ### <a name="create-ungerboeck-software-test-user"></a>Créer un utilisateur de test Ungerboeck Software
 
-Dans cette section, vous allez créer un utilisateur appelé B.Simon dans Ungerboeck Software. Collaborez avec l’ [équipe du support technique Ungerboeck Software](mailto:Rhonda.Jannings@ungerboeck.com) pour ajouter les utilisateurs à la plateforme Ungerboeck Software. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé B.Simon dans Ungerboeck Software. Collaborez avec l’[équipe du support technique Ungerboeck Software](mailto:Rhonda.Jannings@ungerboeck.com) pour ajouter les utilisateurs à la plateforme Ungerboeck Software. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Quand vous sélectionnez la vignette Ungerboeck Software dans le volet d’accès, vous devez être automatiquement connecté à l’application Ungerboeck Software pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette Ungerboeck Software dans le volet d’accès, vous devez être automatiquement connecté à l’application Ungerboeck Software pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

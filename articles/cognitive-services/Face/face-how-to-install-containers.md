@@ -1,28 +1,32 @@
 ---
-title: Installer et exécuter des conteneurs – Visage
+title: Installer et exécuter des conteneurs Docker pour l’API Visage
 titleSuffix: Azure Cognitive Services
-description: Cet article décrit la procédure pas à pas pour télécharger, installer et exécuter des conteneurs pour Visage.
+description: Utilisez le conteneur Docker pour l’API Visage afin de détecter et d’identifier des visages humains dans des images.
 services: cognitive-services
 author: aahill
 manager: nitinme
-ms.custom: seodec18
+ms.custom: seodec18, cog-serv-seo-aug-2020
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: conceptual
-ms.date: 04/01/2020
+ms.date: 07/16/2020
 ms.author: aahi
-ms.openlocfilehash: 74465bddb57c14af4d02c1d3bfdc46f3ac25bef3
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+keywords: local, Docker, conteneur, identifier
+ms.openlocfilehash: 0f6807f771510f85c5a20cfb2a160cfe1e8726a3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80878542"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000542"
 ---
 # <a name="install-and-run-face-containers-preview"></a>Installer et exécuter des conteneurs Visage (préversion)
 
-L’API Visage d’Azure Cognitive Services fournit un conteneur Linux standardisé pour Docker qui détecte les visages humains dans des images. Cette API identifie également les attributs, y compris les caractéristiques comme le nez et les yeux, le sexe, l’âge et d’autres caractéristiques du visage prévues par la machine. En plus de ces capacités de détection, l’API Visage peut vérifier si deux visages dans la même image ou dans des images différentes sont identiques à l’aide d’un score de confiance. L’API Visage peut également comparer les visages par rapport à une base de données pour voir si un visage paraissant similaire ou identique existe déjà. Elle peut également regrouper des visages similaires à l’aide de caractéristiques visuelles partagées.
+> [!IMPORTANT]
+> La limite pour les utilisateurs du conteneur Visage a été atteinte. Nous n’acceptons actuellement aucune nouvelle inscription pour le conteneur Visage.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+L’API Visage d’Azure Cognitive Services fournit un conteneur Docker Linux qui détecte et analyse les visages humains dans des images. Cette API identifie également les attributs, y compris les caractéristiques comme le nez et les yeux, le sexe, l’âge et d’autres caractéristiques du visage prévues par la machine. En plus de ces capacités de détection, l’API Visage peut vérifier si deux visages dans la même image ou dans des images différentes sont identiques à l’aide d’un score de confiance. L’API Visage peut également comparer les visages par rapport à une base de données pour voir si un visage paraissant similaire ou identique existe déjà. Elle peut également regrouper des visages similaires à l’aide de caractéristiques visuelles partagées.
+
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -32,13 +36,9 @@ Vous devez respecter les prérequis suivants avant d’utiliser les conteneurs d
 |--|--|
 |Moteur Docker| Le moteur Docker doit être installé sur un [ordinateur hôte](#the-host-computer). Docker fournit des packages qui configurent l’environnement Docker sur [macOS](https://docs.docker.com/docker-for-mac/), [Windows](https://docs.docker.com/docker-for-windows/) et [Linux](https://docs.docker.com/engine/installation/#supported-platforms). Pour apprendre les principes de base de Docker et des conteneurs, consultez la [vue d’ensemble de Docker](https://docs.docker.com/engine/docker-overview/).<br><br> Vous devez configurer Docker pour permettre aux conteneurs de se connecter à Azure et de lui envoyer des données de facturation. <br><br> Sur Windows, vous devez également configurer Docker pour prendre en charge les conteneurs Linux.<br><br>|
 |Bonne connaissance de Docker | Vous avez besoin de connaissances de base des concepts Docker, telles que les registres, les référentiels, les conteneurs et les images conteneur. Vous devez également connaître les commandes `docker` de base.| 
-|Ressource visage |Pour utiliser le conteneur, vous devez disposer des éléments suivants :<br><br>Une ressource **Visage** Azure, la clé API associée et l’URI de point de terminaison. Les deux valeurs sont disponibles sur les pages **Vue d’ensemble** et **Clés** de la ressource. Elles sont nécessaires au démarrage du conteneur.<br><br>**{API_KEY}**  : L’une des deux clés de ressource disponibles à la page **Clés**<br><br>**{ENDPOINT_URI}**  : Le point de terminaison tel qu'il est fourni à la page**Vue d’ensemble**
+|Ressource visage |Pour utiliser le conteneur, vous devez disposer des éléments suivants :<br><br>Une ressource **Visage** Azure, la clé API associée et l’URI de point de terminaison. Les deux valeurs sont disponibles sur les pages **Vue d’ensemble** et **Clés** de la ressource. Elles sont nécessaires au démarrage du conteneur.<br><br>**{API_KEY}**  : L’une des deux clés de ressource disponibles à la page **Clés**<br><br>**{ENDPOINT_URI}**  : Le point de terminaison tel qu'il est fourni à la page **Vue d’ensemble**
 
 [!INCLUDE [Gathering required container parameters](../containers/includes/container-gathering-required-parameters.md)]
-
-## <a name="request-access-to-the-private-container-registry"></a>Demander l’accès au registre de conteneurs privé
-
-[!INCLUDE [Request access to private container registry](../../../includes/cognitive-services-containers-request-access.md)]
 
 ### <a name="the-host-computer"></a>L’ordinateur hôte
 

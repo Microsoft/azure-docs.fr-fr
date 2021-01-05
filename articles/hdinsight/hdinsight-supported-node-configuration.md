@@ -6,15 +6,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.custom: hdinsightactive,hdiseo17may2017
 ms.topic: conceptual
-ms.date: 08/26/2019
-ms.openlocfilehash: e75146266568001d8fee7be26898ac8bdfffb7fc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: hdinsightactive,hdiseo17may2017
+ms.date: 05/14/2020
+ms.openlocfilehash: 0bf5559590b66400fc4fc4dc27ea88c3522effb1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77484784"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83646624"
 ---
 # <a name="what-are-the-default-and-recommended-node-configurations-for-azure-hdinsight"></a>Quelles sont les configurations de nœud par défaut et recommandées pour Azure HDInsight ?
 
@@ -24,9 +24,9 @@ Cet article décrit les configurations de nœud par défaut et recommandées pou
 
 Les tableaux suivants répertorient les tailles de machine virtuelle par défaut et recommandées des clusters HDInsight.  Ces informations sont nécessaires pour comprendre les tailles de machine virtuelle à utiliser lorsque vous créez des scripts PowerShell ou Azure CLI pour déployer des clusters HDInsight.
 
-Si vous avez besoin de plus de 32 nœuds Worker dans un cluster, sélectionnez une taille de nœud principal avec au moins 8 cœurs et 14 Go de RAM. 
+Si vous avez besoin de plus de 32 nœuds Worker dans un cluster, sélectionnez une taille de nœud principal avec au moins 8 cœurs et 14 Go de RAM.
 
-Les seuls types de clusters dotés de disques de données sont les clusters Kafka et HBase avec la fonctionnalité Écritures accélérées activée. HDInsight prend en charge les tailles de disque P30 et S30 dans ces scénarios.
+Les seuls types de clusters dotés de disques de données sont les clusters Kafka et HBase avec la fonctionnalité Écritures accélérées activée. HDInsight prend en charge les tailles de disque P30 et S30 dans ces scénarios. Pour tous les autres types de clusters, HDInsight fournit un espace disque managé avec le cluster. À compter du 07/11/2019, la taille de disque managé de chaque nœud du cluster nouvellement créé est de 128 Go. Cela ne peut pas être modifié.
 
 Les spécifications de tous les types de machines virtuelles recommandés minimum utilisés dans ce document sont résumées dans le tableau suivant.
 

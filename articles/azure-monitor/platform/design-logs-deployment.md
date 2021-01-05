@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 09/20/2019
-ms.openlocfilehash: 7cc2b7871c7141a0e466bf8620351c5beed0c684
-ms.sourcegitcommit: fad3aaac5af8c1b3f2ec26f75a8f06e8692c94ed
+ms.openlocfilehash: 034f2b3884d732487a9f7aff4d14740691983885
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82165686"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95536776"
 ---
 # <a name="designing-your-azure-monitor-logs-deployment"></a>Conception de votre déploiement de journaux Azure Monitor
 
@@ -25,7 +25,9 @@ Un espace de travail Log Analytics offre :
 
 * Un emplacement géographique pour le stockage des données.
 * L’isolation des données en accordant à différents utilisateurs des droits d’accès suivant l’une de nos stratégies de conception recommandées.
-* Une étendue pour la configuration des paramètres, comme le [niveau tarifaire](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#changing-pricing-tier), la [rétention](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period) et la [limitation des données](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#manage-your-maximum-daily-data-volume).
+* Une étendue pour la configuration des paramètres, comme le [niveau tarifaire](./manage-cost-storage.md#changing-pricing-tier), la [rétention](./manage-cost-storage.md#change-the-data-retention-period) et la [limitation des données](./manage-cost-storage.md#manage-your-maximum-daily-data-volume).
+
+Les espaces de travail sont hébergés sur des clusters physiques. Par défaut, le système crée et gère ces clusters. Les clients qui ingèrent plus de 4 To/jour sont censés créer leurs propres clusters dédiés pour leurs espaces de travail, ce qui leur offre un meilleur contrôle et un taux d’ingestion supérieur.
 
 Cet article fournit une présentation détaillée des considérations relatives à la conception et à la migration, une présentation du contrôle d’accès ainsi que des implémentations de conception recommandées pour votre service informatique.
 
@@ -47,18 +49,18 @@ Aujourd’hui, les services informatiques sont modélisés à l’aide d’un mo
 
 Quand vous utilisez les agents Log Analytics pour collecter des données, vous devez comprendre ce qui suit pour planifier le déploiement de votre agent :
 
-* Pour collecter des données à partir d’agents Windows, vous pouvez [configurer chaque agent pour qu’il rend compte à un ou plusieurs espaces de travail](../../azure-monitor/platform/agent-windows.md), même s’il rend compte à un groupe d’administration System Center Operations Manager. L’agent Windows peut rendre compte à quatre espaces de travail au maximum.
+* Pour collecter des données à partir d’agents Windows, vous pouvez [configurer chaque agent pour qu’il rend compte à un ou plusieurs espaces de travail](./agent-windows.md), même s’il rend compte à un groupe d’administration System Center Operations Manager. L’agent Windows peut rendre compte à quatre espaces de travail au maximum.
 * L’agent Linux ne prend pas en charge l’hébergement multiple et peut uniquement rendre compte à un seul espace de travail.
 
 Si vous utilisez System Center Operations Manager 2012 R2 ou une version ultérieure :
 
-* Chaque groupe d’administration Operations Manager peut être [connecté à un seul espace de travail](../platform/om-agents.md). 
+* Chaque groupe d’administration Operations Manager peut être [connecté à un seul espace de travail](./om-agents.md). 
 * Les ordinateurs Linux rendant compte à un groupe d’administration doivent être configurés pour rendre compte directement à un espace de travail Log Analytics. Si vos ordinateurs Linux rendent déjà compte directement à un espace de travail et que vous souhaitez les superviser avec Operations Manager, effectuez les étapes suivantes pour [qu’ils rendent compte à un groupe d’administration Operations Manager](agent-manage.md#configure-agent-to-report-to-an-operations-manager-management-group). 
 * Vous pouvez installer l’agent Windows Log Analytics sur l’ordinateur Windows et faire en sorte qu’il rende compte à la fois à Operations Manager intégré à un espace de travail et à un autre espace de travail.
 
 ## <a name="access-control-overview"></a>Présentation du contrôle d’accès
 
-Avec le contrôle d’accès en fonction du rôle (RBAC), vous pouvez accorder aux utilisateurs et aux groupes uniquement le type d’accès dont ils ont besoin pour travailler avec les données de surveillance dans un espace de travail. Vous pouvez ainsi vous aligner sur le modèle d’exploitation de votre service informatique en utilisant un espace de travail unique pour stocker les données collectées activées sur toutes vos ressources. Par exemple, vous accordez l’accès à votre équipe responsable des services d’infrastructure hébergés sur des machines virtuelles Azure et par conséquent, les membres de l’équipe ont accès uniquement aux journaux générés par les machines virtuelles. Le nouveau modèle de journal Contexte de ressource est le suivant. La base de ce modèle est, pour chaque enregistrement de journal émis par une ressource Azure, qu’il est automatiquement associé à cette ressource. Les journaux sont transférés vers un espace de travail central qui respecte la portée et le contrôle d’accès en fonction du rôle, en fonction des ressources.
+Avec le contrôle d’accès en fonction du rôle Azure (Azure RBAC), vous pouvez accorder aux utilisateurs et aux groupes uniquement le type d’accès dont ils ont besoin pour travailler avec les données de surveillance dans un espace de travail. Vous pouvez ainsi vous aligner sur le modèle d’exploitation de votre service informatique en utilisant un espace de travail unique pour stocker les données collectées activées sur toutes vos ressources. Par exemple, vous accordez l’accès à votre équipe responsable des services d’infrastructure hébergés sur des machines virtuelles Azure et par conséquent, les membres de l’équipe ont accès uniquement aux journaux générés par les machines virtuelles. Le nouveau modèle de journal Contexte de ressource est le suivant. La base de ce modèle est, pour chaque enregistrement de journal émis par une ressource Azure, qu’il est automatiquement associé à cette ressource. Les journaux sont transférés vers un espace de travail central qui respecte la délimitation et Azure RBAC, en fonction des ressources.
 
 Les données auxquelles un utilisateur a accès sont déterminées par plusieurs facteurs, listés dans le tableau suivant. Chacun est décrit dans les sections ci-dessous.
 
@@ -67,7 +69,7 @@ Les données auxquelles un utilisateur a accès sont déterminées par plusieurs
 | [Mode d’accès](#access-mode) | Méthode utilisée par l’utilisateur pour accéder à l’espace de travail.  Définit l’étendue des données disponibles et le mode de contrôle d’accès qui est appliqué. |
 | [Mode de contrôle d’accès](#access-control-mode) | Paramètre de l’espace de travail qui détermine si des autorisations sont appliquées au niveau de la ressource ou de l’espace de travail. |
 | [autorisations](manage-access.md) | Autorisations appliquées à des utilisateurs spécifiques ou à des groupes d’utilisateurs pour l’espace de travail ou la ressource. Définit les données auxquelles l’utilisateur a accès. |
-| [RBAC au niveau table](manage-access.md#table-level-rbac) | Autorisations granulaires facultatives qui s’appliquent à tous les utilisateurs, quel que soit leur mode d’accès ou mode de contrôle d’accès. Définit les types de données auxquels un utilisateur peut accéder. |
+| [Azure RBAC au niveau de la table](manage-access.md#table-level-azure-rbac) | Autorisations granulaires facultatives qui s’appliquent à tous les utilisateurs, quel que soit leur mode d’accès ou mode de contrôle d’accès. Définit les types de données auxquels un utilisateur peut accéder. |
 
 ## <a name="access-mode"></a>Mode d’accès
 
@@ -79,7 +81,7 @@ Les utilisateurs disposent de deux options pour accéder aux données :
 
     ![Contexte Log Analytics de l’espace de travail](./media/design-logs-deployment/query-from-workspace.png)
 
-* **Contexte de ressource** : lorsque vous accédez à l’espace de travail pour une ressource, un groupe de ressources ou un abonnement spécifique, par exemple, lorsque vous sélectionnez **Journaux** à partir d’un menu de ressources dans le portail Azure, vous pouvez voir les journaux pour les ressources dans toutes les tables auxquelles vous avez accès uniquement. Dans ce mode, l’étendue des requêtes englobe uniquement les données associées à cette ressource. Ce mode autorise également le contrôle d’accès en fonction du rôle (RBAC) granulaire.
+* **Contexte de ressource** : lorsque vous accédez à l’espace de travail pour une ressource, un groupe de ressources ou un abonnement spécifique, par exemple, lorsque vous sélectionnez **Journaux** à partir d’un menu de ressources dans le portail Azure, vous pouvez voir les journaux pour les ressources dans toutes les tables auxquelles vous avez accès uniquement. Dans ce mode, l’étendue des requêtes englobe uniquement les données associées à cette ressource. Ce mode autorise également le contrôle d’accès en fonction du rôle Azure (Azure RBAC) granulaire.
 
     ![Contexte Log Analytics de la ressource](./media/design-logs-deployment/query-from-resource.png)
 
@@ -89,7 +91,7 @@ Les utilisateurs disposent de deux options pour accéder aux données :
     > - Service Fabric
     > - Application Insights
     >
-    > Vous pouvez tester si les journaux sont correctement associés à leurs ressources en exécutant une requête et en inspectant les enregistrements qui vous intéressent. Si l’ID de ressource correct se trouve dans la propriété [_ResourceId](log-standard-properties.md#_resourceid), les données sont disponibles pour les requêtes centrées sur la ressource.
+    > Vous pouvez tester si les journaux sont correctement associés à leurs ressources en exécutant une requête et en inspectant les enregistrements qui vous intéressent. Si l’ID de ressource correct se trouve dans la propriété [_ResourceId](./log-standard-columns.md#_resourceid), les données sont disponibles pour les requêtes centrées sur la ressource.
 
 Azure Monitor détermine automatiquement le mode approprié en fonction du contexte à partir duquel vous effectuez la recherche dans les journaux. L’étendue est toujours affichée en haut à gauche de Log Analytics.
 
@@ -97,26 +99,26 @@ Azure Monitor détermine automatiquement le mode approprié en fonction du conte
 
 Le tableau suivant récapitule les modes d’accès :
 
-| | Contexte d’espace de travail | Contexte d’espace de ressource |
+| Problème | Contexte d’espace de travail | Contexte d’espace de ressource |
 |:---|:---|:---|
 | À qui chaque modèle s’adresse-t-il ? | Administration centrale. Les administrateurs qui ont besoin de configurer une collecte de données et les utilisateurs qui ont besoin d’accéder à un large éventail de ressources. Également nécessaire pour les utilisateurs qui doivent accéder aux journaux des ressources situées en dehors d’Azure. | Équipes d’application. Administrateurs de ressources Azure en cours de supervision. |
 | De quoi un utilisateur a-t-il besoin pour voir les journaux ? | Autorisations sur l’espace de travail. Consultez **Autorisations d’espace de travail** dans [Gérer l’accès à l’aide d’autorisations au niveau de l’espace de travail](manage-access.md#manage-access-using-workspace-permissions). | Accès en lecture à la ressource. Consultez **Autorisations de ressources** dans [Gérer l’accès à l’aide d’autorisations Azure](manage-access.md#manage-access-using-azure-permissions). Les autorisations peuvent être héritées (par exemple du groupe de ressources les contenant) ou directement attribuées à la ressource. L’autorisation sur les journaux pour la ressource est automatiquement attribuée. |
-| Quelle est l’étendue des autorisations ? | Espace de travail. Les utilisateurs ayant accès à l’espace de travail peuvent interroger tous les journaux dans cet espace de travail à partir des tables sur lesquelles ils ont des autorisations. Consultez [Contrôle d’accès aux tables](manage-access.md#table-level-rbac). | Ressource Azure. L’utilisateur peut interroger les journaux à propos de ressources, groupes de ressources ou abonnements auxquels il a accès à partir de n’importe quel espace de travail, mais il ne peut pas interroger les journaux associés à d’autres ressources. |
+| Quelle est l’étendue des autorisations ? | Espace de travail. Les utilisateurs ayant accès à l’espace de travail peuvent interroger tous les journaux dans cet espace de travail à partir des tables sur lesquelles ils ont des autorisations. Consultez [Contrôle d’accès aux tables](manage-access.md#table-level-azure-rbac). | Ressource Azure. L’utilisateur peut interroger les journaux à propos de ressources, groupes de ressources ou abonnements auxquels il a accès à partir de n’importe quel espace de travail, mais il ne peut pas interroger les journaux associés à d’autres ressources. |
 | Comment l’utilisateur peut-il accéder aux journaux ? | <ul><li>Démarrez **Journaux** dans le menu **Azure Monitor**.</li></ul> <ul><li>Démarrez **Journaux** à partir des **Espaces de travail Log Analytics**.</li></ul> <ul><li>À partir des [Workbooks](../visualizations.md#workbooks) Azure Monitor.</li></ul> | <ul><li>Démarrez **Journaux** dans le menu associé à la ressource Azure.</li></ul> <ul><li>Démarrez **Journaux** dans le menu **Azure Monitor**.</li></ul> <ul><li>Démarrez **Journaux** à partir des **Espaces de travail Log Analytics**.</li></ul> <ul><li>À partir des [Workbooks](../visualizations.md#workbooks) Azure Monitor.</li></ul> |
 
 ## <a name="access-control-mode"></a>Mode de contrôle d’accès
 
 Le *mode de contrôle d’accès* est un paramètre sur chaque espace de travail qui définit comment les autorisations sont déterminées pour l’espace de travail.
 
-* **Exiger des autorisations d’espace de travail** : ce mode de contrôle n’autorise pas un contrôle RBAC précis. Pour qu’un utilisateur puisse accéder à l’espace de travail, il doit avoir des autorisations sur l’espace de travail ou sur des tables spécifiques.
+* **Exiger des autorisations d’espace de travail** : Ce mode de contrôle n’autorise pas un contrôle Azure RBAC granulaire. Pour qu’un utilisateur puisse accéder à l’espace de travail, il doit avoir des autorisations sur l’espace de travail ou sur des tables spécifiques.
 
     Si un utilisateur accède à l’espace de travail dans le contexte de l’espace de travail, il a accès à toutes les données de toutes les tables auxquelles il est autorisé à accéder. Si un utilisateur accède à l’espace de travail dans le contexte de la ressource, il a accès uniquement aux données de cette ressource dans les tables auxquelles il est autorisé à accéder.
 
     Il s’agit du paramétrage par défaut pour tous les espaces de travail créés avant mars 2019.
 
-* **Utiliser les autorisations de ressource ou d’espace de travail** : ce mode de contrôle autorise un contrôle RBAC précis. Les utilisateurs peuvent être autorisés à accéder uniquement aux données associées aux ressources qu’ils peuvent afficher en attribuant l’autorisation `read` Azure. 
+* **Utiliser les autorisations de ressource ou d’espace de travail** : Ce mode de contrôle autorise un contrôle Azure RBAC granulaire. Les utilisateurs peuvent être autorisés à accéder uniquement aux données associées aux ressources qu’ils peuvent afficher en attribuant l’autorisation `read` Azure. 
 
-    Quand un utilisateur accède à l’espace de travail dans le contexte de l’espace de travail, les autorisations d’espace de travail s’appliquent. Quand un utilisateur accède à l’espace de travail dans le contexte de la ressource, seules les autorisations de ressource sont vérifiées, les autorisations d’espace de travail étant ignorées. Activez le contrôle RBAC pour un utilisateur en le supprimant des autorisations d’espace de travail et en permettant à ses autorisations de ressource d’être reconnues.
+    Quand un utilisateur accède à l’espace de travail dans le contexte de l’espace de travail, les autorisations d’espace de travail s’appliquent. Quand un utilisateur accède à l’espace de travail dans le contexte de la ressource, seules les autorisations de ressource sont vérifiées, les autorisations d’espace de travail étant ignorées. Activez Azure RBAC pour un utilisateur en le supprimant des autorisations d’espace de travail et en permettant à ses autorisations de ressource d’être reconnues.
 
     Il s’agit du paramétrage par défaut pour tous les espaces de travail créés après mars 2019.
 
@@ -125,19 +127,15 @@ Le *mode de contrôle d’accès* est un paramètre sur chaque espace de travail
 
 Pour savoir comment modifier le mode de contrôle d’accès dans le portail, avec PowerShell ou à l’aide d’un modèle Resource Manager, consultez [Configurer le mode de contrôle d’accès](manage-access.md#configure-access-control-mode).
 
-## <a name="ingestion-volume-rate-limit"></a>Limite de débit du volume d’ingestion
+## <a name="scale-and-ingestion-volume-rate-limit"></a>Échelle et débit maximal du volume d’ingestion
 
-Azure Monitor est un service de données à grande échelle servant des milliers de clients envoyant des téraoctets de données chaque mois à un rythme croissant. Par défaut, le seuil du débit d’ingestion a la valeur **6 Go/min** par espace de travail. Il s’agit d’une valeur approximative dans la mesure où la taille réelle peut varier d’un type de données à l’autre en fonction de la longueur du journal et de son taux de compression. Cette limite ne s’applique pas aux données envoyées à partir d’agents ou de l’[API de collecteur de données](data-collector-api.md).
+Azure Monitor est un service de données à grande échelle servant des milliers de clients envoyant des pétaoctets de données chaque mois à un rythme croissant. Les espaces de travail ne sont pas limités dans leur espace de stockage, et peuvent croître jusqu’à plusieurs pétaoctets de données. Il n’est pas nécessaire de fractionner les espaces de travail en raison d’une mise à l’échelle.
 
-Si vous envoyez des données vers un espace de travail unique à un débit supérieur, certaines données sont supprimées et un événement est envoyé toutes les 6 heures à la table *Operation* de votre espace de travail tant que le seuil est dépassé. Si votre volume d’ingestion continue de dépasser la limite du débit ou si vous pensez l’atteindre bientôt, vous pouvez demander une augmentation de votre espace de travail en envoyant un e-mail à LAIngestionRate@microsoft.com ou en effectuant une demande de support.
- 
-Pour être averti de la survenue d’un tel événement dans votre espace de travail, créez une [règle d’alerte de journal](alerts-log.md) à l’aide de la requête suivante, où la logique d’alerte est basée sur le nombre de résultats supérieurs à zéro.
+Pour protéger et isoler les clients Azure Monitor et leur infrastructure principale, il existe un débit maximal d’ingestion par défaut conçu pour protéger contre les situations de pics et de saturations. Le débit maximal par défaut, d’environ **6 Go/minute**, est conçu pour permettre une ingestion normale. Pour plus d’informations sur la mesure du volume maximal d’ingestion, consultez [Limites du service Azure Monitor](../service-limits.md#data-ingestion-volume-rate).
 
-``` Kusto
-Operation
-|where OperationCategory == "Ingestion"
-|where Detail startswith "The rate of data crossed the threshold"
-``` 
+Les clients qui ingèrent moins de 4 To/jour ne respectent généralement pas ces limites. Les clients qui ingèrent des volumes plus élevés ou qui sont confrontés à des pics dans le cadre de leurs opérations normales doivent envisager de passer à des [clusters dédiés](../log-query/logs-dedicated-clusters.md) où le débit maximal d’ingestion peut être augmenté.
+
+Lorsque le débit maximal d’ingestion est activé ou atteint 80 % du seuil, un événement est ajouté à la table *Opération* dans votre espace de travail. Il est recommandé de surveiller le débit et de créer une alerte. Pour plus d’informations, consultez [Débit d’ingestion de données](../service-limits.md#data-ingestion-volume-rate).
 
 
 ## <a name="recommendations"></a>Recommandations

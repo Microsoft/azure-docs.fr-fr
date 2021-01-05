@@ -2,18 +2,18 @@
 title: 'Réinitialiser un circuit en échec - ExpressRoute : PowerShell : Azure | Microsoft Docs'
 description: Cet article vous aide à réinitialiser un circuit ExpressRoute en état d’échec.
 services: expressroute
-author: anzaman
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/28/2018
-ms.author: anzaman
+ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: deeb1c65cae7e3a5b42230dbda1ad8efa717ba0b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7df96f34ee408c0a6d26b27adbac7351c9ab937f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73748106"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89393086"
 ---
 # <a name="reset-a-failed-expressroute-circuit"></a>Réinitialiser un circuit ExpressRoute en échec
 

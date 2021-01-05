@@ -1,23 +1,24 @@
 ---
 title: Augmenter automatiquement le stockage – Azure PowerShell – Azure Database pour MySQL
 description: Cet article explique comment vous pouvez activer la croissance automatique du stockage avec PowerShell dans Azure Database pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 4/28/2020
-ms.openlocfilehash: c8a19fe338af14f97e0eb191d7b57e840c71e400
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: e8c9f6f66e484fbd9ebe5c15934936d6e5c59073
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612722"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94542029"
 ---
 # <a name="auto-grow-storage-in-azure-database-for-mysql-server-using-powershell"></a>Croissance automatique du stockage sur le serveur Azure Database pour MySQL à l’aide de PowerShell
 
 Cet article explique comment vous pouvez configurer l’augmentation d’un stockage de serveur Azure Database pour MySQL sans affecter la charge de travail.
 
-La croissance automatique du stockage évite à votre serveur d’[atteindre la limite de stockage](/azure/mysql/concepts-pricing-tiers#reaching-the-storage-limit) et de passer en lecture seule. Pour les serveurs disposant de jusqu’à 100 Go de stockage approvisionné, la taille est augmentée de 5 Go lorsque l’espace libre est inférieur à 10 %. Pour les serveurs disposant de plus de 100 Go de stockage approvisionné, la taille est augmentée de 5 % lorsque l’espace libre est inférieur à 10 Go. Des limites de stockage maximales s’appliquent comme spécifié dans la section relative au stockage des [niveaux tarifaires d’Azure Database pour MySQL](/azure/mysql/concepts-pricing-tiers#storage).
+La croissance automatique du stockage évite à votre serveur d’[atteindre la limite de stockage](./concepts-pricing-tiers.md#reaching-the-storage-limit) et de passer en lecture seule. Pour les serveurs disposant de jusqu’à 100 Go de stockage approvisionné, la taille est augmentée de 5 Go lorsque l’espace libre est inférieur à 10 %. Pour les serveurs disposant de plus de 100 Go de stockage approvisionné, la taille est augmentée de 5 % lorsque l’espace libre est inférieur à 10 Go. Des limites de stockage maximales s’appliquent comme spécifié dans la section relative au stockage des [niveaux tarifaires d’Azure Database pour MySQL](./concepts-pricing-tiers.md#storage).
 
 > [!IMPORTANT]
 > N’oubliez pas que le stockage peut seulement monter en puissance.
@@ -30,8 +31,8 @@ Pour utiliser ce guide pratique, il vous faut :
 - Un [serveur Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-powershell.md)
 
 > [!IMPORTANT]
-> Tant que le module PowerShell Az.MySql est en préversion, vous devez l’installer séparément du module Az PowerShell à l’aide de la commande suivante : `Install-Module -Name Az.MySql -AllowPrerelease`.
-> Une fois le module PowerShell Az.MySql générale disponible, il devient partie intégrante des versions futures du module Az PowerShell et disponible en mode natif dans Azure Cloud Shell.
+> Tant que le module Az.MySql PowerShell est en préversion, vous devez l’installer séparément du module Az PowerShell à l’aide de la commande suivante : `Install-Module -Name Az.MySql -AllowPrerelease`.
+> Une fois que le module Az.MySql PowerShell est en disponibilité générale, il devient partie intégrante des versions futures du module Az PowerShell et disponible en mode natif dans Azure Cloud Shell.
 
 Si vous choisissez d’utiliser PowerShell en local, connectez-vous à votre compte Azure à l’aide de la cmdlet [Connect-AzAccount](/powershell/module/az.accounts/Connect-AzAccount).
 

@@ -7,13 +7,13 @@ ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 01/02/2020
-ms.openlocfilehash: 9b720470ac406ed0730e6243262dcf33d2df169a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 05/15/2020
+ms.openlocfilehash: ac84ce17f53145ffd85ffa31b6633d8b4b184962
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233417"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93042648"
 ---
 # <a name="join-transformation-in-mapping-data-flow"></a>Transformation de jointure dans le flux de données de mappage
 
@@ -57,11 +57,17 @@ Si vous souhaitez générer explicitement un produit cartésien complet, utilise
 
 ## <a name="configuration"></a>Configuration
 
-1. Dans la liste déroulante **Flux de droite**, choisissez le flux de données que vous joignez.
+1. Dans la liste déroulante **Flux de droite** , choisissez le flux de données que vous joignez.
 1. Sélectionner votre **Type de jointure**
 1. Choisissez les colonnes clés pour lesquelles vous souhaitez faire correspondre la condition de jointure. Par défaut, le flux de données recherche l’équivalence entre une colonne d’un flux et une colonne de l’autre flux. Pour effectuer une comparaison à l’aide d’une valeur calculée, pointez sur la liste déroulante de la colonne, puis sélectionnez **Colonne calculée**.
 
 ![Transformation de jointure (Join)](media/data-flow/join.png "Join")
+
+### <a name="non-equi-joins"></a>Jointures différentes
+
+Pour utiliser un opérateur conditionnel tel que « différent de » ( !=) ou « supérieur à » (>) dans vos conditions de jointure, modifiez la liste déroulante de l’opérateur entre les deux colonnes. Des jointures différentes nécessitent qu’au moins l’un des deux flux soit diffusé en utilisant la diffusion **fixe** dans l’onglet **Optimiser**.
+
+![Jointure différente](media/data-flow/non-equi-join.png "Jointure différente")
 
 ## <a name="optimizing-join-performance"></a>Optimisation des performances de jointure
 
@@ -102,7 +108,7 @@ L’exemple ci-dessous illustre une transformation de jointure nommée `JoinMatc
 
 Dans l’expérience utilisateur Data Factory, cette transformation se présente comme dans l’image ci-dessous :
 
-![Exemple de jointure](media/data-flow/join-script1.png "Exemple de jointure")
+![Capture d’écran montrant la transformation avec la sélection de l’onglet Paramètres de jointure, et un type de jointure Interne.](media/data-flow/join-script1.png "Exemple de jointure")
 
 Le script de flux de données pour cette transformation se trouve dans l’extrait de code ci-dessous :
 
@@ -124,7 +130,7 @@ L’exemple ci-dessous illustre une transformation de jointure nommée `JoiningC
 
 Dans l’expérience utilisateur Data Factory, cette transformation se présente comme dans l’image ci-dessous :
 
-![Exemple de jointure](media/data-flow/join-script2.png "Exemple de jointure")
+![Capture d’écran montrant la transformation avec la sélection de l’onglet Paramètres de jointure, et un type de jointure personnalisé (croisé).](media/data-flow/join-script2.png "Exemple de jointure")
 
 Le script de flux de données pour cette transformation se trouve dans l’extrait de code ci-dessous :
 

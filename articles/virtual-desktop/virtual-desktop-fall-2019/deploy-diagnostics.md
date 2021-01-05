@@ -1,29 +1,22 @@
 ---
-title: Déployer l’outil de diagnostic pour Windows Virtual Desktop - Azure
-description: Comment déployer l’outil UX de diagnostic pour Windows Virtual Desktop.
-services: virtual-desktop
+title: Déployer l’outil de diagnostic pour Windows Virtual Desktop (classique) – Azure
+description: Comment déployer l’outil de diagnostic de l’expérience utilisateur pour Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
-ms.date: 03/30/2020
+ms.topic: how-to
+ms.date: 12/15/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 6635fff957512b601fe0927769e4ea91e9270450
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 9672d18fe99d8baae3c73fa3782531eb84114713
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614190"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97515634"
 ---
-# <a name="deploy-the-diagnostics-tool"></a>Déployer l’outil de diagnostic
+# <a name="deploy-the-windows-virtual-desktop-classic-diagnostics-tool"></a>Déployer l’outil de diagnostic Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop.
-
->[!IMPORTANT]
->Depuis le 16 mars 2020, nous avons désactivé temporairement les requêtes de diagnostic qui nuisaient à l’expérience utilisateur en raison de l’augmentation de la demande sur le service. Cela entraînera l’arrêt de l’outil, car il s’appuie sur ces requêtes pour fonctionner. Nous mettrons à jour cet article lorsque les requêtes de diagnostic seront à nouveau disponibles.
->
->D’ici là, nous vous recommandons vivement [d’utiliser Log Analytics](diagnostics-log-analytics-2019.md) pour poursuivre le monitoring.
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager.
 
 Voici ce que l’outil de diagnostic pour Windows Virtual Desktop peut faire pour vous :
 
@@ -45,8 +38,8 @@ Vous devez créer une inscription de l’application Azure Active Directory et u
 
 Vous devez également installer ces deux modules PowerShell avant de commencer :
 
-- [Module Azure PowerShell](/powershell/azure/install-az-ps?view=azps-2.4.0/)
-- [Module Azure AD](/powershell/azure/active-directory/install-adv2?view=azureadps-2.0/)
+- [Module Azure PowerShell](/powershell/azure/install-az-ps?view=azps-2.4.0/&preserve-view=true)
+- [Module Azure AD](/powershell/azure/active-directory/install-adv2?view=azureadps-2.0/&preserve-view=true)
 
 Assurez-vous que votre ID d’abonnement est prêt lorsque vous vous connectez.
 
@@ -123,7 +116,7 @@ Voici comment configurer manuellement les compteurs de performances recommandés
     -   Informations processeur (\*)\\Temps processeur
     -   Retard d’entrée utilisateur par session(\*)\\Délai d’entrée maximal
 
-Découvrez-en plus sur les compteurs de performances sur [Source de données des performances Windows et Linux dans Azure Monitor](/azure/azure-monitor/platform/data-sources-performance-counters).
+Découvrez-en plus sur les compteurs de performances sur [Source de données des performances Windows et Linux dans Azure Monitor](../../azure-monitor/platform/data-sources-performance-counters.md).
 
 >[!NOTE]
 >Les compteurs supplémentaires que vous configurez n'apparaîtront pas dans l'outil de diagnostic lui-même. Pour qu’il apparaisse dans l’outil de diagnostic, vous devez configurer le fichier config de l’outil. Les instructions pour effectuer cette opération avec l’administration avancé seront disponibles dans GitHub à une date ultérieure.
@@ -195,9 +188,10 @@ Pour définir l’URI de redirection :
 6. Sélectionnez **Web** dans le menu déroulant sous Type.
 7. Entrez l’URL à partir de la page de présentation de l’application et ajoutez **/security/signIn-callback** à la fin. Par exemple : `https://<yourappname>.azurewebsites.net/security/signin-callback`.
 
-   ![La page URI de redirection](../media/redirect-uri-page.png)
+   > [!div class="mx-imgBorder"]
+   > ![La page URI de redirection](../media/redirect-uri-page.png)
 
-8. Accédez à présent à vos ressources Azure, sélectionnez la ressource Azure App Services avec le nom fourni dans le modèle, puis accédez à l’URL y associée. (Par exemple, si le nom de l’application que vous avez utilisé dans le modèle était `contosoapp45`, votre URL associée est <https://contosoapp45.azurewebsites.net>).
+8. Accédez à présent à vos ressources Azure, sélectionnez la ressource Azure App Services avec le nom fourni dans le modèle, puis accédez à l’URL y associée. (Par exemple, si le nom de l’application que vous avez utilisé dans le modèle était `contosoapp45`, votre URL associée est <http://contoso.azurewebsites.net>).
 9. Connectez-vous en utilisant le compte d’utilisateur Azure Active Directory approprié.
 10.   Sélectionnez **Accepter**.
 
@@ -205,7 +199,7 @@ Pour définir l’URI de redirection :
 
 Avant de rendre l’outil de diagnostic disponible pour vos utilisateurs, assurez-vous qu’ils disposent des autorisations suivantes :
 
-- Les utilisateurs doivent avoir un accès en lecture pour l’analytique des journaux d'activité. Pour plus d’informations, consultez [Prise en main des rôles, des autorisations et de la sécurité dans Azure Monitor](/azure/azure-monitor/platform/roles-permissions-security).
+- Les utilisateurs doivent avoir un accès en lecture pour l’analytique des journaux d'activité. Pour plus d’informations, consultez [Prise en main des rôles, des autorisations et de la sécurité dans Azure Monitor](../../azure-monitor/platform/roles-permissions-security.md).
 -  Les utilisateurs ont également besoin d’un accès en lecture pour l’abonné Windows Virtual Desktop (rôle de lecteur des Services Bureau à distance). Pour plus d’informations, consultez [Accès délégué dans Windows Virtual Desktop](delegated-access-virtual-desktop-2019.md).
 
 Vous devez également fournir aux utilisateurs les informations suivantes :
@@ -226,7 +220,7 @@ Les activités sont triées par timestamp, avec l’activité la plus récente e
 
 Les activités de connexion peuvent avoir plus d’une erreur. Vous pouvez développer le type d’activité pour consulter toutes les autres erreurs rencontrées par l’utilisateur. Sélectionnez le nom du code d’erreur pour ouvrir une boîte de dialogue qui vous permet d’obtenir plus d’informations.
 
-### <a name="investigate-the-session-host"></a>Examiner l’hôte de la session 
+### <a name="investigate-the-session-host"></a>Examiner l’hôte de la session
 
 Dans les résultats de la recherche, recherchez et sélectionnez l’hôte de la session sur lequel vous souhaitez obtenir des informations.
 

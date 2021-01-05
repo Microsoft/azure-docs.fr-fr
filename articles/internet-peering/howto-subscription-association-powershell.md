@@ -5,15 +5,16 @@ description: Associer un NSA d’homologue à un abonnement Azure à l’aide de
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
+ms.topic: how-to
+ms.date: 12/15/2020
 ms.author: prmitiki
-ms.openlocfilehash: 77cc4732e017d95cbae19578cf26b1111b08fdde
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 3b463293899dc2586404d68145943caff3105e89
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75908987"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590186"
 ---
 # <a name="associate-peer-asn-to-azure-subscription-using-powershell"></a>Associer un NSA d’homologue à un abonnement Azure à l’aide de PowerShell
 

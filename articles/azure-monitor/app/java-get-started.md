@@ -2,19 +2,24 @@
 title: 'Démarrage rapide : Analytique d’une application web Java avec Azure Application Insights'
 description: 'Analyse des performances des applications pour les applications web Java à l’aide d’Application Insights. '
 ms.topic: conceptual
-author: lgayhardt
-ms.author: lagayhar
-ms.date: 05/24/2019
-ms.openlocfilehash: e56ba304d197984110de5127a0f163ac0accf1aa
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/22/2020
+author: MS-jgol
+ms.custom: devx-track-java
+ms.author: jgol
+ms.openlocfilehash: 6bdad71f0b36995abdeb3b1edb87cbef32df8b67
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537506"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96919432"
 ---
 # <a name="quickstart-get-started-with-application-insights-in-a-java-web-project"></a>Démarrage rapide : Prise en main d'Application Insights dans un projet web Java
 
-Dans ce démarrage rapide, vous utilisez Application Insights pour instrumenter automatiquement des requêtes, effectuer le suivi des dépendances, recueillir les compteurs de performances, diagnostiquer les problèmes de performances et les exceptions et écrire du code pour suivre l’utilisation de votre application par les utilisateurs.
+
+> [!CAUTION]
+> Depuis novembre 2020, pour la surveillance des applications Java, nous vous recommandons d’utiliser l’instrumentation automatique avec l’agent Azure Monitor Application Insights Java 3.0. Pour plus d’informations sur la prise en main, consultez [Agent Application Insights Java 3.0](./java-in-process-agent.md).
+
+Dans ce démarrage rapide, vous utilisez le Kit de développement logiciel (SDK) Application Insights pour instrumenter des requêtes, effectuer le suivi des dépendances, recueillir les compteurs de performances, diagnostiquer les problèmes de performances et les exceptions et écrire du code pour suivre l’utilisation de votre application par les utilisateurs.
 
 Application Insights est un service d’analyse extensible pour développeurs web qui vous permet de comprendre les performances et l’utilisation de votre application en direct. Application Insights prend en charge les applications Java exécutées sur Linux, Unix ou Windows.
 
@@ -25,6 +30,8 @@ Application Insights est un service d’analyse extensible pour développeurs w
 
 ## <a name="get-an-application-insights-instrumentation-key"></a>Obtenir une clé d'instrumentation Application Insights
 
+> [!IMPORTANT]
+> Les nouvelles régions Azure **exigent** l’utilisation de chaînes de connexion au lieu de clés d’instrumentation. Une [chaîne de connexion](./sdk-connection-string.md?tabs=java) identifie la ressource à laquelle vous souhaitez associer vos données de télémétrie. Elle vous permet également de modifier les points de terminaison que votre ressource utilisera comme destination pour votre télémétrie. Vous devrez copier la chaîne de connexion et l’ajouter au code de votre application ou à une variable d’environnement.
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 2. Dans le Portail Azure, créez une ressource Application Insights. Définissez le type d’application sur Application web Java.
 
@@ -131,7 +138,7 @@ Le kit de développement logiciel (SDK) d’Application Insights recherche la cl
 2. Variable d’environnement : APPINSIGHTS_INSTRUMENTATIONKEY
 3. Configuration de l'application : *ApplicationInsights.xml*
 
-Vous pouvez également [définir la clé dans le code](../../azure-monitor/app/api-custom-events-metrics.md#ikey):
+Vous pouvez également [définir la clé dans le code](./api-custom-events-metrics.md#ikey):
 
 ```java
     String instrumentationKey = "00000000-0000-0000-0000-000000000000";
@@ -172,7 +179,7 @@ Cliquez sur un type de demande spécifique pour afficher les instances individue
 ![Explorer un exemple de vue spécifique](./media/java-get-started/007-instance.png)
 
 ### <a name="analytics-powerful-query-language"></a>Analytics : Tirez parti d’un puissant langage de requête.
-En accumulant toujours plus de données, vous pouvez exécuter des requêtes à la fois pour agréger les données et pour rechercher des instances individuelles.  [Analytics](../../azure-monitor/app/analytics.md) est un outil puissant qui permet non seulement de comprendre les performances et l’utilisation, mais également d’effectuer des diagnostics.
+En accumulant toujours plus de données, vous pouvez exécuter des requêtes à la fois pour agréger les données et pour rechercher des instances individuelles.  [Analytics](../log-query/log-query-overview.md) est un outil puissant qui permet non seulement de comprendre les performances et l’utilisation, mais également d’effectuer des diagnostics.
 
 ![Exemple d’Analytics](./media/java-get-started/0025.png)
 
@@ -192,22 +199,10 @@ Publiez maintenant votre application sur le serveur, laissez le temps aux usager
 
     (Cette opération active les compteurs de performances.)
 
-## <a name="azure-app-service-config-spring-boot"></a>Configuration d’Azure App Service (Spring Boot)
+## <a name="azure-app-service-aks-vms-config"></a>Azure App Service, AKS, configuration de machines virtuelles
 
-Les applications Spring Boot qui s’exécutent sur Windows nécessitent une configuration supplémentaire pour s’exécuter sur Azure App Services. Modifiez le fichier **web.config** et ajoutez la configuration suivante :
+L’approche la meilleure et la plus simple pour surveiller vos applications s’exécutant sur n’importe quel fournisseur de ressources Azure consiste à utiliser l’instrumentation automatique d’Application Insights via l’[agent Java 3.0](./java-in-process-agent.md).
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <system.webServer>
-        <handlers>
-            <add name="httpPlatformHandler" path="*" verb="*" modules="httpPlatformHandler" resourceType="Unspecified"/>
-        </handlers>
-        <httpPlatform processPath="%JAVA_HOME%\bin\java.exe" arguments="-Djava.net.preferIPv4Stack=true -Dserver.port=%HTTP_PLATFORM_PORT% -jar &quot;%HOME%\site\wwwroot\AzureWebAppExample-0.0.1-SNAPSHOT.jar&quot;">
-        </httpPlatform>
-    </system.webServer>
-</configuration>
-```
 
 ## <a name="exceptions-and-request-failures"></a>Exceptions et échecs de requêtes
 Les exceptions non prises en charge et les échecs de demande sont collectés automatiquement par le filtre web Application Insights.
@@ -264,7 +259,7 @@ Vous pouvez spécifier d'autres compteurs de performances à collecter.
   * `tabular`: les données du compteur de performances sont au format ligne de tableau
 
 #### <a name="windows-performance-counters"></a>Compteurs de performances Windows
-Chaque [compteur de performances Windows](https://msdn.microsoft.com/library/windows/desktop/aa373083.aspx) est un membre d'une catégorie (de la même façon qu'un champ est un membre d'une classe). Les catégories peuvent être globales ou peuvent avoir des instances numérotées ou nommées.
+Chaque [compteur de performances Windows](/windows/win32/perfctrs/performance-counters-portal) est un membre d'une catégorie (de la même façon qu'un champ est un membre d'une classe). Les catégories peuvent être globales ou peuvent avoir des instances numérotées ou nommées.
 
 ```XML
     <PerformanceCounters>
@@ -307,16 +302,16 @@ Application Insights peut tester votre site web à intervalles réguliers pour v
 * [Surveillance des appels de dépendance](java-agent.md)
 * [Surveillance des compteurs de performances Unix](java-collectd.md)
 * Ajoutez [la surveillance à vos pages web](javascript.md) pour surveiller le temps de chargement des pages, les appels AJAX et les exceptions du navigateur.
-* Écrivez [télémétrie personnalisée](../../azure-monitor/app/api-custom-events-metrics.md) pour suivre l’utilisation sur le navigateur ou le serveur.
-* Utilisez [Analytics](../../azure-monitor/app/analytics.md) pour des requêtes puissantes sur les données de télémétrie de votre application
+* Écrivez [télémétrie personnalisée](./api-custom-events-metrics.md) pour suivre l’utilisation sur le navigateur ou le serveur.
+* Utilisez [Analytics](../log-query/log-query-overview.md) pour des requêtes puissantes sur les données de télémétrie de votre application
 * Pour plus d’informations, consultez [Azure pour les développeurs Java](/java/azure).
 
 <!--Link references-->
 
-[api]: ../../azure-monitor/app/api-custom-events-metrics.md
-[apiexceptions]: ../../azure-monitor/app/api-custom-events-metrics.md#trackexception
-[availability]: ../../azure-monitor/app/monitor-web-app-availability.md
-[diagnostic]: ../../azure-monitor/app/diagnostic-search.md
+[api]: ./api-custom-events-metrics.md
+[apiexceptions]: ./api-custom-events-metrics.md#trackexception
+[availability]: ./monitor-web-app-availability.md
+[diagnostic]: ./diagnostic-search.md
 [javalogs]: java-trace-logs.md
-[metrics]: ../../azure-monitor/platform/metrics-charts.md
+[metrics]: ../platform/metrics-charts.md
 [usage]: javascript.md

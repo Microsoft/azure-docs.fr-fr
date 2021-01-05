@@ -1,18 +1,19 @@
 ---
 title: Événements planifiés pour les machines virtuelles Linux dans Azure
 description: Planifiez des événements en utilisant le service de métadonnées Azure pour vos machines virtuelles Linux.
-author: mimckitt
-ms.service: virtual-machines-windows
-ms.topic: article
+author: EricRadzikowskiMSFT
+ms.service: virtual-machines-linux
+ms.topic: how-to
 ms.workload: infrastructure-services
-ms.date: 02/22/2018
-ms.author: mimckitt
-ms.openlocfilehash: ee600d7524af27a0e9e2ce0176e7bd4d1f60bc3b
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.date: 06/01/2020
+ms.author: ericrad
+ms.reviewer: mimckitt
+ms.openlocfilehash: 99528d1575056917b68bcb38f41a24d065822827
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758561"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92792801"
 ---
 # <a name="azure-metadata-service-scheduled-events-for-linux-vms"></a>Service de métadonnées Azure : événements planifiés pour les machines virtuelles Linux
 
@@ -38,10 +39,10 @@ Avec le service Événements planifiés, votre application peut savoir quand une
 
 Le service Événements planifiés fournit des événements dans les cas d’usage suivants :
 
-- [Maintenance lancée par la plateforme](https://docs.microsoft.com/azure/virtual-machines/linux/maintenance-and-updates) (par exemple, redémarrage de machine virtuelle, migration dynamique ou mémoire conservant les mises à jour pour l’hôte)
+- [Maintenance lancée par la plateforme](../maintenance-and-updates.md?bc=/azure/virtual-machines/linux/breadcrumb/toc.json&toc=/azure/virtual-machines/linux/toc.json) (par exemple, redémarrage de machine virtuelle, migration dynamique ou mémoire conservant les mises à jour pour l’hôte)
 - La machine virtuelle est en cours d’exécution sur le [matériel hôte détérioré](https://azure.microsoft.com/blog/find-out-when-your-virtual-machine-hardware-is-degraded-with-scheduled-events) dont la défaillance prochaine est prédite
 - L’utilisateur a lancé une maintenance (par exemple, un utilisateur redémarre ou redéploie une machine virtuelle).
-- Évictions d’instances de [machine virtuelle Spot](spot-vms.md) et de [groupe de machines virtuelles identiques Spot](../../virtual-machine-scale-sets/use-spot.md).
+- Évictions d’instances de [machine virtuelle Spot](../spot-vms.md) et de [groupe de machines virtuelles identiques Spot](../../virtual-machine-scale-sets/use-spot.md).
 
 ## <a name="the-basics"></a>Concepts de base  
 
@@ -53,14 +54,19 @@ Les événements planifiés sont remis à :
 - Machines virtuelles autonomes.
 - Toutes les machines virtuelles d’un service cloud
 - Toutes les machines virtuelles d’un groupe à haute disponibilité
+- Toutes les machines virtuelles d’une zone à haute disponibilité. 
 - Toutes les machines virtuelles d’un groupe de placement de groupe identique 
+
+> [!NOTE]
+> Les événements planifiés, spécifiques aux machines virtuelles dans une zone de disponibilité, sont dirigés vers des machines virtuelles uniques d’une zone.
+> Par exemple, si vous avez 100 machines virtuelles dans un groupe à haute disponibilité et que l’une d’elles doit être mise à jour, l’événement planifié les concernera toutes, tandis que s’il y a 100 machines virtuelles uniques dans une zone, l’événement concernera uniquement la machine virtuelle impactée.
 
 Par conséquent, vérifiez le champ `Resources` de l’événement pour identifier les machines virtuelles concernées.
 
 ### <a name="endpoint-discovery"></a>Découverte de point de terminaison
 Pour les machines virtuelles compatibles avec le réseau virtuel, le service de métadonnées est disponible à partir d’une adresse IP non routable statique, `169.254.169.254`. Le point de terminaison complet de la dernière version des événements planifiés est : 
 
- > `http://169.254.169.254/metadata/scheduledevents?api-version=2019-01-01`
+ > `http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01`
 
 Si la machine virtuelle n’est pas créée au sein d’un réseau virtuel, ce qui est habituellement le cas pour les services cloud et les machines virtuelles classiques, une logique supplémentaire est nécessaire pour découvrir l’adresse IP à utiliser. Reportez-vous à cet exemple pour savoir comment [découvrir le point de terminaison hôte](https://github.com/azure-samples/virtual-machines-python-scheduled-events-discover-endpoint-for-non-vnet-vm).
 
@@ -69,6 +75,8 @@ Les versions du service Événements planifiés sont gérées. Ces versions sont
 
 | Version | Type de version | Régions | Notes de publication | 
 | - | - | - | - | 
+| 2019-08-01 | Disponibilité générale | Tous | <li> Ajout de la prise en charge pour EventSource |
+| 2019-04-01 | Disponibilité générale | Tous | <li> Ajout de la prise en charge pour Description de l’événement |
 | 2019-01-01 | Disponibilité générale | Tous | <li> Ajout de la prise en charge des groupes de machines virtuelles identiques, EventType « Terminate » |
 | 2017-11-01 | Disponibilité générale | Tous | <li> Ajout de la prise en charge de l’éviction de machine virtuelle Spot, EventType « Preempt »<br> | 
 | 2017-08-01 | Disponibilité générale | Tous | <li> Suppression du trait de soulignement ajouté au début des noms de ressources pour les machines virtuelles IaaS<br><li>Spécification d’en-tête de métadonnées appliquée à toutes les requêtes | 
@@ -98,7 +106,7 @@ Vous pouvez rechercher des événements planifiés en effectuant l’appel suiva
 
 #### <a name="bash"></a>Bash
 ```
-curl -H Metadata:true http://169.254.169.254/metadata/scheduledevents?api-version=2019-01-01
+curl -H Metadata:true http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01
 ```
 
 Une réponse contient un tableau d’événements planifiés. Un tableau vide signifie qu’il n’y a actuellement aucun événement planifié.
@@ -113,7 +121,9 @@ S’il existe des événements planifiés, la réponse contient un tableau d’�
             "ResourceType": "VirtualMachine",
             "Resources": [{resourceName}],
             "EventStatus": "Scheduled" | "Started",
-            "NotBefore": {timeInUTC},              
+            "NotBefore": {timeInUTC},       
+            "Description": {eventDescription},
+            "EventSource" : "Platform" | "User",
         }
     ]
 }
@@ -125,9 +135,11 @@ S’il existe des événements planifiés, la réponse contient un tableau d’�
 | EventId | GUID pour cet événement. <br><br> Exemple : <br><ul><li>602d9444-d2cd-49c7-8624-8643e7171297  |
 | Type d’événement | Impact provoqué par cet événement. <br><br> Valeurs : <br><ul><li> `Freeze`: une pause de quelques secondes est planifiée pour la machine virtuelle. L’UC et la connectivité réseau peuvent être suspendus, mais cela n’a aucun impact sur la mémoire ni sur les fichiers ouverts.<li>`Reboot`: un redémarrage est planifié pour la machine virtuelle (la mémoire non persistante est effacée). <li>`Redeploy`: un déplacement vers un autre nœud est planifié pour la machine virtuelle (le contenu des disques éphémères est perdu). <li>`Preempt`: la machine virtuelle Spot est supprimée (le contenu des disques éphémères est perdu). <li> `Terminate`: La suppression de la machine virtuelle est planifiée. |
 | ResourceType | Type de ressource affecté par cet événement. <br><br> Valeurs : <ul><li>`VirtualMachine`|
-| Ressources| Liste de ressources affectée par cet événement. Elle contient à coup sûr des machines d’au plus un [domaine de mise à jour](manage-availability.md), mais elle peut tout aussi bien ne pas contenir toutes les machines de ce domaine. <br><br> Exemple : <br><ul><li> ["FrontEnd_IN_0", "BackEnd_IN_0"] |
+| Ressources| Liste de ressources affectée par cet événement. Elle contient à coup sûr des machines d’au plus un [domaine de mise à jour](../manage-availability.md), mais elle peut tout aussi bien ne pas contenir toutes les machines de ce domaine. <br><br> Exemple : <br><ul><li> ["FrontEnd_IN_0", "BackEnd_IN_0"] |
 | EventStatus | État de cet événement. <br><br> Valeurs : <ul><li>`Scheduled`: cet événement est planifié pour démarrer après l’heure spécifiée dans la propriété `NotBefore`.<li>`Started`: cet événement a démarré.</ul> Aucun état `Completed` ou similaire n’est fourni. L’événement n’est plus renvoyé lorsqu’il est terminé.
 | NotBefore| Heure après laquelle cet événement peut démarrer. <br><br> Exemple : <br><ul><li> Lundi 19 septembre 2016 18:29:47 GMT  |
+| Description | Description de cet événement. <br><br> Exemple : <br><ul><li> Le serveur hôte est en cours de maintenance. |
+| EventSource | Initiateur de l’événement. <br><br> Exemple : <br><ul><li> `Platform`: Cet événement est déclenché par la plateforme. <li>`User`: Cet événement est déclenché par l’utilisateur. |
 
 ### <a name="event-scheduling"></a>Planification d’événement
 Chaque événement est planifié à un moment donné dans le futur (délai minimum), en fonction de son type. Cette heure est reflétée dans la propriété `NotBefore` d’un événement. 
@@ -142,6 +154,10 @@ Chaque événement est planifié à un moment donné dans le futur (délai minim
 
 > [!NOTE] 
 > Dans certains cas, Azure est en mesure de prédire une défaillance de l’hôte en raison d’un matériel détérioré, et tente d’atténuer l’interruption du service en planifiant une migration. Les machines virtuelles affectées recevront un événement planifié avec une valeur de temps `NotBefore` généralement définie sur quelques jours dans le futur. La valeur de temps réelle varie en fonction de l’évaluation du risque de la défaillance prédite. Autant que possible, Azure tente de donner un préavis de 7 jours, mais le temps réel varie et peut être inférieur si la prédiction indique qu’il y a de fortes chances que la défaillance du matériel soit imminente. Pour minimiser les risques auxquels votre service serait exposé en cas de défaillance du matériel avant la migration lancée par le système, nous vous recommandons d’auto-redéployer votre machine virtuelle dès que possible.
+
+### <a name="polling-frequency"></a>Fréquence d’interrogation
+
+Vous pouvez rechercher des mises à jour sur le point de terminaison à la fréquence de votre choix. Toutefois, plus l’intervalle entre deux requêtes est long, plus vous perdez potentiellement du temps pour réagir à un événement à venir. La plupart des événements préviennent de 5 à 15 minutes à l’avance, bien que dans certains cas, 30 secondes suffisent. Pour être sûr de disposer du maximum de temps pour prendre des mesures d’atténuation, nous vous recommandons d’interroger le service une fois pas seconde.
 
 ### <a name="start-an-event"></a>Démarrer un événement 
 
@@ -177,7 +193,7 @@ import json
 import socket
 import urllib2
 
-metadata_url = "http://169.254.169.254/metadata/scheduledevents?api-version=2019-01-01"
+metadata_url = "http://169.254.169.254/metadata/scheduledevents?api-version=2019-08-01"
 this_host = socket.gethostname()
 
 
@@ -197,9 +213,14 @@ def handle_scheduled_events(data):
         eventtype = evt['EventType']
         resourcetype = evt['ResourceType']
         notbefore = evt['NotBefore'].replace(" ", "_")
+    description = evt['Description']
+    eventSource = evt['EventSource']
         if this_host in resources:
             print("+ Scheduled Event. This host " + this_host +
-                " is scheduled for " + eventtype + " not before " + notbefore)
+                " is scheduled for " + eventtype + 
+        " by " + eventSource + 
+        " with description " + description +
+        " not before " + notbefore)
             # Add logic for handling events here
 
 
@@ -216,4 +237,4 @@ if __name__ == '__main__':
 - Regardez la vidéo sur le service [Événements planifiés sur Azure Friday](https://channel9.msdn.com/Shows/Azure-Friday/Using-Azure-Scheduled-Events-to-Prepare-for-VM-Maintenance) pour voir une démonstration. 
 - Passez en revue les exemples de code d’événements planifiés disponibles dans le [dépôt GitHub d’événements planifiés de métadonnées d’instance Azure](https://github.com/Azure-Samples/virtual-machines-scheduled-events-discover-endpoint-for-non-vnet-vm).
 - Apprenez-en davantage sur les API disponibles dans le [service de métadonnées d’instance](instance-metadata-service.md).
-- Découvrez plus d’informations sur la [maintenance planifiée pour les machines virtuelles Linux dans Azure](planned-maintenance.md).
+- Découvrez plus d’informations sur la [maintenance planifiée pour les machines virtuelles Linux dans Azure](../maintenance-and-updates.md?bc=/azure/virtual-machines/linux/breadcrumb/toc.json&toc=/azure/virtual-machines/linux/toc.json).

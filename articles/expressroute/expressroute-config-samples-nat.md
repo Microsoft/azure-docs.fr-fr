@@ -2,17 +2,17 @@
 title: "Azure ExpressRoute : Exemples de configuration de routeur – Traduction d'adresses réseau"
 description: Cette page fournit des exemples de configuration pour les routeurs Cisco et Juniper.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
 ms.topic: article
 ms.date: 12/06/2018
-ms.author: cherylmc
-ms.openlocfilehash: ef2fd40db422c459ca966e802344ef45f7ec01de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 4b57dec32a3a008cadf68c19ea52353a23fb2cd3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74072108"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89397492"
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-nat"></a>Exemples de configuration de routeur pour configurer et gérer des NAT
 
@@ -30,59 +30,71 @@ Cette page fournit des exemples de configuration NAT pour les routeurs des séri
 
 ## <a name="cisco-asa-firewalls"></a>Pare-feu Cisco ASA
 ### <a name="pat-configuration-for-traffic-from-customer-network-to-microsoft"></a>Configuration PAT pour le trafic du réseau client à Microsoft
-    object network MSFT-PAT
-      range <SNAT-START-IP> <SNAT-END-IP>
+
+```console
+object network MSFT-PAT
+  range <SNAT-START-IP> <SNAT-END-IP>
 
 
-    object-group network MSFT-Range
-      network-object <IP> <Subnet_Mask>
+object-group network MSFT-Range
+  network-object <IP> <Subnet_Mask>
 
-    object-group network on-prem-range-1
-      network-object <IP> <Subnet-Mask>
+object-group network on-prem-range-1
+  network-object <IP> <Subnet-Mask>
 
-    object-group network on-prem-range-2
-      network-object <IP> <Subnet-Mask>
+object-group network on-prem-range-2
+  network-object <IP> <Subnet-Mask>
 
-    object-group network on-prem
-      network-object object on-prem-range-1
-      network-object object on-prem-range-2
+object-group network on-prem
+  network-object object on-prem-range-1
+  network-object object on-prem-range-2
 
-    nat (outside,inside) source dynamic on-prem pat-pool MSFT-PAT destination static MSFT-Range MSFT-Range
+nat (outside,inside) source dynamic on-prem pat-pool MSFT-PAT destination static MSFT-Range MSFT-Range
+```
 
 ### <a name="pat-configuration-for-traffic-from-microsoft-to-customer-network"></a>Configuration PAT pour le trafic de Microsoft au réseau client
 
 **Interfaces et sens :**
 
-    Source Interface (where the traffic enters the ASA): inside
-    Destination Interface (where the traffic exits the ASA): outside
+Interface source (où le trafic entre dans ASA) : dans l’interface de destination (où le trafic quitte ASA) : en dehors
 
 **Configuration :**
 
 Pool NAT :
 
-    object network outbound-PAT
-        host <NAT-IP>
+```console
+object network outbound-PAT
+    host <NAT-IP>
+```
 
 Serveur cible :
 
-    object network Customer-Network
-        network-object <IP> <Subnet-Mask>
+```console
+object network Customer-Network
+    network-object <IP> <Subnet-Mask>
+```
 
-Groupe d’objets pour les adresses IP de clients
+Groupe d’objets pour les adresses IP de clients :
 
-    object-group network MSFT-Network-1
-        network-object <MSFT-IP> <Subnet-Mask>
+```console
+object-group network MSFT-Network-1
+    network-object <MSFT-IP> <Subnet-Mask>
 
-    object-group network MSFT-PAT-Networks
-        network-object object MSFT-Network-1
+object-group network MSFT-PAT-Networks
+    network-object object MSFT-Network-1
+```
 
 Commandes NAT :
 
-    nat (inside,outside) source dynamic MSFT-PAT-Networks pat-pool outbound-PAT destination static Customer-Network Customer-Network
+```console
+nat (inside,outside) source dynamic MSFT-PAT-Networks pat-pool outbound-PAT destination static Customer-Network Customer-Network
+```
 
 
 ## <a name="juniper-srx-series-routers"></a>Routeurs de la série Juniper SRX
 ### <a name="1-create-redundant-ethernet-interfaces-for-the-cluster"></a>1. Création d’interfaces Ethernet redondantes pour le cluster
+
+```console
     interfaces {
         reth0 {
             description "To Internal Network";
@@ -112,17 +124,50 @@ Commandes NAT :
             }
         }
     }
-
+```
 
 ### <a name="2-create-two-security-zones"></a>2. Création de deux zones de sécurité
 * Zone approuvée pour le réseau interne et zone non approuvée pour les routeurs accessibles depuis le réseau externe
 * Affectation des interfaces appropriées aux zones
 * Autorisation des services sur les interfaces
 
-    security {       zones {           security-zone Trust {               host-inbound-traffic {                   system-services {                       ping;                   }                   protocols {                       bgp;                   }               }               interfaces {                   reth0.100;               }           }           security-zone Untrust {               host-inbound-traffic {                   system-services {                       ping;                   }                   protocols {                       bgp;                   }               }               interfaces {                   reth1.100;               }           }       }   }
+```console
+    security {
+        zones {
+            security-zone Trust {
+                host-inbound-traffic {
+                    system-services {
+                        ping;
+                    }
+                    protocols {
+                        bgp;
+                    }
+                }
+                interfaces {
+                    reth0.100;
+                }
+            }
+            security-zone Untrust {
+                host-inbound-traffic {
+                    system-services {
+                        ping;
+                    }
+                    protocols {
+                        bgp;
+                    }
+                }
+                interfaces {
+                    reth1.100;
+                }
+            }
+        }
+    }
+```
 
 
 ### <a name="3-create-security-policies-between-zones"></a>3. Création des stratégies de sécurité entre les zones
+
+```console
     security {
         policies {
             from-zone Trust to-zone Untrust {
@@ -151,12 +196,13 @@ Commandes NAT :
             }
         }
     }
-
+```
 
 ### <a name="4-configure-nat-policies"></a>4. Configuration des stratégies NAT
 * Créez deux pools NAT. Un pool servira au trafic NAT sortant vers Microsoft et un autre au trafic de Microsoft vers le client.
 * Création des règles NAT pour le trafic respectif
-  
+
+```console
        security {
            nat {
                source {
@@ -211,11 +257,14 @@ Commandes NAT :
                }
            }
        }
+```
 
 ### <a name="5-configure-bgp-to-advertise-selective-prefixes-in-each-direction"></a>5. Configuration de BGP pour publier les préfixes sélectifs dans chaque direction
 Consultez les exemples de la page [Exemples de configuration de routage ](expressroute-config-samples-routing.md).
 
 ### <a name="6-create-policies"></a>6. Création des stratégies
+
+```console
     routing-options {
                   autonomous-system <Customer-ASN>;
     }
@@ -309,6 +358,7 @@ Consultez les exemples de la page [Exemples de configuration de routage ](expres
             }
         }
     }
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations, consultez le [Forum Aux Questions sur ExpressRoute](expressroute-faqs.md) .

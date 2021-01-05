@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: H1Hack27Feb2017,hdinsightactive
 ms.date: 12/16/2019
-ms.openlocfilehash: f3705170be28f33e5994bd00e363dc7ec7f94642
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fe511ed2d6b724c1215f9986c9d6c50aae076935
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435612"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95971907"
 ---
 # <a name="analyze-twitter-data-using-apache-hive-and-apache-hadoop-on-hdinsight"></a>Analyser des données Twitter avec Apache Hive et Apache Hadoop sur HDInsight
 
@@ -313,4 +313,4 @@ Ces commandes stockent les données dans un emplacement accessible à tous les n
 Vous avez appris à transformer un jeu de données JSON non structuré en une table [Apache Hive](https://hive.apache.org/) structurée. Pour en savoir plus sur Hive avec HDInsight, consultez les documents suivants :
 
 * [Prise en main de HDInsight](hadoop/apache-hadoop-linux-tutorial-get-started.md)
-* [Analyse des données sur les retards de vol avec HDInsight](/azure/hdinsight/interactive-query/interactive-query-tutorial-analyze-flight-data)
+* [Analyse des données sur les retards de vol avec HDInsight](./interactive-query/interactive-query-tutorial-analyze-flight-data.md)

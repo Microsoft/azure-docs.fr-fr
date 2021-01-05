@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/12/2017
 ms.author: alkohli
-ms.openlocfilehash: b5490c4e79ee1458b498f539c0db2cc189fce7f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 69a36f38cc76693f596b45d4df6e232bc01584d5
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60723304"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967973"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-administer-your-storsimple-device"></a>Utiliser le service StorSimple Device Manager pour gérer votre appareil StorSimple
 
@@ -65,7 +65,7 @@ Pour plus d'informations sur chaque flux de travail, cliquez sur la procédure a
 | À propos des enregistrements de contrôle d’accès</br>Création d'un enregistrement de contrôle d’accès</br>Modifier un enregistrement de contrôle d’accès</br>Supprimer un enregistrement de contrôle d’accès |[Gestion d’enregistrements de contrôle d’accès](storsimple-8000-manage-acrs.md) |
 | Affichage des détails d’une tâche</br>Annulation d’une tâche |[Gestion des travaux](storsimple-8000-manage-jobs-u2.md) |
 | Réception de notifications d’alerte</br>Gérer les alertes</br>Consulter les alertes |[Affichage et gestion des alertes StorSimple](storsimple-8000-manage-alerts.md) |
-| Création de graphiques d’analyse |[Surveillance de votre appareil StorSimple](storsimple-monitor-device.md) |
+| Création de graphiques d’analyse |[Surveillance de votre appareil StorSimple](./storsimple-8000-monitor-device.md) |
 | Ajouter un conteneur de volumes</br>Modifier un conteneur de volumes</br>Supprimer un conteneur de volumes |[Gestion de conteneurs de volume](storsimple-8000-manage-volume-containers.md) |
 | Ajout d’un volume</br>Modification d’un volume</br>Mise hors connexion d’un volume</br>Suppression d’un volume</br>Analyse d’un volume |[Gérer les volumes](storsimple-8000-manage-volumes-u2.md) |
 | Modification des paramètres de l’appareil</br>Modification des paramètres d’heure</br>Modification des paramètres DNS.md</br>Configuration d’interfaces réseau |[Modification de la configuration de votre appareil StorSimple](storsimple-8000-modify-device-config.md) |
@@ -73,7 +73,7 @@ Pour plus d'informations sur chaque flux de travail, cliquez sur la procédure a
 | Modification du mot de passe administrateur de votre appareil</br>Modification du mot de passe de StorSimple Snapshot Manager |[Modification des mots de passe StorSimple](storsimple-8000-change-passwords.md) |
 | Configuration de la gestion à distance |[Connexion à distance à votre appareil StorSimple](storsimple-8000-remote-connect.md) |
 | Configuration des paramètres d'alerte |[Affichage et gestion des alertes StorSimple](storsimple-8000-manage-alerts.md) |
-| Configuration de CHAP pour votre appareil StorSimple |[Configuration de CHAP pour votre appareil StorSimple](storsimple-configure-chap.md) |
+| Configuration de CHAP pour votre appareil StorSimple |[Configuration de CHAP pour votre appareil StorSimple](./storsimple-8000-configure-chap.md) |
 | Ajout d’une stratégie de sauvegarde</br>Ajouter ou modifier une planification</br>Supprimer une stratégie de sauvegarde</br>Exécuter une sauvegarde manuelle</br>Créer une stratégie de sauvegarde personnalisée comportant plusieurs volumes et planifications |[Gestion des stratégies de sauvegarde](storsimple-8000-manage-backup-policies-u2.md) |
 | Arrêt des contrôleurs d’appareil</br>Redémarrage des contrôleurs de l’appareil</br>Arrêt des contrôleurs de l'appareil</br>Réinitialisation de votre appareil aux valeurs par défaut</br>(Les données ci-dessus s’appliquent aux appareils en local uniquement) |[Gestion du contrôleur d’appareil StorSimple](storsimple-8000-manage-device-controller.md) |
 | En savoir plus sur les composants matériels de StorSimple</br>Surveillance de l'état du matériel</br>(Les données ci-dessus s’appliquent aux appareils en local uniquement) |[Surveillance des composants matériels](storsimple-8000-monitor-hardware-status.md) |
@@ -88,4 +88,3 @@ Si vous rencontrez des problèmes de fonctionnement quotidien de votre appareil 
 * [Utilisation des indicateurs de surveillance de StorSimple](storsimple-monitoring-indicators.md)
 
 Si vous ne parvenez pas à résoudre les problèmes et vous devez générer une demande d’intervention, consultez [Contacter le support technique Microsoft](storsimple-8000-contact-microsoft-support.md).
-

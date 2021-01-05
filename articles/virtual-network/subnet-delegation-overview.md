@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/20/2019
 ms.author: kumud
-ms.openlocfilehash: b33ff808b802b6848e2d5debaf515a73bf21a1bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1fbb683754aed5b2a2e6e9c022713b7e87ad9ba9
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74281063"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91329205"
 ---
 # <a name="what-is-subnet-delegation"></a>Qu’est-ce que la délégation de sous-réseau ?
 
@@ -51,6 +51,7 @@ Chaque service Azure définit son propre modèle de déploiement, où il peut d�
 - détermine le nombre minimal d’adresses IP dans le sous-réseau délégué.
 - indique que l’espace d’adressage IP dans le sous-réseau délégué doit provenir de l’espace d’adressage IP privé (10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12).
 - exige que la configuration DNS personnalisée ait une entrée Azure DNS.
+- exige que la délégation soit supprimée avant que le sous-réseau ou le réseau virtuel puisse être supprimé.
 
 Les services injectés peuvent également ajouter leurs propres stratégies comme suit :
 - **Stratégies de sécurité** : Collection de règles de sécurité requises pour le fonctionnement d’un service donné.

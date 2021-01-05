@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 10/23/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: eb00234fb7522c763dbaa910bee99cf327bebaf1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 1d2a0d79a5cdd53f8376c088fc986c20908575eb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77597896"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91329452"
 ---
 # <a name="tutorial-extend-windows-file-servers-with-azure-file-sync"></a>Tutoriel : Étendre les serveurs de fichiers Windows avec Azure File Sync
 
@@ -259,9 +259,8 @@ L’interface utilisateur d’inscription du serveur s’ouvre normalement autom
 
    ![Capture d’écran de l’interface utilisateur d’inscription de serveur](media/storage-sync-files-extend-servers/signin.png)
 
-   | | |
-   | ----- | ----- |
    | Valeur | Description |
+   | ----- | ----- |
    | **Abonnement Azure** | L’abonnement qui contient le Service de synchronisation de stockage pour ce didacticiel. |
    | **Groupe de ressources** | groupe de ressources qui contient le service de synchronisation de stockage. Utilisez le groupe _afsresgroup101918_ dans ce tutoriel. |
    | **Service de synchronisation de stockage** | Nom du service de synchronisation de stockage. Utilisez le nom _afssyncservice02_ dans ce tutoriel. |
@@ -301,9 +300,8 @@ Un point de terminaison de serveur représente un emplacement spécifique sur un
 
 1. Dans le volet **Ajouter un point de terminaison de serveur**, entrez les informations suivantes pour créer un point de terminaison de serveur :
 
-   | | |
-   | ----- | ----- |
    | Valeur | Description |
+   | ----- | ----- |
    | **Serveur inscrit** | Nom du serveur que vous avez créé. Utilisez le serveur *afsvm101918* dans ce tutoriel. |
    | **Chemin d’accès** | Chemin Windows Server vers le lecteur que vous avez créé. Utilisez le chemin *f:\filestosync* dans ce tutoriel. |
    | **Hiérarchisation cloud** | Laissez le champ désactivé pour ce didacticiel. |
@@ -316,6 +314,8 @@ Vos fichiers sont maintenant synchronisés entre le partage de fichiers Azure et
 ![Le Stockage Azure s’est synchronisé avec succès](media/storage-sync-files-extend-servers/files-synced-in-azurestorage.png)
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous souhaitez nettoyer les ressources que vous avez créées dans ce tutoriel, commencez par supprimer les points de terminaison du service de synchronisation du stockage. Ensuite, désinscrivez le serveur de votre service de synchronisation de stockage, supprimez les groupes de synchronisation et supprimez le service de synchronisation.
 
 [!INCLUDE [storage-files-clean-up-portal](../../../includes/storage-files-clean-up-portal.md)]
 

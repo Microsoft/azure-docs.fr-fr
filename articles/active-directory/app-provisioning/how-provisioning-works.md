@@ -2,21 +2,22 @@
 title: Comprendre le fonctionnement du provisionnement Azure AD | Microsoft Docs
 description: Comprendre le fonctionnement du provisionnement Azure AD
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 12/10/2019
-ms.author: mimart
+ms.date: 11/04/2020
+ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: 7ee685da3492b6915a687151beea3e82e46185de
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.custom: contperf-fy21q2
+ms.openlocfilehash: 07e3ff76886a935bf0b7b5c83052e0e7cd7a0429
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593724"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97027422"
 ---
 # <a name="how-provisioning-works"></a>Comment fonctionne le provisionnement
 
@@ -42,9 +43,7 @@ Si vous souhaitez demander un connecteur de provisionnement automatique Azure A
 
 ## <a name="authorization"></a>Autorisation
 
-Des informations d’identification sont nécessaires pour qu’Azure AD puisse se connecter à l’API de gestion des utilisateurs de l’application. Pour configurer l’attribution automatique d’utilisateurs dans une application, vous devez entrer des informations d’identification valides. Pour connaître les différents types d’informations d’identification et d’exigences d’une application, consultez le tutoriel de l’application. Dans le portail Azure, vous pouvez tester les informations d’identification en demandant à Azure AD de se connecter à l’API de provisionnement de l’application à l’aide des informations d’identification fournies.
-
-Si l’authentification unique basée sur SAML est également configurée pour l’application, la limite de stockage par application interne d’Azure AD est de 1 024 octets. Cette limite comprend l’ensemble des certificats, jetons secrets, informations d’identification et données de configuration qui sont associés à une même instance d’application (également appelée « enregistrement du principal de service » dans Azure AD). Lorsque l’authentification unique basée sur SAML est configurée, le certificat utilisé pour signer les jetons SAML consomme généralement plus de 50 % de l’espace. Les éléments supplémentaires (jetons secrets, URI, adresses e-mail de notification, noms d’utilisateur et mots de passe) que vous entrez pendant la configuration de l’attribution d’utilisateurs peuvent entraîner un dépassement de la limite de stockage. Pour plus d’informations, consultez [Problème d’enregistrement des informations d’identification d’administrateur lors de la configuration du provisionnement d’utilisateurs](../manage-apps/application-provisioning-config-problem-storage-limit.md).
+Des informations d’identification sont nécessaires pour qu’Azure AD puisse se connecter à l’API de gestion des utilisateurs de l’application. Pour configurer l’attribution automatique d’utilisateurs dans une application, vous devez entrer des informations d’identification valides. Pour les applications de la galerie, consultez le tutoriel de l’application afin d’en connaître les différents types d’informations d’identification et les exigences. Pour les applications qui ne proviennent pas de la galerie, vous pouvez consulter la documentation [SCIM](./use-scim-to-provision-users-and-groups.md#authorization-for-provisioning-connectors-in-the-application-gallery) pour comprendre les types d’informations d’identification et les exigences. Dans le portail Azure, vous pouvez tester les informations d’identification en demandant à Azure AD de se connecter à l’API de provisionnement de l’application à l’aide des informations d’identification fournies.
 
 ## <a name="mapping-attributes"></a>Mappage d’attributs
 
@@ -54,7 +53,7 @@ Il existe un ensemble préconfiguré d’attributs et de mappages d’attributs 
 
 Lors de la configuration du provisionnement, il est important de vérifier et configurer les mappages d’attributs et les workflows qui définissent les propriétés de l’utilisateur (ou du groupe) passant d’Azure AD à l’application. Vérifiez et configurez la propriété correspondante (**Trouver les objets utilisant cet attribut**) qui est utilisée pour identifier de façon unique et établir une correspondance entre les utilisateurs et groupes des deux systèmes.
 
-Vous pouvez personnaliser les mappages d’attributs par défaut en fonction des besoins de votre organisation. Vous pouvez ainsi modifier ou supprimer des mappages d’attributs existants ou en créer de nouveaux. Pour plus d’informations, consultez [Personnalisation des mappages d’attributs d’attribution d’utilisateurs pour les applications SaaS](../manage-apps/customize-application-attributes.md).
+Vous pouvez personnaliser les mappages d’attributs par défaut en fonction des besoins de votre organisation. Vous pouvez ainsi modifier ou supprimer des mappages d’attributs existants ou en créer de nouveaux. Pour plus d’informations, consultez [Personnalisation des mappages d’attributs d’attribution d’utilisateurs pour les applications SaaS](./customize-application-attributes.md).
 
 Quand vous configurez l’approvisionnement pour une application SaaS, l’un des types de mappages d’attributs que vous pouvez spécifier est un mappage d’expression. Pour ces mappages, vous devez écrire une expression semblable à un script qui vous permet de transformer les données des utilisateurs dans des formats plus acceptables pour l’application SaaS. Pour plus d’informations, consultez [Écriture d’expressions pour les mappages d’attributs](functions-for-customizing-application-data.md).
 
@@ -63,17 +62,17 @@ Quand vous configurez l’approvisionnement pour une application SaaS, l’un de
 
 Pour le provisionnement sortant entre Azure AD et une application SaaS, les [attributions d’utilisateurs ou de groupes](../manage-apps/assign-user-or-group-access-portal.md) constituent la méthode la plus courante pour déterminer les utilisateurs qui sont compris dans l’étendue du provisionnement. Étant donné que les attributions d’utilisateurs sont également utilisées pour l’authentification unique, cette même méthode peut être utilisée pour gérer l’accès et le provisionnement. L’étendue basée sur les attributions ne s’applique pas aux scénarios de provisionnement entrant tels que Workday et Successfactors.
 
-* **Groupes.** Avec un plan de licence Azure AD Premium, vous pouvez utiliser des groupes pour autoriser l’accès à une application SaaS intégrée. Ensuite, lorsque l’étendue de provisionnement est définie sur **Synchroniser uniquement les utilisateurs et groupes assignés**, le service de provisionnement Azure AD provisionne ou déprovisionne des utilisateurs selon qu’ils sont membres d’un groupe affecté à l’application. L’objet de groupe n’est pas provisionné, sauf si l’application prend en charge les objets de groupe. Assurez-vous que les groupes affectés à votre application ont la propriété « SecurityEnabled » définie sur « False ».
+* **Groupes.** Avec un plan de licence Azure AD Premium, vous pouvez utiliser des groupes pour autoriser l’accès à une application SaaS intégrée. Ensuite, lorsque l’étendue de provisionnement est définie sur **Synchroniser uniquement les utilisateurs et groupes assignés**, le service de provisionnement Azure AD provisionne ou déprovisionne des utilisateurs selon qu’ils sont membres d’un groupe affecté à l’application. L’objet de groupe n’est pas provisionné, sauf si l’application prend en charge les objets de groupe. Assurez-vous que les groupes attribués à votre application ont la propriété « SecurityEnabled » définie sur « False ».
 
-* **Groupes dynamiques.** Le service d’attribution d’utilisateurs Azure AD peut lire et attribuer des utilisateurs dans des [groupes dynamiques](../users-groups-roles/groups-create-rule.md). Gardez à l’esprit les mises en garde et suggestions suivantes :
+* **Groupes dynamiques.** Le service d’attribution d’utilisateurs Azure AD peut lire et attribuer des utilisateurs dans des [groupes dynamiques](../enterprise-users/groups-create-rule.md). Gardez à l’esprit les mises en garde et suggestions suivantes :
 
   * Les groupes dynamiques peuvent impacter les performances du provisionnement de bout en bout entre Azure AD et les applications SaaS.
 
-  * La rapidité à laquelle un utilisateur est provisionné ou déprovisionné dans une application SaaS dépend de la vitesse à laquelle le groupe dynamique auquel il appartient réussit à analyser les changements d’appartenance. Pour plus d’informations sur la vérification de l’état de traitement d’un groupe dynamique, consultez [Vérifier l’état de traitement d’une règle d’appartenance](../users-groups-roles/groups-create-rule.md).
+  * La rapidité à laquelle un utilisateur est provisionné ou déprovisionné dans une application SaaS dépend de la vitesse à laquelle le groupe dynamique auquel il appartient réussit à analyser les changements d’appartenance. Pour plus d’informations sur la vérification de l’état de traitement d’un groupe dynamique, consultez [Vérifier l’état de traitement d’une règle d’appartenance](../enterprise-users/groups-create-rule.md).
 
   * Lorsqu’un utilisateur perd son appartenance à un groupe dynamique, on parle d’événement de déprovisionnement. Envisagez ce scénario lorsque vous créez des règles pour les groupes dynamiques.
 
-* **Groupes imbriqués.** Le service d’attribution d’utilisateurs Azure AD ne peut pas lire ni attribuer des utilisateurs dans des groupes imbriqués. Le service peut uniquement lire et attribuer les utilisateurs qui se trouvent directement dans un groupe attribué explicitement. Cette limitation concernant les « attributions basées sur les groupes à des applications » affecte également l’authentification unique (voir [Utilisation d’un groupe pour gérer l’accès aux applications SaaS](../users-groups-roles/groups-saasapps.md)). Vous devez attribuer explicitement les groupes qui contiennent les utilisateurs à attribuer ou les [inclure dans l’étendue](define-conditional-rules-for-provisioning-user-accounts.md).
+* **Groupes imbriqués.** Le service d’attribution d’utilisateurs Azure AD ne peut pas lire ni attribuer des utilisateurs dans des groupes imbriqués. Le service peut uniquement lire et attribuer les utilisateurs qui se trouvent directement dans un groupe attribué explicitement. Cette limitation concernant les « attributions basées sur les groupes à des applications » affecte également l’authentification unique (voir [Utilisation d’un groupe pour gérer l’accès aux applications SaaS](../enterprise-users/groups-saasapps.md)). Vous devez attribuer explicitement les groupes qui contiennent les utilisateurs à attribuer ou les [inclure dans l’étendue](define-conditional-rules-for-provisioning-user-accounts.md).
 
 ### <a name="attribute-based-scoping"></a>Étendue basée sur les attributs 
 
@@ -81,13 +80,13 @@ Vous pouvez utiliser les filtres d’étendue pour définir les règles basées 
 
 ### <a name="b2b-guest-users"></a>Utilisateurs B2B invités
 
-Il est possible d’utiliser le service d’attribution d’utilisateurs Azure AD pour attribuer des utilisateurs B2B (ou invités) Azure AD dans des applications SaaS. Toutefois, pour permettre aux utilisateurs B2B de se connecter à l’application SaaS à l’aide d’Azure AD, vous devez configurer la fonctionnalité d’authentification unique basée sur SAML de l’application SaaS d’une manière particulière. Pour plus d’informations sur la configuration des applications SaaS afin d’autoriser les connexions d’utilisateurs B2B, consultez [Configurer des applications SaaS pour B2B Collaboration](../b2b/configure-saas-apps.md).
+Il est possible d’utiliser le service d’attribution d’utilisateurs Azure AD pour attribuer des utilisateurs B2B (ou invités) Azure AD dans des applications SaaS. Toutefois, pour permettre aux utilisateurs B2B de se connecter à l’application SaaS à l’aide d’Azure AD, vous devez configurer la fonctionnalité d’authentification unique basée sur SAML de l’application SaaS d’une manière particulière. Pour plus d’informations sur la configuration des applications SaaS afin d’autoriser les connexions d’utilisateurs B2B, consultez [Configurer des applications SaaS pour B2B Collaboration](../external-identities/configure-saas-apps.md).
 
 Notez que le paramètre userPrincipalName d’un utilisateur invité est souvent stocké en tant que « alias#EXT#@domain.com ». Lorsque userPrincipalName est inclus dans vos mappages d’attributs en tant qu’attribut source, la partie #EXT# est supprimée du userPrincipalName. Si vous avez besoin que la partie #EXT# soit présente, remplacez userPrincipalName par originalUserPrincipalName en tant qu’attribut source. 
 
 ## <a name="provisioning-cycles-initial-and-incremental"></a>Cycles de provisionnement : cycle initial et cycle incrémentiel
 
-Lorsqu’Azure AD est le système source, le service d’approvisionnement utilise la fonctionnalité [Utilisation des requêtes différentielles pour suivre les modifications apportées aux données de Microsoft Graph](https://docs.microsoft.com/graph/delta-query-overview) pour surveiller les utilisateurs et groupes. Le service de provisionnement exécute un cycle initial sur le système source et le système cible, qui est suivi de cycles incrémentiels périodiques.
+Lorsqu’Azure AD est le système source, le service d’approvisionnement utilise la fonctionnalité [Utilisation des requêtes différentielles pour suivre les modifications apportées aux données de Microsoft Graph](/graph/delta-query-overview) pour surveiller les utilisateurs et groupes. Le service de provisionnement exécute un cycle initial sur le système source et le système cible, qui est suivi de cycles incrémentiels périodiques.
 
 ### <a name="initial-cycle"></a>Cycle initial
 
@@ -154,44 +153,68 @@ Ces échecs peuvent être résolus en ajustant les valeurs d’attribut de l’u
 
 ### <a name="quarantine"></a>Mise en quarantaine
 
-Si la plupart ou la totalité des appels effectués sur le système cible échouent constamment en raison d’une erreur (des informations d’identification non valides, par exemple), le travail de provisionnement est mis en quarantaine. Cet état est indiqué dans le [rapport de synthèse sur l’approvisionnement](../manage-apps/check-status-user-account-provisioning.md) et via les notifications par e-mail si elles ont été configurées dans le portail Azure.
+Si la plupart ou la totalité des appels effectués sur le système cible échouent constamment en raison d’une erreur (des informations d’identification non valides, par exemple), le travail de provisionnement est mis en quarantaine. Cet état est indiqué dans le [rapport de synthèse sur l’approvisionnement](./check-status-user-account-provisioning.md) et via les notifications par e-mail si elles ont été configurées dans le portail Azure.
 
 Lors de la mise en quarantaine, la fréquence des cycles incrémentiels est progressivement réduite à une fois par jour.
 
-Le travail de provisionnement sort de quarantaine lorsque toutes les erreurs ont été corrigées et que le prochain cycle de synchronisation démarre. Si le travail d’approvisionnement reste en quarantaine pendant plus de quatre semaines, celui-ci est désactivé. Pour en savoir plus sur l’état de quarantaine, [cliquez ici](../manage-apps/application-provisioning-quarantine-status.md).
+Le travail de provisionnement sort de quarantaine lorsque toutes les erreurs ont été corrigées et que le prochain cycle de synchronisation démarre. Si le travail d’approvisionnement reste en quarantaine pendant plus de quatre semaines, celui-ci est désactivé. Pour en savoir plus sur l’état de quarantaine, [cliquez ici](./application-provisioning-quarantine-status.md).
 
 ### <a name="how-long-provisioning-takes"></a>Durée du provisionnement
 
-Les performances varient selon que votre tâche d’approvisionnement exécute un cycle d’approvisionnement initial ou un cycle incrémentiel. Pour en savoir plus sur la durée de l’approvisionnement et comment surveiller l’était du service d’approvisionnement, consultez [Vérifier l’état de l’approvisionnement d’utilisateurs](../manage-apps/application-provisioning-when-will-provisioning-finish-specific-user.md).
+Les performances varient selon que votre tâche d’approvisionnement exécute un cycle d’approvisionnement initial ou un cycle incrémentiel. Pour en savoir plus sur la durée de l’approvisionnement et comment surveiller l’était du service d’approvisionnement, consultez [Vérifier l’état de l’approvisionnement d’utilisateurs](application-provisioning-when-will-provisioning-finish-specific-user.md).
 
 ### <a name="how-to-tell-if-users-are-being-provisioned-properly"></a>Comment savoir si les utilisateurs sont correctement attribués ?
 
-Toutes les opérations effectuées par le service de provisionnement d’utilisateurs sont enregistrées dans les [Journaux de provisionnement (préversion)](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) Azure AD. Les journaux comprennent toutes les opérations de lecture et d’écriture effectuées sur les systèmes sources et cibles, ainsi que les données utilisateur qui ont été lues ou écrites lors de chaque opération. Pour plus d’informations sur la lecture des journaux de provisionnement dans le portail Azure, consultez le [guide de création de rapports sur le provisionnement](../manage-apps/check-status-user-account-provisioning.md).
+Toutes les opérations effectuées par le service de provisionnement d’utilisateurs sont enregistrées dans les [Journaux de provisionnement (préversion)](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) Azure AD. Les journaux comprennent toutes les opérations de lecture et d’écriture effectuées sur les systèmes sources et cibles, ainsi que les données utilisateur qui ont été lues ou écrites lors de chaque opération. Pour plus d’informations sur la lecture des journaux de provisionnement dans le portail Azure, consultez le [guide de création de rapports sur le provisionnement](./check-status-user-account-provisioning.md).
 
 ## <a name="de-provisioning"></a>Déprovisionnement
+Le service d’approvisionnement Azure AD effectue la synchronisation des systèmes sources et cibles en déprovisionnant les comptes lorsque l’accès utilisateur est supprimé.
 
-Le service de provisionnement Azure AD effectue la synchronisation des systèmes sources et cibles en déprovisionnant les comptes lorsque les utilisateurs ne doivent plus y avoir accès. 
+Le service d’approvisionnement prend en charge la suppression et la désactivation (parfois appelées « suppressions réversibles ») des utilisateurs. La définition exacte de désactivation et de suppression varie en fonction de l’implémentation de l’application cible, mais en général, une désactivation indique que l’utilisateur ne peut pas se connecter. Une suppression indique que l’utilisateur a été entièrement supprimé de l’application. Pour les applications SCIM, une désactivation correspond une demande de définition de la propriété *active* sur false pour un utilisateur. 
 
-Le service de provisionnement Azure AD supprime de manière réversible un utilisateur d’une application lorsque celle-ci prend en charge la suppression réversible (demande de mise à jour avec active = false) et lorsque l’un des événements suivants se produit :
+**Configurer votre application pour désactiver un utilisateur**
 
-* Le compte d’utilisateur est supprimé d’Azure AD
-*   L’utilisateur est déprovisionné de l’application
-*   L’utilisateur ne répond plus à un filtre d’étendue et n’est plus inclus dans l’étendue
-    * Par défaut, le service de provisionnement Azure AD supprime de manière réversible ou désactive les utilisateurs qui sortent de l’étendue. Si vous souhaitez substituer ce comportement par défaut, vous pouvez définir un indicateur permettant d’[ignorer les suppressions non comprises dans l’étendue](../app-provisioning/skip-out-of-scope-deletions.md).
-*   La propriété AccountEnabled est définie sur false
+Vérifiez que vous avez activé la case à cocher des mises à jour.
 
-Si l’un des quatre événements ci-dessus se produit et si l’application cible ne prend pas en charge les suppressions réversibles, le service de provisionnement envoie une demande de suppression afin de supprimer définitivement l’utilisateur de l’application. 
+Vérifiez que le mappage est *actif* pour votre application. Si vous utilisez une application à partir de la galerie d’applications, le mappage peut être légèrement différent. Veillez à utiliser le mappage par défaut/prêt à l’emploi pour les applications de la galerie.
 
-30 jours après sa suppression d’Azure AD, l’utilisateur est définitivement supprimé du locataire. À ce stade, le service de provisionnement envoie une demande de suppression afin de supprimer définitivement l’utilisateur de l’application. Pendant cette période de 30 jours, vous pouvez à tout moment [supprimer manuellement un utilisateur](../fundamentals/active-directory-users-restore.md), ce qui a pour effet d’envoyer une demande de suppression à l’application.
+:::image type="content" source="./media/how-provisioning-works/disable-user.png" alt-text="Désactiver un utilisateur" lightbox="./media/how-provisioning-works/disable-user.png":::
 
-Si vous voyez un attribut IsSoftDeleted dans vos mappages d’attributs, sachez qu’il sera utilisé pour déterminer l’état de l’utilisateur et s’il faut envoyer une demande de mise à jour avec active = false pour supprimer l’utilisateur de manière réversible. 
+
+**Configurer votre application pour supprimer un utilisateur**
+
+Les scénarios suivants déclenchent une désactivation ou une suppression : 
+* Un utilisateur est supprimé de manière réversible dans Azure AD (envoyé à la corbeille/ propriété AccountEnabled définie sur false).
+    30 jours après sa suppression d’Azure AD, l’utilisateur est définitivement supprimé du locataire. À ce stade, le service de provisionnement envoie une demande de suppression afin de supprimer définitivement l’utilisateur de l’application. Pendant cette période de 30 jours, vous pouvez à tout moment [supprimer manuellement un utilisateur](../fundamentals/active-directory-users-restore.md), ce qui a pour effet d’envoyer une demande de suppression à l’application.
+* Un utilisateur est définitivement supprimé / supprimé de la corbeille dans Azure AD.
+* Un utilisateur n’est plus affecté à une application.
+* Un utilisateur dans l’étendue d’application sort de cette étendue (et ne transmet plus de filtre d’étendue).
+
+:::image type="content" source="./media/how-provisioning-works/delete-user.png" alt-text="Suppression d’un utilisateur" lightbox="./media/how-provisioning-works/delete-user.png":::
+
+Par défaut, le service de provisionnement Azure AD supprime de manière réversible ou désactive les utilisateurs qui sortent de l’étendue. Si vous souhaitez substituer ce comportement par défaut, vous pouvez définir un indicateur permettant d'[ignorer les suppressions non comprises dans l'étendue.](skip-out-of-scope-deletions.md)
+
+Si l’un des quatre événements ci-dessus se produit et si l’application cible ne prend pas en charge les suppressions réversibles, le service de provisionnement envoie une demande de suppression afin de supprimer définitivement l’utilisateur de l’application.
+
+Si vous voyez un attribut IsSoftDeleted dans vos mappages d’attributs, sachez qu’il sera utilisé pour déterminer l’état de l’utilisateur et s’il faut envoyer une demande de mise à jour avec active = false pour supprimer l’utilisateur de manière réversible.
+
+**Limitations connues**
+
+* Si un utilisateur précédemment managé par le service d’approvisionnement n’est plus affecté à une application ou à un groupe affecté à une application, nous envoyons une requête de désactivation. À ce stade, l’utilisateur n’est pas managé par le service et nous n’envoyons aucune requête de suppression lorsqu’il est supprimé de l’annuaire.
+* L’approvisionnement d’un utilisateur qui est désactivé dans Azure AD n’est pas pris en charge. Pour pouvoir être approvisionné, l’utilisateur doit être dans Azure AD préalablement.
+* Quand un utilisateur supprimé de façon réversible devient actif, le service d’approvisionnement Azure AD l’active dans l’application cible, mais ne restaure pas automatiquement les appartenances aux groupes. L’application cible doit conserver les appartenances aux groupes de l’utilisateur dans un état inactif. Si l’application cible ne prend pas en charge ce comportement, vous pouvez redémarrer l’approvisionnement pour mettre à jour les appartenances aux groupes. 
+
+**Recommandation**
+
+Lors du développement d’une application, prenez toujours en charge les suppressions réversibles et les suppressions définitives. Cela permet aux clients de récupérer un client qui a été désactivé accidentellement.
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Planifier un déploiement d’attribution automatique d’utilisateurs](../app-provisioning/plan-auto-user-provisioning.md)
 
-[Configurer le provisionnement pour une application de galerie](../manage-apps/configure-automatic-user-provisioning-portal.md)
+[Configurer le provisionnement pour une application de galerie](./configure-automatic-user-provisioning-portal.md)
 
 [Créer un point de terminaison SCIM et configurer le provisionnement lors de la création de votre propre application](../app-provisioning/use-scim-to-provision-users-and-groups.md)
 
-[Résoudre les problèmes liés à la configuration et à l’attribution des utilisateurs dans une application](../manage-apps/application-provisioning-config-problem.md)
+[Résoudre les problèmes liés à la configuration et à l’attribution des utilisateurs dans une application](./application-provisioning-config-problem.md)

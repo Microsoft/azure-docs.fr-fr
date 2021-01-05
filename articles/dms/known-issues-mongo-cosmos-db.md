@@ -10,14 +10,14 @@ ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
 ms.custom: seo-lt-2019
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 02/27/2020
-ms.openlocfilehash: ae5d5f2d282c546f5172ca1c8cb0e420d3b6e96b
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: be6d9d3b8a20e11c874234baae26629ce0187e4f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80878049"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91291808"
 ---
 # <a name="known-issuesmigration-limitations-with-migrations-from-mongodb-to-azure-cosmos-dbs-api-for-mongodb"></a>Problèmes connus/limitations de migration avec les migrations de MongoDB vers l’API Azure Cosmos DB pour MongoDB
 

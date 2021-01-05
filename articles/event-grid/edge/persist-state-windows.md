@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/06/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: c2bae3bd268dba8efdf23ae314671b17a2c89420
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f38e23a3af1e2c81ee012a4f3c268cbff3fc1bee
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77086629"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002815"
 ---
 # <a name="persist-state-in-windows"></a>Conserver l’état sur Windows
 

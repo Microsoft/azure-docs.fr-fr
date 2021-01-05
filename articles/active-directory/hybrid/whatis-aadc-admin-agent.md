@@ -11,12 +11,12 @@ ms.date: 09/04/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 79f68635820125161ed4f5777e27a20de9e6fbe8
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: da4e1cfc68dff4ad2bc0552c6d35fe1230779306
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80049393"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91312955"
 ---
 # <a name="what-is-the-azure-ad-connect-admin-agent"></a>Présentation de l’agent d’administration Azure AD Connect 
 L’agent d’administration Azure AD Connect est un nouveau composant d’Azure Active Directory Connect qui peut être installé sur un serveur Azure Active Directory Connect. Il est utilisé pour collecter des données spécifiques à partir de votre environnement Active Directory qui permettent à un ingénieur du support Microsoft de résoudre les problèmes quand vous créez une demande de support. 
@@ -46,7 +46,7 @@ Quand vous y êtes invité, entrez vos informations d’identification d’admin
 
 Une fois que l’agent est installé, vous verrez les deux nouveaux programmes suivants dans la liste « Ajout/Suppression de programmes » du Panneau de configuration de votre serveur : 
 
-![agent d’administration](media/whatis-aadc-admin-agent/adminagent1.png)
+![Capture d’écran montrant la liste Ajout/suppression de programmes qui comprend les nouveaux programmes que vous avez ajoutés.](media/whatis-aadc-admin-agent/adminagent1.png)
 
 ## <a name="what-data-in-my-sync-service-is-shown-to-the-microsoft-service-engineer"></a>Quelles sont les données de mon service de synchronisation qui sont présentées à l’ingénieur du service Microsoft ? 
 Quand vous créez une demande de support, l’ingénieur du support Microsoft peut voir, pour un utilisateur donné, les données pertinentes dans Active Directory, l’espace de connecteur Active Directory sur le serveur Azure Active Directory Connect, l’espace de connecteur Azure Active Directory sur le serveur Azure Active Directory Connect et le métaverse sur le serveur Azure Active Directory Connect. 
@@ -56,8 +56,8 @@ L’ingénieur du support Microsoft ne peut modifier aucune donnée dans votre s
 ## <a name="what-if-i-dont-want-the-microsoft-support-engineer-to-access-my-data"></a>Que faire si je ne veux pas que l’ingénieur du support Microsoft accède à mes données ? 
 Une fois que l’agent est installé, si vous ne souhaitez pas que l’ingénieur du service Microsoft accède à vos données pour un appel au support, vous pouvez désactiver la fonctionnalité en modifiant le fichier de configuration de service, comme décrit ci-dessous : 
 
-1.    Ouvrez **C:\Program Files\Microsoft Azure AD Connect Administration Agent\AzureADConnectAdministrationAgentService.exe.config** dans le Bloc-notes.
-2.    Désactivez le paramètre **UserDataEnabled** comme indiqué ci-dessous. Si le paramètre **UserDataEnabled** existe et a la valeur true, affectez-lui la valeur false. Si le paramètre n’existe pas, ajoutez-le comme indiqué ci-dessous.    
+1. Ouvrez **C:\Program Files\Microsoft Azure AD Connect Administration Agent\AzureADConnectAdministrationAgentService.exe.config** dans le Bloc-notes.
+2. Désactivez le paramètre **UserDataEnabled** comme indiqué ci-dessous. Si le paramètre **UserDataEnabled** existe et a la valeur true, affectez-lui la valeur false. Si le paramètre n’existe pas, ajoutez-le comme indiqué ci-dessous.    
 
     ```xml
     <appSettings>
@@ -66,10 +66,10 @@ Une fois que l’agent est installé, si vous ne souhaitez pas que l’ingénieu
     </appSettings>
     ```
 
-3.    Enregistrez le fichier de configuration.
-4.    Redémarrez le service de l’agent d’administration Azure AD Connect comme indiqué ci-dessous
+3. Enregistrez le fichier de configuration.
+4. Redémarrez le service de l’agent d’administration Azure AD Connect comme indiqué ci-dessous
 
-![agent d’administration](media/whatis-aadc-admin-agent/adminagent2.png)
+![Capture d’écran montrant où redémarrer le service de l’agent d’administration Azure AD.](media/whatis-aadc-admin-agent/adminagent2.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 En savoir plus sur l’ [intégration de vos identités locales avec Azure Active Directory](whatis-hybrid-identity.md).

@@ -4,6 +4,8 @@
   items:
     - name: À propos des certificats
       href: about-certificates.md
+    - name: À propos du renouvellement de certificat
+      href: overview-renew-certificate.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -13,13 +15,18 @@
       href: quick-create-powershell.md
     - name: Portail
       href: quick-create-portal.md
+    - name: .NET
+      href: quick-create-net.md
+    - name: Node.js
+      href: quick-create-node.md
     - name: Python
       href: quick-create-python.md
+    - name: Java
+      href: quick-create-java.md
 - name: Exemples
   items:
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ../policy-samples.md?toc=/azure/key-vault/certificates/toc.json&bc=/azure/key-vault/breadcrumb/toc.json
+    - name: Exemples de code de coffre de clés
+      href: /samples/browse/?expanded=azure&products=azure-key-vault
 - name: Tutoriels
   items:
     - name: Importation d’un certificat
@@ -34,25 +41,40 @@
       href: create-certificate-scenarios.md
     - name: Méthodes de création de certificats
       href: create-certificate.md
+    - name: Création d’une demande de signature de certificat
+      href: create-certificate-signing-request.md
+    - name: Contrôle d’accès aux certificats
+      href: certificate-access-control.md
+- name: Guides pratiques
+  items:
+    - name: Intégration de Key Vault avec l’autorité de certification DigiCert
+      href: how-to-integrate-certificate-authority.md
+    - name: Résolution des problèmes - Importer des certificats
+      href: import-cert-faqs.md
+    - name: Exporter un certificat à partir d’un coffre de clés
+      href: how-to-export-certificate.md
 - name: Informations de référence
   items:
     - name: Azure PowerShell
-      href: '/powershell/module/az.keyvault/?view=azps-1.2.0#key_vault'
+      href: /powershell/module/az.keyvault/?view=azps-1.2.0#key_vault
     - name: Azure CLI
       href: /cli/azure/keyvault
     - name: .NET
-      href: /dotnet/api/overview/azure/key-vault?view=azure-dotnet
+      href: /dotnet/api/overview/azure/security.keyvault.certificates-readme?view=azure-dotnet
     - name: Java
       href: /java/api/overview/azure/keyvault?view=azure-java-stable
     - name: Node.js
-      href: /javascript/api/overview/azure/key-vault?view=azure-node-latest
+      href: /javascript/api/overview/azure/key-vault-index?view=azure-node-latest
     - name: Python
-      href: /python/api/overview/azure/key-vault?view=azure-python
+      href: /python/api/overview/azure/keyvault-certificates-readme?view=azure-python
     - name: REST
       href: /rest/api/keyvault
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.keyvault/allversions
       displayName: ARM
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ../policy-reference.md?toc=/azure/key-vault/certificates/toc.json&bc=/azure/key-vault/breadcrumb/toc.json
 - name: Ressources
   items:
     - name: Développer vos compétences avec Microsoft Learn
@@ -70,6 +92,6 @@
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=key-vault'
     - name: Blog
-      href: 'https://blogs.technet.com/b/kv/'
+      href: /archive/blogs/kv/
     - name: Commentaires sur le produit
       href: 'https://feedback.azure.com/forums/906355-azure-key-vault'

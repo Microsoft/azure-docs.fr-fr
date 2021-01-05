@@ -1,6 +1,6 @@
 ---
 title: Gamme StorSimple 8000 en tant que cible de sauvegarde avec Veeam | Microsoft Docs
-description: Décrit la configuration de la cible de sauvegarde StorSimple avec Veeam.
+description: Découvrez la configuration de cible de sauvegarde StorSimple avec Veeam et les meilleures pratiques pour l’intégration des deux solutions.
 services: storsimple
 documentationcenter: ''
 author: harshakirank
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/06/2016
 ms.author: matd
-ms.openlocfilehash: 3ebf464fed1480e7452f246f04f3906faf0dd219
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bf28265de2b297dade545695c9369b8074eeb72c
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67875315"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962550"
 ---
 # <a name="storsimple-as-a-backup-target-with-veeam"></a>StorSimple comme cible de sauvegarde avec Veeam
 
@@ -81,7 +81,7 @@ StorSimple offre les avantages suivants :
 
 Bien que StorSimple présente deux principaux scénarios de déploiement (cible de sauvegarde principale et secondaire), il s’agit essentiellement d’un dispositif de stockage de bloc. StorSimple exécute la totalité des tâches de compression et de déduplication. Il envoie et récupère de façon transparente les données entre le cloud, l’application et le système de fichiers.
 
-Pour plus d’informations sur StorSimple, consultez l’article [StorSimple série 8000 : une solution de stockage de cloud hybride](storsimple-overview.md). En outre, vous pouvez consulter les [caractéristiques techniques de StorSimple série 8000](storsimple-technical-specifications-and-compliance.md).
+Pour plus d’informations sur StorSimple, consultez l’article [StorSimple série 8000 : une solution de stockage de cloud hybride](storsimple-overview.md). En outre, vous pouvez consulter les [caractéristiques techniques de StorSimple série 8000](./storsimple-8000-technical-specifications-and-compliance.md).
 
 > [!IMPORTANT]
 > L’utilisation d’un appareil StorSimple comme cible de sauvegarde n’est prise en charge que pour StorSimple 8000 Update 3 et les versions ultérieures.
@@ -172,7 +172,7 @@ Pour que la solution fonctionne de manière optimale, nous vous recommandons d�
 
 ### <a name="deploy-storsimple"></a>Déployer StorSimple
 
-Pour découvrir un guide de déploiement de StorSimple pas à pas, consultez l’article [Déploiement de votre appareil StorSimple local](storsimple-deployment-walkthrough-u2.md).
+Pour découvrir un guide de déploiement de StorSimple pas à pas, consultez l’article [Déploiement de votre appareil StorSimple local](./storsimple-8000-deployment-walkthrough-u2.md).
 
 ### <a name="deploy-veeam"></a>Déployer Veeam
 
@@ -187,7 +187,7 @@ Dans cette section, nous fournissons quelques exemples de configuration. Les exe
 | Tâches de déploiement StorSimple  | Commentaires supplémentaires |
 |---|---|
 | Déploiement de votre appareil StorSimple local | Versions prises en charge : Update 3 et versions ultérieures. |
-| Activez la cible de sauvegarde. | Utilisez ces commandes pour activer ou désactiver le mode de cible de sauvegarde et pour obtenir l’état. Pour plus d’informations, consultez l’article [Connexion à distance à un appareil StorSimple](storsimple-remote-connect.md).</br> Pour activer le mode de sauvegarde : `Set-HCSBackupApplianceMode -enable`. </br> Pour désactiver le mode de sauvegarde : `Set-HCSBackupApplianceMode -disable`. </br> Pour obtenir l’état actuel des paramètres de mode de sauvegarde : `Get-HCSBackupApplianceMode`. |
+| Activez la cible de sauvegarde. | Utilisez ces commandes pour activer ou désactiver le mode de cible de sauvegarde et pour obtenir l’état. Pour plus d’informations, consultez l’article [Connexion à distance à un appareil StorSimple](./storsimple-8000-remote-connect.md).</br> Pour activer le mode de sauvegarde : `Set-HCSBackupApplianceMode -enable`. </br> Pour désactiver le mode de sauvegarde : `Set-HCSBackupApplianceMode -disable`. </br> Pour obtenir l’état actuel des paramètres de mode de sauvegarde : `Get-HCSBackupApplianceMode`. |
 | Création d’un conteneur de volumes commun pour votre volume qui stocke les données de sauvegarde. Toutes les données d’un conteneur de volumes sont dédupliquées. | Les conteneurs de volumes StorSimple définissent les domaines de déduplication.  |
 | Créez les volumes StorSimple. | Créez des volumes en les dimensionnant le plus conformément possible à l’usage que vous prévoyez d’en faire, car la taille du volume a une incidence sur la durée des captures instantanées cloud. Pour plus d’informations sur la taille d’un volume, consultez les [stratégies de rétention](#retention-policies).</br> </br> Utilisez les volumes hiérarchisés StorSimple et cochez la case **Utiliser ce volume pour les données d’archivage auxquelles vous accédez moins souvent**. </br> L’utilisation de volumes épinglés localement uniquement n’est pas prise en charge. |
 | Création d’une stratégie de sauvegarde StorSimple unique pour tous les volumes cibles de sauvegarde. | Une stratégie de sauvegarde StorSimple définit le groupe de cohérence de volume. |
@@ -213,16 +213,16 @@ Configurez votre solution en respectant les instructions dans les sections suiva
 - Désactivez la défragmentation Windows Server sur les volumes StorSimple.
 - Désactivez l’indexation Windows Server sur les volumes StorSimple.
 - Exécutez une analyse antivirus au niveau de l’hôte source (et non par rapport aux volumes StorSimple).
-- Désactivez l’activité [Maintenance Windows Server](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) par défaut dans le Gestionnaire des tâches. Pour ce faire, procédez de l’une des manières suivantes :
+- Désactivez l’activité [Maintenance Windows Server](/windows/win32/w8cookbook/automatic-maintenance) par défaut dans le Gestionnaire des tâches. Pour ce faire, procédez de l’une des manières suivantes :
   - Désactivez le programme de configuration de l’activité de maintenance dans le Planificateur de tâches Windows.
-  - Téléchargez [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) à partir de Windows Sysinternals. Après avoir téléchargé PsExec, exécutez Windows PowerShell en tant qu’administrateur, puis tapez :
+  - Téléchargez [PsExec](/sysinternals/downloads/psexec) à partir de Windows Sysinternals. Après avoir téléchargé PsExec, exécutez Windows PowerShell en tant qu’administrateur, puis tapez :
     ```powershell
     psexec \\%computername% -s schtasks /change /tn “MicrosoftWindowsTaskSchedulerMaintenance Configurator" /disable
     ```
 
 ### <a name="storsimple-best-practices"></a>Meilleures pratiques concernant StorSimple
 
--   Assurez-vous que l’appareil StorSimple est mis à jour avec la version [Update 3 ou une version ultérieure](storsimple-install-update-3.md).
+-   Assurez-vous que l’appareil StorSimple est mis à jour avec la version [Update 3 ou une version ultérieure](./index.yml).
 -   Isolez le trafic iSCSI et cloud. Utilisez des connexions iSCSI dédiées pour le trafic entre StorSimple et le serveur de sauvegarde.
 -   Assurez-vous que l’appareil StorSimple est une cible de sauvegarde dédiée. Les charges de travail mixtes ne sont pas prises en charge, car elles affectent le RTO et le RPO.
 
@@ -274,7 +274,7 @@ Sur la base des hypothèses qui précèdent, créez un volume hiérarchisé Stor
 
 1.  Dans la console Veeam de sauvegarde et de réplication, sous **Repository Tools (Outils de référentiel)** , accédez à **Backup Infrastructure (Infrastructure de sauvegarde)** . Cliquez avec le bouton droit sur **Backup Repositories (Référentiels de sauvegarde)** , puis sélectionnez **Add Backup Repository (Ajouter un référentiel de sauvegarde)** .
 
-    ![Console d’administration de Veeam, page du référentiel de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage1.png)
+    ![Capture d’écran qui montre la console de gestion Veeam et met en évidence l’option Add Backup Repository.](./media/storsimple-configure-backup-target-using-veeam/veeamimage1.png)
 
 2.  Dans la boîte de dialogue **New Backup Repository (Nouveau référentiel sauvegarde)** , entrez un nom et une description pour le référentiel. Sélectionnez **Suivant**.
 
@@ -295,7 +295,7 @@ Sur la base des hypothèses qui précèdent, créez un volume hiérarchisé Stor
 
 6.  Dans la boîte de dialogue **New Backup Repository (Nouveau référentiel de sauvegarde)** , cochez la case **Enable vPower NFS service on the mount server (recommended) (Activer le service NFS vPower sur le serveur de montage (recommandé))** . Sélectionnez **Suivant**.
 
-    ![Console d’administration de Veeam, page du référentiel de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage6.png)
+    ![Capture d’écran montrant la console de gestion Veeam dans laquelle vous pouvez ajouter un nouveau référentiel de sauvegarde.](./media/storsimple-configure-backup-target-using-veeam/veeamimage6.png)
 
 7.  Passez en revue les paramètres, puis sélectionnez **Suivant**.
 
@@ -335,11 +335,11 @@ Pour le scénario de cible de sauvegarde principale, créez un travail quotidien
 
 2.  Dans la boîte de dialogue **New Backup Job (Nouveau travail de sauvegarde)** , entrez un nom et une description pour le travail de sauvegarde quotidien.
 
-    ![Console d’administration de Veeam, page du nouveau travail de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage9.png)
+    ![Capture d’écran de la console de gestion Veeam dans laquelle vous ajoutez le nom et la description.](./media/storsimple-configure-backup-target-using-veeam/veeamimage9.png)
 
 3.  Sélectionnez une machine virtuelle sur laquelle effectuer la sauvegarde.
 
-    ![Console d’administration de Veeam, page du nouveau travail de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage10.png)
+    ![Capture d’écran montrant la console de gestion Veeam dans laquelle vous sélectionnez la machine virtuelle.](./media/storsimple-configure-backup-target-using-veeam/veeamimage10.png)
 
 4.  Sélectionnez les valeurs souhaitées pour **Backup proxy (Proxy de sauvegarde)** et **Backup repository (Référentiel de sauvegarde)** . Sélectionnez une valeur pour **Restore points to keep on disk (Points de restauration à conserver sur le disque)** conformément aux définitions des objectifs RPO et RTO de votre environnement sur le stockage connecté localement. Sélectionnez **Avancé**.
 
@@ -347,7 +347,7 @@ Pour le scénario de cible de sauvegarde principale, créez un travail quotidien
 
 5. Dans la boîte de dialogue **Advanced Settings (Paramètres avancés)** , dans l’onglet **Backup (Sauvegarde)** , sélectionnez **Incremental (Incrémentielle)** . Assurez-vous que la case **Create synthetic full backups periodically (Créer régulièrement des sauvegardes intégrales synthétiques)** est désactivée. Cochez la case **Create active full backups periodically (Créer périodiquement des sauvegardes complètes actives)** . Sous **Active full backup (Sauvegarde complète active)** , cochez la case **Weekly on selected days (Hebdomadaire pour les jours sélectionnés)** pour le samedi.
 
-    ![Console d’administration de Veeam, page de paramètres avancés du nouveau travail de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage12.png)
+    ![Capture d’écran montrant la console de gestion Veeam, plus spécifiquement la page des paramètres avancés du nouveau travail de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage12.png)
 
 6. Dans l’onglet **Storage (Stockage)** , vérifiez que la case **Enable inline data deduplication (Activer la déduplication des données en ligne)** est désactivée. Cochez la case **Exclude swap file blocks (Exclure les blocs de fichiers d’échange)** et cochez la case **Exclude deleted file blocks (Exclure les blocs de fichiers supprimés)** . Définissez **Compression level (Niveau de compression)** sur **None (Aucun)** . Définissez l’option **Storage optimization (Optimisation du stockage)** sur **LAN target (Cible LAN)** pour équilibrer les performances et la déduplication. Sélectionnez **OK**.
 
@@ -408,11 +408,11 @@ planification de rotation GFS hebdomadaire, mensuelle et annuelle
 
 1.  Dans la console Veeam de sauvegarde et de réplication, sélectionnez **Backup & Replication (Sauvegarde et réplication)** . Cliquez avec le bouton droit sur **Backup (Sauvegarde)** , puis sélectionnez **VMware** ou **Hyper-V** en fonction de votre environnement.
 
-    ![Console d’administration de Veeam, page de nouveau travail de copie de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage16.png)
+    ![Capture d’écran montrant la console de gestion Veeam avec les options VMware et Hyper-V que vous pouvez sélectionner.](./media/storsimple-configure-backup-target-using-veeam/veeamimage16.png)
 
 2.  Dans la boîte de dialogue **New Backup Copy Job (Nouveau travail de copie de sauvegarde)** , entrez un nom et une description pour le travail.
 
-    ![Console d’administration de Veeam, page de nouveau travail de copie de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage17.png)
+    ![Capture d’écran montrant la console de gestion Veeam dans laquelle vous entrez le nom et la description du travail.](./media/storsimple-configure-backup-target-using-veeam/veeamimage17.png)
 
 3.  Sélectionnez les machines virtuelles à traiter. Sélectionnez l’option From backups (À partir des sauvegardes), puis sélectionnez la sauvegarde quotidienne créée précédemment.
 
@@ -422,13 +422,13 @@ planification de rotation GFS hebdomadaire, mensuelle et annuelle
 
 5.  Sélectionnez votre référentiel de sauvegarde, puis définissez une valeur pour **Restore points to keep (Points de restauration à conserver)** . N’oubliez pas de cocher la case **Keep the following restore points for archival purposes (Conserver les points de restauration ci-dessous à des fins d’archivage)** . Définissez la fréquence de sauvegarde, puis sélectionnez **Advanced (Avancé)** .
 
-    ![Console d’administration de Veeam, page de nouveau travail de copie de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage19.png)
+    ![Capture d’écran montrant où vous définissez la fréquence de sauvegarde.](./media/storsimple-configure-backup-target-using-veeam/veeamimage19.png)
 
 6.  Spécifiez les paramètres avancés suivants :
 
     * Dans l’onglet **Maintenance**, désactivez la protection contre l’altération des niveaux de stockage.
 
-    ![Console d’administration de Veeam, page de paramètres avancés du nouveau travail de copie de sauvegarde](./media/storsimple-configure-backup-target-using-veeam/veeamimage20.png)
+    ![Capture d’écran montrant l’onglet Maintenance dans la console de gestion Veeam.](./media/storsimple-configure-backup-target-using-veeam/veeamimage20.png)
 
     * Dans l’onglet **Storage (Stockage)** , assurez-vous que la déduplication et la compression sont désactivées.
 
@@ -468,7 +468,7 @@ La section ci-après décrit comment créer un bref script pour déclencher et s
 
 ### <a name="to-start-or-delete-a-cloud-snapshot"></a>Pour démarrer ou supprimer une capture instantanée cloud
 
-1. [Installez Azure PowerShell](/powershell/azure/overview).
+1. [Installez Azure PowerShell](/powershell/azure/).
 2. Téléchargez et installez le script PowerShell [Manage-CloudSnapshots.ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1).
 3. Sur le serveur qui exécute le script, exécutez PowerShell en tant qu’administrateur. Vérifiez que vous exécutez le script avec `-WhatIf $true` pour voir les modifications qu’il apporte. Une fois la validation terminée, passez `-WhatIf $false`. Exécutez la commande ci-dessous :
    ```powershell
@@ -502,7 +502,7 @@ Un sinistre peut être dû à plusieurs facteurs. Le tableau ci-après répertor
 
 | Scénario | Impact | Procédure de récupération | Notes |
 |---|---|---|---|
-| Défaillance d’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Remplacez l’appareil défaillant et effectuez [un basculement et une récupération d’urgence StorSimple](storsimple-device-failover-disaster-recovery.md). | Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. Le processus de nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local, ce qui peut prendre un certain temps. |
+| Défaillance d’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Remplacez l’appareil défaillant et effectuez [un basculement et une récupération d’urgence StorSimple](./storsimple-8000-device-failover-disaster-recovery.md). | Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. Le processus de nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local, ce qui peut prendre un certain temps. |
 | Défaillance du serveur Veeam | Les opérations de sauvegarde et de restauration sont interrompues. | Régénérez le serveur de sauvegarde et effectuez la restauration de base de données en suivant les instructions du [Centre d’aide Veeam (documentation technique)](https://www.veeam.com/documentation-guides-datasheets.html).  | Vous devez reconstruire ou restaurer le serveur Veeam sur le site de récupération d’urgence. Restaurez la base de données à partir du point de défaillance le plus récent. Si la base de données Veeam restaurée n’est pas synchronisée avec vos derniers travaux de sauvegarde, vous devez procéder à une indexation et à un catalogage. Cette nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local. Ce processus peut donc prendre un certain temps. |
 | Défaillance du site entraînant la perte du serveur de sauvegarde et de l’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Commencez par restaurer StorSimple, puis restaurez Veeam. | Commencez par restaurer StorSimple, puis restaurez Veeam. Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. |
 
@@ -511,12 +511,12 @@ Un sinistre peut être dû à plusieurs facteurs. Le tableau ci-après répertor
 
 Les documents référencés dans cet article sont les suivants :
 
-- [StorSimple multipath I/O setup (Configuration de StorSimple MPIO)](storsimple-configure-mpio-windows-server.md)
-- [Storage scenarios: Thin provisioning (Scénarios de stockage : allocation dynamique)](https://msdn.microsoft.com/library/windows/hardware/dn265487.aspx)
-- [Using GPT drives (Utilisation de disques de table de partition GUID)](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
-- [Set up shadow copies for shared folders (Configurer des clichés instantanés de dossiers partagés)](https://technet.microsoft.com/library/cc771893.aspx)
+- [StorSimple multipath I/O setup (Configuration de StorSimple MPIO)](./storsimple-8000-configure-mpio-windows-server.md)
+- [Storage scenarios: Thin provisioning (Scénarios de stockage : allocation dynamique)](/windows-hardware/drivers/storage/thin-provisioning)
+- [Using GPT drives (Utilisation de disques de table de partition GUID)](/previous-versions/windows/hardware/design/dn653580(v=vs.85)#EHD)
+- [Set up shadow copies for shared folders (Configurer des clichés instantanés de dossiers partagés)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771893(v=ws.11))
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [restauration à partir d’un jeu de sauvegarde](storsimple-restore-from-backup-set-u2.md).
-- En savoir plus sur l’exécution [d’un basculement et d’une récupération d’urgence pour un appareil](storsimple-device-failover-disaster-recovery.md).
+- En savoir plus sur la [restauration à partir d’un jeu de sauvegarde](./storsimple-8000-restore-from-backup-set-u2.md).
+- En savoir plus sur l’exécution [d’un basculement et d’une récupération d’urgence pour un appareil](./storsimple-8000-device-failover-disaster-recovery.md).

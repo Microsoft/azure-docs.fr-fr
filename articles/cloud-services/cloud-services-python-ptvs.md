@@ -9,12 +9,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 07/18/2017
 ms.author: tagore
-ms.openlocfilehash: b832831a2483b11a7a3c1942dd79065e8be65bf9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 955498c663560351c01f1894fb348b89f72d549b
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75360716"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92079239"
 ---
 # <a name="python-web-and-worker-roles-with-python-tools-for-visual-studio"></a>Rôles Web et rôles de travail Python avec Python Tools pour Visual Studio
 
@@ -287,7 +288,7 @@ else
 #### <a name="pscmd"></a>ps.cmd
 Les modèles Visual Studio doivent avoir créé un fichier **ps.cmd** dans le dossier **./bin**. Ce script shell appelle les scripts de wrapper PowerShell ci-dessus et assure la journalisation en fonction du nom du wrapper PowerShell appelé. Si ce fichier n’a pas été créé, voici ce qu’il doit contenir. 
 
-```bat
+```cmd
 @echo off
 
 cd /D %~dp0
@@ -356,13 +357,10 @@ Pour plus d’informations sur l’utilisation des services Azure à partir de v
 <!--External Link references-->
 
 [Python Tools for Visual Studio]: https://aka.ms/ptvs
-[Python Tools for Visual Studio Documentation]: https://aka.ms/ptvsdocs
-[Cloud Service Projects]: https://docs.microsoft.com/visualstudio/python/python-azure-cloud-service-project-template
+[Python Tools for Visual Studio Documentation]: /visualstudio/python/
+[Cloud Service Projects]: /visualstudio/python/python-azure-cloud-service-project-template
 [Azure SDK Tools for VS 2013]: https://go.microsoft.com/fwlink/?LinkId=746482
 [Azure SDK Tools for VS 2015]: https://go.microsoft.com/fwlink/?LinkId=746481
 [Azure SDK Tools for VS 2017]: https://go.microsoft.com/fwlink/?LinkId=746483
 [Python 2.7 32-bit]: https://www.python.org/downloads/
 [Python 3.5 32-bit]: https://www.python.org/downloads/
-
-
-

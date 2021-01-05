@@ -4,12 +4,12 @@ ms.service: virtual-machines-sql
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: jroth
-ms.openlocfilehash: 9df08151e4af6e82a775b3ee99dab88134a2f032
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: 6195b949cc71043dfa7a12bdece7a311dbde5e21
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82784093"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95564292"
 ---
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -17,9 +17,9 @@ Après avoir activé Azure Key Vault Integration, vous pouvez activer le chiffre
 
 Il existe plusieurs types de chiffrement que vous pouvez exploiter :
 
-* [Chiffrement transparent des données (TDE)](https://msdn.microsoft.com/library/bb934049.aspx)
-* [Sauvegardes chiffrées](https://msdn.microsoft.com/library/dn449489.aspx)
-* [Chiffrement au niveau des colonnes (CLE)](https://msdn.microsoft.com/library/ms173744.aspx)
+* [Chiffrement transparent des données (TDE)](/sql/relational-databases/security/encryption/transparent-data-encryption)
+* [Sauvegardes chiffrées](/sql/relational-databases/backup-restore/backup-encryption)
+* [Chiffrement au niveau des colonnes (CLE)](/sql/t-sql/functions/cryptographic-functions-transact-sql)
 
 Les scripts Transact-SQL suivants fournissent des exemples pour chacune de ces options.
 
@@ -144,6 +144,6 @@ CLOSE SYMMETRIC KEY DATA_ENCRYPTION_KEY;
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-Pour plus d'informations sur l'utilisation de ces fonctionnalités de chiffrement, consultez [Utilisation d'EKM avec les fonctionnalités de chiffrement SQL Server (en Anglais)](https://msdn.microsoft.com/library/dn198405.aspx#UsesOfEKM).
+Pour plus d'informations sur l'utilisation de ces fonctionnalités de chiffrement, consultez [Utilisation d'EKM avec les fonctionnalités de chiffrement SQL Server (en Anglais)](/sql/relational-databases/security/encryption/extensible-key-management-using-azure-key-vault-sql-server#UsesOfEKM).
 
-Notez que cet article suppose que vous disposez déjà de SQL Server exécuté sur une machine virtuelle Azure. Dans le cas contraire, consultez l’article [Approvisionnement d’une machine virtuelle SQL Server dans Azure](../articles/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision.md). Pour d’autres conseils sur l’utilisation de SQL Server sur des machines virtuelles Azure, consultez l’article [Présentation de SQL Server sur les machines virtuelles Azure](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-server-iaas-overview.md).
+Notez que cet article suppose que vous disposez déjà de SQL Server exécuté sur une machine virtuelle Azure. Dans le cas contraire, consultez l’article [Approvisionnement d’une machine virtuelle SQL Server dans Azure](../articles/azure-sql/virtual-machines/windows/create-sql-vm-portal.md). Pour d’autres conseils sur l’utilisation de SQL Server sur des machines virtuelles Azure, consultez l’article [Présentation de SQL Server sur les machines virtuelles Azure](../articles/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md).

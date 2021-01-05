@@ -7,15 +7,15 @@ ms.reviewer: jasonh
 ms.custom: hdinsightactive
 ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 04/27/2020
-ms.openlocfilehash: e76c75e172e48866565cc292ac673f7bbddabf1f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 11/12/2020
+ms.openlocfilehash: 00b5d220cdbc511a309d55cfca2049508049fa30
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232817"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96549002"
 ---
-# <a name="release-notes"></a>Notes de publication
+# <a name="azure-hdinsight-release-notes"></a>Notes de publication Azure HDInsight
 
 Cet article fournit des informations sur les mises à jour **les plus récentes** des versions d’Azure HDInsight. Pour plus d’informations sur les versions antérieures, voir [Archive des notes de publication de HDInsight](hdinsight-release-notes-archive.md).
 
@@ -23,55 +23,44 @@ Cet article fournit des informations sur les mises à jour **les plus récentes*
 
 Azure HDInsight est l’un des services les plus populaires parmi les clients d’entreprise pour l’analytique open source sur Azure.
 
-## <a name="release-date-01092020"></a>Date de publication : 09/01/2020
+Si vous souhaitez vous abonner aux notes de publication, regardez les communiqués sur [ce référentiel GitHub](https://github.com/hdinsight/release-notes/releases).
 
-Cette version s’applique à la fois à HDInsight 3.6 et 4.0. La version HDInsight est mise à disposition dans toutes les régions sur plusieurs jours. La date de publication mentionnée ici indique la date de publication dans la première région. Si vous ne voyez pas les modifications ci-dessous, veuillez attendre quelques jours pour que la mise en production soit active dans votre région.
+## <a name="release-date-11182020"></a>Date de publication : 18/11/2020
 
-> [!IMPORTANT]  
-> Linux est le seul système d’exploitation utilisé sur HDInsight version 3.4 ou supérieure. Pour plus d’informations, consultez [l’article sur le contrôle de version de HDInsight](hdinsight-component-versioning.md).
+Cette version s’applique à la fois à HDInsight 3.6 et HDInsight 4.0. La version HDInsight est mise à disposition dans toutes les régions sur plusieurs jours. La date de publication mentionnée ici indique la date de publication dans la première région. Si vous ne voyez pas les changements ci-dessous, attendez quelques jours pour que la version release soit active dans votre région.
 
 ## <a name="new-features"></a>Nouvelles fonctionnalités
-### <a name="tls-12-enforcement"></a>Application de TLS 1.2
-TLS (Transport Layer Security) et SSL (Secure Sockets Layer) sont des protocoles de chiffrement qui permettent la sécurité des communications sur un réseau d’ordinateurs. Apprenez-en davantage sur [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security#SSL_1.0.2C_2.0_and_3.0). HDInsight utilise TLS 1.2 sur les points de terminaison HTTPS publics, mais TLS 1.1 est toujours pris en charge à des fins de compatibilité descendante. 
+### <a name="auto-key-rotation-for-customer-managed-key-encryption-at-rest"></a>Rotation automatique des clés pour le chiffrement à clé géré par le client au repos
+À partir de cette version, les clients peuvent utiliser des URL de clé de chiffrement sans version Azure KeyValut pour le chiffrement à clé géré par le client au repos. HDInsight fait automatiquement pivoter les clés à mesure qu’elles expirent ou sont remplacées par les nouvelles versions. Vous trouverez plus de détails [ici](./disk-encryption.md).
 
-Avec cette version, les clients peuvent choisir TLS 1.2 uniquement pour toutes les connexions qui passent par le point de terminaison de cluster public. Pour prendre cela en charge, vous pouvez spécifier la nouvelle propriété **minSupportedTlsVersion** lors de la création du cluster. Si cette propriété n’est pas définie, le cluster prend toujours en charge TLS 1.0, 1.1 et 1.2, ce qui est identique au comportement actuel. Les clients peuvent affecter la valeur « 1.2 » à cette propriété, ce qui signifie que le cluster ne prend en charge que TLS 1.2 et versions ultérieures. Pour plus d’informations, consultez [TLS](./transport-layer-security.md).
-
-### <a name="bring-your-own-key-for-disk-encryption"></a>BYOK (Bring Your Own Key) pour le chiffrement de disque
-Tous les disques managés dans HDInsight sont protégés par Azure Storage Service Encryption (SSE). Par défaut, les données stockées sur ces disques sont chiffrées à l’aide de clés managées par Microsoft. À compter de cette version, vous pouvez utiliser votre propre clé (BYOK, Bring Your Own Key) pour le chiffrement de disque et effectuer la gestion à l’aide d’Azure Key Vault. Le chiffrement BYOK est une configuration en une étape qui a lieu lors de la création d’un cluster, sans coût supplémentaire. Il vous suffit d’inscrire HDInsight comme identité managée auprès d’Azure Key Vault et d’ajouter la clé de chiffrement pendant la création du cluster. Pour plus d’informations, consultez [Chiffrement de disque avec clé gérée par le client](https://docs.microsoft.com/azure/hdinsight/disk-encryption).
-
-## <a name="deprecation"></a>Dépréciation
-Cette version ne fait pas l’objet d’une dépréciation. Pour vous préparer aux dépréciations à venir, consultez [Modifications à venir](#upcoming-changes).
-
-## <a name="behavior-changes"></a>Changements de comportement
-Cette version n’est associée à aucun changement de comportement. Pour vous préparer aux changements à venir, consultez [Changements à venir](#upcoming-changes).
-
-## <a name="upcoming-changes"></a>Changements à venir
-Les changements suivants se produiront dans les prochaines versions. 
-
-### <a name="deprecate-spark-21-and-22-for-hdinsight-36-spark-cluster"></a>Dépréciation de Spark 2.1 et 2.2 pour le cluster Spark HDInsight 3.6
-À compter du 1er juillet 2020, les clients ne seront pas en mesure de créer de nouveaux clusters Spark avec les versions 2.1 et 2.2 de Spark sur HDInsight 3.6. Les clusters existants s’exécuteront tels quels sans le support de Microsoft. Envisagez de mettre à niveau vers Spark 2.3 sur HDInsight 3.6 d’ici le 30 juin 2020 pour éviter une éventuelle interruption du système ou du support.
-
-### <a name="deprecate-spark-23-for-hdinsight-40-spark-cluster"></a>Dépréciation de Spark 2.3 pour le cluster Spark HDInsight 4.0
-À compter du 1er juillet 2020, les clients ne seront pas en mesure de créer de nouveaux clusters Spark avec Spark 2.3 sur HDInsight 4.0. Les clusters existants s’exécuteront tels quels sans le support de Microsoft. Envisagez de mettre à niveau vers Spark 2.4 sur HDInsight 4.0 d’ici le 30 juin 2020 pour éviter une éventuelle interruption du système ou du support.
-
-### <a name="deprecate-kafka-11-for-hdinsight-40-kafka-cluster"></a>Dépréciation de Kafka 1.1 pour le cluster Kafka HDInsight 4.0
-À compter du 1er juillet 2020, les clients ne seront pas en mesure de créer de nouveaux clusters Kafka avec Kafka 1.1 sur HDInsight 4.0. Les clusters existants s’exécuteront tels quels sans le support de Microsoft. Envisagez de mettre à niveau vers Kafka 2.1 sur HDInsight 4.0 d’ici le 30 juin 2020 pour éviter une éventuelle interruption du système ou du support.
-
-### <a name="hbase-20-to-21"></a>HBase 2.0 à 2.1
-Dans la prochaine version de HDInsight 4.0, la version de HBase sera mise à niveau de la version 2.0 à 2.1.
-
-### <a name="a-minimum-4-core-vm-is-required-for-head-node"></a>Une machine virtuelle à au moins quatre cœurs est nécessaire pour le nœud principal 
-Une machine virtuelle à au moins quatre cœurs est nécessaire pour le nœud principal, afin de garantir la haute disponibilité et la fiabilité des clusters HDInsight. À compter du 6 avril 2020, les clients peuvent uniquement choisir des machines virtuelles à quatre cœurs ou plus comme nœud principal pour les nouveaux clusters HDInsight. Les clusters existants continueront à s’exécuter comme prévu. 
-
-### <a name="esp-spark-cluster-node-size-change"></a>Modification de la taille du nœud de cluster ESP Spark 
-Dans la version à venir, la taille de nœud minimale autorisée pour le cluster ESP Spark sera remplacée par la taille Standard_D13_V2. Les machines virtuelles de la série A peuvent provoquer des problèmes liés au cluster ESP, en raison d’une capacité de mémoire et de processeur relativement faible. L’utilisation des machines virtuelles de la série A sera dépréciée pour la création de nouveaux clusters ESP.
+### <a name="ability-to-select-different-zookeeper-virtual-machine-sizes-for-spark-hadoop-and-ml-services"></a>Possibilité de sélectionner différentes tailles de machine virtuelle Zookeeper pour les services Spark, Hadoop et ML
+HDInsight ne prenait auparavant pas en charge la personnalisation de la taille de nœud Zookeeper pour les types de cluster des services Spark, Hadoop et ML. Les tailles de machine virtuelle sont définies par défaut sur A2_v2/A2, qui sont fournies sans frais. À partir de cette version, vous pourrez sélectionner la taille de machine virtuelle Zookeeper la plus appropriée pour votre scénario. Les nœuds Zookeeper avec une taille de machine virtuelle différente de A2_v2/A2 sont facturés. Les machines virtuelles A2_v2 et A2 sont toujours fournies sans frais.
 
 ### <a name="moving-to-azure-virtual-machine-scale-sets"></a>Passage à des groupes de machines virtuelles identiques Azure
-HDInsight utilise désormais les machines virtuelles Azure pour approvisionner le cluster. Dans la version à venir, HDInsight utilisera à la place des groupes de machines virtuelles identiques Azure. Apprenez-en davantage sur les groupes de machines virtuelles identiques Azure.
+HDInsight utilise désormais les machines virtuelles Azure pour approvisionner le cluster. À compter de cette version, le service migrera progressivement vers des [groupes de machines virtuelles identiques Azure](../virtual-machine-scale-sets/overview.md). L’ensemble du processus peut prendre plusieurs mois. Une fois les régions et les abonnements migrés, les clusters HDInsight nouvellement créés s’exécuteront sur des groupes de machines virtuelles identiques sans l’intervention du client. Aucun changement cassant n’est prévu.
+
+## <a name="deprecation"></a>Dépréciation
+### <a name="deprecation-of-hdinsight-36-ml-services-cluster"></a>Dépréciation du cluster ML Services HDInsight 3.6
+Le type de cluster ML Services HDInsight 3.6 ne sera plus pris en charge au 31 décembre 2020. Après cette date, les clients ne devront plus créer de cluster ML Services 3.6. Les clusters existants s’exécuteront tels quels sans le support de Microsoft. Vérifiez l’expiration de la prise en charge des versions HDInsight et des types de cluster [ici](./hdinsight-component-versioning.md#available-versions).
+
+### <a name="disabled-vm-sizes"></a>Tailles de machine virtuelle désactivées
+À compter du 16 novembre 2020, HDInsight bloquera les nouveaux clients qui créent des clusters en utilisant les tailles de machine virtuelle standand_A8, standand_A9, standand_A10 et standand_A11. Les clients existants qui ont utilisé ces tailles de machine virtuelle au cours des trois derniers mois ne seront pas concernés. À compter du 9 janvier 2021, HDInsight bloquera tous les clients qui créent des clusters en utilisant les tailles de machine virtuelle standand_A8, standand_A9, standand_A10 et standand_A11. Les clusters existants fonctionneront tels quels. Envisagez de migrer vers HDInsight 4.0 pour éviter une éventuelle interruption du système ou du support.
+
+## <a name="behavior-changes"></a>Changements de comportement
+### <a name="add-nsg-rule-checking-before-scaling-operation"></a>Ajout la vérification de la règle NSG avant l'opération de mise à l'échelle
+HDInsight a ajouté la vérification des groupes de sécurité réseau (NSG) et des itinéraires définis par l'utilisateur (UDR) à l'opération de mise à l'échelle. La même validation intervient pour la mise à l'échelle des clusters en plus de leur création. Cette validation permet d'éviter les erreurs imprévisibles. Si la validation échoue, la mise à l'échelle échoue également. Pour en savoir plus sur la configuration des NSG et des UDR, reportez-vous à la section [Adresses IP de gestion HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-management-ip-addresses).
+
+## <a name="upcoming-changes"></a>Changements à venir
+Les changements suivants se produiront dans les prochaines versions.
+
+### <a name="default-cluster-version-will-be-changed-to-40"></a>La version de cluster par défaut sera remplacée par la version 4.0
+À partir de février 2021, la version par défaut du cluster HDInsight passera de la version 3.6 à 4.0. Pour plus d’informations sur les versions disponibles, consultez [Versions disponibles](./hdinsight-component-versioning.md#available-versions). En savoir plus sur les nouveautés de [HDInsight 4.0](./hdinsight-version-release.md).
+
+### <a name="hdinsight-36-end-of-support-on-june-30-2021"></a>Fin de la prise en charge de HDInsight 3.6 le 30 juin 2021
+HDInsight 3.6 ne sera plus pris en charge. À partir du 30 juin 2021, les clients ne pourront plus créer de nouveaux clusters HDInsight 3.6. Les clusters existants s’exécuteront tels quels sans le support de Microsoft. Envisagez de migrer vers HDInsight 4.0 pour éviter une éventuelle interruption du système ou du support.
 
 ## <a name="bug-fixes"></a>Résolution des bogues
 HDInsight continue à améliorer la fiabilité et les performances des clusters. 
 
 ## <a name="component-version-change"></a>Changement de la version des composants
-Aucune modification de la version des composants pour cette version. Vous pouvez trouver les versions actuelles des composants pour HDInsight 4.0 et HDInsight 3.6 ici.
-
+Aucune modification de la version des composants pour cette version. Les versions actuelles des composants pour HDInsight 4.0 et HDInsight 3.6 sont indiquées dans [ce document](./hdinsight-component-versioning.md).

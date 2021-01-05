@@ -1,6 +1,6 @@
 ---
 title: Exemples d’interface de ligne de commande Azure - mise en réseau
-description: Exemples d’interface de ligne de commande Azure
+description: Découvrez des exemples Azure CLI pour la mise en réseau, incluant des exemples pour la connectivité entre les ressources Azure, et des exemples pour l’équilibrage de charge et la direction du trafic.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -14,18 +14,19 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 04/25/2017
 ms.author: kumud
-ms.openlocfilehash: 84754a61bfe9537e928759aefbcb5dcddce33089
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: c038f0d238646f43b93ba2a2c6a1120ab5feccee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81457958"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87497288"
 ---
 # <a name="azure-cli-samples-for-networking"></a>Exemples d’interface de ligne de commande Azure pour la mise en réseau
 
 Le tableau suivant contient des liens vers des scripts Bash créés à l’aide de l’interface de ligne de commande Azure.
 
-| | |
+| Script | Description |
 |-|-|
 |**Connectivité entre les ressources Azure**||
 | [Créer un réseau virtuel pour les applications multiniveau](./scripts/virtual-network-cli-sample-multi-tier-application.md?toc=%2fazure%2fnetworking%2ftoc.json) | Crée un réseau virtuel avec des sous-réseaux frontaux et principaux. Le trafic vers le sous-réseau frontal est limité à HTTP et SSH, tandis que le trafic vers le sous-réseau principal est limité à MySQL, port 3306. |

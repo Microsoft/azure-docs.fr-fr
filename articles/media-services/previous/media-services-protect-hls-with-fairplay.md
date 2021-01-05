@@ -13,17 +13,20 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 873bc4ab5e435b91ff4400a39c92db0d0bb9baa8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 2f9b3cdd0b2080a26a9b1948263a7638dc66f2b3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74968763"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89259742"
 ---
 # <a name="protect-your-hls-content-with-apple-fairplay-or-microsoft-playready"></a>Protéger votre contenu HLS avec Apple FairPlay ou Microsoft PlayReady
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Pour suivre ce tutoriel, vous avez besoin d’un compte Azure. Pour plus d’informations, consultez [Essai gratuit Azure](https://azure.microsoft.com/pricing/free-trial/).   > Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Pour suivre ce tutoriel, vous avez besoin d’un compte Azure. Pour plus d’informations, consultez [Essai gratuit Azure](https://azure.microsoft.com/pricing/free-trial/).   > Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 >
 
 Azure Media Services vous permet de chiffrer dynamiquement votre contenu HTTP Live Streaming (HLS) à l’aide des formats suivants :  
@@ -127,7 +130,7 @@ Voici les étapes générales que vous devez suivre pour protéger vos élément
 ## <a name="use-fairplay-key-delivery-by-player-apps"></a>Utiliser la remise de clé FairPlay des applications de lecteur
 Vous pouvez développer des applications de lecteur à l’aide du Kit de développement logiciel (SDK) iOS. Pour pouvoir lire le contenu FairPlay, vous devez implémenter le protocole d’échange de licence. Ce protocole n’est pas spécifié par Apple. Chaque application doit décider comment envoyer des requêtes de distribution de clés. Le service de remise de clé Media Services FairPlay s’attend à ce que le certificat SPC soit fourni en tant que message encodé www-form-url au format suivant :
 
-    spc=<Base64 encoded SPC>
+`spc=<Base64 encoded SPC>`
 
 > [!NOTE]
 > Azure Media Player prend en charge la lecture de FairPlay. Consultez la [documentation Azure Media Player](https://amp.azure.net/libs/amp/latest/docs/index.html) pour obtenir plus d’informations.

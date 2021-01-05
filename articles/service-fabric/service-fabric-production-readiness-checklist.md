@@ -3,12 +3,12 @@ title: Liste de contrôle de disponibilité de production Azure Service Fabric
 description: Préparez votre application Service Fabric et votre cluster de production en suivant les meilleures pratiques.
 ms.topic: conceptual
 ms.date: 6/05/2019
-ms.openlocfilehash: 90d600b01aa870f7b3a58e70ef32e774e7107524
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a03df40a8ce213c5de9ed7017d47713c4de3449d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75376798"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87835865"
 ---
 # <a name="production-readiness-checklist"></a>Liste de vérification de disponibilité de la production
 
@@ -17,13 +17,13 @@ Votre application et le cluster sont prêts à accepter le trafic de production�
 
 ## <a name="prerequisites-for-production"></a>Conditions préalables à la production
 1. Les meilleures pratiques Service Fabric sont : [Conception d’applications](./service-fabric-best-practices-applications.md), [Sécurité](./service-fabric-best-practices-security.md), [Mise en réseau](./service-fabric-best-practices-networking.md), [Planification de la capacité et mise à l’échelle](./service-fabric-best-practices-capacity-scaling.md), [Infrastructure as code](./service-fabric-best-practices-infrastructure-as-code.md), et [Surveillance et diagnostics](./service-fabric-best-practices-monitoring.md). 
-1. Implémenter la configuration de sécurité de Reliable Actors si vous utilisez le modèle de programmation Actors
+1. [Configurez les paramètres FabricTransport](./service-fabric-reliable-actors-fabrictransportsettings.md) si vous utilisez le modèle de programmation Reliable Actors et que vous devez sécuriser la communication entre les services.
 1. Pour les clusters comprenant plus de 20 cœurs ou 10 nœuds, créez un type de nœud principal dédié aux services système. Ajoutez des [contraintes de placement](service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies.md) pour réserver le type de nœud principal aux services système.
 1. Utilisez une référence (SKU) D2v2 ou supérieure pour le type de nœud principal. Il est recommandé de choisir une référence (SKU) avec une capacité de disque dur d’au moins 50 Go.
 1. Les clusters de production doivent être [sécurisés](service-fabric-cluster-security.md). Pour un exemple de configuration de cluster sécurisé, regardez ce [modèle de cluster](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/7-VM-Windows-3-NodeTypes-Secure-NSG). Utilisez des noms communs pour les certificats, et évitez d’utiliser des certificats auto-signés.
 1. Ajoutez [des contraintes de ressources sur les conteneurs et les services](service-fabric-resource-governance.md), afin qu’ils ne consomment pas plus de 75 % des ressources du nœud. 
-1. Comprenez et définissez le [niveau de durabilité](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster). Le niveau de durabilité Silver ou un niveau supérieur sont recommandés pour les types de nœuds exécutant des charges de travail avec état. Le type de nœud principal doit avoir le niveau de durabilité Silver ou un niveau supérieur.
-1. Comprenez et choisissez le [niveau de fiabilité](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) du type de nœud. Une fiabilité de niveau Silver ou d’un niveau supérieur est recommandée.
+1. Comprenez et définissez le [niveau de durabilité](service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster). Le niveau de durabilité Silver ou un niveau supérieur sont recommandés pour les types de nœuds exécutant des charges de travail avec état.
+1. Comprenez et choisissez le [niveau de fiabilité](service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster) du type de nœud. Une fiabilité de niveau Silver ou d’un niveau supérieur est recommandée.
 1. Chargez vos charges de travail et testez-les à l’échelle afin d’identifier les [besoins en capacité](service-fabric-cluster-capacity.md) pour votre cluster. 
 1. Vos services et applications sont surveillés, et les journaux des applications sont générés et stockés avec génération d’alertes. Consultez, par exemple, [Ajouter la journalisation à votre application Service Fabric](service-fabric-how-to-diagnostics-log.md) et [Surveiller les conteneurs avec les journaux Azure Monitor](service-fabric-diagnostics-oms-containers.md).
 1. Le cluster est surveillé avec un dispositif de génération d’alertes (par exemple, les [journaux Azure Monitor](service-fabric-diagnostics-event-analysis-oms.md)). 
@@ -35,7 +35,7 @@ Votre application et le cluster sont prêts à accepter le trafic de production�
 1. Fixez un objectif de point de récupération (RPO) pour votre service, configurez un [processus de récupération d’urgence](service-fabric-disaster-recovery.md), puis testez-le.
 1. Planifiez la [mise à l’échelle](service-fabric-cluster-scaling.md) de votre cluster manuellement ou par programmation.
 1. Planifiez la [mise à jour corrective](service-fabric-patch-orchestration-application.md) de vos nœuds de cluster. 
-1. Établissez un pipeline d’intégration/livraison continue afin que vos dernières modifications soient testées en permanence. Par exemple, en utilisant [Azure DevOps](service-fabric-tutorial-deploy-app-with-cicd-vsts.md) ou [Jenkins](service-fabric-cicd-your-linux-applications-with-jenkins.md)
+1. Établissez un pipeline d’intégration/livraison continue afin que vos dernières modifications soient testées en permanence. Par exemple, en utilisant [Azure DevOps](service-fabric-tutorial-deploy-app-with-cicd-vsts.md) ou [Jenkins](/azure/developer/jenkins/deploy-to-service-fabric-cluster)
 1. Testez vos clusters de développement et de préproduction sous charge avec le [service d’analyse des défaillances](service-fabric-testability-overview.md), et provoquez un [chaos](service-fabric-controlled-chaos.md) contrôlé. 
 1. Planifiez la [mise à l’échelle](service-fabric-concepts-scalability.md) de vos applications. 
 

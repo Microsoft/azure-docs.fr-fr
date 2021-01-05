@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 08/01/2019
+ms.date: 08/03/2020
 ms.author: jingwang
-ms.openlocfilehash: 50d893ef42c7b870d5fbf2be1feed798d46c86a7
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 78e7fc6b2a4c9804fbba60aa9946cc612b494461
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81409976"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87531283"
 ---
 # <a name="copy-data-from-zoho-using-azure-data-factory-preview"></a>Copier des données de Zoho à l’aide d’Azure Data Factory (préversion)
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -36,6 +36,8 @@ Ce connecteur Zoho est pris en charge pour les activités suivantes :
 
 Vous pouvez copier les données depuis Zoho vers une banque de données réceptrice prise en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
+Ce connecteur prend en charge l’authentification par jeton d’accès Xero et l’authentification OAuth 2.0.
+
 Azure Data Factory fournit un pilote intégré qui permet la connexion. Vous n’avez donc pas besoin d’installer manuellement un pilote à l’aide de ce connecteur.
 
 ## <a name="getting-started"></a>Prise en main
@@ -51,13 +53,19 @@ Les propriétés prises en charge pour le service lié Zoho sont les suivantes :
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type doit être définie sur : **Zoho** | Oui |
+| connectionProperties | Un groupe de propriétés qui définit la façon de se connecter à Zoho. | Oui |
+| ***Sous `connectionProperties`:*** | | |
 | endpoint | Le point de terminaison du serveur Zoho (`crm.zoho.com/crm/private`). | Oui |
+| authenticationType | Les valeurs autorisées sont `OAuth_2.0` et `Access Token`. | Oui |
+| clientId | L’ID client associé à votre application Zoho. | Oui pour l’authentification OAuth 2.0 | 
+| clientSecrect | Le secret client associé à votre application Zoho. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui pour l’authentification OAuth 2.0 | 
+| refreshToken | Le jeton d’actualisation OAuth 2.0 associé à votre application Zoho et utilisé pour actualiser le jeton d’accès quand il expire. Le jeton d’actualisation n’expire jamais. Pour obtenir un jeton d’actualisation, vous devez demander le paramètre access_type `offline`. Apprenez-en davantage dans [cet article](https://www.zoho.com/crm/developer/docs/api/auth-request.html). <br>Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md).| Oui pour l’authentification OAuth 2.0 |
 | accessToken | Le jeton d’accès pour l’authentification Zoho. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 | useEncryptedEndpoints | Indique si les points de terminaison de la source de données sont chiffrés suivant le protocole HTTPS. La valeur par défaut est true.  | Non |
 | useHostVerification | Indique si le nom d’hôte du certificat du serveur doit correspondre à celui du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
-| usePeerVerification | Indique si l’identité du serveur doit être vérifiée en cas de connexion TLS. La valeur par défaut est true.  | Non |
+| usePeerVerification | Indique s’il faut vérifier l’identité du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
 
-**Exemple :**
+**Exemple : Authentification OAuth 2.0**
 
 ```json
 {
@@ -65,11 +73,50 @@ Les propriétés prises en charge pour le service lié Zoho sont les suivantes :
     "properties": {
         "type": "Zoho",
         "typeProperties": {
-            "endpoint" : "crm.zoho.com/crm/private",
-            "accessToken": {
-                 "type": "SecureString",
-                 "value": "<accessToken>"
-            }
+            "connectionProperties": { 
+                "authenticationType":"OAuth_2.0", 
+                "endpoint": "crm.zoho.com/crm/private", 
+                "clientId": "<client ID>", 
+                "clientSecrect": {
+                    "type": "SecureString",
+                    "value": "<client secret>"
+                },
+                "accessToken": {
+                    "type": "SecureString",
+                    "value": "<access token>"
+                }, 
+                "refreshToken": {
+                    "type": "SecureString",
+                    "value": "<refresh token>"
+                }, 
+                "useEncryptedEndpoints": true,
+                "useHostVerification": true, 
+                "usePeerVerification": true
+            }
+        }
+    }
+}
+```
+
+**Exemple : authentification par jeton d’accès**
+
+```json
+{
+    "name": "ZohoLinkedService",
+    "properties": {
+        "type": "Zoho",
+        "typeProperties": {
+            "connectionProperties": { 
+                "authenticationType":"Access Token", 
+                "endpoint": "crm.zoho.com/crm/private", 
+                "accessToken": {
+                    "type": "SecureString",
+                    "value": "<access token>"
+                }, 
+                "useEncryptedEndpoints": true, 
+                "useHostVerification": true, 
+                "usePeerVerification": true
+            }
         }
     }
 }

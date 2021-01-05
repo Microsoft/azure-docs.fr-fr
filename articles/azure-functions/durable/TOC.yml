@@ -13,12 +13,18 @@
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: 'Créer une fonction durable-C#'
+    - name: Créer une fonction durable-C#
       href: durable-functions-create-first-csharp.md
       displayName: 'get started, chaining'
     - name: Créer une fonction durable-JavaScript
       displayName: 'get started, chaining'
       href: quickstart-js-vscode.md
+    - name: Créer une fonction durable - Python
+      displayName: 'get started, chaining'
+      href: quickstart-python-vscode.md
+    - name: Créer une fonction durable - PowerShell
+      displayName: 'get started, chaining'
+      href: quickstart-powershell-vscode.md
 - name: Tutoriels
   items:
     - name: Chaînage de fonctions
@@ -76,7 +82,7 @@
 - name: Informations de référence
   items:
     - name: Paramètres host.json
-      href: 'durable-functions-bindings.md#host-json'
+      href: durable-functions-bindings.md#host-json
     - name: Liaisons
       href: durable-functions-bindings.md
     - name: API HTTP
@@ -85,6 +91,8 @@
       href: /dotnet/api/microsoft.azure.webjobs.extensions.durabletask?view=azure-dotnet
     - name: API Node.js
       href: /javascript/api/durable-functions/?view=azure-node-latest
+    - name: API Python
+      href: /python/api/azure-functions-durable/azure.durable_functions?view=azure-python
 - name: Guides pratiques
   items:
     - name: Développer
@@ -129,10 +137,10 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Disponibilité régionale
       href: 'https://azure.microsoft.com/regions/services/'
-    - name: Videos
+    - name: Vidéos
       href: 'https://www.youtube.com/c/AzureFunctions'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-functions.html'
+      href: /answers/topics/azure-functions.html
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-functions'
     - name: Twitter

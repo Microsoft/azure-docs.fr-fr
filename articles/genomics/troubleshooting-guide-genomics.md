@@ -11,11 +11,11 @@ ms.workload: genomics
 ms.topic: troubleshooting
 ms.date: 10/29/2018
 ms.openlocfilehash: c508c10d619cde1a16d89b446c5cfd1a3ce81daf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100904"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023821"
 ---
 # <a name="troubleshooting-guide"></a>Guide de résolution des problèmes
 

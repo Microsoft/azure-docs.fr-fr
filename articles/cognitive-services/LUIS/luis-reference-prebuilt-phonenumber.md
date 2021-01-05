@@ -3,20 +3,18 @@ title: Entité prédéfinie phonenumber – LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie phonenumber dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 09/27/2019
-ms.author: diberry
-ms.openlocfilehash: 4e2c8e27c6d4195252c6a5b423fa98b2a4247182
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 598ecaddbab3b70297a460521c7ec3386b390a8d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270468"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535387"
 ---
 # <a name="phone-number-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie de numéro de téléphone pour une application LUIS
 L’entité `phonenumber` extrait une série de numéros de téléphone, avec le code pays. Étant donné que cette entité est déjà formée, il est inutile d’ajouter des exemples d’énoncés à l’application. L’entité `en-us` est prise en charge uniquement dans la culture `phonenumber`.

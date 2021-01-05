@@ -4,24 +4,21 @@ titlesuffix: Azure Virtual Network
 description: Découvrez comment Azure achemine le trafic de réseau virtuel, et comment vous pouvez personnaliser le routage d’Azure.
 services: virtual-network
 documentationcenter: na
-author: malopMSFT
+author: KumudD
 manager: ''
-editor: v-miegge
-tags: ''
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/26/2017
-ms.author: malop
-ms.reviewer: kumud
-ms.openlocfilehash: d9ed11cd00909a104b5ea54463f8a98020837e10
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.author: aldomel
+ms.openlocfilehash: ca6460497fa026feca503df741ad6811a95fb9e3
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477882"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96936928"
 ---
 # <a name="virtual-network-traffic-routing"></a>Routage du trafic de réseau virtuel
 
@@ -83,7 +80,7 @@ Vous pouvez spécifier les types suivants de tronçon suivants lors de la créat
 
 * **Appliance virtuelle** : une appliance virtuelle réseau est une machine virtuelle qui exécute une application réseau telle qu’un pare-feu. Pour en savoir plus sur une panoplie d’appliances virtuelles réseau préconfigurées que vous pouvez déployer dans un réseau virtuel, voir [Place de marché Microsoft Azure](https://azuremarketplace.microsoft.com/marketplace/apps/category/networking?page=1&subcategories=appliances). Lorsque vous créez un itinéraire avec le **appliance virtuelle** type de tronçon, vous également spécifiez les adresses IP de tronçon suivant. L’adresse IP peut être :
 
-    * L’[adresse IP privée](virtual-network-ip-addresses-overview-arm.md#private-ip-addresses) d’une interface réseau attachée à une machine virtuelle. L’option*Activer le transfert IP* doit être activée pour toute interface réseau attachée à une machine virtuelle qui transfère le trafic réseau vers une adresse autre que celle qui lui appartient. Le paramètre désactive la vérification de la source et de destination pour une interface réseau par Azure. En savoir plus sur la façon d’[activer le transfert IP pour une interface réseau](virtual-network-network-interface.md#enable-or-disable-ip-forwarding). Bien que le paramètre *Activer le transfert IP* soit un paramètre Azure, il se peut qu’il soit également nécessaire d’activer le transfert IP au sein du système d’exploitation de la machine virtuelle pour que l’appliance transfère le trafic entre les adresses IP privées et les interfaces réseau Azure. Si l’appliance doit acheminer le trafic vers une adresse IP publique, elle doit l’acheminer par proxy ou bien traduire l’adresse réseau de l’adresse IP privée originale vers sa propre adresse IP privée, qu’Azure traduit alors vers une adresse IP publique, avant d’envoyer le trafic sur Internet. Pour déterminer les paramètres requis pour la machine virtuelle, consultez la documentation de votre système d’exploitation ou application réseau. Pour comprendre les connexions sortantes dans Azure, consultez [Comprendre les connexions sortantes dans Azure](../load-balancer/load-balancer-outbound-connections.md?toc=%2fazure%2fvirtual-network%2ftoc.json).<br>
+    * L’[adresse IP privée](virtual-network-ip-addresses-overview-arm.md#private-ip-addresses) d’une interface réseau attachée à une machine virtuelle. L’option *Activer le transfert IP* doit être activée pour toute interface réseau attachée à une machine virtuelle qui transfère le trafic réseau vers une adresse autre que celle qui lui appartient. Le paramètre désactive la vérification de la source et de destination pour une interface réseau par Azure. En savoir plus sur la façon d’[activer le transfert IP pour une interface réseau](virtual-network-network-interface.md#enable-or-disable-ip-forwarding). Bien que le paramètre *Activer le transfert IP* soit un paramètre Azure, il se peut qu’il soit également nécessaire d’activer le transfert IP au sein du système d’exploitation de la machine virtuelle pour que l’appliance transfère le trafic entre les adresses IP privées et les interfaces réseau Azure. Si l’appliance doit acheminer le trafic vers une adresse IP publique, elle doit l’acheminer par proxy ou bien traduire l’adresse réseau de l’adresse IP privée originale vers sa propre adresse IP privée, qu’Azure traduit alors vers une adresse IP publique, avant d’envoyer le trafic sur Internet. Pour déterminer les paramètres requis pour la machine virtuelle, consultez la documentation de votre système d’exploitation ou application réseau. Pour comprendre les connexions sortantes dans Azure, consultez [Comprendre les connexions sortantes dans Azure](../load-balancer/load-balancer-outbound-connections.md?toc=%2fazure%2fvirtual-network%2ftoc.json).<br>
 
         > [!NOTE]
         > Déployez une appliance virtuelle dans un sous-réseau autre que celui dans lequel les ressources de routage par l’intermédiaire de l’appliance virtuelle sont déployées. Le déploiement de l’appliance virtuelle dans le même sous-réseau, puis l’application d’une table de routage au sous-réseau qui achemine le trafic via l’appliance virtuelle, peut entraîner des boucles de routage, où le trafic ne quitte jamais le sous-réseau.
@@ -170,7 +167,7 @@ Lorsque vous substituez le préfixe d’adresse 0.0.0.0/0, en plus du flux du tr
 
 Si votre réseau virtuel est connecté à une passerelle VPN Azure, n’associez pas de table de routage au [sous-réseau de passerelle](../vpn-gateway/vpn-gateway-about-vpn-gateway-settings.md?toc=%2fazure%2fvirtual-network%2ftoc.json#gwsub) incluant un itinéraire avec une destination de 0.0.0.0/0. Cela peut empêcher la passerelle de fonctionner correctement. Pour plus d’informations, consultez la question *Pourquoi certains ports sont ouverts sur ma passerelle VPN ?* dans le [FAQ sur la passerelle VPN](../vpn-gateway/vpn-gateway-vpn-faq.md?toc=%2fazure%2fvirtual-network%2ftoc.json#gatewayports).
 
-Consultez [Zone DMZ entre Azure et votre centre de données local](/azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?toc=%2fazure%2fvirtual-network%2ftoc.json) et [Zone DMZ entre Azure et Internet](/azure/architecture/reference-architectures/dmz/secure-vnet-dmz?toc=%2fazure%2fvirtual-network%2ftoc.json) pour les détails de mise en œuvre lors de l’utilisation de passerelles et d’appliances virtuelles entre les Internet et Azure.
+Consultez [Zone DMZ entre Azure et votre centre de données local](/azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?toc=%2fazure%2fvirtual-network%2ftoc.json) pour obtenir les détails de mise en œuvre lors de l’utilisation de passerelles de réseau virtuel entre Internet et Azure.
 
 ## <a name="routing-example"></a>Exemple de routage
 

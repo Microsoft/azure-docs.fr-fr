@@ -3,12 +3,12 @@ title: Consultation des recommandations Azure Advisor vous concernant
 description: Afficher et filtrer les recommandations Azure Advisor pour réduire le bruit.
 ms.topic: article
 ms.date: 04/03/2019
-ms.openlocfilehash: 10d7b16864f8e449dc51e870c5ff9f20d8c0dc87
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 43bdaba7d774bba8857a6eb3ef296d7ab8e1c264
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75422370"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90986870"
 ---
 # <a name="view-azure-advisor-recommendations-that-matter-to-you"></a>Consultation des recommandations Azure Advisor vous concernant
 
@@ -34,7 +34,7 @@ Pour apporter des modifications dans le portail Azure :
 
 Les paramètres de configuration restent actifs jusqu’à ce qu’ils soient modifiés. Si vous souhaitez limiter l’affichage des recommandations sur un seule affichage, vous pouvez utiliser les listes déroulantes en haut du panneau d’Advisor. Dans les panneaux Vue d’ensemble, Haute disponibilité, Sécurité, Performances, Coût et Recommandation, vous pouvez sélectionner les abonnements, les types de ressources et le statut des recommandations que vous souhaitez voir.
 
-   ![Menu de filtrage d’Advisor](./media/view-recommendations/filtering.png)
+   :::image type="content" source="./media/view-recommendations/filtering.png" alt-text="Capture d’écran d’Azure Advisor montrant des options de filtrage.":::
 
 ## <a name="dismissing-and-postponing-recommendations"></a>Ignorer et reporter des recommandations
 
@@ -47,7 +47,7 @@ Azure Advisor vous permet d’ignorer ou de reporter des recommandations sur une
 1. Sélectionnez une recommandation dans la liste des recommandations.
 1. Sélectionner Reporter ou Ignorer pour la recommandation que vous souhaitez reporter ou ignorer
 
-     ![Menu de filtrage d’Advisor](./media/view-recommendations/postpone-dismiss.png)
+     :::image type="content" source="./media/view-recommendations/postpone-dismiss.png" alt-text="Capture d’écran d’Azure Advisor montrant des options de filtrage.":::
 
 ### <a name="postpone-or-dismiss-a-multiple-recommendations-in-the-azure-portal"></a>Reporter ou ignorer plusieurs recommandations dans le portail Azure
 
@@ -57,7 +57,7 @@ Azure Advisor vous permet d’ignorer ou de reporter des recommandations sur une
 1. Sélectionnez la case à cocher à gauche de la ligne pour toutes les ressources pour lesquelles vous souhaitez reporter ou ignorer la recommandation.
 1. Sélectionnez **Reporter** ou **Ignorer** en haut à gauche de la table.
 
-     ![Menu de filtrage d’Advisor](./media/view-recommendations/postpone-dismiss-multiple.png)
+     :::image type="content" source="./media/view-recommendations/postpone-dismiss-multiple.png" alt-text="Capture d’écran d’Azure Advisor montrant des options de filtrage.":::
 
 > [!NOTE]
 > Vous devez disposer d’une autorisation de contributeur ou de propriétaire pour pouvoir ignorer ou reporter une recommandation. En savoir plus sur les autorisations dans Azure Advisor.
@@ -73,7 +73,7 @@ Vous pouvez activer une recommandation qui a été reporté ou ignorée. Cette a
 
 1. Modifiez le filtre dans le panneau de vue d’ensemble des recommandations **reportées**. Advisor affiche alors les recommandations reportées ou ignorées.
 
-    ![Menu de filtrage d’Advisor](./media/view-recommendations/activate-postponed.png)
+    :::image type="content" source="./media/view-recommendations/activate-postponed.png" alt-text="Capture d’écran d’Azure Advisor montrant des options de filtrage.":::
 
 1. Sélectionnez une catégorie pour voir les recommandations **Reportée** et **Ignorée**.
 
@@ -81,7 +81,7 @@ Vous pouvez activer une recommandation qui a été reporté ou ignorée. Cette a
 
 1. Cliquez sur **Activer** à la fin de la ligne. Une fois que vous cliquez dessus, la recommandation est active pour cette ressource et elle est donc supprimée. La recommandation est désormais visible dans l’onglet **Actives**.
  
-     ![Menu de filtrage d’Advisor](./media/view-recommendations/activate-postponed-2.png)
+     :::image type="content" source="./media/view-recommendations/activate-postponed-2.png" alt-text="Capture d’écran d’Azure Advisor montrant des options de filtrage.":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,19 +1,19 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: active-directory
-author: rolyon
+author: barclayn
 ms.service: active-directory
 ms.topic: include
-ms.date: 04/29/2019
-ms.author: rolyon
+ms.date: 12/07/2020
+ms.author: barclayn
 ms.custom: include file
-ms.openlocfilehash: d791c4ba46587ac5709d72cb31bc76f087118b03
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cbcd4b459faa3bf67f591cc7afab0bf0027062e1
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67476252"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96842303"
 ---
 ## <a name="create-one-or-more-access-reviews"></a>Créer une ou plusieurs révisions d’accès
 
@@ -36,13 +36,14 @@ ms.locfileid: "67476252"
     ![Étendue des utilisateurs pour la révision d’une appartenance à un rôle](./media/active-directory-privileged-identity-management-access-reviews/users.png)
 
     > [!NOTE]
-    > La sélection de plusieurs rôles crée plusieurs révisions d’accès. Par exemple, en sélectionnant cinq rôles, vous créez cinq révisions d’accès distinctes.
+    > - Les rôles sélectionnés ici incluent des [rôles permanents et éligibles](../articles/active-directory/privileged-identity-management/pim-how-to-add-role-to-user.md).
+    > - La sélection de plusieurs rôles crée plusieurs révisions d’accès. Par exemple, en sélectionnant cinq rôles, vous créez cinq révisions d’accès distinctes.
 
-    Si vous créez une révision d’accès des rôles Azure AD, l’exemple suivant présente une liste Révision d’appartenance.
+    Si vous créez une révision d’accès des **rôles Azure AD**, l’exemple suivant présente une liste Révision d’appartenance.
 
     ![Volet Révision d’appartenance répertoriant les rôles Azure AD que vous pouvez sélectionner](./media/active-directory-privileged-identity-management-access-reviews/review-membership.png)
 
-    Si vous créez une révision d’accès des rôles de ressource Azure, l’exemple suivant présente une liste Révision d’appartenance.
+    Si vous créez une révision d’accès des **rôles de ressource Azure**, l’image suivant présente une liste Révision d’appartenance.
 
     ![Volet Révision d’appartenance répertoriant les rôles de ressource Azure que vous pouvez sélectionner](./media/active-directory-privileged-identity-management-access-reviews/review-membership-azure-resource-roles.png)
 
@@ -52,6 +53,7 @@ ms.locfileid: "67476252"
 
     - **Utilisateurs sélectionnés** : utilisez cette option lorsque vous ne savez pas qui a besoin de l’accès. Avec cette option, vous pouvez affecter la révision à un propriétaire de ressource ou un responsable de groupe.
     - **Membres (auto)** : utilisez cette option pour demander aux utilisateurs de réviser leurs propres attributions de rôles.
+    - **Manager (préversion)**  : utilisez cette option pour que le manager de l’utilisateur révise son attribution de rôle. En sélectionnant Manager (préversion), vous aurez également la possibilité de spécifier un réviseur de secours. Les réviseurs de secours sont invités à réviser un utilisateur lorsque celui-ci n’a aucun manager spécifié dans le répertoire.
 
 ### <a name="upon-completion-settings"></a>Paramètres de saisie semi-automatique
 
@@ -81,3 +83,6 @@ ms.locfileid: "67476252"
 1. Définissez **Notifications par e-mail** sur **Activer** pour qu’Azure AD envoie des notifications par e-mail aux réviseurs quand une révision d’accès commence et aux administrateurs quand une révision se termine.
 
 1. Définissez **Rappels** sur **Activer** pour qu’Azure AD envoie des rappels concernant les révisions d’accès en cours aux réviseurs qui n’ont pas terminé leur révision.
+1. Le contenu de l’e-mail envoyé aux réviseurs est généré automatiquement en fonction des détails de la révision, comme le nom de la révision, le nom de la ressource, la date d’échéance, etc. Si vous souhaitez communiquer des informations supplémentaires telles que des instructions ou des coordonnées, vous pouvez les ajouter dans l’**e-mail Contenu supplémentaire pour le réviseur** qui sera inclus dans les e-mails d’invitation et de rappel envoyés aux réviseurs désignés. Ces informations seront affichées dans la section en surbrillance ci-dessous.
+
+    ![Contenu de l’e-mail envoyé aux réviseurs avec mise en évidence des points importants](./media/active-directory-privileged-identity-management-access-reviews/email-info.png)

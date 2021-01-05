@@ -1,18 +1,14 @@
 ---
 title: Guide pratique pour filtrer des événements pour Azure Event Grid
 description: Cet article explique comment filtrer des événements (par type d’événement, par sujet, par opérateurs, par données, etc.) lors de la création d’un abonnement Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 01/21/2020
-ms.author: spelluru
-ms.openlocfilehash: 63a5cdbff79af52d9f96cf410a820c6cfc530066
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.openlocfilehash: 99fb00f99a055033ccfcd99e32a52d423878fb44
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79454021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86105572"
 ---
 # <a name="filter-events-for-event-grid"></a>Filtrer des événements pour Event Grid
 

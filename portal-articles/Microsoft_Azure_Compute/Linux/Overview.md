@@ -8,12 +8,12 @@ ms.service: virtual-machines-linux
 ms.topic: article
 ms.date: 04/27/2017
 ms.author: sewatson
-ms.openlocfilehash: ff439083ca9c648ceec95b89b041bb5b60785c91
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: bf465cb6d391188b4110cca6d72deba6932af0a6
+ms.sourcegitcommit: dccb85aed33d9251048024faf7ef23c94d695145
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77603005"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87282396"
 ---
 # <a name="linux-virtual-machines-documentation"></a>Documentation sur les machines virtuelles Linux
 
@@ -23,9 +23,10 @@ Les Machines virtuelles Linux Azure fournissent une infrastructure sécurisée e
 
 Découvrez comment déployer un serveur web NGINX au sein d’une machine virtuelle exécutant Ubuntu :
 
-- [Portail Azure](/azure/virtual-machines/virtual-machines-linux-quick-create-portal?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-- [Azure PowerShell](/azure/virtual-machines/virtual-machines-linux-quick-create-powershell?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-- [Azure CLI](/azure/virtual-machines/virtual-machines-linux-quick-create-cli?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+- [Azure CLI](../../articles/virtual-machines/linux/quick-create-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+- [Portail Azure](../../articles//virtual-machines/linux/quick-create-portal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+- [Azure PowerShell](../../articles//virtual-machines/quick-create-powershell.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+
 
 ## <a name="step-by-step-tutorials"></a>Didacticiels pas à pas
 

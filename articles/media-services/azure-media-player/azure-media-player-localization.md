@@ -6,14 +6,14 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: reference
 ms.date: 04/20/2020
-ms.openlocfilehash: ca4dc888af414ede270118eff72652f098d3306c
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: 8a459d1fba4353b4b3e092e83a759314cc455ead
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82779040"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87087286"
 ---
-# <a name="localization"></a>Localisation #
+# <a name="azure-media-player-localization"></a>Localisation de Lecteur multimédia Azure #
 
 La prise en charge de plusieurs langues permet aux utilisateurs ayant des langues autres que l’anglais d’interagir en mode natif avec le lecteur. Le Lecteur multimédia Azure instanciera avec un dictionnaire global de langues, ce qui permettra de localiser les messages d’erreur en fonction de la langue de la page. Un développeur peut également créer une instance de lecteur avec une langue définie forcée. La langue par défaut est l’anglais (en).
 

@@ -3,19 +3,19 @@ title: Gérer les ressources Data Lake Storage Gen1 – Explorateur Stockage Azu
 description: Découvrez comment accéder aux données et ressources Azure Data Lake Storage Gen1 et les gérer dans l’Explorateur Stockage Azure.
 author: jejiang
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/05/2018
 ms.author: jejiang
-ms.openlocfilehash: a5117f72f933e1e48dc471a75624a8d3921f55af
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f251e6ba2d94c0fcede3387ac12461951de40f1
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73832256"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108743"
 ---
 # <a name="manage-azure-data-lake-storage-gen1-resources-by-using-storage-explorer"></a>Gérer les ressources Azure Data Lake Storage Gen1 en utilisant l’Explorateur Stockage
 
-[Azure Data Lake Storage Gen1](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview) est un service destiné à stocker de grandes quantités de données non structurées, telles que des données de texte ou binaires. Vous pouvez accéder aux données en tout lieu via HTTP ou HTTPS. Dans l’Explorateur Stockage Azure, Data Lake Storage Gen1 vous permet d’accéder aux ressources et aux données Data Lake Storage Gen1 et de les gérer. Il en va de même avec d’autres entités Azure telles que les objets blob et les files d’attente. À présent, vous pouvez utiliser le même outil pour gérer vos différentes entités Azure au même endroit.
+[Azure Data Lake Storage Gen1](./data-lake-store-overview.md) est un service destiné à stocker de grandes quantités de données non structurées, telles que des données de texte ou binaires. Vous pouvez accéder aux données en tout lieu via HTTP ou HTTPS. Dans l’Explorateur Stockage Azure, Data Lake Storage Gen1 vous permet d’accéder aux ressources et aux données Data Lake Storage Gen1 et de les gérer. Il en va de même avec d’autres entités Azure telles que les objets blob et les files d’attente. À présent, vous pouvez utiliser le même outil pour gérer vos différentes entités Azure au même endroit.
 
 Autre avantage : vous n’avez pas besoin de posséder une autorisation d’abonnement pour gérer les données Data Lake Storage Gen1. Dans l’Explorateur Stockage, vous pouvez joindre le chemin d’accès Data Lake Storage Gen1 au nœud **Local and Attached** (Local et attaché) tant qu’un utilisateur l’autorise.
 
@@ -24,7 +24,7 @@ Autre avantage : vous n’avez pas besoin de posséder une autorisation d’abon
 Pour effectuer les étapes indiquées dans cet article, vous avez besoin des éléments requis suivants :
 
 * Un abonnement Azure. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial).
-* Un compte Data Lake Storage Gen1. Pour savoir comment en créer un, voir [Prise en main d’Azure Data Lake Storage Gen1](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal).
+* Un compte Data Lake Storage Gen1. Pour savoir comment en créer un, voir [Prise en main d’Azure Data Lake Storage Gen1](./data-lake-store-get-started-portal.md).
 
 ## <a name="install-storage-explorer"></a>Installer l’Explorateur Stockage
 
@@ -195,7 +195,7 @@ Si vous disposez d’une URL, vous pouvez l’entrer dans le chemin d’adresse 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Consultez les [dernières notes de publication et vidéos de l’Explorateur Stockage](https://www.storageexplorer.com).
-* Découvrez comment [gérer Azure Cosmos DB dans l’Explorateur Stockage Azure](https://docs.microsoft.com/azure/cosmos-db/storage-explorer).
-* [Prise en main de l’Explorateur Stockage](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
-* [Prise en main d’Azure Data Lake Storage Gen1](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview)
+* Découvrez comment [gérer Azure Cosmos DB dans l’Explorateur Stockage Azure](../cosmos-db/storage-explorer.md).
+* [Prise en main de l’Explorateur Stockage](../vs-azure-tools-storage-manage-with-storage-explorer.md).
+* [Prise en main d’Azure Data Lake Storage Gen1](./data-lake-store-overview.md)
 * Visionnez une [vidéo YouTube pour découvrir comment utiliser Azure Cosmos DB dans l’Explorateur Stockage Azure](https://www.youtube.com/watch?v=iNIbg1DLgWo&feature=youtu.be).

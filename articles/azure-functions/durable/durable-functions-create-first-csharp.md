@@ -6,12 +6,12 @@ ms.topic: quickstart
 ms.date: 03/18/2020
 ms.author: azfuncdf
 zone_pivot_groups: code-editors-set-one
-ms.openlocfilehash: eda3afdf8deb3336cd0c5293c2422e694caa69c8
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: d5b6ecc12cee983cee0772da8b6f8f26a3b5a8ae
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80132765"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008174"
 ---
 # <a name="create-your-first-durable-function-in-c"></a>Créer votre première fonction durable dans C\#
 
@@ -21,7 +21,7 @@ ms.locfileid: "80132765"
 
 Cet article explique comment utiliser Visual Studio Code pour créer et tester en local une fonction durable « Hello world ».  Cette fonction orchestre et chaîne des appels à d’autres fonctions. Vous allez ensuite publier le code de la fonction dans Azure. Ces outils sont disponibles dans le cadre de l’[extension Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) de VS Code.
 
-![Exécution d’une fonction durable dans Azure](./media/durable-functions-create-first-csharp/functions-vscode-complete.png)
+![La capture d’écran montre une fenêtre Visual Studio Code avec une fonction durable.](./media/durable-functions-create-first-csharp/functions-vscode-complete.png)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -148,7 +148,7 @@ Après avoir vérifié que la fonction s’exécute correctement sur votre ordin
 
 1. Copiez l’URL du déclencheur HTTP à partir du panneau **Sortie**. L’URL qui appelle la fonction déclenchée via HTTP doit être au format suivant :
 
-        https://<functionappname>.azurewebsites.net/api/HelloOrchestration_HttpStart
+    `https://<functionappname>.azurewebsites.net/api/HelloOrchestration_HttpStart`
 
 1. Collez cette nouvelle URL de requête HTTP dans la barre d’adresse de votre navigateur. Vous devez obtenir la même réponse d’état que lorsque vous avez utilisé l’application publiée.
 
@@ -165,7 +165,7 @@ Vous avez utilisé Visual Studio Code pour créer et publier une application de 
 
 Cet article explique comment utiliser Visual Studio 2019 pour créer et tester en local une fonction durable « Hello world ».  Cette fonction orchestre et chaîne des appels à d’autres fonctions. Vous allez ensuite publier le code de la fonction dans Azure. Ces outils sont disponibles dans le cadre de la charge de travail de développement Azure dans Visual Studio 2019.
 
-![Exécution d’une fonction durable dans Azure](./media/durable-functions-create-first-csharp/functions-vs-complete.png)
+![La capture d’écran montre une fenêtre Visual Studio 2019 avec une fonction durable.](./media/durable-functions-create-first-csharp/functions-vs-complete.png)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -237,7 +237,7 @@ Azure Functions Core Tools vous permet d’exécuter un projet Azure Functions s
 
 3. Collez l’URL de la requête HTTP dans la barre d’adresse de votre navigateur et exécutez la requête. La capture d’écran suivante du navigateur montre la requête renvoyée par la fonction suite à la demande locale GET :
 
-    ![Réponse de la fonction localhost dans le navigateur](./media/durable-functions-create-first-csharp/functions-vs-status.png)
+    ![La capture d’écran montre une fenêtre de navigateur avec statusQueryGetUri appelé.](./media/durable-functions-create-first-csharp/functions-vs-status.png)
 
     La réponse est le résultat initial de la fonction HTTP, qui nous indique que l’orchestration durable a bien été démarrée.  Il ne s’agit pas encore du résultat final de l’orchestration.  La réponse contient plusieurs URL utiles.  Pour le moment, demandons l’état de l’orchestration.
 
@@ -277,7 +277,7 @@ Vous devez disposer d’une application de fonction dans votre abonnement Azure 
 
     L’URL qui appelle le déclencheur HTTP de la fonction durable doit être au format suivant :
 
-        https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>_HttpStart
+    `https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>_HttpStart`
 
 2. Collez cette nouvelle URL de requête HTTP dans la barre d’adresse de votre navigateur. Vous devez obtenir la même réponse d’état que lorsque vous avez utilisé l’application publiée.
 

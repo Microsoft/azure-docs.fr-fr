@@ -7,15 +7,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: overview
-ms.date: 09/19/2019
+ms.date: 05/28/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: d3d6b33211f6f247d9f30c0f162b388085faabe6
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: fef192ab273a0e53958cda315932f91b427a5d7d
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80332546"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97108381"
 ---
 # <a name="technical-and-feature-overview-of-azure-active-directory-b2c"></a>Vue d’ensemble technique et fonctionnelle d’Azure Active Directory B2C
 
@@ -36,7 +36,7 @@ Les ressources principales que vous utilisez dans un locataire Azure AD B2C sont
   * les fournisseurs d’identités *de réseau social*, comme Facebook, LinkedIn ou Twitter, que vous souhaitez prendre en charge dans vos applications ;
   * les fournisseurs d’identités *externes* qui prennent en charge les protocoles d’identité standard, tels que OAuth 2.0, OpenID Connect, etc.
   * les comptes *locaux* qui permettent aux utilisateurs de s’inscrire et de se connecter au moyen d’un nom d’utilisateur (d’une adresse e-mail ou d’un autre ID) et d’un mot de passe.
-* **Clés** : ajoutez et gérez des clés de chiffrement pour la signature et la validation des jetons.
+* **Clés** : ajoutez et gérez des clés de chiffrement pour la signature et la validation des jetons, des secrets clients, des certificats et des mots de passe.
 
 Un locataire Azure AD B2C est la première ressource que vous devez créer pour commencer à utiliser Azure AD B2C. Découvrez comment, dans le [Tutoriel : Créer un locataire Azure Active Directory B2C](tutorial-create-tenant.md).
 
@@ -63,13 +63,13 @@ Un utilisateur disposant d’un compte consommateur peut se connecter avec plusi
 
 ![Identités d’un compte consommateur](media/technical-overview/identities.png)<br/>*Figure : Compte consommateur unique doté de plusieurs identités dans Azure AD B2C*
 
-Azure AD B2C vous permet de gérer les attributs courants des profils de comptes consommateur, tels que le nom d’affichage, le nom, le prénom, la ville, etc. Vous pouvez également étendre le schéma Azure AD pour stocker des informations supplémentaires sur vos utilisateurs, comme leur pays ou lieu de résidence, leur langue par défaut et leurs préférences, par exemple s’ils souhaitent s’abonner à un bulletin d’informations ou activer une authentification multifacteur.
+Azure AD B2C vous permet de gérer les attributs courants des profils de comptes consommateur, tels que le nom d’affichage, le nom, le prénom, la ville, etc. Vous pouvez également étendre le schéma Azure AD pour stocker des informations supplémentaires sur vos utilisateurs, comme leur pays/région ou lieu de résidence, leur langue par défaut et leurs préférences (par exemple, s’ils souhaitent s’abonner à un bulletin d’informations ou activer l’authentification multifacteur).
 
 Apprenez-en davantage sur les types de comptes utilisateur dans Azure AD B2C avec [Vue d’ensemble des comptes d’utilisateur dans Azure Active Directory B2C](user-overview.md).
 
 ## <a name="external-identity-providers"></a>Fournisseurs d’identité externes
 
-Vous pouvez configurer Azure AD B2C pour permettre aux utilisateurs de se connecter à votre application avec des informations d’identification de fournisseurs d’identités de réseau social ou d’entreprise externes (IdP). Azure AD B2C prend en charge les fournisseurs d’identités externes, tels que Facebook, compte Microsoft, Google, Twitter et tout fournisseur d’identité prenant en charge les protocoles OAuth 1.0, OAuth 2.0, OpenID Connect, SAML ou WS-Federation.
+Vous pouvez configurer Azure AD B2C pour permettre aux utilisateurs de se connecter à votre application avec des informations d’identification de fournisseurs d’identités de réseau social ou d’entreprise externes (IdP). Azure AD B2C prend en charge les fournisseurs d’identité externe, comme Facebook, compte Microsoft, Google, Twitter et tout fournisseur d’identité prenant en charge les protocoles OAuth 1.0, OAuth 2.0, OpenID Connect et SAML.
 
 ![Fournisseurs d’identité externes](media/technical-overview/external-idps.png)
 
@@ -100,8 +100,8 @@ Pour vous aider à rapidement configurer les tâches d’identité les plus cour
 Vous pouvez configurer des paramètres de flux utilisateur comme ceux mentionnés ici, pour contrôler les comportements d’expérience d’identité dans vos applications :
 
 * Types de compte utilisés pour la connexion, comme les comptes de réseaux sociaux de type Facebook, ou les comptes locaux qui utilisent une adresse e-mail et un mot de passe pour cette connexion
-* Attributs à collecter auprès du consommateur, tels que le prénom, le code postal ou le pays de résidence
-* Azure Multi-Factor Authentication (MFA)
+* Attributs à collecter auprès du consommateur, comme le prénom, le code postal ou le pays/la région de résidence
+* Azure AD Multi-Factor Authentication (MFA)
 * Personnalisation de l’interface utilisateur
 * Ensemble de revendications dans un jeton que votre application reçoit dès que l’utilisateur a terminé le flux utilisateur
 * Gestion des sessions
@@ -134,15 +134,13 @@ Apprenez-en davantage sur les stratégies personnalisées avec [Stratégies pers
 
 ## <a name="protocols-and-tokens"></a>Protocoles et jetons
 
-Azure AD B2C prend en charge les [protocoles OpenID Connect et OAuth 2.0](protocols-overview.md) pour les parcours utilisateur. Dans l’implémentation d’OpenID Connect par Azure AD B2C, votre application entame le parcours utilisateur en émettant des demandes d’authentification vers Azure AD B2C.
+- Pour les applications, Azure AD B2C prend en charge les protocoles [OAuth 2.0](protocols-overview.md), [OpenID Connect](openid-connect.md) et [SAML](connect-with-saml-service-providers.md) pour les parcours utilisateur. Votre application démarre le parcours utilisateur en envoyant des demandes d’authentification à Azure AD B2C. Le résultat d’une demande à Azure AD B2C est un jeton de sécurité, de type [jeton d’ID, jeton d’accès](tokens-overview.md) ou jeton SAML. Ce jeton de sécurité définit l’identité de l’utilisateur dans l’application.
 
-Le résultat d’une demande à Azure AD B2C est un jeton de sécurité, comme un [jeton d’ID ou un jeton d’accès](tokens-overview.md). Ce jeton de sécurité définit l’identité de l’utilisateur. Les jetons sont reçus depuis des points de terminaison Azure AD B2C, comme le point de terminaison `/token` ou `/authorize`. Avec ces jetons, vous pouvez accéder à des revendications utilisables pour valider une identité et autoriser l’accès à des ressources sécurisées.
+- Pour les identités externes, Azure AD B2C prend en charge la fédération avec tout fournisseur d’identité OAuth 1.0, OAuth 2.0, OpenID Connect et SAML.
 
-Pour les identités externes, Azure AD B2C prend en charge la fédération avec tout fournisseur d’identité OAuth 1.0, OAuth 2.0, OpenID Connect, SAML ou WS-Fed.
+Le schéma suivant montre comment Azure AD B2C peut communiquer via divers protocoles, au sein du même flux d’authentification :
 
 ![Schéma de fédération de l’application cliente basée sur OIDC avec un IdP s’appuyant sur SAML](media/technical-overview/protocols.png)
-
-Le schéma précédent montre comment Azure AD B2C peut communiquer via divers protocoles, au sein du même flux d’authentification :
 
 1. L’application par partie de confiance initie une requête d’autorisation auprès d’Azure AD B2C à l’aide d’OpenID Connect.
 1. Quand un utilisateur de l’application choisit de se connecter avec un fournisseur d’identité externe utilisant le protocole SAML, Azure AD B2C appelle le protocole SAML pour communiquer avec ce fournisseur d’identité.
@@ -164,7 +162,7 @@ Dans Azure AD B2C, vous pouvez concevoir les expériences d’identité de vos u
 
 ![Captures d’écran de la page d’inscription et de connexion personnalisée associant la marque](media/technical-overview/seamless-ux.png)
 
-Pour plus d’informations sur la personnalisation de l’interface utilisateur, consultez [À propos de la personnalisation de l’interface utilisateur dans Azure Active Directory B2C](customize-ui-overview.md).
+Pour plus d’informations sur la personnalisation de l’interface utilisateur, consultez [À propos de la personnalisation de l’interface utilisateur dans Azure Active Directory B2C](customize-ui-with-html.md).
 
 ## <a name="localization"></a>Localisation
 
@@ -172,7 +170,7 @@ La personnalisation de la langue dans Azure AD B2C vous permet de prendre en cha
 
 ![Trois pages d’inscription et de connexion montrant le texte de l’interface utilisateur dans différentes langues](media/technical-overview/localization.png)
 
-Découvrez comment fonctionne la localisation dans [Personnalisation de la langue dans Azure Active Directory B2C](user-flow-language-customization.md).
+Découvrez comment fonctionne la localisation dans [Personnalisation de la langue dans Azure Active Directory B2C](language-customization.md).
 
 ## <a name="add-your-own-business-logic"></a>Ajouter votre propre logique métier
 
@@ -217,13 +215,13 @@ Vous pouvez attribuer des rôles pour contrôler quelles personnes peuvent effec
 * Créer et gérer des stratégies de framework de confiance dans Identity Experience Framework (stratégies personnalisées)
 * Gérer les secrets pour la fédération et le chiffrement dans Identity Experience Framework (stratégies personnalisées)
 
-Pour plus d’informations sur les rôles Azure AD, notamment la prise en charge des rôles d’administration Azure AD B2C, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/users-groups-roles/directory-assign-admin-roles.md).
+Pour plus d’informations sur les rôles Azure AD, notamment la prise en charge des rôles d’administration Azure AD B2C, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/roles/permissions-reference.md).
 
 ### <a name="multi-factor-authentication-mfa"></a>Authentification multifacteur (MFA)
 
 L’authentification multifacteur (MFA) AD B2C participe à la sécurisation de l’accès aux données et aux applications tout en maintenant une simplicité de gestion pour vos utilisateurs. MFA fournit une sécurité supplémentaire en exigeant une deuxième forme d’authentification, et procure une authentification renforcée en proposant toute une palette de méthodes d’authentification faciles à utiliser. Vos utilisateurs peuvent être amenés à s’authentifier par l’intermédiaire de MFA, selon les choix de configuration que vous avez faits en tant qu’administrateur.
 
-Découvrez comment activer MFA dans les flux d’utilisateurs en consultant [Activer l’authentification multifacteur dans Azure Active Directory B2C](custom-policy-multi-factor-authentication.md).
+Découvrez comment activer MFA dans les flux d’utilisateurs en consultant [Activer l’authentification multifacteur dans Azure Active Directory B2C](multi-factor-authentication.md).
 
 ### <a name="smart-account-lockout"></a>Verrouillage intelligent de compte
 
@@ -237,7 +235,7 @@ Pour plus d’informations sur la gestion des paramètres de protection de mot d
 
 Lors de l’inscription ou de la réinitialisation de mot de passe, vos utilisateurs doivent fournir un mot de passe qui respecte des règles de complexité. Par défaut, Azure AD B2C applique une stratégie de mot de passe fort. Azure AD B2C fournit également des options de configuration permettant de spécifier les exigences en matière de complexité pour les mots de passe utilisés par vos clients.
 
-Vous pouvez configurer les exigences en matière de complexité de mot de passe dans les [flux utilisateur](user-flow-password-complexity.md) et dans les [stratégies personnalisées](custom-policy-password-complexity.md).
+Vous pouvez configurer les exigences en matière de complexité de mot de passe dans les [flux utilisateur](password-complexity.md) et dans les [stratégies personnalisées](password-complexity.md).
 
 ## <a name="auditing-and-logs"></a>Audit et journaux
 
@@ -264,7 +262,4 @@ Apprenez-en davantage sur l’analytique de l’utilisation en consultant [Suivr
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous disposez d’une vue plus détaillée sur les fonctionnalités et les aspects techniques d’Azure Active Directory B2C, commencez à utiliser ce service en créant un locataire B2C :
-
-> [!div class="nextstepaction"]
-> [Tutoriel : Créer un locataire Azure Active Directory B2C](tutorial-create-tenant.md)
+Maintenant que vous disposez d’une vue plus détaillée des fonctionnalités et les aspects techniques d’Azure Active Directory B2C, commencez à utiliser notre [tutoriel pour la création d’un client Azure Active Directory B2C](tutorial-create-tenant.md).

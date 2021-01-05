@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 10/30/2019
+ms.date: 07/14/2020
 ms.author: jmprieur
-ms.custom: aaddev
-ms.openlocfilehash: df02c7d2ace6c58d86f4044607eca386f1790e1d
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: e7397f6d02d71a6344953b8210b0349b9ee26360
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734312"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443549"
 ---
 # <a name="web-app-that-signs-in-users-sign-in-and-sign-out"></a>Application web qui connecte les utilisateurs : Se connecter et se déconnecter
 
@@ -33,7 +33,7 @@ La connexion comprend deux parties :
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-Dans ASP.NET Core, pour les applications de plateforme d’identité Microsoft, le bouton **Se connecter** est exposé dans `Views\Shared\_LoginPartial.cshtml` (pour une application MVC) ou `Pages\Shared\_LoginPartial.cshtm` (pour une application Razor). Il s’affiche uniquement lorsque l’utilisateur n’est pas authentifié. Autrement dit, il s’affiche lorsque l’utilisateur ne s’est pas encore connecté ou qu’il s’est déconnecté. Au contraire, le bouton **Se déconnecter** s’affiche lorsque l’utilisateur est déjà connecté. Notez que le contrôleur de compte est défini dans le **package NuGet Microsoft.Identity.Web.UI**, dans la zone nommée **MicrosoftIdentity**
+Dans ASP.NET Core, pour les applications de plateforme d’identité Microsoft, le bouton **Se connecter** est exposé dans `Views\Shared\_LoginPartial.cshtml` (pour une application MVC) ou `Pages\Shared\_LoginPartial.cshtm` (pour une application Razor). Elles s’affichent uniquement quand l’utilisateur n’est pas authentifié. Autrement dit, il s’affiche lorsque l’utilisateur ne s’est pas encore connecté ou qu’il s’est déconnecté. Au contraire, le bouton **Se déconnecter** s’affiche lorsque l’utilisateur est déjà connecté. Notez que le contrôleur de compte est défini dans le **package NuGet Microsoft.Identity.Web.UI**, dans la zone nommée **MicrosoftIdentity**
 
 ```html
 <ul class="navbar-nav">
@@ -335,7 +335,7 @@ Dans les versions précédentes des modèles ASP.NET Core, le contrôleur `Accou
 - Appeler `Signout()`, ce qui permet à l’intergiciel OpenID Connect de contacter le point de terminaison `logout` de la plateforme d’identités Microsoft. Ensuite, le point de terminaison :
 
   - efface le cookie de session du navigateur.
-  - Rappelle l’URL de déconnexion. Par défaut, l’URL de déconnexion affiche la page de la vue déconnectée, [SignedOut.html](https://github.com/aspnet/AspNetCore/blob/master/src/Azure/AzureAD/Authentication.AzureAD.UI/src/Areas/AzureAD/Pages/Account/SignedOut.cshtml). Cette page est également fournie dans le cadre de Microsoft.Identity.Web.
+  - Rappelle l’URL de déconnexion. Par défaut, l’URL de déconnexion affiche la page de vue déconnectée [SignedOut.cshtml.cs](https://github.com/AzureAD/microsoft-identity-web/blob/master/src/Microsoft.Identity.Web.UI/Areas/MicrosoftIdentity/Pages/Account/SignedOut.cshtml.cs). Cette page est également fournie dans le cadre de Microsoft.Identity.Web.
 
 # <a name="aspnet"></a>[ASP.NET](#tab/aspnet)
 
@@ -432,5 +432,4 @@ Pour en savoir plus sur la déconnexion, voir la documentation du protocole, dis
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Passer en production](scenario-web-app-sign-user-production.md)
+Passez à l’article suivant de ce scénario, [Passer en production](scenario-web-app-sign-user-production.md).

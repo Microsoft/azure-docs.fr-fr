@@ -1,14 +1,16 @@
 ---
-title: Amélioration d’une base de connaissances - QnA Maker
-description: Améliorez la qualité de votre base de connaissances avec l'apprentissage actif. Examinez, acceptez ou refusez, ajoutez sans supprimer ou modifier les questions existantes.
+title: Utiliser l’apprentissage actif avec la base de connaissances – QnA Maker
+description: Apprenez à améliorer la qualité de votre base de connaissances avec l'apprentissage actif. Examinez, acceptez ou refusez, ajoutez sans supprimer ou modifier les questions existantes.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 03/18/2020
-ms.openlocfilehash: 33b3c547b0aea9a1e235bf8a05d01aa16b468a71
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1ac5e32b454cfc1adafb1f54b01d2a1a302908a4
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80071068"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96600433"
 ---
 # <a name="use-active-learning-to-improve-your-knowledge-base"></a>Utiliser l’apprentissage actif pour améliorer votre base de connaissances
 
@@ -22,6 +24,8 @@ Votre base de connaissances ne change pas automatiquement. Vous devez accepter l
 L’apprentissage actif est pris en charge dans la version 4.4.0 du runtime et dans les versions ultérieures. Si votre base de connaissances a été créée dans une version antérieure, [mettez à niveau votre runtime](set-up-qnamaker-service-azure.md#get-the-latest-runtime-updates) pour utiliser cette fonctionnalité.
 
 ## <a name="turn-on-active-learning-for-alternate-questions"></a>Activer l’apprentissage actif pour les questions alternatives
+
+# <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
 
 L’apprentissage actif est désactivé par défaut. Activez-le pour afficher les suggestions de questions. Une fois l’apprentissage actif activé, vous devez envoyer des informations de l’application cliente vers QnA Maker. Pour plus d’informations, consultez [Flux architectural pour utiliser les API Train et GenerateAnswer à partir d’un bot](improve-knowledge-base.md#architectural-flow-for-using-generateanswer-and-train-apis-from-a-bot).
 
@@ -41,6 +45,12 @@ L’apprentissage actif est désactivé par défaut. Activez-le pour afficher le
     > La version exacte sur l’image précédente est présentée à titre d’exemple uniquement. Votre version peut être différente.
 
     Une fois que la fonctionnalité **Apprentissage actif** est activée, la base de connaissances suggère de nouvelles questions à intervalles réguliers en fonction des questions soumises par l’utilisateur. Vous pouvez désactiver la stratégie **Apprentissage actif** en basculant de nouveau le paramètre.
+    
+# <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+
+Par défaut, l’apprentissage actif est **activé** dans QnA Maker managé (préversion). Pour voir les autres questions suggérées, [utilisez les options Affichage](../How-To/improve-knowledge-base.md#view-suggested-questions) sur la page Modifier.
+
+---
 
 ## <a name="review-suggested-alternate-questions"></a>Passer en revue les questions alternatives suggérées
 

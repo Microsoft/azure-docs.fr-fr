@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 22e91d50227fcb44c7b90478d76379c14161ae05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 878a2a47dfaddf1d3399a1dbd98865332838e148
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76718601"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93321747"
 ---
 # <a name="sample-data-in-azure-blob-containers-sql-server-and-hive-tables"></a><a name="heading"></a>Échantillonner des données dans des conteneurs d'objets blob Azure, SQL Server et des tables Hive
 
@@ -26,9 +26,8 @@ Les articles suivants expliquent comment échantillonner les données stockées 
 * Les [**données SQL Server**](sample-data-sql-server.md) sont échantillonnées à l’aide de SQL et du langage de programmation Python. 
 * Les [**données de tables Hive**](sample-data-hive.md) sont échantillonnées à l’aide de requêtes Hive.
 
-Cette tâche d’échantillonnage est une étape du [processus TDSP (Team Data Science Process)](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/).
+Cette tâche d’échantillonnage est une étape du [processus TDSP (Team Data Science Process)](./index.yml).
 
 **Pourquoi échantillonner des données ?**
 
 Si vous prévoyez d’analyser un jeu de données volumineux, il est généralement recommandé de sous-échantillonner les données afin de réduire leur taille sous une forme plus facilement exploitable, mais toujours représentative. Réduire la taille peut faciliter la compréhension et l’exploration des données, ainsi que l’ingénierie de fonctionnalités. Ce rôle d’échantillonnage dans le processus Cortana Analytics consiste à permettre le prototypage rapide des fonctions de traitement des données et des modèles Machine Learning.
-

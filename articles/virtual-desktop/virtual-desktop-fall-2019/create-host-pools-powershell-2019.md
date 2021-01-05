@@ -1,24 +1,22 @@
 ---
-title: Créer un pool d’hôtes Windows Virtual Desktop via PowerShell – Azure
-description: Découvrez comment créer un pool d’hôtes dans Windows Virtual Desktop avec des cmdlets PowerShell.
-services: virtual-desktop
+title: Créer un pool d’hôtes Windows Virtual Desktop (classique) via PowerShell – Azure
+description: Découvrez comment créer un pool d’hôtes dans Windows Virtual Desktop (classique) avec des cmdlets PowerShell.
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 1d312417017676d0b0bc53e3e16e229e45f1aa17
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: c035a7fbafe9b3a42fbd16e3f8377014010ddd49
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83659414"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88003555"
 ---
-# <a name="create-a-host-pool-with-powershell"></a>Créer un pool d’hôtes avec PowerShell
+# <a name="create-a-host-pool-in-windows-virtual-desktop-classic-with-powershell"></a>Créer un pool d’hôtes dans Windows Virtual Desktop (classique) avec PowerShell
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../create-host-pools-powershell.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer les objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../create-host-pools-powershell.md).
 
 Les pools d'hôtes sont des ensembles d'une ou de plusieurs machines virtuelles identiques dans des environnements de locataires Windows Virtual Desktop. Chaque pool d’hôtes peut contenir un groupe d’applications avec lequel les utilisateurs peuvent interagir comme ils le feraient sur un ordinateur de bureau physique.
 
@@ -71,7 +69,7 @@ Vous pouvez créer une machine virtuelle de plusieurs façons :
 >[!NOTE]
 >Si vous déployez une machine virtuelle à l’aide de Windows 7 en tant que système d’exploitation hôte, le processus de création et de déploiement sera un peu différent. Pour plus d'informations, consultez [Déployer une machine virtuelle Windows 7 sur Windows Virtual Desktop](deploy-windows-7-virtual-machine.md).
 
-Une fois que vous avez créé vos machines virtuelles hôtes de session, [appliquez une licence Windows à une machine virtuelle hôte de session](../apply-windows-license.md#apply-a-windows-license-to-a-session-host-vm) pour exécuter vos machines virtuelles Windows ou Windows Server sans payer une autre licence. 
+Une fois que vous avez créé vos machines virtuelles hôtes de session, [appliquez une licence Windows à une machine virtuelle hôte de session](../apply-windows-license.md#apply-a-windows-license-to-a-session-host-vm) pour exécuter vos machines virtuelles Windows ou Windows Server sans payer une autre licence.
 
 ## <a name="prepare-the-virtual-machines-for-windows-virtual-desktop-agent-installations"></a>Préparer les machines virtuelles pour l'installation des agents Windows Virtual Desktop
 

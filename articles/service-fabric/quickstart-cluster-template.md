@@ -6,27 +6,29 @@ ms.service: service-fabric
 ms.topic: quickstart
 ms.custom: subject-armqs
 ms.author: edoyle
-ms.date: 04/24/2020
-ms.openlocfilehash: 60771d5a188df5dfeca3530a551a116c870e63f5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 07/29/2020
+ms.openlocfilehash: 359b527733ee8eebf7e1e7d12c40a0c74ec1c9bd
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82150484"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87460301"
 ---
-# <a name="quickstart-create-a-service-fabric-cluster-using-resource-manager-template"></a>Démarrage rapide : Créer un cluster Service Fabric avec un modèle Resource Manager
+# <a name="quickstart-create-a-service-fabric-cluster-using-arm-template"></a>Démarrage rapide : Créer un cluster Service Fabric à l’aide d’un modèle Resource Manager
 
-Azure Service Fabric est une plateforme de systèmes distribués qui facilite le packaging, le déploiement et la gestion de conteneurs et de microservices évolutifs et fiables. Un *cluster* Service Fabric est un ensemble de machines virtuelles connectées au réseau, sur lequel vos microservices sont déployés et gérés.
+Azure Service Fabric est une plateforme de systèmes distribués qui facilite le packaging, le déploiement et la gestion de conteneurs et de microservices évolutifs et fiables. Un *cluster* Service Fabric est un ensemble de machines virtuelles connectées au réseau, sur lequel vos microservices sont déployés et gérés. Cet article explique comment déployer un cluster de test Service Fabric dans Azure à l’aide d’un modèle Resource Manager (Azure Resource Manager).
 
 [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
 
-Cet article explique comment déployer un cluster de test Service Fabric dans Azure à l’aide de Resource Manager. Ce cluster Windows à cinq nœuds est sécurisé avec un certificat auto-signé et, par conséquent, uniquement destiné à des fins pédagogiques (plutôt que pour des charges de travail de production).
+Ce cluster Windows à cinq nœuds est sécurisé avec un certificat auto-signé et, par conséquent, uniquement destiné à des fins pédagogiques (plutôt que pour des charges de travail de production). Nous allons utiliser Azure PowerShell pour déployer le modèle. Outre Azure PowerShell, vous pouvez également utiliser le portail Azure, l’interface Azure CLI et l’API REST. Pour découvrir d’autres méthodes de déploiement, consultez [Déployer des modèles](../azure-resource-manager/templates/deploy-portal.md).
 
-Nous allons utiliser Azure PowerShell pour déployer le modèle. Outre Azure PowerShell, vous pouvez également utiliser le portail Azure, l’interface Azure CLI et l’API REST. Pour découvrir d’autres méthodes de déploiement, consultez [Déployer des modèles](../azure-resource-manager/templates/deploy-portal.md).
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
 
-Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fservice-fabric-secure-cluster-5-node-1-nodetype%2Fazuredeploy.json)
 
 ## <a name="prerequisites"></a>Prérequis
+
+Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ### <a name="install-service-fabric-sdk-and-powershell-modules"></a>Installer le SDK Service Fabric et des modules PowerShell
 
@@ -34,13 +36,13 @@ Pour suivre ce guide de démarrage rapide, vous devez effectuer les opérations 
 
 * Installez le [Kit de développement logiciel (SDK) Service Fabric et le module PowerShell](service-fabric-get-started.md).
 
-* Installez [Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+* Installez [Azure PowerShell](/powershell/azure/install-az-ps).
 
 ### <a name="download-the-sample-template-and-certificate-helper-script"></a>Télécharger l’exemple de modèle et le script d’assistance de certificat
 
 Clonez ou téléchargez le dépôt [Modèles de démarrage rapide Azure Resource Manager](https://github.com/Azure/azure-quickstart-templates). Vous pouvez également copier localement les fichiers suivants à partir du dossier *service-fabric-secure-cluster-5-node-1-nodetype* :
 
-* [New-ServiceFabricClusterCertificate.ps1](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/service-fabric-secure-cluster-5-node-1-nodetype/New-ServiceFabricClusterCertificate.ps1)
+* [New-ServiceFabricClusterCertificate.ps1](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/service-fabric-secure-cluster-5-node-1-nodetype/scripts/New-ServiceFabricClusterCertificate.ps1)
 * [azuredeploy.json](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/service-fabric-secure-cluster-5-node-1-nodetype/azuredeploy.json)
 * [azuredeploy.parameters.json](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/service-fabric-secure-cluster-5-node-1-nodetype/azuredeploy.parameters.json)
 
@@ -66,10 +68,10 @@ $keyVaultName = "SFQuickstartKV"
 New-AzResourceGroup -Name $resourceGroupName -Location SouthCentralUS
 
 # Create a Key Vault enabled for deployment
-New-AzKeyVault -VaultName $KeyVaultName -ResourceGroupName $resourceGroupName -Location SouthCentralUS -EnabledForDeployment
+New-AzKeyVault -VaultName $keyVaultName -ResourceGroupName $resourceGroupName -Location SouthCentralUS -EnabledForDeployment
 
 # Generate a certificate and upload it to Key Vault
-.\New-ServiceFabricClusterCertificate.ps1
+.\scripts\New-ServiceFabricClusterCertificate.ps1
 ```
 
 Le script vous invite à entrer les informations suivantes (veillez à remplacer les exemples de valeurs *CertDNSName* et *KeyVaultName* ci-dessous) :
@@ -87,11 +89,9 @@ $certUrlValue = "<Certificate URL>"
 $certThumbprint = "<Certificate Thumbprint>"
 ```
 
-## <a name="create-a-service-fabric-cluster"></a>Créer un cluster Service Fabric
+## <a name="review-the-template"></a>Vérifier le modèle
 
-### <a name="review-the-template"></a>Vérifier le modèle
-
-Le modèle utilisé dans ce guide de démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/blob/master/service-fabric-secure-cluster-5-node-1-nodetype). Le modèle utilisé pour cet article est trop long pour être affiché ici. Pour le voir, consultez https://github.com/Azure/azure-quickstart-templates/blob/master/service-fabric-secure-cluster-5-node-1-nodetype/azuredeploy.json.
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/service-fabric-secure-cluster-5-node-1-nodetype/). Le modèle utilisé pour cet article est trop long pour être affiché ici. Pour afficher le modèle, consultez le fichier [azuredeploy.json](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/service-fabric-secure-cluster-5-node-1-nodetype/azuredeploy.json).
 
 Plusieurs ressources Azure ont été définies dans le modèle :
 
@@ -178,6 +178,18 @@ Quand vous n’en avez plus besoin, supprimez le groupe de ressources, ce qui su
 $resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
 Remove-AzResourceGroup -Name $resourceGroupName
 Write-Host "Press [ENTER] to continue..."
+```
+
+Ensuite, supprimez le certificat du cluster de votre magasin local. Listez les certificats installés pour trouver l’empreinte numérique de votre cluster :
+
+```powershell
+Get-ChildItem Cert:\CurrentUser\My\
+```
+
+Supprimez ensuite le certificat :
+
+```powershell
+Get-ChildItem Cert:\CurrentUser\My\{THUMBPRINT} | Remove-Item
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

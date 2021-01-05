@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : TRUNC'
 description: Découvrez la fonction système SQL TRUNC dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 8bad33f593bae2679c83d59ae4567dcab4a64809
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc6370e9183f897edb65ceb129cd7600729a85aa
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78304223"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341516"
 ---
 # <a name="trunc-azure-cosmos-db"></a>TRUNC (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une valeur numérique, tronquée au nombre entier le plus proche.  
   
 ## <a name="syntax"></a>Syntaxe

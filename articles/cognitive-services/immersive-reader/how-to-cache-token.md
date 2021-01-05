@@ -8,13 +8,14 @@ ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: conceptual
 ms.date: 01/14/2020
-ms.author: metan
-ms.openlocfilehash: e652aa29b1c1935fcc4887dbe13ef9b683a8bd05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: metang
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: fd92de3bc5f306cd5ebbcd80b9f1d92af3a9e45d
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75946048"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92633313"
 ---
 # <a name="how-to-cache-the-authentication-token"></a>Comment mettre en cache le jeton d’authentification
 

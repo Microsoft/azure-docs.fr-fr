@@ -10,12 +10,13 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 07/05/2019
 ms.author: chlandsi
-ms.openlocfilehash: 9891cdb59c757035afd17339b052d5587ac99b0c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 48316d571eac835dd5d4ec7d225048f4fdcdf237
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74109981"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026605"
 ---
 # <a name="how-to-select-an-audio-input-device-with-the-speech-sdk"></a>Procédure : Sélectionner un périphérique d’entrée audio avec le SDK Speech
 
@@ -134,6 +135,10 @@ void ListEndpoints()
 
         // Print endpoint friendly name and endpoint ID.
         printf("Endpoint %d: \"%S\" (%S)\n", i, varName.pwszVal, pwszID);
+
+        CoTaskMemFree(pwszID);
+        pwszID = NULL;
+        PropVariantClear(&varName);
     }
 
 Exit:
@@ -387,5 +392,5 @@ Dans JavaScript, la méthode [MediaDevices.enumerateDevices()](https://developer
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Personnaliser les modèles acoustiques](how-to-customize-acoustic-models.md)
-- [Personnaliser les modèles de langage](how-to-customize-language-model.md)
+- [Personnaliser les modèles acoustiques](./how-to-custom-speech-train-model.md)
+- [Personnaliser les modèles de langage](./how-to-custom-speech-train-model.md)

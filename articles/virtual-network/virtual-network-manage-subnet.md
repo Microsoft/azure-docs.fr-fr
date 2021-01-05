@@ -1,24 +1,24 @@
 ---
 title: Ajouter, changer ou supprimer un sous-réseau de réseau virtuel Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment ajouter, modifier ou supprimer un sous-réseau de réseau virtuel dans Azure.
+description: Découvrez où trouver des informations sur les réseaux virtuels et comment ajouter, modifier ou supprimer un sous-réseau de réseau virtuel dans Azure.
 services: virtual-network
 documentationcenter: na
 author: KumudD
-manager: twooley
+manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2020
 ms.author: kumud
-ms.openlocfilehash: b9ef084e530faa3bcea2cfcf1554a84f543bbf59
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 15fe5d6d16948875253d65e70d9d440214a4a2e8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186082"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995656"
 ---
 # <a name="add-change-or-delete-a-virtual-network-subnet"></a>Ajouter, modifier ou supprimer un sous-réseau de réseau virtuel
 

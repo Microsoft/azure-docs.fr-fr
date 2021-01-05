@@ -3,12 +3,12 @@ title: Présentation de l'architecture
 description: Fournit une vue d’ensemble de l’architecture, des composants et des processus utilisés par le service Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 02/19/2019
-ms.openlocfilehash: b093c6702bb26fe537622727fe1b623141bf4160
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 288b073c20b93bf1802f34f5dcd17b12430bb279
+ms.sourcegitcommit: 0dcafc8436a0fe3ba12cb82384d6b69c9a6b9536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233973"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94427732"
 ---
 # <a name="azure-backup-architecture-and-components"></a>Architecture et composants d’Azure Backup
 
@@ -35,18 +35,22 @@ Apprenez-en davantage sur [ce que vous pouvez sauvegarder](backup-overview.md) e
 
 ## <a name="where-is-data-backed-up"></a>Où les données sont-elles sauvegardées ?
 
-Sauvegarde Azure stocke les données sauvegardées dans un coffre Recovery Services. Un coffre est une entité de stockage en ligne dans Azure qui permet de conserver des données telles que des copies de sauvegarde, des points de récupération et des stratégies de sauvegarde.
+Le service Sauvegarde Azure stocke les données sauvegardées dans des coffres Recovery Services et de sauvegarde. Un coffre est une entité de stockage en ligne dans Azure qui permet de conserver des données telles que des copies de sauvegarde, des points de récupération et des stratégies de sauvegarde.
 
-Les coffres Recovery Services offrent les fonctionnalités suivantes :
+Les coffres présentent les fonctionnalités suivantes :
 
 - Les coffres facilitent l’organisation de vos données de sauvegarde, tout en réduisant le temps de gestion.
-- Dans chaque abonnement Azure, vous pouvez créer jusqu’à 500 coffres.
 - Vous pouvez superviser les éléments sauvegardés dans un coffre, notamment les machines virtuelles Azure et les ordinateurs locaux.
-- Vous pouvez gérer l’accès au coffre avec le [contrôle d’accès en fonction du rôle (RBAC)](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal) Azure.
+- Vous pouvez gérer l’accès au coffre avec le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/role-assignments-portal.md).
 - Vous spécifiez le mode de réplication des données dans le coffre pour la redondance :
-  - **Stockage localement redondant (LRS)**  : Pour vous protéger contre des défaillances de centre de données, vous pouvez utiliser un stockage localement redondant. LRS réplique les données vers une unité d’échelle de stockage. [Plus d’informations](https://docs.microsoft.com/azure/storage/common/storage-redundancy-lrs)
-  - **Stockage géo-redondant (GRS)**  : Pour vous protéger contre des pannes régionales, vous pouvez utiliser un stockage géoredondant. Celui-ci réplique vos données dans une région secondaire. [Plus d’informations](https://docs.microsoft.com/azure/storage/common/storage-redundancy-grs)
+  - **Stockage localement redondant (LRS)**  : Pour vous protéger contre des défaillances de centre de données, vous pouvez utiliser un stockage localement redondant. LRS réplique les données vers une unité d’échelle de stockage. [Plus d’informations](../storage/common/storage-redundancy.md#locally-redundant-storage)
+  - **Stockage géo-redondant (GRS)**  : Pour vous protéger contre des pannes régionales, vous pouvez utiliser un stockage géoredondant. Celui-ci réplique vos données dans une région secondaire. [Plus d’informations](../storage/common/storage-redundancy.md#geo-redundant-storage)
+  - **Stockage redondant interzone (ZRS)**  : réplique vos données dans des [zones de disponibilité](../availability-zones/az-overview.md#availability-zones), garantissant ainsi la résidence et la résilience des données dans la même région. [En savoir plus](../storage/common/storage-redundancy.md#zone-redundant-storage)
   - Par défaut, les coffres Recovery Services utilisent un stockage géoredondant.
+
+Les coffres Recovery Services offrent les fonctionnalités supplémentaires suivantes :
+
+- Dans chaque abonnement Azure, vous pouvez créer jusqu’à 500 coffres.
 
 ## <a name="backup-agents"></a>Agents de sauvegarde
 
@@ -83,7 +87,7 @@ La consommation du stockage, l’objectif de délai de récupération (RTO) et l
 
 - La source de données A est composée de 10 blocs de stockage A1-A10, qui sont sauvegardés mensuellement.
 - Les blocs A2, A3, A4 et A9 ont changé lors du premier mois et le bloc A5 a changé lors du mois suivant.
-- Pour les sauvegardes différentielles, lors du deuxième mois, les blocs A2, A3, A4 et A9 qui ont changé sont sauvegardés. Lors du troisième mois, ces mêmes blocs sont à nouveau sauvegardés, ainsi que le bloc A5 qui a changé. Les blocs modifiés continuent d’être sauvegardés jusqu’à la prochaine sauvegarde complète.
+- Pour les sauvegardes différentielles, le deuxième mois, les blocs A2, A3, A4 et A9 qui ont changé sont sauvegardés. Lors du troisième mois, ces mêmes blocs sont à nouveau sauvegardés, ainsi que le bloc A5 qui a changé. Les blocs modifiés continuent d’être sauvegardés jusqu’à la prochaine sauvegarde complète.
 - Pour les sauvegardes incrémentielles, le deuxième mois, les blocs A2, A3, A4 et A9 sont marqués comme modifiés et transférés. Lors du troisième mois, seul le bloc A5 qui a changé est marqué et transféré.
 
 ![Illustration montrant des comparaisons entre méthodes de sauvegarde](./media/backup-architecture/backup-method-comparison.png)
@@ -105,9 +109,7 @@ Sauvegarder les disques dédupliqués | | | ![Partiellement][yellow]<br/><br/> U
 ## <a name="backup-policy-essentials"></a>Principes de base de la stratégie de sauvegarde
 
 - Une stratégie de sauvegarde est créée par coffre.
-- Une stratégie de sauvegarde peut être créée pour la sauvegarde des charges de travail suivantes
-  - Azure VM
-  - SQL dans une machine virtuelle Azure
+- Une stratégie de sauvegarde peut être créée pour la sauvegarde des charges de travail suivantes : Machines virtuelles Azure, SQL dans des machines virtuelles Azure, SAP HANA dans des machines virtuelles Azure et partages de fichiers Azure. La stratégie de sauvegarde des fichiers et des dossiers à l’aide de l’agent MARS est spécifiée dans la console MARS.
   - Partage de fichiers Azure
 - Une stratégie peut être attribuée à de nombreuses ressources. Une stratégie de sauvegarde de machine virtuelle Azure peut être utilisée pour protéger plusieurs machines virtuelles Azure.
 - Une stratégie est constituée de deux composants
@@ -115,9 +117,28 @@ Sauvegarder les disques dédupliqués | | | ![Partiellement][yellow]<br/><br/> U
   - Conservation : la durée de conservation de chaque sauvegarde.
 - La planification peut être définie comme « quotidienne » ou « hebdomadaire » avec un point de temps spécifique.
 - La rétention peut être définie pour les points de sauvegarde « quotidienne », « hebdomadaire », « mensuelle », « annuelle ».
-- « hebdomadaire » fait référence à une sauvegarde un jour donné de la semaine, « mensuelle » fait référence à une sauvegarde un jour donné du mois et « année » fait référence à une sauvegarde un jour donné de l’année.
-- La rétention pour les points de sauvegarde « mensuelle », « annuelle » est appelée « LongTermRetention ».
-- Quand un coffre est créé, une stratégie pour les sauvegardes de machine virtuelle Azure appelée « DefaultPolicy » est également créée et peut être utilisée pour sauvegarder des machines virtuelles Azure.
+  - « hebdomadaire » fait référence à une sauvegarde un certain jour de la semaine
+  - « mensuelle » fait référence à une sauvegarde un certain jour du mois
+  - « annuelle » fait référence à une sauvegarde un certain jour de l’année
+- La rétention pour les points de sauvegarde « mensuelle » et « annuelle » est appelée rétention à long terme (LTR, Long Term Retention).
+- Lors de la création d’un coffre, une « DefaultPolicy » est également créée, qui peut être utilisé pour sauvegarder des ressources.
+- Toutes les modifications apportées à la période de rétention d’une stratégie de sauvegarde sont appliquées de manière rétroactive à tous les anciens points de récupération en plus des nouveaux.
+
+### <a name="impact-of-policy-change-on-recovery-points"></a>Impact du changement de stratégie sur les points de récupération
+
+- **Durée de rétention allongée ou raccourcie :** en cas de modification de la durée de rétention, la nouvelle durée est également appliquée aux points de récupération existants. Par conséquent, certains points de récupération sont nettoyés. En cas d’allongement de la période de rétention, la durée de rétention des points de récupération existants est également allongée.
+- **Passage de la fréquence quotidienne à la fréquence hebdomadaire :** quand la fréquence des sauvegardes planifiées passe de quotidienne à hebdomadaire, les points de récupération quotidiens existants sont nettoyés.
+- **Passage de la fréquence hebdomadaire à la fréquence quotidienne :** les sauvegardes hebdomadaires existantes seront conservées en fonction du nombre de jours restants en vertu de la stratégie de rétention actuelle.
+
+### <a name="additional-reference"></a>Références supplémentaires
+
+- Machine virtuelle Azure : Comment [créer](./backup-azure-vms-first-look-arm.md#back-up-from-azure-vm-settings) et [modifier](./backup-azure-manage-vms.md#manage-backup-policy-for-a-vm) une stratégie.
+- Base de données SQL Server dans une machine virtuelle Azure : Comment [créer](./backup-sql-server-database-azure-vms.md#create-a-backup-policy) et [modifier](./manage-monitor-sql-database-backup.md#modify-policy) une stratégie.
+- Partage de fichiers Azure Files : Comment [créer](./backup-afs.md) et [modifier](./manage-afs-backup.md#modify-policy) une stratégie.
+- SAP HANA : Comment [créer](./backup-azure-sap-hana-database.md#create-a-backup-policy) et [modifier](./sap-hana-db-manage.md#change-policy) une stratégie.
+- MARS : Comment [créer](./backup-windows-with-mars-agent.md#create-a-backup-policy) et [modifier](./backup-azure-manage-mars.md#modify-a-backup-policy) une stratégie.
+- [Existe-t-il des limitations relatives à la planification de la sauvegarde en fonction du type de charge de travail ?](./backup-azure-backup-faq.md#are-there-limits-on-backup-scheduling)
+- [Qu’advient-il des points de récupération existants si je change la stratégie de conservation ?](./backup-azure-backup-faq.md#what-happens-when-i-change-my-backup-policy)
 
 ## <a name="architecture-built-in-azure-vm-backup"></a>Architecture : Sauvegarde de machine virtuelle Azure prédéfinie
 
@@ -133,9 +154,9 @@ Sauvegarder les disques dédupliqués | | | ![Partiellement][yellow]<br/><br/> U
     - Seuls les blocs de données qui ont changé depuis la dernière sauvegarde sont copiés.
     - Les données ne sont pas chiffrées. Sauvegarde Azure peut sauvegarder des machines virtuelles Azure chiffrées avec Azure Disk Encryption.
     - Les données d’instantanés peuvent ne pas être immédiatement copiées dans le coffre. Aux heures de pointe, la sauvegarde peut prendre quelques heures. La durée de sauvegarde totale d’une machine virtuelle est inférieure à 24 heures pour les stratégies de sauvegarde quotidienne.
-1. Une fois les données envoyées au coffre, un point de récupération est créé. Par défaut, les instantanés sont conservés pendant 2 jours avant d’être supprimés. Cette fonctionnalité autorise les opérations de restauration à partir de ces instantanés en réduisant les durées de restauration. Elle réduit le temps requis pour transformer et copier des données depuis un coffre. Consultez [Fonctionnalité de restauration instantanée de Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-instant-restore-capability).
+1. Une fois les données envoyées au coffre, un point de récupération est créé. Par défaut, les instantanés sont conservés pendant 2 jours avant d’être supprimés. Cette fonctionnalité autorise les opérations de restauration à partir de ces instantanés en réduisant les durées de restauration. Elle réduit le temps requis pour transformer et copier des données depuis un coffre. Consultez [Fonctionnalité de restauration instantanée de Sauvegarde Azure](./backup-instant-restore-capability.md).
 
-Vous n'avez pas besoin d'autoriser explicitement la connexion Internet pour sauvegarder vos machines virtuelles Azure.
+Vous n’avez pas besoin d’autoriser explicitement la connectivité Internet pour sauvegarder vos machines virtuelles Azure.
 
 ![Sauvegarde des machines virtuelles Azure](./media/backup-architecture/architecture-azure-vm.png)
 
@@ -182,9 +203,8 @@ Les machines virtuelles Azure utilisent des disques pour stocker leur système d
 
 Pour plus d’informations sur le stockage sur disque et les types de disques disponibles pour les machines virtuelles, voir les articles suivants :
 
-- [Disques managés Azure pour machines virtuelles Windows](../virtual-machines/windows/managed-disks-overview.md)
-- [Disques managés Azure pour machines virtuelles Linux](../virtual-machines/linux/managed-disks-overview.md)
-- [Types de disques disponibles pour machines virtuelles](../virtual-machines/windows/disks-types.md)
+- [Disques managés Azure pour machines virtuelles Linux](../virtual-machines/managed-disks-overview.md)
+- [Types de disques disponibles pour machines virtuelles](../virtual-machines/disks-types.md)
 
 ### <a name="back-up-and-restore-azure-vms-with-premium-storage"></a>Sauvegarder et restaurer des machines virtuelles Azure avec un stockage premium
 
@@ -193,7 +213,7 @@ Vous pouvez sauvegarder des machines virtuelles Azure en utilisant un stockage p
 - Lors du processus de sauvegarde de machines virtuelles avec un stockage premium, le service Sauvegarde crée un emplacement intermédiaire temporaire nommé *AzureBackup-* dans le compte de stockage. La taille de l’emplacement intermédiaire est égale à celle de la capture instantanée du point de récupération.
 - Vérifiez que le compte de stockage Premium dispose d’un espace libre suffisant pour prendre en compte cet emplacement intermédiaire temporaire. Pour plus d’informations, consultez [Objectifs de scalabilité pour les comptes de stockage d’objets blob de pages Premium](../storage/blobs/scalability-targets-premium-page-blobs.md). Ne modifiez pas l’emplacement intermédiaire.
 - Une fois la sauvegarde terminée, l’emplacement intermédiaire est supprimé.
-- Le prix du stockage utilisé pour l’emplacement intermédiaire est conforme à la [tarification du stockage Premium](../virtual-machines/windows/disks-types.md#billing).
+- Le prix du stockage utilisé pour l’emplacement intermédiaire est conforme à la [tarification du stockage Premium](../virtual-machines/disks-types.md#billing).
 
 Quand vous restaurez des machines virtuelles Azure utilisant un stockage premium, vous pouvez les restaurer vers un stockage premium ou standard. En règle générale, vous les restaurerez vers un stockage premium. Mais si vous n’avez besoin que d’un sous-ensemble des fichiers de la machine virtuelle, il peut être économique de les restaurer vers un stockage standard.
 

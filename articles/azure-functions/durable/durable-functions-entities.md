@@ -5,12 +5,12 @@ author: cgillum
 ms.topic: overview
 ms.date: 12/17/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 4f45ac40e7df865bdb4722d086325096c377cd59
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 496b315e23beeb97d08befca13e05c4797268f36
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80877540"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "85341556"
 ---
 # <a name="entity-functions"></a>Fonctions d’entité
 
@@ -18,7 +18,7 @@ Les fonctions d’entité définissent les opérations pour la lecture et la mis
 Les entités offrent un moyen d’effectuer un scale-out des applications, en distribuant le travail entre plusieurs entités, chacune avec un état de taille modeste.
 
 > [!NOTE]
-> Les fonctions d’entité et les fonctionnalités associées sont uniquement disponibles dans Durable Functions 2.0 et versions ultérieures.
+> Les fonctions d’entité et les fonctionnalités associées ne sont disponibles que dans Durable Functions 2.0 et les versions ultérieures. Elles sont actuellement prises en charge dans .NET et JavaScript.
 
 ## <a name="general-concepts"></a>Concepts généraux
 

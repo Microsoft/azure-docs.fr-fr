@@ -1,20 +1,18 @@
 ---
 title: Paramètres temporels des classeurs Azure Monitor
-description: Créer des rapports complexes en toute simplicité grâce à des classeurs paramétrables prédéfinis et personnalisés
+description: Découvrez comment définir des paramètres temporels pour permettre aux utilisateurs de définir le contexte temporel de l’analyse. Presque tous les rapports utilisent les paramètres temporels.
 services: azure-monitor
-author: mrbullwinkle
 manager: carmonm
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
 ms.date: 10/23/2019
-ms.author: mbullwin
-ms.openlocfilehash: 380b8a7ce286ab06b6935bf63bf3a0e82f371c2f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 37f2219313a0d4c533d587a765dd22d527a5910f
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658011"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92143447"
 ---
 # <a name="workbook-time-parameters"></a>Paramètres de temps des classeurs
 
@@ -80,5 +78,5 @@ requests
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Commencez](workbooks-visualizations.md) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
+* [Commencez](./workbooks-overview.md#visualizations) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
 * [Contrôlez](workbooks-access-control.md) et partagez l’accès à vos ressources de classeur.

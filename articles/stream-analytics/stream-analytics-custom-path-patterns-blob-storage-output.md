@@ -8,12 +8,12 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 02/07/2019
 ms.custom: seodec18
-ms.openlocfilehash: e978771eaafafe4120f9eec802525c293fb9c7c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9763a0ac3cba15dcfd66b8fad83230e2b0eb356b
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75426381"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96491670"
 ---
 # <a name="azure-stream-analytics-custom-blob-output-partitioning"></a>Partitionnement personnalisé de sortie BLOB dans Azure Stream Analytics
 
@@ -25,7 +25,7 @@ Des champs ou attributs d’entrée personnalisés améliorent en aval le traite
 
 ### <a name="partition-key-options"></a>Options de clé de partition
 
-La clé de partition ou le nom de colonne utilisés pour partitionner des données d’entrée peuvent contenir des caractères alphanumériques avec des traits d’union, des traits de soulignement et des espaces. Il n’est pas possible d’utiliser des champs imbriqués en tant que clé de partition, sauf conjointement avec des alias. La clé de partition doit être NVARCHAR(MAX).
+La clé de partition ou le nom de colonne utilisés pour partitionner des données d’entrée peuvent contenir des caractères alphanumériques avec des traits d’union, des traits de soulignement et des espaces. Il n’est pas possible d’utiliser des champs imbriqués en tant que clé de partition, sauf conjointement avec des alias. La clé de partition doit être de type NVARCHAR (MAX), BIGINT, FLOAT ou BIT (niveau de compatibilité 1.2 ou supérieur). Pour plus d’informations, consultez [Types de données Azure Stream Analytics](/stream-analytics-query/data-types-azure-stream-analytics).
 
 ### <a name="example"></a>Exemple
 
@@ -44,7 +44,7 @@ Lorsque l’exécution du travail commence, le conteneur *clients* peut ressembl
 
 ![Conteneur clients](./media/stream-analytics-custom-path-patterns-blob-storage-output/stream-analytics-clients-container.png)
 
-Chaque dossier peut contenir plusieurs objets blob contenant chacun un ou plusieurs enregistrements. Dans l’exemple ci-dessus, il y a un seul objet blob dans un dossier étiqueté « 06000000 » avec le contenu suivant :
+Chaque dossier peut contenir plusieurs objets blob contenant chacun un ou plusieurs enregistrements. Dans l’exemple ci-dessus, il y a un seul blob dans un dossier étiqueté « 06000000 » avec le contenu suivant :
 
 ![Contenu d’objet blob](./media/stream-analytics-custom-path-patterns-blob-storage-output/stream-analytics-blob-contents.png)
 
@@ -63,6 +63,8 @@ Notez que chaque enregistrement dans l’objet blob comporte une colonne **clien
 
 3. Quand un flux d’entrée se compose d’enregistrements avec une cardinalité de clé de partition inférieure à 8 000, les enregistrements sont ajoutés à des objets blob existants et ne créent de nouveaux objets blob que lorsque cela est nécessaire. Si la cardinalité est supérieure à 8 000, il n’est nullement garanti qu’une écriture sera effectuée dans des objets blob existants, et que de nouveaux objets blob ne seront pas créés pour un nombre arbitraire d’enregistrements avec la même clé de partition.
 
+4. Si la sortie d’objet blob est [configurée comme non modifiable](../storage/blobs/storage-blob-immutable-storage.md), Stream Analytics crée un objet blob chaque fois que des données sont envoyées.
+
 ## <a name="custom-datetime-path-patterns"></a>Modèles de chemin DateTime personnalisés
 
 Avec les modèles de chemin DateTime personnalisés, vous pouvez spécifier un format de sortie conforme aux conventions Hive Streaming, ce qui permet à Azure Stream Analytics d’envoyer des données à Azure HDInsight et à Azure Databricks pour un traitement en aval. Les modèles de chemin DateTime personnalisés s’implémentent facilement en ajoutant le mot clé `datetime` dans le champ Préfixe de chemin de votre sortie Blob, ainsi que le spécificateur de format. Par exemple : `{datetime:yyyy}`.
@@ -79,8 +81,8 @@ Les jetons de spécificateur de format suivants peuvent être utilisés individu
 |{datetime:dd}|Jour de 01 à 31|02|
 |{datetime:d}|Jour de 1 à 31|2|
 |{datetime:HH}|Heure au format 24 heures, de 00 à 23|10|
-|{datetime:mm}|Minutes de 00 à 24|06|
-|{datetime:m}|Minutes de 0 à 24|6|
+|{datetime:mm}|Minutes de 00 à 60|06|
+|{datetime:m}|Minutes de 0 à 60|6|
 |{datetime:ss}|Secondes de 00 à 60|08|
 
 Si vous ne souhaitez pas utiliser des modèles DateTime personnalisés, vous pouvez ajouter le jeton {date} et/ou {time} au préfixe de chemin. Vous obtenez ainsi une liste déroulante contenant les formats DateTime prédéfinis.
@@ -113,7 +115,7 @@ MSCK REPAIR TABLE while hive.exec.dynamic.partition true
 
 ### <a name="example"></a>Exemple
 
-Créez un compte de stockage, un groupe de ressources, un travail Stream Analytics et une source d’entrée en vous aidant du guide de démarrage rapide [Créer un travail Stream Analytics à l’aide du portail Azure](stream-analytics-quick-create-portal.md). Utilisez les mêmes exemples de données que dans le guide de démarrage rapide (également disponibles sur [GitHub](https://raw.githubusercontent.com/Azure/azure-stream-analytics/master/Samples/GettingStarted/HelloWorldASA-InputStream.json)).
+Créez un compte de stockage, un groupe de ressources, un travail Stream Analytics et une source d’entrée conformément au guide de démarrage rapide [du Portail Azure d’Azure Stream Analytics](stream-analytics-quick-create-portal.md). Utilisez les mêmes exemples de données que dans le guide de démarrage rapide (également disponibles sur [GitHub](https://raw.githubusercontent.com/Azure/azure-stream-analytics/master/Samples/GettingStarted/HelloWorldASA-InputStream.json)).
 
 Créez un récepteur de sortie Blob avec la configuration suivante :
 

@@ -1,21 +1,24 @@
 ---
-title: 'Tutoriel : Mettre à l’échelle une application dans Azure Spring Cloud | Microsoft Docs'
-description: Dans ce tutoriel, vous allez apprendre à mettre à l’échelle une application avec Azure Spring Cloud sur le portail Azure.
+title: Mettre à l’échelle une application dans Azure Spring Cloud | Microsoft Docs
+description: Apprenez à mettre à l’échelle une application avec Azure Spring Cloud dans le portail Azure.
 ms.service: spring-cloud
-ms.topic: tutorial
+ms.topic: how-to
 ms.author: brendm
 author: bmitchell287
 ms.date: 10/06/2019
-ms.openlocfilehash: f08a3b5d0a03b0e898457bbb783dd5031c4b0f27
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-java
+ms.openlocfilehash: 5632f9a6126615255306cc89425bd08a9ffa9753
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76277477"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96531800"
 ---
 # <a name="scale-an-application-in-azure-spring-cloud"></a>Mettre à l’échelle une application dans Azure Spring Cloud
 
-Ce tutoriel montre comment mettre à l’échelle une application de microservices à partir du tableau de bord Azure Spring Cloud sur le portail Azure.
+**Cet article s’applique à :** ✔️ Java ✔️ C#
+
+Cette documentation montre comment mettre à l’échelle une application de microservices à partir du tableau de bord Azure Spring Cloud sur le portail Azure.
 
 Effectuez un scale-up ou un scale-down de votre application en modifiant le nombre de processeurs virtuels, ainsi que la quantité de mémoire. Effectuez un scale-in ou un scale-out de votre application en modifiant le nombre d’instances de l’application.
 
@@ -23,10 +26,10 @@ Effectuez un scale-up ou un scale-down de votre application en modifiant le nomb
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour suivre ce didacticiel, vous avez besoin des éléments suivants :
+Pour suivre ces procédures, vous avez besoin des éléments suivants :
 
 * Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
-* Une instance du service Azure Spring Cloud déployée.  Pour bien démarrer, suivez notre [guide de démarrage rapide sur le déploiement d’une application via Azure CLI](spring-cloud-quickstart-launch-app-cli.md).
+* Une instance du service Azure Spring Cloud déployée.  Pour bien démarrer, suivez notre [guide de démarrage rapide sur le déploiement d’une application par le biais d’Azure CLI](spring-cloud-quickstart.md).
 * Au moins une application déjà créée dans votre instance de ce service.
 
 ## <a name="navigate-to-the-scale-page-in-the-azure-portal"></a>Accéder à la page Mettre à l’échelle sur le portail Azure
@@ -59,9 +62,12 @@ Veillez à sélectionner **Enregistrer** pour appliquer vos paramètres de mise 
 
 Au bout de quelques secondes, les modifications que vous avez apportées sont visibles dans la page **Vue d’ensemble**. Des détails supplémentaires sont disponibles sous l’onglet **Instances de l’application**. La mise à l’échelle ne nécessite aucune modification de code ni de redéploiement.
 
+## <a name="upgrade-to-the-standard-tier"></a>Passer au niveau Standard
+Si vous êtes au niveau De base et limité par une ou plusieurs de ces [restrictions](spring-cloud-quotas.md), vous pouvez passer au niveau Standard. Pour ce faire, accédez au menu Niveau tarifaire en sélectionnant d’abord la colonne Niveau Standard et en cliquant sur le bouton **Mettre à niveau**.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez appris à mettre à l’échelle manuellement vos applications Azure Spring Cloud. Pour savoir comment superviser votre application, passez au tutoriel suivant.
+Cet exemple vous a montré comment mettre à l’échelle manuellement une application Azure Spring Cloud. Pour savoir comment superviser une application en configurant des alertes, consultez [Configurer la mise à l’échelle automatique](spring-cloud-tutorial-setup-autoscale.md).
 
 > [!div class="nextstepaction"]
-> [Savoir comment superviser une application](spring-cloud-tutorial-distributed-tracing.md)
+> [Découvrir comment configurer des alertes](spring-cloud-tutorial-alerts-action-groups.md)

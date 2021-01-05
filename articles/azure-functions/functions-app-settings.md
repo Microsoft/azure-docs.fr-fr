@@ -3,12 +3,12 @@ title: Informations de référence sur les paramètres d’application d’Azure
 description: Documentation de référence pour les paramètres d’application ou les variables d’environnement d’Azure Functions.
 ms.topic: conceptual
 ms.date: 09/22/2018
-ms.openlocfilehash: 6f42c411263575040d4392b85542920e8f2463d4
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 2b71bee620ab7d5b1ef98b60013d1978f49d127f
+ms.sourcegitcommit: 4bee52a3601b226cfc4e6eac71c1cb3b4b0eafe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82690760"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94505884"
 ---
 # <a name="app-settings-reference-for-azure-functions"></a>Informations de référence sur les paramètres d’application d’Azure Functions
 
@@ -18,21 +18,65 @@ Les paramètres d’une application de fonction contiennent les options de confi
 
 Les fichiers [host.json](functions-host-json.md) et [local.settings.json](functions-run-local.md#local-settings-file) contiennent d’autres options de configuration globale.
 
+> [!NOTE]  
+> Vous pouvez utiliser des paramètres d’application pour remplacer les valeurs de paramètres host.json sans avoir à modifier le fichier host.json proprement dit. C’est utile dans des scénarios où vous devez configurer ou modifier des paramètres host.json spécifiques pour un environnement spécifique. Cela vous permet également de modifier les paramètres host.json sans avoir à republier votre projet. Pour plus d’informations, consultez l’[article de référence host.json](functions-host-json.md#override-hostjson-values).  
+
 ## <a name="appinsights_instrumentationkey"></a>APPINSIGHTS_INSTRUMENTATIONKEY
 
-Clé d’instrumentation pour Application Insights. Utilisez `APPINSIGHTS_INSTRUMENTATIONKEY` ou `APPLICATIONINSIGHTS_CONNECTIONSTRING`. Pour plus d’informations, consultez [Surveiller l’exécution des fonctions Azure](functions-monitoring.md). 
+Clé d’instrumentation pour Application Insights. Utilisez `APPINSIGHTS_INSTRUMENTATIONKEY` ou `APPLICATIONINSIGHTS_CONNECTION_STRING`. Lorsque Application Insights s’exécute dans un cloud souverain, utilisez `APPLICATIONINSIGHTS_CONNECTION_STRING`. Pour plus d’informations, consultez [Comment configurer la surveillance de Azure Functions](configure-monitoring.md). 
 
 |Clé|Exemple de valeur|
 |---|------------|
 |APPINSIGHTS_INSTRUMENTATIONKEY|55555555-af77-484b-9032-64f83bb83bb|
 
-## <a name="applicationinsights_connectionstring"></a>APPLICATIONINSIGHTS_CONNECTIONSTRING
+## <a name="applicationinsights_connection_string"></a>APPLICATIONINSIGHTS_CONNECTION_STRING
 
-Chaîne de connexion pour Application Insights. Utilisez `APPLICATIONINSIGHTS_CONNECTIONSTRING` au lieu de `APPINSIGHTS_INSTRUMENTATIONKEY` lorsque votre application de fonction requiert les personnalisations ajoutées prises en charge à l’aide de la chaîne de connexion. Pour plus d’informations, consultez [Chaînes de connexion](../azure-monitor/app/sdk-connection-string.md). 
+Chaîne de connexion pour Application Insights. Utilisez `APPLICATIONINSIGHTS_CONNECTION_STRING` au lieu de `APPINSIGHTS_INSTRUMENTATIONKEY` dans les cas suivants :
+
++ lorsque votre application de fonction requiert les personnalisations ajoutées prises en charge à l’aide de la chaîne de connexion. 
++ Lorsque votre instance d’Application Insights s’exécute dans un cloud souverain, qui requiert un point de terminaison personnalisé.
+
+Pour plus d’informations, consultez [Chaînes de connexion](../azure-monitor/app/sdk-connection-string.md). 
 
 |Clé|Exemple de valeur|
 |---|------------|
-|APPLICATIONINSIGHTS_CONNECTIONSTRING|InstrumentationKey=[key];IngestionEndpoint=[url];LiveEndpoint=[url];ProfilerEndpoint=[url];SnapshotEndpoint=[url];|
+|APPLICATIONINSIGHTS_CONNECTION_STRING|InstrumentationKey=[key];IngestionEndpoint=[url];LiveEndpoint=[url];ProfilerEndpoint=[url];SnapshotEndpoint=[url];|
+
+## <a name="azure_function_proxy_disable_local_call"></a>AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL
+
+Par défaut, les [proxies Functions](functions-proxies.md) utilisent un raccourci pour envoyer des appels d’API à partir de proxies directement vers les fonctions de la même application de fonction. Ce raccourci est utilisé au lieu de créer une nouvelle requête HTTP. Ce paramètre vous permet de désactiver le comportement de ce raccourci.
+
+|Clé|Valeur|Description|
+|-|-|-|
+|AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL|true|Les appels dont l’URL de back-end pointe vers une fonction de l’application de fonction locale ne seront pas envoyés directement vers la fonction. Au lieu de cela, les requêtes sont retournées au serveur frontal HTTP pour l’application de fonction.|
+|AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL|false|Les appels dont l’URL de back-end pointe vers une fonction de l’application de fonction locale sont transférés directement vers la fonction. Il s’agit de la valeur par défaut. |
+
+## <a name="azure_function_proxy_backend_url_decode_slashes"></a>AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES
+
+Ce paramètre vérifie si les caractères `%2F` sont décodés en tant que barres obliques dans les paramètres d’itinéraire lorsqu’ils sont réinsérés dans l’URL principale. 
+
+|Clé|Valeur|Description|
+|-|-|-|
+|AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES|true|Les paramètres d’itinéraire avec des barres obliques encodées sont décodés. |
+|AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES|false|Tous les paramètres d’itinéraire sont transmis tels quels, ce qui correspond au comportement par défaut. |
+
+Par exemple, considérez le fichier proxies.json pour une application de fonction au niveau du domaine `myfunction.com`.
+
+```JSON
+{
+    "$schema": "http://json.schemastore.org/proxies",
+    "proxies": {
+        "root": {
+            "matchCondition": {
+                "route": "/{*all}"
+            },
+            "backendUri": "example.com/{all}"
+        }
+    }
+}
+```
+
+Lorsque `AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES` a la valeur `true`, l’URL `example.com/api%2ftest` correspond à `example.com/api/test`. Par défaut, l’URL reste inchangée en tant que `example.com/test%2fapi`. Pour plus d’informations, consultez [Proxys de fonctions](functions-proxies.md).
 
 ## <a name="azure_functions_environment"></a>AZURE_FUNCTIONS_ENVIRONMENT
 
@@ -91,7 +135,7 @@ Spécifie le référentiel ou le fournisseur à utiliser pour le stockage de cl�
 
 ## <a name="azurewebjobsstorage"></a>AzureWebJobsStorage
 
-Le runtime d’Azure Functions utilise cette chaîne de connexion de compte de stockage pour toutes les fonctions à l’exception de celles qui sont déclenchées par HTTP. Le compte de stockage doit être à usage général. Il prend en charge les objets blob, les files d’attente et les tables. Consultez les sections [Compte de stockage](functions-infrastructure-as-code.md#storage-account) et [Conditions requises pour le compte de stockage](storage-considerations.md#storage-account-requirements).
+Le runtime Azure Functions utilise cette chaîne de connexion de compte de stockage pour fonctionner normalement. Ce compte de stockage est notamment utilisé pour la gestion des clés, la gestion des déclencheurs de minuterie et les points de contrôle Event Hubs. Le compte de stockage doit être à usage général. Il prend en charge les objets blob, les files d’attente et les tables. Consultez les sections [Compte de stockage](functions-infrastructure-as-code.md#storage-account) et [Conditions requises pour le compte de stockage](storage-considerations.md#storage-account-requirements).
 
 |Clé|Exemple de valeur|
 |---|------------|
@@ -151,13 +195,45 @@ Runtime du rôle de travail de langage à charger dans l’application de foncti
 |---|------------|
 |FUNCTIONS\_WORKER\_RUNTIME|dotnet|
 
-## <a name="website_contentazurefileconnectionstring"></a>WEBSITE_CONTENTAZUREFILECONNECTIONSTRING
+## <a name="pip_extra_index_url"></a>PIP\_EXTRA\_INDEX\_URL
+
+La valeur de ce paramètre indique une URL d’index des packages personnalisée pour les applications Python. Utilisez ce paramètre lorsque vous devez exécuter une build distante à l’aide de dépendances personnalisées se trouvant dans un index de packages supplémentaire.   
+
+|Clé|Exemple de valeur|
+|---|------------|
+|PIP\_EXTRA\_INDEX\_URL|http://my.custom.package.repo/simple |
+
+Pour en savoir plus, consultez [Dépendances personnalisées](functions-reference-python.md#remote-build-with-extra-index-url) dans les informations de référence pour les développeurs Python.
+
+## <a name="scale_controller_logging_enable"></a>SCALE\_CONTROLLER\_LOGGING\_ENABLE
+
+_Ce paramètre est actuellement en préversion._  
+
+Ce paramètre contrôle la journalisation à partir du contrôleur d’échelle Azure Functions. Pour plus d’informations, consultez [Journaux du contrôleur d’échelle](functions-monitoring.md#scale-controller-logs).
+
+|Clé|Exemple de valeur|
+|-|-|
+|SCALE_CONTROLLER_LOGGING_ENABLE|AppInsights:Verbose|
+
+La valeur de cette clé est fournie au format `<DESTINATION>:<VERBOSITY>`, qui est défini comme suit :
+
+[!INCLUDE [functions-scale-controller-logging](../../includes/functions-scale-controller-logging.md)]
+
+## <a name="website_contentazurefileconnectionstring"></a>WEBSITE\_CONTENTAZUREFILECONNECTIONSTRING
 
 Pour les plans Consommation et Premium uniquement. Chaîne de connexion du compte de stockage dans lequel la configuration et le code de l’application de fonction sont stockés. Consultez la section [Créer une application de fonction](functions-infrastructure-as-code.md#create-a-function-app).
 
 |Clé|Exemple de valeur|
 |---|------------|
 |WEBSITE_CONTENTAZUREFILECONNECTIONSTRING|DefaultEndpointsProtocol=https;AccountName=[name];AccountKey=[key]|
+
+## <a name="website_contentovervnet"></a>WEBSITE\_CONTENTOVERVNET
+
+Pour les plans Premium uniquement. La valeur `1` permet à votre application de fonction de se mettre à l’échelle lorsque votre compte de stockage est limité à un réseau virtuel. Vous devez activer ce paramètre lorsque vous limitez votre compte de stockage à un réseau virtuel. Pour en savoir plus, consultez [Restreindre votre compte de stockage à un réseau virtuel](functions-networking-options.md#restrict-your-storage-account-to-a-virtual-network-preview). 
+
+|Clé|Exemple de valeur|
+|---|------------|
+|WEBSITE_CONTENTOVERVNET|1|
 
 ## <a name="website_contentshare"></a>WEBSITE\_CONTENTSHARE
 
@@ -171,8 +247,8 @@ Pour les plans Consommation et Premium uniquement. Chemin d’accès au fichier 
 
 Nombre maximal d’instances possibles vers lequel l’application de fonction peut effectuer un scale-out. Par défaut, il n’y pas de limite.
 
-> [!NOTE]
-> Ce paramètre est une fonctionnalité d’évaluation et fiable uniquement si la valeur définie est <= 5
+> [!IMPORTANT]
+> Ce paramètre est en préversion.  Une [propriété d’application pour un scale-out maximal](./functions-scale.md#limit-scale-out) a été ajoutée et constitue la méthode recommandée pour limiter le scale-out.
 
 |Clé|Exemple de valeur|
 |---|------------|
@@ -197,47 +273,16 @@ Permet à votre application de fonction de s’exécuter à partir d’un fichie
 
 Les valeurs valides sont soit une URL qui correspond à l’emplacement d’un fichier de package de déploiement, soit `1`. Lorsque la valeur `1` est définie, le package doit se trouver dans le dossier `d:\home\data\SitePackages`. Lorsque vous utilisez le déploiement zip avec ce paramètre, le package est automatiquement chargé vers cet emplacement. Dans la préversion, ce paramètre s’appelait `WEBSITE_RUN_FROM_ZIP`. Pour plus d’informations, consultez [Exécuter des fonctions Azure à partir d’un fichier de package](run-functions-from-deployment-package.md).
 
-## <a name="azure_function_proxy_disable_local_call"></a>AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL
+## <a name="website_time_zone"></a>WEBSITE\_TIME\_ZONE
 
-Par défaut, les proxies Functions utilisent un raccourci pour envoyer des appels d’API à partir de proxies directement vers les fonctions de Function App, au lieu de créer une requête HTTP. Ce paramètre vous permet de désactiver ce comportement.
+Vous permet de définir le fuseau horaire de votre application de fonction. 
 
-|Clé|Valeur|Description|
-|-|-|-|
-|AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL|true|Les appels dont l’URL de back-end pointe vers une fonction de l’application de fonction locale ne sont plus envoyés directement vers la fonction. Au lieu de cela, ils sont redirigés vers le front-end HTTP pour l’application de fonction|
-|AZURE_FUNCTION_PROXY_DISABLE_LOCAL_CALL|false|Il s’agit de la valeur par défaut. Les appels dont l’URL de back-end pointe vers une fonction de l’application de fonction locale sont transférés directement vers cette fonction|
+|Clé|Système d''exploitation|Exemple de valeur|
+|---|--|------------|
+|WEBSITE\_TIME\_ZONE|Windows|Heure standard de l'Est|
+|WEBSITE\_TIME\_ZONE|Linux|America/New_York|
 
-
-## <a name="azure_function_proxy_backend_url_decode_slashes"></a>AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES
-
-Ce paramètre vérifie si %2F est décodé en tant que barres obliques dans les paramètres d’itinéraire lorsqu’ils sont réinsérés dans l’URL principale. 
-
-|Clé|Valeur|Description|
-|-|-|-|
-|AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES|true|Les paramètres d’itinéraire avec des barres obliques encodées les décodent. `example.com/api%2ftest` devient `example.com/api/test`|
-|AZURE_FUNCTION_PROXY_BACKEND_URL_DECODE_SLASHES|false|Il s'agit du comportement par défaut. Tous les paramètres d’itinéraire restent inchangés lors de leur transmission|
-
-### <a name="example"></a>Exemple
-
-Voici un fichier exemple proxies.json dans une application de fonction sur l’URL myfunction.com
-
-```JSON
-{
-    "$schema": "http://json.schemastore.org/proxies",
-    "proxies": {
-        "root": {
-            "matchCondition": {
-                "route": "/{*all}"
-            },
-            "backendUri": "example.com/{all}"
-        }
-    }
-}
-```
-|Décodage d’URL|Entrée|Output|
-|-|-|-|
-|true|myfunction.com/test%2fapi|example.com/test/api
-|false|myfunction.com/test%2fapi|example.com/test%2fapi|
-
+[!INCLUDE [functions-timezone](../../includes/functions-timezone.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: arthii, logicappspm
 ms.topic: article
-ms.date: 12/05/2019
-ms.openlocfilehash: f2f8b9f207993c49201d03d3d1fed3c5800e8780
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.date: 05/15/2020
+ms.openlocfilehash: a36b9d20fa20df56ec53e090976ea86e689ac74b
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80673813"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91322510"
 ---
 # <a name="install-on-premises-data-gateway-for-azure-logic-apps"></a>Installer une passerelle de données locale pour Azure Logic Apps
 
@@ -22,27 +22,26 @@ Pour pouvoir vous [connecter à des sources de données locales à partir d’Az
 * [Passerelle de données locale Microsoft Power Apps](/powerapps/maker/canvas-apps/gateway-reference)
 * [Passerelle de données locale Azure Analysis Services](../analysis-services/analysis-services-gateway.md)
 
-Cet article explique comment télécharger, installer et configurer votre passerelle de données locale afin de pouvoir accéder à des sources de données locales à partir d’Azure Logic Apps. Vous pouvez également en savoir plus sur le [fonctionnement de la passerelle de données](#gateway-cloud-service) plus loin dans cette rubrique. Pour obtenir des informations détaillées sur la passerelle, voir [Qu’est-ce qu’une passerelle de données locale ?](https://docs.microsoft.com/data-integration/gateway/service-gateway-onprem). Pour automatiser les tâches d'installation et de gestion de la passerelle, visitez la galerie PowerShell pour accéder aux [cmdlets DataGateway PowerShell](https://www.powershellgallery.com/packages/DataGateway/3000.15.15).
+Cet article explique comment télécharger, installer et configurer votre passerelle de données locale afin de pouvoir accéder à des sources de données locales à partir d’Azure Logic Apps. Vous pouvez également en savoir plus sur le [fonctionnement de la passerelle de données](#gateway-cloud-service) plus loin dans cette rubrique. Pour obtenir des informations détaillées sur la passerelle, voir [Qu’est-ce qu’une passerelle de données locale ?](/data-integration/gateway/service-gateway-onprem). Pour automatiser les tâches d'installation et de gestion de la passerelle, visitez la galerie PowerShell pour accéder aux [cmdlets DataGateway PowerShell](https://www.powershellgallery.com/packages/DataGateway/3000.15.15).
 
 <a name="requirements"></a>
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un compte et un abonnement Azure. Si vous n’avez pas de compte Azure avec un abonnement, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/).
+* Un compte et un abonnement Azure. Si vous n’avez pas de compte Azure avec un abonnement, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
-  * Votre compte Azure doit appartenir à un seul [client ou répertoire Azure Active Directory (Azure AD)](../active-directory/fundamentals/active-directory-whatis.md#terminology). Vous devez utiliser le même compte Azure pour installer et administrer la passerelle sur votre ordinateur local.
-
-  * Pendant l’installation de la passerelle, vous vous connectez avec votre compte Azure, qui relie l’installation de votre passerelle à votre compte Azure et uniquement à ce compte. Plus tard, dans le Portail Azure, vous devez utiliser le même compte Azure et le même client Azure AD, lorsque vous créez une ressource de passerelle Azure qui inscrit et réclame votre installation de passerelle. Dans Azure Logic Apps, les déclencheurs et les actions locaux utilisent ensuite la ressource de passerelle pour se connecter aux sources de données locales.
+  * Votre compte Azure doit être un compte professionnel ou scolaire, du type `username@contoso.com`. Vous ne pouvez pas utiliser des comptes Azure B2B (invité) ou des comptes Microsoft personnels, comme @hotmail.com ou @outlook.com.
 
     > [!NOTE]
-    > Vous ne pouvez lier qu’une seule installation de passerelle et une seule ressource de passerelle Azure l’une à l’autre. Vous ne pouvez pas lier la même installation de passerelle à plusieurs comptes Azure ou ressources de passerelle Azure. Toutefois, un compte Azure peut être lié à plusieurs installations de passerelle et ressources de passerelle Azure. Dans un déclencheur ou une action locale, vous pouvez choisir parmi vos différents abonnements Azure, puis sélectionner une ressource de passerelle associée.
+    > Si vous avez souscrit une offre Microsoft 365 sans fournir votre adresse e-mail professionnelle, votre adresse de connexion peut se présenter comme ceci : `username@domain.onmicrosoft.com`. Votre compte est stocké dans un locataire Azure AD. Dans la plupart des cas, le nom d’utilisateur principal (UPN) de votre compte Azure est identique à votre adresse e-mail.
 
-  * Vous devez vous connecter avec un compte professionnel ou scolaire, également appelé compte d’*organisation*, qui se présente comme ceci : `username@contoso.com`. Vous ne pouvez pas utiliser des comptes Azure B2B (invité) ou des comptes Microsoft personnels, comme @hotmail.com ou @outlook.com.
+    Pour utiliser un [abonnement standard Visual Studio](https://visualstudio.microsoft.com/vs/pricing/) associé à un compte Microsoft, commencez par [créer un locataire Azure AD](../active-directory/develop/quickstart-create-new-tenant.md) ou utilisez l’annuaire par défaut. Ajoutez un utilisateur avec un mot de passe à l’annuaire, puis donnez-lui accès à votre abonnement Azure. Vous pourrez alors vous connecter au cours de l’installation de la passerelle avec ce nom d’utilisateur et ce mot de passe.
 
-    > [!TIP]
-    > Si vous avez souscrit une offre Office 365 sans fournir votre adresse e-mail professionnelle, votre adresse de connexion peut se présenter comme ceci : `username@domain.onmicrosoft.com`. Votre compte est stocké au sein d’un locataire dans Azure Active Directory (Azure AD). Dans la plupart des cas, le nom d’utilisateur principal (UPN) de votre compte Azure AD est identique à votre adresse e-mail.
-    >
-    > Pour utiliser un [abonnement Standard Visual Studio](https://visualstudio.microsoft.com/vs/pricing/) lié à un compte Microsoft, commencez par [créer un locataire dans Azure AD](../active-directory/develop/quickstart-create-new-tenant.md) ou utilisez l’annuaire par défaut. Ajoutez un utilisateur avec un mot de passe à l’annuaire, puis donnez-lui accès à votre abonnement Azure. Vous pourrez alors vous connecter au cours de l’installation de la passerelle avec ce nom d’utilisateur et ce mot de passe.
+  * Votre compte Azure ne doit appartenir qu’à un seul [locataire ou annuaire Azure Active Directory (Azure AD)](../active-directory/fundamentals/active-directory-whatis.md#terminology). Vous devez utiliser le même compte Azure pour installer et administrer la passerelle sur votre ordinateur local.
+
+  * Lorsque vous installez la passerelle, vous vous connectez avec votre compte Azure, qui relie l’installation de votre passerelle à votre compte Azure et uniquement à celui-ci. Il n’est pas possible de lier la même installation de passerelle à plusieurs comptes Azure ou locataires Azure AD.
+
+  * Plus tard, sur le Portail Azure, vous devrez utiliser le même compte Azure pour créer une ressource de passerelle Azure reliée à votre installation de passerelle. Vous ne pouvez lier qu’une seule installation de passerelle et une seule ressource de passerelle Azure l’une à l’autre. Toutefois, votre compte Azure peut être lié à différentes installations de passerelle qui sont chacune associées à une ressource de passerelle Azure. Vos applications logiques peuvent alors utiliser cette ressource de passerelle dans les déclencheurs et les actions qui ont accès à des sources de données locales.
 
 * Voici la configuration requise pour votre ordinateur local :
 
@@ -68,17 +67,19 @@ Cet article explique comment télécharger, installer et configurer votre passer
     > [!TIP]
     > Pour réduire la latence, vous pouvez installer la passerelle le plus près possible de votre source de données, ou sur le même ordinateur, en supposant que vous disposiez des autorisations nécessaires.
 
-  * Installez la passerelle sur un ordinateur qui se trouve sur un réseau câblé, connecté à Internet, toujours allumé et qui ne se met pas en veille. Sinon, la passerelle ne peut pas s’exécuter et les performances peuvent se dégrader sur un réseau sans fil.
+  * Installez la passerelle sur un ordinateur local branché à un réseau câblé, connecté à Internet, toujours allumé et qui ne se met pas en veille. Sinon, la passerelle ne peut pas s’exécuter et les performances peuvent se dégrader sur un réseau sans fil.
 
   * Si vous prévoyez d’utiliser l’authentification Windows, veillez à installer la passerelle sur un ordinateur membre du même environnement Active Directory que vos sources de données.
 
   * La région que vous sélectionnez pour l’installation de votre passerelle est le même emplacement que celui que vous devez sélectionner quand vous créez plus tard la ressource de passerelle Azure pour votre application logique. Par défaut, cette région est le même emplacement que votre locataire Azure AD qui gère votre compte Azure. Vous pouvez cependant changer l’emplacement lors de l’installation de la passerelle.
 
-  * Si vous mettez à jour votre installation de passerelle vers la dernière version, désinstallez d’abord votre passerelle actuelle pour obtenir une expérience plus propre.
+  * Si vous mettez à jour votre installation de passerelle, commencez par désinstaller votre passerelle actuelle pour obtenir une interface plus propre.
+
+    Nous vous recommandons de vérifier que vous utilisez une version prise en charge. Microsoft publie une nouvelle mise à jour de la passerelle de données locale chaque mois, et prend actuellement en charge uniquement les six dernières versions de la passerelle de données locale. Si vous rencontrez des problèmes avec la version que vous utilisez, essayez d’opérer une [mise à niveau vers la version la plus récente](https://aka.ms/on-premises-data-gateway-installer), car celle-ci résoudra peut-être votre problème.
 
   * La passerelle a deux modes : le mode standard et le mode personnel, qui s’applique seulement à Power BI. Vous ne pouvez pas avoir plusieurs passerelles s’exécutant dans le même mode sur le même ordinateur.
 
-  * Azure Logic Apps prend en charge les opérations de lecture et d’écriture par le biais de la passerelle. Toutefois, ces opérations ont des [limites quant à la taille de leur charge utile](https://docs.microsoft.com/data-integration/gateway/service-gateway-onprem#considerations).
+  * Azure Logic Apps prend en charge les opérations de lecture et d’écriture par le biais de la passerelle. Toutefois, ces opérations ont des [limites quant à la taille de leur charge utile](/data-integration/gateway/service-gateway-onprem#considerations).
 
 <a name="install-gateway"></a>
 
@@ -113,7 +114,7 @@ Cet article explique comment télécharger, installer et configurer votre passer
 
    Notez l’option pour **Ajouter à un cluster de passerelle existant**, que vous sélectionnez quand vous installez des passerelles supplémentaires pour des [scénarios de haute disponibilité](#high-availability).
 
-1. Vérifiez la région sélectionnée pour le service cloud de passerelle et pour [Azure Service Bus](https://azure.microsoft.com/services/service-bus/), qui est utilisée par votre installation de passerelle. Par défaut, cette région est le même emplacement que votre locataire Azure AD pour votre compte Azure.
+1. Vérifiez la région du service cloud de passerelle et [l’instance de messagerie Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) qui est utilisée par votre installation de passerelle. Par défaut, cette région est le même emplacement que votre locataire Azure AD pour votre compte Azure.
 
    ![Confirmer la région pour le service de passerelle et le service bus](./media/logic-apps-gateway-install/confirm-gateway-region.png)
 
@@ -139,10 +140,10 @@ Cet article explique comment télécharger, installer et configurer votre passer
 
 ## <a name="check-or-adjust-communication-settings"></a>Vérifier ou ajuster les paramètres de communication
 
-La passerelle de données locale dépend d’[Azure Service bus](../service-bus-messaging/service-bus-messaging-overview.md) pour la connectivité au cloud et établit les connexions sortantes correspondantes à la région Azure associée de la passerelle. Si votre environnement de travail nécessite que le trafic passe par un proxy ou un pare-feu pour accéder à Internet, cette restriction peut empêcher la passerelle de données de se connecter au service cloud de passerelle et à Azure Service Bus. La passerelle a plusieurs paramètres de communication que vous pouvez ajuster. Pour plus d’informations, consultez les rubriques suivantes :
+La passerelle de données locale dépend de la [messagerie Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) pour la connectivité au cloud et établit les connexions sortantes correspondantes à la région Azure associée de la passerelle. Si votre environnement de travail nécessite que le trafic passe par un proxy ou un pare-feu pour accéder à Internet, cette restriction peut empêcher la passerelle de données locale de se connecter au service cloud de passerelle et à la messagerie Azure Service Bus. La passerelle a plusieurs paramètres de communication que vous pouvez ajuster. Pour plus d’informations, consultez les rubriques suivantes :
 
-* [Ajuster les paramètres de communication pour la passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-communication)
-* [Configurer les paramètres de proxy pour la passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-proxy)
+* [Ajuster les paramètres de communication pour la passerelle de données locale](/data-integration/gateway/service-gateway-communication)
+* [Configurer les paramètres de proxy pour la passerelle de données locale](/data-integration/gateway/service-gateway-proxy)
 
 <a name="high-availability"></a>
 
@@ -154,7 +155,7 @@ Pour éviter les points de défaillance uniques pour l’accès aux données loc
 
 * Votre passerelle principale doit fonctionner sous la mise à jour de passerelle datant de novembre 2017 ou une version plus récente.
 
-Une fois que vous avez configuré votre passerelle principale, quand vous accédez à installer une autre passerelle, sélectionnez **Ajouter à un cluster de passerelle existant**, sélectionnez la passerelle principale, qui est la première passerelle que vous avez installée, et spécifiez la clé de récupération pour cette passerelle. Pour plus d’informations, consultez [Clusters à haute disponibilité pour la passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-install#add-another-gateway-to-create-a-cluster).
+Une fois que vous avez configuré votre passerelle principale, quand vous accédez à installer une autre passerelle, sélectionnez **Ajouter à un cluster de passerelle existant**, sélectionnez la passerelle principale, qui est la première passerelle que vous avez installée, et spécifiez la clé de récupération pour cette passerelle. Pour plus d’informations, consultez [Clusters à haute disponibilité pour la passerelle de données locale](/data-integration/gateway/service-gateway-install#add-another-gateway-to-create-a-cluster).
 
 <a name="update-gateway-installation"></a>
 
@@ -162,11 +163,11 @@ Une fois que vous avez configuré votre passerelle principale, quand vous accéd
 
 Si vous devez modifier l’emplacement de votre passerelle, déplacer votre programme d’installation de passerelle vers un nouvel ordinateur, récupérer une passerelle endommagée ou contrôler une passerelle existante, vous avez besoin de la clé de récupération qui a été fournie lors de l’installation de la passerelle.
 
-1. Exécutez le programme d’installation de passerelle sur l’ordinateur où se trouve la passerelle existante. Si vous n’avez pas le dernier programme d’installation de passerelle, [téléchargez la dernière version de la passerelle](https://aka.ms/on-premises-data-gateway-installer).
+> [!NOTE]
+> Avant de restaurer la passerelle sur l’ordinateur où la passerelle d’origine est installée, vous devez d’abord désinstaller la passerelle sur cet ordinateur. Cette action déconnecte l’ancienne passerelle.
+> Si vous supprimez un cluster de passerelle pour un service cloud, vous ne pouvez pas restaurer ce cluster.
 
-   > [!NOTE]
-   > Avant de restaurer la passerelle sur l’ordinateur où la passerelle d’origine est installée, vous devez d’abord désinstaller la passerelle sur cet ordinateur. Cette action déconnecte l’ancienne passerelle.
-   > Si vous supprimez un cluster de passerelle pour un service cloud, vous ne pouvez pas restaurer ce cluster.
+1. Exécutez le programme d’installation de passerelle sur l’ordinateur où se trouve la passerelle existante.
 
 1. Une fois le programme d’installation ouvert, connectez-vous avec le même compte Azure que celui utilisé pour installer la passerelle.
 
@@ -184,7 +185,7 @@ Si vous devez modifier l’emplacement de votre passerelle, déplacer votre prog
 
 ## <a name="tenant-level-administration"></a>Administration au niveau du locataire
 
-Pour obtenir une visibilité de toutes les passerelles de données locales dans un locataire Azure AD, les administrateurs généraux de ce locataire peuvent se connecter au [Centre d’administration Power Platform](https://powerplatform.microsoft.com) en tant qu’administrateur du locataire et sélectionner l’option **Passerelles de données**. Pour plus d’informations, consultez [Administration au niveau du locataire pour la passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-tenant-level-admin).
+Pour obtenir une visibilité de toutes les passerelles de données locales dans un locataire Azure AD, les administrateurs généraux de ce locataire peuvent se connecter au [Centre d’administration Power Platform](https://powerplatform.microsoft.com) en tant qu’administrateur du locataire et sélectionner l’option **Passerelles de données**. Pour plus d’informations, consultez [Administration au niveau du locataire pour la passerelle de données locale](/data-integration/gateway/service-gateway-tenant-level-admin).
 
 <a name="restart-gateway"></a>
 
@@ -195,7 +196,7 @@ Par défaut, l’installation de la passerelle sur votre ordinateur local s’ex
 > [!NOTE]
 > Votre compte de service Windows diffère du compte utilisé pour la connexion à des sources de données locales, et du compte Azure que vous utilisez quand vous vous connectez à des services cloud.
 
-Comme tout autre service Windows, vous pouvez démarrer et arrêter la passerelle de plusieurs façons. Pour plus d’informations, consultez [Redémarrer une passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-restart).
+Comme tout autre service Windows, vous pouvez démarrer et arrêter la passerelle de plusieurs façons. Pour plus d’informations, consultez [Redémarrer une passerelle de données locale](/data-integration/gateway/service-gateway-restart).
 
 <a name="gateway-cloud-service"></a>
 
@@ -205,7 +206,7 @@ Les utilisateurs au sein de votre organisation peuvent accéder aux données loc
 
 La passerelle facilite une communication plus rapides et plus sûre en coulisses. Cette communication circule entre un utilisateur dans le cloud, le service cloud de passerelle et votre source de données locale. Le service cloud de passerelle chiffre et stocke les informations d’identification de votre source de données et les détails de la passerelle. Le service achemine également les requêtes et leurs résultats entre l’utilisateur, la passerelle et votre source de données locale.
 
-La passerelle fonctionne avec les pare-feux et utilise uniquement des connexions sortantes. L’ensemble du trafic est généré sous forme de trafic sortant sécurisé en provenance de l’agent de passerelle. La passerelle relaie les données des sources locales sur des canaux chiffrés via [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md). Ce service bus crée un canal entre la passerelle et le service d’appel, mais ne stocke aucune donnée. Toutes les données qui transitent via la passerelle sont chiffrées.
+La passerelle fonctionne avec les pare-feux et utilise uniquement des connexions sortantes. L’ensemble du trafic est généré sous forme de trafic sortant sécurisé en provenance de l’agent de passerelle. La passerelle envoie les données des sources locales sur des canaux chiffrés via la [messagerie Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md). Ce service bus crée un canal entre la passerelle et le service d’appel, mais ne stocke aucune donnée. Toutes les données qui transitent via la passerelle sont chiffrées.
 
 ![Architecture pour la passerelle de données locale](./media/logic-apps-gateway-install/how-on-premises-data-gateway-works-flow-diagram.png)
 
@@ -216,9 +217,9 @@ Ces étapes décrivent ce qu’il se produit quand vous interagissez avec un él
 
 1. Le service cloud crée une requête, ainsi que les informations d’identification chiffrées pour la source de données. Le service envoie ensuite la requête et les informations d’identification à la file d’attente de passerelle pour traitement.
 
-1. Le service cloud de la passerelle analyse la requête et envoie celle-ci à Azure Service Bus.
+1. Le service cloud de passerelle analyse la requête et envoie (push) celle-ci à la messagerie Azure Service Bus.
 
-1. Azure Service Bus envoie les demandes en attente à la passerelle.
+1. La messagerie Azure Service Bus envoie les requêtes en attente à la passerelle.
 
 1. La passerelle reçoit la requête, déchiffre les informations d’identification et les utilise pour se connecter à une ou plusieurs sources de données.
 
@@ -259,11 +260,9 @@ Voici comment faire correspondre vos comptes Active Directory locaux avec Azure 
 
 ## <a name="faq-and-troubleshooting"></a>FAQ et résolution des problèmes
 
-Pour plus d’informations, consultez les rubriques suivantes :
-
-* [Questions fréquentes (FAQ) sur la passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-onprem-faq)
-* [Résoudre des problèmes de passerelle de données locale](https://docs.microsoft.com/data-integration/gateway/service-gateway-tshoot)
-* [Surveiller et optimiser les performances de la passerelle](https://docs.microsoft.com/data-integration/gateway/service-gateway-performance)
+* [Questions fréquentes (FAQ) sur la passerelle de données locale](/data-integration/gateway/service-gateway-onprem-faq)
+* [Résoudre des problèmes de passerelle de données locale](/data-integration/gateway/service-gateway-tshoot)
+* [Surveiller et optimiser les performances de la passerelle](/data-integration/gateway/service-gateway-performance)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

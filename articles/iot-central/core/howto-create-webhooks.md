@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: corywink
-ms.openlocfilehash: 7cb80b54c75d637842c5f50d9336629dedf758fa
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b2ac4bbf1457144d23a91c4e83b554b3ee806119
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100122"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87337226"
 ---
 # <a name="create-webhook-actions-on-rules-in-azure-iot-central"></a>Créer des actions de webhook sur des règles dans Azure IoT Central
 
@@ -143,7 +143,7 @@ Si vous avez créé et enregistré un ou plusieurs webhooks avant le **3 avril 2
     }],
     "application": {
         "id": "<id>",
-        "displayName": "x - Store Analytics Checkout---PnP",
+        "displayName": "x - Store Analytics Checkout",
         "subdomain": "<subdomain>",
         "host": "<host>"
     }

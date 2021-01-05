@@ -2,48 +2,40 @@
 title: Fichier include
 description: Fichier include
 services: cognitive-services
-author: diberry
 manager: nitinme
-ms.custom: include file
+ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.date: 05/05/2020
+ms.date: 10/30/2020
 ms.topic: include
-ms.author: diberry
-ms.openlocfilehash: 5e2a74f69f575f4b9b332b98d7e19089418b29ed
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: e006f804b8ab6411f4949424147acf567dc2ed24
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585199"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97371307"
 ---
 ## <a name="sign-in-to-luis-portal"></a>Se connecter au portail LUIS
 
+[!INCLUDE [Note about portal deprecation](luis-portal-note.md)]
+
 Un nouvel utilisateur de LUIS doit suivre cette procédure :
 
-1. Connectez-vous au [portail LUIS](https://www.luis.ai), sélectionnez votre pays, puis acceptez les conditions d’utilisation. Si vous voyez à la place **Mes applications**, c’est qu’une ressource LUIS existe déjà et vous devez passer directement à la création d’une application.
+1. Connectez-vous au [portail LUIS](https://www.luis.ai), sélectionnez votre pays/région, puis acceptez les conditions d’utilisation. Si vous voyez à la place **Mes applications**, c’est qu’une ressource LUIS existe déjà et vous devez passer directement à la création d’une application. Vous avez deux options pour vous inscrire :
 
-1. Sélectionnez **Create Azure resource** (Créer une ressource Azure), puis **Create an authoring resource to migrate your apps to** (Créer une ressource de création vers laquelle migrer vos applications).
+    * Utilisation d’une ressource Azure (recommandé) – vous permet de lier votre compte LUIS à une ressource de création Azure nouvelle ou existante. Cela équivaut à une inscription déjà migrée. Vous n’aurez pas besoin de passer ultérieurement par le [processus de migration](../luis-migration-authoring.md#what-is-migration).
 
-    ![Choisir un type de ressource de création Language Understanding](../media/luis-how-to-azure-subscription/sign-in-create-resource.png)
+    * Utilisation d’une clé d’évaluation. Cela vous permet de vous connecter à LUIS avec une ressource d’évaluation que vous n’avez pas besoin de configurer. Si vous choisissez cette option, vous devrez plus tard [migrer votre compte](../luis-migration-authoring.md#migration-steps) et lier vos applications à une ressource de création.
 
-1. Renseignez les détails de la ressource.
+1. Dans la fenêtre **Choisir une ressource de création** qui s’affiche, recherchez votre abonnement Azure et la ressource de création LUIS. Si vous n’avez pas de ressource, vous pouvez en créer une nouvelle.
 
-    ![Créer une ressource de création](../media/migrate-authoring-key/choose-authoring-resource-form.png)
-
-    Quand vous **créez une ressource de création**, fournissez les informations suivantes :
-
-    * **Resource name** (Nom de la ressource) : nom personnalisé que vous choisissez, utilisé comme élément de l’URL pour vos requêtes de point de terminaison de création et de prédiction.
-    * **Tenant** (Locataire) : locataire auquel votre abonnement Azure est associé.
-    * **Subscription name** (Nom de l’abonnement) : abonnement auquel la ressource sera facturée.
-    * **Resource group** (Groupe de ressources) : nom de groupe de ressources personnalisé que vous choisissez ou que vous créez. Les groupes de ressources vous permettent de regrouper des ressources Azure pour l’accès et la gestion.
-    * **Location** (Emplacement) : le choix de l’emplacement est basé sur la sélection du groupe de ressources (**Resource group)** .
+    :::image type="content" source="../media/luis-how-to-azure-subscription/choose-authoring-resource.png" alt-text="Choisissez un type de ressource de création LUIS.":::
+    
+    Quand vous créez une ressource de création, fournissez les informations suivantes :
+    * **Nom du locataire** – locataire auquel votre abonnement Azure est associé.
+    * **Nom de l’abonnement Azure** – abonnement auquel la ressource sera facturée.
+    * **Nom du groupe de ressources Azure** – nom de groupe de ressources personnalisé que vous choisissez ou créez. Les groupes de ressources vous permettent de regrouper des ressources Azure pour l’accès et la gestion.
+    * **Nom de la ressource Azure** – nom personnalisé que vous choisissez, utilisé comme élément de l’URL pour vos requêtes de point de terminaison de création et de prédiction.
     * **Pricing tier** (Niveau tarifaire) : le niveau tarifaire détermine la transaction maximale par seconde et par mois.
 
-1. Un récapitulatif de la ressource à créer s’affiche. Sélectionnez **Suivant**.
 
-    ![Créer une ressource de création](../media/sign-in/sign-in-confirm-key-selection.png)
-
-1. Confirmez en sélectionnant **Continuer**.
-
-    ![Créer une ressource de création](../media/sign-in/sign-in-confirm-continue.png)

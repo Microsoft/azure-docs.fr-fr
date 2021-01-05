@@ -1,19 +1,19 @@
 ---
 title: SDK REST du serveur de requêtes Phoenix - Azure HDInsight
 description: Installer et utiliser le SDK REST pour le serveur de requêtes Phoenix dans Azure HDInsight.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 01/01/2020
-ms.openlocfilehash: 84c2bad1004029fe61dcfc19321957a170284587
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 051d7b37f5f78ce28134fa7c4ee188f3dde81812
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75612255"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89504840"
 ---
 # <a name="apache-phoenix-query-server-rest-sdk"></a>SDK REST Apache Phoenix Query Server
 
@@ -27,7 +27,9 @@ Pour plus d’informations, consultez [Référence des mémoires tampons de prot
 
 Le pilote Microsoft .NET pour le serveur de requêtes Apache Phoenix est fourni sous la forme d’un package NuGet qui peut être installé à partir de la **Console du gestionnaire de package NuGet** de Visual Studio avec la commande suivante :
 
-    Install-Package Microsoft.Phoenix.Client
+```console
+Install-Package Microsoft.Phoenix.Client
+```
 
 ## <a name="instantiate-new-phoenixclient-object"></a>Instancier un nouvel objet PhoenixClient
 
@@ -494,7 +496,7 @@ finally
 
 La sortie des instructions `select` doit être le résultat suivant :
 
-```
+```output
 id0 first0
 id1 first1
 id10 first10

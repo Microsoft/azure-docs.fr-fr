@@ -3,17 +3,17 @@ title: Créer ou modifier un Peering Exchange à l’aide du Portail Azure
 titleSuffix: Azure
 description: Créer ou modifier un Peering Exchange à l’aide du Portail Azure
 services: internet-peering
-author: prmitiki
+author: derekolo
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
-ms.author: prmitiki
-ms.openlocfilehash: e4f2ee72cbe17c094567aab5c7cc4720b02cde68
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 5/2/2020
+ms.author: derekol
+ms.openlocfilehash: 69201c97882846fb929b3b6f9a90be6647603bcc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81680937"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84700478"
 ---
 # <a name="create-or-modify-an-exchange-peering-by-using-the-azure-portal"></a>Créer ou modifier un Peering Exchange à l’aide du Portail Azure
 
@@ -32,10 +32,31 @@ Si vous préférez, vous pouvez suivre ce guide en utilisant [PowerShell](howto-
 
 ### <a name="create-an-exchange-peering"></a><a name=create></a>Créer un Peering Exchange
 
-Vous pouvez créer une nouvelle demande de Peering à l’aide de la ressource **Peering**.
 
-#### <a name="launch-the-resource-and-configure-basic-settings"></a>Lancer la ressource et configurer les paramètres de base
-[!INCLUDE [direct-peering-basic](./includes/direct-portal-basic.md)]
+En tant que fournisseur Internet Exchange, vous pouvez créer une requête Peering Exchange en [créant un Peering]( https://go.microsoft.com/fwlink/?linkid=2129593).
+
+1. Dans la page **Créer un Peering**, sur l’onglet **Informations de base**, remplissez les cases comme illustré ici :
+
+    > [!div class="mx-imgBorder"] 
+    > ![Inscrire Peering Service](./media/setup-basics-tab.png)
+
+*    Sélectionnez votre abonnement Azure.
+
+* Pour le groupe de ressources, sélectionnez un groupe de ressources existant dans la liste déroulante ou créez un nouveau groupe en sélectionnant Créer nouveau. Dans cet exemple, ,nous allons créer un nouveau groupe de ressources.
+
+* Nom correspond au nom de la ressource, et vous pouvez le choisir librement.
+
+* Région est sélectionné automatiquement si vous avez choisi un groupe de ressources existant. Si vous avez choisi de créer un nouveau groupe de ressources, vous devez également choisir la région Azure dans laquelle vous souhaitez que la ressource réside.
+
+>[!NOTE]
+>La région dans laquelle un groupe de ressources réside est indépendante de l’emplacement où vous souhaitez créer le Peering avec Microsoft. Toutefois, il est recommandé d’organiser vos ressources de Peering dans des groupes de ressources qui résident dans les régions Azure les plus proches. Par exemple : pour les Peerings à Ashburn, vous pouvez créer un groupe de ressources dans les régions USA Est ou USA Est2.
+
+* Sélectionnez votre ASN dans la case **PeerASN**.
+
+>[!IMPORTANT] 
+>Vous pouvez uniquement choisir un ASN dont le paramètre ValidationState est « approuvé » avant de soumettre une demande de Peering. Si vous venez d’envoyer votre demande PeerAsn, patientez environ 12 heures pour que l’association ASN soit « approuvée ». Si l’ASN que vous sélectionnez est en attente de validation, un message d’erreur s’affiche. Si vous ne voyez pas l’ASN que vous devez choisir, vérifiez que vous avez sélectionné le bon abonnement. Si c’est le cas, vérifiez si vous avez déjà créé PeerAsn à l’aide de **[l’association du numéro ASN de l’homologue à un abonnement Azure](https://go.microsoft.com/fwlink/?linkid=2129592)** .
+
+* Sélectionnez **Suivant : Configuration** pour continuer.
 
 #### <a name="configure-connections-and-submit"></a>Configurer les connexions et les soumettre
 [!INCLUDE [exchange-peering-configuration](./includes/exchange-portal-configuration.md)]

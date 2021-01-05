@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/21/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: b214932f43ce20480ee37a7b4edf942f080b38e8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce39e23208398f6060103345a6c6cb3541834abc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67176956"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90606687"
 ---
 Quand vous installez un certificat client, vous avez besoin du mot de passe créé lors de l’exportation du certificat client.
 
@@ -23,4 +23,4 @@ Quand vous installez un certificat client, vous avez besoin du mot de passe cré
    ![Ajout de certificats](./media/vpn-gateway-certificates-install-mac-client-cert-include/addcert.png)
 3. Entrez le mot de passe que vous avez créé lors de l’exportation du certificat client. Le mot de passe protège la clé privée du certificat. Cliquez sur **OK** pour terminer l’installation.
 
-   ![Mot de passe](./media/vpn-gateway-certificates-install-mac-client-cert-include/password.png)
+   ![La capture d’écran montre une boîte de dialogue qui vous invite à entrer un mot de passe.](./media/vpn-gateway-certificates-install-mac-client-cert-include/password.png)

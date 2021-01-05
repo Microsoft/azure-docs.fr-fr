@@ -1,6 +1,6 @@
 ---
 title: Fonctionnalités de repérage dans Azure Sentinel | Microsoft Docs
-description: Cet article décrit comment utiliser les fonctionnalités de repérage Azure Sentinel.
+description: Utilisez les requêtes de chasse intégrées à Azure Sentinel pour vous aider à poser les bonnes questions afin de détecter les problèmes dans vos données.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -16,12 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/10/2019
 ms.author: yelevin
-ms.openlocfilehash: 52af688917aa531d125f83844df29a988ed7cb7e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ca483d993290e4d66ba257d4cb5de7fc3c952405
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81686631"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660829"
 ---
 # <a name="hunt-for-threats-with-azure-sentinel"></a>Repérer les menaces avec Azure Sentinel
 
@@ -66,7 +66,7 @@ La fonctionnalité de repérage d’Azure Sentinel vous offre les avantages suiv
 
 ## <a name="query-language"></a>Langage de requête 
 
-La fonctionnalité de repérage d’Azure Sentinel repose sur le langage de requête Kusto. Pour plus d’informations sur le langage de requête et sur les opérateurs pris en charge, consultez l’article [Référence sur le langage de requête](/azure/azure-monitor/log-query/get-started-queries).
+La fonctionnalité de repérage d’Azure Sentinel repose sur le langage de requête Kusto. Pour plus d’informations sur le langage de requête et sur les opérateurs pris en charge, consultez l’article [Référence sur le langage de requête](../azure-monitor/log-query/get-started-queries.md).
 
 ## <a name="public-hunting-query-github-repository"></a>Référentiel public GitHub de requêtes de repérage
 

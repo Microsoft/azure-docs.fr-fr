@@ -1,24 +1,27 @@
 ---
 title: Voir et gérer les clients et les ressources déléguées
-description: En tant que fournisseur de services utilisant la gestion des ressources déléguées Azure, vous pouvez afficher l’ensemble des ressources et abonnements délégués de vos clients en accédant à Mes clients sur le portail Azure.
-ms.date: 01/22/2020
-ms.topic: conceptual
-ms.openlocfilehash: 0d4b3187066754e8a549f029623762df539b30b1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+description: En tant que fournisseur de services ou entreprise utilisant Azure Lighthouse, vous pouvez afficher l'ensemble de vos ressources et abonnements délégués en accédant à Mes clients sur le portail Azure.
+ms.date: 08/12/2020
+ms.topic: how-to
+ms.openlocfilehash: 165110556282e90bbacf4ce3b3c59e34b203a528
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76543424"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88167196"
 ---
 # <a name="view-and-manage-customers-and-delegated-resources"></a>Voir et gérer les clients et les ressources déléguées
 
-Les fournisseurs de services qui utilisent la [gestion des ressources déléguées Azure](../concepts/azure-delegated-resource-management.md) peuvent utiliser la page **Mes clients** du [portail Azure](https://portal.azure.com) pour afficher les ressources et abonnements délégués du client. Si nous faisons référence ici aux fournisseurs de services et aux clients, des entreprises gérant plusieurs locataires peuvent suivre le même processus pour consolider leur expérience de gestion.
+Les fournisseurs de services qui utilisent [Azure Lighthouse](../overview.md) peuvent consulter la page **Mes clients** du [Portail Azure](https://portal.azure.com) pour connaître les ressources et abonnements délégués des clients. 
+
+> [!TIP]
+> Si nous faisons référence ici aux fournisseurs de services et aux clients, des [entreprises gérant plusieurs locataires](../concepts/enterprise.md) peuvent suivre le même processus pour consolider leur expérience de gestion.
 
 Pour accéder à la page **Mes clients** du portail Azure, sélectionnez **Tous les services**, puis recherchez et sélectionnez **Mes clients**. Vous pouvez également la trouver en entrant « Mes clients » dans la zone de recherche dans la partie supérieure du portail Azure.
 
-N’oubliez pas que la section **Clients** supérieure de la page **Mes clients** affiche des informations uniquement sur les clients qui ont délégué des abonnements ou des groupes de ressources. Si vous travaillez avec d’autres clients, par exemple, via le programme [Fournisseur de solutions cloud](https://docs.microsoft.com/partner-center/csp-overview), vous ne voyez pas d’informations sur ces clients dans la section **Clients**, sauf si vous avez intégré leurs ressources pour la gestion des ressources déléguées Azure.
+N’oubliez pas que la section **Clients** supérieure de la page **Mes clients** affiche des informations uniquement sur les clients qui ont délégué des abonnements ou des groupes de ressources. Si vous travaillez avec d’autres clients (par exemple, dans le cadre du programme [Fournisseur de solutions cloud](/partner-center/csp-overview)), vous ne voyez pas d’informations à leur sujet dans la section **Clients**, sauf si vous avez [intégré leurs ressources à Azure Lighthouse](onboard-customer.md).
 
-Plus bas dans la page, une section distincte appelée **Fournisseur de solutions cloud (préversion)** , affiche des informations de facturation et des ressources pour vos clients CSP qui ont [signé le contrat client Microsoft (MCA)](https://docs.microsoft.com/partner-center/confirm-customer-agreement) et sont [sous le plan Azure](https://docs.microsoft.com/partner-center/azure-plan-get-started). Pour plus d’informations, voir [Bien démarrer avec votre compte de facturation dans le cadre d’un Contrat Partenaire Microsoft](../../billing/mpa-overview.md). Notez que de tels clients CSP apparaissent dans cette section, que vous les ayez ou non également intégrés pour la gestion des ressources déléguées Azure. De même, il n’est pas nécessaire qu’un client CSP apparaisse dans la section **Fournisseur de solutions cloud (préversion)** de **Mes clients** pour pouvoir les intégrer à la gestion des ressources déléguée Azure.
+Plus bas dans la page, une section distincte appelée **Fournisseur de solutions cloud (préversion)** , affiche des informations de facturation et des ressources pour vos clients CSP qui ont [signé le contrat client Microsoft (MCA)](/partner-center/confirm-customer-agreement) et sont [sous le plan Azure](/partner-center/azure-plan-get-started). Pour plus d’informations, voir [Bien démarrer avec votre compte de facturation dans le cadre d’un Contrat Partenaire Microsoft](../../cost-management-billing/understand/mpa-overview.md). Notez que de tels clients CSP apparaissent dans cette section, que vous les ayez ou non également intégrés à Azure Lighthouse. De même, il n’est pas nécessaire qu’un client CSP apparaisse dans la section **Fournisseur de solutions cloud (préversion)** de **Mes clients** pour pouvoir les intégrer à Azure Lighthouse.
 
 > [!NOTE]
 > Vos clients peuvent afficher des informations sur les fournisseurs de services en accédant à **Fournisseurs de services** sur le portail Azure. Pour plus d’informations, consultez [Voir et gérer les fournisseurs de services](view-manage-service-providers.md).
@@ -42,7 +45,7 @@ Vous pouvez afficher les informations suivantes de cette page :
 
 ## <a name="view-and-manage-delegations"></a>Afficher et gérer les délégations
 
-Les délégations affichent l’abonnement ou le groupe de ressources délégués, ainsi que les utilisateurs et autorisations qui y ont accès. Pour afficher ces informations, sélectionnez **Délégations** sur le côté gauche de la page **Mes clients**.
+Les délégations affichent l'abonnement ou le groupe de ressources délégué, ainsi que les utilisateurs et autorisations qui y ont accès. Pour afficher ces informations, sélectionnez **Délégations** sur le côté gauche de la page **Mes clients**.
 
 Les filtres en haut de la page vous permettent de trier et de regrouper vos informations d’affectation d’accès ou de filtrer sur des clients, offres ou mots clés spécifiques.
 
@@ -52,8 +55,7 @@ Les utilisateurs et les autorisations associés à chaque délégation apparaiss
 
 ### <a name="remove-delegations"></a>Supprimer des délégations
 
-Si vous avez inclus des utilisateurs avec le [rôle Supprimer l’attribution de l’inscription des services managés](../../role-based-access-control/built-in-roles.md#managed-services-registration-assignment-delete-role) lors de l’intégration d’un client pour la gestion des ressources déléguées Azure, ces utilisateurs peuvent supprimer une délégation en sélectionnant l’icône de la corbeille figurant dans la ligne de cette délégation. Dans ce cas, aucun utilisateur du locataire du fournisseur de services ne pourra accéder aux ressources précédemment déléguées.
-
+Si vous avez inclus des utilisateurs possédant le [rôle Supprimer l’attribution de l’inscription aux services gérés](../../role-based-access-control/built-in-roles.md#managed-services-registration-assignment-delete-role) lors de l’intégration d’un client à Azure Lighthouse, ils peuvent supprimer une délégation en sélectionnant l’icône de la corbeille figurant sur la ligne correspondante. Dans ce cas, aucun utilisateur du locataire du fournisseur de services ne pourra accéder aux ressources précédemment déléguées.
 
 ## <a name="work-in-the-context-of-a-delegated-subscription"></a>Travailler dans le contexte d’un abonnement délégué
 

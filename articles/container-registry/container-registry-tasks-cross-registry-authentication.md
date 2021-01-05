@@ -2,13 +2,13 @@
 title: Authentification multiregistre à partir d’une tâche ACR
 description: Configurez une tâche Azure Container Registry (Tâche ACR) pour accéder à un autre registre de conteneurs Azure privé avec une identité managée pour les ressources Azure.
 ms.topic: article
-ms.date: 01/14/2020
-ms.openlocfilehash: 47b2a50784cf56b089fea0981e5a06d581b8ba3a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/06/2020
+ms.openlocfilehash: 9a460102eafa5c1eda2f37330887d985387d5df5
+ms.sourcegitcommit: daab0491bbc05c43035a3693a96a451845ff193b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76842489"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93026256"
 ---
 # <a name="cross-registry-authentication-in-an-acr-task-using-an-azure-managed-identity"></a>Authentification multiregistre dans une tâche ACR à l’aide d’une identité managée par Azure 
 
@@ -39,15 +39,12 @@ Si vous n’avez pas encore les registres de conteneurs Azure requis, consultez 
 
 ## <a name="prepare-base-registry"></a>Préparer le registre de base
 
-Tout d’abord, créez un répertoire de travail, puis un fichier nommé Dockerfile avec le contenu suivant. Cet exemple simple crée une image de base Node.js à partir d’une image publique dans Docker Hub.
-    
-```bash
-echo FROM node:9-alpine > Dockerfile
-```
-Dans le répertoire actif, exécutez la commande [az acr build][az-acr-build] pour générer et transmettre l’image de base vers le registre de base. Dans la pratique, une autre équipe ou un autre processus de l’organisation peut conserver le registre de base.
-    
+À des fins de démonstration, dans le cadre d’une opération unique, exécutez [az acr import][az-acr-import] pour importer une image Node.js publique de Docker Hub vers votre registre de base. Dans la pratique, une autre équipe ou un autre processus de l’organisation peut conserver des images dans le registre de base.
+
 ```azurecli
-az acr build --image baseimages/node:9-alpine --registry mybaseregistry --file Dockerfile .
+az acr import --name mybaseregistry \
+  --source docker.io/library/node:9-alpine \
+  --image baseimages/node:9-alpine 
 ```
 
 ## <a name="define-task-steps-in-yaml-file"></a>Définir des étapes de tâche dans le fichier YAML
@@ -85,6 +82,27 @@ az acr task create \
 
 [!INCLUDE [container-registry-tasks-user-id-properties](../../includes/container-registry-tasks-user-id-properties.md)]
 
+### <a name="give-identity-pull-permissions-to-the-base-registry"></a>Accorder des autorisations d’extraction d’identité au registre de base
+
+Dans cette section, vous allez accorder à l’identité gérée les autorisations d’extraction à partirdu registre de base, *mybaseregistry*.
+
+Utilisez la commande [az acr show][az-acr-show] pour obtenir l’ID de ressource du registre de base et le stocker dans une variable :
+
+```azurecli
+baseregID=$(az acr show --name mybaseregistry --query id --output tsv)
+```
+
+Utilisez la commande [az role assignment create][az-role-assignment-create] pour affecter à l’identité le rôle `acrpull` à chaque registre de base. Ce rôle dispose uniquement des autorisations pour extraire des images du registre.
+
+```azurecli
+az role assignment create \
+  --assignee $principalID \
+  --scope $baseregID \
+  --role acrpull
+```
+
+Procédez à [Ajouter des informations d’identification de registre cible à la tâche](#add-target-registry-credentials-to-task).
+
 ## <a name="option-2-create-task-with-system-assigned-identity"></a>Option n°2 : Créer une tâche avec une identité affectée par le système
 
 Les étapes de cette section créent une tâche et activent une identité affectée par le système. Si vous souhaitez activer une identité affectée par l’utilisateur à la place, consultez l’[Option 1 : Créer une tâche avec une identité affectée par l’utilisateur](#option-1-create-task-with-user-assigned-identity). 
@@ -103,7 +121,7 @@ az acr task create \
 ```
 [!INCLUDE [container-registry-tasks-system-id-properties](../../includes/container-registry-tasks-system-id-properties.md)]
 
-## <a name="give-identity-pull-permissions-to-the-base-registry"></a>Accorder des autorisations d’extraction d’identité au registre de base
+### <a name="give-identity-pull-permissions-to-the-base-registry"></a>Accorder des autorisations d’extraction d’identité au registre de base
 
 Dans cette section, vous allez accorder à l’identité gérée les autorisations d’extraction à partirdu registre de base, *mybaseregistry*.
 
@@ -201,7 +219,7 @@ The push refers to repository [myregistry.azurecr.io/hello-world]
 Run ID: cf10 was successful after 32s
 ```
 
-Exécutez la commande [az acr repository show-tags][az-acr-repository-show-tags] pour vérifier que l’image générée a été correctement transmise vers *myregistry* :
+Exécutez la commande [az acr repository show-tags][az-acr-repository-show-tags] pour vérifier que l’image générée a été correctement transmise vers *myregistry*  :
 
 ```azurecli
 az acr repository show-tags --name myregistry --repository hello-world --output tsv

@@ -4,12 +4,12 @@ ms.service: databox
 ms.topic: include
 ms.date: 11/20/2018
 ms.author: alkohli
-ms.openlocfilehash: cbf6d01925e1924bc5f3c7f1e99840d479fef296
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bb1390a32abfe9ccf31002fc569936d39e4e5428
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67177729"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94553137"
 ---
 Configurez le logiciel partenaire pour vous connecter au client. En règle générale, pour vous connecter au logiciel partenaire, vous avez besoin des informations suivantes (pouvant varier) que vous avez recueillies dans la page **Connexion et copie** de l’interface utilisateur web locale à l’étape précédente :
 
@@ -23,8 +23,8 @@ Si vous utilisez l’Explorateur Stockage pour la première fois, vous devez eff
 
 1. Dans la barre de commandes du haut, accédez à **Modifier > Cibler Azure Stack**.
 
-    ![Tableau de bord Data Box](media/data-box-configure-partner-software/data-box-connect-via-rest-6.png)
+    ![La capture d’écran montre l’option Cibler les API Azure Stack sélectionnée dans le menu Edition.](media/data-box-configure-partner-software/data-box-connect-via-rest-6.png)
 
 2. Redémarrez l’Explorateur Stockage pour la prise en compte des modifications.
 
-    ![Tableau de bord Data Box](media/data-box-configure-partner-software/data-box-connect-via-rest-7.png)
+    ![La capture d’écran montre le bouton Redémarrer maintenant.](media/data-box-configure-partner-software/data-box-connect-via-rest-7.png)

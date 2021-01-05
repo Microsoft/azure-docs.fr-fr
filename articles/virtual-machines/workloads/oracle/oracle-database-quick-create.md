@@ -1,25 +1,19 @@
 ---
 title: Créer une base de données Oracle dans une machine virtuelle Azure | Microsoft Docs
 description: Configurez et exécutez rapidement une base de données Oracle Database 12c dans votre environnement Azure.
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
-ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
-ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: 77a374a83c178639052e8db6fc85c31e366ac0e6
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.subservice: workloads
+ms.topic: quickstart
+ms.date: 10/05/2020
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: 6468acb598cee26c46b62d64c748f0e393f27271
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683639"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967956"
 ---
 # <a name="create-an-oracle-database-in-an-azure-vm"></a>Créer une base de données Oracle dans une machine virtuelle Azure
 
@@ -82,10 +76,10 @@ ssh azureuser@<publicIpAddress>
 
 Le logiciel Oracle est déjà installé sur l’image Place de marché. Créer une base de données comme suit. 
 
-1.  Basculez vers le super-utilisateur *oracle*, puis initialisez l’écouteur pour vous connecter :
+1.  Basculez vers l’utilisateur *oracle*, puis démarrez l’écouteur Oracle :
 
     ```bash
-    $ sudo su - oracle
+    $ sudo -su oracle
     $ lsnrctl start
     ```
 
@@ -116,8 +110,13 @@ Le logiciel Oracle est déjà installé sur l’image Place de marché. Créer u
     The listener supports no services
     The command completed successfully
     ```
+2. Créer un répertoire de données pour les fichiers de données Oracle
 
-2.  Créez la base de données :
+    ```bash
+        mkdir /u01/app/oracle/oradata
+    ```
+
+3.  Créez la base de données :
 
     ```bash
     dbca -silent \
@@ -136,28 +135,58 @@ Le logiciel Oracle est déjà installé sur l’image Place de marché. Créer u
            -databaseType MULTIPURPOSE \
            -automaticMemoryManagement false \
            -storageType FS \
+           -datafileDestination "/u01/app/oracle/oradata/" \
            -ignorePreReqs
     ```
 
     La création de la base de données ne nécessite que quelques minutes.
 
-3. Fixer les variables oracle
+    La sortie ressemble à ce qui suit :
 
-Avant de vous connecter, vous devez fixer deux variables d’environnement : *ORACLE_HOME* et *ORACLE_SID*.
+    ```output
+        Copying database files
+        1% complete
+        2% complete
+        8% complete
+        13% complete
+        19% complete
+        27% complete
+        Creating and starting Oracle instance
+        29% complete
+        32% complete
+        33% complete
+        34% complete
+        38% complete
+        42% complete
+        43% complete
+        45% complete
+        Completing Database Creation
+        48% complete
+        51% complete
+        53% complete
+        62% complete
+        70% complete
+        72% complete
+        Creating Pluggable Databases
+        78% complete
+        100% complete
+        Look at the log file "/u01/app/oracle/cfgtoollogs/dbca/cdb1/cdb1.log" for further details.
+    ```
 
-```bash
-ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1; export ORACLE_HOME
-ORACLE_SID=cdb1; export ORACLE_SID
-```
+4. Fixer les variables oracle
 
-Vous pouvez également ajouter les variables ORACLE_HOME et ORACLE_SID au fichier .bashrc. Cela aura pour effet de sauvegarder les variables d’environnement lors des connexions futures. Confirmez le fait que les instructions suivantes ont été ajoutées au fichier `~/.bashrc` à l’aide de l’éditeur de votre choix.
+    Avant de vous connecter, vous devez fixer deux variables d’environnement : *ORACLE_HOME* et *ORACLE_SID*.
 
-```bash
-# Add ORACLE_HOME. 
-export ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1 
-# Add ORACLE_SID. 
-export ORACLE_SID=cdb1 
-```
+    ```bash
+        ORACLE_SID=cdb1; export ORACLE_SID
+    ```
+
+    Vous pouvez également ajouter les variables ORACLE_HOME et ORACLE_SID au fichier .bashrc. Cela aura pour effet de sauvegarder les variables d’environnement lors des connexions futures. Confirmez le fait que les instructions suivantes ont été ajoutées au fichier `~/.bashrc` à l’aide de l’éditeur de votre choix.
+
+    ```bash
+    # Add ORACLE_SID. 
+    export ORACLE_SID=cdb1 
+    ```
 
 ## <a name="oracle-em-express-connectivity"></a>Connectivité à Oracle EM Express
 
@@ -325,6 +354,6 @@ az group delete --name myResourceGroup
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur les autres [solutions Oracle sur Azure](oracle-considerations.md). 
+En savoir plus sur les autres [solutions Oracle sur Azure](./oracle-overview.md). 
 
 Effectuez le didacticiel relatif à [l’installation et à la configuration d’Oracle Automated Storage Management](configure-oracle-asm.md).

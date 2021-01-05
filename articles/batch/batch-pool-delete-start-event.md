@@ -2,13 +2,13 @@
 title: Événement de début de suppression de pool Azure Batch
 description: Référence pour l’événement de début de suppression de pool Batch. Cet événement est émis quand une opération de suppression du pool a commencé.
 ms.topic: reference
-ms.date: 04/20/2017
-ms.openlocfilehash: d4fac833b6c77258e48b38838f6b7b133738a6e8
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.date: 12/28/2020
+ms.openlocfilehash: 86f6eb8e7b269cb45f692398e9e60390375ca073
+ms.sourcegitcommit: 7e97ae405c1c6c8ac63850e1b88cf9c9c82372da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83723933"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97803746"
 ---
 # <a name="pool-delete-start-event"></a>Événement de début de suppression de pool
 
@@ -18,7 +18,7 @@ ms.locfileid: "83723933"
 
 ```
 {
-    "id": "myPool1"
+   "id": "myPool1"
 }
 ```
 

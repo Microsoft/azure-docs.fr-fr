@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 07/05/2019
 ms.author: erhopf
-ms.openlocfilehash: d959f4948d6b848f3b399c1310add06991d72012
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 19d4cc388494e149b7f258a8e9f154041a3dd070
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74806318"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95021964"
 ---
 # <a name="speech-service-for-telephony-data"></a>Service Speech pour les données de téléphonie
 
@@ -60,7 +60,7 @@ Il n’est pas rare que 35 % de la durée d’un appel de support soit dépourv
 
 ### <a name="translation"></a>Traduction
 
-Certaines entreprises expérimentent la fourniture de transcriptions traduites à partir d’appels de support en langues étrangères afin que les responsables des prestations puissent comprendre l’expérience de leurs clients à l’échelle mondiale. Nos capacités de [traduction](translation.md) sont inégalées. Nous pouvons traduire des données audio dans un format audio ou dans un format texte pour de nombreuses langues locales.
+Certaines entreprises expérimentent la fourniture de transcriptions traduites à partir d’appels de support en langues étrangères afin que les responsables des prestations puissent comprendre l’expérience de leurs clients à l’échelle mondiale. Nos capacités de [traduction](./speech-translation.md) sont inégalées. Nous pouvons traduire des données audio dans un format audio ou dans un format texte pour de nombreuses langues locales.
 
 ### <a name="text-to-speech"></a>Synthèse vocale
 
@@ -94,10 +94,10 @@ Une solution classique utilise les services suivants :
 
 - Le service Speech sert à transcrire des données obtenues par reconnaissance vocale. Pour pouvoir utiliser l’API de transcription par lot, vous avez besoin d’un abonnement standard (S0) pour le service Speech. Les abonnements gratuits (F0) ne fonctionnent pas.
 - [Stockage Azure](https://azure.microsoft.com/services/storage/) est utilisé pour stocker les données de téléphonie et les transcriptions retournées par l’API de transcription par lot. Ce compte de stockage doit utiliser des notifications, en particulier quand de nouveaux fichiers sont ajoutés. Ces notifications permettent de déclencher le processus de transcription.
-- [Azure Functions](https://docs.microsoft.com/azure/azure-functions/) sert à créer l’URI des signatures d’accès partagé (SAP) pour chaque enregistrement et à déclencher la requête HTTP POST pour démarrer une transcription. En outre, Azure Functions permet de créer des requêtes pour récupérer et supprimer des transcriptions à l’aide de l’API de transcription par lot.
+- [Azure Functions](../../azure-functions/index.yml) sert à créer l’URI des signatures d’accès partagé (SAP) pour chaque enregistrement et à déclencher la requête HTTP POST pour démarrer une transcription. En outre, Azure Functions permet de créer des requêtes pour récupérer et supprimer des transcriptions à l’aide de l’API de transcription par lot.
 
 En interne, nous utilisons les technologies ci-dessus pour prendre en charge les appels des clients de Microsoft en mode de traitement par lot.
-![Architecture du traitement par lot](media/scenarios/call-center-batch-pipeline.png)
+:::image type="content" source="media/scenarios/call-center-batch-pipeline.png" alt-text="Technologies utilisées pour prendre en charge les appels des clients Microsoft en mode de traitement par lot.":::
 
 ## <a name="real-time-transcription-for-call-center-data"></a>Transcription en temps réel des données de centre d’appels
 
@@ -111,7 +111,7 @@ En interne, nous utilisons les technologies ci-dessus pour analyser en temps ré
 
 ## <a name="a-word-on-ivrs"></a>Un mot sur les RVI
 
-Vous pouvez facilement intégrer le service Speech à une solution à l’aide du [SDK Speech](speech-sdk.md) ou de l’[API REST](rest-apis.md). Toutefois, la transcription de centre d’appels peut nécessiter des technologies supplémentaires. En règle générale, une connexion entre un système RVI et Azure est requise. Même si nous n’offrons pas ces composants, voici la description de ce qu’implique une connexion à un système RVI.
+Vous pouvez facilement intégrer le service Speech à une solution à l’aide du [SDK Speech](speech-sdk.md) ou de l’[API REST](./overview.md#reference-docs). Toutefois, la transcription de centre d’appels peut nécessiter des technologies supplémentaires. En règle générale, une connexion entre un système RVI et Azure est requise. Même si nous n’offrons pas ces composants, voici la description de ce qu’implique une connexion à un système RVI.
 
 Plusieurs produits de service RVI ou de téléphonie (comme Genesys ou AudioCodes) offrent des fonctionnalités d’intégration qui peuvent être exploitées pour permettre au trafic audio entrant et sortant d’accéder à un service Azure. Fondamentalement, un service Azure personnalisé peut fournir une interface spécifique pour définir des sessions d’appel téléphonique (comme un démarrage d’appel ou une fin d’appel) et exposer une API WebSocket pour recevoir les données audio de flux entrant utilisées avec le service Speech. Les réponses sortantes, telles que la transcription de conversation ou les connexions avec le Bot Framework, peuvent être synthétisées avec le service de synthèse vocale de Microsoft et retournées au système RVI à des fins de lecture.
 
@@ -123,10 +123,10 @@ Un autre scénario est l’intégration directe avec le protocole SIP (Session I
 
 | Service Speech | Modèle | Description |
 | -------------- | ----- | ----------- |
-| Reconnaissance vocale | [Modèle acoustique](how-to-customize-acoustic-models.md) | Créez un modèle acoustique personnalisé pour des applications, outils ou appareils utilisés dans des environnements particuliers, tels qu’une voiture ou un atelier, avec des conditions d’enregistrement spécifique. Par exemple, vous pouvez adapter l’enregistrement à des accent régionaux, à des bruits de fond spécifiques ou à l’utilisation d’un microphone particulier. |
-|                | [Modèle de langage](how-to-customize-language-model.md) | Créez un modèle de langage personnalisé afin d’améliorer la transcription du vocabulaire ou de la grammaire spécifiques d’un secteur, par exemple, la terminologie médicale ou le jargon informatique. |
-|                | [Modèle de prononciation](how-to-customize-pronunciation.md) | Avec un modèle de prononciation personnalisé, vous pouvez définir la forme phonétique et écrite d’un mot. Cela peut être utile pour traiter les termes personnalisés que sont notamment les noms et les acronymes. Pour commencer, vous n’avez besoin que d’un fichier de prononciation, c’est-à-dire un simple fichier `.txt`. |
-| Synthèse vocale | [Police de la voix](how-to-customize-voice-font.md) | Les polices de voix personnalisées vous permettent de créer une voix unique reconnaissable entre toutes pour votre marque. Il suffit d’une petite quantité de données pour commencer. Plus vous fournirez de données, plus naturelle et humaine sonnera votre police de voix. |
+| Reconnaissance vocale | [Modèle acoustique](./how-to-custom-speech-train-model.md) | Créez un modèle acoustique personnalisé pour des applications, outils ou appareils utilisés dans des environnements particuliers, tels qu’une voiture ou un atelier, avec des conditions d’enregistrement spécifique. Par exemple, vous pouvez adapter l’enregistrement à des accent régionaux, à des bruits de fond spécifiques ou à l’utilisation d’un microphone particulier. |
+|                | [Modèle de langage](./how-to-custom-speech-train-model.md) | Créez un modèle de langage personnalisé afin d’améliorer la transcription du vocabulaire ou de la grammaire spécifiques d’un secteur, par exemple, la terminologie médicale ou le jargon informatique. |
+|                | [Modèle de prononciation](./how-to-custom-speech-train-model.md) | Avec un modèle de prononciation personnalisé, vous pouvez définir la forme phonétique et écrite d’un mot. Cela peut être utile pour traiter les termes personnalisés que sont notamment les noms et les acronymes. Pour commencer, vous n’avez besoin que d’un fichier de prononciation, c’est-à-dire un simple fichier `.txt`. |
+| Synthèse vocale | [Police de la voix](./how-to-custom-voice-create-voice.md) | Les polices de voix personnalisées vous permettent de créer une voix unique reconnaissable entre toutes pour votre marque. Il suffit d’une petite quantité de données pour commencer. Plus vous fournirez de données, plus naturelle et humaine sonnera votre police de voix. |
 
 ## <a name="sample-code"></a>Exemple de code
 
@@ -138,13 +138,13 @@ Un exemple de code est disponible sur GitHub pour chacune des fonctionnalités d
 
 ## <a name="reference-docs"></a>Documents de référence
 
-- [Kit de développement logiciel (SDK) de reconnaissance vocale](speech-sdk-reference.md)
+- [Kit de développement logiciel (SDK) de reconnaissance vocale](./speech-sdk.md)
 - [SDK Speech Devices](speech-devices-sdk.md)
 - [API REST : Reconnaissance vocale](rest-speech-to-text.md)
 - [API REST : Synthèse vocale](rest-text-to-speech.md)
-- [API REST : Transcription et personnalisation par lot](https://westus.cris.ai/swagger/ui/index)
+- [API REST : Transcription et personnalisation par lot](https://westus.dev.cognitive.microsoft.com/docs/services/speech-to-text-api-v3-0)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Obtenir gratuitement une clé d’abonnement au service Speech](get-started.md)
+> [Obtenir gratuitement une clé d’abonnement au service Speech](overview.md#try-the-speech-service-for-free)

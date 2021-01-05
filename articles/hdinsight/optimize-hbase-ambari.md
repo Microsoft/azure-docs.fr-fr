@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/04/2020
-ms.openlocfilehash: a7da6bc23d797e0e89b2338f446fc850b0fd0577
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: b262e07bd07320e4b10b12a2f2cf07b97e58c61e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82794013"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91821707"
 ---
 # <a name="optimize-apache-hbase-with-apache-ambari-in-azure-hdinsight"></a>Optimiser Apache HBase avec Apache Ambari dans Azure HDInsight
 
@@ -89,7 +89,7 @@ Plus la taille du fichier de région est importante, plus le nombre de fractionn
 
 ## <a name="define-memstore-size"></a>Définir la taille de Memstore
 
-La taille de Memstore est définie par les paramètres `hbase.regionserver.global.memstore.UpperLimit` et `hbase.regionserver.global.memstore.LowerLimit`. En définissant deux valeurs égales, vous réduisez les pauses pendant les écritures (ce qui augmente la fréquence des vidages) et améliore les performances d’écriture.
+La taille de Memstore est définie par les paramètres `hbase.regionserver.global.memstore.upperLimit` et `hbase.regionserver.global.memstore.lowerLimit`. En définissant deux valeurs égales, vous réduisez les pauses pendant les écritures (ce qui augmente la fréquence des vidages) et améliore les performances d’écriture.
 
 ## <a name="set-memstore-local-allocation-buffer"></a>Définir la mémoire tampon d’allocation locale de Memstore
 

@@ -2,14 +2,14 @@
 title: 'Gestion des erreurs dans Fonctions durables : Azure'
 description: Découvrez comment gérer des erreurs dans l’extension Fonctions durables pour Azure Functions.
 ms.topic: conceptual
-ms.date: 11/02/2019
+ms.date: 07/13/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 447b3dcf5040835f5a853beff68bde794ece51f5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6650322834d491d78470e2d8dbd24e2c6750ae39
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235277"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87081693"
 ---
 # <a name="handling-errors-in-durable-functions-azure-functions"></a>Gestion des erreurs dans Fonctions durables (Azure Functions)
 
@@ -97,6 +97,33 @@ module.exports = df.orchestrator(function*(context) {
     }
 });
 ```
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    transfer_details = context.get_input()
+
+    yield context.call_activity('DebitAccount', {
+         'account': transfer_details['sourceAccount'],
+         'amount' : transfer_details['amount']
+    })
+
+    try:
+        yield context.call_activity('CreditAccount', {
+                'account': transfer_details['destinationAccount'],
+                'amount': transfer_details['amount'],
+            })
+    except:
+        yield context.call_activity('CreditAccount', {
+            'account': transfer_details['sourceAccount'],
+            'amount': transfer_details['amount']
+        })
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 
 ---
 
@@ -143,6 +170,23 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    first_retry_interval_in_milliseconds = 5000
+    max_number_of_attempts = 3
+
+    retry_options = df.RetryOptions(first_retry_interval_in_milliseconds, max_number_of_attempts)
+
+    yield context.call_activity_with_retry('FlakyFunction', retry_options)
+
+main = df.Orchestrator.create(orchestrator_function)
+```
+
 ---
 
 L'appel de fonction de l'activité de l'exemple précédent utilise un paramètre pour configurer une stratégie de nouvelles tentatives automatiques. Il existe plusieurs options de personnalisation de la stratégie de nouvelle tentative automatique :
@@ -156,7 +200,7 @@ L'appel de fonction de l'activité de l'exemple précédent utilise un paramètr
 
 ## <a name="function-timeouts"></a>Délais d’expiration des fonctions
 
-Vous souhaiterez peut-être abandonner un appel de fonction au sein d’une fonction d’orchestrateur s’il prend trop de temps. Actuellement, la méthode adéquate pour cela consiste à créer un [minuteur durable](durable-functions-timers.md) à l’aide de `context.CreateTimer` (.NET) ou `context.df.createTimer` (JavaScript) conjointement avec `Task.WhenAny` (.NET) ou `context.df.Task.any` (JavaScript), comme dans l’exemple suivant :
+Vous souhaiterez peut-être abandonner un appel de fonction au sein d’une fonction d’orchestrateur s’il prend trop de temps. Actuellement, la méthode adéquate pour cela consiste à créer un [minuteur durable](durable-functions-timers.md) en utilisant `context.CreateTimer` (.NET), `context.df.createTimer` (JavaScript) ou `context.create_timer` (Python) conjointement avec `Task.WhenAny` (.NET), `context.df.Task.any` (JavaScript) ou `context.task_any` (Python) comme dans l’exemple suivant :
 
 # <a name="c"></a>[C#](#tab/csharp)
 
@@ -213,6 +257,28 @@ module.exports = df.orchestrator(function*(context) {
         return false;
     }
 });
+```
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+from datetime import datetime, timedelta
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    deadline = context.current_utc_datetime + timedelta(seconds = 30)
+    
+    activity_task = context.call_activity('FlakyFunction')
+    timeout_task = context.create_timer(deadline)
+
+    winner = yield context.task_any(activity_task, timeout_task)
+    if winner == activity_task:
+        timeout_task.cancel()
+        return True
+    else:
+        return False
+
+main = df.Orchestrator.create(orchestrator_function)
 ```
 
 ---

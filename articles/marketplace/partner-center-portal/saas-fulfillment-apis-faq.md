@@ -1,18 +1,18 @@
 ---
 title: Questions fréquentes (FAQ) sur l’API de traitement SaaS – Place de marché commerciale Microsoft
 description: Découvrez plusieurs conditions d’intégration de la Place de marché commerciale Microsoft permettant aux clients Azure de s’abonner à des offres SaaS.
-author: dsindona
-ms.author: dsindona
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 07/11/2019
-ms.openlocfilehash: 1a1ba6f393eba257fcbe2757b8b4bced00bef8fe
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+author: mingshen-ms
+ms.author: mingshen
+ms.openlocfilehash: 4c5d8b438764fa9aa3838b2225c63d412afc519b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792902"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88606808"
 ---
 # <a name="common-questions-about-saas-fulfillment-apis"></a>Questions courantes sur les API de traitement SaaS
 
@@ -46,7 +46,7 @@ Lorsque l'utilisateur Azure est redirigé vers la page d'accueil, un jeton est a
 
 ![Flux d’abonnement du client](media/saas-metering-service-integration-flow-a.png)
 
-Pour plus d’informations sur le contrat API pour la gestion des scénarios Transaction dans le cycle de vie d’une offre SaaS, consultez [API de traitement SaaS ](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-api-v2).
+Pour plus d’informations sur le contrat API pour la gestion des scénarios Transaction dans le cycle de vie d’une offre SaaS, consultez [API de traitement SaaS ](pc-saas-fulfillment-api-v2.md).
 
 ### <a name="how-do-you-know-the-saas-offer-to-which-the-user-subscribes-in-azure"></a>Comment identifier l'offre SaaS que l'utilisateur souscrit dans Azure ?
 
@@ -67,9 +67,9 @@ La séquence ci-dessous montre le flux quand un client Azure change de forfait d
 
 ![Flux de changement du forfait d’un client](media/saas-metering-service-integration-flow-b.png)
 
-La séquence ci-dessous montre le flux lorsqu'un client Azure change de forfait dans la vitrine de Microsoft
+La séquence ci-dessous montre le flux lorsqu’un client Azure change de forfait dans le magasin en ligne de Microsoft :
 
-![Flux de changement du forfait dans la vitrine du client](media/saas-metering-service-integration-flow-c.png)
+![Flux de changement de forfait dans le magasin en ligne client](media/saas-metering-service-integration-flow-c.png)
 
 ### <a name="how-can-the-azure-user-unsubscribe-from-the-plan-associated-with-azure-subscription"></a>Comment l’utilisateur Azure peut-il se désabonner du forfait associé à un abonnement Azure ?
 
@@ -79,9 +79,9 @@ La séquence ci-dessous montre le flux lorsqu'un client Azure se désabonne de l
 
 ![Le client se désabonne dans l'expérience SaaS](media/saas-metering-service-integration-flow-d.png)
 
-La séquence ci-dessous montre le flux lorsqu'un client Azure se désabonne dans la vitrine Microsoft :
+La séquence ci-dessous est la capture du flux quand un utilisateur Azure se désabonne via le magasin en ligne de Microsoft :
 
-![Le client se désabonne dans la vitrine de Microsoft](media/saas-metering-service-integration-flow-e.png)
+![Un client se désabonne via le magasin en ligne de Microsoft](media/saas-metering-service-integration-flow-e.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

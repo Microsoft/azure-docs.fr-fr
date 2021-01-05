@@ -8,18 +8,47 @@ ms.date: 11/11/2019
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 965c420fa29c4cf82517148c01e17d6d7dd6ea97
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b23324a7226d4b3de4908bd78a8f19c799e59f06
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74106513"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932181"
 ---
 # <a name="tutorial-an-end-to-end-solution-using-azure-machine-learning-and-iot-edge"></a>Tutoriel : Une solution de bout en bout à l’aide d’Azure Machine Learning et IoT Edge
 
 Souvent, les applications IoT souhaitent tirer parti du cloud intelligent et de la périphérie intelligente. Dans ce didacticiel, nous vous guidons durant l’apprentissage d’un modèle Machine Learning avec les données collectées à partir d’appareils IoT dans le cloud, suivi du déploiement de ce modèle sur IoT Edge. Pour finir, nous verrons comment assurer périodiquement la maintenance et l’affinement de ce modèle.
 
 L’objectif principal de ce didacticiel consiste à expliquer comment fonctionne le traitement des données IoT avec le Machine Learning, en particulier en périphérie. Même si nous abordons plusieurs aspects du flux de travail Machine Learning, ce didacticiel n’est pas une présentation exhaustive du Machine Learning. Par exemple, nous ne verrons pas comment créer un modèle hautement optimisé pour notre cas d’usage : nous nous contenterons de présenter le processus de création et l’utilisation d’un modèle viable pour le traitement des données IoT.
+
+Cette section du tutoriel traite des points suivants :
+
+> [!div class="checklist"]
+>
+> * Prérequis à remplir pour effectuer les étapes suivantes du tutoriel.
+> * Public cible du tutoriel.
+> * Cas d’usage simulé par le tutoriel.
+> * Processus global suivi par le tutoriel pour respecter le cas d’usage.
+
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+
+## <a name="prerequisites"></a>Prérequis
+
+Pour suivre ce didacticiel, vous devez avoir un abonnement Azure dans lequel vous disposez des droits pour créer des ressources. Plusieurs services utilisés dans ce didacticiel occasionnent des frais Azure. Si vous n’avez pas d’abonnement Azure, vous pourrez peut-être commencer par utiliser un [compte Azure gratuit](https://azure.microsoft.com/offers/ms-azr-0044p/).
+
+Vous devez également avoir un ordinateur sur lequel PowerShell est installé, et où vous pouvez exécuter des scripts pour configurer une machine virtuelle Azure pour qu’elle soit votre ordinateur de développement.
+
+Voici les outils que nous avons utilisés lors des procédures décrites dans ce document :
+
+* Un hub Azure IoT pour la capture des données
+
+* Azure Notebooks en tant que serveur frontal principal pour la préparation des données et l’expérimentation Machine Learning. L’exécution du code Python dans un bloc-notes sur un sous-ensemble des données d’échantillon est un excellent moyen d’obtenir une rotation rapide itérative et interactive pendant la préparation des données. Les blocs-notes Jupyter peuvent également servir à préparer des scripts à exécuter à l’échelle dans un serveur principal de calcul.
+
+* Azure Machine Learning comme serveur principal pour le Machine Learning à l’échelle et la génération d’image Machine Learning. Nous pilotons le serveur principal Azure Machine Learning à l’aide de scripts conçus et testés dans les blocs-notes Jupyter.
+
+* Azure IoT Edge pour l’application en dehors du cloud d’une image Machine Learning
+
+Évidemment, d’autres options sont envisageables. Par exemple, dans certains scénarios, vous pouvez utiliser IoT Central en tant qu’alternative pour capturer des données d’apprentissage initial à partir d’appareils IoT sans utiliser de code.
 
 ## <a name="target-audience-and-roles"></a>Public et rôles cibles
 
@@ -30,7 +59,7 @@ Vous pouvez également suivre ce didacticiel avec des collègues occupant diffé
 Dans tous les cas, dans un souci de lisibilité, chaque article de ce didacticiel indique le rôle prévu pour le lecteur. Ces rôles sont les suivants :
 
 * Développeur cloud (dont un développeur cloud travaillant selon la méthode DevOps)
-* Analyse de données
+* L’Analytique données
 
 ## <a name="use-case-predictive-maintenance"></a>Cas d’usage Maintenance prédictive
 
@@ -40,9 +69,9 @@ Les données utilisées dans ce didacticiel provient du [jeu de données de simu
 
 Voici ce qu’en dit le fichier Readme (Lisez-moi) :
 
-***Scénario expérimental***
+***Scénario expérimental** _
 
-*Ces jeux de données se composent de plusieurs séries chronologiques multidimensionnelles. Chaque jeu de données est divisé en sous-ensembles d’entraînement et de test. Chaque série chronologique provient d’un moteur différent : ainsi, les données peuvent être considérées comme provenant d’un parc de moteurs du même type. Chaque moteur a un niveau d’usure initial différent et des variations de fabrication, que l’utilisateur ne connaît pas. Cette usure et ces variations sont considérées comme normales. Elles ne sont donc pas considérées comme étant des conditions d’erreurs. Trois paramètres opérationnels ont un effet important sur les performances du moteur. Ces paramètres sont également inclus dans les données. Les données sont contaminées par le bruit du capteur.*
+_Ces jeux de données se composent de plusieurs séries chronologiques multidimensionnelles. Chaque jeu de données est divisé en sous-ensembles d’entraînement et de test. Chaque série chronologique provient d’un moteur différent : ainsi, les données peuvent être considérées comme provenant d’un parc de moteurs du même type. Chaque moteur a un niveau d’usure initial différent et des variations de fabrication, que l’utilisateur ne connaît pas. Cette usure et ces variations sont considérées comme normales. Elles ne sont donc pas considérées comme étant des conditions d’erreurs. Trois paramètres opérationnels ont un effet important sur les performances du moteur. Ces paramètres sont également inclus dans les données. Les données sont contaminées par le bruit du capteur.*
 
 *Le moteur fonctionne normalement au début de chaque série chronologique et développe une erreur à un moment donné. Dans le jeu d’apprentissage, la grandeur de l’erreur augmente jusqu’à la défaillance du système. Dans le jeu de test, la série chronologique se termine peu de temps avant la défaillance du système. L’objectif de cette comparaison est d’établir une prévision du nombre de cycles opérationnels restants avant que la défaillance survienne dans le jeu de test. Cela permettra de prévoir le nombre de cycles opérationnels après le dernier cycle pendant lesquels le moteur continuera de fonctionner. Un vecteur des valeurs réelles de la durée de vie restante est également fourni pour les données de test.*
 
@@ -52,7 +81,7 @@ Comme les données a été publiées pour un concours, plusieurs méthodes de d�
 
 [Dégradation d’un moteur à turboréacteur](https://github.com/hankroark/Turbofan-Engine-Degradation) de l’utilisateur de GitHub hankroark.
 
-## <a name="process"></a>Process
+## <a name="process"></a>Processus
 
 L’image ci-dessous représente une synthèse des étapes de ce didacticiel :
 
@@ -74,23 +103,9 @@ L’image ci-dessous représente une synthèse des étapes de ce didacticiel :
 
 1. **Mise à jour et affinage du modèle** : Après le déploiement du modèle, notre travail continue. En règle générale, nous voulons poursuivre la collecte des données et télécharger régulièrement ces données vers le cloud. Nous pouvons ensuite utiliser ces données pour reformer et affiner notre modèle, que nous pouvons ensuite redéployer sur IoT Edge.
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Pour suivre ce didacticiel, vous devez avoir un abonnement Azure dans lequel vous disposez des droits pour créer des ressources. Plusieurs services utilisés dans ce didacticiel occasionnent des frais Azure. Si vous n’avez pas d’abonnement Azure, vous pourrez peut-être commencer par utiliser un [compte Azure gratuit](https://azure.microsoft.com/offers/ms-azr-0044p/).
-
-Vous devez également avoir un ordinateur sur lequel PowerShell est installé, et où vous pouvez exécuter des scripts pour configurer une machine virtuelle Azure pour qu’elle soit votre ordinateur de développement.
-
-Voici les outils que nous avons utilisés lors des procédures décrites dans ce document :
-
-* Un hub Azure IoT pour la capture des données
-
-* Azure Notebooks en tant que serveur frontal principal pour la préparation des données et l’expérimentation Machine Learning. L’exécution du code Python dans un bloc-notes sur un sous-ensemble des données d’échantillon est un excellent moyen d’obtenir une rotation rapide itérative et interactive pendant la préparation des données. Les blocs-notes Jupyter peuvent également servir à préparer des scripts à exécuter à l’échelle dans un serveur principal de calcul.
-
-* Azure Machine Learning comme serveur principal pour le Machine Learning à l’échelle et la génération d’image Machine Learning. Nous pilotons le serveur principal Azure Machine Learning à l’aide de scripts conçus et testés dans les blocs-notes Jupyter.
-
-* Azure IoT Edge pour l’application en dehors du cloud d’une image Machine Learning
-
-Évidemment, d’autres options sont envisageables. Par exemple, dans certains scénarios, vous pouvez utiliser IoT Central en tant qu’alternative pour capturer des données d’apprentissage initial à partir d’appareils IoT sans utiliser de code.
+Ce tutoriel fait partie d’un ensemble où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -106,4 +121,4 @@ Ce didacticiel comprend les sections suivantes :
 Passez à l’article suivant pour configurer un ordinateur de développement et des ressources Azure.
 
 > [!div class="nextstepaction"]
-> [Configurer un environnement pour le Machine Learning sur Azure IoT Edge](tutorial-machine-learning-edge-02-prepare-environment.md)
+> [Configurer un environnement - Machine Learning sur Azure IoT Edge](tutorial-machine-learning-edge-02-prepare-environment.md)

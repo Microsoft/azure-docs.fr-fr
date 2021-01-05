@@ -2,38 +2,32 @@
 title: Créer un index de recherche dans le portail Azure
 titleSuffix: Azure Cognitive Search
 description: Dans ce guide de démarrage rapide du portail Azure, utilisez l’Assistant Importation de données pour créer, charger et interroger votre premier index de recherche dans Recherche cognitive Azure.
-author: tchristiani
 manager: nitinme
-ms.author: terrychr
+author: HeidiSteen
+ms.author: heidist
 ms.service: cognitive-search
 ms.topic: quickstart
-ms.date: 02/10/2020
-ms.openlocfilehash: 8324ca0184c508591fa4568175bad0f606f952a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/12/2020
+ms.openlocfilehash: 1e9d63c88cf0cd6f65db99b2bc878797770d53cd
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80369451"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97368628"
 ---
 # <a name="quickstart-create-an-azure-cognitive-search-index-in-the-azure-portal"></a>Démarrage rapide : Créer un index Recherche cognitive Azure dans le portail Azure
-> [!div class="op_single_selector"]
-> * [Portail](search-get-started-portal.md)
-> * [C#](search-get-started-dotnet.md)
-> * [Java](search-get-started-java.md)
-> * [Node.JS](search-get-started-nodejs.md)
-> * [PowerShell](search-get-started-powershell.md)
-> * [Postman](search-get-started-postman.md)
-> * [Python](search-get-started-python.md)
 
-Utilisez l’Assistant **Importation de données** du portail et les outils de l’**Explorateur de recherche** pour assimiler rapidement les concepts et écrire en quelques minutes des requêtes intéressantes qui ciblent un index.
+Créez votre premier index à l’aide de l’Assistant **Importation des données** et d’un exemple de source de données intégré, constitué de données d’hôtel fictives. L’Assistant vous guide lors de la création d’un index de recherche (hotels-sample-index) afin que vous puissiez écrire des requêtes intéressantes en quelques minutes. 
 
-Si les outils sont trop limités, vous pouvez suivre une [Présentation basée sur du code de la programmation pour la Recherche cognitive Azure dans .NET](search-howto-dotnet-sdk.md), ou utiliser [Postman pour effectuer des appels d’API REST](search-get-started-postman.md). 
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
+Bien que vous n’utilisiez pas les options de ce guide de démarrage rapide, l’Assistant comporte une page consacrée à l’enrichissement par IA, afin que vous puissiez extraire le texte et la structure des fichiers image et du texte non structuré. Pour obtenir une procédure pas à pas similaire qui propose l’enrichissement par IA, consultez [Démarrage rapide : Créer un ensemble de compétences cognitives](cognitive-search-quickstart-blob.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
-[Créez un service Recherche cognitive Azure](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide. 
+Avant de commencer la lecture cet article, vous devez disposer des éléments suivants :
+
++ Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/).
+
++ Service Recherche cognitive Azure. [Créez un service](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide. 
 
 ### <a name="check-for-space"></a>Vérifier l’espace disponible
 
@@ -41,7 +35,7 @@ De nombreux clients commencent avec le service gratuit. Cette version est limit�
 
 Les sections figurant sur le tableau de bord des services indiquent le nombre d’index, d’indexeurs et de sources de données dont vous disposez déjà. 
 
-![Listes des index, indexeurs et sources de données](media/search-get-started-portal/tiles-indexers-datasources.png)
+:::image type="content" source="media/search-get-started-portal/tiles-indexers-datasources.png" alt-text="Listes des index, indexeurs et sources de données":::
 
 ## <a name="create-an-index-and-load-data"></a><a name="create-index"></a> Créer un index et charger des données
 
@@ -51,15 +45,17 @@ Pour les besoins de ce tutoriel, nous utilisons un exemple de jeu de données in
 
 ### <a name="step-1---start-the-import-data-wizard-and-create-a-data-source"></a>Étape 1 : démarrer l’Assistant Importation de données et créer une source de données
 
-1. Dans le tableau de bord du service Recherche cognitive Azure, cliquez dans la barre de commandes sur **Importer des données** pour créer et remplir un index de recherche.
+1. Connectez-vous au [portail Azure](https://portal.azure.com/) avec votre compte Azure.
 
-   ![Commande Importer des données](media/search-get-started-portal/import-data-cmd.png)
+1. [Recherchez votre service de recherche](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/). Ensuite, dans la page Vue d’ensemble, cliquez sur **Importer des données** dans la barre de commandes pour créer et remplir un index de recherche.
 
-2. Dans l’Assistant, cliquez sur **Se connecter aux données** > **Exemples** > **hotels-sample**. Cette source de données est intégrée. Si vous avez créé votre propre source de données, vous devez spécifier un nom, un type et des informations de connexion. Une fois créée, elle devient une « source de données existante » qui peut être réutilisée dans d’autres opérations d’importation.
+   :::image type="content" source="media/search-get-started-portal/import-data-cmd.png" alt-text="Commande Importer des données":::
 
-   ![Sélection d’un exemple de jeu de données](media/search-get-started-portal/import-datasource-sample.png)
+1. Dans l’Assistant, cliquez sur **Se connecter aux données** > **Exemples** > **hotels-sample**. Cette source de données est intégrée. Si vous avez créé votre propre source de données, vous devez spécifier un nom, un type et des informations de connexion. Une fois créée, elle devient une « source de données existante » qui peut être réutilisée dans d’autres opérations d’importation.
 
-3. Passez à la page suivante.
+   :::image type="content" source="media/search-get-started-portal/import-datasource-sample.png" alt-text="Sélection d’un exemple de jeu de données":::
+
+1. Passez à la page suivante.
 
 ### <a name="step-2---skip-the-enrich-content-page"></a>Étape 2 : Ignorer la page « Contenu enrichi »
 
@@ -67,7 +63,7 @@ L’Assistant prend en charge la création d’un [pipeline d’enrichissement p
 
 Nous allons pour le moment ignorer cette étape et passer directement à l’étape de **personnalisation de l’index cible**.
 
-   ![Ignorer l’étape des compétences cognitives](media/search-get-started-portal/skip-cog-skill-step.png)
+   :::image type="content" source="media/search-get-started-portal/skip-cog-skill-step.png" alt-text="Ignorer l’étape des compétences cognitives":::
 
 > [!TIP]
 > Vous pouvez consulter un exemple d'indexation IA dans un [guide de démarrage rapide](cognitive-search-quickstart-blob.md) ou [didacticiel](cognitive-search-tutorial-blob.md).
@@ -87,11 +83,11 @@ Votre sélection n’a aucune influence sur les besoins en stockage. Par exemple
 
 Par défaut, l’Assistant analyse la source de données pour y rechercher des identificateurs uniques comme base pour le champ de clé. Les *chaînes* sont dotées des attributs **Récupérable** et **Possibilité de recherche**. Les *entiers* sont dotés des attributs **Récupérable**, **Filtrable**, **Triable** et **À choix multiples**.
 
-1. Acceptez les valeurs par défaut. 
+1. Acceptez les valeurs par défaut.
 
    Si vous réexécutez l’Assistant à l’aide d’une source de données « hotels » existante, l’index ne sera pas configuré avec les attributs par défaut. Vous devrez sélectionner manuellement les attributs lors des prochaines importations. 
 
-   ![Index des hôtels généré](media/search-get-started-portal/hotelsindex.png)
+   :::image type="content" source="media/search-get-started-portal/hotelsindex.png" alt-text="Index des hôtels généré":::
 
 2. Passez à la page suivante.
 
@@ -104,7 +100,7 @@ Cet objet définit un processus exécutable. Vous pouvez le configurer en planif
 
 Cliquez sur **Envoyer** pour créer et exécuter simultanément l’indexeur.
 
-  ![Indexeur des hôtels](media/search-get-started-portal/hotels-indexer.png)
+  :::image type="content" source="media/search-get-started-portal/hotels-indexer.png" alt-text="Indexeur des hôtels":::
 
 ## <a name="monitor-progress"></a>Surveiller la progression
 
@@ -112,7 +108,7 @@ L’Assistant doit vous rediriger vers la liste des indexeurs où vous pourrez e
 
 Il faut parfois plusieurs minutes au portail pour actualiser la page, mais l’indexeur que vous venez de créer devrait apparaître dans la liste, avec un état indiquant que l’opération est en cours ou qu’elle a réussi, ainsi que le nombre de documents indexés.
 
-   ![Message de progression de l’indexeur](media/search-get-started-portal/indexers-inprogress.png)
+   :::image type="content" source="media/search-get-started-portal/indexers-inprogress.png" alt-text="Message de progression de l’indexeur":::
 
 ## <a name="view-the-index"></a>Afficher l’index
 
@@ -120,13 +116,13 @@ La page principale du service fournit des liens vers les ressources créées dan
 
 Attendez que la page du portail s’actualise. Après quelques minutes, vous devriez voir l’index avec un nombre de documents et une taille de stockage.
 
-   ![Liste des index dans le tableau de bord du service](media/search-get-started-portal/indexes-list.png)
+   :::image type="content" source="media/search-get-started-portal/indexes-list.png" alt-text="Liste des index dans le tableau de bord du service":::
 
 Dans cette liste, vous pouvez cliquer sur l’index *hotels-sample* que vous venez de créer pour voir le schéma de l’index. Ajoutez éventuellement de nouveaux champs. 
 
 L’onglet **Champs** montre le schéma d’index. Faites défiler la liste vers le bas pour entrer un nouveau champ. Dans la plupart des cas, vous ne pouvez pas modifier les champs existants. Les champs existants ont une représentation physique dans la Recherche cognitive Azure et ne sont donc pas modifiables, pas même dans du code. Pour modifier considérablement un champ existant, créez un nouvel index en supprimant l’original.
 
-   ![définition de l’index d’exemples](media/search-get-started-portal/sample-index-def.png)
+   :::image type="content" source="media/search-get-started-portal/sample-index-def.png" alt-text="définition de l’index d’exemples":::
 
 D’autres constructions, telles que des profils de score et des options CORS, peuvent être ajoutées à tout moment.
 
@@ -136,7 +132,7 @@ Pour comprendre clairement ce que vous pouvez et ne pouvez pas modifier lors de 
 
 Vous devriez maintenant avoir un index de recherche prêt à lancer des requêtes à l’aide de la page de requête [**Explorateur de recherche**](search-explorer.md) intégrée. Il fournit une zone de recherche afin que vous puissiez tester les chaînes de requête arbitraires.
 
-L’**Explorateur de recherche** est uniquement équipé pour gérer des [demandes d’API REST](https://docs.microsoft.com/rest/api/searchservice/search-documents), mais il accepte à la fois une syntaxe de [requête simple](https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search) et celle de l’[analyseur complet de requêtes Lucene](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search), ainsi que tous les paramètres de recherche disponibles dans des opérations d’[API REST de recherche dans des documents](https://docs.microsoft.com/rest/api/searchservice/search-documents#bkmk_examples).
+L’**Explorateur de recherche** est uniquement équipé pour gérer des [demandes d’API REST](/rest/api/searchservice/search-documents), mais il accepte à la fois une syntaxe de [requête simple](/rest/api/searchservice/simple-query-syntax-in-azure-search) et celle de l’[analyseur complet de requêtes Lucene](/rest/api/searchservice/lucene-query-syntax-in-azure-search), ainsi que tous les paramètres de recherche disponibles dans des opérations d’[API REST de recherche dans des documents](/rest/api/searchservice/search-documents#bkmk_examples).
 
 > [!TIP]
 > Les étapes suivantes font l’objet d’une démonstration à 6:08 dans la [vidéo de présentation de la Recherche cognitive Azure](https://channel9.msdn.com/Events/Connect/2016/138).
@@ -144,15 +140,15 @@ L’**Explorateur de recherche** est uniquement équipé pour gérer des [demand
 
 1. Cliquez sur **Explorateur de recherche** dans la barre de commandes.
 
-   ![Commande Explorateur de recherche](media/search-get-started-portal/search-explorer-cmd.png)
+   :::image type="content" source="media/search-get-started-portal/search-explorer-cmd.png" alt-text="Commande Explorateur de recherche":::
 
-2. Dans la liste déroulante **Index**, choisissez *hotels-sample-index*. Cliquez sur la liste déroulante **Version d’API** pour voir les API REST disponibles. Pour les requêtes ci-après, utilisez la version mise à la disposition générale (2019-05-06).
+2. Dans la liste déroulante **Index**, choisissez *hotels-sample-index*. Cliquez sur la liste déroulante **Version d’API** pour voir les API REST disponibles. Pour les requêtes ci-après, utilisez la version mise à la disposition générale (2020-06-30).
 
-   ![Commandes d’index et d’API](media/search-get-started-portal/search-explorer-changeindex.png)
+   :::image type="content" source="media/search-get-started-portal/search-explorer-changeindex.png" alt-text="Commandes d’index et d’API":::
 
 3. Dans la barre de recherche, collez les chaînes de requête ci-dessous, puis cliquez sur **Rechercher**.
 
-   ![Chaîne de requête et bouton de recherche](media/search-get-started-portal/search-explorer-query-string-example.png)
+   :::image type="content" source="media/search-get-started-portal/search-explorer-query-string-example.png" alt-text="Chaîne de requête et bouton de recherche":::
 
 ## <a name="example-queries"></a>Exemples de requêtes
 
@@ -184,7 +180,7 @@ Les filtres sont inclus dans les demandes de recherche lorsque vous ajoutez le p
 
 * Le paramètre **$filter** renvoie les résultats correspondant aux critères que vous avez spécifiés. Dans ce cas précis, ce sont les évaluations supérieures à 4.
 
-* La syntaxe de filtre est une construction OData. Pour plus d’informations, consultez l’article [Filter OData syntax](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
+* La syntaxe de filtre est une construction OData. Pour plus d’informations, consultez l’article [Filter OData syntax](/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
 
 ### <a name="facet-the-query"></a><a name="facet-query"></a> « Facetter » la requête
 
@@ -192,8 +188,8 @@ Les filtres de facettes sont inclus dans les demandes de recherche. Vous pouvez 
 
 #### <a name="example-faceted-with-scope-reduction-searchfacetcategorytop2"></a>Exemple (par facettes avec une étendue réduite) : `search=*&facet=Category&$top=2`
 
-* **search=** * est une recherche vide. Les recherches vides portent sur tous les éléments. L’un des motifs possibles de l’exécution d’une requête vide est l’application de filtres ou de facettes au jeu complet de documents. Par exemple, vous souhaitez obtenir une structure de navigation par facettes constituée de tous les hôtels de l’index.
-* **facet** renvoie une structure de navigation que vous pouvez transmettre à un contrôle d’interface utilisateur. Il renvoie des catégories ainsi qu’un nombre. Dans ce cas, les catégories sont basées sur un champ nommé *Catégorie*. Il n’existe pas d’agrégation dans la Recherche cognitive Azure, mais vous pouvez bénéficier d’une fonctionnalité quasiment comparable via `facet`, qui retourne un nombre de documents dans chaque catégorie.
+* **search=** _ est une recherche vide. Les recherches vides portent sur tous les éléments. L’un des motifs possibles de l’exécution d’une requête vide est l’application de filtres ou de facettes au jeu complet de documents. Par exemple, vous souhaitez obtenir une structure de navigation par facettes constituée de tous les hôtels de l’index.
+_ **facet** retourne une structure de navigation que vous pouvez transmettre à un contrôle d’interface utilisateur. Il renvoie des catégories ainsi qu’un nombre. Dans ce cas, les catégories sont basées sur un champ nommé *Catégorie*. Il n’existe pas d’agrégation dans la Recherche cognitive Azure, mais vous pouvez bénéficier d’une fonctionnalité quasiment comparable via `facet`, qui retourne un nombre de documents dans chaque catégorie.
 
 * **$top=2** renvoie deux documents, illustrant ainsi la possibilité d’utiliser `top` pour réduire ou augmenter les résultats.
 
@@ -203,7 +199,7 @@ Les filtres de facettes sont inclus dans les demandes de recherche. Vous pouvez 
 
 * Seuls les champs filtrables peuvent être désignés comme étant à facettes. Les résultats ne peuvent renvoyer que les champs récupérables.
 
-* Le champ *Évaluation* est un champ à virgule flottante et double précision, et le regroupement se fera par valeur précise. Pour plus d’informations sur le regroupement par intervalle (par exemple « 3 étoiles », « 4 étoiles », etc.), consultez [Guide pratique pour implémenter une navigation par facettes dans la Recherche cognitive Azure](https://docs.microsoft.com/azure/search/search-faceted-navigation#filter-based-on-a-range).
+* Le champ *Évaluation* est un champ à virgule flottante et double précision, et le regroupement se fera par valeur précise. Pour plus d’informations sur le regroupement par intervalle (par exemple « 3 étoiles », « 4 étoiles », etc.), consultez [Guide pratique pour implémenter une navigation par facettes dans la Recherche cognitive Azure](./search-faceted-navigation.md#filter-based-on-a-range).
 
 
 ### <a name="highlight-search-results"></a><a name="highlight-query"></a>Mettre en surbrillance les termes de recherche
@@ -236,11 +232,11 @@ Lorsque l’élément **queryType** n’est pas spécifié, l’analyseur de req
 
 La recherche partielle et la recherche par caractères génériques ont des conséquences sur les résultats de la recherche. L’analyse linguistique n’est pas effectuée sur ces formats de requête. Avant d’utiliser la recherche partielle et la recherche par caractères génériques, consultez [Fonctionnement de la recherche en texte intégral dans la Recherche cognitive Azure](search-lucene-query-architecture.md#stage-2-lexical-analysis), puis recherchez la section sur les exceptions relatives à l’analyse lexicale.
 
-Pour plus d’informations sur les scénarios de requête permis par l’analyseur de requêtes complètes, consultez [Syntaxe de requête Lucene dans la Recherche cognitive Azure](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search).
+Pour plus d’informations sur les scénarios de requête permis par l’analyseur de requêtes complètes, consultez [Syntaxe de requête Lucene dans la Recherche cognitive Azure](/rest/api/searchservice/lucene-query-syntax-in-azure-search).
 
 ### <a name="try-geospatial-search"></a><a name="geo-search"></a> Essayez la recherche géospatiale
 
-La recherche géographique est prise en charge par le biais du [type de données edm.GeographyPoint](https://docs.microsoft.com/rest/api/searchservice/supported-data-types) sur un champ contenant des coordonnées. La recherche géographique est un type de filtre, spécifié dans l’article [Filter OData syntax](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
+La recherche géographique est prise en charge par le biais du [type de données edm.GeographyPoint](/rest/api/searchservice/supported-data-types) sur un champ contenant des coordonnées. La recherche géographique est un type de filtre, spécifié dans l’article [Filter OData syntax](/rest/api/searchservice/odata-expression-syntax-for-azure-search) (Syntaxe d’expression de filtre OData).
 
 #### <a name="example-geo-coordinate-filters-searchcounttruefiltergeodistancelocationgeographypoint-12212-4767-le-5"></a>Exemple (filtres géo-coordonnés) : `search=*&$count=true&$filter=geo.distance(Location,geography'POINT(-122.12 47.67)') le 5`
 
@@ -252,7 +248,7 @@ La recherche géographique est utile si votre application de recherche dispose d
 
 Ce tutoriel a fourni une brève présentation de la Recherche cognitive Azure à l’aide du portail Azure.
 
-Vous avez appris à créer un index de recherche à l’aide de l’Assistant **Importer des données**. Vous avez découvert les [indexeurs](search-indexer-overview.md), ainsi que le flux de travail de base pour la conception d’index, y compris les [modifications prises en charge pour un index publié](https://docs.microsoft.com/rest/api/searchservice/update-index).
+Vous avez appris à créer un index de recherche à l’aide de l’Assistant **Importer des données**. Vous avez découvert les [indexeurs](search-indexer-overview.md), ainsi que le flux de travail de base pour la conception d’index, y compris les [modifications prises en charge pour un index publié](/rest/api/searchservice/update-index).
 
 À l’aide de **l’Explorateur de recherche** dans le portail Azure, vous avez découvert la syntaxe de requête par le biais d’exemples pratiques qui illustraient des fonctionnalités clés comme les filtres, la mise en surbrillance des correspondances, la recherche partielle et la recherche basée sur la géolocalisation.
 
@@ -271,4 +267,4 @@ Si vous utilisez un service gratuit, n’oubliez pas que vous êtes limité à t
 Utilisez un Assistant du portail pour générer une application web prête à l’emploi qui s’exécute dans un navigateur. Vous pouvez essayer cet Assistant sur le petit index que vous venez de créer ou utiliser l’un des exemples de jeux de données intégrés pour une expérience de recherche plus riche.
 
 > [!div class="nextstepaction"]
-> [Créer une application de recherche dans le portail](search-create-app-portal.md)
+> [Créer une application de démonstration dans le portail](search-create-app-portal.md)

@@ -3,14 +3,14 @@ title: Déployer sur un hôte dédié
 description: Utiliser un hôte dédié à des fins d'isolation au niveau de l’hôte pour vos charges de travail Azure Container Instances
 ms.topic: article
 ms.date: 01/17/2020
-author: dkkapur
-ms.author: dekapur
-ms.openlocfilehash: a614d6b5d0cf5c6c1df5ffcb90e56960d6b8a2a9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+author: macolso
+ms.author: macolso
+ms.openlocfilehash: 967d2da61ffdfa9d1723bcab589deb2277d4041e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82025031"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91825604"
 ---
 # <a name="deploy-on-dedicated-hosts"></a>Déployer sur des hôtes dédiés
 
@@ -28,7 +28,7 @@ La référence SKU dédiée est appropriée pour les charges de travail de conte
 > L’utilisation de la référence SKU dédiée est uniquement disponible dans la dernière version de l’API (2019-12-01) qui est en cours de déploiement. Spécifiez cette version d’API dans votre modèle de déploiement.
 >
 
-À partir de la version de l’API 2019-12-01, il existe une propriété `sku` dans la section Propriétés du groupe de conteneurs d’un modèle de déploiement qui est nécessaire pour un déploiement ACI. Actuellement, vous pouvez utiliser cette propriété dans le cadre d’un modèle de déploiement Azure Resource Manager pour ACI. Apprenez-en davantage sur le déploiement de ressources ACI à l’aide d’un modèle dans le [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](https://docs.microsoft.com/azure/container-instances/container-instances-multi-container-group). 
+À partir de la version de l’API 2019-12-01, il existe une propriété `sku` dans la section Propriétés du groupe de conteneurs d’un modèle de déploiement qui est nécessaire pour un déploiement ACI. Actuellement, vous pouvez utiliser cette propriété dans le cadre d’un modèle de déploiement Azure Resource Manager pour ACI. Apprenez-en davantage sur le déploiement de ressources ACI à l’aide d’un modèle dans le [Tutoriel : Déployer un groupe de plusieurs conteneurs avec un modèle Resource Manager](./container-instances-multi-container-group.md). 
 
 La propriété `sku` peut présenter l'une des valeurs suivantes :
 * `Standard` : le choix de déploiement ACI standard, qui garantit toujours la sécurité au niveau de l’hyperviseur 
@@ -137,17 +137,17 @@ Créez un groupe de ressources avec la commande [az group create][az-group-creat
 az group create --name myResourceGroup --location eastus
 ```
 
-Déployez ensuite le modèle avec la commande [az group deployment create][az-group-deployment-create].
+Déployez ensuite le modèle avec la commande [az deployment group create][az-deployment-group-create].
 
 ```azurecli-interactive
-az group deployment create --resource-group myResourceGroup --template-file deployment-template.json
+az deployment group create --resource-group myResourceGroup --template-file deployment-template.json
 ```
 
 Après quelques secondes, vous devriez recevoir une réponse initiale d’Azure. Un déploiement réussi intervient sur un hôte dédié.
 
 <!-- LINKS - Internal -->
 [az-group-create]: /cli/azure/group#az-group-create
-[az-group-deployment-create]: /cli/azure/group/deployment#az-group-deployment-create
+[az-deployment-group-create]: /cli/azure/deployment/group#az-deployment-group-create
 
 <!-- LINKS - External -->
 [azure-support]: https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest

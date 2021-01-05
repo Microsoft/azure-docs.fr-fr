@@ -5,18 +5,20 @@ author: tknandu
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/23/2020
 ms.author: ramkris
 ms.reviewer: sngun
-ms.openlocfilehash: 40ef05107f20a3396f6710f894a2dbad2d7fa6c9
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 6f6994717ff4c730fb27bd26c40d199fb198e528
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478851"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96019954"
 ---
 # <a name="use-the-bulk-executor-net-library-to-perform-bulk-operations-in-azure-cosmos-db"></a>Utiliser la bibliothèque d’exécuteur en bloc .NET pour effectuer des opérations en bloc dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!NOTE]
 > La bibliothèque d’exécuteur en bloc décrite dans cet article est conservée pour les applications qui utilisent le Kit de développement logiciel (SDK) .NET version 2.x. Pour les nouvelles applications, vous pouvez utiliser la **prise en charge de l’exécution en bloc** qui est directement disponible avec le [Kit de développement logiciel (SDK) .NET version 3.x](tutorial-sql-api-dotnet-bulk-import.md) et ne nécessite aucune bibliothèque externe. 
@@ -33,7 +35,7 @@ Actuellement, la bibliothèque de l’exécuteur en bloc est prise en charge uni
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
 
-* Vous pouvez [essayer Azure Cosmos DB gratuitement](https://azure.microsoft.com/try/cosmosdb/) sans abonnement Azure, libre de tous frais et engagements. Vous pouvez également utiliser l’[émulateur Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/local-emulator) avec le point de terminaison `https://localhost:8081`. La clé primaire est fournie dans des [requêtes d’authentification](local-emulator.md#authenticating-requests).
+* Vous pouvez [essayer Azure Cosmos DB gratuitement](https://azure.microsoft.com/try/cosmosdb/) sans abonnement Azure, libre de tous frais et engagements. Vous pouvez également utiliser l’[émulateur Azure Cosmos DB](./local-emulator.md) avec le point de terminaison `https://localhost:8081`. La clé primaire est fournie dans des [requêtes d’authentification](local-emulator.md#authenticate-requests).
 
 * Créez un compte d’API SQL Azure Cosmos DB en suivant les étapes décrites dans la section [Créer un compte de base de données](create-sql-api-dotnet.md#create-account) de l’article de démarrage rapide .NET.
 
@@ -41,7 +43,7 @@ Actuellement, la bibliothèque de l’exécuteur en bloc est prise en charge uni
 
 Nous allons maintenant passer à l’utilisation de code en téléchargeant un exemple d’application .NET à partir de GitHub. Cette application effectue des opérations en bloc sur les données stockées dans votre compte Azure Cosmos. Pour cloner l’application, ouvrez une invite de commandes, accédez au répertoire où vous souhaitez la copier, puis exécutez la commande suivante :
 
-```
+```bash
 git clone https://github.com/Azure/azure-cosmosdb-bulkexecutor-dotnet-getting-started.git
 ```
 
@@ -92,7 +94,7 @@ L’application « BulkImportSample » génère des documents aléatoires et l
    client.ConnectionPolicy.RetryOptions.MaxRetryAttemptsOnThrottledRequests = 0;
    ```
 
-5. L’application appelle l’API BulkImportAsync. La bibliothèque .NET fournit deux surcharges de l’API d’importation en bloc : une qui accepte une liste de documents JSON sérialisés et une autre qui accepte une liste de documents POCO désérialisés. Pour en savoir plus sur les définitions de chacune de ces méthodes surchargées, consultez la [documentation de l’API](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkexecutor.bulkimportasync?view=azure-dotnet).
+5. L’application appelle l’API BulkImportAsync. La bibliothèque .NET fournit deux surcharges de l’API d’importation en bloc : une qui accepte une liste de documents JSON sérialisés et une autre qui accepte une liste de documents POCO désérialisés. Pour en savoir plus sur les définitions de chacune de ces méthodes surchargées, consultez la [documentation de l’API](/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkexecutor.bulkimportasync?view=azure-dotnet&preserve-view=true).
 
    ```csharp
    BulkImportResponse bulkImportResponse = await bulkExecutor.BulkImportAsync(
@@ -124,11 +126,11 @@ L’application « BulkImportSample » génère des documents aléatoires et l
 
 ## <a name="bulk-update-data-in-your-azure-cosmos-account"></a>Mettre à jour des données en bloc dans votre compte Azure Cosmos
 
-Vous pouvez mettre à jour des documents existants à l’aide de l’API BulkUpdateAsync. Dans cet exemple, vous allez affecter une nouvelle valeur au champ `Name` et supprimer le champ `Description` des documents existants. Pour connaître l’ensemble complet d’opérations de mise à jour prises en charge, consultez la [documentation de l’API](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkupdate?view=azure-dotnet).
+Vous pouvez mettre à jour des documents existants à l’aide de l’API BulkUpdateAsync. Dans cet exemple, vous allez affecter une nouvelle valeur au champ `Name` et supprimer le champ `Description` des documents existants. Pour connaître l’ensemble complet d’opérations de mise à jour prises en charge, consultez la [documentation de l’API](/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkupdate?view=azure-dotnet&preserve-view=true).
 
 1. Accédez au dossier « BulkUpdateSample » et ouvrez le fichier « BulkUpdateSample.sln ».  
 
-2. Définissez les éléments de mise à jour ainsi que les opérations de mise à jour de champs correspondantes. Dans cet exemple, vous allez utiliser `SetUpdateOperation` pour mettre à jour le champ `Name` et `UnsetUpdateOperation` pour supprimer le champ `Description` de tous les documents. Vous pouvez également effectuer d’autres opérations comme incrémenter un champ de document d’une valeur spécifique, envoyer des valeurs spécifiques dans un champ de tableau ou supprimer une valeur spécifique d’un champ de tableau. Pour en savoir plus sur les différentes méthodes fournies par l’API de mise à jour en bloc, consultez la [documentation de l’API](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkupdate?view=azure-dotnet).
+2. Définissez les éléments de mise à jour ainsi que les opérations de mise à jour de champs correspondantes. Dans cet exemple, vous allez utiliser `SetUpdateOperation` pour mettre à jour le champ `Name` et `UnsetUpdateOperation` pour supprimer le champ `Description` de tous les documents. Vous pouvez également effectuer d’autres opérations comme incrémenter un champ de document d’une valeur spécifique, envoyer des valeurs spécifiques dans un champ de tableau ou supprimer une valeur spécifique d’un champ de tableau. Pour en savoir plus sur les différentes méthodes fournies par l’API de mise à jour en bloc, consultez la [documentation de l’API](/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.bulkupdate?view=azure-dotnet&preserve-view=true).
 
    ```csharp
    SetUpdateOperation<string> nameUpdate = new SetUpdateOperation<string>("Name", "UpdatedDoc");
@@ -145,7 +147,7 @@ Vous pouvez mettre à jour des documents existants à l’aide de l’API BulkUp
    }
    ```
 
-3. L’application appelle l’API BulkUpdateAsync. Pour en savoir plus sur la définition de la méthode BulkUpdateAsync, consultez la [documentation de l’API](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.ibulkexecutor.bulkupdateasync?view=azure-dotnet).  
+3. L’application appelle l’API BulkUpdateAsync. Pour en savoir plus sur la définition de la méthode BulkUpdateAsync, consultez la [documentation de l’API](/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.ibulkexecutor.bulkupdateasync?view=azure-dotnet&preserve-view=true).  
 
    ```csharp
    BulkUpdateResponse bulkUpdateResponse = await bulkExecutor.BulkUpdateAsync(
@@ -203,4 +205,4 @@ Pour bénéficier de meilleures performances lors de l’utilisation de la bibli
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus sur les packages Nuget et les notes de publication de la bibliothèque, consultez les [détails sur le SDK de l’exécuteur en bloc](sql-api-sdk-bulk-executor-dot-net.md).
+* Pour en savoir plus sur les packages NuGet et les notes de publication, consultez les [détails sur le Kit de développement logiciel (SDK) de l’exécuteur en bloc](sql-api-sdk-bulk-executor-dot-net.md).

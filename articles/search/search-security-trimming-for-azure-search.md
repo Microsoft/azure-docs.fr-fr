@@ -1,19 +1,19 @@
 ---
 title: Filtres de sécurité pour le filtrage des résultats
 titleSuffix: Azure Cognitive Search
-description: Contrôle d’accès au contenu de Recherche cognitive Azure à l’aide de filtres de sécurité et d’identités d’utilisateur.
+description: Privilèges de sécurité au niveau du document pour les résultats de Recherche cognitive Azure, utilisation de filtres de sécurité et d’identités.
 manager: nitinme
-author: brjohnstmsft
-ms.author: brjohnst
+author: HeidiSteen
+ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 24f168f68a60ebb0408b7f1c367039ea5caea6d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/04/2020
+ms.openlocfilehash: 8562fd1afaa01e362bd6d95fd4dcf90cf3145c5a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72794276"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88928521"
 ---
 # <a name="security-filters-for-trimming-results-in-azure-cognitive-search"></a>Filtres de sécurité pour le filtrage des résultats dans Recherche cognitive Azure
 
@@ -34,33 +34,36 @@ Cet article explique les étapes à suivre pour mettre en place le filtrage de s
 
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article part du principe que vous disposez d’un [abonnement Azure](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A261C142F), du [service Recherche cognitive Azure](https://docs.microsoft.com/azure/search/search-create-service-portal) et de l’[index Recherche cognitive Azure](https://docs.microsoft.com/azure/search/search-create-index-portal).  
+Cet article part du principe que vous disposez d’un [abonnement Azure](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A261C142F), du [service Recherche cognitive Azure](search-create-service-portal.md) et d’un [index](search-what-is-an-index.md).  
 
 ## <a name="create-security-field"></a>Créer le champ de sécurité
 
 Vos documents doivent inclure un champ qui spécifie les groupes disposant d’autorisations d’accès. Ces informations constituent les critères de filtre par rapport auxquels les documents sont sélectionnés ou non dans le jeu de résultats retourné à l’émetteur.
 Imaginons que nous disposons d’un index de fichiers sécurisés et qu’un ensemble différent d’utilisateurs a accès à chaque fichier.
+
 1. Ajoutez le champ `group_ids` (vous pouvez choisir n’importe quel nom ici) comme `Collection(Edm.String)`. Vérifiez que le champ a un attribut `filterable` défini avec la valeur `true` pour que les résultats de la recherche soient filtrés en fonction de l’accès dont dispose l’utilisateur. Par exemple, si vous définissez le champ `group_ids` avec la valeur `["group_id1, group_id2"]` pour le document ayant comme `file_name` « secured_file_b », seuls les utilisateurs qui appartiennent à l’ID de groupe « group_id1 » ou « group_id2 » ont accès en lecture au fichier.
+   
    Vérifiez que l’attribut `retrievable` du champ a la valeur `false` pour qu’il ne soit pas retourné dans le cadre de la requête de recherche.
+
 2. Pour les besoins de cet exemple, ajoutez également les champs `file_id` et `file_name`.  
 
-```JSON
-{
-    "name": "securedfiles",  
-    "fields": [
-        {"name": "file_id", "type": "Edm.String", "key": true, "searchable": false, "sortable": false, "facetable": false},
-        {"name": "file_name", "type": "Edm.String"},
-        {"name": "group_ids", "type": "Collection(Edm.String)", "filterable": true, "retrievable": false}
-    ]
-}
-```
+    ```JSON
+    {
+        "name": "securedfiles",  
+        "fields": [
+            {"name": "file_id", "type": "Edm.String", "key": true, "searchable": false, "sortable": false, "facetable": false},
+            {"name": "file_name", "type": "Edm.String"},
+            {"name": "group_ids", "type": "Collection(Edm.String)", "filterable": true, "retrievable": false}
+        ]
+    }
+    ```
 
 ## <a name="pushing-data-into-your-index-using-the-rest-api"></a>Envoi (push) des données à votre index à l’aide de l’API REST
   
 Émettez une requête HTTP POST au point de terminaison de l’URL de votre index. Le corps de la requête HTTP est un objet JSON contenant les documents à ajouter :
 
 ```
-POST https://[search service].search.windows.net/indexes/securedfiles/docs/index?api-version=2019-05-06  
+POST https://[search service].search.windows.net/indexes/securedfiles/docs/index?api-version=2020-06-30  
 Content-Type: application/json
 api-key: [admin key]
 ```
@@ -106,19 +109,19 @@ Si vous avez besoin de mettre à jour un document existant avec la liste des gro
 }
 ```
 
-Pour obtenir des informations détaillées sur l’ajout ou la mise à jour de documents, lisez [Modifier des documents](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents).
+Pour obtenir des informations détaillées sur l’ajout ou la mise à jour de documents, lisez [Modifier des documents](/rest/api/searchservice/addupdate-or-delete-documents).
    
 ## <a name="apply-the-security-filter"></a>Appliquer le filtre de sécurité
 
 Pour filtrer des documents en fonction de l’accès de `group_ids`, vous devez émettre une requête de recherche avec un filtre `group_ids/any(g:search.in(g, 'group_id1, group_id2,...'))`, où « group_id1, group_id2,... » sont les groupes auxquels l’émetteur de la requête de recherche appartient.
 Ce filtre correspond à tous les documents dont le champ `group_ids` contient l’un des identificateurs donnés.
-Pour obtenir des informations détaillées sur la recherche de documents à l’aide de Recherche cognitive Azure, lisez [Recherche de documents](https://docs.microsoft.com/rest/api/searchservice/search-documents).
+Pour obtenir des informations détaillées sur la recherche de documents à l’aide de Recherche cognitive Azure, lisez [Recherche de documents](/rest/api/searchservice/search-documents).
 Notez que cet exemple montre comment lancer une recherche dans des documents à l’aide d’une requête POST.
 
 Émettez la requête HTTP POST :
 
 ```
-POST https://[service name].search.windows.net/indexes/securedfiles/docs/search?api-version=2019-05-06
+POST https://[service name].search.windows.net/indexes/securedfiles/docs/search?api-version=2020-06-30
 Content-Type: application/json  
 api-key: [admin or query key]
 ```

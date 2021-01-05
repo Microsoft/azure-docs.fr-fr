@@ -5,12 +5,12 @@ author: athinanthny
 ms.topic: conceptual
 ms.date: 2/23/2018
 ms.author: atsenthi
-ms.openlocfilehash: ba1fa92559d39a481008d1dd18036e4232be1bfa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e6174f35bd54b3ca0b2c5240a663369350b30ce8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639800"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86241894"
 ---
 # <a name="service-fabric-container-networking-modes"></a>Modes de mise en réseau du conteneur Service Fabric
 
@@ -21,7 +21,7 @@ Si vous avez un service de conteneur avec un point de terminaison statique dans 
 Lorsqu’un service de conteneur redémarre ou se déplace vers un autre nœud du cluster, l’adresse IP change. Pour cette raison, nous ne recommandons pas l’utilisation de l’adresse IP attribuée de manière dynamique pour découvrir les services de conteneur. Seul le service d’affectation de noms de Service Fabric ou le service DNS doivent être utilisés pour la découverte de services. 
 
 >[!WARNING]
->Azure permet un total de 65 356 adresses IP par réseau virtuel. Par conséquent, la somme du nombre de nœuds et du nombre d’instances de service de conteneur (utilisant le mode Ouvert) ne peuvent pas dépasser 65 356 au sein d’un réseau virtuel. Pour les scénarios de haute densités, nous recommandons le mode de mise en réseau nat. D’autres dépendances, telles que l’équilibreur de charge, devront également prendre en compte d’autres [limitations](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits). Jusqu’à 50 adresses IP par nœud ont été testées et prouvées stables. 
+>Azure permet un total de 65 356 adresses IP par réseau virtuel. Par conséquent, la somme du nombre de nœuds et du nombre d’instances de service de conteneur (utilisant le mode Ouvert) ne peuvent pas dépasser 65 356 au sein d’un réseau virtuel. Pour les scénarios de haute densités, nous recommandons le mode de mise en réseau nat. D’autres dépendances, telles que l’équilibreur de charge, devront également prendre en compte d’autres [limitations](../azure-resource-manager/management/azure-subscription-service-limits.md). Jusqu’à 50 adresses IP par nœud ont été testées et prouvées stables. 
 >
 
 ## <a name="set-up-open-networking-mode"></a>Configurer le mode de mise en réseau Ouvert
@@ -191,15 +191,14 @@ Lorsqu’un service de conteneur redémarre ou se déplace vers un autre nœud d
  
 3. Pour les clusters Windows uniquement, configurez une règle de groupe de sécurité réseau (NSG) Azure qui ouvre le port UDP/53 pour le réseau virtuel avec les valeurs suivantes :
 
-   |Paramètre |Valeur | |
-   | --- | --- | --- |
-   |Priority |2000 | |
-   |Nom |Custom_Dns  | |
-   |Source |VirtualNetwork | |
-   |Destination | VirtualNetwork | |
-   |Service | DNS (UDP/53) | |
-   |Action | Allow  | |
-   | | |
+   |Paramètre |Valeur |
+   | --- | --- |
+   |Priority |2000 |
+   |Nom |Custom_Dns  |
+   |Source |VirtualNetwork |
+   |Destination | VirtualNetwork |
+   |Service | DNS (UDP/53) |
+   |Action | Allow  |
 
 4. Spécifiez le mode de mise en réseau dans le manifeste d’application pour chaque service : `<NetworkConfig NetworkType="Open">`. Le mode **Ouvrir** permet au service d’obtenir une adresse IP dédiée. Si un mode n’est pas spécifié, par défaut, le service est en mode **nat**. Dans l’exemple de manifeste suivant, les services `NodeContainerServicePackage1` et `NodeContainerServicePackage2` peuvent chacun être à l’écoute sur le même port (les deux services sont à l’écoute sur `Endpoint1`). Quand le mode de mise en réseau Ouvert est spécifié, les configurations `PortBinding` ne peuvent pas être spécifiées.
 
@@ -264,6 +263,6 @@ Lorsqu’un service de conteneur redémarre ou se déplace vers un autre nœud d
  
 ## <a name="next-steps"></a>Étapes suivantes
 * [Modéliser une application dans Service Fabric](service-fabric-application-model.md)
-* [En savoir plus sur les ressources du manifeste du service Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-service-manifest-resources)
+* [En savoir plus sur les ressources du manifeste du service Service Fabric](./service-fabric-service-manifest-resources.md)
 * [Déployer un conteneur Windows sur Service Fabric sous Windows Server 2016](service-fabric-get-started-containers.md)
 * [Déployer un conteneur Docker sur Service Fabric sous Linux](service-fabric-get-started-containers-linux.md)

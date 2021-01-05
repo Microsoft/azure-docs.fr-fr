@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: windows
 ms.date: 11/30/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 14777b85fdc531b96c61882d5f244ca40ed28fa6
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: b3853ddc71d1a9be26b2492764a9b341446e0eeb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83197988"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078739"
 ---
 # <a name="tutorial-create-a-virtual-machine-scale-set-and-deploy-a-highly-available-app-on-windows-with-azure-powershell"></a>Tutoriel : Créer un groupe de machines virtuelles identiques et déployer une application hautement disponible sur Windows avec Azure PowerShell
 Un groupe de machines virtuelles identiques vous permet de déployer et de gérer un ensemble de machines virtuelles identiques prenant en charge la mise à l’échelle automatique. Vous pouvez mettre à l’échelle manuellement le nombre de machines virtuelles du groupe identique. Vous pouvez également définir des règles pour mettre à l’échelle automatiquement en fonction de l’utilisation des ressources (processeur, demande de mémoire, trafic réseau, etc.). Ce tutoriel explique comment déployer un groupe de machines virtuelles identiques dans Azure et vous apprend à :
@@ -37,11 +37,11 @@ Un groupe de machines virtuelles identiques vous permet de déployer et de gére
 
 Les machines virtuelles sont créées en fonction des besoins dans un groupe identique. En définissant des règles de mise à l’échelle automatique, vous pouvez contrôler quand et comment les machines virtuelles sont ajoutées ou supprimées au niveau du groupe identique. Ces règles peuvent se déclencher en fonction de mesures telles que la charge du processeur, l’utilisation de la mémoire ou le trafic réseau.
 
-Les groupes identiques prennent en charge jusqu’à 1 000 machines virtuelles lorsque vous utilisez une image de plateforme Azure. Pour les charges de travail qui s’accompagnent de contraintes importantes en matière d’installation ou de personnalisation de machines virtuelles, vous pouvez [créer une image de machine virtuelle personnalisée](tutorial-custom-images.md). Vous pouvez créer un maximum de 300 machines virtuelles dans un groupe identique lorsque vous utilisez une image personnalisée.
+Les groupes identiques prennent en charge jusqu’à 1 000 machines virtuelles lorsque vous utilisez une image de plateforme Azure. Pour les charges de travail qui s’accompagnent de contraintes importantes en matière d’installation ou de personnalisation de machines virtuelles, vous pouvez [créer une image de machine virtuelle personnalisée](tutorial-custom-images.md). Vous pouvez créer un maximum de 600 machines virtuelles dans un groupe identique lorsque vous utilisez une image personnalisée.
 
 
 ## <a name="create-a-scale-set"></a>Créer un groupe identique
-Créez un groupe de machines virtuelles identiques avec [New-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/new-azvmss). L’exemple suivant crée un groupe identique nommé *myScaleSet* qui utilise l’image de plateforme *Windows Server 2016 Datacenter*. Les ressources réseau Azure pour le réseau virtuel, l’adresse IP publique et l’équilibreur de charge sont automatiquement créées. Quand vous y êtes invité, vous pouvez définir vos propres informations d’identification d’administration pour les instances de machine virtuelle du groupe identique :
+Créez un groupe de machines virtuelles identiques avec [New-AzVmss](/powershell/module/az.compute/new-azvmss). L’exemple suivant crée un groupe identique nommé *myScaleSet* qui utilise l’image de plateforme *Windows Server 2016 Datacenter*. Les ressources réseau Azure pour le réseau virtuel, l’adresse IP publique et l’équilibreur de charge sont automatiquement créées. Quand vous y êtes invité, vous pouvez définir vos propres informations d’identification d’administration pour les instances de machine virtuelle du groupe identique :
 
 ```azurepowershell-interactive
 New-AzVmss `
@@ -59,7 +59,7 @@ La création et la configuration des l’ensemble des ressources et des machines
 
 
 ## <a name="deploy-sample-application"></a>Déployer un exemple d’application
-Pour tester votre groupe identique, installez une application web de base. L’extension de script personnalisé Azure permet de télécharger et d’exécuter un script qui installe IIS sur les instances de machine virtuelle. Cette extension est utile pour la configuration post-déploiement, l’installation de logiciels ou toute autre tâche de configuration ou de gestion. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](extensions-customscript.md).
+Pour tester votre groupe identique, installez une application web de base. L’extension de script personnalisé Azure permet de télécharger et d’exécuter un script qui installe IIS sur les instances de machine virtuelle. Cette extension est utile pour la configuration post-déploiement, l’installation de logiciels ou toute autre tâche de configuration ou de gestion. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../extensions/custom-script-windows.md).
 
 Utilisez l’extension de script personnalisé pour installer un serveur web IIS de base. Appliquez l’extension de script personnalisé qui installe IIS comme suit :
 
@@ -92,7 +92,7 @@ Update-AzVmss `
 
 ## <a name="allow-traffic-to-application"></a>Autoriser le trafic vers l’application
 
-Pour autoriser l’accès à l’application web de base, créez un groupe de sécurité réseau avec [New-AzNetworkSecurityRuleConfig](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecurityruleconfig) et [New-AzNetworkSecurityGroup](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecuritygroup). Pour plus d’informations, consultez [Fonctionnalités réseau pour les groupes de machines virtuelles identiques Azure](../../virtual-machine-scale-sets/virtual-machine-scale-sets-networking.md).
+Pour autoriser l’accès à l’application web de base, créez un groupe de sécurité réseau avec [New-AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig) et [New-AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup). Pour plus d’informations, consultez [Fonctionnalités réseau pour les groupes de machines virtuelles identiques Azure](../../virtual-machine-scale-sets/virtual-machine-scale-sets-networking.md).
 
 ```azurepowershell-interactive
 # Get information about the scale set
@@ -141,7 +141,7 @@ Update-AzVmss `
 ```
 
 ## <a name="test-your-scale-set"></a>Tester votre groupe identique
-Pour voir votre groupe identique en action, obtenez l’adresse IP publique de votre équilibreur de charge avec [Get-AzPublicIPAddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress). L’exemple suivant affiche l’adresse IP pour *myPublicIP* qui a été créée dans le cadre du groupe identique :
+Pour voir votre groupe identique en action, obtenez l’adresse IP publique de votre équilibreur de charge avec [Get-AzPublicIPAddress](/powershell/module/az.network/get-azpublicipaddress). L’exemple suivant affiche l’adresse IP pour *myPublicIP* qui a été créée dans le cadre du groupe identique :
 
 ```azurepowershell-interactive
 Get-AzPublicIPAddress `
@@ -160,7 +160,7 @@ Pour voir le groupe identique en action, vous pouvez forcer l’actualisation de
 Tout au long du cycle de vie du groupe identique, vous devrez peut-être exécuter une ou plusieurs tâches de gestion. En outre, vous souhaiterez peut-être créer des scripts pour automatiser les diverses tâches liées au cycle de vie. Azure PowerShell offre un moyen rapide d’effectuer ces tâches. Voici quelques tâches courantes.
 
 ### <a name="view-vms-in-a-scale-set"></a>Afficher les machines virtuelles d’un groupe identique
-Pour afficher la liste des instances de machine virtuelle dans un groupe identique, utilisez [Get-AzVmssVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvmssvm) comme suit :
+Pour afficher la liste des instances de machine virtuelle dans un groupe identique, utilisez [Get-AzVmssVM](/powershell/module/az.compute/get-azvmssvm) comme suit :
 
 ```azurepowershell-interactive
 Get-AzVmssVM `
@@ -177,7 +177,7 @@ MYRESOURCEGROUPSCALESET   myScaleSet_0   eastus Standard_DS1_v2          0      
 MYRESOURCEGROUPSCALESET   myScaleSet_1   eastus Standard_DS1_v2          1         Succeeded
 ```
 
-Pour afficher des informations supplémentaires sur une instance spécifique de la machine virtuelle, ajoutez le paramètre `-InstanceId` à [Get-AzVmssVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvmssvm). L’exemple suivant présente des informations sur l’instance de machine virtuelle *1* :
+Pour afficher des informations supplémentaires sur une instance spécifique de la machine virtuelle, ajoutez le paramètre `-InstanceId` à [Get-AzVmssVM](/powershell/module/az.compute/get-azvmssvm). L’exemple suivant présente des informations sur l’instance de machine virtuelle *1* :
 
 ```azurepowershell-interactive
 Get-AzVmssVM `
@@ -188,7 +188,7 @@ Get-AzVmssVM `
 
 
 ### <a name="increase-or-decrease-vm-instances"></a>Augmenter ou diminuer les instances de machines virtuelles
-Pour afficher le nombre d’instances actuellement présentes dans un groupe identique, utilisez [Get-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss) et interrogez *sku.capacity* :
+Pour afficher le nombre d’instances actuellement présentes dans un groupe identique, utilisez [Get-AzVmss](/powershell/module/az.compute/get-azvmss) et interrogez *sku.capacity* :
 
 ```azurepowershell-interactive
 Get-AzVmss -ResourceGroupName "myResourceGroupScaleSet" `
@@ -196,7 +196,7 @@ Get-AzVmss -ResourceGroupName "myResourceGroupScaleSet" `
   Select -ExpandProperty Sku
 ```
 
-Vous pouvez ensuite augmenter ou diminuer manuellement le nombre de machines virtuelles présentes dans le groupe identique avec [Update-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/update-azvmss). L’exemple suivant fixe le nombre de machines virtuelles présentes dans votre groupe identique à *3* :
+Vous pouvez ensuite augmenter ou diminuer manuellement le nombre de machines virtuelles présentes dans le groupe identique avec [Update-AzVmss](/powershell/module/az.compute/update-azvmss). L’exemple suivant fixe le nombre de machines virtuelles présentes dans votre groupe identique à *3* :
 
 ```azurepowershell-interactive
 # Get current scale set

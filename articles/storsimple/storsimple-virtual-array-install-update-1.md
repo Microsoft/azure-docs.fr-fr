@@ -1,6 +1,6 @@
 ---
 title: Installer Update 1.0 sur StorSimple Virtual Array | Microsoft Docs
-description: Décrit comment utiliser l’interface utilisateur web de StorSimple Virtual Array pour appliquer des mises à jour à l’aide du portail Azure et de la méthode de correctifs logiciels
+description: Explique comment utiliser l’interface utilisateur web de StorSimple Virtual Array pour appliquer la mise à jour 1.0 à l’aide du portail Azure et de la méthode des correctifs logiciels.
 services: storsimple
 documentationcenter: NA
 author: alkohli
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 11/02/2017
 ms.author: alkohli
-ms.openlocfilehash: fa53213e577028628d48db91704578e23888f2a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d05395f97aded0b57780f898e9cba6ddca491f95
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228093"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005813"
 ---
 # <a name="install-update-10-on-your-storsimple-virtual-array"></a>Installer Update 1.0 sur StorSimple Virtual Array
 
@@ -30,6 +30,7 @@ Cet article décrit les étapes nécessaires pour installer Update 1.0 sur votr
 Pour maintenir votre instance StorSimple Virtual Array à jour, vous appliquez les mises à jour ou les correctifs logiciels. Avant d’appliquer une mise à jour, nous vous recommandons de mettre les volumes ou les partages hors connexion sur l’ordinateur hôte puis sur l’appareil. Vous réduisez ainsi toute possibilité d’altération des données. Une fois que les volumes ou partages sont hors connexion, vous devez également effectuer une sauvegarde manuelle de l’appareil.
 
 > [!IMPORTANT]
+>
 > - Update 1.0 correspond à la version logicielle **10.0.10296.0** sur votre appareil. Pour plus d’informations sur les nouveautés de cette mise à jour, consultez [Notes de version pour Update 1.0](storsimple-virtual-array-update-1-release-notes.md).
 >
 > - N’oubliez pas que l’installation d’une mise à jour ou d’un correctif logiciel nécessite le redémarrage de votre appareil. Étant donné que StorSimple Virtual Array est un appareil à nœud unique, les E/S en cours seront interrompues et votre appareil subira des temps d’arrêt.
@@ -101,26 +102,26 @@ Cette procédure prend environ quatre minutes. Effectuez les opérations suivan
 
 1. Dans l’interface utilisateur web locale, accédez à **Maintenance** > **Mise à jour logicielle**. Prenez note de la version du logiciel que vous exécutez. **Effectuez cette mise à jour uniquement si vous exécutez la version Update 0.6 (10.0.10293.0). Si vous exécutez une version antérieure, [installez Update 0.6](storsimple-virtual-array-install-update-06.md) sur votre appareil avant d’appliquer Update 1.**
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-1/update1m.png)
+    ![Capture d’écran montrant les Mises à jour logicielles sélectionnées dans le menu Maintenance.](./media/storsimple-virtual-array-install-update-1/update1m.png)
 
 2. Dans le **chemin d’accès au fichier de mise à jour**, entrez le nom du fichier de mise à jour ou de correctif. Vous pouvez également accéder au fichier d'installation de la mise à jour ou du correctif si celui-ci est placé sur un partage réseau. Cliquez sur **Appliquer**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-1/update2m.png)
+    ![Capture d’écran montrant la version actuelle du logiciel et la zone de texte Mise à jour du chemin du fichier sur la page Mise à jour logicielle.](./media/storsimple-virtual-array-install-update-1/update2m.png)
 
 3. Un avertissement s’affiche. Puisque la baie virtuelle est un appareil à nœud unique, l’application de la mise à jour entraîne le redémarrage de l’appareil et provoque un temps d’arrêt. Cliquez sur l’icône en forme de coche.
    
-   ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-1/update3m.png)
+   ![Capture d’écran montrant une boîte de dialogue avertissant d’un temps d’arrêt.](./media/storsimple-virtual-array-install-update-1/update3m.png)
 
 4. La mise à jour démarre. Une fois l’appareil correctement mis à jour, il est redémarré. L’interface utilisateur locale n’est pas accessible pendant cet intervalle.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-1/update5m.png)
+    ![Capture d’écran montrant un message confirmant la réussite de la mise à jour.](./media/storsimple-virtual-array-install-update-1/update5m.png)
 
 5. Une fois le redémarrage effectué, vous êtes redirigé vers la page **Se connecter** . Pour vérifier que le logiciel de l’appareil a été mis à jour, accédez à **Maintenance** > **Mise à jour logicielle** dans l’interface utilisateur web locale. La version logicielle doit être **10.0.0.0.0.10296** pour Update 1.0.
    
    > [!NOTE]
    > L’affichage des versions logicielles diffère légèrement entre l’interface utilisateur web locale et le portail Azure. Par exemple, la même version s’affiche comme **10.0.0.0.0.10296** dans l’interface utilisateur web locale et comme **10.0.10296.0** dans le portail Azure.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-1/update6m.png)
+    ![Capture d’écran montrant la page des mises à jour logicielles avec la version actuelle du logiciel.](./media/storsimple-virtual-array-install-update-1/update6m.png)
 
 6. Répétez les étapes 2 à 4 pour installer le correctif de sécurité Windows à l’aide du fichier `windows8.1-kb4012213-x64`. Le groupe virtuel redémarre après l’installation. Vous devez ensuite vous connecter à l’interface utilisateur web locale.
 

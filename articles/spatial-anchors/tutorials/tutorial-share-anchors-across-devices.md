@@ -1,40 +1,42 @@
 ---
 title: 'Tutoriel : Partager des ancres entre plusieurs sessions et appareils'
 description: Dans ce tutoriel, vous allez apprendre à partager des identificateurs Azure Spatial Anchor entre des appareils Android/iOS dans Unity avec un service back-end.
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 3b377f87bdba40c90cb3af6caef2c089d7b7de49
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3048eb1ca7f9312a43bc1ab5885bf19d4c2e7931
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77615498"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185393"
 ---
-# <a name="tutorial-share-azure-spatial-anchors-across-sessions-and-devices"></a>Tutoriel : Partager Azure Spatial Anchors entre plusieurs sessions et appareils
+# <a name="tutorial-share-spatial-anchors-across-sessions-and-devices"></a>Tutoriel : Partager des ancres spatiales entre plusieurs sessions et appareils
 
-Dans ce tutoriel, vous allez apprendre à utiliser [Azure Spatial Anchors](../overview.md) pour créer des ancres au cours d’une session et les localiser ensuite sur le même appareil ou un autre. Ces mêmes ancres pourront aussi être localisées par plusieurs appareils au même emplacement et au même moment.
+Azure Spatial Anchors est un service de développement multiplateforme avec lequel vous pouvez créer des expériences de réalité mixte en utilisant des objets qui conservent leur emplacement sur les appareils dans le temps. 
 
-![Persistance](./media/persistence.gif)
+Dans ce tutoriel, vous allez utiliser [Azure Spatial Anchors](../overview.md) pour créer des ancres au cours d’une session et les localiser ensuite sur le même appareil ou sur un autre. Les mêmes ancres peuvent aussi être localisées par plusieurs appareils à un même emplacement et à un même moment.
 
-Azure Spatial Anchors est un service de développement multiplateforme qui vous permet de créer des expériences de réalité mixte en utilisant des objets qui conservent leur emplacement sur les appareils. Quand vous avez terminé, vous disposez d’une application qui peut être déployée sur plusieurs appareils. Les ancres spatiales Azure créées par une instance peuvent être partagées avec d’autres.
+![Animation montrant des ancres spatiales créées avec un appareil mobile et utilisées avec un appareil différent au fil des jours.](./media/persistence.gif)
 
-Vous découvrirez comment effectuer les actions suivantes :
+
+Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
-> * Déployer une application web ASP.NET Core dans Azure qui peut être utilisée pour partager des ancres, en les stockant en mémoire pendant un certain temps.
-> * Configurer la scène AzureSpatialAnchorsLocalSharedDemo dans l’exemple Unity à partir de nos guides de démarrage rapide pour tirer parti de l’application web de partage des ancres.
-> * Déployer et exécuter une application sur un ou plusieurs appareils.
+> * Déployer une application web ASP.NET Core dans Azure permettant de partager des ancres et de les stocker en mémoire pendant une période spécifiée.
+> * Configurer la scène AzureSpatialAnchorsLocalSharedDemo dans l’exemple Unity de nos guides de démarrage rapide pour tirer parti de l’application web de partage d’ancres.
+> * Déployer et exécuter les ancres sur un ou plusieurs appareils.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 [!INCLUDE [Share Anchors Sample Prerequisites](../../../includes/spatial-anchors-share-sample-prereqs.md)]
 
-Il est important de noter que vous allez utiliser Unity et une application web ASP.NET Core dans ce tutoriel uniquement pour illustrer un exemple de la façon de partager des identificateurs d’ancre spatiale Azure entre d’autres appareils. Vous pouvez utiliser d’autres langages et technologies back-end pour atteindre le même objectif. Par ailleurs, l’application web ASP.NET Core utilisée dans ce tutoriel a une dépendance sur le kit SDK .NET Core 2.2. Elle s’exécute correctement sur Azure Web Apps standard (pour Windows), mais ne fonctionne pas sur Azure Web Apps pour Linux.
+> [!NOTE]
+> Vous allez utiliser Unity et une application web ASP.NET Core dans ce tutoriel, mais l’idée ici est seulement de donner un exemple de la manière dont sont partagés les identificateurs Azure Spatial Anchors avec d’autres appareils. Vous pouvez utiliser d’autres langages et technologies back-end pour atteindre le même objectif.
 
 [!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
 
@@ -42,21 +44,21 @@ Il est important de noter que vous allez utiliser Unity et une application web A
 
 [!INCLUDE [Clone Sample Repo](../../../includes/spatial-anchors-clone-sample-repository.md)]
 
-## <a name="deploy-your-sharing-anchors-service"></a>Déployer votre service de partage des ancres
+## <a name="deploy-the-sharing-anchors-service"></a>Déployer le service de partage d’ancres
 
 ## <a name="visual-studio"></a>[Visual Studio](#tab/VS)
 
-Ouvrez Visual Studio, puis ouvrez le projet au dossier `Sharing\SharingServiceSample`.
+Après avoir ouvert Visual Studio, ouvrez le projet dans le dossier *Sharing\SharingServiceSample*.
 
 [!INCLUDE [Publish Azure](../../../includes/spatial-anchors-publish-azure.md)]
 
 ## <a name="visual-studio-code"></a>[Visual Studio Code](#tab/VSC)
 
-Vous devrez créer un groupe de ressources et un plan App Service avant de déployer le service dans VS Code.
+Vous devez créer un groupe de ressources et un plan App Service avant de déployer le service dans Visual Studio Code.
 
-### <a name="sign-in-to-azure"></a>Se connecter à Azure
+### <a name="sign-in-to-azure"></a>Connexion à Azure
 
-Accédez au <a href="https://portal.azure.com/" target="_blank">portail Azure</a> et connectez-vous à votre abonnement Azure.
+Accédez au <a href="https://portal.azure.com/" target="_blank">portail Azure</a>, puis connectez-vous à votre abonnement Azure.
 
 ### <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -72,17 +74,19 @@ Nommez le groupe de ressources **myResourceGroup**, puis sélectionnez **OK**.
 
 En regard de **Plan d’hébergement**, sélectionnez **Nouveau**.
 
-Dans la boîte de dialogue **Configurer le plan d’hébergement**, utilisez ces paramètres :
+Dans le volet **Configurer un plan d’hébergement**, utilisez ces paramètres :
 
 | Paramètre | Valeur suggérée | Description |
 |-|-|-|
-|Plan App Service| MySharingServicePlan | Nom du plan App Service. |
-| Emplacement | USA Ouest | Centre de données dans lequel l’application web est hébergée. |
-| Taille | Gratuit | [Niveau tarifaire](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) déterminant les fonctionnalités d’hébergement. |
+|Plan App Service| MySharingServicePlan | Nom du plan App Service |
+| Emplacement | USA Ouest | Centre de données où l’application web est hébergée |
+| Taille | Gratuit | [Niveau tarifaire](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) déterminant les fonctionnalités d’hébergement |
 
 Sélectionnez **OK**.
 
-Ouvrez Visual Studio Code, puis le projet situé dans le dossier `Sharing\SharingServiceSample`. Suivez <a href="https://docs.microsoft.com/aspnet/core/tutorials/publish-to-azure-webapp-using-vscode?view=aspnetcore-2.2#open-it-with-visual-studio-code" target="_blank">ce tutoriel</a> pour déployer le service de partage par le biais de Visual Studio Code. Vous pouvez suivre les étapes à partir de la section « Ouvrir le projet avec Visual Studio Code ». Ne créez pas un autre projet MVC comme expliqué à l’étape ci-dessus, car vous disposez déjà du projet qui doit être déployé et publié : SharingServiceSample.
+Après avoir ouvert Visual Studio Code, ouvrez le projet dans le dossier *Sharing\SharingServiceSample*. 
+
+Pour déployer le service de partage via Visual Studio Code, suivez les instructions dans <a href="/aspnet/core/tutorials/publish-to-azure-webapp-using-vscode?view=aspnetcore-2.2#open-it-with-visual-studio-code" target="_blank">Publier une application ASP.NET Core sur Azure avec Visual Studio Code</a>. Commencez à la section « Ouvrir le projet avec Visual Studio Code ». Ne créez pas un autre projet ASP.NET comme expliqué à l’étape précédente, car vous avez déjà un projet à déployer et à publier : SharingServiceSample.
 
 ---
 
@@ -90,20 +94,13 @@ Ouvrez Visual Studio Code, puis le projet situé dans le dossier `Sharing\Sharin
 
 [!INCLUDE [Run Share Anchors Sample](../../../includes/spatial-anchors-run-share-sample.md)]
 
-## <a name="troubleshooting"></a>Dépannage
-
-### <a name="unity-20193"></a>Unity 2019.3
-
-En raison de changements cassants, Unity 2019.3 n’est pas pris en charge pour le moment. Utilisez Unity 2019.1 ou 2019.2.
-
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez déployé une application web ASP.NET Core dans Azure, puis configuré et déployé une application Unity. Vous avez créé des ancres spatiales avec l’application, puis les avez partagées avec d’autres appareils à l’aide de votre application web ASP.NET Core.
+Dans ce tutoriel, vous avez déployé une application web ASP.NET Core dans Azure, puis configuré et déployé une application Unity. Vous avez créé des ancres spatiales avec l’application et les avez partagées avec d’autres appareils en utilisant votre application web ASP.NET Core.
 
-Vous pouvez améliorer votre application web ASP.NET Core afin qu’elle utilise Azure Cosmos DB pour rendre le stockage des identificateurs de vos ancres spatiales partagées permanent. L’ajout de la prise en charge d’Azure Cosmos DB permettra à votre application de créer une ancre aujourd’hui et de la relocaliser dans plusieurs jours à partir de l’identificateur d’ancre stocké dans votre application web.
+Vous pouvez améliorer votre application web ASP.NET Core afin qu’elle utilise Azure Cosmos DB pour rendre le stockage des identificateurs de vos ancres spatiales partagées permanent. En ajoutant la prise en charge d’Azure Cosmos DB, vous pouvez dès aujourd’hui créer une ancre avec votre application web ASP.NET Core. Ensuite, à partir de l’identificateur d’ancre stocké dans votre application web, vous pouvez faire en sorte que l’application relocalise l’ancre quelques jours plus tard.
 
 > [!div class="nextstepaction"]
-> [Utiliser Azure Cosmos DB pour stocker des ancres](./tutorial-use-cosmos-db-to-store-anchors.md)
-
+> [Utiliser Azure Cosmos DB pour stocker des ancres](./tutorial-use-cosmos-db-to-store-anchors.md)

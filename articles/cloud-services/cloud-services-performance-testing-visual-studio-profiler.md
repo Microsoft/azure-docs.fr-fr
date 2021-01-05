@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/18/2016
 ms.author: mikejo
-ms.openlocfilehash: 21270d3c7143ce063ffe30d939368b9813e9072e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6b5707405879c462a1d919e04730d368332ba68c
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70094103"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92077153"
 ---
 # <a name="testing-the-performance-of-a-cloud-service-locally-in-the-azure-compute-emulator-using-the-visual-studio-profiler"></a>Test des performances d'un service cloud local dans l'émulateur de calcul Azure avec le profileur Visual Studio
 Différents outils et diverses techniques permettent de tester les performances des services cloud.
@@ -166,9 +166,9 @@ Félicitations ! Vous avez fait connaissance avec le profileur.
 ## <a name="next-steps"></a>Étapes suivantes
 L'instrumentalisation d'exécutables Azure dans l'émulateur de calcul n'est pas prise en charge par le profileur Visual Studio, mais si vous souhaitez tester l'allocation de la mémoire, vous pouvez choisir cette option au moment du profilage. Vous pouvez également choisir le profilage d'accès concurrentiel, qui vous aide à savoir si des threads perdent du temps à se disputer les verrouillages, ou bien le profilage d'interaction de couche, qui permet de détecter les problèmes de performances lors de l'interaction entre différentes couches de l'application, la plupart du temps entre la couche de données et un rôle de travail.  Vous pouvez consulter les requêtes de base de données que votre application génère et utiliser les données de profilage pour optimiser l'utilisation de la base de données. Pour plus d’informations sur le profilage d’interaction de couche, consultez le billet de blog [Walkthrough: Using the Tier Interaction Profiler in Visual Studio Team System 2010][3].
 
-[1]: https://docs.microsoft.com/azure/application-insights/app-insights-profiler
-[2]: https://msdn.microsoft.com/library/azure/hh411542.aspx
-[3]: https://blogs.msdn.com/b/habibh/archive/2009/06/30/walkthrough-using-the-tier-interaction-profiler-in-visual-studio-team-system-2010.aspx
+[1]: ../azure-monitor/app/profiler.md
+[2]: /previous-versions/azure/hh411542(v=azure.100)
+[3]: /archive/blogs/habibh/walkthrough-using-the-tier-interaction-profiler-in-visual-studio-team-system-2010
 [4]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally09.png
 [5]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally10.png
 [6]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally02.png

@@ -1,22 +1,22 @@
 ---
-title: Problèmes connus liés à la conformité du protocole SCIM 2.0 - Azure AD
+title: Problèmes connus avec la conformité du protocole SCIM (System for Cross-domain Identity Management) 2.0 – Azure AD
 description: Comment résoudre les problèmes courants de compatibilité des protocoles rencontrés lors de l’ajout d’une application ne figurant pas dans la galerie qui prend en charge SCIM 2.0 dans Azure AD
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 12/03/2018
-ms.author: mimart
+ms.topic: reference
+ms.date: 08/05/2020
+ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: 00551eb6c9d5d6fab9dc1d698a7a25bb6872901b
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 7f400d6959a40361ea3beff8bd21c2fa9ef2996a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594030"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90052628"
 ---
 # <a name="known-issues-and-resolutions-with-scim-20-protocol-compliance-of-the-azure-ad-user-provisioning-service"></a>Problèmes et solutions connus relatifs à la conformité au protocole SCIM 2.0 du service de provisionnement des utilisateurs Azure AD
 
@@ -26,32 +26,129 @@ La prise en charge Azure AD du protocole SCIM 2.0 est décrite dans l’article
 
 Cet article décrit les problèmes actuels et passés concernant le respect du service d’approvisionnement d’utilisateurs Azure AD au protocole SCIM 2.0, et comment les résoudre.
 
-> [!IMPORTANT]
-> La dernière mise à jour du client SCIM du service d’approvisionnement utilisateur Azure AD a été effectuée le 18 décembre 2018. Cette mise à jour traite des problèmes de compatibilité connus énumérés dans le tableau ci-dessous. Consultez le forum aux questions ci-dessous pour plus d’informations sur cette mise à jour.
+## <a name="understanding-the-provisioning-job"></a>Compréhension des étapes d’approvisionnement
+Le service d’approvisionnement utilise le concept de travail pour opérer sur une application. Le jobID se trouve dans la [barre de progression](application-provisioning-when-will-provisioning-finish-specific-user.md#view-the-provisioning-progress-bar). Toutes les nouvelles applications d’approvisionnement sont créées avec un jobID commençant par « scim ». Le travail scim représente l’état actuel du service. Les travaux plus anciens ont l’ID « customappsso ». Ce travail représente l’état du service en 2018. 
+
+Si vous utilisez une application de la galerie, le travail contient généralement le nom de l’application (par exemple, zoom snowFrake, dataBricks, etc.). Vous pouvez ignorer cette documentation lors de l’utilisation d’une application de la galerie. Cela s’applique principalement aux applications qui ne sont pas de la galerie avec jobID SCIM ou customAppSSO.
 
 ## <a name="scim-20-compliance-issues-and-status"></a>Problèmes de conformité et état SCIM 2.0
-
-| **Problèmes de conformité à SCIM 2.0** |  **Résolution ?** | **Date du correctif**  |  
-|---|---|---|
-| Azure AD nécessite que « /scim » soit à la racine de l’URL du point de terminaison SCIM de l’application  | Oui  |  18 décembre 2018 | 
-| Les attributs d’extension utilisent la notation point « . » avant les noms d’attribut, et non pas la notation deux-points « : » |  Oui  | 18 décembre 2018  | 
-|  Les demandes de correctif pour les attributs multivaleurs contiennent une syntaxe de filtre de chemin d’accès non valide | Oui  |  18 décembre 2018  | 
-|  Les demandes de création de groupe contiennent une URI de schéma non valide | Oui  |  18 décembre 2018  |  
-
-## <a name="were-the-services-fixes-described-automatically-applied-to-my-pre-existing-scim-app"></a>Les corrections de services décrites ont-elles été automatiquement appliquées à mon application SCIM préexistante ?
-
-Non. Comme cela aurait constitué un changement radical pour les applications SCIM codées pour utiliser l’ancien comportement, les modifications n’ont pas été automatiquement appliquées aux applications existantes.
-
-Les changements sont appliqués à toutes les nouvelles [applications SCIM en dehors de la galerie](../manage-apps/configure-single-sign-on-non-gallery-applications.md) configurées dans le portail Azure, après la date du correctif.
-
-Pour plus d’informations sur la migration d’un travail d’approvisionnement utilisateur préexistant en vue d’inclure les dernières correctifs, reportez-vous à la section suivante.
-
-## <a name="can-i-migrate-an-existing-scim-based-user-provisioning-job-to-include-the-latest-service-fixes"></a>Puis-je migrer un travail d’approvisionnement utilisateur existant basé sur SCIM pour y inclure les dernières correctifs de service ?
-
-Oui. Si vous utilisez déjà cette instance d’application pour l’authentification unique et que vous avez besoin de migrer le travail d’approvisionnement existant pour inclure les dernières corrections, suivez la procédure ci-dessous. Cette procédure décrit comment utiliser l’API Microsoft Graph et l’explorateur d’API Microsoft Graph pour supprimer votre ancien travail d’approvisionnement de votre application SCIM existante et en créer une nouvelle qui présente le nouveau comportement.
+Dans le tableau ci-dessous, tout élément marqué comme corrigé signifie que le comportement correct peut être trouvé sur le travail SCIM. Nous avons travaillé pour garantir la compatibilité descendante des modifications que nous avons apportées. Toutefois, nous vous déconseillons d’implémenter l’ancien comportement. Nous vous recommandons d’utiliser le nouveau comportement pour les nouvelles implémentations et la mise à jour des implémentations existantes.
 
 > [!NOTE]
-> Si votre application est encore en cours de développement et n’a pas encore été déployée pour l’authentification unique ou l’approvisionnement utilisateur, la solution la plus simple est de supprimer l’entrée de l’application dans la section **Azure Active Directory > Applications d’entreprise** du portail Azure, et de simplement ajouter une nouvelle entrée pour l’application en utilisant l’option **Créer une application > Ne figurant pas dans la galerie**. Il s’agit d’une alternative à l’exécution de la procédure ci-dessous.
+> Pour les modifications apportées en 2018, vous pouvez revenir au comportement customappsso. Pour les modifications apportées depuis 2018, vous pouvez utiliser les URL pour revenir à l’ancien comportement. Nous avons travaillé pour garantir la compatibilité descendante des modifications que nous avons apportées en vous permettant de revenir à l’ancien jobID ou en utilisant un indicateur. Toutefois, comme mentionné précédemment, nous vous déconseillons d’implémenter l’ancien comportement. Nous vous recommandons d’utiliser le nouveau comportement pour les nouvelles implémentations et la mise à jour des implémentations existantes.
+
+| **Problèmes de conformité à SCIM 2.0** |  **Résolution ?** | **Date du correctif**  |  **Compatibilité descendante** |
+|---|---|---|
+| Azure AD nécessite que « /scim » soit à la racine de l’URL du point de terminaison SCIM de l’application  | Oui  |  18 décembre 2018 | Passage à la version antérieure customappSSO |
+| Les attributs d’extension utilisent la notation point « . » avant les noms d’attribut, et non pas la notation deux-points « : » |  Oui  | 18 décembre 2018  | Passage à la version antérieure customappSSO |
+| Les demandes de correctif pour les attributs multivaleurs contiennent une syntaxe de filtre de chemin d’accès non valide | Oui  |  18 décembre 2018  | passage à la version antérieure customappSSO |
+| Les demandes de création de groupe contiennent une URI de schéma non valide | Oui  |  18 décembre 2018  |  passage à la version antérieure customappSSO |
+| Mise à jour du comportement des PATCH pour garantir la conformité (par exemple, actif en tant que valeur booléenne et suppressions appropriées d’appartenance à un groupe) | Non | TBD| utiliser un indicateur d’aperçu |
+
+## <a name="flags-to-alter-the-scim-behavior"></a>Indicateurs permettant de modifier le comportement de SCIM
+Utilisez les indicateurs ci-dessous dans l’URL du locataire de votre application afin de modifier le comportement de client SCIM par défaut.
+
+:::image type="content" source="media/application-provisioning-config-problem-scim-compatibility/scim-flags.jpg" alt-text="Indicateurs SCIM pour comportement ultérieur.&quot;:::
+
+* Utilisez l’URL suivante pour mettre à jour le comportement des PATCH et garantir la conformité SCIM (par exemple, actif en tant que valeur booléenne et suppressions appropriées d’appartenance à un groupe). Ce comportement est actuellement disponible uniquement lorsque vous utilisez l’indicateur, mais il deviendra le comportement par défaut au cours des prochains mois. Notez que cet indicateur de préversion ne fonctionne actuellement pas avec l’approvisionnement à la demande. 
+  * **URL (conforme à SCIM) :** AzureAdScimPatch062020
+  * **Références RFC SCIM :** 
+    * https://tools.ietf.org/html/rfc7644#section-3.5.2
+  * **Comportement :**
+  ```json
+   PATCH https://[...]/Groups/ac56b4e5-e079-46d0-810e-85ddbd223b09
+   {
+    &quot;schemas&quot;: [
+        &quot;urn:ietf:params:scim:api:messages:2.0:PatchOp&quot;
+    ],
+    &quot;Operations&quot;: [
+        {
+            &quot;op&quot;: &quot;remove&quot;,
+            &quot;path&quot;: &quot;members[value eq \&quot;16b083c0-f1e8-4544-b6ee-27a28dc98761\&quot;]&quot;
+        }
+    ]
+   }
+
+    PATCH https://[...]/Groups/ac56b4e5-e079-46d0-810e-85ddbd223b09
+    {
+    &quot;schemas&quot;: [
+        &quot;urn:ietf:params:scim:api:messages:2.0:PatchOp&quot;
+    ],
+    &quot;Operations&quot;: [
+        {
+            &quot;op&quot;: &quot;add&quot;,
+            &quot;path&quot;: &quot;members&quot;,
+            &quot;value&quot;: [
+                {
+                    &quot;value&quot;: &quot;10263a6910a84ef9a581dd9b8dcc0eae&quot;
+                }
+            ]
+        }
+    ]
+    } 
+
+    PATCH https://[...]/Users/ac56b4e5-e079-46d0-810e-85ddbd223b09
+    {
+    &quot;schemas&quot;: [
+        &quot;urn:ietf:params:scim:api:messages:2.0:PatchOp&quot;
+    ],
+    &quot;Operations&quot;: [
+        {
+            &quot;op&quot;: &quot;replace&quot;,
+            &quot;path&quot;: &quot;emails[type eq \&quot;work\&quot;].value&quot;,
+            &quot;value&quot;: &quot;someone@contoso.com&quot;
+        },
+        {
+            &quot;op&quot;: &quot;replace&quot;,
+            &quot;path&quot;: &quot;emails[type eq \&quot;work\&quot;].primary&quot;,
+            &quot;value&quot;: true
+        },
+        {
+            &quot;op&quot;: &quot;replace&quot;,
+            &quot;value&quot;: {
+                &quot;active&quot;: false,
+                &quot;userName&quot;: &quot;someone&quot;
+            }
+        }
+    ]
+    }
+
+    PATCH https://[...]/Users/ac56b4e5-e079-46d0-810e-85ddbd223b09
+    {
+    &quot;schemas&quot;: [
+        &quot;urn:ietf:params:scim:api:messages:2.0:PatchOp&quot;
+    ],
+    &quot;Operations&quot;: [
+        {
+            &quot;op&quot;: &quot;replace&quot;,
+            &quot;path&quot;: &quot;active&quot;,
+            &quot;value&quot;: false
+        }
+    ]
+    }
+
+    PATCH https://[...]/Users/ac56b4e5-e079-46d0-810e-85ddbd223b09
+    {
+    &quot;schemas&quot;: [
+        &quot;urn:ietf:params:scim:api:messages:2.0:PatchOp&quot;
+    ],
+    &quot;Operations&quot;: [
+        {
+            &quot;op&quot;: &quot;add&quot;,
+            &quot;path&quot;: &quot;urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department&quot;,
+            &quot;value&quot;: &quot;Tech Infrastructure"
+        }
+    ]
+    }
+   
+  ```
+
+  * **URL de rétrogradation :** Une fois que le nouveau comportement conforme à SCIM devient celui par défaut sur l’application ne figurant pas dans la galerie, vous pouvez utiliser l’URL suivante pour revenir à l’ancien comportement conforme non SCIM : AzureAdScimPatch2017
+  
+
+
+## <a name="upgrading-from-the-older-customappsso-job-to-the-scim-job"></a>Mise à niveau de l’ancien travail customappsso en travail SCIM
+Les étapes ci-dessous ont pour effet de supprimer votre travail customappsso existant et créer un nouveau travail scim. 
  
 1. Connectez-vous au portail Azure à l’adresse https://portal.azure.com.
 2. Dans la section **Azure Active Directory > Applications d’entreprise** du portail Azure, localisez et sélectionnez votre application SCIM existante.
@@ -71,7 +168,7 @@ Oui. Si vous utilisez déjà cette instance d’application pour l’authentific
  
    ![Obtenir le schéma](media/application-provisioning-config-problem-scim-compatibility/get-schema.PNG "Obtenir le schéma") 
 
-8. Copiez la sortie JSON de la dernière étape et enregistrez-la dans un fichier texte. Ce code JSON de quelques milliers de lignes contient tous les mappages d’attributs personnalisés que vous avez ajoutés à votre ancienne application.
+8. Copiez la sortie JSON de la dernière étape et enregistrez-la dans un fichier texte. Le code JSON contient les mappages d’attributs personnalisés que vous avez ajoutés à votre ancienne application et doit contenir quelques milliers de lignes.
 9. Exécutez la commande ci-dessous pour supprimer le travail d’approvisionnement :
  
    `DELETE https://graph.microsoft.com/beta/servicePrincipals/[object-id]/synchronization/jobs/[job-id]`
@@ -81,7 +178,7 @@ Oui. Si vous utilisez déjà cette instance d’application pour l’authentific
  `POST https://graph.microsoft.com/beta/servicePrincipals/[object-id]/synchronization/jobs`
  `{   templateId: "scim"   }`
    
-11. Dans les résultats de la dernière étape, copiez la chaîne « ID » complète qui commence par « scim ». Si vous le souhaitez, réappliquez vos anciens mappages d’attributs en exécutant la commande ci-dessous, en remplaçant [new-job-id] par le nouvel ID de travail que vous venez de copier, et en entrant la sortie JSON de l’étape n° 7 en tant que corps de la requête.
+11. Dans les résultats de la dernière étape, copiez la chaîne « ID » complète qui commence par « scim ». Si vous le souhaitez, réappliquez vos anciens mappages d’attributs en exécutant la commande ci-dessous, en remplaçant [new-job-id] par le nouvel ID de travail que vous avez copié, et en entrant la sortie JSON de l’étape n° 7 en tant que corps de la demande.
 
  `POST https://graph.microsoft.com/beta/servicePrincipals/[object-id]/synchronization/jobs/[new-job-id]/schema`
  `{   <your-schema-json-here>   }`
@@ -89,10 +186,9 @@ Oui. Si vous utilisez déjà cette instance d’application pour l’authentific
 12. Revenez à la première fenêtre du navigateur Web et sélectionnez l’onglet **Approvisionnement** de votre application.
 13. Vérifiez votre configuration, puis démarrez la tâche d’approvisionnement. 
 
-## <a name="can-i-add-a-new-non-gallery-app-that-has-the-old-user-provisioning-behavior"></a>Puis-je ajouter une nouvelle application non galerie possédant l’ancien comportement d’approvisionnement des utilisateurs ?
+## <a name="downgrading-from-the-scim-job-to-the-customappsso-job-not-recommended"></a>passage fu travail SCIM à la tâche version antérieure du travail customappsso (non recommandé)
+ Nous vous autorisons à revenir à l’ancien comportement mais ne le recommandons pas, car le travail customappsso ne bénéficie pas de certaines mises à jour que nous faisons, et risque ne pas être pris en charge indéfiniment. 
 
-Oui. Si vous avez codé une application sur l’ancien comportement qui existait avant les correctifs et que vous avez besoin de déployer une nouvelle instance, suivez la procédure ci-dessous. Cette procédure décrit comment utiliser l’API Microsoft Graph et l’explorateur d’API Microsoft Graph pour créer un travail d’approvisionnement qui présente l’ancien comportement.
- 
 1. Connectez-vous au portail Azure à l’adresse https://portal.azure.com.
 2. Dans la section **Azure Active Directory > Applications d’entreprise > Créer une application** du portail Azure, créez une application **ne figurant pas dans la galerie**.
 3. Dans la section **Propriétés** de votre nouvelle application personnalisée, copiez l’**ID objet**.
@@ -109,4 +205,3 @@ Oui. Si vous avez codé une application sur l’ancien comportement qui existait
 
 ## <a name="next-steps"></a>Étapes suivantes
 [En savoir plus sur l’approvisionnement et l’annulation de l’approvisionnement pour les applications SaaS](user-provisioning.md)
-

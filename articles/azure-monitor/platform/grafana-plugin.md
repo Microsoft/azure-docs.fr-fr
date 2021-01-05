@@ -4,12 +4,12 @@ description: Acheminez les données Azure Monitor et Application Insights en vue
 ms.subservice: ''
 ms.topic: conceptual
 ms.date: 11/06/2017
-ms.openlocfilehash: 142e3e19c13710963d239a75bc237b63713c29cc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 23bba091628eee767fbf292a8a8d772ffab674cb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77672206"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073460"
 ---
 # <a name="monitor-your-azure-services-in-grafana"></a>Surveiller vos services Azure dans Grafana
 Maintenant, vous pouvez superviser les services et applications Azure à partir de [Grafana](https://grafana.com/) en utilisant le [plug-in Azure Monitor de source de données](https://grafana.com/plugins/grafana-azure-monitor-datasource). Le plug-in rassemble des données de performance d’application collectées par Azure Monitor, y compris divers journaux d’activité et métriques. Vous pouvez ensuite afficher ces données dans votre tableau de bord Grafana.
@@ -42,7 +42,7 @@ Pour configurer un serveur Grafana local, [téléchargez et installez Grafana da
 
 ## <a name="sign-in-to-grafana"></a>Se connecter à Grafana
 
-1. À l’aide de l’adresse IP de votre serveur, ouvrez la page de connexion sur *http://\<adresse IP\>: 3000* ou le *\<NomDNS>\:3000* dans votre navigateur. 3000 étant le port par défaut, notez que vous avez peut-être sélectionné un port différent pendant la configuration. Une page de connexion doit s’afficher pour le serveur Grafana que vous avez créé.
+1. À l’aide de l’adresse IP de votre serveur, ouvrez la page de connexion *http://\<IP address\>:3000* ou le *\<DNSName>\:3000* dans votre navigateur. 3000 étant le port par défaut, notez que vous avez peut-être sélectionné un port différent pendant la configuration. Une page de connexion doit s’afficher pour le serveur Grafana que vous avez créé.
 
     ![Écran de connexion Grafana](./media/grafana-plugin/grafana-login-screen.png)
 
@@ -59,9 +59,9 @@ Lorsque vous êtes correctement connecté, vous devez voir que le plug-in Azure 
 2. Choisissez un nom pour la source de données et sélectionnez **Azure Monitor** comme type dans la liste déroulante.
 
 3. Créer un principal de service - Grafana utilise un principal de service Azure Active Directory pour se connecter à des API Azure Monitor et collecter des données. Vous devez créer un principal de service ou en utiliser un existant pour gérer l’accès à vos ressources Azure.
-    * Consultez [ces instructions](../../azure-resource-manager/resource-group-create-service-principal-portal.md) pour créer un principal de service. Copiez et enregistrez votre ID de locataire (ID d’annuaire), ID client (ID d’application) et le secret client (valeur de la clé d’application).
-    * Consultez [Affecter l’application à un rôle](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal) pour assigner le rôle de lecteur à l’application Azure Active Directory dans l’abonnement, le groupe de ressources ou la ressource que vous souhaitez superviser. 
-    L’API Log Analytics a besoin du [rôle Lecteur Log Analytics](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#log-analytics-reader) qui inclut les autorisations du rôle de lecteur et les lui ajoute.
+    * Consultez [ces instructions](../../active-directory/develop/howto-create-service-principal-portal.md) pour créer un principal de service. Copiez et enregistrez votre ID de locataire (ID d’annuaire), ID client (ID d’application) et le secret client (valeur de la clé d’application).
+    * Consultez [Affecter l’application à un rôle](../../active-directory/develop/howto-create-service-principal-portal.md) pour assigner le rôle de lecteur à l’application Azure Active Directory dans l’abonnement, le groupe de ressources ou la ressource que vous souhaitez superviser. 
+    L’API Log Analytics a besoin du [rôle Lecteur Log Analytics](../../role-based-access-control/built-in-roles.md#log-analytics-reader) qui inclut les autorisations du rôle de lecteur et les lui ajoute.
 
 4. Fournissez les informations de connexion aux API que vous souhaitez utiliser. Vous pouvez vous connecter à l’intégralité de ces API ou à certaines d’entre elles. 
     * Si vous vous connectez aux métriques et aux journaux dans Azure Monitor, vous pouvez réutiliser les mêmes informations d’identification en sélectionnant **Same details as Azure Monitor API (Mêmes détails que l’API Azure Monitor)** .
@@ -104,7 +104,7 @@ Lorsque vous êtes correctement connecté, vous devez voir que le plug-in Azure 
     ![Exemple de deux graphes Grafana](media/grafana-plugin/grafana6.png)
 
 
-## <a name="optional-monitor-your-custom-metrics-in-the-same-grafana-server"></a>Facultatif : Surveiller vos métriques personnalisés dans le même serveur Grafana
+## <a name="optional-monitor-your-custom-metrics-in-the-same-grafana-server"></a>Facultatif : Surveiller vos métriques personnalisés dans le même serveur Grafana
 
 Vous pouvez également installer Telegraf et InfluxDB pour collecter et tracer des métriques à la fois personnalisés et basés sur agent dans la même instance Grafana. Il existe de nombreux plug-ins de source de données à utiliser pour rassembler ces métriques dans un tableau de bord.
 
@@ -159,4 +159,3 @@ Si vous avez configuré un environnement Grafana sur Azure, vous êtes facturé 
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Vue d’ensemble des métriques d’Azure Monitor](data-platform.md)
-

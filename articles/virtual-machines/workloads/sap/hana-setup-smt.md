@@ -7,18 +7,19 @@ author: hermanndms
 manager: juergent
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/10/2018
 ms.author: hermannd
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 699a8a69621642d07d3547c07bb20c0d32ca7686
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 88b1cd2a5bf33d6401f0d2e15237400e27c72e54
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77616990"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967650"
 ---
 # <a name="set-up-smt-server-for-suse-linux"></a>Configuration de serveur SMT pour SUSE Linux
 Les grandes instances SAP HANA n’ont pas de connexion directe à Internet. Le processus incluant l’inscription d’une telle unité auprès du fournisseur du système d’exploitation ainsi que le téléchargement et l’application des mises à jour n’est pas un simple. Avec SUSE Linux, une solution peut être de configurer un serveur SMT sur une machine virtuelle Azure. Hébergez la machine virtuelle dans un réseau virtuel Azure connecté à la grande instance HANA. Avec un tel serveur SMT, l’unité de grande instance HANA peut inscrire et télécharger des mises à jour. 
@@ -44,7 +45,7 @@ La machine virtuelle déployée est plus petite et a obtenu l’adresse IP inter
 
 Ajoutez un disque à la machine virtuelle. Vous utilisez ce disque pour stocker les mises à jour, et le disque de démarrage lui-même pourrait être trop petit. Ici, le disque a été monté sur /srv/www/htdocs, comme indiqué dans la capture d’écran suivante. Un disque de 100 Go devrait suffire.
 
-![Capture d’écran du déploiement d’une machine virtuelle pour un serveur SMT](./media/hana-installation/image4_additional_disk_on_smtserver.PNG)
+![Capture d’écran montrant le disque ajouté dans la fenêtre PuTTy.](./media/hana-installation/image4_additional_disk_on_smtserver.PNG)
 
 Connectez-vous aux unités de grande instance HANA, conservez le fichier /etc/hosts et vérifiez si vous pouvez atteindre la machine virtuelle Azure supposée exécuter le serveur SMT sur le réseau.
 

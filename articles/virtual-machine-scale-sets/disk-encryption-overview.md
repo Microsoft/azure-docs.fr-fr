@@ -10,10 +10,10 @@ ms.date: 10/10/2019
 ms.reviewer: jushiman
 ms.custom: mimckitt
 ms.openlocfilehash: 6b9805d66149a18216a200bc89a79b3e06106c9d
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83195107"
 ---
 # <a name="azure-disk-encryption-for-virtual-machine-scale-sets"></a>Azure Disk Encryption pour les groupes de machines virtuelles identiques

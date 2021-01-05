@@ -14,12 +14,12 @@ ms.date: 05/31/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b17300fa69b61c7713c860e2a35e63fcb6584bc4
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b82dcc633f0f2bb13cb84f80873117f9eb94a24f
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "66474006"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96176118"
 ---
 # <a name="tutorial--integrate-a-single-ad-forest-using-password-hash-sync-phs"></a>Tutoriel :  Intégrer une forêt AD unique avec la synchronisation du hachage de mot de passe (PHS)
 
@@ -29,8 +29,8 @@ Ce didacticiel vous guidera dans la création d’un environnement d’identité
 
 ## <a name="prerequisites"></a>Prérequis
 Voici les conditions préalables requises pour suivre ce didacticiel.
-- Un ordinateur où [Hyper-V](https://docs.microsoft.com/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](https://docs.microsoft.com/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](https://docs.microsoft.com/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
-- Une [carte réseau externe](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
+- Un ordinateur où [Hyper-V](/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
+- Une [carte réseau externe](/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
 - Un [abonnement Azure](https://azure.microsoft.com/free)
 - Une copie de Windows Server 2016
 
@@ -184,7 +184,7 @@ Nous devons maintenant créer un locataire Azure AD pour synchroniser nos utili
 2. Cliquez sur l’**icône plus (+)** et recherchez **Azure Active Directory**.
 3. Dans la liste des résultats, sélectionnez sur **Azure Active Directory**.
 4. Sélectionnez **Create** (Créer).</br>
-![Créer](media/tutorial-password-hash-sync/create1.png)</br>
+![Capture d’écran montrant comment créer un locataire Azure AD.](media/tutorial-password-hash-sync/create1.png)</br>
 5. Indiquez le **nom de l’organisation** avec le **nom de domaine initial**. Sélectionnez ensuite **Créer**. Votre annuaire est alors créé.
 6. Une fois cette opération terminée, cliquez sur **ce lien** pour gérer l’annuaire.
 
@@ -192,10 +192,10 @@ Nous devons maintenant créer un locataire Azure AD pour synchroniser nos utili
 Maintenant que nous avons un locataire Azure AD, nous allons créer un compte d’administrateur général.  Ce compte est utilisé pour créer le compte de connecteur Azure AD lors de l’installation d’Azure AD Connect.  Le compte de connecteur Azure AD sert à écrire des informations dans Azure AD.   Pour créer le compte d’administrateur général, procédez comme suit.
 
 1.  Sous **Gérer**, sélectionnez **Utilisateurs**.</br>
-![Créer](media/tutorial-password-hash-sync/gadmin1.png)</br>
+![Capture d’écran montrant l’option Utilisateur sélectionnée dans la section Gérer où vous créez un administrateur général dans Azure AD.](media/tutorial-password-hash-sync/gadmin1.png)</br>
 2.  Sélectionnez **Tous les utilisateurs**, puis **+ Nouvel utilisateur**.
 3.  Renseignez un nom et un nom d’utilisateur pour cet utilisateur. Il s’agit de votre administrateur général pour le locataire. Vous devez également définir le **rôle d’annuaire** sur **Administrateur général**. Vous pouvez également afficher le mot de passe temporaire. Lorsque vous avez terminé, sélectionnez **Créer**.</br>
-![Créer](media/tutorial-password-hash-sync/gadmin2.png)</br>
+![Capture d’écran montrant le bouton Créer que vous sélectionnez quand vous créez un administrateur général dans Azure AD.](media/tutorial-password-hash-sync/gadmin2.png)</br>
 4. Une fois cette opération terminée, ouvrez une nouvelle fenêtre de navigateur web et connectez-vous à myapps.microsoft.com en utilisant le nouveau compte d’administrateur général et le mot de passe temporaire.
 5. Remplacez le mot de passe de l’administrateur général par quelque chose de facile à retenir.
 
@@ -203,10 +203,10 @@ Maintenant que nous avons un locataire Azure AD, nous allons créer un compte d
 Il est maintenant temps de télécharger et d’installer Azure AD Connect.  Une fois l’installation terminée, nous aborderons l’installation rapide.  Effectuez les actions suivantes :
 
 1. Télécharger [Azure AD Connect](https://www.microsoft.com/download/details.aspx?id=47594)
-2. Accédez à **AzureADConnect.msi**et double-cliquez sur ce fichier.
+2. Accédez à **AzureADConnect.msi** et double-cliquez sur ce fichier.
 3. Sur l'écran d’accueil, sélectionnez la case pour accepter les termes du contrat de licence et cliquez sur **Continuer**.  
 4. Sur l'écran Paramètres Express, cliquez sur **Utiliser les paramètres Express**.</br>  
-![Créer](media/tutorial-password-hash-sync/express1.png)</br>
+![Capture d’écran montrant l’écran des paramètres Express et le bouton Utiliser les paramètres Express.](media/tutorial-password-hash-sync/express1.png)</br>
 5. Sur l’écran Connexion à Azure AD, entrez le nom d’utilisateur et le mot de passe de l’administrateur général pour l’instance Azure AD. Cliquez sur **Suivant**.  
 6. Sur l’écran Connexion à AD DS, entrez le nom d’utilisateur et le mot de passe d’un compte d’administrateur d’entreprise. Cliquez sur **Suivant**.  
 7. Sur l’écran Prêt à configurer, cliquez sur **Installer**.

@@ -4,10 +4,10 @@ description: Présentation des tâches multiétapes, une fonctionnalité d’ACR
 ms.topic: article
 ms.date: 03/28/2019
 ms.openlocfilehash: 0dcd38559d3f50715f982de4c9c80bfe9c6c8433
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78399701"
 ---
 # <a name="run-multi-step-build-test-and-patch-tasks-in-acr-tasks"></a>Exécuter des tâches de compilation, de test et de correction multiétapes dans les tâches ACR

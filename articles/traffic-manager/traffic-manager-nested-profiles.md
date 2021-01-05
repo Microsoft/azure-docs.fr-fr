@@ -4,7 +4,7 @@ titleSuffix: Azure Traffic Manager
 description: Cet article explique la fonctionnalité des profils imbriqués d’Azure Traffic Manager
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 manager: twooley
 ms.service: traffic-manager
 ms.devlang: na
@@ -12,13 +12,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/22/2018
-ms.author: rohink
-ms.openlocfilehash: 282099cb274c1ea872a0df9c2753a939ef31421f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: d96cd9b3c83357c2591edf4bbb09a82b897c6a24
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938571"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91826030"
 ---
 # <a name="nested-traffic-manager-profiles"></a>Profils Traffic Manager imbriqués
 
@@ -97,7 +97,7 @@ Les paramètres d’analyse dans un profil Traffic Manager s’appliquent à tou
 
 ## <a name="faqs"></a>FAQ
 
-* [Comment configurer des profils imbriqués ?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#traffic-manager-endpoint-monitoring)
+* [Comment configurer des profils imbriqués ?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#traffic-manager-nested-profiles)
 
 * [Combien de couches d’imbrication Traffic Manager prend-il en charge ?](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-faqs#how-many-layers-of-nesting-does-traffic-manger-support)
 

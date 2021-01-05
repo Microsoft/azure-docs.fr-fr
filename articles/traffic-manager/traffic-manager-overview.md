@@ -2,7 +2,7 @@
 title: Azure Traffic Manager | Microsoft Docs
 description: Cet article fournit une vue d’ensemble d’Azure Traffic Manager. Déterminez si Azure Traffic Manager est adapté à votre application pour équilibrer la charge de trafic utilisateur.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 manager: twooley
 ms.service: traffic-manager
 customer intent: As an IT admin, I want to learn about Traffic Manager and what I can use it for.
@@ -11,13 +11,13 @@ ms.topic: overview
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/23/2019
-ms.author: rohink
-ms.openlocfilehash: 6eb1ce18f3bc6674efd5343306fff617bc9cd1f7
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.author: duau
+ms.openlocfilehash: 830700fb4a5ac57405877364e9cc4828e5d1a5a4
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80060797"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89392542"
 ---
 # <a name="what-is-traffic-manager"></a>Qu’est-ce que Traffic Manager ?
 Azure Traffic Manager est un équilibreur de charge du trafic DNS qui vous permet de distribuer le trafic de manière optimale aux services dans toutes les régions Azure globales, tout en offrant réactivité et haute disponibilité.

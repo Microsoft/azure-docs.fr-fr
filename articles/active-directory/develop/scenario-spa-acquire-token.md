@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 08/20/2019
 ms.author: negoe
 ms.custom: aaddev
-ms.openlocfilehash: eeba01a609a1a21ed564c0b9cb78a28a4ad5c95a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3d91e69d7d9eac9f8cae1a1a122a13afd19ef631
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80882316"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443872"
 ---
 # <a name="single-page-application-acquire-a-token-to-call-an-api"></a>Application monopage : Acquérir un jeton pour appeler une API
 
@@ -198,5 +198,4 @@ Ce code est identique à celui qui est décrit plus haut.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Appel d’une API web](scenario-spa-call-api.md)
+Passez à l’article suivant de ce scénario, [Appeler une API web](scenario-spa-call-api.md).

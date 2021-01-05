@@ -8,12 +8,16 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 09/18/2017
 ms.author: eustacea
-ms.openlocfilehash: 3d02d3573902964a8549fa0eeb1f4f1471de1752
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- 'Role: System Architecture'
+ms.openlocfilehash: 455f1f3e1c8181646fbe165d0f1aea6a2fb2fb13
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79237325"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92150709"
 ---
 # <a name="device-authentication-using-x509-ca-certificates"></a>Authentification des appareils à l’aide de certificats d’autorité de certification X.509
 
@@ -23,6 +27,8 @@ Cet article décrit comment utiliser des certificats d’autorité de certificat
 * Guide pratique pour inscrire le certificat de l’autorité de certification X.509 dans IoT Hub
 * Comment signer des appareils à l’aide de certificats d’autorité de certification X.509
 * Comment les appareils signés à l’aide d’une autorité de certification X.509 sont authentifiés
+
+[!INCLUDE [iot-hub-include-x509-ca-signed-support-note](../../includes/iot-hub-include-x509-ca-signed-support-note.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -50,7 +56,7 @@ Le propriétaire d’un certificat d’autorité de certification X.509 peut sig
 
 ![img-generic-cert-chain-of-trust](./media/generic-cert-chain-of-trust.png)
 
-Sur le certificat d’appareil (également appelé certificat feuille), le *Nom du sujet* doit être défini sur l’**ID d’appareil** utilisé lors de l’inscription de l’appareil IoT dans IoT Hub. Ce paramètre est requis pour l’authentification.
+Sur le certificat d’appareil (également appelé certificat feuille), le *Nom du sujet* doit être défini sur l’**ID d’appareil** (`CN=deviceId`) utilisé lors de l’inscription de l’appareil IoT dans le hub Azure IoT. Ce paramètre est requis pour l’authentification.
 
 Découvrez ici comment [créer une chaîne de certificats](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md) lors de la signature des appareils.
 
@@ -84,4 +90,4 @@ Découvrez ici comment [effectuer cette étape de connexion de l’appareil](iot
 
 En savoir plus sur [l’importance de l’authentification par autorité de certification X.509](iot-hub-x509ca-concept.md) dans IoT.
 
-Bien démarrer avec [Service IoT Hub Device Provisioning](https://docs.microsoft.com/azure/iot-dps/).
+Bien démarrer avec [Service IoT Hub Device Provisioning](../iot-dps/index.yml).

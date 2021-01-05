@@ -8,36 +8,40 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-news-search
 ms.topic: quickstart
-ms.date: 12/16/2019
+ms.date: 05/22/2020
 ms.author: aahi
-ms.custom: seodec2018
-ms.openlocfilehash: 1a3e98afacf85bde8180253078cb53eae9a03d2f
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: seodec2018, devx-track-java
+ms.openlocfilehash: f49de67504c3d3fea39d4c12ab4b06790693ad68
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75383610"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351961"
 ---
 # <a name="quickstart-perform-a-news-search-using-java-and-the-bing-news-search-rest-api"></a>Démarrage rapide : Effectuer une recherche d’actualités à l'aide de Java et l’API REST Recherche d'actualités Bing
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche d’actualités Bing et afficher la réponse JSON. Cette application simple en Java envoie une requête de recherche d’actualités à l’API et affiche ensuite la réponse.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
-Alors que cette application est écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche d’actualités Bing. Cette application simple en Java envoie une requête de recherche d’actualités à l’API et affiche ensuite la réponse JSON.
 
-Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingNewsSearchv7.java) 
+Bien que cette application soit écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+
+Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingNewsSearchv7.java). 
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Le [JDK (Java Development Kit) 7 ou 8](https://aka.ms/azure-jdks)
-
-* La [bibliothèque Gson](https://github.com/google/gson)
+* Le [JDK (Java Development Kit) 7 ou 8](/azure/developer/java/fundamentals/java-jdk-long-term-support).
+* La [bibliothèque Gson](https://github.com/google/gson).
 
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../includes/cognitive-services-bing-news-search-signup-requirements.md)]
 
 ## <a name="create-and-initialize-a-project"></a>Créer et initialiser un projet
 
-1. Créez un projet Java dans votre éditeur ou IDE favori, puis importez les bibliothèques suivantes.
+1. Créez un projet Java dans votre éditeur ou votre IDE favori, puis importez les bibliothèques suivantes :
 
     ```java
     import java.net.*;
@@ -50,7 +54,7 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
     import com.google.gson.JsonParser;
     ```
 
-2. Créez une classe avec des variables pour le point de terminaison d’API, votre clé d’abonnement et le terme de recherche. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Créez une classe. Ajoutez des variables pour le point de terminaison d’API, votre clé d’abonnement et le terme de recherche. Vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```java
     public static SearchResults SearchNews (String searchQuery) throws Exception {
@@ -64,7 +68,7 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
 
 ## <a name="construct-the-search-request-and-receive-a-json-response"></a>Construire la requête de recherche et recevoir une réponse JSON
 
-1. Utilisez les variables de la dernière étape pour mettre en forme une URL de recherche pour la requête d’API. Notez que votre terme de recherche doit être encodé sous forme d’URL avant d’être ajouté à la requête.
+1. Utilisez les variables de l’étape précédente pour mettre en forme une URL de recherche pour la requête d’API. Encodez votre terme de recherche dans une URL avant de l’ajouter à la demande.
 
     ```java
     public static SearchResults SearchNews (String searchQuery) throws Exception {
@@ -88,6 +92,7 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
 ## <a name="process-the-json-response"></a>Traiter la réponse JSON
 
 1. Séparez les en-têtes HTTP Bing du corps JSON, puis fermez le flux et retournez la réponse de l’API.
+
     ```java
     // extract Bing-related HTTP headers
     Map<String, List<String>> headers = connection.getHeaderFields();
@@ -101,7 +106,8 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
     return results;
     ```
 
-2. Créer une méthode pour analyser et resérialiser JSON
+2. Créez une méthode pour analyser et resérialiser les résultats JSON.
+
     ```java
     // pretty-printer for JSON; uses GSON parser to parse and re-serialize
     public static String prettify(String json_text) {
@@ -113,7 +119,8 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
     ```
 
 3. Dans la méthode principale de votre application, appelez la méthode de recherche et affichez les résultats.
-    ```csharp
+
+    ```java
    public static void main (String[] args) {
        System.out.println("Searching the Web for: " + searchTerm);
        SearchResults result = SearchNews(searchTerm);
@@ -126,7 +133,7 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
     }
     ```
 
-## <a name="json-response"></a>Réponse JSON
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
 Une réponse correcte est retournée au format JSON, comme dans l’exemple suivant :
 

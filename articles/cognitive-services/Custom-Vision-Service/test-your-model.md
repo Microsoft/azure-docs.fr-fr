@@ -3,19 +3,19 @@ title: Tester et recycler un modèle - Service Vision personnalisée
 titleSuffix: Azure Cognitive Services
 description: Cet article explique comment tester une image, puis l’utiliser pour reformer votre modèle dans le service Custom Vision.
 services: cognitive-services
-author: anrothMSFT
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 03/21/2019
-ms.author: anroth
-ms.openlocfilehash: c6ed8869f6d33609381a42fd22d728e9e5542802
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: pafarley
+ms.openlocfilehash: 5a3aacd1d07ff068fe50312b2c1d47ac080e5c2c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73721200"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85391721"
 ---
 # <a name="test-and-retrain-a-model-with-custom-vision-service"></a>Tester et recycler un modèle avec Service Vision personnalisée
 

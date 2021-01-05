@@ -25,13 +25,13 @@
     - name: Résolution des problèmes liés à Internet Analyzer
       href: troubleshoot.md
     - name: Informations de référence sur l’interface CLI d’Internet Analyzer
-      href: 'https://docs.microsoft.com/cli/azure/ext/internet-analyzer/internet-analyzer?view=azure-cli-latest'
+      href: /cli/azure/ext/internet-analyzer/internet-analyzer?view=azure-cli-latest
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=networking'
     - name: Blog
       href: 'https://azure.microsoft.com/blog/topics/networking'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-virtual-network.html'
+      href: /answers/topics/azure-virtual-network.html
     - name: Aperçu de contrat SLA
       href: 'https://azure.microsoft.com/support/legal/preview-supplemental-terms'
     - name: Contrat SLA

@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Talent Palette | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Talent Palette.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 839dbf54-b636-477b-9cf8-157374c78e7a
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9dee0013d227cfc3809d9effe7f4f633bc22f6fa
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6e1064e4362175b3de5187ce050f1719ede56bd5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73159913"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018747"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-talent-palette"></a>Tutoriel : Intégration d’Azure Active Directory à Talent Palette
 
@@ -32,7 +27,7 @@ L’intégration de Talent Palette dans Azure AD vous offre les avantages suivan
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Talent Palette (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -105,13 +100,13 @@ Pour configurer l’authentification unique Azure AD avec Talent Palette, proc�
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL Talent Palette](common/both_replyurl.png)
+    ![Capture d’écran montrant Configuration SAML de base où vous pouvez entrer une URL de réponse](common/both_replyurl.png)
 
     Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://talent-p.net/saml/acs/<tenantID>`
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL Talent Palette](common/both_signonurl.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/both_signonurl.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://talent-p.net/saml/sso/<tenantID>`
 
@@ -189,18 +184,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-talent-palette-test-user"></a>Créer un utilisateur de test Talent Palette
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Talent Palette. Travaillez avec l’ [équipe du support technique Talent Palette](mailto:talent-support@pa-consul.co.jp) pour ajouter des utilisateurs à la plateforme de Talent Palette. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Talent Palette. Travaillez avec l’[équipe du support technique Talent Palette](mailto:talent-support@pa-consul.co.jp) pour ajouter des utilisateurs à la plateforme de Talent Palette. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Talent Palette dans le panneau d’accès doit vous connecter automatiquement à l’application Talent Palette pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Talent Palette dans le panneau d’accès doit vous connecter automatiquement à l’application Talent Palette pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

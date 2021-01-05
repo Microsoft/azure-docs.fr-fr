@@ -3,27 +3,29 @@ title: Codecs et formats de Media Encoder Standard - Azure
 description: Cet article contient la liste des formats de fichier d’importation et d’exportation les plus courants que vous pouvez utiliser avec StandardEncoderPreset.
 services: media-services
 documentationcenter: ''
-author: juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 02/10/2019
-ms.author: juliako
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
 ms.reviewer: anilmur
-ms.openlocfilehash: f1d4d4f4006702ebe0d057e56cf24a022e73b83e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6e9c0a3d9100bc447314f5874107363c6bf5d8a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227125"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289441"
 ---
 # <a name="standard-encoder-formats-and-codecs"></a>Codecs et formats de Media Encoder Standard
 
-Cet article contient la liste des formats de fichier d’importation et d’exportation les plus courants que vous pouvez utiliser avec [StandardEncoderPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#standardencoderpreset). Pour plus d’informations sur la façon de créer des préréglages personnalisés à l’aide de **StandardEncoderPreset**, consultez [Créer une transformation avec un préréglage personnalisé](customize-encoder-presets-how-to.md).
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+Cet article contient la liste des formats de fichier d’importation et d’exportation les plus courants que vous pouvez utiliser avec [StandardEncoderPreset](/rest/api/media/transforms/createorupdate#standardencoderpreset). Pour plus d’informations sur la façon de créer des préréglages personnalisés à l’aide de **StandardEncoderPreset**, consultez [Créer une transformation avec un préréglage personnalisé](customize-encoder-presets-how-to.md).
 
 ## <a name="input-containerfile-formats"></a>Formats de conteneurs/fichiers d’entrée
 
@@ -36,7 +38,7 @@ Cet article contient la liste des formats de fichier d’importation et d’expo
 | Windows Media Video (WMV)/ASF (.wmv, .asf) |Oui |
 | AVI (8 bits/10 bits non compressé) (.avi) |Oui |
 | MP4 (.mp4, .m4a, .m4v)/ISMV (.isma, .ismv) |Oui |
-| [Microsoft Digital Video Recording (DVR-MS)](https://msdn.microsoft.com/library/windows/desktop/dd692984) (.dvr-ms) |Oui |
+| [Microsoft Digital Video Recording (DVR-MS)](/previous-versions/windows/desktop/mstv/about-the-dvr-ms-file-format) (.dvr-ms) |Oui |
 | Matroska/WebM (.mkv) |Oui |
 | WAVE/WAV (.wav) |Oui |
 | QuickTime (.mov) |Oui |

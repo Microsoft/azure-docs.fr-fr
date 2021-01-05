@@ -1,0 +1,128 @@
+- name: Documentation sur les rôles Azure AD
+  href: index.yml
+- name: Vue d’ensemble
+  items:
+    - name: "Qu’est-ce que RBAC Azure\_AD\_?"
+      href: custom-overview.md
+    - name: "Comprendre les rôles Azure\_AD"
+      href: concept-understand-roles.md
+- name: Démarrages rapides
+  items:
+    - name: Créer des inscriptions d’applications illimitées
+      href: quickstart-app-registration-limits.md
+- name: Tutoriels
+  items:
+    - name: Créer un groupe dynamique
+      href: ../enterprise-users/users-revoke-access.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+- name: Concepts
+  expanded: true
+  items:
+    - name: Déléguer les rôles d’administrateur Azure AD
+      href: concept-delegation.md
+    - name: Comparer les autorisations d’utilisateur par défaut
+      href: ../fundamentals/users-default-permissions.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+    - name: Comparer les rôles Azure AD et Azure
+      href: ../../role-based-access-control/rbac-and-directory-admin-roles.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+    - name: Comprendre les unités administratives dans Azure AD
+      href: administrative-units.md
+- name: Guides pratiques
+  expanded: true
+  items:
+    - name: Utilisateurs et rôles
+      items:
+        - name: Affecter des utilisateurs aux rôles d’administrateur
+          href: ../fundamentals/active-directory-users-assign-role-azure-portal.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+        - name: Révoquer l’accès d’un utilisateur
+          href: ../enterprise-users/users-revoke-access.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+        - name: Attribuer un rôle à un utilisateur invité
+          href: ../external-identities/add-guest-to-role.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+        - name: Limiter l’accès des utilisateurs invités
+          href: ../enterprise-users/users-restrict-guest-permissions.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+        - name: Groupes dynamiques et invités
+          href: ../external-identities/use-dynamic-groups.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+    - name: Rôles et autorisations
+      expanded: true
+      items:
+        - name: Rôles et autorisations
+          href: permissions-reference.md
+        - name: Afficher et attribuer des rôles
+          href: manage-roles-portal.md
+        - name: Délégation de Mon personnel
+          href: my-staff-configure.md
+    - name: Rôles personnalisés
+      expanded: true
+      items:
+        - name: Créer un rôle personnalisé
+          href: custom-create.md
+        - name: Voir les attributions des rôles personnalisés
+          href: custom-view-assignments.md
+        - name: Attribuer des rôles personnalisés dans le portail Azure
+          href: ../fundamentals/active-directory-users-assign-role-azure-portal.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+        - name: Attribuer des rôles personnalisés dans PowerShell
+          href: custom-assign-powershell.md
+        - name: Attribuer des rôles personnalisés pour les applications d’entreprise
+          href: custom-enterprise-apps.md
+        - name: Autorisations de rôles personnalisés
+          items:
+            - name: Autorisations d’inscription d’application
+              href: custom-available-permissions.md
+            - name: Autorisations d’application d’entreprise
+              href: custom-enterprise-app-permissions.md
+            - name: Autorisations de consentement d’application
+              href: custom-consent-permissions.md
+        - name: Déléguer le rôle d’administration d’applications
+          href: delegate-app-roles.md
+    - name: Attribuer des rôles à des groupes
+      items:
+        - name: Aperçu de l’attribution de rôles basée sur les groupes
+          href: groups-concept.md
+        - name: Créer un groupe pouvant se voir attribuer des rôles
+          href: groups-create-eligible.md
+        - name: Attribuer des rôles à un groupe
+          href: groups-assign-role.md
+        - name: Supprimer des attributions de rôles d’un groupe
+          href: groups-remove-assignment.md
+        - name: Afficher les attributions de rôles d’un groupe
+          href: groups-view-assignments.md
+        - name: Rendre un groupe éligible à un rôle dans PIM
+          href: groups-pim-eligible.md
+        - name: FAQ et résolution des problèmes
+          href: groups-faq-troubleshooting.md
+    - name: Sécuriser vos rôles
+      items:
+        - name: Planification de la sécurité du rôle
+          href: security-planning.md
+        - name: Créer des comptes d’urgence
+          href: security-emergency-access.md
+    - name: Unités administratives
+      items:
+        - name: Vue d’ensemble des unités administratives
+          href: administrative-units.md
+        - name: Ajouter et gérer
+          href: admin-units-manage.md
+        - name: Ajouter et gérer des utilisateurs
+          href: admin-units-add-manage-users.md
+        - name: Ajouter et gérer des groupes
+          href: admin-units-add-manage-groups.md
+        - name: Attribuer un rôle avec une étendue
+          href: admin-units-assign-roles.md
+        - name: FAQ et résolution des problèmes
+          href: admin-units-faq-troubleshoot.md
+    - name: Dépanner
+      items:
+        - name: Bénéficier du support pour Azure AD
+          href: ../fundamentals/active-directory-troubleshooting-support-howto.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context
+- name: Informations de référence
+  items:
+    - name: Rôles à privilèges minimum par tâche
+      href: delegate-by-task.md
+    - name: "Documentation sur les rôles Microsoft\_365"
+      href: m365-workload-docs.md
+    - name: API Graph
+      href: /graph/api/resources/azure-ad-overview?view=graph-rest-1.0
+    - name: CLI Azure AD
+      href: /cli/azure/ad
+    - name: Azure AD PowerShell pour Graph
+      href: /powershell/azure/active-directory/install-adv2?view=azureadps-2.0
+    - name: Limites du service Azure AD
+      href: ../enterprise-users/directory-service-limits-restrictions.md?context=%2fazure%2factive-directory%2froles%2fcontext%2fugr-context

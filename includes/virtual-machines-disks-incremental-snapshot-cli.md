@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/05/2020
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: cbd6f821326c86983ceb3ae5b90969e522c187fe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4bdeef537556db94338ed50fcfa6e9d88431f25a
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80343041"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96016253"
 ---
 [!INCLUDE [virtual-machines-disks-incremental-snapshots-description](virtual-machines-disks-incremental-snapshots-description.md)]
 
@@ -29,9 +29,9 @@ Sur Windows, la commande suivante vous permet de l’installer ou de mettre à j
 ```PowerShell
 Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'
 ```
-Sur Linux, l’installation de l’interface de ligne de commande varie en fonction de la version du système d’exploitation.  Consultez [Installer l’interface de ligne de commande Microsoft Azure](https://docs.microsoft.com/cli/azure/install-azure-cli) pour votre version Linux spécifique.
+Sur Linux, l’installation de l’interface de ligne de commande varie en fonction de la version du système d’exploitation.  Consultez [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli) pour votre version Linux spécifique.
 
-Pour créer un instantané incrémentiel, utilisez [az snapshot create](https://docs.microsoft.com/cli/azure/snapshot?view=azure-cli-latest#az-snapshot-create) avec le paramètre `--incremental`.
+Pour créer un instantané incrémentiel, utilisez [az snapshot create](/cli/azure/snapshot?view=azure-cli-latest#az-snapshot-create) avec le paramètre `--incremental`.
 
 L’exemple suivant crée un instantané incrémentiel. Remplacez `<yourDesiredSnapShotNameHere>`, `<yourResourceGroupNameHere>`, `<exampleDiskName>` et `<exampleLocation>` par vos propres valeurs, puis exécutez l’exemple :
 

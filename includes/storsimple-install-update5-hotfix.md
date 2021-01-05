@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 19d2dedc2ccf7015696504a94f5ef7c43a90d3be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cbc7c82803115f71db233be94d62a857ba050b63
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177260"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86050347"
 ---
 #### <a name="to-download-hotfixes"></a>Pour télécharger des correctifs logiciels
 
@@ -53,18 +53,18 @@ Procédez comme suit pour installer et vérifier les correctifs logiciels en mod
     >[!NOTE] 
     > Vous devez d’abord installer le fichier _HcsSoftwareUpdate.exe_. Une fois l’installation terminée, installez le fichier _CisMdsAgentUpdate.exe_.
    
-        ```
-        Controller0>Start-HcsHotfix -Path \\10.100.100.100\share
-        \FirstOrderUpdate\HcsSoftwareUpdate.exe -Credential contoso\John
+    ```output
+    Controller0>Start-HcsHotfix -Path \\10.100.100.100\share
+    \FirstOrderUpdate\HcsSoftwareUpdate.exe -Credential contoso\John
    
-        Confirm
+    Confirm
    
-        This operation starts the hotfix installation and could reboot one or
-        both of the controllers. If the device is serving I/Os, these will not
-        be disrupted. Are you sure you want to continue?
-        [Y] Yes [N] No [?] Help (default is "Y"): Y
+    This operation starts the hotfix installation and could reboot one or
+    both of the controllers. If the device is serving I/Os, these will not
+    be disrupted. Are you sure you want to continue?
+    [Y] Yes [N] No [?] Help (default is "Y"): Y
    
-        ```
+    ```
 5. Tapez **Y** lorsque vous êtes invité à confirmer l’installation du correctif.
 6. Contrôlez la mise à jour à l'aide de l'applet de commande `Get-HcsUpdateStatus` . La mise à jour se termine d’abord sur le contrôleur passif. Une fois le contrôleur passif mis à jour, un basculement se produit et la mise à jour est ensuite appliquée à l’autre contrôleur. La mise à jour est terminée lorsque les deux contrôleurs sont mis à jour.
    
@@ -139,41 +139,46 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
     `Enter-HcsMaintenanceMode`
    
     Voici un exemple de sortie obtenue.
+
+    ```output
+    Controller0>Enter-HcsMaintenanceMode
+    Checking device state...
    
-        Controller0>Enter-HcsMaintenanceMode
-        Checking device state...
+    In maintenance mode, your device will not service IOs and will be disconnected from the Microsoft Azure StorSimple Manager service. Entering maintenance mode will end the current session and reboot both controllers, which takes a few minutes to complete. Are you sure you want to enter maintenance mode?
+    [Y] Yes [N] No (Default is "Y"): Y
    
-        In maintenance mode, your device will not service IOs and will be disconnected from the Microsoft Azure StorSimple Manager service. Entering maintenance mode will end the current session and reboot both controllers, which takes a few minutes to complete. Are you sure you want to enter maintenance mode?
-        [Y] Yes [N] No (Default is "Y"): Y
+    -----------------------MAINTENANCE MODE------------------------
+    Microsoft Azure StorSimple Appliance Model 8600
+    Name: Update4-8600-mystorsimple
+    Copyright (C) 2014 Microsoft Corporation. All rights reserved.
+    You are connected to Controller0 - Passive
+    ---------------------------------------------------------------
    
-        -----------------------MAINTENANCE MODE------------------------
-        Microsoft Azure StorSimple Appliance Model 8600
-        Name: Update4-8600-mystorsimple
-        Copyright (C) 2014 Microsoft Corporation. All rights reserved.
-        You are connected to Controller0 - Passive
-        ---------------------------------------------------------------
-   
-        Serial Console Menu
-        [1] Log in with full access
-        [2] Log into peer controller with full access
-        [3] Connect with limited access
-        [4] Change language
-        Please enter your choice>
-   
+    Serial Console Menu
+    [1] Log in with full access
+    [2] Log into peer controller with full access
+    [3] Connect with limited access
+    [4] Change language
+    Please enter your choice>
+    ```
+
     Les deux contrôleurs redémarrent alors en mode maintenance.
 2. Pour installer la mise à jour du microprogramme de disque, tapez :
    
     `Start-HcsHotfix -Path <path to update file> -Credential <credentials in domain\username format>`
    
     Voici un exemple de sortie obtenue.
-   
-        Controller1>Start-HcsHotfix -Path \\10.100.100.100\share\ThirdOrderUpdates\ -Credential contoso\john
-        Enter Password:
-        WARNING: In maintenance mode, hotfixes should be installed on each controller sequentially. After the hotfix is installed on this controller, install it on the peer controller.
-        Confirm
-        This operation starts a hotfix installation and could reboot one or both of the controllers. By installing new updates you agree to, and accept any additional terms associated with, the new functionality listed in the release notes (https://go.microsoft.com/fwLink/?LinkID=613790). Are you sure you want to continue?
-        [Y] Yes [N] No (Default is "Y"): Y
-        WARNING: Installation is currently in progress. This operation can take several minutes to complete.
+
+    ```output
+    Controller1>Start-HcsHotfix -Path \\10.100.100.100\share\ThirdOrderUpdates\ -Credential contoso\john
+    Enter Password:
+    WARNING: In maintenance mode, hotfixes should be installed on each controller sequentially. After the hotfix is installed on this controller, install it on the peer controller.
+    Confirm
+    This operation starts a hotfix installation and could reboot one or both of the controllers. By installing new updates you agree to, and accept any additional terms associated with, the new functionality listed in the release notes (https://go.microsoft.com/fwLink/?LinkID=613790). Are you sure you want to continue?
+    [Y] Yes [N] No (Default is "Y"): Y
+    WARNING: Installation is currently in progress. This operation can take several minutes to complete.
+    ```
+
 3. Surveillez la progression de l’installation à l’aide de la commande `Get-HcsUpdateStatus` . La mise à jour est terminée quand `RunInProgress` passe à `False`.
 4. Une fois l’installation terminée, le contrôleur sur lequel le correctif logiciel en mode Maintenance a été installé redémarre. Connectez-vous avec l’option 1, **Se connecter avec accès total**, et vérifiez la version du microprogramme de disque. Tapez :
    
@@ -184,7 +189,8 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
    `XMGJ, XGEG, KZ50, F6C2, VR08, N003, 0107`
    
    Voici un exemple de sortie obtenue.
-   
+
+    ```output
        -----------------------MAINTENANCE MODE------------------------
        Microsoft Azure StorSimple Appliance Model 8600
        Name: Update4-8600-mystorsimple
@@ -196,75 +202,76 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
        Controller1>Get-HcsFirmwareVersion
    
        Controller0 : TalladegaFirmware
-           ActiveBIOS:0.45.0010
-              BackupBIOS:0.45.0006
-              MainCPLD:17.0.000b
-              ActiveBMCRoot:2.0.001F
-              BackupBMCRoot:2.0.001F
-              BMCBoot:2.0.0002
-              LsiFirmware:20.00.04.00
-              LsiBios:07.37.00.00
-              Battery1Firmware:06.2C
-              Battery2Firmware:06.2C
-              DomFirmware:X231600
-              CanisterFirmware:3.5.0.56
-              CanisterBootloader:5.03
-              CanisterConfigCRC:0x9134777A
-              CanisterVPDStructure:0x06
-              CanisterGEMCPLD:0x19
-              CanisterVPDCRC:0x142F7DC2
-              MidplaneVPDStructure:0x0C
-              MidplaneVPDCRC:0xA6BD4F64
-              MidplaneCPLD:0x10
-              PCM1Firmware:1.00|1.05
-              PCM1VPDStructure:0x05
-              PCM1VPDCRC:0x41BEF99C
-              PCM2Firmware:1.00|1.05
-              PCM2VPDStructure:0x05
-              PCM2VPDCRC:0x41BEF99C
+        ActiveBIOS:0.45.0010
+           BackupBIOS:0.45.0006
+           MainCPLD:17.0.000b
+           ActiveBMCRoot:2.0.001F
+           BackupBMCRoot:2.0.001F
+           BMCBoot:2.0.0002
+           LsiFirmware:20.00.04.00
+           LsiBios:07.37.00.00
+           Battery1Firmware:06.2C
+           Battery2Firmware:06.2C
+           DomFirmware:X231600
+           CanisterFirmware:3.5.0.56
+           CanisterBootloader:5.03
+           CanisterConfigCRC:0x9134777A
+           CanisterVPDStructure:0x06
+           CanisterGEMCPLD:0x19
+           CanisterVPDCRC:0x142F7DC2
+           MidplaneVPDStructure:0x0C
+           MidplaneVPDCRC:0xA6BD4F64
+           MidplaneCPLD:0x10
+           PCM1Firmware:1.00|1.05
+           PCM1VPDStructure:0x05
+           PCM1VPDCRC:0x41BEF99C
+           PCM2Firmware:1.00|1.05
+           PCM2VPDStructure:0x05
+           PCM2VPDCRC:0x41BEF99C
 
-           EbodFirmware
-              CanisterFirmware:3.5.0.56
-              CanisterBootloader:5.03
-              CanisterConfigCRC:0xB23150F8
-              CanisterVPDStructure:0x06
-              CanisterGEMCPLD:0x14
-              CanisterVPDCRC:0xBAA55828
-              MidplaneVPDStructure:0x0C
-              MidplaneVPDCRC:0xA6BD4F64
-              MidplaneCPLD:0x10
-              PCM1Firmware:3.11
-              PCM1VPDStructure:0x03
-              PCM1VPDCRC:0x6B58AD13
-              PCM2Firmware:3.11
-              PCM2VPDStructure:0x03
-              PCM2VPDCRC:0x6B58AD13
+        EbodFirmware
+           CanisterFirmware:3.5.0.56
+           CanisterBootloader:5.03
+           CanisterConfigCRC:0xB23150F8
+           CanisterVPDStructure:0x06
+           CanisterGEMCPLD:0x14
+           CanisterVPDCRC:0xBAA55828
+           MidplaneVPDStructure:0x0C
+           MidplaneVPDCRC:0xA6BD4F64
+           MidplaneCPLD:0x10
+           PCM1Firmware:3.11
+           PCM1VPDStructure:0x03
+           PCM1VPDCRC:0x6B58AD13
+           PCM2Firmware:3.11
+           PCM2VPDStructure:0x03
+           PCM2VPDCRC:0x6B58AD13
 
-           DisksFirmware
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
+        DisksFirmware
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+    ```
    
     Exécutez la commande `Get-HcsFirmwareVersion` sur le deuxième contrôleur pour vérifier que la version du logiciel a été mise à jour. Vous pouvez à présent quitter le mode Maintenance. Pour ce faire, tapez la commande suivante pour chaque contrôleur d’appareil :
    

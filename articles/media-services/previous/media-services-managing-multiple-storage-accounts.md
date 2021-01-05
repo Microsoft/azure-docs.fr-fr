@@ -13,14 +13,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: 252d5e551dad56108ad952eb0c7c3b39df0585d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b5b0b383cba45646a1e5a8f980b3a097767f9979
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69901273"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89262598"
 ---
 # <a name="managing-media-services-assets-across-multiple-storage-accounts"></a>Gestion des ressources Media Services sur plusieurs comptes de stockage  
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Vous pouvez associer plusieurs comptes de stockage à un même compte Media Services. L’option d’association de plusieurs comptes de stockage à un compte Media Services offre les avantages suivants :
 
@@ -46,21 +49,23 @@ Media Services utilise la valeur de la propriété **IAssetFile.Name** durant la
 
 ## <a name="to-attach-storage-accounts"></a>Pour associer des comptes de stockage  
 
-Pour associer des comptes de stockage à votre compte AMS, utilisez les [API Azure Resource Manager](/rest/api/media/operations/azure-media-services-rest-api-reference) et [PowerShell](/powershell/module/az.media), comme dans l’exemple suivant :
+Pour associer des comptes de stockage à votre compte AMS, utilisez les [API Azure Resource Manager](/rest/api/media/operations/azure-media-services-rest-api-reference) et [PowerShell](/powershell/module/az.media), comme dans l’exemple suivant :
 
-    $regionName = "West US"
-    $subscriptionId = " xxxxxxxx-xxxx-xxxx-xxxx- xxxxxxxxxxxx "
-    $resourceGroupName = "SkyMedia-USWest-App"
-    $mediaAccountName = "sky"
-    $storageAccount1Name = "skystorage1"
-    $storageAccount2Name = "skystorage2"
-    $storageAccount1Id = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccount1Name"
-    $storageAccount2Id = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccount2Name"
-    $storageAccount1 = New-AzMediaServiceStorageConfig -StorageAccountId $storageAccount1Id -IsPrimary
-    $storageAccount2 = New-AzMediaServiceStorageConfig -StorageAccountId $storageAccount2Id
-    $storageAccounts = @($storageAccount1, $storageAccount2)
+```azurepowershell
+$regionName = "West US"
+$subscriptionId = " xxxxxxxx-xxxx-xxxx-xxxx- xxxxxxxxxxxx "
+$resourceGroupName = "SkyMedia-USWest-App"
+$mediaAccountName = "sky"
+$storageAccount1Name = "skystorage1"
+$storageAccount2Name = "skystorage2"
+$storageAccount1Id = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccount1Name"
+$storageAccount2Id = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccount2Name"
+$storageAccount1 = New-AzMediaServiceStorageConfig -StorageAccountId $storageAccount1Id -IsPrimary
+$storageAccount2 = New-AzMediaServiceStorageConfig -StorageAccountId $storageAccount2Id
+$storageAccounts = @($storageAccount1, $storageAccount2)
     
-    Set-AzMediaService -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccounts $storageAccounts
+Set-AzMediaService -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccounts $storageAccounts
+```
 
 ### <a name="support-for-cool-storage"></a>Prise en charge du stockage froid
 

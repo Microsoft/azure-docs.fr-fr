@@ -4,19 +4,19 @@ description: Découvrez comment examiner des utilisateurs, des détections et de
 services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
-ms.topic: conceptual
-ms.date: 12/13/2019
+ms.topic: how-to
+ms.date: 06/05/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c5191f05752c177aa29d121abe9d1aa29fde265a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: be72c2152bdb8e1155d2dd29547f93ba3605d462
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227777"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95251091"
 ---
 # <a name="how-to-investigate-risk"></a>Procédure : Examiner les risques
 
@@ -75,6 +75,9 @@ Les administrateurs peuvent ensuite choisir d’agir sur ces événements. Les a
 - Confirmer que la connexion est compromise
 - Confirmer que la connexion est sécurisée
 
+> [!NOTE] 
+> Identity Protection évalue les risques pour tous les flux d’authentification, qu’ils soient interactifs ou non. Toutefois, le rapport de connexion n’affiche que les connexions interactives. Des connexions risquées peuvent s’être produites sur des connexions non interactives, mais elles ne figurent pas dans le rapport de connexions Azure AD.
+
 ## <a name="risk-detections"></a>Détections de risques
 
 Le rapport des détections de risques contient des données filtrables correspondant aux 90 derniers jours (3 mois).
@@ -87,6 +90,10 @@ Les informations indiquées dans le rapport des détections de risques permetten
 - Des liens vers plus d’informations sur Microsoft Cloud App Security (MCAS)
 
 Les administrateurs peuvent ensuite choisir de revenir au rapport des risques ou des connexions de l’utilisateur pour effectuer des actions en fonction des informations recueillies.
+
+> [!NOTE] 
+> Notre système peut détecter que l’événement à risque qui a contribué à la note de risque de l’utilisateur est un faux positif ou que le risque de l’utilisateur a été corrigé par l’application d’une stratégie, par exemple en effectuant une demande d’authentification multifacteur (MFA) ou une modification sécurisée du mot de passe. Par conséquent, notre système ignorera l’état de risque et le détail de risque « L’intelligence artificielle a confirmé que la connexion est sécurisée » apparaîtra et ne contribuera plus au risque de l’utilisateur. 
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

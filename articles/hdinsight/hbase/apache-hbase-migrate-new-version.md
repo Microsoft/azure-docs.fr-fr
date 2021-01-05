@@ -1,19 +1,19 @@
 ---
 title: Migrer un cluster HBase vers une nouvelle version - Azure HDInsight
 description: Explique comment effectuer la migration de clusters Apache HBase vers une version plus récente dans Azure HDInsight.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 01/02/2020
-ms.openlocfilehash: d7fb7b6b409a4e24be97ee61fc7ba1f0c0a93202
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 8ce25780e197c26e0e5b102670e093031e1a2582
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792630"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94697660"
 ---
 # <a name="migrate-an-apache-hbase-cluster-to-a-new-version"></a>Effectuer la migration d’un cluster Apache HBase vers une nouvelle version
 
@@ -52,7 +52,7 @@ Pour mettre à niveau votre cluster Apache HBase sur Azure HDInsight, procédez 
 
 1. [Configurez un nouveau cluster HDInsight de destination](../hdinsight-hadoop-provision-linux-clusters.md) avec le même compte de stockage, mais avec un nom de conteneur différent :
 
-    ![Utiliser le même compte de stockage, mais créer un autre conteneur](./media/apache-hbase-migrate-new-version/same-storage-different-container.png)
+   ![Utiliser le même compte de stockage, mais créer un autre conteneur](./media/apache-hbase-migrate-new-version/same-storage-different-container.png)
 
 1. Videz votre cluster HBase source, qui est le cluster que vous mettez à niveau. HBase écrit les données entrantes dans un magasin en mémoire, appelé _memstore_. Une fois que le memstore atteint une certaine taille, HBase le vide sur le disque pour le stockage à long terme dans le compte de stockage du cluster. Lorsque vous supprimez l’ancien cluster, les memstores sont recyclés, ce qui entraîne potentiellement une perte de données. Pour vider manuellement le memstore de chaque table sur le disque, exécutez le script suivant. La version la plus récente de ce script se trouve sur [GitHub](https://raw.githubusercontent.com/Azure/hbase-utils/master/scripts/flush_all_tables.sh) Azure.
 
@@ -182,19 +182,49 @@ Pour mettre à niveau votre cluster Apache HBase sur Azure HDInsight, procédez 
 
     ![Cocher la case pour activer le mode de maintenance pour HBase, puis confirmer](./media/apache-hbase-migrate-new-version/turn-on-maintenance-mode.png)
 
+1. Si vous n’utilisez pas de clusters HBase avec la fonctionnalité Écritures améliorées, ignorez cette étape. Elle n’est requise que pour les clusters HBase avec la fonctionnalité Écritures améliorées.
+
+   Sauvegardez le répertoire WAL sous HDFS en exécutant les commandes ci-dessous dans une session SSH sur l’un des nœuds ZooKeeper ou Worker du cluster d’origine.
+   
+   ```bash
+   hdfs dfs -mkdir /hbase-wal-backup**
+   hdfs dfs -cp hdfs://mycluster/hbasewal /hbase-wal-backup**
+   ```
+    
 1. Connectez-vous à Ambari sur le nouveau cluster HDInsight. Modifiez le paramètre HDFS `fs.defaultFS` pour pointer vers le nom du conteneur utilisé par le cluster d’origine. Ce paramètre se trouve sous **HDFS > Configurations > Avancé > Advanced core-site (Site principal avancé)** .
 
-    ![Dans Ambari, cliquez sur Services > HDFS > Configurations > Avancé](./media/apache-hbase-migrate-new-version/hdfs-advanced-settings.png)
+   ![Dans Ambari, cliquez sur Services > HDFS > Configurations > Avancé](./media/apache-hbase-migrate-new-version/hdfs-advanced-settings.png)
 
-    ![Dans Ambari, modifier le nom du conteneur](./media/apache-hbase-migrate-new-version/change-container-name.png)
+   ![Dans Ambari, modifier le nom du conteneur](./media/apache-hbase-migrate-new-version/change-container-name.png)
 
 1. Si vous n’utilisez pas de clusters HBase avec la fonctionnalité Écritures améliorées, ignorez cette étape. Elle n’est requise que pour les clusters HBase avec la fonctionnalité Écritures améliorées.
 
    Modifiez le chemin d’accès `hbase.rootdir` pour qu’il pointe vers le conteneur du cluster d’origine.
 
-    ![Dans Ambari, modifier le nom du conteneur pour HBase rootdir](./media/apache-hbase-migrate-new-version/change-container-name-for-hbase-rootdir.png)
+   ![Dans Ambari, modifier le nom du conteneur pour HBase rootdir](./media/apache-hbase-migrate-new-version/change-container-name-for-hbase-rootdir.png)
+    
+1. Si vous n’utilisez pas de clusters HBase avec la fonctionnalité Écritures améliorées, ignorez cette étape. Elle n’est nécessaire que pour les clusters HBase dotés de la fonctionnalité Écritures améliorées, et uniquement dans le cas où le cluster d’origine était un cluster HBase doté de la fonctionnalité Écritures améliorées.
 
-1. Si vous mettez à niveau HDInsight 3.6 vers 4.0, suivez les étapes ci-dessous, sinon passez à l’étape 10 :
+   Nettoyez les données FS ZooKeeper et WAL de ce nouveau cluster. Émettez les commandes suivantes dans l’un des nœuds ZooKeeper ou Worker :
+
+   ```bash
+   hbase zkcli
+   rmr /hbase-unsecure
+   quit
+
+   hdfs dfs -rm -r hdfs://mycluster/hbasewal**
+   ```
+
+1. Si vous n’utilisez pas de clusters HBase avec la fonctionnalité Écritures améliorées, ignorez cette étape. Elle n’est requise que pour les clusters HBase avec la fonctionnalité Écritures améliorées.
+   
+   Restaurez le répertoire WAL sur le nouveau HDFS du cluster dans une session SSH sur l’un des nœuds ZooKeeper ou Worker du nouveau cluster.
+   
+   ```bash
+   hdfs dfs -cp /hbase-wal-backup/hbasewal hdfs://mycluster/**
+   ```
+   
+1. Si vous mettez à niveau HDInsight 3.6 vers la version 4.0, suivez les étapes ci-dessous, sinon passez à l’étape 13 :
+
     1. Redémarrez tous les services requis dans Ambari en sélectionnant **Services** > **Restart All Required** (Redémarrer tous les services requis).
     1. Arrêtez le service HBase.
     1. Ouvrez une connexion SSH sur le nœud Zookeeper et exécutez la commande [zkCli](https://github.com/go-zkcli/zkcli)`rmr /hbase-unsecure` pour supprimer le znode racine HBase de Zookeeper.

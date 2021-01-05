@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 11/21/2018
 ms.author: srrengar
-ms.openlocfilehash: 97c3be391dfbee7301ea47bf7234a9549d373370
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e1871df962a26def8c12000f8b8bc0cf31bae9a0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75464723"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86247657"
 ---
 # <a name="application-logging"></a>Journalisation des applications
 
@@ -22,11 +22,11 @@ Pour obtenir des exemples d’utilisation de ces suggestions, consultez [Ajouter
 
 ## <a name="application-insights-sdk"></a>Kit de développement logiciel (SDK) Application Insights
 
-Application Insights bénéficie d’une intégration riche et prête à l’emploi avec Service Fabric. Les utilisateurs peuvent ajouter les packages NuGet AI Service Fabric et ainsi recevoir des données et journaux d’activité créés et collectés tel qu’affichés dans le Portail Azure. En outre, ils sont invités à ajouter leurs propres données de télémétrie pour diagnostiquer et déboguer leurs applications, mais aussi pour effectuer le suivi des services et parties de leur application les plus utilisés. Dans le SDK, la classe [TelemetryClient](https://docs.microsoft.com/dotnet/api/microsoft.applicationinsights.telemetryclient?view=azure-dotnet) offre de nombreuses façons d’effectuer le suivi des données de télémétrie dans vos applications. Regardez un exemple dans notre didacticiel montrant comment utiliser et ajouter Application Insights à votre application pour [surveiller et diagnostiquer une application .NET](service-fabric-tutorial-monitoring-aspnet.md).
+Application Insights bénéficie d’une intégration riche et prête à l’emploi avec Service Fabric. Les utilisateurs peuvent ajouter les packages NuGet AI Service Fabric et ainsi recevoir des données et journaux d’activité créés et collectés tel qu’affichés dans le Portail Azure. En outre, ils sont invités à ajouter leurs propres données de télémétrie pour diagnostiquer et déboguer leurs applications, mais aussi pour effectuer le suivi des services et parties de leur application les plus utilisés. Dans le SDK, la classe [TelemetryClient](/dotnet/api/microsoft.applicationinsights.telemetryclient?view=azure-dotnet) offre de nombreuses façons d’effectuer le suivi des données de télémétrie dans vos applications. Regardez un exemple dans notre didacticiel montrant comment utiliser et ajouter Application Insights à votre application pour [surveiller et diagnostiquer une application .NET](service-fabric-tutorial-monitoring-aspnet.md).
 
 ## <a name="eventsource"></a>EventSource
 
-Lorsque vous créez une solution Service Fabric à partir d’un modèle dans Visual Studio, une classe dérivée **EventSource** (**ServiceEventSource** ou **ActorEventSource**) est générée. Un modèle dans lequel vous pouvez ajouter des événements pour votre application ou votre service est créé. Le nom de la classe dérivée **EventSource** **doit** être unique et créé à partir de la chaîne de modèle par défaut MyCompany-&lt;solution&gt;-&lt;project&gt;. Un même nom attribué à plusieurs définitions **EventSource** peut causer des problèmes lors de l’exécution. Chaque événement défini doit avoir un identificateur unique. Si l’identificateur n’est pas unique, l’exécution échoue. Certaines organisations préaffectent des valeurs aux identificateurs afin d’éviter les conflits entre les équipes de développement. Pour plus d’informations, consultez le [blog de Vance](https://blogs.msdn.microsoft.com/vancem/2012/07/09/introduction-tutorial-logging-etw-events-in-c-system-diagnostics-tracing-eventsource/) ou la [documentation MSDN](https://msdn.microsoft.com/library/dn774985(v=pandp.20).aspx).
+Lorsque vous créez une solution Service Fabric à partir d’un modèle dans Visual Studio, une classe dérivée **EventSource** (**ServiceEventSource** ou **ActorEventSource**) est générée. Un modèle dans lequel vous pouvez ajouter des événements pour votre application ou votre service est créé. Le nom de la classe dérivée **EventSource** **doit** être unique et créé à partir de la chaîne de modèle par défaut MyCompany-&lt;solution&gt;-&lt;project&gt;. Un même nom attribué à plusieurs définitions **EventSource** peut causer des problèmes lors de l’exécution. Chaque événement défini doit avoir un identificateur unique. Si l’identificateur n’est pas unique, l’exécution échoue. Certaines organisations préaffectent des valeurs aux identificateurs afin d’éviter les conflits entre les équipes de développement. Pour plus d’informations, consultez le [blog de Vance](/archive/blogs/vancem/introduction-tutorial-logging-etw-events-in-c-system-diagnostics-tracing-eventsource) ou la [documentation MSDN](/previous-versions/msp-n-p/dn774985(v=pandp.20)).
 
 ## <a name="aspnet-core-logging"></a>Journalisation ASP.NET Core
 

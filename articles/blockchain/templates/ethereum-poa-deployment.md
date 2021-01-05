@@ -1,15 +1,16 @@
 ---
 title: Déployer le modèle de solution Ethereum de consortium de preuve d’autorité sur Azure
 description: Utiliser la solution Ethereum de consortium de preuve d’autorité pour déployer et configurer un réseau Ethereum de consortium sur Azure
-ms.date: 12/18/2019
-ms.topic: article
-ms.reviewer: coborn
-ms.openlocfilehash: 7e9af5c501b58f6828360ee280440ea85698bf16
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/23/2020
+ms.topic: how-to
+ms.reviewer: ravastra
+ms.custom: devx-track-js
+ms.openlocfilehash: e680bc601b7f230314c1063523a003e95a849c0a
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75387503"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95024396"
 ---
 # <a name="deploy-ethereum-proof-of-authority-consortium-solution-template-on-azure"></a>Déployer le modèle de solution Ethereum de consortium de preuve d’autorité sur Azure
 
@@ -17,15 +18,20 @@ Vous pouvez utiliser [le modèle de solution Azure en préversion Ethereum de co
 
 Le modèle de solution peut être utilisé par chaque membre du consortium pour approvisionner une empreinte réseau blockchain à l’aide de services de calcul, de mise en réseau et de stockage Azure. L’empreinte réseau de chaque membre de consortium se compose d’un ensemble de nœuds de validateur avec équilibrage de charge grâce auquel une application ou un utilisateur peut interagir pour soumettre des transactions Ethereum.
 
+[!INCLUDE [Preview note](./includes/preview.md)]
+
 ## <a name="choose-an-azure-blockchain-solution"></a>Choisir une solution Azure Blockchain
 
 Avant d'opter pour le modèle de solution Ethereum de consortium de preuve d'autorité, comparez votre scénario avec les cas d’utilisation courants des options Azure Blockchain disponibles.
 
+> [!IMPORTANT]
+> Envisagez d’utiliser [Azure Blockchain Service](../service/overview.md) plutôt que le modèle de solution Ethereum sur Azure. Azure Blockchain Service est un service géré Azure pris en charge. Parity Ethereum est passé en développement et maintenance pilotés par la communauté. Pour plus d’informations, consultez [Transition de Parity Ethereum vers la DAO OpenEthereum](https://www.parity.io/parity-ethereum-openethereum-dao/).
+
 Option | Modèle de service | Cas d’utilisation courant
 -------|---------------|-----------------
-Modèles de solution | IaaS | Les modèles de solution correspondent à des modèles Azure Resource Manager que vous pouvez utiliser pour approvisionner une topologie de réseau blockchain entièrement configurée. Les modèles déploient et configurent les services de calcul, de mise en réseau et de stockage Microsoft Azure pour un type de réseau blockchain donné.
+Modèles de solution | IaaS | Les modèles de solution correspondent à des modèles Azure Resource Manager que vous pouvez utiliser pour approvisionner une topologie de réseau blockchain entièrement configurée. Les modèles déploient et configurent les services de calcul, de mise en réseau et de stockage Microsoft Azure pour un type de réseau blockchain donné. Les modèles de solution sont fournis sans contrat SLA. Utilisez la [page de questions Microsoft Q&A](/answers/topics/azure-blockchain-workbench.html) pour obtenir de l’aide.
 [Azure Blockchain Service](../service/overview.md) | PaaS | Azure Blockchain Service (préversion) simplifie la formation, la gestion et la gouvernance des réseaux blockchain de consortium. Utilisez Azure Blockchain Service pour les solutions nécessitant PaaS, la gestion de consortium ou la confidentialité des contrats et transactions.
-[Azure Blockchain Workbench](../workbench/overview.md) | IaaS et PaaS | La préversion d’Azure Blockchain Workbench est une collection de services et de fonctionnalités Azure conçus pour vous aider à créer et à déployer des applications blockchain afin de partager des processus métier et des données avec d’autres organisations. Utilisez Azure Blockchain Workbench pour le prototypage d’une solution blockchain ou d’une preuve de concept d’application blockchain.
+[Azure Blockchain Workbench](../workbench/overview.md) | IaaS et PaaS | La préversion d’Azure Blockchain Workbench est une collection de services et de fonctionnalités Azure conçus pour vous aider à créer et à déployer des applications blockchain afin de partager des processus métier et des données avec d’autres organisations. Utilisez Azure Blockchain Workbench pour le prototypage d’une solution blockchain ou d’une preuve de concept d’application blockchain. Azure Blockchain Workbench est fourni sans contrat de niveau de service. Utilisez la [page de questions Microsoft Q&A](/answers/topics/azure-blockchain-workbench.html) pour obtenir de l’aide.
 
 ## <a name="solution-architecture"></a>Architecture de solution
 
@@ -42,7 +48,9 @@ Chaque déploiement d’un membre de consortium inclut :
 * Azure Monitor, pour l’agrégation des journaux d’activité et des statistiques de performances ;
 * une passerelle de réseau virtuel (facultative) pour autoriser les connexions VPN sur les réseaux virtuels privés.
 
-Par défaut, le RPC et les points de terminaison du peering sont accessibles via l’adresse IP publique pour simplifier la connectivité entre les différents abonnements et clouds. Pour les contrôles d'accès de niveau applicatif, vous pouvez utiliser les [contrats d’octroi d’autorisations de Parity](https://wiki.parity.io/Permissioning). Les réseaux déployés derrière des VPN, qui tirent parti des passerelles de réseau virtuel pour garantir une connectivité entre les abonnements, sont pris en charge. Les déploiements de VPN et de réseau virtuel étant plus complexes, vous pouvez commencer par un modèle d’adresse IP publique lors du prototypage d’une solution.
+Par défaut, le RPC et les points de terminaison du peering sont accessibles via l’adresse IP publique pour simplifier la connectivité entre
+
+les abonnements et les clouds. Pour les contrôles d'accès de niveau applicatif, vous pouvez utiliser les [contrats d’octroi d’autorisations de Parity](https://openethereum.github.io/Permissioning.html). Les réseaux déployés derrière des VPN, qui tirent parti des passerelles de réseau virtuel pour garantir une connectivité entre les abonnements, sont pris en charge. Les déploiements de VPN et de réseau virtuel étant plus complexes, vous pouvez commencer par un modèle d’adresse IP publique lors du prototypage d’une solution.
 
 Des conteneurs Docker sont utilisés à des fins de fiabilité et de modularité. Azure Container Registry est utilisé pour héberger et diffuser des images avec contrôle de version dans le cadre de chaque déploiement. Les images de conteneur sont composées de la manière suivante :
 
@@ -319,7 +327,7 @@ Pour des raisons de sécurité, l’accès au port SSH est refusé par défaut p
 
 1. Sélectionnez la règle **allow-ssh**.
 
-    ![ssh-allow](./media/ethereum-poa-deployment/ssh-allow.png)
+    ![Capture d’écran montrant une fenêtre de vue d’ensemble de la règle ssh-allow sélectionnée.](./media/ethereum-poa-deployment/ssh-allow.png)
 
 1. Cliquez sur **Autoriser** sous **Action**.
 
@@ -679,7 +687,7 @@ Une fois votre contrat intelligent déployé, vous pouvez envoyer une transactio
 
 ## <a name="webassembly-wasm-support"></a>Prise en charge de WebAssembly (WASM)
 
-La prise en charge de WebAssembly est déjà activée pour vous sur les réseaux PoA récemment déployés. Elle permet de développer des contrats intelligents dans n’importe quel langage transpilable en Web-Assembly (Rust, C, C++). Pour plus d'informations, consultez les pages suivantes : [Vue d’ensemble de WebAssembly avec Parity](https://wiki.parity.io/WebAssembly-Home) et [Didacticiel de Parity Tech](https://github.com/paritytech/pwasm-tutorial)
+La prise en charge de WebAssembly est déjà activée pour vous sur les réseaux PoA récemment déployés. Elle permet de développer des contrats intelligents dans n’importe quel langage transpilable en Web-Assembly (Rust, C, C++). Pour plus d'informations, consultez les pages suivantes : [Vue d’ensemble de WebAssembly avec Parity](https://openethereum.github.io/WebAssembly-Home.html) et [Didacticiel de Parity Tech](https://github.com/paritytech/pwasm-tutorial)
 
 ## <a name="faq"></a>Questions fréquentes (FAQ)
 
@@ -719,6 +727,20 @@ Le débit des transactions dépend fortement des types de transactions et de la 
 
 Ethereum Proof-of-Authority prend désormais en charge les WebSockets.  Vérifiez votre sortie de déploiement pour localiser l’URL et le port du WebSocket.
 
+## <a name="support-and-feedback"></a>Support et commentaires
+
+Pour vous tenir informé sur Azure Blockchain, visitez le [blog Azure Blockchain](https://azure.microsoft.com/blog/topics/blockchain/). Vous y trouverez les toutes dernières offres du service Blockchain ainsi que diverses informations de l’équipe technique d’Azure Blockchain.
+
+Pour faire des commentaires sur le produit ou suggérer de nouvelles fonctionnalités, postez votre idée ou votez pour une autre idée sur le [forum de commentaires Azure pour Blockchain](https://aka.ms/blockchainuservoice).
+
+### <a name="community-support"></a>Support de la communauté pour les objets blob
+
+Communiquez avec les ingénieurs Microsoft et les experts de la communauté Azure Blockchain.
+
+* [Page de questions Microsoft Q&A](/answers/topics/azure-blockchain-workbench.html). Le support d’ingénierie pour les modèles blockchain est limité aux problèmes de déploiement.
+* [Microsoft Tech Community](https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain)
+* [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-blockchain-workbench)
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur les solutions Azure Blockchain, consultez la [documentation Azure Blockchain](https://docs.microsoft.com/azure/blockchain/).
+Pour plus d’informations sur les solutions Azure Blockchain, consultez la [documentation Azure Blockchain](../index.yml).

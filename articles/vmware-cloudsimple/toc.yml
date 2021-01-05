@@ -1,5 +1,5 @@
 - name: VMware Solution by CloudSimple
-  href: /azure/vmware-cloudsimple
+  href: ./index.md
   items:
     - name: Vue d’ensemble
       items:
@@ -40,7 +40,7 @@
           href: cloudsimple-public-ip-address.md
         - name: Connexion réseau Azure
           href: cloudsimple-azure-network-connection.md
-        - name: Account management
+        - name: Gestion des comptes
           href: cloudsimple-account.md
         - name: Gestion des activités
           href: cloudsimple-activity.md
@@ -52,6 +52,8 @@
           href: node-quota.md
         - name: Maintenance et mises à jour
           href: cloudsimple-maintenance-updates.md
+        - name: Actions interdites
+          href: forbidden-actions.md
         - name: Questions fréquentes (FAQ)
           href: cloudsimple-faq.md
     - name: Tutoriels
@@ -178,3 +180,7 @@
               href: on-premises-connection.md
             - name: Connexion au réseau virtuel Azure avec ExpressRoute
               href: azure-expressroute-connection.md
+    - name: Notes de publication
+      items:
+        - name: "Mise à jour de CloudSimple - septembre\_2020"
+          href: update-plan-sept-2020.md

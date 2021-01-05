@@ -3,18 +3,18 @@ title: Créer une règle Azure Load Balancer pour un cluster
 description: Configurez Azure Load Balancer pour ouvrir les ports pour votre cluster Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 12/06/2017
-ms.openlocfilehash: f4599b2e0174381ab7df04aeeb33db7e3ee60f26
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e09c7b0b3e2bfa5a5ff834e243f5098cbbd947b
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77025382"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92319898"
 ---
 # <a name="open-ports-for-a-service-fabric-cluster"></a>Ouvrir des ports pour un cluster Service Fabric
 
 L’équilibreur de charge déployé avec votre cluster Azure Service Fabric dirige le trafic vers votre application en cours d’exécution sur un nœud. Si vous modifiez votre application pour utiliser un autre port, vous devez exposer ce port (ou acheminer un port différent) dans Azure Load Balancer.
 
-Une fois votre cluster Service Fabric déployé vers Azure, un équilibreur de charge est créé automatiquement pour vous. Si vous ne disposez pas d’un équilibrage de charge, consultez [Configurer un équilibreur de charge connecté à Internet](../load-balancer/load-balancer-get-started-internet-portal.md).
+Une fois votre cluster Service Fabric déployé vers Azure, un équilibreur de charge est créé automatiquement pour vous. Si vous ne disposez pas d’un équilibrage de charge, consultez [Configurer un équilibreur de charge connecté à Internet](../load-balancer/quickstart-load-balancer-standard-public-portal.md).
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
@@ -25,7 +25,7 @@ Le fichier de configuration de votre application Service Fabric **ServiceManifes
 
 ## <a name="create-a-load-balancer-rule"></a>Créer une règle d’équilibreur de charge
 
-Une règle Load Balancer ouvre un port connecté à internet et transfère le trafic vers le port du nœud interne utilisé par votre application. Si vous ne disposez pas d’un équilibrage de charge, consultez [Configurer un équilibreur de charge connecté à Internet](../load-balancer/load-balancer-get-started-internet-portal.md).
+Une règle Load Balancer ouvre un port connecté à internet et transfère le trafic vers le port du nœud interne utilisé par votre application. Si vous ne disposez pas d’un équilibrage de charge, consultez [Configurer un équilibreur de charge connecté à Internet](../load-balancer/quickstart-load-balancer-standard-public-portal.md).
 
 Pour créer une règle Load Balancer, vous devez collecter les informations suivantes :
 
@@ -60,7 +60,7 @@ La commande Azure CLI dispose de quelques paramètres décrits dans le tableau s
 
 
 >[!NOTE]
->Pour plus d’informations sur la création d’un équilibreur de charge avec l’interface Azure CLI, consultez [Créer un équilibreur de charge avec l’interface Azure CLI](../load-balancer/load-balancer-get-started-ilb-arm-cli.md).
+>Pour plus d’informations sur la création d’un équilibreur de charge avec l’interface Azure CLI, consultez [Créer un équilibreur de charge avec l’interface Azure CLI](../load-balancer/quickstart-load-balancer-standard-internal-cli.md).
 
 ## <a name="powershell"></a>PowerShell
 
@@ -96,7 +96,7 @@ $lb | Set-AzLoadBalancer
 En ce qui concerne la commande `New-AzLoadBalancerRuleConfig`, le `-FrontendPort` représente le port que l’équilibrage de charge expose aux connexions externes, et le `-BackendPort` représente le port d’écoute de l’application Service Fabric.
 
 >[!NOTE]
->Pour plus d’informations sur la création d’un équilibreur de charge avec l’interface PowerShellI, consultez [Créer un équilibreur de charge avec PowerShell](../load-balancer/load-balancer-get-started-ilb-arm-ps.md).
+>Pour plus d’informations sur la création d’un équilibreur de charge avec l’interface PowerShellI, consultez [Créer un équilibreur de charge avec PowerShell](../load-balancer/quickstart-load-balancer-standard-internal-powershell.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

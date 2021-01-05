@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 467af776af95cf035121250fdcadd2fee65d9805
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4ca02b3d6f4dec805c6ce58d4470c4c8e5f3454f
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177108"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93375820"
 ---
 #### <a name="to-create-a-volume-container"></a>Pour créer un conteneur de volumes
 1. Accédez à votre service StorSimple Device Manager et cliquez sur **Appareils**. Dans la liste tabulaire des appareils, sélectionnez un appareil et cliquez dessus. 
@@ -18,7 +18,7 @@ ms.locfileid: "67177108"
 
 2. Dans le tableau de bord de l’appareil, cliquez sur **+ Ajouter un conteneur de volumes**.
 
-    ![Panneau du conteneur de volumes](./media/storsimple-8000-create-volume-container/createvolumecontainer2.png)
+    ![Panneau du conteneur de volumes 2](./media/storsimple-8000-create-volume-container/createvolumecontainer2.png)
 
 3. Dans le panneau **Ajouter un conteneur de volumes** :
    
@@ -30,10 +30,10 @@ ms.locfileid: "67177108"
    6. Sélectionnez **Illimitée** dans la liste déroulante **Spécifier la bande passante** si vous souhaitez consommer toute la bande passante disponible. Vous pouvez également définir cette option sur **Personnalisé** pour utiliser les contrôles de bande passante et spécifier une valeur comprise entre 1 et 1 000 Mbits/s.
       Si vos informations d’utilisation de la bande passante sont disponibles, vous pouvez allouer de la bande passante selon une planification en spécifiant **Sélectionner un modèle de bande passante**. Pour une procédure pas à pas, consultez la page [Ajouter un modèle de bande passante](../articles/storsimple/storsimple-8000-manage-bandwidth-templates.md#add-a-bandwidth-template).
 
-      ![Panneau du conteneur de volumes](./media/storsimple-8000-create-volume-container/createvolumecontainer6b.png)
+      ![Panneau du conteneur de volumes 3](./media/storsimple-8000-create-volume-container/createvolumecontainer6b.png)
    7. Cliquez sur **Créer**.
 
-        ![Panneau du conteneur de volumes](./media/storsimple-8000-create-volume-container/createvolumecontainer6.png)
+        ![Panneau du conteneur de volumes 4](./media/storsimple-8000-create-volume-container/createvolumecontainer6.png)
    
        Un message s’affiche une fois le conteneur de volumes créé.
 

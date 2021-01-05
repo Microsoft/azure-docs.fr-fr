@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 04/08/2019
 ms.author: mayg
-ms.openlocfilehash: 6c77cd43231d4596535c11564313a0fe90633cdb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bb112e0b2d1c64e65ecaf6749a25707d8632c0cb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60947744"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86134958"
 ---
 # <a name="azure-traffic-manager-with-azure-site-recovery"></a>Azure Traffic Manager avec Azure Site Recovery
 
@@ -30,7 +30,7 @@ Pour le premier scénario, prenons le cas d’une **société A** qui exécute l
 La **société A** exécute des applications avec des points de terminaison publics et souhaite pouvoir rediriger facilement le trafic vers Azure en cas d’incident. Dans Azure Traffic Manager, la méthode de routage du trafic [Priorité](../traffic-manager/traffic-manager-configure-priority-routing-method.md) permet à la société A d’implémenter facilement ce modèle de basculement.
 
 La configuration est la suivante :
-- La **société A** crée un [profil Traffic Manager](../traffic-manager/traffic-manager-create-profile.md).
+- La **société A** crée un [profil Traffic Manager](../traffic-manager/quickstart-create-traffic-manager-profile.md).
 - En utilisant la méthode de routage **Priorité**, la **société A** crée deux points de terminaison : **Principal** pour l’environnement local et **Basculement** pour Azure. **Principal** reçoit la Priorité 1 et **Basculement** reçoit la Priorité 2.
 - Étant donné que le point de terminaison **Principal** est hébergé en dehors d’Azure, il est créé comme un point de terminaison [Externe](../traffic-manager/traffic-manager-endpoint-types.md#external-endpoints).
 - Avec Azure Site Recovery, le site Azure ne comprend pas de machines virtuelles ou d’applications qui s’exécutent avant le basculement. Par conséquent, le point de terminaison **Basculement** est également créé comme un point de terminaison **Externe**.
@@ -65,7 +65,7 @@ Pour cet exemple, prenons le cas d’une **société C** qui exécute l’ensemb
 La **société C** exécute des applications avec des points de terminaison publics et souhaite pouvoir rediriger facilement le trafic vers une autre région Azure en cas d’incident. La méthode de routage du trafic [Priorité](../traffic-manager/traffic-manager-configure-priority-routing-method.md) permet à la **société C** d’implémenter facilement ce modèle de basculement.
 
 La configuration est la suivante :
-- La **société C** crée un [profil Traffic Manager](../traffic-manager/traffic-manager-create-profile.md).
+- La **société C** crée un [profil Traffic Manager](../traffic-manager/quickstart-create-traffic-manager-profile.md).
 - En utilisant la méthode de routage **Priorité**, la **société C** crée deux points de terminaison : **Principal** pour la région source (Azure Asie Est) et **Basculement** pour la région de récupération (Azure Asie Sud-Est). **Principal** reçoit la Priorité 1 et **Basculement** reçoit la Priorité 2.
 - Étant donné que le point de terminaison **Principal** est hébergé dans Azure, il peut également être un point de terminaison [Azure](../traffic-manager/traffic-manager-endpoint-types.md#azure-endpoints).
 - Avec Azure Site Recovery, le site Azure de récupération ne comprend pas de machines virtuelles ou d’applications qui s’exécutent avant le basculement. Par conséquent, le point de terminaison **Basculement** peut également être créé comme un point de terminaison [Externe](../traffic-manager/traffic-manager-endpoint-types.md#external-endpoints).

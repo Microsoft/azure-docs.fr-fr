@@ -1,27 +1,27 @@
 ---
-title: Connecter des utilisateurs dans des applications monopages Angular - Azure
+title: 'Démarrage rapide : Connecter des utilisateurs dans des applications monopages Angular - Azure'
 titleSuffix: Microsoft identity platform
-description: Découvrez de quelle manière une application Angular peut appeler une API qui exige des jetons d’accès à l’aide de la plateforme d’identités Microsoft.
+description: Dans ce guide de démarrage rapide, vous découvrez de quelle manière une application Angular peut appeler une API qui exige des jetons d’accès émis par la plateforme d’identités Microsoft.
 services: active-directory
 author: jasonnutter
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript
+ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript, devx-track-js
 ms.topic: quickstart
 ms.workload: identity
 ms.date: 03/18/2020
 ms.author: janutter
-ms.openlocfilehash: f457e876cb9484fce29cba35c7570572b2771aed
-ms.sourcegitcommit: 95269d1eae0f95d42d9de410f86e8e7b4fbbb049
+ms.openlocfilehash: 72d9aefcdda5d224b256c6e969b7a75259a97005
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83860050"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95750771"
 ---
 # <a name="quickstart-sign-in-users-and-get-an-access-token-in-an-angular-single-page-application"></a>Démarrage rapide : Connecter des utilisateurs et obtenir un jeton d’accès dans une application monopage Angular
 
-Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour découvrir comment une application monopage (SPA) Angular peut connecter des utilisateurs disposant de comptes Microsoft personnels, de comptes professionnels ou de comptes scolaires. Une application monopage Angular peut également obtenir un jeton d’accès pour appeler l’API Microsoft Graph ou une API web.
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment une application monopage Angular peut connecter des utilisateurs et appeler Microsoft Graph. L’exemple de code montre comment obtenir un jeton d’accès pour appeler l’API Microsoft Graph ou n’importe quelle API web.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -47,7 +47,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >
 > 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 > 1. Si votre compte a accès à plusieurs locataires, sélectionnez votre compte en haut à droite, puis définissez votre session de portail sur le locataire Azure AD que vous voulez utiliser.
-> 1. Suivez les instructions pour [inscrire une application monopage](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) dans le portail Azure.
+> 1. Suivez les instructions pour [inscrire une application monopage](./scenario-spa-app-registration.md) dans le portail Azure.
 > 1. Ajoutez une nouvelle plateforme dans le volet **Authentification** de l’inscription de votre application, puis enregistrez l’URI de redirection : `http://localhost:4200/`.
 > 1. Ce guide de démarrage rapide utilise le [flux d’octroi implicite](v2-oauth2-implicit-grant-flow.md). Sélectionnez les paramètres **Octroi implicite** pour les **jetons d’ID** et les **jetons d’accès**. Des jetons d’ID et des jetons d’accès sont nécessaires, car cette application connectent des utilisateurs et appellent une API.
 
@@ -99,7 +99,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >|Nom de la valeur|Description|
 >|---------|---------|
 >|Enter_the_Application_Id_Here|Dans la page **Vue d’ensemble** de l’inscription de votre application, il s’agit de la valeur de votre **ID d’application (client)** . |
->|Enter_the_Cloud_Instance_Id_Here|Il s’agit de l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez **https://login.microsoftonline.com** . Pour les clouds nationaux (par exemple Chine), consultez [Clouds nationaux](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud).|
+>|Enter_the_Cloud_Instance_Id_Here|Il s’agit de l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez **https://login.microsoftonline.com** . Pour les clouds nationaux (par exemple Chine), consultez [Clouds nationaux](./authentication-national-cloud.md).|
 >|Enter_the_Tenant_Info_Here| Définissez cette valeur sur une des options suivantes : Si votre application prend en charge les *comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’ID de l’annuaire (locataire) ou le nom du locataire (par exemple, **contoso.microsoft.com**). Si votre application prend en charge les *Comptes dans un annuaire organisationnel*, remplacez cette valeur par **organizations**. Si votre application prend en charge les *Comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par **common**. Pour limiter la prise en charge aux *Comptes Microsoft personnels uniquement*, remplacez cette valeur par **consumers**. |
 >|Enter_the_Redirect_Uri_Here|Remplacez par **http://localhost:4200** .|
 >|cacheLocation  | (Facultatif) Définissez le stockage du navigateur pour l’état d’authentification. La valeur par défaut est **sessionStorage**.   |
@@ -107,7 +107,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > > [!TIP]
 > > Pour connaître les valeurs de l’**ID d’Application (client)** , de l’**ID de l’annuaire (locataire)** , et des **Types de comptes pris en charge**, consultez la page **Vue d’ensemble** de l’application dans le Portail Azure.
 
-Pour plus d’informations sur les options configurables disponibles, consultez [Initialiser les applications clientes](msal-js-initializing-client-applications.md). 
+Pour plus d’informations sur les options configurables disponibles, consultez [Initialiser les applications clientes](msal-js-initializing-client-applications.md).
 
 Vous trouverez le code source de la bibliothèque MSAL.js dans le dépôt [AzureAD/microsoft-authentication-library-for-js](https://github.com/AzureAD/microsoft-authentication-library-for-js) sur GitHub.
 
@@ -134,7 +134,7 @@ Une fois que l’application est chargée dans le navigateur, sélectionnez **Se
 
 ## <a name="how-the-sample-works"></a>Fonctionnement de l’exemple
 
-![Diagramme illustrant le fonctionnement de l’exemple d’application dans ce guide de démarrage rapide](media/quickstart-v2-javascript/javascriptspa-intro.svg)
+![Diagramme illustrant le fonctionnement de l’exemple d’application dans ce guide de démarrage rapide](./media/quickstart-v2-angular/diagram-auth-flow-spa-angular.svg)
 
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -142,5 +142,4 @@ Une fois que l’application est chargée dans le navigateur, sélectionnez **Se
 À présent, découvrez comment connecter un utilisateur et acquérir des jetons dans le tutoriel Angular :
 
 > [!div class="nextstepaction"]
-> [Tutoriel Angular](https://docs.microsoft.com/azure/active-directory/develop/tutorial-v2-angular)
-
+> [Tutoriel Angular](./tutorial-v2-angular.md)

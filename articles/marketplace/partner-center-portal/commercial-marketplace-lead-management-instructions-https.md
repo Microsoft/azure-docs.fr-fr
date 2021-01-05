@@ -1,18 +1,18 @@
 ---
 title: Gestion des prospects avec un point de terminaison HTTPS – Marketplace commercial de Microsoft
 description: Découvrez comment utiliser Power Automate et un point de terminaison HTTPS pour gérer les prospects de Microsoft AppSource et de la Place de marché Azure.
-author: qianw211
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
+author: trkeya
+ms.author: trkeya
 ms.date: 03/30/2020
-ms.author: dsindona
-ms.openlocfilehash: 7a4fc57b3be8dd59997ef2bfc9624892cf726160
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: b4dabee6a725fd02b7be6dd12c8a032e3d816835
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790981"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94489367"
 ---
 # <a name="use-an-https-endpoint-to-manage-commercial-marketplace-leads"></a>Utiliser un point de terminaison HTTPS pour gérer les prospects de marketplaces commerciaux
 
@@ -31,11 +31,11 @@ Cet article explique comment créer un flux dans Power Automate pour générer l
 
     ![Connexion à Mes flux](./media/commercial-marketplace-lead-management-instructions-https/my-flows-automated.png)
 
-1. Sous **+ Nouveau**, sélectionnez **+ Instantané - à partir de zéro**.
+1. Sous **+ Nouveau** , sélectionnez **+ Instantané - à partir de zéro**.
 
     ![Mes flux + Automatisé – à partir de zéro](./media/commercial-marketplace-lead-management-instructions-https/https-myflows-create-fromblank.png)
 
-1. Nommez votre flux, puis sous **Choisir comment déclencher ce flux**, sélectionnez **Lors de la réception d’une requête HTTP**.
+1. Nommez votre flux, puis sous **Choisir comment déclencher ce flux** , sélectionnez **Lors de la réception d’une requête HTTP**.
 
     ![Bouton Ignorer dans la fenêtre Générer un flux automatisé](./media/commercial-marketplace-lead-management-instructions-https/https-myflows-pick-request-trigger.png)
 
@@ -43,10 +43,10 @@ Cet article explique comment créer un flux dans Power Automate pour générer l
 
     ![Développer l’étape du flux](./media/commercial-marketplace-lead-management-instructions-https/expand-flow-step.png)
 
-1. Utilisez l’une des méthodes suivantes pour configurer le **schéma JSON du corps de la demande** :
+1. Utilisez l’une des méthodes suivantes pour configurer le **schéma JSON du corps de la demande**  :
 
     - Copiez le schéma JSON dans la zone de texte **Schéma JSON du corps de la demande**.
-    - Sélectionnez **Utiliser l’exemple de charge utile pour générer le schéma**. Dans la zone de texte **Entrer ou coller un exemple de charge utile JSON**, collez l’exemple JSON. Sélectionnez **Terminé** pour créer le schéma.
+    - Sélectionnez **Utiliser l’exemple de charge utile pour générer le schéma**. Dans la zone de texte **Entrer ou coller un exemple de charge utile JSON** , collez l’exemple JSON. Sélectionnez **Terminé** pour créer le schéma.
 
     **Schéma JSON**
 
@@ -152,25 +152,25 @@ Cet article explique comment créer un flux dans Power Automate pour générer l
 ### <a name="set-up-email-notification"></a>Configurer une notification par e-mail
 
 1. Maintenant que vous avez terminé le schéma JSON, sélectionnez **+ Nouvelle étape**.
-1. Sous **Choisir une action**, sélectionnez **Actions**.
-1. Sous l’onglet **Actions**, sélectionnez **Envoyer un e-mail (Office 365 Outlook)** .
+1. Sous **Choisir une action** , sélectionnez **Actions**.
+1. Sous l’onglet **Actions** , sélectionnez **Envoyer un e-mail (Office 365 Outlook)** .
 
     >[!NOTE]
     >Si vous souhaitez utiliser un autre fournisseur de messagerie, recherchez et sélectionnez **Envoyer une notification par e-mail (Courrier)** comme action à la place.
 
     ![Ajouter une action de messagerie](./media/commercial-marketplace-lead-management-instructions-https/https-request-received-send-email.png)
 
-1. Dans la fenêtre **Envoyer un e-mail**, configurez les champs obligatoires suivants :
+1. Dans la fenêtre **Envoyer un e-mail** , configurez les champs obligatoires suivants :
 
-   - **À** : entrez au moins une adresse e-mail valide à laquelle les prospects seront envoyés.
-   - **Objet** : Power Automate vous donne la possibilité d’ajouter du contenu dynamique, comme **LeadSource**, illustré dans la capture d’écran suivante. Commencez par entrer un nom de champ. Ensuite, sélectionnez la liste de sélection du contenu dynamique dans la fenêtre contextuelle. 
+   - **À**  : entrez au moins une adresse e-mail valide à laquelle les prospects seront envoyés.
+   - **Objet** : Power Automate vous donne la possibilité d’ajouter du contenu dynamique, comme **LeadSource** , illustré dans la capture d’écran suivante. Commencez par entrer un nom de champ. Ensuite, sélectionnez la liste de sélection du contenu dynamique dans la fenêtre contextuelle. 
 
         >[!NOTE] 
         > Lorsque vous ajoutez des noms de champs, vous pouvez faire suivre chaque nom d’un signe deux-points (:) puis sélectionner **Entrée** pour créer une nouvelle ligne. Une fois que vous avez ajouté vos noms de champs, vous pouvez ajouter chaque paramètre associé à partir de la liste de sélection dynamique.
 
         ![Ajouter une action de messagerie à l’aide de contenu dynamique](./media/commercial-marketplace-lead-management-instructions-https/add-email-using-dynamic-content.png)
 
-   - **Corps**: dans la liste de sélection de contenu dynamique, ajoutez les informations souhaitées dans le corps de l’e-mail. Par exemple, utilisez LastName, FirstName, Email et Company. Quand vous aurez fini de configurer la notification par e-mail, elle ressemblera à l’exemple affiché dans la capture d’écran suivante.
+   - **Corps** : dans la liste de sélection de contenu dynamique, ajoutez les informations souhaitées dans le corps de l’e-mail. Par exemple, utilisez LastName, FirstName, Email et Company. Quand vous aurez fini de configurer la notification par e-mail, elle ressemblera à l’exemple affiché dans la capture d’écran suivante.
 
 
        ![Exemple de notification par e-mail](./media/commercial-marketplace-lead-management-instructions-https/send-an-email.png)
@@ -187,7 +187,7 @@ Vous pouvez tester votre configuration à l’aide de [Postman](https://app.getp
 
    ![Demande de configuration de votre outil de test](./media/commercial-marketplace-lead-management-instructions-https/postman-request.png)
 
-1. Renseignez le formulaire **Enregistrer la requête**, puis enregistrez-le dans le dossier que vous avez créé.
+1. Renseignez le formulaire **Enregistrer la requête** , puis enregistrez-le dans le dossier que vous avez créé.
 
    ![Formulaire Enregistrer la requête](./media/commercial-marketplace-lead-management-instructions-https/postman-save-to-test.png)
 
@@ -202,7 +202,7 @@ Vous pouvez tester votre configuration à l’aide de [Postman](https://app.getp
 1. Retournez dans [Power Automate](https://flow.microsoft.com/). Recherchez le flux que vous avez créé pour envoyer des prospects en accédant à **Mes flux** à partir de la barre de menus Power Automate. Sélectionnez les points de suspension en regard du nom du flux pour afficher plus d’options et sélectionnez **Modifier**.
 
 
-1. Sélectionnez **Tester** en haut à droite, puis **J’effectuerai l’action de déclenchement**, et enfin **Tester**. Vous verrez une indication en haut de l’écran indiquant que le test a démarré.
+1. Sélectionnez **Tester** en haut à droite, puis **J’effectuerai l’action de déclenchement** , et enfin **Tester**. Vous verrez une indication en haut de l’écran indiquant que le test a démarré.
 
    ![Option J’effectuerai l’action de déclenchement](./media/commercial-marketplace-lead-management-instructions-https/test-flow-trigger-action.png)
 
@@ -229,13 +229,14 @@ Lorsque vous êtes prêt à configurer les informations de gestion des prospects
 
 1. Sélectionnez votre offre, puis accédez à l’onglet **Configuration de l’offre**.
 
-1. Dans la section **Gestion des prospects**, sélectionnez **Connexion**. 
-    ![Lead management Connect button](./media/commercial-marketplace-lead-management-instructions-https/lead-management-connect.png)
+1. Dans la section **Prospects** , sélectionnez **Se connecter**.
 
-1. Dans la fenêtre contextuelle **Détails de la connexion**, sélectionnez **Point de terminaison HTTPS** comme **Destination du prospect**. Collez l’URL HTTP POST à partir du flux que vous avez créé en suivant les étapes précédentes dans le champ **URL du point de terminaison HTTPS**.
+    :::image type="content" source="./media/commercial-marketplace-lead-management-instructions-https/customer-leads.png" alt-text="Prospects":::
+
+1. Dans la fenêtre contextuelle **Détails de la connexion** , sélectionnez **Point de terminaison HTTPS** comme **Destination du prospect**. Collez l’URL HTTP POST à partir du flux que vous avez créé en suivant les étapes précédentes dans le champ **URL du point de terminaison HTTPS**.
     ![Connection details Contact email](./media/commercial-marketplace-lead-management-instructions-https/https-connection-details.png)
 
-1. Sous **E-mail du contact**, entrez les adresses e-mail des personnes de votre société qui doivent recevoir des notifications par e-mail lors de la réception d’un nouveau prospect. Vous pouvez spécifier plusieurs e-mails en les séparant par un point-virgule.
+1. Sous **E-mail du contact** , entrez les adresses e-mail des personnes de votre société qui doivent recevoir des notifications par e-mail lors de la réception d’un nouveau prospect. Vous pouvez spécifier plusieurs e-mails en les séparant par un point-virgule.
 
 1. Sélectionnez **OK**.
 

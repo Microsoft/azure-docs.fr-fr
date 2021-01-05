@@ -2,14 +2,14 @@
 title: Monter le volume Azure Files pour le groupe de conteneurs
 description: Découvrir comment monter un volume Azure Files pour conserver l’état avec Azure Container Instances
 ms.topic: article
-ms.date: 12/30/2019
-ms.custom: mvc
-ms.openlocfilehash: f66890c503de8de9160f11fb28795012ae57daeb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/02/2020
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 5ca619ac3ae93ee238d019b64ecccc975b7c8e3b
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75561335"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746862"
 ---
 # <a name="mount-an-azure-file-share-in-azure-container-instances"></a>Monter un partage de fichiers Azure dans Azure Container Instances
 
@@ -49,15 +49,15 @@ az storage share create \
 
 Pour monter un partage de fichiers Azure en tant que volume dans Azure Container Instances, vous avez besoin de trois valeurs : le nom du compte de stockage, le nom du partage et la clé d’accès de stockage.
 
-* **Nom du compte de stockage** : si vous avez utilisé le script précédent, le nom du compte de stockage a été stocké dans la variable `$ACI_PERS_STORAGE_ACCOUNT_NAME`. Pour afficher le nom du compte, entrez :
+* **Nom du compte de stockage**  : si vous avez utilisé le script précédent, le nom du compte de stockage a été stocké dans la variable `$ACI_PERS_STORAGE_ACCOUNT_NAME`. Pour afficher le nom du compte, entrez :
 
   ```console
   echo $ACI_PERS_STORAGE_ACCOUNT_NAME
   ```
 
-* **Nom de partage** : cette valeur est déjà connue (définie comme `acishare` dans le script précédent)
+* **Nom de partage**  : cette valeur est déjà connue (définie comme `acishare` dans le script précédent)
 
-* **Clé de compte de stockage** : cette valeur est disponible à l’aide de la commande suivante :
+* **Clé de compte de stockage**  : cette valeur est disponible à l’aide de la commande suivante :
 
   ```azurecli-interactive
   STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME --query "[0].value" --output tsv)
@@ -103,7 +103,7 @@ Le modèle YAML suivant définit un groupe de conteneurs avec un seul conteneur 
 Comme dans l’exemple CLI, la valeur `dnsNameLabel` doit être unique au sein de la région Azure dans laquelle vous créez l’instance de conteneur. Si nécessaire, mettez à jour la valeur dans le fichier YAML.
 
 ```yaml
-apiVersion: '2018-10-01'
+apiVersion: '2019-12-01'
 location: eastus
 name: file-share-demo
 properties:
@@ -168,7 +168,7 @@ Comme dans les exemples précédents, la valeur `dnsNameLabel` doit être unique
     {
       "name": "file-share-demo",
       "type": "Microsoft.ContainerInstance/containerGroups",
-      "apiVersion": "2018-10-01",
+      "apiVersion": "2019-12-01",
       "location": "[resourceGroup().location]",
       "properties": {
         "containers": [
@@ -223,11 +223,11 @@ Comme dans les exemples précédents, la valeur `dnsNameLabel` doit être unique
 }
 ```
 
-Pour effectuer un déploiement avec le modèle Resource Manager, enregistrez le JSON précédent dans un fichier nommé `deploy-aci.json`, puis exécutez la commande [az container create][az-group-deployment-create] avec le paramètre `--template-file` :
+Pour effectuer un déploiement avec le modèle Resource Manager, enregistrez le JSON précédent dans un fichier nommé `deploy-aci.json`, puis exécutez la commande [az deployment group create][az-deployment-group-create] avec le paramètre `--template-file` :
 
 ```azurecli
 # Deploy with Resource Manager template
-az group deployment create --resource-group myResourceGroup --template-file deploy-aci.json
+az deployment group create --resource-group myResourceGroup --template-file deploy-aci.json
 ```
 
 
@@ -235,7 +235,7 @@ az group deployment create --resource-group myResourceGroup --template-file depl
 
 Pour monter plusieurs volumes dans une instance de conteneur, vous devez effectuer le déploiement à l’aide d’un [modèle Azure Resource Manager](/azure/templates/microsoft.containerinstance/containergroups), d’un fichier YAML ou d’une autre méthode programmatique. Pour utiliser un modèle ou fichier YAML, fournissez les détails de partage et définissez les volumes en remplissant le tableau `volumes` dans la section `properties` du fichier. 
 
-Par exemple, si vous avez créé deux partages de fichiers Azure nommés *share1* et *share2* dans le compte de stockage *myStorageAccount*, le tableau `volumes` dans un modèle Resource Manager ressemblerait à ceci :
+Par exemple, si vous avez créé deux partages de fichiers Azure nommés *share1* et *share2* dans le compte de stockage *myStorageAccount* , le tableau `volumes` dans un modèle Resource Manager ressemblerait à ceci :
 
 ```JSON
 "volumes": [{
@@ -256,7 +256,7 @@ Par exemple, si vous avez créé deux partages de fichiers Azure nommés *share1
 }]
 ```
 
-Ensuite, pour chaque conteneur du groupe de conteneurs dans lequel vous souhaitez monter les volumes, remplissez le tableau `volumeMounts` dans la section `properties` de la définition de conteneur. Ainsi, nous obtenons les deux volumes montés, *myvolume1* et *myvolume2*, définis précédemment :
+Ensuite, pour chaque conteneur du groupe de conteneurs dans lequel vous souhaitez monter les volumes, remplissez le tableau `volumeMounts` dans la section `properties` de la définition de conteneur. Ainsi, nous obtenons les deux volumes montés, *myvolume1* et *myvolume2* , définis précédemment :
 
 ```JSON
 "volumeMounts": [{
@@ -285,4 +285,4 @@ Découvrez comment monter d’autres types de volumes dans Azure Container Insta
 <!-- LINKS - Internal -->
 [az-container-create]: /cli/azure/container#az-container-create
 [az-container-show]: /cli/azure/container#az-container-show
-[az-group-deployment-create]: /cli/azure/group/deployment#az-group-deployment-create
+[az-deployment-group-create]: /cli/azure/deployment/group#az-deployment-group-create

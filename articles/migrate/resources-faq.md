@@ -1,14 +1,17 @@
 ---
 title: Questions fréquentes (FAQ) sur Azure Migrate
 description: Obtenez des réponses aux questions courantes au sujet du service Azure Migrate.
+author: ms-psharma
+ms.author: panshar
+ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 04/15/2020
-ms.openlocfilehash: 9b71888b284fd9cc125def4758d1e3800a92acf2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b36a4089a15118499b0ce57500f221b74af82242
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81530315"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753742"
 ---
 # <a name="azure-migrate-common-questions"></a>Azure Migrate : Questions courantes
 
@@ -29,9 +32,19 @@ Utilisez Azure Migrate pour découvrir, évaluer et migrer des données, des app
 
 [Azure Migrate](migrate-services-overview.md) fournit un hub centralisé pour l’évaluation et la migration vers Azure. 
 
-[Azure Site Recovery](../site-recovery/site-recovery-overview.md) est une solution de reprise d’activité. 
+- L’utilisation d’Azure Migrate fournit une interopérabilité et une extensibilité future avec les outils Azure Migrate, les autres services Azure et les outils tiers.
+- L’outil Azure Migrate : Migration de serveurs est conçu spécialement pour la migration de serveurs vers Azure. Il est optimisé pour la migration. Vous n’avez pas besoin d’en savoir plus sur les concepts et les scénarios qui ne sont pas directement pertinents pour la migration. 
+- Il n’y a pas de frais d’utilisation de l’outil pour la migration pendant 180 jours, à partir du moment où la réplication est démarrée pour une machine virtuelle. Cela vous donne le temps de terminer la migration. Vous payez uniquement pour les ressources de stockage et de réseau utilisées pour la réplication, et pour les frais de calcul consommés pendant les migrations de test.
+- Azure Migrate prend en charge tous les scénarios de migration pris en charge par Site Recovery. En outre, pour les machines virtuelles VMware, Azure Migrate fournit une option de migration sans agent.
+- Nous donnons la priorité aux nouvelles fonctionnalités de migration pour l’outil Azure Migrate : Migration de serveurs uniquement. Ces fonctionnalités ne sont pas ciblées pour Site Recovery.
+
+[Azure Site Recovery](../site-recovery/site-recovery-overview.md) ne doit être utilisé que pour la récupération d’urgence.
 
 Azure Migrate : Server Migration utilise des fonctionnalités Site Recovery de back-end pour la migration lift-and-shift de certains ordinateurs locaux.
+
+## <a name="i-have-a-project-with-the-previous-classic-experience-of-azure-migrate-how-do-i-start-using-the-new-version"></a>J’ai un projet avec l’expérience classique précédente d’Azure Migrate. Comment faire commencer à utiliser la nouvelle version ?
+
+Vous ne pouvez pas mettre à niveau des projets ou composants de la version précédente vers la nouvelle version. Vous devez [créer un projet Azure Migrate](create-manage-projects.md) et y [ajouter des outils d’évaluation et de migration](./create-manage-projects.md). Consultez les tutoriels pour comprendre comment utiliser les outils d’évaluation et de migration disponibles. Si un espace de travail Log Analytics est attaché à un projet classique, vous pouvez l’attacher à un projet de la version actuelle après avoir supprimé le projet classique.
 
 ## <a name="whats-the-difference-between-azure-migrate-server-assessment-and-the-map-toolkit"></a>Quelle est la différence entre Azure Migrate: Server Assessment et Map Toolkit ?
 

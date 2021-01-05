@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: troubleshooting
 ms.custom: seoapr2020
 ms.date: 04/22/2020
-ms.openlocfilehash: 527d2d8cb8086ed6b5e87417e2bc80dd52aa6e63
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2e9f6898dba559f557f49cc0ee9ff39644da243f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188410"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000689"
 ---
 # <a name="troubleshoot-resource-creation-failures-in-azure-hdinsight"></a>Résoudre les problèmes de création de ressources dans Azure HDInsight
 
@@ -25,7 +25,7 @@ Azure a une limite de quota de 800 déploiements par groupe de ressources. Des 
 
 Pour résoudre ce problème, supprimez les déploiements qui ne sont plus nécessaires à l’aide du portail Azure, de CLI ou de PowerShell.
 
-Pour plus d’informations, consultez [Résoudre les erreurs liées aux quotas de ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quota-errors).
+Pour plus d’informations, consultez [Résoudre les erreurs liées aux quotas de ressources](../azure-resource-manager/templates/error-resource-quota.md).
 
 ## <a name="error-the-maximum-node-exceeded-the-available-cores-in-this-region"></a>Erreur : Le nombre maximal de nœuds dépasse le nombre de cœurs disponibles dans cette région
 
@@ -47,10 +47,4 @@ Pour plus d’informations, consultez [Créer un ticket de support pour augmente
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

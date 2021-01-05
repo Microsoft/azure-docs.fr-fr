@@ -6,18 +6,18 @@ ms.author: mimckitt
 ms.topic: overview
 ms.service: virtual-machine-scale-sets
 ms.subservice: ''
-ms.date: 09/26/2019
+ms.date: 06/30/2020
 ms.reviewer: jushiman
 ms.custom: mimckitt
-ms.openlocfilehash: 986a2722515ac49aad9e655d1dcef06f5ce2e3dc
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: dff83159511c6e8a08e8f212c01244e923ad1f5b
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198406"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94376942"
 ---
 # <a name="what-are-virtual-machine-scale-sets"></a>Que sont les groupes de machines virtuelles identiques ?
-Les groupes identiques de machines virtuelles Azure vous permettent de créer et de gérer un groupe de machines virtuelles identiques et disposant d’une charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Les groupes identiques offrent une haute disponibilité à vos applications, et vous permettent de gérer, configurer et mettre à jour de manière centralisée un grand nombre de machines virtuelles. Avec les groupes identiques de machines virtuelles, vous pouvez créer des services à grande échelle pour des zones telles que le calcul, Big Data et des charges de travail de conteneur.
+Les groupes identiques de machines virtuelles Azure vous permettent de créer et de gérer un groupe de machines virtuelles et disposant d’une charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Les groupes identiques offrent une haute disponibilité à vos applications, et vous permettent de gérer, configurer et mettre à jour de manière centralisée un grand nombre de machines virtuelles. Avec les groupes identiques de machines virtuelles, vous pouvez créer des services à grande échelle pour des zones telles que le calcul, Big Data et des charges de travail de conteneur.
 
 
 ## <a name="why-use-virtual-machine-scale-sets"></a>Pourquoi utiliser les groupes identiques de machines virtuelles ?
@@ -28,7 +28,7 @@ Les groupes identiques de machines virtuelles Azure fournissent les fonctionnali
 - **Création et gestion faciles de plusieurs machines virtuelles**
     - Lorsque vous disposez de nombreuses machines virtuelles qui exécutent votre application, il est important de conserver une configuration cohérente dans votre environnement. Pour des performances fiables de votre application, la taille de la machine virtuelle, la configuration du disque et les installations de l’application doivent correspondre entre toutes les machines virtuelles.
     - Avec les groupes identiques, toutes les instances de machine virtuelle sont créées à partir de la même image de système d’exploitation de base et de la même configuration. Cette approche vous permet de gérer facilement des centaines de machines virtuelles sans tâches de configuration supplémentaires ou gestion de réseau.
-    - Les groupes identiques prennent en charge l’utilisation de l’[équilibreur de charge Azure](../load-balancer/load-balancer-overview.md) pour la distribution du trafic de type Couche 4 de base, et [Azure Application Gateway](../application-gateway/application-gateway-introduction.md) pour une distribution du trafic de type Couche 7 plus avancée et un arrêt TLS.
+    - Les groupes identiques prennent en charge l’utilisation de l’[équilibreur de charge Azure](../load-balancer/load-balancer-overview.md) pour la distribution du trafic de type Couche 4 de base, et [Azure Application Gateway](../application-gateway/overview.md) pour une distribution du trafic de type Couche 7 plus avancée et un arrêt TLS.
 
 - **Offre une haute disponibilité et une résilience des applications**
     - Les groupes identiques sont utilisés pour exécuter plusieurs instances de votre application. Si l’une de ces instances de machine virtuelle a un problème, les clients continuent d’accéder à votre application via l’une des autres instances de machine virtuelle avec une interruption minimale.
@@ -40,7 +40,7 @@ Les groupes identiques de machines virtuelles Azure fournissent les fonctionnali
 
 - **Fonctionne à grande échelle**
     - Les groupes identiques peuvent prendre en charge jusqu’à 1 000 instances de machines virtuelles. Si vous créez et chargez vos propres images de machine virtuelle personnalisées, la limite est de 600 instances de machine virtuelle.
-    - Pour des performances optimales avec des charges de travail de production, utilisez [Azure Disques managés](../virtual-machines/windows/managed-disks-overview.md).
+    - Pour des performances optimales avec des charges de travail de production, utilisez [Azure Disques managés](../virtual-machines/managed-disks-overview.md).
 
 
 ## <a name="differences-between-virtual-machines-and-scale-sets"></a>Différences entre les machines virtuelles et les groupes identiques
@@ -60,6 +60,10 @@ Les groupes identiques n’entraînent aucun coût supplémentaire. Vous payez u
 Utilisez [Azure Monitor pour machines virtuelles](../azure-monitor/insights/vminsights-overview.md), dont le processus d’intégration est simple et automatise la collecte des données à partir des compteurs importants du processeur, de la mémoire, des disques et des performances réseau sur les machines virtuelles de votre groupe identique. Il comprend également des fonctionnalités de supervision supplémentaires et des visualisations prédéfinies qui vous permettent de vous concentrer sur la disponibilité et les performances de vos groupes identiques.
 
 Activez la supervision de votre [application de groupe de machines virtuelles identiques](../azure-monitor/app/azure-vm-vmss-apps.md) avec Application Insights afin de collecter des informations détaillées sur votre application, notamment les vues de pages, les requêtes d’application et les exceptions. Vérifiez la disponibilité de votre application en configurant un [test de disponibilité](../azure-monitor/app/monitor-web-app-availability.md) pour simuler le trafic utilisateur.
+
+## <a name="data-residency"></a>Résidence des données
+
+Dans Azure, la fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique et la région Brésil Sud (État de Sao Paulo) de la zone géographique Brésil. Pour toutes les autres régions, les données client sont stockées dans Zone géographique. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour commencer, créez votre premier groupe identique de machines virtuelles dans le portail Azure.

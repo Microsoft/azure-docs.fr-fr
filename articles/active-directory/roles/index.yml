@@ -1,0 +1,85 @@
+### YamlMime:Landing
+title: Documentation sur les rôles Azure AD - Azure AD
+summary: Le contrôle d’accès en fonction du rôle Azure AD gère l’accès aux ressources Azure AD. Créez des rôles personnalisés, attribuez des rôles qui utilisent des unités administratives pour limiter l’étendue du contrôle, attribuez des autorisations d’accès aux applications à des groupes ou à des utilisateurs, gérez l’éligibilité avec PIM (Privileged Identity Management) ou déléguez des autorisations pour distribuer des tâches de gestion des identités.
+metadata:
+  title: Documentation sur les rôles Azure Active Directory
+  description: Découvrez comment utiliser les rôles Azure AD pour gérer l’accès dans votre organisation.
+  services: active-directory
+  ms.service: active-directory
+  ms.subservice: roles
+  manager: daveba
+  ms.topic: landing-page
+  ms.date: 10/19/2020
+  author: curtand
+  ms.author: curtand
+  ms.openlocfilehash: 8dd6ac6fef0dbc84c77ccacfd048b2af21771f6a
+  ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "96499201"
+landingContent:
+- title: À propos des rôles Azure AD
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vue d’ensemble du contrôle d’accès en fonction du rôle Azure AD
+      url: custom-overview.md
+  - linkListType: concept
+    links:
+    - text: Comprendre les rôles Azure AD
+      url: concept-understand-roles.md
+    - text: Comprendre les unités administratives dans Azure AD
+      url: administrative-units.md
+    - text: Utiliser des groupes cloud pour gérer les attributions de rôles
+      url: groups-concept.md
+- title: Bien démarrer
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Accorder l’autorisation de créer un nombre illimité d’inscriptions d’applications
+      url: quickstart-app-registration-limits.md
+- title: Déléguer des rôles
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Déléguer des rôles par tâche
+      url: delegate-by-task.md
+    - text: Déléguer la gestion des applications
+      url: delegate-app-roles.md
+- title: Attribuer des rôles aux utilisateurs
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Créer des rôles personnalisées
+      url: custom-create.md
+    - text: Attribuer des rôles à l’aide d’API Graph
+      url: custom-assign-graph.md
+    - text: Attribuer avec PowerShell
+      url: custom-assign-powershell.md
+    - text: Attribuer des rôles à l’aide d’API Graph
+      url: custom-assign-graph.md
+- title: Attribuer des rôles à des groupes
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Créer des groupes pouvant se voir attribuer des rôles
+      url: groups-create-eligible.md
+    - text: Attribuer un rôle à un groupe cloud
+      url: groups-assign-role.md
+    - text: Rendre un groupe éligible à PIM
+      url: groups-pim-eligible.md
+    - text: Voir les attributions pour un groupe
+      url: groups-view-assignments.md
+- title: Gérer l’étendue avec des unités administratives
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Ajouter et supprimer des unités administratives
+      url: admin-units-manage.md
+    - text: Affecter des utilisateurs à des unités
+      url: admin-units-add-manage-users.md
+    - text: Affecter des groupes à des unités
+      url: admin-units-add-manage-groups.md
+    - text: Affecter des groupes avec une étendue
+      url: admin-units-assign-roles.md

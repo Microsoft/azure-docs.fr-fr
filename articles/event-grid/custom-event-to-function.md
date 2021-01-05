@@ -1,19 +1,14 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements personnalisés vers une fonction Azure - Event Grid'
 description: 'Démarrage rapide : Utilisez Azure Event Grid et Azure CLI ou le portail pour publier une rubrique et vous abonner à cet événement. Une fonction Azure est utilisée pour le point de terminaison.'
-services: event-grid
-keywords: ''
-author: banisadr
-ms.author: babanisa
-ms.date: 11/15/2019
+ms.date: 07/07/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.openlocfilehash: 5e38571cf84537fd722093b96cd277743e8ce80c
-ms.sourcegitcommit: fab450a18a600d72b583ecfbe6c5e53afd43408c
+ms.openlocfilehash: aea52bcaa94d6f288e86e44e1a0f294796d8e4a3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80292163"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996341"
 ---
 # <a name="quickstart-route-custom-events-to-an-azure-function-with-event-grid"></a>Démarrage rapide : Router des événements personnalisés vers une fonction Azure avec Event Grid
 
@@ -22,14 +17,17 @@ Azure Event Grid est un service de gestion d’événements pour le cloud. Azure
 [!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="create-azure-function"></a>Créer une fonction Azure
+Avant de nous abonner à la rubrique personnalisée, créez une fonction pour gérer les événements. 
 
-Avant de nous abonner à la rubrique personnalisée, nous allons créer une fonction pour gérer les événements. Dans le portail Azure, cliquez sur « Créer une ressource » et tapez « fonction ». Choisissez « Application de fonction », puis cliquez sur Créer. Sélectionnez « Créer » sous Groupe de ressources et attribuez un nom au groupe. Nous allons utiliser cette procédure tout au long du tutoriel. Attribuez un nom à l’application de fonction, laissez le bouton bascule « Publier » sur la valeur « Code », sélectionnez le runtime et la région de votre choix, puis appuyez sur Créer.
+1. Créez une application de fonction à l’aide des instructions indiquées dans [Créer une application de fonction](../azure-functions/functions-create-first-azure-function.md#create-a-function-app).
+2. Créez une fonction à l’aide du **déclencheur Event Grid**. Si vous utilisez ce déclencheur pour la première fois, vous devrez peut-être cliquer sur Installer pour installer l’extension.
+    1. Dans la page **Application de fonction**, sélectionnez **Fonctions** dans le menu de gauche, recherchez **Event Grid** dans les modèles, puis sélectionnez **Déclencheur Azure Event Grid**. 
 
-Une fois que votre application de fonction est prête, accédez-y puis cliquez sur « + Nouvelle fonction ». Sélectionnez « Dans le portail » pour l’environnement de développement, puis appuyez sur Continuer. Sous Créer une fonction, choisissez « Plus de modèles » pour voir d’autres modèles, puis recherchez « déclencheur Azure Event Grid » et sélectionnez-le. Si vous utilisez ce déclencheur pour la première fois, vous devrez peut-être cliquer sur Installer pour installer l’extension.
+        :::image type="content" source="./media/custom-event-to-function/function-event-grid-trigger.png" alt-text="Sélectionner le déclencheur Event Grid":::
+3. Dans la page **Nouvelle fonction**, entrez un nom pour la fonction, puis sélectionnez **Créer une fonction**.
 
-![Déclencheur Event Grid de la fonction](./media/custom-event-to-function/grid-trigger.png)
-
-Une fois que vous avez installé l’extension, cliquez sur Continuer, donnez un nom à votre fonction, puis appuyez sur Créer.
+    :::image type="content" source="./media/custom-event-to-function/new-function-page.png" alt-text="Page Nouvelle fonction":::
+4. Utilisez la page **Code + test** pour voir le code existant de la fonction et le mettre à jour. 
 
 [!INCLUDE [event-grid-register-provider-portal.md](../../includes/event-grid-register-provider-portal.md)]
 
@@ -48,7 +46,7 @@ Une rubrique de grille d’événement fournit un point de terminaison défini p
 4. Dans la page **Créer une rubrique**, procédez comme suit :
 
     1. Donnez un **nom** unique à la rubrique personnalisée. Le nom de la rubrique doit être unique, car elle est représentée par une entrée DNS. N’utilisez pas le nom indiqué dans l’image. Au lieu de cela, créez votre propre nom : il doit comprendre entre 3 et 50 caractères, et contenir uniquement des valeurs a-z, A-Z, 0-9 et « - ».
-    2. Sélectionnez votre **abonnement**Azure.
+    2. Sélectionnez votre **abonnement** Azure.
     3. Sélectionnez le même groupe de ressources que celui des étapes précédentes.
     4. Sélectionnez un **emplacement** pour la rubrique Event Grid.
     5. Conservez la valeur par défaut **Schéma Event Grid** pour le champ **Schéma d’événement**. 
@@ -86,7 +84,11 @@ Vous vous abonnez à une rubrique Event Grid pour indiquer à Event Grid les év
     5. Pour le point de terminaison de la fonction, sélectionnez l’abonnement Azure et le groupe de ressources dans lequel se trouve votre application de fonction, puis sélectionnez cette dernière, ainsi que la fonction que vous avez créée précédemment. Sélectionnez **Confirmer la sélection**.
 
        ![Fournir une URL du point de terminaison](./media/custom-event-to-function/provide-endpoint.png)
-
+    6. Cette étape est facultative, mais recommandée pour les scénarios de production. Dans la page **Créer un abonnement aux événements**, basculez vers l’onglet **fonctionnalités avancées** et définissez des valeurs pour **Nb max. d’événements par lot** et **Taille de lot par défaut en kilo-octets**. 
+    
+        Le traitement par lot peut vous offrir un débit élevé. Pour **Nb max. d’événements par lot**, définissez le nombre maximal d’événements qu’un abonnement doit inclure dans un lot. La taille de lot par défaut définit la limite supérieure par défaut de la taille de lot en kilo-octets, mais peut être dépassée si un seul événement est supérieur à ce seuil.
+    
+        :::image type="content" source="./media/custom-event-to-function/enable-batching.png" alt-text="Activer le traitement par lot":::
     6. Dans la page **Créer un abonnement aux événements**, sélectionnez **Créer**.
 
 ## <a name="send-an-event-to-your-topic"></a>Envoyer un événement à votre rubrique

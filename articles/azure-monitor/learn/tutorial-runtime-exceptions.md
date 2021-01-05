@@ -7,12 +7,12 @@ author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 09/19/2017
 ms.custom: mvc
-ms.openlocfilehash: 91a0e4b052571a509ec7122e4440a8eaf58839be
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 057b211179c6932d4214e6118e3fa97b95145ba0
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77670421"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92926629"
 ---
 # <a name="find-and-diagnose-run-time-exceptions-with-azure-application-insights"></a>Rechercher et diagnostiquer des exceptions runtime avec Azure Application Insights
 
@@ -35,8 +35,8 @@ Pour suivre ce tutoriel :
     - Développement web et ASP.NET
     - Développement Azure
 - Téléchargez et installez le [débogueur d'instantané de Visual Studio](https://aka.ms/snapshotdebugger).
-- Activez le [débogueur de capture instantanée de Visual Studio](https://docs.microsoft.com/azure/application-insights/app-insights-snapshot-debugger).
-- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../../azure-monitor/app/asp-net.md). 
+- Activez le [débogueur de capture instantanée de Visual Studio](../app/snapshot-debugger.md).
+- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../app/asp-net.md). 
 - Le didacticiel effectuant le suivi de l’identification d’une exception dans votre application, modifiez le code dans votre environnement de développement ou de test afin de générer une exception. 
 
 ## <a name="log-in-to-azure"></a>Connexion à Azure
@@ -63,7 +63,7 @@ Application Insights collecte les échecs dans votre application et vous permet 
 
     ![Exemples de demande ayant échoué](media/tutorial-runtime-exceptions/failed-requests-search.png)
 
-6. Les détails de la demande ayant échoué affiche le diagramme de Gantt qui montre qu’il y avait deux échecs de dépendance dans cette transaction, ce qui est également attribué à plus de 50 % de la durée totale de la transaction. Cette expérience présente toutes les données de télémétrie à travers les composants d’une application distribuée qui sont liés à cet ID d’opération. [En savoir plus sur la nouvelle expérience](../../azure-monitor/app/transaction-diagnostics.md). Vous pouvez sélectionner n’importe quels éléments pour afficher ses détails sur le côté droit. 
+6. Les détails de la demande ayant échoué affiche le diagramme de Gantt qui montre qu’il y avait deux échecs de dépendance dans cette transaction, ce qui est également attribué à plus de 50 % de la durée totale de la transaction. Cette expérience présente toutes les données de télémétrie à travers les composants d’une application distribuée qui sont liés à cet ID d’opération. [En savoir plus sur la nouvelle expérience](../app/transaction-diagnostics.md). Vous pouvez sélectionner n’importe quels éléments pour afficher ses détails sur le côté droit. 
 
     ![Détails des requêtes ayant échoué](media/tutorial-runtime-exceptions/failed-request-details.png)
 
@@ -81,7 +81,7 @@ Le débogueur d'instantané collecte des captures instantanées des exceptions l
 
 3. Le premier appel dont les valeurs sont valides est **ValidZipCode**, et nous voyons qu’un code postal a été fourni, qui contient des lettres ne pouvant pas être traduites en chiffres.  Il semble qu’il s’agisse de l’erreur de code à corriger.
 
-    ![Déboguer l'instantané](media/tutorial-runtime-exceptions/debug-snapshot-02.png)
+    ![Capture d’écran montrant une erreur dans le code qui doit être corrigée.    ](media/tutorial-runtime-exceptions/debug-snapshot-02.png)
 
 4. Vous avez ensuite la possibilité de télécharger cet instantané dans Visual Studio où il est possible de localiser le code réel à corriger. Pour ce faire, cliquez sur **Télécharger l’instantané**.
 5. L’instantané est chargé dans Visual Studio.
@@ -97,7 +97,7 @@ Toutes les données collectées par Application Insights sont stockées dans Azu
 
     ![Code](media/tutorial-runtime-exceptions/codelens.png)
 
-1. Cliquez sur **Analyser l’impact** pour ouvrir Application Insights Analytics.  Application Insights Analytics comprend plusieurs requêtes qui fournissent des détails sur les demandes ayant échoué, tels que les utilisateurs, les navigateurs et les régions concernés.<br><br>![Analyse](media/tutorial-runtime-exceptions/analytics.png)<br>
+1. Cliquez sur **Analyser l’impact** pour ouvrir Application Insights Analytics.  Application Insights Analytics comprend plusieurs requêtes qui fournissent des détails sur les demandes ayant échoué, tels que les utilisateurs, les navigateurs et les régions concernés.<br><br>![Capture d’écran montrant la fenêtre Application Insights comprenant plusieurs requêtes.](media/tutorial-runtime-exceptions/analytics.png)<br>
 
 ## <a name="add-work-item"></a>Ajouter un élément de travail
 Si vous connectez Application Insights à un système de suivi tel que Azure DevOps ou GitHub, vous pouvez créer un élément de travail directement à partir d’Application Insights.
@@ -112,4 +112,5 @@ Si vous connectez Application Insights à un système de suivi tel que Azure Dev
 À présent que vous avez appris à identifier les exceptions runtime, passez au didacticiel suivant pour apprendre à identifier et à diagnostiquer les problèmes de performances.
 
 > [!div class="nextstepaction"]
-> [Identifier les problèmes de performances](../../azure-monitor/learn/tutorial-performance.md)
+> [Identifier les problèmes de performances](./tutorial-performance.md)
+

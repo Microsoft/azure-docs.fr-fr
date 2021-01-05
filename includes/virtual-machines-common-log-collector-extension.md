@@ -4,12 +4,12 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: cynthn
-ms.openlocfilehash: 09c4420647043fccc408631fec75854667923721
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8a442b5de7a256dd8bcf47da741bd41894709c3a
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74085239"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95561335"
 ---
 Les problèmes de diagnostic avec un service cloud Microsoft Azure nécessitent la collecte des fichiers journaux du service sur les machines virtuelles au fur et à mesure que les problèmes surviennent. Vous pouvez utiliser l’extension AzureLogCollector à la demande pour exécuter une collecte unique de journaux d’activité à partir d’une ou de plusieurs machines virtuelles de service cloud (à partir des rôles web et de travail) et transférer les fichiers collectés dans un compte de stockage Azure, le tout sans connexion à distance à l’une des machines virtuelles.
 
@@ -44,11 +44,11 @@ Dans les deux modes de collecte, les dossiers de collecte de données supplémen
 * Azure PowerShell. Pour obtenir des instructions d’installation, consultez [Installer Azure PowerShell](/powershell/azure/install-az-ps).
 
 ## <a name="add-the-extension"></a>Ajouter l’extension
-Vous pouvez utiliser les applets de commande [Microsoft Azure PowerShell](https://msdn.microsoft.com/library/dn495240.aspx) ou les [API REST Gestion des services](https://msdn.microsoft.com/library/ee460799.aspx) pour ajouter l’extension AzureLogCollector.
+Vous pouvez utiliser les applets de commande [Microsoft Azure PowerShell](/previous-versions/azure/dn495240(v=azure.100)) ou les [API REST Gestion des services](/previous-versions/azure/ee460799(v=azure.100)) pour ajouter l’extension AzureLogCollector.
 
 Pour les services cloud, l’applet de commande Powershell de Azure existante **Set-AzureServiceExtension**, peut être utilisée pour activer l’extension sur les instances de rôle de service cloud. Chaque fois que cette extension est activée via cette applet de commande, la collecte des journaux est déclenchée sur les instances de rôle choisies pour les rôles sélectionnés.
 
-Pour les machines virtuelles, l’applet de commande Azure Powershell existante **Set-AzureVMExtension**peut être utilisée pour activer l’extension sur des machines virtuelles. À chaque fois que cette extension est activée via les applets de commande, la collecte des journaux est déclenchée sur chaque instance.
+Pour les machines virtuelles, l’applet de commande Azure Powershell existante **Set-AzureVMExtension** peut être utilisée pour activer l’extension sur des machines virtuelles. À chaque fois que cette extension est activée via les applets de commande, la collecte des journaux est déclenchée sur chaque instance.
 
 En interne, cette extension utilise les configurations PublicConfiguration et PrivateConfiguration basées sur JSON. Voici la disposition d’un exemple de JSON pour la configuration publique et privée.
 
@@ -528,4 +528,3 @@ else
 
 ## <a name="next-steps"></a>Étapes suivantes
 Vous pouvez maintenant examiner ou copier vos journaux d’activité à partir d’un emplacement simple.
-

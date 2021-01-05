@@ -3,31 +3,33 @@ title: Attendre des événements et y répondre
 description: Automatiser les flux de travail qui déclenchent, suspendent et reprennent en fonction des événements au niveau d’un point de terminaison de service à l’aide d’Azure Logic Apps
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: jonfan, logicappspm
 ms.topic: conceptual
-ms.date: 03/06/2020
+ms.date: 08/27/2020
 tags: connectors
-ms.openlocfilehash: 0a3fb9a8a72b384d2af4af38bdc382e541ddf535
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: 7c6f3c4e3e4a2a29fe6a02c03043e3dfb81a2010
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80656280"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89227897"
 ---
 # <a name="create-and-run-automated-event-based-workflows-by-using-http-webhooks-in-azure-logic-apps"></a>Créer et exécuter des flux de travail automatisés basés sur des événements à l’aide de Webhooks HTTP dans Azure Logic Apps
 
-[Azure Logic Apps](../logic-apps/logic-apps-overview.md) et le connecteur Webhook HTTP intégré vous permettent d’automatiser des flux de travail qui attendent et s’exécutent en fonction d’événements spécifiques qui se produisent sur point de terminaison HTTP ou HTTPS en générant des applications logiques. Par exemple, vous pouvez créer une application logique qui surveille un point de terminaison de service dans l’attente d’un événement spécifique avant de déclencher le flux de travail et d’exécuter les actions spécifiées, plutôt que de vérifier ou d’*interroger* ce point de terminaison périodiquement.
+Avec [Azure Logic Apps](../logic-apps/logic-apps-overview.md) et le connecteur HTTP Webhook intégré, vous pouvez créer des tâches et des workflows automatisées qui s’abonnent à un point de terminaison de service, attendre des événements spécifiques et exécuter des flux en fonction de ces événements plutôt que de vérifier ou d’*interroger* régulièrement ce point de terminaison.
 
-Voici des exemples de flux de travail basés sur un événement :
+Voici des exemples de flux de travail basés sur webhook :
 
 * Attendre qu’un élément provienne d’un [Azure Event Hub](https://github.com/logicappsio/EventHubAPI) avant de déclencher l’exécution d’une application logique.
 * Attendre une approbation avant de poursuivre un flux de travail.
 
+Cet article explique comment utiliser le déclencheur Webhook et l’action Webhook pour que votre application logique puisse recevoir des événements et y répondre sur un point de terminaison de service.
+
 ## <a name="how-do-webhooks-work"></a>Comment fonctionnent les webhooks ?
 
-Un déclencheur de Webhook HTTP est basé sur un événement et ne dépend pas de la vérification ou de l’interrogation périodiques de nouveaux éléments. Lorsque vous enregistrez une application logique avec un déclencheur de Webhook, ou lorsque vous modifiez votre application logique en l’activant, le déclencheur de Webhook *s’abonne* à un service ou à un point de terminaison spécifiques en inscrivant une *URL de rappel* avec ce service ou point de terminaison. Le déclencheur attend ensuite que ce service ou point de terminaison appelle l’URL, ce qui a pour effet de démarrer l’exécution de l’application logique. Comme le [déclencheur de demande](connectors-native-reqres.md), l’application logique se déclenche dès que l’événement spécifié se produit. Le déclencheur *se désabonne* du service ou du point de terminaison si vous supprimez le déclencheur et enregistrez votre application logique, ou lorsque vous modifiez votre application logique en la désactivant.
+Un déclencheur de Webhook est basé sur un événement et ne dépend pas de la vérification ou de l’interrogation périodiques de nouveaux éléments. Lorsque vous enregistrez une application logique avec un déclencheur de Webhook, ou lorsque vous modifiez votre application logique en l’activant, le déclencheur de Webhook *s’abonne* au point de terminaison de service spécifié en inscrivant une *URL de rappel* avec ce point de terminaison. Le déclencheur attend ensuite que ce service de point de terminaison appelle l’URL, ce qui a pour effet de démarrer l’exécution de l’application logique. Comme le [déclencheur de demande](connectors-native-reqres.md), l’application logique se déclenche dès que l’événement spécifié se produit. Le déclencheur webhook *se désabonne* du service de point de terminaison si vous supprimez le déclencheur et enregistrez votre application logique, ou lorsque vous modifiez votre application logique en la désactivant.
 
-Une action de Webhook HTTP est également basée sur un événement et *s’abonne* à un service ou à un point de terminaison spécifiques en inscrivant une *URL de rappel* avec ce service ou point de terminaison. L’action du Webhook suspend le flux de travail de l’application logique et attend que le service ou le point de terminaison appellent l’URL avant de reprendre l’exécution de l’application logique. L’application logique *se désabonne* du service ou du point de terminaison dans les cas suivants :
+Une action webhook est également basée sur un événement et *s’abonne* à un service de point de terminaison spécifiques en inscrivant une *URL de rappel* avec ce point de terminaison. L’action du Webhook suspend le flux de travail de l’application logique et attend que le point de terminaison de service appelle l’URL avant de reprendre l’exécution de l’application logique. L’action webhook se *désabonne* du point de terminaison de service dans les cas suivants :
 
 * Lorsque l’action de webhook s’est terminée avec succès.
 * Si l’exécution de l’application logique est annulée en attendant une réponse.
@@ -35,27 +37,16 @@ Une action de Webhook HTTP est également basée sur un événement et *s’abon
 
 Par exemple, l’action [**Envoyer un e-mail d’approbation**](connectors-create-api-office365-outlook.md) du connecteur Office 365 Outlook est un exemple d’action de Webhook qui suit ce modèle. Vous pouvez étendre ce modèle à tout service à l’aide de l’action de Webhook.
 
-> [!NOTE]
-> Logic Apps applique le protocole TLS (Transport Layer Security) 1.2 lors de la réception du rappel sur le déclencheur ou l’action Webhook HTTP. Si vous constatez des erreurs de liaison TLS, assurez-vous d’utiliser le protocole TLS 1.2. Pour les appels entrants, voici les suites de chiffrement prises en charge :
->
-> * TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
-> * TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
-> * TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-> * TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-> * TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
-> * TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
-> * TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
-> * TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
-
 Pour plus d’informations, consultez les rubriques suivantes :
 
-* [Paramètres de déclencheur de Webhook HTTP](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger)
 * [Webhooks et abonnements](../logic-apps/logic-apps-workflow-actions-triggers.md#webhooks-and-subscriptions)
 * [Créer des API personnalisées qui prennent en charge un Webhook](../logic-apps/logic-apps-create-api-app.md)
 
+Pour plus d’informations sur le chiffrement, la sécurité et l’autorisation des appels entrants à votre application logique, comme [Transport Layer Security (TLS)](https://en.wikipedia.org/wiki/Transport_Layer_Security), précédemment appelé Secure Sockets Layer (SSL), ou [Azure Active Directory Open Authentication (Azure AD OAuth)](../active-directory/develop/index.yml), consultez [Sécuriser l’accès et les données – Accès pour les appels entrants aux déclencheurs basés sur des requêtes](../logic-apps/logic-apps-securing-a-logic-app.md#secure-inbound-requests).
+
 ## <a name="prerequisites"></a>Prérequis
 
-* Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/).
+* Un compte et un abonnement Azure. Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/).
 
 * URL d’un point de terminaison ou d’une API déjà déployés prenant en charge le modèle d’abonnement et de désabonnement de Webhook pour des [déclencheurs de Webhook](../logic-apps/logic-apps-create-api-app.md#webhook-triggers) ou des [actions de Webhook](../logic-apps/logic-apps-create-api-app.md#webhook-actions) dans des applications logiques, selon le cas.
 
@@ -147,11 +138,7 @@ Cette action intégrée appelle le point de terminaison d’abonnement sur le se
 
    Votre application logique appelle le point de terminaison d’abonnement sur le service cible et inscrit l’URL de rappel. L’application logique suspend ensuite le worflow et attend que le service cible envoie une demande `HTTP POST` à l’URL de rappel. Lorsque cet événement se produit, l’action transmet toutes les données de la demande au workflow. Si l’opération aboutit, l’action se désabonne du point de terminaison, et votre application logique continue d’exécuter le workflow restant.
 
-## <a name="connector-reference"></a>Référence de connecteur
-
-Pour plus d’informations sur les paramètres de déclencheur et d’action, qui sont similaires entre eux, voir [Paramètres de Webhook HTTP](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger).
-
-### <a name="output-details"></a>Détails des résultats
+## <a name="trigger-and-action-outputs"></a>Sorties des déclencheurs et des actions
 
 Voici d’autres informations sur les sorties d’un déclencheur ou d’une action de Webhook HTTP qui renvoient les informations suivantes :
 
@@ -173,6 +160,11 @@ Voici d’autres informations sur les sorties d’un déclencheur ou d’une act
 | 500 | Erreur interne du serveur. Une erreur inconnue s’est produite. |
 |||
 
+## <a name="connector-reference"></a>Référence de connecteur
+
+Pour plus d’informations sur les paramètres de déclencheur et d’action, qui sont similaires entre eux, voir [Paramètres de Webhook HTTP](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger).
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur les autres [connecteurs d’applications logiques](../connectors/apis-list.md)
+* [Sécuriser l’accès et les données – Accès pour les appels entrants aux déclencheurs basés sur des requêtes](../logic-apps/logic-apps-securing-a-logic-app.md#secure-inbound-requests)
+* [Connecteurs pour Logic Apps](../connectors/apis-list.md)

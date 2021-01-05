@@ -3,24 +3,26 @@ title: Schémas des journaux de diagnostic Azure Media Services - Azure
 description: Cet article présente les schémas des journaux de diagnostic d’Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 01/20/2019
-ms.author: juliako
-ms.openlocfilehash: 37baed076ca074c1d558af36649e90959a0034c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 8cfbe26458de630aaf411aade4a31cb4e9c72b17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75750875"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295425"
 ---
 # <a name="diagnostic-logs-schemas"></a>Schémas des journaux de diagnostic
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 [Azure Monitor](../../azure-monitor/overview.md) vous permet de surveiller les métriques et journaux de diagnostic pour vous aider à comprendre le fonctionnement de vos applications. Vous pouvez surveiller les journaux de diagnostic Media Services et créer des alertes et notifications pour les métriques et les journaux collectés. Vous pouvez envoyer les journaux d’activité au [Stockage Azure](https://azure.microsoft.com/services/storage/), les transmettre à [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) et les exporter vers [Log Analytics](https://azure.microsoft.com/services/log-analytics/), ou utiliser un service externe.
 
@@ -30,7 +32,7 @@ Cet article décrit les schémas des journaux de diagnostic de Media Services.
 
 ## <a name="top-level-diagnostic-logs-schema"></a>Schéma des journaux de diagnostic de niveau supérieur
 
-Pour une description détaillée du schéma général des journaux de diagnostic, consultez [Services, schémas et catégories pris en charge pour les journaux de diagnostic Azure](../../azure-monitor/platform/tutorial-dashboards.md).
+Pour une description détaillée du schéma général des journaux de diagnostic, consultez [Services, schémas et catégories pris en charge pour les journaux de diagnostic Azure](../../azure-monitor/platform/resource-logs-schema.md).
 
 ## <a name="key-delivery-log-schema"></a>Schéma de journal de remise de clé
 

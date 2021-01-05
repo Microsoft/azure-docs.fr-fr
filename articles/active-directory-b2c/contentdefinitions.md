@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 02/20/2020
+ms.date: 10/26/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 074a0a39090e22a29f778fc1c99060848c6bfd99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 018d90db06948f3fd6a34b56c65088641a9ca874
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80051493"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97108975"
 ---
 # <a name="contentdefinitions"></a>ContentDefinitions
 
@@ -30,7 +30,7 @@ L’élément **ContentDefinitions** contient des URL de modèles HTML5 utilisab
 
 L’exemple suivant montre l’identificateur de définition de contenu et la définition de ressources localisées :
 
-```XML
+```xml
 <ContentDefinition Id="api.localaccountsignup">
   <LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri>
   <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
@@ -46,7 +46,7 @@ L’exemple suivant montre l’identificateur de définition de contenu et la d�
 
 Les métadonnées du profil technique autodéclaré **LocalAccountSignUpWithLogonEmail** contiennent l’identificateur de définition de contenu **ContentDefinitionReferenceId** défini sur `api.localaccountsignup`.
 
-```XML
+```xml
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
   <DisplayName>Email signup</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -90,7 +90,7 @@ L’élément **DataUri** est utilisé pour spécifier l’identificateur de pag
 
 ### <a name="select-a-page-layout"></a>Sélectionner une mise en page
 
-Vous pouvez activer le [code JavaScript côté client](javascript-samples.md) en insérant `contract` entre `elements` et le type de page. Par exemple : `urn:com:microsoft:aad:b2c:elements:contract:page-name:version`.
+Vous pouvez activer le [code JavaScript côté client](javascript-and-page-layout.md) en insérant `contract` entre `elements` et le type de page. Par exemple : `urn:com:microsoft:aad:b2c:elements:contract:page-name:version`.
 
 [!INCLUDE [active-directory-b2c-public-preview](../../includes/active-directory-b2c-public-preview.md)]
 
@@ -126,6 +126,39 @@ Le format de la valeur doit contenir le mot `contract`: _urn:com:microsoft:aad:b
 | `urn:com:microsoft:aad:b2c:elements:unifiedssp:1.0.0` | `urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:1.2.0` |
 | `urn:com:microsoft:aad:b2c:elements:unifiedssp:1.1.0` | `urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:1.2.0` |
 
+L’exemple suivant montre les identificateurs de définition de contenu et les **DataUri** correspondants avec le contrat de page : 
+
+```xml
+<ContentDefinitions>
+  <ContentDefinition Id="api.error">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:globalexception:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.idpselections">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.idpselections.signup">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.signuporsignin">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.selfasserted">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.selfasserted.profileupdate">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.localaccountsignup">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.localaccountpasswordreset">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.2.0</DataUri>
+  </ContentDefinition>
+  <ContentDefinition Id="api.phonefactor">
+    <DataUri>urn:com:microsoft:aad:b2c:elements:contract:multifactor:1.2.0</DataUri>
+  </ContentDefinition>
+</ContentDefinitions>
+```
 
 ### <a name="metadata"></a>Métadonnées
 
@@ -161,12 +194,12 @@ L’élément **LocalizedResourcesReference** contient les attributs suivants :
 
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
-| Langage | Oui | Chaîne contenant une langue prise en charge pour la stratégie conformément à la spécification RFC 5646 - Tags pour l’identification des langues. |
+| Language | Oui | Chaîne contenant une langue prise en charge pour la stratégie conformément à la spécification RFC 5646 - Tags pour l’identification des langues. |
 | LocalizedResourcesReferenceId | Oui | Identificateur de l’élément **LocalizedResources**. |
 
 L’exemple suivant montre une définition de contenu d’inscription ou de connexion avec une référence à la localisation pour l’anglais, le français et l’espagnol :
 
-```XML
+```xml
 <ContentDefinition Id="api.signuporsignin">
   <LoadUri>~/tenant/default/unified.cshtml</LoadUri>
   <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
@@ -205,4 +238,4 @@ L’attribut d’ID de l’élément **ContentDefinition** spécifie le type de 
 
 Pour obtenir un exemple de personnalisation de l’interface utilisateur à l’aide de définitions de contenu, voir :
 
-[Personnaliser l’interface utilisateur de votre application à l’aide d’une stratégie personnalisée](custom-policy-ui-customization.md)
+[Personnaliser l’interface utilisateur de votre application à l’aide d’une stratégie personnalisée](customize-ui-with-html.md)

@@ -4,13 +4,13 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrir comment créer un volume persistant de manière dynamique avec Azure Files pour une utilisation simultanée avec plusieurs pods dans Azure Kubernetes Service (ACS)
 services: container-service
 ms.topic: article
-ms.date: 09/12/2019
-ms.openlocfilehash: 447df96240891e30570f0c7a8174674e1f404efc
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.date: 07/01/2020
+ms.openlocfilehash: 2ad2affee34348e8c2fc7b734c8b49d0aec8db40
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83677904"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96744907"
 ---
 # <a name="dynamically-create-and-use-a-persistent-volume-with-azure-files-in-azure-kubernetes-service-aks"></a>Créer et utiliser un volume persistant de manière dynamique avec Azure Files dans Azure Kubernetes Service (AKS)
 
@@ -22,7 +22,7 @@ Pour plus d’informations sur les volumes Kubernetes, consultez [Options de sto
 
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
-Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 ## <a name="create-a-storage-class"></a>Créer une classe de stockage
 
@@ -33,6 +33,7 @@ Une classe de stockage permet de définir la façon dont un partage de fichiers 
 * *Standard_ZRS* : stockage redondant interzone (ZRS) standard
 * *Standard_RAGRS* : stockage géographiquement redondant avec accès en lecture (RA-GRS) standard
 * *Premium_LRS* - Stockage Premium localement redondant (LRS)
+* *Premium_ZRS* : stockage redondant interzone (ZRS) premium
 
 > [!NOTE]
 > Azure Files prend en charge le stockage premium dans les clusters AKS qui exécutent Kubernetes 1.13 ou version ultérieure. Le partage de fichiers premium minimum est de 100 Go.
@@ -45,7 +46,7 @@ Créez un fichier nommé `azure-file-sc.yaml` et copiez-le dans l’exemple de m
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: azurefile
+  name: my-azurefile
 provisioner: kubernetes.io/azure-file
 mountOptions:
   - dir_mode=0777
@@ -54,6 +55,7 @@ mountOptions:
   - gid=0
   - mfsymlinks
   - cache=strict
+  - actimeo=30
 parameters:
   skuName: Standard_LRS
 ```
@@ -74,11 +76,11 @@ Maintenant, créez un fichier nommé `azure-file-pvc.yaml`, et copiez-y le code 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: azurefile
+  name: my-azurefile
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: azurefile
+  storageClassName: my-azurefile
   resources:
     requests:
       storage: 5Gi
@@ -96,15 +98,15 @@ kubectl apply -f azure-file-pvc.yaml
 Une fois que c’est terminé, le partage de fichiers est créé. Un secret Kubernetes incluant des informations d’identification et des informations de connexion est également créé. Vous pouvez utiliser la commande [kubectl get][kubectl-get] pour voir l’état de la revendication de volume persistant :
 
 ```console
-$ kubectl get pvc azurefile
+$ kubectl get pvc my-azurefile
 
-NAME        STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-azurefile   Bound     pvc-8436e62e-a0d9-11e5-8521-5a8664dc0477   5Gi        RWX            azurefile      5m
+NAME           STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+my-azurefile   Bound     pvc-8436e62e-a0d9-11e5-8521-5a8664dc0477   5Gi        RWX            my-azurefile      5m
 ```
 
 ## <a name="use-the-persistent-volume"></a>Utiliser le volume persistant
 
-Le code YAML ci-après crée un pod qui utilise la revendication de volume persistant *azurefile* pour monter le partage de fichiers Azure dans le chemin */mnt/azure*. Pour les conteneurs Windows Server, spécifiez un *chemin de montage* en utilisant la convention de chemin Windows, par exemple, *'D:'* .
+Le code YAML ci-après crée un pod qui utilise la revendication de volume persistant *my-azurefile* pour monter le partage de fichiers Azure dans le chemin */mnt/azure*. Pour les conteneurs Windows Server, spécifiez un *chemin de montage* en utilisant la convention de chemin Windows, par exemple, *'D:'* .
 
 Créez un fichier nommé `azure-pvc-files.yaml` et copiez-y le code YAML suivant. Vérifiez que *claimName* correspond à la revendication de volume persistant créée à la dernière étape.
 
@@ -116,7 +118,7 @@ metadata:
 spec:
   containers:
   - name: mypod
-    image: nginx:1.15.5
+    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     resources:
       requests:
         cpu: 100m
@@ -130,7 +132,7 @@ spec:
   volumes:
     - name: volume
       persistentVolumeClaim:
-        claimName: azurefile
+        claimName: my-azurefile
 ```
 
 Créez le pod avec la commande [kubectl apply][kubectl-apply].
@@ -145,7 +147,7 @@ Vous disposez maintenant d’un pod en cours d’exécution avec le partage Azur
 Containers:
   mypod:
     Container ID:   docker://053bc9c0df72232d755aa040bfba8b533fa696b123876108dec400e364d2523e
-    Image:          nginx:1.15.5
+    Image:          mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     Image ID:       docker-pullable://nginx@sha256:d85914d547a6c92faa39ce7058bd7529baacab7e0cd4255442b04577c4d1f424
     State:          Running
       Started:      Fri, 01 Mar 2019 23:56:16 +0000
@@ -157,7 +159,7 @@ Containers:
 Volumes:
   volume:
     Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-    ClaimName:  azurefile
+    ClaimName:  my-azurefile
     ReadOnly:   false
 [...]
 ```
@@ -170,7 +172,7 @@ La valeur par défaut de *fileMode* et *dirMode* est *0777* pour Kubernetes 1.1
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: azurefile
+  name: my-azurefile
 provisioner: kubernetes.io/azure-file
 mountOptions:
   - dir_mode=0777
@@ -179,6 +181,7 @@ mountOptions:
   - gid=0
   - mfsymlinks
   - cache=strict
+  - actimeo=30
 parameters:
   skuName: Standard_LRS
 ```
@@ -186,6 +189,8 @@ parameters:
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour connaître les meilleures pratiques associées, consultez [Meilleures pratiques relatives au stockage et aux sauvegardes dans Azure Kubernetes Service (AKS)][operator-best-practices-storage].
+
+Pour connaître les paramètres de classe de stockage, consultez [Dynamic Provision](https://github.com/kubernetes-sigs/azurefile-csi-driver/blob/master/docs/driver-parameters.md#dynamic-provision) (Provisionnement dynamique).
 
 Apprenez-en davantage sur les volumes persistants Kubernetes utilisant Azure Files.
 

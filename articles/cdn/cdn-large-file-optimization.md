@@ -1,6 +1,6 @@
 ---
 title: Optimisation avec Azure CDN des téléchargements de fichiers volumineux
-description: Cet article explique comment optimiser les téléchargements de fichiers volumineux.
+description: Découvrez comment les téléchargements de fichiers volumineux peuvent être optimisés dans Azure Content Delivery Network. Cet article comprend plusieurs scénarios.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/01/2018
 ms.author: allensu
-ms.openlocfilehash: 28b3c4faf62bcd9f9495810927ece03e2dadc1fc
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ed5768e89482d32bb140e9ba7064de2d20809892
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260528"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020719"
 ---
 # <a name="large-file-download-optimization-with-azure-cdn"></a>Optimisation avec Azure CDN des téléchargements de fichiers volumineux
 
@@ -44,10 +44,10 @@ Quand un segment arrive à la périphérie du CDN, il est mis en cache et imméd
 
 Pour plus d’informations sur la demande de plage d’octets, voir [RFC 7233](https://tools.ietf.org/html/rfc7233).
 
-Le CDN met en cache les blocs au fur et à mesure de leur réception. Le fichier entier n’a pas besoin d’être mis en cache sur le cache du CDN. Les demandes suivantes du fichier ou des plages d’octets sont servies à partir du cache du CDN. Si tous les blocs sont mis en cache sur le CDN, une prérécupération est utilisée pour demander des blocs de l’origine. Cette optimisation s’appuie sur la capacité du serveur d’origine à prendre en charge les requêtes de plage d’octets. Si le serveur d’origine ne les prend pas en charge, cette optimisation n’est pas efficace. 
+Le CDN met en cache les blocs au fur et à mesure de leur réception. Le fichier entier n’a pas besoin d’être mis en cache sur le cache du CDN. Les demandes suivantes du fichier ou des plages d’octets sont servies à partir du cache du CDN. Si tous les blocs sont mis en cache sur le CDN, une prérécupération est utilisée pour demander des blocs de l’origine. Cette optimisation s’appuie sur la capacité du serveur d’origine à prendre en charge les requêtes de plage d’octets. Si le serveur d’origine ne les prend pas en charge, les demandes de téléchargement de données dont la taille dépasse 8 Mo échoueront. 
 
 ### <a name="conditions-for-large-file-optimization"></a>Conditions d’optimisation des fichiers volumineux
-Les fonctionnalités d’optimisation des fichiers volumineux pour **Azure CDN Standard de Microsoft** sont activées par défaut quand vous utilisez le type d’optimisation Livraison web générale. Il n’existe aucune limite à la taille de fichier maximale.
+Il n’existe aucune limite à la taille de fichier maximale.
 
 
 ## <a name="optimize-for-delivery-of-large-files-with-azure-cdn-from-verizon"></a>Optimiser la distribution de fichiers volumineux avec Azure CDN de Verizon
@@ -107,11 +107,10 @@ Le CDN met en cache les blocs au fur et à mesure de leur réception. Le fichier
 ### <a name="caching"></a>Mise en cache
 L’optimisation des fichiers volumineux utilise des temps d’expiration de mise en cache par défaut différents de ceux d’une livraison web générale. Il établit la distinction entre la mise en cache positive et négative basée sur les codes de réponse HTTP. Si le serveur d’origine spécifie un délai d’expiration via un en-tête Cache-control ou Expires dans la réponse, le CDN respecte cette valeur. Lorsque le serveur d’origine ne spécifie rien de tel et que le fichier remplit les conditions de type et de taille de fichier pour ce type d’optimisation, le CDN utilise les valeurs par défaut pour l’optimisation des fichiers volumineux. Autrement, le CDN utilise les paramètres par défaut pour une livraison web générale.
 
-
-|    | Livraison web générale | Optimisation des fichiers volumineux 
+| Mise en cache  | Livraison web générale | Optimisation des fichiers volumineux 
 --- | --- | --- 
-Mise en cache : positive <br> HTTP 200, 203, 300, <br> 301, 302 et 410 | 7 jours |1 jour  
-Mise en cache : négative <br> HTTP 204, 305, 404, <br> et 405 | None | 1 seconde 
+Mise en cache : Positive <br> HTTP 200, 203, 300, <br> 301, 302 et 410 | 7 jours |1 jour  
+Mise en cache : Negative <br> HTTP 204, 305, 404, <br> et 405 | None | 1 seconde 
 
 ### <a name="deal-with-origin-failure"></a>Traitement des défaillances de l’origine
 

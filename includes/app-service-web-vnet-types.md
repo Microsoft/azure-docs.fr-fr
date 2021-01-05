@@ -2,14 +2,14 @@
 author: ccompy
 ms.service: app-service-web
 ms.topic: include
-ms.date: 04/15/2020
+ms.date: 10/01/2020
 ms.author: ccompy
-ms.openlocfilehash: c31a5aaa9866a4ce97cd3cd59a8e363834f70587
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 93b92da999c15255f543abca346fc2bf8840006c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312837"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999430"
 ---
 * Les systèmes multilocataires qui prennent en charge l’ensemble des plans de tarification, excepté « Isolé ».
 * La fonctionnalité App Service Environment qui opère un déploiement dans votre réseau virtuel et prend en charge les applications à plan tarifaire Isolé.
@@ -23,7 +23,7 @@ L’intégration au réseau virtuel permet à votre application d’accéder aux
 
 Les fonctionnalités d’intégration au réseau virtuel :
 
-* Nécessitent un plan tarifaire Standard, Premium, PremiumV2 ou Élastique Premium.
+* Nécessitent un plan tarifaire Standard, Premium, PremiumV2, PremiumV3 ou Élastique Premium.
 * Prennent en charge les protocoles TCP et UDP.
 * Fonctionnent avec les applications Azure App Service et les applications de fonction.
 
@@ -38,5 +38,5 @@ L’intégration au réseau virtuel avec passerelle obligatoire fournit un accè
 Quelle que soit la version utilisée, l’intégration au réseau virtuel permet à votre application d’accéder aux ressources de votre réseau virtuel, mais n’accorde pas d’accès privé entrant à votre application à partir du réseau virtuel. L’accès à un site privé fait référence au fait de rendre votre application accessible uniquement à partir d’un réseau privé tel qu’un réseau virtuel Azure. L'intégration au réseau virtuel sert uniquement à passer des appels sortants de votre application vers votre réseau virtuel.
 
 <!--Links-->
-[ASEintro]: https://docs.microsoft.com/azure/app-service/environment/intro
-[Networkingfeatures]: https://docs.microsoft.com/azure/app-service/networking-features
+[ASEintro]: ../articles/app-service/environment/intro.md
+[Networkingfeatures]: ../articles/app-service/networking-features.md

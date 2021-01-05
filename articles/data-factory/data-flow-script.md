@@ -6,13 +6,13 @@ ms.author: nimoolen
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 04/13/2020
-ms.openlocfilehash: e0042960c25d58b72bc0ab884de5a2db62e566d9
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 12/03/2020
+ms.openlocfilehash: 69b2713e928707479945df0bb242ac2fbc001c32
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81413441"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96600657"
 ---
 # <a name="data-flow-script-dfs"></a>Script de flux de données (DFS)
 
@@ -176,7 +176,75 @@ aggregate(groupBy(movie),
 Utilisez ce code dans votre script de flux de données pour créer une colonne dérivée nommée ```DWhash``` qui produit un hachage ```sha1``` de trois colonnes.
 
 ```
-derive(DWhash = sha1(Name,ProductNumber,Color))
+derive(DWhash = sha1(Name,ProductNumber,Color)) ~> DWHash
+```
+
+Vous pouvez également utiliser le script ci-dessous pour générer un hachage de ligne à l’aide de toutes les colonnes présentes dans votre flux, sans avoir à nommer chacune d’elles :
+
+```
+derive(DWhash = sha1(columns())) ~> DWHash
+```
+
+### <a name="string_agg-equivalent"></a>Équivalent String_agg
+Ce code agit comme la fonction ```string_agg()``` T-SQL et regroupe les valeurs de chaîne dans un tableau. Vous pouvez ensuite caster ce tableau en chaîne à utiliser avec des destinations SQL.
+
+```
+source1 aggregate(groupBy(year),
+    string_agg = collect(title)) ~> Aggregate1
+Aggregate1 derive(string_agg = toString(string_agg)) ~> StringAgg
+```
+
+### <a name="count-number-of-updates-upserts-inserts-deletes"></a>Nombre de mises à jour, upserts, insertions, suppressions
+Lorsque vous utilisez une transformation de modification de ligne, vous pouvez compter le nombre de mises à jour, d’upserts, d’insertions, de suppressions résultant de vos stratégies de modification de ligne. Ajoutez une transformation d’agrégation après votre modification de ligne et collez ce script de Data Flow dans la définition de l’agrégat pour ces nombres.
+
+```
+aggregate(updates = countIf(isUpdate(), 1),
+        inserts = countIf(isInsert(), 1),
+        upserts = countIf(isUpsert(), 1),
+        deletes = countIf(isDelete(),1)) ~> RowCount
+```
+
+### <a name="distinct-row-using-all-columns"></a>Ligne distincte utilisant toutes les colonnes
+Cet extrait de code ajoute une nouvelle transformation d’agrégation à votre flux de données, qui prend toutes les colonnes entrantes, génère un hachage utilisé pour le regroupement afin d’éliminer les doublons, puis fournit la première occurrence de chaque doublon comme sortie. Vous n’avez pas besoin de nommer explicitement les colonnes, car elles seront générées automatiquement à partir de votre flux de données entrant.
+
+```
+aggregate(groupBy(mycols = sha2(256,columns())),
+    each(match(true()), $$ = first($$))) ~> DistinctRows
+```
+
+### <a name="check-for-nulls-in-all-columns"></a>Rechercher les valeurs NULL dans toutes les colonnes
+Il s’agit d’un extrait de code que vous pouvez coller dans votre flux de données pour rechercher de manière générique les valeurs NULL dans toutes vos colonnes. Cette technique s’appuie sur la dérive de schéma pour parcourir toutes les colonnes de toutes les lignes et utilise une opération de fractionnement conditionnel pour séparer les lignes contenant des valeurs NULL des lignes sans valeurs NULL. 
+
+```
+split(contains(array(columns()),isNull(#item)),
+    disjoint: false) ~> LookForNULLs@(hasNULLs, noNULLs)
+```
+
+### <a name="automap-schema-drift-with-a-select"></a>Mapper automatiquement la dérive de schéma à l’aide d’une transformation de sélection
+Lorsque vous devez charger un schéma de base de données existant à partir d’un ensemble inconnu ou dynamique de colonnes entrantes, vous devez mapper les colonnes de droite dans la transformation du récepteur. Cela est nécessaire uniquement lorsque vous chargez une table existante. Ajoutez cet extrait de code avant votre récepteur pour créer une transformation de sélection qui mappe automatiquement vos colonnes. Laissez le mappage de votre récepteur sur Mappage automatique.
+
+```
+select(mapColumn(
+        each(match(true()))
+    ),
+    skipDuplicateMapInputs: true,
+    skipDuplicateMapOutputs: true) ~> automap
+```
+
+### <a name="persist-column-data-types"></a>Rendre persistants les types de données de la colonne
+Ajoutez ce script dans une définition de colonne dérivée pour stocker les noms de colonne et les types de données de votre flux de données dans un magasin persistant à l’aide d’un récepteur.
+
+```
+derive(each(match(type=='string'), $$ = 'string'),
+    each(match(type=='integer'), $$ = 'integer'),
+    each(match(type=='short'), $$ = 'short'),
+    each(match(type=='complex'), $$ = 'complex'),
+    each(match(type=='array'), $$ = 'array'),
+    each(match(type=='float'), $$ = 'float'),
+    each(match(type=='date'), $$ = 'date'),
+    each(match(type=='timestamp'), $$ = 'timestamp'),
+    each(match(type=='boolean'), $$ = 'boolean'),
+    each(match(type=='double'), $$ = 'double')) ~> DerivedColumn1
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

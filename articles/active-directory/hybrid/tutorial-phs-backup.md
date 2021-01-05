@@ -12,12 +12,12 @@ ms.date: 04/25/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3e5ad7badfa44a006fd7e71d3b0e42ee95ac698d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3d9f59906c566d80344891c0796a85b0a4972e68
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "64919010"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91313091"
 ---
 # <a name="tutorial--setting-up-phs-as-backup-for-ad-fs-in-azure-ad-connect"></a>Tutoriel :  Configurer PHS en tant que sauvegarde pour AD FS dans Azure AD Connect
 
@@ -33,7 +33,7 @@ Ce tutoriel explique comment configurer la synchronisation de hachage de mot de 
 Ce tutoriel s'appuie sur le tutoriel [ : Fédérer un environnement de forêt AD unique dans le cloud](tutorial-federation.md), un prérequis avant de suivre le présent tutoriel.  Si vous n’avez pas terminé ce tutoriel, faites-le avant de suivre la procédure décrite dans ce document.
 
 >[!IMPORTANT]
->Avant de passer à PHS, vous devez créer une sauvegarde de votre environnement AD FS.  Pour cela, vous pouvez utiliser l’[outil de restauration rapide AD FS](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/ad-fs-rapid-restore-tool#how-to-use-the-tool).
+>Avant de passer à PHS, vous devez créer une sauvegarde de votre environnement AD FS.  Pour cela, vous pouvez utiliser l’[outil de restauration rapide AD FS](/windows-server/identity/ad-fs/operations/ad-fs-rapid-restore-tool#how-to-use-the-tool).
 
 ## <a name="enable-phs-in-azure-ad-connect"></a>Activer PHS dans Azure AD Connect
 La première étape, maintenant que nous disposons d'un environnement Azure AD Connect utilisant la fédération, consiste à activer la synchronisation de hachage de mot de passe et à autoriser Azure AD Connect à synchroniser les hachages.
@@ -74,7 +74,7 @@ Nous allons maintenant vous expliquer comment basculer vers la synchronisation d
 
 1. Accédez à [https://myapps.microsoft.com](https://myapps.microsoft.com).
 2. Connectez-vous avec un compte d’utilisateur créé dans le nouveau locataire.  Vous devez vous connecter en utilisant le format suivant : (user@domain.onmicrosoft.com). Saisissez le même mot de passe que celui utilisé par l’utilisateur pour se connecter en local.</br>
-   ![Vérifier](media/tutorial-password-hash-sync/verify1.png)</br>
+   ![Capture d’écran montrant un message indiquant que le test de connexion a réussi. ](media/tutorial-password-hash-sync/verify1.png)</br>
 
 ## <a name="switch-back-to-federation"></a>Revenir à la fédération
 Nous allons maintenant vous montrer comment revenir à la fédération.  Pour cela, effectuez les étapes suivantes :
@@ -91,7 +91,7 @@ Nous allons maintenant vous montrer comment revenir à la fédération.  Pour ce
 10. Une fois la configuration terminée, cliquez sur **Suivant**.
 ![Configurer](media/tutorial-phs-backup/backup4.png)</br>
 11. Sur l’écran **Vérifier la connectivité de fédération** , cliquez sur **Vérifier**.  Vous devrez peut-être configurer des enregistrements DNS (ajouter des enregistrements A et AAAA) pour que cette opération aboutisse.
-![Vérifier](media/tutorial-phs-backup/backup5.png)</br>
+![Capture d’écran montrant l’écran Vérifier la connectivité de fédération et le bouton Vérifier.](media/tutorial-phs-backup/backup5.png)</br>
 12. Cliquez sur **Quitter**.
 
 ## <a name="reset-the-ad-fs-and-azure-trust"></a>Réinitialiser la confiance entre AD FS et Azure
@@ -106,7 +106,7 @@ Nous devons maintenant réinitialiser la confiance entre AD FS et Azure.
 6.  Dans l’écran **Se connecter à AD FS**, entrez le nom d’utilisateur contoso\Administrator et le mot de passe, puis cliquez sur **Suivant**.
 7.  Sur l’écran **Certificats**, cliquez sur **Suivant**.
 
-## <a name="test-signing-in-with-one-of-our-users"></a>Tester la connexion avec un des utilisateurs
+## <a name="test-signing-in-with-a-user"></a>Test de connexion avec un utilisateur
 
 1.  Accédez à [https://myapps.microsoft.com](https://myapps.microsoft.com).
 2. Connectez-vous avec un compte d’utilisateur créé dans le nouveau locataire.  Vous devez vous connecter en utilisant le format suivant : (user@domain.onmicrosoft.com). Saisissez le même mot de passe que celui utilisé par l’utilisateur pour se connecter en local.

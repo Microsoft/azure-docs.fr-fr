@@ -9,10 +9,10 @@ ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
 ms.openlocfilehash: 2fec54c19b9040e7cb44f1a5d2b7909510ab7313
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82734601"
 ---
 # <a name="choose-a-load-balancing-solution-for-cloudsimple-private-clouds"></a>Choisir une solution d'équilibrage de charge pour les clouds privés CloudSimple

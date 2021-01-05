@@ -10,14 +10,14 @@ ms.service: active-directory
 ms.subservice: user-help
 ms.workload: identity
 ms.topic: end-user-help
-ms.date: 01/15/2020
+ms.date: 05/28/2020
 ms.author: curtand
-ms.openlocfilehash: 3deb59b04f3c0ba90e270bc064e3ece3c21229b3
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: e460f3fd383286b1e61a979b87a9dfa09f272313
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83739604"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88799024"
 ---
 # <a name="register-your-verification-method-info-to-reset-your-own-password"></a>Inscrire vos informations de méthode de vérification pour réinitialiser votre mot de passe
 
@@ -26,7 +26,7 @@ Si vous avez oublié votre mot de passe professionnel ou scolaire, que votre org
 Votre administrateur doit activer cette fonctionnalité pour que vous puissiez enregistrer vos informations et réinitialiser votre mot de passe. Si l’option **J’ai oublié mon mot de passe** n’apparaît pas, cela signifie que votre administrateur n’a pas encore activé cette fonctionnalité pour votre organisation. Si vous pensez que ce n’est pas normal, contactez votre support technique pour obtenir de l’aide.
 
 >[!Important]
->Cet article est destiné aux utilisateurs qui essaient d’utiliser une inscription pour la réinitialisation de mot de passe en libre-service. Cela signifie que vous serez en mesure de réinitialiser votre mot de passe professionnel ou scolaire (par exemple, alain@contoso.com), sans l’aide de votre administrateur. Si vous êtes administrateur et recherchez des informations sur la façon d’activer la réinitialisation de mot de passe en libre-service pour vos employés ou d’autres utilisateurs, voir [Déployer la réinitialisation de mot de passe en libre-service Azure AD et autres articles](https://docs.microsoft.com/azure/active-directory/authentication/howto-sspr-deployment).
+>Cet article est destiné aux utilisateurs qui essaient d’utiliser une inscription pour la réinitialisation de mot de passe en libre-service. Cela signifie que vous serez en mesure de réinitialiser votre mot de passe professionnel ou scolaire (par exemple, alain@contoso.com) sans l’aide de votre administrateur. Si vous êtes administrateur et recherchez des informations sur la façon d’activer la réinitialisation de mot de passe en libre-service pour vos employés ou d’autres utilisateurs, voir [Déployer la réinitialisation de mot de passe en libre-service Azure AD et autres articles](../authentication/howto-sspr-deployment.md).
 
 ## <a name="set-up-your-password-reset-verification-method"></a>Configurer votre méthode de vérification de réinitialisation de mot de passe
 

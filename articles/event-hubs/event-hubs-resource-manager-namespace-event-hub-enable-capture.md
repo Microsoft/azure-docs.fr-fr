@@ -1,29 +1,19 @@
 ---
 title: Créer un hub d’événement avec capture activée - Azure Event Hubs | Microsoft Docs
 description: Créer un espace de noms Azure Event Hubs avec un concentrateur d’événements et activer Capture à l’aide d’un modèle Azure Resource Manager
-services: event-hubs
-documentationcenter: .net
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: 8bdda6a2-5ff1-45e3-b696-c553768f1090
-ms.service: event-hubs
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 02/12/2020
-ms.author: shvija
-ms.openlocfilehash: 0b20c73ed0590f3afc19db43b4b55dd3ff6bde8e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 658defcef5c9d145d499eb72ae372d1a7edfb740
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79453868"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97705419"
 ---
 # <a name="create-a-namespace-with-event-hub-and-enable-capture-using-a-template"></a>Créer un espace de noms avec un Event Hub et activer Capture à l’aide d’un modèle
 
-Cet article explique comment utiliser un modèle Azure Resource Manager qui crée un espace de noms [Event Hubs](event-hubs-what-is-event-hubs.md) avec une instance de concentrateur d’événements, et active la [fonctionnalité Capture](event-hubs-capture-overview.md) sur le concentrateur d’événements. L’article décrit comment définir les ressources à déployer et configurer les paramètres qui sont spécifiés lors de l’exécution du déploiement. Vous pouvez utiliser ce modèle pour vos propres déploiements, ou le personnaliser afin qu’il réponde à vos besoins.
+Cet article explique comment utiliser un modèle Azure Resource Manager qui crée un espace de noms [Event Hubs](./event-hubs-about.md) avec une instance de concentrateur d’événements, et active la [fonctionnalité Capture](event-hubs-capture-overview.md) sur le concentrateur d’événements. L’article décrit comment définir les ressources à déployer et configurer les paramètres qui sont spécifiés lors de l’exécution du déploiement. Vous pouvez utiliser ce modèle pour vos propres déploiements, ou le personnaliser afin qu’il réponde à vos besoins.
 
 Cet article explique également comment spécifier la capture des événements soit dans Azure Storage Blobs, soit dans Azure Data Lake Store, en fonction de la destination choisie.
 
@@ -414,13 +404,13 @@ New-AzResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -Templa
 Stockage Blob Azure comme destination :
 
 ```azurecli
-az group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture/azuredeploy.json][]
+az deployment group create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture/azuredeploy.json][]
 ```
 
 Azure Data Lake Store comme destination :
 
 ```azurecli
-az group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture-for-adls/azuredeploy.json][]
+az deployment group create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture-for-adls/azuredeploy.json][]
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -429,7 +419,7 @@ Vous pouvez également configurer la fonctionnalité Event Hubs Capture via l
 
 Vous pouvez en apprendre plus sur Event Hubs en consultant les liens suivants :
 
-* [Vue d’ensemble d’Event Hubs](event-hubs-what-is-event-hubs.md)
+* [Vue d’ensemble d’Event Hubs](./event-hubs-about.md)
 * [Créer un concentrateur d’événements](event-hubs-create.md)
 * [FAQ sur les hubs d’événements](event-hubs-faq.md)
 

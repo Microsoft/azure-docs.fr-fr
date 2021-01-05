@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/02/2019
 ms.author: memildin
-ms.openlocfilehash: b26f0bab073ce248ca23bb8a815fa3e293ddba51
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 742d7122c60b383e8ab7aa73f73b11b47843a9d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73686494"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91613818"
 ---
 # <a name="cloud-smart-alert-correlation-in-azure-security-center-incidents"></a>Corrélation des alertes intelligentes cloud dans Azure Security Center (incidents)
 
@@ -36,7 +36,11 @@ Security Center s’appuie sur MITRE Attack Matrix pour associer les alertes à 
 
 Dans le cadre d’une investigation d’un incident, les analystes ont souvent besoin de plus de contexte pour aboutir à un verdict sur la nature de la menace et sur les moyens de l’atténuer. Par exemple, même si une anomalie de réseau a été détectée, sans connaître les autres événements qui se produisent sur le réseau ou en lien avec la ressource ciblée, il est difficile de déterminer les actions à prendre. Pour vous aider, un incident de sécurité peut inclure des artefacts, des événements connexes et des informations. Les informations supplémentaires disponibles pour les incidents de sécurité varient en fonction du type de menace détecté et de la configuration de votre environnement. 
 
-![Capture d’écran du rapport d’incident de sécurité détecté](./media/security-center-alerts-cloud-smart/security-incident.png)
+> [!TIP]
+> Pour obtenir la liste des alertes d’incident de sécurité qui peuvent être générées par l’analytique de fusion, consultez la [table de référence des alertes](alerts-reference.md#alerts-fusion).
 
-Pour mieux comprendre les incidents de sécurité, consultez [Gestion des incidents de sécurité dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-incident).
+:::image type="content" source="./media/security-center-alerts-cloud-smart/security-incident.png" alt-text="Capture d’écran du rapport d’incident de sécurité détecté":::
+
+
+Pour mieux comprendre les incidents de sécurité, consultez le [Guide pratique pour gérer les incidents de sécurité dans Azure Security Center](security-center-incident.md).
 

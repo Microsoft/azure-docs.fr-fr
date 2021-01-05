@@ -3,12 +3,12 @@ title: Gérer et superviser des bases de données SQL Server sur une machine vir
 description: Cet article décrit comment gérer et surveiller des bases de données SQL Server s’exécutant sur une machine virtuelle Azure.
 ms.topic: conceptual
 ms.date: 09/11/2019
-ms.openlocfilehash: 14e3a4797fe60a3d1857f1e6d947fa0c669bdcfe
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.openlocfilehash: b0df22002521c8148cac1200e79aeb0ae5a60546
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81537302"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021501"
 ---
 # <a name="manage-and-monitor-backed-up-sql-server-databases"></a>Gérer et surveiller des bases de données SQL Server sauvegardées
 
@@ -16,15 +16,11 @@ Cet article décrit les tâches courantes de gestion et de surveillance des base
 
 Si vous n’avez pas encore configuré de sauvegardes pour vos bases de données SQL Server, voir [Sauvegarder des bases de données SQL Server sur des machines virtuelles Azure](backup-azure-sql-database.md).
 
-## <a name="monitor-manual-backup-jobs-in-the-portal"></a>Surveiller les travaux de sauvegarde manuelles sur le portail
+## <a name="monitor-backup-jobs-in-the-portal"></a>Surveiller les travaux de sauvegarde sur le portail
 
-Sauvegarde Azure affiche tous les travaux déclenchés manuellement sur le portail **Travaux de sauvegarde**. Les travaux que vous voyez sur ce portail incluent les opérations de découverte, d’inscription, de sauvegarde et de restauration de base de données.
+Sauvegarde Azure affiche toutes les opérations planifiées et à la demande sous **Travaux de sauvegarde** dans le portail, à l’exception des sauvegardes de fichiers journaux planifiées qui peuvent s’avérer particulièrement fréquentes. Les travaux que vous voyez sur ce portail incluent les opérations de découverte, d’inscription, de configuration, de sauvegarde et de restauration de base de données.
 
 ![Portail Travaux de sauvegarde](./media/backup-azure-sql-database/jobs-list.png)
-
-> [!NOTE]
-> Le portail **Travaux de sauvegarde** n’affiche pas les travaux de sauvegarde planifiée. Utilisez SQL Server Management Studio pour surveiller les travaux de sauvegarde planifiés, comme décrit dans la section suivante.
->
 
 Pour plus d’informations sur les scénarios de surveillance, voir [Surveillance dans le portail Azure](backup-azure-monitoring-built-in-monitor.md) et [Surveillance à l’aide d’Azure Monitor](backup-azure-monitoring-use-azuremonitor.md).  
 
@@ -57,9 +53,9 @@ Pour arrêter la sauvegarde d'une base de données SQL Server, deux méthodes so
 
 Si vous choisissez de conserver les points de récupération, gardez à l’esprit les considérations suivantes :
 
-- Tous les points de récupération resteront intacts, toutes les opérations de nettoyage s’arrêteront à l’arrêt de la protection avec données conservées.
+- Tous les points de récupération resteront intacts et toutes les opérations de nettoyage s’arrêteront à l’arrêt de la protection avec données conservées.
 - Vous serez facturé pour l’instance protégée et le stockage utilisé. Pour plus d’informations, voir [Tarification Sauvegarde Azure](https://azure.microsoft.com/pricing/details/backup/).
-- Si vous supprimez une source de données sans arrêter les sauvegardes, les nouvelles sauvegardes échouent. Les anciens points de récupération expirent conformément à la stratégie, mais un dernier point de récupération est conservé jusqu’à ce que vous arrêtiez les sauvegardes et supprimiez les données.
+- Si vous supprimez une source de données sans arrêter les sauvegardes, les nouvelles sauvegardes échouent. Les anciens points de récupération expirent conformément à la stratégie, mais le point de récupération le plus récent est conservé jusqu’à ce que vous arrêtiez les sauvegardes et supprimiez les données.
 
 Pour arrêter la protection de la base de données :
 
@@ -117,24 +113,6 @@ Si vous devez spécifier la durée de conservation de l’option Copier uniqueme
 
 Pour plus d’informations, voir [Types de sauvegardes SQL Server](backup-architecture.md#sql-server-backup-types).
 
-## <a name="unregister-a-sql-server-instance"></a>Supprimer l'inscription d'une instance SQL Server
-
-Désinscrivez une instance SQL Server après avoir désactivé la protection, mais avant de supprimer le coffre :
-
-1. Sur le tableau de bord du coffre, sous **Gestion**, sélectionnez **Infrastructure de sauvegarde**.  
-
-   ![Choisir Infrastructure de sauvegarde](./media/backup-azure-sql-database/backup-infrastructure-button.png)
-
-2. Sous **Management Servers** (Serveurs d’administration), sélectionnez **Protected Servers** (serveurs protégés).
-
-   ![Sélectionner Serveurs protégés](./media/backup-azure-sql-database/protected-servers.png)
-
-3. Dans **Serveurs protégés**, sélectionnez le serveur dont vous souhaitez annuler l'inscription. Si vous souhaitez supprimer le coffre, vous devez annuler l’inscription de tous les serveurs.
-
-4. Cliquez sur le serveur protégé, puis sélectionnez **Désinscrire**.
-
-   ![Sélectionner Supprimer](./media/backup-azure-sql-database/delete-protected-server.jpg)
-
 ## <a name="modify-policy"></a>Modifier la stratégie
 
 Dans la stratégie, modifiez la fréquence de sauvegarde ou la plage de rétention.
@@ -160,11 +138,31 @@ Vous pouvez corriger la version de la stratégie pour tous les éléments concer
 
   ![Corriger la stratégie incohérente](./media/backup-azure-sql-database/fix-inconsistent-policy.png)
 
+## <a name="unregister-a-sql-server-instance"></a>Supprimer l'inscription d'une instance SQL Server
+
+Désinscrivez une instance SQL Server après avoir désactivé la protection, mais avant de supprimer le coffre :
+
+1. Sur le tableau de bord du coffre, sous **Gestion**, sélectionnez **Infrastructure de sauvegarde**.  
+
+   ![Choisir Infrastructure de sauvegarde](./media/backup-azure-sql-database/backup-infrastructure-button.png)
+
+2. Sous **Management Servers** (Serveurs d’administration), sélectionnez **Protected Servers** (serveurs protégés).
+
+   ![Sélectionner Serveurs protégés](./media/backup-azure-sql-database/protected-servers.png)
+
+3. Dans **Serveurs protégés**, sélectionnez le serveur dont vous souhaitez annuler l'inscription. Si vous souhaitez supprimer le coffre, vous devez annuler l’inscription de tous les serveurs.
+
+4. Cliquez sur le serveur protégé, puis sélectionnez **Désinscrire**.
+
+   ![Sélectionner Supprimer](./media/backup-azure-sql-database/delete-protected-server.jpg)
+
 ## <a name="re-register-extension-on-the-sql-server-vm"></a>Réinscrire une extension sur la machine virtuelle SQL Server
 
-Parfois, l’extension de charge de travail sur la machine virtuelle peut être affectée pour une raison ou une autre. Dans ce cas, toutes les opérations déclenchées sur la machine virtuelle commencent à échouer. Vous devrez alors réinscrire l’extension sur la machine virtuelle. L’opération **Réinscrire** a pour effet de réinstaller l’extension de sauvegarde de charge de travail sur la machine virtuelle pour que les opérations se poursuivent.
+Parfois, l’extension de charge de travail sur la machine virtuelle peut être affectée pour une raison ou une autre. Dans ce cas, toutes les opérations déclenchées sur la machine virtuelle commencent à échouer. Vous devrez alors réinscrire l’extension sur la machine virtuelle. L’opération de **réinscription** a pour effet de réinstaller l’extension de sauvegarde de charge de travail sur la machine virtuelle pour que les opérations se poursuivent. Cette option est disponible sous **Infrastructure de sauvegarde** dans le coffre Recovery Services.
 
-Utilisez cette option avec prudence car, une fois déclenchée sur une machine virtuelle avec une extension déjà saine, cette opération provoque le redémarrage de l’extension. Cela peut entraîner l’échec de tous les travaux en cours. Avant de déclencher l’opération de réinscription, vérifiez la présence d’un ou plusieurs des [symptômes](backup-sql-server-azure-troubleshoot.md#re-registration-failures).
+![Serveurs protégés sous Infrastructure de sauvegarde](./media/backup-azure-sql-database/protected-servers-backup-infrastructure.png)
+
+Utilisez cette option avec précaution. Une fois déclenchée sur une machine virtuelle avec une extension déjà saine, cette opération provoque le redémarrage de l’extension. Cela peut provoquer l’échec de tous les travaux en cours. Vérifiez la présence d’un ou plusieurs de ces [symptômes](backup-sql-server-azure-troubleshoot.md#re-registration-failures) avant de déclencher l’opération de réinscription.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

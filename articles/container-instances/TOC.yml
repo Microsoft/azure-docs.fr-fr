@@ -16,6 +16,8 @@
     - name: Déployer une instance de conteneur - Modèle ARM
       displayName: Resource Manager
       href: container-instances-quickstart-template.md
+    - name: Déployer une instance de conteneur - Docker CLI
+      href: quickstart-docker-cli.md
 - name: Tutoriels
   items:
     - name: Créer et déployer une image conteneur
@@ -32,6 +34,8 @@
           href: container-instances-multi-container-yaml.md
         - name: Déployer un groupe de conteneurs - Resource Manager
           href: container-instances-multi-container-group.md
+        - name: Déployer un groupe de conteneurs - Docker Compose
+          href: tutorial-docker-compose.md
     - name: Intégrer avec les services Azure
       items:
         - name: Déclencher avec Azure Functions
@@ -39,7 +43,7 @@
 - name: Exemples
   items:
     - name: Exemples de code
-      href: 'https://azure.microsoft.com/resources/samples/?sort=0&term=aci'
+      href: /samples/browse/?products=azure&terms=container%2binstance
     - name: Modèles Resource Manager
       href: container-instances-samples-rm.md
 - name: Concepts
@@ -68,7 +72,7 @@
           href: container-instances-vnet.md
         - name: Déployer depuis Azure Container Registry
           href: container-instances-using-azure-container-registry.md
-        - name: Déployer avec GitHub Actions (préversion)
+        - name: Déployer avec GitHub Actions
           href: container-instances-github-action.md
         - name: Chiffrer les données de déploiement
           href: container-instances-encrypt-data.md
@@ -86,14 +90,18 @@
           href: container-instances-start-command.md
         - name: Exécuter une commande (exec)
           href: container-instances-exec.md
+        - name: Exécuter un conteneur d’installation (init)
+          href: container-instances-init-container.md
         - name: Utiliser une identité managée (préversion)
           href: container-instances-managed-identity.md
         - name: Utiliser des ressources GPU (préversion)
           href: container-instances-gpu.md
         - name: Activer le point de terminaison SSL en sidecar
           href: container-instances-container-group-ssl.md
-        - name: "Exposer une adresse\_IP statique"
+        - name: Exposer une adresse IP statique avec App Gateway
           href: container-instances-application-gateway.md
+        - name: Utiliser le Pare-feu Azure pour l’entrée et la sortie
+          href: container-instances-egress-ip-address.md
     - name: Monter des volumes de données
       items:
         - name: Partage de fichiers Azure

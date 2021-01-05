@@ -9,17 +9,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/14/2018
+ms.topic: troubleshooting
+ms.date: 11/30/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cde94dce13eeb7536f72fb0dcd937265960c7314
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce2525927b38a2d3300d15b7d34324f5ff59e4e5
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70842693"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96457418"
 ---
 # <a name="troubleshoot-sql-connectivity-issues-with-azure-ad-connect"></a>Résoudre les problèmes de connectivité SQL liés à Azure AD Connect
 Cet article explique comment résoudre les problèmes de connectivité entre Azure AD Connect et SQL Server. 
@@ -29,10 +29,12 @@ La capture d’écran suivante montre une erreur typique qui se produit si le se
 ![Erreur SQL](./media/tshoot-connect-tshoot-sql-connectivity/sql1.png)
 
 ## <a name="troubleshooting-steps"></a>Étapes de dépannage
-Ouvrez une fenêtre powershell et importez le module Powershell ADSyncTools
+Ouvrez une fenêtre PowerShell et importez le module PowerShell ADSyncTools
 
 ``` powershell
-Import-Module "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\AdSyncTools.psm1" 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Import-module -Name "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\AdSyncTools"
 ```
 
 >[!NOTE]
@@ -40,13 +42,13 @@ Import-Module "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\A
 Ou installez [Modules PowerShell PackageManagement Preview - Mars 2016 pour PowerShell 3.0/4.0](/powershell/module/PackageManagement) 
 
 - **Afficher toutes les commandes** : `Get-Command -Module AdSyncTools` 
-- **Exécutez la fonction powershell** : `Connect-ADSyncDatabase` avec les paramètres suivants
+- **Exécutez la fonction PowerShell** : `Connect-ADSyncDatabase` avec les paramètres suivants
     - Serveur. Nom du serveur SQL Server.
     - Instance. (Facultatif) Nom de l’instance de SQL Server et éventuellement le numéro de port que vous souhaitez utiliser. Pour utiliser l’instance par défaut, ne spécifiez pas ce paramètre.
-    - UserName. (Facultatif) Compte d’utilisateur avec lequel se connecter. Si ce champ est vide, l’utilisateur actuellement connecté est utilisé. Si vous vous connectez à un serveur SQL distant, il doit s’agir du compte de service personnalisé que vous avez créé pour la connectivité SQL Azure ADConnect. Azure AD Connect utilise le compte de service de synchronisation Azure AD Connect pour s’authentifier auprès d’un serveur SQL distant.
+    - UserName. (Facultatif) Compte d’utilisateur avec lequel se connecter. Si ce champ est vide, l’utilisateur actuellement connecté est utilisé. Si vous vous connectez à un serveur SQL distant, il doit s’agir du compte de service personnalisé que vous avez créé pour la connectivité SQL Azure AD Connect. Azure AD Connect utilise le compte de service de synchronisation Azure AD Connect pour s’authentifier auprès d’un serveur SQL distant.
     - Password. (Facultatif) Mot de passe pour le nom d’utilisateur fourni.
 
-Cette fonction powershell tente d’établir une liaison à l’ordinateur SQL Server et à l’instance spécifiés en utilisant les informations d’identification passées ou celles de l’utilisateur actuel. Si l’ordinateur SQL Server est introuvable, le script tente de se connecter au service SQL Browser pour déterminer les ports et protocoles activés.
+Cette fonction PowerShell tente d’établir une liaison à l’ordinateur SQL Server et à l’instance spécifiés en utilisant les informations d’identification passées OU celles de l’utilisateur actuel. Si l’ordinateur SQL Server est introuvable, le script tente de se connecter au service SQL Browser pour déterminer les ports et protocoles activés.
 
 Exemple utilisant uniquement un nom de serveur :
 ```

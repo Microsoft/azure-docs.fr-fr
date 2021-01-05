@@ -1,6 +1,7 @@
 ---
-title: Ajouter la connexion OIDC à une application web node.js - Plateforme d’identités Microsoft | Azure
-description: Apprenez à implémenter l'authentification dans une application web Node.js à l'aide d'OpenID Connect.
+title: 'Démarrage rapide : Ajouter une connexion utilisateur à une application web Node.js | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce guide de démarrage rapide, vous apprenez à implémenter l’authentification dans une application web Node.js avec OpenID Connect.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -10,25 +11,22 @@ ms.topic: quickstart
 ms.workload: identity
 ms.date: 10/28/2019
 ms.author: jmprieur
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET
-ms.openlocfilehash: 1ff92b8a9477800477ebb2d79145ddaa78831f30
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET, devx-track-js
+ms.openlocfilehash: 643305057490cc550a5a8e39a892297b000cbc8e
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81536061"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169407"
 ---
 # <a name="quickstart-add-sign-in-using-openid-connect-to-a-nodejs-web-app"></a>Démarrage rapide : Ajouter la connexion à l’aide d’OpenID Connect à une application web Node.js
 
-Dans ce guide de démarrage rapide, vous allez apprendre à configurer l'authentification OpenID Connect dans une application web créée à l'aide de Node.js avec Express. L'exemple est conçu pour fonctionner sur n'importe quelle plateforme.
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment configurer l’authentification OpenID Connect dans une application web créée à l’aide de Node.js avec Express. L'exemple est conçu pour fonctionner sur n'importe quelle plateforme.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour exécuter cet exemple, vous avez besoin des éléments suivants :
-
-* Installation de Node.js à partir de http://nodejs.org/
-
-* Un [compte Microsoft](https://www.outlook.com) ou [Programme pour développeurs Office 365](/office/developer-program/office-365-developer-program)
+- Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- [Node.js](https://nodejs.org/en/download/).
 
 ## <a name="register-your-application"></a>Inscrivez votre application
 1. Connectez-vous au [portail Azure](https://portal.azure.com/) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
@@ -52,8 +50,8 @@ Pour exécuter cet exemple, vous avez besoin des éléments suivants :
 
 1. Dans la liste des pages de l’application, sélectionnez **Authentification**.
     - Dans la section **URI de redirection**, sélectionnez **Web** à partir de la zone de liste modifiable et entrez l'URI de redirection suivant : `http://localhost:3000/auth/openid/return`
-    - Dans la section **Paramètres avancés**, définissez **URL de déconnexion** sur `http://localhost:3000`.
-    - Dans la section **Paramètres avancés > Octroi implicite**, cochez  **Jetons d'ID** car cet exemple exige l'activation du [flux d'octroi implicite](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-implicit-grant-flow) pour permettre la connexion de l'utilisateur.
+    - Dans la section **Paramètres avancés**, définissez **URL de déconnexion** sur `https://localhost:3000`.
+    - Dans la section **Paramètres avancés > Octroi implicite**, cochez  **Jetons d'ID** car cet exemple exige l'activation du [flux d'octroi implicite](./v2-oauth2-implicit-grant-flow.md) pour permettre la connexion de l'utilisateur.
 
 1. Sélectionnez **Enregistrer**.
 

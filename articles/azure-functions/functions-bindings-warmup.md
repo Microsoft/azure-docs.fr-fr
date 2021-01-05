@@ -2,19 +2,20 @@
 title: Déclencheur de préchauffage Azure Functions
 description: Découvrez comment utiliser le déclencheur de préchauffage dans Azure Functions.
 documentationcenter: na
-author: alexkarcher-msft
+author: craigshoemaker
 manager: gwallace
 keywords: azure functions, fonctions, traitement des événements, préchauffage, démarrage à froid, premium, calcul dynamique, architecture serverless
 ms.service: azure-functions
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 11/08/2019
-ms.author: alkarche
-ms.openlocfilehash: 013001eebeec232cc60e31f1a850aeab4fd6c905
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.author: cshoe
+ms.openlocfilehash: 6a909b246e7cb3695533a75294c523d7c9aeaeda
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82982239"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94832940"
 ---
 # <a name="azure-functions-warm-up-trigger"></a>Déclencheur de préchauffage Azure Functions
 
@@ -96,10 +97,8 @@ Voici le fichier *function.json* :
 
 La section [configuration](#trigger---configuration) décrit ces propriétés.
 
-Voici le code de script C# qui lie à `HttpRequest` :
-
 ```cs
-public static void Run(ILogger log)
+public static void Run(WarmupContext warmupContext, ILogger log)
 {
     log.LogInformation("Function App instance is warm 🌞🌞🌞");  
 }

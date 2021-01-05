@@ -1,19 +1,19 @@
 ---
 title: Disponibilité générale de Microsoft Threat Modeling Tool version du 02/07/2019
 titleSuffix: Azure
-description: Compilation des notes de publication pour l’outil de modélisation des menaces
+description: Lisez les notes de publication relatives à la mise à jour de Threat Modeling Tool publiée le 02/07/2019. Les notes incluent des améliorations de l’accessibilité et des correctifs de bogues.
 author: jegeib
 ms.author: jegeib
 ms.service: security
 ms.subservice: security-develop
 ms.topic: article
 ms.date: 07/02/2019
-ms.openlocfilehash: d4a97a10b8055af4401dbe163723b1fb38a5d12f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0e62f6950f90d7f15aa231783e292ec8eee0b4c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78269670"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87539116"
 ---
 # <a name="threat-modeling-tool-update-release-71607021---722019"></a>Version mise à jour de Threat Modeling Tool 7.1.60702.1 - 2 juillet 2019
 

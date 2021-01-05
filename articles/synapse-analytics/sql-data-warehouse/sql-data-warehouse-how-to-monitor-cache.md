@@ -5,36 +5,36 @@ services: synapse-analytics
 author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.topic: conceptual
-ms.date: 09/06/2018
+ms.date: 11/20/2020
 ms.author: kevin
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: bb5560164af2b573e6aaffd4e4c62bbe0dc24a51
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: 041751b5b23dbb3153f1ae638303579a860c0e5b
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80350422"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95020161"
 ---
-# <a name="how-to-monitor-the-gen2-cache"></a>Procédure de surveillance du cache Gen2
+# <a name="how-to-monitor-the-adaptive-cache"></a>Procédure de surveillance du cache adaptatif
 
-Cet article décrit la procédure de surveillance et de résolution des problèmes de lenteur des performances des requêtes en déterminant si votre charge de travail exploite lu cache Gen2 de façon optimale.
+Cet article décrit la procédure de surveillance et de résolution des problèmes de lenteur des performances des requêtes en déterminant si votre charge de travail exploite de façon optimale le cache adaptatif des pools SQL dédiés.
 
-L’architecture de stockage Gen2 nivelle automatiquement vos segments columnstore les plus fréquemment interrogés dans un cache résidant sur des disques SSD basés sur NVMe conçus pour les entrepôts de données Gen2. Les performances sont optimisées lorsque vos requêtes récupèrent des segments qui résident dans le cache.
+L’architecture de stockage d’un pool SQL dédié nivelle automatiquement vos segments columnstore les plus fréquemment interrogés dans un cache résidant sur des disques SSD basés sur NVMe. Vous obtiendrez des performances supérieures lorsque vos requêtes récupèrent des segments qui résident dans le cache.
  
 ## <a name="troubleshoot-using-the-azure-portal"></a>Résolution des problèmes à l’aide du portail Azure
 
-Vous pouvez utiliser Azure Monitor pour afficher les mesures du cache Gen2 afin de résoudre les problèmes de performances des requêtes. Commencez par accéder au portail Microsoft Azure et cliquez sur **Superviser**, **Métriques** et **+ Sélectionner une étendue** :
+Vous pouvez utiliser Azure Monitor pour afficher les mesures du cache afin de résoudre les problèmes de performances des requêtes. Commencez par accéder au portail Microsoft Azure et cliquez sur **Superviser**, **Métriques** et **+ Sélectionner une étendue** :
 
-![Azure Monitor](./media/sql-data-warehouse-how-to-monitor-cache/cache-0.png)
+![Capture d’écran montrant l’option Sélectionner une étendue sélectionnée dans Métriques sur le portail Azure.](./media/sql-data-warehouse-how-to-monitor-cache/cache-0.png)
 
-Utilisez les barres de recherche et de liste déroulante pour rechercher votre entrepôt de données. Sélectionnez ensuite Appliquer.
+Utilisez les barres de recherche et de liste déroulante pour rechercher votre pool SQL dédié. Sélectionnez ensuite Appliquer.
 
-![Azure Monitor](./media/sql-data-warehouse-how-to-monitor-cache/cache-1.png)
+![Capture d’écran montrant le volet Sélectionner une étendue dans lequel vous pouvez sélectionner votre entrepôt de données.](./media/sql-data-warehouse-how-to-monitor-cache/cache-1.png)
 
-Les métriques clés pour la résolution des problèmes du cache Gen2 sont **Pourcentage d’accès au cache** et **Pourcentage de cache utilisé**. Sélectionnez **Pourcentage d’accès au cache**, puis utilisez le bouton **Ajouter une métrique** pour ajouter **Pourcentage de cache utilisé**. 
+Les métriques clés pour la résolution des problèmes du cache sont **Pourcentage d’accès au cache** et **Pourcentage de cache utilisé**. Sélectionnez **Pourcentage d’accès au cache**, puis utilisez le bouton **Ajouter une métrique** pour ajouter **Pourcentage de cache utilisé**. 
 
 ![Métriques du cache](./media/sql-data-warehouse-how-to-monitor-cache/cache-2.png)
 

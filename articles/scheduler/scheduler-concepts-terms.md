@@ -9,12 +9,12 @@ ms.author: deli
 ms.reviewer: klam, estfan
 ms.topic: conceptual
 ms.date: 08/18/2016
-ms.openlocfilehash: 100be6a4376883a4f2a91b1efd172242c1d19e19
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: 899c64e818896cde18e955d6abd82594734c4b57
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80878389"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368160"
 ---
 # <a name="concepts-terminology-and-entities-in-azure-scheduler"></a>Concepts, terminologie et entités d’Azure Scheduler
 
@@ -40,7 +40,7 @@ D’une façon générale, l’API REST de Scheduler expose ces opérations pour
 
 ### <a name="job-management"></a>Gestion des travaux
 
-Prend en charge les opérations de création et de modification des travaux. Tous les travaux doivent appartenir à une collection de travaux existante ; il n’y a donc pas de création implicite. Pour plus d’informations, consultez [API REST de Scheduler - Travaux](https://docs.microsoft.com/rest/api/scheduler/jobs). Voici l’adresse URI pour ces opérations :
+Prend en charge les opérations de création et de modification des travaux. Tous les travaux doivent appartenir à une collection de travaux existante ; il n’y a donc pas de création implicite. Pour plus d’informations, consultez [API REST de Scheduler - Travaux](/rest/api/scheduler/jobs). Voici l’adresse URI pour ces opérations :
 
 ```
 https://management.azure.com/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}/jobs/{jobName}
@@ -48,7 +48,7 @@ https://management.azure.com/subscriptions/{subscriptionID}/resourceGroups/{reso
 
 ### <a name="job-collection-management"></a>Gestion de la collection de travaux
 
-Prend en charge les opérations de création et de modification des travaux et des collections de travaux, qui correspondent aux quotas et aux paramètres partagés. Par exemple, les quotas spécifient le nombre maximal de travaux et le plus petit intervalle de récurrence. Pour plus d’informations, consultez [API REST de Scheduler - Collections de travaux](https://docs.microsoft.com/rest/api/scheduler/jobcollections). Voici l’adresse URI pour ces opérations :
+Prend en charge les opérations de création et de modification des travaux et des collections de travaux, qui correspondent aux quotas et aux paramètres partagés. Par exemple, les quotas spécifient le nombre maximal de travaux et le plus petit intervalle de récurrence. Pour plus d’informations, consultez [API REST de Scheduler - Collections de travaux](/rest/api/scheduler/jobcollections). Voici l’adresse URI pour ces opérations :
 
 ```
 https://management.azure.com/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}
@@ -56,7 +56,7 @@ https://management.azure.com/subscriptions/{subscriptionID}/resourceGroups/{reso
 
 ### <a name="job-history-management"></a>Gestion de l’historique des travaux
 
-Prend en charge l’opération GET pour l’extraction de 60 jours d’historique d’exécution des travaux, par exemple le temps écoulé pour le travail et les résultats d’exécution du travail. Inclut la prise en charge du paramètre de chaîne de requête pour le filtrage basé sur l’état et le statut. Pour plus d’informations, consultez [API REST de Scheduler - Lister l’historique des travaux](https://docs.microsoft.com/rest/api/scheduler/jobs/listjobhistory). Voici l’adresse URI pour cette opération :
+Prend en charge l’opération GET pour l’extraction de 60 jours d’historique d’exécution des travaux, par exemple le temps écoulé pour le travail et les résultats d’exécution du travail. Inclut la prise en charge du paramètre de chaîne de requête pour le filtrage basé sur l’état et le statut. Pour plus d’informations, consultez [API REST de Scheduler - Lister l’historique des travaux](/rest/api/scheduler/jobs/listjobhistory). Voici l’adresse URI pour cette opération :
 
 ```
 https://management.azure.com/subscriptions/{subscriptionID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scheduler/jobCollections/{jobCollectionName}/jobs/{jobName}/history
@@ -144,7 +144,7 @@ Voici un exemple qui montre une définition complète d’un travail pour une ac
 
 ## <a name="starttime"></a>startTime
 
-Dans l’objet **startTime**, vous pouvez spécifier l’heure de début et un décalage de fuseau horaire au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+Dans l’objet **startTime** , vous pouvez spécifier l’heure de début et un décalage de fuseau horaire au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
 
 <a name="action"></a>
 
@@ -214,13 +214,13 @@ Voici un exemple d’action de rubrique Service Bus :
 },
 ```
 
-Pour plus d’informations sur les signatures d’accès partagé, consultez [Autoriser avec des signatures d’accès partagé](../storage/common/storage-dotnet-shared-access-signature-part-1.md).
+Pour plus d’informations sur les signatures d’accès partagé, consultez [Autoriser avec des signatures d’accès partagé](../storage/common/storage-sas-overview.md).
 
 <a name="error-action"></a>
 
 ## <a name="erroraction"></a>errorAction
 
-Si **l’action** principale de votre travail échoue, Scheduler peut exécuter une action **errorAction** qui gère l’erreur. Dans **l’action** principale, vous pouvez spécifier un objet **errorAction**, ce qui permet à Scheduler d’appeler un point de terminaison de gestion des erreurs ou d’envoyer une notification à l’utilisateur. 
+Si **l’action** principale de votre travail échoue, Scheduler peut exécuter une action **errorAction** qui gère l’erreur. Dans **l’action** principale, vous pouvez spécifier un objet **errorAction** , ce qui permet à Scheduler d’appeler un point de terminaison de gestion des erreurs ou d’envoyer une notification à l’utilisateur. 
 
 Par exemple, si un incident se produit au point de terminaison principal, vous pouvez utiliser **errorAction** pour appeler un point de terminaison secondaire ou pour envoyer une notification à un point de terminaison de gestion des erreurs. 
 
@@ -230,7 +230,7 @@ Comme pour **l’action** principale, l’action d’erreur peut utiliser une lo
 
 ## <a name="recurrence"></a>recurrence
 
-Un travail se répète si la définition JSON du travail inclut l’objet **recurrence**, par exemple :
+Un travail se répète si la définition JSON du travail inclut l’objet **recurrence** , par exemple :
 
 ```json
 "recurrence": {
@@ -250,14 +250,14 @@ Un travail se répète si la définition JSON du travail inclut l’objet **recu
 |----------|----------|-------|-------------| 
 | **frequency** | Oui, quand **recurrence** est utilisé | "Minute", "Hour", "Day", "Week", "Month", "Year" | Unité de temps entre les occurrences | 
 | **interval** | Non | 1 à 1000 (inclusivement) | Entier positif qui détermine le nombre d’unités de temps entre chaque occurrence, en fonction de **frequency** | 
-| **schedule** | Non | Variable | Détails pour les planifications avancées et plus complexes. Voir **hours**, **minutes**, **weekDays**, **months** et **monthDays** | 
+| **schedule** | Non | Variable | Détails pour les planifications avancées et plus complexes. Voir **hours** , **minutes** , **weekDays** , **months** et **monthDays** | 
 | **hours** | Non | 1 à 24 | Tableau avec les marques d’heures pour le moment où exécuter le travail | 
 | **minutes** | Non | 0 à 59 | Tableau avec les marques de minutes pour le moment où exécuter le travail | 
 | **months** | Non | 1 à 12 | Tableau avec les mois pour le moment où exécuter le travail | 
 | **monthDays** | Non | Variable | Tableau avec les jours du mois pour le moment où exécuter le travail | 
 | **weekDays** | Non | "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" | Tableau avec les jours de la semaine pour le moment où exécuter le travail | 
-| **count** | Non | <*none*> | Nombre de récurrences. Par défaut, le nombre de récurrences est infini. Vous ne pouvez pas utiliser à la fois **count** et **endTime**, mais la règle qui se termine en premier est honorée. | 
-| **endTime** | Non | <*none*> | La date et l’heure d’arrêt de la récurrence. Par défaut, le nombre de récurrences est infini. Vous ne pouvez pas utiliser à la fois **count** et **endTime**, mais la règle qui se termine en premier est honorée. | 
+| **count** | Non | <*none*> | Nombre de récurrences. Par défaut, le nombre de récurrences est infini. Vous ne pouvez pas utiliser à la fois **count** et **endTime** , mais la règle qui se termine en premier est honorée. | 
+| **endTime** | Non | <*none*> | La date et l’heure d’arrêt de la récurrence. Par défaut, le nombre de récurrences est infini. Vous ne pouvez pas utiliser à la fois **count** et **endTime** , mais la règle qui se termine en premier est honorée. | 
 ||||
 
 Pour plus d’informations sur ces éléments, consultez [Créer des planifications complexes et des récurrences avancées](../scheduler/scheduler-advanced-complexity.md).
@@ -278,7 +278,7 @@ Dans le cas où un travail du planificateur échoue, vous pouvez configurer une 
 
 | Propriété | Obligatoire | Valeur | Description | 
 |----------|----------|-------|-------------| 
-| **retryType** | Oui | **Fixed**, **None** | Détermine si vous spécifiez une stratégie de nouvelle tentative (**fixed**) ou non (**none**). | 
+| **retryType** | Oui | **Fixed** , **None** | Détermine si vous spécifiez une stratégie de nouvelle tentative ( **fixed** ) ou non ( **none** ). | 
 | **retryInterval** | Non | PT30S | Spécifie l’intervalle et la fréquence entre les nouvelles tentatives au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations). La valeur minimale est 15 secondes, alors que la valeur maximale est 18 mois. | 
 | **retryCount** | Non | 4 | Spécifie le nombre de nouvelles tentatives. La valeur maximale est 20. | 
 ||||
@@ -293,14 +293,14 @@ L’état d’un travail est **Enabled** (Activé), **Disabled** (Désactivé), 
 
 `"state": "Disabled"`
 
-Pour changer l’état des travaux en **Enabled** ou **Disabled**, vous pouvez utiliser l’opération PUT ou PATCH sur ces travaux.
-Cependant, si un travail a l’état **Completed** ou **Faulted**, vous ne pouvez pas mettre à jour l’état ; vous pouvez cependant effectuer l’opération DELETE sur le travail. Scheduler supprime les travaux terminés et en erreur après 60 jours. 
+Pour changer l’état des travaux en **Enabled** ou **Disabled** , vous pouvez utiliser l’opération PUT ou PATCH sur ces travaux.
+Cependant, si un travail a l’état **Completed** ou **Faulted** , vous ne pouvez pas mettre à jour l’état ; vous pouvez cependant effectuer l’opération DELETE sur le travail. Scheduler supprime les travaux terminés et en erreur après 60 jours. 
 
 <a name="status"></a>
 
 ## <a name="status"></a>status
 
-Après le démarrage d’un travail, Scheduler retourne des informations sur l’état du travail via l’objet **status**, que seul Scheduler contrôle. Vous pouvez cependant trouver l’objet **status** à l’intérieur de l’objet **job**. Voici les informations incluses dans le statut d’un travail :
+Après le démarrage d’un travail, Scheduler retourne des informations sur l’état du travail via l’objet **status** , que seul Scheduler contrôle. Vous pouvez cependant trouver l’objet **status** à l’intérieur de l’objet **job** . Voici les informations incluses dans le statut d’un travail :
 
 * Heure de l’exécution précédente, le cas échéant
 * Heure de la prochaine exécution planifiée pour les travaux en cours

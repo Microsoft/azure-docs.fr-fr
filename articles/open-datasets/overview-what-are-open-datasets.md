@@ -7,12 +7,12 @@ ms.topic: overview
 author: cjgronlund
 ms.author: cgronlun
 ms.date: 05/06/2020
-ms.openlocfilehash: 24f5a671076a44db382ac37e2f6532e5f0f2a3ae
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: cc7d3a7ba5927730a68b704d61101a9dba447f2f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82930384"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96493965"
 ---
 # <a name="what-are-azure-open-datasets-and-how-can-you-use-them"></a>Qu’est-ce qu’Azure Open Datasets et comment l’utiliser ?
 
@@ -59,5 +59,5 @@ Si vous ne trouvez pas les données que vous recherchez, envoyez-nous un e-mail 
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Exemple de notebook](samples.md)
-* [Tutoriel : Modélisation de régression avec données sur les taxis de New York](/azure/machine-learning/tutorial-auto-train-models?context=azure/open-datasets/context/open-datasets-context)
-* [Kit de développement logiciel (SDK) Python pour Open Datasets](/python/api/azureml-opendatasets/?view=azure-ml-py)
+* [Tutoriel : Modélisation de régression avec données sur les taxis de New York](../machine-learning/tutorial-auto-train-models.md?context=azure%2fopen-datasets%2fcontext%2fopen-datasets-context)
+* [Kit de développement logiciel (SDK) Python pour Open Datasets](/python/api/azureml-opendatasets/)

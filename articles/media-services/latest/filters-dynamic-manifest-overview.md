@@ -4,24 +4,26 @@ titleSuffix: Azure Media Services
 description: Découvrez comment créer des filtres à l’aide de Dynamic Packager pour filtrer et diffuser de manière sélective vos manifestes.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
-ms.topic: article
-ms.date: 07/11/2019
-ms.author: juliako
-ms.openlocfilehash: cd955f97a2f26543f799d95b7dc0b1de235333c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: acb30c1659c4c29e0af83da5594bdd9a7e3465d8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74186214"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89299029"
 ---
 # <a name="filter-your-manifests-using-dynamic-packager"></a>Filtrer vos manifestes à l’aide de Dynamic Packager
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Lorsque vous fournissez du contenu en streaming à débit adaptatif à des appareils, il est souvent nécessaire de publier plusieurs versions d'un manifeste pour cibler des fonctionnalités d'appareil spécifiques ou la bande passante réseau disponible. Le [Packager dynamique](dynamic-packaging-overview.md) vous permet de spécifier des filtres qui peuvent filtrer des codecs, des résolutions, des vitesses de transmission et des combinaisons de pistes audio spécifiques à la volée. Ce filtrage supprime la nécessité de créer plusieurs copies. Vous devez simplement publier une nouvelle URL avec un ensemble spécifique de filtres configurés pour vos appareils cibles (iOS, Android, SmartTV ou navigateurs) et les fonctionnalités réseau (scénarios de bande passante élevée, mobiles ou de bande passante faible). Dans ce cas, les clients peuvent manipuler le streaming de votre contenu par le biais de la chaîne de requête (en spécifiant les [filtres de ressources ou les filtres de comptes](filters-concept.md) disponibles) et utiliser des filtres pour diffuser des sections spécifiques d’un flux.
 
@@ -36,7 +38,7 @@ Cette possibilité de spécifier des filtres différents sur votre flux offre un
 
 ## <a name="overview-of-manifests"></a>Vue d'ensemble des manifestes
 
-Azure Media Services prend en charge les protocoles HLS, MPEG DASH et Smooth Streaming. Dans le cadre du l'[empaquetage dynamique](dynamic-packaging-overview.md), les manifestes du client de streaming (liste de lecture principale HLS, DASH MPD (Media Presentation Description) et Smooth Streaming) sont générés de façon dynamique en fonction du sélecteur de format de l'URL. Pour plus d’informations, consultez les protocoles de remise présentés dans [Workflow à la demande commun](dynamic-packaging-overview.md#delivery-protocols).
+Azure Media Services prend en charge les protocoles HLS, MPEG DASH et Smooth Streaming. Dans le cadre du l'[empaquetage dynamique](dynamic-packaging-overview.md), les manifestes du client de streaming (liste de lecture principale HLS, DASH MPD (Media Presentation Description) et Smooth Streaming) sont générés de façon dynamique en fonction du sélecteur de format de l'URL. Pour plus d’informations, consultez les protocoles de remise présentés dans [Workflow à la demande commun](dynamic-packaging-overview.md#to-prepare-your-source-files-for-delivery).
 
 ### <a name="get-and-examine-manifest-files"></a>Obtenir et examiner des fichiers manifeste
 

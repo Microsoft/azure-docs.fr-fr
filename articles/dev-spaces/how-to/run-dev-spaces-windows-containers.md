@@ -5,14 +5,16 @@ ms.date: 01/16/2020
 ms.topic: conceptual
 description: Découvrez comment exécuter Azure Dev Spaces sur un cluster existant avec des conteneurs Windows
 keywords: Azure Dev Spaces, Dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, conteneurs Windows
-ms.openlocfilehash: 0b3f221c9e62343a02ba8742e4cf988c7cf26c12
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a9aa24ae70afe062246e1b295cdc7e0724639596
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80240483"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97606757"
 ---
 # <a name="interact-with-windows-containers-using-azure-dev-spaces"></a>Interagir avec des conteneurs Windows à l’aide d’Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Vous pouvez activer Azure Dev Spaces sur des espaces de noms Kubernetes nouveaux et existants. Azure Dev Spaces exécute et instrumente des services qui s’exécutent sur des conteneurs Linux. Ces services peuvent également interagir avec les applications qui s’exécutent sur des conteneurs Windows dans le même espace de noms. Cet article explique comment utiliser Azure Dev Spaces pour exécuter des services dans un espace de noms avec des conteneurs Windows existants. À l’heure actuelle, vous ne pouvez pas déboguer ou attacher des conteneurs Windows avec Azure Dev Spaces.
 
@@ -116,8 +118,8 @@ Utilisez `helm list` pour indiquer le déploiement de votre service Windows :
 
 ```cmd
 $ helm list --namespace dev
-NAME              REVISION  UPDATED                     STATUS      CHART           APP VERSION NAMESPACE
-windows-service 1           Wed Jul 24 15:45:59 2019    DEPLOYED    mywebapi-0.1.0  1.0         dev  
+NAME             REVISION   UPDATED                    STATUS    CHART            APP VERSION    NAMESPACE
+windows-service    1        Wed Jul 24 15:45:59 2019   DEPLOYED  mywebapi-0.1.0   1.0            dev
 ```
 
 Dans l’exemple ci-dessus, le nom de votre déploiement est *windows-service*. Mettez à jour votre service Windows avec la nouvelle configuration en utilisant `helm upgrade` :
@@ -167,18 +169,16 @@ Vous pouvez voir le service en cours d’exécution en ouvrant l’URL publique 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment Azure Dev Spaces vous aide à développer des applications plus complexes sur plusieurs conteneurs, et comment vous pouvez simplifier le développement collaboratif en utilisant différentes versions ou branches de votre code dans différents espaces.
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
 
 > [!div class="nextstepaction"]
-> [Développement en équipe dans Azure Dev Spaces][team-development-qs]
+> [Fonctionnement d’Azure Dev Spaces](../how-dev-spaces-works.md)
 
 [kubectl]: https://kubernetes.io/docs/user-guide/kubectl/
 [kubectl-get]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get
 [helm-installed]: https://helm.sh/docs/intro/install/
 [sample-application]: https://github.com/Azure/dev-spaces/tree/master/samples/existingWindowsBackend
 [sample-application-toleration-example]: https://github.com/Azure/dev-spaces/blob/master/samples/existingWindowsBackend/mywebapi-windows/charts/templates/deployment.yaml#L24-L27
-[team-development-qs]: ../quickstart-team-development.md
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
-[team-development]: ../team-development-netcore.md
-[using-taints]: ../../aks/use-multiple-node-pools.md#schedule-pods-using-taints-and-tolerations
+[using-taints]: ../../aks/use-multiple-node-pools.md#setting-nodepool-taints
 [windows-container-cli]: ../../aks/windows-container-cli.md

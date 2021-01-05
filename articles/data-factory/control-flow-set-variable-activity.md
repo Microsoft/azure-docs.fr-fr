@@ -7,16 +7,16 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 04/07/2020
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
-ms.openlocfilehash: e5bd3d10e4e43daf3031aae5083ee917cfe65ede
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: f3c1fae2cbf2a1ba8b71dcbc8f6639bda4765f5c
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417978"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498385"
 ---
 # <a name="set-variable-activity-in-azure-data-factory"></a>Activité de définition de variable dans Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -30,8 +30,8 @@ Propriété | Description | Obligatoire
 name | Nom de l’activité dans le pipeline | Oui
 description | Texte décrivant l’activité | non
 type | Doit être défini sur **SetVariable** | Oui
-value | Chaîne littérale ou valeur d’objet d’expression à laquelle la variable sera affectée | Oui
-variableName | Nom de la variable qui sera définie par cette activité | Oui
+value | Chaîne littérale ou valeur d’objet d’expression à laquelle la variable est affectée | Oui
+variableName | Nom de la variable définie par cette activité | Oui
 
 ## <a name="incrementing-a-variable"></a>Incrémentation d’une variable
 

@@ -10,16 +10,16 @@ ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: f247465c7e2c0a212df2821ebc7165d3ee5b15f3
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 8ddaed181d017e3167694a9d7edf53c7c09fd5e9
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80876655"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968517"
 ---
 # <a name="deploy-and-run-container-on-azure-container-instance"></a>Déployer et exécuter un conteneur sur Azure Container Instances
 
-Les étapes suivantes permettent de mettre facilement à l’échelle des applications Azure Cognitive Services dans le cloud avec [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/). La conteneurisation vous aide à vous concentrer sur la création de vos applications au lieu de gérer l’infrastructure. Pour plus d’informations sur l’utilisation de conteneurs, voir [Fonctionnalités et avantages](../cognitive-services-container-support.md#features-and-benefits).
+Les étapes suivantes permettent de mettre facilement à l’échelle des applications Azure Cognitive Services dans le cloud avec [Azure Container Instances](../../container-instances/index.yml). La conteneurisation vous aide à vous concentrer sur la création de vos applications au lieu de gérer l’infrastructure. Pour plus d’informations sur l’utilisation de conteneurs, voir [Fonctionnalités et avantages](../cognitive-services-container-support.md#features-and-benefits).
 
 ## <a name="prerequisites"></a>Prérequis
 

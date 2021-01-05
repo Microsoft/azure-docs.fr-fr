@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/13/2019
-ms.openlocfilehash: dfa1ad318ccc9e891b646ec050f6a0776e108206
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0484d846501ef20e5d474668c45324452d0c8fc8
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418233"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92638225"
 ---
 # <a name="copy-data-to-an-azure-cognitive-search-index-using-azure-data-factory"></a>Copier des données vers un index de recherche cognitive Azure à l’aide d’Azure Data Factory
 
@@ -115,7 +115,7 @@ Pour copier des données vers Recherche cognitive Azure, définissez **AzureSear
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type de la source d’activité de copie doit être définie sur **AzureSearchIndexSink** | Oui |
-| writeBehavior | Indique s’il convient de procéder à une fusion ou à un remplacement lorsqu’un document existe déjà dans l’index. Voir la [propriété WriteBehavior](#writebehavior-property).<br/><br/>Valeurs autorisées : **Merge** (par défaut) et **Upload**. | Non |
+| writeBehavior | Indique s’il convient de procéder à une fusion ou à un remplacement lorsqu’un document existe déjà dans l’index. Voir la [propriété WriteBehavior](#writebehavior-property).<br/><br/>Valeurs autorisées : **Merge** (par défaut) et **Upload** . | Non |
 | writeBatchSize | Charge des données dans l’index de recherche lorsque la taille de la mémoire tampon atteint writeBatchSize. Pour plus d’informations, voir la [propriété WriteBatchSize](#writebatchsize-property).<br/><br/>Valeurs autorisées : entier de 1 à 1000 ; la valeur par défaut est 1000. | Non |
 
 ### <a name="writebehavior-property"></a>Propriété WriteBehavior
@@ -124,8 +124,8 @@ AzureSearchSink effectue une opération d’upsert lors de l’écriture des don
 
 AzureSearchSink fournit les deux comportements upsert suivants (en utilisant le Kit de développement logiciel (SDK) AzureSearch) :
 
-- **Fusion** : combine toutes les colonnes du nouveau document avec celles du document existant. Pour les colonnes ayant une valeur Null dans le nouveau document, la valeur de celles du document existant est conservée.
-- **Chargement** : le nouveau document remplace l’ancien. Pour les colonnes qui ne sont pas spécifiées dans le nouveau document, la valeur est définie sur Null qu’il existe ou non une valeur autre que Null dans le document existant.
+- **Fusion**  : combine toutes les colonnes du nouveau document avec celles du document existant. Pour les colonnes ayant une valeur Null dans le nouveau document, la valeur de celles du document existant est conservée.
+- **Chargement**  : le nouveau document remplace l’ancien. Pour les colonnes qui ne sont pas spécifiées dans le nouveau document, la valeur est définie sur Null qu’il existe ou non une valeur autre que Null dans le document existant.
 
 **Fusion** est le comportement par défaut.
 
@@ -180,7 +180,7 @@ Le tableau suivant indique si un type de données Recherche cognitive Azure est 
 | Tableau de chaînes | N |
 | GeographyPoint | N |
 
-Les autres types de données, par exemple ComplexType, ne sont pas pris en charge pour le moment. Pour obtenir la liste complète des types de données pris en charge par Recherche cognitive Azure, consultez [Types de données pris en charge (Recherche cognitive Azure)](https://docs.microsoft.com/rest/api/searchservice/supported-data-types).
+Les autres types de données, par exemple ComplexType, ne sont pas pris en charge pour le moment. Pour obtenir la liste complète des types de données pris en charge par Recherche cognitive Azure, consultez [Types de données pris en charge (Recherche cognitive Azure)](/rest/api/searchservice/supported-data-types).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour obtenir la liste des banques de données prises en charge en tant que sources et récepteurs par l’activité de copie dans Azure Data Factory, consultez le tableau [banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).

@@ -3,15 +3,15 @@ title: Informations de référence sur Azure Functions pour les développeurs F#
 description: Découvrez comment développer sur Azure Functions à l’aide de scripts F#.
 author: sylvanc
 ms.assetid: e60226e5-2630-41d7-9e5b-9f9e5acc8e50
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 10/09/2018
 ms.author: syclebsc
-ms.openlocfilehash: 669701f91ab28a4eb734b0346be6515dc44e8685
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f9b7b92fd21e12f1d86c5d5878e48c6ec6b0e748
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234941"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87088017"
 ---
 # <a name="azure-functions-f-developer-reference"></a>Informations de référence pour les développeurs F# sur Azure Functions
 
@@ -90,7 +90,7 @@ let Run(input: string, item: byref<Item>) =
 ```
 
 ## <a name="logging"></a>Journalisation
-Pour consigner la sortie dans vos [journaux d’activité de streaming](../app-service/troubleshoot-diagnostic-logs.md) en F#, votre fonction doit utiliser un argument de type [ILogger](https://docs.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger). Par souci de cohérence, nous vous recommandons de nommer cet argument `log`. Par exemple :
+Pour consigner la sortie dans vos [journaux d’activité de streaming](../app-service/troubleshoot-diagnostic-logs.md) en F#, votre fonction doit utiliser un argument de type [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger). Par souci de cohérence, nous vous recommandons de nommer cet argument `log`. Par exemple :
 
 ```fsharp
 let Run(blob: string, output: byref<string>, log: ILogger) =
@@ -293,4 +293,3 @@ Pour plus d’informations, consultez les ressources suivantes :
 * [Azure Functions triggers and bindings (Déclencheurs et liaisons Azure Functions)](functions-triggers-bindings.md)
 * [Test des fonctions Azure](functions-test-a-function.md)
 * [Mise à l’échelle d’Azure Functions](functions-scale.md)
-

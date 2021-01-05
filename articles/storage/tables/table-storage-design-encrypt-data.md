@@ -1,19 +1,19 @@
 ---
 title: Chiffrer les données de table de stockage Azure | Microsoft Docs
-description: Découvrez plus d’informations sur le chiffrement de données de table dans le Stockage Azure.
+description: Découvrez plus d’informations sur le chiffrement de données de table dans le Stockage Azure. La bibliothèque de client .NET Stockage Azure vous permet de chiffrer les entités de chaîne pour les opérations d’insertion et de remplacement.
 services: storage
-author: MarkMcGeeAtAquent
+author: tamram
+ms.author: tamram
 ms.service: storage
 ms.topic: article
 ms.date: 04/11/2018
-ms.author: sngun
 ms.subservice: tables
-ms.openlocfilehash: f56946702011968a0fcb31f6fbecbaacdc89ea42
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b921be718bfeb5eb95d4a802fb4d2a8cdd0946c1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60326001"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88236775"
 ---
 # <a name="encrypt-table-data"></a>Chiffrer des données de table
 La bibliothèque cliente de stockage .NET Azure Storage prend en charge le chiffrement des propriétés de l’entité de chaîne pour les opérations d’insertion et de remplacement. Les chaînes chiffrées sont stockées sur le service en tant que propriétés binaires, et elles sont converties en chaînes après le déchiffrement.    

@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/22/2019
-ms.openlocfilehash: 490d3305abcbcd906a0f727d736db8cab7e4287e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bf35d08128aa8a3e8f545ed7184866694219f2cb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456019"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90905224"
 ---
 # <a name="remove-duplicate-rows-module"></a>Module Supprimer les lignes en double
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Ce module permet de supprimer les doublons potentiels d’un jeu de données.
 

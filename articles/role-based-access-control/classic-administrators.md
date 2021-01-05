@@ -8,18 +8,18 @@ manager: mtillman
 ms.assetid: ''
 ms.service: role-based-access-control
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 01/22/2020
+ms.date: 11/30/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: cacdeee4512c512b058be96c4fe3a829c2933f06
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 4c758dca9f6020fd948ad8c3a8cdf014306e8ae7
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734856"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96343991"
 ---
 # <a name="azure-classic-subscription-administrators"></a>Administrateurs d'abonnement classique Azure
 
@@ -30,7 +30,7 @@ Cet article décrit comment ajouter ou modifier les rôles Coadministrateur et A
 ## <a name="add-a-co-administrator"></a>Ajouter un coadministrateur
 
 > [!TIP]
-> Vous devez ajouter un coadministrateur uniquement si l’utilisateur a besoin de gérer les déploiements Azure Classic à l’aide du [module PowerShell de gestion des services Azure](https://docs.microsoft.com/powershell/module/servicemanagement/azure). Si l’utilisateur utilise uniquement le portail Azure pour gérer les ressources classiques, vous n’avez pas besoin d’ajouter l’administrateur classique pour l’utilisateur.
+> Vous devez ajouter un coadministrateur uniquement si l’utilisateur a besoin de gérer les déploiements Azure Classic à l’aide du [module PowerShell de gestion des services Azure](/powershell/module/servicemanagement/azure.service). Si l’utilisateur utilise uniquement le portail Azure pour gérer les ressources classiques, vous n’avez pas besoin d’ajouter l’administrateur classique pour l’utilisateur.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) en tant qu’administrateur ou coadministrateur du service.
 
@@ -58,7 +58,7 @@ Pour ajouter un utilisateur invité en tant que coadministrateur, suivez les mê
 
 - L’utilisateur invité doit être présent dans votre annuaire. Cela signifie que l’utilisateur a été invité dans votre annuaire et a accepté l’invitation.
 
-Pour plus d’informations sur la manière d’ajouter un utilisateur invité à votre annuaire, consultez [Ajouter des utilisateurs Azure Active Directory B2B Collaboration dans le Portail Azure](../active-directory/b2b/add-users-administrator.md).
+Pour plus d’informations sur la manière d’ajouter un utilisateur invité à votre annuaire, consultez [Ajouter des utilisateurs Azure Active Directory B2B Collaboration dans le Portail Azure](../active-directory/external-identities/add-users-administrator.md).
 
 ### <a name="differences-for-guest-users"></a>Différences pour les utilisateurs invités
 
@@ -71,9 +71,9 @@ Les utilisateurs invités qui ont été affectés au rôle de coadministrateur p
 
 Vous vous attendiez sans doute à ce que l’utilisateur B puisse tout gérer. La raison de cette différence est que le compte Microsoft est ajouté à l’abonnement en tant qu’invité utilisateur et non en tant qu’utilisateur membre. Les utilisateurs invités disposent d’autorisations par défaut différentes dans Azure AD par rapport aux utilisateurs membres. Par exemple, les utilisateurs membres peuvent voir les autres utilisateurs dans Azure AD, ce que ne peuvent pas faire les utilisateurs invités. Les utilisateurs membres peuvent inscrire de nouveaux principaux de service dans Azure AD, ce que ne peuvent pas faire les utilisateurs invités.
 
-Si un utilisateur invité doit pouvoir effectuer ces tâches, une solution possible consiste à lui affecter les rôles Azure AD spécifiques dont l’utilisateur invité a besoin. Par exemple, dans le scénario précédent, vous pouvez attribuer le rôle [lecteur d’annuaire](../active-directory/users-groups-roles/directory-assign-admin-roles.md#directory-readers) pour pouvoir lire d’autres utilisateurs et affecter le rôle [développeur d’applications](../active-directory/users-groups-roles/directory-assign-admin-roles.md#application-developer) pour pouvoir créer des principaux de service. Pour plus d’informations sur les membres et les utilisateurs invités et leurs autorisations, consultez [Quelles sont les autorisations utilisateur par défaut dans Azure Active Directory ?](../active-directory/fundamentals/users-default-permissions.md). Pour plus d’informations sur l’octroi de l’accès pour les utilisateurs invités, consultez [Ajouter ou supprimer des attributions de rôle Azure pour les utilisateurs invités externes à l’aide du portail Azure](role-assignments-external-users.md).
+Si un utilisateur invité doit pouvoir effectuer ces tâches, une solution possible consiste à lui affecter les rôles Azure AD spécifiques dont l’utilisateur invité a besoin. Par exemple, dans le scénario précédent, vous pouvez attribuer le rôle [lecteur d’annuaire](../active-directory/roles/permissions-reference.md#directory-readers) pour pouvoir lire d’autres utilisateurs et affecter le rôle [développeur d’applications](../active-directory/roles/permissions-reference.md#application-developer) pour pouvoir créer des principaux de service. Pour plus d’informations sur les membres et les utilisateurs invités et leurs autorisations, consultez [Quelles sont les autorisations utilisateur par défaut dans Azure Active Directory ?](../active-directory/fundamentals/users-default-permissions.md). Pour plus d’informations sur l’octroi de l’accès pour les utilisateurs invités, consultez [Ajouter ou supprimer des attributions de rôle Azure pour les utilisateurs invités externes à l’aide du portail Azure](role-assignments-external-users.md).
 
-Notez que les [rôles intégrés Azure](../role-based-access-control/built-in-roles.md) sont différents des [rôles Azure AD](../active-directory/users-groups-roles/directory-assign-admin-roles.md). Les rôles intégrés n’accordent aucun accès à Azure AD. Pour plus d’informations, consultez [Comprendre les différents rôles](../role-based-access-control/rbac-and-directory-admin-roles.md).
+Notez que les [rôles intégrés Azure](../role-based-access-control/built-in-roles.md) sont différents des [rôles Azure AD](../active-directory/roles/permissions-reference.md). Les rôles intégrés n’accordent aucun accès à Azure AD. Pour plus d’informations, consultez [Comprendre les différents rôles](../role-based-access-control/rbac-and-directory-admin-roles.md).
 
 Pour plus d’informations comparant les utilisateurs membres et les utilisateurs invités, consultez [Quelles sont les autorisations d’utilisateur par défaut dans Azure Active Directory ?](../active-directory/fundamentals/users-default-permissions.md).
 
@@ -99,25 +99,25 @@ Pour plus d’informations comparant les utilisateurs membres et les utilisateur
 
 Seul l’administrateur de compte peut modifier l’administrateur de services fédérés d’un abonnement. Par défaut, quand vous vous inscrivez à un abonnement Azure, l’Administrateur de services est le même que l’Administrateur de compte. L’utilisateur avec le rôle Administrateur de compte n’a pas accès au portail Azure. L’utilisateur avec le rôle Administrateur de service a un accès complet au portail Azure. Si l’Administrateur de compte et l’Administrateur de service sont le même utilisateur et que vous remplacez l’Administrateur de service par un autre utilisateur, alors l’Administrateur de compte perd l’accès au portail Azure. Toutefois, l’administrateur de compte peut toujours utiliser le centre des comptes pour se réaffecter le rôle d’administrateur de services fédérés à lui-même.
 
-Procédez comme suit pour modifier l’administrateur de services fédérés dans le **centre des comptes**.
-
-### <a name="account-center"></a>Centre des comptes
+Procédez comme suit pour modifier l’administrateur de services fédérés dans le portail Azure.
 
 1. Vérifiez que votre scénario est pris en charge en vérifiant les [limites de modification de l’administrateur de services fédérés](#limitations-for-changing-the-service-administrator).
 
-1. Connectez-vous au [Centre des comptes](https://account.windowsazure.com/subscriptions) en tant qu’administrateur de compte.
+1. Connectez-vous au [portail Azure](https://portal.azure.com) en tant qu’administrateur de compte.
 
-1. Cliquez sur un abonnement.
+1. Ouvrez **Facturation et gestion des coûts** et sélectionnez un abonnement.
 
-1. Sur le côté droit, cliquez sur **Modifier les détails de l’abonnement**.
+1. Dans le volet de navigation gauche, cliquez sur **Propriétés**.
 
-    ![Capture d’écran montrant le bouton Modifier l’abonnement dans le Centre des comptes](./media/classic-administrators/editsub.png)
+1. Cliquez sur **Administrateur de services fédérés**.
 
-1. Dans la zone **ADMINISTRATEUR DE SERVICES** , entrez l’adresse de messagerie du nouvel administrateur de services fédérés.
+    ![Capture d’écran montrant les propriétés de l’abonnement dans le portail Azure](./media/classic-administrators/service-admin.png)
 
-    ![Capture d’écran montrant la zone de modification de l’adresse e-mail de l’administrateur de services fédérés](./media/classic-administrators/change-service-admin.png)
+1. Dans la page **Modifier l’administrateur de services fédérés**, entrez l’adresse e-mail du nouvel administrateur de services fédérés.
 
-1. Cliquez sur la coche pour enregistrer la modification.
+    ![Capture d’écran montrant la page Modifier l’administrateur de services fédérés](./media/classic-administrators/service-admin-edit.png)
+
+1. Cliquez sur **OK** pour enregistrer la modification.
 
 ### <a name="limitations-for-changing-the-service-administrator"></a>Limites de modification de l’Administrateur de service
 
@@ -140,9 +140,9 @@ Pour voir l’Administrateur de compte, procédez comme suit.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Ouvrez [Abonnements](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade) et sélectionnez un abonnement.
+1. Ouvrez **Facturation et gestion des coûts** et sélectionnez un abonnement.
 
-1. Cliquez sur **Propriétés**.
+1. Dans le volet de navigation gauche, cliquez sur **Propriétés**.
 
     L’administrateur de compte de l’abonnement s’affiche dans la zone **Administrateur de compte**.
 

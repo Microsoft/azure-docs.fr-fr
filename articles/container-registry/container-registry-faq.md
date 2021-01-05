@@ -3,18 +3,23 @@ title: Forum aux questions
 description: Réponses aux questions fréquemment posées sur le service Azure Container Registry
 author: sajayantony
 ms.topic: article
-ms.date: 03/18/2020
+ms.date: 09/18/2020
 ms.author: sajaya
-ms.openlocfilehash: 39b543c5f886b22d488198873b75cf76555692fa
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: a2cddc9bbe868a2d18ee8111aabf6db7dc8643cf
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82731642"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93346993"
 ---
 # <a name="frequently-asked-questions-about-azure-container-registry"></a>Forum aux questions sur Azure Container Registry
 
 Cet article aborde les questions fréquemment posées et les problèmes connus liés à Azure Container Registry.
+
+Pour obtenir des instructions sur le dépannage du registre, consultez :
+* [Résoudre les problèmes de connexion au registre](container-registry-troubleshoot-login.md)
+* [Résoudre les problèmes de réseau avec le Registre](container-registry-troubleshoot-access.md)
+* [Résoudre les problèmes de performances de registre](container-registry-troubleshoot-performance.md)
 
 ## <a name="resource-management"></a>Gestion des ressources
 
@@ -32,7 +37,7 @@ Oui. Voici [un modèle](https://github.com/Azure/azure-quickstart-templates/tree
 
 ### <a name="is-there-security-vulnerability-scanning-for-images-in-acr"></a>Existe-t-il une analyse de sécurité des vulnérabilités pour les images dans ACR ?
 
-Oui. Consultez la documentation [d’Azure Security Center](https://docs.microsoft.com/azure/security-center/azure-container-registry-integration), [de Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry/) et [d’Aqua](https://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry).
+Oui. Consultez la documentation [d’Azure Security Center](../security-center/defender-for-container-registries-introduction.md), [de Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry/) et [d’Aqua](https://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry).
 
 ### <a name="how-do-i-configure-kubernetes-with-azure-container-registry"></a>Comment configurer Kubernetes avec Azure Container Registry ?
 
@@ -119,7 +124,7 @@ Si vous êtes sur bash :
 az acr repository show-manifests -n myRegistry --repository myRepository --query "[?tags[0]==null].digest" -o tsv  | xargs -I% az acr repository delete -n myRegistry -t myRepository@%
 ```
 
-Pour PowerShell :
+Pour PowerShell :
 
 ```azurecli
 az acr repository show-manifests -n myRegistry --repository myRepository --query "[?tags[0]==null].digest" -o tsv | %{ az acr repository delete -n myRegistry -t myRepository@$_ }
@@ -254,8 +259,11 @@ Le contrôle des images est une fonctionnalité d’évaluation d’ACR. Vous po
 
 ### <a name="how-do-i-enable-anonymous-pull-access"></a>Comment activer l’accès par tirage (pull) anonyme ?
 
-La configuration d’un registre de conteneurs Azure pour l’accès par tirage (pull) anonyme (public) est actuellement une fonctionnalité en préversion. Pour activer l’accès public, veuillez ouvrir un ticket de support à https://aka.ms/acr/support/create-ticket. Pour plus d’informations, consultez le [Forum de commentaires Azure](https://feedback.azure.com/forums/903958-azure-container-registry/suggestions/32517127-enable-anonymous-access-to-registries).
+La configuration d’un registre de conteneurs Azure pour l’accès par tirage (pull) anonyme (public) est actuellement une fonctionnalité en préversion. Si vous avez [des ressources de jeton ou de mappage d’étendue (utilisateur)](./container-registry-repository-scoped-permissions.md) dans votre registre, supprimez-les avant de déclencher un ticket de support (les mappages d’étendue système peuvent être ignorés). Pour activer l’accès public, veuillez ouvrir un ticket de support à https://aka.ms/acr/support/create-ticket. Pour plus d’informations, consultez le [Forum de commentaires Azure](https://feedback.azure.com/forums/903958-azure-container-registry/suggestions/32517127-enable-anonymous-access-to-registries).
 
+> [!NOTE]
+> * Seules les API requises pour extraire une image connue sont accessibles de façon anonyme. Aucune autre API destinée à des opérations comme une liste d’étiquettes ou une liste de référentiels n’est accessible de manière anonyme.
+> * Avant de tenter une opération d’extraction anonyme, exécutez `docker logout` pour vous assurer que vous effacez les informations d’identification existantes de Docker.
 
 ## <a name="diagnostics-and-health-checks"></a>Diagnostics et contrôles d’intégrité
 
@@ -269,6 +277,7 @@ La configuration d’un registre de conteneurs Azure pour l’accès par tirage 
 - [Pourquoi le portail Azure ne liste-t-il pas tous mes dépôts ou étiquettes ?](#why-does-the-azure-portal-not-list-all-my-repositories-or-tags)
 - [Pourquoi le portail Azure ne parvient-il pas à récupérer les dépôts ou les étiquettes ?](#why-does-the-azure-portal-fail-to-fetch-repositories-or-tags)
 - [Pourquoi ma requête tirer (pull) ou envoyer (push) échoue-t-elle avec une opération non autorisée ?](#why-does-my-pull-or-push-request-fail-with-disallowed-operation)
+- [Le format du référentiel n’est pas valide ou n’est pas pris en charge](#repository-format-is-invalid-or-unsupported)
 - [Comment collecter les traces http sur Windows ?](#how-do-i-collect-http-traces-on-windows)
 
 ### <a name="check-health-with-az-acr-check-health"></a>Contrôler l’intégrité avec `az acr check-health`
@@ -435,9 +444,16 @@ Contactez votre administrateur réseau ou vérifiez la configuration et la conne
 ### <a name="why-does-my-pull-or-push-request-fail-with-disallowed-operation"></a>Pourquoi ma requête tirer (pull) ou envoyer (push) échoue-t-elle avec une opération non autorisée ?
 
 Voici quelques scénarios dans lesquels les opérations peuvent ne pas être autorisées :
-* Les registres classiques ne sont plus pris en charge. Effectuez une mise à niveau vers des [références SKU](https://aka.ms/acr/skus) à l’aide de [az acr update](https://docs.microsoft.com/cli/azure/acr?view=azure-cli-latest#az-acr-update) ou du portail Azure.
-* L’image ou le référentiel peuvent être verrouillés afin qu’il ne soit pas possible de les supprimer ou de les mettre à jour. Vous pouvez utiliser la commande [az acr show repository](https://docs.microsoft.com/azure/container-registry/container-registry-image-lock) pour afficher les attributs actuels.
+* Les registres classiques ne sont plus pris en charge. Effectuez une mise à niveau vers un [niveau de service](./container-registry-skus.md) pris en charge à l’aide de la commande [az acr update](/cli/azure/acr#az-acr-update) ou du portail Azure.
+* L’image ou le référentiel peuvent être verrouillés afin qu’il ne soit pas possible de les supprimer ou de les mettre à jour. Vous pouvez utiliser la commande [az acr show repository](./container-registry-image-lock.md) pour afficher les attributs actuels.
 * Certaines opérations ne sont pas autorisées si l’image est en contrôle. En savoir plus sur le [contrôle](https://github.com/Azure/acr/tree/master/docs/preview/quarantine).
+* Votre registre a peut-être atteint sa [limite de stockage](container-registry-skus.md#service-tier-features-and-limits).
+
+### <a name="repository-format-is-invalid-or-unsupported"></a>Le format du référentiel n’est pas valide ou n’est pas pris en charge
+
+Si vous voyez une erreur telle que « format de référentiel non pris en charge », « format non valide » ou « les données requises n’existent pas » lors de la spécification d’un nom de référentiel dans les opérations de référentiel, vérifiez l’orthographe du nom. Les noms de référentiel valides ne peuvent inclure que des caractères alphanumériques en minuscules, des points, des tirets, des tirets du bas et des barres obliques. 
+
+Pour connaître les règles complètes de nommage de référentiel, consultez la [spécification de distribution Open Container Initiative](https://github.com/docker/distribution/blob/master/docs/spec/api.md#overview).
 
 ### <a name="how-do-i-collect-http-traces-on-windows"></a>Comment collecter les traces http sur Windows ?
 

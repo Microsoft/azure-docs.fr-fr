@@ -6,12 +6,12 @@ author: eternovsky
 ms.author: evternov
 ms.date: 08/08/2018
 ms.reviewer: mbullwin
-ms.openlocfilehash: 121e4699bd6a72f6865d3a6ffdef58c1b3806047
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 17de697686485d695586ffa798196efb4a34c251
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79082759"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87092913"
 ---
 # <a name="correlating-application-insights-data-with-custom-data-sources"></a>Mise en corrélation de données Application Insights avec des sources de données personnalisées
 
@@ -35,15 +35,15 @@ Si vous ne l’avez pas déjà fait, configurez un nouvel espace de travail Log 
 
 Pour commencer à envoyer des données de journal dans Azure Monitor. Vous disposez de plusieurs options :
 
-- Pour un mécanisme synchrone, vous pouvez soit appeler directement [l’API Collecte de données](https://docs.microsoft.com/azure/log-analytics/log-analytics-data-collector-api) soit utiliser notre connecteur Logic App : il vous suffit de rechercher « Azure Log Analytics » et de sélectionner l’option « Envoyer des données » :
+- Pour un mécanisme synchrone, vous pouvez soit appeler directement [l’API Collecte de données](../platform/data-collector-api.md) soit utiliser notre connecteur Logic App : il vous suffit de rechercher « Azure Log Analytics » et de sélectionner l’option « Envoyer des données » :
 
   ![Capture d’écran choix et action](./media/custom-data-correlation/01-logic-app-connector.png)  
 
-- Pour une méthode asynchrone, utilisez l’API Collecte de données pour créer un pipeline de traitement. Pour plus d’informations, consultez [cet article](https://docs.microsoft.com/azure/log-analytics/log-analytics-create-pipeline-datacollector-api).
+- Pour une méthode asynchrone, utilisez l’API Collecte de données pour créer un pipeline de traitement. Pour plus d’informations, consultez [cet article](../platform/create-pipeline-datacollector-api.md).
 
 ## <a name="correlating-data"></a>Corrélation des données
 
-Application Insights s'appuie sur la plateforme de journaux Azure Monitor. Par conséquent, nous pouvons utiliser des [jointures inter-ressources](https://docs.microsoft.com/azure/log-analytics/log-analytics-cross-workspace-search) pour mettre en corrélation des données que nous avons ingérées dans Azure Monitor avec nos données Application Insights.
+Application Insights s'appuie sur la plateforme de journaux Azure Monitor. Par conséquent, nous pouvons utiliser des [jointures inter-ressources](../log-query/cross-workspace-query.md) pour mettre en corrélation des données que nous avons ingérées dans Azure Monitor avec nos données Application Insights.
 
 Par exemple, nous pouvons ingérer notre inventaire et nos emplacements de laboratoire dans une table appelée « LabLocations_CL » au sein d'un espace de travail Log Analytics appelé « myLA ». Si nous voulons ensuite passer en revue nos requêtes surveillées dans l'application Application Insights appelée « myAI » et mettre en corrélation les noms d'ordinateurs qui ont traité les requêtes avec les emplacements de ces ordinateurs stockés dans la table personnalisée mentionnée précédemment, nous pouvons exécuter la requête suivante à partir du contexte Application Insights ou Azure Monitor :
 
@@ -57,5 +57,5 @@ app('myAI').requests
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez la référence de [l’API Collecte de données](https://docs.microsoft.com/azure/log-analytics/log-analytics-data-collector-api).
-- En savoir plus sur les [jointures inter-ressources](https://docs.microsoft.com/azure/log-analytics/log-analytics-cross-workspace-search).
+- Consultez la référence de [l’API Collecte de données](../platform/data-collector-api.md).
+- En savoir plus sur les [jointures inter-ressources](../log-query/cross-workspace-query.md).

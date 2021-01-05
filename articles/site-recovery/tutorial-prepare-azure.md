@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 09/09/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: ba5ecc29edbcd69324500e87add846e4395ce0a3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0d697f2100360732666c9f5ea8050800dad154b4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067566"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88653815"
 ---
 # <a name="prepare-azure-for-on-premises-disaster-recovery-to-azure"></a>Préparer Azure pour la reprise d’activité locale sur Azure
 
@@ -62,7 +62,7 @@ Pour effectuer ces tâches, le rôle prédéfini de contributeur de machines vir
 6. Dans **Région**, sélectionnez la région dans laquelle le coffre doit se trouver. Nous utilisons **Europe Ouest**.
 7. Sélectionnez **Revoir + créer**.
 
-   ![Créer un coffre](./media/tutorial-prepare-azure/new-vault-settings.png)
+   ![Capture d’écran de la page Créer un coffre Recovery Services](./media/tutorial-prepare-azure/new-vault-settings.png)
 
    Le nouveau coffre est maintenant répertorié dans **Tableau de bord** > **Toutes les ressources** et dans la page principale **Coffres Recovery Services**.
 
@@ -81,7 +81,7 @@ Les machines locales sont répliquées sur des disques managés Azure. Durant le
 9. Nous laissons les options par défaut de la protection DDoS de base, sans point de terminaison de service ou pare-feu sur le réseau.
 9. Sélectionnez **Create** (Créer).
 
-   ![Créez un réseau virtuel](media/tutorial-prepare-azure/create-network.png)
+   ![Capture d’écran des options Créer un réseau virtuel](media/tutorial-prepare-azure/create-network.png)
 
 La création du réseau virtuel prend quelques secondes. Une fois qu’il est créé, vous le voyez dans le tableau de bord du portail Azure.
 
@@ -90,8 +90,8 @@ La création du réseau virtuel prend quelques secondes. Une fois qu’il est cr
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour la reprise d’activité VMware, [préparez l’infrastructure VMware locale](tutorial-prepare-on-premises-vmware.md).
+- Pour la reprise d’activité VMware, [préparez l’infrastructure VMware locale](./vmware-azure-tutorial-prepare-on-premises.md).
 - Pour la reprise d’activité Hyper-V, [préparez les serveurs Hyper-V locaux](hyper-v-prepare-on-premises-tutorial.md).
 - Pour la reprise d’activité du serveur physique, [configurez le serveur de configuration et l’environnement source](physical-azure-disaster-recovery.md)
-- [En savoir plus](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview) sur les réseaux Azure.
-- [En savoir plus](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview) sur les disques managés.
+- [En savoir plus](../virtual-network/virtual-networks-overview.md) sur les réseaux Azure.
+- [En savoir plus](../virtual-machines/managed-disks-overview.md) sur les disques managés.

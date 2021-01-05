@@ -1,18 +1,18 @@
 ---
 title: 'Tutoriel : Gérer la gouvernance des balises'
 description: Dans ce tutoriel, vous utilisez l’effet modify d’Azure Policy pour créer et appliquer un modèle de gouvernance des balises sur des ressources nouvelles ou existantes.
-ms.date: 04/21/2020
+ms.date: 10/05/2020
 ms.topic: tutorial
-ms.openlocfilehash: 6319bbde2fdc8f78e2743dd5f1565c8680433fea
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 9efeb27151cd3a32741f1bdb6d1d90d3304c5874
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759068"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91876275"
 ---
 # <a name="tutorial-manage-tag-governance-with-azure-policy"></a>Tutoriel : Gérer la gouvernance des balises avec Azure Policy
 
-Les [balises](../../../azure-resource-manager/management/tag-resources.md) représentent un aspect essentiel de l’organisation des ressources Azure dans une taxonomie. Dès lors que les [meilleures pratiques de gestion des balises](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#naming-and-tagging-resources) sont suivies, les balises peuvent servir de base à l’application des stratégies d’entreprise avec Azure Policy ou au [suivi des coûts avec Cost Management](../../../cost-management-billing/costs/cost-mgt-best-practices.md#organize-and-tag-your-resources).
+Les [balises](../../../azure-resource-manager/management/tag-resources.md) représentent un aspect essentiel de l’organisation des ressources Azure dans une taxonomie. Dès lors que les [meilleures pratiques de gestion des balises](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging#naming-and-tagging-resources) sont suivies, les balises peuvent servir de base à l’application des stratégies d’entreprise avec Azure Policy ou au [suivi des coûts avec Cost Management](../../../cost-management-billing/costs/cost-mgt-best-practices.md#tag-shared-resources).
 Quels que soient l’usage et la finalité des balises utilisées, il est important de pouvoir en ajouter, en modifier et en supprimer rapidement sur des ressources Azure. Pour voir si votre ressource Azure prend en charge l’étiquetage, consultez [Prise en charge des étiquettes](../../../azure-resource-manager/management/tag-support.md).
 
 L’effet [modify](../concepts/effects.md#modify) d’Azure Policy est conçu pour faciliter la gouvernance des balises à toutes les phases de gouvernance des ressources. **modify** est utile dans les cas suivants :
@@ -45,7 +45,7 @@ Comme pour toute bonne implémentation des contrôles de gouvernance, les exigen
 
 ## <a name="configure-the-costcenter-tag"></a>Configurer la balise CostCenter
 
-Dans un environnement Azure géré par Azure Policy en particulier, les spécifications de balise _CostCenter_ exigent les mesures suivantes :
+Dans un environnement Azure géré par Azure Policy en particulier, les spécifications d’étiquette _CostCenter_ exigent les mesures suivantes :
 
 - Refuser les groupes de ressources qui ne contiennent pas la balise _CostCenter_
 - Modifier les ressources qui ne contiennent pas la balise _CostCenter_ en l’ajoutant à partir du groupe de ressources parent
@@ -107,7 +107,7 @@ Cette règle de stratégie utilise l’opération **add** au lieu de **addOrRepl
 
 ## <a name="configure-the-env-tag"></a>Configurer la balise Env
 
-Dans un environnement Azure géré par Azure Policy en particulier, les spécifications de balise _Env_ exigent les mesures suivantes :
+Dans un environnement Azure géré par Azure Policy en particulier, les spécifications d’étiquette _Env_ exigent les mesures suivantes :
 
 - Modifier la balise _Env_ sur le groupe de ressources en fonction du schéma de nommage du groupe de ressources
 - Modifier la balise _Env_ de toutes les ressources du groupe de ressources pour qu’elle soit identique à celle du groupe de ressources parent
@@ -126,7 +126,12 @@ Une stratégie [modify](../concepts/effects.md#modify) est nécessaire pour chac
         {
             "field": "name",
             "like": "prd-*"
+        },
+        {
+            "field": "tags['Env']",
+            "notEquals": "Production"
         }
+
     ]
     },
     "then": {

@@ -4,16 +4,15 @@ ms.service: service-bus-relay
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: clemensv
-ms.openlocfilehash: 22d5d24eca73962d165fd0de56c2e70da641b15d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b7ad91a089fdbfb28b31d9fc67b76d38f586ce16
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177294"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96026475"
 ---
 > [!div class="op_single_selector"]
-> * [NET](../articles/service-bus-relay/relay-hybrid-connections-dotnet-get-started.md)
-> * [Node.JS](../articles/service-bus-relay/relay-hybrid-connections-node-get-started.md)
+> * [NET](../articles/azure-relay/relay-hybrid-connections-dotnet-get-started.md)
+> * [Node.JS](../articles/azure-relay/relay-hybrid-connections-node-get-started.md)
 > 
-> 
-
+>

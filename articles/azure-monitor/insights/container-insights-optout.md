@@ -3,12 +3,13 @@ title: Arrêter la surveillance de votre cluster Azure Kubernetes Service | Micr
 description: Cet article explique comment arrêter la surveillance de votre cluster Azure AKS avec Azure Monitor pour conteneurs.
 ms.topic: conceptual
 ms.date: 08/19/2019
-ms.openlocfilehash: 618a4d7e10212dd2b042724b1ea11c97920dad57
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 99c4ecb6c8b77f1576f25816ba486ed262249c32
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234477"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97695704"
 ---
 # <a name="how-to-stop-monitoring-your-azure-kubernetes-service-aks-with-azure-monitor-for-containers"></a>Guide pratique pour arrêter la supervision de votre cluster Azure Kubernetes Service (AKS) avec Azure Monitor pour conteneurs
 
@@ -17,7 +18,7 @@ Après avoir activé la supervision de votre cluster AKS, vous pouvez l'arrêter
 
 ## <a name="azure-cli"></a>Azure CLI
 
-Utilisez la commande [az aks disable-addons](https://docs.microsoft.com/cli/azure/aks?view=azure-cli-latest#az-aks-disable-addons) pour désactiver Azure Monitor pour conteneurs. La commande supprime l’agent des nœuds du cluster, mais ne supprime pas la solution ou les données déjà collectées et stockées dans votre ressource Azure Monitor.  
+Utilisez la commande [az aks disable-addons](/cli/azure/aks?view=azure-cli-latest#az-aks-disable-addons) pour désactiver Azure Monitor pour conteneurs. La commande supprime l’agent des nœuds du cluster, mais ne supprime pas la solution ou les données déjà collectées et stockées dans votre ressource Azure Monitor.  
 
 ```azurecli
 az aks disable-addons -a monitoring -n MyExistingManagedCluster -g MyExistingManagedClusterRG
@@ -34,10 +35,10 @@ Si vous n’êtes pas familiarisé avec le déploiement de ressources à l’aid
 * [Déployer des ressources à l’aide de modèles Resource Manager et de l’interface de ligne de commande Azure](../../azure-resource-manager/templates/deploy-cli.md)
 
 >[!NOTE]
->Le modèle doit être déployé dans le même groupe de ressources du cluster. Si vous omettez d’autres propriétés ou modules complémentaires lors de l’utilisation de ce modèle, ils peuvent être supprimés du cluster. Par exemple, *enableRBAC* pour les stratégies RBAC implémentées dans votre cluster ou *aksResourceTagValues* si des balises sont spécifiées pour le cluster AKS.  
+>Le modèle doit être déployé dans le même groupe de ressources du cluster. Si vous omettez d’autres propriétés ou modules complémentaires lors de l’utilisation de ce modèle, ils peuvent être supprimés du cluster. Par exemple, *enableRBAC* pour les stratégies Kubernetes RBAC implémentées dans votre cluster ou *aksResourceTagValues* si des balises sont spécifiées pour le cluster AKS.  
 >
 
-Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI 2.0.27 ou version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI 2.0.27 ou version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 ### <a name="create-template"></a>Créer un modèle
 
@@ -134,7 +135,7 @@ Exécutez la commande suivante avec Azure CLI sur Linux pour supprimer la soluti
 ```azurecli
 az login   
 az account set --subscription "Subscription Name"
-az group deployment create --resource-group <ResourceGroupName> --template-file ./OptOutTemplate.json --parameters @./OptOutParam.json  
+az deployment group create --resource-group <ResourceGroupName> --template-file ./OptOutTemplate.json --parameters @./OptOutParam.json  
 ```
 
 Le changement de configuration peut prendre quelques minutes. Lorsqu’il est terminé, un message similaire au suivant s’affiche avec les résultats :
@@ -164,4 +165,4 @@ ProvisioningState       : Succeeded
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si l’espace de travail a été créé uniquement pour prendre en charge la surveillance du cluster et qu’il n’est plus nécessaire, vous devez le supprimer manuellement. Si vous n’êtes pas familiarisé avec la suppression d’un espace de travail, consultez la rubrique [Supprimer un espace de travail Azure Log Analytics avec le portail Azure](../../log-analytics/log-analytics-manage-del-workspace.md). N’oubliez pas l’**ID de ressource de l’espace de travail** copiée précédemment à l’étape 4 car vous en aurez besoin.
+Si l’espace de travail a été créé uniquement pour prendre en charge la surveillance du cluster et qu’il n’est plus nécessaire, vous devez le supprimer manuellement. Si vous n’êtes pas familiarisé avec la suppression d’un espace de travail, consultez la rubrique [Supprimer un espace de travail Azure Log Analytics avec le portail Azure](../platform/delete-workspace.md). N’oubliez pas l’**ID de ressource de l’espace de travail** copiée précédemment à l’étape 4 car vous en aurez besoin.

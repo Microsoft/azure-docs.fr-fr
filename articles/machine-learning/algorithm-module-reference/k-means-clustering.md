@@ -8,21 +8,21 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 02/19/2020
-ms.openlocfilehash: 9606768288cc74afc24491149eb471944f45e2dc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/04/2020
+ms.openlocfilehash: 7e0b61c1ca6ae30044e4c9d4705bdce01eac1942
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77921162"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93323693"
 ---
 # <a name="module-k-means-clustering"></a>Module : Clustering k-moyennes
 
-Cet article décrit comment utiliser le module *Clustering k-moyennes* dans le concepteur Azure Machine Learning Studio (préversion) pour créer un modèle de clustering k-moyennes non formé. 
+Cet article décrit comment utiliser le module *Clustering k-moyennes* dans le concepteur Azure Machine Learning Studio pour créer un modèle de clustering k-moyennes non formé. 
  
 K-moyennes est l’un des algorithmes *non supervisé* les plus simples et les plus connus. Vous pouvez utiliser cet algorithme pour diverses tâches d’apprentissage automatique, telles que : 
 
-* [Détection de données anormales](https://msdn.microsoft.com/magazine/jj891054.aspx).
+* [Détection de données anormales](/archive/msdn-magazine/2013/february/data-clustering-detecting-abnormal-data-using-k-means-clustering).
 * Clustering de documents de texte.
 * Analyse des jeux de données avant d’utiliser d’autres méthodes de classification ou de régression. 
 
@@ -60,9 +60,9 @@ Lorsqu’il traite les données d’apprentissage, l’algorithme k-moyennes com
   
     -   **Single Parameter** (Paramètre unique) : Si vous connaissez les paramètres exacts que vous souhaitez utiliser dans le modèle de clustering, vous pouvez fournir un ensemble spécifique de valeurs comme arguments.  
   
-3.  Pour le **nombre de centroïdes**, entrez le nombre de clusters par lesquels doit commencer l’algorithme.  
+3.  Pour le **nombre de centroïdes** , entrez le nombre de clusters par lesquels doit commencer l’algorithme.  
   
-     Il n’est pas garanti que le modèle produise exactement ce nombre de clusters. L’algorithme commence par ce nombre de points de données et effectue une itération pour trouver la configuration optimale.  
+     Il n’est pas garanti que le modèle produise exactement ce nombre de clusters. L’algorithme commence par ce nombre de points de données et effectue une itération pour trouver la configuration optimale. Vous pouvez consulter le [code source de sklearn](https://github.com/scikit-learn/scikit-learn/blob/fd237278e/sklearn/cluster/_kmeans.py#L1069).
   
 4.  La propriété **Initialisation** est utilisé pour spécifier l’algorithme utilisé pour définir la configuration initiale du cluster.  
   
@@ -79,17 +79,17 @@ Lorsqu’il traite les données d’apprentissage, l’algorithme k-moyennes com
          L’algorithme **k-moyennes ++** a été proposé en 2007 par David Arthur et Sergei Vassilvitskii dans le but d’éviter un clustering pauvre par l’algorithme k-moyennes standard. La méthode **k-moyennes ++** améliore la méthode k-moyennes standard via une méthode différente dans le choix des centres de cluster initiaux.  
   
     
-5.  Pour **Valeur de départ numérique aléatoire**, vous pouvez éventuellement saisir une valeur à utiliser comme valeur initiale pour l’initialisation de cluster. Cette valeur peut avoir un effet significatif sur la sélection du cluster.  
+5.  Pour **Valeur de départ numérique aléatoire** , vous pouvez éventuellement saisir une valeur à utiliser comme valeur initiale pour l’initialisation de cluster. Cette valeur peut avoir un effet significatif sur la sélection du cluster.  
   
-6.  Pour **Métrique**, choisissez la fonction à utiliser pour mesurer la distance entre des vecteurs de cluster, ou entre les nouveaux points de données et le centroïde choisi au hasard. Azure Machine Learning prend en charge les métriques de distance de cluster suivantes :  
+6.  Pour **Métrique** , choisissez la fonction à utiliser pour mesurer la distance entre des vecteurs de cluster, ou entre les nouveaux points de données et le centroïde choisi au hasard. Azure Machine Learning prend en charge les métriques de distance de cluster suivantes :  
   
     -   **Euclidienne** : La distance Euclidienne est couramment utilisée pour mesure l’écart de cluster pour le clustering k-moyennes. Cette métrique est recommandée car elle minimise la distance moyenne entre les points et les centroïdes.
   
-7.  Pour **Itérations**, saisissez le nombre d’itération que l’algorithme doit effectuer sur les données formées avant de finaliser la sélection des centroïdes.  
+7.  Pour **Itérations** , saisissez le nombre d’itération que l’algorithme doit effectuer sur les données formées avant de finaliser la sélection des centroïdes.  
   
      Vous pouvez ajuster ce paramètre pour équilibrer la précision en fonction du temps de formation.  
   
-8.  Pour **Attribuer un mode d’étiquette**, choisissez une option qui spécifie comment doit être gérée une colonne d’étiquette, si présente dans le jeu de données.  
+8.  Pour **Attribuer un mode d’étiquette** , choisissez une option qui spécifie comment doit être gérée une colonne d’étiquette, si présente dans le jeu de données.  
   
      Étant donné que le clustering k-moyennes est une méthode d’apprentissage automatique non supervisé, les étiquettes sont facultatives. Toutefois, si votre jeu de données dispose déjà d’une colonne d’étiquette, vous pouvez utiliser ces valeurs pour guider la sélection des clusters, ou vous pouvez spécifier que les valeurs doivent être ignorées.  
   
@@ -105,7 +105,7 @@ Lorsqu’il traite les données d’apprentissage, l’algorithme k-moyennes com
 
 10. Effectuez l’apprentissage du modèle.  
   
-    -   Si vous définissez le **mode Create trainer** (Créer formateur) sur **Paramètre unique**, ajoutez un jeu de données balisé et formez le modèle à l’aide du module [Train Clustering Model](train-clustering-model.md).  
+    -   Si vous définissez le **mode Create trainer** (Créer formateur) sur **Paramètre unique** , ajoutez un jeu de données balisé et formez le modèle à l’aide du module [Train Clustering Model](train-clustering-model.md).  
   
 ## <a name="results"></a>Résultats
 
@@ -145,4 +145,4 @@ En général, avec les modèles de clustering, il est possible qu’une configur
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

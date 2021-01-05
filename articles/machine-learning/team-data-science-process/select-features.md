@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 1127a470a48660ffffa892d24c9f2991ec64c8e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 940d4c465acb5e8478d2b204ab5b9b18c79254f0
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76716680"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93321315"
 ---
 # <a name="feature-selection-in-the-team-data-science-process-tdsp"></a>Sélection de fonctionnalités dans le processus TDSP (Team Data Science Process)
 Cet article explique les finalités de la sélection de fonctionnalités et fournit des exemples de son rôle dans le processus d’amélioration des données de l’apprentissage automatique. Ces exemples sont tirés d’Azure Machine Learning Studio.
@@ -26,7 +26,7 @@ La conception et la sélection de fonctionnalités constituent une partie du pro
 * **Ingénierie des caractéristiques** : ce processus tente de créer des caractéristiques supplémentaires pertinentes à partir de caractéristiques brutes existantes dans les données et d’augmenter la performance de prédiction de l’algorithme d’apprentissage.
 * **Sélection de caractéristiques** : ce processus sélectionne le sous-ensemble clé des caractéristiques de données d’origine afin de réduire la dimensionnalité du problème d’apprentissage.
 
-En général, l’**ingénierie de caractéristiques** s’applique d’abord à la génération de caractéristiques supplémentaires. L’étape de **sélection de caractéristiques** est alors effectuée pour éliminer les caractéristiques inutiles, redondantes ou fortement corrélées.
+En général, l’ **ingénierie de caractéristiques** s’applique d’abord à la génération de caractéristiques supplémentaires. L’étape de **sélection de caractéristiques** est alors effectuée pour éliminer les caractéristiques inutiles, redondantes ou fortement corrélées.
 
 ## <a name="filter-features-from-your-data---feature-selection"></a>Filtrage des caractéristiques à partir de vos données : sélection de caractéristiques
 La sélection de caractéristiques peut être utilisée pour les tâches de classification ou de régression. L'objectif est de sélectionner un sous-ensemble des caractéristiques du jeu de données d'origine qui réduit ses dimensions à l'aide d'un ensemble minimal de caractéristiques pour représenter l'écart de quantité maximum dans les données. Ce sous-ensemble de caractéristiques est utilisé pour l’apprentissage du modèle. La sélection de caractéristiques a deux principaux objectifs.
@@ -64,7 +64,6 @@ La conception et la sélection de fonctionnalités augmentent toutes deux l'effi
 Il n’est pas toujours nécessaire d’effectuer l’ingénierie de caractéristiques ou la sélection des caractéristiques. Que cela soit nécessaire ou non dépend des données collectées, de l’algorithme sélectionné et des objectifs de l’expérience.
 
 <!-- Module References -->
-[feature-hashing]: https://msdn.microsoft.com/library/azure/c9a82660-2d9c-411d-8122-4d9e0b3ce92a/
-[filter-based-feature-selection]: https://msdn.microsoft.com/library/azure/918b356b-045c-412b-aa12-94a1d2dad90f/
-[fisher-linear-discriminant-analysis]: https://msdn.microsoft.com/library/azure/dcaab0b2-59ca-4bec-bb66-79fd23540080/
-
+[feature-hashing]: /azure/machine-learning/studio-module-reference/feature-hashing
+[filter-based-feature-selection]: /previous-versions/azure/dn905854(v=azure.100)
+[fisher-linear-discriminant-analysis]: /azure/machine-learning/studio-module-reference/fisher-linear-discriminant-analysis

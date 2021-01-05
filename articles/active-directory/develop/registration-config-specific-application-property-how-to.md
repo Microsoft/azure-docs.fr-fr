@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: conceptual
 ms.date: 06/28/2019
 ms.author: ryanwi
-ms.openlocfilehash: c44575ca43063388d5c65855542cf15700d2cb5a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1469fcfa68b10353b78d31ccc758c61bf7746692
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80883166"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88120692"
 ---
 # <a name="azure-portal-registration-fields-for-custom-developed-apps"></a>Champs d’inscription du portail Azure pour les applications personnalisées
 
@@ -38,7 +38,7 @@ Cet article décrit brièvement tous les champs disponibles dans le formulaire d
 |------------------|------------------------------------------------------------------------------------------|
 | Nom             | Le nom de l’application. Il doit être composé de quatre caractères minimum.                |
 | Types de comptes pris en charge| Sélectionnez les comptes que vous souhaitez que votre application prenne en charge : les comptes dans cet annuaire organisationnel uniquement, les comptes dans n’importe quel annuaire organisationnel ou les comptes dans n’importe quel annuaire organisationnel et compte Microsoft personnel.  |
-| URI de redirection (facultatif) | sélectionnez le type d’application que vous créez, **Web** ou **Client public (mobile et bureau)** , puis entrez l’URI de redirection (ou URL de réponse) de votre application. Pour les applications web, indiquez l’URL de base de votre application. Par exemple, http://localhost:31544 peut être l’URL pour une application web en cours d’exécution sur votre ordinateur local. Les utilisateurs peuvent utiliser cette URL pour se connecter à une application web cliente. Pour les applications de client public, indiquez l’URI utilisé par Azure AD pour retourner les réponses de jeton. Entrez une valeur spécifique de votre application, par exemple, myapp://auth. Pour voir des exemples spécifiques pour les applications web ou natives, consultez les [Guides de démarrage rapides](https://docs.microsoft.com/azure/active-directory/develop).|
+| URI de redirection (facultatif) | sélectionnez le type d’application que vous créez, **Web** ou **Client public (mobile et bureau)** , puis entrez l’URI de redirection (ou URL de réponse) de votre application. Pour les applications web, indiquez l’URL de base de votre application. Par exemple, http://localhost:31544 peut être l’URL pour une application web en cours d’exécution sur votre ordinateur local. Les utilisateurs peuvent utiliser cette URL pour se connecter à une application web cliente. Pour les applications de client public, indiquez l’URI utilisé par Azure AD pour retourner les réponses de jeton. Entrez une valeur spécifique de votre application, par exemple, myapp://auth. Pour voir des exemples spécifiques pour les applications web ou natives, consultez les [Guides de démarrage rapides](./index.yml).|
 
 Après avoir rempli les champs ci-dessus, l’application est inscrite dans le portail Azure et vous êtes redirigé vers la page de vue d’ensemble de l’application. Les pages des paramètres dans le volet gauche, sous **Gérer**, ont plus de champs pour personnaliser votre application. Les tableaux ci-dessous décrivent tous les champs. Vous voyez uniquement un sous-ensemble de ces champs. Cet affichage peut changer si vous avez créé une application web ou une application cliente publique.
 

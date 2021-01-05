@@ -13,12 +13,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 09/10/2019
   ms.author: aahi
-  ms.openlocfilehash: 26632aebbd6cddd1463064b397a2f42071a5d518
-  ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+  ms.openlocfilehash: 7e0fe85007aae69bf79557e0f094e275f538d280
+  ms.sourcegitcommit: e0ec3c06206ebd79195d12009fd21349de4a995d
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/22/2020
-  ms.locfileid: "81757304"
+  ms.lasthandoff: 12/18/2020
+  ms.locfileid: "97683430"
 landingContent:
 - title: À propos de l’API Détecteur d’anomalies
   linkLists:
@@ -86,6 +86,8 @@ landingContent:
       url: anomaly-detector-container-configuration.md
     - text: Déployer une instance de conteneur sur Azure
       url: how-to/deploy-anomaly-detection-on-container-instances.md
+    - text: Déployer sur IoT Edge
+      url: how-to/deploy-anomaly-detection-on-iot-edge.md
   - linkListType: video
     links:
     - text: Utiliser le détecteur d’anomalies localement avec la prise en charge des conteneurs
@@ -98,6 +100,12 @@ landingContent:
       url: https://aka.ms/adadvisorsjoin
     - text: Contenu recommandé généré par les utilisateurs
       url: user-generated-content.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/anomaly-detector/context/context
 - title: Informations de référence
   linkLists:
   - linkListType: reference
@@ -113,6 +121,6 @@ landingContent:
     - text: Kit de développement logiciel (SDK) Node.js
       url: https://go.microsoft.com/fwlink/?linkid=2090788
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+      url: /powershell/module/az.cognitiveservices/#cognitive_services
     - text: Azure CLI
       url: /cli/azure/cognitiveservices#az-cognitiveservices-list

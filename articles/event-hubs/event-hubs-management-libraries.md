@@ -1,21 +1,15 @@
 ---
 title: Bibliothèques de gestion – Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des informations à propos de la bibliothèque que vous pouvez utiliser pour gérer les espaces de noms et les entités Azure Event Hubs à partir de .NET.
-services: event-hubs
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
-ms.devlang: dotnet
 ms.topic: article
-ms.custom: seodec18
-ms.date: 12/06/2018
-ms.author: shvija
-ms.openlocfilehash: 431fe04461f422274697d1e91c4b56e914ce2d4e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 74392fbf0b2c0b81898410af8027a4f13fc52b67
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60746656"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89013994"
 ---
 # <a name="event-hubs-management-libraries"></a>Bibliothèque de gestion des Event Hubs
 
@@ -33,7 +27,7 @@ Pour commencer à utiliser les bibliothèques de gestion d’Event Hubs, vous de
 
 * [Utiliser le portail Azure pour créer une application et un principal du service Active Directory pouvant accéder aux ressources](../active-directory/develop/howto-create-service-principal-portal.md)
 * [Créer un principal du service pour accéder aux ressources à l’aide d’Azure PowerShell](../active-directory/develop/howto-authenticate-service-principal-powershell.md)
-* [Créer un principal du service pour accéder aux ressources à l’aide de l’interface de ligne de commande (CLI) Azure](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md)
+* [Créer un principal du service pour accéder aux ressources à l’aide de l’interface de ligne de commande (CLI) Azure](/cli/azure/create-an-azure-service-principal-azure-cli)
 
 Ces didacticiels vous fournissent un `AppId` (ID de client), un `TenantId` et un `ClientSecret` (clé d’authentification), tous étant utilisés pour l’authentification par les bibliothèques de gestion. Vous devez disposer des autorisations **Propriétaire** pour le groupe de ressources à utiliser pour l’exécution.
 

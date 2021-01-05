@@ -3,15 +3,16 @@ title: Prise en main du Kit de développement logiciel (SDK) WebJobs
 description: Introduction au Kit de développement logiciel (SDK) WebJobs pour le traitement en arrière-plan basé sur les événements. Découvrez comment accéder aux données des services Azure et des services tiers.
 author: ggailey777
 ms.devlang: dotnet
+ms.custom: devx-track-csharp
 ms.topic: article
 ms.date: 02/18/2019
 ms.author: glenga
-ms.openlocfilehash: 287b58f85cad0082ac782a20cdfb0b9b9ea810e7
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 4a22602dd9638b981cfe3d8bae9b5cdaacbf90dc
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743616"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91652038"
 ---
 # <a name="get-started-with-the-azure-webjobs-sdk-for-event-driven-background-processing"></a>Prise en main du Kit de développement logiciel (SDK) Azure WebJobs pour le traitement en arrière-plan basé sur les événements
 
@@ -183,11 +184,11 @@ Vous pouvez désormais ajouter une fonction qui est déclenchée par des message
 
    L’attribut `QueueTrigger` indique au runtime d’appeler cette fonction lorsqu’un nouveau message est écrit dans une file d’attente de stockage Azure appelée `queue`. Le contenu du message en file d’attente est fourni pour le code de méthode dans le paramètre `message`. Le corps de la méthode correspond à l’endroit où vous traitez les données du déclencheur. Dans cet exemple, le code ne fait qu’enregistrer le message.
 
-   Le paramètre `message` ne doit pas nécessairement être une chaîne. Vous pouvez également le lier à un objet JSON, un tableau d’octets ou un objet [CloudQueueMessage](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueuemessage). Consultez la section relative à [l’utilisation des déclencheurs de file d’attente](/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp#usage). Chaque type de liaison (par exemple, des files d’attente, des objets blob ou des tables) dispose d’un ensemble différent de types de paramètre auquel vous pouvez lier des éléments.
+   Le paramètre `message` ne doit pas nécessairement être une chaîne. Vous pouvez également le lier à un objet JSON, un tableau d’octets ou un objet [CloudQueueMessage](/dotnet/api/microsoft.azure.storage.queue.cloudqueuemessage). Consultez la section relative à [l’utilisation des déclencheurs de file d’attente](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#usage). Chaque type de liaison (par exemple, des files d’attente, des objets blob ou des tables) dispose d’un ensemble différent de types de paramètre auquel vous pouvez lier des éléments.
 
 ## <a name="create-a-storage-account"></a>Créez un compte de stockage.
 
-L’émulateur de stockage Azure exécuté localement ne possède pas toutes les fonctionnalités nécessaires au Kit de développement logiciel (SDK) WebJobs. Dans cette section, vous allez donc créer un compte de stockage dans Azure et configurer le projet pour l’utiliser. Si vous disposez déjà d'un compte de stockage, passez à l’étape 6.
+L’émulateur de Stockage Azure exécuté localement ne possède pas toutes les fonctionnalités nécessaires au Kit de développement logiciel (SDK) WebJobs. Dans cette section, vous allez donc créer un compte de stockage dans Azure et configurer le projet pour l’utiliser. Si vous disposez déjà d'un compte de stockage, passez à l’étape 6.
 
 1. Ouvrez **l’Explorateur de serveurs** dans Visual Studio et connectez-vous à Azure. Cliquez avec le bouton droit sur le nœud **Azure**, puis sélectionner **Se connecter à un abonnement Microsoft Azure**.
 
@@ -263,13 +264,13 @@ Dans cette section, vous allez générer et exécuter le projet localement et d�
 
 1. Entrez *file d’attente* comme nom de la file d’attente, puis sélectionnez **OK**.
 
-   ![Créer la file d’attente](./media/webjobs-sdk-get-started/create-queue.png)
+   ![Capture d’écran montrant où vous créez la file d’attente et la nommez « file d’attente ». ](./media/webjobs-sdk-get-started/create-queue.png)
 
 1. Cliquez avec le bouton droit sur le nœud de la nouvelle file d’attente, puis sélectionnez **Afficher la file d’attente**.
 
 1. Sélectionnez l’icône **Ajouter un message**.
 
-   ![Créer la file d’attente](./media/webjobs-sdk-get-started/create-queue-message.png)
+   ![Capture d’écran mettant en évidence l’icône Ajouter un message.](./media/webjobs-sdk-get-started/create-queue-message.png)
 
 1. Dans la boîte de dialogue **Ajouter un message**, entrez *Hello World!* en tant que **Texte du message**, puis sélectionnez **OK**. La file d'attente contient maintenant un message.
 
@@ -279,7 +280,7 @@ Dans cette section, vous allez générer et exécuter le projet localement et d�
 
    Comme vous avez utilisé l’attribut `QueueTrigger` dans la fonction `ProcessQueueMessage`, le runtime du Kit de développement logiciel (SDK) WeJobs écoute les messages en file d’attente lors du démarrage. Il recherche un nouveau message dans la file d’attente nommée *file d’attente* et appelle la fonction.
 
-   En raison de la [temporisation exponentielle de l’interrogation de la file d’attente](/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp#polling-algorithm), 2 minutes peuvent être nécessaires au runtime pour trouver le message et appeler la fonction. Ce délai d’attente peut être réduit en lançant l’exécution en [mode de développement](webjobs-sdk-how-to.md#host-development-settings).
+   En raison de la [temporisation exponentielle de l’interrogation de la file d’attente](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#polling-algorithm), 2 minutes peuvent être nécessaires au runtime pour trouver le message et appeler la fonction. Ce délai d’attente peut être réduit en lançant l’exécution en [mode de développement](webjobs-sdk-how-to.md#host-development-settings).
 
    La sortie de console se présente ainsi :
 
@@ -310,7 +311,7 @@ Dans cette section, vous allez effectuer les tâches suivantes pour configurer l
 
 ### <a name="create-app-service-app-and-application-insights-instance"></a>Créer une application App Service et une instance Application Insights
 
-1. Si vous ne disposez pas déjà d’une application App Service que vous pouvez utiliser, [créez-en une](app-service-web-get-started-dotnet-framework.md). Lorsque vous créez votre application, vous pouvez également créer une ressource Application Insights connectée. Lorsque vous faites cela, `APPINSIGHTS_INSTRUMENTATIONKEY` est défini pour vous dans votre application.
+1. Si vous ne disposez pas déjà d’une application App Service que vous pouvez utiliser, [créez-en une](quickstart-dotnet-framework.md). Lorsque vous créez votre application, vous pouvez également créer une ressource Application Insights connectée. Lorsque vous faites cela, `APPINSIGHTS_INSTRUMENTATIONKEY` est défini pour vous dans votre application.
 
 1. Si vous ne disposez pas déjà d’une ressource Application Insights que vous pouvez utiliser, [créez-en une](../azure-monitor/app/create-new-resource.md ). Définissez l’option **Type d’application** sur **Général** et ignorez les sections qui suivent **Copier la clé d’instrumentation**.
 
@@ -443,7 +444,7 @@ Lors du déploiement, vous créez une instance App Service dans laquelle exécut
 1. Actualisez la page **File d’attente** ; le nouveau message disparaît, car il a été traité par la fonction qui s’exécute dans Azure.
 
    > [!TIP]
-   > Si vous procédez au test dans Azure, utilisez le [mode de développement](webjobs-sdk-how-to.md#host-development-settings) pour vous assurer qu’une fonction de déclenchement de file d’attente est appelée immédiatement et éviter les retards dus à la [temporisation exponentielle de l’interrogation de la file d’attente](/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=csharp#polling-algorithm).
+   > Si vous procédez au test dans Azure, utilisez le [mode de développement](webjobs-sdk-how-to.md#host-development-settings) pour vous assurer qu’une fonction de déclenchement de file d’attente est appelée immédiatement et éviter les retards dus à la [temporisation exponentielle de l’interrogation de la file d’attente](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#polling-algorithm).
 
 ### <a name="view-logs-in-application-insights"></a>Afficher les journaux d’activité dans Application Insights
 

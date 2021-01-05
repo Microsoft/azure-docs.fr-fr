@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur le déploiement d’un con
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 949f1b3ee3db72e1c541c3dd4c5f74f364f1b514
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2d64766c754c0ea104ae83fde799a514e9da6d68
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869893"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97693726"
 ---
 # <a name="install-an-application-gateway-ingress-controller-agic-using-an-existing-application-gateway"></a>Installer un contrôleur d’entrée Application Gateway (AGIC) à l’aide d’une instance Application Gateway existante
 
@@ -29,8 +29,8 @@ AGIC surveille les ressources [d’entrée](https://kubernetes.io/docs/concepts/
 
 ## <a name="prerequisites"></a>Prérequis
 Ce document suppose que vous avez déjà installé l’infrastructure et les outils suivants :
-- [AKS](https://azure.microsoft.com/services/kubernetes-service/) avec [Mise en réseau avancée](https://docs.microsoft.com/azure/aks/configure-azure-cni) activée
-- [Application Gateway v2](https://docs.microsoft.com/azure/application-gateway/create-zone-redundant) dans le même réseau virtuel qu’AKS
+- [AKS](https://azure.microsoft.com/services/kubernetes-service/) avec [Mise en réseau avancée](../aks/configure-azure-cni.md) activée
+- [Application Gateway v2](./tutorial-autoscale-ps.md) dans le même réseau virtuel qu’AKS
 - [AAD Pod Identity](https://github.com/Azure/aad-pod-identity) installé sur votre cluster AKS
 - [Cloud Shell](https://shell.azure.com/) est l’environnement d’interpréteur de commandes Azure, qui a `az` CLI, `kubectl` et `helm` installés. Ces outils sont requis pour les commandes ci-dessous.
 
@@ -41,12 +41,12 @@ Veuillez __sauvegarder la configuration de votre instance Application Gateway__ 
 Le fichier zip que vous avez téléchargé aura des modèles JSON, des scripts bash et PowerShell que vous pouvez utiliser pour restaurer l’instance Application Gateway si nécessaire
 
 ## <a name="install-helm"></a>Installer Helm
-[Helm](https://docs.microsoft.com/azure/aks/kubernetes-helm) est un gestionnaire de package pour Kubernetes. Nous allons l’utiliser pour installer le package `application-gateway-kubernetes-ingress`.
+[Helm](../aks/kubernetes-helm.md) est un gestionnaire de package pour Kubernetes. Nous allons l’utiliser pour installer le package `application-gateway-kubernetes-ingress`.
 Utilisez [Cloud Shell](https://shell.azure.com/) pour installer Helm :
 
-1. Installez [Helm](https://docs.microsoft.com/azure/aks/kubernetes-helm) et exécutez la commande suivante pour ajouter le package Helm `application-gateway-kubernetes-ingress` :
+1. Installez [Helm](../aks/kubernetes-helm.md) et exécutez la commande suivante pour ajouter le package Helm `application-gateway-kubernetes-ingress` :
 
-    - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) activé*
+    - Cluster AKS sur lequel *Kubernetes RBAC* est activé
 
     ```bash
     kubectl create serviceaccount --namespace kube-system tiller-sa
@@ -54,7 +54,7 @@ Utilisez [Cloud Shell](https://shell.azure.com/) pour installer Helm :
     helm init --tiller-namespace kube-system --service-account tiller-sa
     ```
 
-    - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) désactivé*
+    - Cluster AKS sur lequel *Kubernetes RBAC* est désactivé
 
     ```bash
     helm init
@@ -72,7 +72,7 @@ AGIC communique avec le serveur d’API Kubernetes et Azure Resource Manager. Un
 
 ## <a name="set-up-aad-pod-identity"></a>Configurer AAD Pod Identity
 
-[AAD Pod Identity](https://github.com/Azure/aad-pod-identity) est un contrôleur, similaire à AGIC, qui s’exécute également sur votre instance AKS. Il lie des identités Azure Active Directory à vos pods Kubernetes. Une identité est nécessaire pour qu’une application dans un pod Kubernetes puisse communiquer avec d’autres composants Azure. Dans le cas présent, nous avons besoin d’une autorisation pour que le pod AGIC envoie des requêtes HTTP à [ARM](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview).
+[AAD Pod Identity](https://github.com/Azure/aad-pod-identity) est un contrôleur, similaire à AGIC, qui s’exécute également sur votre instance AKS. Il lie des identités Azure Active Directory à vos pods Kubernetes. Une identité est nécessaire pour qu’une application dans un pod Kubernetes puisse communiquer avec d’autres composants Azure. Dans le cas présent, nous avons besoin d’une autorisation pour que le pod AGIC envoie des requêtes HTTP à [ARM](../azure-resource-manager/management/overview.md).
 
 Suivez les [instructions d’installation d’AAD Pod Identity](https://github.com/Azure/aad-pod-identity#deploy-the-azure-aad-identity-infra) pour ajouter ce composant à votre instance AKS.
 
@@ -187,7 +187,7 @@ Les premières étapes consistent à installer Tiller de Helm sur votre cluster 
     #    secretJSON: <<Generate this value with: "az ad sp create-for-rbac --sdk-auth | base64 -w0" >>
     
     ################################################################################
-    # Specify if the cluster is RBAC enabled or not
+    # Specify if the cluster is Kubernetes RBAC enabled or not
     rbac:
         enabled: false # true/false
     
@@ -323,7 +323,7 @@ L’installation de Helm avec `appgw.shared=true` déploie AGIC, mais n’apport
     ```
 
 ### <a name="enable-for-an-existing-agic-installation"></a>Activer pour une installation AGIC existante
-Supposons que nous disposons déjà d’une instance AKS opérationnelle, d’une instance Application Gateway et d’un AGIC configurés dans notre cluster. Nous avons une entrée pour `prod.contosor.com` et traitons correctement le trafic de celui-ci à partir de l’instance AKS. Nous souhaitons ajouter `staging.contoso.com` à notre instance Application Gateway existante, mais devons l’héberger sur une [machine virtuelle](https://azure.microsoft.com/services/virtual-machines/). Nous allons réutiliser l’instance Application Gateway existante et configurer manuellement un écouteur et des pools principaux pour `staging.contoso.com`. Cependant, la modification manuelle de la configuration de l’instance Application Gateway (via le [portail](https://portal.azure.com), les [API ARM](https://docs.microsoft.com/rest/api/resources/) ou [Terraform](https://www.terraform.io/)) poserait problème car AGIC possède en totalité l’instance Application Gateway. Quelques instants après l’application de modifications, AGIC les remplacerait ou les supprimerait.
+Supposons que nous disposons déjà d’une instance AKS opérationnelle, d’une instance Application Gateway et d’un AGIC configurés dans notre cluster. Nous avons une entrée pour `prod.contoso.com` et traitons correctement le trafic de celui-ci à partir de l’instance AKS. Nous souhaitons ajouter `staging.contoso.com` à notre instance Application Gateway existante, mais devons l’héberger sur une [machine virtuelle](https://azure.microsoft.com/services/virtual-machines/). Nous allons réutiliser l’instance Application Gateway existante et configurer manuellement un écouteur et des pools principaux pour `staging.contoso.com`. Cependant, la modification manuelle de la configuration de l’instance Application Gateway (via le [portail](https://portal.azure.com), les [API ARM](/rest/api/resources/) ou [Terraform](https://www.terraform.io/)) poserait problème car AGIC possède en totalité l’instance Application Gateway. Quelques instants après l’application de modifications, AGIC les remplacerait ou les supprimerait.
 
 Nous pouvons empêcher AGIC d’apporter des modifications à un sous-ensemble de la configuration.
 

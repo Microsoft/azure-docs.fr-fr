@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 06/22/2019
-ms.openlocfilehash: e58cbe85f30ea09adde45d55bb7b80c710c45495
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8e3805fae5bf6cc5ad8cf759d3ba75220c6ddbd8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74792445"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91565069"
 ---
 # <a name="add-trading-partners-to-integration-accounts-for-azure-logic-apps"></a>Ajouter des partenaires commerciaux à des comptes d’intégration pour Azure Logic Apps
 
@@ -47,7 +47,7 @@ Dans un contrat, vous spécifiez les détails pour la gestion des messages entra
 
 1. Choisissez la mosaïque **Partenaires**.
 
-   ![Choisir la mosaïque « Partenaires »](./media/logic-apps-enterprise-integration-partners/choose-partners.png)
+   ![Capture d’écran montrant la vignette Partenaires.](./media/logic-apps-enterprise-integration-partners/choose-partners.png)
 
 1. Sous **Partenaires**, choisissez **Ajouter**. Sous **Ajouter un partenaire**, indiquez les détails sur le partenaire comme décrit dans le tableau ci-dessous.
 
@@ -100,7 +100,7 @@ Choisissez la mosaïque **Partenaires**.
 
 1. Dans le [portail Azure](https://portal.azure.com), recherchez et sélectionnez votre compte d’intégration. Choisissez la mosaïque **Partenaires**.
 
-   ![Choisir la mosaïque « Partenaires »](./media/logic-apps-enterprise-integration-partners/choose-partners-to-delete.png)
+   ![Capture d’écran montrant la vignette Partenaires que vous sélectionnez lorsque vous souhaitez supprimer un partenaire.](./media/logic-apps-enterprise-integration-partners/choose-partners-to-delete.png)
 
 1. Sous **Partenaires**, sélectionnez le partenaire à supprimer. Choisissez **Supprimer**.
 

@@ -1,6 +1,6 @@
 ---
 title: Réseau mondial Microsoft - Azure
-description: Explique comment Microsoft crée son réseau mondial, à la fois rapide et fiable
+description: Découvrez comment Microsoft crée et utilise l’un des plus grands réseaux principaux dans le monde, et pourquoi il est essentiel pour offrir une expérience cloud remarquable.
 services: networking
 documentationcenter: ''
 author: KumudD
@@ -13,32 +13,32 @@ ms.workload: infrastructure-services
 ms.date: 06/13/2019
 ms.author: kumud
 ms.reviewer: ypitsch
-ms.openlocfilehash: 10a061163447a60f1c25b386ef28028436284650
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 05e966d3f4631e3c344bd97c0faec99cc3c6dd66
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75453070"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91819900"
 ---
 # <a name="microsoft-global-network"></a>Réseau Microsoft mondial
 
-Microsoft possède et gère l’un des plus grands réseaux principaux du monde. Cette architecture mondiale et sophistiquée, couvrant plus de 160 000 km, connecte nos centres de données et nos clients. 
+Microsoft possède et gère l’un des plus grands réseaux principaux du monde. Cette architecture mondiale et sophistiquée, couvrant plus de 165 000 km, connecte nos centres de données et nos clients. 
  
-Tous les jours, des clients du monde entier se connectent et transfèrent des billions de demandes à Microsoft Azure, Bing, Dynamics 365, Office 365, XBox et bien d’autres. Quel que soit leur type, les clients attendent de nos services une fiabilité et une réactivité instantanée. 
+Tous les jours, des clients du monde entier se connectent et transfèrent des billions de demandes à Microsoft Azure, Bing, Dynamics 365, Microsoft 365, XBox et bien d’autres. Quel que soit leur type, les clients attendent de nos services une fiabilité et une réactivité instantanée. 
  
-Le [réseau mondial Microsoft](https://azure.microsoft.com/global-infrastructure/global-network/) (WAN) est l’une des parties essentielles d’une très bonne expérience cloud. En connectant notre [centres de données](https://azure.microsoft.com/global-infrastructure/) Microsoft à 54 régions Azure et un grand maillage de nœuds de périphérie placés de manière stratégique dans le monde entier, notre réseau mondial offre à la fois la disponibilité, la capacité et la flexibilité permettant de répondre à toute demande.
+Le [réseau mondial Microsoft](https://azure.microsoft.com/global-infrastructure/global-network/) (WAN) est l’une des parties essentielles d’une très bonne expérience cloud. En connectant notre [centres de données](https://azure.microsoft.com/global-infrastructure/) Microsoft à 61 régions Azure et un grand maillage de nœuds de périphérie placés de manière stratégique dans le monde entier, notre réseau mondial offre à la fois la disponibilité, la capacité et la flexibilité permettant de répondre à toute demande.
 
 ![Réseau Microsoft mondial](./media/microsoft-global-network/microsoft-global-wan.png)
  
 ## <a name="get-the-premium-cloud-network"></a>Obtenir le réseau cloud Premium
  
-Il est facile de choisir la [meilleure expérience possible](https://www.sdxcentral.com/articles/news/azure-tops-aws-gcp-in-cloud-performance-says-thousandeyes/2018/11/) quand vous utilisez le cloud Microsoft. À partir du moment où le trafic client entre sur notre réseau mondial par le biais de nos nœuds de périphérie disposés de façon stratégique, vos données transitent via des routes optimisées presque à la vitesse de la lumière. Cela garantit une latence optimale pour de meilleures performances. Ces nœuds de périphérie, tous interconnectés à plus de 3 500 partenaires Internet uniques (pairs) par le biais des milliers de connexions dans plus de 145 endroits, servent de base à notre stratégie d’interconnexion. 
+Il est facile de choisir la [meilleure expérience possible](https://www.sdxcentral.com/articles/news/azure-tops-aws-gcp-in-cloud-performance-says-thousandeyes/2018/11/) quand vous utilisez le cloud Microsoft. À partir du moment où le trafic client entre sur notre réseau mondial par le biais de nos nœuds de périphérie disposés de façon stratégique, vos données transitent via des routes optimisées presque à la vitesse de la lumière. Cela garantit une latence optimale pour de meilleures performances. Ces nœuds de périphérie, tous interconnectés à plus de 4000 partenaires Internet uniques (pairs) par le biais des milliers de connexions dans plus de 175 endroits, servent de base à notre stratégie d’interconnexion. 
  
 Si vous vous connectez de Londres à Tokyo, ou de Washington DC à Los Angeles, les performances réseau sont quantifiées et affectées par des éléments tels que la latence, l’instabilité, la perte de paquets et le débit.  Chez Microsoft, nous préférons utiliser des interconnexions directes plutôt que des liaisons de transit. Cela maintient le trafic des réponses symétrique et permet de garder les tronçons, les parties d’un appairage (peering) et les chemins aussi courts et aussi simples possible. 
 
 Par exemple, si un utilisateur à Londres tente d’accéder à un service à Tokyo, le trafic Internet entre dans l’une de nos périphéries à Londres, passe par le réseau étendu (WAN) Microsoft via la France, nos chemins de Transarabie entre l’Europe et l’Inde, puis jusqu’au Japon où le service est hébergé. Le trafic des réponses est symétrique. Cela est parfois appelé [routage cold potato](https://en.wikipedia.org/wiki/Hot-potato_and_cold-potato_routing), ce qui signifie que le trafic reste sur le réseau Microsoft aussi longtemps que possible avant que nous le transmettions.  
   
-Mais est-ce que cela concerne tout le trafic généré lors de l’utilisation de services Microsoft ? Oui, tout le trafic entre les centres de données, dans Microsoft Azure ou entre des services Microsoft comme des machines virtuelles, Office 365, XBox, des bases de données SQL, le stockage et des réseaux virtuels, est routé dans notre réseau mondial et jamais via l’Internet public, afin de garantir des performances et une intégrité optimales.  
+Mais est-ce que cela concerne tout le trafic généré lors de l’utilisation de services Microsoft ? Oui, tout le trafic entre les centres de données, dans Microsoft Azure ou entre des services Microsoft comme des machines virtuelles, Microsoft 365, XBox, des bases de données SQL, le stockage et des réseaux virtuels, est routé dans notre réseau mondial et jamais via l’Internet public, afin de garantir des performances et une intégrité optimales.  
  
 Des investissements considérables dans la fibre et la diversité entre les chemins métropolitains, terrestres et sous-marins sont essentiels pour maintenir un niveau du service élevé et constant tout en stimulant la croissance spectaculaire de notre cloud et de nos services en ligne. Nous avons récemment ajouté à notre réseau mondial notre câble sous-marin [MAREA](https://www.submarinecablemap.com/#/submarine-cable/marea), le premier système de ligne ouverte (OLS, Open Line System) sous-marin du secteur, entre Bilbao (Espagne) et Virginia Beach (Virginie, États-Unis), ainsi que le câble sous-marin [AEC](https://www.submarinecablemap.com/#/submarine-cable/aeconnect-1) entre New York (États-Unis) et Dublin (Irlande) et le câble sous-marin [NCP (New Cross-Pacifique)](https://www.submarinecablemap.com/#/submarine-cable/new-cross-pacific-ncp-cable-system) entre Tokyo (Japon) et Portland (Oregon, États-Unis). 
  

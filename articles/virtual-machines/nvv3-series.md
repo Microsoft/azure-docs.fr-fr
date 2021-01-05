@@ -2,17 +2,18 @@
 title: Série NVv3 – Machines virtuelles Microsoft Azure
 description: Spécifications pour les machines virtuelles de la série NVv3.
 services: virtual-machines
-author: vikancha
+ms.subservice: sizes
+author: vikancha-MSFT
 ms.service: virtual-machines
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: lahugh
-ms.openlocfilehash: d74b00a4bade956d3a511a47b0a6b0011b9fb212
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: jushiman
+ms.openlocfilehash: 65107b0924351ca6debf37201e8849ffe8dd1eab
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78267430"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97589424"
 ---
 # <a name="nvv3-series"></a>Série NVv3
 
@@ -20,19 +21,21 @@ Les machines virtuelles de la série NVv3 sont pilotées par des GPU [Tesla M60 
 
 Chaque GPU dans les instances NVv3 est fourni avec une licence GRID. Cette licence vous donne la possibilité d’utiliser une instance NV comme station de travail virtuelle pour un seul utilisateur. 25 utilisateurs simultanés peuvent aussi se connecter à la machine virtuelle pour un scénario d’application virtuelle.
 
-Mise en cache du Stockage Premium :  Prise en charge
+[Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Génération 1 et 2<br>
+Mise en réseau accélérée : Pris en charge<br>
+<br>
 
-Migration dynamique : Non pris en charge
-
-Mises à jour avec préservation de la mémoire : Non pris en charge
-
-| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau | Stations de travail virtuelles | Applications virtuelles |
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau / Bande passante réseau attendue (MBps) | Stations de travail virtuelles | Applications virtuelles |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Standard_NV12s_v3 |12 | 112 | 320  | 1 | 8  | 12 | 20 000/200 | 4 | 1 | 25  |
-| Standard_NV24s_v3 |24 | 224 | 640  | 2 | 16 | 24 | 40 000/400 | 8 | 2 | 50  |
-| Standard_NV48s_v3 |48 | 448 | 1 280 | 4 | 32 | 32 | 80 000/800 | 8 | 4 | 100 |
+| Standard_NV12s_v3 |12 | 112 | 320  | 1 | 8  | 12 | 20 000/200 | 4 / 6 000 | 1 | 25  |
+| Standard_NV24s_v3 |24 | 224 | 640  | 2 | 16 | 24 | 40 000/400 | 8 / 12000 | 2 | 50  |
+| Standard_NV48s_v3 |48 | 448 | 1 280 | 4 | 32 | 32 | 80 000/800 | 8 / 24000 | 4 | 100 |
 
-1 GPU = une moitié de carte M60.
+<sup>1</sup> 1 GPU = la moitié d’une carte M60.
 
 [!INCLUDE [virtual-machines-common-sizes-table-defs](../../includes/virtual-machines-common-sizes-table-defs.md)]
 

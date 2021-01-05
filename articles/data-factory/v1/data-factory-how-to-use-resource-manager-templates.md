@@ -3,20 +3,20 @@ title: Utiliser des modèles Resource Manager dans Data Factory
 description: Découvrez comment créer et utiliser des modèles Azure Resource Manager pour créer des entités Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 73498b3537f4cf9313fc9e2464785f63c2af0d5a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4c840d50fb80a57e9c68645ade8baa22b455fa84
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460730"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495495"
 ---
 # <a name="use-templates-to-create-azure-data-factory-entities"></a>Utilisation de modèles pour créer des entités Azure Data Factory
 > [!NOTE]
@@ -25,7 +25,7 @@ ms.locfileid: "81460730"
 ## <a name="overview"></a>Vue d’ensemble
 Lors de l’utilisation d’Azure Data Factory pour vos besoins d’intégration de données, vous pourriez être amené à réutiliser le même modèle dans différents environnements ou à implémenter la même tâche de façon répétée dans la même solution. Les modèles vous aident à implémenter et à gérer ces scénarios de manière simple. Les modèles dans Azure Data Factory sont parfaitement adaptés aux scénarios qui impliquent la réutilisation et la répétition.
 
-Prenons le cas d’une entreprise qui compte 10 usines de fabrication dans le monde entier. Les journaux d’activité de chaque usine sont stockés dans une base de données SQL Server locale distincte. L’entreprise souhaite créer un entrepôt de données unique dans le cloud pour l’analyse ad-hoc. Elle souhaite également avoir la même logique mais des configurations différentes pour les environnements de développement, de test et de production.
+Prenons le cas d’une entreprise qui compte 10 usines de fabrication dans le monde entier. Les journaux de chaque usine sont stockés dans une base de données SQL Server distincte. L’entreprise souhaite créer un entrepôt de données unique dans le cloud pour l’analyse ad-hoc. Elle souhaite également avoir la même logique mais des configurations différentes pour les environnements de développement, de test et de production.
 
 Dans ce cas, une tâche doit être répétée dans le même environnement, mais avec des valeurs différentes dans les 10 entrepôts de données pour chaque usine de fabrication. Le facteur de **répétition** est donc présent. La création de modèles permet l’abstraction de ce flux générique (autrement dit, les pipelines ayant les mêmes activités dans chaque entrepôt de données), mais utilise un fichier de paramètres distinct pour chaque usine de fabrication.
 
@@ -37,8 +37,8 @@ Les [modèles Azure Resource Manager](../../azure-resource-manager/templates/ove
 ## <a name="tutorials"></a>Tutoriels
 Reportez-vous aux didacticiels suivants pour obtenir des instructions détaillées sur la création d’entités Data Factory à l’aide de modèles Resource Manager :
 
-* [Didacticiel : Créer un pipeline pour copier des données à l’aide du modèle Azure Resource Manager](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md)
-* [Didacticiel : Créer un pipeline pour traiter des données à l’aide du modèle Azure Resource Manager](data-factory-build-your-first-pipeline.md)
+* [Tutoriel : Créer un pipeline pour copier des données à l’aide du modèle Azure Resource Manager](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md)
+* [Tutoriel : Créer un pipeline pour traiter des données à l’aide du modèle Azure Resource Manager](data-factory-build-your-first-pipeline.md)
 
 ## <a name="data-factory-templates-on-github"></a>Modèles Data Factory sur GitHub
 Découvrez les modèles de démarrage rapide Azure suivants sur GitHub :
@@ -48,7 +48,7 @@ Découvrez les modèles de démarrage rapide Azure suivants sur GitHub :
 * [Créer une fabrique de données pour copier des données à partir de Salesforce vers des objets blob Azure](https://github.com/Azure/azure-quickstart-templates/tree/master/101-data-factory-salesforce-to-blob-copy)
 * [Créer une fabrique de données qui lié les activités : copie des données à partir d’un serveur FTP vers des objets Blob Azure, appelle un script hive sur un cluster HDInsight à la demande pour transformer les données et copie le résultat dans Azure SQL Database](https://github.com/Azure/azure-quickstart-templates/tree/master/201-data-factory-ftp-hive-blob)
 
-N’hésitez pas à partager vos modèles Azure Data Factory dans [Démarrage rapide d’Azure](https://azure.microsoft.com/documentation/templates/). Reportez-vous au [guide de contribution](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE) lors du développement de modèles qui peuvent être partagés via ce référentiel.
+N’hésitez pas à partager vos modèles Azure Data Factory sur la page [Démarrage rapide Azure](https://azure.microsoft.com/documentation/templates/). Reportez-vous au [guide de contribution](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE) lors du développement de modèles qui peuvent être partagés via ce référentiel.
 
 Les sections suivantes fournissent plus d’informations sur la définition de ressources Data Factory dans un modèle Resource Manager.
 
@@ -228,7 +228,7 @@ Consultez [Définition des pipelines](data-factory-create-pipelines.md#pipeline-
 }
 ```
 ## <a name="parameterizing-data-factory-template"></a>Paramétrage du modèle Data Factory
-Pour connaître les meilleures pratiques de paramétrage, consultez [Bonnes pratiques relatives à la création de modèles Azure Resource Manager](../../azure-resource-manager/resource-manager-template-best-practices.md). En général, l’utilisation des paramètres doit être minimale, surtout s’il est possible d’utiliser des variables à la place. Fournissez uniquement des paramètres dans les scénarios suivants :
+Pour connaître les meilleures pratiques de paramétrage, consultez [Bonnes pratiques relatives à la création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-best-practices.md). En général, l’utilisation des paramètres doit être minimale, surtout s’il est possible d’utiliser des variables à la place. Fournissez uniquement des paramètres dans les scénarios suivants :
 
 * Les paramètres varient selon l’environnement (exemple : développement, test et production)
 * les clés secrètes (notamment les mots de passe) ;

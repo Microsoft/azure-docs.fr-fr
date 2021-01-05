@@ -13,14 +13,14 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 08/14/2018
 ms.author: alsin
-ms.openlocfilehash: 3ad68438f5fc015b6a9150d67485b90a095f1a4a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 545399e1d7941351ce861ac98d995d5e57006ea1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226733"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022851"
 ---
-# <a name="use-serial-console-for-sysrq-and-nmi-calls"></a>Utiliser la console série pour les appels SysRq et NMI
+# <a name="use-the-azure-serial-console-for-sysrq-and-nmi-calls"></a>Utiliser la console série Azure pour les appels SysRq et NMI
 
 ## <a name="system-request-sysrq"></a>Requête système (SysRq)
 Une SysRq est une séquence de clés comprise par le noyau du système d’exploitation Linux et pouvant déclencher un ensemble d’actions prédéfinies. Ces commandes sont souvent utilisées quand l’administration classique ne permet pas de résoudre les problèmes ou de récupérer les machines virtuelles (par exemple, quand celles-ci ne répondent pas). La fonction SysRq de la console série Azure permet de simuler l’appui sur la touche SysRq et la saisie de caractères sur un clavier physique.
@@ -29,11 +29,11 @@ Une fois que la séquence SysRq est livrée, la configuration du noyau contrôle
 
 La console série Azure peut être utilisée pour envoyer une SysRq à une machine virtuelle Azure via l’icône de clavier dans la barre de commande ci-dessous.
 
-![](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg)
+![Capture d’écran de la console série Azure. L’icône de clavier est mise en surbrillance et son menu est visible. Ce menu contient une option Envoyer une commande SysRq.](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg)
 
 En sélectionnant « Envoyer une commande SysRq », une boîte de dialogue s’ouvre et propose des options SysRq communes ou accepte une séquence de commandes SysRq entrées dans la boîte de dialogue.  Une série de SysRq peut ainsi exécuter une opération de haut niveau, par exemple un redémarrage sûr : `REISUB`.
 
-![](../media/virtual-machines-serial-console/virtual-machine-serial-console-sysreq_UI.png)
+![Capture d’écran de la boîte de dialogue Envoyer une commande SysRq à un invité. L’option permettant d’entrer des commandes est sélectionnée et la zone de commande contient REISUB.](../media/virtual-machines-serial-console/virtual-machine-serial-console-sysreq_UI.png)
 
 La commande SysRq ne peut pas être utilisée sur les machines virtuelles arrêtées ou dont le noyau n’est pas en état réactif. (par exemple un état d’alerte du noyau).
 
@@ -62,7 +62,7 @@ Dans le guide administrateur SysRq ci-dessus :
 |``h``  |   Affiche l’aide (les touches qui ne sont pas mentionnées ici affichent aussi l’aide, mais il est facile de mémoriser ``h`` :-)
 |``i``  |    Envoie un SIGKILL à tous les processus, sauf init.
 |``j``  |    Forçage de « Just thaw it » (simple libération) - systèmes de fichiers gelés par l’ioctl FIFREEZE.
-|``k``  |    La clé d’accès sécurisée (SAK) arrête tous les programmes de la console virtuelle en cours. REMARQUE : consultez les commentaires importants ci-dessous dans la section SAK.
+|``k``  |    La clé d’accès sécurisée (SAK) arrête tous les programmes de la console virtuelle en cours. REMARQUE :  consultez les commentaires importants disponibles ci-dessous, à la section SAK.
 |``l``  |    Affiche un historique des piles de tous les processeurs actifs.
 |``m``  |    Sauvegarde les informations de la mémoire actuelle sur votre console.
 |``n``  |    Utilisé pour que les tâches RT soient agréables
@@ -102,7 +102,7 @@ Une interruption non masquable (NMI) est conçue pour créer un signal que les l
 
 La console série peut être utilisée pour envoyer une NMI à une machine virtuelle Azure à l’aide de l’icône de clavier dans la barre de commandes ci-dessous. Une fois que la NMI est remise, la configuration de machine virtuelle contrôle le mode de réponse du système.  Les systèmes d’exploitation Linux peuvent être configurés de façon à provoquer un incident et à créer une image mémoire lorsque le système d’exploitation reçoit une NMI.
 
-![](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg) <br>
+![Capture d’écran de la console série. L’icône de clavier est mise en surbrillance et son menu est visible. Ce menu contient une option Envoyer une interruption non masquable.](../media/virtual-machines-serial-console/virtual-machine-serial-console-command-menu.jpg) <br>
 
 ### <a name="enable-nmi"></a>Activer une NMI
 Pour les systèmes Linux qui prennent en charge sysctl pour configurer les paramètres du noyau, vous pouvez activer une alerte lors de la réception de la NMI en procédant comme suit :
@@ -111,7 +111,7 @@ Pour les systèmes Linux qui prennent en charge sysctl pour configurer les param
 1. Redémarrage ou mise à jour de sysctl en exécutant <br>
     `sysctl -p`
 
-Pour plus d’informations sur les configurations du noyau Linux, notamment `unknown_nmi_panic`, `panic_on_io_nmi` et `panic_on_unrecovered_nmi`, consultez la [documentation de /proc/sys/kernel/*](https://www.kernel.org/doc/Documentation/sysctl/kernel.txt). Pour obtenir de la documentation propre à la distribution sur NMI et les étapes de configuration de Linux pour créer un vidage sur incident à la réception d’une NMI, consultez les liens ci-dessous :
+Pour plus d'informations sur les configurations du noyau Linux, notamment `unknown_nmi_panic`, `panic_on_io_nmi` et `panic_on_unrecovered_nmi`, consultez ce qui suit : [Documentation de /proc/sys/kernel/*](https://www.kernel.org/doc/Documentation/sysctl/kernel.txt). Pour obtenir de la documentation propre à la distribution sur NMI et les étapes de configuration de Linux pour créer un vidage sur incident à la réception d’une NMI, consultez les liens ci-dessous :
 
 ### <a name="ubuntu"></a>Ubuntu
  - [Vidage sur incident du noyau](https://help.ubuntu.com/lts/serverguide/kernel-crash-dump.html)

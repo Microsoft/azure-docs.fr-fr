@@ -11,32 +11,32 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3dd1b4cf554e773f49a15ac5cedcbcc5b3e710b9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 8ab484e8caaffaf57f19f1fcd1e65f4b8e723f86
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74380099"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93077895"
 ---
-# <a name="quickstart-require-terms-of-use-to-be-accepted-before-accessing-cloud-apps"></a>Démarrage rapide : exiger l’acceptation des conditions d’utilisation avant d’accorder l’accès à des applications cloud
+# <a name="quickstart-require-terms-of-use-to-be-accepted-before-accessing-cloud-apps"></a>Démarrage rapide : Exiger l’acceptation des conditions d’utilisation avant d’accorder l’accès à des applications cloud
 
 Si vous souhaitez obtenir le consentement des utilisateurs avant qu’ils ne puissent accéder à certaines applications cloud de votre environnement, vous pouvez demander à ce qu’ils acceptent vos conditions d’utilisation. L’accès conditionnel Azure Active Directory (Azure AD) vous offre les avantages suivants :
 
 - Une méthode simple pour configurer les conditions d’utilisation
 - La possibilité d’exiger l’acceptation de vos conditions d’utilisation à l’aide d’une stratégie d’accès conditionnel  
 
-Ce démarrage rapide vous montre comment configurer une [stratégie d’accès conditionnel Azure AD](../active-directory-conditional-access-azure-portal.md) qui vous permet de demander aux utilisateurs d’accepter vos conditions d’utilisation pour accéder à une certaine application cloud de votre environnement.
+Ce démarrage rapide vous montre comment configurer une [stratégie d’accès conditionnel Azure AD](./overview.md) qui vous permet de demander aux utilisateurs d’accepter vos conditions d’utilisation pour accéder à une certaine application cloud de votre environnement.
 
-![Créer une stratégie](./media/require-tou/5555.png)
+:::image type="content" source="./media/require-tou/5555.png" alt-text="Capture d’écran du portail Azure. Un volet qui définit une stratégie nommée Exiger des conditions d’utilisation pour Isabella est visible." border="false":::
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre le scénario décrit dans ce démarrage rapide, vous avez besoin de ce qui suit :
 
-- **Accès à l’édition Azure AD Premium** : l’accès conditionnel Azure AD est une fonctionnalité d’Azure AD Premium.
-- **Un compte d’essai nommé Isabella Simonsen** : si vous ignorez comment créer un compte d’essai, voir [Ajouter des utilisateurs basés sur le cloud](../fundamentals/add-users-azure-active-directory.md#add-a-new-user).
+- **Accès à l’édition Azure AD Premium**  : l’accès conditionnel Azure AD est une fonctionnalité d’Azure AD Premium.
+- **Un compte d’essai nommé Isabella Simonsen**  : si vous ignorez comment créer un compte d’essai, voir [Ajouter des utilisateurs basés sur le cloud](../fundamentals/add-users-azure-active-directory.md#add-a-new-user).
 
 ## <a name="test-your-sign-in"></a>Tester la connexion
 
@@ -54,34 +54,34 @@ Cette section explique comment configurer des conditions d’utilisation. Lorsqu
 **Pour créer vos conditions d’utilisation :**
 
 1. Dans Microsoft Word, créez un nouveau document.
-1. Saisissez **My terms of use**, puis enregistrez le document sur votre ordinateur sous le nom **mytou.pdf**.
+1. Saisissez **My terms of use** , puis enregistrez le document sur votre ordinateur sous le nom **mytou.pdf**.
 1. Connectez-vous au [portail Azure](https://portal.azure.com) en tant qu’administrateur général, administrateur de sécurité ou administrateur de l’accès conditionnel.
 1. Dans la barre de navigation gauche du portail Azure, cliquez sur **Azure Active Directory**.
 
    ![Azure Active Directory](./media/require-tou/02.png)
 
-1. Sur la page **Azure Active Directory**, dans la section **Sécurité**, cliquez sur **Accès conditionnel**.
+1. Sur la page **Azure Active Directory** , dans la section **Sécurité** , cliquez sur **Accès conditionnel**.
 
    ![Accès conditionnel](./media/require-tou/03.png)
 
-1. Dans la section **Gérer**, cliquez sur **Conditions d’utilisation**.
+1. Dans la section **Gérer** , cliquez sur **Conditions d’utilisation**.
 
-   ![Conditions d’utilisation](./media/require-tou/04.png)
+   :::image type="content" source="./media/require-tou/04.png" alt-text="Capture d’écran de la section Gérer de la page Azure Active Directory. L’élément Conditions d’utilisation est mis en surbrillance." border="false":::
 
 1. Dans le menu supérieur, cliquez sur **Nouvelles conditions**.
 
-   ![Conditions d’utilisation](./media/require-tou/05.png)
+   :::image type="content" source="./media/require-tou/05.png" alt-text="Capture d’écran d’un menu dans la page Azure Active Directory. L’élément Nouvelles conditions est mis en évidence." border="false":::
 
 1. Sur la page **Nouvelles conditions d’utilisation** :
 
-   ![Conditions d’utilisation](./media/require-tou/112.png)
+   :::image type="content" source="./media/require-tou/112.png" alt-text="Capture d’écran de la page Nouvelles conditions d’utilisation mettant en évidence le nom, le nom complet, le document, la langue, l’accès conditionnel et la bascule d’extension des conditions d’utilisation." border="false":::
 
-   1. Dans la zone de texte **Nom**, saisissez **My TOU**.
+   1. Dans la zone de texte **Nom** , saisissez **My TOU**.
    1. Dans la zone de texte **Nom d’affichage** saisissez **My TOU**.
    1. Chargez vos conditions d’utilisation sous forme de fichier PDF.
-   1. Dans la zone **langue**, sélectionnez **anglais**.
+   1. Dans la zone **langue** , sélectionnez **anglais**.
    1. Activez l’option permettant de **demander aux utilisateurs de développer les conditions d’utilisation** **.**
-   1. Pour l’option **Appliquer avec des modèles de stratégie d’accès conditionnel**, sélectionnez **Stratégie personnalisée**.
+   1. Pour l’option **Appliquer avec des modèles de stratégie d’accès conditionnel** , sélectionnez **Stratégie personnalisée**.
    1. Cliquez sur **Créer**.
 
 ## <a name="create-your-conditional-access-policy"></a>Créer votre stratégie d’accès conditionnel
@@ -99,29 +99,29 @@ Dans votre stratégie, définissez :
 | Applications cloud | Gestion Microsoft Azure |
 | Accorder l'accès | My TOU |
 
-![Créer une stratégie](./media/require-tou/1234.png)
+:::image type="content" source="./media/require-tou/1234.png" alt-text="Capture d’écran d’un volet du portail Azure qui définit une stratégie. Les flèches indiquent que la stratégie accorde l’accès à Mes conditions d’utilisation et comprend un utilisateur et une application." border="false":::
 
 **Pour configurer votre stratégie d’accès conditionnel, effectuez les étapes suivantes :**
 
-1. Sur la page **Nouveau**, dans la zone de texte **Nom**, saisissez **Require TOU for Isabella**.
+1. Sur la page **Nouveau** , dans la zone de texte **Nom** , saisissez **Require TOU for Isabella**.
 
-   ![Name](./media/require-tou/71.png)
+   ![Nom](./media/require-tou/71.png)
 
-1. Dans la section **Affectation**, cliquez sur **Utilisateurs et groupes**.
+1. Dans la section **Affectation** , cliquez sur **Utilisateurs et groupes**.
 
-   ![Utilisateurs et groupes](./media/require-tou/06.png)
+   :::image type="content" source="./media/require-tou/06.png" alt-text="Capture d’écran de la section Affectations d’un volet du portail Azure qui définit une stratégie. L’élément Utilisateurs et groupes est visible, avec la valeur Aucun sélectionnée." border="false":::
 
 1. Sur la page **Utilisateurs et groupes** :
 
-   ![Utilisateurs et groupes](./media/require-tou/24.png)
+   :::image type="content" source="./media/require-tou/24.png" alt-text="Capture d’écran de l’onglet Inclure de la page Utilisateurs et groupes. L’option Sélectionner des utilisateurs et des groupes est sélectionnée, de même que l’option Utilisateurs et groupes. Sélectionner est mis en surbrillance." border="false":::
 
-   1. Cliquez sur **Sélectionner des utilisateurs et des groupes**, puis choisissez **des utilisateurs et des groupes**.
+   1. Cliquez sur **Sélectionner des utilisateurs et des groupes** , puis choisissez **des utilisateurs et des groupes**.
    1. Cliquez sur **Sélectionner**.
-   1. Dans la page **Sélectionner**, sélectionnez **Isabella Simonsen**, puis cliquez sur **Sélectionner**.
-   1. Dans la page **Utilisateurs et groupes**, cliquez sur **Terminé**.
+   1. Dans la page **Sélectionner** , sélectionnez **Isabella Simonsen** , puis cliquez sur **Sélectionner**.
+   1. Dans la page **Utilisateurs et groupes** , cliquez sur **Terminé**.
 1. Cliquez sur **Applications cloud**.
 
-   ![Applications cloud](./media/require-tou/08.png)
+   :::image type="content" source="./media/require-tou/08.png" alt-text="Capture d’écran de la section Affectations d’un volet du portail Azure qui définit une stratégie. L’élément Applications cloud est visible, avec la valeur Aucun sélectionnée." border="false":::
 
 1. Sur la page **Applications cloud** :
 
@@ -129,9 +129,9 @@ Dans votre stratégie, définissez :
 
    1. Cliquez sur **Sélectionner les applications**.
    1. Cliquez sur **Sélectionner**.
-   1. Dans la page **Sélectionner**, choisissez **Gestion Microsoft Azure**, puis cliquez sur **Sélectionner**.
-   1. Dans la page **Applications cloud**, cliquez sur **Terminé**.
-1. Dans la section **Contrôles d’accès**, cliquez sur **Accorder**.
+   1. Dans la page **Sélectionner** , choisissez **Gestion Microsoft Azure** , puis cliquez sur **Sélectionner**.
+   1. Dans la page **Applications cloud** , cliquez sur **Terminé**.
+1. Dans la section **Contrôles d’accès** , cliquez sur **Accorder**.
 
    ![Contrôles d’accès](./media/require-tou/10.png)
 
@@ -142,7 +142,7 @@ Dans votre stratégie, définissez :
    1. Sélectionner **Accorder l’accès**.
    1. Sélectionnez **My TOU**.
    1. Cliquez sur **Sélectionner**.
-1. Dans la section **Activer la stratégie**, cliquez sur **Activée**.
+1. Dans la section **Activer la stratégie** , cliquez sur **Activée**.
 
    ![Activer la stratégie](./media/require-tou/18.png)
 
@@ -152,7 +152,7 @@ Dans votre stratégie, définissez :
 
 À présent que vous avez configuré votre stratégie d’accès conditionnel, vous souhaitez probablement savoir s’il fonctionne comme prévu. Dans un premier temps, utilisez l’outil de stratégie d’accès conditionnel What If pour simuler une connexion de votre utilisateur de test. La simulation évalue l’impact cette connexion sur vos stratégies et génère un rapport de simulation.  
 
-Pour initialiser l’outil d’évaluation de stratégie **What If**, définissez ce qui suit :
+Pour initialiser l’outil d’évaluation de stratégie **What If** , définissez ce qui suit :
 
 - **Isabella Simonsen** en tant qu’utilisateur.
 - **Gestion Microsoft Azure** en tant qu’application cloud.
@@ -170,18 +170,18 @@ Un clic sur **What If** a pour effet de créer un rapport de simulation indiquan
 
    ![What If](./media/require-tou/14.png)
 
-1. Cliquez sur **Utilisateurs**, sélectionnez **Isabella Simonsen**, puis cliquez sur **Sélectionner**.
+1. Cliquez sur **Utilisateurs** , sélectionnez **Isabella Simonsen** , puis cliquez sur **Sélectionner**.
 
    ![Utilisateur](./media/require-tou/15.png)
 
 1. Pour sélectionner une application cloud :
 
-   ![Applications cloud](./media/require-tou/16.png)
+   :::image type="content" source="./media/require-tou/16.png" alt-text="Capture d’écran de la section Applications cloud. Le texte indique qu’une application est sélectionnée." border="false":::
 
    1. Cliquez sur **Applications cloud**.
-   1. Dans la page **Applications cloud**, cliquez sur **Sélectionner les applications**.
+   1. Dans la page **Applications cloud** , cliquez sur **Sélectionner les applications**.
    1. Cliquez sur **Sélectionner**.
-   1. Dans la page **Sélectionner**, choisissez **Gestion Microsoft Azure**, puis cliquez sur **Sélectionner**.
+   1. Dans la page **Sélectionner** , choisissez **Gestion Microsoft Azure** , puis cliquez sur **Sélectionner**.
    1. Dans la page Applications cloud, cliquez sur **Terminé**.
 1. Cliquez sur **What If**.
 
@@ -191,7 +191,7 @@ Dans la section précédente, vous avez appris à évaluer une connexion simulé
 
 Pour tester votre stratégie, essayez de vous connecter à votre [portail Azure](https://portal.azure.com) à l’aide de votre compte de test **Isabella Simonsen**. Une boîte de dialogue doit s’afficher, exigeant que vous acceptiez vos conditions d’utilisation.
 
-![Conditions d’utilisation](./media/require-tou/57.png)
+:::image type="content" source="./media/require-tou/57.png" alt-text="Capture d’écran d’une boîte de dialogue intitulée Conditions d’utilisation de la fonction de protection de la sécurité des identités, avec les boutons Refuser et Accepter et un bouton intitulé Mes conditions d’utilisation." border="false":::
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -200,14 +200,13 @@ Lorsque vous n’en avez plus besoin, supprimez l’utilisateur de test et la st
 - Si vous ignorez comment supprimer un utilisateur Azure AD, voir [Supprimer des utilisateurs d’Azure AD](../fundamentals/add-users-azure-active-directory.md#delete-a-user).
 - Pour supprimer votre stratégie, sélectionnez-la, puis cliquez sur **Supprimer** dans la barre d’outils Accès rapide.
 
-    ![Authentification multifacteur](./media/require-tou/33.png)
+    :::image type="content" source="./media/require-tou/33.png" alt-text="Capture d’écran montrant une stratégie nommée Exiger l’authentification MFA pour l’accès au portail Azure. Le menu contextuel est visible, avec l’option Supprimer en évidence." border="false":::
 
 - Pour supprimer vos conditions d’utilisation, sélectionnez-les, puis cliquez sur **Supprimer les conditions** dans la barre d’outils supérieure.
 
-    ![Authentification multifacteur](./media/require-tou/29.png)
+    :::image type="content" source="./media/require-tou/29.png" alt-text="Capture d’écran montrant une partie d’un tableau répertoriant les documents des conditions d’utilisation. Le document Mes conditions d’utilisation est visible. Dans le menu, l’option Supprimer les conditions est mise en évidence." border="false":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Exiger une authentification multifacteur pour des applications spécifiques](app-based-mfa.md)
-> [Bloquer l’accès lorsqu’un risque de session est détecté](app-sign-in-risk.md)
+> [Exiger une authentification multifacteur pour certaines applications spécifiques](../authentication/tutorial-enable-azure-mfa.md)

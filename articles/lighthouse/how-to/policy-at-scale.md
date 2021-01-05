@@ -1,20 +1,23 @@
 ---
 title: Déployer à grande échelle Azure Policy vers des abonnements délégués
-description: Découvrez comment la gestion des ressources déléguées Azure vous permet de déployer une définition et une affectation de stratégie sur plusieurs locataires.
-ms.date: 11/8/2019
-ms.topic: conceptual
-ms.openlocfilehash: 3fe7e48c56e9a5af93e9642ee16c50cfbce34f9e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+description: Découvrez comment Azure Lighthouse vous permet de déployer une définition et une affectation de stratégie sur plusieurs locataires.
+ms.date: 11/09/2020
+ms.topic: how-to
+ms.openlocfilehash: 5af938c61ad3e42e36360a15c6011b54fa1e823d
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81481820"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94412066"
 ---
 # <a name="deploy-azure-policy-to-delegated-subscriptions-at-scale"></a>Déployer à grande échelle Azure Policy vers des abonnements délégués
 
-En tant que fournisseur de services, vous assurez peut-être la gestion des ressources déléguée Azure de plusieurs locataires clients. [Azure Lighthouse](../overview.md) permet aux fournisseurs de services d’effectuer des opérations à grande échelle sur plusieurs locataires à la fois, améliorant ainsi l'efficacité des tâches de gestion.
+En tant que fournisseur de services, vous avez peut-être intégré les locataires de plusieurs clients à [Azure Lighthouse](../overview.md). Azure Lighthouse permet aux fournisseurs de services d’effectuer des opérations à grande échelle sur plusieurs locataires à la fois, améliorant ainsi l’efficacité des tâches de gestion.
 
 Cette rubrique montre comment utiliser [Azure Policy](../../governance/policy/index.yml) pour déployer une définition et une affectation de stratégie sur plusieurs locataires à l’aide de commandes PowerShell. Dans cet exemple, la définition de stratégie veille à ce que les comptes de stockage soient sécurisés en n'autorisant que le trafic HTTPS.
+
+> [!TIP]
+> Même si nous faisons référence aux fournisseurs de services et aux clients dans cette rubrique, les [entreprises gérant plusieurs locataires](../concepts/enterprise.md) peuvent utiliser les mêmes processus.
 
 ## <a name="use-azure-resource-graph-to-query-across-customer-tenants"></a>Utiliser Azure Resource Graph pour interroger plusieurs locataires clients
 
@@ -88,7 +91,11 @@ foreach ($ManagedSub in $ManagedSubscriptions)
 }
 ```
 
+> [!NOTE]
+> Bien que vous puissiez déployer des stratégies sur plusieurs locataires, vous ne pouvez pas actuellement [afficher les détails de conformité](../../governance/policy/how-to/determine-non-compliance.md#compliance-details) pour les ressources non conformes dans ces locataires.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 - En savoir plus sur [Azure Policy](../../governance/policy/index.yml).
 - Découvrez les [Expériences de gestion inter-locataire](../concepts/cross-tenant-management-experience.md).
+- Découvrez comment [déployer une stratégie pouvant être corrigée](deploy-policy-remediation.md) dans un abonnement délégué.

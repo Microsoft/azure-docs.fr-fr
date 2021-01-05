@@ -1,21 +1,21 @@
 ---
 title: Examiner les journaux WAF à l’aide d’Azure Log Analytics
 titleSuffix: Azure Application Gateway
-description: Cet article vous montre comment utiliser Log Analytics pour examiner les journaux du pare-feu d’applications web sur Application Gateway
+description: Cet article vous montre comment utiliser Log Analytics pour examiner les journaux du pare-feu d’applications web (WAF) sur Application Gateway.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: 9fe4462a71852e5f66268f798f6f0418f2dd39c4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 881dbd02a6bf069fbe68108cc6eab0cb6b909a13
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74048081"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91362648"
 ---
-# <a name="use-log-analytics-to-examine-application-gateway-web-application-firewall-logs"></a>Utiliser Azure Log Analytics pour examiner les journaux du pare-feu d’applications web sur Application Gateway
+# <a name="use-log-analytics-to-examine-application-gateway-web-application-firewall-waf-logs"></a>Utiliser Azure Log Analytics pour examiner les journaux du pare-feu d’applications web (WAF) sur Application Gateway
 
 Une fois que votre WAF Application Gateway est opérationnel, vous pouvez activer les journaux pour examiner ce qui se produit avec chaque requête. Les journaux de pare-feu donnent des informations sur ce que le WAF évalue, met en correspondance et bloque. Avec Log Analytics, vous pouvez examiner les données contenues dans les journaux de pare-feu pour obtenir encore plus d’informations. Pour plus d’informations sur la création d’un espace de travail Log Analytics, consultez [Créer un espace de travail Log Analytics dans le portail Azure](../azure-monitor/learn/quick-create-workspace.md). Pour plus d’informations sur les requêtes de journal, consultez [Vue d’ensemble des requêtes de journal dans Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
 
@@ -80,7 +80,7 @@ AzureDiagnostics
 
 Une fois que vous créez une requête, vous pouvez l’ajouter à votre tableau de bord.  Sélectionnez **Épingler au tableau de bord** dans le coin supérieur droit de l’espace de travail Log Analytics. Avec les quatre requêtes précédentes épinglées à un exemple de tableau de bord, voici les données que vous pouvez voir en un coup d’œil :
 
-![tableau de bord](media/log-analytics/dashboard.png)
+![Capture d’écran montrant un tableau de bord Azure dans lequel vous pouvez ajouter votre requête.](media/log-analytics/dashboard.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -2,15 +2,15 @@
 title: Emplacements de déploiement Azure Functions
 description: Apprendre à créer et à utiliser des emplacements de déploiement avec Azure Functions
 author: craigshoemaker
-ms.topic: reference
-ms.date: 08/12/2019
+ms.topic: conceptual
+ms.date: 04/15/2020
 ms.author: cshoe
-ms.openlocfilehash: 0e8c93ea6d5c2b525ccbea2af900f100afcc3d93
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87d7d4676c604ca7219b7580eb3ce585282a7f11
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75769215"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96327238"
 ---
 # <a name="azure-functions-deployment-slots"></a>Emplacements de déploiement Azure Functions
 
@@ -45,7 +45,7 @@ Pendant une permutation, un emplacement est considéré source et l’autre comm
 
 1. **Mettre à jour le routage :** Si toutes les instances dans l’emplacement source sont correctement préchauffées, les deux emplacements opèrent la permutation en échangeant leurs règles d’acheminement. Après cette étape, l’emplacement cible (par exemple, l’emplacement de production) dispose de l’application déjà initialisée dans l’emplacement source.
 
-1. **Répéter l’opération :** Maintenant que l’emplacement source contient l’application qui se trouvait dans l’emplacement cible avant la permutation, effectuez la même opération en appliquant tous les paramètres, puis en redémarrant les instances pour l’emplacement source.
+1. **Répéter l’opération :** Maintenant que l’emplacement source contient l’application qui se trouvait dans l’emplacement cible avant la permutation, menez à bien la même opération en appliquant tous les paramètres, puis en redémarrant les instances pour l’emplacement source.
 
 Gardez à l’esprit les points suivants :
 
@@ -57,25 +57,62 @@ Gardez à l’esprit les points suivants :
 
 ## <a name="manage-settings"></a>Gérer les paramètres
 
-[!INCLUDE [app-service-deployment-slots-settings](../../includes/app-service-deployment-slots-settings.md)]
+Certains paramètres de configuration sont spécifiques à l’emplacement. Les listes suivantes décrivent en détail les paramètres qui évoluent quand vous effectuez un changement d’emplacement, et ceux qui restent identiques.
+
+**Paramètres spécifiques à l’emplacement** :
+
+* Points de terminaison de publication
+* Noms de domaine personnalisés
+* Certificats non publics et paramètres TLS/SSL
+* Paramètres de mise à l’échelle
+* Planificateurs WebJobs
+* Restrictions d’adresse IP
+* Always On
+* Paramètres de diagnostic
+* Partage des ressources cross-origin (CORS)
+
+**Paramètres non spécifiques à l’emplacement** :
+
+* Paramètres généraux, par exemple versions du framework, 32/64 bits, sockets web
+* Paramètres d’application (peuvent être configurés pour respecter un emplacement)
+* Chaînes de connexion (peuvent être configurées pour respecter un emplacement)
+* Mappages de gestionnaires
+* Certificats publics
+* Contenu WebJobs
+* Connexions hybrides*
+* Intégration du réseau virtuel*
+* Points de terminaison de service*
+* Azure Content Delivery Network*
+
+Il est prévu que les fonctionnalités marquées d’un astérisque (*) ne soient plus échangées. 
+
+> [!NOTE]
+> Certains paramètres d’application qui s’appliquent à des paramètres non échangés ne sont pas non plus échangés. Par exemple, étant donné que les paramètres de diagnostic ne sont pas échangés, les paramètres d’application associés comme `WEBSITE_HTTPLOGGING_RETENTION_DAYS` et `DIAGNOSTICS_AZUREBLOBRETENTIONDAYS` ne sont pas non plus échangés, même s’ils n’apparaissent pas comme des paramètres d’emplacement.
+>
 
 ### <a name="create-a-deployment-setting"></a>Créer un paramètre de déploiement
 
 Vous pouvez marquer des paramètres en tant que paramètres de déploiement, ce qui a pour effet de les rendre « rémanents ». Un paramètre rémanent ne suit pas la permutation de l’instance d’application.
 
-Si vous créez un paramètre de déploiement dans un emplacement, veillez à créer le même paramètre avec une valeur unique dans tout autre emplacement impliqué dans une permutation. De cette façon, si la valeur d’un paramètre ne change pas, son nom reste cohérent dans les emplacements. Cette cohérence de nom garantit que votre code ne tente pas d’accéder à un paramètre défini dans un emplacement, mais pas dans un autre.
+Si vous créez un paramètre de déploiement dans un emplacement, veillez à créer le même paramètre avec une valeur unique dans tout autre emplacement qui est impliqué dans une permutation. De cette façon, si la valeur d’un paramètre ne change pas, son nom reste cohérent dans les emplacements. Cette cohérence de nom garantit que votre code ne tente pas d’accéder à un paramètre défini dans un emplacement, mais pas dans un autre.
 
 Pour créer un paramètre de déploiement, procédez comme suit :
 
-- Accédez à *Emplacements* dans l’application de fonction.
-- Cliquez sur le nom de l’emplacement.
-- Sous *Fonctionnalités de la plateforme > Paramètres généraux*, cliquez sur **Configuration**.
-- Cliquez sur le nom du paramètre que vous souhaitez associer à l’emplacement actuel.
-- Activez la case à cocher **Paramètre de l’emplacement de déploiement**.
-- Cliquez sur **OK**
-- Lorsque le panneau des paramètres disparaît, cliquez sur **Enregistrer** pour conserver les modifications.
+1. Dans l’application de fonction, accédez à **Deployment slots** (Emplacements de déploiement), puis sélectionnez le nom de l’emplacement.
 
-![Paramètre d’emplacement de déploiement](./media/functions-deployment-slots/azure-functions-deployment-slots-deployment-setting.png)
+    :::image type="content" source="./media/functions-deployment-slots/functions-navigate-slots.png" alt-text="Recherchez des emplacements dans le portail Azure." border="true":::
+
+1. Sélectionnez **Configuration**, puis le nom du paramètre que vous souhaitez utiliser avec l’emplacement actuel.
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-configure-deployment-slot.png" alt-text="Configurez le paramètre d’application d’un emplacement dans le portail Azure." border="true":::
+
+1. Sélectionnez **Deployment slot setting** (Paramètre d’emplacement de déploiement), puis **OK**.
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-deployment-slot-setting.png" alt-text="Configurez le paramètre d’emplacement de déploiement." border="true":::
+
+1. Lorsque la section du paramètre disparaît, sélectionnez **Save** (Enregistrer) pour conserver les modifications
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-save-deployment-slot-setting.png" alt-text="Enregistrez le paramètre d’emplacement de déploiement." border="true":::
 
 ## <a name="deployment"></a>Déploiement
 
@@ -90,24 +127,30 @@ Tous les emplacements sont mis à l’échelle du nombre de rôles de travail da
 
 ## <a name="add-a-slot"></a>Ajouter un emplacement
 
-Vous pouvez ajouter un emplacement via l’[interface de ligne de commande](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-create) ou le portail. Les étapes suivantes montrent comment créer un emplacement sur le portail :
+Vous pouvez ajouter un emplacement via l’[interface de ligne de commande](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-create) ou le portail. Les étapes suivantes montrent comment créer un emplacement sur le portail :
 
-1. Accédez à votre application de fonction, puis cliquez sur le **signe Plus (+)** en regard d’*Emplacements*.
+1. Accédez à votre application de fonction.
 
-    ![Ajouter un emplacement de déploiement Azure Functions](./media/functions-deployment-slots/azure-functions-deployment-slots-add.png)
+1. Sélectionnez **Deployment slots** (Emplacements de déploiement), puis **+ Add Slot** (+ Ajouter un emplacement).
 
-1. Entrez un nom dans la zone de texte, puis appuyez sur le bouton **Créer**.
+    :::image type="content" source="./media/functions-deployment-slots/functions-deployment-slots-add.png" alt-text="Ajout d’un emplacement de déploiement Azure Functions." border="true":::
 
-    ![Nommer un emplacement de déploiement Azure Functions](./media/functions-deployment-slots/azure-functions-deployment-slots-add-name.png)
+1. Tapez le nom de l’emplacement, puis sélectionnez **Add** (Ajouter).
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-deployment-slots-add-name.png" alt-text="Nommez l’emplacement de déploiement Azure Functions." border="true":::
 
 ## <a name="swap-slots"></a>Permuter des emplacements
 
-Vous pouvez permuter des emplacements via l’[interface de ligne de commande](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-swap) ou le portail. Les étapes suivantes expliquent comment permuter des emplacements dans le portail :
+Vous pouvez permuter des emplacements via l’[interface de ligne de commande](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-swap) ou le portail. Les étapes suivantes expliquent comment permuter des emplacements dans le portail :
 
 1. Accédez à l’application de fonction.
-1. Cliquez sur le nom de l’emplacement source que vous souhaitez permuter.
-1. Sous l’onglet *Vue d’ensemble*, cliquez sur le bouton **Permuter**![Permuter un emplacement de déploiement Azure Functions](./media/functions-deployment-slots/azure-functions-deployment-slots-swap.png).
-1. Vérifiez les paramètres de configuration de votre permutation, puis cliquez sur **Permuter** ![Permuter un emplacement de déploiement Azure Functions](./media/functions-deployment-slots/azure-functions-deployment-slots-swap-config.png)
+1. Sélectionnez **Deployment slots** (Emplacements de déploiement), puis **Swap** (Échanger).
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-swap-deployment-slot.png" alt-text="Capture d’écran montrant la page « Emplacement de déploiement » avec l’action « Ajouter un emplacement » sélectionnée." border="true":::
+
+1. Vérifiez les paramètres de configuration de votre échange, puis sélectionnez **Swap** (Échanger)
+    
+    :::image type="content" source="./media/functions-deployment-slots/azure-functions-deployment-slots-swap-config.png" alt-text="Échangez l’emplacement de déploiement." border="true":::
 
 L’exécution de l’opération peut prendre un certain temps.
 
@@ -117,23 +160,33 @@ Si une permutation provoque une erreur ou si vous souhaitez simplement « annul
 
 ## <a name="remove-a-slot"></a>Supprimer un emplacement
 
-Vous pouvez supprimer un emplacement via l’[interface de ligne de commande](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-delete) ou le portail. Les étapes suivantes montrent comment supprimer un emplacement sur le portail :
+Vous pouvez supprimer un emplacement via l’[interface de ligne de commande](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-delete) ou le portail. Les étapes suivantes montrent comment supprimer un emplacement sur le portail :
 
-1. Accédez à la vue d’ensemble de l’application de fonction.
+1. Dans l’application de fonction, accédez à **Deployment slots** (Emplacements de déploiement), puis sélectionnez le nom de l’emplacement.
 
-1. Cliquez sur le bouton **Supprimer**.
+    :::image type="content" source="./media/functions-deployment-slots/functions-navigate-slots.png" alt-text="Recherchez des emplacements dans le portail Azure." border="true":::
 
-    ![Ajouter un emplacement de déploiement Azure Functions](./media/functions-deployment-slots/azure-functions-deployment-slots-delete.png)
+1. Sélectionnez **Supprimer**.
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-delete-deployment-slot.png" alt-text="Capture d’écran montrant la page « Vue d’ensemble » avec l’action « Supprimer » sélectionnée." border="true":::
+
+1. Tapez le nom de l’emplacement de déploiement que vous souhaitez supprimer, puis sélectionnez **Delete** (Supprimer).
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-delete-deployment-slot-details.png" alt-text="Suppression de l’emplacement de déploiement dans le portail Azure." border="true":::
+
+1. Fermez le volet confirmation de la suppression.
+
+    :::image type="content" source="./media/functions-deployment-slots/functions-deployment-slot-deleted.png" alt-text="Confirmation de suppression de l’emplacement de déploiement." border="true":::
 
 ## <a name="automate-slot-management"></a>Automatiser la gestion des emplacements
 
-[Azure CLI](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest) vous permet d’automatiser les actions suivantes pour un emplacement :
+[Azure CLI](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest) vous permet d’automatiser les actions suivantes pour un emplacement :
 
-- [create](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-create)
-- [delete](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-delete)
-- [list](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-list)
-- [swap](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-swap)
-- [auto-swap](https://docs.microsoft.com/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-auto-swap)
+- [create](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-create)
+- [delete](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-delete)
+- [list](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-list)
+- [swap](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-swap)
+- [auto-swap](/cli/azure/functionapp/deployment/slot?view=azure-cli-latest#az-functionapp-deployment-slot-auto-swap)
 
 ## <a name="change-app-service-plan"></a>Changer le plan App Service
 
@@ -144,20 +197,17 @@ Une application de fonction qui s’exécute dans le cadre d’un plan App Servi
 
 Pour modifier le plan App service d’un emplacement, procédez comme suit :
 
-1. Accédez à un emplacement.
+1. Dans l’application de fonction, accédez à **Deployment slots** (Emplacements de déploiement), puis sélectionnez le nom de l’emplacement.
 
-1. Sous *Fonctionnalités de la plateforme*, cliquez sur **Tous les paramètres**.
+    :::image type="content" source="./media/functions-deployment-slots/functions-navigate-slots.png" alt-text="Recherchez des emplacements dans le portail Azure." border="true":::
 
-    ![Modifier un plan App Service](./media/functions-deployment-slots/azure-functions-deployment-slots-change-app-service-settings.png)
+1. Sous **App Service plan** (Plan App Service), sélectionnez **Change App Service plan** (Modifier le plan App Service).
 
-1. Cliquez sur **Plan App Service**.
+1. Sélectionnez le plan vers lequel vous souhaitez effectuer la mise à niveau ou créez un nouveau plan.
 
-1. Sélectionnez un nouveau plan App Service ou créez-en un.
+    :::image type="content" source="./media/functions-deployment-slots/azure-functions-deployment-slots-change-app-service-apply.png" alt-text="Modification du plan App Service dans le portail Azure." border="true":::
 
-1. Cliquez sur **OK**
-
-    ![Modifier un plan App Service](./media/functions-deployment-slots/azure-functions-deployment-slots-change-app-service-select.png)
-
+1. Sélectionnez **OK**.
 
 ## <a name="limitations"></a>Limites
 

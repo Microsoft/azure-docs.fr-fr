@@ -3,12 +3,12 @@ title: Description des services et applications Azure Service Fabric
 description: Explique l’utilisation de manifestes pour décrire les services et les applications Service Fabric.
 ms.topic: conceptual
 ms.date: 8/12/2019
-ms.openlocfilehash: 6014ef6a9b6ec810aafd5e5be96223b8ed92d576
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fcf4c7611f0a6f52c28b234717b9244ac58ad2d4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75349961"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86248218"
 ---
 # <a name="service-fabric-application-and-service-manifests"></a>Manifestes des services et applications Service Fabric
 Cet article explique comment les services et les applications Service Fabric sont définis et créés dans différentes versions à l’aide des fichiers ApplicationManifest.xml et ServiceManifest.xml.  Pour plus d’exemples, consultez les [exemples de manifeste de service et d’application](service-fabric-manifest-examples.md).  Le schéma XML pour ces fichiers manifestes est détaillé dans [Documentation relative au schéma ServiceFabricServiceModel.xsd](service-fabric-service-model-schema.md).
@@ -157,7 +157,7 @@ Comme dans le cas des manifestes de service, les attributs **Version** sont des 
 
 **Certificates** (non défini dans l’exemple précédent) déclare les certificats utilisés pour [configurer les points de terminaison HTTPS](service-fabric-service-manifest-resources.md#example-specifying-an-https-endpoint-for-your-service) ou [chiffrer des secrets dans le manifeste d’application](service-fabric-application-secret-management.md).
 
-Les **contraintes de placement** sont les instructions qui définissent où les services doivent s’exécuter. Ces instructions sont attachées aux différents services que vous sélectionnez pour une ou plusieurs propriétés de nœud. Pour plus d’informations, consultez [Syntaxe des contraintes de placement et des propriétés de nœud](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-resource-manager-cluster-description#placement-constraints-and-node-property-syntax)
+Les **contraintes de placement** sont les instructions qui définissent où les services doivent s’exécuter. Ces instructions sont attachées aux différents services que vous sélectionnez pour une ou plusieurs propriétés de nœud. Pour plus d’informations, consultez [Syntaxe des contraintes de placement et des propriétés de nœud](./service-fabric-cluster-resource-manager-cluster-description.md#placement-constraints-and-node-property-syntax)
 
 **Policies** (non défini dans l’exemple précédent) décrit les stratégies de collecte de journaux, d’[« exécuter en tant que » par défaut](service-fabric-application-runas-security.md), d’[intégrité](service-fabric-health-introduction.md#health-policies) et de [sécurité d’accès](service-fabric-application-runas-security.md) à définir au niveau de l’application, et indique notamment si les services ont accès au runtime Service Fabric.
 
@@ -192,6 +192,3 @@ For more information about other features supported by application manifests, re
 [appmodel-diagram]: ./media/service-fabric-application-model/application-model.png
 [cluster-imagestore-apptypes]: ./media/service-fabric-application-model/cluster-imagestore-apptypes.png
 [cluster-application-instances]: media/service-fabric-application-model/cluster-application-instances.png
-
-
-

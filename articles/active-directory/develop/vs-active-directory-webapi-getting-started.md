@@ -6,16 +6,16 @@ manager: jillfra
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/12/2018
 ms.author: ghogen
-ms.custom: aaddev, vs-azure
-ms.openlocfilehash: 9a9f8aaa9e3f90e78668d2294ea9959b480e3384
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp, aaddev, vs-azure
+ms.openlocfilehash: fb8c1f25c8a22c96679a0310353f474f6b9d5ba5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80886073"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88165428"
 ---
 # <a name="get-started-with-azure-active-directory-webapi-projects"></a>Prise en main avec Azure Active Directory (projets WebApi)
 
@@ -33,5 +33,5 @@ Tous les contrôleurs de votre projet ont été ornés de l’attribut `[Authori
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Scénarios d’authentification pour Azure Active Directory](authentication-scenarios.md)
+- [Scénarios d’authentification pour Azure Active Directory](./authentication-vs-authorization.md)
 - [Ajouter la connexion avec Microsoft à une application web ASP.NET](quickstart-v2-aspnet-webapp.md)

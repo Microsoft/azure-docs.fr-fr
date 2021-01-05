@@ -1,6 +1,6 @@
 ---
-title: Résolution des problèmes liés à la solution Start/Stop VMs during off-hours
-description: Cet article fournit des informations sur la résolution des problèmes rencontrés avec la solution Start/Stop VMs during off hours (Démarrer/Arrêter des machines virtuelles durant les heures creuses).
+title: Résoudre les problèmes liés à la fonctionnalité Start/Stop VMs during off-hours d’Azure Automation
+description: Cet article explique comment détecter et résoudre les problèmes qui surviennent lors de l’utilisation de la fonctionnalité Start/Stop VMs during off-hours.
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -9,25 +9,22 @@ ms.author: magoedte
 ms.date: 04/04/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 611e8441fab56114ca010d0b555c9ed156ae9d40
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: bb8fa53fa07d666693ae545c193faaf3d6d0a30c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82855061"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86187147"
 ---
-# <a name="troubleshoot-the-startstop-vms-during-off-hours-solution"></a>Résoudre les problèmes liés à la solution Start/Stop VMs during off-hours
+# <a name="troubleshoot-startstop-vms-during-off-hours-issues"></a>Résoudre les problèmes liés à Start/Stop VMs during off-hours
 
-Cet article fournit des informations sur la résolution des problèmes qui surviennent lorsque vous utilisez la solution Azure Automation Start/Stop VMs during off-hours (Démarrer/Arrêter des machines virtuelles durant les heures creuses).
+Cet article fournit des informations sur la détection et la résolution des problèmes qui surviennent lorsque vous déployez la fonctionnalité Start/Stop VMs during off-hours d’Azure Automation sur vos machines virtuelles. 
 
->[!NOTE]
->Cet article a été mis à jour pour tenir compte de l’utilisation du nouveau module Az d’Azure PowerShell. Vous pouvez toujours utiliser le module AzureRM, qui continue à recevoir des correctifs de bogues jusqu’à au moins décembre 2020. Pour en savoir plus sur le nouveau module Az et la compatibilité avec AzureRM, consultez [Présentation du nouveau module Az d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-3.5.0). Pour obtenir des instructions relatives à l’installation du module Az sur votre runbook Worker hybride, voir [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps?view=azps-3.5.0). Pour votre compte Azure Automation, vous pouvez mettre à jour vos modules vers la toute dernière version en suivant les instructions du [Guide de mise à jour des modules Azure PowerShell dans Azure Automation](../automation-update-azure-modules.md).
-
-## <a name="scenario-the-startstop-vms-during-off-hours-solution-fails-to-properly-deploy"></a><a name="deployment-failure"></a>Scénario : Le déploiement de la solution Start/Stop VMs during off-hours ne fonctionne pas correctement
+## <a name="scenario-startstop-vms-during-off-hours-fails-to-properly-deploy"></a><a name="deployment-failure"></a>Scénario : Le déploiement de Start/Stop VMs during off-hours ne fonctionne pas correctement
 
 ### <a name="issue"></a>Problème
 
-Lorsque vous déployez la [solution Start/Stop VMs during off-hours](../automation-solution-vm-management.md), vous recevez l’une des erreurs suivantes :
+Lorsque vous déployez [Start/Stop VMs during off-hours](../automation-solution-vm-management.md), vous recevez l’une des erreurs suivantes :
 
 ```error
 Account already exists in another resourcegroup in a subscription. ResourceGroupName: [MyResourceGroup].
@@ -62,18 +59,18 @@ Start-AzureRmVm : Run Login-AzureRmAccount to login
 Les déploiements peuvent échouer pour l’une des raisons suivantes :
 
 - Il existe déjà un compte Automation du même nom dans la région sélectionnée.
-- Une stratégie interdit le déploiement de la solution Start/Stop VMs during off-hours.
+- Une stratégie interdit le déploiement de Start/Stop VMs during off-hours.
 - Le type de ressource `Microsoft.OperationsManagement`, `Microsoft.Insights` ou `Microsoft.Automation` n’est pas inscrit.
 - Votre espace de travail Log Analytics est verrouillé.
-- Vous avez une version obsolète des modules AzureRM ou de la solution Start/Stop VMs during off-hours.
+- La version des modules AzureRM ou de la fonctionnalité Start/Stop VMs during off-hours est obsolète.
 
 ### <a name="resolution"></a>Résolution
 
-Examinez les correctifs suivants pour trouver les solutions possibles à votre problème :
+Examinez les correctifs suivants pour connaître les solutions possibles :
 
 * Les comptes Automation doivent être uniques dans une région Azure, même s’ils se trouvent dans différents groupes de ressources. Vérifiez vos comptes Automation dans la région cible.
-* Une stratégie existante empêche le déploiement d’une ressource nécessaire à la solution Start/Stop VMs during off-hours. Accédez à vos affectations de stratégie sur le portail Azure et regardez s’il en existe une qui interdit le déploiement de cette ressource. Pour plus d’informations, consultez [Erreur RequestDisallowedByPolicy](../../azure-resource-manager/templates/error-policy-requestdisallowedbypolicy.md).
-* Votre abonnement doit être inscrit aux espaces de noms de ressources Azure suivants pour que vous puissiez déployer la solution Start/Stop VMs :
+* Une stratégie existante empêche le déploiement d’une ressource nécessaire à Start/Stop VMs during off-hours. Accédez à vos affectations de stratégie sur le portail Azure et regardez s’il en existe une qui interdit le déploiement de cette ressource. Pour plus d’informations, consultez [Erreur RequestDisallowedByPolicy](../../azure-resource-manager/templates/error-policy-requestdisallowedbypolicy.md).
+* Votre abonnement doit être inscrit aux espaces de noms de ressources Azure suivants pour que vous puissiez déployer Start/Stop VMs during off-hours :
 
     * `Microsoft.OperationsManagement`
     * `Microsoft.Insights`
@@ -81,13 +78,13 @@ Examinez les correctifs suivants pour trouver les solutions possibles à votre p
 
    Pour plus d’informations sur les erreurs survenant lors de l’inscription des fournisseurs, consultez [Résoudre les erreurs d’inscription de fournisseurs de ressources](../../azure-resource-manager/templates/error-register-resource-provider.md).
 * Si votre espace de travail Log Analytics est verrouillé, accédez-y sur le Portail Azure et supprimez tous les verrous de la ressource.
-* Si ces solutions ne résolvent pas votre problème, suivez les instructions sous [Mettre à jour la solution](../automation-solution-vm-management.md#update-the-solution) pour redéployer la solution Start/Stop VMs during off hours.
+* Si ces solutions ne résolvent pas votre problème, suivez les instructions sous [Mettre à jour la fonctionnalité](../automation-solution-vm-management.md#update-the-feature) pour redéployer Start/Stop VMs during off-hours.
 
 ## <a name="scenario-all-vms-fail-to-start-or-stop"></a><a name="all-vms-fail-to-startstop"></a>Scénario : Échec du démarrage ou de l’arrêt de toutes les machines virtuelles
 
 ### <a name="issue"></a>Problème
 
-Vous avez configuré la solution Start/Stop VMs during off-hours, mais elle ne démarre pas ou n’arrête pas toutes les machines virtuelles.
+Vous avez configuré Start/Stop VMs during off-hours, mais elle ne démarre pas ou n’arrête pas toutes les machines virtuelles.
 
 ### <a name="cause"></a>Cause
 
@@ -100,9 +97,9 @@ Cette erreur peut être due à l’une des raisons suivantes :
 
 ### <a name="resolution"></a>Résolution
 
-Examinez la liste suivante pour trouver les solutions possibles à votre problème :
+Consultez la liste suivante pour connaître les solutions possibles :
 
-* Vérifiez que vous avez correctement configuré une planification pour la solution Start/Stop VMs during off-hours. Pour savoir comment configurer une planification, consultez [Planifications](../automation-schedules.md).
+* Vérifiez que vous avez correctement configuré une planification pour Start/Stop VMs during off-hours. Pour savoir comment configurer une planification, consultez [Planifications](../shared-resources/schedules.md).
 
 * Vérifiez les [flux de tâches](../automation-runbook-execution.md#job-statuses) afin de détecter d’éventuelles erreurs. Recherchez des tâches dans l’un des runbooks suivants :
 
@@ -118,7 +115,7 @@ Examinez la liste suivante pour trouver les solutions possibles à votre problè
 
 * Vérifiez que votre [compte d’identification](../manage-runas-account.md) dispose des autorisations appropriées pour les machines virtuelles que vous tentez de démarrer ou d’arrêter. Pour savoir comment vérifier les autorisations sur une ressource, consultez [Démarrage rapide : Afficher les rôles attribués à un utilisateur à l’aide du portail Azure](../../role-based-access-control/check-access.md). Vous devez fournir l’ID d’application du principal de service utilisé par le compte d’identification. Vous pouvez récupérer cette valeur en accédant à votre compte Automation dans le portail Azure. Sélectionnez **Comptes d’identification** sous **Paramètres du compte**, puis sélectionnez le compte d’identification approprié.
 
-* Les machines virtuelles peuvent ne pas être démarrées ou arrêtées si elles sont explicitement exclues. Les machines virtuelles exclues sont définies dans la variable `External_ExcludeVMNames` du compte Automation sur lequel la solution est déployée. L’exemple suivant montre comment vous pouvez interroger cette valeur avec PowerShell.
+* Les machines virtuelles peuvent ne pas être démarrées ou arrêtées si elles sont explicitement exclues. Les machines virtuelles exclues sont définies dans la variable `External_ExcludeVMNames` du compte Automation sur lequel la fonctionnalité est déployée. L’exemple suivant montre comment vous pouvez interroger cette valeur avec PowerShell.
 
   ```powershell-interactive
   Get-AzAutomationVariable -Name External_ExcludeVMNames -AutomationAccountName <automationAccountName> -ResourceGroupName <resourceGroupName> | Select-Object Value
@@ -128,7 +125,7 @@ Examinez la liste suivante pour trouver les solutions possibles à votre problè
 
 ### <a name="issue"></a>Problème
 
-Vous avez configuré la solution Start/Stop VMs during off-hours, mais elle ne démarre pas ou n’arrête pas certaines des machines virtuelles configurées.
+Vous avez configuré Start/Stop VMs during off-hours, mais elle ne démarre pas ou n’arrête pas certaines des machines virtuelles configurées.
 
 ### <a name="cause"></a>Cause
 
@@ -141,15 +138,15 @@ Cette erreur peut être due à l’une des raisons suivantes :
 
 ### <a name="resolution"></a>Résolution
 
-Examinez la liste suivante pour trouver des solutions possibles à votre problème ou des endroits où en chercher :
+Consultez la liste suivante pour connaître les solutions possibles :
 
-* Quand vous utilisez le [scénario de séquence](../automation-solution-vm-management.md) de la solution Start/Stop VMs during off-hours, vous devez vérifier que chaque machine virtuelle que vous voulez démarrer ou arrêter dispose de la balise appropriée. Vérifiez que les machines virtuelles que vous voulez démarrer ont la balise `sequencestart` et que celles que vous voulez arrêter ont la balise `sequencestop`. Les deux balises exigent une valeur entière positive. Vous pouvez utiliser une requête semblable à l’exemple suivant pour rechercher toutes les machines virtuelles avec les balises et leurs valeurs.
+* Quand vous utilisez le [scénario de séquence](../automation-solution-vm-management.md) de Start/Stop VMs during off-hours, vous devez vérifier que chaque machine virtuelle que vous voulez démarrer ou arrêter dispose de la balise appropriée. Vérifiez que les machines virtuelles que vous voulez démarrer ont la balise `sequencestart` et que celles que vous voulez arrêter ont la balise `sequencestop`. Les deux balises exigent une valeur entière positive. Vous pouvez utiliser une requête semblable à l’exemple suivant pour rechercher toutes les machines virtuelles avec les balises et leurs valeurs.
 
   ```powershell-interactive
   Get-AzResource | ? {$_.Tags.Keys -contains "SequenceStart" -or $_.Tags.Keys -contains "SequenceStop"} | ft Name,Tags
   ```
 
-* Les machines virtuelles peuvent ne pas être démarrées ou arrêtées si elles sont explicitement exclues. Les machines virtuelles exclues sont définies dans la variable `External_ExcludeVMNames` du compte Automation sur lequel la solution est déployée. L’exemple suivant montre comment vous pouvez interroger cette valeur avec PowerShell.
+* Les machines virtuelles peuvent ne pas être démarrées ou arrêtées si elles sont explicitement exclues. Les machines virtuelles exclues sont définies dans la variable `External_ExcludeVMNames` du compte Automation sur lequel la fonctionnalité est déployée. L’exemple suivant montre comment vous pouvez interroger cette valeur avec PowerShell.
 
   ```powershell-interactive
   Get-AzAutomationVariable -Name External_ExcludeVMNames -AutomationAccountName <automationAccountName> -ResourceGroupName <resourceGroupName> | Select-Object Value
@@ -173,14 +170,14 @@ Plusieurs causes peuvent être à l’origine de l’échec. Accédez à votre c
 
 Nous vous recommandons :
 
-* Utiliser la [solution Start/Stop VMs during off-hours](../automation-solution-vm-management.md) pour démarrer et arrêter des machines virtuelles dans Azure Automation. Cette solution a été créée par Microsoft. 
-* N’oubliez pas que Microsoft ne prend pas en charge les runbooks personnalisés. Vous pouvez trouver une solution pour votre runbook personnalisé dans la [Résolution des problèmes liés aux runbooks](runbooks.md). Vérifiez les [flux de tâches](../automation-runbook-execution.md#job-statuses) afin de détecter d’éventuelles erreurs. 
+* Utilisez [Start/Stop VMs during off-hours](../automation-solution-vm-management.md) pour démarrer et arrêter des machines virtuelles dans Azure Automation. 
+* N’oubliez pas que Microsoft ne prend pas en charge les runbooks personnalisés. Vous trouverez peut-être une solution pour votre runbook personnalisé dans la rubrique [Résoudre les problèmes de runbook](runbooks.md). Vérifiez les [flux de tâches](../automation-runbook-execution.md#job-statuses) afin de détecter d’éventuelles erreurs. 
 
 ## <a name="scenario-vms-dont-start-or-stop-in-the-correct-sequence"></a><a name="dont-start-stop-in-sequence"></a>Scénario : Les machines virtuelles ne démarrent pas ou ne s’arrêtent pas dans l’ordre approprié
 
 ### <a name="issue"></a>Problème
 
-Les machines virtuelles que vous avez configurées dans la solution ne démarrent pas ou ne s’arrêtent pas dans l’ordre approprié.
+Les machines virtuelles pour lesquelles vous avez activé la fonctionnalité ne démarrent pas ou ne s’arrêtent pas dans l’ordre approprié.
 
 ### <a name="cause"></a>Cause
 
@@ -188,19 +185,17 @@ Ce problème est dû à un balisage incorrect sur les machines virtuelles.
 
 ### <a name="resolution"></a>Résolution
 
-Suivez ces étapes pour vérifier que la solution est correctement configurée.
+Suivez ces étapes pour vérifier que la fonctionnalité est correctement activée :
 
 1. Vérifiez que toutes les machines virtuelles à démarrer ou à arrêter ont une balise `sequencestart` ou `sequencestop`, suivant votre situation. La valeur de ces balises doit être un entier positif. Les machines virtuelles sont traitées dans l’ordre croissant en fonction de cette valeur.
 1. Vérifiez que les groupes de ressources des machines virtuelles à démarrer ou à arrêter sont dans les variables `External_Start_ResourceGroupNames` ou `External_Stop_ResourceGroupNames`, suivant votre situation.
-1. Testez vos modifications en exécutant le runbook `SequencedStartStop_Parent` avec le paramètre `WHATIF` défini sur True pour les prévisualiser.
+1. Testez vos modifications en exécutant le runbook **SequencedStartStop_Parent** avec le paramètre `WHATIF` défini sur True pour les prévisualiser.
 
-Pour plus d’informations sur l’utilisation de la solution permettant de démarrer et d’arrêter des machines virtuelles en séquence, consultez [Démarrer/arrêter des machines virtuelles en séquence](../automation-solution-vm-management.md).
-
-## <a name="scenario-startstop-vms-during-off-hours-job-fails-with-403-forbidden-error"></a><a name="403"></a>Scénario : La tâche Démarrer/arrêter des machines virtuelles pendant les heures creuses échoue avec une erreur 403 forbidden
+## <a name="scenario-startstop-vms-during-off-hours-job-fails-with-403-forbidden-error"></a><a name="403"></a>Scénario : La tâche Start/Stop VMs during off-hours échoue avec une erreur 403 forbidden
 
 ### <a name="issue"></a>Problème
 
-Vous trouvez des tâches qui ont échoué avec une erreur `403 forbidden` pour les runbooks de la solution Start/Stop VMs during off-hours.
+Vous trouvez des tâches qui ont échoué avec une erreur `403 forbidden` pour les runbooks de Start/Stop VMs during off-hours.
 
 ### <a name="cause"></a>Cause
 
@@ -220,18 +215,18 @@ S’il manque des autorisations, consultez [Démarrage rapide : Afficher les r�
 
 ### <a name="issue"></a>Problème
 
-Lors de l’utilisation de la solution Start/Stop VMs during off-hours, vous rencontrez un problème ou obtenez un résultat inattendu qui n’est pas listé dans cette page.
+Lors de l’utilisation de Start/Stop VMs during off-hours, vous rencontrez un problème ou obtenez un résultat inattendu qui n’est pas répertorié sur cette page.
 
 ### <a name="cause"></a>Cause
 
-Souvent, les erreurs peuvent être dues à l’utilisation d’une ancienne version obsolète de la solution.
+Souvent, les erreurs peuvent être dues à l’utilisation d’une ancienne version obsolète de la fonctionnalité.
 
 > [!NOTE]
-> La solution Start/Stop VMs during off-hours a été testée avec les modules Azure importés dans votre compte Automation lors du déploiement de la solution. Actuellement, la solution ne fonctionne pas avec des versions plus récentes du module Azure. Cette restriction affecte uniquement le compte Automation que vous utilisez pour exécuter la solution Start/Stop VMs during off-hours. Vous pouvez toujours utiliser des versions plus récentes du module Azure dans vos autres comptes Automation, comme décrit dans le [Guide de mise à jour des modules Azure PowerShell dans Azure Automation](../automation-update-azure-modules.md).
+> La fonctionnalité Start/Stop VMs during off-hours a été testée avec les modules Azure importés dans votre compte Automation lors du déploiement de la fonctionnalité sur les machines virtuelles. Actuellement, la fonctionnalité ne fonctionne pas avec des versions plus récentes du module Azure. Cette restriction concerne uniquement le compte Automation que vous utilisez pour exécuter Start/Stop VMs during off-hours. Vous pouvez toujours utiliser des versions plus récentes du module Azure dans vos autres comptes Automation, comme décrit dans le [guide de mise à jour des modules Azure PowerShell](../automation-update-azure-modules.md).
 
 ### <a name="resolution"></a>Résolution
 
-Pour résoudre de nombreuses erreurs, pensez à supprimer et à [mettre à jour la solution Start/Stop VMs during off-hours](../automation-solution-vm-management.md#update-the-solution). Vous pouvez aussi vérifier les [flux de travail](../automation-runbook-execution.md#job-statuses) afin de détecter d’éventuelles erreurs. 
+Pour résoudre de nombreuses erreurs, pensez à supprimer et à [mettre à jour Start/Stop VMs during off-hours](../automation-solution-vm-management.md#update-the-feature). Vous pouvez aussi vérifier les [flux de travail](../automation-runbook-execution.md#job-statuses) afin de détecter d’éventuelles erreurs. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -6,15 +6,15 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 12/18/2019
+ms.date: 07/08/2020
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 817e11fdf70c8043d2eb860fe15cc0a7907c6656
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1662f3d72c51b1fea766891e7681206f5e271601
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75750633"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86145945"
 ---
 # <a name="scalability-and-performance-targets-for-standard-storage-accounts"></a>Cibles de scalabilité et de performances pour les comptes de stockage standard
 

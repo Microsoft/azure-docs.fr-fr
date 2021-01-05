@@ -1,14 +1,14 @@
 ---
 title: Informations détaillées sur la structure d’attribution des stratégies
 description: Décrit la définition d’attribution des stratégies qui est utilisée par Azure Policy pour associer des définitions et des paramètres de stratégie aux ressources à des fins d’évaluation.
-ms.date: 04/15/2020
+ms.date: 09/22/2020
 ms.topic: conceptual
-ms.openlocfilehash: cdb2fc0c6f057ece44383f68bc79fca54507db9b
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: e930e9ddcc04846a35c8db7784a349007c71580b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683217"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90904086"
 ---
 # <a name="azure-policy-assignment-structure"></a>Structure d’attribution Azure Policy
 
@@ -70,17 +70,19 @@ Si **enforcementMode** n’est pas spécifié dans la définition d’une strat�
 
 ## <a name="excluded-scopes"></a>Étendues exclues
 
-L’**étendue** de l’affectation comprend tous les conteneurs de ressources enfants et les ressources enfants. Si la définition ne doit pas être appliquée à un conteneur de ressources enfant ou une ressource enfant, ces derniers peuvent être exclus de l’évaluation en définissant **notScopes**. Cette propriété est un tableau qui permet d’exclure un ou plusieurs conteneurs de ressources ou ressources de l’évaluation. **notScopes** peut être ajouté ou mis à jour au terme de l’affectation initiale.
+L’**étendue** de l’affectation comprend tous les conteneurs de ressources enfants et les ressources enfants. Si la définition ne doit pas être appliquée à un conteneur de ressources enfant ou une ressource enfant, ces derniers peuvent être _exclus_ de l’évaluation en définissant **notScopes**. Cette propriété est un tableau qui permet d’exclure un ou plusieurs conteneurs de ressources ou ressources de l’évaluation. **notScopes** peut être ajouté ou mis à jour au terme de l’affectation initiale.
+
+> [!NOTE]
+> Une ressource _exclue_ est différente d’une ressource _exemptée_. Pour plus d’informations, consultez [Comprendre l’étendue d’Azure Policy](./scope.md).
 
 ## <a name="policy-definition-id"></a>ID de définition de stratégie
 
 Ce champ correspond au nom du chemin complet d’une définition de stratégie ou d’une définition d’initiative.
-`policyDefinitionId` est une chaîne et non un tableau. Si plusieurs stratégies sont souvent attribuées ensemble, il est recommandé d’utiliser une [initiative](./definition-structure.md#initiatives).
+`policyDefinitionId` est une chaîne et non un tableau. Si plusieurs stratégies sont souvent attribuées ensemble, il est recommandé d’utiliser une [initiative](./initiative-definition-structure.md).
 
 ## <a name="parameters"></a>Paramètres
 
-Ce segment de l’attribution de stratégie fournit les valeurs des paramètres définis dans la [définition de stratégie ou d’initiative](./definition-structure.md#parameters).
-Grâce à cette conception, il est possible de réutiliser une définition de stratégie ou d’initiative avec différentes ressources. Toutefois, vous devez chercher à connaître les valeurs métiers et les résultats pour chaque option.
+Ce segment de l’attribution de stratégie fournit les valeurs des paramètres définis dans la [définition de stratégie ou d’initiative](./definition-structure.md#parameters). Grâce à cette conception, il est possible de réutiliser une définition de stratégie ou d’initiative avec différentes ressources. Toutefois, vous devez chercher à connaître les valeurs métiers et les résultats pour chaque option.
 
 ```json
 "parameters": {

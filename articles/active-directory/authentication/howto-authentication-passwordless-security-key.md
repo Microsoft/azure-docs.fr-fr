@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 02/12/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 09/14/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: librown, aakapo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 066ab7892bed6e7505e7ee114ff37a7850ef5c9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8ac8cf172a13e7198233170634ee4a3954793cd2
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81450919"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743426"
 ---
 # <a name="enable-passwordless-security-key-sign-in-preview"></a>Activer la connexion par clé de sécurité sans mot de passe (préversion)
 
@@ -24,25 +24,23 @@ Pour les entreprises qui utilisent des mots de passe aujourd’hui et qui dispos
 
 Ce document met l’accent sur l’activation de l’authentification sans mot de passe, basée sur une clé de sécurité. À la fin de cet article, vous serez en mesure de vous connecter aux applications web avec votre compte Azure AD, à l’aide d’une clé de sécurité FIDO2.
 
-|     |
-| --- |
-| Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)|
-|     |
+> [!NOTE]
+> Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="requirements"></a>Spécifications
 
-- [Azure Multi-Factor Authentication](howto-mfa-getstarted.md)
-- [Inscription d’informations de sécurité combinée – Préversion](concept-registration-mfa-sspr-combined.md)
+- [Azure AD Multi-Factor Authentication](howto-mfa-getstarted.md)
+- Activer la [préversion de l’inscription d’informations de sécurité combinée](concept-registration-mfa-sspr-combined.md)
 - [Clés de sécurité FIDO2](concept-authentication-passwordless.md#fido2-security-keys) compatibles
-- WebAuthN nécessite Windows 10 version 1809 ou plus**
+- WebAuthN nécessite Windows 10 version 1903 ou plus**
 
 Pour utiliser des clés de sécurité pour la connexion aux services et applications web, vous devez disposer d’un navigateur qui prend en charge le protocole WebAuthN. Il s’agit notamment de Microsoft Edge, Chrome, Firefox et Safari.
 
 ## <a name="prepare-devices-for-preview"></a>Préparer les appareils pour la préversion
 
-Les appareils joints à Azure AD que vous utilisez pour exécuter des pilotes doivent exécuter Windows 10 version 1809 ou ultérieure. Vous bénéficierez de la meilleure expérience sur Windows 10 version 1903 ou ultérieure.
+Pour les appareils joints à Azure AD, la meilleure expérience est sur Windows 10 version 1903 ou ultérieure.
 
-Les appareils joints à Azure AD Hybride doivent exécuter Windows 10 Insider Build 18945 ou une version ultérieure.
+Les appareils de jointure Azure AD Hybride doivent exécuter Windows 10 version 2004 ou ultérieure.
 
 ## <a name="enable-passwordless-authentication-method"></a>Activer les méthodes d’authentification sans mot de passe
 
@@ -64,8 +62,8 @@ Les fonctionnalités d’inscription pour les méthodes d’authentification san
 1. Accédez à [https://myprofile.microsoft.com](https://myprofile.microsoft.com).
 1. Connectez-vous si ce n’est pas déjà fait.
 1. Cliquez **Informations de sécurité**.
-   1. Si l’utilisateur possède dispose déjà d’au moins une méthode d’authentification multifacteur Azure inscrite, il peut inscrire immédiatement une clé de sécurité FIDO2.
-   1. Sinon, il doit d’abord ajouter une méthode Azure MFA.
+   1. Si l’utilisateur dispose déjà d’au moins une méthode Azure AD Multi-Factor Authentication inscrite, il peut inscrire immédiatement une clé de sécurité FIDO2.
+   1. Sinon, il doit d’abord ajouter une méthode Azure AD MFA.
 1. Ajoutez une clé de sécurité de FIDO2 en cliquant sur **Ajouter méthode** et en choisissant **Clé de sécurité**.
 1. Choisissez **Périphérique USB** ou **Appareil NFC**.
 1. Préparez votre clé et choisissez **Suivant**.
@@ -75,7 +73,7 @@ Les fonctionnalités d’inscription pour les méthodes d’authentification san
 
 ## <a name="sign-in-with-passwordless-credential"></a>Se connecter avec les informations d’identification sans mot de passe
 
-Dans l’exemple ci-dessous, un utilisateur a déjà approvisionné sa clé de sécurité FIDO2. L’utilisateur peut choisir de se connecter en ligne avec sa clé de sécurité FIDO2 depuis un navigateur pris en charge sur Windows 10 version 1809 ou ultérieure.
+Dans l’exemple ci-dessous, un utilisateur a déjà approvisionné sa clé de sécurité FIDO2. L’utilisateur peut choisir de se connecter en ligne avec sa clé de sécurité FIDO2 depuis un navigateur pris en charge sur Windows 10 version 1903 ou ultérieure.
 
 ![Connexion par clé de sécurité dans Microsoft Edge](./media/howto-authentication-passwordless-security-key/fido2-windows-10-1903-edge-sign-in.png)
 
@@ -107,4 +105,4 @@ Nous travaillons sur la prise en charge d’une fonctionnalité qui permet la mo
 
 [En savoir plus sur l’inscription des appareils](../devices/overview.md)
 
-[En savoir plus sur Azure Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)
+[En savoir plus sur Azure AD Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)

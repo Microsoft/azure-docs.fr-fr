@@ -1,0 +1,69 @@
+- name: Documentation Azure Data Box Gateway
+  href: /azure/databox-gateway/
+  expanded: true
+- name: Data Box Gateway
+  items:
+    - name: Vue d’ensemble
+      items:
+        - name: Qu’est-ce que Data Box Gateway ?
+          href: data-box-gateway-overview.md
+    - name: Tutoriels
+      items:
+        - name: '1 : Préparer'
+          href: data-box-gateway-deploy-prep.md
+        - name: '2A : Approvisionner dans Hyper-V'
+          href: data-box-gateway-deploy-provision-hyperv.md
+        - name: '2B : Approvisionner dans VMware'
+          href: data-box-gateway-deploy-provision-vmware.md
+        - name: '3 : Connecter, configurer, activer'
+          href: data-box-gateway-deploy-connect-setup-activate.md
+        - name: '4 : Ajouter, connecter pour partager'
+          href: data-box-gateway-deploy-add-shares.md
+    - name: Concepts
+      items:
+        - name: Examiner les conditions requises
+          href: data-box-gateway-system-requirements.md
+        - name: Comprendre les limites
+          href: data-box-gateway-limits.md
+        - name: Présentation de la sécurité
+          href: data-box-gateway-security.md
+        - name: Consulter les cas d’utilisation
+          href: data-box-gateway-use-cases.md
+    - name: Procédures
+      items:
+        - name: Update
+          href: data-box-gateway-apply-updates.md
+        - name: Gérer
+          items:
+            - name: Partages
+              href: data-box-gateway-manage-shares.md
+            - name: Utilisateurs
+              href: data-box-gateway-manage-users.md
+            - name: Planifications de la bande passante
+              href: data-box-gateway-manage-bandwidth-schedules.md
+            - name: 'Accès, alimentation, connectivité'
+              href: data-box-gateway-manage-access-power-connectivity-mode.md
+            - name: Via PowerShell
+              href: data-box-gateway-connect-powershell-interface.md
+        - name: Superviser
+          href: data-box-gateway-monitor.md
+        - name: Dépanner
+          href: data-box-gateway-troubleshoot.md
+        - name: Contacter le support Microsoft
+          href: ../databox-online/azure-stack-edge-contact-microsoft-support.md
+    - name: Notes de publication
+      items:
+        - name: 2007 - À jour
+          href: data-box-gateway-2007-release-notes.md
+        - name: 1911
+          href: data-box-gateway-1911-release-notes.md
+        - name: 1906
+          href: data-box-gateway-1906-release-notes.md
+        - name: 1905
+          href: data-box-gateway-1905-release-notes.md
+        - name: Disponibilité générale
+          href: data-box-gateway-release-notes.md
+- name: Ressources
+  items:
+    - name: Tarifs
+      href: 'https://azure.microsoft.com/en-us/pricing/details/databox/gateway/'

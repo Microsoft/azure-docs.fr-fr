@@ -1,20 +1,16 @@
 ---
 title: Utiliser le catalogue U-SQL dans Azure Data Lake Analytics
 description: Découvrez comment utiliser le catalogue U-SQL pour partager du code et des données. Créez des fonctions table, créez des vues, créez des tables, et interrogez-les.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: saveenr
-ms.author: saveenr
-ms.reviewer: jasonwhowell
-ms.assetid: 57143396-ab86-47dd-b6f8-613ba28c28d2
-ms.topic: conceptual
+ms.reviewer: jasonh
+ms.topic: how-to
 ms.date: 05/09/2017
-ms.openlocfilehash: f3b9f14be4422373fb30f8c3d4909fd9c9546fdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f92aadc8ccf18dd91b5dd4b35285f60b174e4cf7
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71672841"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220072"
 ---
 # <a name="get-started-with-the-u-sql-catalog-in-azure-data-lake-analytics"></a>Bien démarrer avec le catalogue U-SQL dans Azure Data Lake Analytics
 
@@ -24,7 +20,7 @@ Dans le script U-SQL précédent, vous avez réutilisé EXTRACT pour lire depuis
 
 Le script suivant crée une TVF appelée `Searchlog()` dans la base de données et le schéma par défaut :
 
-```
+```usql
 DROP FUNCTION IF EXISTS Searchlog;
 
 CREATE FUNCTION Searchlog()
@@ -55,7 +51,7 @@ END;
 
 Le script suivant montre comment utiliser la fonction table définie dans le script précédent :
 
-```
+```usql
 @res =
     SELECT
         Region,
@@ -76,7 +72,7 @@ Si vous avez une expression de requête unique, vous pouvez utiliser une vue U-S
 
 Le script suivant crée une vue appelée `SearchlogView` dans la base de données et le schéma par défaut :
 
-```
+```usql
 DROP VIEW IF EXISTS SearchlogView;
 
 CREATE VIEW SearchlogView AS  
@@ -93,7 +89,7 @@ USING Extractors.Tsv();
 
 Le script suivant montre l'utilisation de la vue définie :
 
-```
+```usql
 @res =
     SELECT
         Region,
@@ -113,7 +109,7 @@ De façon similaire aux tables de base de données relationnelle, U-SQL vous per
 
 Créez une base de données et deux tables avec le script suivant :
 
-```
+```usql
 DROP DATABASE IF EXISTS SearchLogDb;
 CREATE DATABASE SearchLogDb;
 USE DATABASE SearchLogDb;
@@ -147,7 +143,7 @@ Vous pouvez interroger des tables, par exemple celles que vous avez créées dan
 
 Pour lire à partir des tables, modifiez le script de transformation que vous avez utilisé précédemment :
 
-```
+```usql
 @rs1 =
     SELECT
         Region,

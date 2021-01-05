@@ -1,27 +1,27 @@
 ---
 title: Niveaux tarifaires - Azure Database pour MySQL
 description: Découvrez les différents niveaux tarifaires d’Azure Database pour MySQL, ce qui englobe les générations de calcul, les types de stockage, la taille de stockage, les vCores, la mémoire et les périodes de conservation des sauvegardes.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 02/25/2020
-ms.openlocfilehash: f633c33d0d90715a940129d62cee6472d33d2106
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/14/2020
+ms.openlocfilehash: c70e4a097a56b76089a26510bcf33b4c7c24c266
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100955"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018713"
 ---
 # <a name="azure-database-for-mysql-pricing-tiers"></a>Niveaux tarifaires Azure Database pour MySQL
 
 Vous pouvez créer un serveur Azure Database pour MySQL dans un des trois différents niveaux tarifaires : De base, Usage général et À mémoire optimisée. Les niveaux tarifaires diffèrent par la quantité de calcul dans vCores qui peut être configurée, la mémoire par vCore et la technologie de stockage utilisée pour stocker les données. Toutes les ressources sont approvisionnées au niveau du serveur MySQL. Un serveur peut avoir une ou plusieurs bases de données.
 
-|    | **De base** | **Usage général** | **Mémoire optimisée** |
+| Attribut   | **De base** | **Usage général** | **Mémoire optimisée** |
 |:---|:----------|:--------------------|:---------------------|
 | Génération de calcul | Gen 4, Gen 5 | Gen 4, Gen 5 | Gen 5 |
 | vCores | 1, 2 | 2, 4, 8, 16, 32, 64 |2, 4, 8, 16, 32 |
-| Mémoire par vCore | 2 Go | 5 Go | 10 Go |
+| Mémoire par vCore | 2 Go | 5 Go | 10 Go |
 | Taille de stockage | 5 Go à 1 To | 5 Go à 16 To | 5 Go à 16 To |
 | Période de rétention de sauvegarde de bases de données | 7 à 35 jours | 7 à 35 jours | 7 à 35 jours |
 
@@ -43,7 +43,7 @@ Les ressources de calcul sont fournies en tant que vCores, représentant le proc
 
 Le stockage que vous approvisionnez est la quantité de stockage disponible pour votre serveur Azure Database pour MySQL. Le stockage est utilisé pour les fichiers de base de données, les fichiers temporaires, les journaux d’activité de transaction, et les journaux d’activité du serveur MySQL. La quantité totale de stockage que vous approvisionnez définit également la capacité d’E/S disponible sur votre serveur.
 
-|    | **De base** | **Usage général** | **Mémoire optimisée** |
+| Attribut de stockage   | De base | Usage général | Mémoire optimisée |
 |:---|:----------|:--------------------|:---------------------|
 | Type de stockage | Stockage de base | Stockage à usage général | Stockage à usage général |
 | Taille de stockage | 5 Go à 1 To | 5 Go à 16 To | 5 Go à 16 To |
@@ -51,7 +51,7 @@ Le stockage que vous approvisionnez est la quantité de stockage disponible pour
 | E/S par seconde | Variable |3 E/S par seconde/Go<br/>Min 100 E/S par seconde<br/>Max 20 000 IOPS | 3 E/S par seconde/Go<br/>Min 100 E/S par seconde<br/>Max 20 000 IOPS |
 
 > [!NOTE]
-> Un stockage d’une capacité maximale de 16 To et 20 000 IOPS sont pris en charge dans les régions suivantes : USA Est, USA Est 2, USA Centre, USA Ouest, USA Centre Nord, USA Centre Sud, Europe Nord, Europe Ouest, Royaume-Uni Sud, Royaume-Uni Ouest, Asie Sud-Est, Asie Est, Japon Est, Japon Ouest, Corée Centre, Corée Sud, Australie Est, Australie Sud-Est.
+> Un stockage d’une capacité maximale de 16 To et 20 000 IOPS sont pris en charge dans les régions suivantes : USA Est, USA Est 2, USA Centre, Brésil Sud, USA Ouest, USA Centre Nord, USA Centre Sud, Europe Nord, Europe Ouest, Royaume-Uni Sud, Royaume-Uni Ouest, Asie Sud-Est, Asie Est, Japon Est, Japon Ouest, Corée Centre, Corée Sud, Australie Est, Australie Sud-Est, USA Ouest 2, USA Centre-Ouest, Canada Est et Canada Centre.
 >
 > Toutes les autres régions prennent en charge une capacité de stockage maximale de 4 TO et jusqu’à 6 000 IOPS.
 >
@@ -83,9 +83,9 @@ Par exemple, si vous avez approvisionné 1000 Go de stockage et que l’utilisa
 
 N’oubliez pas que le stockage peut seulement monter en puissance.
 
-## <a name="backup"></a>Backup
+## <a name="backup-storage"></a>Stockage de sauvegarde 
 
-Le service effectue automatiquement des sauvegardes de votre serveur. Vous pouvez sélectionner une période de conservation comprise entre 7 et 35 jours. Les serveurs à usage général et à mémoire optimisée peuvent disposer d’un stockage géoredondant pour les sauvegardes. En savoir plus sur les sauvegardes dans l’[article sur les concepts](concepts-backup.md).
+Azure Database pour MySQL fournit jusqu’à 100 % du stockage de votre serveur approvisionné en stockage de sauvegarde sans coût supplémentaire. Le stockage de sauvegarde que vous utilisez au-delà de cette quantité est facturé en Go par mois. Par exemple, si vous configurez un serveur avec 250 Go de stockage, vous disposez de 250 Go de stockage supplémentaire pour les sauvegardes de serveur sans frais. Le stockage pour les sauvegardes dépassant 250 Go est facturé conformément au [modèle de tarification](https://azure.microsoft.com/pricing/details/mysql/). Pour comprendre les facteurs influençant l’utilisation du stockage de sauvegarde, la surveillance et le contrôle du coût de stockage de sauvegarde, vous pouvez consulter la [documentation relative à la sauvegarde](concepts-backup.md).
 
 ## <a name="scale-resources"></a>Mettre les ressources à l’échelle
 

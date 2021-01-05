@@ -8,13 +8,13 @@ services: iot-hub
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: robinsh
-ms.custom: mvc
-ms.openlocfilehash: 056dac7977115f97892d8dbfde0710e00237804e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 239d8f2bcc1422a1098fb8f6cb3fba6706d671f2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78674342"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87500195"
 ---
 # <a name="tutorial-use-the-azure-cli-to-configure-iot-hub-message-routing"></a>Tutoriel : Utiliser Azure CLI pour configurer le routage des messages IoT Hub
 

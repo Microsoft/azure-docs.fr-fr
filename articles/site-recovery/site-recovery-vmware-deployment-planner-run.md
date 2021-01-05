@@ -1,18 +1,18 @@
 ---
 title: Exécuter le planificateur de déploiement pour la récupération d’urgence de VMware avec Azure Site Recovery
 description: Cet article décrit comment exécuter le planificateur de déploiement Azure Site Recovery pour la reprise d’activité de VMware sur Azure.
-author: mayurigupta13
+author: rajeswari-mamilla
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 4/15/2019
-ms.author: mayg
-ms.openlocfilehash: 044e5c5df8e0af67e4717b864de1e31fc2520408
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: ramamill
+ms.openlocfilehash: 05d260de726c62c130a58938c2a2c9fa2440a96d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73953279"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004719"
 ---
 # <a name="run-the-deployment-planner-for-vmware-disaster-recovery"></a>Exécuter le planificateur de déploiement pour la récupération d’urgence de VMware
 Cet article est le guide de l’utilisateur d’Azure Site Recovery Deployment Planner portant sur les déploiements de production de VMware vers Azure.
@@ -40,18 +40,24 @@ Tout d’abord, vous avez besoin d’une liste des machines virtuelles à profil
 2. Ouvrez la console VMware vSphere PowerCLI.
 3. Assurez-vous que la stratégie d’exécution est activée pour le script. Si elle est désactivée, lancez la console VMware vSphere PowerCLI en mode administrateur, puis activez-la en exécutant la commande suivante :
 
-            Set-ExecutionPolicy –ExecutionPolicy AllSigned
+    ```powershell
+    Set-ExecutionPolicy –ExecutionPolicy AllSigned
+    ```
 
 4. Vous pourriez avoir besoin d’exécuter la commande suivante, dans le cas où Connect-VIServer ne serait pas reconnu comme nom de cmdlet.
 
-            Add-PSSnapin VMware.VimAutomation.Core
+    ```powershell
+    Add-PSSnapin VMware.VimAutomation.Core
+    ```
 
 5. Pour obtenir tous les noms des machines virtuelles sur un serveur vCenter/hôte vSphere ESXi et enregistrer la liste dans un fichier .txt, exécutez les deux commandes répertoriées ici.
 Remplacez &lsaquo;server name&rsaquo;, &lsaquo;user name&rsaquo;, &lsaquo;password&rsaquo; et &lsaquo;outputfile.txt&rsaquo; par vos entrées.
 
-            Connect-VIServer -Server <server name> -User <user name> -Password <password>
+    ```powershell
+    Connect-VIServer -Server <server name> -User <user name> -Password <password>
 
-            Get-VM |  Select Name | Sort-Object -Property Name >  <outputfile.txt>
+    Get-VM |  Select Name | Sort-Object -Property Name >  <outputfile.txt>
+    ```
 
 6. Ouvrez le fichier de sortie dans le bloc-notes et copiez les noms de toutes les machines virtuelles que vous souhaitez profiler dans un autre fichier (par exemple, ProfileVMList.txt), en indiquant un nom de machine virtuelle par ligne. Ce fichier est utilisé comme entrée pour le paramètre *-VMListFile* de l’outil de ligne de commande.
 

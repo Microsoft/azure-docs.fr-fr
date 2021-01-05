@@ -1,6 +1,6 @@
 ---
 title: Types d’application pour la plateforme d’identité Microsoft | Azure
-description: Types d’applications et de scénarios pris en charge par le point de terminaison de la plateforme d’identité Microsoft (version 2.0).
+description: Types d’applications et de scénarios pris en charge par le point de terminaison de la plateforme d’identité Microsoft.
 services: active-directory
 author: rwike77
 manager: CelesteDG
@@ -8,24 +8,24 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 04/13/2020
+ms.date: 11/13/2020
 ms.author: ryanwi
 ms.reviewer: saeeda, jmprieur
-ms.custom: aaddev
-ms.openlocfilehash: def92071496716f90b24158a50e4a5233e93c994
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: aaddev, fasttrack-edit, contperf-fy21q2
+ms.openlocfilehash: fd1fc59fd1ade6036c57f15415afccfc693f7bff
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81677984"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97029751"
 ---
 # <a name="application-types-for-microsoft-identity-platform"></a>Types d’application pour la plateforme d’identité Microsoft
 
-Le point de terminaison de la plateforme d’identité Microsoft v2.0 prend en charge l’authentification pour plusieurs architectures d’application modernes, toutes basées sur des protocoles industriels standard [OAuth 2.0 ou OpenID Connect](active-directory-v2-protocols.md). Cet article décrit les types d’application que vous pouvez générer à l’aide de la plateforme d’identité Microsoft, quelle que soit votre plateforme ou votre langage préférés. Ces informations sont conçues pour vous aider à comprendre les scénarios de haut niveau avant de [commencer à manipuler le code](v2-overview.md#getting-started).
+Le point de terminaison de la plateforme d’identité Microsoft prend en charge l’authentification pour plusieurs architectures d’application modernes, toutes basées sur des protocoles industriels standard [OAuth 2.0 ou OpenID Connect](active-directory-v2-protocols.md). Cet article décrit les types d’application que vous pouvez générer à l’aide de la plateforme d’identité Microsoft, quelle que soit votre plateforme ou votre langage préférés. Ces informations sont conçues pour vous aider à comprendre les scénarios de haut niveau avant de commencer à manipuler le code dans les [scénarios d’application](authentication-flows-app-scenarios.md#application-scenarios).
 
 ## <a name="the-basics"></a>Concepts de base
 
-Vous devez inscrire chaque application qui utilise la plateforme d’identité Microsoft dans le [portail d’inscriptions d’applications](https://go.microsoft.com/fwlink/?linkid=2083908). Le processus d’inscription des applications collecte les valeurs suivantes et les affecte à votre application :
+Vous devez inscrire chaque application utilisant la plateforme d’identité Microsoft dans le portail Azure [Inscriptions d’applications](https://go.microsoft.com/fwlink/?linkid=2083908). Le processus d’inscription des applications collecte les valeurs suivantes et les affecte à votre application :
 
 * un **ID d’application** qui identifie de manière unique votre application ;
 * un **URI de redirection** que vous pouvez utiliser pour renvoyer les réponses à votre application ;
@@ -42,13 +42,19 @@ https://login.microsoftonline.com/common/oauth2/v2.0/token
 
 ## <a name="single-page-apps-javascript"></a>Applications à page unique (Javascript)
 
-De nombreuses applications modernes disposent d’un frontend d’application à page unique écrit principalement en JavaScript. Souvent, il est écrit à l’aide d’une infrastructure telle qu’Angular, React ou Vue. Le point de terminaison de la plateforme d’identité Microsoft prend en charge ces applications à l’aide du [flux implicite OAuth 2.0](v2-oauth2-implicit-grant-flow.md).
+De nombreuses applications modernes ont un frontal d’application monopage écrit principalement en JavaScript, souvent avec une infrastructure telle que Angular, React ou Vue. Le point de terminaison de la plateforme d’identité Microsoft prend en charge ces applications avec le protocole [OpenID Connect](v2-protocols-oidc.md) pour l’authentification et soit le [flux d’octroi implicite OAuth 2.0](v2-oauth2-implicit-grant-flow.md), soit le système plus récent avec [code d’autorisation OAuth 2.0 + flux PKCE](v2-oauth2-auth-code-flow.md) pour l’autorisation (voir ci-dessous).
 
-Dans ce flux, l'application reçoit des jetons directement du point de terminaison de plateforme d’identité Microsoft, sans exécuter d’échanges de serveur à serveur. Tout traitement de logique d'authentification et de gestion de sessions est entièrement exécuté dans le client javascript, sans redirections de pages supplémentaires.
+Le diagramme ci-dessous illustre l’octroi du code d’autorisation OAuth 2.0 (avec des détails sur le PKCE omis), dans lequel l’application reçoit un code du point de terminaison de la plateforme d’identité Microsoft `authorize` et l’utilise pour les jetons et les jetons d’actualisation à l’aide de requêtes web intersites. Le jeton d’actualisation expire toutes les 24 heures, et l’application doit demander un autre code. En plus du jeton d’accès, une `id_token` qui représente l’utilisateur connecté à l’application cliente est généralement également demandée par le biais du même flux et/ou d’une demande de connexion OpenID distincte (non illustrée ici).
 
-![Affiche le flux d’authentification implicite](./media/v2-app-types/convergence-scenarios-implicit.svg)
+:::image type="content" source="media/v2-oauth-auth-code-spa/active-directory-oauth-code-spa.svg" alt-text="Diagramme montrant le flot du code d’autorisation OAuth 2 entre une application à page unique et le point de terminaison du service d’émission de jeton de sécurité." border="false":::
 
-Pour voir ce scénario en action, exécutez l’un des exemples de code d’application monopage dans la section relative à la [prise en main de la plateforme d’identité Microsoft](v2-overview.md#getting-started).
+Pour voir ce scénario en action, consultez le [didacticiel : Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage JavaScript à l’aide d’un flux de code d’autorisation](tutorial-v2-javascript-auth-code.md).
+
+### <a name="authorization-code-flow-vs-implicit-flow"></a>Flux de code d’autorisation et flux implicite
+
+Pour l’essentiel de l’historique d’OAuth 2.0, le [flux implicite](v2-oauth2-implicit-grant-flow.md) était la méthode recommandée pour générer des applications monopages. Avec la suppression des [cookies tiers](reference-third-party-cookies-spas.md) et une [plus grande attention](https://tools.ietf.org/html/draft-ietf-oauth-security-topics-14) portée sur les problèmes de sécurité liés au flux implicite, nous avons adopté vers le code d’autorisation pour les applications monopages.
+
+Pour garantir la compatibilité de votre application dans Safari et dans d’autres navigateurs prenant en charge la confidentialité, nous recommandons d’utiliser le flux de code d’autorisation plutôt que le flux implicite.
 
 ## <a name="web-apps"></a>les applications web
 
@@ -75,9 +81,9 @@ Dans les applications de serveur web, le flux d’authentification de connexion 
 
 Vous pouvez vérifier l’identité de l’utilisateur en validant le jeton d’ID avec une clé de signature publique reçue du point de terminaison de la plateforme d’identité Microsoft. Un cookie de session qui peut être utilisé pour identifier l’utilisateur sur les requêtes de page suivantes est défini.
 
-Pour voir ce scénario en action, exécutez l’un des exemples de code de connexion d’application web dans la section relative à la [prise en main de la plateforme d’identité Microsoft](v2-overview.md#getting-started).
+Pour voir ce scénario en action, essayez les exemples de code du [scénario d'application web qui connecte des utilisateurs](scenario-web-app-sign-user-overview.md).
 
-En plus de la connexion simple, une application de serveur web peut également nécessiter l’accès à un autre service Web, comme une API REST. Dans ce cas, l’application de serveur web s’engager dans un flux OpenID Connect et OAuth 2.0 à l’aide du [flux de code d’autorisation OAuth 2.0](active-directory-v2-protocols.md). Pour en savoir plus sur ce scénario, découvrez comment [la bien démarrer avec les applications web et des API web](active-directory-v2-devquickstarts-webapp-webapi-dotnet.md).
+En plus de la connexion simple, une application de serveur web peut également nécessiter l’accès à un autre service Web, comme une API REST. Dans ce cas, l’application de serveur web s’engager dans un flux OpenID Connect et OAuth 2.0 à l’aide du [flux de code d’autorisation OAuth 2.0](v2-oauth2-auth-code-flow.md). Pour en savoir plus sur ce scénario, découvrez comment [la bien démarrer avec les applications web et des API web](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-WebAPI-OpenIDConnect-DotNet).
 
 ## <a name="web-apis"></a>API Web
 
@@ -99,7 +105,7 @@ Une API web peut recevoir des jetons d’accès de tous types d’applications, 
 
 ![Affiche le flux d’authentification d’API web](./media/v2-app-types/convergence-scenarios-webapi.svg)
 
-Pour savoir comment sécuriser une API web avec des jetons d’accès OAuth2, consultez les exemples de code d’API web de la section [Prise en main de la plateforme d’identités Microsoft](v2-overview.md#getting-started).
+Pour savoir comment sécuriser une API web avec des jetons d’accès OAuth2, consultez les exemples de code d’API web du [scénario d’API web protégée](scenario-protected-web-api-overview.md).
 
 Dans de nombreux cas, les API web doivent également envoyer des demandes à d’autres API web en aval, sécurisées par la plateforme d’identité Microsoft. Pour ce faire, elles peuvent utiliser le flux **Au nom de** d’Azure AD, qui permet à l’API web d’échanger un jeton d’accès entrant contre un autre jeton d’accès, à utiliser pour les requêtes sortantes. Pour en savoir plus, voir [Plateforme d’identité Microsoft et flux On-Behalf-Of OAuth 2.0](v2-oauth2-on-behalf-of-flow.md).
 
@@ -111,6 +117,9 @@ Dans ce flux, l’application reçoit un code d’autorisation à partir du poin
 
 ![Affiche le flux d’authentification des applications natives](./media/v2-app-types/convergence-scenarios-native.svg)
 
+> [!NOTE]
+> Si l’application utilise l’application System WebView par défaut, consultez les informations concernant la fonctionnalité « Confirmer ma connexion » et le code d’erreur AADSTS50199 dans [Codes d’erreur d’authentification et d’autorisation Azure AD](reference-aadsts-error-codes.md).
+
 ## <a name="daemons-and-server-side-apps"></a>Applications démons et côté serveur
 
 Les applications qui contiennent des processus de longue durée ou qui fonctionnent sans interaction d’un utilisateur doivent également disposer d’un moyen d’accès aux ressources sécurisées, comme les API web. Ces applications peuvent s'authentifier et récupérer des jetons à l'aide de l'identité d'application plutôt qu'avec l'identité déléguée d'un utilisateur avec le flux des informations d'identification du client OAuth 2.0. Vous pouvez prouver l’identité de l’application à l’aide d’une clé secrète client ou d’un certificat. Pour plus d’informations, consultez [Application console démon .NET Core utilisant la plateforme d’identité Microsoft](https://github.com/Azure-Samples/active-directory-dotnetcore-daemon-v2).
@@ -120,3 +129,7 @@ Dans ce flux, l’application interagit directement avec le point de terminaison
 ![Affiche le flux d’authentification des applications démons](./media/v2-app-types/convergence-scenarios-daemon.svg)
 
 Pour créer une application démon, consultez la [documentation sur les informations d’identification des clients](v2-oauth2-client-creds-grant-flow.md) ou consultez un [exemple d’application .NET](https://github.com/Azure-Samples/active-directory-dotnet-daemon-v2).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+À présent que vous êtes familiarisé avec les types d’applications que la plateforme d’identité Microsoft prend en charge, apprenez-en davantage sur [OAuth 2.0 et OpenID Connect](active-directory-v2-protocols.md) afin de comprendre les composants de protocole utilisés par les différents scénarios.

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Storegate pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Storegate.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 628fa804-c0e6-4db1-ab6b-46ee9aab4d41
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/15/2019
 ms.author: Zhchia
-ms.openlocfilehash: 72903a36f88f9092ce1d203b557003083407320b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c984beff630ef90ea33a13e2fef1bca0189c2314
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064255"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94357935"
 ---
 # <a name="tutorial-configure-storegate-for-automatic-user-provisioning"></a>Tutoriel : Configurer Storegate pour l’approvisionnement automatique d’utilisateurs
 
@@ -67,7 +63,7 @@ Avant de configurer Storegate pour l’approvisionnement automatique d’utilisa
 
     ![Bouton bascule Storegate](media/storegate-provisioning-tutorial/sso.png)
 
-3. Copiez l’**URL de locataire** et le **Jeton**. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** respectivement de l’onglet Approvisionnement de votre application Storegate sur le Portail Azure. 
+3. Copiez l’ **URL de locataire** et le **Jeton**. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** respectivement de l’onglet Approvisionnement de votre application Storegate sur le Portail Azure. 
 
     ![Storegate Créer le jeton](media/storegate-provisioning-tutorial/token.png)
 
@@ -79,7 +75,7 @@ Avant de configurer Storegate pour l’approvisionnement automatique d’utilisa
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -124,7 +120,7 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 ### <a name="to-configure-automatic-user-provisioning-for-storegate-in-azure-ad"></a>Pour configurer l’approvisionnement automatique d’utilisateurs pour Storegate dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -134,27 +130,27 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://dialpad.com/scim` dans **URL de locataire**. Entrez la valeur que vous avez récupérée et enregistrée précédemment à partir de Storegate dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Storegate. Si la connexion échoue, vérifiez que votre compte Storegate dispose d’autorisations Administrateur et réessayez.
+5. Dans la section **Informations d’identification de l’administrateur** , entrez `https://dialpad.com/scim` dans **URL de locataire**. Entrez la valeur que vous avez récupérée et enregistrée précédemment à partir de Storegate dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Storegate. Si la connexion échoue, vérifiez que votre compte Storegate dispose d’autorisations Administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-6. Dans le champ **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+6. Dans le champ **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 7. Cliquez sur **Enregistrer**.
 
-8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Storegate**.
+8. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Storegate**.
 
     ![Mappages d’utilisateurs Storegate](media/storegate-provisioning-tutorial/usermappings.png)
 
-9. Dans la section **Mappages des attributs**, passez en revue les attributs d’utilisateurs qui sont synchronisés entre Azure AD et Storegate. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Storegate pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+9. Dans la section **Mappages des attributs** , passez en revue les attributs d’utilisateurs qui sont synchronisés entre Azure AD et Storegate. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Storegate pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Attributs utilisateur Storegate](media/storegate-provisioning-tutorial/userattributes.png)
 

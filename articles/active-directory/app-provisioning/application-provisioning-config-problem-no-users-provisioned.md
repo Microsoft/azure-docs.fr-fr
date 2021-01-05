@@ -2,21 +2,21 @@
 title: Utilisateurs non approvisionnés dans mon application
 description: Résolution des problèmes courants rencontrés lorsque les utilisateurs ne figurent pas dans une application de la galerie Azure AD que vous avez configurée pour l’approvisionnement d’utilisateurs avec Azure AD
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/20/2020
-ms.author: mimart
+ms.topic: how-to
+ms.date: 12/03/2020
+ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: fa47fbba7632077c83dc1d594c7c58c59c869bf7
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 89a5838524daa1959ecf6b4fe3c17d6175ca8553
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594013"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96571774"
 ---
 # <a name="no-users-are-being-provisioned"></a>Aucun utilisateur n’est en cours d’approvisionnement 
 >[!NOTE]
@@ -24,7 +24,7 @@ ms.locfileid: "82594013"
 >
 Une fois que l’approvisionnement automatique a été configuré pour une application (avec notamment la vérification des informations d’identification de l’application fournies à Azure AD pour la connexion à l’application), les utilisateurs et/ou groupes sont approvisionnés sur l’application. L’approvisionnement est déterminé par les éléments suivants :
 
--   Quels utilisateurs et groupes ont été **affectés** à l’application. Notez que le provisionnement des groupes imbriqués ou des groupes Office 365 n’est pas pris en charge. Pour plus d’informations sur l’affectation, consultez [Affecter un utilisateur ou un groupe à une application d’entreprise dans Azure Active Directory](../manage-apps/assign-user-or-group-access-portal.md).
+-   Quels utilisateurs et groupes ont été **affectés** à l’application. Notez que le provisionnement des groupes imbriqués n’est pas pris en charge. Pour plus d’informations sur l’affectation, consultez [Affecter un utilisateur ou un groupe à une application d’entreprise dans Azure Active Directory](../manage-apps/assign-user-or-group-access-portal.md).
 -   Les **mappages d’attributs** sont-ils activés et configurés pour synchroniser les attributs valides d’Azure AD avec l’application. Pour plus de détails sur les mappages d’attributs, consultez [Personnalisation des mappages d’attributs d’approvisionnement d’utilisateurs pour les applications SaaS dans Azure Active Directory](customize-application-attributes.md).
 -   Un **filtre d’étendue** permet-il de filtrer les utilisateurs en fonction de valeurs d’attribut spécifiques. Pour plus d’informations sur les filtres d’étendue, consultez [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
   
@@ -58,7 +58,7 @@ Lorsqu’un utilisateur apparaît comme « ignoré » dans les journaux de pro
 - **Un attribut requis manque ou n’est pas indiqué pour un utilisateur.** Lors de la configuration de l’approvisionnement, il est important de vérifier et configurer les mappages d’attributs et les workflows qui définissent les propriétés de l’utilisateur (ou du groupe) passant d’Azure AD à l’application. Cette configuration inclut la définition d’une « propriété correspondante » réservée à l’identification et à la mise en correspondance des utilisateurs/groupes entre les deux systèmes. Pour plus de détails sur ce processus important, consultez [Personnalisation des mappages d’attributs d’approvisionnement d’utilisateurs pour les applications SaaS dans Azure Active Directory](customize-application-attributes.md).
 - **Mappage d’attributs pour les groupes :** Approvisionnement du nom du groupe et des détails du groupe, en plus des membres, si la prise en charge est effective pour certaines applications. Vous pouvez activer ou désactiver cette fonctionnalité en activant ou désactivant le **mappage** pour les objets de groupe affichés dans l’onglet **Approvisionnement**. Si les groupes d’approvisionnement sont activés, veillez à passer en revue les mappages d’attributs afin de vous assurer qu’un champ approprié est utilisé pour l’« ID correspondant ». L’ID correspondant peut être le nom d’affichage ou l’alias de messagerie. Le groupe et ses membres ne sont pas approvisionnés si la propriété correspondante est vide ou n’est pas renseignée pour un groupe dans Azure AD.
 ## <a name="provisioning-users-assigned-to-the-default-access-role"></a>Approvisionnement des utilisateurs assignés au rôle d’accès par défaut
-Le rôle par défaut sur une application de la galerie est appelé le rôle « accès par défaut ». Historiquement, les utilisateurs assignés à ce rôle ne sont pas approvisionnés et sont marqués comme étant ignorés dans les [journaux d’approvisionnement](https://docs.microsoft.com/azure/active-directory/reports-monitoring/concept-provisioning-logs) parce qu’ils ont le statut « non autorisés de manière effective ». 
+Le rôle par défaut sur une application de la galerie est appelé le rôle « accès par défaut ». Historiquement, les utilisateurs assignés à ce rôle ne sont pas approvisionnés et sont marqués comme étant ignorés dans les [journaux d’approvisionnement](../reports-monitoring/concept-provisioning-logs.md) parce qu’ils ont le statut « non autorisés de manière effective ». 
 
 **Comportement pour l’approvisionnement des configurations créées après le 16/04/2020 :** Les utilisateurs assignés au rôle d’accès par défaut sont évalués de la même façon que tous les autres rôles. Un utilisateur auquel est attribué l’accès par défaut n’est pas ignoré pour le motif « non autorisé de manière effective ». 
 

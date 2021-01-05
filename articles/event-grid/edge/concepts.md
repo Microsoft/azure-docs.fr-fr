@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/03/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 73309e10e88c11e639e6ac6fd3bb061e1b5c685b
-ms.sourcegitcommit: 6a4fbc5ccf7cca9486fe881c069c321017628f20
+ms.openlocfilehash: b3babfe93012fae15e79362ba34f3f48856bc833
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "72991850"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171735"
 ---
 # <a name="event-grid-concepts"></a>Concepts d’Event Grid
 

@@ -3,12 +3,12 @@ title: Informations de référence sur le fichier host.json pour Azure Functions
 description: Documentation de référence pour le fichier host.json d’Azure Functions avec le runtime v1.
 ms.topic: conceptual
 ms.date: 10/19/2018
-ms.openlocfilehash: 36d028d09c94ae28e77404297bd576f5e20404c6
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 588ab6723015f34d15e4a46ec4f7324302b13b81
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81757520"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94832821"
 ---
 # <a name="hostjson-reference-for-azure-functions-1x"></a>Informations de référence sur le fichier host.json pour Azure Functions 1.x
 
@@ -93,7 +93,8 @@ L’exemple de fichier *host.json* suivant contient toutes les options possibles
     "serviceBus": {
       "maxConcurrentCalls": 16,
       "prefetchCount": 100,
-      "autoRenewTimeout": "00:05:00"
+      "autoRenewTimeout": "00:05:00",
+      "autoComplete": true
     },
     "singleton": {
       "lockPeriod": "00:00:15",
@@ -230,7 +231,7 @@ Si vous partagez un compte de stockage entre plusieurs applications de fonction,
 
 ## <a name="logger"></a>logger
 
-Contrôle le filtrage des journaux d’activité écrits par un [objet ILogger](functions-monitoring.md#write-logs-in-c-functions) ou par [context.log](functions-monitoring.md#write-logs-in-javascript-functions).
+Contrôle le filtrage des journaux d’activité écrits par un [objet ILogger](functions-dotnet-class-library.md#ilogger) ou par [context.log](functions-reference-node.md#contextlog-method).
 
 ```json
 {
@@ -286,6 +287,7 @@ Paramètres de configuration pour la [liaison de sortie SendGrind](functions-bin
     "sendGrid": {
         "from": "Contoso Group <admin@contoso.com>"
     }
+}    
 ```
 
 |Propriété  |Default | Description |
@@ -301,7 +303,8 @@ Paramètre de configuration pour les [déclencheurs et liaisons Service Bus](fu
     "serviceBus": {
       "maxConcurrentCalls": 16,
       "prefetchCount": 100,
-      "autoRenewTimeout": "00:05:00"
+      "autoRenewTimeout": "00:05:00",
+      "autoComplete": true
     }
 }
 ```
@@ -310,7 +313,8 @@ Paramètre de configuration pour les [déclencheurs et liaisons Service Bus](fu
 |---------|---------|---------| 
 |maxConcurrentCalls|16|Nombre maximal d’appels simultanés pour le rappel que la pompe de messages doit initier. Par défaut, le runtime Functions traite plusieurs messages simultanément. Pour que le runtime ne traite qu’un message de file d’attente ou de rubrique à la fois, définissez `maxConcurrentCalls` sur 1. | 
 |prefetchCount|n/a|Valeur PrefetchCount par défaut qui est utilisée par l’instance MessageReceiver sous-jacente.| 
-|autoRenewTimeout|00:05:00|Durée maximale pendant laquelle le verrouillage de message doit être renouvelé automatiquement.| 
+|autoRenewTimeout|00:05:00|Durée maximale pendant laquelle le verrouillage de message doit être renouvelé automatiquement.|
+|autoComplete|true|Lorsque la valeur est true, le déclencheur termine automatiquement le traitement du message en cas d’exécution réussie de l’opération. Lorsque la valeur est false, la fonction est chargée de terminer le message avant de le retourner.|
 
 ## <a name="singleton"></a>singleton
 
@@ -340,7 +344,7 @@ Paramètres de configuration du comportement de verrouillage Singleton. Pour plu
 
 *Version 1.x*
 
-Paramètres de configuration des journaux d’activité que vous créez à l’aide d’un objet `TraceWriter`. Consultez les sections relatives à la [journalisation en C#](functions-reference-csharp.md#logging) et à la [journalisation Node.js](functions-reference-node.md#writing-trace-output-to-the-console).
+Paramètres de configuration des journaux d’activité que vous créez à l’aide d’un objet `TraceWriter`. Pour en savoir plus, consultez [Journalisation C#].
 
 ```json
 {

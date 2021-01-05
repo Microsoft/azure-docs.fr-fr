@@ -1,17 +1,17 @@
 ---
-author: julianparismorgan
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.date: 05/14/2019
+ms.date: 11/20/2020
 ms.topic: include
-ms.author: pmorgan
+ms.author: parkerra
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 96439479ebb007507efdd577e963532d9cdf90d4
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 1986764a44a98208ee79819fa200034ec34370bf
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67722950"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95996257"
 ---
 ## <a name="putting-everything-together"></a>Regroupement
 
@@ -42,6 +42,11 @@ public class AzureSpatialAnchorsScript : MonoBehaviour
     /// Set this string to the Spatial Anchors account key provided in the Spatial Anchors resource.
     /// </summary>
     protected string SpatialAnchorsAccountKey = "Set me";
+
+    /// <summary>
+    /// Set this string to the Spatial Anchors account domain provided in the Spatial Anchors resource.
+    /// </summary>
+    protected string SpatialAnchorsAccountDomain = "Set me";
 
     /// <summary>
     /// Our queue of actions that will be executed on the main thread.
@@ -197,6 +202,7 @@ public class AzureSpatialAnchorsScript : MonoBehaviour
 
         cloudSpatialAnchorSession.Configuration.AccountId = SpatialAnchorsAccountId.Trim();
         cloudSpatialAnchorSession.Configuration.AccountKey = SpatialAnchorsAccountKey.Trim();
+        cloudSpatialAnchorSession.Configuration.AccountDomain = SpatialAnchorsAccountDomain.Trim();
 
         cloudSpatialAnchorSession.LogLevel = SessionLogLevel.All;
 
@@ -277,13 +283,13 @@ public class AzureSpatialAnchorsScript : MonoBehaviour
         {
             return;
         }
+        
         tapExecuted = true;
 
         // We have saved an anchor, so we will now look for it.
         if (!String.IsNullOrEmpty(cloudSpatialAnchorId))
         {
             Debug.Log("ASA Info: We will look for a placed anchor.");
-            tapExecuted = true;
 
             ResetSession(() =>
             {
@@ -399,4 +405,4 @@ public class AzureSpatialAnchorsScript : MonoBehaviour
 Dans ce tutoriel, vous avez découvert l’utilisation d’Azure Spatial Anchors dans une nouvelle application Unity HoloLens. Pour en savoir plus sur l’utilisation d’Azure Spatial Anchors dans une nouvelle application Android, passez au tutoriel suivant.
 
 > [!div class="nextstepaction"]
-> [Démarrage d’une nouvelle application Android](/azure/spatial-anchors/tutorials/tutorial-new-android-app)
+> [Démarrage d’une nouvelle application Android](../articles/spatial-anchors/tutorials/tutorial-new-android-app.md)

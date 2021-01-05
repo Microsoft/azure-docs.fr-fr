@@ -3,16 +3,16 @@ title: Restaurer des partages de fichiers Azure
 description: Découvrez comment utiliser le portail Azure pour restaurer un partage de fichiers entier ou des fichiers spécifiques à partir d’un point de restauration créé par le service Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 01/12/2020
-ms.openlocfilehash: c22078ebd89f5f6f8299e1424d4d9e21edce8b92
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 35ca0936ae6efba716adb51f43326cdd5bfa2d98
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77586857"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89376772"
 ---
 # <a name="restore-azure-file-shares"></a>Restaurer des partages de fichiers Azure
 
-Cet article explique comment utiliser le portail Azure pour restaurer l’intégralité d’un partage de fichiers ou des fichiers spécifiques à partir d’un point de restauration créé par le service [Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-overview).
+Cet article explique comment utiliser le portail Azure pour restaurer l’intégralité d’un partage de fichiers ou des fichiers spécifiques à partir d’un point de restauration créé par le service [Sauvegarde Azure](./backup-overview.md).
 
 Dans cet article, vous allez apprendre à :
 
@@ -50,41 +50,40 @@ Vous pouvez utiliser cette option de restauration pour restaurer l’intégralit
 
    ![Sélectionner Restaurer le partage](./media/restore-afs/restore-share.png)
 
-1. Après que vous avez sélectionné **Restaurer le partage**, le volet **Restaurer** s’ouvre sur un menu **Point de restauration** affichant la liste des points de restauration disponibles pour le partage de fichiers sélectionné.
+1. Lorsque vous sélectionnez **Restaurer le partage**, le volet **Restaurer** s’ouvre. Pour sélectionner le point de restauration à utiliser pour exécuter l’opération de restauration, choisissez le texte du lien **Sélectionner** situé sous la zone de texte **Point de restauration**.
 
-1. Sélectionnez le point de restauration que vous souhaitez utiliser pour effectuer l’opération de restauration, puis sélectionnez **OK**.
+    ![Sélectionner un point de restauration en choisissant Sélectionner](./media/restore-afs/select-restore-point.png)
+
+1. Le volet contextuel **Sélectionner un point de restauration** s’ouvre à droite et propose une liste de points de restauration disponibles pour le partage de fichiers sélectionné. Sélectionnez le point de restauration que vous souhaitez utiliser pour effectuer l’opération de restauration, puis sélectionnez **OK**.
 
     ![Sélectionner le point de restauration](./media/restore-afs/restore-point.png)
 
-1. Une fois que vous avez sélectionné **OK**, le menu du volet **Restaurer** bascule vers **Emplacement de restauration**. Dans **Emplacement de restauration**, indiquez où (ou comment) restaurer les données. Sélectionnez l’une des deux options suivantes :
+    >[!NOTE]
+    >Par défaut, le volet **Sélectionner un point de restauration** présente les points de restauration des 30 derniers jours. Si vous souhaitez afficher les points de restauration créés à un moment précis, spécifiez la plage en sélectionnant l’**heure de début** et l’**heure de fin** appropriées, puis sélectionnez le bouton **Actualiser**.
+
+1. L’étape suivante consiste à choisir l’**emplacement de restauration**. Dans la section **Destination de récupération**, spécifiez où et comment restaurer les données. Sélectionnez l’une des deux options suivantes à l’aide du bouton bascule :
 
     * **Emplacement d’origine** : Restaurez le partage de fichiers complet au même emplacement que la source d’origine.
     * **Autre emplacement** : Restaurez le partage de fichiers complet à un autre emplacement et conservez le partage de fichiers d’origine tel quel.
 
-#### <a name="restore-to-the-original-location"></a>Restaurer à l’emplacement d’origine
+#### <a name="restore-to-the-original-location-full-share-recovery"></a>Restaurer à l'emplacement d'origine (récupération de l'intégralité du partage)
 
-1. Sélectionnez **Emplacement d’origine** comme **Destination de récupération** et indiquez si vous souhaitez ignorer ou remplacer en cas de conflit. Après que vous avez effectué la sélection appropriée, sélectionnez **OK**.
-
-    ![Sélectionner l’emplacement d’origine](./media/restore-afs/original-location.png)
+1. Sélectionnez **Emplacement d’origine** comme **Destination de récupération** et choisissez d’ignorer ou de remplacer en cas de conflit en sélectionnant l’option appropriée dans la liste déroulante **En cas de conflit**.
 
 1. Sélectionnez **Restaurer** pour démarrer l’opération de restauration.
 
     ![Sélectionner Restaurer pour démarrer](./media/restore-afs/click-restore.png)
 
-#### <a name="restore-to-an-alternate-location"></a>Restaurer à un autre emplacement
+#### <a name="restore-to-an-alternate-location-full-share-recovery"></a>Restaurer à un autre emplacement (récupération de l'intégralité du partage)
 
 1. Sélectionnez **Autre emplacement** comme **Destination de récupération**.
 1. Dans la liste déroulante **Compte de stockage**, sélectionnez le compte de stockage de destination dans lequel vous souhaitez restaurer le contenu sauvegardé.
 1. La liste déroulante **Sélectionner le partage de fichiers** affiche les partages de fichiers présents dans le compte de stockage que vous avez sélectionné à l’étape 2. Sélectionnez le partage de fichiers dans lequel vous souhaitez restaurer le contenu sauvegardé.
 1. Dans la zone **Nom du dossier**, spécifiez le nom du dossier que vous souhaitez créer dans le partage de fichiers de destination avec le contenu restauré.
 1. Indiquez si les conflits doivent être ignorés ou remplacés.
-1. Après avoir entré les valeurs appropriées dans toutes les zones, sélectionnez **OK**.
+1. Après avoir entré les valeurs appropriées dans toutes les zones, sélectionnez **Restaurer** pour démarrer l’opération de restauration.
 
     ![Sélectionner un autre emplacement](./media/restore-afs/alternate-location.png)
-
-1. Sélectionnez **Restaurer** pour démarrer l’opération de restauration.
-
-    ![Sélectionner Restaurer pour démarrer](./media/restore-afs/click-restore.png)
 
 ### <a name="item-level-recovery"></a>Récupération au niveau de l'élément
 
@@ -94,64 +93,57 @@ Vous pouvez utiliser cette option de restauration pour restaurer des fichiers ou
 
     ![Sélectionner la récupération de fichier](./media/restore-afs/file-recovery.png)
 
-1. Après que vous avez sélectionné **Récupération de fichiers**, le volet **Restaurer** s’ouvre sur un menu **Point de restauration** affichant la liste des points de restauration disponibles pour le partage de fichiers sélectionné.
+1. Lorsque vous sélectionnez **Récupération de fichier**, le volet **Restaurer** s’ouvre. Pour sélectionner le point de restauration à utiliser pour exécuter l’opération de restauration, choisissez le texte du lien **Sélectionner** situé sous la zone de texte **Point de restauration**.
 
-1. Sélectionnez le point de restauration que vous souhaitez utiliser pour effectuer l’opération de restauration, puis sélectionnez **OK**.
+    ![Sélectionner un point de restauration en choisissant le lien Sélectionner](./media/restore-afs/select-restore-point.png)
+
+1. Le volet contextuel **Sélectionner un point de restauration** s’ouvre à droite et propose une liste de points de restauration disponibles pour le partage de fichiers sélectionné. Sélectionnez le point de restauration que vous souhaitez utiliser pour effectuer l’opération de restauration, puis sélectionnez **OK**.
 
     ![Sélectionner le point de restauration](./media/restore-afs/restore-point.png)
 
-1. Une fois que vous avez sélectionné **OK**, le menu du volet Restaurer bascule vers **Emplacement de restauration**. Dans **Emplacement de restauration**, indiquez où (ou comment) restaurer les données. Sélectionnez l’une des deux options suivantes :
+1. L’étape suivante consiste à choisir l’**emplacement de restauration**. Dans la section **Destination de récupération**, spécifiez où et comment restaurer les données. Sélectionnez l’une des deux options suivantes à l’aide du bouton bascule :
 
     * **Emplacement d’origine** : Restaurez les fichiers ou dossiers sélectionnés dans le même partage de fichiers que la source d’origine.
     * **Autre emplacement** : Restaurez les fichiers ou dossiers sélectionnés dans un autre emplacement et conservez le contenu du partage de fichiers d’origine tel quel.
 
-#### <a name="restore-to-the-original-location"></a>Restaurer à l’emplacement d’origine
+#### <a name="restore-to-the-original-location-item-level-recovery"></a>Restaurer à l'emplacement d'origine (récupération au niveau de l'élément)
 
-1. Sélectionnez **Emplacement d’origine** comme **Destination de récupération** et indiquez si vous souhaitez ignorer ou remplacer en cas de conflit.
+1. Sélectionnez **Emplacement d’origine** comme **Destination de récupération** et choisissez d’ignorer ou de remplacer en cas de conflit en sélectionnant l’option appropriée dans la liste déroulante **En cas de conflit**.
 
     ![Emplacement d’origine pour la récupération au niveau de l’élément](./media/restore-afs/original-location-item-level.png)
 
-1. Choisissez **Sélectionner un fichier** pour sélectionner les fichiers ou dossiers à restaurer.
+1. Pour sélectionner les fichiers ou dossiers à restaurer, sélectionnez le bouton **Ajouter un fichier**. Un volet contextuel s’ouvre à droite et présente le contenu du point de récupération du partage de fichiers sélectionné pour restauration.
 
-    ![Choisir Sélectionner un fichier](./media/restore-afs/select-file.png)
-
-1. Lorsque vous choisissez **Sélectionnez un fichier**, un volet de partage de fichiers affiche le contenu du point de récupération du partage de fichiers que vous avez sélectionné pour la restauration.
+    ![Choisir Ajouter un fichier](./media/restore-afs/add-file.png)
 
 1. Activez la case à cocher correspondant au fichier ou au dossier que vous souhaitez restaurer, puis choisissez **Sélectionner**.
 
     ![Sélectionner un fichier ou un dossier](./media/restore-afs/select-file-folder.png)
 
 1. Répétez les étapes 2 à 4 pour sélectionner plusieurs fichiers ou dossiers à restaurer.
-1. Après avoir sélectionné tous les éléments à restaurer, sélectionnez **OK**.
-
-    ![Après sélection de tous les éléments à restaurer, sélectionner OK](./media/restore-afs/after-selecting-items.png)
-
-1. Sélectionnez **Restaurer** pour démarrer l’opération de restauration.
+1. Après avoir sélectionné tous les éléments à restaurer, sélectionnez **Restaurer** pour démarrer l’opération de restauration.
 
     ![Sélectionner Restaurer pour démarrer](./media/restore-afs/click-restore.png)
 
-#### <a name="restore-to-an-alternate-location"></a>Restaurer à un autre emplacement
+#### <a name="restore-to-an-alternate-location-item-level-recovery"></a>Restaurer à un autre emplacement (récupération au niveau de l'élément)
 
 1. Sélectionnez **Autre emplacement** comme **Destination de récupération**.
 1. Dans la liste déroulante **Compte de stockage**, sélectionnez le compte de stockage de destination dans lequel vous souhaitez restaurer le contenu sauvegardé.
 1. La liste déroulante **Sélectionner le partage de fichiers** affiche les partages de fichiers présents dans le compte de stockage que vous avez sélectionné à l’étape 2. Sélectionnez le partage de fichiers dans lequel vous souhaitez restaurer le contenu sauvegardé.
 1. Dans la zone **Nom du dossier**, spécifiez le nom du dossier que vous souhaitez créer dans le partage de fichiers de destination avec le contenu restauré.
 1. Indiquez si les conflits doivent être ignorés ou remplacés.
-1. Choisissez **Sélectionner un fichier** pour sélectionner les fichiers ou dossiers à restaurer.
+1. Pour sélectionner les fichiers ou dossiers à restaurer, sélectionnez le bouton **Ajouter un fichier**. Un volet contextuel s’ouvre à droite et présente le contenu du point de récupération du partage de fichiers sélectionné pour restauration.
 
     ![Sélectionner les éléments à restaurer à un autre emplacement](./media/restore-afs/restore-to-alternate-location.png)
 
-1. Après que vous avez choisi **Sélectionnez un fichier**, un volet de partage de fichiers affiche le contenu du point de récupération du partage de fichiers que vous avez sélectionné pour la restauration.
 1. Activez la case à cocher correspondant au fichier ou au dossier que vous souhaitez restaurer, puis choisissez **Sélectionner**.
 
     ![Sélectionner la destination de récupération](./media/restore-afs/recovery-destination.png)
 
 1. Répétez les étapes 6 à 8 pour sélectionner plusieurs fichiers à restaurer.
-1. Après avoir sélectionné tous les éléments à restaurer, sélectionnez **OK**.
+1. Après avoir sélectionné tous les éléments à restaurer, sélectionnez **Restaurer** pour démarrer l’opération de restauration.
 
     ![Sélectionner OK après avoir sélectionné tous les fichiers](./media/restore-afs/after-selecting-all-items.png)
-
-1. Sélectionnez **Restaurer** pour démarrer l’opération de restauration.
 
 ## <a name="track-a-restore-operation"></a>Suivre une opération de restauration
 

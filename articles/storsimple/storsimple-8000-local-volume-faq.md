@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/26/2017
 ms.author: manuaery
-ms.openlocfilehash: aa69d8b07d31b5cf0386e34c113475cbf4191891
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 483fa81b409e1bd740af85b431a86b6c814831e6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60319545"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002712"
 ---
 # <a name="storsimple-locally-pinned-volumes-frequently-asked-questions-faq"></a>Volumes StorSimple épinglés localement : forum aux questions (FAQ)
 ## <a name="overview"></a>Vue d’ensemble

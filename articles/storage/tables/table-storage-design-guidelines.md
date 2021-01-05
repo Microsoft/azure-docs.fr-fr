@@ -1,19 +1,19 @@
 ---
 title: Conseils de conception de table de stockage Azure | Microsoft Docs
-description: Concevez votre service de Table Azure pour prendre en charge efficacement les opérations de lecture.
+description: Découvrez des conseils relatifs à la conception de votre service de table de stockage Azure pour prendre en charge les opérations de lecture et d’écriture de manière efficace.
 services: storage
-author: SnehaGunda
 ms.service: storage
+author: tamram
+ms.author: tamram
 ms.topic: article
 ms.date: 04/23/2018
-ms.author: sngun
 ms.subservice: tables
-ms.openlocfilehash: d056d29469ad9a60fceeee307aca3c0e1319283c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f84707e454a8b1f5d5947478fe65108a142a9757
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61269831"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88236316"
 ---
 # <a name="guidelines-for-table-design"></a>Conseils pour la conception de table
 

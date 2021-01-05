@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Dialpad pour l’attribution automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes utilisateur sur Dialpad.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 06/28/2019
 ms.author: zhchia
-ms.openlocfilehash: 9f39277644547a625d87a39681f0c5520996cbd6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b88e618da3f8a23c0517aaeb251e54bf559fc468
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058341"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014514"
 ---
 # <a name="tutorial-configure-dialpad-for-automatic-user-provisioning"></a>Tutoriel : Configurer Dialpad pour l’attribution automatique d’utilisateurs
 
@@ -58,13 +54,13 @@ Avant de configurer Dialpad pour l’attribution automatique d’utilisateurs av
 
 1. Connectez-vous à votre [console d’administration Dialpad](https://dialpadbeta.com/login) et sélectionnez **Admin settings** (Paramètres d’administration). Vérifiez que l’option **My Company** (Ma société) est sélectionnée dans la liste déroulante. Accédez à **Authentication > API Keys** (Authentification > Clés API).
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/dialpad01.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/dialpad01.png" alt-text="Capture d’écran de la console d’administration Dialpad, avec l’icône des paramètres, My Company (Ma société), Authentication (Authentification) et API keys (Clés API) mis en surbrillance, et My Company (Ma société) sélectionné." border="false":::
 
 2. Générez une nouvelle clé en cliquant sur **Add a key** (Ajouter une clé) et en configurant les propriétés du jeton de votre secret.
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/dialpad02.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/dialpad02.png" alt-text="Capture d’écran de la page API keys (Clés API) de la console d’administration Dialpad. Add a key (Ajouter une clé) est mis en surbrillance." border="false":::
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/dialpad03.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/dialpad03.png" alt-text="Capture d’écran de la page Edit API key (Modifier une clé API) de la console d’administration Dialpad. Le bouton Enregistrer est en surbrillance." border="false":::
 
 3. Cliquez sur le bouton **Click to show value** (Cliquer pour afficher la valeur) associé à votre clé API récemment créée et copiez la valeur affichée. Cette valeur devra être entrée dans le champ **Jeton secret** sous l’onglet Provisionnement de votre application Dialpad dans le portail Azure. 
 
@@ -93,19 +89,19 @@ Avant de configurer Dialpad pour l’attribution automatique d’utilisateurs av
 
 5. Accédez à l’**URL** mise en évidence ci-dessous dans un autre navigateur. 
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/dialpad05.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/dialpad05.png" alt-text="Capture d’écran d’une page affichant des informations sur l’application Dialpad. Sous URL, une adresse est répertoriée et mise en surbrillance." border="false":::
 
 6. Dans le coin supérieur droit, sélectionnez **Log In > Use Dialpad online** (Se connecter> Utiliser Dialpad en ligne).
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/dialpad06.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/dialpad06.png" alt-text="Capture d’écran du site web de Dialpad. Log in (Se connecter) est mis en surbrillance et l’onglet Log in (Se connecter) est ouvert. Use Dialpad online (Utiliser Dialpad en ligne) est également mis en surbrillance." border="false":::
 
 7. Comme Dialpad est une application OpenIDConnect, choisissez de vous connecter à Dialpad à l’aide de votre compte professionnel Microsoft.
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/loginpage.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/loginpage.png" alt-text="Capture d’écran de la page Start making calls (Commencer à passer des appels) sur le site web de Dialpad. Le bouton Log in with Office 365 (Se connecter avec Office 365) est mis en surbrillance." border="false":::
 
 8. Une fois l’authentification réussie, acceptez l’invite de consentement pour la page de consentement. L’application est alors automatiquement ajoutée à votre locataire et vous serez redirigé vers votre compte Dialpad.
 
-    ![Dialpad - Ajout - SCIM](media/dialpad-provisioning-tutorial/redirect.png)
+    :::image type="content" source="media/dialpad-provisioning-tutorial/redirect.png" alt-text="Capture d’écran montrant une page d’authentification Microsoft indiquant que l’application Dialpad a demandé l’accès à certaines données. Le bouton Accept (Accepter) est mis en surbrillance." border="false":::
 
  ## <a name="configure-automatic-user-provisioning-to-dialpad"></a>Configurer l’attribution automatique d’utilisateurs sur Dialpad
 
@@ -123,11 +119,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://dialpad.com/scim` dans **URL de locataire**. Entrez la valeur que vous avez récupérée et enregistrée à partir de Dialpad dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Dialpad. Si la connexion échoue, vérifiez que votre compte Dialpad dispose des autorisations d’administrateur et réessayez.
 

@@ -9,10 +9,10 @@ ms.topic: overview
 ms.date: 10/20/2019
 ms.custom: mqtt
 ms.openlocfilehash: 9e0b4a3c22c1e6008bdce7fecc1d122fe317dd58
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "81686204"
 ---
 # <a name="architecture-of-iot-central-smart-inventory-management-application-template"></a>Architecture du modèle de gestion des stocks intelligente IoT pour Azure IoT Central

@@ -10,10 +10,10 @@ ms.topic: conceptual
 ms.date: 05/06/2019
 ms.custom: mqtt
 ms.openlocfilehash: 5c14e8cfcbf8df86b0f71d6b12025594d2e648c4
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81730104"
 ---
 # <a name="schedule-jobs-on-multiple-devices"></a>Planifier des travaux sur plusieurs appareils

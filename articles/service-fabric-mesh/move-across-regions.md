@@ -6,12 +6,12 @@ ms.author: edoyle
 ms.topic: how-to
 ms.date: 01/14/2020
 ms.custom: subject-moving-resources
-ms.openlocfilehash: 376808a6d8f61d4dc03d17061323a473d48053a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c842a065f108a924c6bffd70d6c2edbbd31b6dff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76907340"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260158"
 ---
 # <a name="move-a-service-fabric-mesh-application-to-another-azure-region"></a>Déplacer une application Service Fabric Mesh vers une autre région Azure
 
@@ -19,16 +19,16 @@ Cet article décrit comment déplacer votre application Service Fabric Mesh et s
 
  [Service Fabric Mesh ne prend pas en charge](../azure-resource-manager/management/region-move-support.md#microsoftservicefabricmesh) la possibilité de déplacer directement des ressources dans des régions Azure. Pour autant, vous pouvez déplacer des ressources indirectement en déployant une copie de votre modèle Azure Resource Manager actuel vers la nouvelle région cible, puis en redirigeant le trafic d'entrée et les dépendances vers l'application Service Fabric Mesh nouvellement créée.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* Contrôleur d’entrée (par exemple, [Application Gateway](https://docs.microsoft.com/azure/application-gateway/)) faisant office d’intermédiaire pour acheminer le trafic entre les clients et votre application Service Fabric Mesh
+* Contrôleur d’entrée (par exemple, [Application Gateway](../application-gateway/index.yml)) faisant office d’intermédiaire pour acheminer le trafic entre les clients et votre application Service Fabric Mesh
 * Disponibilité de Service Fabric Mesh (préversion) dans la région Azure cible (`westus`, `eastus` ou `westeurope`)
 
 ## <a name="prepare"></a>Préparation
 
-1. Prenez un « instantané » de l’état actuel de votre application Service Fabric Mesh en exportant le modèle Azure Resource Manager et les paramètres du plus récent déploiement. Pour ce faire, suivez les étapes décrites dans [Exporter un modèle après déploiement](../azure-resource-manager/templates/export-template-portal.md#export-template-after-deployment) à l’aide du portail Azure. Vous pouvez également utiliser [Azure CLI](../azure-resource-manager/management/manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](../azure-resource-manager/management/manage-resource-groups-powershell.md#export-resource-groups-to-templates) ou l'[API REST](https://docs.microsoft.com/rest/api/resources/resourcegroups/exporttemplate).
+1. Prenez un « instantané » de l’état actuel de votre application Service Fabric Mesh en exportant le modèle Azure Resource Manager et les paramètres du plus récent déploiement. Pour ce faire, suivez les étapes décrites dans [Exporter un modèle après déploiement](../azure-resource-manager/templates/export-template-portal.md#export-template-after-deployment) à l’aide du portail Azure. Vous pouvez également utiliser [Azure CLI](../azure-resource-manager/management/manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](../azure-resource-manager/management/manage-resource-groups-powershell.md#export-resource-groups-to-templates) ou l'[API REST](/rest/api/resources/resourcegroups/exporttemplate).
 
-2. Le cas échéant, [exportez d’autres ressources dans le même groupe de ressources](https://docs.microsoft.com/azure/azure-resource-manager/templates/export-template-portal#export-template-from-a-resource-group) à des fins de redéploiement dans la région cible.
+2. Le cas échéant, [exportez d’autres ressources dans le même groupe de ressources](../azure-resource-manager/templates/export-template-portal.md#export-template-from-a-resource-group) à des fins de redéploiement dans la région cible.
 
 3. Examinez (et modifiez, si nécessaire) le modèle exporté pour vous assurer que les valeurs de propriété existantes correspondent à celles que vous souhaitez utiliser dans la région cible. Le nouvel `location` (région Azure) correspond à un paramètre que vous fournirez lors du redéploiement.
 
@@ -36,7 +36,7 @@ Cet article décrit comment déplacer votre application Service Fabric Mesh et s
 
 1. Créez un groupe de ressources (ou utilisez un groupe existant) dans la région cible.
 
-2. Avec votre modèle exporté, suivez les étapes décrites dans [Déployer des ressources à partir d’un modèle personnalisé](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-portal#deploy-resources-from-custom-template) à l’aide du portail Azure. Vous pouvez également utiliser [Azure CLI](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-cli), [Azure PowerShell](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell) ou l'[API REST](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-rest).
+2. Avec votre modèle exporté, suivez les étapes décrites dans [Déployer des ressources à partir d’un modèle personnalisé](../azure-resource-manager/templates/deploy-portal.md#deploy-resources-from-custom-template) à l’aide du portail Azure. Vous pouvez également utiliser [Azure CLI](../azure-resource-manager/templates/deploy-cli.md), [Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md) ou l'[API REST](../azure-resource-manager/templates/deploy-rest.md).
 
 3. Pour plus d'informations sur le déplacement de ressources connexes, telles que les [comptes Stockage Azure](../storage/common/storage-account-move.md), reportez-vous aux conseils correspondant aux services individuels répertoriés dans la rubrique [Déplacement des ressources Azure entre les régions](../azure-resource-manager/management/move-region.md).
 
@@ -44,7 +44,7 @@ Cet article décrit comment déplacer votre application Service Fabric Mesh et s
 
 1. Une fois le déploiement terminé, testez le(s) point(s) de terminaison de l'application afin d'en vérifier la fonctionnalité.
 
-2. Vous pouvez également vérifier l’état de votre application en utilisant [az mesh app show](https://docs.microsoft.com/cli/azure/ext/mesh/mesh/app?view=azure-cli-latest#ext-mesh-az-mesh-app-show) et en examinant les journaux d'application et les commandes ([az mesh code-package-log](https://docs.microsoft.com/cli/azure/ext/mesh/mesh/code-package-log?view=azure-cli-latest)) à l'aide de l'[interface de ligne de commande Azure Service Fabric Mesh](https://docs.microsoft.com/azure/service-fabric-mesh/service-fabric-mesh-quickstart-deploy-container#set-up-service-fabric-mesh-cli).
+2. Vous pouvez également vérifier l’état de votre application en utilisant [az mesh app show](/cli/azure/ext/mesh/mesh/app?view=azure-cli-latest#ext-mesh-az-mesh-app-show) et en examinant les journaux d'application et les commandes ([az mesh code-package-log](/cli/azure/ext/mesh/mesh/code-package-log?view=azure-cli-latest)) à l'aide de l'[interface de ligne de commande Azure Service Fabric Mesh](./service-fabric-mesh-quickstart-deploy-container.md#set-up-service-fabric-mesh-cli).
 
 ## <a name="commit"></a>Commit
 

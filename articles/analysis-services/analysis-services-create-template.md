@@ -4,39 +4,41 @@ description: Guide de démarrage rapide montrant comment créer une ressource de
 author: minewiskan
 ms.author: owend
 tags: azure-resource-manager
-ms.service: analysis-services
+ms.service: azure-analysis-services
 ms.topic: quickstart
-ms.date: 04/14/2020
-ms.custom: subject-armqs
-ms.openlocfilehash: 6f0d5f084c5cd48abf399e351c627d64951ce719
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.date: 08/31/2020
+ms.custom: subject-armqs, references_regions
+ms.openlocfilehash: 3e776bf41420d38a1b208ce11a6a34e97fa92a15
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697448"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89230770"
 ---
-# <a name="quickstart-create-a-server---azure-resource-manager-template"></a>Démarrage rapide : Créer un serveur - Modèle Azure Resource Manager
+# <a name="quickstart-create-a-server---arm-template"></a>Démarrage rapide : Créer un serveur - Modèle ARM
 
-Ce guide de démarrage rapide explique comment créer une ressource de serveur Analysis Services dans votre abonnement Azure avec un modèle Resource Manager.
+Ce guide de démarrage rapide explique comment créer une ressource de serveur Analysis Services dans votre abonnement Azure à l’aide d’un modèle ARM (Azure Resource Manager).
 
 [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
+
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-analysis-services-create%2Fazuredeploy.json)
 
 ## <a name="prerequisites"></a>Prérequis
 
 * **Abonnement Azure** : Visitez [Version d’évaluation gratuite d’Azure](https://azure.microsoft.com/offers/ms-azr-0044p/) pour créer un compte.
 * **Azure Active Directory** : Votre abonnement doit être associé à un locataire Azure Active Directory. Vous devez également être connecté à Azure avec un compte dans cette instance d’Azure Active Directory. Pour en savoir plus, consultez [Authentification et autorisations utilisateur](analysis-services-manage-users.md).
 
-## <a name="create-a-server"></a>Créer un serveur
+## <a name="review-the-template"></a>Vérifier le modèle
 
-### <a name="review-the-template"></a>Vérifier le modèle
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/101-analysis-services-create/).
 
-Le modèle utilisé dans ce guide de démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/101-analysis-services-create/).
+:::code language="json" source="~/quickstart-templates/101-analysis-services-create/azuredeploy.json":::
 
-:::code language="json" source="~/quickstart-templates/101-analysis-services-create/azuredeploy.json" range="1-79" highlight="63-78":::
+Une seule ressource [Microsoft.AnalysisServices/servers](/azure/templates/microsoft.analysisservices/servers) avec une règle de pare-feu est définie dans le modèle.
 
-Une seule ressource [Microsoft.AnalysisServices/servers](https://docs.microsoft.com/azure/templates/microsoft.analysisservices/2017-08-01/servers) avec une règle de pare-feu est définie dans le modèle. 
-
-### <a name="deploy-the-template"></a>Déployer le modèle
+## <a name="deploy-the-template"></a>Déployer le modèle
 
 1. Sélectionnez le lien Déployer sur Azure suivant pour vous connecter à Azure et ouvrir un modèle. Le modèle sert à créer une ressource de serveur Analysis Services et à spécifier les propriétés obligatoires et facultatives.
 
@@ -60,7 +62,7 @@ Une seule ressource [Microsoft.AnalysisServices/servers](https://docs.microsoft.
 
 3. Sélectionnez **Achat**. Une fois que le serveur a été déployé avec succès, vous recevez une notification :
 
-   ![Modèle Resource Manager, notification du portail de déploiement](./media/analysis-services-create-template/notification.png)
+   ![Modèle ARM, notification du portail de déploiement](./media/analysis-services-create-template/notification.png)
 
 ## <a name="validate-the-deployment"></a>Valider le déploiement
 
@@ -101,7 +103,7 @@ Write-Host "Press [ENTER] to continue..."
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez utilisé un modèle Azure Resource Manager pour créer un groupe de ressources et une ressource de serveur Azure Analysis Services. Une fois que vous avez créé une ressource de serveur à l’aide du modèle, envisagez les opérations suivantes :
-- [Démarrage rapide : Créer un serveur - PowerShell](analysis-services-create-powershell.md)
-- [Ajouter un exemple de modèle à partir du portail](analysis-services-create-sample-model.md)
-- [Configurer les rôles d’utilisateur et d’administrateur de serveur](tutorials/analysis-services-tutorial-roles.md)
+Dans ce guide de démarrage rapide, vous avez utilisé un modèle ARM pour créer un groupe de ressources et une ressource de serveur Azure Analysis Services. Une fois que vous avez créé une ressource de serveur à l’aide du modèle, consultez les documents suivants :
+
+> [!div class="nextstepaction"]
+> [Démarrage rapide : Configurer un pare-feu de serveur - Portail](analysis-services-qs-firewall.md)   

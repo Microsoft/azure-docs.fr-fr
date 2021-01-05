@@ -7,16 +7,16 @@ author: bwren
 ms.author: bwren
 ms.date: 08/19/2019
 ms.custom: mvc, sec-javascript-october2019
-ms.openlocfilehash: 2e63b2ca0ee7246009068e6a2875795a14aeddb3
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 6cc9c6af4592956b6498e826ef65b556e5780f34
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215167"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186828"
 ---
 # <a name="collect-data-from-an-azure-virtual-machine-with-azure-monitor"></a>Collecter des données à partir d’une machine virtuelle Azure avec Azure Monitor
 
-[Azure Monitor](../overview.md) est capable de collecter directement les données de vos machines virtuelles Azure dans un espace de travail Log Analytics en vue d’une analyse et d’une mise en corrélation détaillées. L’installation de l’extension de machine virtuelle Log Analytics pour [Windows](../../virtual-machines/extensions/oms-windows.md) et [Linux](../../virtual-machines/extensions/oms-linux.md) permet à Azure Monitor de collecter les données de vos machines virtuelles Azure. Ce guide de démarrage rapide vous montre comment configurer et collecter les données de vos machines virtuelles Azure Linux ou Windows en quelques étapes simples avec l’extension de machine virtuelle.  
+[Azure Monitor](../overview.md) est capable de collecter directement les données de vos machines virtuelles Azure dans un espace de travail Log Analytics en vue d’analyser les détails et les corrélations. L’installation de l’extension de machine virtuelle Log Analytics pour [Windows](../../virtual-machines/extensions/oms-windows.md) et [Linux](../../virtual-machines/extensions/oms-linux.md) permet à Azure Monitor de collecter les données de vos machines virtuelles Azure. Ce guide de démarrage rapide vous montre comment configurer et collecter les données de vos machines virtuelles Azure Linux ou Windows en quelques étapes simples avec l’extension de machine virtuelle.  
  
 En suivant ce guide, vous êtes censé disposer d’une machine virtuelle Azure. Dans le cas contraire, vous pouvez [créer une machine virtuelle Windows](../../virtual-machines/windows/quick-create-portal.md) ou [créer une machine virtuelle Linux](../../virtual-machines/linux/quick-create-cli.md) en suivant nos guides de démarrage rapide consacrés aux machines virtuelles.
 
@@ -87,7 +87,7 @@ Azure Monitor est capable de collecter les événements des journaux des événe
 
 7. Quand vous procédez à la configuration initiale des compteurs de performances Windows pour un nouvel espace de travail Log Analytics, la possibilité vous est offerte de créer rapidement plusieurs compteurs courants. Ils s’affichent avec une case à cocher en regard.
 
-    ![Compteurs de performances Windows par défaut sélectionnés](media/quick-collect-azurevm/windows-perfcounters-default.png)
+    ![Capture d’écran du volet Compteurs de performances Windows, avec une liste des compteurs sélectionnés et le bouton Ajouter les compteurs de performances sélectionnés sélectionné.](media/quick-collect-azurevm/windows-perfcounters-default.png)
 
     Sélectionnez **Ajouter les compteurs de performances sélectionnés**.  Ils sont ajoutés et prédéfinis avec un intervalle d’échantillonnage de collecte de dix secondes.
   
@@ -107,7 +107,7 @@ Azure Monitor est capable de collecter les événements des journaux des événe
 
 6. Quand vous procédez à la configuration initiale des compteurs de performances Linux pour un nouvel espace de travail Log Analytics, la possibilité vous est offerte de créer rapidement plusieurs compteurs courants. Ils s’affichent avec une case à cocher en regard.
 
-    ![Compteurs de performances Windows par défaut sélectionnés](media/quick-collect-azurevm/linux-perfcounters-azure-monitor.png)
+    ![Capture d’écran du volet Compteurs de performances Linux, avec une liste des compteurs sélectionnés et le bouton Ajouter les compteurs de performances sélectionnés sélectionné.](media/quick-collect-azurevm/linux-perfcounters-azure-monitor.png)
 
     Sélectionnez **Appliquer la configuration ci-dessous à mes machines**, puis **Ajouter les compteurs de performances sélectionnés**.  Ils sont ajoutés et prédéfinis avec un intervalle d’échantillonnage de collecte de dix secondes.  
 
@@ -141,4 +141,4 @@ Maintenant que vous collectez des données opérationnelles et de performances �
 Pour savoir comment consulter et analyser les données, passez au didacticiel suivant.
 
 > [!div class="nextstepaction"]
-> [Consulter ou analyser les données dans Log Analytics](../../azure-monitor/learn/tutorial-viewdata.md)
+> [Consulter ou analyser les données dans Log Analytics](../log-query/log-analytics-tutorial.md)

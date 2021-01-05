@@ -5,14 +5,14 @@ services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
 ms.topic: conceptual
-ms.date: 03/05/2020
+ms.date: 09/02/2020
 ms.author: yushwang
-ms.openlocfilehash: 027047a212df72479a4f1b2511729365f3fa09e4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e59c8ecc0d7af341ddc1ea79aa42460e00fa444
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235901"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89419773"
 ---
 # <a name="vpn-gateway-faq"></a>FAQ sur la passerelle VPN
 
@@ -127,6 +127,10 @@ Nous sommes limités à l'utilisation de clés prépartagées (PSK) pour l'authe
 
 Oui. Consultez [Configurer un tunneling forcé](vpn-gateway-about-forced-tunneling.md).
 
+### <a name="can-i-use-nat-t-on-my-vpn-connections"></a>Puis-je utiliser NAT-T sur mes connexions VPN ?
+
+Oui, NAT Traversal (NAT-T) est pris en charge. La passerelle VPN Azure n’effectue AUCUNE fonctionnalité de type NAT sur les paquets internes vers/à partir des tunnels IPsec.  Dans cette configuration, vérifiez que l’appareil local initie le tunnel IPSec.
+
 ### <a name="can-i-set-up-my-own-vpn-server-in-azure-and-use-it-to-connect-to-my-on-premises-network"></a>Puis-je configurer mon propre serveur VPN dans Azure et l’utiliser pour me connecter à mon réseau local ?
 
 Oui, vous pouvez déployer vos propres serveurs ou passerelles VPN dans Azure depuis Azure Marketplace ou en créant vos propres routeurs VPN. Vous devez configurer des itinéraires définis par l’utilisateur dans votre réseau virtuel pour vous assurer que le trafic est acheminé correctement entre vos réseaux locaux et les sous-réseaux de votre réseau virtuel.
@@ -195,7 +199,7 @@ Cette section s’applique au modèle de déploiement Resource Manager.
 Oui. Pour en savoir plus, voir [BGP](#bgp).
 
 **Modèle de déploiement classique**<br>
-Le transit du trafic via la passerelle VPN Azure est possible à l’aide du modèle de déploiement Classic, mais il s’appuie sur les espaces d’adressage définis de manière statique dans le fichier de configuration réseau. BGP n’est pas encore pris en charge avec les réseaux virtuels Azure et les passerelles VPN à l’aide du modèle de déploiement Classic. Sans BGP, la définition manuelle des espaces d’adressage de transit peut entraîner des erreurs et n’est pas recommandée.
+ Le transit du trafic via la passerelle VPN Azure est possible à l’aide du modèle de déploiement Classic, mais il s’appuie sur les espaces d’adressage définis de manière statique dans le fichier de configuration réseau. BGP n’est pas encore pris en charge avec les réseaux virtuels Azure et les passerelles VPN à l’aide du modèle de déploiement Classic. Sans BGP, la définition manuelle des espaces d’adressage de transit peut entraîner des erreurs et n’est pas recommandée.
 
 ### <a name="does-azure-generate-the-same-ipsecike-pre-shared-key-for-all-my-vpn-connections-for-the-same-virtual-network"></a>Azure génère-t-il la même clé prépartagée IPsec/IKE pour toutes les connexions VPN d'un même réseau virtuel ?
 
@@ -215,7 +219,7 @@ Oui, les réseaux VPN point à site peuvent être utilisés avec les passerelles
 
 ### <a name="can-i-connect-a-virtual-network-with-ipsec-vpns-to-my-expressroute-circuit"></a>Puis-je me connecter à un réseau virtuel avec les VPN IPsec sur mon circuit ExpressRoute ?
 
-Oui, cette méthode est prise en charge. Pour plus d’informations, consultez [Configurer des connexions ExpressRoute et VPN de site à site pour qu’elles coexistent pour un réseau virtuel](../expressroute/expressroute-howto-coexist-classic.md).
+Oui, ceci est pris en charge. Pour plus d’informations, consultez [Configurer des connexions ExpressRoute et VPN de site à site pour qu’elles coexistent pour un réseau virtuel](../expressroute/expressroute-howto-coexist-classic.md).
 
 ## <a name="ipsecike-policy"></a><a name="ipsecike"></a>Stratégie IPsec/IKE
 

@@ -6,12 +6,12 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 07/31/2017
 ms.author: yegu
-ms.openlocfilehash: 29ad5ca6c9058b88a539c7a3bb8ace4d9a65083a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ee3b447b2b5f6dfa8972749c3c46ae01f79bfdc
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235349"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96327506"
 ---
 # <a name="import-and-export-data-in-azure-cache-for-redis"></a>Importer et exporter des données dans le Cache Azure pour Redis
 L’Importation/Exportation est une opération de gestion de données de Cache Azure pour Redisqui vous permet d’importer ou d’exporter des données depuis ou vers le Cache Azure pour Redis, en important ou en exportant une capture instantanée de base de données du Cache Azure pour Redis (RDB) depuis un cache Premium vers un objet blob dans un compte de stockage Azure.
@@ -24,7 +24,7 @@ L’Importation/Exportation vous permet de migrer entre différentes instances d
 Cet article fournit un guide pour l’importation et l’exportation de données avec le Cache Azure pour Redis et répond aux questions fréquemment posées.
 
 > [!IMPORTANT]
-> L’importation/exportation est uniquement disponible pour les caches de niveau [Premium](cache-premium-tier-intro.md) .
+> L’importation/exportation est uniquement disponible pour les caches de [niveau Premium](cache-overview.md#service-tiers).
 >
 >
 
@@ -32,7 +32,7 @@ Cet article fournit un guide pour l’importation et l’exportation de données
 L’importation peut servir à récupérer les fichiers RDB compatibles Redis depuis un serveur Redis en cours d’exécution dans un environnement ou dans un cloud, y compris si Redis est exécuté sur Linux, Windows ou n’importe quel fournisseur de cloud tel qu’Amazon Web Services. Importer des données est un moyen simple de créer un cache pré-rempli de données. Pendant le processus d’importation, le Cache Azure pour Redis charge les fichiers RDB du stockage Azure dans la mémoire, puis insère les clés dans le cache.
 
 > [!NOTE]
-> Avant de commencer l’opération d’importation, vérifiez que le ou les fichier(s) de votre base de données Redis (RDB) sont téléchargés vers des objets blob de pages ou de blocs dans le stockage Azure, dans les mêmes région et abonnement que votre instance de Cache Azure pour Redis. Pour plus d’informations, consultez l’article [Prise en main du stockage d’objets blob Azure](../storage/blobs/storage-dotnet-how-to-use-blobs.md). Si vous avez exporté votre fichier RDB à l’aide de la fonctionnalité [Exportation du cache Azure pour Redis](#export), votre fichier RDB est déjà stocké dans un objet blob de pages et est prêt pour l’importation.
+> Avant de commencer l’opération d’importation, vérifiez que le ou les fichier(s) de votre base de données Redis (RDB) sont téléchargés vers des objets blob de pages ou de blocs dans le stockage Azure, dans les mêmes région et abonnement que votre instance de Cache Azure pour Redis. Pour plus d’informations, consultez l’article [Prise en main du stockage d’objets blob Azure](../storage/blobs/storage-quickstart-blobs-dotnet.md). Si vous avez exporté votre fichier RDB à l’aide de la fonctionnalité [Exportation du cache Azure pour Redis](#export), votre fichier RDB est déjà stocké dans un objet blob de pages et est prêt pour l’importation.
 >
 >
 
@@ -66,7 +66,7 @@ L’exportation vous permet d’exporter les données stockées dans le Cache Az
 
 1. Pour exporter le contenu actuel du cache vers un espace de stockage, [accédez à votre cache](cache-configure.md#configure-azure-cache-for-redis-settings) dans le portail Azure, puis cliquez sur **Exporter des données** à partir du **Menu Ressource**.
 
-    ![Choisir un conteneur de stockage](./media/cache-how-to-import-export-data/cache-export-data-choose-storage-container.png)
+    ![Dans le volet de navigation de contoso5premium, l’option Exporter des données de la liste Administration est mise en surbrillance.](./media/cache-how-to-import-export-data/cache-export-data-choose-storage-container.png)
 2. Cliquez sur **Choisir un conteneur de stockage** et sélectionnez le compte de stockage souhaité. Le compte de stockage doit être situé dans les mêmes région et abonnement que votre cache.
 
    > [!IMPORTANT]
@@ -76,7 +76,7 @@ L’exportation vous permet d’exporter les données stockées dans le Cache Az
     ![Compte de stockage](./media/cache-how-to-import-export-data/cache-export-data-choose-account.png)
 3. Choisissez le conteneur d’objets blob souhaité et cliquez sur **Sélectionnez**. Pour utiliser un nouveau conteneur, cliquez sur **Ajouter un conteneur** , puis sélectionnez-le dans la liste.
 
-    ![Choisir un conteneur de stockage](./media/cache-how-to-import-export-data/cache-export-data-container.png)
+    ![Dans Conteneurs pour contoso55, l’option Conteneur est mise en surbrillance. Il y a un conteneur dans la liste, cachesaves, qui est sélectionné et mis en surbrillance. L’option Sélection est sélectionnée et mise en surbrillance.](./media/cache-how-to-import-export-data/cache-export-data-container.png)
 4. Tapez un **préfixe de nom d’objet blob** et cliquez sur **Exporter** pour lancer le processus d’exportation. Le préfixe de nom d’objet blob est utilisé pour préfixer les noms des fichiers générés par cette opération d’exportation.
 
     ![Exporter](./media/cache-how-to-import-export-data/cache-export-data.png)
@@ -142,7 +142,9 @@ Oui, pour les instructions PowerShell, consultez les articles [pour importer un 
 ### <a name="i-received-a-timeout-error-during-my-importexport-operation-what-does-it-mean"></a>J’ai reçu une erreur de délai d’attente pendant mon opération d’Importation/Exportation. Qu’est-ce que cela signifie ?
 Si vous restez sur le panneau **Importer des données** ou **Exporter des données** pendant plus de 15 minutes avant de lancer l’opération, vous recevez une erreur avec un message similaire à ce qui suit :
 
-    The request to import data into cache 'contoso55' failed with status 'error' and error 'One of the SAS URIs provided could not be used for the following reason: The SAS token end time (se) must be at least 1 hour from now and the start time (st), if given, must be at least 15 minutes in the past.
+```output
+The request to import data into cache 'contoso55' failed with status 'error' and error 'One of the SAS URIs provided could not be used for the following reason: The SAS token end time (se) must be at least 1 hour from now and the start time (st), if given, must be at least 15 minutes in the past.
+```
 
 Pour résoudre ce problème, démarrez l’importation ou l’exportation avant que les 15 minutes ne se soient écoulées.
 
@@ -150,6 +152,6 @@ Pour résoudre ce problème, démarrez l’importation ou l’exportation avant 
 L’exportation ne fonctionne qu’avec les fichiers RDB stockés sous la forme d’objets blob de pages. Les autres types d’objets blob ne sont pas pris en charge pour l’instant, y compris les comptes de stockage d’objets blob de niveaux chaud et froid. Pour plus d’informations, consultez [Vue d’ensemble des comptes de stockage Azure](../storage/common/storage-account-overview.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
-Découvrez comment utiliser davantage de fonctionnalités de cache de niveau Premium.
+En savoir plus sur les fonctionnalités d’Azure Cache pour Redis.
 
-* [Introduction au niveau Premium du Cache Redis Azure](cache-premium-tier-intro.md)
+* [Niveaux de service Azure Cache pour Redis](cache-overview.md#service-tiers)

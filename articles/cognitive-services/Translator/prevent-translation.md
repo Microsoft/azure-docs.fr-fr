@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
-ms.date: 03/20/2020
+ms.date: 05/26/2020
 ms.author: swmachan
-ms.openlocfilehash: 33939976a0824ce8afeb2e6f6fb19e7033098683
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: bf8923c1090669caa46ef51a26418933b1cda023
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592693"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97563430"
 ---
 # <a name="how-to-prevent-translation-of-content-with-the-translator"></a>Comment empêcher la traduction de contenu avec Translator
 
@@ -37,13 +37,27 @@ Translator vous permet d’étiqueter du contenu pour qu’il ne soit pas tradui
    <div>This will be translated. </div>
    ```
 
-2. Utilisez le [dictionnaire dynamique](dynamic-dictionary.md) pour prescrire une traduction spécifique.
+2. Étiquetez votre contenu avec `translate="no"`. Cela fonctionne uniquement lorsque le textType d’entrée est défini sur HTML.
 
-3. Ne passez pas la chaîne à Translator pour traduction.
+   Exemple :
 
-4. Custom Translator : Utiliser un [dictionnaire dans Custom Translator](custom-translator/what-is-dictionary.md) pour prescrire la traduction d’une phrase avec une probabilité de 100 %.
+   ```html
+   <span translate="no">This will not be translated.</span>
+   <span>This will be translated. </span>
+   ```
+   
+   ```html
+   <div translate="no">This will not be translated.</div>
+   <div>This will be translated. </div>
+   ```
+   
+3. Utilisez le [dictionnaire dynamique](dynamic-dictionary.md) pour prescrire une traduction spécifique.
+
+4. Ne passez pas la chaîne à Translator pour traduction.
+
+5. Custom Translator : Utiliser un [dictionnaire dans Custom Translator](custom-translator/what-is-dictionary.md) pour prescrire la traduction d’une phrase avec une probabilité de 100 %.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 > [!div class="nextstepaction"]
-> [Éviter la traduction dans votre appel de Translator](reference/v3-0-translate.md)
+> [Utiliser l’opération Translate pour traduire du texte](reference/v3-0-translate.md)

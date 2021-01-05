@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 11/27/2018
 ms.author: mayg
-ms.openlocfilehash: dfed398124ca20771e169f6f9e7d08d4d799ee1e
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 7a4408b54b663b2cd8abc22772ac1b799ea50de0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478286"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87083767"
 ---
 # <a name="set-up-disaster-recovery-for-a-multi-tier-iis-based-web-application"></a>Configurer la reprise d’activité pour une application web multiniveau basée sur IIS
 
@@ -31,7 +31,7 @@ Cet article explique comment protéger une application web qui s’appuie sur In
 Avant de commencer, assurez-vous que vous savez accomplir les tâches suivantes :
 
 * [Répliquer une machine virtuelle vers Azure](vmware-azure-tutorial.md)
-* [Constituer un réseau de récupération](site-recovery-network-design.md)
+* [Constituer un réseau de récupération](./concepts-on-premises-to-azure-networking.md)
 * [Effectuer un test de basculement vers Azure](site-recovery-test-failover-to-azure.md)
 * [Procéder à un basculement vers Azure](site-recovery-failover.md)
 * [Répliquer un contrôleur de domaine](site-recovery-active-directory.md)
@@ -92,7 +92,7 @@ Pour plus d’informations, consultez [Personnaliser le plan de récupération](
 
 
 ### <a name="add-a-script-to-the-recovery-plan"></a>Ajouter un script au plan de récupération
-Pour que la batterie de serveurs web IIS fonctionne correctement, vous devrez peut-être effectuer certaines opérations sur les machines virtuelles Azure, après le basculement ou lors d’un test de basculement. Vous pouvez automatiser certaines opérations après le basculement. Par exemple, vous pouvez mettre à jour l’entrée DNS, modifier une liaison de site ou une chaîne de connexion en ajoutant au plan de récupération les scripts correspondants. L’article [Ajouter un script VMM à un plan de récupération](site-recovery-how-to-add-vmmscript.md) explique comment configurer les tâches automatisées à l’aide d’un script.
+Pour que la batterie de serveurs web IIS fonctionne correctement, vous devrez peut-être effectuer certaines opérations sur les machines virtuelles Azure, après le basculement ou lors d’un test de basculement. Vous pouvez automatiser certaines opérations après le basculement. Par exemple, vous pouvez mettre à jour l’entrée DNS, modifier une liaison de site ou une chaîne de connexion en ajoutant au plan de récupération les scripts correspondants. L’article [Ajouter un script VMM à un plan de récupération](./hyper-v-vmm-recovery-script.md) explique comment configurer les tâches automatisées à l’aide d’un script.
 
 #### <a name="dns-update"></a>Mise à jour DNS
 Si le système DNS est configuré pour la mise à jour DNS dynamique, les machines virtuelles le mettent généralement à jour avec la nouvelle adresse IP dès leur démarrage. Si vous voulez ajouter une étape explicite afin de mettre à jour le DNS avec les nouvelles adresses IP des machines virtuelles, ajoutez un [script pour mettre à jour les adresses IP dans DNS](https://aka.ms/asr-dns-update) en tant qu’action post-basculement dans les groupes de plan de récupération.  
@@ -102,12 +102,14 @@ La chaîne de connexion spécifie la base de données avec laquelle le site web 
 
 Si la chaîne de connexion désigne la machine virtuelle base de données à l’aide d’une adresse IP, elle doit être mise à jour après le basculement. Par exemple, la chaîne de connexion suivante pointe vers la base de données avec l’adresse IP 127.0.1.2 :
 
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-        <connectionStrings>
-        <add name="ConnStringDb1" connectionString="Data Source= 127.0.1.2\SqlExpress; Initial Catalog=TestDB1;Integrated Security=False;" />
-        </connectionStrings>
-        </configuration>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+<connectionStrings>
+<add name="ConnStringDb1" connectionString="Data Source= 127.0.1.2\SqlExpress; Initial Catalog=TestDB1;Integrated Security=False;" />
+</connectionStrings>
+</configuration>
+```
 
 Pour mettre à jour la chaîne de connexion dans la couche Web, ajoutez un [script de mise à jour de la connexion IIS](https://gallery.technet.microsoft.com/Update-IIS-connection-2579aadc) après le groupe 3, dans le plan de récupération.
 

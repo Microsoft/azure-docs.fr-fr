@@ -1,6 +1,6 @@
 ---
 title: S’inscrire à Azure NetApp Files | Microsoft Docs
-description: Décrit comment s’inscrire pour utiliser Azure NetApp Files.
+description: Découvrez comment s’inscrire à Azure NetApp Files en soumettant une demande de mise en liste d’attente et en inscrivant le fournisseur de ressources Azure pour Azure NetApp Files.
 services: azure-netapp-files
 documentationcenter: ''
 author: b-juche
@@ -11,15 +11,15 @@ ms.service: azure-netapp-files
 ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 05/06/2019
+ms.topic: how-to
+ms.date: 06/09/2020
 ms.author: b-juche
-ms.openlocfilehash: 6f5d84dea2e835fd12a062b628181354295ed9f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e2838b759a611cb55b9fd3fadf834c84eb74210d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234109"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91533636"
 ---
 # <a name="register-for-azure-netapp-files"></a>S’inscrire à Azure NetApp Files
 
@@ -30,7 +30,7 @@ Dans cet article, vous allez découvrir comment vous inscrire à Azure NetApp Fi
 
 ## <a name="submit-a-waitlist-request-for-accessing-the-service"></a><a name="waitlist"></a>Soumettre une requête de liste d’attente pour l’accès au service
 
-1. Soumettez une requête de liste d'attente pour accéder au service Azure NetApp Files via le [page de soumission de liste d’attente Azure NetApp Files](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR8cq17Xv9yVBtRCSlcD_gdVUNUpUWEpLNERIM1NOVzA5MzczQ0dQR1ZTSS4u). 
+1. Soumettez une requête de liste d'attente pour accéder au service Azure NetApp Files via le [page de soumission de liste d’attente Azure NetApp Files](https://aka.ms/azurenetappfiles). 
 
     Une inscription sur la liste d’attente ne garantit pas un accès immédiat au service. 
 
@@ -50,18 +50,24 @@ Pour utiliser le service, vous devez inscrire le fournisseur de ressources Azure
 
       ![Icône d’Azure Cloud Shell](../media/azure-netapp-files/azure-netapp-files-azure-cloud-shell.png)
 
-2. Si vous avez plusieurs abonnements sur votre compte Azure, sélectionnez celui qui a été mis en liste verte pour Azure NetApp Files :
+2. Si vous disposez de plusieurs abonnements sur votre compte Azure, sélectionnez celui qui a été approuvé pour Azure NetApp Files :
     
-        az account set --subscription <subscriptionId>
+    ```azurepowershell
+    az account set --subscription <subscriptionId>
+    ```
 
-3. Dans la console Azure Cloud Shell, entrez la commande suivante pour vérifier que votre abonnement a été mis en liste verte :
+3. Dans la console Azure Cloud Shell, entrez la commande suivante pour vérifier que votre abonnement a été approuvé :
     
-        az feature list | grep NetApp
+    ```azurepowershell
+    az feature list | grep NetApp
+    ```
 
    La sortie de la commande se présente comme suit :
    
-       "id": "/subscriptions/<SubID>/providers/Microsoft.Features/providers/Microsoft.NetApp/features/ANFGA",  
-       "name": "Microsoft.NetApp/ANFGA" 
+    ```output
+    "id": "/subscriptions/<SubID>/providers/Microsoft.Features/providers/Microsoft.NetApp/features/ANFGA",  
+    "name": "Microsoft.NetApp/ANFGA" 
+    ```
        
    `<SubID>` est votre ID d’abonnement.
 
@@ -69,21 +75,27 @@ Pour utiliser le service, vous devez inscrire le fournisseur de ressources Azure
 
 4. Dans la console Azure Cloud Shell, entrez la commande suivante pour inscrire le fournisseur de ressources Azure : 
     
-        az provider register --namespace Microsoft.NetApp --wait
+    ```azurepowershell
+    az provider register --namespace Microsoft.NetApp --wait
+    ```
 
    Le paramètre `--wait` indique à la console d’attendre que l’inscription soit terminée. Le processus d’inscription peut prendre du temps.
 
 5. Dans la console Azure Cloud Shell, entrez la commande suivante pour vérifier que le fournisseur de ressources Azure a été inscrit : 
     
-        az provider show --namespace Microsoft.NetApp
+    ```azurepowershell
+    az provider show --namespace Microsoft.NetApp
+    ```
 
    La sortie de la commande se présente comme suit :
    
-        {
-        "id": "/subscriptions/<SubID>/providers/Microsoft.NetApp",
-        "namespace": "Microsoft.NetApp", 
-        "registrationState": "Registered", 
-        "resourceTypes": […. 
+    ```output
+    {
+     "id": "/subscriptions/<SubID>/providers/Microsoft.NetApp",
+     "namespace": "Microsoft.NetApp", 
+     "registrationState": "Registered", 
+     "resourceTypes": […. 
+    ```
 
    `<SubID>` est votre ID d’abonnement.  La valeur du paramètre `state` indique `Registered`.
 

@@ -6,19 +6,18 @@ ms.author: yalavi
 ms.topic: conceptual
 ms.date: 03/19/2018
 ms.subservice: alerts
-ms.openlocfilehash: f31fcc07bed0287c2f86ca4fe52bf02a2a1d2a71
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 9df5d702019063ffba6d79cc63370cd25a7242fd
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114405"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91358779"
 ---
 # <a name="prepare-your-logic-apps-and-runbooks-for-migration-of-classic-alert-rules"></a>Préparer les applications logiques et les runbooks pour la migration des règles d’alerte classiques
 
-Comme [précédemment annoncé](monitoring-classic-retirement.md), les alertes classiques dans Azure Monitor seront mises hors service en septembre 2019 (c’était initialement prévu pour juillet 2019). Un outil de migration est disponible dans le Portail Azure pour les clients qui utilisent des règles d’alerte classiques et qui souhaitent déclencher la migration eux-mêmes.
-
 > [!NOTE]
-> En raison de retards dans le déploiement de l’outil de migration, la date de mise hors service des alertes classiques a été repoussée au 31 août 2019 (la date annoncée à l’origine était le 30 juin 2019).
+> Comme [précédemment annoncé](monitoring-classic-retirement.md), les alertes classiques dans Azure Monitor sont mises hors service, bien qu’elles soient toujours utilisées pour les ressources qui ne prennent pas encore en charge les nouvelles alertes. La date de mise hors service de ces alertes a été repoussée. Une nouvelle date sera annoncée prochainement.
+>
 
 Si vous choisissez de migrer volontairement vos règles d’alerte classiques vers de nouvelles règles d’alerte, n’oubliez pas qu’il existe certaines différences entre les deux systèmes. Cet article décrit ces différences et explique comment préparer la modification.
 
@@ -28,12 +27,12 @@ Les API qui créent et gèrent les règles d’alerte classiques (`microsoft.ins
 
 Le tableau suivant référence les interfaces de programmation pour les alertes classiques et les nouvelles alertes :
 
-|         |Alertes classiques  |Nouvelles alertes de métrique |
-|---------|---------|---------|
-|API REST     | [microsoft.insights/alertrules](https://docs.microsoft.com/rest/api/monitor/alertrules)         | [microsoft.insights/metricalerts](https://docs.microsoft.com/rest/api/monitor/metricalerts)       |
-|Azure CLI     | [az monitor alert](https://docs.microsoft.com/cli/azure/monitor/alert?view=azure-cli-latest)        | [az monitor metrics alert](https://docs.microsoft.com/cli/azure/monitor/metrics/alert?view=azure-cli-latest)        |
-|PowerShell      | [Référence](https://docs.microsoft.com/powershell/module/az.monitor/add-azmetricalertrule)       |  [Référence](https://docs.microsoft.com/powershell/module/az.monitor/add-azmetricalertrulev2)    |
-| Modèle Azure Resource Manager | [Pour les alertes classiques](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-enable-template)|[Pour les nouvelles alertes de métrique](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric-create-templates)|
+| Type de script de déploiement | Alertes classiques | Nouvelles alertes de métrique |
+| ---------------------- | -------------- | ----------------- |
+|API REST     | [microsoft.insights/alertrules](/rest/api/monitor/alertrules)         | [microsoft.insights/metricalerts](/rest/api/monitor/metricalerts)       |
+|Azure CLI     | [az monitor alert](/cli/azure/monitor/alert?view=azure-cli-latest)        | [az monitor metrics alert](/cli/azure/monitor/metrics/alert?view=azure-cli-latest)        |
+|PowerShell      | [Référence](/powershell/module/az.monitor/add-azmetricalertrule)       |  [Référence](/powershell/module/az.monitor/add-azmetricalertrulev2)    |
+| Modèle Azure Resource Manager | [Pour les alertes classiques](./alerts-enable-template.md)|[Pour les nouvelles alertes de métrique](./alerts-metric-create-templates.md)|
 
 ## <a name="notification-payload-changes"></a>Modifications de charge utile de notification
 
@@ -41,8 +40,8 @@ Le format de charge utile de notification est légèrement différent pour les [
 
 Utilisez le tableau suivant pour mapper les champs de charge utile de webhook du format classique vers le nouveau format :
 
-|  |Alertes classiques  |Nouvelles alertes de métrique |
-|---------|---------|---------|
+| Type de point de terminaison de notification | Alertes classiques | Nouvelles alertes de métrique |
+| -------------------------- | -------------- | ----------------- |
 |L’alerte a-t-elle été activée ou résolue ?    | **statut**       | **data.status** |
 |Informations contextuelles sur l’alerte     | **context**        | **data.context**        |
 |Date et heure auxquelles l’alerte a été activée ou résolue     | **context.timestamp**       | **data.context.timestamp**        |
@@ -77,7 +76,7 @@ Si vous utilisez des applications logiques avec les alertes classiques, vous dev
 
 1. Utilisez le modèle « Azure Monitor - Metrics Alert Handler ». Ce modèle comporte un déclencheur de **requête HTTP** avec le schéma approprié défini.
 
-    ![logic-app-template](media/alerts-migration/logic-app-template.png "Modèle d’alerte de métrique")
+    ![Capture d’écran montrant deux boutons, Application logique vide et Azure Monitor – Metrics Alert Handler.](media/alerts-migration/logic-app-template.png "Modèle d’alerte de métrique")
 
 1. Ajoutez une action pour héberger votre logique de traitement.
 
@@ -150,11 +149,11 @@ else {
 
 ```
 
-Pour obtenir un exemple complet de runbook qui arrête une machine virtuelle lorsqu’une alerte est déclenchée, consultez la [documentation Azure Automation](https://docs.microsoft.com/azure/automation/automation-create-alert-triggered-runbook).
+Pour obtenir un exemple complet de runbook qui arrête une machine virtuelle lorsqu’une alerte est déclenchée, consultez la [documentation Azure Automation](../../automation/automation-create-alert-triggered-runbook.md).
 
 ## <a name="partner-integration-via-webhooks"></a>Intégration des partenaires par le biais de webhooks
 
-La plupart de [nos partenaires qui s’intègrent avec les alertes classiques](https://docs.microsoft.com/azure/azure-monitor/platform/partners) prennent déjà en charge les nouvelles alertes de métrique. Voici quelques intégrations connues qui fonctionnent déjà avec les nouvelles alertes de métrique :
+La plupart de [nos partenaires qui s’intègrent avec les alertes classiques](./partners.md) prennent déjà en charge les nouvelles alertes de métrique. Voici quelques intégrations connues qui fonctionnent déjà avec les nouvelles alertes de métrique :
 
 - [PagerDuty](https://www.pagerduty.com/docs/guides/azure-integration-guide/)
 - [OpsGenie](https://docs.opsgenie.com/docs/microsoft-azure-integration)

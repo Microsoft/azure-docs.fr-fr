@@ -1,14 +1,14 @@
 ---
 title: 'Modèle : Paramètres dans une définition de stratégie'
-description: Ce modèle Azure Policy fournit un exemple d’utilisation des paramètres dans une définition de stratégie.
-ms.date: 01/31/2020
+description: Ce modèle Azure Policy fournit un exemple d’utilisation des paramètres de chaîne et de tableau dans une définition de stratégie, ainsi que du paramétrage de l’effet.
+ms.date: 08/17/2020
 ms.topic: sample
-ms.openlocfilehash: 4921bb216ef67b561bc8986cf48239e6448beafc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7bb991c43a1deee39dd047aa7d814c124712fe69
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77170177"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89649944"
 ---
 # <a name="azure-policy-pattern-parameters"></a>Modèle Azure Policy : paramètres
 
@@ -16,7 +16,10 @@ Une définition de stratégie peut être rendue dynamique afin de réduire le no
 
 ## <a name="sample-1-string-parameters"></a>Exemple 1 : Paramètre de chaîne
 
-Cette définition de stratégie utilise deux paramètres (**tagName** et **tagValue**) pour définir ce que l’attribution de stratégie doit rechercher dans les ressources. Ce format permet à la stratégie d’être utilisée avec autant de combinaisons nom-valeur d’étiquette que souhaité. Toutefois, il ne conserve qu’une seule définition de stratégie.
+Cette définition de stratégie utilise deux paramètres (**tagName** et **tagValue**) pour définir ce que l’attribution de stratégie doit rechercher dans les ressources. Ce format permet à la définition de stratégie d’être utilisée avec autant de combinaisons nom-valeur d’étiquette que souhaité. Toutefois, il ne conserve qu’une seule définition de stratégie.
+
+> [!NOTE]
+> Pour obtenir un exemple d’étiquette qui utilise **mode** _All_ et fonctionne avec un groupe de ressources, consultez [Modèle : Étiquettes - Exemple no1](./pattern-tags.md#sample-1-parameterize-tags).
 
 :::code language="json" source="~/policy-templates/patterns/pattern-parameters-1.json":::
 
@@ -47,6 +50,22 @@ Le paramètre est ensuite utilisé dans le bloc **policyRule.if**. En tant que p
 Ici, il est utilisé sur l’alias **serviceProvider.bandwidthInMbps** comme l’une des valeurs définies.
 
 :::code language="json" source="~/policy-templates/patterns/pattern-parameters-2.json" range="21-24" highlight="3":::
+
+## <a name="sample-3-parameterized-effect"></a>Exemple 3 : Effet paramétrable
+
+Une façon courante de rendre les définitions de stratégie réutilisables consiste à paramétrer l’effet lui-même. Cet exemple utilise un seul paramètre, **effect**. Le paramétrage de l’effet permet d’assigner la même définition à différentes étendues avec des effets différents.
+
+:::code language="json" source="~/policy-templates/patterns/pattern-parameters-3.json":::
+
+### <a name="sample-3-explanation"></a>Exemple 3 : Explication
+
+:::code language="json" source="~/policy-templates/patterns/pattern-parameters-3.json" range="11-25":::
+
+Dans cette partie de la définition de stratégie, le paramètre **effect** est défini en tant que _chaîne_. La définition de stratégie définit la valeur par défaut d’une affectation sur _audit_, et limite les autres options à _disabled_ et _deny_.
+
+Le paramètre est ensuite utilisé dans le bloc **policyRule.then** pour obtenir _effect_.
+
+:::code language="json" source="~/policy-templates/patterns/pattern-parameters-3.json" range="38-40" highlight="2":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

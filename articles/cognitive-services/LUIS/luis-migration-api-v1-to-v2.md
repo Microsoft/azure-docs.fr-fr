@@ -3,26 +3,24 @@ title: Migration de l’API v1 vers v2
 titleSuffix: Azure Cognitive Services
 description: Les API de point de terminaison et de création Language Understanding de version 1 sont dépréciées. Utilisez ce guide pour comprendre comment migrer vers la version 2 des API de point de terminaison et de création.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/02/2019
-ms.author: diberry
-ms.openlocfilehash: 2f67bf0951ef8928297c71e8fc9f924cf05c63f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 867ae2cc7567077786bb0840cd11c47b786be423
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68932686"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95018750"
 ---
 # <a name="api-v1-to-v2-migration-guide-for-luis-apps"></a>Guide de migration d’API v1 vers v2 pour les applications LUIS
-Les API de [point de terminaison](https://aka.ms/v1-endpoint-api-docs) et de [création](https://aka.ms/v1-authoring-api-docs) de version 1 sont dépréciées. Utilisez ce guide pour comprendre comment migrer vers la version 2 des API de [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356) et de [création](https://go.microsoft.com/fwlink/?linkid=2092087). 
+Les API de [point de terminaison](https://aka.ms/v1-endpoint-api-docs) et de [création](https://aka.ms/v1-authoring-api-docs) de version 1 sont dépréciées. Utilisez ce guide pour comprendre comment migrer vers la version 2 des API de [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356) et de [création](https://go.microsoft.com/fwlink/?linkid=2092087).
 
 ## <a name="new-azure-regions"></a>Nouvelles régions Azure
-LUIS fournit de nouvelles [régions](https://aka.ms/LUIS-regions) pour les API LUIS. LUIS fournit un autre portail Web pour les groupes de régions. L’application doit être créée dans la région que vous vous attendez à interroger. Les applications ne migrent pas automatiquement vers d’autres régions. Vous exportez l’application à partir d’une région, puis vous l’importez dans une autre pour qu’elle soit disponible dans une nouvelle région.
+LUIS fournit de nouvelles [régions](./luis-reference-regions.md) pour les API LUIS. LUIS fournit un autre portail Web pour les groupes de régions. L’application doit être créée dans la région que vous vous attendez à interroger. Les applications ne migrent pas automatiquement vers d’autres régions. Vous exportez l’application à partir d’une région, puis vous l’importez dans une autre pour qu’elle soit disponible dans une nouvelle région.
 
 ## <a name="authoring-route-changes"></a>Création de modifications d’itinéraires
 L’itinéraire de création d’API passe de l’utilisation de l’itinéraire **prog** à l’utilisation de l’itinéraire **api**.
@@ -112,7 +110,7 @@ Les API de la clé du point de terminaison de l’abonnement sont déconseillée
 |1|/luis/v1.0/prog/subscriptions|
 |1|/luis/v1.0/prog/subscriptions/{subscriptionKey}|
 
-Les [clés de point de terminaison](luis-how-to-azure-subscription.md) Azure sont générées sur le Portail Azure. Vous affectez la clé à une application LUIS à la page **[Publier](luis-how-to-azure-subscription.md)** . Vous n’avez pas besoin de connaître la valeur de clé réelle. LUIS utilise le nom de l’abonnement pour effectuer l’affectation. 
+Les [clés de point de terminaison](luis-how-to-azure-subscription.md) Azure sont générées sur le Portail Azure. Vous affectez la clé à une application LUIS à la page **[Publier](luis-how-to-azure-subscription.md)** . Vous n’avez pas besoin de connaître la valeur de clé réelle. LUIS utilise le nom de l’abonnement pour effectuer l’affectation.
 
 ## <a name="new-versioning-route"></a>Nouvel itinéraire de contrôle de version
 Le modèle v2 est maintenant contenu dans une [version](luis-how-to-manage-versions.md). Un nom de version a 10 caractères dans l’itinéraire. La version par défaut est « 0.1 ».
@@ -145,7 +143,7 @@ LUIS suggère des énoncés à partir d’[énoncés de point de terminaison](lu
 
 
 ## <a name="create-app-from-prebuilt-domains"></a>Créer une application à partir d’un domaine prédéfini
-Les [Domaines prédéfinis](luis-how-to-use-prebuilt-domains.md) fournissent un modèle de domaine prédéfini. Les domaines prédéfinis permettent de développer rapidement votre application LUIS pour les domaines courants. Cette API permet de créer une application basée sur un domaine prédéfini. La réponse est le nouvel appID.
+Les [Domaines prédéfinis](./howto-add-prebuilt-models.md) fournissent un modèle de domaine prédéfini. Les domaines prédéfinis permettent de développer rapidement votre application LUIS pour les domaines courants. Cette API permet de créer une application basée sur un domaine prédéfini. La réponse est le nouvel appID.
 
 |Itinéraire v2|verbe|
 |--|--|
@@ -153,22 +151,22 @@ Les [Domaines prédéfinis](luis-how-to-use-prebuilt-domains.md) fournissent un 
 |/luis/api/v2.0/apps/customprebuiltdomains/{culture}  |get|
 
 ## <a name="importing-1x-app-into-2x"></a>Importation d’une application 1.x dans 2.x
-Le fichier JSON 1.x exporté de l’application inclut certaines zones que vous devez modifier avant l’importation dans [LUIS][LUIS] 2.0. 
+Le fichier JSON 1.x exporté de l’application inclut certaines zones que vous devez modifier avant l’importation dans [LUIS][LUIS] 2.0.
 
-### <a name="prebuilt-entities"></a>Entités prédéfinies 
-Les [entités prédéfinies](luis-prebuilt-entities.md) ont changé. Vérifiez que vous utilisez les entités prédéfinies V2. Cela inclut l’utilisation de [datetimeV2](luis-reference-prebuilt-datetimev2.md), au lieu de datetime. 
+### <a name="prebuilt-entities"></a>Entités prédéfinies
+Les [entités prédéfinies](./howto-add-prebuilt-models.md) ont changé. Vérifiez que vous utilisez les entités prédéfinies V2. Cela inclut l’utilisation de [datetimeV2](luis-reference-prebuilt-datetimev2.md), au lieu de datetime.
 
 ### <a name="actions"></a>Actions
-La propriété actions n’est plus valide. Elle devrait être vide 
+La propriété actions n’est plus valide. Elle devrait être vide
 
 ### <a name="labeled-utterances"></a>Énoncés étiquetés
-V1 autorisait les énoncés étiquetés pour inclure des espaces au début ou à la fin du mot ou de l’expression. Espaces supprimés. 
+V1 autorisait les énoncés étiquetés pour inclure des espaces au début ou à la fin du mot ou de l’expression. Espaces supprimés.
 
 ## <a name="common-reasons-for-http-response-status-codes"></a>Raisons courantes pour les codes d’état de la réponse HTTP
 Voir [Codes de réponse des API LUIS](luis-reference-response-codes.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Utilisez la documentation de l’API v2 pour mettre à jour des appels REST existants vers des API LUIS de [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356) et de [création](https://go.microsoft.com/fwlink/?linkid=2092087). 
+Utilisez la documentation de l’API v2 pour mettre à jour des appels REST existants vers des API LUIS de [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356) et de [création](https://go.microsoft.com/fwlink/?linkid=2092087).
 
-[LUIS]: https://docs.microsoft.com/azure/cognitive-services/luis/luis-reference-regions
+[LUIS]: ./luis-reference-regions.md

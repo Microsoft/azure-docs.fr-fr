@@ -1,15 +1,15 @@
 ---
 author: rothja
-ms.service: cost-management-billing
+ms.service: active-directory
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: jroth
-ms.openlocfilehash: df237cdbb8944928641f2dbea2117bbef7ba9165
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 57c64173ee3f307feb7bd879098f41505f5c5e32
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74224363"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85839083"
 ---
 | Ressource | Limite par défaut | Limite maximale |
 | --- | --- | --- |

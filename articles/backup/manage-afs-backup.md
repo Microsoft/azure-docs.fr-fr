@@ -3,16 +3,16 @@ title: Gérer les sauvegardes de partage de fichiers Azure
 description: Cet article décrit les tâches courantes de gestion et de supervision des partages de fichiers Azure sauvegardés par le service Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 01/07/2020
-ms.openlocfilehash: cb764fa441c063328dc350cf26f42c5bc7a0ca99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 784b22f11b57fb025f6d9401e10d527c83751898
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225985"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88757623"
 ---
 # <a name="manage-azure-file-share-backups"></a>Gérer les sauvegardes de partage de fichiers Azure
 
-Cet article décrit les tâches courantes de gestion et de supervision des partages de fichiers Azure sauvegardés par le service [Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-overview). Vous allez apprendre à effectuer des tâches de gestion dans le coffre Recovery Services.
+Cet article décrit les tâches courantes de gestion et de supervision des partages de fichiers Azure sauvegardés par le service [Sauvegarde Azure](./backup-overview.md). Vous allez apprendre à effectuer des tâches de gestion dans le coffre Recovery Services.
 
 ## <a name="monitor-jobs"></a>Surveiller des travaux
 
@@ -143,7 +143,7 @@ Pour supprimer les données de sauvegarde du partage de fichiers Azure :
 
 ## <a name="unregister-a-storage-account"></a>Annuler l’inscription d’un compte de stockage
 
-Pour protéger vos partages de fichiers sur un compte de stockage particulier à l'aide d'un coffre Recovery Services distinct, commencez par [mettre fin à la protection de tous les partages de fichiers](#stop-protection-on-a-file-share) de ce compte de stockage. Désinscrivez ensuite le compte du coffre Recovery Services utilisé pour la protection.
+Pour protéger vos partages de fichiers sur un compte de stockage particulier à l’aide d’un coffre Recovery Services distinct, commencez par [mettre fin à la protection de tous les partages de fichiers](#stop-protection-on-a-file-share) de ce compte de stockage. Désinscrivez ensuite le compte du coffre Recovery Services utilisé pour la protection.
 
 La procédure suivante part du principe que la protection a été interrompue pour tous les partages de fichiers du compte de stockage dont vous souhaitez annuler l'inscription.
 
@@ -165,4 +165,4 @@ Pour annuler l’inscription du compte de stockage :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d'informations, consultez [Résoudre les problèmes liés à la sauvegarde des partages de fichiers Azure](https://docs.microsoft.com/azure/backup/troubleshoot-azure-files).
+Pour plus d'informations, consultez [Résoudre les problèmes liés à la sauvegarde des partages de fichiers Azure](./troubleshoot-azure-files.md).

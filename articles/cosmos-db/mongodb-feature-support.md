@@ -7,25 +7,28 @@ ms.topic: overview
 ms.date: 10/16/2019
 author: sivethe
 ms.author: sivethe
-ms.openlocfilehash: 94b65b4e7947bc02b1fdaae90c8f774ec216e7bb
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 60e806be85a36c2e8a64d731c8794d806a4fcae4
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80981883"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93096524"
 ---
 # <a name="azure-cosmos-dbs-api-for-mongodb-32-version-supported-features-and-syntax"></a>API Azure Cosmos DB pour MongoDB (version 3.2) : fonctionnalités et syntaxe prises en charge
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 Azure Cosmos DB est le service de base de données multi-modèle de Microsoft distribué à l’échelle mondiale. Vous pouvez communiquer avec l’API Azure Cosmos DB pour MongoDB par le biais de n’importe quel [pilote](https://docs.mongodb.org/ecosystem/drivers) du client open source MongoDB. L’API Azure Cosmos DB pour MongoDB permet d’utiliser les pilotes clients existants en adhérant au [protocole Wire](https://docs.mongodb.org/manual/reference/mongodb-wire-protocol) MongoDB.
 
-À l’aide de l’API Azure Cosmos DB pour MongoDB, vous pouvez profiter des avantages de MongoDB que vous connaissez déjà, ainsi que de toutes les fonctionnalités d’entreprise fournies par Cosmos DB : [distribution globale](distribute-data-globally.md), [partitionnement automatique](partition-data.md), garanties de disponibilité et latence, indexation automatique de tous les champs, chiffrement au repos, sauvegardes et bien plus encore.
+À l’aide de l’API Azure Cosmos DB pour MongoDB, vous pouvez profiter des avantages de MongoDB que vous connaissez déjà, ainsi que de toutes les fonctionnalités d’entreprise fournies par Cosmos DB : [distribution globale](distribute-data-globally.md), [partitionnement automatique](partitioning-overview.md), garanties de disponibilité et latence, indexation automatique de tous les champs, chiffrement au repos, sauvegardes et bien plus encore.
 
 > [!NOTE]
 > Cet article concerne l’API Azure Cosmos DB pour MongoDB 3.2. Pour la version MongoDB 3.6, consultez [Fonctionnalités et syntaxe prises en charge de MongoDB 3.6](mongodb-feature-support-36.md).
 
 ## <a name="protocol-support"></a>Prise en charge du protocole
 
-Tous les nouveaux comptes de l’API Azure Cosmos DB pour MongoDB sont compatibles avec la version **3.6** du serveur MongoDB. Cet article porte sur MongoDB version 3.2. Les opérateurs pris en charge, ainsi que les limitations ou exceptions sont répertoriés ci-dessous. Les pilotes clients comprenant ces protocoles doivent pouvoir se connecter à l’API Azure Cosmos DB pour MongoDB.
+Tous les nouveaux comptes de l’API Azure Cosmos DB pour MongoDB sont compatibles avec la version **3.6** du serveur MongoDB. Cet article porte sur MongoDB version 3.2. Les opérateurs pris en charge, ainsi que les limitations ou exceptions sont répertoriés ci-dessous. Les pilotes clients comprenant ces protocoles doivent pouvoir se connecter à l’API Azure Cosmos DB pour MongoDB. 
+
+L’API Azure Cosmos DB pour MongoDB offre également une expérience de mise à niveau transparente pour les comptes éligibles. Pour en savoir plus, consultez le [Guide de mise à niveau de la version MongoDB](mongodb-version-upgrade.md).
 
 ## <a name="query-language-support"></a>Prise en charge du langage de requêtes
 
@@ -73,7 +76,7 @@ L’API Azure Cosmos DB pour MongoDB prend en charge les commandes de base de do
 - listDatabases
 - whatsmyuri
 
-<a name="aggregation-pipeline"/>
+<a name="aggregation-pipeline"></a>
 
 ## <a name="aggregation-pipelinea"></a>Pipeline d’agrégation</a>
 
@@ -288,7 +291,7 @@ L’opérateur à barre « | » agit comme une fonction « OR », la requête ``
 
 ### <a name="geospatial-operators"></a>Opérateurs géospatiaux
 
-Opérateur | Exemple | |
+Opérateur | Exemple | Prise en charge |
 --- | --- | --- |
 $geoWithin | ```{ "Location.coordinates": { $geoWithin: { $centerSphere: [ [ -121, 46 ], 5 ] } } }``` | Oui |
 $geoIntersects |  ```{ "Location.coordinates": { $geoIntersects: { $geometry: { type: "Polygon", coordinates: [ [ [ -121.9, 46.7 ], [ -121.5, 46.7 ], [ -121.5, 46.9 ], [ -121.9, 46.9 ], [ -121.9, 46.7 ] ] ] } } } }``` | Oui |
@@ -342,7 +345,7 @@ Cosmos DB prend en charge une durée de vie (TTL) en fonction du timestamp du do
 
 ## <a name="user-and-role-management"></a>Gestion des rôles et des utilisateurs
 
-Cosmos DB ne prend pas encore en charge les utilisateurs et les rôles. Cosmos DB prend cependant en charge le contrôle d’accès en fonction du rôle (RBAC) et les mots de passe/clés en lecture-écriture et en lecture seule, qui peuvent être obtenus via le [Portail Azure](https://portal.azure.com) (page de la chaîne de connexion).
+Cosmos DB ne prend pas encore en charge les utilisateurs et les rôles. Cosmos DB prend cependant en charge le contrôle d'accès en fonction du rôle Azure (Azure RBAC) et les mots de passe/clés en lecture-écriture et en lecture seule, qui peuvent être obtenus par le biais du [portail Azure](https://portal.azure.com) (page de la chaîne de connexion).
 
 ## <a name="replication"></a>Réplication
 

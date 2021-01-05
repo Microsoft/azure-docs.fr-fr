@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: conceptual
-ms.date: 03/25/2020
+ms.date: 07/02/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 20b699f0672b49dd2f947e0cf00d0ffcef7961e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bdaaed72b85bc3c0196a8897be311efa5fb714e2
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295305"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92366341"
 ---
 # <a name="common-conditional-access-policies"></a>Stratégies d’accès conditionnel courantes
 
@@ -28,7 +28,7 @@ Les [paramètres de sécurité par défaut](../fundamentals/concept-fundamentals
 
 Pour plus d’informations sur les comptes d’accès d’urgence et la raison pour laquelle ils sont importants, consultez les articles suivants : 
 
-* [Gérer des comptes d’accès d’urgence dans Azure AD](../users-groups-roles/directory-emergency-access.md)
+* [Gérer des comptes d’accès d’urgence dans Azure AD](../roles/security-emergency-access.md)
 * [Créer une stratégie de gestion du contrôle d'accès résiliente avec Azure Active Directory](../authentication/concept-resilient-controls.md)
 
 ## <a name="typical-policies-deployed-by-organizations"></a>Stratégies standard déployées par les organisations
@@ -42,7 +42,8 @@ Pour plus d’informations sur les comptes d’accès d’urgence et la raison p
 
 ## <a name="additional-policies"></a>Stratégies supplémentaires
 
-* [Accès conditionnel basé sur le risque (requiert Azure AD Premium P2)](howto-conditional-access-policy-risk.md)
+* [Accès conditionnel basé sur les risques de connexion (requiert Azure AD Premium P2)](howto-conditional-access-policy-risk.md)
+* [Accès conditionnel basé sur les risques des utilisateurs (requiert Azure AD Premium P2)](howto-conditional-access-policy-risk-user.md)
 * [Exiger un emplacement approuvé pour l’inscription MFA](howto-conditional-access-policy-registration.md)
 * [Bloquer l’accès par emplacement](howto-conditional-access-policy-location.md)
 * [Exiger un appareil conforme](howto-conditional-access-policy-compliant-device.md)

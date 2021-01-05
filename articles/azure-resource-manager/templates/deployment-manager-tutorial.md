@@ -2,15 +2,15 @@
 title: Utiliser Azure Deployment Manager pour déployer des modèles
 description: Découvrez comment utiliser les modèles Resource Manager avec Azure Deployment Manager pour déployer des ressources Azure.
 author: mumian
-ms.date: 12/04/2019
+ms.date: 08/25/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: ad79721b88f886426d658ed6ee89c4969e1f1baa
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 49465f05b5484dfd358136866b67ce35f789799f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75470284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88892930"
 ---
 # <a name="tutorial-use-azure-deployment-manager-with-resource-manager-templates-public-preview"></a>Tutoriel : Utiliser Azure Deployment Manager avec des modèles Resource Manager (préversion publique)
 
@@ -40,7 +40,7 @@ Ce tutoriel décrit les tâches suivantes :
 
 Ressources supplémentaires :
 
-* Les [informations de référence de l’API REST Azure Deployment Manager](https://docs.microsoft.com/rest/api/deploymentmanager/).
+* Les [informations de référence de l’API REST Azure Deployment Manager](/rest/api/deploymentmanager/).
 * [Tutoriel : Utiliser le contrôle d’intégrité dans Azure Deployment Manager](./deployment-manager-tutorial-health-check.md).
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
@@ -52,7 +52,7 @@ Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https:/
 Pour effectuer ce qui est décrit dans cet article, vous avez besoin des éléments suivants :
 
 * Une certaine expérience du développement de [modèles Azure Resource Manager](overview.md).
-* Azure PowerShell. Pour plus d’informations, consultez [Bien démarrer avec Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Azure PowerShell. Pour plus d’informations, consultez [Bien démarrer avec Azure PowerShell](/powershell/azure/get-started-azureps).
 * Cmdlets Deployment Manager. Pour installer ces cmdlets en version préliminaire, vous avez besoin de la dernière version de PowerShellGet. Pour obtenir la toute dernière version, consultez [Installation de PowerShellGet](/powershell/scripting/gallery/installing-psget). Fermez la fenêtre PowerShell après l’installation de PowerShellGet. Ouvrez une nouvelle fenêtre PowerShell avec des privilèges élevés, puis exécutez la commande suivante :
 
     ```powershell

@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Cisco Umbrella | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Cisco Umbrella.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 675dca98-f119-4463-8350-d6a45d5601e3
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: ee91ca53e32bfdc387dc20054493d02d506a75da
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: dde618b28e004e87edc2783bc44c5e7dd9f0ebba
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158628"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97670619"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-cisco-umbrella"></a>Tutoriel : Intégration d’Azure Active Directory à Cisco Umbrella
 
@@ -32,7 +27,7 @@ L’intégration de Cisco Umbrella avec Azure AD offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Cisco Umbrella (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Cisco Umbrella à Azure AD, vous devez ajout
 
 4. Dans la zone de recherche, entrez **Cisco Umbrella**, sélectionnez **Cisco Umbrella** dans le panneau des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Cisco Umbrella dans la liste des résultats](common/search-new-app.png)
+    ![Cisco Umbrella dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -173,7 +168,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -229,7 +224,7 @@ En l’occurrence, cet approvisionnement est une tâche manuelle.
     b. Dans le champ **Nom de famille**, entrez le prénom **Simon**.
 
     c. À partir de **Choisir un rôle d'administrateur délégué**, sélectionnez votre rôle.
-  
+
     d. Dans le champ **Adresse e-mail**, entrez l’adresse e-mail de l’utilisateur, par exemple **brittasimon\@contoso.com**.
 
     e. Dans le champ **Mot de passe**, entrez votre mot de passe.
@@ -242,12 +237,12 @@ En l’occurrence, cet approvisionnement est une tâche manuelle.
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Cisco Umbrella dans le panneau d’accès doit vous connecter automatiquement à l’application Cisco Umbrella pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Cisco Umbrella dans le panneau d’accès doit vous connecter automatiquement à l’application Cisco Umbrella pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

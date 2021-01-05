@@ -6,15 +6,15 @@ manager: vashan
 ms.service: virtual-machines-windows
 ms.subservice: security
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/02/2017
 ms.author: mimckitt
-ms.openlocfilehash: a0ff463bd7f77f8a4a138bf41698059102809215
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fb847a8935a438b4d2668733e87571aefdca26a1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82098694"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87288286"
 ---
 # <a name="apply-policies-to-windows-vms-with-azure-resource-manager"></a>Appliquer des stratégies aux machines virtuelles Windows avec Azure Resource Manager
 Avec les stratégies, une organisation peut appliquer différentes conventions et règles à travers l'entreprise. L’application du comportement souhaité peut vous aider à atténuer les risques tout en contribuant à la réussite de l'organisation. Dans cet article, nous expliquons comment utiliser les stratégies d’Azure Resource Manager afin de définir le comportement souhaité pour les machines virtuelles de votre entreprise.

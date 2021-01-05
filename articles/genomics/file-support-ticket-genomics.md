@@ -11,10 +11,10 @@ ms.service: genomics
 ms.topic: conceptual
 ms.date: 05/23/2018
 ms.openlocfilehash: ddfe8b6010ddc241364ccf7b2d4f5f648bd3ce0e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "72248605"
 ---
 # <a name="how-to-contact-microsoft-genomics-for-support"></a>Comment contacter Microsoft Genomics pour une demande de support

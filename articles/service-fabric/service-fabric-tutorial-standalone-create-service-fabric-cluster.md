@@ -1,17 +1,15 @@
 ---
 title: Installer un client autonome Service Fabric
-description: Au cours de ce didacticiel, vous allez apprendre à installer le client autonome Service Fabric sur le cluster que vous avez créé dans l’article didacticiel précédent.
-author: dkkapur
+description: Dans ce tutoriel, découvrez comment installer le client autonome Service Fabric sur le cluster.
 ms.topic: tutorial
 ms.date: 07/22/2019
-ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: bbaf7dfc546c739dfb858be7ef8372eccf60111b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ae0b343be986f4d8d5176c1f39eef6b23ca81278
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75613939"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91840640"
 ---
 # <a name="tutorial-install-and-create-service-fabric-cluster"></a>Didacticiel : installer et créer un cluster Service Fabric
 
@@ -19,7 +17,7 @@ Les clusters autonomes Service Fabric vous permettent de choisir votre propre en
 
 Ce tutoriel est le deuxième d’une série. Ce tutoriel vous guide tout au long du processus de création d’un cluster autonome Service Fabric.
 
-Dans ce deuxième volet, vous apprenez à :
+Dans cet article, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Télécharger et installer le package autonome Service Fabric
@@ -77,7 +75,7 @@ cd .\Desktop\Microsoft.Azure.ServiceFabric.WindowsServer.6.2.274.9494\
 .\TestConfiguration.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json
 ```
 
-Un résultat similaire à ce qui suit s’affiche normalement. Si le dernier champ « Passed » est renvoyé avec la valeur `True`, les contrôles d’intégrité ont réussi, et le cluster semble être déployable à l’aide de la configuration d’entrée.
+Vous devez obtenir un résultat semblable à l’exemple ci-dessous. Si le dernier champ « Passed » est renvoyé avec la valeur `True`, les contrôles d’intégrité ont réussi, et le cluster semble être déployable à l’aide de la configuration d’entrée.
 
 ```powershell
 Trace folder already exists. Traces will be written to existing trace folder: C:\Users\Administrator\Desktop\Microsoft.Azure.ServiceFabric.WindowsServer.6.2.274.9494\DeploymentTraces
@@ -101,7 +99,7 @@ Passed                     : True
 
 ## <a name="create-the-cluster"></a>Créer le cluster
 
-Après avoir validé la configuration du cluster, exécutez le script *CreateServiceFabricCluster.ps1* pour déployer le cluster Service Fabric sur les machines virtuelles dans le fichier de configuration.
+Après avoir validé la configuration du cluster, exécutez le script *CreateServiceFabricCluster.ps1* pour déployer le cluster Service Fabric sur les machines virtuelles du fichier de configuration.
 
 ```powershell
 .\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json -AcceptEULA
@@ -118,7 +116,7 @@ Your cluster is successfully created! You can connect and manage your cluster us
 >
 >
 
-### <a name="bring-up-service-fabric-explorer"></a>Afficher Service Fabric Explorer
+### <a name="open-service-fabric-explorer"></a>Ouvrir Service Fabric Explorer
 
 Désormais, vous pouvez vous connecter au cluster avec Service Fabric Explorer directement à partir de l’un des ordinateurs avec http:\//localhost:19080/Explorer/index.html ou à distance avec http:\//<*adresse_IP_ordinateur*>:19080/Explorer/index.html.
 
@@ -128,7 +126,7 @@ Vous pouvez ajouter des nœuds à votre cluster Service Fabric autonome ou en su
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans la deuxième partie de la série, vous avez appris à charger de grandes quantités de données aléatoires dans un compte de stockage, notamment comment :
+Dans cet article, vous avez appris à charger de grandes quantités de données aléatoires dans un compte de stockage en parallèle, notamment à :
 
 > [!div class="checklist"]
 > * Configurer la chaîne de connexion

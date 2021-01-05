@@ -10,17 +10,18 @@ ms.service: machine-learning
 ms.subservice: core
 ms.workload: data-services
 ms.topic: conceptual
+ms.custom: how-to, automl
 ms.date: 03/09/2020
-ms.openlocfilehash: e55e6d4eb4f52b8a4b64db89691cf087a30ecb73
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: d6d21acc685ba840b585ada43e59230fdd73787f
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612314"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97796378"
 ---
 # <a name="train-models-with-automated-machine-learning-in-the-cloud"></a>Entraîner des modèles avec le machine learning automatisé dans le cloud
 
-[!INCLUDE [aml-applies-to-basic-enterprise-sku](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Dans Azure Machine Learning, vous effectuez l'apprentissage de votre modèle sur différents types de ressources de calcul que vous gérez. La cible de calcul peut être un ordinateur local ou une ressource dans le cloud.
 
@@ -42,7 +43,7 @@ ws = Workspace.from_config()
 
 ## <a name="create-resource"></a>Créer une ressource
 
-Créez la cible [`AmlCompute`](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.amlcompute%28class%29?view=azure-ml-py) dans votre espace de travail (`ws`) si elle n’existe pas encore.
+Créez la cible [`AmlCompute`](/python/api/azureml-core/azureml.core.compute.amlcompute%28class%29?preserve-view=true&view=azure-ml-py) dans votre espace de travail (`ws`) si elle n’existe pas encore.
 
 **Durée estimée** : La création de la cible AmlCompute prend environ 5 minutes.
 
@@ -89,7 +90,7 @@ Voici les restrictions concernant le nom du cluster :
 
 ## <a name="access-data-using-tabulardataset-function"></a>Accéder aux données à l’aide de la fonction TabularDataset
 
-training_data défini en tant que [`TabularDataset`](https://docs.microsoft.com/python/api/azureml-core/azureml.data.tabulardataset?view=azure-ml-py) et l’étiquette, qui sont passés au Machine Learning automatisé dans [`AutoMLConfig`](https://docs.microsoft.com/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig?view=azure-ml-py). Par défaut, la méthode `TabularDataset` `from_delimited_files` définit `infer_column_types` sur True, ce qui déduit automatiquement le type des colonnes. 
+training_data défini en tant que [`TabularDataset`](/python/api/azureml-core/azureml.data.tabulardataset?preserve-view=true&view=azure-ml-py) et l’étiquette, qui sont passés au Machine Learning automatisé dans [`AutoMLConfig`](/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig?preserve-view=true&view=azure-ml-py). Par défaut, la méthode `TabularDataset` `from_delimited_files` définit `infer_column_types` sur True, ce qui déduit automatiquement le type des colonnes. 
 
 Si vous souhaitez définir manuellement les types de colonnes, vous pouvez configurer l’argument `set_column_types` pour définir manuellement le type de chaque colonne. Dans l’exemple de code suivant, les données proviennent du package sklearn.
 
@@ -158,47 +159,48 @@ automl_config = AutoMLConfig(task='classification',
 
 ```python
 from azureml.core.experiment import Experiment
-experiment = Experiment(ws, 'automl_remote')
+experiment = Experiment(ws, 'Tutorial-automl-remote')
 remote_run = experiment.submit(automl_config, show_output=True)
 ```
 
 Le résultat ressemble à l’exemple suivant :
 
-    Running on remote compute: mydsvmParent Run ID: AutoML_015ffe76-c331-406d-9bfd-0fd42d8ab7f6
-    ***********************************************************************************************
-    ITERATION: The iteration being evaluated.
-    PIPELINE:  A summary description of the pipeline being evaluated.
-    DURATION: Time taken for the current iteration.
-    METRIC: The result of computing score on the fitted pipeline.
-    BEST: The best observed score thus far.
-    ***********************************************************************************************
+```output
+Running on remote compute: mydsvmParent Run ID: AutoML_015ffe76-c331-406d-9bfd-0fd42d8ab7f6
+***********************************************************************************************
+ITERATION: The iteration being evaluated.
+PIPELINE:  A summary description of the pipeline being evaluated.
+DURATION: Time taken for the current iteration.
+METRIC: The result of computing score on the fitted pipeline.
+BEST: The best observed score thus far.
+***********************************************************************************************
 
-     ITERATION     PIPELINE                               DURATION                METRIC      BEST
-             2      Standardize SGD classifier            0:02:36                  0.954     0.954
-             7      Normalizer DT                         0:02:22                  0.161     0.954
-             0      Scale MaxAbs 1 extra trees            0:02:45                  0.936     0.954
-             4      Robust Scaler SGD classifier          0:02:24                  0.867     0.954
-             1      Normalizer kNN                        0:02:44                  0.984     0.984
-             9      Normalizer extra trees                0:03:15                  0.834     0.984
-             5      Robust Scaler DT                      0:02:18                  0.736     0.984
-             8      Standardize kNN                       0:02:05                  0.981     0.984
-             6      Standardize SVM                       0:02:18                  0.984     0.984
-            10      Scale MaxAbs 1 DT                     0:02:18                  0.077     0.984
-            11      Standardize SGD classifier            0:02:24                  0.863     0.984
-             3      Standardize gradient boosting         0:03:03                  0.971     0.984
-            12      Robust Scaler logistic regression     0:02:32                  0.955     0.984
-            14      Scale MaxAbs 1 SVM                    0:02:15                  0.989     0.989
-            13      Scale MaxAbs 1 gradient boosting      0:02:15                  0.971     0.989
-            15      Robust Scaler kNN                     0:02:28                  0.904     0.989
-            17      Standardize kNN                       0:02:22                  0.974     0.989
-            16      Scale 0/1 gradient boosting           0:02:18                  0.968     0.989
-            18      Scale 0/1 extra trees                 0:02:18                  0.828     0.989
-            19      Robust Scaler kNN                     0:02:32                  0.983     0.989
-
+ ITERATION     PIPELINE                               DURATION                METRIC      BEST
+         2      Standardize SGD classifier            0:02:36                  0.954     0.954
+         7      Normalizer DT                         0:02:22                  0.161     0.954
+         0      Scale MaxAbs 1 extra trees            0:02:45                  0.936     0.954
+         4      Robust Scaler SGD classifier          0:02:24                  0.867     0.954
+         1      Normalizer kNN                        0:02:44                  0.984     0.984
+         9      Normalizer extra trees                0:03:15                  0.834     0.984
+         5      Robust Scaler DT                      0:02:18                  0.736     0.984
+         8      Standardize kNN                       0:02:05                  0.981     0.984
+         6      Standardize SVM                       0:02:18                  0.984     0.984
+        10      Scale MaxAbs 1 DT                     0:02:18                  0.077     0.984
+        11      Standardize SGD classifier            0:02:24                  0.863     0.984
+         3      Standardize gradient boosting         0:03:03                  0.971     0.984
+        12      Robust Scaler logistic regression     0:02:32                  0.955     0.984
+        14      Scale MaxAbs 1 SVM                    0:02:15                  0.989     0.989
+        13      Scale MaxAbs 1 gradient boosting      0:02:15                  0.971     0.989
+        15      Robust Scaler kNN                     0:02:28                  0.904     0.989
+        17      Standardize kNN                       0:02:22                  0.974     0.989
+        16      Scale 0/1 gradient boosting           0:02:18                  0.968     0.989
+        18      Scale 0/1 extra trees                 0:02:18                  0.828     0.989
+        19      Robust Scaler kNN                     0:02:32                  0.983     0.989
+```
 
 ## <a name="explore-results"></a>Explorer les résultats
 
-Vous pouvez utiliser le même [widget Jupyter](https://docs.microsoft.com/python/api/azureml-widgets/azureml.widgets?view=azure-ml-py) que celui du [tutoriel de formation](tutorial-auto-train-models.md#explore-the-results) pour afficher un graphique et le tableau des résultats.
+Vous pouvez utiliser le même [widget Jupyter](/python/api/azureml-widgets/azureml.widgets?preserve-view=true&view=azure-ml-py) que celui du [tutoriel de formation](tutorial-auto-train-models.md#explore-the-results) pour afficher un graphique et le tableau des résultats.
 
 ```python
 from azureml.widgets import RunDetails
@@ -218,7 +220,7 @@ Si vous n’êtes pas dans un bloc-notes Jupyter, vous pouvez afficher l’URL �
 remote_run.get_portal_url()
 ```
 
-Les mêmes informations sont disponibles dans votre espace de travail.  Pour en savoir plus sur ces résultats, consultez [Comprendre les résultats du Machine Learning automatisé](how-to-understand-automated-ml.md).
+Les mêmes informations sont disponibles dans votre espace de travail.  Pour en savoir plus sur ces résultats, consultez [Évaluer les résultats du Machine Learning automatisé](how-to-understand-automated-ml.md).
 
 ## <a name="example"></a>Exemple
 

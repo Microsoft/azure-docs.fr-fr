@@ -9,20 +9,20 @@ ms.subservice: translator-text
 ms.date: 12/09/2019
 ms.author: swmachan
 ms.topic: overview
-ms.openlocfilehash: 04f90292b74593dece5f7e54268907e184fd084c
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 6a7301fd878eb65e4c1dd540275611bcf9348afc
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592761"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95241741"
 ---
 # <a name="what-is-custom-translator"></a>Qu’est-ce que Custom Translator ?
 
-[Custom Translator](https://portal.customtranslator.azure.ai) est une fonctionnalité du service Microsoft Translator qui permet aux entreprises de traduction, aux développeurs d’applications et aux fournisseurs de services linguistiques de créer des systèmes de traduction automatique neuronaux (NMT) personnalisés. Les systèmes de traduction personnalisés s’intègrent de manière fluide aux applications, aux workflows et aux sites web existants. [Custom Translator](https://portal.customtranslator.azure.ai/) offre des fonctions similaires à celles de [Microsoft Translator Hub](https://hub.microsofttranslator.com/) pour la traduction automatique statistique (SMT), mais exclusivement pour les systèmes de traduction automatique neuronaux (NMT).
+[Custom Translator](https://portal.customtranslator.azure.ai) est une fonctionnalité du service Microsoft Translator qui permet aux entreprises de traduction, aux développeurs d’applications et aux fournisseurs de services linguistiques de créer des systèmes de traduction automatique neuronaux (NMT) personnalisés. Les systèmes de traduction personnalisés s’intègrent de manière fluide aux applications, aux workflows et aux sites web existants.
 
-Les systèmes de traduction créés avec [Custom Translator](https://portal.customtranslator.azure.ai) sont disponibles via la même [API de traduction de texte Translator Text V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl) cloud [sécurisée](https://cognitive.uservoice.com/knowledgebase/articles/1147537-api-and-customization-confidentiality) extrêmement performante et scalable de Microsoft qui génère des milliards de traductions tous les jours.
+Les systèmes de traduction créés avec [Custom Translator](https://portal.customtranslator.azure.ai) sont disponibles via la même [API de traduction de texte Translator Text V3](../reference/v3-0-translate.md?tabs=curl) cloud [sécurisée](https://cognitive.uservoice.com/knowledgebase/articles/1147537-api-and-customization-confidentiality) extrêmement performante et scalable de Microsoft qui génère des milliards de traductions tous les jours.
 
-Custom Translator prend en charge plus de trente-six langues et mappe directement vers les langues disponibles pour les systèmes NMT. Pour une liste complète, consultez [Langues Microsoft Translator](https://docs.microsoft.com/azure/cognitive-services/translator/language-support#customization).
+Custom Translator prend en charge plus de trente-six langues et mappe directement vers les langues disponibles pour les systèmes NMT. Pour une liste complète, consultez [Langues Microsoft Translator](../language-support.md#customization).
 
 ## <a name="features"></a>Fonctionnalités
 
@@ -34,7 +34,7 @@ Custom Translator offre différentes fonctionnalités pour créer un système de
 |[Créer des systèmes qui connaissent la terminologie de votre activité](what-are-parallel-documents.md)     |  Personnalisez et créez des systèmes de traduction en utilisant des documents parallèles qui comprennent la terminologie utilisée dans votre entreprise et votre secteur d’activité.       |
 |[Utiliser un dictionnaire pour générer vos modèles](what-is-dictionary.md)     |   Si vous n’avez pas de jeu de données d’entraînement, vous pouvez entraîner un modèle avec uniquement des données de dictionnaire.       |
 |[Collaborer avec d’autres personnes](how-to-manage-settings.md#share-your-workspace)     |   Collaborez avec votre équipe en partageant votre travail avec différentes personnes.     |
-|[Accéder à votre modèle de traduction personnalisé](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl)     |  Vos applications/programmes peuvent accéder à votre modèle de traduction personnalisé à tout moment via Translator V3.       |
+|[Accéder à votre modèle de traduction personnalisé](../reference/v3-0-translate.md?tabs=curl)     |  Vos applications/programmes peuvent accéder à votre modèle de traduction personnalisé à tout moment via l’API de traduction de texte Translator Text V3 de Microsoft.       |
 
 ## <a name="get-better-translations"></a>Obtenir de meilleures traductions
 
@@ -54,11 +54,11 @@ Avec [Custom Translator](https://portal.customtranslator.azure.ai), l’entraîn
 
 [Custom Translator](https://portal.customtranslator.azure.ai) peut également être accessible programmatiquement via une [API dédiée](https://custom-api.cognitive.microsofttranslator.com/swagger/) (actuellement en préversion). L’API permet aux utilisateurs de gérer la création ou la mise à jour régulière d’entraînements depuis leur propre application ou service web.
 
-Le coût d’utilisation d’un modèle personnalisé pour traduire du contenu est fonction du niveau tarifaire de Translator de l’utilisateur. Pour les détails des niveaux tarifaires, consultez la [page web des tarifs de Translator](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/) de Cognitive Services.
+Le coût d’utilisation d’un modèle personnalisé pour traduire du contenu est fonction du niveau tarifaire de l’API de traduction de texte Translator Text de l’utilisateur. Pour les détails des niveaux tarifaires, consultez la [page web des tarifs de l’API de traduction de texte Translator Text](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/) de Cognitive Services.
 
 ## <a name="securely-translate-anytime-anywhere-on-all-your-apps-and-services"></a>Traduisez sans crainte où et quand vous voulez sur toutes vos applications et tous vos services
 
-Des systèmes personnalisés peuvent être accessibles et intégrés de manière fluide à n’importe quel produit ou workflow métier et sur n’importe quel appareil, par le biais de Translator et d’une technologie REST standard.
+Des systèmes personnalisés peuvent être accessibles et intégrés de manière fluide à n’importe quel produit ou workflow métier et sur n’importe quel appareil, par le biais de l’API de traduction de texte Translator Text Microsoft et d’une technologie REST standard.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

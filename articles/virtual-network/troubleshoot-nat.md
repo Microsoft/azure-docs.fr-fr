@@ -9,17 +9,17 @@ manager: KumudD
 ms.service: virtual-network
 Customer intent: As an IT administrator, I want to troubleshoot Virtual Network NAT.
 ms.devlang: na
-ms.topic: overview
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 04/28/2020
+ms.date: 05/20/2020
 ms.author: allensu
-ms.openlocfilehash: c9b5aaefeb8ab21eed850f5bf291d38981239aab
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 690543ebc91e346e77509fbf993493f6978374ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82508426"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87836103"
 ---
 # <a name="troubleshoot-azure-virtual-network-nat-connectivity"></a>Résoudre les problèmes de connectivité du service NAT de réseau virtuel Azure
 
@@ -31,6 +31,7 @@ Cet article permet aux administrateurs de diagnostiquer et de résoudre les prob
 * [Échec de la commande ping ICMP](#icmp-ping-is-failing)
 * [Échecs de connectivité](#connectivity-failures)
 * [Coexistence IPv6](#ipv6-coexistence)
+* [La connexion ne provient pas de la ou des adresses IP de passerelle NAT](#connection-doesnt-originate-from-nat-gateway-ips)
 
 Pour résoudre ces problèmes, effectuez les étapes de la section suivante.
 
@@ -61,10 +62,10 @@ _**Solution :**_ Utiliser les modèles et bonnes pratiques appropriés
 - Le système DNS peut introduire un grand nombre de flux individuels quand le client ne met pas en cache le résultat des programmes de résolution DNS. Utilisez la mise en cache.
 - Les flux UDP (par exemple, les recherches DNS) allouent des ports SNAT pour la durée du délai d’inactivité. Plus le délai d’inactivité est long, plus la sollicitation des ports SNAT est forte. Utilisez un délai d’inactivité court (par exemple, 4 minutes).
 - Utilisez des pools de connexions pour déterminer votre volume de connexions.
-- N’abandonnez jamais un flux TCP en mode silencieux et ne vous fiez pas aux minuteries TCP pour nettoyer un flux. Si vous ne laissez pas le protocole TCP fermer explicitement la connexion, l’état reste alloué aux systèmes intermédiaires et aux points de terminaison, et les ports SNAT ne sont alors pas disponibles pour les autres connexions. Cela peut déclencher des échecs d’application et l’épuisement des ports SNAT. 
+- N’abandonnez jamais un flux TCP en mode silencieux et ne vous fiez pas aux minuteries TCP pour nettoyer un flux. Si vous ne laissez pas le protocole TCP fermer explicitement la connexion, l’état reste alloué aux systèmes intermédiaires et aux points de terminaison, et les ports SNAT ne sont alors pas disponibles pour les autres connexions. Ce modèle peut déclencher des échecs d’application et l’épuisement des ports SNAT. 
 - Ne changez pas les valeurs de minuteur lié à la fermeture TCP au niveau du système d’exploitation sans en connaître précisément l’impact. Même si la pile TCP est récupérée, les performances de votre application risquent d’être affectées si les points de terminaison d’une connexion ont des attentes incompatibles. Quand vous voulez changer les minuteurs, c’est généralement qu’il y a un problème de conception sous-jacent. Tenez compte des recommandations suivantes.
 
-Souvent, l’épuisement des ports SNAT peut aussi être amplifié par d’autres anti-modèles dans l’application sous-jacente. Passez en revue ces modèles et bonnes pratiques supplémentaires pour améliorer la mise à l’échelle et la fiabilité de votre service.
+L’épuisement des ports SNAT peut aussi être amplifié par d’autres anti-modèles dans l’application sous-jacente. Passez en revue ces modèles et bonnes pratiques supplémentaires pour améliorer la mise à l’échelle et la fiabilité de votre service.
 
 - Explorez l’impact de la réduction du [délai d’inactivité TCP](nat-gateway-resource.md#timers) à des valeurs inférieures, notamment le délai d’inactivité par défaut de 4 minutes, pour libérer plus tôt l’inventaire des ports SNAT.
 - Envisagez d’utiliser les [modèles d’interrogation asynchrone](https://docs.microsoft.com/azure/architecture/patterns/async-request-reply) pour les opérations de longue durée afin de libérer des ressources de connexion pour d’autres opérations.
@@ -95,7 +96,7 @@ Le tableau suivant peut être utilisé comme point de départ pour savoir quels 
 | Système d’exploitation | Test de connexion TCP générique | Test de la couche Application TCP | UDP |
 |---|---|---|---|
 | Linux | nc (test de connexion générique) | curl (test de la couche Application TCP) | spécifique à l’application |
-|  Windows | [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) | [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest) de PowerShell | spécifique à l’application |
+| Windows | [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) | [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest) de PowerShell | spécifique à l’application |
 
 ### <a name="connectivity-failures"></a>Échecs de connectivité
 
@@ -112,11 +113,11 @@ Utilisez des outils tels que ceux mentionnés ci-après pour la validation de la
 | Système d’exploitation | Test de connexion TCP générique | Test de la couche Application TCP | UDP |
 |---|---|---|---|
 | Linux | nc (test de connexion générique) | curl (test de la couche Application TCP) | spécifique à l’application |
-|  Windows | [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) | [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest) de PowerShell | spécifique à l’application |
+| Windows | [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) | [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest) de PowerShell | spécifique à l’application |
 
 #### <a name="configuration"></a>Configuration
 
-Vérifiez les points suivants :
+Vérifiez votre configuration :
 1. La ressource de passerelle NAT a-t-elle au moins une ressource d’adresse IP publique ou une ressource de préfixe d’adresse IP publique ? Au moins une adresse IP doit être associée à la passerelle NAT pour qu’elle puisse fournir une connectivité sortante.
 2. Le sous-réseau du réseau virtuel est-il configuré pour utiliser la passerelle NAT ?
 3. Utilisez-vous des routes définies par l’utilisateur (UDR) et remplacez-vous la destination ?  Les ressources de passerelle NAT deviennent la route par défaut (0/0) sur les sous-réseaux configurés.
@@ -182,6 +183,18 @@ Le service [NAT de réseau virtuel](nat-overview.md) prend en charge les protoco
 _**Solution :**_ Déployer une passerelle NAT sur un sous-réseau sans préfixe IPv6.
 
 Si vous êtes intéressé par d’autres fonctionnalités, vous pouvez l’indiquer sur le site [UserVoice](https://aka.ms/natuservoice) (service NAT de réseau virtuel).
+
+### <a name="connection-doesnt-originate-from-nat-gateway-ips"></a>La connexion ne provient pas de la ou des adresses IP de passerelle NAT
+
+Vous configurez la passerelle NAT, la ou les adresses IP à utiliser et le sous-réseau qui doit utiliser une ressource de passerelle NAT. Toutefois, les connexions provenant d’instances de machines virtuelles qui existaient avant le déploiement de la passerelle NAT n’utilisent pas la ou les adresses IP.  Elles semblent recourir à des adresses IP qui ne sont pas utilisées avec la ressource de passerelle NAT.
+
+_**Solution :**_
+
+Le [NAT de réseau virtuel](nat-overview.md) remplace la connectivité sortante pour le sous-réseau sur lequel il est configuré. Lors de la transition du port SNAT par défaut ou du port SNAT sortant de l’équilibreur de charge vers des passerelles NAT, les nouvelles connexions commencent immédiatement à utiliser la ou les adresses IP associées à la ressource de passerelle NAT.  Toutefois, si une machine virtuelle dispose toujours d’une connexion pendant le basculement vers la ressource de passerelle NAT, cette connexion continue d’utiliser l’ancienne adresse IP SNAT qui a été affectée lors de l’établissement de la connexion.  Établissez une nouvelle connexion au lieu de réutiliser celle qui existait déjà parce que le système d’exploitation ou le navigateur mettait en cache les connexions dans un pool de connexions.  Par exemple, lorsque vous utilisez _curl_ dans PowerShell, veillez à spécifier le paramètre _-DisableKeepalive_ pour forcer une nouvelle connexion.  Si vous utilisez un navigateur, les connexions peuvent également être mises en pool.
+
+Il n’est pas nécessaire de redémarrer une machine virtuelle en configurant un sous-réseau pour une ressource de passerelle NAT.  Cependant, si la machine est redémarrée, l’état de la connexion est vidé.  De ce fait, toutes les connexions se mettent à utiliser la ou les adresses IP de la ressource de passerelle NAT.  Il s’agit toutefois d’un effet secondaire du redémarrage de la machine virtuelle et non d’un signe indiquant qu’un redémarrage est nécessaire.
+
+Si vous rencontrez toujours des problèmes, ouvrez un dossier de support pour les résoudre.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

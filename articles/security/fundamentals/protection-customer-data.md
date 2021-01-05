@@ -1,6 +1,6 @@
 ---
 title: Protection des données des clients dans Azure
-description: Cet article traite de la façon dont Azure protège les données clientes.
+description: Découvrez comment Azure protège les données client par le biais de la séparation des données, de la redondance des données et de la destruction des données.
 services: security
 documentationcenter: na
 author: TerryLanfear
@@ -13,17 +13,17 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/28/2018
+ms.date: 07/10/2020
 ms.author: terrylan
-ms.openlocfilehash: 630304bec17dd34befab4e5bd9f1cfdfb6505645
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 14589e4efe22d89468b069bf6ff7e3d9babcc714
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811429"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543790"
 ---
 # <a name="azure-customer-data-protection"></a>Protection des données client Azure   
-L’accès aux données clientes par le personnel des opérations et du support Microsoft est refusé par défaut. Lorsque l’accès aux données clientes est accordé, l’approbation de la direction est obligatoire, puis l’accès est géré et journalisé avec soin. Les conditions de contrôle d’accès sont établies par la stratégie de sécurité Azure suivante :
+L’accès aux données clientes par le personnel des opérations et du support Microsoft est refusé par défaut. Lorsque l'accès aux données liées à un cas de support est accordé, il n'est accordé qu'avec un modèle juste-à-temps utilisant des stratégies qui sont auditées et vérifiées par rapport à nos stratégies de conformité et de confidentialité.  Les conditions de contrôle d’accès sont établies par la stratégie de sécurité Azure suivante :
 
 - Aucun accès aux données client par défaut.
 - Aucun compte d’utilisateur ou d’administrateur sur les machines virtuelles des clients.
@@ -40,12 +40,9 @@ Azure fournit aux clients une sécurité renforcée des données, à la fois par
 
 **Protection des données au repos** : les clients sont tenus de veiller à ce que les données stockées dans Azure soient chiffrées conformément aux normes en vigueur. Azure propose toute une série de fonctionnalités de chiffrement qui permettent aux clients de choisir la solution correspondant le mieux à leurs besoins. Azure Key Vault aide les clients à assurer facilement le contrôle des clés utilisées par les applications et les services cloud pour chiffrer les données. Azure Disk Encryption permet aux clients de chiffrer les machines virtuelles. Azure Storage Service Encryption offre la possibilité de chiffrer toutes les données placées dans le compte de stockage du client.
 
-**Protection des données en transit** : les clients peuvent activer le chiffrement du trafic entre leurs propres machines virtuelles et les utilisateurs finaux. Azure protège les données en transit depuis ou vers des composants externes et les données en transit en interne, par exemple entre deux réseaux virtuels. Azure utilise le protocole standard TLS (Transport Layer Security) 1.2 ou protocole ultérieur avec les clés de chiffrement 2 048 bits RSA/SHA256, comme recommandé par CESG/NCSC, pour chiffrer les communications entre :
+**Protection des données en transit** : Microsoft propose un certain nombre d'options qui peuvent être utilisées par les clients pour sécuriser les données en transit en interne au sein du réseau Azure, et en externe sur Internet, pour l'utilisateur final.  Il s'agit notamment des communications par le biais de réseaux privés virtuels (utilisant le chiffrement IPsec/IKE), de Transport Layer Security (TLS) 1.2 ou version ultérieure (via des composants Azure tels qu'Application Gateway ou Azure Front Door), de protocoles utilisés directement sur les machines virtuelles Azure (comme Windows IPsec ou SMB), etc. 
 
-- Le client et le cloud.
-- En interne entre les centres de données et les systèmes Azure.
-
-**Chiffrement** : le chiffrement des données en stockage et en transit peut être déployé par les clients comme bonne pratique pour garantir la confidentialité et l'intégrité des données. Il est très facile pour les clients de configurer leurs services cloud Azure de façon à utiliser TLS pour protéger les communications à partir d’Internet et même entre leurs machines virtuelles hébergées dans Azure.
+En outre, le « chiffrement par défaut » à l'aide de MACsec (norme IEEE au niveau de la couche de liaison de données) est activé pour tout le trafic Azure qui transite entre les centres de données Azure afin de garantir la confidentialité et l'intégrité des données client. 
 
 **Redondance des données** : Microsoft contribue à assurer la protection des données en cas de cyberattaque ou de dommages physiques sur un centre de données. Les clients peuvent choisir :
 

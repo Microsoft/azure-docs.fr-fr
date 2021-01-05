@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Birst Agile Business Analytics | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Birst Agile Business Analytics.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 677183b1-5348-4302-88cc-5c8ab63a3c6c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/07/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 46bea4afcd59a385a8e9d2ccf1aa0d70fdae198c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 124485819bf7fab02e2d62bec46ad50468589773
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158832"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97674342"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-birst-agile-business-analytics"></a>Didacticiel : Intégration d’Azure Active Directory à Birst Agile Business Analytics
 
@@ -32,7 +27,7 @@ L’intégration de Birst Agile Business Analytics dans Azure AD vous offre les 
 * Vous pouvez autoriser vos utilisateurs à se connecter automatiquement à Birst Agile Business Analytics (via l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Birst Agile Business Analytics à Azure AD,
 
 4. Dans la zone de recherche, tapez **Birst Agile Business Analytics**, sélectionnez **Birst Agile Business Analytics** dans le volet de résultats, puis cliquez sur **Ajouter** pour ajouter l’application.
 
-     ![Birst Agile Business Analytics dans la liste des résultats](common/search-new-app.png)
+    ![Birst Agile Business Analytics dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -155,7 +150,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -191,19 +186,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-birst-agile-business-analytics-test-user"></a>Créer un utilisateur de test Birst Agile Business Analytics
 
-Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Birst Agile Business Analytics. Collaborez avec l’ [équipe du support technique Birst Agile Business Analytics](mailto:info@birst.com) pour ajouter des utilisateurs dans la plateforme Birst Agile Business Analytics. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur nommé Britta Simon dans Birst Agile Business Analytics. Collaborez avec l’[équipe du support technique Birst Agile Business Analytics](mailto:info@birst.com) pour ajouter des utilisateurs dans la plateforme Birst Agile Business Analytics. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette Birst Agile Business Analytics dans le volet d’accès, vous devez être connecté automatiquement à l’application Birst Agile Business Analytics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette Birst Agile Business Analytics dans le volet d’accès, vous devez être connecté automatiquement à l’application Birst Agile Business Analytics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

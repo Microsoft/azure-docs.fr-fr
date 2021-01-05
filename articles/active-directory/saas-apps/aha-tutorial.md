@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Aha! | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Aha!.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: ad955d3d-896a-41bb-800d-68e8cb5ff48d
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/09/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: a63872680d28664c6d5a7ff109f6de72817173d5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 82f3a2dc7f43bd484d6a81efaa8d07f13b746d9e
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68989646"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97671078"
 ---
 # <a name="tutorial-integrate-aha-with-azure-active-directory"></a>Tutoriel : Intégrer Aha! à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Aha! à Azure Active D
 * Permettre à vos utilisateurs de se connecter automatiquement à Aha! avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -39,6 +34,9 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 * Un abonnement Azure AD Si vous ne disposez d’aucun abonnement, vous pouvez obtenir [un compte gratuit](https://azure.microsoft.com/free/).
 * Aha! pour lequel l’authentification unique (SSO) est activée.
+
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -67,7 +65,7 @@ Pour configurer et tester l’authentification unique Azure AD avec Aha!, suivez
 1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-sso)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
     1. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec B. Simon.
     1. **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à B. Simon d’utiliser l’authentification unique Azure AD.
-2. **[Configurer l’authentification unique Aha ! ](#configure-aha-sso)** pour configurer les paramètres de l’authentification unique côté application.
+2. **[Configurer l’authentification unique Aha !](#configure-aha-sso)** pour configurer les paramètres de l’authentification unique côté application.
     1. **[Créer un utilisateur de test Aha!](#create-aha-test-user)** pour avoir un équivalent de B.Simon dans Aha! lié à la représentation Azure AD de l’utilisateur.
 3. **[Tester l’authentification unique](#test-sso)** pour vérifier si la configuration fonctionne.
 
@@ -79,7 +77,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
 1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet pour **Configuration SAML de base** afin de modifier les paramètres.
 
-   ![Modifier la configuration SAML de base](common/edit-urls.png)
+    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
 1. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
 
@@ -145,12 +143,12 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
     ![Paramètres](./media/aha-tutorial/IC798950.png "Paramètres")
 
 5. Cliquez sur **Account**.
-  
+
     ![Profil](./media/aha-tutorial/IC798951.png "Profil")
 
 6. Cliquez sur **Security and single sign-on**.
 
-    ![Sécurité et authentification unique](./media/aha-tutorial/IC798952.png "Security and single sign-on")
+    ![Capture d’écran mettant en évidence l’option de menu Security and single sign-on](./media/aha-tutorial/IC798952.png "Security and single sign-on").
 
 7. Dans la section **Single Sign-On**, pour **Identity Provider**, sélectionnez **SAML2.0**.
 
@@ -176,13 +174,12 @@ Dans cette section, un utilisateur appelé B.Simon est créé dans Aha!. Aha! pr
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Aha! dans le volet d’accès, vous devez vous connecter automatiquement à l’application Aha! pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Aha! dans le volet d’accès, vous devez vous connecter automatiquement à l’application Aha! pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

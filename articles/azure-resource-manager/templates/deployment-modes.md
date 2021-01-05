@@ -2,13 +2,13 @@
 title: Modes de déploiement
 description: Explique comment spécifier s’il faut utiliser un mode de déploiement complet ou incrémentiel avec Azure Resource Manager.
 ms.topic: conceptual
-ms.date: 01/17/2020
-ms.openlocfilehash: 1077d92f076797fb03c4fe750b353e2306f9b6de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/22/2020
+ms.openlocfilehash: bc499be4185905af7eaf71b3515895de9bee46d3
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79460243"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184040"
 ---
 # <a name="azure-resource-manager-deployment-modes"></a>Modes de déploiement Azure Resource Manager
 
@@ -22,11 +22,14 @@ Le mode par défaut est incrémentiel.
 
 En mode complet, le Gestionnaire des ressources **supprime** les ressources qui existent dans le groupe de ressources, mais qui ne sont pas spécifiées dans le modèle.
 
+> [!NOTE]
+> Effectuez toujours l’[opération de simulation](template-deploy-what-if.md) avant de déployer un modèle en mode complet. La simulation vous indique les ressources qui seront créées, supprimées ou modifiées. Effectuez une simulation pour éviter la suppression accidentelle de ressources.
+
 Si votre modèle inclut une ressource qui n’est pas déployée parce que la [condition](conditional-resource-deployment.md) donne false, le résultat dépend de la version de l’API REST utilisée. Si vous utilisez une version antérieure à 2019-05-10, la ressource **n’est pas supprimée**. Avec 2019-05-10 ou ultérieur, elle **est supprimée**. Les dernières versions d’Azure PowerShell et d’Azure CLI suppriment la ressource.
 
 Soyez prudent lorsque vous utilisez le mode Complet avec les [boucles de copie](copy-resources.md). Toutes les ressources qui ne sont pas spécifiées dans le modèle après la résolution de la boucle de copie sont supprimées.
 
-Si vous déployez sur [plusieurs groupes de ressources dans un modèle](cross-resource-group-deployment.md), les ressources du groupe de ressources spécifié dans le déploiement peuvent être supprimées. Les ressources dans les groupes de ressources secondaires ne sont pas supprimées.
+Si vous déployez sur [plusieurs groupes de ressources dans un modèle](./deploy-to-resource-group.md), les ressources du groupe de ressources spécifié dans le déploiement peuvent être supprimées. Les ressources dans les groupes de ressources secondaires ne sont pas supprimées.
 
 Il existe des différences dans la manière dont les types de ressources traitent les suppressions en mode complet. Les ressources parentes sont automatiquement supprimées lorsqu'elles ne figurent pas dans un modèle déployé en mode complet. Certaines ressources enfants ne sont pas automatiquement supprimées lorsqu'elles ne figurent pas dans le modèle. Toutefois, ces ressources enfants sont supprimées si la ressource parent est supprimée.
 
@@ -50,6 +53,8 @@ En mode incrémentiel, le Gestionnaire des ressources **conserve telles quelles*
 
 > [!NOTE]
 > Lors du redéploiement d’une ressource existante en mode incrémentiel, toutes les propriétés sont réappliquées. Les **propriétés ne sont pas ajoutées de manière incrémentielle**. On pense souvent à tort que les propriétés qui ne sont pas spécifiées dans le modèle restent inchangées. Si vous omettez de spécifier certaines propriétés, Resource Manager interprète le déploiement comme un remplacement de ces valeurs. Les propriétés qui ne sont pas incluses dans le modèle sont réinitialisées aux valeurs par défaut. Spécifiez toutes les valeurs non définies par défaut pour la ressource et pas seulement celles que vous mettez à jour. La définition de la ressource dans le modèle contient toujours l’état final de la ressource. Elle ne peut pas représenter une mise à jour partielle d’une ressource existante.
+>
+> Dans de rares cas, les propriétés que vous spécifiez pour une ressource sont en réalité implémentées en tant que ressource enfants. Par exemple, lorsque vous fournissez des valeurs de configuration de site pour une application web, ces valeurs sont implémentées dans le type de ressource enfant `Microsoft.Web/sites/config`. Si vous redéployez l’application web et spécifiez un objet vide pour les valeurs de configuration de site, la ressource enfant n’est pas mise à jour. Toutefois, si vous fournissez de nouvelles valeurs de configuration de site, le type de ressource enfant est mis à jour.
 
 ## <a name="example-result"></a>Résultat de l’exemple
 

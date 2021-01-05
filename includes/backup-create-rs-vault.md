@@ -9,16 +9,16 @@ ms.topic: include
 ms.date: 10/18/2018
 ms.author: dacurwin
 ms.custom: include file
-ms.openlocfilehash: 2c74783ea8246232cb5c4270691daf3f83fe9a30
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 69259023484457249acd4c7b4a65c4cbe3e660ca
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82204581"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184742"
 ---
 ## <a name="create-a-recovery-services-vault"></a>Créer un coffre Recovery Services
 
-Un coffre Recovery Services est une entité de stockage qui stocke les points de récupération créés au fil du temps. Il contient également les stratégies de sauvegarde associées aux éléments protégés.
+Un coffre Recovery Services est une entité de gestion qui stocke les points de récupération créés au fil du temps et fournit une interface permettant d’effectuer des opérations liées à la sauvegarde. Cela inclut l’exécution de sauvegardes à la demande, l’exécution de restaurations et la création de stratégies de sauvegarde.
 
 Pour créer un coffre Recovery Services, effectuez les étapes suivantes.
 
@@ -52,6 +52,10 @@ Pour créer un coffre Recovery Services, effectuez les étapes suivantes.
       >
       >
 
+1. Après avoir défini les valeurs, sélectionnez **Vérifier + créer**.
+
+    ![Capture d’écran montrant le bouton Vérifier + créer dans le processus de création d’un coffre Recovery Services.](./media/backup-create-rs-vault/review-and-create.png)
+
 1. Quand vous êtes prêt à créer le coffre Recovery Services, sélectionnez **Créer**.
 
     ![Créer le coffre Recovery Services](./media/backup-create-rs-vault/click-create-button.png)
@@ -59,3 +63,6 @@ Pour créer un coffre Recovery Services, effectuez les étapes suivantes.
     La création du coffre Recovery Services peut prendre un certain temps. Surveillez les notifications d’état dans la zone **Notifications** dans l’angle supérieur droit du portail. Une fois que le coffre est créé, il apparaît dans la liste des coffres Recovery Services. Si vous ne voyez pas votre coffre, sélectionnez **Actualiser**.
 
      ![Actualiser la liste des coffres de sauvegarde](./media/backup-create-rs-vault/refresh-button.png)
+
+>[!IMPORTANT]
+> Nous vous recommandons vivement de consulter les paramètres par défaut pour **type de réplication de stockage** et **Paramètres de sécurité** avant de configurer les sauvegardes dans le coffre. Pour plus d’informations, consultez la section [Définir la redondance du stockage](../articles/backup/backup-create-rs-vault.md#set-storage-redundancy).

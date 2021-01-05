@@ -1,14 +1,16 @@
 ---
 title: 'Démarrage rapide : Déployer une application avec le portail LUIS'
 description: Ce guide de démarrage rapide montre comment déployer une application en créant une ressource de point de terminaison de prédiction, en affectant la ressource à l’application, puis en entraînant et en publiant l’application.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: quickstart
 ms.date: 05/06/2020
-ms.openlocfilehash: 9b22f1eda822b5354f0b434a04c2ea03e4c0ff2a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: b051f349716b5597adee4509cfe774978a8f61aa
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585064"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95972507"
 ---
 # <a name="quickstart-deploy-an-app-in-the-luis-portal"></a>Démarrage rapide : Déployer une application dans le portail LUIS
 
@@ -19,7 +21,7 @@ Dans ce démarrage rapide, vous allez apprendre à déployer une application. Cr
 ## <a name="prerequisites"></a>Prérequis
 
 * Obtenez un [abonnement Azure](https://azure.microsoft.com/free).
-* Suivez le guide de [démarrage rapide du portail précédent](get-started-portal-build-app.md) ou [téléchargez et importez l’application](https://github.com/Azure-Samples/cognitive-services-language-understanding/blob/master/documentation-samples/quickstarts/in-portal/build-portal-app.json).
+* Suivez le guide de [démarrage rapide du portail précédent](get-started-portal-build-app.md) ou [téléchargez et importez l’application](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/luis/apps/portal-build-app.json).
 * Si vous disposez d’applications qui sont antérieures à l’authentification des ressources Azure, [effectuez une migration vers une ressource Azure](luis-migration-authoring.md). Certaines pages du portail s’affichent différemment lorsque l’authentification par e-mail est appliquée.
 
 <a name="create-the-endpoint-resource"></a>
@@ -40,7 +42,8 @@ Chaque fois que vous créez une ressource de création ou de prédiction de requ
 
 1. Sélectionnez vos locataire, abonnement et nom de ressource. Sélectionnez **Assign resource** (Affecter une ressource).
 
-   ![Affecter une ressource à votre application](./media/get-started-portal-deploy-app/assign-resource.png)
+   > [!div class="mx-imgBorder"]
+   > ![Affecter une ressource à votre application](./media/get-started-portal-deploy-app/assign-resource.png)
 
 1. Effectuez les mêmes étapes pour ajouter la clé de création à votre application.
 
@@ -51,11 +54,11 @@ Chaque fois que vous créez une ressource de création ou de prédiction de requ
 
 ## <a name="train-the-app"></a>Effectuer l’apprentissage de l’application
 
-[!INCLUDE [LUIS How to Train steps](includes/howto-train.md)]
+Si vous avez changé l’application depuis que vous l’avez entraînée pour la dernière fois, [entraînez-la](get-started-portal-build-app.md).
 
 ## <a name="publish-the-app-to-the-prediction-endpoint"></a>Publier l’application LUIS sur le point de terminaison de prédiction
 
-[!INCLUDE [LUIS How to Train steps](includes/howto-publish.md)]
+[!INCLUDE [LUIS How to Publish steps](includes/howto-publish.md)]
 
 ## <a name="prediction-endpoint-request"></a>Demande de point de terminaison de prédiction
 
@@ -118,4 +121,4 @@ Quand vous avez terminé ce guide de démarrage rapide, sélectionnez **Mes appl
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Identifier les intentions et les entités courantes](luis-tutorial-prebuilt-intents-entities.md)
+> [Identifier les intentions et les entités courantes](./tutorial-machine-learned-entity.md)

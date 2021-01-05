@@ -9,10 +9,10 @@ ms.date: 07/01/2019
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: d6f56f3500ab9c6b4482d2ade892dfdb46ccacb5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67503383"
 ---
 Les fichiers Premium utilisent un compte de stockage unique appelé **FileStorage**. Ce type de compte est conçu pour les charges de travail avec un nombre élevé d’IOPS, des débits élevés avec une latence faible homogène. Le stockage de fichiers Premium s’adapte à la taille du partage configuré.

@@ -7,18 +7,18 @@ author: rwike77
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
-ms.date: 04/05/2019
+ms.date: 07/23/2020
 ms.author: ryanwi
 ms.reviewer: lenalepa, sureshja, zachowd
 ms.custom: aaddev
-ms.openlocfilehash: 68040c8ee22454c300296493b6c840eabbca98aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d62328534157a1e2d9e53830be9d6b87e08c9e40
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76697130"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87129268"
 ---
 # <a name="how-to-configure-an-applications-publisher-domain"></a>Procédure : Configurer un domaine d’éditeur d’application
 
@@ -76,9 +76,12 @@ Si votre application n’est pas inscrite dans un locataire, vous ne verrez que 
    ```json
    {
       "associatedApplications": [
-        {
-           "applicationId": "{YOUR-APP-ID-HERE}"
-        }
+         {
+            "applicationId": "{YOUR-APP-ID-HERE}"
+         },
+         {
+            "applicationId": "{YOUR-OTHER-APP-ID-HERE}"
+         }
       ]
     }
    ```

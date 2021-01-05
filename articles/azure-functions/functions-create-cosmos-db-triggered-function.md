@@ -5,12 +5,12 @@ ms.assetid: bc497d71-75e7-47b1-babd-a060a664adca
 ms.topic: how-to
 ms.date: 04/28/2020
 ms.custom: cc996988-fb4f-47
-ms.openlocfilehash: c16bd728fe81796d671762615ec8dc4ad6e1d87d
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 907836b0e45ccc9e9481e605b1ebf4180f7650d6
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83123739"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96182578"
 ---
 # <a name="create-a-function-triggered-by-azure-cosmos-db"></a>Créer une fonction déclenchée par Azure Cosmos DB
 
@@ -100,7 +100,7 @@ Ensuite, vous vous connectez à votre compte Azure Cosmos DB et créez le conten
     | ---|---|--- |
     | **ID de base de données** | Tâches |Nom de votre nouvelle base de données. Ce nom doit correspondre au nom défini dans votre liaison de fonction. |
     | **ID de conteneur** | Éléments | Nom du nouveau conteneur. Ce nom doit correspondre au nom défini dans votre liaison de fonction.  |
-    | **[Clé de partition](../cosmos-db/partition-data.md)** | /category|Clé de partition qui distribue les données uniformément à chaque partition. Il est important de sélectionner la clé de partition correcte pour obtenir un conteneur performant. | 
+    | **[Clé de partition](../cosmos-db/partitioning-overview.md)** | /category|Clé de partition qui distribue les données uniformément à chaque partition. Il est important de sélectionner la clé de partition correcte pour obtenir un conteneur performant. | 
     | **Débit** |400 RU| Utilisez la valeur par défaut. Si vous souhaitez réduire la latence, vous pourrez augmenter le débit par la suite. |    
 
 1. Cliquez sur **OK** pour créer le conteneur d’éléments. La création du conteneur peut prendre un peu de temps.
@@ -115,11 +115,13 @@ Une fois que le conteneur spécifié dans la liaison de fonction a été créé,
 
 1. Remplacez le contenu du nouvel élément par le contenu suivant, puis choisissez **Enregistrer**.
 
-        {
-            "id": "task1",
-            "category": "general",
-            "description": "some task"
-        }
+    ```yaml
+    {
+        "id": "task1",
+        "category": "general",
+        "description": "some task"
+    }
+    ```
 
 1. Passez au premier onglet de navigateur qui contient votre fonction dans le portail. Développez les journaux d’activité de la fonction et vérifiez que le nouveau document a déclenché la fonction. La valeur d’ID de document `task1` doit être écrite dans les journaux d’activité. 
 

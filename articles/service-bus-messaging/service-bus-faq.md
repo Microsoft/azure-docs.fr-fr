@@ -1,26 +1,19 @@
 ---
 title: Forum Aux Questions (FAQ) sur Azure Service Bus | Microsoft Docs
 description: Cet article fournit des réponses aux questions fréquemment posées (FAQ) sur Azure Service Bus.
-services: service-bus-messaging
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 3cd4e69481fb452391e6dc027cb41fd6dae71b7e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/16/2020
+ms.openlocfilehash: acd741101928f5a2dfd72eab1598af6e4556a3d1
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76760247"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96022135"
 ---
 # <a name="azure-service-bus---frequently-asked-questions-faq"></a>Azure Service Bus - Forum Aux Questions (FAQ)
 
 Cet article évoque certaines questions fréquemment posées sur Microsoft Azure Service Bus. Vous pouvez également consulter les [Questions fréquentes (FAQ) du support Azure](https://azure.microsoft.com/support/faq/) pour obtenir des informations générales de support et de tarification Azure.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="general-questions-about-azure-service-bus"></a>Questions générales sur Azure Service Bus
 ### <a name="what-is-azure-service-bus"></a>Qu’est-ce qu’Azure Service Bus ?
@@ -42,32 +35,41 @@ Le classement n’est pas garanti lors de l’utilisation d’entités partition
 
  Les entités partitionnées ne sont plus prises en charge dans la [référence SKU Premium](service-bus-premium-messaging.md). 
 
+### <a name="where-does-azure-service-bus-store-customer-data"></a><a name="in-region-data-residency"></a>Où Azure Service Bus stocke-t-il les données client ?
+Azure Service Bus stocke les données client. Service Bus stockant automatiquement ces données dans une seule région, ce service répond automatiquement aux exigences en matière de résidence des données de la région, y compris celles spécifiées dans le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
+
 ### <a name="what-ports-do-i-need-to-open-on-the-firewall"></a>Quels ports du pare-feu dois-je ouvrir ? 
 Vous pouvez utiliser les protocoles suivants avec Azure Service Bus pour envoyer et recevoir des messages :
 
-- Advanced Message Queuing Protocol (AMQP)
-- Service Bus Messaging Protocol (SBMP)
-- HTTP
+- Advanced Message Queuing Protocol 1.0 (AMQP)
+- Hypertext Transfer Protocol 1.1 avec TLS (HTTPS)
 
-Consultez le tableau suivant pour savoir quels ports de sortie vous devez ouvrir afin d’utiliser ces protocoles dans le but de communiquer avec Azure Event Hubs. 
+Consultez le tableau suivant pour savoir quels ports TCP sortants vous devez ouvrir afin d’utiliser ces protocoles dans le but de communiquer avec Azure Service Bus :
 
-| Protocol | Ports | Détails | 
+| Protocol | Port | Détails | 
 | -------- | ----- | ------- | 
-| AMQP | 5671 et 5672 | Consultez le [Guide du protocole AMQP](service-bus-amqp-protocol-guide.md) | 
-| SBMP | 9350 à 9354 | Consultez l’article sur le [Mode de connectivité](/dotnet/api/microsoft.servicebus.connectivitymode?view=azure-dotnet) |
-| HTTP, HTTPS | 80, 443 | 
+| AMQP | 5671 | AMQP avec TLS. Consultez le [Guide du protocole AMQP](service-bus-amqp-protocol-guide.md) | 
+| HTTPS | 443 | Ce port est utilisé pour l’API HTTP/REST et pour AMQP sur WebSockets |
 
-### <a name="what-ip-addresses-do-i-need-to-whitelist"></a>Quelles adresses IP dois-je ajouter à la liste verte ?
-Pour trouver les adresses IP à ajouter à la liste verte de vos connexions, procédez comme suit :
+Le port HTTPS est généralement requis pour les communications sortantes quand AMQP est utilisé sur le port 5671, car plusieurs opérations de gestion effectuées par les kits de développement logiciel (SDK) clients et l’acquisition de jetons à partir d’Azure Active Directory (le cas échéant) s’exécutent sur HTTPS. 
+
+Les kits de développement logiciel (SDK) officiels Azure utilisent généralement le protocole AMQP pour envoyer et recevoir des messages à partir de Service Bus. 
+
+[!INCLUDE [service-bus-websockets-options](../../includes/service-bus-websockets-options.md)]
+
+L’ancien package WindowsAzure. ServiceBus pour .NET Framework peut utiliser le protocole hérité « Service Bus Messaging Protocol » (SBMP), également appelé « NetMessaging ». Ce protocole utilise les ports TCP 9350-9354. Le mode par défaut de ce package consiste à déterminer automatiquement si ces ports sont disponibles à des fins de communication et à basculer vers WebSockets avec TLS sur le port 443 dans le cas contraire. Vous pouvez remplacer ce paramètre et forcer ce mode en définissant le paramètre `Https` [ConnectivityMode](/dotnet/api/microsoft.servicebus.connectivitymode?view=azure-dotnet) sur le paramètre [`ServiceBusEnvironment.SystemConnectivity`](/dotnet/api/microsoft.servicebus.servicebusenvironment.systemconnectivity?view=azure-dotnet), qui s’applique globalement à l’application.
+
+### <a name="what-ip-addresses-do-i-need-to-add-to-allow-list"></a>Quelles adresses IP dois-je ajouter à la liste verte ?
+Pour trouver les adresses IP à ajouter à la liste verte pour vos connexions, procédez comme suit :
 
 1. Exécutez la commande suivante depuis une invite de commandes : 
 
     ```
     nslookup <YourNamespaceName>.servicebus.windows.net
     ```
-2. Notez l’adresse IP renvoyée dans `Non-authoritative answer`. Cette adresse IP est statique. La seule modification susceptible d’entraîner une conséquence serait une restauration de l’espace de noms sur un autre cluster.
+2. Notez l’adresse IP renvoyée dans `Non-authoritative answer`. 
 
-Si vous utilisez la redondance de zone pour votre espace de noms, vous devez suivre quelques étapes supplémentaires : 
+Si vous utilisez la **redondance de zone** pour votre espace de noms, vous devez suivre quelques étapes supplémentaires : 
 
 1. Tout d’abord, exécutez nslookup sur l’espace de noms.
 
@@ -77,19 +79,26 @@ Si vous utilisez la redondance de zone pour votre espace de noms, vous devez sui
 2. Notez le nom dans la section **Réponse ne faisant pas autorité**, qui se présente dans l’un des formats suivants : 
 
     ```
-    <name>-s1.servicebus.windows.net
-    <name>-s2.servicebus.windows.net
-    <name>-s3.servicebus.windows.net
+    <name>-s1.cloudapp.net
+    <name>-s2.cloudapp.net
+    <name>-s3.cloudapp.net
     ```
 3. Exécutez nslookup pour chacun d’eux avec des suffixes s1, s2 et s3 pour obtenir les adresses IP des 3 instances en cours d’exécution dans 3 zones de disponibilité. 
 
+    > [!NOTE]
+    > L’adresse IP retournée par la commande `nslookup` n’est pas une adresse IP statique. Toutefois, elle reste constante jusqu’à ce que le déploiement sous-jacent soit supprimé ou déplacé vers un autre cluster.
+
+### <a name="where-can-i-find-the-ip-address-of-the-client-sendingreceiving-messages-tofrom-a-namespace"></a>Où puis-je trouver l’adresse IP du client qui envoie des messages à un espace de noms ou en reçoit de ce dernier ? 
+Nous ne journalisons pas les adresses IP des clients qui envoient des messages à votre espace de noms ou en reçoivent de ce dernier. Régénérez les clés afin que tous les clients existants ne puissent pas s’authentifier et passez en revue les paramètres de contrôle d’accès en fonction du rôle Azure ([Azure RBAC](authenticate-application.md#azure-built-in-roles-for-azure-service-bus)) pour vous assurer que seuls les utilisateurs ou les applications autorisés ont accès à l’espace de noms. 
+
+Si vous utilisez un espace de noms **Premium**, utilisez le [filtrage IP](service-bus-ip-filtering.md), des [points de terminaison de service de réseau virtuel](service-bus-service-endpoints.md) et des [points de terminaison privés](private-link-service.md) pour limiter l’accès à l’espace de noms. 
 
 ## <a name="best-practices"></a>Meilleures pratiques
 ### <a name="what-are-some-azure-service-bus-best-practices"></a>Présentation des meilleures pratiques Azure Service Bus
 Consultez [Meilleures pratiques relatives aux améliorations du niveau de performance avec Service Bus][Best practices for performance improvements using Service Bus] : cet article explique comment optimiser le niveau de performance lors de l’échange de messages.
 
 ### <a name="what-should-i-know-before-creating-entities"></a>Quelles sont les informations à connaître pour pouvoir créer des entités ?
-Les propriétés suivantes de file d’attente et de rubrique sont immuables. Tenez compte de cette restriction lorsque vous configurez vos entités, dans la mesure où ces propriétés ne peuvent pas être modifiées sans créer une nouvelle entité de remplacement.
+Les propriétés suivantes de file d’attente et de rubrique sont immuables. Tenez compte de cette restriction quand vous provisionnez vos entités, dans la mesure où ces propriétés ne peuvent pas être modifiées sans créer une entité de remplacement.
 
 * Partitionnement
 * Sessions
@@ -106,32 +115,25 @@ Vous pouvez également consulter les [Questions fréquentes (FAQ) du support Azu
 ### <a name="how-do-you-charge-for-service-bus"></a>Quel est le coût de Service Bus ?
 Pour obtenir toutes les informations sur la tarification Service Bus, voir la section [détails de tarification Service Bus][Pricing overview]. Outre les prix indiqués, vous êtes facturé pour les transferts de données associés aux sorties à l’extérieur du centre de données dans lequel votre application est déployée.
 
-### <a name="what-usage-of-service-bus-is-subject-to-data-transfer-what-is-not"></a>Quelle est l’utilisation de Service Bus soumise au transfert de données ? Laquelle ne l’est pas ?
+### <a name="what-usage-of-service-bus-is-subject-to-data-transfer-what-isnt"></a>Quelle est l’utilisation de Service Bus soumise au transfert de données ? Quelle est celle qui ne l’est pas ?
 Les transferts de données au sein d’une région Azure donnée sont effectués gratuitement, de même que les transferts de données entrants. Le transfert de données en dehors d’une région est soumis à des frais de sortie consultables [ici](https://azure.microsoft.com/pricing/details/bandwidth/).
 
 ### <a name="does-service-bus-charge-for-storage"></a>Service Bus facture-t-il le stockage ?
-Non, Service Bus ne facture pas le stockage ? Toutefois, il existe un quota limitant la quantité maximale de données qui peuvent être conservées par la file d’attente/rubrique. Voir le Forum aux questions suivants.
+Non. Service Bus ne facture pas le stockage. Toutefois, il existe un quota limitant la quantité maximale de données qui peuvent être conservées par la file d’attente/rubrique. Voir le Forum aux questions suivants.
 
 ### <a name="i-have-a-service-bus-standard-namespace-why-do-i-see-charges-under-resource-group-system"></a>Je dispose d’un espace de noms Service Bus Standard. Pourquoi des frais sont-ils facturés dans le groupe de ressources « $system » ?
-Azure Service Bus a récemment mis à niveau les composants de facturation. C’est pourquoi, si vous disposez d’un espace de noms Service Bus Standard, des postes peuvent apparaître pour la ressource « /subscriptions/<azure_subscription_id>/resourceGroups/$system/providers/Microsoft.ServiceBus/namespaces/$system » sous le groupe de ressources « $system ».
+Azure Service Bus a récemment mis à niveau les composants de facturation. En raison de cette modification, si vous disposez d’un espace de noms Service Bus Standard, des postes peuvent apparaître pour la ressource « /subscriptions/<azure_subscription_id>/resourceGroups/$system/providers/Microsoft.ServiceBus/namespaces/$system » sous le groupe de ressources « $system ».
 
 Ces frais représentent les frais de base par abonnement Azure pour lequel un espace de noms Service Bus Standard est approvisionné. 
 
-Il est important de noter qu’il ne s’agit pas de nouveaux frais, c’est-à-dire qu’ils existaient également dans le modèle de facturation précédent. La seule modification est qu’ils apparaissent maintenant sous « $system ». Cela est dû aux contraintes posées par le nouveau système de facturation, qui regroupe les frais engendrés au niveau de l’abonnement, non liés à une ressource en particulier, sous l’ID de ressource « $system ».
+Il est important de noter que ces frais ne sont pas nouveaux, c’est-à-dire qu’ils existaient également dans le modèle de facturation précédent. La seule modification est qu’ils apparaissent maintenant sous « $system ». Elle est due aux contraintes posées par le nouveau système de facturation, qui regroupe les frais engendrés au niveau de l’abonnement, non liés à une ressource en particulier, sous l’ID de ressource « $system ».
 
 ## <a name="quotas"></a>Quotas
 
 Pour obtenir la liste des limites et des quotas Service Bus, consultez [Vue d’ensemble des quotas Service Bus][Quotas overview].
 
-### <a name="does-service-bus-have-any-usage-quotas"></a>Service Bus fixe-t-il des quotas d’utilisation ?
-Par défaut, pour n’importe quel service cloud, Microsoft définit un quota d’utilisation agrégée mensuel calculé avec tous les abonnements d’un client. Si vos besoins dépassent ces limites, vous pouvez contacter le service client à tout moment, afin de nous permettre d’ajuster ces limites en fonction de vos exigences. Pour Service Bus, le quota d’utilisation agrégée est de 5 milliards de messages par mois.
-
-Microsoft se réserve le droit de désactiver un compte client ayant dépassé son quota d’utilisation pour un mois donné. Des notifications par e-mail sont envoyées plusieurs fois pour contacter le client avant de procéder à quoi que ce soit. Les clients qui dépassent ces quotas restent responsables de frais de dépassement occasionnés.
-
-À l’instar d’autres services sur Azure, Service Bus applique un ensemble de quotas spécifiques pour assurer une utilisation juste des ressources. Pour plus d’informations sur ces quotas, consultez [Quotas Service Bus][Quotas overview].
-
 ### <a name="how-to-handle-messages-of-size--1-mb"></a>Comment gérer les messages de taille > à 1 Mo ?
-Les services de messagerie Service Bus (files d’attente et rubriques/abonnements) permettent à l'application d'envoyer des messages dont la taille peut aller jusqu'à 256 Ko (niveau standard) ou 1 Mo (niveau Premium). En présence de messages de taille supérieure à 1 Mo, utilisez le modèle de vérification des requêtes décrit dans [ce billet de blog](https://www.serverless360.com/blog/deal-with-large-service-bus-messages-using-claim-check-pattern).
+Les services de messagerie Service Bus (files d’attente et rubriques/abonnements) permettent à l'application d'envoyer des messages dont la taille peut aller jusqu'à 256 Ko (niveau standard) ou 1 Mo (niveau Premium). En présence de messages de taille supérieure à 1 Mo, utilisez le modèle de vérification des requêtes décrit dans [ce billet de blog](https://www.serverless360.com/blog/deal-with-large-service-bus-messages-using-claim-check-pattern).
 
 ## <a name="troubleshooting"></a>Dépannage
 ### <a name="why-am-i-not-able-to-create-a-namespace-after-deleting-it-from-another-subscription"></a>Pourquoi ne suis-je pas en mesure de créer un espace de noms après l'avoir supprimé d'un autre abonnement ? 

@@ -3,17 +3,19 @@ title: Constantes SQL dans Azure Cosmos DB
 description: Découvrir comment les constantes de requête SQL dans Azure Cosmos DB sont utilisées pour représenter une valeur de données spécifique
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/31/2019
 ms.author: tisande
-ms.openlocfilehash: cca62c358037dbe99fd16746ee081b1540161df2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b0973dca980b65b85ac66cc1b3c9ed45f0f9c779
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74873418"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339198"
 ---
 # <a name="azure-cosmos-db-sql-query-constants"></a>Constantes de requête SQL Azure Cosmos DB  
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
  Une constante, également appelée valeur littérale ou scalaire, est un symbole représentant une valeur de donnée spécifique. Le format d'une constante dépend du type de données dont elle représente la valeur.  
   
@@ -23,7 +25,7 @@ ms.locfileid: "74873418"
 |-|-|  
 |**Undefined**|Valeur unique : **Undefined**|  
 |**Null**|Valeur unique : **null**|  
-|**Booléen**|Valeurs : **false**, **true**.|  
+|**Booléen**|Valeurs : **false** , **true**.|  
 |**Nombre**|Un nombre à virgule flottante double précision répondant à la norme IEEE 754.|  
 |**Chaîne**|Une séquence de zéro ou plusieurs caractères Unicode. Les chaînes doivent figurer entre guillemets simples ou doubles.|  
 |**Tableau**|Une séquence de zéro ou plusieurs éléments. Chaque élément peut être une valeur de tout type de données scalaires, à l’exception de **Undefined**.|  

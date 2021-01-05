@@ -8,13 +8,13 @@ ms.author: brjohnst
 tags: complex data types; compound data types; aggregate data types
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 2edd62825de08becf22f2f953a63a7f89f55e0a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/27/2020
+ms.openlocfilehash: b0b2dd9904682121c83b22b9029097e7ee57fb11
+ms.sourcegitcommit: 6b16e7cc62b29968ad9f3a58f1ea5f0baa568f02
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236877"
+ms.lasthandoff: 11/28/2020
+ms.locfileid: "96303763"
 ---
 # <a name="how-to-model-complex-data-types-in-azure-cognitive-search"></a>Modélisation de types de données complexes dans Recherche cognitive Azure
 
@@ -27,7 +27,7 @@ Recherche cognitive Azure prend nativement en charge les types et les collection
 Pour commencer, nous vous recommandons le [jeu de données d’hôtels](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/README.md), que vous pouvez charger dans l’Assistant **Importer des données** du portail Azure. L’Assistant détecte les types complexes dans la source et suggère un schéma d’index basé sur les structures détectées.
 
 > [!Note]
-> La prise en charge des types complexes est généralement disponible dans `api-version=2019-05-06`. 
+> La prise en charge des types complexes a commencé à être généralement disponible dans `api-version=2019-05-06`. 
 >
 > Si votre solution de recherche est basée sur des solutions de contournement antérieures de jeux de données aplatis d’une collection, vous devez modifier votre index pour inclure des types complexes pris en charge dans la dernière version d’API. Pour plus d’informations sur la mise à niveau des versions d’API, consultez [Mettre à niveau vers la dernière version de l’API REST](search-api-migration.md) ou [Mettre à niveau vers la dernière version du kit de développement logiciel (SDK) .NET](search-dotnet-sdk-migration-version-9.md).
 
@@ -35,11 +35,13 @@ Pour commencer, nous vous recommandons le [jeu de données d’hôtels](https://
 
 Le document JSON suivant est composé de champs simples et de champs complexes. Les champs complexes, tels que `Address` et `Rooms`, ont des sous-champs. `Address` contient un seul jeu de valeurs pour ces sous-champs, puisqu’il s’agit d’un objet unique dans le document. En revanche, `Rooms` a plusieurs ensembles de valeurs pour ses sous-champs, soit un pour chaque objet dans la collection.
 
+
 ```json
 {
   "HotelId": "1",
   "HotelName": "Secret Point Motel",
   "Description": "Ideally located on the main commercial artery of the city in the heart of New York.",
+  "Tags": ["Free wifi", "on-site parking", "indoor pool", "continental breakfast"]
   "Address": {
     "StreetAddress": "677 5th Ave",
     "City": "New York",
@@ -48,21 +50,28 @@ Le document JSON suivant est composé de champs simples et de champs complexes. 
   "Rooms": [
     {
       "Description": "Budget Room, 1 Queen Bed (Cityside)",
-      "Type": "Budget Room",
-      "BaseRate": 96.99
+      "RoomNumber": 1105,
+      "BaseRate": 96.99,
     },
     {
       "Description": "Deluxe Room, 2 Double Beds (City View)",
       "Type": "Deluxe Room",
-      "BaseRate": 150.99
-    },
+      "BaseRate": 150.99,
+    }
+    . . .
   ]
 }
 ```
 
+## <a name="indexing-complex-types"></a>Indexation des types complexes
+
+Pendant l’indexation, vous pouvez avoir un maximum de 3 000 éléments dans toutes les collections complexes d’un même document. Un élément d’une collection complexe est membre de cette collection. par conséquent, dans le cas des chambres (la seule collection complexe de l’exemple Hôtel), chaque espace est un élément. Dans l’exemple ci-dessus, si le « Secret Point Motel » contient 500 chambres, le document de l’hôtel aurait 500 éléments de chambre. Pour les collections complexes imbriquées, chaque élément imbriqué est également compté, en plus de l’élément externe (parent).
+
+Cette limite s’applique uniquement aux collections complexes, et non aux types complexes (tels que l’adresse) ou aux collections de chaînes (telles que les balises).
+
 ## <a name="creating-complex-fields"></a>Création de champs complexes
 
-Comme avec n’importe quelle définition d’index, vous pouvez utiliser le portail, l’[API REST](https://docs.microsoft.com/rest/api/searchservice/create-index), ou le kit de développement logiciel [ (SDK) .NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.index?view=azure-dotnet) pour créer un schéma incluant des types complexes. 
+Comme avec n’importe quelle définition d’index, vous pouvez utiliser le portail, l’[API REST](/rest/api/searchservice/create-index), ou le kit de développement logiciel [ (SDK) .NET](/dotnet/api/azure.search.documents.indexes.models.searchindex) pour créer un schéma incluant des types complexes. 
 
 L’exemple suivant montre un schéma d’index JSON avec des champs simples, des collections et des types complexes. Notez qu’au sein d’un type complexe, chaque sous-champ a un type et peut avoir des attributs, comme c’est le cas pour les champs de niveau supérieur. Le schéma correspond à l’exemple de données ci-dessus. `Address` est un champ complexe qui n’est pas une collection (un hôtel a une adresse). `Rooms` est un champ de collection complexe (un hôtel a plusieurs chambres).
 
@@ -93,7 +102,7 @@ L’exemple suivant montre un schéma d’index JSON avec des champs simples, de
 
 ## <a name="updating-complex-fields"></a>Mise à jour de champs complexes
 
-Toutes les [règles de réindexation](search-howto-reindex.md) qui s’appliquent à des champs s’appliquent en général toujours aux champs complexes. Dans le cadre du rappel de quelques règles principales, notons que, contrairement à la plupart des modifications, l’ajout d’un champ ne nécessite pas une reconstruction de l’index.
+Toutes les [règles de réindexation](search-howto-reindex.md) qui s’appliquent à des champs s’appliquent en général toujours aux champs complexes. Dans le cadre du rappel de quelques règles principales, notons que, contrairement à la plupart des modifications, l’ajout d’un champ à un type de complexe ne nécessite pas une reconstruction de l’index.
 
 ### <a name="structural-updates-to-the-definition"></a>Mises à jour structurelles de la définition
 
@@ -111,7 +120,7 @@ Les expressions de recherche de forme libre fonctionnent comme prévu avec des t
 
 Les requêtes sont plus nuancées lorsque vous avez plusieurs termes et opérateurs, et certains termes ont des noms de champs spécifiés, comme cela est possible avec la [syntaxe Lucene](query-lucene-syntax.md). Par exemple, cette requête essaie de faire correspondre deux termes, « Portland » et « OR » à deux sous-champs du champ adresse :
 
-    search=Address/City:Portland AND Address/State:OR
+> `search=Address/City:Portland AND Address/State:OR`
 
 Des requêtes de ce type sont *sans corrélation* pour la recherche en texte intégral, contrairement aux filtres. Dans les filtres, les requêtes relatives aux sous-champs d’une collection complexe sont corrélés à l’aide de variables de portée dans [`any` ou `all`](search-query-odata-collection-operators.md). La requête Lucene ci-dessus retourne des documents contenant « Portland, Maine » et « Portland, Oregon », ainsi que d’autres villes d’Oregon. C’est dû au fait que chaque clause s’applique à toutes les valeurs de son champ dans le document entier. Il n’existe donc pas de concept de « sous-élément actuel ». Pour plus d’informations à ce sujet, consultez [Présentation de filtres de collection OData dans Recherche cognitive Azure](search-query-understand-collection-filters.md).
 
@@ -119,7 +128,7 @@ Des requêtes de ce type sont *sans corrélation* pour la recherche en texte int
 
 Le paramètre `$select` permet de choisir quels champs retourner dans les résultats de la recherche. Pour utiliser ce paramètre afin de sélectionner des sous-champs spécifiques d’un champ complexe, incluez le champ parent et le sous-champ séparés par une barre oblique (`/`).
 
-    $select=HotelName, Address/City, Rooms/BaseRate
+> `$select=HotelName, Address/City, Rooms/BaseRate`
 
 Les champs doivent être marqués comme récupérables dans l’index si vous souhaitez les afficher dans les résultats de la recherche. Seuls les champs marqués comme récupérable peuvent être utilisés dans une instruction `$select`.
 
@@ -143,11 +152,11 @@ Les opérations de tri fonctionnent lorsque les champs ont une valeur unique pou
 
 Vous pouvez faire référence à des sous-champs d’un champ complexe dans une expression de filtre. Utilisez simplement la même [syntaxe de chemin OData](query-odata-filter-orderby-syntax.md) qui est utilisé pour l’activation de facettes, le tri et la sélection de champs. Par exemple, le filtre suivant retourne tous les hôtels au Canada :
 
-    $filter=Address/Country eq 'Canada'
+> `$filter=Address/Country eq 'Canada'`
 
 Pour filtrer sur un champ de collection complexe, vous pouvez utiliser une **expression lambda**[avec les opérateurs](search-query-odata-collection-operators.md)`any` et `all`. Dans ce cas, la **variable de portée** de l’expression lambda est un objet avec des sous-champs. Vous pouvez consulter ces sous-champs avec la syntaxe de chemin OData standard. Par exemple, le filtre suivant retourne tous les hôtels avec au moins une chambre de luxe et toutes les chambres non-fumeurs :
 
-    $filter=Rooms/any(room: room/Type eq 'Deluxe Room') and Rooms/all(room: not room/SmokingAllowed)
+> `$filter=Rooms/any(room: room/Type eq 'Deluxe Room') and Rooms/all(room: not room/SmokingAllowed)`
 
 Comme avec les champs simples de niveau supérieur, les sous-champs simples de champs complexe ne peuvent être inclus dans des filtres que si leur attribut **filtrable** est défini sur `true` dans la définition d’index. Pour plus d’informations, consultez la [référence Créer une API d’index](/rest/api/searchservice/create-index).
 

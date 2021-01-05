@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/25/2019
 ms.author: allensu
-ms.openlocfilehash: 26559adf183a5e008d77b87654a1bd4dabebbca0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5387fdc224cd77ee5273767df5033a51dc27608c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253830"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008359"
 ---
 # <a name="dynamic-site-acceleration-via-azure-cdn"></a>Accélération de site dynamique via Azure CDN
 
@@ -27,7 +27,7 @@ Avec l’explosion des médias sociaux, du e-commerce et du web hyper-personnali
 
 La fonctionnalité de réseau de distribution de contenu (CDN) standard permet de rapprocher le cache de fichiers des utilisateurs finaux afin d’accélérer la distribution des fichiers statiques. Toutefois, avec des applications web dynamiques, la mise en cache de ce contenu dans des emplacements de périmètre n’est pas possible, car le serveur génère le contenu en réponse au comportement de l’utilisateur. L’accélération de la distribution d’un tel contenu est plus complexe que la mise en cache de périmètre traditionnelle, et nécessite une solution de bout en bout qui règle finement chaque élément avec le chemin d’accès aux données entier, du début jusqu’à la distribution. Grâce à l’optimisation de l’accélération de site dynamique (DSA) d’Azure CDN, le niveau de performance des pages web comprenant du contenu dynamique est sensiblement amélioré.
 
-Les fonctionnalités **Azure CDN d’Akamai** et **Azure CDN de Verizon** offrent une fonction d’optimisation d’accélération de site dynamique au moyen du menu **Optimisé pour** durant la création du point de terminaison. L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](https://docs.microsoft.com/azure/frontdoor/front-door-overview).
+Les fonctionnalités **Azure CDN d’Akamai** et **Azure CDN de Verizon** offrent une fonction d’optimisation d’accélération de site dynamique au moyen du menu **Optimisé pour** durant la création du point de terminaison. L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](../frontdoor/front-door-overview.md).
 
 > [!Important]
 > Pour les profils **CDN Azure fournis par Akamai**, vous êtes autorisé à modifier l’optimisation d’un point de terminaison CDN après sa création.
@@ -109,9 +109,9 @@ Le *démarrage lent* TCP est un algorithme du protocole TCP qui empêche la surc
 
 1. La surveillance de l’intégrité et de la bande passante est utilisée pour mesurer la bande passante des connexions entre les serveurs PoP de périphérie.
     
-2. Des métriques sont partagées entre les serveurs PoP de périphérie afin que chaque serveur tienne compte des conditions de réseau et de l’intégrité des autres serveurs PoP alentour.  
+2. Des métriques sont partagées entre les serveurs PoP de périphérie afin que chaque serveur tienne compte des conditions de réseau et de l’intégrité des autres serveurs PoP alentour.  
     
-3. Les serveurs de périphérie CDN bâtissent des hypothèses sur certains paramètres de transmission, tels que la taille de fenêtre optimale lors de la communication avec d’autres serveurs de périphérie CDN à proximité. Cette étape signifie que la taille de la fenêtre de congestion initiale peut être augmentée si l’intégrité de la connexion entre les serveurs de périphérie CDN permet des transferts de données par paquets de plus grande taille.  
+3. Les serveurs de périphérie CDN bâtissent des hypothèses sur certains paramètres de transmission, tels que la taille de fenêtre optimale lors de la communication avec d’autres serveurs de périphérie CDN à proximité. Cette étape signifie que la taille de la fenêtre de congestion initiale peut être augmentée si l’intégrité de la connexion entre les serveurs de périphérie CDN permet des transferts de données par paquets de plus grande taille.  
 
 #### <a name="leveraging-persistent-connections"></a>Exploitation des connexions persistantes
 
@@ -157,7 +157,7 @@ Pour les profils **Azure CDN Standard fourni par Verizon** et **Azure CDN Standa
 
 Pour accéder à des règles de mise en cache :
 
-1. Dans la page **Profil CDN**, sous Paramètres, sélectionnez **Règles de mise en cache**.  
+1. Dans la page **Profil CDN**, sous Paramètres, sélectionnez **Règles de mise en cache**.  
     
     ![Bouton Règles de mise en cache CDN](./media/cdn-dynamic-site-acceleration/cdn-caching-rules-btn.png)
 
@@ -165,11 +165,11 @@ Pour accéder à des règles de mise en cache :
 
 2. Créez une règle de mise en cache globale ou personnalisée pour activer la mise en cache de votre point de terminaison DSA. 
 
-Pour les profils **Azure CDN Premium fourni par Verizon** uniquement, vous pouvez activer la mise en cache des points de terminaison DSA spécifiques à l’aide du [moteur de règles](cdn-rules-engine.md). Les règles créées n’affectent que les points de terminaison de votre profil qui sont optimisés pour DSA. 
+Pour les profils **Azure CDN Premium fourni par Verizon** uniquement, vous pouvez activer la mise en cache des points de terminaison DSA spécifiques à l’aide du [moteur de règles](./cdn-verizon-premium-rules-engine.md). Les règles créées n’affectent que les points de terminaison de votre profil qui sont optimisés pour DSA. 
 
 Pour accéder au moteur de règles :
     
-1. Dans la page **Profil CDN**, sélectionnez **Gérer**.  
+1. Dans la page **Profil CDN**, sélectionnez **Gérer**.  
     
     ![Bouton de gestion du profil CDN](./media/cdn-dynamic-site-acceleration/cdn-manage-btn.png)
 
@@ -183,7 +183,4 @@ Pour accéder au moteur de règles :
 
 Vous pouvez également utiliser deux points de terminaison CDN : un point de terminaison optimisé avec DSA pour fournir des ressources dynamiques et un autre point de terminaison optimisé avec un type d’optimisation statique, tel qu’une livraison web générale, pour fournir les ressources pouvant être mises en cache. Modifiez les URL de vos pages web afin qu’elles pointent directement sur le point de terminaison CDN vers la ressource que vous envisagez d’utiliser. 
 
-Par exemple : `mydynamic.azureedge.net/index.html` est une page dynamique et est chargée à partir du point de terminaison avec accélération de site dynamique.  La page html fait référence à plusieurs ressources statiques telles que des images ou des bibliothèques JavaScript qui sont chargées à partir du point de terminaison CDN statique, telles que `mystatic.azureedge.net/banner.jpg` et `mystatic.azureedge.net/scripts.js`. 
-
-
-
+Par exemple : `mydynamic.azureedge.net/index.html` est une page dynamique et est chargée à partir du point de terminaison avec accélération de site dynamique.    La page html fait référence à plusieurs ressources statiques telles que des images ou des bibliothèques JavaScript qui sont chargées à partir du point de terminaison CDN statique, telles que `mystatic.azureedge.net/banner.jpg` et `mystatic.azureedge.net/scripts.js`.

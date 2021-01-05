@@ -13,19 +13,17 @@ ms.date: 03/31/2020
 ms.author: marsma
 ms.reviewer: hahamil
 ms.custom: aaddev, identitypla | Azuretformtop40
-ms.openlocfilehash: d9874e27c21906512c2f6c841767b4d6591dbeaf
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: fc32b4f583aea2fa9a34ab8b235f3f99fe4def9d
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80576720"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94562166"
 ---
 # <a name="shared-device-mode-for-android-devices"></a>Mode d’appareil partagé pour les appareils Android
 
-> [!NOTE]
-> Cette fonctionnalité est en version préliminaire publique.
-> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge.
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>[!IMPORTANT]
+> Cette fonctionnalité [!INCLUDE [PREVIEW BOILERPLATE](../../../includes/active-directory-develop-preview.md)]
 
 Les employés de terrain, comme les représentants, les membres d'équipage et les techniciens d'intervention, utilisent souvent un appareil mobile partagé pour effectuer leur travail. Cela devient problématique quand ils commencent à partager des mots de passe ou des codes confidentiels pour accéder aux données des clients et de l’entreprise sur l’appareil partagé.
 
@@ -36,7 +34,7 @@ Le mode d’appareil partagé permet également de gérer les appareils avec des
 Pour créer une application en mode d’appareil partagé, les développeurs et les administrateurs d’appareils cloud travaillent ensemble :
 
 - Les développeurs écrivent une application monocompte (les applications multicomptes ne sont pas prises en charge en mode d’appareil partagé), ajoutent `"shared_device_mode_supported": true` à la configuration de l’application et écrivent du code pour gérer des opérations comme la déconnexion des appareils partagés.
-- Les administrateurs d’appareils préparent l’appareil à partager en installant l’application d’authentification et en définissant l’appareil en mode partagé à l’aide de l’application d’authentification. Seuls les utilisateurs qui ont le rôle [Administrateur d’appareil cloud](../users-groups-roles/directory-assign-admin-roles.md#cloud-device-administrator-permissions) peuvent mettre un appareil en mode partagé à l’aide de l’[application d’authentification](../user-help/user-help-auth-app-overview.md). Vous pouvez configurer l’appartenance de vos rôles organisationnels dans le portail Azure via : **Azure Active Directory** > **Rôles et administrateurs** > **Administrateur d’appareil cloud**.
+- Les administrateurs d’appareils préparent l’appareil à partager en installant l’application d’authentification et en définissant l’appareil en mode partagé à l’aide de l’application d’authentification. Seuls les utilisateurs qui ont le rôle [Administrateur d’appareil cloud](../roles/permissions-reference.md#cloud-device-administrator-permissions) peuvent mettre un appareil en mode partagé à l’aide de l’[application d’authentification](../user-help/user-help-auth-app-overview.md). Vous pouvez configurer l’appartenance de vos rôles organisationnels dans le portail Azure via : **Azure Active Directory** > **Rôles et administrateurs** > **Administrateur d’appareil cloud**.
 
  Cet article se concentre principalement sur les points sur lesquels les développeurs doivent réfléchir.
 

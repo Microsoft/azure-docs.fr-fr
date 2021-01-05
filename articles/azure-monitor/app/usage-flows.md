@@ -6,16 +6,16 @@ author: NumberByColors
 ms.author: daviste
 ms.date: 01/24/2018
 ms.reviewer: mbullwin
-ms.openlocfilehash: 8622ede9e6f7fba2fde2e0b2e90eb31520a23d04
-ms.sourcegitcommit: df8b2c04ae4fc466b9875c7a2520da14beace222
+ms.openlocfilehash: a31ab24b96fa44787d08801a0680f94ff98bb5a2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80892442"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87309267"
 ---
 # <a name="analyze-user-navigation-patterns-with-user-flows-in-application-insights"></a>Analyser les modèles de navigation utilisateur avec User Flows dans Azure Application Insights
 
-![Outil User Flows d’Application Insights](./media/usage-flows/00001-flows.png)
+![Outil User Flows d’Application Insights](./media/usage-flows/flows.png)
 
 L’outil User Flows permet de visualiser la façon dont vos utilisateurs naviguent entre les pages et les fonctionnalités de votre site. Il est idéal pour répondre à certaines questions que vous vous posez, par exemple :
 
@@ -27,13 +27,13 @@ L’outil User Flows permet de visualiser la façon dont vos utilisateurs navigu
 L’outil User Flows démarre à partir de la page consultée, de l’événement personnalisé ou de l’exception initial(e) que vous spécifiez. Sur la base de cet événement initial, User Flows présente les événements qui se sont produits avant et après les sessions utilisateur. Des lignes d’épaisseur variable montrent le nombre de fois où les utilisateurs ont suivi chaque parcours. Des nœuds **Session démarrée** spéciaux indiquent où les nœuds suivants ont commencé une session. Des nœuds **Session terminée** indiquent combien d’utilisateurs n’ont envoyé aucune page consultée ou aucun événement personnalisé après le nœud précédent, ce qui permet d’identifier les points où les utilisateurs ont probablement quitté votre site.
 
 > [!NOTE]
-> Votre ressource Application Insights doit contenir des pages consultées ou des événements personnalisés pour pouvoir utiliser l’outil User Flows. [Découvrez comment configurer votre application pour collecter des vues de page automatiquement à l’aide du Kit de développement logiciel (SDK) JavaScript Application Insights](../../azure-monitor/app/javascript.md).
+> Votre ressource Application Insights doit contenir des pages consultées ou des événements personnalisés pour pouvoir utiliser l’outil User Flows. [Découvrez comment configurer votre application pour collecter des vues de page automatiquement à l’aide du Kit de développement logiciel (SDK) JavaScript Application Insights](./javascript.md).
 >
 >
 
 ## <a name="start-by-choosing-an-initial-event"></a>Commencer par choisir un événement initial
 
-![Choisissez un événement initial pour User Flows](./media/usage-flows/00002-flows-initial-event.png)
+![Choisissez un événement initial pour User Flows](./media/usage-flows/initial-event.png)
 
 Pour commencer à utiliser l’outil User Flows pour répondre à ces questions, choisissez une page consultée, un événement personnalisé ou une exception initial(e) qui servira de point de départ pour la visualisation :
 
@@ -52,13 +52,13 @@ S’il manque des pages consultées ou des événements personnalisés qui devra
 * Consultez la section **Excluded events** (Événements exclus) dans le menu **Edit** (Édition).
 * Utilisez les boutons plus de nœuds **Others** (Autres) pour inclure des événements moins fréquents dans la visualisation.
 * Si la page consultée ou l’événement personnalisé que vous attendez est rarement envoyé par les utilisateurs, essayez d’augmenter l’intervalle de temps de la visualisation dans le menu **Edit** (Édition).
-* Assurez-vous que la page consultée, l’événement personnalisé ou l’exception que vous attendez est configuré pour être collecté par le Kit de développement logiciel (SDK) Application Insights dans le code source de votre site. [En savoir plus sur la collecte d’événements personnalisés.](../../azure-monitor/app/api-custom-events-metrics.md)
+* Assurez-vous que la page consultée, l’événement personnalisé ou l’exception que vous attendez est configuré pour être collecté par le Kit de développement logiciel (SDK) Application Insights dans le code source de votre site. [En savoir plus sur la collecte d’événements personnalisés.](./api-custom-events-metrics.md)
 
 Si vous souhaitez voir davantage d’étapes dans la visualisation, utilisez les listes déroulantes **Previous steps** (Étapes précédentes) et **Étapes suivantes** au-dessus de la visualisation.
 
 ## <a name="after-visiting-a-page-or-feature-where-do-users-go-and-what-do-they-click"></a>Après avoir consulté une page ou une fonctionnalité, où vont les utilisateurs et sur quoi cliquent-ils ?
 
-![Utiliser User Flows pour savoir où cliquent les utilisateurs](./media/usage-flows/00003-flows-one-step.png)
+![Utiliser User Flows pour savoir où cliquent les utilisateurs](./media/usage-flows/one-step.png)
 
 Si votre événement initial est une page consultée, la première colonne, « Step 1 » (Étape 1) de la visualisation permet de comprendre rapidement ce que les utilisateurs ont fait immédiatement après avoir consulté la page. Essayez d’ouvrir votre site dans une fenêtre en regard de la visualisation User Flows. Comparez ce que vous attendez des interactions de vos utilisateurs avec la page à la liste des événements contenue dans la colonne « Step 1 » (Étape 1). Bien souvent, un élément d’interface utilisateur sur la page qui semble sans importance pour votre équipe peut compter parmi les fonctionnalités les plus utilisées de la page. Cela peut constituer un excellent point de départ pour améliorer la conception de votre site.
 
@@ -92,4 +92,5 @@ Utilisez les options **Split by** (Fractionner par) dans le menu **Edit** (Édit
 * [Vue d’ensemble de l’utilisation](usage-overview.md)
 * [Utilisateurs, Sessions et Événements](usage-segmentation.md)
 * [Rétention](usage-retention.md)
-* [Ajout d’événements personnalisés à votre application](../../azure-monitor/app/api-custom-events-metrics.md)
+* [Ajout d’événements personnalisés à votre application](./api-custom-events-metrics.md)
+

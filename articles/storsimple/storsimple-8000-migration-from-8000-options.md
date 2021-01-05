@@ -2,17 +2,17 @@
 title: Options de migration de données à partir des appareils de la gamme StorSimple 8000
 description: Fournit une vue d’ensemble des options pour migrer des données de la gamme StorSimple 8000.
 services: storsimple
-author: priestlg
+author: alkohli
 ms.service: storsimple
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/25/2020
-ms.author: v-grpr
-ms.openlocfilehash: 974bcc657b811a10e28b41150439e83d26a208d2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: alkohli
+ms.openlocfilehash: 4839f8211e678f5fc2fb3572c7eaa545fbee6c6c
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81767054"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94961190"
 ---
 # <a name="options-to-migrate-data-from-storsimple-8000-series"></a>Options de migration de données à partir de la gamme StorSimple 8000
 
@@ -31,7 +31,7 @@ Les clients qui utilisent la gamme StorSimple 8000 disposent d’options Azure o
 
 Cette toute nouvelle option de migration permet aux clients de stocker les partages de fichiers de leur organisation dans Azure Files. Ces partages de fichiers sont ensuite centralisés pour un accès local à l’aide d’Azure File Sync (AFS). AFS peut être déployé sur un hôte Windows Server. La migration des données réelle est ensuite effectuée sous forme de copie hôte ou à l’aide de l’outil de migration.
 
-Pour plus d’informations sur la migration des données vers Azure File Sync, accédez à [Migration de StorSimple 8100 et 8600 vers Azure File Sync](https://docs.microsoft.com/azure/storage/files/storage-files-migration-storsimple-8000).
+Pour plus d’informations sur la migration des données vers Azure File Sync, accédez à [Migration de StorSimple 8100 et 8600 vers Azure File Sync](../storage/files/storage-files-migration-storsimple-8000.md).
 
 ### <a name="third-party-options"></a>Options tierces
 
@@ -40,6 +40,12 @@ Pour plus d’informations sur la migration des données vers Azure File Sync, a
 Les clients de la gamme StorSimple 5000-7000 et de la gamme StorSimple 8000 peuvent choisir de migrer vers Panzura Freedom NAS pour conserver leurs données dans Azure. La solution Panzura Freedom fournit une solution NAS qui couvre les centres de données, les bureaux, ainsi que les clouds publics et privés. Elle prend en charge les workflows de données locaux, hybrides et dans le cloud pour les clients NFS, SMB et mobiles.
 
 Cette migration est assurée par Panzura. Les clients peuvent commencer en demandant la prise en charge de la migration sur le [site web Panzura](https://panzura.com/migrate-storsimple-panzura/).
+
+#### <a name="migrate-to-nasuni"></a>Migrer vers Nasuni
+
+Grâce à Nasuni, il est facile de transférer l’ensemble de votre environnement StorSimple vers une plateforme de services de fichiers stable, sécurisée et à haute performance. Nasuni offre la sécurité et les performances du stockage de fichiers localement tout en le combinant avec la scalabilité et la durabilité d’Azure.  En tant qu’éditeur de logiciels indépendant (ISV) Azure, Nasuni intègre tous les outils nécessaires pour déplacer vos données StorSimple vers une plateforme moderne qui vous permet de partager vos fichiers et de collaborer sur plusieurs sites.
+
+Commencez dès aujourd’hui : [site web de Nasuni](https://info.nasuni.com/storsimple8000-webinar).
 
 <!-- 04/09/2020 v-grpr (priestlg) - As per request, commenting out this section because the information that will go into this section is forthcoming
 #### Migrate to Cohesity
@@ -105,4 +111,4 @@ R. La durée de migration des données varie en fonction de la quantité de donn
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Migrer des données d’un appareil StorSimple 8000 vers Azure File Sync](https://docs.microsoft.com/azure/storage/files/storage-files-migration-storsimple-8000)
+* [Migrer des données d’un appareil StorSimple 8000 vers Azure File Sync](../storage/files/storage-files-migration-storsimple-8000.md)

@@ -3,18 +3,19 @@ title: Exemple de script Azure CLI - Utiliser des clés-valeurs dans un magasi
 titleSuffix: Azure App Configuration
 description: Utiliser un script Azure CLI pour créer, afficher, mettre à jour et supprimer des valeurs de clés dans le magasin App Configuration
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.devlang: azurecli
 ms.topic: sample
 ms.date: 02/19/2020
-ms.author: lcozzens
-ms.openlocfilehash: 1a4edabe666a554ccd01d110f0f71226221dfc67
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: alkemper
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 54ad9f389070e1d5d280517a2f6c41e9a0f8f33e
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77523645"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96929988"
 ---
 # <a name="work-with-key-values-in-an-azure-app-configuration-store"></a>Utiliser des clés-valeurs dans un magasin Azure App Configuration
 
@@ -26,10 +27,9 @@ Cet exemple de script montre comment :
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). 
-
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 ## <a name="sample-script"></a>Exemple de script
 
 ```azurecli-interactive

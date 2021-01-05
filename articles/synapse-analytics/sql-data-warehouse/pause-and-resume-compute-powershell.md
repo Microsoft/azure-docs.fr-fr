@@ -1,22 +1,22 @@
 ---
-title: Suspendre et reprendre le calcul dans le pool SQL Synapse avec Azure PowerShell
+title: 'Démarrage rapide : Suspendre et reprendre le calcul dans le pool SQL Synapse avec Azure PowerShell'
 description: Vous pouvez utiliser Azure PowerShell pour suspendre et reprendre le pool SQL Synapse (entrepôt de données). ressources de calcul.
 services: synapse-analytics
 author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/20/2019
 ms.author: kevin
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 44ce56238140de90145f69e966c94be8572c7749
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: seo-lt-2019, azure-synapse, devx-track-azurepowershell
+ms.openlocfilehash: 08ddb6077887043d798af9790a7b66f1b8ebb95c
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81252300"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91570698"
 ---
 # <a name="quickstart-pause-and-resume-compute-in-synapse-sql-pool-with-azure-powershell"></a>Démarrage rapide : Suspendre et reprendre le calcul dans le pool SQL Synapse avec Azure PowerShell
 

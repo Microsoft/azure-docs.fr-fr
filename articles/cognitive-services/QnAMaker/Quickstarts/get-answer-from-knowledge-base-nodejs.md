@@ -1,22 +1,24 @@
 ---
 title: 'Démarrage rapide : Obtenir des réponses d’une base de connaissances - REST, Node.js - QnA Maker'
 description: Ce guide de démarrage rapide basé sur REST Node.js vous aide à obtenir programmatiquement une réponse à partir d’une base de connaissances.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.date: 02/08/2020
 ROBOTS: NOINDEX,NOFOLLOW
 ms.custom: RESTCURL2020FEB27
-ms.topic: conceptual
-ms.openlocfilehash: 9031c320b055c0a7191655d6531eaa31d9cc8bb8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: f7923e4b49ae9f047a314880607d1d9923abf0db
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78851563"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96345886"
 ---
 # <a name="quickstart-get-answers-to-a-question-from-a-knowledge-base-with-nodejs"></a>Démarrage rapide : Obtenir des réponses à une question à partir d’une base de connaissance avec Node.js
 
-Ce guide de démarrage rapide vous aide à obtenir programmatiquement une réponse à partir d’une base de connaissances QnA Maker publiée. La base de connaissances contient des questions et réponses de [sources de données](../Concepts/knowledge-base.md) telles que des FAQ. La [question](../how-to/metadata-generateanswer-usage.md#generateanswer-request-configuration) est envoyée au service QnA Maker. La [réponse](../how-to/metadata-generateanswer-usage.md#generateanswer-response-properties) inclut la réponse la plus prévisible.
+Ce guide de démarrage rapide vous aide à obtenir programmatiquement une réponse à partir d’une base de connaissances QnA Maker publiée. La base de connaissances contient des questions et réponses de [sources de données](../index.yml) telles que des FAQ. La [question](../how-to/metadata-generateanswer-usage.md#generateanswer-request-configuration) est envoyée au service QnA Maker. La [réponse](../how-to/metadata-generateanswer-usage.md#generateanswer-response-properties) inclut la réponse la plus prévisible.
 
-[Documentation de référence](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime) | [Exemple](https://github.com/Azure-Samples/cognitive-services-qnamaker-nodejs/blob/master/documentation-samples/quickstarts/get-answer/get-answer.js)
+[Documentation de référence](/rest/api/cognitiveservices/qnamaker4.0/Runtime) | [Exemple](https://github.com/Azure-Samples/cognitive-services-qnamaker-nodejs/blob/master/documentation-samples/quickstarts/get-answer/get-answer.js)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -37,29 +39,19 @@ Ouvrez VSCode et créez un fichier nommé `get-answer.js`.
 
 En haut du fichier `get-answer.js`, ajoutez les dépendances nécessaires au projet :
 
-[!code-nodejs[Add the required dependencies](~/samples-qnamaker-nodejs/documentation-samples/quickstarts/get-answer/get-answer.js?range=1-4 "Add the required dependencies")]
+:::code language="javascript" source="~/cognitive-services-quickstart-code/javascript/QnAMaker/rest/query-kb.js" id="dependencies":::
 
 ## <a name="add-the-required-constants"></a>Ajouter les constantes nécessaires
 
 Ajoutez ensuite les constantes nécessaires pour accéder à QnA Maker. Ces valeurs se trouvent dans la page **Publier** une fois la base de connaissances publiée.
 
-[!code-nodejs[Add the required constants](~/samples-qnamaker-nodejs/documentation-samples/quickstarts/get-answer/get-answer.js?range=6-22 "Add the required constants")]
+:::code language="javascript" source="~/cognitive-services-quickstart-code/javascript/QnAMaker/rest/query-kb.js" id="constants":::
 
 ## <a name="add-a-post-request-to-send-question-and-get-an-answer"></a>Ajouter une requête POST pour envoyer une question et obtenir une réponse
 
 Le code suivant adresse une requête HTTPS à l’API QnA Maker afin d’envoyer la question à la base de connaissances et reçoit la réponse :
 
-[!code-nodejs[Add a POST request to send question to knowledge base](~/samples-qnamaker-nodejs/documentation-samples/quickstarts/get-answer/get-answer.js?range=24-49 "Add a POST request to send question to knowledge base")]
-
-La valeur de l’en-tête `Authorization` inclut la chaîne `EndpointKey`.
-
-## <a name="install-the-dependencies"></a>Installer les dépendances
-
-Installez les dépendances à partir de la ligne de commande :
-
-```bash
-npm install request request-promise
-```
+:::code language="javascript" source="~/cognitive-services-quickstart-code/javascript/QnAMaker/rest/query-kb.js" id="query":::
 
 ## <a name="run-the-program"></a>Exécuter le programme
 
@@ -80,4 +72,4 @@ En savoir plus sur la [requête](../how-to/metadata-generateanswer-usage.md#gene
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Documentation de référence pour l’API REST QnA Maker (V4)](https://go.microsoft.com/fwlink/?linkid=2092179)
+> [Documentation de référence pour l’API REST QnA Maker (V4)](/rest/api/cognitiveservices/qnamaker4.0/knowledgebase)

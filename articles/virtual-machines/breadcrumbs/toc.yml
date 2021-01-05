@@ -1,0 +1,11 @@
+- name: Azure
+  tocHref: /azure/
+  topicHref: /azure/index
+  items:
+    - name: Machines Virtuelles
+      tocHref: /azure/
+      topicHref: /azure/virtual-machines/index
+      items:
+        - name: Vue d’ensemble
+          tocHref: /azure/virtual-machines/index
+          topicHref: /azure/baremetal-infrastructure/workloads/sap/

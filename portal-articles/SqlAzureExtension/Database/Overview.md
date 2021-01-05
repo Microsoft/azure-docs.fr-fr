@@ -1,6 +1,6 @@
 ---
-title: Vue d’ensemble de la base de données SQL Azure | Microsoft Docs
-description: Aide relative à la vue d’ensemble de la base de données SQL au sein du portail Azure
+title: Vue d’ensemble de SQL Database | Microsoft Docs
+description: Aide relative à la vue d’ensemble de SQL Database au sein du portail Azure
 services: sql-database
 author: sewatson
 manager: lwelicki
@@ -8,12 +8,12 @@ ms.service: sql-database
 ms.topic: article
 ms.date: 04/09/2019
 ms.author: ninarn
-ms.openlocfilehash: 99f19971eafaa1ddad1f96b187e18b79810560a2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 6d4f0c50f57661576f97ddd3772d78b9fa293153
+ms.sourcegitcommit: e132633b9c3a53b3ead101ea2711570e60d67b83
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "61244457"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86040518"
 ---
 # <a name="sql-database-documentation"></a>Documentation SQL Database
 
@@ -29,7 +29,7 @@ Azure SQL Database vous permet d’effectuer facilement des tâches de gestion b
 
 ## <a name="step-by-step-tutorials"></a>Didacticiels pas à pas
 
-Découvrez comment créer, gérer et migrer des bases de données à l’aide de la base de données SQL.
+Découvrez comment créer, gérer et migrer des bases de données avec SQL Database.
 
 - Commencer par utiliser une [base de données unique](/azure/sql-database/sql-database-single-database-quickstart-guide) en vous aidant de notre guide de démarrage rapide
 - Créer et concevoir le schéma pour une nouvelle base de données unique à l’aide de [SSMS](/azure/sql-database/sql-database-design-first-database) ou de [.NET](/azure/sql-database/sql-database-design-first-database-csharp)

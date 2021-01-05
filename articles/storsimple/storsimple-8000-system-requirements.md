@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 09/28/2017
 ms.author: alkohli
-ms.openlocfilehash: 3032585c6f0a5cc6143eee06b12b6def50cd7cd0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6dcaa83980210a1f5449e8a2e0982cb8e39ff03d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80297704"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966188"
 ---
 # <a name="storsimple-8000-series-software-high-availability-and-networking-requirements"></a>Configurations logicielles, de haute disponibilité et réseau requises pour StorSimple 8000 Series
 
@@ -122,7 +122,7 @@ Dans la plupart des cas, nous vous recommandons de définir librement les règle
 
 Une métrique de routage est associée aux interfaces et à la passerelle qui acheminent les données vers les réseaux spécifiés. La métrique de routage est utilisée par le protocole de routage pour calculer le meilleur chemin vers une destination donnée, si plusieurs chemins existent pour la même destination. La métrique de routage est inversement proportionnelle à la préférence.
 
-Dans le contexte de StorSimple, si plusieurs interfaces et passerelles de réseau sont configurées pour canaliser le trafic, les métriques de routage entrent en jeu afin de déterminer l’ordre relatif dans lequel les interfaces seront utilisées. Les métriques de routage ne peuvent pas être modifiées par l’utilisateur. Toutefois, vous pouvez utiliser l’applet de commande `Get-HcsRoutingTable` pour imprimer la table de routage (et les métriques de routage) sur votre appareil StorSimple. Pour plus d’informations sur l’applet de commande Get-HcsRoutingTable, consultez le [dépannage du déploiement StorSimple](storsimple-troubleshoot-deployment.md).
+Dans le contexte de StorSimple, si plusieurs interfaces et passerelles de réseau sont configurées pour canaliser le trafic, les métriques de routage entrent en jeu afin de déterminer l’ordre relatif dans lequel les interfaces seront utilisées. Les métriques de routage ne peuvent pas être modifiées par l’utilisateur. Toutefois, vous pouvez utiliser l’applet de commande `Get-HcsRoutingTable` pour imprimer la table de routage (et les métriques de routage) sur votre appareil StorSimple. Pour plus d’informations sur l’applet de commande Get-HcsRoutingTable, consultez le [dépannage du déploiement StorSimple](./storsimple-8000-troubleshoot-deployment.md).
 
 L’algorithme de métrique de routage utilisé pour la mise à jour 2 et versions ultérieures peut être décrit comme suit.
 
@@ -250,4 +250,4 @@ Lisez attentivement ces meilleures pratiques recommandées pour assurer la haute
 * [Découvrez comment déployer votre solution StorSimple](storsimple-8000-deployment-walkthrough-u2.md).
 
 <!--Reference links-->
-[1]: https://technet.microsoft.com/library/cc731844(v=WS.10).aspx
+[1]: /previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc731844(v=ws.10)

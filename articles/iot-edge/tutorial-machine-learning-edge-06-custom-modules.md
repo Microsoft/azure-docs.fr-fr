@@ -4,32 +4,30 @@ description: Ce tutoriel montre comment créer et déployer des modules IoT Edge
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 11/12/2019
+ms.date: 6/30/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 3cba7781ac80ae567b2bfd54c4131429ed94b90f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 25db7104e565a987f3be9e2d6f3b239cf1884ae4
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75772361"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932334"
 ---
 # <a name="tutorial-create-and-deploy-custom-iot-edge-modules"></a>Tutoriel : Créer et déployer des modules IoT Edge personnalisés
 
-> [!NOTE]
-> Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Si vous êtes arrivé directement à cet article, nous vous encourageons à commencer par le [premier article](tutorial-machine-learning-edge-01-intro.md) de la série afin d’obtenir de meilleurs résultats.
-
-Dans cet article, nous créons trois modules IoT Edge qui reçoivent des messages des appareils de nœud terminal, exécutent les données dans votre modèle Machine Learning, puis transfèrent les insights à IoT Hub.
+Dans cet article, nous créons trois modules IoT Edge qui reçoivent des messages des appareils de nœud terminal IoT, exécutent les données dans votre modèle Machine Learning, puis transfèrent les insights au hub IoT.
 
 Le hub IoT Edge facilite la communication entre les modules. L’utilisation du hub IoT Edge comme répartiteur de messages permet aux modules de rester indépendants les uns des autres. Il suffit aux modules de spécifier les entrées sur lesquelles ils acceptent des messages et les sorties vers lesquelles ils écrivent des messages.
 
 Nous voulons que l’appareil IoT Edge accomplisse quatre choses pour nous :
 
-* Recevoir des données des appareils de nœud terminal
-* Prédire la durée de vie restante de l’appareil qui a envoyé les données
-* Envoyer un message à IoT Hub avec seulement la durée de vie restante de l’appareil (cette fonction peut être modifiée pour envoyer des données seulement si la durée de vie restante est inférieure à un certain niveau)
-* Enregistrer les données des appareils de nœud terminal dans un fichier local sur l’appareil IoT Edge. Ce fichier de données est régulièrement chargé sur IoT Hub via le chargement de fichier pour affiner l’entraînement du modèle Machine Learning. L’utilisation du chargement de fichier au lieu d’un streaming constant de messages est plus rentable.
+* Recevoir des données des appareils de nœud terminal.
+* Prédire la durée de vie restante de l’appareil qui a envoyé les données.
+* Envoyer un message avec la durée de vie restante de l’appareil au hub IoT. Cette fonction peut être modifiée pour envoyer les données seulement si la durée de vie restante descend sous un niveau spécifié.
+* Enregistrer les données des appareils de nœud terminal dans un fichier local sur l’appareil IoT Edge. Ce fichier de données est régulièrement chargé sur IoT Hub pour affiner l’entraînement du modèle Machine Learning. L’utilisation du chargement de fichier au lieu d’un streaming constant de messages est plus rentable.
 
 Pour accomplir ces tâches, nous utilisons trois modules personnalisés :
 
@@ -48,39 +46,54 @@ Pour accomplir ces tâches, nous utilisons trois modules personnalisés :
     * **writeAvro :** envoie des messages à « avroModuleInput »
     * **toIotHub :** envoie des messages à $upstream, qui les transmet au hub IoT connecté
 
-Le diagramme ci-dessous illustre les modules, les entrées, les sorties et les routes du hub IoT Edge pour la solution complète :
+Le diagramme suivant illustre les modules, les entrées, les sorties et les routes du hub IoT Edge pour la solution complète :
 
 ![Diagramme d’architecture des trois modules IoT Edge](media/tutorial-machine-learning-edge-06-custom-modules/modules-diagram.png)
 
 Les étapes décrites dans cet article sont généralement effectuées par un développeur de cloud.
 
+Dans cette section du tutoriel, vous allez apprendre à :
+
+> [!div class="checklist"]
+>
+> * Créer un module IoT Edge à partir de code personnalisé.
+> * Générer une image Docker à partir de votre module personnalisé.
+> * Reconfigurer le routage IoT Hub pour prendre en charge vos modules personnalisés.
+> * Générer, publier et déployer vos modules personnalisés.
+
+## <a name="prerequisites"></a>Prérequis
+
+Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Chaque article de la série s’appuie sur le travail réalisé dans le cadre de l’article précédent. Si vous êtes tombé directement sur cet article, reportez-vous au [premier article](tutorial-machine-learning-edge-01-intro.md) de la série.
+
 ## <a name="create-a-new-iot-edge-solution"></a>Créer une solution IoT Edge
 
-Pendant l’exécution du deuxième de nos deux notebooks Azure, nous avons créé et publié une image conteneur qui contient notre modèle de durée de vie restante. Pendant le processus de création d’image, Azure Machine Learning empaquetait ce modèle pour offrir la possibilité de déployer l’image en tant que module Azure IoT Edge. Dans cette étape, nous créons une solution Azure IoT Edge à l’aide du module « Azure Machine Learning » et faisons pointer le module sur l’image que nous avons publiée à l’aide de notebooks Azure.
+Pendant l’exécution du deuxième de nos deux notebooks Azure, nous avons créé et publié une image conteneur qui contient notre modèle de durée de vie restante. Pendant le processus de création d’image, Azure Machine Learning empaquetait ce modèle pour offrir la possibilité de déployer l’image en tant que module Azure IoT Edge.
 
-1. Ouvrez une session Bureau à distance sur votre machine de développement.
+Dans cette étape, nous créons une solution Azure IoT Edge à l’aide du module « Azure Machine Learning » et faisons pointer le module sur l’image que nous avons publiée à l’aide de notebooks Azure.
 
-2. Ouvrez le dossier **C:\\source\\IoTEdgeAndMlSample** dans Visual Studio Code.
+1. Ouvrez une session Bureau à distance sur votre machine virtuelle de développement.
 
-3. Cliquez avec le bouton droit sur le panneau Explorateur (dans l’espace vide) et sélectionnez **Nouvelle solution IoT Edge**.
+1. Ouvrez le dossier **C:\\source\\IoTEdgeAndMlSample** dans Visual Studio Code.
+
+1. Cliquez avec le bouton droit sur le panneau Explorateur (dans l’espace vide) et sélectionnez **Nouvelle solution IoT Edge**.
 
     ![Créer une solution IoT Edge](media/tutorial-machine-learning-edge-06-custom-modules/new-edge-solution-command.png)
 
-4. Acceptez le nom de solution par défaut **EdgeSolution**.
+1. Acceptez le nom de solution par défaut **EdgeSolution**.
 
-5. Choisissez **Azure Machine Learning** comme modèle de module.
+1. Choisissez **Azure Machine Learning** comme modèle de module.
 
-6. Nommez le module **turbofanRulClassifier**.
+1. Nommez le module **turbofanRulClassifier**.
 
-7. Choisissez votre espace de travail Machine Learning.
+1. Choisissez votre espace de travail Machine Learning. Cet espace de travail est l’espace de travail **turboFanDemo** que vous avez créé dans [Tutoriel : Entraîner et déployer un modèle Azure Machine Learning](tutorial-machine-learning-edge-04-train-model.md)
 
-8. Sélectionnez l’image que vous avez créée pendant l’exécution du notebook Azure.
+1. Sélectionnez l’image que vous avez créée pendant l’exécution du notebook Azure.
 
-9. Examinez la solution et notez les fichiers qui ont été créés :
+1. Examinez la solution et notez les fichiers qui ont été créés :
 
    * **deployment.template.json :** Ce fichier contient la définition de chacun des modules dans la solution. Vous devez examiner trois sections dans ce fichier :
 
-     * **Informations d’identification de registre :** Définit l’ensemble des registres de conteneurs personnalisés que vous utilisez dans votre solution. À ce stade, elle doit contenir le registre de votre espace de travail Machine Learning, qui est l’emplacement de stockage de votre image Azure Machine Learning. Vous pouvez avoir n’importe quel nombre de registres de conteneurs, mais par souci de simplicité, nous utilisons ce même registre pour tous les modules
+     * **Informations d’identification de registre :** Définit l’ensemble des registres de conteneurs personnalisés que vous utilisez dans votre solution. À ce stade, elle doit contenir le registre de votre espace de travail Machine Learning, qui est l’emplacement de stockage de votre image Azure Machine Learning. Vous pouvez avoir un nombre quelconque de registres de conteneurs, mais par souci de simplicité, nous utilisons ce même registre pour tous les modules.
 
        ```json
        "registryCredentials": {
@@ -92,51 +105,40 @@ Pendant l’exécution du deuxième de nos deux notebooks Azure, nous avons cré
        }
        ```
 
-     * **Modules :** Cette section contient l’ensemble des modules définis par l’utilisateur associés à cette solution. Notez que cette section contient actuellement deux modules : SimulatedTemperatureSensor et turbofanRulClassifier. Le module SimulatedTemperatureSensor a été installé par le modèle Visual Studio Code, mais nous n’en avons pas besoin pour cette solution. Vous pouvez supprimer la définition du module SimulatedTemperatureSensor de la section des modules. Notez que la définition du module turbofanRulClassifier pointe vers l’image dans votre registre de conteneurs. Les différents modules que nous ajoutons à la solution apparaissent dans cette section.
+     * **Modules :** Cette section contient l’ensemble des modules définis par l’utilisateur associés à cette solution. La définition du module turbofanRulClassifier pointe vers l’image dans votre registre de conteneurs. Les différents modules que nous ajoutons à la solution apparaissent dans cette section.
 
        ```json
-       "modules": {
-         "SimulatedTemperatureSensor": {
-           "version": "1.0",
-           "type": "docker",
-           "status": "running",
-           "restartPolicy": "always",
-           "settings": {
-             "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
-             "createOptions": {}
-           }
-         },
-         "turbofanRulClassifier": {
-           "version": "1.0",
-           "type": "docker",
-           "status": "running",
-           "restartPolicy": "always",
-           "settings": {
-             "image": "<your registry>.azurecr.io/edgemlsample:1",
-             "createOptions": {}
-           }
-         }
-       }
+        "modules": {
+          "turbofanRulClassifier": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "turbofandemo2cd74296.azurecr.io/edgemlsample:1",
+              "createOptions": {}
+            }
+          }
+        }
        ```
 
-     * **Routes :** nous utilisons beaucoup les routes dans ce tutoriel. Les routes définissent la façon dont les modules communiquent les uns avec les autres. Les deux routes définies par le modèle ne correspondent pas au routage dont nous avons besoin. La première route envoie toutes les données des sorties du classifieur au hub IoT ($upstream). L’autre route concerne SimulatedTemperatureSensor, que nous venons de supprimer. Supprimez les deux routes par défaut.
+     * **Routes :** nous utilisons beaucoup les routes dans ce tutoriel. Les routes définissent la façon dont les modules communiquent les uns avec les autres. La route existante, définie par le modèle, ne correspond pas au routage dont nous avons besoin. Supprimez la route `turbofanRulClassifierToIoTHub`.
 
        ```json
-       "$edgeHub": {
-         "properties.desired": {
-           "schemaVersion": "1.0",
-           "routes": {
-             "turbofanRulClassifierToIoTHub": "FROM /messages/modules/turbofanRulClassifier/outputs/\* INTO $upstream",
-             "sensorToturbofanRulClassifier": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\\"/modules/turbofanRulClassifier/inputs/input1\\")"
-           },
-           "storeAndForwardConfiguration": {
-             "timeToLiveSecs": 7200
-           }
-         }
-       }
+        "$edgeHub": {
+          "properties.desired": {
+            "schemaVersion": "1.0",
+            "routes": {
+              "turbofanRulClassifierToIoTHub": "FROM /messages/modules/turbofanRulClassifier/outputs/* INTO $upstream"
+            },
+            "storeAndForwardConfiguration": {
+              "timeToLiveSecs": 7200
+            }
+          }
+        }
        ```
 
-   * **deployment.debug.template.json :** ce fichier est la version debug de deployment.template.json. Nous devons refléter tous les changements de deployment.template.json dans ce fichier.
+   * **deployment.debug.template.json :** ce fichier est la version debug de deployment.template.json. En règle générale, nous devrions maintenir ce fichier synchronisé avec le contenu du fichier deployment.template.json, mais cela n’est pas nécessaire pour ce tutoriel.
 
    * **.env :** ce fichier doit contenir le nom d’utilisateur et le mot de passe dont vous avez besoin pour accéder à votre registre.
 
@@ -145,9 +147,9 @@ Pendant l’exécution du deuxième de nos deux notebooks Azure, nous avons cré
       CONTAINER_REGISTRY_PASSWORD_<your registry name>=<ACR password>
       ```
 
-10. Cliquez avec le bouton droit sur le fichier deployment.template.json dans l’Explorateur Visual Studio Code et sélectionnez **Générer la solution IoT Edge**.
+1. Cliquez avec le bouton droit sur le fichier deployment.template.json dans l’Explorateur Visual Studio Code et sélectionnez **Générer la solution IoT Edge**.
 
-11. Notez que cette commande crée un dossier config avec un fichier deployment.amd64.json. Ce fichier est le modèle de déploiement concret pour la solution.
+1. Notez que cette commande crée un dossier config avec un fichier deployment.amd64.json. Ce fichier est le modèle de déploiement concret pour la solution.
 
 ## <a name="add-router-module"></a>Ajouter un module Routeur
 
@@ -158,44 +160,41 @@ Ensuite, nous ajoutons le module Routeur à notre solution. Le module Routeur g�
 * **Envoyer des messages de durée de vie restante à IoT Hub :** quand le routeur reçoit un message du classifieur, il le transforme pour contenir uniquement les informations essentielles, l’ID d’appareil et la durée de vie restante, puis envoie le message abrégé au hub IoT. Pour plus de précision, vous pouvez envoyer des messages au hub IoT seulement si la prédiction de durée de vie restante est inférieure à un seuil donné (par exemple, quand la durée de vie restante est inférieure à 100 cycles). Nous ne l’avons pas fait ici. Ce type de filtrage réduit le volume de messages et le coût du hub IoT.
 * **Envoyer un message au module Enregistreur Avro :** pour préserver toutes les données envoyées par l’appareil en aval, le module Routeur envoie l’intégralité du message reçu du classifieur au module Enregistreur Avro, lequel conserve et charge les données à l’aide du chargement de fichier IoT Hub.
 
-> [!NOTE]
-> La description des responsabilités de module peut donner l’impression que le traitement est séquentiel, mais en réalité le flux est basé sur les messages/événements. C’est la raison pour laquelle nous avons besoin d’un module d’orchestration comme notre module Routeur.
+Le module Routeur est un élément important de la solution qui garantit que les messages sont traités dans l’ordre approprié.
 
-### <a name="create-module-and-copy-files"></a>Créer le module et copier les fichiers
+### <a name="create-the-module-and-copy-files"></a>Créer le module et copier les fichiers
 
 1. Cliquez avec le bouton droit sur le dossier des modules dans Visual Studio Code et choisissez **Ajouter un module IoT Edge**.
 
-2. Choisissez **Module C#** .
+1. Choisissez **Module C#** comme modèle de module.
 
-3. Nommez le module **turbofanRouter**.
+1. Nommez le module **turbofanRouter**.
 
-4. Quand vous êtes invité à indiquer votre dépôt d’images Docker, utilisez le registre de l’espace de travail Machine Learning (il se trouve sous le nœud registryCredentials de votre fichier *deployment.template.json*). Cette valeur est l’adresse complète du registre, par exemple, **\<votre registre\>.azurecr.io/turbofanrouter**.
+1. Quand vous êtes invité à indiquer votre dépôt d’images Docker, utilisez le registre de l’espace de travail Machine Learning (il se trouve sous le nœud registryCredentials de votre fichier *deployment.template.json*). Cette valeur est l’adresse complète du registre, par exemple, **\<your registry\>.azurecr.io/turbofanrouter**.
 
     > [!NOTE]
-    > Dans cet article, nous utilisons l’instance Azure Container Registry créée par l’espace de travail Azure Machine Learning, que nous avons utilisée pour entraîner et déployer notre classifieur. C’est pour des raisons purement pratiques. Nous aurions pu tout aussi bien créer un registre de conteneurs et y publier nos modules.
+    > Dans cet article, nous utilisons l’instance Azure Container Registry qui a été créée par l’espace de travail Azure Machine Learning. C’est pour des raisons purement pratiques. Nous aurions pu tout aussi bien créer un registre de conteneurs et y publier nos modules.
 
-5. Ouvrez une nouvelle fenêtre de terminal dans Visual Studio Code (**Afficher** > **Terminal**) et copiez les fichiers du répertoire de modules.
+1. Dans le terminal, à l’aide d’un interpréteur de commandes, copiez les fichiers de l’exemple de module dans la solution.
 
     ```cmd
     copy c:\source\IoTEdgeAndMlSample\EdgeModules\modules\turbofanRouter\*.cs c:\source\IoTEdgeAndMlSample\EdgeSolution\modules\turbofanRouter\
     ```
 
-6. Quand vous êtes invité à remplacer le fichier program.cs, appuyez sur `y`, puis sur `Enter`.
+1. Acceptez l’invite de remplacement du fichier program.cs.
 
 ### <a name="build-router-module"></a>Générer un module Routeur
 
 1. Dans Visual Studio Code, sélectionnez **Terminal** > **Configurer la tâche de build par défaut**.
 
-2. Cliquez sur **Créer un fichier tasks.json à partir d’un modèle**.
+1. Sélectionnez **Créer le fichier tasks.json à partir d’un modèle**.
 
-3. Cliquez sur **.NET Core**.
+1. Sélectionnez **.NET Core**.
 
-4. Quand tasks.json s’ouvre, remplacez le contenu par :
+1. Remplacez le contenu de tasks.json par le code suivant.
 
     ```json
     {
-      // See https://go.microsoft.com/fwlink/?LinkId=733558
-      // for the documentation about the tasks.json format
       "version": "2.0.0",
       "tasks": [
         {
@@ -219,9 +218,9 @@ Ensuite, nous ajoutons le module Routeur à notre solution. Le module Routeur g�
     }
     ```
 
-5. Enregistrez et fermez tasks.json.
+1. Enregistrez et fermez tasks.json.
 
-6. Exécutez la build avec `Ctrl + Shift + B` ou **Terminal** > **Exécuter la tâche de build**.
+1. Exécutez la build avec `Ctrl + Shift + B` ou **Terminal** > **Exécuter la tâche de build**.
 
 ### <a name="set-up-module-routes"></a>Configurer des routes de module
 
@@ -248,7 +247,7 @@ Comme mentionné plus haut, le runtime IoT Edge utilise les routes configurées 
    "classifierToRouter": "FROM /messages/modules/turbofanRulClassifier/outputs/amloutput INTO BrokeredEndpoint(\"/modules/turbofanRouter/inputs/rulInput\")"
    ```
 
-#### <a name="outputs"></a>Outputs
+#### <a name="outputs"></a>Sorties
 
 Ajoutez quatre routes supplémentaires au paramètre de route $edgeHub, pour gérer les sorties du module Routeur.
 
@@ -297,12 +296,8 @@ En tenant compte de toutes les routes, votre nœud « $edgeHub » doit ressemb
 }
 ```
 
-> [!NOTE]
-> L’ajout du module turbofanRouter a créé la route supplémentaire suivante : `turbofanRouterToIoTHub": "FROM /messages/modules/turbofanRouter/outputs/* INTO $upstream`. Supprimez cette route et gardez uniquement les routes listées ci-dessus dans votre fichier deployment.template.json.
-
-#### <a name="copy-routes-to-deploymentdebugtemplatejson"></a>Copier les routes dans deployment.debug.template.json
-
-Pour la dernière étape, afin de synchroniser nos fichiers, répercutez les changements de deployment.template.json dans deployment.debug.template.json.
+  > [!NOTE]
+  > L’ajout du module turbofanRouter a créé la route supplémentaire suivante : `turbofanRouterToIoTHub": "FROM /messages/modules/turbofanRouter/outputs/* INTO $upstream`. Supprimez cette route et gardez uniquement les routes listées ci-dessus dans votre fichier deployment.template.json.
 
 ## <a name="add-avro-writer-module"></a>Ajouter le module Enregistreur Avro
 
@@ -314,21 +309,15 @@ Le module Enregistreur Avro a deux responsabilités dans notre solution, stocker
 
 ### <a name="create-module-and-copy-files"></a>Créer le module et copier les fichiers
 
-1. Dans la palette de commandes, recherchez et sélectionnez **Python : Sélectionner l’interpréteur**.
+1. Dans Visual Studio Code, sélectionnez **Afficher** > **Palette de commandes**, puis recherchez et sélectionnez **Python : Sélectionner l’interpréteur**.
 
-1. Choisissez l’interpréteur trouvé dans C:\\Python37.
-
-1. Rouvrez la palette de commandes, et recherchez et sélectionnez **Terminal : Sélectionner l’interpréteur de commandes par défaut**.
-
-1. Quand vous y êtes invité, choisissez **Invite de commandes**.
-
-1. Ouvrez un nouvel interpréteur de commandes du terminal, **Terminal** > **Nouveau terminal**.
+1. Sélectionnez votre version installée de Python 3.7 ou une version ultérieure.
 
 1. Cliquez avec le bouton droit sur le dossier des modules dans Visual Studio Code et choisissez **Ajouter un module IoT Edge**.
 
 1. Choisissez **Module Python**.
 
-1. Nommez le module « avroFileWriter ».
+1. Nommez le module `avroFileWriter`.
 
 1. Quand vous êtes invité à indiquer votre dépôt d’images Docker, utilisez le même registre que celui que vous avez utilisé pour ajouter le module Routeur.
 
@@ -338,7 +327,7 @@ Le module Enregistreur Avro a deux responsabilités dans notre solution, stocker
    copy C:\source\IoTEdgeAndMlSample\EdgeModules\modules\avroFileWriter\*.py C:\source\IoTEdgeAndMlSample\EdgeSolution\modules\avroFileWriter\
    ```
 
-1. Si vous êtes invité à remplacer main.py, tapez `y`, puis appuyez sur `Enter`.
+1. Acceptez le remplacement de main.py.
 
 1. Notez que filemanager.py et schema.py ont été ajoutés à la solution et que main.py a été mis à jour.
 
@@ -347,29 +336,29 @@ Le module Enregistreur Avro a deux responsabilités dans notre solution, stocker
 
 ### <a name="bind-mount-for-data-files"></a>Montage de liaison pour les fichiers de données
 
-Comme mentionné dans l’introduction, le module enregistreur a besoin d’un montage de liaison pour écrire des fichiers Avro sur le système de fichiers de l’appareil.
+Comme mentionné précédemment, le module enregistreur a besoin d’un montage de liaison pour écrire des fichiers Avro dans le système de fichiers de l’appareil.
 
 #### <a name="add-directory-to-device"></a>Ajouter le répertoire à l’appareil
 
-1. Connectez-vous à la machine virtuelle de votre appareil IoT Edge à l’aide de SSH.
+1. Dans le portail Azure, démarrez votre machine virtuelle d’appareil IoT Edge si elle n’est pas en cours d’exécution. Connectez-vous à elle à l’aide de SSH. Cette connexion requiert le nom DNS que vous pouvez copier à partir de la page de présentation de la machine virtuelle dans le portail Azure.
 
-   ```bash
-   ssh -l <user>@IoTEdge-<extension>.<region>.cloudapp.azure.com
+   ```cmd
+   ssh -l <user>@<vm name>.<region>.cloudapp.azure.com
    ```
 
-2. Créez le répertoire pour les messages enregistrés de l’appareil de nœud terminal.
+1. Une fois connecté, créez le répertoire pour les messages enregistrés de l’appareil de nœud terminal.
 
    ```bash
    sudo mkdir -p /data/avrofiles
    ```
 
-3. Mettez à jour des autorisations de répertoire pour le rendre accessible en écriture par le conteneur.
+1. Mettez à jour des autorisations de répertoire pour le rendre accessible en écriture par le conteneur.
 
    ```bash
    sudo chmod ugo+rw /data/avrofiles
    ```
 
-4. Vérifiez que le répertoire a maintenant l’autorisation d’écriture (w) aux niveaux utilisateur, groupe et propriétaire.
+1. Vérifiez que le répertoire a maintenant l’autorisation d’écriture (w) aux niveaux utilisateur, groupe et propriétaire.
 
    ```bash
    ls -la /data
@@ -381,9 +370,9 @@ Comme mentionné dans l’introduction, le module enregistreur a besoin d’un m
 
 Pour ajouter le répertoire au conteneur du module, nous modifions les fichiers Dockerfile associés au module avroFileWriter. Trois fichiers Dockerfile sont associés au module : Dockerfile.amd64, Dockerfile.amd64.debug et Dockerfile.arm32v7. Ces fichiers doivent être synchronisés en prévision d’une opération de débogage ou de déploiement sur un appareil arm32. Pour cet article, seul Dockerfile.amd64 nous intéresse.
 
-1. Sur votre machine de développement, ouvrez le fichier **Dockerfile.amd64**.
+1. Sur votre machine virtuelle de développement, ouvrez le fichier **C:\source\IoTEdgeAndMlSample\EdgeSolution\modules\avoFileWriter\Dockerfile.amd64**.
 
-2. Modifiez le fichier pour qu’il ressemble à l’exemple suivant :
+1. Modifiez le fichier pour qu’il ressemble à l’exemple suivant :
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -408,9 +397,9 @@ Pour ajouter le répertoire au conteneur du module, nous modifions les fichiers 
 
    Les commandes `mkdir` et `chown` indiquent au processus de génération Docker de créer un répertoire de niveau supérieur appelé /avrofiles dans l’image, puis de définir l’utilisateur du module comme le propriétaire de ce répertoire. Il est important d’insérer ces commandes après l’ajout de l’utilisateur du module à l’image avec la commande `useradd` et avant que le contexte bascule sur l’utilisateur du module (USER moduleuser).
 
-3. Effectuez les changements correspondants dans Dockerfile.amd64.debug et Dockerfile.arm32v7.
+1. Si nécessaire, effectuez les changements correspondants dans Dockerfile.amd64.debug et Dockerfile.arm32v7.
 
-#### <a name="update-the-module-configuration"></a>Mettre à jour la configuration du module
+#### <a name="add-bind-configuration-to-the-avrofilewriter"></a>Ajouter une configuration de liaison à avroFileWriter
 
 La dernière étape de création de la liaison est la mise à jour des fichiers deployment.template.json (et deployment.debug.template.json) avec les informations de liaison.
 
@@ -437,8 +426,6 @@ La dernière étape de création de la liaison est la mise à jour des fichiers 
    }
    ```
 
-3. Effectuez les changements correspondants dans deployment.debug.template.json.
-
 ### <a name="bind-mount-for-access-to-configyaml"></a>Montage de liaison pour accéder à config.yaml
 
 Nous devons ajouter une liaison de plus pour le module enregistreur. Cette liaison permet au module de lire la chaîne de connexion du fichier /etc/iotedge/config.yaml sur l’appareil IoT Edge. Nous avons besoin de la chaîne de connexion pour créer un IoTHubClient et pouvoir appeler la méthode upload\_blob\_async pour télécharger des fichiers dans le hub IoT. Les étapes d’ajout de cette liaison sont similaires à celles de la section précédente.
@@ -451,25 +438,25 @@ Nous devons ajouter une liaison de plus pour le module enregistreur. Cette liais
    ssh -l <user>@IoTEdge-<extension>.<region>.cloudapp.azure.com
    ```
 
-2. Ajoutez l’autorisation de lecture au fichier config.yaml.
+1. Ajoutez l’autorisation de lecture au fichier config.yaml.
 
    ```bash
    sudo chmod +r /etc/iotedge/config.yaml
    ```
 
-3. Vérifiez que les autorisations sont définies correctement.
+1. Vérifiez que les autorisations sont définies correctement.
 
    ```bash
    ls -la /etc/iotedge/
    ```
 
-4. Vérifiez que les autorisations pour config.yaml sont **- r--r--r--** .
+1. Vérifiez que les autorisations pour config.yaml sont **- r--r--r--** .
 
 #### <a name="add-directory-to-module"></a>Ajouter le répertoire au module
 
 1. Sur votre machine de développement, ouvrez le fichier **Dockerfile.amd64**.
 
-2. Ajouter un jeu supplémentaire de commandes `mkdir` et `chown` au fichier pour qu’il ressemble à :
+1. Ajouter un jeu supplémentaire de commandes `mkdir` et `chown` au fichier pour qu’il ressemble à :
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -494,13 +481,13 @@ Nous devons ajouter une liaison de plus pour le module enregistreur. Cette liais
    CMD "python3", "-u", "./main.py"]
    ```
 
-3. Effectuez les changements correspondants dans Dockerfile.amd64.debug et Dockerfile.arm32v7.
+1. Effectuez les changements correspondants dans Dockerfile.amd64.debug et Dockerfile.arm32v7.
 
 #### <a name="update-the-module-configuration"></a>Mettre à jour la configuration du module
 
 1. Ouvrez le fichier **deployment.template.json**.
 
-2. Modifiez la définition de module pour avroFileWriter en ajoutant une deuxième ligne au paramètre `Binds` qui fait pointer le répertoire du conteneur (/app/iotconfig) vers le répertoire local sur l’appareil (/etc/iotedge).
+1. Modifiez la définition de module pour avroFileWriter en ajoutant une deuxième ligne au paramètre `Binds` qui fait pointer le répertoire du conteneur (/app/iotconfig) vers le répertoire local sur l’appareil (/etc/iotedge).
 
    ```json
    "avroFileWriter": {
@@ -522,7 +509,7 @@ Nous devons ajouter une liaison de plus pour le module enregistreur. Cette liais
    }
    ```
 
-3. Effectuez les changements correspondants dans deployment.debug.template.json.
+1. Effectuez les changements correspondants dans deployment.debug.template.json.
 
 ## <a name="install-dependencies"></a>Installer des dépendances
 
@@ -530,14 +517,14 @@ Le module enregistreur prend une dépendance sur deux bibliothèques Python, fas
 
 ### <a name="pyyaml"></a>PyYAML
 
-1. Sur votre machine de développement, ouvrez le fichier **requirements.txt** et ajoutez pyyaml.
+1. Sur votre machine de développement, ouvrez le fichier `C:\source\IoTEdgeAndMlSample\EdgeSolution\modules\avoFileWriter\requirements.txt` et ajoutez « pyyaml » sur une nouvelle ligne dans le fichier.
 
    ```txt
    azure-iothub-device-client~=1.4.3
    pyyaml
    ```
 
-2. Ouvrez le fichier **Dockerfile.amd64** et ajoutez une commande `pip install` pour mettre à niveau setuptools.
+1. Ouvrez le fichier **Dockerfile.amd64** et ajoutez une commande `pip install` pour mettre à niveau setuptools.
 
    ```dockerfile
    FROM ubuntu:xenial
@@ -563,9 +550,7 @@ Le module enregistreur prend une dépendance sur deux bibliothèques Python, fas
    CMD [ "python3", "-u", "./main.py" ]
    ```
 
-3. Effectuez les changements correspondants dans Dockerfile.amd64.debug. <!--may not be necessary. Add 'if needed'?-->
-
-4. Installer pyyaml localement en ouvrant un terminal dans Visual Studio Code et en tapant
+1. À l’invite de commandes, installez pyyaml sur votre ordinateur de développement.
 
    ```cmd
    pip install pyyaml
@@ -581,7 +566,7 @@ Le module enregistreur prend une dépendance sur deux bibliothèques Python, fas
    fastavro
    ```
 
-2. Installez fastavro sur votre machine de développement à l’aide du terminal Visual Studio Code.
+1. Installez fastavro sur votre ordinateur de développement.
 
    ```cmd
    pip install fastavro
@@ -602,31 +587,31 @@ Une fois le routeur et le classifieur en place, nous espérons recevoir des mess
 
 1. Dans le portail Azure, accédez à votre hub IoT.
 
-2. Dans la barre de navigation gauche, choisissez **Routage des messages**.
+1. Dans le menu du volet de gauche, sous **Messagerie**, sélectionnez **Routage des messages**.
 
-3. Sélectionnez **Ajouter**.
+1. Sous l’onglet **Routes**, sélectionnez **Ajouter**.
 
-4. Nommez la route **RulMessageRoute**.
+1. Nommez la route **RulMessageRoute**.
 
-5. Sélectionnez **Ajouter** à côté du sélecteur de **point de terminaison** et choisissez **Stockage d’objets blob**.
+1. Sélectionnez **Ajouter un point de terminaison** à droite du sélecteur de **point de terminaison** et choisissez **Stockage**.
 
-6. Dans le formulaire **Ajouter un point de terminaison de stockage**, nommez le point de terminaison **ruldata**.
+1. Dans la page **Ajouter un point de terminaison de stockage**, nommez le point de terminaison **ruldata**.
 
-7. Sélectionnez **Choisir un conteneur**.
+1. Sélectionnez **Choisir un conteneur**.
 
-8. Choisissez le compte de stockage utilisé dans ce tutoriel, dont le nom ressemble à **iotedgeandml\<suffixe unique\>** .
+1. Dans la page **Comptes de stockage**, recherchez le compte de stockage que vous utilisez tout au long de ce tutoriel, dont le nom ressemble à **iotedgeandml\<unique suffix\>** .
 
-9. Choisissez le conteneur **ruldata** et cliquez sur **Sélectionner**.
+1. Sélectionnez le conteneur **ruldata** et cliquez sur **Sélectionner**.
 
-10. Cliquez sur **Créer** pour créer le point de terminaison de stockage.
+1. De retour dans la page **Ajouter un point de terminaison de stockage**, sélectionnez **Créer** pour créer le point de terminaison de stockage.
 
-11. Pour la **requête de routage**, entrez la requête suivante :
+1. De retour dans la page **Ajouter une route**, pour la **requête de routage**, remplacez `true` par la requête suivante :
 
     ```sql
     IS_DEFINED($body.PredictedRul) AND NOT IS_DEFINED($body.OperationalSetting1)
     ```
 
-12. Développez la section **Test**, puis la section **Corps du Message**. Remplacez le message par cet exemple des messages que nous espérons :
+1. Développez la section **Test**, puis la section **Corps du Message**. Remplacez le corps du message par cet exemple des messages que nous espérons :
 
     ```json
     {
@@ -637,25 +622,25 @@ Une fois le routeur et le classifieur en place, nous espérons recevoir des mess
     }
     ```
 
-13. Sélectionnez **Tester la route**. Si le test a réussi, vous voyez « Le message correspond à la requête ».
+1. Sélectionnez **Tester la route**. Si le test a réussi, vous voyez « Le message correspond à la requête ».
 
-14. Cliquez sur **Enregistrer**.
+1. Cliquez sur **Enregistrer**.
 
-#### <a name="update-turbofandevicetostorage-route"></a>Mettre à jour la route turbofanDeviceToStorage
+#### <a name="update-turbofandevicedatatostorage-route"></a>Mettre à jour la route turbofanDeviceDataToStorage
 
 Nous ne voulons pas router les nouvelles données de prédiction vers notre ancien emplacement de stockage, par conséquent, mettez à jour la route pour l’éviter.
 
 1. Dans la page **Routage des messages** du hub IoT, sélectionnez l’onglet **Routes**.
 
-2. Sélectionnez **turbofanDeviceDataToStorage** ou le nom que vous avez donné à la route de données initiale de l’appareil.
+1. Sélectionnez **turbofanDeviceDataToStorage** ou le nom que vous avez donné à la route de données initiale de l’appareil.
 
-3. Mettre à jour la requête de routage vers
+1. Mettre à jour la requête de routage vers
 
    ```sql
    IS_DEFINED($body.OperationalSetting1)
    ```
 
-4. Développez la section **Test**, puis la section **Corps du Message**. Remplacez le message par cet exemple des messages que nous espérons :
+1. Développez la section **Test**, puis la section **Corps du Message**. Remplacez le message par cet exemple des messages que nous espérons :
 
    ```json
    {
@@ -689,23 +674,23 @@ Nous ne voulons pas router les nouvelles données de prédiction vers notre anci
    }
    ```
 
-5. Sélectionnez **Tester la route**. Si le test a réussi, vous voyez « Le message correspond à la requête ».
+1. Sélectionnez **Tester la route**. Si le test a réussi, vous voyez « Le message correspond à la requête ».
 
-6. Sélectionnez **Enregistrer**.
+1. Sélectionnez **Enregistrer**.
 
 ### <a name="configure-file-upload"></a>Configurer le chargement de fichiers
 
 Configurez la fonctionnalité de chargement de fichier IoT Hub pour activer le module enregistreur de fichier afin de charger des fichiers dans le stockage.
 
-1. Dans le navigateur de gauche de votre hub IoT, choisissez **Chargement de fichier**.
+1. Dans le menu du volet gauche de votre hub IoT, sous **Messagerie**, choisissez **Chargement de fichiers**.
 
-2. Sélectionnez **Conteneur de stockage Azure**.
+1. Sélectionnez **Conteneur de stockage Azure**.
 
-3. Sélectionnez votre compte de stockage dans la liste.
+1. Sélectionnez votre compte de stockage dans la liste.
 
-4. Sélectionnez le conteneur **uploadturbofanfiles** et cliquez sur **Sélectionner**.
+1. Sélectionnez le conteneur qui commence par **azureml-blobstore** auquel s’ajoute un GUID, et cliquez sur **Sélectionner**.
 
-5. Sélectionnez **Enregistrer**. Le portail vous avertit une fois que l’enregistrement est effectué.
+1. Sélectionnez **Enregistrer**. Le portail vous avertit une fois que l’enregistrement est effectué.
 
 > [!Note]
 > Nous n’activons pas les notifications de chargement pour ce tutoriel, mais consultez [Recevoir une notification de chargement de fichier](../iot-hub/iot-hub-java-java-file-upload.md#receive-a-file-upload-notification) pour plus d’informations sur la gestion des notifications de chargement de fichier.
@@ -740,7 +725,11 @@ Maintenant que nous avons modifié la configuration, nous sommes prêts à gén�
 
 ### <a name="build-and-publish"></a>Générer et publier
 
-1. Dans Visual Studio Code sur votre machine virtuelle de développement, ouvrez une fenêtre de terminal Visual Studio Code et connectez-vous à votre registre de conteneurs.
+1. Sur votre machine virtuelle de développement, démarrez Docker s’il n’est pas en cours d’exécution.
+
+1. Dans Visual Studio Code, démarrez un nouveau terminal à l’aide d’une invite de commandes et connectez-vous à votre registre de conteneurs Azure (ACR).
+
+  Les valeurs requises pour le nom d’utilisateur, le mot de passe et le serveur de connexion sont disponibles dans le portail Azure. Le nom du registre de conteneurs a le format « turbofandemo\<unique id\> ». Dans le menu du volet de gauche, sous **Paramètres**, sélectionnez **Clés d’accès** pour les afficher.
 
    ```cmd
    docker login -u <ACR username> -p <ACR password> <ACR login server>
@@ -752,15 +741,13 @@ Maintenant que nous avons modifié la configuration, nous sommes prêts à gén�
 
 Une fois la build effectuée, nous pouvons utiliser le portail Azure pour passer en revue nos modules publiés.
 
-1. Dans le portail Azure, accédez à votre espace de travail Azure Machine Learning et cliquez sur le lien hypertexte de **Registre**.
+1. Ouvrez Azure Container Registry pour ce tutoriel. Le nom du registre de conteneurs a le format « turbofandemo\<unique id\> ». 
 
-    ![Accédez au registre à partir de l’espace de travail de service Machine Learning](media/tutorial-machine-learning-edge-06-custom-modules/follow-registry-link.png)
+1. Dans le menu du volet de gauche, sous **Services**, sélectionnez **Référentiels**.
 
-2. Dans le navigateur latéral du registre, sélectionnez **Dépôts**.
+1. Notez que les deux modules que vous avez créés, **avrofilewriter** et **turbofanrouter**, apparaissent comme des dépôts.
 
-3. Notez que les deux modules que vous avez créés, **avrofilewriter** et **turbofanrouter**, apparaissent comme des dépôts.
-
-4. Sélectionnez **turbofanrouter** et notez que vous avez publié une image marquée avec 0.0.1-amd64.
+1. Sélectionnez **turbofanrouter** et notez que vous avez publié une image marquée avec 0.0.1-amd64.
 
    ![Voir la première version marquée de turbofanrouter](media/tutorial-machine-learning-edge-06-custom-modules/tagged-image-turbofanrouter-repo.png)
 
@@ -770,13 +757,13 @@ Nous avons généré et configuré les modules dans notre solution, maintenant n
 
 1. Dans Visual Studio Code, cliquez avec le bouton droit sur le fichier **deployment.amd64.json** du dossier config.
 
-2. Choisissez **Créer un déploiement pour un seul appareil**.
+1. Choisissez **Créer un déploiement pour un seul appareil**.
 
-3. Choisissez votre appareil IoT Edge, **aaTurboFanEdgeDevice**.
+1. Choisissez votre appareil IoT Edge, **aaTurboFanEdgeDevice**.
 
-4. Actualisez le panneau des appareils Azure IoT Hub dans l’Explorateur Visual Studio Code. Vous devez voir que les trois nouveaux modules sont déployés, mais pas encore en cours d’exécution.
+1. Actualisez le panneau des appareils Azure IoT Hub dans l’Explorateur Visual Studio Code. Vous devez voir que les trois nouveaux modules sont déployés, mais pas encore en cours d’exécution.
 
-5. Réactualisez au bout de quelques minutes pour voir les modules en cours d’exécution.
+1. Réactualisez au bout de quelques minutes pour voir les modules en cours d’exécution.
 
    ![Voir les modules en cours d’exécution dans Visual Studio Code](media/tutorial-machine-learning-edge-06-custom-modules/view-running-modules-list.png)
 
@@ -795,7 +782,13 @@ Dans cette section, nous partageons quelques techniques pour comprendre ce qui a
 
 ### <a name="diagnosing-from-the-device"></a>Diagnostic de l’appareil
 
-En vous connectant à l’appareil IoT Edge, vous pouvez accéder à une grande partie des informations sur l’état de vos modules. Le mécanisme principal que nous utilisons sont les commandes Docker qui nous permettent d’examiner les conteneurs et les images sur l’appareil.
+En vous connectant à l’appareil IoT Edge (la machine virtuelle Linux dans notre cas), vous pouvez accéder à une grande partie des informations sur l’état de vos modules. Le mécanisme principal que nous utilisons sont les commandes Docker qui nous permettent d’examiner les conteneurs et les images sur l’appareil.
+
+1. Connectez-vous à votre appareil IoT Edge :
+
+   ```bash
+   ssh -l <user>@IoTEdge-<extension>.<region>.cloudapp.azure.com
+   ```
 
 1. Listez les conteneurs en cours d’exécution. Nous espérons voir un conteneur pour chaque module avec un nom qui correspond au module. Par ailleurs, cette commande liste l’image exacte du conteneur, y compris la version. Vous pouvez également lister des images en remplaçant « container » par « image » dans la commande.
 
@@ -803,35 +796,33 @@ En vous connectant à l’appareil IoT Edge, vous pouvez accéder à une grande 
    sudo docker container ls
    ```
 
-2. Obtenez les journaux d’un conteneur. Cette commande génère tout ce qui a été écrit dans StdErr et StdOut dans le conteneur. Cette commande fonctionne pour les conteneurs qui ont démarré et se sont arrêtés pour une raison quelconque. Il est également utile de comprendre ce qui s’est passé avec les conteneurs edgeAgent ou edgeHub.
+1. Obtenez les journaux d’un conteneur. Cette commande génère tout ce qui a été écrit dans StdErr et StdOut dans le conteneur. Cette commande fonctionne pour les conteneurs qui ont démarré et se sont arrêtés pour une raison quelconque. Il est également utile de comprendre ce qui s’est passé avec les conteneurs edgeAgent ou edgeHub.
 
    ```bash
-   sudo docker container logs <container name>
+   sudo docker container logs <container id>
    ```
 
-3. Inspectez un conteneur. Cette commande donne une multitude d’informations sur l’image. Les données peuvent être filtrées selon ce que vous recherchez. Par exemple, si vous voulez vérifier que les liaisons sur avroFileWriter sont correctes, vous pouvez utiliser la commande :
+1. Inspectez un conteneur. Cette commande donne une multitude d’informations sur l’image. Les données peuvent être filtrées selon ce que vous recherchez. Par exemple, si vous voulez vérifier que les liaisons sur avroFileWriter sont correctes, vous pouvez utiliser la commande :
 
    ```bash
    sudo docker container inspect -f "{{ json .Mounts }}" avroFileWriter | python -m json.tool
    ```
 
-4. Connectez-vous à un conteneur en cours d’exécution. Cette commande peut être utile si vous voulez examiner le conteneur pendant son exécution :
+1. Connectez-vous à un conteneur en cours d’exécution. Cette commande peut être utile si vous voulez examiner le conteneur pendant son exécution :
 
    ```bash
    sudo docker exec -it avroFileWriter bash
    ```
 
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Ce tutoriel fait partie d’un ensemble où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans cet article, nous avons créé une solution IoT Edge dans Visual Studio Code avec trois modules, un classifieur, un routeur et un enregistreur/chargeur de fichier. Nous avons configuré des routes pour permettre aux modules de communiquer entre eux sur l’appareil de périphérie, modifié la configuration de l’appareil de périphérie et mis à jour les fichiers Dockerfile pour installer des dépendances et ajouter des montages de liaisons aux conteneurs des modules. Ensuite, nous avons mis à jour la configuration du hub IoT pour router nos messages selon le type et gérer les chargements de fichier. Une fois tous les éléments en place, nous avons déployé les modules sur l’appareil IoT Edge et vérifié que les modules étaient exécutés correctement.
+Dans cet article, nous avons créé une solution IoT Edge dans Visual Studio Code avec trois modules : un classifieur, un routeur et un enregistreur/chargeur de fichier. Nous avons configuré les routes pour permettre aux modules de communiquer entre eux sur l’appareil de périphérie. Nous avons modifié la configuration de l’appareil de périphérie et mis à jour les fichiers Dockerfile pour installer des dépendances et ajouter des montages de liaisons aux conteneurs des modules. 
 
-Des informations supplémentaires sont disponibles dans les pages suivantes :
-
-* [Découvrir comment déployer des modules et établir des routes dans IoT Edge](module-composition.md)
-* [Syntaxe des requêtes de routage des messages IoT Hub](../iot-hub/iot-hub-devguide-routing-query-syntax.md)
-* [Routage des messages IoT Hub : maintenant avec le routage dans le corps du message](https://azure.microsoft.com/blog/iot-hub-message-routing-now-with-routing-on-message-body/)
-* [Chargement de fichiers avec IoT Hub](../iot-hub/iot-hub-devguide-file-upload.md)
-* [Charger des fichiers sur le cloud à partir d’un appareil avec IoT Hub](../iot-hub/iot-hub-python-python-file-upload.md)
+Ensuite, nous avons mis à jour la configuration du hub IoT pour router nos messages selon le type et gérer les chargements de fichier. Une fois tous les éléments en place, nous avons déployé les modules sur l’appareil IoT Edge et vérifié que les modules étaient exécutés correctement.
 
 Passez à l’article suivant pour commencer à envoyer des données et voir votre solution en action.
 

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec ITRP | Microsoft Docs'
 description: Dans ce tutoriel, vous allez découvrir comment configurer l’authentification unique entre Azure Active Directory et ITRP.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: e09716a3-4200-4853-9414-2390e6c10d98
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: jeedes
-ms.openlocfilehash: c4d0f753e23e42b1064fec3f56957dfe97c30ca4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 2dff68f98e2922d5fc7a4fca1e6de8740bc2ae68
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81261191"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "92459677"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-itrp"></a>Tutoriel : Intégration d’Azure Active Directory avec ITRP
 
@@ -31,7 +27,7 @@ Cette intégration offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à ITRP (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure.
 
-Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](../manage-apps/what-is-single-sign-on.md).
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
@@ -98,7 +94,7 @@ Pour configurer l’authentification unique Azure AD avec ITRP, effectuez les é
 
 3. Dans la page **Configurer l’authentification unique avec SAML**, sélectionnez l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base** :
 
-    ![Icône Modifier](common/edit-urls.png)
+    ![Capture d’écran montrant la page Configurer l’authentification unique avec SAML, dans laquelle l’icône Modifier est sélectionnée.](common/edit-urls.png)
 
 4. Dans la boîte de dialogue **Configuration SAML de base**, effectuez les étapes suivantes.
 
@@ -117,7 +113,7 @@ Pour configurer l’authentification unique Azure AD avec ITRP, effectuez les é
 
 5. Dans la section **Certificat de signature SAML**, sélectionnez le bouton **Modifier** pour ouvrir la boîte de dialogue **Certificat de signature SAML** :
 
-    ![Icône Modifier](common/edit-certificate.png)
+    ![Capture d’écran montrant la page Certificat de signature SAML avec l’icône Modifier sélectionnée.](common/edit-certificate.png)
 
 6. Dans la boîte de dialogue **Certificat de signature SAML**, copiez la valeur **Thumbprint** du certificat et enregistrez-la :
 
@@ -147,9 +143,9 @@ Pour configurer l’authentification unique Azure AD avec ITRP, effectuez les é
 
 1. Dans la section de configuration **Single Sign-On**, effectuez les étapes suivantes.
 
-    ![Section Single Sign-On](./media/itrp-tutorial/ic775572.png "Section Single Sign-On")
+    ![Capture d’écran montrant la section Single Sign-On avec l’option Enabled sélectionnée.](./media/itrp-tutorial/ic775572.png "Section Single Sign-On")
 
-    ![Section Single Sign-On](./media/itrp-tutorial/ic775573.png "Section Single Sign-On")
+    ![Capture d’écran montrant la section Single Sign-On dans laquelle vous pouvez ajouter les informations décrites à cette étape](./media/itrp-tutorial/ic775573.png "Section Single Sign-On").
 
     1. Sélectionnez **Enabled**.
 
@@ -179,7 +175,7 @@ Dans cette section, vous allez créer un utilisateur de test appelé Britta Simo
 
     1. Dans la zone **Nom**, entrez **BrittaSimon**.
   
-    1. Dans la zone **Nom d’utilisateur**, entrez **BrittaSimon@\<votre_domaine_d'entreprise>.\<extension>** . (Par exemple, BrittaSimon@contoso.com.)
+    1. Dans la zone **Nom d’utilisateur**, entrez **BrittaSimon@\<yourcompanydomain>.\<extension>** . (Par exemple, BrittaSimon@contoso.com.)
 
     1. Sélectionnez **Afficher le mot de passe**, puis notez la valeur affichée dans la zone **Mot de passe**.
 
@@ -246,12 +242,12 @@ Pour créer un compte d’utilisateur, procédez comme suit :
 
 Vous devez maintenant tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous sélectionnez la vignette ITRP dans le volet d’accès, vous devez être connecté automatiquement à l’instance ITRP pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le volet d’accès, consultez [Accéder aux applications du portail Mes applications et les utiliser](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette ITRP dans le volet d’accès, vous devez être connecté automatiquement à l’instance ITRP pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le volet d’accès, consultez [Accéder aux applications du portail Mes applications et les utiliser](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

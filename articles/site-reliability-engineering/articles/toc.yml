@@ -3,5 +3,7 @@
 - name: Forum Aux Questions (FAQ)
   expanded: true
   items:
+    - name: SRE et codage
+      href: code.md
     - name: SRE et DevOps
       href: devops.md

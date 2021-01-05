@@ -1,18 +1,18 @@
 ---
 title: Démarrage rapide - Créer une zone Azure DNS privée avec Azure PowerShell
-description: Dans cet article, vous pourrez créer et tester une zone DNS privée et faire un enregistrement dans Azure DNS. Il s’agit d’un guide pas à pas pour la création et la gestion de votre première zone privée DNS et de votre premier enregistrement à l’aide d’Azure PowerShell.
+description: Dans ce guide de démarrage rapide, vous allez découvrir comment créer et gérer votre première zone privée DNS et votre premier enregistrement à l’aide d’Azure PowerShell.
 services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: quickstart
-ms.date: 10/05/2019
+ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: 0db53bcd6516bd52e2796deaa49fe0dd582e0588
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: ee6dde6b34cccd415f9bf2052f65dcbe940715c1
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76939389"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92424388"
 ---
 # <a name="quickstart-create-an-azure-private-dns-zone-using-azure-powershell"></a>Démarrage rapide : Créer une zone Azure DNS privée avec Azure PowerShell
 
@@ -22,19 +22,13 @@ Cet article vous indique la procédure à suivre pour créer votre premier enreg
 
 Une zone DNS permet d’héberger les enregistrements DNS d’un domaine particulier. Pour commencer à héberger votre domaine dans le DNS Azure, vous devez créer une zone DNS pour ce nom de domaine. Chaque enregistrement DNS pour votre domaine est ensuite créé à l’intérieur de cette zone DNS. Pour publier une zone DNS privée sur votre réseau virtuel, vous spécifiez la liste des réseaux virtuels qui sont autorisés à résoudre les enregistrements dans la zone.  On les appelle réseaux virtuels *liés*. Quand l’inscription automatique est activée, Azure DNS met également à jour les enregistrements de zone chaque fois qu’une machine virtuelle est créée, change d’adresse IP ou est supprimée.
 
-Dans cet article, vous apprendrez comment :
-
-> [!div class="checklist"]
-> * Créer une zone DNS privée
-> * Créer des machines virtuelles de test
-> * Créer un enregistrement DNS supplémentaire
-> * Tester la zone privée
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 Si vous préférez, vous pouvez suivre ce guide de démarrage rapide en utilisant [Azure CLI](private-dns-getstarted-cli.md).
+
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
 ## <a name="create-the-resource-group"></a>Créer le groupe de ressources
 
@@ -48,7 +42,7 @@ New-AzResourceGroup -name MyAzureResourceGroup -location "eastus"
 
 Une zone DNS est créée à l’aide de l’applet de commande `New-AzPrivateDnsZone` .
 
-L’exemple suivant crée un réseau virtuel nommé **myAzureVNet**. Il crée ensuite une zone DNS nommée **private.contoso.com** dans le groupe de ressources **MyAzureResourceGroup**, puis il lie la zone DNS au réseau virtuel **MyAzureVnet** et active l’inscription automatique.
+L’exemple suivant crée un réseau virtuel nommé **myAzureVNet**. Il crée ensuite une zone DNS nommée **private.contoso.com** dans le groupe de ressources **MyAzureResourceGroup** , puis il lie la zone DNS au réseau virtuel **MyAzureVnet** et active l’inscription automatique.
 
 ```azurepowershell
 Install-Module -Name Az.PrivateDns -force
@@ -114,7 +108,7 @@ L’exécution de cette opération nécessite quelques minutes.
 
 ## <a name="create-an-additional-dns-record"></a>Créer un enregistrement DNS supplémentaire
 
-Vous pouvez utiliser l’applet de commande `New-AzPrivateDnsRecordSet` pour créer des jeux d’enregistrements. L’exemple suivant crée un enregistrement avec le nom relatif **db** dans la zone DNS **private.contoso.com**, dans le groupe de ressources **MyAzureResourceGroup**. Le nom complet du jeu d’enregistrements est **db.private.contoso.com**. Le type d’enregistrement est « A », avec l’adresse IP « 10.2.0.4 », et la durée de vie est de 3600secondes.
+Vous pouvez utiliser l’applet de commande `New-AzPrivateDnsRecordSet` pour créer des jeux d’enregistrements. L’exemple suivant crée un enregistrement avec le nom relatif **db** dans la zone DNS **private.contoso.com** , dans le groupe de ressources **MyAzureResourceGroup**. Le nom complet du jeu d’enregistrements est **db.private.contoso.com**. Le type d’enregistrement est « A », avec l’adresse IP « 10.2.0.4 », et la durée de vie est de 3600secondes.
 
 ```azurepowershell
 New-AzPrivateDnsRecordSet -Name db -RecordType A -ZoneName private.contoso.com `
@@ -155,7 +149,7 @@ Répétez l’opération pour myVM02.
    ping myVM01.private.contoso.com
    ```
 
-   La sortie doit ressembler à cela :
+   La sortie doit ressembler à ceci :
 
    ```
    PS C:\> ping myvm01.private.contoso.com
@@ -179,7 +173,7 @@ Répétez l’opération pour myVM02.
    ping db.private.contoso.com
    ```
 
-   La sortie doit ressembler à cela :
+   La sortie doit ressembler à ceci :
 
    ```
    PS C:\> ping db.private.contoso.com
@@ -197,7 +191,7 @@ Répétez l’opération pour myVM02.
    PS C:\>
    ```
 
-## <a name="delete-all-resources"></a>Supprimer toutes les ressources
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Lorsque vous n’en avez plus besoin, supprimez le groupe de ressources **MyAzureResourceGroup** pour supprimer les ressources créées dans cet article.
 

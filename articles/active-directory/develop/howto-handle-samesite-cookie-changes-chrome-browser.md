@@ -8,17 +8,17 @@ manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/27/2020
 ms.author: jmprieur
 ms.reviewer: kkrishna
 ms.custom: aaddev
-ms.openlocfilehash: f28d3722d56582bd925d31b43b4a0219bca2ae30
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.openlocfilehash: 30c4f054259aa7c3f2a9fdfaeeadd64f26dd9bea
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81534599"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444909"
 ---
 # <a name="handle-samesite-cookie-changes-in-chrome-browser"></a>Gérer les changements de cookie SameSite dans le navigateur Chrome
 
@@ -26,7 +26,7 @@ ms.locfileid: "81534599"
 
 `SameSite` est une propriété qui peut être définie dans les cookies HTTP pour empêcher les attaques de falsification de requête intersites (CSRF) dans les applications web :
 
-- Lorsque `SameSite` est défini sur **Lax**, le cookie est envoyé dans les requêtes au sein du même site et dans les requêtes GET d’autres sites. Il n’est pas envoyé dans les requêtes GET qui sont interdomaines.
+- Lorsque `SameSite` est défini sur **Lax** , le cookie est envoyé dans les requêtes au sein du même site et dans les requêtes GET d’autres sites. Il n’est pas envoyé dans les requêtes GET qui sont interdomaines.
 - La valeur **Strict** garantit que le cookie est envoyé dans des requêtes uniquement au sein du même site.
 
 Par défaut, la valeur `SameSite` n’est PAS définie dans les navigateurs et c’est la raison pour laquelle il n’existe aucune restriction sur les cookies envoyés dans les requêtes. Une application doit s’abonner à la protection CSRF en paramétrant **Lax** ou **Strict** selon leurs exigences.
@@ -35,7 +35,7 @@ Par défaut, la valeur `SameSite` n’est PAS définie dans les navigateurs et c
 
 De récentes [mises à jour des normes sur SameSite](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00) proposent de protéger les applications en définissant le comportement par défaut de `SameSite` sur l’absence de valeur définie sur Lax. Cette atténuation signifie que les cookies seront restreints sur les requêtes HTTP, à l’exception des requêtes GET provenant d’autres sites. En outre, une valeur **None** est introduite pour supprimer les restrictions concernant les cookies envoyés. Ces mises à jour seront bientôt publiées dans une prochaine version du navigateur Chrome.
 
-Lorsque les applications web s’authentifient auprès de la plateforme Microsoft Identity à l’aide du mode de réponse « form_post », le serveur de connexion répond à l’application à l’aide d’une requête HTTP POST pour envoyer les jetons ou le code d’authentification. Étant donné que cette requête est une requête interdomaine (de `login.microsoftonline.com` à votre domaine, par exemple `https://contoso.com/auth`), les cookies qui ont été définis par votre application sont désormais soumis aux nouvelles règles de Chrome. Les cookies qui doivent être utilisés dans les scénarios intersites sont des cookies qui contiennent les valeurs *état* et *nonce*, qui sont également envoyées dans la requête de connexion. D’autres cookies sont déposés par Azure AD pour maintenir la session.
+Lorsque les applications web s’authentifient auprès de la plateforme Microsoft Identity à l’aide du mode de réponse « form_post », le serveur de connexion répond à l’application à l’aide d’une requête HTTP POST pour envoyer les jetons ou le code d’authentification. Étant donné que cette requête est une requête interdomaine (de `login.microsoftonline.com` à votre domaine, par exemple `https://contoso.com/auth`), les cookies qui ont été définis par votre application sont désormais soumis aux nouvelles règles de Chrome. Les cookies qui doivent être utilisés dans les scénarios intersites sont des cookies qui contiennent les valeurs *état* et *nonce* , qui sont également envoyées dans la requête de connexion. D’autres cookies sont déposés par Azure AD pour maintenir la session.
 
 Si vous ne mettez pas à jour vos applications web, ce nouveau comportement entraînera des échecs d’authentification.
 
@@ -59,7 +59,7 @@ Le tableau ci-dessous présente les demandes de tirage (pull request) qui ont co
 
 Pour plus d’informations sur la gestion des cookies SameSite dans ASP.NET et ASP.NET Core, consultez également :
 
-- [Utiliser des cookies SameSite dans ASP.NET Core](https://docs.microsoft.com/aspnet/core/security/samesite).
+- [Utiliser des cookies SameSite dans ASP.NET Core](/aspnet/core/security/samesite).
 - [Blog ASP.NET concernant SameSite](https://devblogs.microsoft.com/aspnet/upcoming-samesite-cookie-changes-in-asp-net-and-asp-net-core/)
 
 # <a name="python"></a>[Python](#tab/python)
@@ -81,11 +81,8 @@ Pour plus d’informations sur la gestion des cookies SameSite dans ASP.NET et A
 
 En savoir plus sur SameSite et le scénario des applications web :
 
-> [!div class="nextstepaction"]
-> [FAQ de Google Chrome sur SameSite](https://www.chromium.org/updates/same-site/faq)
+- [FAQ de Google Chrome sur SameSite](https://www.chromium.org/updates/same-site/faq)
 
-> [!div class="nextstepaction"]
-> [Page SameSite de Chromium](https://www.chromium.org/updates/same-site)
+- [Page SameSite de Chromium](https://www.chromium.org/updates/same-site)
 
-> [!div class="nextstepaction"]
-> [Scénario : application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md)
+- [Scénario : application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md)

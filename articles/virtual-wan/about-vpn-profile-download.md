@@ -4,15 +4,15 @@ description: Cela vous aide à utiliser le fichier de profil client.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
-ms.topic: article
-ms.date: 03/18/2020
+ms.topic: how-to
+ms.date: 09/22/2020
 ms.author: cherylmc
-ms.openlocfilehash: b88be5cccdaeb452288a2cb2f1dd4b4690a8b274
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 116ec518f7788e620fc6bd177e535c8f6af99d10
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80066208"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91267769"
 ---
 # <a name="working-with-user-vpn-client-profiles"></a>Utilisation de profils clients VPN utilisateurs
 

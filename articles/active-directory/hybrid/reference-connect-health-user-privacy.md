@@ -15,12 +15,12 @@ ms.topic: reference
 ms.date: 04/26/2018
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 58cddcde71e6e86b9abe07eb4200f13ad55ea659
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 58ecdfefa79716bcc0a69063293d5a1067693a78
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227833"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89182358"
 ---
 # <a name="user-privacy-and-azure-ad-connect-health"></a>Confidentialité des utilisateurs et Azure AD Connect Health 
 
@@ -41,7 +41,7 @@ Les serveurs sur lesquels il existe des alertes d'**erreur** **Les données du S
 Azure AD Connect Health vous permet d’arrêter la collecte des données pour chaque serveur surveillé ou pour une instance d’un service surveillé. Par exemple, vous pouvez arrêter la collecte des données pour chaque serveur ADFS qui est surveillé à l’aide d’Azure AD Connect Health. Vous pouvez également arrêter la collecte de données pour l’intégralité d’une instance ADFS qui est surveillée par Azure AD Connect Health. Dans ce cas, les serveurs correspondants sont supprimés du portail Azure AD Connect Health, après l’arrêt de la collecte de données. 
 
 >[!IMPORTANT]
-> Pour supprimer les serveurs surveillés d’Azure AD Connect Health, vous devez disposer de privilèges d’administrateur général Azure AD ou du rôle Contributeur dans RBAC.
+> Pour supprimer les serveurs surveillés d’Azure AD Connect Health, vous devez disposer de privilèges d’administrateur général Azure AD ou du rôle Contributeur dans Azure RBAC.
 >
 > La suppression d’un serveur ou d’une instance de service d’Azure AD Connect Health est une action irréversible. 
 

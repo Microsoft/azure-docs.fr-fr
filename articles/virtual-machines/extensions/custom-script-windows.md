@@ -5,17 +5,18 @@ services: virtual-machines-windows
 manager: carmonm
 author: bobbytreed
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 05/02/2019
+ms.date: 08/31/2020
 ms.author: robreed
-ms.openlocfilehash: 2c7cad2dfdcd55073a1cf09d79e5223b666ced5f
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 8d11ff6eaab8ed6a13c3c2aa1b712cc57e7825ea
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478155"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94960969"
 ---
 # <a name="custom-script-extension-for-windows"></a>Extension de script personnalisé pour Windows
 
@@ -30,7 +31,17 @@ Ce document explique en détail l’utilisation de l’extension de script perso
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-L’extension de script personnalisé pour Windows s’exécute sur les systèmes d’exploitation pris en charge par l’extension. Pour plus d’informations, consultez les [systèmes d’exploitation pris en charge par l’extension Azure](https://support.microsoft.com/help/4078134/azure-extension-supported-operating-systems).
+L’extension de script personnalisé pour Windows s’exécute sur les systèmes d’exploitation pris en charge par l’extension.
+### <a name="windows"></a>Windows
+
+* Windows Server 2008 R2
+* Windows Server 2012
+* Windows Server 2012 R2
+* Windows 10
+* Windows Server 2016
+* Windows Server 2016 Core
+* Windows Server 2019
+* Windows Server 2019 Core
 
 ### <a name="script-location"></a>Emplacement du script
 
@@ -38,7 +49,7 @@ L’extension vous permet d’utiliser vos informations d’identification de St
 
 ### <a name="internet-connectivity"></a>Connectivité Internet
 
-Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du Stockage Azure, vous devez ouvrir des ports de pare-feu et de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](../../virtual-network/security-overview.md#service-tags).
+Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du Stockage Azure, vous devez ouvrir des ports de pare-feu et de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](../../virtual-network/network-security-groups-overview.md#service-tags).
 
 Si votre script se trouve sur un serveur local, vous devrez peut-être encore ouvrir des ports de pare-feu et de groupe de sécurité réseau supplémentaires.
 
@@ -50,12 +61,14 @@ Si votre script se trouve sur un serveur local, vous devrez peut-être encore ou
 * L’exécution du script est autorisée pendant 90 minutes. Toute exécution d’une durée supérieure entraîne l’échec du provisionnement de l’extension.
 * Ne placez pas de redémarrage dans le script. Cette action provoque des problèmes avec les autres extensions qui sont en cours d’installation. Après le redémarrage, l’extension ne continuera pas.
 * Si vous avez un script qui entraîne un redémarrage, installe des applications puis exécute des scripts, vous pouvez planifier le redémarrage à l’aide d’une tâche planifiée Windows, ou utiliser des outils tels que les extensions DSC, Chef ou Puppet.
+* Il n’est pas recommandé d’exécuter un script qui provoquera l’arrêt ou la mise à jour de l’agent de machine virtuelle. Cela peut maintenir l’extension dans un état de transition, ce qui entraîne l’expiration du délai d’attente.
 * L’extension n’exécute un script qu’une seule fois. Si vous voulez exécuter un script à chaque démarrage, vous devez utiliser l’extension pour créer une tâche planifiée Windows.
 * Si vous souhaitez planifier le moment de l’exécution d’un script, vous devez utiliser l’extension pour créer une tâche planifiée Windows.
 * Lors de l’exécution du script, vous voyez seulement l’état de l’extension « transition en cours » dans le portail Azure ou l’interface Azure CLI. Si vous souhaitez que les mises à jour de l’état d’un script en cours d’exécution soient plus fréquentes, vous devez créer votre propre solution.
 * L’extension de script personnalisé ne prend pas en charge les serveurs proxy en mode natif, mais vous pouvez utiliser un outil de transfert de fichiers prenant en charge les serveurs proxy dans votre script, par exemple *Curl*.
 * Tenez compte des emplacements de répertoire autres que par défaut, et qui sont susceptibles d’être utilisés pour vos scripts ou commandes. Gérez cette situation de façon logique.
 * L’extension de script personnalisé s’exécutera sous le compte LocalSystem
+* Si vous prévoyez d’utiliser les propriétés *storageAccountName* et *storageAccountKey*, celles-ci doivent être colocalisées dans *protectedSettings*.
 
 ## <a name="extension-schema"></a>Schéma d’extensions
 
@@ -133,7 +146,7 @@ Ces éléments doivent être traités comme des données sensibles et spécifié
 * `timestamp` : (facultatif, entier 32 bits) utilisez ce champ uniquement pour déclencher la réexécution du script en modifiant la valeur de ce champ.  Toutes les valeurs sont autorisées pour l’entier. Cette valeur doit uniquement être différente de la valeur précédente.
 * `storageAccountName` : (facultatif, chaîne) nom du compte de stockage. Si vous spécifiez des informations d’identification de stockage, toutes les propriétés `fileUris` doivent être des URL d’objets blob Azure.
 * `storageAccountKey` : (facultatif, chaîne) clé d’accès du compte de stockage
-* `managedIdentity` : (facultatif, objet JSON) [identité managée](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) pour le téléchargement de fichiers
+* `managedIdentity` : (facultatif, objet JSON) [identité managée](../../active-directory/managed-identities-azure-resources/overview.md) pour le téléchargement de fichiers
   * `clientId` : (facultatif, chaîne) ID de client de l’identité managée
   * `objectId` : (facultatif, chaîne) ID d’objet de l’identité managée
 
@@ -149,9 +162,9 @@ Les paramètres publics sont envoyés en texte clair à la machine virtuelle sur
 > [!NOTE]
 > Cette propriété **doit** uniquement être spécifiée dans les paramètres protégés.
 
-CustomScript (versions 1.10 et ultérieures) prend en charge l’[identité managée](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) pour télécharger des fichiers à partir des URL fournies dans le paramètre « fileUris ». Il permet à CustomScript d’accéder aux objets blob/conteneurs privés de Stockage Azure sans que l’utilisateur doive passer des secrets comme des jetons SAS ou des clés de compte de stockage.
+CustomScript (versions 1.10 et ultérieures) prend en charge l’[identité managée](../../active-directory/managed-identities-azure-resources/overview.md) pour télécharger des fichiers à partir des URL fournies dans le paramètre « fileUris ». Il permet à CustomScript d’accéder aux objets blob/conteneurs privés de Stockage Azure sans que l’utilisateur doive passer des secrets comme des jetons SAS ou des clés de compte de stockage.
 
-Pour utiliser cette fonctionnalité, l’utilisateur doit ajouter une identité [attribuée par le système](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet#add-a-system-assigned-identity) ou [attribuée par l’utilisateur](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet#add-a-user-assigned-identity) à la machine virtuelle ou au groupe de machines virtuelles identiques où CustomScript doit s’exécuter, et [accorder l’accès à l’identité managée au conteneur ou à l’objet blob de Stockage Azure](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/tutorial-vm-windows-access-storage#grant-access).
+Pour utiliser cette fonctionnalité, l’utilisateur doit ajouter une identité [attribuée par le système](../../app-service/overview-managed-identity.md?tabs=dotnet#add-a-system-assigned-identity) ou [attribuée par l’utilisateur](../../app-service/overview-managed-identity.md?tabs=dotnet#add-a-user-assigned-identity) à la machine virtuelle ou au groupe de machines virtuelles identiques où CustomScript doit s’exécuter, et [accorder l’accès à l’identité managée au conteneur ou à l’objet blob de Stockage Azure](../../active-directory/managed-identities-azure-resources/tutorial-vm-windows-access-storage.md#grant-access).
 
 Pour utiliser l’identité attribuée par le système sur la machine virtuelle/groupe de machines virtuelles identiques cible, définissez le champ « managedidentity » sur un objet JSON vide. 
 
@@ -272,7 +285,7 @@ The response content cannot be parsed because the Internet Explorer engine is no
 ```
 ## <a name="virtual-machine-scale-sets"></a>Virtual Machine Scale Sets
 
-Pour déployer l’extension de script personnalisé sur un groupe identique, consultez [Add-AzVmssExtension](https://docs.microsoft.com/powershell/module/az.compute/add-azvmssextension?view=azps-3.3.0).
+Pour déployer l’extension de script personnalisé sur un groupe identique, consultez [Add-AzVmssExtension](/powershell/module/az.compute/add-azvmssextension?view=azps-3.3.0).
 
 ## <a name="classic-vms"></a>les machines virtuelles Classic,
 
@@ -290,7 +303,7 @@ Dans la page **Installer l’extension**, sélectionnez le fichier PowerShell lo
 
 ### <a name="powershell"></a>PowerShell
 
-Utilisez la cmdlet [Set-AzureVMCustomScriptExtension](/powershell/module/servicemanagement/azure/set-azurevmcustomscriptextension) pour ajouter l’extension de script personnalisé sur une machine virtuelle existante.
+Utilisez la cmdlet [Set-AzureVMCustomScriptExtension](/powershell/module/servicemanagement/azure.service/set-azurevmcustomscriptextension) pour ajouter l’extension de script personnalisé sur une machine virtuelle existante.
 
 ```powershell
 # define your file URI

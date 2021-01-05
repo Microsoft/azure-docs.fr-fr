@@ -10,12 +10,13 @@ ms.devlang: powershell
 ms.topic: sample
 ms.date: 12/04/2019
 ms.author: tamram
-ms.openlocfilehash: 52ebed3de093f15d8188ee5fec49d75d5a4a206d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 7d8585b5d05012ab2aff2580d41fecf6423b509c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80060805"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89070426"
 ---
 # <a name="rotate-storage-account-access-keys-with-powershell"></a>Passer d’une clé d’accès au compte de stockage à une autre avec PowerShell
 
@@ -51,6 +52,6 @@ Ce script utilise les commandes suivantes pour créer le compte de stockage, ré
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples de scripts PowerShell de stockage supplémentaires dans les [exemples PowerShell pour le stockage d’objets blob Azure](../blobs/storage-samples-blobs-powershell.md).

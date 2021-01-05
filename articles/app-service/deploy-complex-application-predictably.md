@@ -5,12 +5,12 @@ ms.assetid: bb51e565-e462-4c60-929a-2ff90121f41d
 ms.topic: article
 ms.date: 01/06/2016
 ms.custom: seodec18
-ms.openlocfilehash: 62d0bf776b2d0c97d95b992ed6a1fd2a356e467a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6c45d2da8658740b5e5e7e3dceb7478ea28d712c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75967390"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88962024"
 ---
 # <a name="provision-and-deploy-microservices-predictably-in-azure"></a>Mise en service et déploiement de microservices de manière prévisible dans Azure
 Ce didacticiel explique comment mettre en service et déployer une application composée de [microservices](https://en.wikipedia.org/wiki/Microservices) dans [Azure App Service](https://azure.microsoft.com/services/app-service/) sous la forme d'une unité unique et de manière prévisible, à l'aide de modèles de groupe de ressources JSON et des scripts PowerShell. 
@@ -29,7 +29,7 @@ Dans ce didacticiel, vous allez déployer une application incluant les élément
 Dans ce didacticiel, vous allez utiliser les outils suivants. Dans la mesure où il ne s’agit pas d’une discussion complète sur les outils, je vais opter pour le scénario de bout en bout : je vais vous présenter chacun d’eux et vous indiquer à quel emplacement vous pouvez trouver davantage d’informations le concernant. 
 
 ### <a name="azure-resource-manager-templates-json"></a>Modèles Microsoft Azure Resource Manager (JSON)
-Chaque fois que vous créez une application dans Microsoft Azure App Service, par exemple, Microsoft Azure Resource Manager utilise un modèle JSON pour créer le groupe de ressources dans son ensemble, avec les ressources des composants. Un modèle complexe sur la [Place de marché Azure](/azure/marketplace) peut inclure la base de données, les comptes de stockage, le plan App Service, l’application elle-même, les règles relatives aux alertes, les paramètres d’application et de mise à l’échelle automatique, etc. Tous ces modèles sont à votre disposition, par le biais de PowerShell. Pour en savoir plus sur les modèles Microsoft Azure Resource Manager, voir [Création de modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md)
+Chaque fois que vous créez une application dans Microsoft Azure App Service, par exemple, Microsoft Azure Resource Manager utilise un modèle JSON pour créer le groupe de ressources dans son ensemble, avec les ressources des composants. Un modèle complexe sur la [Place de marché Azure](../marketplace/index.yml) peut inclure la base de données, les comptes de stockage, le plan App Service, l’application elle-même, les règles relatives aux alertes, les paramètres d’application et de mise à l’échelle automatique, etc. Tous ces modèles sont à votre disposition, par le biais de PowerShell. Pour en savoir plus sur les modèles Microsoft Azure Resource Manager, voir [Création de modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md)
 
 ### <a name="azure-sdk-26-for-visual-studio"></a>Kit de développement logiciel (SDK) Microsoft Azure version 2.6 pour Visual Studio
 Le Kit de développement logiciel (SDK) le plus récent contient des améliorations portant sur la prise en charge des modèles Resource Manager dans l’éditeur JSON. Vous pouvez utiliser ce Kit pour créer rapidement un modèle de groupe de ressources à partir de zéro, ou ouvrir un modèle JSON existant (comme un modèle de galerie téléchargé) à des fins de modification, pour remplir le fichier de paramètres, voire pour déployer le groupe de ressources directement à partir d’une solution de groupe de ressources Microsoft Azure.
@@ -39,7 +39,7 @@ Pour en savoir plus, voir [Kit de développement logiciel (SDK) Microsoft Azur
 ### <a name="azure-powershell-080-or-later"></a>Microsoft Azure PowerShell 0.8.0 ou plus
 Depuis la version 0.8.0, l’installation de Microsoft Azure PowerShell inclut le module Microsoft Azure Resource Manager en plus du module Microsoft Azure. Ce nouveau module vous permet de créer un script pour le déploiement des groupes de ressources.
 
-Pour en savoir plus, voir [Utilisation d’Azure PowerShell avec le Gestionnaire de ressources Azure](../powershell-azure-resource-manager.md)
+Pour en savoir plus, voir [Utilisation d’Azure PowerShell avec le Gestionnaire de ressources Azure](../azure-resource-manager/management/manage-resources-powershell.md)
 
 ### <a name="azure-resource-explorer"></a>Azure Resource Explorer
 Cela [outil Aperçu](https://resources.azure.com) vous permet d’explorer les définitions JSON de tous les groupes de ressources dans votre abonnement et les ressources individuelles. Dans cet outil, vous pouvez modifier les définitions  JSON d’une ressource, supprimer une hiérarchie entière de ressources et créer des ressources.  Les informations proposées dans cet outil sont très utiles pour créer des modèles. En effet, elles vous indiquent quelles propriétés vous devez définir pour un type de ressource spécifique, ainsi que les valeurs correctes, etc. Vous pouvez même créer le groupe de ressources dans le [portail Azure](https://portal.azure.com/), puis inspecter ses définitions JSON dans l’outil d’exploration, afin de pouvoir créer des modèles pour le groupe de ressources.
@@ -54,19 +54,19 @@ Si vous utilisez GitHub pour contrôler le code source, vous pouvez placer un [b
 2. Dans le fichier readme.md, cliquez sur **Déployer dans Azure**.
 3. Vous êtes redirigé vers le site [deploy-to-azure](https://deploy.azure.com) et invité à saisir des paramètres de déploiement. Vous pouvez constater que la plupart des champs sont remplis pour vous, avec le nom du référentiel et certaines chaînes aléatoires. Vous pouvez modifier tous les champs que vous souhaitez, mais les seuls éléments que vous devez saisir sont l’identifiant de connexion et le mot de passe d’administration SQL Server. Ensuite, cliquez sur **Suivant**.
    
-   ![](./media/app-service-deploy-complex-application-predictably/gettemplate-1-deploybuttonui.png)
+   ![Montre les paramètres de déploiement d’entrée sur le site deploy-to-azure.](./media/app-service-deploy-complex-application-predictably/gettemplate-1-deploybuttonui.png)
 4. Ensuite, cliquez sur **Déployer** pour démarrer le processus de déploiement. Une fois le processus terminé, cliquez sur le lien http://todoapp*XXXX*.azurewebsites.net pour accéder à l’application déployée. 
    
-   ![](./media/app-service-deploy-complex-application-predictably/gettemplate-2-deployprogress.png)
+   ![Montre le processus de déploiement de votre application.](./media/app-service-deploy-complex-application-predictably/gettemplate-2-deployprogress.png)
    
    Il se peut que l’interface utilisateur soit un peu lente lorsque vous y accédez pour la première fois, car les applications sont en plein démarrage. Cependant, n’ayez aucune crainte : il s’agit d’une application entièrement opérationnelle.
 5. Dans la page Déployer, cliquez sur le lien **Gérer** pour afficher la nouvelle application dans le portail Azure.
 6. Dans la liste déroulante **Essentials** , cliquez sur le lien du groupe de ressources. Vous pouvez également voir que l’application est déjà connectée au référentiel GitHub, sous **Projet externe**. 
    
-   ![](./media/app-service-deploy-complex-application-predictably/gettemplate-3-portalresourcegroup.png)
+   ![Montre le lien du groupe de ressources dans la section de la liste déroulante Essentials.](./media/app-service-deploy-complex-application-predictably/gettemplate-3-portalresourcegroup.png)
 7. Dans le volet du groupe de ressources, notez que ce dernier inclut déjà deux applications et une base de données SQL.
    
-   ![](./media/app-service-deploy-complex-application-predictably/gettemplate-4-portalresourcegroupclicked.png)
+   ![Montre les ressources disponibles dans votre groupe de ressources.](./media/app-service-deploy-complex-application-predictably/gettemplate-4-portalresourcegroupclicked.png)
 
 Comme vous avez pu le constater, en quelques minutes, deux applications de microservices ont été entièrement déployées, avec l'ensemble de leurs composants, dépendances, paramètres et bases de données, ainsi que la publication en continue, configurés par l'orchestration automatisée de Microsoft Azure Resource Manager. Tout cela a été possible grâce à deux éléments :
 
@@ -80,10 +80,10 @@ Examinons à présent la configuration du référentiel GitHub. Vous allez à pr
 
 1. Clonez le référentiel [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) via votre outil git favori. Dans la capture d’écran ci-dessous, vous pouvez voir que j’utilise l’outil Team Explorer de Visual Studio 2013.
    
-   ![](./media/app-service-deploy-complex-application-predictably/examinejson-1-vsclone.png)
+   ![Montre comment utiliser un outil git pour cloner le dépôt ToDoApp.](./media/app-service-deploy-complex-application-predictably/examinejson-1-vsclone.png)
 2. À partir de la racine du référentiel, ouvrez le fichier azuredeploy.json dans Visual Studio. Si vous ne voyez pas apparaître le volet du plan JSON, vous devez installer le Kit de développement logiciel (SDK) Microsoft Azure .NET.
    
-   ![](./media/app-service-deploy-complex-application-predictably/examinejson-2-vsjsoneditor.png)
+   ![Montre le volet Structure JSON de Visual Studio.](./media/app-service-deploy-complex-application-predictably/examinejson-2-vsjsoneditor.png)
 
 Je ne vais pas décrire tous les détails du format JSON ; cependant, la section [Autres ressources](#resources) présente des liens permettant d’apprendre le langage de modèle du groupe de ressources. Ici, je vais juste vous montrer des fonctionnalités intéressantes, qui peuvent vous aider à vous lancer dans la création de votre propre modèle personnalisé pour le déploiement de l’application.
 
@@ -96,7 +96,7 @@ Dans le nœud de ressources, vous pouvez voir que 4 ressources de niveau supér
 #### <a name="app-service-plan"></a>Plan App Service
 Commençons par une simple ressource de niveau racine dans le JSON. Dans le plan JSON, cliquez sur le plan App Service appelé **[hostingPlanName]** pour mettre en surbrillance le code JSON correspondant. 
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-3-appserviceplan.png)
+![Montre la section [hostingPlanName] du code JSON.](./media/app-service-deploy-complex-application-predictably/examinejson-3-appserviceplan.png)
 
 Notez que l’élément `type` spécifie la chaîne pour un plan App Service (appelé « ferme de serveurs » dans les temps anciens) ; d’autres éléments et propriétés sont remplis au moyen des paramètres définis dans le fichier JSON, et cette ressource n’inclut aucune ressource imbriquée.
 
@@ -108,7 +108,7 @@ Notez que l’élément `type` spécifie la chaîne pour un plan App Service (a
 #### <a name="sql-server"></a>SQL Server
 Ensuite, cliquez sur la ressource SQL Server appelée **SQLServer** dans le plan JSON.
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-4-sqlserver.png)
+![Montre la ressource SQL Server appelée SQLServer dans Structure JSON.](./media/app-service-deploy-complex-application-predictably/examinejson-4-sqlserver.png)
 
 Notez les éléments suivants concernant le code JSON en surbrillance :
 
@@ -128,12 +128,12 @@ Notez les éléments suivants concernant le code JSON en surbrillance :
 ##### <a name="root-resource"></a>Ressource racine
 L’application dépend de deux ressources différentes. Cela signifie que le logiciel Microsoft Azure Resource Manager génère l’application uniquement après la création du plan App Service et de l’instance SQL Server.
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-5-webapproot.png)
+![Montre les dépendances de l’application dans le plan App Service et l’instance SQL Server.](./media/app-service-deploy-complex-application-predictably/examinejson-5-webapproot.png)
 
 ##### <a name="app-settings"></a>Paramètres de l’application
 Les paramètres d’application sont également définis en tant que ressource imbriquée.
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-6-webappsettings.png)
+![Montre les paramètres de l’application définis sous forme de ressource imbriquée dans le code JSON.](./media/app-service-deploy-complex-application-predictably/examinejson-6-webappsettings.png)
 
 Dans l’élément `properties` de `config/appsettings`, vous disposez de deux paramètres d’application au format `"<name>" : "<value>"`.
 
@@ -143,7 +143,7 @@ Dans l’élément `properties` de `config/appsettings`, vous disposez de deux p
 ##### <a name="connection-strings"></a>Chaînes de connexion
 Les chaînes de connexion sont également définies en tant que ressource imbriquée.
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-7-webappconnstr.png)
+![Montre comment les chaînes de connexion sont définies en tant que ressource imbriquée dans le code JSON.](./media/app-service-deploy-complex-application-predictably/examinejson-7-webappconnstr.png)
 
 Dans l’élément `properties` relatif à `config/connectionstrings`, chaque chaîne de connexion est définie comme une paire nom:valeur, avec le format spécifique de l’élément `"<name>" : {"value": "…", "type": "…"}`. Pour l’élément `type`, les valeurs possibles sont les suivantes : `MySql`, `SQLServer`, `SQLAzure` et `Custom`.
 
@@ -155,7 +155,7 @@ Dans l’élément `properties` relatif à `config/connectionstrings`, chaque ch
 ##### <a name="source-control"></a>Contrôle de code source
 Les paramètres de contrôle du code source sont également définis en tant que ressource imbriquée. Azure Resource Manager utilise cette ressource pour configurer la publication en continu (nous verrons les inconvénients liés à `IsManualIntegration` plus tard) et pour lancer le déploiement automatique du code d’application lors du traitement du fichier JSON.
 
-![](./media/app-service-deploy-complex-application-predictably/examinejson-8-webappsourcecontrol.png)
+![Montre comment les paramètres de contrôle de code source sont définis en tant que ressource imbriquée dans le code JSON.](./media/app-service-deploy-complex-application-predictably/examinejson-8-webappsourcecontrol.png)
 
 Les éléments `RepoUrl` et `branch` doivent être assez intuitifs et doivent pointer vers le référentiel Git et le nom de la branche à partir de laquelle effectuer la publication. Là encore, ces éléments sont définis par les paramètres d’entrée. 
 
@@ -171,11 +171,11 @@ Ici, vous pouvez faire défiler tous les panneaux de l’application dans le [po
 
 Par exemple, lorsque j’accède à l’outil [Azure Resource Explorer](https://resources.azure.com) et développe les nœuds dans l’explorateur, je peux afficher le groupe de ressources et les ressources de niveau racine qui sont collectés sous leur type de ressource respectif.
 
-![](./media/app-service-deploy-complex-application-predictably/ARM-1-treeview.png)
+![Montre le groupe de ressources et les ressources de niveau racine dans l’outil développé Azure Resources Explorer.](./media/app-service-deploy-complex-application-predictably/ARM-1-treeview.png)
 
 Si vous explorez une application, vous devez voir apparaître les informations sur la configuration de l’application, de manière similaire à ce qu’indique la capture d’écran ci-dessous :
 
-![](./media/app-service-deploy-complex-application-predictably/ARM-2-jsonview.png)
+![Descendez dans la hiérarchie pour afficher les détails de configuration de l’application.](./media/app-service-deploy-complex-application-predictably/ARM-2-jsonview.png)
 
 Là encore, les ressources imbriquées doivent présenter une hiérarchie très similaire à celles du modèle de fichier JSON, et vous devez voir apparaître les paramètres de l’application, les chaînes de connexion, etc. reflétés de manière correcte dans le volet JSON. L’absence de paramètres à ce niveau peut signaler un problème touchant votre fichier JSON et peut vous aider à dépanner votre fichier de modèle JSON.
 
@@ -185,44 +185,44 @@ Le bouton **Déployer dans Azure** est très utile, mais il vous permet uniqueme
 1. Dans Visual Studio, cliquez sur **Fichier** > **Nouveau** > **Projet**.
 2. Cliquez sur **Visual C#**  > **Cloud** > **Groupe de ressources Azure**, puis cliquez sur **OK**.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-1-vsproject.png)
+   ![Créez un projet en tant que groupe de ressources Azure dans le SDK .NET Azure.](./media/app-service-deploy-complex-application-predictably/deploy-1-vsproject.png)
 3. Dans **Sélectionner un modèle Azure**, choisissez **Modèle vide** et cliquez sur **OK**.
 4. Faites glisser le fichier azuredeploy.json vers le dossier **Modèle** de votre nouveau projet.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-2-copyjson.png)
+   ![Montre le résultat du glissement du fichier azuredeploy.json dans le dossier de modèles de votre projet.](./media/app-service-deploy-complex-application-predictably/deploy-2-copyjson.png)
 5. Dans l’Explorateur de solutions, ouvrez le fichier azuredeploy.json copié.
 6. Pour les besoins de notre démonstration, ajoutons quelques ressources Application Insights standard dans notre fichier JSON, en cliquant sur **Ajouter une ressource**. Si vous êtes uniquement intéressé par le déploiement du fichier JSON, passez directement aux étapes de déploiement.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-3-newresource.png)
+   ![Montre le bouton Ajouter une ressource qui vous permet d’ajouter des ressources Application Insight standard à votre fichier JSON.](./media/app-service-deploy-complex-application-predictably/deploy-3-newresource.png)
 7. Sélectionnez **Application Insights pour les applications web**, puis assurez-vous qu’un plan App Service existant et une application sont sélectionnés, puis cliquez sur **Ajouter**.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-4-newappinsight.png)
+   ![Montre la sélection de Application Insights pour les applications web, Nom, Plan App Service et Application web.](./media/app-service-deploy-complex-application-predictably/deploy-4-newappinsight.png)
    
    À présent, vous pouvez afficher plusieurs nouvelles ressources qui, selon la ressource et son action, présentent des dépendances avec le plan App Service ou l’application. Ces ressources ne sont pas activées par leur définition existante. Vous allez changer cela.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-5-appinsightresources.png)
+   ![Montre les nouvelles ressources qui ont des dépendances dans le plan App Service ou l’application.](./media/app-service-deploy-complex-application-predictably/deploy-5-appinsightresources.png)
 8. Dans le plan JSON, cliquez sur **appInsights AutoScale** pour mettre en évidence son code JSON. Il s’agit du paramètre de mise à l’échelle de votre plan App Service.
 9. Dans le code JSON mis en surbrillance, localisez les propriétés `location` et `enabled`, et définissez-les comme indiqué ci-dessous.
    
-   ![](./media/app-service-deploy-complex-application-predictably/deploy-6-autoscalesettings.png)
+   ![Montre l’emplacement et les propriétés activées dans le code JSON appInsights AutoScale et les valeurs que vous devez leur attribuer.](./media/app-service-deploy-complex-application-predictably/deploy-6-autoscalesettings.png)
 10. Dans le plan JSON, cliquez sur **CPUHigh appInsights** pour mettre en évidence son code JSON. Il s’agit d’une alerte.
 11. Localisez les propriétés `location` et `isEnabled`, et définissez-les comme indiqué ci-dessous. Faites de même pour les autres trois alertes (ampoules violettes).
     
-    ![](./media/app-service-deploy-complex-application-predictably/deploy-7-alerts.png)
+    ![Montre l’emplacement et les propriétés isEnabled dans le code JSON CPUHigh appInsights et les valeurs que vous devez leur attribuer.](./media/app-service-deploy-complex-application-predictably/deploy-7-alerts.png)
 12. À présent, vous êtes prêt à effectuer le déploiement. Cliquez avec le bouton droit de la souris sur le projet et sélectionnez **Déployer** > **New Déployerment**.
     
-    ![](./media/app-service-deploy-complex-application-predictably/deploy-8-newdeployment.png)
+    ![Montre comment déployer votre nouveau projet.](./media/app-service-deploy-complex-application-predictably/deploy-8-newdeployment.png)
 13. Le cas échéant, connectez-vous à votre compte Microsoft Azure.
 14. Sélectionnez un groupe de ressources dans votre abonnement ou créez-en un nouveau, sélectionnez **azuredeploy.json**, puis cliquez sur **Modifier les paramètres**.
     
-    ![](./media/app-service-deploy-complex-application-predictably/deploy-9-deployconfig.png)
+    ![Montre comment modifier les paramètres dans le fichier azuredeploy.json.](./media/app-service-deploy-complex-application-predictably/deploy-9-deployconfig.png)
     
     Vous pouvez maintenant modifier tous les paramètres définis dans le fichier de modèle dans une table complète. Les paramètres qui définissent des valeurs par défaut présentent déjà des valeurs par défaut, et ceux qui définissent une liste de valeurs autorisées s’affichent en tant que listes déroulantes.
     
-    ![](./media/app-service-deploy-complex-application-predictably/deploy-10-parametereditor.png)
+    ![Montre les paramètres qui définissent une liste de valeurs autorisées sous forme de listes déroulantes.](./media/app-service-deploy-complex-application-predictably/deploy-10-parametereditor.png)
 15. Renseignez tous les paramètres vides et utilisez l’ [adresse du référentiel GitHub pour ToDoApp](https://github.com/azure-appservice-samples/ToDoApp.git) dans **repoUrl**. Ensuite, cliquez sur **Enregistrer**.
     
-    ![](./media/app-service-deploy-complex-application-predictably/deploy-11-parametereditorfilled.png)
+    ![Montre les paramètres nouvellement complétés pour le fichier azuredeploy.json.](./media/app-service-deploy-complex-application-predictably/deploy-11-parametereditorfilled.png)
     
     > [!NOTE]
     > La fonction de mise à l’échelle automatique est proposée au niveau **Standard** ou plus, et les alertes au niveau du plan sont proposées au niveau **Basic** ou plus. Vous devrez définir le paramètre **sku** sur **Standard** ou **Premium** afin de mettre en surbrillance toutes vos nouvelles ressources App Insights.
@@ -240,7 +240,7 @@ Les étapes de cette section ont permis d’accomplir les tâches principales su
 
 Cette dernière étape est facile à accomplir via l’applet de commande PowerShell. Pour voir les actions effectuées par Visual Studio lors du déploiement de votre application, accédez à l’élément Scripts\Deploy-AzureResourceGroup.ps1. Il y a beaucoup de code, mais je vais mettre en évidence celui que vous devez écrire pour déployer le fichier de modèle avec le fichier de paramètres.
 
-![](./media/app-service-deploy-complex-application-predictably/deploy-12-powershellsnippet.png)
+![Montre le code pertinent dans le script que vous devez utiliser pour déployer le fichier de modèle avec le fichier de paramètres.](./media/app-service-deploy-complex-application-predictably/deploy-12-powershellsnippet.png)
 
 La dernière applet de commande, `New-AzureResourceGroup`, est celle qui effectue réellement l’action. Tout cela doit indiquer que, grâce aux outils, il est relativement simple de déployer votre application Cloud de manière prévisible. Chaque fois que vous exécutez l’applet de commande sur le même modèle, avec le même fichier de paramètres, vous obtenez le même résultat.
 
@@ -254,7 +254,7 @@ Dans DevOps, la répétition et la prévisibilité jouent un rôle majeur pour 
 * [Création de modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md)
 * [Fonctions des modèles Azure Resource Manager](../azure-resource-manager/templates/template-functions.md)
 * [Déploiement d’une application avec un modèle Azure Resource Manager](../azure-resource-manager/templates/deploy-powershell.md)
-* [Utilisation d'Azure PowerShell avec Azure Resource Manager](../azure-resource-manager/powershell-azure-resource-manager.md)
+* [Utilisation d'Azure PowerShell avec Azure Resource Manager](../azure-resource-manager/management/manage-resources-powershell.md)
 * [Résolution des problèmes liés aux déploiements de groupes de ressources dans Azure](../azure-resource-manager/templates/common-deployment-errors.md)
 
 ## <a name="next-steps"></a>Étapes suivantes

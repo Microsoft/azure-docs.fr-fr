@@ -7,22 +7,22 @@ ms.date: 11/15/2017
 ms.topic: conceptual
 ms.service: virtual-machines-linux
 ms.subservice: disks
-ms.openlocfilehash: 7298b54d94effaa5bd7e600ec2d8d1045aa263ec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e986348c063626bd6a0b5a834854bad09d73c952
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78970447"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88814193"
 ---
 # <a name="scalability-and-performance-targets-for-vm-disks-on-linux"></a>Cibles de scalabilité et de performance des disques de machine virtuelle sur Linux
 
 [!INCLUDE [azure-storage-limits-vm-disks](../../../includes/azure-storage-limits-vm-disks.md)]
 
-Consultez [Tailles des machines virtuelles Linux](../../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) pour plus d’informations.
+Consultez [Tailles des machines virtuelles Linux](../sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) pour plus d’informations.
 
 ## <a name="managed-virtual-machine-disks"></a>Disques de machines virtuelles gérées
 
-Les tailles signalées par un astérisque sont actuellement en préversion. Consultez notre [FAQ](faq-for-disks.md#new-disk-sizes-managed-and-unmanaged) pour connaître les régions où ces modèles sont disponibles.
+Les tailles signalées par un astérisque sont actuellement en préversion. Consultez notre [FAQ](../faq-for-disks.md#new-disk-sizes-managed-and-unmanaged) pour connaître les régions où ces modèles sont disponibles.
 
 [!INCLUDE [azure-storage-limits-vm-disks-managed](../../../includes/azure-storage-limits-vm-disks-managed.md)]
 
@@ -33,4 +33,4 @@ Les tailles signalées par un astérisque sont actuellement en préversion. Cons
 
 ## <a name="see-also"></a>Voir aussi
 
-[Abonnement Azure et limites, quotas et contraintes du service](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits)
+[Abonnement Azure et limites, quotas et contraintes du service](../../azure-resource-manager/management/azure-subscription-service-limits.md)

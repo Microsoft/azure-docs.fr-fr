@@ -14,23 +14,26 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: a83d6ae2e3ed13f0d03e0fdc87a3b45a4119ba88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 707c12cac6bbceee925c4710eff29482f687d47f
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162750"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93040724"
 ---
 # <a name="perform-live-streaming-with-on-premises-encoders-using-azure-portal"></a>Effectuer un streaming en direct avec des encodeurs locaux à l’aide du portail Azure
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [Portail](media-services-portal-live-passthrough-get-started.md)
 > * [.NET](media-services-dotnet-live-encode-with-onpremises-encoders.md)
-> * [REST](https://docs.microsoft.com/rest/api/media/operations/channel)
+> * [REST](/rest/api/media/operations/channel)
 > 
 > 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Ce didacticiel vous guide tout au long des étapes d’utilisation du portail Azure afin de créer un **canal** configuré pour une livraison directe. 
 
@@ -109,7 +112,7 @@ Cette section explique comment utiliser l’option **Création rapide** pour cr�
 Pour plus d’informations sur les canaux directs, consultez [Streaming en direct avec des encodeurs locaux qui créent des flux multidébits](media-services-live-streaming-with-onprem-encoders.md).
 
 1. Dans le [portail Azure](https://portal.azure.com/), sélectionnez votre compte Azure Media Services.
-2. Dans la fenêtre **Paramètres**, cliquez sur **Diffusion en continu**. 
+2. Dans la fenêtre **Paramètres** , cliquez sur **Diffusion en continu**. 
    
     ![Prise en main](./media/media-services-portal-passthrough-get-started/media-services-getting-started.png)
    
@@ -130,7 +133,7 @@ Pour plus d’informations sur les canaux directs, consultez [Streaming en direc
 ## <a name="get-ingest-urls"></a>Obtenir les URL de réception
 Lorsque le canal est créé, vous pouvez obtenir des URL de réception que vous devez fournir à l’encodeur dynamique. L’encodeur utilise ces URL pour entrer un flux dynamique.
 
-![Date de création](./media/media-services-portal-passthrough-get-started/media-services-channel-created.png)
+![Capture d’écran montrant la page « Streaming en direct » avec un canal sélectionné et le volet du canal affiché.](./media/media-services-portal-passthrough-get-started/media-services-channel-created.png)
 
 ## <a name="watch-the-event"></a>Regarder l’événement
 Pour visionner l’événement, cliquez sur **Watch** (Visionner) dans le portail Azure ou copiez l’URL de diffusion en continu et utilisez le lecteur de votre choix. 
@@ -159,4 +162,3 @@ Consultez les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

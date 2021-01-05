@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: abshamsft
 ms.author: absha
 ms.date: 02/20/2018
-ms.openlocfilehash: 126cca9d3606b378e59e4f4e1c5b52d985d19d94
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c20f668c57e8c2e74c320ca535aea18e633daf8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80055684"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87326118"
 ---
 # <a name="network-performance-monitor-solution-performance-monitoring"></a>Solution Network Performance Monitor : analyse des performances.
 
@@ -128,4 +128,5 @@ Dans l’image suivante, la cause racine des zones à problème dans la section 
 ![Carte topologique avec les propriétés du nœud sélectionnées](media/network-performance-monitor-performance-monitor/topology-dashboard-root-cause.png) 
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Rechercher dans les journaux d’activité](../../azure-monitor/log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+[Rechercher dans les journaux d’activité](../log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+

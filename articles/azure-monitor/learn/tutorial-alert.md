@@ -7,12 +7,12 @@ author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 04/10/2019
 ms.custom: mvc
-ms.openlocfilehash: 7195de1cf58e5dd2e1d0b49b309f3afc718cca92
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: c1aa3ae5be3e9f3fb50909cb5311d167bbeee647
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77656260"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96904225"
 ---
 # <a name="monitor-and-alert-on-application-health-with-azure-application-insights"></a>Surveiller et alerter sur l’intégrité des applications avec Azure Application Insights
 
@@ -28,7 +28,7 @@ Vous allez apprendre à effectuer les actions suivantes :
 
 Pour suivre ce tutoriel :
 
-Créez une [ressource Application Insights](https://docs.microsoft.com/azure/azure-monitor/learn/dotnetcore-quick-start#enable-application-insights).
+Créez une [ressource Application Insights](../app/create-new-resource.md).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -56,7 +56,7 @@ Les tests de disponibilité dans Application Insights vous permettent de tester 
 
     ![Modifiez l'alerte](media/tutorial-alert/edit-alert-001.png)
 
-6. Définissez une valeur égale ou supérieure à 3 pour les emplacements incorrects. Créez un [groupe d’actions](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups) pour configurer les personnes à informer si votre seuil d’alerte est dépassé.
+6. Définissez une valeur égale ou supérieure à 3 pour les emplacements incorrects. Créez un [groupe d’actions](../platform/action-groups.md) pour configurer les personnes à informer si votre seuil d’alerte est dépassé.
 
     ![Enregistrer l'interface utilisateur d’alerte](media/tutorial-alert/save-alert-001.png)
 
@@ -73,4 +73,5 @@ Les tests de disponibilité dans Application Insights vous permettent de tester 
 Maintenant que vous avez appris à créer des alertes en cas de problèmes, passez à l’étape suivante du didacticiel pour apprendre à analyser la façon dont les utilisateurs interagissent avec votre application.
 
 > [!div class="nextstepaction"]
-> [Comprendre les utilisateurs](../../azure-monitor/learn/tutorial-users.md)
+> [Comprendre les utilisateurs](./tutorial-users.md)
+

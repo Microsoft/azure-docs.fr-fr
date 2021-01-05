@@ -1,31 +1,29 @@
 ---
 title: Créer un compte dans le portail Azure
 description: Apprenez à créer un compte Azure Batch dans le portail Azure pour exécuter des charges de travail parallèles à grande échelle dans le cloud
-ms.topic: conceptual
-ms.date: 02/26/2019
+ms.topic: how-to
+ms.date: 06/10/2020
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 9349ed74111565f68a088cda95c8defcd79f7e69
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1205de2b800588b735aeb20d388ba4b64bc6b078
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82113219"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84711338"
 ---
 # <a name="create-a-batch-account-with-the-azure-portal"></a>Créer un compte Batch avec le portail Azure
 
-Apprenez à créer un compte Azure Batch dans le [portail Azure][azure_portal] et choisissez les propriétés du compte qui correspondent à votre scénario de calcul. Découvrez où se trouvent les propriétés du compte importantes, telles que les clés d’accès et les URL du compte.
+Cette rubrique montre comment créer un compte Azure Batch dans le [portail Azure](https://portal.azure.com), en choisissant les propriétés du compte qui correspondent à votre scénario de calcul. Vous allez également découvrir où se trouvent les propriétés du compte importantes, telles que les clés d’accès et les URL du compte.
 
-Pour plus d’informations sur les comptes et les scénarios Batch, consultez la [présentation des fonctionnalités](batch-api-basics.md).
+Pour plus d’informations sur les comptes et les scénarios Batch, consultez [Workflow et ressources du service Batch](batch-service-workflow-features.md).
 
 ## <a name="create-a-batch-account"></a>Création d’un compte Batch
 
 [!INCLUDE [batch-account-mode-include](../../includes/batch-account-mode-include.md)]
 
-1. Connectez-vous au [portail Azure][azure_portal].
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Sélectionnez **Créer une ressource** > **Compute** > **Service Batch**.
-
-    ![Batch dans Marketplace][marketplace_portal]
+1. Sélectionnez **Créer une ressource**, puis sélectionnez **Calcul** et **Service Batch**.
 
 1. Entrez les paramètres **Nouveau compte Batch**. Consultez les informations suivantes :
 
@@ -39,7 +37,7 @@ Pour plus d’informations sur les comptes et les scénarios Batch, consultez la
 
     d. **Emplacement** : Région Azure où créer le compte Batch. Seules les régions prises en charge par votre abonnement et votre groupe de ressources sont affichées.
 
-    e. **Compte de stockage** : Compte de Stockage Azure facultatif à associer à votre compte Batch. Un compte de stockage v2 universel est recommandé pour obtenir des performances optimales. Pour connaître les options de compte de stockage de Batch, consultez la [vue d’ensemble des fonctionnalités d’Azure Batch](batch-api-basics.md#azure-storage-account). Dans le portail, sélectionnez un compte de stockage existant ou créez-en un nouveau.
+    e. **Compte de stockage** : Compte de Stockage Azure facultatif à associer à votre compte Batch. Un compte de stockage v2 universel est recommandé pour obtenir des performances optimales. Pour connaître les options de compte de stockage de Batch, consultez la [vue d’ensemble des fonctionnalités d’Azure Batch](accounts.md#azure-storage-accounts). Dans le portail, sélectionnez un compte de stockage existant ou créez-en un nouveau.
 
       ![Créez un compte de stockage.][storage_account]
 
@@ -52,6 +50,9 @@ Pour plus d’informations sur les comptes et les scénarios Batch, consultez la
 ## <a name="view-batch-account-properties"></a>Afficher les propriétés du compte Batch
 
 Une fois le compte créé, cliquez dessus pour accéder à ses propriétés et paramètres. Vous avez accès à tous les paramètres et propriétés du compte dans le menu de gauche.
+
+> [!NOTE]
+> Le nom du compte Batch correspond à son ID et ne peut pas être modifié. Si vous avez besoin de modifier le nom d’un compte Batch, vous devez supprimer le compte et en créer un nouveau avec le nom souhaité.
 
 ![Page du compte Batch dans le portail Azure][account_blade]
 
@@ -73,7 +74,7 @@ Si vous choisissez de créer un compte Batch en mode d’abonnement utilisateur,
 
 Quand vous créez votre premier compte Batch en mode Abonnement utilisateur, vous devez inscrire votre abonnement auprès de Batch. (Si vous l’avez déjà fait, passez à la section suivante.)
 
-1. Connectez-vous au [portail Azure][azure_portal].
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
 1. Sélectionnez **Tous les services** > **Abonnements**, puis cliquez sur l’abonnement que vous souhaitez utiliser pour le compte Batch.
 
@@ -85,7 +86,7 @@ Quand vous créez votre premier compte Batch en mode Abonnement utilisateur, vou
 
     ![Contrôle d’accès à l’abonnement][subscription_access]
 
-1. Dans la page **Ajouter une attribution de rôle**, sélectionnez le rôle **Contributeur** et recherchez l’API Batch. Recherchez chacune de ces chaînes, jusqu’à ce que vous trouviez l’API :
+1. Dans la page **Ajouter une attribution de rôle**, sélectionnez le rôle **Contributeur** ou **Propriétaire**, puis recherchez l’API Batch. Recherchez chacune de ces chaînes, jusqu’à ce que vous trouviez l’API :
     1. **MicrosoftAzureBatch**.
     1. **Microsoft Azure Batch**. Les locataires Azure AD les plus récents peuvent utiliser ce nom.
     1. La chaîne **ddbf3205-c6bd-46ae-8127-60eb93363864** correspond à l’ID de l’API Batch.
@@ -94,37 +95,33 @@ Quand vous créez votre premier compte Batch en mode Abonnement utilisateur, vou
 
     ![Ajouter des autorisations Batch][add_permission]
 
-### <a name="create-a-key-vault"></a>Création d’un coffre de clés
+### <a name="create-a-key-vault"></a>Créer un coffre de clés
 
-En mode Abonnement utilisateur, un coffre de clés Azure appartenant au même groupe de ressources que le compte Batch est requis. Assurez-vous que le groupe de ressources se trouve dans une région prise en charge par votre abonnement et dans laquelle Batch est [disponible](https://azure.microsoft.com/regions/services/).
+En mode abonnement utilisateur, un [coffre de clés Azure](../key-vault/general/overview.md) est nécessaire. Le coffre de clés doit se trouver dans la même région et le même abonnement que le compte Batch à créer. 
 
-1. Dans le [portail Azure][azure_portal], cliquez sur **Nouveau** > **Sécurité** > **Key Vault**.
+1. Dans le [portail Azure](https://portal.azure.com), cliquez sur **Nouveau** > **Sécurité** > **Key Vault**.
 
 1. Dans la page **Créer un coffre de clés**, entrez un nom pour le coffre de clés et créez un groupe de ressources dans la région souhaitée pour votre compte Batch. Conservez les autres paramètres par défaut, puis cliquez sur **Créer**.
 
-Lors de la création du compte Batch en mode Abonnement utilisateur, utilisez le groupe de ressources pour le coffre de clés. Spécifiez **Abonnement utilisateur** en tant que mode d’allocation de pool, sélectionnez le coffre de clés, puis cochez la case pour accorder à Azure Batch l’accès au coffre de clés. 
+Lors de la création du compte Batch en mode abonnement utilisateur, spécifiez **Abonnement utilisateur** comme mode d’allocation de pool, sélectionnez le coffre de clés, puis cochez la case pour accorder à Azure Batch l’accès au coffre de clés.
 
 Si vous préférez accorder manuellement l’accès au coffre de clés, accédez à la section **Stratégies d’accès** du coffre de clés, sélectionnez **Ajouter une stratégie d’accès**, puis recherchez **Microsoft Azure Batch**. Une fois les autorisations sélectionnées sous **Autorisations du secret**, vous devez les configurer à l’aide du menu déroulant. Azure Batch doit avoir au minimum les autorisations **Get**, **List**, **Set** et **Delete**.
 
 ![Autorisations de secret pour Azure Batch](./media/batch-account-create-portal/secret-permissions.png)
 
-
 > [!NOTE]
 > Vérifiez que les cases à cocher **Machines virtuelles Azure pour le déploiement** et **Azure Resource Manager pour le déploiement de modèles** sont activées sous **Stratégies d’accès** pour la ressource **Key Vault** liée.
-> 
-> ![Stratégie d’accès à Key Vault obligatoire](./media/batch-account-create-portal/key-vault-access-policy.png) : Ce n’est pas obligatoire lors de la création d’un compte batch dans le portail Azure. L’option est sélectionnée par défaut.
-
-
+>
+> ![Créer une stratégie d’accès au coffre de clés obligatoire](./media/batch-account-create-portal/key-vault-access-policy.png)
 
 ### <a name="configure-subscription-quotas"></a>Configurer les quotas d’abonnement
 
-Les quotas de base ne sont pas définis par défaut sur les comptes Batch d’abonnement utilisateur. Les quotas de base doivent être définis manuellement, car les quotas de base Batch standard ne s’appliquent pas aux comptes en mode Abonnement utilisateur.
+Pour les comptes Batch d’abonnement utilisateur, les quotas de base doivent être définis manuellement. Les quotas de base Batch standard ne s’appliquent pas aux comptes en mode abonnement utilisateur.
 
-1. Dans le [Portail Azure][azure_portal], sélectionnez votre compte Batch en mode d’abonnement utilisateur pour afficher ses paramètres et ses propriétés.
-
+1. Dans le [Portail Azure](https://portal.azure.com), sélectionnez votre compte Batch en mode d’abonnement utilisateur pour afficher ses paramètres et ses propriétés.
 1. Dans le menu de gauche, sélectionnez **Quotas** pour afficher et configurer les quotas de base associés à votre compte Batch.
 
-Consultez [Quotas et limites du service Batch](batch-quota-limit.md) pour plus d’informations sur les quotas de base en mode d’abonnement utilisateur.
+Pour plus d’informations sur les quotas de base en mode d’abonnement utilisateur, consultez [Quotas et limites du service Batch](batch-quota-limit.md).
 
 ## <a name="other-batch-account-management-options"></a>Autres options de gestion de comptes Batch
 
@@ -136,13 +133,9 @@ Vous pouvez créer et gérer des comptes Batch à l’aide du portail Azure, mai
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus sur les concepts et fonctionnalités du service Batch, consultez [Présentation des fonctionnalités du service Batch pour les développeurs](batch-api-basics.md). L’article traite des principales ressources Batch, notamment des pools, des nœuds de calcul, des travaux et des tâches et fournit une vue d’ensemble des fonctionnalités du service pour l’exécution de charges de travail de calcul à grande échelle.
+* En savoir plus sur le [workflow et les ressources principales du service Batch](batch-service-workflow-features.md) telles que les pools, les nœuds, les travaux et les tâches.
 * Découvrez les bases du développement d’une application Batch à l’aide de la [bibliothèque Azure Batch pour .NET](quick-run-dotnet.md) ou [Python](quick-run-python.md). Ces démarrages rapides décrivent la création d’un exemple d’application qui utilise le service Batch pour exécuter une charge de travail sur plusieurs nœuds de calcul, et inclut l’utilisation d’Azure Storage pour la mise en attente et la récupération de fichiers de la charge de travail.
 
-[azure_portal]: https://portal.azure.com
-[batch_pricing]: https://azure.microsoft.com/pricing/details/batch/
-
-[marketplace_portal]: ./media/batch-account-create-portal/marketplace-batch.png
 [account_blade]: ./media/batch-account-create-portal/batch_blade.png
 [account_portal]: ./media/batch-account-create-portal/batch-account-portal.png
 [pool_allocation]: ./media/batch-account-create-portal/batch-pool-allocation.png

@@ -14,14 +14,18 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: ab3c40ee408498453bb137c63c440d980b0b7255
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 24fd4dcb9b24b6d025ff0327d98fee15a05fb7de
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74974510"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89267715"
 ---
 # <a name="configure-asset-delivery-policies-with-net-sdk"></a>Configuration de stratégies de remise de ressources à l’aide du Kit de développement logiciel (SDK) .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 [!INCLUDE [media-services-selector-asset-delivery-policy](../../../includes/media-services-selector-asset-delivery-policy.md)]
 
 ## <a name="overview"></a>Vue d’ensemble

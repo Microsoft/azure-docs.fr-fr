@@ -4,15 +4,15 @@ description: Cette page fournit des instructions pour la création, la configura
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/13/2019
 ms.author: victorh
-ms.openlocfilehash: 406dcdb419dba2e8044a173f4c05028abbaba3da
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 3d663dc4e2bd860ec9494785ecbf6dbf10a4c5b5
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312416"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397754"
 ---
 # <a name="create-an-application-gateway-with-an-internal-load-balancer-ilb"></a>Créer une passerelle d’application avec un équilibreur de charge interne (ILB)
 
@@ -50,7 +50,7 @@ Procédure de création d’une passerelle Application Gateway :
 
 ## <a name="create-a-resource-group-for-resource-manager"></a>Créer un groupe de ressources pour Resource Manager
 
-Veillez à passer en mode PowerShell pour utiliser les applets de commande d’Azure Resource Manager. Pour plus d’informations, voir [Utilisation de Windows PowerShell avec Azure Resource Manager](../powershell-azure-resource-manager.md).
+Veillez à passer en mode PowerShell pour utiliser les applets de commande d’Azure Resource Manager. Pour plus d’informations, voir [Utilisation de Windows PowerShell avec Azure Resource Manager](../azure-resource-manager/management/manage-resources-powershell.md).
 
 ### <a name="step-1"></a>Étape 1
 
@@ -258,10 +258,9 @@ Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous souhaitez configurer le déchargement SSL, consultez [Configuration d’une passerelle Application Gateway pour le déchargement SSL](application-gateway-ssl.md).
+Si vous souhaitez configurer le déchargement SSL, consultez [Configuration d’une passerelle Application Gateway pour le déchargement SSL](./tutorial-ssl-powershell.md).
 
 Si vous souhaitez plus d'informations sur les options d'équilibrage de charge en général, consultez :
 
 * [Équilibrage de charge Azure](https://azure.microsoft.com/documentation/services/load-balancer/)
 * [Azure Traffic Manager](https://azure.microsoft.com/documentation/services/traffic-manager/)
-

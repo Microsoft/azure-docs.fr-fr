@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 04/27/2017
-ms.openlocfilehash: ad50cbb423f8c60f1caad159bc1a20cf96ed98aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c6d95cb938a341b94a32989e82c42d37956c0a80
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74792544"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89179842"
 ---
 # <a name="handle-edifact-documents-with-unh25-segments-in-azure-logic-apps"></a>Gérer des documents EDIFACT avec des segments UNH2.5 dans Azure Logic Apps
 
@@ -56,8 +56,6 @@ Pour encoder le message entrant, configurez le schéma EDIFACT dans les paramèt
 1. Ajoutez le schéma à votre compte d’intégration.
 
 1. Configurez le schéma EDIFACT dans les paramètres d’envoi de l’accord EDIFACT.
-
-1. Sélectionnez un accord EDIFACT et cliquez sur **Modifier au format JSON**.  Ajoutez la valeur UNH2.5 à la section **schemaReferences** de l’accord d’envoi.
 
 1. Sélectionnez l’accord EDIFACT, puis sélectionnez **Modifier au format JSON**. Ajoutez la valeur UNH2.5 à la section `schemaReferences` de l’accord d’envoi :
 

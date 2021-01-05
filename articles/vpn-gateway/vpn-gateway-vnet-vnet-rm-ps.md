@@ -4,15 +4,15 @@ description: Connectez des réseaux virtuels avec une connexion de réseau virtu
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 02/15/2019
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: eebe66ca038b31f23ca864b107816b8cf761b29c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7de83302dd91d7d679b9c35718d184a9767ba436
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75860518"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94655355"
 ---
 # <a name="configure-a-vnet-to-vnet-vpn-gateway-connection-using-powershell"></a>Configurer une connexion de passerelle VPN de réseau virtuel à réseau virtuel à l’aide de PowerShell
 
@@ -67,7 +67,7 @@ Pour cet exercice, vous pouvez combiner des configurations ou choisir simplement
 
 * [Réseaux virtuels situés dans le même abonnement](#samesub) : Les étapes à suivre pour cette configuration utilisent les réseaux virtuels TestVNet1 et TestVNet4.
 
-  ![Diagramme v2v](./media/vpn-gateway-vnet-vnet-rm-ps/v2vrmps.png)
+  ![Diagramme représentant les étapes de réseau virtuel à réseau virtuel pour les réseaux virtuels associés au même abonnement.](./media/vpn-gateway-vnet-vnet-rm-ps/v2vrmps.png)
 
 * [Réseaux virtuels situés dans des abonnements différents](#difsub) : Les étapes à suivre pour cette configuration utilisent les réseaux virtuels TestVNet1 et TestVNet5.
 
@@ -81,7 +81,7 @@ Pour cet exercice, vous pouvez combiner des configurations ou choisir simplement
 
 * La création d’une passerelle peut prendre jusqu’à 45 minutes. C’est pourquoi Azure Cloud Shell expire périodiquement au cours de cet exercice. Pour redémarrer Cloud Shell, cliquez dans le coin supérieur gauche du terminal. Veillez à redéclarer les éventuelles variables au redémarrage du terminal.
 
-* Si vous préférez installer localement la dernière version du module Azure PowerShell, consultez [Guide pratique pour installer et configurer Azure PowerShell](/powershell/azure/overview).
+* Si vous préférez installer localement la dernière version du module Azure PowerShell, consultez [Guide pratique pour installer et configurer Azure PowerShell](/powershell/azure/).
 
 ### <a name="step-1---plan-your-ip-address-ranges"></a><a name="Step1"></a>Étape 1 : planifier vos plages d’adresses IP
 
@@ -448,7 +448,7 @@ Dans cet exemple, étant donné que les passerelles se trouvent dans différents
    PS C:\> $vnet5gw.Id
    /subscriptions/66c8e4f1-ecd6-47ed-9de7-7e530de23994/resourceGroups/TestRG5/providers/Microsoft.Network/virtualNetworkGateways/VNet5GW
    ```
-3. **[Abonnement 1]** Créez la connexion TestVNet1 à TestVNet5. Dans cette étape, vous créez la connexion de TestVNet1 à TestVNet5. La différence réside dans le fait que $vnet5gw ne peut pas être obtenu directement, car il se trouve dans un abonnement différent. Vous devez créer un objet PowerShell avec les valeurs communiquées par Abonnement 1 dans les étapes précédentes. Utilisez l’exemple ci-dessous. Remplacez le nom, l’ID et la clé partagée par vos propres valeurs. Il est important que la clé partagée corresponde aux deux connexions. La création d’une connexion peut prendre quelques instants.
+3. **[Abonnement 1]** Créez la connexion TestVNet1 à TestVNet5. Dans cette étape, vous créez la connexion de TestVNet1 à TestVNet5. La différence réside dans le fait que $vnet5gw ne peut pas être obtenu directement, car il se trouve dans un abonnement différent. Vous devez créer un objet PowerShell avec les valeurs communiquées par Abonnement 1 dans les étapes précédentes. Utilisez l’exemple ci-dessous. Remplacez le nom, l'ID et la clé partagée par vos propres valeurs. Il est important que la clé partagée corresponde aux deux connexions. La création d’une connexion peut prendre quelques instants.
 
    Se connecter à Abonnement 1 avant d’exécuter l’exemple suivant :
 
@@ -475,7 +475,7 @@ Dans cet exemple, étant donné que les passerelles se trouvent dans différents
 
 [!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
-[!INCLUDE [verify connections powershell](../../includes/vpn-gateway-verify-connection-ps-rm-include.md)]
+[!INCLUDE [verify connections PowerShell](../../includes/vpn-gateway-verify-connection-ps-rm-include.md)]
 
 ## <a name="vnet-to-vnet-faq"></a><a name="faq"></a>Forum Aux Questions sur l’interconnexion de réseaux virtuels
 
@@ -483,5 +483,5 @@ Dans cet exemple, étant donné que les passerelles se trouvent dans différents
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez la [documentation relative aux machines virtuelles](https://docs.microsoft.com/azure/) .
+* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez la [documentation relative aux machines virtuelles](../index.yml) .
 * Pour plus d’informations sur le protocole BGP, consultez les articles [Vue d’ensemble du protocole BGP](vpn-gateway-bgp-overview.md) et [Comment configurer BGP](vpn-gateway-bgp-resource-manager-ps.md).

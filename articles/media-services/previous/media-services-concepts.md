@@ -13,23 +13,25 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: dc39ef8f3d72b2b8fc5aa55aacb2e2503b052023
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: 2a251ef426d41413cf81f46ca05b11640f01e87a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82160220"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91333764"
 ---
-# <a name="azure-media-services-concepts"></a>Concepts Azure Media Services 
+# <a name="azure-media-services-concepts"></a>Concepts Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Cette rubrique fournit une vue d'ensemble des concepts les plus importants liés à Media Services.
 
-## <a name="assets-and-storage"></a><a id="assets"/>Éléments multimédias et stockage
+## <a name="assets-and-storage"></a><a name="assets"></a>Éléments multimédias et stockage
 ### <a name="assets"></a>Éléments multimédias
-Un [élément multimédia](https://docs.microsoft.com/rest/api/media/operations/asset) contient des fichiers numériques (y compris vidéo, audio, images, collections de miniatures, légendes et fichiers de sous-titres) et les métadonnées associées à ces fichiers. Une fois les fichiers numériques chargés dans un élément multimédia, ils peuvent être utilisés dans des flux de travail de diffusion et d’encodage Media Services.
+Un [élément multimédia](/rest/api/media/operations/asset) contient des fichiers numériques (y compris vidéo, audio, images, collections de miniatures, légendes et fichiers de sous-titres) et les métadonnées associées à ces fichiers. Une fois les fichiers numériques chargés dans un élément multimédia, ils peuvent être utilisés dans des flux de travail de diffusion et d’encodage Media Services.
 
 Un élément multimédia est mappé à un conteneur d’objets blob dans le compte de stockage Azure et les fichiers de l’élément multimédia sont stockés en tant qu’objets blob de blocs dans ce conteneur. Les objets blob de pages ne sont pas pris en charge par Azure Media Services.
 
@@ -39,7 +41,7 @@ Lors du choix du contenu multimédia à télécharger et à stocker dans un él�
 * Un élément multimédia ne doit pas contenir plusieurs rendus ou versions d’un fichier audiovisuel. Une tentative d’enregistrement de plusieurs épisodes d’une série TV, plusieurs publicités ou plusieurs angles de caméra à partir d’une production unique dans un élément multimédia constitue un exemple d’utilisation incorrect d’un élément multimédia. Le stockage de plusieurs rendus ou versions d’un fichier audiovisuel dans un élément multimédia peut entraîner des difficultés lors de l’envoi des travaux d’encodage, de la diffusion en continu et de la sécurisation de la remise de l’élément multimédia ultérieurement dans le flux de travail.  
 
 ### <a name="asset-file"></a>Fichier d’élément multimédia
-Un [AssetFile](https://docs.microsoft.com/rest/api/media/operations/assetfile) représente un fichier vidéo ou audio réel stocké dans un conteneur d’objets blob. Un fichier d’élément multimédia est toujours associé à un élément multimédia et un élément multimédia peut contenir un ou plusieurs fichiers La tâche de Media Services Encoder échoue si un objet de fichier de ressources n’est pas associé à un fichier numérique dans un conteneur d’objets blob.
+Un [AssetFile](/rest/api/media/operations/assetfile) représente un fichier vidéo ou audio réel stocké dans un conteneur d’objets blob. Un fichier d’élément multimédia est toujours associé à un élément multimédia et un élément multimédia peut contenir un ou plusieurs fichiers La tâche de Media Services Encoder échoue si un objet de fichier de ressources n’est pas associé à un fichier numérique dans un conteneur d’objets blob.
 
 L'instance **AssetFile** et le fichier multimédia réel sont deux objets distincts. L’instance AssetFile contient des métadonnées concernant le fichier multimédia, tandis que le fichier multimédia contient le contenu multimédia réel.
 
@@ -62,7 +64,7 @@ Pour fournir un élément multimédia avec chiffrement de stockage, vous devez c
 **EnvelopeEncryptionProtected** : utilisez cette option si vous souhaitez protéger du contenu (ou charger du contenu déjà protégé) HTTP Live Streaming (HLS) chiffré avec AES (Advanced Encryption Standard). Si vous téléchargez du contenu HLS déjà chiffré avec AES, il doit avoir été chiffré par Transform Manager.
 
 ### <a name="access-policy"></a>Stratégie d’accès
-La stratégie d’accès ( [AccessPolicy](https://docs.microsoft.com/rest/api/media/operations/accesspolicy) ) définit les autorisations (telles que lecture, écriture et énumération) et la durée d’accès à un élément multimédia. En général, vous passez un objet AccessPolicy à un localisateur qui est ensuite utilisé pour accéder aux fichiers contenus dans un élément multimédia.
+La stratégie d’accès ( [AccessPolicy](/rest/api/media/operations/accesspolicy) ) définit les autorisations (telles que lecture, écriture et énumération) et la durée d’accès à un élément multimédia. En général, vous passez un objet AccessPolicy à un localisateur qui est ensuite utilisé pour accéder aux fichiers contenus dans un élément multimédia.
 
 >[!NOTE]
 >Un nombre limite de 1 000 000 a été défini pour les différentes stratégies AMS (par exemple, pour la stratégie de localisateur ou pour ContentKeyAuthorizationPolicy). Vous devez utiliser le même ID de stratégie si vous utilisez toujours les mêmes jours / autorisations d’accès, par exemple, les stratégies pour les localisateurs destinées à demeurer en place pendant une longue période (stratégies sans chargement). Pour plus d’informations, consultez [cette rubrique](media-services-dotnet-manage-entities.md#limit-access-policies) .
@@ -75,8 +77,8 @@ Un conteneur d’objets blob regroupe un ensemble d’objets blob. Les conteneur
 > 
 > 
 
-### <a name="locators"></a><a id="locators"/>Localisateurs
-Les [localisateur](https://docs.microsoft.com/rest/api/media/operations/locator)s fournissent un point d’entrée pour accéder aux fichiers contenus dans une ressource. Une stratégie d’accès est utilisée pour définir les autorisations et la durée pendant laquelle un client a accès à un élément multimédia donné. Les localisateurs peuvent avoir une relation plusieurs-à-un avec une stratégie d’accès, de telle sorte que différents localisateurs puissent fournir différentes heures de démarrage et différents types de connexions à différents clients tout en utilisant tous les mêmes paramètres d’autorisation et de durée. Toutefois, en raison d’une restriction de stratégie d’accès partagé définie par les services de stockage Azure, vous ne pouvez pas avoir plus de cinq localisateurs uniques associés simultanément à un élément multimédia donné. 
+### <a name="locators"></a><a name="locators"></a>Localisateurs
+Les [localisateur](/rest/api/media/operations/locator)s fournissent un point d’entrée pour accéder aux fichiers contenus dans une ressource. Une stratégie d’accès est utilisée pour définir les autorisations et la durée pendant laquelle un client a accès à un élément multimédia donné. Les localisateurs peuvent avoir une relation plusieurs-à-un avec une stratégie d’accès, de telle sorte que différents localisateurs puissent fournir différentes heures de démarrage et différents types de connexions à différents clients tout en utilisant tous les mêmes paramètres d’autorisation et de durée. Toutefois, en raison d’une restriction de stratégie d’accès partagé définie par les services de stockage Azure, vous ne pouvez pas avoir plus de cinq localisateurs uniques associés simultanément à un élément multimédia donné. 
 
 Media Services prend en charge deux types de localisateurs : Les localisateurs OnDemandOrigin, utilisés pour diffuser du contenu multimédia (par exemple, MPEG DASH, HLS ou Smooth Streaming) ou télécharger progressivement du contenu multimédia et des localisateurs d’URL SAS, qui servent à charger ou à télécharger des fichiers multimédias vers/depuis le stockage Azure. 
 
@@ -84,12 +86,12 @@ Media Services prend en charge deux types de localisateurs : Les localisateurs 
 >L’autorisation de liste (AccessPermissions.List) ne doit pas être utilisée lors de la création d’un localisateur OnDemandOrigin. 
 
 ### <a name="storage-account"></a>Compte de stockage
-Tous les accès à Azure Storage passent par un compte de stockage. Un compte Media Services peut être associé à un ou plusieurs comptes de stockage. Un compte peut contenir un nombre illimité de conteneurs, tant que la taille totale ne dépasse pas 500 To par compte de stockage.  Media Services fournit des outils de niveau SDK pour vous permettre de gérer plusieurs comptes de stockage et d’équilibrer la charge de distribution de vos éléments multimédia pendant le téléchargement vers ces comptes en fonction de métriques ou de la distribution aléatoire. Pour plus d’informations, consultez la page [Utilisation d’Azure Storage](https://msdn.microsoft.com/library/azure/dn767951.aspx). 
+Tous les accès à Azure Storage passent par un compte de stockage. Un compte Media Services peut être associé à un ou plusieurs comptes de stockage. Un compte peut contenir un nombre illimité de conteneurs, tant que la taille totale ne dépasse pas 500 To par compte de stockage.  Media Services fournit des outils de niveau SDK pour vous permettre de gérer plusieurs comptes de stockage et d’équilibrer la charge de distribution de vos éléments multimédia pendant le téléchargement vers ces comptes en fonction de métriques ou de la distribution aléatoire. Pour plus d’informations, consultez la page [Utilisation d’Azure Storage](/previous-versions/azure/dn767951(v=azure.100)). 
 
 ## <a name="jobs-and-tasks"></a>Travaux et tâches
-Un [travail](https://docs.microsoft.com/rest/api/media/operations/job) sert généralement à traiter (par exemple à indexer ou encoder) une présentation audio/vidéo. Si vous traitez plusieurs vidéos, créez un travail pour chaque vidéo à encoder.
+Un [travail](/rest/api/media/operations/job) sert généralement à traiter (par exemple à indexer ou encoder) une présentation audio/vidéo. Si vous traitez plusieurs vidéos, créez un travail pour chaque vidéo à encoder.
 
-Un travail contient des métadonnées concernant le traitement à effectuer. Chaque travail contient une ou plusieurs [tâche](https://docs.microsoft.com/rest/api/media/operations/task)s qui spécifient une tâche de traitement atomique, ses éléments multimédias d’entrée, ses éléments multimédias de sortie, un processeur multimédia et ses paramètres associés. Les tâches d’un travail peuvent être chaînées, c’est-à-dire que la ressource de sortie d’une tâche peut être transmise comme ressource d’entrée à la tâche suivante. De cette façon, un travail peut contenir tout le traitement nécessaire à une présentation multimédia.
+Un travail contient des métadonnées concernant le traitement à effectuer. Chaque travail contient une ou plusieurs [tâche](/rest/api/media/operations/task)s qui spécifient une tâche de traitement atomique, ses éléments multimédias d’entrée, ses éléments multimédias de sortie, un processeur multimédia et ses paramètres associés. Les tâches d’un travail peuvent être chaînées, c’est-à-dire que la ressource de sortie d’une tâche peut être transmise comme ressource d’entrée à la tâche suivante. De cette façon, un travail peut contenir tout le traitement nécessaire à une présentation multimédia.
 
 ## <a name="encoding"></a><a id="encoding"></a>Encodage
 Azure Media Services fournit plusieurs options pour l’encodage de fichiers multimédias dans le cloud.
@@ -101,12 +103,11 @@ Media Services fournit l’empaquetage dynamique qui permet de distribuer un con
 
 Pour tirer parti de l’[empaquetage dynamique](media-services-dynamic-packaging-overview.md), vous devez encoder votre fichier mezzanine (source) en un ensemble de fichiers MP4 à débit adaptatif ou de fichiers Smooth Streaming à débit adaptatif et avoir au moins un point de terminaison de streaming standard ou premium à l’état Démarré.
 
-Media Services prend en charge les éléments suivants sur les encodeurs à la demande décrits dans cet article :
+Media Services prend en charge les éléments suivants sur l'encodeur à la demande décrit dans cet article :
 
 * [Media Encoder Standard](media-services-encode-asset.md#media-encoder-standard)
-* [Media Encoder Premium Workflow](media-services-encode-asset.md#media-encoder-premium-workflow)
 
-Pour plus d’informations sur les encodeurs pris en charge, consultez la page [Encodeurs](media-services-encode-asset.md).
+Pour plus d'informations sur l'encodeur pris en charge, consultez [Encodeur](media-services-encode-asset.md).
 
 ## <a name="live-streaming"></a>Vidéo en flux continu
 Dans Azure Media Services, un canal représente un pipeline de traitement du contenu de diffusion en direct. Un canal reçoit des flux d’entrée en direct de l’une des deux manières suivantes :
@@ -115,14 +116,14 @@ Dans Azure Media Services, un canal représente un pipeline de traitement du con
 * Un flux à débit unique (dans l’un des formats suivants : RTMP ou Smooth Streaming [MP4 fragmenté]) est envoyé au canal qui est activé pour effectuer un encodage en direct avec Media Services. Le canal procède ensuite à l’encodage en temps réel du flux à débit unique entrant en flux vidéo multidébit (adaptatif). Lorsqu’il y est invité, Media Services fournit le flux aux clients.
 
 ### <a name="channel"></a>Channel
-Dans Media Services, les [canaux](https://docs.microsoft.com/rest/api/media/operations/channel)sont responsables du traitement du contenu de vidéo en flux continu. Un canal fournit un point de terminaison d’entrée (URL de réception) que vous fournissez ensuite à un transcodeur live. Le canal reçoit des flux d’entrée live en provenance du transcodeur et les met à disposition pour la diffusion en continu via un ou plusieurs StreamingEndpoints. Les canaux fournissent également un point de terminaison d’aperçu (URL d’aperçu) que vous utilisez pour obtenir un aperçu et valider votre flux avant tout traitement et remise supplémentaires.
+Dans Media Services, les [canaux](/rest/api/media/operations/channel)sont responsables du traitement du contenu de vidéo en flux continu. Un canal fournit un point de terminaison d’entrée (URL de réception) que vous fournissez ensuite à un transcodeur live. Le canal reçoit des flux d’entrée live en provenance du transcodeur et les met à disposition pour la diffusion en continu via un ou plusieurs StreamingEndpoints. Les canaux fournissent également un point de terminaison d’aperçu (URL d’aperçu) que vous utilisez pour obtenir un aperçu et valider votre flux avant tout traitement et remise supplémentaires.
 
 Vous pouvez obtenir l’URL de réception et l’URL d’aperçu lors de la création du canal. Pour obtenir ces URL, il n’est pas obligatoire que le canal soit à l’état démarré. Lorsque vous êtes prêt à commencer l’envoi de données à partir d’un transcodeur live dans le canal, celui-ci doit être démarré. Une fois que le transcodeur live a commencé l’ingestion des données, vous pouvez prévisualiser votre flux.
 
 Chaque compte Media Services peut contenir plusieurs canaux, plusieurs programmes et plusieurs StreamingEndpoints. Selon les besoins en matière de bande passante et de sécurité, les services StreamingEndpoint peuvent être affectés à un ou plusieurs canaux. N’importe quel StreamingEndpoint peut assurer l’extraction à partir de n’importe quel canal.
 
 ### <a name="program-event"></a>Programme (événement)
-Un [programme (événement)](https://docs.microsoft.com/rest/api/media/operations/program) vous permet de contrôler la publication et le stockage des segments dans un flux live. Les canaux gèrent les programmes (événements). La relation entre canal et programme est similaire au contenu multimédia traditionnel où un canal a un flux de contenu constant et un programme est limité à un événement minuté sur ce canal.
+Un [programme (événement)](/rest/api/media/operations/program) vous permet de contrôler la publication et le stockage des segments dans un flux live. Les canaux gèrent les programmes (événements). La relation entre canal et programme est similaire au contenu multimédia traditionnel où un canal a un flux de contenu constant et un programme est limité à un événement minuté sur ce canal.
 Vous pouvez spécifier le nombre d’heures pendant lesquelles vous souhaitez conserver le contenu enregistré pour le programme en définissant la propriété **ArchiveWindowLength** . Cette valeur peut être comprise entre 5 minutes et 25 heures.
 
 ArchiveWindowLength détermine également la durée maximale que les clients peuvent rechercher en arrière à partir de la position dynamique actuelle. Les programmes peuvent durer davantage que le laps de temps spécifié, mais le contenu qui se situe en dehors de la longueur de fenêtre est ignoré en permanence. La valeur de cette propriété détermine également la longueur maximale que les manifestes de client peuvent atteindre.
@@ -160,7 +161,7 @@ Pour plus d’informations, consultez les articles suivants :
 - [Protéger avec PlayReady/Widevine](media-services-protect-with-playready-widevine.md)
 
 ## <a name="delivering"></a>Remise
-### <a name="dynamic-packaging"></a><a id="dynamic_packaging"/>Empaquetage dynamique
+### <a name="dynamic-packaging"></a><a name="dynamic_packaging"></a>Empaquetage dynamique
 Lors de l’utilisation de Media Services, il est recommandé de toujours encoder vos fichiers mezzanine en un ensemble de fichiers MP4 à vitesse de transmission adaptative, puis de convertir le jeu au format souhaité en utilisant l’ [empaquetage dynamique](media-services-dynamic-packaging-overview.md).
 
 ### <a name="streaming-endpoint"></a>point de terminaison de diffusion en continu
@@ -180,7 +181,7 @@ Par défaut, vous bénéficiez au maximum de deux points de terminaison de diffu
 Vous êtes facturé uniquement lorsque votre StreamingEndpoint est en cours d’exécution.
 
 ### <a name="asset-delivery-policy"></a>Stratégie de remise d’élément multimédia
-L’une des étapes du flux de travail de remise de contenu Media Services consiste à configurer les [stratégies de remise pour les éléments multimédias](https://docs.microsoft.com/rest/api/media/operations/assetdeliverypolicy) que vous souhaitez diffuser en continu. La stratégie de remise de ressources indique à Media Services comment vous souhaitez distribuer vos ressources : dans quel protocole de diffusion en continu votre ressource doit être empaquetée dynamiquement (par exemple, MPEG DASH, HLS, Smooth Streaming ou tous), si vous souhaitez chiffrer dynamiquement votre ressource ou non et comment (chiffrement commun ou d’enveloppe).
+L’une des étapes du flux de travail de remise de contenu Media Services consiste à configurer les [stratégies de remise pour les éléments multimédias](/rest/api/media/operations/assetdeliverypolicy) que vous souhaitez diffuser en continu. La stratégie de remise de ressources indique à Media Services comment vous souhaitez distribuer vos ressources : dans quel protocole de diffusion en continu votre ressource doit être empaquetée dynamiquement (par exemple, MPEG DASH, HLS, Smooth Streaming ou tous), si vous souhaitez chiffrer dynamiquement votre ressource ou non et comment (chiffrement commun ou d’enveloppe).
 
 Si vous avez un élément multimédia avec chiffrement de stockage, avant de pouvoir le diffuser en continu, le serveur de diffusion supprime le chiffrement de stockage et diffuse en continu votre contenu à l’aide de la stratégie de remise spécifiée. Par exemple, pour remettre votre élément multimédia chiffré avec une clé de chiffrement AES (Advanced Encryption Standard), définissez le type de stratégie sur DynamicEnvelopeEncryption. Pour supprimer le chiffrement de stockage et diffuser la ressource en clair, définissez le type de stratégie sur NoDynamicEncryption.
 
@@ -237,4 +238,3 @@ http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

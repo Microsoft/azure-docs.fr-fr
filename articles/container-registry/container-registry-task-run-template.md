@@ -3,12 +3,12 @@ title: Exécution de tâche rapide à l’aide d’un modèle
 description: Mettre en file d’attente une exécution de tâche ACR pour générer une image à l’aide d’un modèle Azure Resource Manager
 ms.topic: article
 ms.date: 04/22/2020
-ms.openlocfilehash: 6e85e4a3d10ea34d71efde959aa7d179eba69e3b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7ad40d2e925d5e1443af9bce4115d45b0e8c06e1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82196990"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "82927766"
 ---
 # <a name="run-acr-tasks-using-resource-manager-templates"></a>Exécuter ACR Tasks à l’aide de modèles Resource Manager
 
@@ -139,7 +139,7 @@ Ce scénario est similaire à [l’authentification multiregistre dans une tâch
 
 ### <a name="create-new-dockerfile"></a>Créer un Dockerfile
 
-Créez un Dockerfile qui extrait l’image de base de votre registre de base. Procédez comme suit dans votre fourche locale du référentiel GitHub, par exemple, https://github.com/myGitHubID/acr-build-helloworld-node.git *.
+Créez un Dockerfile qui extrait l’image de base de votre registre de base. Procédez comme suit dans votre fork locale du référentiel GitHub, par exemple, `https://github.com/myGitHubID/acr-build-helloworld-node.git`.
 
 1. Dans l’interface utilisateur GitHub, sélectionnez **Create new file** (Créer un fichier).
 1. Nommez votre fichier *Dockerfile-test* et collez le contenu suivant. Remplacez le nom de votre registre par *mybaseregistry*.
@@ -187,7 +187,7 @@ Pour cet exemple, fournissez des valeurs pour les paramètres de modèle suivant
 |userAssignedIdentity |ID de ressource de l’identité attribuée par l’utilisateur qui est activée dans la tâche|
 |customRegistryIdentity | ID client de l’identité attribuée par l’utilisateur qui est activée dans la tâche, utilisé pour l’authentification auprès du registre personnalisé |
 |customRegistry |Nom du serveur de connexion du registre personnalisé auquel la tâche accède, par exemple, *mybaseregistry.azurecr.io*|
-|sourceLocation     |Contexte distant pour la tâche de génération, par exemple, *https://github.com/\<your-GitHub-ID\>/acr-build-helloworld-node* |
+|sourceLocation     |Contexte distant pour la tâche de génération, par exemple, *https://github.com/\<your-GitHub-ID\> /acr-build-helloworld-node* |
 |dockerFilePath | Chemin d’accès au Dockerfile dans le contexte distant, utilisé pour générer l’image |
 
 ### <a name="deploy-the-template"></a>Déployer le modèle

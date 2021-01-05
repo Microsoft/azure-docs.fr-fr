@@ -1,25 +1,14 @@
 ---
 title: Authentification et autorisation Azure Relay | Microsoft Docs
 description: Cet article présente l’authentification par signature d’accès partagé (SAS) auprès du service Azure Relay.
-services: service-bus-relay
-documentationcenter: na
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: service-bus-relay
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/21/2020
-ms.author: spelluru
-ms.openlocfilehash: aac5c973a99b13d5918a0162feb7f1ede443463b
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.openlocfilehash: 4b0a5c7a092155a006419eedd170a63abed42bb3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204200"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87033375"
 ---
 # <a name="azure-relay-authentication-and-authorization"></a>Authentification et autorisation Azure Relay
 
@@ -31,7 +20,7 @@ Les applications peuvent s’authentifier auprès d’Azure Relay à l’aide de
 
 Vous pouvez configurer des clés pour SAP dans un espace de noms Relay. Contrairement à la messagerie Service Bus, les [connexions hybrides Relay](relay-hybrid-connections-protocol.md) prennent en charge les expéditeurs non autorisés ou anonymes. Vous pouvez activer l’accès anonyme pour l’entité lors de sa création, comme indiqué dans la capture d’écran suivante du portail :
 
-![][0]
+![Une boîte de dialogue intitulée « Créer une connexion hybride » contient une zone de texte « Nom » et une case à cocher intitulée « Nécessite l’authentification du client », qui est activée.][0]
 
 Pour utiliser SAP, vous pouvez configurer un objet [SharedAccessAuthorizationRule](/dotnet/api/microsoft.servicebus.messaging.sharedaccessauthorizationrule) dans un espace de noms Relay, qui est constitué des éléments suivants :
 

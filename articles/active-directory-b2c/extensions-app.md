@@ -6,16 +6,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 09/06/2017
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 547b625996a65999c32c1b73699e3b408be01de3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dc536fa4292d794e8d89a2564ad10a3c10dd0a3d
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188594"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94560852"
 ---
 # <a name="azure-ad-b2c-extensions-app"></a>Azure AD B2C : application Extensions
 
@@ -39,7 +39,7 @@ Si vous avez supprimé accidentellement b2c-extensions-app, vous avez 30 jours p
 1. Accédez à [https://graphexplorer.azurewebsites.net/](https://graphexplorer.azurewebsites.net/).
 1. Ouvrez une session en tant qu’administrateur général pour l’annuaire Azure AD B2C dans lequel restaurer l’application supprimée. Cet administrateur général doit avoir une adresse e-mail semblable à la suivante : `username@{yourTenant}.onmicrosoft.com`.
 1. Exécutez une requête HTTP GET sur l’URL `https://graph.windows.net/myorganization/deletedApplications` avec les paramètres suivants : api-version=1.6. Cette opération liste toutes les applications qui ont été supprimées au cours des 30 derniers jours.
-1. Dans la liste, recherchez l’application dont le nom commence par « b2c-extension-app », puis copiez sa valeur de propriété `objectid`.
+1. Dans la liste, recherchez l’application dont le nom commence par « b2c-extensions-app », puis copiez sa valeur de propriété `objectid`.
 1. Exécutez une requête HTTP POST sur l’URL `https://graph.windows.net/myorganization/deletedApplications/{OBJECTID}/restore`. Remplacez la partie `{OBJECTID}` de l’URL par le `objectid` de l’étape précédente.
 
 Vous devez maintenant être en mesure de [voir l’application restaurée](#verifying-that-the-extensions-app-is-present) dans le portail Azure.

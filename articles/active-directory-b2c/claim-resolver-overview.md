@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 04/21/2020
+ms.date: 10/28/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 83e1e11fe38a21bbd7c44139fac562342bcab866
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 682b83d7016a89b27b5c936853abda1438f59c28
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82229644"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508014"
 ---
 # <a name="about-claim-resolvers-in-azure-active-directory-b2c-custom-policies"></a>À propos des résolveurs de revendication dans les stratégies personnalisées d’Azure Active Directory B2C
 
@@ -26,7 +26,7 @@ Pour utiliser un résolveur de revendication dans une revendication d’entrée 
 
 Dans l’exemple suivant, un type de revendication nommé `correlationId` est défini avec un **DataType** de `string`.
 
-```XML
+```xml
 <ClaimType Id="correlationId">
   <DisplayName>correlationId</DisplayName>
   <DataType>string</DataType>
@@ -36,7 +36,7 @@ Dans l’exemple suivant, un type de revendication nommé `correlationId` est d�
 
 Dans le profil technique, mappez le résolveur de revendication au type de revendication. Azure AD B2C renseigne la valeur du résolveur de revendication `{Context:CorrelationId}` dans la revendication `correlationId` et envoie la demande au profil technique.
 
-```XML
+```xml
 <InputClaim ClaimTypeReferenceId="correlationId" DefaultValue="{Context:CorrelationId}" />
 ```
 
@@ -88,7 +88,7 @@ Les sections suivantes répertorient les résolveurs de revendication disponible
 | {Context:DateTimeInUtc} |Date et heure UTC.  | 10/10/2018 12:00:00 |
 | {Context:DeploymentMode} |Mode de déploiement de la stratégie.  | Production |
 | {Context:IPAddress} | Adresse IP utilisateur. | 11.111.111.11 |
-| {Context:KMSI} | Indique si la case [Maintenir la connexion](custom-policy-keep-me-signed-in.md) est cochée. |  true |
+| {Context:KMSI} | Indique si la case [Maintenir la connexion](session-behavior.md?pivots=b2c-custom-policy#enable-keep-me-signed-in-kmsi) est cochée. |  true |
 
 ### <a name="claims"></a>Revendications 
 
@@ -113,6 +113,7 @@ Tous les noms de paramètre inclus dans le cadre d’une requête OIDC ou OAuth2
 | Revendication | Description |  Exemple |
 | ----- | ----------------------- | --------|
 | {oauth2:access_token} | Jeton d’accès. | N/A |
+| {oauth2:refresh_token} | Le jeton d’actualisation. | N/A |
 
 
 ### <a name="saml"></a>SAML
@@ -126,6 +127,7 @@ Tous les noms de paramètre inclus dans le cadre d’une requête OIDC ou OAuth2
 | {SAML:ForceAuthn} | Valeur de l'attribut `ForceAuthN`, provenant de l'élément `AuthnRequest` de la demande SAML. | True |
 | {SAML:ProviderName} | Valeur de l'attribut `ProviderName`, provenant de l'élément `AuthnRequest` de la demande SAML.| Contoso.com |
 | {SAML:RelayState} | Paramètre de chaîne de requête `RelayState`.| 
+| {SAML:Subject} | `Subject` de l’élément NameId de la demande SAML AuthN.| 
 
 ## <a name="using-claim-resolvers"></a>Utilisation de programmes de résolution de revendications
 
@@ -157,7 +159,7 @@ Dans un profil technique [RESTful](restful-technical-profile.md), vous pouvez en
 
 L'exemple suivant illustre un profil technique RESTful en lien avec ce scénario :
 
-```XML
+```xml
 <TechnicalProfile Id="REST">
   <DisplayName>Validate user input data and return loyaltyNumber claim</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -183,11 +185,11 @@ L'exemple suivant illustre un profil technique RESTful en lien avec ce scénario
 
 ### <a name="dynamic-ui-customization"></a>Personnalisation dynamique de l’interface utilisateur
 
-Azure AD B2C vous permet de transmettre des paramètres de chaîne de requête à vos points de terminaison de définition de contenu HTML afin d'afficher dynamiquement le contenu de la page. Par exemple, cette fonctionnalité permet de changer l’image d’arrière-plan sur la page de connexion ou d’inscription Azure AD B2C en fonction d’un paramètre personnalisé que vous transmettez depuis votre application web ou mobile. Pour plus d’informations, consultez [Configurer dynamiquement l’interface utilisateur à l’aide de stratégies personnalisées dans Azure Active Directory B2C](custom-policy-ui-customization.md#configure-dynamic-custom-page-content-uri). Vous pouvez également localiser votre page HTML en fonction d’un paramètre de langue ou changer le contenu selon l’ID client.
+Azure AD B2C vous permet de transmettre des paramètres de chaîne de requête à vos points de terminaison de définition de contenu HTML afin d'afficher dynamiquement le contenu de la page. Par exemple, cette fonctionnalité permet de changer l’image d’arrière-plan sur la page de connexion ou d’inscription Azure AD B2C en fonction d’un paramètre personnalisé que vous transmettez depuis votre application web ou mobile. Pour plus d’informations, consultez [Configurer dynamiquement l’interface utilisateur à l’aide de stratégies personnalisées dans Azure Active Directory B2C](customize-ui-with-html.md#configure-dynamic-custom-page-content-uri). Vous pouvez également localiser votre page HTML en fonction d’un paramètre de langue ou changer le contenu selon l’ID client.
 
 L'exemple suivant transmet dans la chaîne de requête les paramètres **campaignId** (valeur `Hawaii`), **language** (valeur `en-US`), et **app** (représentant l'ID client) :
 
-```XML
+```xml
 <UserJourneyBehaviors>
   <ContentDefinitionParameters>
     <Parameter Name="campaignId">{OAUTH-KV:campaignId}</Parameter>
@@ -207,7 +209,7 @@ Ainsi, Azure AD B2C envoie les paramètres ci-dessus à la page de contenu HTML�
 
 Une définition de contenu ([ContentDefinition](contentdefinitions.md)`LoadUri`) vous permet d'envoyer des programmes de résolution de revendications pour extraire du contenu à partir de différents emplacements, conformément aux paramètres utilisés.
 
-```XML
+```xml
 <ContentDefinition Id="api.signuporsignin">
   <LoadUri>https://contoso.blob.core.windows.net/{Culture:LanguageName}/myHTML/unified.html</LoadUri>
   ...
@@ -218,7 +220,7 @@ Une définition de contenu ([ContentDefinition](contentdefinitions.md)`LoadUri`)
 
 Avec Azure Application Insights et les résolveurs de revendication, vous pouvez obtenir des insights sur le comportement de l’utilisateur. Dans le profil technique Application Insights, vous envoyez des revendications d’entrée qui sont conservées dans Azure Application Insights. Pour plus d’informations, consultez [Suivre le comportement des utilisateurs dans les parcours Azure AD B2C à l’aide d’Application Insights](analytics-with-application-insights.md). L’exemple suivant envoie l’ID de stratégie, l’ID de corrélation, la langue et l’ID client à Azure Application Insights.
 
-```XML
+```xml
 <TechnicalProfile Id="AzureInsights-Common">
   <DisplayName>Alternate Email</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.Insights.AzureApplicationInsightsProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -236,7 +238,7 @@ Avec Azure Application Insights et les résolveurs de revendication, vous pouvez
 
 Le profil technique d'une stratégie [Partie de confiance](relyingparty.md) vous permet d'envoyer l'ID du locataire ou l'ID de corrélation à l'application par partie de confiance dans le jeton JWT.
 
-```XML
+```xml
 <RelyingParty>
     <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
     <TechnicalProfile Id="PolicyProfile">

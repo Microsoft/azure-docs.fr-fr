@@ -6,15 +6,24 @@
       href: overview.md
     - name: Éditions et fonctionnalités prises en charge
       href: features.md
+    - name: Notes de publication
+      href: release-notes.md
+    - name: Collecte des données d’utilisation et de diagnostic
+      href: usage-and-diagnostics-data-configuration.md
 - name: Démarrages rapides
   expanded: true
   items:
     - name: Déployer SQL Edge
       href: deploy-portal.md
+    - name: Déployer avec Docker
+      href: disconnected-deployment.md
     - name: Déployer des modèles ONNX sur SQL Edge
       href: deploy-onnx.md
 - name: Tutoriels
+  expanded: true
   items:
+    - name: Déployer dans Kubernetes
+      href: deploy-kubernetes.md
     - name: Synchroniser des données avec Azure Data Factory
       href: tutorial-sync-data-factory.md
     - name: Synchroniser des données avec SQL Data Sync
@@ -27,36 +36,42 @@
           href: tutorial-set-up-iot-edge-modules.md
         - name: Déployer un modèle sur SQL Edge
           href: tutorial-run-ml-model-on-sql-edge.md
-- name: Procédures
-  items:
-    - name: Déployer des tâches Stream Analytics
-      href: stream-analytics.md
-    - name: Configurer la réplication
-      href: configure-replication.md
-    - name: Suivre les modifications de données
-      href: track-data-changes.md
-    - name: Gérer les travaux de streaming T-SQL
-      href: create-stream-analytics-job.md
-    - name: Se connecter à SQL Edge
-      href: connect.md
-    - name: Configurer SQL Edge
-      href: configure.md
-    - name: Déployer un package DAC
-      href: deploy-dacpac.md
 - name: Concepts
   items:
-    - name: Machine Learning et IA avec ONNX
-      href: onnx-overview.md
-    - name: Sauvegarde et restauration
-      href: backup-restore.md
-    - name: Streaming de données dans SQL Edge
+    - name: Déployer
+      items:
+        - name: Déployer à l’aide du portail Azure
+          href: deploy-portal.md
+        - name: Déployer avec Docker
+          href: disconnected-deployment.md
+        - name: Déployer dans Kubernetes
+          href: deploy-kubernetes.md
+        - name: Déployer avec Azure Data Studio
+          href: /sql/azure-data-studio/deploy-azure-sql-edge?toc=%2fazure%2fazure-sql-edge%2ftoc.json
+    - name: Apprentissage automatique
+      items:
+        - name: Machine Learning et IA avec ONNX
+          href: onnx-overview.md
+        - name: Déployer des modèles ONNX
+          href: deploy-onnx.md
+    - name: Performances
+      items:
+        - name: Recommandations sur les performances
+          href: performance-best-practices.md
+    - name: Configurer la continuité de l’activité
+      items:
+        - name: Sauvegarde et restauration
+          href: backup-restore.md
+        - name: Haute disponibilité pour les conteneurs
+          href: high-availability-sql-edge-containers.md
+    - name: Streaming de données
       items:
         - name: Transmettre des données en continu
           href: stream-data.md
+        - name: Créer et gérer des travaux de streaming
+          href: create-stream-analytics-job.md
         - name: Créer un flux externe (Transact-SQL)
           href: create-external-stream-transact-sql.md
-        - name: Modifier un flux externe (Transact-SQL)
-          href: alter-external-stream-transact-sql.md
         - name: Supprimer un flux externe (Transact-SQL)
           href: drop-external-stream-transact-sql.md
         - name: Vues de streaming et vues de gestion dynamique
@@ -65,11 +80,71 @@
               href: streaming-catalog-views.md
             - name: sys.external_job_streams (Transact-SQL)
               href: sys-external-job-streams.md
-            - name: sys.external-streaming_jobs (Transact-SQL)
+            - name: sys.external_streaming_jobs (Transact-SQL)
               href: sys-external-streaming-jobs.md
             - name: sys.external_streams (Transact-SQL)
               href: sys-external-streams.md
     - name: Traitement des données de série chronologique
       items:
-        - name: Date_Bucket (Transact-SQL)
+        - name: Intervalles de temps et valeurs manquantes
+          href: imputing-missing-values.md
+        - name: DATE_BUCKET (Transact-SQL)
           href: date-bucket-tsql.md
+        - name: FIRST_VALUE (Transact-SQL)
+          href: /sql/t-sql/functions/first-value-transact-sql?toc=%2fazure%2fazure-sql-edge%2ftoc.json
+        - name: LAST_VALUE (Transact-SQL)
+          href: /sql/t-sql/functions/last-value-transact-sql?toc=%2fazure%2fazure-sql-edge%2ftoc.json
+        - name: Conservation et nettoyage des données
+          items:
+            - name: Vue d’ensemble de la conservation des données
+              href: data-retention-overview.md
+            - name: Activer ou désactiver la conservation des données
+              href: data-retention-enable-disable.md
+            - name: Nettoyage de la conservation des données
+              href: data-retention-cleanup.md
+            - name: sys.sp_cleanup_data_retention (Transact-SQL)
+              href: sys-sp-cleanup-data-retention.md
+    - name: Sécurité
+      items:
+        - name: Présentation de la sécurité
+          href: security-overview.md
+        - name: Fonctionnalités de sécurité
+          href: /sql/linux/sql-server-linux-security-get-started?toc=%2fazure%2fazure-sql-edge%2ftoc.json
+        - name: Chiffrement des connexions
+          href: /sql/linux/sql-server-linux-encrypted-connections?toc=%2fazure%2fazure-sql-edge%2ftoc.json
+        - name: Azure Security Center pour IoT
+          href: ../defender-for-iot/overview.md?bc=%2fazure%2fazure-sql-edge%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fazure-sql-edge%2ftoc.json
+- name: Procédures
+  items:
+    - name: Configurer SQL Edge
+      items:
+        - name: Configurer à l’aide de variables d’environnement
+          href: configure.md#configure-by-using-environment-variables
+        - name: Configurer à l’aide du fichier mssql.conf
+          href: configure.md#configure-by-using-an-mssqlconf-file
+        - name: Exécuter en tant qu’utilisateur non racine
+          href: configure.md#run-azure-sql-edge-as-non-root-user
+        - name: Conserver les données
+          href: configure.md#persist-your-data
+        - name: Configurer la réplication
+          href: configure-replication.md
+    - name: Se connecter à SQL Edge
+      href: connect.md
+    - name: Déployer un package DAC
+      href: deploy-dacpac.md
+    - name: Suivre les modifications de données
+      href: track-data-changes.md
+    - name: Gérer les travaux de streaming T-SQL
+      href: create-stream-analytics-job.md
+    - name: Résoudre les problèmes de déploiement
+      href: troubleshoot.md
+- name: Référence
+  items:
+    - name: Informations de référence sur Transact-SQL (T-SQL)
+      href: /sql/t-sql/language-reference
+- name: Ressources
+  items:
+    - name: Partenaires
+      items:
+        - name: Sécurité
+          href: resources-partners-security.md

@@ -7,16 +7,16 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 04/27/2020
+ms.date: 10/12/2020
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 314d7ebe9cc363b4186b81d8eda5f892710d71c8
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 48c60878a6a58b2f4629768b81af894a741dab1c
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82229984"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509799"
 ---
 # <a name="web-sign-in-with-openid-connect-in-azure-active-directory-b2c"></a>Connexion web avec OpenID Connect dans Azure Active Directory B2C
 
@@ -34,7 +34,7 @@ Lorsque votre application web a besoin d’authentifier l’utilisateur et d’e
 
 Dans cette demande, le client indique les autorisations qu’il a besoin d’acquérir de l’utilisateur dans le paramètre `scope` et spécifie le flux utilisateur à exécuter. Pour avoir une idée du fonctionnement de la requête, collez-la dans un navigateur et exécutez-la. Remplacez `{tenant}` par le nom de votre locataire. Remplacez `90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6` par l'ID de l'application que vous avez précédemment inscrite dans votre locataire. De même, remplacez le nom de la stratégie (`{policy}`) par le nom de stratégie présent dans votre locataire, par exemple `b2c_1_sign_in`.
 
-```HTTP
+```http
 GET https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/authorize?
 client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6
 &response_type=code+id_token
@@ -64,7 +64,7 @@ Une fois que l’utilisateur a terminé le flux utilisateur, une réponse est re
 
 Une réponse réussie utilisant `response_mode=fragment` se présenterait ainsi :
 
-```HTTP
+```http
 GET https://aadb2cplayground.azurewebsites.net/#
 id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
 &code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...
@@ -79,7 +79,7 @@ id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
 
 Les réponses d’erreur peuvent également être envoyées au paramètre `redirect_uri` pour que l’application puisse les traiter de façon appropriée :
 
-```HTTP
+```http
 GET https://aadb2cplayground.azurewebsites.net/#
 error=access_denied
 &error_description=the+user+canceled+the+authentication
@@ -98,13 +98,13 @@ La réception d’un jeton d’ID à elle seule n’est pas suffisante pour auth
 
 Azure AD B2C présente un point de terminaison de métadonnées OpenID Connect, qui permet à une application d’obtenir des informations sur Azure AD B2C au moment de l’exécution. Ces informations incluent les points de terminaison, le contenu des jetons et les clés de signature de jetons. Il existe un document de métadonnées JSON pour chaque flux utilisateur dans votre locataire B2C. Par exemple, le document de métadonnées pour le flux utilisateur `b2c_1_sign_in` dans `fabrikamb2c.onmicrosoft.com` se trouve à l’emplacement suivant :
 
-```HTTP
+```http
 https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/b2c_1_sign_in/v2.0/.well-known/openid-configuration
 ```
 
 Une des propriétés de ce document de configuration est `jwks_uri`, dont la valeur pour le même flux utilisateur serait :
 
-```HTTP
+```http
 https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/b2c_1_sign_in/discovery/v2.0/keys
 ```
 
@@ -124,7 +124,7 @@ Vous devez également effectuer plusieurs autres validations. Ces validations so
 
 - Vérifier que l’utilisateur/l’organisation s’est inscrit pour l’application.
 - Vérifier que l’utilisateur dispose de l’autorisation/des privilèges appropriés.
-- S’assurer de l’utilisation d’une force certaine d’authentification, comme Azure Multi-Factor Authentication.
+- Vérifier qu'un certain niveau d'authentification a été atteint, par exemple en utilisant Azure AD Multi-Factor Authentication.
 
 Une fois que vous avez validé le jeton d’ID, vous pouvez commencer une session avec l’utilisateur. Vous pouvez utiliser les revendications figurant dans le jeton d’ID pour obtenir des informations sur l’utilisateur dans votre application. Les utilisations de ces informations sont notamment l’affichage, les enregistrements et les autorisations.
 
@@ -136,7 +136,7 @@ Vous pouvez échanger le code d’autorisation que vous avez acquis (en utilisan
 
 Vous pouvez également demander un jeton d’accès pour l’API web de back-end de votre application par convention visant à utiliser l’ID client de l’application comme étendue demandée (ce qui génère un jeton d’accès avec cet ID client comme « public ») :
 
-```HTTP
+```http
 POST {tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/token HTTP/1.1
 Host: {tenant}.b2clogin.com
 Content-Type: application/x-www-form-urlencoded
@@ -157,7 +157,7 @@ grant_type=authorization_code&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&sco
 
 Un jeton de réponse de réussite se présente ainsi :
 
-```JSON
+```json
 {
     "not_before": "1442340812",
     "token_type": "Bearer",
@@ -179,7 +179,7 @@ Un jeton de réponse de réussite se présente ainsi :
 
 Les réponses d’erreur se présentent comme ceci :
 
-```JSON
+```json
 {
     "error": "access_denied",
     "error_description": "The user revoked access to the app.",
@@ -195,7 +195,7 @@ Les réponses d’erreur se présentent comme ceci :
 
 Un jeton d’accès étant acquis, vous pouvez maintenant l’utiliser dans les demandes effectuées à vos API web principales en l’incluant dans l’en-tête `Authorization` :
 
-```HTTP
+```http
 GET /tasks
 Host: mytaskwebapi.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
@@ -205,7 +205,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZn
 
 Les jetons d’ID expirent après un court délai. Actualisez les jetons après leur expiration pour continuer à accéder aux ressources. Vous pouvez actualiser un jeton en envoyant une nouvelle demande `POST` au point de terminaison `/token`. Cette fois-ci, spécifiez le paramètre `refresh_token` au lieu du paramètre `code` :
 
-```HTTP
+```http
 POST {tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/token HTTP/1.1
 Host: {tenant}.b2clogin.com
 Content-Type: application/x-www-form-urlencoded
@@ -219,14 +219,14 @@ grant_type=refresh_token&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&scope=op
 | {policy} | Oui | Flux utilisateur utilisé pour obtenir le jeton d’actualisation d’origine. Vous ne pouvez pas utiliser un autre flux utilisateur dans cette demande. Ajoutez ce paramètre à la chaîne de requête, et non pas au corps POST. |
 | client_id | Oui | ID d’application que le [portail Azure](https://portal.azure.com/) a affecté à votre application. |
 | client_secret | Oui, dans Web Apps | Secret d'application qui a été généré dans le [portail Azure](https://portal.azure.com/). Les clés secrètes client sont utilisées dans ce flux pour les scénarios de type application web, dans lesquels le client peut les stocker de manière sécurisée. Dans les scénarios de type application native (client public), les clés secrètes client ne peuvent pas être stockées en toute sécurité. Elle ne sont donc pas utilisées sur cet appel. Si vous utilisez une clé secrète client, modifiez-la régulièrement. |
-| grant_type | Oui | Type d’octroi, qui doit être un jeton d’actualisation pour cette partie du flux de code d’autorisation. |
+| grant_type | Oui | Type d’octroi, qui doit être `refresh_token` pour cette partie du flux de code d’autorisation. |
 | refresh_token | Oui | Jeton d’actualisation d’origine qui a été acquis dans la seconde partie du flux. L’étendue `offline_access` doit être utilisée dans les demandes d’autorisation et de jeton pour recevoir un jeton d’actualisation. |
 | redirect_uri | Non  | Le paramètre `redirect_uri` de l’application où vous avez reçu le code d’autorisation. |
 | scope | Non  | Une liste d’étendues séparées par des espaces. L’étendue `openid` indique une autorisation pour connecter l’utilisateur et obtenir des données relatives à l’utilisateur sous la forme de jetons d’ID. Elle peut être utilisée afin d’envoyer des jetons à l’API web de back-end de votre application, qui est représentée par le même ID d’application que le client. L’étendue `offline_access` indique que votre application a besoin d’un jeton d’actualisation pour l’accès étendu aux ressources. |
 
 Un jeton de réponse de réussite se présente ainsi :
 
-```JSON
+```json
 {
     "not_before": "1442340812",
     "token_type": "Bearer",
@@ -248,7 +248,7 @@ Un jeton de réponse de réussite se présente ainsi :
 
 Les réponses d’erreur se présentent comme ceci :
 
-```JSON
+```json
 {
     "error": "access_denied",
     "error_description": "The user revoked access to the app.",
@@ -262,11 +262,11 @@ Les réponses d’erreur se présentent comme ceci :
 
 ## <a name="send-a-sign-out-request"></a>Envoi d’une demande de déconnexion
 
-Quand vous souhaitez déconnecter l’utilisateur de l’application, il ne suffit pas de supprimer les cookies de l’application ou d’arrêter la session de l’utilisateur. Redirigez l’utilisateur vers Azure AD B2C pour le déconnecter. Si vous n’y parvenez pas, l’utilisateur peut être en mesure de se réauthentifier auprès de votre application, sans entrer à nouveau ses informations d’identification. Pour plus d’informations, consultez [Session Azure AD B2C](session-overview.md).
+Quand vous souhaitez déconnecter l’utilisateur de l’application, il ne suffit pas de supprimer les cookies de l’application ou d’arrêter la session de l’utilisateur. Redirigez l’utilisateur vers Azure AD B2C pour le déconnecter. Si vous n’y parvenez pas, l’utilisateur peut être en mesure de se réauthentifier auprès de votre application, sans entrer à nouveau ses informations d’identification. Pour plus d’informations, consultez [Session Azure AD B2C](session-behavior.md).
 
 Pour déconnecter l’utilisateur, redirigez-le vers le point de terminaison `end_session` répertorié dans le document de métadonnées OpenID Connect décrit précédemment :
 
-```HTTP
+```http
 GET https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/logout?post_logout_redirect_uri=https%3A%2F%2Fjwt.ms%2F
 ```
 
@@ -274,13 +274,17 @@ GET https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/
 | --------- | -------- | ----------- |
 | {tenant} | Oui | Nom de votre locataire Azure AD B2C |
 | {policy} | Oui | Flux utilisateur que vous voulez utiliser pour déconnecter l’utilisateur de votre application. |
-| id_token_hint| Non  | Jeton d’ID émis précédemment à transmettre au point de terminaison de déconnexion en tant qu’indicateur de la session authentifiée active de l’utilisateur final avec le client. `id_token_hint` vérifie que `post_logout_redirect_uri` est une URL de réponse inscrite dans les paramètres de votre application Azure AD B2C. |
+| id_token_hint| Non  | Jeton d’ID émis précédemment à transmettre au point de terminaison de déconnexion en tant qu’indicateur de la session authentifiée active de l’utilisateur final avec le client. `id_token_hint` vérifie que `post_logout_redirect_uri` est une URL de réponse inscrite dans les paramètres de votre application Azure AD B2C. Pour en savoir plus, consultez [Sécuriser la redirection de déconnexion](#secure-your-logout-redirect). |
 | client_id | Non* | ID d’application que le [portail Azure](https://portal.azure.com/) a affecté à votre application.<br><br>\**Cela est nécessaire lors de l’utilisation de la configuration de l’authentification unique de l’isolation `Application` et _Demander le jeton d’ID_ dans la demande de déconnexion est défini sur `No`.* |
 | post_logout_redirect_uri | Non  | URL vers laquelle l’utilisateur doit être redirigé après la déconnexion. Si elle n’est pas incluse, Azure AD B2C affiche un message générique à l’utilisateur. À moins de fournir un `id_token_hint`, vous ne devez pas inscrire cette URL en tant qu’URL de réponse dans les paramètres de votre application Azure AD B2C. |
 | state | Non  | Si un paramètre `state` est inclus dans la demande, la même valeur doit apparaître dans la réponse. L’application doit vérifier que les valeurs `state` de la demande et de la réponse sont identiques. |
 
 ### <a name="secure-your-logout-redirect"></a>Sécuriser la redirection de déconnexion
 
-Après la déconnexion, l’utilisateur est redirigé vers l’URI spécifié dans le paramètre `post_logout_redirect_uri`, quelles que soient les URL de réponse qui ont été spécifiées pour l’application. Cependant, si un `id_token_hint` valide est transmis, Azure AD B2C vérifie que la valeur de `post_logout_redirect_uri` correspond à l’un des URI de redirection configurés de l’application avant d’effectuer la redirection. Si aucune URL de réponse correspondante n’a été configurée pour l’application, un message d’erreur s’affiche et l’utilisateur n’est pas redirigé.
+Après la déconnexion, l’utilisateur est redirigé vers l’URI spécifié dans le paramètre `post_logout_redirect_uri`, quelles que soient les URL de réponse qui ont été spécifiées pour l’application. Cependant, si un `id_token_hint` valide est transmis et que l’option **Exiger un jeton d’ID dans les demandes de déconnexion** est activée, Azure AD B2C vérifie que la valeur de `post_logout_redirect_uri` correspond à l’un des URI de redirection configurés de l’application avant d’effectuer la redirection. Si aucune URL de réponse correspondante n’a été configurée pour l’application, un message d’erreur s’affiche et l’utilisateur n’est pas redirigé.
 
+Pour définir le jeton d’ID requis dans les demandes de déconnexion, consultez [Configurer le comportement de session dans Azure Active Directory B2C](session-behavior.md#secure-your-logout-redirect).
 
+## <a name="next-steps"></a>Étapes suivantes
+
+- En savoir plus sur une [session Azure AD B2C](session-behavior.md).

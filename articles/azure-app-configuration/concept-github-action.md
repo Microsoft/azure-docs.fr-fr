@@ -6,12 +6,12 @@ ms.author: lcozzens
 ms.date: 02/20/2020
 ms.topic: conceptual
 ms.service: azure-app-configuration
-ms.openlocfilehash: 602ccddf97938022df3c5903b573608558fe5d35
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: 66d0e32e7dfdd5ab2abee5108ac8ce54c5222747
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80585482"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87371819"
 ---
 # <a name="sync-your-github-repository-to-app-configuration"></a>Synchroniser votre dépôt GitHub avec App Configuration
 
@@ -25,7 +25,7 @@ Un [workflow](https://help.github.com/articles/about-github-actions#workflow) Gi
 La [documentation](https://help.github.com/actions/automating-your-workflow-with-github-actions/configuring-a-workflow) GitHub fournit une vue détaillée des flux de travail et actions GitHub. 
 
 ## <a name="enable-github-actions-in-your-repository"></a>Activer GitHub Actions dans votre dépôt
-Pour commencer à utiliser cette action GitHub, accédez à votre dépôt et sélectionnez l’onglet **Actions**. Cliquez sur **Nouveau workflow**, puis sur **Configurer un workflow vous-même**. Enfin, recherchez « Azure App Configuration Sync » sur la Place de marché.
+Pour commencer à utiliser cette action GitHub, accédez à votre dépôt et sélectionnez l’onglet **Actions**. Sélectionnez **Nouveau workflow**, puis **Configurer un workflow vous-même**. Enfin, recherchez « Azure App Configuration Sync » sur la Place de marché.
 > [!div class="mx-imgBorder"]
 > ![Sélectionner l’onglet Action](media/find-github-action.png)
 
@@ -61,8 +61,121 @@ jobs:
           separator: ':' 
 ```
 
+## <a name="use-strict-sync"></a>Utiliser une synchronisation stricte
+Par défaut, l’action GitHub n’active pas le mode strict, ce qui signifie que la synchronisation ajoutera uniquement les valeurs de clés du fichier de configuration à l’instance App Configuration (aucune paire clé-valeur n’est supprimée). L’activation du mode strict signifie que les paires clé-valeur qui ne se trouvent pas dans le fichier de configuration sont supprimées de l’instance App Configuration, afin qu’elles correspondent au fichier de configuration. Si vous effectuez une synchronisation à partir de plusieurs sources ou à l’aide d’Azure Key Vault avec App Configuration, vous pouvez utiliser des préfixes ou des étiquettes différents avec une synchronisation stricte afin d’éviter d’effacer les paramètres de configuration d’autres fichiers (voir les exemples ci-dessous). 
+
+```json
+on: 
+  push: 
+    branches: 
+      - 'master' 
+    paths: 
+      - 'appsettings.json' 
+ 
+jobs: 
+  syncconfig: 
+    runs-on: ubuntu-latest 
+    steps: 
+      # checkout done so that files in the repo can be read by the sync 
+      - uses: actions/checkout@v1 
+      - uses: azure/appconfiguration-sync@v1 
+        with: 
+          configurationFile: 'appsettings.json' 
+          format: 'json' 
+          # Replace <ConnectionString> with the name of the secret in your 
+          # repository 
+          connectionString: ${{ secrets.<ConnectionString> }}  
+          separator: ':' 
+          label: 'Label' 
+          prefix: 'Prefix:' 
+          strict: true 
+```
+## <a name="sync-multiple-files-in-one-action"></a>Synchroniser plusieurs fichiers en une seule action 
+
+Si votre configuration se trouve dans plusieurs fichiers, vous pouvez utiliser le modèle ci-dessous pour déclencher une synchronisation lorsque l’un des fichiers est modifié. Ce modèle utilise la bibliothèque Glob https://www.npmjs.com/package/glob. Notez que si le nom de votre fichier config contient une virgule, vous pouvez utiliser une barre oblique inverse pour éviter la virgule. 
+
+```json
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'appsettings.json'
+      - 'appsettings2.json'
+
+jobs:
+  syncconfig:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout done so that files in the repo can be read by the sync
+      - uses: actions/checkout@v1
+      - uses: azure/appconfiguration-sync@v1
+        with:
+          configurationFile: '{appsettings.json,appsettings2.json}'
+          format: 'json'
+          # Replace <ConnectionString> with the name of the secret in your repository
+          connectionString: ${{ secrets.<ConnectionString> }}
+          separator: ':'
+```
+
+## <a name="sync-by-prefix-or-label"></a>Synchroniser par préfixe ou étiquette
+Si vous spécifiez des préfixes ou des étiquettes dans votre action de synchronisation, vous synchroniserez uniquement cet ensemble particulier. Cela est important pour l’utilisation de la synchronisation stricte avec plusieurs fichiers. Selon la configuration utilisée, un préfixe ou une étiquette peut être associé à chaque fichier, puis chaque préfixe ou étiquette peut être synchronisé séparément afin que rien ne soit remplacé. En règle générale, les préfixes sont utilisés pour différentes applications ou les services et étiquettes sont utilisés pour différents environnements. 
+
+Synchronisation par préfixe : 
+
+```json
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'appsettings.json'
+
+jobs:
+  syncconfig:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout done so that files in the repo can be read by the sync
+      - uses: actions/checkout@v1
+      - uses: azure/appconfiguration-sync@v1
+        with:
+          configurationFile: 'appsettings.json'
+          format: 'json'
+          # Replace <ConnectionString> with the name of the secret in your repository
+          connectionString: ${{ secrets.<ConnectionString> }}
+          separator: ':'
+          prefix: 'Prefix::'
+```
+
+Synchronisation par étiquette : 
+
+```json
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'appsettings.json'
+
+jobs:
+  syncconfig:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout done so that files in the repo can be read by the sync
+      - uses: actions/checkout@v1
+      - uses: azure/appconfiguration-sync@v1
+        with:
+          configurationFile: 'appsettings.json'
+          format: 'json'
+          # Replace <ConnectionString> with the name of the secret in your repository
+          connectionString: ${{ secrets.<ConnectionString> }}
+          separator: ':'
+          label: 'Label'
+
+```
+
 ## <a name="use-a-dynamic-label-on-sync"></a>Utiliser une étiquette dynamique lors d’une synchronisation
-L’action précédente met à jour l’instance App Configuration à chaque mise à jour de `appsettings.json`. Cette action insère une étiquette dynamique à chaque synchronisation. De cette façon, chaque synchronisation peut être identifiée et les modifications du code peuvent être mappées aux modifications de configuration.
+L’action suivante insère une étiquette dynamique à chaque synchronisation. De cette façon, chaque synchronisation peut être identifiée et les modifications du code peuvent être mappées aux modifications de configuration.
 
 La première section de ce flux de travail spécifie que l’action se déclenche *sur* un *push* contenant `appsettings.json` vers la branche *maître*. La deuxième section exécute un travail qui crée une étiquette pour la mise à jour de configuration en fonction du hachage de validation. Le travail met ensuite à jour l’instance App Configuration avec les nouvelles valeurs et l’étiquette unique pour cette mise à jour.
 
@@ -95,36 +208,45 @@ jobs:
           label: ${{ steps.determine_label.outputs.LABEL }} 
 ```
 
-## <a name="use-strict-sync"></a>Utiliser une synchronisation stricte
-Lorsque le mode strict est activé, la synchronisation garantit que l’instance App Configuration correspond exactement au fichier de configuration pour le préfixe et l’étiquette donnés. Si les paires clé-valeur qui ont le même préfixe et le même nom ne figurent pas dans le fichier de configuration, elles sont supprimées. 
- 
-Si le mode strict n’est pas activé, la synchronisation ne définit que les paires clé-valeur du fichier de configuration. Aucune paire clé-valeur n’est supprimée. 
+## <a name="use-azure-key-vault-with-github-action"></a>Utiliser Azure Key Vault avec l’action GitHub
+Les développeurs qui utilisent Azure Key Vault avec AppConfiguration doivent utiliser deux fichiers distincts, généralement un fichier appSettings.json et un fichier secretreferences.json. Le fichier secretreferences.json contient l’URL du secret du coffre de clés.
+
+{ "mySecret": "{\"uri\":\"https://myKeyVault.vault.azure.net/secrets/mySecret "}" }
+
+L’action GitHub peut ensuite être configurée pour effectuer une synchronisation stricte sur appSettings.json, suivie d’une synchronisation non stricte sur secretreferences.json. L’exemple suivant déclenche une synchronisation lorsque l’un des fichiers est mis à jour :
 
 ```json
-on: 
-  push: 
-    branches: 
-      - 'master' 
-    paths: 
-      - 'appsettings.json' 
- 
-jobs: 
-  syncconfig: 
-    runs-on: ubuntu-latest 
-    steps: 
-      # checkout done so that files in the repo can be read by the sync 
-      - uses: actions/checkout@v1 
-      - uses: azure/appconfiguration-sync@v1 
-        with: 
-          configurationFile: 'appsettings.json' 
-          format: 'json' 
-          # Replace <ConnectionString> with the name of the secret in your 
-          # repository 
-          connectionString: ${{ secrets.<ConnectionString> }}  
-          separator: ':' 
-          label: 'Label' 
-          prefix: 'Prefix:' 
-          strict: true 
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'appsettings.json'
+      - 'secretreferences.json'
+
+jobs:
+  syncconfig:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout done so that files in the repo can be read by the sync
+      - uses: actions/checkout@v1
+      - uses: azure/appconfiguration-sync@v1
+        with:
+          configurationFile: 'appsettings.json'
+          format: 'json'
+          # Replace <ConnectionString> with the name of the secret in your repository
+          connectionString: ${{ secrets.<ConnectionString> }}
+          separator: ':'
+          strict: true
+      - uses: azure/appconfiguration-sync@v1
+        with:
+          configurationFile: 'secretreferences.json'
+          format: 'json'
+          # Replace <ConnectionString> with the name of the secret in your repository
+          connectionString: ${{ secrets.<ConnectionString> }}
+          separator: ':'
+          contentType: 'application/vnd.microsoft.appconfig.keyvaultref+json;charset=utf-8'
+
 ```
 
 ## <a name="use-max-depth-to-limit-github-action"></a>Utiliser une profondeur maximale pour limiter une action GitHub

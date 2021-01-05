@@ -2,14 +2,14 @@
 author: erhopf
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 02/10/2020
+ms.date: 10/15/2020
 ms.author: erhopf
-ms.openlocfilehash: e3ee175e521fe37c99fcb3650ce7480f3f503a08
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 967861363d5056a5a466aa88840cda2aafbeb86b
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83673269"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96188316"
 ---
 Pour créer un projet Visual Studio pour le développement Desktop en C++, vous devez configurer les options de développement de Visual Studio, créer le projet, sélectionner l’architecture cible et installer le SDK Speech.
 
@@ -19,13 +19,13 @@ Pour commencer, vérifiez que Visual Studio est configuré correctement pour le 
 
 1. Ouvrez Visual Studio 2019 pour afficher la fenêtre **Démarrer**.
 
-   ![Fenêtre Démarrer - Visual Studio](../articles/cognitive-services/Speech-Service/media/sdk/vs-start-window.png)
+   ![Capture d’écran montrant la fenêtre « Démarrer » de Visual Studio 2019.](../articles/cognitive-services/Speech-Service/media/sdk/vs-start-window.png)
 
 1. Sélectionnez **Continuer sans code** pour accéder à l’IDE Visual Studio.
 
 1. Dans la barre de menus de Visual Studio, sélectionnez **Outils** > **Obtenir les outils et fonctionnalités** pour ouvrir Visual Studio Installer et afficher la boîte de dialogue **Modification**.
 
-   ![Onglet Charges de travail, boîte de dialogue Modification, Visual Studio Installer](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-cpp-workload.png)
+   ![Capture d’écran montrant l’onglet « Charges de travail » de la boîte de dialogue « Modification » pour « Visual Studio Installer ».](../articles/cognitive-services/Speech-Service/media/sdk/vs-enable-cpp-workload.png)
 
 1. Sous l’onglet **Charges de travail**, sous **Windows**, recherchez la charge de travail **Développement Desktop en C++** . Si la case située en regard de cette charge de travail n’est pas déjà cochée, cochez-la.
 
@@ -53,7 +53,7 @@ Ensuite, créez votre projet :
 
 1. Dans **Emplacement**, accédez au dossier où enregistrer votre projet et sélectionnez-le, ou bien créez ce dossier.
 
-Sélectionnez maintenant l’architecture de votre plateforme cible. Dans la barre d’outils de Visual Studio, recherchez la zone de liste déroulante **Plateformes Solution**. (Si vous ne la voyez pas, choisissez**Afficher** > **Barres d’outils** > **Standard** pour afficher la barre d’outils contenant **Plateformes Solution**.) Si vous exécutez Windows 64 bits, choisissez **x64** dans la zone de liste déroulante. Windows 64 bits peut aussi exécuter les applications 32 bits : vous pouvez donc choisir **x86** si vous préférez.
+Sélectionnez maintenant l’architecture de votre plateforme cible. Dans la barre d’outils de Visual Studio, recherchez la zone de liste déroulante **Plateformes Solution**. (Si vous ne la voyez pas, choisissez **Afficher** > **Barres d’outils** > **Standard** pour afficher la barre d’outils contenant **Plateformes Solution**.) Si vous exécutez Windows 64 bits, choisissez **x64** dans la zone de liste déroulante. Windows 64 bits peut aussi exécuter les applications 32 bits : vous pouvez donc choisir **x86** si vous préférez.
 
 ### <a name="install-the-speech-sdk"></a>Installer le Kit de développement logiciel (SDK) Speech
 
@@ -77,4 +77,4 @@ Enfin, installez le [package NuGet du SDK Speech](https://aka.ms/csspeech/nuget)
 
 1. Dans la boîte de dialogue **Aperçu des modifications**, sélectionnez **OK**.
 
-1. Dans la boîte de dialogue **Acceptation de la licence**, affichez la licence, puis sélectionnez **J’accepte**. L’installation du package commence et, quand l’installation est terminée, le volet **Sortie** affiche un message similaire au texte suivant : `Successfully installed 'Microsoft.CognitiveServices.Speech 1.12.0' to helloworld`.
+1. Dans la boîte de dialogue **Acceptation de la licence**, affichez la licence, puis sélectionnez **J’accepte**. L’installation du package commence et, quand l’installation est terminée, le volet **Sortie** affiche un message similaire au texte suivant : `Successfully installed 'Microsoft.CognitiveServices.Speech 1.13.0' to helloworld`.

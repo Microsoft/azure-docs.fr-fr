@@ -3,12 +3,12 @@ title: Empaqueter un fichier exécutable existant sur Azure Service Fabric
 description: Découvrez-en plus sur l’empaquetage d’une application existante en tant que fichier exécutable invité afin de la déployer sur un cluster Service Fabric.
 ms.topic: conceptual
 ms.date: 03/15/2018
-ms.openlocfilehash: 3d7aab28a32effa2caf7b04b830d72e5e3dfda56
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b808d092001196a4d2150e44d508e031db95554
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75457821"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017744"
 ---
 # <a name="deploy-an-existing-executable-to-service-fabric"></a>Déployer un fichier exécutable existant sur Service Fabric
 Vous pouvez exécuter n’importe quel type de code, comme Node.js, Java ou C++ dans Azure Service Fabric en tant que service. Dans la terminologie Service Fabric, ces types de service sont appelés des exécutables invités.
@@ -65,8 +65,7 @@ Le paramètre ApplicationPackageRoot contient le fichier ApplicationManifest.xml
 ## <a name="next-steps"></a>Étapes suivantes
 Consultez les articles suivants pour obtenir des informations supplémentaires et connaître les tâches connexes.
 * [Déployer un fichier exécutable invité](service-fabric-deploy-existing-app.md)
-* [Déploiement de plusieurs exécutables invités](service-fabric-deploy-multiple-apps.md)
+* [Déploiement de plusieurs exécutables invités](./service-fabric-deploy-existing-app.md)
 * [Créer votre première application exécutable invitée avec Visual Studio](quickstart-guest-app.md)
 * [Exemple pour empaqueter et déployer un exécutable invité](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started), avec un lien vers la version préliminaire de l’outil d’empaquetage
 * [Exemple de deux exécutables invités (C# et nodejs) communiquant via le service d’attribution de noms à l’aide de REST](https://github.com/Azure-Samples/service-fabric-containers)
-

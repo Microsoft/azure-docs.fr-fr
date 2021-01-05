@@ -3,16 +3,16 @@ title: Python – Authentification de service à service – Data Lake Storage G
 description: Découvrez comment procéder à une authentification de service à service auprès d’Azure Data Lake Storage Gen1 en utilisant Azure Active Directory et Python
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.custom: has-adal-ref
-ms.openlocfilehash: 449159f6857cb2120f4570a8c20cd82fd11016a2
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.custom: has-adal-ref, devx-track-python
+ms.openlocfilehash: fe987070438c689e899dee18edaf4f708555ab11
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82688125"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92106754"
 ---
 # <a name="service-to-service-authentication-with-azure-data-lake-storage-gen1-using-python"></a>Authentification de service à service auprès d’Azure Data Lake Storage Gen1 à l’aide de Python
 > [!div class="op_single_selector"]
@@ -40,7 +40,7 @@ Pour utiliser Data Lake Storage Gen1 avec Python, vous devez installer trois mod
 
 * Le module `azure-mgmt-resource`, qui inclut des modules Azure pour Active Directory, etc.
 * Le module `azure-mgmt-datalake-store`, qui inclut les opérations de gestion du compte Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules de gestion Azure Data Lake Storage Gen1](/python/api/azure-mgmt-datalake-store/).
-* Le module `azure-datalake-store`, qui inclut les opérations de gestion du système de fichiers Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules du système de fichiers azure-datalake-store](https://docs.microsoft.com/python/api/azure-datalake-store/azure.datalake.store.core/).
+* Le module `azure-datalake-store`, qui inclut les opérations de gestion du système de fichiers Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules du système de fichiers azure-datalake-store](/python/api/azure-datalake-store/azure.datalake.store.core/).
 
 Utilisez les commandes suivantes pour installer les modules.
 
@@ -82,30 +82,34 @@ pip install azure-datalake-store
 
 Utilisez cet extrait de code pour l’authentification auprès d’Azure AD pour les opérations de gestion de compte sur Data Lake Storage Gen1, telles que la création ou la suppression d’un compte Data Lake Storage Gen1, etc. Vous pouvez utiliser l’extrait de code suivant pour authentifier votre application en mode non interactif, en utilisant la clé secrète client pour une application/un principal de service d’une application « Web App » Azure AD existante.
 
-    authority_host_uri = 'https://login.microsoftonline.com'
-    tenant = '<TENANT>'
-    authority_uri = authority_host_uri + '/' + tenant
-    RESOURCE = 'https://management.core.windows.net/'
-    client_id = '<CLIENT_ID>'
-    client_secret = '<CLIENT_SECRET>'
+```python
+authority_host_uri = 'https://login.microsoftonline.com'
+tenant = '<TENANT>'
+authority_uri = authority_host_uri + '/' + tenant
+RESOURCE = 'https://management.core.windows.net/'
+client_id = '<CLIENT_ID>'
+client_secret = '<CLIENT_SECRET>'
 
-    context = adal.AuthenticationContext(authority_uri, api_version=None)
-    mgmt_token = context.acquire_token_with_client_credentials(RESOURCE, client_id, client_secret)
-    armCreds = AADTokenCredentials(mgmt_token, client_id, resource=RESOURCE)
+context = adal.AuthenticationContext(authority_uri, api_version=None)
+mgmt_token = context.acquire_token_with_client_credentials(RESOURCE, client_id, client_secret)
+armCreds = AADTokenCredentials(mgmt_token, client_id, resource=RESOURCE)
+```
 
 ## <a name="service-to-service-authentication-with-client-secret-for-filesystem-operations"></a>Authentification de service à service avec clé secrète client pour les opérations du système de fichiers
 
 Utilisez l’extrait de code suivant pour procéder à une authentification auprès d’Azure AD pour les opérations du système de fichiers sur Data Lake Storage Gen1, telles que la création d’un dossier, le chargement d’un fichier, etc. Vous pouvez faire appel à l’extrait de code suivant pour authentifier votre application en mode non interactif, en utilisant la clé secrète client pour une application/un principal du service. Utilisez-le avec une « application web » Azure AD existante.
 
-    tenant = '<TENANT>'
-    RESOURCE = 'https://datalake.azure.net/'
-    client_id = '<CLIENT_ID>'
-    client_secret = '<CLIENT_SECRET>'
+```python
+tenant = '<TENANT>'
+RESOURCE = 'https://datalake.azure.net/'
+client_id = '<CLIENT_ID>'
+client_secret = '<CLIENT_SECRET>'
 
-    adlCreds = lib.auth(tenant_id = tenant,
-                    client_secret = client_secret,
-                    client_id = client_id,
-                    resource = RESOURCE)
+adlCreds = lib.auth(tenant_id = tenant,
+                client_secret = client_secret,
+                client_id = client_id,
+                resource = RESOURCE)
+```
 
 <!-- ## Service-to-service authentication with certificate for account management
 

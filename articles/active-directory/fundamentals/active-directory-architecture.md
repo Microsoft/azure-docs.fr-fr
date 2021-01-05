@@ -2,7 +2,7 @@
 title: Vue d’ensemble de l’architecture - Azure Active Directory | Microsoft Docs
 description: Découvrez ce qu’est un locataire Azure Active Directory et comment gérer Azure à l’aide d’Azure Active Directory.
 services: active-directory
-author: msaburnley
+author: ajburnle
 manager: daveba
 ms.service: active-directory
 ms.subservice: fundamentals
@@ -13,12 +13,12 @@ ms.author: ajburnle
 ms.reviewer: jeffsta
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 854fb4649f8c1113f20abe5807dd0ce473ba6ee3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 476cf8013f5dc8b5d54efb573cf305d81fc690b1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77368069"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996710"
 ---
 # <a name="what-is-the-azure-active-directory-architecture"></a>Qu’est-ce que l’architecture Azure Active Directory ?
 
@@ -123,4 +123,4 @@ Utilisation de contrôles opérationnels, tels que l’authentification multifac
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Guide du développeur Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop)
+[Guide du développeur Azure Active Directory](../develop/index.yml)

@@ -5,15 +5,15 @@ description: Cet article explique comment configurer un tunnel utilisateur VPN A
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 03/12/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: cherylmc
-ms.openlocfilehash: 56934dd13661d8f623e673e2817e87618675c7ed
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 99d21222a62ed6b27a6a1b2a73b704f4cb26457b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79502262"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89435794"
 ---
 # <a name="configure-an-always-on-vpn-user-tunnel"></a>Configurer un tunnel utilisateur VPN Always On
 

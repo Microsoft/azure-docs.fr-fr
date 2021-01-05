@@ -6,34 +6,39 @@ author: brahmnes
 ms.author: bfung
 ms.date: 03/26/2019
 ms.reviewer: mbullwin
-ms.openlocfilehash: 8af688e38003e0613a06d7d8622ce279a3838589
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 35653840c5ddd6f5ae2d5dc078513f0fa35ab34a
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80298270"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97560931"
 ---
 # <a name="enable-snapshot-debugger-for-net-apps-in-azure-app-service"></a>Activer le Débogueur de capture instantanée pour les applications .NET dans Azure App Service
 
-Le Débogueur de capture instantanée fonctionne actuellement pour les applications ASP.NET et ASP.NET Core s’exécutant sur Azure App Service sur des plans de service Windows.
+Le Débogueur de capture instantanée fonctionne actuellement pour les applications ASP.NET et ASP.NET Core s’exécutant sur Azure App Service sur des plans de service Windows. Lorsque vous utilisez le Débogueur de capture instantanée, nous vous recommandons d'exécuter votre application au niveau de service De base (ou supérieur). Pour la plupart des applications, la mémoire disponible avec les niveaux de service Gratuit et Partagé est insuffisante pour enregistrer les captures instantanées.
 
 ## <a name="enable-snapshot-debugger"></a><a id="installation"></a> Activer le Débogueur de capture instantanée
-Pour activer le Débogueur de capture instantanée pour une application, suivez les instructions ci-dessous. Si vous exécutez un autre type de service Azure, voici les instructions à suivre pour activer le Débogueur de capture instantanée sur d’autres plateformes prises en charge :
+Pour activer le Débogueur de capture instantanée pour une application, suivez les instructions ci-dessous.
+
+Si vous exécutez un autre type de service Azure, voici les instructions à suivre pour activer Débogueur de capture instantanée sur d’autres plateformes prises en charge :
 * [Azure Cloud Services](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json)
 * [Services Azure Service Fabric](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json)
 * [Machines virtuelles Azure et Virtual Machine Scale Sets](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json)
 * [Machines virtuelles ou physiques locales](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json)
 
-Si vous utilisez une préversion de .NET Core, suivez les instructions pour [Activer le débogueur de capture instantanée pour d’autres environnements](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json) pour d’abord inclure le package NuGet [Microsoft.ApplicationInsights.SnapshotCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.SnapshotCollector) avec l’application, puis effectuez le reste des instructions ci-dessous. 
+> [!NOTE]
+> Si vous utilisez une préversion de .NET Core ou que votre application fait référence au Kit de développement logiciel (SDK) Application Insights, directement ou indirectement via un assembly dépendant, suivez d’abord les instructions pour [activer Débogueur de capture instantanée pour d’autres environnements](snapshot-debugger-vm.md?toc=/azure/azure-monitor/toc.json) pour inclure le package NuGet [Microsoft.ApplicationInsights.SnapshotCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.SnapshotCollector) avec l’application, puis effectuez le reste des instructions ci-dessous. 
 
-Le Débogueur de capture instantanée Application Insights est préinstallé dans le cadre de l’exécution d’App Services, mais vous devez l’activer pour obtenir des captures instantanées pour votre application App Service. Une fois que vous avez déployé une application, même si vous avez inclus le SDK Application Insights dans le code source, suivez les étapes ci-dessous pour activer le débogueur de capture instantanée.
+Débogueur de capture instantanée est préinstallé dans le cadre du runtime d’App Services, mais vous devez l’activer pour obtenir des captures instantanées pour votre application App Service.
 
-1. Accédez au volet **App Services** dans le portail Azure.
-2. Accédez au volet **Paramètres > Application Insights**.
+Une fois que vous avez déployé une application, suivez les étapes ci-dessous pour activer le débogueur de capture instantanée :
+
+1. Accédez au panneau de configuration Azure pour votre App Service.
+2. Accédez à la page **Paramètres > Application Insights**.
 
    ![Activer App Insights sur le portail App Services](./media/snapshot-debugger/applicationinsights-appservices.png)
 
-3. Suivez les instructions dans le volet pour créer une ressource ou sélectionnez une ressource App Insights existante pour superviser votre application. Vérifiez également que les deux commutateurs du Débogueur de capture instantanée sont définis sur **On** (Activé).
+3. Suivez les instructions dans la page pour créer une ressource ou sélectionnez une ressource App Insights existante pour superviser votre application. Vérifiez également que les deux commutateurs du Débogueur de capture instantanée sont définis sur **On** (Activé).
 
    ![Ajouter l’extension de site Application Insights][Enablement UI]
 
@@ -44,11 +49,12 @@ Le Débogueur de capture instantanée Application Insights est préinstallé dan
 ## <a name="disable-snapshot-debugger"></a>Désactiver le Débogueur de capture instantanée
 
 Suivez les mêmes étapes que pour **Activer le Débogueur de capture instantanée**, mais basculez les deux commutateurs du Débogueur de capture instantanée sur **Off** (Désactivé).
-Nous vous recommandons d’avoir le Débogueur de capture instantanée activé sur toutes vos applications afin de faciliter le diagnostic des exceptions d’application.
+
+Nous vous recommandons d’activer Débogueur de capture instantanée sur toutes vos applications afin de faciliter le diagnostic des exceptions d’application.
 
 ## <a name="azure-resource-manager-template"></a>Modèle Azure Resource Manager
 
-Pour un service Azure App Service, vous pouvez définir des paramètres d’application dans un modèle Resource Manager pour activer le Débogueur de capture instantanée et le Profileur. Vous ajoutez une ressource de configuration contenant les paramètres de l’application en tant que ressource enfant du site web :
+Pour un service Azure App Service, vous pouvez définir des paramètres d’application dans le modèle Azure Resource Manager pour activer Débogueur de capture instantanée et Profiler, voir l’extrait de code du modèle ci-dessous :
 
 ```json
 {

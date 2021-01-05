@@ -1,18 +1,18 @@
 ---
 title: Facturation basée sur des mesures pour les applications managées à l’aide du service de mesure de la Place de marché | Place de marché Azure
 description: Cette documentation est un guide pour les éditeurs de logiciels indépendants publiant des applications Azure avec des modèles de facturation flexibles.
-author: qianw211
-ms.author: dsindona
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/22/2020
-ms.openlocfilehash: 180015a6bab576c02dcfaaea589628e40c6adde4
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.author: mingshen
+author: mingshen-ms
+ms.openlocfilehash: d015cec30e516541b50c2acfac38fad898965e1b
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82736104"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436349"
 ---
 # <a name="managed-application-metered-billing"></a>Facturation des applications managées basée sur des mesures 
 
@@ -22,7 +22,7 @@ Le service de mesure de la Place de marché vous permet de créer des plans d’
 
 Pour qu’un plan d’application managée utilise la facturation basée sur des mesures, il doit remplir les critères suivants :
 
-* Respecter toutes les exigences d’offre décrites dans [Créer une offre d’application Azure](create-new-azure-apps-offer.md).
+* Respecter toutes les exigences d’offre décrites dans [Créer une offre d’application Azure](../create-new-azure-apps-offer.md).
 * Fixer une **Tarification** pour facturer aux clients le coût mensuel de votre service. Le prix peut être égal à zéro si vous ne souhaitez pas facturer des frais fixes mais plutôt vous appuyer entièrement sur la facturation basée sur des mesures.
 * Définir des **dimensions de facturation** pour les événements mesurés pour lesquels le client paiera en plus du tarif forfaitaire.
 * S’intégrer aux [API du service de mesure de la consommation de la Place de marché](./marketplace-metering-service-apis.md) pour informer Microsoft des événements facturables.
@@ -107,25 +107,17 @@ Une fois qu’un plan est publié, les détails au niveau du plan ne peuvent plu
 
 ### <a name="upper-limits"></a>Limites supérieures
 
-Le nombre maximal de dimensions pouvant être configurées pour une même offre est de 18 dimensions uniques.
+Le nombre maximal de dimensions pouvant être configurées pour une même offre est de 30 dimensions uniques.
 
 ## <a name="get-support"></a>Obtenir de l’aide
 
-Si l’un des cas suivants se présente, vous pouvez ouvrir un ticket de support.
+Si vous rencontrez l’un des problèmes suivants, vous pouvez ouvrir un ticket de support.
 
 * Problèmes techniques liés à l’API du service de mesure de la consommation de la Place de marché.
 * Un problème qui doit être remonté en raison d’une erreur ou d’un bogue de votre côté (par exemple un événement d’utilisation incorrect).
 * Tout autre problème lié à la facturation à la consommation.
 
-Suivez les étapes ci-dessous pour envoyer votre ticket de support :
-
-1. Accédez à la [page de support](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff). Les premiers menus déroulants sont automatiquement remplis pour vous. Pour le support de la Place de marché, identifiez la famille de produits comme étant **Services cloud et en ligne** et le produit comme étant **Éditeur Marketplace**. Ne changez pas les sélections préremplies des menus déroulants.
-2. Sous « Sélectionner la version du produit », sélectionnez **Gestion des offres en direct**.
-3. Sous « Sélectionnez la catégorie qui décrit le mieux le problème », choisissez **Azure Application**.
-4. Sous « Sélectionnez un problème décrivant le mieux le vôtre », sélectionnez **Facturation à la consommation**.
-5. Après avoir sélectionné le bouton **Suivant**, vous êtes redirigé vers la page **Détails du problème**, où vous pouvez entrer plus de détails sur votre problème.
-
-Pour plus d’options de support à destination des éditeurs, consultez [Support technique pour le programme Place de marché commerciale dans l’Espace partenaires](https://docs.microsoft.com/azure/marketplace/partner-center-portal/support).
+Suivez les instructions de la section [Support technique pour le programme Place de marché commerciale dans l’Espace partenaires](../support.md) pour comprendre les options du éditeur et pour ouvrir un ticket de support auprès de Microsoft.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -3,23 +3,25 @@ title: Encoder un fichier distant et diffuser en streaming avec Azure Media Serv
 description: Suivez les étapes décrites dans ce tutoriel pour encoder un fichier basé sur une URL et streamer votre contenu avec Azure Media Services au moyen de REST.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: tutorial
 ms.custom: mvc
-ms.date: 03/16/2020
-ms.author: juliako
-ms.openlocfilehash: 35be4ec2c4f5f8c299120c0ba7dbdcb1dd112473
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 10/12/2020
+ms.author: inhenkel
+ms.openlocfilehash: 023c4d685804b2c6c201f44ab672139d56338cdb
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79472031"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91979102"
 ---
 # <a name="tutorial-encode-a-remote-file-based-on-url-and-stream-the-video---rest"></a>Tutoriel : Encoder un fichier distant basé sur une URL et streamer la vidéo - REST
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Azure Media Services vous permet d’encoder vos fichiers multimédias dans des formats pouvant être lus sur un large choix de navigateurs et d’appareils. Par exemple, vous pouvez streamer votre contenu au format HLS ou MPEG DASH d’Apple. Avant la diffusion en continu, vous devez encoder votre fichier multimédia numérique haute qualité. Pour obtenir des instructions d’encodage, consultez [Encoding concept](encoding-concept.md) (Concept d’encodage).
 
@@ -42,7 +44,7 @@ Ce didacticiel vous explique les procédures suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-- [Créer un compte Media Services](create-account-cli-how-to.md).
+- [Créer un compte Media Services](./create-account-howto.md).
 
     Veillez à mémoriser les valeurs que vous avez utilisées pour le nom du groupe de ressources et le nom du compte Media Services
 
@@ -115,7 +117,7 @@ Dans cette section, nous enverrons des requêtes qui sont pertinentes pour le co
     L’opération **POST** suivante est envoyée.
 
     ```
-    https://login.microsoftonline.com/:tenantId/oauth2/token
+    https://login.microsoftonline.com/:aadTenantDomain/oauth2/token
     ```
 
 4. La réponse inclut le jeton et définit la variable d’environnement « AccessToken » sur la valeur du jeton. Pour afficher le code qui définit « AccessToken », cliquez sur l’onglet **Tests**. 
@@ -125,7 +127,7 @@ Dans cette section, nous enverrons des requêtes qui sont pertinentes pour le co
 
 ### <a name="start-a-streaming-endpoint"></a>Démarrer un point de terminaison de streaming
 
-Pour activer le streaming, vous devez d’abord démarrer le [point de terminaison de streaming](https://docs.microsoft.com/azure/media-services/latest/streaming-endpoint-concept) à partir duquel vous souhaitez diffuser la vidéo.
+Pour activer le streaming, vous devez d’abord démarrer le [point de terminaison de streaming](./streaming-endpoint-concept.md) à partir duquel vous souhaitez diffuser la vidéo.
 
 > [!NOTE]
 > Vous êtes facturé uniquement lorsque votre point de terminaison de streaming est en cours d’exécution.
@@ -147,11 +149,11 @@ Pour activer le streaming, vous devez d’abord démarrer le [point de terminais
         
         `https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/<resourceGroupName>/providers/Microsoft.Media/mediaservices/<accountName>/streamingendpointoperations/1be71957-4edc-4f3c-a29d-5c2777136a2e?api-version=2018-07-01`
 
-        L’article [Suivre les opérations asynchrones Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations) explique en détail comment suivre l’état des opérations asynchrones Azure à l’aide des valeurs retournées dans la réponse.
+        L’article [Suivre les opérations asynchrones Azure](../../azure-resource-manager/management/async-operations.md) explique en détail comment suivre l’état des opérations asynchrones Azure à l’aide des valeurs retournées dans la réponse.
 
 ### <a name="create-an-output-asset"></a>Créer une ressource de sortie
 
-La [ressource](https://docs.microsoft.com/rest/api/media/assets) de sortie stocke le résultat de votre travail d’encodage. 
+La [ressource](/rest/api/media/assets) de sortie stocke le résultat de votre travail d’encodage. 
 
 1. Dans la fenêtre de gauche de l’application Postman, sélectionnez « Assets » (Ressources).
 2. Ensuite, sélectionnez « Créer ou mettre à jour une ressource ».
@@ -175,14 +177,14 @@ La [ressource](https://docs.microsoft.com/rest/api/media/assets) de sortie stock
 
 ### <a name="create-a-transform"></a>Créer une transformation
 
-Lors de l’encodage ou du traitement de contenus dans Media Services, il est courant de configurer les paramètres de codage en tant que formule. Vous envoyez ensuite un **travail** pour appliquer cette formule à une vidéo. En envoyant de nouveaux travaux pour chaque nouvelle vidéo, vous appliquez cette formule à toutes les vidéos de votre bibliothèque. Une formule dans Media Services est référencée comme une **transformation**. Pour plus d’informations, consultez [Transformations et travaux](transform-concept.md). L’exemple décrit dans ce didacticiel définit une formule qui encode la vidéo, afin de la diffuser en continu sur divers appareils iOS et Android. 
+Lors de l’encodage ou du traitement de contenus dans Media Services, il est courant de configurer les paramètres de codage en tant que formule. Vous envoyez ensuite un **travail** pour appliquer cette formule à une vidéo. En envoyant de nouveaux travaux pour chaque nouvelle vidéo, vous appliquez cette formule à toutes les vidéos de votre bibliothèque. Une formule dans Media Services est référencée comme une **transformation**. Pour plus d’informations, consultez [Transformations et travaux](./transforms-jobs-concept.md). L’exemple décrit dans ce didacticiel définit une formule qui encode la vidéo, afin de la diffuser en continu sur divers appareils iOS et Android. 
 
-Lorsque vous créez une instance de [transformation](https://docs.microsoft.com/rest/api/media/transforms), vous devez spécifier ce qu’elle doit produire comme sortie. Le paramètre requis est un objet **TransformOutput**. Chaque objet **TransformOutput** contient un **préréglage**. Le **préréglage** décrit les instructions détaillées concernant les opérations de traitement vidéo et/ou audio qui doivent être utilisées pour générer l’objet **TransformOutput** souhaité. L’exemple décrit dans cet article utilise un préréglage appelé **AdaptiveStreaming**. Le préréglage encode la vidéo d’entrée dans une échelle des vitesses de transmission générée automatiquement (paires vitesse de transmission-résolution) basée sur la vitesse de transmission et la résolution de la sortie, et crée des fichiers MP4 ISO avec des fichiers audio AAC et des fichiers vidéo H.264 qui correspondent à chaque paire vitesse de transmission-résolution. Pour plus d’informations sur ce préréglage, consultez [Encode with an auto-generated bitrate ladder](autogen-bitrate-ladder.md) (Encoder avec une échelle des vitesses de transmission générée automatiquement).
+Lorsque vous créez une instance de [transformation](/rest/api/media/transforms), vous devez spécifier ce qu’elle doit produire comme sortie. Le paramètre requis est un objet **TransformOutput**. Chaque objet **TransformOutput** contient un **préréglage**. Le **préréglage** décrit les instructions détaillées concernant les opérations de traitement vidéo et/ou audio qui doivent être utilisées pour générer l’objet **TransformOutput** souhaité. L’exemple décrit dans cet article utilise un préréglage appelé **AdaptiveStreaming**. Le préréglage encode la vidéo d’entrée dans une échelle des vitesses de transmission générée automatiquement (paires vitesse de transmission-résolution) basée sur la vitesse de transmission et la résolution de la sortie, et crée des fichiers MP4 ISO avec des fichiers audio AAC et des fichiers vidéo H.264 qui correspondent à chaque paire vitesse de transmission-résolution. Pour plus d’informations sur ce préréglage, consultez [Encode with an auto-generated bitrate ladder](autogen-bitrate-ladder.md) (Encoder avec une échelle des vitesses de transmission générée automatiquement).
 
 Vous pouvez utiliser un préréglage EncoderNamedPreset intégré ou des préréglages personnalisés. 
 
 > [!Note]
-> Lorsque vous créez une [transformation](https://docs.microsoft.com/rest/api/media/transforms), vous devez tout d’abord vérifier s’il en existe déjà une à l’aide de la méthode **Get**. Ce tutoriel suppose que vous créez la transformation avec un nom unique.
+> Lorsque vous créez une [transformation](/rest/api/media/transforms), vous devez tout d’abord vérifier s’il en existe déjà une à l’aide de la méthode **Get**. Ce tutoriel suppose que vous créez la transformation avec un nom unique.
 
 1. Dans la fenêtre de gauche de l’application Postman, sélectionnez « Encoding and Analysis » (Encodage et analyse).
 2. Sélectionnez ensuite « Créer transformation ».
@@ -215,7 +217,7 @@ Vous pouvez utiliser un préréglage EncoderNamedPreset intégré ou des préré
 
 ### <a name="create-a-job"></a>Créer un travail
 
-Un [travail](https://docs.microsoft.com/rest/api/media/jobs) est la requête réelle envoyée à Media Services pour appliquer cette **transformation** à un contenu vidéo ou audio d’entrée donné. Le **travail** spécifie des informations telles que l’emplacement de la vidéo d’entrée et celui de la sortie.
+Un [travail](/rest/api/media/jobs) est la requête réelle envoyée à Media Services pour appliquer cette **transformation** à un contenu vidéo ou audio d’entrée donné. Le **travail** spécifie des informations telles que l’emplacement de la vidéo d’entrée et celui de la sortie.
 
 Dans cet exemple, l’entrée du travail est basée sur une URL HTTPS ("https:\//nimbuscdn-nimbuspm.streaming.mediaservices.windows.net/2b533311-b215-4409-80af-529c3e853622/").
 
@@ -256,18 +258,18 @@ Le **travail** passe généralement par les états suivants : **Planifié**, **
 
 #### <a name="job-error-codes"></a>Codes d’erreur des tâches
 
-Consultez [Codes d’erreur](https://docs.microsoft.com/rest/api/media/jobs/get#joberrorcode).
+Consultez [Codes d’erreur](/rest/api/media/jobs/get#joberrorcode).
 
 ### <a name="create-a-streaming-locator"></a>Créer un localisateur de diffusion en continu
 
-Une fois le travail d’encodage terminé, l’étape suivante consiste à mettre à la disposition des clients la vidéo dans l’**actif multimédia** de sortie pour qu’ils puissent la lire. Vous pouvez le faire en deux étapes : d’abord, créez un élément [StreamingLocator](https://docs.microsoft.com/rest/api/media/streaminglocators), puis générez les URL de diffusion en continu que les clients peuvent utiliser. 
+Une fois le travail d’encodage terminé, l’étape suivante consiste à mettre à la disposition des clients la vidéo dans l’**actif multimédia** de sortie pour qu’ils puissent la lire. Vous pouvez le faire en deux étapes : d’abord, créez un élément [StreamingLocator](/rest/api/media/streaminglocators), puis générez les URL de diffusion en continu que les clients peuvent utiliser. 
 
 Le processus de création d’un localisateur de streaming est appelée « publication ». Par défaut, le localisateur de streaming est valide immédiatement après avoir effectué les appels d’API et dure jusqu’à ce qu’il soit supprimé, sauf si vous configurez les heures de début et de fin facultatives. 
 
-Lors de la création d’un élément [StreamingLocator](https://docs.microsoft.com/rest/api/media/streaminglocators), vous devez spécifier le nom **StreamingPolicyName** souhaité. Dans cet exemple, vous allez diffuser en continu du contenu en clair (ou non chiffré), la stratégie de diffusion en continu en clair prédéfinie (« Predefined_ClearStreamingOnly ») est donc utilisée.
+Lors de la création d’un élément [StreamingLocator](/rest/api/media/streaminglocators), vous devez spécifier le nom **StreamingPolicyName** souhaité. Dans cet exemple, vous allez diffuser en continu du contenu en clair (ou non chiffré), la stratégie de diffusion en continu en clair prédéfinie (« Predefined_ClearStreamingOnly ») est donc utilisée.
 
 > [!IMPORTANT]
-> Lorsque vous utilisez une stratégie [StreamingPolicy](https://docs.microsoft.com/rest/api/media/streamingpolicies) personnalisée, vous devez concevoir un ensemble limité de ces stratégies pour votre compte Media Services et les réutiliser pour vos éléments StreamingLocators chaque fois que les mêmes protocoles et options de chiffrement sont nécessaires. 
+> Lorsque vous utilisez une stratégie [StreamingPolicy](/rest/api/media/streamingpolicies) personnalisée, vous devez concevoir un ensemble limité de ces stratégies pour votre compte Media Services et les réutiliser pour vos éléments StreamingLocators chaque fois que les mêmes protocoles et options de chiffrement sont nécessaires. 
 
 Votre compte Media Services a un quota en matière de nombre d’entrées de **stratégie de streaming**. Vous ne devez pas créer de **stratégie de streaming** pour chaque localisateur de streaming.
 
@@ -297,7 +299,7 @@ Votre compte Media Services a un quota en matière de nombre d’entrées de **s
 
 #### <a name="list-paths"></a>Répertorier les chemins d’accès
 
-Maintenant que le [localisateur de streaming](https://docs.microsoft.com/rest/api/media/streaminglocators) a été créé, vous pouvez obtenir les URL de streaming.
+Maintenant que le [localisateur de streaming](/rest/api/media/streaminglocators) a été créé, vous pouvez obtenir les URL de streaming.
 
 1. Dans la fenêtre de gauche de l’application Postman, sélectionnez « Streaming Policies » (Stratégies de streaming).
 2. Ensuite, sélectionnez « Répertorier les chemin d’accès ».

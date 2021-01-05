@@ -10,16 +10,17 @@ ms.assetid: 1c46ed69-4049-44ec-9b46-e90e964a4a8e
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 04/15/2020
+ms.date: 09/23/2020
 ms.author: jingwang
-ms.openlocfilehash: 344ad8e106c119c1de59570d1ec4e3df5e1cc8af
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: e32115c590d73f5c93f322d3bd542096f2964a4c
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417120"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91297604"
 ---
 # <a name="get-metadata-activity-in-azure-data-factory"></a>Activité d’obtention des métadonnées dans Azure Data Factory
+
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Vous pouvez utiliser l’activité d’obtention des métadonnées pour récupérer les métadonnées de n’importe quelle donnée dans Azure Data Factory. Vous pouvez utiliser cette activité dans les scénarios suivants :
@@ -34,7 +35,7 @@ La fonctionnalité suivante est disponible dans le flux de contrôle :
 
 ## <a name="capabilities"></a>Fonctionnalités
 
-L’activité d’obtention des métadonnées sélectionne un jeu de données en tant qu’entrée et retourne les informations de métadonnées en tant que sortie. Pour l’instant, les connecteurs suivants et les métadonnées récupérables correspondantes sont pris en charge. La taille maximale des métadonnées retournées est de 2 Mo.
+L’activité d’obtention des métadonnées sélectionne un jeu de données en tant qu’entrée et retourne les informations de métadonnées en tant que sortie. Pour l’instant, les connecteurs suivants et les métadonnées récupérables correspondantes sont pris en charge. La taille maximale des métadonnées retournées est d’environ 4 Mo.
 
 >[!NOTE]
 >Si vous exécutez l’activité d’obtention des métadonnées sur un runtime d’intégration auto-hébergé, les dernières fonctionnalités sont prises en charge sur la version 3.6 ou ultérieure.
@@ -49,7 +50,7 @@ L’activité d’obtention des métadonnées sélectionne un jeu de données en
 | [Google Cloud Storage](connector-google-cloud-storage.md) | √/√ | √/√ | √ | x/x | √/√* | √ | x | √ | √ | √/√* |
 | [stockage d’objets blob Azure](connector-azure-blob-storage.md) | √/√ | √/√ | √ | x/x | √/√* | √ | √ | √ | √ | √/√ |
 | [Azure Data Lake Storage Gen1](connector-azure-data-lake-store.md) | √/√ | √/√ | √ | x/x | √/√ | √ | x | √ | √ | √/√ |
-| [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md) | √/√ | √/√ | √ | x/x | √/√ | √ | x | √ | √ | √/√ |
+| [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md) | √/√ | √/√ | √ | x/x | √/√ | √ | √ | √ | √ | √/√ |
 | [Azure Files](connector-azure-file-storage.md) | √/√ | √/√ | √ | √/√ | √/√ | √ | x | √ | √ | √/√ |
 | [Système de fichiers](connector-file-system.md) | √/√ | √/√ | √ | √/√ | √/√ | √ | x | √ | √ | √/√ |
 | [SFTP](connector-sftp.md) | √/√ | √/√ | √ | x/x | √/√ | √ | x | √ | √ | √/√ |
@@ -60,14 +61,15 @@ L’activité d’obtention des métadonnées sélectionne un jeu de données en
 - Pour le stockage Blob Azure, `lastModified` s’applique au conteneur et au blob, mais pas au dossier virtuel.
 - Le filtre `lastModified` s’applique actuellement aux éléments du filtre enfant mais pas au dossier/fichier spécifié lui-même.
 - Le filtre de caractères génériques sur des dossiers/fichiers n’est pas pris en charge pour une activité Obtenir des métadonnées.
+- `structure` et `columnCount` ne sont pas pris en charge lors de l’obtention de métadonnées à partir de fichiers binaires, JSON ou XML.
 
 **Base de données relationnelle**
 
 | Connecteur/Métadonnées | structure | columnCount | exists |
 |:--- |:--- |:--- |:--- |
 | [Azure SQL Database](connector-azure-sql-database.md) | √ | √ | √ |
-| [Azure SQL Database Managed Instance](connector-azure-sql-database-managed-instance.md) | √ | √ | √ |
-| [Azure SQL Data Warehouse](connector-azure-sql-data-warehouse.md) | √ | √ | √ |
+| [Azure SQL Managed Instance](../azure-sql/managed-instance/sql-managed-instance-paas-overview.md) | √ | √ | √ |
+| [Azure Synapse Analytics](connector-azure-sql-data-warehouse.md) | √ | √ | √ |
 | [SQL Server](connector-sql-server.md) | √ | √ | √ |
 
 ### <a name="metadata-options"></a>Options de métadonnées
@@ -85,7 +87,7 @@ Vous pouvez spécifier les types de métadonnées suivants dans la liste de cham
 | contentMD5 | MD5 du fichier. S’applique aux fichiers uniquement. |
 | structure | Structure de données du fichier ou de la table de base de données relationnelle. La valeur retournée est une liste de noms et de types de colonnes. |
 | columnCount | Nombre de colonnes dans le fichier ou la table relationnelle. |
-| exists| Indique si un fichier, un dossier ou une table existe ou non. Notez que si `exists` est spécifié dans la liste de champs de l’activité d’obtention des métadonnées, l’activité n’échouera pas, même si le fichier, le dossier ou la table n’existe pas. `exists: false` sera alors retourné dans la sortie. |
+| exists| Indique si un fichier, un dossier ou une table existe ou non. Si `exists` est spécifié dans la liste de champs de l’activité d’obtention des métadonnées, l’activité n’échouera pas, même si le fichier, le dossier ou la table n’existe pas. `exists: false` sera alors retourné dans la sortie. |
 
 >[!TIP]
 >Si vous souhaitez vérifier qu’un fichier, un dossier ou une table existe, spécifiez `exists` dans la liste de champs de l’activité d’obtention des métadonnées. Vous pouvez ensuite vérifier le résultat de `exists: true/false` dans la sortie de l’activité. Si `exists` n’est pas spécifié dans la liste de champs, l’activité d’obtention des métadonnées échouera si l’objet est introuvable.
@@ -99,13 +101,36 @@ Vous pouvez spécifier les types de métadonnées suivants dans la liste de cham
 
 ```json
 {
-    "name": "MyActivity",
-    "type": "GetMetadata",
-    "typeProperties": {
-        "fieldList" : ["size", "lastModified", "structure"],
-        "dataset": {
-            "referenceName": "MyDataset",
-            "type": "DatasetReference"
+    "name":"MyActivity",
+    "type":"GetMetadata",
+    "dependsOn":[
+
+    ],
+    "policy":{
+        "timeout":"7.00:00:00",
+        "retry":0,
+        "retryIntervalInSeconds":30,
+        "secureOutput":false,
+        "secureInput":false
+    },
+    "userProperties":[
+
+    ],
+    "typeProperties":{
+        "dataset":{
+            "referenceName":"MyDataset",
+            "type":"DatasetReference"
+        },
+        "fieldList":[
+            "size",
+            "lastModified",
+            "structure"
+        ],
+        "storeSettings":{
+            "type":"AzureBlobStorageReadSettings"
+        },
+        "formatSettings":{
+            "type":"JsonReadSettings"
         }
     }
 }
@@ -115,18 +140,22 @@ Vous pouvez spécifier les types de métadonnées suivants dans la liste de cham
 
 ```json
 {
-    "name": "MyDataset",
-    "properties": {
-    "type": "AzureBlob",
-        "linkedService": {
-            "referenceName": "StorageLinkedService",
-            "type": "LinkedServiceReference"
+    "name":"MyDataset",
+    "properties":{
+        "linkedServiceName":{
+            "referenceName":"AzureStorageLinkedService",
+            "type":"LinkedServiceReference"
         },
-        "typeProperties": {
-            "folderPath":"container/folder",
-            "filename": "file.json",
-            "format":{
-                "type":"JsonFormat"
+        "annotations":[
+
+        ],
+        "type":"Json",
+        "typeProperties":{
+            "location":{
+                "type":"AzureBlobStorageLocation",
+                "fileName":"file.json",
+                "folderPath":"folder",
+                "container":"container"
             }
         }
     }

@@ -1,31 +1,33 @@
 ---
 title: Sauvegarde et restauration - Azure CLI - Azure Database pour MySQL
 description: Découvrez comment sauvegarder et restaurer un serveur dans Azure Database pour MySQL à l’aide d’Azure CLI.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/27/2020
-ms.openlocfilehash: a2a9efceed84c4c57d1ad2cae47dd4440fd4eb42
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: ee06eed1b8f54877d01a8b316c015938038879cf
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80373012"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94535399"
 ---
 # <a name="how-to-back-up-and-restore-a-server-in-azure-database-for-mysql-using-the-azure-cli"></a>Comment sauvegarder et restaurer un serveur dans Azure Database pour MySQL à l’aide d’Azure CLI
 
 Les serveurs Azure Database pour MySQL sont sauvegardés régulièrement pour activer les fonctionnalités de restauration. À l’aide de cette fonctionnalité, vous pouvez restaurer le serveur et toutes ses bases de données à un point dans le temps antérieur, sur un nouveau serveur.
 
-## <a name="prerequisites"></a>Conditions préalables requises
-Pour utiliser ce guide pratique, il vous faut :
-- Un [serveur et une base de données Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-cli.md)
+## <a name="prerequisites"></a>Prérequis
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+Pour suivre cette procédure :
 
-> [!IMPORTANT]
-> Ce guide de procédures requiert l’utilisation de la version 2.0 Azure CLI ou version ultérieure. Pour vérifier la version, à l’invite de commande de l’interface Azure CLI, entrez `az --version`. Pour installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Vous avez besoin d’un [serveur et d’une base de données Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-cli.md).
+
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
+
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="set-backup-configuration"></a>Définir la configuration de sauvegarde
 
@@ -66,9 +68,9 @@ az mysql server restore --resource-group myresourcegroup --name mydemoserver-res
 
 La commande `az mysql server restore` requiert les paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur source.  |
+| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur source.  |
 | name | mydemoserver-restored | Nom du serveur créé par la commande de restauration. |
 | restore-point-in-time | 2018-03-13T13:59:00Z | Sélectionnez un état antérieur auquel effectuer la restauration. Elles doivent être comprises dans la période de rétention de la sauvegarde du serveur source. Utilisez le format de date et d’heure ISO8601. Par exemple, vous pouvez utiliser votre fuseau horaire local, comme `2018-03-13T05:59:00-08:00`. Vous pouvez également utiliser le format UTC Zulu, par exemple, `2018-03-13T13:59:00Z`. |
 | source-server | mydemoserver | Nom ou identifiant du serveur source à partir duquel la restauration s’effectuera. |
@@ -78,6 +80,12 @@ Lorsque vous restaurez un serveur à un état antérieur, un nouveau serveur est
 Les valeurs d’emplacement et de niveau tarifaire du serveur restauré restent les mêmes que celles du serveur d’origine. 
 
 Une fois la restauration terminée, recherchez le nouveau serveur et vérifiez que les données ont été restaurées correctement. Le nouveau serveur a le même nom de connexion d’administrateur et le même mot de passe que le serveur qui existait au moment du lancement de la restauration. Le mot de passe peut être modifié sur la page **Vue d’ensemble** du nouveau serveur.
+
+En outre, une fois l’opération de restauration terminée, deux paramètres de serveur sont réinitialisés aux valeurs par défaut (et ne sont pas copiés à partir du serveur principal) après l’opération de restauration
+*   time_zone : valeur à affecter à la valeur par défaut **SYSTEM**
+*   event_scheduler : valeur définie sur **OFF** sur le serveur restauré
+
+Vous devrez copier la valeur à partir du serveur principal et la définir sur le serveur restauré en reconfigurant le [paramètre de serveur](howto-server-parameters.md)
 
 Le nouveau serveur créé lors d’une restauration ne dispose pas des points de terminaison de service de réseau virtuel qui se trouvaient sur le serveur d’origine. Ces règles doivent être définies séparément pour ce nouveau serveur. Les règles de pare-feu du serveur d’origine sont restaurées.
 
@@ -106,7 +114,7 @@ az mysql server georestore --resource-group newresourcegroup --name mydemoserver
 
 La commande `az mysql server georestore` requiert les paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
 |resource-group| myResourceGroup | Le nom du groupe de ressources auquel appartient le nouveau serveur.|
 |name | mydemoserver-georestored | Le nom du nouveau serveur. |

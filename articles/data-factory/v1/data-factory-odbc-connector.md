@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 11/19/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: e1735c2d2ed107f7ec65d68a6826267ee83a93f8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3c68b1f4d76a1899ce473c57f3a6d5de1eab71c6
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236365"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92636865"
 ---
 # <a name="move-data-from-odbc-data-stores-using-azure-data-factory"></a>Transfert de données à partir de magasins de données ODBC à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -47,9 +47,9 @@ En dehors de la passerelle de gestion des données, vous devez également instal
 ## <a name="getting-started"></a>Prise en main
 Vous pouvez créer un pipeline avec une activité de copie qui déplace les données d’un magasin de données ODBC local à l’aide de différents outils/API.
 
-Le moyen le plus simple de créer un pipeline consiste à utiliser **l’Assistant Copie**. Voir le [tutoriel : Créer un pipeline avec l’activité de copie à l’aide de l’Assistant Copie](data-factory-copy-data-wizard-tutorial.md) pour obtenir une procédure pas à pas rapide sur la création d’un pipeline à l’aide de l’Assistant Copie de données.
+Le moyen le plus simple de créer un pipeline consiste à utiliser **l’Assistant Copie** . Voir le [tutoriel : Créer un pipeline avec l’activité de copie à l’aide de l’Assistant Copie](data-factory-copy-data-wizard-tutorial.md) pour obtenir une procédure pas à pas rapide sur la création d’un pipeline à l’aide de l’Assistant Copie de données.
 
-Vous pouvez également utiliser les outils suivants pour créer un pipeline : **Visual Studio**, **Azure PowerShell**, **modèle Azure Resource Manager**, **.NET API** et **API REST**. Pour obtenir des instructions détaillées sur la création d’un pipeline avec une activité de copie, consultez le [didacticiel sur l’activité de copie](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+Vous pouvez également utiliser les outils suivants pour créer un pipeline : **Visual Studio** , **Azure PowerShell** , **modèle Azure Resource Manager** , **.NET API** et **API REST** . Pour obtenir des instructions détaillées sur la création d’un pipeline avec une activité de copie, consultez le [didacticiel sur l’activité de copie](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 Que vous utilisiez des outils ou des API, la création d’un pipeline qui déplace les données d’un magasin de données source vers un magasin de données récepteur implique les étapes suivantes :
 
@@ -94,7 +94,7 @@ Le tableau suivant fournit la description des éléments JSON spécifiques au se
 }
 ```
 ### <a name="using-basic-authentication-with-encrypted-credentials"></a>Utilisation de l’authentification de base avec des informations d’identification chiffrées
-Vous pouvez chiffrer les informations d’identification à l’aide de l’applet de commande [New-AzDataFactoryEncryptValue](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) (version 1.0 d’Azure PowerShell) ou [New-AzureDataFactoryEncryptValue](https://msdn.microsoft.com/library/dn834940.aspx) (version 0.9 ou antérieure d’Azure PowerShell).
+Vous pouvez chiffrer les informations d’identification à l’aide de l’applet de commande [New-AzDataFactoryEncryptValue](/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) (version 1.0 d’Azure PowerShell) ou [New-AzureDataFactoryEncryptValue](/previous-versions/azure/dn834940(v=azure.100)) (version 0.9 ou antérieure d’Azure PowerShell).
 
 ```json
 {
@@ -293,7 +293,7 @@ Les données sont écrites dans un nouvel objet blob toutes les heures (fréquen
 
 **Activité de copie dans un pipeline, avec une source ODBC (RelationalSource) et un récepteur blob (BlobSink)**
 
-Le pipeline contient une activité de copie qui est configurée pour utiliser ces jeux de données d'entrée et de sortie, et qui est planifiée pour s'exécuter toutes les heures. Dans la définition du pipeline JSON, le type **source** est défini sur **RelationalSource** et le type **sink** est défini sur **BlobSink**. La requête SQL spécifiée pour la propriété **query** sélectionne les données de la dernière heure à copier.
+Le pipeline contient une activité de copie qui est configurée pour utiliser ces jeux de données d'entrée et de sortie, et qui est planifiée pour s'exécuter toutes les heures. Dans la définition du pipeline JSON, le type **source** est défini sur **RelationalSource** et le type **sink** est défini sur **BlobSink** . La requête SQL spécifiée pour la propriété **query** sélectionne les données de la dernière heure à copier.
 
 ```json
 {
@@ -346,7 +346,7 @@ Comme mentionné dans l’article consacré aux [activités de déplacement de d
 1. Conversion de types natifs source en types .NET
 2. Conversion à partir du type .NET en type de récepteur natif
 
-Lors du déplacement de données à partir de magasins de données ODBC, les types de données ODBC sont mappés aux types .NET, comme indiqué dans la rubrique [Mappages de types de données ODBC](https://msdn.microsoft.com/library/cc668763.aspx) .
+Lors du déplacement de données à partir de magasins de données ODBC, les types de données ODBC sont mappés aux types .NET, comme indiqué dans la rubrique [Mappages de types de données ODBC](/dotnet/framework/data/adonet/odbc-data-type-mappings) .
 
 ## <a name="map-source-to-sink-columns"></a>Mapper les colonnes source aux colonnes du récepteur
 Pour en savoir plus sur le mappage de colonnes du jeu de données source à des colonnes du jeu de données récepteur, voir [Mappage des colonnes d’un jeu de données dans Azure Data Factory](data-factory-map-columns.md).
@@ -355,9 +355,9 @@ Pour en savoir plus sur le mappage de colonnes du jeu de données source à des 
 Lorsque vous copiez des données à partir de magasins de données relationnels, gardez à l’esprit la répétabilité de l’opération, afin d’éviter des résultats imprévus. Dans Azure Data Factory, vous pouvez réexécuter une tranche manuellement. Vous pouvez également configurer une stratégie de nouvelles tentatives pour un jeu de données, afin qu’une tranche soit réexécutée en cas de défaillance. Lorsqu’une tranche est réexécutée d’une manière ou d’une autre, vous devez vous assurer que les mêmes données sont lues et ce, quel que soit le nombre d’exécutions de la tranche. Voir [Lecture renouvelée de sources relationnelles](data-factory-repeatable-copy.md#repeatable-read-from-relational-sources).
 
 ## <a name="troubleshoot-connectivity-issues"></a>Résoudre les problèmes de connectivité
-Pour résoudre les problèmes de connexion, utilisez l’onglet **Diagnostics** du **Gestionnaire de configuration de la passerelle de gestion des données**.
+Pour résoudre les problèmes de connexion, utilisez l’onglet **Diagnostics** du **Gestionnaire de configuration de la passerelle de gestion des données** .
 
-1. Lancez le **Gestionnaire de configuration de la passerelle de gestion des données**. Vous pouvez exécuter directement « C:\Program Files\Microsoft Data Management Gateway\1.0\Shared\ConfigManager.exe » (ou) rechercher **Passerelle** pour trouver un lien vers l’application **Passerelle de gestion des données de Microsoft**, comme l’illustre l’image suivante.
+1. Lancez le **Gestionnaire de configuration de la passerelle de gestion des données** . Vous pouvez exécuter directement « C:\Program Files\Microsoft Data Management Gateway\1.0\Shared\ConfigManager.exe » (ou) rechercher **Passerelle** pour trouver un lien vers l’application **Passerelle de gestion des données de Microsoft** , comme l’illustre l’image suivante.
 
     ![Rechercher la passerelle](./media/data-factory-odbc-connector/search-gateway.png)
 2. Basculez vers l’onglet **Diagnostics** .

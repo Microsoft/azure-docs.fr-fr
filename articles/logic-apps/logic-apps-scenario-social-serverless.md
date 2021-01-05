@@ -8,12 +8,12 @@ ms.author: jehollan
 ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 03/15/2018
-ms.openlocfilehash: e300bf9c9aa0acf0bed6426eb73f690f9a38bd74
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2fae7d2526e6c95efe83ca8fa742a6d92457b897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75980423"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86520747"
 ---
 # <a name="create-a-streaming-customer-insights-dashboard-with-azure-logic-apps-and-azure-functions"></a>Créer un tableau de bord des insights client en streaming avec Azure Logic Apps et Azure Functions
 
@@ -22,7 +22,7 @@ Azure offre des outils [serverless](https://azure.microsoft.com/solutions/server
 Pour cette solution, utilisez ces composants Azure clés pour les applications serverless : [Azure Functions](https://azure.microsoft.com/services/functions/) et [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps/).
 Azure Logic Apps fournit un moteur de flux de travail serverless dans le cloud afin que vous puissiez créer des orchestrations entre les composants serverless et vous connecter à plus de 200 services et API. Azure Functions offre un computing serverless dans le cloud. Cette solution utilise Azure Functions pour le marquage des tweets client en fonction de mots clés prédéfinis.
 
-Dans ce scénario, vous créez une application logique qui déclenche la recherche des retours d’expérience des clients. Voici certains des connecteurs qui peuvent aider à réagir aux retours d’expérience client, y compris Outlook.com, Office 365, Survey Monkey, Twitter et une [requête HTTP à partir d’un formulaire Web](https://blogs.msdn.microsoft.com/logicapps/2017/01/30/calling-a-logic-app-from-an-html-form/). Le flux de travail que vous créez analyse un hashtag sur Twitter.
+Dans ce scénario, vous créez une application logique qui déclenche la recherche des retours d’expérience des clients. Voici certains des connecteurs qui peuvent aider à réagir aux retours d’expérience client, y compris Outlook.com, Office 365, Survey Monkey, Twitter et une [requête HTTP à partir d’un formulaire Web](/archive/blogs/logicapps/calling-a-logic-app-from-an-html-form). Le flux de travail que vous créez analyse un hashtag sur Twitter.
 
 Vous pouvez [générer la solution entière dans Visual Studio](../logic-apps/quickstart-create-logic-apps-with-visual-studio.md) et [déployer la solution avec le modèle Azure Resource Manager](../logic-apps/logic-apps-deploy-azure-resource-manager-templates.md). Pour obtenir une procédure pas à pas vidéo qui montre comment créer cette solution, [regardez cette vidéo de Channel 9](https://aka.ms/logicappsdemo). 
 
@@ -67,7 +67,7 @@ Vous pouvez également créer un Azure Functions afin de pouvoir effectuer un tr
 
 ## <a name="process-data-with-azure-functions"></a>Traiter des données avec Azure Functions
 
-Avant de créer une fonction, créez une application de fonctions dans votre abonnement Azure. En outre, pour que votre application logique appelle directement une fonction, la fonction doit avoir une liaison de déclencheur HTTP, par exemple, utilisez le modèle **HttpTrigger**. Apprenez [à créer votre première application de fonctions et fonction dans le portail Azure](../azure-functions/functions-create-first-azure-function-azure-portal.md).
+Avant de créer une fonction, créez une application de fonctions dans votre abonnement Azure. En outre, pour que votre application logique appelle directement une fonction, la fonction doit avoir une liaison de déclencheur HTTP, par exemple, utilisez le modèle **HttpTrigger**. Apprenez [à créer votre première application de fonctions et fonction dans le portail Azure](../azure-functions/functions-create-first-azure-function.md).
 
 Dans ce scénario, utilisez le texte du tweet comme corps de la demande pour votre Fonction Azure. Dans votre code de fonction, définissez la logique qui détermine si le texte du tweet contient un mot clé ou une phrase. Conservez la fonction aussi simple ou complexe que nécessaire pour le scénario.
 À la fin de la fonction, renvoyez une réponse à l’application logique avec certaines données, par exemple, une valeur booléenne simple telle que `containsKeyword` ou un objet complexe.

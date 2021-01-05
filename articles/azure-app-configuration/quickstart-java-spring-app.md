@@ -1,21 +1,21 @@
 ---
 title: Démarrage rapide pour apprendre à utiliser Azure App Configuration
-description: Guide de démarrage rapide pour utiliser Azure App Configuration avec des applications Java Spring.
+description: Dans ce guide de démarrage rapide, créez une application Java Spring avec Azure App Configuration pour centraliser le stockage et la gestion des paramètres d’application en dehors de votre code.
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.service: azure-app-configuration
 ms.topic: quickstart
 ms.date: 04/18/2020
-ms.author: lcozzens
-ms.openlocfilehash: 69b9733f4d79f5fc42fe86ca0f8a97305205aeef
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-java
+ms.author: alkemper
+ms.openlocfilehash: 40c8fae292f465b3ecc8778a21e4903bdf423a3a
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82085057"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932028"
 ---
 # <a name="quickstart-create-a-java-spring-app-with-azure-app-configuration"></a>Démarrage rapide : Créer une application Java Spring avec Azure App Configuration
 
@@ -24,14 +24,14 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 ## <a name="prerequisites"></a>Prérequis
 
 - Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
-- Un [kit de développement Java (JDK)](https://docs.microsoft.com/java/azure/jdk) pris en charge avec version 8
+- Un [kit de développement Java (JDK)](/java/azure/jdk) pris en charge avec version 8
 - [Apache Maven](https://maven.apache.org/download.cgi) version 3.0 ou ultérieure
 
 ## <a name="create-an-app-configuration-store"></a>Créer un magasin App Configuration
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
+7. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
 
     | Clé | Valeur |
     |---|---|
@@ -39,7 +39,7 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
     Laissez **Étiquette** et **Type de contenu** vides pour l’instant.
 
-7. Sélectionnez **Appliquer**.
+8. Sélectionnez **Appliquer**.
 
 ## <a name="create-a-spring-boot-app"></a>Créer une application Spring Boot
 
@@ -68,7 +68,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-appconfiguration-config</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.5</version>
     </dependency>
     ```
 
@@ -78,7 +78,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-appconfiguration-config</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.7</version>
     </dependency>
     ```
 
@@ -187,7 +187,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et vous l’avez utilisé avec une application Java Spring. Pour plus d’informations, consultez [Spring sur Azure](https://docs.microsoft.com/java/azure/spring-framework/). Pour savoir comment permettre à votre application Java Spring d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
+En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et vous l’avez utilisé avec une application Java Spring. Pour plus d’informations, consultez [Spring sur Azure](/java/azure/spring-framework/). Pour savoir comment permettre à votre application Java Spring d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
 
 > [!div class="nextstepaction"]
 > [Activer la configuration dynamique](./enable-dynamic-configuration-java-spring-app.md)

@@ -2,20 +2,18 @@
 title: Fichier include
 description: Fichier include
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
-ms.subservice: luis
+ms.subservice: qna-maker
 ms.topic: include
 ms.custom: include file
-ms.date: 04/27/2020
-ms.author: diberry
-ms.openlocfilehash: 9b1ee467abcbfb6d91a64abf4e9ad74d7b23e881
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 11/09/2020
+ms.openlocfilehash: cbabfc1ae0c54c4ef20d3c689506e486bf4b6a66
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203956"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94386485"
 ---
 Ce démarrage rapide basé sur cURL vous montre pas à pas comment obtenir une réponse de votre base de connaissances.
 
@@ -36,9 +34,17 @@ Utilisez la base de connaissances issue du démarrage rapide précédent pour de
 1. À partir de la page **Paramètres** de la base de connaissances, sélectionnez l’onglet **CURL** pour voir un exemple de commande cURL permettant de générer une réponse issue de la base de connaissances.
 1. Copiez la commande dans un environnement modifiable (comme un fichier texte) afin de pouvoir modifier la commande. Modifiez la valeur de la question comme suit pour faire en sorte que les métadonnées de `service:qna_maker` soient utilisées comme filtre pour les paires de Q/R.
 
+   # <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
+
     ```bash
     curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'top':30, 'question':'size','strictFilters': [{'name':'service','value':'qna_maker'}]}"
     ```
+    # <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+    
+    ```bash
+    curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H   "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'top':30, 'question':'size','strictFilters': [{'name':'service','value':'qna_maker'}]}"
+    ```
+    ---
 
     La question n’est qu’un seul mot, `size`, qui peut retourner une des deux paires de Q/R. Le paramètre `strictFilters` indique à la réponse de se réduire uniquement aux réponses de `qna_maker`.
 
@@ -77,9 +83,11 @@ Utilisez la base de connaissances issue du démarrage rapide précédent pour de
     }
     ```
 
-    S’il existe une série de questions et réponses qui ne correspond pas au terme recherché, mais qui est conforme au filtre, il n’est pas retourné. À la place, la réponse générale `No good match found in KB.` est retournée.
+    S’il y a une paire question/réponse qui ne correspond pas au terme recherché, mais qui est conforme au filtre, elle n’est pas retournée. À la place, la réponse générale `No good match found in KB.` est retournée.
 
 ## <a name="use-debug-query-property"></a>Utiliser la propriété de requête de débogage
+> [!NOTE]
+>Nous vous déconseillons d’utiliser la propriété Debug pour les dépendances. Cette propriété a été ajoutée pour aider l’équipe produit à résoudre les problèmes.
 
 Les informations de débogage vous aident à comprendre comment la réponse retournée a été déterminée. Bien qu’elles s’avèrent utiles, elles ne sont pas indispensables. Pour générer une réponse avec les informations de débogage, ajoutez la propriété `debug` :
 
@@ -89,9 +97,15 @@ Debug: {Enable:true}
 
 1. Modifiez la commande cURL pour inclure la propriété de débogage afin d’obtenir plus d’informations.
 
+   # <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
     ```bash
     curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'question':'size', 'Debug':{'Enable':true}}"
     ```
+    # <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+    ```bash
+    curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'question':'size', 'Debug':{'Enable':true}}"
+    ```
+    ---
 
 1. La réponse comprend les informations pertinentes. Dans la sortie JSON suivante, certains détails de débogage ont été remplacés par des points de suspension par souci de concision.
 
@@ -194,11 +208,16 @@ isTest:true
 ```
 
 La commande cURL ressemble à ceci :
-
+# <a name="qna-maker-ga"></a>[QnA Maker GA](#tab/v1)
 ```bash
 curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'question':'size', 'IsTest':true}"
 ```
+# <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+```bash
+curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'question':'size', 'IsTest':true}"
+```
 
+---
 La réponse JSON utilise le même schéma que la requête de base de connaissances publiée.
 
 > [!NOTE]
@@ -207,10 +226,17 @@ La réponse JSON utilise le même schéma que la requête de base de connaissanc
 ## <a name="use-curl-to-query-for-a-chit-chat-answer"></a>Utiliser cURL pour demander une réponse d’échange de conversation (chit-chat)
 
 1. Dans le terminal prenant en charge cURL, utilisez une instruction de fin de conversation de bot provenant de l’utilisateur, comme `Thank you` en tant que question. Il n’y a aucune autre propriété à définir.
+    
+   # <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
 
     ```bash
     curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'question':'thank you'}"
     ```
+    # <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+    ```bash
+    curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'question':'thank you'}"
+    ```
+    ---
 
 1. Exécutez la commande cURL et recevez la réponse JSON comprenant le score et la réponse.
 
@@ -302,9 +328,15 @@ Vous pouvez demander un seuil minimal pour la réponse. Si le seuil n’est pas 
 
 1. Ajoutez la propriété `threshold` pour demander une réponse à `size` avec un seuil de 80 % ou plus. La base de connaissances ne doit pas trouver cette réponse, car le score de la question s’élève à 71 %. Le résultat retourne la réponse par défaut que vous avez fournie lors de la création de la base de connaissances.
 
+   # <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
     ```bash
     curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'question':'size', 'scoreThreshold':80.00}"
     ```
+    # <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+    ```bash
+    curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'question':'size', 'scoreThreshold':80.00}"
+    ```
+    ---
 
 1. Exécutez la commande cURL pour recevoir la réponse JSON.
 
@@ -328,10 +360,16 @@ Vous pouvez demander un seuil minimal pour la réponse. Si le seuil n’est pas 
     QnA Maker a retourné un score de `0`, ce qui signifie « pas de certitude ». Il a également retourné la réponse par défaut.
 
 1. Remplacez la valeur du seuil par 60 % et réexécutez la requête :
-
+    
+   # <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
     ```bash
     curl -X POST https://replace-with-your-resource-name.azurewebsites.net/qnamaker/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Authorization: EndpointKey replace-with-your-endpoint-key" -H "Content-type: application/json" -d "{'question':'size', 'scoreThreshold':60.00}"
     ```
+    # <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+    ```bash
+    curl -X POST https://replace-with-your-resource-name.cognitiveservices.azure.com/qnamaker/v5.0-preview.1/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer -H "Ocp-Apim-Subscription-Key: REPLACE-WITH-YOUR-RESOURCE-KEY" -H "Content-type: application/json" -d "{'question':'size', 'scoreThreshold':60.00}"
+    ```
+    ---
 
     Le JSON retourné a trouvé la réponse.
 

@@ -8,16 +8,18 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
 ms.topic: conceptual
-ms.date: 05/02/2019
+ms.date: 08/24/2020
 ms.author: aahi
-ms.openlocfilehash: 36f2fa65f47f824ccc3544f5c13b5f5ee9afd21a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 176060700f50a6ce6e8cb5cf622ee4c922e5a952
+ms.sourcegitcommit: 5ef018fdadd854c8a3c360743245c44d306e470d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "67721744"
+ms.lasthandoff: 01/01/2021
+ms.locfileid: "97845348"
 ---
 # <a name="language-and-region-support-for-the-ink-recognizer-api"></a>Langues et régions prises en charge pour l’API Ink Recognizer
+
+[!INCLUDE [ink-recognizer-deprecation](includes/deprecation-note.md)]
 
 Cet article explique quelles langues sont prises en charge pour l’API d’Ink Recognizer. Le contenu d’encre numérique écrit dans les langues suivantes peut être interprété et traité par l’API.
 
@@ -39,8 +41,8 @@ Cet article explique quelles langues sont prises en charge pour l’API d’Ink 
 | Néerlandais (Pays-Bas)                        |     `nl-NL`     |
 | Anglais (Australie)                        |     `en-AU`     |
 | Anglais (Canada)                           |     `en-CA`     |
-| Anglais (Royaume-Uni)                   |     `en-GB`     |
 | Anglais (Inde)                            |     `en-IN`     |
+| Anglais (Royaume-Uni)                   |     `en-GB`     |
 | Anglais (États-Unis)                    |     `en-US`     |
 | Finnois                                    |     `fi-FI`     |
 | Français (France)                            |     `fr-FR`     |
@@ -65,23 +67,23 @@ Cet article explique quelles langues sont prises en charge pour l’API d’Ink 
 | Polonais                                     |     `pl-PL`     |
 | Portugais (Brésil)                        |     `pt-BR`     |
 | Portugais (Portugal)                      |     `pt-PT`     |
-| Romanche                                    |     `rm-CH`     |
 | Roumain                                   |     `ro-RO`     |
+| Romanche                                    |     `rm-CH`     |
 | Russe                                    |     `ru-RU`     |
 | Gaélique écossais                            |     `gd-GB`     |
-| Sotho du Nord                           |    `nso-ZA`     |
 | Serbe (cyrillique, Bosnie-Herzégovine) |  `sr-Cyrl-BA`   |
 | Serbe (cyrillique, Monténégro)             |  `sr-Cyrl-ME`   |
 | Serbe (cyrillique, Serbie)                 |  `sr-Cyrl-RS`   |
 | Serbe (latin, Bosnie-Herzégovine)    |  `sr-Latn-BA`   |
 | Serbe (latin, Monténégro)                |  `sr-Latn-ME`   |
 | Serbe (latin, Serbie)                    |  `sr-Latn-RS`   |
+| Sotho du Nord                           |    `nso-ZA`     |
 | Setswana (Afrique du Sud)                    |     `tn-ZA`     |
 | Slovaque                                     |     `sk-SK`     |
 | Slovène                                  |     `sl-SI`     |
 | Espagnol (Argentine)                        |     `es-AR`     |
-| Espagnol (Espagne)                            |     `es-ES`     |
 | Espagnol (Mexique)                           |     `es-MX`     |
+| Espagnol (Espagne)                            |     `es-ES`     |
 | Suédois (Suède)                           |     `sv-SE`     |
 | Turc                                    |     `tr-TR`     |
 | Gallois                                      |     `cy-GB`     |

@@ -1,20 +1,14 @@
 ---
 title: Azure IoT Hub en tant que source Event Grid
 description: Cet article fournit les propriétés et les schémas des événements IoT Hub. Il liste les types d’événements disponibles et les propriétés d’événement, et contient un exemple d’événement.
-services: iot-hub
-documentationcenter: ''
-author: spelluru
-editor: ''
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 04/09/2020
-ms.author: spelluru
-ms.openlocfilehash: f9bf807884ab5592fa320532f3ca10a223081263
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 07/07/2020
+ms.openlocfilehash: 02ecf8d4df55aa6b4319e40892778f85f94e29a7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393324"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86113647"
 ---
 # <a name="azure-iot-hub-as-an-event-grid-source"></a>Azure IoT Hub en tant que source Event Grid
 Cet article fournit les propriétés et les schémas des événements IoT Hub. Pour une présentation des schémas d’événements, consultez [Schéma d’événements Azure Event Grid](event-schema.md). 

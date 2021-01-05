@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/19/2019
 ms.author: tibasham
-ms.openlocfilehash: 5d6396efc9ab25baa0d32e7c33c7715863516249
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e5ab1262def78da4971ea6e5535f3ac915a38ec8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77371361"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86526756"
 ---
 # <a name="azure-windows-vm-shutdown-is-stuck-on-restarting-shutting-down-or-stopping-services"></a>L’arrêt de Machines virtuelles Windows Azure est bloqué sur « Redémarrage », « Arrêt » ou « Arrêt des services »
 
@@ -25,11 +25,11 @@ Cet article décrit les étapes à suivre pour résoudre les problèmes de messa
 
 ## <a name="symptoms"></a>Symptômes
 
-Quand vous utilisez [Diagnostics de démarrage](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics) pour visualiser la capture d’écran de la machine virtuelle, vous pouvez voir que cette capture affiche le message « Redémarrage », « Arrêt » ou « Arrêt des services ».
+Quand vous utilisez [Diagnostics de démarrage](./boot-diagnostics.md) pour visualiser la capture d’écran de la machine virtuelle, vous pouvez voir que cette capture affiche le message « Redémarrage », « Arrêt » ou « Arrêt des services ».
 
 ![Écrans Redémarrage, Arrêt ou Arrêt des services](./media/boot-error-troubleshooting-windows/restart-shut-down-stop-service.png)
  
-## <a name="cause"></a>Cause :
+## <a name="cause"></a>Cause
 
 Windows utilise le processus d’arrêt pour effectuer les opérations de maintenance du système et traiter les modifications, comme les mises à jour, les rôles et les fonctionnalités. Il n’est pas recommandé d’interrompre ce processus critique avant qu’il se termine. En fonction du nombre de mises à jour/modifications et de la taille de la machine virtuelle, le processus peut prendre beaucoup de temps. Si le processus est arrêté, il est possible que le système d’exploitation soit endommagé. Interrompez le processus seulement s’il est excessivement long.
 
@@ -41,27 +41,27 @@ Windows utilise le processus d’arrêt pour effectuer les opérations de mainte
 
 2. Détachez le disque contenant les fichiers nécessaires de la machine virtuelle fonctionnelle et attachez le disque à votre machine virtuelle endommagée. Nous appelons ce disque **Disque utilitaire**.
 
-Utilisez la [console série](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-windows) pour effectuer les étapes suivantes :
+Utilisez la [console série](./serial-console-windows.md) pour effectuer les étapes suivantes :
 
-1. Ouvrez une session PowerShell d’administration et vérifiez le service qui est bloqué lors de l’arrêt.
+1. Ouvrez une session PowerShell d’administration et vérifiez le service qui cesse de répondre lors de l’arrêt.
 
    ``
    Get-Service | Where-Object {$_.Status -eq "STOP_PENDING"}
    ``
 
-2. Sur une commande d’administration, récupérez le PID du service bloqué.
+2. Sur une commande d’administration, récupérez le PID du service qui ne répond pas.
 
    ``
    tasklist /svc | findstr /i <STOPING SERVICE>
    ``
 
-3. Récupérez un exemple d’image mémoire à partir du processus bloqué <STOPPING SERVICE>.
+3. Récupérez un exemple d’image mémoire à partir du processus <STOPPING SERVICE> qui ne répond pas.
 
    ``
    procdump.exe -s 5 -n 3 -ma <PID>
    ``
 
-4. Tuez maintenant le processus bloqué pour débloquer le processus d’arrêt.
+4. Tuez maintenant le processus qui ne répond pas pour débloquer le processus d’arrêt.
 
    ``
    taskkill /PID <PID> /t /f
@@ -81,13 +81,13 @@ Si le problème n’est pas résolu après que vous avez attendu que les modific
 
 **Attacher le disque du système d’exploitation à une machine virtuelle de récupération**
 
-1. Prenez un instantané du disque du système d’exploitation de la machine virtuelle affectée en guise de sauvegarde. Pour plus d’informations, consultez [Créer un instantané](https://docs.microsoft.com/azure/virtual-machines/windows/snapshot-copy-managed-disk).
+1. Prenez un instantané du disque du système d’exploitation de la machine virtuelle affectée en guise de sauvegarde. Pour plus d’informations, consultez [Créer un instantané](../windows/snapshot-copy-managed-disk.md).
 
-2. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](https://docs.microsoft.com/azure/virtual-machines/windows/troubleshoot-recovery-disks-portal).
+2. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](./troubleshoot-recovery-disks-portal-windows.md).
 
 3. Connectez-vous à la machine virtuelle de récupération à l’aide du Bureau à distance.
 
-4. Si le disque du système d’exploitation est chiffré, vous devez désactiver le chiffrement avant de passer à l’étape suivante. Pour plus d’informations, consultez [Déchiffrer le disque de système d’exploitation chiffré sur la machine virtuelle qui ne peut pas démarrer](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/troubleshoot-bitlocker-boot-error#solution).
+4. Si le disque du système d’exploitation est chiffré, vous devez désactiver le chiffrement avant de passer à l’étape suivante. Pour plus d’informations, consultez [Déchiffrer le disque de système d’exploitation chiffré sur la machine virtuelle qui ne peut pas démarrer](./troubleshoot-bitlocker-boot-error.md#solution).
 
 **Rechercher le fichier d’image mémoire et envoyer un ticket de support**
 
@@ -142,7 +142,7 @@ Pour activer le journal de vidage et la console série, exécutez le script suiv
    reg unload HKLM\BROKENSYSTEM
    ```
 
-5. [Détachez le disque du système d’exploitation, puis rattachez-le à la machine virtuelle affectée](https://docs.microsoft.com/azure/virtual-machines/windows/troubleshoot-recovery-disks-portal).
+5. [Détachez le disque du système d’exploitation, puis rattachez-le à la machine virtuelle affectée](./troubleshoot-recovery-disks-portal-windows.md).
 
 6. Démarrez la machine virtuelle et accédez à la console série.
 

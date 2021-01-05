@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 234bf8bb-d5fe-40be-9d25-721d7482bc3b
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
-ms.openlocfilehash: 5cedde1e7daa49aaa7a2786c9ad8a65fb8e452f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 70b6231829173059ffee675105bacbe1bd1532f2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80297573"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023889"
 ---
 # <a name="use-storsimple-device-manager-to-manage-storage-account-credentials-for-storsimple-virtual-array"></a>Utilisation de StorSimple Device Manager pour gérer les informations d’identification du compte de stockage pour StorSimple Virtual Array
 
@@ -31,7 +31,7 @@ La section **Configuration** du panneau du service StorSimple Device Manager de 
   
   ![Tableau de bord du service StorSimple Device Manager](./media/storsimple-virtual-array-manage-storage-accounts/ova-storageaccts-dashboard.png)  
 
-Ce didacticiel vous explique comment ajouter, modifier ou supprimer les informations d’identification du compte de stockage pour votre instance StorSimple Virtual Array. Les informations contenues dans ce didacticiel s’appliquent uniquement à l’instance StorSimple Virtual Array. Pour plus d’informations sur la gestion des comptes de stockage de la gamme 8000, consultez la page [Utiliser le service StorSimple Manager pour gérer votre compte de stockage](storsimple-manage-storage-accounts.md).
+Ce didacticiel vous explique comment ajouter, modifier ou supprimer les informations d’identification du compte de stockage pour votre instance StorSimple Virtual Array. Les informations contenues dans ce didacticiel s’appliquent uniquement à l’instance StorSimple Virtual Array. Pour plus d’informations sur la gestion des comptes de stockage de la gamme 8000, consultez la page [Utiliser le service StorSimple Manager pour gérer votre compte de stockage](./storsimple-8000-manage-storage-accounts.md).
 
 Les informations d’identification des comptes de stockage contiennent les informations d’identification que l’appareil utilise pour accéder au compte de stockage que vous procure votre fournisseur de services cloud. Pour les comptes de stockage Microsoft Azure, il s’agit d’informations d’identification telles que le nom du compte et la clé d’accès primaire.
 
@@ -52,7 +52,7 @@ Les travaux les plus communes associées aux informations d’identification du 
 Il existe trois types d’informations d’identification de compte de stockage pouvant être utilisées avec votre appareil StorSimple.
 
 * **Informations d’identification de compte de stockage générées automatiquement** : comme son nom l’indique, de type de données de compte de stockage est automatiquement généré lors de la création du service. Pour plus d’informations sur la création de ce type d’informations d’identification de compte de stockage, consultez la section [Création d’un nouveau service](storsimple-virtual-array-manage-service.md#create-a-service).
-* **Informations d’identification de compte de stockage dans l’abonnement au service** : ces données sont celles qui sont associées à l’abonnement au service. Pour plus d’informations sur la création de ce type d’informations d’identification, consultez la section [À propos des comptes de stockage Azure](../storage/common/storage-create-storage-account.md).
+* **Informations d’identification de compte de stockage dans l’abonnement au service** : ces données sont celles qui sont associées à l’abonnement au service. Pour plus d’informations sur la création de ce type d’informations d’identification, consultez la section [À propos des comptes de stockage Azure](../storage/common/storage-account-create.md).
 * **Informations d’identification de compte de stockage en dehors de l’abonnement au service** : il s’agit ici des données qui ne sont pas associées à votre service et existaient probablement avant sa création.
 
 ## <a name="add-a-storage-account-credential"></a>Ajout des informations d’identification de compte de stockage
@@ -152,4 +152,3 @@ Pour informer le service StorSimple Device Manager de la modification, vous deve
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Découvrez comment [gérer votre StorSimple Virtual Array](storsimple-ova-web-ui-admin.md).
-

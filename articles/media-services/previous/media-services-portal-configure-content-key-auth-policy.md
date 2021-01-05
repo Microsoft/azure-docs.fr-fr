@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 8580bafd4d68ef6567b09fefcaa01c682ae2cafe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0218c24637b9b49972e93b8dd53e5970c9ab89d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74968788"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89260898"
 ---
 # <a name="configure-a-content-key-authorization-policy"></a>Configurer une stratégie d’autorisation de clé de contenu
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 [!INCLUDE [media-services-selector-content-key-auth-policy](../../../includes/media-services-selector-content-key-auth-policy.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
@@ -57,7 +60,7 @@ La restriction ouverte signifie que le système fournit la clé à toute personn
 ### <a name="token-restriction"></a>Restriction à jeton
 Pour choisir la stratégie de restriction à jeton, sélectionnez le bouton **JETON**.
 
-La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [SWT (Simple Web Tokens)](https://msdn.microsoft.com/library/gg185950.aspx#BKMK_2) et JWT (JSON Web Token). Pour en savoir plus, consultez [Authentification JWT](http://www.gtrifonov.com/2015/01/03/jwt-token-authentication-in-azure-media-services-and-dynamic-encryption/).
+La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [SWT (Simple Web Tokens)](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_2) et JWT (JSON Web Token). Pour en savoir plus, consultez [Authentification JWT](http://www.gtrifonov.com/2015/01/03/jwt-token-authentication-in-azure-media-services-and-dynamic-encryption/).
 
 Media Services ne fournit pas de service STS. Vous pouvez créer un STS personnalisé pour émettre des jetons. Le STS doit être configuré pour créer un jeton signé avec la clé spécifiée et émettre les revendications spécifiées dans la configuration de restriction de jeton. Si le jeton est valide et que les revendications du jeton correspondent à celles configurées pour la clé de contenu, le service de remise de clés Media Services retourne la clé de chiffrement au client.
 
@@ -66,17 +69,19 @@ Quand vous configurez la stratégie de restriction par jeton, vous devez défini
 ### <a name="playready"></a>PlayReady
 Quand vous protégez votre contenu avec PlayReady, vous devez spécifier dans votre stratégie d’autorisation une chaîne XML qui définit le modèle de licence PlayReady. Par défaut, la stratégie suivante est définie :
 
-    <PlayReadyLicenseResponseTemplate xmlns:i="https://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1">
-          <LicenseTemplates>
-            <PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices>
-              <ContentKey i:type="ContentEncryptionKeyFromHeader" />
-              <LicenseType>Nonpersistent</LicenseType>
-              <PlayRight>
-                <AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput>
-              </PlayRight>
-            </PlayReadyLicenseTemplate>
-          </LicenseTemplates>
-        </PlayReadyLicenseResponseTemplate>
+```xml
+<PlayReadyLicenseResponseTemplate xmlns:i="https://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1">
+  <LicenseTemplates>
+    <PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices>
+      <ContentKey i:type="ContentEncryptionKeyFromHeader" />
+      <LicenseType>Nonpersistent</LicenseType>
+      <PlayRight>
+        <AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput>
+      </PlayRight>
+    </PlayReadyLicenseTemplate>
+  </LicenseTemplates>
+</PlayReadyLicenseResponseTemplate>
+```
 
 Vous pouvez sélectionner le bouton **importer le XML de la stratégie** et fournir un autre code XML conforme au schéma XML défini dans la [vue d’ensemble des modèles de licence PlayReady de Media Services](media-services-playready-license-template-overview.md).
 
@@ -92,4 +97,3 @@ Vous pouvez sélectionner le bouton **importer le XML de la stratégie** et four
 
 [open_policy]: ./media/media-services-portal-configure-content-key-auth-policy/media-services-protect-content-with-open-restriction.png
 [token_policy]: ./media/media-services-key-authorization-policy/media-services-protect-content-with-token-restriction.png
-

@@ -2,18 +2,18 @@
 title: Informations sur les réseaux dans la récupération d'urgence de machines virtuelles Azure avec Azure Site Recovery
 description: Fournit une vue d’ensemble de la mise en réseau en vue d’une réplication des machines virtuelles Azure avec Azure Site Recovery.
 services: site-recovery
-author: sujayt
+author: Harsha-CS
 manager: rochakm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 3/13/2020
-ms.author: sutalasi
-ms.openlocfilehash: 58348c9aed14a5cc9126be780fe01817274a0b47
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: harshacs
+ms.openlocfilehash: b9fdaf8a0791570ecee402442c5faefe2f70a22b
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80283257"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92370438"
 ---
 # <a name="about-networking-in-azure-vm-disaster-recovery"></a>Informations sur les réseaux dans la récupération d'urgence de machines virtuelles Azure
 
@@ -29,22 +29,24 @@ Découvrez comment Site Recovery permet la récupération d’urgence pour [ce s
 
 Le diagramme suivant illustre un environnement Azure classique pour des applications qui s’exécutent sur des machines virtuelles Azure :
 
-![environnement client](./media/site-recovery-azure-to-azure-architecture/source-environment.png)
+![Diagramme montrant un environnement Azure classique pour des applications qui s’exécutent sur des machines virtuelles Azure.](./media/site-recovery-azure-to-azure-architecture/source-environment.png)
 
 Si vous utilisez Azure ExpressRoute ou une connexion VPN de votre réseau local vers Azure, l’environnement ressemble à ceci :
 
 ![environnement client](./media/site-recovery-azure-to-azure-architecture/source-environment-expressroute.png)
 
-Les réseaux sont généralement protégés à l’aide de pare-feu et de groupes de sécurité réseau. Les pare-feu se servent d’une liste verte basée sur l’adresse IP ou l’URL pour contrôler la connectivité réseau. Les groupes de sécurité réseau appliquent des règles qui utilise les plages d’adresses IP pour contrôler la connectivité réseau.
+Les réseaux sont généralement protégés à l’aide de pare-feu et de groupes de sécurité réseau. Les balises de service doivent être utilisées pour contrôler la connectivité réseau. Les groupes de sécurité réseau doivent autoriser plusieurs balises de service à contrôler la connectivité sortante.
 
 >[!IMPORTANT]
 > L’utilisation d’un proxy authentifié pour contrôler la connectivité réseau n’est pas pris en charge par Site Recovery, et la réplication ne peut pas être activée.
 
+>[!NOTE]
+>- Le filtrage basé sur l’adresse IP ne doit pas être effectué pour contrôler la connectivité sortante.
+>- Les adresses IP d’Azure Site Recovery ne doivent pas être ajoutées à la table de routage Azure pour contrôler la connectivité sortante.
 
 ## <a name="outbound-connectivity-for-urls"></a>Connectivité sortante pour les URL
 
 Si vous utilisez un proxy de pare-feu basé sur des URL pour contrôler la connectivité sortante, autorisez ces URL Site Recovery :
-
 
 **URL** | **Détails**
 --- | ---
@@ -57,12 +59,12 @@ login.microsoftonline.com | Nécessaire pour l’autorisation et l’authentific
 
 ## <a name="outbound-connectivity-using-service-tags"></a>Connectivité sortante à l’aide d’étiquettes de service
 
-Si vous utilisez un groupe de sécurité réseau pour contrôler la connectivité sortante, ces étiquettes de services doivent être autorisées.
+Quand vous utilisez un groupe de sécurité réseau pour contrôler la connectivité sortante, ces étiquettes de services doivent être autorisées.
 
 - Pour les comptes de stockage dans la région source :
-    - Créez une règle de groupe de sécurité réseau basée sur une [balise de service de stockage](../virtual-network/security-overview.md#service-tags) pour la région source.
+    - Créez une règle de groupe de sécurité réseau basée sur une [balise de service de stockage](../virtual-network/network-security-groups-overview.md#service-tags) pour la région source.
     - Autorisez ces adresses pour que les données puissent être écrites dans le compte de stockage de cache, à partir de la machine virtuelle.
-- Créer une règle de groupe de sécurité réseau basée sur une [balise de service Azure Active Directory (AAD)](../virtual-network/security-overview.md#service-tags) pour autoriser l’accès à toutes les adresses IP correspondant à AAD
+- Créer une règle de groupe de sécurité réseau basée sur une [balise de service Azure Active Directory (AAD)](../virtual-network/network-security-groups-overview.md#service-tags) pour autoriser l’accès à toutes les adresses IP correspondant à AAD
 - Créez une règle de groupe de sécurité réseau basée sur une balise du service EventsHub pour la région cible, en autorisant l’accès à la supervision de Site Recovery.
 - Créez une règle de groupe de sécurité réseau basée sur une balise du service AzureSiteRecovery pour autoriser l’accès au service Site Recovery dans n’importe quelle région.
 - Créez une règle NSG basée sur une étiquette de service AzureKeyVault. Cela est nécessaire uniquement pour l’activation de la réplication des machines virtuelles compatibles avec ADE via le portail.
@@ -80,11 +82,11 @@ Cet exemple montre comment configurer des règles de groupes de sécurité rése
 
 1. Créez une règle de sécurité HTTPS sortante (443) pour « Storage.EastUS » sur le groupe de sécurité réseau comme indiqué dans la capture d’écran ci-dessous.
 
-      ![storage-tag](./media/azure-to-azure-about-networking/storage-tag.png)
+      ![Capture d’écran montrant Ajouter une règle de sécurité de trafic sortant applicable à un groupe de sécurité réseau pour le point de stockage USA Est.](./media/azure-to-azure-about-networking/storage-tag.png)
 
 2. Créez une règle de sécurité HTTPS sortante (443) pour « AzureActiveDirectory » sur le groupe de sécurité réseau comme indiqué dans la capture d’écran ci-dessous.
 
-      ![aad-tag](./media/azure-to-azure-about-networking/aad-tag.png)
+      ![Capture d’écran montrant Ajouter une règle de sécurité de trafic sortant applicable à un groupe de sécurité réseau pour Azure AD.](./media/azure-to-azure-about-networking/aad-tag.png)
 
 3. Comme pour les règles de sécurité ci-dessus, créez une règle de sécurité HTTPS sortante (443) pour « EventHub.CentralUS » sur le groupe de sécurité réseau qui correspond à la position cible. Celle-ci permet d’accéder à la supervision de Site Recovery.
 
@@ -124,6 +126,6 @@ Vous pouvez créer un point de terminaison de service réseau dans votre réseau
 Vous pouvez remplacer l’itinéraire système par défaut d’Azure pour le préfixe d’adresse 0.0.0.0/0 par un [itinéraire personnalisé](../virtual-network/virtual-networks-udr-overview.md#custom-routes) et rediriger le trafic des machines virtuelles vers une appliance virtuelle réseau locale, mais cette configuration n’est pas recommandée pour la réplication Site Recovery. Si vous utilisez des itinéraires personnalisés, vous devez [créer un point de terminaison de service de réseau virtuel](azure-to-azure-about-networking.md#create-network-service-endpoint-for-storage) dans votre réseau virtuel pour « Stockage » afin que le trafic de réplication ne quitte pas la limite Azure.
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Commencer à protéger vos charges de travail en [répliquant des machines virtuelles Azure](site-recovery-azure-to-azure.md).
+- Commencer à protéger vos charges de travail en [répliquant des machines virtuelles Azure](./azure-to-azure-quickstart.md).
 - En savoir plus sur la [conservation des adresses IP](site-recovery-retain-ip-azure-vm-failover.md) pour le basculement de machines virtuelles Azure.
 - En savoir plus sur la récupération d’urgence des [machines virtuelles Azure via ExpressRoute](azure-vm-disaster-recovery-with-expressroute.md).

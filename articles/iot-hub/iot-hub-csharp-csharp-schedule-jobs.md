@@ -8,13 +8,13 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/20/2019
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: 4c71a108d1967027465d127db50737119af3e2c1
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: mqtt, devx-track-csharp
+ms.openlocfilehash: 0391afe5562238f488fde7e50d914c46a5c32944
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733371"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92142456"
 ---
 # <a name="schedule-and-broadcast-jobs-net"></a>Planifier et diffuser des travaux (.NET)
 
@@ -32,9 +32,9 @@ Un travail encapsule l’une de ces actions et suit l’exécution sur un ensemb
 
 Pour plus d’informations sur chacune de ces fonctionnalités, consultez les pages :
 
-* Jumeau d’appareil et propriétés : [Bien démarrer avec les jumeaux d’appareils](iot-hub-csharp-csharp-twin-getstarted.md) et [Tutoriel : Utiliser les propriétés de jumeau d’appareil](tutorial-device-twins.md)
+* Jumeau d’appareil et propriétés : [Bien démarrer avec des jumeaux d’appareils](iot-hub-csharp-csharp-twin-getstarted.md) et [Tutoriel : Guide pratique pour utiliser des propriétés de jumeau d’appareil](tutorial-device-twins.md)
 
-* Méthodes directes : [Guide du développeur IoT Hub - Méthodes directes](iot-hub-devguide-direct-methods.md) et [Didacticiel : utilisation des méthodes directes](quickstart-control-device-dotnet.md)
+* Méthodes directes : [Guide du développeur IoT Hub - méthodes directes](iot-hub-devguide-direct-methods.md) et [Didacticiel : Utiliser des méthodes directes](quickstart-control-device-dotnet.md)
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
@@ -50,13 +50,13 @@ Ce didacticiel vous explique les procédures suivantes :
 
 * **ScheduleJob**. Cette application utilise des travaux pour appeler la méthode directe **LockDoor** et mettre à jour les propriétés souhaitées du jumeau d’appareil sur plusieurs appareils.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Visual Studio.
 
 * Un compte Azure actif. Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes.
 
-* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 
@@ -261,7 +261,7 @@ Dans cette section, vous allez créer une application console .NET (en C#) qui u
     ```
 
     > [!NOTE]
-    > Pour plus d’informations sur la syntaxe de requête, consultez l’article [Langage de requête IoT Hub](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language).
+    > Pour plus d’informations sur la syntaxe de requête, consultez l’article [Langage de requête IoT Hub](./iot-hub-devguide-query-language.md).
     >
 
 1. Enfin, ajoutez les lignes suivantes à la méthode **Main** :
@@ -309,6 +309,6 @@ Vous êtes maintenant prêt à exécuter les applications.
 
 Dans ce didacticiel, vous avez utilisé un travail pour planifier une méthode directe sur un appareil et la mise à jour des propriétés de représentation de l’appareil.
 
-* Pour poursuivre votre découverte d’IoT Hub et des modèles de gestion d’appareils, comme la mise à jour du microprogramme à distance, consultez le [Tutoriel : Mettre à jour un microprogramme](tutorial-firmware-update.md).
+* Pour approfondir la prise en main d’IoT Hub et des modèles de gestion d’appareils, comme la mise à jour du microprogramme à distance, consultez [Didacticiel : Mettre à jour un microprogramme](tutorial-firmware-update.md).
 
-* Pour en savoir plus sur le déploiement de l’intelligence artificielle sur des appareils de périphérie avec Azure IoT Edge, consultez [Bien démarrer avec IoT Edge](../iot-edge/tutorial-simulate-device-linux.md).
+* Pour en savoir plus sur le déploiement de l’intelligence artificielle sur des appareils de périphérie avec Azure IoT Edge, consultez [Bien démarrer avec IoT Edge](../iot-edge/quickstart-linux.md).

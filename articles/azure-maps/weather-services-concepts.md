@@ -1,27 +1,31 @@
 ---
-title: Concepts relatifs aux services météo | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir les concepts qui s’appliquent aux services météo de Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 11/20/2019
+title: Concepts relatifs au service Météo (préversion) de Microsoft Azure Maps
+description: Découvrez les concepts qui s’appliquent au service Météo (préversion) de Microsoft Azure Maps.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 09/10/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 03a16ac065b585c499efa268500e0a8c81c07738
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 657cb6a86122d267b86e82b6f02eb58e968cddd3
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80333816"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96904735"
 ---
-# <a name="weather-services-in-azure-maps"></a>Services météo dans Azure Maps
+# <a name="weather-services-preview-in-azure-maps"></a>Service Météo (préversion) d’Azure Maps
 
-Cet article présente les concepts qui s’appliquent aux [Services météo d’Azure Maps](https://aka.ms/AzureMapsWeatherService). Nous vous recommandons de consulter cet article avant de commencer à utiliser les API météo. 
+> [!IMPORTANT]
+> Le service Météo d’Azure Maps est disponible en préversion publique.
+> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+Cet article présente les concepts qui s’appliquent au [service Météo](/rest/api/maps/weather) d’Azure Maps. Nous vous recommandons de consulter cet article avant de commencer à utiliser les API météo.
 
 ## <a name="unit-types"></a>Types d’unités
 
-Certaines API du service météo permettent à l’utilisateur de spécifier si les données sont retournées soit en unités métriques, soit en unités impériales. Les réponses renvoyées pour ces API comprennent unitType et une valeur numérique qui peut être utilisée pour les conversions d’unités. Pour interpréter ces valeurs, consultez le tableau ci-dessous.
+Certaines API du service Météo (préversion) permettent à l’utilisateur de spécifier si les données doivent être retournées en unités métriques ou en unités impériales. Les réponses renvoyées pour ces API comprennent unitType et une valeur numérique qui peut être utilisée pour les conversions d’unités. Pour interpréter ces valeurs, consultez le tableau ci-dessous.
 
 |unitType|Description         |
 |--------|--------------------|
@@ -52,55 +56,55 @@ Certaines API du service météo permettent à l’utilisateur de spécifier si 
 
 ## <a name="weather-icons"></a>Icônes météo
 
-Certaines API de service Météo retournent `iconCode` dans la réponse. `iconCode` est une valeur numérique utilisée pour définir l’icône. Ne créez pas de lien direct avec ces images à partir de vos applications, les URL peuvent changer et changeront.
+Certaines API du service Météo retournent `iconCode` dans la réponse. `iconCode` est une valeur numérique utilisée pour définir l’icône. Ne créez pas de lien direct avec ces images à partir de vos applications, les URL peuvent changer et changeront.
 
 | Numéro d’icône |Icône| jour | Nuit | Texte |
 |-------------|:----:|-----|-------|------|
-| 1           |![](./media/weather-services-concepts/sunny-i.png)                      | Oui |  Non    | Ensoleillé|
-| 2           |![](./media/weather-services-concepts/mostly-sunny.png)                | Oui |  Non    | Principalement ensoleillé|
-| 3           |![](./media/weather-services-concepts/partly-sunny.png)                | Oui |  Non    | Partiellement ensoleillé|
-| 4           |![](./media/weather-services-concepts/intermittent-clouds.png)         | Oui |  Non    | Nuages intermittents|
-| 5           |![](./media/weather-services-concepts/hazy-sunshine.png)               | Oui |  Non    | Rayonnement diffus |
-| 6           |![](./media/weather-services-concepts/mostly-cloudy.png)               | Oui |  Non    | Principalement nuageux|
-| 7           |![](./media/weather-services-concepts/cloudy-i.png)                     | Oui |  Oui   | Nuageux |
-| 8           |![](./media/weather-services-concepts/dreary-overcast.png)             | Oui |  Oui   | Maussade (couvert)|
-| 11           |![](./media/weather-services-concepts/fog-i.png)                       | Oui |  Oui   | Brouillard|
-| 12           |![](./media/weather-services-concepts/showers-i.png)                   | Oui |  Oui   | Averses|
-| 13           |![](./media/weather-services-concepts/mostly-cloudy-showers.png)       | Oui |  Non    | Principalement nuageux avec des averses|
-| 14           |![](./media/weather-services-concepts/partly-sunny-showers.png)        | Oui |  Non    | Partiellement ensoleillé avec des averses|
-| 15           |![](./media/weather-services-concepts/tstorms-i.png)                   | Oui |  Oui   | Orages|
-| 16           |![](./media/weather-services-concepts/mostly-cloudy-tstorms.png)       | Oui |  Non    | Principalement nuageux avec des orages|
-| 17           |![](./media/weather-services-concepts/partly-sunny-tstorms.png)        | Oui |  Non    | Partiellement ensoleillé avec des orages|
-| 18           |![](./media/weather-services-concepts/rain-i.png)                      | Oui |  Oui   | Pluie|
-| 19           |![](./media/weather-services-concepts/flurries-i.png)                  | Oui |  Oui   | Averses de neige|
-| 20           |![](./media/weather-services-concepts/mostly-cloudy-flurries.png)      | Oui |  Non    | Principalement nuageux avec des averses de neige|
-| 21           |![](./media/weather-services-concepts/partly-sunny-flurries.png)       | Oui |  Non    | Partiellement ensoleillé avec des averses de neige|
-| 22           |![](./media/weather-services-concepts/snow-i.png)                      | Oui |  Oui   | Neige|
-| 23           |![](./media/weather-services-concepts/mostly-cloudy-snow.png)          | Oui |  Non    | Principalement nuageux avec de la neige|
-| 24           |![](./media/weather-services-concepts/ice-i.png)                       | Oui |  Oui   | Verglas |
-| 25           |![](./media/weather-services-concepts/sleet-i.png)                     | Oui |  Oui   | Giboulée|
-| 26           |![](./media/weather-services-concepts/freezing-rain.png)              | Oui |  Oui   | Pluie verglaçante|
-| 29           |![](./media/weather-services-concepts/rain-snow.png)                  | Oui |  Oui   | Pluie et neige|
-| 30           |![](./media/weather-services-concepts/hot-i.png)                       | Oui |  Oui   | À chaud|
-| 31           |![](./media/weather-services-concepts/cold-i.png)                      | Oui |  Oui   | Froid|
-| 32           |![](./media/weather-services-concepts/windy-i.png)                     | Oui |  Oui   | Venteux|
-| 33           |![](./media/weather-services-concepts/clear-night.png)                | Non  |  Oui   | Désactiver|
-| 34           |![](./media/weather-services-concepts/mostly-clear-night.png)          | Non  |  Oui   | Ciel plutôt dégagé|
-| 35           |![](./media/weather-services-concepts/partly-cloudy-night.png)         | Non  |  Oui   | Partiellement nuageux|
-| 36           |![](./media/weather-services-concepts/intermittent-clouds-Night.png)   | Non  |  Oui   | Nuages intermittents|
-| 37           |![](./media/weather-services-concepts/hazymoon-light.png)             | Non  |  Oui   | Clair de lune brumeux|
-| 38           |![](./media/weather-services-concepts/mostly-cloudy-night.png)         | Non  |  Oui   | Principalement nuageux|
-| 39           |![](./media/weather-services-concepts/partly-cloudy-showers-night.png)  | Non  |  Oui   | Partiellement nuageux avec des averses|
-| 40           |![](./media/weather-services-concepts/mostly-cloudy-showers-night.png)  | Non  |  Oui   | Principalement nuageux avec des averses|
-| 41           |![](./media/weather-services-concepts/partly-cloudy-tstorms-night.png)  | Non  |  Oui   | Partiellement nuageux avec des orages|
-| 42           |![](./media/weather-services-concepts/mostly-cloudy-tstorms-night.png)  | Non  |  Oui   | Principalement nuageux avec des orages|
-| 43           |![](./media/weather-services-concepts/mostly-cloudy-flurries-night.png) | Non  |  Oui   | Principalement nuageux avec des averses de neige|
-| 44           |![](./media/weather-services-concepts/mostly-cloudy-snow.png)          | Non  |  Oui   | Principalement nuageux avec de la neige|
+| 1           | :::image type="icon" source="./media/weather-services-concepts/sunny-i.png"::: | Oui |  Non    | Ensoleillé|
+| 2           | :::image type="icon" source="./media/weather-services-concepts/mostly-sunny.png"::: | Oui |  Non    | Principalement ensoleillé|
+| 3           | :::image type="icon" source="./media/weather-services-concepts/partly-sunny.png"::: | Oui |  Non    | Partiellement ensoleillé|
+| 4           | :::image type="icon" source="./media/weather-services-concepts/intermittent-clouds.png"::: | Oui |  Non    | Nuages intermittents|
+| 5           | :::image type="icon" source="./media/weather-services-concepts/hazy-sunshine.png"::: | Oui |  Non    | Rayonnement diffus |
+| 6           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy.png"::: | Oui |  Non    | Principalement nuageux|
+| 7           | :::image type="icon" source="./media/weather-services-concepts/cloudy-i.png"::: | Oui |  Oui   | Nuageux |
+| 8           | :::image type="icon" source="./media/weather-services-concepts/dreary-overcast.png"::: | Oui |  Oui   | Maussade (couvert)|
+| 11           | :::image type="icon" source="./media/weather-services-concepts/fog-i.png"::: | Oui |  Oui   | Brouillard|
+| 12           | :::image type="icon" source="./media/weather-services-concepts/showers-i.png"::: | Oui |  Oui   | Averses|
+| 13           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-showers.png"::: | Oui |  Non    | Principalement nuageux avec des averses|
+| 14           | :::image type="icon" source="./media/weather-services-concepts/partly-sunny-showers.png"::: | Oui |  Non    | Partiellement ensoleillé avec des averses|
+| 15           | :::image type="icon" source="./media/weather-services-concepts/tstorms-i.png"::: | Oui |  Oui   | Orages|
+| 16           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-tstorms.png"::: | Oui |  Non    | Principalement nuageux avec des orages|
+| 17           | :::image type="icon" source="./media/weather-services-concepts/partly-sunny-tstorms.png"::: | Oui |  Non    | Partiellement ensoleillé avec des orages|
+| 18           | :::image type="icon" source="./media/weather-services-concepts/rain-i.png"::: | Oui |  Oui   | Pluie|
+| 19           | :::image type="icon" source="./media/weather-services-concepts/flurries-i.png"::: | Oui |  Oui   | Averses de neige|
+| 20           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-flurries.png"::: | Oui |  Non    | Principalement nuageux avec des averses de neige|
+| 21           | :::image type="icon" source="./media/weather-services-concepts/partly-sunny-flurries.png"::: | Oui |  Non    | Partiellement ensoleillé avec des averses de neige|
+| 22           | :::image type="icon" source="./media/weather-services-concepts/snow-i.png"::: | Oui |  Oui   | Neige|
+| 23           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-snow.png"::: | Oui |  Non    | Principalement nuageux avec de la neige|     
+| 24           | :::image type="icon" source="./media/weather-services-concepts/ice-i.png"::: | Oui |  Oui   | Verglas |
+| 25           | :::image type="icon" source="./media/weather-services-concepts/sleet-i.png"::: | Oui |  Oui   | Giboulée|
+| 26           | :::image type="icon" source="./media/weather-services-concepts/freezing-rain.png"::: | Oui |  Oui   | Pluie verglaçante|
+| 29           | :::image type="icon" source="./media/weather-services-concepts/rain-snow.png"::: | Oui |  Oui   | Pluie et neige|
+| 30           | :::image type="icon" source="./media/weather-services-concepts/hot-i.png"::: | Oui |  Oui   | À chaud|
+| 31           | :::image type="icon" source="./media/weather-services-concepts/cold-i.png"::: | Oui |  Oui   | Froid|
+| 32           | :::image type="icon" source="./media/weather-services-concepts/windy-i.png"::: | Oui |  Oui   | Venteux|
+| 33           | :::image type="icon" source="./media/weather-services-concepts/clear-night.png"::: | Non  |  Oui   | Désactiver|
+| 34           | :::image type="icon" source="./media/weather-services-concepts/mostly-clear-night.png"::: | Non  |  Oui   | Ciel plutôt dégagé|
+| 35           | :::image type="icon" source="./media/weather-services-concepts/partly-cloudy-night.png"::: | Non  |  Oui   | Partiellement nuageux|
+| 36           | :::image type="icon" source="./media/weather-services-concepts/intermittent-clouds-Night.png"::: | Non  |  Oui   | Nuages intermittents|
+| 37           | :::image type="icon" source="./media/weather-services-concepts/hazymoon-light.png"::: | Non  |  Oui   | Clair de lune brumeux|
+| 38           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-night.png"::: | Non  |  Oui   | Principalement nuageux|
+| 39           | :::image type="icon" source="./media/weather-services-concepts/partly-cloudy-showers-night.png"::: | Non  |  Oui   | Partiellement nuageux avec des averses|
+| 40           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-showers-night.png"::: | Non  |  Oui   | Principalement nuageux avec des averses|
+| 41           | :::image type="icon" source="./media/weather-services-concepts/partly-cloudy-tstorms-night.png"::: | Non  |  Oui   | Partiellement nuageux avec des orages|
+| 42           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-tstorms-night.png"::: | Non  |  Oui   | Principalement nuageux avec des orages|
+| 43           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-flurries-night.png"::: | Non  |  Oui   | Principalement nuageux avec des averses de neige|
+| 44           | :::image type="icon" source="./media/weather-services-concepts/mostly-cloudy-snow.png"::: | Non  |  Oui   | Principalement nuageux avec de la neige|
 
 
 ## <a name="radar-and-satellite-imagery-color-scale"></a>Mise à l’échelle de couleurs des images radar et par satellite
 
-Via l’[API Get Map Tile v2](https://aka.ms/AzureMapsWeatherTiles), les utilisateurs peuvent demander les images radar et infra-rouges par satellite les plus récentes. Consultez le guide ci-dessous pour interpréter les couleurs utilisées pour les vignettes radar et satellite.
+Via l’[API Get Map Tile v2](/rest/api/maps/renderv2/getmaptilepreview), les utilisateurs peuvent demander les images radar et infra-rouges par satellite les plus récentes. Consultez le guide ci-dessous pour interpréter les couleurs utilisées pour les vignettes radar et satellite.
 
 ### <a name="radar-images"></a>Images radar
 
@@ -108,22 +112,22 @@ Le tableau ci-dessous fournit des conseils pour interpréter les images radar et
 
 | Code couleur hexadécimal | Échantillon de couleur | Conditions météorologiques |
 |----------------|--------------|-------------------|
-| #93c701        | ![](./media/weather-services-concepts/color-93c701.png) | Pluie-Faible |
-| #ffd701        | ![](./media/weather-services-concepts/color-ffd701.png) | Pluie-Modérée |
-| #f05514        | ![](./media/weather-services-concepts/color-f05514.png) | Pluie-Intense |
-| #dc250e        | ![](./media/weather-services-concepts/color-dc250e.png) | Pluie-Torrentielle |
-| #9ec8f2        | ![](./media/weather-services-concepts/color-9ec8f2.png) | Neige-Faible |
-| #2a8fdb        | ![](./media/weather-services-concepts/color-2a8fdb.png) | Neige-Modérée |
-| #144bed        | ![](./media/weather-services-concepts/color-144bed.png) | Neige-Intense |
-| #020096        | ![](./media/weather-services-concepts/color-020096.png) | Neige-Extrême |
-| #e6a5c8        | ![](./media/weather-services-concepts/color-e6a5c8.png) | Verglas-Faible |
-| #d24fa0        | ![](./media/weather-services-concepts/color-d24fa0.png) | Verglas-Modéré |
-| #b71691        | ![](./media/weather-services-concepts/color-b71691.png) | Verglas-Intense |
-| #7a1570        | ![](./media/weather-services-concepts/color-7a1570.png) | Verglas-Extrême |
-| #c196e6        | ![](./media/weather-services-concepts/color-c196e6.png) | Conditions mixtes-Légères |
-| #ae6ee6        | ![](./media/weather-services-concepts/color-ae6ee6.png) | Conditions mixtes-Modérées |
-| #8a32d7        | ![](./media/weather-services-concepts/color-8a32d7.png) | Conditions mixtes-Intenses |
-| #6500ba        | ![](./media/weather-services-concepts/color-6500ba.png) | Conditions mixtes-Extrêmes |
+| #93c701        | ![Couleur pour pluie-légère.](./media/weather-services-concepts/color-93c701.png) | Pluie-Faible |
+| #ffd701        | ![Couleur pour pluie-modérée.](./media/weather-services-concepts/color-ffd701.png) | Pluie-Modérée |
+| #f05514        | ![Couleur pour pluie-forte.](./media/weather-services-concepts/color-f05514.png) | Pluie-Intense |
+| #dc250e        | ![Couleur pour pluie-intense.](./media/weather-services-concepts/color-dc250e.png) | Pluie-Torrentielle |
+| #9ec8f2        | ![Couleur pour neige-légère.](./media/weather-services-concepts/color-9ec8f2.png) | Neige-Faible |
+| #2a8fdb        | ![Couleur pour neige-modérée.](./media/weather-services-concepts/color-2a8fdb.png) | Neige-Modérée |
+| #144bed        | ![Couleur pour neige-forte.](./media/weather-services-concepts/color-144bed.png) | Neige-Intense |
+| #020096        | ![Couleur pour neige-intense.](./media/weather-services-concepts/color-020096.png) | Neige-Extrême |
+| #e6a5c8        | ![Couleur pour glace-légère.](./media/weather-services-concepts/color-e6a5c8.png) | Verglas-Faible |
+| #d24fa0        | ![Couleur pour glace-modérée.](./media/weather-services-concepts/color-d24fa0.png) | Verglas-Modéré |
+| #b71691        | ![Couleur pour glace-forte.](./media/weather-services-concepts/color-b71691.png) | Verglas-Intense |
+| #7a1570        | ![Couleur pour glace-intense.](./media/weather-services-concepts/color-7a1570.png) | Verglas-Extrême |
+| #c196e6        | ![Couleur pour mélange-léger.](./media/weather-services-concepts/color-c196e6.png) | Conditions mixtes-Légères |
+| #ae6ee6        | ![Couleur pour mélange-modéré.](./media/weather-services-concepts/color-ae6ee6.png) | Conditions mixtes-Modérées |
+| #8a32d7        | ![Couleur pour mélange-fort.](./media/weather-services-concepts/color-8a32d7.png) | Conditions mixtes-Intenses |
+| #6500ba        | ![Couleur pour mélange-intense.](./media/weather-services-concepts/color-6500ba.png) | Conditions mixtes-Extrêmes |
 
 La palette de couleurs détaillée pour les mosaïques radar avec des codes de couleur hex et des valeurs dBZ est indiquée ci-dessous. dBZ représente l’intensité de précipitation dans le radar météo. 
 
@@ -199,18 +203,18 @@ Le tableau ci-dessous fournit des conseils pour interpréter les images satellit
 
 | Code couleur hexadécimal | Échantillon de couleur | Température du nuage |
 |----------------|--------------|-------------------|
-| #b5b5b5        | ![](./media/weather-services-concepts/color-b5b5b5.png) | Température-Valeur basse | 
-| #d24fa0        | ![](./media/weather-services-concepts/color-d24fa0.png) |  |
-| #8a32d7        | ![](./media/weather-services-concepts/color-8a32d7.png) |  |
-| #144bed        | ![](./media/weather-services-concepts/color-144bed.png) |  |
-| #479702        | ![](./media/weather-services-concepts/color-479702.png) |  |
-| #72b403        | ![](./media/weather-services-concepts/color-72b403.png) |  |
-| #93c701        | ![](./media/weather-services-concepts/color-93c701.png) |  |
-| #ffd701        | ![](./media/weather-services-concepts/color-ffd701.png) |  |
-| #f05514        | ![](./media/weather-services-concepts/color-f05514.png) |  |
-| #dc250e        | ![](./media/weather-services-concepts/color-dc250e.png) |  |
-| #ba0808        | ![](./media/weather-services-concepts/color-ba0808.png) |  |
-| #1f1f1f        | ![](./media/weather-services-concepts/color-1f1f1f.png) | Température-Valeur élevée |
+| #b5b5b5        | ![Vignette de couleur pour #b5b5b5.](./media/weather-services-concepts/color-b5b5b5.png) | Température-Valeur basse | 
+| #d24fa0        | ![Vignette de couleur pour #d24fa0.](./media/weather-services-concepts/color-d24fa0.png) |  |
+| #8a32d7        | ![Vignette de couleur pour #8a32d7.](./media/weather-services-concepts/color-8a32d7.png) |  |
+| #144bed        | ![Vignette de couleur pour #144bed.](./media/weather-services-concepts/color-144bed.png) |  |
+| #479702        | ![Vignette de couleur pour #479702.](./media/weather-services-concepts/color-479702.png) |  |
+| #72b403        | ![Vignette de couleur pour #72b403.](./media/weather-services-concepts/color-72b403.png) |  |
+| #93c701        | ![Vignette de couleur pour #93c701.](./media/weather-services-concepts/color-93c701.png) |  |
+| #ffd701        | ![Vignette de couleur pour #ffd701.](./media/weather-services-concepts/color-ffd701.png) |  |
+| #f05514        | ![Vignette de couleur pour #f05514.](./media/weather-services-concepts/color-f05514.png) |  |
+| #dc250e        | ![Vignette de couleur pour #dc250e.](./media/weather-services-concepts/color-dc250e.png) |  |
+| #ba0808        | ![Vignette de couleur pour #ba0808.](./media/weather-services-concepts/color-ba0808.png) |  |
+| #1f1f1f        | ![Vignette de couleur pour #1f1f1f.](./media/weather-services-concepts/color-1f1f1f.png) | Température-Valeur élevée |
 
 
 La palette de couleurs détaillée pour les mosaïques de satellite infrarouges est illustrée ci-dessous.
@@ -472,3 +476,169 @@ La palette de couleurs détaillée pour les mosaïques de satellite infrarouges 
 |307,57  |#02555555     |
 |308     |#00525252     |
 |308     |#00525252     |
+
+## <a name="index-ids-and-index-groups-ids"></a>ID d’index et ID de groupes d’index
+
+L’[API Obtenir des index quotidiens](/rest/api/maps/weather) permet aux utilisateurs de limiter les résultats renvoyés à des types ou groupes d’index spécifiques.
+
+Vous trouverez ci-dessous une table des ID d’index disponibles, leurs noms et un lien vers leurs ensembles de plages. Le tableau ci-dessous répertorie les différents groupes d’index.
+
+  Nom de l'index |  id  | Plage de valeurs
+  -------------------------- |---|-----
+  Douleur arthritique             |21 | [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Asthme                     |23|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Plage et piscine               |10| [Médiocre-Excellent 1](#poor-excellent-1)
+  Cyclisme                  |4| [Médiocre-Excellent 1](#poor-excellent-1)
+  Rhume                |25|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Compostage                 |38| [Médiocre-Excellent 1](#poor-excellent-1)
+  Construction               |14| [Médiocre-Excellent 1](#poor-excellent-1)
+  COPD                       |44|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Promenade avec chien        |43| [Médiocre-Excellent 1](#poor-excellent-1)
+  Conduite                    |40|  [Médiocre-Excellent 2](#poor-excellent-2)
+  Poussière et phanères              |18| [Faible-Extrême 1](#low-extreme-1)
+  Préparation du terrain            |32| [Médiocre-Excellent 1](#poor-excellent-1)
+  Pêche                    |13| [Médiocre-Excellent 1](#poor-excellent-1)
+  Retards des vols              |-3|  [Très peu probable- Très probable 2](#very-unlikely-very-likely-2)
+  Grippe                        |26|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Index des voyages en avion        |31| [Excellent-Médiocre](#excellent-poor)
+  Économie de carburant               |37| [Médiocre-Excellent 1](#poor-excellent-1)
+  Météo pour le golf               |5| [Médiocre-Excellent 1](#poor-excellent-1)
+  Pousse du gazon              |33| [Médiocre-Excellent 1](#poor-excellent-1)
+  Frisottis                 |42| [Peu probable-Urgence](#unlikely-emergency)
+  Bonne santé cardiaque      |16| [Médiocre-Excellent 1](#poor-excellent-1)
+  Randonnée                     |3| [Médiocre-Excellent 1](#poor-excellent-1)
+  Efficacité énergétique du domicile     |36| [Médiocre-Excellent 1](#poor-excellent-1)
+  Chasse                    | 20| [Médiocre-Excellent 1](#poor-excellent-1)
+  Activité intérieure            | -2| [Médiocre-Excellent 1](#poor-excellent-1)
+  Jogging                    |2| [Médiocre-Excellent 1](#poor-excellent-1)
+  Cerf-volant                |9| [Médiocre-Excellent 1](#poor-excellent-1)
+  Tonte du gazon                |28| [Médiocre-Excellent 1](#poor-excellent-1)
+  Migraine          |27|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Bus scolaire du matin         |35| [Médiocre-Excellent 1](#poor-excellent-1)
+  Moustiques          |17|[Faible-Extrême 1](#low-extreme-1)
+  Activité extérieure           |29| [Médiocre-Excellent 1](#poor-excellent-1)
+  Barbecue en plein air           |24| [Médiocre-Excellent 1](#poor-excellent-1)
+  Concert en plein air            |8| [Médiocre-Excellent 1](#poor-excellent-1)
+  En cours d’exécution                    |1|  [Médiocre-Excellent 1](#poor-excellent-1)
+  Tennis                     |6| [Médiocre-Excellent 1](#poor-excellent-1)
+  Soif                     |41| [Faible-Extrême 2](#low-extreme-2)
+  Voile                    |11| [Médiocre-Excellent 1](#poor-excellent-1)
+  Achats                   |39| [Médiocre-Excellent 1](#poor-excellent-1)
+  Sinusite             |30|  [Bénéfique-À risque extrême](#beneficial-at-extreme-risk)
+  Skateboard              | 7| [Médiocre-Excellent 1](#poor-excellent-1)
+  Météo des pistes de ski                | 15| [Médiocre-Excellent 1](#poor-excellent-1)
+  Jours de neige                  | 19| [Très peu probable - Très probable](#very-unlikely-very-likely)
+  Humidité du sol              | 34| [Médiocre-Excellent 1](#poor-excellent-1)
+  Observation des étoiles                 | 12| [Médiocre-Excellent 1](#poor-excellent-1)
+
+Voici la liste des groupes d’index disponibles (indexGroupId) :
+
+  id   | Nom du groupe | Index dans ce groupe |
+  -------- | ------------------|------
+  1       |Tous | Tous
+  2       |Douleurs et maux | Douleur arthritique (21) </br> Migraine (27) </br> Sinusite (30)
+  3       |Respiration | Asthme (23) </br> Rhume (25) </br> Prévision de grippe (26)
+  4       |Jardinage | Préparation du terrain (32) </br> Tonte du gazon (28) </br> Humidité du sol (34)</br>
+  5       |Environnement | Compostage (38) </br> Efficacité énergétique du domicile (36) </br> Économie de carburant (37)
+  6       |Plein air | Barbecue en plein air (24) </br> Moustiques (17)
+  7       |Plage et activités nautiques | Plage et piscine (10) </br> Pêche (13) </br> Voile (11)
+  8       |Sports | Pêche (13) </br> Chasse (20) </br> Activité extérieure (29)</br>
+  9       |Agriculture |  Préparation du terrain (32) </br>  Humidité du sol (34)
+  10      |Santé | Douleur arthritique (21) </br> Asthme (23) </br> Rhume (25) </br> Poussière et phanères (18) </br> Grippe (26) </br> Bonne santé cardiaque (16) </br> Migraine (27)
+  11      |Plein air | Barbecue en plein air (24) </br> Plage et piscine (10) </br> Cyclisme (4) </br> Concert en plein air (8) </br>  Préparation du terrain (32) </br> Pêche (13) </br> Météo pour le golf (5) </br> Randonnée (3) </br> Chasse (20) </br> Jogging (2) </br> Cerf-volant (9) </br> Moustiques (17)</br> Tonte du gazon (28) </br> Activité extérieure (29) </br> Course à pied (1) </br> Voile (11) </br> Skateboard (7) </br> Météo des pistes de ski (15) </br>  Humidité du sol (34)</br> Observation des étoiles (12) </br> Tennis (6)
+  12      |Sports | Cyclisme (4) </br> Météo pour le golf (5) </br> Randonnée (3) </br>  Jogging (2) </br> Course à pied (1) </br> Skateboard (7) </br> Météo des pistes de ski (15) </br>Tennis (6)
+  13      |Accueil | Efficacité énergétique du domicile (36) </br> Économie de carburant (37) </br> Activité intérieure (-2)
+
+## <a name="daily-index-range-sets"></a>Ensembles de plages d’index quotidiens
+
+L’[API Obtenir des index quotidiens](/rest/api/maps/weather) renvoie la valeur de plage et son nom de catégorie associé pour chaque ID d’index. Les ensembles de plages ne sont pas identiques pour tous les index. Les tableaux ci-dessous montrent les différents ensembles de plages utilisés par les index pris en charge et répertoriés dans [ID d’index et de groupes d’index](#index-ids-and-index-groups-ids). Pour déterminer les index qui utilisent les ensembles de plages, consultez la section [ID d’index et groupes d’index](#index-ids-and-index-groups-ids) de ce document.
+
+### <a name="poor-excellent-1"></a>Médiocre-Excellent 1
+
+  | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Médiocre              |  0 |                2.99
+  Moyen              |  3  |               4.99
+  Bien              |  5  |              6,99
+  Très bien         |  7  |               8.99
+  Excellent         |  9  |               10
+
+### <a name="poor-excellent-2"></a>Médiocre-Excellent 2
+
+ | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Médiocre           |0              |  3
+  Moyen           |3.01           |  6
+  Bien           |6.01           |  7,5
+  Très bien      |7.51           |  8.99
+  Excellent      |9              |  10
+
+### <a name="excellent-poor"></a>Excellent-Médiocre
+
+ | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Excellent      |     0,00        |    1.00
+  Très bien        |   1.01          |  3.00
+  Bien             |   3.01          |  5,00
+  Moyen             |   5,01          |  7,00
+  Médiocre             |   7.01          |  10.00
+
+### <a name="low-extreme-1"></a>Faible-Extrême 1
+
+   | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Faible                |  0         |        1.99
+  Modéré           |  2         |        3.99
+  Élevé               |  4         |        5,99
+  Très élevée          |  6         |        7.99
+  Extreme            |  8         |        10
+
+### <a name="low-extreme-2"></a>Faible-Extrême 2
+
+   | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Faible                |  0            |      2.99
+  Modéré           |  3            |      4.99
+  Élevé               |  5            |      6,99
+  Très élevée          |  7            |      8.99
+  Extreme            |  9            |      10
+
+### <a name="very-unlikely-very-likely"></a>Très peu probable- Très probable 2
+
+ | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Très peu probable      | 0     |           1.99
+  Peu probable           | 2     |           3.99
+  Possible           | 4     |           5,99
+  Probable             | 6     |           7.99
+  Très probablement        | 8     |           10
+
+### <a name="very-unlikely-very-likely-2"></a>Très peu probable- Très probable 2
+
+ | Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Très peu probable      |  0,00     |         1.00
+  Peu probable           |  1.01     |         3.00
+  Possible           |  3.01     |         5,00
+  Probable             |  5,01     |         7,00
+  Très probablement        |  7.01     |         10.00
+
+### <a name="unlikely-emergency"></a>Peu probable-Urgence
+
+| Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Peu probable         |  0     |          2.99
+  Espion            |  3     |          4.99
+  Conseil         |  5     |          6,99
+  Avertissement          |  7     |          8.99
+  Urgence        |  9     |          10
+
+### <a name="beneficial-at-extreme-risk"></a>Bénéfique-À risque extrême
+
+| Nom de catégorie | Plage de début | Plage de fin |
+  ----------------|--------------|------------
+  Bénéfique        |    0        |        1.99
+  Neutre           |    2        |        3.99
+  À risque           |    4        |        5,99
+  À risque élevé      |    6        |        7.99
+  À risque extrême   |    8        |        10

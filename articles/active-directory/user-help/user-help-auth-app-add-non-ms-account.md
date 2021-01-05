@@ -11,12 +11,12 @@ ms.topic: end-user-help
 ms.date: 01/24/2019
 ms.author: curtand
 ms.reviewer: olhaun
-ms.openlocfilehash: b6bda6d35391543e416c377557e34de317e293eb
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: cba8837fc738884fc187b13083487c2ab62d25f0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83741566"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020090"
 ---
 # <a name="add-non-microsoft-accounts-to-the-microsoft-authenticator-app"></a>Ajouter vos comptes non-Microsoft à l’application Microsoft Authenticator
 
@@ -36,7 +36,7 @@ En règle générale, pour tous vos comptes personnels, vous devez :
     >[!Note]
     >S’il s’agit de la première fois que vous configurez l’application Microsoft Authenticator, vous pouvez recevoir une invite vous demandant si vous souhaitez autoriser l’application à accéder à votre appareil photo (iOS) ou à prendre des photos et à enregistrer des vidéos (Android). Vous devez sélectionner **Autoriser** pour que l’application Authenticator puisse accéder à votre appareil photo pour prendre une photo du code QR à l’étape suivante. Si vous n’autorisez pas l’accès à l’appareil photo, vous pouvez toujours installer l’application Authenticator, mais vous devrez ajouter les informations de code manuellement. Pour plus d’informations sur l’ajout manuel du code, consultez [Ajouter manuellement un compte à l’application](user-help-auth-app-add-account-manual.md).
 
-Nous vous présentons ici le processus correspondant aux comptes Facebook, Google, GitHub et Amazon, mais ce processus est identique pour les autres applications, telles que Netflix, Instagram ou Adobe.
+Nous vous présentons ici le processus correspondant aux comptes Facebook, Google, GitHub et Amazon, mais ce processus est identique pour d’autres applications, telles qu’Instagram et Adobe.
 
 ## <a name="add-your-google-account"></a>Ajout de votre compte Google
 
@@ -50,7 +50,7 @@ Ajoutez votre compte Google en activant la vérification en deux étapes, puis e
 
 ### <a name="add-your-google-account-to-the-app"></a>Ajouter votre compte Google à l'application
 
-1. Sur la page Google de votre ordinateur, accédez à la section **Configurer une autre deuxième étape** et sélectionnez **Configurer** dans la section **Application Authenticator**.
+1. Dans la page de sécurité du compte Google sur votre ordinateur (https://myaccount.google.com/security) ), accédez à la section **Ajouter des étapes supplémentaires pour vérifier votre identité** et sélectionnez **Configurer** dans la section **Application Authenticator**.
 
 2. Sur la page **Obtenir les codes de l'application Authenticator**, sélectionnez **Android** ou **iPhone** en fonction de votre type de téléphone, puis **Suivant**.
 

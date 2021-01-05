@@ -2,25 +2,21 @@
 title: 'Didacticiel : intégration d’Azure Active Directory à Tango Analytics | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Tango Analytics.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 2f7555d3-e9ba-40b2-9b3a-2f0ab38a4c08
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 6d7b06d809d7ec3c421254b51a3cbd4a36d494ab
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b1f0cbc1b15eec6498b9219b58d4679bf1a854dc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67089117"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018764"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-tango-analytics"></a>Didacticiel : intégration d’Azure Active Directory à Tango Analytics
 
@@ -31,7 +27,7 @@ L’intégration de Tango Analytics dans Azure AD vous offre les avantages suiva
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à Tango Analytics (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -183,18 +179,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-tango-analytics-test-user"></a>Créer un utilisateur de test Tango Analytics
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Tango Analytics. Collaborez avec l’ [équipe du support technique de Tango Analytics](mailto:support@tangoanalytics.com) pour ajouter des utilisateurs sur la plateforme Tango Analytics. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Tango Analytics. Travailler avec [l’équipe de support technique Tango Analytics](mailto:support@tangoanalytics.com) pour ajouter des utilisateurs dans la plateforme Tango Analytics. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Tango Analytics dans le volet d’accès doit vous connecter automatiquement à l’application Tango Analytics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Tango Analytics dans le volet d’accès doit vous connecter automatiquement à l’application Tango Analytics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

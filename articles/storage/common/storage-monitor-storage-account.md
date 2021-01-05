@@ -1,6 +1,6 @@
 ---
 title: Guide pratique pour superviser un compte Stockage Azure dans le portail Azure | Microsoft Docs
-description: Découvrez comment surveiller un compte de stockage dans Azure en utilisant le portail Azure.
+description: Découvrez comment surveiller un compte de stockage dans Azure en utilisant le portail Azure et Azure Storage Analytics.
 author: normesta
 ms.service: storage
 ms.topic: conceptual
@@ -9,12 +9,12 @@ ms.author: normesta
 ms.reviewer: fryu
 ms.subservice: common
 ms.custom: monitoring
-ms.openlocfilehash: 6f53d5ec2d73c9edbb7e24c24107b2a6d6deb167
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: bfecae4775655f732df8fd6cffea613cd39fb828
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83684680"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92782006"
 ---
 # <a name="monitor-a-storage-account-in-the-azure-portal"></a>Surveillance d'un compte de stockage dans le portail Azure
 
@@ -27,17 +27,17 @@ Nous vous recommandons de consulter [Azure Monitor pour le stockage](../../azure
 >
 > Azure Files prend actuellement en charge les métriques de Storage Analytics, mais pas encore la journalisation.
 >
-> Les comptes de stockage d’objets blob de blocs de niveau de performance Premium ne prennent pas en charge les métriques d’analyse de stockage, mais ils prennent en charge la journalisation. Vous pouvez activer la journalisation par programmation via l’API REST ou la bibliothèque de client. Si vous souhaitez afficher les métriques pour des comptes de stockage d’objets blob de blocs de niveau de performance Premium, envisagez d’utiliser [Métriques de Stockage Azure dans Azure Monitor](storage-metrics-in-azure-monitor.md).
+> Les comptes de stockage d’objets blob de blocs de niveau de performance Premium ne prennent pas en charge les métriques d’analyse de stockage, mais ils prennent en charge la journalisation. Vous pouvez activer la journalisation par programmation via l’API REST ou la bibliothèque de client. Si vous souhaitez afficher les métriques pour des comptes de stockage d’objets blob de blocs de niveau de performance Premium, envisagez d’utiliser [Métriques de Stockage Azure dans Azure Monitor](../blobs/monitor-blob-storage.md).
 >
 > Pour obtenir un guide détaillé concernant l'utilisation de Storage Analytics et d'autres outils permettant d'analyser, de diagnostiquer et de résoudre les problèmes d'Azure Storage, consultez [Analyse, diagnostic et résolution des problèmes rencontrés sur Microsoft Azure Storage](storage-monitoring-diagnosing-troubleshooting.md).
 >
 
 ## <a name="configure-monitoring-for-a-storage-account"></a>Configuration de la surveillance d'un compte de stockage
 
-1. Dans le [portail Azure](https://portal.azure.com), sélectionnez **Comptes de stockage**, puis le nom du compte de stockage pour ouvrir le tableau de bord du compte.
+1. Dans le [portail Azure](https://portal.azure.com), sélectionnez **Comptes de stockage** , puis le nom du compte de stockage pour ouvrir le tableau de bord du compte.
 1. Sélectionnez **Diagnostics** dans la section **SURVEILLANCE** du panneau du menu.
 
-    ![MonitoringOptions](./media/storage-monitor-storage-account/storage-enable-metrics-00.png)
+    ![Capture d'écran mettant en évidence l'option Paramètres de diagnostic (classique) dans la section Surveillance (classique).](./media/storage-monitor-storage-account/storage-enable-metrics-00.png)
 
 1. Sélectionnez le **type** de données de métrique pour chaque **service** à surveiller et la **stratégie de rétention** pour les données. Vous pouvez également désactiver la surveillance en définissant **l’état** sur **Off**.
 
@@ -98,10 +98,10 @@ Les métriques que vous avez sélectionnées dans **Diagnostics** déterminent l
 
 Vous pouvez créer des alertes pour vous avertir lorsque les seuils sont atteints pour les métriques des ressources de stockage.
 
-1. Pour ouvrir le **panneau Règles d’alerte**, faites défiler jusqu’à la section **SURVEILLANCE** du **panneau Menu** et sélectionnez **Alertes (classiques)** .
+1. Pour ouvrir le **panneau Règles d’alerte** , faites défiler jusqu’à la section **SURVEILLANCE** du **panneau Menu** et sélectionnez **Alertes (classiques)** .
 2. Sélectionnez **Ajouter une alerte métrique (classique)** pour ouvrir le panneau **Ajouter une règle d’alerte**
 3. Entrez un **Nom** et une **Description** pour votre nouvelle règle d’alerte.
-4. Sélectionnez la **métrique** pour laquelle vous souhaitez ajouter une alerte, une **condition** d’alerte et un **seuil**. Le type d’unité de seuil change en fonction de la métrique choisie. Par exemple, « count » est le type d’unité pour *ContainerCount*, tandis que l’unité pour la métrique *PercentNetworkError* est un pourcentage.
+4. Sélectionnez la **métrique** pour laquelle vous souhaitez ajouter une alerte, une **condition** d’alerte et un **seuil**. Le type d’unité de seuil change en fonction de la métrique choisie. Par exemple, « count » est le type d’unité pour *ContainerCount* , tandis que l’unité pour la métrique *PercentNetworkError* est un pourcentage.
 5. Sélectionnez la **Période**. Les métriques qui atteignent ou dépassent le seuil durant la période déclenchent une alerte.
 6. (Facultatif) Configurez des notifications **E-mail** et **Webhook**. Pour plus d’informations sur webhooks, consultez [Configurer un webhook sur une alerte de métrique Azure](../../azure-monitor/platform/alerts-webhooks.md). Si vous ne configurez pas de notifications e-mail ou webhook, les alertes s’affichent uniquement dans le portail Azure.
 
@@ -112,9 +112,9 @@ Vous pouvez créer des alertes pour vous avertir lorsque les seuils sont atteint
 Vous pouvez ajouter des graphiques de métriques Stockage Azure pour l’un de vos comptes de stockage au tableau de bord du portail.
 
 1. Cliquez sur **Modifier le tableau de bord** lorsque le tableau de bord est affiché dans le [portail Azure](https://portal.azure.com).
-1. Dans la **Galerie de vignettes**, sélectionnez **Recherche des vignettes par** > **Type**.
+1. Dans la **Galerie de vignettes** , sélectionnez **Recherche des vignettes par** > **Type**.
 1. Sélectionnez **Type** > **Comptes de stockage**.
-1. Dans **Ressources**, sélectionnez le compte de stockage dont vous souhaitez ajouter les métriques au tableau de bord.
+1. Dans **Ressources** , sélectionnez le compte de stockage dont vous souhaitez ajouter les métriques au tableau de bord.
 1. Sélectionnez **Catégories** > **Surveillance**.
 1. Glissez-déplacez la vignette du graphique sur votre tableau de bord pour la métrique à afficher. Répétez cette opération pour toutes les métriques à afficher sur le tableau de bord. Dans l’image suivante, le graphique « Objets Blob - Nombre total de requêtes » est mis en surbrillance comme exemple, mais tous les graphiques peuvent être placés sur votre tableau de bord.
 
@@ -131,17 +131,17 @@ Vous pouvez demander au Stockage Azure d’enregistrer les journaux de diagnosti
 > Azure Files prend actuellement en charge les métriques de Storage Analytics, mais pas encore la journalisation.
 >
 
-1. Dans le [portail Azure](https://portal.azure.com), sélectionnez **Comptes de stockage**, puis le nom du compte de stockage pour ouvrir le panneau du compte de stockage.
+1. Dans le [portail Azure](https://portal.azure.com), sélectionnez **Comptes de stockage** , puis le nom du compte de stockage pour ouvrir le panneau du compte de stockage.
 1. Sélectionnez **Paramètres de diagnostic (classique)** dans la section **Surveillance (classique)** du panneau du menu.
 
     ![Élément de menu Diagnostics sous SURVEILLANCE dans le portail Azure.](./media/storage-monitor-storage-account/storage-enable-metrics-00.png)
 
-1. Vérifiez que **l’état** est défini sur **On**, puis sélectionnez les **services** pour lesquels vous souhaitez activer la journalisation.
+1. Vérifiez que **l’état** est défini sur **On** , puis sélectionnez les **services** pour lesquels vous souhaitez activer la journalisation.
 
     ![Configurez la journalisation dans le portail Azure.](./media/storage-monitor-storage-account/enable-diagnostics.png)
 1. Cliquez sur **Enregistrer**.
 
-Les journaux de diagnostic sont enregistrés dans un conteneur d’objets blob nommé *$logs* dans votre compte de stockage. Vous pouvez afficher les données du journal à l’aide d’un explorateur de stockage, comme [Microsoft Storage Explorer](https://storageexplorer.com) ou par programme à l’aide de la bibliothèque cliente de stockage ou de PowerShell.
+Les journaux de diagnostic sont enregistrés dans un conteneur d’objets blob nommé *$logs* dans votre compte de stockage. Vous pouvez afficher les données du journal à l’aide d’un explorateur de stockage, tel que l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com), ou de façon programmatique à l’aide d’une bibliothèque de client de stockage ou PowerShell.
 
 Pour plus d’informations sur l’accès au conteneur $logs, consultez la page [Journalisation Storage Analytics](storage-analytics-logging.md).
 

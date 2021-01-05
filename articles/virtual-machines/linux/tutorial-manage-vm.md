@@ -13,15 +13,15 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 03/23/2018
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: 8e559be82fc7c3d6b25b99319785d49e30f56287
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: aeb44a52dc7a83321752bb00e09270fe7bfd0bbe
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81459999"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91972184"
 ---
-# <a name="tutorial-create-and-manage-linux-vms-with-the-azure-cli"></a>Tutoriel : Créer et gérer des machines virtuelles Linux avec Azure CLI
+# <a name="tutorial-create-and-manage-linux-vms-with-the-azure-cli"></a>Tutoriel : Créer et gérer des machines virtuelles Linux avec l’interface Azure CLI
 
 Les machines virtuelles fournissent un environnement informatique entièrement configurable et flexible. Ce didacticiel traite d’aspects de base du déploiement de machines virtuelles Azure, tels que la sélection d’une taille de machine virtuelle, la sélection d’une image de machine virtuelle et le déploiement d’une machine virtuelle. Vous allez apprendre à effectuer les actions suivantes :
 
@@ -32,13 +32,13 @@ Les machines virtuelles fournissent un environnement informatique entièrement c
 > * Redimensionner une machine virtuelle
 > * Consulter et comprendre l’état d’une machine virtuelle
 
-Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
+Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](../../cloud-shell/overview.md), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce didacticiel nécessite que vous exécutiez Azure CLI version 2.0.30 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
 
 ## <a name="create-resource-group"></a>Créer un groupe de ressources
 
-Créez un groupe de ressources avec la commande [az group create](https://docs.microsoft.com/cli/azure/group). 
+Créez un groupe de ressources avec la commande [az group create](/cli/azure/group). 
 
 Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. Un groupe de ressources doit être créé avant les machines virtuelles. Dans cet exemple, un groupe de ressources nommé *myResourceGroupVM* est créé dans la région *eastus*. 
 
@@ -50,7 +50,7 @@ Le groupe de ressources est spécifié lors de la création ou de la modificatio
 
 ## <a name="create-virtual-machine"></a>Créer une machine virtuelle
 
-Créez une machine virtuelle avec la commande [az vm create](https://docs.microsoft.com/cli/azure/vm). 
+Créez une machine virtuelle avec la commande [az vm create](/cli/azure/vm). 
 
 Lorsque vous créez une machine virtuelle, plusieurs options sont disponibles, comme l’image de système d’exploitation, le dimensionnement des disques et les informations d’identification d’administration. L’exemple suivant permet de créer une machine virtuelle nommée *myVM* qui s’exécute sur le serveur Ubuntu. Un compte d’utilisateur nommé *azureuser* est créé sur la machine virtuelle, et les clés SSH sont générées si elles n’existent pas dans l’emplacement de la clé par défaut ( *~/.ssh*) :
 
@@ -155,12 +155,12 @@ Le tableau suivant classe les tailles en fonction des cas d’utilisation.
 
 | Type                     | Tailles courantes           |    Description       |
 |--------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| [Usage général](sizes-general.md)         |B, Dsv3, Dv3, DSv2, Dv2, Av2, DC| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
-| [Optimisé pour le calcul](sizes-compute.md)   | Fsv2          | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
-| [Mémoire optimisée](sizes-memory.md)    | Esv3, Ev3, M, DSv2, Dv2  | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
-| [Optimisé pour le stockage](sizes-storage.md)      | Lsv2, Ls              | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
-| [GPU](sizes-gpu.md)          | NV, NVv2, NC, NCv2, NCv3, ND            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
-| [Hautes performances](sizes-hpc.md) | H        | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). |
+| [Usage général](../sizes-general.md)         |B, Dsv3, Dv3, DSv2, Dv2, Av2, DC| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
+| [Optimisé pour le calcul](../sizes-compute.md)   | Fsv2          | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
+| [Mémoire optimisée](../sizes-memory.md)    | Esv3, Ev3, M, DSv2, Dv2  | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
+| [Optimisé pour le stockage](../sizes-storage.md)      | Lsv2, Ls              | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
+| [GPU](../sizes-gpu.md)          | NV, NVv2, NC, NCv2, NCv3, ND            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
+| [Hautes performances](../sizes-hpc.md) | H        | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). |
 
 
 ### <a name="find-available-vm-sizes"></a>Rechercher les tailles de machines virtuelles disponibles
@@ -279,6 +279,8 @@ ode                DisplayStatus    Level
 ------------------  ---------------  -------
 PowerState/running  VM running       Info
 ```
+
+Pour récupérer l’état d’alimentation de toutes les machines virtuelles de votre abonnement, utilisez l’[API Machines virtuelles - Répertorier tout](/rest/api/compute/virtualmachines/listall) avec le paramètre **statusOnly** défini sur *true*.
 
 ## <a name="management-tasks"></a>Tâches de gestion
 

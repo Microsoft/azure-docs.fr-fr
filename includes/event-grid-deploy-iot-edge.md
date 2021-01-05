@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 10/10/2019
 ms.author: spelluru
 ms.custom: include file
-ms.openlocfilehash: b453a04a170764a037eed7415eaf71e5a4d37526
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0fc6a62a94f31617209bcc60bfaa95bc8927551a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76844584"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86050464"
 ---
 ## <a name="deploy-event-grid-iot-edge-module"></a>Déployer le module Event Grid sur IoT Edge
 
@@ -49,23 +49,23 @@ Un manifeste de déploiement est un document JSON qui décrit les modules à dé
    * **URI de l’image**  : `mcr.microsoft.com/azure-event-grid/iotedge:latest`
    * **Options de création de conteneur** :
 
-    ```json
-        {
-          "Env": [
-            "inbound__clientAuth:clientCert__enabled=false",
-            "outbound__webhook__httpsOnly=false"
-          ],
-          "HostConfig": {
-            "PortBindings": {
-              "4438/tcp": [
-                {
-                  "HostPort": "4438"
-                }
-              ]
+```json
+    {
+      "Env": [
+        "inbound__clientAuth:clientCert__enabled=false",
+        "outbound__webhook__httpsOnly=false"
+      ],
+      "HostConfig": {
+        "PortBindings": {
+          "4438/tcp": [
+            {
+              "HostPort": "4438"
             }
-          }
+          ]
         }
-    ```
+      }
+    }
+```
 
  1. Cliquez sur **Enregistrer**.
  1. Cliquez sur **Suivant** pour passer à la section des itinéraires

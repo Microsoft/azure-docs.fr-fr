@@ -1,37 +1,45 @@
 ---
-title: Déployer des machines virtuelles Linux sur des hôtes dédiés à l’aide d’Azure CLI
-description: Déployez des machines virtuelles sur des hôtes dédiés à l’aide d’Azure CLI.
+title: Déployer des machines virtuelles et des instances de groupes identiques sur des hôtes dédiés avec CLI
+description: Déployez des machines virtuelles et des instances de groupes identiques sur des hôtes dédiés à l’aide d’Azure CLI.
 author: cynthn
-ms.service: virtual-machines-linux
-ms.topic: article
-ms.date: 01/09/2020
+ms.service: virtual-machines
+ms.topic: how-to
+ms.date: 09/25/2020
 ms.author: cynthn
-ms.openlocfilehash: ba40e610e31a1215ac90baf63a04b435b636d68a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d99f8c380b486ed818aff64782ca817dab41c916
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79127699"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91975279"
 ---
-# <a name="deploy-vms-to-dedicated-hosts-using-the-azure-cli"></a>Déployez des machines virtuelles sur des hôtes dédiés à l’aide d’Azure CLI
+# <a name="deploy-to-dedicated-hosts-using-the-azure-cli"></a>Déployer sur des hôtes dédiés avec Azure CLI
  
 
-Cet article vous guide dans la création d’un [hôte dédié](dedicated-hosts.md) Azure pour héberger vos machines virtuelles. 
+Cet article vous guide dans la création d’un [hôte dédié](../dedicated-hosts.md) Azure pour héberger vos machines virtuelles. 
 
 Vérifiez que vous avez installé Azure CLI version 2.0.70 ou version ultérieure, et que vous êtes connecté à un compte Azure avec `az login`. 
 
 
 ## <a name="limitations"></a>Limites
 
-- Actuellement, les hôtes dédiés ne prennent pas en charge les groupes de machines virtuelles identiques.
 - Les tailles et les types de matériel disponibles pour les hôtes dédiés varient selon la région. Pour en savoir plus, consultez la [page de tarification de l’hôte](https://aka.ms/ADHPricing).
- 
 
 ## <a name="create-resource-group"></a>Créer un groupe de ressources 
 Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. Créez le groupe de ressources avec la commande az group create. L’exemple suivant crée un groupe de ressources nommé *myDHResourceGroup* à l’emplacement *USA Est*.
 
-```bash
+```azurecli-interactive
 az group create --name myDHResourceGroup --location eastus 
+```
+ 
+## <a name="list-available-host-skus-in-a-region"></a>Répertorier les niveaux tarifaires de l’hôte disponibles dans une région
+
+Tous les niveaux tarifaires de l’hôte ne sont pas disponibles dans toutes les régions et zones de disponibilité. 
+
+Répertoriez la disponibilité de l’hôte et les éventuelles restrictions d’offre avant de commencer l’approvisionnement des hôtes dédiés. 
+
+```azurecli-interactive
+az vm list-skus -l eastus2  -r hostGroups/hosts  -o table  
 ```
  
 ## <a name="create-a-host-group"></a>Créer un groupe hôte 
@@ -44,9 +52,10 @@ Dans les deux cas, vous devez fournir le nombre de domaines d’erreur pour votr
 
 Vous pouvez également choisir d’utiliser des zones de disponibilité et des domaines d’erreur. 
 
+
 Dans cet exemple, nous allons utiliser la commande [az vm host group create](/cli/azure/vm/host/group#az-vm-host-group-create) pour créer un groupe hôte à l’aide de zones de disponibilité et de domaines d’erreur. 
 
-```bash
+```azurecli-interactive
 az vm host group create \
    --name myHostGroup \
    -g myDHResourceGroup \
@@ -54,11 +63,22 @@ az vm host group create \
    --platform-fault-domain-count 2 
 ``` 
 
+Ajoutez le paramètre `--automatic-placement true` pour que vos machines virtuelles et vos instances de groupes identiques soient placées automatiquement sur les hôtes au sein d’un groupe hôte. Pour plus d’informations, consultez [Sélection élective manuelle ou automatique](../dedicated-hosts.md#manual-vs-automatic-placement).
+
+> [!IMPORTANT]
+> La fonctionnalité Sélection élective automatique est actuellement en préversion publique.
+>
+> Pour participer à la préversion, répondez à l’enquête d’intégration sur [https://aka.ms/vmss-adh-preview](https://aka.ms/vmss-adh-preview).
+>
+> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
+>
+> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
 ### <a name="other-examples"></a>Autres exemples
 
 Vous pouvez également utiliser [az vm host group create](/cli/azure/vm/host/group#az-vm-host-group-create) pour créer un groupe hôte dans la zone de disponibilité 1 (sans domaine d’erreur).
 
-```bash
+```azurecli-interactive
 az vm host group create \
    --name myAZHostGroup \
    -g myDHResourceGroup \
@@ -68,7 +88,7 @@ az vm host group create \
  
 L’exemple suivant exploite la commande [az vm host group create](/cli/azure/vm/host/group#az-vm-host-group-create) pour créer un groupe hôte à l’aide de domaines d’erreur uniquement (à utiliser dans les régions dans lesquels les zones de disponibilité ne sont pas prises en charge). 
 
-```bash
+```azurecli-interactive
 az vm host group create \
    --name myFDHostGroup \
    -g myDHResourceGroup \
@@ -83,7 +103,7 @@ Pour en savoir plus sur les références SKU et la tarification des hôtes, cons
 
 Utilisez la commande [az vm host create](/cli/azure/vm/host#az-vm-host-create) pour créer un hôte. Si vous définissez un nombre de domaines d’erreur pour votre groupe hôte, vous êtes invité à spécifier le domaine d’erreur de votre hôte.  
 
-```bash
+```azurecli-interactive
 az vm host create \
    --host-group myHostGroup \
    --name myHost \
@@ -97,28 +117,57 @@ az vm host create \
 ## <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle 
 Créez une machine virtuelle dans un hôte dédié à l’aide de la commande [az vm create](/cli/azure/vm#az-vm-create). Si vous avez spécifié une zone de disponibilité lors de la création de votre groupe hôte, vous devez utiliser la même zone quand vous créez la machine virtuelle.
 
-```bash
+```azurecli-interactive
 az vm create \
    -n myVM \
    --image debian \
-   --generate-ssh-keys \
    --host-group myHostGroup \
-   --host myHost \
    --generate-ssh-keys \
    --size Standard_D4s_v3 \
    -g myDHResourceGroup \
    --zone 1
 ```
+
+Pour placer la machine virtuelle sur un hôte spécifique, utilisez `--host` au lieu de spécifier le groupe hôte avec `--host-group`.
  
 > [!WARNING]
 > Toute machine virtuelle créée sur un hôte qui ne dispose pas d’un nombre de ressources suffisant présente un état ÉCHEC. 
+
+## <a name="create-a-scale-set-preview"></a>Créer un groupe identique (préversion)
+
+> [!IMPORTANT]
+> La fonctionnalité Groupes de machines virtuelles identiques sur Dedicated Host est actuellement en préversion publique.
+>
+> Pour participer à la préversion, répondez à l’enquête d’intégration sur [https://aka.ms/vmss-adh-preview](https://aka.ms/vmss-adh-preview).
+>
+> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
+>
+> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+Lorsque vous déployez un groupe identique, vous spécifiez le groupe hôte.
+
+```azurecli-interactive
+az vmss create \
+  --resource-group myResourceGroup \
+  --name myScaleSet \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username azureuser \
+  --host-group myHostGroup \
+  --generate-ssh-keys \
+  --size Standard_D4s_v3 \
+  -g myDHResourceGroup \
+  --zone 1
+```
+
+Si vous souhaitez choisir manuellement l’hôte sur lequel déployer le groupe identique, ajoutez `--host` et le nom de l’hôte.
 
 
 ## <a name="check-the-status-of-the-host"></a>Vérifier l’état de l’hôte
 
 Vous pouvez vérifier l’état d’intégrité de l’hôte et le nombre de machines virtuelles que vous pouvez encore déployer sur l’hôte à l’aide de la commande [az vm host get-instance-view](/cli/azure/vm/host#az-vm-host-get-instance-view).
 
-```bash
+```azurecli-interactive
 az vm host get-instance-view \
    -g myDHResourceGroup \
    --host-group myHostGroup \
@@ -225,7 +274,7 @@ az vm host get-instance-view \
 ## <a name="export-as-a-template"></a>Exporter en tant que modèle 
 Vous pouvez exporter un modèle si vous souhaitez créer un environnement de développement supplémentaire avec les mêmes paramètres, ou un environnement de production correspondant. Resource Manager utilise des modèles JSON qui définissent tous les paramètres pour votre environnement. Vous créez des environnements entiers en faisant référence à ce modèle JSON. Vous pouvez créer manuellement des modèles JSON ou exporter un environnement existant qui créera le modèle JSON pour vous. Utilisez la commande [az group export](/cli/azure/group#az-group-export) pour exporter votre groupe de ressources.
 
-```bash
+```azurecli-interactive
 az group export --name myDHResourceGroup > myDHResourceGroup.json 
 ```
 
@@ -233,7 +282,7 @@ Cette commande crée le fichier `myDHResourceGroup.json` dans votre répertoire 
  
 Pour créer un environnement à partir de votre modèle, utilisez la commande [az group deployment create](/cli/azure/group/deployment#az-group-deployment-create).
 
-```bash
+```azurecli-interactive
 az group deployment create \ 
     --resource-group myNewResourceGroup \ 
     --template-file myDHResourceGroup.json 
@@ -246,32 +295,32 @@ Vous êtes facturé pour vos hôtes dédiés, même si aucune machine virtuelle 
 
 Vous pouvez supprimer un hôte uniquement lorsqu’il n’est plus utilisé par aucune machine virtuelle. Supprimez les machines virtuelles avec la commande [az vm delete](/cli/azure/vm#az-vm-delete).
 
-```bash
+```azurecli-interactive
 az vm delete -n myVM -g myDHResourceGroup
 ```
 
 Cela fait, vous pouvez supprimer l’hôte, avec la commande [az vm host delete](/cli/azure/vm/host#az-vm-host-delete).
 
-```bash
+```azurecli-interactive
 az vm host delete -g myDHResourceGroup --host-group myHostGroup --name myHost 
 ```
  
 Une fois que vous avez supprimé tous vos hôtes, utilisez la commande [az vm host group delete](/cli/azure/vm/host/group#az-vm-host-group-delete) pour supprimer le groupe hôte.  
  
-```bash
+```azurecli-interactive
 az vm host group delete -g myDHResourceGroup --host-group myHostGroup  
 ```
  
 Vous pouvez également supprimer l’intégralité du groupe de ressources via une seule commande. Cette opération supprime toutes les ressources créées dans le groupe, y compris l’ensemble des machines virtuelles, des hôtes et des groupes hôtes.
  
-```bash
+```azurecli-interactive
 az group delete -n myDHResourceGroup 
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour en savoir plus, voir la page de présentation [Hôtes dédiés](dedicated-hosts.md).
+- Pour en savoir plus, voir la page de présentation [Hôtes dédiés](../dedicated-hosts.md).
 
-- Le [Portail Microsoft Azure](dedicated-hosts-portal.md) permet également de créer des hôtes dédiés.
+- Le [Portail Microsoft Azure](../dedicated-hosts-portal.md) permet également de créer des hôtes dédiés.
 
 - Un exemple de modèle, disponible [ici](https://github.com/Azure/azure-quickstart-templates/blob/master/201-vm-dedicated-hosts/README.md), utilise les zones et les domaines d’erreur pour offrir une résilience maximale dans une région.

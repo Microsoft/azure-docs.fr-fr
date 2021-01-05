@@ -14,33 +14,36 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: f5a2dd68d86a7a38fc7f2942351c42c84742d104
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c30808a46b5cecfaf2e761b3f7a611020cd2cdfb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74887066"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89263669"
 ---
 # <a name="azure-media-services-error-codes"></a>Codes d’erreur d’Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 lors de l’utilisation de Microsoft Azure Media Services, il se peut que vous receviez du service des codes d’erreur HTTP liés à problèmes tels que des jetons d’authentification qui expirent pour des actions qui ne sont pas prises en charge dans Media Services. Vous trouverez ci-dessous la liste des **codes d’erreur HTTP** qui peuvent être retournés par Media Services, ainsi que leurs causes possibles.  
 
 ## <a name="400-bad-request"></a>400 Demande incorrecte
 La demande contient des informations non valides et est rejetée pour l’une des raisons suivantes :
 
 * La version spécifiée de l’API n’est pas prise en charge. Pour la version la plus récente, voir [Configuration pour le développement de l’API REST Media Services](media-services-rest-how-to-use.md).
-* La version de l’API de Media Services n’est pas spécifiée. Pour en savoir plus sur la façon de spécifier la version de l’API, voir [Référence de l’API REST de Media Services Operations](https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference).
+* La version de l’API de Media Services n’est pas spécifiée. Pour en savoir plus sur la façon de spécifier la version de l’API, voir [Référence de l’API REST de Media Services Operations](/rest/api/media/operations/azure-media-services-rest-api-reference).
   
   > [!NOTE]
   > Si vous utilisez les Kits de développement logiciel (SDK) .NET ou Java pour vous connecter à Media Services, la version de l’API est automatiquement spécifiée chaque fois que vous tentez d’effectuer une action sur Media Services.
   > 
   > 
-* Une propriété non définie a été spécifiée. Le nom de la propriété figure dans le message d’erreur. Vous ne pouvez spécifier que des propriétés membres d’une entité donnée. Pour obtenir la liste des entités et de leurs propriétés, voir [Référence de l’API REST d’Azure Media Services](https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference).
+* Une propriété non définie a été spécifiée. Le nom de la propriété figure dans le message d’erreur. Vous ne pouvez spécifier que des propriétés membres d’une entité donnée. Pour obtenir la liste des entités et de leurs propriétés, voir [Référence de l’API REST d’Azure Media Services](/rest/api/media/operations/azure-media-services-rest-api-reference).
 * Une valeur de propriété non valide a été spécifiée. Le nom de la propriété figure dans le message d’erreur. Pour connaître les types de propriété valides et leurs valeurs, voir le lien précédent.
 * Une valeur de propriété requise est manquante.
 * Une partie de l’URL spécifiée contient une valeur incorrecte.
 * Une tentative de mise à jour d’une propriété WriteOnce a été effectuée.
 * Une tentative a été faite de créer un travail comportant une ressource d’entrée avec un fichier de ressources (AssetFile) non spécifié ou qui n’a pas pu être déterminé.
-* Une tentative de mise à jour d’un localisateur de SAP a été effectuée. Des localisateurs de SAP peuvent uniquement être créés ou supprimés. Des localisateurs de streaming peuvent être mis à jour. Pour plus d’informations, voir [Localisateurs](https://docs.microsoft.com/rest/api/media/operations/locator).
+* Une tentative de mise à jour d’un localisateur de SAP a été effectuée. Des localisateurs de SAP peuvent uniquement être créés ou supprimés. Des localisateurs de streaming peuvent être mis à jour. Pour plus d’informations, voir [Localisateurs](/rest/api/media/operations/locator).
 * Une opération ou demande non prises en charge ont été envoyées.
 
 ## <a name="401-unauthorized"></a>401 Non autorisé
@@ -109,7 +112,7 @@ Les descriptions d’état possibles sont les suivantes :
 * « Le serveur est occupé. Plus de {0} demandes par seconde peuvent être limitées. »
 * « Le serveur est occupé. Plus de {0} demandes toutes les {1} secondes peuvent être limitées. »
 
-Pour gérer cette erreur, nous recommandons d’utiliser une logique de nouvelle tentative d’interruption exponentielle. Cela implique d’utiliser des attentes de plus en plus longues entre nouvelles tentatives suite à des réponses d’erreur consécutives.  Pour plus d’informations, voir [What Does the Transient Fault Handling Application Block Do?](https://msdn.microsoft.com/library/hh680905.aspx) (Que fait le bloc applicatif de gestion des erreurs temporaires ?).
+Pour gérer cette erreur, nous recommandons d’utiliser une logique de nouvelle tentative d’interruption exponentielle. Cela implique d’utiliser des attentes de plus en plus longues entre nouvelles tentatives suite à des réponses d’erreur consécutives.  Pour plus d’informations, voir [What Does the Transient Fault Handling Application Block Do?](/previous-versions/msp-n-p/hh680905(v=pandp.50)) (Que fait le bloc applicatif de gestion des erreurs temporaires ?).
 
 > [!NOTE]
 > Si vous utilisez le [Kit de développement logiciel (SDK) Azure Media Services pour .Net](https://github.com/Azure/azure-sdk-for-media-services/tree/master), la logique de nouvelle tentative pour l’erreur 503 a été implémentée par le Kit de développement logiciel.  
@@ -117,11 +120,10 @@ Pour gérer cette erreur, nous recommandons d’utiliser une logique de nouvelle
 > 
 
 ## <a name="see-also"></a>Voir aussi
-[Codes d’erreur de gestion de Media Services](https://msdn.microsoft.com/library/windowsazure/dn167016.aspx)
+[Codes d’erreur de gestion de Media Services](/rest/api/media/)
 
 ## <a name="next-steps"></a>Étapes suivantes
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

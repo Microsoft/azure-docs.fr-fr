@@ -3,19 +3,17 @@ title: Format TSV pour les tests par lot - QnA Maker
 titleSuffix: Azure Cognitive Services
 description: Comprendre le format TSV pour les tests par lot
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: reference
 ms.date: 10/24/2019
-ms.author: diberry
-ms.openlocfilehash: dccf034b6497651db70b6cc09fff3f1b1d645a1b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0ed948b4bf69fc672a59a7825279a12868d10521
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73506800"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87132124"
 ---
 # <a name="batch-testing-tsv-format"></a>Format TSV pour les tests par lot
 

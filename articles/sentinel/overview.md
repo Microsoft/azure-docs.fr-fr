@@ -1,6 +1,6 @@
 ---
-title: Qu’est-ce qu’Azure Sentinel ? | Microsoft Docs
-description: Découvrez Azure Sentinel, ses fonctionnalités principales et son fonctionnement.
+title: Qu’est-ce qu’Azure Sentinel ? | Microsoft Docs
+description: Découvrez Azure Sentinel, une solution native cloud et scalable de type SIEM (Security Information and Event Management) et SOAR (Security Orchestrated Automated Response).
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -14,26 +14,26 @@ ms.topic: overview
 ms.custom: mvc
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/24/2019
+ms.date: 09/16/2020
 ms.author: yelevin
-ms.openlocfilehash: 517bdc0846ae56e0db41631f1dc5411471c6c2bd
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: 773cf5cc6755a4f094eb676992364eea07a795ea
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83800140"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94654658"
 ---
 # <a name="what-is-azure-sentinel"></a>Qu’est-ce qu’Azure Sentinel ?
 
 Microsoft Azure Sentinel est une solution native cloud et scalable de type **SIEM (Security Information and Event Management)** et **SOAR (Security Orchestrated Automated Response)** . Azure Sentinel assure une analyse de sécurité intelligente et fournit des informations sur les menaces dans l’ensemble de l’entreprise. Elle constitue une solution unique pour la détection des alertes, la visibilité des menaces, la chasse proactive et la réponse face aux menaces. 
 
-Azure Sentinel est votre observatoire global sur l’ensemble de l’entreprise et atténue le stress dû à des attaques de plus en plus sophistiquées, à l’augmentation des volumes d’alertes et à la durée de résolution.
+Azure Sentinel vous offre une vue d'ensemble de l'organisation, ce qui réduit le stress lié aux attaques de plus en plus sophistiquées, aux volumes croissants d'alertes et aux longs délais de résolution.
 
-- **Collectez des données à l’échelle du cloud** sur l’ensemble des utilisateurs, appareils, applications et infrastructures, tant locaux que dans de multiples clouds. 
+- **Collectez des données à l’échelle du cloud** sur l’ensemble des utilisateurs, appareils, applications et infrastructures, tant locaux que dans de multiples clouds. 
 
-- **Détectez les menaces non détectées précédemment** et réduisez les faux positifs en vous appuyant sur l’analytique et les systèmes de renseignement incomparables sur les menaces fournis par Microsoft. 
+- **Détectez les menaces non détectées précédemment** et réduisez les faux positifs en vous appuyant sur l’analytique et les systèmes de renseignement incomparables sur les menaces fournis par Microsoft. 
 
-- **Investiguez les menaces à l’aide de l’intelligence artificielle** et recherchez les activités suspectes à grande échelle en profitant des années de travail que Microsoft a consacrées à la cybersécurité. 
+- **Investiguez les menaces à l’aide de l’intelligence artificielle** et recherchez les activités suspectes à grande échelle en profitant des années de travail que Microsoft a consacrées à la cybersécurité. 
 
 - **Répondez aux incidents rapidement** avec une orchestration et une automatisation intégrées des tâches courantes.
 
@@ -43,7 +43,7 @@ S’appuyant sur la gamme complète des services Azure existants, Azure Sentinel
 
 ## <a name="connect-to-all-your-data"></a>Connexion à toutes vos données
 
-Pour intégrer Azure Sentinel, vous devez d’abord [vous connecter à vos sources de sécurité](connect-data-sources.md). Azure Sentinel est fourni avec plusieurs connecteurs pour les solutions Microsoft, disponibles par défaut et offrant une intégration en temps réel, y compris les solutions Microsoft Threat Protection, et les sources Microsoft 365, dont Office 365, Azure AD, Azure ATP et Microsoft Cloud App Security, et bien plus encore. En outre, il existe des connecteurs intégrés pour la connexion aux écosystèmes de sécurité élargis pour les solutions non Microsoft. Vous pouvez également utiliser le format d’événement commun, Syslog ou l’API REST pour connecter vos sources de données à Azure Sentinel.  
+Pour intégrer Azure Sentinel, vous devez d’abord [vous connecter à vos sources de sécurité](connect-data-sources.md). Azure Sentinel est fourni avec un certain nombre de connecteurs pour solutions Microsoft, prêts à l'emploi et offrant une intégration en temps réel, comme les solutions Microsoft 365 Defender (anciennement Protection Microsoft contre les menaces), les sources Microsoft 365, dont Office 365, Azure AD, Microsoft Defender pour Identity (anciennement Azure ATP) et Microsoft Cloud App Security. En outre, il existe des connecteurs intégrés pour la connexion aux écosystèmes de sécurité élargis pour les solutions non Microsoft. Vous pouvez également utiliser le format d’événement commun, Syslog ou l’API REST pour connecter vos sources de données à Azure Sentinel. 
 
 ![Collecteurs de données](./media/collect-data/collect-data-page.png)
 
@@ -51,7 +51,7 @@ Pour intégrer Azure Sentinel, vous devez d’abord [vous connecter à vos sourc
 
 ## <a name="workbooks"></a>Workbooks
 
-Après avoir  [connecté vos sources de données](quickstart-onboard.md) à Azure Sentinel, vous pouvez superviser les données à l’aide de l’intégration Azure Sentinel avec des classeurs Azure Monitor, ce qui offre une grande souplesse lors de la création de classeurs personnalisés. Même si les classeurs s’affichent différemment dans Azure Sentinel, il peut être utile de voir comment [créer des rapports interactifs avec les classeurs Azure Monitor](../azure-monitor/platform/workbooks-overview.md). Azure Sentinel vous permet de créer des classeurs personnalisés sur l’ensemble de vos données. Il est également fourni avec des modèles de classeurs intégrés avec lesquels vous obtenez rapidement des insights sur vos données dès que vous connectez une source de données.
+Après avoir [connecté vos sources de données](quickstart-onboard.md) à Azure Sentinel, vous pouvez surveiller les données à l’aide de l’intégration Azure Sentinel avec les classeurs Azure Monitor, ce qui offre une grande souplesse lors de la création de classeurs personnalisés. Même si les classeurs s’affichent différemment dans Azure Sentinel, il peut être utile de voir comment [créer des rapports interactifs avec les classeurs Azure Monitor](../azure-monitor/platform/workbooks-overview.md). Azure Sentinel vous permet de créer des classeurs personnalisés sur l’ensemble de vos données. Il est également fourni avec des modèles de classeurs intégrés avec lesquels vous obtenez rapidement des insights sur vos données dès que vous connectez une source de données.
 
 ![Tableaux de bord](./media/tutorial-monitor-data/access-workbooks.png)
 
@@ -64,7 +64,7 @@ Pour vous aider à réduire le niveau de bruit et à réduire le nombre d’aler
 
 ## <a name="security-automation--orchestration"></a>Automatisation et orchestration de la sécurité
 
-Automatisez les tâches courantes et [simplifiez l’orchestration de la sécurité avec des playbooks](tutorial-respond-threats-playbook.md) qui s’intègrent aux services Azure et à vos outils. Basée sur Azure Logic Apps, la solution d’automatisation et d’orchestration d’Azure Sentinel offre une architecture hautement extensible qui permet une automatisation capable d’évoluer avec les nouvelles technologies et les nouvelles menaces. Pour créer des playbooks avec Azure Logic Apps, vous pouvez faire votre choix dans une galerie croissante de playbooks intégrés. Ceux-ci incluent [plus de 200 connecteurs](https://docs.microsoft.com/azure/connectors/apis-list) pour différents services comme Azure Functions. Ces connecteurs vous permettent d’appliquer une logique personnalisée dans votre code, ServiceNow, Jira, Zendesk, les requêtes HTTP, Microsoft Teams, Slack, Windows Defender ATP et Cloud App Security.
+Automatisez les tâches courantes et [simplifiez l’orchestration de la sécurité avec des playbooks](tutorial-respond-threats-playbook.md) qui s’intègrent aux services Azure et à vos outils. Basée sur Azure Logic Apps, la solution d’automatisation et d’orchestration d’Azure Sentinel offre une architecture hautement extensible qui permet une automatisation capable d’évoluer avec les nouvelles technologies et les nouvelles menaces. Pour créer des playbooks avec Azure Logic Apps, vous pouvez faire votre choix dans une galerie croissante de playbooks intégrés. Ceux-ci incluent [plus de 200 connecteurs](../connectors/apis-list.md) pour différents services comme Azure Functions. Ces connecteurs vous permettent d’appliquer une logique personnalisée dans votre code, ServiceNow, Jira, Zendesk, les requêtes HTTP, Microsoft Teams, Slack, Windows Defender ATP et Cloud App Security.
 
 Par exemple, si vous utilisez le système de tickets ServiceNow, vous pouvez utiliser les outils fournis pour utiliser Azure Logic Apps et automatiser vos flux de travail et ouvrir un ticket dans ServiceNow chaque fois qu’un événement en particulier est détecté.
 
@@ -82,13 +82,13 @@ Actuellement en préversion, les outils d’[investigation approfondie](tutorial
 
 Utilisez les [puissants outils de recherche et de requête](hunting.md) d’Azure Sentinel, basés sur l’infrastructure MITRE, et qui vous permettent de façon proactive de rechercher les menaces de sécurité sur toutes les sources de données de votre organisation avant même le déclenchement d’une alerte. Une fois que vous avez découvert quelle requête de recherche fournit des informations d’importance sur les attaques possibles, vous pouvez également créer des règles de détection personnalisées basées sur cette requête et communiquer ces informations sous forme d’alertes au personnel en charge de la gestion des incidents de sécurité. Lors de la recherche, vous pouvez créer des signets pour les événements intéressants, ce qui vous permet d’y revenir plus tard, de les partager avec d’autres utilisateurs et de les regrouper avec d’autres événements en corrélation pour créer un incident d’investigation solide.
 
-![Chasse](./media/overview/hunting.png)
+![Vue d'ensemble de la fonctionnalité de repérage](./media/overview/hunting.png)
 
 ## <a name="community"></a>Communauté
 
 La communauté Azure Sentinel est une ressource importante pour l’automatisation et la détection des menaces. Nos analystes de sécurité Microsoft créent et ajoutent constamment de nouveaux classeurs, de nouveaux playbooks, de nouvelles requêtes de recherche, entre autres, et les publient dans la communauté pour que vous puissiez les utiliser dans votre environnement. Vous pouvez télécharger l’exemple de contenu à partir du [dépôt](https://aka.ms/asicommunity) GitHub de la communauté privée pour créer des classeurs, requêtes de recherche, notebooks et playbooks personnalisés pour Azure Sentinel. 
 
-![Communauté](./media/overview/community.png)
+![Explorer la communauté des utilisateurs](./media/overview/community.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

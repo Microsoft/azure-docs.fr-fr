@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 07/30/2019
 ms.author: raynew
-ms.openlocfilehash: aa9d776df50306ab1705426c923413b5a5d545a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d441284b265ab11dd5ece42ec3737e455d662435
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68717353"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023565"
 ---
 # <a name="monitor-site-recovery"></a>Superviser Site Recovery
 
@@ -36,7 +36,7 @@ Avant de commencer, vous pouvez consulter les [questions courantes concernant la
 
 2. À partir du tableau de bord, faites défiler vers le bas dans différentes zones. 
 
-    ![Tableau de bord Site Recovery](./media/site-recovery-monitor-and-troubleshoot/site-recovery-overview-page.png).
+    ![Capture d’écran montrant les zones du tableau de bord où vous pouvez descendre dans la hiérarchie.](./media/site-recovery-monitor-and-troubleshoot/site-recovery-overview-page.png).
 
 3. Dans **Éléments répliqués**, cliquez sur **Afficher tout** pour voir tous les serveurs dans le coffre.
 4. Cliquez sur les informations d’état de chaque section pour faire défiler vers le bas.
@@ -93,7 +93,7 @@ Dans **Résumé des erreurs**, surveillez les symptômes d’erreurs actives sus
 
 ## <a name="monitor-the-infrastructure"></a>Surveiller l’infrastructure
 
-Dans**Affichage de l’infrastructure**, surveillez les composants d’infrastructure impliqués dans la réplication, ainsi que l’intégrité de la connectivité entre les serveurs et les services Azure.
+Dans **Affichage de l’infrastructure**, surveillez les composants d’infrastructure impliqués dans la réplication, ainsi que l’intégrité de la connectivité entre les serveurs et les services Azure.
 
 - Une ligne verte indique que la connexion est opérationnelle.
 - Une ligne rouge sur laquelle est superposée une icône d’erreur indique l’existence d’une ou de plusieurs erreurs qui affectent la connectivité.

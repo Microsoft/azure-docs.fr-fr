@@ -8,12 +8,12 @@ ms.subservice: heavy
 ms.topic: tutorial
 ms.date: 07/03/2019
 ms.author: alkohli
-ms.openlocfilehash: 67547db53d2b9ce05838335ffcb5d789b77ecbbe
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 601e5cf15c47b16c53ff9ca81a56cb613bcfc3f5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77560218"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006557"
 ---
 # <a name="tutorial-use-the-data-copy-service-to-copy-data-into-azure-data-box-heavy-preview"></a>Tutoriel : Utiliser le service de copie des données pour copier des données dans Azure Data Box Heavy (préversion)
 
@@ -64,7 +64,7 @@ Pour copier des données par l’intermédiaire du service de copie des données
     |**Compte de stockage de destination**    |Sélectionnez le compte de stockage cible sur lequel charger les données à partir de la liste.         |
     |**Type de destination**       |Sélectionnez le type du stockage cible dans la liste : **Objet blob de blocs**, **Objet blob de pages** ou **Azure Files**.        |
     |**Conteneur/partage de destination**    |Entrez le nom du conteneur ou du partage de votre compte de stockage de destination dans lequel vous souhaitez charger les données. Le nom peut être un nom de partage ou un nom de conteneur. Par exemple, utilisez `myshare` ou `mycontainer`. Vous pouvez également entrer le nom au format `sharename\directory_name` ou `containername\virtual_directory_name`.        |
-    |**Copier les fichiers correspondant à un modèle**    | Vous pouvez entrer le modèle de correspondance des noms de fichiers de deux façons :<ul><li>**Utiliser des caractères génériques :** seuls `*` et `?` sont pris en charge dans les expressions génériques. Par exemple, l’expression `*.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. De même, `*.dl?` correspond à tous les fichiers ayant l’extension `.dl` ou qui commencent par `.dl`, tels que `.dll`. De la même façon, `*foo` correspond à tous les fichiers dont le nom se termine par `foo`.<br>Vous pouvez entrer l’expression générique directement dans le champ. Par défaut, la valeur que vous entrez dans le champ est traitée comme une expression générique.</li><li>**Utiliser des expressions régulières :** les expressions régulières POSIX sont prises en charge. Par exemple, l’expression régulière `.*\.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. Pour les expressions régulières, fournissez le modèle (`<pattern>`) directement au format `regex(<pattern>)`. Pour plus d’informations sur les expressions régulières, consultez [Langage des expressions régulières - Aide-mémoire](https://docs.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference).</li><ul>|
+    |**Copier les fichiers correspondant à un modèle**    | Vous pouvez entrer le modèle de correspondance des noms de fichiers de deux façons :<ul><li>**Utiliser des caractères génériques :** seuls `*` et `?` sont pris en charge dans les expressions génériques. Par exemple, l’expression `*.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. De même, `*.dl?` correspond à tous les fichiers ayant l’extension `.dl` ou qui commencent par `.dl`, tels que `.dll`. De la même façon, `*foo` correspond à tous les fichiers dont le nom se termine par `foo`.<br>Vous pouvez entrer l’expression générique directement dans le champ. Par défaut, la valeur que vous entrez dans le champ est traitée comme une expression générique.</li><li>**Utiliser des expressions régulières :** les expressions régulières POSIX sont prises en charge. Par exemple, l’expression régulière `.*\.vhd` correspond à tous les fichiers dotés de l’extension `.vhd`. Pour les expressions régulières, fournissez le modèle (`<pattern>`) directement au format `regex(<pattern>)`. Pour plus d’informations sur les expressions régulières, consultez [Langage des expressions régulières - Aide-mémoire](/dotnet/standard/base-types/regular-expression-language-quick-reference).</li><ul>|
     |**Optimisation de fichier**              |Lorsque cette fonctionnalité est activée, les fichiers dont la taille est inférieure à 1 Mo sont compressés au cours de l’ingestion. Cette compression accélère la transmission des petits fichiers. Elle permet également un gain de temps significatif lorsque le nombre de fichiers dépasse largement le nombre de répertoires.        |
  
 4. Sélectionnez **Démarrer**. Les entrées sont validées, et si la validation aboutit, le travail démarre. Le démarrage du travail peut prendre quelques minutes.
@@ -147,4 +147,3 @@ Passez au tutoriel suivant pour découvrir comment renvoyer votre appareil Data 
 
 > [!div class="nextstepaction"]
 > [Envoyer votre appareil Azure Data Box Heavy à Microsoft](./data-box-heavy-deploy-picked-up.md)
-

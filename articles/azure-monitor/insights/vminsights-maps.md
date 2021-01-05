@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/20/2020
-ms.openlocfilehash: acb96984a49e4ad8535f87a41da11b3b63ae207b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 32ad92b333eda8cd429303177dba160f0b58af54
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80283852"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95985796"
 ---
 # <a name="use-the-map-feature-of-azure-monitor-for-vms-to-understand-application-components"></a>Utiliser la fonctionnalité Cartographie d’Azure Monitor pour machines virtuelles afin de mieux comprendre le fonctionnement des composants d’application
 Dans Azure Monitor pour machines virtuelles, vous pouvez voir les composants d’application qui ont été détectés sur les machines virtuelles Windows et Linux exécutées dans Azure ou votre environnement. Il existe deux manières d’observer les machines virtuelles : en affichant une carte directement à partir d’une machine virtuelle ou en affichant une carte à partir d’Azure Monitor pour voir les composants dans les groupes de machines virtuelles. Cet article vous aidera à bien comprendre ces deux méthodes de visualisation et à utiliser correctement la fonctionnalité Cartographie. 
@@ -49,7 +49,7 @@ Pour que la fonctionnalité Cartographie affiche des alertes pertinentes, créez
 - Incluez une clause de regroupement des alertes par ordinateur (par exemple, **by Computer interval 1 minute**).
 - Créez l’alerte sur la base d’une métrique.
 
-Pour plus d’informations sur les alertes Azure et la création de règles d’alerte, consultez [Alertes unifiées dans Azure Monitor](../../azure-monitor/platform/alerts-overview.md).
+Pour plus d’informations sur les alertes Azure et la création de règles d’alerte, consultez [Alertes unifiées dans Azure Monitor](../platform/alerts-overview.md).
 
 Située dans le coin supérieur droit, l’option **Légende** décrit les symboles et les rôles cartographiés. Pour voir la carte plus en détail et vous déplacer autour, utilisez les contrôles de zoom disponibles en bas à droite. Vous pouvez définir le niveau de zoom et adapter la carte à la taille de la page.  
 
@@ -95,7 +95,7 @@ La carte affiche les dépendances de la machine virtuelle en détectant les proc
 
 Par défaut, la carte affiche les 30 dernières minutes. Si vous souhaitez voir les dépendances sur une plus grande période passée, vous pouvez exécuter une requête sur un intervalle de temps historique allant jusqu’à une heure. Pour exécuter la requête, utilisez le sélecteur **TimeRange** dans le coin supérieur gauche. Vous pouvez exécuter une requête, par exemple, durant un incident ou pour afficher l’état avant une modification.  
 
-![Vue d’ensemble de la carte de machine virtuelle directe](./media/vminsights-maps/map-direct-vm-01.png)
+![Capture d’écran de l’onglet Carte dans la section Insights d’analyse du portail Azure, montrant un diagramme des dépendances entre les machines virtuelles.](./media/vminsights-maps/map-direct-vm-01.png)
 
 ## <a name="view-a-map-from-a-virtual-machine-scale-set"></a>Afficher une carte à partir d’un groupe de machines virtuelles identiques
 
@@ -111,7 +111,7 @@ Pour charger la carte d’une instance spécifique, sélectionnez d’abord cett
 
 Par défaut, la carte affiche les 30 dernières minutes. Si vous souhaitez voir les dépendances sur une plus grande période passée, vous pouvez exécuter une requête sur un intervalle de temps historique allant jusqu’à une heure. Pour exécuter la requête, utilisez le sélecteur **TimeRange**. Vous pouvez exécuter une requête, par exemple, durant un incident ou pour afficher l’état avant une modification.
 
-![Vue d’ensemble de la carte de machine virtuelle directe](./media/vminsights-maps/map-direct-vmss-01.png)
+![Capture d’écran de l’onglet Carte dans la section Insights d’analyse du portail Azure, montrant un diagramme des dépendances entre les groupes de machines virtuelles identiques.](./media/vminsights-maps/map-direct-vmss-01.png)
 
 >[!NOTE]
 >Vous pouvez également accéder à la carte d’une instance spécifique à partir de la vue **Instances** de votre groupe de machines virtuelles identiques. Dans la section **Paramètres**, accédez à **Instances** > **Insights**.
@@ -128,10 +128,11 @@ Dans Azure Monitor, la fonctionnalité Cartographie offre une vue globale de vos
 
 Choisissez un espace de travail à l’aide du sélecteur **Espace de travail** en haut de la page. Si vous avez plusieurs espaces de travail Log Analytics, choisissez l’espace de travail qui est activé avec la solution et qui contient des machines virtuelles supervisées. 
 
-Le sélecteur **Groupe** affiche les abonnements, les groupes de ressources, les [groupes d’ordinateurs](../../azure-monitor/platform/computer-groups.md) et les groupes de machines virtuelles identiques qui sont associés à l’espace de travail sélectionné. Votre sélection s’applique uniquement à la fonctionnalité Cartographie, et n’est pas reportée sur la fonctionnalité Performances ou Intégrité.
+Le sélecteur **Groupe** affiche les abonnements, les groupes de ressources, les [groupes d’ordinateurs](../platform/computer-groups.md) et les groupes de machines virtuelles identiques qui sont associés à l’espace de travail sélectionné. Votre sélection s’applique uniquement à la fonctionnalité Cartographie, et n’est pas reportée sur la fonctionnalité Performances ou Intégrité.
 
 Par défaut, la carte affiche les 30 dernières minutes. Si vous souhaitez voir les dépendances sur une plus grande période passée, vous pouvez exécuter une requête sur un intervalle de temps historique allant jusqu’à une heure. Pour exécuter la requête, utilisez le sélecteur **TimeRange**. Vous pouvez exécuter une requête, par exemple, durant un incident ou pour afficher l’état avant une modification.  
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour identifier les goulots d’étranglement, superviser les performances et comprendre l’utilisation globale de vos machines virtuelles, consultez [Afficher les performances avec Azure Monitor pour machines virtuelles](vminsights-performance.md). 
+

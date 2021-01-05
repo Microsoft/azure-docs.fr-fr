@@ -7,15 +7,15 @@ ms.service: data-factory
 services: data-factory
 documentationcenter: ''
 ms.workload: data-services
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
-ms.openlocfilehash: 8b7791c5c04e986b30959d2fcae17142fdd8b7ec
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 70be8d8be48f2b1e1cc275c06e4abff09e3e62f6
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418318"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498572"
 ---
 # <a name="roles-and-permissions-for-azure-data-factory"></a>Rôles et autorisations pour Azure Data Factory
 
@@ -29,18 +29,18 @@ Cet article décrit les rôles requis pour créer et gérer des ressources Azure
 Pour créer des instances Data Factory, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit être membre des rôles *Contributeur* ou *Propriétaire*, ou *administrateur* de l’abonnement Azure. Pour visualiser les autorisations dont vous disposez dans l’abonnement, sélectionnez votre nom d’utilisateur dans le coin supérieur droit du Portail Azure, puis sélectionnez **Autorisations**. Si vous avez accès à plusieurs abonnements, sélectionnez l’abonnement approprié. 
 
 Les exigences applicables à la création et à la gestion des ressources enfants pour Data Factory (jeux de données, services liés, pipelines, déclencheurs et runtimes d’intégration) sont les suivantes :
-- Pour créer et gérer des ressources enfants dans le Portail Azure, vous devez appartenir au rôle **Contributeurs de Data Factory** au niveau du groupe de ressources ou à un niveau supérieur.
+- Pour créer et gérer des ressources enfants dans le portail Azure, vous devez appartenir au rôle **Contributeur de Data Factory** au niveau du **groupe de ressources** ou à un niveau supérieur.
 - Pour créer et gérer des ressources enfants à l’aide de PowerShell ou du Kit de développement logiciel (SDK), le rôle **Contributeur** au niveau du groupe de ressources ou à un niveau supérieur est suffisant.
 
 Pour découvrir des exemples d’instructions concernant l’ajout d’un utilisateur à un rôle, consultez l’article décrivant comment [ajouter des rôles](../cost-management-billing/manage/add-change-subscription-administrator.md).
 
 ## <a name="set-up-permissions"></a>Définir des autorisations
 
-Après avoir créé une fabrique de données, vous allez sans doute vouloir permettre à d’autres utilisateurs de l’utiliser. Pour accorder cet accès à d’autres utilisateurs, vous devez les ajouter au rôle **Contributeur de Data Factory** lequel est intégré au groupe de ressources qui contient la fabrique de données.
+Après avoir créé une fabrique de données, vous allez sans doute vouloir permettre à d’autres utilisateurs de l’utiliser. Pour accorder cet accès à d’autres utilisateurs, vous devez les ajouter au rôle **Contributeur de Data Factory**, lequel est intégré au **groupe de ressources** qui contient la fabrique de données.
 
 ### <a name="scope-of-the-data-factory-contributor-role"></a>Portée du rôle Contributeur de Data Factory
 
-L’appartenance au rôle **Contributeur de Data Factory** permet aux utilisateurs d’effectuer les opérations suivantes :
+L’appartenance au rôle **Contributeur de Data Factory** permet aux utilisateurs d’effectuer les opérations suivantes :
 - Créer, modifier et supprimer des fabriques de données et des ressources enfants, y compris des jeux de données, des services liés, des pipelines, des déclencheurs et des runtimes d’intégration.
 - Déployer des modèles Resource Manager. Le déploiement Resource Manager est la méthode de déploiement utilisée par Data Factory dans le portail Microsoft Azure.
 - Gérer les alertes App Insights pour une fabrique de données.
@@ -50,7 +50,7 @@ Pour plus d’informations sur ce rôle, voir [Rôle Contributeur de Data Factor
 
 ### <a name="resource-manager-template-deployment"></a>Déploiement de modèle Resource Manager
 
-Le rôle **Contributeur de Data Factory**, au niveau du groupe de ressources ou au-delà, permet aux utilisateurs de déployer des modèles Resource Manager. Par conséquent, les membres de ce rôle peuvent utiliser des modèles Resource Manager pour déployer des fabriques de données et leurs ressources enfants, y compris des jeux de données, des services liés, des pipelines, des déclencheurs et des runtimes d’intégration. Toutefois, l’appartenance à ce rôle ne permet pas à l’utilisateur de créer d’autres ressources.
+Le rôle **Contributeur de Data Factory**, au niveau du groupe de ressources ou au-delà, permet aux utilisateurs de déployer des modèles Resource Manager. Par conséquent, les membres de ce rôle peuvent utiliser des modèles Resource Manager pour déployer des fabriques de données et leurs ressources enfants, y compris des jeux de données, des services liés, des pipelines, des déclencheurs et des runtimes d’intégration. L’appartenance à ce rôle ne permet pas à l’utilisateur de créer d’autres ressources.
 
 Les autorisations pour les référentiels Azure et GitHub sont indépendantes des autorisations Data Factory. Par conséquent, un utilisateur disposant des autorisations de référentiel et uniquement membre du rôle Lecteur peut modifier les ressources enfant Data Factory et apporter des modifications au référentiel, mais il ne peut pas publier ces modifications.
 
@@ -82,9 +82,9 @@ Voici quelques exemples qui illustrent l’intérêt d’utiliser des rôles per
   1. Vous attribuez le rôle **Contributeur** au niveau de la fabrique de données.
   2. Vous créez un rôle personnalisé avec l'autorisation **Microsoft.Resources/deployments/** . Vous attribuez ce rôle personnalisé à l’utilisateur au niveau du groupe de ressources.
 
-- Permettre à un utilisateur de tester uniquement la connexion dans un service lié
+- Vous permettez à un utilisateur de tester la connexion dans un service lié ou d’afficher un aperçu des données dans un jeu de données
 
-    Créez un rôle personnalisé avec des autorisations pour les actions suivantes : **Microsoft.DataFactory/factories/getFeatureValue/read** et **Microsoft.DataFactory/factories/getDataPlaneAccess/read**. Attribuez ce rôle personnalisé à l’utilisateur dans la ressource de fabrique de données.
+    Créez un rôle personnalisé avec des autorisations pour les actions suivantes : **Microsoft.DataFactory/factories/getFeatureValue/read** et **Microsoft.DataFactory/factories/getDataPlaneAccess/action**. Attribuez ce rôle personnalisé à l’utilisateur dans la ressource de fabrique de données.
 
 - Vous permettez à un utilisateur de mettre à jour une fabrique de données à partir de PowerShell ou du SDK, mais pas dans le portail Microsoft Azure.
 

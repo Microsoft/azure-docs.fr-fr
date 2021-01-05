@@ -5,15 +5,16 @@ description: Convertir un Peering Exchange hérité en ressource Azure à l’ai
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
+ms.topic: how-to
+ms.date: 12/15/2020
 ms.author: prmitiki
-ms.openlocfilehash: eedf87548d62e05d4940911ed3dcd821077acb27
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: acc32f4916f5f7f8fe22eebdd1e72db297cac94c
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81686788"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590203"
 ---
 # <a name="convert-a-legacy-exchange-peering-to-an-azure-resource-by-using-powershell"></a>Convertir un Peering Exchange hérité en ressource Azure à l’aide de PowerShell
 

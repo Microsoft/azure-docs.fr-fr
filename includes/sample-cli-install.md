@@ -1,14 +1,15 @@
 ---
-author: sptramer
 ms.topic: include
 ms.date: 05/31/2019
-ms.author: sttramer
-ms.openlocfilehash: c4bc5a6befaf684cd07fb3b6799ba00099627132
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+author: dbradish-microsoft
+ms.author: dbradish
+manager: barbkess
+ms.openlocfilehash: fd3965c42679c8435348a66cc7eeab90d1eeb1b3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "66814731"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85374664"
 ---
 Pour exécuter cet exemple, installez la dernière version d’[Azure CLI](/cli/azure/install-azure-cli). Pour démarrer, exécutez `az login` pour créer une connexion avec Azure.
 

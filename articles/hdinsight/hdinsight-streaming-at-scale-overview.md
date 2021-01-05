@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 12/17/2019
-ms.openlocfilehash: 006310f1a0efa69881bbe6d6ea4403b9c50402e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a04ce77c7e81a3a73b87eaf5790b383dece35d86
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435392"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022715"
 ---
 # <a name="streaming-at-scale-in-hdinsight"></a>Diffusion en continu à l’échelle dans HDInsight
 
@@ -39,7 +39,7 @@ Pour plus d’informations, consultez [Présentation d’Apache Storm sur Azure 
 
 Spark Streaming est une extension de Spark qui vous permet de réutiliser le même code que celui utilisé pour le traitement par lots. Vous pouvez combiner des requêtes interactives et par lots dans la même application. Contrairement à Storm, Spark Streaming fournit une sémantique de traitement avec état de type « exactement une fois ». En cas d’utilisation avec [l’API directe Kafka](https://spark.apache.org/docs/latest/streaming-kafka-integration.html), qui garantit que toutes les données Kafka sont reçues par Spark Streaming exactement une fois, il est possible d’obtenir des garanties de bout en bout « exactement une fois ». L’une des forces de Spark Streaming réside dans ses fonctionnalités de tolérance des pannes, qui permettent de récupérer rapidement les nœuds défectueux quand plusieurs nœuds sont utilisés au sein du cluster.
 
-Pour plus d’informations, consultez [Présentation d’Apache Spark Streaming](hdinsight-spark-streaming-overview.md).
+Pour plus d’informations, consultez [Présentation d’Apache Spark Streaming](./spark/apache-spark-streaming-overview.md).
 
 ## <a name="scaling-a-cluster"></a>Mise à l’échelle d’un cluster
 

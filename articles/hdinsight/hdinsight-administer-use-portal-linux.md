@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 04/24/2020
-ms.openlocfilehash: 05d057be76a1b468f892b3123080e32a948153ae
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.openlocfilehash: 7c644583e994e51f11bdf7991755a6ea94b01e76
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82598496"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012803"
 ---
 # <a name="manage-apache-hadoop-clusters-in-hdinsight-by-using-the-azure-portal"></a>Gérer des clusters Apache Hadoop dans HDInsight à l’aide du portail Azure
 
@@ -70,7 +70,7 @@ Sélectionnez le nom de votre cluster dans la page [**Clusters HDInsight**](#sho
     |Taille du cluster|permet de vérifier, d’augmenter et de réduire le nombre de nœuds Worker du cluster. Voir [Mettre à l’échelle des clusters](hdinsight-administer-use-portal-linux.md#scale-clusters).|
     |Limites de quota|permet d’afficher les cœurs utilisés et disponibles pour votre abonnement.|
     |SSH + Connexion du cluster|affiche les instructions pour se connecter au cluster avec une connexion Secure Shell (SSH). Pour en savoir plus, voir [Utilisation de SSH avec Hadoop Linux sur HDInsight depuis Linux, Unix ou OS X](hdinsight-hadoop-linux-use-ssh-unix.md).|
-    |Data Lake Storage Gen 1|permet de configurer l’accès à Data Lake Storage Gen1.  Consultez [Démarrage rapide : Configurer des clusters dans HDInsight](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md).|
+    |Data Lake Storage Gen 1|permet de configurer l’accès à Data Lake Storage Gen1.  Consultez [Démarrage rapide : Configurer des clusters dans HDInsight](./hdinsight-hadoop-provision-linux-clusters.md).|
     |Comptes de stockage|permet d’afficher les comptes de stockage et les clés. Les comptes de stockage sont configurés pendant le processus de création de cluster.|
     |Applications|permet d’ajouter/supprimer des applications HDInsight.  Consultez [Installer des applications HDInsight personnalisées](hdinsight-apps-install-custom-applications.md).|
     |Actions de script|permet d’exécuter des scripts Bash sur le cluster. Consultez [Personnalisation de clusters HDInsight basés sur Linux à l’aide d’une action de script](hdinsight-hadoop-customize-cluster-linux.md).|

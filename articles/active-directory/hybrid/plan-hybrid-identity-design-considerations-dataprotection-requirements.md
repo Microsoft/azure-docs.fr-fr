@@ -18,10 +18,10 @@ ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: 056d0caf2bfc6e99d5d659a2561bc41844feb79a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "64918793"
 ---
 # <a name="plan-for-enhancing-data-security-through-a-strong-identity-solution"></a>Planifier l'amélioration de la sécurité des données grâce à une solution d'identité solide

@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: user-help
 ms.workload: identity
 ms.topic: end-user-help
-ms.date: 02/03/2020
+ms.date: 10/19/2020
 ms.author: curtand
 ms.reviewer: kasimpso
 ms.custom: user-help, seo-update-azuread-jan
-ms.openlocfilehash: 23b7205e63c7991368efe421d5c067e980314611
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: cff1298f12d26b1260213d75701c282e0a82511d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83741978"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004147"
 ---
 # <a name="update-your-groups-info-on-the-my-apps-portal"></a>Mettre à jour les informations relatives à vos groupes sur le portail Mes applications
 
@@ -26,7 +26,7 @@ Vous pouvez utiliser votre compte professionnel ou scolaire avec le portail web 
 [!INCLUDE [preview-notice](../../../includes/active-directory-end-user-my-apps-portal.md)]
 
 >[!Important]
->Ce contenu est destiné aux utilisateurs. Si vous êtes administrateur, vous trouverez des informations sur la configuration et la gestion de vos applications cloud dans la [documentation sur la gestion des applications](https://docs.microsoft.com/azure/active-directory/manage-apps).
+>Ce contenu est destiné aux utilisateurs. Si vous êtes administrateur, vous trouverez des informations sur la configuration et la gestion de vos applications cloud dans la [documentation sur la gestion des applications](../manage-apps/index.yml).
 
 ## <a name="view-your-groups-information"></a>Afficher les informations relatives à vos groupes
 
@@ -44,13 +44,11 @@ Si votre administrateur vous a donné l'autorisation d'afficher la vignette **Gr
 
     La page **Applications** s'affiche, avec toutes les applications cloud de votre organisation que vous pouvez utiliser.
 
-    ![Page Applications du portail Mes applications](media/my-apps-portal/my-apps-portal-apps-page-groups-tile.png)
+    ![Page Applications du portail Mes applications](media/my-apps-portal-end-user-groups/my-apps-home-large.png)
 
-3. Sélectionnez la vignette **Groupes** pour afficher les informations relatives à vos groupes.
+3. Explorez le menu **Mes applications** et sélectionnez **Mes groupes** pour afficher les informations relatives à votre groupe.
 
-    ![Page Groupes présentant les groupes dont vous êtes propriétaire et les groupes dont vous êtes membres](media/my-apps-portal/my-apps-portal-groups-page.png)
-
-4. Selon les autorisations dont vous disposez, vous pouvez utiliser la page **Groupes** pour :
+4. Selon les autorisations dont vous disposez, vous pouvez utiliser la page **Mes groupes** pour :
 
     - **Passer en revue les groupes dont vous êtes propriétaire.** Consultez les informations relatives aux groupes dont vous êtes propriétaire au sein de votre organisation dans la zone **Groupes dont je suis propriétaire**. La sélection d'un nom de groupe spécifique affiche des détails supplémentaires sur le groupe : type, nombre de membres, stratégie d'adhésion, liste des membres actifs, etc.
 
@@ -168,6 +166,6 @@ Vous pouvez rejoindre ou quitter un groupe existant à partir de la page **Group
 
 - [Accéder aux applications et les utiliser sur le portail Mes applications](my-apps-portal-end-user-access.md).
 
-- [Modifier vos informations de profil](my-apps-portal-end-user-update-profile.md).
+- [Modifier vos informations de profil](./my-account-portal-settings.md).
 
 - [Effectuer vos propres révisions d’accès](my-apps-portal-end-user-access-reviews.md).

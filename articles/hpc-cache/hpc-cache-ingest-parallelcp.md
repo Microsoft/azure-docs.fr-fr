@@ -3,15 +3,15 @@ title: Ingestion des données Azure HPC Cache - Script de copie parallèle
 description: Comment utiliser un script de copie parallèle pour déplacer des données vers une cible de stockage Blob dans Azure HPC Cache
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/30/2019
-ms.author: rohogue
-ms.openlocfilehash: 90e05ad3d42b1009b631630fe476669a9f418d33
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: v-erkel
+ms.openlocfilehash: ff7b15a36c5ef19a1fa6ffdca7697dd6ba97c29f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74166898"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87092352"
 ---
 # <a name="azure-hpc-cache-data-ingest---parallel-copy-script-method"></a>Ingestion des données Azure HPC Cache - Script de copie parallèle
 

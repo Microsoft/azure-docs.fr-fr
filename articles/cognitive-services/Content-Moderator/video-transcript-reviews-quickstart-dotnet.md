@@ -10,12 +10,13 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 10/24/2019
 ms.author: pafarley
-ms.openlocfilehash: b2d763454b86570b57a16fb9ae2107a2a2bcd23d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 326fc2cc162a2ab54b40888250fbeef55ad8800a
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73744378"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96853456"
 ---
 # <a name="create-video-transcript-reviews-using-net"></a>Révisions de transcriptions de vidéos à l’aide de .NET
 
@@ -144,7 +145,7 @@ Créez une révision de vidéo avec **ContentModeratorClient.Reviews.CreateVideo
 **CreateVideoReviews** a les paramètres obligatoires suivants :
 1. Une chaîne contenant un type MIME, qui doit être « application/json ». 
 1. Le nom de votre équipe Content Moderator.
-1. Un objet **IList\<CreateVideoReviewsBodyItem>** . Chaque objet **CreateVideoReviewsBodyItem** représente une révision de vidéo. Ce guide de démarrage rapide crée une révision à la fois.
+1. Un objet **IList\<CreateVideoReviewsBodyItem>**. Chaque objet **CreateVideoReviewsBodyItem** représente une révision de vidéo. Ce guide de démarrage rapide crée une révision à la fois.
 
 **CreateVideoReviewsBodyItem** a plusieurs propriétés. Vous définissez au moins les propriétés suivantes :
 - **Content**. URL de la vidéo à réviser.
@@ -152,7 +153,7 @@ Créez une révision de vidéo avec **ContentModeratorClient.Reviews.CreateVideo
 - **Status**. Définissez la valeur sur « Unpublished ». Si vous ne définissez pas cette propriété, sa valeur par défaut est « Pending », ce qui signifie que la révision de la vidéo est publiée et en attente d’une révision par un opérateur humain. Une fois qu’une révision de vidéo est publiée, vous ne pouvez plus y ajouter de trames vidéo, de transcription ou de résultat de la modération des transcriptions.
 
 > [!NOTE]
-> **CreateVideoReviews** retourne une chaîne IList\<string>. Chacune de ces chaînes contient un ID de révision de vidéo. Ces ID sont des GUID et sont différents de la valeur de la propriété **ContentId**.
+> **CreateVideoReviews** retourne un IList\<string>. Chacune de ces chaînes contient un ID de révision de vidéo. Ces ID sont des GUID et sont différents de la valeur de la propriété **ContentId**.
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms VideoReviews.
 
@@ -204,7 +205,7 @@ Vous ajoutez une transcription à une révision vidéo avec **ContentModeratorCl
 La transcription doit être au format WebVTT. Pour plus d’informations, consultez [WebVTT: The Web Video Text Tracks Format](https://www.w3.org/TR/webvtt1/) (WebVTT : le format Web Video Text Tracks).
 
 > [!NOTE]
-> Le programme utilise un exemple de transcription au format VTT. Dans une solution réelle, vous utilisez le service Azure Media Indexer pour [générer une transcription](https://docs.microsoft.com/azure/media-services/media-services-index-content) à partir d’une vidéo.
+> Le programme utilise un exemple de transcription au format VTT. Dans une solution réelle, vous utilisez le service Azure Media Indexer pour [générer une transcription](../../media-services/previous/media-services-index-content.md) à partir d’une vidéo.
 
 Ajoutez la définition de méthode suivante à l’espace de noms VideoTranscriptReview de la classe Program.
 
@@ -317,7 +318,7 @@ private static void PublishReview(ContentModeratorClient client, string review_i
 Ajoutez la définition de méthode **Main** à l’espace de noms VideoTranscriptReviews de la classe Program. Pour finir, fermez la classe Program et l’espace de noms VideoTranscriptReviews.
 
 > [!NOTE]
-> Le programme utilise un exemple de transcription au format VTT. Dans une solution réelle, vous utilisez le service Azure Media Indexer pour [générer une transcription](https://docs.microsoft.com/azure/media-services/media-services-index-content) à partir d’une vidéo.
+> Le programme utilise un exemple de transcription au format VTT. Dans une solution réelle, vous utilisez le service Azure Media Indexer pour [générer une transcription](../../media-services/previous/media-services-index-content.md) à partir d’une vidéo.
 
 ```csharp
 static void Main(string[] args)
@@ -380,5 +381,3 @@ Vous voyez les caractéristiques suivantes :
 Obtenez le [SDK Content Moderator pour .NET](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) et la [solution Visual Studio](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) pour ce guide de démarrage rapide et d’autres guides de démarrage rapide Content Moderator pour .NET.
 
 Découvrez comment générer des [révisions de vidéos](video-reviews-quickstart-dotnet.md) dans l’outil de révision.
-
-Consultez le tutoriel détaillé sur le développement d’une [solution complète de modération de vidéos](video-transcript-moderation-review-tutorial-dotnet.md).

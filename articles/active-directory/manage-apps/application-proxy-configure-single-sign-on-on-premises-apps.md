@@ -3,25 +3,25 @@ title: Authentification unique SAML pour les applications locales avec le proxy 
 description: Découvrez comment fournir l’authentification unique pour les applications locales qui sont sécurisées avec l’authentification SAML. Fournissez un accès à distance aux applications locales avec le proxy d’application.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/24/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d3d2117e913f292e92f37f31d2e123587c70a189
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: e7d51aa7e75d7e94d1c2ac66d7edb92a3ef9395b
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80803295"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94657463"
 ---
 # <a name="saml-single-sign-on-for-on-premises-applications-with-application-proxy"></a>Authentification unique SAML pour les applications locales avec le proxy d’application
 
@@ -33,9 +33,9 @@ L’authentification unique SAML avec le proxy d’application fonctionne égal
 
 Les diagrammes de protocole ci-dessous décrivent la séquence de l’authentification unique pour un flux initié par le fournisseur de services et un flux d’identité initié par le fournisseur d’identité. Le proxy d’application fonctionne avec l’authentification unique SAML en mettant en cache la demande et la réponse SAML vers et depuis l’application locale.
 
-  ![Flux du fournisseur de services SAML](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-sp-initiated-flow.png)
+  ![Diagramme illustrant les interactions entre l’application, le proxy d’application, le client et Azure AD pour l’authentification unique initiée par le fournisseur de services.](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-sp-initiated-flow.png)
 
-  ![Flux du fournisseur de services SAML](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-idp-initiated-flow.png)
+  ![Diagramme illustrant les interactions entre l’application, le proxy d’application, le client et Azure AD pour l’authentification unique initiée par le fournisseur d’identités.](./media/application-proxy-configure-single-sign-on-on-premises-apps/saml-idp-initiated-flow.png)
 
 ## <a name="create-an-application-and-set-up-saml-sso"></a>Créer une application et configurer l’authentification unique SAML
 
@@ -47,7 +47,7 @@ Les diagrammes de protocole ci-dessous décrivent la séquence de l’authentifi
 
 4. Sélectionnez **SAML** comme méthode d’authentification unique.
 
-5. Configurez d’abord l’authentification unique SAML pour qu’elle fonctionne sur le réseau d’entreprise. Dans la page **Configurer l’authentification unique avec SAML**, accédez au titre **Configuration SAML de base** et sélectionnez l’icône **Modifier** (un crayon). Suivez les étapes de [Entrer la configuration SAML de base](configure-single-sign-on-non-gallery-applications.md#step-1-edit-the-basic-saml-configuration) pour configurer l’authentification basée sur SAML pour l’application.
+5. Commencez par configurer l’authentification unique SAML pour qu’elle fonctionne sur le réseau d’entreprise. Pour configurer l’authentification SAML pour l’application, consultez la section Configuration SAML de base de l’article [Configurer l’authentification unique SAML](configure-saml-single-sign-on.md).
 
 6. Ajoutez au moins un utilisateur à l’application et vérifiez que le compte de test a accès à l’application. En étant connecté au réseau d’entreprise, utilisez le compte de test pour vérifier si vous avez une authentification unique pour l’application. 
 
@@ -62,7 +62,7 @@ Pour fournir l’authentification unique aux applications locales, vous devez ac
    > [!NOTE]
    > Une bonne pratique consiste à utiliser des domaines personnalisés chaque fois que cela est possible, afin d’optimiser l’expérience utilisateur. Pour plus d’informations, consultez [Utilisation des domaines personnalisés dans le proxy d’application Azure AD](application-proxy-configure-custom-domain.md).
 
-2. Sélectionnez **Azure Active Directory** comme méthode de **pré-authentification**pour votre application.
+2. Sélectionnez **Azure Active Directory** comme méthode de **pré-authentification** pour votre application.
 
 3. Copiez l’**URL externe** de l’application. Vous aurez besoin de cette URL pour terminer la configuration de SAML.
 
@@ -81,7 +81,7 @@ Pour fournir l’authentification unique aux applications locales, vous devez ac
 
 4. Cochez la case en regard de l’**URL de réponse** mise à jour pour la marquer comme valeur par défaut.
 
-   * Après avoir marqué l’**URL de réponse** requise comme l’URL de réponse par défaut, vous pouvez également supprimer l’**URL de réponse** précédemment configurée qui utilisait l’URL interne.
+   * Après avoir marqué l’**URL de réponse** requise comme URL par défaut, vous pouvez également supprimer l’**URL de réponse** précédemment configurée qui utilisait l’URL interne.
 
    * Pour un flux initié par le fournisseur de services, vérifiez que l’application back-end spécifie l’**URL de réponse** ou l’URL du service consommateur d’assertion correcte pour recevoir le jeton d’authentification.
 
@@ -97,5 +97,5 @@ Une fois toutes ces étapes effectuées, votre application doit être opération
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Comment le proxy d’application Azure AD fournit-il une authentification unique ?](application-proxy-single-sign-on.md)
+- [Comment le proxy d’application Azure AD fournit-il une authentification unique ?](./what-is-single-sign-on.md)
 - [Résoudre les problèmes du proxy d’application](application-proxy-troubleshoot.md)

@@ -7,12 +7,12 @@ ms.service: app-service
 ms.topic: conceptual
 ms.date: 01/06/2017
 ms.author: yegu
-ms.openlocfilehash: 11c854491ab030394eb61964979cb04a5a4b489b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec8d4f5611425734974d07ae6ee7008b10b9b406
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75433392"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85833772"
 ---
 # <a name="create-a-web-app-plus-azure-cache-for-redis-using-a-template"></a>Créer une application web avec un cache Azure pour Redis à l’aide d’un modèle
 
@@ -42,11 +42,13 @@ Pour exécuter automatiquement le déploiement, cliquez sur le bouton ci-dessous
 ## <a name="variables-for-names"></a>Variables pour les noms
 Ce modèle utilise des variables afin de créer des noms pour les ressources. Il utilise la fonction [uniqueString](../azure-resource-manager/templates/template-functions-string.md#uniquestring) pour construire une valeur basée sur l’identifiant du groupe de ressources.
 
-    "variables": {
-      "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]",
-      "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
-      "cacheName": "[concat('cache', uniqueString(resourceGroup().id))]"
-    },
+```json
+"variables": {
+  "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]",
+  "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
+  "cacheName": "[concat('cache', uniqueString(resourceGroup().id))]"
+},
+```
 
 
 ## <a name="resources-to-deploy"></a>Ressources à déployer
@@ -57,23 +59,25 @@ Crée le cache Azure pour Redis utilisé avec l’application web. Le nom du cac
 
 Le modèle crée le cache au même emplacement que le groupe de ressources.
 
-    {
-      "name": "[variables('cacheName')]",
-      "type": "Microsoft.Cache/Redis",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2015-08-01",
-      "dependsOn": [ ],
-      "tags": {
-        "displayName": "cache"
-      },
-      "properties": {
-        "sku": {
-          "name": "[parameters('cacheSKUName')]",
-          "family": "[parameters('cacheSKUFamily')]",
-          "capacity": "[parameters('cacheSKUCapacity')]"
-        }
-      }
+```json
+{
+  "name": "[variables('cacheName')]",
+  "type": "Microsoft.Cache/Redis",
+  "location": "[resourceGroup().location]",
+  "apiVersion": "2015-08-01",
+  "dependsOn": [ ],
+  "tags": {
+    "displayName": "cache"
+  },
+  "properties": {
+    "sku": {
+      "name": "[parameters('cacheSKUName')]",
+      "family": "[parameters('cacheSKUFamily')]",
+      "capacity": "[parameters('cacheSKUCapacity')]"
     }
+  }
+}
+```
 
 
 ### <a name="web-app"></a>Application web
@@ -81,44 +85,52 @@ Crée l’application web avec le nom spécifié dans la variable **webSiteName*
 
 Notez que l’application web est configurée selon des paramètres qui lui permettent d’utiliser le cache Azure pour Redis. Ces paramètres sont créés de façon dynamique en fonction des valeurs fournies lors du déploiement.
 
+```json
+{
+  "apiVersion": "2015-08-01",
+  "name": "[variables('webSiteName')]",
+  "type": "Microsoft.Web/sites",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.Web/serverFarms/', variables('hostingPlanName'))]",
+    "[concat('Microsoft.Cache/Redis/', variables('cacheName'))]"
+  ],
+  "tags": {
+    "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]": "empty",
+    "displayName": "Website"
+  },
+  "properties": {
+    "name": "[variables('webSiteName')]",
+    "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+  },
+  "resources": [
     {
       "apiVersion": "2015-08-01",
-      "name": "[variables('webSiteName')]",
-      "type": "Microsoft.Web/sites",
-      "location": "[resourceGroup().location]",
+      "type": "config",
+      "name": "appsettings",
       "dependsOn": [
-        "[concat('Microsoft.Web/serverFarms/', variables('hostingPlanName'))]",
+        "[concat('Microsoft.Web/Sites/', variables('webSiteName'))]",
         "[concat('Microsoft.Cache/Redis/', variables('cacheName'))]"
       ],
-      "tags": {
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]": "empty",
-        "displayName": "Website"
-      },
       "properties": {
-        "name": "[variables('webSiteName')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
-      },
-      "resources": [
-        {
-          "apiVersion": "2015-08-01",
-          "type": "config",
-          "name": "appsettings",
-          "dependsOn": [
-            "[concat('Microsoft.Web/Sites/', variables('webSiteName'))]",
-            "[concat('Microsoft.Cache/Redis/', variables('cacheName'))]"
-          ],
-          "properties": {
-            "CacheConnection": "[concat(variables('cacheName'),'.redis.cache.windows.net,abortConnect=false,ssl=true,password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('cacheName')), '2015-08-01').primaryKey)]"
-          }
-        }
-      ]
+       "CacheConnection": "[concat(variables('cacheName'),'.redis.cache.windows.net,abortConnect=false,ssl=true,password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('cacheName')), '2015-08-01').primaryKey)]"
+      }
     }
+  ]
+}
+```
 
 ## <a name="commands-to-run-deployment"></a>Commandes pour l’exécution du déploiement
 [!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ### <a name="powershell"></a>PowerShell
-    New-AzResourceGroupDeployment -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-web-app-with-redis-cache/azuredeploy.json -ResourceGroupName ExampleDeployGroup
+
+```azurepowershell
+New-AzResourceGroupDeployment -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-web-app-with-redis-cache/azuredeploy.json -ResourceGroupName ExampleDeployGroup
+```
 
 ### <a name="azure-cli"></a>Azure CLI
-    azure group deployment create --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-web-app-with-redis-cache/azuredeploy.json -g ExampleDeployGroup
+
+```azurecli
+azure group deployment create --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-web-app-with-redis-cache/azuredeploy.json -g ExampleDeployGroup
+```

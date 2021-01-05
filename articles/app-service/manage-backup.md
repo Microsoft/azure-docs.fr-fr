@@ -5,12 +5,12 @@ ms.assetid: 6223b6bd-84ec-48df-943f-461d84605694
 ms.topic: article
 ms.date: 10/16/2019
 ms.custom: seodec18
-ms.openlocfilehash: b812ae10b3462dbeff05c8a67e7ebb725281e7e8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 933ac96d0cf98e0068575e5a70b0f42a157eb611
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535755"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91827456"
 ---
 # <a name="back-up-your-app-in-azure"></a>Sauvegarde de votre application dans Azure
 La fonctionnalité de sauvegarde et de restauration [d’Azure App Service](overview.md) vous permet de créer facilement des sauvegardes d’applications manuelles ou planifiées. Vous pouvez configurer les sauvegardes pour qu’elles soient conservées pendant une durée indéfinie. Vous pouvez restaurer l’application d’après la capture instantanée d’un état précédent en remplaçant l’application existante ou en restaurant sur une autre application.
@@ -41,8 +41,8 @@ Les solutions de base de données suivantes sont prises en charge par la fonctio
 <a name="requirements"></a>
 
 ## <a name="requirements-and-restrictions"></a>Exigences et restrictions
-* La fonctionnalité de sauvegarde et de restauration implique que le plan App Service soit de type **Standard** ou **Premium**. Pour plus d'informations sur la mise à l’échelle de votre plan App Service en vue d'utiliser un niveau plus élevé, consultez [Mise à l’échelle d’une application web dans Microsoft Azure App Service](manage-scale-up.md). Le niveau **Premium** permet un plus grand nombre de sauvegardes quotidiennes que le niveau **Standard**.
-* Vous avez besoin d’un compte de stockage Azure et d’un conteneur dans le même abonnement que l’application que vous souhaitez sauvegarder. Pour plus d’informations sur les comptes de stockage Azure, consultez [Vue d’ensemble des comptes de stockage Azure](https://docs.microsoft.com/azure/storage/common/storage-account-overview).
+* La fonctionnalité de sauvegarde et de restauration nécessite un plan App Service de niveau **Standard**, **Premium** ou **Isolé**. Pour plus d'informations sur la mise à l’échelle de votre plan App Service en vue d'utiliser un niveau plus élevé, consultez [Mise à l’échelle d’une application web dans Microsoft Azure App Service](manage-scale-up.md). Les niveaux **Premium** et **Isolé** permettent un plus grand nombre de sauvegardes quotidiennes que le niveau **Standard**.
+* Vous avez besoin d’un compte de stockage Azure et d’un conteneur dans le même abonnement que l’application que vous souhaitez sauvegarder. Pour plus d’informations sur les comptes de stockage Azure, consultez [Vue d’ensemble des comptes de stockage Azure](../storage/common/storage-account-overview.md).
 * Les sauvegardes peuvent contenir jusqu’à 10 Go de contenu d’applications et de bases de données. Une erreur se produit si la taille de la sauvegarde dépasse cette limite.
 * La sauvegarde d’Azure Database pour MySQL avec TLS activé n’est pas prise en charge. Si une sauvegarde est configurée, celle-ci échoue.
 * La sauvegarde d’Azure Database pour PostgreSQL avec TLS activé n’est pas prise en charge. Si une sauvegarde est configurée, celle-ci échoue.
@@ -60,7 +60,7 @@ Les solutions de base de données suivantes sont prises en charge par la fonctio
     > [!NOTE]
     > Si le message suivant s’affiche, cliquez dessus pour mettre à niveau votre plan App Service avant de pouvoir poursuivre les sauvegardes.
     > Pour plus d’informations, consultez [Faire monter en puissance une application web dans Azure](manage-scale-up.md).
-    > ![Sélection d'un compte de stockage](./media/manage-backup/upgrade-plan.png)
+    > :::image type="content" source="./media/manage-backup/upgrade-plan.png" alt-text="Capture d’écran d’une bannière contenant un message relatif à la mise à niveau du plan App Service afin d’accéder à la fonctionnalité de sauvegarde et de restauration.":::
     > 
     > 
 
@@ -70,13 +70,13 @@ Les solutions de base de données suivantes sont prises en charge par la fonctio
 
 3. Dans la page **Configuration de la sauvegarde**, cliquez sur **Stockage non configuré** pour configurer un compte de stockage.
 
-    ![Sélection d'un compte de stockage](./media/manage-backup/configure-storage.png)
+    :::image type="content" source="./media/manage-backup/configure-storage.png" alt-text="Capture d’écran d’une bannière contenant un message relatif à la mise à niveau du plan App Service afin d’accéder à la fonctionnalité de sauvegarde et de restauration.":::
 
 4. Choisissez la destination de sauvegarde en sélectionnant un **Compte de stockage** et un **Conteneur**. Ce compte de stockage doit relever du même abonnement que l’application que vous souhaitez sauvegarder. Si vous le souhaitez, vous pouvez créer un compte de stockage ou un conteneur dans les pages respectives. Quand vous avez terminé, cliquez sur **Sélectionner**.
 
-5. Dans la page **Configuration de la sauvegarde** toujours ouverte, vous pouvez configurer **Base de données de sauvegarde**, sélectionner les bases de données que vous souhaitez inclure dans les sauvegardes (base de données SQL ou MySQL), puis cliquer sur **OK**.
+5. Dans la page **Configuration de la sauvegarde** toujours ouverte, vous pouvez configurer **Base de données de sauvegarde**, sélectionner les bases de données que vous souhaitez inclure dans les sauvegardes (SQL Database ou MySQL), puis cliquer sur **OK**.
 
-    ![Sélection d'un compte de stockage](./media/manage-backup/configure-database.png)
+    :::image type="content" source="./media/manage-backup/configure-database.png" alt-text="Capture d’écran d’une bannière contenant un message relatif à la mise à niveau du plan App Service afin d’accéder à la fonctionnalité de sauvegarde et de restauration.":::
 
     > [!NOTE]
     > Pour qu’une base de données apparaisse dans cette liste, sa chaîne de connexion doit figurer dans la section **Chaînes de connexion** de la page **Paramètres d’application** de votre application. 
@@ -92,7 +92,7 @@ Les solutions de base de données suivantes sont prises en charge par la fonctio
 
     Un message de progression s’affiche au cours du processus de sauvegarde.
 
-Une fois le compte de stockage et le conteneur configurés, vous pouvez lancer une sauvegarde manuelle à tout moment.
+Une fois le compte de stockage et le conteneur configurés, vous pouvez lancer une sauvegarde manuelle à tout moment. Les sauvegardes manuelles sont conservées indéfiniment.
 
 <a name="automatedbackups"></a>
 
@@ -141,7 +141,7 @@ Exécutez des sauvegardes comme vous le faites normalement, [manuellement](#crea
 > [!NOTE]
 > Pour restaurer les sauvegardes partielles de votre site, procédez de la même façon que pour [restaurer une sauvegarde régulière](web-sites-restore.md). Le processus de restauration fait ce qu’il faut.
 > 
-> Lorsqu'une sauvegarde complète est restaurée, tout le contenu sur le site est remplacé par tout ce qui se trouve dans la sauvegarde. Si un fichier se trouve sur le site, mais pas dans la sauvegarde, il est supprimé. Mais lorsqu'une sauvegarde partielle est restaurée, tout contenu qui se trouve dans l'un des répertoires exclus, ou n'importe quel fichier exclu, est conservé tel quel.
+> Lorsqu'une sauvegarde complète est restaurée, tout le contenu sur le site est remplacé par tout ce qui se trouve dans la sauvegarde. Si un fichier se trouve sur le site, mais pas dans la sauvegarde, il est supprimé. Mais lorsqu’une sauvegarde partielle est restaurée, tout contenu qui se trouve dans l’un des répertoires limités, ou n’importe quel fichier limité, est conservé tel quel.
 > 
 
 
@@ -150,7 +150,7 @@ Exécutez des sauvegardes comme vous le faites normalement, [manuellement](#crea
 ## <a name="how-backups-are-stored"></a>Mode de stockage des sauvegardes
 Dès que vous avez effectué une ou plusieurs sauvegardes de votre application, celles-ci apparaissent dans la page **Conteneurs** de votre compte de stockage et dans votre application. Dans le compte de stockage, chaque sauvegarde se compose d’un fichier `.zip` et d’un fichier `.xml` contenant respectivement les données sauvegardées et un manifeste du contenu du fichier `.zip`. Vous pouvez décompresser et parcourir ces fichiers si vous souhaitez accéder à vos sauvegardes sans réellement effectuer une restauration d'application.
 
-La sauvegarde de base de données pour l'application est stockée dans la racine du fichier .zip. Pour une base de données SQL, il s'agit d'un fichier BACPAC (pas d'extension de fichier) qui peut être importé. Pour créer une base de données SQL en fonction de l’exportation de BACPAC, consultez [Importer un fichier BACPAC pour créer une nouvelle base de données utilisateur](https://technet.microsoft.com/library/hh710052.aspx).
+La sauvegarde de base de données pour l'application est stockée dans la racine du fichier .zip. Pour SQL Database, il s’agit d’un fichier BACPAC (pas d’extension de fichier) qui peut être importé. Pour créer une base de données dans Azure SQL Database en fonction de l’exportation de BACPAC, consultez [Importer un fichier BACPAC pour créer une base de données dans Azure SQL Database](../azure-sql/database/database-import.md).
 
 > [!WARNING]
 > Toute modification apportée aux fichiers de votre conteneur **websitebackups** peut invalider la sauvegarde et la rendre impossible à restaurer.
@@ -159,7 +159,7 @@ La sauvegarde de base de données pour l'application est stockée dans la racine
 
 ## <a name="automate-with-scripts"></a>Automatiser des tâches à l’aide de scripts
 
-Vous pouvez automatiser la gestion des sauvegardes à l’aide de scripts, en utilisant [Azure CLI](/cli/azure/install-azure-cli) ou [Azure PowerShell](/powershell/azure/overview).
+Vous pouvez automatiser la gestion des sauvegardes à l’aide de scripts, en utilisant [Azure CLI](/cli/azure/install-azure-cli) ou [Azure PowerShell](/powershell/azure/).
 
 Pour obtenir des exemples, consultez :
 
@@ -169,4 +169,4 @@ Pour obtenir des exemples, consultez :
 <a name="nextsteps"></a>
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur la restauration d’une application à partir d’une sauvegarde, consultez [Restauration d’une application dans Azure](web-sites-restore.md). 
+Pour plus d’informations sur la restauration d’une application à partir d’une sauvegarde, consultez [Restauration d’une application dans Azure](web-sites-restore.md).

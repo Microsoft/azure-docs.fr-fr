@@ -1,19 +1,19 @@
 ---
 title: Réparation d’un travail d’exportation Azure Import/Export - v1 | Microsoft Docs
 description: Apprenez à réparer un travail d’exportation qui a été créé et exécuté à l’aide du service Azure Import/Export.
-author: twooley
+author: alkohli
 services: storage
 ms.service: storage
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2017
-ms.author: twooley
+ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: b2ba30bddfc6364c79e1bb01d30cde63b261a07f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 35738db5b7bd4a1ac7aaf94e2dc5f1d26a075cdf
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74978013"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92791832"
 ---
 # <a name="repairing-an-export-job"></a>Réparation d’un travail d’exportation
 Une fois qu’un travail d’exportation est terminé, vous pouvez exécuter l’outil Microsoft Azure Import/Export local pour :  
@@ -24,7 +24,7 @@ Une fois qu’un travail d’exportation est terminé, vous pouvez exécuter l�
   
 Vous devez disposer d’une connectivité au Stockage Azure pour utiliser cette fonctionnalité.  
   
-La commande de réparation d’un travail d’exportation est **RepairExport**.
+La commande de réparation d’un travail d’exportation est **RepairExport** .
 
 ## <a name="repairexport-parameters"></a>Paramètres de RepairExport
 
@@ -32,15 +32,15 @@ Les paramètres suivants peuvent être spécifiés pour **RepairExport** :
   
 |Paramètre|Description|  
 |---------------|-----------------|  
-|**/r:&lt;RepairFile\>**|Obligatoire. Chemin d’accès au fichier de réparation, qui suit la progression de la réparation et vous permet de reprendre une réparation interrompue. Chaque disque ne doit avoir qu’un fichier de réparation. Lorsque vous démarrez une réparation pour un lecteur donné, vous transmettez le chemin d’accès à un fichier de réparation qui n’existe pas encore. Pour reprendre une réparation interrompue, vous devez transmettre le nom d’un fichier de réparation existant. Le fichier de réparation correspondant au lecteur cible doit toujours être spécifié.|  
+|**/r:&lt;RepairFile\>**|Obligatoire. Chemin d’accès au fichier de réparation, qui suit la progression de la réparation et vous permet de reprendre une réparation interrompue. Chaque disque ne doit avoir qu’un fichier de réparation. Quand vous lancez la réparation d’un lecteur donné, vous transmettez le chemin à un fichier de réparation qui n’existe pas encore. Pour reprendre une réparation interrompue, vous devez transmettre le nom d’un fichier de réparation existant. Spécifiez toujours le fichier de réparation correspondant au lecteur cible.|  
 |**/logdir:&lt;LogDirectory\>**|facultatif. Répertoire du journal. Les fichiers journaux détaillés seront écrits dans ce répertoire. Si aucun répertoire de journaux n’est spécifié, le répertoire en cours est utilisé comme répertoire de journaux.|  
-|**/d:&lt;TargetDirectory\>**|Obligatoire. Répertoire pour valider et réparer. Il s’agit généralement du répertoire racine du lecteur d’exportation, mais cela peut également être un partage de fichiers réseau contenant une copie des fichiers exportés.|  
-|**/bk:&lt;BitLockerKey\>**|facultatif. Vous devez spécifier la clé BitLocker si vous souhaitez que l’outil déverrouille un lecteur chiffré dans lequel les fichiers d’origine sont disponibles.|  
+|**/d:&lt;TargetDirectory\>**|Obligatoire. Répertoire pour valider et réparer. Il s’agit généralement du répertoire racine du lecteur d’exportation, mais ce peut également être un partage de fichiers réseau contenant une copie des fichiers exportés.|  
+|**/bk:&lt;BitLockerKey\>**|facultatif. Spécifiez la clé BitLocker si vous souhaitez que l’outil déverrouille un lecteur chiffré dans lequel les fichiers d’origine sont stockés.|  
 |**/sn:&lt;StorageAccountName\>**|Obligatoire. Nom du compte de stockage du travail d’exportation.|  
 |**/sk:&lt;StorageAccountKey\>**|**Obligatoire** si et seulement si une SAP de conteneur n’est pas spécifiée. Clé du compte de stockage du travail d’exportation.|  
 |**/csas:&lt;ContainerSas\>**|**Obligatoire** si et seulement si la clé du compte de stockage n’est pas spécifiée. SAP de conteneur pour accéder aux objets blob associés au travail d’exportation.|  
-|**/CopyLogFile:&lt;DriveCopyLogFile\>**|Obligatoire. Chemin du fichier journal de copie du disque. Le fichier est généré par le service Windows Azure Import/Export et peut être téléchargé à partir du stockage blob associé au travail. Le fichier journal de copie contient des informations sur les objets blob en échec ou les fichiers qui doivent être réparés.|  
-|**/ManifestFile:&lt;DriveManifestFile\>**|facultatif. Chemin du fichier de manifeste du lecteur d’exportation. Ce fichier est généré par le service Windows Azure Import/Export et stocké sur le lecteur d’exportation et éventuellement dans un objet blob dans le compte de stockage associé au travail.<br /><br /> Le contenu des fichiers sur le lecteur d’exportation sera vérifié avec les hachages MD5 contenus dans ce fichier. Tous les fichiers qui sont considérés comme étant endommagés seront téléchargés et réécrits dans les répertoires cibles.|  
+|**/CopyLogFile:&lt;DriveCopyLogFile\>**|Obligatoire. Chemin du fichier journal de copie du disque. Le fichier est généré par le service Windows Azure Import/Export et peut être téléchargé à partir du stockage blob associé au travail. Le fichier journal de copie contient des informations sur les blob ou fichiers défectueux à réparer.|  
+|**/ManifestFile:&lt;DriveManifestFile\>**|facultatif. Chemin du fichier de manifeste du lecteur d’exportation. Ce fichier est généré par le service Windows Azure Import/Export et stocké sur le lecteur d’exportation. Éventuellement, dans un blob dans le compte de stockage associé au travail.<br /><br /> Le contenu des fichiers sur le lecteur d’exportation sera vérifié avec les hachages MD5 contenus dans ce fichier. Les fichiers endommagés sont téléchargés et réécrits dans les répertoires cibles.|  
   
 ## <a name="using-repairexport-mode-to-correct-failed-exports"></a>Utilisation du mode RepairExport pour corriger les échecs d’exportation  
 Vous pouvez utiliser l’outil Azure Import/Export pour télécharger les fichiers dont l’exportation a échoué. Le fichier journal de copie contient une liste des fichiers qui n’ont pas pu être exportés.  
@@ -51,13 +51,13 @@ Les causes d’échec d’exportation incluent les possibilités suivantes :
   
 -   Clé de compte de stockage modifiée pendant le processus de transfert  
   
-Pour exécuter l’outil en mode **RepairExport**, vous devez d’abord connecter le lecteur contenant les fichiers exportés à votre ordinateur. Ensuite, exécutez l’outil Azure Import/Export en spécifiant le chemin d’accès à ce lecteur avec le paramètre `/d`. Vous devez également spécifier le chemin d’accès au fichier journal de copie du lecteur que vous avez téléchargé. L’exemple de ligne de commande ci-dessous exécute l’outil pour réparer tous les fichiers qui n’ont pas pu être exportés :  
+Pour exécuter l’outil en mode **RepairExport** , vous devez d’abord connecter le lecteur contenant les fichiers exportés à votre ordinateur. Ensuite, exécutez l’outil Azure Import/Export en spécifiant le chemin d’accès à ce lecteur avec le paramètre `/d`. Vous devez également spécifier le chemin d’accès au fichier journal de copie du lecteur que vous avez téléchargé. L’exemple de ligne de commande ci-dessous exécute l’outil pour réparer tous les fichiers dont l’exportation a échoué :  
   
 ```  
 WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log  
 ```  
   
-Voici un exemple d’un fichier journal de copie qui montre qu’un bloc dans l’objet blob n’a pas pu être exporté :  
+L’exemple suivant est un fichier journal de copie qui montre que l’exportation d’un bloc dans le blob a échoué :  
   
 ```xml
 <?xml version="1.0" encoding="utf-8"?>  
@@ -81,7 +81,7 @@ Le fichier journal de copie indique qu’une défaillance s’est produite penda
 ## <a name="using-repairexport-to-validate-drive-contents"></a>Utilisation de RepairExport pour valider le contenu du lecteur  
 Vous pouvez également utiliser Azure Import/Export avec l’option **RepairExport** pour vérifier que le contenu sur le lecteur est correct. Le fichier manifeste sur chaque lecteur d’exportation contient des MD5 pour le contenu du lecteur.  
   
-Le service Azure Import/Export peut également enregistrer les fichiers manifeste sur un compte de stockage pendant le processus d’exportation. L’emplacement des fichiers manifeste est disponible via l’opération [Get Job](/rest/api/storageimportexport/jobs) une fois le travail terminé. Consultez la page [Format de fichier de manifeste du service d’importation/exportation](storage-import-export-file-format-metadata-and-properties.md) pour plus d’informations sur le format d’un fichier manifeste de lecteur.  
+Le service Azure Import/Export peut également enregistrer les fichiers manifeste sur un compte de stockage pendant le processus d’exportation. L’emplacement des fichiers manifeste est disponible via l’opération [Get Job](/rest/api/storageimportexport/jobs) une fois le travail terminé. Pour plus d’informations sur le format d’un fichier manifeste de lecteur, consultez [Format de fichier manifeste du service d’importation/exportation](/previous-versions/azure/storage/common/storage-import-export-file-format-metadata-and-properties).  
   
 L’exemple suivant montre comment exécuter l’outil Azure Import/Export avec les paramètres **/ManifestFile** et **/CopyLogFile** :  
   
@@ -89,7 +89,7 @@ L’exemple suivant montre comment exécuter l’outil Azure Import/Export avec 
 WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log /ManifestFile:G:\9WM35C3U.manifest  
 ```  
   
-Voici un exemple de fichier manifeste :  
+L’exemple suivant montre un fichier manifeste :  
   
 ```xml
 <?xml version="1.0" encoding="utf-8"?>  
@@ -153,7 +153,6 @@ Tout composant dont la vérification échoue sera téléchargé par l’outil et
 ## <a name="next-steps"></a>Étapes suivantes
  
 * [Configuration de l’outil Azure Import/Export](storage-import-export-tool-setup-v1.md)   
-* [Préparation des disques durs pour un travail d’importation](../storage-import-export-tool-preparing-hard-drives-import-v1.md)   
+* [Préparation des disques durs pour un travail d’importation](/previous-versions/azure/storage/common/storage-import-export-tool-preparing-hard-drives-import-v1)   
 * [Consultation de l’état du travail avec les fichiers journaux de copie](storage-import-export-tool-reviewing-job-status-v1.md)   
-* [Réparation d’un travail d’importation](storage-import-export-tool-repairing-an-import-job-v1.md)   
-* [Résolution des problèmes associés à l’outil Azure Import-Export](storage-import-export-tool-troubleshooting-v1.md)
+* [Réparation d’un travail d’importation](storage-import-export-tool-repairing-an-import-job-v1.md)

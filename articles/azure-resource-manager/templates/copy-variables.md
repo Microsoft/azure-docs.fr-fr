@@ -1,18 +1,18 @@
 ---
 title: Définir plusieurs instances d’une variable
-description: Utilisez l’opération copy dans un modèle Azure Resource Manager pour effectuer une itération à plusieurs reprises lors de la création d’une variable.
+description: Utilisez l’opération copy dans un modèle Azure Resource Manager (modèle ARM) pour effectuer une itération à plusieurs reprises lors de la création d’une variable.
 ms.topic: conceptual
 ms.date: 02/13/2020
-ms.openlocfilehash: 4fbe392e8a0fb477b6986fc9c7584291590eb4e7
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: b8acd85659b843cb482e1ccc61e28da03431db1b
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583375"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905891"
 ---
 # <a name="variable-iteration-in-arm-templates"></a>Itération de variable dans les modèles ARM
 
-Cet article explique comment créer plusieurs valeurs pour une variable dans votre modèle Azure Resource Manager (ARM). En ajoutant l’élément **copy** dans la section variables de votre modèle, vous pouvez définir dynamiquement le nombre d’éléments pour une variable pendant le déploiement. Cela vous évite également de répéter la syntaxe du modèle.
+Cet article explique comment créer plusieurs valeurs pour une variable dans votre modèle Azure Resource Manager (modèle ARM). En ajoutant l’élément `copy` dans la section variables de votre modèle, vous pouvez définir dynamiquement le nombre d’éléments pour une variable pendant le déploiement. Cela vous évite également de répéter la syntaxe du modèle.
 
 Vous pouvez également utiliser l’élément copy avec des [ressources](copy-resources.md), des [propriétés dans une ressource](copy-properties.md) et des [sorties](copy-outputs.md).
 
@@ -30,9 +30,9 @@ L’élément copy utilise le format général suivant :
 ]
 ```
 
-La propriété **name** est toute valeur qui identifie la boucle. La propriété **count** spécifie le nombre d’itérations que vous souhaitez pour la variable.
+La propriété `name` est toute valeur qui identifie la boucle. La propriété `count` spécifie le nombre d’itérations que vous souhaitez pour la variable.
 
-La propriété **input** spécifie les propriétés que vous souhaitez répéter. Vous créez un tableau d’éléments construits à partir de la valeur de la propriété **input**. Il peut s’agir d’une propriété unique (par exemple, une chaîne) ou d’un objet avec plusieurs propriétés.
+La propriété `input` spécifie les propriétés que vous souhaitez répéter. Vous créez un tableau d’éléments construits à partir de la valeur de la propriété `input`. Il peut s’agir d’une propriété unique (par exemple, une chaîne) ou d’un objet avec plusieurs propriétés.
 
 ## <a name="copy-limits"></a>Limites de copie
 
@@ -92,7 +92,7 @@ Le modèle précédent retourne un tableau avec les valeurs suivantes :
 ]
 ```
 
-L’exemple suivant montre comment créer un tableau d’objets avec trois propriétés : name, diskSizeGB et diskIndex.
+L’exemple suivant montre comment créer un tableau d’objets avec trois propriétés : `name`, `diskSizeGB` et `diskIndex`.
 
 ```json
 {
@@ -160,10 +160,10 @@ L’exemple précédent retourne un tableau avec les valeurs suivantes :
 ```
 
 > [!NOTE]
-> L’itération de variable prend en charge un argument de contrepartie. La contrepartie doit venir après le nom de l’itération, par exemple copyIndex('diskNames', 1). Si vous ne fournissez pas de valeur de contrepartie, la valeur par défaut est 0 pour la première instance.
+> L’itération de variable prend en charge un argument de contrepartie. L’argument offset doit venir après le nom de l’itération, par exemple `copyIndex('diskNames', 1)`. Si vous ne fournissez pas de valeur de contrepartie, la valeur par défaut est 0 pour la première instance.
 >
 
-Vous pouvez également utiliser l’élément copy dans une variable. L’exemple suivant crée un objet dont l’une des valeurs est un tableau.
+Vous pouvez également utiliser l’élément `copy` dans une variable. L’exemple suivant crée un objet dont l’une des valeurs est un tableau.
 
 ```json
 {
@@ -236,11 +236,11 @@ L’exemple précédent retourne un objet avec les valeurs suivantes :
 }
 ```
 
-L’exemple suivant montre les différentes façons d’utiliser copy avec des variables.
+L’exemple suivant montre les différentes façons d’utiliser `copy` avec des variables.
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {},
   "variables": {
@@ -321,11 +321,10 @@ Les exemples suivants illustrent des scénarios courants de création de plusieu
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressource à l’aide de modèles ARM](template-tutorial-create-multiple-instances.md).
+* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressources grâce à des modèles ARM](template-tutorial-create-multiple-instances.md).
 * Pour connaître les autres utilisations de l’élément copy, consultez :
   * [Itération de ressource dans les modèles ARM](copy-resources.md)
   * [Itération de propriété dans les modèles ARM](copy-properties.md)
   * [Itération de sortie dans les modèles ARM](copy-outputs.md)
-* Pour en savoir plus sur les sections d’un modèle, consultez [Création de modèles ARM](template-syntax.md).
-* Pour savoir comment déployer votre modèle, consultez [Déployer une application avec un modèle ARM](deploy-powershell.md).
-
+* Pour plus d’informations sur les différentes sections d’un modèle, consultez [Présentation de la structure et de la syntaxe des modèles ARM](template-syntax.md).
+* Pour savoir comment déployer votre modèle, consultez [Déployer des ressources avec des modèles ARM et Azure PowerShell](deploy-powershell.md).

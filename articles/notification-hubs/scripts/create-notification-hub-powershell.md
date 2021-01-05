@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/14/2020
 ms.author: dimazaid
-ms.openlocfilehash: 01749e1ae5c29a7e77b2143939e25cf1ccd1aec2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 857210efdc5740defcde4187b7b04cce55215325
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76263969"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87071612"
 ---
 # <a name="use-powershell-to-create-an-azure-notification-hub"></a>Utilisez PowerShell pour créer un hub de notification Azure.
 
@@ -57,4 +57,4 @@ Ce script utilise les commandes suivantes :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).

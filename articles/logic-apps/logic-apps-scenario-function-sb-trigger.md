@@ -1,21 +1,22 @@
 ---
 title: Appeler des applications logiques avec Azure Functions
-description: Créer des fonctions Azure qui appellent ou déclenchent des applications logiques en écoutant Azure Service Bus
+description: Appeler ou déclencher des applications logiques à l’aide d’Azure Functions et d’Azure Service Bus
 services: logic-apps
 ms.suite: integration
 ms.reviewer: jehollan, klam, logicappspm
 ms.topic: article
 ms.date: 11/08/2019
-ms.openlocfilehash: afd2735bae2a79ad942c347219019ef200b61070
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 25f761d85ebfd0ac16f182941c5b5c29636066bf
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75428703"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000332"
 ---
 # <a name="call-or-trigger-logic-apps-by-using-azure-functions-and-azure-service-bus"></a>Appeler ou déclencher des applications logiques à l’aide d’Azure Functions et d’Azure Service Bus
 
-Vous pouvez utiliser [Azure Functions](../azure-functions/functions-overview.md) afin de déclencher une application logique quand vous devez déployer un écouteur ou une tâche de longue durée. Par exemple, vous pouvez créer une fonction Azure qui écoute sur une file d’attente [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) et qui déclenche immédiatement une application logique en tant que déclencheur d’émission.
+Vous pouvez utiliser [Azure Functions](../azure-functions/functions-overview.md) afin de déclencher une application logique quand vous devez déployer un écouteur ou une tâche de longue durée. Par exemple, vous pouvez créer une fonction qui écoute sur une file d’attente [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) et qui déclenche immédiatement une application logique en tant que déclencheur d’émission.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -23,7 +24,7 @@ Vous pouvez utiliser [Azure Functions](../azure-functions/functions-overview.md)
 
 * Un espace de noms Azure Service Bus. Si vous n’avez pas d’espace de noms, [créez d’abord votre espace de noms](../service-bus-messaging/service-bus-create-namespace-portal.md).
 
-* Une application de fonction Azure, qui est un conteneur pour les fonctions Azure. Si vous n’avez pas d’application de fonction, [créez d’abord votre application de fonction](../azure-functions/functions-create-first-azure-function.md), puis veillez à sélectionner .NET comme pile d’exécution.
+* Une application de fonction Azure, qui est un conteneur pour vos fonctions. Si vous n’avez pas d’application de fonction, [créez d’abord votre application de fonction](../azure-functions/functions-create-first-azure-function.md), puis veillez à sélectionner .NET comme pile d’exécution.
 
 * Des connaissances de base en [création d’applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 
@@ -93,7 +94,7 @@ Pour ce scénario, vous disposez d’une fonction exécutant chaque application 
 
    ![URL de rappel générée pour le déclencheur](./media/logic-apps-scenario-function-sb-trigger/callback-URL-for-trigger.png)
 
-## <a name="create-azure-function"></a>Créer une fonction Azure
+## <a name="create-a-function"></a>Créer une fonction
 
 Maintenant, créez la fonction qui agit comme déclencheur et écoute la file d’attente.
 
@@ -119,11 +120,11 @@ Maintenant, créez la fonction qui agit comme déclencheur et écoute la file d�
 
    * Cet exemple utilise un type de contenu de message `application/json`, mais vous pouvez le modifier si nécessaire.
    
-   * En raison de la possibilité d’exécution simultanée de fonctions, de volumes élevés ou de charges lourdes, évitez d’instancier la [classe HTTPClient](https://docs.microsoft.com/dotnet/api/system.net.http.httpclient) avec l’instruction `using` et de créer directement des instances HTTPClient par requête. Pour plus d’informations, consultez [Utiliser HttpClientFactory pour implémenter des requêtes HTTP résilientes](https://docs.microsoft.com/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net-core).
+   * En raison de la possibilité d’exécution simultanée de fonctions, de volumes élevés ou de charges lourdes, évitez d’instancier la [classe HTTPClient](/dotnet/api/system.net.http.httpclient) avec l’instruction `using` et de créer directement des instances HTTPClient par requête. Pour plus d’informations, consultez [Utiliser HttpClientFactory pour implémenter des requêtes HTTP résilientes](/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net-core).
    
    * Si possible, réutilisez l’instance de clients HTTP. Pour plus d’informations, consultez la rubrique [Gérer les connexions dans Azure Functions](../azure-functions/manage-connections.md).
 
-   Cet exemple utilise la [méthode `Task.Run`](https://docs.microsoft.com/dotnet/api/system.threading.tasks.task.run) en mode [asynchrone](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/async). Pour plus d’informations, consultez l’article [Programmation asynchrone avec async et await](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/async/).
+   Cet exemple utilise la [méthode `Task.Run`](/dotnet/api/system.threading.tasks.task.run) en mode [asynchrone](/dotnet/csharp/language-reference/keywords/async). Pour plus d’informations, consultez l’article [Programmation asynchrone avec async et await](/dotnet/csharp/programming-guide/concepts/async/).
 
    ```csharp
    using System;

@@ -1,21 +1,21 @@
 ---
-title: Passer de Public De base vers Public Standard - Azure Load Balancer
+title: Passer du niveau tarifaire Interne De base à Public Standard – Azure Load Balancer
 description: Cet article explique comment passer d’Azure Basic Internal Load Balancer à Standard Public Load Balancer.
 services: load-balancer
 author: irenehua
 ms.service: load-balancer
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2020
 ms.author: irenehua
-ms.openlocfilehash: df7b8e6243bc45b5d5bdd8a9a72e81b0946454ff
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: d1c69f528328d5ff983c7de9d7fad052a7c41285
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858415"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009294"
 ---
 # <a name="upgrade-azure-internal-load-balancer---outbound-connection-required"></a>Mise à niveau d’Azure Internal Load Balancer avec connexion sortante nécessaire
-[Azure Standard Load Balancer](load-balancer-overview.md) offre un ensemble complet de fonctionnalités et une haute disponibilité avec la redondance de zone. Pour en savoir plus sur la référence SKU de Load Balancer, consultez le [tableau comparatif](https://docs.microsoft.com/azure/load-balancer/skus#skus). Comme Standard Internal Load Balancer ne fournit pas de connexion sortante, nous proposons à la place une solution permettant de créer un équilibreur de charge Standard Public Load Balancer.
+[Azure Standard Load Balancer](load-balancer-overview.md) offre un ensemble complet de fonctionnalités et une haute disponibilité avec la redondance de zone. Pour en savoir plus sur la référence SKU de Load Balancer, consultez le [tableau comparatif](./skus.md#skus). Comme Standard Internal Load Balancer ne fournit pas de connexion sortante, nous proposons à la place une solution permettant de créer un équilibreur de charge Standard Public Load Balancer.
 
 Une mise à niveau se compose de quatre phases :
 
@@ -109,16 +109,16 @@ Voici quelques scénarios illustrant la façon d’ajouter des machines virtuell
     >Pour les machines virtuelles avec des adresses IP publiques, vous devez d’abord créer des adresses IP standard là où la même adresse IP n’est pas garantie. Dissociez les machines virtuelles des adresses IP de base et associez-les aux adresses IP standard nouvellement créées. Vous êtes alors en mesure de suivre les instructions permettant d’ajouter des machines virtuelles au pool de back-ends de Standard Load Balancer. 
 
 * **Création de machines virtuelles à ajouter aux pools de back-ends de l’instance Standard Load Balancer publique nouvellement créée**.
-    * Des instructions supplémentaires sur la création d’une machine virtuelle et son association à Standard Load Balancer sont disponibles [ici](https://docs.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal#create-virtual-machines).
+    * Des instructions supplémentaires sur la création d’une machine virtuelle et son association à Standard Load Balancer sont disponibles [ici](./quickstart-load-balancer-standard-public-portal.md#create-virtual-machines).
 
 ### <a name="create-an-outbound-rule-for-outbound-connection"></a>Créer une règle de trafic sortant pour une connexion sortante
 
-Suivez les [instructions](https://docs.microsoft.com/azure/load-balancer/configure-load-balancer-outbound-portal#create-outbound-rule-configuration) pour créer une règle de trafic sortant afin de pouvoir
+Suivez les [instructions](./quickstart-load-balancer-standard-public-powershell.md#create-outbound-rule-configuration) pour créer une règle de trafic sortant afin de pouvoir
 * définir la NAT de trafic sortant à partir de zéro ;
 * mettre à l’échelle et adapter le comportement de la NAT de trafic sortant.
 
 ### <a name="create-nsg-rules-for-vms-which-to-refrain-communication-from-or-to-the-internet"></a>Création de règles NSG pour les machines virtuelles dont la communication à partir de/vers Internet doit être bloquée
-Si vous souhaitez éviter que le trafic Internet atteigne vos machines virtuelles, vous pouvez créer une [règle NSG](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group) sur leur interface réseau.
+Si vous souhaitez éviter que le trafic Internet atteigne vos machines virtuelles, vous pouvez créer une [règle NSG](../virtual-network/manage-network-security-group.md) sur leur interface réseau.
 
 ## <a name="common-questions"></a>Questions courantes
 

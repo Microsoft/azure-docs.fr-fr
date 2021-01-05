@@ -1,6 +1,6 @@
 ---
 title: Importer une collection Postman avec les opérations de streaming à la demande Azure
-description: Cet article fournit une définition de la collection Postman pour les appels REST Azure Media Services.
+description: Découvrez la collection Postman comprenant les requêtes HTTP groupées qui appellent les API REST Azure Media Services.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -13,14 +13,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 37fd131e570fa9f50df2479503b35407d67410cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 30a139ca0569a2ada4a66befbf7c56a9f8edaab9
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60637533"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656731"
 ---
-# <a name="import-a-postman-collection-with-on-demand-streaming-operations"></a>Importer une collection Postman avec les opérations de streaming à la demande 
+# <a name="import-a-postman-collection-with-on-demand-streaming-operations"></a>Importer une collection Postman avec les opérations de streaming à la demande
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article contient une définition de la collection **Postman** comprenant les requêtes HTTP groupées qui appellent les API REST Azure Media Services. Pour plus d’informations sur la configuration de **Postman** afin de pouvoir l’utiliser pour appeler l’API REST Media Services, consultez le didacticiel [Configurer Postman pour les appels d’API REST Media Services](media-rest-apis-with-postman.md).
 
@@ -178,7 +180,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 ]
                             }
                         }
-                    ],                  
+                    ],
                     "request": {
                         "auth": {
                             "type": "bearer",
@@ -844,7 +846,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Assets"
                             ]
                         },
-                        "description": "Create Assets\nThe Asset entity contains digital files (including video, audio, images, thumbnail collections, text tracks and closed caption files) and the metadata about these files. After the digital files are uploaded into an asset, they could be used in the Media Services encoding and streaming workflows.\n\n[Asset Entity REST API](https://msdn.microsoft.com/library/azure/hh974277.aspx)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Assets\nThe Asset entity contains digital files (including video, audio, images, thumbnail collections, text tracks and closed caption files) and the metadata about these files. After the digital files are uploaded into an asset, they could be used in the Media Services encoding and streaming workflows.\n\n[Asset Entity REST API](/rest/api/media/operations/asset)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2403,7 +2405,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "List Filters\n\n[List Filters documentation](https://docs.microsoft.com/rest/api/media/operations/filter#list_filters)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "List Filters\n\n[List Filters documentation](/rest/api/media/operations/filter#list_filters)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2473,7 +2475,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters('{{filterId}}')"
                             ]
                         },
-                        "description": "Delete Filters\n\n[Delete Filters documentation](https://docs.microsoft.com/rest/api/media/operations/filter#delete_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Delete Filters\n\n[Delete Filters documentation](/rest/api/media/operations/filter#delete_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2546,7 +2548,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "Create Filter\n\n[Create Filter documentation](https://docs.microsoft.com/rest/api/media/operations/filter#create_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Filter\n\n[Create Filter documentation](/rest/api/media/operations/filter#create_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2619,7 +2621,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "Create Filter\n\n[Create Filter documentation](https://docs.microsoft.com/rest/api/media/operations/filter#create_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Filter\n\n[Create Filter documentation](/rest/api/media/operations/filter#create_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 }
@@ -2695,7 +2697,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "List Filters\n\n[List Filters documentation](https://docs.microsoft.com/rest/api/media/operations/filter#list_filters)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "List Filters\n\n[List Filters documentation](/rest/api/media/operations/filter#list_filters)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2765,7 +2767,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters('{{filterId}}')"
                             ]
                         },
-                        "description": "Delete AssetFilter\n\n[Delete AssetFilter documentation](https://docs.microsoft.com/rest/api/media/operations/assetfilter#delete_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Delete AssetFilter\n\n[Delete AssetFilter documentation](/rest/api/media/operations/assetfilter#delete_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2838,7 +2840,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "Create AssetFilter\n\n[Create AssetFilter documentation](https://docs.microsoft.com/rest/api/media/operations/assetfilter#create_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create AssetFilter\n\n[Create AssetFilter documentation](/rest/api/media/operations/assetfilter#create_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -2911,7 +2913,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Filters"
                             ]
                         },
-                        "description": "Update AssetFilter\n\n[Update AssetFilter documentation](https://docs.microsoft.com/rest/api/media/operations/assetfilter#update_a_filter)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Update AssetFilter\n\n[Update AssetFilter documentation](/rest/api/media/operations/assetfilter#update_a_filter)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 }
@@ -3251,7 +3253,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                     "key": "access-control-expose-headers",
                                     "value": "request-id, x-ms-request-id",
                                     "name": "access-control-expose-headers",
-                                    "description": "Lets a server whitelist headers that browsers are allowed to access."
+                                    "description": "Lets a server allowlist headers that browsers are allowed to access."
                                 },
                                 {
                                     "key": "request-id",
@@ -3337,7 +3339,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Jobs"
                             ]
                         },
-                        "description": "Create Job\nA job is an entity that contains metadata about a set of tasks. Each task performs an atomic operation on the input asset(s). A job is typically used to process one audio/video presentation. If you are processing multiple videos, create a job for each video to be encoded. \n\n    NOTE: It is very important to use the JSON Verbose Accept header for the Job to submit properly. Set the Accept header to application/json;odata=verbose\n    \nThis sample creates a Job with a custom encoding profile.  For details see [Customizing Media Encoder Standard presets](https://docs.microsoft.com/azure/media-services/media-services-custom-mes-presets-with-dotnet)\nOr for JSON samples of our system presets, see the [Sample Presets page](https://docs.microsoft.com/azure/media-services/media-services-mes-presets-overview)\n\n[Job Entity REST API](https://msdn.microsoft.com/library/azure/hh974289.aspx)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Job\nA job is an entity that contains metadata about a set of tasks. Each task performs an atomic operation on the input asset(s). A job is typically used to process one audio/video presentation. If you are processing multiple videos, create a job for each video to be encoded. \n\n    NOTE: It is very important to use the JSON Verbose Accept header for the Job to submit properly. Set the Accept header to application/json;odata=verbose\n    \nThis sample creates a Job with a custom encoding profile.  For details see [Customizing Media Encoder Standard presets](./media-services-custom-mes-presets-with-dotnet.md)\nOr for JSON samples of our system presets, see the [Sample Presets page](./media-services-mes-presets-overview.md)\n\n[Job Entity REST API](/rest/api/media/operations/job)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": [
                         {
@@ -3454,7 +3456,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                     "key": "access-control-expose-headers",
                                     "value": "request-id, x-ms-request-id",
                                     "name": "access-control-expose-headers",
-                                    "description": "Lets a server whitelist headers that browsers are allowed to access."
+                                    "description": "Lets a server allowlist headers that browsers are allowed to access."
                                 },
                                 {
                                     "key": "request-id",
@@ -3540,7 +3542,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Jobs"
                             ]
                         },
-                        "description": "Create Indexer Job\n\nThis job submits a Speech Analytics job with custom configuration settings. \nNote that it uses the Media Processor ID for Indexer: \n\t\"MediaProcessorId\": \"nb:mpid:UUID:1927f26d-0aa5-4ca1-95a3-1a3f95b0f706\"\n\nAnd it uses a custom configuration JSON:\n\t \"Configuration\": \"{'Version':'1.0','Features':[{'Options':{'Formats':['WebVtt','TTML'],'Language':'EnUs','Type':'RecoOptions'},'Type':'SpReco'}]}\",\n\t \nFor details on configuring the settings of the speech analyzer, read the [Indexing Media Files](https://docs.microsoft.com/azure/media-services/media-services-process-content-with-indexer2) article\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Indexer Job\n\nThis job submits a Speech Analytics job with custom configuration settings. \nNote that it uses the Media Processor ID for Indexer: \n\t\"MediaProcessorId\": \"nb:mpid:UUID:1927f26d-0aa5-4ca1-95a3-1a3f95b0f706\"\n\nAnd it uses a custom configuration JSON:\n\t \"Configuration\": \"{'Version':'1.0','Features':[{'Options':{'Formats':['WebVtt','TTML'],'Language':'EnUs','Type':'RecoOptions'},'Type':'SpReco'}]}\",\n\t \nFor details on configuring the settings of the speech analyzer, read the [Indexing Media Files](./media-services-process-content-with-indexer2.md) article\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -3609,7 +3611,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Jobs"
                             ]
                         },
-                        "description": "This example submits a redaction job.\nFor details on configuration settings, refer to the [Redact faces with Azure Media Analytics](https://docs.microsoft.com/azure/media-services/media-services-face-redaction) article. \n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "This example submits a redaction job.\nFor details on configuration settings, refer to the [Redact faces with Azure Media Analytics](./media-services-face-redaction.md) article. \n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -4714,7 +4716,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Programs"
                             ]
                         },
-                        "description": "List Programs\n\n[List Programs documentation](https://docs.microsoft.com/rest/api/media/operations/program#list_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "List Programs\n\n[List Programs documentation](/rest/api/media/operations/program#list_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -4785,7 +4787,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Start"
                             ]
                         },
-                        "description": "Start Programs\n\n[Start a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#start_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Start Programs\n\n[Start a Program documentation](/rest/api/media/operations/program#start_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -4855,7 +4857,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Programs('{{programId}}')"
                             ]
                         },
-                        "description": "Delete Programs\n\n[Delete a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#delete_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Delete Programs\n\n[Delete a Program documentation](/rest/api/media/operations/program#delete_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -4928,7 +4930,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Programs('{{programId}}')"
                             ]
                         },
-                        "description": "Update Programs\n\n[Update a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#update_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Update Programs\n\n[Update a Program documentation](/rest/api/media/operations/program#update_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -4999,7 +5001,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Stop"
                             ]
                         },
-                        "description": "Strop Programs\n\n[Stop a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#stop_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Strop Programs\n\n[Stop a Program documentation](/rest/api/media/operations/program#stop_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5072,7 +5074,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Programs"
                             ]
                         },
-                        "description": "Create Program\n\n[Create Programs documentation](https://docs.microsoft.com/rest/api/media/operations/program#create_programs)\n\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Program\n\n[Create Programs documentation](/rest/api/media/operations/program#create_programs)\n\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 }
@@ -5148,7 +5150,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "StreamingEndpoints"
                             ]
                         },
-                        "description": "List StreamingEndpoints\n\n[List StreamingEndpoints documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#list_create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "List StreamingEndpoints\n\n[List StreamingEndpoints documentation](/rest/api/media/operations/streamingendpoint#list_create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5218,7 +5220,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "StreamingEndpoints('{{streamingEndpointId}}')"
                             ]
                         },
-                        "description": "List StreamingEndpoints\n\n[List StreamingEndpoints documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#list_create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "List StreamingEndpoints\n\n[List StreamingEndpoints documentation](/rest/api/media/operations/streamingendpoint#list_create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5289,7 +5291,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Start"
                             ]
                         },
-                        "description": "Start StreamingEndpoints\n\n[Start StreamingEndpoint documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#start_create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Start StreamingEndpoints\n\n[Start StreamingEndpoint documentation](/rest/api/media/operations/streamingendpoint#start_create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5360,7 +5362,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Start"
                             ]
                         },
-                        "description": "Start StreamingEndpoints\n\n[Stop StreamingEndpoint documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#stop_create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Start StreamingEndpoints\n\n[Stop StreamingEndpoint documentation](/rest/api/media/operations/streamingendpoint#stop_create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5434,7 +5436,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "Scale"
                             ]
                         },
-                        "description": "Scale StreamingEndpoints\n\n[Scale StreamingEndpoint documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#scale_create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Scale StreamingEndpoints\n\n[Scale StreamingEndpoint documentation](/rest/api/media/operations/streamingendpoint#scale_create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5507,7 +5509,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "StreamingEndpoints"
                             ]
                         },
-                        "description": "Create StreamingEndpoints\n\n[Create StreamingEndpoints documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#create_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create StreamingEndpoints\n\n[Create StreamingEndpoints documentation](/rest/api/media/operations/streamingendpoint#create_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -5580,7 +5582,7 @@ Cet article contient une définition de la collection **Postman** comprenant les
                                 "StreamingEndpoints"
                             ]
                         },
-                        "description": "Update StreamingEndpoints\n\n[Update StreamingEndpoints documentation](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint#update_streaming_endpoints)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Update StreamingEndpoints\n\n[Update StreamingEndpoints documentation](/rest/api/media/operations/streamingendpoint#update_streaming_endpoints)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 }
@@ -5589,3 +5591,4 @@ Cet article contient une définition de la collection **Postman** comprenant les
     ]
 }
 ```
+

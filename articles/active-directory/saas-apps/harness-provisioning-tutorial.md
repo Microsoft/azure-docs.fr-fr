@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Harness pour le provisionnement automatique des utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur Harness.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 0cdb970b-440b-4e7c-9118-2f03baab6a20
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/29/2019
 ms.author: Zhchia
-ms.openlocfilehash: 518d86fff04a23f1c1e63c44c53485b99f30637d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 13ae960f5d259314f00f8f09b2999a36c0919bc5
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057833"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94353711"
 ---
 # <a name="tutorial-configure-harness-for-automatic-user-provisioning"></a>Tutoriel : Configurer Harness pour le provisionnement automatique d’utilisateurs
 
@@ -37,7 +33,7 @@ Le scénario décrit dans cet article suppose que vous disposez des prérequis s
 
 * un locataire Azure AD ;
 * [Un locataire Harness](https://harness.io/pricing/)
-* Un compte d’utilisateur dans Harness avec des autorisations d’*administrateur*
+* Un compte d’utilisateur dans Harness avec des autorisations d’ *administrateur*
 
 ## <a name="assign-users-to-harness"></a>Attribuer des utilisateurs à Harness
 
@@ -94,7 +90,7 @@ Avant de configurer Harness pour l’attribution automatique d’utilisateurs av
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-1. Dans la zone de recherche, entrez **Harness**, sélectionnez **Harness** dans la liste des résultats, puis sélectionnez le bouton **Ajouter** pour ajouter l’application.
+1. Dans la zone de recherche, entrez **Harness** , sélectionnez **Harness** dans la liste des résultats, puis sélectionnez le bouton **Ajouter** pour ajouter l’application.
 
     ![Harness dans la liste des résultats](common/search-new-app.png)
 
@@ -103,7 +99,7 @@ Avant de configurer Harness pour l’attribution automatique d’utilisateurs av
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement Azure AD pour créer, mettre à jour et désactiver des utilisateurs ou des groupes dans Harness en fonction des affectations d’utilisateurs ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Harness en suivant les instructions fournies dans le [tutoriel sur l’authentification unique Harness](https://docs.microsoft.com/azure/active-directory/saas-apps/harness-tutorial). Vous pouvez configurer l’authentification unique indépendamment de l’attribution automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Harness en suivant les instructions fournies dans le [tutoriel sur l’authentification unique Harness](./harness-tutorial.md). Vous pouvez configurer l’authentification unique indépendamment de l’attribution automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
 
 > [!NOTE]
 > Pour en savoir plus sur le point de terminaison SCIM Harness, consultez l’article sur les [clés API](https://docs.harness.io/article/smloyragsm-api-keys) Harness.
@@ -122,47 +118,47 @@ Pour configurer l’attribution automatique d’utilisateurs pour Harness dans A
 
     ![Bouton Provisionnement](common/provisioning.png)
 
-1. Dans la liste déroulante **Mode d’approvisionnement**, sélectionnez **Automatique**.
+1. Dans la liste déroulante **Mode d’approvisionnement** , sélectionnez **Automatique**.
 
     ![Liste déroulante « Mode de provisionnement »](common/provisioning-automatic.png)
 
-1. Sous **Informations d’identification de l’administrateur**, procédez comme suit :
+1. Sous **Informations d’identification de l’administrateur** , procédez comme suit :
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
  
-   a. Dans la zone **URL de locataire**, entrez **`https://app.harness.io/gateway/api/scim/account/XCPzWkCIQ46ypIu2DeT7yw`** .  
-   b. Dans la zone **Jeton secret**, entrez la valeur du jeton d’authentification SCIM que vous avez enregistré à l’étape 6 de la section « Configurer Harness pour le provisionnement ».  
-   c. Sélectionnez **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Harness. Si la connexion échoue, vérifiez que votre compte Harness dispose d’autorisations d’*administrateur*, puis réessayez.
+   a. Dans la zone **URL de locataire** , entrez **`https://app.harness.io/gateway/api/scim/account/<your_harness_account_ID>`** . Vous pouvez obtenir votre ID de compte Harness à partir de l’URL dans votre navigateur lorsque vous êtes connecté à Harness.
+   b. Dans la zone **Jeton secret** , entrez la valeur du jeton d’authentification SCIM que vous avez enregistré à l’étape 6 de la section « Configurer Harness pour le provisionnement ».  
+   c. Sélectionnez **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Harness. Si la connexion échoue, vérifiez que votre compte Harness dispose d’autorisations d’ *administrateur* , puis réessayez.
 
-1. Dans la zone **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur de provisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+1. Dans la zone **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur de provisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![Zone « E-mail de notification »](common/provisioning-notification-email.png)
 
 1. Sélectionnez **Enregistrer**.
 
-1. Sous **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Harness**.
+1. Sous **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Harness**.
 
     ![Lien Harness « Synchroniser les utilisateurs Azure Active Directory avec Harness »](media/harness-provisioning-tutorial/usermappings.png)
 
-1. Sous **Mappages d’attributs**, passez en revue les attributs utilisateur synchronisés entre Azure AD et Harness. Les attributs sélectionnés en tant que *Correspondance* sont utilisés pour faire correspondre les comptes d’utilisateurs dans Harness pour les opérations de mise à jour. Sélectionnez **Enregistrer** pour valider les modifications.
+1. Sous **Mappages d’attributs** , passez en revue les attributs utilisateur synchronisés entre Azure AD et Harness. Les attributs sélectionnés en tant que *Correspondance* sont utilisés pour faire correspondre les comptes d’utilisateurs dans Harness pour les opérations de mise à jour. Sélectionnez **Enregistrer** pour valider les modifications.
 
     ![Volet « Mappages d’attributs » des utilisateurs Harness](media/harness-provisioning-tutorial/userattributes.png)
 
-1. Sous **Mappages**, sélectionnez **Synchroniser les groupes Azure Active Directory avec Harness**.
+1. Sous **Mappages** , sélectionnez **Synchroniser les groupes Azure Active Directory avec Harness**.
 
     ![Lien Harness « Synchroniser les groupes Azure Active Directory avec Harness »](media/harness-provisioning-tutorial/groupmappings.png)
 
-1. Sous **Mappages d’attributs**, passez en revue les attributs de groupe synchronisés entre Azure AD et Harness. Les attributs sélectionnés comme propriétés de *Correspondance* sont utilisés pour la mise en correspondre des groupes dans Harness dans le cadre des opérations de mise à jour. Sélectionnez **Enregistrer** pour valider les modifications.
+1. Sous **Mappages d’attributs** , passez en revue les attributs de groupe synchronisés entre Azure AD et Harness. Les attributs sélectionnés comme propriétés de *Correspondance* sont utilisés pour la mise en correspondre des groupes dans Harness dans le cadre des opérations de mise à jour. Sélectionnez **Enregistrer** pour valider les modifications.
 
     ![Volet « Mappages d’attributs » des groupes Harness](media/harness-provisioning-tutorial/groupattributes.png)
 
 1. Pour configurer des filtres d’étendue, consultez [Provisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 
-1. Sous **Paramètres**, pour activer le service de provisionnement Azure AD pour Harness, basculez le commutateur **État du provisionnement** sur **Activé**.
+1. Sous **Paramètres** , pour activer le service de provisionnement Azure AD pour Harness, basculez le commutateur **État du provisionnement** sur **Activé**.
 
     ![Commutateur d’état du provisionnement basculé sur « Activé »](common/provisioning-toggle-on.png)
 
-1. Sous **Paramètres**, dans la liste déroulante **Étendue**, sélectionnez la façon dont vous voulez synchroniser les utilisateurs ou groupes que vous provisionnez dans Harness.
+1. Sous **Paramètres** , dans la liste déroulante **Étendue** , sélectionnez la façon dont vous voulez synchroniser les utilisateurs ou groupes que vous provisionnez dans Harness.
 
     ![Étendue de l’approvisionnement](common/provisioning-scope.png)
 

@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur la façon de mettre à niv
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 3903ccd1c15765d06cd1794a40567e2c70062538
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f20302a4993da1754255254ce6d69c000750d4ab
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73795901"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84806778"
 ---
 # <a name="how-to-upgrade-application-gateway-ingress-controller-using-helm"></a>Comment mettre à niveau le contrôleur d’entrée d’Application Gateway à l’aide de Helm 
 

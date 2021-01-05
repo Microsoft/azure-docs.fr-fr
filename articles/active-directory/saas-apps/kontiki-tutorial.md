@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec Kontiki | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Kontiki.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 8d5e5413-da4c-40d8-b1d0-f03ecfef030b
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/14/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: bfb154bce34b2ceda99b82c7ca3534b8a8ee0a1f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 9e0b438e0cfa729300099463086248780c69484c
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67098502"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019838"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-kontiki"></a>Didacticiel : Intégration d’Azure Active Directory à Kontiki
 
@@ -33,7 +28,7 @@ L’intégration de Kontiki à Azure AD vous offre les avantages suivants :
 * Les utilisateurs peuvent être automatiquement connectés à Kontiki avec leur compte Azure AD (par le biais de l'authentification unique).
 * Vous pouvez centraliser la gestion de vos comptes à un seul emplacement : le Portail Azure.
 
-Pour plus d’informations sur l’intégration d’applications software as a service (SaaS) à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour plus d’informations sur l’intégration d’applications software as a service (SaaS) à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -109,7 +104,7 @@ Dans cette section, vous allez configurer l’authentification unique Azure AD a
     ![Informations d’authentification unique dans Domaine et URL Kontiki](common/sp-signonurl.png)
 
     > [!NOTE]
-    > Pour obtenir la valeur à utiliser, contactez l’[équipe du support technique de Kontiki](https://customersupport.kontiki.com/enterprise/contactsupport.html). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Pour obtenir la valeur à utiliser, contactez l’[équipe du support technique de Kontiki](https://kollective.com/support/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 1. Dans le volet **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, sélectionnez **Télécharger** en regard de **XML de métadonnées de fédération**. Sélectionnez une option de téléchargement en fonction de vos exigences. Enregistrez le certificat sur votre ordinateur.
 
@@ -125,7 +120,7 @@ Dans cette section, vous allez configurer l’authentification unique Azure AD a
 
 ### <a name="configure-kontiki-single-sign-on"></a>Configurer l’authentification unique Kontiki
 
-Pour configurer l’authentification unique côté Kontiki, envoyez le fichier XML des métadonnées de fédération téléchargé et les URL appropriées copiées dans le portail Azure à l’[équipe du support technique Kontiki](https://customersupport.kontiki.com/enterprise/contactsupport.html). L’équipe du support technique Kontiki utilise les informations que vous lui envoyez pour vérifier que la connexion SAML à authentification unique est correctement configurée des deux côtés.
+Pour configurer l’authentification unique côté Kontiki, envoyez le fichier XML des métadonnées de fédération téléchargé et les URL appropriées copiées dans le portail Azure à l’[équipe du support technique Kontiki](https://kollective.com/support/). L’équipe du support technique Kontiki utilise les informations que vous lui envoyez pour vérifier que la connexion SAML à authentification unique est correctement configurée des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
 
@@ -143,7 +138,7 @@ Dans cette section, créez un utilisateur de test nommé Britta Simon dans le po
 
     1. Dans la zone **Nom**, entrez **BrittaSimon**.
   
-    1. Dans la zone **Nom d’utilisateur**, entrez **brittasimon\@\<votre_domaine_d’entreprise>.\<extension>** . Par exemple, **brittasimon\@contoso.com**.
+    1. Dans la zone **Nom d’utilisateur**, entrez **brittasimon\@\<your-company-domain>.\<extension>** . Par exemple, **brittasimon\@contoso.com**.
 
     1. Cochez la case **Afficher le mot de passe**. Notez la valeur affichée dans la zone **Mot de passe**.
 
@@ -191,6 +186,6 @@ Après avoir configuré l’authentification unique, lorsque vous sélectionnez 
 
 Pour en savoir plus, consultez les articles suivants :
 
-- [Listes des tutoriels pour intégrer des applications SaaS à Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
-- [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Listes des tutoriels pour intégrer des applications SaaS à Azure Active Directory](./tutorial-list.md)
+- [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](../manage-apps/what-is-single-sign-on.md)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

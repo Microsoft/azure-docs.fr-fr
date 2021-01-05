@@ -1,12 +1,12 @@
-- name: Documentation du stockage de table Azure
-  href: /azure/storage/
+- name: Documentation Stockage Table Azure
+  href: ./index.yml
 - name: Vue d’ensemble
   expanded: true
   items:
     - name: Vue d’ensemble du stockage de table Azure
       href: table-storage-overview.md
     - name: Choisissez Stockage de tables ou API de table
-      href: /azure/cosmos-db/table-support
+      href: ../../cosmos-db/table-support.md
       maintainContext: true
 - name: Démarrages rapides
   items:
@@ -15,31 +15,31 @@
 - name: Exemples
   items:
     - name: .NET
-      href: /azure/cosmos-db/table-storage-how-to-use-dotnet
+      href: ../../cosmos-db/tutorial-develop-table-dotnet.md
       maintainContext: true
-    - name: 'F#'
-      href: 'https://docs.microsoft.com/dotnet/articles/fsharp/using-fsharp-on-azure/table-storage'
+    - name: F#
+      href: /dotnet/articles/fsharp/using-fsharp-on-azure/table-storage
       maintainContext: true
     - name: Java
-      href: /azure/cosmos-db/table-storage-how-to-use-java
+      href: ../../cosmos-db/table-storage-how-to-use-java.md
       maintainContext: true
     - name: Node.js
-      href: /azure/cosmos-db/table-storage-how-to-use-nodejs
+      href: ../../cosmos-db/table-storage-how-to-use-nodejs.md
       maintainContext: true
     - name: C++
-      href: /azure/cosmos-db/table-storage-how-to-use-c-plus
+      href: ../../cosmos-db/table-storage-how-to-use-c-plus.md
       maintainContext: true
     - name: PHP
-      href: /azure/cosmos-db/table-storage-how-to-use-php
+      href: ../../cosmos-db/table-storage-how-to-use-php.md
       maintainContext: true
     - name: Python
-      href: /azure/cosmos-db/table-storage-how-to-use-python
+      href: ../../cosmos-db/table-storage-how-to-use-python.md
       maintainContext: true
     - name: Ruby
-      href: /azure/cosmos-db/table-storage-how-to-use-ruby
+      href: ../../cosmos-db/table-storage-how-to-use-ruby.md
       maintainContext: true
     - name: PowerShell
-      href: /azure/storage/tables/table-storage-how-to-use-powershell
+      href: ./table-storage-how-to-use-powershell.md
       maintainContext: true
 - name: Concepts
   items:
@@ -47,13 +47,16 @@
       href: ../common/storage-account-overview.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: Sécurité
       items:
-        - name: Base de référence de la sécurité
-          href: ../common/security-baseline.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
         - name: Chiffrement du Stockage Azure au repos
           href: ../common/storage-service-encryption.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
           items:
-            - name: Clés gérées par le client avec Azure Key Vault
-              href: ../common/encryption-customer-managed-keys.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+            - name: Chiffrement avec des clés gérées par le client
+              href: ../common/customer-managed-keys-overview.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ../common/security-controls-policy.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+        - name: Base de référence de la sécurité
+          href: ../common/security-baseline.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: Redondance des données
       href: ../common/storage-redundancy.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: Reprise d’activité après sinistre et basculement
@@ -76,6 +79,8 @@
       href: table-storage-design-modeling.md
     - name: Modèles de conception de table
       href: table-storage-design-patterns.md
+    - name: Supervision du stockage Table
+      href: monitor-table-storage.md
 - name: Procédures
   items:
     - name: Créez un compte de stockage.
@@ -84,8 +89,10 @@
       maintainContext: true
     - name: Mettre à niveau un compte de stockage
       href: ../common/storage-account-upgrade.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+    - name: récupérer un compte de stockage supprimé
+      href: ../common/storage-account-recover.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: Utiliser l’émulateur de stockage
-      href: /azure/storage/common/storage-use-emulator?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+      href: ../common/storage-use-emulator.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
       maintainContext: true
     - name: Sécuriser les données de table
       items:
@@ -101,16 +108,16 @@
           items:
             - name: Créer un compte qui prend en charge les clés gérées par le client
               href: ../common/account-encryption-key-create.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
-            - name: Configurer les clés gérées par le client
+            - name: Configurer le chiffrement avec les clés gérées par le client
               items:
-                - name: Portail
-                  href: ../common/storage-encryption-keys-portal.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
-                - name: PowerShell
-                  href: ../common/storage-encryption-keys-powershell.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
-                - name: Azure CLI
-                  href: ../common/storage-encryption-keys-cli.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+                - name: Stocker les clés gérées par le client dans un coffre de clés
+                  href: ../common/customer-managed-keys-configure-key-vault.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+                - name: Stocker les clés gérées par le client dans un HSM managé
+                  href: ../common/customer-managed-keys-configure-key-vault-hsm.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
             - name: Vérifier le modèle de clé de chiffrement du compte
               href: ../common/storage-encryption-key-model-get.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+            - name: Activer le chiffrement de l’infrastructure pour le compte
+              href: ../common/infrastructure-encryption-enable.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
         - name: Configurer le chiffrement côté client
           items:
             - name: .NET
@@ -125,8 +132,14 @@
               href: ../common/storage-network-security.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
             - name: Exiger un transfert sécurisé
               href: ../common/storage-require-secure-transfer.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
-            - name: Activer TLS (Transport Layer Security)
-              href: ../common/storage-security-tls.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+            - name: Gérer TLS (Transport Layer Security)
+              items:
+                - name: Appliquer la version TLS minimale pour les demandes entrantes
+                  href: ../common/transport-layer-security-configure-minimum-version.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+                - name: Configurer la version TLS pour une application cliente
+                  href: ../common/transport-layer-security-configure-client-version.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+        - name: Configurer Azure Defender pour la protection contre les menaces
+          href: ../common/azure-defender-storage-configure.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: Gérer la redondance des données
       items:
         - name: Changer le mode de réplication des données
@@ -142,15 +155,29 @@
     - name: Transfert de données
       items:
         - name: AzCopy sur Windows (v8)
-          href: 'https://docs.microsoft.com/previous-versions/azure/storage/storage-use-azcopy'
+          href: /previous-versions/azure/storage/storage-use-azcopy
         - name: AzCopy sur Linux (v8)
-          href: 'https://docs.microsoft.com/previous-versions/azure/storage/storage-use-azcopy-linux'
+          href: /previous-versions/azure/storage/storage-use-azcopy-linux
     - name: Dépanner
       items:
         - name: Problèmes de latence
           href: ../common/troubleshoot-latency-storage-analytics-logs.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
+- name: Ressources
+  items:
+    - name: Mises à jour Azure
+      href: 'https://azure.microsoft.com/updates/?product=storage'
+    - name: Stockage Table sur Microsoft Q&A
+      href: /answers/topics/azure-table-storage.html
+    - name: Stockage Table sur Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-table-storage'
+    - name: Prix du stockage Table
+      href: 'https://azure.microsoft.com/en-us/pricing/details/storage/tables/'
+    - name: Calculatrice de prix Azure
+      href: 'https://azure.microsoft.com/pricing/calculator/'
 - name: Informations de référence
   items:
+    - name: Informations de référence sur la supervision du stockage Table Azure
+      href: monitor-table-storage-reference.md
     - name: Cibles de performance et d’évolutivité
       items:
         - name: Stockage de tables
@@ -160,5 +187,5 @@
         - name: Fournisseur de ressources de stockage
           href: ../common/scalability-targets-resource-provider.md?toc=%2fazure%2fstorage%2ftables%2ftoc.json
     - name: API REST du Stockage de table
-      href: 'https://docs.microsoft.com/rest/api/storageservices/table-service-rest-api'
+      href: /rest/api/storageservices/table-service-rest-api
       maintainContext: true

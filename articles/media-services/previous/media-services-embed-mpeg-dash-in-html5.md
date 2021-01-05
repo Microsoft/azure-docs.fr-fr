@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 6c1df14ba5a9f233f42750d4e6dea68a7d6ddc0e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 55c22a58ea76c268c40894c0ea64d43312b1ba27
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77564854"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89269091"
 ---
-# <a name="embedding-an-mpeg-dash-adaptive-streaming-video-in-an-html5-application-with-dashjs"></a>Incorporation d’une vidéo de diffusion en continu adaptative MPEG-DASH dans une application HTML5 avec DASH.js  
+# <a name="embedding-an-mpeg-dash-adaptive-streaming-video-in-an-html5-application-with-dashjs"></a>Incorporation d’une vidéo de diffusion en continu adaptative MPEG-DASH dans une application HTML5 avec DASH.js
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)] 
 
 ## <a name="overview"></a>Vue d’ensemble
 MPEG-DASH est une norme ISO pour la diffusion en continu adaptative de contenu vidéo, qui offre des avantages significatifs pour les développeurs qui souhaitent proposer un résultat de diffusion vidéo en continu adaptative de haute qualité. Avec MPEG-DASH, le flux vidéo s’ajuste automatiquement à une définition inférieure quand le réseau est encombré. Cela réduit le risque pour un utilisateur de voir une vidéo « interrompue » pendant que le lecteur télécharge les quelques secondes suivantes à lire (c’est-à-dire qu’il réduit la probabilité d’une mise en mémoire tampon). À mesure que l’encombrement du réseau diminue, le lecteur vidéo renvoie à son tour un flux de qualité supérieure. Cette capacité d'adaptation de la bande passante requise entraîne également un temps de départ plus rapide pour la vidéo. Cela signifie que les premières secondes peuvent être lues dans un segment de moindre qualité rapide à télécharger, puis que la qualité s'améliore une fois le contenu suffisant mis en mémoire tampon.

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/28/2019
 ms.author: kaushika
-ms.openlocfilehash: dddf402455292e19bf0fcda3c50d9ce10d5888d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d6532747c50311ada4df6a0038bd0e05f4d9ce31
+ms.sourcegitcommit: 30505c01d43ef71dac08138a960903c2b53f2499
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71099054"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92089687"
 ---
 # <a name="configure-and-validate-virtual-network-or-vpn-connections"></a>Configurer et valider des connexions de réseaux virtuels ou de VPN
 
@@ -38,7 +38,7 @@ La connexion d'un réseau virtuel à un autre réseau virtuel (réseau à résea
 
 ![Connexion VPN réseau à réseau avec IPsec](./media/virtual-network-configure-vnet-connections/4034386_en_2.png)
  
-Si vos réseaux virtuels se trouvent dans la même région, vous pouvez envisager de les connecter à l'aide de l'appairage de réseaux virtuels. L'appairage de réseaux virtuels n'utilise pas de passerelle VPN. Il augmente le débit et diminue la latence. Pour configurer une connexion d'appairage de réseaux virtuels, sélectionnez **Configurer et valider l'appairage de réseaux virtuels**.
+Si vos réseaux virtuels se trouvent dans la même région, vous pouvez envisager de les connecter à l'aide de l'appairage de réseaux virtuels. L'appairage de réseaux virtuels n'utilise pas de passerelle VPN. Il augmente le débit et diminue la latence. Pour configurer une connexion d'appairage de réseaux virtuels, sélectionnez **Configurer et valider l'appairage de réseaux virtuels** .
 
 Si vos réseaux virtuels ont été créés à l'aide du modèle de déploiement Azure Resource Manager, sélectionnez **Configurer et valider un réseau virtuel Resource Manager sur une connexion de réseau virtuel Resource Manager** pour configurer une connexion VPN.
 
@@ -57,9 +57,9 @@ Si vous remplissez les conditions requises, vous pouvez suivre le [Didacticiel 
 Pour vérifier la configuration de l'appairage, utilisez la méthode suivante :
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/) à l'aide d'un compte doté des [rôles et autorisations](virtual-network-manage-peering.md#permissions) nécessaires.
-2. Dans la boîte de dialogue contenant le texte **Rechercher des ressources** en haut du portail Azure, tapez **réseaux virtuels**. Quand la mention **Réseaux virtuels** apparaît dans les résultats de recherche, sélectionnez-la.
+2. Dans la boîte de dialogue contenant le texte **Rechercher des ressources** en haut du portail Azure, tapez **réseaux virtuels** . Quand la mention **Réseaux virtuels** apparaît dans les résultats de recherche, sélectionnez-la.
 3. Dans le panneau **Réseaux virtuels** qui s'affiche, sélectionnez le réseau virtuel pour lequel vous souhaitez créer un appairage.
-4. Dans le volet qui s'affiche pour le réseau virtuel, accédez à la section **Paramètres** et sélectionnez **Appairages**.
+4. Dans le volet qui s'affiche pour le réseau virtuel, accédez à la section **Paramètres** et sélectionnez **Appairages** .
 5. Sélectionnez un appairage et consultez les résultats de la configuration.
 
 ![Sélections pour vérifier la configuration d'un appairage de réseaux virtuels](./media/virtual-network-configure-vnet-connections/4034496_en_1.png)
@@ -122,7 +122,7 @@ Vous pouvez établir une connexion entre des réseaux virtuels associés à des 
 
 Pour configurer une connexion entre un réseau virtuel classique et un réseau virtuel Resource Manager, consultez [Connecter des réseaux virtuels à partir de différents modèles de déploiement à l'aide du portail Azure](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-connect-different-deployment-models-portal).
 
-![Connexion d'un réseau virtuel classique à un réseau virtuel Azure Resource Manager](./media/virtual-network-configure-vnet-connections/4034389_en_2.png)
+![Diagramme représentant une connexion de réseau virtuel classique à un réseau virtuel Azure Resource Manager.](./media/virtual-network-configure-vnet-connections/4034389_en_2.png)
 
 Pour vérifier la configuration lors de la connexion d'un réseau virtuel classique à un réseau virtuel Azure Resource Manager, suivez les instructions ci-dessous.
 
@@ -140,7 +140,7 @@ Pour vérifier la configuration lors de la connexion d'un réseau virtuel classi
 
 ## <a name="create-a-point-to-site-vpn-connection"></a>Créer une connexion VPN point à site
 
-Une configuration point à site (*P2S* dans le diagramme suivant) vous permet de connecter de manière sécurisée un ordinateur client individuel à un réseau virtuel. Les connexions point à site vous permettent de vous connecter à votre réseau virtuel à partir d'un emplacement distant, par exemple depuis votre domicile ou une salle de conférence. Elles sont également utiles lorsque seuls quelques clients doivent se connecter à un réseau virtuel. 
+Une configuration point à site ( *P2S* dans le diagramme suivant) vous permet de connecter de manière sécurisée un ordinateur client individuel à un réseau virtuel. Les connexions point à site vous permettent de vous connecter à votre réseau virtuel à partir d'un emplacement distant, par exemple depuis votre domicile ou une salle de conférence. Elles sont également utiles lorsque seuls quelques clients doivent se connecter à un réseau virtuel. 
 
 La connexion VPN point à site est initiée à partir de l'ordinateur client à l'aide du client VPN Windows natif. Les clients qui se connectent utilisent des certificats pour l’authentification.
 
@@ -158,7 +158,7 @@ L'article [Dépannage : problèmes de connexion point à site Azure](https://do
 
 ## <a name="create-a-multisite-vpn-connection"></a>Créer une connexion VPN multisite
 
-Vous pouvez ajouter une connexion site à site (*S2S* dans le diagramme suivant) à un réseau virtuel qui dispose déjà d'une connexion site à site, d'une connexion point à site ou d'une connexion réseau à réseau. Ce type de connexion est souvent appelé configuration *multisite*. 
+Vous pouvez ajouter une connexion site à site ( *S2S* dans le diagramme suivant) à un réseau virtuel qui dispose déjà d'une connexion site à site, d'une connexion point à site ou d'une connexion réseau à réseau. Ce type de connexion est souvent appelé configuration *multisite* . 
 
 ![Connexion multisite](./media/virtual-network-configure-vnet-connections/4034497_en_2.png)
 
@@ -182,7 +182,7 @@ Ce scénario est pris en charge lorsque le protocole BGP est activé sur le VPN 
 
 ### <a name="configure-transit-routing-in-an-expressroute-connection"></a>Configurer un itinéraire de transit dans une connexion ExpressRoute
 
-Azure ExpressRoute vous permet d’étendre vos réseaux locaux au cloud de Microsoft par le biais d’une connexion privée dédiée assurée par un fournisseur de connectivité. Grâce à ExpressRoute, vous pouvez établir des connexions aux services de cloud computing Microsoft, comme Microsoft Azure, Office 365 et Dynamics 365. Pour plus d’informations, voir [Appairage ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction).
+Azure ExpressRoute vous permet d’étendre vos réseaux locaux au cloud de Microsoft par le biais d’une connexion privée dédiée assurée par un fournisseur de connectivité. Avec ExpressRoute, vous pouvez établir des connexions aux services de cloud computing Microsoft, par exemple Microsoft Azure, Microsoft 365 et Dynamics 365. Pour plus d’informations, voir [Appairage ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction).
 
 ![Connexion d'un appairage privé ExpressRoute à des réseaux virtuels Azure](./media/virtual-network-configure-vnet-connections/4034395_en_1.png)
 
@@ -200,7 +200,7 @@ Pour savoir si vous avez configuré un itinéraire de transit pour l'appairage d
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/) à l'aide d'un compte doté des [rôles et autorisations](virtual-network-manage-peering.md#permissions) nécessaires.
 2. [Créez un appairage entre VNetA et VNetB](https://docs.microsoft.com/azure/virtual-network/virtual-network-create-peering), comme indiqué dans le diagramme précédent. 
-3. Dans le volet qui s'affiche pour le réseau virtuel, accédez à la section **Paramètres** et sélectionnez **Appairages**.
+3. Dans le volet qui s'affiche pour le réseau virtuel, accédez à la section **Paramètres** et sélectionnez **Appairages** .
 4. Sélectionnez l'appairage que vous souhaitez afficher. Puis sélectionnez **Configuration** pour confirmer que vous avez activé l'option **Autoriser le transit par passerelle** sur le réseau virtuel VNetA connecté au circuit ExpressRoute et l'option **Utiliser la passerelle distante** sur le réseau virtuel VNetB distant non connecté au circuit ExpressRoute.
 
 ### <a name="configure-transit-routing-in-a-virtual-network-peering-connection"></a>Configurer un itinéraire de transit dans le cadre d'une connexion d'appairage de réseaux virtuels
@@ -213,10 +213,10 @@ Lorsque des réseaux virtuels sont homologués, vous pouvez également configure
 Pour savoir si vous avez configuré un itinéraire de transit pour l'appairage de réseaux virtuels, suivez les instructions ci-dessous :
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/) à l'aide d'un compte doté des [rôles et autorisations](virtual-network-manage-peering.md#permissions) nécessaires.
-2. Dans la boîte de dialogue contenant le texte **Rechercher des ressources** en haut du portail Azure, tapez **réseaux virtuels**. Quand la mention **Réseaux virtuels** apparaît dans les résultats de recherche, sélectionnez-la.
+2. Dans la boîte de dialogue contenant le texte **Rechercher des ressources** en haut du portail Azure, tapez **réseaux virtuels** . Quand la mention **Réseaux virtuels** apparaît dans les résultats de recherche, sélectionnez-la.
 3. Dans le panneau **Réseaux virtuels** qui s'affiche, sélectionnez le réseau virtuel pour lequel vous souhaitez vérifier le paramètre d'appairage.
-4. Dans le volet qui s'affiche pour le réseau virtuel que vous avez sélectionné, accédez à la section **Paramètres** et sélectionnez **Appairages**.
-5. Sélectionnez l'appairage que vous souhaitez afficher. Vérifiez que vous avez activé les options **Autoriser le transit par passerelle** et **Utiliser la passerelle distante** sous **Configuration**.
+4. Dans le volet qui s'affiche pour le réseau virtuel que vous avez sélectionné, accédez à la section **Paramètres** et sélectionnez **Appairages** .
+5. Sélectionnez l'appairage que vous souhaitez afficher. Vérifiez que vous avez activé les options **Autoriser le transit par passerelle** et **Utiliser la passerelle distante** sous **Configuration** .
 
 ![Sélections pour vérifier que vous avez configuré un itinéraire de transit pour l'appairage de réseaux virtuels](./media/virtual-network-configure-vnet-connections/4035414_en_1.png)
 
@@ -248,7 +248,7 @@ Le protocole BGP assure également le routage de transit entre plusieurs réseau
 
 Pour configurer une connexion VPN utilisant le protocole BGP, consultez [Configurer le protocole BGP sur des passerelles VPN Azure à l'aide de PowerShell](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-bgp-resource-manager-ps).
 
-Activez le protocole BGP sur la passerelle de réseau virtuel en créant un numéro de système autonome. Les passerelles de base ne prennent pas en charge le protocole BGP. Pour vérifier la référence SKU de la passerelle, accédez à la section **Vue d'ensemble** du panneau **Passerelle VPN** dans le portail Azure. Si vous disposez d'une référence SKU **De base**, vous devez la remplacer (voir [Redimensionner la passerelle](https://docs.microsoft.com/powershell/module/azurerm.network/resize-azurermvirtualnetworkgateway?view=azurermps-4.1.0&viewFallbackFrom=azurermps-4.0.0)) par **VpnGw1**. 
+Activez le protocole BGP sur la passerelle de réseau virtuel en créant un numéro de système autonome. Les passerelles de base ne prennent pas en charge le protocole BGP. Pour vérifier la référence SKU de la passerelle, accédez à la section **Vue d'ensemble** du panneau **Passerelle VPN** dans le portail Azure. Si vous disposez d'une référence SKU **De base** , vous devez la remplacer (voir [Redimensionner la passerelle](https://docs.microsoft.com/powershell/module/azurerm.network/resize-azurermvirtualnetworkgateway?view=azurermps-4.1.0&viewFallbackFrom=azurermps-4.0.0)) par **VpnGw1** . 
 
 La vérification de la référence SKU peut entraîner un temps d'arrêt de 20 à 30 minutes. Dès que la passerelle dispose de la référence SKU qui convient, vous pouvez ajouter le numéro de système autonome via la cmdlet PowerShell [Set-AzureRmVirtualNetworkGateway](https://docs.microsoft.com/powershell/module/azurerm.network/set-azurermvirtualnetworkgateway?view=azurermps-3.8.0). Une fois le numéro AS configuré, une adresse IP de pair BGP pour la passerelle est fournie automatiquement.
 
@@ -277,15 +277,15 @@ Pour savoir si le protocole BGP est correctement configuré, vous pouvez exécut
 Les principales différences entre les passerelles en modes actif/actif et actif/passif sont les suivantes :
 
 * Vous devez créer deux configurations IP de passerelle avec deux adresses IP publiques.
-* Vous devez définir l'indicateur **EnableActiveActiveFeature**.
-* La référence SKU de la passerelle doit être **VpnGw1**, **VpnGw2** ou **VpnGw3**.
+* Vous devez définir l'indicateur **EnableActiveActiveFeature** .
+* La référence SKU de la passerelle doit être **VpnGw1** , **VpnGw2** ou **VpnGw3** .
 
 Pour obtenir une haute disponibilité des connexions intersites et réseau à réseau, vous devez déployer plusieurs passerelles VPN, et établir différentes connexions parallèles entre vos réseaux et Azure. Pour une vue d'ensemble des options de connectivité et de topologie, consultez [Configuration haute disponibilité pour la connectivité intersites et réseau à réseau](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-highlyavailable).
 
 Pour créer des connexions intersites et réseau à réseau en mode actif/actif, suivez les instructions de la section [Configurer des connexions VPN S2S en mode actif/actif avec des passerelles VPN Azure](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-activeactive-rm-powershell) afin de configurer une passerelle VPN Azure en mode actif/actif.
 
 > [!Note]  
-> * Lorsque vous ajoutez des adresses à la passerelle de réseau local pour le mode actif/actif activé pour le protocole BGP, *ajoutez uniquement les adresses /32 des pairs BGP*. Si vous ajoutez des autres adresses, celles-ci sont considérées comme des itinéraires statiques et ont priorité sur les itinéraires BGP.
+> * Lorsque vous ajoutez des adresses à la passerelle de réseau local pour le mode actif/actif activé pour le protocole BGP, *ajoutez uniquement les adresses /32 des pairs BGP* . Si vous ajoutez des autres adresses, celles-ci sont considérées comme des itinéraires statiques et ont priorité sur les itinéraires BGP.
 > * Vous devez utiliser des numéros de système autonome BGP différents pour les réseaux locaux qui se connectent à Azure. (En cas de numéros de système autonome identiques, vous devez modifier celui de votre réseau virtuel si votre périphérique VPN local l'utilise déjà pour s'appairer à des voisins BGP.)
 
 ## <a name="change-an-azure-vpn-gateway-type-after-deployment"></a>Modifier un type de passerelle VPN Azure après le déploiement

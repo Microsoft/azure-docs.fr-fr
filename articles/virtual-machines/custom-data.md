@@ -4,23 +4,21 @@ description: Détails sur l’utilisation de données personnalisées et de Clou
 services: virtual-machines
 author: mimckitt
 ms.service: virtual-machines
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/06/2020
 ms.author: mimckitt
-ms.openlocfilehash: 9497e665d024b583c261ade3e6fb5393a9322ce0
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 2924caaac5fb8c512100d9e897f7f153af9a3b3e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759136"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87284912"
 ---
 # <a name="custom-data-and-cloud-init-on-azure-virtual-machines"></a>Données personnalisées et Cloud-init sur les machines virtuelles Azure
 
-## <a name="what-is-custom-data"></a>Que sont les données personnalisées ?
+Vous devrez peut-être injecter un script ou d’autres métadonnées dans une machine virtuelle Microsoft Azure au moment du provisionnement.  Dans d’autres clouds, ce concept est souvent appelé données utilisateur.  Dans Microsoft Azure, nous disposons d’une fonctionnalité similaire appelée données personnalisées. 
 
-Les clients demandent souvent comment injecter un script ou d’autres métadonnées dans une machine virtuelle Microsoft Azure au moment de la configuration.  Dans d’autres clouds, ce concept est souvent appelé données utilisateur.  Dans Microsoft Azure, nous disposons d’une fonctionnalité similaire appelée données personnalisées. 
-
-Les données personnalisées sont uniquement accessibles à la machine virtuelle lors du premier démarrage ou de l’installation initiale ; nous appelons cela la « configuration ». La configuration est le processus au cours duquel les paramètres de création de la machine virtuelle (par exemple, le nom d’hôte, le nom d’utilisateur, le mot de passe, les certificats, les données personnalisées, les clés, etc.) sont mis à la disposition de la machine virtuelle et un agent de configuration les traite, par exemple l’agent [Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-linux) ou [Cloud-init](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init#troubleshooting-cloud-init). 
+Les données personnalisées sont uniquement accessibles à la machine virtuelle lors du premier démarrage ou de l’installation initiale ; nous appelons cela la « configuration ». La configuration est le processus au cours duquel les paramètres de création de la machine virtuelle (par exemple, le nom d’hôte, le nom d’utilisateur, le mot de passe, les certificats, les données personnalisées, les clés, etc.) sont mis à la disposition de la machine virtuelle et un agent de configuration les traite, par exemple l’agent [Linux](./extensions/agent-linux.md) ou [Cloud-init](./linux/using-cloud-init.md#troubleshooting-cloud-init). 
 
 
 ## <a name="passing-custom-data-to-the-vm"></a>Transmission de données personnalisées à la machine virtuelle
@@ -36,7 +34,7 @@ az vm create \
   --generate-ssh-keys
 ```
 
-Dans Azure Resource Manager (ARM), il existe une fonction [base64](https://docs.microsoft.com/azure/azure-resource-manager/templates/template-functions-string#base64).
+Dans Azure Resource Manager (ARM), il existe une fonction [base64](../azure-resource-manager/templates/template-functions-string.md#base64).
 
 ```json
 "name": "[parameters('virtualMachineName')]",
@@ -76,21 +74,21 @@ Lorsque vous activez des données personnalisées et que vous exécutez un scrip
 
 Pour résoudre les problèmes d’exécution de données personnalisées, consultez */var/log/waagent.log*
 
-* Cloud-ini : traite les données personnalisées par défaut. Cloud-init accepte [plusieurs formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html) de données personnalisées, dont la configuration Cloud-init, les scripts, etc. Similaire à l’agent Linux, lorsque Cloud-init traite les données personnalisées. Si des erreurs se produisent pendant l’exécution du traitement de la configuration ou des scripts, cela n’est pas considéré comme un échec d’approvisionnement irrécupérable et vous devrez créer un chemin de notification pour vous avertir de l’état d’achèvement du script. Toutefois, dans le cas de l’agent Linux, Cloud-init n’attend pas la fin des configurations de données personnalisées de l’utilisateur avant de signaler à la plateforme que la machine virtuelle est prête. Pour plus d’informations sur Cloud-init sur Azure, consultez la [documentation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init).
+* Cloud-ini : traite les données personnalisées par défaut. Cloud-init accepte [plusieurs formats](https://cloudinit.readthedocs.io/en/latest/topics/format.html) de données personnalisées, dont la configuration Cloud-init, les scripts, etc. Similaire à l’agent Linux, lorsque Cloud-init traite les données personnalisées. Si des erreurs se produisent pendant l’exécution du traitement de la configuration ou des scripts, cela n’est pas considéré comme un échec d’approvisionnement irrécupérable et vous devrez créer un chemin de notification pour vous avertir de l’état d’achèvement du script. Toutefois, dans le cas de l’agent Linux, Cloud-init n’attend pas la fin des configurations de données personnalisées de l’utilisateur avant de signaler à la plateforme que la machine virtuelle est prête. Pour plus d’informations sur Cloud-init sur Azure, consultez la [documentation](./linux/using-cloud-init.md).
 
 
-Pour résoudre les problèmes liés à l’exécution de données personnalisées, consultez la [documentation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init#troubleshooting-cloud-init) relative à la résolution des problèmes.
+Pour résoudre les problèmes liés à l’exécution de données personnalisées, consultez la [documentation](./linux/using-cloud-init.md#troubleshooting-cloud-init) relative à la résolution des problèmes.
 
 
 ## <a name="faq"></a>Questions fréquentes (FAQ)
 ### <a name="can-i-update-custom-data-after-the-vm-has-been-created"></a>Puis-je mettre à jour les données personnalisées après la création de la machine virtuelle ?
-Pour les machines virtuelles uniques, les données personnalisées dans le modèle de machine virtuelle ne peuvent pas être mises à jour, mais pour les VMSS, vous pouvez mettre à jour les données personnalisées des VMSS via l’API REST (non applicable pour les clients PS ou AZ CLI). Quand vous mettez à jour des données personnalisées dans le modèle de VMSS :
+Pour les machines virtuelles uniques, les données personnalisées dans le modèle de machine virtuelle ne peuvent pas être mises à jour, mais pour les VMSS, vous pouvez mettre à jour les données personnalisées des VMSS via l’[REST API](/rest/api/compute/virtualmachinescalesets/update) (non applicable pour les clients PS ou AZ CLI). Quand vous mettez à jour des données personnalisées dans le modèle de VMSS :
 * Les instances existantes dans le VMSS n’obtiendront pas les données personnalisées mises à jour, uniquement jusqu’à ce qu’elles soient réinitialisées.
 * Les instances existantes dans les VMSS qui sont mises à niveau n’obtiendront pas les données personnalisées mises à jour.
 * Les nouvelles instances recevront les nouvelles données personnalisées.
 
 ### <a name="can-i-place-sensitive-values-in-custom-data"></a>Puis-je placer des valeurs sensibles dans les données personnalisées ?
-Nous vous conseillons de ne **pas** stocker des données sensibles dans les données personnalisées. Pour plus d’informations, consultez les [Meilleures pratiques pour la sécurité et le chiffrement Azure](https://docs.microsoft.com/azure/security/fundamentals/data-encryption-best-practices).
+Nous vous conseillons de ne **pas** stocker des données sensibles dans les données personnalisées. Pour plus d’informations, consultez les [Meilleures pratiques pour la sécurité et le chiffrement Azure](../security/fundamentals/data-encryption-best-practices.md).
 
 
 ### <a name="is-custom-data-made-available-in-imds"></a>Les données personnalisées sont-elles rendues disponibles dans IMDS ?

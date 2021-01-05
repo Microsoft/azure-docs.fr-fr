@@ -1,5 +1,5 @@
 ---
-title: 'Synchronisation d’Azure AD Connect : Modifier la configuration dans la synchronisation Azure AD Connect'
+title: 'Synchronisation d’Azure AD Connect : modifier la configuration par défaut'
 description: Cet article vous guide dans les changements de configuration d’Azure AD Connect Sync.
 services: active-directory
 author: billmath
@@ -7,17 +7,17 @@ manager: daveba
 ms.assetid: 7b9df836-e8a5-4228-97da-2faec9238b31
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/30/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d77882817934d5ad98f16965aeb9dc246931c495
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2044653673da10de59d5ff125da44ac1f89e22f9
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230141"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96861848"
 ---
 # <a name="azure-ad-connect-sync-make-a-change-to-the-default-configuration"></a>Synchronisation d’Azure AD Connect : modifier la configuration par défaut
 L’objectif de cet article est d’expliquer comment apporter des modifications à la configuration par défaut dans la synchronisation Azure Active Directory (Azure AD) Connect. Elle explique pas à pas la procédure pour les scénarios courants. À la fin, vous serez capable d’apporter des modifications simples à votre configuration en fonction de vos propres règles d’entreprise.
@@ -113,7 +113,7 @@ Si tout fonctionne comme prévu, vous pouvez réactiver le planificateur. À par
 Dans la section précédente, nous avons vu comment apporter des modifications à un flux d’attributs. Dans cette section, vous trouverez d’autres exemples. Les étapes de création de la règle de synchronisation ont été condensées, mais vous trouverez la procédure complète dans la section précédente.
 
 ### <a name="use-an-attribute-other-than-the-default"></a>Utiliser un attribut autre que l’attribut par défaut
-Dans ce scénario Fabrikam, il existe une forêt où l’alphabet local est utilisé pour le prénom, le nom de famille et le nom complet. La représentation sous forme de caractères latins de ces attributs est stockée dans les attributs d’extension. Pour créer la liste globale des adresses dans Azure AD et Office 365, l’organisation souhaite utiliser ces attributs.
+Dans ce scénario Fabrikam, il existe une forêt où l’alphabet local est utilisé pour le prénom, le nom de famille et le nom complet. La représentation sous forme de caractères latins de ces attributs est stockée dans les attributs d’extension. Pour créer la liste globale des adresses dans Azure AD et Microsoft 365, l’organisation souhaite utiliser ces attributs.
 
 Avec une configuration par défaut, un objet de la forêt locale ressemble à ceci :  
 ![Flux d’attributs 1](./media/how-to-connect-sync-change-the-configuration/attributeflowjp1.png)
@@ -122,7 +122,7 @@ Pour créer une règle avec d’autres flux d’attributs, procédez comme suit�
 
 1. Ouvrez **l’Éditeur de règles de synchronisation** dans le menu **Démarrer**.
 2. En maintenant l’option **Entrant** sélectionnée sur la gauche, cliquez sur le bouton **Ajouter une nouvelle règle**.
-3. Attribuez à la règle un nom et une description. Sélectionnez l’instance Active Directory locale et les types d’objets souhaités. Dans **Type de lien**, sélectionnez **Jointure**. Pour**Précédence**, choisissez un nombre qui n’est pas utilisé par une autre règle. Les règles par défaut commencent à 100, donc, il est possible d’utiliser la valeur 50 dans cet exemple.
+3. Attribuez à la règle un nom et une description. Sélectionnez l’instance Active Directory locale et les types d’objets souhaités. Dans **Type de lien**, sélectionnez **Jointure**. Pour **Précédence**, choisissez un nombre qui n’est pas utilisé par une autre règle. Les règles par défaut commencent à 100, donc, il est possible d’utiliser la valeur 50 dans cet exemple.
   ![Flux d’attributs 2](./media/how-to-connect-sync-change-the-configuration/attributeflowjp2.png)
 4. Laissez le champ **Filtre d’étendue** vide. (Elle doit s’appliquer à tous les objets utilisateurs de la forêt.)
 5. Laissez le champ **Règles de jointure** vide. (C’est la règle prête à l’emploi qui gèrera toutes les jointures.)
@@ -200,7 +200,7 @@ Par défaut, l’attribut UserType n’est pas activé pour la synchronisation, 
 
 - Azure AD accepte seulement deux valeurs pour l’attribut UserType : **Membre** et **Invité**.
 - Si la synchronisation de l’attribut UserType n’est pas activée dans Azure AD Connect, il est défini sur **Membre** pour les utilisateurs Azure AD créés via la synchronisation d’annuaires.
-- Azure AD n’autorise pas la modification par Azure AD Connect de l’attribut UserType sur les utilisateurs Azure AD existants. Il peut uniquement être défini lors de la création des utilisateurs Azure AD et [changé par le biais de PowerShell](/powershell/module/azuread/set-azureaduser?view=azureadps-2.0).
+- Avant la version 1.5.30.0, Azure AD n’autorisait pas la modification par Azure AD Connect de l’attribut UserType sur les utilisateurs Azure AD existants. Dans les versions antérieures, il pouvait uniquement être défini lors de la création des utilisateurs Azure AD, et [changé par le biais de PowerShell](/powershell/module/azuread/set-azureaduser).
 
 Avant d’activer la synchronisation de l’attribut UserType, vous devez déterminer comment il sera dérivé d’Active Directory en local. Voici les approches les plus courantes :
 
@@ -210,7 +210,7 @@ Avant d’activer la synchronisation de l’attribut UserType, vous devez déter
 
 - Vous avez également la possibilité de dériver la valeur de l’attribut UserType à partir d’autres propriétés. Par exemple, vous voulez synchroniser tous les utilisateurs en tant **qu’Invités** si leur attribut userPrincipalName AD local se termine par l’élément de domaine <em>@partners.fabrikam123.org</em>. 
 
-    Comme nous l’avons précisé, Azure AD Connect ne peut pas modifier l’attribut UserType sur des utilisateurs Azure AD existants. Par conséquent, vous devez vous assurer que la logique que vous avez choisie est cohérente avec la manière dont l’attribut UserType est déjà configuré pour tous les utilisateurs Azure AD existants dans votre client.
+    Comme nous l’avons précisé, les versions antérieures d’Azure AD Connect ne peuvent pas modifier l’attribut UserType sur des utilisateurs Azure AD existants. Par conséquent, vous devez vous assurer que la logique que vous avez choisie est cohérente avec la manière dont l’attribut UserType est déjà configuré pour tous les utilisateurs Azure AD existants dans votre client.
 
 Les étapes d’activation de la synchronisation de l’attribut UserType peuvent se résumer comme suit :
 
@@ -243,7 +243,7 @@ Certains attributs Azure AD ne sont pas importés dans l’espace connecteur AD 
  5. Cliquez sur **OK** pour enregistrer.
 ![Ajouter l’attribut source au schéma du connecteur AD local](./media/how-to-connect-sync-change-the-configuration/usertype1.png)
 
-### <a name="step-3-add-the-usertype-to-the-azure-ad-connector-schema"></a>Étape 3 : Ajouter UserType au schéma du Connecteur Azure AD
+### <a name="step-3-add-the-usertype-attribute-to-the-azure-ad-connector-schema"></a>Étape 3 : Ajouter un attribut UserType au schéma du Connecteur Azure AD
 Par défaut, l’attribut UserType n’est pas importé dans l’espace Azure AD Connect. Pour ajouter l’attribut UserType à la liste des attributs importés :
 
  1. Accédez à l’onglet **Connecteurs** dans Synchronization Service Manager.
@@ -340,7 +340,7 @@ Vous pouvez procéder comme suit pour vérifier les modifications tandis que vou
 
 1. Exécutez une **Importation intégrale** sur le **Connecteur AD local** :
 
-   1. Accédez à l’onglet **Opérations** dans Synchronization Service Manager.
+   1. Accédez à l’onglet **Connecteurs** dans Synchronization Service Manager.
    2. Cliquez avec le bouton droit sur le **Connecteur AD local**, puis sélectionnez **Exécuter**.
    3. Dans la boîte de dialogue contextuelle, sélectionnez **Importation intégrale**, puis cliquez sur **OK**.
    4. Attendez que l'opération se termine.

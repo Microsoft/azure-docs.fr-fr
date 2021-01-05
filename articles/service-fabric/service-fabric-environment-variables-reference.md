@@ -1,16 +1,14 @@
 ---
 title: Variables d’environnement d’Azure Service Fabric
 description: Découvrir les variables d’environnement dans Azure Service Fabric. Contient une référence à une liste complète de variables et à leurs utilisations.
-author: mikkelhegn
 ms.topic: reference
 ms.date: 12/07/2017
-ms.author: mikhegn
-ms.openlocfilehash: b13522b1d9f2acd2aa3f7923c1b623fab696056d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b70249daa439b5a631b5a84b10c47f082ce75985
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645682"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574579"
 ---
 # <a name="service-fabric-environment-variables"></a>Variables d’environnement de Service Fabric
 

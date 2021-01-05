@@ -4,15 +4,15 @@ description: Dans ce parcours d’apprentissage, commencez à protéger des zone
 services: dns
 author: asudbring
 ms.service: dns
-ms.topic: article
+ms.topic: how-to
 ms.date: 2/20/2020
 ms.author: allensu
-ms.openlocfilehash: 89a945f146601084795b2e12a721a03a1b96aaea
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8163fcb3b349e298bc89f06523e3e784bdc4ed49
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371475"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965666"
 ---
 # <a name="how-to-protect-dns-zones-and-records"></a>Comment protéger les enregistrements et zones DNS
 
@@ -20,11 +20,11 @@ ms.locfileid: "79371475"
 
 Les enregistrements et zones DNS sont des ressources critiques. La suppression d’une zone DNS ou d’un enregistrement DNS peut entraîner une interruption de service. Il est important que les zones et les enregistrements DNS soient protégés contre toute modification non autorisée ou accidentelle.
 
-Cet article explique comment Azure DNS permet de protéger vos enregistrements et zones DNS contre de telles modifications.  Nous appliquons deux puissantes fonctionnalités de sécurité d’Azure Resource Manager : le [contrôle d’accès en fonction du rôle (RBAC)](../role-based-access-control/overview.md) et les [verrous de ressources](../azure-resource-manager/management/lock-resources.md).
+Cet article explique comment Azure DNS permet de protéger vos enregistrements et zones DNS contre de telles modifications.  Nous appliquons deux puissantes fonctionnalités de sécurité d’Azure Resource Manager : le [contrôle d’accès en fonction du rôle Azure (RBAC)](../role-based-access-control/overview.md) et les [verrous de ressources](../azure-resource-manager/management/lock-resources.md).
 
-## <a name="role-based-access-control"></a>Contrôle d’accès en fonction du rôle
+## <a name="azure-role-based-access-control"></a>Contrôle d'accès en fonction du rôle Azure
 
-Le contrôle d’accès en fonction du rôle (RBAC) Azure permet une gestion précise de l’accès pour les clients, groupes et ressources Azure. Avec le rôle RBAC, vous pouvez accorder le niveau d’accès dont les utilisateurs ont besoin. Pour plus d’informations sur la gestion des droits d’accès avec RBAC, voir [Qu’est-ce que le contrôle d’accès en fonction du rôle (RBAC)](../role-based-access-control/overview.md).
+Le contrôle d’accès en fonction du rôle Azure (Azure RBAC) permet une gestion des accès affinée pour les utilisateurs, les groupes et les ressources Azure. Avec Azure RBAC, vous pouvez accorder le niveau d’accès dont les utilisateurs ont besoin. Pour plus d’informations sur la gestion des droits d’accès avec le contrôle Azure RBAC, voir [Qu’est-ce que le contrôle d’accès en fonction du rôle Azure (Azure RBAC) ?](../role-based-access-control/overview.md).
 
 ### <a name="the-dns-zone-contributor-role"></a>Rôle Contributeur de zone DNS
 
@@ -32,11 +32,11 @@ Le rôle Collaborateur de zone DNS est un rôle intégré fourni par Azure pour
 
 Le groupe de ressources *myResourceGroup* contient cinq zones pour Contoso Corporation. L’octroi des autorisations Contributeur de zone DNS pour ce groupe de ressources à l’administrateur DNS lui donne un contrôle total sur ces zones DNS. De cette façon, il n’accorde pas d’autorisations non nécessaires. L’administrateur DNS ne peut pas créer ni arrêter des machines virtuelles.
 
-La façon la plus simple d’attribuer des autorisations RBAC consiste à utiliser [le portail Azure](../role-based-access-control/role-assignments-portal.md).  
+La façon la plus simple d’attribuer des autorisations Azure RBAC consiste à utiliser [le portail Azure](../role-based-access-control/role-assignments-portal.md).  
 
 Ouvrez **Contrôle d’accès (IAM)** pour le groupe de ressources, sélectionnez **Ajouter**, puis sélectionnez le rôle **Collaborateur de zone DNS**. Sélectionnez les utilisateurs ou les groupes auxquels accorder des autorisations.
 
-![RBAC au niveau groupe de ressources via le portail Azure](./media/dns-protect-zones-recordsets/rbac1.png)
+![Azure RBAC au niveau groupe de ressources via le portail Azure](./media/dns-protect-zones-recordsets/rbac1.png)
 
 Vous pouvez également [accorder des autorisations à l’aide d’Azure PowerShell](../role-based-access-control/role-assignments-powershell.md) :
 
@@ -61,15 +61,15 @@ az role assignment create \
 --resource-group "<resource group name>"
 ```
 
-### <a name="zone-level-rbac"></a>RBAC au niveau zone
+### <a name="zone-level-azure-rbac"></a>Azure RBAC au niveau de la zone
 
 Vous pouvez appliquer les règles RBAC d’Azure à un abonnement, à un groupe de ressources ou à une ressource. Cette ressource peut correspondre à une zone DNS ou à un jeu d’enregistrements.
 
 Par exemple, le groupe de ressources *myResourceGroup* contient la zone *contoso.com* et la sous-zone *customers.contoso.com*. Des enregistrements CNAMe sont créés pour chaque compte client. Le compte d’administrateur utilisé pour gérer les enregistrements CNAME se voit attribuer des autorisations lui permettant de créer des enregistrements dans la zone *customers.contoso.com*. Le compte peut gérer uniquement *customers.contoso.com*.
 
-Vous pouvez accorder les autorisations RBAC au niveau zone via le portail Azure.  Ouvrez **Contrôle d’accès (IAM)** pour la zone, sélectionnez **Ajouter**, sélectionnez le rôle **Contributeur de zone DNS**, puis sélectionnez les utilisateurs ou groupes auxquels accorder les autorisations.
+Vous pouvez accorder les autorisations Azure RBAC au niveau zone via le portail Azure.  Ouvrez **Contrôle d’accès (IAM)** pour la zone, sélectionnez **Ajouter**, sélectionnez le rôle **Contributeur de zone DNS**, puis sélectionnez les utilisateurs ou groupes auxquels accorder les autorisations.
 
-![RBAC au niveau Zone DNS via le portail Azure](./media/dns-protect-zones-recordsets/rbac2.png)
+![Azure RBAC au niveau zone DNS via le portail Azure](./media/dns-protect-zones-recordsets/rbac2.png)
 
 Vous pouvez également [accorder des autorisations à l’aide d’Azure PowerShell](../role-based-access-control/role-assignments-powershell.md) :
 
@@ -96,15 +96,15 @@ az role assignment create \
 --scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/DnsZones/<zone name>/"
 ```
 
-### <a name="record-set-level-rbac"></a>RBAC au niveau jeu d’enregistrements
+### <a name="record-set-level-azure-rbac"></a>Azure RBAC au niveau du jeu d’enregistrements
 
 Les autorisations sont appliquées au niveau du jeu d’enregistrements.  L’utilisateur peut contrôler les entrées dont il a besoin et ne peut apporter aucune autre modification.
 
-Vous pouvez configurer les autorisations RBAC au niveau du jeu d’enregistrements via le portail Azure à l’aide du bouton **Contrôle d’accès (IAM)** situé dans la page du jeu d’enregistrements :
+Vous pouvez configurer les autorisations Azure RBAC au niveau du jeu d’enregistrements via le portail Azure à l’aide du bouton **Contrôle d’accès (IAM)** situé dans la page du jeu d’enregistrements :
 
-![RBAC au niveau jeu d’enregistrements via le portail Azure](./media/dns-protect-zones-recordsets/rbac3.png)
+![Azure RBAC au niveau jeu d’enregistrements via le portail Azure](./media/dns-protect-zones-recordsets/rbac3.png)
 
-Vous pouvez également accorder les autorisations RBAC au niveau jeu d’enregistrements en utilisant [Azure PowerShell](../role-based-access-control/role-assignments-powershell.md) :
+Vous pouvez également accorder les autorisations Azure RBAC au niveau jeu d’enregistrements en utilisant [Azure PowerShell](../role-based-access-control/role-assignments-powershell.md) :
 
 ```azurepowershell
 # Grant permissions to a specific record set
@@ -168,7 +168,7 @@ La propriété Actions définit les autorisations spécifiques de DNS suivantes�
 Les Actions restantes sont copiées à partir du [rôle intégré Contributeur de Zone DNS](../role-based-access-control/built-in-roles.md#dns-zone-contributor).
 
 > [!NOTE]
-> L’utilisation d’un rôle RBAC personnalisé pour empêcher la suppression de jeux d’enregistrements tout en autorisant leur mise à jour ne constitue pas un contrôle efficace. Cela empêche la suppression de jeux d’enregistrements, mais pas leur modification.  Les modifications autorisées incluent l’ajout et la suppression d’enregistrements du jeu d’enregistrements, y compris la suppression de tous les enregistrements pour ne laisser qu’un jeu d’enregistrements vide. Sur le plan de la résolution DNS, cela produit le même effet que la suppression du jeu d’enregistrements.
+> Le recours à un rôle Azure personnalisé pour empêcher la suppression de jeux d’enregistrements tout en autorisant leur mise à jour ne constitue pas un contrôle efficace. Cela empêche la suppression de jeux d’enregistrements, mais pas leur modification.  Les modifications autorisées incluent l’ajout et la suppression d’enregistrements du jeu d’enregistrements, y compris la suppression de tous les enregistrements pour ne laisser qu’un jeu d’enregistrements vide. Sur le plan de la résolution DNS, cela produit le même effet que la suppression du jeu d’enregistrements.
 
 Il n’est pas possible de définir des rôles personnalisés via le portail Azure. Vous pouvez créer un rôle personnalisé basé sur cette définition de rôle en utilisant Azure PowerShell :
 
@@ -186,7 +186,7 @@ az role create -inputfile <file path>
 
 Ensuite, vous pouvez attribuer le rôle de la même façon qu’un rôle intégré, en procédant de la manière décrite précédemment dans cet article.
 
-Pour plus d’informations sur la façon de créer, gérer et attribuer des rôles personnalisés, consultez [Rôles personnalisés dans le contrôle d’accès en fonction du rôle (RBAC) Azure](../role-based-access-control/custom-roles.md).
+Pour plus d’informations sur la façon de créer, gérer et attribuer des rôles personnalisés, consultez [Rôles personnalisés Azure](../role-based-access-control/custom-roles.md).
 
 ## <a name="resource-locks"></a>Verrous de ressources
 
@@ -202,7 +202,7 @@ Vous pouvez créer des verrous de ressources au niveau zone via le portail Azure
 
 ![Verrous de ressources au niveau zone via le portail Azure](./media/dns-protect-zones-recordsets/locks1.png)
 
-Vous pouvez également créer des verrous de ressources au niveau d’une zone via [Azure PowerShell](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcelock?view=latest) :
+Vous pouvez également créer des verrous de ressources au niveau d’une zone via [Azure PowerShell](/powershell/module/az.resources/new-azresourcelock?view=latest) :
 
 ```azurepowershell
 # Lock a DNS zone
@@ -216,7 +216,7 @@ $rsg = "<resource group name>"
 New-AzResourceLock -LockLevel $lvl -LockName $lnm -ResourceName $rsc -ResourceType $rty -ResourceGroupName $rsg
 ```
 
-La commande équivalente est également [disponible via l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/lock?view=azure-cli-latest#az-lock-create) :
+La commande équivalente est également [disponible via l’interface de ligne de commande Azure](/cli/azure/lock?view=azure-cli-latest#az-lock-create) :
 
 ```azurecli
 # Lock a DNS zone
@@ -286,5 +286,5 @@ Il est possible d’utiliser les deux approches (verrous de ressources et rôles
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour plus d’informations sur l’utilisation de RBAC, voir [Prise en main de la gestion des accès dans le portail Azure](../role-based-access-control/overview.md).
+* Pour plus d’informations sur Azure RBAC, consultez [Qu’est-ce que le contrôle d’accès en fonction du rôle Azure (Azure RBAC) ?](../role-based-access-control/overview.md).
 * Pour plus d’informations sur l’utilisation des verrous de ressources, voir [Verrouiller des ressources avec Azure Resource Manager](../azure-resource-manager/management/lock-resources.md).

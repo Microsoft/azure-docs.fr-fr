@@ -1,9 +1,9 @@
 ---
 title: Activités de création de branches et de chaînage dans un pipeline à l’aide du portail Azure
-description: Découvrez comment contrôler le flux de données dans Azure Data Factory à l’aide d’activités de création de branches et de chaînage.
+description: Découvrez comment contrôler le flux de contrôle des données dans le pipeline Azure Data Factory à l’aide du Portail Azure.
 services: data-factory
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
 ms.reviewer: maghan
 ms.service: data-factory
@@ -11,20 +11,20 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019; seo-dt-2019
 ms.date: 01/11/2018
-ms.openlocfilehash: ff9e5ff099bba7af9cac9862103ef63aa0169545
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: dc82cfdc4e5a063e7c5cb833b617da58023d1ba6
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81418744"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497433"
 ---
-# <a name="branching-and-chaining-activities-in-a-data-factory-pipeline"></a>Activités de création de branches et chaînage dans un pipeline Azure Data Factory
+# <a name="branching-and-chaining-activities-in-an-azure-data-factory-pipeline-using-the-azure-portal"></a>Création de branches et de chaînage pour les activités dans un pipeline Azure Data Factory à l’aide du portail Azure
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
 Dans ce didacticiel, vous créez un pipeline Data Factory qui présente certaines des fonctionnalités de flux de contrôle. Ce pipeline est une simple copie depuis un conteneur Stockage Blob Azure vers un autre conteneur dans le même compte de stockage. Si l’activité de copie réussit, le pipeline envoie les détails de l’opération de copie réussie (par exemple, la quantité de données écrites) dans un e-mail d’avis de réussite. Si l’activité de copie échoue, le pipeline envoie les détails de l’échec de la copie (par exemple, le message d’erreur) dans un e-mail d’avis d’échec. Tout au long de ce didacticiel, vous allez apprendre à passer des paramètres.
 
-Vue d’ensemble du scénario : ![vue d’ensemble](media/tutorial-control-flow-portal/overview.png)
+Vue d’ensemble du scénario : ![Le diagramme montre le Stockage Blob Azure qui est la cible d’une copie, laquelle, en cas de réussite, envoie un e-mail avec des détails ou, en cas d’échec, envoie un e-mail avec les détails de l’erreur.](media/tutorial-control-flow-portal/overview.png)
 
 Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
@@ -40,11 +40,11 @@ Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
 Ce tutoriel utilise le portail Azure. Vous pouvez utiliser d’autres mécanismes pour interagir avec Azure Data Factory. Consultez « Guides de démarrage rapide » dans la table des matières.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * **Abonnement Azure**. Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 * **Compte Stockage Azure**. Vous utilisez le stockage blob comme magasins de données **source**. Si vous n’avez pas de compte de stockage Azure, consultez l’article [Créer un compte de stockage](../storage/common/storage-account-create.md) pour découvrir comment en créer un.
-* **Azure SQL Database**. Vous utilisez la base de données en tant que magasin de données **récepteur**. Si vous n’avez pas de base de données Azure SQL Database, consultez l’article [Création d’une base de données Azure SQL](../sql-database/sql-database-get-started-portal.md) pour savoir comme en créer une.
+* **Azure SQL Database**. Vous utilisez la base de données en tant que magasin de données **récepteur**. Si vous n’avez pas de base de données dans Azure SQL Database, consultez l’article [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md) pour savoir comme en créer une.
 
 ### <a name="create-blob-table"></a>Créer la table d’objets blob
 
@@ -139,7 +139,8 @@ https://prodxxx.eastus.logic.azure.com:443/workflows/000000/triggers/manual/path
 
    Le nom de la fabrique de données Azure doit être un nom **global unique**. Si l’erreur suivante s’affiche, changez le nom de la fabrique de données (par exemple, votrenomADFTutorialDataFactory), puis tentez de la recréer. Consultez l’article [Data Factory - Règles d’affectation des noms](naming-rules.md) pour savoir comment nommer les artefacts Data Factory.
 
-       `Data factory name “ADFTutorialDataFactory” is not available`
+   *Le nom de fabrique de données « ADFTutorialDataFactory » n’est pas disponible*.
+
 3. Sélectionnez l’**abonnement** Azure dans lequel vous voulez créer la fabrique de données.
 4. Pour le **groupe de ressources**, effectuez l’une des opérations suivantes :
 
@@ -151,7 +152,7 @@ https://prodxxx.eastus.logic.azure.com:443/workflows/000000/triggers/manual/path
 5. Sélectionnez **l’emplacement** de la fabrique de données. Seuls les emplacements pris en charge sont affichés dans la liste déroulante. Les magasins de données (Stockage Azure, Azure SQL Database, etc.) et les services de calcul (HDInsight, etc.) utilisés par la fabrique de données peuvent être proposés dans d’autres régions.
 6. Sélectionnez **Épingler au tableau de bord**.     
 7. Cliquez sur **Créer**.      
-8. Sur le tableau de bord, vous voyez la mosaïque suivante avec l’état : **Déploiement de fabrique de données**.
+8. Sur le tableau de bord, vous voyez la vignette suivante avec l’état : **Déploiement de Data Factory**.
 
     ![mosaïque déploiement de fabrique de données](media/tutorial-control-flow-portal/deploying-data-factory.png)
 9. Une fois la création terminée, la page **Data Factory** s’affiche comme sur l’image.
@@ -178,12 +179,12 @@ Dans cette étape, vous allez créer un pipeline avec une activité de copie et 
     - **receiver** - ce paramètre est utilisé par les deux activités web dans le pipeline qui envoient des e-mails de réussite ou d’échec au récepteur dont l’adresse e-mail est spécifiée par ce paramètre.
 
    ![Menu Nouveau pipeline](./media/tutorial-control-flow-portal/pipeline-parameters.png)
-4. Dans la boîte à outils **Activités**, développez **Flux de données**et glissez-déposez l’activité de **copie** vers la surface du concepteur de pipeline.
+4. Dans la boîte à outils **Activités**, développez **Flux de données** et glissez-déposez l’activité de **copie** vers la surface du concepteur de pipeline.
 
    ![Glisser-déposer de l’activité de copie](./media/tutorial-control-flow-portal/drag-drop-copy-activity.png)
 5. Dans la fenêtre **Propriétés** pour l’activité de **copie** en bas, basculez vers l’onglet **Source**, puis cliquez sur **+ Nouveau**. Vous créez un jeu de données source pour l’activité de copie dans cette étape.
 
-   ![Jeu de données source](./media/tutorial-control-flow-portal/new-source-dataset-button.png)
+   ![Capture d’écran montrant comment créer un jeu de données source pour l’activité de copie.](./media/tutorial-control-flow-portal/new-source-dataset-button.png)
 6. Dans la fenêtre **Nouveau jeu de données**, sélectionnez **Stockage Blob Azure**, puis cliquez sur **Terminer**.
 
    ![Sélectionner le stockage Blob Azure](./media/tutorial-control-flow-portal/select-azure-blob-storage.png)
@@ -202,10 +203,12 @@ Dans cette étape, vous allez créer un pipeline avec une activité de copie et 
    ![Nouveau service lié Stockage Azure](./media/tutorial-control-flow-portal/new-azure-storage-linked-service.png)
 12. Saisissez `@pipeline().parameters.sourceBlobContainer` pour le dossier et `emp.txt` pour le nom du fichier. Le paramètre de pipeline sourceBlobContainer vous permet de définir le chemin d’accès de dossier pour le jeu de données.
 
-   ![Paramètres du jeu de données source](./media/tutorial-control-flow-portal/source-dataset-settings.png)
-13. Basculez vers l’onglet **pipeline** (ou) cliquez sur le pipeline dans l’arborescence. Vérifiez que **SourceBlobDataset** est sélectionné comme **jeu de données source**.
+    ![Paramètres du jeu de données source](./media/tutorial-control-flow-portal/source-dataset-settings.png)
 
-    ![Jeu de données source](./media/tutorial-control-flow-portal/pipeline-source-dataset-selected.png)
+13. Basculez vers l’onglet **pipeline** (ou) cliquez sur le pipeline dans l’arborescence. Vérifiez que **SourceBlobDataset** est sélectionné comme **jeu de données source**.
+      
+   ![Jeu de données source](./media/tutorial-control-flow-portal/pipeline-source-dataset-selected.png)
+
 13. Dans la fenêtre Propriétés, basculez vers l’onglet **Récepteur**, puis cliquez sur **+ Nouveau** pour **Jeu de données récepteur**. Vous créez un jeu de données récepteur pour l’activité de copie dans cette étape d’une façon similaire à la création du jeu de données source.
 
     ![Bouton Nouveau jeu de données récepteur](./media/tutorial-control-flow-portal/new-sink-dataset-button.png)
@@ -270,7 +273,7 @@ Dans cette étape, vous allez créer un pipeline avec une activité de copie et 
         ![Paramètres pour la deuxième activité Web](./media/tutorial-control-flow-portal/web-activity2-settings.png)         
 22. Sélectionnez l’activité de **copie** dans le concepteur de pipeline, puis cliquez sur le bouton **+->** , puis sélectionnez **Erreur**.  
 
-    ![Paramètres pour la deuxième activité Web](./media/tutorial-control-flow-portal/select-copy-failure-link.png)
+    ![Capture d’écran montrant comment sélectionner une erreur sur l’activité de copie dans le concepteur de pipeline.](./media/tutorial-control-flow-portal/select-copy-failure-link.png)
 23. Faites glisser le bouton **rouge** proche de l’activité de copie vers la deuxième activité Web **SendFailureEmailActivity**. Vous pouvez déplacer les activités afin que le pipeline ressemble à l’image suivante :
 
     ![Pipeline complète avec toutes les activités](./media/tutorial-control-flow-portal/full-pipeline.png)
@@ -301,7 +304,7 @@ Dans cette étape, vous allez créer un pipeline avec une activité de copie et 
     ![Exécution de pipeline réussie](./media/tutorial-control-flow-portal/monitor-success-pipeline-run.png)
 2. Pour **voir les exécutions d’activité** associées à l’exécution de ce pipeline, cliquez sur le premier lien dans la colonne **Actions**. Vous pouvez revenir à la vue précédente en cliquant sur **Pipelines** en haut. Utilisez le bouton **Actualiser** pour actualiser la liste.
 
-    ![Exécutions d’activités](./media/tutorial-control-flow-portal/activity-runs-success.png)
+    ![Capture d’écran montrant comment afficher la liste des exécutions d’activités.](./media/tutorial-control-flow-portal/activity-runs-success.png)
 
 ## <a name="trigger-a-pipeline-run-that-fails"></a>Déclencher une exécution de pipeline qui échoue
 1. Basculez vers l’onglet **Modifier** sur la gauche.

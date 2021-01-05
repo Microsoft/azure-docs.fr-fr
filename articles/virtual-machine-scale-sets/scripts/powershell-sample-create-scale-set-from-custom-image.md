@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: imaging
 ms.date: 03/27/2018
 ms.reviewer: cynthn
-ms.custom: akjosh
-ms.openlocfilehash: bdd36a2c58bddce5bea0ba43e5d21da9ef89a14d
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: akjosh, devx-track-azurepowershell
+ms.openlocfilehash: 34a786c133d38e40cfa614ddceed53a6cf52b617
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83699460"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078926"
 ---
 # <a name="create-a-virtual-machine-scale-set-from-a-custom-vm-image-with-powershell"></a>Créer un groupe de machines virtuelles identiques à partir d’une image de machine virtuelle personnalisée avec Azure PowerShell
 Ce script permet de créer un groupe de machines virtuelles identiques qui utilise une image de machine virtuelle personnalisée comme source pour les instances de machine virtuelle.
@@ -43,4 +43,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

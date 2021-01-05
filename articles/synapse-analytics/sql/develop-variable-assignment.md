@@ -5,22 +5,22 @@ services: synapse-analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: b2a596b71ee7e5f58e01d5bc10b330f6f54a69d2
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 4ec59b7cc124a87b3939d095d03ee4a8bae9070f
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426657"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685764"
 ---
-# <a name="assigning-variables-with-synapse-sql"></a>Attribution de variables avec SQL Synapse
+# <a name="assign-variables-with-synapse-sql"></a>Attribuer des variables avec SQL Synapse
 
 Dans cet article, vous trouverez des conseils pour l’attribution de variables T-SQL avec SQL Synapse.
 
-## <a name="setting-variables-with-declare"></a>Définition de variables via l’instruction DECLARE
+## <a name="set-variables-with-declare"></a>Définir des variables via l’instruction DECLARE
 
 Dans SQL Synapse, les variables sont définies au moyen de l’instruction `DECLARE` ou `SET`. L’initialisation de variables avec l’instruction DECLARE constitue l’une des méthodes les plus flexibles pour définir une valeur de variable dans SQL Synapse.
 
@@ -37,7 +37,7 @@ DECLARE @v  INT = (SELECT TOP 1 c_customer_sk FROM Customer where c_last_name = 
 ;
 ```
 
-Il n’est pas possible d’initialiser et d’utiliser une variable au sein de la même instruction DECLARE. Illustrons notre propos : l’exemple suivant n’est pas autorisé car l’élément *@p1* est à la fois initialisé et utilisé dans la même instruction DECLARE. L’exemple suivant génère une erreur.
+Il n’est pas possible d’initialiser et d’utiliser une variable au sein de la même instruction DECLARE. Illustrons notre propos : l’exemple suivant n’est pas autorisé car l’élément *\@p1* est à la fois initialisé et utilisé dans la même instruction DECLARE. L’exemple suivant génère une erreur.
 
 ```sql
 DECLARE @p1 int = 0
@@ -45,7 +45,7 @@ DECLARE @p1 int = 0
 ;
 ```
 
-## <a name="setting-values-with-set"></a>Définition de valeurs avec l’instruction SET
+## <a name="set-values-with-set"></a>Définir des valeurs avec l’instruction SET
 
 L’instruction SET est couramment utilisée pour définir une variable unique.
 

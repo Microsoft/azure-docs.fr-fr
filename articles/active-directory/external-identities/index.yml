@@ -1,0 +1,87 @@
+### YamlMime:Landing
+title: Documentation sur les identités externes
+summary: Les identités externes sont un ensemble de fonctionnalités qui permettent aux organisations de sécuriser et de gérer n’importe quel utilisateur externe, notamment les clients et les partenaires. Basé sur la collaboration B2B, External Identities vous permet d’interagir avec des utilisateurs externes à votre organisation et de vous connecter à ces utilisateurs.
+metadata:
+  title: Documentation sur les identités externes
+  description: Les identités externes sont un ensemble de fonctionnalités qui permettent aux organisations de sécuriser et de gérer n’importe quel utilisateur externe, notamment les clients et les partenaires. Basé sur la collaboration B2B, External Identities vous permet d’interagir avec des utilisateurs externes à votre organisation et de vous connecter à ces utilisateurs.
+  ms.service: active-directory
+  ms.subservice: B2B
+  ms.workload: identity
+  ms.topic: landing-page
+  ms.date: 05/19/2020
+  author: msmimart
+  ms.author: mimart
+  manager: celested
+  ms.openlocfilehash: ecc69f8e2e281b4456861397bdd5af4ba41448e8
+  ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 10/23/2020
+  ms.locfileid: "92441757"
+landingContent:
+- title: À propos des identités externes
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Comparer les solutions des identités externes
+      url: compare-with-b2c.md
+    - text: Qu’est-ce qu’Azure AD B2B Collaboration ?
+      url: what-is-b2b.md
+    - text: Qu’est-ce que l’identité Azure AD B2C (entreprise-client) ?
+      url: ../../active-directory-b2c/overview.md
+- title: Collaborer avec des utilisateurs en dehors de votre organisation (collaboration B2B)
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Comprendre l’utilisateur invité B2B
+      url: user-properties.md
+    - text: Comment un invité B2B accepte une invitation
+      url: redemption-experience.md
+  - linkListType: how-to-guide
+    links:
+    - text: Configurer les paramètres de collaboration externe
+      url: delegate-invitations.md
+    - text: Configurer la fédération directe (préversion)
+      url: direct-federation.md
+    - text: Configurer des codes secrets à usage unique (préversion)
+      url: one-time-passcode.md
+    - text: Ajouter et inviter des utilisateurs invités
+      url: add-users-administrator.md
+    - text: Quitter une organisation en tant qu’utilisateur invité
+      url: leave-the-organization.md
+- title: Mettre à l’échelle les applications pour les consommateurs et les clients (Azure AD B2C)
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: À propos d’Azure AD B2C
+      url: ../../active-directory-b2c/overview.md
+    - text: Vue d’ensemble technique et des fonctionnalités
+      url: ../../active-directory-b2c/technical-overview.md
+    - text: Voir toute la documentation Azure AD B2C
+      url: ../../active-directory-b2c/index.yml
+  - linkListType: concept
+    links:
+    - text: Flux d’utilisateurs Azure AD B2C
+      url: ../../active-directory-b2c/user-flow-overview.md
+    - text: Stratégies personnalisées Azure Active Directory B2C
+      url: ../../active-directory-b2c/custom-policy-overview.md
+  - linkListType: tutorial
+    links:
+    - text: Créer des flux d’utilisateurs dans Azure AD B2C
+      url: ../../active-directory-b2c/tutorial-create-user-flows.md
+- title: Flux d’inscription en libre-service pour les utilisateurs invités B2B (préversion)
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce que l’inscription libre-service ?
+      url: self-service-sign-up-overview.md
+  - linkListType: sample
+    links:
+    - text: Exemples de code de connecteur d’API pour les flux d’utilisateurs
+      url: code-samples-self-service-sign-up.md
+  - linkListType: how-to-guide
+    links:
+    - text: Ajouter un flux d’utilisateur d’inscription en libre-service
+      url: self-service-sign-up-user-flow.md
+    - text: Définir des attributs personnalisés pour les flux d’utilisateurs
+      url: user-flow-add-custom-attributes.md

@@ -1,19 +1,22 @@
 ---
 title: Gérer les conflits entre les régions dans Azure Cosmos DB
 description: Découvrir comment gérer des conflits dans Azure Cosmos DB en créant la stratégie de type last-writer-wins (dernière version valide) ou une stratégie personnalisée de résolution de conflit
-author: markjbrown
+author: anfeldma-ms
 ms.service: cosmos-db
-ms.topic: conceptual
-ms.date: 12/03/2019
-ms.author: mjbrown
-ms.openlocfilehash: 6d364f1a9974d6d638bb0f824e88ed3866644c15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
+ms.date: 06/11/2020
+ms.author: anfeldma
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: 8f98c2201159350f5774f4d2b05102384f31f3af
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225909"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339340"
 ---
 # <a name="manage-conflict-resolution-policies-in-azure-cosmos-db"></a>Gérer les stratégies de résolution des conflits dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Avec les écritures multirégions, quand plusieurs clients écrivent dans le même élément, des conflits peuvent se produire. Quand un conflit se produit, vous pouvez le résoudre à l’aide des différentes stratégies de résolution de conflit. Cet article explique comment gérer les stratégies de résolution de conflit.
 
@@ -21,7 +24,9 @@ Avec les écritures multirégions, quand plusieurs clients écrivent dans le mê
 
 Ces exemples montrent comment configurer un conteneur avec une stratégie de résolution de conflit de type last-writer-wins (dernière version valide). Le chemin par défaut de la stratégie last-writer-wins est le champ d’horodatage ou la propriété `_ts`. Pour l’API SQL, il peut aussi s’agir d’un chemin défini par l’utilisateur avec un type numérique. En cas de conflit, la valeur la plus élevée l’emporte. Si le chemin n’est pas défini ou n’est pas valide, il suit par défaut la propriété `_ts`. Les conflits résolus avec cette stratégie ne s’affichent pas dans le flux de conflit. Cette stratégie peut être utilisée par toutes les API.
 
-### <a name="net-sdk-v2"></a><a id="create-custom-conflict-resolution-policy-lww-dotnet"></a>Kit SDK .NET V2
+### <a name="net-sdk"></a><a id="create-custom-conflict-resolution-policy-lww-dotnet"></a>Kit SDK .NET
+
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 ```csharp
 DocumentCollection lwwCollection = await createClient.CreateDocumentCollectionIfNotExistsAsync(
@@ -36,7 +41,7 @@ DocumentCollection lwwCollection = await createClient.CreateDocumentCollectionIf
   });
 ```
 
-### <a name="net-sdk-v3"></a><a id="create-custom-conflict-resolution-policy-lww-dotnet-v3"></a>Kit SDK .NET V3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 ```csharp
 Container container = await createClient.GetDatabase(this.databaseName)
@@ -49,8 +54,29 @@ Container container = await createClient.GetDatabase(this.databaseName)
         }
     });
 ```
+---
 
-### <a name="java-async-sdk"></a><a id="create-custom-conflict-resolution-policy-lww-java-async"></a>Kit SDK Java Async
+### <a name="java-v4-sdk"></a><a id="create-custom-conflict-resolution-policy-lww-javav4"></a> SDK Java V4
+
+# <a name="async"></a>[Async](#tab/api-async)
+
+   API Async du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/async/SampleDocumentationSnippetsAsync.java?name=ManageConflictResolutionLWWAsync)]
+
+# <a name="sync"></a>[Synchronisation](#tab/api-sync)
+
+   API Sync du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/sync/SampleDocumentationSnippets.java?name=ManageConflictResolutionLWWSync)]
+
+--- 
+
+### <a name="java-v2-sdks"></a><a id="create-custom-conflict-resolution-policy-lww-javav2"></a>Kits de développement logiciel (SDK) Java v2
+
+# <a name="async-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Async Java v2](#tab/async)
+
+[Kit de développement logiciel (SDK) Async Java v2](sql-api-sdk-async-java.md) (Maven [com.microsoft.azure::azure-cosmosdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-cosmosdb))
 
 ```java
 DocumentCollection collection = new DocumentCollection();
@@ -60,7 +86,9 @@ collection.setConflictResolutionPolicy(policy);
 DocumentCollection createdCollection = client.createCollection(databaseUri, collection, null).toBlocking().value();
 ```
 
-### <a name="java-sync-sdk"></a><a id="create-custom-conflict-resolution-policy-lww-java-sync"></a>Kit SDK Java Sync
+# <a name="sync-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Sync Java v2](#tab/sync)
+
+[Kit de développement logiciel (SDK) Sync Java v2](sql-api-sdk-java.md) (Maven [com.microsoft.azure::azure-documentdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb))
 
 ```java
 DocumentCollection lwwCollection = new DocumentCollection();
@@ -69,6 +97,7 @@ ConflictResolutionPolicy lwwPolicy = ConflictResolutionPolicy.createLastWriterWi
 lwwCollection.setConflictResolutionPolicy(lwwPolicy);
 DocumentCollection createdCollection = this.tryCreateDocumentCollection(createClient, database, lwwCollection);
 ```
+---
 
 ### <a name="nodejsjavascripttypescript-sdk"></a><a id="create-custom-conflict-resolution-policy-lww-javascript"></a>Kit SDK Node.js/JavaScript/TypeScript
 
@@ -107,10 +136,10 @@ Ces exemples montrent comment configurer un conteneur avec une stratégie de ré
 
 Les procédures stockées de résolution de conflit personnalisées doivent être implémentées en utilisant la signature de fonction présentée ci-dessous. Le nom de fonction ne doit pas nécessairement correspondre au nom utilisé pendant l’inscription de la procédure stockée auprès du conteneur, mais l’affectation de noms est simplifiée. Voici une description des paramètres qui doivent être implémentés pour cette procédure stockée.
 
-- **incomingItem** : élément inséré ou mis à jour dans la validation qui génère les conflits. A la valeur null pour les opérations de suppression.
-- **existingItem** : élément en cours de validation. Cette valeur est non Null dans une mise à jour et Null pour une insertion ou des suppressions.
-- **isTombstone** : valeur booléenne indiquant si l’élément incomingItem est en conflit avec un élément supprimé précédemment. Quand sa valeur est true, existingItem a aussi la valeur null.
-- **conflictingItems** : Tableau de la version validée de tous les éléments du conteneur qui sont en conflit avec incomingItem concernant l’ID ou d’autres propriétés de l’index unique.
+- **incomingItem**  : élément inséré ou mis à jour dans la validation qui génère les conflits. A la valeur null pour les opérations de suppression.
+- **existingItem**  : élément en cours de validation. Cette valeur est non Null dans une mise à jour et Null pour une insertion ou des suppressions.
+- **isTombstone**  : valeur booléenne indiquant si l’élément incomingItem est en conflit avec un élément supprimé précédemment. Quand sa valeur est true, existingItem a aussi la valeur null.
+- **conflictingItems**  : Tableau de la version validée de tous les éléments du conteneur qui sont en conflit avec incomingItem concernant l’ID ou d’autres propriétés de l’index unique.
 
 > [!IMPORTANT]
 > Comme n’importe quelle procédure stockée, une procédure de résolution de conflit personnalisée peut accéder à des données avec la même clé de partition et peut effectuer une opération d’insertion, de mise à jour ou de suppression pour résoudre des conflits.
@@ -171,7 +200,9 @@ function resolver(incomingItem, existingItem, isTombstone, conflictingItems) {
 }
 ```
 
-### <a name="net-sdk-v2"></a><a id="create-custom-conflict-resolution-policy-stored-proc-dotnet"></a>Kit SDK .NET V2
+### <a name="net-sdk"></a><a id="create-custom-conflict-resolution-policy-stored-proc-dotnet"></a>Kit SDK .NET
+
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 ```csharp
 DocumentCollection udpCollection = await createClient.CreateDocumentCollectionIfNotExistsAsync(
@@ -194,7 +225,7 @@ UriFactory.CreateStoredProcedureUri(this.databaseName, this.udpCollectionName, "
 });
 ```
 
-### <a name="net-sdk-v3"></a><a id="create-custom-conflict-resolution-policy-stored-proc-dotnet-v3"></a>Kit SDK .NET V3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 ```csharp
 Container container = await createClient.GetDatabase(this.databaseName)
@@ -211,8 +242,29 @@ await container.Scripts.CreateStoredProcedureAsync(
     new StoredProcedureProperties("resolver", File.ReadAllText(@"resolver.js"))
 );
 ```
+---
 
-### <a name="java-async-sdk"></a><a id="create-custom-conflict-resolution-policy-stored-proc-java-async"></a>Kit SDK Java Async
+### <a name="java-v4-sdk"></a><a id="create-custom-conflict-resolution-policy-stored-proc-javav4"></a> SDK Java V4
+
+# <a name="async"></a>[Async](#tab/api-async)
+
+   API Async du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/async/SampleDocumentationSnippetsAsync.java?name=ManageConflictResolutionSprocAsync)]
+
+# <a name="sync"></a>[Synchronisation](#tab/api-sync)
+
+   API Sync du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/sync/SampleDocumentationSnippets.java?name=ManageConflictResolutionSprocSync)]
+
+--- 
+
+### <a name="java-v2-sdks"></a><a id="create-custom-conflict-resolution-policy-stored-proc-javav2"></a>Kits de développement logiciel (SDK) Java v2
+
+# <a name="async-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Async Java v2](#tab/async)
+
+[Kit de développement logiciel (SDK) Async Java v2](sql-api-sdk-async-java.md) (Maven [com.microsoft.azure::azure-cosmosdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-cosmosdb))
 
 ```java
 DocumentCollection collection = new DocumentCollection();
@@ -222,9 +274,9 @@ collection.setConflictResolutionPolicy(policy);
 DocumentCollection createdCollection = client.createCollection(databaseUri, collection, null).toBlocking().value();
 ```
 
-Après la création de votre conteneur, vous devez créer la procédure stockée `resolver`.
+# <a name="sync-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Sync Java v2](#tab/sync)
 
-### <a name="java-sync-sdk"></a><a id="create-custom-conflict-resolution-policy-stored-proc-java-sync"></a>Kit SDK Java Sync
+[Kit de développement logiciel (SDK) Sync Java v2](sql-api-sdk-java.md) (Maven [com.microsoft.azure::azure-documentdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb))
 
 ```java
 DocumentCollection udpCollection = new DocumentCollection();
@@ -234,6 +286,7 @@ ConflictResolutionPolicy udpPolicy = ConflictResolutionPolicy.createCustomPolicy
 udpCollection.setConflictResolutionPolicy(udpPolicy);
 DocumentCollection createdCollection = this.tryCreateDocumentCollection(createClient, database, udpCollection);
 ```
+---
 
 Après la création de votre conteneur, vous devez créer la procédure stockée `resolver`.
 
@@ -276,7 +329,9 @@ Après la création de votre conteneur, vous devez créer la procédure stockée
 
 Ces exemples montrent comment configurer un conteneur avec une stratégie de résolution de conflits personnalisée. Ces conflits apparaissent dans le flux de conflit.
 
-### <a name="net-sdk-v2"></a><a id="create-custom-conflict-resolution-policy-dotnet"></a>Kit SDK .NET V2
+### <a name="net-sdk"></a><a id="create-custom-conflict-resolution-policy-dotnet"></a>Kit SDK .NET
+
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 ```csharp
 DocumentCollection manualCollection = await createClient.CreateDocumentCollectionIfNotExistsAsync(
@@ -290,7 +345,7 @@ DocumentCollection manualCollection = await createClient.CreateDocumentCollectio
   });
 ```
 
-### <a name="net-sdk-v3"></a><a id="create-custom-conflict-resolution-policy-dotnet-v3"></a>Kit SDK .NET V3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 ```csharp
 Container container = await createClient.GetDatabase(this.databaseName)
@@ -302,8 +357,29 @@ Container container = await createClient.GetDatabase(this.databaseName)
         }
     });
 ```
+---
 
-### <a name="java-async-sdk"></a><a id="create-custom-conflict-resolution-policy-java-async"></a>Kit SDK Java Async
+### <a name="java-v4-sdk"></a><a id="create-custom-conflict-resolution-policy-javav4"></a> SDK Java V4
+
+# <a name="async"></a>[Async](#tab/api-async)
+
+   API Async du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/async/SampleDocumentationSnippetsAsync.java?name=ManageConflictResolutionCustomAsync)]
+
+# <a name="sync"></a>[Synchronisation](#tab/api-sync)
+
+   API Sync du Kit de développement logiciel (SDK) Java v4 (Maven com.azure::azure-cosmos)
+
+   [!code-java[](~/azure-cosmos-java-sql-api-samples/src/main/java/com/azure/cosmos/examples/documentationsnippets/sync/SampleDocumentationSnippets.java?name=ManageConflictResolutionCustomSync)]
+
+--- 
+
+### <a name="java-v2-sdks"></a><a id="create-custom-conflict-resolution-policy-javav2"></a>Kits de développement logiciel (SDK) Java v2
+
+# <a name="async-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Async Java v2](#tab/async)
+
+[Kit de développement logiciel (SDK) Async Java v2](sql-api-sdk-async-java.md) (Maven [com.microsoft.azure::azure-cosmosdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-cosmosdb))
 
 ```java
 DocumentCollection collection = new DocumentCollection();
@@ -313,7 +389,9 @@ collection.setConflictResolutionPolicy(policy);
 DocumentCollection createdCollection = client.createCollection(databaseUri, collection, null).toBlocking().value();
 ```
 
-### <a name="java-sync-sdk"></a><a id="create-custom-conflict-resolution-policy-java-sync"></a>Kit SDK Java Sync
+# <a name="sync-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Sync Java v2](#tab/sync)
+
+[Kit de développement logiciel (SDK) Sync Java v2](sql-api-sdk-java.md) (Maven [com.microsoft.azure::azure-documentdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb))
 
 ```java
 DocumentCollection manualCollection = new DocumentCollection();
@@ -322,6 +400,7 @@ ConflictResolutionPolicy customPolicy = ConflictResolutionPolicy.createCustomPol
 manualCollection.setConflictResolutionPolicy(customPolicy);
 DocumentCollection createdCollection = client.createCollection(database.getSelfLink(), collection, null).getResource();
 ```
+---
 
 ### <a name="nodejsjavascripttypescript-sdk"></a><a id="create-custom-conflict-resolution-policy-javascript"></a>Kit SDK Node.js/JavaScript/TypeScript
 
@@ -354,13 +433,15 @@ manual_collection = client.CreateContainer(database['_self'], collection)
 
 Ces exemples montrent comment lire le flux de conflit d’un conteneur. Les conflits figurent dans le flux de conflit uniquement s’ils n’ont pas été résolus automatiquement ou si une stratégie de conflit personnalisée a été utilisée.
 
-### <a name="net-sdk-v2"></a><a id="read-from-conflict-feed-dotnet"></a>Kit SDK .NET V2
+### <a name="net-sdk"></a><a id="read-from-conflict-feed-dotnet"></a>Kit SDK .NET
+
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 ```csharp
 FeedResponse<Conflict> conflicts = await delClient.ReadConflictFeedAsync(this.collectionUri);
 ```
 
-### <a name="net-sdk-v3"></a><a id="read-from-conflict-feed-dotnet-v3"></a>Kit SDK .NET V3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 ```csharp
 FeedIterator<ConflictProperties> conflictFeed = container.Conflicts.GetConflictQueryIterator();
@@ -381,8 +462,13 @@ while (conflictFeed.HasMoreResults)
     }
 }
 ```
+---
 
-### <a name="java-async-sdk"></a><a id="read-from-conflict-feed-java-async"></a>Kit SDK Java Async
+### <a name="java-v2-sdks"></a><a id="read-from-conflict-feed-javav2"></a>Kits de développement logiciel (SDK) Java v2
+
+# <a name="async-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Async Java v2](#tab/async)
+
+[Kit de développement logiciel (SDK) Async Java v2](sql-api-sdk-async-java.md) (Maven [com.microsoft.azure::azure-cosmosdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-cosmosdb))
 
 ```java
 FeedResponse<Conflict> response = client.readConflicts(this.manualCollectionUri, null)
@@ -391,8 +477,9 @@ for (Conflict conflict : response.getResults()) {
     /* Do something with conflict */
 }
 ```
+# <a name="sync-java-v2-sdk"></a>[Kit de développement logiciel (SDK) Sync Java v2](#tab/sync)
 
-### <a name="java-sync-sdk"></a><a id="read-from-conflict-feed-java-sync"></a>Kit SDK Java Sync
+[Kit de développement logiciel (SDK) Sync Java v2](sql-api-sdk-java.md) (Maven [com.microsoft.azure::azure-documentdb](https://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb))
 
 ```java
 Iterator<Conflict> conflictsIterator = client.readConflicts(this.collectionLink, null).getQueryIterator();
@@ -401,6 +488,7 @@ while (conflictsIterator.hasNext()) {
     /* Do something with conflict */
 }
 ```
+---
 
 ### <a name="nodejsjavascripttypescript-sdk"></a><a id="read-from-conflict-feed-javascript"></a>Kit SDK Node.js/JavaScript/TypeScript
 
@@ -427,9 +515,9 @@ while conflict:
 Découvrez les concepts Azure Cosmos DB suivants :
 
 - [Article relatif au principe de la distribution mondiale d’Azure Cosmos DB](global-dist-under-the-hood.md)
-- [Configurer la fonction multimaître dans vos applications](how-to-multi-master.md)
+- [Guide pratique pour configurer les écritures multirégion dans vos applications](how-to-multi-master.md)
 - [Configurer les clients pour la multirésidence](how-to-manage-database-account.md#configure-multiple-write-regions)
 - [Ajouter ou supprimer des régions de votre compte Azure Cosmos DB](how-to-manage-database-account.md#addremove-regions-from-your-database-account)
-- [Guide pratique pour configurer les fonctionnalités multimaîtres dans vos applications](how-to-multi-master.md).
-- [Partitionnement et distribution des données](partition-data.md)
-- [Indexation dans Azure Cosmos DB](indexing-policies.md)
+- [Guide pratique pour configurer les écritures multirégion dans vos applications](how-to-multi-master.md).
+- [Partitionnement et distribution des données](partitioning-overview.md)
+- [Indexation dans Azure Cosmos DB](index-policy.md)

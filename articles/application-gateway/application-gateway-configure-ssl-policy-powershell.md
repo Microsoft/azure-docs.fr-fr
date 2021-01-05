@@ -5,15 +5,15 @@ description: Cet article contient des instructions pour configurer une stratégi
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: 3804059fdd818f10663d14bde72da2c6773fa53f
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: cb0f9ef64cb8032c02f2ccd4b42028103b6d3ec6
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312672"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397890"
 ---
 # <a name="configure-tls-policy-versions-and-cipher-suites-on-application-gateway"></a>Configurer les versions des stratégies TLS et les suites de chiffrement sur Application Gateway
 
@@ -191,7 +191,7 @@ $appgw = New-AzApplicationGateway -Name appgwtest -ResourceGroupName $rg.Resourc
 
 ## <a name="update-an-existing-application-gateway-with-a-pre-defined-tls-policy"></a>Mettre à jour une passerelle d'application existante avec une stratégie TLS prédéfinie
 
-Pour définir une stratégie TLS personnalisée, transmettez les paramètres suivants : **PolicyType**, **MinProtocolVersion**, **CipherSuite** et **ApplicationGateway**. Pour définir une stratégie TLS prédéfinie, transmettez les paramètres suivants : **PolicyType**, **PolicyName** et **ApplicationGateway**. Si vous essayez de passer d’autres paramètres, vous obtiendrez une erreur lors de la création ou de la mise à jour de la passerelle Application Gateway.
+Pour définir une stratégie TLS personnalisée, transmettez les paramètres suivants : **PolicyType** , **MinProtocolVersion** , **CipherSuite** et **ApplicationGateway**. Pour définir une stratégie TLS prédéfinie, transmettez les paramètres suivants : **PolicyType** , **PolicyName** et **ApplicationGateway**. Si vous essayez de passer d’autres paramètres, vous obtiendrez une erreur lors de la création ou de la mise à jour de la passerelle Application Gateway.
 
 L’exemple suivant comporte des exemples de code pour les stratégies personnalisées et prédéfinies. Supprimer les marques de commentaire sur la stratégie que vous souhaitez utiliser.
 
@@ -217,4 +217,4 @@ $SetGW = Set-AzApplicationGateway -ApplicationGateway $AppGW
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour savoir comment rediriger le trafic HTTP vers un point de terminaison HTTPS, voir la page [Vue d’ensemble de la redirection dans Application Gateway](application-gateway-redirect-overview.md).
+Pour savoir comment rediriger le trafic HTTP vers un point de terminaison HTTPS, voir la page [Vue d’ensemble de la redirection dans Application Gateway](./redirect-overview.md).

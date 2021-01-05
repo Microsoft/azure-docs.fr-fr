@@ -3,20 +3,24 @@ title: 'Démarrage rapide : Bibliothèque cliente Stockage Blob Azure pour .NET
 description: Dans ce guide de démarrage rapide, vous apprenez à utiliser la bibliothèque cliente Stockage Blob Azure pour .NET afin de créer un conteneur et un objet blob dans le stockage (d’objets) blob. Vous apprenez ensuite à télécharger l’objet blob sur votre ordinateur local et à lister tous les objets blob dans un conteneur.
 author: mhopkins-msft
 ms.author: mhopkins
-ms.date: 07/20/2019
+ms.date: 07/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: b243d05619642e1dd3ad8dfe2bbe1d0a9661b773
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-csharp
+ms.openlocfilehash: effb193e54be7331c9dc2874a4a34ef55442ed30
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75351316"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96021739"
 ---
 # <a name="quickstart-azure-blob-storage-client-library-v11-for-net"></a>Démarrage rapide : Bibliothèque de client Stockage Blob Azure v11 pour .NET
 
 Familiarisez-vous avec la bibliothèque de client Stockage Blob Azure v11 pour .NET. Le Stockage Blob Azure est la solution de stockage d’objets de Microsoft pour le cloud. Suivez les étapes pour installer le package et essayer l’exemple de code pour les tâches de base. Le stockage Blob est optimisé pour stocker de grandes quantités de données non structurées.
+
+> [!NOTE]
+> Ce guide de démarrage rapide utilise une version héritée de la bibliothèque de client Stockage Blob Azure. Pour démarrer avec la dernière version, consultez [Démarrage rapide : Bibliothèque de client de stockage d’objets blob Azure v12 pour .NET](storage-quickstart-blobs-dotnet.md).
 
 Utilisez la bibliothèque cliente Stockage Blob Azure pour .NET afin de :
 
@@ -27,14 +31,19 @@ Utilisez la bibliothèque cliente Stockage Blob Azure pour .NET afin de :
 * Lister tous les objets blob d’un conteneur
 * Supprimer un conteneur
 
-[Documentation de référence sur l’API](https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet) | [Code source de la bibliothèque](https://github.com/Azure/azure-storage-net/tree/master/Blob) | [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) | [Exemples](https://azure.microsoft.com/resources/samples/?sort=0&service=storage&platform=dotnet&term=blob)
+Ressources supplémentaires :
+
+* [Documentation de référence de l’API](/dotnet/api/overview/azure/storage)
+* [Code source de la bibliothèque](https://github.com/Azure/azure-storage-net/tree/master/Blob)
+* [Package (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)
+* [Exemples](https://azure.microsoft.com/resources/samples/?sort=0&service=storage&platform=dotnet&term=blob)
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
 * Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
-* Compte de stockage Azure : [créez un compte de stockage](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account)
+* Compte de stockage Azure : [créez un compte de stockage](../common/storage-account-create.md)
 * Dernière version du [Kit SDK .NET Core](https://dotnet.microsoft.com/download/dotnet-core) pour votre système d’exploitation. Veillez à disposer du Kit de développement logiciel (SDK), et non du runtime.
 
 ## <a name="setting-up"></a>Configuration
@@ -109,12 +118,11 @@ namespace blob_quickstart
 {
     class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             Console.WriteLine("Azure Blob Storage - .NET quickstart sample\n");
 
-            // Run the examples asynchronously, wait for the results before proceeding
-            ProcessAsync().GetAwaiter().GetResult();
+            await ProcessAsync();
 
             Console.WriteLine("Press any key to exit the sample application.");
             Console.ReadLine();
@@ -197,7 +205,7 @@ Ces exemples d’extraits de code vous montrent comment effectuer les opération
 
 ### <a name="authenticate-the-client"></a>Authentifier le client
 
-Le code ci-dessous vérifie si la variable d’environnement contient une chaîne de connexion à analyser pour créer un objet [CloudStorageAccount](/dotnet/api/microsoft.azure.storage.cloudstorageaccount?view=azure-dotnet) pointant vers le compte de stockage. Pour vérifier si la chaîne de connexion est valide, utilisez la méthode [TryParse](/dotnet/api/microsoft.azure.storage.cloudstorageaccount.tryparse?view=azure-dotnet). Si la méthode `TryParse` réussit, elle initialise la variable `storageAccount` et retourne `true`.
+Le code ci-dessous vérifie si la variable d’environnement contient une chaîne de connexion à analyser pour créer un objet [CloudStorageAccount](/dotnet/api/microsoft.azure.storage.cloudstorageaccount) pointant vers le compte de stockage. Pour vérifier si la chaîne de connexion est valide, utilisez la méthode [TryParse](/dotnet/api/microsoft.azure.storage.cloudstorageaccount.tryparse). Si la méthode `TryParse` réussit, elle initialise la variable `storageAccount` et retourne `true`.
 
 Ajoutez ce code dans la méthode `ProcessAsync` :
 
@@ -240,7 +248,7 @@ Pour créer le conteneur, créez d’abord une instance de l’objet [CloudBlobC
 Dans ce cas, le code appelle la méthode [CreateAsync](/dotnet/api/microsoft.azure.storage.blob.cloudblobcontainer.createasync) pour créer le conteneur. Une valeur GUID est ajoutée au nom du conteneur pour s’assurer qu’il est unique. Dans un environnement de production, il est souvent préférable d’utiliser la méthode [CreateIfNotExistsAsync](/dotnet/api/microsoft.azure.storage.blob.cloudblobcontainer.createifnotexistsasync) pour créer un conteneur uniquement s’il n’existe pas déjà.
 
 > [!IMPORTANT]
-> Les noms de conteneurs doivent être en minuscules. Pour plus d’informations sur l’affectation de noms aux conteneurs et objets blob, consultez [Affectation de noms et références aux conteneurs, objets blob et métadonnées](https://docs.microsoft.com/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata).
+> Les noms de conteneurs doivent être en minuscules. Pour plus d’informations sur l’affectation de noms aux conteneurs et objets blob, consultez [Affectation de noms et références aux conteneurs, objets blob et métadonnées](/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata).
 
 ```csharp
 // Create the CloudBlobClient that represents the 

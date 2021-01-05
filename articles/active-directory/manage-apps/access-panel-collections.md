@@ -3,32 +3,30 @@ title: Créer des collections pour les portails Mes applications dans Azure Acti
 description: Utilisez des collections Mes applications pour personnaliser les pages Mes applications afin de simplifier l’expérience Mes applications pour vos utilisateurs finaux. Organisez les applications en groupes avec des onglets distincts.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.assetid: ''
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/10/2020
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: kasimpso
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c91b9ffc9e3487e492c91cb0f5825d0b725f9410
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 967ac34ddb736f58f66639181cdf10e4aaa8ffab
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77120085"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94656783"
 ---
 # <a name="create-collections-on-the-my-apps-portal"></a>Créer des collections sur le portail Mes applications
 
 Vos utilisateurs peuvent utiliser le portail Mes applications pour afficher et démarrer les applications cloud auxquelles ils ont accès. Par défaut, toutes les applications auxquelles un utilisateur peut accéder sont répertoriées sur une seule page. Pour mieux organiser cette page pour vos utilisateurs, si vous disposez d’une licence Azure AD Premium P1 ou P2, vous pouvez configurer des collections. Avec une collection, vous pouvez regrouper des applications associées (par exemple, par rôle de travail, tâche ou projet) et les afficher sous un onglet distinct. Une collection applique essentiellement un filtre aux applications auxquelles un utilisateur a déjà accès, de sorte que celui-ci ne voit que les applications de la collection qui lui ont été attribuées.
 
 > [!NOTE]
-> Cet article explique comment un administrateur peut activer et créer des collections. Pour plus d’informations sur l’utilisation du portail et des collections Mes applications à destination des utilisateurs finaux, voir [Accéder aux collections et les utiliser](https://docs.microsoft.com/azure/active-directory/user-help/my-applications-portal-workspaces).
+> Cet article explique comment un administrateur peut activer et créer des collections. Pour plus d’informations sur l’utilisation du portail et des collections Mes applications à destination des utilisateurs finaux, voir [Accéder aux collections et les utiliser](../user-help/my-applications-portal-workspaces.md).
 
 ## <a name="enable-the-latest-my-apps-features"></a>Activer les dernières fonctionnalités de Mes applications
 

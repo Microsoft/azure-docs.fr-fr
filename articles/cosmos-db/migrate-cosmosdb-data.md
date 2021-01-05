@@ -1,20 +1,21 @@
 ---
 title: Migrer des centaines de téraoctets de données dans Azure Cosmos DB
 description: Ce document explique comment migrer des centaines de téraoctets de données vers Azure Cosmos DB.
-author: bharathsreenivas
+author: SnehaGunda
+ms.author: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/23/2019
-ms.author: bharathb
-ms.openlocfilehash: 69b400eb7838c986ac6f275da58c7457179ebea6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c45445415f3eaa7cb0f9069dd5f64b57c19e5836
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72880201"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96437148"
 ---
 # <a name="migrate-hundreds-of-terabytes-of-data-into-azure-cosmos-db"></a>Migrer des centaines de téraoctets de données dans Azure Cosmos DB 
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 Azure Cosmos DB peut stocker plusieurs téraoctets de données. Vous pouvez procéder à une migration de données à grande échelle pour transférer votre charge de travail de production vers Azure Cosmos DB. Cet article décrit les défis liés au transfert de données à grande échelle vers Azure Cosmos DB et vous présente l'outil qui permet de relever ces défis pour migrer les données vers Azure Cosmos DB. Dans cette étude de cas, le client a utilisé l'API SQL Cosmos DB.  
 
@@ -38,14 +39,14 @@ La plupart de ces limites sont en cours de correction pour les outils tels qu'Az
 
 ## <a name="custom-tool-with-bulk-executor-library"></a>Outil personnalisé avec bibliothèque d'Exécuteurs en bloc 
 
-Les défis décrits à la section précédente peuvent être résolus à l'aide d'un outil personnalisé qui peut facilement faire l'objet d'une montée en charge sur plusieurs instances et qui résiste aux défaillances temporaires. En outre, l'outil personnalisé peut suspendre et reprendre la migration à différents points de contrôle. Azure Cosmos DB fournit déjà la [bibliothèque d'Exécuteurs en bloc](https://docs.microsoft.com/azure/cosmos-db/bulk-executor-overview) qui intègre certaines de ces fonctionnalités. Par exemple, la bibliothèque d'Exécuteurs en bloc dispose déjà de la fonctionnalité permettant de gérer les erreurs temporaires et peut effectuer un scale-out des threads d'un nœud individuel pour utiliser environ 500 K de RU par nœud. La bibliothèque d'Exécuteurs en bloc partitionne également le jeu de données source en micro-lots qui sont exploités indépendamment comme forme de pointage de contrôle.  
+Les défis décrits à la section précédente peuvent être résolus à l'aide d'un outil personnalisé qui peut facilement faire l'objet d'une montée en charge sur plusieurs instances et qui résiste aux défaillances temporaires. En outre, l'outil personnalisé peut suspendre et reprendre la migration à différents points de contrôle. Azure Cosmos DB fournit déjà la [bibliothèque d'Exécuteurs en bloc](./bulk-executor-overview.md) qui intègre certaines de ces fonctionnalités. Par exemple, la bibliothèque d'Exécuteurs en bloc dispose déjà de la fonctionnalité permettant de gérer les erreurs temporaires et peut effectuer un scale-out des threads d'un nœud individuel pour utiliser environ 500 K de RU par nœud. La bibliothèque d'Exécuteurs en bloc partitionne également le jeu de données source en micro-lots qui sont exploités indépendamment comme forme de pointage de contrôle.  
 
 L'outil personnalisé utilise la bibliothèque d'Exécuteurs en bloc. En outre, il assure la montée en charge sur plusieurs clients et le suivi des erreurs pendant le processus d'ingestion. Pour utiliser cet outil, les données sources doivent être partitionnées en fichiers distincts dans Azure Data Lake Storage (ADLS) afin que différents agents de migration puissent récupérer chaque fichier et les ingérer dans Azure Cosmos DB. L'outil personnalisé utilise une collection distincte, qui stocke les métadonnées relatives à l'avancement de la migration de chaque fichier source dans ADLS et assure le suivi des erreurs associées.  
 
 L'illustration suivante décrit le processus de migration à l'aide de cet outil personnalisé. L'outil s'exécute sur un ensemble de machines virtuelles, et chaque machine virtuelle interroge la collection de suivi d'Azure Cosmos DB pour acquérir un bail sur l'une des partitions de données source. Au terme de cette opération, la partition de données source est lue par l'outil et ingérée dans Azure Cosmos DB à l'aide de la bibliothèque d'Exécuteurs en bloc. La collection de suivi est ensuite mise à jour pour enregistrer l'avancement de l'ingestion des données et les éventuelles erreurs rencontrées. Après le traitement d'une partition de données, l'outil tente de rechercher la partition source disponible suivante. Il poursuit le traitement de la partition source suivante jusqu'à ce que toutes les données soient migrées. Le code source de l'outil est disponible [ici](https://github.com/Azure-Samples/azure-cosmosdb-bulkingestion).  
 
  
-![Configuration de l'outil de migration](./media/migrate-cosmosdb-data/migrationsetup.png)
+:::image type="content" source="./media/migrate-cosmosdb-data/migrationsetup.png" alt-text="Configuration de l’outil de migration" border="false":::
  
 
  
@@ -142,14 +143,8 @@ Une fois les conditions préalables remplies, vous pouvez migrer les données en
 
 Au terme de la migration, vous pouvez vérifier que le nombre de documents contenus dans Azure Cosmos DB et dans la base de données source est le même. Dans cet exemple, la taille totale des données contenues dans Azure Cosmos DB était de 65 téraoctets. Après la migration, l'indexation peut être activée de manière sélective et les RU peuvent être abaissées au niveau requis par les opérations de la charge de travail.
 
-## <a name="contact-the-azure-cosmos-db-team"></a>Sélectionner l’équipe Azure Cosmos DB
-Même si vous pouvez suivre les instructions de ce guide pour migrer correctement des jeux de données volumineux vers Azure Cosmos DB, pour des migrations à grande échelle, il est recommandé de contacter l’équipe produit d’Azure Cosmos DB pour valider la modélisation des données et une révision de l’architecture générale. En fonction de votre jeu de données et de votre charge de travail, l’équipe produit peut également suggérer d’autres optimisations des performances et des coûts qui peuvent s’appliquer à votre situation. Pour contacter l’équipe Azure Cosmos DB afin d’obtenir de l’aide concernant les migrations à grande échelle, vous pouvez ouvrir un ticket de support sous le type de problème « Conseils généraux », sous-type de problème « Grandes (To+) migrations », comme indiqué ci-dessous.
-
-![Rubrique sur le support de la migration](./media/migrate-cosmosdb-data/supporttopic.png)
-
-
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour en savoir plus, essayez les exemples d'applications utilisant la bibliothèque d'Exécuteurs en bloc en [.NET](bulk-executor-dot-net.md) et [Java](bulk-executor-java.md). 
 * La bibliothèque d'Exécuteurs en bloc est intégrée au connecteur Spark Cosmos DB. Pour plus d'informations, consultez [Connecteur Spark Azure Cosmos DB](spark-connector.md).  
-* Pour contacter l’équipe Azure Cosmos DB en ouvrant un ticket de support sous le type de problème « Conseils généraux », sous-type de problème « Grandes (To+) migrations » pour obtenir une aide supplémentaire lors des migrations à grande échelle. 
+* Pour contacter l’équipe Azure Cosmos DB en ouvrant un ticket de support sous le type de problème « Conseils généraux », sous-type de problème « Grandes (To+) migrations » pour obtenir une aide supplémentaire lors des migrations à grande échelle.

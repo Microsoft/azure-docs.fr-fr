@@ -1,40 +1,46 @@
 ---
 title: 'Tutoriel : Trouver plusieurs routes en fonction du mode de transport | Microsoft Azure Maps'
-description: Dans ce tutoriel, vous allez apprendre à trouver des itinéraires pour différents modes de transport en utilisant Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 01/14/2020
+description: Didacticiel sur l’utilisation d’Azure Maps afin de rechercher des itinéraires pour des modes spécifiques de déplacement vers des points d'intérêt. Apprenez à afficher plusieurs itinéraires sur des cartes.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 09/10/2020
 ms.topic: tutorial
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.custom: mvc
-ms.openlocfilehash: c7ed2421f468dfbb64c635683a7909b517105bc7
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-js
+ms.openlocfilehash: 125ca501dbad74263f32632db44eebd097c3b0a1
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80333802"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896699"
 ---
-# <a name="tutorial-find-routes-for-different-modes-of-travel-using-azure-maps"></a>Tutoriel : Rechercher des itinéraires pour différents modes de déplacement avec Azure Maps
+# <a name="tutorial-find-and-display-routes-for-different-modes-of-travel-using-azure-maps"></a>Tutoriel : Rechercher et afficher des itinéraires pour différents modes de déplacement avec Azure Maps
 
-Ce tutoriel montre comment utiliser votre compte Azure Maps et le service d’itinéraire. Le service d’itinéraire peut trouver l’itinéraire vers le point d’intérêt de votre choix, en hiérarchisant le mode de déplacement, en fonction de votre mode de déplacement. Vous pouvez afficher deux itinéraires différents sur votre carte, un pour les voitures et l’autre pour les camions. Le service d’itinéraire prend en compte les limitations liées à la hauteur et au poids du véhicule, ou au transport de chargements dangereux. Dans ce tutoriel, vous allez apprendre à :
+Ce tutoriel montre comment utiliser le [service Route](/rest/api/maps/route) et le [contrôle de carte](./how-to-use-map-control.md) d’Azure Maps pour afficher des directions pour des véhicules privés et des véhicules commerciaux (camions) avec le type de chargement `USHazmatClass2`. Nous verrons également comment visualiser les données de trafic en temps réel sur une carte. Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
-> * Créer une page web à l’aide de l’API Map Control
-> * Visualiser le flux du trafic sur votre carte
-> * Créer des requêtes d’itinéraire déclarant le mode de déplacement
-> * Afficher plusieurs itinéraires sur votre carte
+> * Créer et afficher le contrôle de carte sur une page web.
+> * Afficher des données de trafic en temps réel sur une carte.
+> * Demander et afficher des itinéraires pour véhicules privés et commerciaux sur une carte.
 
 ## <a name="prerequisites"></a>Prérequis
-Avant de continuer, suivez les instructions mentionnées dans [Créer un compte](quick-demo-map-app.md#create-an-account-with-azure-maps), puis sélectionnez le niveau tarifaire S1. Effectuez les étapes décrites dans [Obtenir la clé primaire](quick-demo-map-app.md#get-the-primary-key-for-your-account) pour obtenir la clé primaire de votre compte. Pour plus d’informations sur l’authentification dans Azure Maps, voir [Gérer l’authentification dans Azure Maps](how-to-manage-authentication.md).
 
-## <a name="create-a-new-map"></a>Créer une carte
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-Les étapes suivantes vous indiquent comment créer une page HTML statique intégrée avec l’API Map Control.
+2. [Créez un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account).
 
-1. Sur votre ordinateur local, créez un fichier et nommez-le **MapTruckRoute.html**.
-2. Ajoutez les composants HTML suivants au fichier :
+3. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement. Pour plus d’informations sur l’authentification dans Azure Maps, voir [Gérer l’authentification dans Azure Maps](how-to-manage-authentication.md).
+
+Vous pouvez obtenir le code source complet de l’exemple [ici](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/truckRoute.html). Vous pouvez trouver un exemple en direct [ici](https://azuremapscodesamples.azurewebsites.net/?sample=Multiple%20routes%20by%20mode%20of%20travel).
+
+## <a name="create-a-new-web-page-using-the-map-control-api"></a>Créer une page web à l’aide de l’API Map Control
+
+Les étapes suivantes vous montrent comment créer et afficher le contrôle de carte dans une page web.
+
+1. Sur votre ordinateur local, créez un fichier et nommez-le **MapTruckRoute.html** .
+2. Copiez/collez le balisage HTML suivant dans le fichier.
 
     ```HTML
     <!DOCTYPE html>
@@ -79,7 +85,7 @@ Les étapes suivantes vous indiquent comment créer une page HTML statique inté
     </html>
     ```
 
-    Notez que l’en-tête HTML inclut les fichiers de ressources CSS et JavaScript hébergés par la bibliothèque Azure Map Control. Notez l’événement `onload` sur le corps de la page, qui appelle la fonction `GetMap` lorsque le corps de la page est chargé. Cette fonction est destinée à contenir du code JavaScript inline pour accéder aux API Azure Maps.
+     L’en-tête HTML inclut les fichiers de ressources CSS et JavaScript hébergés par la bibliothèque Azure Map Control. L’événement `onload` du corps appelle la fonction `GetMap`. À l’étape suivante, nous allons ajouter le code d’initialisation du contrôle de carte.
 
 3. Ajoutez le code JavaScript suivant à la fonction `GetMap`. Remplacez la chaîne `<Your Azure Maps Key>` par la clé primaire copiée à partir de votre compte Maps.
 
@@ -94,15 +100,13 @@ Les étapes suivantes vous indiquent comment créer une page HTML statique inté
     });
     ```
 
-    La classe `atlas.Map` fournit le contrôle d’une carte web visuelle et interactive. Elle est un composant de l’API Azure Map Control.
+4. Enregistrez le fichier et ouvrez-le dans votre navigateur. Un modèle s’affiche.
 
-4. Enregistrez le fichier et ouvrez-le dans votre navigateur. À ce stade, vous disposez d’une carte de base que vous pouvez développer.
+    :::image type="content" source="./media/tutorial-prioritized-routes/basic-map.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
-   ![Afficher la carte de base](./media/tutorial-prioritized-routes/basic-map.png)
+## <a name="render-real-time-traffic-data-on-a-map"></a>Afficher des données de trafic en temps réel sur une carte.
 
-## <a name="visualize-traffic-flow"></a>Visualiser le flux du trafic
-
-1. Ajoutez l’affichage du trafic à la carte. L’événement `ready` des cartes attend que les ressources des cartes soient chargées et prêtes à interagir de manière sécurisée avec lui.
+1. Ajoutez le code JavaScript suivant à la fonction `GetMap`. Ce code implémente le gestionnaire d’événements du contrôle de carte `ready`. Le reste du code de ce tutoriel sera placé dans le gestionnaire d’événements `ready`.
 
     ```javascript
     map.events.add("ready", function() {
@@ -113,54 +117,56 @@ Les étapes suivantes vous indiquent comment créer une page HTML statique inté
     });
     ```
 
-    Dans le gestionnaire d’événements `ready` de la carte, le paramètre de flux de trafic sur la carte est défini sur `relative`, c’est-à-dire la vitesse de la route correspondant à un trafic fluide. Vous pouvez également le définir sur la vitesse `absolute` de la route, ou sur `relative-delay` qui affiche la vitesse relative lorsqu’elle diffère du trafic fluide.
+    Dans le gestionnaire d’événements `ready` de la carte, le paramètre de circulation sur la carte est défini sur `relative`, c’est-à-dire la vitesse de la route correspondant à un trafic fluide. Pour plus d’options de trafic, consultez [TrafficOptions, interface](/javascript/api/azure-maps-control/atlas.trafficoptions?preserve-view=false&view=azure-maps-typescript-latest).
 
-2. Enregistrez le fichier **MapTruckRoute.html** et actualisez la page dans votre navigateur. Si vous interagissez avec la carte et que vous faites un zoom sur Los Angeles, vous devriez voir les rues avec les données de trafic actuelles.
+2. Enregistrez le fichier **MapTruckRoute.html** et actualisez la page dans votre navigateur. Si vous effectuez un zoom sur une ville, par exemple Los Angeles, vous verrez que les rues sont affichées avec les données de circulation actuelles.
 
-   ![Voir le trafic sur une carte](./media/tutorial-prioritized-routes/traffic-map.png)
+    :::image type="content" source="./media/tutorial-prioritized-routes/traffic-map.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
 <a id="queryroutes"></a>
 
-## <a name="define-how-the-route-will-be-rendered"></a>Définir le rendu de l’itinéraire
+## <a name="define-route-display-rendering"></a>Définir le rendu de l’affichage de l’itinéraire
 
-Dans ce didacticiel, deux itinéraires sont calculés et affichés sur la carte. Un itinéraire utilise des routes accessibles aux voitures et l’autre des routes accessibles aux camions. Lors du rendu, nous affichons une icône de symbole pour le départ et l’arrivée de l’itinéraire, et des lignes de couleurs différentes pour chaque tracé d’itinéraire.
+Dans ce didacticiel, deux itinéraires sont calculés et affichés sur la carte. Le premier itinéraire est calculé pour un véhicule privé (voiture). Le deuxième itinéraire est calculé pour un véhicule commercial (camion) afin de montrer la différence entre les résultats. Lorsque la carte est rendue, elle affiche une icône de symbole pour les points de départ et de fin de l’itinéraire, et des formes géométriques de ligne d’itinéraire avec différentes couleurs pour chaque tracé d’itinéraire. Pour plus d’informations sur l’ajout de couches de lignes, consultez [Ajouter une couche de lignes à une carte](map-add-line-layer.md). Pour en savoir plus sur les couches de symboles, consultez [Ajouter une couche de symboles à une carte](map-add-pin.md).
 
-1. Une fois la carte initialisée, ajoutez le code JavaScript suivant au gestionnaire d’événements `ready` des cartes.
+1. Dans le gestionnaire d’événements du contrôle de carte `ready`, ajoutez le code suivant.
 
     ```JavaScript
-    //Wait until the map resources have fully loaded.
-    map.events.add('ready', function () {
 
-        //Create a data source and add it to the map.
-        datasource = new atlas.source.DataSource();
-        map.sources.add(datasource);
+    //Create a data source and add it to the map.
+    datasource = new atlas.source.DataSource();
+    map.sources.add(datasource);
 
-        //Add a layer for rendering the route lines and have it render under the map labels.
-        map.layers.add(new atlas.layer.LineLayer(datasource, null, {
-            strokeColor: ['get', 'strokeColor'],
-            strokeWidth: ['get', 'strokeWidth'],
-            lineJoin: 'round',
-            lineCap: 'round'
-        }), 'labels');
+    //Add a layer for rendering the route lines and have it render under the map labels.
+    map.layers.add(new atlas.layer.LineLayer(datasource, null, {
+        strokeColor: ['get', 'strokeColor'],
+        strokeWidth: ['get', 'strokeWidth'],
+        lineJoin: 'round',
+        lineCap: 'round'
+    }), 'labels');
 
-        //Add a layer for rendering point data.
-        map.layers.add(new atlas.layer.SymbolLayer(datasource, null, {
-            iconOptions: {
-                image: ['get', 'icon'],
-                allowOverlap: true
-            },
-            textOptions: {
-                textField: ['get', 'title'],
-                offset: [0, 1.2]
-            },
-            filter: ['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']] //Only render Point or MultiPoints in this layer.
-        }));
-    });
+    //Add a layer for rendering point data.
+    map.layers.add(new atlas.layer.SymbolLayer(datasource, null, {
+        iconOptions: {
+            image: ['get', 'icon'],
+            allowOverlap: true
+        },
+        textOptions: {
+            textField: ['get', 'title'],
+            offset: [0, 1.2]
+        },
+        filter: ['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']] //Only render Point or MultiPoints in this layer.
+    }));
+
     ```
-    
-    Dans le gestionnaire d’événements `ready` des cartes, une source de données est créée pour stocker les tracés d’itinéraire, ainsi que les points de départ et d’arrivée. Une couche de ligne est créée et jointe à la source de données pour définir le rendu de la ligne d’itinéraire. Des expressions sont utilisées pour récupérer la largeur et la couleur de ligne des propriétés de la fonctionnalité de ligne d’itinéraire. Lors de l’ajout de la couche sur la carte, un deuxième paramètre avec la valeur `'labels'` est transmis et spécifie le rendu de cette couche sous les étiquettes de carte. Cela garantit que la ligne d’itinéraire ne couvre pas les étiquettes de route. Une couche de symbole est créée et jointe à la source de données. Ce calque spécifie la manière dont les points de départ et d’arrivée sont affichés. Dans le cas présent, des expressions ont été ajoutées pour récupérer les informations d’image d’icône et d’étiquette de texte des propriétés de chaque objet de point. 
-    
-2. Pour ce didacticiel, définissez le point de départ sur une entreprise fictive de Seattle appelée Fabrikam et le point d’arrivée sur un siège Microsoft. Dans le gestionnaire d’événements `ready` des cartes, ajoutez le code suivant.
+
+
+    Dans le gestionnaire d’événements `ready` du contrôle de carte, une source de données est créée pour stocker l’itinéraire du départ jusqu’à l’arrivée. Des [expressions](data-driven-style-expressions-web-sdk.md) sont utilisées pour récupérer la largeur et la couleur de ligne à partir des propriétés de la caractéristique de ligne d’itinéraire. Pour vous assurer que la ligne d’itinéraire ne couvre pas les étiquettes de route, nous avons transmis un deuxième paramètre avec la valeur de `'labels'`.
+
+    Ensuite, une couche de symbole est créée et jointe à la source de données. Ce calque spécifie comment les points de départ et d’arrivée sont affichés. Des expressions ont été ajoutées pour récupérer les informations d’image d’icône et d’étiquette de texte des propriétés à partir de chaque objet de point. Pour en savoir plus sur les expressions, consultez [Expressions de style basé sur les données](data-driven-style-expressions-web-sdk.md).
+
+2. Définissez le point de départ sur une entreprise fictive de Seattle appelée Fabrikam, et le point d’arrivée sur un bâtiment Microsoft.  Dans le gestionnaire d’événements du contrôle de carte `ready`, ajoutez le code suivant.
+
 
     ```JavaScript
     //Create the GeoJSON objects which represent the start and end point of the route.
@@ -173,13 +179,7 @@ Dans ce didacticiel, deux itinéraires sont calculés et affichés sur la carte.
         title: 'Microsoft - Lincoln Square',
         icon: 'pin-round-blue'
     });
-    ```
 
-    Ce code crée deux [objets GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) pour représenter les points de départ et d’arrivée de l’itinéraire. Une propriété `title` et `icon` est ajoutée à chaque point.
-
-3. Ajoutez ensuite le code JavaScript suivant pour ajouter à la carte les marqueurs des points de départ et d’arrivée :
-
-    ```JavaScript
     //Add the data to the data source.
     datasource.add([startPoint, endPoint]);
 
@@ -188,25 +188,27 @@ Dans ce didacticiel, deux itinéraires sont calculés et affichés sur la carte.
         bounds: atlas.data.BoundingBox.fromData([startPoint, endPoint]),
         padding: 100
     });
+
     ```
 
-    Les points de départ et d’arrivée sont ajoutés à la source de données. Le rectangle englobant des points de départ et d’arrivée est calculé à l’aide de la fonction `atlas.data.BoundingBox.fromData`. Ce rectangle englobant est utilisé pour définir la vue de caméra de la carte sur l’itinéraire entier à l’aide de la fonction `map.setCamera`. Une marge intérieure est ajoutée pour compenser les dimensions en pixels des icônes de symbole.
+    Ce code crée deux [objets point GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) pour représenter des points de départ et d’arrivée qui sont ensuite ajoutés à la source de données.
 
-4. Enregistrez le fichier et actualisez votre navigateur afin d’afficher les repères sur votre carte. À présent, la carte est centrée sur Seattle. Vous pouvez observer le repère rond bleu marquant le point de départ et l’autre repère bleu marquant le point d’arrivée.
+    Le dernier bloc de code définit la vue de l’appareil photo sur la base de la latitude et de la longitude des points de départ et d’arrivée. Les points de départ et d’arrivée sont ajoutés à la source de données. Le rectangle englobant des points de départ et d’arrivée est calculé à l’aide de la fonction `atlas.data.BoundingBox.fromData`. Ce rectangle englobant est utilisé pour définir la vue de caméra de la carte sur l’itinéraire entier à l’aide de la fonction `map.setCamera`. Une marge intérieure est ajoutée pour compenser les dimensions en pixels des icônes de symbole. Pour plus d’informations sur la propriété setCamera du contrôle de carte setCamera, consultez la propriété [setCamera(CameraOptions | CameraBoundsOptions & AnimationOptions)](/javascript/api/azure-maps-control/atlas.map?view=azure-maps-typescript-latest#setcamera-cameraoptions---cameraboundsoptions---animationoptions-&preserve-view=false).
 
-   ![Afficher la carte avec les points de départ et d’arrivée](./media/tutorial-prioritized-routes/pins-map.png)
+3. Enregistrez **TruckRoute.html** et actualisez votre navigateur. La carte est maintenant centrée sur Seattle. La broche bleue en forme de larme marque le point de départ. La broche bleue ronde marque le point d’arrivée.
+
+   :::image type="content" source="./media/tutorial-prioritized-routes/pins-map.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
 <a id="multipleroutes"></a>
 
-## <a name="render-routes-prioritized-by-mode-of-travel"></a>Afficher les itinéraires priorisés par mode de déplacement
+## <a name="request-and-display-private-and-commercial-vehicle-routes-on-a-map"></a>Demander et afficher des itinéraires pour véhicules privés et commerciaux sur une carte.
 
-Cette section montre comment utiliser l’API de service d’itinéraire Maps. L’API d’itinéraire permet de rechercher plusieurs itinéraires entre un point de départ et une destination donnés, en fonction de votre mode de transport. Le service d’itinéraire fournit les API dédiées à la planification des itinéraires les plus *rapides*, *courts*, *économiques*, ou *intéressants*. Non seulement les API planifient des itinéraires entre deux localisations, mais elles considèrent également les conditions de trafic actuelles. 
+Cette section montre comment utiliser le service Route Azure Maps pour trouver des directions d’un point à un autre, en fonction du mode de transport. Nous allons utiliser deux modes de transport : camion et voiture.
 
-Avec la base de données de trafic historique complète d’Azure, L’API d’itinéraire permet également aux utilisateurs de planifier des itinéraires. L’API peut prédire les durées d’itinéraire pour un jour et une heure donnés. Pour plus d’informations, consultez [Get route directions](https://docs.microsoft.com/rest/api/maps/route/getroutedirections) (Obtenir les itinéraires). 
+>[!TIP]
+>Le service Route fournit des API afin de planifier l’itinéraire le plus *rapide* , le plus *court* , le plus *économique* ou le plus *intéressant* en fonction de la distance, des conditions de circulation et du mode de transport utilisé. Il permet également aux utilisateurs de planifier de futurs itinéraires en fonction de l’historique des conditions de circulation. Les utilisateurs peuvent voir la prédiction des durées d’itinéraire pour un moment donné. Pour plus d’informations, consultez l’[API Obtenir les itinéraires](/rest/api/maps/route/getroutedirections).
 
-Tous les blocs de code suivants doivent être ajoutés **dans l’eventListener du chargement de la carte** pour assurer leur chargement une fois la carte complètement chargée.
-
-1. Dans la fonction GetMap, ajoutez le code JavaScript suivant.
+1. Dans la fonction `GetMap`, à l’intérieur du gestionnaire d’événements `ready` du contrôle, ajoutez le code suivant au code JavaScript.
 
     ```JavaScript
     // Use SubscriptionKeyCredential with a subscription key
@@ -219,9 +221,9 @@ Tous les blocs de code suivants doivent être ajoutés **dans l’eventListener 
     var routeURL = new atlas.service.RouteURL(pipeline);
     ```
 
-   `SubscriptionKeyCredential` crée un `SubscriptionKeyCredentialPolicy` pour authentifier les requêtes HTTP auprès d’Azure Maps avec la clé d’abonnement. `atlas.service.MapsURL.newPipeline()` utilise la stratégie `SubscriptionKeyCredential` et crée une instance de [pipeline](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.pipeline?view=azure-maps-typescript-latest). `routeURL` représente une URL des opérations sur l’[itinéraire](https://docs.microsoft.com/rest/api/maps/route) d’Azure Maps.
+   `SubscriptionKeyCredential` crée un `SubscriptionKeyCredentialPolicy` pour authentifier les requêtes HTTP auprès d’Azure Maps avec la clé d’abonnement. `atlas.service.MapsURL.newPipeline()` utilise la stratégie `SubscriptionKeyCredential` et crée une instance de [pipeline](/javascript/api/azure-maps-rest/atlas.service.pipeline). `routeURL` représente une URL des opérations sur l’[itinéraire](/rest/api/maps/route) d’Azure Maps.
 
-2. Après avoir configuré les informations d’identification et l’URL, ajoutez le code JavaScript suivant pour construire un itinéraire du point de départ au point d’arrivée pour un camion transportant USHazmatClass2 classé cargo et afficher les résultats.
+2. Après avoir configuré les informations d’identification et l’URL, ajoutez le code JavaScript suivant pour construire un itinéraire pour camion du point de départ au point d’arrivée. Cet itinéraire est créé et affiché pour un camion transportant un chargement classé `USHazmatClass2`.
 
     ```JavaScript
     //Start and end point input to the routeURL
@@ -248,9 +250,12 @@ Tous les blocs de code suivants doivent être ajoutés **dans l’eventListener 
     });
     ```
 
-    L’extrait de code ci-dessus interroge le service d’itinéraire d’Azure Maps via la méthode [getRouteDirections](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.models.routedirectionsrequestbody?view=azure-maps-typescript-latest). La ligne d’itinéraire est ensuite extraite de la collection de fonctionnalités GeoJSON à partir de la réponse extraite à l’aide de la méthode `geojson.getFeatures()`. La ligne d’itinéraire est ensuite ajoutée à la source de données. Un index de 0 garantit que la ligne est affichée avant toutes les autres lignes dans la source de données. Cela est fait car le calcul d’un itinéraire de camion sera souvent plus lent que le calcul d’un itinéraire de voiture. Si la ligne d’itinéraire de camion est ajoutée à la source de données après l’itinéraire de voiture, elle s’affiche au-dessus d’elle. Deux propriétés sont ajoutées à la ligne d’itinéraire réservé aux camions : un trait de couleur bleue et une épaisseur de trait de neuf pixels.
+    Le code ci-dessus interroge le service Route Azure Maps par le biais de l’[API Obtenir des directions Azure Maps](/javascript/api/azure-maps-rest/atlas.service.routeurl#calculateroutedirections-aborter--geojson-position----calculateroutedirectionsoptions-). La ligne d’itinéraire est ensuite extraite de la collection de fonctionnalités GeoJSON à partir de la réponse extraite à l’aide de la méthode `geojson.getFeatures()`. Pour finir, la ligne d’itinéraire est ajoutée à la source de données. Nous l’ajoutons à l’index 0 afin de nous assurer que l’itinéraire pour camion est affiché avant toute autre ligne dans la source de données, car le calcul de l’itinéraire pour camion sera souvent plus lent que le calcul d’un itinéraire pour voiture. Si la ligne d’itinéraire de camion est ajoutée à la source de données après l’itinéraire de voiture, elle s’affiche au-dessus d’elle. Deux propriétés sont ajoutées à la ligne d’itinéraire pour camion : un trait de couleur bleue et une épaisseur de trait de neuf pixels.
 
-3. Ajoutez le code JavaScript suivant pour construire un itinéraire pour une voiture et afficher les résultats.
+    >[!TIP]
+    > Pour afficher toutes les options et valeurs possibles pour l’API Obtenir des directions Azure Maps, consultez les [paramètres d’URI pour la publication de directions](/rest/api/maps/route/postroutedirections#uri-parameters).
+
+3. Ajoutez maintenant le code JavaScript suivant afin de construire un itinéraire pour une voiture.
 
     ```JavaScript
     routeURL.calculateRouteDirections(atlas.service.Aborter.timeout(10000), coordinates).then((directions) => {
@@ -263,39 +268,28 @@ Tous les blocs de code suivants doivent être ajoutés **dans l’eventListener 
         routeLine.properties.strokeColor = '#B76DAB';
         routeLine.properties.strokeWidth = 5;
 
-        //Add the route line to the data source. We want this to render below the car route which will likely be added to the data source faster, so insert it at index 0.  
+        //Add the route line to the data source. This will add the car route after the truck route.  
         datasource.add(routeLine);
     });
     ```
 
-    L’extrait de code ci-dessus interroge le service d’itinéraire d’Azure Maps via la méthode [getRouteDirections](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.models.routedirectionsrequestbody?view=azure-maps-typescript-latest). La ligne d’itinéraire est ensuite extraite de la collection de fonctionnalités GeoJSON à partir de la réponse extraite à l’aide de la méthode `geojson.getFeatures()`. La ligne d’itinéraire est ensuite ajoutée à la source de données. Deux propriétés sont ajoutées à la ligne d’itinéraire réservé aux voitures : un trait de couleur violette et une épaisseur de trait de cinq pixels.  
+    Le code ci-dessus interroge le service d’itinéraire Azure Maps par le biais de la méthode d’[API Obtenir des directions Azure Maps](/javascript/api/azure-maps-rest/atlas.service.routeurl#calculateroutedirections-aborter--geojson-position----calculateroutedirectionsoptions-). La ligne d’itinéraire est ensuite extraite de la collection de fonctionnalités GeoJSON à partir de la réponse extraite à l’aide de la méthode `geojson.getFeatures()`. Pour finir, la ligne d’itinéraire est ajoutée à la source de données. Deux propriétés sont ajoutées à la ligne d’itinéraire pour camion : un trait de couleur violette et une épaisseur de trait de cinq pixels.
 
-4. Enregistrez le fichier **MapTruckRoute.html** et actualisez votre navigateur afin d’afficher les résultats. Dans le cadre d’une connexion efficace avec les API Maps, vous devriez observer une carte similaire au contenu suivant.
+4. Enregistrez le fichier **TruckRoute.html** et actualisez votre navigateur web. La carte doit maintenant afficher les itinéraires pour camion et pour voiture.
 
-    ![Itinéraires priorisés avec Azure Route Service](./media/tutorial-prioritized-routes/prioritized-routes.png)
+    :::image type="content" source="./media/tutorial-prioritized-routes/prioritized-routes.png" alt-text="Rendu de la carte de base du contrôle de carte":::
 
-    L’itinéraire des camions est bleu, tandis que l’itinéraire des voitures est violet et fin. L’itinéraire réservé aux voitures passe au-dessus du Lac Washington via l’I-90, qui traverse des tunnels installés sous des zones résidentielles. Les tunnels étant proches de zones résidentielles, tout transport de déchets dangereux est interdit. L’itinéraire des camions, pour lequel est défini le type de chargement USHazmatClass2, utilise une voie de circulation différente.
+    L’itinéraire pour camion est affiché à l’aide d’une ligne bleue épaisse. L’itinéraire pour voiture est affichée à l’aide d’une fine ligne violette. L’itinéraire pour voiture passe au-dessus du Lac Washington via l’I-90, qui traverse des tunnels installés sous des zones résidentielles. Les tunnels étant proches de zones résidentielles, tout transport de déchets dangereux est interdit. L’itinéraire pour camion, pour lequel est défini le type de chargement `USHazmatClass2`, utilise une voie de circulation différente.
+
+Vous pouvez obtenir le code source complet de l’exemple [ici](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/truckRoute.html). Vous pouvez trouver un exemple en direct [ici](https://azuremapscodesamples.azurewebsites.net/?sample=Multiple%20routes%20by%20mode%20of%20travel).
+
+Vous pouvez également [Utiliser des expressions de style basées sur les données](data-driven-style-expressions-web-sdk.md)
+
+
 
 ## <a name="next-steps"></a>Étapes suivantes
-
-Dans ce didacticiel, vous avez appris à :
-
-> [!div class="checklist"]
-> * Créer une page web à l’aide de l’API Map Control
-> * Visualiser le flux du trafic sur votre carte
-> * Créer des requêtes d’itinéraire déclarant le mode de déplacement
-> * Afficher plusieurs itinéraires sur votre carte
-
-> [!div class="nextstepaction"]
-> [Afficher le code source complet](https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/master/AzureMapsCodeSamples/Tutorials/truckRoute.html)
-
-> [!div class="nextstepaction"]
-> [Afficher un exemple en direct](https://azuremapscodesamples.azurewebsites.net/?sample=Multiple%20routes%20by%20mode%20of%20travel)
 
 Le tutoriel suivant montre comment créer un localisateur de magasin simple à l’aide d’Azure Maps.
 
 > [!div class="nextstepaction"]
 > [Créer un localisateur de magasin à l’aide d’Azure Maps](./tutorial-create-store-locator.md)
-
-> [!div class="nextstepaction"]
-> [Utiliser des expressions de style basées sur les données](data-driven-style-expressions-web-sdk.md)

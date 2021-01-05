@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à 123FormBuilder SSO | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et 123FormBuilder SSO.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 5211910a-ab96-4709-959a-524c4d57c43e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/14/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 947a9d632089b18f6b950c5eecbcb74d061f32eb
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: aa4bab2f7ecb90c61e22de46b01a5ed81342a408
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81275749"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92319183"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-123formbuilder-sso"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à 123FormBuilder SSO
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer 123FormBuilder SSO à 
 * Permettre à vos utilisateurs de se connecter automatiquement à 123FormBuilder SSO avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -45,7 +41,7 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 * 123FormBuilder SSO prend en charge l’authentification unique initiée par le **fournisseur de services et le fournisseur d’identité**.
 * 123FormBuilder SSO prend en charge le provisionnement d’utilisateurs **juste-à-temps**.
-* Après avoir configuré 123FormBuilder SSO, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré 123FormBuilder SSO, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="adding-123formbuilder-sso-from-the-gallery"></a>Ajout de 123FormBuilder SSO à partir de la galerie
 
@@ -137,7 +133,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Pour configurer l’authentification unique côté **123FormBuilder SSO**, accédez à [https://www.123formbuilder.com/form-2709121/](https://www.123formbuilder.com/form-2709121/) et effectuez les étapes suivantes :
 
-    ![Configure Single Sign-On](./media/123formbuilder-tutorial/submit.png) 
+    ![Capture d’écran montrant l’écran de configuration SSO SAML - Identity Provider.](./media/123formbuilder-tutorial/submit.png) 
 
     a. Dans la zone de texte **Email**, entrez l’adresse e-mail de l’utilisateur, par exemple `B.Simon@Contoso.com`.
 
@@ -163,16 +159,16 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans 123FormB
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette 123FormBuilder SSO dans le volet d’accès, vous devez être connecté automatiquement à l’application 123FormBuilder SSO pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette 123FormBuilder SSO dans le volet d’accès, vous devez être connecté automatiquement à l’application 123FormBuilder SSO pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer 123FormBuilder SSO avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)

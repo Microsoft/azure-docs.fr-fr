@@ -2,16 +2,14 @@
 title: Effectuer une rotation des certificats dans Azure Kubernetes Service (AKS)
 description: Découvrez comment assurer la rotation de vos certificats dans un cluster Azure Kubernetes Service (AKS).
 services: container-service
-author: zr-msft
 ms.topic: article
 ms.date: 11/15/2019
-ms.author: zarhoads
-ms.openlocfilehash: 00dcef4ae0f04fc7f550859238ae8c7e1ad19384
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: 90526b78e65c335f07a2a9d2d152b54b47233082
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80549070"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88211038"
 ---
 # <a name="rotate-certificates-in-azure-kubernetes-service-aks"></a>Effectuer une rotation des certificats dans Azure Kubernetes Service (AKS)
 
@@ -39,10 +37,9 @@ AKS génère et utilise les certificats, autorités de certification et comptes 
 > [!NOTE]
 > Les clusters AKS créés avant le mois de mars 2019 possèdent des certificats qui expirent au bout de deux ans. Tout cluster créé après mars 2019, et tout cluster dont la rotation des certificats a été effectuée, dispose de certificats d’autorité de certification de cluster qui expirent au bout de 30 ans. Tous les autres certificats expirent au bout de deux ans. Pour vérifier à quel moment votre cluster a été créé, utilisez `kubectl get nodes` pour afficher l’*âge* de vos pools de nœuds.
 > 
-> En outre, vous pouvez vérifier la date d’expiration du certificat de votre cluster. Par exemple, la commande suivante affiche les détails du certificat pour le cluster *myAKSCluster*.
+> En outre, vous pouvez vérifier la date d’expiration du certificat de votre cluster. Par exemple, la commande Bash suivante affiche les détails du certificat pour le cluster *myAKSCluster*.
 > ```console
-> kubectl config view --raw -o jsonpath="{.clusters[?(@.name == 'myAKSCluster')].cluster.certificate-authority-data}" | base64 -d > my-cert.crt
-> openssl x509 -in my-cert.crt -text
+> kubectl config view --raw -o jsonpath="{.clusters[?(@.name == 'myAKSCluster')].cluster.certificate-authority-data}" | base64 -d | openssl x509 -text | grep -A2 Validity
 > ```
 
 ## <a name="rotate-your-cluster-certificates"></a>Procéder à la rotation de vos certificats de cluster
@@ -97,5 +94,5 @@ Cet article vous a montré comment procéder automatiquement à la rotation des 
 [az-extension-add]: /cli/azure/extension#az-extension-add
 [az-extension-update]: /cli/azure/extension#az-extension-update
 [aks-best-practices-security-upgrades]: operator-best-practices-cluster-security.md
-[dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/
+[dev-spaces]: ../dev-spaces/index.yml
 [dev-spaces-rotate]: ../dev-spaces/troubleshooting.md#error-using-dev-spaces-after-rotating-aks-certificates

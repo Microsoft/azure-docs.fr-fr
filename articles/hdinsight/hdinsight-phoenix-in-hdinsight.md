@@ -1,19 +1,19 @@
 ---
 title: Apache Phoenix dans HDinsight - Azure HDInsight
 description: Présentation d’Apache Phoenix
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/17/2019
-ms.openlocfilehash: b1d81296c996ab09cb6482cb970496779ccf8bd6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f98021d1e94b3796b2aeb6ba2e883e4e1380b8ca
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435494"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004821"
 ---
 # <a name="apache-phoenix-in-azure-hdinsight"></a>Apache Phoenix dans Azure HDInsight
 

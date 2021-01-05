@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 10/09/2019
 ms.author: dastrebe
 zone_pivot_groups: client-operating-system
-ms.openlocfilehash: 1601ab6d81b888fd2247e95f22c58e1fc91df698
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7c5ad53c0040009e9ed1f28072540b46ce7b0b9a
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273733"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94683917"
 ---
 # <a name="install-and-use-consul-in-azure-kubernetes-service-aks"></a>Installer et utiliser Consul dans AKS (Azure Kubernetes Service)
 
@@ -33,7 +33,7 @@ Dans cet article, vous apprendrez comment :
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Les étapes détaillées dans cet article supposent que vous avez créé un cluster AKS (Kubernetes version `1.13` ou supérieure, avec RBAC activé) et que vous avez établi une connexion `kubectl` avec le cluster. Si vous avez besoin d’aide avec l’un quelconque de ces éléments, consultez le [guide de démarrage rapide d’AKS][aks-quickstart]. Vérifiez que votre cluster dispose au minimum de 3 nœuds dans le pool de nœuds Linux.
+Les étapes détaillées dans cet article supposent que vous avez créé un cluster AKS (Kubernetes `1.13` et ultérieur, avec RBAC Kubernetes activé) et que vous avez établi une connexion `kubectl` avec le cluster. Si vous avez besoin d’aide avec l’un quelconque de ces éléments, consultez le [guide de démarrage rapide d’AKS][aks-quickstart]. Vérifiez que votre cluster dispose au minimum de 3 nœuds dans le pool de nœuds Linux.
 
 Vous avez besoin de [Helm][helm] pour suivre ces instructions et installer Consul. Nous vous recommandons d’installer et de configurer correctement la dernière version stable dans votre cluster. Si vous avez besoin d’aide pour installer Helm, consultez les [consignes d’installation de Helm dans AKS][helm-install]. Tous les pods Consul doivent également être planifiés pour s’exécuter sur des nœuds Linux.
 
@@ -166,6 +166,8 @@ Pour explorer davantage d’options de configuration et d’installation pour Co
 Pour suivre des scénarios supplémentaires, consultez :
 
 - [Exemple d’application Consul][consul-app-example]
+- [Architecture de référence Kubernetes Consul][consul-reference]
+- [Passerelles de maillage Consul][consul-mesh-gateways]
 
 <!-- LINKS - external -->
 [Hashicorp]: https://hashicorp.com
@@ -177,15 +179,17 @@ Pour suivre des scénarios supplémentaires, consultez :
 [consul-github-releases]: https://github.com/hashicorp/consul/releases
 [consul-release-notes]: https://github.com/hashicorp/consul/blob/master/CHANGELOG.md
 [consul-install-download]: https://www.consul.io/downloads.html
-[consul-install-k8]: https://www.consul.io/docs/platform/k8s/run.html
+[consul-install-k8]: https://learn.hashicorp.com/consul/kubernetes/kubernetes-deployment-guide
 [consul-install-helm-options]: https://www.consul.io/docs/platform/k8s/helm.html#configuration-values-
-[consul-app-example]: https://github.com/hashicorp/demo-consul-101/tree/master/k8s
-[install-wsl]: https://docs.microsoft.com/windows/wsl/install-win10
+[consul-mesh-gateways]: https://learn.hashicorp.com/consul/kubernetes/mesh-gateways
+[consul-reference]: https://learn.hashicorp.com/consul/kubernetes/kubernetes-reference
+[consul-app-example]: https://learn.hashicorp.com/consul?track=gs-consul-service-mesh#gs-consul-service-mesh
+[install-wsl]: /windows/wsl/install-win10
 
 [kubectl-get]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get
 [kubectl-describe]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#describe
 [kubectl-port-forward]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward
-[kubernetes-node-selectors]: https://docs.microsoft.com/azure/aks/concepts-clusters-workloads#node-selectors
+[kubernetes-node-selectors]: ./concepts-clusters-workloads.md#node-selectors
 
 <!-- LINKS - internal -->
 [aks-quickstart]: ./kubernetes-walkthrough.md

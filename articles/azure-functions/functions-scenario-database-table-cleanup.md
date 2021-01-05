@@ -3,17 +3,18 @@ title: Utiliser Azure Functions pour effectuer une tâche de nettoyage de base d
 description: Utilisez Azure Functions pour planifier une tâche qui se connecte à Azure SQL Database pour nettoyer des lignes régulièrement.
 ms.assetid: 076f5f95-f8d2-42c7-b7fd-6798856ba0bb
 ms.topic: conceptual
+ms.custom: devx-track-csharp
 ms.date: 10/02/2019
-ms.openlocfilehash: 2e3f53943d45e90b8aff8e386ce8d0e28670673f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b5e255d7d108eb063ece4e5489a8762261a0bed
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79366805"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88207253"
 ---
 # <a name="use-azure-functions-to-connect-to-an-azure-sql-database"></a>Utiliser Azure Functions pour se connecter à une base de données Azure SQL Database
 
-Cet article vous montre comment utiliser Azure Functions pour créer un travail planifié qui se connecte à une base de données ou une instance managée Azure SQL. Le code de fonction nettoie les lignes d’une table de la base de données. La fonction C# est créée selon un modèle de déclencheur de minuteur prédéfini dans Visual Studio 2019. Pour prendre en charge ce scénario, vous devez également définir une chaîne de connexion de base de données comme paramètre d’application dans l’application de fonction. Pour une instance managée Azure SQL, vous devez [activer le point de terminaison public](https://docs.microsoft.com/azure/sql-database/sql-database-managed-instance-public-endpoint-configure) pour pouvoir vous connecter à partir d’Azure Functions. Ce scénario utilise une opération en bloc sur la base de données. 
+Cet article vous montre comment utiliser Azure Functions pour créer un travail planifié qui se connecte à une base de données ou une instance managée Azure SQL. Le code de fonction nettoie les lignes d’une table de la base de données. La fonction C# est créée selon un modèle de déclencheur de minuteur prédéfini dans Visual Studio 2019. Pour prendre en charge ce scénario, vous devez également définir une chaîne de connexion de base de données comme paramètre d’application dans l’application de fonction. Pour une instance managée Azure SQL, vous devez [activer le point de terminaison public](../azure-sql/managed-instance/public-endpoint-configure.md) pour pouvoir vous connecter à partir d’Azure Functions. Ce scénario utilise une opération en bloc sur la base de données. 
 
 Si c’est la première fois que vous utilisez Azure Functions pour C#, vous devez consulter les [Informations de référence pour les développeurs C# sur Azure Functions](functions-dotnet-class-library.md).
 
@@ -21,13 +22,13 @@ Si c’est la première fois que vous utilisez Azure Functions pour C#, vous dev
 
 + Suivez les étapes de l’article [Créer votre première fonction à l’aide de Visual Studio](functions-create-your-first-function-visual-studio.md) pour créer une application de fonction locale qui cible la version 2.x ou une version ultérieure du runtime. Vous devez également avoir publié votre projet sur une application de fonction dans Azure.
 
-+ Cette article montre une commande Transact-SQL qui exécute une opération de nettoyage en bloc dans la table nommée **SalesOrderHeader** de l’exemple de base de données AdventureWorksLT. Pour créer l’exemple de base de données AdventureWorksLT, effectuez les étapes de l’article [Création d’une base de données Azure SQL dans le portail Azure](../sql-database/sql-database-get-started-portal.md).
++ Cette article montre une commande Transact-SQL qui exécute une opération de nettoyage en bloc dans la table nommée **SalesOrderHeader** de l’exemple de base de données AdventureWorksLT. Pour créer l’exemple de base de données AdventureWorksLT, effectuez les étapes de l’article [Créer une base de données dans Azure SQL Database à l’aide du portail Azure](../azure-sql/database/single-database-create-quickstart.md).
 
-+ Vous devez ajouter une [règle de pare-feu au niveau du serveur](../sql-database/sql-database-get-started-portal-firewall.md) pour l’adresse IP publique de l’ordinateur que vous utilisez pour ce guide de démarrage rapide. Cette règle vous permet d’accéder à l’instance de base de données SQL à partir de votre ordinateur local.  
++ Vous devez ajouter une [règle de pare-feu au niveau du serveur](../azure-sql/database/firewall-create-server-level-portal-quickstart.md) pour l’adresse IP publique de l’ordinateur que vous utilisez pour ce guide de démarrage rapide. Cette règle vous permet d’accéder à l’instance SQL Database à partir de votre ordinateur local.  
 
 ## <a name="get-connection-information"></a>Obtenir des informations de connexion
 
-Vous devez obtenir la chaîne de connexion pour la base de données que vous avez créée quand vous avez effectué les étapes de [Créer une base de données Azure SQL dans le portail Azure](../sql-database/sql-database-get-started-portal.md).
+Vous devez obtenir la chaîne de connexion pour la base de données que vous avez créée quand vous avez effectué les étapes décrites dans [Créer une base de données dans Azure SQL Database à l’aide du portail Azure](../azure-sql/database/single-database-create-quickstart.md).
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 
@@ -55,7 +56,7 @@ Vous devez avoir publié votre application sur Azure. Si ce n’est déjà fait,
 
 ## <a name="add-the-sqlclient-package-to-the-project"></a>Ajouter le package SqlClient au projet
 
-Vous devez ajouter le package NuGet qui contient la bibliothèque SqlClient. Cette bibliothèque d’accès aux données est nécessaire pour la connexion à une base de données SQL.
+Vous devez ajouter le package NuGet qui contient la bibliothèque SqlClient. Cette bibliothèque d’accès aux données est nécessaire pour la connexion à SQL Database.
 
 1. Ouvrez votre projet d’application de fonction locale dans Visual Studio 2019.
 

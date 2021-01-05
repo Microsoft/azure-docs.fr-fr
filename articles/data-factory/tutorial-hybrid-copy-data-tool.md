@@ -1,6 +1,6 @@
 ---
 title: Copier des données locales avec l’outil Copier des données d’Azure
-description: Créez une fabrique de données Azure, puis utilisez l’outil Copier les données pour copier des données depuis une base de données SQL Server locale vers un stockage d’objets Blob Azure.
+description: Créez une fabrique de données Azure Data Factory, puis utilisez l’outil Copier les données pour copier des données depuis une base de données SQL Server vers un stockage Blob Azure.
 services: data-factory
 ms.author: abnarain
 author: nabhishek
@@ -10,22 +10,22 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019
-ms.date: 04/09/2018
-ms.openlocfilehash: 6b4df324fec38d08355754146d8be76d225e6cb7
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 11/09/2020
+ms.openlocfilehash: d9cf9729d8be77845572efd9ef6e2486ddceaaaf
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81418590"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002832"
 ---
-# <a name="copy-data-from-an-on-premises-sql-server-database-to-azure-blob-storage-by-using-the-copy-data-tool"></a>Copier des données depuis une base de données SQL Server locale vers un stockage Blob Azure à l’aide de l’outil Copier les données
+# <a name="copy-data-from-a-sql-server-database-to-azure-blob-storage-by-using-the-copy-data-tool"></a>Copier des données depuis une base de données SQL Server vers un stockage Blob Azure à l’aide de l’outil Copier les données
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)
 > * [Version actuelle](tutorial-hybrid-copy-data-tool.md)
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce didacticiel, vous utilisez le portail Azure pour créer une fabrique de données. Vous utilisez ensuite l’outil Copier les données pour créer un pipeline qui copie des données depuis une base de données SQL Server locale vers un stockage Blob Azure.
+Dans ce didacticiel, vous utilisez le portail Azure pour créer une fabrique de données. Vous utilisez ensuite l’outil Copier les données pour créer un pipeline qui copie des données depuis une base de données SQL Server vers un stockage Blob Azure.
 
 > [!NOTE]
 > - Si vous débutez avec Azure Data Factory, consultez [Présentation d’Azure Data Factory](introduction.md).
@@ -37,19 +37,19 @@ Dans ce tutoriel, vous effectuerez les étapes suivantes :
 > * Utiliser l’outil Copier les données pour créer un pipeline.
 > * Surveiller les exécutions de pipeline et d’activité.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 ### <a name="azure-subscription"></a>Abonnement Azure
 Si vous n’avez pas d’abonnement Azure, [créez un compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ### <a name="azure-roles"></a>Rôles Azure
 Pour créer des instances de fabrique de données, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit être un membre des rôles *contributeur* ou *propriétaire*, ou un *administrateur* de l’abonnement Azure.
 
-Pour afficher les autorisations dont vous disposez dans l’abonnement, accédez au portail Azure. Dans l’angle supérieur droit, sélectionnez votre nom d’utilisateur, puis **Autorisations**. Si vous avez accès à plusieurs abonnements, sélectionnez l’abonnement approprié. Pour obtenir des exemples d’instructions sur l’ajout d’un utilisateur à un rôle, voir [Gérer les accès à l’aide du contrôle d’accès en fonction du rôle et du Portail Azure](../role-based-access-control/role-assignments-portal.md).
+Pour afficher les autorisations dont vous disposez dans l’abonnement, accédez au portail Azure. Dans l’angle supérieur droit, sélectionnez votre nom d’utilisateur, puis **Autorisations**. Si vous avez accès à plusieurs abonnements, sélectionnez l’abonnement approprié. Pour obtenir des exemples d’instructions sur l’ajout d’un utilisateur à un rôle, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide du portail Azure](../role-based-access-control/role-assignments-portal.md).
 
 ### <a name="sql-server-2014-2016-and-2017"></a>SQL Server 2014, 2016 et 2017
-Dans le cadre de ce didacticiel, vous utilisez une base de données SQL Server locale comme magasin de données *source*. Le pipeline de la fabrique de données que vous allez créer dans ce didacticiel copie les données de cette base de données SQL Server locale (source) dans un stockage Blob (récepteur). Créez ensuite un tableau nommé **emp** dans votre base de données SQL Server, puis insérez-y quelques exemples d’entrées.
+Dans le cadre de ce tutoriel, vous allez utiliser une base de données SQL Server comme magasin de données *source*. Le pipeline de la fabrique de données que vous allez créer dans ce tutoriel copie les données de cette base de données SQL Server (source) dans un stockage Blob (récepteur). Créez ensuite un tableau nommé **emp** dans votre base de données SQL Server, puis insérez-y quelques exemples d’entrées.
 
-1. Exécutez SQL Server Management Studio. S’il n’est pas déjà installé sur votre machine, accédez à [Télécharger SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms).
+1. Exécutez SQL Server Management Studio. S’il n’est pas déjà installé sur votre machine, accédez à [Télécharger SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms).
 
 1. Connectez-vous à votre instance SQL Server à l’aide de vos informations d’identification.
 
@@ -74,7 +74,7 @@ Dans le cadre de ce didacticiel, vous utilisez une base de données SQL Server l
     ```
 
 ### <a name="azure-storage-account"></a>Compte Azure Storage
-Dans ce didacticiel, vous utilisez un compte de stockage Azure à usage général (stockage Blob plus spécifiquement) comme banque de données réceptrice/de destination. Si vous ne possédez pas de compte de stockage à usage général, consultez la section [Créer un compte de stockage](../storage/common/storage-account-create.md) pour savoir comment en créer un. Le pipeline de la fabrique de données que vous créez dans ce didacticiel copie les données de la base de données SQL Server locale (source) dans ce stockage Blob (récepteur). 
+Dans ce didacticiel, vous utilisez un compte de stockage Azure à usage général (stockage Blob plus spécifiquement) comme banque de données réceptrice/de destination. Si vous ne possédez pas de compte de stockage à usage général, consultez la section [Créer un compte de stockage](../storage/common/storage-account-create.md) pour savoir comment en créer un. Le pipeline de la fabrique de données que vous allez créer dans ce tutoriel copie les données de la base de données SQL Server (source) dans ce stockage Blob (récepteur). 
 
 #### <a name="get-the-storage-account-name-and-account-key"></a>Obtenir le nom de compte de stockage et la clé de compte
 Dans ce didacticiel, vous utilisez le nom et la clé de votre compte de stockage. Pour obtenir le nom et la clé de votre compte de stockage, procédez comme suit :
@@ -109,7 +109,7 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
 ## <a name="create-a-data-factory"></a>Créer une fabrique de données
 
-1. Dans le menu de gauche, sélectionnez **+ Créer une ressource** > **Analytics** > **Data Factory**.
+1. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Intégration** > **Data Factory**.
 
    ![Création d’une fabrique de données](./media/doc-common-process/new-azure-data-factory-menu.png)
 
@@ -146,18 +146,15 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
 1. Sur la page **Banque de données sources**, cliquez sur **+ Créer une connexion**.
 
-
 1. Sous **Nouveau service lié**, recherchez **SQL Server**, puis sélectionnez **Continuer**.
 
 1. Dans la boîte de dialogue **Nouveau service lié (SQL Server)** , sous **Nom**, entrez **SqlServerLinkedService**. Sélectionnez **+ Nouveau** sous **Se connecter via le runtime d’intégration**. Vous devez créer un runtime d’intégration auto-hébergé, le télécharger sur votre machine et l’inscrire auprès de Data Factory. Le runtime d’intégration auto-hébergé copie des données entre votre environnement local et le cloud.
 
+1. Dans la boîte de dialogue **Configuration du runtime d’intégration**, sélectionnez **Auto-hébergé**. Sélectionnez **Continuer**.
 
-1. Dans la boîte de dialogue **Configuration du runtime d’intégration**, sélectionnez **Auto-hébergé**. Sélectionnez ensuite **Suivant**.
+   ![Créer un runtime d’intégration](./media/tutorial-hybrid-copy-data-tool/create-self-hosted-integration-runtime.png)
 
-   ![Créer un runtime d’intégration](./media/tutorial-hybrid-copy-data-tool/create-integration-runtime-dialog0.png)
-
-1. Dans la boîte de dialogue **Configuration du runtime d’intégration**, sous **Nom**, entrez **TutorialIntegrationRuntime**. Sélectionnez ensuite **Suivant**.
-
+1. Dans la boîte de dialogue **Configuration du runtime d’intégration**, sous **Nom**, entrez **TutorialIntegrationRuntime**. Sélectionnez ensuite **Créer**.
 
 1. Dans la boîte de dialogue **Configuration du runtime d’intégration**, sélectionnez **Cliquez ici pour lancer l’installation rapide pour cet ordinateur**. Cette action installe le runtime d’intégration sur votre machine et l’inscrit auprès de Data Factory. Vous pouvez également utiliser l’option d’installation manuelle pour télécharger le fichier d’installation, l’exécuter et utiliser la clé pour inscrire le runtime d’intégration.
 
@@ -169,13 +166,13 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
     a. Dans le champ **Nom**, entrez **SqlServerLinkedService**.
 
-    b. Entrez le nom de votre instance SQL Server locale dans le champ **Nom du serveur**.
+    b. Entrez le nom de votre instance SQL Server dans le champ **Nom du serveur**.
 
     c. Entrez le nom de votre base de données locale dans le champ **Nom de la base de données**.
 
     d. Sélectionnez l’authentification appropriée sous **Type d’authentification**.
 
-    e. Entrez le nom d’utilisateur ayant accès au SQL Server local dans le champ **Nom d’utilisateur**.
+    e. Entrez le nom d’utilisateur ayant accès au SQL Server dans le champ **Nom d’utilisateur**.
 
     f. Entrez le **mot de passe** correspondant à l’utilisateur.
 
@@ -216,24 +213,21 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
 1. Dans la boîte de dialogue **Résumé**, vérifiez la valeur de tous les paramètres, puis sélectionnez **Suivant**.
 
-1. Sur la page **Déploiement**, sélectionnez **Surveiller** pour surveiller le pipeline (ou tâche) que vous avez créé.
+1. Sur la page **Déploiement**, sélectionnez **Surveiller** pour surveiller le pipeline (tâche). 
 
-   ![Page Déploiement](./media/tutorial-hybrid-copy-data-tool/deployment-page.png)
+1. Une fois l’exécution du pipeline terminée, vous pouvez afficher l’état du pipeline que vous avez créé. 
 
-1. Sous l’onglet **Surveiller**, vous pouvez afficher l’état du pipeline que vous avez créé. Vous pouvez utiliser les liens dans la colonne **Action** pour visualiser les exécutions d’activités associées à l’exécution du pipeline et pour réexécuter le pipeline.
+1. Dans la page Exécutions de pipeline, sélectionnez **Actualiser** pour actualiser la liste. Cliquez sur le lien en dessous de **Nom du pipeline** pour afficher les détails de l’exécution de l’activité ou réexécuter le pipeline. 
 
-1. Sélectionnez le lien **Afficher les exécutions d’activités** dans la colonne **Actions** pour voir les exécutions d’activités associées à l’exécution du pipeline. Pour voir plus de détails sur l’opération de copie, sélectionnez le lien **Détails** (icône en forme de lunettes) dans la colonne **Actions**. Pour revenir à l’affichage **Exécutions de pipeline**, sélectionnez **Exécutions de pipeline** en haut de la page.
+1. Dans la page Exécutions de l’activité, sélectionnez le lien **Détails** (icône de lunettes) en dessous de la colonne **Nom de l’activité** pour plus d’informations sur l’opération de copie. Pour revenir à l’affichage Exécutions de pipeline, sélectionnez le lien **Toutes les exécutions de pipelines** dans le menu de navigation. Sélectionnez **Actualiser** pour actualiser l’affichage.
 
 1. Vérifiez que le fichier de sortie apparaît bien dans le dossier **fromonprem** du conteneur **adftutorial**.
 
-
 1. Sélectionnez l’onglet **Modifier** sur la gauche pour basculer en mode éditeur. Vous pouvez mettre à jour les services, jeux de données et pipelines liés créés par l’outil à l’aide de l’éditeur. Sélectionnez **Code** pour afficher le code JSON associé à l’entité ouverte dans l’éditeur. Pour plus de détails sur la modification de ces entités dans l’interface utilisateur de Data Factory, consultez [la version du portail Azure de ce didacticiel](tutorial-copy-data-portal.md).
-
-   ![Onglet Modifier](./media/tutorial-hybrid-copy-data-tool/edit-tab.png)
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Le pipeline dans cet exemple copie des données depuis une base de données SQL Server locale vers un stockage Blob. Vous avez appris à :
+Le pipeline dans cet exemple copie des données depuis une base de données SQL Server vers un stockage Blob. Vous avez appris à :
 
 > [!div class="checklist"]
 > * Créer une fabrique de données.

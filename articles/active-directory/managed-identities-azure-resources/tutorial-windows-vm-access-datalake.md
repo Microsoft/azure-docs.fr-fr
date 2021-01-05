@@ -3,7 +3,7 @@ title: Tutoriel `:` Utiliser une identité managée pour accéder à Azure Data
 description: Un didacticiel qui vous montre comment utiliser une identité managée attribuée par le système d’une machine virtuelle Windows pour accéder à Azure Data Lake Store.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
@@ -12,15 +12,15 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 11/14/2018
-ms.author: markvi
+ms.date: 12/15/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c03f78341b7521267f8aaf72d58ebd4c912949ce
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 908fb1ac869ec2b22085af2e07ced6ff64229308
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75977876"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592481"
 ---
 # <a name="tutorial-use-a-windows-vm-system-assigned-managed-identity-to-access-azure-data-lake-store"></a>Didacticiel : Utiliser une identité managée attribuée par le système de la machine virtuelle Windows pour accéder à Azure Data Lake Store
 
@@ -34,7 +34,12 @@ Ce didacticiel vous indique comment utiliser une identité managée attribuée p
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-[!INCLUDE [msi-tut-prereqs](../../../includes/active-directory-msi-tut-prereqs.md)]
+- Compréhension des identités managées. Si vous n’êtes pas familiarisé de la fonctionnalité identités managées pour ressources Azure, consultez cette [Vue d’ensemble](overview.md). 
+- Un compte Azure. [Inscrivez-vous pour obtenir un compte gratuit](https://azure.microsoft.com/free/).
+- Des autorisations « Propriétaire » avec l’étendue appropriée (votre abonnement ou groupe de ressources) pour effectuer les étapes de création de ressource et de gestion de rôles nécessaires. Si vous avez besoin d’aide concernant l’attribution de rôle, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources d’un abonnement Azure](../../role-based-access-control/role-assignments-portal.md).
+- Vous avez également besoin d’une machine virtuelle Windows sur laquelle les identités managées attribuées par le système sont activées.
+  - Si vous devez créer une machine virtuelle pour ce tutoriel, vous pouvez suivre les instructions de l’article intitulé [Créer une machine virtuelle avec une identité affectée par le système activée](./qs-configure-portal-windows-vm.md#system-assigned-managed-identity)
+
 
 
 
@@ -46,7 +51,7 @@ Ce didacticiel vous indique comment utiliser une identité managée attribuée p
 
 ## <a name="grant-access"></a>Accorder l'accès
 
-Maintenant, vous pouvez accorder à votre machine virtuelle l’accès à des fichiers et des dossiers dans un Azure Data Lake Store.  Pour cette étape, vous pouvez utiliser un Data Lake Store existant ou bien en créer un.  Pour créer un nouveau Data Lake Store via le portail Azure, suivez ce [Démarrage rapide de Azure Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-portal). Des procédures de démarrage rapide utilisant Azure CLI et Azure PowerShell sont également décrites dans la [Documentation Azure Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-overview).
+Maintenant, vous pouvez accorder à votre machine virtuelle l’accès à des fichiers et des dossiers dans un Azure Data Lake Store.  Pour cette étape, vous pouvez utiliser un Data Lake Store existant ou bien en créer un.  Pour créer un nouveau Data Lake Store via le portail Azure, suivez ce [Démarrage rapide de Azure Data Lake Store](../../data-lake-store/data-lake-store-get-started-portal.md). Des procédures de démarrage rapide utilisant Azure CLI et Azure PowerShell sont également décrites dans la [Documentation Azure Data Lake Store](../../data-lake-store/data-lake-store-overview.md).
 
 Dans Data Lake Store, créez un dossier et autorisez l’identité managée attribuée par le système de la machine virtuelle à lire, écrire et exécuter des fichiers dans ce dossier :
 
@@ -54,7 +59,7 @@ Dans Data Lake Store, créez un dossier et autorisez l’identité managée attr
 2. Cliquez sur le Data Lake Store que vous souhaitez utiliser pour ce didacticiel.
 3. Cliquez sur **Explorateur de données** dans la barre de commandes.
 4. Le dossier racine du Data Lake Store est sélectionné.  Cliquez sur **Accéder** dans la barre de commandes.
-5. Cliquez sur **Ajouter**.  Dans le champ **Sélectionner**, saisissez le nom de votre machine virtuelle, par exemple **DevTestVM**.  Sélectionnez votre machine virtuelle à partir des résultats de recherche, puis cliquez sur **Sélectionner**.
+5. Cliquez sur **Add**.  Dans le champ **Sélectionner**, saisissez le nom de votre machine virtuelle, par exemple **DevTestVM**.  Sélectionnez votre machine virtuelle à partir des résultats de recherche, puis cliquez sur **Sélectionner**.
 6. Cliquez sur **Sélectionner les autorisations**.  Sélectionnez **Lire** et **Exécuter**, ajoutez à **Ce dossier** et ajoutez en tant qu’une **Autorisation d’accès uniquement**.  Cliquez sur **OK**.  L’autorisation doit être ajoutée avec succès.
 7. Fermez le panneau **Accès**.
 8. Pour ce didacticiel, créons un nouveau dossier.  Cliquez sur **Nouveau dossier** dans la barre de commandes et donnez-lui un nom, par exemple **TestFolder**.  Cliquez sur **OK**.
@@ -62,11 +67,11 @@ Dans Data Lake Store, créez un dossier et autorisez l’identité managée attr
 10. Semblable à l’étape 5, cliquez sur **Ajouter**, saisissez le nom de votre machine virtuelle dans le champ **Sélectionner**, sélectionnez-la puis cliquez sur **Sélectionner**.
 11. Semblable à l’étape 6, cliquez sur **Sélectionner les autorisations**, sélectionnez **Lire**, **Écrire**, et **Exécuter**, ajoutez à **Ce dossier** et ajoutez en tant qu’**une entrée d’autorisation accès et une entrée d’autorisation par défaut**.  Cliquez sur **OK**.  L’autorisation doit être ajoutée avec succès.
 
-Votre identité managée attribuée par le système de la machine virtuelle peut désormais effectuer toutes les opérations sur les fichiers du dossier que vous avez créé.  Pour plus d’informations sur la gestion de l’accès à Data Lake Store, lisez cet article sur le [Contrôle d’accès dans Data Lake Store](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-access-control).
+Votre identité managée attribuée par le système de la machine virtuelle peut désormais effectuer toutes les opérations sur les fichiers du dossier que vous avez créé.  Pour plus d’informations sur la gestion de l’accès à Data Lake Store, lisez cet article sur le [Contrôle d’accès dans Data Lake Store](../../data-lake-store/data-lake-store-access-control.md).
 
 ## <a name="access-data"></a>Accéder aux données
 
-Azure Data Lake Store prenant en charge Azure AD Authentication en mode natif, il peut accepter directement des jetons d’accès obtenus à l’aide d’identités managées attribuées par le système pour les ressources Azure.  Pour s’authentifier sur le système de fichiers de Data Lake Store, vous envoyez un jeton d’accès émis par Azure AD pour votre point de terminaison de système de fichiers de Data Lake Store dans un en-tête d’autorisation au format « Porteur < ACCESS_TOKEN_VALUE > ».  Pour en savoir plus sur la prise en charge de Data Lake Store pour l’authentification à l’aide de Azure AD, lire [Authentification auprès de Data Lake Store à l’aide de Azure Active Directory](https://docs.microsoft.com/azure/data-lake-store/data-lakes-store-authentication-using-azure-active-directory)
+Azure Data Lake Store prenant en charge Azure AD Authentication en mode natif, il peut accepter directement des jetons d’accès obtenus à l’aide d’identités managées attribuées par le système pour les ressources Azure.  Pour s’authentifier sur le système de fichiers de Data Lake Store, vous envoyez un jeton d’accès émis par Azure AD pour votre point de terminaison de système de fichiers de Data Lake Store dans un en-tête d’autorisation au format « Porteur < ACCESS_TOKEN_VALUE > ».  Pour en savoir plus sur la prise en charge de Data Lake Store pour l’authentification à l’aide de Azure AD, lire [Authentification auprès de Data Lake Store à l’aide de Azure Active Directory](../../data-lake-store/data-lakes-store-authentication-using-azure-active-directory.md)
 
 > [!NOTE]
 > Les kits de développement logiciel clients du système de fichiers de Data Lake Store ne gèrent pas encore les identités managées pour les ressources Azure.  Ce didacticiel sera mis à jour lorsque cette prise en charge sera ajoutée aux kits de développements logiciel.
@@ -193,4 +198,4 @@ Dans ce didacticiel, vous vous authentifiez sur l’API REST du système de fich
 Dans ce didacticiel, vous avez appris à utiliser une identité managée attribuée par le système pour une machine virtuelle Windows afin d’accéder à Azure Data Lake Store. Pour en savoir plus sur Azure Data Lake Store, consultez :
 
 > [!div class="nextstepaction"]
->[Azure Data Lake Store](/azure/data-lake-store/data-lake-store-overview)
+>[Azure Data Lake Store](../../data-lake-store/data-lake-store-overview.md)

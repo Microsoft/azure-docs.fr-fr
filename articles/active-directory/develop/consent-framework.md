@@ -9,26 +9,25 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 11/30/2018
+ms.date: 10/21/2020
 ms.author: ryanwi
 ms.reviewer: zachowd, lenalepa, jesakowi
-ms.custom: aaddev, has-adal-ref
-ms.openlocfilehash: e706c0eeb848b6cd14a3c14de821ca59a9c52ee9
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 74321bc75fa760727e7896f47cdfc5b2929047e5
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611362"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92366086"
 ---
 # <a name="azure-active-directory-consent-framework"></a>Infrastructure de consentement d’Azure Active Directory
 
-L’infrastructure de consentement d’Azure Active Directory (Azure AD) facilite le développement d’applications web multi-locataires et d’applications clientes natives. Ces applications autorisent la connexion au moyen de comptes d’utilisateurs d’un locataire Azure AD qui est différent de celui où l’application a été inscrite. Elles peuvent également avoir à accéder aux API web telles que l’API Microsoft Graph (pour l’accès à Azure AD, à Intune et aux services d’Office 365) et d’autres API de services Microsoft, en plus de vos propres API web.
+L’infrastructure de consentement d’Azure Active Directory (Azure AD) facilite le développement d’applications web multi-locataires et d’applications clientes natives. Ces applications autorisent la connexion au moyen de comptes d’utilisateurs d’un locataire Azure AD qui est différent de celui où l’application a été inscrite. Elles peuvent également avoir besoin d'accéder à des API web telles que l'API Microsoft Graph (pour l'accès à Azure AD, à Intune et aux services de Microsoft 365) et à des API d'autres services Microsoft, en plus de vos propres API web.
 
-L’infrastructure est basée sur le consentement d’un utilisateur ou d’un administrateur à l’inscription d’une application dans son répertoire, ce qui peut impliquer l’accès aux données du répertoire. Par exemple, si une application cliente web doit lire les informations de calendrier de l’utilisateur à partir d’Office 365, cet utilisateur doit d’abord donner son consentement à l’application cliente. Une fois le consentement donné, l’application cliente sera en mesure d’appeler l’API Microsoft Graph au nom de l’utilisateur et d’utiliser les informations de calendrier en fonction des besoins. L’[API Microsoft Graph](https://developer.microsoft.com/graph) permet d’accéder aux données d’Office 365 (comme les calendriers et les messages Exchange, les sites et les listes SharePoint, les documents OneDrive, les blocs-notes OneNote, les tâches Organiseur et les classeurs Excel), ainsi qu’aux utilisateurs et groupes d’Azure AD, et à d’autres objets de données provenant d’autres services cloud Microsoft.
+L’infrastructure est basée sur le consentement d’un utilisateur ou d’un administrateur à l’inscription d’une application dans son répertoire, ce qui peut impliquer l’accès aux données du répertoire. Par exemple, si une application cliente web doit lire les informations de calendrier de l'utilisateur à partir de Microsoft 365, cet utilisateur doit d'abord donner son consentement à l'application cliente. Une fois le consentement donné, l’application cliente sera en mesure d’appeler l’API Microsoft Graph au nom de l’utilisateur et d’utiliser les informations de calendrier en fonction des besoins. L'[API Microsoft Graph](https://developer.microsoft.com/graph) permet d'accéder aux données de Microsoft 365 (comme les calendriers et les messages Exchange, les sites et les listes SharePoint, les documents OneDrive, les blocs-notes OneNote, les tâches Organiseur et les classeurs Excel), ainsi qu'aux utilisateurs et groupes d'Azure AD, et à d'autres objets de données provenant d'autres services cloud Microsoft.
 
 L'infrastructure de consentement est conçue sur OAuth 2.0 et ses différents flux, notamment l’octroi d’un code d’autorisation et d’informations d'identification du client, à l'aide de clients publics ou confidentiels. En utilisant OAuth 2.0, Azure AD permet de créer de nombreux types d’applications clientes, sur téléphone, tablette, serveur ou web, et d’accéder aux ressources requises.
 
-Pour plus d’informations sur l’utilisation de l’infrastructure de consentement avec les demandes d’autorisation OAuth2.0, consultez [Autoriser l’accès aux applications web à l’aide d’OAuth 2.0 et d’Azure AD](v2-oauth2-auth-code-flow.md) et [Scénarios d’authentification pour Azure AD](authentication-scenarios.md). Pour plus d’informations sur l’obtention d’un accès autorisé à Office 365 via Microsoft Graph, consultez [Authentification de l’application avec Microsoft Graph](https://developer.microsoft.com/graph/docs/authorization/auth_overview).
+Pour plus d’informations sur l’utilisation de l’infrastructure de consentement avec les demandes d’autorisation OAuth2.0, consultez [Autoriser l’accès aux applications web à l’aide d’OAuth 2.0 et d’Azure AD](v2-oauth2-auth-code-flow.md) et [Scénarios d’authentification pour Azure AD](./authentication-vs-authorization.md). Pour plus d'informations sur l'obtention d'un accès autorisé à Microsoft 365 via Microsoft Graph, consultez [Authentification de l'application avec Microsoft Graph](/graph/).
 
 ## <a name="consent-experience---an-example"></a>Exemple d’expérience de consentement
 
@@ -50,19 +49,18 @@ Les étapes suivantes vous montrent comment l’expérience de consentement fonc
 
 1. Une fois que l'utilisateur a donné son consentement, un code d'autorisation est retourné à votre application, qui est utilisé pour acquérir un jeton d'accès et un jeton d'actualisation. Pour plus d’informations sur ce flux, consultez [Flux du code d’autorisation OAuth 2.0](v2-oauth2-auth-code-flow.md).
 
-1. En tant qu’administrateur, vous pouvez également donner votre consentement pour les autorisations déléguées d’une application pour le compte de tous les utilisateurs de votre client. Le consentement administrateur empêche l’affichage d’une boîte de dialogue pour chaque utilisateur dans le locataire, ce qui peut être fait dans le [portail Azure](https://portal.azure.com) par les utilisateurs avec le rôle administrateur. Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../users-groups-roles/directory-assign-admin-roles.md).
+1. En tant qu’administrateur, vous pouvez également donner votre consentement pour les autorisations déléguées d’une application pour le compte de tous les utilisateurs de votre client. Le consentement administrateur empêche l’affichage d’une boîte de dialogue pour chaque utilisateur dans le locataire, ce qui peut être fait dans le [portail Azure](https://portal.azure.com) par les utilisateurs avec le rôle administrateur. Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../roles/permissions-reference.md).
 
     **Pour donner son consentement pour les autorisations déléguées d’une application**
 
    1. Accédez à la page **Autorisations des API** de votre application
-   1. Cliquez sur le bouton **Accorder le consentement administrateur**.
+   1. Cliquez sur le bouton **Accorder le consentement administrateur** .
 
       ![Accorder des autorisations pour un consentement administrateur explicite](./media/consent-framework/grant-consent.png)
 
    > [!IMPORTANT]
-   > Pour les applications monopages (SPA) qui utilisent ADAL.js, vous devez accorder un consentement explicite à l’aide du bouton **Accorder des autorisations**. Sinon, l’application échoue lorsque le jeton d’accès est demandé.
+   > Pour les applications monopages (SPA) qui utilisent ADAL.js, vous devez accorder un consentement explicite à l’aide du bouton **Accorder des autorisations** . Sinon, l’application échoue lorsque le jeton d’accès est demandé.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Consultez [comment convertir une application multi-locataire](howto-convert-app-to-be-multi-tenant.md)
-* Pour plus de détails, découvrez [la façon dont le consentement est pris en charge au niveau de la couche du protocole OAuth 2.0 pendant le flux d’octroi de code d’autorisation.](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code)
+Consultez [comment convertir une application multi-locataire](howto-convert-app-to-be-multi-tenant.md)

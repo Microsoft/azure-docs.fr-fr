@@ -3,12 +3,12 @@ title: À propos du basculement et de la restauration automatique dans Azure Sit
 description: En savoir plus sur le basculement et les défaillances dans Azure Site Recovery.
 ms.topic: conceptual
 ms.date: 12/24/2019
-ms.openlocfilehash: d9b54f3c452212e12419a5ffd67b116c8660308d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3617683200aa3ffba08061b70993613fd0cc7241
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236493"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92369877"
 ---
 # <a name="about-on-premises-disaster-recovery-failoverfailback"></a>À propos du basculement/restauration de la récupération d’urgence au niveau local
 
@@ -20,8 +20,8 @@ Le basculement et la restauration automatique dans Azure Site Recovery comporten
 
 - **Étape 1 : Basculement vers un site local** : Après la configuration de la réplication vers Azure pour les machines locales, lorsque votre site local tombe en panne, vous basculez ces machines vers Azure. Une fois le basculement effectué, les machines virtuelles Azure sont créées à partir des données répliquées.
 - **Étape 2 : Reprotéger des machines virtuelles Azure :** Dans Azure, vous reprotégez les machines virtuelles Azure afin qu’elles soient répliquées sur le site local. La machine virtuelle locale (si elle est disponible) est désactivée au cours de la reprotection afin de garantir la cohérence des données.
-- **Étape 3 : Basculement à partir d’Azure**: Lorsque votre site local s’exécute de nouveau normalement, vous exécutez un autre basculement, cette fois pour restaurer les machines virtuelles Azure sur votre site local. Vous pouvez effectuer une restauration automatique vers l’emplacement d’origine à partir duquel vous avez basculé ou vers un autre emplacement.
-- **Étape 4 : Reprotéger les machines locales**: Après une restauration automatique, activez à nouveau la réplication des machines locales vers Azure.
+- **Étape 3 : Basculement à partir d’Azure** : Lorsque votre site local s’exécute de nouveau normalement, vous exécutez un autre basculement, cette fois pour restaurer les machines virtuelles Azure sur votre site local. Vous pouvez effectuer une restauration automatique vers l’emplacement d’origine à partir duquel vous avez basculé ou vers un autre emplacement.
+- **Étape 4 : Reprotéger les machines locales** : Après une restauration automatique, activez à nouveau la réplication des machines locales vers Azure.
 
 ## <a name="failover"></a>Basculement
 
@@ -34,7 +34,7 @@ Vous effectuez un basculement dans le cadre de votre stratégie de continuité d
 Le basculement est une activité en deux phases :
 
 - **Basculement** : Basculement qui crée et affiche une machine virtuelle Azure à l’aide du point de récupération sélectionné.
-- **Valider** : Après le basculement, vous vérifiez la machine virtuelle dans Azure :
+- **Valider**  : Après le basculement, vous vérifiez la machine virtuelle dans Azure :
     - Vous pouvez ensuite valider le basculement vers le point de récupération sélectionné ou sélectionner un autre point pour la validation.
     - Une fois le basculement validé, le point de récupération ne peut pas être modifié.
 
@@ -45,10 +45,10 @@ Pour vous connecter aux machines virtuelles Azure créées après le basculement
 
 **Type de basculement** | **Lieu** | **Actions**
 --- | --- | ---
-**Machine virtuelle Azure (Windows** | Sur la machine locale, avant le basculement | **Accès via Internet**: Activer le protocole RDP. Assurez-vous que les règles TCP et UDP sont ajoutées pour le profil **Public** et que RDP est autorisé pour tous les profils dans **Pare-feu Windows** > **Applications autorisées**.<br/><br/> **Accès via un VPN de site à site**: Activer le protocole RDP sur l’ordinateur. Vérifiez que RDP est autorisé dans **Pare-feu Windows** -> **Applications et fonctionnalités autorisées**, pour les réseaux **Domaine et Privé** .<br/><br/>  Vérifiez que la stratégie SAN du système d’exploitation est définie sur la valeur **OnlineAll**. [Plus d’informations](https://support.microsoft.com/kb/3031135)<br/><br/> Vérifiez qu’aucune mise à jour de Windows n’est en attente sur la machine virtuelle quand vous déclenchez un basculement. Windows Update peut démarrer lors du basculement, et vous ne pourrez pas vous connecter à la machine virtuelle tant que les mises à jour ne sont pas terminées.
-**Machine virtuelle Azure exécutant Windows** | Sur la machine virtuelle Azure, après le basculement |  [Ajoutez une adresse IP publique](https://aka.ms/addpublicip) pour la machine virtuelle.<br/><br/> Les règles des groupes de sécurité réseau sur la machine virtuelle basculée (et le sous-réseau Azure auquel elle est connectée) doivent autoriser les connexions entrantes avec le port RDP.<br/><br/> Cochez **Diagnostics de démarrage** pour examiner une capture d’écran de la machine virtuelle. Si vous ne parvenez pas à vous connecter, vérifiez que la machine virtuelle est en cours d’exécution et consultez ces [conseils de résolution des problèmes](https://social.technet.microsoft.com/wiki/contents/articles/31666.troubleshooting-remote-desktop-connection-after-failover-using-asr.aspx).
+**Machine virtuelle Azure (Windows** | Sur la machine locale, avant le basculement | **Accès via Internet** : Activer le protocole RDP. Assurez-vous que les règles TCP et UDP sont ajoutées pour le profil **Public** et que RDP est autorisé pour tous les profils dans **Pare-feu Windows** > **Applications autorisées** .<br/><br/> **Accès via un VPN de site à site** : Activer le protocole RDP sur l’ordinateur. Vérifiez que RDP est autorisé dans **Pare-feu Windows** -> **Applications et fonctionnalités autorisées** , pour les réseaux **Domaine et Privé** .<br/><br/>  Vérifiez que la stratégie SAN du système d’exploitation est définie sur la valeur **OnlineAll** . [Plus d’informations](https://support.microsoft.com/kb/3031135)<br/><br/> Vérifiez qu’aucune mise à jour de Windows n’est en attente sur la machine virtuelle quand vous déclenchez un basculement. Windows Update peut démarrer lors du basculement, et vous ne pourrez pas vous connecter à la machine virtuelle tant que les mises à jour ne sont pas terminées.
+**Machine virtuelle Azure exécutant Windows** | Sur la machine virtuelle Azure, après le basculement |  [Ajoutez une adresse IP publique](/archive/blogs/srinathv/how-to-add-a-public-ip-address-to-azure-vm-for-vm-failed-over-using-asr) pour la machine virtuelle.<br/><br/> Les règles des groupes de sécurité réseau sur la machine virtuelle basculée (et le sous-réseau Azure auquel elle est connectée) doivent autoriser les connexions entrantes avec le port RDP.<br/><br/> Cochez **Diagnostics de démarrage** pour examiner une capture d’écran de la machine virtuelle. Si vous ne parvenez pas à vous connecter, vérifiez que la machine virtuelle est en cours d’exécution et consultez ces [conseils de résolution des problèmes](https://social.technet.microsoft.com/wiki/contents/articles/31666.troubleshooting-remote-desktop-connection-after-failover-using-asr.aspx).
 **Machine virtuelle Azure exécutant Linux** | Sur la machine locale, avant le basculement | Vérifiez que le service Secure Shell, sur la machine virtuelle, est défini pour démarrer automatiquement au démarrage du système.<br/><br/> Vérifiez que les règles de pare-feu autorisent une connexion SSH à ce dernier.
-**Machine virtuelle Azure exécutant Linux** | Sur la machine virtuelle Azure, après le basculement | Les règles des groupes de sécurité réseau figurant sur la machine virtuelle basculée (et le sous-réseau Azure auquel elle est connectée) doivent autoriser les connexions entrantes avec le port SSH.<br/><br/> [Ajoutez une adresse IP publique](https://aka.ms/addpublicip) pour la machine virtuelle.<br/><br/> Cochez **Diagnostics de démarrage** pour obtenir une capture d’écran de la machine virtuelle.<br/><br/>
+**Machine virtuelle Azure exécutant Linux** | Sur la machine virtuelle Azure, après le basculement | Les règles des groupes de sécurité réseau figurant sur la machine virtuelle basculée (et le sous-réseau Azure auquel elle est connectée) doivent autoriser les connexions entrantes avec le port SSH.<br/><br/> [Ajoutez une adresse IP publique](/archive/blogs/srinathv/how-to-add-a-public-ip-address-to-azure-vm-for-vm-failed-over-using-asr) pour la machine virtuelle.<br/><br/> Cochez **Diagnostics de démarrage** pour obtenir une capture d’écran de la machine virtuelle.<br/><br/>
 
 ## <a name="types-of-failover"></a>Types de basculement
 
@@ -82,7 +82,7 @@ Pendant le basculement, vous pouvez sélectionner un certain nombre d’options 
 **Dernier point traité**  | Cette option bascule les machines virtuelles vers le dernier point de récupération traité par Site Recovery. Pour voir le dernier point de récupération d’une machine virtuelle spécifique, cochez **Derniers points de récupération** dans les paramètres de la machine virtuelle. Cette option fournit un objectif de délai de récupération (RTO) faible, car aucun temps n’est consacré à traiter les données non traitées.
 **Dernier point de cohérence des applications** |  Cette option bascule toutes les machines virtuelles du plan vers le dernier point de récupération de cohérence des applications traité par Site Recovery. Vérifiez le dernier point de récupération dans les paramètres de la machine virtuelle.
 **Dernier point multimachine virtuelle traité** | cette option est disponible pour les plans de récupération qui comportent une ou plusieurs machines virtuelles dont la cohérence multimachine virtuelle est activée. Les machines virtuelles pour lesquelles ce paramètre est activé basculent vers le dernier point de récupération de cohérence multimachine virtuelle commun. Toutes les autres machines virtuelles du plan basculent vers le dernier point de récupération traité.
-**Dernière cohérence des applications multimachines virtuelles** : |  cette option est disponible pour les plans de récupération qui comportent une ou plusieurs machines virtuelles dont la cohérence multimachine virtuelle est activée. Les machines virtuelles qui font partie d’un groupe de réplication basculent vers le dernier point de récupération de cohérence des applications multimachine virtuelle commun. Les autres machines virtuelles basculent vers leur dernier point de récupération de cohérence des applications.
+**Dernière cohérence des applications multimachines virtuelles**  : |  cette option est disponible pour les plans de récupération qui comportent une ou plusieurs machines virtuelles dont la cohérence multimachine virtuelle est activée. Les machines virtuelles qui font partie d’un groupe de réplication basculent vers le dernier point de récupération de cohérence des applications multimachine virtuelle commun. Les autres machines virtuelles basculent vers leur dernier point de récupération de cohérence des applications.
 **Personnalisée** | Utilisez cette option pour basculer une machine virtuelle spécifique à un point de récupération particulier dans le temps. Cette option n’est pas disponible pour les plans de récupération.
 
 > [!NOTE]
@@ -109,10 +109,10 @@ La restauration automatique fonctionne comme suit :
 
 Pour reprotéger et restaurer automatiquement des machines VMware et des serveurs physiques à partir d’Azure vers le site local, vous avez besoin d’une infrastructure de restauration automatique et il existe un certain nombre d’exigences.
 
-- **Serveur de traitement temporaire dans Azure** : pour effectuer une restauration automatique à partir d’Azure, configurez une machine virtuelle Azure faisant office de serveur de traitement pour gérer la réplication à partir d’Azure. Vous pourrez supprimer cette machine virtuelle une fois la restauration terminée.
-- **Connexion VPN** : pour la restauration automatique, vous avez besoin d’une connexion VPN (ou ExpressRoute) du réseau Azure vers le site local.
-- **Serveur cible maître distinct** : par défaut, le serveur cible maître local qui a été installé avec le serveur de configuration, sur la machine virtuelle VMware locale, gère la restauration automatique. Si vous avez besoin de restaurer automatiquement de grands volumes de trafic, configurez un autre serveur cible maître local dédié.
-- **Stratégie de restauration automatique** : pour répliquer vers votre site local, vous avez besoin d’une stratégie de restauration automatique. Cette stratégie est automatiquement créée en même temps que la stratégie de réplication depuis le site local vers Azure.
+- **Serveur de traitement temporaire dans Azure**  : pour effectuer une restauration automatique à partir d’Azure, configurez une machine virtuelle Azure faisant office de serveur de traitement pour gérer la réplication à partir d’Azure. Vous pourrez supprimer cette machine virtuelle une fois la restauration terminée.
+- **Connexion VPN**  : pour la restauration automatique, vous avez besoin d’une connexion VPN (ou ExpressRoute) du réseau Azure vers le site local.
+- **Serveur cible maître distinct**  : par défaut, le serveur cible maître local qui a été installé avec le serveur de configuration, sur la machine virtuelle VMware locale, gère la restauration automatique. Si vous avez besoin de restaurer automatiquement de grands volumes de trafic, configurez un autre serveur cible maître local dédié.
+- **Stratégie de restauration automatique**  : pour répliquer vers votre site local, vous avez besoin d’une stratégie de restauration automatique. Cette stratégie est automatiquement créée en même temps que la stratégie de réplication depuis le site local vers Azure.
     - Cette stratégie est automatiquement associée au serveur de configuration.
     - Vous ne pouvez pas modifier cette stratégie.
     - Valeurs de stratégie : Seuil de RPO - 15 minutes ; Rétention des points de récupération - 24 heures ; Fréquence des instantanés de cohérence des applications - 60 minutes.
@@ -164,4 +164,3 @@ Après une restauration automatique sur le site local, vous activez **Réplicati
 - Basculer des [machines virtuelles dans un plan de récupération](site-recovery-failover.md).
 - [Faire les préparations ](vmware-azure-failback.md) de la reprotection et de la restauration de VMware.
 - Restaurer automatiquement des [machines virtuelles Hyper-V](hyper-v-azure-failback.md).
-

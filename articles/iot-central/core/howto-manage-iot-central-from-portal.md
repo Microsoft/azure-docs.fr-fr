@@ -8,12 +8,12 @@ ms.author: dobett
 ms.date: 02/11/2020
 ms.topic: how-to
 manager: philmea
-ms.openlocfilehash: e7efda8efa27044168386e3ebbc557bf7fb74e8c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0802169898cad51e9a5d208e546a004f7ea7b3c0
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80157923"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653330"
 ---
 # <a name="manage-iot-central-from-the-azure-portal"></a>Gérer IoT Central à l’aide du Portail Azure
 
@@ -56,11 +56,11 @@ Pour commencer, sélectionnez **Toutes les ressources** dans le portail. Sélect
 
 Pour accéder à l’application, sélectionnez l’**URL de l’application IoT Central** :
 
-![Portail de gestion : gestion des ressources](media/howto-manage-iot-central-from-portal/image3.png)
+![Capture d’écran montrant la page « Vue d’ensemble » avec l’option « URL de l’application IoT Central » mise en évidence.](media/howto-manage-iot-central-from-portal/image3.png)
 
 Pour déplacer l’application vers un autre groupe de ressources, sélectionnez le lien **Modifier** à côté du groupe de ressources. Dans la page **Déplacer des ressources**, sélectionnez le groupe de ressources vers lequel vous souhaitez déplacer cette application :
 
-![Portail de gestion : gestion des ressources](media/howto-manage-iot-central-from-portal/image4a.png)
+![Capture d’écran montrant la page « Vue d’ensemble » avec l’option « Groupe de ressources (modifier) » mise en surbrillance.](media/howto-manage-iot-central-from-portal/image4a.png)
 
 Pour déplacer l’application vers un autre abonnement, sélectionnez **Modifier** en regard de l’abonnement. Dans la page **Déplacer des ressources**, choisissez l’abonnement vers lequel vous souhaitez déplacer cette application :
 

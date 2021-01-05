@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Dynamic Signal pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Dynamic Signal.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 05/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 2ec91d42dff8f3a1fc4b036aa1c3ec77faf6a0fc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 263a67fd8fba2c336d1ed4d91475386a8ae175dd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058040"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005790"
 ---
 # <a name="tutorial-configure-dynamic-signal-for-automatic-user-provisioning"></a>Tutoriel : Configurer Dynamic Signal pour l’approvisionnement automatique d’utilisateurs
 
@@ -94,21 +90,21 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Admin Credentials** (Informations d’identification d’administrateur), entrez les valeurs **Tenant URL** (URL de locataire) et **Secret Token** (Jeton secret) de votre compte Dynamic Signal, comme cela est décrit à l’étape 6.
 
 6. Dans la console d’administration de Dynamic Signal, accédez à **Admin > Advanced > API** (Admin > Avancé > API).
 
-    ![Configuration de Dynamic Signal](./media/dynamic-signal-provisioning-tutorial/secret-token-1.png)
+    :::image type="content" source="./media/dynamic-signal-provisioning-tutorial/secret-token-1.png" alt-text="Capture d’écran de la console d’administration Dynamic Signal. Advanced est mis en évidence dans le menu Admin. Le menu Advanced est également visible, avec API mis en évidence." border="false":::
 
     Copiez **l’URL de l’API SCIM** dans **Tenant URL** (URL de locataire). Cliquez sur **Générer un nouveau jeton** pour générer un **jeton du porteur**, puis copiez la valeur dans **Secret Token** (Jeton secret).
 
-    ![Configuration de Dynamic Signal](./media/dynamic-signal-provisioning-tutorial/secret-token-2.png)
+    :::image type="content" source="./media/dynamic-signal-provisioning-tutorial/secret-token-2.png" alt-text="Capture d’écran de la page Tokens, avec SCIM API URL, Generate new token et Bearer token mis en évidence, et un espace réservé dans la zone Bearer token." border="false":::
 
 7. Après avoir renseigné les champs indiqués à l’étape 5, cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Dynamic Signal. Si la connexion échoue, vérifiez que votre compte Dynamic Signal dispose d’autorisations d’administrateur et réessayez.
 

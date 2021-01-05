@@ -10,13 +10,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 12/10/2019
-ms.openlocfilehash: d31ab1d9cb250e0395e8b57342a449a6b9383c64
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/31/2020
+ms.openlocfilehash: 4c5cee412dea286a76b5678f93637e655e308b26
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81415079"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97346144"
 ---
 # <a name="copy-data-from-or-to-azure-file-storage-by-using-azure-data-factory"></a>Copier des données depuis ou vers Stockage Fichier Azure à l’aide d’Azure Data Factory
 
@@ -33,7 +33,12 @@ Ce connecteur Stockage Fichier Azure est pris en charge pour les activités suiv
 - [Activité GetMetadata](control-flow-get-metadata-activity.md)
 - [Supprimer l’activité](delete-activity.md)
 
-Plus spécifiquement, ce connecteur Stockage Fichier Azure prend en charge la copie de fichiers en l’état ou l’analyse/génération de fichiers avec les [formats de fichier et codecs de compression pris en charge](supported-file-formats-and-compression-codecs.md).
+Vous pouvez copier des données depuis Stockage Fichier Azure vers un magasin de données récepteur pris en charge, ou copier des données depuis un magasin de données sources pris en charge vers Stockage Fichier Azure. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs pour l’activité de copie, consultez [Magasins de données et formats pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
+
+Plus précisément, ce connecteur Stockage Fichier Azure prend en charge ce qui suit :
+
+- Copie de fichiers en utilisant des authentifications par clé de compte et par signature d’accès partagé (SAS) de service.
+- Copie de fichiers en l'état ou analyse/génération de fichiers avec les [formats de fichier et codecs de compression pris en charge](supported-file-formats-and-compression-codecs.md).
 
 ## <a name="getting-started"></a>Prise en main
 
@@ -43,7 +48,139 @@ Les sections suivantes fournissent des informations détaillées sur les propri�
 
 ## <a name="linked-service-properties"></a>Propriétés du service lié
 
-Les propriétés prises en charge pour le service lié Stockage Fichier Azure sont les suivantes :
+Ce connecteur Stockage Fichier Azure prend en charge les types d’authentification suivants. Pour plus d’informations, consultez les sections correspondantes.
+
+- [Authentification par clé de compte](#account-key-authentication)
+- [Authentification avec une signature d’accès partagé](#shared-access-signature-authentication)
+
+>[!NOTE]
+> Si vous utilisiez le service lié Stockage Fichier Azure avec le [modèle hérité](#legacy-model), avec l’interface utilisateur de création ADF présentée comme « Authentification de base », il est toujours pris en charge en l’état, mais il vous est suggéré d’utiliser le nouveau modèle à l’avenir. Le modèle hérité transfère des données depuis/vers le stockage via le protocole SMB (Server Message Block), tandis que le nouveau modèle utilise le kit SDK de stockage qui offre un meilleur débit. Pour effectuer la mise à niveau, vous pouvez modifier votre service lié pour basculer la méthode d’authentification sur « Clé de compte » ou « URI SAS ». Aucune modification n’est nécessaire sur le jeu de données ou l’activité de copie.
+
+### <a name="account-key-authentication"></a>Authentification par clé de compte
+
+Pour l’authentification par clé de compte Stockage Fichier Azure, Data Factory prend en charge les propriétés suivantes :
+
+| Propriété | Description | Obligatoire |
+|:--- |:--- |:--- |
+| type | La propriété type doit être définie sur : **AzureFileStorage**. | Oui |
+| connectionString | Spécifiez les informations requises pour se connecter au Stockage Fichier Azure. <br/> Vous pouvez également définir une clé de compte dans Azure Key Vault et extraire la configuration `accountKey` de la chaîne de connexion. Pour plus d’informations, consultez les exemples suivants et l’article [Stocker les informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md). |Oui |
+| fileShare | Spécifiez le partage de fichiers. | Oui |
+| instantané | Spécifiez la date de l’[instantané de partage de fichiers](../storage/files/storage-snapshots-files.md) si vous souhaitez effectuer une copie à partir d’un instantané. | Non |
+| connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Vous pouvez utiliser runtime d’intégration Azure ou un runtime d’intégration auto-hébergé (si votre banque de données se trouve dans un réseau privé). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
+
+**Exemple :**
+
+```json
+{
+    "name": "AzureFileStorageLinkedService",
+    "properties": {
+        "type": "AzureFileStorage",
+        "typeProperties": {
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=<accountName>;AccountKey=<accountKey>;EndpointSuffix=core.windows.net;",
+            "fileShare": "<file share name>"
+        },
+        "connectVia": {
+          "referenceName": "<name of Integration Runtime>",
+          "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+**Exemple : stockage de la clé de compte dans Azure Key Vault**
+
+```json
+{
+    "name": "AzureFileStorageLinkedService",
+    "properties": {
+        "type": "AzureFileStorage",
+        "typeProperties": {
+            "connectionString": "DefaultEndpointsProtocol=https;AccountName=<accountname>;",
+            "fileShare": "<file share name>",
+            "accountKey": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<Azure Key Vault linked service name>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<secretName>" 
+            }
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }            
+    }
+}
+```
+
+### <a name="shared-access-signature-authentication"></a>Authentification avec une signature d’accès partagé
+
+Une signature d'accès partagé fournit un accès délégué aux ressources de votre compte de stockage. Vous pouvez utiliser une signature d’accès partagé pour octroyer à un client des autorisations d’accès limité à des objets de votre compte de stockage pendant une période donnée. Pour plus d’informations sur les signatures d’accès partagé, consultez [Signatures d’accès partagé : Comprendre le modèle de signature d’accès partagé](../storage/common/storage-sas-overview.md).
+
+Pour l’authentification par signature d’accès partagé, Data Factory prend en charge les propriétés suivantes :
+
+| Propriété | Description | Obligatoire |
+|:--- |:--- |:--- |
+| type | La propriété type doit être définie sur : **AzureFileStorage**. | Oui |
+| sasUri | Spécifiez l’URI de signature d’accès partagé aux ressources. <br/>Marquez ce champ comme **SecureString** pour le stocker en toute sécurité dans Data Factory. Vous pouvez également placer le jeton SAP dans Azure Key Vault pour utiliser la rotation automatique et supprimer la portion jeton. Pour plus d’informations, consultez les exemples suivants et [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| fileShare | Spécifiez le partage de fichiers. | Oui |
+| instantané | Spécifiez la date de l’[instantané de partage de fichiers](../storage/files/storage-snapshots-files.md) si vous souhaitez effectuer une copie à partir d’un instantané. | Non |
+| connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Vous pouvez utiliser runtime d’intégration Azure ou un runtime d’intégration auto-hébergé (si votre banque de données se trouve dans un réseau privé). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
+
+**Exemple :**
+
+```json
+{
+    "name": "AzureFileStorageLinkedService",
+    "properties": {
+        "type": "AzureFileStorage",
+        "typeProperties": {
+            "sasUri": {
+                "type": "SecureString",
+                "value": "<SAS URI of the resource e.g. https://<accountname>.file.core.windows.net/?sv=<storage version>&st=<start time>&se=<expire time>&sr=<resource>&sp=<permissions>&sip=<ip range>&spr=<protocol>&sig=<signature>>"
+            },
+            "fileShare": "<file share name>",
+            "snapshot": "<snapshot version>"
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+**Exemple : stockage de la clé de compte dans Azure Key Vault**
+
+```json
+{
+    "name": "AzureFileStorageLinkedService",
+    "properties": {
+        "type": "AzureFileStorage",
+        "typeProperties": {
+            "sasUri": {
+                "type": "SecureString",
+                "value": "<SAS URI of the Azure Storage resource without token e.g. https://<accountname>.file.core.windows.net/>"
+            },
+            "sasToken": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<Azure Key Vault linked service name>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<secretName with value of SAS token e.g. ?sv=<storage version>&st=<start time>&se=<expire time>&sr=<resource>&sp=<permissions>&sip=<ip range>&spr=<protocol>&sig=<signature>>" 
+            }
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+### <a name="legacy-model"></a>Modèle hérité
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
@@ -52,13 +189,6 @@ Les propriétés prises en charge pour le service lié Stockage Fichier Azure so
 | userid | Spécifiez l’utilisateur pouvant accéder à Stockage Fichier Azure comme suit : <br/>\- Utilisation de l’interface utilisateur : spécifiez `AZURE\<storage name>`<br/>\- Utilisation de JSON : `"userid": "AZURE\\<storage name>"`. | Oui |
 | mot de passe | Spécifiez la clé d’accès au stockage. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Vous pouvez utiliser runtime d’intégration Azure ou un runtime d’intégration auto-hébergé (si votre banque de données se trouve dans un réseau privé). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non pour Source, Oui pour Récepteur |
-
->[!IMPORTANT]
-> - Pour copier des données dans le Stockage Fichier Azure à l’aide d’Azure Integration Runtime, [créez un runtime d’intégration Azure](create-azure-integration-runtime.md#create-azure-ir) explicitement avec l’emplacement de Stockage Fichier, puis associez-le au service lié, comme dans l’exemple suivant.
-> - Pour copier des données depuis/vers Stockage Fichier Azure à l’aide du runtime d’intégration auto-hébergé en dehors d’Azure, n’oubliez pas d’ouvrir le port TCP 445 sortant sur votre réseau local.
-
->[!TIP]
->Lorsque vous utilisez l’interface utilisateur d’Azure Data Factory pour la création, vous trouverez l’entrée spécifique « Stockage Fichier Azure » pour la création du service lié, qui génère l’objet de type `FileServer`.
 
 **Exemple :**
 
@@ -93,7 +223,7 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
 
 | Propriété   | Description                                                  | Obligatoire |
 | ---------- | ------------------------------------------------------------ | -------- |
-| type       | La propriété de type sous `location` dans le jeu de données doit être définie sur **FileServerLocation**. | Oui      |
+| type       | La propriété type sous `location` dans le jeu de données doit être définie sur **AzureFileStorageLocation**. | Oui      |
 | folderPath | Chemin d’accès du dossier. Si vous souhaitez utiliser un caractère générique pour filtrer le dossier, ignorez ce paramètre et spécifiez-le dans les paramètres de la source de l’activité. | Non       |
 | fileName   | Nom de fichier dans le chemin d’accès folderPath donné. Si vous souhaitez utiliser un caractère générique pour filtrer les fichiers, ignorez ce paramètre et spécifiez-le dans les paramètres de la source de l’activité. | Non       |
 
@@ -111,7 +241,7 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
         "schema": [ < physical schema, optional, auto retrieved during authoring > ],
         "typeProperties": {
             "location": {
-                "type": "FileServerLocation",
+                "type": "AzureFileStorageLocation",
                 "folderPath": "root/folder/subfolder"
             },
             "columnDelimiter": ",",
@@ -135,12 +265,20 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
 
 | Propriété                 | Description                                                  | Obligatoire                                      |
 | ------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
-| type                     | La propriété type sous `storeSettings` doit être définie sur **FileServerReadSettings**. | Oui                                           |
-| recursive                | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Notez que lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. Les valeurs autorisées sont **true** (par défaut) et **false**. | Non                                            |
-| wildcardFolderPath       | Chemin d’accès du dossier avec des caractères génériques pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de dossier contient effectivement ce caractère d’échappement ou générique. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
-| wildcardFileName         | Nom du fichier avec des caractères génériques situé dans le chemin d’accès folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de dossier contient effectivement ce caractère d’échappement ou générique.  Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui, si `fileName` n’est pas spécifié dans le jeu de données |
-| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut : Dernière modification. Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent avoir la valeur Null, ce qui a pour effet qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés. | Non                                            |
+| type                     | La propriété type sous `storeSettings` doit être définie sur **AzureFileStorageReadSettings**. | Oui                                           |
+| **_Rechercher les fichiers à copier :_* _ |  |  |
+| OPTION 1 : chemin d’accès statique<br> | Copiez à partir du chemin d’accès au dossier/fichier spécifié dans le jeu de données. Si vous souhaitez copier tous les fichiers d’un dossier, spécifiez en plus `wildcardFileName` comme `_`. |  |
+| OPTION 2 : préfixe de fichier<br>- prefix | Préfixe du nom de fichier sous le partage de fichiers donné, configuré dans un jeu de données pour filtrer les fichiers sources. Les fichiers dont le nom commence par `fileshare_in_linked_service/this_prefix` sont sélectionnés. Il utilise le filtre côté service pour le Stockage Fichier Azure, qui offre de meilleures performances qu’un filtre de caractères génériques. Cette fonctionnalité n’est pas prise en charge lors de l’utilisation d’un [modèle de service lié hérité](#legacy-model). | Non                                                          |
+| OPTION 3 : caractère générique<br>- wildcardFolderPath | Chemin d’accès du dossier avec des caractères génériques pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de dossier contient effectivement ce caractère d’échappement ou générique. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
+| OPTION 3 : caractère générique<br>- wildcardFileName | Nom du fichier avec des caractères génériques situé dans le chemin d’accès folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de fichier contient effectivement ce caractère d’échappement ou générique.  Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui |
+| OPTION 4 : liste de fichiers<br>- fileListPath | Indique de copier un ensemble de fichiers donné. Pointez vers un fichier texte contenant la liste des fichiers que vous voulez copier, un fichier par ligne indiquant le chemin d’accès relatif configuré dans le jeu de données.<br/>Si vous utilisez cette option, ne spécifiez pas de nom de fichier dans le jeu de données. Pour plus d’exemples, consultez [Exemples de listes de fichiers](#file-list-examples). |Non |
+| ***Paramètres supplémentaires :** _ |  | |
+| recursive | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. <br>Les valeurs autorisées sont _ *true** (par défaut) et **false**<br>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. |Non |
+| deleteFilesAfterCompletion | Indique si les fichiers binaires seront supprimés du magasin source après leur déplacement vers le magasin de destination. La suppression se faisant par fichier, lorsque l’activité de copie échoue, vous pouvez constater que certains fichiers ont déjà été copiés vers la destination et supprimés de la source, tandis que d’autres restent dans le magasin source. <br/>Cette propriété est valide uniquement dans un scénario de copie de fichiers binaires. La valeur par défaut est false. |Non |
+| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut : Dernière modification. <br>Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent avoir la valeur Null, ce qui a pour effet qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés.<br/>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. | Non                                            |
 | modifiedDatetimeEnd      | Identique à ce qui précède.                                               | Non                                            |
+| enablePartitionDiscovery | Pour les fichiers partitionnés, spécifiez s’il faut analyser les partitions à partir du chemin d’accès au fichier et les ajouter en tant que colonnes sources supplémentaires.<br/>Les valeurs autorisées sont **false** (par défaut) et **true**. | Non                                            |
+| partitionRootPath | Lorsque la découverte de partition est activée, spécifiez le chemin d’accès racine absolu pour pouvoir lire les dossiers partitionnés en tant que colonnes de données.<br/><br/>S’il n’est pas spécifié, par défaut :<br/>– Quand vous utilisez le chemin d’accès du fichier dans le jeu de données ou la liste des fichiers sur la source, le chemin racine de la partition est le chemin d’accès configuré dans le jeu de données.<br/>– Quand vous utilisez le filtre de dossiers de caractères génériques, le chemin d’accès racine de la partition est le sous-chemin d’accès avant le premier caractère générique.<br/><br/>Par exemple, en supposant que vous configurez le chemin d’accès dans le jeu de données en tant que « root/folder/year=2020/month=08/day=27 » :<br/>– Si vous spécifiez le chemin d’accès racine de la partition en tant que « root/folder/year=2020 », l’activité de copie génère deux colonnes supplémentaires, `month` et `day`, ayant respectivement la valeur « 08 » et « 27 », en plus des colonnes contenues dans les fichiers.<br/>– Si le chemin d’accès racine de la partition n’est pas spécifié, aucune colonne supplémentaire n’est générée. | Non                                            |
 | maxConcurrentConnections | Nombre de connexions simultanées au magasin de stockage. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non                                            |
 
 **Exemple :**
@@ -170,7 +308,7 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
                     "skipLineCount": 10
                 },
                 "storeSettings":{
-                    "type": "FileServerReadSettings",
+                    "type": "AzureFileStorageReadSettings",
                     "recursive": true,
                     "wildcardFolderPath": "myfolder*A",
                     "wildcardFileName": "*.csv"
@@ -186,13 +324,13 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
 
 ### <a name="azure-file-storage-as-sink"></a>Stockage Fichier Azure en tant que récepteur
 
-[!INCLUDE [data-factory-v2-file-formats](../../includes/data-factory-v2-file-formats.md)] 
+[!INCLUDE [data-factory-v2-file-sink-formats](../../includes/data-factory-v2-file-sink-formats.md)]
 
 Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dans les paramètres `storeSettings` du récepteur de la copie basé sur le format :
 
 | Propriété                 | Description                                                  | Obligatoire |
 | ------------------------ | ------------------------------------------------------------ | -------- |
-| type                     | La propriété type sous `storeSettings` doit être définie sur **FileServerWriteSettings**. | Oui      |
+| type                     | La propriété type sous `storeSettings` doit être définie sur **AzureFileStorageWriteSettings**. | Oui      |
 | copyBehavior             | Définit le comportement de copie lorsque la source est constituée de fichiers d’une banque de données basée sur un fichier.<br/><br/>Les valeurs autorisées sont les suivantes :<br/><b>- PreserveHierarchy (par défaut)</b> : conserve la hiérarchie des fichiers dans le dossier cible. Le chemin d’accès relatif du fichier source vers le dossier source est identique au chemin d’accès relatif du fichier cible vers le dossier cible.<br/><b>- FlattenHierarchy</b> : tous les fichiers du dossier source figurent dans le premier niveau du dossier cible. Les noms des fichiers cibles sont générés automatiquement. <br/><b>- MergeFiles</b> : fusionne tous les fichiers du dossier source dans un seul fichier. Si le nom de fichier est spécifié, le nom de fichier fusionné est le nom spécifié. Dans le cas contraire, il s’agit d’un nom de fichier généré automatiquement. | Non       |
 | maxConcurrentConnections | Nombre de connexions simultanées au magasin de données. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non       |
 
@@ -222,7 +360,7 @@ Les propriétés suivantes sont prises en charge pour Stockage Fichier Azure dan
             "sink": {
                 "type": "ParquetSink",
                 "storeSettings":{
-                    "type": "FileServerWriteSettings",
+                    "type": "AzureFileStorageWriteSettings",
                     "copyBehavior": "PreserveHierarchy"
                 }
             }
@@ -241,6 +379,16 @@ Cette section décrit le comportement résultant de l’utilisation de filtres d
 | `Folder*` | (vide, utiliser la valeur par défaut) | true | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier2.json**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier4.json**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 | `Folder*` | `*.csv` | false | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier5.csv<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 | `Folder*` | `*.csv` | true | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
+
+### <a name="file-list-examples"></a>Exemples de liste de fichiers
+
+Cette section décrit le comportement résultant de l’utilisation du chemin d’accès à la liste de fichiers dans la source de l’activité de copie.
+
+En supposant que vous disposez de la structure de dossiers source suivante et que vous souhaitez copier les fichiers en gras :
+
+| Exemple de structure source                                      | Contenu de FileListToCopy.txt                             | Configuration ADF                                            |
+| ------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------ |
+| root<br/>&nbsp;&nbsp;&nbsp;&nbsp;DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Métadonnées<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FileListToCopy.txt | File1.csv<br>Subfolder1/File3.csv<br>Subfolder1/File5.csv | **Dans le jeu de données :**<br>- chemin d’accès du dossier : `root/FolderA`<br><br>**Dans la source de l’activité de copie :**<br>- chemin d’accès à la liste de fichiers : `root/Metadata/FileListToCopy.txt` <br><br>Le chemin d’accès à la liste de fichiers pointe vers un fichier texte dans le même magasin de données qui contient la liste de fichiers que vous voulez copier, un fichier par ligne étant le chemin d’accès relatif au chemin d’accès configuré dans le jeu de données. |
 
 ### <a name="recursive-and-copybehavior-examples"></a>exemples de valeurs recursive et copyBehavior
 
@@ -278,7 +426,7 @@ Pour en savoir plus sur les propriétés, consultez [Activité Delete](delete-ac
 |:--- |:--- |:--- |
 | type | La propriété type du jeu de données doit être définie sur : **FileShare** |Oui |
 | folderPath | Chemin d'accès au dossier. <br/><br/>Le filtre de caractères génériques est pris en charge, et les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` comme caractère d'échappement si le nom réel de votre dossier contient des caractères génériques ou ce caractère d'échappement. <br/><br/>Exemples : dossier_racine/sous-dossier/ ; consultez d’autres exemples dans [Exemples de filtres de dossier et de fichier](#folder-and-file-filter-examples). |Oui |
-| fileName | **Filtre de nom ou de caractère générique** pour les fichiers sous le « folderPath » spécifié. Si vous ne spécifiez pas de valeur pour cette propriété, le jeu de données pointe vers tous les fichiers du dossier. <br/><br/>Dans le filtre, les caractères génériques autorisés sont les suivants : `*` (correspond à zéro caractère ou plus) et `?` (correspond à zéro ou un caractère).<br/>- Exemple 1 : `"fileName": "*.csv"`<br/>- Exemple 2 : `"fileName": "???20180427.txt"`<br/>Utilisez `^` comme caractère d’échappement si votre nom de fichier réel contient des caractères génériques ou ce caractère d’échappement.<br/><br/>Lorsque fileName n’est pas spécifié pour un jeu de données de sortie et que **preserveHierarchy** n’est pas spécifié dans le récepteur d’activité, l’activité de copie génère automatiquement le nom de fichier suivant ce modèle : « *Data.[ID GUID d’exécution d’activité].[GUID si FlattenHierarchy].[format si configuré].[compression si configurée]* », par exemple, « Data.0a405f8a-93ff-4c6f-b3be-f69616f1df7a.txt.gz ». Si c’est le nom de la table et non la requête qui est utilisé pour la copie à partir d’une source tabulaire, le modèle de nom est le suivant : « *[nom de la table].[format].[compression si configurée]* », par exemple « MyTable.csv ». |Non |
+| fileName | **Filtre de nom ou de caractère générique** pour les fichiers sous le « folderPath » spécifié. Si vous ne spécifiez pas de valeur pour cette propriété, le jeu de données pointe vers tous les fichiers du dossier. <br/><br/>Dans le filtre, les caractères génériques autorisés sont les suivants : `*` (correspond à zéro caractère ou plus) et `?` (correspond à zéro ou un caractère).<br/>- Exemple 1 : `"fileName": "*.csv"`<br/>- Exemple 2 : `"fileName": "???20180427.txt"`<br/>Utilisez `^` comme caractère d’échappement si votre nom de fichier réel contient des caractères génériques ou ce caractère d’échappement.<br/><br/>Lorsque fileName n’est pas spécifié pour un jeu de données de sortie et que **preserveHierarchy** n’est pas spécifié dans le récepteur d’activité, l’activité de copie génère automatiquement le nom de fichier suivant ce modèle : « *Data.[GUID de l’ID d’exécution de l’activité].[GUID si FlattenHierarchy].[format si configuré].[compression si configurée]*  », par exemple « Data.0a405f8a-93ff-4c6f-b3be-f69616f1df7a.txt.gz ». Si vous copiez à partir d’une source tabulaire à l’aide du nom de table au lieu de la requête, le modèle de nom est «  *[nom de la table].[format].[compression si configurée]*  », par exemple « MyTable.csv ». |Non |
 | modifiedDatetimeStart | Filtre de fichiers en fonction de l’attribut : Dernière modification. Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br/><br/> Sachez que les performances globales du déplacement des données sont affectées par l’activation de ce paramètre lorsque vous souhaitez filtrer des fichiers parmi de grandes quantités de fichiers. <br/><br/> Les propriétés peuvent avoir la valeur Null, ce qui signifie qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés.| Non |
 | modifiedDatetimeEnd | Filtre de fichiers en fonction de l’attribut : Dernière modification. Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br/><br/> Sachez que les performances globales du déplacement des données sont affectées par l’activation de ce paramètre lorsque vous souhaitez filtrer des fichiers parmi de grandes quantités de fichiers. <br/><br/> Les propriétés peuvent avoir la valeur Null, ce qui signifie qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés.| Non |
 | format | Si vous souhaitez **copier des fichiers en l’état** entre des magasins de fichiers (copie binaire), ignorez la section Format dans les deux définitions de jeu de données d’entrée et de sortie.<br/><br/>Si vous souhaitez analyser ou générer des fichiers dans un format spécifique, les types de format de fichier suivants sont pris en charge : **TextFormat**, **JsonFormat**, **AvroFormat**, **OrcFormat** et **ParquetFormat**. Définissez la propriété **type** située sous Format sur l’une de ces valeurs. Pour en savoir plus, consultez les sections relatives à [format Text](supported-file-formats-and-compression-codecs-legacy.md#text-format), [format Json](supported-file-formats-and-compression-codecs-legacy.md#json-format), [format Avro](supported-file-formats-and-compression-codecs-legacy.md#avro-format), [format Orc](supported-file-formats-and-compression-codecs-legacy.md#orc-format) et [format Parquet](supported-file-formats-and-compression-codecs-legacy.md#parquet-format). |Non (uniquement pour un scénario de copie binaire) |

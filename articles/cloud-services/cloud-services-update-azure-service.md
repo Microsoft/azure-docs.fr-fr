@@ -7,12 +7,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 04/19/2017
 ms.author: tagore
-ms.openlocfilehash: 731f4e8cc8a93f33d6887f44fc8d09585e92a75a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f12e5b6b0b2902d69936b9cf2695b7ee21db88e2
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75360342"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92075040"
 ---
 # <a name="how-to-update-a-cloud-service"></a>Mettre à jour un service cloud
 
@@ -21,7 +21,7 @@ La mise à jour d’un service cloud, et notamment de ses rôles et du système 
 ## <a name="update-an-azure-service"></a>Mettre à jour un Service Azure
 Azure organise vos instances de rôle en regroupements logiques appelés domaines de mise à niveau (UD). Les domaines de mise à niveau (UD) sont des ensembles logiques d’instances de rôle qui sont mis à jour en tant que groupe.  Azure met à jour un domaine de mise à niveau de Service Cloud à la fois, ce qui permet aux instances présentes sur les autres domaines de mise à niveau de maintenir le trafic.
 
-Le nombre de domaines de mise à niveau par défaut est de 5. Vous pouvez spécifier un nombre différent de domaines de mise à niveau en incluant l’attribut upgradeDomainCount dans le fichier de définition du service (.csdef). Pour plus d’informations sur l’attribut upgradeDomainCount, consultez [Schéma de définition Microsoft Azure Cloud Services (fichier .csdef)](https://docs.microsoft.com/azure/cloud-services/schema-csdef-file).
+Le nombre de domaines de mise à niveau par défaut est de 5. Vous pouvez spécifier un nombre différent de domaines de mise à niveau en incluant l’attribut upgradeDomainCount dans le fichier de définition du service (.csdef). Pour plus d’informations sur l’attribut upgradeDomainCount, consultez [Schéma de définition Microsoft Azure Cloud Services (fichier .csdef)](./schema-csdef-file.md).
 
 Lorsque vous effectuez la mise à jour sur place d’un ou de plusieurs rôles dans votre service, Azure met à jour les ensembles d’instances de rôle en fonction du domaine de mise à niveau auquel ils appartiennent. Azure met à jour toutes les instances dans un domaine de mise à niveau donné (les arrête, les met à jour, les remet en ligne) puis passe au domaine suivant. En arrêtant uniquement les instances en cours d’exécution dans le domaine de mise à niveau en cours, Azure garantit que l’opération aura un impact minimal sur le service en cours d’exécution. Pour plus d’informations, consultez [Déroulement de la mise à niveau](#howanupgradeproceeds) plus loin dans cet article.
 
@@ -182,7 +182,4 @@ Le diagramme suivant montre comment un service contenant deux rôles qui sont di
 ## <a name="next-steps"></a>Étapes suivantes
 [Gestion des services cloud](cloud-services-how-to-manage-portal.md)  
 [Surveillance des services cloud](cloud-services-how-to-monitor.md)  
-[Configuration des services cloud](cloud-services-how-to-configure-portal.md)  
-
-
-
+[Configuration des services cloud](cloud-services-how-to-configure-portal.md)

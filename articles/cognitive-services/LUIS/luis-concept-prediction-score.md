@@ -1,14 +1,16 @@
 ---
 title: Scores de prédiction - LUIS
 description: Un score de prédiction indique le degré de confiance que le service d’API LUIS a dans les résultats de prédiction, en fonction d’un énoncé utilisateur.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 04/14/2020
-ms.openlocfilehash: 709a34f0a278d8a17267c7544583798d54167dad
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: d836273e61752ff208133466016ce7c6ff9c28fa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81382374"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91316458"
 ---
 # <a name="prediction-scores-indicate-prediction-accuracy-for-intent-and-entities"></a>Les scores de prédiction indiquent la précision des prédictions pour les entités et l’intention
 

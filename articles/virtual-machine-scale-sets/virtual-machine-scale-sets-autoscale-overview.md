@@ -6,15 +6,15 @@ ms.author: avverma
 ms.topic: overview
 ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
-ms.date: 05/29/2018
+ms.date: 06/30/2020
 ms.reviewer: jushiman
 ms.custom: avverma
-ms.openlocfilehash: 90777b8303f2d31168e489c8e2a7ca3a779a11e6
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 092b95845ed033ac0705e325fc6535739088848f
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124956"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94888791"
 ---
 # <a name="overview-of-autoscale-with-azure-virtual-machine-scale-sets"></a>Vue d’ensemble de la mise à l’échelle automatique avec des groupes de machines virtuelles identiques Azure
 Un groupe de machines virtuelles identiques Azure peut augmenter ou diminuer automatiquement le nombre d’instances de machine virtuelle qui exécutent votre application. Ce comportement élastique et automatisé réduit la charge de gestion pour analyser et optimiser les performances de votre application. Vous créez des règles qui définissent les performances acceptables pour une expérience utilisateur positive. Lorsque les seuils définis sont respectés, les règles de mise à l’échelle automatique prennent des mesures pour ajuster la capacité de votre groupe identique. Vous pouvez également planifier des événements qui augmentent ou diminuent automatiquement la capacité de votre groupe identique à des moments donnés. Cet article fournit une vue d’ensemble des mesures de performance disponibles et des actions réalisables par la mise à l’échelle automatique.
@@ -23,13 +23,16 @@ Un groupe de machines virtuelles identiques Azure peut augmenter ou diminuer aut
 ## <a name="benefits-of-autoscale"></a>Avantages de la mise à l’échelle automatique
 Si la demande de votre application augmente, la charge sur les instances de machine virtuelle dans votre groupe identique augmente. Si cette augmentation de la charge est cohérente, au lieu d’une brève demande, vous pouvez configurer des règles de mise à l’échelle automatique pour augmenter le nombre d’instances de machine virtuelle dans le groupe identique.
 
+> [!NOTE]
+> Lorsque vous utilisez des réparations automatiques d’instances pour votre groupe identique, le nombre maximal d’instances dans le groupe identique est 200. Apprenez-en davantage sur les [réparations automatiques d’instances](./virtual-machine-scale-sets-automatic-instance-repairs.md).
+
 Lorsque ces instances de machine virtuelle sont créées et que vos applications sont déployées, le groupe identique commence à distribuer le trafic vers les instances via l’équilibreur de charge. Vous contrôlez les métriques à surveiller, telles que l’usage du processeur ou de la mémoire, la durée pendant laquelle la charge de l’application doit respecter un seuil donné, et le nombre d’instances de machine virtuelle à ajouter au groupe identique.
 
 Au cours d’une soirée ou d’un week-end, la demande de votre application peut diminuer. Si cette charge réduite est constante pendant un certain temps, vous pouvez configurer des règles de mise à l’échelle automatique pour réduire le nombre d’instances de machine virtuelle dans le groupe identique. Cette action de diminution du nombre d’instances a pour effet de réduire le coût d’exécution de votre groupe identique, car vous seul exécutez le nombre d’instances requis pour répondre à la demande en cours.
 
 
 ## <a name="use-host-based-metrics"></a>Utiliser des mesures basées sur les hôtes
-Vous pouvez créer des règles de mise à l’échelle automatique qui intègrent des mesures d’hôtes disponibles à partir de vos instances de machine virtuelle. Les mesures d’hôtes vous offrent une visibilité sur les performances des instances de machine virtuelle dans un groupe identique sans devoir installer ou configurer des agents supplémentaires et des collections de données. Les règles de mise à l’échelle automatique qui utilisent ces mesures peuvent effectuer un scale-out ou un scale-in du nombre d’instances de machine virtuelle en réponse à l’utilisation du processeur, la demande de mémoire ou l’accès au disque.
+Vous pouvez créer des règles de mise à l’échelle automatique qui intègrent des mesures d’hôtes disponibles à partir de vos instances de machine virtuelle. Les mesures d’hôtes vous offrent une visibilité sur les performances des instances de machine virtuelle dans un groupe identique sans devoir installer ou configurer des agents supplémentaires et des collections de données. Les règles de mise à l’échelle automatique qui utilisent ces mesures peuvent augmenter ou diminuer le nombre d’instances de machine virtuelle en réponse à l’utilisation du processeur, la demande de mémoire ou l’accès au disque.
 
 Les règles de mise à l’échelle qui utilisent des indicateurs basés sur les hôtes peuvent être créées avec l’un des outils suivants :
 
@@ -58,7 +61,7 @@ Les métriques basées sur les hôtes suivantes sont disponibles lorsque vous cr
 
 | Nom de métrique               |
 |---------------------------|
-| Percentage CPU            |
+| Pourcentage UC            |
 | Network In                |
 | Network Out               |
 | Disk Read Bytes           |
@@ -72,7 +75,7 @@ Lorsque vous créez des règles de mise à l’échelle automatique pour surveil
 
 | Type d’agrégation |
 |------------------|
-| Average          |
+| Moyenne          |
 | Minimum          |
 | Maximale          |
 | Total            |
@@ -92,7 +95,7 @@ Les règles de mise à l’échelle automatique sont alors déclenchées lorsque
 
 
 ### <a name="actions-when-rules-trigger"></a>Actions lors du déclenchent des règles
-Lorsqu’une règle de mise à l’échelle automatique est déclenchée, votre groupe identique peut automatiquement effectuer un scale-in de l’une des manières suivantes :
+Lorsqu’une règle de mise à l’échelle automatique est déclenchée, votre groupe identique peut automatiquement diminuer la taille des instances de l’une des manières suivantes :
 
 | Opération de mise à l'échelle     | Cas d’utilisation                                                                                                                               |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------------|
@@ -123,7 +126,7 @@ Vous pouvez également créer des règles de mise à l’échelle automatique ba
 
 Les exemples suivants sont des scénarios qui peuvent bénéficier de l’utilisation de règles de mise à l’échelle automatique basées sur la planification :
 
-- Effectuer automatiquement un scale-out du nombre d’instances de machines virtuelles au début de la journée de travail lorsque la demande du client augmente. À la fin de la journée de travail, effectuez automatiquement un scale-in du nombre d’instances de machines virtuelles afin de réduire les coûts des ressources pendant la nuit, lorsque l’utilisation de l’application est faible.
+- Redimensionner automatiquement le nombre d’instances de machines virtuelles au début de la journée de travail lorsque la demande du client augmente. À la fin de la journée de travail, redimensionner automatiquement le nombre d’instances de machines virtuelles afin de réduire les coûts des ressources pendant la nuit, lorsque l’utilisation de l’application est faible.
 - Si un service utilise fortement une application durant certaines parties du mois ou du cycle fiscal, redimensionner automatiquement le nombre d’instances de machines virtuelles pour prendre en compte des exigences supplémentaires.
 - Lors d’un événement marketing, d’une saison de promotions ou de fêtes, vous pouvez automatiquement mettre à l’échelle le nombre d’instances de machines virtuelles afin d’anticiper la demande du client. 
 
@@ -137,6 +140,6 @@ Vous pouvez créer des règles de mise à l’échelle automatique qui utilisent
 
 Cette présentation vous a appris à utiliser des règles de mise à l’échelle automatique pour mettre à l’échelle horizontalement, et augmenter ou diminuer le *nombre* d’instances de machines virtuelles dans votre groupe identique. Vous pouvez également mettre à l’échelle verticalement pour augmenter ou diminuer la *taille* d’instance de machine virtuelle. Pour plus d’informations, voir [Mise à l’échelle verticale avec des groupes de machines virtuelles identiques](virtual-machine-scale-sets-vertical-scale-reprovision.md).
 
-Pour plus d’informations sur la gestion de vos instances de machine virtuelle, voir [Gérer les groupes de machines virtuelles identiques avec Azure PowerShell](virtual-machine-scale-sets-windows-manage.md).
+Pour plus d’informations sur la gestion de vos instances de machine virtuelle, voir [Gérer les groupes de machines virtuelles identiques avec Azure PowerShell](./virtual-machine-scale-sets-manage-powershell.md).
 
-Pour découvrir comment générer des alertes lorsque vos règles de mise à l’échelle automatique déclenchent, voir [Utilisation d’actions de mise à l’échelle automatique pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/autoscale-webhook-email.md). Vous pouvez également [Utiliser des journaux d’audit pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md).
+Pour découvrir comment générer des alertes lorsque vos règles de mise à l’échelle automatique déclenchent, voir [Utilisation d’actions de mise à l’échelle automatique pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/autoscale-webhook-email.md). Vous pouvez également [Utiliser des journaux d’audit pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/alerts-log-webhook.md).

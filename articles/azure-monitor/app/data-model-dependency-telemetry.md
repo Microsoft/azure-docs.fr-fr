@@ -4,16 +4,16 @@ description: Modèle de données Application Insights pour la télémétrie des
 ms.topic: conceptual
 ms.date: 04/17/2017
 ms.reviewer: sergkanz
-ms.openlocfilehash: ba0d848904d1ba885dc53e2941953d8dfb4864cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0f9fc96479569c3411024068ed614d422035ab17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671917"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87315969"
 ---
 # <a name="dependency-telemetry-application-insights-data-model"></a>Télémétrie des dépendances : modèle de données Application Insights
 
-La télémétrie des dépendances (dans [Application Insights](../../azure-monitor/app/app-insights-overview.md)) représente une interaction du composant surveillé avec un composant distant tel que SQL ou un point de terminaison HTTP.
+La télémétrie des dépendances (dans [Application Insights](./app-insights-overview.md)) représente une interaction du composant surveillé avec un composant distant tel que SQL ou un point de terminaison HTTP.
 
 ## <a name="name"></a>Name
 
@@ -21,7 +21,7 @@ Nom de la commande lancée par cet appel de dépendance. Valeur de faible cardin
 
 ## <a name="id"></a>id
 
-Identificateur d’une instance d’appel de dépendance. Utilisé pour la corrélation avec l’élément de télémétrie de demande correspondant à cet appel de dépendance. Pour plus d’informations, consultez la page relative à la [corrélation](../../azure-monitor/app/correlation.md).
+Identificateur d’une instance d’appel de dépendance. Utilisé pour la corrélation avec l’élément de télémétrie de demande correspondant à cet appel de dépendance. Pour plus d’informations, consultez la page relative à la [corrélation](./correlation.md).
 
 ## <a name="data"></a>Données
 
@@ -33,7 +33,7 @@ Nom du type de dépendance. Valeur de faible cardinalité pour le regroupement l
 
 ## <a name="target"></a>Cible
 
-Site cible d’un appel de dépendance. Exemples : nom de serveur, adresse d’hôte. Pour plus d’informations, consultez la page relative à la [corrélation](../../azure-monitor/app/correlation.md).
+Site cible d’un appel de dépendance. Exemples : nom de serveur, adresse d’hôte. Pour plus d’informations, consultez la page relative à la [corrélation](./correlation.md).
 
 ## <a name="duration"></a>Duration
 
@@ -58,8 +58,9 @@ Indication de la réussite ou non d’un appel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Configurez le suivi des dépendances pour [.NET](../../azure-monitor/app/asp-net-dependencies.md).
-- Configurez le suivi des dépendances pour [Java](../../azure-monitor/app/java-agent.md).
-- [Écrire des données de télémétrie des dépendances personnalisées](../../azure-monitor/app/api-custom-events-metrics.md#trackdependency)
+- Configurez le suivi des dépendances pour [.NET](./asp-net-dependencies.md).
+- Configurez le suivi des dépendances pour [Java](./java-agent.md).
+- [Écrire des données de télémétrie des dépendances personnalisées](./api-custom-events-metrics.md#trackdependency)
 - Pour connaître les types et les modèles de données Application Insights, consultez [Modèle de données](data-model.md).
-- Découvrez quelles [plateformes](../../azure-monitor/app/platforms.md) sont prises en charge par Application Insights.
+- Découvrez quelles [plateformes](./platforms.md) sont prises en charge par Application Insights.
+

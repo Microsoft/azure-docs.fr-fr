@@ -4,12 +4,12 @@ description: Découvrez comment afficher des informations de dépannage dans les
 services: container-service
 ms.topic: article
 ms.date: 03/05/2019
-ms.openlocfilehash: b7a74803af916f9e9de72dd528273007ce37832f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2ef38aa76f4ef9152e7bc55a1d74c84ef426f0ac
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77595380"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87056761"
 ---
 # <a name="get-kubelet-logs-from-azure-kubernetes-service-aks-cluster-nodes"></a>Accéder aux journaux d’activité kubelet à partir de nœuds serveur Azure Kubernetes Service (AKS)
 
@@ -32,6 +32,12 @@ Une fois connecté au nœud, exécutez la commande suivante pour récupérer les
 ```console
 sudo journalctl -u kubelet -o cat
 ```
+
+> [!NOTE]
+> Pour les nœuds Windows, les données du journal se trouvent dans `C:\k` et peuvent être consultées à l’aide de la commande *more* :
+> ```
+> more C:\k\kubelet.log
+> ```
 
 L’exemple de sortie suivant indique que les données de journal *kubelet* :
 

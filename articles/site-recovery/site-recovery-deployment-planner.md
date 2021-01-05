@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 03/13/2020
 ms.author: mayg
-ms.openlocfilehash: 70d84516e2d7a42b1c6a3714d9060bedf6535f58
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9a78b0ec53dfce0a1c1478790f404adb78a8c6b9
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79366294"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92359847"
 ---
 # <a name="about-the-azure-site-recovery-deployment-planner-for-vmware-to-azure"></a>À propos du planificateur de déploiement Azure Site Recovery pour VMware sur Azure
 Cet article est le guide de l’utilisateur d’Azure Site Recovery Deployment Planner portant sur les déploiements de production de VMware vers Azure.
@@ -62,7 +62,7 @@ L’outil fournit les informations suivantes :
 
 ## <a name="support-matrix"></a>Matrice de prise en charge
 
-| | **VMware vers Azure** |**Hyper-V vers Azure**|**Azure vers Azure**|**Hyper-V vers un site secondaire**|**VMware vers un site secondaire**
+| **Catégorie** | **VMware vers Azure** |**Hyper-V vers Azure**|**Azure vers Azure**|**Hyper-V vers un site secondaire**|**VMware vers un site secondaire**
 --|--|--|--|--|--
 Scénarios pris en charge |Oui|Oui|Non|Oui*|Non
 Version prise en charge | vCenter 6.7, 6.5, 6.0 ou 5.5| Windows Server 2016, Windows Server 2012 R2 | N/D |Windows Server 2016, Windows Server 2012 R2|N/D
@@ -76,7 +76,7 @@ L’outil comporte deux phases principales : le profilage et la génération d
 
 | Configuration requise du serveur | Description|
 |---|---|
-|Profilage et mesure du débit| <ul><li>Système d’exploitation : Windows Server 2016 ou Windows Server 2012 R2<br>(dans l’idéal, correspondant au moins aux [recommandations de taille pour le serveur de configuration](https://aka.ms/asr-v2a-on-prem-components))</li><li>Configuration de l’ordinateur : 8 processeurs virtuels, 16 Go de RAM, disque dur de 300 Go</li><li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://aka.ms/download_powercli)</li><li>[Visual C++ Redistributable pour Visual Studio 2012](https://aka.ms/vcplusplus-redistributable)</li><li>Accès Internet à Azure (*.blob.core.windows.net) à partir de ce serveur, port 443<br>[Cette étape est facultative. Vous pouvez choisir de fournir manuellement la bande passante disponible pendant la génération de rapport.]</li><li>Compte Azure Storage</li><li>Accès administrateur sur le serveur</li><li>Au minimum 100 Go d’espace disque disponible (en supposant que 1 000 machines virtuelles avec une moyenne de trois disques chacune, profilage pour 30 jours)</li><li>Les paramètres de niveau de statistiques de VMware vCenter peuvent être définis sur 1 ou un niveau supérieur</li><li>Autoriser le port vCenter (port 443 par défaut) : Le planificateur de déploiement Site Recovery se sert de ce port pour se connecter au serveur vCenter/à l’hôte ESXi</ul></ul>|
+|Profilage et mesure du débit| <ul><li>Système d’exploitation : Windows Server 2016 ou Windows Server 2012 R2<br>(dans l’idéal, correspondant au moins aux [recommandations de taille pour le serveur de configuration](/en-in/azure/site-recovery/site-recovery-plan-capacity-vmware#size-recommendations-for-the-configuration-server))</li><li>Configuration de l’ordinateur : 8 processeurs virtuels, 16 Go de RAM, disque dur de 300 Go</li><li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://aka.ms/download_powercli)</li><li>[Visual C++ Redistributable pour Visual Studio 2012](https://aka.ms/vcplusplus-redistributable)</li><li>Accès Internet à Azure (*.blob.core.windows.net) à partir de ce serveur, port 443<br>[Cette étape est facultative. Vous pouvez choisir de fournir manuellement la bande passante disponible pendant la génération de rapport.]</li><li>Compte Azure Storage</li><li>Accès administrateur sur le serveur</li><li>Au minimum 100 Go d’espace disque disponible (en supposant que 1 000 machines virtuelles avec une moyenne de trois disques chacune, profilage pour 30 jours)</li><li>Les paramètres de niveau de statistiques de VMware vCenter peuvent être définis sur 1 ou un niveau supérieur</li><li>Autoriser le port vCenter (port 443 par défaut) : Le planificateur de déploiement Site Recovery se sert de ce port pour se connecter au serveur vCenter/à l’hôte ESXi</ul></ul>|
 | Génération de rapport | Un PC Windows ou serveur Windows Server doté de Excel 2013 ou version ultérieure.<li>[.NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[Visual C++ Redistributable pour Visual Studio 2012](https://aka.ms/vcplusplus-redistributable)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://aka.ms/download_powercli) est requis uniquement lorsque vous passez l’option -User dans la commande de génération de rapport pour extraire les dernières informations de configuration de machine virtuelle des machines virtuelles. Le planificateur de déploiement se connecte au serveur vCenter. Autoriser le port vCenter (port 443 par défaut) à se connecter au serveur vCenter.</li>|
 | Autorisations utilisateur | Autorisation de lecture seule pour le compte d’utilisateur utilisé pour accéder au serveur VMware vCenter/à l’hôte VMware vSphere ESXi lors du profilage |
 
@@ -90,7 +90,7 @@ L’outil comporte deux phases principales : le profilage et la génération d
 L’outil se présente dans un dossier .zip. Sa version actuelle ne prend en charge que le scénario VMware vers Azure.
 
 2. Copiez le dossier .zip sur le serveur Windows à partir duquel vous voulez exécuter l’outil.
-Vous pouvez exécuter l’outil à partir de Windows Server 2012 R2 si le serveur a accès au réseau pour se connecter au serveur vCenter/à l’hôte vSphere ESXi qui contient les machines virtuelles à profiler. Toutefois, nous vous recommandons d’exécuter l’outil sur un serveur dont la configuration matérielle répond aux [indications de dimensionnement pour les serveurs de configuration](https://aka.ms/asr-v2a-on-prem-components). Si vous avez déjà déployé les composants Site Recovery en local, exécutez l’outil à partir du serveur de configuration.
+Vous pouvez exécuter l’outil à partir de Windows Server 2012 R2 si le serveur a accès au réseau pour se connecter au serveur vCenter/à l’hôte vSphere ESXi qui contient les machines virtuelles à profiler. Toutefois, nous vous recommandons d’exécuter l’outil sur un serveur dont la configuration matérielle répond aux [indications de dimensionnement pour les serveurs de configuration](/en-in/azure/site-recovery/site-recovery-plan-capacity-vmware#size-recommendations-for-the-configuration-server). Si vous avez déjà déployé les composants Site Recovery en local, exécutez l’outil à partir du serveur de configuration.
 
     Nous vous recommandons d’adopter la même configuration matérielle que le serveur de configuration (qui dispose d’un serveur de processus intégré) sur le serveur sur lequel vous exécutez l’outil. Cette configuration garantit que le débit atteint rapporté par l’outil corresponde au débit que Site Recovery peut atteindre lors de la réplication. Le calcul du débit dépend de la bande passante réseau disponible sur le serveur et de la configuration matérielle (comme le processeur, le stockage, etc.) du serveur. Si vous exécutez l’outil à partir de n’importe quel autre serveur, le débit est calculé à partir de ce serveur vers Azure. En outre, étant donné que la configuration matérielle du serveur peut différer de celle du serveur de configuration, le débit atteint rapporté par l’outil peut être inexact.
 
@@ -120,7 +120,7 @@ Si vous disposez d’une version précédente du planificateur de déploiement, 
 
 ## <a name="version-history"></a>Historique des versions
 La dernière version de l’outil Planificateur de déploiement Site Recovery est la version 2.5.
-Reportez-vous à la page [Historique des versions du Planificateur de déploiement Site Recovery](https://docs.microsoft.com/azure/site-recovery/site-recovery-deployment-planner-history) pour voir les correctifs ajoutés à chaque mise à jour.
+Reportez-vous à la page [Historique des versions du Planificateur de déploiement Site Recovery](./site-recovery-deployment-planner-history.md) pour voir les correctifs ajoutés à chaque mise à jour.
 
 ## <a name="next-steps"></a>Étapes suivantes
 [Exécuter le Planificateur de déploiement Site Recovery](site-recovery-vmware-deployment-planner-run.md)

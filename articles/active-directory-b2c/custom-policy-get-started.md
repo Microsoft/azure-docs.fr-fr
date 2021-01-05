@@ -7,16 +7,17 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/28/2020
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 856bd6c2a3546a438293e89a0b576e1392d9c6a5
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: ae3865c1ee5e656fc4feda48de9ab67995619593
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81407291"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96936367"
 ---
 # <a name="get-started-with-custom-policies-in-azure-active-directory-b2c"></a>Bien démarrer avec les stratégies personnalisées dans Azure Active Directory B2C
 
@@ -74,22 +75,9 @@ Vous ne devez inscrire ces deux applications dans votre locataire Azure AD B2C q
 
 ### <a name="register-the-identityexperienceframework-application"></a>Inscrire l’application IdentityExperienceFramework
 
-Pour inscrire une application dans votre locataire Azure AD B2C, vous pouvez utiliser l'expérience **Inscriptions d'applications (version héritée)** ou notre nouvelle expérience unifiée **Inscriptions d'applications (préversion)** . [En savoir plus sur la nouvelle expérience](https://aka.ms/b2cappregintro).
+Pour inscrire une application pour votre locataire Azure AD B2C, vous pouvez utiliser la fonctionnalité d’**inscriptions d’applications**.
 
-#### <a name="applications"></a>[Applications](#tab/applications/)
-
-1. Connectez-vous au [portail Azure](https://portal.azure.com).
-1. Dans le Portail Azure, recherchez et sélectionnez **Azure Active Directory**.
-1. Dans le menu de vue d’ensemble d’**Azure Active Directory**, sous **Gérer**, sélectionnez **Inscriptions d’applications (héritée)** .
-1. Sélectionnez **Nouvelle inscription d’application**.
-1. Pour **Nom**, entrez `IdentityExperienceFramework`.
-1. Pour **Type d’application**, choisissez **Application/API web**.
-1. Pour **URL de connexion**, entrez `https://your-tenant-name.b2clogin.com/your-tenant-name.onmicrosoft.com`, où `your-tenant-name` est le nom de domaine de votre locataire Azure AD B2C. Toutes les URL doivent désormais utiliser [b2clogin.com](b2clogin.md).
-1. Sélectionnez **Create** (Créer). Après sa création, copiez l’ID d’application et enregistrez-le pour une utilisation ultérieure.
-
-#### <a name="app-registrations-preview"></a>[Inscriptions d’applications (préversion)](#tab/app-reg-preview/)
-
-1. Sélectionnez **Inscriptions d’applications (préversion)** , puis **Nouvelle inscription**.
+1. Sélectionnez **Inscriptions d’applications**, puis **Nouvelle inscription**.
 1. Pour **Nom**, entrez `IdentityExperienceFramework`.
 1. Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans cet annuaire organisationnel uniquement**.
 1. Sous **URI de redirection**, sélectionnez **Web**, puis entrez `https://your-tenant-name.b2clogin.com/your-tenant-name.onmicrosoft.com`, où `your-tenant-name` est le nom de domaine de votre locataires Azure AD B2C.
@@ -99,7 +87,7 @@ Pour inscrire une application dans votre locataire Azure AD B2C, vous pouvez uti
 
 Ensuite, exposez l’API en ajoutant une étendue :
 
-1. Sous **Gérer**, sélectionnez **Exposer une API**.
+1. Dans le menu de gauche, sous **Gérer**, sélectionnez **Exposer une API**.
 1. Sélectionnez **Ajouter une étendue**, puis sélectionnez **Enregistrer et continuer** pour accepter l’URI d’ID d’application par défaut.
 1. Entrez les valeurs suivantes pour créer une étendue qui autorise l’exécution de stratégie personnalisée dans votre locataires Azure AD B2C :
     * **Nom de l’étendue** : `user_impersonation`
@@ -111,21 +99,7 @@ Ensuite, exposez l’API en ajoutant une étendue :
 
 ### <a name="register-the-proxyidentityexperienceframework-application"></a>Inscrire l’application ProxyIdentityExperienceFramework
 
-#### <a name="applications"></a>[Applications](#tab/applications/)
-
-1. Dans **Inscriptions d’applications (héritées)** , sélectionnez **Nouvelle inscription d’application**.
-1. Pour **Nom**, entrez `ProxyIdentityExperienceFramework`.
-1. Pour **Type d’application**, choisissez **Native**.
-1. Pour **URI de redirection**, entrez `myapp://auth`.
-1. Sélectionnez **Create** (Créer). Après sa création, copiez l’ID d’application et enregistrez-le pour une utilisation ultérieure.
-1. Sélectionnez **Paramètres**, puis sélectionnez **Autorisations requises**, puis **Ajouter**.
-1. Choisissez **Sélectionner une API**, recherchez et sélectionnez **IdentityExperienceFramework**, puis cliquez sur **Sélectionner**.
-1. Cochez la case en regard d’**Accéder à IdentityExperienceFramework**, cliquez sur **Sélectionner**, puis sur **Terminé**.
-1. Sélectionnez **Accorder des autorisations** puis confirmez en sélectionnant **Oui**.
-
-#### <a name="app-registrations-preview"></a>[Inscriptions d’applications (préversion)](#tab/app-reg-preview/)
-
-1. Sélectionnez **Inscriptions d’applications (préversion)** , puis **Nouvelle inscription**.
+1. Sélectionnez **Inscriptions d’applications**, puis **Nouvelle inscription**.
 1. Pour **Nom**, entrez `ProxyIdentityExperienceFramework`.
 1. Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans cet annuaire organisationnel uniquement**.
 1. Sous **URI de redirection**, utilisez la liste déroulante pour sélectionner **client public/natif (Bureau et mobile)** .
@@ -136,14 +110,13 @@ Ensuite, exposez l’API en ajoutant une étendue :
 
 Ensuite, spécifiez que l’application doit être traitée comme un client public :
 
-1. Sous **Gérer**, sélectionnez **Authentification**.
-1. Sélectionnez **Essayer la nouvelle expérience** (si elle est indiquée).
-1. Sous **Paramètres avancés**, activez **Considérer l’application comme un client public** (sélectionnez **Oui**).
+1. Dans le menu de gauche, sous **Gérer**, sélectionnez **Authentification**.
+1. Sous **Paramètres avancés**, activez **Considérer l’application comme un client public** (sélectionnez **Oui**). Assurez-vous que **« allowPublicClient » : true** est défini dans le manifeste de l’application. 
 1. Sélectionnez **Enregistrer**.
 
 Maintenant, accordez des autorisations à l’étendue de l’API que vous avez exposée précédemment dans l’inscription  *IdentityExperienceFramework* :
 
-1. Sous **Gérer**, sélectionnez **Autorisations de l’API**.
+1. Dans le menu de gauche, sous **Gérer**, sélectionnez **Autorisations d’API**.
 1. Sous **Autorisations configurées**, sélectionnez **Ajouter une autorisation**.
 1. Sélectionnez l’onglet **Mes API**, puis sélectionnez l’application **IdentityExperienceFramework**.
 1. Sous **Autorisation**, sélectionnez l’étendue **user_impersonation** que vous avez définie précédemment.
@@ -151,7 +124,7 @@ Maintenant, accordez des autorisations à l’étendue de l’API que vous avez 
 1. Sélectionnez **Accorder le consentement de l’administrateur pour (nom de votre abonné)** .
 1. Sélectionnez le compte administrateur actuellement connecté ou connectez-vous avec un compte de votre locataire Azure AD B2C qui possède au minimum le rôle *Administrateur d’application cloud*.
 1. Sélectionnez **Accepter**.
-1. Sélectionnez **Actualiser**, puis vérifiez que la mention « Accordé pour ... » apparaît dans **État** pour les deux étendues. La propagation des autorisations peut prendre quelques minutes.
+1. Sélectionnez **Actualiser**, puis vérifiez que le message « Accordé pour... » apparaît bien sous **Statut** pour les étendues : offline_access, openid et user_impersonation. La propagation des autorisations peut prendre quelques minutes.
 
 * * *
 
@@ -240,6 +213,6 @@ Comme indiqué dans [Conditions préalables](#prerequisites), Facebook n’est *
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Ensuite, essayez d’ajouter Azure Active Directory (Azure AD) comme fournisseur d’identité. Le fichier de base utilisé dans ce guide de démarrage contient déjà une partie du contenu dont vous avez besoin pour ajouter d’autres fournisseurs d’identité comme Azure AD.
+Ensuite, essayez d’ajouter Azure Active Directory (Azure AD) comme fournisseur d’identité. Le fichier de base utilisé dans ce guide de démarrage contient déjà une partie du contenu dont vous avez besoin pour ajouter d’autres fournisseurs d’identité comme Azure AD. Pour plus d’informations sur la configuration de Azure AD en tant que fournisseur d’identité, consultez [Configurer l’inscription et la connexion avec un compte Azure Active Directory à l’aide de stratégies personnalisées Active Directory B2C](identity-provider-azure-ad-single-tenant.md). 
 
-Pour plus d’informations sur la configuration de Azure AD et sur le fournisseur d’identité, consultez [Configurer l’inscription et la connexion avec un compte Azure Active Directory à l’aide de stratégies personnalisées Active Directory B2C](identity-provider-azure-ad-single-tenant-custom.md).
+Pour en savoir plus sur la façon d’implémenter l’intégration ISV à l’aide de stratégies personnalisées, visitez notre [Galerie partenaires](partner-gallery.md). 

@@ -4,14 +4,14 @@ description: Article de procédure mettant en avant l’inclusion de profils de 
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: 04ac6c2bf0137289221a4ae6ed58d5a71ad21739
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b27ff631ce13d70d15a6fd2b6dd5ad5bccaf5450
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68950221"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021909"
 ---
 # <a name="how-to-data-profile-data-sources-in-azure-data-catalog"></a>Guide pratique pour utiliser des sources de données de profilage de données dans Azure Data Catalog
 
@@ -29,7 +29,7 @@ Le profilage des données consiste à examiner les données dans la source de do
 
 Les sources de données suivantes prennent en charge le profilage des données :
 
-* Vues et tables SQL Server (y compris la base de données SQL Azure et Azure SQL Data Warehouse)
+* Tables et vues SQL Server (notamment Azure SQL DB et Azure Synapse Analytics)
 * Tables et vues Oracle
 * Tables et vues Teradata
 * Tables Hive
@@ -45,7 +45,7 @@ L’inclusion de profils de données lors de l’inscription de ressources de do
 > Vous pouvez également ajouter de la documentation à une ressource pour décrire dans quelle mesure les données peuvent être intégrées à une application. Voir [Comment documenter des sources de données](data-catalog-how-to-documentation.md).
 >
 
-<a name="howto"/>
+<a name="howto"></a>
 
 ## <a name="how-to-include-a-data-profile-when-registering-a-data-source"></a>Comment inclure un profil de données lors de l’inscription d’une source de données
 

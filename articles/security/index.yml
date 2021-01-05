@@ -4,7 +4,7 @@ summary: La sécurité fait partie intégrante d’Azure. Azure vous offre des a
 brand: azure
 metadata:
   title: Documentation sur la sécurité Azure
-  description: La sécurité fait partie intégrante d’Azure. Azure vous offre des avantages uniques en matière de sécurité découlant des informations de sécurité mondiales, dérivés des informations de sécurité globales, des contrôles orientés client sophistiqués et une infrastructure de sécurité renforcée. Cette combinaison puissante permet de protéger vos applications et vos données, prend en charge vos efforts de conformité, et offre une sécurité rentable pour les entreprises de toutes tailles.
+  description: Découvrez la sécurité dans Azure. Découvrez les bases, les bonnes pratiques et les modèles sur la sécurité, ainsi qu’Azure Security Center.
   services: security
   ms.service: security
   ms.subservice: na
@@ -14,12 +14,12 @@ metadata:
   ms.author: terrylan
   manager: rkarlin
   ms.date: 08/29/2019
-  ms.openlocfilehash: b3c5fb0dd15c1211132e627b507aa20a043f09ba
-  ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+  ms.openlocfilehash: a96ff0e329fb00888645949f2eab5652d15cb941
+  ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/10/2020
-  ms.locfileid: "81115362"
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "96489681"
 highlightedContent:
   items:
   - title: Présentation de la sécurité Azure
@@ -30,7 +30,7 @@ highlightedContent:
     url: ./fundamentals/best-practices-and-patterns.md
   - title: Qu’est-ce que le Centre de sécurité Azure ?
     itemType: overview
-    url: ../security-center/security-center-intro.md
+    url: ../security-center/security-center-introduction.md
 conceptualContent:
   items:
   - title: Notions de base
@@ -52,7 +52,7 @@ conceptualContent:
     - url: ./develop/secure-dev-overview.md
       itemType: overview
       text: Bonnes pratiques du développement sécurisé
-    - url: ./develop/secure-web-app.md
+    - url: /previous-versions/azure/security/develop/secure-web-app
       itemType: tutorial
       text: Développer une application web sécurisée
     - url: ./develop/threat-modeling-tool.md
@@ -74,17 +74,17 @@ conceptualContent:
       text: En savoir plus
   - title: Secrets et clés
     links:
-    - url: ../key-vault/key-vault-overview.md
+    - url: ../key-vault/general/overview.md
       itemType: overview
       text: Qu'est-ce qu'Azure Key Vault ?
-    - url: ../key-vault/quick-create-cli.md
+    - url: ../key-vault/secrets/quick-create-cli.md
       itemType: quickstart
       text: Définir et récupérer un secret
     - url: ../dedicated-hsm/overview.md
       itemType: overview
       text: Présentation du service HSM dédié Azure
     footerLink:
-      url: /azure/key-vault/
+      url: ../key-vault/index.yml
       text: En savoir plus
   - title: Protection de données
     links:
@@ -102,7 +102,7 @@ conceptualContent:
       text: En savoir plus
   - title: Gestion des identités
     links:
-    - url: ./fundamentals/choose-ad-authn.md
+    - url: ../active-directory/hybrid/choose-ad-authn.md
       itemType: concept
       text: Choisir la méthode d’authentification appropriée
     - url: ./fundamentals/steps-secure-identity.md
@@ -126,17 +126,17 @@ conceptualContent:
       itemType: how-to-guide
       text: Utilisation de stratégies de sécurité
     footerLink:
-      url: /azure/security-center/
+      url: ../security-center/index.yml
       text: En savoir plus
   - title: Supervision de la sécurité IoT
     links:
-    - url: ../asc-for-iot/overview.md
+    - url: ../defender-for-iot/overview.md
       itemType: overview
       text: Présentation d’Azure Security Center pour IoT
-    - url: ../asc-for-iot/architecture.md
+    - url: ../defender-for-iot/architecture.md
       itemType: how-to-guide
       text: Architecture d’Azure Security Center pour IoT
-    - url: ../asc-for-iot/getting-started.md
+    - url: ../defender-for-iot/getting-started.md
       itemType: how-to-guide
       text: Bien démarrer avec Azure Security Center pour l’IoT
     footerLink:
@@ -154,17 +154,17 @@ conceptualContent:
       itemType: quickstart
       text: Bien démarrer avec la préversion Azure Sentinel
     footerLink:
-      url: /azure/sentinel/
+      url: ../sentinel/index.yml
       text: En savoir plus
   - title: Protection contre les menaces
     links:
     - url: ../security-center/security-center-alerts-overview.md
       itemType: concept
       text: Alertes de sécurité dans Azure Security Center
-    - url: ../storage/common/storage-advanced-threat-protection.md
+    - url: ../storage/common/azure-defender-storage-configure.md
       itemType: concept
       text: Advanced Threat Protection pour le stockage Azure
-    - url: ../sql-database/sql-database-threat-detection-overview.md
+    - url: ../azure-sql/database/threat-detection-overview.md
       itemType: concept
       text: Advanced Threat Protection pour Azure SQL Database
     footerLink:
@@ -179,7 +179,7 @@ conceptualContent:
       itemType: overview
       text: Vue d’ensemble de la gestion et de la supervision
     footerLink:
-      url: https://docs.microsoft.com/search/?search=security+audit+log&scope=azure&category=Documentation
+      url: /search/?category=Documentation&scope=azure&search=security%2baudit%2blog
       text: Rechercher d’autres informations
   - title: Sécurité du réseau
     links:
@@ -189,7 +189,7 @@ conceptualContent:
     - url: ./fundamentals/network-best-practices.md
       itemType: concept
       text: Bonnes pratiques de sécurité
-    - url: ./fundamentals/ddos-best-practices.md
+    - url: ../ddos-protection/fundamental-best-practices.md
       itemType: concept
       text: Protection DDOS
   - title: Infrastructure de sécurité
@@ -237,5 +237,5 @@ conceptualContent:
       itemType: overview
       text: Service Azure Blueprints
     footerLink:
-      url: /azure/governance/
+      url: ../governance/index.yml
       text: En savoir plus

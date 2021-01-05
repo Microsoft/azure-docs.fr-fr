@@ -6,7 +6,9 @@
   href: conversion-rest-api.md
 - name: Configurer la conversion de modèle
   href: configure-model-conversion.md
+- name: Disposition des fichiers pour la conversion
+  href: layout-files-for-conversion.md
 - name: Remplacer des matériaux pendant la conversion d’un modèle
   href: override-materials.md
-- name: Obtenir des informations sur un modèle converti
+- name: Obtenir des informations sur les conversions
   href: get-information.md

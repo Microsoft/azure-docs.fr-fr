@@ -5,12 +5,12 @@ author: masnider
 ms.topic: conceptual
 ms.date: 08/18/2017
 ms.author: masnider
-ms.openlocfilehash: b6df25b525975f2d4fe6a02064e81f359a804c58
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 192aca589c3b1e660667dbe8377afe7802b56f17
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416271"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93146192"
 ---
 # <a name="balancing-your-service-fabric-cluster"></a>Équilibrage de votre cluster Service Fabric
 Service Fabric Cluster Resource Manager permet de modifier la charge dynamique, de réagir aux ajouts ou aux suppressions de nœuds ou de services. Il corrige également automatiquement les violations de contrainte et rééquilibre de façon proactive le cluster. Mais à quelle fréquence ces actions sont-elles effectuées, et quel en est l’élément déclencheur ?
@@ -189,7 +189,7 @@ Vous voyez certainement où je veux en venir : il s’agit d’une chaîne ! N
 
 <center>
 
-![Équilibrage de plusieurs services en même temps][Image4]
+![Schéma qui montre comment équilibrer plusieurs services en même temps.][Image4]
 </center>
 
 En raison de cette chaîne, il est donc possible qu’un déséquilibre dans les mesures 1 à 4 provoque le déplacement de réplicas ou d’instances appartenant aux services 1 à 3. Nous savons également qu’un déséquilibre de la mesure Metric1, Metric2 ou Metric3 ne peut pas provoquer de déplacements pour le service Service4. Cela n’aurait aucun intérêt, puisque le déplacement de réplicas ou d’instances appartenant au service Service4 n’a pas la moindre incidence sur l’équilibre de la mesure Metric1, Metric2 ou Metric3.
@@ -198,7 +198,7 @@ Cluster Resource Manager identifie automatiquement les services associés. Ajout
 
 <center>
 
-![Équilibrage de plusieurs services en même temps][Image5]
+![Schéma qui montre que le Gestionnaire des ressources clusters identifie les services associés.][Image5]
 </center>
 
 ## <a name="next-steps"></a>Étapes suivantes

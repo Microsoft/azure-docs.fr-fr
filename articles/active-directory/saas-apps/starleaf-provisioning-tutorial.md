@@ -2,25 +2,21 @@
 title: "Tutoriel : Configurer StarLeaf pour l'approvisionnement automatique d'utilisateurs avec Azure Active Directory | Microsoft Docs"
 description: Apprenez à configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur StarLeaf.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/19/2019
 ms.author: zhchia
-ms.openlocfilehash: 520373fc6a05bcaada973273e3553f9da623c669
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 07c476c0de644ac63c577d466f4691b5cf415334
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064289"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94357930"
 ---
 # <a name="tutorial-configure-starleaf-for-automatic-user-provisioning"></a>Tutoriel : Configurer StarLeaf pour l'approvisionnement automatique d'utilisateurs
 
@@ -36,7 +32,7 @@ L'objectif de ce didacticiel est de présenter les étapes à suivre dans StarLe
 Le scénario décrit dans ce tutoriel part du principe que vous disposez des prérequis suivants :
 
 * Un locataire Azure AD.
-* [Un locataire StarLeaf](https://www.starleaf.com/solutions/).
+* [Un locataire StarLeaf](https://starleaf.com/).
 * Un compte d'utilisateur StarLeaf doté d'autorisations d'administrateur.
 
 ## <a name="assign-users-to-starleaf"></a>Attribuer des utilisateurs à StarLeaf
@@ -56,15 +52,15 @@ Avant de configurer StarLeaf pour l'approvisionnement automatique d'utilisateurs
 
 1. Connectez-vous à votre [Console d'administration StarLeaf](https://portal.starleaf.com/#page=login). Accédez à **Intégrations** > **Ajouter une intégration**.
 
-    ![StarLeaf - Ajouter SCIM](media/starleaf-provisioning-tutorial/image00.png)
+    ![Capture d’écran de la console d’administration StarLeaf avec les options Intégrations et Ajouter une intégration en évidence.](media/starleaf-provisioning-tutorial/image00.png)
 
-2. Pour le **Type**, sélectionnez Microsoft Azure Active Directory. Entrez un nom approprié dans le champ **Nom**. Cliquez sur **Appliquer**.
+2. Pour le **Type** , sélectionnez Microsoft Azure Active Directory. Entrez un nom approprié dans le champ **Nom**. Cliquez sur **Appliquer**.
 
-    ![StarLeaf - Ajouter SCIM](media/starleaf-provisioning-tutorial/image01.png)
+    ![Capture d’écran de la boîte de dialogue Ajouter une intégration avec les zones de texte Type et Nom en évidence.](media/starleaf-provisioning-tutorial/image01.png)
 
 3.  Les valeurs **URL de base SCIM** et **Jeton d'accès** s'affichent. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** de l'onglet Approvisionnement de votre application StarLeaf sur le Portail Microsoft Azure. 
 
-    ![StarLeaf - Créer un jeton](media/starleaf-provisioning-tutorial/image02.png)
+    ![Capture d’écran de la boîte de dialogue Modifier l’intégration avec les zones de texte Type, Nom et URL de base SCIM en évidence.](media/starleaf-provisioning-tutorial/image02.png)
 
 ## <a name="add-starleaf-from-the-gallery"></a>Ajouter StarLeaf à partir de la galerie
 
@@ -76,7 +72,7 @@ Avant de configurer StarLeaf pour l'approvisionnement automatique d'utilisateurs
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -84,14 +80,14 @@ Avant de configurer StarLeaf pour l'approvisionnement automatique d'utilisateurs
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **StarLeaf**, puis sélectionnez **StarLeaf** dans le volet de résultats.
+4. Dans la zone de recherche, entrez **StarLeaf** , puis sélectionnez **StarLeaf** dans le volet de résultats.
     ![StarLeaf dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-automatic-user-provisioning-to-starleaf"></a>Configurer l'approvisionnement automatique d'utilisateurs sur StarLeaf
 
 Cette section vous guide tout au long des étapes de configuration du service d'approvisionnement d'Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans StarLeaf en fonction des attributions d'utilisateurs et/ou de groupes dans Azure AD.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -101,29 +97,29 @@ Cette section vous guide tout au long des étapes de configuration du service d'
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Sous la section Informations d'identification de l'administrateur, entrez respectivement les valeurs de l'**URL de base SCIM** et du **Jeton d'accès** récupérées précédemment dans les champs **URL de locataire** et **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu'Azure AD peut se connecter à StarLeaf. Si la connexion échoue, vérifiez que votre compte StarLeaf dispose d'autorisations d'administrateur et réessayez.
+5. Sous la section Informations d'identification de l'administrateur, entrez respectivement les valeurs de l' **URL de base SCIM** et du **Jeton d'accès** récupérées précédemment dans les champs **URL de locataire** et **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu'Azure AD peut se connecter à StarLeaf. Si la connexion échoue, vérifiez que votre compte StarLeaf dispose d'autorisations d'administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-6. Dans le champ **E-mail de notification**, entrez l'adresse e-mail de la personne ou du groupe qui doit recevoir les notifications d'erreur d'approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+6. Dans le champ **E-mail de notification** , entrez l'adresse e-mail de la personne ou du groupe qui doit recevoir les notifications d'erreur d'approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 7. Cliquez sur **Enregistrer**.
 
-8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec StarLeaf**.
+8. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec StarLeaf**.
 
-    ![StarLeaf - Créer un jeton](media/starleaf-provisioning-tutorial/usermapping.png)
+    ![Capture d’écran de la section Mappages montrant l’option Synchroniser les utilisateurs Azure Active Directory avec StarLeaf.](media/starleaf-provisioning-tutorial/usermapping.png)
 
-9. Dans la section **Mappages des attributs**, passez en revue les attributs d'utilisateurs synchronisés entre Azure AD et StarLeaf. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d'utilisateur dans StarLeaf pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+9. Dans la section **Mappages des attributs** , passez en revue les attributs d'utilisateurs synchronisés entre Azure AD et StarLeaf. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d'utilisateur dans StarLeaf pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![StarLeaf - Créer un jeton](media/starleaf-provisioning-tutorial/userattribute.png)
+    ![Capture d’écran de la section Mappages des attributs montrant neuf mappages affichés.](media/starleaf-provisioning-tutorial/userattribute.png)
 
 
 10. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).

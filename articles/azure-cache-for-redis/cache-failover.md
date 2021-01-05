@@ -1,17 +1,17 @@
 ---
 title: Basculement et mise à jour corrective – Azure Cache pour Redis
 description: Découvrez-en plus sur le basculement, la mise à jour corrective et le processus de mise à jour pour Azure Cache pour Redis.
-author: asasine
+author: yegu-ms
+ms.author: yegu
 ms.service: cache
 ms.topic: conceptual
 ms.date: 10/18/2019
-ms.author: adsasine
-ms.openlocfilehash: 6ff33bd594181aabc4fd7d55ce33f780a0d06086
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7cfa7257e64421c30c359bb34044988bbb5af1dd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74122185"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87093083"
 ---
 # <a name="failover-and-patching-for-azure-cache-for-redis"></a>Basculement et mise à jour corrective pour Azure Cache pour Redis
 
@@ -23,32 +23,32 @@ Commençons par un aperçu du basculement pour Azure Cache pour Redis.
 
 ### <a name="a-quick-summary-of-cache-architecture"></a>Un rapide résumé de l’architecture du cache
 
-Un cache se compose de plusieurs machines virtuelles avec des adresses IP privées distinctes. Chaque machine virtuelle, également appelée nœud, est connectée à un équilibreur de charge partagé avec une seule adresse IP virtuelle. Chaque nœud exécute le processus serveur Redis et est accessible par le biais du nom d’hôte et des ports Redis. Chaque nœud est considéré comme un nœud maître ou réplica. Quand une application cliente se connecte à un cache, son trafic passe par cet équilibreur de charge et est automatiquement routé au nœud maître.
+Un cache se compose de plusieurs machines virtuelles avec des adresses IP privées distinctes. Chaque machine virtuelle, également appelée nœud, est connectée à un équilibreur de charge partagé avec une seule adresse IP virtuelle. Chaque nœud exécute le processus serveur Redis et est accessible par le biais du nom d’hôte et des ports Redis. Chaque nœud est considéré comme un nœud principal ou réplica. Lorsqu’une application cliente se connecte à un cache, son trafic passe par cet équilibreur de charge et est automatiquement routé au nœud principal.
 
-Dans un cache de base, le nœud unique est toujours un maître. Un cache Standard ou Premium comprend deux nœuds : l’un est choisi comme maître et l’autre est le réplica. Étant donné que les caches Standard et Premium ont plusieurs nœuds, un nœud peut être indisponible pendant que l’autre continue à traiter les requêtes. Les caches en cluster sont constitués de plusieurs partitions, chacune ayant un nœud maître et un nœud réplica distincts. Une partition peut être en panne pendant que les autres restent disponibles.
+Dans un cache De base, le nœud unique est toujours un nœud principal. Un cache Standard ou Premium comprend deux nœuds : l’un est choisi comme nœud principal et l’autre est le réplica. Étant donné que les caches Standard et Premium ont plusieurs nœuds, un nœud peut être indisponible pendant que l’autre continue à traiter les requêtes. Les caches en cluster sont constitués de plusieurs partitions, chacune ayant un nœud principal et un nœud réplica distincts. Une partition peut être en panne pendant que les autres restent disponibles.
 
 > [!NOTE]
 > Un cache de base n’a pas plusieurs nœuds et n’offre pas de contrat de niveau de service (SLA) en matière de disponibilité. Les caches de base sont recommandés uniquement à des fins de développement et de test. Utilisez un cache Standard ou Premium pour un déploiement sur plusieurs nœuds afin d’augmenter la disponibilité.
 
 ### <a name="explanation-of-a-failover"></a>Explication d’un basculement
 
-Un basculement se produit quand un nœud de réplica se promeut en nœud maître et quand l’ancien nœud maître ferme des connexions existantes. Une fois le nœud maître rétabli, il remarque le changement de rôle et se rétrograde pour devenir un réplica. Il se connecte ensuite au nouveau maître et synchronise les données. Un basculement peut être planifié ou non.
+Un basculement se produit lorsqu’un nœud réplica se promeut en nœud principal et que l’ancien nœud principal ferme des connexions existantes. Une fois le nœud principal rétabli, il remarque le changement de rôle et se rétrograde pour devenir un réplica. Il se connecte ensuite au nouveau nœud principal et synchronise les données. Un basculement peut être planifié ou non.
 
 Un *basculement planifié* a lieu pendant les mises à jour du système (par exemple, mises à jour correctives Redis ou mises à niveau du système d’exploitation) et les opérations de gestion (par exemple, mise à l’échelle et redémarrage). Étant donné que les nœuds sont avertis à l’avance de la mise à jour, ils peuvent échanger des rôles de manière coopérative et indiquer rapidement la modification à l’équilibreur de charge. Un basculement planifié se termine généralement en moins de 1 seconde.
 
-Un *basculement non planifié* peut se produire en raison d’une défaillance matérielle, d’une défaillance du réseau ou d’autres pannes inattendues du nœud maître. Le nœud réplica se promeut en maître, mais le processus prend plus de temps. Un nœud réplica doit tout d’abord détecter que son nœud maître n’est pas disponible avant de pouvoir lancer le processus de basculement. Le nœud réplica doit également vérifier que cette défaillance non planifiée n’est pas temporaire ni locale afin d’éviter un basculement inutile. Ce retard de détection signifie qu’un basculement non planifié se termine généralement dans un délai de 10 à 15 secondes.
+Un *basculement non planifié* peut se produire en raison d’une défaillance matérielle, d’une défaillance de réseau ou d’autres pannes inattendues du nœud principal. Le nœud réplica se promeut en nœud principal, mais le processus prend plus de temps. Un nœud réplica doit tout d’abord détecter que son nœud principal n’est pas disponible avant de pouvoir lancer le processus de basculement. Le nœud réplica doit également vérifier que cette défaillance non planifiée n’est pas temporaire ni locale afin d’éviter un basculement inutile. Ce retard de détection signifie qu’un basculement non planifié se termine généralement dans un délai de 10 à 15 secondes.
 
 ## <a name="how-does-patching-occur"></a>Comment la mise à jour corrective a-t-elle lieu ?
 
 Le service Azure Cache pour Redis met régulièrement à jour votre cache avec les fonctionnalités et les correctifs les plus récents de la plateforme. Pour corriger un cache, le service effectue les étapes suivantes :
 
 1. Le service de gestion sélectionne un nœud à corriger.
-1. Si le nœud sélectionné est un nœud maître, son nœud réplica se promeut de manière coopérative. Cette promotion est considérée comme un basculement planifié.
+1. Si le nœud sélectionné est un nœud principal, son nœud réplica se promeut de manière coopérative. Cette promotion est considérée comme un basculement planifié.
 1. Le nœud sélectionné redémarre pour accepter les nouveaux changements, puis revient comme nœud réplica.
-1. Le nœud réplica se connecte au nœud maître et synchronise les données.
+1. Le nœud réplica se connecte au nœud principal et synchronise les données.
 1. Une fois la synchronisation des données terminée, le processus de mise à jour corrective se répète pour les nœuds restants.
 
-Étant donné que la mise à jour corrective est un basculement planifié, le nœud réplica se promeut rapidement en maître et commence à traiter les requêtes et les nouvelles connexions. Les caches de base n’ont pas de nœud réplica et sont indisponibles tant que la mise à jour n’est pas terminée. Chaque partition d’un cache en cluster est corrigée séparément et ne ferme pas les connexions à une autre partition.
+La mise à jour corrective étant un basculement planifié, le nœud réplica se promeut rapidement en nœud principal et commence à traiter les requêtes et les nouvelles connexions. Les caches de base n’ont pas de nœud réplica et sont indisponibles tant que la mise à jour n’est pas terminée. Chaque partition d’un cache en cluster est corrigée séparément et ne ferme pas les connexions à une autre partition.
 
 > [!IMPORTANT]
 > Les nœuds sont corrigés un à un pour éviter toute perte de données. Les caches de base subissent une perte de données. Les caches en cluster sont corrigés une partition à la fois.

@@ -9,18 +9,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: pim
-ms.date: 11/08/2019
+ms.date: 12/08/2020
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ae70b8386b1dc3ebd570d2651cded3eda75dfc53
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a618da7c9a66b8f687c1b75914530080ed56bea
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73847069"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905823"
 ---
 # <a name="create-an-access-review-of-azure-resource-roles-in-privileged-identity-management"></a>Créer une révision d’accès des rôles de ressources Azure dans Privileged Identity Management
 
@@ -30,7 +30,7 @@ Cet article explique comment créer une ou plusieurs révisions d’accès pour 
 
 ## <a name="prerequisites"></a>Prérequis
 
-[Administrateur de rôle privilégié](../users-groups-roles/directory-assign-admin-roles.md#privileged-role-administrator)
+[Administrateur de rôle privilégié](../roles/permissions-reference.md#privileged-role-administrator)
 
 ## <a name="open-access-reviews"></a>Ouvrir les révisions d’accès
 
@@ -40,7 +40,7 @@ Cet article explique comment créer une ou plusieurs révisions d’accès pour 
 
 1. Dans le menu de gauche, sélectionnez **Ressources Azure**.
 
-1. Sélectionnez la ressource que vous souhaitez gérer, telle qu’un abonnement ou un groupe d’administration.
+1. Sélectionnez la ressource que vous souhaitez gérer, par exemple, un abonnement.
 
 1. Sous Gérer, sélectionnez **Révisions d’accès**.
 

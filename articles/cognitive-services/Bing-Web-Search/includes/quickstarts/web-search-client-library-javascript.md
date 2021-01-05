@@ -8,12 +8,13 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/05/2020
 ms.author: aahi
-ms.openlocfilehash: 0380dc8d2ff34cf9eecaad063a305491a357ca29
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: 1b0fa12aa00165ad4ddd02d36383b41bdf74f4d8
+ms.sourcegitcommit: 8a1ba1ebc76635b643b6634cc64e137f74a1e4da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78924780"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94386569"
 ---
 La bibliothèque de client de l’API Recherche Web Bing simplifie l’intégration de l’API dans votre application Node.js. Dans ce démarrage rapide, vous allez apprendre à instancier un client, envoyer une requête et imprimer la réponse.
 
@@ -45,11 +46,11 @@ Commençons par la configuration de l’environnement de développement pour not
     npm init
     ```
 
-1. Maintenant, nous allons installer certains modules Azure et les ajouter à `package.json` :
+1. Maintenant, nous allons installer certains modules Azure et les ajouter à `package.json` :
 
     ```console
-    npm install --save azure-cognitiveservices-websearch
-    npm install --save ms-rest-azure
+    npm install --save @azure/cognitiveservices-websearch
+    npm install --save @azure/ms-rest-azure-js
     ```
 
 ## <a name="create-a-project-and-declare-required-modules"></a>Créer un projet et déclarer les modules requis
@@ -59,13 +60,13 @@ Dans le même répertoire que votre `package.json`, créez un projet Node.js à 
 Ensuite, copiez ce code dans votre projet. Il charge les modules installés dans la section précédente.
 
 ```javascript
-const CognitiveServicesCredentials = require('ms-rest-azure').CognitiveServicesCredentials;
-const WebSearchAPIClient = require('azure-cognitiveservices-websearch');
+const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
+const WebSearchAPIClient = require('@azure/cognitiveservices-websearch');
 ```
 
 ## <a name="instantiate-the-client"></a>Instancier le client
 
-Ce code instancie un client et l’utilisation du module `azure-cognitiveservices-websearch`. Assurez-vous que vous entrez une clé d’abonnement valide pour votre compte Azure avant de continuer.
+Ce code instancie un client et l’utilisation du module `@azure/cognitiveservices-websearch`. Assurez-vous que vous entrez une clé d’abonnement valide pour votre compte Azure avant de continuer.
 
 ```javascript
 let credentials = new CognitiveServicesCredentials('YOUR-ACCESS-KEY');
@@ -106,4 +107,4 @@ Lorsque vous avez terminé ce projet, veillez à supprimer votre clé d’abonne
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Référence du SDK Node Azure](https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-websearch/)
+* [Référence du SDK Node Azure](/javascript/api/@azure/cognitiveservices-websearch/)

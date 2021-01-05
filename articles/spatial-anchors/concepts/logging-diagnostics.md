@@ -1,19 +1,20 @@
 ---
 title: Journalisation et diagnostics
 description: Explication détaillée de la méthode à suivre pour générer et récupérer des diagnostics et des journaux dans Azure Spatial Anchors.
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 02/22/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: conceptual
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: f4359db1deda2295a66bcb97cf374d0fe9bc3ef7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: da8ffd7ff0b8473ce558943bb420b36f26c3fc32
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74270128"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95494639"
 ---
 # <a name="logging-and-diagnostics-in-azure-spatial-anchors"></a>Journalisation et diagnostics dans Azure Spatial Anchors
 
@@ -42,9 +43,9 @@ Deux rappels sont particulièrement intéressants pour l’utilisateur. L’exem
 
 Ces rappels d’événement sont fournis pour traiter les journaux et les erreurs de la session :
 
-- [LogLevel](https://docs.microsoft.com/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.loglevel) : spécifie le niveau de détail que le runtime doit envoyer en ce qui concerne les événements.
-- [OnLogDebug](https://docs.microsoft.com/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.onlogdebug) : fournit les événements de journalisation de débogage standard.
-- [Erreur](https://docs.microsoft.com/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.error) : fournit les événements de journalisation que le runtime considère comme des erreurs.
+- [LogLevel](/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.loglevel) : spécifie le niveau de détail que le runtime doit envoyer en ce qui concerne les événements.
+- [OnLogDebug](/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.onlogdebug) : fournit les événements de journalisation de débogage standard.
+- [Erreur](/dotnet/api/microsoft.azure.spatialanchors.cloudspatialanchorsession.error) : fournit les événements de journalisation que le runtime considère comme des erreurs.
 
 ## <a name="diagnostics-logging"></a>Journalisation des diagnostics
 

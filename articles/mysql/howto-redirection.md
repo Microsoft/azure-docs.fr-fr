@@ -1,26 +1,30 @@
 ---
 title: Se connecter à l’aide de la redirection – Azure Database pour MySQL
 description: Cet article décrit comment vous pouvez configurer votre application pour qu’elle se connecte à Azure Database pour MySQL avec la redirection.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
-ms.date: 03/16/2020
-ms.openlocfilehash: f987d5d9640c3bfef61320df379a68eae2f4712b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 6/8/2020
+ms.openlocfilehash: bea618b34809544308caba46a0ffbdecee91d69f
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80246333"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541808"
 ---
 # <a name="connect-to-azure-database-for-mysql-with-redirection"></a>Se connecter à Azure Database pour MySQL avec la redirection
 
 Cette rubrique explique comment connecter une application à votre serveur Azure Database pour MySQL avec le mode de redirection. La redirection vise à réduire la latence réseau entre les applications clientes et les serveurs MySQL en permettant aux applications de se connecter directement aux nœuds du serveur back-end.
 
 ## <a name="before-you-begin"></a>Avant de commencer
-Connectez-vous au [portail Azure](https://portal.azure.com). Créez un serveur Azure Database pour MySQL avec un moteur version 5.6, 5.7 ou 8.0. Pour plus d’informations, reportez-vous à [Guide pratique pour créer un serveur de base de données Azure pour MySQL à partir du portail](quickstart-create-mysql-server-database-using-azure-portal.md) ou à [Guide pratique pour créer un serveur de base de données Azure pour MySQL à l’aide de l’interface CLI](quickstart-create-mysql-server-database-using-azure-cli.md).
+Connectez-vous au [portail Azure](https://portal.azure.com). Créez un serveur Azure Database pour MySQL avec un moteur version 5.6, 5.7 ou 8.0. 
 
-La redirection n’est actuellement prise en charge que lorsque **le protocole SSL est activé** sur votre serveur Azure Database pour MySQL. Pour plus d’informations sur la configuration de SSL, consultez [Utilisation de SSL avec une base de données Azure pour MySQL](howto-configure-ssl.md#step-3--enforcing-ssl-connections-in-azure).
+Pour plus d’informations, consultez la rubrique relative à la création d’un serveur Azure Database pour MySQL à l’aide du [portail Azure](quickstart-create-mysql-server-database-using-azure-portal.md) ou d’[Azure CLI](quickstart-create-mysql-server-database-using-azure-cli.md).
+
+## <a name="enable-redirection"></a>Activer la redirection
+
+Sur votre serveur Azure Database pour MySQL, configurez le paramètre `redirect_enabled` sur `ON` pour autoriser les connexions avec le mode de redirection. Pour mettre à jour ce paramètre de serveur, utilisez le [portail Azure](howto-server-parameters.md) ou [Azure CLI](howto-configure-server-parameters-using-cli.md).
 
 ## <a name="php"></a>PHP
 
@@ -43,8 +47,8 @@ Si vous utilisez une version antérieure de l’extension mysqlnd_azure (version
 |**Valeur mysqlnd_azure.enableRedirect**| **Comportement**|
 |----------------------------------------|-------------|
 |`off` ou `0`|La redirection ne sera pas utilisée. |
-|`on` ou `1`|- Si le protocole SSL n’est pas activé sur le serveur Azure Database pour MySQL, aucune connexion n’est établie. L’erreur suivante est retournée : *« mysqlnd_azure.enableRedirect est activé, mais l’option SSL n’est pas définie dans la chaîne de connexion. La redirection n’est possible qu’avec SSL. »*<br>- Si le protocole SSL est activé sur le serveur MySQL, mais que la redirection n’est pas prise en charge sur le serveur, la première connexion est abandonnée et l’erreur suivante est retournée : *« La connexion a été abandonnée, car la redirection n’est pas activée sur le serveur MySQL ou le package réseau ne respecte pas le protocole de redirection. »*<br>- Si le serveur MySQL prend en charge la redirection, mais que la connexion redirigée a échoué pour une raison quelconque, la première connexion au proxy est également abandonnée. Elle retourne l’erreur de la connexion redirigée.|
-|`preferred` ou `2`<br> (valeur par défaut)|- mysqlnd_azure utilise la redirection, si possible.<br>- Si la connexion n’utilise pas le protocole SSL, si le serveur ne prend pas en charge la redirection, ou si la connexion redirigée échoue pour une raison non fatale alors que la connexion par proxy est encore valide, elle revient à la première connexion proxy.|
+|`on` ou `1`|- Si la connexion n’utilise pas le protocole SSL côté pilote, aucune connexion n’est établie. L’erreur suivante est retournée : *« mysqlnd_azure.enableRedirect est activé, mais l’option SSL n’est pas définie dans la chaîne de connexion. La redirection n’est possible qu’avec SSL. »*<br>- Si le protocole SSL est utilisé côté pilote, mais que la redirection n’est pas prise en charge sur le serveur, la première connexion est abandonnée et l’erreur suivante est retournée : *« La connexion a été abandonnée, car la redirection n’est pas activée sur le serveur MySQL ou le package réseau ne respecte pas le protocole de redirection. »*<br>- Si le serveur MySQL prend en charge la redirection, mais que la connexion redirigée a échoué pour une raison quelconque, la première connexion au proxy est également abandonnée. Elle retourne l’erreur de la connexion redirigée.|
+|`preferred` ou `2`<br> (valeur par défaut)|- mysqlnd_azure utilise la redirection, si possible.<br>- Si la connexion n’utilise pas le protocole SSL côte pilote, si le serveur ne prend pas en charge la redirection, ou si la connexion redirigée échoue pour une raison récupérable alors que la connexion par proxy est encore valide, elle revient à la première connexion par proxy.|
 
 Les sections suivantes du document décrivent l’installation de l’extension `mysqlnd_azure` à l’aide de PECL et la définition de la valeur de ce paramètre.
 
@@ -54,7 +58,7 @@ Les sections suivantes du document décrivent l’installation de l’extension 
 - Versions PHP 7.2.15+ et 7.3.2+
 - PHP PEAR 
 - php-mysql
-- Serveur Azure Database pour MySQL avec SSL activé
+- Serveur Azure Database pour MySQL
 
 1. Installez [mysqlnd_azure](https://github.com/microsoft/mysqlnd_azure) avec [PECL](https://pecl.php.net/package/mysqlnd_azure). Il est recommandé d’utiliser la version 1.1.0+.
 
@@ -92,7 +96,7 @@ Les sections suivantes du document décrivent l’installation de l’extension 
 #### <a name="prerequisites"></a>Prérequis 
 - Versions PHP 7.2.15+ et 7.3.2+
 - php-mysql
-- Serveur Azure Database pour MySQL avec SSL activé
+- Serveur Azure Database pour MySQL
 
 1. Déterminez si vous exécutez une version x64 ou x86 de PHP en exécutant la commande suivante :
 

@@ -12,17 +12,17 @@ ms.workload: mobile
 ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 ms.date: 09/30/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 03/22/2019
-ms.openlocfilehash: 9151870836b1a616a79e54275ed185a425c11f0c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 2c77eba69fd914e8ecc7d08a1b16f61ceefe101b
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72385602"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92320568"
 ---
 # <a name="tutorial-send-notifications-to-specific-devices-running-universal-windows-platform-applications"></a>Tutoriel : Envoyer des notifications vers des appareils spécifiques exécutant des applications de plateforme Windows universelle
 
@@ -197,7 +197,7 @@ Dans cette section, vous allez vous inscrire auprès du hub de notification au d
 1. Pour utiliser la classe `notifications` pour vous abonner en fonction des catégories, ouvrez le fichier *App.xaml.cs* et mettez à jour la méthode `InitNotificationsAsync`.
 
     ```csharp
-    // *** Remove or comment out these lines ***
+    // *** Remove or comment out these lines **_
     //var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
     //var hub = new NotificationHub("your hub name", "your listen connection string");
     //var result = await hub.RegisterNativeAsync(channel.Uri);
@@ -265,9 +265,9 @@ Dans cet article, vous avez appris à diffuser les dernières nouvelles par cat�
 [Use Notification Hubs to broadcast localized breaking news]: notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md
 [Notify users with Notification Hubs]: notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
 [Mobile Service]: /develop/mobile/tutorials/get-started/
-[Notification Hubs Guidance]: https://msdn.microsoft.com/library/jj927170.aspx
-[Notification Hubs How-To for Windows Store]: https://msdn.microsoft.com/library/jj927172.aspx
+[Notification Hubs Guidance]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[Notification Hubs How-To for Windows Store]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
 [Submit an app page]: https://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: https://go.microsoft.com/fwlink/p/?LinkId=262039
 [Live SDK for Windows]: https://go.microsoft.com/fwlink/p/?LinkId=262253
-[wns object]: https://go.microsoft.com/fwlink/p/?LinkId=260591
+[wns object]: /previous-versions/azure/reference/jj860484(v=azure.100)

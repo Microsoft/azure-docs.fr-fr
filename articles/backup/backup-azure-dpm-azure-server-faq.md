@@ -4,12 +4,12 @@ description: Cet article fournit des réponses à des questions courantes sur la
 ms.reviewer: srinathv
 ms.topic: conceptual
 ms.date: 07/05/2019
-ms.openlocfilehash: 35957a1e8a3d6c3d9be06d9d44dbcd47efa0e6ee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cd974181c78586f915dad6cc6ed39d9255a1456b
+ms.sourcegitcommit: 2989396c328c70832dcadc8f435270522c113229
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74173154"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92172577"
 ---
 # <a name="azure-backup-server-and-dpm---faq"></a>Serveur de sauvegarde Azure et DPM - Forum aux questions
 
@@ -37,6 +37,10 @@ Oui. Mais vous devez configurer tout d’abord DPM et puis installer l’agent S
 
 Pour les serveurs DPM avec des sources de données protégées dans le cloud (en utilisant un correctif cumulatif antérieur au correctif cumulatif 7), vous devez attendre au moins un jour après l'installation d’UR7 et du dernier agent Azure Backup avant de démarrer**Ajouter un serveur DPM externe**. La période d’une journée est nécessaire pour charger les métadonnées des groupes de protection DPM dans Azure. Les métadonnées du groupe de protection sont chargées la première fois pendant une tâche nocturne.
 
+### <a name="are-there-recommendations-for-configuring-exclusions-for-antivirus-software"></a>Existe-t-il des recommandations pour la configuration des exclusions pour les logiciels antivirus ?
+
+Oui, il est recommandé de configurer les exclusions pour les antivirus. Pour les exclusions de DPM, voir [Exécution d'un logiciel antivirus sur le serveur DPM](/system-center/dpm/run-antivirus-server). Pour les exclusions de MABS, consultez [Configurer l’antivirus pour un serveur MABS](backup-azure-mabs-troubleshoot.md#configure-antivirus-for-mabs-server).
+
 ## <a name="vmware-and-hyper-v-backup"></a>Sauvegarde VMware et Hyper-V
 
 ### <a name="can-i-back-up-vmware-vcenter-servers-to-azure"></a>Puis-je sauvegarder des serveurs VMware vCenter dans Azure ?
@@ -61,7 +65,7 @@ Oui, l'élément peut être restauré sur le site SharePoint d'origine.
 
 ### <a name="can-i-recover-a-sharepoint-database-to-the-original-location-if-sharepoint-is-configured-by-using-sql-alwayson"></a>Puis-je restaurer une base de données SharePoint à l'emplacement d'origine si SharePoint est configuré à l'aide de SQL AlwaysOn ?
 
-Comme les bases de données SharePoint sont configurées dans SQL AlwaysOn, elles ne peuvent être modifiées que si le groupe de disponibilité est supprimé. Par conséquent, DPM ne peut pas restaurer la base de données sur l’emplacement d’origine. Vous pouvez récupérer une base de données SQL Server sur une autre instance SQL Server.
+Comme les bases de données SharePoint sont configurées dans SQL AlwaysOn, elles ne peuvent être modifiées que si le groupe de disponibilité est supprimé. Par conséquent, DPM ne peut pas restaurer la base de données à l'emplacement d'origine. Vous pouvez récupérer une base de données SQL Server sur une autre instance SQL Server.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

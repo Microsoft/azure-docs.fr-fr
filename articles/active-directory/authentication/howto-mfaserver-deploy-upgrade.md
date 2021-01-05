@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 11/12/2018
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9f242b4a7e984ceeb183547cb3a949927f3c91da
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: 1755404a06d8586968801aa22f2af532da278802
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80653099"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96742321"
 ---
 # <a name="upgrade-to-the-latest-azure-multi-factor-authentication-server"></a>Mise à niveau du serveur Azure Multi-Factor Authentication vers la dernière version
 
@@ -25,7 +25,11 @@ Cet article vous guide dans le processus de mise à niveau du serveur Azure Mult
 Si vous passez de la v6.x ou d’une version antérieure à la version 7.x ou une version plus récente, tous les composants passent de .NET 2.0 à .NET 4.5. Tous les composants requièrent également Redistribuable Microsoft Visual C++ 2015 Update 1 ou une version ultérieure. Le programme d’installation du serveur MFA installe à la fois la version x86 et la version x64 de ces composants s’ils ne sont pas encore installés. Si le portail utilisateur et le service web de l’application mobile s’exécutent sur des serveurs distincts, vous devez installer ces packages avant de mettre à niveau ces composants. Vous pouvez rechercher la dernière mise à jour de Redistribuable Microsoft Visual C++ 2015 sur le [Centre de téléchargement Microsoft](https://www.microsoft.com/download/). 
 
 > [!IMPORTANT]
-> À compter du 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui veulent demander à leurs utilisateurs de procéder à une authentification multifacteur doivent utiliser la fonction Azure Multi-Factor Authentication basée sur le cloud. Les clients existants qui ont activé MFA Server avant le 1er juillet peuvent télécharger la dernière version et les futures mises à jour, et générer des informations d’identification d’activation comme d’habitude.
+> Depuis le 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui souhaitent imposer une authentification multifacteur lors des événements de connexion doivent utiliser la fonctionnalité d’authentification multifacteur Azure AD basée sur le cloud.
+>
+> Pour commencer à utiliser l’authentification multifacteur basée sur le cloud, consultez [Tutoriel : Événements de connexion utilisateur sécurisés avec l’authentification multifacteur Azure AD](tutorial-enable-azure-mfa.md).
+>
+> Les clients existants qui ont activé le serveur MFA avant le 1er juillet 2019 peuvent télécharger la dernière version, les futures mises à jour et générer des informations d’identification d’activation comme d’habitude.
 
 Aperçu des étapes de mise à niveau :
 

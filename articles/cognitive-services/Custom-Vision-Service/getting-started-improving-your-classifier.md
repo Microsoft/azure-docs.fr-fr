@@ -1,7 +1,7 @@
 ---
 title: 'Améliorer votre classifieur : Service Vision personnalisée'
 titleSuffix: Azure Cognitive Services
-description: Dans cet article, vous allez découvrir comment la quantité, la qualité et la variété de données peuvent améliorer la qualité de votre classifieur dans le service Custom Vision.
+description: Dans cet article, vous allez découvrir comment la quantité, la qualité et la variété des données peuvent améliorer la qualité de votre classifieur dans le service Custom Vision.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
@@ -10,12 +10,13 @@ ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 03/21/2019
 ms.author: pafarley
-ms.openlocfilehash: c2858d5f9bca662cbbcd48b2345a7dc2c7ae48b2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: cog-serv-seo-aug-2020
+ms.openlocfilehash: a77d3d5c1225fdd85e27db20cdae23e0c77a5e28
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73718536"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91271356"
 ---
 # <a name="how-to-improve-your-classifier"></a>Comment améliorer votre classifieur
 

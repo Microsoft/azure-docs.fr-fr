@@ -1,54 +1,52 @@
 ---
 title: Optimiser les hyperparamètres pour votre modèle
 titleSuffix: Azure Machine Learning
-description: Ajustez avec efficacité les hyperparamètres de votre modèle Deep Learning/Machine Learning avec Azure Machine Learning. Vous allez apprendre à définir l’espace de recherche de paramètres, à spécifier un indicateur de performance à optimiser et à arrêter de façon anticipée les exécutions peu performantes.
+description: Ajustez avec efficacité les hyperparamètres de vos modèles Deep Learning et Machine Learning avec Azure Machine Learning.
 ms.author: swatig
 author: swatig007
 ms.reviewer: sgilley
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.date: 03/30/2020
-ms.custom: seodec18
-ms.openlocfilehash: a58ea58ebf6fdc7d8521d204ac42fcbadeca39a4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python, contperf-fy21q1
+ms.openlocfilehash: a1a0b89dee5a6d57e6f317c5f6c8b61ffeda3c33
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189298"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97029071"
 ---
 # <a name="tune-hyperparameters-for-your-model-with-azure-machine-learning"></a>Optimiser les hyperparamètres de votre modèle avec Azure Machine Learning
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Ajustez avec efficacité les hyperparamètres de votre modèle à l’aide d’Azure Machine Learning.  L’optimisation des hyperparamètres comprend les étapes suivantes :
 
-* Définir l’espace de recherche de paramètres
-* Spécifier une métrique principale à optimiser  
-* Spécifier des critères d’arrêt anticipé pour les exécutions peu performantes
-* Allouer des ressources pour l’optimisation des hyperparamètres
-* Lancer une expérience avec la configuration ci-dessus
-* Visualiser les exécutions d’entraînement
-* Sélectionner la configuration la plus performante pour votre modèle
+Automatisez une optimisation efficace des hyperparamètres à l’aide du [package HyperDrive](/python/api/azureml-train-core/azureml.train.hyperdrive?preserve-view=true&view=azure-ml-py) Azure Machine Learning. Découvrez comment effectuer les étapes nécessaires pour régler les hyperparamètres à l’aide du SDK [Azure Machine Learning](/python/api/overview/azure/ml/?preserve-view=true&view=azure-ml-py) :
+
+1. Définir l’espace de recherche de paramètres
+1. Spécifier une métrique principale à optimiser  
+1. Spécifier la stratégie d’arrêt anticipé pour les exécutions à faibles performances
+1. Allouer des ressources
+1. Lancer une expérience avec la configuration définie
+1. Visualiser les exécutions d’entraînement
+1. Sélectionner la meilleure configuration pour votre modèle
 
 ## <a name="what-are-hyperparameters"></a>Présentation des hyperparamètres
 
-Les hyperparamètres sont des paramètres ajustables que vous choisissez pour entraîner un modèle qui régit le processus d’entraînement lui-même. Par exemple, pour entraîner un réseau neuronal profond, vous décidez du nombre de couches masquées dans le réseau et du nombre de nœuds dans chaque couche préalablement à l’entraînement du modèle. Ces valeurs restent généralement constantes au cours du processus d’entraînement.
+Les **hyperparamètres** sont des paramètres réglables qui vous permettent de contrôler le processus d’entraînement du modèle. Par exemple, avec des réseaux neuronaux, vous déterminez le nombre de couches masquées et le nombre de nœuds dans chaque couche. Les performances du modèle dépendent fortement des hyperparamètres.
 
-Dans les scénarios d’apprentissage profond / machine learning, les performances d’un modèle dépendent fortement des valeurs sélectionnées pour les hyperparamètres. L’objectif de l’exploration des hyperparamètres est de rechercher parmi les différentes configurations des hyperparamètres celle qui offre les meilleures performances. En règle générale, le processus d’exploration des hyperparamètres est manuel et minutieux, car l’espace de recherche est vaste et l’évaluation de chaque configuration peut être coûteuse en termes de ressources.
+ L’**optimisation des hyperparamètres** est le processus de recherche de la configuration des hyperparamètres qui produit les meilleures performances. Le processus est généralement manuel et gourmand en ressources informatiques.
 
-Azure Machine Learning vous permet d’automatiser l’exploration des hyperparamètres de manière efficace et ainsi de bénéficier de gains de temps et de ressources significatifs. Vous pouvez spécifier la plage de valeurs des hyperparamètres, ainsi qu’un nombre maximal d’exécutions d’entraînement. Le système lance alors automatiquement plusieurs exécutions simultanées avec différentes configurations de paramètres, puis recherche la configuration qui offre les meilleures performances, mesurées en fonction de la métrique que vous choisissez. Les exécutions d’entraînement ayant obtenu des performances médiocres sont arrêtées de façon anticipée, ce qui réduit considérablement le gaspillage des ressources de calcul. Ces ressources sont alors utilisées pour explorer d’autres configurations des hyperparamètres.
+Azure Machine Learning vous permet d’automatiser l’optimisation des hyperparamètres et d’exécuter des expérimentations parallèles pour optimiser efficacement les hyperparamètres.
 
 
-## <a name="define-search-space"></a>Définir l’espace de recherche
+## <a name="define-the-search-space"></a>Définir l’espace de recherche
 
-Optimisez automatiquement les hyperparamètres en explorant la plage de valeurs définie pour chaque hyperparamètre.
+Optimisez les hyperparamètres en explorant la plage de valeurs définie pour chaque hyperparamètre.
 
-### <a name="types-of-hyperparameters"></a>Types d’hyperparamètres
+Les hyperparamètres peuvent être discrets ou continus et ont une distribution des valeurs décrite par une [expression de paramètre](/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?preserve-view=true&view=azure-ml-py).
 
-Chaque hyperparamètre peut être discret ou continu et a une distribution des valeurs décrites par une [expression de paramètre](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py).
-
-#### <a name="discrete-hyperparameters"></a>Hyperparamètres discrets 
+### <a name="discrete-hyperparameters"></a>Hyperparamètres discrets 
 
 Les hyperparamètres discrets sont spécifiés en tant que `choice` parmi des valeurs discrètes. Voici à quoi `choice` peut correspondre :
 
@@ -66,16 +64,16 @@ Les hyperparamètres discrets sont spécifiés en tant que `choice` parmi des va
 
 Dans ce cas, `batch_size` prend l’une des valeurs [16, 32, 64, 128] et `number_of_hidden_layers` prend l’une des valeurs [1, 2, 3, 4].
 
-Des hyperparamètres discrets avancés peuvent également être spécifiés en utilisant une distribution. Les distributions prises en charge sont les suivantes :
+Les hyperparamètres discrets avancés suivants peuvent également être spécifiés en utilisant une distribution.
 
 * `quniform(low, high, q)` : retourne une valeur comme round(uniform(low, high) / q) * q
 * `qloguniform(low, high, q)` : retourne une valeur comme round(exp(uniform(low, high)) / q) * q
 * `qnormal(mu, sigma, q)` : retourne une valeur comme round(normal(mu, sigma) / q) * q
 * `qlognormal(mu, sigma, q)` : retourne une valeur comme round(exp(normal(mu, sigma)) / q) * q
 
-#### <a name="continuous-hyperparameters"></a>Hyperparamètres continus 
+### <a name="continuous-hyperparameters"></a>Hyperparamètres continus 
 
-Les hyperparamètres continus sont spécifiés comme une distribution sur une plage continue de valeurs. Les distributions prises en charge sont les suivantes :
+Les hyperparamètres continus sont spécifiés comme une distribution sur une plage continue de valeurs :
 
 * `uniform(low, high)` : retourne une valeur uniformément distribuée entre low (valeur basse) et high (valeur haute)
 * `loguniform(low, high)` : retourne une valeur calculée en fonction de exp(uniform(low, high)), de sorte que le logarithme de la valeur de retour est uniformément distribué
@@ -95,20 +93,21 @@ Ce code définit un espace de recherche avec deux paramètres : `learning_rate`
 
 ### <a name="sampling-the-hyperparameter-space"></a>Échantillonnage de l’espace des hyperparamètres
 
-Vous pouvez aussi spécifier la méthode d’échantillonnage des paramètres à utiliser dans la définition de l’espace des hyperparamètres. Azure Machine Learning prend en charge l’échantillonnage aléatoire, l’échantillonnage par grille et l’échantillonnage bayésien.
+Spécifiez la méthode d’échantillonnage des paramètres à utiliser dans l’espace des hyperparamètres. Azure Machine Learning prend en charge les méthodes suivantes :
 
-#### <a name="picking-a-sampling-method"></a>Sélection d’une méthode d’échantillonnage
-
-* L’échantillonnage de grille peut être utilisé si votre espace d’hyperparamètres peut être défini en tant que choix parmi des valeurs discrètes et si vous disposez d’un budget suffisant pour effectuer une recherche complète sur toutes les valeurs dans l’espace de recherche défini. En outre, il est possible d’utiliser l’arrêt automatisé anticipé des exécutions à performances médiocres, ce qui réduit le gaspillage des ressources.
-* L’échantillonnage aléatoire permet à l’espace d’hyperparamètres d’inclure à la fois des hyperparamètres discrets et des hyperparamètres continus. En pratique, il produit de bons résultats la plupart du temps et permet également l’utilisation d’un arrêt automatisé anticipé des exécutions peu performantes. Certains utilisateurs effectuent une recherche initiale à l’aide de l’échantillonnage aléatoire, puis affinent de manière itérative l’espace de recherche pour améliorer les résultats.
-* L’échantillonnage bayésien utilise la connaissance des exemples précédents lors du choix de valeurs hyperparamètres, en tentant d’améliorer efficacement la métrique principale signalée. L’échantillonnage bayésien est recommandé si vous disposez d’un budget suffisant pour explorer l’espace d’hyperparamètres. Pour de meilleurs résultats avec l’échantillonnage bayésien, nous vous recommandons d’utiliser un nombre maximal d’exécutions supérieur ou égal à 20 fois le nombre d’hyperparamètres configurés. Notez que l’échantillonnage bayésien ne prend actuellement pas en charge les stratégies d’arrêt anticipé.
+* Échantillonnage aléatoire
+* Échantillonnage par grille
+* Échantillonnage bayésien
 
 #### <a name="random-sampling"></a>Échantillonnage aléatoire
 
-Dans l’échantillonnage aléatoire, les valeurs des hyperparamètres sont sélectionnées de façon aléatoire à partir de l’espace de recherche défini. L’[échantillonnage aléatoire](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.randomparametersampling?view=azure-ml-py) permet à l’espace de recherche d’inclure à la fois des hyperparamètres discrets et des hyperparamètres continus.
+L’[échantillonnage aléatoire](/python/api/azureml-train-core/azureml.train.hyperdrive.randomparametersampling?preserve-view=true&view=azure-ml-py) prend en charge les hyperparamètres discrets et continus. Il prend en charge l’arrêt précoce des exécutions à faibles performances. Certains utilisateurs effectuent une recherche initiale avec l’échantillonnage aléatoire, puis affinent l’espace de recherche pour améliorer les résultats.
+
+Dans l’échantillonnage aléatoire, les valeurs des hyperparamètres sont sélectionnées de façon aléatoire à partir de l’espace de recherche défini. 
 
 ```Python
 from azureml.train.hyperdrive import RandomParameterSampling
+from azureml.train.hyperdrive import normal, uniform, choice
 param_sampling = RandomParameterSampling( {
         "learning_rate": normal(10, 3),
         "keep_probability": uniform(0.05, 0.1),
@@ -119,10 +118,13 @@ param_sampling = RandomParameterSampling( {
 
 #### <a name="grid-sampling"></a>Échantillonnage par grille
 
-L’[échantillonnage par grille](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.gridparametersampling?view=azure-ml-py) effectue une simple recherche de grille sur toutes les valeurs possibles dans l’espace de recherche défini. Il peut être utilisé seulement avec des hyperparamètres spécifiés en utilisant `choice`. Par exemple, l’espace suivant compte un total de six échantillons :
+L’[échantillonnage de grille](/python/api/azureml-train-core/azureml.train.hyperdrive.gridparametersampling?preserve-view=true&view=azure-ml-py) prend en charge les hyperparamètres discrets. Utilisez l’échantillonnage de grille si vous avez un budget pour effectuer une recherche exhaustive sur l’espace de recherche. Prend en charge l’arrêt anticipé des exécutions à faibles performances.
+
+Effectue une recherche de grille simple sur toutes les valeurs possibles. L’échantillonnage de grille ne peut être utilisé qu’avec des hyperparamètres `choice`. Par exemple, l’espace suivant compte six échantillons :
 
 ```Python
 from azureml.train.hyperdrive import GridParameterSampling
+from azureml.train.hyperdrive import choice
 param_sampling = GridParameterSampling( {
         "num_hidden_layers": choice(1, 2, 3),
         "batch_size": choice(16, 32)
@@ -132,14 +134,17 @@ param_sampling = GridParameterSampling( {
 
 #### <a name="bayesian-sampling"></a>Échantillonnage bayésien
 
-L’[échantillonnage bayésien](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.bayesianparametersampling?view=azure-ml-py) est basé sur l’algorithme d’optimisation bayésienne et fait des choix intelligents quant aux prochaines valeurs d’hyperparamètres à échantillonner. Il sélectionne l’échantillon en fonction des performances des échantillons précédents, si bien que le nouvel échantillon améliore la métrique principale rapportée.
+L’[échantillonnage bayésien](/python/api/azureml-train-core/azureml.train.hyperdrive.bayesianparametersampling?preserve-view=true&view=azure-ml-py) est basé sur l’algorithme d’optimisation bayésienne. Il choisit des exemples en fonction de la façon dont les exemples précédents ont été exécutés, afin que les nouveaux exemples améliorent la métrique principale.
 
-Quand vous utilisez l’échantillonnage bayésien, le nombre d’exécutions simultanées a un impact sur l’efficacité du processus d’optimisation. En règle générale, un nombre inférieur d’exécutions simultanées peut déboucher sur une meilleure convergence d’échantillonnage, car le plus faible degré de parallélisme accroît le nombre d’exécutions qui bénéficient des exécutions ayant abouti précédemment.
+L’échantillonnage bayésien est recommandé si vous disposez d’un budget suffisant pour explorer l’espace hyperparamétrique. Pour de meilleurs résultats, nous recommandons un nombre maximal d’exécutions supérieur ou égal à 20 fois le nombre d’hyperparamètres configurés. 
+
+Le nombre d’exécutions simultanées a un impact sur l’efficacité du processus d’optimisation. Un nombre inférieur d’exécutions simultanées peut déboucher sur une meilleure convergence d’échantillonnage, car le plus faible degré de parallélisme accroît le nombre d’exécutions qui bénéficient des exécutions ayant abouti précédemment.
 
 L’échantillonnage bayésien prend en charge seulement les distributions `choice`, `uniform` et `quniform` sur l’espace de recherche.
 
 ```Python
 from azureml.train.hyperdrive import BayesianParameterSampling
+from azureml.train.hyperdrive import uniform, choice
 param_sampling = BayesianParameterSampling( {
         "learning_rate": uniform(0.05, 0.1),
         "batch_size": choice(16, 32, 64, 128)
@@ -147,16 +152,15 @@ param_sampling = BayesianParameterSampling( {
 )
 ```
 
-> [!NOTE]
-> L’échantillonnage bayésien ne prend pas en charge les stratégies d’arrêt anticipé (consultez [Spécifier une stratégie d’arrêt anticipé](#specify-early-termination-policy)). Quand vous utilisez l’échantillonnage de paramètres bayésien, définissez `early_termination_policy = None` ou laissez le paramètre `early_termination_policy` désactivé.
 
-<a name='specify-primary-metric-to-optimize'/>
 
-## <a name="specify-primary-metric"></a>Spécifier la métrique principale
+## <a name="specify-primary-metric"></a><a name="specify-primary-metric-to-optimize"></a> Spécifier la métrique principale
 
-Spécifiez la [métrique principale](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.primarymetricgoal?view=azure-ml-py) que l’expérience d’optimisation des hyperparamètres doit optimiser. Chaque exécution d’entraînement est évaluée par rapport à la métrique principale. Les exécutions peu performantes (pour lesquelles la métrique principale ne répond pas aux critères définis par la stratégie d’arrêt anticipé) sont arrêtées. En plus de spécifier le nom de la métrique principale, vous devez aussi spécifier l’objectif de l’optimisation, c’est-à-dire s’il faut maximiser ou minimiser la métrique principale.
+Spécifiez la [métrique principale](/python/api/azureml-train-core/azureml.train.hyperdrive.primarymetricgoal?preserve-view=true&view=azure-ml-py) que l’optimisation des hyperparamètres doit optimiser. Chaque exécution d’entraînement est évaluée par rapport à la métrique principale. La stratégie d’arrêt anticipé utilise la métrique principale pour identifier les exécutions aux faibles performances.
 
-* `primary_metric_name`: nom de la métrique principale à optimiser. Le nom de la métrique principale doit correspondre exactement au nom de la métrique journalisée par le script d’entraînement. Consultez [Journaliser des métriques pour l’optimisation des hyperparamètres](#log-metrics-for-hyperparameter-tuning).
+Spécifiez les attributs suivants pour votre métrique principale :
+
+* `primary_metric_name` : le nom de la métrique principale doit correspondre exactement au nom de la métrique journalisée par le script d’entraînement
 * `primary_metric_goal`: il peut s’agir de `PrimaryMetricGoal.MAXIMIZE` ou de `PrimaryMetricGoal.MINIMIZE`. Il détermine si la métrique principale est maximisée ou minimisée lors de l’évaluation des exécutions. 
 
 ```Python
@@ -164,15 +168,13 @@ primary_metric_name="accuracy",
 primary_metric_goal=PrimaryMetricGoal.MAXIMIZE
 ```
 
-Optimisez les exécutions de façon à maximiser la précision (« accuracy »).  Veillez à journaliser cette valeur dans votre script d’entraînement.
+Cet exemple maximise la « précision ».
 
-<a name='log-metrics-for-hyperparameter-tuning'/>
+### <a name="log-metrics-for-hyperparameter-tuning"></a><a name="log-metrics-for-hyperparameter-tuning"></a>Journaliser des métriques pour l’optimisation des hyperparamètres
 
-### <a name="log-metrics-for-hyperparameter-tuning"></a>Journaliser des métriques pour l’optimisation des hyperparamètres
+Le script d’entraînement pour votre modèle **doit** journaliser la métrique principale lors de l’entraînement du modèle, afin que HyperDrive puisse y accéder pour l’optimisation des hyperparamètres.
 
-Le script d’entraînement de votre modèle doit journaliser les métriques importantes pendant l’entraînement du modèle. Au moment de configurer l’optimisation des hyperparamètres, vous spécifiez la métrique principale à utiliser pour l’évaluation des performances d’exécution. (Consultez [Spécifier une métrique principale à optimiser](#specify-primary-metric-to-optimize).)  Dans votre script d’entraînement, vous devez journaliser cette métrique de façon à la rendre accessible au processus d’optimisation des hyperparamètres.
-
-Journalisez cette métrique dans votre script d’entraînement avec l’extrait de code suivant :
+Journalisez la métrique principale dans votre script d’entraînement avec l’extrait de code suivant :
 
 ```Python
 from azureml.core.run import Run
@@ -180,30 +182,40 @@ run_logger = Run.get_context()
 run_logger.log("accuracy", float(val_accuracy))
 ```
 
-Le script d’entraînement calcule la valeur de `val_accuracy` et la journalise comme valeur de précision (« accuracy »), qui est utilisée comme métrique principale. Chaque fois que la métrique est journalisée, elle est reçue par le service d’optimisation des hyperparamètres. Il incombe au développeur du modèle de déterminer la fréquence de collecte de cette métrique.
+Le script d’entraînement calcule la valeur de `val_accuracy` et la journalise comme valeur de précision de la métrique principale. Chaque fois que la métrique est journalisée, elle est reçue par le service d’optimisation des hyperparamètres. C’est à vous de déterminer la fréquence des rapports.
 
-<a name='specify-early-termination-policy'/>
+Pour plus d’informations sur les valeurs de journalisation dans les exécutions d’entraînement du modèle, consultez [Activer la journalisation dans les exécutions d’entraînement Azure ML](how-to-track-experiments.md).
 
 ## <a name="specify-early-termination-policy"></a><a name="early-termination"></a> Spécifier une stratégie d’arrêt anticipé
 
-Une stratégie d’arrêt anticipé permet d’arrêter automatiquement les exécutions peu performantes. Cet arrêt permet de réduire le gaspillage de ressources, qui servent alors à explorer les autres configurations de paramètres.
+Une stratégie d’arrêt anticipé permet d’arrêter automatiquement les exécutions peu performantes. Un arrêt anticipé améliore l’efficacité du calcul.
 
-Si vous utilisez une stratégie d’arrêt anticipé, vous pouvez configurer les paramètres suivants pour contrôler à quel moment elle s’applique :
+Vous pouvez configurer les paramètres suivants pour contrôler à quel moment une stratégie s’applique :
 
-* `evaluation_interval` : fréquence d’application de la stratégie. Chaque journalisation de la métrique principale par le script d’entraînement compte pour un intervalle. Ainsi, une valeur de 1 pour `evaluation_interval` applique la stratégie chaque fois que le script d’entraînement signale la métrique principale. Une valeur de 2 pour `evaluation_interval` applique la stratégie à chaque autre signalement de la métrique principale par le script d’entraînement. La valeur par défaut de `evaluation_interval` est 1 si ce paramètre n’est pas spécifié.
-* `delay_evaluation` : retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié. Il s’agit d’un paramètre facultatif qui permet à toutes les configurations de s’exécuter pour un nombre minimal initial d’intervalles, évitant ainsi un arrêt prématuré des exécutions d’entraînement. S’il est spécifié, la stratégie s’applique à chaque multiple de evaluation_interval qui est supérieur ou égal à delay_evaluation.
+* `evaluation_interval` : fréquence d’application de la stratégie. Chaque journalisation de la métrique principale par le script d’entraînement compte pour un intervalle. Une valeur de 1 pour `evaluation_interval` applique la stratégie chaque fois que le script d’entraînement signale la métrique principale. Une valeur de 2 pour `evaluation_interval` applique la stratégie à chaque fois. La valeur par défaut de `evaluation_interval` est 1 si ce paramètre n’est pas spécifié.
+* `delay_evaluation` : retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié. Il s’agit d’un paramètre facultatif qui évite un arrêt prématuré des exécutions d’entraînement en permettant à toutes les configurations de s’exécuter pour un nombre minimal d’intervalles. S’il est spécifié, la stratégie s’applique à chaque multiple de evaluation_interval qui est supérieur ou égal à delay_evaluation.
 
-Azure Machine Learning prend en charge les stratégies d’arrêt anticipé suivantes.
+Azure Machine Learning prend en charge les stratégies d’arrêt anticipé suivantes :
+* [Stratégie Bandit](#bandit-policy)
+* [Stratégie d’arrêt médiane](#median-stopping-policy)
+* [Stratégie de sélection de troncation](#truncation-selection-policy)
+* [Stratégie sans arrêt](#no-termination-policy-default)
+
 
 ### <a name="bandit-policy"></a>Stratégie Bandit
 
-La stratégie [Bandit](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.banditpolicy?view=azure-ml-py#definition) est une stratégie d’arrêt basée sur le facteur de marge/marge totale et l’intervalle d’évaluation. Cette stratégie arrête de façon anticipée les exécutions quand la métrique principale se trouve en dehors du facteur de marge/marge totale spécifié par rapport à l’exécution d’entraînement la plus performante. Elle prend les paramètres de configuration suivants :
+La [stratégie Bandit](/python/api/azureml-train-core/azureml.train.hyperdrive.banditpolicy?preserve-view=true&view=azure-ml-py#&preserve-view=truedefinition) est une stratégie d’arrêt basée sur le facteur de marge/marge totale et l’intervalle d’évaluation. Cette stratégie arrête de façon anticipée les exécutions quand la métrique principale se trouve en dehors du facteur de marge/marge totale spécifié par rapport à l’exécution la plus performante.
+
+> [!NOTE]
+> L’échantillonnage bayésien ne prend pas en charge l’arrêt anticipé. Lorsque vous utilisez l’échantillonnage bayésien, définissez `early_termination_policy = None`.
+
+Spécifiez les paramètres de configuration suivants :
 
 * `slack_factor` ou `slack_amount` : marge autorisée par rapport à l’exécution d’entraînement la plus performante. `slack_factor` spécifie la marge autorisée sous forme de ratio. `slack_amount` spécifie la marge autorisée en valeur absolue, au lieu d’un ratio.
 
-    Par exemple, considérez une stratégie Bandit appliquée avec un intervalle de 10. Supposez que l’exécution la plus performante à l’intervalle 10 a signalé une métrique principale de 0,8 avec l’objectif de maximiser la métrique principale. Si la stratégie a été spécifiée avec un `slack_factor` de 0,2, les exécutions d’entraînement, dont la meilleure mesure à l’intervalle 10 est inférieure à 0,66 (0,8/(1+`slack_factor`)) seront arrêtées. Si au lieu de cela, la stratégie a été spécifiée avec un `slack_amount` de 0,2, les exécutions d’entraînement, dont la meilleure mesure à l’intervalle 10 est inférieure à 0,6 (0,8 - `slack_amount`) seront arrêtées.
-* `evaluation_interval` : fréquence d’application de la stratégie (paramètre facultatif).
-* `delay_evaluation` : retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié (paramètre facultatif).
+    Par exemple, considérez une stratégie Bandit appliquée avec un intervalle de 10. Supposez que l’exécution la plus performante à l’intervalle 10 a signalé une métrique principale de 0,8 avec l’objectif de maximiser la métrique principale. Si la stratégie spécifie avec un `slack_factor` de 0,2, les exécutions d’entraînement, dont la meilleure mesure à l’intervalle 10 est inférieure à 0,66 (0,8/(1+`slack_factor`)) seront arrêtées.
+* `evaluation_interval` : (facultatif) fréquence d’application de la stratégie
+* `delay_evaluation` : (facultatif) retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié
 
 
 ```Python
@@ -215,7 +227,9 @@ Dans cet exemple, la stratégie d’arrêt anticipé est appliquée à chaque in
 
 ### <a name="median-stopping-policy"></a>Stratégie d’arrêt médiane
 
-La [stratégie d’arrêt médiane](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.medianstoppingpolicy?view=azure-ml-py) est une stratégie d’arrêt anticipé basée sur les moyennes mobiles des métriques principales rapportées par les exécutions. Cette stratégie calcule les moyennes mobiles pour toutes les exécutions d’entraînement et arrête les exécutions dont les performances sont moins bonnes que la médiane des moyennes mobiles. Cette stratégie prend les paramètres de configuration suivants :
+La [stratégie d’arrêt médiane](/python/api/azureml-train-core/azureml.train.hyperdrive.medianstoppingpolicy?preserve-view=true&view=azure-ml-py) est une stratégie d’arrêt anticipé basée sur les moyennes mobiles des métriques principales rapportées par les exécutions. Cette stratégie calcule les moyennes mobiles pour toutes les exécutions d’entraînement et arrête les exécutions dont les valeurs de la métrique principale sont moins bonnes que la médiane des moyennes.
+
+Cette stratégie prend les paramètres de configuration suivants :
 * `evaluation_interval` : fréquence d’application de la stratégie (paramètre facultatif).
 * `delay_evaluation` : retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié (paramètre facultatif).
 
@@ -229,11 +243,13 @@ Dans cet exemple, la stratégie d’arrêt anticipé est appliquée à chaque in
 
 ### <a name="truncation-selection-policy"></a>Stratégie de sélection de troncation
 
-La [stratégie de sélection de troncation](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.truncationselectionpolicy?view=azure-ml-py) annule un pourcentage donné des exécutions les moins performantes à chaque intervalle d’évaluation. Les exécutions sont comparées en fonction de leur performance sur la métrique principale et les X % les moins bonnes sont arrêtées. Elle prend les paramètres de configuration suivants :
+La [stratégie de sélection de troncation](/python/api/azureml-train-core/azureml.train.hyperdrive.truncationselectionpolicy?preserve-view=true&view=azure-ml-py) annule un pourcentage des exécutions les moins performantes à chaque intervalle d’évaluation. Les exécutions sont comparées à l’aide de la métrique principale. 
 
-* `truncation_percentage` : le pourcentage des exécutions avec les performances les moins bonnes à arrêter à chaque intervalle d’évaluation. Spécifiez un nombre entier compris entre 1 et 99.
-* `evaluation_interval` : fréquence d’application de la stratégie (paramètre facultatif).
-* `delay_evaluation` : retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié (paramètre facultatif).
+Cette stratégie prend les paramètres de configuration suivants :
+
+* `truncation_percentage` : le pourcentage des exécutions avec les performances les moins bonnes à arrêter à chaque intervalle d’évaluation. Nombre entier compris entre 1 et 99.
+* `evaluation_interval` : (facultatif) fréquence d’application de la stratégie
+* `delay_evaluation` : (facultatif) retarde la première évaluation de la stratégie pour un nombre d’intervalles spécifié
 
 
 ```Python
@@ -243,41 +259,35 @@ early_termination_policy = TruncationSelectionPolicy(evaluation_interval=1, trun
 
 Dans cet exemple, la stratégie d’arrêt anticipé est appliquée à chaque intervalle, en commençant à l’intervalle d’évaluation 5. Une exécution est arrêtée à l’intervalle 5 si sa performance à cet intervalle se trouve dans les 20 % des performances les moins bonnes de toutes les exécutions à l’intervalle 5.
 
-### <a name="no-termination-policy"></a>Stratégie sans arrêt
+### <a name="no-termination-policy-default"></a>Aucune stratégie de fin (par défaut)
 
-Si vous voulez que toutes les exécutions d’entraînement s’exécutent jusqu’à leur terme, définissez la stratégie sur None (Aucune). Son effet est qu’aucune stratégie d’arrêt anticipé n’est appliquée.
+Si aucune stratégie n’est spécifiée, le service d’optimisation des hyperparamètres permet à toutes les exécutions d’entraînement d’arriver à leur terme.
 
 ```Python
 policy=None
 ```
 
-### <a name="default-policy"></a>Stratégie par défaut
-
-Si aucune stratégie n’est spécifiée, le service d’optimisation des hyperparamètres permet à toutes les exécutions d’entraînement d’arriver à leur terme.
-
 ### <a name="picking-an-early-termination-policy"></a>Sélection d’une stratégie d’arrêt anticipé
 
 * Si vous cherchez une stratégie classique qui permet de réaliser des économies, sans arrêter les tâches prometteuses, vous pouvez utiliser une stratégie d’arrêt à la médiane avec un `evaluation_interval` de 1 et un `delay_evaluation` de 5. Il s’agit de valeurs prudentes, qui peuvent fournir approximativement 25 à 35 % d’économies sans perte sur la métrique principale (d’après nos évaluations).
-* Si vous recherchez des économies plus poussées que celles possibles avec l’arrêt anticipé, vous pouvez utiliser une stratégie Bandit avec une marge autorisée plus stricte (plus petite) ou une stratégie de sélection de troncation avec un pourcentage de troncation plus élevé.
+* Pour des économies plus importantes, utilisez une stratégie Bandit avec une plus petite marge autorisée ou une stratégie de sélection de troncation avec un pourcentage de troncation plus élevé.
 
 ## <a name="allocate-resources"></a>Allouer des ressources
 
-Maîtrisez votre budget ressources pour votre expérience d’optimisation des hyperparamètres en spécifiant le nombre total maximal d’exécutions d’entraînement.  Spécifiez éventuellement la durée maximale de votre expérience d’optimisation des hyperparamètres.
+Contrôlez le budget de vos ressources en spécifiant le nombre maximal d’exécutions d’entraînement.
 
-* `max_total_runs`: nombre total maximal d’exécutions d’entraînement à créer. Il s’agit d’une limite supérieure : le nombre d’exécutions peut être inférieur, par exemple si l’espace des hyperparamètres est limité et compte moins d’échantillons. Doit être un nombre compris entre 1 et 1000.
-* `max_duration_minutes`: durée maximale en minutes de l’expérience d’optimisation des hyperparamètres. Ce paramètre est facultatif, et s’il est présent, les exécutions qui s’exécutent au-delà de cette durée sont automatiquement annulées.
+* `max_total_runs` : nombre maximal d’exécutions d’entraînement. Doit être un entier compris entre 1 et 1000.
+* `max_duration_minutes` : (facultatif) durée maximale en minutes de l’expérience d’optimisation des hyperparamètres. S’exécute après l’annulation de cette durée.
 
 >[!NOTE] 
 >Si `max_total_runs` et `max_duration_minutes` sont tous deux spécifiés, l’expérience d’optimisation des hyperparamètres s’arrête dès que le premier de ces deux seuils est atteint.
 
 Par ailleurs, spécifiez le nombre maximal d’exécutions d’entraînement qui peuvent s’exécuter simultanément pendant votre recherche d’optimisation des hyperparamètres.
 
-* `max_concurrent_runs`: nombre maximal d’exécutions à exécuter simultanément à un moment donné. Si aucune valeur n’est spécifiée, toutes les `max_total_runs` exécutions sont lancées en parallèle. S’il est spécifié, sa valeur doit être un nombre compris entre 1 et 100.
+* `max_concurrent_runs` : (facultatif) nombre maximal d’exécutions qui peuvent s’exécuter simultanément. En l’absence de spécification, toutes les exécutions s’exécutent en parallèle. En cas de spécification, doit être un entier compris entre 1 et 100.
 
 >[!NOTE] 
->Le nombre d’exécutions simultanées est limité par les ressources disponibles dans la cible de calcul spécifiée. Vous devez donc vérifier que la cible de calcul dispose des ressources nécessaires à l’accès concurrentiel souhaité.
-
-Allouez des ressources pour l’optimisation des hyperparamètres :
+>Le nombre d’exécutions simultanées est limité par les ressources disponibles dans la cible de calcul spécifiée. Vérifiez que la cible de calcul dispose des ressources nécessaires à l’accès concurrentiel souhaité.
 
 ```Python
 max_total_runs=20,
@@ -288,38 +298,51 @@ Ce code configure l’expérience d’optimisation des hyperparamètres pour uti
 
 ## <a name="configure-experiment"></a>Configurer une expérience
 
-[Configurez votre expérience d’optimisation des hyperparamètres](https://docs.microsoft.com/python/api/azureml-train-core/azureml.train.hyperdrive.hyperdriverunconfig?view=azure-ml-py) en utilisant l’espace de recherche des hyperparamètres défini, la stratégie d’arrêt anticipé, la métrique principale et l’allocation de ressources, qui sont décrits dans les sections précédentes. Par ailleurs, fournissez un `estimator` qui sera appelé avec les hyperparamètres échantillonnés. Cet `estimator` décrit le script d’entraînement que vous exécutez, les ressources par travail (un seul GPU ou plusieurs) et la cible de calcul à utiliser. L’accès concurrentiel pour votre expérience d’optimisation des hyperparamètres étant limité par les ressources disponibles, vérifiez que la cible de calcul spécifiée dans `estimator` dispose de ressources suffisantes pour l’accès concurrentiel souhaité. (Pour plus d’informations sur les estimateurs, consultez [Comment entraîner des modèles](how-to-train-ml-models.md).)
+Pour [configurer votre optimisation des hyperparamètres](/python/api/azureml-train-core/azureml.train.hyperdrive.hyperdriverunconfig?preserve-view=true&view=azure-ml-py), fournissez les informations suivantes :
+* Espace de recherche des hyperparamètres défini
+* Votre stratégie d’arrêt anticipé
+* Métrique principale
+* Paramètres d’allocation des ressources
+* ScriptRunConfig `src`
+
+ScriptRunConfig est le script d’entraînement qui s’exécute avec les hyperparamètres échantillonnés. Il définit les ressources par travail (un ou plusieurs nœuds) et la cible de calcul à utiliser.
+
+> [!NOTE]
+>La cible de calcul spécifiée dans `src` doit avoir suffisamment de ressources pour répondre à votre niveau d’accès concurrentiel. Pour plus d’informations sur ScriptRunConfig, consultez [Configurer des exécutions d’entraînement](how-to-set-up-training-targets.md).
 
 Configurez votre expérience d’optimisation des hyperparamètres :
 
 ```Python
 from azureml.train.hyperdrive import HyperDriveConfig
-hyperdrive_run_config = HyperDriveConfig(estimator=estimator,
-                          hyperparameter_sampling=param_sampling, 
-                          policy=early_termination_policy,
-                          primary_metric_name="accuracy", 
-                          primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
-                          max_total_runs=100,
-                          max_concurrent_runs=4)
+hd_config = HyperDriveConfig(run_config=src,
+                             hyperparameter_sampling=param_sampling,
+                             policy=early_termination_policy,
+                             primary_metric_name="accuracy",
+                             primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
+                             max_total_runs=100,
+                             max_concurrent_runs=4)
 ```
 
 ## <a name="submit-experiment"></a>Soumettre l’expérience
 
-Une fois que vous avez défini votre configuration d’optimisation des hyperparamètres, [soumettez une expérience](https://docs.microsoft.com/python/api/azureml-core/azureml.core.experiment%28class%29?view=azure-ml-py#submit-config--tags-none----kwargs-) :
+Une fois que vous avez défini votre configuration d’optimisation des hyperparamètres, [soumettez une expérience](/python/api/azureml-core/azureml.core.experiment%28class%29?preserve-view=true&view=azure-ml-py#&preserve-view=truesubmit-config--tags-none----kwargs-) :
 
 ```Python
 from azureml.core.experiment import Experiment
 experiment = Experiment(workspace, experiment_name)
-hyperdrive_run = experiment.submit(hyperdrive_run_config)
+hyperdrive_run = experiment.submit(hd_config)
 ```
-
-`experiment_name` est le nom que vous voulez attribuer à votre expérience d’optimisation des hyperparamètres, et `workspace` est l’espace de travail dans lequel vous voulez créer l’expérience (pour plus d’informations sur les expériences, consultez [Fonctionnement d’Azure Machine Learning](concept-azure-machine-learning-architecture.md)).
 
 ## <a name="warm-start-your-hyperparameter-tuning-experiment-optional"></a>Démarrage à chaud de votre expérience de paramétrage d’hyperparamètres (facultatif)
 
-Souvent, la recherche des meilleures valeurs d’hyperparamètres pour votre modèle peut être un processus itératif, nécessitant plusieurs exécutions de paramétrage qui apprennent à partir des exécutions de paramétrage d’hyperparamètres précédentes. La réutilisation des connaissances de ces exécutions précédentes accélère le processus de paramétrage d’hyperparamètres, ce qui réduit le coût de réglage du modèle et peut potentiellement améliorer la métrique principale du modèle résultant. Lors du démarrage à chaud d’une expérience de paramétrage d’hyperparamètres avec l’échantillonnage bayésien, les essais de l’exécution précédente sont utilisés comme connaissances préalables pour choisir intelligemment de nouveaux échantillons, afin d’améliorer la métrique principale. En outre, lors de l’utilisation de l’échantillonnage aléatoire ou de grille, toutes les décisions d’arrêt anticipé tirent parti des mesures des précédentes exécutions pour déterminer des exécutions de formation médiocres. 
+La recherche des meilleures valeurs d’hyperparamètres pour votre modèle peut être un processus itératif. Vous pouvez réutiliser les connaissances des cinq précédentes exécutions pour accélérer l’optimisation des hyperparamètres.
 
-Azure Machine Learning vous permet de démarrer à chaud votre exécution de paramétrage d’hyperparamètres en tirant parti des connaissances de jusqu’à 5 exécutions parentes de paramétrage d’hyperparamètres terminées/annulées précédemment. Vous pouvez spécifier la liste des exécutions parentes que vous souhaitez démarrer à chaud à l’aide de cet extrait de code :
+
+Le démarrage à chaud est géré différemment en fonction de la méthode d’échantillonnage :
+- **Échantillonnage bayésien** : Les essais de l’exécution précédente sont utilisés comme connaissance préalable pour choisir de nouveaux exemples et pour améliorer la métrique principale.
+- **Échantillonnage aléatoire** ou **échantillonnage de grille** :  L’arrêt anticipé utilise les connaissances des précédentes exécutions pour déterminer les performances d’exécution médiocres. 
+
+Spécifiez la liste des exécutions parentes que vous souhaitez démarrer à chaud.
 
 ```Python
 from azureml.train.hyperdrive import HyperDriveRun
@@ -329,7 +352,9 @@ warmstart_parent_2 = HyperDriveRun(experiment, "warmstart_parent_run_ID_2")
 warmstart_parents_to_resume_from = [warmstart_parent_1, warmstart_parent_2]
 ```
 
-En outre, il peut arriver que des formations individuelles sur une expérience de paramétrage d’hyperparamètres soient annulées en raison de contraintes budgétaires ou d’une défaillance due à d’autres raisons. Il est à présent possible de reprendre ces formations individuelles à partir du dernier point de contrôle (en supposant que votre script de formation gère les points de contrôle). La reprise d’une exécution de formation unique utilise la même configuration d’hyperparamètres et monte le dossier de sorties utilisé pour cette exécution. Le script de formation doit accepter l’argument `resume-from`, qui contient les fichiers de point de contrôle ou de modèle à partir desquels reprendre l’exécution de la formation. Vous pouvez reprendre des exécutions de formation individuelles à l’aide de l’extrait de code suivant :
+Si une expérience d’optimisation des hyperparamètres est annulée, vous pouvez reprendre les exécutions d’entraînement à partir du dernier point de contrôle. Toutefois, votre script d’entraînement doit gérer la logique de point de contrôle.
+
+L’exécution d’entraînement doit utiliser la même configuration d’hyperparamètre et monter les dossiers Outputs. Le script d’entraînement doit accepter l’argument `resume-from`, qui contient les fichiers de point de contrôle ou de modèle à partir desquels reprendre l’exécution de l’entraînement. Vous pouvez reprendre des exécutions de formation individuelles à l’aide de l’extrait de code suivant :
 
 ```Python
 from azureml.core.run import Run
@@ -344,20 +369,20 @@ Vous pouvez configurer votre expérience de paramétrage d’hyperparamètres po
 ```Python
 from azureml.train.hyperdrive import HyperDriveConfig
 
-hyperdrive_run_config = HyperDriveConfig(estimator=estimator,
-                          hyperparameter_sampling=param_sampling, 
-                          policy=early_termination_policy,
-                          resume_from=warmstart_parents_to_resume_from, 
-                          resume_child_runs=child_runs_to_resume,
-                          primary_metric_name="accuracy", 
-                          primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
-                          max_total_runs=100,
-                          max_concurrent_runs=4)
+hd_config = HyperDriveConfig(run_config=src,
+                             hyperparameter_sampling=param_sampling,
+                             policy=early_termination_policy,
+                             resume_from=warmstart_parents_to_resume_from,
+                             resume_child_runs=child_runs_to_resume,
+                             primary_metric_name="accuracy",
+                             primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
+                             max_total_runs=100,
+                             max_concurrent_runs=4)
 ```
 
 ## <a name="visualize-experiment"></a>Visualiser l’expérience
 
-Le SDK Azure Machine Learning fournit un [widget Notebook](https://docs.microsoft.com/python/api/azureml-widgets/azureml.widgets.rundetails?view=azure-ml-py) qui vous permet de visualiser la progression de vos exécutions d’entraînement. L’extrait de code suivant vous permet de visualiser toutes vos exécutions d’optimisation des hyperparamètres dans un notebook Jupyter :
+Utilisez le [widget Notebook](/python/api/azureml-widgets/azureml.widgets.rundetails?preserve-view=true&view=azure-ml-py) pour visualiser la progression de vos exécutions d’entraînement. L’extrait de code suivant vous permet de visualiser toutes vos exécutions d’optimisation des hyperparamètres dans un notebook Jupyter :
 
 ```Python
 from azureml.widgets import RunDetails
@@ -372,15 +397,15 @@ Vous pouvez également visualiser les performances de chacune des exécutions au
 
 ![Tracé de l’optimisation des hyperparamètres](./media/how-to-tune-hyperparameters/HyperparameterTuningPlot.png)
 
-De plus, vous pouvez identifier visuellement la corrélation entre les performances et les valeurs des hyperparamètres individuels avec un tracé de coordonnées parallèles. 
+Vous pouvez identifier visuellement la corrélation entre les performances et les valeurs des hyperparamètres individuels avec un tracé de coordonnées parallèles. 
 
 [![Coordonnées parallèles de l'optimisation des hyperparamètres](./media/how-to-tune-hyperparameters/HyperparameterTuningParallelCoordinates.png)](media/how-to-tune-hyperparameters/hyperparameter-tuning-parallel-coordinates-expanded.png)
 
-Vous pouvez aussi visualiser toutes vos exécutions d’optimisation des hyperparamètres dans le portail web Azure. Pour plus d’informations sur la visualisation d’une expérience sur le portail web, consultez le [guide pratique pour suivre les expériences](how-to-track-experiments.md#view-the-experiment-in-the-web-portal).
+Vous pouvez aussi visualiser toutes vos exécutions d’optimisation des hyperparamètres dans le portail web Azure. Pour plus d’informations sur la visualisation d’une expérience sur le portail, consultez le [guide pratique pour suivre les expériences](how-to-monitor-view-training-logs.md#view-the-experiment-in-the-web-portal).
 
 ## <a name="find-the-best-model"></a>Trouver le meilleur modèle
 
-Une fois que toutes les exécutions d’optimisation des hyperparamètres ont abouti, [identifiez la configuration la plus performante](/python/api/azureml-train-core/azureml.train.hyperdrive.hyperdriverun?view=azure-ml-py#get-best-run-by-primary-metric-include-failed-true--include-canceled-true--include-resume-from-runs-true-----typing-union-azureml-core-run-run--nonetype-) et les valeurs des hyperparamètres correspondantes :
+Une fois que toutes les exécutions d’optimisation des hyperparamètres ont abouti, identifiez la configuration la plus performante et les valeurs des hyperparamètres :
 
 ```Python
 best_run = hyperdrive_run.get_best_run_by_primary_metric()
@@ -396,7 +421,7 @@ print('\n batch size:',parameter_values[7])
 
 ## <a name="sample-notebook"></a>Exemple de notebook
 Reportez-vous aux notebooks train-hyperparameter-* dans ce dossier :
-* [how-to-use-azureml/training-with-deep-learning](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/training-with-deep-learning)
+* [how-to-use-azureml/ml-frameworks](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/ml-frameworks)
 
 [!INCLUDE [aml-clone-in-azure-notebook](../../includes/aml-clone-for-examples.md)]
 

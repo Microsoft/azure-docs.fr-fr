@@ -3,24 +3,24 @@ title: Attribuer à une identité managée l’accès à une ressource à l’ai
 description: Instructions détaillées pour attribuer à un identité managée sur une ressource un accès à une autre ressource, à l’aide du portail Azure.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 09/14/2017
-ms.author: markvi
+ms.date: 11/03/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e24c97909870c4d76b07ec837e5f624a509bd1f2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6584754edf3ff7ae31c3b9ace72baf16459dbc44
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74547286"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93359989"
 ---
 # <a name="assign-a-managed-identity-access-to-a-resource-by-using-the-azure-portal"></a>Attribuer à une identité managée un accès à une ressource à l’aide du portail Azure
 
@@ -30,18 +30,18 @@ Après avoir configuré une ressource Azure avec une identité managée, vous po
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#how-does-the-managed-identities-for-azure-resources-work)** .
+- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#managed-identity-types)** .
 - Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
 
-## <a name="use-rbac-to-assign-a-managed-identity-access-to-another-resource"></a>Utiliser RBAC pour affecter à une identité managée l’accès à une autre ressource
+## <a name="use-azure-rbac-to-assign-a-managed-identity-access-to-another-resource"></a>Utiliser Azure RBAC pour affecter à une identité managée l’accès à une autre ressource
 
-Après avoir activé l’identité managée sur une ressource Azure, telle qu’une [machine virtuelle Azure](qs-configure-portal-windows-vm.md) ou un [groupe de machines virtuelles identiques Azure](qs-configure-portal-windows-vmss.md) :
+Après avoir activé l’identité managée sur une ressource Azure, comme une [machine virtuelle Azure](qs-configure-portal-windows-vm.md) ou un [groupe de machines virtuelles identiques Azure](qs-configure-portal-windows-vmss.md) :
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) à l’aide d’un compte associé à l’abonnement Azure sur lequel vous avez configuré l’identité managée.
 
 2. Accédez à la ressource souhaitée sur laquelle vous voulez modifier le contrôle d’accès. Dans cet exemple, nous offrons à une machine virtuelle Azure l’accès à un compte de stockage auquel nous accédons.
 
-3. Sélectionnez la page **Contrôle d’accès (IAM)** de la ressource, puis cliquez sur **+ Ajouter une attribution de rôle**. Spécifiez ensuite le **rôle**, la **destination de l’accès** et l’**abonnement** correspondant. La ressource doit être située sous la zone de critères de recherche. Sélectionnez la ressource puis sélectionnez **Enregistrer**. 
+3. Sélectionnez la page **Contrôle d’accès (IAM)** de la ressource, puis cliquez sur **+ Ajouter une attribution de rôle**. Spécifiez ensuite le **rôle** , la **destination de l’accès** et l’ **abonnement** correspondant. La ressource doit être située sous la zone de critères de recherche. Sélectionnez la ressource puis sélectionnez **Enregistrer**. 
 
    ![Capture d’écran du contrôle d’accès (IAM)](./media/msi-howto-assign-access-portal/assign-access-control-iam-blade-before.png)  
      

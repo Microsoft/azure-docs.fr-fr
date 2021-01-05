@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 01/10/2020
 ms.author: apimpm
-ms.openlocfilehash: 2c021a6d10c95b58ac444de8ea895ca01371a2b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a3b6f90d0aa26b478c0f2fcefac55dcd509da437
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75902460"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92070943"
 ---
 # <a name="error-handling-in-api-management-policies"></a>Gestion des erreurs dans les stratégies de la Gestion des API
 
@@ -51,7 +51,7 @@ Lors du traitement d’une requête, les étapes intégrées sont exécutées av
 La section de stratégie `on-error` peut être utilisée, quelle que soit l’étendue. Les éditeurs d’API peuvent configurer un comportement personnalisé, par exemple l’enregistrement de l’erreur dans des Event Hubs ou la création d’une nouvelle réponse à renvoyer à l’appelant.
 
 > [!NOTE]
-> La section `on-error` n’est pas présente par défaut dans les stratégies. Pour ajouter la section `on-error` à une stratégie, accédez à la stratégie de votre choix dans l’éditeur de stratégies et ajoutez-la. Pour plus d’informations sur la configuration des stratégies, consultez la page [Stratégies dans la Gestion des API](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/).
+> La section `on-error` n’est pas présente par défaut dans les stratégies. Pour ajouter la section `on-error` à une stratégie, accédez à la stratégie de votre choix dans l’éditeur de stratégies et ajoutez-la. Pour plus d’informations sur la configuration des stratégies, consultez la page [Stratégies dans la Gestion des API](./api-management-howto-policies.md).
 >
 > En l’absence de section `on-error`, les appelants recevront des messages de réponse HTTP 400 ou 500 si une condition d’erreur se produit.
 
@@ -71,12 +71,16 @@ Les stratégies suivantes peuvent être utilisées dans la section de stratégie
 -   [log-to-eventhub](api-management-advanced-policies.md#log-to-eventhub)
 -   [json-to-xml](api-management-transformation-policies.md#ConvertJSONtoXML)
 -   [xml-to-json](api-management-transformation-policies.md#ConvertXMLtoJSON)
+-   [limit-concurrency](api-management-advanced-policies.md#LimitConcurrency)
+-   [mock-response](api-management-advanced-policies.md#mock-response)
+-   [retry](api-management-advanced-policies.md#Retry)
+-   [trace](api-management-advanced-policies.md#Trace)
 
 ## <a name="lasterror"></a>lastError
 
 Quand une erreur se produit et que le contrôle passe à la section de stratégie `on-error`, l’erreur est enregistrée dans la propriété [context.LastError](api-management-policy-expressions.md#ContextVariables), accessible aux stratégies dans la section `on-error`. LastError a les propriétés suivantes.
 
-| Name       | Type   | Description                                                                                               | Obligatoire |
+| Nom       | Type   | Description                                                                                               | Obligatoire |
 | ---------- | ------ | --------------------------------------------------------------------------------------------------------- | -------- |
 | `Source`   | string | Désigne l’élément où l’erreur s’est produite. Peut être une stratégie ou un nom d’étape de pipeline intégrée.      | Oui      |
 | `Reason`   | string | Code d’erreur informatique, utilisable dans la gestion des erreurs.                                       | Non       |
@@ -185,5 +189,5 @@ Pour plus d’informations sur l’utilisation de stratégies, consultez les pag
 
 -   [Stratégies dans Gestion des API](api-management-howto-policies.md)
 -   [Transform and protect your API](transform-api.md) (Transformer et protéger votre API)
--   [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
--   [Exemples de stratégie](policy-samples.md)
+-   [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
+-   [Exemples de stratégie](./policy-reference.md)

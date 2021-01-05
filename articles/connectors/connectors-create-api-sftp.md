@@ -1,21 +1,22 @@
 ---
-title: Se connecter à un compte SFTP
-description: Automatiser les tâches et les processus qui supervisent, créent, gèrent, envoient et reçoivent des fichiers pour un serveur SFTP via SSH à l’aide d’Azure Logic Apps
+title: Se connecter à un compte SFTP (déconseillé)
+description: Automatiser les tâches et les processus qui surveillent, créent, gèrent, envoient et reçoivent des fichiers pour un serveur SFTP à l’aide d’Azure Logic Apps
 services: logic-apps
 ms.suite: integration
 author: divyaswarnkar
-ms.reviewer: divswa, klam, logicappspm
+ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 11/01/2019
 tags: connectors
-ms.openlocfilehash: d0da98070fa8da5403677e1a67bda75456c74d80
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ROBOTS: NOINDEX
+ms.openlocfilehash: 70fb956af7ff45c7b54f04d7ed441ec39f9d80a5
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74789271"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92673818"
 ---
-# <a name="monitor-create-and-manage-sftp-files-by-using-azure-logic-apps"></a>Superviser, créer et gérer des fichiers SFTP à l’aide d’Azure Logic Apps
+# <a name="monitor-create-and-manage-sftp-files-in-azure-logic-apps"></a>Surveiller, créer et gérer des fichiers SFTP dans Azure Logic Apps
 
 > [!IMPORTANT]
 > Veuillez utiliser le [connecteur SFTP-SSH](../connectors/connectors-sftp-ssh.md), car le connecteur SFTP est déconseillé. Vous ne pouvez plus sélectionner les déclencheurs et actions SFTP dans le concepteur d’applications logiques.
@@ -44,10 +45,10 @@ Le connecteur SFTP gère uniquement les fichiers dont la taille est *inférieure
   > Le connecteur SFTP prend en charge ces formats de clé privée : OpenSSH, ssh.com et PuTTY
   >
   > Lorsque vous créez votre application logique, après avoir ajouté le déclencheur SFTP ou une action , vous devrez fournir les informations de connexion pour votre serveur SFTP. 
-  > Si vous utilisez une clé privée SSH, assurez-vous de ***copier*** la clé à partir de votre fichier de clé privée SSH, puis ***collez*** cette clé dans les détails de connexion. ***N’entrez pas manuellement ou ne modifiez pas la clé*** car cela peut entraîner l’échec de la connexion. 
+  > Si vous utilisez une clé privée SSH, assurez-vous de * **copier** _ la clé à partir de votre fichier de clé privée SSH, puis _*_collez_*_ cette clé dans les détails de connexion. _*_N’entrez pas ni ne modifiez manuellement la clé_*_ , car cela peut entraîner l’échec de la connexion. 
   > Pour plus d’informations, consultez les étapes détaillées plus loin dans cet article.
 
-* Des connaissances de base en [création d’applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+_ Des connaissances de base [en création d’applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
 * L’application logique à partir de laquelle vous souhaitez accéder à votre compte SFTP. Pour démarrer avec un déclencheur SFTP, [créez une application logique vide](../logic-apps/quickstart-create-first-logic-app-workflow.md). Pour utiliser une action SFTP, démarrez votre application logique avec un autre déclencheur, par exemple, le déclencheur **Périodicité**.
 
@@ -81,7 +82,7 @@ Quand un déclencheur détecte un nouveau fichier, il vérifie que le nouveau fi
 
    > [!IMPORTANT]
    >
-   > Lorsque vous entrez votre clé privée SSH dans la propriété **Clé privée SSH**, suivez ces étapes supplémentaires pour vous assurer que vous fournissez la valeur complète et correcte pour cette propriété. 
+   > Lorsque vous entrez votre clé privée SSH dans la propriété **Clé privée SSH** , suivez ces étapes supplémentaires pour vous assurer que vous fournissez la valeur complète et correcte pour cette propriété. 
    > Une clé non valide entraîne l’échec de la connexion.
 
    Bien qu’il est possible d’utiliser n’importe quel éditeur de texte, vous trouverez ici des exemples d’étapes montrant comment copier et coller correctement votre clé à l’aide de Notepad.exe.
@@ -92,9 +93,9 @@ Quand un déclencheur détecte un nouveau fichier, il vérifie que le nouveau fi
 
    1. Sélectionnez **Edition** > **Copier**.
 
-   1. Dans le déclencheur SFTP ou l’action que vous avez ajoutés, collez la clé *complète* que vous avez copiée dans la propriété **Clé privée SSH**, qui prend en charge plusieurs lignes. ***Assurez-vous que vous collez*** la clé. ***N’entrez pas manuellement ou ne modifiez pas la clé***.
+   1. Dans le déclencheur SFTP ou l’action que vous avez ajoutés, collez la clé *complète* que vous avez copiée dans la propriété **Clé privée SSH** , qui prend en charge plusieurs lignes. **_Veillez à coller_* _ la clé. _*_N’entrez pas ni ne modifiez la clé manuellement_*_.
 
-1. Après avoir entré les informations de connexion, choisissez **Créer**.
+1. Après avoir entré les informations de connexion, choisissez _*Créer**.
 
 1. Fournissez les informations nécessaires pour le déclencheur ou l’action sélectionnés et continuez à générer le flux de travail de votre application logique.
 
@@ -106,7 +107,7 @@ Quand un déclencheur détecte un nouveau fichier, il vérifie que le nouveau fi
 
 Ce déclencheur démarre un flux de travail d’application logique quand un fichier est ajouté ou changé sur un serveur SFTP. Par exemple, vous pouvez ajouter une condition qui vérifie et extrait le contenu du fichier si ce contenu répond à une condition spécifiée. Vous pouvez ensuite ajouter une action qui obtient le contenu du fichier et le place dans un dossier sur le serveur SFTP.
 
-**Exemple en entreprise** : vous pouvez utiliser ce déclencheur pour superviser l’apparition dans un dossier SFTP de nouveaux fichiers représentant les commandes des clients. Vous pouvez ensuite utiliser une action SFTP comme **Obtenir le contenu du fichier** afin d’obtenir le contenu de la commande à des fins de traitement et stocker cette commande dans une base de données de commandes.
+**Exemple en entreprise**  : vous pouvez utiliser ce déclencheur pour superviser l’apparition dans un dossier SFTP de nouveaux fichiers représentant les commandes des clients. Vous pouvez ensuite utiliser une action SFTP comme **Obtenir le contenu du fichier** afin d’obtenir le contenu de la commande à des fins de traitement et stocker cette commande dans une base de données de commandes.
 
 <a name="get-content"></a>
 
@@ -116,7 +117,7 @@ Cette action obtient le contenu d’un fichier sur un serveur SFTP. Par exemple,
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour obtenir des détails techniques sur les déclencheurs, les actions et les limites, qui sont décrits par la description OpenAPI du connecteur (anciennement Swagger), consultez la [page de référence](/connectors/sftpconnector/) du connecteur.
+Pour obtenir des détails techniques sur les déclencheurs, les actions et les limites, qui sont décrits par la description OpenAPI du connecteur (anciennement Swagger), consultez la [page de référence](../data-factory/connector-sftp.md) du connecteur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

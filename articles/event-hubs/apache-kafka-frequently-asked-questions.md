@@ -1,30 +1,21 @@
 ---
 title: Forum aux questions (FAQ) - Azure Event Hubs pour Apache Kafka
-description: Cet article explique comment les contrôles serveur consommateurs et les producteurs qui utilisent des protocoles différents (AMQP, Apache Kafka et HTTPS) peuvent échanger des événements avec Azure Event Hubs.
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: ''
-ms.service: event-hubs
-ms.devlang: na
+description: Cet article répond aux questions fréquentes posées sur la prise en charge d’Azure Event Hubs pour les clients Apache Kafka non couvertes ailleurs.
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 04/01/2020
-ms.author: shvija
-ms.openlocfilehash: 0186b90e1d75c5dba6e1ca26e4ba079a3456cea4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/23/2020
+ms.openlocfilehash: dc6a12b2098a1fdf33adda92b4347f91ab4e5489
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81606684"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91828103"
 ---
 # <a name="frequently-asked-questions---event-hubs-for-apache-kafka"></a>Forum aux questions (FAQ) - Event Hubs pour Apache Kafka 
 Cet article fournit des réponses à certaines des questions fréquemment posées concernant la migration vers Event Hubs pour Apache Kafka.
 
-## <a name="do-you-run-apache-kafka"></a>Exécutez-vous Apache Kafka ?
+## <a name="does-azure-event-hubs-run-on-apache-kafka"></a>Azure Event Hubs s’exécute-t-il sur Apache Kafka ?
 
-Non.  Nous exécutons les opérations de l’API Kafka dans l’infrastructure Event Hubs.  Étant donné qu’il existe une corrélation étroite entre la fonctionnalité AMQP dans Apache Kafka et Event Hubs (c’est-à-dire la production, la réception, la gestion, etc.), nous sommes en mesure de transférer la fiabilité connue d’Event Hubs à l’espace PaaS Kafka.
+Non. Azure Event Hubs est un répartiteur multiniveau cloud natif qui prend en charge plusieurs protocoles développés et gérés par Microsoft et qui n’utilise pas de code Apache Kafka. L’un des protocoles pris en charge est le protocole RPC Kafka pour les API de consommateur et de producteur du client Kafka. Event Hubs fonctionne avec un grand nombre de vos applications Kafka existantes. Pour plus d’informations, consultez [Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md). Dans la mesure où les concepts d’Apache Kafka et d’Azure Event Hubs sont très similaires (mais pas identiques), nous pouvons offrir la fiabilité inégalée d’Azure Event Hubs aux clients avec des investissements Apache Kafka existants. 
 
 ## <a name="event-hubs-consumer-group-vs-kafka-consumer-group"></a>Groupe de consommateurs Event Hubs et groupe de consommateurs Kafka
 Quelle est la différence entre un groupe de consommateurs Event Hub et un groupe de consommateurs Kafka sur Event Hubs ? Les groupes de consommateurs Kafka sur Event Hubs sont entièrement distincts des groupes de consommateurs Event Hubs standard.
@@ -50,5 +41,5 @@ Pour plus d’informations sur Event Hubs et sur Event Hubs pour Kafka, consulte
 - [Guide du développeur Apache Kafka pour Event Hubs](apache-kafka-developer-guide.md)
 - [Guide de migration Apache Kafka pour Event Hubs](apache-kafka-migration-guide.md)
 - [Guide de dépannage Apache Kafka pour Event Hubs](apache-kafka-troubleshooting-guide.md)
-- [Configurations recommandées](https://github.com/Azure/azure-event-hubs-for-kafka/blob/master/CONFIGURATION.md)
+- [Configurations recommandées](apache-kafka-configurations.md)
 

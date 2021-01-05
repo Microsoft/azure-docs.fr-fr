@@ -1,21 +1,24 @@
 ---
 title: Exécuter des travaux de bout en bout à l’aide de modèles
 description: En utilisant juste des commandes CLI, vous pouvez créer un pool, charger des données d’entrée, créer des travaux et des tâches associées, et télécharger les données de sortie produites.
-ms.topic: article
-ms.date: 12/07/2018
-ms.custom: seodec18
-ms.openlocfilehash: 634a0b66379d8c94988d5f974baffe475af94c2e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 10/08/2020
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 845a32c2feda5a5a3b8d44d237c62db94cae1779
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82117350"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91848719"
 ---
 # <a name="use-azure-batch-cli-templates-and-file-transfer"></a>Utiliser des modèles d’interface de ligne de commande Azure Batch et le transfert de fichiers
 
-Vous pouvez utiliser une extension Azure Batch de l’interface Azure CLI pour exécuter des travaux Batch sans écrire de code.
+Vous pouvez utiliser une extension Batch de l’interface Azure CLI pour exécuter des travaux Batch sans écrire de code.
 
 Créez et utilisez des modèles de fichier JSON avec Azure CLI pour créer des pools, travaux et tâches Batch. Utilisez des commandes d’extension LCI pour charger facilement les fichiers d’entrée des travaux dans le compte de stockage associé au compte Batch, et télécharger les fichiers de sortie de travaux.
+
+> [!NOTE]
+> Les fichiers JSON ne prennent pas en charge les mêmes fonctionnalités que [les modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md). Ils sont conçus pour être mis en forme comme le corps de la demande REST brute. L’extension CLI ne modifie pas les commandes existantes, mais elle possède une option de modèle similaire qui ajoute une fonctionnalité partielle de modèle Azure Resource Manager. Voir [Extensions CLI d’Azure Batch pour Windows, Mac et Linux](https://github.com/Azure/azure-batch-cli-extensions).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -62,7 +65,7 @@ Les modèles Azure Batch sont semblables aux modèles Azure Resource Manager en 
 -   **Paramètres**
 
     -   Ils autorisent la spécification des valeurs de propriété dans une section Corps, seules les valeurs de paramètre devant être fournies lorsque le modèle est utilisé. Par exemple, la définition complète d’un pool peut être placée dans le corps et un seul paramètre défini pour `poolId`. Par conséquent, seule la chaîne d’ID du pool doit être fournie pour créer un pool.
-        
+
     -   Le corps du modèle peut être créé par une personne connaissant Batch et les applications à exécuter dans celui-ci. Seules les valeurs des paramètres définis par l’auteur doivent être fournis lorsque le modèle est utilisé. Un utilisateur sans connaissance poussée de Batch ou des applications peut par conséquent utiliser les modèles.
 
 -   **Variables**
@@ -118,7 +121,7 @@ Voici l’exemple d’un modèle qui crée un pool de machines virtuelles Linux 
             "vmSize": "STANDARD_D3_V2",
             "targetDedicatedNodes": "[parameters('nodeCount')]",
             "enableAutoScale": false,
-            "maxTasksPerNode": 1,
+            "taskSlotsPerNode": 1,
             "packageReferences": [
                 {
                     "type": "aptPackage",
@@ -206,7 +209,7 @@ Voici un exemple de modèle qui crée un travail de transcodage de fichiers vid�
             },
             "taskFactory": {
                 "type": "taskPerFile",
-                "source": { 
+                "source": {
                     "fileGroup": "ffmpeg-input"
                 },
                 "repeatTask": {
@@ -268,7 +271,7 @@ Un groupe de fichiers correspond à un conteneur créé dans le compte de stocka
 L’extension Batch CLI fournit des commandes pour charger les fichiers du client vers un groupe de fichiers spécifié, et pour télécharger les fichiers du groupe de fichiers spécifié vers le client.
 
 ```azurecli
-az batch file upload --local-path c:\source_videos\*.mp4 
+az batch file upload --local-path c:\source_videos\*.mp4
     --file-group ffmpeg-input
 
 az batch file download --file-group ffmpeg-output --local-path

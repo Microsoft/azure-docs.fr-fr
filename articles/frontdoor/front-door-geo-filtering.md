@@ -3,34 +3,34 @@ title: Géofiltrage sur un domaine Azure Front Door | Microsoft Docs
 description: Dans cet article, vous en apprendrez plus sur la stratégie de géofiltrage Azure Front Door
 services: frontdoor
 documentationcenter: ''
-author: KumudD
+author: duongau
 editor: ''
 ms.service: frontdoor
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/21/2019
-ms.author: kumud
+ms.date: 09/28/2020
+ms.author: duau
 ms.reviewer: tyao
-ms.openlocfilehash: 2cdde705d0e9f0905d4c33648b5415758d838b06
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: 42697a57d39f4a34eee4866b67e2cde947db1ff5
+ms.sourcegitcommit: 3792cf7efc12e357f0e3b65638ea7673651db6e1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411183"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91449254"
 ---
-# <a name="what-is-geo-filtering-on-a-domain-for-azure-front-door"></a>Présentation du filtrage géographique sur un domaine Azure Front Door
+# <a name="geo-filtering-on-a-domain-for-azure-front-door"></a>Filtrage géographique sur un domaine pour Azure Front Door
 
-Par défaut, Azure Front Door répond aux demandes de l’utilisateur, quel que soit son emplacement. Toutefois, dans certains cas, vous devrez peut-être limiter l’accès à vos applications web en fonction du pays/de la région. Le service de pare-feu d’applications web (WAF) au niveau de Front Door vous permet de définir une stratégie à l’aide de règles d’accès personnalisées pour un chemin d’accès spécifique à votre point de terminaison. Cette stratégie autorisera ou bloquera l’accès à partir de pays/régions spécifiés. 
+Par défaut, Azure Front Door répond aux demandes de l’utilisateur, quel que soit l’emplacement d’origine de la demande. Dans certains scénarios, vous devrez peut-être limiter l’accès à votre applications web en fonction du pays/de la région. Le service de pare-feu d’applications web (WAF) au niveau de Front Door vous permet de définir une stratégie à l’aide de règles d’accès personnalisées pour un chemin d’accès spécifique à votre point de terminaison. Cette stratégie autorisera ou bloquera l’accès à partir de pays/régions spécifiés. 
 
-Une stratégie WAF est généralement constituée d’un ensemble de règles personnalisées. Une règle se compose de conditions de correspondance, d’une action et d’une priorité. Dans les conditions de correspondance, vous pourrez définir une variable de correspondance, un opérateur et une valeur de correspondance.  En ce qui concerne la règle de filtrage géographique, la variable de correspondance est REMOTE_ADDR, l’opérateur est GeoMatch, la valeur correspond à l’indicatif à deux lettres du pays d’intérêt. Vous pouvez combiner une condition GeoMatch et une condition de correspondance de chaîne REQUEST_URI pour créer une règle de filtrage géographique basé sur le chemin d’accès.
+Une stratégie WAF contient un ensemble de règles personnalisées. La règle se compose de conditions de correspondance, d’une action et d’une priorité. Dans une condition de correspondance, vous pourrez définir une variable de correspondance, un opérateur et une valeur de correspondance. Pour une règle de filtrage géographique, la variable de correspondance est REMOTE_ADDR, l’opérateur est GeoMatch, et la valeur correspond à un indicatif à deux lettres du pays/région d’intérêt. Vous pouvez combiner une condition GeoMatch et une condition de correspondance de chaîne REQUEST_URI pour créer une règle de filtrage géographique basé sur le chemin d’accès.
 
 Vous pouvez configurer une stratégie de filtrage géographique pour votre porte d’entrée à l’aide d’[Azure PowerShell](front-door-tutorial-geo-filtering.md) ou de notre [modèle de démarrage rapide](https://github.com/Azure/azure-quickstart-templates/tree/master/101-front-door-geo-filtering).
 
-## <a name="country-code-reference"></a>Référence de l’indicatif de pays
+## <a name="countryregion-code-reference"></a>Référence du code pays ou région
 
-|Code pays | Nom du pays |
+|Code pays ou région | Nom du pays/de la région |
 | ----- | ----- |
 | AD | Andorre |
 | AE | Émirats Arabes Unis|
@@ -212,5 +212,5 @@ Vous pouvez configurer une stratégie de filtrage géographique pour votre porte
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [sécurité de la couche Application avec Front Door](front-door-application-security.md).
 - Découvrez comment [créer une porte d’entrée](quickstart-create-front-door.md).
+- Apprenez à [configurer une stratégie WAF de géofiltrage](front-door-tutorial-geo-filtering.md).

@@ -4,16 +4,16 @@ description: Découvrez comment utiliser la prise en charge des disques optiques
 services: storage
 author: tamram
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/26/2019
 ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: 539154135c35e034c889294d911fb53b3d45daa4
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.openlocfilehash: a09dbd7d778a4f7ea2a9aac9ca07b9e6d06bc1ae
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83771007"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84463601"
 ---
 # <a name="set-and-manage-immutability-policies-for-blob-storage"></a>Définir et gérer des stratégies d’immuabilité pour le stockage Blob
 

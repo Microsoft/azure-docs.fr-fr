@@ -2,35 +2,31 @@
 title: Actualiser des modèles Azure Analysis Services avec Azure Automation | Microsoft Docs
 description: Cet article explique comment coder l’actualisation du modèle pour Azure Analysis Services avec Azure Automation.
 author: chrislound
-ms.service: analysis-services
+ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 10/30/2019
+ms.date: 12/01/2020
 ms.author: chlound
-ms.openlocfilehash: a79123d57f80474e1871ef68f9a92ea9417089ac
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7c801511b6f24cf5ef04d55bb195e3a4c62d7b6d
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73572351"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96491245"
 ---
 # <a name="refresh-with-azure-automation"></a>Actualiser avec Azure Automation
 
 Azure Automation et les runbooks PowerShell vous permettent d’effectuer des opérations d’actualisation de données automatiques sur vos modèles tabulaires Azure Analysis.  
 
-L’exemple présenté dans cet article utilise les [modules SqlServer PowerShell](https://docs.microsoft.com/powershell/module/sqlserver/?view=sqlserver-ps).
-
-Un exemple de runbook PowerShell illustrant l’actualisation d’un modèle est fourni plus loin dans cet article.  
+L’exemple de cet article utilise le [module SqlServer PowerShell](/powershell/module/sqlserver/?view=sqlserver-ps&preserve-view=true). Un exemple de runbook PowerShell illustrant l’actualisation d’un modèle est fourni plus loin dans cet article.  
 
 ## <a name="authentication"></a>Authentification
 
-Tous les appels doivent être authentifiés avec un jeton Azure Active Directory (OAuth 2) valide.  L’exemple fourni dans cet article utilise un principal de service (SPN) pour s’authentifier auprès d’Azure Analysis Services.
-
-Pour en savoir plus sur la création d’un principal de service, voir [Créer un principal de service à l’aide du portail Azure](../active-directory/develop/howto-create-service-principal-portal.md).
+Tous les appels doivent être authentifiés avec un jeton Azure Active Directory (OAuth 2) valide.  L’exemple fourni dans cet article utilise un principal de service (SPN) pour s’authentifier auprès d’Azure Analysis Services. Pour en savoir plus, consultez [Créer un principal du service à l’aide du portail Azure](../active-directory/develop/howto-create-service-principal-portal.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
 > [!IMPORTANT]
-> L’exemple suivant suppose que le pare-feu Azure Analysis Services est désactivé. Si le pare-feu est activé, l’adresse IP publique de l’initiateur de la demande doit figurer sur la liste verte du pare-feu.
+> L’exemple suivant suppose que le pare-feu Azure Analysis Services est désactivé. Si le pare-feu est activé, l’adresse IP publique de l’initiateur de la requête doit figurer dans une règle de pare-feu.
 
 ### <a name="install-sqlserver-modules-from-powershell-gallery"></a>Installez les modules SqlServer à partir de la galerie PowerShell.
 
@@ -58,17 +54,20 @@ Le principal du service que vous créez doit disposer d’autorisations d’admi
 
 1. Dans le compte Automation, créez une ressources **Informations d’identification** qui sera utilisée pour stocker le principal de service en toute sécurité.
 
-    ![Créer des informations d’identification](./media/analysis-services-refresh-azure-automation/6.png)
+    ![Capture d’écran de la page « Informations d’identification » avec l’action « Ajouter des informations d’identification » sélectionnée](./media/analysis-services-refresh-azure-automation/6.png)
 
-2. Entrez les détails des informations d’identification.  Pour **Nom d’utilisateur**, entrez l’**ID de client du SPN**, pour **Mot de passe**, entrez le **Secret du SPN**.
+2. Entrez les détails des informations d’identification. Dans **Nom d’utilisateur**, entrez l’ID de l’application du principal de service (appid). Ensuite, entrez le secret du principal de service dans **Mot de passe**.
 
     ![Créer des informations d’identification](./media/analysis-services-refresh-azure-automation/7.png)
 
-3. Importer le runbook Automation
+3. Importez le runbook Automation.
 
-    ![Importer un Runbook](./media/analysis-services-refresh-azure-automation/8.png)
+    ![Capture d’écran de la page « Runbooks » avec l’action « Importer un runbook » sélectionnée](./media/analysis-services-refresh-azure-automation/8.png)
 
-4. Recherchez le fichier **Refresh-Model.ps1**, fournissez un **nom** et un **description**, puis cliquez sur **Créer**.
+4. Recherchez le fichier [Refresh-Model.ps1](#sample-powershell-runbook), fournissez un **nom** et une **description**, puis cliquez sur **Créer**.
+
+    > [!NOTE]
+    > Utilisez le script de la section [Exemple de runbook PowerShell](#sample-powershell-runbook) au bas de ce document pour créer un fichier appelé Refresh-Model.ps1, et enregistrez-le sur l’ordinateur local pour l’importer dans le runbook.
 
     ![Importer un Runbook](./media/analysis-services-refresh-azure-automation/9.png)
 
@@ -81,7 +80,7 @@ Le principal du service que vous créez doit disposer d’autorisations d’admi
 
 6. Testez le runbook en cliquant sur **Démarrer**.
 
-    ![Démarrer le runbook](./media/analysis-services-refresh-azure-automation/11.png)
+    ![Capture d’écran de la page « Vue d’ensemble » avec l’action « Démarrer » sélectionnée](./media/analysis-services-refresh-azure-automation/11.png)
 
 7. Renseignez les paramètres **DATABASENAME**, **ANALYSISSERVER** et **REFRESHTYPE**, puis cliquez sur **OK**. Le paramètre **WEBHOOKDATA** n’est pas obligatoire lorsque le runbook est exécuté manuellement.
 
@@ -173,7 +172,7 @@ Une machine virtuelle Azure avec une adresse IP publique statique peut être uti
 > [!IMPORTANT]
 > Vérifiez que l’adresse IP publique de machine virtuelle est configurée comme statique.
 >
->Pour en savoir plus sur la configuration des Workers hybrides Azure Automation, voir [Automatiser les ressources de votre centre de données ou de votre cloud à l’aide d’un Runbook Worker hybride](../automation/automation-hybrid-runbook-worker.md#install-a-hybrid-runbook-worker).
+>Pour en savoir plus sur la configuration d’Azure Automation Hybrid Worker, consultez [Installation d’un Runbook Worker hybride](../automation/automation-hybrid-runbook-worker.md#hybrid-runbook-worker-installation).
 
 Une fois un Worker hybride configuré, créez un Webhook comme décrit dans la section [Consommer avec Data Factory](#consume-with-data-factory).  La seule différence ici consiste à sélectionner l’option **Exécuter sur** > **Worker hybride** lors de la configuration du Webhook.
 
@@ -203,7 +202,7 @@ $_Credential = Get-AutomationPSCredential -Name "ServicePrincipal"
 
 # If runbook was called from Webhook, WebhookData will not be null.
 if ($WebhookData)
-{ 
+{ 
     # Retrieve AAS details from Webhook request body
     $atmParameters = (ConvertFrom-Json -InputObject $WebhookData.RequestBody)
     Write-Output "CredentialName: $($atmParameters.CredentialName)"
@@ -227,4 +226,4 @@ else
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Exemples](analysis-services-samples.md)  
-[REST API](https://docs.microsoft.com/rest/api/analysisservices/servers)
+[REST API](/rest/api/analysisservices/servers)

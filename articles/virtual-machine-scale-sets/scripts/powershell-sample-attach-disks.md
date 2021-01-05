@@ -6,15 +6,15 @@ ms.author: mimckitt
 ms.topic: sample
 ms.service: virtual-machine-scale-sets
 ms.subservice: disks
-ms.date: 03/27/2018
+ms.date: 06/25/2020
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 39c1c534a930dae2967d982f7c175fadb3222e83
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: 2a2c93578d8cb4b40e504dd83e3f603bffcccaf6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700912"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89069644"
 ---
 # <a name="attach-and-use-data-disks-with-a-virtual-machine-scale-set-with-powershell"></a>Attacher et utiliser des disques de données avec un groupe de machines virtuelles identiques avec PowerShell
 Ce script permet de créer un groupe de machines virtuelles identiques, puis d’attacher et préparer les disques de données.
@@ -46,4 +46,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 07/03/2019
 ms.author: ramamill
-ms.openlocfilehash: 902c14211e91a1500c6b50cd790b347e337c4f70
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 327e995a8fe2f66903548fba054804768d2538ab
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229129"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001549"
 ---
 # <a name="set-up-the-configuration-server-for-disaster-recovery-of-physical-servers-to-azure"></a>Configurer le serveur de configuration pour la récupération d’urgence de serveurs physiques sur Azure
 
@@ -38,7 +38,7 @@ Le tableau suivant présente la configuration minimale requise pour le matériel
 1. Dans le portail Azure, accédez au panneau des coffres **Recovery Services**, puis sélectionnez votre coffre.
 2. Dans le menu **Ressource** du coffre, cliquez sur **Prise en main** > **Site Recovery** > **Étape 1 : préparer l’infrastructure** > **Objectif de protection**.
 
-    ![Sélectionner des objectifs](./media/physical-azure-set-up-source/choose-goals.png)
+    ![Capture d'écran montrant où sélectionner l'objectif de protection.](./media/physical-azure-set-up-source/choose-goals.png)
 3. Dans la zone **Objectif de protection**, sélectionnez **To Azure** (Vers Azure) et **Non virtualisé/Autre**, puis cliquez sur **OK**.
 
     ![Sélectionner des objectifs](./media/physical-azure-set-up-source/physical-protection-goal.png)
@@ -47,7 +47,7 @@ Le tableau suivant présente la configuration minimale requise pour le matériel
 
 1. Dans **Préparer la source**, si vous n’avez pas de serveur de configuration, cliquez sur **+Serveur de configuration** afin d’en ajouter un.
 
-   ![Configurer la source](./media/physical-azure-set-up-source/plus-config-srv.png)
+   ![Capture d'écran montrant comment sélectionner le serveur de configuration.](./media/physical-azure-set-up-source/plus-config-srv.png)
 2. Dans le panneau **Ajouter un serveur**, vérifiez que **Serveur de configuration** s’affiche dans **Type de serveur**.
 4. Téléchargez le fichier d’installation unifiée de Site Recovery.
 5. Téléchargez la clé d’inscription du coffre. Vous avez besoin de la clé d’inscription lorsque vous exécutez le programme d’installation unifiée. Une fois générée, la clé reste valide pendant 5 jours.
@@ -58,7 +58,7 @@ Le tableau suivant présente la configuration minimale requise pour le matériel
 #### <a name="run-azure-site-recovery-unified-setup"></a>Exécuter le programme d’installation unifiée Azure Site Recovery
 
 > [!TIP]
-> L’inscription du serveur de configuration échoue si l’horloge système de vos ordinateurs diffère de l’heure locale de plus de cinq minutes. Synchronisez votre horloge système avec un [serveur de temps](https://technet.microsoft.com/windows-server-docs/identity/ad-ds/get-started/windows-time-service/windows-time-service) avant de commencer l’installation.
+> L’inscription du serveur de configuration échoue si l’horloge système de vos ordinateurs diffère de l’heure locale de plus de cinq minutes. Synchronisez votre horloge système avec un [serveur de temps](/windows-server/networking/windows-time-service/windows-time-service-top) avant de commencer l’installation.
 
 [!INCLUDE [site-recovery-add-configuration-server](../../includes/site-recovery-add-configuration-server.md)]
 

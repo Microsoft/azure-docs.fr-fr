@@ -3,22 +3,22 @@ title: Créer votre première fabrique de données Azure (modèle Resource Manag
 description: Dans ce didacticiel, vous créez un exemple de pipeline Azure Data Factory en utilisant un modèle Azure Resource Manager.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.date: 01/22/2018
-ms.openlocfilehash: e6a14cbb758426203a46ac508fe8e4bfdf3090cf
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: e65039d39bea4063f717709f97b090e465c5e3c4
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82203894"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508507"
 ---
-# <a name="tutorial-build-your-first-azure-data-factory-using-azure-resource-manager-template"></a>Didacticiel : concevoir votre première fabrique de données Azure à l’aide du modèle Azure Resource Manager
+# <a name="tutorial-build-your-first-azure-data-factory-using-azure-resource-manager-template"></a>Tutoriel : Concevoir votre première fabrique de données Azure à l’aide du modèle Azure Resource Manager
 > [!div class="op_single_selector"]
 > * [Vue d’ensemble et composants requis](data-factory-build-your-first-pipeline.md)
 > * [Visual Studio](data-factory-build-your-first-pipeline-using-vs.md)
@@ -28,23 +28,23 @@ ms.locfileid: "82203894"
 > 
  
 > [!NOTE]
-> Cet article s’applique à la version 1 de Data Factory. Si vous utilisez la version actuelle du service Data Factory, consultez [Démarrage rapide : Créer une fabrique de données à l’aide d’Azure Data Factory](../quickstart-create-data-factory-dot-net.md).
+> Cet article s’applique à la version 1 de Data Factory. Si vous utilisez la version actuelle du service Data Factory, consultez [Démarrage rapide : Créer une fabrique de données à l’aide d’Azure Data Factory](../quickstart-create-data-factory-dot-net.md).
 
 Dans cet article, vous utilisez un modèle Azure Resource Manager pour créer votre première fabrique de données Azure. Pour suivre le didacticiel avec d’autres outils/Kits de développement logiciel (SDK), sélectionnez une des options dans la liste déroulante.
 
-Le pipeline dans ce didacticiel a une activité : **Activité HDInsight Hive**. Cette activité exécute un script Hive sur un cluster HDInsight qui transforme des données d’entrée pour produire des données de sortie. Le pipeline est programmé pour s’exécuter une fois par mois entre les heures de début et de fin spécifiées. 
+Dans ce tutoriel, le pipeline a une seule activité : **activité Hive HDInsight**. Cette activité exécute un script Hive sur un cluster HDInsight qui transforme des données d’entrée pour produire des données de sortie. Le pipeline est programmé pour s’exécuter une fois par mois entre les heures de début et de fin spécifiées. 
 
 > [!NOTE]
-> Dans ce didacticiel, le pipeline de données transforme les données d’entrée pour produire des données de sortie. Pour un didacticiel sur la copie de données à l’aide d’Azure Data Factory, consultez [Copie de données Blob Storage vers une base de données SQL à l’aide de Data Factory](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+> Dans ce didacticiel, le pipeline de données transforme les données d’entrée pour produire des données de sortie. Pour suivre un tutoriel sur la copie des données à l’aide d’Azure Data Factory, consultez [Tutoriel : Copier des données de Stockage Blob vers SQL Database](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)
 > 
-> Le pipeline dans ce didacticiel a une seule activité de type : HDInsightHive. Un pipeline peut contenir plusieurs activités. En outre, vous pouvez chaîner deux activités (une après l’autre) en configurant le jeu de données de sortie d’une activité en tant que jeu de données d’entrée de l’autre activité. Pour plus d’informations, consultez [Planification et exécution dans Data Factory](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline). 
+> Le pipeline dans ce tutoriel a une seule activité de type : HDInsightHive. Un pipeline peut contenir plusieurs activités. En outre, vous pouvez chaîner deux activités (une après l’autre) en configurant le jeu de données de sortie d’une activité en tant que jeu de données d’entrée de l’autre activité. Pour plus d’informations, consultez [Planification et exécution dans Data Factory](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline). 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 * Lisez l’article [Vue d’ensemble du didacticiel](data-factory-build-your-first-pipeline.md) et effectuez les **étapes préalables requises** .
-* Suivez les instructions de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/overview) pour installer la dernière version d’Azure PowerShell sur votre ordinateur.
+* Suivez les instructions de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/) pour installer la dernière version d’Azure PowerShell sur votre ordinateur.
 * Consultez [Création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md) pour en savoir plus sur les modèles Azure Resource Manager. 
 
 ## <a name="in-this-tutorial"></a>Dans ce didacticiel
@@ -143,14 +143,14 @@ Créez un fichier JSON nommé **ADFTutorialARM.json** dans le dossier **C:\ADFGe
             ],
             "apiVersion": "2015-10-01",
             "properties": {
-                  "type": "HDInsightOnDemand",
-                  "typeProperties": {
+                "type": "HDInsightOnDemand",
+                "typeProperties": {
                     "version": "3.5",
                     "clusterSize": 1,
                     "timeToLive": "00:05:00",
                     "osType": "Linux",
                     "linkedServiceName": "[variables('azureStorageLinkedServiceName')]"
-                  }
+                }
             }
           },
           {
@@ -261,7 +261,7 @@ Créez un fichier JSON nommé **ADFTutorialARM.json** dans le dossier **C:\ADFGe
 ```
 
 > [!NOTE]
-> Vous trouverez un autre exemple de modèle Resource Manager pour créer une fabrique de données Azure dans le [didacticiel : Créer un pipeline avec activité de copie à l’aide d’un modèle Azure Resource Manager](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md).  
+> Vous trouverez un autre exemple de modèle Resource Manager pour créer une fabrique de données Azure dans [Tutoriel : Créer un pipeline avec une activité de copie à l’aide d’un modèle Azure Resource Manager](data-factory-copy-activity-tutorial-using-azure-resource-manager-template.md).  
 > 
 > 
 
@@ -343,7 +343,7 @@ Créez un fichier JSON nommé **ADFTutorialARM-Parameters** contient les paramè
    ![Vue du diagramme](./media/data-factory-build-your-first-pipeline-using-arm/DiagramView.png) 
 5. Dans la vue de diagramme, double-cliquez sur le jeu de données **AzureBlobOutput**. La tranche est en cours de traitement.
    
-    ![Dataset](./media/data-factory-build-your-first-pipeline-using-arm/AzureBlobOutput.png)
+    ![Capture d’écran montrant le jeu de données AzureBlobOutput.](./media/data-factory-build-your-first-pipeline-using-arm/AzureBlobOutput.png)
 6. Quand le traitement est terminé, l’état de la tranche est **Prêt** . La création d’un cluster HDInsight à la demande prend généralement un certain temps (environ 20 minutes). Le pipeline devrait donc traiter la tranche en **30 minutes environ** .
    
     ![Dataset](./media/data-factory-build-your-first-pipeline-using-arm/SliceReady.png)    
@@ -432,13 +432,14 @@ Consultez l’article [Services liés de calcul](data-factory-compute-linked-ser
     }
 }
 ```
+
 Notez les points suivants : 
 
 * La fabrique de données crée pour vous un cluster HDInsight **Linux** avec le code JSON ci-dessus. Pour plus d’informations, voir [Service lié à la demande Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) . 
 * Vous pouvez utiliser votre **propre cluster HDInsight** au lieu d’utiliser un cluster HDInsight à la demande. Pour plus d’informations, voir [Service lié Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) .
 * Le cluster HDInsight crée un **conteneur par défaut** dans le stockage d’objets blob que vous avez spécifié dans le JSON (**linkedServiceName**). HDInsight ne supprime pas ce conteneur lorsque le cluster est supprimé. Ce comportement est normal. Avec le service lié HDInsight à la demande, un cluster HDInsight est créé à chaque fois qu’une tranche doit être traitée, à moins qu’il n’existe un cluster activé (**timeToLive**), et est supprimé une fois le traitement activé.
   
-    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « **nomdevotrefabriquededonnéesadf**-**nomduservicelié**-horodatage ». Utilisez des outils tels que [Microsoft Storage Explorer](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob Azure.
+    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « **nomdevotrefabriquededonnéesadf**-**nomduservicelié**-horodatage ». Utilisez des outils tels que l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage Blob Azure.
 
 Pour plus d’informations, voir [Service lié à la demande Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) .
 
@@ -525,37 +526,37 @@ Vous définissez un pipeline qui transforme les données en exécutant le script
     "properties": {
         "description": "Pipeline that transforms data using Hive script.",
         "activities": [
-        {
-            "type": "HDInsightHive",
-            "typeProperties": {
-                "scriptPath": "[concat(parameters('blobContainer'), '/', parameters('hiveScriptFolder'), '/', parameters('hiveScriptFile'))]",
-                "scriptLinkedService": "[variables('azureStorageLinkedServiceName')]",
-                "defines": {
-                    "inputtable": "[concat('wasb://', parameters('blobContainer'), '@', parameters('storageAccountName'), '.blob.core.windows.net/', parameters('inputBlobFolder'))]",
-                    "partitionedtable": "[concat('wasb://', parameters('blobContainer'), '@', parameters('storageAccountName'), '.blob.core.windows.net/', parameters('outputBlobFolder'))]"
-                }
-            },
-            "inputs": [
             {
-                "name": "[variables('blobInputDatasetName')]"
+                "type": "HDInsightHive",
+                "typeProperties": {
+                    "scriptPath": "[concat(parameters('blobContainer'), '/', parameters('hiveScriptFolder'), '/', parameters('hiveScriptFile'))]",
+                    "scriptLinkedService": "[variables('azureStorageLinkedServiceName')]",
+                    "defines": {
+                        "inputtable": "[concat('wasb://', parameters('blobContainer'), '@', parameters('storageAccountName'), '.blob.core.windows.net/', parameters('inputBlobFolder'))]",
+                        "partitionedtable": "[concat('wasb://', parameters('blobContainer'), '@', parameters('storageAccountName'), '.blob.core.windows.net/', parameters('outputBlobFolder'))]"
+                    }
+                },
+                "inputs": [
+                    {
+                        "name": "[variables('blobInputDatasetName')]"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "[variables('blobOutputDatasetName')]"
+                    }
+                ],
+                "policy": {
+                    "concurrency": 1,
+                    "retry": 3
+                },
+                "scheduler": {
+                    "frequency": "Month",
+                    "interval": 1
+                },
+                "name": "RunSampleHiveActivity",
+                "linkedServiceName": "[variables('hdInsightOnDemandLinkedServiceName')]"
             }
-            ],
-            "outputs": [
-            {
-                "name": "[variables('blobOutputDatasetName')]"
-            }
-            ],
-            "policy": {
-                "concurrency": 1,
-                "retry": 3
-            },
-            "scheduler": {
-                "frequency": "Month",
-                "interval": 1
-            },
-            "name": "RunSampleHiveActivity",
-            "linkedServiceName": "[variables('hdInsightOnDemandLinkedServiceName')]"
-        }
         ],
         "start": "2017-07-01T00:00:00Z",
         "end": "2017-07-02T00:00:00Z",
@@ -615,7 +616,7 @@ Voici un exemple de modèle Resource Manager pour la création d’une passerell
     ]
 }
 ```
-Ce modèle crée une fabrique de données nommée GatewayUsingArmDF avec une passerelle nommée GatewayUsingARM. 
+Ce modèle crée une fabrique de données nommée GatewayUsingArmDF avec une passerelle nommée : GatewayUsingARM. 
 
 ## <a name="see-also"></a>Voir aussi
 

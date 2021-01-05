@@ -8,17 +8,18 @@ manager: carmonm
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: windows
 ms.workload: ''
 ms.date: 03/26/2018
 ms.author: robreed
-ms.openlocfilehash: 592c731d1851ac36cf9b57864750df0603b6c3fd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5254d83c18ddc9f2a5518ed4f711d4cd73ab6de7
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227925"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97510938"
 ---
 # <a name="powershell-dsc-extension"></a>Extension de configuration d’état souhaité PowerShell
 
@@ -73,7 +74,7 @@ L’extrait JSON suivant montre le schéma de la section des paramètres de l’
         "advancedOptions": {
             "forcePullAndApply": false,
             "downloadMappings": {
-                "specificDependencyKey": "https://myCustomDependencyLocation"
+             "specificDependencyKey": "https://myCustomDependencyLocation"
             }
         } 
     },

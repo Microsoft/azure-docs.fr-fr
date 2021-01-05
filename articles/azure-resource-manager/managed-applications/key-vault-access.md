@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 01/30/2019
 ms.author: tomfitz
 ms.openlocfilehash: 5dc219747b9cc74b6c6aac8ab190ebfbe5ae9b32
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81458281"
 ---
 # <a name="access-key-vault-secret-when-deploying-azure-managed-applications"></a>Accéder à un secret dans le coffre de clés lors du déploiement d’applications managées Azure

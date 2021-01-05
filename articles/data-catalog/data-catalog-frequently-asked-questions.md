@@ -6,12 +6,12 @@ ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
 ms.date: 08/01/2019
-ms.openlocfilehash: 7dbb1b4a8b85350b8bf8a6df0c9035a19055444c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1f893f8e2ec03681697f15cd85685d4c99b13de6
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79409017"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151962"
 ---
 # <a name="azure-data-catalog-frequently-asked-questions"></a>Forum Aux Questions Azure Data Catalog
 Cet article fournit des réponses aux questions fréquemment posées sur le service Azure Data Catalog.
@@ -55,7 +55,7 @@ Pour demander des fonctionnalités et envoyer d’autres commentaires, rendez-vo
 
 ## <a name="why-do-i-get-an-error-catalog-already-exists-when-i-try-to-create-a-new-catalog"></a>Pourquoi l’erreur *Catalog already exists (Ce catalogue existe déjà)* s’affiche-t-elle quand j'essaie de créer un catalogue ?
 
-Lorsque vous achetez Office 365 E5 avec une licence Power BI Pro, Microsoft crée automatiquement un catalogue par défaut dans la région de l'abonnement. Ce catalogue utilise la référence SKU gratuite. La licence utilisateur Office 365 / Power BI est gérée dans la page Administration d'Office 365. 
+Lorsque vous achetez Office 365 E5 avec une licence Power BI Pro, Microsoft crée automatiquement un catalogue par défaut dans la région de l'abonnement. Ce catalogue utilise la référence SKU gratuite. La licence utilisateur Office 365 / Power BI est gérée dans la page Administration. 
 
 Cependant, ce type de catalogue de données n’inclut pas d'option **Administrateur** et n'est pas visible dans le portail **Azure**. Vous ne pouvez pas supprimer ce type de catalogue de données. De même, vous n'êtes pas autorisé à renommer le catalogue de données et vous ne pouvez pas le déplacer vers une autre région. 
 
@@ -87,7 +87,7 @@ Les propriétés spécifiques diffèrent selon la source de données, mais en g�
 >
 
 > [!NOTE]
-> Pour les sources de données telles que SQL Server Analysis Services qui ont une propriété **Description** de première classe, l'outil d'inscription de la source de données Data Catalog extrait la valeur de cette propriété. Pour des bases de données relationnelles SQL Server *locales*, qui ne possèdent pas de propriété **Description** de première classe, l’outil d’inscription de la source de données Data Catalog extrait la valeur de la propriété étendue **ms_description** pour les objets et les colonnes. Cette propriété n’est pas prise en charge avec SQL Azure. Pour plus d’informations, consultez la page [Utilisation de propriétés étendues sur les objets de base de données](https://technet.microsoft.com/library/ms190243%28v=sql.105%29.aspx).
+> Pour les sources de données telles que SQL Server Analysis Services qui ont une propriété **Description** de première classe, l'outil d'inscription de la source de données Data Catalog extrait la valeur de cette propriété. Pour des bases de données relationnelles SQL Server *locales*, qui ne possèdent pas de propriété **Description** de première classe, l’outil d’inscription de la source de données Data Catalog extrait la valeur de la propriété étendue **ms_description** pour les objets et les colonnes. Cette propriété n’est pas prise en charge avec SQL Azure. Pour plus d’informations, consultez la page [Utilisation de propriétés étendues sur les objets de base de données](/previous-versions/sql/sql-server-2008-r2/ms190243(v=sql.105)).
 >
 >
 
@@ -122,7 +122,7 @@ Data Catalog est un service cloud qui peut fonctionner avec des sources de donn
 ## <a name="can-i-extract-more-or-richer-metadata-from-the-data-sources-i-register"></a>Est-il possible d’extraire davantage de métadonnées/des métadonnées plus riches à partir de sources de données que j’inscris ?
 Nous travaillons activement au développement des fonctionnalités de Data Catalog. Si vous souhaitez que des métadonnées supplémentaires soient extraites à partir de la source de données pendant l’inscription, suggérez-les (ou votez en leur faveur si elles ont déjà été suggérées) dans la section [Data Catalog sur les forums de commentaires Azure](https://feedback.azure.com/forums/906052-data-catalog). 
 
-Si vous souhaitez inclure des métadonnées de colonne/schéma, des aperçus ou des profils de données pour les sources de données dans lesquelles ces métadonnées ne sont pas extraites par l’outil d’inscription, vous pouvez utiliser l’API Data Catalog pour ajouter ces métadonnées. Pour plus d’informations, consultez [API REST Azure Data Catalog](https://docs.microsoft.com/rest/api/datacatalog/).
+Si vous souhaitez inclure des métadonnées de colonne/schéma, des aperçus ou des profils de données pour les sources de données dans lesquelles ces métadonnées ne sont pas extraites par l’outil d’inscription, vous pouvez utiliser l’API Data Catalog pour ajouter ces métadonnées. Pour plus d’informations, consultez [API REST Azure Data Catalog](/rest/api/datacatalog/).
 
 ## <a name="how-do-i-restrict-the-visibility-of-registered-data-assets-so-that-only-certain-people-can-discover-them"></a>Comment restreindre la visibilité des ressources de données inscrites, afin que seules certaines personnes puissent les découvrir ?
 Sélectionnez les ressources de données dans Data Catalog, puis cliquez sur le bouton **Appropriation**. Les propriétaires de ressources de données dans Data Catalog peuvent modifier les paramètres de visibilité pour autoriser tous les utilisateurs à découvrir les ressources leur appartenant, ou pour limiter la visibilité à des utilisateurs spécifiques. Pour plus d’informations, consultez [Gérer les ressources de données dans Azure Data Catalog](data-catalog-how-to-manage.md).

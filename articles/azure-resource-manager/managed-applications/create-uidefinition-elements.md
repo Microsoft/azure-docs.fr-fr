@@ -3,18 +3,18 @@ title: Créer des éléments de définition de l’interface utilisateur
 description: Décrit les éléments à utiliser pour construire des définitions d’interfaces utilisateurs pour le Portail Azure.
 author: tfitzmac
 ms.topic: conceptual
-ms.date: 02/06/2020
+ms.date: 10/27/2020
 ms.author: tomfitz
-ms.openlocfilehash: 12bf5d131001d95a3f4327f95c24125dbf3fb510
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3e8bdd85c112d90fd5e10f6e65e48ca6b3f71b6e
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77086706"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94410740"
 ---
 # <a name="createuidefinition-elements"></a>Éléments de CreateUiDefinition
 
-Cet article décrit le schéma et les propriétés de tous les éléments pris en charge d’une fonction CreateUiDefinition. 
+Cet article décrit le schéma et les propriétés de tous les éléments pris en charge d’une fonction CreateUiDefinition.
 
 ## <a name="schema"></a>schéma
 
@@ -48,23 +48,31 @@ Le schéma pour la plupart des éléments est le suivant :
 
 La documentation de chaque élément contient un exemple d’interface utilisateur, un schéma, des remarques sur le comportement de l’élément (en général concernant la validation et la personnalisation prise en charge) et un exemple de sortie.
 
+- [Microsoft.Common.CheckBox](microsoft-common-checkbox.md)
 - [Microsoft.Common.DropDown](microsoft-common-dropdown.md)
+- [Microsoft.Common.EditableGrid](microsoft-common-editablegrid.md)
 - [Microsoft.Common.FileUpload](microsoft-common-fileupload.md)
 - [Microsoft.Common.InfoBox](microsoft-common-infobox.md)
 - [Microsoft.Common.OptionsGroup](microsoft-common-optionsgroup.md)
 - [Microsoft.Common.PasswordBox](microsoft-common-passwordbox.md)
 - [Microsoft.Common.Section](microsoft-common-section.md)
+- [Microsoft.Common.ServicePrincipalSelector](microsoft-common-serviceprincipalselector.md)
+- [Microsoft.Common.Slider](microsoft-common-slider.md)
 - [Microsoft.Common.TagsByResource](microsoft-common-tagsbyresource.md)
 - [Microsoft.Common.TextBlock](microsoft-common-textblock.md)
 - [Microsoft.Common.TextBox](microsoft-common-textbox.md)
 - [Microsoft.Compute.CredentialsCombo](microsoft-compute-credentialscombo.md)
 - [Microsoft.Compute.SizeSelector](microsoft-compute-sizeselector.md)
 - [Microsoft.Compute.UserNameTextBox](microsoft-compute-usernametextbox.md)
+- [Microsoft.KeyVault.KeyVaultCertificateSelector](microsoft-keyvault-keyvaultcertificateselector.md)
 - [Microsoft.ManagedIdentity.IdentitySelector](microsoft-managedidentity-identityselector.md)
 - [Microsoft.Network.PublicIpAddressCombo](microsoft-network-publicipaddresscombo.md)
 - [Microsoft.Network.VirtualNetworkCombo](microsoft-network-virtualnetworkcombo.md)
+- [Microsoft.Solutions.ArmApiControl](microsoft-solutions-armapicontrol.md)
+- [Microsoft.Solutions.ResourceSelector](microsoft-solutions-resourceselector.md)
 - [Microsoft.Storage.MultiStorageAccountCombo](microsoft-storage-multistorageaccountcombo.md)
 - [Microsoft.Storage.StorageAccountSelector](microsoft-storage-storageaccountselector.md)
+- [Microsoft.Storage.StorageBlobSelector](microsoft-storage-storageblobselector.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -5,12 +5,12 @@ author: cawaMS
 ms.topic: conceptual
 ms.date: 8/04/2017
 ms.author: cawa
-ms.openlocfilehash: 11f76153726d3fc92118fb46cc61b4627ab6a1b2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4d6b781d97d481793e69cf2ca97cca5b93ce432
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75464091"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008529"
 ---
 # <a name="configure-secure-connections-to-a-service-fabric-cluster-from-visual-studio"></a>Configurer des connexions sécurisées à un cluster Service Fabric à partir de Visual Studio
 Découvrez comment utiliser Visual Studio pour accéder en toute sécurité à un cluster Azure Service Fabric avec des stratégies de contrôle d’accès configurées.
@@ -35,9 +35,9 @@ La boîte de dialogue **Publier une application Service Fabric** valide automat
 3. Choisissez la commande **Publier...** du menu contextuel du projet pour ouvrir la boîte de dialogue **Publier une application Azure**, puis sélectionnez le cluster cible. L'outil résout automatiquement la connexion et enregistre les paramètres de connexion sécurisée dans le profil de publication.
 4. Facultatif : vous pouvez modifier le profil de publication pour spécifier une connexion sécurisée de cluster.
    
-   Puisque vous modifiez manuellement le fichier XML du profil de publication pour spécifier les informations de certificat, prenez soin de noter le nom du magasin de certificats, l'emplacement du magasin et l’empreinte numérique du certificat. Vous devrez fournir ces valeurs pour le nom du magasin de certificats et l’emplacement du magasin. Consultez [Procédure : récupérer l’empreinte numérique d’un certificat](https://msdn.microsoft.com/library/ms734695\(v=vs.110\).aspx).
+   Puisque vous modifiez manuellement le fichier XML du profil de publication pour spécifier les informations de certificat, prenez soin de noter le nom du magasin de certificats, l'emplacement du magasin et l’empreinte numérique du certificat. Vous devrez fournir ces valeurs pour le nom du magasin de certificats et l’emplacement du magasin. Consultez [Procédure : récupérer l’empreinte numérique d’un certificat](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric).
    
-   Vous pouvez utiliser les paramètres *ClusterConnectionParameters* pour spécifier les paramètres PowerShell à utiliser lors de la connexion au cluster Service Fabric. Les paramètres valides sont ceux qui sont acceptés par l'applet de commande Connect-ServiceFabricCluster. Consultez la rubrique [Connect-ServiceFabricCluster](https://docs.microsoft.com/powershell/module/servicefabric/connect-servicefabriccluster) pour obtenir la liste des paramètres disponibles.
+   Vous pouvez utiliser les paramètres *ClusterConnectionParameters* pour spécifier les paramètres PowerShell à utiliser lors de la connexion au cluster Service Fabric. Les paramètres valides sont ceux qui sont acceptés par l'applet de commande Connect-ServiceFabricCluster. Consultez la rubrique [Connect-ServiceFabricCluster](/powershell/module/servicefabric/connect-servicefabriccluster) pour obtenir la liste des paramètres disponibles.
    
    Si vous publiez sur un cluster à distance, vous devez spécifier les paramètres appropriés pour ce cluster spécifique. Voici un exemple de connexion à un cluster non sécurisé :
    

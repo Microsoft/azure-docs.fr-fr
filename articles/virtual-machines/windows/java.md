@@ -7,13 +7,14 @@ ms.service: virtual-machines-windows
 ms.workload: infrastructure
 ms.topic: how-to
 ms.date: 07/17/2017
+ms.custom: devx-track-java
 ms.author: cynthn
-ms.openlocfilehash: a99924983bf0e78bd8c8901e25819a363583169a
-ms.sourcegitcommit: af1cbaaa4f0faa53f91fbde4d6009ffb7662f7eb
+ms.openlocfilehash: f571dc5f4f3aee2405d4968b050bd2dd92a709db
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81870031"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012746"
 ---
 # <a name="create-and-manage-windows-vms-in-azure-using-java"></a>Créer et gérer des machines virtuelles Windows dans Azure à l’aide de Java
 
@@ -32,7 +33,7 @@ Ces étapes prennent environ 20 minutes.
 
 ## <a name="create-a-maven-project"></a>Création d’un projet Maven
 
-1. Si ce n’est pas déjà fait, installez [Java](https://aka.ms/azure-jdks).
+1. Si ce n’est pas déjà fait, installez [Java](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 2. Installez [Maven](https://maven.apache.org/download.cgi).
 3. Créez un dossier et le projet :
     
@@ -211,7 +212,7 @@ AvailabilitySet availabilitySet = azure.availabilitySets()
 ```
 ### <a name="create-the-public-ip-address"></a>Créer une adresse IP publique
 
-Une [adresse IP publique](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) est nécessaire pour communiquer avec la machine virtuelle.
+Une [adresse IP publique](../../virtual-network/public-ip-addresses.md) est nécessaire pour communiquer avec la machine virtuelle.
 
 Pour créer l’adresse IP publique de la machine virtuelle, ajoutez ce code au bloc try de la méthode main :
 
@@ -412,7 +413,7 @@ input.nextLine();
 
 ### <a name="resize-the-vm"></a>Redimensionner la machine virtuelle
 
-De nombreux aspects du déploiement doivent être pris en considération lors du choix d’une taille pour votre machine virtuelle. Pour plus d’informations, voir [Tailles des machines virtuelles](sizes.md).  
+De nombreux aspects du déploiement doivent être pris en considération lors du choix d’une taille pour votre machine virtuelle. Pour plus d’informations, voir [Tailles des machines virtuelles](../sizes.md).  
 
 Pour modifier la taille de la machine virtuelle, ajoutez ce code au bloc try de la méthode main :
 
@@ -465,5 +466,4 @@ L’exécution complète de cette application console devrait durer cinq minutes
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* En savoir plus sur l’utilisation des [bibliothèques Azure pour Java](https://docs.microsoft.com/java/azure/java-sdk-azure-overview).
-
+* En savoir plus sur l’utilisation des [bibliothèques Azure pour Java](/java/azure/java-sdk-azure-overview).

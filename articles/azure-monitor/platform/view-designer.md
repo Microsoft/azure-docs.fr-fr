@@ -5,24 +5,26 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 02/10/2019
-ms.openlocfilehash: 9a7521f61dc59bd954629a05638c159ab0e70556
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/04/2020
+ms.openlocfilehash: f3ae081c8657a3ee6a27b0f9208c3eb4e4e745cc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658487"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87759731"
 ---
 # <a name="create-custom-views-by-using-view-designer-in-azure-monitor"></a>Créer des vues personnalisées à l’aide du Concepteur de vues dans Azure Monitor
 Grâce au Concepteur de vues d’Azure Monitor, vous pouvez créer plusieurs vues personnalisées dans le portail Azure qui peuvent vous aider à visualiser les données dans votre espace de travail Log Analytics. Cet article fournit une présentation du Concepteur de vues et des procédures de création et de modification des vues personnalisées.
 
 > [!IMPORTANT]
-> Les vues d'Azure Monitor sont progressivement supprimées et remplacées par des [classeurs](workbooks-overview.md) qui offrent des fonctionnalités supplémentaires. Pour plus d'informations sur la conversion de vos vues existantes en classeurs, consultez le [Guide de transition : du concepteur de vues Azure Monitor aux classeurs](view-designer-conversion-overview.md).
+> Les vues d'Azure Monitor ont été remplacées par des [classeurs](workbooks-overview.md) qui offrent des fonctionnalités supplémentaires. Pour plus d'informations sur la conversion de vos vues existantes en classeurs, consultez le [Guide de transition : du concepteur de vues Azure Monitor aux classeurs](view-designer-conversion-overview.md).
+ 
+
 
 Pour plus d’informations sur le Concepteur de vues, consultez :
 
-* [Référence de la vignette](view-designer-tiles.md) : fournit un guide de référence pour les paramètres de chacune des vignettes disponibles dans vos vues personnalisées.
-* [Référence des composants de visualisation](view-designer-parts.md) : fournit un guide de référence pour les paramètres des composants de visualisation disponibles dans vos vues personnalisées.
+* [Référence de vignette](view-designer-tiles.md) : guide de référence pour les paramètres de chacune des vignettes disponibles dans vos vues personnalisées.
+* [Référence des composants de visualisation](view-designer-parts.md) : guide de référence pour les paramètres des composants de visualisation disponibles dans vos vues personnalisées.
 
 
 ## <a name="concepts"></a>Concepts
@@ -52,7 +54,7 @@ Les options sont décrites dans le tableau suivant :
 | Option | Description |
 |:--|:--|
 | Actualiser   | Actualise la vue avec les données les plus récentes. | 
-| Journaux d’activité      | Ouvre [Log Analytics](../log-query/portals.md) pour analyser des données avec des requêtes de journal. |
+| Journaux d’activité      | Ouvre [Log Analytics](../log-query/log-query-overview.md) pour analyser des données avec des requêtes de journal. |
 | Modifier       | Ouvre la vue dans le Concepteur de vues pour modifier son contenu et sa configuration.  |
 | Clone      | Crée une vue et l’ouvre dans le Concepteur de vues. Le nom de la nouvelle vue est identique à celui de la vue d’origine, avec le mot *Copy* ajouté à la fin. |
 | Plage de dates | Définissez un filtre de date et d’heure pour les données incluses dans la vue. Cette plage de dates est appliquée avant les plages de dates définies dans les requêtes dans la vue.  |

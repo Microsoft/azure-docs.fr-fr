@@ -17,12 +17,12 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 21558c4eccf0cd1f4e9e1d630f0e89dbb6f01c51
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 500d226fcb60646becc49144f206dcb0dee49bd8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60381159"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89278392"
 ---
 # <a name="determine-directory-synchronization-requirements"></a>Déterminer les exigences de synchronisation de répertoire
 La synchronisation consiste à fournir aux utilisateurs une identité dans le cloud basée sur leur identité locale. Qu'ils comptent utiliser le compte synchronisé pour l'authentification ou pour l'authentification fédérée, les utilisateurs doivent toujours avoir une identité dans le cloud.  Cette identité devra être gérée et mise à jour de temps en temps.  Les mises à jour peuvent prendre différentes formes, des modifications de titre aux modifications de mot de passe.  
@@ -64,7 +64,7 @@ Vous devez également déterminer la synchronisation des annuaires d'exigences e
   * Pourrez-vous ouvrir les ports de pare-feu requis pour prendre en charge la synchronisation ?
 * Avez-vous un plan de récupération d'urgence pour le serveur de synchronisation ?
 * Avez-vous un compte disposant des autorisations appropriées pour toutes les forêts avec lesquelles vous souhaitez synchroniser ?
-  * Si votre entreprise ne connaît pas la réponse à cette question, consultez la section « Autorisations pour la synchronisation de mot de passe » dans l'article [Installer le Service de synchronisation Azure Active Directory](https://msdn.microsoft.com/library/azure/dn757602.aspx#BKMK_CreateAnADAccountForTheSyncService) et déterminez si vous avez déjà un compte disposant de ces autorisations, ou si vous devez en créer un.
+  * Si votre entreprise ne connaît pas la réponse à cette question, consultez la section « Autorisations pour la synchronisation de mot de passe » dans l'article [Installer le Service de synchronisation Azure Active Directory](/previous-versions/azure/azure-services/dn757602(v=azure.100)#BKMK_CreateAnADAccountForTheSyncService) et déterminez si vous avez déjà un compte disposant de ces autorisations, ou si vous devez en créer un.
 * Si vous disposez d'une synchronisation à forêts multiples, le serveur de synchronisation est-il en mesure d'atteindre chaque forêt ?
 
 > [!NOTE]
@@ -77,4 +77,3 @@ Vous devez également déterminer la synchronisation des annuaires d'exigences e
 
 ## <a name="see-also"></a>Voir aussi
 [Présentation des considérations relatives à la conception](plan-hybrid-identity-design-considerations-overview.md)
-

@@ -1,23 +1,101 @@
 ---
-title: Tutoriel - Utiliser le traçage distribué avec Azure Spring Cloud
-description: Ce tutoriel montre comment utiliser le traçage distribué de Spring Cloud via Azure Application Insights
+title: Utiliser le suivi distribué avec Azure Spring Cloud
+description: Découvrez comment utiliser le suivi distribué de Spring Cloud par le biais d’Azure Application Insights
 author: bmitchell287
 ms.service: spring-cloud
-ms.topic: tutorial
+ms.topic: how-to
 ms.date: 10/06/2019
 ms.author: brendm
-ms.openlocfilehash: 0815aa084462d1b829d64cd7c5d6fa7cebf534fc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-java
+zone_pivot_groups: programming-languages-spring-cloud
+ms.openlocfilehash: a78aec8c18f3b89629bbf696de3a097397ac59bc
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78273206"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94337914"
 ---
 # <a name="use-distributed-tracing-with-azure-spring-cloud"></a>Utiliser le suivi distribué avec Azure Spring Cloud
 
-Avec les outils de suivi distribué d’Azure Spring Cloud, vous pouvez facilement déboguer et superviser les problèmes complexes. Azure Spring Cloud intègre Azure [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth) au service [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) d’Azure. Cette intégration fournit une fonctionnalité puissante de suivi distribué qui est disponible dans le portail Azure.
+Avec les outils de suivi distribué d’Azure Spring Cloud, vous pouvez facilement déboguer et superviser les problèmes complexes. Azure Spring Cloud intègre Azure [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth) au service [Application Insights](../azure-monitor/app/app-insights-overview.md) d’Azure. Cette intégration fournit une fonctionnalité puissante de suivi distribué qui est disponible dans le portail Azure.
 
-Dans cet article, vous apprendrez comment :
+::: zone pivot="programming-language-csharp"
+Dans cet article, vous allez apprendre à activer une application .NET Core Steeltoe pour utiliser le traçage distribué.
+
+## <a name="prerequisites"></a>Prérequis
+
+Pour suivre ces procédures, vous avez besoin d’une application Steeltoe déjà [préparée pour le déploiement sur Azure Spring Cloud](spring-cloud-tutorial-prepare-app-deployment.md).
+
+## <a name="dependencies"></a>Dépendances
+
+Pour Steeltoe 2.4.4, ajoutez les packages NuGet suivants :
+
+* [Steeltoe.Management.TracingCore](https://www.nuget.org/packages/Steeltoe.Management.TracingCore/)
+* [Steeltoe.Management.ExporterCore](https://www.nuget.org/packages/Microsoft.Azure.SpringCloud.Client/)
+
+Pour Steeltoe 3.0.0, ajoutez le package NuGet suivant :
+
+* [Steeltoe.Management.TracingCore](https://www.nuget.org/packages/Steeltoe.Management.TracingCore/)
+
+## <a name="update-startupcs"></a>Mettre à jour Startup.cs
+
+1. Pour Steeltoe 2.4.4, appelez `AddDistributedTracing` et `AddZipkinExporter` dans la méthode `ConfigureServices`.
+
+   ```csharp
+   public void ConfigureServices(IServiceCollection services)
+   {
+       services.AddDistributedTracing(Configuration);
+       services.AddZipkinExporter(Configuration);
+   }
+   ```
+
+   Pour Steeltoe 3.0.0, appelez `AddDistributedTracing` dans la méthode `ConfigureServices`.
+
+   ```csharp
+   public void ConfigureServices(IServiceCollection services)
+   {
+       services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+   }
+   ```
+
+1. Pour Steeltoe 2.4.4, appelez `UseTracingExporter` dans la méthode `Configure`.
+
+   ```csharp
+   public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+   {
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+        app.UseTracingExporter();
+   }
+   ```
+
+   Pour Steeltoe 3.0.0, aucune modification n’est requise dans la méthode `Configure`.
+
+## <a name="update-configuration"></a>Mettre à jour la configuration
+
+Ajoutez les paramètres suivants à la source de configuration qui sera utilisée lors de l’exécution de l’application dans Azure Spring Cloud :
+
+1. Définissez `management.tracing.alwaysSample` sur True.
+
+2. Si vous souhaitez afficher les étendues de suivi envoyées entre le serveur Eureka, le serveur de configuration et les applications utilisateur : définissez `management.tracing.egressIgnorePattern` sur /api/v2/spans|/v2/apps/. */permissions|/eureka/.* |/oauth/.*.
+
+Par exemple, *appSettings.json* comprend les propriétés suivantes :
+ 
+```json
+"management": {
+    "tracing": {
+      "alwaysSample": true,
+      "egressIgnorePattern": "/api/v2/spans|/v2/apps/.*/permissions|/eureka/.*|/oauth/.*"
+    }
+  }
+```
+
+Pour plus d’informations sur le traçage distribué dans les applications Steeltoe .NET Core, consultez [Traçage distribué](https://steeltoe.io/docs/3/tracing/distributed-tracing) dans la documentation de Steeltoe.
+::: zone-end
+::: zone pivot="programming-language-java"
+Dans cet article, vous apprendrez comment :
 
 > [!div class="checklist"]
 > * Activer le suivi distribué dans le portail Azure
@@ -27,8 +105,8 @@ Dans cet article, vous apprendrez comment :
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour suivre ce tutoriel, vous avez besoin d’un service Azure Spring Cloud déjà provisionné et en cours d’exécution. Suivez le [guide de démarrage rapide concernant le déploiement d’une application via Azure CLI](spring-cloud-quickstart-launch-app-cli.md) afin de provisionner et d’exécuter un service Azure Spring Cloud.
-    
+Pour suivre ces procédures, vous avez besoin d’un service Azure Spring Cloud déjà provisionné et en cours d’exécution. Effectuez le démarrage rapide [Déployer votre première application Azure Spring Cloud](spring-cloud-quickstart.md) pour approvisionner et exécuter un service Azure Spring Cloud.
+
 ## <a name="add-dependencies"></a>Ajout de dépendances
 
 1. Ajoutez la ligne suivante au fichier application.properties :
@@ -72,6 +150,7 @@ spring.sleuth.sampler.probability=0.5
 ```
 
 Si vous avez déjà créé et déployé une application, vous pouvez modifier le taux d’échantillonnage. Pour ce faire, ajoutez la ligne précédente en tant que variable d’environnement dans Azure CLI ou dans le portail Azure.
+::: zone-end
 
 ## <a name="enable-application-insights"></a>Activer Application Insights
 
@@ -84,15 +163,15 @@ Si vous avez déjà créé et déployé une application, vous pouvez modifier le
 
 ## <a name="view-the-application-map"></a>Ouvrir la Cartographie d’application
 
-Revenez à la page **Suivi distribué** et sélectionnez **Afficher la cartographie d’application**. Passez en revue la représentation visuelle de votre application et les paramètres de supervision. Pour savoir comment utiliser la cartographie d’application, consultez [Cartographie d’application : trier des applications distribuées](https://docs.microsoft.com/azure/azure-monitor/app/app-map).
+Revenez à la page **Suivi distribué** et sélectionnez **Afficher la cartographie d’application**. Passez en revue la représentation visuelle de votre application et les paramètres de supervision. Pour savoir comment utiliser la cartographie d’application, consultez [Cartographie d’application : trier des applications distribuées](../azure-monitor/app/app-map.md).
 
 ## <a name="use-search"></a>Utiliser la recherche
 
-Utilisez la fonction de recherche pour interroger certaines données de télémétrie. Dans la page **Suivi distribué**, sélectionnez **Rechercher**. Pour plus d’informations sur l’utilisation de la fonction de recherche, consultez [Utilisation de la recherche dans Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/diagnostic-search).
+Utilisez la fonction de recherche pour interroger certaines données de télémétrie. Dans la page **Suivi distribué**, sélectionnez **Rechercher**. Pour plus d’informations sur l’utilisation de la fonction de recherche, consultez [Utilisation de la recherche dans Application Insights](../azure-monitor/app/diagnostic-search.md).
 
 ## <a name="use-application-insights"></a>Utiliser Application Insights
 
-En plus des fonctionnalités de cartographie d’application et de recherche, Application Insights fournit des fonctions de supervision. Recherchez le nom de votre application dans le portail Azure, puis ouvrez une page Application Insights pour accéder aux informations de supervision. Pour plus d’informations sur l’utilisation de ces outils, consultez [Requêtes de journal Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/query-language).
+En plus des fonctionnalités de cartographie d’application et de recherche, Application Insights fournit des fonctions de supervision. Recherchez le nom de votre application dans le portail Azure, puis ouvrez une page Application Insights pour accéder aux informations de supervision. Pour plus d’informations sur l’utilisation de ces outils, consultez [Requêtes de journal Azure Monitor](/azure/data-explorer/kusto/query/).
 
 ## <a name="disable-application-insights"></a>Désactiver Application Insights
 
@@ -102,7 +181,4 @@ En plus des fonctionnalités de cartographie d’application et de recherche, Ap
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez appris ce qu’est le suivi distribué dans Azure Spring Cloud et vous avez vu comment l’activer. Pour savoir comment lier votre application à une base de données Azure Cosmos DB, passez au tutoriel suivant.
-
-> [!div class="nextstepaction"]
-> [En savoir plus sur la liaison à une base de données Azure Cosmos DB](spring-cloud-tutorial-bind-cosmos.md)
+Dans cet article, vous avez appris ce qu’est le suivi distribué dans Azure Spring Cloud et vous avez vu comment l’activer. Pour en savoir plus sur la liaison de services à une application, consultez [Lier une base de données Azure Cosmos DB à une application Azure Spring Cloud](spring-cloud-tutorial-bind-cosmos.md).

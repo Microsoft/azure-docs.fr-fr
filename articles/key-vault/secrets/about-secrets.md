@@ -10,12 +10,12 @@ ms.subservice: secrets
 ms.topic: overview
 ms.date: 09/04/2019
 ms.author: mbaldwin
-ms.openlocfilehash: eabfa03aa70f54a967fe256f694ef59ad0fe7ebe
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 7aa2feba5a2b2fa47bbb0c055a2f556b8997ab34
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81685450"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "82930469"
 ---
 # <a name="about-azure-key-vault-secrets"></a>À propos des secrets Azure Key Vault
 
@@ -26,6 +26,10 @@ Pour les développeurs, les API Key Vault acceptent et retournent des valeurs de
 Pour les données extrêmement sensibles, les clients doivent envisager des couches supplémentaires de protection des données. Un exemple serait de chiffrer les données à l’aide d’une clé de protection distincte avant le stockage dans Key Vault.  
 
 Key Vault prend également en charge un champ contentType pour les secrets. Les clients peuvent spécifier le type de contenu d’un secret pour simplifier l’interprétation des données du secret lors de leur récupération. La longueur maximale de ce champ est de 255 caractères. Il n’existe aucune valeur prédéfinie. L’utilisation suggérée est donnée à titre de conseil pour interpréter les données du secret. Par exemple, une implémentation peut stocker des mots de passe et des certificats en tant que secret. Ensuite, utilisez ce champ pour les différencier. Il n’existe aucune valeur prédéfinie.  
+
+## <a name="encryption"></a>Chiffrement
+
+Tous les secrets de votre Key Vault sont stockés sous forme chiffrée. Ce chiffrement est transparent et ne nécessite aucune action de la part de l’utilisateur. Le service Azure Key Vault chiffre vos secrets lorsque vous les ajoutez et les déchiffre automatiquement quand vous les lisez. La clé de chiffrement est propre à chaque coffre de clés.
 
 ## <a name="secret-attributes"></a>Attributs de secret
 

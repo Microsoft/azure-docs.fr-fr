@@ -10,14 +10,20 @@ ms.subservice: bing-spell-check
 ms.topic: quickstart
 ms.date: 12/16/2019
 ms.author: aahi
-ms.openlocfilehash: 1cda7032d5bfe58e9f8bcbdb8b18dd597a691441
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: bc0caaf30db0384da3fa9c5abea6360206a3fb8e
+ms.sourcegitcommit: beacda0b2b4b3a415b16ac2f58ddfb03dd1a04cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78273525"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97831973"
 ---
 # <a name="quickstart-check-spelling-with-the-bing-spell-check-sdk-for-c"></a>Démarrage rapide : Vérifier l’orthographe avec le kit SDK Vérification orthographique Bing pour C#
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Utilisez ce guide de démarrage rapide pour commencer la vérification orthographique avec le kit SDK Vérification orthographique Bing pour C#. Si l’outil Vérification orthographique Bing a une API REST compatible avec la plupart des langages de programmation, le kit SDK offre quant à lui un moyen facile d’intégrer le service à vos applications. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/samples/SpellCheck).
 
@@ -104,4 +110,4 @@ Créez et exécutez votre projet. Si vous utilisez Visual Studio, appuyez sur **
 > [Créer une application web monopage](tutorials/spellcheck.md)
 
 - [Qu’est-ce que l’API Vérification orthographique Bing ?](overview.md)
-- [Guide de référence du SDK C# de Vérification orthographique Bing](https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingspellcheck?view=azure-dotnet)
+- [Guide de référence du SDK C# de Vérification orthographique Bing](/dotnet/api/overview/azure/cognitiveservices/bing-spell-check-readme?view=azure-dotnet)

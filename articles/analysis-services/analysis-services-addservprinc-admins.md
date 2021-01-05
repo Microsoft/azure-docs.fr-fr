@@ -4,20 +4,23 @@ description: Découvrez comment ajouter un principal de service d’automatisati
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 05/19/2020
+ms.date: 07/07/2020
 ms.author: owend
 ms.reviewer: minewiskan
 ms.custom: fasttrack-edit
-ms.openlocfilehash: bc3e17ce5becf039703585167e1ef3aa825cf2ab
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: b1d5f8ec628245756c53e4dfeeecdeb3a4bebc2e
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697530"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93100726"
 ---
 # <a name="add-a-service-principal-to-the-server-administrator-role"></a>Ajouter un principal de service au rôle d’administrateur du serveur 
 
- Pour automatiser les tâches PowerShell sans assistance, un principal de service doit disposer des privilèges **Administrateur du serveur** sur le serveur Analysis Services géré. Cet article décrit comment ajouter un principal de service au rôle d’administrateurs du serveur sur un serveur Azure AS. Pour ce faire, vous pouvez utiliser SQL Server Management Studio ou un modèle Resource Manager.
+ Pour automatiser les tâches PowerShell sans assistance, un principal de service doit disposer des privilèges **Administrateur du serveur** sur le serveur Analysis Services géré. Cet article décrit comment ajouter un principal de service au rôle d’administrateurs du serveur sur un serveur Azure AS. Pour ce faire, vous pouvez utiliser SQL Server Management Studio ou un modèle Resource Manager. 
+
+> [!NOTE]
+> Les principaux de service doivent être ajoutés directement au rôle d’administrateur de serveur. L’ajout d’un principal de service à un groupe de sécurité, puis l’ajout de ce groupe de sécurité au rôle d’administrateur de serveur n’est pas pris en charge. 
 
 ## <a name="before-you-begin"></a>Avant de commencer
 Avant d’exécuter cette tâche, vous devez disposer d’un principal de service inscrit dans Azure Active Directory.
@@ -30,18 +33,18 @@ Avant d’exécuter cette tâche, vous devez disposer d’un principal de servic
 Vous pouvez configurer des administrateurs du serveur à l’aide de SQL Server Management Studio (SSMS). Pour effectuer cette tâche, vous devez disposer d’autorisations [Administrateur du serveur](analysis-services-server-admins.md) sur le serveur Azure AS. 
 
 1. Dans SSMS, connectez-vous à votre serveur Azure AS.
-2. Dans **Propriétés du serveur** > **Sécurité**, cliquez sur **Ajouter**.
-3. Dans **Sélectionnez un utilisateur ou un groupe**, recherchez votre application inscrite par nom, sélectionnez, puis cliquez sur **Ajouter**.
+2. Dans **Propriétés du serveur** > **Sécurité** , cliquez sur **Ajouter**.
+3. Dans **Sélectionnez un utilisateur ou un groupe** , recherchez votre application inscrite par nom, sélectionnez, puis cliquez sur **Ajouter**.
 
     ![Rechercher le compte de principal de service](./media/analysis-services-addservprinc-admins/aas-add-sp-ssms-picker.png)
 
 4. Vérifiez l’ID de compte de principal de service, puis cliquez sur **OK**.
     
-    ![Rechercher le compte de principal de service](./media/analysis-services-addservprinc-admins/aas-add-sp-ssms-add.png)
+    ![Capture d’écran montrant l’ID de compte de principal de service et mettant en évidence le bouton OK.](./media/analysis-services-addservprinc-admins/aas-add-sp-ssms-add.png)
 
 ## <a name="using-a-resource-manager-template"></a>Utilisation d’un modèle Resource Manager
 
-Vous pouvez également configurer des administrateurs du serveur en déployant le serveur Analysis Services à l’aide d’un modèle Azure Resource Manager. L’identité qui exécute le déploiement doit appartenir au rôle **Contributeur** pour la ressource dans le [contrôle d’accès en fonction du rôle (RBAC) Azure](../role-based-access-control/overview.md).
+Vous pouvez également configurer des administrateurs du serveur en déployant le serveur Analysis Services à l’aide d’un modèle Azure Resource Manager. L’identité qui exécute le déploiement doit appartenir au rôle **Contributeur** pour la ressource dans le [contrôle d’accès en fonction du rôle (Azure RBAC)](../role-based-access-control/overview.md).
 
 > [!IMPORTANT]
 > Le principal du service doit être ajouté au format `app:{service-principal-client-id}@{azure-ad-tenant-id}`.
@@ -114,7 +117,5 @@ Ensuite, vous utilisez cet ID client conjointement avec l’ID de locataire pour
 
 ## <a name="related-information"></a>Informations connexes
 
-* [Télécharger le module SQL Server PowerShell](https://docs.microsoft.com/sql/ssms/download-sql-server-ps-module)   
-* [Télécharger SSMS](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms)   
-
-
+* [Télécharger le module SQL Server PowerShell](/sql/ssms/download-sql-server-ps-module)   
+* [Télécharger SSMS](/sql/ssms/download-sql-server-management-studio-ssms)

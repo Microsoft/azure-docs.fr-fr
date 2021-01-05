@@ -3,12 +3,12 @@ title: Configuration d’Azure Active Directory pour l’authentification des cl
 description: Découvrez comment configurer Azure Active Directory (Azure AD) pour authentifier les clients des clusters Service Fabric.
 ms.topic: conceptual
 ms.date: 6/28/2019
-ms.openlocfilehash: 28c4c65cfcc77607dfe9a463a09ecd10389a6eca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 537a81a090828d3fcc9dde6032f1d4eb2df9b4e4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78193376"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86258773"
 ---
 # <a name="set-up-azure-active-directory-for-client-authentication"></a>Configuration d’Azure Active Directory pour l’authentification des clients
 
@@ -125,7 +125,7 @@ Pour connecter le cluster Service Fabric, utilisez l’exemple de commande Power
 Connect-ServiceFabricCluster -ConnectionEndpoint <endpoint> -KeepAliveIntervalInSec 10 -AzureActiveDirectory -ServerCertThumbprint <thumbprint>
 ```
 
-Pour plus d’informations, consultez l’applet de commande [Connect-ServiceFabricCluster](https://docs.microsoft.com/powershell/module/servicefabric/connect-servicefabriccluster).
+Pour plus d’informations, consultez l’applet de commande [Connect-ServiceFabricCluster](/powershell/module/servicefabric/connect-servicefabriccluster).
 
 ### <a name="can-i-reuse-the-same-azure-ad-tenant-in-multiple-clusters"></a>Puis-je utiliser le même locataire Azure AD pour plusieurs clusters ?
 Oui. Cependant, n’oubliez pas d’ajouter l’URL de Service Fabric Explorer à votre application en cluster (web). Si vous ne le faites pas, Service Fabric Explorer ne fonctionnera pas.

@@ -1,18 +1,15 @@
 ---
 title: Reprise d’activité pour les rubriques personnalisées dans Event Grid
 description: Ce tutoriel vous aide à configurer votre architecture de gestion des événements en vue d’une reprise d’activité, si le service Event Grid devient non sain dans une région.
-services: event-grid
-author: banisadr
-ms.service: event-grid
 ms.topic: tutorial
-ms.date: 01/21/2020
-ms.author: babanisa
-ms.openlocfilehash: 87f8f79e2cf125fa5735653153d8fcaa781f5200
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/07/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e37cb6a0679ee2e249de4ed8fa31c40d5082ea4a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76511516"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020141"
 ---
 # <a name="build-your-own-disaster-recovery-for-custom-topics-in-event-grid"></a>Créer votre propre système de reprise d’activité pour les rubriques personnalisées dans Event Grid
 La récupération d’urgence se concentre sur la récupération des fonctionnalités des applications en cas de perte grave. Ce tutoriel vous aide à configurer votre architecture de gestion des événements en vue d’une reprise d’activité, si le service Event Grid devient non sain dans une région.
@@ -30,7 +27,7 @@ Pour simplifier les tests, déployez une [application web prédéfinie](https://
 
 1. Sélectionnez **Déployer sur Azure** pour déployer la solution sur votre abonnement. Dans le portail Azure, indiquez des valeurs pour les paramètres.
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png" alt="Button to Deploy to Aquent." /></a>
 
 1. Le déploiement peut prendre quelques minutes. Une fois le déploiement réussi, affichez votre application web pour vérifier qu’elle s’exécute. Dans un navigateur web, accédez à : `https://<your-site-name>.azurewebsites.net`
 Prenez note de cette URL, car vous en aurez besoin ultérieurement.
@@ -75,7 +72,7 @@ Tout d’abord, créez deux rubriques Event Grid. Il s’agira de la rubrique pr
    * Sélectionnez un webhook de type de point de terminaison.
    * Définissez le point de terminaison sur l’URL d’événement de votre récepteur d’événements, qui doit ressembler à ceci : `https://<your-event-reciever>.azurewebsites.net/api/updates`
 
-     ![Abonnement d’événements principal Event Grid](./media/custom-disaster-recovery/create-primary-es.png)
+     ![Capture d’écran montrant la page « Créer un abonnement aux événements - De base » avec les valeurs « Nom », « Type de point de terminaison » et « Point de terminaison » mises en évidence.](./media/custom-disaster-recovery/create-primary-es.png)
 
 1. Répétez la même procédure pour créer votre rubrique et votre abonnement secondaire. Cette fois-ci, remplacez le suffixe « -principal(e) » par le suffixe « -secondaire » pour faciliter le suivi. Enfin, placez-le dans une autre région Azure. Même si vous pouvez le placer n’importe où, il est recommandé d’utiliser les [régions associées Azure](../best-practices-availability-paired-regions.md). Le fait de placer la rubrique et l’abonnement secondaires dans une autre région garantit la transmission des nouveaux événements, même lorsque la région primaire est indisponible.
 
@@ -211,4 +208,4 @@ De même, vous pouvez implémenter la logique de restauration automatique en fon
 
 - En savoir plus sur la [réception des événements sur un point de terminaison HTTP](./receive-events.md)
 - En savoir plus sur le [routage des événements vers des connexions hybrides](./custom-event-to-hybrid-connection.md)
-- En savoir plus sur la [reprise d’activité à l’aide d’Azure DNS et de Traffic Manager](https://docs.microsoft.com/azure/networking/disaster-recovery-dns-traffic-manager)
+- En savoir plus sur la [reprise d’activité à l’aide d’Azure DNS et de Traffic Manager](../networking/disaster-recovery-dns-traffic-manager.md)

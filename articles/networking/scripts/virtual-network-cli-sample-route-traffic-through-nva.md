@@ -12,14 +12,15 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 07/07/2017
 ms.author: kumud
-ms.openlocfilehash: 05581114ce54ed8e92c6457c95f73b20304e419e
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: a349f8160e8ab5b6459b2085e21e7368570c57db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521525"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87503835"
 ---
-# <a name="route-traffic-through-a-network-virtual-appliance"></a>Acheminer le trafic via une appliance virtuelle réseau
+# <a name="use-an-azure-cli-script-to-route-traffic-through-a-network-virtual-appliance"></a>Utiliser un script Azure CLI pour router le trafic via une appliance virtuelle réseau
 
 Cet exemple de script permet de créer un réseau virtuel avec des sous-réseaux frontaux et principaux. Il crée également une machine virtuelle sur laquelle le transfert IP est activé pour acheminer le trafic entre les deux sous-réseaux. Après avoir exécuté le script, vous pouvez déployer un logiciel réseau, telle qu’une application de pare-feu, sur la machine virtuelle.
 

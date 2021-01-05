@@ -6,15 +6,15 @@ ms.author: mimckitt
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
 ms.subservice: faq
-ms.date: 05/24/2019
+ms.date: 06/30/2020
 ms.reviewer: jushiman
 ms.custom: mimckitt
-ms.openlocfilehash: a3074fdd10ef960a1c0b58b973d57da14d888af4
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 8170cfcbbf200c6ba5030aff5716f46b537d8c97
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200158"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016707"
 ---
 # <a name="azure-virtual-machine-scale-sets-faqs"></a>FAQ sur les groupes de machines virtuelles identiques Azure
 
@@ -71,15 +71,15 @@ Oui. Pour plus d’informations, consultez le [document relatif aux zones des gr
 
 ### <a name="what-are-best-practices-for-azure-autoscale"></a>Quelles sont les meilleures pratiques pour la mise à l’échelle automatique d’Azure ?
 
-Pour connaître les meilleures pratiques pour la mise à l’échelle automatique, consultez [Meilleures pratiques pour la mise à l’échelle automatique des machines virtuelles](https://docs.microsoft.com/azure/monitoring-and-diagnostics/insights-autoscale-best-practices).
+Pour connaître les meilleures pratiques pour la mise à l’échelle automatique, consultez [Meilleures pratiques pour la mise à l’échelle automatique des machines virtuelles](../azure-monitor/platform/autoscale-best-practices.md).
 
 ### <a name="where-do-i-find-metric-names-for-autoscaling-that-uses-host-based-metrics"></a>Où trouver les noms des métriques pour la mise à l’échelle automatique utilisant des métriques basées sur les hôtes ?
 
-Pour obtenir les noms des métriques pour la mise à l’échelle automatique utilisant des métriques basées sur les hôtes, consultez [Métriques prises en charge avec Azure Monitor](https://azure.microsoft.com/documentation/articles/monitoring-supported-metrics/).
+Pour obtenir les noms des métriques pour la mise à l’échelle automatique utilisant des métriques basées sur les hôtes, consultez [Métriques prises en charge avec Azure Monitor](../azure-monitor/platform/metrics-supported.md).
 
 ### <a name="are-there-any-examples-of-autoscaling-based-on-an-azure-service-bus-topic-and-queue-length"></a>Existe-t-il des exemples de mise à l’échelle automatique basée sur une rubrique Azure Service Bus et une longueur de file d’attente ?
 
-Oui. Pour obtenir des exemples de mise à l’échelle automatique basée sur une rubrique Azure Service Bus et une longueur de file d’attente, consultez [Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](https://azure.microsoft.com/documentation/articles/insights-autoscale-common-metrics/).
+Oui. Pour obtenir des exemples de mise à l’échelle automatique basée sur une rubrique Azure Service Bus et une longueur de file d’attente, consultez [Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](../azure-monitor/platform/autoscale-common-metrics.md).
 
 Pour une file d’attente Service Bus, utilisez le JSON suivant :
 
@@ -104,9 +104,9 @@ Remplacez les exemples de valeurs par les URI (Uniform Resource Identifiers) de 
 
 Vous pouvez créer un paramètre de mise à l’échelle automatique sur une machine virtuelle pour utiliser les métriques au niveau de l’hôte ou les métriques basées sur le système d’exploitation invité.
 
-Pour obtenir la liste des métriques prises en charge, consultez [Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/insights-autoscale-common-metrics).
+Pour obtenir la liste des métriques prises en charge, consultez [Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](../azure-monitor/platform/autoscale-common-metrics.md).
 
-Pour obtenir un exemple complet pour les groupes de machines virtuelles identiques, consultez [Configuration avancée de la mise à l’échelle automatique à l’aide de modèles Resource Manager pour les groupes de machines virtuelles identiques](https://docs.microsoft.com/azure/monitoring-and-diagnostics/insights-advanced-autoscale-virtual-machine-scale-sets).
+Pour obtenir un exemple complet pour les groupes de machines virtuelles identiques, consultez [Configuration avancée de la mise à l’échelle automatique à l’aide de modèles Resource Manager pour les groupes de machines virtuelles identiques](../azure-monitor/platform/autoscale-virtual-machine-scale-sets.md).
 
 L’exemple utilise la métrique du processeur au niveau de l’hôte et une métrique de comptage de messages.
 
@@ -114,13 +114,13 @@ L’exemple utilise la métrique du processeur au niveau de l’hôte et une mé
 
 ### <a name="how-do-i-set-alert-rules-on-a-virtual-machine-scale-set"></a>Comment définir des règles d’alerte sur un groupe de machines virtuelles identiques ?
 
-Vous pouvez créer des alertes sur des métriques pour les groupes de machines virtuelles identiques via PowerShell ou l’interface CLI Azure. Pour plus d’informations, consultez [Exemples de démarrage rapide Azure Monitor PowerShell](https://azure.microsoft.com/documentation/articles/insights-powershell-samples/#create-alert-rules) et [Exemples de démarrage rapide de l’interface CLI multiplateforme pour Azure Monitor](https://azure.microsoft.com/documentation/articles/insights-cli-samples/#work-with-alerts).
+Vous pouvez créer des alertes sur des métriques pour les groupes de machines virtuelles identiques via PowerShell ou l’interface CLI Azure. Pour plus d’informations, consultez [Exemples de démarrage rapide Azure Monitor PowerShell](../azure-monitor/samples/powershell-samples.md#create-metric-alerts) et [Exemples de démarrage rapide de l’interface CLI multiplateforme pour Azure Monitor](../azure-monitor/samples/cli-samples.md#work-with-alerts).
 
 La valeur TargetResourceId du groupe de machines virtuelles identiques ressemble à ceci :
 
 /subscriptions/yoursubscriptionid/resourceGroups/yourresourcegroup/providers/Microsoft.Compute/virtualMachineScaleSets/yourvmssname
 
-Vous pouvez choisir n’importe quel compteur de performances de machine virtuelle en tant que métrique sur laquelle définir une alerte. Pour plus d’informations, consultez [Métriques du système d’exploitation invité pour les machines virtuelles Windows Resource Manager](https://azure.microsoft.com/documentation/articles/insights-autoscale-common-metrics/#guest-os-metrics-resource-manager-based-windows-vms) et [Métriques du système d’exploitation invité pour les machines virtuelles Linux](https://azure.microsoft.com/documentation/articles/insights-autoscale-common-metrics/#guest-os-metrics-linux-vms) dans l’article[Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](https://azure.microsoft.com/documentation/articles/insights-autoscale-common-metrics/).
+Vous pouvez choisir n’importe quel compteur de performances de machine virtuelle en tant que métrique sur laquelle définir une alerte. Pour plus d’informations, consultez [Métriques du système d’exploitation invité pour les machines virtuelles Windows Resource Manager](../azure-monitor/platform/autoscale-common-metrics.md#guest-os-metrics-for-resource-manager-based-windows-vms) et [Métriques du système d’exploitation invité pour les machines virtuelles Linux](../azure-monitor/platform/autoscale-common-metrics.md#guest-os-metrics-linux-vms) dans l’article[Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](../azure-monitor/platform/autoscale-common-metrics.md).
 
 ### <a name="how-do-i-set-up-autoscale-on-a-virtual-machine-scale-set-by-using-powershell"></a>Comment configurer la mise à l’échelle automatique sur un groupe de machines virtuelles identiques à l’aide de PowerShell ?
 
@@ -159,7 +159,7 @@ Utilisez le JSON suivant :
 
 Le code prend en charge Windows et Linux.
 
-Pour plus d’informations, consultez [Création ou mise à jour d’un groupe de machines virtuelles identiques](https://msdn.microsoft.com/library/mt589035.aspx).
+Pour plus d’informations, consultez [Création ou mise à jour d’un groupe de machines virtuelles identiques](/rest/api/compute/virtualmachinescalesets/createorupdate).
 
 
 ### <a name="how-do-i-use-self-signed-certificates-provisioned-for-azure-service-fabric-clusters"></a>Comment faire pour utiliser des certificats auto-signés approvisionnés pour les clusters Azure Service Fabric
@@ -169,7 +169,7 @@ Pour obtenir l’exemple le plus récent, utilisez l’instruction Azure CLI sui
 az sf cluster create -h
 ```
 
-Vous ne pouvez pas utiliser de certificats auto-signés pour une approbation distribuée fournie par une autorité de certification. Vous ne pouvez pas non plus les utiliser avec un cluster Service Fabric destiné à héberger des solutions de production d’entreprise. Pour obtenir de l’aide supplémentaire sur la sécurité dans Service Fabric, passez en revue [Bonnes pratiques pour la sécurité Azure Service Fabric](https://docs.microsoft.com/azure/security/fundamentals/service-fabric-best-practices) et [Scénarios de sécurité d’un cluster Service Fabric](https://azure.microsoft.com/documentation/articles/service-fabric-cluster-security/).
+Vous ne pouvez pas utiliser de certificats auto-signés pour une approbation distribuée fournie par une autorité de certification. Vous ne pouvez pas non plus les utiliser avec un cluster Service Fabric destiné à héberger des solutions de production d’entreprise. Pour obtenir de l’aide supplémentaire sur la sécurité dans Service Fabric, passez en revue [Bonnes pratiques pour la sécurité Azure Service Fabric](../security/fundamentals/service-fabric-best-practices.md) et [Scénarios de sécurité d’un cluster Service Fabric](../service-fabric/service-fabric-cluster-security.md).
 
 ### <a name="can-i-specify-an-ssh-key-pair-to-use-for-ssh-authentication-with-a-linux-virtual-machine-scale-set-from-a-resource-manager-template"></a>Puis-je spécifier une paire de clés SSH à utiliser pour l’authentification SSH avec un groupe de machines virtuelles identiques Linux à partir d’un modèle Resource Manager ?
 
@@ -197,7 +197,7 @@ Incluez **osProfile** dans votre modèle :
 
 Ce bloc JSON est utilisé dans le [modèle de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/blob/master/101-vm-sshkey/azuredeploy.json).
 
-Pour plus d’informations, consultez [Création ou mise à jour d’un groupe de machines virtuelles identiques](https://msdn.microsoft.com/library/azure/mt589035.aspx#linuxconfiguration).
+Pour plus d’informations, consultez [Création ou mise à jour d’un groupe de machines virtuelles identiques](/rest/api/compute/virtualmachinescalesets/createorupdate#linuxconfiguration).
 
 ### <a name="how-do-i-remove-deprecated-certificates"></a>Comment supprimer des certificats obsolètes ?
 
@@ -234,13 +234,13 @@ Pour obtenir un exemple, consultez [le modèle de démarrage rapide GitHub 101-v
 
 ### <a name="when-i-run-update-azvmss-after-adding-more-than-one-certificate-from-the-same-key-vault-i-see-the-following-message"></a>Lorsque j’exécute `Update-AzVmss` après l’ajout de plusieurs certificats à partir du même coffre de clés, je reçois le message suivant :
 
->Update-AzVmss : La zone List secret (Afficher la liste des secrets) contient des instances répétées de /subscriptions/\<id-mon-abonnement>/resourceGroups/internal-rg-dev/providers/Microsoft.KeyVault/vaults/internal-keyvault-dev, ce qui n’est pas autorisé.
+>Update-AzVmss : List secret contient des instances répétées de /subscriptions/\<my-subscription-id>/resourceGroups/internal-rg-dev/providers/Microsoft.KeyVault/vaults/internal-keyvault-dev, ce qui n’est pas autorisé.
 
 Cela peut se produire si vous essayez d’ajouter à nouveau le même coffre au lieu d’utiliser un nouveau certificat de coffre pour le coffre source existant. La commande `Add-AzVmssSecret` ne fonctionne pas correctement si vous ajoutez des secrets supplémentaires.
 
 Pour ajouter plus de secrets à partir du même coffre de clés, mettez à jour la liste $vmss.properties.osProfile.secrets[0].vaultCertificates.
 
-Pour connaître la structure d’entrée attendue, consultez [Création ou mise à jour d’un groupe de machines virtuelles](https://msdn.microsoft.com/library/azure/mt589035.aspx).
+Pour connaître la structure d’entrée attendue, consultez [Création ou mise à jour d’un groupe de machines virtuelles](/rest/api/compute/virtualmachinescalesets/createorupdate).
 
 Recherchez le secret dans l’objet du groupe de machines virtuelles identiques qui se trouve dans le coffre de clés. Ensuite, ajoutez votre référence de certificat (l’URL et le nom du magasin des secrets) dans la liste associée au coffre.
 
@@ -268,7 +268,7 @@ Les certificats sont ajoutés à toutes vos machines virtuelles, mêmes les pré
 
 ### <a name="where-do-i-put-certificates-for-linux-vms"></a>Où dois-je placer les certificats pour les machines virtuelles Linux ?
 
-Pour savoir comment déployer des certificats pour les machines virtuelles Linux, consultez [Déployer des certificats sur les machines virtuelles à partir de coffres de clés gérés par les clients](https://blogs.technet.microsoft.com/kv/2015/07/14/deploy-certificates-to-vms-from-customer-managed-key-vault/).
+Pour savoir comment déployer des certificats pour les machines virtuelles Linux, consultez [Déployer des certificats sur les machines virtuelles à partir de coffres de clés gérés par les clients](/archive/blogs/kv/deploy-certificates-to-vms-from-customer-managed-key-vault).
 
 ### <a name="how-do-i-add-a-new-vault-certificate-to-a-new-certificate-object"></a>Comment ajouter un nouveau certificat de coffre à un nouvel objet de certificat ?
 
@@ -304,7 +304,7 @@ Si vous créez une machine virtuelle, puis mettez à jour votre secret dans le c
 
 Pour déployer des clés publiques .cer dans un groupe de machines virtuelles identiques, vous pouvez générer un fichier .pfx qui contient uniquement des fichiers .cer. Pour ce faire, utilisez `X509ContentType = Pfx`. Par exemple, chargez le fichier .cer en tant qu’objet x509Certificate2 dans C# ou PowerShell, puis appelez la méthode.
 
-Pour plus d’informations, consultez [Méthode X509Certificate.Export (X509ContentType, chaîne)](https://msdn.microsoft.com/library/24ww6yzk(v=vs.110.aspx)).
+Pour plus d’informations, consultez [Méthode X509Certificate.Export (X509ContentType, chaîne)](/dotnet/api/system.security.cryptography.x509certificates.x509certificate.export?view=netcore-3.1#system_security_cryptography_x509certificates_x509certificate_export_system_security_cryptography_x509certificates_x509contenttype_system_string_).
 
 ### <a name="how-do-i-pass-in-certificates-as-base64-strings"></a>Comment faire pour passer des certificats en tant que chaînes base64 ?
 
@@ -334,7 +334,7 @@ Du point de vue de la conformité, les groupes de machines virtuelles identiques
 
 Pour plus d’informations, consultez le [Centre de gestion de la confidentialité de Microsoft](https://www.microsoft.com/TrustCenter/Compliance/PCI).
 
-### <a name="does-managed-identities-for-azure-resources-work-with-virtual-machine-scale-sets"></a>Les [identités managées pour ressources Azure](https://docs.microsoft.com/azure/active-directory/msi-overview) fonctionnent-elles avec des groupes de machines virtuelles identiques ?
+### <a name="does-managed-identities-for-azure-resources-work-with-virtual-machine-scale-sets"></a>Les [identités managées pour ressources Azure](../active-directory/managed-identities-azure-resources/overview.md) fonctionnent-elles avec des groupes de machines virtuelles identiques ?
 
 Oui. Vous pouvez voir des exemples de modèles MSI dans les modèles de démarrage rapide Azure pour [Linux](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-msi) et [Windows](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-msi).
 
@@ -436,7 +436,7 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 
 ### <a name="how-do-i-execute-a-custom-script-thats-hosted-in-a-private-storage-account"></a>Comment faire pour exécuter un script personnalisé hébergé dans un compte de stockage privé ?
 
-Pour exécuter un script personnalisé qui est hébergé dans un compte de stockage privé, configurez les paramètres protégés avec le nom et la clé du compte de stockage. Pour plus d’informations, voir [Custom Script Extension](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-extensions-customscript/#template-example-for-a-windows-vm-with-protected-settings) (Extension de script personnalisé).
+Pour exécuter un script personnalisé qui est hébergé dans un compte de stockage privé, configurez les paramètres protégés avec le nom et la clé du compte de stockage. Pour plus d’informations, voir [Custom Script Extension](../virtual-machines/extensions/custom-script-windows.md?toc=/azure/virtual-machines/windows/toc.json#property-managedidentity) (Extension de script personnalisé).
 
 ## <a name="passwords"></a>Mots de passe
 
@@ -448,7 +448,7 @@ Il existe deux principales façons de changer le mot de passe pour les machines 
 
     Mettez à jour les informations d’identification d’administrateur directement dans le modèle de groupe identique (par exemple en utilisant Azure Resource Explorer, PowerShell ou l’interface CLI). Une fois que le groupe identique est mis à jour, toutes les nouvelles machines virtuelles disposent des nouvelles informations d’identification. Les machines virtuelles existantes ont les nouvelles informations d’identification uniquement si elles sont réinitialisées.
 
-- Réinitialisez le mot de passe à l’aide des extensions d’accès aux machines virtuelles. Veillez à respecter les exigences de mot de passe, telles qu’elles sont décrites [ici](https://docs.microsoft.com/azure/virtual-machines/windows/faq#what-are-the-password-requirements-when-creating-a-vm).
+- Réinitialisez le mot de passe à l’aide des extensions d’accès aux machines virtuelles. Veillez à respecter les exigences de mot de passe, telles qu’elles sont décrites [ici](../virtual-machines/windows/faq.md#what-are-the-password-requirements-when-creating-a-vm).
 
     Utilisez l’exemple PowerShell suivant :
 
@@ -635,7 +635,7 @@ Oui, vous pouvez déplacer des ressources d’un groupe identique vers un nouvel
 
 ### <a name="how-to-i-update-my-virtual-machine-scale-set-to-a-new-image-how-do-i-manage-patching"></a>Comment mettre à jour mon groupe de machines virtuelles identiques sur une nouvelle image ? Comment gérer la mise à jour corrective ?
 
-Pour mettre à jour votre groupe de machines virtuelles identiques sur une nouvelle image et gérer la mise à jour corrective, consultez [Mettre à niveau un groupe de machines virtuelles identiques](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set).
+Pour mettre à jour votre groupe de machines virtuelles identiques sur une nouvelle image et gérer la mise à jour corrective, consultez [Mettre à niveau un groupe de machines virtuelles identiques](./virtual-machine-scale-sets-upgrade-scale-set.md).
 
 ### <a name="can-i-use-the-reimage-operation-to-reset-a-vm-without-changing-the-image-that-is-i-want-reset-a-vm-to-factory-settings-rather-than-to-a-new-image"></a>Puis-je utiliser l’opération de réinitialisation pour réinitialiser une machine virtuelle sans modifier l’image ? (Autrement dit, je veux réinitialiser une machine virtuelle sur les paramètres d’usine plutôt qu’une nouvelle image.)
 

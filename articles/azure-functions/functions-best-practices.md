@@ -6,11 +6,11 @@ ms.topic: conceptual
 ms.date: 12/17/2019
 ms.custom: H1Hack27Feb2017
 ms.openlocfilehash: a41a5828a82d81c5e7e8749fee70cd15e17bb9d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235253"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84697688"
 ---
 # <a name="optimize-the-performance-and-reliability-of-azure-functions"></a>Optimisation des performances et de la fiabilité d’Azure Functions
 

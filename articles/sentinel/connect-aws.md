@@ -1,6 +1,6 @@
 ---
 title: Connecter AWS CloudTrail à Azure Sentinel | Microsoft Docs
-description: Découvrez comment connecter les données AWS CloudTrail à Azure Sentinel.
+description: Utilisez le connecteur AWS pour déléguer l’accès à Azure Sentinel à vos journaux de ressources AWS, créant une relation d’approbation entre AWS CloudTrail et Azure Sentinel.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -9,28 +9,31 @@ editor: ''
 ms.service: azure-sentinel
 ms.subservice: azure-sentinel
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/30/2019
+ms.date: 05/27/2020
 ms.author: yelevin
-ms.openlocfilehash: 5cbef1f31ea7088d4fab4888f5630af1b765a910
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a7405824d2477d2d39c45a56ae545e58a090c321
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77588652"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436604"
 ---
 # <a name="connect-azure-sentinel-to-aws-cloudtrail"></a>Connecter Azure Sentinel à AWS CloudTrail
 
 Utilisez le connecteur AWS pour diffuser tous vos événements AWS CloudTrail vers Azure Sentinel. Ce processus de connexion délègue l’accès pour Azure Sentinel à vos journaux de ressources AWS, créant une relation d’approbation entre AWS CloudTrail et Azure Sentinel. Pour ce faire, un rôle est créé sur AWS, qui autorise Azure Sentinel à accéder à vos journaux d’activité AWS.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+> [!NOTE]
+> AWS CloudTrail dispose de [limitations intégrées](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html) dans son API LookupEvents. Il n'autorise pas plus de deux transactions par seconde (TPS) par compte, et chaque requête peut renvoyer un maximum de 50 enregistrements. Par conséquent, si un seul locataire génère constamment plus de 100 enregistrements par seconde dans une région, des backlogs et des retards d'ingestion des données en résulteront.
+
+## <a name="prerequisites"></a>Prérequis
 
 Vous devez disposer de l’autorisation d’écriture sur l’espace de travail Azure Sentinel.
 
 > [!NOTE]
-> Azure Sentinel collecte les événements CloudTrail de toutes les régions. Il vous est conseillé de ne pas diffuser les événements d’une région à une autre.
+> Azure Sentinel collecte les événements de gestion CloudTrail de toutes les régions. Il vous est conseillé de ne pas diffuser les événements d’une région à une autre.
 
 ## <a name="connect-aws"></a>Connecter AWS 
 
@@ -77,11 +80,11 @@ Vous devez disposer de l’autorisation d’écriture sur l’espace de travail 
 
 1. Pour utiliser le schéma pertinent dans Log Analytics pour les événements AWS, recherchez **AWSCloudTrail**.
 
-
+    > [!IMPORTANT]
+    > À compter du 1er décembre 2020, le champ **AwsRequestId** a été remplacé par le champ **AwsRequestId_** (remarquez l’ajout du trait de soulignement). Les données de l’ancien champ **AwsRequestId** seront conservées jusqu’à la fin de la période spécifiée de rétention des données du client.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Dans ce document, vous avez appris à connecter AWS CloudTrail à Azure Sentinel. Pour en savoir plus sur Azure Sentinel, voir les articles suivants :
 - Découvrez comment [avoir une visibilité sur vos données et les menaces potentielles](quickstart-get-visibility.md).
 - Prise en main de la [détection des menaces avec Azure Sentinel](tutorial-detect-threats-built-in.md).
 - [Utilisez des classeurs](tutorial-monitor-your-data.md) pour superviser vos données.
-

@@ -1,19 +1,20 @@
 ---
 title: Se connecter à un service WFS (Web Feature Service) | Microsoft Azure Maps
 description: Découvrez comment vous connecter à un service WFS, puis interroger celui-ci à l’aide du Kit de développement logiciel (SDK) web Azure Maps et du module d’E/S spatiales.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 03/03/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 8b511395eb61e8845aaa11e5ca7a490dc461424d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 75a7da41e4f0d5356ca135eb3cb4cbe5f29e8116
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334199"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891446"
 ---
 # <a name="connect-to-a-wfs-service"></a>Se connecter à un service WFS
 
@@ -26,7 +27,7 @@ Les caractéristiques suivantes sont prises en charge par la classe `WfsClient`�
 - Les demandes sont effectuées uniquement à l’aide de `HTTP GET`.
 - Opérations prises en charge :
 
-    | | |
+    | Opération | Description |
     | :-- | :-- |
     | GetCapabilities | Génère un document de métadonnées avec des paramètres et des opérations WFS valides |
     | GetFeature | Retourne une sélection de caractéristiques à partir d’une source de données |
@@ -109,10 +110,10 @@ client = new atlas.io.ogc.WfsClient({
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [WfsClient](https://docs.microsoft.com/JavaScript/api/azure-maps-spatial-io/atlas.io.ogc.wfsclient)
+> [WfsClient](/JavaScript/api/azure-maps-spatial-io/atlas.io.ogc.wfsclient)
 
 > [!div class="nextstepaction"]
-> [WfsServiceOptions](https://docs.microsoft.com/JavaScript/api/azure-maps-spatial-io/atlas.wfsserviceoptions)
+> [WfsServiceOptions](/JavaScript/api/azure-maps-spatial-io/atlas.wfsserviceoptions)
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 

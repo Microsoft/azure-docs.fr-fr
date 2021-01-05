@@ -1,6 +1,6 @@
 ---
-title: Connecter des données F5 à Azure Sentinel | Microsoft Docs
-description: Découvrez comment connecter des données F5 à Azure Sentinel.
+title: Connecter des données ASM F5 à Azure Sentinel | Microsoft Docs
+description: Découvrez comment utiliser le connecteur de données ASM F5 pour tirer vos journaux ASM F5 dans Azure Sentinel. Affichez les données de l’affichage ASM F5 dans des classeurs, créez des alertes et améliorez l’investigation.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -10,25 +10,25 @@ ms.assetid: 0001cad6-699c-4ca9-b66c-80c194e439a5
 ms.service: azure-sentinel
 ms.subservice: azure-sentinel
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/30/2019
+ms.date: 05/20/2020
 ms.author: yelevin
-ms.openlocfilehash: 6f33cecca1c67f91d0f2be64ab156f45ee500521
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 81a0f0e01827c48518f2eb1fba062e9e6536d9df
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77588261"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94655695"
 ---
-# <a name="connect-f5-to-azure-sentinel"></a>Connecter F5 à Azure Sentinel
+# <a name="connect-f5-asm-to-azure-sentinel"></a>Connecter ASM F5 à Azure Sentinel
 
-Cet article explique comment connecter votre appliance F5 à Azure Sentinel. Le connecteur de données F5 vous permet de connecter facilement vos journaux F5 à Azure Sentinel, de consulter des tableaux de bord, de créer des alertes personnalisées et d'améliorer les enquêtes. L'utilisation de F5 sur Azure Sentinel vous permettra d'obtenir davantage d'informations sur l'utilisation d'Internet au sein de votre organisation et améliorera ses fonctionnalités de sécurité. 
+Cet article explique comment utiliser le connecteur de données ASM F5 pour tirer (pull) facilement vos journaux ASM F5 dans Azure Sentinel. Cela vous permet d’afficher des données ASM F5 dans des classeurs, de les utiliser pour créer des alertes personnalisées et de les incorporer pour améliorer l’investigation. Les données ASM F5 dans Azure Sentinel vous permettent d'obtenir davantage d'informations sur la sécurité de l’application web au sein de votre organisation et améliorent vos fonctionnalités d’opérations de sécurité. 
 
-## <a name="configure-your-f5-to-send-cef-messages"></a>Configurer votre appliance F5 pour envoyer des messages CEF
+## <a name="configure-your-f5-asm-to-send-cef-messages"></a>Configurer votre ASM F5 pour envoyer des messages CEF
 
-1. Accédez à [Configuration de la journalisation des événements de sécurité des applications](https://techdocs.f5.com/kb/en-us/products/big-ip_asm/manuals/product/asm-implementations-11-5-0/12.html) et suivez les instructions pour configurer la journalisation à distance, en suivant les recommandations ci-dessous :
+1. Suivez les instructions dans [Configuration F5 de la journalisation des événements de sécurité des applications](https://techdocs.f5.com/kb/en-us/products/big-ip_asm/manuals/product/asm-implementations-11-5-0/12.html) et configurez la journalisation à distance, en suivant les lignes directrices ci-dessous :
    - Définissez le **Type de stockage distant** sur **CEF**.
    - Définissez le **Protocole** sur **TCP**.
    - Définissez l'**adresse IP** sur l'adresse IP du serveur Syslog.
@@ -37,12 +37,11 @@ Cet article explique comment connecter votre appliance F5 à Azure Sentinel. Le 
 
 1. Pour utiliser le schéma pertinent dans Log Analytics pour les événements CEF, recherchez `CommonSecurityLog`.
 
-1. Passez à l’[ÉTAPE 3 : Valider la connectivité](connect-cef-verify.md).
+1. Passez à [l’étape 3 : Valider la connectivité](connect-cef-verify.md).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans ce document, vous avez appris à connecter F5 à Azure Sentinel. Pour en savoir plus sur Azure Sentinel, voir les articles suivants :
+Dans ce document, vous découvrirez comment connecter ASM F5 à Azure Sentinel. Pour en savoir plus sur Azure Sentinel, voir les articles suivants :
 - Découvrez comment [avoir une visibilité sur vos données et les menaces potentielles](quickstart-get-visibility.md).
-- Prise en main de la [détection des menaces avec Azure Sentinel](tutorial-detect-threats.md).
+- Prise en main de la [détection des menaces avec Azure Sentinel](./tutorial-detect-threats-built-in.md).
 - [Utilisez des classeurs](tutorial-monitor-your-data.md) pour superviser vos données.
-

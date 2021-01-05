@@ -1,5 +1,5 @@
 ---
-title: Présentation d’HSM dédié - HSM dédié Azure | Microsoft Docs
+title: Résoudre les problèmes liés à Azure Dedicated HSM – Azure Dedicated HSM | Microsoft Docs
 description: La présentation du service HSM dédié Azure offre dans Azure des fonctionnalités de stockage de clés qui répondent à la certification FIPS 140-2 de niveau 3
 services: dedicated-hsm
 author: msmbaldwin
@@ -9,27 +9,27 @@ ms.service: key-vault
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: overview
+ms.topic: how-to
 ms.custom: mvc, seodec18
 ms.date: 12/07/2018
 ms.author: mbaldwin
-ms.openlocfilehash: ad3c9d702384b8a32a9d4f0c8aebe44de4bb526e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 42bfa52721160a469db2aa0507dadfa85ff41389
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80337218"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508269"
 ---
-# <a name="troubleshooting"></a>Dépannage
+# <a name="troubleshooting-the-azure-dedicated-hsm-service"></a>Résolution des problèmes du service Azure Dedicated HSM
 
 Le service Azure Dedicated HSM remplit deux fonctions distinctes : d’une part, l’inscription et le déploiement dans Azure des appareils HSM avec leurs composants réseau sous-jacents et, d’autre part, la configuration des appareils HSM en vue de leur utilisation/intégration avec une charge de travail ou une application donnée. Bien que les appareils HSM Thales Luna Network dans Azure soient les mêmes que ceux que vous pouvez acheter directement auprès de Thales, le fait qu’ils constituent une ressource dans Azure crée des considérations uniques. Ces considérations ainsi que les bonnes pratiques et insights en matière de dépannage sont documentés ici pour garantir la bonne visibilité des informations critiques et l’accès à celles-ci. Une fois le service en place, des informations définitives sont disponibles par le biais de demandes de support adressées directement à Microsoft ou à Thales. 
 
 > [!NOTE]
-> Il convient de noter qu’avant d’effectuer toute configuration sur un appareil HSM nouvellement déployé, vous devez le mettre à jour avec les correctifs appropriés. [KB0019789](https://supportportal.gemalto.com/csm?id=kb_article_view&sys_kb_id=19a81c8bdb9a1fc8d298728dae96197d&sysparm_article=KB0019789) est un correctif obligatoire disponible dans le portail de support Thales qui permet de résoudre un problème de blocage du redémarrage.
+> Il convient de noter qu’avant d’effectuer toute configuration sur un appareil HSM nouvellement déployé, vous devez le mettre à jour avec les correctifs appropriés. [KB0019789](https://supportportal.gemalto.com/csm?id=kb_article_view&sys_kb_id=19a81c8bdb9a1fc8d298728dae96197d&sysparm_article=KB0019789) est un correctif obligatoire disponible sur le portail de support Thales qui permet de résoudre un problème qui empêche le système de répondre pendant le redémarrage.
 
 ## <a name="hsm-registration"></a>Inscription auprès de HSM
 
-Dedicated HSM n’est pas disponible gratuitement, car il fournit des ressources matérielles dans le cloud et constitue donc une ressource précieuse qui doit être protégée. Nous utilisons donc un processus de mise en liste verte par le biais de l’adresse e-mail HSMrequest@microsoft.com. 
+Dedicated HSM n’est pas disponible gratuitement, car il fournit des ressources matérielles dans le cloud et constitue donc une ressource précieuse qui doit être protégée. Nous utilisons donc un processus de mise en liste d’autorisation par le biais de l’adresse e-mail en utilisant HSMrequest@microsoft.com. 
 
 ### <a name="getting-access-to-dedicated-hsm"></a>Accès à Dedicated HSM
 
@@ -69,9 +69,9 @@ Les déploiements peuvent échouer si vous dépassez 2 HSM par tampon et 4 HSM
 Quand un tampon ou une région spécifique arrive à saturation, c’est-à-dire que presque tous les HSM gratuits sont provisionnés, des échecs de déploiement peuvent se produire. Chaque tampon met à disposition des clients 11 HSM, soit 22 par région. Il y a également 3 appareils de secours et 1 appareil de test dans chaque tampon. Si vous pensez avoir atteint une limite, envoyez un e-mail à HSMrequest@microsoft.com pour obtenir des informations sur le niveau de remplissage de tampons spécifiques.
 
 ###  <a name="how-do-i-see-hsms-when-provisioned"></a>Comment voir les HSM après provisionnement
-Dedicated HSM étant un service sur liste verte, il est considéré comme un « type masqué » dans le portail Azure. Pour voir les ressources HSM, vous devez cocher la case « Afficher les types masqués » comme indiqué ci-dessous. Étant donné que la ressource de carte réseau suit toujours le HSM, il s’agit d’un bon endroit pour trouver l’adresse IP du HSM avant d’utiliser SSH pour établir la connexion.
+Dedicated HSM étant un service sur liste d’autorisation, il est considéré comme un « type masqué » dans le portail Azure. Pour voir les ressources HSM, vous devez cocher la case « Afficher les types masqués » comme indiqué ci-dessous. Étant donné que la ressource de carte réseau suit toujours le HSM, il s’agit d’un bon endroit pour trouver l’adresse IP du HSM avant d’utiliser SSH pour établir la connexion.
 
-![Délégation de sous-réseau](./media/troubleshoot/hsm-provisioned.png)
+![Capture d’écran mettant en évidence la case Afficher les types masqués](./media/troubleshoot/hsm-provisioned.png)
 
 ## <a name="networking-resources"></a>Ressources réseau
 
@@ -85,7 +85,7 @@ Dedicated HSM utilise la passerelle ExpressRoute comme « tunnel » pour la co
 
 Les exemples de modèles fournis pour Dedicated HSM supposent que l’adresse IP de HSM est automatiquement extraite d’une plage de sous-réseau donnée. Vous pouvez spécifier une adresse IP explicite pour le HSM par le biais d’un attribut « NetworkInterfaces » dans le modèle Resource Manager. 
 
-![Délégation de sous-réseau](./media/troubleshoot/private-ip-address.png)
+![Capture d’écran montrant l’exemple de modèle pour HSM dédié.](./media/troubleshoot/private-ip-address.png)
 
 ## <a name="hsm-initialization"></a>Initialisation du HSM
 
@@ -120,7 +120,7 @@ Soyez prudent quand vous configurez le réseau dans le HSM.  Le HSM a une connex
 
 ### <a name="hsm-device-reboot"></a>Redémarrage de l’appareil HSM
 
-Certaines modifications de configuration nécessitent le redémarrage ou la mise hors tension puis sous tension du HSM. Les tests réalisés par Microsoft sur le HSM dans Azure ont déterminé que le redémarrage peut parfois se bloquer. Une demande de support doit alors être créée dans le portail Azure pour demander un redémarrage forcé. Comme il s’agit d’un processus manuel dans un centre de données Azure, cette opération peut prendre jusqu’à 48 heures.  Pour éviter cela, veillez à déployer directement le correctif de redémarrage disponible sur le site de Thales. Consultez l’article [KB0019789](https://supportportal.gemalto.com/csm?sys_kb_id=d66911e2db4ffbc0d298728dae9619b0&id=kb_article_view&sysparm_rank=1&sysparm_tsqueryId=d568c35bdb9a4850d6b31f3b4b96199e&sysparm_article=KB0019789) dans la page des téléchargements de Thales Luna Network HSM 7.2 pour obtenir un correctif recommandé en cas de blocage du redémarrage. Remarque : Vous derez être inscrit auprès du portail de support de Thales pour télécharger le correctif.
+Certaines modifications de configuration nécessitent le redémarrage ou la mise hors tension puis sous tension du HSM. Les tests réalisés par Microsoft sur le HSM dans Azure ont déterminé que le redémarrage peut parfois se bloquer. Une demande de support doit alors être créée dans le portail Azure pour demander un redémarrage forcé. Comme il s’agit d’un processus manuel dans un centre de données Azure, cette opération peut prendre jusqu’à 48 heures.  Pour éviter cela, veillez à déployer directement le correctif de redémarrage disponible sur le site de Thales. Consultez l’article [KB0019789](https://supportportal.gemalto.com/csm?sys_kb_id=d66911e2db4ffbc0d298728dae9619b0&id=kb_article_view&sysparm_rank=1&sysparm_tsqueryId=d568c35bdb9a4850d6b31f3b4b96199e&sysparm_article=KB0019789) dans la page des téléchargements de Thales Luna Network HSM 7.2 pour obtenir un correctif recommandé pour un problème qui empêche le système de répondre pendant le redémarrage (Remarque : vous devez vous être inscrit sur le portail de support Thales pour pouvoir télécharger le correctif).
 
 ### <a name="ntls-certificates-out-of-sync"></a>Certificats NTLS non synchronisés
 Un client peut perdre la connectivité à un HSM quand un certificat expire ou quand celui-ci est remplacé à la suite de mises à jour de configuration. La configuration du client d’échange de certificats doit être réappliquée avec chaque HSM.

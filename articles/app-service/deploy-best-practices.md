@@ -7,12 +7,12 @@ ms.assetid: bb51e565-e462-4c60-929a-2ff90121f41d
 ms.topic: article
 ms.date: 07/31/2019
 ms.author: jafreebe
-ms.openlocfilehash: 4dd959d75fd582d787e68db4a415a4a694b9cda8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 37c1854aeb1a1fa3d9283c00b07c665b213b306c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81770680"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91708150"
 ---
 # <a name="deployment-best-practices"></a>Meilleures pratiques de déploiement
 
@@ -47,7 +47,7 @@ Si votre projet a désigné des branches pour le test, l’assurance qualité et
 
 Le déploiement continu ne doit jamais être activé pour votre emplacement de production. Au lieu de cela, votre branche de production (souvent maître) doit être déployée sur un emplacement de non-production. Lorsque vous êtes prêt à mettre en production la branche de base, échangez-la dans l’emplacement de production. Un échange en production, au lieu d’un déploiement en production, vous permet d’éviter les temps d’arrêt et de restaurer les modifications en les échangeant à nouveau. 
 
-![Contrôle de l’utilisation de l’emplacement](media/app-service-deploy-best-practices/slot_flow_code_diagam.png)
+![Diagramme montrant le flux entre les branches Dev, Staging et Master, ainsi que les emplacements dans lesquels elles sont déployées.](media/app-service-deploy-best-practices/slot_flow_code_diagam.png)
 
 ### <a name="continuously-deploy-containers"></a>Déployer des conteneurs en continu
 
@@ -69,7 +69,7 @@ App Service est doté de la [livraison continue intégrée](deploy-continuous-de
 
 ### <a name="use-github-actions"></a>Utiliser GitHub Actions
 
-Vous pouvez également automatiser le déploiement de vos conteneurs à l’aide de [GitHub Actions](containers/deploy-container-github-action.md).  Le fichier de workflow ci-dessous génère et balise le conteneur avec l’ID de validation, l’envoie (push) à un registre de conteneurs et met à jour l’emplacement de site spécifié avec la nouvelle balise d’image.
+Vous pouvez également automatiser le déploiement de vos conteneurs à l’aide de [GitHub Actions](deploy-container-github-action.md).  Le fichier de workflow ci-dessous génère et balise le conteneur avec l’ID de validation, l’envoie (push) à un registre de conteneurs et met à jour l’emplacement de site spécifié avec la nouvelle balise d’image.
 
 ```yaml
 name: Build and deploy a container image to Azure Web Apps
@@ -127,7 +127,7 @@ Dans votre script, connectez-vous en utilisant `az login --service-principal` et
 
 ### <a name="java"></a>Java
 
-Utilisez l’API [zipdeploy/](deploy-zip.md) de Kudu pour déployer des applications JAR, et [wardeploy/](deploy-zip.md#deploy-war-file) pour des applications WAR. Si vous utilisez Jenkins, vous pouvez utiliser ces API directement lors de votre phase de déploiement. Pour plus d’informations, consultez [cet article](../jenkins/execute-cli-jenkins-pipeline.md).
+Utilisez l’API [zipdeploy/](deploy-zip.md) de Kudu pour déployer des applications JAR, et [wardeploy/](deploy-zip.md#deploy-war-file) pour des applications WAR. Si vous utilisez Jenkins, vous pouvez utiliser ces API directement lors de votre phase de déploiement. Pour plus d’informations, consultez [cet article](/azure/developer/jenkins/deploy-to-azure-app-service-using-azure-cli).
 
 ### <a name="node"></a>Nœud
 
@@ -149,7 +149,7 @@ Utilisez toujours le cache local conjointement avec les [emplacements de déploi
 
 Si votre plan App Service utilise plus de 90 % de l’UC ou de la mémoire disponible, la machine virtuelle sous-jacente risque de rencontrer des problèmes lors du traitement de votre déploiement. Dans ce cas, mettez temporairement à l’échelle le nombre d’instances pour effectuer le déploiement. Une fois le déploiement terminé, vous pouvez remettre le nombre d’instances à sa valeur précédente.
 
-Pour plus d’informations sur les bonnes pratiques, consultez [Diagnostics App Service](https://docs.microsoft.com/azure/app-service/overview-diagnostics) pour connaître les bonnes pratiques applicables spécifiques à votre ressource.
+Pour plus d’informations sur les bonnes pratiques, consultez [Diagnostics App Service](./overview-diagnostics.md) pour connaître les bonnes pratiques applicables spécifiques à votre ressource.
 
 - Accédez à votre application web dans le [portail Azure](https://portal.azure.com).
 - Dans le volet de navigation de gauche, cliquez sur **Diagnostiquer et résoudre les problèmes** pour ouvrir Diagnostics App Service.

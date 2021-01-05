@@ -1,18 +1,18 @@
 ---
-title: Lumières
+title: Éclairage de la scène
 description: Description et propriétés des sources de lumière
 author: florianborn71
 ms.author: flborn
 ms.date: 02/10/2020
 ms.topic: article
-ms.openlocfilehash: 0a4a226af1347b5302b0c3964889fc072f89e7f8
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 49027899d66a2192cc311fb4dba66e441155b527
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679123"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206847"
 ---
-# <a name="lights"></a>Lumières
+# <a name="scene-lighting"></a>Éclairage de la scène
 
 Par défaut, une [lumière ambiante](sky.md) est utilisée pour l'éclairage des objets rendus à distance. Dans la plupart des cas, cet éclairage est suffisant, mais vous pouvez ajouter d'autres sources de lumière à la scène.
 
@@ -69,6 +69,17 @@ Il n'y a pas d'autres propriétés.
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
 Les sources de lumière ont un impact significatif sur les performances de rendu. Utilisez-les avec précaution et uniquement si l'application l'exige. Toute condition d'éclairage global statique, y compris un composant directionnel statique, peut être obtenue avec une [texture ambiante personnalisée](sky.md), sans coût de rendu supplémentaire.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [LightComponentBase, classe C#](/dotnet/api/microsoft.azure.remoterendering.lightcomponentbase)
+* [PointLightComponent, classe C#](/dotnet/api/microsoft.azure.remoterendering.pointlightcomponent)
+* [SpotLightComponent, classe C#](/dotnet/api/microsoft.azure.remoterendering.spotlightcomponent)
+* [DirectionalLightComponent, classe C#](/dotnet/api/microsoft.azure.remoterendering.directionallightcomponent)
+* [LightComponentBase, classe C++](/cpp/api/remote-rendering/lightcomponentbase)
+* [PointLightComponent, classe C++](/cpp/api/remote-rendering/pointlightcomponent)
+* [SpotLightComponent, classe C++](/cpp/api/remote-rendering/spotlightcomponent)
+* [DirectionalLightComponent, classe C++](/cpp/api/remote-rendering/directionallightcomponent)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 03/03/2018
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: e4838597c50898748eb4b33e81ff22eaeea37b30
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 3b73d528802a8aa33c6122eaf5edfa9d046b6753
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80476894"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88962075"
 ---
 # <a name="integrate-your-ilb-app-service-environment-with-the-azure-application-gateway"></a>Intégrer votre environnement App Service ILB à l’aide de la passerelle d’application Azure #
 
@@ -127,6 +127,6 @@ Dès lors que l’opération de configuration est terminée et que vous avez aut
 [9]: ./media/integrate-with-application-gateway/appgw-iplist.png
 
 <!--LINKS-->
-[appgw]: https://docs.microsoft.com/azure/application-gateway/application-gateway-introduction
+[appgw]: ../../application-gateway/overview.md
 [custom-domain]: ../app-service-web-tutorial-custom-domain.md
 [ilbase]: ./create-ilb-ase.md

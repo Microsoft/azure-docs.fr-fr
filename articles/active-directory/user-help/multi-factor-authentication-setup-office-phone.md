@@ -11,10 +11,10 @@ ms.topic: end-user-help
 ms.date: 08/12/2019
 ms.author: curtand
 ms.openlocfilehash: 9dd9853bae324a047c673852f14d2b4c1639d914
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83739207"
 ---
 # <a name="set-up-an-office-phone-as-your-two-factor-verification-method"></a>Configurer un téléphone professionnel comme méthode de vérification à deux facteurs

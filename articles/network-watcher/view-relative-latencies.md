@@ -6,18 +6,18 @@ documentationcenter: ''
 author: damendo
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 12/14/2017
 ms.author: damendo
 ms.custom: ''
-ms.openlocfilehash: 39f81731f20566d1a39f3f0931ff52c4e8b43ec0
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 938315dac80ae51984851083753a9cb8f77662b2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521395"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84737901"
 ---
 # <a name="view-relative-latency-to-azure-regions-from-specific-locations"></a>Afficher la latence relative aux régions Azure à partir d’emplacements spécifiques
 

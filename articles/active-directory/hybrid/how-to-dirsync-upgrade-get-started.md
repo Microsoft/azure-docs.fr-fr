@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2f2d9a7c8cfbfc4fb56ff8fba3c65ae9a7925830
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8aa45294de4ef644c20ef66b7163706dca9759d3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60348613"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996523"
 ---
 # <a name="azure-ad-connect-upgrade-from-dirsync"></a>Azure AD Connect : Effectuer une mise à niveau à partir de DirSync
 Azure AD Connect est le successeur de DirSync. Cette rubrique explique les différentes façons de procéder à une mise à niveau à partir de DirSync. Ces étapes ne fonctionnent pas pour la mise à niveau à partir d’une autre version d’Azure AD Connect ou d’Azure AD Sync.
@@ -100,10 +100,10 @@ Des étapes supplémentaires sont nécessaires dans les cas suivants :
    * Si vous utilisez SQL Server Express et que vous avez moins de 50 000 objets, l'écran suivant s'affiche :  
      ![Analyse terminée, mise à niveau à partir de la synchronisation d’annuaires prête](./media/how-to-dirsync-upgrade-get-started/AnalysisReady.png)
    * Si vous utilisez une instance SQL Server complète pour DirSync, vous voyez cette page à la place :  
-     ![Analyse terminée, mise à niveau à partir de DirSync prête](./media/how-to-dirsync-upgrade-get-started/AnalysisReadyFullSQL.png)  
+     ![screenshot that shows the existing SQL database server being used.](./media/how-to-dirsync-upgrade-get-started/AnalysisReadyFullSQL.png)  
      Les informations concernant le serveur de base de données SQL Server utilisé par DirSync s’affichent. Apportez des modifications, si nécessaire. Cliquez sur **Suivant** pour continuer l'installation.
    * Si vous avez plus de 50 000 objets, vous voyez cet écran à la place :  
-     ![Analyse terminée, mise à niveau à partir de DirSync prête](./media/how-to-dirsync-upgrade-get-started/AnalysisRecommendParallel.png)  
+     ![Screenshot that shows the screen you see when you have more than 50,000 objects to upgrade.](./media/how-to-dirsync-upgrade-get-started/AnalysisRecommendParallel.png)  
      Pour procéder à une mise à niveau sur place, cochez la case en regard du message : **Continuez à mettre à niveau DirSync sur cet ordinateur.**
      Pour effectuer un [parallel deployment](#parallel-deployment) , exportez les paramètres de configuration de DirSync et copiez-les sur le nouveau serveur.
 5. Indiquez le mot de passe du compte que vous utilisez actuellement pour vous connecter à Azure AD. Il doit s’agir du compte actuellement utilisé par DirSync.  
@@ -140,7 +140,7 @@ Si vous avez moins de 50 000 objets mais que vous souhaitez effectuer un déploi
 4. À partir de l’emplacement d’installation d’Azure AD Connect (par défaut : C:\Program Files\Microsoft Azure Active Directory Connect), exécutez la commande suivante : `AzureADConnect.exe /ForceExport`.
 5. Cliquez sur le bouton **Paramètres d'exportation** . Lorsque vous installez Azure AD Connect sur un autre serveur, ces paramètres sont migrés de votre installation DirSync vers votre nouvelle installation Azure AD Connect.
 
-![Analyse terminée](./media/how-to-dirsync-upgrade-get-started/forceexport.png)
+![Capture d’écran montrant l’option Paramètres d’exportation pour la migration de vos paramètres vers la nouvelle installation d’Azure AD Connect.](./media/how-to-dirsync-upgrade-get-started/forceexport.png)
 
 Une fois vos paramètres exportés, vous pouvez quitter l’Assistant Azure AD Connect sur le serveur de synchronisation d’annuaires. Passez à l’étape suivante pour installer Azure AD Connect sur un serveur distinct.
 
@@ -152,14 +152,14 @@ Lorsque vous installez Azure AD Connect sur un nouveau serveur, le système pré
 3. Ouvrez une invite de commandes.
 4. À partir de l’emplacement d’installation d’Azure AD Connect (par défaut : C:\Program Files\Microsoft Azure Active Directory Connect), exécutez la commande suivante : `AzureADConnect.exe /migrate`.
    L’Assistant d’installation d’Azure AD Connect démarre et affiche l’écran suivant :  
-   ![Entrez vos informations d’identification Azure AD.](./media/how-to-dirsync-upgrade-get-started/ImportSettings.png)
+   ![Screenshot that shows where to import the settings file when you upgrade.](./media/how-to-dirsync-upgrade-get-started/ImportSettings.png)
 5. Sélectionnez le fichier de paramètres exportés à partir de votre installation de la synchronisation d’annuaires.
 6. Configurez les options avancées :
    * Un emplacement d'installation personnalisé pour Azure AD Connect.
    * Une instance de SQL Server (par défaut, Azure AD Connect installe SQL Server 2012 Express). N'utilisez pas la même instance de base de données que celle de votre serveur DirSync.
    * Un compte de service utilisé pour la connexion à SQL Server (si votre base de données SQL Server est distante, ce compte doit être un compte de service du domaine).
      Ces options s'affichent dans cet écran :  
-     ![Entrez vos informations d’identification Azure AD.](./media/how-to-dirsync-upgrade-get-started/advancedsettings.png)
+     ![Screenshot that shows the advance configuration options for upgrading from DirSync.](./media/how-to-dirsync-upgrade-get-started/advancedsettings.png)
 7. Cliquez sur **Suivant**.
 8. Sur la page **Prêt pour la configuration**, laissez la case **Démarrer le processus de synchronisation dès que la configuration est terminée** cochée. Le serveur étant maintenant en [mode de préproduction](how-to-connect-sync-staging-server.md) , les modifications ne sont pas exportées vers Azure AD.
 9. Cliquez sur **Installer**.
@@ -204,7 +204,7 @@ Les éléments suivants doivent s’afficher :
 * Sélectionnez **Configuration du mode de préproduction**.
 * Désactivez le mode de préproduction en désactivant la case à cocher **Mode de préproduction activé** .
 
-![Entrez vos informations d’identification Azure AD.](./media/how-to-dirsync-upgrade-get-started/configurestaging.png)
+![Capture d’écran montrant l’option permettant d’activer le mode de processus de site.](./media/how-to-dirsync-upgrade-get-started/configurestaging.png)
 
 * Cliquez sur le bouton **Suivant** .
 * Dans la page Confirmation, cliquez sur le bouton **Installer** .

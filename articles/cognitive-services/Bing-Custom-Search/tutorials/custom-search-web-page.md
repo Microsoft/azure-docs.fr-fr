@@ -10,16 +10,21 @@ ms.subservice: bing-custom-search
 ms.topic: tutorial
 ms.date: 03/05/2019
 ms.author: aahi
-ms.openlocfilehash: c7b41f77f8eb57c39489f1e5a69b0ac1c3c9c7d4
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: a789cb3fde05d12a8793196043f1c246bbab6559
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78943912"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96342411"
 ---
 # <a name="tutorial-build-a-custom-search-web-page"></a>Tutoriel : Créer une page web Recherche personnalisée
 
-La Recherche personnalisée Bing vous permet de créer des expériences de recherche adaptées pour les sujets qui vous intéressent. Par exemple, si vous avez un site web d’arts martiaux qui fournit une expérience de recherche, vous pouvez spécifier les domaines, sous-sites et pages web dans lesquels Bing effectue les recherches. Vos utilisateurs consultent des résultats de recherche adaptés au contenu qui les intéresse au lieu de compulser des pages de résultats de recherche générale dont le contenu peut être inapproprié. 
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+La Recherche personnalisée Bing vous permet de créer des expériences de recherche adaptées pour les sujets qui vous intéressent. Par exemple, si vous avez un site web d’arts martiaux qui fournit une expérience de recherche, vous pouvez spécifier les domaines, les sous-sites et les pages web dans lesquels Bing effectue les recherches. Vos utilisateurs consultent des résultats de recherche adaptés au contenu qui les intéresse au lieu de compulser des pages de résultats de recherche générale dont le contenu peut être inapproprié. 
 
 Ce tutoriel montre comment configurer une instance de recherche personnalisée et l’intégrer à une nouvelle page web.
 
@@ -34,7 +39,7 @@ Les tâches traitées sont les suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Pour suivre ce tutoriel, vous avez besoin d’une clé d’abonnement pour l’API Recherche personnalisée Bing.  Pour obtenir une clé, [créez une ressource Recherche personnalisée Bing](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesBingCustomSearch) dans le portail Azure. Vous pouvez également utiliser une [clé d’essai](https://azure.microsoft.com/try/cognitive-services).
+- Pour suivre ce tutoriel, vous avez besoin d’une clé d’abonnement pour l’API Recherche personnalisée Bing.  Pour obtenir une clé, [créez une ressource Recherche personnalisée Bing](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesBingCustomSearch) dans le portail Azure.
 - Si vous n’avez pas encore installé Visual Studio 2017 ou ultérieur, vous pouvez télécharger et utiliser **gratuitement** [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/).
 
 ## <a name="create-a-custom-search-instance"></a>Création d’une instance de recherche personnalisée
@@ -60,11 +65,11 @@ Pour créer une instance Recherche personnalisée Bing :
 
 Pour inclure les résultats d’URL ou de sites web particuliers, ajoutez-les à l’onglet **Active** (Éléments actifs).
 
-1.       Dans la page **Configuration**, cliquez sur l’onglet **Active** et entrez l’URL d’un ou plusieurs sites web à inclure dans votre recherche.
+1. Dans la page **Configuration**, cliquez sur l’onglet **Active** et entrez l’URL d’un ou plusieurs sites web à inclure dans votre recherche.
 
     ![Capture d’écran de l’onglet des éléments actifs dans l’éditeur de définitions](../media/customSrchEditor.png)
 
-2.       Pour vérifier que votre instance retourne des résultats, entrez une requête dans le volet de visualisation situé à droite. Bing retourne uniquement les résultats pour les sites web publics qu’il a indexés.
+2. Pour vérifier que votre instance retourne des résultats, entrez une requête dans le volet de visualisation situé à droite. Bing retourne uniquement les résultats pour les sites web publics qu’il a indexés.
 
 ## <a name="add-blocked-entries"></a>Ajout d’entrées bloquées
 
@@ -79,7 +84,7 @@ Pour exclure les résultats d’URL ou de sites web particuliers, ajoutez-les à
 
 ## <a name="add-pinned-entries"></a>Ajout d’entrées épinglées
 
-Pour épingler une page web spécifique au début des résultats de recherche, ajoutez la page web et le terme de requête dans l’onglet **Pinned** (Éléments épinglés). L’onglet **Pinned** (Éléments épinglés) contient une liste de paires, constituées de termes de requête associés à des pages web, qui spécifient la page web devant s’afficher en tant que meilleur résultat pour une requête particulière. La page web est épinglée uniquement si la chaîne de requête de l’utilisateur correspond à la chaîne de requête de l’épingle selon la condition de correspondance de l’épingle. Seules les pages web indexées apparaîtront dans les recherches. Consultez [Définir votre affichage personnalisé](../define-your-custom-view.md#pin-slices-to-the-top-of-search-results) pour en savoir plus.
+Pour épingler une page web spécifique au début des résultats de recherche, ajoutez la page web et le terme de requête dans l’onglet **Pinned** (Éléments épinglés). L’onglet **Pinned** (Éléments épinglés) contient une liste de paires, constituées de termes de requête associés à des pages web, qui spécifient la page web devant s’afficher en tant que meilleur résultat pour une requête particulière. La page web est épinglée uniquement si la chaîne de requête de l’utilisateur correspond à la chaîne de requête de l’épingle selon la condition de correspondance de l’épingle. Seules les pages web indexées apparaîtront dans les recherches. Pour plus d’informations, consultez [Définir votre vue personnalisée](../define-your-custom-view.md#pin-slices-to-the-top-of-search-results).
 
 1. Dans la page **Configuration**, cliquez sur l’onglet **Pinned** et entrez la page web et le terme de requête de la page web que vous voulez voir retourner comme premier résultat.  
   
@@ -116,9 +121,9 @@ La Recherche personnalisée fournit une IU hébergée pour restituer la réponse
 
    ![Capture d’écran de l’étape des configurations avancées de l’interface utilisateur hébergée](./media/custom-search-hosted-ui-advanced-configurations.png)  
   
-5. Dans les listes déroulantes, sélectionnez vos clés d’abonnement. Vous pouvez aussi entrer la clé d’abonnement manuellement. Pour plus d’informations sur l’obtention de clés, consultez [Essayez Cognitive Services](https://azure.microsoft.com/try/cognitive-services/?api=bing-custom-search-api).  
+5. Dans les listes déroulantes, sélectionnez vos clés d’abonnement. Vous pouvez aussi entrer la clé d’abonnement manuellement.
   
-   ![Capture d’écran de l’étape des configurations supplémentaires de l’interface utilisateur hébergée](./media/custom-search-hosted-ui-subscription-key.png)
+   ![Capture d’écran de la clé d’abonnement de l’interface utilisateur hébergée](./media/custom-search-hosted-ui-subscription-key.png)
 
 [!INCLUDE [publish or revert](../includes/publish-revert.md)]
 
@@ -130,7 +135,7 @@ Il existe deux façons de consommer l’IU hébergée.
 - Option 1 : intégrer l’extrait de code JavaScript fourni dans votre application.
 - Option n°2 : utiliser le point de terminaison HTML fourni.
 
-Le reste de ce tutoriel illustre l’**Option 1 : Extrait de code Javascript**.  
+Le reste de ce tutoriel illustre l’**Option 1 : Extrait de code JavaScript**.  
 
 ## <a name="set-up-your-visual-studio-solution"></a>Configurer votre solution Visual Studio
 
@@ -144,7 +149,7 @@ Le reste de ce tutoriel illustre l’**Option 1 : Extrait de code Javascript**.
   
 4. Dans la fenêtre **Nouvelle application ASP.NET Core**, sélectionnez **Application web** et cliquez sur **OK**.  
   
-   ![Capture d’écran de la fenêtre Nouveau projet](./media/custom-search-new-webapp.png)  
+   ![Capture d’écran de la fenêtre Nouvelle application web](./media/custom-search-new-webapp.png)  
 
 ## <a name="edit-indexcshtml"></a>Éditer index.cshtml
 

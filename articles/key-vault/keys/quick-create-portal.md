@@ -12,10 +12,10 @@ ms.custom: mvc
 ms.date: 03/24/2020
 ms.author: mbaldwin
 ms.openlocfilehash: 41f3d60d91b7418d6e9733b8351d4830b31dbace
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "81420283"
 ---
 # <a name="quickstart-set-and-retrieve-a-key-from-azure-key-vault-using-the-azure-portal"></a>Démarrage rapide : Définir et récupérer une clé dans Azure Key Vault avec le portail Azure

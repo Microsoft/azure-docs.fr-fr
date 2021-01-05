@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 03/10/2020
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 9498babd9605c46d752c5fe1eb1b077f6d911351
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: c255a3d68b1a24e25c1c0e308faa3fd364a15861
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83121012"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97358739"
 ---
 # <a name="modify-a-virtual-machine-scale-set"></a>Modifier un groupe de machines virtuelles identiques
 
@@ -320,13 +320,13 @@ Il existe une méthode de modification des propriétés globales de groupe ident
     POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myScaleSet/reimage?api-version={apiVersion}
     ```
 
-- Azure PowerShell avec [Set-AzVmssVm](https://docs.microsoft.com/powershell/module/az.compute/set-azvmssvm) :
+- Azure PowerShell avec [Set-AzVmssVm](/powershell/module/az.compute/set-azvmssvm) :
 
     ```powershell
     Set-AzVmssVM -ResourceGroupName "myResourceGroup" -VMScaleSetName "myScaleSet" -InstanceId instanceId -Reimage
     ```
 
-- Azure CLI avec [az vmss reimage](https://docs.microsoft.com/cli/azure/vmss) :
+- Azure CLI avec [az vmss reimage](/cli/azure/vmss) :
 
     ```azurecli
     az vmss reimage --resource-group myResourceGroup --name myScaleSet --instance-id instanceId
@@ -350,12 +350,12 @@ La capacité à modifier certaines propriétés peut dépendre de la valeur actu
 
 - **singlePlacementGroup** : si singlePlacementGroup a la valeur true, celle-ci peut être remplacée par false. Toutefois, si singlePlacementGroup a la valeur false, elle **ne peut pas** avoir la valeur true.
 - **subnet** : le sous-réseau d’un groupe identique peut être modifié, tant que le sous-réseau d’origine et le nouveau sous-réseau se trouvent dans le même réseau virtuel.
+- **imageReferenceSku** : une référence (SKU) d’image peut être mise à jour pour des [distributions Linux](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros) approuvées, des images de serveur/client Windows et des images sans [informations de plan](https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage#view-plan-properties). 
 
 ### <a name="properties-that-require-deallocation-to-change"></a>Propriétés qui nécessitent une désallocation pour être modifiées
 La valeur de certaines propriétés peut uniquement être modifiée si les machines virtuelles du groupe identique sont libérées. Ces propriétés sont les suivantes :
 
-- **SKU name** : si la nouvelle référence SKU de machine virtuelle n’est pas prise en charge par l’appareil sur lequel se trouve le groupe identique, vous devez libérer les machines virtuelles du groupe identique avant de modifier le nom de la référence SKU. Pour plus d’informations, voir [comment redimensionner une machine virtuelle Azure](../virtual-machines/windows/resize-vm.md).
-
+- **SKU Name** : si la nouvelle référence (SKU) de machine virtuelle n’est pas prise en charge sur l’appareil sur lequel se trouve le groupe identique, vous devez libérer les machines virtuelles du groupe identique avant de modifier le nom de la référence (SKU). Pour plus d’informations, voir [comment redimensionner une machine virtuelle Azure](../virtual-machines/windows/resize-vm.md). 
 
 ## <a name="vm-specific-updates"></a>Mises à jour relatives à certaines machines virtuelles
 Certaines modifications peuvent être appliquées uniquement à certaines machines virtuelles, et non aux propriétés globales du groupe identique. Pour le moment, la seule mise à jour applicable à certaines machines virtuelles qui est prise en charge est celle qui permet de joindre et de détacher des disques de données au niveau des machines virtuelles du groupe identique. Cette fonctionnalité est en préversion. Pour plus d’informations, consultez la [documentation relative à la préversion](https://github.com/Azure/vm-scale-sets/tree/master/preview/disk).
@@ -369,12 +369,12 @@ Si une application est déployée dans un groupe identique via des extensions, l
 Il est également courant de déployer des applications à l’aide d’une image personnalisée. Ce scénario est décrit dans la section suivante.
 
 ### <a name="os-updates"></a>Mises à jour de système d’exploitation
-Si vous utilisez des images de plateforme Azure, vous pouvez les mettre à jour en modifiant *imageReference* (pour plus d’informations, consultez la [documentation de l’API REST](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/createorupdate)).
+Si vous utilisez des images de plateforme Azure, vous pouvez les mettre à jour en modifiant *imageReference* (pour plus d’informations, consultez la [documentation de l’API REST](/rest/api/compute/virtualmachinescalesets/createorupdate)).
 
 >[!NOTE]
-> Avec les images de plateforme, il est courant de spécifier « latest » (dernière) pour la version de référence d’image. Cela signifie que lors de la création, du scale-out et de la réinitialisation du groupe identique, les machines virtuelles sont créées avec la dernière version disponible. Toutefois, cela **ne signifie pas** que l’image du système d’exploitation sera automatiquement mise à jour à chaque nouvelle version d’image. Une fonction distincte, actuellement en version préliminaire, fournit des mises à niveau automatiques du système d’exploitation. Pour plus d’informations, consultez la [documentation relative aux mises à niveau automatiques du système d’exploitation](virtual-machine-scale-sets-automatic-upgrade.md).
+> Avec les images de plateforme, il est courant de spécifier « latest » (dernière) pour la version de référence d’image. Cela signifie que lors de la création, de l’augmentation de la taille des instances et de la réinitialisation du groupe identique, les machines virtuelles sont créées avec la dernière version disponible. Toutefois, cela **ne signifie pas** que l’image du système d’exploitation sera automatiquement mise à jour à chaque nouvelle version d’image. Une fonction distincte, actuellement en version préliminaire, fournit des mises à niveau automatiques du système d’exploitation. Pour plus d’informations, consultez la [documentation relative aux mises à niveau automatiques du système d’exploitation](virtual-machine-scale-sets-automatic-upgrade.md).
 
-Si vous utilisez des images personnalisées, vous pouvez les mettre à jour en modifiant l’ID *imageReference* (pour plus d’informations, consultez la [documentation de l’API REST](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/createorupdate)).
+Si vous utilisez des images personnalisées, vous pouvez les mettre à jour en modifiant l’ID *imageReference* (pour plus d’informations, consultez la [documentation de l’API REST](/rest/api/compute/virtualmachinescalesets/createorupdate)).
 
 ## <a name="examples"></a>Exemples
 

@@ -2,25 +2,20 @@
 title: Fonctionnalités techniques de la sécurité dans Azure - Microsoft Azure
 description: Introduction aux services de sécurité d’Azure qui vous aident à protéger vos données, ressources et applications dans le cloud.
 services: security
-documentationcenter: na
-author: UnifyCloud
-manager: barbkess
-editor: TomSh
+author: terrylanfear
 ms.assetid: ''
 ms.service: security
 ms.subservice: security-fundamentals
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 05/31/2019
-ms.author: TomSh
-ms.openlocfilehash: 61afad1d9994fd703bd8df047d1861baddeae997
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/13/2020
+ms.author: terrylan
+ms.openlocfilehash: 575486a89cd078325b76fa684ff9bd3d59a619c9
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76845346"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844265"
 ---
 # <a name="azure-security-technical-capabilities"></a>Fonctionnalités techniques de la sécurité Azure
 Cet article fournit une introduction aux services de sécurité d’Azure qui vous aident à protéger vos données, vos ressources et vos applications dans le cloud et à répondre aux besoins de sécurité de votre entreprise.
@@ -53,7 +48,7 @@ Azure vous aide à protéger les informations professionnelles et personnelles e
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
-Les solutions de gestion des identités et des accès de Microsoft aident les services informatiques à protéger l’accès aux applications et aux ressources dans le centre de données de l’entreprise, mais aussi dans le cloud. Elles activent des niveaux supplémentaires de validation comme l’authentification multifacteur et les stratégies d’accès conditionnel. En surveillant les activités suspectes via les fonctions avancées de reporting, d’audit et d’alertes de sécurité, vous êtes en mesure de limiter les problèmes de sécurité potentiels. [Azure Active Directory Premium](../../active-directory/active-directory-whatis.md) fournit une authentification unique à des milliers d’applications cloud et assure un accès aux applications web que vous exécutez en local.
+Les solutions de gestion des identités et des accès de Microsoft aident les services informatiques à protéger l’accès aux applications et aux ressources dans le centre de données de l’entreprise, mais aussi dans le cloud. Elles activent des niveaux supplémentaires de validation comme l’authentification multifacteur et les stratégies d’accès conditionnel. En surveillant les activités suspectes via les fonctions avancées de reporting, d’audit et d’alertes de sécurité, vous êtes en mesure de limiter les problèmes de sécurité potentiels. [Azure Active Directory Premium](../../active-directory/fundamentals/active-directory-whatis.md) fournit une authentification unique à des milliers d’applications cloud et assure un accès aux applications web que vous exécutez en local.
 
 Azure Active Directory (Azure AD) présente de nombreux avantages en termes de sécurité :
 
@@ -89,21 +84,21 @@ Voici les principales fonctionnalités de gestion des identités Azure :
 
 Avec l’[authentification unique (SSO)](https://azure.microsoft.com/documentation/videos/overview-of-single-sign-on/), vous pouvez accéder à toutes les applications et à toutes les ressources dont vous avez besoin pour travailler, en vous connectant une seule fois avec un seul compte d’utilisateur. Une fois connecté, vous accédez à toutes les applications qui vous sont indispensables, sans avoir besoin de vous réauthentifier (par exemple, en tapant un mot de passe).
 
-De nombreuses organisations s’appuient sur des applications SaaS, comme Office 365, Box et Salesforce, pour accroître la productivité des utilisateurs finaux. Historiquement, le personnel informatique devait créer et mettre à jour chaque compte d’utilisateur dans chaque application SaaS et les utilisateurs devaient mémoriser un mot de passe pour chaque application SaaS.
+De nombreuses organisations s'appuient sur des applications SaaS telles que Microsoft 365, Box et Salesforce pour accroître la productivité des utilisateurs finaux. Historiquement, le personnel informatique devait créer et mettre à jour chaque compte d’utilisateur dans chaque application SaaS et les utilisateurs devaient mémoriser un mot de passe pour chaque application SaaS.
 
 [Azure AD étend Active Directory local dans le cloud](../../active-directory/manage-apps/what-is-single-sign-on.md), ce qui permet aux utilisateurs d’utiliser leur compte professionnel principal, non seulement pour se connecter à leurs appareils liés au domaine et aux ressources de l’entreprise, mais aussi à toutes les applications SaaS et web nécessaires à leur travail.
 
-Non seulement les utilisateurs n’ont plus besoin de gérer plusieurs noms d’utilisateur et mots de passe, mais l’accès aux applications peut être automatiquement activé ou désactivé en fonction des groupes de l’organisation et de leur statut d’employé. [Azure AD ajoute des contrôles de sécurité et de gouvernance de l’accès](../../active-directory/active-directory-enterprise-apps-manage-sso.md) qui vous permettent de gérer de manière centralisée l’accès des utilisateurs sur les différentes applications SaaS.
+Non seulement les utilisateurs n’ont plus besoin de gérer plusieurs noms d’utilisateur et mots de passe, mais l’accès aux applications peut être automatiquement activé ou désactivé en fonction des groupes de l’organisation et de leur statut d’employé. [Azure AD ajoute des contrôles de sécurité et de gouvernance de l’accès](../../active-directory/manage-apps/view-applications-portal.md) qui vous permettent de gérer de manière centralisée l’accès des utilisateurs sur les différentes applications SaaS.
 
 #### <a name="multi-factor-authentication"></a>Authentification multifacteur
 
-[Azure Multi-Factor Authentication (MFA)](../../active-directory/authentication/multi-factor-authentication.md) est une méthode d’authentification qui nécessite l’utilisation de plusieurs méthodes de vérification et ajoute une deuxième couche essentielle de sécurité aux connexions et transactions des utilisateurs. [MFA contribue à sécuriser](../../active-directory/authentication/concept-mfa-howitworks.md) l’accès aux données et aux applications tout en répondant à la demande des utilisateurs souhaitant un processus d’authentification simple. Cette méthode fournit une authentification forte par le biais de diverses options de vérification : appel téléphonique, SMS, notification par application mobile ou code de vérification et jetons OAuth tiers.
+[Azure AD Multi-Factor Authentication (MFA)](../../active-directory/authentication/concept-mfa-howitworks.md) est une méthode d’authentification qui nécessite l’utilisation de plusieurs méthodes de vérification et ajoute une deuxième couche essentielle de sécurité aux connexions et transactions des utilisateurs. [MFA contribue à sécuriser](../../active-directory/authentication/concept-mfa-howitworks.md) l’accès aux données et aux applications tout en répondant à la demande des utilisateurs souhaitant un processus d’authentification simple. Cette méthode fournit une authentification forte par le biais de diverses options de vérification : appel téléphonique, SMS, notification par application mobile ou code de vérification et jetons OAuth tiers.
 
 #### <a name="security-monitoring-alerts-and-machine-learning-based-reports"></a>Surveillance de la sécurité, alertes et rapports Machine Learning
 
 Vous pouvez protéger votre entreprise grâce à la surveillance de la sécurité, aux alertes et aux rapports Machine Learning qui identifient les comportements d’accès incohérents. Vous pouvez utiliser les rapports d'accès et d'utilisation Azure Active Directory pour obtenir une visibilité complète sur l'intégrité et la sécurité du répertoire de votre société. Grâce à ces informations, un administrateur de répertoire est capable de déterminer plus précisément les risques de sécurité potentiels et donc de les atténuer au maximum.
 
-Dans le portail Azure ou le [portail Azure Active Directory](https://aad.portal.azure.com/), les [rapports](../../active-directory/active-directory-reporting-azure-portal.md) sont classés comme suit :
+Dans le portail Azure ou le [portail Azure Active Directory](https://aad.portal.azure.com/), les [rapports](../../active-directory/reports-monitoring/overview-reports.md) sont classés comme suit :
 
 - Rapports d’anomalies : contiennent les événements de connexion qui peuvent nous sembler anormaux. Notre objectif est de vous faire part de ces activités et de vous permettre de décider si un événement est suspect.
 
@@ -131,15 +126,15 @@ Quand ils sont associés à une solution de [gestion des appareils mobiles (MDM)
 
 #### <a name="privileged-identity-management"></a>Privileged Identity Management
 
-Le service [Azure Active Directory (AD) Privileged Identity Management](../../active-directory/privileged-identity-management/pim-configure.md) vous permet de gérer, de contrôler et de surveiller vos identités privilégiées et l’accès aux ressources dans Azure AD et dans d’autres services en ligne Microsoft, tels qu’Office 365 ou Microsoft Intune.
+Le service [Azure Active Directory (AD) Privileged Identity Management](../../active-directory/privileged-identity-management/pim-configure.md) vous permet de gérer, de contrôler et de surveiller vos identités privilégiées et l'accès aux ressources dans Azure AD et dans d'autres services en ligne Microsoft, tels que Microsoft 365 ou Microsoft Intune.
 
-Les utilisateurs doivent parfois effectuer des opérations privilégiées dans des ressources Azure ou Office 365, ou dans d'autres applications SaaS. Cela signifie souvent que les entreprises doivent leur donner un accès privilégié permanent à Azure AD. C’est un risque de sécurité croissant pour les ressources hébergées dans le cloud, car les entreprises ne peuvent pas suffisamment surveiller ce que ces utilisateurs font avec leurs privilèges d'administrateur. En outre, si un compte d’utilisateur disposant d’un accès privilégié est compromis, cette seule faille peut affecter sa sécurité globale sur le cloud. Azure AD Privileged Identity Management contribue à minimiser ce risque.
+Les utilisateurs doivent parfois effectuer des opérations privilégiées dans des ressources Azure ou Microsoft 365, ou dans d'autres applications SaaS. Cela signifie souvent que les entreprises doivent leur donner un accès privilégié permanent à Azure AD. C’est un risque de sécurité croissant pour les ressources hébergées dans le cloud, car les entreprises ne peuvent pas suffisamment surveiller ce que ces utilisateurs font avec leurs privilèges d'administrateur. En outre, si un compte d’utilisateur disposant d’un accès privilégié est compromis, cette seule faille peut affecter sa sécurité globale sur le cloud. Azure AD Privileged Identity Management contribue à minimiser ce risque.
 
 Grâce à Azure AD Privileged Identity Management, vous pouvez :
 
 - Identifier les utilisateurs qui ont un rôle d’administrateur dans Azure AD
 
-- Activer à la demande un accès administrateur « juste à temps » aux services Microsoft Online Services comme Office 365 et Intune
+- Activer à la demande un accès administrateur « juste à temps » aux services Microsoft Online Services comme Microsoft 365 et Intune
 
 - Obtenir des rapports sur l'historique des accès administrateur et sur les modifications apportées aux affectations de l'administrateur
 
@@ -147,7 +142,7 @@ Grâce à Azure AD Privileged Identity Management, vous pouvez :
 
 #### <a name="identity-protection"></a>Identity Protection
 
-[Azure AD Identity Protection](../../active-directory/identity-protection/overview.md) est un service de sécurité offrant une vue centralisée des détections des risques et des vulnérabilités potentielles qui affectent les identités de votre organisation. Identity Protection utilise des fonctionnalités existantes de détection des anomalies d’Azure Active Directory (disponibles via les rapports d’activités anormales d’Azure AD) et introduit de nouveaux types de détections des risque capables de détecter les anomalies en temps réel.
+[Azure AD Identity Protection](../../active-directory/identity-protection/overview-identity-protection.md) est un service de sécurité offrant une vue centralisée des détections des risques et des vulnérabilités potentielles qui affectent les identités de votre organisation. Identity Protection utilise des fonctionnalités existantes de détection des anomalies d’Azure Active Directory (disponibles via les rapports d’activités anormales d’Azure AD) et introduit de nouveaux types de détections des risque capables de détecter les anomalies en temps réel.
 
 ## <a name="secure-resource-access"></a>Sécuriser l’accès aux ressources
 
@@ -157,90 +152,24 @@ Le contrôle des accès dans Azure s’envisage d’abord dans une perspective d
 
 Les abonnements sont également associés à un répertoire. Le répertoire définit un ensemble d'utilisateurs. Ceux-ci peuvent être des utilisateurs professionnels ou scolaires qui ont créé l’annuaire, ou bien des utilisateurs externes (autrement dit, des comptes Microsoft). Les abonnements sont accessibles par un sous-ensemble des utilisateurs du répertoire qui ont été affectés comme administrateur de service ou comme coadministrateur ; la seule exception est que, pour des raisons d'héritage, les comptes Microsoft (anciennement Windows Live ID) peuvent être affectés comme administrateur de service ou comme co-admistrateur sans être présents dans le répertoire.
 
-Les entreprises orientées sécurité doivent s’efforcer de donner aux employés les autorisations exactes dont ils ont besoin. Un trop grand nombre d’autorisations peut exposer un compte aux attaquants. Si le nombre d’autorisations est trop faible, les employés ne peuvent pas effectuer leur travail efficacement. Le [contrôle d’accès en fonction du rôle (RBAC) dans Azure](../../role-based-access-control/overview.md) permet de résoudre ce problème en offrant une gestion précise de l’accès pour Azure.
+Les entreprises orientées sécurité doivent s’efforcer de donner aux employés les autorisations exactes dont ils ont besoin. Un trop grand nombre d’autorisations peut exposer un compte aux attaquants. Si le nombre d’autorisations est trop faible, les employés ne peuvent pas effectuer leur travail efficacement. Le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/overview.md) permet de résoudre ce problème en offrant une gestion précise de l’accès pour Azure.
 
 ![Accès des ressources sécurisées](./media/technical-capabilities/azure-security-technical-capabilities-fig4.png)
 
-Avec le contrôle d’accès en fonction du rôle, vous pouvez séparer les tâches au sein de votre équipe et accorder aux utilisateurs uniquement les accès nécessaires pour accomplir leur travail. Plutôt que de donner à tous des autorisations illimitées au sein de votre abonnement ou de vos ressources Azure, vous pouvez autoriser uniquement certaines actions. Par exemple, vous pouvez utiliser le RBAC pour permettre à un employé donné de gérer les machines virtuelles dans un abonnement, tandis qu’un autre pourra gérer les bases de données SQL au sein du même abonnement.
+Avec Azure RBAC, vous pouvez séparer les tâches au sein de votre équipe et accorder aux utilisateurs uniquement les accès nécessaires pour accomplir leur travail. Plutôt que de donner à tous des autorisations illimitées au sein de votre abonnement ou de vos ressources Azure, vous pouvez autoriser uniquement certaines actions. Par exemple, vous pouvez utiliser Azure RBAC pour permettre à un employé donné de gérer les machines virtuelles dans un abonnement, tandis qu’un autre pourra gérer les bases de données SQL au sein du même abonnement.
 
-![Accès aux ressources sécurisées dans Azure (RBAC)](./media/technical-capabilities/azure-security-technical-capabilities-fig5.png)
+![Accès aux ressources sécurisées à l’aide d’Azure RBAC](./media/technical-capabilities/azure-security-technical-capabilities-fig5.png)
 
 ## <a name="data-security-and-encryption"></a>Chiffrement et sécurité des données
 
 Pour assurer la protection des données dans le cloud, l’un des facteurs clés consiste à tenir compte des états que les données peuvent présenter, mais aussi des contrôles disponibles pour ces états. Pour les bonnes pratiques de chiffrement et de sécurité des données dans Azure, les recommandations que nous formulons s’articulent autour des états suivants des données :
 
 - Au repos : Cela inclut tous les objets de stockage, conteneurs et types d’informations présents de manière statique sur un support physique, qu’il s’agisse d’un disque magnétique ou d’un disque optique.
-
 - En transit : Lorsque des données sont transférées entre des composants, des emplacements ou des programmes (sur le réseau, par exemple) via un bus de service (depuis un emplacement local vers le cloud, ou vice-versa, y compris via des connexions hybrides comme ExpressRoute), ou lors d’un processus d’entrée/sortie, on parle de données « en transit ».
 
 ### <a name="encryption-at-rest"></a>Chiffrement au repos
 
-Pour appliquer le chiffrement au repos, vous devez effectuer ce qui suit :
-
-Prend en charge au moins un des modèles de chiffrement recommandés qui sont répertoriés dans le tableau suivant pour chiffrer les données.
-
-| Modèles de chiffrement |  |  |  |
-| ----------------  | ----------------- | ----------------- | --------------- |
-| Chiffrement serveur | Chiffrement serveur | Chiffrement serveur | Chiffrement client
-| Chiffrement côté serveur à l’aide de clés gérés par le service | Chiffrement côté serveur à l’aide de clés gérées par le client dans Azure Key Vault | Chiffrement côté serveur à l’aide de clés gérées par le client local |
-| • Les fournisseurs de ressources Azure effectuent les opérations de chiffrement et de déchiffrement <br> • Microsoft gère les clés <br>• Fonctionnalité cloud complète | • Les fournisseurs de ressources Azure effectuent les opérations de chiffrement et de déchiffrement<br>• Le client contrôle les clés par le biais d’Azure Key Vault<br>• Fonctionnalité cloud complète | • Les fournisseurs de ressources Azure effectuent les opérations de chiffrement et de déchiffrement <br>• Le client contrôle les clés localement <br> • Fonctionnalité cloud complète| • Les services Azure ne peuvent pas voir les données déchiffrées <br>• Les clients conservent les clés localement (ou dans d’autres banques d’informations sécurisées). Les clés ne sont pas disponibles pour les services Azure <br>• Fonctionnalité cloud réduite|
-
-### <a name="enabling-encryption-at-rest"></a>Activation du chiffrement au repos
-
-**Identifier tous les emplacements où vos données sont stockées**
-
-Le chiffrement au repos vise à chiffrer toutes les données. En agissant ainsi, la possibilité qu’il puisse manquer des données importantes ou des emplacements persistants est éliminée. Énumérez toutes les données stockées par votre application.
-
-> [!Note]
-> Pas simplement les « données d’application » ou les « informations d’identification personnelle », mais les données relatives à l’application, y compris les métadonnées de compte (mappages d’abonnement, informations de contrat, informations d’identification personnelle).
-
-Réfléchissez aux banques d’informations que vous utilisez pour stocker les données. Par exemple :
-
-- Stockage externe (par exemple, SQL Azure, Document DB, HDInsights, Data Lake, etc.)
-
-- Stockage temporaire (n’importe quel cache local incluant les données du locataire)
-
-- Cache en mémoire (peut être intégré dans le fichier d’échange)
-
-### <a name="leverage-the-existing-encryption-at-rest-support-in-azure"></a>Optimiser la prise en charge existante du chiffrement au repos dans Azure
-
-Pour chaque banque d’informations que vous utilisez, tirez parti de la prise en charge existante du chiffrement au repos.
-
-- Stockage Azure : Consultez [Chiffrement du service Stockage Azure pour les données au repos](../../storage/common/storage-service-encryption.md),
-
-- SQL Azure : Consultez [Transparent Data Encryption (TDE), SQL Always Encrypted](https://msdn.microsoft.com/library/mt163865.aspx)
-
-- Machine virtuelle & stockage sur disque local ([Azure Disk Encryption](../azure-security-disk-encryption-overview.md))
-
-Pour le stockage de disque local et de machine virtuelle, utilisez Azure Disk Encryption où il est pris en charge :
-
-#### <a name="iaas"></a>IaaS
-
-Les services avec des machines virtuelles IaaS (Windows ou Linux) doivent utiliser [Azure Disk Encryption](https://microsoft.sharepoint.com/teams/AzureSecurityCompliance/Security/SitePages/Azure%20Disk%20Encryption.aspx) pour chiffrer les volumes contenant des données client.
-
-#### <a name="paas-v2"></a>PaaS v2
-
-Les services qui s’exécutent sur PaaS v2 au moyen de Service Fabric peuvent utiliser Azure Disk Encryption pour le groupe de machines virtuelles identiques, afin de chiffrer leurs machines virtuelles PaaS v2.
-
-#### <a name="paas-v1"></a>PaaS v1
-
-Actuellement, Azure Disk Encryption n’est pas pris en charge sur PaaS v1. Par conséquent, vous devez utiliser le chiffrement au niveau de l’application pour chiffrer les données persistantes au repos.  Cela inclut, mais n’est pas limité aux données d’application, fichiers temporaires, journaux d’activité et vidages sur incident.
-
-La plupart des services devraient tenter de tirer parti du chiffrement d’un fournisseur de ressources de stockage. Certains services doivent procéder à un chiffrement explicite, par exemple, le matériel de clé persistante (certificats, clé racine / principale) doit être stocké dans Key Vault.
-
-Si vous prenez en charge le chiffrement côté service avec des clés gérées par le client, celui-ci doit trouver le moyen de nous faire parvenir la clé. Le moyen recommandé et pris en charge pour ce faire est l’intégration à Azure Key Vault. Dans ce cas, les clients peuvent ajouter et gérer leurs clés dans Azure Key Vault. Un client peut apprendre à utiliser Azure Key Vault en consultant [Bien démarrer avec Key Vault](https://go.microsoft.com/fwlink/?linkid=521402).
-
-Pour l’intégration à Azure Key Vault, vous devez ajouter du code pour demander une clé à Azure Key Vault lorsqu’elle est nécessaire pour le déchiffrement.
-
-- Consultez [Azure Key Vault – Étape par étape](https://blogs.technet.microsoft.com/kv/2015/06/02/azure-key-vault-step-by-step/) pour obtenir plus d’informations sur l’intégration à Azure Key Vault.
-
-Si vous prenez en charge les clés gérées par le client, vous devez fournir une expérience utilisateur (UX) pour que le client puisse spécifier quel Key Vault (ou l’URI Key Vault) utiliser.
-
-Comme le chiffrement au repos implique le chiffrement de l’hôte, de l’infrastructure et des données du locataire, la perte des clés due à une défaillance du système ou à des activités malveillantes peut signifier la perte de toutes les données chiffrées. Il est donc capital que votre solution de chiffrement au repos dispose d’un historique de récupération d’urgence complet, résistant aux défaillances du système et aux activités malveillantes.
-
-Les services qui implémentent le chiffrement au repos sont en général toujours vulnérables au niveau des données ou des clés de chiffrement qui restent non chiffrés sur le lecteur hôte (par exemple, dans le fichier d’échange du système d’exploitation hôte). Par conséquent, les services doivent s’assurer que le volume hôte soit chiffré pour leurs services. Pour faciliter cette opération, l’équipe Compute a activé le déploiement du chiffrement de l’hôte, qui utilise [BitLocker](https://technet.microsoft.com/library/dn306081.aspx) NKP et des extensions vers l’agent et le service DCM pour chiffrer le volume hôte.
-
-La plupart des services sont implémentés sur des machines virtuelles Azure standard. Ces services devraient automatiquement récupérés le[chiffrement de l’hôte](../azure-security-disk-encryption-overview.md) lorsque Compute l’active. Pour les services qui s’exécutent dans les clusters gérés par Compute, le chiffrement de l’hôte est activé automatiquement en même temps que Windows Server 2016 est déployé.
+Le chiffrement au repos est détaillé dans [Chiffrement de données Azure au repos](encryption-atrest.md).
 
 ### <a name="encryption-in-transit"></a>Chiffrement en transit
 
@@ -254,35 +183,35 @@ Pour les organisations devant sécuriser l’accès à Azure à partir d’un se
 
 Les jeux de données volumineux peuvent être transmis par le biais d’une liaison réseau étendu haut débit dédiée, comme [ExpressRoute](https://azure.microsoft.com/services/expressroute/). Si vous choisissez d’utiliser ExpressRoute, vous pouvez également chiffrer les données au niveau des applications par le biais de [SSL/TLS](https://support.microsoft.com/kb/257591) ou d’autres protocoles, pour optimiser la protection.
 
-Si vous interagissez avec Azure Storage via le portail Azure, toutes les transactions se produisent via HTTPS. L’[API de stockage REST](https://msdn.microsoft.com/library/azure/dd179355.aspx) par le biais de HTTPS peut également être utilisée pour interagir avec [Stockage Azure](https://azure.microsoft.com/services/storage/) et [Azure SQL Database](https://azure.microsoft.com/services/sql-database/).
+Si vous interagissez avec Azure Storage via le portail Azure, toutes les transactions se produisent via HTTPS. L’[API de stockage REST](/rest/api/storageservices/) par le biais de HTTPS peut également être utilisée pour interagir avec [Stockage Azure](https://azure.microsoft.com/services/storage/) et [Azure SQL Database](https://azure.microsoft.com/services/sql-database/).
 
-Les organisations qui ne parviennent pas à protéger les données en transit sont plus sensibles aux [attaques d’intercepteur](https://technet.microsoft.com/library/gg195821.aspx), aux [écoutes électroniques](https://technet.microsoft.com/library/gg195641.aspx) et au piratage de session. Ces attaques peuvent être la première étape d’un processus visant à accéder à des données confidentielles.
+Les organisations qui ne parviennent pas à protéger les données en transit sont plus sensibles aux [attaques d’intercepteur](/previous-versions/office/skype-server-2010/gg195821(v=ocs.14)), aux [écoutes électroniques](/previous-versions/office/skype-server-2010/gg195641(v=ocs.14)) et au piratage de session. Ces attaques peuvent être la première étape d’un processus visant à accéder à des données confidentielles.
 
 Vous pouvez en savoir plus sur l’option de VPN Azure en lisant l’article [Planification et conception de la passerelle VPN](../../vpn-gateway/vpn-gateway-about-vpngateways.md).
 
 ### <a name="enforce-file-level-data-encryption"></a>Application du chiffrement des données au niveau fichier
 
-[Azure RMS](https://technet.microsoft.com/library/jj585026.aspx) utilise des stratégies de chiffrement, d’identité et d’autorisation pour vous aider à sécuriser vos fichiers et vos e-mails. Azure RMS peut fonctionner sur plusieurs appareils (téléphones, tablettes et PC), en protégeant les données au sein de votre organisation et en dehors de cette dernière. Cette fonctionnalité est possible, car Azure RMS ajoute un niveau de protection qui reste avec les données, même lorsqu’elles quittent les limites de votre organisation.
+[Azure RMS](/azure/information-protection/what-is-azure-rms) utilise des stratégies de chiffrement, d’identité et d’autorisation pour vous aider à sécuriser vos fichiers et vos e-mails. Azure RMS peut fonctionner sur plusieurs appareils (téléphones, tablettes et PC), en protégeant les données au sein de votre organisation et en dehors de cette dernière. Cette fonctionnalité est possible, car Azure RMS ajoute un niveau de protection qui reste avec les données, même lorsqu’elles quittent les limites de votre organisation.
 
 Quand vous utilisez Azure RMS pour protéger vos fichiers, vous recourez au chiffrement standard avec prise en charge complète de la norme [FIPS 140-2](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-2.pdf). Lorsque vous tirez parti d’Azure RMS pour la protection des données, vous avez l’assurance que la protection reste avec le fichier, même s’il est copié sur un stockage qui n’est pas sous le contrôle du département informatique (service de stockage cloud, par exemple). Il en va de même pour les fichiers partagés par e-mail ; ils sont protégés en tant que pièces jointes à un message électronique. Des instructions expliquant comment ouvrir la pièce jointe protégée sont fournies.
 Si vous planifiez l’adoption d’Azure RMS, nous vous recommandons de suivre les conseils ci-après :
 
-- Installez l’[application de partage RMS](https://technet.microsoft.com/library/dn339006.aspx) Cette application s’intègre avec les applications Office en installant un complément Office, afin que les utilisateurs puissent directement protéger leurs fichiers, en toute simplicité.
+- Installez l’[application de partage RMS](/azure/information-protection/rms-client/sharing-app-windows) Cette application s’intègre avec les applications Office en installant un complément Office, afin que les utilisateurs puissent directement protéger leurs fichiers, en toute simplicité.
 
 - Configurez des applications et des services pour prendre en charge Azure RMS.
 
-- Créez des [modèles personnalisés](https://technet.microsoft.com/library/dn642472.aspx) qui reflètent les besoins de votre entreprise (exemple : un modèle portant sur des données ultra-secrètes, qui doit être appliqué à tous les e-mails ultra-secrets).
+- Créez des [modèles personnalisés](/azure/information-protection/configure-policy-templates) qui reflètent les besoins de votre entreprise (exemple : un modèle portant sur des données ultra-secrètes, qui doit être appliqué à tous les e-mails ultra-secrets).
 
 Les organisations bénéficiant d’une [classification](https://download.microsoft.com/download/0/A/3/0A3BE969-85C5-4DD2-83B6-366AA71D1FE3/Data-Classification-for-Cloud-Readiness.pdf) et d’une protection insuffisantes des données sont plus vulnérables aux fuites de données. Si la protection des fichiers n’est pas appropriée, les organisations ne pourront pas optimiser leur visibilité, ni surveiller les abus ou empêcher tout accès malveillant aux fichiers.
 
 > [!Note]
-> Vous pouvez en savoir plus sur Azure RMS en lisant l’article [Prise en main d’Azure Rights Management](https://technet.microsoft.com/library/jj585016.aspx).
+> Vous pouvez en savoir plus sur Azure RMS en lisant l’article [Prise en main d’Azure Rights Management](/azure/information-protection/requirements).
 
 ## <a name="secure-your-application"></a>Sécuriser votre application
 Si Azure est responsable de la sécurisation de l’infrastructure et de la plateforme sur laquelle votre application s’exécute, il vous incombe de sécuriser votre application elle-même. En d’autres termes, vous devez développer, déployer et gérer votre code d’application et le contenu de manière sécurisée. Sinon, votre code d’application ou le contenu peut encore être vulnérable aux menaces.
 
 ### <a name="web-application-firewall"></a>Pare-feu d’application web
-Le [pare-feu d’applications Web (WAF, Web Application Firewall)](../../application-gateway/waf-overview.md) est une fonctionnalité de [Application Gateway](../../application-gateway/overview.md) qui protège vos applications web de manière centralisée contre les vulnérabilités et exploits courants.
+Le [pare-feu d’applications Web (WAF, Web Application Firewall)](../../web-application-firewall/ag/ag-overview.md) est une fonctionnalité de [Application Gateway](../../application-gateway/overview.md) qui protège vos applications web de manière centralisée contre les vulnérabilités et exploits courants.
 
 Le pare-feu d’applications web suit les règles des [Ensembles de règles de base OWASP](https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project) 3.0 ou 2.2.9. Les applications Web sont de plus en plus la cible d’attaques malveillantes qui exploitent des vulnérabilités connues. Les types d’attaques les plus courantes sont l’injection de code SQL, les attaques de script site à site, entre autres. Empêcher ces attaques dans le code d’application peut se révéler difficile et nécessiter une maintenance rigoureuse, des mises à jour correctives ainsi que la surveillance au niveau de plusieurs couches de la topologie de l’application. Un pare-feu d’applications web centralisé facilite grandement la gestion de la sécurité et offre une meilleure garantie de protection aux administrateurs de l’application contre les menaces ou les intrusions. Une solution WAF peut également réagir plus rapidement à une menace de sécurité en exécutant la mise à jour corrective d’une vulnérabilité connue dans un emplacement central plutôt que de sécuriser individuellement chacune des applications web. Les passerelles d’application existantes peuvent être facilement converties en une passerelle d’application avec un pare-feu d’applications web.
 
@@ -303,7 +232,7 @@ Le pare-feu d’applications web protège notamment des vulnérabilités web cou
 - Détection des erreurs de configuration d’application courantes (par exemple, Apache, IIS, etc.)
 
 > [!Note]
-> Pour une liste plus détaillée des règles et de leurs protections, consultez ces [Ensembles de règles de base](../../application-gateway/waf-overview.md).
+> Pour une liste plus détaillée des règles et de leurs protections, consultez ces [Ensembles de règles de base](../../web-application-firewall/ag/ag-overview.md).
 
 Azure dispose de plusieurs fonctionnalités simples d’utilisation pour aider à sécuriser le trafic entrant et sortant de votre application. Azure aide également les clients à sécuriser leur code d’application en fournissant des fonctionnalités en externe pour analyser votre application web et y rechercher des vulnérabilités.
 
@@ -336,7 +265,7 @@ Azure App Service utilise la même solution anti-programme malveillant qu’Azur
 ## <a name="secure-your-network"></a>Sécuriser votre réseau
 Microsoft Azure inclut une infrastructure réseau solide pour prendre en charge les exigences de connectivité de vos applications et services. La connectivité réseau est possible entre les ressources hébergées dans Azure, entre les ressources hébergées sur site et dans Azure, mais aussi vers et à partir d’Internet et d’Azure.
 
-L’[infrastructure réseau d’Azure](../../virtual-machines/windows/infrastructure-example.md) vous permet de connecter en toute sécurité les ressources Azure entre elles en utilisant des [réseaux virtuels](../../virtual-network/virtual-networks-overview.md). Un réseau virtuel est une représentation de votre propre réseau dans le cloud. Un réseau virtuel est une isolation logique du réseau cloud Azure dédié à votre abonnement. Vous pouvez connecter des réseaux virtuels à vos réseaux locaux.
+L’[infrastructure réseau d’Azure](/previous-versions/azure/virtual-machines/windows/infrastructure-example) vous permet de connecter en toute sécurité les ressources Azure entre elles en utilisant des [réseaux virtuels](../../virtual-network/virtual-networks-overview.md). Un réseau virtuel est une représentation de votre propre réseau dans le cloud. Un réseau virtuel est une isolation logique du réseau cloud Azure dédié à votre abonnement. Vous pouvez connecter des réseaux virtuels à vos réseaux locaux.
 
 ![Sécuriser votre réseau (protection)](./media/technical-capabilities/azure-security-technical-capabilities-fig6.png)
 
@@ -406,7 +335,7 @@ Cette méthode vous permet de regrouper les données issues de différentes sour
 
 ### <a name="azure-security-center"></a>Azure Security Center
 
-[Azure Security Center](../../security-center/security-center-intro.md) vous aide à prévenir, détecter et résoudre les menaces grâce à une visibilité et un contrôle accrus de la sécurité de vos ressources Azure. Il fournit une surveillance de la sécurité et une gestion des stratégies intégrées pour l’ensemble de vos abonnements Azure, vous aidant ainsi à détecter les menaces qui pourraient passer inaperçues. De plus, il est compatible avec un vaste écosystème de solutions de sécurité.
+[Azure Security Center](../../security-center/security-center-introduction.md) vous aide à prévenir, détecter et résoudre les menaces grâce à une visibilité et un contrôle accrus de la sécurité de vos ressources Azure. Il fournit une surveillance de la sécurité et une gestion des stratégies intégrées pour l’ensemble de vos abonnements Azure, vous aidant ainsi à détecter les menaces qui pourraient passer inaperçues. De plus, il est compatible avec un vaste écosystème de solutions de sécurité.
 
 Le Centre de sécurité analyse l’état de sécurité de vos ressources Azure pour identifier les vulnérabilités potentielles. Une liste de recommandations vous guide tout au long du processus de configuration des contrôles nécessaires.
 
@@ -438,7 +367,8 @@ Le Centre de sécurité collecte, analyse et intègre automatiquement les donné
 
 Les applications cloud sont complexes, et se composent de nombreux éléments mobiles. L’analyse fournit des données visant à garantir que votre application reste opérationnelle et soit exécutée en toute intégrité. Elle vous permet également de parer à des problèmes potentiels ou de résoudre des problèmes déjà survenus.
 
-![Azure Monitor](./media/technical-capabilities/azure-security-technical-capabilities-fig10.png) En outre, vous pouvez utiliser les données de surveillance pour obtenir des informations détaillées sur votre application. Ces connaissances peuvent vous aider à améliorer les performances de l’application ou sa facilité de gestion, ou à automatiser des actions qui exigeraient normalement une intervention manuelle.
+![Diagramme montrant comment vous pouvez utiliser les données de surveillance pour obtenir des informations détaillées sur votre application.](./media/technical-capabilities/azure-security-technical-capabilities-fig10.png)
+En outre, vous pouvez utiliser les données d’analyse pour obtenir des informations détaillées sur votre application. Ces connaissances peuvent vous aider à améliorer les performances de l’application ou sa facilité de gestion, ou à automatiser des actions qui exigeraient normalement une intervention manuelle.
 
 L’audit de sécurité de votre réseau est essentiel pour détecter ses vulnérabilités et assurer la conformité avec votre modèle de gouvernance réglementaire et de sécurité informatique. Grâce à l’affichage du groupe de sécurité, vous pouvez récupérer le groupe de sécurité réseau configuré et ses règles de sécurité, ainsi que les règles de sécurité en vigueur. Avec la liste des règles appliquées, vous pouvez identifier les ports ouverts et évaluer la vulnérabilité du réseau.
 
@@ -448,7 +378,7 @@ L’audit de sécurité de votre réseau est essentiel pour détecter ses vulné
 
 ### <a name="storage-analytics"></a>Storage analytics
 
-[Storage Analytics](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics) peut stocker des mesures qui comprennent les statistiques de transactions agrégées et les données de capacité relatives aux demandes adressées à un service de stockage. Les transactions sont indiquées au niveau de l'opération d'API ainsi qu'au niveau du service de stockage, et la capacité est indiquée au niveau du service de stockage. Les données de métriques peuvent être utilisées pour analyser l'utilisation du service de stockage, diagnostiquer les problèmes au niveau des demandes effectuées auprès du service de stockage et améliorer les performances des applications qui utilisent un service.
+[Storage Analytics](/rest/api/storageservices/fileservices/storage-analytics) peut stocker des mesures qui comprennent les statistiques de transactions agrégées et les données de capacité relatives aux demandes adressées à un service de stockage. Les transactions sont indiquées au niveau de l'opération d'API ainsi qu'au niveau du service de stockage, et la capacité est indiquée au niveau du service de stockage. Les données de métriques peuvent être utilisées pour analyser l'utilisation du service de stockage, diagnostiquer les problèmes au niveau des demandes effectuées auprès du service de stockage et améliorer les performances des applications qui utilisent un service.
 
 ### <a name="application-insights"></a>Application Insights
 
@@ -492,7 +422,7 @@ Resource Manager offre plusieurs avantages :
 
 - Vous pouvez définir les dépendances entre les ressources, de façon à les déployer dans le bon ordre.
 
-- Vous pouvez appliquer le contrôle d’accès à tous les services dans votre groupe de ressources, car le contrôle d’accès en fonction du rôle (RBAC) est intégré en mode natif à la plateforme de gestion.
+- Vous pouvez appliquer le contrôle d’accès à tous les services dans votre groupe de ressources, car le contrôle d’accès en fonction du rôle Azure (Azure RBAC) est intégré en mode natif à la plateforme de gestion.
 
 - Vous pouvez appliquer des balises aux ressources pour organiser logiquement toutes les ressources de votre abonnement.
 

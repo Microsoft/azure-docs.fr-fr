@@ -11,16 +11,16 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 10/18/2018
 ms.author: allensu
 ms.custom: mvc
-ms.openlocfilehash: faf51dbb1f1c3c0346b1ae9104494538efcc2ee7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 29b6cb25e021e86ce6663b4db5c89217aaf70a37
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259968"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84887397"
 ---
 # <a name="allowed-certificate-authorities-for-enabling-custom-https-on-azure-cdn"></a>Autorités de certification autorisées pour le protocole HTTPS personnalisé sur Azure CDN
 

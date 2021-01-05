@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/15/2019
-ms.custom: H1Hack27Feb2017,hdinsightactive
-ms.openlocfilehash: 201bb40e5024442587f5508886da7e844f35be40
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: H1Hack27Feb2017,hdinsightactive, devx-track-python
+ms.openlocfilehash: 0179fd10e75af0ced55b4bb41f9525dc26b3efe5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74148393"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023072"
 ---
 # <a name="use-python-user-defined-functions-udf-with-apache-hive-and-apache-pig-in-hdinsight"></a>Utiliser des fonctions définies par l’utilisateur (UDF) Python avec Apache Hive et Apache Pig dans HDInsight
 
@@ -31,7 +31,7 @@ HDInsight inclut également Jython, une implémentation de Python écrite en Jav
 * **Un client SSH**. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 * Le [schéma d’URI](../hdinsight-hadoop-linux-information.md#URI-and-scheme) de votre principal espace de stockage de clusters. Il s’agirait de `wasb://` pour Stockage Azure, de `abfs://` pour Azure Data Lake Storage Gen2 ou de adl:// pour Azure Data Lake Storage Gen1. Si le transfert sécurisé est activé pour le stockage Azure, l’URI sera wasbs://.  Voir aussi [transfert sécurisé](../../storage/common/storage-require-secure-transfer.md).
 * **Changement possible de la configuration du stockage.**  Consultez [Configuration du stockage](#storage-configuration) si vous utilisez le type de compte de stockage `BlobStorage`.
-* facultatif.  Si vous prévoyez d’utiliser PowerShell, le [module AZ](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) doit être installé.
+* facultatif.  Si vous prévoyez d’utiliser PowerShell, le [module AZ](/powershell/azure/new-azureps-module-az) doit être installé.
 
 > [!NOTE]  
 > Le compte de stockage utilisé dans cet article était Stockage Azure avec le [transfert sécurisé](../../storage/common/storage-require-secure-transfer.md) activé : `wasbs` est donc utilisé tout au long de cet article.
@@ -46,7 +46,7 @@ Aucune action n’est nécessaire si le compte de stockage utilisé est de type 
 > * Vous créez les scripts Python sur votre environnement de développement local.
 > * Vous chargez les scripts sur HDInsight en utilisant la commande `scp` ou le script PowerShell fourni.
 >
-> Si vous voulez utiliser [Azure Cloud Shell (bash)](https://docs.microsoft.com/azure/cloud-shell/overview) pour travailler avec HDInsight, vous devez :
+> Si vous voulez utiliser [Azure Cloud Shell (bash)](../../cloud-shell/overview.md) pour travailler avec HDInsight, vous devez :
 >
 > * Créez les scripts à l’intérieur de l’environnement de l’interpréteur de commandes cloud.
 > * Utilisez `scp` pour charger les fichiers de l’interpréteur de commandes cloud vers HDInsight.
@@ -150,11 +150,13 @@ Dans les commandes ci-dessous, remplacez `sshuser` par le nom d’utilisateur r�
 
 3. Après avoir entré la dernière ligne, la tâche doit démarrer. Une fois le travail terminé, il renvoie une sortie comparable à l’exemple de sortie suivant :
 
-        100041    RIM 9650    d476f3687700442549a83fac4560c51c
-        100041    RIM 9650    d476f3687700442549a83fac4560c51c
-        100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
-        100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
-        100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+    ```output
+    100041    RIM 9650    d476f3687700442549a83fac4560c51c
+    100041    RIM 9650    d476f3687700442549a83fac4560c51c
+    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+    ```
 
 4. Pour quitter Beeline, entrez la commande suivante :
 
@@ -281,11 +283,13 @@ Get-AzHDInsightJobOutput `
 
 La sortie du travail **Hive** doit ressembler à l’exemple de sortie suivant :
 
-    100041    RIM 9650    d476f3687700442549a83fac4560c51c
-    100041    RIM 9650    d476f3687700442549a83fac4560c51c
-    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
-    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
-    100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+```output
+100041    RIM 9650    d476f3687700442549a83fac4560c51c
+100041    RIM 9650    d476f3687700442549a83fac4560c51c
+100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+100042    Apple iPhone 4.2.x    375ad9a0ddc4351536804f1d5d0ea9b9
+```
 
 ## <a name="apache-pig-udf"></a><a name="pigpython"></a>Fonction définie par l’utilisateur Apache Pig
 
@@ -399,11 +403,13 @@ Dans les commandes ci-dessous, remplacez `sshuser` par le nom d’utilisateur r�
 
 3. Après l’entrée de la ligne suivante, le travail doit démarrer. Une fois le travail terminé, il renvoie une sortie comparable aux données suivantes :
 
-        ((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
-        ((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
-        ((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
-        ((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
-        ((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+    ```output
+    ((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
+    ((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
+    ((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
+    ((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
+    ((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+    ```
 
 4. Utilisez `quit` pour quitter l’interpréteur de commandes Grunt, puis utilisez les éléments suivants pour modifier le fichier pigudf.py sur le système de fichiers local :
 
@@ -549,11 +555,13 @@ Get-AzHDInsightJobOutput `
 
 Le résultat du travail **Pig** doit être comparable aux données suivantes :
 
-    ((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
-    ((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
-    ((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
-    ((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
-    ((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+```output
+((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
+((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
+((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
+((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
+((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+```
 
 ## <a name="troubleshooting"></a><a name="troubleshooting"></a>Résolution des problèmes
 
@@ -561,7 +569,9 @@ Le résultat du travail **Pig** doit être comparable aux données suivantes :
 
 Lorsque vous exécutez le travail hive, vous pouvez rencontrer une erreur similaire au texte suivant :
 
-    Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
+```output
+Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
+```
 
 Ce problème peut être causé par les fins de ligne dans le fichier Python. De nombreux éditeurs Windows utilisent par défaut CRLF comme fin de ligne, mais les applications Linux utilisent généralement LF.
 
@@ -584,7 +594,7 @@ Les informations sur l’erreur (STDERR) et le résultat du travail (STDOUT) son
 
 ## <a name="next-steps"></a><a name="next"></a>Étapes suivantes
 
-Si vous devez charger des modules Python qui ne sont pas fournis par défaut, consultez l’article [How to deploy a Python module to Azure HDInsight](https://blogs.msdn.com/b/benjguin/archive/2014/03/03/how-to-deploy-a-python-module-to-windows-azure-hdinsight.aspx) (Déploiement d’un module Python vers Azure HDInsight).
+Si vous devez charger des modules Python qui ne sont pas fournis par défaut, consultez l’article [How to deploy a Python module to Azure HDInsight](/archive/blogs/benjguin/how-to-deploy-a-python-module-to-windows-azure-hdinsight) (Déploiement d’un module Python vers Azure HDInsight).
 
 Pour connaître d’autres façons d’utiliser Pig et Hive et pour en savoir plus sur l’utilisation de MapReduce, consultez les documents suivants :
 

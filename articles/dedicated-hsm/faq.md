@@ -1,6 +1,6 @@
 ---
 title: Questions fréquentes (FAQ) - HSM dédié Azure | Microsoft Docs
-description: Questions fréquentes sur les différentes rubriques du service HSM dédié Azure
+description: Trouvez des réponses aux questions courantes sur le module de sécurité du matériel dédié Azure, comme les informations de base, l’interopérabilité, la haute disponibilité et la prise en charge.
 services: dedicated-hsm
 author: johncdawson
 manager: rkarlin
@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 02/05/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 8f9e759372f01d2a1b48562aef2bace1e8435a67
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 0d3309283279c887c00a475ccedfe1edaf311ae5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683325"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88189877"
 ---
 # <a name="frequently-asked-questions-faq"></a>Forum Aux Questions (FAQ)
 
@@ -115,7 +115,7 @@ Oui, si vous disposez de modules HSM SafeNet Gemalto locaux. Il existe plusieurs
 ### <a name="q-what-operating-systems-are-supported-by-dedicated-hsm-client-software"></a>Q : Quels systèmes d’exploitation les logiciels clients de HSM dédié prennent-ils en charge ?
 
 * Windows, Linux, Solaris, AIX, HP-UX, FreeBSD
-* Virtuel : VMware, hyper-v, Xen, KVM
+* Virtuel : VMware, Hyper-V, Xen, KVM
 
 ### <a name="q-how-do-i-configure-my-client-application-to-create-a-high-availability-configuration-with-multiple-partitions-from-multiple-hsms"></a>Q : Comment configurer mon application cliente pour créer une configuration de haute disponibilité avec plusieurs partitions issues de plusieurs HSM ?
 
@@ -242,7 +242,7 @@ Microsoft n’a pas la possibilité de se connecter aux modules HSM alloués aux
 
 ### <a name="q-what-if-i-need-to-reboot-my-hsm"></a>Q : Que se passe-t-il si j’ai besoin de redémarrer mon module HSM ?
 
-Le module HSM a une option de ligne de commande de redémarrage. Toutefois, nous rencontrons occasionnellement des problèmes de blocage de redémarrage. C’est pourquoi, pour un redémarrage plus sûr, nous vous recommandons d’ouvrir une demande de support auprès de Microsoft pour que l’appareil soit physiquement redémarré. 
+Le module HSM dispose d’une option de redémarrage en ligne de commande. Toutefois, nous rencontrons des problèmes où le redémarrage cesse de répondre par intermittence. C’est pourquoi, pour un redémarrage plus sûr, nous vous recommandons d’ouvrir une demande de support auprès de Microsoft pour que l’appareil soit physiquement redémarré. 
 
 ## <a name="cryptography-and-standards"></a>Chiffrement et standards
 

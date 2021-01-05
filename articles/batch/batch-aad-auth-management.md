@@ -3,35 +3,35 @@ title: Utiliser Azure Active Directory pour authentifier des solutions Batch Man
 description: Découvrez comment utiliser Azure Active Directory pour l’authentification à partir d’applications qui utilisent la bibliothèque Batch Management .NET.
 ms.topic: how-to
 ms.date: 04/27/2017
-ms.custom: has-adal-ref
-ms.openlocfilehash: ec9cf15f37c3ca7e4e477c628733d34cac21c141
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.custom: has-adal-ref, devx-track-csharp
+ms.openlocfilehash: ff49d5e88df7c56ed4dee0685f09e45eb372aa5c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726891"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88930211"
 ---
 # <a name="authenticate-batch-management-solutions-with-active-directory"></a>Authentification de solutions de gestion Batch avec Active Directory
 
-Les applications qui appellent le service Azure Batch Management s’authentifient auprès d’[Azure Active Directory][aad_about] (Azure AD). Azure AD est le service Microsoft de gestion des répertoires et des identités basé sur le cloud mutualisé. Azure lui-même utilise Azure AD pour l’authentification de ses clients, de ses administrateurs de services fédérés et de ses utilisateurs professionnels.
+Les applications qui appellent le service Azure Batch Management s’authentifient auprès d’[Azure Active Directory](../active-directory/fundamentals/active-directory-whatis.md) (Azure AD). Azure AD est le service Microsoft de gestion des répertoires et des identités basé sur le cloud mutualisé. Azure lui-même utilise Azure AD pour l’authentification de ses clients, de ses administrateurs de services fédérés et de ses utilisateurs professionnels.
 
-La bibliothèque .NET de gestion Batch expose des types pour l’utilisation des packages d’application, des applications, des clés de compte et des comptes Batch. La bibliothèque Batch Management .NET est un client de fournisseur de ressources Azure, utilisée avec [Azure Resource Manager][resman_overview] pour gérer ces ressources programmatiquement. Azure AD est nécessaire pour authentifier les demandes effectuées via les clients de fournisseur de ressources Azure, dont la bibliothèque Batch Management .NET, et [Azure Resource Manager][resman_overview].
+La bibliothèque .NET de gestion Batch expose des types pour l’utilisation des packages d’application, des applications, des clés de compte et des comptes Batch. La bibliothèque Batch Management .NET est un client de fournisseur de ressources Azure, utilisée avec [Azure Resource Manager](../azure-resource-manager/management/overview.md) pour gérer ces ressources programmatiquement. Azure AD est nécessaire pour authentifier les requêtes effectuées via les clients de fournisseur de ressources Azure, dont la bibliothèque Batch Management .NET, et via Azure Resource Manager.
 
-Dans cet article, nous découvrons comment utiliser Azure AD pour l’authentification à partir des applications qui utilisent la bibliothèque .NET de gestion Batch. Nous montrons comment utiliser Azure AD pour authentifier un administrateur ou un coadministrateur d’abonnement avec l’authentification intégrée. Nous utilisons l’exemple de projet [AccountManagement][acct_mgmt_sample], disponible sur GitHub, pour parcourir la bibliothèque Batch Management .NET avec Azure AD.
+Dans cet article, nous découvrons comment utiliser Azure AD pour l’authentification à partir des applications qui utilisent la bibliothèque .NET de gestion Batch. Nous montrons comment utiliser Azure AD pour authentifier un administrateur ou un coadministrateur d’abonnement avec l’authentification intégrée. Nous utilisons l’exemple de projet [AccountManagement](https://github.com/Azure/azure-batch-samples/tree/master/CSharp/AccountManagement), disponible sur GitHub, pour parcourir la bibliothèque Batch Management .NET avec Azure AD.
 
 Pour en savoir plus sur l’utilisation de la bibliothèque .NET de gestion Batch et l’exemple AccountManagement, consultez [Gérer les quotas et comptes Batch avec la bibliothèque cliente Batch Management pour .NET](batch-management-dotnet.md).
 
 ## <a name="register-your-application-with-azure-ad"></a>Inscrire votre application auprès d’Azure AD
 
-La [bibliothèque d’authentification Azure Active Directory][aad_adal] (ADAL) fournit une interface programmatique à Azure AD, que vous pouvez utiliser dans vos applications. Pour appeler ADAL à partir de votre application, vous devez inscrire votre application dans un locataire Azure AD. Lorsque vous inscrivez votre application, vous fournissez des informations relatives à votre application à Azure AD, y compris un nom au sein du locataire Azure AD. Azure AD fournit ensuite un ID d’application que vous utilisez pour associer votre application à Azure AD lors de l’exécution. Pour en savoir plus sur l’ID d’application, consultez [Objets application et principal du service dans Azure Active Directory](../active-directory/develop/app-objects-and-service-principals.md).
+La [bibliothèque d’authentification Azure Active Directory](../active-directory/azuread-dev/active-directory-authentication-libraries.md) (ADAL) fournit une interface de programmation à Azure AD, que vous pouvez utiliser dans vos applications. Pour appeler ADAL à partir de votre application, vous devez inscrire votre application dans un locataire Azure AD. Lorsque vous inscrivez votre application, vous fournissez des informations relatives à votre application à Azure AD, y compris un nom au sein du locataire Azure AD. Azure AD fournit ensuite un ID d’application que vous utilisez pour associer votre application à Azure AD lors de l’exécution. Pour en savoir plus sur l’ID d’application, consultez [Objets application et principal du service dans Azure Active Directory](../active-directory/develop/app-objects-and-service-principals.md).
 
-Suivez les étapes de la section [Ajout d’une application](../active-directory/develop/quickstart-register-app.md) dans [Intégration d’applications dans Azure Active Directory][aad_integrate] pour inscrire l’exemple d’application AccountManagement. Indiquez **Application cliente native** comme type d’application. L’URI conforme au standard OAuth 2.0 de l’**URI de redirection** est `urn:ietf:wg:oauth:2.0:oob`. Pour `http://myaccountmanagementsample`l’URI de redirection **, vous pouvez toutefois spécifier n’importe quel URI valide (tel que** ), puisqu’il n’est pas nécessaire que ce soit un point de terminaison réel :
+Suivez les étapes de la section [Ajout d’une application](../active-directory/develop/quickstart-register-app.md) dans [Intégration d’applications dans Azure Active Directory](../active-directory/develop/quickstart-register-app.md) pour inscrire l’exemple d’application AccountManagement. Indiquez **Application cliente native** comme type d’application. L’URI conforme au standard OAuth 2.0 de l’**URI de redirection** est `urn:ietf:wg:oauth:2.0:oob`. Pour `http://myaccountmanagementsample`l’URI de redirection **, vous pouvez toutefois spécifier n’importe quel URI valide (tel que** ), puisqu’il n’est pas nécessaire que ce soit un point de terminaison réel.
 
-![](./media/batch-aad-auth-management/app-registration-management-plane.png)
+![Ajout d'une application](./media/batch-aad-auth-management/app-registration-management-plane.png)
 
 Lorsque vous avez terminé le processus d’inscription, l’ID d’application et l’ID d’objet (principal de service) sont répertoriés pour votre application.
 
-![](./media/batch-aad-auth-management/app-registration-client-id.png)
+![Processus d’inscription terminé](./media/batch-aad-auth-management/app-registration-client-id.png)
 
 ## <a name="grant-the-azure-resource-manager-api-access-to-your-application"></a>Accorder l’accès à l’API Azure Resource Manager à votre application
 
@@ -83,7 +83,7 @@ Votre application cliente utilise l’ID d’application (également appelé l�
 // Specify the unique identifier (the "Client ID") for your application. This is required so that your
 // native client application (i.e. this sample) can access the Microsoft Graph API. For information
 // about registering an application in Azure Active Directory, please see "Register an application with the Microsoft identity platform" here:
-// https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app
+// https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app
 private const string ClientId = "<application-id>";
 ```
 Copiez également l’URI de redirection que vous avez spécifiée pendant l’inscription. L’URI de redirection spécifié dans votre code doit correspondre à l’URI de redirection que vous avez fourni lors de l’inscription de l’application.
@@ -114,17 +114,7 @@ Après avoir fourni vos informations d’identification, l’exemple d’applica
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur l’exécution de l’[exemple d’application AccountManagement][acct_mgmt_sample], consultez [Gérer les quotas et comptes Batch avec la bibliothèque cliente Batch Management pour .NET](batch-management-dotnet.md).
-
-Pour en savoir plus sur Azure AD, consultez la [documentation sur Azure Active Directory](https://docs.microsoft.com/azure/active-directory/). Des exemples détaillés illustrant l’utilisation d’ADAL sont disponibles dans la bibliothèque [Exemples de code Azure](https://azure.microsoft.com/resources/samples/?service=active-directory).
-
-Pour authentifier des applications de service Batch à l’aide d’Azure AD, consultez [Authentifier des solutions de service Batch auprès d’Active Directory](batch-aad-auth.md).
-
-
-[aad_about]:../active-directory/fundamentals/active-directory-whatis.md "Qu’est-ce qu’Azure Active Directory ?"
-[aad_adal]: ../active-directory/active-directory-authentication-libraries.md
-[aad_auth_scenarios]:../active-directory/develop/authentication-scenarios.md "Scénarios d’authentification pour Azure AD"
-[aad_integrate]: ../active-directory/active-directory-integrating-applications.md "Intégration d’applications dans Azure Active Directory"
-[acct_mgmt_sample]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/AccountManagement
-[azure_portal]: https://portal.azure.com
-[resman_overview]: ../azure-resource-manager/management/overview.md
+- Pour en savoir plus sur l’exécution de l’[exemple d’application AccountManagement](https://github.com/Azure/azure-batch-samples/tree/master/CSharp/AccountManagement), consultez [Gérer les quotas et comptes Batch avec la bibliothèque cliente Batch Management pour .NET](batch-management-dotnet.md).
+- Pour en savoir plus sur Azure AD, consultez la [documentation sur Azure Active Directory](../active-directory/index.yml).
+- Des exemples détaillés illustrant l’utilisation d’ADAL sont disponibles dans la bibliothèque [Exemples de code Azure](https://azure.microsoft.com/resources/samples/?service=active-directory).
+- Pour authentifier des applications de service Batch à l’aide d’Azure AD, consultez [Authentifier des solutions de service Batch auprès d’Active Directory](batch-aad-auth.md).

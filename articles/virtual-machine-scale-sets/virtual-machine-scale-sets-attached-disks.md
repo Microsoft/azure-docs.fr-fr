@@ -9,15 +9,15 @@ ms.subservice: disks
 ms.date: 4/25/2017
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: e5bdb30929b4d93b05d850a56c9a6baf32f9856b
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 9e4bdf868d3f8ddf3a049509ead30a4b1ba341b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125007"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86527436"
 ---
 # <a name="azure-virtual-machine-scale-sets-and-attached-data-disks"></a>Groupes de machines virtuelles identiques Azure et disques de données associés
-Pour développer votre espace de stockage, les [groupes de machines virtuelles identiques](/azure/virtual-machine-scale-sets/) Azure prennent en charge les instances de machine virtuelle avec des disques de données associés. Vous pouvez associer des disques de données lorsque le groupe identique est créé ou sur un groupe identique existant.
+Pour développer votre espace de stockage, les [groupes de machines virtuelles identiques](./index.yml) Azure prennent en charge les instances de machine virtuelle avec des disques de données associés. Vous pouvez associer des disques de données lorsque le groupe identique est créé ou sur un groupe identique existant.
 
 > [!NOTE]
 > Lorsque vous créez un groupe identique avec des disques de données associés, vous devez monter et formater les disques à partir d’une machine virtuelle pour les utiliser (comme pour les machines virtuelles Azure autonomes). Une méthode pratique pour effectuer ce processus consiste à utiliser une extension de script personnalisé qui appelle un script pour partitionner et formater tous les disques de données sur une machine virtuelle. Pour obtenir des exemples, consultez [Azure CLI](tutorial-use-disks-cli.md#prepare-the-data-disks) [Azure PowerShell](tutorial-use-disks-powershell.md#prepare-the-data-disks).
@@ -33,7 +33,7 @@ Le reste de cet article décrit les cas d’usage spécifiques tels que les clus
 
 
 ## <a name="create-a-service-fabric-cluster-with-attached-data-disks"></a>Créer un cluster Service Fabric avec des disques de données associés
-Chaque [type de nœud](../service-fabric/service-fabric-cluster-nodetypes.md) d’un cluster [Service Fabric](/azure/service-fabric) exécuté dans Azure est alimenté par un groupe de machines virtuelles identiques. Avec un modèle Azure Resource Manager, vous pouvez associer des disques de données aux groupes identiques constituant le cluster Service Fabric. Vous pouvez utiliser un [modèle existant](https://github.com/Azure-Samples/service-fabric-cluster-templates) comme point de départ. Dans le modèle, incluez une section _dataDisks_ dans l’élément _storageProfile_ des ressources _Microsoft.Compute/virtualMachineScaleSets_, puis déployez-le. Dans l’exemple suivant, un disque de données de 128 Go est associé :
+Chaque [type de nœud](../service-fabric/service-fabric-cluster-nodetypes.md) d’un cluster [Service Fabric](../service-fabric/index.yml) exécuté dans Azure est alimenté par un groupe de machines virtuelles identiques. Avec un modèle Azure Resource Manager, vous pouvez associer des disques de données aux groupes identiques constituant le cluster Service Fabric. Vous pouvez utiliser un [modèle existant](https://github.com/Azure-Samples/service-fabric-cluster-templates) comme point de départ. Dans le modèle, incluez une section _dataDisks_ dans l’élément _storageProfile_ des ressources _Microsoft.Compute/virtualMachineScaleSets_, puis déployez-le. Dans l’exemple suivant, un disque de données de 128 Go est associé :
 
 ```json
 "dataDisks": [
@@ -94,5 +94,3 @@ Les disques de données spécifiés dans le modèle de groupe identique sont tou
 La prise en charge des disques managés Azure et des disques de données associés de groupe identique ests disponible dans les versions [_2016-04-30-preview_](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/compute/resource-manager/Microsoft.Compute/preview/2016-04-30-preview/compute.json) et ultérieures de l’APi Microsoft.Compute.API.
 
 La prise en charge du portail Azure pour les disques de données associés dans des groupes identiques est limitée. Selon vos besoins, vous pouvez utiliser des modèles Azure, la CLI, PowerShell, des kits de développement logiciel (SDK) et l’API REST pour gérer les disques associés.
-
-

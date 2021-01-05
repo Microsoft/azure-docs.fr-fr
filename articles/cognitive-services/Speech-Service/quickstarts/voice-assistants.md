@@ -1,22 +1,23 @@
 ---
 title: 'Démarrage rapide : Créer un assistant vocal personnalisé - Service Speech'
 titleSuffix: Azure Cognitive Services
-description: Dans cet article, vous allez utiliser le SDK Speech pour créer un assistant vocal personnalisé.
+description: Dans cet article, vous utilisez le SDK Speech pour créer un assistant vocal personnalisé.
 services: cognitive-services
 author: trrwilson
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: quickstart
-ms.date: 02/10/2020
+ms.date: 06/25/2020
 ms.author: travisw
-zone_pivot_groups: programming-languages-set-fifteen
-ms.openlocfilehash: be5ee988484f8e1f3e4ed6826e9bfabf2a63b47f
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.custom: devx-track-csharp
+zone_pivot_groups: programming-languages-voice-assistants
+ms.openlocfilehash: 6e13864aa46ff1871aa18d8d33296b21b99d7047
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82979092"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187629"
 ---
 # <a name="quickstart-create-a-custom-voice-assistant"></a>Démarrage rapide : Créer un assistant vocal personnalisée
 

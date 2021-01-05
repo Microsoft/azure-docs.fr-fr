@@ -6,12 +6,12 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: quickstart
 ms.date: 04/20/2020
-ms.openlocfilehash: ac81832765f674e58ad6b3213238e9c68e04d2dc
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 3d8ff1d2f121501152673c8375ef3d26aab10f1a
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81727476"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511737"
 ---
 # <a name="azure-media-player-quickstart"></a>Démarrage rapide du Lecteur multimédia Azure
 Le lecteur multimédia Azure est facile à configurer. Seules quelques minutes sont nécessaires pour récupérer la lecture simple de contenu multimédia à partir de votre compte Azure Media Services. Cette section montre les étapes de base sans entrer dans les détails. Les sections qui suivent fournissent des détails sur l’installation et la configuration du Lecteur multimédia Azure.  Ajoutez simplement ce qui suit à l’élément `<head>` de votre document :
@@ -63,4 +63,4 @@ Si vous ne souhaitez pas utiliser la configuration automatique, vous pouvez omet
 
 ## <a name="next-steps"></a>Étapes suivantes ##
 
-- [Démarrage rapide du Lecteur multimédia Azure](azure-media-player-quickstart.md)
+- [Installation complète du Lecteur multimédia Azure](https://docs.microsoft.com/azure/media-services/azure-media-player/azure-media-player-full-setup)

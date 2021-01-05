@@ -10,14 +10,19 @@ ms.subservice: bing-web-search
 ms.topic: sample
 ms.date: 05/15/2019
 ms.author: aahi
-ms.openlocfilehash: 36719fc8370c04e9c2d01422536502f90e124c12
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: f13250bb2d6829cf7f1bf3dd0417974b810a36fe
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735247"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350430"
 ---
 # <a name="bing-web-search-sdk-samples"></a>Exemples du kit SDK Recherche Web Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Le kit de développement logiciel (SDK) Recherche Web Bing est disponible en Python, Node.js, C# et Java. Vous trouverez les exemples de code, les prérequis et les instructions de génération sur GitHub. Les scénarios abordés sont les suivants :
 

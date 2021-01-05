@@ -1,19 +1,22 @@
 ---
-title: Tutoriel - Configurer votre instance de serveur de configuration dans Azure Spring Cloud
-description: Dans ce tutoriel, vous apprenez à configurer une instance de serveur de configuration Spring Cloud pour votre service Azure Spring Cloud dans le portail Azure
+title: Configurer votre instance Config Server dans Azure Spring Cloud
+description: Découvrez comment configurer une instance Config Server Spring Cloud pour votre service Azure Spring Cloud dans le portail Azure
 ms.service: spring-cloud
-ms.topic: tutorial
+ms.topic: how-to
 ms.author: brendm
 author: bmitchell287
 ms.date: 10/18/2019
-ms.openlocfilehash: 5e0b5633a153583117cfe0d90ec5c0e7c5f2a147
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-java
+ms.openlocfilehash: 3033be3a793c318135f8150b86114b6fee55fac7
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76277528"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94655196"
 ---
-# <a name="tutorial-set-up-a-spring-cloud-config-server-instance-for-your-service"></a>Tutoriel : Configurer une instance de serveur de configuration Spring Cloud pour votre service
+# <a name="set-up-a-spring-cloud-config-server-instance-for-your-service"></a>Configurer une instance de serveur de configuration Spring Cloud pour votre service
+
+**Cet article s’applique à :** ✔️ Java ✔️ C#
 
 Ce tutoriel vous montre comment connecter une instance de serveur de configuration Spring Cloud à votre service Azure Spring Cloud.
 
@@ -21,7 +24,7 @@ La configuration Spring Cloud offre la prise en charge côté serveur et côté 
 
 ## <a name="prerequisites"></a>Prérequis
 * Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
-* Un service Azure Spring Cloud déjà provisionné et en cours d’exécution. Pour configurer et lancer un service Azure Spring Cloud, consultez [Démarrage rapide : Lancer une application Java Spring en utilisant Azure CLI](spring-cloud-quickstart-launch-app-cli.md).
+* Un service Azure Spring Cloud déjà provisionné et en cours d’exécution. Pour configurer et lancer un service Azure Spring Cloud, consultez [Démarrage rapide : Lancer une application Java Spring en utilisant Azure CLI](spring-cloud-quickstart.md).
 
 ## <a name="restriction"></a>Restriction
 
@@ -33,6 +36,7 @@ eureka.client.tls.keystore
 server.port
 spring.cloud.config.tls.keystore
 spring.application.name
+spring.jmx.enabled
 ```
 
 > [!CAUTION]
@@ -77,6 +81,9 @@ Toutes les propriétés configurables servant à configurer un dépôt Git priv�
 | `host-key`                 | Non     | La clé hôte du serveur du dépôt Git ne doit pas inclure le préfixe d’algorithme tel qu’il est couvert par `host-key-algorithm`. |
 | `host-key-algorithm`       | Non     | Algorithme de clé d’hôte, doit être *ssh-dss*, *ssh-rsa*, *ecdsa-sha2-nistp256*, *ecdsa-sha2-nistp384* ou *ecdsa-sha2-nistp521*. *Obligatoire* uniquement si `host-key` existe. |
 | `strict-host-key-checking` | Non     | Indique si l’instance du serveur de configuration ne peut pas démarrer en cas d’utilisation de la `host-key` privée. Doit être *true* (valeur par défaut) ou *false*. |
+
+> [!NOTE]
+> Config Server prend `master` (sur Git lui-même) comme étiquette par défaut si elle n’est pas spécifiée. Toutefois, GitHub a récemment modifié la branche par défaut `master` en `main`. Pour éviter les défaillances du composant Config Server d’Azure Spring Cloud, prêtez attention à l’étiquette par défaut lors de la configuration de Config Server avec GitHub, en particulier pour les nouveaux référentiels créés.
 
 -----
 
@@ -126,13 +133,25 @@ Maintenant que vous avez enregistré vos fichiers de configuration dans un dép�
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Accédez à la page **Vue d’ensemble** de votre instance Azure Spring Cloud.
+2. Accédez à la page **Vue d’ensemble** de votre instance Azure Spring Cloud.
 
-1. Sélectionnez le service à configurer.
+3. Sélectionnez **Config Server** dans le volet de navigation de gauche.
 
-1. Dans le volet gauche de la page du service, sous **Paramètres**, sélectionnez l’onglet **Serveur de configuration**.
+4. Dans la section **Dépôt par défaut**, définissez **URI** sur « https://github.com/Azure-Samples/piggymetrics-config  ».
 
-![Fenêtre du serveur de configuration](media/spring-cloud-tutorial-config-server/portal-config-server.png)
+5. Cliquez sur **Valider**.
+
+    ![Accéder au serveur de configuration](media/spring-cloud-quickstart-launch-app-portal/portal-config.png)
+
+6. Une fois la validation terminée, cliquez sur **Appliquer** pour enregistrer vos modifications.
+
+    ![Validation du serveur de configuration](media/spring-cloud-quickstart-launch-app-portal/validate-complete.png)
+
+7. La mise à jour de la configuration peut prendre quelques minutes.
+ 
+    ![Mise à jour du serveur de configuration](media/spring-cloud-quickstart-launch-app-portal/updating-config.png) 
+
+8. Une fois la configuration terminée, vous devriez recevoir une notification.
 
 ### <a name="enter-repository-information-directly-to-the-azure-portal"></a>Entrer les informations de dépôt directement dans le portail Azure
 
@@ -144,14 +163,14 @@ Maintenant que vous avez enregistré vos fichiers de configuration dans un dép�
 
     * **Authentification de base** : Dans la section **Dépôt par défaut**, dans la zone **URI**, collez l’URI du dépôt, puis sélectionnez le bouton **Authentification** (icône de stylo). Dans le volet **Modifier l’authentification**, dans la liste déroulante **Type d’authentification**, sélectionnez **HTTP de base**, puis entrez votre nom d’utilisateur et votre mot de passe/jeton pour accorder l’accès à Azure Spring Cloud. Sélectionnez **OK**, puis **Appliquer** pour terminer la configuration de votre instance de serveur de configuration.
 
-    ![Volet Modifier l’authentification](media/spring-cloud-tutorial-config-server/basic-auth.png)
+    ![Volet Modifier l'authentification - Authentification de base](media/spring-cloud-tutorial-config-server/basic-auth.png)
     
     > [!CAUTION]
     > Certains serveurs de dépôt Git, comme GitHub, utilisent un *jeton personnel* ou un *jeton d’accès* (par exemple, un mot de passe), pour l’**Authentification de base**. Vous pouvez utiliser ce type de jeton comme mot de passe dans Azure Spring Cloud, car il n’expire jamais. Toutefois, pour les autres serveurs de dépôt Git de type BitBucket et Azure DevOps, le *jeton d’accès* expire au bout d’une ou deux heures. Dès lors, cette option n’est pas viable si vous utilisez ces serveurs de dépôt avec Azure Spring Cloud.
 
     * **SSH** : Dans la section **Dépôt par défaut**, dans la zone **URI**, collez l’URI du dépôt, puis sélectionnez le bouton **Authentification** (icône de stylo). Dans le volet **Modifier l’authentification**, dans la liste déroulante **Type d’authentification**, sélectionnez **SSH**, puis entrez votre **Clé privée**. Vous pouvez également spécifier votre **Clé d’hôte** et l’**Algorithme de la clé d’hôte**. Veillez à inclure votre clé publique dans le dépôt de votre serveur de configuration. Sélectionnez **OK**, puis **Appliquer** pour terminer la configuration de votre instance de serveur de configuration.
 
-    ![Volet Modifier l’authentification](media/spring-cloud-tutorial-config-server/ssh-auth.png)
+    ![Volet Modifier l'authentification - Authentification SSH](media/spring-cloud-tutorial-config-server/ssh-auth.png)
 
 #### <a name="pattern-repository"></a>Dépôt de modèles
 
@@ -161,7 +180,7 @@ Si vous souhaitez utiliser un **Dépôt de modèles** pour configurer votre serv
 
 Si vous avez écrit un fichier YAML avec les paramètres de votre dépôt, vous pouvez importer le fichier directement de votre machine locale vers Azure Spring Cloud. Un fichier YAML pour un dépôt privé avec authentification de base se présente comme suit :
 
-```yml
+```yaml
 spring:
     cloud:
         config:
@@ -180,6 +199,48 @@ Sélectionnez le bouton **Importer les paramètres**, puis sélectionnez le fich
 
 Les informations de votre fichier YAML doivent s’afficher dans le portail Azure. Sélectionnez **Appliquer** pour terminer. 
 
+## <a name="using-azure-repos-for-azure-spring-cloud-configuration"></a>Utiliser Azure Repos pour la configuration d'Azure Spring Cloud
+
+Azure Spring Cloud peut accéder aux référentiels Git publics, sécurisés par SSH ou sécurisés à l'aide de l'authentification de base HTTP. Nous allons utiliser cette dernière option car elle est plus facile à créer et à gérer avec Azure Repos.
+
+### <a name="get-repo-url-and-credentials"></a>Récupérer l'URL et les informations d'identification du référentiel
+1. Sur le portail Azure Repos de votre projet, cliquez sur le bouton « Cloner » :
+
+    ![Bouton Cloner](media/spring-cloud-tutorial-config-server/clone-button.png)
+
+1. Copiez l'URL du clone à partir de la zone de texte. Cette URL se présente généralement sous la forme suivante :
+
+    ```Text
+    https://<organization name>@dev.azure.com/<organization name>/<project name>/_git/<repository name>
+    ```
+
+    Supprimez tout ce qui se trouve après `https://` et avant `dev.azure.com`, y compris le symbole `@`. L'URL qui en résulte doit se présenter sous la forme suivante :
+
+    ```Text
+    https://dev.azure.com/<organization name>/<project name>/_git/<repository name>
+    ```
+
+    Enregistrez cette URL car vous en aurez besoin dans la section suivante.
+
+1. Cliquez sur « Générer les informations d'identification Git ». Un nom d'utilisateur et un mot de passe apparaissent. Enregistrez-les car vous en aurez besoin dans la section suivante.
+
+
+### <a name="configure-azure-spring-cloud-to-access-the-git-repository"></a>Configurer Azure Spring Cloud pour accéder au dépôt Git
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+
+1. Accédez à la page **Vue d’ensemble** de votre instance Azure Spring Cloud.
+
+1. Sélectionnez le service à configurer.
+
+1. Dans le volet gauche de la page du service, sous **Paramètres**, sélectionnez l’onglet **Serveur de configuration**. Configurez le référentiel que nous avons créé précédemment :
+   - Ajoutez l'URL du référentiel que vous avez enregistrée dans la section précédente.
+   - Cliquez sur `Authentication`, puis sélectionnez `HTTP Basic`.
+   - Le __nom d'utilisateur__ est celui qui a été enregistré dans la section précédente.
+   - Le __mot de passe__ est celui qui a été enregistré dans la section précédente.
+   - Cliquez sur « Appliquer » et attendez la fin de l'opération.
+
+   ![Serveur de configuration Spring Cloud](media/spring-cloud-tutorial-config-server/config-server-azure-repos.png)
 
 ## <a name="delete-your-app-configuration"></a>Supprimer la configuration de votre application
 
@@ -189,7 +250,4 @@ Une fois que vous avez enregistré un fichier de configuration, le bouton **Supp
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez appris à activer et configurer votre instance de serveur de configuration Spring Cloud. Pour en savoir plus sur la gestion de votre application, passez au tutoriel sur la mise à l’échelle manuelle d’une application.
-
-> [!div class="nextstepaction"]
-> [Tutoriel : Mettre à l’échelle une application dans Azure Spring Cloud](spring-cloud-tutorial-scale-manual.md)
+Dans cet article, vous avez appris à activer et à configurer votre instance Config Server Spring Cloud. Pour en savoir plus sur la gestion de votre application, consultez [Mettre à l’échelle une application dans Azure Spring Cloud](spring-cloud-tutorial-scale-manual.md).

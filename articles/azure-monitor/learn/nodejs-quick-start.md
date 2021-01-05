@@ -6,13 +6,13 @@ ms.topic: quickstart
 author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 07/12/2019
-ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019
-ms.openlocfilehash: 694d2ae529202223869fcbb2a084e32bccaedbf1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019, devx-track-js
+ms.openlocfilehash: 550097272f90a2f7fa06af7f06810fd3fa0ed94f
+ms.sourcegitcommit: 2989396c328c70832dcadc8f435270522c113229
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77660221"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92173886"
 ---
 # <a name="quickstart-start-monitoring-your-nodejs-web-application-with-azure-application-insights"></a>Démarrage rapide : Démarrer la supervision de votre application web Node.js avec Azure Application Insights
 
@@ -31,12 +31,12 @@ Application Insights permet de recueillir les données de télémétrie à parti
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 
-2. Sélectionnez **Créer une ressource** > **Outils de développement** > **Application Insights**.
+2. Sélectionnez **Créer une ressource** > **Outils de développement** > **Application Insights** .
 
    ![Ajouter une ressource Azure Application Insights](./media/nodejs-quick-start/azure-app-insights-create-resource.png)
 
    > [!NOTE]
-   >Si c’est la première fois que vous créez une ressource Application Insights, vous pouvez en apprendre davatange en vous rendant sur la documentation [Créer une ressource Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource).
+   >Si c’est la première fois que vous créez une ressource Application Insights, vous pouvez en apprendre davatange en vous rendant sur la documentation [Créer une ressource Application Insights](../app/create-new-resource.md).
 
    Une page de configuration s’affiche. Utilisez le tableau suivant pour remplir les champs d’entrée. 
 
@@ -60,7 +60,7 @@ Application Insights permet de recueillir les données de télémétrie à parti
    npm install applicationinsights --save
    ```
 
-3. Modifiez le premier fichier *.js* de votre application et ajoutez les deux lignes ci-dessous dans la partie supérieure de votre script. Si vous utilisez l’[application de démarrage rapide Node.js](https://docs.microsoft.com/azure/app-service/app-service-web-get-started-nodejs), vous modifiez le fichier *index.js*. Remplacez `<instrumentation_key>` par la clé d’instrumentation de votre application. 
+3. Modifiez le premier fichier *.js* de votre application et ajoutez les deux lignes ci-dessous dans la partie supérieure de votre script. Si vous utilisez l’ [application de démarrage rapide Node.js](../../app-service/quickstart-nodejs.md), vous modifiez le fichier *index.js* . Remplacez `<instrumentation_key>` par la clé d’instrumentation de l’insight de votre application. 
 
    ```JavaScript
    const appInsights = require('applicationinsights');
@@ -82,7 +82,7 @@ Application Insights permet de recueillir les données de télémétrie à parti
 
    ![Cartographie d’application Application Insights](./media/nodejs-quick-start/azure-app-insights-application-map.png)
 
-3. Sélectionnez l’icône **Analyse d’application** ![icône Cartographie d’application](./media/nodejs-quick-start/azure-app-insights-analytics-icon.png) **Voir dans Analytics**.  Cette action ouvre **Application Insights - Analyses**, qui fournit un langage de requête enrichi permettant d’analyser toutes les données collectées par Application Insights. Dans ce cas, une requête est générée et affiche le nombre de demandes sous forme de graphique. Vous pouvez écrire vos propres requêtes pour analyser d’autres données.
+3. Sélectionnez l’icône **Analyse d’application** ![icône Cartographie d’application](./media/nodejs-quick-start/azure-app-insights-analytics-icon.png) **Voir dans Analytics** .  Cette action ouvre **Application Insights - Analyses** , qui fournit un langage de requête enrichi permettant d’analyser toutes les données collectées par Application Insights. Dans ce cas, une requête est générée et affiche le nombre de demandes sous forme de graphique. Vous pouvez écrire vos propres requêtes pour analyser d’autres données.
 
    ![Graphes analytiques Application Insights](./media/nodejs-quick-start/azure-app-insights-analytics-queries.png)
 
@@ -90,7 +90,7 @@ Application Insights permet de recueillir les données de télémétrie à parti
 
    ![Graphes chronologiques de la vue d’ensemble de l’intégrité Application Insights](./media/nodejs-quick-start/azure-app-insights-health-overview.png)
 
-   Pour activer le graphique **Temps de chargement de la page consultée** à remplir avec les données de **télémétrie côté client**, ajoutez ce script à toutes les pages dont vous souhaitez effectuer le suivi :
+   Pour activer le graphique **Temps de chargement de la page consultée** à remplir avec les données de **télémétrie côté client** , ajoutez ce script à toutes les pages dont vous souhaitez effectuer le suivi :
 
    ```HTML
    <!-- 
@@ -112,11 +112,11 @@ Application Insights permet de recueillir les données de télémétrie à parti
    </script>
    ```
 
-5. Sur la gauche, sélectionnez **Métriques**. Utilisez l’explorateur de métriques pour examiner l’intégrité et l’utilisation de votre ressource. Sélectionnez **Ajouter un nouveau graphique** pour créer des vues personnalisées supplémentaires ou sélectionnez **Modifier** pour modifier les types de graphiques existants, leur hauteur, leur palette de couleurs, leurs regroupements et leurs métriques. Par exemple, vous pouvez créer un graphique qui affiche le temps de chargement moyen de la page de navigateur en sélectionnant « Temps de chargement de la page de navigateur » dans la liste déroulante de métriques et « Moyenne » en guise d’agrégation. Pour en savoir plus sur Azure Metrics Explorer, consultez [Bien démarrer avec Azure Metrics Explorer](../../azure-monitor/platform/metrics-getting-started.md).
+5. Sur la gauche, sélectionnez **Métriques** . Utilisez l’explorateur de métriques pour examiner l’intégrité et l’utilisation de votre ressource. Sélectionnez **Ajouter un nouveau graphique** pour créer des vues personnalisées supplémentaires ou sélectionnez **Modifier** pour modifier les types de graphiques existants, leur hauteur, leur palette de couleurs, leurs regroupements et leurs métriques. Par exemple, vous pouvez créer un graphique qui affiche le temps de chargement moyen de la page de navigateur en sélectionnant « Temps de chargement de la page de navigateur » dans la liste déroulante de métriques et « Moyenne » en guise d’agrégation. Pour en savoir plus sur Azure Metrics Explorer, consultez [Bien démarrer avec Azure Metrics Explorer](../platform/metrics-getting-started.md).
 
    ![Graphe des métriques de serveur Application Insights](./media/nodejs-quick-start/azure-app-insights-server-metrics.png)
 
-Pour plus d’informations sur la supervision de Node.js, consultez la [documentation supplémentaire sur Application Insights pour Node.js](../../azure-monitor/app/nodejs.md).
+Pour plus d’informations sur la supervision de Node.js, consultez la [documentation supplémentaire sur Application Insights pour Node.js](../app/nodejs.md).
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -125,10 +125,11 @@ Une fois les tests terminés, vous pouvez supprimer le groupe de ressources et t
 > [!NOTE]
 > Si vous avez utilisé un groupe de ressources existant, les instructions ci-dessous ne s’appliquent pas ; vous devrez simplement supprimer la ressource Application Insights individuelle. N’oubliez pas que lorsque vous supprimez un groupe de ressources, toutes les ressources sous-jacentes qui sont membres de ce groupe seront également supprimées.
 
-1. Dans le menu gauche du portail Azure, sélectionnez **Groupes de ressources**, puis **myResourceGroup**.
-2. Dans la page de votre groupe de ressources, sélectionnez **Supprimer**, entrez **myResourceGroup** dans la zone de texte, puis sélectionnez **Supprimer**.
+1. Dans le menu gauche du portail Azure, sélectionnez **Groupes de ressources** , puis **myResourceGroup** .
+2. Dans la page de votre groupe de ressources, sélectionnez **Supprimer** , entrez **myResourceGroup** dans la zone de texte, puis sélectionnez **Supprimer** .
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Rechercher et diagnostiquer des problèmes de performances](https://docs.microsoft.com/azure/application-insights/app-insights-analytics)
+> [Rechercher et diagnostiquer des problèmes de performances](../log-query/log-query-overview.md)
+

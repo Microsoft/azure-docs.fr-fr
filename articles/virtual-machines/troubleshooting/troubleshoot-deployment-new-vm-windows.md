@@ -15,12 +15,12 @@ ms.topic: troubleshooting
 ms.date: 06/15/2018
 ms.author: daberry
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 78db1ba0eaff0dce83ed13e9f20c3c5a5b96bf9c
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 2b2f21cab4740013eb2de1d69f558c95461c493e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83120961"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87028394"
 ---
 # <a name="troubleshoot-deployment-issues-when-creating-a-new-windows-vm-in-azure"></a>Résoudre les problèmes de déploiement lors de la création d’une machine virtuelle Windows dans Azure
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
@@ -37,7 +37,7 @@ Pour résoudre les problèmes, commencez par collecter les journaux d’activit�
 
 [Voir les opérations de déploiement](../../azure-resource-manager/templates/deployment-history.md)
 
-[Afficher les journaux d’activité pour gérer les ressources Azure](../../resource-group-audit.md)
+[Afficher les journaux d’activité pour gérer les ressources Azure](../../azure-resource-manager/management/view-activity-logs.md)
 
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-issue1](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-issue1-include.md)]
 
@@ -53,7 +53,7 @@ Pour résoudre les problèmes, commencez par collecter les journaux d’activit�
 
 **Résolution :**
 
-Pour corriger ces deux erreurs, utilisez [Add-AzVhd pour télécharger le disque dur virtuel d’origine](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd), disponible en mode local, avec le même paramétrage que pour le système d’exploitation (généralisé/spécialisé). Pour effectuer un téléchargement de type généralisé, n’oubliez pas d’exécuter d’abord sysprep.
+Pour corriger ces deux erreurs, utilisez [Add-AzVhd pour télécharger le disque dur virtuel d’origine](/powershell/module/az.compute/add-azvhd), disponible en mode local, avec le même paramétrage que pour le système d’exploitation (généralisé/spécialisé). Pour effectuer un téléchargement de type généralisé, n’oubliez pas d’exécuter d’abord sysprep.
 
 **Erreurs de capture :**
 
@@ -90,5 +90,3 @@ Cette erreur se produit lorsque la nouvelle demande de la machine virtuelle est 
 
 ## <a name="next-steps"></a>Étapes suivantes
 Si vous rencontrez des problèmes lorsque vous démarrez une machine virtuelle Windows arrêtée ou que vous redimensionnez Windows une machine virtuelle existante dans Azure, consultez [Résoudre les problèmes de déploiement Resource Manager liés au redémarrage ou au redimensionnement d’une machine virtuelle Windows existante dans Azure](restart-resize-error-troubleshooting.md).
-
-

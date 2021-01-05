@@ -4,16 +4,16 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 08/06/2019
 ms.author: erhopf
-ms.openlocfilehash: 6cca4521e3ecce5b07f1d9095498e0b74606acf4
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: f03da6c6f02992b411cb7f61a68ae32cf7c1c545
+ms.sourcegitcommit: c293217e2d829b752771dab52b96529a5442a190
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69906614"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88246374"
 ---
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Ce démarrage rapide nécessite :
 
 * [Node 8.12.x ou version ultérieure](https://nodejs.org/en/)
-* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/)
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services)

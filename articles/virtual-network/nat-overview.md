@@ -7,19 +7,20 @@ documentationcenter: na
 author: asudbring
 manager: KumudD
 ms.service: virtual-network
+ms.subservice: nat
 Customer intent: As an IT administrator, I want to learn more about Virtual Network NAT, its NAT gateway resources, and what I can use them for.
 ms.devlang: na
-ms.topic: overview
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/14/2020
+ms.date: 09/28/2020
 ms.author: allensu
-ms.openlocfilehash: 50fc8b9cefe88a80f3f954ce363139b6a4a38589
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: 75a2bb187b2ed7a234e99d8cd293cb30148bcb1f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80548389"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91667195"
 ---
 # <a name="what-is-virtual-network-nat"></a>Qu’est-ce que le service NAT de Réseau virtuel ?
 
@@ -31,7 +32,7 @@ Le service NAT (traduction d’adresses réseau) de Réseau virtuel simplifie la
 -->
 
 <p align="center">
-  <img src="./media/nat-overview/flow-map.svg" width="256" title="Service NAT de Réseau virtuel">
+  <img src="./media/nat-overview/flow-map.svg" alt="Figure depicts a NAT receiving traffic from internal subnets and directing it to a public IP (PIP) and an IP prefix." width="256" title="Service NAT de Réseau virtuel">
 </p>
 
 
@@ -42,7 +43,7 @@ Le service NAT (traduction d’adresses réseau) de Réseau virtuel simplifie la
 
 Une connectivité sortante peut être définie pour chaque sous-réseau avec NAT.  Plusieurs sous-réseaux au sein du même réseau virtuel peuvent avoir différents services NAT. Un sous-réseau est configuré en spécifiant la ressource de passerelle NAT à utiliser. Tous les flux sortants UDP et TCP en provenance de toute instance de machine virtuelle utilisent la traduction d’adresses réseau (NAT). 
 
-NAT est compatible avec les ressources d’adresses IP publiques ou les ressources de préfixes d’adresses IP publiques de la référence SKU standard, ou avec une combinaison des deux.  Vous pouvez utiliser directement un préfixe d’adresse IP publique ou distribuer les adresses IP publiques du préfixe entre plusieurs ressources de passerelle NAT. NAT nettoie tout le trafic vers la plage d’adresses IP du préfixe.  Toute mise en liste verte des adresses IP de vos déploiements est à présent très simple.
+NAT est compatible avec les ressources d’adresses IP publiques ou les ressources de préfixes d’adresses IP publiques de la référence SKU standard, ou avec une combinaison des deux.  Vous pouvez utiliser directement un préfixe d’adresse IP publique ou distribuer les adresses IP publiques du préfixe entre plusieurs ressources de passerelle NAT. NAT nettoie tout le trafic vers la plage d’adresses IP du préfixe.  Tout filtrage des adresses IP de vos déploiements est à présent très simple.
 
 Tout le trafic sortant du sous-réseau est traité par NAT automatiquement sans aucune configuration par le client.  Les routes définies par l’utilisateur ne sont pas nécessaires. NAT est prioritaire sur les autres scénarios de trafic sortant et remplace la destination Internet par défaut d’un sous-réseau.
 
@@ -50,11 +51,11 @@ Tout le trafic sortant du sous-réseau est traité par NAT automatiquement sans 
 
 NAT utilise la « traduction d’adresses réseau de port » (PNAT ou PAT) et est recommandé pour la plupart des charges de travail. Les charges de travail dynamiques ou divergentes peuvent être facilement adaptées à l’allocation de flux de trafic sortant à la demande. Sont ainsi évités une planification préalable, une préallocation et un surprovisionnement des ressources sortantes. Les ressources de port SNAT sont partagées et disponibles sur tous les sous-réseaux à l’aide d’une ressource de passerelle NAT spécifique. Elles sont fournies en cas de besoin.
 
-Une adresse IP publique attaché à NAT fournit jusqu’à 64 000 flux simultanés pour UDP et TCP. Vous pouvez commencer avec une seule adresse IP et augmenter jusqu’à 16 adresses IP publiques.
+Une adresse IP publique attachée à NAT fournit jusqu’à 64 000 flux simultanés pour respectivement UDP et TCP. Vous pouvez commencer avec une seule adresse IP et évoluer jusqu’à 16 adresses IP à l’aide d’adresses IP publiques ou de préfixes IP publics, ou les deux.  Une ressource de passerelle NAT utilisera toutes les adresses IP associées à la ressource pour les connexions sortantes à partir de tous les sous-réseaux configurés avec la même ressource de passerelle NAT.
 
 NAT autorise la création de flux depuis le réseau virtuel vers Internet. Le trafic de retour provenant d’Internet est uniquement autorisé en réponse à un flux actif.
 
-Contrairement au service SNAT de flux sortant d’équilibreur de charge, NAT ne présente aucune restriction quant à l’adresse IP privée d’une instance de machine virtuelle pouvant établir des connexions sortantes.  Les configurations IP secondaires peuvent créer une connexion Internet sortante avec NAT.
+Contrairement au service SNAT de flux sortant d’équilibreur de charge, NAT ne présente aucune restriction quant à l’adresse IP privée d’une instance de machine virtuelle pouvant établir des connexions sortantes.  Les configurations IP principales et secondaires peuvent créer une connexion Internet sortante avec NAT.
 
 ## <a name="coexistence-of-inbound-and-outbound"></a>Coexistence des trafics entrant et sortant
 
@@ -73,7 +74,7 @@ NAT et les fonctionnalités de la référence SKU standard compatibles connaisse
 ![Virtual Network NAT flow direction](./media/nat-overview/flow-direction4.svg)
 -->
 <p align="center">
-  <img src="./media/nat-overview/flow-direction4.svg" width="512" title="Direction du flux NAT de Réseau virtuel">
+  <img src="./media/nat-overview/flow-direction4.svg" alt="Figure depicts a NAT gateway that supports outbound traffic to the internet from a virtual network and inbound traffic with an instance-level public IP and a public load balancer." width="512" title="Direction du flux NAT de Réseau virtuel">
 </p>
 
 *Figure : Direction du flux NAT de Réseau virtuel*
@@ -102,7 +103,7 @@ Par défaut, le service NAT est régional. Quand vous créez des scénarios de [
 -->
 
 <p align="center">
-  <img src="./media/nat-overview/az-directions.svg" width="512" title="Service NAT de Réseau virtuel avec des zones de disponibilité">
+  <img src="./media/nat-overview/az-directions.svg" alt="Figure depicts three zonal stacks, each of which contains a NAT gateway and a subnet." width="512" title="Service NAT de Réseau virtuel avec des zones de disponibilité">
 </p>
 
 *Figure : Service NAT de Réseau virtuel avec des zones de disponibilité*
@@ -122,41 +123,25 @@ Vous pouvez superviser le fonctionnement de votre NAT par le biais de métriques
 
 En disponibilité générale, le chemin de données NAT est au moins disponible à 99,9 %.
 
-
 ## <a name="pricing"></a>Tarifs
 
-La passerelle NAT est facturée avec deux compteurs distincts :
-
-| Compteur | Tarif |
-| --- | --- |
-| Heures de ressource | 0,045 dollars/heure |
-| Données traitées | 0,045 dollar/Go |
-
-Les heures de ressource tiennent compte de la durée pendant laquelle une ressource de passerelle NAT existe.
-Les données traitées tiennent compte de tout le trafic traité par une ressource de passerelle NAT.
+Pour plus d'informations sur les tarifs, consultez [Tarification des réseaux virtuels](https://azure.microsoft.com/pricing/details/virtual-network).
 
 ## <a name="availability"></a>Disponibilité
 
-Le service NAT de réseau virtuel et la ressource de passerelle NAT sont disponibles dans toutes les [régions](https://azure.microsoft.com/global-infrastructure/regions/) du cloud public Azure.
+Le service NAT de réseau virtuel et la ressource de passerelle NAT sont disponibles dans toutes les [régions](https://azure.microsoft.com/global-infrastructure/regions/) des clouds Azure.
 
-## <a name="support"></a>Support
-
-NAT est pris en charge par le biais des canaux normaux.
-
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Nous aimerions savoir comment nous pouvons améliorer le service. Proposez-nous de nouvelles fonctionnalités et votez pour celles que vous préférez en nous contactant sur [UserVoice for NAT](https://aka.ms/natuservoice).
-
 
 ## <a name="limitations"></a>Limites
 
 * NAT est compatible avec des ressources d’adresses IP publiques, de préfixes d’adresses IP publiques et d’équilibreur de charge de la référence SKU standard. Les ressources de base (par exemple, un équilibreur de charge de base) et tous les produits qui en dérivent ne sont pas compatibles avec NAT.  Les ressources de base doivent être placées sur un sous-réseau non configuré avec NAT.
 * La famille d’adresses IPv4 est prise en charge.  NAT n’interagit pas avec la famille d’adresses IPv6.  NAT ne peut pas être déployé sur un sous-réseau avec un préfixe IPv6.
-* La journalisation des flux de groupe de sécurité réseau n’est pas prise en charge lors de l’utilisation de NAT.
 * NAT ne peut pas s’étendre sur plusieurs réseaux virtuels.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Apprenez-en davantage sur la [ressource de passerelle NAT](./nat-gateway-resource.md).
 * [Utilisez UserVoice pour nous faire part des prochains développements dont vous aimeriez bénéficier concernant le service NAT de réseau virtuel](https://aka.ms/natuservoice).
-

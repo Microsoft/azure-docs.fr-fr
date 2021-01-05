@@ -8,25 +8,33 @@ ms.date: 3/12/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 42c776d4d6c3973e7c222c9c9adf3e5105f6c84f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d86a273a69203a92a9b437f021486feb3bcb31da
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79296798"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932368"
 ---
 # <a name="tutorial-set-up-an-environment-for-machine-learning-on-iot-edge"></a>Tutoriel : Configurer un environnement - Machine Learning sur Azure IoT Edge
 
-> [!NOTE]
-> Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Si vous êtes arrivé directement à cet article, nous vous encourageons à commencer par le [premier article](tutorial-machine-learning-edge-01-intro.md) de la série afin d’obtenir de meilleurs résultats.
-
 Cet article vous aide à préparer votre environnement pour le développement et le déploiement. Tout d’abord, configurez une machine de développement avec tous les outils dont vous avez besoin. Ensuite, créez les ressources cloud nécessaires dans Azure.
+
+Dans cette section du tutoriel, vous allez apprendre à :
+
+> [!div class="checklist"]
+>
+> * Configurer une machine virtuelle pour le développement.
+> * Configurer un hub IoT et un stockage cloud à utiliser dans votre environnement de développement.
+
+## <a name="prerequisites"></a>Prérequis
+
+Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Chaque article de la série s’appuie sur le travail réalisé dans le cadre de l’article précédent. Si vous êtes tombé directement sur cet article, reportez-vous au [premier article](tutorial-machine-learning-edge-01-intro.md) de la série.
 
 ## <a name="set-up-the-development-vm"></a>Configurer la machine virtuelle de développement
 
 Cette étape est généralement effectuée par un développeur cloud. Certains logiciels peuvent également être utiles pour un scientifique des données.
 
-Nous avons créé un script PowerShell qui crée une machine virtuelle Azure avec plusieurs des prérequis déjà configurés. La machine virtuelle que vous créez doit pouvoir gérer la [virtualisation imbriquée](https://docs.microsoft.com/azure/virtual-machines/windows/nested-virtualization), c’est pourquoi nous avons choisi la taille de machine [Standard_D8s_v3](../virtual-machines/dv3-dsv3-series.md).
+Nous avons créé un script PowerShell qui crée une machine virtuelle Azure avec plusieurs des prérequis déjà configurés. La machine virtuelle que vous créez doit pouvoir gérer la [virtualisation imbriquée](../virtual-machines/windows/nested-virtualization.md), c’est pourquoi nous avons choisi la taille de machine [Standard_D8s_v3](../virtual-machines/dv3-dsv3-series.md).
 
 La machine virtuelle de développement sera mise en place avec :
 
@@ -38,7 +46,7 @@ La machine virtuelle de développement sera mise en place avec :
 * [Kit de développement logiciel (SDK) .NET Core](https://dotnet.microsoft.com/)
 * [Python 3](https://www.python.org/)
 * [Visual Studio Code](https://code.visualstudio.com/)
-* [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview?view=azps-1.1.0)
+* [Azure PowerShell](/powershell/azure/)
 * [Extensions de VS Code](https://marketplace.visualstudio.com/search?target=VSCode)
   * [Outils IoT Azure](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)
   * [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
@@ -82,7 +90,7 @@ Il faut environ 30 minutes pour créer et configurer la machine virtuelle.
 
    Pendant plusieurs minutes, le script exécute les étapes suivantes :
 
-    1. Installe le [module Azure PowerShell Az](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-1.1.0).
+    1. Installe le [module Azure PowerShell Az](/powershell/azure/new-azureps-module-az).
     1. Vous invite à vous connecter à Azure.
     1. Confirme les informations relatives à la création de votre machine virtuelle. Appuyez sur **y** ou **Entrée** pour continuer.
     1. Crée le groupe de ressources s’il n’existe pas.
@@ -209,15 +217,13 @@ Dans le cadre de la création du hub IoT, le script que nous avons exécuté à 
 
 1. Dans la mesure où aucune modification n’a été apportée, fermez cette page.
 
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Ce tutoriel fait partie d’un ensemble où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans cet article, nous avons créé un hub IoT et configuré un itinéraire vers un compte Stockage Azure. Nous allons à présent envoyer les données d’un ensemble d’appareils simulés par le biais du hub IoT au compte de stockage. Plus tard dans le tutoriel, après avoir configuré notre appareil et nos modules IoT Edge, nous revisiterons les itinéraires et examinerons un peu plus la requête de routage.
-
-Pour plus d’informations sur les étapes décrites dans cette partie du tutoriel Machine Learning sur IoT Edge, consultez :
-
-* [Notions de base d’Azure IoT](https://docs.microsoft.com/azure/iot-fundamentals/)
-* [Configurer le routage des messages avec IoT Hub](../iot-hub/tutorial-routing.md)
-* [Créer un IoT Hub à l’aide du Portail Azure](../iot-hub/iot-hub-create-through-portal.md)
 
 Passez à l’article suivant pour créer un appareil simulé à surveiller.
 

@@ -7,17 +7,17 @@ author: cynthn
 manager: gwallace
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 09/17/2018
+ms.date: 08/20/2020
 ms.author: cynthn
-ms.openlocfilehash: 7c93c1f525713a90abd71c30a21401b9d1cfcb9f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 399022c1ef740865e4b2f7b82e2175e748a2a925
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460900"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91306954"
 ---
 # <a name="time-sync-for-linux-vms-in-azure"></a>Synchronisation de l’heure pour les machines virtuelles Linux dans Azure
 
@@ -25,10 +25,10 @@ La synchronisation de l’heure est importante pour la sécurité et la corréla
 
 Azure est soutenu par une infrastructure exécutant Windows Server 2016. Windows Server 2016 utilise des algorithmes améliorés qui permettent de corriger l’heure et de configurer l’horloge locale pour la synchroniser avec l’heure UTC.  La fonctionnalité d’heure précise de Windows Server 2016 a considérablement amélioré la façon dont le service VMICTimeSync régit les machines virtuelles avec l’hôte pour une heure précise. Les améliorations incluent une heure initiale plus précise au démarrage ou lors de la restauration d’une machine virtuelle, ainsi que l’interruption de la correction de la latence. 
 
->[!NOTE]
->Pour une présentation rapide du service d’heure de Windows, regardez cette [vidéo de présentation globale](https://aka.ms/WS2016TimeVideo).
+> [!NOTE]
+> Pour une présentation rapide du service d’heure de Windows, regardez cette [vidéo de présentation globale](https://aka.ms/WS2016TimeVideo).
 >
-> Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time). 
+> Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](/windows-server/networking/windows-time-service/accurate-time). 
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -64,7 +64,7 @@ Par défaut, la plupart des images de la place de marché Azure pour Linux sont 
 - NTP comme source principale, qui obtient l’heure à partir d’un serveur NTP. Par exemple, les images de la place de marché Ubuntu 16.04 LTS utilisent **ntp.ubuntu.com**.
 - Le service VMICTimeSync, utilisé comme source secondaire pour communiquer l’heure de l’hôte aux machines virtuelles et apporter des corrections une fois que la machine virtuelle est interrompue à des fins de maintenance. Les hôtes Azure utilisent des appareils de couche 1 appartenant à Microsoft pour maintenir une heure précise.
 
-Dans les nouvelles distributions Linux, le service VMICTimeSync utilise le protocole de temps de précision (PTP), mais les distributions antérieures ne prennent pas forcément en charge PTP et ont recours à NTP pour obtenir l’heure à partir de l’hôte.
+Dans les nouvelles distributions Linux, le service VMICTimeSync fournit une source d’horloge matérielle Precision Time Protocol (PTP), mais les distributions antérieures ne fournissent pas forcément cette source d’horloge matérielle et ont recours à NTP pour obtenir l’heure à partir de l’hôte.
 
 Pour vérifier la synchronisation correcte de NTP, exécutez la commande `ntpq -p`.
 
@@ -112,9 +112,9 @@ root        391      2  0 17:52 ?        00:00:00 [hv_balloon]
 ```
 
 
-### <a name="check-for-ptp"></a>Vérification PTP
+### <a name="check-for-ptp-clock-source"></a>Vérifier la source de l’horloge PTP
 
-Avec les versions plus récentes de Linux, une source d’horloge de protocole de temps de précision (PTP) est disponible avec le fournisseur VMICTimeSync. Dans les versions antérieures de Red Hat Enterprise Linux ou CentOS 7.x, les [service d’intégration Linux](https://github.com/LIS/lis-next) peuvent être téléchargé et utilisés pour installer le pilote mis à jour. Lorsque vous utilisez PTP, l’appareil Linux présente le format /dev/ptp*x*. 
+Avec les versions plus récentes de Linux, une source d’horloge de protocole de temps de précision (PTP) est disponible avec le fournisseur VMICTimeSync. Dans les versions antérieures de Red Hat Enterprise Linux ou CentOS 7.x, les [service d’intégration Linux](https://github.com/LIS/lis-next) peuvent être téléchargé et utilisés pour installer le pilote mis à jour. Lorsque la source de l’horloge PTP est disponible, le périphérique Linux se présente sous la forme /dev/ptp*x*. 
 
 Consultez les sources d’horloge PTP disponibles.
 
@@ -128,25 +128,25 @@ Dans cet exemple, la valeur renvoyée est *ptp0*, ce qui permet de vérifier le
 cat /sys/class/ptp/ptp0/clock_name
 ```
 
-Le résultat renvoyé doit être **hyperv**.
+Le résultat renvoyé doit être `hyperv`.
 
 ### <a name="chrony"></a>chrony
 
-Sur Ubuntu 19.10 et versions ultérieures, Red Hat Enterprise Linux et CentOS 7.x, [chrony](https://chrony.tuxfamily.org/) est configuré pour utiliser une horloge de source PTP. Au lieu de Chrony, les versions antérieures de Linux utilisent le démon ntpd (Network Time Protocol Daemon), qui ne prend pas en charge les sources PTP. Pour activer PTP dans ces versions, chrony doit être installé et configuré manuellement (dans chrony.conf) à l’aide du code suivant :
+Sur Ubuntu 19.10 et versions ultérieures, Red Hat Enterprise Linux et CentOS 8.x, [chrony](https://chrony.tuxfamily.org/) est configuré pour utiliser une horloge de source PTP. Au lieu de Chrony, les versions antérieures de Linux utilisent le démon ntpd (Network Time Protocol Daemon), qui ne prend pas en charge les sources PTP. Pour activer PTP dans ces versions, chrony doit être installé et configuré manuellement (dans chrony.conf) à l’aide du code suivant :
 
 ```bash
 refclock PHC /dev/ptp0 poll 3 dpoll -2 offset 0
 ```
 
-Pour plus d’informations sur Ubuntu et NTP, consultez [Synchronisation temporelle](https://help.ubuntu.com/lts/serverguide/NTP.html).
+Pour plus d’informations sur Ubuntu et NTP, consultez [Synchronisation temporelle](https://ubuntu.com/server/docs/network-ntp).
 
-Pour plus d’informations sur Red Hat et NTP, consultez [Configurer NTP](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/s1-configure_ntp). 
+Pour plus d’informations sur Red Hat et NTP, consultez [Configurer NTP](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_ntpd#s1-Configure_NTP). 
 
-Pour plus d’informations sur chrony, consultez [Utilisation de chrony](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-using_chrony).
+Pour plus d’informations sur chrony, consultez [Utilisation de chrony](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-configuring_ntp_using_the_chrony_suite#sect-Using_chrony).
 
-Si les sources chrony et TimeSync sont activées simultanément, vous pouvez en marquer une comme **favorite**, l’autre devenant alors la source de secours. Étant donné que les services NTP ne mettent pas à jour l’horloge pour les grands décalages, sauf après une longue période, la source VMICTimeSync permet de récupérer l’horloge à partir d’événements de machine virtuelle en pause beaucoup plus rapidement que les outils NTP seuls.
+Si les sources chrony et VMICTimeSync sont activées simultanément, vous pouvez en marquer une comme **favorite**, l’autre devenant alors la source de secours. Étant donné que les services NTP ne mettent pas à jour l’horloge pour les grands décalages, sauf après une longue période, la source VMICTimeSync permet de récupérer l’horloge à partir d’événements de machine virtuelle en pause beaucoup plus rapidement que les outils NTP seuls.
 
-Par défaut, chronyd accélère ou ralentit l’horloge système pour corriger toute dérive temporelle. En cas de dérive trop importante, chrony n’est pas capable de la résoudre. Pour surmonter cela, le paramètre `makestep` dans **/etc/chrony.conf** peut être modifié pour forcer un TimeSync si la dérive dépasse le seuil spécifié.
+Par défaut, chronyd accélère ou ralentit l’horloge système pour corriger toute dérive temporelle. En cas de dérive trop importante, chrony n’est pas capable de la résoudre. Pour surmonter cela, le paramètre `makestep` dans **/etc/chrony.conf** peut être modifié pour forcer une synchronisation de l’heure si la dérive dépasse le seuil spécifié.
 
  ```bash
 makestep 1.0 -1
@@ -164,6 +164,6 @@ Sur les versions SUSE et Ubuntu antérieures à 19.10, la synchronisation de l�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time).
+Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](/windows-server/networking/windows-time-service/accurate-time).
 
 

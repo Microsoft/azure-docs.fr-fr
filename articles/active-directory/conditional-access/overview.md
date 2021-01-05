@@ -5,22 +5,25 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: overview
-ms.date: 09/17/2019
+ms.date: 10/16/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7b044a4fd4e29bfe35abff7a4b36e5bae783328b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: contperf-fy20q4, azuread-video-2020
+ms.openlocfilehash: 9c5f7684083ec533c8100785787572ebe4456bcc
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79215987"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97030244"
 ---
 # <a name="what-is-conditional-access"></a>Qu’est-ce que l’accès conditionnel ?
 
 Le périmètre de sécurité moderne s’étend désormais au-delà du réseau d’une organisation pour inclure l’identité de l’utilisateur et de l’appareil. Les organisations peuvent utiliser ces signaux d’identité dans le cadre de leurs décisions de contrôle d’accès. 
+
+> [!VIDEO https://channel9.msdn.com/Shows/Docs-Azure/Azure-AD-Conditional-Access/player]
 
 L’accès conditionnel est l’outil utilisé par Azure Active Directory pour réunir des signaux, prendre des décisions et appliquer des stratégies d’organisation. L’accès conditionnel est au cœur du nouveau plan de contrôle basé sur les identités.
 
@@ -33,11 +36,12 @@ Les administrateurs sont confrontés à deux objectifs principaux :
 - Permettre aux utilisateurs d’être productifs où et quand ils le veulent
 - Protéger les ressources de l’entreprise
 
-En utilisant des stratégies d’accès conditionnel, vous pouvez appliquer les contrôles d’accès appropriés quand cela est nécessaire pour garantir la sécurité de votre organisation et ne pas freiner votre utilisateur dans le cas contraire.
+En utilisant des stratégies d’accès conditionnel, vous pouvez appliquer les contrôles d’accès nécessaires pour garantir la sécurité de votre organisation sans pour autant freiner inutilement votre utilisateur.
 
 ![Workflow du processus d’accès conditionnel conceptuel](./media/overview/conditional-access-overview-how-it-works.png)
 
-Des stratégies d’accès conditionnel sont appliquées au terme de l’authentification premier facteur. L’accès conditionnel n’est pas destiné à servir de première ligne de défense d’une organisation pour les scénarios comme les attaques par déni de service, mais il peut utiliser des signaux de ces événements pour déterminer l’accès.
+> [!IMPORTANT]
+> Des stratégies d'accès conditionnel sont appliquées au terme de l'authentification premier facteur. L'accès conditionnel n'est pas destiné à être la première ligne de défense d'une organisation pour des scénarios comme les attaques par déni de service (DoS), mais il peut utiliser les signaux de ces événements pour déterminer l'accès.
 
 ## <a name="common-signals"></a>Signaux courants
 
@@ -47,7 +51,7 @@ Les signaux courants que l’accès conditionnel peut prendre en compte lors d�
    - Les stratégies peuvent ciblées des utilisateurs et des groupes spécifiques, ce qui donne aux administrateurs un contrôle plus précis sur l’accès.
 - Informations d’emplacement IP
    - Les organisations peuvent créer des plages d’adresses IP approuvées qui peuvent être utilisées pour prendre des décisions en matière de stratégie. 
-   - Les administrateurs peuvent spécifier des plages d’adresses IP de pays entiers pour bloquer ou autoriser le trafic en provenance de ceux-ci.
+   - Les administrateurs peuvent spécifier des plages d’adresses IP de pays/régions entiers pour bloquer ou autoriser le trafic en provenance de ceux-ci.
 - Appareil
    - Les utilisateurs disposant d’appareils de plateformes spécifiques ou marqués avec un état spécifique peuvent être utilisés lors de l’application de stratégies d’accès conditionnel.
 - Application
@@ -71,37 +75,28 @@ Les signaux courants que l’accès conditionnel peut prendre en compte lors d�
 
 ## <a name="commonly-applied-policies"></a>Stratégies couramment appliquées
 
-De nombreuses organisations rencontrent des problèmes d’accès courants que les stratégies d’accès conditionnel peuvent vous aider à résoudre :
+De nombreuses organisations rencontrent des [problèmes d’accès courants que les stratégies d’accès conditionnel peuvent contribuer à résoudre](concept-conditional-access-policy-common.md) :
 
 - Demande d’authentification multifacteur pour les utilisateurs disposant de rôles d’administration
 - Demande d’authentification multifacteur pour les tâches de gestion Azure
 - Blocage des connexions pour les utilisateurs tentant d’utiliser des protocoles d’authentification hérités
-- Demande d’emplacements approuvés pour l’inscription à l’authentification multifacteur Azure
+- Demande d’emplacements approuvés pour l’inscription à l’authentification multifacteur Azure AD
 - Blocage ou octroi de l’accès à partir d’emplacements spécifiques
 - Blocage des comportements de connexion à risque
 - Demande d’appareils gérés par l’organisation pour des applications spécifiques
-
-## <a name="customer-case-studies"></a>Études de cas clients
-
-Découvrez comment d’autres organisations utilisent l’accès conditionnel Azure AD pour définir et implémenter des décisions de contrôle d’accès automatisées. Les récits présentés ci-après montrent comment ces besoins client sont respectés.
-
-* [Wipro favorise la productivité mobile avec les outils de sécurité cloud Microsoft pour améliorer les engagements des clients.](https://customers.microsoft.com/story/wipro-professional-services-enterprise-mobility-security) Les stratégies d’accès conditionnel dans Azure AD ont permis à la société de partager des documents, des ressources et des applications avec des entités approuvées extérieures, qui peuvent utiliser leurs propres informations d’identification, tout en conservant le contrôle sur ses propres données d’entreprise.
-* [Aramex delivery limited - L’entreprise de transport et de logistique mondiale crée un bureau connecté au cloud avec une solution de gestion des accès et des identités.](https://customers.microsoft.com/story/aramex-azure-active-directory-travel-transportation-united-arab-emirates-en) Garantir un accès sécurisé était particulièrement difficile avec les employés distants d’Aramex. La société applique désormais l’accès conditionnel pour permettre à ces employés distants d’accéder à leurs applications SaaS à partir de l’extérieur du réseau. La règle d’accès conditionnel décide s’il faut appliquer Multi-Factor Authentication, ce qui donne uniquement l’accès approprié aux personnes appropriées.
 
 ## <a name="license-requirements"></a>Conditions de licence :
 
 [!INCLUDE [Active Directory P1 license](../../../includes/active-directory-p1-license.md)]
 
-Les clients avec [des licences Microsoft 365 Business](/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-business-service-description) ont également accès aux fonctionnalités d’accès conditionnel. 
+Les clients avec [des licences Microsoft 365 Business Premium](/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-business-service-description) ont également accès aux fonctionnalités d’accès conditionnel. 
+
+[Risque de connexion](concept-conditional-access-conditions.md#sign-in-risk) nécessite un accès à [Identity Protection](../identity-protection/overview-identity-protection.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Génération d’une stratégie d’accès conditionnel élément par élément](concept-conditional-access-policies.md)
-
-Pour apprendre à implémenter l’accès conditionnel dans votre environnement, consultez [Planifier votre déploiement d’accès conditionnel dans Azure Active Directory](plan-conditional-access.md).
-
-[En savoir plus sur Identity Protection](../identity-protection/overview-v2.md)
-
-[En savoir plus sur Microsoft Cloud App Security](/cloud-app-security/what-is-cloud-app-security)
-
-[En savoir plus sur Microsoft Intune](/intune/index)
+- [Génération d’une stratégie d’accès conditionnel élément par élément](concept-conditional-access-policies.md)
+- [Planification d’un déploiement d’accès conditionnel](plan-conditional-access.md)
+- [En savoir plus sur Identity Protection](../identity-protection/overview-identity-protection.md)
+- [En savoir plus sur Microsoft Cloud App Security](/cloud-app-security/what-is-cloud-app-security)
+- [En savoir plus sur Microsoft Intune](/intune/index)

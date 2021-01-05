@@ -3,13 +3,13 @@ title: Créer un cluster Service Fabric Linux dans Azure
 description: Découvrez comment déployer un cluster Service Fabric Linux dans un réseau virtuel Azure existant à l’aide de l’interface Azure CLI.
 ms.topic: conceptual
 ms.date: 02/14/2019
-ms.custom: mvc
-ms.openlocfilehash: a9026e46f2fd386892af5a3d8f4ec8d7e0c9f649
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 52eba2e5780b1a66f3884a764631908335372273
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81411007"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92738963"
 ---
 # <a name="deploy-a-linux-service-fabric-cluster-into-an-azure-virtual-network"></a>Déployer un cluster Service Fabric Linux dans un réseau virtuel Azure
 
@@ -41,27 +41,32 @@ Pour Ubuntu 18.04 LTS :
 * [AzureDeploy.json][template2]
 * [AzureDeploy.Parameters.json][parameters2]
 
-La différence entre les deux modèles est la valeur « 18.04-LTS » de l’attribut **vmImageSku** et la valeur 1.1 de **typeHandlerVersion** pour chaque nœud.
+Pour Ubuntu 18.04 LTS, les différences entre les deux modèles sont les suivantes : 
+* l’attribut **vmImageSku** défini sur « 18.04-LTS »
+* la valeur **typeHandlerVersion** de chaque nœud définie sur 1.1
+* pour la ressource Microsoft.ServiceFabric/clusters :
+   - **apiVersion** défini sur « 2019-03-01 » ou une version ultérieure
+   - propriété **vmImage** définie sur « Ubuntu18_04 »
 
 Ce modèle déploie un cluster sécurisé de sept machines virtuelles et trois types de nœuds dans un réseau virtuel.  D’autres exemples de modèles sont disponibles sur [GitHub](https://github.com/Azure-Samples/service-fabric-cluster-templates). Le modèle [AzureDeploy.json][template] déploie un certain nombre de ressources, notamment celles ci-dessous.
 
 ### <a name="service-fabric-cluster"></a>Cluster Service Fabric
 
-Dans la ressource **Microsoft.ServiceFabric/clusters**, un cluster Linux est déployé avec les caractéristiques suivantes :
+Dans la ressource **Microsoft.ServiceFabric/clusters** , un cluster Linux est déployé avec les caractéristiques suivantes :
 
 * Trois types de nœuds
 * Cinq nœuds dans le type de nœud principal (configurable dans les paramètres du modèle) et un nœud dans chacun des autres types
 * Système d’exploitation : Ubuntu 16.04 LTS/Ubuntu 18.04 LTS (configurable dans les paramètres du modèle)
 * certificat sécurisé (configurable dans les paramètres du modèle)
 * [service DNS](service-fabric-dnsservice.md) activé
-* [niveau de durabilité](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster) Bronze (configurable dans les paramètres du modèle)
-* [niveau de fiabilité](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) Silver (configurable dans les paramètres du modèle)
+* [niveau de durabilité](service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster) Bronze (configurable dans les paramètres du modèle)
+* [niveau de fiabilité](service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster) Silver (configurable dans les paramètres du modèle)
 * point de terminaison de connexion client : 19000 (configurable dans les paramètres du modèle)
 * point de terminaison de passerelle HTTP : 19080 (configurable dans les paramètres du modèle)
 
 ### <a name="azure-load-balancer"></a>Équilibrage de charge Azure
 
-Dans la ressource **Microsoft.Network/loadBalancers**, un équilibreur de charge est configuré et des sondes et règles sont configurées pour les ports suivants :
+Dans la ressource **Microsoft.Network/loadBalancers** , un équilibreur de charge est configuré et des sondes et règles sont configurées pour les ports suivants :
 
 * point de terminaison de connexion client : 19000
 * point de terminaison de passerelle HTTP : 19080
@@ -162,7 +167,7 @@ sfctl cluster health
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Si vous ne passez pas immédiatement à l’article suivant, vous souhaiterez peut-être [supprimer le cluster](service-fabric-cluster-delete.md) pour éviter de subir des frais.
+Si vous ne passez pas immédiatement à l’article suivant, vous souhaiterez peut-être [supprimer le cluster](./service-fabric-tutorial-delete-cluster.md) pour éviter de subir des frais.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -6,12 +6,12 @@ author: harelbr
 ms.author: harelbr
 ms.date: 06/26/2019
 ms.reviewer: mbullwin
-ms.openlocfilehash: 7ca4df620739b2ab55b8ba986031cc48fe87f1fa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 169ad40e32f688ae20a9d02f61db161844b1254a
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80294921"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92890511"
 ---
 # <a name="manage-application-insights-smart-detection-rules-using-azure-resource-manager-templates"></a>Gérer les règles de détection intelligente d’Application Insights à l’aide de modèles Azure Resource Manager
 
@@ -21,12 +21,12 @@ Cette méthode peut être utilisée lors du déploiement de nouvelles ressources
 ## <a name="smart-detection-rule-configuration"></a>Configuration de règle de détection intelligente
 
 Vous pouvez configurer les paramètres suivants pour une règle de détection intelligente :
-- Si la règle est activée (la valeur par défaut est **true**.)
-- Si les e-mails doivent être envoyés aux utilisateurs associés aux rôles [Lecteur de surveillance](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) et [Contributeur de surveillance](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) de l’abonnement à la suite d’une détection (la valeur par défaut est **true**).
+- Si la règle est activée (la valeur par défaut est **true** .)
+- Si les e-mails doivent être envoyés aux utilisateurs associés aux rôles [Lecteur de surveillance](../../role-based-access-control/built-in-roles.md#monitoring-reader) et [Contributeur de surveillance](../../role-based-access-control/built-in-roles.md#monitoring-contributor) de l’abonnement à la suite d’une détection (la valeur par défaut est **true** ).
 - Les destinataires d’e-mails supplémentaires qui doivent recevoir une notification lorsqu’une détection est trouvée.
-    -  La configuration relative aux e-mails n’est pas disponible pour les règles de détection intelligente indiquant _Préversion_.
+    -  La configuration relative aux e-mails n’est pas disponible pour les règles de détection intelligente indiquant _Préversion_ .
 
-Pour autoriser la configuration des paramètres de règle via Azure Resource Manager, la configuration de règle de détection intelligente est désormais disponible en tant que ressource interne au sein de la ressource Application Insights, nommée **ProactiveDetectionConfigs**.
+Pour autoriser la configuration des paramètres de règle via Azure Resource Manager, la configuration de règle de détection intelligente est désormais disponible en tant que ressource interne au sein de la ressource Application Insights, nommée **ProactiveDetectionConfigs** .
 Pour une flexibilité maximale, chaque règle de détection intelligente peut être configurée avec les paramètres de notification unique.
 
 ## <a name="examples"></a>Exemples
@@ -44,7 +44,7 @@ Assurez-vous de remplacer le nom de la ressource Application Insights et de spé
       "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
       "properties": {
-        "ApplicationId": "myApplication"
+        "Application_Type": "web"
       },
       "resources": [
         {
@@ -75,7 +75,7 @@ Assurez-vous de remplacer le nom de la ressource Application Insights et de spé
       "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
       "properties": {
-        "ApplicationId": "myApplication"
+        "Application_Type": "web"
       },
       "resources": [
         {
@@ -106,7 +106,7 @@ Assurez-vous de remplacer le nom de la ressource Application Insights et de spé
       "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
       "properties": {
-        "ApplicationId": "myApplication"
+        "Application_Type": "web"
       },
       "resources": [
         {
@@ -120,7 +120,7 @@ Assurez-vous de remplacer le nom de la ressource Application Insights et de spé
           "properties": {
             "name": "longdependencyduration",
             "sendEmailsToSubscriptionOwners": true,
-            "customEmails": ['alice@contoso.com', 'bob@contoso.com'],
+            "customEmails": ["alice@contoso.com", "bob@contoso.com"],
             "enabled": true
           }
         }
@@ -192,6 +192,7 @@ Ce modèle Azure Resource Manager montre comment configurer une règle d’alert
 
 En savoir plus sur la détection automatique :
 
-- [Défaillances](../../azure-monitor/app/proactive-failure-diagnostics.md)
-- [Fuites de mémoire](../../azure-monitor/app/proactive-potential-memory-leak.md)
-- [Anomalies de performance](../../azure-monitor/app/proactive-performance-diagnostics.md)
+- [Défaillances](./proactive-failure-diagnostics.md)
+- [Fuites de mémoire](./proactive-potential-memory-leak.md)
+- [Anomalies de performance](./proactive-performance-diagnostics.md)
+

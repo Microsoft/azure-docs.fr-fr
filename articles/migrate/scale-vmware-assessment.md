@@ -1,14 +1,17 @@
 ---
 title: Évaluer un grand nombre de machines virtuelles VMware pour la migration vers Azure avec Azure Migrate
 description: Décrit comment évaluer de grands nombres de machines virtuelles VMware pour les migrer vers Azure à l’aide du service Azure Migrate.
+author: rashi-ms
+ms.author: rajosh
+ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 03/23/2020
-ms.openlocfilehash: d404583b1bad474a5e24e8c7cf060aeb80d610bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 206df399736dbd3b5d1d52531a249bbd37646514
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80336853"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753669"
 ---
 # <a name="assess-large-numbers-of-vmware-vms-for-migration-to-azure"></a>Évaluer de grands nombres de machines virtuelles VMware pour les migrer vers Azure
 
@@ -26,7 +29,7 @@ Dans cet article, vous apprendrez comment :
 
 
 > [!NOTE]
-> Si vous voulez tester une preuve de concept afin d’évaluer quelques machines virtuelles avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](tutorial-prepare-vmware.md)
+> Si vous voulez tester une preuve de concept afin d’évaluer quelques machines virtuelles avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](./tutorial-discover-vmware.md)
 
 ## <a name="plan-for-assessment"></a>Planifier l’évaluation
 
@@ -34,8 +37,10 @@ Lorsque vous planifiez l'évaluation d'un grand nombre de machines virtuelles VM
 
 - **Planification de projets Azure Migrate** : Découvrez comment déployer les projets Azure Migrate. Par exemple, si vos centres de données sont situés dans des zones géographiques différentes, ou si vous avez besoin de stocker des métadonnées de découverte, d’évaluation ou de migration dans une autre zone géographique, vous pouvez avoir besoin de plusieurs projets. 
 - **Planifier des appliances** : Azure Migrate utilise une appliance Azure Migrate locale, déployée en tant que machine virtuelle VMware, pour découvrir en permanence les machines virtuelles. L’appliance surveille les changements d’environnement tels que l’ajout de machines virtuelles, de disques ou d’adaptateurs réseau. Elle envoie également à Azure les métadonnées et les données de performance concernant ces opérations. Vous devez déterminer le nombre d'appliances à déployer.
-- **Planifier des comptes pour la découverte** : L'appliance Azure Migrate utilise un compte avec accès à vCenter Server afin de découvrir les machines virtuelles pour l'évaluation et la migration. Si vous découvrez plus de 10 000 machines virtuelles, configurez plusieurs comptes.
+- **Planifier des comptes pour la découverte** : L'appliance Azure Migrate utilise un compte avec accès à vCenter Server afin de découvrir les machines virtuelles pour l'évaluation et la migration. Si vous découvrez plus de 10 000 machines virtuelles, configurez plusieurs comptes, car il est nécessaire qu’il n’y ait aucun chevauchement entre les machines virtuelles découvertes à partir de deux appliances dans un projet. 
 
+> [!NOTE]
+> Si vous configurez plusieurs appliances, assurez-vous qu’il n’existe aucun chevauchement entre les machines virtuelles sur les comptes vCenter fournis. Une découverte avec un tel chevauchement n’est pas un scénario pris en charge. Si une machine virtuelle est découverte par plus d’une appliance, cela se traduit par des doublons dans la découverte et entraîne des problèmes lors de la réplication de la machine virtuelle en utilisant le portail Azure dans Server Migration.
 
 ## <a name="planning-limits"></a>Limites de planification
  
@@ -52,11 +57,12 @@ En tenant compte de ces limites, voici quelques exemples de déploiements :
 
 
 **Serveur vCenter** | **Machines virtuelles sur serveur** | **Recommandation** | **Action**
----|---|---
+---|---|---|---
 Une | < 10 000 | Un projet Azure Migrate.<br/> Une appliance.<br/> Un compte vCenter pour la découverte. | Configurez l'appliance, puis connectez-vous au vCenter Server avec un compte.
-Une | > 10 000 | Un projet Azure Migrate.<br/> Plusieurs appliances.<br/> Plusieurs comptes vCenter. | Configurez une appliance par tranche de 10 000 machines virtuelles.<br/><br/> Configurez des comptes vCenter et divisez l'inventaire pour limiter l'accès d'un compte à moins de 10 000 machines virtuelles.<br/> Connectez chaque appliance au vCenter Server avec un compte.<br/> Vous pouvez analyser les dépendances entre les machines découvertes avec différentes appliances.
+Une | > 10 000 | Un projet Azure Migrate.<br/> Plusieurs appliances.<br/> Plusieurs comptes vCenter. | Configurez une appliance par tranche de 10 000 machines virtuelles.<br/><br/> Configurez des comptes vCenter et divisez l'inventaire pour limiter l'accès d'un compte à moins de 10 000 machines virtuelles.<br/> Connectez chaque appliance au vCenter Server avec un compte.<br/> Vous pouvez analyser les dépendances entre les machines découvertes avec différentes appliances. <br/> <br/> Assurez-vous qu’il n’existe aucun chevauchement entre les machines virtuelles sur les comptes vCenter fournis. Une découverte avec un tel chevauchement n’est pas un scénario pris en charge. Si une machine virtuelle est découverte par plus d’une appliance, cela se traduit par des doublons dans la découverte et entraîne des problèmes lors de la réplication de la machine virtuelle en utilisant le portail Azure dans Server Migration.
 Multiple | < 10 000 |  Un projet Azure Migrate.<br/> Plusieurs appliances.<br/> Un compte vCenter pour la découverte. | Configurez les appliances, puis connectez-vous au vCenter Server avec un compte.<br/> Vous pouvez analyser les dépendances entre les machines découvertes avec différentes appliances.
-Multiple | > 10 000 | Un projet Azure Migrate.<br/> Plusieurs appliances.<br/> Plusieurs comptes vCenter. | Si la découverte du vCenter Server est inférieure à 10 000 machines virtuelles, configurez une appliance pour chaque vCenter Server.<br/><br/> Si la découverte du vCenter Server est supérieure à 10 000 machines virtuelles, configurez une appliance par tranche de 10 000 machines virtuelles.<br/> Configurez des comptes vCenter et divisez l'inventaire pour limiter l'accès d'un compte à moins de 10 000 machines virtuelles.<br/> Connectez chaque appliance au vCenter Server avec un compte.<br/> Vous pouvez analyser les dépendances entre les machines découvertes avec différentes appliances.
+Multiple | > 10 000 | Un projet Azure Migrate.<br/> Plusieurs appliances.<br/> Plusieurs comptes vCenter. | Si la découverte du vCenter Server est inférieure à 10 000 machines virtuelles, configurez une appliance pour chaque vCenter Server.<br/><br/> Si la découverte du vCenter Server est supérieure à 10 000 machines virtuelles, configurez une appliance par tranche de 10 000 machines virtuelles.<br/> Configurez des comptes vCenter et divisez l'inventaire pour limiter l'accès d'un compte à moins de 10 000 machines virtuelles.<br/> Connectez chaque appliance au vCenter Server avec un compte.<br/> Vous pouvez analyser les dépendances entre les machines découvertes avec différentes appliances. <br/><br/> Assurez-vous qu’il n’existe aucun chevauchement entre les machines virtuelles sur les comptes vCenter fournis. Une découverte avec un tel chevauchement n’est pas un scénario pris en charge. Si une machine virtuelle est découverte par plus d’une appliance, cela se traduit par des doublons dans la découverte et entraîne des problèmes lors de la réplication de la machine virtuelle en utilisant le portail Azure dans Server Migration.
+
 
 
 ## <a name="plan-discovery-in-a-multi-tenant-environment"></a>Planifier la découverte dans un environnement multilocataire
@@ -75,7 +81,7 @@ Préparez Azure et VMware pour l’évaluation des serveurs.
 2. Configurez des autorisations pour permettre à votre compte Azure d’interagir avec Azure Migrate.
 3. Préparez VMware pour l’évaluation.
 
-Suivez les instructions de [ce tutoriel](tutorial-prepare-vmware.md) pour configurer ces paramètres.
+Suivez les instructions de [ce tutoriel](./tutorial-discover-vmware.md) pour configurer ces paramètres.
 
 
 ## <a name="create-a-project"></a>Création d’un projet
@@ -85,7 +91,7 @@ Conformément à vos exigences de planification, procédez comme suit :
 1. Créez un projet Azure Migrate.
 2. Ajoutez l’outil Évaluation de serveur Azure Migrate aux projets.
 
-[En savoir plus](how-to-add-tool-first-time.md)
+[En savoir plus](./create-manage-projects.md)
 
 ## <a name="create-and-review-an-assessment"></a>Créer et examiner une évaluation
 
@@ -93,7 +99,7 @@ Conformément à vos exigences de planification, procédez comme suit :
 1. Passez en revue les évaluations en préparation de la planification de la migration.
 
 
-Suivez les instructions de [ce tutoriel](tutorial-assess-vmware.md) pour configurer ces paramètres.
+Suivez les instructions de [ce tutoriel](./tutorial-assess-vmware-azure-vm.md) pour configurer ces paramètres.
     
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -5,14 +5,17 @@ ms.date: 12/10/2019
 ms.topic: conceptual
 description: Découvrez comment configurer Azure Dev Spaces pour utiliser un contrôleur d’entrée NGINX personnalisé et configurer HTTPS à l’aide de ce contrôleur d’entrée.
 keywords: Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, Helm, service Mesh, routage du service Mesh, kubectl, k8s
-ms.openlocfilehash: 0fe9fec263b72ac06839b58fdc5b0142a724718c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js, devx-track-azurecli
+ms.openlocfilehash: 873057e88809c1aaa8047ac02129d83ca8e9a478
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80155445"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608552"
 ---
 # <a name="use-a-custom-nginx-ingress-controller-and-configure-https"></a>Utiliser un contrôleur d’entrée NGINX personnalisé et configurer HTTPS
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Cet article explique comment configurer Azure Dev Spaces pour utiliser un contrôleur d’entrée NGINX personnalisé. Cet article vous montre également comment configurer ce contrôleur d’entrée personnalisé pour utiliser le protocole HTTPS.
 
@@ -20,7 +23,7 @@ Cet article explique comment configurer Azure Dev Spaces pour utiliser un contr�
 
 * Un abonnement Azure. Si vous n’en avez pas, vous pouvez créer un [compte gratuit][azure-account-create].
 * [Azure CLI][az-cli].
-* [Cluster AKS (Azure Kubernetes Service) avec Azure Dev Spaces activé][qs-cli].
+* Cluster AKS (Azure Kubernetes Service) avec Azure Dev Spaces activé.
 * [kubectl][kubectl] installé.
 * [Helm 3 installé][helm-installed].
 * [Un domaine personnalisé][custom-domain] avec une [zone DNS][dns-zone].  Cet article suppose que le domaine personnalisé et la zone DNS se trouvent dans le même groupe de ressources que votre cluster AKS, mais il est possible d’utiliser un domaine personnalisé et une zone DNS dans un groupe de ressources différent.
@@ -316,20 +319,17 @@ Accédez à l’exemple d’application dans l’espace enfant *dev/azureuser1* 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment Azure Dev Spaces vous aide à développer des applications plus complexes sur plusieurs conteneurs, et comment vous pouvez simplifier le développement collaboratif en utilisant différentes versions ou branches de votre code dans différents espaces.
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
 
 > [!div class="nextstepaction"]
-> [Développement en équipe dans Azure Dev Spaces][team-development-qs]
+> [Fonctionnement d’Azure Dev Spaces](../how-dev-spaces-works.md)
 
 
 [az-cli]: /cli/azure/install-azure-cli?view=azure-cli-latest
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [az-network-dns-record-set-a-add-record]: /cli/azure/network/dns/record-set/a?view=azure-cli-latest#az-network-dns-record-set-a-add-record
-[custom-domain]: ../../app-service/manage-custom-dns-buy-domain.md#buy-the-domain
+[custom-domain]: ../../app-service/manage-custom-dns-buy-domain.md#buy-an-app-service-domain
 [dns-zone]: ../../dns/dns-getstarted-cli.md
-[qs-cli]: ../quickstart-cli.md
-[team-development-qs]: ../quickstart-team-development.md
-
 [azds-yaml]: https://github.com/Azure/dev-spaces/blob/master/samples/BikeSharingApp/BikeSharingWeb/azds.yaml
 [azure-account-create]: https://azure.microsoft.com/free
 [cert-manager]: https://cert-manager.io/

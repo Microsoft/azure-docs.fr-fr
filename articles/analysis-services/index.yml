@@ -4,19 +4,19 @@ summary: Apprenez à configurer la modélisation de données avec Analysis Servi
 metadata:
   title: Documentation Azure Analysis Services | Microsoft Docs
   description: Azure Analysis Services est une plateforme entièrement gérée en tant que service (PaaS) qui fournit des modèles de données de qualité professionnelle dans le cloud.
-  ms.service: analysis-services
+  ms.service: azure-analysis-services
   ms.topic: landing-page
   ms.collection: 
   author: minewiskan
   ms.author: owend
   manager: mtillman
   ms.date: 10/30/2019
-  ms.openlocfilehash: 8c0d92cc7f50ec72b33d86335291580a477db056
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: dcac3af93a1ddbcca6e4c96744b95a50ae30ebbe
+  ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "78273668"
+  ms.lasthandoff: 10/14/2020
+  ms.locfileid: "92015192"
 landingContent:
 - title: À propos d’Azure Analysis Services
   linkLists:
@@ -59,7 +59,7 @@ landingContent:
   - linkListType: reference
     links:
     - text: PowerShell
-      url: /azure/analysis-services/analysis-services-powershell
+      url: ./analysis-services-powershell.md
     - text: API REST
       url: /rest/api/analysisservices/
     - text: Langage TMSL (Tabular Model Scripting Language)

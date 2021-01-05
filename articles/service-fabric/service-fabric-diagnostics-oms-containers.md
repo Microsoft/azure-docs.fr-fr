@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 02/25/2019
 ms.author: srrengar
-ms.openlocfilehash: 8d4231de13da3f8b2960bd4852136f803a97a546
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c1d118fa1fb65663f37e33f739bf4a72a14e1c52
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614432"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998213"
 ---
 # <a name="monitor-containers-with-azure-monitor-logs"></a>Superviser les conteneurs avec les journaux d’activité Azure Monitor
  
@@ -48,5 +48,5 @@ L’agent permet de collecter plusieurs journaux d’activité propres aux conte
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur [la solution de conteneurs Journaux Azure Monitor](../azure-monitor/insights/containers.md).
 * En savoir plus sur l’orchestration des conteneurs dans Service Fabric : [Service Fabric et conteneurs](service-fabric-containers-overview.md)
-* Familiarisez-vous avec les fonctionnalités de [requête et de recherche dans les journaux](../log-analytics/log-analytics-log-searches.md) proposées par Journaux Azure Monitor
-* Configurez les journaux Azure Monitor pour paramétrer des règles d’[alerte automatisée](../log-analytics/log-analytics-alerts.md) afin de faciliter la détection et les diagnostics
+* Familiarisez-vous avec les fonctionnalités de [requête et de recherche dans les journaux](../azure-monitor/log-query/log-query-overview.md) proposées par Journaux Azure Monitor
+* Configurez les journaux Azure Monitor pour paramétrer des règles d’[alerte automatisée](../azure-monitor/platform/alerts-overview.md) afin de faciliter la détection et les diagnostics

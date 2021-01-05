@@ -1,17 +1,17 @@
 ---
 title: Points de terminaison de service de réseau virtuel - Azure Database for MariaDB
 description: Décrit le fonctionnement des points de terminaison des services de réseau virtuel de votre serveur Azure Database for MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: 54379c65850fa210e5523b53a64fe89705ed1f15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 7/17/2020
+ms.openlocfilehash: bd7d08e4f65612b9a76b63e8153603d043209ad3
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79532108"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96453382"
 ---
 # <a name="use-virtual-network-service-endpoints-and-rules-for-azure-database-for-mariadb"></a>Utiliser des règles et des points de terminaison de service de réseau virtuel pour Azure Database for MariaDB
 
@@ -24,7 +24,9 @@ Pour créer une règle de réseau virtuel, il doit d’abord exister un [réseau
 > [!NOTE]
 > Cette fonctionnalité est disponible dans toutes les régions Azure où Azure Database for MariaDB est déployé, pour les serveurs à usage général et à mémoire optimisée.
 
-<a name="anch-terminology-and-description-82f" />
+Vous pouvez également envisager d’utiliser [Azure Private Link](concepts-data-access-security-private-link.md) pour les connexions. Azure Private Link fournit une adresse IP privée dans votre réseau virtuel pour le serveur d’Azure Database for MariaDB.
+
+<a name="anch-terminology-and-description-82f"></a>
 
 ## <a name="terminology-and-description"></a>Terminologie et description
 
@@ -44,7 +46,7 @@ Une règle de réseau virtuel donne l’instruction au serveur Azure Database fo
 
 
 
-<a name="anch-benefits-of-a-vnet-rule-68b" />
+<a name="anch-benefits-of-a-vnet-rule-68b"></a>
 
 ## <a name="benefits-of-a-virtual-network-rule"></a>Avantages d’une règle de réseau virtuel
 
@@ -62,13 +64,8 @@ Vous pouvez récupérer l’option IP en obtenant une adresse IP *statique* pour
 
 L’approche des IP statiques peut toutefois devenir difficile à gérer, et elle est coûteuse quand elle est appliquée à grande échelle. Les règles de réseau virtuel sont plus faciles à établir et à gérer.
 
-### <a name="c-cannot-yet-have-azure-database-for-mariadb-on-a-subnet-without-defining-a-service-endpoint"></a>C. Impossible d’avoir un serveur Azure Database for MariaDB sur un sous-réseau sans définir de point de terminaison de service
 
-Si votre serveur **Microsoft.Sql** était un nœud sur un sous-réseau de votre réseau virtuel, tous les nœuds situés dans le réseau virtuel pourraient communiquer avec le serveur Azure Database for MariaDB. Dans ce cas, vos machines virtuelles pourraient communiquer avec Azure Database for MariaDB sans avoir à utiliser de règles de réseau virtuel ni de règles IP.
-
-Toutefois, depuis août 2018, le service Azure Database for MariaDB ne figure plus parmi les services pouvant être assignés directement à un sous-réseau.
-
-<a name="anch-details-about-vnet-rules-38q" />
+<a name="anch-details-about-vnet-rules-38q"></a>
 
 ## <a name="details-about-virtual-network-rules"></a>Informations sur les règles de réseau virtuel
 
@@ -91,17 +88,17 @@ Il existe une séparation des rôles de sécurité dans l’administration des p
 - **Administrateur réseau :** &nbsp; Activez le point de terminaison.
 - **Administrateur de base de données :** &nbsp; Mettez à jour la liste de contrôle d’accès (ACL) pour ajouter le sous-réseau concerné au serveur Azure Database for MariaDB.
 
-*Alternative RBAC :*
+*Alternative Azure RBAC :*
 
 Les rôles d’administrateur de réseau et d’administrateur de base de données disposent de plus de fonctionnalités que nécessaires pour gérer les règles de réseau virtuel. Seule une partie de ces fonctionnalités est réellement nécessaire.
 
-Vous avez la possibilité d’utiliser le [contrôle d’accès en fonction du rôle (RBAC)][rbac-what-is-813s] dans Azure pour créer un rôle personnalisé unique disposant uniquement des fonctionnalités nécessaires. Le rôle personnalisé peut être utilisé au lieu d’impliquer l’administrateur de réseau ou l’administrateur de base de données. Votre surface d’exposition de sécurité est inférieure si vous assignez un rôle personnalisé à un utilisateur au lieu de lui assigner les deux principaux rôles d’administrateur.
+Vous avez la possibilité d’utiliser le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)][rbac-what-is-813s] dans Azure pour créer un rôle personnalisé unique disposant uniquement des capacités nécessaires. Le rôle personnalisé peut être utilisé au lieu d’impliquer l’administrateur de réseau ou l’administrateur de base de données. Votre surface d’exposition de sécurité est inférieure si vous assignez un rôle personnalisé à un utilisateur au lieu de lui assigner les deux principaux rôles d’administrateur.
 
 > [!NOTE]
 > Il peut arriver que l’instance Azure Database for MariaDB et le sous-réseau de réseau virtuel se trouvent dans des abonnements différents. Dans ce cas, vous devez vérifier les configurations suivantes :
 > - Les deux abonnements doivent se trouver dans le même locataire Azure Active Directory.
 > - L’utilisateur dispose des autorisations requises pour lancer des opérations, telles que l’activation des points de terminaison de service et l’ajout d’un sous-réseau de réseau virtuel sur le serveur donné.
-> - Assurez-vous que le fournisseur de ressources **Microsoft.Sql** est inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
+> - Assurez-vous que les fournisseurs de ressources **Microsoft.sql** et **Microsoft. DBforMariaDB** sont inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
 
 ## <a name="limitations"></a>Limites
 
@@ -115,9 +112,11 @@ Pour Azure Database for MariaDB, la fonctionnalité de règle de réseau virtuel
 
 - Les règles de réseau virtuel s’appliquent uniquement à des réseaux virtuels Azure Resource Manager, et non à des réseaux avec un [modèle de déploiement classique][resource-manager-deployment-model-568f].
 
-- Le fait d’activer les points de terminaison de service de réseau virtuel sur Azure Database for MariaDB avec l’étiquette de service **Microsoft.Sql** a pour effet d’activer également les points de terminaison pour tous les services Azure Database : Azure Database for MariaDB, Azure Database pour MySQL, Azure Database pour PostgreSQL, Azure SQL Database et Azure SQL Data Warehouse.
+- Le fait d’activer les points de terminaison de service de réseau virtuel sur Azure Database for MariaDB avec l’étiquette de service **Microsoft.Sql** a pour effet d’activer également les points de terminaison pour tous les services Azure Database : Azure Database for MariaDB, Azure Database pour MySQL, Azure Database pour PostgreSQL, Azure SQL Database et Azure Synapse Analytics.
 
 - Les points de terminaison de service de réseau virtuel sont uniquement pris en charge pour les serveurs Usage général et Mémoire optimisée.
+
+- Si **Microsoft.Sql** est activé dans un sous-réseau, il signifie que vous souhaitez utiliser uniquement des règles de réseau virtuel pour vous connecter. [Les règles de pare-feu hors réseau virtuel](concepts-firewall-rules.md) des ressources de ce sous-réseau ne fonctionneront pas.
 
 - Sur le pare-feu, les plages d’adresses IP s’appliquent aux éléments de mise en réseau suivants, contrairement aux règles de réseau virtuel :
     - [Réseau privé virtuel (VPN) site à site (S2S)][vpn-gateway-indexmd-608y]
@@ -129,9 +128,9 @@ Si votre réseau est connecté au réseau Azure via l’utilisation d’[Express
 
 Pour permettre la communication de votre circuit avec Azure Database for MariaDB, vous devez créer des règles de réseau IP pour les adresses IP publiques de vos circuits. Pour rechercher les adresses IP publiques de votre circuit ExpressRoute, ouvrez un ticket de support avec ExpressRoute dans le portail Azure.
 
-## <a name="adding-a-vnet-firewall-rule-to-your-server-without-turning-on-vnet-service-endpoints"></a>Ajout d’une règle de pare-feu de réseau virtuel à votre serveur sans activer les points de terminaison de service Vnet
+## <a name="adding-a-vnet-firewall-rule-to-your-server-without-turning-on-vnet-service-endpoints"></a>Ajout d’une règle de pare-feu de réseau virtuel à votre serveur sans activer les points de terminaison de service de réseau virtuel
 
-La simple définition d’une règle de pare-feu ne permet pas de sécuriser le serveur sur le réseau virtuel. Vous devez également **activer** les points de terminaison de service du réseau virtuel pour que la sécurité soit appliquée. Quand vous **activez** les points de terminaison de service, le sous-réseau de votre réseau virtuel est arrêté le temps de passer de l’état **Désactivé** à l’état **Activé**. Cela est particulièrement vrai dans le contexte de grands réseaux virtuels. Vous pouvez utiliser l’indicateur **IgnoreMissingServiceEndpoint** pour réduire ou éliminer le temps d’arrêt pendant la transition.
+La simple définition d’une règle de pare-feu de réseau virtuel ne permet pas de sécuriser le serveur sur le réseau virtuel. Vous devez également **activer** les points de terminaison de service du réseau virtuel pour que la sécurité soit appliquée. Quand vous **activez** les points de terminaison de service, le sous-réseau de votre réseau virtuel est arrêté le temps de passer de l’état **Désactivé** à l’état **Activé**. Cela est particulièrement vrai dans le contexte de grands réseaux virtuels. Vous pouvez utiliser l’indicateur **IgnoreMissingServiceEndpoint** pour réduire ou éliminer le temps d’arrêt pendant la transition.
 
 Vous pouvez définir l’indicateur **IgnoreMissingServiceEndpoint** à l’aide d’Azure CLI ou du Portail Azure.
 
@@ -156,7 +155,7 @@ Pour des articles dédiés à la création de règles de réseau virtuel, consul
 
 [vm-configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-portal-321w]: ../virtual-network/virtual-networks-static-private-ip-arm-pportal.md
 
-[rbac-what-is-813s]: ../active-directory/role-based-access-control-what-is.md
+[rbac-what-is-813s]: ../role-based-access-control/overview.md
 
 [vpn-gateway-indexmd-608y]: ../vpn-gateway/index.yml
 

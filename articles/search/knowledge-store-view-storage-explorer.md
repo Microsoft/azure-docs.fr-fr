@@ -1,28 +1,25 @@
 ---
-title: Visualiser une base de connaissances (préversion) avec l’Explorateur Stockage
+title: Voir une base de connaissances avec l’Explorateur Stockage
 titleSuffix: Azure Cognitive Search
-description: Visualisez et analysez une base de connaissances Recherche cognitive Azure avec l’Explorateur Stockage du portail Azure. La base de connaissances est actuellement en préversion publique.
+description: Visualisez et analysez une base de connaissances Recherche cognitive Azure avec l’Explorateur Stockage du portail Azure.
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 12/30/2019
-ms.openlocfilehash: 167316eca1f85530a040d4543f98ae34a9fb93c6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/30/2020
+ms.openlocfilehash: ba0b02067c032f9038051c169866588ded44af73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75754069"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85566020"
 ---
 # <a name="view-a-knowledge-store-with-storage-explorer"></a>Voir une base de connaissances avec l’Explorateur Stockage
 
-> [!IMPORTANT] 
-> La base de connaissances est actuellement disponible en préversion publique. Les fonctionnalités en préversion sont fournies sans contrat de niveau de service et ne sont pas recommandées pour les charges de travail de production. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). L’[API REST version 2019-05-06-Preview](search-api-preview.md) fournit des fonctionnalités en préversion. La prise en charge du portail est actuellement limitée, et il n’existe pas de prise en charge du kit SDK .NET.
-
 Cet article explique, par exemple, comment se connecter à une base de connaissances et l’explorer à l’aide de l’Explorateur Stockage dans le portail Azure.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 + Suivez les étapes décrites dans [Créer une base de connaissances dans le portail Azure](knowledge-store-create-portal.md) pour créer l’exemple de base de connaissances utilisé dans cette procédure pas à pas.
 

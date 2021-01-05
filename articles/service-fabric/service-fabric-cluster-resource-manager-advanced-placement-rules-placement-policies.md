@@ -5,12 +5,13 @@ author: masnider
 ms.topic: conceptual
 ms.date: 08/18/2017
 ms.author: masnider
-ms.openlocfilehash: 9aea157d03f344e07a81f0588d3e0127f17ca75d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5a4586c9c1be51b0ebbdebcf0c23289fc39f9eda
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75834405"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96485499"
 ---
 # <a name="placement-policies-for-service-fabric-services"></a>Stratégies de positionnement pour les services Service Fabric
 Les stratégies de positionnement sont des règles supplémentaires qui peuvent être utilisées pour régir le positionnement des services dans certains scénarios spécifiques moins courants. Voici quelques exemples de ces scénarios :
@@ -19,6 +20,7 @@ Les stratégies de positionnement sont des règles supplémentaires qui peuvent 
 - Votre environnement s’étend sur plusieurs zones de contrôle géopolitique ou juridique, ou d’autres cas de figure où des limites en matière de stratégie doivent être appliquées
 - Vous devez tenir compte de certains facteurs de performance ou de latence des communications en raison des grandes distances ou de l’utilisation de liaisons réseau plus lentes ou peu fiables
 - Vous devez autant que possible maintenir la colocalisation de certaines charges de travail en utilisant d’autres charges de travail ou en les rapprochant des clients
+- Vous avez besoin de plusieurs instances sans état d’une partition sur un seul nœud
 
 La plupart de ces exigences correspondent à la disposition physique du cluster, représentée comme les domaines d’erreur du cluster. 
 
@@ -28,6 +30,7 @@ Les stratégies de positionnement avancées qui contribuent à résoudre ces sc�
 2. Domaines requis
 3. Domaines par défaut
 4. Désactivation de la compression de réplica
+5. Autoriser plusieurs instances sans état sur le nœud
 
 La plupart des commandes suivantes peuvent être configurées par le biais des propriétés de nœud et des contraintes de positionnement, mais certaines sont plus complexes. Pour simplifier les choses, Service Fabric Cluster Resource Manager fournit ces stratégies de positionnement supplémentaires. Les stratégies de positionnement sont configurées pour chaque instance de service nommée. Elles peuvent également être mises à jour dynamiquement.
 
@@ -121,6 +124,42 @@ New-ServiceFabricService -ApplicationName $applicationName -ServiceName $service
 ```
 
 Est-il possible d’utiliser ces configurations pour les services d’un cluster qui ne sont pas répartis géographiquement ? Oui, mais il n’y a pas de bonne raison de le faire. Les configurations de domaine requises, non valides et par défaut doivent être évitées, sauf si les scénarios le nécessitent. Il n’y a aucune raison de tenter de forcer une charge de travail à s’exécuter dans un seul rack ou de préférer un segment de votre cluster local plutôt qu’un autre. Différentes configurations matérielles doivent être réparties sur plusieurs domaines d’erreur et gérées par les contraintes de placement et les propriétés de nœud normales.
+
+## <a name="placement-of-multiple-stateless-instances-of-a-partition-on-single-node"></a>Placement de plusieurs instances sans état d’une partition sur un seul nœud
+La stratégie de placement **AllowMultipleStatelessInstancesOnNode** autorise le placement de plusieurs instances sans état d’une partition sur un nœud unique. Par défaut, plusieurs instances d’une seule partition ne peuvent pas être placées sur un nœud. Même avec un service-1, il n’est pas possible de mettre à l’échelle le nombre d’instances au-delà du nombre de nœuds dans le cluster, pour un service nommé donné. Cette stratégie de positionnement supprime cette restriction et autorise la spécification de InstanceCount à une valeur supérieure au nombre de nœuds.
+
+Si vous avez déjà vu un message d’intégrité comme « `The Load Balancer has detected a Constraint Violation for this Replica:fabric:/<some service name> Secondary Partition <some partition ID> is violating the Constraint: ReplicaExclusion` », vous avez rencontré cette situation ou quelque chose de semblable. 
+
+En spécifiant la stratégie `AllowMultipleStatelessInstancesOnNode` sur le service, InstanceCount peut être défini au-delà du nombre de nœuds dans le cluster.
+
+Code :
+
+```csharp
+ServicePlacementAllowMultipleStatelessInstancesOnNodePolicyDescription allowMultipleInstances = new ServicePlacementAllowMultipleStatelessInstancesOnNodePolicyDescription();
+serviceDescription.PlacementPolicies.Add(allowMultipleInstances);
+```
+
+PowerShell :
+
+```posh
+New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName -Stateless –PartitionSchemeSingleton –PlacementPolicy @(“AllowMultipleStatelessInstancesOnNode”) -InstanceCount 10 -ServicePackageActivationMode ExclusiveProcess 
+```
+
+> [!NOTE]
+> La stratégie de positionnement est actuellement en préversion et derrière le paramètre de cluster `EnableUnsupportedPreviewFeatures` . Étant donné qu’il s’agit d’une fonctionnalité d’évaluation pour l’instant, la définition de la configuration de préversion empêche la mise à niveau du cluster. En d’autres termes, vous devrez créer un nouveau cluster pour essayer la fonctionnalité.
+>
+
+> [!NOTE]
+> Actuellement, la stratégie est uniquement prise en charge pour les services sans état avec le [mode d’activation du package de service](/dotnet/api/system.fabric.description.servicepackageactivationmode?view=azure-dotnet) ExclusiveProcess.
+>
+
+> [!WARNING]
+> La stratégie n’est pas prise en charge lorsqu’elle est utilisée avec des points de terminaison de port statique. L’utilisation conjointe peut entraîner un cluster défectueux, car plusieurs instances sur le même nœud essaient d’effectuer une liaison avec le même port, sans pouvoir l’établir. 
+>
+
+> [!NOTE]
+> L’utilisation d’une valeur élevée de [MinInstanceCount](/dotnet/api/system.fabric.description.statelessservicedescription.mininstancecount?view=azure-dotnet) avec cette stratégie de positionnement peut mener à des mises à niveau d’application bloquées. Par exemple, si vous disposez d’un cluster à cinq nœuds et que vous définissez InstanceCount=10, vous aurez deux instances sur chaque nœud. Si vous définissez MinInstanceCount=9, une tentative de mise à niveau d’application peut être bloquée avec MinInstanceCount=8, cela peut être évité.
+>
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Pour plus d’informations sur la configuration des services, consultez la rubrique [En savoir plus sur la configuration des services](service-fabric-cluster-resource-manager-configure-services.md)

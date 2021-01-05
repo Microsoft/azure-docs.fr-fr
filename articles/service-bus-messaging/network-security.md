@@ -1,23 +1,14 @@
 ---
 title: Sécurité réseau pour Azure Service Bus
 description: Cet article décrit les fonctionnalités de sécurité réseau, comme les balises de service, les règles de pare-feu IP, les points de terminaison de service et les points de terminaison privés.
-services: service-bus-messaging
-documentationcenter: .net
-author: axisc
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
-ms.date: 03/13/2020
-ms.author: aschhab
-ms.openlocfilehash: 95f8c2a3b47b59bab7df909be43dacdb1f9c58f7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/23/2020
+ms.openlocfilehash: db0dd89d1f902699c27b724609505ba681757454
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79475987"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92310459"
 ---
 # <a name="network-security-for-azure-service-bus"></a>Sécurité réseau pour Azure Service Bus 
 Cet article explique comment utiliser les fonctionnalités de sécurité suivantes avec Azure Service Bus : 
@@ -25,18 +16,21 @@ Cet article explique comment utiliser les fonctionnalités de sécurité suivant
 - Balises de service
 - Règles de pare-feu IP
 - Points de terminaison de service réseau
-- Points de terminaison privés (préversion)
+- Instances Private Endpoint
 
 
 ## <a name="service-tags"></a>Balises de service
 Une balise de service représente un groupe de préfixes d’adresses IP d’un service Azure donné. Microsoft gère les préfixes d’adresses englobés par l’étiquette de service et met à jour automatiquement l’étiquette de service quand les adresses changent, ce qui réduit la complexité des mises à jour fréquentes relatives aux règles de sécurité réseau. Pour plus d’informations sur les étiquettes de service, consultez [Vue d’ensemble des balises de service](../virtual-network/service-tags-overview.md).
 
-Vous pouvez utiliser des étiquettes de service pour définir des contrôles d’accès réseau sur des [groupes de sécurité réseau](../virtual-network/security-overview.md#security-rules) ou sur le [pare-feu Azure](../firewall/service-tags.md). Utilisez des étiquettes de service à la place des adresses IP spécifiques lors de la création de règles de sécurité. En spécifiant le nom de l’étiquette de service (par exemple, **ServiceBus**) dans le champ *source* ou de *destination* approprié d’une règle, vous pouvez autoriser ou refuser le trafic pour le service correspondant.
+Vous pouvez utiliser des étiquettes de service pour définir des contrôles d’accès réseau sur des [groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md#security-rules) ou sur le [pare-feu Azure](../firewall/service-tags.md). Utilisez des étiquettes de service à la place des adresses IP spécifiques lors de la création de règles de sécurité. En spécifiant le nom de l’étiquette de service (par exemple, **ServiceBus**) dans le champ *source* ou de *destination* approprié d’une règle, vous pouvez autoriser ou refuser le trafic pour le service correspondant.
 
 | Balise du service | Objectif | Peut-elle utiliser le trafic entrant ou sortant ? | Peut-elle être étendue à une zone régionale ? | Peut-elle être utilisée avec le Pare-feu Azure ? |
 | --- | -------- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **ServiceBus** | Trafic Azure Service Bus qui utilise le niveau de service Premium. | Règle de trafic sortant | Oui | Oui |
 
+
+> [!NOTE]
+> Vous pouvez utiliser des balises de service uniquement pour les espaces de noms **Premium**. Si vous utilisez un espace de noms **standard**, utilisez l’adresse IP que vous voyez lorsque vous exécutez la commande suivante : `nslookup <host name for the namespace>`. Par exemple : `nslookup contosons.servicebus.windows.net`. 
 
 ## <a name="ip-firewall"></a>Pare-feu IP 
 Par défaut, les espaces de noms Service Bus sont accessibles à partir d’Internet tant que la demande s’accompagne d’une authentification et d’une autorisation valides. Avec le pare-feu IP, vous pouvez la limiter à un ensemble d’adresses IPv4 ou de plages d’adresses IPv4 dans la notation [CIDR (Classless Inter-Domain Routing)](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
@@ -87,8 +81,6 @@ Pour plus d’informations, consultez [Qu’est-ce qu’Azure Private Link ?](.
 
 > [!NOTE]
 > Cette fonctionnalité est prise en charge avec le niveau **Premium** d’Azure Service Bus. Pour plus d’informations sur le niveau Premium, consultez l’article [Couches de messagerie Service Bus Premium et Standard](service-bus-premium-messaging.md).
->
-> Cette fonctionnalité est actuellement en **préversion**. 
 
 
 Pour plus d’informations, consultez [Guide pratique pour configurer des points de terminaison privés pour un espace de noms Service Bus](private-link-service.md).

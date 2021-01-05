@@ -1,25 +1,28 @@
 ---
 title: Tutoriel – Créer un locataire Azure Active Directory B2C
-description: Découvrez comment préparer l’inscription de vos applications en créant un locataire Azure Active Directory B2C à l’aide du portail Azure.
+description: Ce tutoriel explique comment préparer l’inscription de vos applications en créant un locataire Azure Active Directory B2C à l’aide du portail Azure.
 services: B2C
 author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 09/28/2019
+ms.topic: tutorial
+ms.date: 12/03/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c31f3c4c6688af7d2142180e8d9b7100965bad96
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5229175af618f897caeae7310338cbe51966a48d
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78186401"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96859588"
 ---
-# <a name="tutorial-create-an-azure-active-directory-b2c-tenant"></a>Didacticiel : créer un locataire Azure Active Directory B2C
+# <a name="tutorial-create-an-azure-active-directory-b2c-tenant"></a>Tutoriel : Créer un locataire Azure Active Directory B2C
 
-Pour que vos applications puissent interagir avec Azure Active Directory B2C (Azure AD B2C), elles doivent être inscrites dans un locataire que vous gérez.
+Pour que vos applications puissent interagir avec Azure Active Directory B2C (Azure AD B2C), elles doivent être inscrites dans un locataire que vous gérez. 
+
+> [!NOTE]
+> Vous pouvez créer jusqu’à 20 locataires par abonnement. Cette limite aide à se prémunir contre les menaces visant vos ressources, telles que les attaques par déni de service, et est appliquée à la fois dans le portail Azure et dans l’API de création de locataire sous-jacente. Si vous avez besoin de créer plus de 20 locataires, contactez le [Support Microsoft](support-options.md).
 
 Dans cet article, vous apprendrez comment :
 
@@ -30,6 +33,8 @@ Dans cet article, vous apprendrez comment :
 > * Ajouter la ressource Azure AD B2C en tant que **favori** dans le portail Azure
 
 Vous découvrirez comment inscrire une application dans le didacticiel suivant.
+
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -44,32 +49,28 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
     ![Abonné, filtre Annuaire et abonnement avec locataire d’abonnement sélectionné](media/tutorial-create-tenant/portal-01-pick-directory.png)
 
 1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
+
+   ![Sélectionner le bouton Créer une ressource](media/tutorial-create-tenant/create-a-resource.png)
+
 1. Recherchez **Azure Active Directory B2C**, puis sélectionnez **Créer**.
-1. Cliquez sur **Créer un nouveau client Azure Active Directory B2C**.
+2. Cliquez sur **Créer un nouveau client Azure Active Directory B2C**.
 
     ![Créer un locataire Azure AD B2C sélectionné dans le portail Azure](media/tutorial-create-tenant/portal-02-create-tenant.png)
 
-1. Entrez des valeurs pour **Nom de l’organisation** et **Nom de domaine initial**. Sélectionnez une valeur pour **Pays ou région** (que vous pouvez changer par la suite), puis **Créer**.
+1. Dans la page **Créer un annuaire**, entrez les informations suivantes :
 
-    Le nom de domaine est utilisé dans le cadre du nom de domaine de locataire complet. Dans cet exemple, le nom du locataire est *contosob2c.onmicrosoft.com* :
+   - **Nom de l’organisation** : entrez un nom pour votre locataire Azure AD B2C.
+   - **Nom de domaine initial** : entrez un nom de domaine pour votre locataire Azure AD B2C.
+   - **Pays ou région** : sélectionnez votre pays ou votre région dans la liste. Il ne sera pas possible de changer cette sélection ultérieurement.
+   - **Abonnement** : sélectionnez votre abonnement dans la liste.
+   - **Groupe de ressources** : sélectionnez ou recherchez le groupe de ressources qui contiendra le locataire.
 
-    ![Formulaire de création de locataire avec des exemples de valeurs dans le portail Azure](media/tutorial-create-tenant/portal-03-tenant-naming.png)
+    ![Formulaire de création de locataire avec des exemples de valeurs dans le portail Azure](media/tutorial-create-tenant/review-and-create-tenant.png)
 
-1. Une fois la création du locataire terminée, sélectionnez le lien **Créer un locataire B2C ou lier à un locataire existant** en haut de la page de création du locataire.
+1. Sélectionnez **Revoir + créer**.
+1. Passez en revue les paramètres de votre annuaire. Sélectionnez ensuite **Créer**.
 
-    ![Lien de navigation de liaison à un locataire mis en surbrillance dans le portail Azure](media/tutorial-create-tenant/portal-04-select-link-sub-link.png)
-
-1. Sélectionnez **Lier un locataire Azure AD B2C existant à mon abonnement Azure**.
-
-   ![Lier une sélection d’abonnement existante dans le portail Azure](media/tutorial-create-tenant/portal-05-link-subscription.png)
-
-1. Sélectionnez le **Locataire Azure AD B2C** que vous avez créé, puis votre **abonnement**.
-
-    Pour **Groupe de ressources**, sélectionnez **Créer**. Entrez un **Nom** pour le groupe de ressources qui contiendra le locataire, sélectionnez l’**Emplacement du groupe de ressources**, puis **Créer**.
-
-    ![Formulaire de liaison des paramètres d’abonnement dans le portail Azure](media/tutorial-create-tenant/portal-06-link-subscription-settings.png)
-
-    Vous pouvez lier plusieurs locataires Azure AD B2C à un seul abonnement Azure pour la facturation.
+Vous pouvez lier plusieurs locataires Azure AD B2C à un seul abonnement Azure pour la facturation. Pour lier un locataire, vous devez être administrateur du locataire Azure AD B2C et vous devez disposer d’au moins le rôle Contributeur dans l’abonnement Azure. Consultez [Lier un locataire Azure AD B2C à un abonnement](billing.md#link-an-azure-ad-b2c-tenant-to-a-subscription).
 
 ## <a name="select-your-b2c-tenant-directory"></a>Sélectionner l’annuaire de votre locataire B2C
 

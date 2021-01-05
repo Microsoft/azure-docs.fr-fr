@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/29/2019
+ms.date: 09/16/2020
 ms.author: yelevin
-ms.openlocfilehash: 4042f7b9d0f6fdf293f338c89d5783fe266c4edf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f9c400b55b0da47495db4f1ff4ceb86aa39fe2cc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77581682"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90885830"
 ---
 # <a name="remove-azure-sentinel-from-your-workspace"></a>Supprimer Azure Sentinel de votre espace de travail
 
@@ -48,13 +48,13 @@ Une fois la déconnexion identifiée, le processus d’annulation de l’intégr
 
 -   AWS
 
--   Alertes de sécurité des services Microsoft (Azure ATP, Microsoft Cloud App Security, ce qui inclut la génération de rapports Cloud Discovery Shadow IT, Azure AD Identity Protection, Microsoft Defender ATP, Azure Security Center)
+-   Alertes de sécurité des services Microsoft : Alertes de sécurité Azure Security Center de Microsoft Defender pour Identity (*anciennement Azure ATP*), Microsoft Cloud App Security, ce qui inclut la génération de rapports Cloud Discovery Shadow IT, Azure AD Identity Protection, Microsoft Defender for Endpoint (*anciennement Microsoft Defender ATP*) Azure Defender
 
 -   Informations sur les menaces
 
--   Journaux de sécurité courants (notamment les journaux CEF, Barracuda et Syslog) (Si vous disposez d’Azure Security Center, ces journaux continueront d’être collectés.)
+-   Journaux de sécurité courants (notamment les journaux CEF, Barracuda et Syslog) (Si vous recevez les alertes Azure Defender depuis Azure Security Center, ces journaux continueront d’être collectés.)
 
--   Événements de sécurité Windows (Si vous disposez d’Azure Security Center, ces journaux continueront d’être collectés.)
+-   Événements de sécurité Windows (Si vous recevez les alertes Azure Defender depuis Azure Security Center, ces journaux continueront d’être collectés.)
 
 Au cours des 48 premières heures, les données et les règles d’analyse (dont la configuration de l’automatisation en temps réel) ne seront plus accessibles ou ne pourront plus être interrogées dans Azure Sentinel.
 

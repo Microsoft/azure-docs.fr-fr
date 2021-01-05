@@ -1,21 +1,15 @@
 ---
-title: Ajouter, supprimer et organiser des favoris dans le portail Azure | Microsoft Docs
+title: Ajouter, supprimer et organiser des favoris dans le portail Azure
 description: Découvrez comment ajouter ou supprimer des éléments dans la liste des favoris et réorganiser les éléments
-services: azure-portal
 keywords: favoris,portail
-author: mgblythe
-ms.author: mblythe
 ms.date: 12/20/2019
-ms.topic: conceptual
-ms.service: azure-portal
-ms.custom: ''
-manager: mtillman
-ms.openlocfilehash: d6b580accb02efb6a44c0c245af583d2e3850409
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: 01ed34c2e72890c6aeeef9371312825273722ac6
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76310813"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745789"
 ---
 # <a name="add-remove-and-rearrange-favorites"></a>Ajouter, supprimer et réorganiser des favoris
 

@@ -6,12 +6,12 @@ manager: rochakm
 ms.topic: article
 ms.date: 01/10/2020
 ms.author: sutalasi
-ms.openlocfilehash: 6499c986bef965848303ee9833fd59f5e3f0889c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a4140a0b22f7ca8164d50cf60fe57c861f826eb4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229165"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86132507"
 ---
 # <a name="set-up-disaster-recovery-to-azure-for-hyper-v-vms-using-powershell-and-azure-resource-manager"></a>Configurer la récupération d’urgence dans Azure pour les machines virtuelles Hyper-V à l’aide de PowerShell et de Azure Resource Manager
 
@@ -25,7 +25,7 @@ Cet article décrit comment utiliser Windows PowerShell, ainsi que Azure Resourc
 
 Azure PowerShell fournit des applets de commande pour gérer Azure à l’aide de Windows PowerShell. Les applets de commande PowerShell de Site Recovery, disponibles avec Azure PowerShell pour Azure Resource Manager, vous permettent de protéger et récupérer vos serveurs dans Azure.
 
-Vous n’avez pas besoin d’être un expert de PowerShell pour utiliser cet article, mais vous devez tout de même connaître des concepts de base, tels que les modules, les applets de commande et les sessions. Pour plus d’informations, consultez la [documentation PowerShell](/powershell) et [Utilisation d’Azure PowerShell avec Azure Resource Manager](../powershell-azure-resource-manager.md).
+Vous n’avez pas besoin d’être un expert de PowerShell pour utiliser cet article, mais vous devez tout de même connaître des concepts de base, tels que les modules, les applets de commande et les sessions. Pour plus d’informations, consultez la [documentation PowerShell](/powershell) et [Utilisation d’Azure PowerShell avec Azure Resource Manager](../azure-resource-manager/management/manage-resources-powershell.md).
 
 > [!NOTE]
 > Les partenaires Microsoft membres du programme Cloud Solution Provider (CSP) peuvent configurer et gérer la protection des serveurs clients sur leurs abonnements CSP respectifs (abonnements des locataires).

@@ -4,12 +4,12 @@ description: Découvrir les bonnes pratiques de l’opérateur relatives aux fon
 services: container-service
 ms.topic: conceptual
 ms.date: 11/26/2018
-ms.openlocfilehash: cccc476a944b28d24c53a947e434d465c94f94ee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 087c1d2efc93b8460a3683a4e66916d73fd4e885
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79126586"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87015678"
 ---
 # <a name="best-practices-for-basic-scheduler-features-in-azure-kubernetes-service-aks"></a>Bonnes pratiques relatives aux fonctionnalités de base du planificateur dans Azure Kubernetes Service (AKS)
 
@@ -87,7 +87,7 @@ metadata:
 spec:
    minAvailable: 3
    selector:
-   matchLabels:
+    matchLabels:
       app: nginx-frontend
 ```
 
@@ -103,7 +103,7 @@ metadata:
 spec:
    maxUnavailable: 2
    selector:
-   matchLabels:
+    matchLabels:
       app: nginx-frontend
 ```
 

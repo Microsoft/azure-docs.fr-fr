@@ -6,19 +6,16 @@ ms.author: yalavi
 ms.topic: conceptual
 ms.date: 03/19/2018
 ms.subservice: alerts
-ms.openlocfilehash: ab5c16995a2d2bad6e44f0f9d1187ca3d66be1b6
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: d7bcf3e5c0b50d3d6eb8f71dc70f0ff064ff3465
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114266"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95536028"
 ---
 # <a name="use-the-voluntary-migration-tool-to-migrate-your-classic-alert-rules"></a>Utiliser l’outil de migration volontaire pour migrer vos règles d’alerte classiques
 
-Comme [précédemment annoncé](monitoring-classic-retirement.md), les alertes classiques dans Azure Monitor seront mises hors service en septembre 2019 (c’était initialement prévu pour juillet 2019). Un outil de migration est disponible dans le Portail Azure pour les clients qui utilisent des règles d’alerte classiques et qui souhaitent déclencher la migration eux-mêmes. Cet article vous explique comment utiliser l’outil de migration pour migrer volontairement vos règles d’alerte classiques avant que la migration automatique démarre en septembre 2019.
-
-> [!NOTE]
-> En raison de retards dans le déploiement de l’outil de migration, la date de mise hors service des alertes classiques a été [repoussée au 31 août 2019](https://azure.microsoft.com/updates/azure-monitor-classic-alerts-retirement-date-extended-to-august-31st-2019/) (la date annoncée à l’origine était le 30 juin 2019).
+Comme [précédemment annoncé](monitoring-classic-retirement.md), les alertes classiques dans Azure Monitor sont mises hors service, bien qu’elles soient toujours utilisées pour les ressources qui ne prennent pas encore en charge les nouvelles alertes. Un outil de migration était disponible dans le portail Azure pour les clients qui utilisaient des règles d’alerte classiques et qui souhaitaient déclencher la migration eux-mêmes. Cet article explique comment utiliser cet outil de migration, qui sera également utilisé pour les alertes restantes dans l’attente d’une annonce ultérieure.
 
 ## <a name="benefits-of-new-alerts"></a>Avantages des nouvelles alertes
 
@@ -37,7 +34,7 @@ Le processus de migration convertit les règles d’alerte classiques en de nouv
 
 - Le format de charge utile de notification et les API pour créer et gérer les nouvelles règles d’alerte sont différents de ceux des règles d’alerte classiques, car ils prennent en charge davantage de fonctionnalités. [Découvrez comment préparer la migration](alerts-prepare-migration.md).
 
-- Certaines règles d’alerte classiques ne peuvent pas être migrées à l’aide de l’outil. [Découvrez les règles qui ne peuvent pas être migrées et que faire avec](alerts-understand-migration.md#classic-alert-rules-that-will-not-be-migrated).
+- Certaines règles d’alerte classiques ne peuvent pas être migrées à l’aide de l’outil. [Découvrez les règles qui ne peuvent pas être migrées et que faire avec](alerts-understand-migration.md#manually-migrating-classic-alerts-to-newer-alerts).
 
     > [!NOTE]
     > Le processus de migration n’affecte pas l’évaluation de vos règles d’alerte classiques. Elles continuent à s’exécuter et envoyer des alertes jusqu'à ce qu’elles soient migrées et que les nouvelles règles d’alerte prennent effet.
@@ -52,7 +49,7 @@ Pour déclencher la migration de vos règles d’alerte classiques dans le porta
 
 1. Sélectionnez **Migrer vers les nouvelles règles** pour accéder à la page d’accueil de migration. Cette page affiche une liste de tous vos abonnements et leur état de migration :
 
-    ![migration-landing](media/alerts-migration/migration-landing.png "Migrer les règles")
+    ![Capture d’écran montrant la page Migrer les règles d’alerte.](media/alerts-migration/migration-landing.png "Migrer les règles")
 
     Tous les abonnements qui peuvent être migrés à l’aide de l’outil sont marqués comme **Prêts pour la migration**.
 
@@ -63,7 +60,7 @@ Pour déclencher la migration de vos règles d’alerte classiques dans le porta
 
     La page résultante affiche les détails des règles d’alerte classiques qui seront migrées pour un abonnement à la fois. Vous pouvez également sélectionner **Télécharger les détails de la migration pour cet abonnement** pour obtenir les détails au format CSV.
 
-    ![migration-preview](media/alerts-migration/migration-preview.png "Prévisualiser la migration")
+    ![Capture d’écran montrant la page Migrer les règles d’alerte avec un lien Télécharger les détails de la migration pour cet abonnement, où vous pouvez spécifier une adresse e-mail pour la notification de migration.](media/alerts-migration/migration-preview.png "Prévisualiser la migration")
 
 1. Spécifiez une ou plusieurs adresses e-mail pour être informé de l’état de la migration. Vous recevrez un e-mail lorsque de la migration sera terminée ou si une action est nécessaire de votre part.
 
@@ -72,7 +69,7 @@ Pour déclencher la migration de vos règles d’alerte classiques dans le porta
     > [!IMPORTANT]
     > Une fois que vous initiez la migration pour un abonnement, vous ne pourrez pas modifier ou créer des règles d’alerte classiques pour cet abonnement. Cette restriction garantit qu’aucune modification de vos règles d’alerte classiques n’est perdue pendant la migration vers les nouvelles règles. Bien que vous ne pourrez pas modifier vos règles d’alerte classiques, elles continueront à exécuter et à fournir des alertes jusqu'à leur migration. Une fois la migration terminée pour votre abonnement, vous ne pourrez plus utiliser les règles d’alerte classiques.
 
-    ![migration-confirm](media/alerts-migration/migration-confirm.png "Confirmer le démarrage de la migration")
+    ![Capture d’écran montrant une invite de confirmation pour votre migration, comprenant des informations importantes avec des liens pour en savoir plus avant de continuer.](media/alerts-migration/migration-confirm.png "Confirmer le démarrage de la migration")
 
 1. Lorsque la migration est terminée, ou si une action est nécessaire de votre part, vous recevrez un e-mail aux adresses que vous avez fournies précédemment. Vous pouvez également régulièrement vérifier l’état sur la page d’accueil de migration dans le portail.
 
@@ -86,7 +83,7 @@ Quand un abonnement est prêt pour la migration, le propriétaire de l’abonnem
 
 ### <a name="who-can-trigger-the-migration"></a>Qui peut déclencher la migration ?
 
-Les utilisateurs qui ont le rôle Contributeur de surveillance au niveau de l’abonnement peuvent déclencher la migration. [En savoir plus sur le contrôle d’accès en fonction du rôle pour le processus de migration](alerts-understand-migration.md#who-can-trigger-the-migration).
+Les utilisateurs qui ont le rôle Contributeur de surveillance au niveau de l’abonnement peuvent déclencher la migration. [Apprenez-en davantage sur le contrôle d’accès en fonction du rôle Azure pour le processus de migration](alerts-understand-migration.md#who-can-trigger-the-migration).
 
 ### <a name="how-long-will-the-migration-take"></a>Combien de temps prendra la migration ?
 

@@ -9,12 +9,12 @@ metadata:
   author: yegu-ms
   ms.author: yegu
   ms.date: 12/16/2019
-  ms.openlocfilehash: fad78db361927a14f393066fb088354552d880a9
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 2655c1a5b3a99422a71a2acc18671d9fdd31baa5
+  ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "75470030"
+  ms.lasthandoff: 10/30/2020
+  ms.locfileid: "93099995"
 landingContent:
 - title: À propos du cache Azure pour Redis
   linkLists:
@@ -22,26 +22,24 @@ landingContent:
     links:
     - text: Présentation du cache Azure pour Redis
       url: cache-overview.md
-    - text: En savoir plus sur le niveau Premium du cache Azure pour Redis
-      url: cache-premium-tier-intro.md
   - linkListType: video
     links:
-    - text: Options d’administration
-      url: https://azure.microsoft.com/resources/videos/azure-redis-cache-administration-options/
-    - text: Mise en cache de sécurité
-      url: https://azure.microsoft.com/resources/videos/azure-redis-security-cacheing/
     - text: Meilleures pratiques
       url: https://azure.microsoft.com/resources/videos/azure-redis-cache-best-practices/
     - text: Améliorer les performances
       url: https://azure.microsoft.com/resources/videos/increase-performance-through-redis-cluster-in-azure-redis-cache/
+    - text: Mise en cache de sécurité
+      url: https://azure.microsoft.com/resources/videos/azure-redis-security-cacheing/
+    - text: Options d’administration
+      url: https://azure.microsoft.com/resources/videos/azure-redis-cache-administration-options/
   - linkListType: whats-new
     links:
-    - text: Forum aux questions
-      url: cache-faq.md
+    - text: Créer un cache de niveau Entreprise
+      url: quickstart-create-redis-enterprise.md
     - text: Bonnes pratiques en matière d’utilisation du cache Azure pour Redis
       url: cache-best-practices.md
-    - text: Fournisseur d’États de session ASP.NET pour le Cache Azure pour Redis
-      url: cache-aspnet-session-state-provider.md
+    - text: Forum aux questions
+      url: cache-faq.md
 - title: 'Guides de démarrage rapide : Cache Azure pour Redis'
   linkLists:
   - linkListType: quickstart
@@ -60,8 +58,12 @@ landingContent:
       url: cache-python-get-started.md
   - linkListType: tutorial
     links:
-    - text: Créer un leaderboard de type Cache-Aside sur ASP.NET
-      url: cache-web-app-cache-aside-leaderboard.md
+    - text: Utiliser le fournisseur d’état de session
+      url: cache-aspnet-session-state-provider.md
+    - text: Utiliser le fournisseur de cache de sortie
+      url: cache-aspnet-output-cache-provider.md
+    - text: Utiliser un initialiseur Spring Boot
+      url: /azure/developer/java/spring-framework/configure-spring-boot-initializer-java-app-with-redis-cache
   - linkListType: get-started
     links:
     - text: Exemples

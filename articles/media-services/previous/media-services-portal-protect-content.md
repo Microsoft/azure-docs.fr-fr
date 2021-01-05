@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 0c2a9612fab6c685cbc690aa9bbc12d1c7b7b746
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 061d66f08e79f935c778eb84dd47f71cab1a62d7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74978200"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266627"
 ---
 # <a name="configure-content-protection-policies-by-using-the-azure-portal"></a>Configurer des stratégies de protection du contenu à l’aide du portail Azure
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Pour suivre ce tutoriel, vous avez besoin d’un compte Azure. Pour plus d’informations, consultez [Essai gratuit Azure](https://azure.microsoft.com/pricing/free-trial/).   > Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Pour suivre ce tutoriel, vous avez besoin d’un compte Azure. Pour plus d’informations, consultez [Essai gratuit Azure](https://azure.microsoft.com/pricing/free-trial/).   > Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 >
 
  Avec Azure Media Services, vous pouvez sécuriser votre contenu multimédia du moment où il quitte votre ordinateur jusqu’à la remise, en passant par le stockage et le traitement. Vous pouvez utiliser Media Services pour délivrer du contenu chiffré de manière dynamique avec la norme AES (Advanced Encryption Standard) à l’aide de clés de chiffrement 128 bits. Vous pouvez aussi l’utiliser avec le chiffrement commun (CENC) à l’aide de la gestion des droits numériques (DRM) PlayReady et/ou Widevine et Apple FairPlay. 
@@ -133,4 +135,3 @@ Le chiffrement de clé en clair AES est activé sur tous les protocoles de strea
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

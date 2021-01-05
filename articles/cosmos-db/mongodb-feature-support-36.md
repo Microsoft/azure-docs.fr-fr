@@ -4,21 +4,22 @@ description: Découvrez les fonctionnalités et la syntaxe prises en charge de l
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: overview
-ms.date: 01/15/2020
+ms.date: 08/07/2020
 author: sivethe
 ms.author: sivethe
-ms.openlocfilehash: 5df21b2c1926803a65eca911c66b059f36ee18aa
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.openlocfilehash: bb9efa3fde0ed840589b66db7b28392de67ee8dd
+ms.sourcegitcommit: 295db318df10f20ae4aa71b5b03f7fb6cba15fc3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393612"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94635583"
 ---
 # <a name="azure-cosmos-dbs-api-for-mongodb-36-version-supported-features-and-syntax"></a>API Azure Cosmos DB pour MongoDB (version 3.6) : fonctionnalités et syntaxe prises en charge
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 Azure Cosmos DB est le service de base de données multi-modèle de Microsoft distribué à l’échelle mondiale. Vous pouvez communiquer avec l’API Azure Cosmos DB pour MongoDB par le biais de n’importe quel [pilote](https://docs.mongodb.org/ecosystem/drivers) du client open source MongoDB. L’API Azure Cosmos DB pour MongoDB permet d’utiliser les pilotes clients existants en adhérant au [protocole Wire](https://docs.mongodb.org/manual/reference/mongodb-wire-protocol) MongoDB.
 
-À l’aide de l’API Azure Cosmos DB pour MongoDB, vous pouvez profiter des avantages de MongoDB que vous connaissez déjà, ainsi que de toutes les fonctionnalités d’entreprise fournies par Cosmos DB, comme la [distribution mondiale](distribute-data-globally.md), le [partitionnement automatique](partition-data.md), les garanties de disponibilité et de latence, le chiffrement au repos, les sauvegardes et bien d’autres encore.
+À l’aide de l’API Azure Cosmos DB pour MongoDB, vous pouvez profiter des avantages de MongoDB que vous connaissez déjà, ainsi que de toutes les fonctionnalités d’entreprise fournies par Cosmos DB, comme la [distribution mondiale](distribute-data-globally.md), le [partitionnement automatique](partitioning-overview.md), les garanties de disponibilité et de latence, le chiffrement au repos, les sauvegardes et bien d’autres encore.
 
 ## <a name="protocol-support"></a>Prise en charge du protocole
 
@@ -106,7 +107,7 @@ L’API Azure Cosmos DB pour MongoDB prend en charge les commandes de base de do
 |top     |    Non     |
 |whatsmyuri     |   Oui      |
 
-<a name="aggregation-pipeline"/>
+<a name="aggregation-pipeline"></a>
 
 ## <a name="aggregation-pipelinea"></a>Pipeline d’agrégation</a>
 
@@ -137,7 +138,7 @@ L’API Azure Cosmos DB pour MongoDB prend en charge les commandes de base de do
 |$lookup    |    Oui|
 |$out        |Oui|
 |$indexStats|        Non|
-|$facet    |Non|
+|$facet    |Oui|
 |$bucket|    Non|
 |$bucketAuto|    Non|
 |$sortByCount|    Oui|
@@ -147,7 +148,7 @@ L’API Azure Cosmos DB pour MongoDB prend en charge les commandes de base de do
 |$currentOp|    Non|
 |$listLocalSessions    |Non|
 |$listSessions    |Non|
-|$graphLookup    |Non|
+|$graphLookup    |Oui|
 
 ### <a name="boolean-expressions"></a>Expressions booléennes
 
@@ -495,10 +496,10 @@ $nearSphere |  Oui |
 $geometry |  Oui |
 $minDistance | Oui |
 $maxDistance | Oui |
-$center | Oui |
-$centerSphere | Oui |
-$box | Oui |
-$polygon |  Oui |
+$center | Non |
+$centerSphere | Non |
+$box | Non |
+$polygon |  Non |
 
 ## <a name="cursor-methods"></a>Méthodes Cursor
 
@@ -542,7 +543,32 @@ Lorsque vous utilisez l’opération `findOneAndUpdate`, les opérations de tri 
 
 ## <a name="unique-indexes"></a>Index uniques
 
-Les index uniques garantissent qu’un champ spécifique ne présente aucune valeur en double dans l’ensemble des documents d’une collection. Cette approche est semblable à la façon dont l’unicité est conservée dans la clé « _id » par défaut. Vous pouvez créer des index personnalisés dans Cosmos DB à l’aide de la commande createIndex, y compris la contrainte « unique ».
+Les [index uniques](mongodb-indexing.md#unique-indexes) garantissent qu’un champ spécifique ne présente aucune valeur en double dans l’ensemble des documents d’une collection. Cette approche est semblable à la façon dont l’unicité est conservée dans la clé « _id » par défaut. Vous pouvez créer des index uniques dans Cosmos DB à l’aide de la commande `createIndex` avec le paramètre de contrainte `unique` :
+
+```javascript
+globaldb:PRIMARY> db.coll.createIndex( { "amount" : 1 }, {unique:true} )
+{
+        "_t" : "CreateIndexesResponse",
+        "ok" : 1,
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 4
+}
+```
+
+## <a name="compound-indexes"></a>Index composés
+
+Les [index composés](mongodb-indexing.md#compound-indexes-mongodb-server-version-36) permettent de créer un index pour des groupes de champs pour un maximum de 8 champs. Ce type d’index diffère des index composés MongoDB natifs. Dans Azure Cosmos DB, les index composés sont utilisés pour le tri des opérations appliquées à plusieurs champs. Pour créer un index composé, vous devez spécifier plusieurs propriétés en tant que paramètre :
+
+```javascript
+globaldb:PRIMARY> db.coll.createIndex({"amount": 1, "other":1})
+{
+        "createdCollectionAutomatically" : false, 
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+```
 
 ## <a name="time-to-live-ttl"></a>Durée de vie (TTL)
 
@@ -550,7 +576,7 @@ Cosmos DB prend en charge une durée de vie (TTL) en fonction du timestamp du do
 
 ## <a name="user-and-role-management"></a>Gestion des rôles et des utilisateurs
 
-Cosmos DB ne prend pas encore en charge les utilisateurs et les rôles. Cosmos DB prend cependant en charge le contrôle d’accès en fonction du rôle (RBAC) et les mots de passe/clés en lecture-écriture et en lecture seule, qui peuvent être obtenus par le biais du [portail Azure](https://portal.azure.com) (page de la chaîne de connexion).
+Cosmos DB ne prend pas encore en charge les utilisateurs et les rôles. Cosmos DB prend cependant en charge le contrôle d'accès en fonction du rôle Azure (Azure RBAC) et les mots de passe/clés en lecture-écriture et en lecture seule, qui peuvent être obtenus par le biais du [portail Azure](https://portal.azure.com) (page de la chaîne de connexion).
 
 ## <a name="replication"></a>Réplication
 

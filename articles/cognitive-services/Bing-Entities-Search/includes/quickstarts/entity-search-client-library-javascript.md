@@ -8,25 +8,23 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/06/2020
 ms.author: aahi
-ms.openlocfilehash: ac2f83c824014e16cfbe9ab18483b914ed8b077d
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: b145cc1689ad2c1a39591df0e39bb8d0445333c7
+ms.sourcegitcommit: 5dbea4631b46d9dde345f14a9b601d980df84897
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "79136606"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91377588"
 ---
 Utilisez ce guide de démarrage rapide pour commencer à rechercher des entités avec la bibliothèque de client Recherche d’entités Bing pour JavaScript. Si l’outil Recherche d’entités Bing a une API REST compatible avec la plupart des langages de programmation, la bibliothèque de client offre quant à elle un moyen facile d’intégrer le service à vos applications. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/entitySearch.js).
 
 ## <a name="prerequisites"></a>Prérequis
 
 * La dernière version de [Node.js](https://nodejs.org/en/download/).
-
-* Le [SDK Recherche d’entités Bing pour Node.js](https://www.npmjs.com/package/@azure/cognitiveservices-entitysearch)
-
-Pour installer le SDK Recherche d’entités Bing :
-
-1. Exécutez `npm install ms-rest-azure` dans votre environnement de développement.
-2. Exécutez `npm install @azure/cognitiveservices-entitysearch` dans votre environnement de développement.
+* Le [SDK Recherche d’entités Bing pour JavaScript](https://www.npmjs.com/package/@azure/cognitiveservices-entitysearch)
+     *  Pour l’installer, exécutez `npm install @azure/cognitiveservices-entitysearch`
+* La classe `CognitiveServicesCredentials` du package `@azure/ms-rest-azure-js` pour authentifier le client.
+     * Pour l’installer, exécutez `npm install @azure/ms-rest-azure-js`
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](~/includes/cognitive-services-bing-entity-search-signup-requirements.md)]
 
@@ -36,7 +34,7 @@ Pour installer le SDK Recherche d’entités Bing :
 1. Créez un fichier JavaScript dans votre éditeur ou IDE favori, puis ajoutez les exigences suivantes.
 
     ```javascript
-    const CognitiveServicesCredentials = require('ms-rest-azure').CognitiveServicesCredentials;
+    const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
     const EntitySearchAPIClient = require('@azure/cognitiveservices-entitysearch');
     ```
 

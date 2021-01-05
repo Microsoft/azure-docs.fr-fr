@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Fastly Edge Cloud | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Fastly Edge Cloud.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: dfc3c4a6-110d-4a16-b687-0fde8ac0dd53
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 01/09/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 858124d3c3dff8c5c09b7a6b608ca326b7d5e5d3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 005e2154f4e33f23a2ec45d6e0b3f620be10c1c6
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76266001"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92453618"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-fastly-edge-cloud"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Fastly Edge Cloud
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Fastly Edge Cloud à Azure A
 * Permettre à vos utilisateurs de se connecter automatiquement à Fastly Edge Cloud avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -51,9 +47,9 @@ Pour configurer l’intégration de Fastly Edge Cloud à Azure AD, vous devez aj
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
 1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **Fastly Edge Cloud** dans la zone de recherche.
+1. Dans la section **Ajouter à partir de la galerie** , tapez **Fastly Edge Cloud** dans la zone de recherche.
 1. Sélectionnez **Fastly Edge Cloud** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-fastly-edge-cloud"></a>Configurer et tester l’authentification unique Azure AD pour Fastly Edge Cloud
@@ -73,24 +69,24 @@ Pour configurer et tester l’authentification unique Azure AD avec Fastly Edge 
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Fastly Edge Cloud**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
+1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Fastly Edge Cloud** , recherchez la section **Gérer** et sélectionnez **Authentification unique**.
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML**.
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la section **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://api.fastly.com/saml/<CUSTOM_IDENTIFIER>`
+    Dans la zone de texte **Identificateur** , tapez une URL au format suivant : `https://api.fastly.com/saml/<CUSTOM_IDENTIFIER>`
 
     > [!NOTE]
     > Cette valeur n’est pas la valeur réelle. Mettez à jour cette valeur avec l’identificateur réel. Pour obtenir cette valeur, contactez l’[équipe du support technique de Fastly Edge Cloud](mailto:support@fastly.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
+1. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/metadataxml.png)
 
-1. Dans la section **Configurer Fastly Edge Cloud**, copiez l’URL ou les URL appropriées en fonction de vos besoins.
+1. Dans la section **Configurer Fastly Edge Cloud** , copiez l’URL ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -98,52 +94,52 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs**.
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe**.
    1. Cliquez sur **Créer**.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Fastly Edge Cloud.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 1. Dans la liste des applications, sélectionnez **Fastly Edge Cloud**.
 1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer**.
 
 ## <a name="configure-fastly-edge-cloud-sso"></a>Configurer l’authentification unique Fastly Edge Cloud
 
-Pour configurer l’authentification unique côté **Fastly Edge Cloud**, vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL correspondantes copiées à partir du portail Azure à l’[équipe du support technique de Fastly Edge Cloud](mailto:support@fastly.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Fastly Edge Cloud** , vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL correspondantes copiées à partir du portail Azure à l’ [équipe du support technique de Fastly Edge Cloud](mailto:support@fastly.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-fastly-edge-cloud-test-user"></a>Créer un utilisateur de test Fastly Edge Cloud
 
-Dans cette section, vous créez un utilisateur appelé B.Simon dans Fastly Edge Cloud. Travaillez en collaboration avec [l’équipe du support technique de Fastly Edge Cloud](mailto:support@fastly.com) pour ajouter les utilisateurs dans la plateforme Fastly Edge Cloud. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous créez un utilisateur appelé B.Simon dans Fastly Edge Cloud. Travaillez en collaboration avec l’[équipe du support technique de Fastly Edge Cloud](mailto:support@fastly.com) pour ajouter les utilisateurs dans la plateforme Fastly Edge Cloud. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Fastly Edge Cloud dans le volet d’accès, vous devez être connecté automatiquement à l’application Fastly Edge Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Fastly Edge Cloud dans le volet d’accès, vous devez être connecté automatiquement à l’application Fastly Edge Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Fastly Edge Cloud avec Azure AD](https://aad.portal.azure.com/)

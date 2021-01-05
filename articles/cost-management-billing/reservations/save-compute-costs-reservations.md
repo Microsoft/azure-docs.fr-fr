@@ -1,18 +1,19 @@
 ---
 title: Qu’est-ce qu’une réservation Azure ?
-description: Découvrez les réservations et tarifs Azure pour économiser sur vos machines virtuelles, les bases de données SQL, Azure Cosmos DB et les coûts d’autres ressources.
+description: Découvrez les réservations et tarifs Azure pour économiser sur vos instances réservées de machines virtuelles, les bases de données SQL, Azure Cosmos DB et les coûts d’autres ressources.
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 04/30/2020
+ms.subservice: reservations
+ms.topic: overview
+ms.date: 12/15/2020
 ms.author: banders
-ms.openlocfilehash: ae94a5c8d7e9ff93098e85535aea3699206b9e03
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: b79bde204d82b069b3314855a45a680b863c3f69
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82626955"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97560489"
 ---
 # <a name="what-are-azure-reservations"></a>Qu’est-ce qu’une réservation Azure ?
 
@@ -20,7 +21,7 @@ Les réservations Azure vous permettent d’économiser en vous engageant sur de
 
 Vous pouvez payer une réservation à l’avance ou tous les mois. Une même réservation avec paiement initial et avec paiements mensuels a le même coût total : vous ne payez pas de frais supplémentaires si vous optez pour le paiement mensuel. Le paiement mensuel est disponible pour les réservations Azure, et non pour les produits tiers.
 
-Vous pouvez acheter une réservation dans le portail Azure sur [https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade).
+Vous pouvez acheter une réservation sur le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade).
 
 ## <a name="why-buy-a-reservation"></a>Pourquoi acheter une réservation ?
 
@@ -49,21 +50,22 @@ Pour plus d’informations, consultez [Déterminer la réservation à acheter]
 
 Vous pouvez acheter des réservations à partir du portail Azure, d’API, de PowerShell et de l’interface CLI. 
 
-Accédez au portail Azure pour faire votre achat (https://ms.portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/Docs). 
+Accédez au [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/Docs) pour effectuer des achats.
 
-Pour plus d’informations, consultez [Acheter une réservation](prepare-buy-reservation.md). 
+Pour plus d’informations, consultez [Acheter une réservation](prepare-buy-reservation.md).
 
 ## <a name="how-is-a-reservation-billed"></a>Comment une réservation est-elle facturée ? 
 
 La réservation est facturée selon le mode de paiement associé à l’abonnement. Le coût de la réservation est déduit de votre solde d’engagement financier, le cas échéant. Lorsque ce solde ne couvre pas le coût des réservations, le dépassement vous est facturé. Si vous avez souscrit un abonnement à partir d’un forfait individuel avec paiement à l’utilisation, la carte de crédit associée à votre compte est facturée immédiatement pour les achats en paiement initial. Les paiements mensuels apparaissent sur votre facture et votre carte de crédit est facturée chaque mois. Lorsque vous réglez sur facture, les frais sont portés sur votre prochaine facture. 
 
-## <a name="permissions-to-view-and-manage-reservations"></a>Autorisations pour consulter et gérer des réservations 
+## <a name="who-can-manage-a-reservation-by-default"></a>Qui peut gérer une réservation par défaut
 
-L’utilisateur qui achète une réservation et l’administrateur de compte de l’abonnement utilisé pour la facturation de la réservation se voient attribuer le rôle Propriétaire sur l’ordre de réservation et la réservation.
+Par défaut, les utilisateurs suivants peuvent voir et gérer des réservations :
 
-Vous pouvez déléguer la gestion des réservations en ajoutant des utilisateurs aux rôles de l’ordre de réservation ou de la réservation. Vous attribuez les rôles dans le portail Azure ou en utilisant des API et PowerShell. 
+- La personne qui achète une réservation et l’administrateur de compte de l’abonnement de facturation utilisé pour acheter la réservation sont ajoutés à l’ordre de réservation.
+- Les administrateurs de facturation de l’Accord Entreprise et du Contrat client Microsoft.
 
-Pour plus d’informations, consultez [Ajouter ou modifier les utilisateurs qui peuvent gérer une réservation](manage-reserved-vm-instance.md#add-or-change-users-who-can-manage-a-reservation). 
+Pour permettre à d’autres personnes de gérer des réservations, consultez [Gérer les réservations pour les ressources Azure](manage-reserved-vm-instance.md).
 
 ## <a name="get-reservation-details-and-utilization-after-purchase"></a>Obtenir les détails de la réservation et les données d’utilisation après l’achat
 
@@ -89,7 +91,7 @@ Pour plus d’informations, consultez [Échanges et remboursements en libre-serv
 - **Instance de machine virtuelle réservée** : une réservation couvre uniquement les coûts de calcul de machine virtuelle et de services cloud. Une réservation ne couvre pas les frais de logiciels, de réseau, de stockage ou liés à Windows.
 - **Capacité réservée de stockage Azure** : une réservation couvre la capacité de stockage pour les comptes de stockage standard pour le stockage d’objets blob ou le stockage Azure Data Lake Gen2. La réservation ne couvre pas les taux de bande passante ou de transaction.
 - **La capacité réservée Azure Cosmos DB** : une réservation couvre le débit provisionné pour vos ressources. Elle ne couvre pas les frais de stockage et de réseau.
-- **vCore réservé de SQL Database** : seuls les coûts de calcul sont inclus dans une réservation. La licence SQL est facturée séparément.
+- **vCore réservé SQL Database** : couvre à la fois SQL Managed Instance et les pools élastiques/bases de données uniques SQL Database. seuls les coûts de calcul sont inclus dans une réservation. La licence SQL est facturée séparément. 
 - **Azure Synapse Analytics** : une réservation couvre l’utilisation de cDWU. Elle ne couvre pas les frais de stockage ou de réseau associés à l’utilisation d’Azure Synapse Analytics.
 - **Azure Databricks** : une réservation couvre uniquement l’utilisation de DBU. Les autres frais, comme le calcul, le stockage et le réseau, sont facturés séparément.
 - **Frais de timbre App service** : Une réservation couvre l’utilisation des timbres. Elle ne s’applique pas aux workers, si bien que toutes les autres ressources associées aux timbres sont facturées séparément.
@@ -105,11 +107,10 @@ Abonnements logiciels :
 
 - **SUSE Linux** : une réservation couvre les coûts de l’abonnement logiciel. Les remises s’appliquent uniquement aux compteurs SUSE et non à l’utilisation de la machine virtuelle.
 - **Offres Red Hat** : une réservation couvre les coûts de l’abonnement logiciel. Les remises s’appliquent uniquement aux compteurs RedHat et non à l’utilisation de la machine virtuelle.
-- **Azure VMware Solution by CloudSimple** : une réservation couvre les nœuds VMWare CloudSimple. Des coûts logiciels supplémentaires sont toujours facturés.
+- **Azure VMware Solution by CloudSimple** : une réservation couvre les nœuds VMware CloudSimple. Des coûts logiciels supplémentaires sont toujours facturés.
 - **Azure Red Hat OpenShift** : une réservation s’applique aux coûts OpenShift, et non aux coûts d’infrastructure Azure.
 
 Pour les machines virtuelles Windows et SQL Database, la remise sur réservation ne s’applique pas aux coûts logiciels. Vous pouvez couvrir les coûts de licence avec [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-benefit/).
-
 
 ## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Contactez-nous.
 
@@ -125,8 +126,9 @@ Si vous avez des questions ou besoin d’aide, [créez une demande de support](h
     - [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](/partner-center/azure-reservations)
 
 - En savoir plus sur les réservations de plans de service :
-    - [Machines virtuelles avec instances de machines virtuelles réservées Azure](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
+    - [Machines virtuelles avec instances de machines virtuelles réservées Azure](../../virtual-machines/prepay-reserved-vm-instances.md)
     - [Ressources Azure Cosmos DB avec capacité réservée Azure Cosmos DB](../../cosmos-db/cosmos-db-reserved-capacity.md)
-    - [Ressources de calcul SQL Database avec capacité réservée Azure SQL Database](../../sql-database/sql-database-reserved-capacity.md) En savoir plus sur les réservations pour les offres logicielles :
-    - [Offres logicielles Red Hat dans Réservations Azure](../../virtual-machines/linux/prepay-rhel-software-charges.md)
+    - [Ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../azure-sql/database/reserved-capacity-overview.md)
+    - [Ressources de calcul Azure Cache pour Redis avec une capacité réservée Azure Cache pour Redis](../../azure-cache-for-redis/cache-reserved-pricing.md) En savoir plus sur les réservations pour les offres logicielles :
+    - [Offres logicielles Red Hat dans Réservations Azure](../../virtual-machines/linux/prepay-suse-software-charges.md)
     - [Offres logicielles SUSE dans Réservations Azure](../../virtual-machines/linux/prepay-suse-software-charges.md)

@@ -7,10 +7,10 @@ author: bwren
 ms.author: bwren
 ms.date: 03/12/2020
 ms.openlocfilehash: 80473aa494b8fbcea5e43870b7717cd3472dd7d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "79480519"
 ---
 # <a name="disable-monitoring-of-your-vms-in-azure-monitor-for-vms"></a>Désactiver la supervision de vos machines virtuelles dans Azure Monitor pour machines virtuelles

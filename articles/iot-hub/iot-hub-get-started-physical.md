@@ -9,12 +9,14 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/22/2017
 ms.author: wesmc
-ms.openlocfilehash: e70ee8843e467af152eedefdf7e03a4ea869e4a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+ms.openlocfilehash: 91ab74e7ba6cbeb7d7c4a652f9080192e6c417d6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69638236"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87327614"
 ---
 # <a name="azure-iot-hub-get-started-with-physical-devices-tutorials"></a>Didacticiels de prise en main pour les appareils physiques connectés à Azure IoT Hub
 

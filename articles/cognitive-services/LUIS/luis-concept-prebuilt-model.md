@@ -3,20 +3,18 @@ title: Modèles prédéfinis – LUIS
 titleSuffix: Azure Cognitive Services
 description: Les modèles prédéfinis fournissent des domaines, des intentions, des énoncés et des entités. Vous pouvez démarrer votre application avec un domaine prédéfini ou ajouter un domaine approprié à votre application ultérieurement.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 10/10/2019
-ms.author: diberry
-ms.openlocfilehash: e0b5b95a7524b60a7c3367035a15a7158fa7908a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6642e59c2957b298d54bc587853752b9fce74686
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74280839"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019141"
 ---
 # <a name="prebuilt-models"></a>Modèles prédéfinis
 
@@ -63,4 +61,4 @@ Quand une entité prédéfinie est incluse dans votre application, ses prédicti
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment [ajouter des entités prédéfinies](luis-prebuilt-entities.md) à votre application.
+Découvrez comment [ajouter des entités prédéfinies](./howto-add-prebuilt-models.md) à votre application.

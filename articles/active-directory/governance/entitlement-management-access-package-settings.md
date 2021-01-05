@@ -3,25 +3,25 @@ title: Partager un lien pour demander un package d’accès dans la gestion des 
 description: Découvrez comment partager un lien pour demander un package d’accès dans la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/15/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ea90032b1f0cfe598ffdb3d35448a996f3111036
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 32973d063c36a45eee79db0b4da4e7419cb70013
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78968760"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87798544"
 ---
 # <a name="share-link-to-request-an-access-package-in-azure-ad-entitlement-management"></a>Partager un lien pour demander un package d’accès dans la gestion des droits d’utilisation Azure AD
 

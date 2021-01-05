@@ -7,13 +7,15 @@
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: Hub virtuel sécurisé
+    - name: Sécuriser un hub virtuel - Modèle ARM
       displayName: Resource Manager
       href: quick-secure-virtual-hub.md
 - name: Tutoriels
   items:
-    - name: Sécuriser votre WAN virtuel - Portail
+    - name: Sécuriser votre hub virtuel - Portail
       href: secure-cloud-network.md
+    - name: Sécuriser votre hub virtuel - PowerShell
+      href: secure-cloud-network-powershell.md
     - name: Sécuriser votre réseau virtuel hub - Portail
       href: secure-hybrid-network.md
 - name: Concepts
@@ -24,24 +26,42 @@
       href: secured-virtual-hub.md
     - name: Processus général de déploiement
       href: deployment-overview.md
-    - name: Partenaires de sécurité de confiance
+    - name: Fournisseurs de partenaire de sécurité
       href: trusted-security-partners.md
+    - name: Sécuriser les hubs avec Check Point Cloudguard Connect
+      href: check-point-overview.md
+    - name: Groupes IP
+      href: ip-groups.md
     - name: Logique de traitement des règles
       href: rule-processing.md
     - name: Options d’architecture
       href: vhubs-and-vnets.md
+    - name: Paramètres du renseignement sur les menaces
+      href: threat-intelligence-settings.md
+    - name: FQDN dans les règles de réseau
+      href: fqdn-filtering-network-rules.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
-    - name: Déployer des partenaires de sécurité de confiance
+    - name: Déployer des fournisseurs de partenaire de sécurité
       href: deploy-trusted-security-partner.md
     - name: Migrer vers une stratégie de pare-feu - PowerShell
       href: migrate-to-policy.md
+    - name: Paramètres DNS
+      href: dns-settings.md
+    - name: Déployer plusieurs adresses IP publiques - PowerShell
+      href: multiple-public-ip-powershell.md
+    - name: Définir une hiérarchie de règles
+      href: rule-hierarchy.md
 - name: Informations de référence
   items:
     - name: Azure CLI
-      href: /cli/azure/ext/azure-firewall/network/firewall
+      href: /cli/azure/ext/azure-firewall/network/firewall/policy
     - name: Azure PowerShell
-      href: /powershell/module/az.network/new-azfirewall
+      href: /powershell/module/az.network/new-azfirewallpolicy
     - name: .NET
       href: /dotnet/api
     - name: Java
@@ -51,7 +71,7 @@
     - name: Python
       href: 'https://azure.microsoft.com/develop/python/'
     - name: REST
-      href: /rest/api/firewall
+      href: /rest/api/virtualnetwork/firewallpolicies
     - name: Azure Resource Manager
       href: ../azure-resource-manager/management/overview.md
 - name: Ressources

@@ -1,17 +1,17 @@
 ---
 title: Analyse des performances des requêtes - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit la fonctionnalité Analyse des performances des requêtes dans Azure Database pour PostgreSQL - Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 08/21/2019
-ms.openlocfilehash: dd5b4ec53d82421ddd9d680ca41e48eeecc43c2c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: babf2c8208732a194184549dfa5ed3228b376d0f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74768382"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91710258"
 ---
 # <a name="query-performance-insight"></a>Query Performance Insight 
 
@@ -30,7 +30,7 @@ La vue [Analyse des performances des requêtes](concepts-query-performance-insig
 
 Sur la page du portail de votre serveur Azure Database pour PostgreSQL, sélectionnez **Analyse des performances des requêtes** sous la section **Performances intelligentes** de la barre de menus.
 
-![Requêtes longues d’analyse des performances des requêtes](./media/concepts-query-performance-insight/query-performance-insight-landing-page.png)
+:::image type="content" source="./media/concepts-query-performance-insight/query-performance-insight-landing-page.png" alt-text="Requêtes longues d’analyse des performances des requêtes":::
 
 L’onglet **Requêtes longues** montre les 5 requêtes dont la durée moyenne d’exécution est la plus longue, agrégées par intervalles de 15 minutes. Vous pouvez afficher plus de requêtes en faisant une sélection dans la liste déroulante **Nombre de requêtes**. Quand vous faites cela, les couleurs du graphique peuvent changer pour un ID de requête spécifique.
 
@@ -40,7 +40,7 @@ Le tableau sous le graphique fournit plus d’informations sur les requêtes lon
 
 Sélectionnez l’onglet **Statistiques sur les attentes** pour voir les visualisations correspondantes sur les temps d’attente dans le serveur.
 
-![Statistiques sur les attentes de l’analyse des performances des requêtes](./media/concepts-query-performance-insight/query-performance-insight-wait-statistics.png)
+:::image type="content" source="./media/concepts-query-performance-insight/query-performance-insight-wait-statistics.png" alt-text="Requêtes longues d’analyse des performances des requêtes":::
 
 ## <a name="considerations"></a>Considérations
 * Query Performance Insight n’est pas disponible pour les [réplicas en lecture](concepts-read-replicas.md).

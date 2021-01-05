@@ -1,6 +1,6 @@
 ---
-title: Configuration d’Azure Key Vault
-description: Comment configurer Key Vault pour une utilisation avec une machine virtuelle.
+title: Configurer Key Vault à l’aide de PowerShell
+description: Comment configurer Key Vault pour une utilisation avec une machine virtuelle à l’aide de PowerShell.
 author: mimckitt
 manager: vashan
 ms.service: virtual-machines
@@ -9,14 +9,14 @@ ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 01/24/2017
 ms.author: mimckitt
-ms.openlocfilehash: e4bff4d1826d9586495207095eccf8f6c66164a0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: dd4a6ed5f57c536a9e40b2fd81b96d055702b425
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81870007"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678313"
 ---
-# <a name="set-up-key-vault-for-virtual-machines-in-azure-resource-manager"></a>Configuration de Key Vault pour des machines virtuelles dans Azure Resource Manager
+# <a name="set-up-key-vault-for-virtual-machines-using-azure-powershell"></a>Configurer Key Vault pour des machines virtuelles à l’aide d’Azure PowerShell
 
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-rm-include.md)]
 
@@ -33,36 +33,46 @@ Pour créer un coffre de clés à l’aide de PowerShell, voir [Définir et réc
 
 Pour de nouveaux coffres de clé, vous pouvez utiliser l’applet de commande PowerShell suivante :
 
-    New-AzKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'East Asia' -EnabledForDeployment
+```azurepowershell
+New-AzKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'East Asia' -EnabledForDeployment
+```
 
 Pour des coffres de clé existants, vous pouvez utiliser l’applet de commande PowerShell suivante :
 
-    Set-AzKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
+```azurepowershell
+Set-AzKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
+```
 
 ## <a name="use-cli-to-set-up-key-vault"></a>Utilisation de l’interface de ligne de commande pour configurer Key Vault
 Pour créer un coffre de clés à l’aide de l’interface de ligne de commande (CLI), consultez la rubrique [Gestion de Key Vault à l’aide de l’interface de ligne de commande (CLI)](../../key-vault/general/manage-with-cli2.md#create-a-key-vault).
 
 Pour l’interface de ligne de commande, vous devez créer d’abord le coffre de clés avant d’affecter la stratégie de déploiement. Pour ce faire, vous pouvez utiliser la commande suivante :
 
-    az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --location "EastAsia"
-    
+```azurecli
+az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --location "EastAsia"
+```
+
 Puis, pour activer Key Vault dans le cadre du déploiement de modèle, exécutez la commande suivante :
 
-    az keyvault update --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --enabled-for-deployment "true"
+```azurecli
+az keyvault update --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --enabled-for-deployment "true"
+```
 
 ## <a name="use-templates-to-set-up-key-vault"></a>Utilisation de modèles pour configurer Key Vault
 Quand vous utilisez un modèle, vous devez définir la propriété `enabledForDeployment` sur `true` pour la ressource Key Vault.
 
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "name": "ContosoKeyVault",
-      "apiVersion": "2015-06-01",
-      "location": "<location-of-key-vault>",
-      "properties": {
-        "enabledForDeployment": "true",
-        ....
-        ....
-      }
-    }
+```config
+{
+  "type": "Microsoft.KeyVault/vaults",
+  "name": "ContosoKeyVault",
+  "apiVersion": "2015-06-01",
+  "location": "<location-of-key-vault>",
+  "properties": {
+    "enabledForDeployment": "true",
+    ....
+    ....
+  }
+}
+```
 
 Pour les autres options que vous pouvez configurer lorsque vous créez un coffre de clés à l’aide de modèles, consultez la rubrique [Création d’un coffre de clés](https://azure.microsoft.com/documentation/templates/101-key-vault-create/).

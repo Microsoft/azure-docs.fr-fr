@@ -1,19 +1,19 @@
 ---
 title: 'Tutoriel : Sauvegarder plusieurs machines virtuelles Azure'
 description: Dans ce didacticiel explique comment créer un coffre Recovery Services, définir une stratégie de sauvegarde et à sauvegarder simultanément plusieurs machines virtuelles.
-ms.date: 01/31/2019
+ms.date: 07/26/2020
 ms.topic: tutorial
 ms.custom: mvc
-ms.openlocfilehash: f9306f2ef5c4b2a53dcba17cafca9ea13b8dab43
-ms.sourcegitcommit: 940e16ff194d5163f277f98d038833b1055a1a3e
+ms.openlocfilehash: a9517ffc1e37d50f7c0e57b9ed53fb8bcf55fd70
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80245240"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89180573"
 ---
 # <a name="use-azure-portal-to-back-up-multiple-virtual-machines"></a>Utiliser le portail Azure pour sauvegarder plusieurs machines virtuelles
 
-Lorsque vous sauvegardez des données dans Azure, vous stockez celles-ci dans une ressource Azure que l’on appelle coffre Recovery Services. La ressource coffre Recovery Services est disponible dans le menu Paramètres de la plupart des services Azure. L’avantage de disposer du coffre Recovery Services intégré dans le menu Paramètres de la plupart des services Azure est que cela facilite la sauvegarde de données. Toutefois, il est fastidieux de manipuler individuellement chaque base de données ou machine virtuelle disponible dans votre entreprise. Que se passe-t-il si vous souhaitez sauvegarder les données de toutes les machines virtuelles d’un service ou d’un emplacement ? Il est facile de sauvegarder plusieurs machines virtuelles en créant une stratégie de sauvegarde et en appliquant celle-ci aux machines virtuelles de votre choix. Ce didacticiel explique comment :
+Lorsque vous sauvegardez des données dans Azure, vous stockez celles-ci dans une ressource Azure que l’on appelle coffre Recovery Services. La ressource coffre Recovery Services est disponible dans le menu Paramètres de la plupart des services Azure. L’avantage de disposer du coffre Recovery Services intégré dans le menu Paramètres de la plupart des services Azure est que cela simplifie la sauvegarde de données. Toutefois, il est fastidieux de manipuler individuellement chaque base de données ou machine virtuelle disponible dans votre entreprise. Que se passe-t-il si vous souhaitez sauvegarder les données de toutes les machines virtuelles d’un service ou d’un emplacement ? Il est facile de sauvegarder plusieurs machines virtuelles en créant une stratégie de sauvegarde et en l’appliquant aux machines virtuelles de votre choix. Ce didacticiel explique comment :
 
 > [!div class="checklist"]
 >
@@ -30,97 +30,117 @@ Connectez-vous au [portail Azure](https://portal.azure.com/).
 
 Le coffre Recovery Services contient les données de sauvegarde et la stratégie de sauvegarde appliquée aux machines virtuelles protégées. La sauvegarde des machines virtuelles est un processus local. Vous ne pouvez pas sauvegarder une machine virtuelle se trouvant dans un emplacement vers un coffre Recovery Services situé dans un autre emplacement. Donc, chaque emplacement Azure contenant des machines virtuelles à sauvegarder, doit comprendre au moins un coffre Recovery Services.
 
-1. Dans le menu de gauche, sélectionnez **Tous les services**, puis dans la liste des services, tapez *Recovery Services*. Lorsque vous tapez cette chaîne, la liste des ressources est filtrée en conséquence. Lorsque vous voyez l’option Coffres Recovery Services dans la liste, sélectionnez-la pour ouvrir le Coffres Recovery Services.
+1. Dans le menu de gauche, sélectionnez **Tous les services**.
 
-    ![Ouvrir le menu Coffres Recovery Services](./media/tutorial-backup-vm-at-scale/full-browser-open-rs-vault.png)
+    ![Sélectionner Tous les services](./media/tutorial-backup-vm-at-scale/click-all-services.png)
 
-2. Dans le menu **Coffres Recovery Services**, cliquez sur **Ajouter** pour ouvrir le menu du coffre Recovery Services.
+1. Dans la boîte de dialogue **Tous les services**, entrez *Recovery Services*. Liste des filtres de ressources variant en fonction de votre entrée. Dans la liste des ressources, sélectionnez **Coffres Recovery Services**.
 
-    ![Ouvrir le menu du coffre](./media/tutorial-backup-vm-at-scale/provide-vault-detail-2.png)
+    ![Entrée et choisir Coffres Recovery Services](./media/tutorial-backup-vm-at-scale/all-services.png)
 
-3. Dans le menu du coffre Recovery Services,
+    La liste des coffres Recovery Services de l’abonnement s’affiche.
+
+1. Dans le tableau de bord **Coffres Recovery Services**, cliquez sur **Ajouter**.
+
+    ![Ajouter un coffre Recovery Services](./media/tutorial-backup-vm-at-scale/add-button-create-vault.png)
+
+1. Dans le menu du coffre Recovery Services,
 
     * tapez *myRecoveryServicesVault* dans **Nom**.
     * L’ID d’abonnement actuel apparaît dans **Abonnement**. Si vous avez des abonnements supplémentaires, vous pouvez en choisir un autre pour le nouveau coffre.
     * Pour **Groupe de ressources**, sélectionnez **Utiliser existant** et choisissez *myResourceGroup*. Si *myResourceGroup* n’existe pas, sélectionnez **Créer un nouveau**, puis tapez *myResourceGroup*.
     * Dans le menu déroulant **Emplacement**, choisissez *Europe Ouest*.
-    * Cliquez sur **Créer** pour créer votre coffre Recovery Services.
 
-Un coffre Recovery Services doit être situé dans le même emplacement que les machines virtuelles protégées. Si vous possédez des machines virtuelles dans plusieurs régions, créez un coffre Recovery Services dans chacune d’entre elles. Ce didacticiel crée un coffre Recovery Services *Europe Ouest* car c’est là que la machine virtuelle *myVM* a été créée avec le démarrage rapide.
+    ![Valeurs du coffre Recovery Services](./media/tutorial-backup-vm-at-scale/review-and-create.png)
 
-La création du coffre Recovery Services peut prendre plusieurs minutes. Surveillez les notifications d'état dans l'angle supérieur droit du portail. Une fois votre archivage créé, il apparaît dans la liste des archivages de Recovery Services.
+    Un coffre Recovery Services doit être situé dans le même emplacement que les machines virtuelles protégées. Si vous possédez des machines virtuelles dans plusieurs régions, créez un coffre Recovery Services dans chacune d’entre elles. Ce tutoriel crée un coffre Recovery Services *Europe Ouest* car c’est là que la machine virtuelle *myVM* a été créée avec le démarrage rapide.
+
+1. Quand vous êtes prêt à créer le coffre Recovery Services, sélectionnez **Créer**.
+
+    ![Créer le coffre Recovery Services](./media/tutorial-backup-vm-at-scale/click-create-button.png)
+
+1. La création du coffre Recovery Services peut prendre un certain temps. Surveillez les notifications d’état dans la zone **Notifications** dans l’angle supérieur droit du portail. Une fois que le coffre est créé, il apparaît dans la liste des coffres Recovery Services. Si vous ne voyez pas votre coffre, sélectionnez **Actualiser**.
+
+     ![Actualiser la liste des coffres de sauvegarde](./media/tutorial-backup-vm-at-scale/refresh-button.png)
 
 Lorsque vous créez un coffre Recovery Services, par défaut, celui-ci a un stockage géo-redondant. Pour assurer la résilience des données, un stockage géo-redondant réplique celles-ci plusieurs fois dans deux régions Azure.
 
 ## <a name="set-backup-policy-to-protect-vms"></a>Définir une stratégie de sauvegarde pour protéger les machines virtuelles
 
-Une fois le coffre Recovery Services créé, l’étape suivante consiste à configurer celui-ci pour le type de données, et à définir la stratégie de sauvegarde. La stratégie de sauvegarde planifie la fréquence et l’heure de la création des points de récupération. Elle inclut également la durée de rétention de ces derniers. Pour ce didacticiel, supposons que votre entreprise est un complexe sportif avec un hôtel, un stade, des restaurants et des concessions, et que vous protégez les données figurant sur les machines virtuelles. Les étapes suivantes créent une stratégie de sauvegarde pour les données financières.
+Une fois le coffre Recovery Services créé, l’étape suivante consiste à configurer celui-ci pour le type de données, et à définir la stratégie de sauvegarde. La stratégie de sauvegarde planifie la fréquence et l’heure de la création des points de récupération. Elle inclut également la durée de rétention de ces derniers. Pour ce tutoriel, supposons que votre entreprise est un complexe sportif avec un hôtel, un stade, des restaurants et des concessions et que vous protégez les données figurant sur les machines virtuelles. Les étapes suivantes créent une stratégie de sauvegarde pour les données financières.
 
 1. Dans la liste des coffres Recovery Services, sélectionnez le coffre **myRecoveryServicesVault** pour ouvrir son tableau de bord.
 
    ![Ouvrir le menu Scénario](./media/tutorial-backup-vm-at-scale/open-vault-from-list.png)
 
-2. Dans le menu du tableau de bord du coffre, cliquez sur **Sauvegarder** pour ouvrir le panneau Sauvegarder.
+1. Dans le menu du tableau de bord du coffre, sélectionnez **Sauvegarder** pour ouvrir le menu Sauvegarder.
 
-3. Dans le menu Objectif de sauvegarde, dans le menu déroulant **Où s’exécute votre charge de travail ?** , choisissez *Azure*. Dans le menu déroulant **Que voulez-vous sauvegarder ?** , choisissez *Machine virtuelle*, puis cliquez sur **Sauvegarder**.
+1. Dans le menu Objectif de sauvegarde, dans le menu déroulant **Où s’exécute votre charge de travail ?** , choisissez *Azure*. Dans le menu déroulant **Que voulez-vous sauvegarder ?** , choisissez *Machine virtuelle*, puis sélectionnez **Sauvegarder**.
 
     Ces actions préparent le coffre Recovery Services à interagir avec une machine virtuelle. Les coffres Recovery Services ont une stratégie par défaut qui crée un point de restauration quotidiennement, et conserve les points de restauration pendant 30 jours.
 
-    ![Ouvrir le menu Scénario](./media/tutorial-backup-vm-at-scale/backup-goal.png)
+    ![Objectif de sauvegarde](./media/tutorial-backup-vm-at-scale/backup-goal.png)
 
-4. Pour créer une stratégie, dans le menu Stratégie de sauvegarde, dans le menu déroulant **Choisir une stratégie de sauvegarde**, sélectionnez *Créer un nouveau*.
+1. Pour créer une stratégie, dans le menu Stratégie de sauvegarde, dans le menu déroulant **Choisir une stratégie de sauvegarde**, sélectionnez *Créer une nouvelle stratégie*.
 
-    ![Sélectionner la charge de travail](./media/tutorial-backup-vm-at-scale/create-new-policy.png)
+    ![Créez une stratégie.](./media/tutorial-backup-vm-at-scale/create-new-policy.png)
 
-5. Dans le menu **Stratégie de sauvegarde**, pour **Nom de la stratégie**, tapez *Finance*. Entrez les modifications suivantes pour la stratégie de sauvegarde :
+1. Le volet **Stratégie de sauvegarde** s’ouvre. Renseignez les valeurs suivantes :
+   * Pour **Nom de la stratégie** tapez *Finance*. Entrez les modifications suivantes pour la stratégie de sauvegarde :
    * Pour **Fréquence de sauvegarde**, définissez le fuseau horaire *Central*. Le complexe sportif étant situé au Texas, son propriétaire souhaite que le calcul du temps soit local. Laissez la fréquence de sauvegarde définie sur Chaque jour à 3:30.
    * Pour **Rétention du point de sauvegarde quotidien**, définissez une période de 90 jours.
    * Pour **Rétention du point de sauvegarde hebdomadaire**, choisissez le point de restauration *lundi* et la rétention de 52  semaines.
    * Pour **Rétention du point de sauvegarde mensuel**, choisissez le point de restauration Premier dimanche de chaque mois et la rétention de 36 mois.
    * Désactivez l’option **Rétention du point de sauvegarde annuel**. Le responsable financier ne souhaite pas conserver les données plus de 36 mois.
-   * Cliquez sur **OK** pour créer la stratégie de sauvegarde.
+   * Sélectionnez **OK** pour créer la stratégie de sauvegarde.
 
-     ![Sélectionner la charge de travail](./media/tutorial-backup-vm-at-scale/set-new-policy.png)
+     ![Paramètres de stratégie de sauvegarde](./media/tutorial-backup-vm-at-scale/set-new-policy.png)
 
      Après avoir créé la stratégie de sauvegarde, associez-la aux machines virtuelles.
 
-6. Dans la boîte de dialogue **Sélectionner les machines virtuelles**, sélectionnez *myVM*, puis cliquez sur **OK** pour déployer la stratégie de sauvegarde pour les machines virtuelles.
+1. Sous **Machines virtuelles**, sélectionnez **Ajouter**.
 
-    Tous les machines virtuelles situées dans le même emplacement qui ne sont pas encore associées à une stratégie de sauvegarde s’affichent. Les machines virtuelles *myVMH1* et *myVMR1* sont sélectionnées pour être associées la stratégie *Finance*.
+     ![Ajouter des machines virtuelles](./media/tutorial-backup-vm-at-scale/add-virtual-machines.png)
 
-    ![Sélectionner la charge de travail](./media/tutorial-backup-vm-at-scale/choose-vm-to-protect.png)
+1. Le volet **Sélectionner les machines virtuelles** s’ouvre. Sélectionnez *myVM*, puis sélectionnez **OK** pour déployer la stratégie de sauvegarde sur les machines virtuelles.
+
+    Tous les machines virtuelles situées au même emplacement qui ne sont pas encore associées à une stratégie de sauvegarde s’affichent. Les machines virtuelles *myVMH1* et *myVMR1* sont sélectionnées pour être associées la stratégie *Finance*.
+
+    ![Choisir les machines virtuelles à protéger](./media/tutorial-backup-vm-at-scale/choose-vm-to-protect.png)
+
+1. Après avoir choisi les machines virtuelles, sélectionnez **Activer la sauvegarde**.
 
     Une fois le déploiement terminé, vous recevez une notification pour vous en informer.
 
 ## <a name="initial-backup"></a>Sauvegarde initiale
 
-Vous avez activé la sauvegarde pour les coffres Recovery Services, mais aucune sauvegarde initiale n’a été créée. Une pratique recommandée pour la récupération d’urgence consiste à déclencher la première sauvegarde de façon à ce que les données soient protégées.
+Vous avez activé la sauvegarde pour les coffres Recovery Services, mais aucune sauvegarde initiale n’a été créée. Une bonne pratique pour la reprise d’activité consiste à déclencher la première sauvegarde de façon à ce que les données soient protégées.
 
 Pour exécuter un travail de sauvegarde à la demande :
 
-1. Sur le tableau de bord du coffre, sous **Éléments de sauvegarde**, cliquez sur **3** pour ouvrir le menu Éléments de sauvegarde.
+1. Sur le tableau de bord du coffre, sous **Éléments de sauvegarde**, sélectionnez **3** pour ouvrir le menu Éléments de sauvegarde.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/tutorial-vm-back-up-now.png)
+    ![Éléments de sauvegarde](./media/tutorial-backup-vm-at-scale/tutorial-vm-back-up-now.png)
 
     Le menu **Éléments de sauvegarde** s’ouvre.
 
-2. Dans le menu **Éléments de sauvegarde**, cliquez sur **Machine virtuelle Azure** pour ouvrir la liste des machines virtuelles associées au coffre.
+1. Dans le menu **Éléments de sauvegarde**, sélectionnez **Machine virtuelle Azure** pour ouvrir la liste des machines virtuelles associées au coffre.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/three-virtual-machines.png)
+    ![Liste des machines virtuelles](./media/tutorial-backup-vm-at-scale/three-virtual-machines.png)
 
-    La liste **Éléments de sauvegarde** s’affiche.
+1. La liste **Éléments de sauvegarde** s’affiche.
 
     ![Travail de sauvegarde déclenché](./media/tutorial-backup-vm-at-scale/initial-backup-context-menu.png)
 
-3. Dans la liste **Éléments de sauvegarde**, cliquez sur le bouton de sélection **...** pour ouvrir le menu contextuel.
+1. Dans la liste **Éléments de sauvegarde**, sélectionnez le bouton de sélection **...** pour ouvrir le menu contextuel.
 
-4. Dans le menu contextuel, sélectionnez **Sauvegarder maintenant**.
+1. Dans le menu contextuel, sélectionnez **Sauvegarder maintenant**.
 
-    ![Menu contextuel](./media/tutorial-backup-vm-at-scale/context-menu.png)
+    ![Menu contextuel – Sélectionner Sauvegarder maintenant](./media/tutorial-backup-vm-at-scale/context-menu.png)
 
     Le menu Sauvegarder maintenant s’ouvre.
 
-5. Dans le menu Sauvegarder maintenant, entrez le dernier jour de rétention du point de récupération, puis cliquez sur **Sauvegarder**.
+1. Dans le menu Sauvegarder maintenant, entrez le dernier jour de conservation du point de récupération, puis sélectionnez **OK**.
 
     ![Définition du dernier jour de conservation du point de récupération dans le panneau Sauvegarder maintenant](./media/tutorial-backup-vm-at-scale/backup-now-short.png)
 
@@ -132,39 +152,42 @@ Pour exécuter un travail de sauvegarde à la demande :
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Si vous souhaitez suivre les didacticiels suivants, ne nettoyez pas les ressources créées dans celui-ci. Sinon, effectuez les opérations suivantes pour supprimer toutes les ressources créées au cours de ce didacticiel dans le portail Azure.
+Si vous prévoyez de continuer avec les tutoriels suivants, ne nettoyez pas les ressources créées dans ce tutoriel. Sinon, effectuez les étapes suivantes pour supprimer toutes les ressources créées dans le cadre de ce tutoriel dans le portail Azure.
 
-1. Sur le tableau de bord **myRecoveryServicesVault**, sous **Éléments de sauvegarde**, cliquez sur **3** pour ouvrir le menu Éléments de sauvegarde.
+1. Sur le tableau de bord **myRecoveryServicesVault**, sous **Éléments de sauvegarde**, sélectionnez **3** pour ouvrir le menu Éléments de sauvegarde.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/tutorial-vm-back-up-now.png)
+    ![Ouvrir le menu Éléments de sauvegarde](./media/tutorial-backup-vm-at-scale/tutorial-vm-back-up-now.png)
 
-2. Dans le menu **Éléments de sauvegarde**, cliquez sur **Machine virtuelle Azure** pour ouvrir la liste des machines virtuelles associées au coffre.
+1. Dans le menu **Éléments de sauvegarde**, sélectionnez **Machine virtuelle Azure** pour ouvrir la liste des machines virtuelles associées au coffre.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/three-virtual-machines.png)
+    ![Liste des machines virtuelles](./media/tutorial-backup-vm-at-scale/three-virtual-machines.png)
 
     La liste **Éléments de sauvegarde** s’affiche.
 
-3. Dans le menu **Éléments de sauvegarde**, cliquez sur le bouton de sélection (...) pour ouvrir le menu contextuel.
+1. Dans le menu **Éléments de sauvegarde**, sélectionnez le bouton de sélection (...) pour ouvrir le menu contextuel.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/context-menu-to-delete-vm.png)
+    ![Dans le menu Éléments de sauvegarde, ouvrez le menu contextuel.](./media/tutorial-backup-vm-at-scale/context-menu-to-delete-vm.png)
 
-4. Dans le menu contextuel, sélectionnez **Arrêter la sauvegarde** pour ouvrir le menu Arrêter la sauvegarde.
+1. Dans le menu contextuel, sélectionnez **Arrêter la sauvegarde** pour ouvrir le menu Arrêter la sauvegarde.
 
-    ![Icône Paramètres](./media/tutorial-backup-vm-at-scale/context-menu-for-delete.png)
+    ![Menu Arrêter la sauvegarde](./media/tutorial-backup-vm-at-scale/context-menu-for-delete.png)
 
-5. Dans le menu **Arrêter la sauvegarde**, sélectionnez le menu déroulant supérieur, puis choisissez **Supprimer les données de sauvegarde**.
+1. Dans le menu **Arrêter la sauvegarde**, sélectionnez le menu déroulant supérieur, puis choisissez **Supprimer les données de sauvegarde**.
 
-6. Dans la boîte de dialogue **Tapez le nom de l’élément de sauvegarde** , tapez *myVM*.
+1. Dans la boîte de dialogue **Tapez le nom de l’élément de sauvegarde** , tapez *myVM*.
 
-7. Une fois l’élément de sauvegarde vérifié (une coche s’affiche), le bouton **Arrêter la sauvegarde** est activé. Cliquez sur **Arrêter la sauvegarde** pour arrêter la stratégie et supprimer les points de restauration.
+1. Une fois l’élément de sauvegarde vérifié (une coche s’affiche), le bouton **Arrêter la sauvegarde** est activé. Sélectionnez **Arrêter la sauvegarde** pour arrêter la stratégie et supprimer les points de restauration.
 
-    ![Cliquer sur Arrêter la sauvegarde pour supprimer le coffre](./media/tutorial-backup-vm-at-scale/provide-reason-for-delete.png)
+    ![Sélectionner Arrêter la sauvegarde pour supprimer le coffre](./media/tutorial-backup-vm-at-scale/provide-reason-for-delete.png)
 
-8. Dans le menu **myRecoveryServicesVault**, cliquez sur **Supprimer**.
+    >[!NOTE]
+    >Les éléments supprimés sont conservés avec l’état de suppression réversible pendant 14 jours. Le coffre peut être supprimé après cette période uniquement. Pour plus d’informations, consultez [Supprimer un coffre Recovery Services Sauvegarde Azure](backup-azure-delete-vault.md).
 
-    ![Cliquer sur Arrêter la sauvegarde pour supprimer le coffre](./media/tutorial-backup-vm-at-scale/deleting-the-vault.png)
+1. Quand le coffre est vide, sélectionnez **Supprimer**.
 
-    Une fois le coffre supprimé, vous revenez à la liste des coffres Recovery Services.
+    ![Sélectionner Supprimer](./media/tutorial-backup-vm-at-scale/deleting-the-vault.png)
+
+    Après la suppression du coffre, vous revenez à la liste des coffres Recovery Services.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

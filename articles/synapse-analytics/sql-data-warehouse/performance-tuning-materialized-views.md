@@ -1,33 +1,31 @@
 ---
 title: Réglage des performances avec des vues matérialisées
-description: Recommandations et points à prendre en compte quand vous utilisez des vues matérialisées pour améliorer les performances de vos requêtes.
+description: Découvrez des recommandations et des points à prendre en compte quand vous utilisez des vues matérialisées pour améliorer les performances de vos requêtes.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 09/05/2019
 ms.author: xiaoyul
-ms.reviewer: nibruno; jrasnick
-ms.openlocfilehash: 6a3235d5edc5249bbbdc2e79dac8575ad26fd5e1
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.reviewer: nibruno; jrasnick; azure-synapse
+ms.openlocfilehash: 902f0ac96349cf3e30ec12aeda02130afc2b800c
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417024"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96460750"
 ---
-# <a name="performance-tuning-with-materialized-views"></a>Réglage des performances avec des vues matérialisées
+# <a name="performance-tune-with-materialized-views"></a>Réglage des performances avec des vues matérialisées
 
-Les vues matérialisées du pool Synapse SQL fournissent une méthode à faible maintenance pour les requêtes analytiques complexes en vue d'obtenir des performances rapides sans aucune modification des requêtes. Cet article dispense des conseils d’ordre général sur l’utilisation des vues matérialisées.
-
-Les vues matérialisées du pool SQL fournissent une méthode à faible maintenance pour les requêtes analytiques complexes en vue d'obtenir des performances rapides sans aucune modification des requêtes. Cet article dispense des conseils d’ordre général sur l’utilisation des vues matérialisées.
+Les vues matérialisées du pool SQL Azure Synapse fournissent une méthode à faible maintenance pour les requêtes analytiques complexes en vue d’obtenir des performances rapides sans aucune modification des requêtes. Cet article dispense des conseils d’ordre général sur l’utilisation des vues matérialisées.
 
 ## <a name="materialized-views-vs-standard-views"></a>Vues matérialisées et vues standard
 
-Le pool SQL prend en charge les vues standard et matérialisées.  Les deux sont des tables virtuelles créées avec des expressions SELECT et présentées aux requêtes sous forme de tables logiques.  Les vues encapsulent la complexité du calcul de données courant et ajoutent une couche d’abstraction aux modifications de calcul si bien qu’il n’est pas nécessaire de réécrire les requêtes.  
+Dans Azure Synapse, le pool SQL prend en charge les vues standard et matérialisées.  Les deux sont des tables virtuelles créées avec des expressions SELECT et présentées aux requêtes sous forme de tables logiques.  Les vues encapsulent la complexité du calcul de données courant et ajoutent une couche d’abstraction aux modifications de calcul si bien qu’il n’est pas nécessaire de réécrire les requêtes.  
 
-Une vue standard calcule ses données chaque fois que la vue est utilisée.  Aucune donnée n’est stockée sur le disque. L’usage veut que les vues standard soient employés en tant qu’outil permettant d’organiser les objets logiques et les requêtes dans une base de données.  Pour utiliser une vue standard, une requête a besoin d’y faire référence directement.
+Une vue standard calcule ses données chaque fois que la vue est utilisée.  Aucune donnée n’est stockée sur le disque. L’usage veut que les vues standard soient employés en tant qu’outil permettant d’organiser les objets logiques et les requêtes dans un pool SQL.  Pour utiliser une vue standard, une requête a besoin d’y faire référence directement.
 
 Une vue matérialisée précalcule, stocke et conserve ses données dans le pool SQL à l'instar d'une table.  Aucun recalcul n’est nécessaire à chaque utilisation d’une vue matérialisée.  C’est pourquoi les requêtes qui utilisent la totalité ou un sous-ensemble des données incluses dans des vues matérialisées peuvent être plus rapides.  Mieux encore, les requêtes peuvent utiliser une vue matérialisée sans y faire référence directement. Il n’est donc pas nécessaire de modifier le code de l’application.  
 
@@ -54,7 +52,7 @@ Une vue matérialisée correctement conçue offre les avantages suivants :
 
 Les vues matérialisées implémentées dans le pool SQL offrent également les avantages supplémentaires suivants :
 
-En comparaison avec d’autres fournisseurs d’entrepôts de données, les vues matérialisées implémentées dans Azure SQL Data Warehouse offrent également les avantages supplémentaires suivants :
+En comparaison avec d’autres fournisseurs d’entrepôts de données, les vues matérialisées implémentées dans Azure Synapse Analytics offrent également les avantages supplémentaires suivants :
 
 - Actualisation automatique et synchrone des données avec les modifications apportées aux données dans les tables de base. Aucune action de l'utilisateur n'est requise.
 - Prise en charge étendue des fonctions d’agrégation. Consultez [CREATE MATERIALIZED VIEW AS SELECT (Transact-SQL)](/sql/t-sql/statements/create-materialized-view-as-select-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
@@ -81,7 +79,7 @@ En comparaison à d’autres options de réglage, comme la mise à l’échelle 
 
 **Besoin d’une stratégie de distribution de données différente pour des performances de requête plus rapides**
 
-Un pool SQL est un système de traitement massivement parallèle (MPP) distribué.   Les données d'un pool SQL sont réparties sur 60 nœuds à l'aide de l'une des trois [stratégies de distribution](sql-data-warehouse-tables-distribute.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) disponibles (hachage, tourniquet ou réplication).  
+Azure Synapse Analytics est un système de traitement de requêtes distribuées.  Les données d'une table SQL sont réparties sur 60 nœuds à l'aide de l'une des trois [stratégies de distribution](sql-data-warehouse-tables-distribute.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) disponibles (hachage, tourniquet ou réplication).   
 
 La distribution des données est spécifiée au moment de la création de la table et reste inchangée jusqu’à ce que la table soit supprimée. Une vue matérialisée étant une table virtuelle sur un disque prend en charge les distributions de données en hachage et tourniquet.  Les utilisateurs peuvent choisir une distribution de données qui est différente des tables de base, mais optimale pour les performances des requêtes qui utilisent le plus les vues.  
 
@@ -99,11 +97,11 @@ Les utilisateurs peuvent exécuter EXPLAIN WITH_RECOMMENDATIONS <Instruction_SQL
 
 **Compromis entre des requêtes plus rapides et le coût**
 
-Pour chaque vue matérialisée, il existe un coût de stockage des données et un coût de maintenance de la vue.  À mesure que les données sont modifiées dans les tables de base, la taille de la vue matérialisée augmente et sa structure physique change également.  Pour éviter toute détérioration des performances de requête, le moteur du pool SQL gère séparément chaque vue matérialisée.  
+Pour chaque vue matérialisée, il existe un coût de stockage des données et un coût de maintenance de la vue.  À mesure que les données sont modifiées dans les tables de base, la taille de la vue matérialisée augmente et sa structure physique change également.  Pour éviter toute détérioration des performances de requête, le moteur SQL Analytics gère séparément chaque vue matérialisée.  
 
 La charge de travail de maintenance est plus élevée quand le nombre de vues matérialisées et de modifications des tables de base augmente.   Les utilisateurs doivent vérifier si les coûts engendrés par toutes les vues matérialisées peuvent être compensés par le gain de performance des requêtes.  
 
-Vous pouvez exécuter cette requête pour obtenir la liste des vues matérialisées dans une base de données :
+Vous pouvez exécuter cette requête pour obtenir la liste des vues matérialisées dans un pool SQL :
 
 ```sql
 SELECT V.name as materialized_view, V.object_id
@@ -143,7 +141,7 @@ GROUP BY A, C
 
 **Tous les réglages des performances n’ont pas besoin de modification des requêtes**
 
-L'optimiseur du pool SQL peut automatiquement utiliser des vues matérialisées déployées pour améliorer les performances des requêtes.  Cette prise en charge s’applique en toute transparence aux requêtes qui ne font pas référence aux vues et aux requêtes qui utilisent des agrégats non pris en charge dans la création de vues matérialisées.  Aucune modification de requête n’est nécessaire. Vous pouvez vérifier le plan d’exécution estimé d’une requête pour confirmer si une vue matérialisée est utilisée.  
+L'optimiseur SQL Analytics peut automatiquement utiliser des vues matérialisées déployées pour améliorer les performances des requêtes.  Cette prise en charge s’applique en toute transparence aux requêtes qui ne font pas référence aux vues et aux requêtes qui utilisent des agrégats non pris en charge dans la création de vues matérialisées.  Aucune modification de requête n’est nécessaire. Vous pouvez vérifier le plan d’exécution estimé d’une requête pour confirmer si une vue matérialisée est utilisée.  
 
 **Superviser les vues matérialisées**
 
@@ -153,7 +151,7 @@ Pour éviter toute détérioration des performances de requête, il est recomman
 
 **Vue matérialisée et mise en cache du jeu de résultats**
 
-Ces deux fonctionnalités sont introduites dans le pool SQL à peu près en même temps à des fins de réglage des performances des requêtes.  La mise en cache du jeu de résultats est utilisée pour obtenir une concurrence élevée et une réponse rapide des requêtes répétitives sur des données statiques.  
+Ces deux fonctionnalités sont introduites dans SQL Analytics à peu près en même temps à des fins de réglage des performances des requêtes.  La mise en cache du jeu de résultats est utilisée pour obtenir une concurrence élevée et une réponse rapide des requêtes répétitives sur des données statiques.  
 
 Pour utiliser le résultat mis en cache, la forme de la requête de cache doit correspondre à la requête qui a produit le cache.  De plus, le résultat mis en cache doit s’appliquer à la requête entière.  
 
@@ -161,7 +159,7 @@ Les vues matérialisées permettent de modifier les données dans les tables de 
 
 ## <a name="example"></a>Exemple
 
-Cet exemple utilise une requête de type TPCDS qui recherche les clients qui dépensent plus d’argent par le biais du catalogue que dans les magasins, afin d’identifier les clients préférés et leur pays d’origine.   La requête consiste à sélectionner les 100 premiers enregistrements issus de l’instruction UNION de trois sous-instructions SELECT impliquant les fonctions SUM() et GROUP BY.
+Cet exemple utilise une requête de type TPCDS qui recherche les clients qui dépensent plus d’argent par le biais du catalogue que dans les magasins, afin d’identifier les clients préférés et leur pays/région d’origine.   La requête consiste à sélectionner les 100 premiers enregistrements issus de l’instruction UNION de trois sous-instructions SELECT impliquant les fonctions SUM() et GROUP BY.
 
 ```sql
 WITH year_total AS (

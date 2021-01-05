@@ -10,12 +10,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 8cf1e5a4d97b882e7a8d0c81041bbcde709760d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 78a543fabadcc0d4e1766af1bc5c65aac0dadebe
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75864194"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91358923"
 ---
 # <a name="track-the-progress-of-data-science-projects"></a>Suivre la progression de projets de science des données
 
@@ -46,7 +46,7 @@ Voici un exemple simple de tableau de bord qui effectue le suivi des activités 
 
 - Le **graphique Burnup** montre le travail accompli par rapport à la quantité totale de travail dans le sprint.
 
-![tableau de bord](./media/track-progress/dashboard.png)
+![Capture d'écran représentant un exemple de tableau de bord Azure DevOps.](./media/track-progress/dashboard.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

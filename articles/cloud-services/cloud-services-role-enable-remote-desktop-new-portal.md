@@ -9,12 +9,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 11/28/2016
 ms.author: memccror
-ms.openlocfilehash: d65f4b55be317234c10a0e90cfe413d9e38a6a90
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 507af87c3126be00a802bcbc5170f8ad364c06fc
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225925"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93099315"
 ---
 # <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services"></a>Activer une connexion Bureau à distance pour un rôle dans Azure Cloud Services
 
@@ -33,7 +33,7 @@ Le portail Azure utilise l’approche basée sur l’extension Bureau à distan
 
 1. Cliquez sur **Services cloud** et sélectionnez le nom du service cloud, puis **Bureau à distance**.
 
-    ![Bureau à distance des Services Cloud](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop.png)
+    ![Capture d’écran mettant en évidence l’option Bureau à distance.](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop.png)
 
 2. Choisissez si vous souhaitez activer le Bureau à distance pour un rôle individuel ou pour tous les rôles, puis modifier la valeur du sélecteur en **Activé**.
 
@@ -44,7 +44,7 @@ Le portail Azure utilise l’approche basée sur l’extension Bureau à distan
    > [!WARNING]
    > Toutes les instances de rôle sont redémarrées lorsque vous activez pour la première fois le Bureau à distance et que vous cochez la case **OK**. Pour éviter un redémarrage, le certificat utilisé pour chiffrer le mot de passe doit être installé sur le rôle. Pour éviter un redémarrage, [téléchargez un certificat pour le service cloud](cloud-services-configure-ssl-certificate-portal.md#step-3-upload-a-certificate) , puis revenez à cette boîte de dialogue.
 
-4. Dans **Roles**, sélectionnez le rôle que vous voulez mettre à jour ou sélectionnez **Tous** pour tous les rôles.
+4. Dans **Roles** , sélectionnez le rôle que vous voulez mettre à jour ou sélectionnez **Tous** pour tous les rôles.
 
 5. Une fois les mises à jour de la configuration terminées, sélectionnez **Enregistrer**. Vos instances de rôles pourront recevoir les connexions quelques instants plus tard.
 
@@ -56,12 +56,12 @@ Une fois que le Bureau à distance aura été activé sur les rôles, vous pourr
 2. Sélectionnez une instance de rôle pour laquelle la fonctionnalité Bureau à distance est configurée.
 3. Cliquez sur **Connecter** afin de télécharger un fichier RDP pour l’instance de rôle.
 
-    ![Bureau à distance des Services Cloud](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop_Connect.png)
+    ![Capture d’écran mettant en évidence le bouton Se connecter.](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop_Connect.png)
 
-4. Cliquez sur **Ouvrir**, puis sur **Connecter** pour démarrer la connexion Bureau à distance.
+4. Cliquez sur **Ouvrir** , puis sur **Connecter** pour démarrer la connexion Bureau à distance.
 
 >[!NOTE]
-> Si votre service cloud se trouve derrière un groupe de sécurité réseau, il peut être nécessaire de créer des règles qui autorisent le trafic sur les ports **3389** et **20000**.  Bureau à distance utilise le port **3389**.  Les instances de service cloud sont soumis à l’équilibrage de charge, donc vous ne pouvez pas contrôler directement à quelle instance vous vous connectez.  Les agents *RemoteForwarder* et *RemoteAccess* gèrent le trafic RDP, et permettent au client d’envoyer un cookie RDP et de spécifier une instance individuelle à laquelle se connecter.  Les agents *RemoteForwarder* et *RemoteAccess* exigent que le port **20000*** soit ouvert : il peut être bloqué si vous avez défini un groupe de sécurité réseau.
+> Si votre service cloud se trouve derrière un groupe de sécurité réseau, il peut être nécessaire de créer des règles qui autorisent le trafic sur les ports **3389** et **20000**.  Bureau à distance utilise le port **3389**.  Les instances de service cloud sont soumis à l’équilibrage de charge, donc vous ne pouvez pas contrôler directement à quelle instance vous vous connectez.  Les agents *RemoteForwarder* et *RemoteAccess* gèrent le trafic RDP, et permettent au client d’envoyer un cookie RDP et de spécifier une instance individuelle à laquelle se connecter.  Les agents *RemoteForwarder* et *RemoteAccess* exigent que le port **20000** * soit ouvert : il peut être bloqué si vous avez défini un groupe de sécurité réseau.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

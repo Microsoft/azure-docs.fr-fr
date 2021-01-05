@@ -5,17 +5,17 @@ ms.assetid: e224fc4f-800d-469a-8d6a-72bcde612450
 ms.topic: article
 ms.date: 04/30/2020
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 11e133a24ff728cc864e50e898e9db982b186337
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.openlocfilehash: ef90603e8c8cdd66d43b9f88f6d128d8a472fd8a
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82597912"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92150336"
 ---
 # <a name="set-up-staging-environments-in-azure-app-service"></a>Configurer des environnements intermédiaires dans Azure App Service
 <a name="Overview"></a>
 
-Lorsque vous déployez votre application web, votre application web Linux, votre backend mobile ou votre API dans [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714), vous pouvez utiliser un autre emplacement de déploiement que l’emplacement de production par défaut lorsque vous exécutez le niveau de plan **Standard**, **Premium** ou **Isolé** d’App Service. Les emplacements de déploiement sont des applications en production pourvues de leur propre nom d’hôte. Les éléments de contenu et de configuration des applications peuvent être échangés entre deux emplacements de déploiement, y compris l’emplacement de production. 
+Lorsque vous déployez votre application web, votre application web Linux, votre backend mobile ou votre API dans [Azure App Service](./overview.md), vous pouvez utiliser un autre emplacement de déploiement que l’emplacement de production par défaut lorsque vous exécutez le niveau de plan **Standard**, **Premium** ou **Isolé** d’App Service. Les emplacements de déploiement sont des applications en production pourvues de leur propre nom d’hôte. Les éléments de contenu et de configuration des applications peuvent être échangés entre deux emplacements de déploiement, y compris l’emplacement de production. 
 
 Le déploiement de votre application sur un emplacement hors production présente les avantages suivants :
 
@@ -58,11 +58,11 @@ Pour que vous puissiez activer plusieurs emplacements de déploiement, l’appli
    
     ![Titre de l’emplacement de déploiement](./media/web-sites-staged-publishing/StagingTitle.png)
 
-    L’emplacement intermédiaire dispose d’une page de gestion, comme n’importe quelle application App Service. Vous pouvez modifier la configuration de l’emplacement. Pour vous rappeler que vous affichez l’emplacement de déploiement, le nom de l’application est affiché sous la forme **\<nom-application>/\<nom-emplacement>** , et le type d’application est **App service (Emplacement)** . Vous pouvez également afficher l’emplacement sous la forme d’une application distincte dans votre groupe de ressources, avec les mêmes désignations.
+    L’emplacement intermédiaire dispose d’une page de gestion, comme n’importe quelle application App Service. Vous pouvez modifier la configuration de l’emplacement. Pour vous rappeler que vous voyez l’emplacement de déploiement, le nom de l’application apparaît sous la forme **\<app-name>/\<slot-name>** , et le type d’application est **App Service (Emplacement)** . Vous pouvez également afficher l’emplacement sous la forme d’une application distincte dans votre groupe de ressources, avec les mêmes désignations.
 
 6. Sélectionnez l’URL de l’application dans la page des ressources de l’emplacement. L’emplacement de déploiement est une application en production et il a son propre nom d’hôte. Pour limiter l’accès public à l’emplacement de déploiement, consultez [Restrictions d’adresse IP avec Azure App Service](app-service-ip-restrictions.md).
 
-Le nouvel emplacement de déploiement n’a aucun contenu, même si vous clonez les paramètres à partir d’un autre emplacement. Par exemple, vous pouvez [publier sur cet emplacement avec Git](app-service-deploy-local-git.md). Vous pouvez effectuer un déploiement sur l’emplacement à partir d’une autre branche du dépôt, ou d’un dépôt différent.
+Le nouvel emplacement de déploiement n’a aucun contenu, même si vous clonez les paramètres à partir d’un autre emplacement. Par exemple, vous pouvez [publier sur cet emplacement avec Git](./deploy-local-git.md). Vous pouvez effectuer un déploiement sur l’emplacement à partir d’une autre branche du dépôt, ou d’un dépôt différent.
 
 <a name="AboutConfiguration"></a>
 
@@ -83,7 +83,7 @@ Lorsque vous échangez deux emplacements (en général, vous passez d’un empla
 
 1. Si le [cache local](overview-local-cache.md) est activé, déclenchez son initialisation en envoyant une requête HTTP à la racine de l’application (« / »), sur chaque instance de l’emplacement source. Attendez que chaque instance retourne une réponse HTTP. L’initialisation du cache local provoque un autre redémarrage sur chaque instance.
 
-1. Si l’[échange automatique](#Auto-Swap) est activé avec l’[initialisation personnalisée](#Warm-up), déclenchez l’[initialisation de l’application](https://docs.microsoft.com/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization) en envoyant une requête HTTP à la racine de l’application (« / ») sur chaque instance de l’emplacement source.
+1. Si l’[échange automatique](#Auto-Swap) est activé avec l’[initialisation personnalisée](#Warm-up), déclenchez l’[initialisation de l’application](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization) en envoyant une requête HTTP à la racine de l’application (« / ») sur chaque instance de l’emplacement source.
 
     Si `applicationInitialization` n’est pas spécifié, déclenchez une requête HTTP à la racine de l’application de l’emplacement source sur chaque instance. 
     
@@ -183,7 +183,7 @@ L’échange automatique simplifie les scénarios Azure DevOps impliquant un dé
 
 Pour configurer l’échange automatique :
 
-1. Accédez à la page des ressources de votre application. Sélectionnez **Emplacements de déploiement** >  *\<emplacement source souhaité >*  > **Configuration** > **Paramètres généraux**.
+1. Accédez à la page des ressources de votre application. Sélectionnez **Emplacements de déploiement** >  *\<desired source slot>*  > **Configuration** > **Paramètres généraux**.
    
 2. Pour **Échange automatique activé**, sélectionnez **Activé**. Ensuite, sélectionnez l’emplacement cible souhaité pour **Échanger automatiquement l’emplacement de déploiement**, puis sélectionnez **Enregistrer** dans la barre de commandes. 
    
@@ -199,12 +199,14 @@ Si vous rencontrez des problèmes, consultez [Résoudre les problèmes liés aux
 
 Certaines applications peuvent nécessiter quelques actions préparatoires personnalisées avant l’échange. L’élément de configuration `applicationInitialization` du fichier web.config vous permet de spécifier les actions d’initialisation personnalisées à exécuter. L’[opération d’échange](#AboutConfiguration) attend la fin de l’initialisation personnalisée pour procéder à l’échange avec l’emplacement cible. Voici un exemple de fragment web.config.
 
-    <system.webServer>
-        <applicationInitialization>
-            <add initializationPage="/" hostName="[app hostname]" />
-            <add initializationPage="/Home/About" hostName="[app hostname]" />
-        </applicationInitialization>
-    </system.webServer>
+```xml
+<system.webServer>
+    <applicationInitialization>
+        <add initializationPage="/" hostName="[app hostname]" />
+        <add initializationPage="/Home/About" hostName="[app hostname]" />
+    </applicationInitialization>
+</system.webServer>
+```
 
 Pour plus d’informations sur la personnalisation de l’élément `applicationInitialization`, consultez [Most common deployment slot swap failures and how to fix them](https://ruslany.net/2017/11/most-common-deployment-slot-swap-failures-and-how-to-fix-them/).
 
@@ -220,7 +222,7 @@ Si vous rencontrez des problèmes, consultez [Résoudre les problèmes liés aux
 
 ## <a name="monitor-a-swap"></a>Superviser un échange
 
-Si l’exécution de l’[opération d’échange](#AboutConfiguration) prend beaucoup de temps, vous pouvez obtenir des informations au sujet de cette opération dans le [journal d’activité](../monitoring-and-diagnostics/monitoring-overview-activity-logs.md).
+Si l’exécution de l’[opération d’échange](#AboutConfiguration) prend beaucoup de temps, vous pouvez obtenir des informations au sujet de cette opération dans le [journal d’activité](../azure-monitor/platform/platform-logs-overview.md).
 
 Sur le portail, dans la page des ressources de votre application, sélectionnez **Journal d’activité** dans le volet de gauche.
 
@@ -254,7 +256,7 @@ Parallèlement au routage automatique du trafic, App Service peut acheminer les 
 
 Par exemple, pour permettre aux utilisateurs de refuser votre application bêta, vous pouvez placer ce lien dans votre page web :
 
-```HTML
+```html
 <a href="<webappname>.azurewebsites.net/?x-ms-routing-name=self">Go back to production app</a>
 ```
 
@@ -272,7 +274,7 @@ Par défaut, les nouveaux emplacements se voient attribuer une règle de routage
 
 ## <a name="delete-a-slot"></a>Supprimer un emplacement
 
-Recherchez et sélectionnez votre application. Sélectionnez **Emplacements de déploiement** >  *\<emplacement à supprimer>*  > **Vue d’ensemble**. Le type d’application est indiqué comme **App Service (Emplacement)** pour vous rappeler que vous consultez un emplacement de déploiement. Sélectionnez **Supprimer** dans la barre de commandes.  
+Recherchez et sélectionnez votre application. Sélectionnez **Emplacements de déploiement** >  *\<slot to delete>*  > **Vue d’ensemble**. Le type d’application est indiqué comme **App Service (Emplacement)** pour vous rappeler que vous consultez un emplacement de déploiement. Sélectionnez **Supprimer** dans la barre de commandes.  
 
 ![Supprimer un emplacement de déploiement](./media/web-sites-staged-publishing/DeleteStagingSiteButton.png)
 
@@ -286,7 +288,7 @@ Recherchez et sélectionnez votre application. Sélectionnez **Emplacements de d
 
 Azure PowerShell est un module qui fournit des applets de commande pour gérer Azure via Windows PowerShell, notamment la prise en charge de la gestion des emplacements de déploiement des applications dans Azure App Service.
 
-Pour plus d’informations sur l’installation et la configuration d’Azure PowerShell et sur l’authentification d’Azure PowerShell avec votre abonnement Azure, consultez la page [Installation et configuration d’Azure PowerShell](/powershell/azure/overview).  
+Pour plus d’informations sur l’installation et la configuration d’Azure PowerShell et sur l’authentification d’Azure PowerShell avec votre abonnement Azure, consultez la page [Installation et configuration d’Azure PowerShell](/powershell/azure/).  
 
 ---
 ### <a name="create-a-web-app"></a>Créer une application web
@@ -333,7 +335,7 @@ Remove-AzResource -ResourceGroupName [resource group name] -ResourceType Microso
 
 ## <a name="automate-with-resource-manager-templates"></a>Automatiser avec des modèles Resource Manager
 
-Les [modèles Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/template-deployment-overview) sont des fichiers JSON déclaratifs utilisés pour automatiser le déploiement et la configuration de ressources Azure. Pour échanger des emplacements à l’aide de modèles Resource Manager, vous devez définir deux propriétés sur les ressources *Microsoft.Web/sites/slots* et *Microsoft.Web/sites* :
+Les [modèles Azure Resource Manager](../azure-resource-manager/templates/overview.md) sont des fichiers JSON déclaratifs utilisés pour automatiser le déploiement et la configuration de ressources Azure. Pour échanger des emplacements à l’aide de modèles Resource Manager, vous devez définir deux propriétés sur les ressources *Microsoft.Web/sites/slots* et *Microsoft.Web/sites* :
 
 - `buildVersion` : propriété de type chaîne qui représente la version actuelle de l’application déployée dans l’emplacement. Par exemple : « v1 », « 1.0.0.1 » ou « 2019-09-20T11:53:25.2887393-07:00 ».
 - `targetBuildVersion` : propriété de type chaîne spécifiant la valeur `buildVersion` que l’emplacement doit avoir. Si la valeur targetBuildVersion n’est pas la valeur `buildVersion` actuelle, cela déclenche l’opération d’échange en recherchant l’emplacement qui a la valeur `buildVersion` spécifiée.
@@ -421,7 +423,6 @@ Voici quelques erreurs courantes liées aux échanges :
       ...
     </conditions>
     ```
-- Certaines [règles de restriction IP](app-service-ip-restrictions.md) peuvent empêcher l’opération d’échange d’envoyer des requêtes HTTP à votre application. Les plages d’adresses IPv4 qui commencent par `10.` et `100.` sont internes à votre déploiement. Vous devez les autoriser à se connecter à votre application.
 
 - Après des échanges d’emplacements, l’application peut rencontrer des redémarrages inattendus. En effet, après un échange, la configuration de la liaison du nom d’hôte se désynchronise, ce qui n’entraîne pas de redémarrages. En revanche, certains événements de stockage sous-jacents (comme des basculements de volume de stockage) peuvent détecter ces différences et forcer le redémarrage de tous les processus Worker. Pour minimiser ces types de redémarrages, définissez le [paramètre d’application`WEBSITE_ADD_SITENAME_BINDINGS_IN_APPHOST_CONFIG=1`](https://github.com/projectkudu/kudu/wiki/Configurable-settings#disable-the-generation-of-bindings-in-applicationhostconfig) sur *tous les emplacements*. En revanche, ce paramètre d’application ne fonctionne *pas* avec des applications Windows Communication Foundation (WCF).
 

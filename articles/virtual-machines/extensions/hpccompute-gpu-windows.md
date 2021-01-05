@@ -8,17 +8,18 @@ manager: gwallace
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 01/09/2019
 ms.author: akjosh
-ms.openlocfilehash: c388f433327b5328483f10fbef637a6fdfd08832
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82ed1d57d72a4479005d8bfd2234c124a97096ee
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226873"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965984"
 ---
 # <a name="nvidia-gpu-driver-extension-for-windows"></a>Extension du pilote GPU NVIDIA pour Windows
 
@@ -26,10 +27,10 @@ ms.locfileid: "79226873"
 
 Cette extension installe des pilotes GPU NVIDIA sur des machines virtuelles Windows de gamme N. En fonction de la famille de machine virtuelle, l’extension installe des pilotes CUDA ou GRID. Lorsque vous installez des pilotes NVIDIA à l’aide de cette extension, vous acceptez les termes du [contrat de licence utilisateur final NVIDIA](https://go.microsoft.com/fwlink/?linkid=874330). Pendant le processus d’installation, la machine virtuelle peut redémarrer pour terminer l’installation du pilote.
 
-Des instructions sur l’installation manuelle des pilotes et les versions actuellement prises en charge sont disponibles [ici](https://docs.microsoft.com/azure/virtual-machines/windows/n-series-driver-setup).
+Des instructions sur l’installation manuelle des pilotes et les versions actuellement prises en charge sont disponibles [ici](../windows/n-series-driver-setup.md).
 Une extension est également disponible pour installer les pilotes GPU NVIDIA sur [des machines virtuelles de gamme N Linux](hpccompute-gpu-linux.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 ### <a name="operating-system"></a>Système d’exploitation
 
@@ -61,7 +62,7 @@ Le JSON suivant illustre le schéma pour l’extension.
   "properties": {
     "publisher": "Microsoft.HpcCompute",
     "type": "NvidiaGpuDriverWindows",
-    "typeHandlerVersion": "1.2",
+    "typeHandlerVersion": "1.3",
     "autoUpgradeMinorVersion": true,
     "settings": {
     }
@@ -71,12 +72,12 @@ Le JSON suivant illustre le schéma pour l’extension.
 
 ### <a name="properties"></a>Propriétés
 
-| Name | Valeur/Exemple | Type de données |
+| Nom | Valeur/Exemple | Type de données |
 | ---- | ---- | ---- |
 | apiVersion | 2015-06-15 | Date |
 | publisher | Microsoft.HpcCompute | string |
 | type | NvidiaGpuDriverWindows | string |
-| typeHandlerVersion | 1.2 | int |
+| typeHandlerVersion | 1.3 | int |
 
 
 ## <a name="deployment"></a>Déploiement
@@ -85,7 +86,7 @@ Le JSON suivant illustre le schéma pour l’extension.
 
 Les extensions de machines virtuelles Azure peuvent être déployées avec des modèles Azure Resource Manager. Les modèles sont idéaux lorsque vous déployez une ou plusieurs machines virtuelles nécessitant une configuration post-déploiement.
 
-La configuration JSON pour une extension de machine virtuelle peut être imbriquée à l’intérieur de la ressource de machine virtuelle ou placée à la racine ou au niveau supérieur d’un modèle de Resource Manager JSON. Le positionnement de la configuration JSON affecte la valeur du nom de la ressource et son type. Pour plus d’informations, consultez [Définition du nom et du type des ressources enfants](../../azure-resource-manager/resource-manager-template-child-resource.md). 
+La configuration JSON pour une extension de machine virtuelle peut être imbriquée à l’intérieur de la ressource de machine virtuelle ou placée à la racine ou au niveau supérieur d’un modèle de Resource Manager JSON. Le positionnement de la configuration JSON affecte la valeur du nom de la ressource et son type. Pour plus d’informations, consultez [Définition du nom et du type des ressources enfants](../../azure-resource-manager/templates/child-resource-name-type.md). 
 
 L’exemple suivant suppose que l’extension est imbriquée dans la ressource de machine virtuelle. Lors de l’imbrication de la ressource d’extension, le JSON est placé dans l’objet `"resources": []` de la machine virtuelle.
 
@@ -101,7 +102,7 @@ L’exemple suivant suppose que l’extension est imbriquée dans la ressource d
   "properties": {
     "publisher": "Microsoft.HpcCompute",
     "type": "NvidiaGpuDriverWindows",
-    "typeHandlerVersion": "1.2",
+    "typeHandlerVersion": "1.3",
     "autoUpgradeMinorVersion": true,
     "settings": {
     }
@@ -119,7 +120,7 @@ Set-AzVMExtension
     -Publisher "Microsoft.HpcCompute" `
     -ExtensionName "NvidiaGpuDriverWindows" `
     -ExtensionType "NvidiaGpuDriverWindows" `
-    -TypeHandlerVersion 1.2 `
+    -TypeHandlerVersion 1.3 `
     -SettingString '{ `
     }'
 ```
@@ -127,13 +128,13 @@ Set-AzVMExtension
 ### <a name="azure-cli"></a>Azure CLI
 
 ```azurecli
-az vm extension set `
-  --resource-group myResourceGroup `
-  --vm-name myVM `
-  --name NvidiaGpuDriverWindows `
-  --publisher Microsoft.HpcCompute `
-  --version 1.2 `
-  --settings '{ `
+az vm extension set \
+  --resource-group myResourceGroup \
+  --vm-name myVM \
+  --name NvidiaGpuDriverWindows \
+  --publisher Microsoft.HpcCompute \
+  --version 1.3 \
+  --settings '{ \
   }'
 ```
 
@@ -154,7 +155,7 @@ az vm extension list --resource-group myResourceGroup --vm-name myVM -o table
 La sortie de l’exécution de l’extension est enregistrée dans le répertoire suivant :
 
 ```cmd
-C:\WindowsAzure\Logs\Plugins\Microsoft.HpcCompute.NvidiaGpuDriverMicrosoft\
+C:\WindowsAzure\Logs\Plugins\Microsoft.HpcCompute.NvidiaGpuDriverWindows\
 ```
 
 ### <a name="error-codes"></a>Codes d’erreur
@@ -163,7 +164,7 @@ C:\WindowsAzure\Logs\Plugins\Microsoft.HpcCompute.NvidiaGpuDriverMicrosoft\
 | :---: | --- | --- |
 | 0 | L’opération a réussi |
 | 1 | L’opération a réussi. Redémarrage requis. |
-| 100 | L’opération n’est pas prise en charge ou n’a pas pu être effectuée. | Causes possibles : la version de PowerShell n’est pas prise en charge, la machine virtuelle n’est pas de série N, le téléchargement des données a échoué. Vérifiez les fichiers journaux pour déterminer la cause de l’erreur. |
+| 100 | L’opération n’est pas prise en charge ou n’a pas pu être effectuée. | Causes possibles : La version de PowerShell n’est pas prise en charge, la machine virtuelle n’est pas de série N, le téléchargement des données a échoué. Vérifiez les fichiers journaux pour déterminer la cause de l’erreur. |
 | 240, 840 | Délai d’expiration de l’opération. | Réessayez l’opération. |
 | -1 | Une exception s’est produite. | Vérifiez les fichiers journaux pour déterminer la cause de l’exception. |
 | -5x | Opération interrompue en raison d’un redémarrage en attente. | Redémarrez la machine virtuelle. L’installation se poursuivra après le redémarrage. La désinstallation doit être appelée manuellement. |
@@ -176,4 +177,4 @@ Si vous avez besoin d’une aide supplémentaire à quelque étape que ce soit d
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur les extensions de machine virtuelle, consultez la page [Extensions et fonctionnalités de machine virtuelle pour Windows](features-windows.md).
 
-Pour plus d’informations sur les machines virtuelles de gamme N, consultez la page [Tailles de machine virtuelle à GPU optimisé](../windows/sizes-gpu.md).
+Pour plus d’informations sur les machines virtuelles de gamme N, consultez la page [Tailles de machine virtuelle à GPU optimisé](../sizes-gpu.md).

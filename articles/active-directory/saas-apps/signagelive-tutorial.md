@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Signagelive | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Signagelive.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: d923f0e7-ad31-4d59-a6fd-f0e895e1a32d
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 1/11/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6dab2fd0ee2f25e835b4bd07a3534475d3d93b5e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 78324cfa58a8ac015b085052bdec7e3793befc1b
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73160931"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348396"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-signagelive"></a>Tutoriel : Intégration d’Azure Active Directory à Signagelive
 
@@ -32,7 +27,7 @@ L’intégration de Signagelive dans Azure AD vous offre les avantages suivants�
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Signagelive (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis). Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md). Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -110,7 +105,7 @@ Pour configurer l’authentification unique Azure AD auprès de Signagelive, pro
     Dans la boîte **URL de connexion**, entrez une URL dont le modèle est le suivant : `https://login.signagelive.com/sso/<ORGANIZATIONALUNITNAME>`
 
     > [!NOTE]
-    > Cette valeur n’est pas la valeur réelle. Mettez à jour la valeur avec l’URL de connexion réelle. Pour obtenir cette valeur, contactez [l’équipe du support technique Signagelive](mailto:support@signagelive.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Cette valeur n’est pas la valeur réelle. Mettez à jour la valeur avec l’URL de connexion réelle. Pour obtenir cette valeur, contactez [l’équipe de support client Signagelive](mailto:support@signagelive.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 5. Dans la page **Configurer l’authentification unique avec SAML**, à la section **Certificat de signature SAML**, sélectionnez **Télécharger** pour télécharger le **Certificat (brut)** en fonction des options définies. Enregistrez-le ensuite sur votre ordinateur.
 
@@ -182,19 +177,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-a-signagelive-test-user"></a>Créer un utilisateur de test Signagelive
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Signagelive. Contactez  [l’équipe du support technique Signagelive](mailto:support@signagelive.com) pour ajouter des utilisateurs dans la plateforme Signagelive. Vous devez créer et activer les utilisateurs avant d’utiliser l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Signagelive. Contactez l’[équipe du support technique Signagelive](mailto:support@signagelive.com) pour ajouter des utilisateurs dans la plateforme Signagelive. Vous devez créer et activer les utilisateurs avant d’utiliser l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du portail MyApps.
 
-Le fait de sélectionner la vignette **Signagelive** dans le portail MyApps doit vous connecter automatiquement à l’application. Pour plus d’informations sur le portail MyApps, consultez [Qu’est-ce que le portail MyApps ?](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de sélectionner la vignette **Signagelive** dans le portail MyApps doit vous connecter automatiquement à l’application. Pour plus d’informations sur le portail MyApps, consultez [Qu’est-ce que le portail MyApps ?](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

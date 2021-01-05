@@ -6,12 +6,12 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 10/22/2019
 ms.author: yegu
-ms.openlocfilehash: 809fbe85a9783777d5dbef86357bd5a386bd6f81
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: fd0e6f893d152259c46ff06e9ec20af54395c5e6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261233"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994381"
 ---
 # <a name="remove-tls-10-and-11-from-use-with-azure-cache-for-redis"></a>Supprimer les protocoles TLS 1.0 et 1.1 de l’utilisation avec Azure Cache pour Redis
 
@@ -19,10 +19,14 @@ L’utilisation exclusive de TLS (Transport Layer Security) version 1.2 ou ulté
 
 Dans le cadre de cet effort, nous apportons les modifications suivantes dans le cache Azure pour Redis :
 
-* **Phase 1 :** Nous configurerons la version TLS minimale par défaut sur la version 1.2 pour les instances de cache nouvellement créées. (Il s’agissait précédemment de TLS 1.0.) Les instances de cache existantes ne seront pas mises à jour à ce stade. Vous êtes autorisé à [modifier la version minimale du protocole TLS](cache-configure.md#access-ports) à 1,0 ou 1,1 pour des raisons de compatibilité descendante, si nécessaire. Cette modification peut être effectuée via le Portail Azure ou d’autres API de gestion.
-* **Phase 2 :** Nous mettrons fin à la prise en charge des versions 1.0 et 1.1 de TLS. Après cette modification, votre application doit utiliser TLS 1.2 ou une version ultérieure pour communiquer avec votre cache.
+* **Phase 1 :** Nous configurerons la version TLS minimale par défaut sur la version 1.2 pour les instances de cache nouvellement créées (auparavant, il s’agissait de TLS 1.0). Les instances de cache existantes ne seront pas mises à jour à ce stade. Vous pouvez toujours utiliser le portail Azure ou d’autres API de gestion pour [modifier la version TLS minimale](cache-configure.md#access-ports) sur 1.0 ou 1.1 pour assurer la compatibilité descendante le cas échéant.
+* **Phase 2 :** Nous mettrons fin à la prise en charge des versions 1.1 et 1.0 de TLS. Après cette modification, votre application devra utiliser TLS 1.2 ou une version ultérieure pour communiquer avec votre cache. Le service Azure Cache pour Redis devrait être disponible pendant que nous le migrons pour prendre en charge uniquement TLS 1.2 ou une version ultérieure.
 
-En outre, dans le cadre de cette modification, nous allons supprimer la prise en charge des suites de chiffrement plus anciennes et non sécurisées.  Nos suites de chiffrement prises en charge sont limitées aux éléments suivants lorsque le cache est configuré avec une version TLS minimale de 1.2.
+  > [!NOTE]
+  > Il est prévu que la phase 2 commence au plus tôt le 31 décembre 2020. Toutefois, nous vous recommandons vivement de commencer à planifier cette modification dès maintenant et de mettre à jour de manière proactive les clients pour qu’ils prennent en charge TLS 1.2 ou une version ultérieure. 
+  >
+
+Dans le cadre de cette modification, nous allons également supprimer la prise en charge des anciennes suites de chiffrement qui ne sont pas sécurisées. Nos suites de chiffrement prises en charge sont limitées aux suites suivantes lorsque le cache est configuré avec TLS 1.2 au minimum :
 
 * TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384
 * TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256
@@ -31,16 +35,20 @@ Cet article fournit des instructions générales sur la façon de détecter les 
 
 Les dates d'entrée en vigueur de ces modifications sont les suivantes :
 
-| Cloud               | Date de début de la phase 1 | Date de début de la phase 2      |
-|---------------------|--------------------|-------------------------|
-| Azure (global)      |  13 janvier 2020  | 11 mai 2020 (étendu) |
-| Azure Government    |  13 mars 2020    | 11 mai 2020            |
-| Azure Germany       |  13 mars 2020    | 11 mai 2020            |
-| Azure Chine         |  13 mars 2020    | 11 mai 2020            |
+| Cloud                | Date de début de la phase 1 | Date de début de la phase 2         |
+|----------------------|--------------------|----------------------------|
+| Azure (global)       |  13 janvier 2020  | Différée en raison de la COVID 19  |
+| Azure Government     |  13 mars 2020    | Différée en raison de la COVID 19  |
+| Azure Germany        |  13 mars 2020    | Différée en raison de la COVID 19  |
+| Azure China 21Vianet |  13 mars 2020    | Différée en raison de la COVID 19  |
+
+> [!NOTE]
+> Il est prévu que la phase 2 commence au plus tôt le 31 décembre 2020. Cet article sera mis à jour lorsque des dates spécifiques seront définies.
+>
 
 ## <a name="check-whether-your-application-is-already-compliant"></a>Vérifier si votre application est déjà conforme
 
-Le moyen le plus simple de déterminer si votre application fonctionne avec TLS 1.2 est de définir la valeur de **Version TLS minimale** sur TLS 1.2 sur un cache de test ou intermédiaire qu’elle utilise. Le paramètre **Version TLS minimale** se trouve dans les [Paramètres avancés](cache-configure.md#advanced-settings) de votre instance de cache dans le portail Azure. Si l’application continue à fonctionner comme prévu après cette modification, elle est probablement conforme. Vous devrez peut-être configurer certaines bibliothèques clientes Redis utilisées par votre application pour activer TLS 1.2, afin qu’elles puissent se connecter à Azure Cache pour Redis avec ce protocole de sécurité.
+Le moyen le plus simple de déterminer si votre application peut fonctionner avec le protocole TLS 1.2 consiste à définir la valeur de **Version TLS minimale** sur TLS 1.2 sur un cache de test ou intermédiaire, puis d’effectuer des tests. Le paramètre **Version TLS minimale** se trouve dans les [Paramètres avancés](cache-configure.md#advanced-settings) de votre instance de cache dans le portail Azure.  Si l’application continue à fonctionner comme prévu après cette modification, elle est probablement conforme. Il se peut que vous deviez configurer la bibliothèque cliente Redis que votre application utilise pour activer le protocole TLS 1.2 afin de vous connecter à Azure Cache pour Redis.
 
 ## <a name="configure-your-application-to-use-tls-12"></a>Configurer votre application pour utiliser TLS 1.2
 
@@ -55,7 +63,12 @@ Les clients .NET Redis utilisent la version TLS la plus ancienne par défaut sur
 
 ### <a name="net-core"></a>.NET Core
 
-Les clients .NET Core Redis utilisent la dernière version de TLS par défaut.
+Les clients .NET Core Redis utilisent par défaut la version TLS du système d’exploitation, qui dépend évidemment du système d’exploitation lui-même. 
+
+En fonction de la version du système d’exploitation et des correctifs qui ont été appliqués, la version par défaut effective du protocole TLS peut varier. Bien qu’il y ait une source d’informations à ce sujet, [voici](/dotnet/framework/network-programming/tls#support-for-tls-12) un article pour Windows. 
+
+Toutefois, si vous utilisez un ancien système d’exploitation ou souhaitez simplement être rassuré, nous vous recommandons de configurer manuellement la version du protocole TLS de votre choix via le client.
+
 
 ### <a name="java"></a>Java
 

@@ -1,7 +1,7 @@
 ---
 title: 'Démarrage rapide : Diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle - Azure CLI'
 titleSuffix: Azure Network Watcher
-description: Dans ce guide de démarrage rapide, vous allez apprendre à diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle à l’aide de la fonctionnalité de vérification de flux IP d’Azure Network Watcher.
+description: Découvrez comment utiliser Azure CLI pour diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle à l’aide de la fonctionnalité de vérification de flux IP d’Azure Network Watcher.
 services: network-watcher
 documentationcenter: network-watcher
 author: KumudD
@@ -17,23 +17,25 @@ ms.tgt_pltfrm: network-watcher
 ms.workload: infrastructure
 ms.date: 04/20/2018
 ms.author: kumud
-ms.custom: mvc
-ms.openlocfilehash: b3919a016613da2470c14995663acc9c5415e483
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: bd99fe0ea8a92ad05ad258dcf4d8da6e4685f263
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382849"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96492520"
 ---
 # <a name="quickstart-diagnose-a-virtual-machine-network-traffic-filter-problem---azure-cli"></a>Démarrage rapide : Diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle - Azure CLI
 
 Dans ce guide de démarrage rapide, vous déployez une machine virtuelle, puis vous vérifiez les communications vers une adresse IP et une URL et à partir d’une adresse IP. Vous déterminez la cause d’un échec de communication et la façon de le résoudre.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser Azure CLI localement, vous devez exécuter Azure CLI version 2.0.28 ou ultérieure pour ce guide de démarrage rapide. Pour trouver la version installée, exécutez `az --version`. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). Après avoir vérifié la version d’Azure CLI, exécutez `az login` pour créer une connexion à Azure. Les commandes Azure CLI dans ce guide de démarrage rapide sont mises en forme de manière à s’exécuter dans un interpréteur de commandes Bash.
+- Ce guide de démarrage rapide nécessite la version 2.0 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
+
+- Les commandes Azure CLI dans ce guide de démarrage rapide sont mises en forme de manière à s’exécuter dans un interpréteur de commandes Bash.
 
 ## <a name="create-a-vm"></a>Créer une machine virtuelle
 
@@ -134,7 +136,7 @@ az network nic list-effective-nsg \
 
 La sortie renvoyée contient le texte suivant pour la règle **AllowInternetOutbound** qui a autorisé un accès sortant vers www.bing.com à l’étape [Utiliser la vérification des flux IP](#use-ip-flow-verify) :
 
-```
+```console
 {
  "access": "Allow",
  "additionalProperties": {},
@@ -175,7 +177,7 @@ Dans la sortie précédente, vous pouvez voir que **destinationAddressPrefix** a
 
 Lorsque vous avez exécuté la commande `az network watcher test-ip-flow` pour tester la communication sortante vers l’adresse 172.131.0.100 dans [Utiliser la vérification des flux IP](#use-ip-flow-verify), la sortie vous a informé que la règle **DefaultOutboundDenyAll** a refusé la communication. La règle **DefaultOutboundDenyAll** équivaut à la règle **DenyAllOutBound** répertoriée dans la sortie suivante de la commande `az network nic list-effective-nsg` :
 
-```
+```console
 {
  "access": "Deny",
  "additionalProperties": {},
@@ -208,7 +210,7 @@ La règle répertorie **0.0.0.0/0** comme **destinationAddressPrefix**. La règl
 
 Lorsque vous avez exécuté la commande `az network watcher test-ip-flow` à l’étape [Utiliser la vérification des flux IP](#use-ip-flow-verify) pour tester la communication entrante à partir l’adresse 172.131.0.100, la sortie vous a informé que la règle **DefaultInboundDenyAll** a refusé la communication. La règle **DefaultInboundDenyAll** équivaut à la règle **DenyAllInBound** répertoriée dans la sortie suivante de la commande `az network nic list-effective-nsg` :
 
-```
+```console
 {
  "access": "Deny",
  "additionalProperties": {},
@@ -251,6 +253,6 @@ az group delete --name myResourceGroup --yes
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez créé une machine virtuelle et diagnostiqué des filtres de trafic réseau entrant et sortant. Vous avez appris que les règles de groupe de sécurité réseau autorisent ou refusent le trafic à destination et en provenance d’une machine virtuelle. En savoir plus sur les [règles de sécurité](../virtual-network/security-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) et la [création des règles de sécurité](../virtual-network/manage-network-security-group.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#create-a-security-rule).
+Dans ce guide de démarrage rapide, vous avez créé une machine virtuelle et diagnostiqué des filtres de trafic réseau entrant et sortant. Vous avez appris que les règles de groupe de sécurité réseau autorisent ou refusent le trafic à destination et en provenance d’une machine virtuelle. En savoir plus sur les [règles de sécurité](../virtual-network/network-security-groups-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) et la [création des règles de sécurité](../virtual-network/manage-network-security-group.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#create-a-security-rule).
 
 Même avec des filtres de trafic réseau adaptés, les communications vers une machine virtuelle peuvent échouer en raison d’une configuration de routage. Pour savoir comment diagnostiquer les problèmes de routage réseau d’une machine virtuelle, consultez [Diagnostiquer des problèmes de routage sur une machine virtuelle](diagnose-vm-network-routing-problem-cli.md) ou, pour diagnostiquer les problèmes liés au routage sortant, à la latence et au filtrage de trafic, avec un outil, consultez [Résoudre les problèmes de connexion](network-watcher-connectivity-cli.md).

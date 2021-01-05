@@ -6,16 +6,17 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 02/10/2020
+ms.date: 09/24/2020
 ms.author: tamram
 ms.reviewer: artek
 ms.subservice: common
-ms.openlocfilehash: 5c37dbdc34138faab8adae6ad18252c18a75cad4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: 228595bf633ef0545a13abe19308e49da82cf75a
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80337077"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844010"
 ---
 # <a name="change-how-a-storage-account-is-replicated"></a>Modifier la manière dont un compte de stockage est répliqué
 
@@ -26,7 +27,7 @@ Stockage Azure propose les types de réplication suivants :
 - Stockage localement redondant (LRS)
 - Stockage redondant interzone (ZRS)
 - Stockage géoredondant (GRS) ou stockage géographiquement redondant avec accès en lecture (RA-GRS)
-- Stockage géoredondant interzone (GZRS) ou stockage géoredondant interzone avec accès en lecture (RA-GZRS) [préversion]
+- Stockage géoredondant interzone (GZRS) ou stockage géoredondant interzone avec accès en lecture (RA-GZRS)
 
 Pour obtenir une vue d’ensemble de chacune de ces options, consultez la rubrique [Redondance de Stockage Azure](storage-redundancy.md).
 
@@ -38,19 +39,20 @@ Le tableau suivant fournit une vue d’ensemble de la façon de passer de chaque
 
 | Basculement | … vers LRS | … vers GRS/RA-GRS | … vers ZRS | … vers GZRS/RA-GZRS |
 |--------------------|----------------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------|
-| <b>… depuis LRS</b> | N/A | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication<sup>1</sup> | Effectuer une migration manuelle <br /><br />Demander une migration dynamique | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Basculer d’abord sur GRS/RA-GRS, puis demander une migration dynamique<sup>1</sup> |
-| <b>… depuis GRS/RA-GRS</b> | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication | N/A | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Basculer d’abord sur LRS, puis demander une migration dynamique | Effectuer une migration manuelle <br /><br /> Demander une migration dynamique |
-| <b>… depuis ZRS</b> | Effectuer une migration manuelle | Effectuer une migration manuelle | N/A | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication<sup>1</sup> |
+| <b>… depuis LRS</b> | N/A | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication<sup>1</sup> | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Demander une migration dynamique | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Basculer d’abord sur GRS/RA-GRS, puis demander une migration dynamique<sup>1</sup> |
+| <b>… depuis GRS/RA-GRS</b> | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication | N/A | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Basculer d’abord sur LRS, puis demander une migration dynamique | Effectuer une migration manuelle <br /><br /> OR <br /><br /> Demander une migration dynamique |
+| <b>… depuis ZRS</b> | Effectuer une migration manuelle | Effectuer une migration manuelle | N/A | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication<sup>1,2</sup> |
 | <b>… depuis GZRS/RA-GZRS</b> | Effectuer une migration manuelle | Effectuer une migration manuelle | Utiliser le Portail Azure, PowerShell ou l’interface CLI pour modifier le paramètre de réplication | N/A |
 
-<sup>1</sup> Implique des frais de sortie ponctuels.
+<sup>1</sup> Implique des frais de sortie ponctuels.<br />
+<sup>2</sup> La conversion de ZRS en GZRS/RA-GZRS ou inversement n’est pas prise en charge dans les régions suivantes : USA Est 2, USA Est, Europe Ouest.
 
 > [!CAUTION]
-> Si vous avez opéré un [basculement de compte](https://docs.microsoft.com/azure/storage/common/storage-disaster-recovery-guidance) pour votre compte (RA-)GRS ou (RA-)GZRS, il est configuré pour être localement redondant dans la nouvelle région primaire. La migration en direct vers ZRS ou GZRS pour de tels comptes LRS n’est pas prise en charge. Vous devrez opérer une [migration manuelle](https://docs.microsoft.com/azure/storage/common/redundancy-migration#perform-a-manual-migration-to-zrs).
+> Si vous avez opéré un [basculement de compte](storage-disaster-recovery-guidance.md) pour votre compte (RA-)GRS ou (RA-)GZRS, le compte est localement redondant dans la nouvelle région primaire après le basculement. La migration en direct vers ZRS ou GZRS pour un compte LRS résultant d’un basculement n’est pas prise en charge. Cela est vrai même dans le cas d’opérations de restauration automatique. Par exemple, si vous effectuez un basculement de compte de RA-GZRS vers LRS dans la région secondaire, puis que vous le configurez de nouveau sur RA-GRS et effectuez un autre basculement de compte vers la région principale d’origine, vous ne pouvez pas contacter le support pour la migration dynamique d’origine vers RA-GZRS dans la région primaire. Vous devrez opérer une migration manuelle vers ZRS ou GZRS.
 
 ## <a name="change-the-replication-setting"></a>Modifier le paramètre de réplication
 
-Vous pouvez utiliser le Portail Azure, PowerShell ou Azure CLI pour modifier le paramètre de réplication d’un compte de stockage, tant que vous ne modifiez pas la manière dont les données sont répliquées dans la région primaire. Si vous effectuez une migration depuis LRS dans la région primaire vers ZRS dans la région primaire, ou vice versa, vous devez effectuer une [migration manuelle](#perform-a-manual-migration-to-zrs) ou une [migration dynamique](#request-a-live-migration-to-zrs).
+Vous pouvez utiliser le Portail Azure, PowerShell ou Azure CLI pour modifier le paramètre de réplication d’un compte de stockage, tant que vous ne modifiez pas la manière dont les données sont répliquées dans la région primaire. Si vous effectuez une migration depuis LRS dans la région primaire vers ZRS dans la région primaire, ou vice versa, vous devez effectuer une migration manuelle ou une migration dynamique.
 
 La modification du mode de réplication de votre compte de stockage n’entraîne pas de temps d’indisponibilité pour vos applications.
 
@@ -87,7 +89,7 @@ az storage account update \
 
 ---
 
-## <a name="perform-a-manual-migration-to-zrs"></a>Effectuer une migration manuelle vers ZRS
+## <a name="perform-a-manual-migration-to-zrs-gzrs-or-ra-gzrs"></a>Effectuer une migration manuelle vers ZRS, GZRS ou RA-GZRS
 
 Si vous souhaitez modifier la façon dont les données de votre compte de stockage sont répliquées dans la région primaire, en passant de LRS à ZRS ou vice versa, vous pouvez choisir d’effectuer une migration manuelle. Une migration manuelle offre plus de souplesse qu’une migration dynamique. Vous contrôlez le moment choisi pour une migration manuelle. Par conséquent, utilisez cette option si vous avez besoin que la migration se termine avant une certaine date.
 
@@ -100,9 +102,11 @@ Avec une migration manuelle, vous copiez les données de votre compte de stockag
 - Copiez les données en utilisant un outil existant tel qu’AzCopy, une des bibliothèques clientes de Stockage Azure, ou un outil tiers fiable.
 - Si vous êtes familiarisé avec Hadoop ou HDInsight, vous pouvez attacher les comptes de stockage source et de destination à votre cluster. Ensuite, vous parallélisez le processus de copie de données avec un outil tel que DistCp.
 
-## <a name="request-a-live-migration-to-zrs"></a>Demander une migration dynamique vers ZRS
+## <a name="request-a-live-migration-to-zrs-gzrs-or-ra-gzrs"></a>Demander une migration dynamique vers ZRS, GZRS ou RA-GZRS
 
-Si vous devez migrer votre compte de stockage de LRS ou GRS vers ZRS dans la région primaire sans interruption de service pour les applications, vous pouvez demander une migration dynamique à Microsoft. Pendant une migration dynamique, vous pouvez accéder aux données de votre compte de stockage sans aucune perte de durabilité ni de disponibilité. Le SLA Stockage Azure est conservé pendant le processus de migration. La migration dynamique n’occasionne aucune perte de données. Les points de terminaison de service, les clés d’accès, les signatures d’accès partagé et les autres options de compte restent inchangés après la migration.
+Si vous devez migrer votre compte de stockage de LRS vers ZRS dans la région primaire sans interruption de service pour les applications, vous pouvez demander une migration dynamique à Microsoft. Pour migrer de LRS vers GZRS ou RA-GZRS, commencez par passer à GRS ou RA-GRS, puis demandez une migration dynamique. De même, vous pouvez demander une migration dynamique de GRS ou RA-GRS vers GZRS ou RA-GZRS. Pour migrer de GRS ou RA-GRS vers ZRS , commencez par passer à LRS, puis demandez une migration dynamique.
+
+Pendant une migration dynamique, vous pouvez accéder aux données de votre compte de stockage sans aucune perte de durabilité ni de disponibilité. Le SLA Stockage Azure est conservé pendant le processus de migration. La migration dynamique n’occasionne aucune perte de données. Les points de terminaison de service, les clés d’accès, les signatures d’accès partagé et les autres options de compte restent inchangés après la migration.
 
 ZRS prend uniquement en charge les comptes v2 universels. Veillez donc à mettre à niveau votre compte de stockage avant de soumettre une demande de migration dynamique vers ZRS. Pour obtenir plus d’informations, consultez [Mettre à niveau vers un compte de stockage v2 à usage général](storage-account-upgrade.md). Un compte de stockage doit contenir les données à migrer à l’aide de la migration dynamique.
 
@@ -120,7 +124,10 @@ Vous devez effectuer une migration manuelle si :
 Vous pouvez demander une migration dynamique via le [portail du Support Azure](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview). À partir du portail, sélectionnez le compte de stockage que vous souhaitez convertir en ZRS.
 
 1. Sélectionnez **Nouvelle demande de support**.
-2. Fournissez les informations **De base** de votre compte. Dans la section **Service**, sélectionnez **Gestion de compte de stockage**, puis la ressource que vous souhaitez convertir en ZRS.
+2. Fournissez les informations **De base** de votre compte : 
+    - **Type de problème** : Sélectionnez **Technique**.
+    - **Service** : Sélectionnez **Mes services** et **Gestion des comptes de stockage**.
+    - **Ressource** : Sélectionnez la ressource à convertir en ZRS.
 3. Sélectionnez **Suivant**.
 4. Dans la section **Problème**, spécifiez les valeurs suivantes :
     - **Gravité** : conservez la valeur par défaut.
@@ -135,11 +142,11 @@ Vous pouvez demander une migration dynamique via le [portail du Support Azure](h
 Une personne du support technique vous contactera pour vous apporter l’aide dont vous aurez besoin.
 
 > [!NOTE]
-> La migration dynamique n’est actuellement pas prise en charge pour les partages de fichiers Premium. Seuls la copie ou le déplacement manuels des données sont actuellement pris en charge.
+> Les partages de fichiers Premium (comptes FileStorage) sont disponibles uniquement pour LRS et ZRS.
 >
-> Les comptes de stockage GZRS ne prennent pas en charge le niveau archive pour le moment. Pour plus d’informations, consultez [Stockage Blob Azure : niveaux d’accès chaud, froid et archive](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers).
+> Les comptes de stockage GZRS ne prennent pas en charge le niveau archive pour le moment. Pour plus d’informations, consultez [Stockage Blob Azure : niveaux d’accès chaud, froid et archive](../blobs/storage-blob-storage-tiers.md).
 >
-> Les disques managés sont disponibles uniquement pour LRS, et ne peuvent pas être migrés vers un stockage redondant interzone (ZRS). Vous pouvez stocker des images et des instantanés de disques managés SSD Standard sur le stockage HDD Standard et [choisir entre les options LRS et ZRS](https://azure.microsoft.com/pricing/details/managed-disks/). Pour plus d’informations sur l’intégration avec des groupes à haute disponibilité, consultez [Introduction aux disques managés Azure](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview#integration-with-availability-sets).
+> Les disques managés sont disponibles uniquement pour LRS, et ne peuvent pas être migrés vers un stockage redondant interzone (ZRS). Vous pouvez stocker des images et des instantanés de disques managés SSD Standard sur le stockage HDD Standard et [choisir entre les options LRS et ZRS](https://azure.microsoft.com/pricing/details/managed-disks/). Pour plus d’informations sur l’intégration avec des groupes à haute disponibilité, consultez [Introduction aux disques managés Azure](../../virtual-machines/managed-disks-overview.md#integration-with-availability-sets).
 
 ## <a name="switch-from-zrs-classic"></a>Basculer vers ZRS classique
 
@@ -195,4 +202,4 @@ Si vous migrez votre compte de stockage géoredondant en compte de stockage loca
 
 - [Redondance de Stockage Azure](storage-redundancy.md)
 - [Vérifier la propriété Heure de la dernière synchronisation pour un compte de stockage](last-sync-time-get.md)
-- [Conception d’applications à haute disponibilité à l’aide du stockage géographiquement redondant avec accès en lecture](storage-designing-ha-apps-with-ragrs.md)
+- [Utilisez la géo-redondance pour concevoir des applications hautement disponibles](geo-redundant-design.md)

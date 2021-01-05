@@ -8,12 +8,12 @@ ms.service: postgresql
 ms.topic: article
 ms.date: 05/10/2017
 ms.author: sewatson
-ms.openlocfilehash: 6282acaf165d2f31a1a1ac525dad75ebc64a2a7c
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 271bcd188f5152bfdac3eb7895827afca2859fe4
+ms.sourcegitcommit: 2ffa5bae1545c660d6f3b62f31c4efa69c1e957f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "62113950"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88076844"
 ---
 # <a name="azure-database-for-postgresql-documentation"></a>Base de données Azure pour obtenir une Documentation PostgreSQL
 
@@ -30,8 +30,8 @@ Découvrez comment créer une base de données PostgreSQL grâce à :
 
 Découvrez comment :
 
-- Concevoir une base de données : [Portail Azure](/azure/postgresql/tutorial-design-database-using-azure-portal) |  [Azure CLI](/azure/postgresql/tutorial-design-database-using-azure-cli)
-- [Créer une application web à l’aide de Python et de l’interface CLI](/azure/app-service/containers/tutorial-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json)
+- Concevoir une base de données : [Portail Azure](/azure/postgresql/tutorial-design-database-using-azure-portal) |  [Azure CLI](/azure/postgresql/tutorial-design-database-using-azure-cli)
+- [Créer une application web avec Python et l’interface CLI](/azure/app-service/tutorial-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json)
 
 ## <a name="samples"></a>Exemples 
 

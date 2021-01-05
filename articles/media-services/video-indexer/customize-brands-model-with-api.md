@@ -9,13 +9,13 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
 ms.date: 01/14/2020
-ms.author: anzaman
-ms.openlocfilehash: 79c3a7934e9152a4908f895c20ee6fbdc0f360cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kumud
+ms.openlocfilehash: 5fc565ecc1b501f52e934784695594dcfef2a83a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80127988"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020464"
 ---
 # <a name="customize-a-brands-model-with-the-video-indexer-api"></a>Personnaliser un modèle de marques avec l’API Video Indexer
 

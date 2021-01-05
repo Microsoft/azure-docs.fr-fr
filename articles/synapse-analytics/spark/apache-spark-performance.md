@@ -1,24 +1,24 @@
 ---
-title: Optimiser les travaux Spark pour les performances dans Azure Synapse Analytics
-description: Cet article présente Apache Spark dans Azure Synapse Analytics et les différents concepts.
+title: Optimiser les performances des travaux Spark
+description: Cet article présente Apache Spark dans Azure Synapse Analytics.
 services: synapse-analytics
 author: euangMS
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: spark
 ms.date: 04/15/2020
 ms.author: euang
 ms.reviewer: euang
-ms.openlocfilehash: 6ffe7f3d9faf82c892975e9ffa03b383d3610c36
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: b94ece73d5f9dc9b8343e45fb1f616599b9a1c1f
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81420893"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96450930"
 ---
-# <a name="optimize-apache-spark-jobs-preview-in-azure-synapse-analytics"></a>Optimiser les travaux Apache Spark (préversion) dans Azure Synapse Analytics
+# <a name="optimize-apache-spark-jobs-in-azure-synapse-analytics"></a>Optimiser les travaux Apache Spark dans Azure Synapse Analytics
 
-Découvrez comment optimiser la configuration de cluster [Apache Spark](https://spark.apache.org/) pour votre charge de travail.  La principale difficulté est une sollicitation trop importante de la mémoire, causée par une configuration incorrecte (en particulier, par des exécuteurs de taille non adaptée), des opérations longues et des tâches qui entraînent des opérations cartésiennes. Vous pouvez accélérer les travaux avec une mise en cache appropriée et en autorisant [l’asymétrie des données](#optimize-joins-and-shuffles). Pour des performances optimales, surveillez les exécutions de travaux Spark de longue durée et consommatrices de ressources.
+Découvrez comment optimiser une configuration de cluster [Apache Spark](https://spark.apache.org/) pour votre charge de travail.  La principale difficulté est une sollicitation trop importante de la mémoire, causée par une configuration incorrecte (en particulier, par des exécuteurs de taille non adaptée), des opérations longues et des tâches qui entraînent des opérations cartésiennes. Vous pouvez accélérer les travaux avec une mise en cache appropriée et en autorisant [l’asymétrie des données](#optimize-joins-and-shuffles). Pour des performances optimales, surveillez les exécutions de travaux Spark de longue durée et consommatrices de ressources.
 
 Les sections suivantes décrivent des recommandations et des optimisations courantes de travaux Spark.
 
@@ -52,7 +52,7 @@ Les versions antérieures de Spark utilisent des RDD pour abstraire des données
 
 Spark prend en charge de nombreux formats, tels que csv, json, xml, parquet, orc et avro. Spark peut être étendu pour prendre en charge de nombreux autres formats avec des sources de données externes. Pour plus d’informations, consultez [Packages Apache Spark](https://spark-packages.org).
 
-Le meilleur format du point de vue des performances est parquet avec *compression Snappy*, qui est l’option par défaut dans Spark 2.x. Parquet stocke les données sous forme de colonnes et il est fortement optimisé dans Spark. De plus, bien que la *compression Snappy* puisse générer des fichiers plus volumineux que la compression gzip (par exemple), en raison de la nature divisible de ces fichiers, ils seront décompressés plus rapidement.
+Le meilleur format du point de vue des performances est parquet avec *compression Snappy*, qui est l’option par défaut dans Spark 2.x. Parquet stocke les données sous forme de colonnes et il est fortement optimisé dans Spark. De plus, si *compression Snappy* peut générer des fichiers plus volumineux que la compression gzip (par exemple), du fait de la nature divisible de ces fichiers, ils seront décompressés plus rapidement.
 
 ## <a name="use-the-cache"></a>Utiliser le cache
 
@@ -77,7 +77,7 @@ Apache Spark dans Azure Synapse utilise YARN ([Apache Hadoop YARN](https://hadoo
 Pour éviter les messages « Mémoire insuffisante », essayez les solutions suivantes :
 
 * Passez en revue les lectures aléatoires de gestion DAG. Réduisez par la réduction côté mappage, prépartitionnez (ou compartimentez) les données sources, optimisez les lectures aléatoires uniques, et réduisez la quantité de données envoyées.
-* Privilégiez `ReduceByKey` (avec sa limite de mémoire fixe) à `GroupByKey`, qui fournit des agrégations, le fenêtrage et d’autres fonctions, mais qui n’a pas de limite de mémoire.
+* Privilégiez `ReduceByKey` avec sa limite de mémoire fixe à `GroupByKey`, qui fournit des agrégations, le fenêtrage et d’autres fonctions, mais qui n’a pas de limite de mémoire.
 * Privilégiez `TreeReduce`, qui effectue plus de travail sur les partitions ou les exécuteurs, à `Reduce`, qui effectue tout le travail sur le pilote.
 * Tirez parti des DataFrames plutôt que des objets RDD de niveau inférieur.
 * Créez des ComplexTypes qui encapsulent des actions, telles que « N premiers », différentes agrégations ou opérations de fenêtrage.
@@ -178,6 +178,6 @@ MAX(AMOUNT) -> MAX(cast(AMOUNT as DOUBLE))
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Optimisation d’Apache Spark](https://spark.apache.org/docs/latest/tuning.html)
+- [Optimisation d’Apache Spark](https://spark.apache.org/docs/2.4.5/tuning.html)
 - [Guide pratique pour paramétrer vos travaux Apache Spark afin qu’ils fonctionnent](https://www.slideshare.net/ilganeli/how-to-actually-tune-your-spark-jobs-so-they-work)
 - [Sérialisation Kryo](https://github.com/EsotericSoftware/kryo)

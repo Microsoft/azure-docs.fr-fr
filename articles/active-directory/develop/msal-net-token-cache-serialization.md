@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 09/16/2019
 ms.author: jmprieur
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 1aa7de4290d0050b9d6b1c8b048f9e5a2836790f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 4a0d5af8faafac8b733bd2daa9655e663da6fe71
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82128001"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91873521"
 ---
 # <a name="token-cache-serialization-in-msalnet"></a>Sérialisation du cache de jetons dans MSAL.NET
 Une fois qu’un [jeton est acquis](msal-acquire-cache-tokens.md), il est mis en cache par Microsoft Authentication Library (MSAL).  Le code de l’application doit d’abord essayer d’obtenir un jeton à partir du cache, avant de l’acquérir par une autre méthode.  Cet article décrit la sérialisation par défaut et personnalisée du cache de jetons dans MSAL.NET.
@@ -51,7 +51,7 @@ Les classes et interfaces suivantes sont utilisées dans la sérialisation du ca
 
 Les stratégies diffèrent selon que vous écrivez une sérialisation du cache de jetons pour une [application cliente publique](msal-client-applications.md) (bureau) ou une [application cliente confidentielle](msal-client-applications.md) (application/API web, application de démon).
 
-### <a name="token-cache-for-a-public-client"></a>Cache de jetons pour un client public 
+### <a name="token-cache-for-a-public-client"></a>Cache de jetons pour un client public
 
 Depuis MSAL.NET v2.x, vous avez plusieurs possibilités pour sérialiser le cache de jetons d’un client public. Vous pouvez sérialiser le cache uniquement au format MSAL.NET (le cache au format unifié est commun à MSAL et aux plateformes).  Vous pouvez également prendre en charge la sérialisation du cache de jetons [héritée](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/wiki/Token-cache-serialization) d’ADAL V3.
 
@@ -86,7 +86,7 @@ static class TokenCacheHelper
   /// <summary>
   /// Path to the token cache. Note that this could be something different for instance for MSIX applications:
   /// private static readonly string CacheFilePath =
-$"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\{AppName}\msalcache.bin";
+  /// $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\{AppName}\msalcache.bin";
   /// </summary>
   public static readonly string CacheFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location + ".msalcache.bin3";
 
@@ -124,7 +124,7 @@ $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\{A
  }
 ```
 
-Une préversion de sérialiseur basé sur un fichier de cache de jetons de qualité de produit pour des applications clientes publiques (applications de bureau s’exécutant sur Windows, Mac et Linux) est disponible à partir de la bibliothèque open source [Microsoft.Identity.Client.Extensions.Msal](https://github.com/AzureAD/microsoft-authentication-extensions-for-dotnet/tree/master/src/Microsoft.Identity.Client.Extensions.Msal). Vous pouvez l’inclure dans vos applications à partir du package nuget suivant : [Microsoft.Identity.Client.Extensions.Msal](https://www.nuget.org/packages/Microsoft.Identity.Client.Extensions.Msal/).
+Un sérialiseur basé sur un fichier de cache de jeton de qualité produit, pour des applications clientes publiques et des applications de bureau s’exécutant sur Windows, Mac et Linux, est disponible depuis la bibliothèque open source [Microsoft.Identity.Client.Extensions.Msal](https://github.com/AzureAD/microsoft-authentication-extensions-for-dotnet/tree/master/src/Microsoft.Identity.Client.Extensions.Msal). Vous pouvez l’inclure dans vos applications à partir du package NuGet suivant : [Microsoft.Identity.Client.Extensions.Msal](https://www.nuget.org/packages/Microsoft.Identity.Client.Extensions.Msal/).
 
 #### <a name="dual-token-cache-serialization-msal-unified-cache-and-adal-v3"></a>Sérialisation d’un cache de jetons double (cache unifié MSAL et ADAL v3)
 
@@ -271,16 +271,67 @@ namespace CommonCacheMsalV3
 
 ### <a name="token-cache-for-a-web-app-confidential-client-application"></a>Cache de jetons pour une application web (application cliente confidentielle)
 
-Dans les applications ou API web, le cache peut exploiter la session, un cache Redis ou une base de données.
+Dans les applications ou API web, le cache peut exploiter la session, un cache Redis ou une base de données. Conservez un cache de jeton par compte dans les applications web et les API web. 
 
-Dans les applications web et les API web, conservez un cache de jeton par compte.  Pour les applications web, le cache de jeton doit être indexé par ID de compte.  Pour les API web, le compte doit être indexé avec le hachage du jeton utilisé pour appeler l’API. MSAL.NET fournit la sérialisation personnalisée du cache de jeton dans les sous-plateformes .NET Framework et .NET Core. Les événements sont déclenchés lors de l’accès au cache, les applications peuvent choisir de sérialiser ou de désérialiser le cache. Sur les applications clientes confidentielles qui gèrent les utilisateurs (applications web connectant les utilisateurs et appellent des API web, et API web appelant des API Web en aval), il peut y avoir de nombreux utilisateurs et ceux-ci utilisateurs sont traités en parallèle. Pour des raisons de sécurité et de performances, nous vous recommandons de sérialiser un cache par utilisateur. Les événements de sérialisation calculent une clé de cache en fonction de l’identité de l’utilisateur traité et sérialisent/désérialisent un cache de jeton pour cet utilisateur.
+Pour les applications web, le cache de jeton doit être indexé par ID de compte.
 
-Des exemples d’utilisation de caches de jetons pour des applications et API web sont disponibles dans le [tutoriel sur les applications web ASP.NET Core](https://docs.microsoft.com/aspnet/core/tutorials/first-mvc-app/) à l’étape [2-2 Cache de jetons](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-2-TokenCache). Pour obtenir des implémentations, examinez le dossier [TokenCacheProviders](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/Microsoft.Identity.Web/TokenCacheProviders) dans la bibliothèque [microsoft-authentification-extensions-for-dotnet](https://github.com/AzureAD/microsoft-authentication-extensions-for-dotnet) dans le dossier [ Microsoft.Identity.Client.Extensions.Web](https://github.com/AzureAD/microsoft-authentication-extensions-for-dotnet/tree/master/src/Microsoft.Identity.Client.Extensions.Web). 
+Pour les API web, le compte doit être indexé avec le hachage du jeton utilisé pour appeler l’API.
+
+MSAL.NET fournit la sérialisation personnalisée du cache de jeton dans les sous-plateformes .NET Framework et .NET Core. Les événements sont déclenchés lors de l’accès au cache, les applications peuvent choisir de sérialiser ou de désérialiser le cache. Sur les applications clientes confidentielles qui gèrent les utilisateurs (applications web connectant les utilisateurs et appellent des API web, et API web appelant des API Web en aval), il peut y avoir de nombreux utilisateurs et ceux-ci utilisateurs sont traités en parallèle. Pour des raisons de sécurité et de performances, nous vous recommandons de sérialiser un cache par utilisateur. Les événements de sérialisation calculent une clé de cache en fonction de l’identité de l’utilisateur traité et sérialisent/désérialisent un cache de jeton pour cet utilisateur.
+
+La bibliothèque [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) fournit un package NuGet en préversion [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web) contenant la sérialisation du cache de jetons :
+
+| Méthode d’extension | Espace de noms secondaire Microsoft.Identity.Web | Description  |
+| ---------------- | --------- | ------------ |
+| `AddInMemoryTokenCaches` | `TokenCacheProviders.InMemory` | Sérialisation de cache de jeton en mémoire. Cette implémentation est idéale pour les tests. Elle est également adaptée aux applications de production, mais sachez que le cache de jeton est perdu lorsque l’application web est redémarrée. `AddInMemoryTokenCaches` prend un paramètre facultatif de type `MsalMemoryTokenCacheOptions` qui vous permet de spécifier la durée après laquelle l’entrée de cache expire, sauf si elle est utilisée.
+| `AddSessionTokenCaches` | `TokenCacheProviders.Session` | Le cache de jeton est lié à la session utilisateur. Cette option n’est pas idéale si le jeton d’ID contient de nombreuses revendications dans la mesure où le cookie devient trop volumineux.
+| `AddDistributedTokenCaches` | `TokenCacheProviders.Distributed` | Le cache de jeton est un adaptateur par rapport à l’implémentation `IDistributedCache` ASP.NET Core, ce qui vous permet donc de choisir entre un cache de mémoire distribuée, un cache Redis, un cache Ncache distribué ou un cache SQL Server. Pour plus d’informations sur les implémentations `IDistributedCache`, consultez https://docs.microsoft.com/aspnet/core/performance/caching/distributed#distributed-memory-cache.
+
+Voici un exemple d’utilisation du cache en mémoire dans la méthode [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configureservices) de la classe [Start-up](/aspnet/core/fundamentals/startup) dans une application ASP.NET Core :
+
+```C#
+// or use a distributed Token Cache by adding
+    services.AddSignIn(Configuration);
+    services.AddWebAppCallsProtectedWebApi(Configuration, new string[] { scopesToRequest })
+            .AddInMemoryTokenCaches();
+```
+
+Exemples de caches distribués possibles :
+
+```C#
+// or use a distributed Token Cache by adding
+    services.AddSignIn(Configuration);
+    services.AddWebAppCallsProtectedWebApi(Configuration, new string[] { scopesToRequest })
+            .AddDistributedTokenCaches();
+
+// and then choose your implementation
+
+// For instance the distributed in memory cache (not cleared when you stop the app)
+services.AddDistributedMemoryCache()
+
+// Or a Redis cache
+services.AddStackExchangeRedisCache(options =>
+{
+ options.Configuration = "localhost";
+ options.InstanceName = "SampleInstance";
+});
+
+// Or even a SQL Server token cache
+services.AddDistributedSqlServerCache(options =>
+{
+ options.ConnectionString = _config["DistCache_ConnectionString"];
+ options.SchemaName = "dbo";
+ options.TableName = "TestCache";
+});
+```
+
+Leur utilisation est présentée dans le tutoriel [Application web ASP.NET Core](/aspnet/core/tutorials/first-mvc-app/) au cours de la phase [2-2 Cache de jeton](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-2-TokenCache).
 
 ## <a name="next-steps"></a>Étapes suivantes
+
 Les exemples suivants illustrent la sérialisation du cache de jetons.
 
 | Exemple | Plateforme | Description|
 | ------ | -------- | ----------- |
-|[active-directory-dotnet-desktop-msgraph-v2](https://github.com/azure-samples/active-directory-dotnet-desktop-msgraph-v2) | Bureau (WPF) | Application Windows Desktop .NET (WPF) appelant l’API Microsoft Graph. ![Topologie](media/msal-net-token-cache-serialization/topology.png)|
-|[active-directory-dotnet-v1-to-v2](https://github.com/Azure-Samples/active-directory-dotnet-v1-to-v2) | Bureau (Console) | Ensemble de solutions Visual Studio illustrant la migration d’applications Azure AD v1.0 (avec ADAL.NET) vers des applications Azure AD v2.0, également appelées applications convergentes (avec MSAL.NET), notamment [Migration de cache de jetons](https://github.com/Azure-Samples/active-directory-dotnet-v1-to-v2/blob/master/TokenCacheMigration/README.md).|
+|[active-directory-dotnet-desktop-msgraph-v2](https://github.com/azure-samples/active-directory-dotnet-desktop-msgraph-v2) | Bureau (WPF) | Application Windows Desktop .NET (WPF) appelant l’API Microsoft Graph. ![Le diagramme montre une topologie avec l’application de bureau WPF TodoListClient qui circule jusqu’à Azure AD en acquérant un jeton de manière interactive, puis jusqu’à Microsoft Graph.](media/msal-net-token-cache-serialization/topology.png)|
+|[active-directory-dotnet-v1-to-v2](https://github.com/Azure-Samples/active-directory-dotnet-v1-to-v2) | Bureau (Console) | Ensemble de solutions Visual Studio illustrant la migration d’applications Azure AD v1.0 (à l’aide d’ADAL.NET) vers des applications de plateforme d’identité Microsoft (à l’aide de MSAL.NET). En particulier, consultez [la migration du cache de jetons](https://github.com/Azure-Samples/active-directory-dotnet-v1-to-v2/blob/master/TokenCacheMigration/README.md)|

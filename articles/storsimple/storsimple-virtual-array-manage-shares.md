@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 0a799c83-fde5-4f3f-af0e-67535d1882b6
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-ms.openlocfilehash: 82a6cdb6c9a39a0d196049a7ba662681ea06b36a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 340b910319cabe3379bdb1bad1c09bc71c17f072
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "62116864"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994942"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-shares-on-the-storsimple-virtual-array"></a>Utiliser le service StorSimple Device Manager pour gérer des partages sur l’instance StorSimple Virtual Array
 

@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: 108389407221779ed20e81310f084b7b5c23b8c7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fb2adafab88eb1d3855cdec8268601fb4e15dcbb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76906028"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86257275"
 ---
 # <a name="sfctl-mesh-deployment"></a>sfctl mesh deployment
 Créer des ressources Service Fabric Mesh.
@@ -63,4 +63,4 @@ sfctl mesh deployment create --input-yaml-files ./resources --parameters "{ 'my_
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

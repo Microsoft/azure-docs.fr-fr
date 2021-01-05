@@ -7,12 +7,12 @@ ms.topic: quickstart
 ms.date: 10/18/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 0bf66baba1b665c92a11d7bda91dcaa3e355dd96
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: dea88bf93000422ce1d832be4a0f60474ff27938
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75431819"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94629782"
 ---
 # <a name="quickstart-create-and-manage-azure-file-shares-with-azure-storage-explorer"></a>Démarrage rapide : créer et gérer les partages de fichiers Azure avec l’Explorateur Stockage Azure
 Ce guide vous explique les bases de l’utilisation du [partage de fichiers Azure](storage-files-introduction.md) avec l’Explorateur Stockage Azure. Le partage de fichiers Azure est similaire à d’autres partages de fichiers, mais est stocké dans le cloud et s’appuie sur la plateforme Azure. Il prend en charge le protocole SMB de norme industrielle et permet le partage de fichiers entre plusieurs machines, applications et instances. 
@@ -49,7 +49,7 @@ Pour créer votre premier partage de fichiers Azure dans le compte de stockage `
 
 3. Pour le partage de fichiers, entrez *myshare*, puis appuyez sur Entrée.
 
-Le nom des partages ne peut contenir que des minuscules, des nombres et des traits d’union uniques (mais ne peut commencer par un trait d’union). Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](https://docs.microsoft.com/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
+Le nom des partages ne peut contenir que des minuscules, des nombres et des traits d’union uniques (mais ne peut commencer par un trait d’union). Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
 
 Lorsque le partage de fichiers est créé, un onglet pour votre partage de fichiers s’ouvre dans le volet droit. 
 

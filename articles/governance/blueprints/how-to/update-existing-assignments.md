@@ -1,14 +1,14 @@
 ---
 title: Mettre à jour une affectation à partir du portail
 description: Découvrez le mécanisme de mise à jour d’une attribution de blueprint existante dans Azure Blueprints à partir du portail Azure.
-ms.date: 04/15/2020
+ms.date: 08/27/2020
 ms.topic: how-to
-ms.openlocfilehash: a00a8bcc10b37af576777e3816a794225a3832f7
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: ddaac8110885d817bc96745965c1af7e522b1919
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81381788"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007186"
 ---
 # <a name="how-to-update-an-existing-blueprint-assignment"></a>Comment mettre à jour une affectation de blueprint existante
 
@@ -24,20 +24,19 @@ Quand un blueprint est affecté, l’affectation peut être mise à jour. Plusie
 
 1. Sélectionnez **Blueprints affectés** dans la page de gauche.
 
-1. Dans la liste des blueprints, cliquez sur l’affectation de blueprint. Cliquez ensuite sur le bouton **Mettre à jour l’affectation** OU cliquez avec le bouton droit sur l’affectation de blueprint, puis sélectionnez **Mettre à jour l’affectation**.
+1. Dans la liste des blueprints, sélectionnez l’affectation de blueprint. Utilisez ensuite sur le bouton **Mettre à jour l’affectation** OU cliquez avec le bouton droit sur l’affectation de blueprint, puis sélectionnez **Mettre à jour l’affectation**.
 
-   :::image type="content" source="../media/update-existing-assignments/update-assignment.png" alt-text="Mettre à jour une affectation de blueprint existante" border="false":::
+   :::image type="content" source="../media/update-existing-assignments/update-assignment.png" alt-text="Capture d’écran de la page d’affectation de blueprint avec le bouton « Mettre à jour l’affectation » mis en surbrillance." border="false":::
 
-1. La page **Affecter le blueprint** se charge préremplie avec toutes les valeurs de l’affectation d’origine.
-   Vous pouvez modifier la **version de définition du blueprint**, l’état **Verrouiller l’affectation**, ainsi que tous les paramètres dynamiques qui existent dans la définition du blueprint. Cliquez sur **Affecter** une fois que vous terminé les modifications.
+1. La page **Affecter le blueprint** se charge préremplie avec toutes les valeurs de l’attribution d’origine. Vous pouvez modifier la **version de définition du blueprint**, l’état **Verrouiller l’affectation**, ainsi que tous les paramètres dynamiques qui existent dans la définition du blueprint. Sélectionnez **Attribuer** une fois que vous terminé les modifications.
 
 1. Dans la page de détails de l’affectation mise à jour, examinez le nouvel état. Dans cet exemple, nous avons ajouté **Verrouillage** à l’affectation.
 
-   :::image type="content" source="../media/update-existing-assignments/updated-assignment.png" alt-text="Affectation de blueprint Mise à jour – Mode de verrouillage modifié" border="false":::
+   :::image type="content" source="../media/update-existing-assignments/updated-assignment.png" alt-text="Capture d’écran d’une affectation de blueprint mise à jour montrant le mode de verrouillage modifié." border="false":::
 
 1. Explorez les détails des autres **Opérations d’affectation** dans la liste déroulante. Le tableau **Ressources gérées** s’actualise en fonction de l’opération d’affectation sélectionnée.
 
-   :::image type="content" source="../media/update-existing-assignments/assignment-operations.png" alt-text="Opérations d’affectation d’une affectation de blueprint" border="false":::
+   :::image type="content" source="../media/update-existing-assignments/assignment-operations.png" alt-text="Capture d’écran d’une affectation de blueprint mise à jour montrant les opérations d’affectation et leur état." border="false":::
 
 ## <a name="rules-for-updating-assignments"></a>Règles de mise à jour des affectations
 
@@ -50,18 +49,18 @@ Le déploiement des affectations mises à jour obéit à quelques règles import
   - Si la définition de l’affectation de stratégie est modifiée, une autre affectation de stratégie est créée.
     Les affectations de stratégies déployées précédemment sont maintenues en place.
   - Si l’artefact d’affectation de stratégie est supprimé du blueprint, les affectations de stratégies déployées sont maintenues en place.
-- Modèles Microsoft Azure Resource Manager
+- Modèles Azure Resource Manager (modèles ARM)
   - Le modèle est traité via Resource Manager en tant que **PUT**. Sachant que chaque type de ressource gère cette action différemment, consultez la documentation de chaque ressource incluse pour déterminer l’impact de cette action quand elle est exécutée par des blueprints.
 
 ## <a name="possible-errors-on-updating-assignments"></a>Erreurs possibles pendant la mise à jour d’affectations
 
-Pendant la mise à jour d’affectations, il est possible d’apporter des modifications qui sont rompues au moment de l’exécution. Cela peut se produire par exemple quand l’emplacement d’un groupe de ressources est modifié après avoir déjà été déployé. Il est possible d’apporter n’importe quelle modification prise en charge par [Azure Resource Manager](../../../azure-resource-manager/management/overview.md), mais celles susceptibles d’entraîner une erreur via Azure Resource Manager entraîneront aussi l’échec de l’affectation.
+Pendant la mise à jour d’affectations, il est possible d’apporter des modifications qui sont rompues au moment de l’exécution. Cela peut se produire par exemple quand l’emplacement d’un groupe de ressources est modifié après avoir déjà été déployé. Il est possible d’apporter n’importe quelle modification prise en charge par [Resource Manager](../../../azure-resource-manager/management/overview.md), mais celles susceptibles d’entraîner une erreur via Resource Manager entraîneront aussi l’échec de l’affectation.
 
 Il n’existe aucune limite quant au nombre de fois qu’une affectation peut être mise à jour. Si une erreur se produit, déterminez la cause et apportez une autre mise à jour à l’affectation.  Exemples de scénarios d’erreur :
 
 - Paramètre incorrect
 - Objet déjà existant
-- Modification non prise en charge par Azure Resource Manager
+- Modification non prise en charge par Resource Manager
 
 ## <a name="next-steps"></a>Étapes suivantes
 

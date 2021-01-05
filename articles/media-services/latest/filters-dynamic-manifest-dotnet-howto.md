@@ -1,9 +1,9 @@
 ---
 title: Création de filtres avec le Kit de développement logiciel (SDK) .NET Azure Media Services v3
-description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Media Services crée des manifestes dynamiques pour obtenir cette diffusion sélective.
+description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Le SDK .NET Media Services v3 crée des manifestes dynamiques pour obtenir cette diffusion sélective.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
@@ -11,22 +11,25 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
 ms.topic: article
-ms.date: 06/03/2019
-ms.author: juliako
-ms.openlocfilehash: ef04b1b7b5030189482e89e26e4565397cbdd7c8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9f54a505d63660fb7c97b3226df4c232e48125e1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75779244"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90527358"
 ---
 # <a name="create-filters-with-media-services-net-sdk"></a>Créer des filtres à l’aide du kit SDK .NET Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Quand vous transmettez votre contenu à un client (événements de streaming en direct ou vidéo à la demande), le fichier manifeste de l’élément multimédia par défaut ne permet pas toujours au client d’interagir avec le contenu comme il le voudrait. Avec Azure Media Services, vous pouvez définir des filtres de compte et d’élément multimédia à appliquer à votre contenu. 
 
 Pour obtenir une description détaillée de cette fonctionnalité et des scénarios dans lesquels elle est utilisée, consultez [Manifestes dynamiques](filters-dynamic-manifest-overview.md) et [Filtres](filters-concept.md).
 
-Cette rubrique explique comment utiliser le SDK .NET Media Services pour définir un filtre pour un actif multimédia Vidéo à la demande, et créer des [filtres de compte](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.accountfilter?view=azure-dotnet) et des [filtres d’actif multimédia](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.assetfilter?view=azure-dotnet). 
+Cette rubrique explique comment utiliser le SDK .NET Media Services pour définir un filtre pour un actif multimédia Vidéo à la demande, et créer des [filtres de compte](/dotnet/api/microsoft.azure.management.media.models.accountfilter?view=azure-dotnet) et des [filtres d’actif multimédia](/dotnet/api/microsoft.azure.management.media.models.assetfilter?view=azure-dotnet). 
 
 > [!NOTE]
 > Veillez à consulter [presentationTimeRange](filters-concept.md#presentationtimerange).
@@ -34,13 +37,13 @@ Cette rubrique explique comment utiliser le SDK .NET Media Services pour défini
 ## <a name="prerequisites"></a>Prérequis 
 
 - Lire [Filtres et manifestes dynamiques](filters-dynamic-manifest-overview.md).
-- [Créer un compte Media Services](create-account-cli-how-to.md). Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
-- Obtenir les informations nécessaires pour [accéder aux API](access-api-cli-how-to.md)
-- Lire la rubrique [Charger, encoder et transmettre en continu des vidéos à l’aide d’Azure Media Services](stream-files-tutorial-with-api.md) pour voir comment [démarrer avec le SDK .NET](stream-files-tutorial-with-api.md#start_using_dotnet)
+- [Créer un compte Media Services](./create-account-howto.md). Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
+- Obtenir les informations nécessaires pour [accéder aux API](./access-api-howto.md)
+- Lire la rubrique [Charger, encoder et transmettre en continu des vidéos à l’aide d’Azure Media Services](stream-files-tutorial-with-api.md) pour voir comment [démarrer avec le SDK .NET](stream-files-tutorial-with-api.md#start-using-media-services-apis-with-net-sdk)
 
 ## <a name="define-a-filter"></a>Définir un filtre  
 
-Dans .NET, vous configurez les sélections de pistes avec les classes [FilterTrackSelection](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.filtertrackselection?view=azure-dotnet) et [FilterTrackPropertyCondition](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.filtertrackpropertycondition?view=azure-dotnet). 
+Dans .NET, vous configurez les sélections de pistes avec les classes [FilterTrackSelection](/dotnet/api/microsoft.azure.management.media.models.filtertrackselection?view=azure-dotnet) et [FilterTrackPropertyCondition](/dotnet/api/microsoft.azure.management.media.models.filtertrackpropertycondition?view=azure-dotnet). 
 
 Le code suivant définit un filtre qui inclut toutes les pistes audio contenant EC-3 et toutes les pistes vidéo ayant une vitesse de transmission entre 0 et 1 000 000.
 
@@ -119,5 +122,3 @@ Le tableau suivant présente des exemples d’URL utilisant des filtres :
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Diffuser des vidéos en streaming](stream-files-tutorial-with-api.md) 
-
-

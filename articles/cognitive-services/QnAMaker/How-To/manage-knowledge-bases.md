@@ -1,14 +1,16 @@
 ---
 title: Gérer des bases de connaissances – QnA Maker
 description: QnA Maker vous permet de gérer vos bases de connaissances en donnant accès aux paramètres et au contenu de la base de connaissances.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 03/18/2020
-ms.openlocfilehash: 4eb07b30b10826c361f4f9b805b517e372fc5ea1
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: c7bb79cbd67ba2fb151641ddeeb31b54e399b906
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80756807"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96938254"
 ---
 # <a name="create-knowledge-base-and-manage-settings"></a>Créer une base de connaissances et gérer les paramètres
 
@@ -17,7 +19,7 @@ QnA Maker vous permet de gérer vos bases de connaissances en donnant accès aux
 ## <a name="prerequisites"></a>Prérequis
 
 > [!div class="checklist"]
-> * Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+> * Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 > * Une [ressource QnA Maker](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesQnAMaker) créée dans le portail Azure. Rappelez-vous l’ID Azure Active Directory, l’abonnement et le nom de ressource QnA que vous avez sélectionnés au moment de créer la ressource.
 
 ## <a name="create-a-knowledge-base"></a>Créer une base de connaissances
@@ -44,7 +46,7 @@ QnA Maker vous permet de gérer vos bases de connaissances en donnant accès aux
     |--|--|
     |**Enable multi-turn extraction from URLs, .pdf or .docx files** (Activer l’extraction multitour à partir d’URL, de fichier .pdf ou .docx)|Activé|
     |**Texte de réponse par défaut**| `Quickstart - default answer not found.`|
-    |**+ Ajouter une URL**|`https://docs.microsoft.com/azure/cognitive-services/qnamaker/troubleshooting`|
+    |**+ Ajouter une URL**|`https://azure.microsoft.com/en-us/support/faq/`|
     |**Échange de conversation (chit-chat)**|Sélectionnez **Professional**.|
 
 1. À l’**étape 5**, sélectionnez **Create your KB** (Créer votre base de connaissances).
@@ -105,7 +107,7 @@ Si vous partagez votre base de connaissances avec des collaborateurs,] (collabor
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Apprenez-en davantage sur la [gestion de la langue](language-knowledge-base.md) de toutes les bases de connaissances dans une ressource.
+Apprenez-en davantage sur la [gestion de la langue](../index.yml) de toutes les bases de connaissances dans une ressource.
 
 * Modifier les paires de Q/R
 * Gérer les ressources Azure utilisées par QnA Maker

@@ -3,12 +3,12 @@ title: Créer un modèle de cluster Azure Service Fabric
 description: Découvrez comment créer un modèle Resource Manager pour un cluster Service Fabric. Configurez la sécurité, Azure Key Vault et Azure Active Directory (Azure AD) pour l’authentification client.
 ms.topic: conceptual
 ms.date: 08/16/2018
-ms.openlocfilehash: 6cf0f9c3b8b54db7bd27ec8dd9c9d59d849c74cc
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b028b5c1f32733146c071e50b24202e5bad945c0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80985369"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260490"
 ---
 # <a name="create-a-service-fabric-cluster-resource-manager-template"></a>Création d’un modèle Service Fabric Cluster Resource Manager
 
@@ -262,7 +262,7 @@ Pour en savoir plus sur la syntaxe JSON et les propriétés pour les ressources 
 <!-- Links -->
 [service-fabric-cluster-security]: service-fabric-cluster-security.md
 [service-fabric-secure-cluster-5-node-1-nodetype]: https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/5-VM-Windows-1-NodeTypes-Secure
-[resource-group-template-deploy]: https://azure.microsoft.com/documentation/articles/resource-group-template-deploy/
+[resource-group-template-deploy]: ../azure-resource-manager/templates/deploy-powershell.md
 
 <!-- Images -->
 [cluster-security-arm-dependency-map]: ./media/service-fabric-cluster-creation-create-template/cluster-security-arm-dependency-map.png

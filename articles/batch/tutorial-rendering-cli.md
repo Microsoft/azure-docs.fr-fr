@@ -1,15 +1,15 @@
 ---
-title: Créer le rendu d’une scène dans le cloud
+title: Tutoriel - Effectuer le rendu d’une scène dans le cloud
 description: 'Didacticiel : comment créer le rendu d’une scène Autodesk 3ds Max avec Arnold à l’aide du service Azure Batch Rendering et de l’interface de ligne de commande Azure'
 ms.topic: tutorial
 ms.date: 03/05/2020
-ms.custom: mvc
-ms.openlocfilehash: e78580cc2f95f14be53c0432df4eb4bd38450832
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: e0858e838ba73862ef7f15040915c5f5cd3c751b
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82117129"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106340"
 ---
 # <a name="tutorial-render-a-scene-with-azure-batch"></a>Tutoriel : Créer le rendu d’une scène avec Azure Batch 
 
@@ -26,14 +26,16 @@ Dans ce didacticiel, vous créer le rendu d’une scène 3ds Max avec Batch à l
 
 ## <a name="prerequisites"></a>Prérequis
 
-Vous avez besoin d’un abonnement de paiement à l’utilisation ou autre option d’achat Azure pour utiliser les applications de rendu dans Batch sur une base de paiement à l’utilisation. **Les licences de paiement à l’utilisation ne sont pas prises en charge si vous utilisez une offre Azure gratuite qui propose un crédit monétaire.**
+ - Vous avez besoin d’un abonnement de paiement à l’utilisation ou autre option d’achat Azure pour utiliser les applications de rendu dans Batch sur une base de paiement à l’utilisation. **Les licences de paiement à l’utilisation ne sont pas prises en charge si vous utilisez une offre Azure gratuite qui propose un crédit monétaire.**
 
-La scène 3ds Max pour ce didacticiel se trouve sur [GitHub](https://github.com/Azure/azure-docs-cli-python-samples/tree/master/batch/render-scene), ainsi qu’un exemple de script Batch et les fichiers de configuration JSON. La scène 3ds Max est issue des [exemples de fichiers Autodesk 3ds Max](https://download.autodesk.com/us/support/files/3dsmax_sample_files/2017/Autodesk_3ds_Max_2017_English_Win_Samples_Files.exe). (Les exemples de fichier Autodesk 3ds Max sont disponibles sous licence Commons Attribution-NonCommercial-Share Alike. Copyright &copy; Autodesk, Inc.)
+ - La scène 3ds Max pour ce didacticiel se trouve sur [GitHub](https://github.com/Azure/azure-docs-cli-python-samples/tree/master/batch/render-scene), ainsi qu’un exemple de script Batch et les fichiers de configuration JSON. La scène 3ds Max est issue des [exemples de fichiers Autodesk 3ds Max](https://download.autodesk.com/us/support/files/3dsmax_sample_files/2017/Autodesk_3ds_Max_2017_English_Win_Samples_Files.exe). (Les exemples de fichier Autodesk 3ds Max sont disponibles sous licence Commons Attribution-NonCommercial-Share Alike. Copyright &copy; Autodesk, Inc.)
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.20 ou une version ultérieure pour poursuivre la procédure décrite dans ce didacticiel. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Ce tutoriel nécessite Azure CLI version 2.0.20 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
+> [!TIP]
+> Vous pouvez afficher les [modèles de travail Arnold](https://github.com/Azure/batch-extension-templates/tree/master/templates/arnold/render-windows-frames) dans le dépôt GitHub de modèles d’extension Azure Batch.
 ## <a name="create-a-batch-account"></a>Création d’un compte Batch
 
 Si vous ne l’avez pas encore fait, créez un groupe de ressources, un compte Batch et un compte de stockage lié dans votre abonnement. 
@@ -344,7 +346,7 @@ Dans ce tutoriel, vous avez appris à effectuer les opérations suivantes :
 > * Mettre à l’échelle le pool et créer le rendu d’une scène comportant plusieurs images
 > * Télécharger la sortie rendue
 
-Pour en savoir plus sur le rendu à l’échelle du cloud, consultez les options relatives au service Batch Rendering. 
+Pour en savoir plus sur le rendu à l’échelle du cloud, consultez la documentation relative au rendu Batch.
 
 > [!div class="nextstepaction"]
 > [Service de rendu Batch](batch-rendering-service.md)

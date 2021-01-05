@@ -1,21 +1,14 @@
 ---
 title: Nouveautés des concentrateurs d'événements Azure ? - service d'ingestion de Big Data | Microsoft Docs
 description: Apprenez-en plus sur Azure Event Hubs, un service de diffusion en continu Big Data qui ingère des millions d’événements par seconde.
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: overview
-ms.custom: seodec18
-ms.date: 12/06/2018
-ms.author: shvija
-ms.openlocfilehash: 45276ab59f1a3dabea42b904ff54bd37326fdeca
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.date: 06/23/2020
+ms.openlocfilehash: 6669760bceee558a058878fbb89342aedda80117
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80398108"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88927899"
 ---
 # <a name="azure-event-hubs--a-big-data-streaming-platform-and-event-ingestion-service"></a>Azure Event Hubs - plateforme de streaming de Big Data et service d’ingestion d’événements
 Azure Event Hubs est une plateforme de streaming de Big Data et un service d’ingestion d’événements. Il peut recevoir et traiter des millions d’événements par seconde. Les données envoyées à un concentrateur d’événements peuvent être transformées et stockées à l’aide d’adaptateurs de traitement par lot/stockage ou d’un fournisseur d’analyse en temps réel.
@@ -51,7 +44,7 @@ Ingérez, mettez en mémoire tampon, stockez et traitez votre flux en temps rée
 
 [Capturez](event-hubs-capture-overview.md) vos données en quasi temps réel dans un [Stockage Blob Azure](https://azure.microsoft.com/services/storage/blobs/) ou dans [Azure Data Lake Store](https://azure.microsoft.com/services/data-lake-store/)  pour une conservation à long terme ou un traitement par micro-lots. Vous pouvez obtenir ce comportement sur le même flux que celui que vous utilisez pour la dérivation de l’analytique en temps réel. La configuration de l’outil Capture est rapide. Son exécution n’engendre aucun coût d’administration et il s’adapte automatiquement à vos  [unités de débit](event-hubs-scalability.md#throughput-units) Event Hubs. Event Hubs vous permet de vous concentrer sur le traitement des données plutôt que sur leur capture.
 
-Azure Event Hubs s’intègre aussi avec [Azure Functions](/azure/azure-functions/) pour une architecture sans serveur.
+Azure Event Hubs s’intègre aussi avec [Azure Functions](../azure-functions/index.yml) pour une architecture sans serveur.
 
 ## <a name="scalable"></a>Évolutif
 
@@ -81,17 +74,17 @@ Event Hubs sur Azure Stack Hub vous permet de réaliser des scénarios de cloud 
 
 Les éditions Event Hubs (sur Azure Stack Hub et sur Azure) offrent un degré élevé de parité des fonctionnalités. Cette parité signifie que les SDK, les exemples, PowerShell, l’interface CLI et les portails offrent une expérience similaire, avec quelques différences. 
 
-Event Hubs sur Stack est gratuit pendant la préversion publique. Pour plus d’informations, consultez [Vue d’ensemble d’Event Hubs sur Azure Stack Hub](https://docs.microsoft.com/azure-stack/user/event-hubs-overview).
+Event Hubs sur Stack est gratuit pendant la préversion publique. Pour plus d’informations, consultez [Vue d’ensemble d’Event Hubs sur Azure Stack Hub](/azure-stack/user/event-hubs-overview).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour commencer à utiliser Event Hubs, consultez les tutoriels **Envoyer et recevoir des événements** :
 
-- [.NET Core](get-started-dotnet-standard-send-v2.md)
-- [Java](get-started-java-send-v2.md)
-- [Python](get-started-python-send-v2.md)
-- [JavaScript](get-started-node-send-v2.md)
+- [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
+- [Java](event-hubs-java-get-started-send.md)
+- [Python](event-hubs-python-get-started-send.md)
+- [JavaScript](event-hubs-node-get-started-send.md)
 - [Go](event-hubs-go-get-started-send.md)
 - [C (envoi uniquement)](event-hubs-c-getstarted-send.md)
 - [Apache Storm (réception uniquement)](event-hubs-storm-getstarted-receive.md)
@@ -101,5 +94,3 @@ Pour plus d’informations sur les hubs d’événements, consultez les articles
 
 - [Vue d’ensemble des fonctionnalités des concentrateurs d’événements](event-hubs-features.md)
 - [Forum aux questions](event-hubs-faq.md).
-
-

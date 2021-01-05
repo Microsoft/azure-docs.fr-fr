@@ -9,16 +9,17 @@ ms.service: cognitive-search
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: fcc70267754f7e66f29dd1b855d3efb8b814e78b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 7726877efcb72caf5bb4c92e2e1c65e5df68f270
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72793014"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89002706"
 ---
 # <a name="upgrade-to-azure-search-net-sdk-version-9"></a>Effectuer une mise à niveau vers la version 9 du SDK .NET Recherche Azure
 
-Si vous utilisez la version 7.0-preview ou une version antérieure du [SDK .NET Recherche Azure](https://aka.ms/search-sdk), cet article vous aidera à mettre à niveau votre application pour utiliser la version 9.
+Si vous utilisez la version 7.0-preview ou une version antérieure du [SDK .NET Recherche Azure](/dotnet/api/overview/azure/search), cet article vous aidera à mettre à niveau votre application pour utiliser la version 9.
 
 > [!NOTE]
 > Si vous souhaitez utiliser la version 8.0-preview pour tester les fonctionnalités qui ne sont pas encore à la disposition générale, vous pouvez également suivre les instructions de cet article pour passer à la version 8.0-preview à partir de versions antérieures.
@@ -35,7 +36,7 @@ La version 9 du SDK .NET Recherche Azure contient de nombreuses modifications pa
 <a name="WhatsNew"></a>
 
 ## <a name="whats-new-in-version-9"></a>Nouveautés de la version 9
-La version 9 du SDK .NET Recherche Azure cible la dernière version en disponibilité générale de l’API REST Recherche Azure, spécifiquement 2019-05-06. Cela permet d’utiliser de nouvelles fonctionnalités de Recherche Azure à partir d’une application .NET, notamment les suivantes :
+La version 9 d’Azure Search .NET SDK est basée sur la version du 06/05/2019 de l’API REST Azure Search, avec les fonctions suivantes :
 
 * L’[enrichissement par IA](cognitive-search-concept-intro.md) est la capacité à extraire du texte à partir d’images, d’objets blob et d’autres sources de données non structurées pour enrichir le contenu et ainsi faciliter les recherches dans un index de Recherche Azure.
 * La prise en charge de [types complexes](search-howto-complex-data-types.md) vous permet de modéliser presque n’importe quelle structure JSON imbriquée dans un index Recherche Azure.

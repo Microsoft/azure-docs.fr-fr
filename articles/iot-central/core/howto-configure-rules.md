@@ -3,21 +3,19 @@ title: Configurer des règles et des actions dans Azure IoT Central
 description: Dans le cadre de cet article de guide pratique, vous découvrez, en tant que générateur, comment configurer des règles et des actions basées sur la télémétrie dans votre application Azure IoT Central.
 author: vavilla
 ms.author: vavilla
-ms.date: 11/27/2019
+ms.date: 12/23/2020
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: philmea
-ms.openlocfilehash: 509f9557a8128df12353ad02a7c7db02b7b42631
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 378a1dbcfbc89cdf9b24dc2490db583f1135b9a2
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158451"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97796786"
 ---
 # <a name="configure-rules"></a>Configurer des règles
-
-
 
 *Cet article s’applique aux opérateurs, aux créateurs et aux administrateurs.*
 
@@ -35,7 +33,13 @@ Les conditions déterminent ce qui entraîne le déclenchement des règles. Actu
 
 Dans la capture d’écran suivante, les conditions vérifient que la température est supérieure à 70 &deg;F et que l’humidité est inférieure à 10. Quand ces deux instructions sont vraies (true), la règle prend la valeur true et déclenche une action.
 
-![Conditions](media/howto-configure-rules/conditions.png)
+![La capture d’écran représente un moniteur de réfrigérateur avec des conditions spécifiées pour la température et l’humidité.](media/howto-configure-rules/conditions.png)
+
+### <a name="use-a-cloud-property-in-a-value-field"></a>Utiliser une propriété Cloud dans un champ de valeur
+
+Vous pouvez référencer une propriété de Cloud du modèle d’appareil dans le champ **Valeur** pour une condition. La propriété de Cloud et la valeur de télémétrie doivent être de types similaires. Par exemple, si **Température** est un double, seules les propriétés Cloud de type double s’affichent en tant qu’options dans la liste déroulante **Valeur**.
+
+Si vous choisissez une valeur de télémétrie de type d’événement, la liste déroulante **Valeur** comprend l’option **Toute**. L’option **Toute** signifie que la règle se déclenche quand votre application reçoit un événement de ce type, quelle que soit la charge utile.
 
 ## <a name="use-aggregate-windowing"></a>Utiliser le fenêtrage des temps d’agrégation
 
@@ -49,7 +53,4 @@ Une restriction s’applique aux règles qui sont appliquées aux modules IoT Ed
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous avez appris à configurer une règle dans votre application Azure IoT Central, vous pouvez :
-
-> [!div class="nextstepaction"]
-> [Analyser vos données à la volée](howto-create-analytics.md)
+Maintenant que vous avez appris à configurer une règle dans votre application Azure IoT Central, vous pouvez apprendre à [Configurer des règles avancées](howto-configure-rules-advanced.md) à l’aide de Power Automate ou d’Azure Logic Apps.

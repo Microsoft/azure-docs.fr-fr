@@ -1,19 +1,20 @@
 ---
-title: Comprendre le détail de l’utilisation et des frais | Microsoft Docs
-description: Découvrez comment lire et comprendre le détail de l’utilisation et des frais
+title: Comprendre le détail de l’utilisation et des frais
+description: Découvrez comment lire et comprendre votre fichier détaillé sur l’utilisation et les frais. Affichez la liste des termes et descriptions utilisés dans le fichier.
 author: bandersmsft
 ms.reviewer: micflan
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 03/20/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 3b4a5601f18a07ba1ecd6fdd93628d671a0acad2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 559fe43bbd9b8951a97733ae1250046f65f10404
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80065639"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92149359"
 ---
 # <a name="understand-the-terms-in-your-azure-usage-and-charges-file"></a>Comprendre les termes du fichier sur l’utilisation et les frais Azure
 
@@ -89,8 +90,8 @@ PublisherType | Tous | Type d’éditeur (valeurs : **Azure**, **AWS**, **Place
 Quantité | Tous | Nombre d’unités achetées ou consommés.
 ID de réservation | EA, MCA | Identificateur unique de l’instance de réservation achetée.
 ReservationName | EA, MCA | Nom de l’instance de réservation achetée.
-ResourceGroup | Tous | Nom du [groupe de ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) dans lequel figure la ressource. Tous les frais ne proviennent pas de ressources déployées sur des groupes de ressources. Les frais qui n’ont pas de groupe de ressources seront indiqués comme étant nuls ou vides, **autres**ou **non applicable**.
-ResourceId<sup>1</sup> | Tous | Identificateur unique de la ressources [Azure Resource Manager](https://docs.microsoft.com/rest/api/resources/resources).
+ResourceGroup | Tous | Nom du [groupe de ressources](../../azure-resource-manager/management/overview.md) dans lequel figure la ressource. Tous les frais ne proviennent pas de ressources déployées sur des groupes de ressources. Les frais qui n’ont pas de groupe de ressources seront indiqués comme étant nuls ou vides, **autres**ou **non applicable**.
+ResourceId<sup>1</sup> | Tous | Identificateur unique de la ressources [Azure Resource Manager](/rest/api/resources/resources).
 ResourceLocation | Tous | Emplacement du centre de données où la ressource est exécutée. Voir Location.
 Nom_ressource | EA, PAYG | Nom de la ressource. Tous les frais ne proviennent pas de ressources déployées. Les frais qui n’ont pas de type de ressource s’affichent comme étant nuls ou vides, **autres**ou **non applicable**.
 ResourceType | MCA | Type d’instance de ressource. Tous les frais ne proviennent pas de ressources déployées. Les frais qui n’ont pas de type de ressource s’affichent comme étant nuls ou vides, **autres**ou **non applicable**.

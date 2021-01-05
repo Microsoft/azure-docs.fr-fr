@@ -1,14 +1,14 @@
 ---
 title: Configurer des points de terminaison de nœud dans le pool Azure Batch
 description: Comment configurer ou désactiver l’accès aux ports SSH ou RDP sur les nœuds de calcul dans un pool Azure Batch.
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/13/2018
-ms.openlocfilehash: 8b0ae4b80757bfa647cd5322668d793fa66ffca3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4e7df7da539be75ef1befdff4b4e1fe5244c1702
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82113848"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92109304"
 ---
 # <a name="configure-or-disable-remote-access-to-compute-nodes-in-an-azure-batch-pool"></a>Configurer ou désactiver l’accès à distance aux nœuds de calcul dans un pool Azure Batch
 
@@ -19,7 +19,7 @@ Dans votre environnement, vous devrez peut-être limiter ou désactiver ces para
 ## <a name="about-the-pool-endpoint-configuration"></a>À propos de la configuration de point de terminaison de pool
 La configuration de point de terminaison se compose d’un ou plusieurs [pools de traduction d’adresses réseau (NAT)](/rest/api/batchservice/pool/add#inboundnatpool) de ports frontaux. (Ne confondez pas un pool NAT avec le pool Batch des nœuds de calcul.) Vous configurez chaque pool NAT pour remplacer les paramètres de connexion par défaut sur les nœuds de calcul du pool. 
 
-Chaque configuration de pool NAT inclut les [règles d’un ou plusieurs groupes de sécurité réseau (NSG)](/rest/api/batchservice/pool/add#networksecuritygrouprule). Chaque règle NSG autorise ou refuse certains trafics réseau au point de terminaison. Vous pouvez choisir d’autoriser ou de refuser tout le trafic, le trafic identifié par une [balise de service](../virtual-network/security-overview.md#service-tags) (par exemple, « Internet »), ou le trafic provenant d’adresses IP ou de sous-réseaux spécifiques.
+Chaque configuration de pool NAT inclut les [règles d’un ou plusieurs groupes de sécurité réseau (NSG)](/rest/api/batchservice/pool/add#networksecuritygrouprule). Chaque règle NSG autorise ou refuse certains trafics réseau au point de terminaison. Vous pouvez choisir d’autoriser ou de refuser tout le trafic, le trafic identifié par une [balise de service](../virtual-network/network-security-groups-overview.md#service-tags) (par exemple, « Internet »), ou le trafic provenant d’adresses IP ou de sous-réseaux spécifiques.
 
 ### <a name="considerations"></a>Considérations
 * La configuration de point de terminaison de pool fait partie de la [configuration réseau](/rest/api/batchservice/pool/add#networkconfiguration) du pool. La configuration réseau peut éventuellement inclure des paramètres permettant de joindre le pool à un [réseau virtuel Azure](batch-virtual-network.md). Si vous configurez le pool dans un réseau virtuel, vous pouvez créer des règles NSG qui utilisent des paramètres d’adresse dans le réseau virtuel.
@@ -120,7 +120,5 @@ pool.network_configuration = batchmodels.NetworkConfiguration(
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour plus d’informations sur les règles NSG dans Azure, consultez l’article [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/security-overview.md).
-
-- Pour obtenir une présentation détaillée de Batch, consultez [Développer des solutions de calcul parallèles à grande échelle avec Batch](batch-api-basics.md).
-
+- Apprenez-en davantage sur le [flux de travail et les ressources principales du service Batch](batch-service-workflow-features.md), telles que les pools, les nœuds, les travaux et les tâches.
+- Pour plus d’informations sur les règles NSG dans Azure, consultez l’article [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).

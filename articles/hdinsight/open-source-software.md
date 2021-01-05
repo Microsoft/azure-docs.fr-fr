@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: seoapr2020
 ms.date: 04/21/2020
-ms.openlocfilehash: 65f21450f194175af37c6c198468978392cee462
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fe9ccc50d6196997863fbf228fbb76913a0d0330
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195160"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013868"
 ---
 # <a name="open-source-software-support-in-azure-hdinsight"></a>Prise en charge des logiciels open source dans Azure HDInsight
 
@@ -40,7 +40,7 @@ En tant qu’utilisateur du cluster, vous pouvez installer ou utiliser dans votr
 > [!WARNING]  
 > Les composants fournis avec le cluster HDInsight sont entièrement pris en charge. Le support Microsoft vous aide à isoler et à résoudre les problèmes liés à ces composants.
 >
-> Les composants personnalisés bénéficient d’un support commercialement raisonnable pour vous aider à résoudre le problème. Le support Microsoft peut réussir à résoudre le problème. Ou alors, il peut vous inviter à faire appel à d’autres canaux qui offrent une expertise reconnue sur ces technologies open source. De nombreux sites de communauté sont disponibles, comme le [forum MSDN pour HDInsight](https://social.msdn.microsoft.com/Forums/azure/home?forum=hdinsight) et [Stack Overflow](https://stackoverflow.com).
+> Les composants personnalisés bénéficient d’un support commercialement raisonnable pour vous aider à résoudre le problème. Le support Microsoft peut réussir à résoudre le problème. Ou alors, il peut vous inviter à faire appel à d’autres canaux qui offrent une expertise reconnue sur ces technologies open source. De nombreux sites de communauté sont disponibles, comme par exemple la [page de questions Microsoft Q&A sur HDInsight](/answers/topics/azure-hdinsight.html) et [Stack Overflow](https://stackoverflow.com).
 >
 > Par ailleurs, les projets Apache ont des sites de projet sur le [site web Apache](https://apache.org). [Hadoop](https://hadoop.apache.org/) en est un exemple.
 

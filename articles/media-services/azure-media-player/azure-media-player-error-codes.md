@@ -7,10 +7,10 @@ ms.service: media-services
 ms.topic: error-reference
 ms.date: 04/20/2020
 ms.openlocfilehash: 13d804ec39c3d7753d4ee04962a88d4451fb04d9
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81725902"
 ---
 # <a name="error-codes"></a>Codes d’erreur #

@@ -7,14 +7,15 @@ ms.topic: conceptual
 ms.date: 09/01/2019
 ms.author: sngun
 ms.custom: seodec18
-ms.openlocfilehash: 976ff4d3be194bf33d2c01f06c66782caf8dad50
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 81c959467c4bb3700120917cf150773fb18e866d
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82608045"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97359827"
 ---
 # <a name="frequently-asked-questions-about-different-apis-in-azure-cosmos-db"></a>Questions fréquentes sur les différentes API dans Azure Cosmos DB
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 ### <a name="what-are-the-typical-use-cases-for-azure-cosmos-db"></a>Quels sont les cas d’utilisation courants d’Azure Cosmos DB ?
 
@@ -40,7 +41,7 @@ Chaque API fonctionne de manière indépendante, à l’exception de Gremlin et 
 
 ### <a name="is-azure-cosmos-db-hipaa-compliant"></a>Azure Cosmos DB est-il conforme à la loi HIPAA ?
 
-Oui, Azure Cosmos DB est conforme à la loi HIPAA. HIPAA établit les conditions requises pour l’utilisation, la divulgation et la protection des informations de santé identifiables de façon individuelle. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité de Microsoft](https://www.microsoft.com/en-us/TrustCenter/Compliance/HIPAA).
+Oui, Azure Cosmos DB est conforme à la loi HIPAA. HIPAA établit les conditions requises pour l’utilisation, la divulgation et la protection des informations de santé identifiables de façon individuelle. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité de Microsoft](/compliance/regulatory/offering-hipaa-hitech).
 
 ### <a name="what-are-the-storage-limits-of-azure-cosmos-db"></a>Quelles sont les limites de stockage d’Azure Cosmos DB ?
 
@@ -70,7 +71,7 @@ Vous pouvez également utiliser l’[émulateur Azure Cosmos DB](local-emulator.
 
 Pour poser une question technique, connectez-vous à l’un de ces forums de questions-réponses :
 
-* [Forum MSDN](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurecosmosdb)
+* [Page de questions Microsoft Q&A](/answers/topics/azure-cosmos-db.html)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-cosmosdb). Consultez Stack Overflow pour les questions sur la programmation. Par souci de clarté et afin d’obtenir une réponse, vérifiez que votre question est [appropriée](https://stackoverflow.com/help/on-topic) et [ fournit un maximum de détails](https://stackoverflow.com/help/how-to-ask).
 
 Pour demander de nouvelles fonctionnalités, faites une nouvelle demande sur [User voice](https://feedback.azure.com/forums/263030-azure-cosmos-db).
@@ -85,7 +86,7 @@ Les souscriptions à l’offre Essayez gratuitement Azure Cosmos DB figurent da
 
 Les souscriptions à l’offre Essayez gratuitement Azure Cosmos DB obéissent aux conditions suivantes :
 
-* L'accès peut être octroyé aux comptes Microsoft personnels (MSA). Évitez d'utiliser des comptes Active Directory (AAD) ou des comptes appartenant à des locataires AAD d'entreprise, car ceux-ci peuvent présenter des limitations susceptibles de bloquer l'octroi de l'accès.
+* L'accès peut être octroyé aux comptes Microsoft personnels (MSA). Évitez d’utiliser des comptes Azure Active Directory (Azure AD) ou des comptes appartenant à des locataires Azure AD d’entreprise, car ceux-ci peuvent présenter des limitations susceptibles de bloquer l’octroi de l’accès.
 * Un seul [conteneur avec débit provisionné](./set-throughput.md#set-throughput-on-a-container) par abonnement pour les comptes SQL, API Gremlin et Table.
 * Jusqu’à trois [collections avec débit provisionné](./set-throughput.md#set-throughput-on-a-container) par abonnement pour les comptes MongoDB.
 * Une [base de données avec débit provisionné](./set-throughput.md#set-throughput-on-a-database) par abonnement. Les bases de données avec débit provisionné peuvent inclure un nombre illimité de conteneurs.
@@ -93,7 +94,7 @@ Les souscriptions à l’offre Essayez gratuitement Azure Cosmos DB obéissent 
 * La réplication globale est disponible dans les [régions Azure](https://azure.microsoft.com/regions/) suivantes : USA Centre, Europe Nord et Asie Sud-Est
 * Débit maximal de 5 000 RU/s lors de l’approvisionnement au niveau du conteneur.
 * Débit maximal de 20 000 RU/s lors de l’approvisionnement au niveau de la base de données.
-* Les abonnements expirent dans un délai de 30 jours et peuvent être prolongés pour une durée totale maximale de 31 jours.
+* Les abonnements expirent dans un délai de 30 jours et peuvent être prolongés pour une durée totale maximale de 31 jours. Une fois ce délai expiré, les informations contenues sont supprimées.
 * Il n’est pas possible de créer des tickets de support Azure pour les comptes d’évaluation d’Azure Cosmos DB ; cependant, les abonnés titulaires de plans de support actifs peuvent bénéficier du support.
 
 ## <a name="set-up-azure-cosmos-db"></a>Configurer Azure Cosmos DB
@@ -102,9 +103,9 @@ Les souscriptions à l’offre Essayez gratuitement Azure Cosmos DB obéissent 
 
 Azure Cosmos DB est disponible dans le portail Azure. Tout d’abord, souscrivez un abonnement Azure. Une fois que vous êtes inscrit, vous pouvez ajouter un compte Azure Cosmos DB à votre abonnement Azure.
 
-### <a name="what-is-a-master-key"></a>Qu'est-ce qu’une clé principale ?
+### <a name="what-is-a-primary-key"></a>Qu’est-ce qu’une clé primaire ?
 
-Une clé principale est un jeton de sécurité permettant d'accéder à toutes les ressources d'un compte. Les personnes disposant de cette clé ont un accès en lecture et en écriture à toutes les ressources du compte de la base de données. Soyez prudent lorsque vous distribuez des clés principales. La clé principale primaire et la clé principale secondaire sont disponibles dans le panneau **Clés** du [Portail Azure][azure-portal]. Pour plus d’informations sur les clés, consultez la rubrique [Affichage, copie et régénération de clés d’accès](manage-with-cli.md#list-account-keys).
+Une clé primaire est un jeton de sécurité permettant d’accéder à toutes les ressources d’un compte. Les personnes disposant de cette clé ont un accès en lecture et en écriture à toutes les ressources du compte de la base de données. Soyez prudent lorsque vous distribuez des clés primaires. La clé primaire et la clé secondaire sont disponibles dans le panneau **Clés** du [portail Azure][azure-portal]. Pour plus d’informations sur les clés, consultez la rubrique [Affichage, copie et régénération de clés d’accès](manage-with-cli.md#list-account-keys).
 
 ### <a name="what-are-the-regions-that-preferredlocations-can-be-set-to"></a>Quelles sont les régions configurables pour PreferredLocations ?
 
@@ -152,7 +153,7 @@ Oui, l’API SQL prend en charge les transactions entre documents exprimées sou
 
 Un conteneur est un groupe de documents accompagnés de leur logique d’application JavaScript. Un conteneur est une entité facturable, où le [coût](performance-levels.md) est déterminé par le débit et le stockage utilisé. Des conteneurs peuvent s’étendre à un ou plusieurs serveurs ou partitions, et peuvent être mis à l’échelle pour gérer des volumes de stockage ou de débit pratiquement illimités.
 
-* Pour l’API SQL, un conteneur est mappé à un conteneur.
+* Pour l’API SQL, la ressource est appelée conteneur.
 * Pour les comptes d’API Azure Cosmos DB pour MongoDB, les conteneurs sont mappés vers des collections.
 * Pour les comptes d’API Cassandra et Table, les conteneurs sont mappés vers des tables.
 * Pour les comptes d’API Gremlin, les conteneurs sont mappés vers des graphes.
@@ -173,13 +174,13 @@ Le langage de requête SQL pris en charge par les comptes d’API SQL est un sou
 
 ### <a name="does-the-sql-api-support-sql-aggregation-functions"></a>L’API SQL prend-elle en charge les fonctions d’agrégation SQL ?
 
-L’API SQL prend en charge l’agrégation à faible latence à n’importe quelle échelle par l’intermédiaire des fonctions d’agrégation `COUNT`, `MIN`, `MAX`, `AVG` et `SUM` par le biais de la grammaire SQL. Pour plus d’informations, consultez [Fonctions d’agrégation](sql-query-aggregates.md).
+L’API SQL prend en charge l’agrégation à faible latence à n’importe quelle échelle par l’intermédiaire des fonctions d’agrégation `COUNT`, `MIN`, `MAX`, `AVG` et `SUM` par le biais de la grammaire SQL. Pour plus d’informations, consultez [Fonctions d’agrégation](sql-query-aggregate-functions.md).
 
 ### <a name="how-does-the-sql-api-provide-concurrency"></a>Comment l’API SQL assure-t-elle l’accès concurrentiel ?
 
 L’API SQL prend en charge le contrôle d’accès concurrentiel optimiste par le biais des balises d’entité HTTP (ou ETags). Chaque ressource de l’API SQL est dotée d’une ETag définie sur le serveur à chaque mise à jour d’un document. L’en-tête et la valeur actuelle ETag sont inclus dans tous les messages de réponse. Les ETag peuvent être utilisées avec l’en-tête If-Match pour permettre au serveur de déterminer si une ressource nécessite une mise à jour. La valeur If-Match est la valeur ETag utilisée pour la vérification. Si la valeur ETag correspond à la valeur ETag du serveur, la ressource est mise à jour. Si l’ETag n’est plus actuelle, le serveur rejette l’opération en retournant un code de réponse « HTTP 412 Échec de la condition préalable ». Dans ce cas, le client extrait à nouveau la ressource afin d’obtenir la valeur ETag actuelle pour la ressource. De plus, les ETag peuvent être utilisées avec l’en-tête If-None-Match pour déterminer si une nouvelle extraction d’une ressource est nécessaire.
 
-Pour utiliser l’accès concurrentiel optimiste dans .NET, utilisez la classe [AccessCondition](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.accesscondition.aspx) . Pour un exemple .NET, voir [Program.cs](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/DocumentManagement/Program.cs) dans l’exemple DocumentManagement sur github.
+Pour utiliser l’accès concurrentiel optimiste dans .NET, utilisez la classe [AccessCondition](/dotnet/api/microsoft.azure.documents.client.accesscondition) . Pour un exemple .NET, voir [Program.cs](https://github.com/Azure/azure-cosmos-dotnet-v2/blob/master/samples/code-samples/DocumentManagement/Program.cs) dans l’exemple DocumentManagement sur github.
 
 ### <a name="how-do-i-perform-transactions-in-the-sql-api"></a>Comment effectuer des transactions dans l’API SQL ?
 
@@ -210,7 +211,7 @@ Il s’agit d’une limitation propre à JavaScript. JavaScript utilise des nomb
 La création d’autorisations à l’aide de ResourceTokens est autorisée au niveau du conteneur et de ses descendants (tels que les documents ou les pièces jointes). Cela implique qu’une tentative de création d’autorisation au niveau de la base de données ou du compte n’est pas autorisée actuellement.
 
 [azure-portal]: https://portal.azure.com
-[query]: sql-api-sql-query.md
+[query]: ./sql-query-getting-started.md
 
 ## <a name="next-steps"></a>Étapes suivantes
 

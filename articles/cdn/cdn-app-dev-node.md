@@ -1,6 +1,6 @@
 ---
 title: Prise en main du kit de développement logiciel Azure CDN pour Node.js | Microsoft Docs
-description: Apprenez à écrire des applications Node.js pour gérer Azure CDN.
+description: Découvrez comment créer une simple application console Node.js qui montre comment automatiser la création et la gestion de profils et de points de terminaisons Azure CDN.
 services: cdn
 documentationcenter: nodejs
 author: zhangmanling
@@ -11,15 +11,16 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 18dbcbf93947306334ccc2c156d9266884198e19
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: f5d5c7a6e1f6993b19f38db2ae846b213a1d553e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67594119"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993363"
 ---
 # <a name="get-started-with-azure-cdn-development"></a>Prise en main du développement Azure CDN
 > [!div class="op_single_selector"]
@@ -44,7 +45,9 @@ Maintenant que nous avons créé un groupe de ressources pour nos profils CDN et
 
 Créez un dossier pour stocker votre application.  À partir d’une console contenant les outils Node.js dans votre chemin d’accès actuel, définissez votre emplacement actuel vers ce nouveau dossier et initialisez votre projet en exécutant la commande suivante :
 
-    npm init
+```console
+npm init
+```
 
 Vous obtenez alors une série de questions qui vous permettront d’initialiser votre projet.  Comme **point d’entrée**, ce didacticiel utilise *app.js*.  Vous pouvez voir mes autres choix dans l’exemple suivant.
 
@@ -52,8 +55,10 @@ Vous obtenez alors une série de questions qui vous permettront d’initialiser 
 
 Notre projet est maintenant initialisé avec un fichier *packages.json* .  Notre projet va utiliser certaines bibliothèques Azure contenues dans des packages NPM.  Nous allons utiliser le Runtime client Azure pour Node.js (ms-rest-azure) et la bibliothèque cliente Azure CDN pour Node.js (azure-arm-cd).  Ajoutons-les au projet sous forme de dépendances.
 
-    npm install --save ms-rest-azure
-    npm install --save azure-arm-cdn
+```console
+npm install --save ms-rest-azure
+npm install --save azure-arm-cdn
+```
 
 Une fois les packages installés, le fichier *package.json* doit se présenter comme dans cet exemple (les numéros de version peuvent varier) :
 

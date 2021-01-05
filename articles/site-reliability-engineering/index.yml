@@ -11,12 +11,12 @@ metadata:
   author: dnblankedelman
   ms.author: dnb
   ms.date: 02/18/2020
-  ms.openlocfilehash: 18857c11887ef6934485602d0fcb7aaf2220721e
-  ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+  ms.openlocfilehash: 5fed24b0c6557fc0f54bf78ac756f2b278863217
+  ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/28/2020
-  ms.locfileid: "82185079"
+  ms.lasthandoff: 11/17/2020
+  ms.locfileid: "94660591"
 highlightedContent:
   items:
   - title: 'Introduction à l’ingénierie SRE :  Qu’est-ce que l’ingénierie SRE ? (1/3)'
@@ -33,21 +33,23 @@ productDirectory:
   - title: Amélioration de la fiabilité avec des pratiques pour les opérations modernes
     imageSrc: ./media/index/video.svg
     links:
-    - url: https://myignite.techcommunity.microsoft.com/sessions/82996
+    - url: https://myignite.microsoft.com/archives/IG19-OPS10
       text: 'Construire les fondements des opérations modernes : supervision'
-    - url: https://myignite.techcommunity.microsoft.com/sessions/82997
+    - url: https://myignite.microsoft.com/archives/IG19-OPS20
       text: Répondre aux incidents
-    - url: https://myignite.techcommunity.microsoft.com/sessions/82998
+    - url: https://myignite.microsoft.com/archives/IG19-OPS30
       text: Apprendre des défaillances
-    - url: https://myignite.techcommunity.microsoft.com/sessions/82999
+    - url: https://myignite.microsoft.com/archives/IG19-OPS40
       text: Pratiques de déploiement pour une plus grande fiabilité
-    - url: https://myignite.techcommunity.microsoft.com/sessions/83001
+    - url: https://myignite.microsoft.com/archives/IG19-OPS50
       text: 'Se préparer à la croissance : planification et adaptation des capacités'
-  - title: Introduction au cours en ligne sur l’ingénierie SRE
+  - title: Cours en ligne sur l’ingénierie SRE
     imageSrc: ./media/index/learn.svg
     links:
-    - url: https://docs.microsoft.com/learn/modules/intro-to-site-reliability-engineering/
-      text: Apprendre les bases de l’ingénierie SRE dans un cours en ligne gratuit
+    - url: /learn/modules/intro-to-site-reliability-engineering/
+      text: Introduction à l’ingénierie de fiabilité de site
+    - url: /learn/paths/improve-reliability-modern-operations/
+      text: Améliorer votre fiabilité avec des pratiques opérationnelles modernes
   - title: Ressources sur l’ingénierie SRE
     imageSrc: ./media/index/reference.svg
     links:
@@ -55,6 +57,8 @@ productDirectory:
       text: Livres
     - url: resources/events.md
       text: Événements
+    - url: articles/code.md
+      text: 'Questions fréquentes : SRE et codage'
     - url: articles/devops.md
       text: 'Questions fréquentes : SRE et DevOps'
     - url: resources/links.md
@@ -65,97 +69,97 @@ conceptualContent:
   items:
   - title: Architecture
     links:
-    - url: https://docs.microsoft.com/azure/architecture/framework/
+    - url: /azure/architecture/framework/
       itemType: reference
       text: Infrastructure Azure Architecture
-    - url: https://docs.microsoft.com/azure/architecture/guide
+    - url: /azure/architecture/guide
       itemType: reference
       text: Guide de l’architecture des applications Azure
-    - url: https://docs.microsoft.com/azure/architecture/architectures/?filter=reference-architecture
+    - url: /azure/architecture/architectures/?filter=reference-architecture
       itemType: reference
       text: Architectures de référence
-    - url: https://docs.microsoft.com/azure/architecture/cloud-adoption/
+    - url: /azure/architecture/cloud-adoption/
       itemType: reference
       text: Framework d’adoption du cloud Microsoft pour Azure
-    - url: https://docs.microsoft.com/azure/architecture/architectures/?filter=example-workload
+    - url: /azure/architecture/architectures/?filter=example-workload
       itemType: reference
       text: Exemples de charges de travail
-    - url: https://docs.microsoft.com/azure/architecture/microservices
+    - url: /azure/architecture/microservices
       itemType: reference
       text: Création de microservices sur Azure
-    - url: https://docs.microsoft.com/azure/architecture/data-guide/
+    - url: /azure/architecture/data-guide/
       itemType: reference
       text: Guide d’architecture des données Azure
-    - url: https://docs.microsoft.com/azure/architecture/best-practices/
+    - url: /azure/architecture/best-practices/
       itemType: reference
       text: Meilleures pratiques du cloud
-    - url: https://docs.microsoft.com/azure/architecture/framework/resiliency/overview
+    - url: /azure/architecture/framework/resiliency/overview
       itemType: reference
       text: Conception d’applications Azure fiables
-    - url: https://docs.microsoft.com/azure/architecture/patterns
+    - url: /azure/architecture/patterns
       itemType: reference
       text: Modèles de conception de cloud
-    - url: https://docs.microsoft.com/azure/architecture/aws-professional
+    - url: /azure/architecture/aws-professional
       itemType: reference
       text: Azure pour les professionnels AWS
-    - url: https://docs.microsoft.com/azure/architecture/performance
+    - url: /azure/architecture/performance
       itemType: reference
       text: Réglage des performances
     footerLink:
-      url: https://docs.microsoft.com/azure/architecture/
+      url: /azure/architecture/
       text: En voir plus dans le Centre des architectures Azure
   - title: Surveillance
     links:
-    - url: https://docs.microsoft.com/azure/azure-monitor/overview
+    - url: ../azure-monitor/overview.md
       itemType: get-started
       text: Vue d’ensemble d’Azure Monitor
-    - url: https://docs.microsoft.com/azure/azure-monitor/platform/data-platform-metrics
+    - url: ../azure-monitor/platform/data-platform-metrics.md
       itemType: get-started
       text: Métriques avec Azure Monitor
-    - url: https://docs.microsoft.com/azure/azure-monitor/platform/data-platform-logs
+    - url: ../azure-monitor/platform/data-platform-logs.md
       itemType: get-started
       text: Journaux avec Azure Monitor
-    - url: https://docs.microsoft.com/azure/azure-monitor/azure-monitor-app-hub
+    - url: ../azure-monitor/azure-monitor-app-hub.yml
       itemType: get-started
       text: Gestion des performances des applications avec Application Insights
-    - url: https://docs.microsoft.com/azure/azure-monitor/app/distributed-tracing
+    - url: ../azure-monitor/app/distributed-tracing.md
       itemType: get-started
       text: Suivi distribué avec Azure Monitor
     footerLink:
-      url: https://docs.microsoft.com/en-us/azure/azure-monitor/
+      url: ../azure-monitor/index.yml
       text: En voir plus sur Azure Monitor
   - title: Provisionnement et remise
     links:
-    - url: https://docs.microsoft.com/azure/azure-resource-manager/
+    - url: ../azure-resource-manager/index.yml
       itemType: get-started
       text: Azure Resource Manager
-    - url: https://docs.microsoft.com/azure/terraform/
+    - url: /azure/terraform/
       itemType: get-started
       text: Terraform sur Azure
     - url: https://help.github.com/actions
       itemType: get-started
       text: GitHub Actions
-    - url: https://docs.microsoft.com/azure/devops/pipelines/index?view=azure-devops
+    - url: /azure/devops/pipelines/index?view=azure-devops
       itemType: get-started
       text: Azure Pipelines
   - title: Mise à l'échelle
     links:
-    - url: https://docs.microsoft.com/azure/azure-monitor/platform/autoscale-overview
+    - url: ../azure-monitor/platform/autoscale-overview.md
       itemType: get-started
       text: Vue d’ensemble de la mise à l’échelle automatique
-    - url: https://docs.microsoft.com/azure/architecture/best-practices/auto-scaling
+    - url: /azure/architecture/best-practices/auto-scaling
       itemType: get-started
       text: Recommandations en matière de mise à l’échelle automatique
     - url: https://www.pluralsight.com/courses/microsoft-azure-autoscaling-developing
       itemType: get-started
       text: Développement pour la mise à l’échelle automatique
-    - url: https://docs.microsoft.com/azure/architecture/framework/scalability/overview
+    - url: /azure/architecture/framework/scalability/overview
       itemType: get-started
       text: Fondement de la scalabilité dans les architectures Azure
-    - url: https://docs.microsoft.com/azure/architecture/guide/design-principles/scale-out
+    - url: /azure/architecture/guide/design-principles/scale-out
       itemType: get-started
       text: Penser la conception des applications pour effectuer un scale-out
-    - url: https://docs.microsoft.com/en-us/azure/architecture/patterns/category/performance-scalability
+    - url: /azure/architecture/patterns/category/performance-scalability
       itemType: get-started
       text: Modèles de performances et d’extensibilité
 additionalContent:

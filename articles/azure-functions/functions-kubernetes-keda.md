@@ -5,12 +5,12 @@ author: jeffhollan
 ms.topic: conceptual
 ms.date: 11/18/2019
 ms.author: jehollan
-ms.openlocfilehash: eab0a54d30f2cd2829779dbfc6081445f5be0a71
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 525635ef40437fe308c52e2d5aba2c97ed8f20e7
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83648846"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92927530"
 ---
 # <a name="azure-functions-on-kubernetes-with-keda"></a>Azure Functions sur Kubernetes avec KEDA
 
@@ -34,6 +34,9 @@ Il existe plusieurs façons d’installer KEDA dans un cluster Kubernetes, y com
 
 Vous pouvez déployer n’importe quelle application de fonction sur un cluster Kubernetes en exécutant KEDA.  Dans la mesure où vos fonctions s’exécutent dans un conteneur Docker, votre projet nécessite un `Dockerfile`.  S’il n’en a pas, vous pouvez ajouter un fichier Dockerfile en exécutant la commande suivante à la racine de votre projet Functions :
 
+> [!NOTE]
+> Les outils de base créent automatiquement le fichier Dockerfile pour les fonctions Azure Functions écrites en .NET, Node, Python ou PowerShell. Pour les applications de fonction écrites en Java, il doit être créé manuellement. Utilisez la [liste d’images](https://github.com/Azure/azure-functions-docker) Azure Functions pour trouver la bonne image de base de la fonction Azure Functions.
+
 ```cli
 func init --docker-only
 ```
@@ -49,7 +52,10 @@ func kubernetes deploy --name <name-of-function-deployment> --registry <containe
 
 > Remplacez `<name-of-function-deployment>` par le nom de votre application de fonction.
 
-Cette opération crée une ressource Kubernetes `Deployment`, une ressource `ScaledObject` et `Secrets`, qui inclut des variables d’environnement importées de votre fichier `local.settings.json`.
+La commande deploy exécute une série d’actions :
+1. Le fichier Dockerfile créé plus tôt est utilisé afin de générer une image locale pour l’application de fonction.
+2. L’image locale est étiquetée et envoyée au registre de conteneurs dans lequel l’utilisateur est connecté.
+3. Un manifeste est créé et appliqué au cluster qui définit une ressource Kubernetes `Deployment`, une ressource `ScaledObject` et `Secrets`, englobant les variables d’environnement importées du fichier `local.settings.json`.
 
 ### <a name="deploying-a-function-app-from-a-private-registry"></a>Déployer une application de fonction à partir d’un registre privé
 

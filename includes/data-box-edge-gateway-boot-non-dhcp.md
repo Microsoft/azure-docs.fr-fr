@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 03/05/2019
 ms.author: alkohli
 ms.openlocfilehash: 880b630ae48eda086f6454f0d7108d27d3403b77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67177731"
 ---
 Si vous effectuez un démarrage dans un environnement non DHCP, procédez comme suit pour déployer la machine virtuelle de votre Data Box Gateway.

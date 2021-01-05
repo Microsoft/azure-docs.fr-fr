@@ -7,12 +7,13 @@ ms.topic: how-to
 ms.author: sandeepu
 author: sandeeppujar
 ms.date: 04/30/2020
-ms.openlocfilehash: cd583b79d6c73ff8da1c9770bf72b3e6990c3140
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: device-developer
+ms.openlocfilehash: 770f6e56a669ab2d9b425a7a2879eeef5d37377b
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594358"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92123421"
 ---
 # <a name="connect-an-azure-sphere-device-to-your-azure-iot-central-application"></a>Connecter un appareil Azure Sphere à votre application Azure IoT Central
 
@@ -20,7 +21,7 @@ ms.locfileid: "83594358"
 
 Cet article vous montre comment connecter un appareil Azure Sphere (DevKit) à une application Azure IoT Central.
 
-Azure Sphere est une plateforme d’application générale sécurisée qui présente des fonctionnalités de sécurité et de communication intégrées pour les appareils connectés à Internet. Elle comprend une unité de microcontrôleur (MCU) transversale, connectée et sécurisée, un système d'exploitation Linux personnalisé et un service de sécurité cloud qui offre une sécurité continue et renouvelable. Pour plus d’informations, consultez [Qu’est-ce qu’Azure Sphere ?](https://docs.microsoft.com/azure-sphere/product-overview/what-is-azure-sphere).
+Azure Sphere est une plateforme d’application générale sécurisée qui présente des fonctionnalités de sécurité et de communication intégrées pour les appareils connectés à Internet. Elle comprend une unité de microcontrôleur (MCU) transversale, connectée et sécurisée, un système d'exploitation Linux personnalisé et un service de sécurité cloud qui offre une sécurité continue et renouvelable. Pour plus d’informations, consultez [Présentation d’Azure Sphere](/azure-sphere/product-overview/what-is-azure-sphere).
 
 Les [kits de développement Azure Sphere](https://azure.microsoft.com/services/azure-sphere/get-started/) mettent à votre disposition tout ce dont vous avez besoin pour démarrer le prototypage et le développement d’applications Azure Sphere. Azure IoT Central avec Azure Sphere active une pile de bout en bout pour une solution IoT. Azure Sphere fournit la prise en charge des appareils et IoT Central en tant que plateforme d’applications IoT managée sans code.
 
@@ -37,7 +38,7 @@ Pour effectuer les étapes de cet article, vous avez besoin des ressources suiva
 
 - Une application Azure IoT Central.
 - Visual Studio 2019, version 16.4 ou ultérieure
-- Un [kit de développement MT3620 Azure Sphere de Seeed Studios](https://docs.microsoft.com/azure-sphere/hardware/mt3620-reference-board-design).
+- Un [kit de développement MT3620 Azure Sphere de Seeed Studios](/azure-sphere/hardware/mt3620-reference-board-design).
 
 > [!NOTE]
 > Si vous n’avez pas d’appareil physique, après la première étape, passez à la dernière section pour essayer un appareil simulé.
@@ -66,7 +67,7 @@ Pour permettre à l’exemple de se connecter à IoT Central, vous devez [config
 
 Une fois l'appareil connecté à IoT Central, les données de télémétrie s'affichent sur le tableau de bord.
 
-:::image type="content" source="media/howto-connect-sphere/sphere-view.png" alt-text="Tableau de bord pour kit de développement Azure Sphere":::
+:::image type="content" source="media/howto-connect-sphere/sphere-view.png" alt-text="Modèle d’appareil pour kit de développement Azure Sphere":::
 
 ## <a name="create-a-simulated-device"></a>Créez un appareil simulé.
 

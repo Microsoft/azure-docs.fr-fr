@@ -3,16 +3,17 @@ title: Exemples de code relatifs au service Stockage Azure | Microsoft Docs
 description: Affichez, téléchargez et exécutez des exemples de code et des applications pour Azure Storage. Découvrez des exemples permettant de bien démarrer avec les objets blob, les files d’attente, les tables et les fichiers à l’aide des bibliothèques de client de stockage .NET, Java, Python, Node.js, Azure CLI et C++.
 author: mhopkins-msft
 ms.author: mhopkins
-ms.date: 09/06/2019
+ms.date: 10/01/2020
 ms.service: storage
 ms.subservice: common
 ms.topic: sample
-ms.openlocfilehash: 900fb5120b1674397c248fd7d090660c7a813705
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: de587483f5dc15b17fa32e044b569ef9d7f007f7
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594183"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92792954"
 ---
 # <a name="azure-storage-samples"></a>Exemples relatifs à Microsoft Azure Storage
 
@@ -48,29 +49,29 @@ Pour explorer les exemples relatifs à Node.js, téléchargez la [bibliothèque 
 
 ## <a name="c-samples"></a>Exemples C++
 
-Pour explorer les exemples C++, téléchargez la [bibliothèque cliente de stockage C++](https://www.nuget.org/packages/wastorage/) à partir de NuGet.
+Pour explorer les exemples C++, accédez à la [bibliothèque de client du Stockage Azure pour C++](https://github.com/Azure/azure-sdk-for-cpp/tree/master/sdk/storage) sur GitHub.
 
-* [Prise en main des objets blob](https://github.com/Azure/azure-storage-cpp/tree/master/Microsoft.WindowsAzure.Storage/samples/BlobsGettingStarted.cpp)
-* [Prise en main des tables](https://github.com/Azure/azure-storage-cpp/tree/master/Microsoft.WindowsAzure.Storage/samples/TablesGettingStarted.cpp)
-* [Prise en main des files d’attente](https://github.com/Azure/azure-storage-cpp/tree/master/Microsoft.WindowsAzure.Storage/samples/QueuesGettingStarted.cpp)
+* [Bien démarrer avec les objets blob Azure](https://github.com/Azure/azure-sdk-for-cpp/blob/master/sdk/storage/azure-storage-blobs/sample/blob_getting_started.cpp)
+* [Bien démarrer avec Azure Data Lake](https://github.com/Azure/azure-sdk-for-cpp/blob/master/sdk/storage/azure-storage-files-datalake/sample/datalake_getting_started.cpp).
+* [Bien démarrer avec Azure Files](https://github.com/Azure/azure-sdk-for-cpp/blob/master/sdk/storage/azure-storage-files-shares/sample/file_share_getting_started.cpp)
 
 ## <a name="azure-cli"></a>Azure CLI
 
 Pour explorer les exemples Azure CLI, commencez par [Installer l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 
 * [Prise en main de l’interface Azure CLI](/cli/azure/get-started-with-azure-cli)
-* [Exemples de stockage Azure à l’aide d’Azure CLI](/azure/storage/blobs/storage-samples-blobs-cli)
+* [Exemples de stockage Azure à l’aide d’Azure CLI](../blobs/storage-samples-blobs-cli.md)
 * [Articles populaires sur l’utilisation de l’interface Azure CLI avec Stockage Azure](/cli/azure/popular-articles-using-the-azure-cli#storage)
 
 ## <a name="api-reference-and-source-code"></a>Informations de référence sur l’API et code source
 
 | Langage | Informations de référence sur l'API | Code source |
 |----------|---------------|-------------|
-| .NET | [Référence de la bibliothèque cliente .NET](https://docs.microsoft.com/dotnet/api/overview/azure/storage) | [Code source de la bibliothèque cliente de stockage .NET](https://github.com/Azure/azure-storage-net) |
-| Java | [Référence de la bibliothèque cliente Java](https://docs.microsoft.com/java/api/overview/azure/storage) | [Code source de la bibliothèque cliente de stockage Java](https://github.com/azure/azure-storage-java) |
+| .NET | [Référence de la bibliothèque cliente .NET](/dotnet/api/overview/azure/storage) | [Code source de la bibliothèque cliente de stockage .NET](https://github.com/Azure/azure-storage-net) |
+| Java | [Référence de la bibliothèque cliente Java](/java/api/overview/azure/storage) | [Code source de la bibliothèque cliente de stockage Java](https://github.com/azure/azure-storage-java) |
 | Python | [Informations de référence sur la bibliothèque de client Python](https://azure-storage.readthedocs.io/) | [Code source de la bibliothèque de client de stockage Python](https://github.com/Azure/azure-storage-python) |
 | Node.js | [Référence de la bibliothèque cliente Node.js](https://azure.github.io/azure-storage-node) | [Code source de la bibliothèque cliente de stockage Node.js](https://github.com/Azure/azure-storage-node) |
-| C++ | [Référence de la bibliothèque cliente C++](https://azure.github.io/azure-storage-cpp/) | [Code source de la bibliothèque cliente de stockage C++](https://github.com/Azure/azure-storage-cpp)|
+| C++ | [Référence de la bibliothèque cliente C++](https://azure.github.io/azure-sdk-for-cpp/) | [Code source de la bibliothèque cliente de stockage C++](https://github.com/Azure/azure-sdk-for-cpp/tree/master/sdk/storage)|
 | Azure CLI | [Informations de référence sur la bibliothèque Azure CLI](/cli/azure/storage) | [Code source de la bibliothèque cliente de stockage Azure CLI](https://github.com/Azure-Samples/azure-cli-samples/tree/master/storage)
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -81,4 +82,5 @@ Les articles suivants indexent chacun des exemples par service (blob, fichier, f
 * [Exemples relatifs au service Stockage Azure avec Java](storage-samples-java.md)
 * [Exemples relatifs au service Stockage Azure en JavaScript](storage-samples-javascript.md)
 * [Exemples relatifs au service Stockage Azure avec Python](storage-samples-python.md)
-* [Exemples relatifs au service Stockage Azure utilisant Azure CLI](/azure/storage/blobs/storage-samples-blobs-cli)
+* [Exemples relatifs au service Stockage Azure avec C++](storage-samples-c-plus-plus.md)
+* [Exemples relatifs au service Stockage Azure utilisant Azure CLI](../blobs/storage-samples-blobs-cli.md)

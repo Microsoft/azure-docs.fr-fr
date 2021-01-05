@@ -1,29 +1,33 @@
 ---
-author: ramonarguelles
+author: msftradford
 ms.service: spatial-anchors
 ms.topic: include
-ms.date: 1/30/2019
-ms.author: rgarcia
-ms.openlocfilehash: 0dab71b6d169e26a3d7dc208dd09efe1143fbe13
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 11/20/2020
+ms.author: parkerra
+ms.openlocfilehash: 80685dee7907b81832c94044d1feb8fcf2e41bde
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67176752"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185377"
 ---
 ### <a name="open-the-publish-wizard"></a>Ouvrir l’Assistant de publication
 
 Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet **SharingService**, puis sélectionnez **Publier**.
 
-L’Assistant de publication démarre. Sélectionnez **App Service** > **Publier** pour ouvrir la boîte de dialogue **Créer App Service**.
+L’Assistant de publication démarre. 
+
+Sélectionnez **App Service** > **Publier** pour ouvrir le volet **Créer App Service**.
 
 ### <a name="sign-in-to-azure"></a>Connexion à Azure
 
-Dans la boîte de dialogue **Créer App Service**, sélectionnez **Ajouter un compte**, puis connectez-vous à votre abonnement Azure. Si vous êtes déjà connecté, sélectionnez le compte que vous souhaitez dans la liste déroulante.
+Connectez-vous au portail Azure.
 
-> [!NOTE]
-> Si vous êtes déjà connecté, ne sélectionnez pas encore **Créer**.
->
+Dans le volet **Créer App Service**, sélectionnez **Ajouter un compte**, puis connectez-vous à votre abonnement Azure. Si vous êtes déjà connecté, sélectionnez le compte que vous souhaitez dans la liste déroulante.
+
+   > [!NOTE]
+   > Si vous êtes déjà connecté, ne sélectionnez pas encore **Créer**.
+   >
 
 ### <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -39,24 +43,24 @@ Nommez le groupe de ressources **myResourceGroup**, puis sélectionnez **OK**.
 
 En regard de **Plan d’hébergement**, sélectionnez **Nouveau**.
 
-Dans la boîte de dialogue **Configurer le plan d’hébergement**, utilisez ces paramètres :
+Dans le volet **Configurer un plan d’hébergement**, utilisez ces paramètres :
 
 | Paramètre | Valeur suggérée | Description |
 |-|-|-|
-|Plan App Service| MySharingServicePlan | Nom du plan App Service. |
-| Location | USA Ouest | Centre de données dans lequel l’application web est hébergée. |
-| Size | Gratuit | [Niveau tarifaire](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) déterminant les fonctionnalités d’hébergement. |
+|Plan App Service| MySharingServicePlan | Nom du plan App Service |
+| Emplacement | USA Ouest | Centre de données où l’application web est hébergée |
+| Taille | Gratuit | [Niveau tarifaire](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) déterminant les fonctionnalités d’hébergement |
 
 Sélectionnez **OK**.
 
 ### <a name="create-and-publish-the-web-app"></a>Créer et publier l’application web
 
-Dans **Nom de l’application**, entrez un nom d’application unique (les caractères valides sont `a-z`, `0-9` et `-`) ou acceptez le nom unique généré automatiquement. L’URL de l’application web est `https://<app_name>.azurewebsites.net`, où `<app_name>` est le nom de votre application.
+Dans **Nom de l’application**, entrez un nom d’application unique. Les caractères valides sont a-z, 0-9 et les tirets (-). Sinon, acceptez le nom unique généré automatiquement. L’URL de l’application web est `https://<app_name>.azurewebsites.net`, où `<app_name>` est le nom de votre application.
 
 Sélectionnez **Créer** pour commencer à créer les ressources Azure.
 
-À la fin de l’Assistant, il publie l’application web ASP.NET Core sur Azure, puis il ouvre l’application dans votre navigateur par défaut.
+   À la fin de l’Assistant, il publie l’application web ASP.NET Core sur Azure, puis il ouvre l’application dans votre navigateur par défaut.
 
-![Application web ASP.NET publiée dans Azure](./media/spatial-anchors-azure/web-app-running-live.png)
+  ![Capture d’écran d’une application web ASP.NET publiée dans Azure.](./media/spatial-anchors-azure/web-app-running-live.png)
 
-Le nom d’application que vous avez utilisé dans cette section est utilisé en tant que le préfixe d’URL au format `https://<app_name>.azurewebsites.net`. Prenez note de cette URL, car vous en aurez besoin.
+Le nom d’application que vous avez utilisé dans cette section est utilisé en tant que le préfixe d’URL au format `https://<app_name>.azurewebsites.net`. Copiez cette URL dans un éditeur de texte en vue de l’utiliser ultérieurement.

@@ -3,21 +3,20 @@ title: Types de point de terminaison Traffic Manager | Microsoft Docs
 description: Cet article explique les différents types de points de terminaison pouvant être utilisés avec Azure Traffic Manager.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
-manager: twooley
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/29/2017
-ms.author: rohink
-ms.openlocfilehash: 3d8f899a7899243129d31c2620a51dc764a8e917
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 692c63849bc9e92ded43db3bf22ce14384f2b68d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226993"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89401280"
 ---
 # <a name="traffic-manager-endpoints"></a>Points de terminaison Traffic Manager
 

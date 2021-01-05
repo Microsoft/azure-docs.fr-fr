@@ -1,6 +1,6 @@
 ---
 title: 'Tutoriel : Concevoir une base de données multilocataire - Hyperscale (Citus) - Azure Database pour PostgreSQL'
-description: Ce tutoriel illustre comment créer, remplir et interroger des tables distribuées dans Azure Database pour PostgreSQL Hyperscale (Citus).
+description: Ce tutoriel explique comment alimenter une application multilocataire évolutive avec Azure Database pour PostgreSQL Hyperscale (Citus).
 author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
@@ -9,12 +9,12 @@ ms.custom: mvc
 ms.devlang: azurecli
 ms.topic: tutorial
 ms.date: 05/14/2019
-ms.openlocfilehash: 17ac29de243f4abfff1cfc83fc6424799978bf0e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d8dee086f55c5596af50245b5271d98536eb7e57
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74978149"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026197"
 ---
 # <a name="tutorial-design-a-multi-tenant-database-by-using-azure-database-for-postgresql--hyperscale-citus"></a>Tutoriel : Concevoir une base de données multilocataire avec Azure Database pour PostgreSQL – Hyperscale (Citus)
 
@@ -139,6 +139,8 @@ SELECT create_distributed_table('ads',         'company_id');
 SELECT create_distributed_table('clicks',      'company_id');
 SELECT create_distributed_table('impressions', 'company_id');
 ```
+
+[!INCLUDE [azure-postgresql-hyperscale-dist-alert](../../includes/azure-postgresql-hyperscale-dist-alert.md)]
 
 ## <a name="ingest-sample-data"></a>Ingérer des exemples de données
 
@@ -273,6 +275,5 @@ Au cours des étapes précédentes, vous avez créé des ressources Azure dans u
 
 Dans ce tutoriel, vous avez appris à configurer un groupe de serveurs Hyperscale (Citus). Vous vous y êtes connecté avec psql, vous avez créé un schéma et vous avez distribué les données. Vous avez appris à exécuter des requêtes de données au sein et entre les locataires, ainsi qu’à personnaliser le schéma par locataire.
 
-Ensuite, découvrez les concepts de l’hyperscale.
-> [!div class="nextstepaction"]
-> [Types de nœuds de l’hyperscale](https://aka.ms/hyperscale-concepts)
+- En savoir plus sur les [types de nœuds](./concepts-hyperscale-nodes.md) des groupes de serveurs
+- Déterminer la [taille initiale](howto-hyperscale-scale-initial.md) optimale pour votre groupe de serveurs

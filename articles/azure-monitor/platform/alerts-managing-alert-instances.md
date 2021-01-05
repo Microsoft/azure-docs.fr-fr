@@ -4,16 +4,16 @@ description: Gestion des instances d’alerte dans Azure
 ms.subservice: alerts
 ms.topic: conceptual
 ms.date: 09/24/2018
-ms.openlocfilehash: 1910b3b474012365e8117f584379b2b29f8ce3de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82905cba5f391365ada13f4e5df5ad139f4c121e
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77667616"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92102868"
 ---
 # <a name="manage-alert-instances-with-unified-alerts"></a>Gérer les instances d’alerte avec des alertes unifiées
 
-L’[expérience des alertes unifiées](https://aka.ms/azure-alerts-overview) dans Azure Monitor, vous permet de voir vos différents types d’alertes dans Azure. Elle s’étend sur plusieurs abonnements dans un seul volet. Cet article explique comment afficher vos instances d’alerte et comment rechercher des instances d’alerte spécifiques pour résoudre des problèmes.
+L’[expérience des alertes unifiées](./alerts-overview.md) dans Azure Monitor, vous permet de voir vos différents types d’alertes dans Azure. Elle s’étend sur plusieurs abonnements dans un seul volet. Cet article explique comment afficher vos instances d’alerte et comment rechercher des instances d’alerte spécifiques pour résoudre des problèmes.
 
 > [!NOTE]
 > Vous ne pouvez accéder qu’aux alertes générées au cours des 30 derniers jours.
@@ -54,5 +54,4 @@ En plus des filtres disponibles dans la page précédente, vous pouvez filtrer s
 
 La sélection d’une instance d’alerte a pour effet d’ouvrir la page **Détails de l’alerte** qui affiche des détails supplémentaires sur cette instance d’alerte spécifique.   
 
-![Capture d’écran de la page Détails de l’alerte](media/alerts-managing-alert-instances/alert-details.jpg)  
-
+![Capture d’écran de la page Détails de l’alerte](media/alerts-managing-alert-instances/alert-details.jpg)

@@ -1,20 +1,20 @@
 ---
-title: Inscrire un appareil TPM auprès du service Azure Device Provisioning avec C#
+title: 'Démarrage rapide : Inscrire un appareil TPM auprès du service Azure Device Provisioning avec C#'
 description: 'Démarrage rapide : Inscrire un appareil TPM auprès du service Azure IoT Hub Device Provisioning (DPS) à l’aide du SDK du service C#. Ce démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
-ms.date: 11/08/2019
+ms.date: 09/28/2020
 ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
-ms.custom: mvc
-ms.openlocfilehash: ee1b803459e0c81b86021b617a29e0b29ee19909
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-csharp
+ms.openlocfilehash: 14f17c6716fe98a11d03e8d1021bcdb1058fe671
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74976840"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968109"
 ---
 # <a name="quickstart-enroll-tpm-device-to-iot-hub-device-provisioning-service-using-c-service-sdk"></a>Démarrage rapide : Inscrire un appareil TPM auprès du service IoT Hub Device Provisioning à l’aide du C# Service SDK
 
@@ -47,7 +47,7 @@ Pour l’exemple de ce démarrage rapide, vous avez besoin de la chaîne de conn
 
 ## <a name="create-the-individual-enrollment-sample"></a>Créer l’exemple d’inscription individuelle
 
-Cette section montre comment créer une application console .NET Core qui ajoute une inscription individuelle pour un appareil TPM à votre service de provisionnement. Avec quelques modifications, vous pouvez également suivre ces étapes pour créer une application console [Windows IoT Core](https://developer.microsoft.com/en-us/windows/iot) pour ajouter l’inscription individuelle. Pour en savoir plus sur le développement avec IoT Core, consultez la [Documentation Windows IoT Core pour les développeurs](https://docs.microsoft.com/windows/iot-core/).
+Cette section montre comment créer une application console .NET Core qui ajoute une inscription individuelle pour un appareil TPM à votre service de provisionnement. Avec quelques modifications, vous pouvez également suivre ces étapes pour créer une application console [Windows IoT Core](https://developer.microsoft.com/en-us/windows/iot) pour ajouter l’inscription individuelle. Pour en savoir plus sur le développement avec IoT Core, consultez la [Documentation Windows IoT Core pour les développeurs](/windows/iot-core/).
 
 1. Ouvrez Visual Studio et sélectionnez **Créer un projet**. Dans **Créer un projet**, choisissez le modèle de projet **Application console (.NET Core)** pour C#, puis sélectionnez **Suivant**.
 
@@ -128,12 +128,15 @@ Cette section montre comment créer une application console .NET Core qui ajoute
    }
    ```
 
-1. Enfin, remplacez le corps de la méthode `Main` par les lignes suivantes :
+1. Enfin, remplacez la méthode `Main` par les lignes suivantes :
 
    ```csharp
-   RunSample().GetAwaiter().GetResult();
-   Console.WriteLine("\nHit <Enter> to exit ...");
-   Console.ReadLine();
+    static async Task Main(string[] args)
+    {
+        await RunSample();
+        Console.WriteLine("\nHit <Enter> to exit ...");
+        Console.ReadLine();
+    }
    ```
 
 1. Générez la solution.

@@ -1,23 +1,20 @@
 ---
 title: Sécurité et authentification Azure Event Grid
 description: Détaille Azure Event Grid et ses concepts.
-services: event-grid
-author: banisadr
-manager: timlt
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 05/22/2019
-ms.author: babanisa
-ms.openlocfilehash: 5f8b0a779e6cb70537d126c251e1e065892934a9
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 07/07/2020
+ms.openlocfilehash: 5a1e4af17c2f4335ed26490bfc2408c66f4aee6b
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629505"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92328723"
 ---
 # <a name="authorizing-access-to-event-grid-resources"></a>Autorisation de l’accès aux ressources Event Grid
-Azure Event Grid vous permet de contrôler le niveau d’accès offert aux utilisateurs, leur permettant d’effectuer différentes opérations de gestion telles que répertorier et créer des abonnements aux événements et générer des clés. Event Grid utilise le contrôle d’accès en fonction du rôle (RBAC) d’Azure.
+Azure Event Grid vous permet de contrôler le niveau d’accès accordé aux utilisateurs leur permettant d’effectuer différentes **opérations de gestion** telles que répertorier et créer des abonnements aux événements et générer des clés. Event Grid utilise le contrôle d’accès en fonction du rôle Azure (Azure RBAC).
 
+> [!NOTE]
+> Azure Event Grid ne prend pas en charge Azure RBAC pour la publication d’événements dans des rubriques ou domaines Event Grid. Utilisez une clé ou un jeton de signature d’accès partagé (SAP) pour authentifier les clients qui publient des événements. Pour plus d’informations, consultez [Authentifier les clients de publication](security-authenticate-publishing-clients.md). 
 
 ## <a name="operation-types"></a>Types d’opération
 
@@ -38,7 +35,7 @@ Event Grid fournit deux rôles intégrés pour gérer les abonnements aux évén
 
 Vous pouvez [affecter ces rôles à un utilisateur ou groupe](../role-based-access-control/quickstart-assign-role-user-portal.md).
 
-**Contributeur EventGrid EventSubscription** : gère les opérations relatives aux abonnements Event Grid.
+**Contributeur EventGrid EventSubscription**  : gère les opérations relatives aux abonnements Event Grid.
 
 ```json
 [
@@ -74,7 +71,7 @@ Vous pouvez [affecter ces rôles à un utilisateur ou groupe](../role-based-acce
 ]
 ```
 
-**Lecteur EventGrid EventSubscription** : lit les abonnements Event Grid.
+**Lecteur EventGrid EventSubscription**  : lit les abonnements Event Grid.
 
 ```json
 [
@@ -112,7 +109,7 @@ Si vous avez besoin de spécifier des autorisations autres que les rôles intég
 
 Voici des exemples de définitions de rôle dans Event Grid permettant aux utilisateurs d’effectuer différentes actions. Ces rôles personnalisés sont différents des rôles intégrés car ils confèrent un accès qui va au-delà des abonnements aux événements.
 
-**EventGridReadOnlyRole.json** : autorise uniquement les opérations en lecture seule.
+**EventGridReadOnlyRole.json**  : autorise uniquement les opérations en lecture seule.
 
 ```json
 {
@@ -131,7 +128,7 @@ Voici des exemples de définitions de rôle dans Event Grid permettant aux utili
 }
 ```
 
-**EventGridNoDeleteListKeysRole.json** : autorise des actions de publication limitées, et interdit les actions de suppression.
+**EventGridNoDeleteListKeysRole.json**  : autorise des actions de publication limitées, et interdit les actions de suppression.
 
 ```json
 {
@@ -154,7 +151,7 @@ Voici des exemples de définitions de rôle dans Event Grid permettant aux utili
 }
 ```
 
-**EventGridContributorRole.json** : autorise toutes les actions Event Grid.
+**EventGridContributorRole.json**  : autorise toutes les actions Event Grid.
 
 ```json
 {
@@ -192,12 +189,12 @@ Vous devez disposer de l’autorisation **Microsoft.EventGrid/EventSubscriptions
 ### <a name="system-topics-azure-service-publishers"></a>Rubriques du système (éditeurs du service Azure)
 Dans les rubriques du système, il vous faut l’autorisation de rédiger un nouvel abonnement à un événement dans la portée de la ressource qui publie l’événement. La ressource est au format suivant : `/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}`
 
-Par exemple, pour vous abonner à un événement sur un compte de stockage nommé **myacct**, il vous faut l’autorisation Microsoft.EventGrid/EventSubscriptions/Write sur :`/subscriptions/####/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/myacct`
+Par exemple, pour vous abonner à un événement sur un compte de stockage nommé **myacct** , il vous faut l’autorisation Microsoft.EventGrid/EventSubscriptions/Write sur :`/subscriptions/####/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/myacct`
 
 ### <a name="custom-topics"></a>Rubriques personnalisées
 Dans les rubriques personnalisées, vous avez besoin de l’autorisation de rédiger un nouvel abonnement à un événement dans la portée de la rubrique Event Grid. La ressource est au format suivant : `/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.EventGrid/topics/{topic-name}`
 
-Par exemple, pour vous abonner à une rubrique personnalisée nommée **mytopic**, il vous faut l’autorisation Microsoft.EventGrid/EventSubscriptions/Write sur :`/subscriptions/####/resourceGroups/testrg/providers/Microsoft.EventGrid/topics/mytopic`
+Par exemple, pour vous abonner à une rubrique personnalisée nommée **mytopic** , il vous faut l’autorisation Microsoft.EventGrid/EventSubscriptions/Write sur :`/subscriptions/####/resourceGroups/testrg/providers/Microsoft.EventGrid/topics/mytopic`
 
 
 

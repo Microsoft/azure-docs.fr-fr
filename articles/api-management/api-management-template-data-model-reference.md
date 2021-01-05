@@ -13,17 +13,17 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 5625ff7e4fc51b9b6b894698719247902a480f44
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 868ad3d1c6e7e7ef2cf32dcf675bc471a614f3ed
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224841"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86243152"
 ---
 # <a name="azure-api-management-template-data-model-reference"></a>Référence du modèle de données du modèle Gestion des API Azure
 Cette rubrique décrit les représentations de type et d’entité des éléments courants utilisés dans les modèles de données pour les modèles du portail des développeurs dans la Gestion des API Azure.  
   
- Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/).  
+ Pour plus d’informations sur l’utilisation de modèles, consultez la page [Guide pratique de personnalisation du portail des développeurs Gestion des API à l’aide de modèles](./api-management-developer-portal-templates.md).  
 
 [!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 
@@ -67,7 +67,7 @@ Cette rubrique décrit les représentations de type et d’entité des élément
 |`serviceUrl`|string|URL absolue du service principal qui implémente cette API.|  
 |`path`|string|URL relative identifiant exclusivement cette API et tous les chemins d’accès à ses ressources au sein de l’instance de service Gestion des API. Elle est ajoutée à l’URL de base du point de terminaison d’API spécifiée lors de la création de l’instance de service pour former l’URL publique de cette API.|  
 |`protocols`|tableau de nombres|Indique sur quels protocoles les opérations dans cette API peuvent être appelées. Les valeurs autorisées sont `1 - http` et `2 - https`, ou les deux.|  
-|`authenticationSettings`|[Paramètres d’authentification du serveur d’autorisation](https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-contract-reference#AuthenticationSettings)|Collection de paramètres d’authentification inclus dans cette API.|  
+|`authenticationSettings`|[Paramètres d’authentification du serveur d’autorisation](/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-contract-reference#AuthenticationSettings)|Collection de paramètres d’authentification inclus dans cette API.|  
 |`subscriptionKeyParameterNames`|object|Propriété facultative utilisable pour donner des noms personnalisés aux paramètres de requête et/ou d’en-tête contenant la clé de l’abonnement. Lorsque cette propriété est présente, elle doit contenir au moins une des deux propriétés suivantes.<br /><br /> `{   "subscriptionKeyParameterNames":   {     "query": “customQueryParameterName",     "header": “customHeaderParameterName"   } }`|  
   
 ##  <a name="api-summary"></a><a name="APISummary"></a> API summary  

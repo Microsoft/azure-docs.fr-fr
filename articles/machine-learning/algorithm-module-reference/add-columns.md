@@ -1,7 +1,7 @@
 ---
 title: 'Ajouter des colonnes : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Ajouter des colonnes dans Azure Machine Learning pour concaténer deux jeux de données.
+description: Découvrez comment utiliser le module Ajouter des colonnes dans le concepteur glisser-déplacer Azure Machine Learning pour concaténer deux jeux de données.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/22/2019
-ms.openlocfilehash: f2e067f76d6ed7d89a38e9b8920c407f161969a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 36de827dff239dbeebc66e330a76b7a65fefb909
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456776"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421955"
 ---
 # <a name="add-columns-module"></a>Module Ajouter des colonnes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour concaténer 2 jeux de données. Vous combinez toutes les colonnes à partir de 2 jeux de données que vous spécifiez en tant qu’entrées pour créer un jeu de données unique. Si vous devez concaténer plus de 2 jeux de données, utilisez plusieurs instances du module **Ajouter des colonnes**.
 

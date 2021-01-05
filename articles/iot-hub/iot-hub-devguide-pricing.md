@@ -12,10 +12,10 @@ ms.custom:
 - amqp
 - mqtt
 ms.openlocfilehash: 4c7382f84522333b6aae0d79941aae8f2147a12f
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81729158"
 ---
 # <a name="azure-iot-hub-pricing-information"></a>Informations sur les tarifs Azure IoT Hub

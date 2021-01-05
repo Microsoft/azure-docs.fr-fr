@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 03/31/2020
 ms.author: apimpm
-ms.openlocfilehash: 2870a654faad4e760a9d022488cb2c4c406cbeab
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: e79248e16ca21ae84022f8ac7f280d93f489c6a4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203129"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87050349"
 ---
 # <a name="provision-a-self-hosted-gateway-in-azure-api-management"></a>Approvisionner une passerelle auto-hébergée dans Gestion des API Azure
 
@@ -31,7 +31,7 @@ Suivez le guide de démarrage rapide suivant : [Créer une instance du service G
 
 ## <a name="provision-a-self-hosted-gateway"></a>Approvisionner une passerelle auto-hébergée
 
-1. Sélectionnez les **Passerelles** sous **Paramètres**.
+1. Sélectionnez **Passerelles** sous **Déploiement et infrastructure**.
 2. Cliquez sur **+ Ajouter**.
 3. Entrez le **Nom** et la **Région** de la passerelle.
 > [!TIP]

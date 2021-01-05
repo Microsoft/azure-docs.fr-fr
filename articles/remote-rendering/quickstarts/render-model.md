@@ -5,18 +5,18 @@ author: florianborn71
 ms.author: flborn
 ms.date: 01/23/2020
 ms.topic: quickstart
-ms.openlocfilehash: b0af45ba4a6b1ca7f9e751af082ff0db80776ec0
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 74bad563de60abc0c1eb7623a81c83fea03f5ee6
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80677684"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92207221"
 ---
 # <a name="quickstart-render-a-model-with-unity"></a>Démarrage rapide : Afficher un modèle avec Unity
 
 Ce guide de démarrage rapide explique comment exécuter un exemple Unity qui effectue le rendu d’un modèle intégré à distance à l’aide du service Azure Remote Rendering (ARR).
 
-Nous n’aborderons pas en détail l’API ARR elle-même ni la configuration d’un nouveau projet Unity. Ces rubriques sont traitées dans le [tutoriel : Configuration d’un projet Unity en partant de zéro](../tutorials/unity/project-setup.md).
+Nous n’aborderons pas en détail l’API ARR elle-même ni la configuration d’un nouveau projet Unity. Ces rubriques sont traitées dans le [tutoriel : Affichage de modèles rendus à distance](../tutorials/unity/view-remote-models/view-remote-models.md).
 
 Dans ce guide de démarrage rapide, vous allez apprendre à :
 > [!div class="checklist"]
@@ -32,11 +32,14 @@ Pour pouvoir accéder au service Azure Remote Rendering, vous devez d’abord [c
 Les logiciels suivants doivent être installés :
 
 * SDK Windows 10.0.18362.0 [(télécharger)](https://developer.microsoft.com/windows/downloads/windows-10-sdk)
-* Dernière version de Visual Studio 2019 [(télécharger)](https://visualstudio.microsoft.com/vs/older-downloads/)
-* GIT [(télécharger)](https://git-scm.com/downloads)
-* Unity 2019.3.1 [(télécharger)](https://unity3d.com/get-unity/download)
-  * Installez ces modules dans Unity :
-    * **UWP** - Prise en charge de la génération avec la plateforme Windows universelle
+* Installez la dernière version de Visual Studio 2019 [(télécharger)](https://visualstudio.microsoft.com/vs/older-downloads/)
+* [Outils Visual Studio pour Mixed Reality](/windows/mixed-reality/install-the-tools). Plus précisément, les installations de *charge de travail* suivantes sont obligatoires :
+  * **Développement Desktop en C++**
+  * **Développement de la plateforme Windows universelle (UWP)**
+* Git [(télécharger)](https://git-scm.com/downloads)
+* Unity 2019.3.1 [(télécharger)](https://unity3d.com/get-unity/download)
+  * Installez les modules ci-dessous dans Unity :
+    * **UWP** : prise en charge de la build de la plateforme Windows universelle
     * **IL2CPP** - Prise en charge de la génération dans Windows (IL2CPP)
 
 ## <a name="clone-the-sample-app"></a>Clonage de l’exemple d’application
@@ -66,7 +69,7 @@ Le modèle par défaut dont nous effectuons le rendu est un [exemple de modèle 
 
 1. Dans le navigateur d’éléments Unity, accédez au dossier *Scenes*, puis ouvrez la scène **Quickstart**.
 1. Sous *Hierarchy*, sélectionnez l’objet de jeu **RemoteRendering**.
-1. Dans le panneau *Inspector*, saisissez vos [informations d’identification de compte](../how-tos/create-an-account.md).
+1. Dans le panneau *Inspector*, saisissez vos [informations d’identification de compte](../how-tos/create-an-account.md). Si vous n’avez pas encore de compte, [créez-en un](../how-tos/create-an-account.md).
 
 ![Informations de compte ARR](./media/arr-sample-account-info.png)
 
@@ -81,7 +84,7 @@ Plus tard, nous déploierons ce projet sur un appareil HoloLens et nous nous con
 
 ### <a name="create-a-session-and-view-the-default-model"></a>Créer une session et voir le modèle par défaut
 
-Sélectionnez le bouton de **lecture** de Unity pour démarrer la session. Dans le panneau *Game*, un message d’état doit apparaître en superposition en bas de la fenêtre d’affichage. Différents changements d’état ont lieu au cours de la session. À l’état **Starting**, la machine virtuelle distante est lancée, ce qui prend plusieurs minutes. En cas de réussite, l’état devient **Ready**. À présent, la session passe à l’état **Connecting**. Elle tente alors d’atteindre le runtime de rendu sur cette machine virtuelle. En cas de réussite, l’exemple passe à l’état **Connected**. À ce stade, il commence à télécharger le modèle pour le rendu. De par la taille du modèle, le téléchargement peut prendre quelques minutes supplémentaires. Le modèle rendu à distance s’affiche alors.
+Sélectionnez le bouton de **lecture** de Unity pour démarrer la session. Dans le panneau *Game*, un message d’état doit apparaître en superposition en bas de la fenêtre d’affichage. Différents changements d’état ont lieu au cours de la session. À l’état **Starting**, le serveur est lancé, ce qui prend plusieurs minutes. En cas de réussite, l’état devient **Ready**. À présent, la session passe à l’état **Connecting**. Elle tente alors d’atteindre le runtime de rendu sur ce serveur. En cas de réussite, l’exemple passe à l’état **Connected**. À ce stade, il commence à télécharger le modèle pour le rendu. De par la taille du modèle, le téléchargement peut prendre quelques minutes supplémentaires. Le modèle rendu à distance s’affiche alors.
 
 ![Sortie de l’exemple](media/arr-sample-output.png)
 

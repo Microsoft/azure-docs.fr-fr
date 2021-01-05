@@ -7,15 +7,17 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 02/20/2020
-ms.openlocfilehash: 78f5f6eda28bed164668445b5671dad92f8dedd7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/06/2020
+ms.openlocfilehash: e78f0d1e8d6d637dfebe1ff475ab8416ba49a263
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77500268"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935413"
 ---
 # <a name="how-to-add-a-custom-skill-to-an-azure-cognitive-search-enrichment-pipeline"></a>Comment ajouter une compétence personnalisée à un pipeline d’enrichissement Recherche cognitive Azure
+
+> [!VIDEO https://www.youtube.com/embed/fHLCE-NZeb4?version=3&start=172&end=221]
 
 Dans Recherche cognitive Azure, un [pipeline d’enrichissement](cognitive-search-concept-intro.md) peut être assemblé à partir de [compétences cognitives prédéfinies](cognitive-search-predefined-skills.md) ainsi que de [compétences personnalisées](cognitive-search-custom-skill-web-api.md) que vous avez créez et ajoutez personnellement au pipeline. Dans cet article, découvrez comment créer une compétence personnalisée qui présente une interface lui permettant d’être incluse dans un pipeline d’enrichissement d’intelligence artificielle. 
 
@@ -39,6 +41,10 @@ Assurez-vous que l’URI est sécurisé (HTTPS).
 Actuellement, le seul mécanisme d’interaction avec une compétence personnalisée est l’interface d’API web. L’API web doit satisfaire les exigences décrites dans cette section.
 
 ### <a name="1--web-api-input-format"></a>1.  Format d’entrée de l’API web
+
+
+> [!VIDEO https://www.youtube.com/embed/fHLCE-NZeb4?version=3&start=294&end=340]
+
 
 L’API web doit accepter un tableau d’enregistrements à traiter. Chaque enregistrement doit contenir un « jeu de propriétés » qui est l’entrée fournie à votre API web. 
 
@@ -158,8 +164,9 @@ Lorsque vous créez un enrichisseur d’API web, vous pouvez décrire des en-tê
 
 Cet article a abordé les exigences d’interface nécessaires à l’intégration d’une compétence personnalisée dans un ensemble de compétences. Cliquez sur les liens suivants pour en savoir plus sur les compétences personnalisées et la composition d’un ensemble de compétences.
 
++ [Regardez notre vidéo sur les compétences personnalisées](https://youtu.be/fHLCE-NZeb4)
 + [Super compétences : référentiel de compétences personnalisées](https://github.com/Azure-Samples/azure-search-power-skills)
 + [Exemple : Création d’une compétence personnalisée pour l’enrichissement par l’IA](cognitive-search-create-custom-skill-example.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un jeu de compétences (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
++ [Créer un jeu de compétences (REST)](/rest/api/searchservice/create-skillset)
 + [Guide pratique pour mapper des champs enrichis](cognitive-search-output-field-mapping.md)

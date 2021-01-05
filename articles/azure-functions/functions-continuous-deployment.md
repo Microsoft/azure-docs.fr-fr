@@ -4,12 +4,12 @@ description: Utilisez les fonctionnalités de déploiement continu d’Azure App
 ms.assetid: 361daf37-598c-4703-8d78-c77dbef91643
 ms.topic: conceptual
 ms.date: 09/25/2019
-ms.openlocfilehash: cc1e100a0c2e652ab081869409fd24dbf88017a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e49c235e11eea17fdd1a7ff7751cc0493934d725
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83123665"
 ---
 # <a name="continuous-deployment-for-azure-functions"></a>Déploiement continu pour Azure Functions
 
@@ -36,46 +36,30 @@ Pour que le déploiement continu fonctionne correctement, votre structure de ré
 
 Pour configurer le déploiement continu d’une Function App existante, procédez comme suit. Ces étapes suivantes présentent l’intégration avec un dépôt GitHub, mais des étapes similaires s’appliquent aux Azure Repos ou à d’autres référentiels de code source.
 
-1. Dans votre Function App sur le [portail Azure](https://portal.azure.com), sélectionnez **Fonctionnalités de la plateforme** > **Centre de déploiement**.
+1. Dans votre application de fonction dans le [Portail Azure](https://portal.azure.com), sélectionnez **Centre de déploiement**, puis **GitHub** et **Autoriser**. Si vous avez déjà autorisé GitHub, sélectionnez **Continuer** et ignorez cette étape. 
 
-    ![Ouvrir le centre de déploiement](./media/functions-continuous-deployment/platform-features.png)
+    :::image type="content" source="./media/functions-continuous-deployment/github.png" alt-text="Centre de déploiement Azure App Service":::
 
-2. Dans le **Centre de déploiement**, sélectionnez **GitHub**, puis **Autoriser**. Si vous avez déjà autorisé GitHub, sélectionnez **Continuer**. 
+3. Dans GitHub, sélectionnez **Autoriser AzureAppService**.
 
-    ![Centre de déploiement Azure App Service](./media/functions-continuous-deployment/github.png)
+    :::image type="content" source="./media/functions-continuous-deployment/authorize.png" alt-text="Centre de déploiement Azure App Service":::
 
-3. Dans GitHub, sélectionnez le bouton **Autoriser Azure App Service**. 
-
-    ![Autoriser Azure App Service](./media/functions-continuous-deployment/authorize.png)
-    
-    Dans le **Centre de déploiement** sur le portail Azure, sélectionnez **Continuer**.
+    Entrez votre mot de passe GitHub, puis sélectionnez **Continuer**.
 
 4. Sélectionnez l’un des fournisseurs de build suivants :
 
     * **Service de build App Service** : idéal si vous n’avez pas besoin d’une build ou si vous avez besoin d’une build générique.
     * **Azure Pipelines (Préversion)**  : idéal si vous avez besoin de davantage de contrôle sur la build. Ce fournisseur est actuellement en préversion.
 
-    ![Sélectionner un fournisseur de build](./media/functions-continuous-deployment/build.png)
+    Sélectionnez **Continuer**.
 
 5. Configurez les informations spécifiques à l’option de contrôle de code source que vous avez spécifiée. Pour GitHub, vous devez entrer ou sélectionner des valeurs pour **Organisation**, **Dépôt** et **Branche**. Les valeurs sont basées sur l’emplacement de votre code. Sélectionnez ensuite **Continuer**.
 
-    ![Configurer GitHub](./media/functions-continuous-deployment/github-specifics.png)
+    :::image type="content" source="./media/functions-continuous-deployment/github-specifics.png" alt-text="Centre de déploiement Azure App Service":::
 
 6. Vérifiez tous les détails, puis sélectionnez **Terminer** pour achever la configuration de votre déploiement.
 
-    ![Résumé](./media/functions-continuous-deployment/summary.png)
-
 Une fois le processus terminé, tout le code de la source spécifiée est déployé sur votre application. À ce stade, les modifications apportées à la source de déploiement déclenchent un déploiement de ces modifications sur votre Function App dans Azure.
-
-## <a name="deployment-scenarios"></a>Scénarios de déploiement
-
-<a name="existing"></a>
-
-### <a name="move-existing-functions-to-continuous-deployment"></a>Déplacer des fonctions existantes pour un déploiement continu
-
-Si vous avez déjà écrit des fonctions sur le [portail Azure](https://portal.azure.com) et souhaitez télécharger le contenu de votre application avant de passer au déploiement continu, accédez à l’onglet **Vue d’ensemble** de votre Function App. Sélectionnez le bouton **Télécharger le contenu de l’application**.
-
-![Télécharger le contenu de l’application](./media/functions-continuous-deployment/download.png)
 
 > [!NOTE]
 > Après avoir configuré l’intégration continue, vous ne pouvez plus modifier vos fichiers sources dans le portail Functions.

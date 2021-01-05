@@ -1,15 +1,14 @@
 ---
 title: Détecter un problème de sauvegarde lente de fichiers et de dossiers
 description: Apporte des conseils visant à vous aider à diagnostiquer la cause des problèmes de performances d’Azure Backup
-ms.reviewer: saurse
 ms.topic: troubleshooting
 ms.date: 07/05/2019
-ms.openlocfilehash: 5e669a68794a8622bb4a2fa55b206153717fd772
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b3f2ac343ef4a703f347ec8a57f242a636bb32d2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82187900"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88824013"
 ---
 # <a name="troubleshoot-slow-backup-of-files-and-folders-in-azure-backup"></a>Résolution des problèmes de sauvegarde lente de fichiers et de dossiers dans Azure Backup
 
@@ -50,13 +49,13 @@ Voici quelques compteurs de performances et plages qui peuvent être utiles pour
 
 | Compteur | Statut |
 | --- | --- |
-| Disque logique (disque physique)--% temps d’inactivité |* 100 % à 50 % d’inactivité = sain</br>* 49 % à 20 % d’inactivité = avertissement ou analyse</br>* 19 % à 0 % d’inactivité = critique ou hors spécifications |
-| Disque logique (disque physique)--% moy. disque s/lecture ou disque s/écriture |* 0,001 ms à 0,015 ms = sain</br>* 0,015 ms à 0,025 ms = avertissement ou analyse</br>* 0,026 ms ou plus = critique ou hors spécifications |
+| Disque logique (disque physique)--% temps d’inactivité |<li> De 100 à 50 % d'inactivité = sain</br><li> De 49 à 20 % d'inactivité = avertissement ou analyse</br><li> De 19 à 0 % d'inactivité = critique ou hors spécifications |
+| Disque logique (disque physique)--% moy. disque s/lecture ou disque s/écriture |<li> De 0,001 à 0,015 ms = sain</br><li> De 0,015 à 0,025 ms = avertissement ou analyse</br><li> 0,026 ou plus = critique ou hors spécifications |
 | Disque logique (disque physique)--Taille de file d’attente du disque actuelle (pour toutes les instances) |80 demandes pendant plus de 6 minutes |
-| Mémoire--Octets de réserve non paginée |* Moins de 60 % du pool consommé = sain<br>* 61 à 80 % du pool consommé = avertissement ou analyse</br>* Plus de 80 % du pool consommé = critique ou hors spécifications |
-| Mémoire--Octets de réserve paginée |* Moins de 60 % du pool consommé = sain</br>* 61 à 80 % du pool consommé = avertissement ou analyse</br>* Plus de 80 % du pool consommé = critique ou hors spécifications |
-| Mémoire--Mégaoctets disponibles |* 50 % de mémoire disponible ou plus = sain</br>* 25 % de mémoire disponible = analyse</br>* 10 % de mémoire disponible = avertissement</br>* Moins de 100 Mo ou 5 % de mémoire disponible = critique ou hors spécifications |
-| Processeur--\%temps processeur (toutes les instances) |* Moins de 60 % consommés = sain</br>* 61 à 90 % consommés = analyse ou attention</br>* 91 % à 100 % consommés = critique |
+| Mémoire--Octets de réserve non paginée |<li> Moins de 60 % du pool consommé = sain<br><li> De 61 à 80 % du pool consommé = avertissement ou analyse</br><li> Plus de 80 % du pool consommé = critique ou hors spécifications |
+| Mémoire--Octets de réserve paginée |<li> Moins de 60 % du pool consommé = sain</br><li> De 61 à 80 % du pool consommé = avertissement ou analyse</br><li> Plus de 80 % du pool consommé = critique ou hors spécifications |
+| Mémoire--Mégaoctets disponibles |<li> 50 % de mémoire disponible ou plus = sain</br><li> 25 % de mémoire disponible = analyse</br><li>10 % de mémoire disponible = avertissement</br><li> Moins de 100 Mo ou 5 % de mémoire disponible = critique ou hors spécifications |
+| Processeur--\%temps processeur (toutes les instances) |<li> Moins de 60 % consommés = sain</br><li> De 61 à 90 % consommés = analyse ou attention</br><li> De 91 à 100 % consommés = critique |
 
 > [!NOTE]
 > Si vous déterminez que l’infrastructure est la cause du problème, nous vous recommandons de défragmenter les disques régulièrement pour de meilleures performances.
@@ -95,6 +94,8 @@ Les indicateurs suivants peuvent vous aider à identifier le goulot d’étrangl
 
 * **L’interface utilisateur affiche la progression du transfert de données**. Les données sont toujours en cours de transfert. La bande passante réseau ou la taille des données engendrent peut-être un ralentissement.
 * **L’interface utilisateur n’affiche pas la progression du transfert de données**. Ouvrez les journaux d’activité sous C:\Program Files\Microsoft Azure Recovery Services Agent\Temp, puis recherchez l’entrée FileProvider::EndData dans les journaux d’activité. Cette entrée signifie que le transfert de données est terminé et que l’opération de catalogage est en cours. N’annulez pas les tâches de sauvegarde. Attendez un peu plus longtemps que l’opération de catalogage soit terminée. Si le problème persiste, contactez le [support Azure](https://portal.azure.com/#create/Microsoft.Support).
+
+Si vous essayez de sauvegarder des disques volumineux, il est recommandé d’utiliser [Azure Data Box](./offline-backup-azure-data-box.md) pour la première sauvegarde (réplication initiale).  Si vous ne pouvez pas utiliser Data Box, tous les problèmes réseau temporaires qui se produisent dans votre environnement pendant des transferts de données longs sur le réseau peuvent entraîner des échecs de sauvegarde.  Pour éviter ceux-ci, vous pouvez ajouter quelques dossiers à votre sauvegarde initiale et continuer à ajouter des dossiers de manière incrémentielle jusqu’à ce que tous les dossiers soient dûment sauvegardés dans Azure.  Les sauvegardes incrémentielles suivantes seront relativement plus rapides.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

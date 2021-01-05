@@ -3,13 +3,13 @@ title: Créer une application de fonction avec un stockage connecté - Azure CLI
 description: Exemple de script Azure CLI - Créer une fonction Azure qui se connecte à un Stockage Azure
 ms.topic: sample
 ms.date: 04/20/2017
-ms.custom: mvc
-ms.openlocfilehash: 833b9223d473c8bfc62485e9e47ba662a4f0e154
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: b95ec2da96e385ba4595a5552e64d6cc039c0e16
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75922683"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565328"
 ---
 # <a name="create-a-function-app-with-a-named-storage-account-connection"></a>Créer une application de fonction avec une connexion au compte de stockage nommée 
 
@@ -17,9 +17,9 @@ Cet exemple de script Azure Functions crée une application de fonction et conne
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous utilisez l’interface de ligne de commande en local, veillez à exécuter Azure CLI 2.0 ou une version plus récente. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

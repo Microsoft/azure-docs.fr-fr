@@ -19,22 +19,26 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: b43c46599cbacaf40bc9583e364d088fa27a3ac9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ad6f89392846564631b70f0acfb5658a050be80
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113125"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88922818"
 ---
 # <a name="odata-searchin-function-in-azure-cognitive-search"></a>Fonction `search.in` OData dans Recherche cognitive Azure
 
 Un scénario courant dans [Expressions de filtre OData](query-odata-filter-orderby-syntax.md) consiste à vérifier si un champ unique dans chaque document est égal à l’une des nombreuses valeurs possibles. Par exemple, voici comment certaines applications implémentent le [filtrage de sécurité](search-security-trimming-for-azure-search.md) : en comparant un champ contenant un ou plusieurs ID de principal avec une liste d’ID de principal représentant l’utilisateur qui émet la requête. Une façon d’écrire une requête telle que celle-ci consiste à utiliser les opérateurs [`eq`](search-query-odata-comparison-operators.md) et [`or`](search-query-odata-logical-operators.md) :
 
+```odata-filter-expr
     group_ids/any(g: g eq '123' or g eq '456' or g eq '789')
+```
 
 Toutefois, il existe une manière plus courte de l’écrire, à l’aide de la fonction `search.in` :
 
+```odata-filter-expr
     group_ids/any(g: search.in(g, '123, 456, 789'))
+```
 
 > [!IMPORTANT]
 > En plus d’être plus courte et plus facile à lire, l’utilisation de `search.in` offre également des [avantages en termes de performances](#bkmk_performance) et permet d’éviter certaines [limites de taille de filtres](search-query-odata-filter.md#bkmk_limits) lorsqu’il existe des centaines voire des milliers de valeurs à inclure dans le filtre. Pour cette raison, nous recommandons fortement d’utiliser `search.in` au lieu d’une disjonction plus complexe d’expressions d’égalité.
@@ -86,27 +90,37 @@ Si vous utilisez `search.in`, vous pouvez vous attendre à des temps de réponse
 
 Recherchez tous les hôtels avec un nom égal à « Sea View motel » ou « Budget hotel ». Les expressions contiennent des espaces, qui sont des séparateurs par défaut. Vous pouvez spécifier un autre séparateur entre guillemets simples comme troisième paramètre de chaîne :  
 
+```odata-filter-expr
     search.in(HotelName, 'Sea View motel,Budget hotel', ',')
+```
 
 Recherchez tous les hôtels avec un nom égal à « Sea View motel » ou « Budget hotel » séparés par « | » :
 
+```odata-filter-expr
     search.in(HotelName, 'Sea View motel|Budget hotel', '|')
+```
 
 Recherchez tous les hôtels avec des chambres comportant les balises « wifi » ou « baignoire » :
 
+```odata-filter-expr
     Rooms/any(room: room/Tags/any(tag: search.in(tag, 'wifi, tub')))
+```
 
 Recherchez une correspondance entre des expressions tirées d’une collection, telles que « heated towel racks » ou « hairdryer included » dans les balises.
 
+```odata-filter-expr
     Rooms/any(room: room/Tags/any(tag: search.in(tag, 'heated towel racks,hairdryer included', ','))
+```
 
 Recherchez tous les hôtels sans les balises « motel » ou « cabin » :
 
+```odata-filter-expr
     Tags/all(tag: not search.in(tag, 'motel, cabin'))
+```
 
 ## <a name="next-steps"></a>Étapes suivantes  
 
 - [Filtres dans la Recherche cognitive Azure](search-filters.md)
 - [Vue d’ensemble du langage d’expression OData pour Recherche cognitive Azure](query-odata-filter-orderby-syntax.md)
 - [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md)
-- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents)

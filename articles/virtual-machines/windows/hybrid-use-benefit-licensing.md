@@ -1,18 +1,18 @@
 ---
 title: Azure Hybrid Benefit pour Windows Server
-description: Découvrez comment optimiser les avantages de votre contrat Software Assurance pour Windows pour mettre des licences locales sur Azure
+description: Découvrez comment optimiser les avantages de votre contrat Software Assurance pour Windows pour mettre des licences locales sur Azure.
 author: xujing-ms
 ms.service: virtual-machines-windows
 ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 4/22/2018
 ms.author: xujing
-ms.openlocfilehash: f84d4fcd85f1e718f414e63bbe76fd29fa32427d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 43784fe2bb94d5abd012f22ed530e4631a304614
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869563"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91335984"
 ---
 # <a name="azure-hybrid-benefit-for-windows-server"></a>Azure Hybrid Benefit pour Windows Server
 Pour les clients avec Software Assurance, Azure Hybrid Benefit pour Windows Server permet d’utiliser les licences Windows Server locales et d’exécuter des machines virtuelles Windows sur Azure à moindre coût. Vous pouvez utiliser Azure Hybrid Benefit pour Windows Server pour déployer de nouvelles machines virtuelles avec le système d’exploitation Windows. Cet article récapitule les étapes du déploiement de nouvelles machines virtuelles avec Azure Hybrid Benefit pour Windows Server. Il explique également comment mettre à jour des machines virtuelles existantes en cours d’exécution. Pour plus d’informations sur les licences et les réductions de coût relatives à Azure Hybrid Benefit pour Windows Server, consultez la [page de gestion des licences Azure Hybrid Benefit pour Windows Server](https://azure.microsoft.com/pricing/hybrid-use-benefit/).
@@ -66,7 +66,7 @@ az vm create \
 ```
 
 ### <a name="template"></a>Modèle
-Dans vos modèles Resource Manager, vous pouvez spécifier un paramètre supplémentaire `licenseType`. Pour en savoir plus sur la création de modèles Azure Resource Manager, [cliquez ici](../../resource-group-authoring-templates.md).
+Dans vos modèles Resource Manager, vous pouvez spécifier un paramètre supplémentaire `licenseType`. Pour en savoir plus sur la création de modèles Azure Resource Manager, [cliquez ici](../../azure-resource-manager/templates/template-syntax.md).
 ```json
 "properties": {
     "licenseType": "Windows_Server",
@@ -190,7 +190,7 @@ Vous pouvez également consulter [Modifier un groupe de machines virtuelles iden
 ## <a name="next-steps"></a>Étapes suivantes
 - Découvrez comment [réaliser des économies avec Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-use-benefit/).
 - Obtenez plus d’informations dans [Questions fréquentes sur Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-use-benefit/faq/).
-- Consultez les [instructions détaillées sur la gestion des licences avec Azure Hybrid Benefit pour Windows Server](https://docs.microsoft.com/windows-server/get-started/azure-hybrid-benefit).
+- Consultez les [instructions détaillées sur la gestion des licences avec Azure Hybrid Benefit pour Windows Server](/windows-server/get-started/azure-hybrid-benefit).
 - Découvrez comment [Azure Hybrid Benefit pour Windows Server et Azure Site Recovery rendent la migration d’applications vers Azure encore plus rentable](https://azure.microsoft.com/blog/hybrid-use-benefit-migration-with-asr/).
-- En savoir plus sur [Windows 10 sur Azure avec des droits d’hébergement multilocataire](https://docs.microsoft.com/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment).
+- En savoir plus sur [Windows 10 sur Azure avec des droits d’hébergement multilocataire](./windows-desktop-multitenant-hosting-deployment.md).
 - En savoir plus sur [l’utilisation de modèles Resource Manager](../../azure-resource-manager/management/overview.md).

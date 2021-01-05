@@ -5,14 +5,14 @@ services: stream-analytics
 author: mamccrea
 ms.author: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/10/2020
-ms.openlocfilehash: 52ea7b45d0dcdb3ae16b8212557ba6ab3344ff15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2afebe61c4b2998692c823e66d8fc73584ec1dc2
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78968933"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93125646"
 ---
 # <a name="export-an-azure-stream-analytics-job-azure-resource-manager-template"></a>Exporter un modèle Azure Resource Manager de tâche Azure Stream Analytics
 
@@ -24,11 +24,11 @@ Vous pouvez redéployer un tâche Azure Stream Analytics en exportant le modèle
 
 Pour pouvoir exporter un modèle, vous devez d’abord ouvrir une tâche Stream Analytics existante dans Visual Studio Code. 
 
-Pour exporter une tâche vers un projet local, recherchez la tâche que à exporter dans l’**Explorateur Stream Analytics** sur le portail Azure. Dans la page **Requête**, sélectionnez **Ouvrir dans Visual Studio**. Ensuite, sélectionnez **Visual Studio Code**.
+Pour exporter une tâche vers un projet local, recherchez la tâche que à exporter dans l’ **Explorateur Stream Analytics** sur le portail Azure. Dans la page **Requête** , sélectionnez **Ouvrir dans Visual Studio**. Ensuite, sélectionnez **Visual Studio Code**.
 
 ![Ouvrir une tâche Stream Analytics dans Visual Studio Code](./media/resource-manager-export/open-job-vs-code.png)
 
-Pour plus d’informations sur l’utilisation de Visual Studio Code pour gérer les tâches Stream Analytics, voir [Démarrage rapide de Visual Studio Code](quick-create-vs-code.md).
+Pour plus d’informations sur l’utilisation de Visual Studio Code pour gérer les tâches Stream Analytics, voir [Démarrage rapide de Visual Studio Code](quick-create-visual-studio-code.md).
 
 ## <a name="compile-the-script"></a>Compiler le script 
 
@@ -38,7 +38,7 @@ L’étape suivante consiste à compiler le script de la tâche dans un modèle 
 
    ![Fichier Transformation.asaql dans Visual Studio Code](./media/resource-manager-export/transformation-asaql.png)
 
-1. Cliquez avec le bouton droit sur le fichier *Transformation.asaql*, puis sélectionnez **ASA : Compiler le script** dans le menu.
+1. Cliquez avec le bouton droit sur le fichier *Transformation.asaql* , puis sélectionnez **ASA : Compiler le script** dans le menu.
 
 1. Notez qu’un dossier **Deploy** s’affiche dans votre espace de travail Stream Analytics.
 
@@ -58,9 +58,9 @@ Ensuite, complétez le fichier de paramètres du modèle Azure Resource Manageme
 
 Vous êtes prêt à déployer votre tâche Azure Stream Analytics à l’aide des modèles Azure Resource Manager que vous avez générés dans la section précédente.
 
-Dans une fenêtre PowerShell, exécutez la commande suivante. Veillez à remplacer *ResourceGroupName*, *TemplateFile* et *TemplateParameterFile* par le nom de votre groupe de ressources réel, et à renseigner les chemins d’accès complets des fichiers *JobTemplate.json* et *JobTemplate.parameters.json* dans le dossier **Deploy** de l’espace de travail de votre tâche.
+Dans une fenêtre PowerShell, exécutez la commande suivante. Veillez à remplacer *ResourceGroupName* , *TemplateFile* et *TemplateParameterFile* par le nom de votre groupe de ressources réel, et à renseigner les chemins d’accès complets des fichiers *JobTemplate.json* et *JobTemplate.parameters.json* dans le dossier **Deploy** de l’espace de travail de votre tâche.
 
-Si Azure PowerShell n’est pas configuré, procédez de la manière décrite dans [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+Si Azure PowerShell n’est pas configuré, procédez de la manière décrite dans [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps).
 
 ```azurepowershell
 New-AzResourceGroupDeployment -ResourceGroupName "<your resource group>" -TemplateFile "<path to JobTemplate.json>" -TemplateParameterFile "<path to JobTemplate.parameters.json>"

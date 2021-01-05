@@ -1,236 +1,229 @@
 ---
-title: Tutoriel - Créer un cluster Azure Red Hat OpenShift
+title: Tutoriel - Créer un cluster Azure Red Hat OpenShift 4
 description: Découvrez comment créer un cluster Microsoft Azure Red Hat OpenShift à l’aide d’Azure CLI
-author: jimzim
-ms.author: jzim
+author: sakthi-vetrivel
+ms.author: suvetriv
 ms.topic: tutorial
 ms.service: container-service
-ms.date: 11/04/2019
-ms.openlocfilehash: 58fc695707995aafe4d804ffab8beee7c52b4320
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 10/26/2020
+ms.openlocfilehash: 7b0aead6ada87ca259c838f3f56e68f1030302a2
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79455296"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92675714"
 ---
-# <a name="tutorial-create-an-azure-red-hat-openshift-cluster"></a>Tutoriel : Créer un cluster Azure Red Hat OpenShift
+# <a name="tutorial-create-an-azure-red-hat-openshift-4-cluster"></a>Tutoriel : Créer un cluster Azure Red Hat OpenShift 4
 
-Ce tutoriel est la première partie d’une série d’étapes. Vous allez apprendre à créer un cluster Microsoft Azure Red Hat OpenShift à l’aide d’Azure CLI, puis à le mettre à l’échelle et le supprimer pour nettoyer les ressources.
-
-Dans la première partie de la série, vous découvrirez comment :
-
+Dans ce tutoriel, première partie d’une série qui en compte trois, vous allez préparer votre environnement pour créer un cluster Azure Red Hat OpenShift exécutant OpenShift 4, puis créer un cluster. Vous découvrirez comment effectuer les actions suivantes :
 > [!div class="checklist"]
-> * Créer un cluster Azure Red Hat OpenShift
+> * Configurer les prérequis 
+> * Créer le réseau virtuel et les sous-réseau requis
+> * Déployer un cluster
 
-Cette série de tutoriels vous montre comment effectuer les opérations suivantes :
-> [!div class="checklist"]
-> * Créer un cluster Azure Red Hat OpenShift
-> * [Mettre à l'échelle un cluster Azure Red Hat OpenShift](tutorial-scale-cluster.md)
-> * [Supprimer un cluster Azure Red Hat OpenShift](tutorial-delete-cluster.md)
+## <a name="before-you-begin"></a>Avant de commencer
 
-## <a name="prerequisites"></a>Prérequis
+Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce tutoriel vous demande d’exécuter Azure CLI version 2.6.0 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
 
-> [!IMPORTANT]
-> Ce tutoriel nécessite Azure CLI version 2.0.65.
+Azure Red Hat OpenShift requiert a minimum de 40 cœurs pour créer et exécuter un cluster OpenShift. Le quota de ressources Azure par défaut pour un nouvel abonnement Azure ne répond pas à cette exigence. Pour demander une augmentation de votre limite de ressources, consultez [Quota standard : augmenter les limites par série de machines virtuelles](../azure-portal/supportability/per-vm-quota-requests.md).
 
-Avant de commencer ce tutoriel :
+### <a name="verify-your-permissions"></a>Vérifier vos autorisations
 
-Vérifiez que vous avez bien [configuré votre environnement de développement](howto-setup-environment.md), à savoir :
-- Installation de la dernière version de l’interface CLI (2.0.65 ou ultérieur)
-- Création d’un locataire si vous n’en avez pas déjà un
-- Création d’un objet Azure Application si vous n’en avez pas déjà un
-- Création d’un groupe de sécurité
-- Création d’un utilisateur Active Directory pour vous connecter au cluster
+Au cours de ce tutoriel, vous allez créer un groupe de ressources qui contiendra le réseau virtuel pour le cluster. Vous devez disposer d’autorisations d’Administrateur pour l’accès Utilisateur ou Contributeur, ou d’autorisations de Propriétaire, soit directement sur le réseau virtuel, soit sur le groupe de ressources ou l’abonnement qui le contient.
 
-## <a name="step-1-sign-in-to-azure"></a>Étape 1 : Connexion à Azure
+Vous aurez également besoin de suffisamment d’autorisations Azure Active Directory pour que les outils créent une application et un principal du service en votre nom pour le cluster.
 
-Si vous exécutez Azure CLI localement, ouvrez un interpréteur de commandes Bash et exécutez `az login` pour vous connecter à Azure.
+### <a name="register-the-resource-providers"></a>Inscrire les fournisseurs de ressources
 
-```azurecli
-az login
-```
+1. Si vous possédez plusieurs abonnements Azure, indiquez l’ID d’abonnement pertinent :
 
- Si vous avez accès à plusieurs abonnements, exécutez `az account set -s {subscription ID}` en remplaçant `{subscription ID}` par l’abonnement que vous souhaitez utiliser.
+    ```azurecli-interactive
+    az account set --subscription <SUBSCRIPTION ID>
+    ```
 
-## <a name="step-2-create-an-azure-red-hat-openshift-cluster"></a>Étape 2 : Créer un cluster Azure Red Hat OpenShift
+1. Inscrivez le fournisseur de ressources `Microsoft.RedHatOpenShift` :
 
-Dans une fenêtre de commande Bash, définissez les variables suivantes :
+    ```azurecli-interactive
+    az provider register -n Microsoft.RedHatOpenShift --wait
+    ```
+    
+1. Inscrivez le fournisseur de ressources `Microsoft.Compute` :
 
-> [!IMPORTANT]
-> Choisissez pour le cluster un nom unique et tout en minuscules, sinon la création du cluster échoue.
+    ```azurecli-interactive
+    az provider register -n Microsoft.Compute --wait
+    ```
+    
+1. Inscrivez le fournisseur de ressources `Microsoft.Storage` :
 
-```bash
-CLUSTER_NAME=<cluster name in lowercase>
-```
+    ```azurecli-interactive
+    az provider register -n Microsoft.Storage --wait
+    ```
 
-Choisissez un emplacement pour créer votre cluster. Pour obtenir une liste des régions Azure qui prennent en charge OpenShift dans Azure, voir [Régions prises en charge](supported-resources.md#azure-regions). Par exemple : `LOCATION=eastus`.
+### <a name="get-a-red-hat-pull-secret-optional"></a>Récupération d’un secret d’extraction Red Hat (facultatif)
 
-```bash
-LOCATION=<location>
-```
+Un secret d’extraction Red Hat permet au cluster d’accéder à des registres de conteneurs Red Hat et à du contenu supplémentaire. Cette étape est facultative mais recommandée.
 
-Définissez `APPID` sur la valeur que vous avez enregistrée à l’étape 5 de [Créer une inscription d’application Azure AD](howto-aad-app-configuration.md#create-an-azure-ad-app-registration).
+1. [Accédez au portail de votre gestionnaire de cluster Red Hat OpenShift](https://cloud.redhat.com/openshift/install/azure/aro-provisioned) et connectez-vous.
 
-```bash
-APPID=<app ID value>
-```
+   Vous devrez vous connecter à votre compte Red Hat existant, ou créer un compte Red Hat avec votre adresse e-mail professionnelle et accepter les conditions générales.
 
-Définissez « GROUPID » sur la valeur que vous avez enregistrée à l’étape 10 de [Créer un groupe de sécurité Azure AD](howto-aad-app-configuration.md#create-an-azure-ad-security-group).
+1. Cliquez sur **Download pull secret** et téléchargez un secret d’extraction à utiliser avec votre cluster ARO.
 
-```bash
-GROUPID=<group ID value>
-```
+    Conservez le fichier `pull-secret.txt` enregistré dans un emplacement sûr. Le fichier sera utilisé dans chaque création de cluster si vous devez créer un cluster incluant des exemples ou des opérateurs pour Red Hat ou des partenaires certifiés.
 
-Définissez `SECRET` sur la valeur que vous avez enregistrée à l’étape 8 de [Créer un secret client](howto-aad-app-configuration.md#create-a-client-secret).
+    Lors de l’exécution de la commande `az aro create`, vous pouvez référencer votre secret d’extraction à l’aide du paramètre `--pull-secret @pull-secret.txt`. Exécutez `az aro create` à partir du répertoire où vous avez stocké votre fichier `pull-secret.txt`. Sinon, remplacez `@pull-secret.txt` par `@/path/to/my/pull-secret.txt`.
 
-```bash
-SECRET=<secret value>
-```
+    Si vous copiez votre secret d’extraction, ou que vous le référencez dans d’autres scripts, il doit se présenter sous la forme d’une chaîne JSON valide.
 
-Définissez `TENANT` sur la valeur d’ID de locataire que vous avez enregistrée à l’étape 7 de [Créer un nouveau locataire](howto-create-tenant.md#create-a-new-azure-ad-tenant).
+### <a name="prepare-a-custom-domain-for-your-cluster-optional"></a>Préparer un domaine personnalisé pour votre cluster (facultatif)
 
-```bash
-TENANT=<tenant ID>
-```
+Lorsque vous exécutez la commande `az aro create`, vous pouvez spécifier un domaine personnalisé pour votre cluster à l’aide du paramètre `--domain foo.example.com`.
 
-Créez le groupe de ressources du cluster. Exécutez la commande suivante à partir de l’interpréteur de commandes Bash que vous avez utilisé pour définir les variables ci-dessus :
+Si vous fournissez un domaine personnalisé pour votre cluster, notez les points suivants :
 
-```azurecli
-az group create --name $CLUSTER_NAME --location $LOCATION
-```
+* Après avoir créé votre cluster, vous devez créer deux enregistrements DNS A dans votre serveur DNS pour le `--domain` spécifié :
+    * **api**  : pointant vers l’adresse IP du serveur d’API
+    * **\*.apps**  : pointant vers l’adresse IP d’entrée
+    * Récupérez ces valeurs en exécutant la commande suivante après la création du cluster : `az aro show -n -g --query '{api:apiserverProfile.ip, ingress:ingressProfiles[0].ip}'`.
 
-### <a name="optional-connect-the-clusters-virtual-network-to-an-existing-virtual-network"></a>Facultatif : Connecter le réseau virtuel du cluster à un réseau virtuel existant
+* La console OpenShift sera disponible à une URL telle que `https://console-openshift-console.apps.example.com`, au lieu du domaine intégré `https://console-openshift-console.apps.<random>.<location>.aroapp.io`.
 
-Si vous n’avez pas besoin de connecter le réseau virtuel du cluster que vous créez à un réseau virtuel existant via le peering, ignorez cette étape.
+* Par défaut, OpenShift utilise des certificats auto-signés pour toutes les routes créées sur des domaines personnalisés `*.apps.example.com`.  Si vous choisissez d’utiliser un DNS personnalisé après vous être connecté au cluster, vous devez suivre la documentation OpenShift afin de [configurer une autorité de certification personnalisée pour votre contrôleur d’entrée](https://docs.openshift.com/aro/4/authentication/certificates/replacing-default-ingress-certificate.html) et configurer une [autorité de certification personnalisée pour votre serveur d’API](https://docs.openshift.com/aro/4/authentication/certificates/api-server.html).
 
-En cas de peering à un réseau se trouvant en dehors de l’abonnement par défaut, alors, dans cet abonnement, vous devrez également inscrire le fournisseur Microsoft.ContainerService. Pour ce faire, exécutez la commande ci-dessous dans cet abonnement. Sinon, si le réseau virtuel dont vous effectuez le peering se trouve dans le même abonnement, vous pouvez ignorer l’étape d’enregistrement.
+### <a name="create-a-virtual-network-containing-two-empty-subnets"></a>Créer un réseau virtuel contenant deux sous-réseaux vides
 
-`az provider register -n Microsoft.ContainerService --wait`
+Vous allez maintenant créer un réseau virtuel contenant deux sous-réseaux vides.
 
-Commencez par obtenir l’identificateur du réseau virtuel existant. L’identificateur aura la forme suivante : `/subscriptions/{subscription id}/resourceGroups/{resource group of VNET}/providers/Microsoft.Network/virtualNetworks/{VNET name}`.
+1. **Définissez les variables suivantes dans l’environnement de l’interpréteur de commandes où vous exécuterez les commandes `az`.**
 
-Si vous ne connaissez pas le nom du réseau ou le groupe de ressources auquel le réseau virtuel existant appartient, accédez au [panneau des réseaux virtuels](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Network%2FvirtualNetworks) et cliquez sur votre réseau virtuel. La page des réseaux virtuels s’affiche et propose une liste contenant le nom du réseau ainsi que le groupe de ressources dont il fait partie.
+   ```console
+   LOCATION=eastus                 # the location of your cluster
+   RESOURCEGROUP=aro-rg            # the name of the resource group where you want to create your cluster
+   CLUSTER=cluster                 # the name of your cluster
+   ```
 
-Définissez une variable VNET_ID à l’aide de la commande CLI suivante dans un interpréteur de commandes BASH :
+2. **Créez un groupe de ressources**.
 
-```azurecli
-VNET_ID=$(az network vnet show -n {VNET name} -g {VNET resource group} --query id -o tsv)
-```
+   Un groupe de ressources Azure est un groupe logique dans lequel des ressources Azure sont déployées et gérées. Lorsque vous créez un groupe de ressources, vous devez spécifier un emplacement. Il s’agit de l’emplacement de stockage des métadonnées de groupe de ressources. C’est également là que vos ressources s’exécutent dans Azure si vous ne spécifiez pas une autre région lors de la création de ressources. Créez un groupe de ressources avec la commande [az group create](/cli/azure/group?view=azure-cli-latest#az-group-create).
+    
+   > [!NOTE] 
+   > Azure Red Hat OpenShift n’est pas disponible dans toutes les régions où un groupe de ressources Azure peut être créé. Pour savoir où Azure Red Hat OpenShift est pris en charge, consultez [Régions disponibles](https://azure.microsoft.com/en-gb/global-infrastructure/services/?products=openshift).
 
-Par exemple : `VNET_ID=$(az network vnet show -n MyVirtualNetwork -g MyResourceGroup --query id -o tsv`
+   ```azurecli-interactive
+   az group create \
+     --name $RESOURCEGROUP \
+     --location $LOCATION
+   ```
 
-### <a name="optional-connect-the-cluster-to-azure-monitoring"></a>Facultatif : Connecter le cluster à Azure Monitor
+   L’exemple de sortie suivant montre que le groupe de ressources a été créé correctement :
 
-Tout d’abord, obtenez l’identificateur de l’espace de travail Log Analytics **existant**. L’identificateur aura la forme suivante :
+   ```json
+   {
+     "id": "/subscriptions/<guid>/resourceGroups/aro-rg",
+     "location": "eastus",
+     "name": "aro-rg",
+     "properties": {
+       "provisioningState": "Succeeded"
+     },
+     "type": "Microsoft.Resources/resourceGroups"
+   }
+   ```
 
-`/subscriptions/{subscription}/resourceGroups/{resourcegroup}/providers/Microsoft.OperationalInsights/workspaces/{workspace-id}`.
+2. **Créez un réseau virtuel**.
 
-Si vous ne connaissez pas le nom de l’espace de travail Log Analytics ou le groupe de ressources auquel il appartient, accédez à [	Espace de travail Log Analytics](https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.OperationalInsights%2Fworkspaces) et cliquez sur vos espaces de travail Log Analytics. La page de l’espace de travail Log Analytics apparaît et indique le nom de l’espace de travail et le groupe de ressources auquel il appartient.
+   Les clusters Azure Red Hat OpenShift exécutant OpenShift 4 nécessitent un réseau virtuel avec deux sous-réseaux vides (pour les nœuds principaux et les nœuds worker).
 
-_Pour créer un espace de travail Log Analytics, consultez [Créer un espace de travail Log Analytics](../azure-monitor/learn/quick-create-workspace-cli.md)_ .
+   Créez un réseau virtuel dans le groupe de ressources que vous avez créé précédemment :
 
-Définissez une variable WORKSPACE_ID à l’aide de la commande CLI suivante dans un interpréteur de commandes BASH :
+   ```azurecli-interactive
+   az network vnet create \
+      --resource-group $RESOURCEGROUP \
+      --name aro-vnet \
+      --address-prefixes 10.0.0.0/22
+   ```
 
-```azurecli
-WORKSPACE_ID=$(az monitor log-analytics workspace show -g {RESOURCE_GROUP} -n {NAME} --query id -o tsv)
-```
+   L’exemple de sortie suivant montre le réseau virtuel qui a été créé :
 
-### <a name="create-the-cluster"></a>Créer le cluster
+   ```json
+   {
+     "newVNet": {
+       "addressSpace": {
+         "addressPrefixes": [
+           "10.0.0.0/22"
+         ]
+       },
+       "dhcpOptions": {
+         "dnsServers": []
+       },
+       "id": "/subscriptions/<guid>/resourceGroups/aro-rg/providers/Microsoft.Network/virtualNetworks/aro-vnet",
+       "location": "eastus",
+       "name": "aro-vnet",
+       "provisioningState": "Succeeded",
+       "resourceGroup": "aro-rg",
+       "type": "Microsoft.Network/virtualNetworks"
+     }
+   }
+   ```
 
-Vous êtes prêt à créer un cluster. La procédure ci-après crée le cluster dans le locataire Azure AD spécifié, puis définit l’objet d’application Azure AD et le secret à utiliser comme principal de sécurité ainsi que le groupe de sécurité qui contient les membres disposant d’un accès administrateur au cluster.
+3. **Ajoutez un sous-réseau vide pour les nœuds principaux**.
 
-> [!IMPORTANT]
-> Avant de créer le cluster, vérifiez que vous avez correctement ajouté les autorisations appropriées pour l’application Azure AD comme [expliqué ici](howto-aad-app-configuration.md#add-api-permissions).
+   ```azurecli-interactive
+   az network vnet subnet create \
+     --resource-group $RESOURCEGROUP \
+     --vnet-name aro-vnet \
+     --name master-subnet \
+     --address-prefixes 10.0.0.0/23 \
+     --service-endpoints Microsoft.ContainerRegistry
+   ```
 
-Si vous n’appairez **pas** votre cluster à un réseau virtuel ou ne voulez **pas** Azure Monitor, utilisez la commande suivante :
+4. **Ajoutez un sous-réseau vide pour les nœuds worker**.
 
-```azurecli
-az openshift create --resource-group $CLUSTER_NAME --name $CLUSTER_NAME -l $LOCATION --aad-client-app-id $APPID --aad-client-app-secret $SECRET --aad-tenant-id $TENANT --customer-admin-group-id $GROUPID
-```
+   ```azurecli-interactive
+   az network vnet subnet create \
+     --resource-group $RESOURCEGROUP \
+     --vnet-name aro-vnet \
+     --name worker-subnet \
+     --address-prefixes 10.0.2.0/23 \
+     --service-endpoints Microsoft.ContainerRegistry
+   ```
 
-Si vous **effectuez** le peering de votre cluster à un réseau virtuel, utilisez la commande suivante qui ajoute l’indicateur `--vnet-peer` :
+5. **[Désactivez les stratégies pour les points de terminaison privés](../private-link/disable-private-link-service-network-policy.md) dans le sous-réseau principal**. C’est nécessaire pour que le service puisse se connecter au cluster et le gérer.
 
-```azurecli
-az openshift create --resource-group $CLUSTER_NAME --name $CLUSTER_NAME -l $LOCATION --aad-client-app-id $APPID --aad-client-app-secret $SECRET --aad-tenant-id $TENANT --customer-admin-group-id $GROUPID --vnet-peer $VNET_ID
-```
+   ```azurecli-interactive
+   az network vnet subnet update \
+     --name master-subnet \
+     --resource-group $RESOURCEGROUP \
+     --vnet-name aro-vnet \
+     --disable-private-link-service-network-policies true
+   ```
 
-Si vous **souhaitez** utiliser Azure Monitor avec votre cluster, utilisez la commande suivante, qui ajoute l’indicateur `--workspace-id` :
+## <a name="create-the-cluster"></a>Créer le cluster
 
-```azurecli
-az openshift create --resource-group $CLUSTER_NAME --name $CLUSTER_NAME -l $LOCATION --aad-client-app-id $APPID --aad-client-app-secret $SECRET --aad-tenant-id $TENANT --customer-admin-group-id $GROUPID --workspace-id $WORKSPACE_ID
-```
+Exécutez la commande suivante pour créer un cluster. Si vous choisissez d’utiliser l’une des options suivantes, modifiez la commande en conséquence :
+* Si vous le souhaitez, vous pouvez [transmettre votre secret d’extraction Red Hat](#get-a-red-hat-pull-secret-optional) pour permettre au cluster d’accéder à des registres de conteneurs Red Hat et à du contenu supplémentaire. Ajoutez l’argument `--pull-secret @pull-secret.txt` à votre commande.
+* Si vous le souhaitez, vous pouvez [utiliser un domaine personnalisé](#prepare-a-custom-domain-for-your-cluster-optional). Ajoutez l’argument `--domain foo.example.com` à votre commande en remplaçant `foo.example.com` par votre propre domaine personnalisé.
 
 > [!NOTE]
-> Si vous obtenez une erreur indiquant que le nom d’hôte n’est pas disponible, cela peut signifier que le nom de votre cluster n’est pas unique. Essayez de supprimer votre inscription d’application initiale et recommencez les étapes avec un autre nom de cluster dans [Créer une inscription d’application](howto-aad-app-configuration.md#create-an-azure-ad-app-registration), en ignorant l’étape consistant à créer un utilisateur et un groupe de sécurité.
+> Si vous ajoutez des arguments facultatifs à votre commande, veillez à fermer l’argument situé sur la ligne précédente de la commande à l’aide d’une barre oblique inverse de fin.
 
-
-
-
-Après quelques minutes, `az openshift create` se termine.
-
-### <a name="get-the-sign-in-url-for-your-cluster"></a>Obtenir l’URL de connexion pour votre cluster
-
-Pour obtenir l’URL permettant de vous connecter à votre cluster, exécutez la commande suivante :
-
-```azurecli
-az openshift show -n $CLUSTER_NAME -g $CLUSTER_NAME
+```azurecli-interactive
+az aro create \
+  --resource-group $RESOURCEGROUP \
+  --name $CLUSTER \
+  --vnet aro-vnet \
+  --master-subnet master-subnet \
+  --worker-subnet worker-subnet
 ```
 
-Recherchez le `publicHostName` dans la sortie, par exemple : `"publicHostname": "openshift.xxxxxxxxxxxxxxxxxxxx.eastus.azmosa.io"`
-
-L’URL de connexion pour votre cluster est `https://` suivi de la valeur `publicHostName`.  Par exemple : `https://openshift.xxxxxxxxxxxxxxxxxxxx.eastus.azmosa.io`.  Vous utiliserez cet URI à l’étape suivante dans le cadre de l’URI de redirection de l’inscription d’application.
-
-## <a name="step-3-update-your-app-registration-redirect-uri"></a>Étape 3 : mettre à jour votre URI de redirection de l’inscription d’application
-
-Maintenant que vous avez l’URL de connexion pour le cluster, définissez l’interface utilisateur de la redirection de l’inscription d’application :
-
-1. Ouvrez le panneau [Inscriptions d’applications](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview).
-2. Cliquez sur votre objet d’inscription d’application.
-3. Cliquez sur **Ajouter un URI de redirection**.
-4. Vérifiez que **TYPE** a pour valeur **Web** et définissez l’**URI DE REDIRECTION** au moyen du format suivant : `https://<public host name>/oauth2callback/Azure%20AD`. Par exemple : `https://openshift.xxxxxxxxxxxxxxxxxxxx.eastus.azmosa.io/oauth2callback/Azure%20AD`
-5. Cliquez sur **Enregistrer**.
-
-## <a name="step-4-sign-in-to-the-openshift-console"></a>Étape 4 : Se connecter à la console OpenShift
-
-Vous êtes désormais prêt à vous connecter à la console OpenShift pour votre nouveau cluster. La [console web OpenShift](https://docs.openshift.com/aro/architecture/infrastructure_components/web_console.html) vous permet de visualiser, de parcourir et de gérer le contenu de vos projets OpenShift.
-
-Vous devez utiliser une nouvelle instance de navigateur qui n’a pas mis en cache l’identité que vous utilisez habituellement pour vous connecter au portail Azure.
-
-1. Ouvrez une fenêtre en mode *navigation privée* (Chrome) ou *InPrivate* (Microsoft Edge).
-2. Accédez à l’URL de connexion que vous avez obtenue ci-dessus, par exemple : `https://openshift.xxxxxxxxxxxxxxxxxxxx.eastus.azmosa.io`
-
-Connectez-vous à l’aide du nom d’utilisateur que vous avez créé à l’étape 3 de [Créer un utilisateur Azure Active Directory](howto-aad-app-configuration.md#create-a-new-azure-active-directory-user).
-
-Une boîte de dialogue **Autorisations demandées** s’affiche. Cliquez sur **Consentement pour le compte de votre organisation**, puis cliquez sur **Accepter**.
-
-Vous êtes désormais connecté à la console du cluster.
-
-![Capture d’écran de la console de cluster OpenShift](./media/aro-console.png)
-
- Pour en savoir plus sur l’[utilisation de la console OpenShift](https://docs.openshift.com/aro/getting_started/developers_console.html) pour créer des images, consultez la documentation [Red Hat OpenShift](https://docs.openshift.com/aro/welcome/index.html).
-
-## <a name="step-5-install-the-openshift-cli"></a>Étape 5 : Installer l’interface CLI OpenShift
-
-L’[interface CLI OpenShift](https://docs.openshift.com/aro/cli_reference/get_started_cli.html) (ou *Outils OC*) propose des commandes pour gérer vos applications et utilitaires de niveau inférieur pour interagir avec les différents composants de votre cluster OpenShift.
-
-Dans la console OpenShift, cliquez sur le point d’interrogation dans le coin supérieur droit à côté de votre nom de connexion et sélectionnez **Outils de ligne de commande**.  Suivez le lien **Dernière version** pour télécharger et installer l’interface CLI OC prise en charge pour Linux, MacOS ou Windows.
-
-> [!NOTE]
-> Si vous ne voyez pas l’icône de point d’interrogation dans le coin supérieur droit, sélectionnez *Catalogue des services* ou *Console de l’application* dans le menu déroulant situé en haut à gauche.
->
-> Vous pouvez également [télécharger l’interface CLI OC](https://www.okd.io/download.html) directement.
-
-La page **Outils de ligne de commande** fournit une commande sous la forme `oc login https://<your cluster name>.<azure region>.cloudapp.azure.com --token=<token value>`.  Cliquez sur le bouton *Copier dans le Presse-papiers* pour copier cette commande.  Dans une fenêtre de terminal, [définissez votre chemin d’accès](https://docs.okd.io/latest/cli_reference/openshift_cli/getting-started-cli.html#installing-the-cli) de manière à inclure votre installation locale des outils OC. Connectez-vous ensuite au cluster à l’aide de la commande CLI OC que vous avez copiée.
-
-Si vous n’avez pas pu obtenir la valeur du jeton à l’aide des étapes ci-dessus, obtenez la valeur de jeton à partir de : `https://<your cluster name>.<azure region>.cloudapp.azure.com/oauth/token/request`.
+Après l’exécution de la commande `az aro create`, la création d’un cluster prend normalement une trentaine de minutes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans cette partie du tutoriel, vous avez appris à :
-
 > [!div class="checklist"]
-> * Créer un cluster Azure Red Hat OpenShift
+> * Préparer les prérequis, et créer le réseau virtuel et ses sous-réseaux nécessaires
+> * Déployer un cluster
 
 Passez au tutoriel suivant :
 > [!div class="nextstepaction"]
-> [Mettre à l'échelle un cluster Azure Red Hat OpenShift](tutorial-scale-cluster.md)
+> [Se connecter à un cluster Azure Red Hat OpenShift](tutorial-connect-cluster.md)

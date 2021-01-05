@@ -4,12 +4,12 @@ ms.service: service-bus-messaging
 ms.topic: include
 ms.date: 11/25/2018
 ms.author: spelluru
-ms.openlocfilehash: 5e3c4622131528fc2c40a1510aeea3092018d182
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 9e9057073c8a661e2f3382333abc7ac2778c4ee3
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77474162"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "84680298"
 ---
 ### <a name="install-via-composer"></a>Installation via Composer
 1. Créez un fichier nommé **composer.json** à la racine de votre projet et ajoutez-y le code suivant :
@@ -27,8 +27,6 @@ ms.locfileid: "77474162"
     ```
     php composer.phar install
     ```
-
-Vous pouvez également accéder à la [bibliothèque de client PHP Stockage Azure][php-sdk-github] sur GitHub pour cloner le code source.
 
 [php-sdk-github]: https://github.com/Azure/azure-storage-php
 [install-git]: http://git-scm.com/book/en/Getting-Started-Installing-Git

@@ -8,13 +8,13 @@ ms.author: heidist
 tags: Lucene query analyzer syntax
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: bc691299f38d562aee5c08a89e10372331663f8e
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.date: 10/05/2020
+ms.openlocfilehash: ae4dd8b82e40b46da52a1b1f396569fda1dfea2b
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81262806"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94694624"
 ---
 # <a name="use-the-full-lucene-search-syntax-advanced-queries-in-azure-cognitive-search"></a>Utiliser la syntaxe de recherche Lucene « complète » (requêtes avancées dans Recherche cognitive Azure)
 
@@ -30,7 +30,7 @@ L’analyseur Lucene prend en charge des constructions de requêtes complexes, t
 
 Les exemples suivants utilisent un index de recherche NYC Jobs composé de postes à pourvoir sur la base d’un jeu de données fourni par l’initiative [City of New York OpenData](https://opendata.cityofnewyork.us/). Ces données ne doivent pas être considérées comme étant à jour ou complètes. L’index se trouve sur un service de bac à sable fourni par Microsoft, ce qui signifie que vous n’avez pas besoin d’abonnement Azure ni de Recherche cognitive Azure pour essayer ces requêtes.
 
-En revanche, vous avez besoin de Postman ou d’un outil équivalent pour émettre la requête HTTP sur GET. Pour plus d’informations, consultez l’article indiquant comment [explorer avec les clients REST](search-get-started-postman.md).
+En revanche, vous avez besoin de Postman ou d’un outil équivalent pour émettre la requête HTTP sur GET. Pour plus d’informations, consultez l’article indiquant comment [explorer avec les clients REST](search-get-started-rest.md).
 
 ### <a name="set-the-request-header"></a>Définir l’en-tête de requête
 
@@ -40,20 +40,20 @@ En revanche, vous avez besoin de Postman ou d’un outil équivalent pour émett
 
 Une fois que vous avez spécifié l’en-tête de requête, vous pouvez le réutiliser pour toutes les requêtes dans cet article, en remplaçant uniquement la chaîne **search=** . 
 
-  ![En-tête de demande Postman](media/search-query-lucene-examples/postman-header.png)
+  :::image type="content" source="media/search-query-lucene-examples/postman-header.png" alt-text="En-tête de demande Postman Définir les paramètres" border="false":::
 
 ### <a name="set-the-request-url"></a>Définir l’URL de requête
 
 La requête est une commande GET accompagnée d’une URL contenant le point de terminaison de Recherche cognitive Azure et la chaîne de recherche.
 
-  ![En-tête de demande Postman](media/search-query-lucene-examples/postman-basic-url-request-elements.png)
+  :::image type="content" source="media/search-query-lucene-examples/postman-basic-url-request-elements.png" alt-text="En-tête de demande Postman GET" border="false":::
 
 L’URL est composée des éléments suivants :
 
 + **`https://azs-playground.search.windows.net/`** est un service de recherche de bac à sable tenu à jour par l’équipe de développement de Recherche cognitive Azure. 
 + **`indexes/nycjobs/`** est l’index NYC Jobs dans la collection d’index de ce service. Le nom du service et l’index sont tous deux obligatoires dans la requête.
 + **`docs`** est la collection de documents contenant tout le contenu disponible pour la recherche. La clé d’API de requête fournie dans l’en-tête de requête fonctionne uniquement sur les opérations de lecture ciblant la collection de documents.
-+ **`api-version=2019-05-06`** définit la version de l’API, qui est un paramètre requis dans chaque requête.
++ **`api-version=2020-06-30`** définit la version de l’API, qui est un paramètre requis dans chaque requête.
 + **`search=*`** est la chaîne de requête qui, dans la requête initiale, est nulle, ce qui retourne les 50 premiers résultats (par défaut).
 
 ## <a name="send-your-first-query"></a>Envoyer votre première requête
@@ -63,7 +63,7 @@ En guise d’étape de vérification, collez la requête suivante dans GET et cl
 Collez cette URL dans un client REST comme étape de validation et pour afficher la structure du document.
 
   ```http
-  https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&$count=true&search=*
+  https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&$count=true&search=*
   ```
 
 La chaîne de requête **`search=*`** , est une recherche non spécifiée équivalente à une recherche nulle ou vide. C’est la recherche la plus simple disponible.
@@ -75,7 +75,7 @@ Si vous le souhaitez, vous pouvez ajouter **`$count=true`** à l’URL pour reto
 Ajoutez **queryType=full** pour appeler la syntaxe de requête complète et substituer la syntaxe de requête simple par défaut. 
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&search=*
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&search=*
 ```
 
 Tous les exemples de cet article spécifient le paramètre de requête **queryType=full**, ce qui indique la syntaxe complète est traitée par l’analyseur de requêtes Lucene. 
@@ -106,12 +106,12 @@ Les espaces après les virgules sont facultatifs.
 ### <a name="full-url"></a>URL complète
 
 ```http
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&search=*&searchFields=business_title&$select=business_title
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&search=*&searchFields=business_title&$select=business_title
 ```
 
 La réponse pour cette requête doit ressembler à la capture d’écran suivante.
 
-  ![Exemple de réponse Postman](media/search-query-lucene-examples/postman-sample-results.png)
+  ![Exemple de réponse Postman avec scores](media/search-query-lucene-examples/postman-sample-results.png)
 
 Vous avez peut-être remarqué le score de recherche dans la réponse. Des scores uniformes de 1 sont obtenus en l’absence de classement, soit parce que la recherche n’était pas une recherche en texte intégral, soit parce qu’aucun critère n’a été appliqué. Pour la recherche de valeur Null sans aucun critère, les lignes sont renvoyées dans un ordre arbitraire. Si vous incluez des critères de recherche réels, vous constaterez que les scores de recherche deviendront des valeurs significatives.
 
@@ -134,10 +134,10 @@ $select=business_title, posting_type&search=business_title:(senior NOT junior) A
 ### <a name="full-url"></a>URL complète
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&$select=business_title&search=business_title:(senior NOT junior)
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&$select=business_title&search=business_title:(senior NOT junior)
 ```
 
-  ![Exemple de réponse Postman](media/search-query-lucene-examples/intrafieldfilter.png)
+  :::image type="content" source="media/search-query-lucene-examples/intrafieldfilter.png" alt-text="Expression de recherche de réponse de l’exemple Postman" border="false":::
 
 Vous pouvez définir une opération de recherche par champ avec la syntaxe **fieldName:searchExpression**, où l'expression de recherche peut être un mot ou une phrase, ou une expression plus complexe entre parenthèses, éventuellement avec des opérateurs booléens. Voici quelques exemples :
 
@@ -147,7 +147,7 @@ Vous pouvez définir une opération de recherche par champ avec la syntaxe **fie
 
 Veillez à placer les chaînes entre guillemets si vous souhaitez que les deux chaînes soient évaluées comme une seule entité, comme ici où deux emplacements distincts sont recherchés dans le champ `state`. Vérifiez également que l’opérateur est en majuscules, comme c’est le cas ici avec NOT et AND.
 
-Le champ spécifié dans **fieldName:searchExpression** doit être un champ pouvant faire l’objet d’une recherche. Pour plus d’informations sur l’utilisation des attributs d’index dans les définitions de champs, consultez [Créer un index (API REST Recherche cognitive Azure)](https://docs.microsoft.com/rest/api/searchservice/create-index).
+Le champ spécifié dans **fieldName:searchExpression** doit être un champ pouvant faire l’objet d’une recherche. Pour plus d’informations sur l’utilisation des attributs d’index dans les définitions de champs, consultez [Créer un index (API REST Recherche cognitive Azure)](/rest/api/searchservice/create-index).
 
 > [!NOTE]
 > Dans l’exemple ci-dessus, nous n’avons pas eu besoin d’utiliser le paramètre `searchFields` car chaque partie de la requête comporte un nom de champ explicitement spécifié. Cependant, vous pouvez toujours utiliser le paramètre `searchFields` si vous voulez exécuter une requête où certaines parties sont limitées à un champ spécifique, et le reste peut s’appliquer à plusieurs champs. Par exemple, la requête `search=business_title:(senior NOT junior) AND external&searchFields=posting_type` ne correspondrait à `senior NOT junior` qu'au niveau du champ `business_title`, alors qu'elle correspondrait au champ « externe » avec le champ `posting_type`. Le nom du champ fourni dans **fieldName:searchExpression** a toujours priorité sur le paramètre `searchFields`, c'est pourquoi dans cet exemple, nous n'avons pas besoin d'inclure `business_title` dans le paramètre `searchFields`.
@@ -174,7 +174,7 @@ searchFields=business_title&$select=business_title&search=business_title:asosiat
 Cette requête recherche les postes à pourvoir contenant le terme « associate » (délibérément mal orthographié) :
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:asosiate~
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:asosiate~
 ```
   ![Réponse de recherche partielle](media/search-query-lucene-examples/fuzzysearch.png)
 
@@ -197,14 +197,14 @@ searchFields=business_title&$select=business_title&search=business_title:%22seni
 Dans cette requête, on recherche les postes contenant le terme « senior analyst » où les deux mots sont séparés au plus par un mot :
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:%22senior%20analyst%22~1
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:%22senior%20analyst%22~1
 ```
-  ![Requête de proximité](media/search-query-lucene-examples/proximity-before.png)
+  :::image type="content" source="media/search-query-lucene-examples/proximity-before.png" alt-text="Requête de proximité" border="false":::
 
 Réessayez, mais en supprimant les mots entre « senior analyst ». Notez que huit documents sont retournés pour cette requête, par opposition à 10 pour la requête précédente.
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:%22senior%20analyst%22~0
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:%22senior%20analyst%22~0
 ```
 
 ## <a name="example-5-term-boosting"></a>Exemple 5 : Promotion de termes
@@ -215,18 +215,18 @@ La promotion de termes signifie que vous pouvez accorder à un document un rang 
 Dans cette requête « avant », on recherche les postes à pourvoir contenant le terme *computer analyst* et on constate l’absence de résultat avec les deux mots *computer* et *analyst*. Par contre, les postes *computer* figurent en haut des résultats.
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:computer%20analyst
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:computer%20analyst
 ```
-  ![Promotion de termes avant](media/search-query-lucene-examples/termboostingbefore.png)
+  :::image type="content" source="media/search-query-lucene-examples/termboostingbefore.png" alt-text="Promotion de termes avant" border="false":::
 
 Dans la requête « après », on répète la recherche, cette fois en promouvant les résultats contenant le terme *analyst* par rapport au terme *computer* si les deux mots ensemble n’existent pas. 
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:computer%20analyst%5e2
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:computer%20analyst%5e2
 ```
 Une version plus lisible de la requête ci-dessus est `search=business_title:computer analyst^2`. Pour obtenir une requête exploitable, `^2` est encodé sous la forme `%5E2`, ce qui est plus difficile à voir.
 
-  ![Promotion de termes après](media/search-query-lucene-examples/termboostingafter.png)
+  :::image type="content" source="media/search-query-lucene-examples/termboostingafter.png" alt-text="Promotion de termes après" border="false":::
 
 Il ne faut pas confondre la promotion de termes avec les profils de score, qui promeuvent certains champs plutôt que des termes spécifiques. L’exemple suivant permet d’illustrer les différences entre les deux.
 
@@ -250,13 +250,13 @@ searchFields=business_title&$select=business_title&search=business_title:/(Sen|J
 Dans cette requête, recherchez les postes à pourvoir contenant le terme « Senior » ou « Junior » : `search=business_title:/(Sen|Jun)ior/`.
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:/(Sen|Jun)ior/
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:/(Sen|Jun)ior/
 ```
 
-  ![Requête par expression régulière](media/search-query-lucene-examples/regex.png)
+  :::image type="content" source="media/search-query-lucene-examples/regex.png" alt-text="Requête par expression régulière" border="false":::
 
 > [!Note]
-> Les requêtes Regex ne sont pas [analysées](https://docs.microsoft.com/azure/search/search-lucene-query-architecture#stage-2-lexical-analysis). La seule transformation effectuée sur les termes de requête incomplets est l’utilisation de minuscules.
+> Les requêtes Regex ne sont pas [analysées](./search-lucene-query-architecture.md#stage-2-lexical-analysis). La seule transformation effectuée sur les termes de requête incomplets est l’utilisation de minuscules.
 >
 
 ## <a name="example-7-wildcard-search"></a>Exemple 7 : Recherche par caractères génériques
@@ -273,23 +273,23 @@ searchFields=business_title&$select=business_title&search=business_title:prog*
 Dans cette requête, on recherche les postes à pourvoir qui contiennent le préfixe « prog », par exemple ceux contenant les termes « programmation » et « programmeur ». Vous ne pouvez pas utiliser un signe * ou ? comme premier caractère d’une recherche.
 
 ```GET
-https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2019-05-06&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:prog*
+https://azs-playground.search.windows.net/indexes/nycjobs/docs?api-version=2020-06-30&queryType=full&$count=true&searchFields=business_title&$select=business_title&search=business_title:prog*
 ```
-  ![Requête par caractère générique](media/search-query-lucene-examples/wildcard.png)
+  :::image type="content" source="media/search-query-lucene-examples/wildcard.png" alt-text="Requête par caractère générique" border="false":::
 
 > [!Note]
-> Les requêtes par caractères génériques ne sont pas [analysées](https://docs.microsoft.com/azure/search/search-lucene-query-architecture#stage-2-lexical-analysis). La seule transformation effectuée sur les termes de requête incomplets est l’utilisation de minuscules.
+> Les requêtes par caractères génériques ne sont pas [analysées](./search-lucene-query-architecture.md#stage-2-lexical-analysis). La seule transformation effectuée sur les termes de requête incomplets est l’utilisation de minuscules.
 >
 
 ## <a name="next-steps"></a>Étapes suivantes
 Essayez de spécifier l’Analyseur de requêtes Lucene dans votre code. Les liens suivants expliquent comment configurer des requêtes de recherche pour .NET et l’API REST. Ces liens utilisent la syntaxe simple par défaut. Vous devrez donc appliquer ce que vous avez appris dans cet article pour spécifier le **queryType**.
 
-* [Interroger un index à l’aide du SDK .NET](search-query-dotnet.md)
-* [Interroger un index à l’aide de l’API REST](search-create-index-rest-api.md)
+* [Interroger un index à l’aide du SDK .NET](./search-get-started-dotnet.md)
+* [Interroger un index à l’aide de l’API REST](./search-get-started-powershell.md)
 
 Vous trouverez des informations de référence supplémentaires sur la syntaxe et sur l’architecture de requête, ainsi que des exemples, en cliquant sur les liens suivants :
 
 + [Exemples de requête de syntaxe simple](search-query-simple-examples.md)
 + [Fonctionnement de la recherche en texte intégral dans la Recherche cognitive Azure](search-lucene-query-architecture.md)
-+ [Syntaxe de requête simple](https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search)
-+ [Syntaxe de requête complète Lucene](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search)
++ [Syntaxe de requête simple](/rest/api/searchservice/simple-query-syntax-in-azure-search)
++ [Syntaxe de requête complète Lucene](/rest/api/searchservice/lucene-query-syntax-in-azure-search)

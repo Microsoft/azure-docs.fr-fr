@@ -9,10 +9,10 @@ ms.date: 05/16/2018
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 8c82e3d2c978a7980d02bc686346acdcb21dd591
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "66425751"
 ---
 |  | **De point à site** | **De site à site** | **ExpressRoute** |

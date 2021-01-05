@@ -6,11 +6,11 @@ ms.topic: conceptual
 ms.date: 03/21/2018
 ms.author: atsenthi
 ms.openlocfilehash: a25f16f08ab8ae9564363f179d19d4b30c5315fa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75464274"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012525"
 ---
 # <a name="run-a-service-startup-script-as-a-local-user-or-system-account"></a>Exécuter un script de démarrage du service en tant qu’utilisateur ou compte système local
 Avant de démarrer l’exécutable du service Service Fabric, il peut être nécessaire d’effectuer certaines tâches de configuration.  Par exemple, configurer les variables d’environnement. Dans le manifeste du service, vous pouvez spécifier un script qui doit être exécuté avant le démarrage de l’exécutable du service. En configurant une stratégie « RunAs » pour le point d’entrée d’installation du service, vous pouvez changer le compte sous lequel l’exécutable d’installation doit être exécuté.  Un point d’entrée d’installation distinct vous permet d’exécuter une configuration à privilèges élevés pour une courte période. Ainsi, l’exécutable de l’hôte de service n’a pas besoin d’être exécuté avec des privilèges élevés pendant de longues périodes.

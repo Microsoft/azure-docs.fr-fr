@@ -7,12 +7,12 @@ ms.service: iot-central
 ms.subservice: iot-central-retail
 ms.topic: overview
 ms.date: 10/20/2019
-ms.openlocfilehash: b73d065b43aff5f9793e642a102ff8bb2a7be036
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: b2e6993cd8dc77ccb9b43a3d5aef7b25fd9d7250
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81001138"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347113"
 ---
 # <a name="architecture-of-iot-central-digital-distribution-center-application-template"></a>Modèle d’application d’architecture du centre de distribution numérique IoT Central
 
@@ -26,7 +26,7 @@ Les partenaires et les clients peuvent utiliser le modèle d’application et le
 1. Ensemble de capteurs IoT envoyant des données de télémétrie à un appareil de passerelle
 2. Les appareils de passerelle envoient des données de télémétrie et des insights agrégés à IoT Central
 3. Les données sont acheminées vers le service Azure souhaité pour manipulation
-4. Les services Azure que sont ASA ou Azure Functions permettent de reformater les flux de données et de les envoyer aux comptes de stockage souhaités 
+4. Les services Azure que sont ASA ou Azure Functions permettent de reformater les flux de données et de les envoyer aux comptes de stockage souhaités
 5. Les données traitées sont stockées dans un stockage à chaud pour des actions en quasi temps réel ou dans un stockage à froid pour des améliorations d’insights supplémentaires basées sur l’analyse par lots ou par ML. 
 6. Logic Apps peut être utilisé pour alimenter divers flux de travail d’entreprise dans les applications d’entreprise pour utilisateurs finaux
 

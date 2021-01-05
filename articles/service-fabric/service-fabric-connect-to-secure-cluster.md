@@ -3,12 +3,13 @@ title: Se connecter en toute sécurité à un cluster Azure Service Fabric
 description: Décrit comment authentifier l’accès client à un cluster Service Fabric et comment sécuriser les communications entre les clients et un cluster.
 ms.topic: conceptual
 ms.date: 01/29/2019
-ms.openlocfilehash: a1f4abbabe428a09492efefca4a8da9801b9f68d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 2ce0325f7aebac92eb1e7deadd6f6875b75b3755
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229345"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89008809"
 ---
 # <a name="connect-to-a-secure-cluster"></a>Se connecter à un cluster sécurisé
 
@@ -145,7 +146,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint <Cluster FQDN>:19000 `
 <a id="connectsecureclusterfabricclient"></a>
 
 ## <a name="connect-to-a-cluster-using-the-fabricclient-apis"></a>Se connecter à un cluster à l’aide des API FabricClient
-Le Kit de développement logiciel (SDK) Service Fabric fournit la classe [FabricClient](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient) pour la gestion de cluster. Pour utiliser les API FabricClient, obtenez le package NuGet Microsoft.ServiceFabric.
+Le Kit de développement logiciel (SDK) Service Fabric fournit la classe [FabricClient](/dotnet/api/system.fabric.fabricclient) pour la gestion de cluster. Pour utiliser les API FabricClient, obtenez le package NuGet Microsoft.ServiceFabric.
 
 ### <a name="connect-to-an-unsecure-cluster"></a>Se connecter à un cluster non sécurisé
 
@@ -163,7 +164,7 @@ FabricClient fabricClient = new FabricClient();
 
 ### <a name="connect-to-a-secure-cluster-using-a-client-certificate"></a>Se connecter à un cluster sécurisé à l’aide d’un certificat client
 
-Les nœuds du cluster doivent présenter des certificats valides, dont le nom commun ou le nom DNS dans le SAN s’affichent dans la [propriété RemoteCommonNames](https://docs.microsoft.com/dotnet/api/system.fabric.x509credentials) définie sur [FabricClient](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient). Ce processus permet une authentification mutuelle entre le client et les nœuds du cluster.
+Les nœuds du cluster doivent présenter des certificats valides, dont le nom commun ou le nom DNS dans le SAN s’affichent dans la [propriété RemoteCommonNames](/dotnet/api/system.fabric.x509credentials) définie sur [FabricClient](/dotnet/api/system.fabric.fabricclient). Ce processus permet une authentification mutuelle entre le client et les nœuds du cluster.
 
 ```csharp
 using System.Fabric;
@@ -231,7 +232,7 @@ catch (Exception e)
 
 L’exemple suivant est basé sur Microsoft.IdentityModel.Clients.ActiveDirectory, version 2.19.208020213.
 
-Pour plus d’informations sur l’acquisition d’un jeton AAD, consultez [Microsoft.IdentityModel.Clients.ActiveDirectory](https://msdn.microsoft.com/library/microsoft.identitymodel.clients.activedirectory.aspx).
+Pour plus d’informations sur l’acquisition d’un jeton AAD, consultez [Microsoft.IdentityModel.Clients.ActiveDirectory](/dotnet/api/microsoft.identitymodel.clients.activedirectory?view=azure-dotnet).
 
 ```csharp
 string tenantId = "C15CFCEA-02C1-40DC-8466-FBD0EE0B05D2";

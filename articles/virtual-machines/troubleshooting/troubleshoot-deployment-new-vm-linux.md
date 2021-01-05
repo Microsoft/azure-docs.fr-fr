@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.topic: troubleshooting
 ms.date: 09/09/2016
 ms.author: daberry
-ms.openlocfilehash: f85389d8fc2269b346df22854bb7ddce08844a88
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: f48963a4d18e80cb67bfbbdc532d34f89b8b5d8a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83118224"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87028445"
 ---
 # <a name="troubleshoot-resource-manager-deployment-issues-with-creating-a-new-linux-virtual-machine-in-azure"></a>Résoudre les problèmes de déploiement Resource Manager liés à la création d’une machine virtuelle Linux dans Azure
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
@@ -36,7 +36,7 @@ Pour résoudre les problèmes, commencez par collecter les journaux d’activit�
 
 [Voir les opérations de déploiement](../../azure-resource-manager/templates/deployment-history.md)
 
-[Afficher les journaux d’activité pour gérer les ressources Azure](../../resource-group-audit.md)
+[Afficher les journaux d’activité pour gérer les ressources Azure](../../azure-resource-manager/management/view-activity-logs.md)
 
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-issue1](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-issue1-include.md)]
 
@@ -88,5 +88,4 @@ Cette erreur se produit lorsque la nouvelle demande de la machine virtuelle est 
   * Ajoutez la nouvelle machine virtuelle au même réseau virtuel.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Si vous rencontrez des problèmes lorsque vous démarrez une machine virtuelle Linux arrêtée ou que vous redimensionnez une machine virtuelle Linux existante dans Azure, consultez [Résoudre les problèmes de déploiement Resource Manager liés au redémarrage ou au redimensionnement d’une machine virtuelle Linux existante dans Azure](../linux/restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-
+Si vous rencontrez des problèmes lorsque vous démarrez une machine virtuelle Linux arrêtée ou que vous redimensionnez une machine virtuelle Linux existante dans Azure, consultez [Résoudre les problèmes de déploiement Resource Manager liés au redémarrage ou au redimensionnement d’une machine virtuelle Linux existante dans Azure](./troubleshoot-deploy-vm-linux.md?toc=/azure/virtual-machines/linux/toc.json).

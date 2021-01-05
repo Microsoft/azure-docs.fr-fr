@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 5a17f98d69cb2196f92e19b66fc23dcd89bce188
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 77f2d433b32d180c7b3a819af96a50b721c2087f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687143"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89263431"
 ---
 # <a name="how-to-configure-on-premises-encoders-when-using-azure-media-services-to-create-multi-bitrate-streams"></a>Comment configurer des encodeurs locaux lorsque Azure Media Services est utilisé pour créer des flux multidébits
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 Cette rubrique répertorie les encodeurs en direct locaux que vous pouvez utiliser pour capturer vos événements en direct et envoyer un flux en direct à débit unique vers des canaux AMS (avec activation de l’encodage en direct) en vue d’un traitement ultérieur. La rubrique contient également des liens vers des didacticiels expliquant comment configurer les encodeurs répertoriés.
 
 > [!NOTE]

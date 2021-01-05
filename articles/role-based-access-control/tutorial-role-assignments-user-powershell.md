@@ -13,12 +13,12 @@ ms.tgt_pltfrm: ''
 ms.workload: identity
 ms.date: 02/02/2019
 ms.author: rolyon
-ms.openlocfilehash: 9c35c08889892e877ecfac20910607ddf85b2282
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: a9b66d7b37397fe509cce5c66d30da0a3ae63465
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735485"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94648257"
 ---
 # <a name="tutorial-grant-a-user-access-to-azure-resources-using-azure-powershell"></a>Tutoriel : Accorder un accès utilisateur aux ressources Azure à l’aide d’Azure PowerShell
 
@@ -40,7 +40,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 Pour exécuter ce didacticiel, les éléments suivants sont nécessaires :
 
 - Autorisations pour créer des utilisateurs dans Azure Active Directory (ou disposer d’un utilisateur existant)
-- [Azure Cloud Shell](/azure/cloud-shell/quickstart-powershell)
+- [Azure Cloud Shell](../cloud-shell/quickstart-powershell.md)
 
 ## <a name="role-assignments"></a>Affectations de rôles
 

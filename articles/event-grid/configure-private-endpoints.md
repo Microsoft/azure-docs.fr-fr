@@ -1,26 +1,20 @@
 ---
 title: Configurer des points de terminaison privés pour les rubriques ou les domaines Azure Event Grid
 description: Cet article explique comment configurer des points de terminaison privés pour les rubriques ou les domaines Azure Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: how-to
-ms.date: 03/11/2020
-ms.author: spelluru
-ms.openlocfilehash: d08afe00c13a3f96b9526c3cb29804cfad688ddc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/18/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: f8e0cfc0a850ae15ea6d03ff6ca8b90003adbfc9
+ms.sourcegitcommit: f6236e0fa28343cf0e478ab630d43e3fd78b9596
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79300520"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94916934"
 ---
-# <a name="configure-private-endpoints-for-azure-event-grid-topics-or-domains-preview"></a>Configurer des points de terminaison privés pour les rubriques ou les domaines Azure Event Grid (préversion)
+# <a name="configure-private-endpoints-for-azure-event-grid-topics-or-domains"></a>Configurer des points de terminaison privés pour les rubriques ou les domaines Azure Event Grid
 Vous pouvez utiliser des [points de terminaison privés](../private-link/private-endpoint-overview.md) pour autoriser l’entrée sécurisée d’événements directement à partir de votre réseau virtuel vers vos rubriques et domaines via une [liaison privée](../private-link/private-link-overview.md), sans passer par le réseau Internet public. Le point de terminaison privé utilise une adresse IP de l’espace d’adressage du réseau virtuel pour votre rubrique ou domaine. Pour plus d’informations conceptuelles, consultez [Sécurité du réseau](network-security.md).
 
 Cet article explique comment configurer des points de terminaison privés pour les rubriques ou les domaines.
-
-> [!IMPORTANT]
-> La fonctionnalité de points de terminaison privés est disponible pour les rubriques et les domaines uniquement dans le niveau Premium. Pour passer du niveau De base au niveau Premium, consultez l’article [Mettre à jour le niveau tarifaire](update-tier.md). 
 
 ## <a name="use-azure-portal"></a>Utiliser le portail Azure 
 Cette section vous montre comment utiliser le Portail Azure pour créer un point de terminaison privé pour une rubrique ou un domaine.
@@ -48,7 +42,7 @@ Cette section vous montre comment utiliser le Portail Azure pour créer un point
         3. Vérifiez que la **Sous-ressource cible** est définie sur **rubrique** ou **domaine** (selon le type de ressource que vous avez sélectionné).    
         4. Sélectionnez **Suivant : Bouton Configuration >** en bas de la page. 
 
-            ![Point de terminaison privé - page des ressources](./media/configure-private-endpoints/resource-page.png)
+            ![Capture d’écran montrant la page « Créer un point de terminaison privé - Ressource »](./media/configure-private-endpoints/resource-page.png)
     2. Si vous sélectionnez **Se connecter à une ressource par alias ou ID de ressource**, suivez ces étapes :
         1. Entrez l’ID de la ressource. Par exemple : `/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>`.  
         2. Pour **Ressource**, entrez **rubrique** ou **domaine**. 
@@ -68,7 +62,7 @@ Cette section vous montre comment utiliser le Portail Azure pour créer un point
     ![Point de terminaison privé - page vérifier et créer](./media/configure-private-endpoints/review-create-page.png)
     
 
-## <a name="manage-private-link-connection"></a>Gérer une connexion à liaison privée
+### <a name="manage-private-link-connection"></a>Gérer une connexion à liaison privée
 
 Quand vous créez un point de terminaison privé, la connexion doit être approuvée. Si la ressource pour laquelle vous créez un point de terminaison privé se trouve dans votre répertoire, vous pouvez approuver la requête de connexion à condition d’avoir les autorisations nécessaires. Si vous vous connectez à une ressource Azure dans un autre répertoire, vous devez attendre que le propriétaire de cette ressource approuve votre requête de connexion.
 
@@ -114,7 +108,7 @@ Vous pouvez rejeter un point de terminaison privé qui se trouve dans l’état 
 
 1. Sélectionnez le **point de terminaison privé** que vous souhaitez rejeter, puis sélectionnez **Rejeter** dans la barre d’outils.
 
-    ![Point de terminaison privé – rejeter](./media/configure-private-endpoints/reject-button.png)
+    ![Capture d'écran montrant « Réseau - Connexions des points de terminaison privés » avec l'option « Rejeter » sélectionnée](./media/configure-private-endpoints/reject-button.png)
 1. Dans la boîte de dialogue **Rejeter la connexion**, ajoutez un commentaire (facultatif) et sélectionnez **Oui**. 
 
     ![Point de terminaison privé – rejeter](./media/configure-private-endpoints/reject.png)
@@ -127,7 +121,7 @@ Vous pouvez rejeter un point de terminaison privé qui se trouve dans l’état 
 
 
 ## <a name="use-azure-cli"></a>Utiliser l’interface de ligne de commande Microsoft Azure
-Pour créer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?view=azure-cli-latest#az-network-private-endpoint-create), comme indiqué dans l’exemple suivant :
+Pour créer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create), comme indiqué dans l’exemple suivant :
 
 ```azurecli-interactive
 az network private-endpoint create \
@@ -141,12 +135,12 @@ az network private-endpoint create \
     --group-ids topic
 ```
 
-Pour obtenir une description des paramètres utilisés dans l’exemple, consultez la documentation relative à [az network private-endpoint create](/cli/azure/network/private-endpoint?view=azure-cli-latest#az-network-private-endpoint-create). Voici quelques points à noter dans cet exemple : 
+Pour obtenir une description des paramètres utilisés dans l’exemple, consultez la documentation relative à [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create). Voici quelques points à noter dans cet exemple : 
 
 - Pour `private-connection-resource-id`, spécifiez l’ID de ressource de la **rubrique** ou du **domaine**. L’exemple précédent utilise le type : rubrique.
 - pour `group-ids`, spécifiez `topic` ou `domain`. Dans l’exemple précédent, `topic` est utilisé. 
 
-Pour supprimer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?view=azure-cli-latest#az-network-private-endpoint-delete), comme indiqué dans l’exemple suivant :
+Pour supprimer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-delete), comme indiqué dans l’exemple suivant :
 
 ```azurecli-interactive
 az network private-endpoint delete --resource-group <RESOURECE GROUP NAME> --name <PRIVATE ENDPOINT NAME>
@@ -155,13 +149,57 @@ az network private-endpoint delete --resource-group <RESOURECE GROUP NAME> --nam
 > [!NOTE]
 > Les étapes présentées dans cette section concernent les rubriques. Vous pouvez utiliser des étapes similaires pour créer des points de terminaison privés pour des **domaines**. 
 
+
+
+### <a name="prerequisites"></a>Prérequis
+Mettez à jour l’extension Azure Event Grid pour Azure CLI en exécutant la commande suivante : 
+
+```azurecli-interactive
+az extension update -n eventgrid
+```
+
+Si l’extension n’est pas installée, exécutez la commande suivante pour l’installer : 
+
+```azurecli-interactive
+az extension add -n eventgrid
+```
+
 ### <a name="create-a-private-endpoint"></a>Créer un Private Endpoint
+Pour créer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create), comme indiqué dans l’exemple suivant :
+
+```azurecli-interactive
+az network private-endpoint create \
+    --resource-group <RESOURECE GROUP NAME> \
+    --name <PRIVATE ENDPOINT NAME> \
+    --vnet-name <VIRTUAL NETWORK NAME> \
+    --subnet <SUBNET NAME> \
+    --private-connection-resource-id "/subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<TOPIC NAME> \
+    --connection-name <PRIVATE LINK SERVICE CONNECTION NAME> \
+    --location <LOCATION> \
+    --group-ids topic
+```
+
+Pour obtenir une description des paramètres utilisés dans l’exemple, consultez la documentation relative à [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create). Voici quelques points à noter dans cet exemple : 
+
+- Pour `private-connection-resource-id`, spécifiez l’ID de ressource de la **rubrique** ou du **domaine**. L’exemple précédent utilise le type : rubrique.
+- pour `group-ids`, spécifiez `topic` ou `domain`. Dans l’exemple précédent, `topic` est utilisé. 
+
+Pour supprimer un point de terminaison privé, utilisez la méthode [az network private-endpoint create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-delete), comme indiqué dans l’exemple suivant :
+
+```azurecli-interactive
+az network private-endpoint delete --resource-group <RESOURECE GROUP NAME> --name <PRIVATE ENDPOINT NAME>
+```
+
+> [!NOTE]
+> Les étapes présentées dans cette section concernent les rubriques. Vous pouvez utiliser des étapes similaires pour créer des points de terminaison privés pour des **domaines**. 
+
+#### <a name="sample-script"></a>Exemple de script
 Voici un exemple de script qui crée les ressources Azure suivantes :
 
 - Resource group
 - Réseau virtuel
 - Sous-réseau dans le réseau virtuel
-- Rubrique Azure Event Grid (niveau Premium)
+- Rubrique Azure Event Grid
 - Point de terminaison privé pour la rubrique
 
 > [!NOTE]
@@ -176,9 +214,6 @@ subNetName="<SUBNET NAME>"
 topicName = "<TOPIC NAME>"
 connectionName="<ENDPOINT CONNECTION NAME>"
 endpointName=<ENDPOINT NAME>
-
-# URI for the topic. replace <SUBSCRIPTION ID>, <RESOURCE GROUP NAME>, and <TOPIC NAME>
-topicUri="/subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<TOPIC NAME>?api-version=2020-04-01-preview"
 
 # resource ID of the topic. replace <SUBSCRIPTION ID>, <RESOURCE GROUP NAME>, and <TOPIC NAME>
 topicResourceID="/subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<TOPIC NAME>"
@@ -210,13 +245,15 @@ az network vnet subnet update \
     --disable-private-endpoint-network-policies true
 
 # create event grid topic. update <LOCATION>
-az rest --method put \
-    --uri $topicUri \
-    --body "{\""location\"":\""LOCATION\"", \""sku\"": {\""name\"": \""premium\""}, \""properties\"": {\""publicNetworkAccess\"":\""Disabled\""}}"
+az eventgrid topic create \
+    --resource-group $resourceGroupName \
+    --name $topicName \
+    --location $location
 
 # verify that the topic was created.
-az rest --method get \
-    --uri $topicUri
+az eventgrid topic show \
+    --resource-group $resourceGroupName \
+    --name $topicName
 
 # create private endpoint for the topic you created
 az network private-endpoint create 
@@ -230,24 +267,43 @@ az network private-endpoint create
     --group-ids topic
 
 # get topic 
-az rest --method get \
-    --uri $topicUri
+az eventgrid topic show \
+    --resource-group $resourceGroupName \
+    --name $topicName
 
 ```
 
-### <a name="approve-a-private-endpoint-connection"></a>Approuver une connexion de point de terminaison privé
+### <a name="approve-a-private-endpoint"></a>Approuver un point de terminaison privé
 L’exemple d’extrait de code CLI suivant vous montre comment approuver une connexion de point de terminaison privé. 
 
 ```azurecli-interactive
-az rest --method put --uri "/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview" --body "{\""properties\"":{\""privateLinkServiceConnectionState\"": {\""status\"":\""approved\"",\""description\"":\""connection approved\"", \""actionsRequired\"": \""none\""}}}"
+az eventgrid topic private-endpoint-connection approve \
+    --resource-group $resourceGroupName \
+    --topic-name $topicName \
+    --name  $endpointName \
+    --description "connection approved"
 ```
 
 
-### <a name="reject-a-private-endpoint-connection"></a>Rejeter une connexion de point de terminaison privé
+### <a name="reject-a-private-endpoint"></a>Rejeter un point de terminaison privé
 L’exemple d’extrait de code CLI suivant vous montre comment rejeter une connexion de point de terminaison privé. 
 
 ```azurecli-interactive
-az rest --method put --uri "/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview" --body "{\""properties\"":{\""privateLinkServiceConnectionState\"": {\""status\"":\""rejected\"",\""description\"":\""connection rejected\"", \""actionsRequired\"": \""none\""}}}"
+az eventgrid topic private-endpoint-connection reject \
+    --resource-group $resourceGroupName \
+    --topic-name $topicName \
+    --name $endpointName \
+    --description "Connection rejected"
+```
+
+### <a name="disable-public-network-access"></a>Désactiver l’accès au réseau public
+Par défaut, l’accès au réseau public est activé pour une rubrique ou un domaine Event Grid. Pour autoriser l’accès via des points de terminaison privés uniquement, désactivez l’accès au réseau public en exécutant la commande suivante :  
+
+```azurecli-interactive
+az eventgrid topic update \
+    --resource-group $resourceGroupName \
+    --name $topicName \
+    --public-network-access disabled
 ```
 
 
@@ -306,17 +362,17 @@ $virtualNetwork | Set-AzVirtualNetwork
 
 
 ```azurepowershell-interactive
-$body = @{"location"="<LOCATION>"; "sku"= @{"name"="premium"}; "properties"=@{"publicNetworkAccess"="disabled"}} | ConvertTo-Json
+$body = @{"location"="<LOCATION>"; "properties"=@{"publicNetworkAccess"="disabled"}} | ConvertTo-Json
 
 # create topic
 Invoke-RestMethod -Method 'Put'  `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview"  `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01"  `
     -Headers $Headers  `
     -Body $body
 
 # verify that the topic was created
 $topic=Invoke-RestMethod -Method 'Get'  `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview"   `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01"   `
     -Headers $Headers  
 
 # create private link service connection
@@ -343,7 +399,7 @@ $privateEndpoint = New-AzPrivateEndpoint -ResourceGroupName <RESOURCE GROUP NAME
 
 # verify that the endpoint was created
 Invoke-RestMethod -Method 'Get'  `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections?api-version=2020-04-01-preview"   `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections?api-version=2020-06-01"   `
     -Headers $Headers   `
     | ConvertTo-Json -Depth 5
 
@@ -389,13 +445,13 @@ $approvedBody = @{"properties"=@{"privateLinkServiceConnectionState"=@{"status"=
 
 # approve endpoint connection
 Invoke-RestMethod -Method 'Put'  `
-    -Uri "https://management.azure.com/subscriptions/<AzuRE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview"  `
+    -Uri "https://management.azure.com/subscriptions/<AzuRE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-06-01"  `
     -Headers $Headers  `
     -Body $approvedBody
 
 # confirm that the endpoint connection was approved
 Invoke-RestMethod -Method 'Get'  `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview"  `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-06-01"  `
     -Headers $Headers
 
 ```
@@ -412,17 +468,18 @@ $rejectedBody = @{"properties"=@{"privateLinkServiceConnectionState"=@{"status"=
 
 # reject private endpoint
 Invoke-RestMethod -Method 'Put'  `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview"  `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-06-01"  `
     -Headers $Headers  `
     -Body $rejectedBody
 
 # confirm that endpoint was rejected
 Invoke-RestMethod -Method 'Get' 
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-04-01-preview" ` 
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>/privateEndpointConnections/<PRIVATE ENDPOINT NAME>.<GUID>?api-version=2020-06-01" ` 
     -Headers $Headers
 ```
 
 Vous pouvez approuver la connexion même après qu’elle a été rejetée via l’API. Si vous utilisez le Portail Azure, vous ne pouvez pas approuver un point de terminaison qui a été rejeté. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour en savoir plus sur la configuration des paramètres de pare-feu IP, consultez [Configurer le pare-feu IP pour les rubriques ou les domaines Azure Event Grid](configure-firewall.md).
+* Pour en savoir plus sur la configuration des paramètres de pare-feu IP, consultez [Configurer le pare-feu IP pour les rubriques ou les domaines Azure Event Grid](configure-firewall.md).
+* Pour résoudre les problèmes de connectivité réseau, consultez [Résoudre les problèmes de connectivité réseau](troubleshoot-network-connectivity.md).

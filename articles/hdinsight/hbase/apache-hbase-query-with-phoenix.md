@@ -9,10 +9,10 @@ ms.topic: quickstart
 ms.date: 06/12/2019
 ms.author: hrasheed
 ms.openlocfilehash: 1c400e41c4c10023d2595bde8c0d62e26184cf05
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "79370319"
 ---
 # <a name="quickstart-query-apache-hbase-in-azure-hdinsight-with-apache-phoenix"></a>Démarrage rapide : Exécuter des requêtes Apache HBase dans Azure HDInsight avec Apache Phoenix

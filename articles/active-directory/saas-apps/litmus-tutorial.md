@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à Litmus | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Litmus.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3b570512-f5b2-490e-8e72-b530c0b53956
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/06/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: ef0395f5898cbd566d31e39f80a165ae767cd31f
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 23db3457458d34852f164649137c2b20cf99238b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81264744"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006011"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-litmus"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Litmus
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Litmus à Azure Active
 * Permettre à vos utilisateurs de se connecter automatiquement à Litmus avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +40,7 @@ Pour commencer, vous devez disposer de ce qui suit :
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
 * Litmus prend en charge l’authentification unique initiée par le **fournisseur de services et le fournisseur d’identité**
-* Après avoir configuré Litmus, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré Litmus, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="adding-litmus-from-the-gallery"></a>Ajout de Litmus à partir de la galerie
 
@@ -133,11 +129,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Cliquez sur **Security** (Sécurité) dans le panneau de navigation gauche.
 
-    ![Configuration de Litmus](./media/litmus-tutorial/security-img.png)
+    ![Capture d’écran montrant l’élément Security sélectionné.](./media/litmus-tutorial/security-img.png)
 
 1. Dans la section **Configure SAML Authentication** (Configurer l’authentification SAML), effectuez les étapes suivantes :
 
-    ![Configuration de Litmus](./media/litmus-tutorial/configure1.png)
+    ![Capture d’écran montrant la section Configure SAML Authentication, dans laquelle vous pouvez entrer les valeurs décrites.](./media/litmus-tutorial/configure1.png)
 
     a. Mettez le bouton bascule **Enable SAML** (Activer SAML) sur la position activé.
 
@@ -147,7 +143,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Procédez comme suit :
 
-    ![Configuration de Litmus](./media/litmus-tutorial/configure3.png)
+    ![Capture d’écran affichant la section dans laquelle vous pouvez indiquer les valeurs décrites.](./media/litmus-tutorial/configure3.png)
 
     a. Dans la zone de texte **SAML 2.0 Endpoint(HTTP)** [Point de terminaison SAML 2.0 (HTTP)], collez la valeur de l’**URL de connexion** que vous avez copiée à partir du portail Azure.
 
@@ -161,17 +157,17 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Cliquez sur **Accounts** (Comptes) dans le panneau de navigation gauche.
 
-    ![Configuration de Litmus](./media/litmus-tutorial/accounts-img.png)
+    ![Capture d’écran montrant l’élément Accounts sélectionné.](./media/litmus-tutorial/accounts-img.png)
 
 1. Cliquez sur l’onglet **Add New User** (Ajouter un nouvel utilisateur).
 
-    ![Configuration de Litmus](./media/litmus-tutorial/add-new-user.png)
+    ![Capture d’écran montrant l’élément Add New User sélectionné.](./media/litmus-tutorial/add-new-user.png)
 
 1. Dans la section **Add User** (Ajouter un utilisateur), effectuez les étapes suivantes :
 
-    ![Configuration de Litmus](./media/litmus-tutorial/user-profile.png)
+    ![Capture d’écran affichant la section Add User dans laquelle vous pouvez indiquer les valeurs décrites.](./media/litmus-tutorial/user-profile.png)
 
-    a. Dans la zone de texte **Email** (E-mail), entrez l’adresse e-mail de l’utilisateur, par exemple **B.Simon@contoso.com**
+    a. Dans la zone de texte **Email**, entrez l’adresse e-mail de l’utilisateur, par exemple **B.Simon\@contoso.com**
 
     b. Dans la zone de texte **First Name**, entrez le prénom de l’utilisateur, par exemple **B**.
 
@@ -183,18 +179,18 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Litmus dans le panneau d’accès, vous devez être connecté automatiquement à l’application Litmus pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Litmus dans le panneau d’accès, vous devez être connecté automatiquement à l’application Litmus pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Litmus avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)
 
-- [Guide pratique pour protéger Litmus avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Guide pratique pour protéger Litmus avec une visibilité et des contrôles avancés](/cloud-app-security/proxy-intro-aad)

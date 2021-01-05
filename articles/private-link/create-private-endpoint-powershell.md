@@ -1,238 +1,294 @@
 ---
-title: Créer une instance Azure Private Endpoint à l’aide de PowerShell | Microsoft Docs
-description: En savoir plus sur Azure Private Link
+title: Démarrage rapide – Création d’un point de terminaison privé Azure avec Azure PowerShell
+description: Découvrez dans ce guide de démarrage rapide comment créer un point de terminaison privé avec Azure PowerShell.
 services: private-link
-author: malopMSFT
+author: asudbring
 ms.service: private-link
-ms.topic: article
-ms.date: 09/16/2019
+ms.topic: quickstart
+ms.date: 11/02/2020
 ms.author: allensu
-ms.openlocfilehash: 8af33e95c92cf51bdabe3325bd9249b4662b7d28
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 7add424c23e430a8ca5059d45acd037fff8836ad
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583757"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368659"
 ---
-# <a name="create-a-private-endpoint-using-azure-powershell"></a>Créer une instance Private Endpoint à l’aide d’Azure PowerShell
-Private Endpoint est le composant fondamental de Private Link dans Azure. Il permet à des ressources Azure, comme des machines virtuelles, de communiquer en privé avec des ressources Private Link. 
+# <a name="quickstart-create-a-private-endpoint-using-azure-powershell"></a>Démarrage rapide : Création d’un point de terminaison privé avec Azure PowerShell
 
-Dans ce guide de démarrage rapide, vous allez apprendre à créer une machine virtuelle sur un réseau virtuel Azure, un serveur SQL Database avec Private Endpoint à l’aide d’Azure PowerShell. Ensuite, vous pouvez accéder en toute sécurité au serveur SQL Database à partir de la machine virtuelle.
+Démarrez avec Azure Private Link en utilisant un point de terminaison privé pour vous connecter en toute sécurité à une application web Azure.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+Dans ce guide de démarrage rapide, vous allez créer un point de terminaison privé pour une application web Azure et déployer une machine virtuelle pour tester la connexion privée.  
+
+Des points de terminaison privés peuvent être créés pour différents types de services Azure, tels qu’Azure SQL et Stockage Azure.
+
+## <a name="prerequisites"></a>Prérequis
+
+* Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* Une application web Azure avec un **niveau PremiumV2** ou un plan App Service supérieur déployé dans votre abonnement Azure.  
+    * Pour plus d’informations et pour obtenir un exemple, consultez [Démarrage rapide : Créer une application web ASP.NET Core dans Azure](../app-service/quickstart-dotnetcore.md). 
+    * Pour obtenir un tutoriel détaillé sur la création d’une application web et d’un point de terminaison, consultez [Tutoriel : Se connecter à une application web à l’aide d’Azure Private Endpoint](tutorial-private-endpoint-webapp-portal.md).
+
+Si vous choisissez d’installer et d’utiliser PowerShell en local, vous devez exécuter le module Azure PowerShell version 5.4.1 ou ultérieure pour les besoins de cet article. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Si vous exécutez PowerShell en local, vous devez également exécuter `Connect-AzAccount` pour créer une connexion avec Azure.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Avant de pouvoir créer vos ressources, vous devez créer un groupe de ressources qui héberge le réseau virtuel et Private Endpoint avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). L’exemple suivant crée un groupe de ressources nommé *myResourceGroup* à l’emplacement *WestUS* :
+Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
 
-```azurepowershell
-
-New-AzResourceGroup `
-  -ResourceGroupName myResourceGroup `
-  -Location westcentralus
-```
-
-## <a name="create-a-virtual-network"></a>Création d'un réseau virtuel
-Dans cette section, vous créez un réseau virtuel et un sous-réseau. Ensuite, associez le sous-réseau à votre réseau virtuel.
-
-### <a name="create-a-virtual-network"></a>Création d'un réseau virtuel
-
-Créez un réseau virtuel pour votre Private Endpoint avec [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork). L’exemple suivant crée un réseau virtuel nommé *MyVirtualNetwork* :
- 
-```azurepowershell
-
-$virtualNetwork = New-AzVirtualNetwork `
-  -ResourceGroupName myResourceGroup `
-  -Location westcentralus `
-  -Name myVirtualNetwork `
-  -AddressPrefix 10.0.0.0/16
-```
-
-### <a name="add-a-subnet"></a>Ajouter un sous-réseau
-
-Azure déploie des ressources dans un sous-réseau au sein d’un réseau virtuel. C’est pourquoi vous devez créer un sous-réseau. Créez une configuration de sous-réseau nommée *mySubnet* avec [Add-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/add-azvirtualnetworksubnetconfig). L’exemple suivant crée un sous-réseau nommé *mySubnet* avec l’indicateur de stratégie réseau Private Endpoint défini sur **Désactivé**.
-
-```azurepowershell
-$subnetConfig = Add-AzVirtualNetworkSubnetConfig `
-  -Name mySubnet `
-  -AddressPrefix 10.0.0.0/24 `
-  -PrivateEndpointNetworkPoliciesFlag "Disabled" `
-  -VirtualNetwork $virtualNetwork
-```
-
-> [!CAUTION]
-> Il est facile de confondre le paramètre `PrivateEndpointNetworkPoliciesFlag` avec un autre indicateur disponible, `PrivateLinkServiceNetworkPoliciesFlag`, car il s’agit de mots longs et d’une apparence similaire.  Vérifiez que vous utilisez la bonne valeur, `PrivateEndpointNetworkPoliciesFlag`.
-
-### <a name="associate-the-subnet-to-the-virtual-network"></a>Associer le sous-réseau au réseau virtuel
-
-Vous pouvez écrire la configuration du sous-réseau dans le réseau virtuel avec [Set-AzVirtualNetwork](/powershell/module/az.network/Set-azVirtualNetwork). Cette commande crée le sous-réseau :
-
-```azurepowershell
-$virtualNetwork | Set-AzVirtualNetwork
-```
-
-## <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
-
-Créez une machine virtuelle dans le réseau virtuel avec [New-AzVM](/powershell/module/az.compute/new-azvm). Lorsque vous exécutez les commandes suivantes, vous êtes invité à fournir des informations d’identification. Entrez un nom d’utilisateur et un mot de passe pour la machine virtuelle :
+Créez un groupe de ressources avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) :
 
 ```azurepowershell-interactive
-New-AzVm `
-    -ResourceGroupName "myResourceGroup" `
-    -Name "myVm" `
-    -Location "westcentralus" `
-    -VirtualNetworkName "MyVirtualNetwork" `
-    -SubnetName "mySubnet" `
-    -SecurityGroupName "myNetworkSecurityGroup" `
-    -PublicIpAddressName "myPublicIpAddress" `
-    -OpenPorts 80,3389 `
-    -AsJob  
+New-AzResourceGroup -Name 'CreatePrivateEndpointQS-rg' -Location 'eastus'
 ```
 
-L’option `-AsJob` permet de créer la machine virtuelle en arrière-plan. Vous pouvez passer à l’étape suivante.
+## <a name="create-a-virtual-network-and-bastion-host"></a>Créer un réseau virtuel et un hôte bastion
 
-Lorsqu’Azure commence la création de la machine virtuelle en arrière-plan, vous obtenez quelque chose de similaire à :
+Dans cette section, vous allez créer un réseau virtuel, un sous-réseau et un hôte bastion. 
 
-```powershell
-Id     Name            PSJobTypeName   State         HasMoreData     Location             Command
---     ----            -------------   -----         -----------     --------             -------
-1      Long Running... AzureLongRun... Running       True            localhost            New-AzVM
-```
+L’hôte bastion sera utilisé pour se connecter de façon sécurisée à la machine virtuelle afin de tester le point de terminaison privé.
 
-## <a name="create-a-sql-database-server"></a>Créer un serveur SQL Database 
+Créez un réseau virtuel et un hôte bastion avec :
 
-Créez un serveur SQL Database à l’aide de la commande New-AzSqlServer. N’oubliez pas que le nom du serveur SQL Database doit être unique dans Azure. Par conséquent, remplacez la valeur d’espace réservé entre crochets par votre propre valeur unique :
+* [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork)
+* [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress)
+* [New-AzBastion](/powershell/module/az.network/new-azbastion)
 
 ```azurepowershell-interactive
-$adminSqlLogin = "SqlAdmin"
-$password = "ChangeYourAdminPassword1"
+## Create backend subnet config. ##
+$subnetConfig = New-AzVirtualNetworkSubnetConfig -Name myBackendSubnet -AddressPrefix 10.0.0.0/24
 
-$server = New-AzSqlServer -ResourceGroupName "myResourceGroup" `
-    -ServerName "myserver" `
-    -Location "WestCentralUS" `
-    -SqlAdministratorCredentials $(New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $adminSqlLogin, $(ConvertTo-SecureString -String $password -AsPlainText -Force))
+## Create Azure Bastion subnet. ##
+$bastsubnetConfig = New-AzVirtualNetworkSubnetConfig -Name AzureBastionSubnet -AddressPrefix 10.0.1.0/24
 
-New-AzSqlDatabase  -ResourceGroupName "myResourceGroup" `
-    -ServerName "myserver"`
-    -DatabaseName "myda"`
-    -RequestedServiceObjectiveName "S0" `
-    -SampleName "AdventureWorksLT"
+## Create the virtual network. ##
+$parameters1 = @{
+    Name = 'MyVNet'
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Location = 'eastus'
+    AddressPrefix = '10.0.0.0/16'
+    Subnet = $subnetConfig, $bastsubnetConfig
+}
+$vnet = New-AzVirtualNetwork @parameters1
+
+## Create public IP address for bastion host. ##
+$parameters2 = @{
+    Name = 'myBastionIP'
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Location = 'eastus'
+    Sku = 'Standard'
+    AllocationMethod = 'Static'
+}
+$publicip = New-AzPublicIpAddress @parameters2
+
+## Create bastion host ##
+$parameters3 = @{
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Name = 'myBastion'
+    PublicIpAddress = $publicip
+    VirtualNetwork = $vnet
+}
+New-AzBastion @parameters3
 ```
 
-## <a name="create-a-private-endpoint"></a>Créer un point de terminaison privé
+Le déploiement de l’hôte Azure Bastion peut prendre quelques minutes.
 
-Private Endpoint pour le serveur SQL Database dans votre réseau virtuel avec [New-AzPrivateLinkServiceConnection](/powershell/module/az.network/New-AzPrivateLinkServiceConnection) : 
+## <a name="create-test-virtual-machine"></a>Créer une machine virtuelle de test
 
-```azurepowershell
+Dans cette section, vous allez créer une machine virtuelle qui sera utilisée pour tester le point de terminaison privé.
 
-$privateEndpointConnection = New-AzPrivateLinkServiceConnection -Name "myConnection" `
-  -PrivateLinkServiceId $server.ResourceId `
-  -GroupId "sqlServer" 
- 
-$virtualNetwork = Get-AzVirtualNetwork -ResourceGroupName  "myResourceGroup" -Name "MyVirtualNetwork"  
- 
-$subnet = $virtualNetwork `
-  | Select -ExpandProperty subnets `
-  | Where-Object  {$_.Name -eq 'mysubnet'}  
- 
-$privateEndpoint = New-AzPrivateEndpoint -ResourceGroupName "myResourceGroup" `
-  -Name "myPrivateEndpoint" `
-  -Location "westcentralus" `
-  -Subnet  $subnet `
-  -PrivateLinkServiceConnection $privateEndpointConnection
-``` 
+Créez la machine virtuelle avec :
 
-## <a name="configure-the-private-dns-zone"></a>Configurer la zone DNS privée 
-Créez une zone DNS privée pour le domaine du serveur SQL Database et créez un lien d’association avec le réseau virtuel : 
-
-```azurepowershell
-
-$zone = New-AzPrivateDnsZone -ResourceGroupName "myResourceGroup" `
-  -Name "privatelink.database.windows.net" 
- 
-$link  = New-AzPrivateDnsVirtualNetworkLink -ResourceGroupName "myResourceGroup" `
-  -ZoneName "privatelink.database.windows.net"`
-  -Name "mylink" `
-  -VirtualNetworkId $virtualNetwork.Id  
- 
-$networkInterface = Get-AzResource -ResourceId $privateEndpoint.NetworkInterfaces[0].Id -ApiVersion "2019-04-01" 
- 
-foreach ($ipconfig in $networkInterface.properties.ipConfigurations) { 
-foreach ($fqdn in $ipconfig.properties.privateLinkConnectionProperties.fqdns) { 
-Write-Host "$($ipconfig.properties.privateIPAddress) $($fqdn)"  
-$recordName = $fqdn.split('.',2)[0] 
-$dnsZone = $fqdn.split('.',2)[1] 
-New-AzPrivateDnsRecordSet -Name $recordName -RecordType A -ZoneName "privatelink.database.windows.net"  `
--ResourceGroupName "myResourceGroup" -Ttl 600 `
--PrivateDnsRecords (New-AzPrivateDnsRecordConfig -IPv4Address $ipconfig.properties.privateIPAddress)  
-} 
-} 
-``` 
-  
-## <a name="connect-to-a-vm-from-the-internet"></a>Se connecter à une machine virtuelle à partir d’Internet
-
-Utilisez [Get-AzPublicIpAddress](/powershell/module/az.network/Get-AzPublicIpAddress) pour retourner l’adresse IP publique d’une machine virtuelle. Cet exemple retourne l’adresse IP publique de la machine virtuelle *myVM* :
-
-```azurepowershell
-Get-AzPublicIpAddress `
-  -Name myPublicIpAddress `
-  -ResourceGroupName myResourceGroup `
-  | Select IpAddress 
-```  
-Ouvrez une invite de commandes sur votre ordinateur local. Exécutez la commande mstsc. Remplacez <publicIpAddress> par l’adresse IP publique renvoyée à l’étape précédente : 
+  * [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential)
+  * [New-AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface) 
+  * [New-AzVM](/powershell/module/az.compute/new-azvm)
+  * [New-AzVMConfig](/powershell/module/az.compute/new-azvmconfig)
+  * [Set-AzVMOperatingSystem](/powershell/module/az.compute/set-azvmoperatingsystem)
+  * [Set-AzVMSourceImage](/powershell/module/az.compute/set-azvmsourceimage)
+  * [Add-AzVMNetworkInterface](/powershell/module/az.compute/add-azvmnetworkinterface)
 
 
-> [!NOTE]
-> Si vous avez exécuté ces commandes à partir d’une invite PowerShell sur votre ordinateur local et que vous utilisez le module Az PowerShell version 1.0 ou une version ultérieure, vous pouvez continuer sur cette interface.
-```
-mstsc /v:<publicIpAddress>
+```azurepowershell-interactive
+## Set credentials for server admin and password. ##
+$cred = Get-Credential
+
+## Command to get virtual network configuration. ##
+$vnet = Get-AzVirtualNetwork -Name myVNet -ResourceGroupName CreatePrivateEndpointQS-rg
+
+## Command to create network interface for VM ##
+$parameters1 = @{
+    Name = 'myNicVM'
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Location = 'eastus'
+    Subnet = $vnet.Subnets[0]
+}
+$nicVM = New-AzNetworkInterface @parameters1
+
+## Create a virtual machine configuration.##
+$parameters2 = @{
+    VMName = 'myVM'
+    VMSize = 'Standard_DS1_v2'
+}
+$parameters3 = @{
+    ComputerName = 'myVM'
+    Credential = $cred
+}
+$parameters4 = @{
+    PublisherName = 'MicrosoftWindowsServer'
+    Offer = 'WindowsServer'
+    Skus = '2019-Datacenter'
+    Version = 'latest'
+}
+$vmConfig = 
+New-AzVMConfig @parameters2 | Set-AzVMOperatingSystem -Windows @parameters3 | Set-AzVMSourceImage @parameters4 | Add-AzVMNetworkInterface -Id $nicVM.Id
+
+## Create the virtual machine ##
+New-AzVM -ResourceGroupName 'CreatePrivateEndpointQS-rg' -Location 'eastus' -VM $vmConfig
 ```
 
-1. Si vous y êtes invité, sélectionnez **Connexion**. 
-2. Entrez le nom d’utilisateur et le mot de passe spécifiés lors de la création de la machine virtuelle.
-  > [!NOTE]
-  > Vous devrez peut-être sélectionner Plus de choix > Utiliser un autre compte pour spécifier les informations d’identification que vous avez entrées lorsque vous avez créé la machine virtuelle. 
-  
-3. Sélectionnez **OK**. 
-4. Vous allez peut-être recevoir un avertissement de certificat. Si vous en recevez un, sélectionnez **Oui** ou **Continuer**. 
+## <a name="create-private-endpoint"></a>Créer un point de terminaison privé
 
-## <a name="access-sql-database-server-privately-from-the-vm"></a>Accéder au serveur de base de données SQL en privé à partir de la machine virtuelle
+Dans cette section, vous allez créer un point de terminaison privé et une connexion avec :
 
-1. Dans le Bureau à distance de myVM, ouvrez PowerShell.
-2. Entrez `nslookup myserver.database.windows.net`. N’oubliez pas de remplacer `myserver` par le nom de votre serveur SQL.
+* [New-AzPrivateLinkServiceConnection](/powershell/module/az.network/New-AzPrivateLinkServiceConnection)
+* [New-AzPrivateEndpoint](/powershell/module/az.network/new-azprivateendpoint)
 
-    Vous recevez un message similaire à celui ci :
-    
-    ```azurepowershell
+```azurepowershell-interactive
+## Place web app into variable. Replace <webapp-resource-group-name> with the resource group of your webapp. ##
+## Replace <your-webapp-name> with your webapp name ##
+$webapp = Get-AzWebApp -ResourceGroupName <webapp-resource-group-name> -Name <your-webapp-name>
+
+## Create private endpoint connection. ##
+$parameters1 = @{
+    Name = 'myConnection'
+    PrivateLinkServiceId = $webapp.ID
+    GroupID = 'sites'
+}
+$privateEndpointConnection = New-AzPrivateLinkServiceConnection @parameters1
+
+## Place virtual network into variable. ##
+$vnet = Get-AzVirtualNetwork -ResourceGroupName 'CreatePrivateEndpointQS-rg' -Name 'myVNet'
+
+## Disable private endpoint network policy ##
+$vnet.Subnets[0].PrivateEndpointNetworkPolicies = "Disabled"
+$vnet | Set-AzVirtualNetwork
+
+## Create private endpoint
+$parameters2 = @{
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Name = 'myPrivateEndpoint'
+    Location = 'eastus'
+    Subnet = $vnet.Subnets[0]
+    PrivateLinkServiceConnection = $privateEndpointConnection
+}
+New-AzPrivateEndpoint @parameters2
+```
+## <a name="configure-the-private-dns-zone"></a>Configurer la zone DNS privée
+
+Dans cette section, vous allez créer et configurer la zone DNS privée avec :
+
+* [New-AzPrivateDnsZone](/powershell/module/az.privatedns/new-azprivatednszone)
+* [New-AzPrivateDnsVirtualNetworkLink](/powershell/module/az.privatedns/new-azprivatednsvirtualnetworklink)
+* [New-AzPrivateDnsZoneConfig](/powershell/module/az.network/new-azprivatednszoneconfig)
+* [New-AzPrivateDnsZoneGroup](/powershell/module/az.network/new-azprivatednszonegroup)
+
+```azurepowershell-interactive
+## Place virtual network into variable. ##
+$vnet = Get-AzVirtualNetwork -ResourceGroupName 'CreatePrivateEndpointQS-rg' -Name 'myVNet'
+
+## Create private dns zone. ##
+$parameters1 = @{
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    Name = 'privatelink.azurewebsites.net'
+}
+$zone = New-AzPrivateDnsZone @parameters1
+
+## Create dns network link. ##
+$parameters2 = @{
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    ZoneName = 'privatelink.azurewebsites.net'
+    Name = 'myLink'
+    VirtualNetworkId = $vnet.Id
+}
+$link = New-AzPrivateDnsVirtualNetworkLink @parameters2
+
+## Create DNS configuration ##
+$parameters3 = @{
+    Name = 'privatelink.azurewebsites.net'
+    PrivateDnsZoneId = $zone.ResourceId
+}
+$config = New-AzPrivateDnsZoneConfig @parameters3
+
+## Create DNS zone group. ##
+$parameters4 = @{
+    ResourceGroupName = 'CreatePrivateEndpointQS-rg'
+    PrivateEndpointName = 'myPrivateEndpoint'
+    Name = 'myZoneGroup'
+    PrivateDnsZoneConfig = $config
+}
+New-AzPrivateDnsZoneGroup @parameters4
+```
+
+## <a name="test-connectivity-to-private-endpoint"></a>Tester la connectivité au point de terminaison privé
+
+Dans cette section, vous allez utiliser la machine virtuelle que vous avez créée à l’étape précédente pour vous connecter au serveur SQL via le point de terminaison privé.
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com) 
+ 
+2. Dans le volet de navigation de gauche, sélectionnez **Groupes de ressources**.
+
+3. Sélectionnez **CreatePrivateEndpointQS-rg**.
+
+4. Sélectionnez **myVM**.
+
+5. Dans la page de vue d’ensemble pour **myVM** , sélectionnez **Se connecter** , puis **Bastion**.
+
+6. Sélectionnez le bouton bleu **Utiliser le bastion**.
+
+7. Entrez le nom d’utilisateur et le mot de passe que vous avez utilisés lors de la création de la machine virtuelle.
+
+8. Ouvrez Windows PowerShell sur le serveur après vous être connecté.
+
+9. Entrez `nslookup <your-webapp-name>.azurewebsites.net`. Remplacez **\<your-webapp-name>** par le nom de l’application web que vous avez créée dans les étapes précédentes.  Vous recevez un message similaire à ce qui est montré ci-dessous :
+
+    ```powershell
     Server:  UnKnown
     Address:  168.63.129.16
-    Non-authoritative answer:
-    Name:    myserver.privatelink.database.windows.net
-    Address:  10.0.0.5
-    Aliases:   myserver.database.windows.net
-    ```
-    
-3. Installez SQL Server Management Studio.
-4. Dans **Se connecter au serveur**, entrez ou sélectionnez les informations suivantes :
 
-    | Paramètre | Valeur |
-    | --- | --- |
-    | Type de serveur | Moteur de base de données |
-    | Nom du serveur | myserver.database.windows.net |
-    | Nom d’utilisateur | Entrez le nom d’utilisateur fourni lors de la création. |
-    | Mot de passe | Entrez le mot de passe fourni lors de la création. |
-    | Se souvenir du mot de passe | Oui |
-    
-5. Sélectionnez **Connecter**.
-6. Parcourez **Bases de données** dans le menu de gauche. 
-7. (Facultatif) Créez ou interrogez des données dans mydatabase.
-8. Fermez la connexion Bureau à distance à *myVM*. 
+    Non-authoritative answer:
+    Name:    mywebapp8675.privatelink.azurewebsites.net
+    Address:  10.0.0.5
+    Aliases:  mywebapp8675.azurewebsites.net
+    ```
+
+    L’adresse IP privée **10.0.0.5** est retournée pour le nom de l’application web.  Cette adresse se trouve dans le sous-réseau du réseau virtuel que vous avez créé précédemment.
+
+10. Dans la connexion bastion à **myVM** , ouvrez Internet Explorer.
+
+11. Entrez l’URL de votre application web : **https://\<your-webapp-name>.azurewebsites.net**.
+
+12. Vous recevrez la page d’application web par défaut si votre application n’a pas été déployée :
+
+    :::image type="content" source="./media/create-private-endpoint-portal/web-app-default-page.png" alt-text="Page d’application web par défaut." border="true":::
+
+13. Fermez la connexion à **myVM**.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources 
-Quand vous avez terminé d’utiliser le point de terminaison privé, le serveur SQL Database et la machine virtuelle, utilisez [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources et toutes les ressources qu’il contient :
+Lorsque vous avez fini d’utiliser le point de terminaison privé et la machine virtuelle, supprimez le groupe de ressources et toutes les ressources qu’il contient avec [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) :
 
 ```azurepowershell-interactive
-Remove-AzResourceGroup -Name myResourceGroup -Force
+Remove-AzResourceGroup -Name CreatePrivateEndpointQS-rg -Force
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-- En savoir plus sur [Azure Private Link](private-link-overview.md)
+
+Dans le cadre de ce guide de démarrage rapide, vous avez créé les éléments suivants :
+
+* Un réseau virtuel et un hôte bastion.
+* Une machine virtuelle.
+* Un point de terminaison privé pour une application web Azure.
+
+Vous avez utilisé la machine virtuelle pour tester la connectivité de façon sécurisée à l’application web via le point de terminaison privé.
+
+Pour plus d’informations sur les services qui prennent en charge un point de terminaison privé, consultez :
+> [!div class="nextstepaction"]
+> [Disponibilité des liaisons privées](private-link-overview.md#availability)

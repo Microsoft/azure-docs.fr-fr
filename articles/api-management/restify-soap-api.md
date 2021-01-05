@@ -1,6 +1,6 @@
 ---
 title: Importer une API SOAP et la convertir pour REST à l’aide du portail Azure | Microsoft Docs
-description: Découvrez comment importer une API SOAP et la convertir pour REST avec Gestion des API.
+description: Découvrez comment importer une API SOAP, la convertir en REST avec le service Gestion des API, puis tester l’API dans les portails des développeurs et Azure.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 11/22/2017
 ms.author: apimpm
-ms.openlocfilehash: a2bec6401ae3ac53f46e92e9be38abf57a92163d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a87f4d0748d14ab995f75279b6a192f350165d6f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74108099"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87843825"
 ---
 # <a name="import-a-soap-api-and-convert-to-rest"></a>Importer une API SOAP et la convertir pour REST
 

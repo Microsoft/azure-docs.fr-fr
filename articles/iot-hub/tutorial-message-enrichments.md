@@ -7,13 +7,13 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 12/20/2019
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: 78aee7829e58feede3360f30f10260903713c52f
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.custom: mqtt, devx-track-azurecli, devx-track-csharp
+ms.openlocfilehash: 60bd416cf330676485f83720be4365b56c56baaf
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81770076"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436706"
 ---
 # <a name="tutorial-use-azure-iot-hub-message-enrichments"></a>Tutoriel : Utiliser des enrichissements de messages IoT Hub
 
@@ -38,13 +38,13 @@ Dans le cadre de ce tutoriel, vous allez effectuer les tâches suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Vous devez avoir un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
-* Installer [Visual Studio](https://www.visualstudio.com/).
+- Vous devez avoir un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-* Vérifiez que le port 8883 est ouvert sur votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Dans certains environnements réseau professionnels et scolaires, ce port peut être bloqué. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+- Installer [Visual Studio](https://www.visualstudio.com/).
 
+- Vérifiez que le port 8883 est ouvert sur votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Dans certains environnements réseau professionnels et scolaires, ce port peut être bloqué. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="retrieve-the-iot-c-samples-repository"></a>Récupérer le référentiel d’exemples C# IoT
 
@@ -386,7 +386,7 @@ Pour supprimer toutes les ressources que vous avez créées dans ce tutoriel, su
 
 ### <a name="use-the-azure-cli-to-clean-up-resources"></a>Utiliser Azure CLI pour nettoyer des ressources
 
-Pour supprimer le groupe de ressources, utilisez la commande [az group delete](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-delete). N’oubliez pas que `$resourceGroup` a été défini sur **ContosoResourcesMsgEn** au début de ce didacticiel.
+Pour supprimer le groupe de ressources, utilisez la commande [az group delete](/cli/azure/group?view=azure-cli-latest#az-group-delete). N’oubliez pas que `$resourceGroup` a été défini sur **ContosoResourcesMsgEn** au début de ce didacticiel.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup

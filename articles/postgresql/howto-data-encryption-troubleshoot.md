@@ -1,17 +1,17 @@
 ---
 title: Résoudre les problèmes de chiffrement des données – Azure Database pour PostgreSQL – Serveur unique
 description: Découvrir comment résoudre les problèmes du chiffrement des données dans Azure Database pour PostgreSQL - Serveur unique
-author: kummanish
-ms.author: manishku
+author: mksuni
+ms.author: sumuth
 ms.service: postgresql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/13/2020
-ms.openlocfilehash: 2902ff17ac14a48f1a11259339c2ab1bc4595980
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c315e1df473f3d23bab7e2a78ce166f22272ee70
+ms.sourcegitcommit: 80034a1819072f45c1772940953fef06d92fefc8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79299258"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93242243"
 ---
 # <a name="troubleshoot-data-encryption-in-azure-database-for-postgresql---single-server"></a>Résoudre les problèmes de chiffrement des données dans Azure Database pour PostgreSQL - Serveur unique
 
@@ -19,7 +19,7 @@ Cet article vous aide à identifier et à résoudre les problèmes courants susc
 
 ## <a name="introduction"></a>Introduction
 
-Lorsque vous configurez le chiffrement des données pour utiliser une clé gérée par le client dans Azure Key Vault, le serveur nécessite un accès continu à la clé. Si le serveur perd l’accès à la clé gérée par le client dans Azure Key Vault, il rejette toutes les connexions, retourne le message d’erreur associé, et son état passe à ***Inaccessible*** dans le portail Azure.
+Lorsque vous configurez le chiffrement des données pour utiliser une clé gérée par le client dans Azure Key Vault, le serveur nécessite un accès continu à la clé. Si le serveur perd l’accès à la clé gérée par le client dans Azure Key Vault, il rejette toutes les connexions, retourne le message d’erreur associé, et son état passe à ***Inaccessible** _ dans le portail Azure.
 
 Si vous n’avez plus besoin d’un serveur Azure Database pour PostgreSQL inaccessible, vous pouvez le supprimer pour arrêter les coûts. Aucune autre action sur le serveur n’est autorisée tant que l’accès au coffre de clés n’a pas été restauré et que le serveur n’est pas disponible. Il n’est pas non plus possible de définir l’option de chiffrement des données sur `No` (managée par le service) au lieu de `Yes` (gérée par le client) sur un serveur inaccessible lorsqu'il est chiffré à l’aide d’une clé gérée par le client. Vous devez revalider la clé manuellement pour que le serveur soit à nouveau accessible. Cette action est nécessaire pour protéger les données contre tout accès non autorisé pendant que les autorisations sur la clé gérée par le client sont révoquées.
 
@@ -44,7 +44,7 @@ Les erreurs de configuration suivantes provoquent la plupart des problèmes lié
 #### <a name="disabled-key-vault"></a>Coffre de clés désactivé
 
 - `AzureKeyVaultKeyDisabledMessage`
-- **Explication** : impossible d’effectuer l’opération sur le serveur, car la clé Azure Key Vault est désactivée.
+- **Explication**: impossible d’effectuer l’opération sur le serveur, car la clé Azure Key Vault est désactivée.
 
 #### <a name="missing-key-vault-permissions"></a>Autorisations d’accès au coffre de clés manquantes
 

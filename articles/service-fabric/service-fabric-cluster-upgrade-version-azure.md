@@ -3,12 +3,12 @@ title: Mettre à niveau la version de Service Fabric d’un cluster
 description: Mettez à niveau le code et/ou la configuration Service Fabric qui exécute un cluster Service Fabric. Cela inclut le mode de mise à jour du cluster, la mise à niveau de certificats, l’ajout de ports d’application, l’application des correctifs de système d’exploitation, etc. À quoi vous attendre lors de l'exécution des mises à niveau ?
 ms.topic: conceptual
 ms.date: 11/12/2018
-ms.openlocfilehash: 802e7402f60370b7151c5e373c8a4921a5af7c80
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 01fe916f0ee78c8481ac6b17b8f7409b47c852ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82789598"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90564285"
 ---
 # <a name="upgrade-the-service-fabric-version-of-a-cluster"></a>Mettre à niveau la version de Service Fabric d’un cluster
 
@@ -19,7 +19,7 @@ Vous pouvez définir votre cluster de façon à recevoir les nouvelles mises à 
 Pour ce faire, définissez la configuration de cluster « upgradeMode » sur le portail, ou utilisez Resource Manager lors de la création ou ultérieurement, sur un cluster activé. 
 
 > [!NOTE]
-> Faites en sorte que votre cluster exécute systématiquement une version prise en charge de la structure. Lorsque nous annonçons le lancement d’une nouvelle version de Service Fabric, la fin de la prise en charge de la version précédente est signalée 60 jours minimum après la date de lancement. Les nouvelles versions sont annoncées [sur le blog de l’équipe Service Fabric](https://blogs.msdn.microsoft.com/azureservicefabric/). La nouvelle version peut alors être sélectionnée. 
+> Faites en sorte que votre cluster exécute systématiquement une version prise en charge de la structure. Lorsque nous annonçons le lancement d’une nouvelle version de Service Fabric, la fin de la prise en charge de la version précédente est signalée 60 jours minimum après la date de lancement. Les nouvelles versions sont annoncées [sur le blog de l’équipe Service Fabric](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric). La nouvelle version peut alors être sélectionnée. 
 > 
 > 
 
@@ -28,7 +28,7 @@ Un événement d’intégrité est généré 14 jours avant la date d’expirati
 ## <a name="set-the-upgrade-mode-in-the-azure-portal"></a>Définir le mode de mise à niveau dans le portail Azure
 Vous pouvez définir le cluster sur le mode Manuel ou Automatique lors de la création du cluster.
 
-![Create_Manualmode][Create_Manualmode]
+![Capture d’écran montrant le volet Créer un cluster Service Fabric avec l’option 2 Configuration du cluster sélectionnée et le volet Configuration du cluster ouvert.][Create_Manualmode]
 
 Vous pouvez définir le cluster sur le mode Automatique ou Manuel dans le cas d’un cluster activé, à l’aide de l’expérience de gestion. 
 
@@ -39,12 +39,12 @@ Si les stratégies d'intégrité du cluster ne sont pas respectées, la mise à 
 
 Une fois que vous avez corrigé les problèmes entraînant la restauration, vous devez initier à nouveau la mise à niveau, en suivant la procédure décrite précédemment.
 
-![Manage_Automaticmode][Manage_Automaticmode]
+![Capture d’écran montrant la fenêtre Clusters Service Fabric avec le volet Mises à niveau de Fabric ouvert et les options de mise à niveau mises en surbrillance, dont Automatique et Manuel.][Manage_Automaticmode]
 
 ## <a name="set-the-upgrade-mode-using-a-resource-manager-template"></a>Définir le mode de mise à niveau à l’aide d’un modèle Resource Manager
 Ajoutez la configuration « upgradeMode » dans la définition de ressource Microsoft.ServiceFabric/clusters et définissez le paramètre « clusterCodeVersion » sur l’une des versions de structure prises en charge, comme indiqué ci-dessous, puis déployez le modèle. Les valeurs valides pour l’élément « upgradeMode » sont « Manuel » ou « Automatique ».
 
-![ARMUpgradeMode][ARMUpgradeMode]
+![Capture d’écran montrant un modèle, qui est mis en retrait en texte clair pour refléter la structure et clusterCodeVersion et upgradeMode mis en surbrillance.][ARMUpgradeMode]
 
 ### <a name="upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-a-resource-manager-template"></a>Mise à niveau vers une nouvelle version sur un cluster défini sur le mode Manuel, via un modèle Resource Manager
 Lorsque le cluster est en mode Manuel, si vous voulez effectuer une mise à niveau vers une nouvelle version, modifiez le paramètre « clusterCodeVersion » en indiquant une version prise en charge et en la déployant. Le déploiement du modèle lance la mise à niveau de la structure automatiquement. Les stratégies de contrôle d’intégrité du cluster (combinaison de l’intégrité des nœuds et de l’intégrité de toutes les applications en cours d’exécution dans le cluster) sont respectées pendant la mise à niveau.

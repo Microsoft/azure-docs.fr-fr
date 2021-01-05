@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/21/2019
 ms.custom: seodec18
-ms.openlocfilehash: 3ae639dd7c5a42fc6880240988f0fb2817b09f43
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 47afaea03e58cf6a24382727c6fc7193fde5abe4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75425971"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012099"
 ---
 # <a name="rotate-login-credentials-for-inputs-and-outputs-of-a-stream-analytics-job"></a>Rotation des informations d'identification pour les entrées et les sorties dans un travail Stream Analytics
 
@@ -49,11 +49,11 @@ Dans cette section, nous vous guiderons tout au long du processus de régénéra
 
 ### <a name="sql-database"></a>SQL Database
 
-Vous devez vous connecter à la base de données SQL pour mettre à jour les informations d’identification de connexion d’un utilisateur existant. Vous pouvez mettre à jour les informations d’identification en utilisant le portail Azure ou un outil côté client comme SQL Server Management Studio. Cette section décrit le processus de mise à jour des informations d’identification à l’aide du portail Azure.
+Vous devez vous connecter à SQL Database pour mettre à jour les informations d’identification de connexion d’un utilisateur existant. Vous pouvez mettre à jour les informations d’identification en utilisant le portail Azure ou un outil côté client comme SQL Server Management Studio. Cette section décrit le processus de mise à jour des informations d’identification à l’aide du portail Azure.
 
 1. Connectez-vous au portail Azure > accédez à la base de données SQL que vous avez utilisée comme sortie pour le travail Stream Analytics.    
 2. À partir de l’**Explorateur de données**, connectez-vous à votre base de données > sélectionnez le type d’autorisation **Authentification SQL Server** > entrez votre **identifiant** et votre **mot de passe** > sélectionnez **Ok**.  
-   ![Régénérer les informations d’identification pour la base de données SQL](media/stream-analytics-login-credentials-inputs-outputs/regenerate-sql-credentials.png)
+   ![Régénérer les informations d’identification pour SQL Database](media/stream-analytics-login-credentials-inputs-outputs/regenerate-sql-credentials.png)
 
 3. Sous l’onglet de la requête, modifiez le mot de passe d’un de vos utilisateurs en exécutant la requête suivante (veillez à remplacer `<user_name>` par votre nom d’utilisateur et `<new_password>` par votre nouveau mot de passe) :  
 
@@ -64,7 +64,7 @@ Vous devez vous connecter à la base de données SQL pour mettre à jour les inf
 
 4. Notez ce nouveau mot de passe.    
 5. Dans le portail Azure, accédez à votre travail Stream Analytics > sélectionnez **Arrêter** et attendez que le travail s’arrête.    
-6. Recherchez la sortie de la base de données SQL dont vous souhaitez remplacer les informations d’identification. Mettez à jour le mot de passe et enregistrez les modifications.    
+6. Recherchez la sortie de SQL Database pour laquelle vous souhaitez opérer une rotation des informations d’identification. Mettez à jour le mot de passe et enregistrez les modifications.    
 7. Un test de connexion démarre automatiquement lorsque vous enregistrez vos modifications ; assurez-vous qu’il a réussi.    
 8. Passez à la section [démarrer votre travail à partir de l’heure du dernier arrêt](#start-your-job-from-the-last-stopped-time).
 
@@ -84,5 +84,5 @@ Vous devez vous connecter à la base de données SQL pour mettre à jour les inf
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

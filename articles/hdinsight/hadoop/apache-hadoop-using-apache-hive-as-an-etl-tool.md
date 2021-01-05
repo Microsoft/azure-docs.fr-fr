@@ -1,19 +1,19 @@
 ---
 title: Utiliser Apache Hive comme outil ETL - Azure HDInsight
 description: Utilisez Apache Hive pour extraire, transformer et charger (ETL) des données dans Azure HDInsight.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/28/2020
-ms.openlocfilehash: c289892246cfce3ffac3f668577073a2af92511f
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 9b9dcd683915c17ae6909ebb88927d275e9a5896
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509548"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89505282"
 ---
 # <a name="use-apache-hive-as-an-extract-transform-and-load-etl-tool"></a>Utiliser Apache Hive comme un outil d’extraction, de transformation et de chargement (ETL)
 
@@ -69,7 +69,7 @@ Les sources de données sont en général des données externes qui peuvent êtr
 Vous pouvez utiliser Hive pour générer des données dans différents types de cibles, notamment :
 
 * Une base de données relationnelle, telle que SQL Server ou Azure SQL Database.
-* Un entrepôt de données tel que Azure SQL Data Warehouse.
+* Un entrepôt de données, tel qu’Azure Synapse Analytics.
 * Excel.
 * Stockage Table et Blob Azure.
 * Applications ou services qui requièrent de traiter les données dans un format spécifique, ou en tant que fichiers contenant des types spécifiques de structure d’informations.

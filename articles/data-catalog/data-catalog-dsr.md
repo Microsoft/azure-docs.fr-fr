@@ -6,12 +6,12 @@ ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
 ms.date: 08/01/2019
-ms.openlocfilehash: ec716924d3cebf8e78b0505b95837b91c568813a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ead1a324d342f818551ac05ac385ba4fa5b8b877
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898144"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89439082"
 ---
 # <a name="supported-data-sources-in-azure-data-catalog"></a>Sources de données prises en charge dans Azure Data Catalog
 
@@ -143,7 +143,7 @@ Vous pouvez publier des métadonnées à l’aide d’une API publique ou d’un
       <td></td>
     </tr>
     <tr>
-      <td>Table Azure SQL Data Warehouse</td>
+      <td>Table Azure Synapse Analytics</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -151,7 +151,7 @@ Vous pouvez publier des métadonnées à l’aide d’une API publique ou d’un
       <td></td>
     </tr>
     <tr>
-      <td>Affichage Azure SQL Data Warehouse</td>
+      <td>Vue Azure Synapse Analytics</td>
       <td>✓</td>
       <td>✓</td>
       <td>✓</td>
@@ -932,7 +932,7 @@ Si vous souhaitez qu’une source de données spécifique soit prise en charge, 
       </td>
     </tr>
     <tr>
-      <td>SQL Data Warehouse</td>
+      <td>Azure Synapse Analytics </td>
       <td>Command</td>
       <td>Stored procedure</td>
       <td>
@@ -948,7 +948,7 @@ Si vous souhaitez qu’une source de données spécifique soit prise en charge, 
       </td>
     </tr>
     <tr>
-      <td>SQL Data Warehouse</td>
+      <td>Azure Synapse Analytics </td>
       <td>TableValuedFunction</td>
       <td>Table-valued function</td>
       <td>
@@ -964,7 +964,7 @@ Si vous souhaitez qu’une source de données spécifique soit prise en charge, 
       </td>
     </tr>
     <tr>
-      <td>SQL Data Warehouse</td>
+      <td>Azure Synapse Analytics </td>
       <td>Container</td>
       <td>Database</td>
       <td>
@@ -978,7 +978,7 @@ Si vous souhaitez qu’une source de données spécifique soit prise en charge, 
       </td>
     </tr>
     <tr>
-      <td>SQL Data Warehouse</td>
+      <td>Azure Synapse Analytics </td>
       <td>Table</td>
       <td>Table, view</td>
       <td>

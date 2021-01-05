@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.openlocfilehash: 462f8dafdffa7ee01e6ccf7945a1abfdff90db42
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dc630021cbf93074119d4feedcb3a09fae1453e3
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228205"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91949426"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-view-and-manage-jobs-update-3-and-later"></a>Utiliser le service StorSimple Device Manager pour afficher et gérer des travaux (Update 3 et versions ultérieures)
 
@@ -59,11 +59,11 @@ Pour afficher les détails d’une tâche, procédez comme suit.
 
 2. Dans le panneau **Travaux (jobs)** , affichez les travaux qui vous intéressent en exécutant une requête avec les filtres appropriés. Vous pouvez rechercher des tâches terminées, en cours d'exécution ou annulées.
 
-    ![Panneau Tâches](./media/storsimple-8000-manage-jobs-u2/jobs1.png)
+    ![Panneau Tâches 2](./media/storsimple-8000-manage-jobs-u2/jobs1.png)
 
 2. Sélectionnez un travail et cliquez dessus.
 
-    ![Panneau Tâches](./media/storsimple-8000-manage-jobs-u2/jobs3.png)
+    ![Panneau Tâches 3](./media/storsimple-8000-manage-jobs-u2/jobs3.png)
 
 3. Dans le panneau des détails du travail, vous pouvez consulter l’état, les détails, les statistiques temporelles et les statistiques de données.
    
@@ -81,7 +81,7 @@ Pour annuler une tâche en cours d’exécution, procédez comme suit.
 
 2. Cliquez avec le bouton droit sur le travail sélectionné pour appeler le menu contextuel, puis cliquez sur **Annuler**.
 
-    ![Détails du travail](./media/storsimple-8000-manage-jobs-u2/jobs2.png)
+    ![Détails du travail 2](./media/storsimple-8000-manage-jobs-u2/jobs2.png)
 
 3. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération. Cette tâche est à présent annulée.
 

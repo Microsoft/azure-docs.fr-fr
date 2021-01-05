@@ -4,34 +4,34 @@ description: Découvrez comment créer une passerelle d’application avec un gr
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/20/2019
 ms.author: victorh
-ms.openlocfilehash: 3064def2eac0aaee5c04f7ab736cf539ae372cb4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 89ba84be61469ff07eff55bb9cd114fe124b3ec2
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68359888"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566603"
 ---
 # <a name="manage-web-traffic-with-an-application-gateway-using-the-azure-cli"></a>Gérer le trafic web avec une passerelle d’application à l’aide d’Azure CLI
 
-La passerelle d’application est utilisée pour gérer et sécuriser le trafic web vers les serveurs que vous gérez. Vous pouvez utiliser Azure CLI pour créer une [passerelle d’application](overview.md) qui utilise un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md) pour les serveurs backend. Dans cet exemple, le groupe identique contient deux instances de machines virtuelles. Le groupe identique est ajouté au pool principal par défaut de la passerelle d’application.
+La passerelle d’application est utilisée pour gérer et sécuriser le trafic web vers les serveurs que vous gérez. Vous pouvez utiliser Azure CLI pour créer une [passerelle d’application](overview.md) qui utilise un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md) pour les serveurs backend. Dans cet exemple, le groupe identique contient deux instances de machines virtuelles. Le groupe identique est ajouté au pool principal par défaut de la passerelle d’application.
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle Application Gateway
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+* Configurer le réseau
+* Créer une passerelle Application Gateway
+* Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure PowerShell](tutorial-manage-web-traffic-powershell.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite que vous exécutiez la version 2.0.4 minimum d’Azure CLI. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Cet tutoriel nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -155,4 +155,4 @@ az group delete --name myResourceGroupAG --location eastus
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Limiter le trafic web avec un pare-feu d’applications web](./tutorial-restrict-web-traffic-cli.md)
+[Limiter le trafic web avec un pare-feu d’applications web](../web-application-firewall/ag/tutorial-restrict-web-traffic-cli.md)

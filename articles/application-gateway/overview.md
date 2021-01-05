@@ -6,14 +6,14 @@ author: vhorne
 ms.service: application-gateway
 ms.topic: overview
 ms.custom: mvc
-ms.date: 03/04/2020
+ms.date: 08/26/2020
 ms.author: victorh
-ms.openlocfilehash: 4a4395801218409fe77d1081689ba80b495fcfad
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 52bc2a20be0d7113583b7f23cc569dbb9503d364
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "78302574"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397244"
 ---
 # <a name="what-is-azure-application-gateway"></a>Qu’est-ce qu’Azure Application Gateway ?
 
@@ -28,7 +28,7 @@ Ce type de routage est connu comme l’équilibrage de charge de la couche d’a
 >[!NOTE]
 > Azure offre une suite de solutions d’équilibrage de charge entièrement managées pour vos scénarios. Si vous avez besoin d’un équilibrage de charge haute performance, à faible latence et de couche 4, consultez [Qu’est-ce qu’Azure Load Balancer ?](../load-balancer/load-balancer-overview.md). Si vous recherchez un équilibrage de charge DNS global, consultez [Qu’est-ce que Traffic Manager ?](../traffic-manager/traffic-manager-overview.md). Vos scénarios de bout en bout peuvent tirer parti de la combinaison de ces solutions.
 >
-> Pour obtenir une comparaison des options d’équilibrage de charge Azure, consultez [Vue d’ensemble des options d’équilibrage de charge dans Azure](https://docs.microsoft.com/azure/architecture/guide/technology-choices/load-balancing-overview).
+> Pour obtenir une comparaison des options d’équilibrage de charge Azure, consultez [Vue d’ensemble des options d’équilibrage de charge dans Azure](/azure/architecture/guide/technology-choices/load-balancing-overview).
 
 ## <a name="features"></a>Fonctionnalités
 
@@ -40,10 +40,14 @@ Pour obtenir des informations sur les tarifs d’Application Gateway, consultez 
 
 Pour obtenir des informations sur le contrat SLA Application Gateway, consultez [SLA pour Application Gateway](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_2/).
 
+## <a name="whats-new"></a>Nouveautés
+
+Pour découvrir les nouveautés d’Azure Application Gateway, consultez [Mises à jour Azure](https://azure.microsoft.com/updates/?category=networking&query=Application%20Gateway).
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Selon vos besoins et votre environnement, vous pouvez créer une passerelle Application Gateway test avec le portail Azure, Azure PowerShell ou Azure CLI.
 
 - [Démarrage rapide : diriger le trafic web avec Azure Application Gateway - Portail Azure](quick-create-portal.md)
-- [Démarrage rapide : diriger le trafic web avec Azure Application Gateway - Azure PowerShell](quick-create-powershell.md)
-- [Démarrage rapide : diriger le trafic web avec Azure Application Gateway - Azure CLI](quick-create-cli.md)
+- [Démarrage rapide : Diriger le trafic web avec Azure Application Gateway - Azure PowerShell](quick-create-powershell.md)
+- [Démarrage rapide : Diriger le trafic web avec Azure Application Gateway - Azure CLI](quick-create-cli.md)

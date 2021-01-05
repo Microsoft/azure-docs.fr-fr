@@ -2,14 +2,16 @@
 title: 'Tutoriel : Révision des énoncés de point de terminaison - LUIS'
 description: Dans ce tutoriel, améliorez les prédictions d’application en vérifiant ou corrigeant les énoncés reçus via le point de terminaison HTTP de LUIS dont ce dernier n’est pas sûr. Certains énoncés peuvent devoir faire l’objet d’une vérification d’intention, d’autres d’une vérification d’entité.
 services: cognitive-services
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: tutorial
-ms.date: 04/01/2020
-ms.openlocfilehash: 32d43b36910c8fbfd60463f4062b6a00b9272fdb
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 07/02/2020
+ms.openlocfilehash: b8f8fa2cd3c9c22187bb95c55d9de2abb2e8caec
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592574"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91324635"
 ---
 # <a name="tutorial-fix-unsure-predictions-by-reviewing-endpoint-utterances"></a>Tutoriel : Corriger les prédictions incertaines en révisant les énoncés de point de terminaison
 Dans ce tutoriel, améliorez les prédictions de l’application en vérifiant ou corrigeant les énoncés reçus via le point de terminaison HTTPS de LUIS dont ce dernier n’est pas sûr. Vous devez examiner les énoncés de point de terminaison régulièrement dans le cadre de la maintenance LUIS planifiée.
@@ -35,11 +37,16 @@ En passant en revue les énoncés de point de terminaison, vous vérifiez ou cor
 
 ## <a name="download-json-file-for-app"></a>Télécharger le fichier JSON pour l’application
 
-Téléchargez et enregistrez le [fichier JSON de l’application](https://github.com/Azure-Samples/cognitive-services-language-understanding/blob/master/documentation-samples/tutorials/custom-domain-sentiment-HumanResources.json?raw=true).
+Téléchargez et enregistrez le [fichier JSON de l’application](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/luis/apps/tutorial-fix-unsure-predictions.json?raw=true).
 
 ## <a name="import-json-file-for-app"></a>Importer le fichier JSON pour l’application
 
-[!INCLUDE [Import app steps](includes/import-app-steps.md)]
+
+1. Sur le [portail LUIS](https://www.luis.ai), dans la page **Mes applications**, sélectionnez **+Nouvelle application de conversation**, puis **Importer en tant que JSON**. Recherchez le fichier JSON enregistré à l’étape précédente. Vous n’avez pas besoin de modifier le nom de l’application. Sélectionnez **Terminé**
+
+1. Sélectionnez **Générer** puis **Intentions** pour voir les intentions, qui sont les principaux composants d’une application LUIS.
+
+    :::image type="content" source="media/luis-tutorial-review-endpoint-utterances/initial-intents-in-app.png" alt-text="Passez de la page Versions à la page Intentions.":::
 
 ## <a name="train-the-app-to-apply-the-entity-changes-to-the-app"></a>Effectuer l’apprentissage de l’application pour appliquer les modifications d’entité à l’application
 
@@ -77,15 +84,11 @@ Passez en revue les énoncés du point de terminaison pour une intention correct
 
 1. Dans la section **Build** du portail, sélectionnez **Réviser les énoncés de point de terminaison** dans le volet de navigation gauche. La liste est filtrée pour intention **ApplyForJob**.
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran du bouton Réviser les énoncés de point de terminaison dans le volet de navigation gauche](./media/luis-tutorial-review-endpoint-utterances/review-endpoint-utterances-with-entity-view.png)
+    :::image type="content" source="./media/luis-tutorial-review-endpoint-utterances/review-endpoint-utterances-with-entity-view.png" alt-text="Passez de la page Versions à la page Intentions.":::
 
-    Ce énoncé, `I'm looking for a job with Natural Language Processing`, n’a pas la bonne intention.
+    Cet énoncé, `I'm looking for a job with Natural Language Processing`, n’a pas l’intention correcte, _GetJobInformation_. Elle a été mal prédite en tant que _ApplyForJob_ en raison de la similarité des noms de postes et des verbes utilisés dans les deux intentions.
 
-1.  Pour aligner cet énoncé, sur la ligne de l’énoncé, sélectionnez l’**intention alignée** correcte de `GetJobInformation`. Ajoutez l’énoncé modifié à l’application en sélectionnant la coche.
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran du bouton Réviser les énoncés de point de terminaison dans le volet de navigation gauche](./media/luis-tutorial-review-endpoint-utterances/select-correct-aligned-intent-for-endpoint-utterance.png)
+1.  Pour aligner cet énoncé, sélectionnez l’**Intention alignée** correcte de `GetJobInformation`. Ajoutez l’énoncé modifié à l’application en sélectionnant la coche.
 
     Passez en revue les énoncés restants dans cette intention but, en corrigeant l’intention alignée de façon appropriée. Utilisez le tableau des énoncés initiaux dans ce tutoriel pour voir l’intention alignée.
 
@@ -110,37 +113,37 @@ Pour vérifier que les exemples d’énoncés correctement alignés ont amélior
             "topIntent": "GetJobInformation",
             "intents": {
                 "GetJobInformation": {
-                    "score": 0.903607249
-                },
-                "EmployeeFeedback": {
-                    "score": 0.0312187821
+                    "score": 0.901367366
                 },
                 "ApplyForJob": {
-                    "score": 0.0230276529
+                    "score": 0.0307973567
+                },
+                "EmployeeFeedback": {
+                    "score": 0.0296942145
                 },
                 "MoveEmployee": {
-                    "score": 0.008322801
-                },
-                "Utilities.Stop": {
-                    "score": 0.004480808
+                    "score": 0.00739785144
                 },
                 "FindForm": {
-                    "score": 0.00425248267
+                    "score": 0.00449316856
+                },
+                "Utilities.Stop": {
+                    "score": 0.00417657848
                 },
                 "Utilities.StartOver": {
-                    "score": 0.004224336
+                    "score": 0.00407167152
                 },
                 "Utilities.Help": {
-                    "score": 0.00373591436
+                    "score": 0.003662492
                 },
                 "None": {
-                    "score": 0.0034621188
+                    "score": 0.00335733569
                 },
                 "Utilities.Cancel": {
-                    "score": 0.00230977475
+                    "score": 0.002225436
                 },
                 "Utilities.Confirm": {
-                    "score": 0.00112078607
+                    "score": 0.00107437756
                 }
             },
             "entities": {
@@ -156,7 +159,7 @@ Pour vérifier que les exemples d’énoncés correctement alignés ont amélior
                                 "timex": "PRESENT_REF",
                                 "resolution": [
                                     {
-                                        "value": "2019-12-05 23:23:53"
+                                        "value": "2020-07-02 21:45:50"
                                     }
                                 ]
                             }

@@ -1,17 +1,17 @@
 ---
 title: Journalisation d’audit - Azure Database pour PostgreSQL - Serveur unique
 description: Concepts relatifs à la journalisation d’audit pgAudit dans Azure Database pour PostgreSQL - Serveur unique
-author: rachel-msft
-ms.author: raagyema
+author: niklarin
+ms.author: nlarin
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: 165e7984c21b74fa7730fc02756b9e75b4b33aa7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 615297a4bf47d80c9313f011b90d343b7ae680e3
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131242"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92488042"
 ---
 # <a name="audit-logging-in-azure-database-for-postgresql---single-server"></a>Journalisation d’audit dans Azure Database pour PostgreSQL - Serveur unique
 
@@ -42,9 +42,9 @@ Pour installer pgAudit, vous devez l’inclure dans les bibliothèques de préch
 À l’aide du [Portail Azure](https://portal.azure.com) :
 
    1. Sélectionnez votre serveur Azure Database pour PostgreSQL.
-   2. Dans la barre latérale, sélectionnez **Paramètres du serveur**.
+   2. Dans la barre latérale, sélectionnez **Paramètres du serveur** .
    3. Recherchez le paramètre `shared_preload_libraries`.
-   4. Sélectionnez **pgaudit**.
+   4. Sélectionnez **pgaudit** .
    5. Redémarrez le serveur pour appliquer les modifications.
 
    6. Connectez-vous à votre serveur à l’aide d’un client (par exemple, psql), puis activez l’extension pgAudit.
@@ -88,9 +88,9 @@ Pour commencer, définissez `pgaudit.log` sur `WRITE`, puis ouvrez vos journaux 
 ## <a name="viewing-audit-logs"></a>Affichage des journaux d’audit
 Si vous utilisez des fichiers .log, vos journaux d’audit seront inclus dans le même fichier que vos journaux d’erreurs PostgreSQL. Vous pouvez télécharger des fichiers journaux à partir du [Portail](howto-configure-server-logs-in-portal.md) Azure ou de l’[interface CLI](howto-configure-server-logs-using-cli.md). 
 
-Si vous utilisez la journalisation des ressources Azure, la façon dont vous accédez aux journaux dépend du point de terminaison que vous choisissez. Pour Stockage Azure, consultez l’article [Compte de stockage des journaux](../azure-monitor/platform/resource-logs-collect-storage.md). Pour Event Hubs, consultez l’article [Diffusion des journaux Azure](../azure-monitor/platform/resource-logs-stream-event-hubs.md).
+Si vous utilisez la journalisation des ressources Azure, la façon dont vous accédez aux journaux dépend du point de terminaison que vous choisissez. Pour le stockage Azure, consultez l’article [Compte de stockage des journaux](../azure-monitor/platform/resource-logs.md#send-to-azure-storage). Pour Event Hubs, consultez l’article [Diffusion des journaux Azure](../azure-monitor/platform/resource-logs.md#send-to-azure-event-hubs).
 
-Pour les journaux Azure Monitor, les journaux sont envoyés à l’espace de travail que vous avez sélectionné. Les journaux Postgres utilisent le mode de collecte **AzureDiagnostics**, pour qu’ils puissent être interrogés à partir de la table AzureDiagnostics. Les champs de la table sont décrits ci-dessous. En savoir plus sur l’interrogation et la génération d’alertes dans la vue d’ensemble [Interroger les journaux Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
+Pour les journaux Azure Monitor, les journaux sont envoyés à l’espace de travail que vous avez sélectionné. Les journaux Postgres utilisent le mode de collecte **AzureDiagnostics** , pour qu’ils puissent être interrogés à partir de la table AzureDiagnostics. Les champs de la table sont décrits ci-dessous. En savoir plus sur l’interrogation et la génération d’alertes dans la vue d’ensemble [Interroger les journaux Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
 
 Vous pouvez utiliser cette requête pour commencer. Vous pouvez configurer des alertes basées sur les requêtes.
 

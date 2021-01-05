@@ -1,22 +1,18 @@
 ---
 title: Azure Maps en tant que source Event Grid
 description: Décrit les propriétés et le schéma qui sont fournis pour les événements Azure Maps avec Azure Event Grid
-services: event-grid
-author: banisadr
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 04/09/2020
-ms.author: babanisa
-ms.openlocfilehash: e879ec3442f2e7912acb450a97079d80d7d95a01
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 07/07/2020
+ms.openlocfilehash: 4203bdf5222278b698d656835afebd9769557303
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393416"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87461984"
 ---
 # <a name="azure-maps-as-an-event-grid-source"></a>Azure Maps en tant que source Event Grid
 
-Cet article fournit les propriétés et les schémas des événements Azure Maps. Pour une présentation des schémas d’événements, consultez [Schéma d’événements Azure Event Grid](https://docs.microsoft.com/azure/event-grid/event-schema). Cet article fournit également une liste de guides de démarrage rapide et de tutoriels permettant d’utiliser Azure Maps en tant que source d’événement.
+Cet article fournit les propriétés et les schémas des événements Azure Maps. Pour une présentation des schémas d’événements, consultez [Schéma d’événements Azure Event Grid](./event-schema.md). Cet article fournit également une liste de guides de démarrage rapide et de tutoriels permettant d’utiliser Azure Maps en tant que source d’événement.
 
 ## <a name="event-grid-event-schema"></a>Schéma d’événement Event Grid
 

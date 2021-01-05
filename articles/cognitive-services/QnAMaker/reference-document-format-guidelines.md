@@ -1,14 +1,16 @@
 ---
 title: Instructions relatives au format des documents importés – QnA Maker
-description: Découvrez comment les types d'URL sont utilisés pour importer et créer des paires de questions et réponses.
+description: Suivez ces instructions pour l’importation de documents afin d’obtenir les meilleurs résultats pour votre contenu.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: reference
 ms.date: 04/06/2020
-ms.openlocfilehash: 799e85e2200d3caa29c9b76bc57a62fc883d246d
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 1bf6eebcfc43452dd9a62e4a49f9aacbcd517ffc
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804331"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352233"
 ---
 # <a name="format-guidelines-for-imported-documents-and-urls"></a>Instructions relatives au format pour les documents et les URL importés
 
@@ -20,7 +22,7 @@ Après l’importation d’un fichier ou d’une URL, QnA Maker convertit et sto
 
 Si vous ajoutez ou modifiez votre contenu directement dans votre base de connaissances, utilisez la **mise en forme Markdown** pour créer un contenu de texte enrichi ou modifiez le contenu du format Markdown qui est déjà dans la réponse. QnA Maker prend en charge une grande partie du format Markdown pour offrir des fonctionnalités de texte enrichi à votre contenu. Toutefois, l’application cliente, telle qu’un bot de chat, peut ne pas prendre en charge le même ensemble de formats Markdown. Il est important de tester l’affichage des réponses de l’application cliente.
 
-Consultez la liste complète des [types et exemples de contenu](./Concepts/content-types.md#file-and-url-data-types).
+Consultez la liste complète des [types et exemples de contenu](./concepts/data-sources-and-content.md#content-types-of-documents-you-can-add-to-a-knowledge-base).
 
 ## <a name="basic-document-formatting"></a>Mise en forme de base du document
 
@@ -116,4 +118,4 @@ L’importation d’une base de connaissances remplace le contenu de la base de 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez la liste complète des [types et exemples de contenu](./Concepts/content-types.md#file-and-url-data-types)
+Consultez la liste complète des [types et exemples de contenu](./concepts/data-sources-and-content.md#content-types-of-documents-you-can-add-to-a-knowledge-base)

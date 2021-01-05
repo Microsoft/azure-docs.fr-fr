@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: troubleshooting
 ms.date: 11/21/2019
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: jsimmons
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 79ebf543a3880a4f2c8ee8c0d706c268ef3f08d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6ca00785bfe8a99b8a3d620559c4fa492ee60c63
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230905"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741743"
 ---
 # <a name="troubleshoot-on-premises-azure-ad-password-protection"></a>Résoudre les problèmes : Protection par mot de passe Azure AD en local
 
@@ -64,7 +64,7 @@ La protection par mot de passe Azure AD dépend fortement des fonctionnalités d
 
    Si le mode de démarrage du service de distribution de clés est désactivé, cette configuration doit être corrigée pour que la protection par mot de passe Azure AD fonctionne correctement.
 
-   Un test simple en lien avec ce problème consiste à démarrer manuellement le service de distribution de clés, soit via la console MMC de management des services, ou à l’aide d’autres outils de gestion (par exemple, en tapant la commande « net start kdssvc » dans une console d’invite de commande). Le service de distribution de clés est censé démarrer correctement et continuer à s’exécuter.
+   Un test simple en lien avec ce problème consiste à démarrer manuellement le service de distribution de clés, soit via la console MMC de management des services, ou à l’aide d’autres outils de gestion (par exemple, en tapant la commande « net start kdssvc » dans une console d’invite de commandes). Le service de distribution de clés est censé démarrer correctement et continuer à s’exécuter.
 
    La cause racine la plus courante de l’incapacité du service de distribution de clés à démarrer est que l’objet contrôleur de domaine Active Directory se trouve en dehors de l’unité d’organisation Contrôleurs de domaine par défaut. Cette configuration n’est pas pris en charge par le service de distribution de clés et ne constitue pas une limitation imposée par la protection par mot de passe Azure AD. La solution pour corriger cette situation consiste à déplacer l’objet contrôleur de domaine vers un emplacement situé sous l’unité d’organisation Contrôleurs de domaine par défaut.
 
@@ -72,7 +72,20 @@ La protection par mot de passe Azure AD dépend fortement des fonctionnalités d
 
    Un correctif de sécurité du service de distribution de clés a été introduit dans Windows Server 2016. Il modifie le format des tampons chiffrés par le service de distribution de clés. Il est parfois impossible de déchiffrer ces tampons sur Windows Server 2012 et Windows Server 2012 R2. En revanche, cela fonctionne dans le sens inverse : les tampons chiffrés par le service de distribution de clés sur Windows Server 2012 et Windows Server 2012 R2 sont toujours déchiffrés correctement sur Windows Server 2016 et versions ultérieures. Si les contrôleurs de domaine de vos domaines Active Directory exécutent une combinaison de ces systèmes d’exploitation, des échecs du déchiffrement de la protection par mot de passe Azure AD risquent d’être signalés de temps en temps. Il n’est pas possible de prédire avec précision le moment ou les symptômes de ces échecs au vu de la nature du correctif de sécurité, et de ce fait, il n’est pas possible de déterminer quel agent de contrôleur de domaine de la protection par mot de passe Azure AD va chiffrer les données à un moment donné sur quel contrôleur de domaine.
 
-   Microsoft cherche actuellement un correctif afin de résoudre ce problème, mais aucune date n’est encore avancée quant à sa disponibilité. En attendant, il n’existe pas de solution de contournement pour ce problème si ce n’est d’éviter d’exécuter une combinaison de ces systèmes d’exploitation incompatibles dans vos domaines Active Directory. En d’autres termes, vous devez exécuter uniquement des contrôleurs de domaine Windows Server 2012 et Windows Server 2012 R2 OU uniquement des contrôleurs de domaine Windows Server 2016 et ultérieur.
+   Il n’existe pas de solution de contournement pour ce problème si ce n’est d’éviter d’exécuter une combinaison de ces systèmes d’exploitation incompatibles dans votre/vos domaine(s) Active Directory. En d’autres termes, vous devez exécuter uniquement des contrôleurs de domaine Windows Server 2012 et Windows Server 2012 R2 OU uniquement des contrôleurs de domaine Windows Server 2016 et ultérieur.
+
+## <a name="dc-agent-thinks-the-forest-has-not-been-registered"></a>L’agent DC estime que la forêt n’a pas été inscrite
+
+Le symptôme de ce problème est la journalisation d’événements 30016 dans le canal DC Agent/Admin qui indique :
+
+```text
+The forest has not been registered with Azure. Password policies cannot be downloaded from Azure unless this is corrected.
+```
+
+Il existe deux causes possibles pour ce problème.
+
+1. La forêt n’a en effet pas été inscrite. Pour résoudre le problème, exécutez la commande Register-AzureADPasswordProtectionForest comme décrit dans les [exigences de déploiement](howto-password-ban-bad-on-premises-deploy.md).
+1. La forêt a été inscrite, mais l’agent DC ne peut pas déchiffrer les données d’inscription de la forêt. Ce cas de figure a la même cause racine que le problème #2 indiqué ci-dessus sous [l’agent DC ne peut pas chiffrer ou déchiffrer les fichiers de stratégie de mot de passe](howto-password-ban-bad-on-premises-troubleshoot.md#dc-agent-is-unable-to-encrypt-or-decrypt-password-policy-files). Un moyen simple de confirmer cette théorie est que vous verrez cette erreur uniquement sur les agents DC qui s’exécutent sur les contrôleurs de domaine Windows Server 2012 ou Windows Server 2012R2, tandis que les agents DC exécutés sur les contrôleurs de domaine Windows Server 2016 et versions ultérieures sont corrects. La solution de contournement est la même : mettre à niveau tous les contrôleurs de domaine vers Windows Server 2016 ou version ultérieure.
 
 ## <a name="weak-passwords-are-being-accepted-but-should-not-be"></a>Les mots de passe faibles sont acceptés alors qu’ils ne devraient pas l’être
 

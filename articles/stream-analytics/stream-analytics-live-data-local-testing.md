@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/07/2018
 ms.custom: seodec18
-ms.openlocfilehash: f2876ea32bdcd900a454ae6b7ac58c11b8ec67c3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0788d8b4f659364fcedc690185c9159a24434125
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840483"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93123912"
 ---
 # <a name="test-live-data-locally-using-azure-stream-analytics-tools-for-visual-studio-preview"></a>Tester des données actives localement à l’aide des outils Azure Stream Analytics pour Visual Studio (préversion)
 
@@ -59,7 +59,7 @@ Les options de test local suivantes sont prises en charge :
 
 * Power BI et Azure Data Lake Storage ne sont pas des récepteurs de sortie pris en charge en raison des limitations du modèle d’authentification.
 
-* Seules les options d’entrée dans le cloud offrent une prise en charge de [stratégies de temps](stream-analytics-out-of-order-and-late-events.md) ; les options d’entrée locale n’en proposent pas.
+* Seules les options d’entrée dans le cloud offrent une prise en charge de [stratégies de temps](./stream-analytics-time-handling.md) ; les options d’entrée locale n’en proposent pas.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

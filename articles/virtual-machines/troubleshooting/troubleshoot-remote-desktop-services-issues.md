@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/23/2018
 ms.author: genli
-ms.openlocfilehash: 4b314fbdb9cbc0c0b797cbee8e92ee4702bbea81
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b00785fed7708986885e9da9102e8f1b4fd4539
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77919462"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86508880"
 ---
 # <a name="remote-desktop-services-isnt-starting-on-an-azure-vm"></a>Les Services Bureau à distance ne démarrent pas sur une machine virtuelle Azure
 
@@ -47,7 +47,9 @@ Lorsque vous essayez de vous connecter à une machine virtuelle, vous rencontrez
 
     Vous pouvez aussi utiliser la fonctionnalité Console d’accès série pour rechercher ces erreurs en exécutant la requête suivante : 
 
-        wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Service Control Manager'] and EventID=7022 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more 
+    ```console
+   wevtutil qe system /c:1 /f:text /q:"Event[System[Provider[@Name='Service Control Manager'] and EventID=7022 and TimeCreated[timediff(@SystemTime) <= 86400000]]]" | more
+    ```
 
 ## <a name="cause"></a>Cause
  
@@ -179,29 +181,44 @@ Pour résoudre ce problème, utilisez la Console série. Vous pouvez également 
 
 1. Ce problème se produit lorsque le compte de démarrage de ce service a été modifié. Rétablissez sa configuration par défaut : 
 
-        sc config TermService obj= 'NT Authority\NetworkService'
+    ```console
+    sc config TermService obj= 'NT Authority\NetworkService'
+    ```
+
 2. Démarrez le service :
 
-        sc start TermService
+    ```console
+    sc start TermService
+    ```
+
 3. Essayez de vous connecter à la machine virtuelle à l’aide du Bureau à distance.
 
 #### <a name="termservice-service-crashes-or-hangs"></a>Le service TermService se bloque
 1. Si l’état du service est bloqué sur **Démarrage** ou sur **Arrêt**, essayez de l’arrêter : 
 
-        sc stop TermService
+    ```console
+    sc stop TermService
+    ```
+
 2. Isolez le service sur son propre conteneur « svchost » :
 
-        sc config TermService type= own
+    ```console
+    sc config TermService type= own
+    ```
+
 3. Démarrez le service :
 
-        sc start TermService
+    ```console
+    sc start TermService
+    ```
+
 4. Si le service échoue toujours au démarrage, [contactez le support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 
 ### <a name="repair-the-vm-offline"></a>Réparer la machine virtuelle en mode hors connexion
 
 #### <a name="attach-the-os-disk-to-a-recovery-vm"></a>Attachez le disque du système d’exploitation à une machine virtuelle de récupération
 
-1. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](../windows/troubleshoot-recovery-disks-portal.md).
+1. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](./troubleshoot-recovery-disks-portal-windows.md).
 2. Établissez une connexion Bureau à distance avec la machine virtuelle de récupération. Vérifiez que le disque attaché est marqué comme étant **En ligne** dans la console Gestion des disques. Notez la lettre de lecteur affectée au disque de système d’exploitation attaché.
 3. Ouvrez une instance d’invite de commande avec élévation de privilèges (**Exécuter en tant qu’administrateur**). Ensuite, exécutez le script suivant. Supposons que la lettre de lecteur affectée au disque de système d’exploitation attaché est **F**. Remplacez-la par la valeur correspondant à votre machine virtuelle. 
 
@@ -217,7 +234,7 @@ Pour résoudre ce problème, utilisez la Console série. Vous pouvez également 
    reg add "HKLM\BROKENSYSTEM\ControlSet002\services\TermService" /v type /t REG_DWORD /d 16 /f
    ```
 
-4. [Détachez le disque de système d’exploitation et recréez la machine virtuelle](../windows/troubleshoot-recovery-disks-portal.md). Ensuite, vérifiez que le problème est résolu.
+4. [Détachez le disque de système d’exploitation et recréez la machine virtuelle](./troubleshoot-recovery-disks-portal-windows.md). Ensuite, vérifiez que le problème est résolu.
 
 ## <a name="need-help-contact-support"></a>Vous avez besoin d’aide ? Contacter le support technique
 

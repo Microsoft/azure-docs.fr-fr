@@ -1,19 +1,20 @@
 ---
 title: Relocalisation grossière en Unity
 description: Explication détaillée de la création et de la localisation d’ancres avec la relocalisation approximative en C#.
-author: bucurb
-manager: dacoghl
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: bobuc
-ms.date: 09/19/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 5c976bd020d37672c44c89113bf7786e1ccf141b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 29ff255887dcd5f86f0b5fd72374df920a2618ee
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76548252"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96017999"
 ---
 # <a name="how-to-create-and-locate-anchors-using-coarse-relocalization-in-c"></a>Guide pratique pour créer et localiser des ancres avec la relocalisation approximative en C#
 

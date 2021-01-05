@@ -6,14 +6,14 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/27/2019
-ms.openlocfilehash: c6bf26d8f3a73db6ee69b2aa0de73872911893bf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1094235f5bc5cc25cf6d8f3762dc242503952de6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75552710"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86083795"
 ---
 # <a name="analyze-website-logs-using-a-custom-python-library-with-apache-spark-cluster-on-hdinsight"></a>Analyser des journaux d’activité de site web en utilisant une bibliothèque Python personnalisée avec un cluster Apache Spark sur HDInsight
 

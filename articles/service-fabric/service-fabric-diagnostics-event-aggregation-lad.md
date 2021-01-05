@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 2/25/2019
 ms.author: srrengar
-ms.openlocfilehash: fdb78498d33416ef21b2e2b0f498e7afa6a58d99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 453258bb5768a2faa8f4e42cce86d02125283026
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75609959"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002168"
 ---
 # <a name="event-aggregation-and-collection-using-linux-azure-diagnostics"></a>Agrégation et collection d’événements à l’aide de Diagnostics Azure pour Linux
 > [!div class="op_single_selector"]
@@ -21,7 +21,7 @@ ms.locfileid: "75609959"
 
 Lorsque vous exécutez un cluster Service Fabric dans Azure, il peut être intéressant de collecter les journaux d’activité de tous les nœuds pour les regrouper dans un emplacement central. La centralisation des journaux d’activité vous permet d’analyser et résoudre les problèmes que vous pourriez rencontrer dans votre cluster ou dans les applications et services exécutés dans ce cluster.
 
-L’une des façons de charger et de collecter des journaux consiste à utiliser l’extension Diagnostics Azure pour Linux (LAD), qui assure le chargement des journaux dans le Stockage Azure, et qui a également la possibilité d’envoyer des journaux à Azure Application Insights ou Event Hubs. Vous pouvez également utiliser un processus externe pour lire les événements à partir du stockage et les placer dans une plateforme d'analyse comme les [journaux Azure Monitor](../log-analytics/log-analytics-service-fabric.md) ou une autre solution d'analyse des journaux.
+L’une des façons de charger et de collecter des journaux consiste à utiliser l’extension Diagnostics Azure pour Linux (LAD), qui assure le chargement des journaux dans le Stockage Azure, et qui a également la possibilité d’envoyer des journaux à Azure Application Insights ou Event Hubs. Vous pouvez également utiliser un processus externe pour lire les événements à partir du stockage et les placer dans une plateforme d'analyse comme les [journaux Azure Monitor](./service-fabric-diagnostics-oms-setup.md) ou une autre solution d'analyse des journaux.
 
 ## <a name="log-and-event-sources"></a>Sources de journaux et d’événements
 
@@ -43,5 +43,5 @@ Vous configurez ainsi l’agent LAD pour surveiller les fichiers journaux indiqu
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-1. Pour identifier plus précisément les événements à consulter lors de la résolution des problèmes, consultez la [documentation de LTTng](https://lttng.org/docs) et la section [Utilisation de l’extension de diagnostic Linux pour analyser les données de performances et de diagnostic d’une machine virtuelle Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/diagnostics-linux).
+1. Pour identifier plus précisément les événements à consulter lors de la résolution des problèmes, consultez la [documentation de LTTng](https://lttng.org/docs) et la section [Utilisation de l’extension de diagnostic Linux pour analyser les données de performances et de diagnostic d’une machine virtuelle Linux](../virtual-machines/extensions/diagnostics-linux.md).
 2. [Configurez l’agent Log Analytics ](service-fabric-diagnostics-event-analysis-oms.md) pour rassembler les métriques, surveiller les conteneurs déployés sur votre cluster et visualiser vos journaux d’activité 

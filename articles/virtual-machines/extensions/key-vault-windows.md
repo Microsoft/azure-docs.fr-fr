@@ -5,15 +5,16 @@ services: virtual-machines-windows
 author: msmbaldwin
 tags: keyvault
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.date: 12/02/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 8e014e7a1c564377582e4503218c4129619daa91
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: 0418c11d84fb82ac4a4b181289f032407a29f92e
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80410733"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500663"
 ---
 # <a name="key-vault-virtual-machine-extension-for-windows"></a>Extension de machine virtuelle Key Vault pour Windows
 
@@ -27,10 +28,17 @@ L’extension de machine virtuelle Key Vault prend en charge les versions ci-des
 - Windows Server 2016
 - Windows Server 2012
 
+L’extension de machine virtuelle Key Vault est également prise en charge sur les machines virtuelles locales personnalisées qui sont téléchargées et converties en une image spécialisée pour une utilisation dans Azure à l’aide de l’installation de Windows Server 2019 Core.
+
 ### <a name="supported-certificate-content-types"></a>Types de contenu de certificat pris en charge
 
-- PKCS #12
+- PKCS#12
 - PEM
+
+## <a name="prerequisities"></a>Conditions préalables
+  - Instance Key Vault avec un certificat. Consultez [Créer un Key Vault](../../key-vault/general/quick-create-portal.md)
+  - Une [identité managée](../../active-directory/managed-identities-azure-resources/overview.md) doit être attribuée à la machine virtuelle/VMSS
+  - La stratégie d’accès à Key Vault doit être définie avec des secrets `get` et l’autorisation `list` pour l’identité managée de machine virtuelle/VMSS afin de récupérer la partie du secret d’un certificat. Consultez [Comment s’authentifier auprès de Key Vault](../../key-vault/general/authentication.md) et [Attribuer une stratégie d’accès Key Vault](../../key-vault/general/assign-access-policy-cli.md).
 
 ## <a name="extension-schema"></a>Schéma d’extensions
 
@@ -54,12 +62,16 @@ L’extrait JSON suivant illustre le schéma de l’extension de machine virtuel
         "secretsManagementSettings": {
           "pollingIntervalInS": <polling interval in seconds, e.g: "3600">,
           "certificateStoreName": <certificate store name, e.g.: "MY">,
-          "linkOnRenewal": <Only Windows. This feature enables auto-rotation of SSL certificates, without necessitating a re-deployment or binding.  e.g.: false>,
+          "linkOnRenewal": <Only Windows. This feature ensures s-channel binding when certificate renews, without necessitating a re-deployment.  e.g.: false>,
           "certificateStoreLocation": <certificate store location, currently it works locally only e.g.: "LocalMachine">,
           "requireInitialSync": <initial synchronization of certificates e..g: true>,
           "observedCertificates": <list of KeyVault URIs representing monitored certificates, e.g.: "https://myvault.vault.azure.net/secrets/mycertificate"
-        }      
-      }
+        },
+        "authenticationSettings": {
+                "msiEndpoint":  <Optional MSI endpoint e.g.: "http://169.254.169.254/metadata/identity">,
+                "msiClientId":  <Optional MSI identity e.g.: "c7373ae5-91c2-4165-8ab6-7381d6e75619">
+        }
+       }
       }
     }
 ```
@@ -67,7 +79,12 @@ L’extrait JSON suivant illustre le schéma de l’extension de machine virtuel
 > [!NOTE]
 > Vos URL de certificats observés doivent être de la forme `https://myVaultName.vault.azure.net/secrets/myCertName`.
 > 
-> Cela est dû au fait que le chemin `/secrets` retourne le certificat complet, y compris la clé privée, contrairement au chemin `/certificates`. Vous trouverez plus d’informations sur les certificats ici : [Certificats Key Vault](https://docs.microsoft.com/azure/key-vault/about-keys-secrets-and-certificates#key-vault-certificates)
+> Cela est dû au fait que le chemin `/secrets` retourne le certificat complet, y compris la clé privée, contrairement au chemin `/certificates`. Vous trouverez plus d’informations sur les certificats ici : [Certificats Key Vault](../../key-vault/general/about-keys-secrets-certificates.md)
+
+> [!IMPORTANT]
+> La propriété 'authenticationSettings' est **requise** uniquement pour les machines virtuelles avec des **identités affectées par l’utilisateur**.
+> Elle spécifie l'identité à utiliser pour l'authentification auprès de Key Vault.
+
 
 ### <a name="property-values"></a>Valeurs de propriétés
 
@@ -80,9 +97,11 @@ L’extrait JSON suivant illustre le schéma de l’extension de machine virtuel
 | pollingIntervalInS | 3600 | string |
 | certificateStoreName | MY | string |
 | linkOnRenewal | false | boolean |
-| certificateStoreLocation  | LocalMachine | string |
+| certificateStoreLocation  | LocalMachine ou CurrentUser (respect de la casse) | string |
 | requiredInitialSync | true | boolean |
-| observedCertificates  | ["https://myvault.vault.azure.net/secrets/mycertificate"] | tableau de chaînes
+| observedCertificates  | ["https://myvault.vault.azure.net/secrets/mycertificate","https://myvault.vault.azure.net/secrets/mycertificate2"] | tableau de chaînes
+| msiEndpoint | http://169.254.169.254/metadata/identity | string |
+| msiClientId | c7373ae5-91c2-4165-8ab6-7381d6e75619 | string |
 
 
 ## <a name="template-deployment"></a>Déploiement de modèle
@@ -90,6 +109,10 @@ L’extrait JSON suivant illustre le schéma de l’extension de machine virtuel
 Les extensions de machines virtuelles Azure peuvent être déployées avec des modèles Azure Resource Manager. Les modèles sont idéaux lorsque vous déployez une ou plusieurs machines virtuelles nécessitant une actualisation de certificats après le déploiement. Vous pouvez déployer l’extension sur des machines virtuelles individuelles ou dans des groupes de machines virtuelles identiques. La configuration et le schéma sont communs aux deux types de modèle. 
 
 La configuration JSON d’une extension de machine virtuelle doit être imbriquée dans le fragment de la ressource de machine virtuelle du modèle, plus précisément dans l’objet `"resources": []` de la machine virtuelle et, dans le cas d’un groupe de machines virtuelles identiques, sous l’objet `"virtualMachineProfile":"extensionProfile":{"extensions" :[]`.
+
+ > [!NOTE]
+> L’extension de machine virtuelle nécessite l’attribution d’une identité managée par le système ou l’utilisateur pour s’authentifier auprès du coffre de clés.  Consultez [Comment s’authentifier auprès de Key Vault et attribuer une stratégie d’accès Key Vault.](../../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md)
+> 
 
 ```json
     {
@@ -110,7 +133,7 @@ La configuration JSON d’une extension de machine virtuelle doit être imbriqu�
           "pollingIntervalInS": <polling interval in seconds, e.g: "3600">,
           "certificateStoreName": <certificate store name, e.g.: "MY">,
           "certificateStoreLocation": <certificate store location, currently it works locally only e.g.: "LocalMachine">,
-          "observedCertificates": <list of KeyVault URIs representing monitored certificates, e.g.: "https://myvault.vault.azure.net/secrets/mycertificate"
+          "observedCertificates": <list of KeyVault URIs representing monitored certificates, e.g.: ["https://myvault.vault.azure.net/secrets/mycertificate", "https://myvault.vault.azure.net/secrets/mycertificate2"]>
         }      
       }
       }
@@ -119,6 +142,8 @@ La configuration JSON d’une extension de machine virtuelle doit être imbriqu�
 
 
 ## <a name="azure-powershell-deployment"></a>Déploiement d’Azure PowerShell
+> [!WARNING]
+> Les clients PowerShell ajoutent souvent `\` à `"` dans settings.json, ce qui entraîne l’échec de akvvm_service avec l’erreur suivante : `[CertificateManagementConfiguration] Failed to parse the configuration settings with:not an object.`
 
 Azure PowerShell vous permet de déployer l’extension de machine virtuelle Key Vault sur une machine virtuelle ou un groupe de machines virtuelles identiques existants. 
 
@@ -130,7 +155,7 @@ Azure PowerShell vous permet de déployer l’extension de machine virtuelle Key
         { "pollingIntervalInS": "' + <pollingInterval> + 
         '", "certificateStoreName": "' + <certStoreName> + 
         '", "certificateStoreLocation": "' + <certStoreLoc> + 
-        '", "observedCertificates": ["' + <observedCerts> + '"] } }'
+        '", "observedCertificates": ["' + <observedCert1> + '","' + <observedCert2> + '"] } }'
         $extName =  "KeyVaultForWindows"
         $extPublisher = "Microsoft.Azure.KeyVault"
         $extType = "KeyVaultForWindows"
@@ -150,7 +175,7 @@ Azure PowerShell vous permet de déployer l’extension de machine virtuelle Key
         { "pollingIntervalInS": "' + <pollingInterval> + 
         '", "certificateStoreName": "' + <certStoreName> + 
         '", "certificateStoreLocation": "' + <certStoreLoc> + 
-        '", "observedCertificates": ["' + <observedCerts> + '"] } }'
+        '", "observedCertificates": ["' + <observedCert1> + '","' + <observedCert2> + '"] } }'
         $extName = "KeyVaultForWindows"
         $extPublisher = "Microsoft.Azure.KeyVault"
         $extType = "KeyVaultForWindows"
@@ -172,52 +197,55 @@ L’interface de ligne de commande Azure permet de déployer l’extension de ma
     
     ```azurecli
        # Start the deployment
-         az vm extension set -n "KeyVaultForWindows" `
+         az vm extension set -name "KeyVaultForWindows" `
          --publisher Microsoft.Azure.KeyVault `
-         -g "<resourcegroup>" `
+         -resource-group "<resourcegroup>" `
          --vm-name "<vmName>" `
-         --settings '{\"secretsManagementSettings\": { \"pollingIntervalInS\": \"<pollingInterval>\", \"certificateStoreName\": \"<certStoreName>\", \"certificateStoreLocation\": \"<certStoreLoc>\", \"observedCertificates\": [\ <observedCerts>\"] }}'
+         --settings '{\"secretsManagementSettings\": { \"pollingIntervalInS\": \"<pollingInterval>\", \"certificateStoreName\": \"<certStoreName>\", \"certificateStoreLocation\": \"<certStoreLoc>\", \"observedCertificates\": [\" <observedCert1> \", \" <observedCert2> \"] }}'
     ```
 
 * Pour déployer l’extension sur un groupe de machines virtuelles identiques :
 
    ```azurecli
         # Start the deployment
-        az vmss extension set -n "KeyVaultForWindows" `
+        az vmss extension set -name "KeyVaultForWindows" `
          --publisher Microsoft.Azure.KeyVault `
-         -g "<resourcegroup>" `
+         -resource-group "<resourcegroup>" `
          --vmss-name "<vmName>" `
-         --settings '{\"secretsManagementSettings\": { \"pollingIntervalInS\": \"<pollingInterval>\", \"certificateStoreName\": \"<certStoreName>\", \"certificateStoreLocation\": \"<certStoreLoc>\", \"observedCertificates\": [\ <observedCerts>\"] }}'
+         --settings '{\"secretsManagementSettings\": { \"pollingIntervalInS\": \"<pollingInterval>\", \"certificateStoreName\": \"<certStoreName>\", \"certificateStoreLocation\": \"<certStoreLoc>\", \"observedCertificates\": [\" <observedCert1> \", \" <observedCert2> \"] }}'
     ```
 
 Tenez compte des restrictions et conditions suivantes :
 - Restrictions de Key Vault :
   - Doit exister au moment du déploiement 
-  - La stratégie d’accès Key Vault est définie pour l’identité de machine virtuelle/VMSS à l’aide de MSI
-
+  - La stratégie d’accès Key Vault doit être définie pour l’identité VM/VMSS à l’aide d’une identité managée. Consultez [Comment s’authentifier auprès de Key Vault](../../key-vault/general/authentication.md) et [Attribuer une stratégie d’accès Key Vault](../../key-vault/general/assign-access-policy-cli.md).
 
 ## <a name="troubleshoot-and-support"></a>Dépannage et support technique
+
+### <a name="frequently-asked-questions"></a>Forum Aux Questions (FAQ)
+
+* Le nombre de observedCertificates que vous pouvez configurer est-il limité ?
+  Non, l'extension de machine virtuelle Key Vault ne limite pas le nombre de observedCertificates.
 
 ### <a name="troubleshoot"></a>Dépanner
 
 Vous pouvez récupérer des données sur l’état des déploiements des extensions à partir du portail Azure et par le biais d’Azure PowerShell. Pour voir l’état de déploiement des extensions d’une machine virtuelle donnée, exécutez la commande suivante à l’aide d’Azure PowerShell.
 
-## <a name="azure-powershell"></a>Azure PowerShell
+**Azure PowerShell**
 ```powershell
 Get-AzVMExtension -VMName <vmName> -ResourceGroupname <resource group name>
 ```
 
-## <a name="azure-cli"></a>Azure CLI
+**Azure CLI**
 ```azurecli
  az vm get-instance-view --resource-group <resource group name> --name  <vmName> --query "instanceView.extensions"
 ```
 
-La sortie de l’exécution de l’extension est enregistrée dans le fichier suivant :
+#### <a name="logs-and-configuration"></a>Journaux et configuration
 
 ```
 %windrive%\WindowsAzure\Logs\Plugins\Microsoft.Azure.KeyVault.KeyVaultForWindows\<version>\akvvm_service_<date>.log
 ```
-
 
 ### <a name="support"></a>Support
 

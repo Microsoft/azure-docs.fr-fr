@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 11/15/2018
 ms.author: genli
-ms.openlocfilehash: fd38f646b8dfc58839cd2645f7fadf7332693854
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.openlocfilehash: 987d4c7188c2bdc2ba6264805e33b79e7d2851d6
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81605983"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91966285"
 ---
 # <a name="troubleshoot-azure-windows-virtual-machine-activation-problems"></a>Résoudre des problèmes liés à l’activation de machines virtuelles Windows Azure
 
@@ -46,9 +46,9 @@ En règle générale, les problèmes d’activation de machines virtuelles Azure
 ## <a name="solution"></a>Solution
 
 >[!NOTE]
->Si vous utilisez un réseau privé virtuel de site à site et un tunneling forcé, consultez l’article [Utiliser des itinéraires personnalisés Azure pour permettre l’activation KMS avec le tunneling forcé](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-forced-tunneling). 
+>Si vous utilisez un réseau privé virtuel de site à site et un tunneling forcé, consultez l’article [Utiliser des itinéraires personnalisés Azure pour permettre l’activation KMS avec le tunneling forcé](../../vpn-gateway/vpn-gateway-about-forced-tunneling.md). 
 >
->Si vous utilisez ExpressRoute et que vous avez publié une route par défaut, consultez [Puis-je bloquer la connectivité Internet pour les réseaux virtuels connectés à des circuits ExpressRoute ?](https://docs.microsoft.com/azure/expressroute/expressroute-faqs).
+>Si vous utilisez ExpressRoute et que vous avez publié une route par défaut, consultez [Puis-je bloquer la connectivité Internet pour les réseaux virtuels connectés à des circuits ExpressRoute ?](../../expressroute/expressroute-faqs.md).
 
 ### <a name="step-1-configure-the-appropriate-kms-client-setup-key"></a>Étape 1 : configurer la bonne clé d’installation client KMS
 
@@ -61,7 +61,7 @@ Pour la machine virtuelle créée à partir d’une image personnalisée, vous d
     cscript c:\windows\system32\slmgr.vbs /dlv
     ```
 
-2. Si **slmgr.vbs /dlv**affiche le canal de vente au détail, exécutez les commandes suivantes afin de définir la [clé d’installation client KMS](https://technet.microsoft.com/library/jj612867%28v=ws.11%29.aspx?f=255&MSPPError=-2147217396) de la version de Windows Server utilisée. Forcez ensuite la tentative d’activation : 
+2. Si **slmgr.vbs /dlv**affiche le canal de vente au détail, exécutez les commandes suivantes afin de définir la [clé d’installation client KMS](/windows-server/get-started/kmsclientkeys) de la version de Windows Server utilisée. Forcez ensuite la tentative d’activation : 
 
     ```
     cscript c:\windows\system32\slmgr.vbs /ipk <KMS client setup key>
@@ -77,7 +77,7 @@ Pour la machine virtuelle créée à partir d’une image personnalisée, vous d
 
 ### <a name="step-2-verify-the-connectivity-between-the-vm-and-azure-kms-service"></a>Étape 2 : Vérifier la connectivité entre la machine virtuelle et le service Azure KMS
 
-1. Téléchargez et extrayez l’outil [PSping](https://docs.microsoft.com/sysinternals/downloads/psping) dans un dossier local sur la machine virtuelle qui ne s’active pas. 
+1. Téléchargez et extrayez l’outil [PSping](/sysinternals/downloads/psping) dans un dossier local sur la machine virtuelle qui ne s’active pas. 
 
 2. Accédez au menu Démarrer, effectuez une recherche pour Windows PowerShell, cliquez avec le bouton droit sur Windows PowerShell, puis sélectionnez l’option Exécuter en tant qu’administrateur.
 
@@ -92,7 +92,7 @@ Pour la machine virtuelle créée à partir d’une image personnalisée, vous d
 4. Vérifiez à l’aide de Psping que vous avez une connexion au serveur KMS. Basculez vers le dossier où vous avez extrait le téléchargement Pstools.zip, puis exécutez la commande suivante :
   
     ```
-    \psping.exe kms.core.windows.net:1688
+    .\psping.exe kms.core.windows.net:1688
     ```
    Dans l’avant-dernière ligne de la sortie, assurez-vous que les informations suivantes s’affichent : Envoyé = 4, Reçu = 4, Perdu = 0 (0 % de perte).
 
@@ -102,7 +102,7 @@ Pour la machine virtuelle créée à partir d’une image personnalisée, vous d
   
     Assurez-vous également que le trafic réseau sortant vers le point de terminaison KMS via le port 1688 n’est pas bloqué par le pare-feu de la machine virtuelle.
 
-5. Vérifiez à l’aide de [Network Watcher Next Hop](https://docs.microsoft.com/azure/network-watcher/network-watcher-next-hop-overview) que le type de tronçon suivant de la machine virtuelle en question vers l’adresse IP de destination 23.102.135.246 (pour kms.core.windows.net) ou l’adresse IP du point de terminaison KMS approprié qui s’applique à votre région est **Internet**.  Si le résultat est VirtualAppliance ou VirtualNetworkGateway, il est probable qu’il existe une route par défaut.  Contactez votre administrateur réseau et collaborez avec lui pour déterminer la marche à suivre.  Il peut s’agir d’une [route personnalisée](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/custom-routes-enable-kms-activation) si cette solution est conforme aux stratégies de votre organisation.
+5. Vérifiez à l’aide de [Network Watcher Next Hop](../../network-watcher/network-watcher-next-hop-overview.md) que le type de tronçon suivant de la machine virtuelle en question vers l’adresse IP de destination 23.102.135.246 (pour kms.core.windows.net) ou l’adresse IP du point de terminaison KMS approprié qui s’applique à votre région est **Internet**.  Si le résultat est VirtualAppliance ou VirtualNetworkGateway, il est probable qu’il existe une route par défaut.  Contactez votre administrateur réseau et collaborez avec lui pour déterminer la marche à suivre.  Il peut s’agir d’une [route personnalisée](./custom-routes-enable-kms-activation.md) si cette solution est conforme aux stratégies de votre organisation.
 
 6. Après avoir vérifié que la connectivité à kms.core.windows.net fonctionne, exécutez la commande suivante dans l’invite Windows PowerShell avec élévation de privilèges. Cette commande tente plusieurs fois l’activation.
 
@@ -130,7 +130,7 @@ Oui.
 ### <a name="what-happens-if-windows-activation-period-expires"></a>Que se passe-t-il en cas d’expiration de la période d’activation de Windows ? 
 
  
-Lorsque la période de grâce a expiré et si Windows n’est pas encore activé, Windows Server 2008 R2 et versions ultérieures de Windows affichera des notifications supplémentaires sur l’activation. Le fond d’écran du Bureau reste noir, et Windows Update installera uniquement les mises à jour essentielles et de sécurité. Les mises à jour facultatives ne seront pas installées par Windows Update. Consultez la section Notifications au bas de la page [Licensing Conditions](https://technet.microsoft.com/library/ff793403.aspx) (Conditions d’obtention de licence).   
+Lorsque la période de grâce a expiré et si Windows n’est pas encore activé, Windows Server 2008 R2 et versions ultérieures de Windows affichera des notifications supplémentaires sur l’activation. Le fond d’écran du Bureau reste noir, et Windows Update installera uniquement les mises à jour essentielles et de sécurité. Les mises à jour facultatives ne seront pas installées par Windows Update. Consultez la section Notifications au bas de la page [Licensing Conditions](/previous-versions/tn-archive/ff793403(v=technet.10)) (Conditions d’obtention de licence).   
 
 ## <a name="need-help-contact-support"></a>Vous avez besoin d’aide ? Contactez le support technique.
 

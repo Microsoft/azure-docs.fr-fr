@@ -4,17 +4,17 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: trbye
-ms.openlocfilehash: 85124a51b986b6e3d6444b35aa264e136abcdb76
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: f40ccbd87d9e889e88b870cc4aed805e0dc2ea66
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81400585"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91377280"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](../../../../get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](../../../../quickstarts/setup-platform.md?tabs=jre&pivots=programming-language-java)
 
 [!INCLUDE [Audio input format](~/articles/cognitive-services/speech-service/includes/audio-input-format-chart.md)]
@@ -109,7 +109,7 @@ ms.locfileid: "81400585"
 
 1. Remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement.
 
-1. Remplacez la chaîne `YourServiceRegion` par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement (par exemple, `westus` pour l’abonnement à un essai gratuit).
+1. Remplacez la chaîne `YourServiceRegion` par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement.
 
 1. Remplacez la chaîne `whatstheweatherlike.wav` par le nom de votre fichier.
 

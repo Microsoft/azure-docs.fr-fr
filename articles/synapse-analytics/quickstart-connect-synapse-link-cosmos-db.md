@@ -1,22 +1,22 @@
 ---
-title: Se connecter à Azure Synapse Link pour Cosmos DB
+title: 'Démarrage rapide : Se connecter à Azure Synapse Link pour Cosmos DB'
 description: Comment connecter une base de données Azure Cosmos DB à un espace de travail Synapse avec Synapse Link
 services: synapse-analytics
 author: ArnoMicrosoft
 ms.service: synapse-analytics
+ms.subservice: synapse-link
 ms.topic: quickstart
-ms.subservice: ''
 ms.date: 04/21/2020
 ms.author: acomet
 ms.reviewer: jrasnick
-ms.openlocfilehash: 81cc7745790c7a89576dc5d0ff925dbaff2b2334
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: 14c71d5888aefc11485c03935c5d8c7ff7d17045
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700386"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995877"
 ---
-# <a name="connect-to-azure-synapse-link-for-azure-cosmos-db"></a>Se connecter à Azure Synapse Link pour Cosmos DB
+# <a name="quickstart-connect-to-azure-synapse-link-for-azure-cosmos-db"></a>Démarrage rapide : Se connecter à Azure Synapse Link pour Cosmos DB
 
 Cet article explique comment accéder à une base de données Azure Cosmos DB à partir d’Azure Synapse Analytics Studio avec Synapse Link. 
 
@@ -41,16 +41,16 @@ La connexion d’une base de données Azure Cosmos DB s’effectue en tant que s
 
 À partir de l’Explorateur d’objets de données, vous pouvez vous connecter directement à une base de données Azure Cosmos DB en procédant comme suit :
 
-1. Sélectionnez l’icône ***+*** à proximité de Données
-2. Sélectionnez **Connect to external data** (Se connecter à des sources de données externes)
+1. Sélectionnez l’icône **_+_* _ à proximité de Données
+2. Sélectionnez _ *Se connecter à des données externes**
 3. Sélectionnez l’API à laquelle vous souhaitez vous connecter : SQL ou MongoDB
-4. Sélectionnez ***Continue*** (Continuer)
+4. Sélectionnez **_Continuer_* _
 5. Nommez le service lié. Le nom sera affiché dans l’Explorateur d’objets et utilisé par les exécutables Synapse pour se connecter à la base de données et aux conteneurs. Nous vous recommandons d’utiliser un nom convivial.
-6. Sélectionnez le **nom du compte Cosmos DB** et le **nom de la base de données**
-7. (Facultatif) Si aucune région n’est spécifiée, les opérations d’exécution Synapse sont acheminées vers la région la plus proche dans laquelle le magasin analytique est activé. Toutefois, vous pouvez définir manuellement la région dans laquelle vous souhaitez que vos utilisateurs accèdent au magasin analytique Cosmos DB. Sélectionnez **Propriétés de connexion supplémentaires** puis **Nouveau**. Sous **Nom de la propriété**, indiquez ***PreferredRegions*** et définissez **Valeur** sur la région de votre choix (exemple : WestUS2, sans espace entre les mots et les nombres)
-8. Sélectionnez ***Créer***
+6. Sélectionnez le _ *nom du compte Cosmos DB** et le **nom de la base de données**
+7. (Facultatif) Si aucune région n’est spécifiée, les opérations d’exécution Synapse sont acheminées vers la région la plus proche dans laquelle le magasin analytique est activé. Toutefois, vous pouvez définir manuellement la région dans laquelle vous souhaitez que vos utilisateurs accèdent au magasin analytique Cosmos DB. Sélectionnez **Propriétés de connexion supplémentaires** puis **Nouveau**. Sous **Nom de la propriété**, tapez **_PreferredRegions_ *_ et définissez _* Valeur** sur la région de votre choix (exemple : WestUS2, sans espace entre les mots et les nombres)
+8. Sélectionnez **_Créer_* _
 
-Les bases de données Azure Cosmos DB sont visibles sous l’onglet **Lié** dans la section Azure Cosmos DB. Vous pouvez différencier un conteneur Azure Cosmos DB activé par HTAP d’un conteneur OLTP uniquement en vous reportant aux icônes suivantes :
+Les bases de données Azure Cosmos DB sont visibles sous l’onglet _ *Lié** dans la section Azure Cosmos DB. Vous pouvez différencier un conteneur Azure Cosmos DB activé par HTAP d’un conteneur OLTP uniquement en vous reportant aux icônes suivantes :
 
 **Conteneur Synapse** :
 

@@ -1,25 +1,14 @@
 ---
 title: Création d’un espace de noms Service Bus dans le portail Azure
 description: Cet article fournit des instructions pour la création d’un espace de noms Azure Service Bus dans le portail Azure.
-services: service-bus-messaging
-documentationcenter: .net
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: fbb10e62-b133-4851-9d27-40bd844db3ba
-ms.service: service-bus-messaging
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: b6351fade23f1671573964f946005d57671d3cc7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: c0844ca144b4303631a0015c06a9b37f3538875b
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76761064"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498810"
 ---
 # <a name="create-a-service-bus-namespace-using-the-azure-portal"></a>Créer un espace de noms Service Bus à l’aide du Portail Azure
 
@@ -30,8 +19,6 @@ Un espace de noms est un conteneur d’étendue pour tous les composants de mess
 Félicitations ! Vous venez de créer un espace de noms de messagerie Service Bus.
 
 ## <a name="next-steps"></a>Étapes suivantes
-
-Consultez les [exemples GitHub][github-samples] de Service Bus qui montrent certaines des fonctionnalités plus avancées de la messagerie Service Bus.
+Consultez [Exemples Service Bus](/samples/azure/azure-sdk-for-net/azuremessagingservicebus-samples/).
 
 [create-namespace-using-arm]: service-bus-resource-manager-overview.md
-[github-samples]: https://github.com/Azure/azure-service-bus/tree/master/samples

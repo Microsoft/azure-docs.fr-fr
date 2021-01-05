@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: b8a65d4ae6aaac78e642c851a66b745a940fa0ad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d8119c56c26ed32db136064d93775d21a71f238f
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67593894"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92778664"
 ---
 # <a name="analyze-edge-node-performance-in-microsoft-azure-cdn"></a>Analyser les performances du nœud de périmètre dans Microsoft Azure CDN
 [!INCLUDE [cdn-premium-feature](../../includes/cdn-premium-feature.md)]
@@ -55,7 +55,7 @@ Ce tableau de bord se décompose comme suit :
     ![Bouton de gestion du panneau de profil CDN](./media/cdn-edge-performance/cdn-manage-btn.png)
    
     Le portail de gestion CDN s'ouvre.
-2. Pointez sur l’onglet **Analytics**, puis sur le menu volant **Analyse des performances de périmètre**.  Cliquez sur **Tableau de bord**.
+2. Pointez sur l’onglet **Analytics** , puis sur le menu volant **Analyse des performances de périmètre** .  Cliquez sur **Tableau de bord** .
    
     Le tableau de bord d’analyse des nœuds de périmètre s’affiche.
 
@@ -143,7 +143,7 @@ Chaque rapport de ce module contient un graphique et des statistiques sur l’ut
     ![Bouton de gestion du panneau de profil CDN](./media/cdn-edge-performance/cdn-manage-btn.png)
    
     Le portail de gestion CDN s'ouvre.
-2. Pointez sur l’onglet **Analytics**, puis sur le menu volant **Analyse des performances de périmètre**.  Cliquez sur **HTTP Large Object**.
+2. Pointez sur l’onglet **Analytics** , puis sur le menu volant **Analyse des performances de périmètre** .  Cliquez sur **HTTP Large Object** .
    
     L’écran des rapports d’analyse des nœuds de périmètre s’affiche.
 
@@ -186,6 +186,5 @@ Chaque rapport de ce module contient un graphique et des statistiques sur l’ut
 ## <a name="see-also"></a>Voir aussi
 * [Vue d'ensemble d'Azure CDN](cdn-overview.md)
 * [Statistiques en temps dans Microsoft Azure CDN](cdn-real-time-stats.md)
-* [Remplacement du comportement HTTP par défaut à l’aide du moteur de règles](cdn-rules-engine.md)
+* [Remplacement du comportement HTTP par défaut à l’aide du moteur de règles](./cdn-verizon-premium-rules-engine.md)
 * [Rapports HTTP avancés](cdn-advanced-http-reports.md)
-

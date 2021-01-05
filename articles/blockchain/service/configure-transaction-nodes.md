@@ -2,14 +2,14 @@
 title: Configurer les nœuds de transaction Azure Blockchain Service
 description: Configuration des nœuds de transaction Azure Blockchain Service
 ms.date: 11/20/2019
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: janders
-ms.openlocfilehash: 8fa18496d0c1aa59beb55569e731967d5ebea427
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: 50f9b2aa0f5e1a1b1095b6c799ce0706b6e541de
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80876927"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92150875"
 ---
 # <a name="configure-azure-blockchain-service-transaction-nodes"></a>Configurer les nœuds de transaction Azure Blockchain Service
 
@@ -52,7 +52,7 @@ Pour afficher les détails du point de terminaison d’un nœud de transaction :
 
 1. Dans le Portail Azure, accédez à l’un des nœuds de transaction de votre membre Azure Blockchain Service et sélectionnez **Vue d’ensemble**.
 
-    ![Points de terminaison](./media/configure-transaction-nodes/endpoints.png)
+    ![La capture d’écran montre la vue d’ensemble des nœuds de transaction pour un membre de blockchain.](./media/configure-transaction-nodes/endpoints.png)
 
 Les points de terminaison de nœud de transaction sont sécurisés et nécessitent une authentification. Vous pouvez vous connecter à un point de terminaison de transaction à l’aide de l’authentification Azure AD, de l’authentification de base HTTPS et d’une clé d’accès sur HTTPS ou Websocket par le biais du protocole TLS.
 
@@ -75,7 +75,7 @@ Pour accorder un contrôle d’accès Azure AD à votre point de terminaison :
 
 1. Sélectionnez **Enregistrer** pour ajouter l’attribution de rôle.
 
-Pour plus d’informations sur le contrôle d’accès Azure AD, consultez l’article [Gérer l’accès aux ressources Azure à l’aide du contrôle d’accès en fonction du rôle et du portail Azure](../../role-based-access-control/role-assignments-portal.md).
+Pour plus d’informations sur le contrôle d’accès Azure AD, consultez [Ajouter ou supprimer des attributions de rôles Azure à l’aide du portail Azure](../../role-based-access-control/role-assignments-portal.md).
 
 Pour plus d’informations sur la connexion à l’aide de l’authentification Azure AD, consultez l’article [Connect to your node using AAD authentication](configure-aad.md) (Se connecter à votre nœud à l’aide de l’authentification AAD).
 

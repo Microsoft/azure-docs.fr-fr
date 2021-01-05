@@ -9,12 +9,12 @@ ms.reviewer: klam, estfan
 ms.suite: infrastructure-services
 ms.topic: article
 ms.date: 11/14/2018
-ms.openlocfilehash: b85932bf0d4fd080afadef2bc28d6a218b2d627a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5a74240e3f116121c0aaddd11c186e6e674ea26a
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898600"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368177"
 ---
 # <a name="build-advanced-schedules-and-recurrences-for-jobs-in-azure-scheduler"></a>Créer des planifications et des périodicités avancées pour les travaux dans Azure Scheduler
 
@@ -54,11 +54,11 @@ Ces scénarios sont décrits plus en détail plus loin dans cet article.
 
 Pour créer une planification de base avec [l’API REST Azure Scheduler](/rest/api/scheduler), effectuez les étapes suivantes :
 
-1. Inscrivez votre abonnement Azure auprès d’un fournisseur de ressources à l’aide de [l’opération Inscrire dans l’API REST Resource Manager](https://docs.microsoft.com/rest/api/resources/providers). Le nom du fournisseur pour le service Azure Scheduler est **Microsoft.Scheduler**. 
+1. Inscrivez votre abonnement Azure auprès d’un fournisseur de ressources à l’aide de [l’opération Inscrire dans l’API REST Resource Manager](/rest/api/resources/providers). Le nom du fournisseur pour le service Azure Scheduler est **Microsoft.Scheduler** . 
 
-1. Créez une collection de travaux en utilisant [l’opération Créer ou Mettre à jour pour les collections de travaux](https://docs.microsoft.com/rest/api/scheduler/jobcollections) dans l’API REST Scheduler. 
+1. Créez une collection de travaux en utilisant [l’opération Créer ou Mettre à jour pour les collections de travaux](/rest/api/scheduler/jobcollections) dans l’API REST Scheduler. 
 
-1. Créez un travail à l’aide de [l’opération Créer ou Mettre à jour pour les travaux](https://docs.microsoft.com/rest/api/scheduler/jobs/createorupdate). 
+1. Créez un travail à l’aide de [l’opération Créer ou Mettre à jour pour les travaux](/rest/api/scheduler/jobs/createorupdate). 
 
 ## <a name="job-schema-elements"></a>Éléments du schéma de travail
 
@@ -66,10 +66,10 @@ Ce tableau fournit une vue d’ensemble des principaux éléments JSON que vous 
 
 | Élément | Obligatoire | Description | 
 |---------|----------|-------------|
-| **startTime** | Non | Valeur de chaîne DateHeure au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) qui spécifie quand le travail démarre la première fois dans une planification de base. <p>Pour les planifications complexes, le travail ne démarre pas avant **startTime**. | 
-| **recurrence** | Non | Spécifie les règles de périodicité selon lesquelles le travail est exécuté. L’objet **recurrence** prend en charge les éléments suivants : **frequency**, **interval**, **schedule**, **count** et **endTime**. <p>Si vous définissez l’élément **recurrence**, vous devez également définir l’élément **frequency**. Les autres éléments **recurrence** sont facultatifs. |
+| **startTime** | Non | Valeur de chaîne DateHeure au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) qui spécifie quand le travail démarre la première fois dans une planification de base. <p>Pour les planifications complexes, le travail ne démarre pas avant **startTime** . | 
+| **recurrence** | Non | Spécifie les règles de périodicité selon lesquelles le travail est exécuté. L’objet **recurrence** prend en charge les éléments suivants : **frequency** , **interval** , **schedule** , **count** et **endTime** . <p>Si vous définissez l’élément **recurrence** , vous devez également définir l’élément **frequency** . Les autres éléments **recurrence** sont facultatifs. |
 | **frequency** | Oui, si vous définissez **recurrence** | Unité de temps entre les occurrences. Les valeurs prises en charge sont : « Minute », « Hour », « Day », « Week », « Month » et « Year ». | 
-| **interval** | Non | Entier positif qui détermine le nombre d’unités de temps entre les occurrences, en fonction de l’élément **frequency**. <p>Par exemple, si **interval** a la valeur 10 et que **frequency** est défini sur « Week », le travail se répète toutes les 10 semaines. <p>Voici le plus grand nombre d’intervalles pour chaque fréquence : <p>- 18 mois <br>- 78 semaines <br>- 548 jours <br>- Pour les heures et les minutes, la plage est 1 <= <*interval*> <= 1 000. | 
+| **interval** | Non | Entier positif qui détermine le nombre d’unités de temps entre les occurrences, en fonction de l’élément **frequency** . <p>Par exemple, si **interval** a la valeur 10 et que **frequency** est défini sur « Week », le travail se répète toutes les 10 semaines. <p>Voici le plus grand nombre d’intervalles pour chaque fréquence : <p>- 18 mois <br>- 78 semaines <br>- 548 jours <br>- Pour les heures et les minutes, la plage est 1 <= < *interval* > <= 1 000. | 
 | **schedule** | Non | Définit les changements de périodicité selon les minutes, heures, jours de la semaine et jours du mois spécifiés. | 
 | **count** | Non | Entier positif qui spécifie le nombre de fois où le travail s’exécute avant de finir. <p>Par exemple, quand un travail quotidien a une valeur **count** égale à 7 et une date de début définie au lundi, le travail finit de s’exécuter le dimanche. Si la date de début est passée, la première exécution est calculée d’après l’heure de création. <p>Si la valeur **endTime** ou **count** n’est pas spécifiée, le travail s’exécute indéfiniment. Vous ne pouvez pas utiliser à la fois **count** et **endTime** dans le même travail, mais la règle qui finit en premier est appliquée. | 
 | **endTime** | Non | Valeur de chaîne Date ou DateHeure au [format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) qui spécifie quand le travail arrête de s’exécuter. Vous pouvez définir une valeur **endTime** qui se trouve dans le passé. <p>Si la valeur **endTime** ou **count** n’est pas spécifiée, le travail s’exécute indéfiniment. Vous ne pouvez pas utiliser à la fois **count** et **endTime** dans le même travail, mais la règle qui finit en premier est appliquée. |
@@ -165,14 +165,14 @@ Le tableau suivant décrit les éléments schedule en détail :
 | **minutes** |Minutes de l’heure où le travail s’exécute. |Tableau d’entiers. |
 | **hours** |Heures de la journée où le travail s’exécute. |Tableau d’entiers. |
 | **weekDays** |Jours de la semaine où le travail s’exécute. Peut être spécifié uniquement avec une fréquence hebdomadaire. |Tableau de l’une des valeurs suivantes (la taille de tableau maximale est 7) :<br />- "Monday"<br />- "Tuesday"<br />- "Wednesday"<br />- "Thursday"<br />- "Friday"<br />- "Saturday"<br />- "Sunday"<br /><br />Ne respecte pas la casse. |
-| **monthlyOccurrences** |Détermine les jours du mois où le travail s’exécute. Peut être spécifié uniquement avec une fréquence mensuelle. |Tableau d’objets **monthlyOccurrence** :<br /> `{ "day": day, "occurrence": occurrence}`<br /><br /> **day** est le jour de la semaine où le travail s’exécute. Par exemple, *{Sunday}* correspond à tous les dimanche du mois. Obligatoire.<br /><br />**occurrence** est l’occurrence du jour au cours du mois. Par exemple, *{Sunday, -1}* correspond au dernier dimanche du mois. facultatif. |
+| **monthlyOccurrences** |Détermine les jours du mois où le travail s’exécute. Peut être spécifié uniquement avec une fréquence mensuelle. |Tableau d’objets **monthlyOccurrence**  :<br /> `{ "day": day, "occurrence": occurrence}`<br /><br /> **day** est le jour de la semaine où le travail s’exécute. Par exemple, *{Sunday}* correspond à tous les dimanche du mois. Obligatoire.<br /><br />**occurrence** est l’occurrence du jour au cours du mois. Par exemple, *{Sunday, -1}* correspond au dernier dimanche du mois. facultatif. |
 | **monthDays** |Jour du mois où le travail s’exécute. Peut être spécifié uniquement avec une fréquence mensuelle. |Tableau des valeurs suivantes :<br />- Toute valeur <= -1 et >= -31<br />- Toute valeur >= 1 et <= 31|
 
 ## <a name="examples-recurrence-schedules"></a>Exemples : planifications de périodicité
 
 Les exemples suivants montrent différentes planifications de périodicité. Ils se concentrent sur l’objet de planification et ses sous-éléments.
 
-Ces planifications partent du principe que **interval** a la valeur 1\., et que les valeurs de **frequency** pour les valeurs spécifiées dans **schedule** sont correctes. Par exemple, vous ne pouvez pas utiliser une valeur **frequency** "day" et avoir une modification **monthDays** dans **schedule**. Nous décrivons ces restrictions plus haut dans l’article.
+Ces planifications partent du principe que **interval** a la valeur 1\., et que les valeurs de **frequency** pour les valeurs spécifiées dans **schedule** sont correctes. Par exemple, vous ne pouvez pas utiliser une valeur **frequency** "day" et avoir une modification **monthDays** dans **schedule** . Nous décrivons ces restrictions plus haut dans l’article.
 
 | Exemple | Description |
 |:--- |:--- |
@@ -181,8 +181,8 @@ Ces planifications partent du principe que **interval** a la valeur 1\., et que 
 | `{"minutes":[15], "hours":[5,17]}` |Exécution à 5h15 et 17h15 tous les jours. |
 | `{"minutes":[15,45], "hours":[5,17]}` |Exécution à 5h15, 5h45, 17h15 et 17h45 tous les jours. |
 | `{"minutes":[0,15,30,45]}` |Exécution toutes les 15 minutes. |
-| `{hours":[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]}` |Exécution toutes les heures.<br /><br />Ce travail s'exécute toutes les heures. La minute est contrôlée par la valeur de **startTime**, si elle est spécifiée. Si aucune valeur **startTime** n’est spécifiée, les minutes sont contrôlées par l’heure de création. Par exemple, si l’heure de début ou l’heure de création (selon le cas) est 00h25, le travail s’exécute à 00h25, 01h25, 02h25, ..., 23h25.<br /><br />La planification est la même qu’un travail avec une valeur **frequency** définie sur « hour », une valeur **interval** égale à 1 et aucune value **schedule**. La différence est que vous pouvez utiliser cette planification avec des valeurs **frequency** et **interval** différentes pour créer d’autres travaux. Par exemple, si **frequency** est définie sur "month", la planification s’exécute une seule fois par mois, plutôt que tous les jours (si **frequency** est définie sur "day"). |
-| `{minutes:[0]}` |Exécution toutes les heures sur l’heure.<br /><br />Ce travail s’exécute également toutes les heures, mais sur l’heure (par exemple, minuit, 1h, 2h, et ainsi de suite). Cette planification équivaut à un travail avec une valeur **frequency** définie sur « hour », une valeur **startTime** de zéro minute, et aucune valeur **schedule**, si la fréquence est « day ». Si la valeur **frequency** est définie sur "week" » ou "month", la planification s’exécute respectivement un seul jour par semaine ou un seul jour par mois. |
+| `{hours":[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]}` |Exécution toutes les heures.<br /><br />Ce travail s'exécute toutes les heures. La minute est contrôlée par la valeur de **startTime** , si elle est spécifiée. Si aucune valeur **startTime** n’est spécifiée, les minutes sont contrôlées par l’heure de création. Par exemple, si l’heure de début ou l’heure de création (selon le cas) est 00h25, le travail s’exécute à 00h25, 01h25, 02h25, ..., 23h25.<br /><br />La planification est la même qu’un travail avec une valeur **frequency** définie sur « hour », une valeur **interval** égale à 1 et aucune value **schedule** . La différence est que vous pouvez utiliser cette planification avec des valeurs **frequency** et **interval** différentes pour créer d’autres travaux. Par exemple, si **frequency** est définie sur "month", la planification s’exécute une seule fois par mois, plutôt que tous les jours (si **frequency** est définie sur "day"). |
+| `{minutes:[0]}` |Exécution toutes les heures sur l’heure.<br /><br />Ce travail s’exécute également toutes les heures, mais sur l’heure (par exemple, minuit, 1h, 2h, et ainsi de suite). Cette planification équivaut à un travail avec une valeur **frequency** définie sur « hour », une valeur **startTime** de zéro minute, et aucune valeur **schedule** , si la fréquence est « day ». Si la valeur **frequency** est définie sur "week" » ou "month", la planification s’exécute respectivement un seul jour par semaine ou un seul jour par mois. |
 | `{"minutes":[15]}` |Exécution 15 minutes après l’heure toutes les heures.<br /><br />Ce travail s’exécute toutes les heures, en commençant à 00h15, 01h15, 02h15, et ainsi de suite. Il se termine à 23h15. |
 | `{"hours":[17], "weekDays":["saturday"]}` |Exécution à 17h00 le samedi chaque semaine. |
 | `{hours":[17], "weekDays":["monday", "wednesday", "friday"]}` |Exécution à 17h00 le lundi, le mercredi et le vendredi chaque semaine. |

@@ -5,12 +5,12 @@ ms.assetid: f9a5cfa1-fbb0-41e6-95d1-75d457347a35
 ms.topic: article
 ms.date: 01/14/2016
 ms.custom: seodec18
-ms.openlocfilehash: e7ad45ea4cb1049ed7eeb454162e23e81ed35019
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 92e893fe9f74d51856faf39d3e4800dd5a8155db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78255204"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88815383"
 ---
 # <a name="azure-app-service-app-cloning-using-powershell"></a>Clonage de l’application Azure App Service à l’aide de PowerShell
 
@@ -107,6 +107,8 @@ Une fois l’ID de gestionnaire de trafic obtenu, la commande suivante illustre 
 ```powershell
 $destapp = New-AzWebApp -ResourceGroupName <Resource group name> -Name dest-webapp -Location "South Central US" -AppServicePlan DestinationAppServicePlan -SourceWebApp $srcapp -TrafficManagerProfileId $TMProfileID
 ```
+> [!NOTE]
+> Si vous recevez une erreur indiquant que « La validation SSL sur le nom d’hôte Traffic Manager échoue », nous vous suggérons d’utiliser l’attribut -IgnoreCustomHostNames dans l’applet de commande PowerShell pendant l’opération de clonage, ou d’utiliser le portail.
 
 ## <a name="current-restrictions"></a>Restrictions actuelles
 Voici les restrictions connues du clonage d’application :

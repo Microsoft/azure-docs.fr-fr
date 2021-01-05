@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : LOG10'
 description: Découvrez la fonction système SQL LOG10 dans Azure Cosmos DB, qui retourne le logarithme de base 10 de l’expression numérique spécifiée
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 6f47200f6978d91f46c010640bb9c2bb26e9b7d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 27f7d916c1a3f84f26674fea6b04597fd9e546bc
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302489"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93338427"
 ---
 # <a name="log10-azure-cosmos-db"></a>LOG10 (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le logarithme en base 10 de l'expression numérique spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe
@@ -34,7 +37,7 @@ LOG10 (<numeric_expr>)
   
 ## <a name="remarks"></a>Notes
   
-  Les fonctions LOG10 et POWER sont inversement proportionnelles. Par exemple, 10 ^ LOG10 (n) = n.  
+  Les fonctions LOG10 et POWER sont inversement proportionnelles. Par exemple, 10 ^ LOG10 (n) = n. Cette fonction système n’utilisera pas l’index.
   
 ## <a name="examples"></a>Exemples
   
@@ -49,10 +52,6 @@ SELECT LOG10(100) AS log10
 ```json
 [{log10: 2}]  
 ```  
-
-## <a name="remarks"></a>Notes
-
-Cette fonction système n’utilisera pas l’index.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

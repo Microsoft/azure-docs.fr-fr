@@ -6,8 +6,6 @@
   items:
     - name: "Qu’est-ce que Data Science Virtual Machine (DSVM)\_?"
       href: overview.md
-    - name: "Qu’est-ce que Geo AI Data Science Virtual Machine\_?"
-      href: geo-ai-dsvm-overview.md
     - name: Outils inclus dans Data Science Virtual Machine
       href: tools-included.md
 - name: Démarrages rapides
@@ -17,8 +15,9 @@
       href: provision-vm.md
     - name: Créer une instance Ubuntu de Data Science Virtual Machine
       href: dsvm-ubuntu-intro.md
-    - name: Créer une instance Geo AI de Data Science Virtual Machine
-      href: provision-geo-ai-dsvm.md
+    - name: Créer une DSVM avec un modèle ARM
+      displayName: Resource Manager
+      href: dsvm-tutorial-resource-manager.md
 - name: Concepts
   items:
     - name: Frameworks d’apprentissage profond et d’intelligence artificielle
@@ -45,22 +44,28 @@
       href: vm-do-ten-things.md
     - name: Utiliser une instance Linux de Data Science Virtual Machine
       href: linux-dsvm-walkthrough.md
-    - name: Utiliser une instance Geo AI de Data Science Virtual Machine
-      href: use-geo-ai-dsvm.md
-    - name: Créer un pool Data Science Virtual Machine mis à l’échelle automatiquement
-      href: dsvm-pools.md
-    - name: Intégration avec Active Directory
-      href: dsvm-common-identity.md
-    - name: Sécuriser les informations d’identification d’accès de ressource
-      href: dsvm-secure-access-keys.md
+    - name: Intégrer Azure Machine Learning
+      items:
+        - name: Suivre les expériences
+          href: how-to-track-experiments.md
+    - name: Assistance Entreprise
+      items:
+        - name: Créer un pool Data Science Virtual Machine mis à l’échelle automatiquement
+          href: dsvm-pools.md
+        - name: Intégration avec Active Directory
+          href: dsvm-common-identity.md
+        - name: Sécuriser les informations d’identification d’accès de ressource
+          href: dsvm-secure-access-keys.md
+    - name: "Mettre à niveau votre Data Science Virtual Machine vers Ubuntu\_18.04"
+      href: ubuntu-upgrade.md
 - name: Ressources
   items:
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-data-science-vm.html'
+      href: /answers/topics/azure-data-science-vm.html
     - name: Stack Overflow
       href: 'https://stackoverflow.com/search?q=dsvm'
     - name: "Guide du développeur\_R"
-      href: /azure/architecture/data-guide/technology-choices/r-developers-guide?context=azure/machine-learning/data-science-virtual-machine/context/ml-context
+      href: /azure/architecture/data-guide/technology-choices/r-developers-guide?context=%2fazure/machine-learning/data-science-virtual-machine/context/ml-context
 - name: Informations de référence
   items:
     - name: Instance Ubuntu de Data Science Virtual Machine
@@ -69,5 +74,3 @@
       href: release-notes.md
     - name: Problèmes connus
       href: reference-known-issues.md
-    - name: Annonces de dépréciation
-      href: reference-deprecation.md

@@ -1,20 +1,21 @@
 ---
 title: Tutoriel - Ajouter une ressource au modèle
-description: Décrit les étapes de la création de votre premier modèle Azure Resource Manager. Vous découvrez la syntaxe du fichier de modèle et comment déployer un compte de stockage.
+description: Décrit les étapes de la création de votre premier modèle ARM (Azure Resource Manager). Vous découvrez la syntaxe du fichier de modèle et comment déployer un compte de stockage.
 author: mumian
 ms.date: 03/27/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: dcdbbb325e6589669abe6cf3d25ac5191e29118b
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: ''
+ms.openlocfilehash: 49cee5c98c4099e214a732371269e935db353152
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411732"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106969"
 ---
 # <a name="tutorial-add-a-resource-to-your-arm-template"></a>Tutoriel : Ajouter une ressource à votre modèle ARM
 
-Dans le [précédent tutoriel](template-tutorial-create-first-template.md), vous avez appris à créer un modèle vide et à le déployer. Vous voici prêt à déployer une ressource réelle. Dans ce tutoriel, vous ajoutez un compte de stockage. Comptez environ **9 minutes** pour suivre ce tutoriel.
+Dans le [précédent tutoriel](template-tutorial-create-first-template.md), vous avez appris à créer un modèle ARM (Azure Resource Manager) vide et à le déployer. Vous voici prêt à déployer une ressource réelle. Dans ce tutoriel, vous ajoutez un compte de stockage. Comptez environ **9 minutes** pour suivre ce tutoriel.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -26,7 +27,7 @@ Vous devez disposer de Visual Studio Code avec l’extension Outils Resource Man
 
 Pour ajouter une définition de compte de stockage au modèle existant, examinez le code JSON mis en évidence dans l’exemple suivant. Plutôt que d’essayer de copier des sections du modèle, copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
-Remplacez **{provide-unique-name}** (y compris les accolades) par un nom de compte de stockage unique.
+Remplacez `{provide-unique-name}` et les accolades `{}` par un nom de compte de stockage unique.
 
 > [!IMPORTANT]
 > Le nom du compte de stockage doit être unique dans Azure. Le nom ne doit contenir que des lettres minuscules ou des chiffres. Il ne doit pas compter plus de 24 caractères. Vous pouvez essayer un modèle de nommage, par exemple en utilisant **store1** comme préfixe et le faisant suivre de vos initiales et de la date du jour. Ainsi, le nom que vous utilisez peut ressembler à **store1abc09092019**.
@@ -41,15 +42,15 @@ Vous vous demandez peut-être comment trouver les propriétés à utiliser pour 
 
 Chaque ressource que vous déployez présente au moins les trois propriétés suivantes :
 
-- **type** : Type de la ressource. Cette valeur est une combinaison de l’espace de noms du fournisseur de ressources et du type de ressource (comme Microsoft.Storage/storageAccounts).
-- **apiVersion** : La version de l'API REST à utiliser pour la création de la ressource. Chaque fournisseur de ressources publiant ses propres versions d’API, cette valeur est donc propre au type.
-- **nom** : Nom de la ressource.
+- `type` : Type de la ressource. Cette valeur est une combinaison de l’espace de noms du fournisseur de ressources et du type de ressource (comme `Microsoft.Storage/storageAccounts`).
+- `apiVersion` : La version de l'API REST à utiliser pour la création de la ressource. Chaque fournisseur de ressources publiant ses propres versions d’API, cette valeur est donc propre au type.
+- `name` : Nom de la ressource.
 
-La plupart des ressources possèdent également une propriété **location**, qui définit la région dans laquelle la ressource est déployée.
+La plupart des ressources possèdent également une propriété `location`, qui définit la région dans laquelle la ressource est déployée.
 
 Les autres propriétés varient selon le type de la ressource et la version de l’API. Il est important de comprendre le lien existant entre la version de l’API et les propriétés disponibles. Voyons donc cela d’un peu plus près.
 
-Dans ce tutoriel, vous avez ajouté un compte de stockage au modèle. Vous pouvez voir cette version d’API à la page [storageAccounts 2019-04-01](/azure/templates/microsoft.storage/2019-04-01/storageaccounts). Notez que vous n’avez pas ajouté toutes les propriétés à votre modèle. Beaucoup de ces propriétés sont facultatives. Le fournisseur de ressources Microsoft.Storage peut publier une nouvelle version de l’API, pour autant la version que vous déployez ne doit pas nécessairement être changée. Vous pouvez continuer à utiliser cette version tout en sachant que les résultats de votre déploiement seront cohérents.
+Dans ce tutoriel, vous avez ajouté un compte de stockage au modèle. Vous pouvez voir cette version d’API à la page [storageAccounts 2019-04-01](/azure/templates/microsoft.storage/2019-04-01/storageaccounts). Notez que vous n’avez pas ajouté toutes les propriétés à votre modèle. Beaucoup de ces propriétés sont facultatives. Le fournisseur de ressources `Microsoft.Storage` peut publier une nouvelle version de l’API, pour autant la version que vous déployez ne doit pas nécessairement être changée. Vous pouvez continuer à utiliser cette version tout en sachant que les résultats de votre déploiement seront cohérents.
 
 Si vous affichez une ancienne version de l’API, par exemple [storageAccounts 2016-05-01](/azure/templates/microsoft.storage/2016-05-01/storageaccounts), vous remarquerez qu’un ensemble de propriétés plus restreint est disponible.
 
@@ -59,7 +60,7 @@ Si vous décidez de modifier la version de l’API pour une ressource, veillez �
 
 Vous pouvez déployer le modèle pour créer le compte de stockage. Donnez un nom différent à votre déploiement, afin de pouvoir le retrouver facilement dans l’historique.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -84,15 +85,15 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 Deux échecs de déploiement peuvent se produire :
 
-- Erreur : Code=AccountNameInvalid; Message={provide-unique-name} n’est pas un nom de compte de stockage valide. Un nom de compte de stockage doit être compris entre 3 et 24 caractères composés uniquement de chiffres et de lettres en minuscules.
+- `Error: Code=AccountNameInvalid; Message={provide-unique-name}` n’est pas un nom de compte de stockage valide. Un nom de compte de stockage doit être compris entre 3 et 24 caractères composés uniquement de chiffres et de lettres en minuscules.
 
-    Dans le modèle, remplacez **{provide-unique-name}** par un nom de compte de stockage unique.  Consultez [Ajouter une ressource](#add-resource).
+    Dans le modèle, remplacez `{provide-unique-name}` par un nom de compte de stockage unique. Consultez [Ajouter une ressource](#add-resource).
 
-- Erreur : Code=StorageAccountAlreadyTaken; Message=Le compte de stockage nommé store1abc09092019 est déjà utilisé.
+- `Error: Code=StorageAccountAlreadyTaken; Message=The storage account named store1abc09092019` est déjà pris.
 
     Dans le modèle, essayez un autre nom de compte de stockage.
 
@@ -121,7 +122,7 @@ Si vous arrêtez maintenant, vous pouvez nettoyer les ressources que vous avez d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous avez créé un modèle simple pour déployer un compte de stockage Azure.  Dans les tutoriels suivants, vous allez découvrir comment ajouter des paramètres, des variables, des ressources et des sorties à un modèle. Ces fonctionnalités constituent les composants élémentaires de modèles bien plus complexes.
+Vous avez créé un modèle simple pour déployer un compte de stockage Azure. Dans les tutoriels suivants, vous allez découvrir comment ajouter des paramètres, des variables, des ressources et des sorties à un modèle. Ces fonctionnalités constituent les composants élémentaires de modèles bien plus complexes.
 
 > [!div class="nextstepaction"]
 > [Ajouter des paramètres](template-tutorial-add-parameters.md)

@@ -9,16 +9,17 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 03/25/2020
+ms.date: 11/26/2020
 ms.author: jingwang
-ms.openlocfilehash: 4eed79210e3e39f82b892ac0681e161ebb59597e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: a48ac86e8f9814adef9be2360b2446335d368447
+ms.sourcegitcommit: 192f9233ba42e3cdda2794f4307e6620adba3ff2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418029"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96296554"
 ---
 # <a name="copy-data-from-teradata-vantage-by-using-azure-data-factory"></a>Copier des données depuis une base de données Teradata Vantage à l’aide d’Azure Data Factory
+
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 >
 > * [Version 1](v1/data-factory-onprem-teradata-connector.md)
@@ -40,7 +41,7 @@ Vous pouvez copier des données de Teradata Vantage vers tout magasin de donnée
 Plus précisément, ce connecteur Teradata prend en charge :
 
 - Teradata **versions 14.10, 15.0, 15.10, 16.0, 16.10 et 16.20**.
-- Copie des données avec l’authentification **De base** ou **Windows**.
+- Copie des données avec l’authentification **De base**, **Windows** ou **LDAP**.
 - Copie en parallèle à partir d’une source Teradata. Pour en savoir plus, voir [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata).
 
 ## <a name="prerequisites"></a>Prérequis
@@ -71,8 +72,10 @@ Autres propriétés de connexion que vous pouvez définir dans la chaîne de con
 
 | Propriété | Description | Valeur par défaut |
 |:--- |:--- |:--- |
-| CharacterSet | Jeu de caractères à utiliser pour la session. Par exemple, `CharacterSet=UTF16`.<br><br/>Cette valeur peut être un jeu de caractères défini par l’utilisateur ou l’un des jeux de caractères prédéfinis suivants : <br/>- ASCII<br/>- UTF8<br/>- UTF16<br/>- LATIN1252_0A<br/>- LATIN9_0A<br/>- LATIN1_0A<br/>- Shift-JIS (Windows, compatible DOS, KANJISJIS_0S)<br/>- EUC (compatible Unix, KANJIEC_0U)<br/>- Mainframe IBM (KANJIEBCDIC5035_0I)<br/>- KANJI932_1S0<br/>- BIG5 (TCHBIG5_1R0)<br/>- GB (SCHGB2312_1T0)<br/>- SCHINESE936_6R0<br/>- TCHINESE950_8R0<br/>- NetworkKorean (HANGULKSC5601_2R4)<br/>- HANGUL949_7R0<br/>- ARABIC1256_6A0<br/>- CYRILLIC1251_2A0<br/>- HEBREW1255_5A0<br/>- LATIN1250_1A0<br/>- LATIN1254_7A0<br/>- LATIN1258_8A0<br/>- THAI874_4A0 | La valeur par défaut est `ASCII`. |
-| MaxRespSize |Taille maximale de la mémoire tampon de réponse pour les requêtes SQL en Ko (kilo-octets). Par exemple, `MaxRespSize=‭10485760‬`.<br/><br/>Pour la version de base de données Teradata 16.00 (ou ultérieure), la valeur maximale est 7361536. Pour les connexions qui utilisent des versions antérieures, la valeur maximale est 1048576. | La valeur par défaut est `65536`. |
+| UseDataEncryption | Spécifie s’il faut chiffrer toutes les communications avec la base de données Teradata. Les valeurs autorisées sont 0 ou 1.<br><br/>- **0 (désactivé, valeur par défaut)**  : Chiffre uniquement les informations d’authentification.<br/>- **1 (activé)**  : Chiffre toutes les données transmises entre le pilote et la base de données. | `0` |
+| CharacterSet | Jeu de caractères à utiliser pour la session. Par exemple, `CharacterSet=UTF16`.<br><br/>Cette valeur peut être un jeu de caractères défini par l’utilisateur ou l’un des jeux de caractères prédéfinis suivants : <br/>- ASCII<br/>- UTF8<br/>- UTF16<br/>- LATIN1252_0A<br/>- LATIN9_0A<br/>- LATIN1_0A<br/>- Shift-JIS (Windows, compatible DOS, KANJISJIS_0S)<br/>- EUC (compatible Unix, KANJIEC_0U)<br/>- Mainframe IBM (KANJIEBCDIC5035_0I)<br/>- KANJI932_1S0<br/>- BIG5 (TCHBIG5_1R0)<br/>- GB (SCHGB2312_1T0)<br/>- SCHINESE936_6R0<br/>- TCHINESE950_8R0<br/>- NetworkKorean (HANGULKSC5601_2R4)<br/>- HANGUL949_7R0<br/>- ARABIC1256_6A0<br/>- CYRILLIC1251_2A0<br/>- HEBREW1255_5A0<br/>- LATIN1250_1A0<br/>- LATIN1254_7A0<br/>- LATIN1258_8A0<br/>- THAI874_4A0 | `ASCII` |
+| MaxRespSize |Taille maximale de la mémoire tampon de réponse pour les requêtes SQL en Ko (kilo-octets). Par exemple, `MaxRespSize=‭10485760‬`.<br/><br/>Pour la version de base de données Teradata 16.00 (ou ultérieure), la valeur maximale est 7361536. Pour les connexions qui utilisent des versions antérieures, la valeur maximale est 1048576. | `65536` |
+| MechanismName | Pour utiliser le protocole LDAP afin d’authentifier la connexion, spécifiez `MechanismName=LDAP`. | N/A |
 
 **Exemple : utilisation de l’authentification de base**
 
@@ -103,6 +106,24 @@ Autres propriétés de connexion que vous pouvez définir dans la chaîne de con
             "connectionString": "DBCName=<server>",
             "username": "<username>",
             "password": "<password>"
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+**Exemple d’utilisation de l’authentification LDAP**
+
+```json
+{
+    "name": "TeradataLinkedService",
+    "properties": {
+        "type": "Teradata",
+        "typeProperties": {
+            "connectionString": "DBCName=<server>;MechanismName=LDAP;Uid=<username>;Pwd=<password>"
         },
         "connectVia": {
             "referenceName": "<name of Integration Runtime>",
@@ -206,7 +227,7 @@ Pour copier des données à partir de Teradata, les propriétés prises en charg
 | query | Utiliser la requête SQL personnalisée pour lire les données. par exemple `"SELECT * FROM MyTable"`.<br>Lorsque vous activez la charge partitionnée, vous devez utiliser les paramètres de partition intégrés correspondants dans votre requête. Pour consulter des exemples, voir [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata). | Non (si la table du jeu de données est spécifiée) |
 | partitionOptions | Spécifie les options de partitionnement des données utilisées pour charger des données à partir de Teradata. <br>Les valeurs autorisées sont : **Aucun** (par défaut), **Hachage** et **DynamicRange**.<br>Lorsqu’une option de partition est activée (autrement dit, pas `None`), le degré de parallélisme pour charger simultanément des données à partir de Teradata est contrôlé par le paramètre [`parallelCopies`](copy-activity-performance-features.md#parallel-copy) de l’activité de copie. | Non |
 | partitionSettings | Spécifiez le groupe de paramètres pour le partitionnement des données. <br>S’applique lorsque l’option de partitionnement n’est pas `None`. | Non |
-| partitionColumnName | Spécifiez le nom de la colonne source qu’utilisera le partitionnement par plages de valeurs ou hachage pour la copie en parallèle. S’il n’est pas spécifié, l'index primaire de la table sera automatiquement détecté et utilisé en tant que colonne de partition. <br>S’applique lorsque l’option de partitionnement est `Hash` ou `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfHashPartitionCondition` ou `?AdfRangePartitionColumnName` dans la clause WHERE. Consultez l’exemple de la section [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata). | Non |
+| partitionColumnName | Spécifiez le nom de la colonne source qu’utilisera le partitionnement par plages de valeurs ou hachage pour la copie en parallèle. S’il n’est pas spécifié, l’index primaire de la table sera automatiquement détecté et utilisé en tant que colonne de partition. <br>S’applique lorsque l’option de partitionnement est `Hash` ou `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfHashPartitionCondition` ou `?AdfRangePartitionColumnName` dans la clause WHERE. Consultez l’exemple de la section [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata). | Non |
 | partitionUpperBound | Valeur maximale de la colonne de partition à partir de laquelle copier des données. <br>S’applique lorsque de l’option de partition est `DynamicRange`. Si vous avez recours à une requête pour récupérer des données sources, utilisez `?AdfRangePartitionUpbound` dans la clause WHERE. Pour consulter un exemple, voir [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata). | Non |
 | partitionLowerBound | Valeur minimale de la colonne de partition à partir de laquelle copier des données. <br>S’applique lorsque l’option de partitionnement est `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfRangePartitionLowbound` dans la clause WHERE. Pour consulter un exemple, voir [Copie en parallèle à partir de Teradata](#parallel-copy-from-teradata). | Non |
 

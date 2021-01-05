@@ -7,12 +7,13 @@ ms.service: static-web-apps
 ms.topic: how-to
 ms.date: 05/08/2020
 ms.author: buhollan
-ms.openlocfilehash: 36d580b7659325d4bf5f13889f774ddaa2ab0702
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-js
+ms.openlocfilehash: 4d6dae8a4f4ed83af3103e95e711bacdb62cf522
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594248"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91326165"
 ---
 # <a name="set-up-local-development-for-azure-static-web-apps-preview"></a>Configurer le développement local pour Azure Static Web Apps en préversion
 
@@ -64,7 +65,7 @@ L’extension Live Server pour Visual Studio Code fournit un serveur web de dév
 
 #### <a name="create-a-repository"></a>Créer un référentiel
 
-1. Accédez à [https://github.com/staticwebdev/vanilla-api/generate](https://github.com/staticwebdev/vanilla-api/generate) et créez un nouveau projet GitHub nommé **vanille-api**, à l’aide de ce modèle.
+1. Vérifiez que vous êtes connecté à GitHub et accédez à [https://github.com/staticwebdev/vanilla-api/generate](https://github.com/staticwebdev/vanilla-api/generate) pour créer un projet GitHub nommé **vanilla-api**, en utilisant ce modèle.
 
     :::image type="content" source="media/local-development/vanilla-api.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
@@ -74,7 +75,7 @@ L’extension Live Server pour Visual Studio Code fournit un serveur web de dév
 
 1. Tapez **clone** dans la zone de recherche, puis sélectionnez **Git: Clone**.
 
-    :::image type="content" source="media/local-development/command-palette-git-clone.png" alt-text="Option git clone dans Visual Studio Code":::
+    :::image type="content" source="media/local-development/command-palette-git-clone.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 1. Entrez la valeur suivante dans **URL du dépôt**.
 
@@ -86,7 +87,7 @@ L’extension Live Server pour Visual Studio Code fournit un serveur web de dév
 
 1. Lorsque vous êtes invité à ouvrir le référentiel cloné, sélectionnez **Ouvrir**.
 
-    :::image type="content" source="media/local-development/open-new-window.png" alt-text="Ouvrir dans une nouvelle fenêtre":::
+    :::image type="content" source="media/local-development/open-new-window.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 Visual Studio Code ouvre le projet cloné dans l’éditeur.
 
@@ -98,7 +99,7 @@ Visual Studio Code ouvre le projet cloné dans l’éditeur.
 
     Un onglet de navigateur s’ouvre pour afficher l’application.
 
-    :::image type="content" source="media/local-development/vanilla-api-site.png" alt-text="Site statique simple s’exécutant dans le navigateur":::
+    :::image type="content" source="media/local-development/vanilla-api-site.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
     Cette application envoie une requête HTTP au point de terminaison `api/message`. Pour le moment, cette requête échoue car la partie API de cette application doit être démarrée.
 
@@ -112,13 +113,13 @@ Dans le cadre du processus de création d’API, une configuration de lancement 
 
 1. La nouvelle instance de terminal qui s’ouvre affiche la sortie du processus de build de l’API.
 
-    :::image type="content" source="media/local-development/terminal-api-debug.png" alt-text="API exécutée dans Visual Studio Code terminal":::
+    :::image type="content" source="media/local-development/terminal-api-debug.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
    La barre d’état de Visual Studio Code est maintenant orange. Cette couleur indique que l’API est en cours d’exécution et que le débogueur est joint.
 
 1. Ensuite, appuyez sur **Ctrl/Cmd** et cliquez sur l’URL dans le terminal pour ouvrir une fenêtre de navigateur qui appelle l’API.
 
-    :::image type="content" source="media/local-development/hello-from-api-endpoint.png" alt-text="Résultat de l’affichage du navigateur pour l’appel d’API":::
+    :::image type="content" source="media/local-development/hello-from-api-endpoint.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 ### <a name="debugging-the-api"></a>Débogage de l’API
 
@@ -126,19 +127,19 @@ Dans le cadre du processus de création d’API, une configuration de lancement 
 
 1. Cliquez à la ligne 2 dans la marge de gauche pour définir un point d’arrêt. Le point rouge qui apparaît indique que le point d’arrêt est défini.
 
-    :::image type="content" source="media/local-development/breakpoint-set.png" alt-text="Point d’arrêt dans Visual Studio Code":::
+    :::image type="content" source="media/local-development/breakpoint-set.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 1. Dans le navigateur, actualisez la page en cours d’exécution dans <http://127.0.0.1:7071/api/message>.
 
 1. Le point d’arrêt est atteint dans Visual Studio Code et l’exécution du programme est suspendue.
 
-   :::image type="content" source="media/local-development/breakpoint-hit.png" alt-text="Point d’arrêt atteint dans Visual Studio Code":::
+   :::image type="content" source="media/local-development/breakpoint-hit.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
    Une [expérience de débogage complète est disponible dans Visual Studio Code](https://code.visualstudio.com/Docs/editor/debugging) pour votre API.
 
 1. Appuyez sur le bouton **Continuer** dans la barre de débogage pour poursuivre l’exécution.
 
-    :::image type="content" source="media/local-development/continue-button.png" alt-text="Bouton Continuer dans Visual Studio Code":::
+    :::image type="content" source="media/local-development/continue-button.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 ### <a name="calling-the-api-from-the-application"></a>Appel de l’API à partir de l’application
 
@@ -191,7 +192,7 @@ Pour plus d’informations sur la configuration des fichiers d’environnement p
 
 1. Tapez **Live Server** et sélectionnez **Live Server : Arrêter Live Server**.
 
-    :::image type="content" source="media/local-development/stop-live-server.png" alt-text="Arrêter la commande Live Server dans la palette de commandes Visual Studio":::
+    :::image type="content" source="media/local-development/stop-live-server.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 1. Appuyez sur **F1** pour ouvrir la palette de commandes.
 
@@ -199,7 +200,7 @@ Pour plus d’informations sur la configuration des fichiers d’environnement p
 
 1. Actualisez l’application en cours d’exécution à l’adresse `http://locahost:3000`. Le navigateur affiche maintenant le message retourné par l’API.
 
-    :::image type="content" source="media/local-development/hello-from-api.png" alt-text="Hello affiché dans le navigateur à partir de l’API":::
+    :::image type="content" source="media/local-development/hello-from-api.png" alt-text="Nouvelle fenêtre de référentiel GitHub":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

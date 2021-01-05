@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: yashar
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
-ms.date: 02/13/2020
+ms.date: 12/02/2020
 ms.author: banders
-ms.openlocfilehash: 76d73b57202acabdf42ce0bec6b9b33cde15592f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 874d5cb022a38b172bb37009bd86b5e6988f3204
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199277"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96545602"
 ---
 # <a name="get-enterprise-agreement-reservation-costs-and-usage"></a>Obtenir les données d’utilisation et de coûts de la réservation pour les Contrats Entreprise
 
@@ -54,7 +55,7 @@ Les autres informations disponibles dans les données d’utilisation Azure ont 
 - Term : 12 mois ou 36 mois.
 - RINormalizationRatio : disponible sous AdditionalInfo. Il s’agit du taux d’application de la réservation à l’enregistrement d’utilisation. Si la flexibilité de la taille d’instance est activée pour votre réservation, elle peut s’appliquer à d’autres tailles. La valeur indique le taux d’application de la réservation à l’enregistrement d’utilisation.
 
-[Consulter la définition des champs](https://docs.microsoft.com/rest/api/consumption/usagedetails/list#definitions)
+[Consulter la définition des champs](/rest/api/consumption/usagedetails/list#definitions)
 
 ## <a name="get-azure-consumption-and-reservation-usage-data-using-api"></a>Obtenir les données d’utilisation des réservations et de consommation Azure à l’aide de l’API
 
@@ -70,7 +71,7 @@ Voici un exemple d’appel de l’API Détails d’utilisation :
 https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{enrollmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodId}/providers/Microsoft.Consumption/usagedetails?metric={metric}&amp;api-version=2019-05-01&amp;$filter={filter}
 ```
 
-Pour plus d’informations sur {enrollmentId} et {billingPeriodId}, consultez l’article sur l’API [Détails d’utilisation - Liste](https://docs.microsoft.com/rest/api/consumption/usagedetails/list).
+Pour plus d’informations sur {enrollmentId} et {billingPeriodId}, consultez l’article sur l’API [Détails d’utilisation - Liste](/rest/api/consumption/usagedetails/list).
 
 Les informations contenues dans le tableau suivant sur metric (métrique) et filter (filtre) peuvent aider à résoudre les problèmes courants liés aux réservations.
 
@@ -139,6 +140,8 @@ Obtenez les données des coûts amortis et filtrez les données pour une instanc
 2. Obtenez les coûts de réservation. Effectuez la somme des valeurs _Cost_ pour obtenir la valeur monétaire de ce que vous avez payé pour l’instance réservée. Le résultat inclut les coûts utilisés et non utilisés de la réservation.
 3. Soustrayez les coûts de réservation des coûts de paiement à l’utilisation estimés pour obtenir les économies estimées.
 
+Gardez à l’esprit que si votre réservation est sous-utilisée, l’entrée _UnusedReservation_ pour _ChargeType_ devient un facteur à prendre en compte. Lorsque vous disposez d’une réservation intégralement utilisée, les économies que vous réalisez sont maximales. Toute quantité _UnusedReservation_ réduit les économies.
+
 ## <a name="reservation-purchases-and-amortization-in-cost-analysis"></a>Achats de réservation et amortissement dans l’analyse des coûts
 
 Les coûts des réservations sont disponibles dans l’[analyse des coûts](https://aka.ms/costanalysis). Par défaut, l’analyse des coûts montre le **Coût réel**, qui est ce qui apparaîtra sur votre facture. Pour voir les achats des réservations ventilés et associés aux ressources qui ont utilisé l’avantage, passez au **Coût amorti** :
@@ -156,8 +159,8 @@ Si vous avez des questions ou besoin d’aide, [créez une demande de support](h
 Pour plus d’informations sur les réservations Azure, consultez les articles suivants :
 
 - [Qu’est-ce qu’une réservation Azure ?](save-compute-costs-reservations.md)
-- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
-- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../sql-database/sql-database-reserved-capacity.md)
+- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/prepay-reserved-vm-instances.md)
+- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../azure-sql/database/reserved-capacity-overview.md)
 - [Gérer les réservations Azure](manage-reserved-vm-instance.md)
 - [Comprendre comment la remise de réservation est appliquée](../manage/understand-vm-reservation-charges.md)
 - [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](understand-reserved-instance-usage.md)

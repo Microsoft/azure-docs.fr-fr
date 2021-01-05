@@ -2,17 +2,18 @@
 title: Intégrer Azure App configuration en utilisant un pipeline d’intégration et de livraison continues
 description: Découvrez comment implémenter l’intégration et la livraison continues à l’aide d’Azure App configuration
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: tutorial
-ms.date: 01/30/2020
-ms.author: lcozzens
-ms.openlocfilehash: 4b1b9e2360f4ae1cf428133006ed08327b10cdef
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-csharp
+ms.date: 04/19/2020
+ms.author: alkemper
+ms.openlocfilehash: d076bdf09626ec9ed08fcf43b95fc63d2f4a7dd7
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790760"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96928447"
 ---
 # <a name="integrate-with-a-cicd-pipeline"></a>Intégrer avec un pipeline CI/CD
 
@@ -32,11 +33,11 @@ L’exemple suivant montre comment inclure les données d’App Configuration en
 
 Vous pouvez utiliser l’éditeur de code de votre choix pour exécuter les étapes de ce tutoriel. [Visual Studio Code](https://code.visualstudio.com/) est une excellente option disponible sur les plateformes Windows, macOS et Linux.
 
-### <a name="prerequisites"></a>Conditions préalables requises
+### <a name="prerequisites"></a>Prérequis
 
-Si vous créez localement, téléchargez et installez l’[interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) si vous ne l’avez pas déjà fait.
+Si vous créez localement, téléchargez et installez l’[interface de ligne de commande Azure](/cli/azure/install-azure-cli?view=azure-cli-latest) si vous ne l’avez pas déjà fait.
 
-Pour faire une build de cloud, avec Azure DevOps, par exemple, assurez-vous que l’[interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) est installée dans votre système de build.
+Pour faire une build de cloud, avec Azure DevOps, par exemple, assurez-vous que l’[interface de ligne de commande Azure](/cli/azure/install-azure-cli?view=azure-cli-latest) est installée dans votre système de build.
 
 ### <a name="export-an-app-configuration-store"></a>Exporter un magasin App Configuration
 
@@ -69,23 +70,33 @@ Pour faire une build de cloud, avec Azure DevOps, par exemple, assurez-vous que 
 1. Définissez une variable d’environnement nommée **ConnectionString** et affectez-lui la valeur de la clé d’accès à votre magasin App Configuration. 
     Si vous utilisez l’invite de commandes Windows, exécutez la commande suivante et redémarrez l’invite pour que la modification soit prise en compte :
 
-        setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```console
+     setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez Windows PowerShell, exécutez la commande suivante :
 
-        $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```powershell
+     $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez macOS ou Linux, exécutez la commande suivante :
 
-        export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```console
+     export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```
 
 2. Pour générer l’application à l’aide de l’interface CLI .NET Core, exécutez la commande suivante dans l’interpréteur de commandes :
 
-        dotnet build
+    ```console
+     dotnet build
+    ```
 
 3. Une fois la génération correctement terminée, exécutez la commande suivante pour exécuter l’application web localement :
 
-        dotnet run
+    ```console
+     dotnet run
+    ```
 
 4. Ouvrez une fenêtre de navigateur, puis accédez à `http://localhost:5000`, qui est l’URL par défaut de l’application web hébergée localement.
 
@@ -96,4 +107,4 @@ Pour faire une build de cloud, avec Azure DevOps, par exemple, assurez-vous que 
 Dans ce tutoriel, vous avez exporté des données d’Azure App Configuration à utiliser dans un pipeline de déploiement. Pour en savoir plus sur l’utilisation d’App Configuration, passez aux exemples Azure CLI.
 
 > [!div class="nextstepaction"]
-> [Azure CLI](https://docs.microsoft.com/cli/azure/appconfig?view=azure-cli-latest)
+> [Azure CLI](/cli/azure/appconfig?view=azure-cli-latest)

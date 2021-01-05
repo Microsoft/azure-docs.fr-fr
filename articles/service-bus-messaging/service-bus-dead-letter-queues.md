@@ -1,25 +1,15 @@
 ---
 title: Files d’attente de lettres mortes Service Bus | Microsoft Docs
 description: Décrit les files d’attente de lettres mortes dans Azure Service Bus. Les files d’attente et abonnements aux rubriques Service Bus fournissent une sous-file d’attente secondaire, appelée file d’attente de lettres mortes.
-services: service-bus-messaging
-documentationcenter: .net
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: 68b2aa38-dba7-491a-9c26-0289bc15d397
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 03/23/2020
-ms.author: aschhab
-ms.openlocfilehash: 9c1a0cb92fbaf98d25799ffb5a85e666e7c05f8c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: fasttrack-edit, devx-track-csharp
+ms.openlocfilehash: 4dbd1216d3ff81e785f16ebed6ceabfa5d5897db
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158897"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91301021"
 ---
 # <a name="overview-of-service-bus-dead-letter-queues"></a>Vue d’ensemble des files d’attente de lettres mortes Service Bus
 
@@ -50,14 +40,13 @@ Comme le message est déplacé par le service broker, deux propriétés sont ajo
 
 Les applications peuvent définir leurs propres codes pour la propriété `DeadLetterReason`, mais le système définit les valeurs suivantes.
 
-| Condition | DeadLetterReason | DeadLetterErrorDescription |
-| --- | --- | --- |
-| Toujours |HeaderSizeExceeded |Le quota de taille pour ce flux a été dépassé. |
-| !TopicDescription.<br />EnableFilteringMessagesBeforePublishing et SubscriptionDescription.<br />EnableDeadLetteringOnFilterEvaluationExceptions |exception.GetType().Name |exception.Message |
-| EnableDeadLetteringOnMessageExpiration |TTLExpiredException |Le message a expiré et a été placé dans la file d’attente de lettres mortes. |
-| SubscriptionDescription.RequiresSession |L’ID de session a la valeur Null. |L’entité activée dans la session n’autorise pas les messages dont l’identificateur de session a la valeur null. |
-| !dead letter queue | MaxTransferHopCountExceeded | Nombre maximal de sauts autorisés lors du transfert entre files d’attente. La valeur est définie sur 4. |
-| Mise en file d’attente de lettres mortes explicite par l’application |Spécifié par l’application |Spécifié par l’application |
+| DeadLetterReason | DeadLetterErrorDescription |
+| --- | --- |
+|HeaderSizeExceeded |Le quota de taille pour ce flux a été dépassé. |
+|TTLExpiredException |Le message a expiré et a été placé dans la file d’attente de lettres mortes. Pour plus d’informations, consultez la section [Dépassement de TimeToLive](#exceeding-timetolive). |
+|L’ID de session a la valeur Null. |L’entité activée dans la session n’autorise pas les messages dont l’identificateur de session a la valeur null. |
+|MaxTransferHopCountExceeded | Nombre maximal de sauts autorisés lors du transfert entre files d’attente. La valeur est définie sur 4. |
+| MaxDeliveryCountExceededExceptionMessage | Le message n’a pas pu être consommé après un nombre de tentatives de livraison maximal. Pour plus d’informations, consultez la section [Dépassement de MaxDeliveryCount](#exceeding-maxdeliverycount). |
 
 ## <a name="exceeding-maxdeliverycount"></a>Dépassement de MaxDeliveryCount
 
@@ -69,11 +58,11 @@ Ce comportement ne peut pas être désactivé, mais vous pouvez définir [MaxDel
 
 Quand la propriété [QueueDescription.EnableDeadLetteringOnMessageExpiration](/dotnet/api/microsoft.servicebus.messaging.queuedescription) ou [SubscriptionDescription.EnableDeadLetteringOnMessageExpiration](/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription) est définie sur **true** (la valeur par défaut est **false**), tous les messages arrivant à expiration sont déplacés vers la file d’attente de lettres mortes avec le code motif `TTLExpiredException`.
 
-Les messages ayant expiré sont uniquement purgés et transférés vers la file d’attente de lettres mortes quand au moins un destinataire actif effectue une collecte à partir de la file d’attente principale ou l’abonnement. Ce comportement est normal.
+Les messages ayant expiré sont uniquement purgés et transférés vers la file d’attente de lettres mortes quand au moins un destinataire actif effectue une collecte à partir de la file d’attente principale ou de l’abonnement. et les [messages différés](./message-deferral.md) ne seront pas non plus purgés ni déplacés vers la file d'attente de lettres mortes après leur expiration. Ces comportements sont liés à la conception.
 
 ## <a name="errors-while-processing-subscription-rules"></a>Erreurs pendant le traitement des règles d’abonnement
 
-Quand la propriété [SubscriptionDescription.EnableDeadLetteringOnFilterEvaluationExceptions](/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription) est activée pour un abonnement, les erreurs qui surviennent pendant l’exécution des règles de filtre SQL d’un abonnement sont capturées dans la file d’attente de lettres mortes avec le message incriminé.
+Quand la propriété [SubscriptionDescription.EnableDeadLetteringOnFilterEvaluationExceptions](/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription) est activée pour un abonnement, les erreurs qui surviennent pendant l’exécution des règles de filtre SQL d’un abonnement sont capturées dans la file d’attente de lettres mortes avec le message incriminé. N’utilisez pas cette option dans un environnement de production dans lequel certains types de messages n’ont pas d’abonnés.
 
 ## <a name="application-level-dead-lettering"></a>Mise en file d’attente de lettres mortes au niveau de l’application
 

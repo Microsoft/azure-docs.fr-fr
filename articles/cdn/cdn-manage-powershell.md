@@ -1,6 +1,6 @@
 ---
 title: Gérer Azure CDN avec PowerShell | Microsoft Docs
-description: Apprenez à utiliser des applets de commande Azure PowerShell pour gérer Azure CDN.
+description: Utilisez ce tutoriel afin d’apprendre à utiliser PowerShell pour gérer les aspects de vos profils de point de terminaison et points de terminaison Azure Content Delivery Network.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/20/2019
 ms.author: allensu
-ms.openlocfilehash: 22602a1ea64e3dbca34d0c366cf6aa0dc6f35662
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b5fa1cedf4cc5e87d11dc4b5c453d9cb2a307c3c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260545"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88192650"
 ---
 # <a name="manage-azure-cdn-with-powershell"></a>Gérer Azure CDN avec PowerShell
 PowerShell fournit une des méthodes les plus flexibles pour gérer vos points de terminaison et profils Azure CDN.  Vous pouvez utiliser PowerShell de manière interactive ou en écrivant des scripts pour automatiser les tâches de gestion.  Ce didacticiel illustre plusieurs des tâches les plus courantes que vous pouvez accomplir avec PowerShell pour gérer vos points de terminaison et profils Azure CDN.
@@ -28,7 +28,7 @@ PowerShell fournit une des méthodes les plus flexibles pour gérer vos points d
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Pour utiliser PowerShell pour gérer vos points de terminaison et profils Azure CDN, vous devez avoir installé le module Azure PowerShell.  Pour savoir comment installer Azure PowerShell et vous connecter à Azure à l’aide de l’applet de commande `Connect-AzAccount` , consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview).
+Pour utiliser PowerShell pour gérer vos points de terminaison et profils Azure CDN, vous devez avoir installé le module Azure PowerShell.  Pour savoir comment installer Azure PowerShell et vous connecter à Azure à l’aide de l’applet de commande `Connect-AzAccount` , consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/).
 
 > [!IMPORTANT]
 > Vous devez vous connecter avec `Connect-AzAccount` avant de pouvoir exécuter les applets de commande Azure PowerShell.

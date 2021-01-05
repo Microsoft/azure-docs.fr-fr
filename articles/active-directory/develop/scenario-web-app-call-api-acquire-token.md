@@ -1,5 +1,6 @@
 ---
-title: Obtenir un jeton dans une application web qui appelle des API web – Plateforme d’identités Microsoft | Azure
+title: Obtenir un jeton pour une application web appelant des API web | Azure
+titleSuffix: Microsoft identity platform
 description: Découvrez comment acquérir un jeton pour une application web qui appelle des API web
 services: active-directory
 author: jmprieur
@@ -8,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 10/30/2019
+ms.date: 09/25/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 40e788099a159e1f60c0af02deccd7e3bef82744
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c8af9ddd3649e2a5757e47ab2a3d8edca1c83929
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181730"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442614"
 ---
 # <a name="a-web-app-that-calls-web-apis-acquire-a-token-for-the-app"></a>Application web qui appelle des API web : Acquérir un jeton pour l’application
 
@@ -27,7 +28,11 @@ Vous avez généré l’objet de votre application cliente. À présent, vous al
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-Les méthodes de contrôleur sont protégées par un attribut `[Authorize]` qui force les utilisateurs à s’authentifier pour utiliser l’application web. Voici le code qui appelle Microsoft Graph :
+*Microsoft.Identity.Web* ajoute des méthodes d’extension qui fournissent des services pratiques pour appeler Microsoft Graph ou une API web en aval. Ces méthodes sont expliquées en détail dans [Application web qui appelle des API web : Appeler une API](scenario-web-app-call-api-call-api.md). Avec ces méthodes d’assistance, vous n’avez pas besoin d’acquérir manuellement un jeton.
+
+Toutefois, si vous souhaitez acquérir manuellement un jeton, le code suivant montre un exemple d’utilisation de *Microsoft.Identity.Web* pour le faire dans un contrôleur home. Il appelle Microsoft Graph à l’aide de l’API REST (au lieu du Kit de développement logiciel (SDK) Microsoft Graph). Pour obtenir un jeton permettant d’appeler l’API en aval, injectez le service `ITokenAcquisition` par injection de dépendance dans le constructeur de votre contrôleur (ou votre constructeur de page, si vous utilisez Blazor), puis utilisez-le dans vos actions de contrôleur, en obtenant un jeton pour l’utilisateur (`GetAccessTokenForUserAsync`) ou pour l’application elle-même (`GetAccessTokenForAppAsync`) dans un scénario basé sur un démon.
+
+Les méthodes de contrôleur sont protégées par un attribut `[Authorize]` qui veille à ce que seuls des utilisateurs authentifiés puissent utiliser l’application web.
 
 ```csharp
 [Authorize]
@@ -50,6 +55,7 @@ Le service `ITokenAcquisition` est injecté par ASP.NET à l’aide de l’injec
 Voici le code simplifié pour l’action du `HomeController`, qui obtient un jeton pour appeler Microsoft Graph :
 
 ```csharp
+[AuthorizeForScopes(Scopes = new[] { "user.read" })]
 public async Task<IActionResult> Profile()
 {
  // Acquire the access token.
@@ -65,6 +71,8 @@ public async Task<IActionResult> Profile()
 
 Pour mieux comprendre le code nécessaire dans ce scénario, consultez la phase 2 ([2-1-Web App Calls Microsoft Graph](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/2-WebApp-graph-user/2-1-Call-MSGraph)) [Application web appelant Microsoft Graph] du tutoriel [ms-identity-aspnetcore-webapp-tutorial](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial).
 
+L’attribut `AuthorizeForScopes` en haut de l’action du contrôleur (ou de la page Razor si vous utilisez un modèle Razor) est fourni par Microsoft.Identity.Web. Il s’assure que l’utilisateur est invité à donner son consentement, le cas échéant, et de façon incrémentielle.
+
 Il existe d’autres variantes complexes, telles que :
 
 - Appels de plusieurs API.
@@ -79,6 +87,36 @@ Le code pour ASP.NET est similaire au code présenté pour ASP.NET Core :
 - Une action de contrôleur, protégée par un attribut [Authorize], extrait l’ID de locataire et l’identifiant utilisateur du membre `ClaimsPrincipal` du contrôleur. (ASP.NET utilise `HttpContext.User`.)
 - Il génère alors un objet `IConfidentialClientApplication` MSAL.NET.
 - Enfin, il appelle la méthode `AcquireTokenSilent` de l’application cliente confidentielle.
+- Si une interaction est requise, l’application web doit vérifier l’utilisateur (réouverture de session) et demander des revendications supplémentaires.
+
+L’extrait de code suivant est extrait de [HomeController.cs#L157-L192](https://github.com/Azure-Samples/ms-identity-aspnet-webapp-openidconnect/blob/257c8f96ec3ff875c351d1377b36403eed942a18/WebApp/Controllers/HomeController.cs#L157-L192) dans l’exemple de code MVC ASP.NET [ms-identity-aspnet-webapp-openidconnect](https://github.com/Azure-Samples/ms-identity-aspnet-webapp-openidconnect) :
+
+```C#
+public async Task<ActionResult> ReadMail()
+{
+    IConfidentialClientApplication app = MsalAppBuilder.BuildConfidentialClientApplication();
+    AuthenticationResult result = null;
+    var account = await app.GetAccountAsync(ClaimsPrincipal.Current.GetMsalAccountId());
+    string[] scopes = { "Mail.Read" };
+
+    try
+    {
+        // try to get token silently
+        result = await app.AcquireTokenSilent(scopes, account).ExecuteAsync().ConfigureAwait(false);
+    }
+    catch (MsalUiRequiredException)
+    {
+        ViewBag.Relogin = "true";
+        return View();
+    }
+
+    // More code here
+    return View();
+}
+```
+
+Pour plus d’informations, consultez le code relatif à [BuildConfidentialClientApplication()](https://github.com/Azure-Samples/ms-identity-aspnet-webapp-openidconnect/blob/master/WebApp/Utils/MsalAppBuilder.cs) et [GetMsalAccountId](https://github.com/Azure-Samples/ms-identity-aspnet-webapp-openidconnect/blob/257c8f96ec3ff875c351d1377b36403eed942a18/WebApp/Utils/ClaimPrincipalExtension.cs#L38) dans l’exemple de code.
+
 
 # <a name="java"></a>[Java](#tab/java)
 
@@ -165,5 +203,4 @@ def graphcall():
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Appeler une API web](scenario-web-app-call-api-call-api.md)
+Passez à l’article suivant de ce scénario, [Appeler une API web](scenario-web-app-call-api-call-api.md).

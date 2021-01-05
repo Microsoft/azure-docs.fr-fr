@@ -3,26 +3,26 @@ title: Chiffrer la source de votre application au repos
 description: Chiffrez les données de votre application dans le Stockage Azure et déployez-la en tant que fichier de package.
 ms.topic: article
 ms.date: 03/06/2020
-ms.openlocfilehash: 62179e900ace0d6d7b8b1f07e8f0ab685508f991
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6e4cf16118e748e3ee1d1ff4899730463565ec70
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79408722"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108029"
 ---
-# <a name="encryption-at-rest-using-customer-managed-keys"></a>Chiffrement au repos à l’aide de clés gérées par le client
+# <a name="encrypt-your-application-data-at-rest-using-customer-managed-keys"></a>Chiffrer vos données d’application au repos avec des clés gérées par le client
 
 Le chiffrement des données au repos de votre application de fonction nécessite un compte de stockage Azure et un coffre de clés Azure. Ces services sont utilisés lorsque vous exécutez votre application à partir d’un package de déploiement.
 
   - [Le stockage Azure permet un chiffrement au repos](../storage/common/storage-service-encryption.md). Vous pouvez utiliser des clés fournies par le système ou vos propres clés gérées par vous-même. C’est dans ce cas que vos données d’application sont stockées lorsqu’elles ne sont pas exécutées dans une application de fonction dans Azure.
-  - [Exécution à partir d’un package de déploiement] ((run-functions-from-deployment-package.md) est une fonctionnalité de déploiement d’App Service. Elle vous permet de déployer le contenu de votre site à partir d’un compte de stockage Azure, à l’aide d’une URL de signature d’accès partagé (SAS).
+  - L’[exécution à partir d’un package de déploiement](run-functions-from-deployment-package.md) est une fonctionnalité de déploiement d’App Service. Elle vous permet de déployer le contenu de votre site à partir d’un compte de stockage Azure, à l’aide d’une URL de signature d’accès partagé (SAS).
   - Les [références Key Vault](../app-service/app-service-key-vault-references.md) sont une fonctionnalité de sécurité d’App Service. Elle vous permet d’importer des secrets au moment de l’exécution comme des paramètres d’application. Utilisez cette valeur pour chiffrer l’URL SAS de votre compte de stockage Azure.
 
 ## <a name="set-up-encryption-at-rest"></a>Configurer le chiffrement au repos
 
 ### <a name="create-an-azure-storage-account"></a>Création d'un compte Azure Storage
 
-Tout d’abord, [créez un compte de stockage Azure](../storage/common/storage-account-create.md) et [chiffrez-le avec des clés gérées par le client](../storage/common/encryption-customer-managed-keys.md). Une fois le compte de stockage créé, utilisez l’[Explorateur Stockage Azure](../vs-azure-tools-storage-manage-with-storage-explorer.md) pour charger les fichiers de package.
+Tout d’abord, [créez un compte de stockage Azure](../storage/common/storage-account-create.md) et [chiffrez-le avec des clés gérées par le client](../storage/common/customer-managed-keys-overview.md). Une fois le compte de stockage créé, utilisez l’[Explorateur Stockage Azure](../vs-azure-tools-storage-manage-with-storage-explorer.md) pour charger les fichiers de package.
 
 Ensuite, utilisez l’Explorateur Stockage pour [générer une URL SAS](../vs-azure-tools-storage-manage-with-storage-explorer.md?tabs=windows#generate-a-sas-in-storage-explorer). 
 

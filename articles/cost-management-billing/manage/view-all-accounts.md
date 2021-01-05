@@ -1,18 +1,19 @@
 ---
 title: Afficher vos comptes de facturation dans le portail Azure
-description: Découvrez comment afficher vos comptes de facturation dans le portail Azure.
+description: Découvrez comment afficher vos comptes de facturation dans le portail Azure. Consultez les informations d’étendue pour les Contrats Entreprise, client Microsoft et Partenaire Microsoft.
 author: amberbhargava
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 02/20/2020
+ms.date: 11/30/2020
 ms.author: banders
-ms.openlocfilehash: 4dab11afb2ddd910a4d6619d088031279ebf3172
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a9e3297ad055157d552424ecc48db6801f43b220
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79238004"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96929953"
 ---
 # <a name="billing-accounts-and-scopes-in-the-azure-portal"></a>Comptes et étendues de facturation dans le portail Azure
 
@@ -22,20 +23,26 @@ Le portail Azure prend en charge le type suivant de comptes de facturation :
 
 - **Programme Microsoft Online Services** : Un compte de facturation pour le Programme Microsoft Online Services est créé lorsque vous souscrivez à Azure via le site web Azure. Par exemple, quand vous souscrivez à un [compte gratuit Azure](https://azure.microsoft.com/offers/ms-azr-0044p/), un [compte avec tarifs de paiement à l’utilisation](https://azure.microsoft.com/offers/ms-azr-0003p/) ou en tant qu’[abonné Visual Studio](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/).
 
-- **Contrat Entreprise** : Un compte de facturation pour un Contrat Entreprise est créé quand votre organisation signe un [Contrat Entreprise (EA)](https://azure.microsoft.com/pricing/enterprise-agreement/) pour utiliser Azure.
+- **Contrat Entreprise** : Un compte de facturation pour un Contrat Entreprise est créé quand votre organisation signe un [Contrat Entreprise (EA)](https://azure.microsoft.com/pricing/enterprise-agreement/) pour utiliser Azure. Vous pouvez avoir un maximum de 2 000 abonnements dans un Contrat Entreprise.
 
-- **Contrat client Microsoft** : Un compte de facturation pour un Contrat client Microsoft est créé lorsque votre organisation signe un Contrat client Microsoft avec un commercial Microsoft. Des clients dans certaines régions, qui s’inscrivent via le site web Azure pour un [compte avec tarifs de paiement à l’utilisation](https://azure.microsoft.com/offers/ms-azr-0003p/) ou un [compte gratuit Azure](https://azure.microsoft.com/offers/ms-azr-0044p/) peuvent aussi avoir un compte de facturation pour un Contrat client Microsoft. Pour plus d’informations, voir [Prise en main de votre compte de facturation dans le cadre d’un Contrat client Microsoft](../understand/mca-overview.md).
+- **Contrat client Microsoft** : Un compte de facturation pour un Contrat client Microsoft est créé lorsque votre organisation signe un Contrat client Microsoft avec un commercial Microsoft. Des clients dans certaines régions, qui s’inscrivent via le site web Azure pour un [compte avec tarifs de paiement à l’utilisation](https://azure.microsoft.com/offers/ms-azr-0003p/) ou un [compte gratuit Azure](https://azure.microsoft.com/offers/ms-azr-0044p/) peuvent aussi avoir un compte de facturation pour un Contrat client Microsoft. Vous pouvez avoir un maximum de 20 abonnements dans un Contrat client Microsoft pour un particulier. Le nombre d’abonnements dans un Contrat client Microsoft n’est pas limité pour une entreprise. Pour plus d’informations, voir [Prise en main de votre compte de facturation dans le cadre d’un Contrat client Microsoft](../understand/mca-overview.md).
 
-- **Contrat Partenaire Microsoft** : Un compte de facturation pour un Contrat Partenaire Microsoft est créé pour les partenaires du fournisseur de solutions cloud (CSP) afin de gérer leurs clients dans la nouvelle expérience de commerce. Les partenaires doivent avoir au moins un client avec un [plan Azure](https://docs.microsoft.com/partner-center/purchase-azure-plan) pour gérer leur compte de facturation dans le portail Azure. Pour plus d’informations, consultez [Prise en main de votre compte de facturation dans le cadre d’un Contrat Partenaire Microsoft](../understand/mpa-overview.md).
+- **Contrat Partenaire Microsoft** : Un compte de facturation pour un Contrat Partenaire Microsoft est créé pour les partenaires du fournisseur de solutions cloud (CSP) afin de gérer leurs clients dans la nouvelle expérience de commerce. Les partenaires doivent avoir au moins un client avec un [plan Azure](/partner-center/purchase-azure-plan) pour gérer leur compte de facturation dans le portail Azure. Pour plus d’informations, consultez [Prise en main de votre compte de facturation dans le cadre d’un Contrat Partenaire Microsoft](../understand/mpa-overview.md).
 
 Pour déterminer le type de votre compte de facturation, voir [Vérifier le type de votre compte de facturation](#check-the-type-of-your-account).
 
 ## <a name="scopes-for-billing-accounts"></a>Étendues pour les comptes de facturation
 Une étendue est un nœud à l’intérieur d’un compte de facturation que vous utilisez pour afficher et gérer la facturation. C’est là que vous gérez les données de facturation, les paiements, les factures, et effectuez la gestion des comptes de manière générale.
 
+Si vous n’avez pas accès pour afficher ou gérer les comptes de facturation, vous n’êtes probablement pas autorisé à y accéder. Vous pouvez demander à votre administrateur de compte de facturation de vous accorder l’accès. Pour plus d’informations, consultez les articles suivants :
+
+- [Accès au Programme Microsoft Online Services](manage-billing-access.md)
+- [Accès au Contrat client Microsoft](understand-mca-roles.md)
+- [Accès au Contrat Entreprise](understand-ea-roles.md)
+
 ### <a name="microsoft-online-services-program"></a>Programme Microsoft Online Services
 
- ![Capture d’écran montrant la hiérarchie MOSP](./media/view-all-accounts/mosp-hierarchy.png)
+![Capture d’écran montrant la hiérarchie MOSP](./media/view-all-accounts/mosp-hierarchy.png)
 
 |Étendue  |Définition  |
 |---------|---------|
@@ -71,7 +78,7 @@ Une étendue est un nœud à l’intérieur d’un compte de facturation que vou
 |Compte de facturation     |   Représente un Contrat Partenaire pour gérer les produits et services Microsoft des clients dans la nouvelle expérience de commerce. Il contient un ou plusieurs profils de facturation et clients.   |
 |Profil de facturation     |   Représente une facture pour une devise.     |
 |Customer    |   Représente un client pour un partenaire du fournisseur de solutions cloud (CSP).  Les abonnements Azure et d’autres achats tels que les produits de la Place de marché Azure et AppSource sont associés à cette étendue.  |
-|Reseller    |   Revendeur qui fournit des services à un client. Il s’agit d’un champ facultatif pour un abonnement, qui s’applique uniquement aux fournisseurs indirects dans le modèle CSP à deux niveaux.     |
+|Reseller    |   Revendeur qui fournit des services à un client. Il s’agit d’un champ facultatif pour un abonnement ; il s’applique uniquement aux fournisseurs indirects dans le modèle CSP à deux niveaux.     |
 
 ## <a name="switch-billing-scope-in-the-azure-portal"></a>Basculement d’étendue de facturation dans le Portail Azure
 
@@ -79,11 +86,11 @@ Une étendue est un nœud à l’intérieur d’un compte de facturation que vou
 
 2. Recherchez **Gestion des coûts + facturation**.
 
-   ![Capture d’écran montrant la recherche dans le portail Azure](./media/view-all-accounts/billing-search-cost-management-billing.png)
+   ![Capture d’écran montrant la recherche de « Cost Management + Billing » dans le portail Azure.](./media/view-all-accounts/billing-search-cost-management-billing.png)
 
 3. Dans la page Vue d’ensemble, sélectionnez **Changer d’étendue**.
 
-   ![Capture d’écran montrant les étendues de facturation](./media/view-all-accounts/overview-select-scopes.png)
+   ![Capture d’écran montrant les étendues de facturation.](./media/view-all-accounts/overview-select-scopes.png)
 
    > [!Note]
     >
@@ -91,7 +98,7 @@ Une étendue est un nœud à l’intérieur d’un compte de facturation que vou
 
 4. Sélectionnez une étendue pour afficher les détails.
 
-   ![Capture d’écran montrant les étendues de facturation](./media/view-all-accounts/list-of-scopes.png)
+   ![Capture d’écran montrant les étendues de facturation, que vous pouvez sélectionner pour plus d’informations.](./media/view-all-accounts/list-of-scopes.png)
 
 ## <a name="check-the-type-of-your-account"></a>Vérifier le type de votre compte
 [!INCLUDE [billing-check-mca](../../../includes/billing-check-account-type.md)]

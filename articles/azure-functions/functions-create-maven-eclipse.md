@@ -5,13 +5,13 @@ author: jeffhollan
 ms.topic: how-to
 ms.date: 07/01/2018
 ms.author: jehollan
-ms.custom: mvc, devcenter
-ms.openlocfilehash: 42e9ed7c080c9274fad7eda8e4c8af3631ed41f5
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.custom: mvc, devcenter, devx-track-java
+ms.openlocfilehash: a4e240837dd3c95efc4dc83a7491f2ad9163435a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80756491"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87373315"
 ---
 # <a name="create-your-first-function-with-java-and-eclipse"></a>Créer votre première fonction avec Java et Eclipse 
 
@@ -28,7 +28,7 @@ Pour développer une application de fonction avec Java et Eclipse, vous devez av
 -  [Java Developer Kit (JDK)](https://www.azul.com/downloads/zulu/) version 8.
 -  [Apache Maven](https://maven.apache.org) version 3.0 ou ultérieure.
 -  [Eclipse](https://www.eclipse.org/downloads/packages/), avec prise en charge de Java et Maven.
--  [Azure CLI](https://docs.microsoft.com/cli/azure)
+-  [Azure CLI](/cli/azure)
 
 > [!IMPORTANT] 
 > Pour pouvoir effectuer ce démarrage rapide, vous devez définir la variable d’environnement JAVA_HOME sur l’emplacement d’installation du JDK.
@@ -39,15 +39,11 @@ Il est vivement recommandé d’installer également [Azure Functions Core Tools
 
 1. Dans Eclipse, sélectionnez le menu **Fichier**, puis **Nouveau -&gt; Projet Maven**. 
 1. Acceptez les valeurs par défaut de la boîte de dialogue **Nouveau projet Maven**, puis sélectionnez **Suivant**.
-1. Sélectionnez **Add Archetype** (Ajouter un archétype), puis ajoutez les entrées pour [azure-functions-archetype](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype).
-    - Archetype Group ID (ID de groupe d’archétypes) : com.microsoft.azure
-    - Archetype Artifact ID (ID d’artefact d’archétype) : azure-functions-archetype
-    - Version : recherchez et utilisez la dernière version du [référentiel central](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype)
-    ![Création de projet Maven dans Eclipse](media/functions-create-first-java-eclipse/functions-create-eclipse.png)  
-1. Cliquez sur **OK**, puis sur **Suivant**.  Veillez à renseigner les valeurs de tous les champs, y compris `resourceGroup`, `appName`et `appRegion` (utilisez un appName différent de **Fabrikam-Function-20170920120101928**), puis **Terminer**.
+1. Recherchez et sélectionnez [azure-functions-archetype](https://mvnrepository.com/artifact/com.microsoft.azure/azure-functions-archetype) et cliquez sur **Suivant**.
+1. Veillez à renseigner les valeurs de tous les champs, y compris `resourceGroup`, `appName`et `appRegion` (utilisez un appName différent de **Fabrikam-Function-20170920120101928**), puis **Terminer**.
     ![Création de projet Maven dans Eclipse2](media/functions-create-first-java-eclipse/functions-create-eclipse2.png)  
 
-Maven crée les fichiers projet dans un nouveau dossier avec le nom de _artifactId_. Le code généré dans le projet est une fonction simple [déclenchée par HTTP](/azure/azure-functions/functions-bindings-http-webhook) qui retourne le corps de la demande HTTP à l’origine du déclenchement.
+Maven crée les fichiers projet dans un nouveau dossier avec le nom de _artifactId_. Le code généré dans le projet est une fonction simple [déclenchée par HTTP](./functions-bindings-http-webhook.md) qui retourne le corps de la demande HTTP à l’origine du déclenchement.
 
 ## <a name="run-functions-locally-in-the-ide"></a>Exécuter des fonctions localement dans l’IDE
 

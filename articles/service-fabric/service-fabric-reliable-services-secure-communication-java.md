@@ -4,13 +4,14 @@ description: Découvrez comment sécuriser les communications à distance pour d
 author: PavanKunapareddyMSFT
 ms.topic: conceptual
 ms.date: 06/30/2017
+ms.custom: devx-track-java
 ms.author: pakunapa
-ms.openlocfilehash: adefeadf939d398268624343d82c18cbf5ec87cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 01a64fbcfef9f56abb0e1aa6cf7f5d821dd3763b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75609636"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87325710"
 ---
 # <a name="secure-service-remoting-communications-in-a-java-service"></a>Sécuriser les communications à distance des services dans un service Java
 > [!div class="op_single_selector"]

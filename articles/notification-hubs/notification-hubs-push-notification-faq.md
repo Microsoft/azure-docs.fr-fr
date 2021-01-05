@@ -5,9 +5,7 @@ services: notification-hubs
 documentationcenter: mobile
 author: sethmanheim
 manager: femila
-editor: jwargo
 keywords: notification push, notifications push, notifications push iOS, notifications push android, push ios, push android
-ms.assetid: 7b385713-ef3b-4f01-8b1f-ffe3690bbd40
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-multiple
@@ -17,12 +15,12 @@ ms.date: 11/13/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 11/13/2019
-ms.openlocfilehash: 3212520f37d33a2d8fb1b071506f688b9f75f15c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9d476b1db645ed1f91b62fcf11464f7077a8fb3c
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76263827"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94491424"
 ---
 # <a name="push-notifications-with-azure-notification-hubs-frequently-asked-questions"></a>Notifications Push avec Azure Notification Hubs : Forum aux questions
 
@@ -69,7 +67,7 @@ Des kits de développement logiciel (SDK) sur serveur pour .NET, Java, Node.js, 
 
 ### <a name="which-client-platforms-do-you-support"></a>Quelles plateformes clientes prenez-vous en charge ?
 
-Les notifications Push sont prises en charge pour [iOS](notification-hubs-ios-apple-push-notification-apns-get-started.md), [Android](notification-hubs-android-push-notification-google-fcm-get-started.md), [Windows Universal](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md), [Windows Phone](notification-hubs-windows-mobile-push-notifications-mpns.md), [Android China (par Baidu)](notification-hubs-baidu-china-android-notifications-get-started.md), Xamarin ([iOS](xamarin-notification-hubs-ios-push-notification-apns-get-started.md) et Android) et Android, et [Safari](https://github.com/Azure/azure-notificationhubs-samples/tree/master/PushToSafari). Pour plus d’informations, voir la page [Didacticiels de prise en main de Notification Hubs] (Tutoriels de prise en main de Notification Hubs).
+Les notifications Push sont prises en charge pour [iOS](ios-sdk-get-started.md), [Android](notification-hubs-android-push-notification-google-fcm-get-started.md), [Windows Universal](notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md), [Windows Phone](notification-hubs-windows-mobile-push-notifications-mpns.md), [Android China (par Baidu)](notification-hubs-baidu-china-android-notifications-get-started.md), Xamarin [iOS](xamarin-notification-hubs-ios-push-notification-apns-get-started.md) et [Android](xamarin-notification-hubs-push-notifications-android-gcm.md), et [Safari](https://github.com/Azure/azure-notificationhubs-samples/tree/master/PushToSafari). Pour plus d’informations, voir la page [Notification Hubs Getting Started tutorials](ios-sdk-get-started.md) (Tutoriels de prise en main de Notification Hubs).
 
 ### <a name="do-you-support-text-message-email-or-web-notifications"></a>Prenez-vous en charge les SMS, les emails ou les notifications web ?
 
@@ -79,7 +77,7 @@ Notification Hubs envoie des notifications aux appareils utilisant des applicati
 
 Pour plus d’informations sur le nombre d’appareils pris en charge, voir la [Tarification de Concentrateurs de notification].
 
-Si vous devez prendre en charge plus de 10 millions d’appareils inscrits, vous devez partitionner vos appareils sur plusieurs hubs.
+Si vous devez prendre en charge plus de 10 millions d’appareils inscrits, vous devez partitionner vos appareils sur plusieurs espaces de noms.
 
 ### <a name="how-many-push-notifications-can-i-send-out"></a>Combien de notifications Push puis-je envoyer ?
 
@@ -140,7 +138,7 @@ Les inscriptions à partir du serveur principal d’applications sont utiles lor
 
 ### <a name="what-is-the-push-notification-delivery-security-model"></a>Quel est le modèle de sécurité de remise de notification Push ?
 
-Azure Notification Hubs utilise un modèle de sécurité basé sur une [signature d’accès partagé](../storage/common/storage-dotnet-shared-access-signature-part-1.md). Vous pouvez utiliser les jetons SAP au niveau de l’espace de noms racine ou au niveau granulaire du hub de notification. Les jetons SAP peuvent être définis pour respecter différentes règles d’autorisation, par exemple, pour envoyer des autorisations de messages ou pour écouter des autorisations de notification. Pour plus d’informations, consultez le document [Modèle de sécurité de Notification Hubs] (Modèle de sécurité de Notification Hubs).
+Azure Notification Hubs utilise un modèle de sécurité basé sur une [signature d’accès partagé](../storage/common/storage-sas-overview.md). Vous pouvez utiliser les jetons SAP au niveau de l’espace de noms racine ou au niveau granulaire du hub de notification. Les jetons SAP peuvent être définis pour respecter différentes règles d’autorisation, par exemple, pour envoyer des autorisations de messages ou pour écouter des autorisations de notification. Pour plus d’informations, consultez le document [Modèle de sécurité de Notification Hubs] (Modèle de sécurité de Notification Hubs).
 
 ### <a name="how-should-i-handle-sensitive-payload-in-push-notifications"></a>Comment gérer une charge utile sensible dans des notifications Push ?
 
@@ -161,15 +159,12 @@ Nous assurons la couverture de la récupération d’urgence des métadonnées (
 
 1. Créez un hub de notification secondaire dans un autre centre de données. Nous vous recommandons d’en créer un dès le début pour vous protéger d’une reprise après sinistre qui peut affecter vos capacités de gestion. Vous pouvez également créer un hub au moment de l’événement de récupération d’urgence.
 
-2. Alimentez le hub de notification secondaire avec les inscriptions du hub de notification principal. Il n’est pas recommandé de tenter de conserver les inscriptions sur les deux hubs ni de les synchroniser au fil des inscriptions. Cette pratique ne fonctionne pas en raison de la tendance inhérente d’inscriptions à expirer côté PNS. Les inscriptions sont supprimées de Notification Hubs lorsque le PNS nous signale qu’elles ont expiré ou qu’elles ne sont plus valides.  
+2. Veillez à ce que le hub de notification secondaire soit synchronisé avec le hub de notification principal en utilisant l’une des options suivantes :
 
-Nous avons deux suggestions pour le serveur principal d’applications :
+   * Utilisez un serveur principal d’application qui crée et met à jour simultanément des installations dans les deux hubs de notification. Ces installations vous permettent de spécifier votre propre identificateur d’appareil unique, ce qui le rend plus adapté au scénario de réplication. Pour plus d’informations, consultez [cet exemple de code](https://github.com/Azure/azure-notificationhubs-dotnet/tree/main/Samples/RedundantHubSample).
+   * Utilisez un serveur principal d’applications qui obtient un vidage régulier des inscriptions à partir du hub de notification principal sous forme de sauvegarde. Il peut alors effectuer une insertion en bloc dans le hub de notification secondaire.
 
-* Utilisez un serveur principal d’applications qui gère un ensemble donné d’inscriptions de son côté. Il peut alors effectuer une insertion en bloc dans le hub de notification secondaire.
-* Utilisez un serveur principal d’applications qui obtient un vidage régulier des inscriptions à partir du hub de notification principal sous forme de sauvegarde. Il peut alors effectuer une insertion en bloc dans le hub de notification secondaire.
-
-> [!NOTE]
-> Pour plus d’informations sur la fonctionnalité d’exportation/importation des inscriptions disponible au niveau Standard, voir [Exportation et modification d’inscriptions en bloc] (Exportation/Importation des inscriptions).
+Le hub de notification secondaire peut se retrouver avec des installations/inscriptions ayant expiré. Lorsque la notification Push est effectuée vers un handle expiré, Notification Hubs nettoie automatiquement l’enregistrement d’installation/inscription associé en fonction de la réponse reçue du serveur PNS. Pour nettoyer les enregistrements expirés d’un hub de notification secondaire, ajoutez une logique personnalisée qui traite les informations reçues de chaque envoi. Ensuite, faites expirer l’installation/l’inscription dans le hub de notification secondaire.
 
 Si vous n’avez de serveur principal d’applications, lorsque l’application démarre sur les appareils cibles, ces derniers effectuent une nouvelle inscription dans le hub de notification secondaire. Finalement, tous les appareils actifs sont inscrits dans le hub de notification secondaire.
 
@@ -205,16 +200,15 @@ Vous pouvez également accéder aux mesures de manière programmatique. Pour plu
 [Azure portal]: https://portal.azure.com
 [Tarification de Concentrateurs de notification]: https://azure.microsoft.com/pricing/details/notification-hubs/
 [Notification Hubs SLA]: https://azure.microsoft.com/support/legal/sla/
-[API REST de Notification Hubs]: https://msdn.microsoft.com/library/azure/dn530746.aspx
-[Didacticiels de prise en main de Notification Hubs]: https://azure.microsoft.com/documentation/articles/notification-hubs-ios-get-started/
+[API REST de Notification Hubs]: /previous-versions/azure/reference/dn530746(v=azure.100)
 [Mobile Services Pricing]: https://azure.microsoft.com/pricing/details/mobile-services/
-[Aide sur l’inscription auprès du serveur principal]: https://msdn.microsoft.com/library/azure/dn743807.aspx
-[Aide sur l’inscription auprès du serveur principal - 2]: https://msdn.microsoft.com/library/azure/dn530747.aspx
-[Modèle de sécurité de Notification Hubs]: https://msdn.microsoft.com/library/azure/dn495373.aspx
-[didacticiel sur les notifications Push sécurisées avec Azure Notification Hubs]: https://azure.microsoft.com/documentation/articles/notification-hubs-aspnet-backend-ios-secure-push/
-[Dépannage de Notification Hubs]: https://azure.microsoft.com/documentation/articles/notification-hubs-diagnosing/
+[Aide sur l’inscription auprès du serveur principal]: /previous-versions/azure/azure-services/dn743807(v=azure.100)
+[Aide sur l’inscription auprès du serveur principal - 2]: /previous-versions/azure/azure-services/dn530747(v=azure.100)
+[Modèle de sécurité de Notification Hubs]: /previous-versions/azure/azure-services/dn495373(v=azure.100)
+[didacticiel sur les notifications Push sécurisées avec Azure Notification Hubs]: ./notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md
+[Dépannage de Notification Hubs]: ./notification-hubs-push-notification-fixer.md
 [Mesures de Notification Hubs]: ../azure-monitor/platform/metrics-supported.md#microsoftnotificationhubsnamespacesnotificationhubs
-[Exportation et modification d’inscriptions en bloc]: https://docs.microsoft.com/azure/notification-hubs/export-modify-registrations-bulk
+[Exportation et modification d’inscriptions en bloc]: ./export-modify-registrations-bulk.md
 [Azure portal]: https://portal.azure.com
 [complete samples]: https://github.com/Azure/azure-notificationhubs-samples
 [App Service Pricing]: https://azure.microsoft.com/pricing/details/app-service/

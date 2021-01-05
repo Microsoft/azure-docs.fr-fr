@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/22/2017
 ms.author: alkohli
-ms.openlocfilehash: 22084f9c59070c2efaa112ebfbb0c5ecc647145e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d736c09fc1c9490f79dfc526895970e01b8b45cc
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68965880"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94963179"
 ---
 # <a name="deploy-your-on-premises-storsimple-device-in-the-government-portal"></a>Déployer votre appareil StorSimple local dans le portail Government
 
@@ -28,7 +28,7 @@ ms.locfileid: "68965880"
 ## <a name="overview"></a>Vue d’ensemble
 Bienvenue dans cette série de didacticiels consacrée au déploiement d’appareils Microsoft Azure StorSimple. Ces didacticiels de déploiement s’appliquent aux appareils de la gamme StorSimple 8000 exécutant le logiciel Update 3 ou version ultérieure dans le portail Azure Government. Ils proposent une liste de contrôle de la configuration, ainsi qu’une liste des éléments requis et des étapes de configuration détaillées pour votre appareil StorSimple.
 
-Les informations contenues dans ces didacticiels supposent que vous avez passé en revue les précautions de sécurité, et décompacté, monté en rack et câblé votre appareil StorSimple. Si vous devez encore effectuer ces tâches, commencez par lire les [précautions de sécurité](storsimple-safety.md). Suivez les instructions spécifiques à l'appareil pour déballer, monter en rack et câbler votre appareil.
+Les informations contenues dans ces didacticiels supposent que vous avez passé en revue les précautions de sécurité, et décompacté, monté en rack et câblé votre appareil StorSimple. Si vous devez encore effectuer ces tâches, commencez par lire les [précautions de sécurité](storsimple-8000-safety.md). Suivez les instructions spécifiques à l'appareil pour déballer, monter en rack et câbler votre appareil.
 
 * [Décompacter, monter en rack et câbler votre appareil 8100](storsimple-8100-hardware-installation.md)
 * [Décompacter, monter en rack et câbler votre appareil 8600](storsimple-8600-hardware-installation.md)
@@ -153,7 +153,7 @@ Procédez comme suit sur votre hôte Windows Server.
 
 > [!IMPORTANT]
 > * Pour une haute disponibilité de votre solution StorSimple, nous vous recommandons de configurer MPIO sur vos serveurs hôtes (facultatif) avant de configurer iSCSI. La configuration de MPIO sur les serveurs hôtes permet de s'assurer que les serveurs peuvent tolérer une panne de liaison, de réseau ou d'interface.
-> * Pour obtenir les instructions d'installation et de configuration de MPIO et d'iSCSI sur l'hôte Windows Server, consultez [Configuration de MPIO pour votre appareil StorSimple](storsimple-configure-mpio-windows-server.md). Ces instructions incluent également les étapes pour monter, initialiser et formater des volumes StorSimple.
+> * Pour obtenir les instructions d'installation et de configuration de MPIO et d'iSCSI sur l'hôte Windows Server, consultez [Configuration de MPIO pour votre appareil StorSimple](./storsimple-8000-configure-mpio-windows-server.md). Ces instructions incluent également les étapes pour monter, initialiser et formater des volumes StorSimple.
 > * Pour obtenir les instructions d'installation et de configuration de MPIO et d'iSCSI sur un hôte Linux, consultez [Configuration de MPIO pour votre hôte Linux StorSimple](storsimple-configure-mpio-on-linux.md)
 
 Si vous décidez de ne pas configurer MPIO, procédez comme suit pour monter, initialiser et formater vos volumes StorSimple sur un hôte Windows Server.
@@ -172,7 +172,7 @@ Vous pouvez à tout moment effectuer une sauvegarde manuelle. Pour connaître le
 ## <a name="configure-a-new-storage-account-for-the-service"></a>Configuration d’un compte de stockage pour le service
 Il s’agit d’une étape facultative que vous devez exécuter uniquement si vous n’avez pas activé la création automatique d’un compte de stockage avec votre service. Un compte de stockage Microsoft Azure est requis pour créer un conteneur de volumes StorSimple.
 
-Si vous devez créer un compte de stockage Azure dans une autre région, consultez la page [À propos des comptes de stockage Azure](../storage/common/storage-create-storage-account.md) pour obtenir des instructions détaillées.
+Si vous devez créer un compte de stockage Azure dans une autre région, consultez la page [À propos des comptes de stockage Azure](../storage/common/storage-account-create.md) pour obtenir des instructions détaillées.
 
 Procédez comme suit dans la page **Service StorSimple Device Manager** du portail Government.
 
@@ -199,4 +199,3 @@ Pour créer une sauvegarde manuelle à la demande pour un seul volume sur votre 
 ## <a name="next-steps"></a>Étapes suivantes
 * Configuration d’un [appareil virtuel](storsimple-8000-cloud-appliance-u2.md).
 * Utilisez le [service StorSimple Device Manager](storsimple-8000-manager-service-administration.md) pour gérer votre appareil StorSimple.
-

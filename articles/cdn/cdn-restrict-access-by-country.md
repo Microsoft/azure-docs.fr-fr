@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/19/2018
 ms.author: allensu
-ms.openlocfilehash: 7ae7224efdaa281106dfbe2118ab0092c8284c6e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ed82adcc1432bde27042d5775c454bfabcdb96ca
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260154"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91358132"
 ---
 # <a name="restrict-azure-cdn-content-by-countryregion"></a>Limiter l’accès à votre contenu CDN Azure par pays/région
 
@@ -38,7 +38,7 @@ Pour le profil **Azure CDN Premium de Verizon**, vous devez utiliser le portail 
 ### <a name="define-the-directory-path"></a>Définir le chemin d’accès au répertoire
 Pour accéder à la fonction de filtrage géographique, choisissez le point de terminaison CDN dans le portail, sélectionnez **Filtrage géographique** sous PARAMÈTRES dans le menu de gauche. 
 
-![Filtrage géographique standard](./media/cdn-filtering/cdn-geo-filtering-standard.png)
+![Capture d’écran montrant l’option Filtrage géographique sélectionnée dans le menu d’un point de terminaison.](./media/cdn-filtering/cdn-geo-filtering-standard.png)
 
 Dans la zone **CHEMIN D’ACCÈS**, vous devez spécifier le chemin d’accès relatif à l’emplacement auquel les accès utilisateur sont autorisés ou refusés. 
 
@@ -67,7 +67,7 @@ Dans la liste **CODES DE PAYS**, sélectionnez les pays/régions pour lesquels v
 
 Une fois que vous avez fini de sélectionner les pays/régions, sélectionnez **Enregistrer** pour activer la nouvelle règle de filtrage géographique. 
 
-![Règles de filtrage géographique](./media/cdn-filtering/cdn-geo-filtering-rules.png)
+![Capture d’écran montrant les CODES DE PAYS à utiliser pour bloquer ou autoriser les pays ou les régions.](./media/cdn-filtering/cdn-geo-filtering-rules.png)
 
 ### <a name="clean-up-resources"></a>Nettoyer les ressources
 Pour supprimer une règle, sélectionnez-la dans la liste de la page **Filtrage géographique**, puis choisissez **Supprimer**.
@@ -79,7 +79,7 @@ Pour les profils **Azure CDN Premium de Verizon**, l’interface utilisateur de 
 
 2. À partir du portail Verizon, sélectionnez **HTTP Large**, puis sélectionnez **Filtrage par pays**.
 
-    ![Filtrage géographique standard](./media/cdn-filtering/cdn-geo-filtering-premium.png)
+    ![Capture d’écran montrant comment sélectionner l’option Filtrage par pays dans Azure CDN.](./media/cdn-filtering/cdn-geo-filtering-premium.png)
 
 3. Sélectionnez **Ajouter un filtre de pays**.
 
@@ -93,7 +93,7 @@ Pour les profils **Azure CDN Premium de Verizon**, l’interface utilisateur de 
     
     La nouvelle règle apparaît dans la table de la page **Filtrage par pays**.
 
-    ![Règles de filtrage géographique](./media/cdn-filtering/cdn-geo-filtering-premium-rules.png)
+    ![Capture d’écran montrant où la règle s’affiche dans Filtrage par pays.](./media/cdn-filtering/cdn-geo-filtering-premium-rules.png)
 
 ### <a name="clean-up-resources"></a>Nettoyer les ressources
 Dans la table de règles de filtrage par pays/région, sélectionnez l’icône de suppression en regard d’une règle pour la supprimer, ou l’icône de modification pour la modifier.

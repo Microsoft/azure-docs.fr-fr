@@ -7,12 +7,12 @@ ms.date: 02/25/2020
 ms.author: barbkess
 ms.reviewer: lcozzens
 ms.service: azure-app-configuration
-ms.openlocfilehash: 560a2df5946b9cfe1160864752595e86cc6eeb65
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.openlocfilehash: 270f8d471a95e67939a31357bc1cc056fe8ea4a1
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82981219"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92072796"
 ---
 # <a name="how-to-use-managed-identities-for-azure-app-configuration"></a>Découvrez comment utiliser des identités managées pour Azure App Configuration
 
@@ -33,7 +33,7 @@ Pour configurer une identité managée à l’aide d’Azure CLI, utilisez la co
 
 - Utiliser [Azure Cloud Shell](../cloud-shell/overview.md) à partir du portail Azure.
 - Utiliser le service incorporé Azure Cloud Shell via le bouton « Essayer », en haut à droite de chaque bloc de code ci-dessous.
-- [Installez la dernière version d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) (2.1 ou ultérieure) si vous préférez utiliser une console CLI locale.
+- [Installez la dernière version d’Azure CLI](/cli/azure/install-azure-cli) (2.1 ou ultérieure) si vous préférez utiliser une console CLI locale.
 
 Les étapes suivantes vous guident dans la création d’un magasin App Configuration et l’attribution à celui-ci d’une identité à l’aide de l’interface de ligne de commande CLI :
 
@@ -66,7 +66,7 @@ Pour configurer une identité managée à l’aide d’Azure CLI, utilisez la co
 
 - Utiliser [Azure Cloud Shell](../cloud-shell/overview.md) à partir du portail Azure.
 - Utiliser le service incorporé Azure Cloud Shell via le bouton « Essayer », en haut à droite de chaque bloc de code ci-dessous.
-- [Installez la dernière version d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) (2.0.31 ou ultérieure) si vous préférez utiliser une console CLI locale.
+- [Installez la dernière version d’Azure CLI](/cli/azure/install-azure-cli) (2.0.31 ou ultérieure) si vous préférez utiliser une console CLI locale.
 
 Les étapes suivantes vous guident dans la création d’une identité attribuée par l’utilisateur et d’un magasin App Configuration, puis l’attribution de l’identité au magasin à l’aide de l’interface CLI :
 

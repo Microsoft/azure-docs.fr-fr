@@ -5,14 +5,14 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/29/2019
-ms.openlocfilehash: aebb590d93b3fb26151f15c176a2941845cdd50c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e2826221bd9d15472467c4dd8676d3d0538e0d6
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75426499"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96326571"
 ---
 # <a name="use-reference-data-from-a-sql-database-for-an-azure-stream-analytics-job"></a>Utiliser les données de référence d’une base de données SQL pour une tâche Azure Stream Analytics
 
@@ -34,19 +34,19 @@ Utilisez les étapes suivantes pour ajouter une base de données Azure SQL comme
 
 1. Dans votre tâche Stream Analytics, sélectionnez **Entrées** sous **Topologie de la tâche**. Cliquez sur **Ajouter une entrée de référence** et choisissez **Base de données SQL**.
 
-   ![Entrée de la tâche Stream Analytics](./media/sql-reference-data/stream-analytics-inputs.png)
+   ![Les entrées sont sélectionnées dans le volet de navigation de gauche. Dans le volet Entrées, l’option Ajouter la référence est sélectionnée, révélant une liste déroulante qui affiche les valeurs Stockage Blob et SQL Database.](./media/sql-reference-data/stream-analytics-inputs.png)
 
 2. Renseignez les configurations d’entrée de Stream Analytics. Choisissez le nom de la base de données, le nom du serveur, le nom d’utilisateur et le mot de passe. Si vous souhaitez actualiser périodiquement votre entrée de données de référence, choisissez « Activé » pour spécifier la fréquence d’actualisation au format JJ:HH:MM. Si vous avez des jeux de données volumineux avec une fréquence de d’actualisation courte, vous pouvez utiliser une [requête delta](sql-reference-data.md#delta-query).
 
-   ![Configuration de la base de données SQL comme référence](./media/sql-reference-data/sql-input-config.png)
+   ![Lorsque SQL Database est sélectionné, la page Nouvelle entrée SQL Database s’affiche. Un formulaire de configuration apparaît dans le volet gauche, et une requête d’instantané s’affiche dans le volet droit.](./media/sql-reference-data/sql-input-config.png)
 
-3. Testez la requête d’instantané dans l’éditeur de requête SQL. Pour plus d’informations, consultez [Utiliser l’éditeur de requête SQL du portail Azure pour se connecter aux données et les interroger](../sql-database/sql-database-connect-query-portal.md).
+3. Testez la requête d’instantané dans l’éditeur de requête SQL. Pour plus d’informations, consultez [Utiliser l’éditeur de requête SQL du portail Azure pour se connecter aux données et les interroger](../azure-sql/database/connect-query-portal.md).
 
 ### <a name="specify-storage-account-in-job-config"></a>Spécifier le compte de stockage dans la configuration de la tâche
 
 Accédez à **Paramètres du compte de stockage** sous **Configurer**, puis sélectionnez **Ajouter un compte de stockage**.
 
-   ![Paramètres du compte de stockage Stream Analytics](./media/sql-reference-data/storage-account-settings.png)
+   ![Les paramètres du compte de stockage sont sélectionnés dans le volet gauche. Le volet droit contient un bouton Ajouter un compte de stockage.](./media/sql-reference-data/storage-account-settings.png)
 
 ### <a name="start-the-job"></a>Démarrage du travail
 
@@ -69,7 +69,7 @@ Suivez ces étapes pour ajouter Azure SQL Database comme source d’entrée de r
 
 ### <a name="create-a-sql-database-table"></a>Création d’une table de base de données SQL
 
-Utilisez SQL Server Management Studio pour créer une table dans laquelle stocker vos données de référence. Pour plus d’informations, consultez [Concevoir votre première base de données Azure SQL à l’aide de SSMS](../sql-database/sql-database-design-first-database.md).
+Utilisez SQL Server Management Studio pour créer une table dans laquelle stocker vos données de référence. Pour plus d’informations, consultez [Concevoir votre première base de données Azure SQL à l’aide de SSMS](../azure-sql/database/design-first-database-tutorial.md).
 
 L’exemple de table utilisé dans l’exemple suivant a été créé à partir de l’instruction suivante :
 
@@ -91,27 +91,27 @@ create table chemicals(Id Bigint,Name Nvarchar(max),FullName Nvarchar(max));
 
 3. Entrez les éléments **Nom**, **Emplacement** et **Nom de la solution** du projet, puis sélectionnez **OK**.
 
-   ![Nouveau projet Stream Analytics dans Visual Studio](./media/sql-reference-data/stream-analytics-vs-new-project.png)
+   ![Le modèle Stream Analytics est sélectionné, l’option Application Azure Stream Analytics est sélectionnée, et les zones Nom, Emplacement et Solution sont mises en surbrillance.](./media/sql-reference-data/stream-analytics-vs-new-project.png)
 
 ### <a name="define-sql-database-reference-data-input"></a>Définir la base de données SQL comme entrée de données de référence
 
 1. Créez une entrée.
 
-   ![Nouvelle entrée Stream Analytics dans Visual Studio](./media/sql-reference-data/stream-analytics-vs-input.png)
+   ![Dans Ajouter un nouvel élément, Entrée est sélectionnée.](./media/sql-reference-data/stream-analytics-vs-input.png)
 
 2. Double-cliquez sur **Input.json** dans l’**Explorateur de solutions**.
 
 3. Renseignez la **configuration d’entrée Stream Analytics**. Choisissez le nom de la base de données, le nom du serveur, le type d’actualisation et la fréquence d’actualisation. Spécifiez la fréquence d’actualisation au format `DD:HH:MM`.
 
-   ![Configuration d’entrée Stream Analytics dans Visual Studio](./media/sql-reference-data/stream-analytics-vs-input-config.png)
+   ![Dans Configuration de l’entrée Stream Analytics, les valeurs sont entrées ou sélectionnées dans des listes déroulantes.](./media/sql-reference-data/stream-analytics-vs-input-config.png)
 
    Si vous choisissez « Exécuter une seule fois » ou « Exécuter périodiquement », un fichier code-behind SQL nommé **[Alias d’entrée].snapshot.sql** est généré dans le projet sous le nœud de fichier **Input.json**.
 
-   ![Code-behind d’entrée dans Visual Studio](./media/sql-reference-data/once-or-periodically-codebehind.png)
+   ![Le fichier SQL CodeBehind Chemicals.snapshot.sql est mis en surbrillance.](./media/sql-reference-data/once-or-periodically-codebehind.png)
 
    Si vous choisissez « Actualiser régulièrement avec une requête delta », deux fichiers code-behind SQL sont générés : **[Alias d’entrée].snapshot.sql** et **[Alias d’entrée].delta.sql**.
 
-   ![Code-behind dans l’Explorateur de solutions](./media/sql-reference-data/periodically-delta-codebehind.png)
+   ![Les fichiers SQL CodeBehind Chemicals.delta.sql et Chemicals.snapshot.sql sont mis en surbrillance.](./media/sql-reference-data/periodically-delta-codebehind.png)
 
 4. Ouvrez le fichier SQL dans l’éditeur et écrivez la requête SQL.
 
@@ -121,7 +121,7 @@ create table chemicals(Id Bigint,Name Nvarchar(max),FullName Nvarchar(max));
 
 Ouvrez **JobConfig.json** pour spécifier le compte de stockage utilisé pour stocker les instantanés de référence SQL.
 
-   ![Configuration de la tâche Stream Analytics dans Visual Studio](./media/sql-reference-data/stream-analytics-job-config.png)
+   ![La fenêtre Configuration de la tâche Stream Analytics s’affiche avec les valeurs par défaut. Les paramètres de stockage globaux sont mis en surbrillance.](./media/sql-reference-data/stream-analytics-job-config.png)
 
 ### <a name="test-locally-and-deploy-to-azure"></a>Tester localement et déployer sur Azure
 
@@ -129,7 +129,7 @@ Avant de déployer la tâche sur Azure, vous pouvez tester la logique de la requ
 
 ## <a name="delta-query"></a>Requête delta
 
-Quand vous utilisez la requête delta, des [tables temporelles dans Azure SQL Database](../sql-database/sql-database-temporal-tables.md) sont recommandées.
+Quand vous utilisez la requête delta, des [tables temporelles dans Azure SQL Database](../azure-sql/temporal-tables.md) sont recommandées.
 
 1. Créer une table temporelle dans la base de données Azure SQL Database.
    
@@ -156,16 +156,16 @@ Quand vous utilisez la requête delta, des [tables temporelles dans Azure SQL Da
  
 2. Créez la requête delta. 
    
-   Cette requête récupère toutes les lignes dans votre base de données SQL qui ont été insérées ou supprimées entre l’heure de début **\@deltaStartTime** et l’heure de fin **\@deltaEndTime**. La requête delta doit retourner les mêmes colonnes que la requête d’instantané, ainsi que l’opération ( **_operation_** ) de la colonne. Cette colonne définit si la ligne est insérée ou supprimée entre **\@deltaStartTime** et **\@deltaEndTime**. Les lignes obtenues sont marquées avec le chiffre **1** si les enregistrements ont été insérés ou avec le chiffre **2** s’ils ont été supprimés. 
+   Cette requête récupère toutes les lignes dans la base de données SQL qui ont été insérées ou supprimées entre l’heure de début **\@deltaStartTime** et l’heure de fin **\@deltaEndTime**. La requête delta doit retourner les mêmes colonnes que la requête d’instantané, ainsi que l’opération (**_operation_**) de la colonne. Cette colonne définit si la ligne est insérée ou supprimée entre **\@deltaStartTime** et **\@deltaEndTime**. Les lignes obtenues sont marquées avec le chiffre **1** si les enregistrements ont été insérés ou avec le chiffre **2** s’ils ont été supprimés. La requête doit également ajouter un **filigrane** du côté SQL Server pour s’assurer que toutes les mises à jour de la période delta sont correctement capturées. L’utilisation de la requête delta sans **filigrane** peut produire un jeu de données de référence incorrect.  
 
    Pour les enregistrements qui ont été mis à jour, la table temporelle se charge de la comptabilité en capturant une opération d’insertion et de suppression. Le runtime Stream Analytics applique ensuite les résultats de la requête delta à l’instantané précédent pour conserver les données de référence à jour. Un exemple de requête delta est présenté ci-dessous :
 
    ```SQL
-      SELECT DeviceId, GroupDeviceId, Description, 1 as _operation_
+      SELECT DeviceId, GroupDeviceId, Description, ValidFrom as _watermark_, 1 as _operation_
       FROM dbo.DeviceTemporal
       WHERE ValidFrom BETWEEN @deltaStartTime AND @deltaEndTime   -- records inserted
       UNION
-      SELECT DeviceId, GroupDeviceId, Description, 2 as _operation_
+      SELECT DeviceId, GroupDeviceId, Description, ValidTo as _watermark_, 2 as _operation_
       FROM dbo.DeviceHistory   -- table we created in step 1
       WHERE ValidTo BETWEEN @deltaStartTime AND @deltaEndTime     -- record deleted
    ```
@@ -173,7 +173,36 @@ Quand vous utilisez la requête delta, des [tables temporelles dans Azure SQL Da
    Notez que le runtime Stream Analytics peut exécuter périodiquement la requête d’instantané en plus de la requête delta pour stocker des points de contrôle.
 
 ## <a name="test-your-query"></a>Tester votre requête
-   Il est important de vérifier que votre requête renvoie le jeu de données attendu, que le travail Stream Analytics utilisera comme information de référence. Pour tester votre requête, accédez à la zone Entrée, dans la section Topologie de la tâche sur le portail. Vous pouvez ensuite sélectionner des échantillons de données sur votre entrée de référence Microsoft Azure SQL Database. Lorsque l’échantillon est disponible, vous pouvez télécharger le fichier et vérifier que les données renvoyées correspondent aux attentes. Si vous souhaitez optimiser vos itérations de test et de développement, il est recommandé d’utiliser les [outils Azure Steam Analytics pour Visual Studio](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-tools-for-visual-studio-install). Vous pouvez également utiliser l’outil de votre choix pour vérifier au préalable que la requête renvoie les bons résultats de Microsoft Azure SQL Database, puis l’utiliser dans votre travail Steam Analytics. 
+   Il est important de vérifier que votre requête renvoie le jeu de données attendu, que le travail Stream Analytics utilisera comme information de référence. Pour tester votre requête, accédez à la zone Entrée, dans la section Topologie de la tâche sur le portail. Vous pouvez ensuite sélectionner des échantillons de données sur votre entrée de référence Microsoft Azure SQL Database. Lorsque l’échantillon est disponible, vous pouvez télécharger le fichier et vérifier que les données renvoyées correspondent aux attentes. Si vous souhaitez optimiser vos itérations de test et de développement, il est recommandé d’utiliser les [outils Azure Steam Analytics pour Visual Studio](./stream-analytics-tools-for-visual-studio-install.md). Vous pouvez également utiliser l’outil de votre choix pour vérifier au préalable que la requête renvoie les bons résultats de Microsoft Azure SQL Database, puis l’utiliser dans votre travail Steam Analytics. 
+
+### <a name="test-your-query-with-visual-studio-code"></a>Tester votre requête avec Visual Studio Code
+
+   Installez [Azure Stream Analytics Tools](https://marketplace.visualstudio.com/items?itemName=ms-bigdatatools.vscode-asa) et [SQL Server (mssql)](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) sur Visual Studio Code et configurez votre projet ASA. Pour plus d’informations, consultez [Démarrage rapide : Créer une tâche Azure Stream Analytics dans Visual Studio Code](./quick-create-visual-studio-code.md) et le [tutoriel sur l’extension SQL Server (mssql)](/sql/tools/visual-studio-code/sql-server-develop-use-vscode).
+
+1. Configurez votre entrée de données de référence SQL.
+   
+   ![Un éditeur Visual Studio Code (onglet) affiche ReferenceSQLDatabase.json.](./media/sql-reference-data/configure-sql-reference-data-input.png)
+
+2. Sélectionnez l’icône SQL Server, puis cliquez sur **Ajouter une connexion**.
+   
+   ![L’option Ajouter une connexion apparaît dans le volet gauche et est mise en surbrillance.](./media/sql-reference-data/add-sql-connection.png)
+
+3. Renseignez les informations de connexion.
+   
+   ![Les deux zones pour les informations de base de données et de serveur sont mises en surbrillance.](./media/sql-reference-data/fill-connection-information.png)
+
+4. Cliquez avec le bouton droit dans les données de référence SQL, puis sélectionnez **Exécuter la requête**.
+   
+   ![L’option Exécuter la requête est mise en surbrillance dans le menu contextuel.](./media/sql-reference-data/execute-query.png)
+
+5. Choisissez votre connexion.
+   
+   ![La boîte de dialogue indique « Create a connection profile from the list below » (créer un profil de connexion dans la liste ci-dessous), et la liste comporte une entrée mise en surbrillance.](./media/sql-reference-data/choose-connection.png)
+
+6. Examinez et vérifiez le résultat de votre requête.
+   
+   ![Les résultats de la recherche de requête s’affichent dans un onglet de l’éditeur VS Code.](./media/sql-reference-data/verify-result.png)
+
 
 ## <a name="faqs"></a>FAQ
 

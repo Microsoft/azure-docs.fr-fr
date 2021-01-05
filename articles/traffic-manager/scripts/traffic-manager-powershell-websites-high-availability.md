@@ -3,7 +3,7 @@ title: Acheminer le trafic pour la haute disponibilité des applications – Azu
 description: Exemple de script Azure PowerShell - Acheminer le trafic pour la haute disponibilité des applications
 services: traffic-manager
 documentationcenter: traffic-manager
-author: rohinkoul
+author: duongau
 manager: kumudD
 editor: ''
 tags: azure-infrastructure
@@ -14,13 +14,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: traffic-manager
 ms.date: 04/26/2018
-ms.author: rohink
-ms.openlocfilehash: 3f448683dbb210ab196e27cfd98a376429d03aec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: a8547a681d3b2b1cfb01750c4898b45f10d18d57
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76934732"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89400209"
 ---
 # <a name="route-traffic-for-high-availability-of-applications-using-azure-powershell"></a>Acheminer le trafic pour la haute disponibilité des applications à l’aide d’Azure PowerShell
 
@@ -60,6 +60,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
 
 Vous pouvez trouver des exemples supplémentaires de scripts PowerShell de mise en réseau dans la [documentation Vue d’ensemble de la mise en réseau Azure](../powershell-samples.md?toc=%2fazure%2fnetworking%2ftoc.json).

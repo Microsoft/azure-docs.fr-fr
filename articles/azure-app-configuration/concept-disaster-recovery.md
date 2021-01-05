@@ -1,17 +1,17 @@
 ---
 title: Résilience et récupération d'urgence Azure App Configuration
 description: Découvrez comment implémenter la résilience et la récupération d'urgence avec Azure App Configuration.
-author: lisaguthrie
-ms.author: lcozzens
+author: AlexandraKemperMS
+ms.author: alkemper
 ms.service: azure-app-configuration
 ms.topic: conceptual
-ms.date: 02/20/2020
-ms.openlocfilehash: 96ef09ac081aa328014217592a7fcd3ed6314c0e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/09/2020
+ms.openlocfilehash: 7910e2092259081aade799fc662052e5a1375e25
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77523762"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930481"
 ---
 # <a name="resiliency-and-disaster-recovery"></a>Résilience et reprise d’activité après sinistre
 
@@ -64,7 +64,11 @@ Notez que le paramètre `optional` est passé dans la fonction `AddAzureAppConfi
 
 ## <a name="synchronization-between-configuration-stores"></a>Synchronisation entre les magasins de configuration
 
-Il est important que vos magasins de configuration géoredondants disposent tous du même jeu de données. Vous pouvez utiliser la fonction **Export** d’App Configuration pour copier des données à la demande du magasin principal vers le magasin secondaire. Cette fonction est disponible via le portail Azure et l’interface CLI.
+Il est important que vos magasins de configuration géoredondants disposent tous du même jeu de données. Il existe deux moyens de parvenir à cet objectif :
+
+### <a name="backup-manually-using-the-export-function"></a>Sauvegarde manuelle à l’aide de la fonction d’exportation
+
+Vous pouvez utiliser la fonction **Export** d’App Configuration pour copier des données à la demande du magasin principal vers le magasin secondaire. Cette fonction est disponible via le portail Azure et l’interface CLI.
 
 Dans le portail Azure, vous pouvez envoyer (push) une modification vers un autre magasin de configuration en suivant ces étapes.
 
@@ -72,15 +76,19 @@ Dans le portail Azure, vous pouvez envoyer (push) une modification vers un autre
 
 1. Dans le nouveau panneau qui s’ouvre, spécifiez l’abonnement, le groupe de ressources et le nom de la ressource de votre magasin secondaire, puis cliquez sur **Appliquer**.
 
-1. L’interface utilisateur est mise à jour pour vous permettre de choisir les données de configuration à exporter vers votre magasin secondaire. Vous pouvez conserver la valeur de temps par défaut et définir les deux options **Étiquette d’expédition** et **Étiquette de destination** sur la même valeur. Sélectionnez **Appliquer**.
+1. L’interface utilisateur est mise à jour pour vous permettre de choisir les données de configuration à exporter vers votre magasin secondaire. Vous pouvez conserver la valeur de temps par défaut et définir les deux options **Étiquette d’expédition** et **Étiquette** sur la même valeur. Sélectionnez **Appliquer**. Répétez cette opération pour toutes les étiquettes de votre magasin principal.
 
-1. Répétez les étapes précédentes pour toutes les modifications de configuration.
+1. Répétez les étapes précédentes chaque fois que votre configuration change.
 
-Pour automatiser ce processus d’exportation, utilisez Azure CLI. La commande suivante montre comment exporter une modification de configuration du magasin principal vers le magasin secondaire :
+Le processus d’exportation peut également être effectué à l’aide de l’interface de ligne de commande Azure. La commande suivante montre comment exporter toutes les configurations du magasin principal vers le magasin secondaire :
 
 ```azurecli
-    az appconfig kv export --destination appconfig --name {PrimaryStore} --label {Label} --dest-name {SecondaryStore} --dest-label {Label}
+    az appconfig kv export --destination appconfig --name {PrimaryStore} --dest-name {SecondaryStore} --label * --preserve-labels -y
 ```
+
+### <a name="backup-automatically-using-azure-functions"></a>Sauvegarde automatique avec Azure Functions
+
+Le processus de sauvegarde peut être automatisé avec Azure Functions. Ce processus tire parti de l’intégration à Azure Event Grid dans App Configuration. Une fois configuré, App Configuration publie des événements sur Event Grid pour toute modification apportée aux valeurs de clés dans un magasin de configuration. Ainsi, une application Azure Functions peut écouter ces événements et sauvegarder les données en conséquence. Pour plus d’informations, consultez le tutoriel [Guide pratique pour sauvegarder automatiquement des magasins App Configuration](./howto-backup-config-store.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

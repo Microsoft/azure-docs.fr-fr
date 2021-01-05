@@ -6,16 +6,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/13/2018
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 56cbeb8e8fe21f4b39c2f5c6af43e83ae330e5d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6bd93f9062f8446ce20436a7a04e2054aaf5be71
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78189971"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85386129"
 ---
 # <a name="enable-age-gating-in-azure-active-directory-b2c"></a>Activer la vérification de l'âge dans Azure Active Directory B2C
 

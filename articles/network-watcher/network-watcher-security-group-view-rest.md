@@ -1,23 +1,23 @@
 ---
 title: Analyser la sécurité réseau - Vue Groupe de sécurité - API REST Azure
 titleSuffix: Azure Network Watcher
-description: Cet article décrit comment utiliser PowerShell pour analyser la sécurité des machines virtuelles par le biais de la vue Groupe de sécurité.
+description: Cet article décrit comment utiliser l’API REST Azure pour analyser la sécurité des machines virtuelles par le biais de la vue Groupe de sécurité.
 services: network-watcher
 documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: c9c76e9c06d4c45a096cff79dac82bb80ebe25d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2efd3e9c9ca97ea3d94b03bd5e440cd24d5da5da
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840738"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94960578"
 ---
 # <a name="analyze-your-virtual-machine-security-with-security-group-view-using-rest-api"></a>Analyser la sécurité de votre machine virtuelle par le biais de la vue Groupe de sécurité dans l’API REST
 
@@ -25,6 +25,9 @@ ms.locfileid: "76840738"
 > - [PowerShell](network-watcher-security-group-view-powershell.md)
 > - [Azure CLI](network-watcher-security-group-view-cli.md)
 > - [REST API](network-watcher-security-group-view-rest.md)
+
+> [!NOTE]
+> L’API d’affichage des groupes de sécurité n’est plus entretenue et sera bientôt déconseillée. Utilisez la [fonction Règles de sécurité en vigueur](./network-watcher-security-group-view-overview.md), qui offre les mêmes fonctionnalités. 
 
 La vue Groupe de sécurité renvoie des règles de sécurité de réseau configurées et efficaces, appliquées à une machine virtuelle. Cette fonctionnalité permet d’auditer et de diagnostiquer les groupes de sécurité réseau ainsi que les règles configurées sur une machine virtuelle afin de garantir l’autorisation ou le refus appropriés du trafic. Dans cet article, nous vous montrons comment récupérer des règles de sécurité efficaces et appliquées à une machine virtuelle à l’aide de l’API REST
 
@@ -183,5 +186,3 @@ L’exemple suivant est la réponse renvoyée par la commande précédente. Les 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Consultez la page [Auditing Network Security Groups (NSG) with Network Watcher (Audit des groupes de sécurité réseau avec Network Watcher)](network-watcher-security-group-view-powershell.md) pour découvrir comment automatiser la validation des groupes de sécurité réseau.
-
-

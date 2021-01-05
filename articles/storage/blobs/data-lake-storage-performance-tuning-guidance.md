@@ -1,19 +1,19 @@
 ---
 title: Optimiser Azure Data Lake Storage Gen2 pour les performances | Microsoft Docs
-description: Conseils de réglage des performances d’Azure Data Lake Storage Gen2
+description: Découvrez comment optimiser les performances d’Azure Data Lake Storage Gen2. Ingérez des données, structurez votre jeu de données, et bien plus encore.
 author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/18/2019
 ms.author: normesta
 ms.reviewer: stewu
-ms.openlocfilehash: f1a16228b72d7e0f45048669ade94a0c78d9ac52
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2011fa8e85f10f12ae914b02710bbd65f5700403
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74327940"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913043"
 ---
 # <a name="optimize-azure-data-lake-storage-gen2-for-performance"></a>Optimiser Azure Data Lake Storage Gen2 pour les performances
 
@@ -27,7 +27,7 @@ Data Lake Storage Gen2 peut être mis à l’échelle afin de fournir le débit 
 
 Lors de l’ingestion de données à partir d’un système source dans Data Lake Storage Gen2, vous devez impérativement tenir compte du fait que le matériel source, le matériel réseau source et la connectivité réseau à Data Lake Storage Gen2 peuvent agir comme goulot d’étranglement.  
 
-![Performances de Data Lake Storage Gen2](./media/data-lake-storage-performance-tuning-guidance/bottleneck.png)
+![Diagramme montrant les facteurs à prendre en compte lors de l’ingestion de données d’un système source dans Data Lake Storage Gen2.](./media/data-lake-storage-performance-tuning-guidance/bottleneck.png)
 
 Vous devez impérativement vous assurer que le déplacement des données n’est pas affecté par ces facteurs.
 
@@ -47,7 +47,7 @@ Après avoir traité les goulots d’étranglement du matériel source et de la 
 |--------------------|------------------------------------------------------|------------------------------|
 | DistCp            | -m (mappeur)   | [Lien](data-lake-storage-use-distcp.md#performance-considerations-while-using-distcp)                             |
 | Azure Data Factory| parallelCopies    | [Lien](../../data-factory/copy-activity-performance.md)                          |
-| Sqoop           | fs.azure.block.size, -m (mappeur)    |   [Lien](https://blogs.msdn.microsoft.com/bigdatasupport/2015/02/17/sqoop-job-performance-tuning-in-hdinsight-hadoop/)        |
+| Sqoop           | fs.azure.block.size, -m (mappeur)    |   [Lien](/archive/blogs/shanyu/performance-tuning-for-hdinsight-storm-and-microsoft-azure-eventhubs)        |
 
 ## <a name="structure-your-data-set"></a>Structure de votre jeu de données
 
@@ -57,7 +57,7 @@ Quand les données sont stockées dans Data Lake Storage Gen2, la taille du fich
 
 En règle générale, les moteurs d’analytique comme HDInsight et Azure Data Lake Analytics affichent une surcharge par fichier. Si vous stockez vos données sous forme de petits fichiers nombreux, cela peut nuire aux performances. De manière générale, organisez vos données dans de grands fichiers pour des performances optimales (taille allant de 256 Mo à 100 Go). Certains moteurs et applications peuvent avoir des difficultés à traiter efficacement les fichiers supérieurs à 100 Go.
 
-Parfois, les pipelines de données ont un contrôle limité sur les données brutes qui possèdent un grand nombre de petits fichiers. Il est recommandé de faire appel à un processus de préparation pour générer les fichiers de grande taille à utiliser pour les applications en aval.
+Parfois, les pipelines de données ont un contrôle limité sur les données brutes qui possèdent un grand nombre de petits fichiers. En général, nous recommandons que votre système dispose d’une sorte de processus permettant d’agréger des fichiers de petite taille en fichiers plus volumineux pour les utiliser dans des applications en aval.
 
 ### <a name="organizing-time-series-data-in-folders"></a>Organisation des données de série chronologique dans des dossiers
 
@@ -65,13 +65,13 @@ Pour les charges de travail Hive, le nettoyage de partition de données de séri
 
 Ces pipelines d’ingestion des données de série chronologique, organisent souvent leurs fichiers selon une structure d’appellation très structurée pour les fichiers et les dossiers. Découvrez ci-après un exemple très courant de données structurées par date :
 
-    \DataSet\YYYY\MM\DD\datafile_YYYY_MM_DD.tsv
+*\DataSet\YYYY\MM\DD\datafile_YYYY_MM_DD.tsv*
 
 Notez que les informations de date / heure s’affichent à la fois en tant que dossiers et dans le nom de fichier.
 
 Pour la date et l’heure, le modèle suivant est récurrent.
 
-    \DataSet\YYYY\MM\DD\HH\mm\datafile_YYYY_MM_DD_HH_mm.tsv
+*\DataSet\YYYY\MM\DD\HH\mm\datafile_YYYY_MM_DD_HH_mm.tsv*
 
 Là encore, le type d’organisation des dossiers et fichiers sélectionné doit optimiser les plus gros fichiers et un nombre raisonnable de fichiers par dossier.
 
@@ -107,7 +107,7 @@ Il existe trois couches au sein d’un cluster HDInsight qui peuvent être ajust
 
 **Exécutez le cluster avec le plus de nœuds et/ou les plus grosses machines virtuelles.**  Un plus grand cluster permet d’exécuter plus de conteneurs YARN, comme le montre l’image ci-dessous.
 
-![Performances de Data Lake Storage Gen2](./media/data-lake-storage-performance-tuning-guidance/VM.png)
+![Diagramme illustrant la façon dont un cluster de plus grande taille vous permet d’exécuter davantage de conteneurs YARN.](./media/data-lake-storage-performance-tuning-guidance/VM.png)
 
 **Utilisez des machines virtuelles avec davantage de bande passante réseau.**  La quantité de bande passante réseau peut être un goulot d’étranglement si elle moins importante que le débit de Data Lake Storage Gen2.  La taille de la bande passante réseau varie en fonction des machines virtuelles.  Choisissez un type de machine virtuelle qui possède la plus grande bande passante possible.
 
@@ -115,7 +115,7 @@ Il existe trois couches au sein d’un cluster HDInsight qui peuvent être ajust
 
 **Utilisez des conteneurs YARN plus petits.**  Réduisez la taille de chaque conteneur YARN pour créer plusieurs conteneurs avec la même quantité de ressources.
 
-![Performances de Data Lake Storage Gen2](./media/data-lake-storage-performance-tuning-guidance/small-containers.png)
+![Diagramme montrant le résultat de la réduction de la taille de chaque conteneur YARN pour créer d’autres conteneurs.](./media/data-lake-storage-performance-tuning-guidance/small-containers.png)
 
 En fonction de votre charge de travail, il y aura toujours une taille de conteneur YARN minimale requise. Si vous sélectionnez un conteneur trop petit, vos tâches rencontreront des problèmes de mémoire insuffisante. En général, les conteneurs YARN ne doivent pas être inférieurs à 1 Go. Les conteneurs YARN de 3 Go sont courants. Pour certaines charges de travail, des conteneurs YARN plus grands peuvent être nécessaires.  
 
@@ -125,7 +125,7 @@ En fonction de votre charge de travail, il y aura toujours une taille de contene
 
 **Utilisez tous les conteneurs disponibles.**  Définissez le nombre de tâches de manière à ce qu’il soit égal ou supérieur au nombre de conteneurs disponibles. Ainsi, toutes les ressources sont utilisées.
 
-![Performances de Data Lake Storage Gen2](./media/data-lake-storage-performance-tuning-guidance/use-containers.png)
+![Diagramme montrant l’utilisation de tous les conteneurs.](./media/data-lake-storage-performance-tuning-guidance/use-containers.png)
 
 **L’échec des tâches est coûteux.** Si chaque tâche doit traiter une grande quantité de données, l’échec d’une tâche entraîne une nouvelle tentative coûteuse.  Par conséquent, il est préférable de créer davantage de tâches, chacune d’elle traitant une petite quantité de données.
 

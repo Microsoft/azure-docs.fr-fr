@@ -7,17 +7,18 @@ author: KumudD
 manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/18/2020
+ms.date: 12/01/2020
 ms.author: mnayak
-ms.openlocfilehash: 59583d6d9e643c7b3f4c86198da04bde6b2db324
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: ccd04a43e6781e8d58234cc382b2739d800e5fe7
+ms.sourcegitcommit: df66dff4e34a0b7780cba503bb141d6b72335a96
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83595758"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96510673"
 ---
 # <a name="configure-routing-preference-for-a-vm-using-azure-cli"></a>Configurer la préférence de routage pour une machine virtuelle à l’aide d’Azure CLI
 
@@ -29,11 +30,6 @@ Cet article explique comment créer une machine virtuelle avec une adresse IP pu
 > La préférence de routage est actuellement en préversion publique.
 > Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-## <a name="register-the-feature-for-your-subscription"></a>Inscrire la fonctionnalité pour votre abonnement
-La fonctionnalité de préférence de routage est actuellement en préversion. Inscrivez la fonctionnalité pour votre abonnement comme suit :
-```azurecli
-az feature register --namespace Microsoft.Network --name AllowRoutingPreferenceFeature
-```
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 1. Si vous utilisez Cloud Shell, passez à l’étape 2. Ouvrez une session de commande et connectez-vous à Azure avec `az login`.
 2. Créez un groupe de ressources avec la commande [az group create](/cli/azure/group#az-group-create). L’exemple suivant crée un groupe de ressources dans la région Azure USA Est :

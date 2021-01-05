@@ -3,20 +3,24 @@ title: Créer une machine virtuelle Windows à partir d’un modèle dans Azure
 description: Utilisez un modèle Resource Manager et PowerShell pour créer facilement une machine virtuelle Windows.
 author: cynthn
 ms.service: virtual-machines-windows
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/22/2019
 ms.author: cynthn
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: cafe28be1d7c08c24b728de2476cb2210c6e5bd0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ddd8166dd29d2210fecdd72d5be446df47a6c5df
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82098320"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89072296"
 ---
 # <a name="create-a-windows-virtual-machine-from-a-resource-manager-template"></a>Créer une machine virtuelle Windows à partir d’un modèle Resource Manager
 
 Découvrez comment créer une machine virtuelle Windows en utilisant un modèle Azure Resource Manager et Azure PowerShell à partir d’Azure Cloud Shell. Le modèle utilisé dans cet article déploie une machine virtuelle unique exécutant Windows Server dans un nouveau réseau virtuel constitué d’un seul sous-réseau. Pour créer une machine virtuelle Linux, consultez [Guide pratique pour créer une machine virtuelle Linux avec des modèles Azure Resource Manager](../linux/create-ssh-secured-vm-from-template.md).
+
+Une alternative consiste à déployer le modèle à partir du portail Azure. Pour ouvrir le modèle dans le portail, sélectionnez le bouton **Déployer sur Azure**.
+
+[![Déployer sur Azure](../../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-vm-simple-windows%2Fazuredeploy.json)
 
 ## <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
 
@@ -56,7 +60,7 @@ Dans l’exemple précédent, vous avez spécifié un modèle stocké dans GitHu
 
 Voici quelques ressources supplémentaires :
 
-- Pour savoir comment développer des modèles Resource Manager, consultez la [documentation Azure Resource Manager](/azure/azure-resource-manager/).
+- Pour savoir comment développer des modèles Resource Manager, consultez la [documentation Azure Resource Manager](../../azure-resource-manager/index.yml).
 - Pour examiner les schémas des machines virtuelles Azure, consultez [Informations de référence sur les modèles Azure](/azure/templates/microsoft.compute/allversions).
 - Pour accéder à d'autres exemples de modèles de machine virtuelle, consultez [Modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Compute&pageNumber=1&sort=Popular).
 
@@ -66,7 +70,7 @@ La dernière commande PowerShell du script précédent affiche le nom de la mach
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Si vous rencontrez des problèmes lors du déploiement, nous vous conseillons de consulter la rubrique [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](../../resource-manager-common-deployment-errors.md).
+- Si vous rencontrez des problèmes lors du déploiement, nous vous conseillons de consulter la rubrique [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](../../azure-resource-manager/templates/common-deployment-errors.md).
 - Découvrez comment créer et gérer une machine virtuelle dans la rubrique [Créer et gérer des machines virtuelles Windows avec le module Azure PowerShell](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 Pour en savoir plus sur la création de modèles, consultez la syntaxe et les propriétés JSON des types de ressource que vous avez déployés :

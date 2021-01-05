@@ -2,15 +2,16 @@
 title: 'Démarrage rapide : Générer des images conteneurs Java et les envoyer (push) à Azure Container Registry à l’aide de Maven et Jib'
 description: Générez une application Java conteneurisée et envoyez-la à Azure Container Registry à l’aide du plug-in Maven Jib.
 author: KarlErickson
+ms.custom: devx-track-java, devx-track-azurecli
 ms.author: karler
 ms.topic: quickstart
 ms.date: 02/26/2020
-ms.openlocfilehash: 561c45bd13648f5f17273b478f320e9fd3d71331
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: 9e400ee0bae2690a84f9cfd3f6a76359e08eabc2
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82857598"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92018336"
 ---
 # <a name="quickstart-build-and-push-java-container-images-to-azure-container-registry"></a>Démarrage rapide : Générer des images conteneurs Java et les envoyer (push) à Azure Container Registry
 
@@ -176,5 +177,5 @@ Pour plus d’informations, consultez les ressources suivantes :
 * [Utilisation d’Azure DevOps et Java](/azure/devops/java)
 * [Spring Boot on Docker Getting Started](https://spring.io/guides/gs/spring-boot-docker)
 * [Spring Initializr](https://start.spring.io)
-* [Déployer une application Spring Boot sur Azure App Service](/azure/developer/java/spring-framework/deploy-spring-boot-java-app-from-container-registry-using-maven-plugin)
-* [Comment utiliser une image Docker personnalisée pour Azure Web App sur Linux](/azure/app-service-web/app-service-linux-using-custom-docker-image)
+* [Déployer une application Spring Boot sur Azure App Service](/azure/developer/java/spring-framework/deploy-spring-boot-java-app-on-linux#configure-maven-to-build-image-to-your-azure-container-registry)
+* [Comment utiliser une image Docker personnalisée pour Azure Web App sur Linux](../app-service/tutorial-custom-container.md)

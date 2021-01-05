@@ -14,11 +14,11 @@ ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
 ms.openlocfilehash: c3b6123c63bf530463379a175745ef86baf2c5a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226553"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84689985"
 ---
 # <a name="azure-api-management-template-resources"></a>Ressources du modèle Gestion des API Azure
 La Gestion des API Azure fournit les types de ressources suivants, utilisables dans les modèles du portail des développeurs.  

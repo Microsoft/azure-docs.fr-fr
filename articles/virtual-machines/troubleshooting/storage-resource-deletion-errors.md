@@ -1,6 +1,6 @@
 ---
 title: Résoudre les erreurs de suppression de ressources de stockage sur des machines virtuelles Linux dans Azure| Microsoft Docs
-description: Comment résoudre les problèmes lors de la suppression de ressources de stockage contenant des VHD attachés.
+description: Découvrez comment résoudre les problèmes rencontrés sur les machines virtuelles Linux lors de la suppression de ressources de stockage auxquelles sont attachés des VHD.
 keywords: ''
 services: virtual-machines
 author: genlin
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: vm-linux
 ms.topic: troubleshooting
 ms.date: 11/01/2018
 ms.author: genli
-ms.openlocfilehash: 50ab4b0f1e676ffcba0ce69ab6aa957e4c77ab88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8d727bc8bdc8f015504baa57f9596b3bacac9712
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71058154"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022868"
 ---
 # <a name="troubleshoot-storage-resource-deletion-errors"></a>Résoudre les erreurs de suppression de ressources de stockage
 
@@ -28,14 +28,14 @@ Dans certains scénarios, vous pouvez rencontrer l’une des erreurs suivantes l
 > 
 > **Impossible de supprimer # sur # objets blob :<br>BlobName.vhd : Il existe actuellement un bail sur l’objet blob et aucun ID de bail n’a été spécifié dans la demande.**
 
-Les VHD utilisés dans des machines virtuelles Azure sont des fichiers .vhd stockés comme objets blob de pages dans un compte de stockage Standard ou Premium dans Azure. Pour plus d'informations sur les disques Azure, consultez [Présentation des disques managés](../linux/managed-disks-overview.md).
+Les VHD utilisés dans des machines virtuelles Azure sont des fichiers .vhd stockés comme objets blob de pages dans un compte de stockage Standard ou Premium dans Azure. Pour plus d'informations sur les disques Azure, consultez [Présentation des disques managés](../managed-disks-overview.md).
 
 Azure empêche la suppression d’un disque qui est joint à une machine virtuelle pour éviter une altération des données. Il empêche également la suppression de conteneurs et de comptes de stockage qui ont un objet blob de pages joint à une machine virtuelle. 
 
 Le processus de suppression d’un compte de stockage, d’un conteneur ou d’un blob lorsque vous recevez l’une de ces erreurs est le suivant : 
 1. Identifier les objets blob joints à une machine virtuelle
 2. [Supprimer les machines virtuelles avec un **disque de système d’exploitation** joint](#step-2-delete-vm-to-detach-os-disk)
-3. [Détacher tous les**disques de données** des autres machines virtuelles](#step-3-detach-data-disk-from-the-vm)
+3. [Détacher tous les **disques de données** des autres machines virtuelles](#step-3-detach-data-disk-from-the-vm)
 
 Effectuez une nouvelle tentative de suppression du compte de stockage, du conteneur ou du blob après avoir terminé ces étapes.
 
@@ -95,7 +95,7 @@ Si le disque dur virtuel est un disque de données, détachez le disque dur virt
 7. Sélectionnez **Modifier** en haut du volet **Disques**.
 8. Cliquez sur **l’icône Détacher** du disque de données à supprimer.
 
-     ![Capture d’écran du portail, avec le volet « Métadonnées d’objet Blob » de stockage ouvert](./media/troubleshoot-vhds/utd-vm-disks-edit.png)
+     ![Capture d’écran du portail, avec le volet « Métadonnées d’objet blob » ouvert et l’icône Détacher mise en évidence pour le disque de données à supprimer.](./media/troubleshoot-vhds/utd-vm-disks-edit.png)
 
 9. Sélectionnez **Enregistrer**. Le disque est désormais détaché de la machine virtuelle, et le VHD n’est plus alloué. La publication du bail peut nécessiter quelques minutes. Pour vérifier que le bail a été résilié, accédez à l’emplacement du blob et dans le volet **Propriétés de l’objet blob**, le paramètre **État du bail** doit être défini sur **Déverrouillé** ou **Disponible**.
 

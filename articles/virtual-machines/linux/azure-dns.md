@@ -3,15 +3,15 @@ title: Options de résolution de noms DNS pour les machines virtuelles Linux
 description: Scénarios de résolution de noms pour les machines virtuelles Linux dans Azure IaaS, notamment les services DNS fournis, le DNS externe hybride et l’apport de son propre serveur DNS.
 author: RicksterCDN
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: conceptual
 ms.date: 10/19/2016
 ms.author: rclaus
-ms.openlocfilehash: 0910b31685aa408c319b40ea23782b11724b6237
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: aa007888c68df41242f937e1062a90ec1b7fc3ce
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81641727"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87372822"
 ---
 # <a name="dns-name-resolution-options-for-linux-virtual-machines-in-azure"></a>Options de résolution de noms DNS pour les machines virtuelles Linux dans Azure
 Azure fournit une résolution des noms DNS par défaut pour toutes les machines virtuelles d’un même réseau virtuel. Vous pouvez implémenter votre propre solution de résolution de noms DNS en configurant vos propres services DNS sur vos machines virtuelles hébergées sur Azure. Les scénarios suivants vous aideront à choisir la solution qui fonctionne dans votre situation.
@@ -92,7 +92,9 @@ DNS est principalement un protocole UDP. Comme le protocole UDP ne garantit pas 
 
 Pour vérifier les paramètres actuels sur une machine virtuelle Linux, exécutez la commande « cat /etc/resolv.conf » et regardez la ligne « options », par exemple :
 
-    options timeout:1 attempts:5
+```config-conf
+options timeout:1 attempts:5
+```
 
 Le fichier resolv.conf est généré automatiquement et ne doit pas être modifié. Les étapes spécifiques pour l’ajout de la ligne « options » varient selon la distribution :
 
@@ -119,7 +121,7 @@ Le transfert DNS permet aussi la résolution DNS entre des réseaux virtuels et 
 
 Quand vous utilisez la résolution de noms fournie par Azure, le suffixe DNS interne est fourni à chaque machine virtuelle via DHCP. Quand vous utilisez votre propre solution de résolution de noms, ce suffixe n’est pas fourni aux machines virtuelles, car il interfère avec d’autres architectures DNS. Pour référencer des machines par le nom de domaine complet ou pour configurer le suffixe sur vos machines virtuelles, vous pouvez utiliser PowerShell ou l’API pour déterminer le suffixe :
 
-* Pour les réseaux virtuels gérés par Azure Resource Manager, le suffixe est disponible via la ressource de [carte réseau](https://msdn.microsoft.com/library/azure/mt163668.aspx). Vous pouvez également exécuter la commande `azure network public-ip show <resource group> <pip name>` pour afficher les détails de votre adresse IP publique, qui inclut le nom de domaine complet de la carte réseau.
+* Pour les réseaux virtuels gérés par Azure Resource Manager, le suffixe est disponible via la ressource de [carte réseau](/rest/api/virtualnetwork/networkinterfaces). Vous pouvez également exécuter la commande `azure network public-ip show <resource group> <pip name>` pour afficher les détails de votre adresse IP publique, qui inclut le nom de domaine complet de la carte réseau.
 
 Si la redirection des requêtes vers Azure ne suffit pas, vous devez fournir votre propre solution DNS.  Votre solution DNS doit :
 
@@ -129,6 +131,6 @@ Si la redirection des requêtes vers Azure ne suffit pas, vous devez fournir vot
 * Être protégée contre tout accès à partir d’Internet, pour atténuer les menaces posées par les agents externes.
 
 > [!NOTE]
-> Pour de meilleures performances, quand vous utilisez des machines virtuelles sur des serveurs DNS Azure, désactivez IPv6 et affectez une [adresse IP publique de niveau instance](../../virtual-network/virtual-networks-instance-level-public-ip.md) à chaque machine virtuelle du serveur DNS.  
+> Pour de meilleures performances, quand vous utilisez des machines virtuelles sur des serveurs DNS Azure, désactivez IPv6 et affectez une [adresse IP publique de niveau instance](/previous-versions/azure/virtual-network/virtual-networks-instance-level-public-ip) à chaque machine virtuelle du serveur DNS.  
 >
 >

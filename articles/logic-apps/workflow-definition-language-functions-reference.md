@@ -3,22 +3,22 @@ title: Guide de référence pour les fonctions dans les expressions
 description: Guide de référence sur les fonctions dans les expressions pour Azure Logic Apps et Power Automate
 services: logic-apps
 ms.suite: integration
-ms.reviewer: jonfan, logicappspm
+ms.reviewer: estfan, logicappspm, azla
 ms.topic: conceptual
-ms.date: 04/30/2020
-ms.openlocfilehash: e1ebc0257082ecfacc708352ba0a68e38e10717f
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.date: 09/04/2020
+ms.openlocfilehash: 5c03d9b64f957f6ef8450197477f185dc8d15b2d
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82607790"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825856"
 ---
 # <a name="reference-guide-to-using-functions-in-expressions-for-azure-logic-apps-and-power-automate"></a>Guide de référence sur l’utilisation des fonctions dans les expressions pour Azure Logic Apps et Power Automate
 
-Pour les définitions de flux de travail dans [Azure Logic Apps](../logic-apps/logic-apps-overview.md) et [Power Automate](https://docs.microsoft.com/flow/getting-started), certaines [expressions](../logic-apps/logic-apps-workflow-definition-language.md#expressions) obtiennent leurs valeurs à partir d’actions runtime qui peuvent ne pas encore exister au début de l’exécution de votre flux de travail. Pour référencer ou traiter ces valeurs dans ces expressions, vous pouvez faire appel à des *fonctions* fournies par le [Langage de définition de workflow](../logic-apps/logic-apps-workflow-definition-language.md).
+Pour les définitions de flux de travail dans [Azure Logic Apps](../logic-apps/logic-apps-overview.md) et [Power Automate](/flow/getting-started), certaines [expressions](../logic-apps/logic-apps-workflow-definition-language.md#expressions) obtiennent leurs valeurs à partir d’actions runtime qui peuvent ne pas encore exister au début de l’exécution de votre flux de travail. Pour référencer ou traiter ces valeurs dans ces expressions, vous pouvez faire appel à des *fonctions* fournies par le [Langage de définition de workflow](../logic-apps/logic-apps-workflow-definition-language.md).
 
 > [!NOTE]
-> Cette page de référence s’applique à Azure Logic Apps et à Power Automate, mais apparaît dans la documentation Azure Logic Apps. Bien que cette page se rapporte spécifiquement aux applications logiques, ces fonctions fonctionnement pour les flux et les applications logiques. Pour plus d’informations sur les fonctions et expressions dans Power Automate, consultez [Utiliser des expressions dans des conditions](https://docs.microsoft.com/flow/use-expressions-in-conditions).
+> Cette page de référence s’applique à Azure Logic Apps et à Power Automate, mais apparaît dans la documentation Azure Logic Apps. Bien que cette page se rapporte spécifiquement aux applications logiques, ces fonctions fonctionnement pour les flux et les applications logiques. Pour plus d’informations sur les fonctions et expressions dans Power Automate, consultez [Utiliser des expressions dans des conditions](/flow/use-expressions-in-conditions).
 
 Par exemple, vous pouvez calculer des valeurs à l’aide de fonctions mathématiques, telles que la fonction [add()](../logic-apps/workflow-definition-language-functions-reference.md#add), lorsque vous souhaitez obtenir la somme d’entiers ou de nombres décimaux. Voici d’autres exemples de tâches que vous pouvez réaliser avec les fonctions :
 
@@ -29,9 +29,6 @@ Par exemple, vous pouvez calculer des valeurs à l’aide de fonctions mathémat
 ||||
 
 Pour rechercher des fonctions [selon leur usage général](#ordered-by-purpose), examinez les tables suivantes. Ou, pour plus d’informations sur chaque fonction, consultez la [liste alphabétique](#alphabetical-list).
-
-> [!NOTE]
-> Dans la syntaxe des définitions de paramètres, un point d’interrogation (?) affiché après un paramètre signifie que ce paramètre est facultatif. Par exemple, consultez [getFutureTime()](#getFutureTime).
 
 ## <a name="functions-in-expressions"></a>Fonctions dans les expressions
 
@@ -51,8 +48,7 @@ Voici quelques autres méthodes générales pour utiliser des fonctions dans des
 | 1. Obtenir le résultat de *functionName*. </br>2. Comme le résultat est un objet avec la propriété *propertyName*, obtenir la valeur de cette propriété. | "\@<*functionName*>(<*élément*>).<*propertyName*>" |
 |||
 
-Par exemple, la fonction `concat()` peut prendre deux valeurs de chaîne ou plus en tant que paramètres. Cette fonction combine ces chaînes dans une seule chaîne.
-Vous pouvez transmettre des littéraux de chaîne, par exemple « Sophia » et « Owen », afin d’obtenir la chaîne combinée « SophiaOwen » :
+Par exemple, la fonction `concat()` peut prendre deux valeurs de chaîne ou plus en tant que paramètres. Cette fonction combine ces chaînes dans une seule chaîne. Vous pouvez transmettre des littéraux de chaîne, par exemple « Sophia » et « Owen », afin d’obtenir la chaîne combinée « SophiaOwen » :
 
 ```json
 "customerName": "@concat('Sophia', 'Owen')"
@@ -66,12 +62,18 @@ Vous pouvez également obtenir les valeurs de chaîne à partir des paramètres.
 
 Dans les deux cas, le résultat est affecté à la propriété `customerName`.
 
-Voici les fonctions disponibles triées par usage général, ou vous pouvez parcourir les fonctions triées par [ordre alphabétique](#alphabetical-list).
+Voici d’autres remarques sur les fonctions dans les expressions :
+
+* Les paramètres de fonction sont évalués de gauche à droite.
+
+* Dans la syntaxe des définitions de paramètres, un point d’interrogation (?) affiché après un paramètre signifie que ce paramètre est facultatif. Par exemple, consultez [getFutureTime()](#getFutureTime).
+
+Les sections suivantes organisent les fonction de langage selon leur objectif général, ou vous pouvez parcourir ces fonctions par [ordre alphabétique](#alphabetical-list).
 
 <a name="ordered-by-purpose"></a>
 <a name="string-functions"></a>
 
-## <a name="string-functions"></a>Fonctions de chaînes
+## <a name="string-functions"></a>Fonctions de chaîne
 
 Pour travailler avec des chaînes, vous pouvez utiliser ces fonctions de chaîne, ainsi que certaines [fonctions de collection](#collection-functions). Les fonctions de chaîne sont uniquement utilisables sur des chaînes.
 
@@ -83,6 +85,7 @@ Pour travailler avec des chaînes, vous pouvez utiliser ces fonctions de chaîne
 | [guid](../logic-apps/workflow-definition-language-functions-reference.md#guid) | Générer un identificateur global unique (GUID) sous forme de chaîne. |
 | [indexOf](../logic-apps/workflow-definition-language-functions-reference.md#indexof) | Renvoyer la position de départ d’une sous-chaîne. |
 | [lastIndexOf](../logic-apps/workflow-definition-language-functions-reference.md#lastindexof) | Retourne la position de départ de la dernière occurrence d’une sous-chaîne. |
+| [length](../logic-apps/workflow-definition-language-functions-reference.md#length) | Renvoyer le nombre d’éléments d’une chaîne ou d’un tableau. |
 | [replace](../logic-apps/workflow-definition-language-functions-reference.md#replace) | Remplacer une sous-chaîne par la chaîne spécifiée et renvoyer la chaîne mise à jour. |
 | [split](../logic-apps/workflow-definition-language-functions-reference.md#split) | Retourne un tableau qui contient des sous-chaînes, séparées par des virgules, extraites à partir d’une chaîne plus grande sur la base d’un caractère délimiteur spécifié dans la chaîne d’origine. |
 | [startsWith](../logic-apps/workflow-definition-language-functions-reference.md#startswith) | Vérifie si une chaîne commence par une sous-chaîne spécifique. |
@@ -118,6 +121,9 @@ Pour travailler avec des collections, généralement des tableaux, des chaînes 
 ## <a name="logical-comparison-functions"></a>Fonctions de comparaison logiques
 
 Pour travailler avec des conditions, comparer des valeurs et des résultats d’expressions, ou évaluer différents types de logique, vous pouvez utiliser ces fonctions de comparaison logiques. Pour obtenir des informations complètes sur chaque fonction, consultez la [liste alphabétique](../logic-apps/workflow-definition-language-functions-reference.md#alphabetical-list).
+
+> [!NOTE]
+> Si vous utilisez des fonctions ou des conditions logiques pour comparer des valeurs, les valeurs NULL sont converties en valeurs de chaînes vides (`""`). Le comportement des conditions diffère lorsque vous procédez à une comparaison à l’aide d’une chaîne vide à la place d’une valeur NULL. Pour plus d’informations, consultez la [fonction string ()](#string). 
 
 | Fonction de comparaison logique | Tâche |
 | --------------------------- | ---- |
@@ -347,7 +353,7 @@ action().outputs.body.<property>
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*property*> | Non  | String | Nom de propriété de l’objet d’action dont vous souhaitez la valeur : **name**, **startTime**, **endTime**, **inputs**, **outputs**, **status**, **code**, **trackingId** et **clientTrackingId**. Vous trouverez ces propriétés dans le portail Azure en passant en revue les détails d’un historique des exécutions spécifique. Pour plus d’informations, consultez [API REST - Actions d’exécution du workflow](https://docs.microsoft.com/rest/api/logic/workflowrunactions/get). |
+| <*property*> | Non | String | Nom de propriété de l’objet d’action dont vous souhaitez la valeur : **name**, **startTime**, **endTime**, **inputs**, **outputs**, **status**, **code**, **trackingId** et **clientTrackingId**. Vous trouverez ces propriétés dans le portail Azure en passant en revue les détails d’un historique des exécutions spécifique. Pour plus d’informations, consultez [API REST - Actions d’exécution du workflow](/rest/api/logic/workflowrunactions/get). |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -473,6 +479,9 @@ Retourne la sortie d’une action lors de l’exécution ou les valeurs d’autr
 Pour les versions raccourcies, consultez [actionBody()](#actionBody), [actionOutputs()](#actionOutputs) et [body()](#body).
 Pour l’action actuelle, consultez [action()](#action).
 
+> [!TIP]
+> La fonction `actions()` retourne la sortie sous forme de chaîne. S’il vous faut une valeur retournée sous forme d’objet JSON, vous devez d’abord convertir la valeur de chaîne. Pour la transformer en objet JSON, utilisez [l’action Analyser le code JSON](logic-apps-perform-data-operations.md#parse-json-action).
+
 > [!NOTE]
 > Auparavant, vous pouviez utiliser la fonction `actions()` ou l’élément `conditions` pour spécifier qu’une action était exécutée en fonction de la sortie d’une autre action. Toutefois, pour déclarer explicitement des dépendances entre des actions, vous devez maintenant utiliser la propriété `runAfter` de l’action dépendante.
 > Pour en savoir plus sur la propriété `runAfter`, consultez [Intercepter et gérer les échecs avec la propriété runAfter](../logic-apps/logic-apps-workflow-definition-language.md).
@@ -485,7 +494,7 @@ actions('<actionName>').outputs.body.<property>
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*actionName*> | Oui | String | Nom de l’objet d’action dont vous souhaitez la sortie  |
-| <*property*> | Non  | String | Nom de propriété de l’objet d’action dont vous souhaitez la valeur : **name**, **startTime**, **endTime**, **inputs**, **outputs**, **status**, **code**, **trackingId** et **clientTrackingId**. Vous trouverez ces propriétés dans le portail Azure en passant en revue les détails d’un historique des exécutions spécifique. Pour plus d’informations, consultez [API REST - Actions d’exécution du workflow](https://docs.microsoft.com/rest/api/logic/workflowrunactions/get). |
+| <*property*> | Non | String | Nom de propriété de l’objet d’action dont vous souhaitez la valeur : **name**, **startTime**, **endTime**, **inputs**, **outputs**, **status**, **code**, **trackingId** et **clientTrackingId**. Vous trouverez ces propriétés dans le portail Azure en passant en revue les détails d’un historique des exécutions spécifique. Pour plus d’informations, consultez [API REST - Actions d’exécution du workflow](/rest/api/logic/workflowrunactions/get). |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -547,7 +556,7 @@ addDays('<timestamp>', <days>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*days*> | Oui | Integer | Nombre de jours positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -589,7 +598,7 @@ addHours('<timestamp>', <hours>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*hours*> | Oui | Integer | Nombre d’heures positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -631,7 +640,7 @@ addMinutes('<timestamp>', <minutes>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*minutes*> | Oui | Integer | Nombre de minutes positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -772,7 +781,7 @@ addSeconds('<timestamp>', <seconds>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*seconds*> | Oui | Integer | Nombre de secondes positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -816,7 +825,7 @@ addToTime('<timestamp>', <interval>, '<timeUnit>', '<format>'?)
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à ajouter |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1120,27 +1129,27 @@ bool(<value>)
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*value*> | Oui | Quelconque | Valeur à convertir |
+| <*value*> | Oui | Quelconque | Valeur à convertir en valeur booléenne. |
 |||||
+
+Si vous utilisez `bool()` avec un objet, la valeur de l'objet doit être une chaîne ou un entier qui peut être converti en valeur booléenne.
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
-| True ou False | Boolean | Version booléenne de la valeur spécifiée |
+| `true` ou `false` | Boolean | Version booléenne de la valeur spécifiée. |
 ||||
 
-*Exemple*
+*Sorties*
 
-Ces exemples illustrent la conversion des valeurs spécifiées en valeurs booléennes :
+Ces exemples illustrent les différents types d'entrée pris en charge pour `bool()` :
 
-```
-bool(1)
-bool(0)
-```
-
-Et retournent les résultats suivants :
-
-* Premier exemple : `true`
-* Second exemple : `false`
+| Valeur d'entrée | Type | Valeur de retour |
+| ----------- | ---------- | ---------------------- |
+| `bool(1)` | Integer | `true` |
+| `bool(0)` | Integer    | `false` |
+| `bool(-1)` | Integer | `true` |
+| `bool('true')` | String | `true` |
+| `bool('false')` | String | `false` |
 
 <a name="coalesce"></a>
 
@@ -1268,8 +1277,8 @@ convertFromUtc('<timestamp>', '<destinationTimeZone>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1310,9 +1319,9 @@ convertTimeZone('<timestamp>', '<sourceTimeZone>', '<destinationTimeZone>', '<fo
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
+| <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1353,8 +1362,8 @@ convertToUtc('<timestamp>', '<sourceTimeZone>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1669,7 +1678,7 @@ decodeUriComponent('<value>')
 Cet exemple illustre le remplacement des caractères d’échappement de cette chaîne par des versions décodées :
 
 ```
-decodeUriComponent('http%3A%2F%2Fcontoso.com')
+decodeUriComponent('https%3A%2F%2Fcontoso.com')
 ```
 
 Et retourne ce résultat : `"https://contoso.com"`
@@ -1678,8 +1687,7 @@ Et retourne ce résultat : `"https://contoso.com"`
 
 ### <a name="div"></a>div
 
-Retourne l’entier résultant de la division de deux nombres.
-Pour obtenir le reste, consultez [mod()](#mod).
+Renvoyer le résultat de la division de deux nombres. Pour obtenir le reste, consultez [mod()](#mod).
 
 ```
 div(<dividend>, <divisor>)
@@ -1693,19 +1701,26 @@ div(<dividend>, <divisor>)
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
-| <*quotient-result*> | Integer | Entier résultant de la division du premier nombre par le second nombre |
+| <*quotient-result*> | Entier ou flottant | Résultat de la division du premier nombre par le second. Si le dividende ou le diviseur est de type flottant, le résultat est de type flottant. <p><p>**Remarque** : Pour convertir le résultat de type flottant en entier, essayez de [créer et appeler une fonction Azure](../logic-apps/logic-apps-azure-functions.md) à partir de votre application logique. |
 ||||
 
-*Exemple*
+*Exemple 1*
 
-Les deux exemples illustrent la division du premier nombre par le second :
+Les deux exemples retournent cette valeur avec un type entier : `2`
 
 ```
-div(10, 5)
-div(11, 5)
+div(10,5)
+div(11,5)
 ```
 
-Et retourne ce résultat : `2`
+*Exemple 2*
+
+Les deux exemples retournent cette valeur avec un type flottant : `2.2`
+
+```
+div(11,5.0)
+div(11.0,5)
+```
 
 <a name="encodeUriComponent"></a>
 
@@ -1738,7 +1753,7 @@ Cet exemple illustre la création d’une version encodée sous forme d’URI po
 encodeUriComponent('https://contoso.com')
 ```
 
-Et retourne ce résultat : `"http%3A%2F%2Fcontoso.com"`
+Et retourne ce résultat : `"https%3A%2F%2Fcontoso.com"`
 
 <a name="empty"></a>
 
@@ -1933,7 +1948,7 @@ formatDateTime('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2027,8 +2042,8 @@ formatNumber(<number>, <format>, <locale>?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*number*> | Oui | Integer ou Double | La valeur que vous souhaitez formater. |
-| <*format*> | Oui | String | Chaîne de format composite qui spécifie le format que vous souhaitez utiliser. Pour les chaînes de format numériques prises en charge, consultez [Chaînes de format numériques standard](https://docs.microsoft.com/dotnet/standard/base-types/standard-numeric-format-strings), qui sont prises en charge par `number.ToString(<format>, <locale>)`. |
-| <*locale*> | Non  | String | Paramètres régionaux à utiliser tels qu’ils sont pris en charge par `number.ToString(<format>, <locale>)`. Si elle n’est pas spécifiée, la valeur par défaut est `en-us`. |
+| <*format*> | Oui | String | Chaîne de format composite qui spécifie le format que vous souhaitez utiliser. Pour les chaînes de format numériques prises en charge, consultez [Chaînes de format numériques standard](/dotnet/standard/base-types/standard-numeric-format-strings), qui sont prises en charge par `number.ToString(<format>, <locale>)`. |
+| <*locale*> | Non | String | Paramètres régionaux à utiliser tels qu’ils sont pris en charge par `number.ToString(<format>, <locale>)`. Si elle n’est pas spécifiée, la valeur par défaut est `en-us`. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2041,7 +2056,7 @@ formatNumber(<number>, <format>, <locale>?)
 Supposons que vous souhaitez formater le nombre `1234567890`. Dans cet exemple, le nombre est formaté en tant que chaîne « 1,234,567,890.00 ».
 
 ```
-formatNumber(1234567890, '{0:0,0.00}', 'en-us')
+formatNumber(1234567890, '0,0.00', 'en-us')
 ```
 
 *Exemple 2"
@@ -2049,7 +2064,7 @@ formatNumber(1234567890, '{0:0,0.00}', 'en-us')
 Supposons que vous souhaitez formater le nombre `1234567890`. Dans cet exemple, le nombre est formaté en tant que chaîne « 1.234.567.890,00 ».
 
 ```
-formatNumber(1234567890, '{0:0,0.00}', 'is-is')
+formatNumber(1234567890, '0,0.00', 'is-is')
 ```
 
 *Exemple 3*
@@ -2082,7 +2097,7 @@ getFutureTime(<interval>, <timeUnit>, <format>?)
 | --------- | -------- | ---- | ----------- |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à ajouter |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2126,7 +2141,7 @@ getPastTime(<interval>, <timeUnit>, <format>?)
 | --------- | -------- | ---- | ----------- |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à soustraire |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2248,7 +2263,7 @@ guid('<format>')
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*format*> | Non  | String | Un seul [spécificateur de format](https://msdn.microsoft.com/library/97af8hh4) pour le GUID retourné. Par défaut, il s’agit du format « D », mais vous pouvez utiliser « N », « D », « B », « P » ou « X ». |
+| <*format*> | Non | String | Un seul [spécificateur de format](/dotnet/api/system.guid.tostring?view=netcore-3.1#system_guid_tostring_system_string_) pour le GUID retourné. Par défaut, il s’agit du format « D », mais vous pouvez utiliser « N », « D », « B », « P » ou « X ». |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2270,8 +2285,7 @@ Et retourne ce résultat : `"(c2ecc88d-88c8-4096-912c-d6f2e2b138ce)"`
 
 ### <a name="if"></a>if
 
-Vérifie si une expression est vraie ou fausse.
-En fonction du résultat, retourne une valeur spécifiée.
+Vérifie si une expression est vraie ou fausse. En fonction du résultat, retourne une valeur spécifiée. Les paramètres sont évalués de gauche à droite.
 
 ```
 if(<expression>, <valueIfTrue>, <valueIfFalse>)
@@ -2686,10 +2700,9 @@ Et retournent les résultats suivants :
 
 ### <a name="lastindexof"></a>lastIndexOf
 
-Retourne la position de départ ou la valeur d’index de la dernière occurrence d’une sous-chaîne.
-Cette fonction ne respecte pas la casse, et les index commencent par 0.
+Retourne la position de départ ou la valeur d’index de la dernière occurrence d’une sous-chaîne. Cette fonction ne respecte pas la casse, et les index commencent par 0.
 
-```
+```json
 lastIndexOf('<text>', '<searchText>')
 ```
 
@@ -2697,22 +2710,38 @@ lastIndexOf('<text>', '<searchText>')
 | --------- | -------- | ---- | ----------- |
 | <*text*> | Oui | String | Chaîne comportant la sous-chaîne à rechercher |
 | <*searchText*> | Oui | String | Sous-chaîne à rechercher |
-|||||
+|||
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
-| <*ending-index-value*> | Integer | Retourne la position de départ ou la valeur d’index de la dernière occurrence de la sous-chaîne spécifiée. <p>Si la chaîne est introuvable, retourne le chiffre -1. |
-||||
+| <*ending-index-value*> | Integer | Retourne la position de départ ou la valeur d’index de la dernière occurrence de la sous-chaîne spécifiée. |
+|||
 
-*Exemple*
+Si la valeur de la chaîne ou de la sous-chaîne est vide, le comportement suivant se produit :
 
-Cet exemple recherche la valeur d’index de départ de la dernière occurrence de la sous-chaîne « world » dans la chaîne « hello world » :
+* Si la valeur de la chaîne est vide, `-1` est retourné :
 
+* Si les valeurs de la chaîne et de la sous-chaîne sont vides, `0` est retourné.
+
+* Si seule la valeur de la sous-chaîne est vide, la plus grande des deux valeurs suivantes est retournée :
+
+  * `0`
+
+  * Longueur de la chaîne, moins 1.
+
+*Exemples*
+
+Cet exemple recherche la valeur d’index de départ de la dernière occurrence de la sous-chaîne `world` dans la chaîne `hello world hello world`. Le résultat retourné est `18` :
+
+```json
+lastIndexOf('hello world hello world', 'world')
 ```
-lastIndexOf('hello world', 'world')
-```
 
-Et retourne ce résultat : `6`
+Cet exemple ne contient pas le paramètre de sous-chaîne et retourne une valeur de `22`, car la valeur de la chaîne d’entrée (`23`) moins 1 est supérieure à 0.
+
+```json
+lastIndexOf('hello world hello world', '')
+```
 
 <a name="length"></a>
 
@@ -3674,7 +3703,7 @@ startOfDay('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -3705,7 +3734,7 @@ startOfHour('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -3736,7 +3765,7 @@ startOfMonth('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -3744,7 +3773,7 @@ startOfMonth('<timestamp>', '<format>'?)
 | <*updated-timestamp*> | String | Horodatage spécifié, mais démarrant le premier jour du mois à la marque zéro-heure |
 ||||
 
-*Exemple*
+*Exemple 1*
 
 Cet exemple retourne le début du mois pour cet horodatage :
 
@@ -3753,6 +3782,16 @@ startOfMonth('2018-03-15T13:30:30Z')
 ```
 
 Et retourne ce résultat : `"2018-03-01T00:00:00.0000000Z"`
+
+*Exemple 2*
+
+Cet exemple retourne le début du mois dans le format spécifié pour cet horodatage :
+
+```
+startOfMonth('2018-03-15T13:30:30Z', 'yyyy-MM-dd')
+```
+
+Et retourne ce résultat : `"2018-03-01"`
 
 <a name="startswith"></a>
 
@@ -3809,13 +3848,17 @@ string(<value>)
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*value*> | Oui | Quelconque | Valeur à convertir |
+| <*value*> | Oui | Quelconque | La valeur à convertir. Si cette valeur est null ou prend la valeur null, la valeur est convertie en une valeur de chaîne vide (`""`). <p><p>Par exemple, si vous assignez une variable de chaîne à une propriété inexistante, à laquelle vous pouvez accéder avec l’opérateur `?`, la valeur null est convertie en chaîne vide. Toutefois, la comparaison d’une valeur NULL n’est pas identique à la comparaison d’une chaîne vide. |
 |||||
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
-| <*string-value*> | String | Version de type chaîne de la valeur spécifiée |
+| <*string-value*> | String | Version de type de la chaîne de la valeur spécifiée. Si le paramètre de cette *valeur* est NULL ou prend la valeur NULL, cette valeur est renvoyée en tant qu’une valeur de chaîne vide (`""`). |
 ||||
+
+
+
+
 
 *Exemple 1*
 
@@ -3872,8 +3915,7 @@ Et retourne ce résultat : `10`
 
 ### <a name="substring"></a>substring
 
-Retourne les caractères d’une chaîne, en commençant à partir de la position spécifiée ou de l’index.
-Les valeurs d’index commencent par le chiffre 0.
+Retourne les caractères d’une chaîne, en commençant à partir de la position spécifiée ou de l’index. Les valeurs d’index commencent par le chiffre 0.
 
 ```
 substring('<text>', <startIndex>, <length>)
@@ -3883,8 +3925,12 @@ substring('<text>', <startIndex>, <length>)
 | --------- | -------- | ---- | ----------- |
 | <*text*> | Oui | String | Chaîne dont vous souhaitez les caractères |
 | <*startIndex*> | Oui | Integer | Une valeur positive supérieure ou égale à 0 que vous souhaitez utiliser comme la valeur de position ou l’index de départ |
-| <*length*> | Oui | Integer | Nombre positif de caractères que vous souhaitez dans la sous-chaîne |
+| <*length*> | Non | Integer | Nombre positif de caractères que vous souhaitez dans la sous-chaîne |
 |||||
+
+> [!NOTE]
+> Vérifiez que la somme issue de l’addition des valeurs de paramètre *startIndex* et *length* est inférieure à la longueur de la chaîne que vous fournissez pour le paramètre *text*.
+> Si ce n’est pas le cas, vous obtenez une erreur, à la différence de fonctions similaires dans d’autres langages où le résultat correspond au substring entre *startIndex* et la fin de la chaîne. Le paramètre *length* est optionnel et n’est pas fourni, la fonction **substring()** sélectionne tous les caractères de *startIndex* jusqu’à la fin de la chaîne.
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
@@ -3917,7 +3963,7 @@ subtractFromTime('<timestamp>', <interval>, '<timeUnit>', '<format>'?)
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à soustraire |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -3985,8 +4031,7 @@ Et retournent les résultats suivants :
 
 ### <a name="ticks"></a>ticks
 
-Retourne la valeur de la propriété `ticks` pour un horodatage spécifique.
-Une *graduation* est un intervalle de 100 nanosecondes.
+Retourne le nombre de cycles, soit des intervalles de 100 nanosecondes, depuis le 1er janvier 0001 12:00:00 minuit (ou DateTime.Ticks en C#) jusqu’à l’horodatage spécifié. Pour plus d’informations, consultez la rubrique suivante : [Propriété DateTime.Ticks (Système)](/dotnet/api/system.datetime.ticks?view=netframework-4.7.2#remarks).
 
 ```
 ticks('<timestamp>')
@@ -4129,7 +4174,7 @@ Cet exemple illustre la création d’un tableau à partir de la valeur de la cl
 triggerFormDataMultiValues('feedUrl')
 ```
 
-Et retourne ce tableau en tant qu’exemple de résultat : `["http://feeds.reuters.com/reuters/topNews"]`
+Et retourne ce tableau en tant qu’exemple de résultat : `["https://feeds.a.dj.com/rss/RSSMarketsMain.xml"]`
 
 <a name="triggerFormDataValue"></a>
 
@@ -4160,7 +4205,7 @@ Cet exemple illustre la création d’une chaîne à partir de la valeur de la c
 triggerFormDataValue('feedUrl')
 ```
 
-Et retourne cette chaîne en tant qu’exemple de résultat : `"http://feeds.reuters.com/reuters/topNews"`
+Et retourne cette chaîne en tant qu’exemple de résultat : `"https://feeds.a.dj.com/rss/RSSMarketsMain.xml"`
 
 <a name="triggerMultipartBody"></a>
 
@@ -4291,7 +4336,7 @@ Cet exemple illustre la création d’une version encodée sous forme d’URI po
 uriComponent('https://contoso.com')
 ```
 
-Et retourne ce résultat : `"http%3A%2F%2Fcontoso.com"`
+Et retourne ce résultat : `"https%3A%2F%2Fcontoso.com"`
 
 <a name="uriComponentToBinary"></a>
 
@@ -4318,7 +4363,7 @@ uriComponentToBinary('<value>')
 Cet exemple illustre la création de la version binaire de cette chaîne encodée sous forme d’URI :
 
 ```
-uriComponentToBinary('http%3A%2F%2Fcontoso.com')
+uriComponentToBinary('https%3A%2F%2Fcontoso.com')
 ```
 
 Et retourne ce résultat :
@@ -4353,7 +4398,7 @@ uriComponentToString('<value>')
 Cet exemple illustre la création de la version de type chaîne décodée pour cette chaîne encodée sous forme d’URI :
 
 ```
-uriComponentToString('http%3A%2F%2Fcontoso.com')
+uriComponentToString('https%3A%2F%2Fcontoso.com')
 ```
 
 Et retourne ce résultat : `"https://contoso.com"`
@@ -4413,7 +4458,7 @@ uriPath('<uri>')
 Cet exemple recherche la valeur `path` pour cet URI :
 
 ```
-uriPath('http://www.contoso.com/catalog/shownew.htm?date=today')
+uriPath('https://www.contoso.com/catalog/shownew.htm?date=today')
 ```
 
 Et retourne ce résultat : `"/catalog/shownew.htm"`
@@ -4443,7 +4488,7 @@ uriPathAndQuery('<uri>')
 Cet exemple recherche les valeurs `path` et `query` pour cet URI :
 
 ```
-uriPathAndQuery('http://www.contoso.com/catalog/shownew.htm?date=today')
+uriPathAndQuery('https://www.contoso.com/catalog/shownew.htm?date=today')
 ```
 
 Et retourne ce résultat : `"/catalog/shownew.htm?date=today"`
@@ -4473,7 +4518,7 @@ uriPort('<uri>')
 Cet exemple retourne la valeur `port` pour cet URI :
 
 ```
-uriPort('http://www.localhost:8080')
+uriPort('https://www.localhost:8080')
 ```
 
 Et retourne ce résultat : `8080`
@@ -4503,7 +4548,7 @@ uriQuery('<uri>')
 Cet exemple retourne la valeur `query` pour cet URI :
 
 ```
-uriQuery('http://www.contoso.com/catalog/shownew.htm?date=today')
+uriQuery('https://www.contoso.com/catalog/shownew.htm?date=today')
 ```
 
 Et retourne ce résultat : `"?date=today"`
@@ -4533,7 +4578,7 @@ uriScheme('<uri>')
 Cet exemple retourne la valeur `scheme` pour cet URI :
 
 ```
-uriScheme('http://www.contoso.com/catalog/shownew.htm?date=today')
+uriScheme('https://www.contoso.com/catalog/shownew.htm?date=today')
 ```
 
 Et retourne ce résultat : `"http"`
@@ -4553,7 +4598,7 @@ Si vous le souhaitez, vous pouvez spécifier un autre format avec le paramètre 
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjTHH:mm:ss.fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -4626,7 +4671,7 @@ workflow().<property>
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*property*> | Non  | String | Nom de la propriété de flux de travail dont vous souhaitez la valeur <p>Un objet de flux de travail possède ces propriétés : **name**, **type**, **id**, **location** et **run**. La valeur de la propriété **run** est également un objet qui possède ces propriétés : **name**, **type** et **id**. |
+| <*property*> | Non | String | Nom de la propriété de flux de travail dont vous souhaitez la valeur <p>Un objet de flux de travail possède ces propriétés : **name**, **type**, **id**, **location** et **run**. La valeur de la propriété **run** est également un objet qui possède ces propriétés : **name**, **type** et **id**. |
 |||||
 
 *Exemple*
@@ -4720,21 +4765,29 @@ xpath('<xml>', '<xpath>')
 
 *Exemple 1*
 
-Cet exemple recherche les nœuds qui correspondent au nœud `<name></name>` dans les arguments spécifiés, et retourne un tableau contenant ces valeurs de nœud :
+Supposons que vous avez la chaîne XML `'items'` : 
+
+```xml
+<?xml version="1.0"?>
+<produce>
+  <item>
+    <name>Gala</name>
+    <type>apple</type>
+    <count>20</count>
+  </item>
+  <item>
+    <name>Honeycrisp</name>
+    <type>apple</type>
+    <count>10</count>
+  </item>
+</produce>
+```
+
+Cet exemple transmet l’expression XPath, `'/produce/item/name'`, pour rechercher les nœuds qui correspondent au nœud `<name></name>` dans la chaîne XML `'items'`, et retourne un tableau avec ces valeurs de nœud :
 
 `xpath(xml(parameters('items')), '/produce/item/name')`
 
-Voici les arguments :
-
-* Chaîne « items », qui contient ce code XML :
-
-  `"<?xml version="1.0"?> <produce> <item> <name>Gala</name> <type>apple</type> <count>20</count> </item> <item> <name>Honeycrisp</name> <type>apple</type> <count>10</count> </item> </produce>"`
-
-  L’exemple utilise la fonction [parameters()](#parameters) pour obtenir la chaîne XML à partir de l’argument « items », mais il doit également convertir la chaîne au format XML à l’aide de la fonction [xml()](#xml).
-
-* Cette expression XPath, qui est transmise en tant que chaîne :
-
-  `"/produce/item/name"`
+Cet exemple utilise également la fonction [parameters()](#parameters) pour obtenir la chaîne XML à partir de `'items'` et convertir la chaîne au format XML à l’aide de la fonction [xml()](#xml).
 
 Voici le tableau de résultats avec les nœuds qui correspondent à `<name></name` :
 
@@ -4742,63 +4795,161 @@ Voici le tableau de résultats avec les nœuds qui correspondent à `<name></nam
 
 *Exemple 2*
 
-À la suite de l’exemple 1, cet exemple recherche les nœuds qui correspondent au nœud `<count></count>` et ajoute ces valeurs de nœud avec la fonction `sum()` :
+Suite à l’exemple 1, cet exemple transmet l’expression XPath, `'/produce/item/name[1]'`, pour rechercher le premier élément `name` qui est l’enfant de l’élément `item`.
 
-`xpath(xml(parameters('items')), 'sum(/produce/item/count)')`
+`xpath(xml(parameters('items')), '/produce/item/name[1]')`
 
-Et retourne ce résultat : `30`
+Voici le résultat : `Gala`
 
 *Exemple 3*
 
-Pour cet exemple, les deux expressions recherchent des nœuds qui correspondent au nœud `<location></location>`, dans les arguments spécifiés, notamment XML avec un espace de noms. 
+Suite à l’exemple 1, cet exemple transmet l’expression XPath, `'/produce/item/name[last()]'`, pour rechercher le dernier élément `name` qui est l’enfant de l’élément `item`.
 
-> [!NOTE]
+`xpath(xml(parameters('items')), '/produce/item/name[last()]')`
+
+Voici le résultat : `Honeycrisp`
+
+*Exemple 4*
+
+Dans cet exemple, supposons que votre chaîne XML `items` contient également les attributs `expired='true'` et `expired='false'` :
+
+```xml
+<?xml version="1.0"?>
+<produce>
+  <item>
+    <name expired='true'>Gala</name>
+    <type>apple</type>
+    <count>20</count>
+  </item>
+  <item>
+    <name expired='false'>Honeycrisp</name>
+    <type>apple</type>
+    <count>10</count>
+  </item>
+</produce>
+```
+
+Cet exemple transmet l’expression XPath, `'//name[@expired]'`, pour rechercher tous les éléments `name` dotés de l’attribut `expired` :
+
+`xpath(xml(parameters('items')), '//name[@expired]')`
+
+Voici le résultat : `[ Gala, Honeycrisp ]`
+
+*Exemple 5*
+
+Dans cet exemple, supposons que votre chaîne XML `items` contient uniquement l’attribut `expired = 'true'` :
+
+```xml
+<?xml version="1.0"?>
+<produce>
+  <item>
+    <name expired='true'>Gala</name>
+    <type>apple</type>
+    <count>20</count>
+  </item>
+  <item>
+    <name>Honeycrisp</name>
+    <type>apple</type>
+    <count>10</count>
+  </item>
+</produce>
+```
+
+Cet exemple transmet l’expression XPath, `'//name[@expired = 'true']'`, pour rechercher tous les éléments `name` dotés de l’attribut `expired = 'true'` :
+
+`xpath(xml(parameters('items')), '//name[@expired = 'true']')`
+
+Voici le résultat : `[ Gala ]`
+
+*Exemple 6*
+
+Dans cet exemple, supposons que votre chaîne XML `items` contient également les attributs : 
+
+* `expired='true' price='12'`
+* `expired='false' price='40'`
+
+```xml
+<?xml version="1.0"?>
+<produce>
+  <item>
+    <name expired='true' price='12'>Gala</name>
+    <type>apple</type>
+    <count>20</count>
+  </item>
+  <item>
+    <name expired='false' price='40'>Honeycrisp</name>
+    <type>apple</type>
+    <count>10</count>
+  </item>
+</produce>
+```
+
+Cet exemple transmet l’expression XPath, `'//name[price>35]'`, pour rechercher tous les éléments `name` dotés de `price > 35` :
+
+`xpath(xml(parameters('items')), '//name[price>35]')`
+
+Voici le résultat : `Honeycrisp`
+
+*Exemple 7*
+
+Dans cet exemple, supposons que votre chaîne XML `items` est identique à celle de l’exemple 1 :
+
+```xml
+<?xml version="1.0"?>
+<produce>
+  <item>
+    <name>Gala</name>
+    <type>apple</type>
+    <count>20</count>
+  </item>
+  <item>
+    <name>Honeycrisp</name>
+    <type>apple</type>
+    <count>10</count>
+  </item>
+</produce>
+```
+
+Cet exemple recherche les nœuds qui correspondent au nœud `<count></count>` et ajoute ces valeurs de nœud avec la fonction `sum()` :
+
+`xpath(xml(parameters('items')), 'sum(/produce/item/count)')`
+
+Voici le résultat : `30`
+
+*Exemple 8*
+
+Dans cet exemple, supposons que vous avez cette chaîne XML, qui comprend l’espace de noms du document XML, `xmlns="https://contoso.com"` :
+
+```xml
+<?xml version="1.0"?><file xmlns="https://contoso.com"><location>Paris</location></file>
+```
+
+Ces expressions utilisent une expression XPath, `/*[name()="file"]/*[name()="location"]` ou `/*[local-name()="file" and namespace-uri()="https://contoso.com"]/*[local-name()="location"]`, pour rechercher les nœuds qui correspondent au nœud `<location></location>`. Ces exemples illustrent la syntaxe que vous utilisez dans le concepteur d’application logique ou dans l’éditeur d’expressions :
+
+* `xpath(xml(body('Http')), '/*[name()="file"]/*[name()="location"]')`
+* `xpath(xml(body('Http')), '/*[local-name()="file" and namespace-uri()="https://contoso.com"]/*[local-name()="location"]')`
+
+Voici le nœud obtenu qui correspond au nœud `<location></location>` : 
+
+`<location xmlns="https://contoso.com">Paris</location>`
+
+> [!IMPORTANT]
 >
-> Si vous travaillez en mode Code, échappez le guillemet double (") à l’aide de la barre oblique inverse (\\). 
+> Si vous travaillez en mode Code, échappez les guillemets doubles (") en utilisant la barre oblique inverse (\\). 
 > Par exemple, vous devez utiliser des caractères d’échappement quand vous sérialisez une expression sous forme de chaîne JSON. 
-> Cependant, si vous travaillez dans le concepteur d’application logique ou dans l’éditeur d’expressions, vous n’avez pas besoin d’échapper le guillemet double, car la barre oblique inverse est ajoutée automatiquement à la définition sous-jacente, par exemple :
+> Toutefois, si vous travaillez dans le concepteur d’application logique ou dans l’éditeur d’expressions, vous n’avez pas besoin d’échapper les guillemets doubles, car la barre oblique inverse est ajoutée automatiquement à la définition sous-jacente. Par exemple :
 > 
 > * Mode Code : `xpath(xml(body('Http')), '/*[name()=\"file\"]/*[name()=\"location\"]')`
 >
 > * Éditeur d'expression : `xpath(xml(body('Http')), '/*[name()="file"]/*[name()="location"]')`
-> 
-> Les exemples suivants s’appliquent aux expressions que vous entrez dans l’éditeur d’expressions.
 
-* *Expression 1*
+*Exemple 9*
 
-  `xpath(xml(body('Http')), '/*[name()="file"]/*[name()="location"]')`
-
-* *Expression 2*
-
-  `xpath(xml(body('Http')), '/*[local-name()="file" and namespace-uri()="http://contoso.com"]/*[local-name()="location"]')`
-
-Voici les arguments :
-
-* Ce code XML, qui inclut l’espace de noms du document XML, `xmlns="http://contoso.com"` :
-
-  ```xml
-  <?xml version="1.0"?> <file xmlns="http://contoso.com"> <location>Paris</location> </file>
-  ```
-
-* L’une ou l’autre des expressions XPath ici :
-
-  * `/*[name()="file"]/*[name()="location"]`
-
-  * `/*[local-name()="file" and namespace-uri()="http://contoso.com"]/*[local-name()="location"]`
-
-Voici le nœud obtenu qui correspond au nœud `<location></location>` :
-
-```xml
-<location xmlns="https://contoso.com">Paris</location>
-```
-
-*Exemple 4*
-
-À la suite de l’exemple 3, cet exemple recherche la valeur du nœud `<location></location>` :
+Suite à l’exemple 8, cet exemple utilise l’expression XPath, `'string(/*[name()="file"]/*[name()="location"])'`, pour rechercher la valeur figurant dans le nœud `<location></location>` :
 
 `xpath(xml(body('Http')), 'string(/*[name()="file"]/*[name()="location"])')`
 
-Et retourne ce résultat : `"Paris"`
+Voici le résultat : `Paris`
 
 ## <a name="next-steps"></a>Étapes suivantes
 

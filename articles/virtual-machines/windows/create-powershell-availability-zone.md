@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.date: 03/27/2018
 ms.author: cynthn
 ms.custom: ''
-ms.openlocfilehash: 60ce5b868b2a8f955b32e372201613ba66d49eff
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 95d97605f00a3a80c097eb16695c9d296e17c33d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208973"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87825240"
 ---
 # <a name="create-a-windows-virtual-machine-in-an-availability-zone-with-powershell"></a>Créer une machine virtuelle Windows dans une zone de disponibilité avec PowerShell
 
@@ -32,9 +32,9 @@ Connect-AzAccount
 ```
 
 ## <a name="check-vm-sku-availability"></a>Vérifier la disponibilité de la référence SKU de machine virtuelle
-La disponibilité des tailles de machine virtuelle, ou des références SKU, peut varier selon la région et le fuseau horaire. Pour vous aider à planifier l’utilisation des Zones de disponibilité, vous pouvez répertorier les références SKU de machine virtuelle disponibles par zone et par région Azure. Cela permet de s’assure que vous choisissez une taille de machine virtuelle appropriée et obtenez la résilience de votre choix entre les zones. Pour plus d’informations sur les différents types de machine virtuelle et les tailles, consultez [Vue d’ensemble des tailles de machine virtuelle](sizes.md).
+La disponibilité des tailles de machine virtuelle, ou des références SKU, peut varier selon la région et le fuseau horaire. Pour vous aider à planifier l’utilisation des Zones de disponibilité, vous pouvez répertorier les références SKU de machine virtuelle disponibles par zone et par région Azure. Cela permet de s’assure que vous choisissez une taille de machine virtuelle appropriée et obtenez la résilience de votre choix entre les zones. Pour plus d’informations sur les différents types de machine virtuelle et les tailles, consultez [Vue d’ensemble des tailles de machine virtuelle](../sizes.md).
 
-Vous pouvez voir les références SKU de machines virtuelles disponibles avec la commande [Get-AzComputeResourceSku](https://docs.microsoft.com/powershell/module/az.compute/get-azcomputeresourcesku). L’exemple suivant répertorie les références SKU de machine virtuelle disponibles dans la région *eastus2* :
+Vous pouvez voir les références SKU de machines virtuelles disponibles avec la commande [Get-AzComputeResourceSku](/powershell/module/az.compute/get-azcomputeresourcesku). L’exemple suivant répertorie les références SKU de machine virtuelle disponibles dans la région *eastus2* :
 
 ```powershell
 Get-AzComputeResourceSku | where {$_.Locations.Contains("eastus2")};
@@ -61,7 +61,7 @@ virtualMachines   Standard_E4_v3   eastus2  {1, 2, 3}
 
 ## <a name="create-resource-group"></a>Créer un groupe de ressources
 
-Créez un groupe de ressources Azure avec [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. Dans cet exemple, un groupe de ressources appelé *myResourceGroup* est créé dans la région *eastus2*. 
+Créez un groupe de ressources Azure avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. Dans cet exemple, un groupe de ressources appelé *myResourceGroup* est créé dans la région *eastus2*. 
 
 ```powershell
 New-AzResourceGroup -Name myResourceGroup -Location EastUS2
@@ -105,7 +105,7 @@ $nsg = New-AzNetworkSecurityGroup -ResourceGroupName myResourceGroup -Location e
 ```
 
 ### <a name="create-a-network-card-for-the-virtual-machine"></a>Créer une carte réseau pour la machine virtuelle 
-Créez une carte réseau avec [New-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface) pour la machine virtuelle. La carte réseau connecte la machine virtuelle à un sous-réseau, un groupe de sécurité réseau et une adresse IP publique.
+Créez une carte réseau avec [New-AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface) pour la machine virtuelle. La carte réseau connecte la machine virtuelle à un sous-réseau, un groupe de sécurité réseau et une adresse IP publique.
 
 ```powershell
 # Create a virtual network card and associate with public IP address and NSG
@@ -128,7 +128,7 @@ $vmConfig = New-AzVMConfig -VMName myVM -VMSize Standard_DS1_v2 -Zone 2 | `
     -Skus 2016-Datacenter -Version latest | Add-AzVMNetworkInterface -Id $nic.Id
 ```
 
-Créez la machine virtuelle avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm).
+Créez la machine virtuelle avec [New-AzVM](/powershell/module/az.compute/new-azvm).
 
 ```powershell
 New-AzVM -ResourceGroupName myResourceGroup -Location eastus2 -VM $vmConfig
@@ -136,7 +136,7 @@ New-AzVM -ResourceGroupName myResourceGroup -Location eastus2 -VM $vmConfig
 
 ## <a name="confirm-zone-for-managed-disk"></a>Confirmer la zone de disque managé
 
-Vous avez créé la ressource d’adresse IP de la machine virtuelle dans la même zone de disponibilité que celle de la machine virtuelle. La ressource de disque managé de la machine virtuelle est créée dans la même zone de disponibilité. Vous pouvez le vérifier avec [Get-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/get-azdisk) :
+Vous avez créé la ressource d’adresse IP de la machine virtuelle dans la même zone de disponibilité que celle de la machine virtuelle. La ressource de disque managé de la machine virtuelle est créée dans la même zone de disponibilité. Vous pouvez le vérifier avec [Get-AzDisk](/powershell/module/az.compute/get-azdisk) :
 
 ```powershell
 Get-AzDisk -ResourceGroupName myResourceGroup
@@ -170,4 +170,4 @@ Tags               : {}
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](availability.md) des machines virtuelles Azure.
+Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](../availability.md) des machines virtuelles Azure.

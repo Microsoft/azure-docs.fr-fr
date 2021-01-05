@@ -1,28 +1,24 @@
 ---
-title: 'Didacticiel : Intégration d’Azure Active Directory à Workstars | Microsoft Docs'
+title: "Tutoriel : Intégration d'Azure Active Directory à Workstars | Microsoft Docs"
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Workstars.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 51a4a4e4-ff60-4971-b3f8-a0367b70d220
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/28/2019
 ms.author: jeedes
-ms.openlocfilehash: 43fbc158c9ed0bbe87a75cd845433c7a7be2e6d1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9f53072b106bedb8e49ba7f3728f39137f848a58
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81867909"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92895016"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-workstars"></a>Didacticiel : Intégration d’Azure Active Directory à Workstars
+# <a name="tutorial-azure-active-directory-integration-with-workstars"></a>Tutoriel : Intégration d'Azure Active Directory à Workstars
 
 Dans ce didacticiel, vous allez apprendre à intégrer Workstars à Azure Active Directory (Azure AD).
 L’intégration de Workstars dans Azure AD vous offre les avantages suivants :
@@ -31,10 +27,10 @@ L’intégration de Workstars dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Workstars (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour configurer l’intégration d’Azure AD à Workstars, vous avez besoin des éléments suivants :
 
@@ -57,7 +53,7 @@ Pour configurer l’intégration de Workstars à Azure AD, vous devez ajouter W
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez l’option **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -65,7 +61,7 @@ Pour configurer l’intégration de Workstars à Azure AD, vous devez ajouter W
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **Workstars**, sélectionnez **Workstars** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **Workstars** , sélectionnez **Workstars** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
      ![Workstars dans la liste des résultats](common/search-new-app.png)
 
@@ -89,34 +85,34 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD avec Workstars, procédez comme suit :
 
-1. Dans le [Portail Azure](https://portal.azure.com/), sur la page d’intégration de l’application **Workstars**, sélectionnez **Authentification unique**.
+1. Dans le [Portail Azure](https://portal.azure.com/), sur la page d’intégration de l’application **Workstars** , sélectionnez **Authentification unique**.
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
+2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
+3. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Sur la page **Configurer l’authentification unique avec SAML**, effectuez les étapes suivantes :
+4. Sur la page **Configurer l’authentification unique avec SAML** , effectuez les étapes suivantes :
 
     ![Informations d’authentification unique dans Domaine et URL Workstars](common/idp-intiated.png)
 
-    a. Dans la zone de texte **Identificateur**, tapez une URL : `https://workstars.com`
+    a. Dans la zone de texte **Identificateur** , tapez une URL : `https://workstars.com`
 
-    b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://<subdomain>.workstars.com/saml/login_check`
+    b. Dans la zone de texte **URL de réponse** , tapez une URL au format suivant : `https://<subdomain>.workstars.com/saml/login_check`
 
     > [!NOTE]
     > Cette valeur n’est pas la valeur réelle. Mettez à jour la valeur avec l’URL de réponse réelle. Pour obtenir la valeur, contactez l’[équipe de support technique Workstars](http://support.workstars.com/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
+5. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-6. Dans la section **Configurer Workstars**, copiez la ou les URL appropriées en fonction de vos besoins.
+6. Dans la section **Configurer Workstars** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -132,13 +128,13 @@ Pour configurer l’authentification unique Azure AD avec Workstars, procédez c
 
 2. Dans la barre d’outils principale, cliquez sur **Paramètres**.
 
-    ![Paramètres Workstars](./media/workstars-tutorial/tutorial_workstars_sett.png)
+    ![Capture d’écran montrant le bouton Settings.](./media/workstars-tutorial/tutorial_workstars_sett.png)
 
 3. Accédez à **Se connecter** > **Paramètres**.
 
     ![Connexion à Workstars](./media/workstars-tutorial/tutorial_workstars_signon.png)
 
-    ![Paramètres Workstars](./media/workstars-tutorial/tutorial_workstars_settings.png)
+    ![Capture d’écran montrant la section Single Sign On, où vous pouvez sélectionner Settings.](./media/workstars-tutorial/tutorial_workstars_settings.png)
 
 4. Dans la page **Paramètres d’authentification unique (SAML)** , procédez comme suit :
     
@@ -146,15 +142,15 @@ Pour configurer l’authentification unique Azure AD avec Workstars, procédez c
 
     a. Dans la zone de texte **Identity Provider Name** (Nom du fournisseur d’identité), entrez **Office 365**.
 
-    b. Dans la zone de texte **Identity Provider Entity ID** (ID d’entité du fournisseur d’identité), collez la valeur de l’**identificateur Azure AD**, que vous avez copiée à partir du portail Azure.
+    b. Dans la zone de texte **Identity Provider Entity ID** (ID d’entité du fournisseur d’identité), collez la valeur de l’ **identificateur Azure AD** , que vous avez copiée à partir du portail Azure.
 
     c. Copiez le contenu du certificat téléchargé dans le Bloc-notes, puis collez-le dans la zone de texte **Certificat x509** . 
 
     d. Dans la zone de texte **SAML SSO URL** (URL SSO SAML), collez la valeur **URL de connexion** que vous avez copiée dans le portail Azure.
     
-    e. Dans la zone de texte **Remote Logout URL** (URL de déconnexion distante), collez la valeur de l’**URL de déconnexion** que vous avez copiée à partir du Portail Azure. 
+    e. Dans la zone de texte **Remote Logout URL** (URL de déconnexion distante), collez la valeur de l’ **URL de déconnexion** que vous avez copiée à partir du Portail Azure. 
 
-    f. Sélectionnez **ID de nom** en tant qu’**adresse électronique (par défaut)** .
+    f. Sélectionnez **ID de nom** en tant qu’ **adresse électronique (par défaut)** .
 
     g. Cliquez sur **Confirmer**.
 
@@ -162,7 +158,7 @@ Pour configurer l’authentification unique Azure AD avec Workstars, procédez c
 
 L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory** , sélectionnez **Utilisateurs** , puis sélectionnez **Tous les utilisateurs**.
 
     ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
 
@@ -174,11 +170,11 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
+    a. Dans le champ **Nom** , entrez **BrittaSimon**.
   
-    b. Dans le champ **Nom d’utilisateur**, tapez brittasimon@yourcompanydomain.extension. Par exemple : BrittaSimon@contoso.com
+    b. Dans le champ **Nom d’utilisateur** , tapez brittasimon@yourcompanydomain.extension. Par exemple : BrittaSimon@contoso.com
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+    c. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ Mot de passe.
 
     d. Cliquez sur **Créer**.
 
@@ -186,7 +182,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Workstars.
 
-1. Dans le Portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **Workstars**.
+1. Dans le Portail Azure, sélectionnez **Applications d’entreprise** , **Toutes les applications** , puis **Workstars**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -198,15 +194,15 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
     ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+4. Cliquez sur le bouton **Ajouter un utilisateur** , puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+5. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+7. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer**.
 
 ### <a name="create-workstars-test-user"></a>Créer un utilisateur de test Workstars
 
@@ -216,13 +212,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans W
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Workstars dans le panneau d’accès doit vous connecter automatiquement à l’application Workstars pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Workstars dans le panneau d’accès doit vous connecter automatiquement à l’application Workstars pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

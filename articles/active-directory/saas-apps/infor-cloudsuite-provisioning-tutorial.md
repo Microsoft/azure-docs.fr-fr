@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Infor CloudSuite pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Infor CloudSuite.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 3ea430bb-86a7-4bb4-8315-95434a660e88
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/14/2019
 ms.author: Zhchia
-ms.openlocfilehash: 7b91b8418580717afaf8ddf176f934b3ff1d0c60
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8fdd2c8a326fbdc68d1aec65377f4c465c5ee4c1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057539"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353899"
 ---
 # <a name="tutorial-configure-infor-cloudsuite-for-automatic-user-provisioning"></a>Tutoriel : Configurer Infor CloudSuite pour l’approvisionnement automatique d’utilisateurs
 
@@ -72,11 +68,11 @@ Avant de configurer et d’activer l’approvisionnement automatique d’utilisa
     
     ![Infor CloudSuite – Mot de passe](media/infor-cloudsuite-provisioning-tutorial/password.png)
 
-    ![Infor CloudSuite – Identificateur](media/infor-cloudsuite-provisioning-tutorial/identifier.png)
+    :::image type="content" source="media/infor-cloudsuite-provisioning-tutorial/identifier.png" alt-text="Capture d’écran de la console d’administration Infor CloudSuite montrant une ligne de table mise en évidence. Cette ligne contient un identificateur d’utilisateur, des mots de passe et un horodatage." border="false":::
 
 5. Pour générer le jeton du porteur, copiez l’**identificateur d’utilisateur** et le **mot de passe SCIM**. Collez-les dans Notepad++ séparés par un deux-points. Encodez la valeur de chaîne en accédant à **Plug-ins > Outils MIME > Basic64 Encode**. 
 
-    ![Infor CloudSuite – Identificateur](media/infor-cloudsuite-provisioning-tutorial/token.png)
+    :::image type="content" source="media/infor-cloudsuite-provisioning-tutorial/token.png" alt-text="Capture d’écran d’un document Notepad++. Dans le menu Plugins, les outils MIME sont mis en évidence. Dans le menu d’outils MIME, l’encodage Base64 est mis en évidence." border="false":::
 
 3.  Copiez le jeton du porteur. Vous devrez entrer cette valeur dans le champ Jeton secret dans l’onglet Approvisionnement de votre application CloudSuite dans le Portail Azure.
 
@@ -107,7 +103,7 @@ Avant de configurer Infor CloudSuite pour l’approvisionnement automatique d’
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Infor CloudSuite en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Infor CloudSuite en suivant les instructions fournies dans le [didacticiel sur l’authentification unique pour Infor CloudSuite](https://docs.microsoft.com/azure/active-directory/saas-apps/infor-cloud-suite-tutorial). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Infor CloudSuite en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Infor CloudSuite](./infor-cloud-suite-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 > [!NOTE]
 > Pour en savoir plus sur le point de terminaison SCIM d’Infor CloudSuite, reportez-vous à ce [document](https://docs.infor.com/mingle/12.0.x/en-us/minceolh/jho1449382121585.html#).
@@ -124,11 +120,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://mingle-t20b-scim.mingle.awsdev.infor.com/INFORSTS_TST/v2/scim` dans **URL de locataire**. Saisissez le jeton du porteur récupéré précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Infor CloudSuite. Si la connexion échoue, vérifiez que votre compte Infor CloudSuite dispose de privilèges Administrateur et réessayez.
 

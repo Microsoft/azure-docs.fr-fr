@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 41f9f267880d199d2e221453eea5c3584ce96881
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2d3f382635e9a8b8a562f7a7f60f256d68b90b8f
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81868391"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91363203"
 ---
 # <a name="authorize-developer-accounts-by-using-azure-active-directory-in-azure-api-management"></a>Autoriser des comptes de développeurs à l’aide d’Azure Active Directory dans Gestion des API Azure
 
@@ -34,7 +34,7 @@ Cet article explique comment activer l’accès au portail des développeurs pou
 ## <a name="authorize-developer-accounts-by-using-azure-ad"></a>Autoriser des comptes de développeurs à l’aide d’Azure AD
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com). 
-2. Sélectionnez ![flèche](./media/api-management-howto-aad/arrow.png).
+2. Sélectionnez ![Icône flèche](./media/api-management-howto-aad/arrow.png).
 3. Dans la zone de recherche, tapez **api**.
 4. Sélectionnez **Services Gestion des API**.
 5. Sélectionnez votre instance de service Gestion des API.
@@ -88,7 +88,7 @@ Pour ajouter un groupe Azure AD externe dans APIM, vous devez d’abord effectue
 
 1. Revenez à l’inscription de votre application qui a été créée dans la section précédente.
 2. Sélectionnez **Autorisations d’API**, puis **+Ajouter une autorisation**. 
-3. Dans le volet **Demander une autorisation d’API**, sélectionnez l’onglet **API Microsoft** et sélectionnez la vignette **Microsoft Graph**. Sélectionnez **Autorisations d’application**, recherchez **Répertoire** et sélectionnez l’autorisation **Directory.Read.All**. 
+3. Dans le volet **Demander des autorisations d’API**, sélectionnez l’onglet **API Microsoft**, faites défiler vers le bas, puis sélectionnez la vignette **Azure Active Directory Graph**. Sélectionnez **Autorisations d’application**, recherchez **Répertoire** et sélectionnez l’autorisation **Directory.Read.All**. 
 4. Cliquez sur **Ajouter des autorisations** en bas du volet et cliquez sur **Octroyer le consentement de l’administrateur à {nom_client}** pour accorder l’accès à tous les utilisateurs de ce répertoire. 
 
 Vous pouvez maintenant ajouter des groupes Azure AD externes à partir de l’onglet **Groupes** de votre instance Gestion des API.
@@ -103,7 +103,7 @@ Après avoir ajouté un groupe Azure AD externe, vous pouvez passer en revue ses
  
 Les utilisateurs de l’instance Azure AD configurée peuvent à présent se connecter au portail des développeurs. Ils peuvent afficher les groupes pour lesquels ils disposent d’une visibilité et s’abonner à ces groupes.
 
-## <a name="developer-portal---add-azure-ad-account-authentication"></a><a id="log_in_to_dev_portal"/> Portail des développeurs : ajouter l’authentification de compte Azure AD
+## <a name="developer-portal---add-azure-ad-account-authentication"></a><a id="log_in_to_dev_portal"></a> Portail des développeurs : ajouter l’authentification de compte Azure AD
 
 Dans le portail des développeurs, il est possible de se connecter avec AAD à l’aide du widget **Bouton de connexion : OAuth**. Le widget est déjà inclus dans la page de connexion du contenu du portail des développeurs par défaut.
 
@@ -141,14 +141,14 @@ Votre utilisateur est maintenant inscrit auprès du portail des développeurs po
 [api-management-complete-registration]: ./media/api-management-howto-aad/api-management-complete-registration.png
 [api-management-registration-complete]: ./media/api-management-howto-aad/api-management-registration-complete.png
 
-[How to add operations to an API]: api-management-howto-add-operations.md
+[How to add operations to an API]: ./mock-api-responses.md
 [How to add and publish a product]: api-management-howto-add-products.md
 [Monitoring and analytics]: api-management-monitoring.md
 [Add APIs to a product]: api-management-howto-add-products.md#add-apis
 [Publish a product]: api-management-howto-add-products.md#publish-product
 [Get started with Azure API Management]: get-started-create-service-instance.md
-[API Management policy reference]: api-management-policy-reference.md
-[Caching policies]: api-management-policy-reference.md#caching-policies
+[API Management policy reference]: ./api-management-policies.md
+[Caching policies]: ./api-management-policies.md#caching-policies
 [Create an API Management service instance]: get-started-create-service-instance.md
 
 [https://oauth.net/2/]: https://oauth.net/2/

@@ -1,454 +1,105 @@
 ---
-title: 'Démarrage rapide : Déploiement automatique d’une machine virtuelle avec Azure App Configuration'
-description: Ce guide de démarrage rapide vous montre comment utiliser le module Azure PowerShell et les modèles Azure Resource Manager pour déployer un magasin Azure App Configuration. Il vous montre ensuite comment déployer une machine virtuelle en utilisant les valeurs stockées dans le magasin.
-author: lisaguthrie
-ms.author: lcozzens
-ms.date: 04/14/2020
+title: Créer un magasin Azure App Configuration avec un modèle Azure Resource Manager (modèle ARM)
+titleSuffix: Azure App Configuration
+description: Découvrez comment créer un magasin Azure App Configuration à l’aide d’un modèle Azure Resource Manager (modèle ARM).
+author: ZhijunZhao
+ms.author: zhijzhao
+ms.date: 10/16/2020
+ms.service: azure-resource-manager
 ms.topic: quickstart
-ms.service: azure-app-configuration
-ms.custom:
-- mvc
-- subject-armqs
-ms.openlocfilehash: 96d09de73e8b904a8e26eb4f365d34fab1401203
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: subject-armqs
+ms.openlocfilehash: feabac62564729338e41bf30eaf8d9f5a6317126
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82137550"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92149008"
 ---
-# <a name="quickstart-automated-vm-deployment-with-app-configuration-and-resource-manager-template"></a>Démarrage rapide : Déploiement automatique d’une machine virtuelle avec un modèle Resource Manager et App Configuration
+# <a name="quickstart-create-an-azure-app-configuration-store-by-using-an-arm-template"></a>Démarrage rapide : Créer un magasin Azure App Configuration avec un modèle Resource Manager
 
-Le module Azure PowerShell est utilisé pour créer et gérer des ressources Azure à l’aide des applets de commande ou des scripts PowerShell. Ce guide de démarrage rapide vous montre comment utiliser Azure PowerShell et les modèles Azure Resource Manager pour déployer un magasin Azure App Configuration. Ensuite, il vous explique comment déployer une machine virtuelle en utilisant les paires clé-valeur stockées dans le magasin.
+Ce guide de démarrage rapide explique comment :
 
-Vous utilisez le modèle prérequis pour créer un magasin App Configuration, puis vous ajoutez des paires clé-valeur dans le magasin à l’aide du Portail Azure ou d’Azure CLI. Le modèle principal référence des configurations de paires clé-valeur existantes qui proviennent d’un magasin de configurations déjà créé. Les valeurs récupérées sont ensuite utilisées pour définir les propriétés des ressources créées par le modèle, comme une machine virtuelle dans cet exemple.
+- Déployer un magasin App Configuration à l’aide d’un modèle Azure Resource Manager (modèle ARM).
+- Créer des paires clé/valeur dans un magasin App Configuration à l’aide d’un modèle ARM.
+- Lire des paires clé/valeur dans un magasin App Configuration à partir d’un modèle ARM.
 
 [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
 
-## <a name="before-you-begin"></a>Avant de commencer
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure** . Le modèle s’ouvre dans le portail Azure.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-app-configuration-store-kv%2Fazuredeploy.json)
 
-* Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/).
+## <a name="prerequisites"></a>Prérequis
 
-* Ce démarrage rapide nécessite le module Azure PowerShell. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée sur votre ordinateur local. Si vous devez installer ou mettre à niveau, consultez [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="sign-in-to-azure"></a>Connexion à Azure
+## <a name="review-the-template"></a>Vérifier le modèle
 
-Connectez-vous à votre abonnement Azure avec la commande `Connect-AzAccount`, puis entrez vos informations d’identification Azure dans le navigateur contextuel :
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/101-app-configuration-store-kv/). Il crée un magasin App Configuration avec deux paires clé/valeur à l’intérieur de celui-ci. Il utilise ensuite la fonction `reference` pour générer les valeurs des deux ressources clé/valeur. La lecture de la valeur de la clé de cette manière permet de l’utiliser ailleurs dans le modèle.
+
+Le guide de démarrage rapide utilise l’élément `copy` pour créer plusieurs instances de la ressource clé-valeur. Pour en savoir plus sur l’élément `copy`, consultez [Itération des ressources dans les modèles Resource Manager](../azure-resource-manager/templates/copy-resources.md).
+
+> [!IMPORTANT]
+> Ce modèle nécessite la version de fournisseur de ressources App Configuration `2020-07-01-preview` ou ultérieure. Cette version utilise la fonction `reference` pour lire les paires clé/valeur. La fonction `listKeyValue` qui était utilisée pour lire les paires clé/valeur dans la version précédente n’est pas disponible à partir de la version `2020-07-01-preview`.
+
+:::code language="json" source="~/quickstart-templates/101-app-configuration-store-kv/azuredeploy.json":::
+
+Deux ressources Azure sont définies dans le modèle :
+
+- [Microsoft.AppConfiguration/configurationStores](/azure/templates/microsoft.appconfiguration/2020-06-01/configurationstores) : crée un magasin App Configuration.
+- Microsoft.AppConfiguration/configurationStores/keyValues : crée une paire clé/valeur dans le magasin App Configuration.
+
+> [!NOTE]
+> Le nom de la ressource `keyValues` est une combinaison de clé et d’étiquette. La clé et l’étiquette sont jointes par le délimiteur de `$`. L’étiquette est facultative. Dans l’exemple ci-dessus, la ressource `keyValues` portant le nom `myKey` crée une paire clé/valeur sans étiquette.
+>
+> L’encodage par pourcentage, également appelé encodage d’URL, permet aux clés ou aux étiquettes d’inclure des caractères qui ne sont pas autorisés dans les noms des ressources des modèles Resource Manager. `%` n’étant pas un caractère autorisé, `~` est utilisé à la place. Pour encoder correctement un nom, effectuez les étapes suivantes :
+>
+> 1. Appliquer l’encodage d’URL
+> 2. Remplacer `~` par `~7E`
+> 3. Remplacer `%` par `~`
+>
+> Par exemple, si vous souhaitez créer une paire clé-valeur avec un nom de clé `AppName:DbEndpoint` et un nom d’étiquette `Test`, le nom de la ressource doit être `AppName~3ADbEndpoint$Test`.
+
+## <a name="deploy-the-template"></a>Déployer le modèle
+
+Cliquez sur l’image ci-après pour vous connecter à Azure et ouvrir un modèle. Le modèle crée un magasin App Configuration avec deux paires clé/valeur à l’intérieur de celui-ci.
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-app-configuration-store-kv%2Fazuredeploy.json)
+
+Vous pouvez également déployer le modèle avec l’applet de commande PowerShell suivante. Les paires clé/valeur apparaîtront dans la sortie de la console PowerShell.
 
 ```azurepowershell-interactive
-# Connect to your Azure account
-Connect-AzAccount
+$projectName = Read-Host -Prompt "Enter a project name that is used for generating resource names"
+$location = Read-Host -Prompt "Enter the location (i.e. centralus)"
+$templateUri = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-app-configuration-store-kv/azuredeploy.json"
+
+$resourceGroupName = "${projectName}rg"
+
+New-AzResourceGroup -Name $resourceGroupName -Location "$location"
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateUri
+
+Read-Host -Prompt "Press [ENTER] to continue ..."
 ```
 
-Si vous avez plusieurs abonnements, sélectionnez l’abonnement que vous souhaitez utiliser dans ce guide de démarrage rapide en exécutant les applets de commande suivantes. N’oubliez pas de remplacer `<your subscription name>` par le nom de votre abonnement :
+## <a name="review-deployed-resources"></a>Vérifier les ressources déployées
 
-```azurepowershell-interactive
-# List all available subscriptions.
-Get-AzSubscription
-
-# Select the Azure subscription you want to use to create the resource group and resources.
-Get-AzSubscription -SubscriptionName "<your subscription name>" | Select-AzSubscription
-```
-
-## <a name="create-a-resource-group"></a>Créer un groupe de ressources
-
-Créez un groupe de ressources Azure avec [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
-
-```azurepowershell-interactive
-$resourceGroup = "StreamAnalyticsRG"
-$location = "WestUS2"
-New-AzResourceGroup `
-    -Name $resourceGroup `
-    -Location $location
-```
-
-## <a name="deploy-an-azure-app-configuration-store"></a>Déployer un magasin Azure App Configuration
-
-Avant de pouvoir appliquer des paires clé-valeur sur la machine virtuelle, vous devez disposer d’un magasin Azure App Configuration existant. Cette section explique en détail comment déployer un magasin Azure App Configuration à l’aide d’un modèle Azure Resource Manager. Si vous avez déjà un magasin App Configuration, vous pouvez passer à la section suivante de cet article. 
-
-1. Copiez et collez le code JSON suivant dans un nouveau fichier nommé *prereq.azuredeploy.json*.
-
-   ```json
-   {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "configStoreName": {
-        "type": "string",
-        "metadata": {
-          "description": "Specifies the name of the app configuration store."
-        }
-      },
-      "location": {
-        "type": "string",
-        "defaultValue": "[resourceGroup().location]",
-        "metadata": {
-          "description": "Specifies the Azure location where the app configuration store should be created."
-        }
-      },
-      "skuName": {
-        "type": "string",
-        "defaultValue": "standard",
-        "metadata": {
-          "description": "Specifies the SKU of the app configuration store."
-        }
-      }
-    },
-    "resources": [
-      {
-        "type": "Microsoft.AppConfiguration/configurationStores",
-        "name": "[parameters('configStoreName')]",
-        "apiVersion": "2019-10-01",
-        "location": "[parameters('location')]",
-        "sku": {
-          "name": "[parameters('skuName')]"
-        }
-      }
-    ]
-   }
-   ```
-
-1. Copiez et collez le code JSON ci-dessous dans un nouveau fichier nommé *prereq.azuredeploy.parameters.json*. Remplacez **GET-UNIQUE** par un nom unique pour votre magasin de configuration.
-
-   ```json
-   {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "configStoreName": {
-        "value": "GET-UNIQUE"
-      }
-    }
-   }
-   ```
-
-1. Dans la fenêtre PowerShell, exécutez la commande suivante pour déployer le magasin Azure App Configuration. N’oubliez pas de remplacer les variables (pour le nom du groupe de ressources, le chemin du fichier de modèle et le chemin du fichier de paramètres du modèle) par vos propres valeurs.
-
-   ```azurepowershell
-   New-AzResourceGroupDeployment `
-       -ResourceGroupName "<your resource group>" `
-       -TemplateFile "<path to prereq.azuredeploy.json>" `
-       -TemplateParameterFile "<path to prereq.azuredeploy.parameters.json>"
-   ```
-
-## <a name="add-vm-configuration-key-values"></a>Ajouter les paires clé-valeur sur la machine virtuelle
-
-Vous pouvez créer un magasin App Configuration à partir d’un modèle Azure Resource Manager, mais vous devez ensuite ajouter les paires clé-valeur en utilisant le portail Azure ou Azure CLI. Dans ce guide de démarrage rapide, vous ajoutez les paires clé-valeur en utilisant le portail Azure.
-
-1. Une fois le déploiement terminé, accédez au nouveau magasin App Configuration dans le [portail Azure](https://portal.azure.com).
-
-1. Sélectionnez **Paramètres** > **Clés d’accès**. Notez la chaîne de connexion de la clé primaire en lecture seule. Vous utilisez cette chaîne de connexion plus tard pour configurer votre application, afin qu’elle communique avec le magasin App Configuration que vous avez créé.
-
-1. Sélectionnez **Explorateur de configurations** > **Créer** pour ajouter les paires clé-valeur suivantes :
-
-   |Clé|Valeur|
-   |-|-|
-   |windowsOsVersion|2019-Datacenter|
-   |diskSizeGB|1023|
-  
-   Entrez *modèle* comme **Étiquette**, mais laissez le champ **Type de contenu** vide.
-
-## <a name="deploy-vm-using-stored-key-values"></a>Déployer une machine virtuelle en utilisant les paires clé-valeur
-
-Maintenant que vous avez ajouté les paires clé-valeur au magasin, vous êtes prêt à déployer une machine virtuelle à l’aide d’un modèle Azure Resource Manager. Le modèle référence les clés **windowsOsVersion** et **diskSizeGB** que vous avez créées.
-
-> [!WARNING]
-> Les modèles ARM ne peuvent pas faire référence à des clés dans un magasin App Configuration pour lequel Private Link est activé.
-
-1. Copiez et collez le code JSON suivant dans un nouveau fichier nommé *azuredeploy.json*, ou téléchargez le fichier à partir des [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/blob/master/101-app-configuration/azuredeploy.json).
-
-   ```json
-   {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "adminUsername": {
-            "type": "string",
-            "metadata": {
-                "description": "Admin user name."
-            }
-        },
-        "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Password for the Virtual Machine."
-            }
-        },
-        "appConfigStoreName": {
-            "type": "string",
-            "metadata": {
-                "description": "App configuration store name."
-            }
-        },
-        "appConfigStoreResourceGroup": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the resource group for the app config store."
-            }
-        },
-        "domainNameLabel": {
-            "type": "string",
-            "metadata": {
-                "description": "The DNS label for the public IP address. It must be lowercase. It should match the following regular expression, or it will raise an error: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
-            }
-        },
-        "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-                "description": "Location for all resources."
-            }
-        },
-        "vmSize": {
-            "type": "string",
-            "defaultValue": "Standard_D2_v3",
-            "metadata": {
-                "description": "Size of the VM"
-            }
-        },
-        "vmSkuKey": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the key in the app config store for the VM windows sku"
-            }
-        },
-        "diskSizeKey": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the key in the app config store for the VM disk size"
-            }
-        },
-        "storageAccountName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the storage account."
-            }
-        }
-    },
-    "variables": {
-        "nicName": "myVMNic",
-        "addressPrefix": "10.0.0.0/16",
-        "subnetName": "Subnet",
-        "subnetPrefix": "10.0.0.0/24",
-        "publicIPAddressName": "myPublicIP",
-        "vmName": "SimpleWinVM",
-        "virtualNetworkName": "MyVNET",
-        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "appConfigRef": "[resourceId(parameters('appConfigStoreResourceGroup'), 'Microsoft.AppConfiguration/configurationStores', parameters('appConfigStoreName'))]",
-        "windowsOSVersionParameters": {
-            "key": "[parameters('vmSkuKey')]",
-            "label": "template"
-        },
-        "diskSizeGBParameters": {
-            "key": "[parameters('diskSizeKey')]",
-            "label": "template"
-        }
-    },
-    "resources": [
-        {
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2018-11-01",
-            "name": "[parameters('storageAccountName')]",
-            "location": "[parameters('location')]",
-            "sku": {
-                "name": "Standard_LRS"
-            },
-            "kind": "Storage",
-            "properties": {
-            }
-        },
-        {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2018-11-01",
-            "name": "[variables('publicIPAddressName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "publicIPAllocationMethod": "Dynamic",
-                "dnsSettings": {
-                    "domainNameLabel": "[parameters('domainNameLabel')]"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "2018-11-01",
-            "name": "[variables('virtualNetworkName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[variables('addressPrefix')]"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[variables('subnetName')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetPrefix')]"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2018-11-01",
-            "name": "[variables('nicName')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
-                            },
-                            "subnet": {
-                                "id": "[variables('subnetRef')]"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2018-10-01",
-            "name": "[variables('vmName')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
-            ],
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "[parameters('vmSize')]"
-                },
-                "osProfile": {
-                    "computerName": "[variables('vmName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]"
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "[listKeyValue(variables('appConfigRef'), '2019-10-01', variables('windowsOSVersionParameters')).value]",
-                        "version": "latest"
-                    },
-                    "osDisk": {
-                        "createOption": "FromImage"
-                    },
-                    "dataDisks": [
-                        {
-                            "diskSizeGB": "[listKeyValue(variables('appConfigRef'), '2019-10-01', variables('diskSizeGBParameters')).value]",
-                            "lun": 0,
-                            "createOption": "Empty"
-                        }
-                    ]
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
-                        }
-                    ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": true,
-                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))).primaryEndpoints.blob]"
-                    }
-                }
-            }
-        }
-    ],
-    "outputs": {
-        "hostname": {
-            "type": "string",
-            "value": "[reference(variables('publicIPAddressName')).dnsSettings.fqdn]"
-        }
-    }
-   }
-   ```
-
-1. Copiez et collez le code JSON ci-dessous dans un nouveau fichier nommé *azuredeploy.parameters.json*, ou téléchargez le fichier à partir des [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/blob/master/101-app-configuration/azuredeploy.parameters.json).
-
-   ```json
-   {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "adminPassword": {
-        "value": "GEN-PASSWORD"
-      },
-      "appConfigStoreName":{
-        "value": "GEN-APPCONFIGSTORE-NAME"
-      },
-      "appConfigStoreResourceGroup": {
-         "value": "GEN-APPCONFIGSTORE-RESOURCEGROUP-NAME"
-      },
-      "vmSkuKey":{
-        "value": "GEN-APPCONFIGSTORE-WINDOWSOSVERSION"
-      },
-      "diskSizeKey" :{
-         "value": "GEN-APPCONFIGSTORE-DISKSIZEGB"
-      },
-      "adminUsername":{
-        "value": "GEN-UNIQUE"
-      },
-      "storageAccountName":{
-        "value": "GEN-UNIQUE"
-      },
-      "domainNameLabel":{
-        "value": "GEN-UNIQUE"
-      }
-    }
-   }
-   ```
-
-   Remplacez les valeurs des paramètres dans le modèle par les valeurs suivantes :
-
-   |Paramètre|Valeur|
-   |-|-|
-   |adminPassword|Mot de passe d'administrateur pour la machine virtuelle.|
-   |appConfigStoreName|Nom de votre magasin Azure App Configuration.|
-   |appConfigStoreResourceGroup|Groupe de ressources qui contient votre magasin App Configuration.|
-   |vmSkuKey|*windowsOSVersion*|
-   |diskSizeKey|*diskSizeGB*|
-   |adminUsername|Nom d’administrateur pour la machine virtuelle.|
-   |storageAccountName|Nom unique d’un compte de stockage associé à la machine virtuelle.|
-   |domainNameLabel|Nom de domaine unique.|
-
-1. Dans la fenêtre PowerShell, exécutez la commande suivante pour déployer la machine virtuelle. N’oubliez pas de remplacer les variables (pour le nom du groupe de ressources, le chemin du fichier de modèle et le chemin du fichier de paramètres du modèle) par vos propres valeurs.
-
-   ```azurepowershell
-   New-AzResourceGroupDeployment `
-       -ResourceGroupName "<your resource group>"
-       -TemplateFile "<path to azuredeploy.json>" `
-       -TemplateParameterFile "<path to azuredeploy.parameters.json>"
-   ```
-
-Félicitations ! Vous avez déployé une machine virtuelle avec les configurations stockées dans Azure App Configuration.
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Dans la zone de recherche du portail Azure, tapez **App Configuration** . Sélectionnez **App Configuration** dans la liste.
+1. Sélectionnez la ressource App Configuration tout juste créée.
+1. Sous **Opérations** , cliquez sur **Explorateur de configurations** .
+1. Vérifiez que deux paires clé/valeur existent.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Lorsque vous n’en avez plus besoin, supprimez le groupe de ressources, le magasin App Configuration, la machine virtuelle et toutes les ressources associées. Si vous envisagez de réutiliser le magasin App Configuration ou la machine virtuelle plus tard, ne les supprimez pas. Si vous n’avez plus besoin de ce travail, supprimez toutes les ressources créées dans le cadre de ce guide de démarrage rapide en exécutant l’applet de commande suivante :
+Quand vous n’en avez plus besoin, supprimez le groupe de ressources, le magasin App Configuration et toutes les ressources associées. Si vous envisagez de réutiliser le magasin App Configuration, ne le supprimez pas. Si vous n’avez plus besoin de ce magasin, supprimez toutes les ressources créées dans le cadre de ce guide de démarrage rapide en exécutant l’applet de commande suivante :
 
 ```azurepowershell-interactive
-Remove-AzResourceGroup `
-  -Name $resourceGroup
+$resourceGroupName = Read-Host -Prompt "Enter the Resource Group name"
+Remove-AzResourceGroup -Name $resourceGroupName
+Write-Host "Press [ENTER] to continue..."
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-
-Dans ce guide de démarrage rapide, vous avez déployé une machine virtuelle en utilisant un modèle Azure Resource Manager et des paires clé-valeur du magasin Azure App Configuration.
 
 Pour découvrir comment créer d’autres applications avec Azure App Configuration, passez à l’article suivant :
 

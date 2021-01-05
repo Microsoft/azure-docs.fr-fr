@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer un serveur - Azure PowerShell - Azure Database pour MySQL'
 description: Ce guide de démarrage rapide explique comment utiliser PowerShell pour créer un serveur Azure Database pour MySQL dans un groupe de ressources Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.devlang: azurepowershell
 ms.topic: quickstart
 ms.date: 04/28/2020
-ms.custom: mvc
-ms.openlocfilehash: 2e12da29a8388bf4a232930c3737be7ddce80d12
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: d12d447acb3b6bf2b6f84e9768e9f063a9a36b03
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611940"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94542301"
 ---
 # <a name="quickstart-create-an-azure-database-for-mysql-server-using-powershell"></a>Démarrage rapide : Créer un serveur Azure Database pour MySQL avec PowerShell
 
@@ -45,7 +45,7 @@ Set-AzContext -SubscriptionId 00000000-0000-0000-0000-000000000000
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un [groupe de ressources Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) avec l’applet de commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
+Créez un [groupe de ressources Azure](../azure-resource-manager/management/overview.md) avec l’applet de commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
 
 L’exemple suivant crée un groupe de ressources nommé **myresourcegroup** dans la région **USA Ouest**.
 
@@ -201,7 +201,7 @@ Pour les autres commandes, consultez le [Manuel de référence de MySQL 5.7 - 
 
 1. Dans la boîte de dialogue **Configurer une nouvelle connexion**, entrez les informations suivantes dans l’onglet **Paramètres** :
 
-   ![configurer une nouvelle connexion](./media/quickstart-create-mysql-server-database-using-azure-powershell/setup-new-connection.png)
+   :::image type="content" source="./media/quickstart-create-mysql-server-database-using-azure-powershell/setup-new-connection.png" alt-text="configurer une nouvelle connexion":::
 
     |    **Paramètre**    |           **Valeur suggérée**           |                      **Description**                       |
     | ----------------- | --------------------------------------- | ---------------------------------------------------------- |

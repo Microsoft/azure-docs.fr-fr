@@ -1,24 +1,14 @@
 ---
 title: Azure Service Bus - Expiration des messages
 description: Cet article traite de l'expiration et de la durée de vie des messages Azure Service Bus. Passé ce délai, le message n’est plus remis.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: e86c92fa1cfb13929d5617502224f479709efdd3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/29/2020
+ms.openlocfilehash: 47f8bdb4440adfeb5197f90cdad5358a442ce6a7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76756332"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91569924"
 ---
 # <a name="message-expiration-time-to-live"></a>Expiration des messages (durée de vie)
 
@@ -37,9 +27,9 @@ Lorsque le message est verrouillé, l’application peut être en possession d�
 Tous les messages envoyés dans une file d’attente ou une rubrique sont soumis à un délai d’expiration par défaut qui est défini au niveau de l’entité avec la propriété [defaultMessageTimeToLive](/azure/templates/microsoft.servicebus/namespaces/queues). Ce délai peut également être défini dans le portail au moment de la création et modifié plus tard. Le délai d’expiration par défaut est utilisé pour tous les messages envoyés à l’entité où la propriété [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) n’est pas définie explicitement. Le délai d’expiration par défaut sert également de plafond pour la valeur **TimeToLive**. Les messages qui ont un délai d’expiration **TimeToLive** plus long que le délai par défaut sont ajustés en mode silencieux à la valeur **defaultMessageTimeToLive** avant d’être mis en file attente.
 
 > [!NOTE]
-> La valeur par défaut [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) d’un message réparti est [TimeSpan.Max](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue), sauf indication contraire.
+> La valeur par défaut [TimeToLive](/dotnet/api/microsoft.azure.servicebus.message.timetolive#Microsoft_Azure_ServiceBus_Message_TimeToLive) d’un message réparti est [TimeSpan.Max](/dotnet/api/system.timespan.maxvalue), sauf indication contraire.
 >
-> Pour les entités de messagerie (files d’attente et rubriques), le délai d’expiration par défaut est également [TimeSpan.Max](https://docs.microsoft.com/dotnet/api/system.timespan.maxvalue) pour les niveaux standard et Premium de Service Bus.  Pour le niveau de base, le délai d’expiration par défaut est de 14 jours.
+> Pour les entités de messagerie (files d’attente et rubriques), le délai d’expiration par défaut est également [TimeSpan.Max](/dotnet/api/system.timespan.maxvalue) pour les niveaux standard et Premium de Service Bus. Pour le niveau **de base**, le délai d’expiration par défaut est de **14 jours** (qui est également le délai d’expiration maximal).
 
 Vous pouvez éventuellement choisir de déplacer les messages expirés vers une [file d’attente de lettres mortes](service-bus-dead-letter-queues.md) en définissant la propriété [EnableDeadLetteringOnMessageExpiration](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enabledeadletteringonmessageexpiration#Microsoft_ServiceBus_Messaging_QueueDescription_EnableDeadLetteringOnMessageExpiration) ou en cochant la case correspondante dans le portail. Si l’option reste désélectionnée, les messages expirés sont supprimés. La distinction entre les messages expirés déplacés vers la file d’attente de lettres mortes et les autres messages de lettres mortes est possible grâce à la valeur de la propriété [DeadletterReason](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) que le répartiteur stocke dans la section des propriétés utilisateur (sa valeur est [TTLExpiredException](service-bus-dead-letter-queues.md#moving-messages-to-the-dlq) dans le cas présent).
 

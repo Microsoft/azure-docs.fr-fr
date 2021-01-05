@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 64caa1228cd073358bef496721c22b17554031d3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1dd82fb00c55e3676929999f204eae8755671038
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189281"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93314749"
 ---
 # <a name="overview-of-data-science-using-spark-on-azure-hdinsight"></a>Vue d’ensemble de la science des données à l’aide de Spark sur Azure HDInsight
 
@@ -41,8 +41,8 @@ Ces blocs-notes doivent être exécutés dans le noyau pySpark du serveur de Blo
 ### <a name="spark-20-notebooks"></a>Notebooks Spark 2.0
 Ces blocs-notes doivent être exécutés dans le noyau pySpark3 du serveur de Bloc-notes Jupyter.
 
-- [Spark2.0-pySpark3-machine-learning-data-science-spark-advanced-data-exploration-modeling.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/pySpark/Spark2.0/Spark2.0-pySpark3-machine-learning-data-science-spark-advanced-data-exploration-modeling.ipynb) : ce fichier donne des informations sur l’exploration, la modélisation et le scoring de données dans des clusters Spark 2.0 à l’aide du jeu de données des courses et tarifs de taxi à New York décrit [ici](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-spark-overview#the-nyc-2013-taxi-data). Ce bloc-notes peut être un bon point de départ pour explorer rapidement le code que nous avons fourni pour Spark 2.0. Pour un bloc-notes plus détaillé analysant les données sur les taxis de New York, consultez le bloc-notes suivant de cette liste. Consultez les notes à la suite de cette liste comparant ces bloc-notes.
-- [Spark2.0-pySpark3_NYC_Taxi_Tip_Regression.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/pySpark/Spark2.0/Spark2.0_pySpark3_NYC_Taxi_Tip_Regression.ipynb) : ce fichier montre comment effectuer des opérations de data wrangling (Spark SQL et trames de données), d’exploration, de modélisation et de scoring l’aide du jeu de données des courses et tarifs de taxi à New York décrit [ici](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-spark-overview#the-nyc-2013-taxi-data).
+- [Spark2.0-pySpark3-machine-learning-data-science-spark-advanced-data-exploration-modeling.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/pySpark/Spark2.0/Spark2.0-pySpark3-machine-learning-data-science-spark-advanced-data-exploration-modeling.ipynb) : ce fichier donne des informations sur l’exploration, la modélisation et le scoring de données dans des clusters Spark 2.0 à l’aide du jeu de données des courses et tarifs de taxi à New York décrit [ici](#the-nyc-2013-taxi-data). Ce bloc-notes peut être un bon point de départ pour explorer rapidement le code que nous avons fourni pour Spark 2.0. Pour un bloc-notes plus détaillé analysant les données sur les taxis de New York, consultez le bloc-notes suivant de cette liste. Consultez les notes à la suite de cette liste comparant ces bloc-notes.
+- [Spark2.0-pySpark3_NYC_Taxi_Tip_Regression.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/pySpark/Spark2.0/Spark2.0_pySpark3_NYC_Taxi_Tip_Regression.ipynb) : ce fichier montre comment effectuer des opérations de data wrangling (Spark SQL et trames de données), d’exploration, de modélisation et de scoring l’aide du jeu de données des courses et tarifs de taxi à New York décrit [ici](#the-nyc-2013-taxi-data).
 - [Spark2.0-pySpark3_Airline_Departure_Delay_Classification.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/pySpark/Spark2.0/Spark2.0_pySpark3_Airline_Departure_Delay_Classification.ipynb) : ce fichier montre comment effectuer des opérations de data wrangling (Spark SQL et trames de données), d’exploration, de modélisation et de scoring l’aide du célèbre jeu de données des départs à l’heure des compagnies aériennes de 2011 et 2012. Nous avons intégré le jeu de données de compagnies aériennes avec les données météorologiques des aéroports (par exemple, vitesse du vent, température, altitude, etc.) avant la modélisation. Ces fonctionnalités météo peuvent donc être incluses dans le modèle.
 
 <!-- -->
@@ -93,20 +93,31 @@ Pesant environ 20 Go au format compressé (ou 48 Go au format non compressé),
 
 1. Les fichiers CSV trip_data contiennent les détails de chaque course, comme le nombre de passagers, les points d’embarquement et de débarquement, la durée du trajet et la distance parcourue. Voici quelques exemples d’enregistrements :
 
-        medallion,hack_license,vendor_id,rate_code,store_and_fwd_flag,pickup_datetime,dropoff_datetime,passenger_count,trip_time_in_secs,trip_distance,pickup_longitude,pickup_latitude,dropoff_longitude,dropoff_latitude
-        89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,1,N,2013-01-01 15:11:48,2013-01-01 15:18:10,4,382,1.00,-73.978165,40.757977,-73.989838,40.751171
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-06 00:18:35,2013-01-06 00:22:54,1,259,1.50,-74.006683,40.731781,-73.994499,40.75066
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-05 18:49:41,2013-01-05 18:54:23,1,282,1.10,-74.004707,40.73777,-74.009834,40.726002
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:54:15,2013-01-07 23:58:20,2,244,.70,-73.974602,40.759945,-73.984734,40.759388
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:25:03,2013-01-07 23:34:24,1,560,2.10,-73.97625,40.748528,-74.002586,40.747868
+   `medallion,hack_license,vendor_id,rate_code,store_and_fwd_flag,pickup_datetime,dropoff_datetime,passenger_count,trip_time_in_secs,trip_distance,pickup_longitude,pickup_latitude,dropoff_longitude,dropoff_latitude`
+
+   `89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,1,N,2013-01-01 15:11:48,2013-01-01 15:18:10,4,382,1.00,-73.978165,40.757977,-73.989838,40.751171`
+
+   `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-06 00:18:35,2013-01-06 00:22:54,1,259,1.50,-74.006683,40.731781,-73.994499,40.75066`
+
+   `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-05 18:49:41,2013-01-05 18:54:23,1,282,1.10,-74.004707,40.73777,-74.009834,40.726002`
+
+   `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:54:15,2013-01-07 23:58:20,2,244,.70,-73.974602,40.759945,-73.984734,40.759388`
+
+   `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:25:03,2013-01-07 23:34:24,1,560,2.10,-73.97625,40.748528,-74.002586,40.747868`
+
 2. Les fichiers CSV trip_fare contiennent des informations sur le prix payé pour chaque trajet, comme le type de paiement, le montant, la surcharge et les taxes, les pourboires et péages, ainsi que le montant total réglé. Voici quelques exemples d’enregistrements :
 
-        medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount
-        89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,2013-01-01 15:11:48,CSH,6.5,0,0.5,0,0,7
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-06 00:18:35,CSH,6,0.5,0.5,0,0,7
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-05 18:49:41,CSH,5.5,1,0.5,0,0,7
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:54:15,CSH,5,0.5,0.5,0,0,6
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:25:03,CSH,9.5,0.5,0.5,0,0,10.5
+   `medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount`
+
+   `89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,2013-01-01 15:11:48,CSH,6.5,0,0.5,0,0,7`
+
+   `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-06 00:18:35,CSH,6,0.5,0.5,0,0,7`
+
+   `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-05 18:49:41,CSH,5.5,1,0.5,0,0,7`
+
+   `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:54:15,CSH,5,0.5,0.5,0,0,6`
+
+   `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:25:03,CSH,9.5,0.5,0.5,0,0,10.5`
 
 Nous avons pris un échantillon représentant 0,1 % de ces fichiers, et joint les fichiers CSV trip\_data et trip\_fare dans un jeu de données unique à utiliser comme jeu de données d’entrée pour cette procédure pas à pas. La clé unique permettant de joindre trip\_data et trip\_fare se compose des champs suivants : medallion (médaillon), hack\_licence (licence de taxi) et pickup\_datetime (date et heure d’embarquement). Chaque enregistrement du jeu de données contient les attributs suivants qui représentent un trajet NYC Taxy :
 
@@ -145,13 +156,13 @@ Vous pouvez lancer le notebook Jupyter à partir du portail Azure. Recherchez vo
 
 ![Tableaux de bord des clusters](./media/spark-overview/spark-jupyter-on-portal.png)
 
-Vous pouvez également naviguer vers ***`https://CLUSTERNAME.azurehdinsight.net/jupyter`*** pour accéder aux blocs-notes Jupyter. Remplacez la partie CLUSTERNAME de cette URL par le nom de votre propre cluster. Pour accéder aux blocs-notes, vous avez besoin du mot de passe de votre compte d’administrateur.
+Vous pouvez également accéder à * *_`https://CLUSTERNAME.azurehdinsight.net/jupyter`_* _ pour accéder aux Jupyter Notebooks. Remplacez la partie CLUSTERNAME de cette URL par le nom de votre propre cluster. Pour accéder aux blocs-notes, vous avez besoin du mot de passe de votre compte d’administrateur.
 
 ![Parcourez Jupyter Notebooks](./media/spark-overview/spark-jupyter-notebook.png)
 
 Sélectionnez PySpark pour afficher un répertoire contenant quelques exemples de notebooks préconfigurés qui utilisent l’API PySpark. Les notebooks contenant les exemples de code de cette suite de rubriques Spark sont disponibles sur [GitHub](https://github.com/Azure/Azure-MachineLearning-DataScience/tree/master/Misc/Spark/pySpark)
 
-Vous pouvez télécharger les notebooks directement de [GitHub](https://github.com/Azure/Azure-MachineLearning-DataScience/tree/master/Misc/Spark/pySpark) sur le serveur de notebooks Jupyter de votre cluster Spark. Dans la page d’accueil de votre Jupyter, cliquez sur le bouton **Télécharger** dans la partie droite de l’écran. Cette action ouvre un explorateur de fichiers. Vous pouvez coller l’URL GitHub (contenu brut) du notebook et cliquer sur **Ouvrir**.
+Vous pouvez télécharger les notebooks directement de [GitHub](https://github.com/Azure/Azure-MachineLearning-DataScience/tree/master/Misc/Spark/pySpark) sur le serveur de notebooks Jupyter de votre cluster Spark. Sur la page d’accueil de votre Jupyter, cliquez sur le bouton _ *Chargement* * dans la partie droite de l’écran. Cette action ouvre un explorateur de fichiers. Vous pouvez coller l’URL GitHub (contenu brut) du notebook et cliquer sur **Ouvrir**.
 
 Le nom de fichier réapparaît dans votre liste de fichiers Jupyter avec un bouton **Charger**. Cliquez sur ce bouton **Télécharger** . Le bloc-notes a été importé. Répétez ces étapes pour télécharger les autres blocs-notes de cette procédure.
 
@@ -182,4 +193,3 @@ Maintenant que vous avez configuré un cluster HDInsight Spark et téléchargé 
 **Utilisation des modèles :** pour découvrir comment évaluer les modèles de classification et de régression créés dans cette rubrique, consultez la page [Noter et évaluer des modèles de Machine Learning créés avec Spark](spark-model-consumption.md).
 
 **Validation croisée et balayage hyperparamétrique** : pour savoir comment entraîner des modèles avec la validation croisée et le balayage hyperparamétrique, voir [Exploration et modélisation avancées des données avec Spark](spark-advanced-data-exploration-modeling.md).
-

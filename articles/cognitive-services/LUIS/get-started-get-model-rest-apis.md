@@ -1,27 +1,25 @@
 ---
-title: 'Démarrage rapide : Reconnaître une intention avec des API REST - LUIS'
+title: Guide pratique pour modifier votre modèle LUIS à l’aide de l’API REST
 titleSuffix: Azure Cognitive Services
-description: Dans ce guide de démarrage rapide avec une API REST, utilisez une application LUIS publique disponible pour déterminer l’intention d’un utilisateur à partir d’un texte de conversation.
+description: Dans cet article, ajoutez des exemples d’énoncés pour changer un modèle et entraîner l’application.
 services: cognitive-services
-author: diberry
 manager: nitinme
-ms.custom: seodec18
+ms.custom: seodec18, devx-track-python, devx-track-js, devx-track-csharp
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: quickstart
-ms.date: 02/14/2020
-ms.author: diberry
+ms.topic: conceptual
+ms.date: 11/30/2020
 zone_pivot_groups: programming-languages-set-one
-ms.openlocfilehash: 58f164f1522975faa2e7a7e7d7ed08145a6c5889
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 7346037ad804da4f68a2bc6512494c461d7fc5bd
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77524646"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436179"
 ---
-# <a name="quickstart-change-model-with-rest-apis"></a>Démarrage rapide : Modifier le modèle avec les API REST
+# <a name="how-to-change-the-luis-model-with-rest-apis"></a>Guide pratique pour modifier le modèle LUIS avec des API REST
 
-Dans ce guide de démarrage rapide, vous allez ajouter des exemples d’énoncés à une application d’agence de voyages et entraîner l’application. Les exemples d’énoncés sont du texte utilisateur conversationnel mappé à une intention. En fournissant des exemples d’énoncés pour les intentions, vous apprenez à l’application LUIS quels types de texte fourni par l’utilisateur appartiennent à quelle intention.
+Dans cet article, vous allez ajouter des exemples d’énoncés à une application de pizza pour entraîner l’application. Les exemples d’énoncés sont du texte utilisateur conversationnel mappé à une intention. En fournissant des exemples d’énoncés pour les intentions, vous apprenez à l’application LUIS quels types de texte fourni par l’utilisateur appartiennent à quelle intention.
 
 ::: zone pivot="programming-language-csharp"
 [!INCLUDE [Get intent with C# and REST](./includes/get-started-get-model-rest-csharp.md)]

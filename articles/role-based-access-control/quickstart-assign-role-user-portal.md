@@ -13,12 +13,12 @@ ms.tgt_pltfrm: ''
 ms.workload: identity
 ms.date: 02/22/2019
 ms.author: rolyon
-ms.openlocfilehash: e70a3a1eedbc56754ad46fd99dddc0c7a3a6cf2f
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: c6736bb2642ff08d0aa3cda536ef1599324efded
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735842"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85362010"
 ---
 # <a name="tutorial-grant-a-user-access-to-azure-resources-using-the-azure-portal"></a>Tutoriel : Accorder un accès utilisateur aux ressources Azure à l’aide du portail Azure
 
@@ -72,7 +72,9 @@ Dans le contrôle d’accès en fonction du rôle Azure, vous créez une attribu
 
    Si vous n’avez pas les autorisations pour attribuer des rôles, l’option Ajouter une attribution de rôle sera désactivée.
 
-   ![Ajoutez un menu](./media/role-assignments-portal/add-menu.png)
+   ![Menu Ajouter une attribution de rôle](./media/shared/add-role-assignment-menu.png)
+
+    Le volet Ajouter une attribution de rôle s’ouvre.
 
    ![Volet Ajouter une attribution de rôle](./media/quickstart-assign-role-user-portal/add-role-assignment.png)
 

@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc
-ms.openlocfilehash: e1a66da52eea6d5da711fa6def58eba65d0960ed
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6cca34774038156cfb01e872e751338c1c96efaa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74976738"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91315998"
 ---
 # <a name="tutorial-provision-devices-across-load-balanced-iot-hubs"></a>Tutoriel : Approvisionner des appareils sur des hubs IoT à charge équilibrée
 
@@ -67,8 +67,6 @@ Liez le service Device Provisioning et le hub IoT pour que le service Device Pro
 4. Dans la page **Ajouter un lien au hub IoT**, utilisez les cases d’option pour spécifier si le hub IoT lié se trouve dans l’abonnement actuel ou dans un autre abonnement. Ensuite, choisissez le nom du hub IoT dans la zone **Hub IoT**.
 5. Cliquez sur **Enregistrer**.
 
-## <a name="next-steps"></a>Étapes suivantes
-
 Dans ce didacticiel, vous avez appris à :
 
 > [!div class="checklist"]
@@ -76,6 +74,8 @@ Dans ce didacticiel, vous avez appris à :
 > * Ajouter une entrée de liste d’inscriptions au deuxième appareil
 > * Définir la stratégie d’allocation du service Device Provisioning sur une **distribution égale**
 > * Lier le nouveau hub IoT au service Device Provisioning
+
+## <a name="next-steps"></a>Étapes suivantes
 
 <!-- Advance to the next tutorial to learn how to 
  Replace this .md

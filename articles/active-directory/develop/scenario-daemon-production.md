@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: e5d25169aa3daee33a9f02e605cbff91776dc7f1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 72e6d0a8677f7a8175223b80541c99026a9eb16f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885427"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88119162"
 ---
 # <a name="daemon-app-that-calls-web-apis---move-to-production"></a>Application démon appelant des API web : passage en production
 
@@ -41,8 +41,8 @@ Voici quelques liens pour vous aider à en savoir plus :
 
 - Démarrage rapide : [Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application console à l’aide de l’identité de l’application](./quickstart-v2-netcore-daemon.md).
 - Documentation de référence pour :
-  - Instanciation de [ConfidentialClientApplication](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.confidentialclientapplicationbuilder).
-  - Appeler [AcquireTokenForClient](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.acquiretokenforclientparameterbuilder).
+  - Instanciation de [ConfidentialClientApplication](/dotnet/api/microsoft.identity.client.confidentialclientapplicationbuilder).
+  - Appeler [AcquireTokenForClient](/dotnet/api/microsoft.identity.client.acquiretokenforclientparameterbuilder).
 - Autres exemples/tutoriels :
   - [microsoft-identity-platform-console-daemon](https://github.com/Azure-Samples/microsoft-identity-platform-console-daemon) propose une simple application de console démon .NET Core qui affiche les utilisateurs d’un locataire interrogeant Microsoft Graph.
 

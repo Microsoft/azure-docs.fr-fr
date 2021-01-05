@@ -8,16 +8,16 @@ manager: daveba
 ms.subservice: hybrid
 ms.service: active-directory
 ms.workload: identity
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/27/2019
 ms.author: billmath
 author: billmath
-ms.openlocfilehash: 6a89c5e3fb84f797d9ad7f81626fb7185ce3e076
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: bef5942707c1ded22ba82bdb0d945b9fdb23fffa
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82854151"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349348"
 ---
 # <a name="configure-group-claims-for-applications-with-azure-active-directory"></a>Configurer des revendications de groupe pour des applications avec Azure Active Directory
 
@@ -78,11 +78,11 @@ Pour configurer les revendications de groupe pour une application SAML de galeri
 
 Cliquez sur **Ajouter une revendication de groupe**.  
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-1.png)
+![Capture d’écran montrant la page « Attributs et revendications de l’utilisateur » avec l’option « Ajouter une revendication de groupe » sélectionnée.](media/how-to-connect-fed-group-claims/group-claims-ui-1.png)
 
 Utilisez les cases d’option pour sélectionner les groupes à inclure dans le jeton
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-2.png)
+![Capture d’écran montrant la fenêtre « Revendications de groupe » avec l’option « Groupes de sécurité » sélectionnée.](media/how-to-connect-fed-group-claims/group-claims-ui-2.png)
 
 | Sélection | Description |
 |----------|-------------|
@@ -93,15 +93,15 @@ Utilisez les cases d’option pour sélectionner les groupes à inclure dans le 
 
 Par exemple, pour émettre tous les groupes de sécurité dont l’utilisateur est membre, sélectionnez Groupes de sécurité
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-3.png)
+![Capture d’écran montrant la fenêtre « Revendications de groupe » avec l’option « Groupes de sécurité » sélectionnée et le menu déroulant « Attribut source » ouvert.](media/how-to-connect-fed-group-claims/group-claims-ui-3.png)
 
 Pour émettre des groupes à l’aide d’attributs Active Directory synchronisés à partir d’Active Directory au lieu d’ObjectID Azure AD, sélectionnez le format requis dans la liste déroulante. Seuls les groupes synchronisés à partir d’Active Directory sont inclus dans les revendications.
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-4.png)
+![Capture d’écran montrant le menu déroulant « Attribut source » ouvert.](media/how-to-connect-fed-group-claims/group-claims-ui-4.png)
 
 Pour émettre uniquement les groupes attribués à l’application, sélectionnez **Groupes attribués à l’application**
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-4-1.png)
+![Capture d’écran montrant la fenêtre « Revendications de groupe » avec l’option « Groupes affectés à l’application » sélectionnée.](media/how-to-connect-fed-group-claims/group-claims-ui-4-1.png)
 
 Les groupes attribués à l’application sont inclus dans le jeton.  Les autres groupes dont l’utilisateur est membre sont omis.  Avec cette option, les groupes imbriqués ne sont pas inclus et l’utilisateur doit être un membre direct du groupe attribué à l’application.
 
@@ -115,11 +115,11 @@ La manière sont les revendications de groupe sont émises peut être modifiée 
 
 Personnaliser le nom de la revendication de groupe :  Si cette option est sélectionnée, un type de revendication différent peut être spécifié pour les revendications de groupe.   Entrez le type de revendication dans le champ Nom, et l’espace de noms facultatif pour la revendication dans le champ Espace de noms.
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-5.png)
+![Capture d’écran montrant la section « Options avancées » avec l’option « Personnaliser le nom de la revendication de groupe » sélectionnée et les valeurs « Nom » et « Espace de noms » entrées.](media/how-to-connect-fed-group-claims/group-claims-ui-5.png)
 
 Certaines applications requièrent que les informations d’appartenance de groupe apparaissent dans la revendication « rôle ». Vous pouvez éventuellement émettre les groupes de l’utilisateur en tant que rôles en cochant la case « Émettre les groupes en tant que revendications de rôle ».
 
-![Interface utilisateur des revendications](media/how-to-connect-fed-group-claims/group-claims-ui-6.png)
+![Capture d’écran montrant la section « Options avancées » avec les options « Personnaliser le nom de la revendication de groupe » et « Émettre les groupes en tant que revendications de rôle » sélectionnées.](media/how-to-connect-fed-group-claims/group-claims-ui-6.png)
 
 > [!NOTE]
 > Si l’option pour émettre des données de groupe en tant que rôles est utilisée, seuls les groupes s’affichent dans la revendication de rôle.  Les rôles d’application auxquels l’utilisateur est affecté n’apparaissent pas dans la revendication de rôle.
@@ -146,6 +146,7 @@ Les valeurs autorisées sont :
 | **"SecurityGroup"** | Émet les groupes de sécurité dont l’utilisateur est membre dans la revendication de groupe |
 | **"DirectoryRole"** | Si l’utilisateur se voit affecter des rôles d’annuaire, ceux-ci sont émis en tant que revendication « wids » (aucune revendication de groupe n’est émise) |
 | **"ApplicationGroup"** | Émet uniquement les groupes qui sont explicitement affectés à l’application et dont l’utilisateur est membre |
+| **"None"** | Aucun groupe n’est retourné. (Non sensible à la case, le paramètre « None » fonctionne également et il peut être défini directement dans le manifeste d’application.) |
 
    Par exemple :
 
@@ -222,6 +223,6 @@ Pour émettre des noms de groupes à retourner au format netbiosDomain\samAccoun
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Affecter un utilisateur ou un groupe à une application d’entreprise](../../active-directory/manage-apps/assign-user-or-group-access-portal.md)
-
-[Configurer des revendications de rôle](../../active-directory/develop/active-directory-enterprise-app-role-management.md)
+- [Ajouter une autorisation à une application web ASP.NET Core à l’aide de groupes et revendications de groupe (exemple de code)](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/blob/master/5-WebApp-AuthZ/5-2-Groups/README.md)
+- [Affecter un utilisateur ou un groupe à une application d’entreprise](../../active-directory/manage-apps/assign-user-or-group-access-portal.md)
+- [Configurer des revendications de rôle](../../active-directory/develop/active-directory-enterprise-app-role-management.md)

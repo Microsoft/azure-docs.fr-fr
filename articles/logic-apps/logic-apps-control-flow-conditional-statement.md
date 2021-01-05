@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 10/09/2018
-ms.openlocfilehash: fe79cf5af86e1f303e4735214b993d8db4488a25
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 19f42270e37c42cf56bbde04f73c01027a56ff63
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74793253"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89657392"
 ---
 # <a name="create-conditional-statements-that-control-workflow-actions-in-azure-logic-apps"></a>Créer des instructions conditionnelles qui contrôlent des actions de workflow dans Azure Logic Apps
 
@@ -28,7 +28,7 @@ Par exemple, supposons que vous disposez d’une application logique qui envoie 
 
 * Des connaissances de base en [création d’applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 
-* Pour suivre l’exemple présenté dans cet article, [créez cet exemple d’application logique](../logic-apps/quickstart-create-first-logic-app-workflow.md) avec un compte Outlook.com ou Office 365 Outlook.
+* Pour suivre l'exemple présenté dans cet article, [créez cet exemple d'application logique](../logic-apps/quickstart-create-first-logic-app-workflow.md) avec un compte Outlook.com ou avec un compte professionnel ou scolaire.
 
 ## <a name="add-condition"></a>Ajouter une condition
 
@@ -110,7 +110,7 @@ Voici la définition de code générale de haut niveau derrière une instruction
 
 ## <a name="get-support"></a>Obtenir de l’aide
 
-* Si vous avez des questions, consultez le [forum Azure Logic Apps](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* Pour toute question, consultez la [page de questions Microsoft Q&A pour Azure Logic Apps](/answers/topics/azure-logic-apps.html).
 * Pour voter pour des fonctionnalités et suggestions ou pour en soumettre, visitez le [site de commentaires des utilisateurs Azure Logic Apps](https://aka.ms/logicapps-wish).
 
 ## <a name="next-steps"></a>Étapes suivantes

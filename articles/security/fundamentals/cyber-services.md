@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 01/14/2019
 ms.author: terrylan
-ms.openlocfilehash: 997bd480fd8b552d7cff61d7a4798e0a3d4db5bf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 14ff56c32fb1fb6ef2fef862e50277e8ef3e5b81
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80548640"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94412882"
 ---
 # <a name="microsoft-services-in-cybersecurity"></a>Services Microsoft en cyber-sécurité
 
@@ -32,12 +32,12 @@ Notre équipe de professionnels se compose d’experts chevronnés qui offrent u
 
 Apprenez-en plus sur les services Microsoft :
 
-* [Évaluation des risques de sécurité](https://download.microsoft.com/download/5/1/6/516F59A7-91EE-4463-8612-C85FD3BEBDC7/microsoft-security-risk-assessment-solution-brief.pdf)
+* [Évaluation des risques de sécurité](https://download.microsoft.com/download/5/D/0/5D06F4EA-EAA1-4224-99E2-0C0F45E941D0/Microsoft%20Security%20Risk%20Asessment%20Datasheet.pdf)
 * [Évaluation du framework d’identité dynamique](https://download.microsoft.com/download/0/7/F/07FA8BFC-17D5-4F55-AD4F-3A987A7324AA/dynamic-identity-framework-identity-assessment-datasheet.pdf)
-* [Évaluation hors ligne des services Active Directory](https://download.microsoft.com/download/5/1/6/516F59A7-91EE-4463-8612-C85FD3BEBDC7/offline-assessment-for-active-directory-security-datasheet.pdf)
-* [Environnement d’administration de sécurité renforcée](https://download.microsoft.com/download/5/1/6/516F59A7-91EE-4463-8612-C85FD3BEBDC7/enhanced-security-administrative-environment-solution-brief.pdf)
+* [Évaluation hors ligne des services Active Directory](https://download.microsoft.com/download/1/C/1/1C15BA51-840E-498D-86C6-4BD35D33C79E/Prerequisites_Offline_AD.pdf)
+* [Environnement d’administration de sécurité renforcée](https://download.microsoft.com/download/A/C/5/AC5D21A6-E04B-4DC4-B1F2-AE060319A4D7/Premier_Support_for_Security/Popis/Enhanced-Security-Admin-Environment-Solution-Datasheet-%5BEN%5D.pdf)
 * [Services d’implémentation d’Azure AD](https://download.microsoft.com/download/0/7/F/07FA8BFC-17D5-4F55-AD4F-3A987A7324AA/azure-active-directory-implementation-services-solution-brief.pdf)
-* [Protection contre le déplacement de comptes latéraux](https://download.microsoft.com/download/5/1/6/516F59A7-91EE-4463-8612-C85FD3BEBDC7/pop-securing-lateral-account-movement.pdf)
-* [Récupération et réponse aux incidents](https://download.microsoft.com/download/5/1/6/516F59A7-91EE-4463-8612-C85FD3BEBDC7/microsoft-incident-response-and-recovery-process-brief.pdf)
+* [Protection contre le déplacement de comptes latéraux](/azure-advanced-threat-protection/use-case-lateral-movement-path)
+* [Récupération et réponse aux incidents](/microsoft-365/compliance/gdpr-breach-microsoft-support-professional-services#data-protection-incident-response-overview)
 
 [Apprenez-en plus](https://aka.ms/cyberserv) sur les services de conseils sur la sécurité des services Microsoft.

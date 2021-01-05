@@ -9,18 +9,18 @@ ms.topic: how-to
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: efce2eb33bb95a3dc13cec4cbe0ea89d1a2c3452
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: fd541b9ff65a5417bff21c0293f4d62f5b6791a7
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793885"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91972847"
 ---
 # <a name="create-a-vm-using-a-generalized-image"></a>Créer une machine virtuelle à l’aide d’une image généralisée 
 
 Créez une machine virtuelle à partir d’une image généralisée stockée dans une galerie d’images partagées. Si vous souhaitez créer une machine virtuelle à l’aide d’une image spécialisée, consultez [Créer une machine virtuelle à partir d’une image spécialisée](vm-specialized-image-version-powershell.md).
 
-Une fois que vous disposez d’une version d’image généralisée, vous pouvez créer une ou plusieurs machines virtuelles. Utilisation de l’applet de commande [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). 
+Une fois que vous disposez d’une version d’image généralisée, vous pouvez créer une ou plusieurs machines virtuelles. Utilisation de l’applet de commande [New-AzVM](/powershell/module/az.compute/new-azvm). 
 
 Dans cet exemple, nous utilisons l’ID de définition d’image pour nous assurer que la nouvelle machine virtuelle utilise la version la plus récente d’une image. Vous pouvez également utiliser une version spécifique en utilisant l’ID de version de l’image pour `Set-AzVMSourceImage -Id`. Par exemple, pour utiliser la version de l’image *1.0.0* tapez : `Set-AzVMSourceImage -Id "/subscriptions/<subscription ID where the gallery is located>/resourceGroups/myGalleryRG/providers/Microsoft.Compute/galleries/myGallery/images/myImageDefinition/versions/1.0.0"`. 
 
@@ -59,6 +59,7 @@ New-AzVM `
    -Location $location `
    -Name $vmName `
    -Image $imageDefinition.Id
+   -Credential $cred
 ```
 
 
@@ -154,4 +155,4 @@ Vous pouvez également créer la ressource de galerie d’images partagées à l
 - [Créer une version d’image dans une galerie d’images partagées](https://azure.microsoft.com/resources/templates/101-sig-image-version-create/)
 - [Créer une machine virtuelle à partir d’une version d’image](https://azure.microsoft.com/resources/templates/101-vm-from-sig/)
 
-Pour plus d’informations sur les galeries d’images partagées, consultez la [vue d’ensemble](./windows/shared-image-galleries.md). Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](./windows/troubleshooting-shared-images.md).
+Pour plus d’informations sur les galeries d’images partagées, consultez la [vue d’ensemble](./windows/shared-image-galleries.md). Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](troubleshooting-shared-images.md).

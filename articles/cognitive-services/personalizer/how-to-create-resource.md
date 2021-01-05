@@ -1,14 +1,17 @@
 ---
 title: Créer une ressource Personalizer
-description: La configuration du service porte sur la façon dont le service traite les récompenses, la fréquence à laquelle le service effectue une exploration, la fréquence à laquelle le modèle est réentraîné et la quantité de données stockées.
-ms.topic: conceptual
+description: Dans cet article, vous allez apprendre à créer une ressource personnalisable dans le Portail Azure pour chaque boucle de rétroaction.
+ms.service: cognitive-services
+ms.subservice: personalizer
+ms.topic: how-to
 ms.date: 03/26/2020
-ms.openlocfilehash: adb97db53d1fc0b6f0cdb14b697c82ec52501b84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 0c75d917f1abe72af2f4aa56b0f67dbb7bcd24a1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80336061"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91303554"
 ---
 # <a name="create-a-personalizer-resource"></a>Création d’une ressource Personalizer
 

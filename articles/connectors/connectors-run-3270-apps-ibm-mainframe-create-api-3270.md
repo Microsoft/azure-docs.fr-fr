@@ -9,12 +9,12 @@ ms.reviewer: estfan, valthom
 ms.topic: article
 ms.date: 03/06/2019
 tags: connectors
-ms.openlocfilehash: 808eef5424d678559ae94ffd04e41eacd0f16aee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ae99e3fa287cc9012e317142cc1e6aef36ce90d6
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80371104"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93094997"
 ---
 # <a name="integrate-3270-screen-driven-apps-on-ibm-mainframes-with-azure-by-using-azure-logic-apps-and-ibm-3270-connector"></a>Intégrer des applications avec écran 3270 sur des mainframes IBM avec Azure à l’aide d’Azure Logic Apps et du connecteur IBM 3270
 
@@ -61,7 +61,7 @@ Le seul prérequis est [Microsoft .NET Framework 4.6.1](https://aka.ms/net-fram
   
   Après le téléchargement et l’installation de cet outil, procédez comme suit pour la connexion à votre hôte :
 
-  1. Ouvrez l’outil de conception 3270. À partir du menu **Session**, sélectionnez **Host Sessions (Sessions hôte)** .
+  1. Ouvrez l’outil de conception 3270. À partir du menu **Session** , sélectionnez **Host Sessions (Sessions hôte)** .
   
   1. Fournissez les informations relatives au serveur hôte TN3270.
 
@@ -77,11 +77,11 @@ Le seul prérequis est [Microsoft .NET Framework 4.6.1](https://aka.ms/net-fram
 
 Dans une application 3270 pilotée par écran, les écrans et les champs de données sont uniques à vos scénarios. Par conséquent, le connecteur 3270 a besoin des informations relatives à votre application, que vous pouvez fournir en tant que métadonnées. Ces métadonnées décrivent les informations qui aident votre application logique à identifier et à reconnaître les écrans, expliquent comment naviguer entre les écrans, où entrer les données et où attendre des résultats. Pour spécifier et générer ces métadonnées, vous utilisez l’outil de conception 3270, qui vous guide à travers ces *modes* spécifiques, ou étapes, comme décrit plus loin plus en détails :
 
-* **Capture** : dans ce mode, vous enregistrez les écrans requis pour effectuer une tâche spécifique avec votre application mainframe, par exemple, l’obtention d’un solde de compte.
+* **Capture**  : dans ce mode, vous enregistrez les écrans requis pour effectuer une tâche spécifique avec votre application mainframe, par exemple, l’obtention d’un solde de compte.
 
-* **Navigation** : dans ce mode, vous spécifiez le plan ou le chemin d’accès pour la navigation dans les écrans de votre application mainframe pour la tâche spécifique.
+* **Navigation**  : dans ce mode, vous spécifiez le plan ou le chemin d’accès pour la navigation dans les écrans de votre application mainframe pour la tâche spécifique.
 
-* **Méthodes** : dans ce mode, vous définissez la méthode, par exemple `GetBalance`, qui décrit le chemin de navigation des écrans. Vous choisissez également les champs de chaque écran qui deviennent les paramètres d’entrée et de sortie de la méthode.
+* **Méthodes**  : dans ce mode, vous définissez la méthode, par exemple `GetBalance`, qui décrit le chemin de navigation des écrans. Vous choisissez également les champs de chaque écran qui deviennent les paramètres d’entrée et de sortie de la méthode.
 
 ### <a name="unsupported-elements"></a>Éléments non pris en charge
 
@@ -102,13 +102,13 @@ Dans ce mode, vous marquez un élément sur chaque écran 3270 qui identifie de
 
 1. Pour démarrer l’enregistrement, appuyez sur la touche F5, ou à partir du menu **Recording (Enregistrement)** , sélectionnez **Start Recording (Démarrer l’enregistrement)** . 
 
-1. Dans le menu **Session**, sélectionnez **Connect (Se connecter)** .
+1. Dans le menu **Session** , sélectionnez **Connect (Se connecter)** .
 
-1. Dans le volet **Capture**, à partir du premier écran de votre application, pilotez votre application pour la tâche spécifique que vous enregistrez.
+1. Dans le volet **Capture** , à partir du premier écran de votre application, pilotez votre application pour la tâche spécifique que vous enregistrez.
 
 1. Une fois que vous avez terminé la tâche, déconnectez-vous de votre application comme vous le faites habituellement.
 
-1. À partir du menu **Session**, sélectionnez **Disconnect (Se déconnecter)** .
+1. À partir du menu **Session** , sélectionnez **Disconnect (Se déconnecter)** .
 
 1. Pour arrêter l’enregistrement, appuyez sur les touches Maj+F5, ou à partir du menu **Recording (Enregistrement)** , sélectionnez **Stop Recording (Arrêter l’enregistrement)** .
 
@@ -116,7 +116,7 @@ Dans ce mode, vous marquez un élément sur chaque écran 3270 qui identifie de
 
    * Parmi vos écrans capturés, vous disposez d’un écran qui est nommé « Empty Vide » (Vide).
 
-     Lorsque vous vous connectez à [CICS](https://www.ibm.com/it-infrastructure/z/cics) pour la première fois, vous devez envoyer la clé « Clear » (Vierge) avant de pouvoir entrer le nom de la transaction que vous souhaitez exécuter. L’écran où vous envoyez la clé « Clear » ne possède aucun *attribut de reconnaissance*, par exemple un titre d’écran, que vous pouvez ajouter à l’aide de l’éditeur de reconnaissance de l’écran. Pour représenter cet écran, la miniature inclut un écran nommé « Empty » (Vide). Vous pouvez utiliser cet écran ultérieurement pour représenter l’écran où vous entrez le nom de la transaction.
+     Lorsque vous vous connectez à [CICS](https://www.ibm.com/it-infrastructure/z/cics) pour la première fois, vous devez envoyer la clé « Clear » (Vierge) avant de pouvoir entrer le nom de la transaction que vous souhaitez exécuter. L’écran où vous envoyez la clé « Clear » ne possède aucun *attribut de reconnaissance* , par exemple un titre d’écran, que vous pouvez ajouter à l’aide de l’éditeur de reconnaissance de l’écran. Pour représenter cet écran, la miniature inclut un écran nommé « Empty » (Vide). Vous pouvez utiliser cet écran ultérieurement pour représenter l’écran où vous entrez le nom de la transaction.
 
    * Par défaut, le nom d’un écran capturé utilise le premier mot à l’écran. Si ce nom existe déjà, l’outil de conception ajoute au nom un trait de soulignement et un nombre, par exemple, « WBGB » et « WBGB_1 ».
 
@@ -138,7 +138,7 @@ Une fois que vous avez terminé de sélectionner les champs de reconnaissance, p
 
 Pour que le connecteur parcourt et différencie les écrans, vous trouvez généralement un texte unique sur un écran que vous pouvez utiliser en tant qu’identificateur parmi les écrans capturés. Pour les écrans répétés, vous aurez peut-être besoin de plusieurs méthodes d’identification. Par exemple, supposons que vous avez 2 écrans qui se ressemblent, à ceci près qu’un écran retourne une valeur valide tandis que l’autre écran retourne un message d’erreur.
 
-Dans l’outil de conception, vous pouvez ajouter des *attributs de reconnaissance*, par exemple un titre d’écran tel que « Obtenir le solde du compte », à l’aide de l’éditeur de reconnaissance d’écran. Si vous avez un chemin comprenant des branches et que les deux branches retournent le même écran, mais avec des résultats différents, vous avez besoin d’autres attributs de reconnaissance. Au moment de l’exécution, le connecteur utilise ces attributs pour déterminer la branche actuelle et la branche dupliquée. Voici les conditions utilisables :
+Dans l’outil de conception, vous pouvez ajouter des *attributs de reconnaissance* , par exemple un titre d’écran tel que « Obtenir le solde du compte », à l’aide de l’éditeur de reconnaissance d’écran. Si vous avez un chemin comprenant des branches et que les deux branches retournent le même écran, mais avec des résultats différents, vous avez besoin d’autres attributs de reconnaissance. Au moment de l’exécution, le connecteur utilise ces attributs pour déterminer la branche actuelle et la branche dupliquée. Voici les conditions utilisables :
 
 * Specific value (Valeur spécifique) : cette valeur correspond à la chaîne spécifiée à l’emplacement spécifié.
 * NOT a specific value (PAS une valeur spécifique) : cette valeur ne correspond pas à la chaîne spécifiée à l’emplacement spécifié.
@@ -178,9 +178,9 @@ Dans ce mode, vous définissez le flux ou les étapes pour parcourir les écrans
 
 1. Dans la barre d’outils de l’outil de conception 3270, choisissez **Navigation** afin de passer au mode Navigation.
 
-1. Pour démarrer votre plan, dans le volet **Navigation**, choisissez **New Plan (Nouveau plan)** .
+1. Pour démarrer votre plan, dans le volet **Navigation** , choisissez **New Plan (Nouveau plan)** .
 
-1. Sous **Choose New Plan Name (Choisir un nouveau nom de plan)** , entrez un nom pour votre plan. Dans la liste **Type**, sélectionnez le type de plan :
+1. Sous **Choose New Plan Name (Choisir un nouveau nom de plan)** , entrez un nom pour votre plan. Dans la liste **Type** , sélectionnez le type de plan :
 
    | Type de plan | Description |
    |-----------|-------------|
@@ -262,11 +262,11 @@ Dans ce mode, vous définissez une méthode qui est associée à votre plan de n
 
 1. Dans la barre d’outils de l’outil de conception 3270, choisissez **Méthodes** afin de passer au mode Méthodes. 
 
-1. Dans le volet **Navigation**, sélectionnez l’écran qui a les champs d’entrée souhaités.
+1. Dans le volet **Navigation** , sélectionnez l’écran qui a les champs d’entrée souhaités.
 
 1. Pour ajouter le premier paramètre d’entrée pour votre méthode, procédez comme suit :
 
-   1. Dans le volet **Capture**, sur l’écran de l’émulateur 3270, choisissez le champ entier, pas uniquement le texte dans le champ, que vous souhaitez comme première entrée.
+   1. Dans le volet **Capture** , sur l’écran de l’émulateur 3270, choisissez le champ entier, pas uniquement le texte dans le champ, que vous souhaitez comme première entrée.
 
       > [!TIP]
       > Pour afficher tous les champs et vous assurer que vous sélectionnez le champ complet, dans le menu **View (Vue)** , sélectionnez **All Fields (Tous les champs)** .
@@ -277,7 +277,7 @@ Dans ce mode, vous définissez une méthode qui est associée à votre plan de n
 
 1. Pour ajouter le premier paramètre de sortie pour votre méthode, procédez comme suit :
 
-   1. Dans le volet **Capture**, sur l’écran de l’émulateur 3270, choisissez le champ entier, pas uniquement le texte dans le champ, que vous souhaitez comme première sortie.
+   1. Dans le volet **Capture** , sur l’écran de l’émulateur 3270, choisissez le champ entier, pas uniquement le texte dans le champ, que vous souhaitez comme première sortie.
 
       > [!TIP]
       > Pour afficher tous les champs et vous assurer que vous sélectionnez le champ complet, dans le menu **View (Vue)** , sélectionnez **All Fields (Tous les champs)** .
@@ -291,8 +291,8 @@ Dans ce mode, vous définissez une méthode qui est associée à votre plan de n
    | Nom de la propriété | Valeurs possibles | 
    |---------------|-----------------|
    | **Type de données** | Byte, Date Time, Decimal, Int, Long, Short, String |
-   | **Field Fill Technique (Technique de remplissage de champ)** | Les paramètres prennent en charge ces types de remplissage, en ajoutant des espaces vides si nécessaire : <p><p>- **Type** : entrez les caractères séquentiellement dans le champ. <p>- **Fill (Remplir)**  : remplacez le contenu du champ par des caractères, en ajoutant des espaces vides si nécessaire. <p>- **EraseEofType** : effacez le champ, puis tapez les caractères de manière séquentielle dans le champ. |
-   | **Format String (Chaîne de format)** | Certains types de données de paramètre utilisent une chaîne de format, qui indique au connecteur 3270 comment convertir le texte de l’écran en type de données .NET : <p><p>- **DateTime** : la chaîne de format DateTime suit le [format des chaînes de date et heure personnalisées .NET](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Par exemple, la date `06/30/2019` utilise la chaîne de format `MM/dd/yyyy`. <p>- **Decimal** : la chaîne de format décimal utilise la [clause COBOL Picture](https://www.ibm.com/support/knowledgecenter/SS6SG3_5.2.0/com.ibm.cobol52.ent.doc/PGandLR/ref/rlddepic.html). Par exemple, le nombre `100.35` utilise la chaîne de format `999V99`. |
+   | **Field Fill Technique (Technique de remplissage de champ)** | Les paramètres prennent en charge ces types de remplissage, en ajoutant des espaces vides si nécessaire : <p><p>- **Type**  : entrez les caractères séquentiellement dans le champ. <p>- **Fill (Remplir)**  : remplacez le contenu du champ par des caractères, en ajoutant des espaces vides si nécessaire. <p>- **EraseEofType**  : effacez le champ, puis tapez les caractères de manière séquentielle dans le champ. |
+   | **Format String (Chaîne de format)** | Certains types de données de paramètre utilisent une chaîne de format, qui indique au connecteur 3270 comment convertir le texte de l’écran en type de données .NET : <p><p>- **DateTime**  : la chaîne de format DateTime suit le [format des chaînes de date et heure personnalisées .NET](/dotnet/standard/base-types/custom-date-and-time-format-strings). Par exemple, la date `06/30/2019` utilise la chaîne de format `MM/dd/yyyy`. <p>- **Decimal**  : la chaîne de format décimal utilise la [clause COBOL Picture](https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/rzasb/picture.htm). Par exemple, le nombre `100.35` utilise la chaîne de format `999V99`. |
    |||
 
 ## <a name="save-and-view-metadata"></a>Enregistrer et afficher les métadonnées
@@ -313,7 +313,7 @@ Toutefois, si vous essayez d’enregistrer les modifications apportées à l’e
 1. Pour exécuter votre méthode sur l’hôte actif, tout en restant dans le mode Méthodes, appuyez sur la touche F5, ou dans la barre d’outils de l’outil de conception, choisissez **Run (Exécuter)** .
 
    > [!TIP]
-   > Vous pouvez changer de mode à tout moment. Dans le menu **File (Fichier)** , sélectionnez **Mode**, puis le mode souhaité.
+   > Vous pouvez changer de mode à tout moment. Dans le menu **File (Fichier)** , sélectionnez **Mode** , puis le mode souhaité.
 
 1. Entrez les valeurs de vos paramètres, puis choisissez **OK**.
 
@@ -362,7 +362,7 @@ Lorsque vous avez terminé toutes ces étapes, vous pouvez utiliser l’action q
    |----------|----------|-------|-------------|
    | **Nom de connexion** | Oui | <*connection-name*> | Nom de votre connexion |
    | **ID de compte d’intégration** | Oui | <*integration-account-name*> | Nom de votre compte d’intégration |
-   | **URL SAP du compte d’intégration** | Oui | <*integration-account-SAS-URL*> | URL de signature d’accès partagé (SAP) de votre compte d’intégration, que vous pouvez générer à partir des paramètres de votre compte d’intégration dans le portail Azure. <p>1. Dans le menu du compte d’intégration, sous **Paramètres**, sélectionnez **URL de rappel**. <br>2. Dans le volet de droite, copiez la valeur **URL de rappel générée**. |
+   | **URL SAP du compte d’intégration** | Oui | <*integration-account-SAS-URL*> | URL de signature d’accès partagé (SAP) de votre compte d’intégration, que vous pouvez générer à partir des paramètres de votre compte d’intégration dans le portail Azure. <p>1. Dans le menu du compte d’intégration, sous **Paramètres** , sélectionnez **URL de rappel**. <br>2. Dans le volet de droite, copiez la valeur **URL de rappel générée**. |
    | **Serveur** | Oui | <*TN3270-server-name*> | Nom du serveur pour votre service TN3270 |
    | **Port** | Non | <*TN3270-server-port*> | Port utilisé par votre serveur TN3270. Si ce champ est vide, le connecteur utilise `23` comme valeur par défaut. |
    | **Type d’appareil** | Non | <*IBM-terminal-model*> | Numéro ou nom de modèle du terminal IBM à émuler. Si ce champ est vide, le connecteur utilise les valeurs par défaut. |
@@ -409,7 +409,7 @@ Lorsque vous avez terminé toutes ces étapes, vous pouvez utiliser l’action q
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](https://docs.microsoft.com/connectors/si3270/).
+Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](/connectors/si3270/).
 
 > [!NOTE]
 > Pour les applications logiques utilisées dans un [environnement de service d’intégration (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md), la version de ce connecteur avec l’étiquette ISE applique les [limites de messages de l’ISE](../logic-apps/logic-apps-limits-and-config.md#message-size-limits) à la place.
@@ -417,3 +417,4 @@ Pour plus d’informations techniques sur ce connecteur, notamment au sujet des 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les autres [connecteurs d’applications logiques](../connectors/apis-list.md)
+

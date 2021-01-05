@@ -16,22 +16,22 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: df45ab0a7b1729ae6c1602c9769cd5b6da26f6ac
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 94f4d17596936dd9d0ebbdae3c351cac9ed2a570
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74014354"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89299862"
 ---
 # <a name="quickstart-configure-named-locations-in-azure-active-directory"></a>Démarrage rapide : Configurer des emplacements nommés dans Azure Active Directory
 
 Les emplacements nommés vous permettent d’étiqueter des plages d’adresses IP approuvées dans votre entreprise. Azure AD utilise des emplacements nommés pour effectuer les actions suivantes :
-- Détecter les faux positifs dans les [détections de risques](concept-risk-events.md). La connexion à partir d’un emplacement approuvé réduit le risque de connexion d’un utilisateur.   
+- Détecter les faux positifs dans les [détections de risques](../identity-protection/overview-identity-protection.md). La connexion à partir d’un emplacement approuvé réduit le risque de connexion d’un utilisateur.   
 - Configurer l’[accès conditionnel en fonction des emplacements](../conditional-access/location-condition.md).
 
 Dans ce guide de démarrage rapide, vous apprenez à configurer des emplacements nommés dans votre environnement.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour effectuer ce démarrage rapide, les éléments suivants sont requis :
 
@@ -63,6 +63,5 @@ Pour effectuer ce démarrage rapide, les éléments suivants sont requis :
 
 Pour plus d'informations, consultez les pages suivantes :
 
-- [Accès conditionnel Azure AD](../active-directory-conditional-access-azure-portal.md).
-- [Conditions d’emplacement dans l’accès conditionnel Azure AD](../conditional-access/location-condition.md)
-- [Rapport sur les connexions à risque](concept-risky-sign-ins.md)  
+- [L’emplacement comme condition dans l’accès conditionnel](../conditional-access/concept-conditional-access-conditions.md#locations).
+- [Rapport sur les connexions à risque](../identity-protection/overview-identity-protection.md)

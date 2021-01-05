@@ -16,14 +16,14 @@ ms.date: 01/04/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 01/04/2019
-ms.openlocfilehash: 7d88f57fe92b9da62cc9f90d64bdec4c27642fb0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3c64155053517205ab006673bb8f400325ad3c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76263742"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86219961"
 ---
-# <a name="templates"></a>Modèles
+# <a name="notification-hubs-templates"></a>Modèles Notification Hubs
 
 Les modèles permettent à une application cliente de spécifier le format exact des notifications que celle-ci souhaite recevoir. Une application peut utiliser des modèles pour en tirer plusieurs avantages, notamment les suivants :
 
@@ -62,7 +62,7 @@ La fonctionnalité de modèle Notification Hubs permet à une application client
 
 L’image suivante illustre le processus :
 
-![](./media/notification-hubs-templates/notification-hubs-hello.png)
+![Diagramme illustrant le processus d'utilisation des modèles multiplateformes](./media/notification-hubs-templates/notification-hubs-hello.png)
 
 Le modèle pour l’inscription d’une application cliente iOS est le suivant :
 
@@ -121,7 +121,7 @@ Le message envoyé au hub de notification contient les propriétés suivantes :
 
 En utilisant ce modèle, le serveur principal envoie uniquement un message sans avoir à stocker des options de personnalisation spécifiques pour les utilisateurs de l’application. L’image suivante illustre ce scénario :
 
-![](./media/notification-hubs-templates/notification-hubs-registration-specific.png)
+![Diagramme montrant que le back-end n'envoie qu'un seul message à chaque plateforme.](./media/notification-hubs-templates/notification-hubs-registration-specific.png)
 
 ## <a name="how-to-register-templates"></a>Inscription des modèles
 

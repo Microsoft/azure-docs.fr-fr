@@ -6,12 +6,12 @@ ms.topic: reference
 ms.date: 02/14/2020
 ms.author: cshoe
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 21654a3b325e8b8f0a3e49ee64b7624c8540d0d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 115ff1b59ecbe3f4fdb089c2bd61da955fba3984
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77461077"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92104544"
 ---
 # <a name="azure-event-grid-bindings-for-azure-functions"></a>Liaisons Azure Event Grid pour Azure Functions
 
@@ -30,7 +30,7 @@ Si vous préférez, vous pouvez utiliser un déclencheur HTTP pour gérer les é
 
 Le code de cette référence utilise par défaut la syntaxe .NET Core, utilisée dans les versions 2.x et ultérieures de Functions. Pour plus d'informations sur la syntaxe 1.x, consultez les [modèles Functions 1.x](https://github.com/Azure/azure-functions-templates/tree/v1.x/Functions.Templates/Templates).
 
-## <a name="add-to-your-functions-app"></a>Ajouter à votre application de fonction
+## <a name="add-to-your-functions-app"></a>Ajouter à votre application Functions
 
 ### <a name="functions-2x-and-higher"></a>Functions 2.x et versions ultérieures
 
@@ -38,14 +38,14 @@ Pour utiliser le déclencheur et les liaisons, vous devez référencer le packag
 
 | Langage                                        | Ajouter via...                                   | Notes 
 |-------------------------------------------------|---------------------------------------------|-------------|
-| C#                                              | L’installation du [package NuGet], version 3.x | |
+| C#                                              | L’installation du [package NuGet], version 2.x | |
 | Script C#, Java, JavaScript, Python, PowerShell | L’inscription du [bundle d’extensions]          | Il est recommandé d’utiliser l’[extension Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) avec Visual Studio Code. |
-| Script C# (en ligne uniquement dans le portail Azure)         | Ajout d’une liaison                            | Pour mettre à jour des extensions de liaison existantes sans avoir à republier votre application de fonction, voir [Mettre à jour vos extensions]. |
+| Script C# (en ligne uniquement dans le portail Azure)         | Ajout d’une liaison                            | Pour mettre à jour des extensions de liaison existantes sans avoir à republier votre application de fonction, consultez [Mettre à jour vos extensions]. |
 
 [core tools]: ./functions-run-local.md
 [Bundle d’extensions]: ./functions-bindings-register.md#extension-bundles
 [Package NuGet]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid
-[Mettre à jour vos extensions]: ./install-update-binding-extensions-manual.md
+[Mettre à jour vos extensions]: ./functions-bindings-register.md
 [Azure Tools extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack
 
 ### <a name="functions-1x"></a>Functions 1.x

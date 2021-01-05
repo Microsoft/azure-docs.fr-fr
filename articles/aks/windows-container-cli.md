@@ -1,15 +1,15 @@
 ---
-title: Créer un conteneur Windows Server sur un cluster Azure Kubernetes Service (AKS)
+title: Création d’un conteneur Windows Server sur un cluster AKS à l’aide d’Azure CLI
 description: Découvrez comment créer rapidement un cluster Kubernetes et déployer une application dans un conteneur Windows Server dans Azure Kubernetes Service (AKS) à l’aide d’Azure CLI.
 services: container-service
 ms.topic: article
-ms.date: 05/06/2020
-ms.openlocfilehash: 28925961ea3b99f939ac650d54b5dcece2551f59
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.date: 07/16/2020
+ms.openlocfilehash: a14659b64bbc86cfc50cbf8a377c0245fba25065
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82926610"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94886241"
 ---
 # <a name="create-a-windows-server-container-on-an-azure-kubernetes-service-aks-cluster-using-the-azure-cli"></a>Créer un conteneur Windows Server sur un cluster Azure Kubernetes Service (AKS) à l’aide d’Azure CLI
 
@@ -19,9 +19,9 @@ AKS (Azure Kubernetes Service) est un service Kubernetes managé qui vous permet
 
 Cet article suppose une compréhension élémentaire des concepts liés à Kubernetes. Pour plus d’informations, consultez [Concepts de base de Kubernetes pour AKS (Azure Kubernetes Service)][kubernetes-concepts].
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 ### <a name="limitations"></a>Limites
 
@@ -67,24 +67,34 @@ L’exemple de sortie suivant montre que le groupe de ressources a été créé 
 
 ## <a name="create-an-aks-cluster"></a>Créer un cluster AKS
 
-Pour exécuter un cluster AKS qui prend en charge des pools de nœuds pour les conteneurs Windows Server, votre cluster doit utiliser une stratégie de réseau qui utilise un plug-in réseau [Azure CNI][azure-cni-about] (avancé). Pour plus d’informations sur la planification des plages de sous-réseau nécessaires et les considérations réseau, consultez [Configurer le réseau Azure CNI][use-advanced-networking]. Utilisez la commande [az aks create][az-aks-create] ci-dessous pour créer un cluster AKS nommé *myAKSCluster*. Cette commande crée les ressources réseau nécessaires si elles n’existent pas.
+Pour pouvoir exécuter un cluster AKS qui prend en charge des pools de nœuds pour les conteneurs Windows Server, votre cluster doit appliquer une stratégie de réseau qui utilise un plug-in réseau [Azure CNI][azure-cni-about] (avancé). Pour plus d’informations sur la planification des plages de sous-réseau nécessaires et les considérations réseau, consultez [Configurer le réseau Azure CNI][use-advanced-networking]. Utilisez la commande [az aks create][az-aks-create] pour créer un cluster AKS nommé *myAKSCluster*. Cette commande crée les ressources réseau nécessaires si elles n’existent pas.
+
+* Le cluster est configuré avec deux nœuds
+* Les paramètres *windows-admin-password* et *windows-admin-username* définissent les informations d’identification administrateur pour les conteneurs Windows Server créés sur le cluster et doivent répondre aux [exigences relatives aux mots de passe de Windows Server][windows-server-password].
+* Le pool de nœuds utilise `VirtualMachineScaleSets`
 
 > [!NOTE]
 > Pour garantir un fonctionnement fiable de votre cluster, vous devez exécuter au moins 2 (deux) nœuds dans le pool de nœuds par défaut.
 
+Fournissez votre propre *PASSWORD_WIN* sécurisé (n’oubliez pas que les commandes dans cet article sont entrées dans un interpréteur de commandes BASH) :
+
 ```azurecli-interactive
+PASSWORD_WIN="P@ssw0rd1234"
+
 az aks create \
     --resource-group myResourceGroup \
     --name myAKSCluster \
     --node-count 2 \
     --enable-addons monitoring \
-    --kubernetes-version 1.16.7 \
     --generate-ssh-keys \
+    --windows-admin-password $PASSWORD_WIN \
+    --windows-admin-username azureuser \
+    --vm-set-type VirtualMachineScaleSets \
     --network-plugin azure
 ```
 
-> [!Note]
-> Si vous ne parvenez pas à créer le cluster AKS parce que la version n’est pas prise en charge dans cette région, vous pouvez utiliser la commande [az aks get-versions --location eastus] pour trouver la liste des versions prises en charge pour cette région.
+> [!NOTE]
+> Si vous recevez une erreur de validation de mot de passe, vérifiez que le paramètre *windows-admin-password* répond aux [exigences en matière de mot de passe de Windows Server][windows-server-password]. Si votre mot de passe répond aux conditions, essayez de créer votre groupe de ressources dans une autre région. Puis essayez de créer le cluster avec le nouveau groupe de ressources.
 
 Au bout de quelques minutes, la commande se termine et retourne des informations au format JSON sur le cluster. Parfois, le provisionnement du cluster peut prendre plus de quelques minutes. Autorisez jusqu’à 10 minutes dans ces cas de figure.
 
@@ -98,8 +108,7 @@ az aks nodepool add \
     --cluster-name myAKSCluster \
     --os-type Windows \
     --name npwin \
-    --node-count 1 \
-    --kubernetes-version 1.16.7
+    --node-count 1
 ```
 
 La commande ci-dessus crée un pool de nœuds nommé *npwin* et l’ajoute à *myAKSCluster*. Lorsque vous créez un pool de nœuds pour exécuter des conteneurs Windows Server, la valeur par défaut de *node-vm-size* est *Standard_D2s_v3*. Si vous choisissez de définir le paramètre *node-vm-size*, veuillez consulter la liste des [tailles de machines virtuelles limitées][restricted-vm-sizes]. La taille minimale recommandée est *Standard_D2s_v3*. La commande ci-dessus utilise également le sous-réseau par défaut dans le réseau virtuel par défaut créé lors de l’exécution de `az aks create`.
@@ -128,8 +137,8 @@ L’exemple de sortie suivant montre tous les nœuds du cluster. Vérifiez que l
 
 ```output
 NAME                                STATUS   ROLES   AGE    VERSION
-aks-nodepool1-12345678-vmssfedcba   Ready    agent   13m    v1.16.7
-aksnpwin987654                      Ready    agent   108s   v1.16.7
+aks-nodepool1-12345678-vmssfedcba   Ready    agent   13m    v1.16.9
+aksnpwin987654                      Ready    agent   108s   v1.16.9
 ```
 
 ## <a name="run-the-application"></a>Exécution de l'application
@@ -259,7 +268,7 @@ Pour en savoir plus sur AKS et parcourir le code complet de l’exemple de dépl
 
 <!-- LINKS - internal -->
 [kubernetes-concepts]: concepts-clusters-workloads.md
-[aks-monitor]: https://aka.ms/coingfonboarding
+[aks-monitor]: ../azure-monitor/insights/container-insights-onboard.md
 [aks-tutorial]: ./tutorial-kubernetes-prepare-app.md
 [az-aks-browse]: /cli/azure/aks?view=azure-cli-latest#az-aks-browse
 [az-aks-create]: /cli/azure/aks?view=azure-cli-latest#az-aks-create
@@ -284,3 +293,4 @@ Pour en savoir plus sur AKS et parcourir le code complet de l’exemple de dépl
 [aks-faq]: faq.md
 [az-extension-add]: /cli/azure/extension#az-extension-add
 [az-extension-update]: /cli/azure/extension#az-extension-update
+[windows-server-password]: /windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements#reference

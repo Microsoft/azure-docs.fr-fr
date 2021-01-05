@@ -5,14 +5,14 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/04/2018
-ms.openlocfilehash: 328ca7cd2c6f76095c8334ae6fdb4aa75fbb867d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a7e56758a1a76933d6bb18883aa15ce33ce2e89e
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80292002"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130916"
 ---
 # <a name="implement-cicd-for-stream-analytics-on-iot-edge-using-apis"></a>Implémenter CI/CD pour Stream Analytics sur IoT Edge à l’aide d’API
 
@@ -59,7 +59,7 @@ Pour créer une tâche Stream Analytics, appelez la méthode PUT à l’aide de 
 |------|-----------|
 |PUT|`https://management.azure.com/subscriptions/{\**subscription-id**}/resourcegroups/{**resource-group-name**}/providers/Microsoft.StreamAnalytics/streamingjobs/{**job-name**}?api-version=2017-04-01-preview`|
  
-Exemple d’utilisation de la commande **curl** :
+Exemple d’utilisation de la commande **curl**  :
 
 ```curl
 curl -u { <username:password> } -H "Content-Type: application/json" -X { <method> } -d "{ <request body> }" https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{resource-group-name}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobname}?api-version=2017-04-01-preview  
@@ -136,7 +136,7 @@ Exemple de corps de la requête au format JSON :
 } 
 ```
  
-Pour plus d’informations, consultez la [documentation de l’API](/rest/api/streamanalytics/stream-analytics-job).  
+Pour plus d’informations, consultez la [documentation de l’API](/rest/api/streamanalytics/).  
  
 ## <a name="publish-edge-package"></a>Publier le package de périphérie 
  
@@ -148,7 +148,7 @@ Pour publier une tâche Stream Analytics sur IoT Edge, appelez la méthode POST 
 
 Cette opération asynchrone retourne l’état 202 tant que la tâche n’est pas publiée. L’en-tête de réponse d’emplacement contient l’URI utilisé pour obtenir l’état du processus. Pendant que le processus est en cours d’exécution, un appel à l’URI dans l’en-tête d’emplacement retourne l’état 202. Une fois le processus terminé, l’URI dans l’en-tête d’emplacement retourne l’état 200. 
 
-Exemple d’appel de publication de package Edge à l’aide de **curl** : 
+Exemple d’appel de publication de package Edge à l’aide de **curl**  : 
 
 ```bash
 curl -d -X POST https://management.azure.com/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobname}/publishedgepackage?api-version=2017-04-01-preview
@@ -163,7 +163,7 @@ https://management.azure.com/subscriptions/{**subscriptionid**}/resourcegroups/{
 ```
 Patientez une ou deux minutes avant d’exécuter la commande suivante pour effectuer un appel d’API avec l’URL que vous avez trouvée dans la tête de la réponse. Réessayez d’exécuter la commande si vous n’obtenez pas une réponse HTTP 200.
  
-Exemple d’appel d’API avec l’URL retournée avec **curl** :
+Exemple d’appel d’API avec l’URL retournée avec **curl**  :
 
 ```bash
 curl -d –X GET https://management.azure.com/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.StreamAnalytics/streamingjobs/{resourcename}/publishedgepackage?api-version=2017-04-01-preview 
@@ -258,5 +258,5 @@ Après la configuration du manifeste de déploiement, consultez [Déployer des m
 ## <a name="next-steps"></a>Étapes suivantes 
  
 * [Azure Stream Analytics sur IoT Edge](stream-analytics-edge.md)
-* [Didacticiel pour ASA sur IoT Edge](https://docs.microsoft.com/azure/iot-edge/tutorial-deploy-stream-analytics)
+* [Didacticiel pour ASA sur IoT Edge](../iot-edge/tutorial-deploy-stream-analytics.md)
 * [Développer des travaux Edge Stream Analytics avec les outils Visual Studio](stream-analytics-tools-for-visual-studio-edge-jobs.md)

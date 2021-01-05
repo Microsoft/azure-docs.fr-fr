@@ -13,12 +13,12 @@ ms.author: ryanwi
 ms.reviewer: nacanuma
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: f2d1eaec80c8925eb7b38af848e29e944f1ebf69
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 977dfea28c5c0dc3f34ada0c138556d70c979e04
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154540"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85551708"
 ---
 # <a name="service-to-service-calls-using-client-credentials-shared-secret-or-certificate"></a>Appels de service à service à l’aide des informations d’identification du client (secret partagé ou certificat)
 
@@ -49,10 +49,10 @@ https://login.microsoftonline.com/<tenant id>/oauth2/token
 ## <a name="service-to-service-access-token-request"></a>Demande de jeton d’accès de service à service
 Deux cas de figure se présentent, selon que l’application cliente choisit d’être sécurisée par un secret partagé ou un certificat.
 
-### <a name="first-case-access-token-request-with-a-shared-secret"></a>Premier cas : demande de jeton d’accès avec un secret partagé
+### <a name="first-case-access-token-request-with-a-shared-secret"></a>Premier cas : Requête de jeton d’accès avec un secret partagé
 Lorsque l’application utilise un secret partagé, la demande de jeton d’accès de service à service contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | grant_type |Obligatoire |Spécifie le type d’autorisation demandée. Dans un flux d’octroi des informations d’identification du client, la valeur doit être **client_credentials**. |
 | client_id |Obligatoire |Spécifie l’ID de client Azure AD du service web appelant. Pour rechercher l’ID de client de l’application appelante, dans le [portail Azure](https://portal.azure.com), cliquez successivement sur **Azure Active Directory**, **Inscriptions des applications** et sur l’application. Le paramètre client_id est l’*ID de l’application* |
@@ -70,10 +70,10 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials&client_id=625bc9f6-3bf6-4b6d-94ba-e97cf07a22de&client_secret=qkDwDJlDfig2IpeuUZYKH1Wb8q1V0ju6sILxQQqhJ+s=&resource=https%3A%2F%2Fservice.contoso.com%2F
 ```
 
-### <a name="second-case-access-token-request-with-a-certificate"></a>Deuxième cas : demande de jeton d’accès avec un certificat
+### <a name="second-case-access-token-request-with-a-certificate"></a>Deuxième cas : Requête de jeton d’accès avec un certificat
 Une demande de jeton d’accès de service à service avec un certificat contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | grant_type |Obligatoire |Spécifie le type de réponse demandé. Dans un flux d’octroi des informations d’identification du client, la valeur doit être **client_credentials**. |
 | client_id |Obligatoire |Spécifie l’ID de client Azure AD du service web appelant. Pour rechercher l’ID de client de l’application appelante, dans le [portail Azure](https://portal.azure.com), cliquez successivement sur **Azure Active Directory**, **Inscriptions des applications** et sur l’application. Le paramètre client_id est l’*ID de l’application* |
@@ -101,7 +101,7 @@ Une réponse affirmative contient une réponse JSON OAuth 2.0 avec les paramètr
 | Paramètre | Description |
 | --- | --- |
 | access_token |Le jeton d’accès demandé. Le service web appelant peut utiliser ce jeton pour s’authentifier auprès du service web de destination. |
-| token_type |Indique la valeur du type de jeton. Le seul type de jeton pris en charge par Azure AD est le **jeton porteur**. Pour plus d’informations sur les jetons du porteur, consultez le document [OAuth 2.2 Authorization Framework: Bearer Token Usage (RFC 6750)](https://www.rfc-editor.org/rfc/rfc6750.txt)(Infrastructure d’autorisation OAuth 2.0 : Utilisation des jetons du porteur [RFC 6750]). |
+| token_type |Indique la valeur du type de jeton. Le seul type de jeton pris en charge par Azure AD est le **jeton porteur**. Pour plus d’informations sur les jetons du porteur, consultez le [Framework d’autorisation OAuth 2.0 : Bearer Token Usage (RFC 6750)](https://www.rfc-editor.org/rfc/rfc6750.txt). |
 | expires_in |La durée de validité (en secondes) du jeton d’accès. |
 | expires_on |L’heure d’expiration du jeton d’accès. La date est représentée en nombre de secondes à partir du 1er janvier 1970 (1970-01-01T0:0:0Z) UTC jusqu’au moment de l’expiration. Cette valeur est utilisée pour déterminer la durée de vie des jetons en cache. |
 | not_before |Heure à partir de laquelle le jeton d’accès devient utilisable. La date est exprimée en nombre de secondes entre 1970-01-01T0:0:0Z UTC et le début de la validité du jeton.|
@@ -112,12 +112,23 @@ L’exemple suivant illustre une réponse affirmative à une demande de jeton d�
 
 ```
 {
-"access_token":"eyJhbGciOiJSUzI1NiIsIng1dCI6IjdkRC1nZWNOZ1gxWmY3R0xrT3ZwT0IyZGNWQSIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL3NlcnZpY2UuY29udG9zby5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlLyIsImlhdCI6MTM4ODQ0ODI2NywibmJmIjoxMzg4NDQ4MjY3LCJleHAiOjEzODg0NTIxNjcsInZlciI6IjEuMCIsInRpZCI6IjdmZTgxNDQ3LWRhNTctNDM4NS1iZWNiLTZkZTU3ZjIxNDc3ZSIsIm9pZCI6ImE5OTE5MTYyLTkyMTctNDlkYS1hZTIyLWYxMTM3YzI1Y2RlYSIsInN1YiI6ImE5OTE5MTYyLTkyMTctNDlkYS1hZTIyLWYxMTM3YzI1Y2RlYSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzdmZTgxNDQ3LWRhNTctNDM4NS1iZWNiLTZkZTU3ZjIxNDc3ZS8iLCJhcHBpZCI6ImQxN2QxNWJjLWM1NzYtNDFlNS05MjdmLWRiNWYzMGRkNThmMSIsImFwcGlkYWNyIjoiMSJ9.aqtfJ7G37CpKV901Vm9sGiQhde0WMg6luYJR4wuNR2ffaQsVPPpKirM5rbc6o5CmW1OtmaAIdwDcL6i9ZT9ooIIicSRrjCYMYWHX08ip-tj-uWUihGztI02xKdWiycItpWiHxapQm0a8Ti1CWRjJghORC1B1-fah_yWx6Cjuf4QE8xJcu-ZHX0pVZNPX22PHYV5Km-vPTq2HtIqdboKyZy3Y4y3geOrRIFElZYoqjqSv5q9Jgtj5ERsNQIjefpyxW3EwPtFqMcDm4ebiAEpoEWRN4QYOMxnC9OUBeG9oLA0lTfmhgHLAtvJogJcYFzwngTsVo6HznsvPWy7UP3MINA",
+"access_token":"eyJ0eXAiO ... 0X2tnSQLEANnSPHY0gKcgw",
 "token_type":"Bearer",
 "expires_in":"3599",
 "expires_on":"1388452167",
 "resource":"https://service.contoso.com/"
 }
+```
+## <a name="use-the-access-token-to-access-the-secured-resource"></a>Utiliser le jeton d’accès pour accéder à la ressource sécurisée
+
+Le service peut utiliser le jeton d’accès obtenu pour faire des requêtes authentifiées à l’API web en aval, en définissant le jeton dans `Authorization` l’en-tête.
+
+### <a name="example"></a>Exemple
+
+```
+GET /me?api-version=2013-11-08 HTTP/1.1
+Host: graph.microsoft.com
+Authorization: Bearer eyJ0eXAiO ... 0X2tnSQLEANnSPHY0gKcgw
 ```
 
 ## <a name="see-also"></a>Voir aussi

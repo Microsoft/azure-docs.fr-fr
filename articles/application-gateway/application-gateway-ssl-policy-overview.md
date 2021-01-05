@@ -4,15 +4,15 @@ description: Découvrez comment configurer la stratégie TLS pour Azure Applicat
 services: application gateway
 author: amsriva
 ms.service: application-gateway
-ms.topic: article
+ms.topic: conceptual
 ms.date: 11/16/2019
 ms.author: amsriva
-ms.openlocfilehash: 871cb930e867002d8af1e7755de27d4873327543
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 16c6dd28d47573c2ad5b0d5a331b0dc48e7aacef
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80257374"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85253628"
 ---
 # <a name="application-gateway-tls-policy-overview"></a>Présentation de la stratégie TLS Application Gateway
 

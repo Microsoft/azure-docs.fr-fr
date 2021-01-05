@@ -3,20 +3,21 @@ title: Exemple de script Azure CLI - Pool Linux dans Batch
 description: Ce script montre certaines des commandes disponibles dans l’interface Azure CLI pour créer et gérer un pool de nœuds de calcul Linux dans Azure Batch.
 ms.topic: sample
 ms.date: 01/29/2018
-ms.openlocfilehash: e39deaf2cb897e01ac69b26a7855d7227904539a
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: b2e0fbf44be5718cf5577f6bc9aea436968e2fc3
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83681869"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93073540"
 ---
 # <a name="cli-example-create-and-manage-a-linux-pool-in-azure-batch"></a>Exemple d’interface CLI : créer et gérer un pool de Linux dans Azure Batch
 
 Ce script montre certaines des commandes disponibles dans l’interface Azure CLI pour créer et gérer un pool de nœuds de calcul Linux dans Azure Batch.
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce démarrage rapide nécessite que vous exécutiez la version 2.0.20 minimum d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli). 
+- Ce tutoriel nécessite Azure CLI version 2.0.20 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="example-script"></a>Exemple de script
 
@@ -40,14 +41,14 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 | [az batch account create](/cli/azure/batch/account#az-batch-account-create) | Crée le compte Batch. |
 | [az batch account login](/cli/azure/batch/account#az-batch-account-login) | Effectue l’authentification par rapport au compte Batch spécifié pour renforcer les interactions avec la CLI.  |
 | [az batch pool node-agent-skus list](../batch-linux-nodes.md#list-of-virtual-machine-images) | Répertorie les SKU de l’agent de nœud et les informations de l’image.  |
-| [az batch pool create](https://docs.microsoft.com/cli/azure/batch/pool#az-batch-pool-create) | Crée un pool de nœuds de calcul.  |
-| [az batch pool resize](https://docs.microsoft.com/cli/azure/batch/pool#az-batch-pool-resize) | Redimensionne le nombre de machines virtuelles en cours d’exécution dans le pool spécifié.  |
-| [az batch pool show](https://docs.microsoft.com/cli/azure/batch/pool#az-batch-pool-show) | Affiche les propriétés d’un pool.  |
-| [az batch node list](https://docs.microsoft.com/cli/azure/batch/node#az-batch-node-list) | Répertorie tous les nœuds de calcul dans le pool spécifié.  |
-| [az batch node reboot](https://docs.microsoft.com/cli/azure/batch/node#az-batch-node-reboot) | Redémarre le nœud de calcul spécifié.  |
-| [az batch node delete](https://docs.microsoft.com/cli/azure/batch/node#az-batch-node-delete) | Supprime les nœuds répertoriés dans le pool spécifié.  |
+| [az batch pool create](/cli/azure/batch/pool#az-batch-pool-create) | Crée un pool de nœuds de calcul.  |
+| [az batch pool resize](/cli/azure/batch/pool#az-batch-pool-resize) | Redimensionne le nombre de machines virtuelles en cours d’exécution dans le pool spécifié.  |
+| [az batch pool show](/cli/azure/batch/pool#az-batch-pool-show) | Affiche les propriétés d’un pool.  |
+| [az batch node list](/cli/azure/batch/node#az-batch-node-list) | Répertorie tous les nœuds de calcul dans le pool spécifié.  |
+| [az batch node reboot](/cli/azure/batch/node#az-batch-node-reboot) | Redémarre le nœud de calcul spécifié.  |
+| [az batch node delete](/cli/azure/batch/node#az-batch-node-delete) | Supprime les nœuds répertoriés dans le pool spécifié.  |
 | [az group delete](/cli/azure/group#az-group-delete) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).

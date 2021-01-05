@@ -1,25 +1,15 @@
 ---
 title: Vue d’ensemble des API Node Azure Relay | Microsoft Docs
 description: Cet article fournit une vue d’ensemble de l’API node. js pour le service Azure Relay. Il montre également comment utiliser le package Hyco-WS node.
-services: service-bus-relay
-documentationcenter: na
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: b7d6e822-7c32-4cb5-a4b8-df7d009bdc85
-ms.service: service-bus-relay
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/21/2020
-ms.author: spelluru
-ms.openlocfilehash: 2877284c419da4999e23490fc986e5da44e5d92e
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: 558f49c09203192ff4cbb1af392eaeef8d705c94
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204588"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91263485"
 ---
 # <a name="relay-hybrid-connections-node-api-overview"></a>Vue d’ensemble des API Node pour les connexions hybrides Relay
 

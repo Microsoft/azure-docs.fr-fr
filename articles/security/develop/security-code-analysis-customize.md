@@ -2,7 +2,7 @@
 title: Personnaliser les tâches Microsoft Security Code Analysis
 titleSuffix: Azure
 description: Cet article décrit la personnalisation des tâches dans l’extension Microsoft Security Code Analysis
-author: vharindra
+author: sukhans
 manager: sukhans
 ms.author: terrylan
 ms.date: 07/31/2019
@@ -13,12 +13,12 @@ ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.openlocfilehash: 6cdf892651407defc21f359a8e3b326b4af63b62
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4016e1dd055b45f9cd59a172d0e71ef95fec1c40
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77499989"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008682"
 ---
 # <a name="configure-and-customize-the-build-tasks"></a>Configurer et personnaliser les tâches de build
 
@@ -39,7 +39,7 @@ Dans la zone de liste **Type** de la capture d'écran, l'option **De base** est 
 
 Windows Defender utilise le client Windows Update pour télécharger et installer les signatures. Si la mise à jour de la signature échoue sur votre agent de build, le code d’erreur **HRESULT** provient probablement de Windows Update.
 
-Pour plus d’informations sur les erreurs de Windows Update et leur atténuation, consultez [, Codes d'erreur de Windows Update par composant](https://docs.microsoft.com/windows/deployment/update/windows-update-error-reference) et l'article TechNet [Agent Windows Update - Codes d'erreur](https://social.technet.microsoft.com/wiki/contents/articles/15260.windows-update-agent-error-codes.aspx).
+Pour plus d’informations sur les erreurs de Windows Update et leur atténuation, consultez [, Codes d'erreur de Windows Update par composant](/windows/deployment/update/windows-update-error-reference) et l'article TechNet [Agent Windows Update - Codes d'erreur](https://social.technet.microsoft.com/wiki/contents/articles/15260.windows-update-agent-error-codes.aspx).
 
 Pour plus d’informations sur la configuration YAML de cette tâche, consultez nos [Options YAML pour les logiciels anti-programme malveillant](yaml-configuration.md#anti-malware-scanner-task)
 
@@ -64,9 +64,11 @@ Les détails de configuration des tâches sont affichés dans la capture d’éc
     - Les spécifications de répertoire doivent toujours se terminer par \\*.
     - Exemples :
 
+```binskim-targets
            *.dll;*.exe
            $(BUILD_STAGINGDIRECTORY)\*
            $(BUILD_STAGINGDIRECTORY)\*.dll;$(BUILD_STAGINGDIRECTORY)\*.exe;
+```
 
 - Si vous sélectionnez **Ligne de commande** dans la liste **Type**, vous devez exécuter binskim.exe :
      - Vérifiez que les premiers arguments de binskim.exe correspondent au verbe **analyser** suivi d’une ou plusieurs spécifications de chemin d’accès. Chaque chemin d’accès peut correspondre à un chemin d’accès complet ou à un chemin d’accès relatif au répertoire source.
@@ -74,11 +76,13 @@ Les détails de configuration des tâches sont affichés dans la capture d’éc
      - Vous pouvez omettre l'option **/o** ou **/output**. La valeur de sortie est ajoutée pour vous ou remplacée.
      - Les configurations de ligne de commande standard sont indiquées comme suit.
 
+```binskim-line-args
            analyze $(Build.StagingDirectory)\* --recurse --verbose
            analyze *.dll *.exe --recurse --verbose
+```
 
-          > [!NOTE]
-          > La fin \\* est importante si vous spécifiez des répertoires pour la cible.
+> [!NOTE]
+> La fin \\* est importante si vous spécifiez des répertoires pour la cible.
 
 Pour plus d’informations sur les arguments de ligne de commande, les règles par ID ou les codes de sortie pour BinSkim, consultez le [Guide de l’utilisateur BinSkim](https://github.com/Microsoft/binskim/blob/master/docs/UserGuide.md).
 
@@ -91,7 +95,8 @@ Les détails de configuration des tâches sont affichés dans la capture d’éc
 ![Configuration de la tâche de build Credential Scanner](./media/security-tools/3-taskdetails.png)
 
 Les options disponibles sont les suivantes :
-
+  - **Nom d’affichage** : Nom de la tâche Azure DevOps. La valeur par défaut est Exécuter Credential Scanner
+  - **Version principale de l'outil** : Les valeurs disponibles sont **CredScan v2**, **CredScan v1**. Nous recommandons aux clients d’utiliser la version **CredScan v2**.
   - **Format de sortie** : Les valeurs disponibles incluent **TSV**, **CSV**, **SARIF** et **PREfast**.
   - **Version de l'outil** : Nous vous recommandons de sélectionner **La plus récente**.
   - **Dossier d'analyse** : Dossier de référentiel à analyser.
@@ -106,36 +111,6 @@ Les options disponibles sont les suivantes :
   - **Version** : Version de la tâche de build dans Azure DevOps. Cette option n’est pas fréquemment utilisée.
 
 Pour plus d’informations sur la configuration YAML de cette tâche, consultez nos [Options YAML pour Credential Scanner](yaml-configuration.md#credential-scanner-task)
-
-## <a name="microsoft-security-risk-detection-task"></a>Tâche Microsoft Security Risk Detection
-
-> [!NOTE]
-> Vous devez créer et configurer un compte avec le service Microsoft Security Risk Detection (MSRD) avant d’utiliser la tâche MSRD. Ce service nécessite un processus d’intégration distinct. Contrairement à la plupart des autres tâches de cette extension, cette tâche nécessite un abonnement distinct avec MSRD.
->
-> Reportez-vous à [Microsoft Security Risk Detection](https://aka.ms/msrddocs) et à [Microsoft Security Risk Detection: How To](https://docs.microsoft.com/security-risk-detection/how-to/) pour des instructions.
-
-Pour plus d’informations sur la configuration de cette tâche, consultez la liste suivante. Pointez sur cet élément d'interface utilisateur pour obtenir de l’aide.
-
-   - **Azure DevOps Service Endpoint Name for MSRD** (Nom du point de terminaison du service Azure DevOps pour MRSD) : Un type générique de point de terminaison de service Azure DevOps stocke l'URL de l'instance MSRD intégrée et le jeton d’accès de l'API REST. Si vous avez créé un tel point de terminaison, vous pouvez le spécifier ici. Sinon, sélectionnez le lien **Gérer** pour créer et configurer un nouveau point de terminaison de service pour cette tâche MSRD.
-   - **Account ID** (ID de compte) : GUID qui peut être récupéré auprès de l’URL du compte MSRD.
-   - **URLs to Binaries** (URL des fichiers binaires) : Liste délimitée par des points-virgules des URL disponibles publiquement. La machine de test à données aléatoires (fuzzing) utilise ces URL pour télécharger les fichiers binaires.
-   - **URLs of the Seed Files** (URL des fichiers de données initiales) : Liste délimitée par des points-virgules des URL disponibles publiquement. La machine de test à données aléatoires (fuzzing) utilise ces URL pour télécharger les fichiers de données initiales. Cette valeur est facultative si les fichiers de données initiales sont téléchargés avec les fichiers binaires.
-   - **OS Platform Type** (Type de plateforme du système d’exploitation) : Plateforme du système d’exploitation des machines exécutant le travail de test à données aléatoires (fuzzing). Les valeurs disponibles sont **Windows** et **Linux**.
-   - **Windows Edition / Linux Edition** (Édition de Windows / Édition de Linux) : Édition du système d’exploitation des machines exécutant le travail de test à données aléatoires (fuzzing). Vous pouvez remplacer la valeur par défaut si vos machines ont une autre édition du système d’exploitation.
-   - **Package Installation Script** (Script d’installation du package) : Votre script à exécuter sur une machine de test. Ce script installe le programme cible des tests et ses dépendances avant de soumettre le travail de test à données aléatoires (fuzzing).
-   - **Job Submission Parameters** (Paramètres de soumission du travail) :
-       - **Seed Directory** (Répertoire des données initiales) : Chemin du répertoire sur la machine de test à données aléatoires (fuzzing) contenant les données initiales.
-       - **Seed Extension** (Extension des données initiales) : Extension de nom de fichier des données initiales.
-       - **Test Driver Executable** (Exécutable du pilote de test) : Chemin du fichier exécutable cible sur la machine de test à données aléatoires (fuzzing).
-       - **Test Driver Executable Architecture** (Architecture de l’exécutable du pilote de test) : Architecture du fichier exécutable cible. Les valeurs disponibles sont **x86** et **amd64**.
-       - **Test Driver Arguments** (Arguments du pilote de test) : Arguments de ligne de commande passés au fichier exécutable des tests. L’argument "% TestFile%", guillemets compris, est automatiquement remplacé par le chemin d’accès complet au fichier cible. Ce fichier est analysé par le pilote de test, et requis.
-       - **Test Driver Process Exits Upon Test Completion** (Le processus du pilote de test s’arrête à la fin du test) : Cochez cette case si le pilote de test doit être arrêté au terme de l’opération. Décochez-la si le pilote de test doit être fermé de force.
-       - **Maximum Duration (in seconds)** (Durée des maximale en secondes) : Estimation de la durée d’attente raisonnable la plus longue requise par le programme cible pour analyser un fichier d’entrée. Plus cette estimation est précise, plus l’exécution de l'application des données aléatoires (fuzzing) est efficace.
-       - **Test Driver Can Be Run Repeatedly** (Le pilote de test peut être exécuté à plusieurs reprises) : Cochez la case si le pilote de test peut s'exécuter de façon répétée sans dépendre d’un état global persistant/partagé.
-       - **Test Driver Can Be Renamed** (Le pilote de test peut être renommé) : Cochez la case si le fichier exécutable du pilote de test peut être renommé et continuer à fonctionner correctement.
-       - **The Fuzzing Application Runs as a Single OS Process** (L’application de test à données aléatoires (fuzzing) s’exécute sous la forme d’un seul processus du système d’exploitation) : Cochez cette case si le pilote de test s’exécute sous la forme d'un seul processus du système d’exploitation. Décochez-la si le pilote de test génère des processus supplémentaires.
-
-Pour plus d’informations sur la configuration YAML de cette tâche, consultez nos [Options YAML pour Microsoft Security Risk Detection](yaml-configuration.md#microsoft-security-risk-detection-task)
 
 ## <a name="roslyn-analyzers-task"></a>Tâche Analyseurs Roslyn
 
@@ -156,7 +131,7 @@ Les options disponibles sont les suivantes :
 
 > [!NOTE]
 >
-> - Les analyseurs Roslyn sont intégrés au compilateur et peuvent être exécutés seulement dans le cadre de la compilation csc.exe. Par conséquent, cette tâche nécessite la relecture/réexécution de la commande du compilateur exécutée précédemment dans la build. Cette relecture ou exécution s’effectue en interrogeant Visual Studio Team Services (VSTS) pour les journaux des tâches de build MSBuild.
+> - Les analyseurs Roslyn sont intégrés au compilateur et peuvent être exécutés seulement dans le cadre de la compilation csc.exe. Par conséquent, cette tâche nécessite la relecture/réexécution de la commande du compilateur exécutée précédemment dans la build. Cette relecture ou exécution s’effectue en interrogeant Azure DevOps (anciennement Visual Studio Team Services) pour les journaux des tâches de build MSBuild.
 >
 >   Il n’existe aucun autre moyen pour la tâche d’obtenir de façon fiable la ligne de commande de compilation MSBuild à partir de la définition de build. Nous avons envisagé d’ajouter une zone de texte de forme libre pour permettre aux utilisateurs d’entrer leurs lignes de commande. Mais il serait difficile de les maintenir à jour et de les synchroniser avec la build principale.
 >
@@ -168,7 +143,7 @@ Les options disponibles sont les suivantes :
 >
 >   Si la nouvelle tâche s’exécute sur le même agent que la tâche d’origine, la sortie de la nouvelle tâche remplace la sortie de la tâche d'origine dans le dossier de sources *s*. Bien que la sortie de la build soit la même, nous vous conseillons d’exécuter MSBuild, de copier la sortie dans le répertoire intermédiaire des artefacts, puis d’exécuter les analyseurs Roslyn.
 
-Pour obtenir des ressources supplémentaires pour la tâche Analyseurs Roslyn, consultez [Analyseurs Roslyn](https://docs.microsoft.com/dotnet/standard/analyzers/) sur Microsoft Docs.
+Pour obtenir des ressources supplémentaires pour la tâche Analyseurs Roslyn, consultez [Analyseurs Roslyn](/dotnet/standard/analyzers/api-analyzer) sur Microsoft Docs.
 
 Pour connaître le package de l’analyseur installé et utilisé par cette tâche de build, consultez la page NuGet [Microsoft.CodeAnalysis.FxCopAnalyzers](https://www.nuget.org/packages/Microsoft.CodeAnalysis.FxCopAnalyzers).
 

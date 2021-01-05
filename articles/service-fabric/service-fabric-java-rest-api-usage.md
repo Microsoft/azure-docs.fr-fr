@@ -4,13 +4,14 @@ description: Générez et utilisez des API du client Java Service Fabric à l’
 author: rapatchi
 ms.topic: conceptual
 ms.date: 11/27/2017
+ms.custom: devx-track-java
 ms.author: rapatchi
-ms.openlocfilehash: 0a243c1cd0ab0dcb93a1cc6169c89ba18606f346
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 24ee4a3d8109626bf93e01fbd10c00140762c9c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75451681"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87324622"
 ---
 # <a name="azure-service-fabric-java-client-apis"></a>API du client Java Azure Service Fabric
 
@@ -125,5 +126,4 @@ Pour chaque API, vous trouverez quatre surcharges d’implémentation. S’il ex
     * Cette variante de l’appel d’API peut être utilisée si vous souhaitez employer une programmation asynchrone réactive et traiter la réponse REST RAW
 
 ## <a name="next-steps"></a>Étapes suivantes
-* En savoir plus sur les [API REST Service Fabric](https://docs.microsoft.com/rest/api/servicefabric/)
-
+* En savoir plus sur les [API REST Service Fabric](/rest/api/servicefabric/)

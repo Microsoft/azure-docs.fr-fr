@@ -1,7 +1,7 @@
 ---
 title: 'Convertir en jeu de données : sur le module Modifier les métadonnées'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Convertir en jeu de données d’Azure Machine Learning pour convertir une entrée de données au format de jeu de données interne utilisé par Microsoft Azure Machine Learning.
+description: Découvrez comment utiliser le module Convertir en jeu de données dans le concepteur Azure Machine Learning pour convertir une entrée de données au format de jeu de données interne.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/10/2019
-ms.openlocfilehash: fd45db779b7a828d247f09cae38f90fc20d12c16
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 671a8f7c6fa4c20ef4fc88f57d4a946a84614389
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456588"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93420867"
 ---
 # <a name="convert-to-dataset"></a>Convertir en jeu de données
 
-Cet article explique comment utiliser le module Convertir en jeu de données du concepteur Azure Machine Learning (préversion) pour convertir des données d’un pipeline au format interne du concepteur.
+Cet article explique comment utiliser le module Convertir en jeu de données du concepteur Azure Machine Learning pour convertir des données d’un pipeline au format interne du concepteur.
   
 La conversion n’est pas obligatoire dans la plupart des cas. Azure Machine Learning convertit implicitement les données au format de jeu de données natif quand une opération est effectuée sur les données. 
 
@@ -35,7 +35,7 @@ Nous vous recommandons d’utiliser le module [Modifier les métadonnées](edit-
 
 2. Connectez-le à n’importe quel module qui génère un jeu de données.   
 
-    Tant que les données sont [tabulaires](https://docs.microsoft.com/python/api/azureml-core/azureml.data.tabulardataset?view=azure-ml-py), vous pouvez les convertir en jeu de données. Cela inclut les données chargées via le module [Importer des données](import-data.md), les données créées via le module [Entrer des données manuellement](enter-data-manually.md) ou les jeux de données transformés via le module [Appliquer une transformation](apply-transformation.md).
+    Tant que les données sont [tabulaires](/python/api/azureml-core/azureml.data.tabulardataset?preserve-view=true&view=azure-ml-py), vous pouvez les convertir en jeu de données. Cela inclut les données chargées via le module [Importer des données](import-data.md), les données créées via le module [Entrer des données manuellement](enter-data-manually.md) ou les jeux de données transformés via le module [Appliquer une transformation](apply-transformation.md).
 
 3.  Dans la liste déroulante **Action**, indiquez si vous souhaitez effectuer un nettoyage des données avant d’enregistrer le jeu de données :  
   
@@ -70,4 +70,4 @@ Nous vous recommandons d’utiliser le module [Modifier les métadonnées](edit-
   
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

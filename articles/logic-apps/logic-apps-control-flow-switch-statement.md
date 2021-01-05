@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 10/08/2018
-ms.openlocfilehash: 5c40feec2dca65e4bc9617a71a6d0a8e4c872a3a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 62f147104cf9e0e1605b02a420cb6d20190361b8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74793237"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89657455"
 ---
 # <a name="create-switch-statements-that-run-workflow-actions-based-on-specific-values-in-azure-logic-apps"></a>Créer des instructions switch qui exécutent des actions de workflow basées sur des valeurs spécifiques dans Azure Logic Apps
 
@@ -23,13 +23,13 @@ Par exemple, supposez que vous souhaitiez une application logique qui prenne des
 > Comme dans tous les langages de programmation, les instructions switch ne prennent en charge que les opérateurs d’égalité. Si vous avez besoin d’autres opérateurs de relation, par exemple « supérieur à », utilisez une [instruction de condition](../logic-apps/logic-apps-control-flow-conditional-statement.md).
 > Pour garantir un comportement d’exécution déterministe, les cas doivent contenir une valeur statique unique et non des jetons ou des expressions dynamiques.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Un abonnement Azure. Si vous n’avez pas encore d’abonnement, vous pouvez [vous inscrire pour obtenir un compte Azure gratuitement](https://azure.microsoft.com/free/).
 
-* Pour suivre l’exemple présenté dans cet article, [créez cet exemple d’application logique](../logic-apps/quickstart-create-first-logic-app-workflow.md) avec un compte Outlook.com ou Office 365 Outlook.
+* Pour suivre l’exemple présenté dans cet article, [créez cet exemple d’application logique](../logic-apps/quickstart-create-first-logic-app-workflow.md) avec un compte Outlook.com ou avec un compte professionnel ou scolaire.
 
-  1. Si vous ajoutez l’action permettant d’envoyer un e-mail, recherchez et sélectionnez plutôt cette action : **Envoyer un e-mail d’approbation**.
+  1. Si vous ajoutez l’action permettant d’envoyer un e-mail, recherchez et sélectionnez plutôt cette action : **Envoyer un e-mail d’approbation**
 
      ![Sélectionner « Envoyer un e-mail d’approbation »](./media/logic-apps-control-flow-switch-statement/send-approval-email-action.png)
 
@@ -44,7 +44,7 @@ Par exemple, supposez que vous souhaitiez une application logique qui prenne des
 
    Si vous souhaitez ajouter une instruction switch entre les étapes, placez le pointeur sur la flèche là où vous souhaitez l’ajouter. Cliquez sur le **signe plus** ( **+** ) qui s’affiche, puis choisissez **Ajouter une action**.
 
-1. Dans la zone de recherche, entrez le filtre « switch ». Sélectionnez cette action : **Switch - Control** (Switch - Contrôle).
+1. Dans la zone de recherche, entrez le filtre « switch ». Sélectionnez cette action : **Switch - Contrôle**
 
    ![Ajout d’une instruction switch](./media/logic-apps-control-flow-switch-statement/add-switch-statement.png)
 
@@ -121,7 +121,7 @@ Maintenant que vous avez créé une application logique avec une instruction swi
 
 ## <a name="get-support"></a>Obtenir de l’aide
 
-* Si vous avez des questions, consultez le [forum Azure Logic Apps](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* Pour toute question, consultez la page [Microsoft Q&A pour Azure Logic Apps](/answers/topics/azure-logic-apps.html).
 * Pour voter pour des fonctionnalités ou suggestions ou pour en soumettre, visitez le [site de commentaires des utilisateurs Azure Logic Apps](https://aka.ms/logicapps-wish).
 
 ## <a name="next-steps"></a>Étapes suivantes

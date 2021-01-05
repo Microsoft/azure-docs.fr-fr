@@ -1,5 +1,5 @@
 ---
-title: Modération de vidéo avec révision manuelle - Content Moderator
+title: Modération de vidéo avec l’outil de révision - Content Moderator
 titleSuffix: Azure Cognitive Services
 description: Utilisez la modération de vidéo assistée par ordinateur et l'outil de révision pour modérer les contenus inappropriés
 services: cognitive-services
@@ -8,101 +8,98 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 07/20/2020
 ms.author: pafarley
-ms.openlocfilehash: 0c031a890efc7fad7e5d9caefce3b0e66c515d90
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 05ece4d8ea24fb9da106ec3daa2cc1a63706dab9
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81404253"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96853496"
 ---
-# <a name="video-moderation-with-human-review"></a>Modération de vidéo avec révision manuelle
+# <a name="video-moderation-with-the-review-tool"></a>Modération de vidéo avec l’outil de révision
 
 Utilisez la [modération de vidéo](video-moderation-api.md) assistée par ordinateur et l'[outil de révision](Review-Tool-User-Guide/human-in-the-loop.md) de Content Moderator pour modérer les vidéos et les transcriptions explicites (contenu destiné aux adultes) ou provocantes (contenu suggestif), et permettre à votre entreprise de bénéficier des meilleurs résultats.
 
-## <a name="video-trained-classifier-preview"></a>Classifieur entraîné à l’aide de vidéos (préversion)
+## <a name="view-videos-under-review"></a>Afficher les vidéos en cours de révision
 
-La classification de vidéos assistée par ordinateur est obtenue grâce à des modèles entraînés à l’aide d’images ou de vidéos. Contrairement aux classifieurs entraînés à l’aide d’images, l’apprentissage du classifieur vidéo Microsoft pour le contenu explicite ou suggestif est effectué à l’aide de vidéos. Cette méthode offre des correspondances de meilleure qualité.
+Dans le tableau de bord, sélectionnez l’une des files d’attente de révision dans le type de contenu vidéo. Cette opération démarre une révision et ouvre la page de modération de contenu vidéo.
 
-## <a name="shot-detection"></a>Détection de plan
+> [!div class="mx-imgBorder"]
+> ![Sur Content Moderator (préversion), le curseur est en évidence et défini sur 4 révisions. Les commutateurs Flouter tout et Noir et blanc sont en évidence et tous deux définis.](./Review-Tool-User-Guide/images/video-moderation-detailed.png)
 
-Lorsque les résultats détaillés de la classification sont obtenus, l’outil offre une plus grande souplesse dans l’analyse des vidéos grâce à une intelligence vidéo supplémentaire. Plutôt que d’isoler simplement des images, le service de modération des vidéos Microsoft fournit des informations au niveau des plans. Vous pouvez désormais analyser vos vidéos au niveau des plans et des images.
+### <a name="review-count"></a>Nombre d’examens
 
-## <a name="key-frame-detection"></a>Détection de l’image clé
+Utilisez le curseur en haut à droite pour définir le nombre de révisions que vous souhaitez afficher dans la page.
 
-Au lieu d’isoler des images à intervalles réguliers, le service de modération des vidéos identifie et isole des images qui sont potentiellement complètes et de bonne qualité. La fonctionnalité génère efficacement des images afin d’analyser le contenu explicite et suggestif au niveau de l’image.
+### <a name="view-type"></a>Type de vue
 
-L’extrait suivant illustre une réponse partielle comportant des plans potentiels, des images clés et des scores de contenu explicite ou suggestif :
+Vous pouvez afficher les différentes entrées de contenu sous forme de vignettes ou dans une vue détaillée. La vue **Detail** vous permet de voir les images clés et d’autres informations sur la vidéo sélectionnée. 
 
-```json
-"fragments":[  
-  {  
-    "start":0,
-    "duration":18000
-  },
-  {  
-    "start":18000,
-    "duration":3600,
-    "interval":3600,
-    "events":[  
-      [  
-        {  
-          "reviewRecommended":false,
-          "adultScore":0.00001,
-          "racyScore":0.03077,
-          "index":5,
-          "timestamp":18000,
-          "shotIndex":0
-        }
-      ]
-    ]
-  },
-  {  
-    "start":18386372,
-    "duration":119149,
-    "interval":119149,
-    "events":[  
-      [  
-        {  
-          "reviewRecommended":true,
-          "adultScore":0.00000,
-          "racyScore":0.91902,
-          "index":5085,
-          "timestamp":18386372,
-          "shotIndex":62
-        }
-      ]
-    ]
-```
+> [!NOTE]
+> Au lieu d’isoler des images à intervalles réguliers, le service de modération des vidéos identifie et isole des images qui sont potentiellement complètes et de bonne qualité. Cette fonctionnalité génère efficacement des images afin d’analyser le contenu explicite et suggestif au niveau de l’image.
 
-## <a name="visualization-for-human-reviews"></a>Visualisation pour la révision manuelle
+La vue **Tiled** affiche chaque vidéo sous la forme d’une vignette unique. Sélectionnez le bouton de développement au-dessus d’une image vidéo pour agrandir cette vidéo et masquer les autres.
 
-Dans certains cas plus nuancés, les entreprises requièrent l’intervention humaine pour examiner la vidéo, les images et les balises assignées par ordinateur. Les modérateurs qui vérifient les vidéos et les images disposent d’une vue complète des résultats, ils peuvent modifier les balises et soumettre leur décision.
+### <a name="content-obscuring-effects"></a>Effets de masquage du contenu
 
-![vue par défaut de l’outil de révision vidéo](images/video-review-default-view.png)
+Utilisez les boutons bascule **Blur all** et **Black and white** pour définir ces effets de masquage du contenu. Ils sont activés par défaut. Dans la vue **Tiled**, vous pouvez basculer les effets individuellement pour chaque vidéo.
 
-## <a name="player-view-for-video-level-review"></a>Affichage du lecteur pour examen au niveau de la vidéo
+## <a name="check-video-details"></a>Vérifier les détails de la vidéo
 
-Il est possible de prendre une décision binaire au niveau de la vidéo grâce à un lecteur vidéo qui montre les images à caractère potentiellement explicite ou suggestif. Les réviseurs peuvent parcourir la vidéo manuellement et utiliser différentes options de défilement pour examiner les scènes. Ils confirment leur décision en activant ou désactivant les balises.
+Dans la vue **Detail**, le volet droit contient plusieurs onglets qui fournissent des détails sur la vidéo.
 
-![vue du lecteur de l’outil de révision vidéo](images/video-review-player-view.PNG)
+* Sélectionnez l’onglet **Notes** pour ajouter des notes personnalisées aux vidéos.
+* Sélectionnez l’onglet **Transcript** pour voir la transcription de la vidéo ; le service extrait automatiquement une transcription de toute parole dans la vidéo. Lorsque vous sélectionnez une section de texte, le lecteur vidéo passe directement à cette partie de la vidéo.
+* Sélectionnez l’onglet **Meta-data** pour afficher les métadonnées du fichier vidéo.
+* Sélectionnez l’onglet **History** pour afficher l’historique de la révision, par exemple sa date de création et la manière dont elle a été modifiée.
 
-## <a name="frames-view-for-detailed-reviews"></a>Affichage d’images pour examen détaillé
+> [!div class="mx-imgBorder"]
+> ![Le volet droit est en évidence et l’onglet Notes est sélectionné. Une zone de test est étiquetée Add a note.](./Review-Tool-User-Guide/images/video-moderation-video-details.png)
 
-Il est possible d’examiner une vidéo en détail, image par image, grâce à un affichage par image. Les réviseurs humains passent en revue et sélectionnent une ou plusieurs images, puis activent ou désactivent les balises pour confirmer leur décision. Une étape facultative supplémentaire permet de censurer les images ou le contenu sensible.
+## <a name="apply-moderation-tags"></a>Appliquer des étiquettes de modération
 
-![vue des images de l’outil de révision vidéo](images/video-review-frames-view-apply-tags.PNG)
+La tâche principale d’une révision de vidéo consiste à appliquer ou à supprimer des étiquettes de modération sur des vidéos ou des parties de vidéos.
 
-## <a name="transcript-moderation"></a>Modération de la transcription
+### <a name="bulk-tagging"></a>Étiquetage en bloc
 
-Bien souvent, les vidéos sont accompagnées d’une voix off qui doit être également modérée afin d’identifier les propos sensibles. Vous pouvez utiliser le service Azure Media Indexer pour convertir l’audio en texte, puis l’API de révision Content Moderator pour transmettre la transcription à l’outil de révision pour la modération de texte.
+La barre d’outils **Bulk Tags** vous permet d’ajouter des étiquettes à plusieurs vidéos sélectionnées en même temps. Sélectionnez une ou plusieurs vidéos, sélectionnez les étiquettes que vous souhaitez appliquer, puis cliquez sur **submit**. 
 
-![vue de la transcription de l’outil de révision vidéo](images/video-review-transcript-view.png)
+> [!div class="mx-imgBorder"]
+> ![Le bouton + est en évidence dans le volet Bulk Tags.](./Review-Tool-User-Guide/images/video-moderation-bulk-tags.png)
+
+
+### <a name="key-frame-tagging"></a>Étiquetage d’image clé
+
+Vous pouvez également ajouter des étiquettes de modération à des images clés spécifiques. Sélectionnez les images dans le volet de vignettes d’images clés, puis sélectionnez **Keyframe tags +** pour appliquer les étiquettes souhaitées.
+
+> [!NOTE]
+> Si le service n’a pas pu extraire les images clés, le volet de vignettes d’images affiche **No frames available**, et l’option permettant de sélectionner les images clés est grisée. Dans ce cas, vous ne pouvez appliquer des étiquettes qu’à la vidéo dans son ensemble (à l’aide du bouton **Video tags +** ).
+
+> [!div class="mx-imgBorder"]
+> ![Les volets de vignette, de lecteur vidéo, d’étiquettes d’images clés et d’étiquettes vidéo sont tous affichés. Les boutons des étiquettes d’images clés et d’étiquettes vidéo sont en évidence.](./Review-Tool-User-Guide/images/video-moderation-tagging-options.png)
+
+## <a name="put-a-review-on-hold"></a>Mettre une révision en attente
+
+Le bouton **Hold** en bas du volet de vidéo vous permet de mettre en attente une révision afin de pouvoir la récupérer et la terminer ultérieurement, par exemple si elle nécessite une consultation par un autre membre ou responsable de l’équipe qui n’est pas disponible actuellement. 
+
+Vous pouvez afficher les vidéos en attente en cliquant sur le bouton **Hold** en haut de l’écran. Le volet Hold est affiché à droite. À partir de là, vous pouvez sélectionner plusieurs révisions en attente et les replacer dans la file d’attente ou définir leur heure d’expiration. Passé le délai préconfiguré, les révisions en attente sont replacées dans la file d’attente. Sélectionnez **Save** pour commencer le compte à rebours à partir du délai d’expiration actuellement sélectionné.
+
+> [!div class="mx-imgBorder"]
+> ![Dans le volet vidéo, le bouton Hold est en évidence. En bas du volet, une zone de liste modifiable Hold Time est en évidence, ainsi que les boutons Release et Save.](./Review-Tool-User-Guide/images/video-moderation-hold.png)
+
+## <a name="submit-a-review"></a>Soumettre une révision
+
+Une fois que vous avez appliqué vos étiquettes, sélectionnez le bouton **Submit** en bas du volet de vidéo. Si vous avez étiqueté plusieurs vidéos, vous pouvez les soumettre en tant que révision unique ou en tant que révisions distinctes.
+
+## <a name="limbo-state"></a>État Limbo
+
+Une fois que vous avez soumis une révision, la vidéo passe à l’état **Limbo**, que vous pouvez afficher en sélectionnant le bouton **Limbo** en haut de l’écran. Les vidéos restent à l’état Limbo pour une durée préconfigurée (que vous pouvez modifier dans le menu en bas) ou jusqu’à ce qu’elles soient révisées à nouveau ou envoyées manuellement.
+
+Une fois que les vidéos expirent de l’état Limbo, leurs évaluations sont marquées comme achevées.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Consultez le [démarrage rapide pour la modération des vidéos](video-moderation-api.md).
 - Découvrez comment générer des [revues de vidéos](video-reviews-quickstart-dotnet.md) pour vos réviseurs à partir de résultats modérés.
 - Ajoutez des [revues de la transcription de la vidéo](video-transcript-reviews-quickstart-dotnet.md) à vos révisions de vidéos.
-- Consultez le tutoriel détaillé sur le développement d’une [solution complète de modération de vidéos](video-transcript-moderation-review-tutorial-dotnet.md).

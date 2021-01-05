@@ -8,17 +8,17 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 10/22/2019
-ms.openlocfilehash: d124fdc15bd34743b237985a66cc35625f5d9a4b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/13/2020
+ms.openlocfilehash: 69d27c102ca059974da87224e44f0ad7aa103fff
+ms.sourcegitcommit: 1cf157f9a57850739adef72219e79d76ed89e264
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79456197"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94592632"
 ---
 # <a name="import-data-module"></a>Module Importer des données
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour charger des données dans un pipeline de Machine Learning des services de données cloud existants. 
 
@@ -44,6 +44,10 @@ Après avoir défini les données souhaitées et une fois connecté à la source
 
 Si votre source de données change, vous pouvez actualiser le jeu de données et ajouter de nouvelles données en réexécutant [Importer des données](./import-data.md).
 
+> [!WARNING]
+> Si votre espace de travail se trouve dans un réseau virtuel, vous devez configurer vos magasins de données pour qu’ils utilisent les fonctionnalités de visualisation de données du concepteur. Pour plus d’informations sur l’utilisation des magasins de données et des jeux de données sur un réseau virtuel, consultez [Isolement réseau pendant l’entraînement et l’inférence avec les réseaux virtuels privés](../how-to-enable-studio-virtual-network.md).
+
+
 ## <a name="how-to-configure-import-data"></a>Comment configurer Importer des données
 
 1. Ajoutez le module **Importer des données** à votre pipeline. Vous trouverez ce module dans la catégorie **Data Input and Output** (Entrée et sortie de données) du concepteur.
@@ -52,7 +56,15 @@ Si votre source de données change, vous pouvez actualiser le jeu de données et
 
 1. Sélectionnez **Source de données**, puis choisissez le type de source de données. Cela peut être HTTP ou un magasin de données.
 
-    Si vous choisissez le magasin de données, vous pouvez sélectionner les magasins de données existants déjà inscrits dans votre espace de travail Azure Machine Learning ou créer un nouveau magasin de données. Ensuite, définissez le chemin d’accès des données à importer dans le magasin de données. Vous pouvez facilement parcourir le chemin d’accès en cliquant sur **Parcourir le chemin d’accès**![import-data-path](media/module/import-data-path.png)
+    Si vous choisissez le magasin de données, vous pouvez sélectionner les magasins de données existants déjà inscrits dans votre espace de travail Azure Machine Learning ou créer un nouveau magasin de données. Ensuite, définissez le chemin d’accès des données à importer dans le magasin de données. Vous pouvez facilement parcourir le chemin en cliquant sur **Parcourir le chemin** ![Capture d'écran présentant le lien Parcourir le chemin qui permet d'ouvrir la boîte de dialogue de sélection du chemin.](media/module/import-data-path.png)
+
+    > [!NOTE]
+    > Le module **Importer des données** est uniquement destiné aux données **tabulaires**.
+    > Si vous souhaitez importer plusieurs fichiers de données tabulaires à la fois, des erreurs se produiront si les conditions suivantes ne sont pas remplies :
+    > 1. Pour inclure tous les fichiers de données dans le dossier, vous devez entrer `folder_name/**` pour **Chemin d’accès**.
+    > 2. Tous les fichiers de données doivent être encodés au format unicode-8.
+    > 3. Tous les fichiers de données doivent avoir les mêmes numéros et noms de colonnes.
+    > 4. Le résultat de l’importation de plusieurs fichiers de données est une concaténation de toutes les lignes de plusieurs fichiers dans l’ordre.
 
 1. Sélectionnez le schéma d’aperçu pour filtrer les colonnes que vous souhaitez inclure. Vous pouvez également définir des paramètres avancés tels que les délimiteurs dans les options d’analyse.
 
@@ -75,9 +87,9 @@ Si votre source de données change, vous pouvez actualiser le jeu de données et
 
 ## <a name="results"></a>Résultats
 
-Lorsque l’importation est terminée, cliquez sur le jeu de données de sortie et sélectionnez **Visualiser** pour voir si les données ont bien été importées.
+Lorsque l’importation est terminée, cliquez avec le bouton droit sur le jeu de données de sortie et sélectionnez **Visualiser** pour voir si les données ont bien été importées.
 
-Si vous souhaitez enregistrer les données pour les réutiliser, plutôt que d’importer un nouveau jeu de données à chaque exécution du pipeline, sélectionnez l’icône **Inscrire le jeu de données** sous l’onglet **Sorties** dans le panneau droit du module. Choisissez un nom pour le jeu de données. Le jeu de données enregistré préserve les données au moment de l’enregistrement et il n’est pas mis à jour au moment de la réexécution du pipeline, même si le jeu de données dans le pipeline est modifié. Cela peut être utile pour prendre des instantanés de données.
+Si vous souhaitez enregistrer les données pour les réutiliser, plutôt que d’importer un nouveau jeu de données à chaque exécution du pipeline, sélectionnez l’icône **Inscrire le jeu de données** sous l’onglet **Sorties + journaux** dans le panneau droit du module. Choisissez un nom pour le jeu de données. Le jeu de données enregistré préserve les données au moment de l’enregistrement et il n’est pas mis à jour au moment de la réexécution du pipeline, même si le jeu de données dans le pipeline est modifié. Cela peut être utile pour prendre des instantanés de données.
 
 Après l’importation des données, d’autres préparations seront peut-être nécessaires pour modélisation et l’analyse :
 

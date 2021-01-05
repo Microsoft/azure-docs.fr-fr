@@ -2,27 +2,27 @@
 title: Ajouter votre domaine personnalisé – Azure Active Directory | Microsoft Docs
 description: Ces instructions expliquent comment ajouter un domaine personnalisé avec Azure Active Directory.
 services: active-directory
-author: msaburnley
+author: ajburnle
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: fundamentals
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/25/2019
 ms.author: ajburnle
 ms.reviewer: elkuzmen
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 69c96d123ebe97ba4a7a6df0395efe698924fef1
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 28847ece3c08e93d14d381b35fc93fb16dad95a1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734737"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95973896"
 ---
 # <a name="add-your-custom-domain-name-using-the-azure-active-directory-portal"></a>Ajouter votre nom de domaine personnalisé à l’aide du Portail Azure Active Directory
 
-Chaque nouveau locataire Azure AD est fourni avec un nom de domaine initial, au format *\<nom_de_domaine>.onmicrosoft.com*. Vous ne pouvez pas modifier ni supprimer le nom de domaine initial, mais vous pouvez ajouter des noms de votre organisation. L’ajout de noms de domaine personnalisés vous permet de créer des noms d’utilisateur qui sont familiers à vos utilisateurs, par exemple *alain\@contoso.com*.
+Chaque nouveau locataire Azure AD est fourni avec un nom de domaine initial, *\<domainname>.onmicrosoft.com*. Vous ne pouvez pas modifier ni supprimer le nom de domaine initial, mais vous pouvez ajouter des noms de votre organisation. L’ajout de noms de domaine personnalisés vous permet de créer des noms d’utilisateur qui sont familiers à vos utilisateurs, par exemple *alain\@contoso.com*.
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
@@ -104,9 +104,9 @@ Si Azure AD ne parvient pas à vérifier un nom de domaine personnalisé, suivez
 
   Si vous ne pouvez pas mettre à jour l’enregistrement sur le site du bureau d’enregistrement, partagez l’entrée avec une personne qui dispose des autorisations pour ajouter l’entrée et vérifier qu’elle est correcte.
 
-- **Assurez-vous que le nom de domaine n’est pas déjà en cours d’utilisation dans un autre annuaire.** Un nom de domaine ne peut être vérifié que dans un seul annuaire. Par conséquent, si votre nom de domaine est vérifié dans un autre annuaire, il ne peut pas être également vérifié dans le nouvel annuaire. Pour résoudre ce problème de duplication, vous devez supprimer le nom de domaine à partir de l’ancien annuaire. Pour plus d’informations sur la suppression de noms de domaine, voir [Gérer les noms de domaine personnalisés](../users-groups-roles/domains-manage.md).
+- **Assurez-vous que le nom de domaine n’est pas déjà en cours d’utilisation dans un autre annuaire.** Un nom de domaine ne peut être vérifié que dans un seul annuaire. Par conséquent, si votre nom de domaine est vérifié dans un autre annuaire, il ne peut pas être également vérifié dans le nouvel annuaire. Pour résoudre ce problème de duplication, vous devez supprimer le nom de domaine à partir de l’ancien annuaire. Pour plus d’informations sur la suppression de noms de domaine, voir [Gérer les noms de domaine personnalisés](../enterprise-users/domains-manage.md).
 
-- **Assurez-vous de n’avoir aucun locataire Power BI non managé.** Si vos utilisateurs ont activé Power BI via l’inscription libre-service et créé un locataire non managé pour votre organisation, vous devez reprendre la gestion en tant qu’administrateur interne ou externe à l’aide de PowerShell. Pour plus d’informations, consultez [Prendre le contrôle d’un annuaire non géré en tant qu’administrateur dans Azure Active Directory](../users-groups-roles/domains-admin-takeover.md).
+- **Assurez-vous de n’avoir aucun locataire Power BI non managé.** Si vos utilisateurs ont activé Power BI via l’inscription libre-service et créé un locataire non managé pour votre organisation, vous devez reprendre la gestion en tant qu’administrateur interne ou externe à l’aide de PowerShell. Pour plus d’informations, consultez [Prendre le contrôle d’un annuaire non géré en tant qu’administrateur dans Azure Active Directory](../enterprise-users/domains-admin-takeover.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -114,6 +114,6 @@ Si Azure AD ne parvient pas à vérifier un nom de domaine personnalisé, suivez
 
 - Ajoutez des utilisateurs à votre domaine. Pour plus d’informations, consultez [Guide pratique pour ajouter ou supprimer des utilisateurs](add-users-azure-active-directory.md).
 
-- Gérez vos informations de nom de domaine dans Azure AD. Pour plus d’informations, consultez [Gestion des noms de domaine personnalisés dans Azure Active Directory](../users-groups-roles/domains-manage.md).
+- Gérez vos informations de nom de domaine dans Azure AD. Pour plus d’informations, consultez [Gestion des noms de domaine personnalisés dans Azure Active Directory](../enterprise-users/domains-manage.md).
 
-- Si vous souhaitez utiliser des versions locales de Windows Server avec Azure Active Directory, consultez la rubrique [Intégrer des répertoires locaux à Azure Active Directory](../connect/active-directory-aadconnect.md).
+- Si vous souhaitez utiliser des versions locales de Windows Server avec Azure Active Directory, consultez la rubrique [Intégrer des répertoires locaux à Azure Active Directory](../hybrid/whatis-hybrid-identity.md).

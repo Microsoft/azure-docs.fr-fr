@@ -6,22 +6,22 @@ ms.author: mimckitt
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
 ms.subservice: management
-ms.date: 08/20/2019
+ms.date: 11/12/2020
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: c4b0cb8204891538ef9c4eef3fa0ff5fd9686536
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 2aa589d237a8cfeb8e0dc947896dba82e755631c
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200099"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94564767"
 ---
 # <a name="planned-maintenance-notifications-for-virtual-machine-scale-sets"></a>Notifications de maintenance planifiées pour les groupes de machines virtuelles identiques
 
 
 Azure exécute régulièrement des mises à jour afin d’améliorer la fiabilité, les performances et la sécurité de l’infrastructure hôte des machines virtuelles. Les mises à jour peuvent inclure la mise à jour corrective de l’environnement d’hébergement ou la mise à niveau et la désactivation de matériel. La plupart des mises à jour n’affectent pas les machines virtuelles hébergées. Toutefois, les mises à jour affectent les machines virtuelles dans les scénarios suivants :
 
-- Lorsque la maintenance ne nécessite pas de redémarrage, Azure utilise une migration sur place pour mettre en pause la machine virtuelle pendant la mise à jour de l’hôte. Les opérations de maintenance qui ne nécessitent pas de redémarrage sont appliquées domaine d’erreur par domaine d’erreur. Elles sont arrêtées si des signaux d’avertissement sont reçus.
+- Si la maintenance ne nécessite pas de redémarrage, Azure met en pause la machine virtuelle pendant quelques secondes lors de la mise à jour de l’hôte. Ces types d’opérations de maintenance sont appliquées domaine d’erreur par domaine d’erreur. Elles sont arrêtées si des signaux d’avertissement sont reçus.
 
 - Si la maintenance nécessite un redémarrage, une notification vous dira pour quand est prévue la maintenance. Dans ces cas, vous disposez d’une période qui s’étend généralement sur 35 jours pour commencer la maintenance vous-même, au moment qui vous convient.
 
@@ -112,7 +112,7 @@ Lorsque vous démarrez la maintenance, les machines virtuelles affectées dans v
  
 ## <a name="check-maintenance-status-by-using-powershell"></a>Vérifier l’état de maintenance à l’aide de PowerShell
 
-Vous pouvez utiliser Azure PowerShell pour voir quand les machines virtuelles dans vos groupes de machines virtuelles identiques sont planifiées pour la maintenance. Les informations de maintenance planifiée sont disponibles via la cmdlet [Get-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss) lorsque vous utilisez le paramètre `-InstanceView`.
+Vous pouvez utiliser Azure PowerShell pour voir quand les machines virtuelles dans vos groupes de machines virtuelles identiques sont planifiées pour la maintenance. Les informations de maintenance planifiée sont disponibles via la cmdlet [Get-AzVmss](/powershell/module/az.compute/get-azvmss) lorsque vous utilisez le paramètre `-InstanceView`.
  
 Les informations de maintenance sont retournées uniquement en cas de maintenance planifiée. Si aucune maintenance planifiée n’affecte l’instance de machine virtuelle, la cmdlet ne retourne pas d’informations de maintenance. 
 
@@ -181,11 +181,11 @@ az vmss perform-maintenance -g rgName -n vmssName --instance-ids id
 
 **R :** Les machines virtuelles déployées dans un groupe à haute disponibilité ou dans des groupes de machines virtuelles identiques utilisent des domaines de mise à jour. Lors des opérations de maintenance, Azure respecte la contrainte de domaine de mise à jour et ne redémarre pas les machines virtuelles à partir d’un domaine de mise à jour distinct (dans le même groupe à haute disponibilité). Azure attend également au moins 30 minutes avant de passer au groupe de machines virtuelles suivant. 
 
-Pour plus d’informations sur la haute disponibilité, consultez [Régions et disponibilité des machines virtuelles dans Azure](../virtual-machines/windows/availability.md).
+Pour plus d’informations sur la haute disponibilité, consultez [Régions et disponibilité des machines virtuelles dans Azure](../virtual-machines/availability.md).
 
 **Q : Comment puis-je être averti d’une maintenance planifiée ?**
 
-**R :** Une vague d’opérations de maintenance planifiée commence par une planification sur une ou plusieurs régions Azure. Peu après, une notification par e-mail est envoyée aux propriétaires d’abonnement (un e-mail par abonnement). Vous pouvez ajouter des canaux et des destinataires pour cette notification à l’aide de la fonctionnalité Alertes de journal d’activité. Si vous déployez une machine virtuelle dans une région dans laquelle une maintenance est déjà planifiée, vous ne recevrez pas de notification. Vous devrez dans ce cas consulter l’état de maintenance de la machine virtuelle.
+**R :** Une vague d’opérations de maintenance planifiée commence par une planification sur une ou plusieurs régions Azure. Peu après, une notification par e-mail est envoyée aux administrateurs, aux coadministrateurs, aux propriétaires et aux contributeurs d’abonnement (un e-mail par abonnement). Il est possible de configurer des canaux et des destinataires supplémentaires pour cette notification à l’aide de la fonctionnalité Alertes de journal d’activité. Dans le cas où vous déployez une machine virtuelle dans une région où la planification de la maintenance est déjà effectuée, vous ne recevez pas la notification. Vous devrez dans ce cas consulter l’état de maintenance de la machine virtuelle.
 
 **Q : Je ne vois aucune indication de maintenance planifiée dans le portail, dans PowerShell ou dans l’interface CLI. Est-ce normal ?**
 

@@ -6,13 +6,13 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/17/2020
-ms.openlocfilehash: 2cb53d0c88d8c29da2bd8bf52d6536555d56c76e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/05/2020
+ms.openlocfilehash: fc89790c7d268bcfa0c08bd26249bc91979d7fca
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80283937"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186896"
 ---
 # <a name="monitoring-azure-virtual-machines-with-azure-monitor"></a>Supervision de machines virtuelles Azure avec Azure Monitor
 Cet article explique comment utiliser Azure Monitor pour collecter et analyser des données de supervision sur des machines virtuelles Azure pour maintenir leur intégrité. Les machines virtuelles peuvent être supervisées pour vérifier leur disponibilité et leurs performances avec Azure Monitor comme n’importe quelle [autre ressource Azure](monitor-azure-resource.md), mais elles se distinguent des autres ressources, car vous devez également superviser le système d’exploitation invité et les charges de travail qui y sont exécutées. 
@@ -24,7 +24,7 @@ Cet article explique comment utiliser Azure Monitor pour collecter et analyser d
 ## <a name="differences-from-other-azure-resources"></a>Différences par rapport aux autres ressources Azure
 [Supervision des ressources Azure avec Azure Monitor](monitor-azure-resource.md) décrit les données de supervision générées par les ressources Azure et comment utiliser les fonctionnalités d’Azure Monitor pour analyser ces données et créer des alertes. Vous pouvez collecter et utiliser les mêmes données de supervision sur des machines virtuelles Azure avec les différences suivantes :
 
-- Les [métriques de plateforme](../platform/data-platform-metrics.md) sont collectées automatiquement pour les machines virtuelles, mais uniquement pour l’[hôte de machine virtuelle](#monitoring-data). Vous avez besoin d’un agent pour collecter les données de performances du système d’exploitation invité. 
+-  Les [métriques de plateforme](../platform/data-platform-metrics.md) sont collectées automatiquement pour les machines virtuelles, mais uniquement pour l’[hôte de machine virtuelle](#monitoring-data). Vous avez besoin d’un agent pour collecter les données de performances du système d’exploitation invité. 
 - Les machines virtuelles ne génèrent pas de [journaux de ressources](../platform/platform-logs-overview.md) qui fournissent des insights sur les opérations qui ont été effectuées au sein d’une ressource Azure. Vous utilisez un agent pour collecter les données de journal du système d’exploitation invité.
 - Vous pouvez créer des [paramètres de diagnostic](../platform/diagnostic-settings.md) pour qu’une machine virtuelle envoie des métriques de plateforme à d’autres destinations comme le stockage et les hubs d’événements, mais vous ne pouvez pas configurer ces paramètres de diagnostic dans le portail Azure. 
 
@@ -64,15 +64,15 @@ Pour activer toutes les fonctionnalités d’Azure Monitor afin de superviser un
 Chacune de ces étapes de configuration est décrite dans les sections suivantes.
 
 ### <a name="enable-azure-monitor-for-vms"></a>Activer Azure Monitor pour machines virtuelles
-[Azure Monitor pour machines virtuelles](vminsights-overview.md) est un [insight](insights-overview.md) dans Azure Monitor qui est le principal outil de supervision des machines virtuelles dans Azure Monitor. Il fournit la valeur ajoutée suivante par rapport aux fonctionnalités standard d’Azure Monitor.
+[Azure Monitor pour machines virtuelles](vminsights-overview.md) est un [insight](../monitor-reference.md) dans Azure Monitor qui est le principal outil de supervision des machines virtuelles dans Azure Monitor. Il fournit la valeur ajoutée suivante par rapport aux fonctionnalités standard d’Azure Monitor.
 
 - Intégration simplifiée de l’agent Log Analytics et de Dependency Agent pour pouvoir superviser le système d’exploitation invité et les charges de travail d’une machine virtuelle. 
 - Classeurs et graphiques de performances des tendances prédéfinis qui vous permettent d’analyser les principales métriques de performances du système d’exploitation invité de la machine virtuelle.
 - Carte de dépendances qui affiche les processus en cours d’exécution sur chaque machine virtuelle, et les composants interconnectés avec d’autres machines et sources externes.
 
-![Azure Monitor pour machines virtuelles](media/monitor-vm-azure/vminsights-01.png)
+![Affichage du niveau de performance d’Azure Monitor pour machines virtuelles](media/monitor-vm-azure/vminsights-01.png)
 
-![Azure Monitor pour machines virtuelles](media/monitor-vm-azure/vminsights-02.png)
+![Affichage des mappages Azure Monitor pour machines virtuelles](media/monitor-vm-azure/vminsights-02.png)
 
 
 Activez Azure Monitor pour machines virtuelles à partir de l’option **Insights** dans le menu de machine virtuelle du portail Azure. Pour plus d’informations et pour connaître les autres méthodes de configuration, consultez la vue d’ensemble [Activer Azure Monitor pour machines virtuelles](vminsights-enable-overview.md).
@@ -80,7 +80,7 @@ Activez Azure Monitor pour machines virtuelles à partir de l’option **Insight
 ![Activer Azure Monitor pour machines virtuelles](media/monitor-vm-azure/enable-vminsights.png)
 
 ### <a name="configure-log-analytics-workspace"></a>Configurer l’espace de travail Log Analytics
-L’agent Log Analytics utilisé par Azure Monitor pour machines virtuelles envoie des données à un [espace de travail Log Analytics](../platform/data-platform-logs.md#how-is-data-in-azure-monitor-logs-structured). Vous pouvez activer la collecte de données de performances et d’événements supplémentaires, et d’autres données de supervision à partir de l’agent en configurant l’espace de travail Log Analytics. Vous avez à le configurer une seule fois, dans la mesure où tout agent qui se connecte à l’espace de travail télécharge automatiquement la configuration et commence immédiatement à collecter les données définies. 
+L’agent Log Analytics utilisé par Azure Monitor pour machines virtuelles envoie des données à un [espace de travail Log Analytics](../platform/data-platform-logs.md). Vous pouvez activer la collecte de données de performances et d’événements supplémentaires, et d’autres données de supervision à partir de l’agent en configurant l’espace de travail Log Analytics. Vous avez à le configurer une seule fois, dans la mesure où tout agent qui se connecte à l’espace de travail télécharge automatiquement la configuration et commence immédiatement à collecter les données définies. 
 
 Vous pouvez accéder à la configuration de l’espace de travail directement à partir d’Azure Monitor pour machines virtuelles en sélectionnant **Configuration de l’espace de travail** dans **Démarrer**. Cliquez sur le nom de l’espace de travail pour ouvrir son menu.
 
@@ -96,7 +96,7 @@ Sélectionnez **Paramètres avancés** dans le menu de l’espace de travail, pu
 
 
 ### <a name="enable-diagnostics-extension-and-telegraf-agent"></a>Activer l’extension de diagnostic et l’agent Telegraf
-Azure Monitor pour machines virtuelles est basé sur l’agent Log Analytics qui collecte des données dans un espace de travail Log Analytics. Il prend en charge [plusieurs fonctionnalités d’Azure Monitor](../platform/data-platform-logs.md#what-can-you-do-with-azure-monitor-logs) comme les [requêtes de journal](../log-query/log-query-overview.md), les [alertes de journal](../platform/alerts-log.md) et les [classeurs](../platform/workbooks-overview.md). L’[extension de diagnostic](../platform/diagnostics-extension-overview.md) collecte les données de performances du système d’exploitation invité des machines virtuelles Windows dans le stockage Azure et envoie éventuellement des données de performances aux [métriques Azure Monitor](../platform/data-platform-metrics.md). Pour les machines virtuelles Linux, l’[agent Telegraf](../platform/collect-custom-metrics-linux-telegraf.md) est nécessaire pour envoyer des données aux métriques Azure.  Il active d’autres fonctionnalités d’Azure Monitor comme [Metrics Explorer](../platform/metrics-getting-started.md) et les [alertes de métriques](../platform/alerts-metric.md). Vous pouvez également configurer l’extension de diagnostic pour envoyer des événements et des données de performances en dehors d’Azure Monitor à l’aide d’Azure Event Hubs.
+Azure Monitor pour machines virtuelles est basé sur l’agent Log Analytics qui envoie des données dans un espace de travail Log Analytics. Il prend en charge plusieurs fonctionnalités d’Azure Monitor comme les [requêtes de journal](../log-query/log-query-overview.md), les [alertes de journal](../platform/alerts-log.md) et les [classeurs](../platform/workbooks-overview.md). L’[extension de diagnostic](../platform/diagnostics-extension-overview.md) collecte les données de performances du système d’exploitation invité des machines virtuelles Windows dans le stockage Azure et envoie éventuellement des données de performances aux [métriques Azure Monitor](../platform/data-platform-metrics.md). Pour les machines virtuelles Linux, l’[agent Telegraf](../platform/collect-custom-metrics-linux-telegraf.md) est nécessaire pour envoyer des données aux métriques Azure.  Il active d’autres fonctionnalités d’Azure Monitor comme [Metrics Explorer](../platform/metrics-getting-started.md) et les [alertes de métriques](../platform/alerts-metric.md). Vous pouvez également configurer l’extension de diagnostic pour envoyer des événements et des données de performances en dehors d’Azure Monitor à l’aide d’Azure Event Hubs.
 
 Installez l’extension de diagnostic pour une seule machine virtuelle Windows dans le portail Azure à partir de l’option **Paramètre de diagnostic** dans le menu de machine virtuelle. Sélectionnez l’option pour activer **Azure Monitor** sous l’onglet **Récepteurs**. Pour activer l’extension à partir d’un modèle ou d’une ligne de commande pour plusieurs machines virtuelles, consultez [Installation et configuration](../platform/diagnostics-extension-overview.md#installation-and-configuration). Contrairement à l’agent Log Analytics, les données à collecter sont définies dans la configuration de l’extension sur chaque machine virtuelle.
 
@@ -105,14 +105,12 @@ Installez l’extension de diagnostic pour une seule machine virtuelle Windows d
 Pour plus d’informations sur la configuration des agents Telegraf sur les machines virtuelles Linux, consultez [Installer et configurer Telegraf](../platform/collect-custom-metrics-linux-telegraf.md#install-and-configure-telegraf). L’option de menu **Paramètre de diagnostic** est disponible pour Linux, mais elle vous permet uniquement d’envoyer des données au stockage Azure.
 
 ### <a name="collect-platform-metrics-and-activity-log"></a>Collecter les métriques de plateforme et le journal d’activité
-Vous pouvez voir les métriques de plateforme et le journal d’activité collectés pour chaque hôte de machine virtuelle dans le portail Azure. Collectez ces données dans le même espace de travail Log Analytics que celui d’Azure Monitor pour machines virtuelles afin de les analyser avec les autres données de supervision collectées pour la machine virtuelle. Cette collection est configurée avec un [paramètre de diagnostic](../platform/diagnostic-settings.md). Collectez le journal d’activité avec un [paramètre de diagnostic pour l’abonnement](../platform/diagnostic-settings.md#create-diagnostic-settings-in-azure-portal).
+Vous pouvez voir les métriques de plateforme et le journal d’activité collectés pour chaque hôte de machine virtuelle dans le portail Azure. Collectez ces données dans le même espace de travail Log Analytics que celui d’Azure Monitor pour machines virtuelles afin de les analyser avec les autres données de supervision collectées pour la machine virtuelle. Cette collection est configurée avec un [paramètre de diagnostic](../platform/diagnostic-settings.md). Collectez le journal d’activité avec un [paramètre de diagnostic pour l’abonnement](../platform/diagnostic-settings.md#create-in-azure-portal).
 
-Collectez les métriques de plateforme avec un paramètre de diagnostic pour la machine virtuelle. Contrairement aux autres ressources Azure, vous ne pouvez pas créer de paramètre de diagnostic pour une machine virtuelle dans le portail Azure et devez utiliser une [autre méthode](../platform/diagnostic-settings.md#create-diagnostic-settings-using-powershell). Les exemples suivants montrent comment collecter des métriques pour une machine virtuelle à l’aide de PowerShell et de l’interface CLI.
+Collectez les métriques de plateforme avec un paramètre de diagnostic pour la machine virtuelle. Contrairement aux autres ressources Azure, vous ne pouvez pas créer de paramètre de diagnostic pour une machine virtuelle dans le portail Azure et devez utiliser une [autre méthode](../platform/diagnostic-settings.md#create-using-powershell). Les exemples suivants montrent comment collecter des métriques pour une machine virtuelle à l’aide de PowerShell et de l’interface CLI.
 
 ```powershell
-Set-AzDiagnosticSetting -Name vm-diagnostics -ResourceId "/subscriptions/monitor diagnostic-settings create \
-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/my-resource-group/providers/Microsoft.Compute/virtualMachines/my-vm" -Enabled $true -MetricCategory AllMetrics -workspaceId "/subscriptions/monitor diagnostic-settings create \
-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/my-resource-group/providers/microsoft.operationalinsights/workspaces/my-workspace"
+Set-AzDiagnosticSetting -Name vm-diagnostics -ResourceId "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/my-resource-group/providers/Microsoft.Compute/virtualMachines/my-vm" -Enabled $true -MetricCategory AllMetrics -workspaceId "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/my-resource-group/providers/microsoft.operationalinsights/workspaces/my-workspace"
 ```
 
 ```CLI
@@ -121,7 +119,6 @@ az monitor diagnostic-settings create \
 --resource /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/my-resource-group/providers/Microsoft.Compute/virtualMachines/my-vm \
 --metrics '[{"category": "AllMetrics","enabled": true}]' \
 --workspace /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/my-resource-group/providers/microsoft.operationalinsights/workspaces/my-workspace
-
 ```
 
 ## <a name="monitoring-in-the-azure-portal"></a>Surveillance dans le portail Azure 
@@ -136,27 +133,28 @@ Une fois que vous avez configuré la collecte des données de supervision pour u
 | Option de menu | Description |
 |:---|:---|
 | Vue d’ensemble | Affiche les [métriques de plateforme](../platform/data-platform-metrics.md) pour l’hôte de machine virtuelle. Cliquez sur un graphique pour utiliser ces données dans [Metrics Explorer](../platform/metrics-getting-started.md). |
-| Journal d’activité | Les entrées du [journal d’activité](../platform/activity-log-view.md) sont filtrées pour la machine virtuelle actuelle. |
-| Insights | Ouvre [Azure Monitor pour machines virtuelles](../insights/vminsights-overview.md) avec la carte de la machine virtuelle sélectionnée. |
+| Journal d’activité | Les entrées du [journal d’activité](../platform/activity-log.md#view-the-activity-log) sont filtrées pour la machine virtuelle actuelle. |
+| Insights | Ouvre [Azure Monitor pour machines virtuelles](./vminsights-overview.md) avec la carte de la machine virtuelle sélectionnée. |
 | Alertes | Montre les [alertes](../platform/alerts-overview.md) de la machine virtuelle actuelle.  |
 | Mesures | Ouvre [Metrics Explorer](../platform/metrics-getting-started.md) avec l’étendue définie sur la machine virtuelle actuelle. |
 | Paramètres de diagnostic | Active et configure l’[extension de diagnostic](../platform/diagnostics-extension-overview.md) pour la machine virtuelle actuelle. |
-| Recommandations d’Advisor | Recommandations d’[Azure Advisor](/azure/advisor/) pour la machine virtuelle actuelle. |
-| Journaux d’activité | Ouvre [Log Analytics](../log-query/log-query-overview.md#what-is-log-analytics) avec l’[étendue](../log-query/scope.md) définie sur la machine virtuelle actuelle. |
-| Moniteur de connexion | Ouvre le [moniteur de connexion Network Watcher](../../network-watcher/connection-monitor-preview.md) pour superviser les connexions entre la machine virtuelle actuelle et les autres machines virtuelles. |
+| Recommandations d’Advisor | Recommandations d’[Azure Advisor](../../advisor/index.yml) pour la machine virtuelle actuelle. |
+| Journaux d’activité | Ouvre [Log Analytics](../log-query/log-analytics-overview.md) avec l’[étendue](../log-query/scope.md) définie sur la machine virtuelle actuelle. |
+| Moniteur de connexion | Ouvre le [moniteur de connexion Network Watcher](../../network-watcher/connection-monitor-overview.md) pour superviser les connexions entre la machine virtuelle actuelle et les autres machines virtuelles. |
 
 
 ## <a name="analyzing-metric-data"></a>Analyse des données de métrique
 Vous pouvez analyser les métriques des machines virtuelles à l’aide de Metrics Explorer en ouvrant **Métriques** à partir du menu de la machine virtuelle. Pour plus d’informations sur l’utilisation de cet outil, consultez [Prise en main d’Azure Metrics Explorer](../platform/metrics-getting-started.md). 
 
-Deux espaces de noms sont utilisés par les machines virtuelles pour les métriques :
+Deux espaces de noms sont utilisés par les machines virtuelles pour les métriques :
 
-| Espace de noms | Description |
-|:---|:---|
-| Hôte de machine virtuelle | Les métriques d’hôte sont automatiquement collectées pour toutes les machines virtuelles Azure. Liste détaillée des métriques sur [Microsoft.Compute/virtualMachines](../platform/metrics-supported.md#microsoftcomputevirtualmachines). |
-| Invité de machine virtuelle | Métriques de système d’exploitation invité collectées sur les machines virtuelles où l’extension de diagnostic est installée et configurée pour l’envoi au récepteur Azure Monitor. |
+| Espace de noms | Description | Condition requise |
+|:---|:---|:---|
+| Hôte de machine virtuelle | Les métriques d’hôte sont automatiquement collectées pour toutes les machines virtuelles Azure. Liste détaillée des métriques sur [Microsoft.Compute/virtualMachines](../platform/metrics-supported.md#microsoftcomputevirtualmachines). | Informations collectées automatiquement sans configuration requise. |
+| Invité (classique) | Ensemble limité de données sur les performances du système d’exploitation invité et les applications. Disponible dans Metrics Explorer, mais non avec d’autres fonctionnalités de Microsoft Azure Monitor telles que les alertes de mesures.  | [Extension de diagnostic](../platform/diagnostics-extension-overview.md) installée. Les données sont lues à partir du stockage Azure.  |
+| Invité de machine virtuelle | Les données sur les performances des applications et du système d’exploitation invité sont disponibles pour toutes les fonctionnalités de Microsoft Azure Monitor, via des mesures. | Pour Windows : [extension de diagnostic installée](../platform/diagnostics-extension-overview.md) avec récepteur Azure Monitor activé. Pour Linux : [agent Telegraf installé](../platform/collect-custom-metrics-linux-telegraf.md). |
 
-![Mesures](media/monitor-vm-azure/metrics.png)
+![Explorateur de métriques dans le portail Azure](media/monitor-vm-azure/metrics.png)
 
 ## <a name="analyzing-log-data"></a>Analyse des données de journal
 Les machines virtuelles Azure collectent les données suivantes dans les journaux Azure Monitor. 
@@ -209,39 +207,38 @@ Par exemple, pour créer une alerte qui vérifie si des machines virtuelles dans
 
 ```kusto
 Heartbeat
-| where TimeGenerated < ago(10m)
+| where TimeGenerated > ago(10m)
 | where ResourceGroup == "my-resource-group"
 | summarize max(TimeGenerated) by Computer
 ```
 
-![Alerte de journal](media/monitor-vm-azure/log-alert-01.png)
+![Alerte de journal pour les pulsations manquées](media/monitor-vm-azure/log-alert-01.png)
 
 Pour créer une alerte si un nombre excessif d’échecs d’ouverture de session se sont produits sur des machines virtuelles Windows de l’abonnement, utilisez la requête suivante qui retourne un enregistrement pour chaque événement d’échec d’ouverture de session dans la dernière heure. Utilisez un seuil défini sur le nombre d’échecs d’ouverture de session que vous autorisez. 
 
 ```kusto
 Event
-| where TimeGenerated < ago(1hr)
+| where TimeGenerated > ago(1hr)
 | where EventID == 4625
 ```
 
-![Alerte de journal](media/monitor-vm-azure/log-alert-02.png)
+![Alerte de journal pour les échecs d’ouverture de session](media/monitor-vm-azure/log-alert-02.png)
 
 
 ## <a name="system-center-operations-manager"></a>System Center Operations Manager
-System Center Operations Manager (SCOM) fournit une supervision granulaire des charges de travail sur les machines virtuelles. Pour obtenir une comparaison des plateformes de supervision et les différentes stratégies d’implémentation, consultez le [Guide de supervision du cloud](https://docs.microsoft.com/azure/cloud-adoption-framework/manage/monitor/).
+System Center Operations Manager fournit une supervision granulaire des charges de travail sur les machines virtuelles. Pour obtenir une comparaison des plateformes de supervision et les différentes stratégies d’implémentation, consultez le [Guide de supervision du cloud](/azure/cloud-adoption-framework/manage/monitor/).
 
-Si vous voulez utiliser un de vos environnements SCOM existants, vous pouvez l’intégrer à Azure Monitor pour fournir des fonctionnalités supplémentaires. L’agent Log Analytics utilisé par Azure Monitor est le même que celui utilisé pour SCOM. De cette façon vos machines virtuelles supervisées peuvent envoyer des données aux deux. Vous devez toujours ajouter l’agent à Azure Monitor pour machines virtuelles et configurer l’espace de travail pour collecter des données supplémentaires comme indiqué ci-dessus, mais les machines virtuelles peuvent continuer à exécuter leurs packs d’administration existants dans un environnement SCOM sans modification.
+Si vous voulez utiliser un de vos environnements Operations Manager existants, vous pouvez l’intégrer à Azure Monitor pour fournir des fonctionnalités supplémentaires. L’agent Log Analytics utilisé par Azure Monitor est le même que celui utilisé pour Operations Manager. De cette façon vos machines virtuelles supervisées peuvent envoyer des données aux deux. Vous devez toujours ajouter l’agent à Azure Monitor pour machines virtuelles et configurer l’espace de travail pour collecter des données supplémentaires comme indiqué ci-dessus, mais les machines virtuelles peuvent continuer à exécuter leurs packs d’administration existants dans un environnement Operations Manager sans modification.
 
-Les fonctionnalités d’Azure Monitor qui s’ajoutent à celles déjà existantes de SCOM sont les suivantes :
+Les fonctionnalités d’Azure Monitor qui s’ajoutent à celles déjà existantes d’Operations Manager sont les suivantes :
 
 - Utilisez Log Analytics pour analyser de manière interactive vos données de journal et de performances.
-- Utilisez les alertes de journal pour définir des conditions d’alerte sur plusieurs machines virtuelles et l’utilisation de tendances à long terme qui ne sont pas possibles avec les alertes dans SCOM.   
+- Utilisez les alertes de journal pour définir des conditions d’alerte sur plusieurs machines virtuelles et l’utilisation de tendances à long terme qui ne sont pas possibles avec les alertes dans Operations Manager.   
 
-Pour plus d’informations sur la connexion de votre groupe d’administration SCOM existant à votre espace de travail Log Analytics, consultez [Connecter Operations Manager à Azure Monitor](../platform/om-agents.md).
+Pour plus d’informations sur la connexion de votre groupe d’administration Operations Manager existant à votre espace de travail Log Analytics, consultez [Connecter Operations Manager à Azure Monitor](../platform/om-agents.md).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment analyser des données dans des journaux Azure Monitor à l’aide de requêtes de journal.](../log-query/get-started-queries.md)
 * [Découvrez plus d’informations sur les alertes à l’aide des métriques et des journaux dans Azure Monitor.](../platform/alerts-overview.md)
-

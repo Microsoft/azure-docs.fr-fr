@@ -1,21 +1,20 @@
 ---
-title: Surveiller Azure Cosmos DB avec Azure Monitor pour Cosmos DB (préversion) | Microsoft Docs
+title: Surveiller Azure Cosmos DB avec Azure Monitor pour Cosmos DB | Microsoft Docs
 description: Cet article décrit la fonctionnalité Azure Monitor pour Cosmos DB, qui fournit aux propriétaires de Cosmos DB une compréhension rapide des problèmes de performances et d’utilisation avec leurs comptes Cosmos DB.
-ms.subservice: ''
-ms.topic: conceptual
 author: mrbullwinkle
 ms.author: mbullwin
-ms.date: 10/27/2019
-ms.openlocfilehash: 9a900a2f2e950fe9b9846ebcc047d7c344284948
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 05/11/2020
+ms.openlocfilehash: 5e40f91945f83af7880f272f1578370f2ee1ec42
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78250672"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608491"
 ---
-# <a name="explore-azure-monitor-for-azure-cosmos-db-preview"></a>Explorer Azure Monitor pour Azure Cosmos DB (préversion)
+# <a name="explore-azure-monitor-for-azure-cosmos-db"></a>Explorer Azure Monitor pour Azure Cosmos DB
 
-Azure Monitor pour Azure Cosmos DB (préversion) fournit une vue des performances globales, des défaillances, de la capacité et de l’intégrité opérationnelle de toutes vos ressources Azure Cosmos DB dans une expérience interactive unifiée. Cet article vous aidera à comprendre les avantages de cette nouvelle expérience de surveillance et comment vous pouvez modifier et adapter l’expérience en fonction des besoins uniques de votre organisation.   
+Azure Monitor pour Azure Cosmos DB fournit une vue de l’ensemble des performances, des échecs, de la capacité et de l’intégrité opérationnelle pour toutes vos ressources Azure Cosmos DB dans une expérience interactive unifiée. Cet article vous aidera à comprendre les avantages de cette nouvelle expérience de surveillance et comment vous pouvez modifier et adapter l’expérience en fonction des besoins uniques de votre organisation.   
 
 ## <a name="introduction"></a>Introduction
 
@@ -44,7 +43,7 @@ Pour afficher l’utilisation et les performances de vos comptes de stockage pou
 
     ![Zone de recherche avec le mot « Monitor » et une liste déroulante indiquant les services « Monitor » avec une image de style compteur de vitesse](./media/cosmosdb-insights-overview/search-monitor.png)
 
-3. Sélectionnez **Cosmos DB (préversion)** .
+3. Sélectionnez **Cosmos DB**.
 
     ![Capture d’écran du classeur de vue d’ensemble de Cosmos DB](./media/cosmosdb-insights-overview/cosmos-db.png)
 
@@ -72,13 +71,13 @@ Sélectionnez **Défaillances** en haut de la page et la portion **Défaillances
 
 ![Capture d’écran des défaillances avec répartition par type de requête HTTP](./media/cosmosdb-insights-overview/failures.png)
 
-| Code      |  Description       | 
+| Code |  Description       | 
 |-----------|:--------------------|
 | `200 OK`  | Une des opérations REST suivantes a réussi : </br>- GET sur une ressource. </br> - PUT sur une ressource. </br> - POST sur une ressource. </br> -POST sur une ressource de procédure stockée pour exécuter la procédure stockée.|
 | `201 Created` | Une opération POST pour créer une ressource a réussi. |
 | `404 Not Found` | L’opération tente d’agir sur une ressource qui n’existe plus. Par exemple, la ressource peut déjà avoir été supprimée. |
 
-Pour obtenir la liste complète des codes d’état, consultez l’article [Codes d'état HTTP d’Azure Cosmos DB](https://docs.microsoft.com/rest/api/cosmos-db/http-status-codes-for-cosmosdb).
+Pour obtenir la liste complète des codes d’état, consultez l’article [Codes d'état HTTP d’Azure Cosmos DB](/rest/api/cosmos-db/http-status-codes-for-cosmosdb).
 
 ### <a name="capacity"></a>Capacité
 
@@ -98,7 +97,7 @@ Par conséquent, dans l’exemple ci-dessous, vous constatez que `eastus-billing
 
 ## <a name="pin-export-and-expand"></a>Épingler, exporter et développer
 
-Vous pouvez épingler une des sections métriques à un [tableau de bord Azure](https://docs.microsoft.com/azure/azure-portal/azure-portal-dashboards) en sélectionnant l’icône de punaise en haut à droite de la section.
+Vous pouvez épingler une des sections métriques à un [tableau de bord Azure](../../azure-portal/azure-portal-dashboards.md) en sélectionnant l’icône de punaise en haut à droite de la section.
 
 ![Exemple d’épinglage de section de métrique au tableau de bord](./media/cosmosdb-insights-overview/pin.png)
 
@@ -110,7 +109,7 @@ Pour développer ou réduire toutes les vues déroulantes dans le classeur, sél
 
 ![Icône de développement de classeur](./media/cosmosdb-insights-overview/expand.png)
 
-## <a name="customize-azure-monitor-for-azure-cosmos-db-preview"></a>Personnaliser Azure Monitor pour Azure Cosmos DB (préversion)
+## <a name="customize-azure-monitor-for-azure-cosmos-db"></a>Personnaliser Azure Monitor pour Azure Cosmos DB
 
 Dans la mesure où cette expérience s’appuie sur des modèles de classeur Azure Monitor, vous avez la possibilité de **Personnaliser** > **Modifier** et **Enregistrer** une copie de votre version modifiée dans un classeur personnalisé. 
 
@@ -120,8 +119,12 @@ Les classeurs sont enregistrés au sein d’un groupe de ressources, soit dans l
 
 ![Lancez la galerie de classeurs à partir de la barre de commandes](./media/cosmosdb-insights-overview/gallery.png)
 
+## <a name="troubleshooting"></a>Dépannage
+
+Pour obtenir des conseils sur la résolution des problèmes, consultez l’[article de résolution des problèmes](troubleshoot-workbooks.md) pour les insights basés sur des classeurs.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Configurez les [alertes de métriques](../platform/alerts-metric.md) et les [notifications d’intégrité du service](../../service-health/alerts-activity-log-service-notifications.md) pour configurer l’alerte automatisée afin de faciliter la détection des problèmes.
+* Configurez les [alertes de métriques](../platform/alerts-metric.md) et les [notifications d’intégrité du service](../../service-health/alerts-activity-log-service-notifications-portal.md) pour configurer l’alerte automatisée afin de faciliter la détection des problèmes.
 
-* Découvrez les scénarios que les classeurs sont conçus pour prendre en charge, comment créer et personnaliser des rapports existants, et bien plus encore en consultant la rubrique [Créer des rapports interactifs avec les classeurs Azure Monitor](../app/usage-workbooks.md).
+* Découvrez les scénarios que les classeurs sont conçus pour prendre en charge, comment créer et personnaliser des rapports existants, et bien plus encore en consultant la rubrique [Créer des rapports interactifs avec les classeurs Azure Monitor](../platform/workbooks-overview.md).

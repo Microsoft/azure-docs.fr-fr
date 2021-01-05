@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/24/2020
 ms.author: damaerte
-ms.openlocfilehash: 37005a722d4a1962b4f6e1ddb8bb1c7a1229d28a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f1846c126e81ca5851cfbb1d782e5315ae10a82a
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81273288"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92152272"
 ---
 # <a name="persist-files-in-azure-cloud-shell"></a>Conserver des fichiers dans Azure Cloud Shell
 Cloud Shell utilise le stockage de fichiers Azure pour conserver les fichiers entre les sessions. Lors du premier démarrage, Cloud Shell vous invite à associer un partage de fichiers nouveau ou existant afin de conserver les fichiers entre les sessions.
@@ -55,7 +55,7 @@ Lorsque l’invite de configuration du stockage s’affiche, sélectionnez **Aff
 ![Paramètre Groupe de ressources](media/persisting-shell-storage/advanced-storage.png)
 
 ## <a name="securing-storage-access"></a>Sécurisation de l’accès au stockage
-Pour la sécurité, chaque utilisateur doit approvisionner son propre compte de stockage.  Pour le contrôle d’accès en fonction du rôle (RBAC), les utilisateurs doivent disposer d’un accès contributeur ou supérieur au niveau du compte de stockage.
+Pour la sécurité, chaque utilisateur doit approvisionner son propre compte de stockage.  Pour le contrôle d’accès en fonction du rôle Azure (Azure RBAC), les utilisateurs doivent disposer d’un accès contributeur ou supérieur au niveau du compte de stockage.
 
 Cloud Shell utilise un partage de fichiers Azure dans un compte de stockage, au sein d’un abonnement spécifié. En raison des autorisations héritées, les utilisateurs disposant de droits d’accès suffisants à l’abonnement peuvent accéder à tous les comptes de stockage, ainsi qu'aux partages de fichiers contenus dans l’abonnement.
 
@@ -83,7 +83,7 @@ Si une région de stockage secondaire est utilisée, le compte de stockage Azure
 Un utilisateur peut exécuter `(Get-CloudDrive | Get-AzStorageAccount).Location` dans PowerShell pour voir l’emplacement des partages de fichiers.
 
 ## <a name="restrict-resource-creation-with-an-azure-resource-policy"></a>Restreindre la création de ressources avec une stratégie de ressource Azure
-Les comptes de stockage que vous créez dans Cloud Shell sont identifiés à l’aide de la balise `ms-resource-usage:azure-cloud-shell`. Si vous souhaitez interdire aux utilisateurs de créer des comptes de stockage par le biais de Cloud Shell, créez une [stratégie de ressource Azure pour les balises](../azure-policy/json-samples.md) déclenchée par cette balise spécifique.
+Les comptes de stockage que vous créez dans Cloud Shell sont identifiés à l’aide de la balise `ms-resource-usage:azure-cloud-shell`. Si vous souhaitez interdire aux utilisateurs de créer des comptes de stockage par le biais de Cloud Shell, créez une [stratégie de ressource Azure pour les balises](../governance/policy/samples/index.md) déclenchée par cette balise spécifique.
 
 ## <a name="how-cloud-shell-storage-works"></a>Fonctionnement du stockage Cloud Shell 
 Cloud Shell conserve les fichiers à l’aide des deux méthodes suivantes : 
@@ -170,4 +170,4 @@ Remarque : Si vous devez définir une fonction dans un fichier et l'appeler à 
 ## <a name="next-steps"></a>Étapes suivantes
 [Démarrage rapide de Cloud Shell](quickstart.md) <br>
 [En savoir plus sur le stockage de fichiers Microsoft Azure](../storage/files/storage-files-introduction.md) <br>
-[En savoir plus sur les balises de stockage](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags) <br>
+[En savoir plus sur les balises de stockage](../azure-resource-manager/management/tag-resources.md) <br>

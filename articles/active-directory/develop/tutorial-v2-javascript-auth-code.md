@@ -1,82 +1,77 @@
 ---
-title: Tutoriel d’application monopage JavaScript 2.0 – Plateforme d’identités Microsoft | Azure
-description: Découvrez comment les applications monopages (SPA, single page application) JavaScript peuvent utiliser le flux du code d’autorisation pour appeler une API qui doit obtenir des jetons d’accès d’un point de terminaison Azure Active Directory v2.0
+title: 'Tutoriel : Créer une application monopage JavaScript qui utilise le flux de code d’authentification | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce tutoriel, vous allez créer une application monopage JavaScript qui peut connecter des utilisateurs et utiliser le flux de code d’authentification pour obtenir un jeton d’accès à partir de la plateforme d’identités Microsoft et appeler l’API Microsoft Graph.
 services: active-directory
-documentationcenter: dev-center-name
 author: hahamil
 manager: CelesteDG
-ROBOTS: NOINDEX
 ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 04/22/2020
+ms.date: 07/17/2020
 ms.author: hahamil
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: f664f5fa4219a8bcc32230b352e90cc2516faceb
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.custom: aaddev, devx-track-js
+ms.openlocfilehash: 79fe821e2da494ab8c9e4cb407e2c2b025f75568
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82890379"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169101"
 ---
-# <a name="sign-in-users-and-call-the-microsoft-graph-api-from-a-javascript-single-page-application-spa---msaljs-20"></a>Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage (SPA) JavaScript - MSAL.js 2.0
+# <a name="tutorial-sign-in-users-and-call-the-microsoft-graph-api-from-a-javascript-single-page-app-spa-using-auth-code-flow"></a>Tutoriel : Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage (SPA) JavaScript à l’aide du flux de code d’authentification
 
-> [!IMPORTANT]
-> Actuellement, cette fonctionnalité est uniquement disponible en tant que version préliminaire. Les préversions sont à votre disposition, à condition que vous acceptiez les [conditions d’utilisation supplémentaires](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). Certains aspects de cette fonctionnalité sont susceptibles d’être changés avant la disponibilité générale (GA).
+Dans ce tutoriel, vous créez une application monopage (SPA) JavaScript qui connecte les utilisateurs et appelle Microsoft Graph en utilisant le flux du code d’autorisation avec PKCE. L’application monopage que vous créez utilise la bibliothèque d’authentification Microsoft (MSAL) pour JavaScript v2.0.
 
-Ce tutoriel utilise une version de MSAL.js qui se sert du flux du code d’autorisation OAuth 2.0 avec PKCE. Pour en savoir plus sur ce protocole ainsi que sur les différences entre le flux implicite et le flux du code d’autorisation, consultez cette [documentation](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow). Si vous recherchez un tutoriel qui utilise le flux implicite, reportez-vous au [tutoriel MSAL.js v1](https://docs.microsoft.com/azure/active-directory/develop/tutorial-v2-javascript-spa).
+Dans ce tutoriel :
+> [!div class="checklist"]
+> * Effectuer le flux de code d’autorisation OAuth 2.0 avec PKCE.
+> * Connecter des comptes personnels Microsoft, ainsi que des comptes professionnels et scolaires.
+> * Obtenir un jeton d’accès
+> * Appeler l’API Microsoft Graph ou votre propre API qui exige des jetons d’accès obtenus à partir du point de terminaison de la plateforme d’identités Microsoft.
 
-Cette version de MSAL.js améliore la bibliothèque MSAL-Core actuelle et utilise le flux du code d’autorisation dans le navigateur. La plupart des fonctionnalités disponibles dans l’ancienne bibliothèque le sont encore dans cette version, mais il y a de légères différences dans le flux d’authentification entre les deux. Cette version ne prend **PAS** en charge le flux implicite.
-
-Ce guide montre comment une application monopage (SPA) JavaScript peut :
-- Se connecter à des comptes personnels, ainsi qu’à des comptes professionnels et scolaires
-- Obtenir un jeton d’accès
-- Appeler l’API Microsoft Graph ou d’autres API qui demandent des jetons d’accès provenant du *point de terminaison de la plateforme d’identités Microsoft*
-
-## <a name="how-the-sample-app-generated-by-this-guide-works"></a>Fonctionnement de l’exemple d’application de ce guide
-
-![Fonctionnement de l’exemple d’application généré par ce tutoriel](media/active-directory-develop-guidedsetup-javascriptspa-introduction/javascriptspa-intro.svg)
-
-### <a name="more-information"></a>Informations complémentaires
-
-L’exemple d’application créé par ce guide permet à une application monopage (SPA) JavaScript d’interroger l’API Microsoft Graph ou une API web qui accepte les jetons provenant du point de terminaison de la plateforme d’identités Microsoft. Dans ce scénario, une fois qu’un utilisateur s’est connecté, un jeton d’accès est demandé et ajouté aux requêtes HTTP par le biais de l’en-tête d’autorisation. L’acquisition et le renouvellement de jetons sont gérés par la bibliothèque d’authentification Microsoft (MSAL).
-
-### <a name="libraries"></a>Bibliothèques
-
-Ce guide utilise la bibliothèque suivante :
-
-|Bibliothèque|Description|
-|---|---|
-|[msal.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser)|Package de navigateur de la bibliothèque d’authentification Microsoft pour JavaScript|
-
-## <a name="set-up-your-web-server-or-project"></a>Configurer le serveur web ou projet
-
-Vous préférez télécharger le projet de cet exemple ? Pour exécuter le projet en utilisant un serveur web local, par exemple Node.js, clonez les fichiers projet :
-
-`git clone https://github.com/Azure-Samples/ms-identity-javascript-v2`
-
-Pour configurer l’exemple de code avant de l’exécuter, passez à l’[étape de configuration](#register-your-application).
+MSAL.js 2.0 offre une amélioration par rapport à MSAL.js 1.0 en prenant en charge le flux de code d’autorisation dans le navigateur au lieu du flux d’octroi implicite. MSAL.js 2.0 ne prend **PAS** en charge le flux implicite.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Pour exécuter ce tutoriel, vous avez besoin d’un serveur web local, comme [Node.js](https://nodejs.org/en/download/) ou [.NET Core](https://www.microsoft.com/net/core).
+* [Node.js](https://nodejs.org/en/download/) pour l’exécution d’un serveur web local
+* [Visual Studio Code](https://code.visualstudio.com/download) ou un autre éditeur de code
 
-* Si vous utilisez Node.js pour exécuter le projet, installez un environnement de développement intégré (IDE) tel que [Visual Studio Code](https://code.visualstudio.com/download) pour modifier les fichiers projet.
+## <a name="how-the-tutorial-app-works"></a>Fonctionnement de l’application du tutoriel
 
-* Les instructions de ce tutoriel sont basées sur Node.js.
+:::image type="content" source="media/tutorial-v2-javascript-auth-code/diagram-01-auth-code-flow.png" alt-text="Diagramme montrant le flux de code d’autorisation dans une application monopage":::
+
+L’application que vous créez dans ce tutoriel permet à une application monopage JavaScript d’interroger l’API Microsoft Graph en faisant l’acquisition de jetons de sécurité provenant du point de terminaison de la plateforme d’identités Microsoft. Dans ce scénario, une fois l’utilisateur connecté, un jeton d’accès est demandé et ajouté aux requêtes HTTP dans l’en-tête d’autorisation. L’acquisition et le renouvellement des jetons sont gérés par la bibliothèque d’authentification Microsoft pour JavaScript (MSAL.js).
+
+Ce tutoriel utilise la bibliothèque suivante :
+
+Package de navigateur de la bibliothèque d’authentification Microsoft pour JavaScript v2.0 [msal.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser)
+
+## <a name="get-the-completed-code-sample"></a>Obtenir l’exemple de code complet
+
+Vous préférez plutôt télécharger l’exemple de projet complet de ce tutoriel ? Pour exécuter le projet en utilisant un serveur web local, par exemple Node.js, clonez le dépôt [ms-identity-javascript-v2](https://github.com/Azure-Samples/ms-identity-javascript-v2) :
+
+`git clone https://github.com/Azure-Samples/ms-identity-javascript-v2`
+
+Ensuite, pour configurer l’exemple de code avant de l’exécuter, passez à l’[étape de configuration](#register-your-application).
+
+Pour poursuivre le tutoriel et générer vous-même l’application, passez à la section suivante, [Prérequis](#prerequisites).
 
 ## <a name="create-your-project"></a>Créer votre projet
 
-Vérifiez que [Node.js](https://nodejs.org/en/download/) est installé, puis créez un dossier pour héberger votre application. Ensuite, vous devez implémenter un petit serveur web [Express](https://expressjs.com/) pour traiter votre fichier `index.html`.
+Une fois que vous avez installé [Node.js](https://nodejs.org/en/download/), créez un dossier pour héberger votre application, par exemple *msal-spa-tutorial*.
 
-1. Tout d’abord, accédez à votre dossier projet dans le terminal, puis exécutez les commandes NPM suivantes.
+Ensuite, implémentez un petit serveur web [Express](https://expressjs.com/) pour traiter votre fichier *index.html*.
+
+1. Tout d’abord, accédez à votre répertoire de projet dans le terminal, puis exécutez les commandes `npm` suivantes :
     ```console
     npm init -y
-    npm install @azure/msal-Browser
+    npm install @azure/msal-browser
     npm install express
+    npm install morgan
+    npm install yargs
     ```
-2. À présent, créez un fichier .js nommé *server.js*, puis ajoutez le code suivant :
+2. Ensuite, créez un fichier nommé *server.js* et ajoutez le code suivant :
 
    ```JavaScript
    const express = require('express');
@@ -119,48 +114,59 @@ Vérifiez que [Node.js](https://nodejs.org/en/download/) est installé, puis cr�
    console.log(`Listening on port ${port}...`);
     ```
 
-Vous disposez maintenant d’un serveur simple pour servir votre application monopage. La structure de dossiers prévue à la fin de ce tutoriel est la suivante :
+Vous disposez maintenant d’un petit serveur web pour traiter votre application monopage. Une fois le tutoriel terminé, la structure des fichiers et des dossiers de votre projet doit ressembler à ce qui suit :
 
-![description textuelle de la structure prévue des dossiers d’application monopage](./media/tutorial-v2-javascript-spa/single-page-application-folder-structure.png)
+```
+msal-spa-tutorial/
+├── app
+│   ├── authConfig.js
+│   ├── authPopup.js
+│   ├── authRedirect.js
+│   ├── graphConfig.js
+│   ├── graph.js
+│   ├── index.html
+│   └── ui.js
+└── server.js
+```
 
 ## <a name="create-the-spa-ui"></a>Créer l’interface utilisateur de SPA
 
-1. Créez un fichier *index.html* pour votre application SPA JavaScript dans le dossier *app*. Ce fichier implémente une interface utilisateur générée avec le **framework Bootstrap 4** et importe des fichiers de script pour la configuration, l’authentification et les appels d’API.
+1. Créez un dossier *app* dans le répertoire de votre projet, puis créez-y un fichier *index.html* pour votre application monopage JavaScript. Ce fichier implémente une interface utilisateur générée avec le **framework Bootstrap 4**, et importe des fichiers de script pour la configuration, l’authentification et les appels d’API.
 
-   Dans le fichier *index.html*, ajoutez le code suivant :
+    Dans le fichier *index.html*, ajoutez le code suivant :
 
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
       <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-         <title>Quickstart | MSAL.JS Vanilla JavaScript SPA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Tutorial | MSAL.js JavaScript SPA</title>
 
-         <!-- IE support: add promises polyfill before msal.js  -->
-         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/bluebird@3.7.2/js/browser/bluebird.min.js"></script>
-         <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.0-beta.0/js/msal-browser.js"></script>
+        <!-- IE support: add promises polyfill before msal.js  -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/bluebird@3.7.2/js/browser/bluebird.min.js"></script>
+        <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.0-beta.4/js/msal-browser.js" integrity="sha384-7sxY2tN3GMVE5jXH2RL9AdbO6s46vUh9lUid4yNCHJMUzDoj+0N4ve6rLOmR88yN" crossorigin="anonymous"></script>
 
-         <!-- adding Bootstrap 4 for UI components  -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-         <link rel="SHORTCUT ICON" href="https://c.s-microsoft.com/favicon.ico?v2" type="image/x-icon">
+        <!-- adding Bootstrap 4 for UI components  -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="SHORTCUT ICON" href="https://c.s-microsoft.com/favicon.ico?v2" type="image/x-icon">
       </head>
       <body>
-         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="/">MS Identity Platform</a>
-            <div class="btn-group ml-auto dropleft">
-               <button type="button" id="SignIn" class="btn btn-secondary" onclick="signIn()">
-                  Sign In
-               </button>
-            </div>
-         </nav>
-         <br>
-         <h5 class="card-header text-center">Vanilla JavaScript SPA calling MS Graph API with MSAL.JS</h5>
-         <br>
-         <div class="row" style="margin:auto" >
-         <div id="card-div" class="col-md-3" style="display:none">
-         <div class="card text-center">
-            <div class="card-body">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="/">Microsoft identity platform</a>
+          <div class="btn-group ml-auto dropleft">
+              <button type="button" id="SignIn" class="btn btn-secondary" onclick="signIn()">
+                Sign In
+              </button>
+          </div>
+        </nav>
+        <br>
+        <h5 class="card-header text-center">JavaScript SPA calling Microsoft Graph API with MSAL.js</h5>
+        <br>
+        <div class="row" style="margin:auto" >
+        <div id="card-div" class="col-md-3" style="display:none">
+        <div class="card text-center">
+          <div class="card-body">
             <h5 class="card-title" id="WelcomeMessage">Please sign-in to see your profile and read your mails</h5>
             <div id="profile-div"></div>
             <br>
@@ -168,249 +174,292 @@ Vous disposez maintenant d’un serveur simple pour servir votre application mon
             <button class="btn btn-primary" id="seeProfile" onclick="seeProfile()">See Profile</button>
             <br>
             <br>
-            <button class="btn btn-primary" id="readMail" onclick="readMail()">Read Mails</button>
-            </div>
-         </div>
-         </div>
-         <br>
-         <br>
-            <div class="col-md-4">
+            <button class="btn btn-primary" id="readMail" onclick="readMail()">Read Mail</button>
+          </div>
+        </div>
+        </div>
+        <br>
+        <br>
+          <div class="col-md-4">
             <div class="list-group" id="list-tab" role="tablist">
             </div>
+          </div>
+          <div class="col-md-5">
+            <div class="tab-content" id="nav-tabContent">
             </div>
-            <div class="col-md-5">
-             <div class="tab-content" id="nav-tabContent">
-            </div>
-            </div>
-         </div>
-         <br>
-         <br>
+          </div>
+        </div>
+        <br>
+        <br>
 
-         <!-- importing bootstrap.js and supporting js libraries -->
-         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <!-- importing bootstrap.js and supporting js libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-         <!-- importing app scripts (load order is important) -->
-         <script type="text/javascript" src="./authConfig.js"></script>
-         <script type="text/javascript" src="./graphConfig.js"></script>
-         <script type="text/javascript" src="./ui.js"></script>
+        <!-- importing app scripts (load order is important) -->
+        <script type="text/javascript" src="./authConfig.js"></script>
+        <script type="text/javascript" src="./graphConfig.js"></script>
+        <script type="text/javascript" src="./ui.js"></script>
 
-         <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
-         <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
-         <script type="text/javascript" src="./authPopup.js"></script>
-         <script type="text/javascript" src="./graph.js"></script>
+        <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
+        <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
+        <script type="text/javascript" src="./authPopup.js"></script>
+        <script type="text/javascript" src="./graph.js"></script>
       </body>
-     </html>
-     ```
+    </html>
+    ```
 
-   > [!TIP]
-   > Vous pouvez remplacer la version de MSAL.js dans le script précédent par la dernière version publiée sous [Publications MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/releases).
+2. Ensuite, toujours dans le dossier *app*, créez un fichier nommé *ui.js* et ajoutez le code suivant. Ce fichier accèdera aux éléments DOM et les mettra à jour.
 
+    ```JavaScript
+    // Select DOM elements to work with
+    const welcomeDiv = document.getElementById("WelcomeMessage");
+    const signInButton = document.getElementById("SignIn");
+    const cardDiv = document.getElementById("card-div");
+    const mailButton = document.getElementById("readMail");
+    const profileButton = document.getElementById("seeProfile");
+    const profileDiv = document.getElementById("profile-div");
 
-2. Maintenant, créez un fichier .js nommé *ui.js* qui accédera aux éléments DOM et les mettra à jour, puis ajoutez le code suivant :
+    function showWelcomeMessage(account) {
+        // Reconfiguring DOM elements
+        cardDiv.style.display = 'initial';
+        welcomeDiv.innerHTML = `Welcome ${account.username}`;
+        signInButton.setAttribute("onclick", "signOut();");
+        signInButton.setAttribute('class', "btn btn-success")
+        signInButton.innerHTML = "Sign Out";
+    }
 
-   ```JavaScript
-   // Select DOM elements to work with
-   const welcomeDiv = document.getElementById("welcomeMessage");
-   const signInButton = document.getElementById("signIn");
-   const signOutButton = document.getElementById('signOut');
-   const cardDiv = document.getElementById("card-div");
-   const mailButton = document.getElementById("readMail");
-   const profileButton = document.getElementById("seeProfile");
-   const profileDiv = document.getElementById("profile-div");
+    function updateUI(data, endpoint) {
+        console.log('Graph API responded at: ' + new Date().toString());
 
-   function showWelcomeMessage(account) {
-     // Reconfiguring DOM elements
-     cardDiv.classList.remove('d-none');
-     welcomeDiv.innerHTML = `Welcome ${account.name}`;
-     signInButton.classList.add('d-none');
-     signOutButton.classList.remove('d-none');
-   }
+        if (endpoint === graphConfig.graphMeEndpoint) {
+            const title = document.createElement('p');
+            title.innerHTML = "<strong>Title: </strong>" + data.jobTitle;
+            const email = document.createElement('p');
+            email.innerHTML = "<strong>Mail: </strong>" + data.mail;
+            const phone = document.createElement('p');
+            phone.innerHTML = "<strong>Phone: </strong>" + data.businessPhones[0];
+            const address = document.createElement('p');
+            address.innerHTML = "<strong>Location: </strong>" + data.officeLocation;
+            profileDiv.appendChild(title);
+            profileDiv.appendChild(email);
+            profileDiv.appendChild(phone);
+            profileDiv.appendChild(address);
 
-   function updateUI(data, endpoint) {
-     console.log('Graph API responded at: ' + new Date().toString());
+        } else if (endpoint === graphConfig.graphMailEndpoint) {
+            if (data.value.length < 1) {
+                alert("Your mailbox is empty!")
+            } else {
+                const tabList = document.getElementById("list-tab");
+                tabList.innerHTML = ''; // clear tabList at each readMail call
+                const tabContent = document.getElementById("nav-tabContent");
 
-     if (endpoint === graphConfig.graphMeEndpoint) {
-       const title = document.createElement('p');
-       title.innerHTML = "<strong>Title: </strong>" + data.jobTitle;
-       const email = document.createElement('p');
-       email.innerHTML = "<strong>Mail: </strong>" + data.mail;
-       const phone = document.createElement('p');
-       phone.innerHTML = "<strong>Phone: </strong>" + data.businessPhones[0];
-       const address = document.createElement('p');
-       address.innerHTML = "<strong>Location: </strong>" + data.officeLocation;
-       profileDiv.appendChild(title);
-       profileDiv.appendChild(email);
-       profileDiv.appendChild(phone);
-       profileDiv.appendChild(address);
+                data.value.map((d, i) => {
+                    // Keeping it simple
+                    if (i < 10) {
+                        const listItem = document.createElement("a");
+                        listItem.setAttribute("class", "list-group-item list-group-item-action")
+                        listItem.setAttribute("id", "list" + i + "list")
+                        listItem.setAttribute("data-toggle", "list")
+                        listItem.setAttribute("href", "#list" + i)
+                        listItem.setAttribute("role", "tab")
+                        listItem.setAttribute("aria-controls", i)
+                        listItem.innerHTML = d.subject;
+                        tabList.appendChild(listItem)
 
-     } else if (endpoint === graphConfig.graphMailEndpoint) {
-         if (data.value.length < 1) {
-           alert("Your mailbox is empty!")
-         } else {
-           const tabList = document.getElementById("list-tab");
-           tabList.innerHTML = ''; // clear tabList at each readMail call
-           const tabContent = document.getElementById("nav-tabContent");
-
-           data.value.map((d, i) => {
-             // Keeping it simple
-             if (i < 10) {
-               const listItem = document.createElement("a");
-               listItem.setAttribute("class", "list-group-item list-group-item-action")
-               listItem.setAttribute("id", "list" + i + "list")
-               listItem.setAttribute("data-toggle", "list")
-               listItem.setAttribute("href", "#list" + i)
-               listItem.setAttribute("role", "tab")
-               listItem.setAttribute("aria-controls", i)
-               listItem.innerHTML = d.subject;
-               tabList.appendChild(listItem)
-
-               const contentItem = document.createElement("div");
-               contentItem.setAttribute("class", "tab-pane fade")
-               contentItem.setAttribute("id", "list" + i)
-               contentItem.setAttribute("role", "tabpanel")
-               contentItem.setAttribute("aria-labelledby", "list" + i + "list")
-               contentItem.innerHTML = "<strong> from: " + d.from.emailAddress.address + "</strong><br><br>" + d.bodyPreview + "...";
-               tabContent.appendChild(contentItem);
-             }
-           });
-         }
-     }
-   }
-   ```
+                        const contentItem = document.createElement("div");
+                        contentItem.setAttribute("class", "tab-pane fade")
+                        contentItem.setAttribute("id", "list" + i)
+                        contentItem.setAttribute("role", "tabpanel")
+                        contentItem.setAttribute("aria-labelledby", "list" + i + "list")
+                        contentItem.innerHTML = "<strong> from: " + d.from.emailAddress.address + "</strong><br><br>" + d.bodyPreview + "...";
+                        tabContent.appendChild(contentItem);
+                    }
+                });
+            }
+        }
+    }
+    ```
 
 ## <a name="register-your-application"></a>Inscrivez votre application
 
-Suivez les instructions pour [inscrire une nouvelle application monopage](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration).
+Suivez les étapes décrites dans [Application monopage : inscription d’application](scenario-spa-app-registration.md) pour créer une inscription d’application pour votre SPA.
 
-#### <a name="set-a-redirect-url-for-nodejs"></a>Définir d’une URL de redirection pour Node.js
+À l’étape [URI de redirection : MSAL.js 2.0 avec flux de code d’authentification](scenario-spa-app-registration.md#redirect-uri-msaljs-20-with-auth-code-flow), entrez `http://localhost:3000`, l’emplacement par défaut où s’exécute l’application de ce tutoriel.
 
-Pour Node.js, vous pouvez définir le port du serveur web dans le fichier *server.js*. Ce tutoriel utilise le port 3000, mais vous pouvez utiliser tout autre port disponible.
-
-Pour configurer une URL de redirection dans les informations d’inscription de l’application, retournez dans le volet **Inscription d’application** et inscrivez une nouvelle **application monopage (SPA)** en effectuant l’une des opérations suivantes :
-
-- Définissez *`http://localhost:3000/`* en tant qu’**URL de redirection**.
-- Si vous utilisez un port TCP personnalisé, utilisez *`http://localhost:<port>/`* (où *\<port>* correspond au numéro du port TCP personnalisé).
+Si vous souhaitez utiliser un autre port, entrez `http://localhost:<port>`, où `<port>` est votre numéro de port TCP par défaut. Si vous spécifiez un numéro de port autre que `3000`, mettez également à jour *server.js* avec le numéro de port de votre choix.
 
 ### <a name="configure-your-javascript-spa"></a>Configurer une application SPA JavaScript
 
-Créez un fichier .js nommé *authConfig.js* qui contiendra vos paramètres de configuration pour l’authentification, puis ajoutez le code suivant :
+Créez un fichier nommé *authConfig.js* dans le dossier *app* qui contiendra vos paramètres de configuration pour l’authentification, puis ajoutez le code suivant :
 
 ```javascript
-  const msalConfig = {
-    auth: {
-      clientId: "Enter_the_Application_Id_Here",
-      authority: "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
-      redirectUri: "Enter_the_Redirect_Uri_Here",
-    },
-    cache: {
-      cacheLocation: "sessionStorage", // This configures where your cache will be stored
-      storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
-    }
-  };
+const msalConfig = {
+  auth: {
+    clientId: "Enter_the_Application_Id_Here",
+    authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
+    redirectUri: "Enter_the_Redirect_Uri_Here",
+  },
+  cache: {
+    cacheLocation: "sessionStorage", // This configures where your cache will be stored
+    storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+  }
+};
 
-  // Add here scopes for id token to be used at MS Identity Platform endpoints.
-  const loginRequest = {
-   scopes: ["openid", "profile", "User.Read"]
-  };
+// Add scopes here for ID token to be used at Microsoft identity platform endpoints.
+const loginRequest = {
+ scopes: ["openid", "profile", "User.Read"]
+};
 
-   // Add here scopes for access token to be used at MS Graph API endpoints.
-  const tokenRequest = {
-   scopes: ["User.Read", "Mail.Read"]
-  };
-
-```
-
- Où :
- - *\<Enter_the_Application_Id_Here>* est l’**ID d’application (client)** de l’application que vous avez inscrite.
- - *\<Enter_the_Cloud_Instance_Id_Here>* est l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez simplement *https://login.microsoftonline.com* . Pour les clouds **nationaux** (par exemple, Chine), consultez [Clouds nationaux](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud).
- - *\<Enter_the_Tenant_info_here >* est défini sur une des options suivantes :
-   - Si votre application prend en charge les *Comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’**ID de locataire** ou le **nom du locataire** (par exemple, *contoso.microsoft.com*).
-   - Si votre application prend en charge les *Comptes dans un annuaire organisationnel*, remplacez cette valeur par **organizations**.
-   - Si votre application prend en charge les *Comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par **common**. Pour limiter la prise en charge aux *Comptes Microsoft personnels uniquement*, remplacez cette valeur par **consumers**.
-- *\Entrer_votre_Uri_de_redirection_ici>* est le port que vous avez inscrit dans le portail ( *`http://localhost:3000/`* )
-
-
-Créez un fichier .js nommé `graphConfig.js`, qui contiendra vos paramètres de configuration pour l’appel de l’API Microsoft Graph, puis ajoutez le code suivant :
-```javascript
-// Add here the endpoints for MS Graph API services you would like to use.
-const graphConfig = {
-    graphMeEndpoint: "Enter_the_Graph_Endpoint_Herev1.0/me",
-    graphMailEndpoint: "Enter_the_Graph_Endpoint_Herev1.0/me/messages"
+// Add scopes here for access token to be used at Microsoft Graph API endpoints.
+const tokenRequest = {
+ scopes: ["User.Read", "Mail.Read"]
 };
 ```
-- *\<Enter_the_Graph_Endpoint_Here>* est l’instance de l’API MS Graph. Pour utiliser le point de terminaison global de l’API MS Graph, remplacez simplement cette chaîne par `https://graph.microsoft.com`. Pour des déploiements sur les clouds nationaux, consultez la [documentation de l’API Graph](https://docs.microsoft.com/graph/deployments).
 
-## <a name="use-the-microsoft-authentication-library-msal-to-sign-in-the-user"></a>Utiliser Microsoft Authentication Library (MSAL) pour connecter l’utilisateur
+Modifiez les valeurs de la section `msalConfig` de la façon suivante :
 
-### <a name="popup"></a>PopUp
-Créez un fichier .js nommé `authPopup.js`, qui contiendra votre logique d’authentification et d’acquisition de jeton pour la fenêtre contextuelle de connexion, puis ajoutez le code suivant :
+- `Enter_the_Application_Id_Here`: **ID d’application (client)** de l’application que vous avez inscrite.
+- `Enter_the_Cloud_Instance_Id_Here`: instance cloud Azure dans laquelle votre application est inscrite.
+  - Pour le cloud Azure principal (ou *mondial*), entrez `https://login.microsoftonline.com`.
+  - Pour les clouds **nationaux** (par exemple la Chine), vous trouverez les valeurs appropriées dans [Clouds nationaux](authentication-national-cloud.md).
+- `Enter_the_Tenant_info_here` doit prendre l’une des valeurs suivantes :
+  - Si votre application prend en charge les *comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’**ID de locataire** ou le **Nom du locataire**. Par exemple : `contoso.microsoft.com`.
+  - Si votre application prend en charge les *comptes dans un annuaire organisationnel*, remplacez cette valeur par `organizations`.
+  - Si votre application prend en charge les *comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par `common`.
+  - Pour limiter la prise en charge aux *comptes Microsoft personnels uniquement*, remplacez cette valeur par `consumers`.
+- `Enter_the_Redirect_Uri_Here` a la valeur `http://localhost:3000`.
 
-   ```JavaScript
-  // Create the main myMSALObj instance
+La valeur `authority` dans votre fichier *authConfig.js* doit ressembler à ce qui suit si vous utilisez le cloud Azure mondial :
+
+```javascript
+authority: "https://login.microsoftonline.com/common",
+```
+
+Toujours dans le dossier *app*, créez un fichier nommé *graphConfig.js*. Ajoutez le code suivant pour fournir à votre application les paramètres de configuration pour l’appel de l’API Microsoft Graph :
+
+```javascript
+// Add the endpoints here for Microsoft Graph API services you'd like to use.
+const graphConfig = {
+    graphMeEndpoint: "Enter_the_Graph_Endpoint_Here/v1.0/me",
+    graphMailEndpoint: "Enter_the_Graph_Endpoint_Here/v1.0/me/messages"
+};
+```
+
+Modifiez les valeurs de la section `graphConfig` comme décrit ci-dessous :
+
+- `Enter_the_Graph_Endpoint_Here` est l’instance de l’API Microsoft Graph avec laquelle l’application doit communiquer.
+  - Pour le point de terminaison de l’API Microsoft Graph **mondial**, remplacez les deux instances de cette chaîne par `https://graph.microsoft.com`.
+  - Pour les points de terminaison dans les déploiements dans des clouds **nationaux**, consultez [Déploiements dans des clouds nationaux](/graph/deployments) dans la documentation Microsoft Graph.
+
+Les valeurs `graphMeEndpoint` et `graphMailEndpoint` dans votre fichier *graphConfig.js* doivent ressembler à ce qui suit si vous utilisez le point de terminaison mondial :
+
+```javascript
+graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
+graphMailEndpoint: "https://graph.microsoft.com/v1.0/me/messages"
+```
+
+## <a name="use-microsoft-authentication-library-msal-to-sign-in-user"></a>Utiliser la bibliothèque d’authentification Microsoft (MSAL) pour connecter l’utilisateur
+
+### <a name="pop-up"></a>Fenêtre contextuelle
+
+Dans le dossier *app*, créez un fichier nommé *authPopup.js*, puis ajoutez le code d’authentification et d’acquisition de jeton suivant pour la fenêtre contextuelle de connexion :
+
+```JavaScript
+// Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
-function signIn() {
-    myMSALObj.loginPopup(loginRequest)
-        .then(loginResponse => {
-            console.log('id_token acquired at: ' + new Date().toString());
+let username = "";
 
-            if (myMSALObj.getAccount()) {
-                showWelcomeMessage(myMSALObj.getAccount());
-            }
-        }).catch(error => {
-            console.error(error);
-        });
+function loadPage() {
+    /**
+     * See here for more info on account retrieval:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+    const currentAccounts = myMSALObj.getAllAccounts();
+    if (currentAccounts === null) {
+        return;
+    } else if (currentAccounts.length > 1) {
+        // Add choose account code here
+        console.warn("Multiple accounts detected.");
+    } else if (currentAccounts.length === 1) {
+        username = currentAccounts[0].username;
+        showWelcomeMessage(currentAccounts[0]);
+    }
+}
+
+function handleResponse(resp) {
+    if (resp !== null) {
+        username = resp.account.username;
+        showWelcomeMessage(resp.account);
+    } else {
+        loadPage();
+    }
+}
+
+function signIn() {
+    myMSALObj.loginPopup(loginRequest).then(handleResponse).catch(error => {
+        console.error(error);
+    });
 }
 
 function signOut() {
-    myMSALObj.logout();
+    const logoutRequest = {
+        account: myMSALObj.getAccountByUsername(username)
+    };
+
+    myMSALObj.logout(logoutRequest);
 }
 
 function getTokenPopup(request) {
-    return myMSALObj.acquireTokenSilent(request)
-        .catch(error => {
-            console.warn(error);
-            console.warn("silent token acquisition fails. acquiring token using popup");
-
+    /**
+     * See here for more info on account retrieval:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+    request.account = myMSALObj.getAccountByUsername(username);
+    return myMSALObj.acquireTokenSilent(request).catch(error => {
+        console.warn("silent token acquisition fails. acquiring token using redirect");
+        if (error instanceof msal.InteractionRequiredAuthError) {
             // fallback to interaction when silent call fails
-            return myMSALObj.acquireTokenPopup(request)
-                .then(tokenResponse => {
-                    return tokenResponse;
-                }).catch(error => {
-                    console.error(error);
-                });
-        });
+            return myMSALObj.acquireTokenPopup(request).then(tokenResponse => {
+                console.log(tokenResponse);
+
+                return tokenResponse;
+            }).catch(error => {
+                console.error(error);
+            });
+        } else {
+            console.warn(error);
+        }
+    });
 }
 
 function seeProfile() {
-    if (myMSALObj.getAccount()) {
-        getTokenPopup(loginRequest)
-            .then(response => {
-                callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-                profileButton.classList.add('d-none');
-                mailButton.classList.remove('d-none');
-            }).catch(error => {
-                console.error(error);
-            });
-    }
+    getTokenPopup(loginRequest).then(response => {
+        callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
+        profileButton.classList.add('d-none');
+        mailButton.classList.remove('d-none');
+    }).catch(error => {
+        console.error(error);
+    });
 }
 
 function readMail() {
-    if (myMSALObj.getAccount()) {
-        getTokenPopup(tokenRequest)
-            .then(response => {
-                callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
-            }).catch(error => {
-                console.error(error);
-            });
-    }
+    getTokenPopup(tokenRequest).then(response => {
+        callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
+    }).catch(error => {
+        console.error(error);
+    });
 }
-   ```
+
+loadPage();
+```
+
 ### <a name="redirect"></a>Rediriger
-Créez un fichier .js nommé `authRedirect.js`, qui contiendra votre logique d’authentification et d’acquisition de jeton pour la redirection de connexion, puis ajoutez le code suivant :
+
+Créez un fichier nommé *authRedirect.js* dans le dossier *app*, puis ajoutez le code d’authentification et d’acquisition de jeton suivant pour la redirection de la connexion :
 
 ```javascript
 // Create the main myMSALObj instance
@@ -418,29 +467,33 @@ Créez un fichier .js nommé `authRedirect.js`, qui contiendra votre logique d�
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accessToken;
-
-// Register Callbacks for Redirect flow
-myMSALObj.handleRedirectCallback(authRedirectCallBack);
-
-function authRedirectCallBack(error, response) {
-    if (error) {
-        console.error(error);
-    } else {
-        if (myMSALObj.getAccount()) {
-            console.log('id_token acquired at: ' + new Date().toString());
-            showWelcomeMessage(myMSALObj.getAccount());
-            getTokenRedirect(loginRequest);
-        } else if (response.tokenType === "Bearer") {
-            console.log('access_token acquired at: ' + new Date().toString());
-        } else {
-            console.log("token type is:" + response.tokenType);
-        }
-    }
-}
+let username = "";
 
 // Redirect: once login is successful and redirects with tokens, call Graph API
-if (myMSALObj.getAccount()) {
-    showWelcomeMessage(myMSALObj.getAccount());
+myMSALObj.handleRedirectPromise().then(handleResponse).catch(err => {
+    console.error(err);
+});
+
+function handleResponse(resp) {
+    if (resp !== null) {
+        username = resp.account.username;
+        showWelcomeMessage(resp.account);
+    } else {
+        /**
+         * See here for more info on account retrieval:
+         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+         */
+        const currentAccounts = myMSALObj.getAllAccounts();
+        if (currentAccounts === null) {
+            return;
+        } else if (currentAccounts.length > 1) {
+            // Add choose account code here
+            console.warn("Multiple accounts detected.");
+        } else if (currentAccounts.length === 1) {
+            username = currentAccounts[0].username;
+            showWelcomeMessage(currentAccounts[0]);
+        }
+    }
 }
 
 function signIn() {
@@ -448,52 +501,64 @@ function signIn() {
 }
 
 function signOut() {
-    myMSALObj.logout();
+    const logoutRequest = {
+        account: myMSALObj.getAccountByUsername(username)
+    };
+
+    myMSALObj.logout(logoutRequest);
 }
 
-// This function can be removed if you do not need to support IE
 function getTokenRedirect(request) {
-    return myMSALObj.acquireTokenSilent(request)
-        .then((response) => {
-            console.log(response);
-            if (response.accessToken) {
-                console.log('access_token acquired at: ' + new Date().toString());
-                accessToken = response.accessToken;
-
-                callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-                profileButton.style.display = 'none';
-                mailButton.style.display = 'initial';
-            }
-        })
-        .catch(error => {
+    /**
+     * See here for more info on account retrieval:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+    request.account = myMSALObj.getAccountByUsername(username);
+    return myMSALObj.acquireTokenSilent(request).catch(error => {
             console.warn("silent token acquisition fails. acquiring token using redirect");
-            // fallback to interaction when silent call fails
-            return myMSALObj.acquireTokenRedirect(request);
+            if (error instanceof msal.InteractionRequiredAuthError) {
+                // fallback to interaction when silent call fails
+                return myMSALObj.acquireTokenRedirect(request);
+            } else {
+                console.warn(error);
+            }
         });
 }
 
 function seeProfile() {
-    getTokenRedirect(loginRequest);
+    getTokenRedirect(loginRequest).then(response => {
+        callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
+        profileButton.classList.add('d-none');
+        mailButton.classList.remove('d-none');
+    }).catch(error => {
+        console.error(error);
+    });
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest);
+    getTokenRedirect(tokenRequest).then(response => {
+        callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
+    }).catch(error => {
+        console.error(error);
+    });
 }
 ```
 
-### <a name="more-information"></a>Informations complémentaires
+### <a name="how-the-code-works"></a>Fonctionnement du code
 
-Quand un utilisateur sélectionne le bouton **Se connecter** pour la première fois, la méthode `signIn` appelle `loginPopup` pour le connecter. Cette méthode ouvre une fenêtre contextuelle avec le *point de terminaison de la plateforme d’identités Microsoft* afin de demander et de valider les informations d’identification de l’utilisateur. Après une connexion réussie, *msal.js* lance le [flux du code d’autorisation](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
+Quand un utilisateur sélectionne le bouton **Sign In** pour la première fois, la méthode `signIn` appelle `loginPopup` pour le connecter. La méthode `loginPopup` ouvre une fenêtre contextuelle avec le *point de terminaison de la plateforme d’identités Microsoft* afin de demander et de valider les informations d’identification de l’utilisateur. Après une connexion réussie, *msal.js* lance le [flux du code d’autorisation](v2-oauth2-auth-code-flow.md).
 
-Un code d’autorisation protégé par PKCE est alors envoyé au point de terminaison de jeton protégé par CORS en vue de l’échange de jetons. Un jeton d’ID, un jeton d’accès et un jeton d’actualisation sont reçus et traités par *msal.js*, et les informations contenues dans le jeton sont mises en cache.
+Un code d’autorisation protégé par PKCE est alors envoyé au point de terminaison de jeton protégé par CORS en vue de l’échange de jetons. Un jeton d’ID, un jeton d’accès et un jeton d’actualisation sont reçus par votre application et traités par *msal.js*, et les informations contenues dans le jeton sont mises en cache.
 
-Le jeton d’ID contient des informations générales sur l’utilisateur, comme son nom d’affichage. Si vous envisagez d’utiliser les données fournies par ce jeton, celui-ci doit être validé par le serveur back-end afin de garantir qu’il a été émis pour un utilisateur autorisé de votre application. Le jeton d’actualisation a une durée de vie limitée et expire au bout de 24 heures. Le jeton d’actualisation peut être utilisé pour acquérir de nouveaux jetons d’accès en mode silencieux.
+Le jeton d’ID contient des informations générales sur l’utilisateur, comme son nom d’affichage. Si vous envisagez d’utiliser les données fournies par le jeton d’ID, votre serveur back-end *doit* le valider afin de garantir qu’il a été émis pour un utilisateur autorisé de votre application.
 
-L’application SPA créée dans ce guide appelle `acquireTokenSilent` et/ou `acquireTokenPopup` pour acquérir un *jeton d’accès* utilisé pour demander les informations de profil utilisateur à l’API Microsoft Graph. Pour obtenir un exemple de validation du jeton d’ID, consultez l’exemple d’application [active-directory-javascript-singlepageapp-dotnet-webapi-v2](https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotnet-webapi-v2) sur GitHub. Cet exemple utilise une API web ASP.NET pour la validation du jeton.
+Le jeton d’accès a une durée de vie limitée et expire au bout de 24 heures. Le jeton d’actualisation peut être utilisé pour acquérir de nouveaux jetons d’accès en mode silencieux.
+
+L’application monopage que vous avez créée dans ce tutoriel appelle `acquireTokenSilent` et/ou `acquireTokenPopup` pour acquérir un *jeton d’accès* utilisé pour demander les informations de profil utilisateur à l’API Microsoft Graph. Pour obtenir un exemple de validation du jeton d’ID, consultez l’exemple d’application [active-directory-javascript-singlepageapp-dotnet-webapi-v2](https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotnet-webapi-v2) sur GitHub. Cet exemple utilise une API web ASP.NET pour la validation du jeton.
 
 #### <a name="get-a-user-token-interactively"></a>Obtenir un jeton d’utilisateur de manière interactive
 
-Après la première connexion, les utilisateurs ne doivent pas être invités à se réauthentifier chaque fois qu’ils ont besoin d’un jeton pour accéder à une ressource. Pour empêcher ces requêtes de réauthentification, utilisez `acquireTokenSilent`. Il existe toutefois certaines situations dans lesquelles vous aurez à forcer les utilisateurs à interagir avec le point de terminaison de la plateforme d’identités Microsoft. Par exemple :
+Après la première connexion, votre application ne doit pas demander aux utilisateurs de se réauthentifier (autrement dit, demander un jeton) chaque fois qu’ils ont besoin d’accéder à une ressource protégée. Pour empêcher ces requêtes de réauthentification, appelez `acquireTokenSilent`. Il existe toutefois certaines situations dans lesquelles vous aurez à forcer les utilisateurs à interagir avec le point de terminaison de la plateforme d’identités Microsoft. Par exemple :
 
 - Les utilisateurs doivent entrer à nouveau leurs informations d’identification car le mot de passe a expiré.
 - Votre application demande l’accès à une ressource et vous avez besoin du consentement de l’utilisateur.
@@ -506,20 +571,17 @@ L’appel de `acquireTokenPopup` ouvre une fenêtre contextuelle (ou `acquireTok
 La méthode `acquireTokenSilent` gère l’acquisition et le renouvellement de jetons sans aucune interaction utilisateur. Quand la méthode `loginPopup` (ou `loginRedirect`) est exécutée pour la première fois, c’est en général la méthode `acquireTokenSilent` qui est utilisée pour obtenir les jetons permettant d’accéder aux ressources protégées pour les appels suivants. (Les appels pour les demandes ou les renouvellements de jetons sont effectués en mode silencieux.) `acquireTokenSilent` risque d’échouer dans certains cas. Par exemple, le mot de passe de l’utilisateur a peut-être expiré. Votre application peut gérer cette exception de deux manières :
 
 1. Effectuez immédiatement un appel à `acquireTokenPopup` pour déclencher une invite de connexion utilisateur. Cette méthode est couramment employée avec les applications en ligne dans lesquelles aucun contenu non authentifié n’est disponible pour l’utilisateur. L’exemple créé avec cette installation guidée utilise ce modèle.
-
 1. Signalez visuellement à l’utilisateur qu’une connexion interactive est requise afin qu’il puisse choisir le bon moment pour se connecter ou que l’application puisse réessayer d’exécuter `acquireTokenSilent` ultérieurement. Cette technique est fréquemment retenue quand l’utilisateur peut se servir d’autres fonctionnalités de l’application sans être perturbé. Par exemple, un contenu non authentifié peut être disponible dans l’application. Dans ce cas, l’utilisateur peut décider quand se connecter pour accéder à la ressource protégée ou pour actualiser les informations obsolètes.
 
 > [!NOTE]
-> Ce guide de démarrage rapide utilise les méthodes `loginPopup` et `acquireTokenPopup` par défaut. Si vous utilisez Internet Explorer comme navigateur, il est recommandé d’utiliser les méthodes `loginRedirect` et `acquireTokenRedirect`, en raison d’un [problème connu](https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki/Known-issues-on-IE-and-Edge-Browser#issues) lié à la façon dont Internet Explorer gère les fenêtres indépendantes. Si vous souhaitez voir comment obtenir le même résultat à l’aide de méthodes de redirection, consultez [*authRedirect.js*](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/blob/quickstart/JavaScriptSPA/authRedirect.js).
+> Ce tutoriel utilise les méthodes `loginPopup` et `acquireTokenPopup` par défaut. Si vous utilisez Internet Explorer, nous vous recommandons d’utiliser les méthodes `loginRedirect` et `acquireTokenRedirect` en raison d’un [problème connu](https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki/Known-issues-on-IE-and-Edge-Browser#issues) avec Internet Explorer et les fenêtres contextuelles. Pour obtenir un exemple d’obtention du même résultat à l’aide de méthodes de redirection, consultez [*authRedirect.js*](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/blob/quickstart/JavaScriptSPA/authRedirect.js) sur GitHub.
 
-## <a name="call-the-microsoft-graph-api-by-using-the-token-you-just-acquired"></a>Appeler l’API Microsoft Graph à l’aide du jeton que vous venez d’acquérir
+## <a name="call-the-microsoft-graph-api"></a>Appeler l’API Microsoft Graph
 
+Créez un fichier nommé *graph.js* dans le dossier *app*, puis ajoutez le code suivant pour effectuer des appels REST à l’API Microsoft Graph :
 
- Créez un fichier .js nommé *graph.js* qui effectuera un appel REST à l’API Microsoft Graph, et ajoutez le code suivant :
-
-   ```javascript
-
-// Helper function to call MS Graph API endpoint
+```javascript
+// Helper function to call Microsoft Graph API endpoint
 // using authorization bearer token scheme
 function callMSGraph(endpoint, token, callback) {
     const headers = new Headers();
@@ -539,51 +601,56 @@ function callMSGraph(endpoint, token, callback) {
         .then(response => callback(response, endpoint))
         .catch(error => console.log(error));
 }
-   ```
+```
 
-### <a name="more-information-about-making-a-rest-call-against-a-protected-api"></a>Informations supplémentaires sur l’envoi d’un appel REST à une API protégée
-
-Dans l’exemple d’application créé par ce guide, la méthode `callMSGraph()` est utilisée pour effectuer une requête HTTP `GET` sur une ressource protégée qui exige un jeton. La requête retourne ensuite le contenu à l’appelant. Cette méthode ajoute le jeton acquis dans l’*en-tête d’autorisation HTTP*. Dans l’exemple d’application créé par ce guide, la ressource est le point de terminaison *me* de l’API Microsoft Graph, qui affiche les informations de profil de l’utilisateur.
-
-## <a name="test-your-code"></a>Test de votre code
-
-1. Pour Node.js, démarrez le serveur web en exécutant les commandes suivantes à partir du dossier d’application :
-
-   ```bash
-   npm install
-   npm start
-   ```
-1. Dans votre navigateur, entrez **http://localhost:3000** ou **http://localhost:{port}** , où *port* est le port sur lequel votre serveur web est à l’écoute. Vous devez voir apparaître le contenu de votre fichier *index.html*, ainsi que le bouton **Se connecter**.
+Dans l’exemple d’application créé dans ce tutoriel, la méthode `callMSGraph()` est utilisée pour effectuer une requête HTTP `GET` sur une ressource protégée qui exige un jeton. La requête retourne ensuite le contenu à l’appelant. Cette méthode ajoute le jeton acquis dans l’*en-tête d’autorisation HTTP*. Dans l’exemple d’application créé dans ce tutoriel, la ressource protégée est le point de terminaison *me* de l’API Microsoft Graph, qui affiche les informations de profil de l’utilisateur connecté.
 
 ## <a name="test-your-application"></a>Tester votre application
 
+Vous avez terminé la création de l’application, et êtes maintenant prêt à lancer le serveur web Node.js et à tester les fonctionnalités de l’application.
+
+1. Démarrez le serveur web Node.js en exécutant la commande suivante à partir de la racine de votre dossier de projet :
+
+   ```console
+   npm start
+   ```
+1. Dans votre navigateur, accédez à `http://localhost:3000` ou `http://localhost:<port>`, où `<port>` est le port sur lequel votre serveur web est à l’écoute. Vous devez voir apparaître le contenu de votre fichier *index.html*, ainsi que le bouton **Se connecter**.
+
+### <a name="sign-in-to-the-application"></a>Se connecter à l’application
+
 Une fois que le navigateur a chargé votre fichier *index.html*, sélectionnez **Se connecter**. Vous êtes invité à vous connecter avec le point de terminaison de la plateforme d’identités Microsoft :
 
-![La fenêtre de connexion au compte JavaScript SPA](media/active-directory-develop-guidedsetup-javascriptspa-test/javascriptspascreenshot1.png)
+:::image type="content" source="media/tutorial-v2-javascript-auth-code/spa-01-signin-dialog.png" alt-text="Navigateur web affichant la boîte de dialogue de connexion":::
 
 ### <a name="provide-consent-for-application-access"></a>Accorder les droits d’accès à l’application
 
 La première fois que vous vous connectez à votre application, vous êtes invité à lui accorder l’accès à votre profil et à vous connecter :
 
-![La fenêtre « Autorisations nécessaires »](media/active-directory-develop-guidedsetup-javascriptspa-test/javascriptspaconsent.png)
+:::image type="content" source="media/tutorial-v2-javascript-auth-code/spa-02-consent-dialog.png" alt-text="Boîte de dialogue de contenu affichée dans le navigateur web":::
 
-### <a name="view-application-results"></a>Afficher les résultats de l’application
+Si vous consentez à accorder les autorisations demandées, l’application web affiche votre nom d’utilisateur, ce qui signifie que la connexion a réussi :
 
-Une fois connecté, vos informations de profil utilisateur sont retournées dans la réponse de l’API Microsoft Graph qui s’affiche :
+:::image type="content" source="media/tutorial-v2-javascript-auth-code/spa-03-signed-in.png" alt-text="Résultats d’une connexion réussie dans le navigateur web":::
 
-![Résultats de l’appel à l’API Graph](media/active-directory-develop-guidedsetup-javascriptspa-test/javascriptsparesults.png)
+### <a name="call-the-graph-api"></a>Appeler l’API Graph
+
+Une fois connecté, sélectionnez **See Profile** pour afficher les informations de profil utilisateur retournées dans la réponse à l’appel à l’API Microsoft Graph :
+
+:::image type="content" source="media/tutorial-v2-javascript-auth-code/spa-04-see-profile.png" alt-text="Informations de profil de Microsoft Graph affichées dans le navigateur":::
 
 ### <a name="more-information-about-scopes-and-delegated-permissions"></a>Informations supplémentaires sur les étendues et les autorisations déléguées
 
-L’API Microsoft Graph nécessite l’étendue *user.read* pour lire le profil d’un utilisateur. Par défaut, cette étendue est automatiquement ajoutée à toutes les applications inscrites dans le Portail Azure. D’autres API pour Microsoft Graph ainsi que des API personnalisées pour votre serveur principal peuvent nécessiter des étendues supplémentaires. Par exemple, l’API Microsoft Graph nécessite l’étendue *Mail.Read* afin de lister les e-mails de l’utilisateur.
+L’API Microsoft Graph nécessite l’étendue *user.read* pour lire le profil d’un utilisateur. Par défaut, cette étendue est automatiquement ajoutée à toutes les applications inscrites dans le Portail Azure. D’autres API pour Microsoft Graph ainsi que des API personnalisées pour votre serveur principal peuvent nécessiter des étendues supplémentaires. Par exemple, l’API Microsoft Graph nécessite l’étendue *Mail.Read* afin de lister l’e-mail de l’utilisateur.
 
-> [!NOTE]
-> L’utilisateur peut être invité à donner des consentements supplémentaires à mesure que vous ajoutez des étendues.
+À mesure que vous ajoutez des étendues, vos utilisateurs peuvent être invités à accorder un consentement supplémentaire pour les étendues ajoutées.
 
-Si une API back-end ne nécessite pas d’étendue (non recommandé), vous pouvez utiliser *clientId* comme étendue dans les appels pour acquérir des jetons.
+Si une API back-end ne nécessite pas d’étendue (ce qui n’est pas recommandé), vous pouvez utiliser `clientId` en tant qu’étendue dans les appels pour acquérir des jetons.
 
 [!INCLUDE [Help and support](../../../includes/active-directory-develop-help-support-include.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Le [dépôt MSAL.js sur GitHub](https://github.com/AzureAD/microsoft-authentication-library-for-js) contient des informations supplémentaires sur la bibliothèque, un Forum aux questions et une section sur la résolution des problèmes.
+Si vous souhaitez approfondir le développement d’applications monopages JavaScript sur la plateforme d’identités Microsoft, consultez notre série de scénarios en plusieurs parties :
+
+> [!div class="nextstepaction"]
+> [Scénario : Application monopage](scenario-spa-overview.md)

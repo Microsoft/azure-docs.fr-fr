@@ -7,17 +7,17 @@ author: damendo
 ms.assetid: 7b907d00-9c35-40f5-a61e-beb7b782276f
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 7d32043ca73e9cf810b3eab5e65cb4b42b599d18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a4debda712636e577639b84845dda6b9b4228a1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152922"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84725053"
 ---
 # <a name="packet-inspection-with-azure-network-watcher"></a>Inspection de paquets avec Azure Network Watcher
 

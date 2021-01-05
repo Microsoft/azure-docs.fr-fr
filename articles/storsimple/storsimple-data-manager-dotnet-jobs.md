@@ -1,17 +1,17 @@
 ---
 title: Utiliser le kit SDK .NET pour les travaux Microsoft Azure StorSimple Data Manager
-description: Découvrez comment utiliser le kit SDK .NET pour lancer les tâches StorSimple Data Manager
+description: Découvrez comment utiliser le kit de développement logiciel (SDK) .NET dans le service StorSimple Data Manager pour transformer des données d’appareil StorSimple.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/16/2018
 ms.author: alkohli
-ms.openlocfilehash: b7cf1d3b9d4a9d751348c4792f904062b00ac104
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b18627d2806662d6d966af95d51873d5623b2393
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76270721"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015534"
 ---
 # <a name="use-the-net-sdk-to-initiate-data-transformation"></a>Utiliser le kit SDK .NET pour lancer la transformation de données
 
@@ -33,7 +33,7 @@ Avant de commencer, assurez-vous de satisfaire les exigences suivantes :
 
     - Visual Studio 2012, 2013, 2015 ou 2017.
 
-    - Azure Powershell. [Téléchargez Azure Powershell](https://azure.microsoft.com/documentation/articles/powershell-install-configure/).
+    - Azure Powershell. [Téléchargez Azure Powershell](/powershell/azure/).
 *   Une définition de tâche correctement configurée dans StorSimple Data Manager au sein d’un groupe de ressources.
 *   Toutes les DLL requises. Téléchargez ces DLL à partir du [dépôt GitHub](https://github.com/Azure-Samples/storsimple-dotnet-data-manager-get-started/tree/master/Data_Manager_Job_Run/dlls).
 *   Script [`Get-ConfigurationParams.ps1`](https://github.com/Azure-Samples/storsimple-dotnet-data-manager-get-started/blob/master/Data_Manager_Job_Run/Get-ConfigurationParams.ps1) du dépôt GitHub.

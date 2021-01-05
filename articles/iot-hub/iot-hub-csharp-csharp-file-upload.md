@@ -9,13 +9,13 @@ ms.devlang: csharp
 ms.topic: conceptual
 ms.date: 07/04/2017
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: 14472e84d425bf03a3c6a0c2dc558d4b8225caec
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: mqtt, devx-track-csharp
+ms.openlocfilehash: 8d45ad630d09a4909cf00b830df139057cc0fcaf
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733410"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92142291"
 ---
 # <a name="upload-files-from-your-device-to-the-cloud-with-iot-hub-net"></a>Charger des fichiers sur le cloud à partir d’un appareil avec IoT Hub (.NET)
 
@@ -31,7 +31,7 @@ Le guide de démarrage rapide [Envoyer des données de télémétrie à partir d
 
 * Fichiers volumineux qui contiennent des images
 
-* Videos
+* Vidéos
 
 * Données de vibration échantillonnées à une fréquence élevée
 
@@ -48,13 +48,15 @@ Ces fichiers sont généralement traités par lot dans le cloud à l’aide d’
 > [!NOTE]
 > IoT Hub offre la prise en charge de nombreux langages (notamment C, Java, Python et Javascript) et plateformes d’appareils par le biais des Kits Azure IoT device SDK. Pour obtenir des instructions pas à pas expliquant comment connecter votre appareil à Azure IoT Hub, voir le [Centre de développement Azure IoT](https://azure.microsoft.com/develop/iot).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+[!INCLUDE [iot-hub-include-x509-ca-signed-file-upload-support-note](../../includes/iot-hub-include-x509-ca-signed-file-upload-support-note.md)]
+
+## <a name="prerequisites"></a>Prérequis
 
 * Visual Studio
 
 * Un compte Azure actif. Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes.
 
-* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 [!INCLUDE [iot-hub-associate-storage](../../includes/iot-hub-associate-storage.md)]
 
@@ -198,4 +200,4 @@ Dans ce didacticiel, vous avez appris à utiliser les fonctionnalités de télé
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)

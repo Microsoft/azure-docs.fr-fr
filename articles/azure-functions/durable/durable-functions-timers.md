@@ -2,18 +2,18 @@
 title: Minuteurs dans Fonctions durables - Azure
 description: Découvrez comment implémenter des minuteurs durables dans l’extension Fonctions durables pour Azure Functions.
 ms.topic: conceptual
-ms.date: 11/03/2019
+ms.date: 07/13/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 0565cc149a36baf31d8516fffcf48b194c465760
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bb91f205a9b83b0b4b410644ef6c0fcbbf60876a
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76261481"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91876445"
 ---
 # <a name="timers-in-durable-functions-azure-functions"></a>Minuteurs dans Fonctions durables (Azure Functions)
 
-[Fonctions durables](durable-functions-overview.md) fournit *des minuteurs durables* à utiliser dans les fonctions de l’orchestrateur pour implémenter des retards ou configurer des délais d’expiration sur des actions asynchrones. Les minuteurs durables doivent être utilisés dans les fonctions de l’orchestrateur à la place de `Thread.Sleep` et `Task.Delay` (C#) ou `setTimeout()` et `setInterval()` (JavaScript).
+[Fonctions durables](durable-functions-overview.md) fournit *des minuteurs durables* à utiliser dans les fonctions de l’orchestrateur pour implémenter des retards ou configurer des délais d’expiration sur des actions asynchrones. Des minuteurs durables doivent être utilisés dans les fonctions de l’orchestrateur à la place de `Thread.Sleep` et `Task.Delay` (C#), `setTimeout()` et `setInterval()` (JavaScript) ou `time.sleep()` (Python).
 
 Vous créez un minuteur durable en appelant la méthode `CreateTimer` (.NET) ou la méthode `createTimer` (JavaScript) de la [liaison de déclencheur d’orchestration](durable-functions-bindings.md#orchestration-trigger). La méthode retourne une tâche qui se termine à une date et une heure spécifiées.
 
@@ -22,7 +22,7 @@ Vous créez un minuteur durable en appelant la méthode `CreateTimer` (.NET) ou 
 Lorsque vous créez un minuteur qui expire à 16:30, l’infrastructure des tâches durables sous-jacent empile un message qui devient uniquement visible à 16:30. Durant l’exécution dans le plan de consommation d’Azure Functions, le message de minuteur nouvellement visible garantit que l’application de fonction est activée sur une machine virtuelle appropriée.
 
 > [!NOTE]
-> * Les minuteurs durables sont actuellement limités à 7 jours. Si des délais plus longs sont nécessaires, ils peuvent être simulés à l’aide des API de minuteur dans une boucle `while`.
+> * À partir de la [version 2.3.0](https://github.com/Azure/azure-functions-durable-extension/releases/tag/v2.3.0) de l’extension durable, les minuteurs durables sont illimités. Dans les versions antérieures de l’extension, les minuteurs durables sont limités à sept jours. Lorsque vous utilisez une version antérieure et que vous avez besoin d’un délai de plus de sept jours, utilisez les API de minuteur dans une boucle `while` pour simuler ce délai.
 > * Utilisez toujours `CurrentUtcDateTime` au lieu de `DateTime.UtcNow` en .NET ou `currentUtcDateTime` au lieu de `Date.now` ou de `Date.UTC` en JavaScript lors du calcul de l’heure de déclenchement pour les minuteurs durables. Pour plus d’informations, consultez l’article [Contraintes du code des fonctions d’orchestrateur](durable-functions-code-constraints.md).
 
 ## <a name="usage-for-delay"></a>Utilisation des retards
@@ -62,7 +62,21 @@ module.exports = df.orchestrator(function*(context) {
     }
 });
 ```
+# <a name="python"></a>[Python](#tab/python)
 
+```python
+import azure.functions as func
+import azure.durable_functions as df
+from datetime import datetime, timedelta
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    for i in range(0, 9):
+        deadline = context.current_utc_datetime + timedelta(days=1)
+        yield context.create_timer(deadline)
+        yield context.call_activity("SendBillingEvent")
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 ---
 
 > [!WARNING]
@@ -130,6 +144,28 @@ module.exports = df.orchestrator(function*(context) {
         return false;
     }
 });
+```
+
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+from datetime import datetime, timedelta
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    deadline = context.current_utc_datetime + timedelta(seconds=30)
+    activity_task = context.call_activity("GetQuote")
+    timeout_task = context.create_timer(deadline)
+
+    winner = yield context.task_any([activity_task, timeout_task])
+    if winner == activity_task:
+        timeout_task.cancel()
+        return True
+    elif winner == timeout_task:
+        return False
+
+main = df.Orchestrator.create(orchestrator_function)
 ```
 
 ---

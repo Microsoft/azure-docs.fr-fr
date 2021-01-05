@@ -7,17 +7,17 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 7cc47414dc985f6fc2fff3c57d809f307b142e30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 936501674fcf1d428de936174575440edad71de2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840925"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84738513"
 ---
 # <a name="configuring-network-security-group-flow-logs-using-rest-api"></a>Configuration des journaux d’activité des flux de groupe de sécurité réseau avec l’API REST
 

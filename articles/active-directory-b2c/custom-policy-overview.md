@@ -7,15 +7,16 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 03/20/2019
+ms.date: 06/06/2019
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: f18f44208b97ab5bc8d9cd9ff01d604c62deb963
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 043cf83d804803e1b5b47d3ac51bbccaa06e4e87
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81678162"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87116412"
 ---
 # <a name="custom-policies-in-azure-active-directory-b2c"></a>Stratégies personnalisées dans Azure Active Directory B2C
 
@@ -25,7 +26,7 @@ Les stratégies personnalisées sont des fichiers de configuration qui définiss
 
 ## <a name="comparing-user-flows-and-custom-policies"></a>Comparaison des flux d’utilisateur et des stratégies personnalisées
 
-| | Flux d’utilisateurs | Stratégies personnalisées |
+| Context | Flux d’utilisateurs | Stratégies personnalisées |
 |-|-------------------|-----------------|
 | Utilisateurs cibles | Tous les développeurs d’applications avec ou sans expertise de l’identité | Professionnels de l’identité, intégrateurs système, consultants et équipes d’identité internes. Ils sont à l’aise avec les flux OpenID Connect et comprennent les fournisseurs d’identité et l’authentification basée sur les revendications. |
 | Mode de configuration | Portail Azure avec interface utilisateur (UI) conviviale | Modification directe des fichiers XML, puis chargement sur le portail Azure |

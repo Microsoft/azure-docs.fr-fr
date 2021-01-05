@@ -1,6 +1,6 @@
 ---
 title: Passerelle de gestion des données pour Data Factory
-description: Mettez en place une passerelle de données pour déplacer vos données entre un emplacement local et le cloud. Utilisez la passerelle de gestion des données dans Azure Data Factory pour déplacer vos données.
+description: Utilisez la passerelle de gestion des données dans Azure Data Factory pour déplacer vos données.
 services: data-factory
 documentationcenter: ''
 author: nabhishek
@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: abnarain
 robots: noindex
-ms.openlocfilehash: 1340c205477b256e3d96ff7ccacb64e575725c2c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 94c1bed8d94f73bc7794037b307618f4c36c4518
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80065403"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96450607"
 ---
 # <a name="data-management-gateway"></a>Passerelle de gestion de données
 > [!NOTE]
@@ -28,7 +28,7 @@ ms.locfileid: "80065403"
 
 La passerelle de gestion des données est un agent client que vous devez installer dans votre environnement local pour permettre la copie des données entre les magasins de données cloud et locaux. Les magasins de données locaux pris en charge par Data Factory sont répertoriés dans la section [Sources de données prises en charge](data-factory-data-movement-activities.md#supported-data-stores-and-formats) .
 
-Cet article vient compléter la procédure pas à pas de l’article [Déplacement de données entre des sources locales et le cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) . Dans cette procédure pas à pas, vous créez un pipeline qui utilise la passerelle qui déplace les données d’une base de données SQL Server locale vers un objet blob Azure. Cet article fournit des informations détaillées sur la passerelle de gestion des données.
+Cet article vient compléter la procédure pas à pas de l’article [Déplacement de données entre des sources locales et le cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) . Dans cette procédure pas à pas, vous créez un pipeline qui utilise la passerelle qui déplace les données d’une base de données SQL Server vers un objet blob Azure. Cet article fournit des informations détaillées sur la passerelle de gestion des données.
 
 Vous pouvez effectuer un scale-out d’une passerelle de gestion des données en associant plusieurs machines locales avec la passerelle. Vous pouvez monter en puissance une passerelle en augmentant le nombre de travaux de déplacement des données qui peuvent s’exécuter simultanément sur un nœud. Cette fonctionnalité est également disponible pour une passerelle logique à nœud unique. Consultez l’article [Mise à l’échelle de la passerelle de gestion des données dans Azure Data Factory](data-factory-data-management-gateway-high-availability-scalability.md) pour plus d’informations.
 
@@ -53,7 +53,7 @@ Lorsque vous utilisez une activité de copie pour copier des données entre des 
 
 Voici le flux de données global et un résumé des étapes pour la copie à l’aide de la passerelle de données : ![Flux de données à l’aide de la passerelle](./media/data-factory-data-management-gateway/data-flow-using-gateway.png)
 
-1. Le développeur des données crée une passerelle pour une fabrique de données Azure à l’aide du [portail Azure](https://portal.azure.com)ou d’une [applet de commande PowerShell](https://docs.microsoft.com/powershell/module/az.datafactory/).
+1. Le développeur des données crée une passerelle pour une fabrique de données Azure à l’aide du [portail Azure](https://portal.azure.com)ou d’une [applet de commande PowerShell](/powershell/module/az.datafactory/).
 2. Le développeur de données crée un service lié pour un magasin de données local en spécifiant la passerelle. Dans le cadre de la configuration du service lié, le développeur des données utilise l’application de configuration des informations d’identification pour spécifier les types d’authentification et les informations d’identification. La boîte de dialogue de l’application de configuration des informations d’identification communique avec le magasin de données pour tester la connexion et la passerelle afin d’enregistrer les informations d’identification.
 3. La passerelle chiffre les informations d’identification avec le certificat associé à la passerelle (fourni par le développeur des données) avant d’enregistrer les informations d’identification dans le cloud.
 4. Le service Data Factory communique avec la passerelle pour la planification et la gestion des tâches via un canal de contrôle qui utilise une file d’attente Azure Service Bus partagée. Lorsqu’une tâche de l’activité de copie doit être lancée, Data Factory place en file d’attente la requête ainsi que les informations d’identification. La passerelle lance la tâche après avoir interrogé la file d'attente.
@@ -73,7 +73,7 @@ Voici le flux de données global et un résumé des étapes pour la copie à l�
 ## <a name="installation"></a>Installation
 ### <a name="prerequisites"></a>Prérequis
 * Les versions de **système d’exploitation** prises en charge sont Windows 7, Windows 8/8.1, Windows 10, Windows Server 2008 R2, Windows Server 2012 et Windows Server 2012 R2. L’installation de la passerelle de gestion des données sur un contrôleur de domaine n’est pas prise en charge.
-* .NET framework 4.5.1 ou version ultérieure est requis. Si vous installez la passerelle sur un ordinateur Windows 7, installez .NET Framework 4.5 ou une version ultérieure. Consultez [Configuration système requise pour .NET Framework](https://msdn.microsoft.com/library/8z6watww.aspx) pour plus d’informations.
+* .NET framework 4.5.1 ou version ultérieure est requis. Si vous installez la passerelle sur un ordinateur Windows 7, installez .NET Framework 4.5 ou une version ultérieure. Consultez [Configuration système requise pour .NET Framework](/dotnet/framework/get-started/system-requirements) pour plus d’informations.
 * La **configuration** recommandée pour l’ordinateur de passerelle est la suivante : au moins 2 GHz, 4 cœurs, 8 Go de RAM et 80 Go d’espace disque.
 * Si l’ordinateur hôte est en veille prolongée, la passerelle ne répond pas à la demande de données. Vous devez donc configurer un **plan de gestion de l’alimentation** approprié sur l’ordinateur avant d’installer la passerelle. L’installation de la passerelle ouvre un message si l’ordinateur est configuré pour la mise en veille prolongée.
 * Vous devez être administrateur sur la machine pour installer et configurer la passerelle de gestion des données avec succès. Vous pouvez ajouter des utilisateurs supplémentaires au groupe Windows local **Utilisateurs de la passerelle de gestion des données**. Les membres de ce groupe sont en mesure d’utiliser l’outil **Gestionnaire de configuration de passerelle de gestion des données** pour configurer la passerelle.
@@ -121,7 +121,7 @@ Pour créer une passerelle dans le portail et obtenir la clé à partir de la pa
     ![Lien de téléchargement dans le portail](media/data-factory-data-management-gateway/download-and-install-link-on-portal.png)
 4. Dans la page **Configurer**, cliquez sur **Recréer une clé**. Dans le message d’avertissement, cliquez sur Oui après l’avoir lu attentivement.
 
-    ![Recréer une clé](media/data-factory-data-management-gateway/recreate-key-button.png)
+    ![Bouton Recréer une clé](media/data-factory-data-management-gateway/recreate-key-button.png)
 5. Cliquez sur le bouton Copier en regard de la clé. La clé est copiée dans le Presse-papiers.
 
     ![Copier la clé](media/data-factory-data-management-gateway/copy-gateway-key.png)
@@ -150,21 +150,21 @@ Au niveau du pare-feu d’entreprise, vous devez configurer les domaines et port
 Au niveau du pare-feu Windows, ces ports de sortie sont normalement activés. Sinon, vous pouvez configurer en conséquence les domaines et les ports sur l’ordinateur de passerelle.
 
 > [!NOTE]
-> 1. Selon votre source/vos récepteurs, vous devrez peut-être ajouter des domaines et des ports de sortie supplémentaires à la liste verte de votre pare-feu d’entreprise/Windows.
-> 2. Pour certaines bases de données cloud (par exemple : [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-configure-firewall-settings), [Azure Data Lake](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-secure-data#set-ip-address-range-for-data-access), etc.), vous aurez besoin d’ajouter sur liste verte l’adresse IP de la machine passerelle dans la configuration de pare-feu.
+> 1. Selon votre source/vos récepteurs, vous devrez peut-être autoriser des domaines et des ports de sortie supplémentaires dans votre pare-feu d’entreprise/Windows.
+> 2. Pour certaines bases de données cloud (par exemple : [Azure SQL Database](../../azure-sql/database/firewall-configure.md), [Azure Data Lake](../../data-lake-store/data-lake-store-secure-data.md#set-ip-address-range-for-data-access), etc.), vous aurez besoin d’autoriser l’adresse IP de la machine passerelle dans la configuration du pare-feu.
 >
 >
 
 #### <a name="copy-data-from-a-source-data-store-to-a-sink-data-store"></a>Copier des données d’une banque de données source vers une banque de données de récepteur
 Assurez-vous que les règles de pare-feu sont correctement activées sur le pare-feu d’entreprise, sur le pare-feu Windows de l’ordinateur de passerelle, ainsi que sur le magasin de données lui-même. Activer ces règles permet à la passerelle de se connecter correctement à la source et au récepteur. Activez les règles pour chaque magasin de données impliqué dans l’opération de copie.
 
-Par exemple, pour copier à partir d’une **banque de données locale vers un récepteur Azure SQL Database ou un récepteur Azure SQL Data Warehouse**, effectuez les opérations suivantes :
+Par exemple, pour copier à partir d’une **banque de données locale vers un récepteur Azure SQL Database ou un récepteur Azure Synapse Analytics**, effectuez les opérations suivantes :
 
 * Autorisez le trafic **TCP** sortant sur le port **1433** pour le pare-feu Windows et le pare-feu d’entreprise.
-* Configurez les paramètres de pare-feu du serveur SQL Azure pour ajouter l’adresse IP de l’ordinateur de passerelle à la liste d’adresses IP autorisées.
+* Configurez les paramètres de pare-feu du serveur SQL logique pour ajouter l’adresse IP de l’ordinateur de passerelle à la liste d’adresses IP autorisées.
 
 > [!NOTE]
-> Si votre pare-feu n’autorise pas le port de sortie 1433, la passerelle ne peut pas accéder directement à Azure SQL. Dans ce cas, vous pouvez utiliser la [copie intermédiaire](https://docs.microsoft.com/azure/data-factory/data-factory-copy-activity-performance#staged-copy) sur SQL Azure Database/SQL Azure DW. Dans ce scénario, vous auriez uniquement besoin du protocole HTTPS (port 443) pour le déplacement des données.
+> Si votre pare-feu n’autorise pas le port de sortie 1433, la passerelle ne peut pas accéder directement à Azure SQL. Dans ce cas, vous pouvez utiliser la [copie intermédiaire](./data-factory-copy-activity-performance.md#staged-copy) sur SQL Database/SQL Managed Instance/SQL Azure DW. Dans ce scénario, vous auriez uniquement besoin du protocole HTTPS (port 443) pour le déplacement des données.
 >
 >
 
@@ -175,7 +175,7 @@ Si votre environnement de réseau d’entreprise utilise un serveur proxy pour a
 
 La passerelle utilise le serveur proxy pour se connecter au service cloud. Cliquez sur le lien **Modifier** pendant l’installation initiale. La boîte de dialogue **Paramètre proxy** s’affiche.
 
-![Définir le proxy avec le gestionnaire de configuration](media/data-factory-data-management-gateway/SetProxySettings.png)
+![Définir le proxy avec le gestionnaire de configuration 1](media/data-factory-data-management-gateway/SetProxySettings.png)
 
 Il existe trois options de configuration :
 
@@ -194,7 +194,7 @@ Une fois la passerelle enregistrée avec succès, si vous souhaitez afficher ou 
 
 Vous pouvez afficher et mettre à jour le proxy HTTP à l’aide de l’outil Gestionnaire de Configuration.
 
-![Définir le proxy avec le gestionnaire de configuration](media/data-factory-data-management-gateway/SetProxyConfigManager.png)
+![Définir le proxy avec le gestionnaire de configuration 2](media/data-factory-data-management-gateway/SetProxyConfigManager.png)
 
 > [!NOTE]
 > Si vous configurez un serveur proxy avec l’authentification NTLM, le service hôte de la passerelle s’exécute sous le compte du domaine. Si vous modifiez le mot de passe du compte du domaine ultérieurement, veillez à mettre à jour les paramètres de configuration pour le service et à redémarrer ce dernier en conséquence. En raison de cette exigence, nous vous conseillons d’utiliser un compte de domaine dédié qui ne nécessite pas de mettre à jour le mot de passe fréquemment pour accéder au serveur proxy.
@@ -223,7 +223,7 @@ Si vous sélectionnez le paramètre **Utiliser le proxy système** pour le proxy
     </system.net>
     ```
 
-    Vous pouvez ajouter des propriétés supplémentaires à l’intérieur de la balise de proxy pour spécifier les paramètres requis comme scriptLocation. Reportez-vous à la page de syntaxe [&lt;proxy&gt;, élément (paramètres réseau)](https://msdn.microsoft.com/library/sa91de1e.aspx) .
+    Vous pouvez ajouter des propriétés supplémentaires à l’intérieur de la balise de proxy pour spécifier les paramètres requis comme scriptLocation. Reportez-vous à la page de syntaxe [&lt;proxy&gt;, élément (paramètres réseau)](/dotnet/framework/configure-apps/file-schema/network/proxy-element-network-settings) .
 
     ```
     <proxy autoDetect="true|false|unspecified" bypassonlocal="true|false|unspecified" proxyaddress="uriString" scriptLocation="uriString" usesystemdefault="true|false|unspecified "/>
@@ -233,7 +233,7 @@ Si vous sélectionnez le paramètre **Utiliser le proxy système** pour le proxy
 > [!IMPORTANT]
 > N’oubliez pas de mettre à jour diahost.exe.config **et** diawp.exe.config.
 
-Outre ces points, vous devez également vérifier que Microsoft Azure figure dans la liste verte de votre entreprise. Vous pouvez télécharger la liste des adresses IP Microsoft Azure valides à partir du [Centre de téléchargement Microsoft](https://www.microsoft.com/download/details.aspx?id=41653).
+Outre ces points, vous devez également vérifier que Microsoft Azure figure dans la liste autorisée de votre entreprise. Vous pouvez télécharger la liste des adresses IP Microsoft Azure valides à partir du [Centre de téléchargement Microsoft](https://www.microsoft.com/download/details.aspx?id=41653).
 
 #### <a name="possible-symptoms-for-firewall-and-proxy-server-related-issues"></a>Symptômes possibles des erreurs liées au pare-feu et au serveur proxy
 Si vous rencontrez l’une des erreurs suivantes, cela signifie que vous avez probablement mal configuré le serveur proxy ou le pare-feu, et que la passerelle ne peut pas se connecter à Data Factory pour s’authentifier. Reportez-vous à la section précédente pour vous assurer que votre pare-feu et votre serveur proxy sont correctement configurés.
@@ -247,9 +247,11 @@ Le port de trafic entrant **8050** est utilisé par l’application **Définitio
 
 Si vous utilisez un pare-feu tiers, vous pouvez ouvrir manuellement le port 8050. Si vous rencontrez des problèmes de pare-feu lors de l’installation de la passerelle, vous pouvez essayer d’utiliser la commande suivante pour installer la passerelle sans configurer le pare-feu.
 
-    msiexec /q /i DataManagementGateway.msi NOFIREWALL=1
+```cmd
+msiexec /q /i DataManagementGateway.msi NOFIREWALL=1
+```
 
-Si vous préférez ne pas ouvrir le port 8050 sur l’ordinateur passerelle, utilisez d’autres mécanismes que l’application **Définition des informations d’identification** pour configurer les informations d’identification de la banque de données. Vous pouvez par exemple utiliser la cmdlet PowerShell [New-AzDataFactoryEncryptValue](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactoryencryptvalue). Consultez la section Configuration des informations d’identification et de la sécurité pour savoir comment configurer les informations d’identification de la banque de données.
+Si vous préférez ne pas ouvrir le port 8050 sur l’ordinateur passerelle, utilisez d’autres mécanismes que l’application **Définition des informations d’identification** pour configurer les informations d’identification de la banque de données. Vous pouvez par exemple utiliser la cmdlet PowerShell [New-AzDataFactoryEncryptValue](/powershell/module/az.datafactory/new-azdatafactoryencryptvalue). Consultez la section Configuration des informations d’identification et de la sécurité pour savoir comment configurer les informations d’identification de la banque de données.
 
 ## <a name="update"></a>Update
 Par défaut, la passerelle de gestion des données est automatiquement mise à jour lorsqu’une version plus récente est disponible. La passerelle n’est pas mise à jour tant que toutes les tâches planifiées ne sont pas terminées. Aucune autre tâche n’est traitée par la passerelle avant la fin de l’opération de mise à jour. Si la mise à jour échoue, la passerelle est restaurée vers son ancienne version.
@@ -318,7 +320,7 @@ La page d’accueil permet d’effectuer les actions suivantes :
 * **Inscrire** à l’aide d’une clé à partir du portail.
 * **Arrêter** et démarrer le **service hôte de passerelle de gestion des données** sur l’ordinateur de passerelle.
 * **Planifier les mises à jour** à un moment spécifique de la journée.
-* Afficher la date de la **dernière mise à jour**de la passerelle.
+* Afficher la date de la **dernière mise à jour** de la passerelle.
 
 ### <a name="settings-page"></a>Page Paramètres
 La page Paramètres permet d’effectuer les actions suivantes :
@@ -334,7 +336,7 @@ Cette fonctionnalité sera activée plus tard. Dans les futures mises à jour (v
 ### <a name="diagnostics-page"></a>Page Diagnostics
 La page Diagnostics permet d’effectuer les actions suivantes :
 
-* Activer la **journalisation**détaillée, afficher les journaux d’activité dans l’observateur d’événements et envoyer des journaux d’activité à Microsoft en cas de défaillance.
+* Activer la **journalisation** détaillée, afficher les journaux d’activité dans l’observateur d’événements et envoyer des journaux d’activité à Microsoft en cas de défaillance.
 * **Tester la connexion** à une source de données.
 
 ### <a name="help-page"></a>Help page
@@ -423,7 +425,7 @@ Cette section décrit les opérations pour déplacer une passerelle client d’u
     ![Gestionnaire de configuration](./media/data-factory-data-management-gateway/ConfigurationManager.png)
 6. Dans la page **Configurer** du portail, cliquez sur **Recréer une clé** dans la barre de commandes, puis, dans le message d’avertissement, cliquez sur **Oui**. Cliquez sur le **bouton de copie** en regard du texte de la clé qui copie la clé dans le presse-papiers. La passerelle de l’ancienne machine cesse de fonctionner dès que vous recréez la clé.
 
-    ![Recréer une clé](./media/data-factory-data-management-gateway/RecreateKey.png)
+    ![Recréer une clé 2](./media/data-factory-data-management-gateway/RecreateKey.png)
 7. Collez la **clé** dans la zone de texte sur la page **Inscrire la passerelle** du **Gestionnaire de configuration de passerelle de gestion des données** sur votre machine. (Facultatif) Cochez la case **Afficher la clé de passerelle** pour afficher le texte de la clé.
 
     ![Copier la clé et s’inscrire](./media/data-factory-data-management-gateway/CopyKeyAndRegister.png)
@@ -470,7 +472,7 @@ Pour chiffrer les informations d’identification dans Data Factory Editor, proc
 
 Quand vous utilisez l’application **Définition des informations d’identification**, le portail chiffre les informations d’identification avec le certificat que vous avez spécifié dans l’onglet **Certificat** du **Gestionnaire de configuration de passerelle** sur l’ordinateur de passerelle.
 
-Si vous recherchez une approche basée sur une API pour chiffrer les informations d’identification, vous pouvez utiliser la cmdlet PowerShell [New-AzDataFactoryEncryptValue](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) pour chiffrer les informations d’identification. L'applet de commande utilise le certificat qui a servi à configurer la passerelle pour chiffrer les informations d'identification. Vous ajoutez des informations d’identification chiffrées pour l’élément **EncryptedCredential** de **connectionString** dans JSON. Vous utilisez JSON avec la cmdlet [New-AzDataFactoryLinkedService](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactorylinkedservice) ou dans Data Factory Editor.
+Si vous recherchez une approche basée sur une API pour chiffrer les informations d’identification, vous pouvez utiliser la cmdlet PowerShell [New-AzDataFactoryEncryptValue](/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) pour chiffrer les informations d’identification. L'applet de commande utilise le certificat qui a servi à configurer la passerelle pour chiffrer les informations d'identification. Vous ajoutez des informations d’identification chiffrées pour l’élément **EncryptedCredential** de **connectionString** dans JSON. Vous utilisez JSON avec la cmdlet [New-AzDataFactoryLinkedService](/powershell/module/az.datafactory/new-azdatafactorylinkedservice) ou dans Data Factory Editor.
 
 ```JSON
 "connectionString": "Data Source=<servername>;Initial Catalog=<databasename>;Integrated Security=True;EncryptedCredential=<encrypted credential>",
@@ -543,4 +545,4 @@ Remove-AzDataFactoryGateway -Name JasonHDMG_byPSRemote -ResourceGroupName ADF_Re
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Consultez la page [Déplacement de données entre des sources locales et le cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) . Dans cette procédure pas à pas, vous créez un pipeline qui utilise la passerelle qui déplace les données d’une base de données SQL Server locale vers un objet blob Azure.
+* Consultez la page [Déplacement de données entre des sources locales et le cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) . Dans cette procédure pas à pas, vous créez un pipeline qui utilise la passerelle qui déplace les données d’une base de données SQL Server vers un objet blob Azure.

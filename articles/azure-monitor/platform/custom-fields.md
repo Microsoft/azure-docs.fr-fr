@@ -6,21 +6,24 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 08/23/2019
-ms.openlocfilehash: bfb0a73631564c96a4af745fe9d7540a3a84f9c3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 496dab24f636c97e1c7b27b871e1fded9216277d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655359"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91448555"
 ---
 # <a name="create-custom-fields-in-a-log-analytics-workspace-in-azure-monitor-preview"></a>Créer des champs personnalisés dans un espace de travail Log Analytics dans Azure Monitor (préversion)
 
 > [!NOTE]
 > Cet article décrit comment analyser les données texte dans un espace de travail Log Analytics au moment de leur collecte. Nous vous recommandons d’analyser les données texte dans un filtre de requête une fois qu’elles ont été collectées en suivant les instructions fournies dans [Analyser les données texte dans Azure Monitor](../log-query/parse-text.md). Cette méthode offre plusieurs avantages par rapport à l’utilisation de champs personnalisés.
 
+> [!IMPORTANT]
+> Les champs personnalisés augmentent la quantité de données collectées dans l’espace de travail Log Analytics, ce qui peut faire monter vos coûts. Pour plus d'informations, consultez [Gérer l’utilisation et les coûts avec les journaux Azure Monitor](manage-cost-storage.md#pricing-model).
+
 La fonction **Champs personnalisés** d’Azure Monitor vous permet de compléter les enregistrements existants dans votre espace de travail Log Analytics en leur ajoutant vos propres champs de recherche.  Les champs personnalisés sont renseignés automatiquement à partir des données extraites d’autres propriétés du même enregistrement.
 
-![Vue d’ensemble](media/custom-fields/overview.png)
+![Le schéma montre un enregistrement d’origine associé à un enregistrement modifié dans un espace de travail Log Analytics avec des paires de valeurs de propriété ajoutées à la propriété d’origine dans l’enregistrement modifié.](media/custom-fields/overview.png)
 
 Par exemple, l’enregistrement ci-dessous contient des données utiles dans la description de l’événement. L’extraction de ces données dans une propriété séparée les rend disponibles pour des opérations de tri et de filtrage.
 
@@ -78,7 +81,7 @@ La section suivante décrit la procédure complète de création d’un champ pe
 
 Nous spécifions la requête suivante pour renvoyer tous les événements du Gestionnaire de contrôle des services dont l’ID d’événement est 7036, c’est-à-dire l’événement indiquant le démarrage ou l’arrêt d’un service.
 
-![Requête](media/custom-fields/query.png)
+![La capture d’écran montre une requête pour une source et un ID d’événement.](media/custom-fields/query.png)
 
 Ensuite, nous sélectionnons puis développons un enregistrement ayant l’ID d’événement 7036.
 
@@ -98,7 +101,7 @@ Nous mettons en surbrillance le nom du service dans la propriété **RenderedDes
 
 Nous constatons que le nom du service est identifié correctement pour certains enregistrements, mais pas pour d’autres.   Les **Résultats de la recherche** montrent que cette partie du nom de **Carte de performance WMI** n’est pas sélectionnée.  Le **Résumé** montre qu’un seul enregistrement identifié **Programme d’installation de modules** au lieu de **Programme d’installation de modules Windows**.  
 
-![Résultats de la recherche](media/custom-fields/search-results-01.png)
+![Capture d’écran montrant des parties du nom de service en surbrillance dans le volet des résultats de recherche et un nom de service incorrect en surbrillance dans le résumé.](media/custom-fields/search-results-01.png)
 
 Commençons par l’enregistrement **Carte de performance WMI** .  Cliquez sur son icône de modification, puis sur **Modifier cette mise en surbrillance**.  
 
@@ -110,7 +113,7 @@ Nous étendons la mise en surbrillance afin d’inclure le mot **WMI** , puis no
 
 Nous constatons que les entrées de **Carte de performance WMI** ont été corrigées, et que Log Analytics a utilisé ces informations pour corriger les enregistrements de **Programme d’installation pour les modules Windows**.
 
-![Résultats de la recherche](media/custom-fields/search-results-02.png)
+![Capture d’écran montrant le nom complet du service en surbrillance dans le volet des résultats de recherche et les noms de service corrects en surbrillance dans le résumé.](media/custom-fields/search-results-02.png)
 
 Nous pouvons maintenant exécuter une requête qui vérifie que **Service_CF** est créé, mais qu’il n’est encore ajouté à aucun enregistrement. C’est parce que le champ personnalisé ne fonctionne pas sur les enregistrements existants. Nous devons attendre que de nouveaux enregistrements soient collectés.
 

@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Zscaler One | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Zscaler One.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: f352e00d-68d3-4a77-bb92-717d055da56f
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/24/2019
 ms.author: jeedes
-ms.openlocfilehash: d23fc94fba9a9b750f2977fd9c5d8297e4da8d5c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3a9279189e3767b035256726a1da53b9edc8392f
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68825921"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608984"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zscaler-one"></a>Didacticiel : Intégration d’Azure Active Directory à Zscaler One
 
@@ -31,7 +27,7 @@ Intégrer Zscaler One à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Zscaler One (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -114,19 +110,19 @@ Pour configurer l’authentification unique Azure AD avec Zscaler One, effectuez
 
 5. Votre application Zscaler One s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration d’attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut. Cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Attributs d’utilisateur**.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant User Attributes avec l’icône Edit sélectionnée.](common/edit-attribute.png)
 
 6. En plus de ce qui précède, l’application Zscaler One s’attend à ce que quelques attributs supplémentaires soient repassés dans la réponse SAML. Dans la section **Revendications des utilisateurs** de la boîte de dialogue **Attributs utilisateur**, effectuez les étapes suivantes pour ajouter le jeton SAML comme indiqué dans le tableau ci-dessous :
     
     | Name | Attribut source |
     | ---------| ------------ |
-    | memberOf     | user.assignedroles |
+    | memberOf | user.assignedroles |
 
     a. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](common/new-save-attribute.png)
+    ![Capture d’écran montrant User claims avec l’option permettant d’ajouter une nouvelle revendication.](common/new-save-attribute.png)
 
-    ![image](common/new-attribute-details.png)
+    ![Capture d’écran montrant la boîte de dialogue Manage user claims où vous pouvez entrer les valeurs décrites.](common/new-attribute-details.png)
 
     b. Dans la zone de texte **Attribut**, indiquez le nom d’attribut pour cette ligne.
 
@@ -139,7 +135,7 @@ Pour configurer l’authentification unique Azure AD avec Zscaler One, effectuez
     f. Cliquez sur **Enregistrer**.
 
     > [!NOTE]
-    > Cliquez [ici](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-app-role-management) pour savoir comment configurer un rôle dans Azure AD.
+    > Cliquez [ici](../develop/active-directory-enterprise-app-role-management.md) pour savoir comment configurer un rôle dans Azure AD.
 
 7. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -169,7 +165,7 @@ Pour configurer l’authentification unique Azure AD avec Zscaler One, effectuez
 
 4. Sélectionnez **Administration > Authentification > Paramètres d'authentification** et procédez comme suit :
    
-    ![Administration](./media/zscaler-one-tutorial/ic800206.png "Administration")
+    ![Capture d’écran montrant le site Zscaler One avec les étapes décrites.](./media/zscaler-one-tutorial/ic800206.png "Administration")
 
     a. Sous Type d'authentification, choisissez **SAML**.
 
@@ -197,7 +193,7 @@ Pour configurer l’authentification unique Azure AD avec Zscaler One, effectuez
 
 6. Dans la page **Configure User Authentication** , procédez comme suit :
 
-    ![Administration](./media/zscaler-one-tutorial/ic800207.png)
+    ![Capture d’écran montrant la boîte de dialogue Configure User Authentication avec l’option Activate sélectionnée.](./media/zscaler-one-tutorial/ic800207.png)
 
     a. Passez la souris sur le menu **Activation** en bas à gauche.
 
@@ -209,12 +205,12 @@ Pour configurer l’authentification unique Azure AD avec Zscaler One, effectuez
 1. Démarrez **Internet Explorer**.
 
 2. Pour ouvrir la boîte de dialogue **Options Internet**, sélectionnez **Options Internet** dans le menu **Outils**.   
-    
-     ![Options Internet](./media/zscaler-one-tutorial/ic769492.png "Options Internet")
+
+    ![Options Internet](./media/zscaler-one-tutorial/ic769492.png "Options Internet")
 
 3. Cliquez sur l’onglet **Connexions** .   
-  
-     ![Connexions](./media/zscaler-one-tutorial/ic769493.png "Connexions")
+
+    ![Connexions](./media/zscaler-one-tutorial/ic769493.png "Connexions")
 
 4. Cliquez sur **Paramètres réseau** pour ouvrir la boîte de dialogue **Paramètres réseau**.
 
@@ -280,15 +276,15 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez l’utilisateur tel que **Britta Simon** dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-    ![image](./media/zscaler-one-tutorial/tutorial_zscalerone_users.png)
+    ![Capture d’écran montrant la boîte de dialogue Utilisateurs et groupes où vous pouvez sélectionner un utilisateur.](./media/zscaler-one-tutorial/tutorial_zscalerone_users.png)
 
 6. Dans la boîte de dialogue **Sélectionner un rôle**, choisissez le rôle d’utilisateur approprié dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-    ![image](./media/zscaler-one-tutorial/tutorial_zscalerone_roles.png)
+    ![Capture d’écran montrant la boîte de dialogue Sélectionner un rôle où vous pouvez sélectionner un rôle d’utilisateur.](./media/zscaler-one-tutorial/tutorial_zscalerone_roles.png)
 
 7. Dans la boîte de dialogue **Ajouter une attribution**, sélectionnez le bouton **Attribuer**.
 
-    ![image](./media/zscaler-one-tutorial/tutorial_zscalerone_assign.png)
+    ![Capture d’écran montrant la boîte de dialogue Add Assignment dans laquelle vous pouvez sélectionner Assign.](./media/zscaler-one-tutorial/tutorial_zscalerone_assign.png)
 
 ### <a name="create-zscaler-one-test-user"></a>Créer un utilisateur de test Zscaler One
 
@@ -301,13 +297,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans Zscaler 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Zscaler One dans le panneau d’accès doit vous connecter automatiquement à l’application Zscaler One pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Zscaler One dans le panneau d’accès doit vous connecter automatiquement à l’application Zscaler One pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

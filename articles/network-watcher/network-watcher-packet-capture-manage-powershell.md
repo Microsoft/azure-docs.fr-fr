@@ -7,17 +7,17 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 06263f85f7d6ad6cc80724baab01124833498739
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c9a7af7575fcdd19d83e5a4f38ef03ef8948b8c0
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79129658"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94963468"
 ---
 # <a name="manage-packet-captures-with-azure-network-watcher-using-powershell"></a>Gérer les captures de paquets avec Azure Network Watcher à l’aide de PowerShell
 
@@ -48,7 +48,7 @@ Cet article part du principe que vous disposez des ressources suivantes :
 * Une machine virtuelle avec l’extension de capture de paquets activée.
 
 > [!IMPORTANT]
-> La capture de paquets requiert une extension de machine virtuelle `AzureNetworkWatcherExtension`. Pour installer l’extension sur une machine virtuelle Windows, consultez la page [Azure Network Watcher Agent virtual machine extension for Windows](../virtual-machines/windows/extensions-nwa.md) (Extension de machine virtuelle d’agent Azure Network Watcher pour Windows). Pour une machine virtuelle Linux, consultez la page [Azure Network Watcher Agent virtual machine extension for Linux](../virtual-machines/linux/extensions-nwa.md) (Extension de machine virtuelle d’agent Azure Network Watcher pour Linux).
+> La capture de paquets requiert une extension de machine virtuelle `AzureNetworkWatcherExtension`. Pour installer l’extension sur une machine virtuelle Windows, consultez la page [Azure Network Watcher Agent virtual machine extension for Windows](../virtual-machines/extensions/network-watcher-windows.md) (Extension de machine virtuelle d’agent Azure Network Watcher pour Windows). Pour une machine virtuelle Linux, consultez la page [Azure Network Watcher Agent virtual machine extension for Linux](../virtual-machines/extensions/network-watcher-linux.md) (Extension de machine virtuelle d’agent Azure Network Watcher pour Linux).
 
 ## <a name="install-vm-extension"></a>Installer une extension de machine virtuelle
 
@@ -281,17 +281,3 @@ Découvrez comment automatiser les captures de paquets avec des alertes de machi
 Recherchez si certains types de trafic sont autorisés au sein ou en dehors de votre machine virtuelle en consultant [Check IP flow verify (Vérifier les flux IP)](diagnose-vm-network-traffic-filtering-problem.md)
 
 <!-- Image references -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-

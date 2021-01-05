@@ -14,14 +14,16 @@ ms.topic: article
 ms.date: 03/18/2019
 ms.author: anilmur
 ms.reviewer: juliako
-ms.openlocfilehash: 059816284e39c65bb772bd02f066d73da624722f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4264d1c0d83f14da02b26107d336521250fcf13b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74887762"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89257855"
 ---
-# <a name="crop-videos-with-media-encoder-standard"></a>Rogner des vidéos avec l’encodeur multimédia standard  
+# <a name="crop-videos-with-media-encoder-standard"></a>Rogner des vidéos avec l’encodeur multimédia standard
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)] 
 
 Vous pouvez utiliser Media Encoder Standard (MES) pour rogner votre vidéo d’entrée. Le rognage consiste à sélectionner une fenêtre rectangulaire dans l’image vidéo et à encoder uniquement les pixels dans cette fenêtre. Le schéma suivant permet d’illustrer le processus.
 
@@ -43,89 +45,91 @@ Dans l’exemple ci-dessous :
 5. Dans la phase de codage, la tâche consiste à produire trois couches avec des résolutions respectives de 1440 x 1080, 960 x 720 et 480 x 360.
 
 ### <a name="json-preset"></a>Présélection JSON
+
+```json
+{
+  "Version": 1.0,
+  "Sources": [
     {
-      "Version": 1.0,
-      "Sources": [
-        {
-          "Streams": [],
-          "Filters": {
-            "Crop": {
-                "X": 240,
-                "Y": 0,
-                "Width": 1440,
-                "Height": 1080
-            }
-          },
-          "Pad": true
+      "Streams": [],
+      "Filters": {
+        "Crop": {
+          "X": 240,
+          "Y": 0,
+          "Width": 1440,
+          "Height": 1080
         }
-      ],
-      "Codecs": [
+      },
+      "Pad": true
+    }
+  ],
+  "Codecs": [
+    {
+      "KeyFrameInterval": "00:00:02",
+      "H264Layers": [
         {
-          "KeyFrameInterval": "00:00:02",
-          "H264Layers": [
-            {
-              "Profile": "Auto",
-              "Level": "auto",
-              "Bitrate": 3400,
-              "MaxBitrate": 3400,
-              "BufferWindow": "00:00:05",
-              "Width": 1440,
-              "Height": 1080,
-              "BFrames": 3,
-              "ReferenceFrames": 3,
-              "AdaptiveBFrame": true,
-              "Type": "H264Layer",
-              "FrameRate": "0/1"
-            },
-            {
-              "Profile": "Auto",
-              "Level": "auto",
-              "Bitrate": 2250,
-              "MaxBitrate": 2250,
-              "BufferWindow": "00:00:05",
-              "Width": 960,
-              "Height": 720,
-              "BFrames": 3,
-              "ReferenceFrames": 3,
-              "AdaptiveBFrame": true,
-              "Type": "H264Layer",
-              "FrameRate": "0/1"
-            },
-            {
-              "Profile": "Auto",
-              "Level": "auto",
-              "Bitrate": 1250,
-              "MaxBitrate": 1250,
-              "BufferWindow": "00:00:05",
-              "Width": 480,
-              "Height": 360,
-              "BFrames": 3,
-              "ReferenceFrames": 3,
-              "AdaptiveBFrame": true,
-              "Type": "H264Layer",
-              "FrameRate": "0/1"
-            }
-          ],
-          "Type": "H264Video"
+          "Profile": "Auto",
+          "Level": "auto",
+          "Bitrate": 3400,
+          "MaxBitrate": 3400,
+          "BufferWindow": "00:00:05",
+          "Width": 1440,
+          "Height": 1080,
+          "BFrames": 3,
+          "ReferenceFrames": 3,
+          "AdaptiveBFrame": true,
+          "Type": "H264Layer",
+          "FrameRate": "0/1"
         },
         {
-          "Profile": "AACLC",
-          "Channels": 2,
-          "SamplingRate": 48000,
-          "Bitrate": 128,
-          "Type": "AACAudio"
+          "Profile": "Auto",
+          "Level": "auto",
+          "Bitrate": 2250,
+          "MaxBitrate": 2250,
+          "BufferWindow": "00:00:05",
+          "Width": 960,
+          "Height": 720,
+          "BFrames": 3,
+          "ReferenceFrames": 3,
+          "AdaptiveBFrame": true,
+          "Type": "H264Layer",
+          "FrameRate": "0/1"
+        },
+        {
+          "Profile": "Auto",
+          "Level": "auto",
+          "Bitrate": 1250,
+          "MaxBitrate": 1250,
+          "BufferWindow": "00:00:05",
+          "Width": 480,
+          "Height": 360,
+          "BFrames": 3,
+          "ReferenceFrames": 3,
+          "AdaptiveBFrame": true,
+          "Type": "H264Layer",
+          "FrameRate": "0/1"
         }
       ],
-      "Outputs": [
-        {
-          "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",
-          "Format": {
-            "Type": "MP4Format"
-          }
-        }
-      ]
+      "Type": "H264Video"
+    },
+    {
+      "Profile": "AACLC",
+      "Channels": 2,
+      "SamplingRate": 48000,
+      "Bitrate": 128,
+      "Type": "AACAudio"
     }
-
+  ],
+  "Outputs": [
+    {
+      "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",
+      "Format": {
+        "Type": "MP4Format"
+      }
+    }
+  ]
+}
+```
 
 ## <a name="restrictions-on-cropping"></a>Restrictions sur le rognage
 La fonctionnalité de rognage est destinée à être manuelle. Vous devez charger votre vidéo d’entrée dans un outil d’édition approprié qui vous permet de sélectionner des images d’intérêt, de positionner le curseur pour déterminer les décalages du rectangle de rognage, de déterminer que la présélection d’encodage est réglée pour une vidéo en particulier, etc. Cette fonctionnalité n’est pas destinée à activer des éléments tels que la détection automatique et la suppression des bordures noires letterbox/pillarbox de votre vidéo d’entrée.

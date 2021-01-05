@@ -4,15 +4,15 @@ description: Dans cet article, vous allez apprendre à déployer un pare-feu Azu
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/19/2019
 ms.author: victorh
-ms.openlocfilehash: 33dcebf14f4d534962783a30ec94f7ff6529ae0d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 46ecc4754a064e26e61365ed6ca167606bef9d81
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74195921"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94656103"
 ---
 # <a name="deploy-an-azure-firewall-with-availability-zones-using-azure-powershell"></a>Déployer un pare-feu Azure avec des zones de disponibilité à l’aide d’Azure PowerShell
 
@@ -54,10 +54,10 @@ New-AzFirewall `
   -ResourceGroupName $rgName `
   -Location centralus `
   -VirtualNetwork $vnet `
-  -PublicIpAddress @($pip1)
+  -PublicIpAddress @($pip1) `
   -Zone 1,2,3
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Tutoriel : Surveiller les journaux d’activité de Pare-feu Azure](./tutorial-diagnostics.md)
+- [Tutoriel : Surveiller les journaux d’activité de Pare-feu Azure](./firewall-diagnostics.md)

@@ -10,17 +10,18 @@ tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/18/2018
 ms.author: kaanan
-ms.openlocfilehash: 56288a65dc9e5b12a12393965b9670e394146181
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 8e3a56e4a6eb1fb6eb633021178ef78f8ac7287d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80234975"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014786"
 ---
 # <a name="work-with-a-virtual-network-tap-using-the-azure-cli"></a>Utiliser un TAP de réseau virtuel à l’aide d’Azure CLI
 

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 02/03/2020
-ms.openlocfilehash: 5cab7f962a829ab8609325e8bb1b35498568726c
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.openlocfilehash: 4d378151b72ab09e8b51467ce09ec9d43c517813
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82994180"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94657956"
 ---
 # <a name="create-hdinsight-clusters-using-the-azure-cli"></a>Créer des clusters HDInsight à l’aide de l’interface de ligne de commande Azure
 
@@ -23,13 +23,9 @@ Les étapes de cette procédure présentent la création d’un cluster HDInsigh
 
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="prerequisites"></a>Prérequis
-
-Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli) pour connaître les étapes à suivre.
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 ## <a name="create-a-cluster"></a>Créer un cluster
 
@@ -42,7 +38,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
     # az account set --subscription "SUBSCRIPTIONID"
     ```
 
-2. Définir des variables d’environnement L’utilisation des variables de cet article repose sur Bash. De petites modifications seront nécessaires si vous utilisez d'autres environnements. Consultez [az-hdinsight-create](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) pour accéder à une liste complète des paramètres possibles pour la création du cluster.
+2. Définir des variables d’environnement L’utilisation des variables de cet article repose sur Bash. De petites modifications seront nécessaires si vous utilisez d'autres environnements. Consultez [az-hdinsight-create](/cli/azure/hdinsight#az-hdinsight-create) pour accéder à une liste complète des paramètres possibles pour la création du cluster.
 
     |Paramètre | Description |
     |---|---|
@@ -68,7 +64,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
     export componentVersion=Hadoop=2.7
     ```
 
-3. [Créez le groupe de ressources](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-create) en entrant la commande ci-dessous :
+3. [Créez le groupe de ressources](/cli/azure/group#az-group-create) en entrant la commande ci-dessous :
 
     ```azurecli-interactive
     az group create \
@@ -78,7 +74,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
 
     Pour obtenir la liste des emplacements valides, utilisez la commande `az account list-locations`, puis l’un des emplacements de la valeur `name`.
 
-4. [Créez un compte de stockage Azure](https://docs.microsoft.com/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create) en saisissant la commande ci-dessous :
+4. [Créez un compte de stockage Azure](/cli/azure/storage/account#az-storage-account-create) en saisissant la commande ci-dessous :
 
     ```azurecli-interactive
     # Note: kind BlobStorage is not available as the default storage account.
@@ -91,7 +87,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
         --sku Standard_LRS
     ```
 
-5. [Extrayez la clé primaire du compte de stockage Azure](https://docs.microsoft.com/cli/azure/storage/account/keys?view=azure-cli-latest#az-storage-account-keys-list) et stockez-la dans une variable en entrant la commande ci-dessous :
+5. [Extrayez la clé primaire du compte de stockage Azure](/cli/azure/storage/account/keys#az-storage-account-keys-list) et stockez-la dans une variable en entrant la commande ci-dessous :
 
     ```azurecli-interactive
     export AZURE_STORAGE_KEY=$(az storage account keys list \
@@ -100,7 +96,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
         --query [0].value -o tsv)
     ```
 
-6. [Créez un conteneur de stockage Azure](https://docs.microsoft.com/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create) en saisissant la commande suivante :
+6. [Créez un conteneur de stockage Azure](/cli/azure/storage/container#az-storage-container-create) en saisissant la commande suivante :
 
     ```azurecli-interactive
     az storage container create \
@@ -109,7 +105,7 @@ Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interf
         --account-name $AZURE_STORAGE_ACCOUNT
     ```
 
-7. [Créez le cluster HDInsight](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-create) en saisissant la commande suivante :
+7. [Créez le cluster HDInsight](/cli/azure/hdinsight#az-hdinsight-create) en saisissant la commande suivante :
 
     ```azurecli-interactive
     az hdinsight create \

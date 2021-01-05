@@ -5,19 +5,20 @@ author: bandersmsft
 ms.reviewer: judupont
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 02/10/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 1c4522bed191ef4142cc603bf0e1d22f086111ee
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b4c2db76405e7bad7653c1801eb2bcc5db82fe9b
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77200586"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88684794"
 ---
 # <a name="open-banking-psd2-and-strong-customer-authentication-sca-for-azure-customers"></a>Système bancaire ouvert et authentification forte du client pour les clients Azure
 
-Depuis le 14 septembre 2019, les banques des 31 pays de l’[Espace économique européen](https://en.wikipedia.org/wiki/European_Economic_Area) sont tenues de vérifier l’identité de la personne qui effectue un achat en ligne avant le traitement du paiement. Cette vérification nécessite l’authentification multifacteur pour garantir la sécurité et la protection de vos achats en ligne. La date de cette exigence de vérification sera différée pour certains pays. Pour plus d’informations, consultez [Forum aux questions Microsoft sur le système bancaire ouvert](https://support.microsoft.com/en-us/help/4517854?preview).
+Depuis le 14 septembre 2019, les banques des 31 pays/régions de [l’Espace économique européen](https://en.wikipedia.org/wiki/European_Economic_Area) sont tenues de vérifier l’identité de la personne qui effectue un achat en ligne avant le traitement du paiement. Cette vérification nécessite l’authentification multifacteur pour garantir la sécurité et la protection de vos achats en ligne. La date de cette exigence de vérification sera différée pour certains pays/régions. Pour plus d’informations, consultez [Forum aux questions Microsoft sur le système bancaire ouvert](https://support.microsoft.com/en-us/help/4517854?preview).
 
 ## <a name="what-psd2-means-for-azure-customers"></a>Signification du système bancaire ouvert pour les clients Azure
 

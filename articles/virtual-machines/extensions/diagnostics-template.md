@@ -9,18 +9,19 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 8cde8fe7-977b-43d2-be74-ad46dc946058
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.topic: article
 ms.date: 05/31/2017
 ms.author: mimckitt
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: d100f054da5f82bc4dea51e054a28cca07f5de7b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 181f226a4d7aa37ffd8c667db4736a96450e2be5
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81258828"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94955954"
 ---
 # <a name="use-monitoring-and-diagnostics-with-a-windows-vm-and-azure-resource-manager-templates"></a>Utiliser la surveillance et les diagnostics avec une machine virtuelle Windows et des modèles Azure Resource Manager
 L’extension Diagnostics Azure fournit des fonctionnalités d’analyse et de diagnostics sur une machine virtuelle Azure basée sur Windows. Vous pouvez activer ces fonctionnalités sur la machine virtuelle en incluant l’extension dans le modèle Azure Resource Manager. Pour plus d’informations sur l’ajout d’une extension dans un modèle de machine virtuelle, consultez [Création de modèles Azure Resource Manager avec des extensions de machine virtuelle](../windows/template-description.md#extensions) . Cet article décrit comment ajouter l’extension Diagnostics Azure à un modèle de machine virtuelle Windows.  
@@ -79,7 +80,7 @@ La valeur de la propriété *name* peut être utilisée pour faire référence �
 
 L’élément *typeHandlerVersion* spécifie la version de l’extension que vous souhaitez utiliser. Le fait de définir la version mineure *autoUpgradeMinorVersion* sur **true** garantit que vous obtenez la dernière version mineure de l’extension qui est disponible. Il est fortement recommandé de toujours définir *autoUpgradeMinorVersion* sur **true** afin de toujours utiliser l’extension Diagnostics la plus récente avec l’ensemble des nouvelles fonctionnalités et des correctifs de bogues. 
 
-L’élément *settings* contient des propriétés de configuration pour l’extension pouvant être définies et lues à partir de l’extension (on parle alors parfois de configuration publique). La propriété *xmlcfg* comporte la configuration XML des journaux de diagnostic, compteurs de performances, etc. qui sont collectés par l’agent de diagnostics. Pour plus d’informations sur le schéma XML, consultez la page [Schéma de configuration des diagnostics](https://msdn.microsoft.com/library/azure/dn782207.aspx). Une pratique courante consiste à stocker la configuration XML réelle en tant que variable dans le modèle Azure Resource Manager, puis à la concaténer et la coder en base64 pour définir la valeur de *xmlcfg*. Consultez la section [Variables de configuration des diagnostics](#diagnostics-configuration-variables) pour en savoir plus sur la façon de stocker le code XML dans des variables. La propriété *storageAccount* spécifie le nom du compte de stockage vers lequel les données de diagnostics sont transférées. 
+L’élément *settings* contient des propriétés de configuration pour l’extension pouvant être définies et lues à partir de l’extension (on parle alors parfois de configuration publique). La propriété *xmlcfg* comporte la configuration XML des journaux de diagnostic, compteurs de performances, etc. qui sont collectés par l’agent de diagnostics. Pour plus d’informations sur le schéma XML, consultez la page [Schéma de configuration des diagnostics](../../azure-monitor/platform/diagnostics-extension-schema-windows.md). Une pratique courante consiste à stocker la configuration XML réelle en tant que variable dans le modèle Azure Resource Manager, puis à la concaténer et la coder en base64 pour définir la valeur de *xmlcfg*. Consultez la section [Variables de configuration des diagnostics](#diagnostics-configuration-variables) pour en savoir plus sur la façon de stocker le code XML dans des variables. La propriété *storageAccount* spécifie le nom du compte de stockage vers lequel les données de diagnostics sont transférées. 
 
 Les propriétés dans *protectedSettings* (parfois désignées par le terme « configuration privée ») peuvent être définies, mais ne peuvent pas être lues ensuite. La nature en écriture seule de *protectedSettings* est utile pour stocker des secrets tels que la clé de compte de stockage où les données de diagnostics sont écrites.    
 
@@ -117,7 +118,7 @@ L’extrait de code JSON de l’extension Diagnostics qui précède définit une
 
 La propriété *xmlcfg* de l’extension Diagnostics est définie à l’aide de plusieurs variables concaténées. Les valeurs de ces variables étant au format XML, elles doivent être correctement placées dans une séquence d’échappement lorsque vous définissez les variables JSON.
 
-L’exemple suivant décrit le XML de configuration des diagnostics qui collecte les compteurs de performances au niveau du système standard, ainsi que certains journaux des événements Windows et journaux d’activité d’infrastructure de diagnostics. Il a été correctement placé dans une séquence d’échappement et mis en forme afin que la configuration puisse être collée directement dans la section des variables de votre modèle. Consultez le [schéma de configuration des diagnostics](https://msdn.microsoft.com/library/azure/dn782207.aspx) pour obtenir un exemple plus lisible du XML de configuration.
+L’exemple suivant décrit le XML de configuration des diagnostics qui collecte les compteurs de performances au niveau du système standard, ainsi que certains journaux des événements Windows et journaux d’activité d’infrastructure de diagnostics. Il a été correctement placé dans une séquence d’échappement et mis en forme afin que la configuration puisse être collée directement dans la section des variables de votre modèle. Consultez le [schéma de configuration des diagnostics](../../azure-monitor/platform/diagnostics-extension-schema-windows.md) pour obtenir un exemple plus lisible du XML de configuration.
 
 ```json
 "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
@@ -157,26 +158,26 @@ La valeur MetricAggregation de *PT1M* et *PT1H* fait référence à une agrégat
 ## <a name="wadmetrics-tables-in-storage"></a>Tables WADMetrics dans le stockage
 La configuration des métriques ci-dessus génère les tables de votre compte de stockage de diagnostics avec les conventions de nommage suivantes :
 
-* **WADMetrics** : préfixe standard pour toutes les tables WADMetrics
-* **PT1H** ou **PT1M** : indique que la table contient des données agrégées sur 1 heure ou 1 minute
-* **P10D** : indique que la table contiendra les données pour une période de 10 jours à partir du moment où la table a commencé à collecter les données
-* **V2S** : constante de chaîne
-* **aaaammjj** : date à laquelle la table a démarré la collecte de données
+* **WADMetrics** : Préfixe standard pour toutes les tables WADMetrics
+* **PT1H** ou **PT1M** : Indique que la table contient des données agrégées sur 1 heure ou 1 minute
+* **P10D** : Indique que la table contient les données d’une période de 10 jours à partir du moment où la table a commencé à collecter les données
+* **V2S** : Constante de chaîne
+* **aaaammjj** : Date à laquelle la table a démarré la collecte de données
 
-Exemple : *WADMetricsPT1HP10DV2S20151108* contient les données de mesures agrégées pendant une heure et pour une période de 10 jours commençant le 11 novembre 2015    
+Exemple : *WADMetricsPT1HP10DV2S20151108* contient les données de métriques agrégées sur une heure pendant 10 jours à partir du 11 novembre 2015    
 
 Chaque table WADMetrics contient les colonnes suivantes :
 
-* **PartitionKey** : la clé de partition se base sur la valeur *resourceID* pour identifier de manière unique la ressource de machine virtuelle. Par exemple : `002Fsubscriptions:<subscriptionID>:002FresourceGroups:002F<ResourceGroupName>:002Fproviders:002FMicrosoft:002ECompute:002FvirtualMachines:002F<vmName>`  
-* **RowKey** : suit le format `<Descending time tick>:<Performance Counter Name>`. Le calcul du cycle horaire décroissant correspond aux cycles horaires maximaux moins l’heure de début de la période d’agrégation. Par exemple, si la période d’échantillonnage a démarré le 10 novembre 2015 à 00h00 UTC, le calcul est le suivant : `DateTime.MaxValue.Ticks - (new DateTime(2015,11,10,0,0,0,DateTimeKind.Utc).Ticks)`. Pour le compteur de performances d’octets disponibles en mémoire, la clé de ligne a l’aspect suivant : `2519551871999999999__:005CMemory:005CAvailable:0020Bytes`
-* **CounterName** : nom du compteur de performances. Cela correspond à l’élément *counterSpecifier* défini dans la configuration XML.
-* **Maximum** : valeur maximale du compteur de performances sur la période d’agrégation.
-* **Minimum** : valeur minimale du compteur de performances sur la période d’agrégation.
-* **Total** : somme de toutes les valeurs du compteur de performances signalées sur la période d’agrégation.
-* **Count** : nombre total de valeurs signalées pour le compteur de performances.
-* **Average** : valeur moyenne (total/count) du compteur de performances sur la période d’agrégation.
+* **PartitionKey** : La clé de partition se base sur la valeur *resourceID* pour identifier de manière unique la ressource de machine virtuelle. Par exemple : `002Fsubscriptions:<subscriptionID>:002FresourceGroups:002F<ResourceGroupName>:002Fproviders:002FMicrosoft:002ECompute:002FvirtualMachines:002F<vmName>`  
+* **RowKey** : Suit le format `<Descending time tick>:<Performance Counter Name>`. Le calcul du cycle horaire décroissant correspond aux cycles horaires maximaux moins l’heure de début de la période d’agrégation. Par exemple, si la période d’échantillonnage a démarré le 10 novembre 2015 à 00h00 UTC, le calcul est le suivant : `DateTime.MaxValue.Ticks - (new DateTime(2015,11,10,0,0,0,DateTimeKind.Utc).Ticks)`. Pour le compteur de performances d’octets disponibles en mémoire, la clé de ligne a l’aspect suivant : `2519551871999999999__:005CMemory:005CAvailable:0020Bytes`
+* **CounterName** : Nom du compteur de performances. Cela correspond à l’élément *counterSpecifier* défini dans la configuration XML.
+* **Maximum** : Valeur maximale du compteur de performances sur la période d’agrégation.
+* **Minimale** : Valeur minimale du compteur de performances sur la période d’agrégation.
+* **Total** : Somme de toutes les valeurs du compteur de performances signalées sur la période d’agrégation.
+* **Nombre** : Nombre total de valeurs signalées pour le compteur de performances.
+* **Average** : Valeur moyenne (total/count) du compteur de performances sur la période d’agrégation.
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Pour obtenir un exemple de modèle complet d’une machine virtuelle Windows avec l’extension Diagnostics, consultez [201-vm-monitoring-diagnostics-extension](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-monitoring-diagnostics-extension)   
 * Déployer le modèle Azure Resource Manager à l’aide [d’Azure PowerShell](../windows/ps-template.md) ou de la [ligne de commande Azure](../linux/create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-* En savoir plus sur la [création de modèles Azure Resource Manager](../../resource-group-authoring-templates.md)
+* En savoir plus sur la [création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md)

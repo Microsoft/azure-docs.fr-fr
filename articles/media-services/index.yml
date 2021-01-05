@@ -1,10 +1,10 @@
 ### YamlMime:Hub
 title: Documentation Azure Media Services
-summary: Azure Media Services est une plateforme de workflow multimédia basée sur le cloud qui vous permet de créer des solutions nécessitant encodage, empaquetage, protection du contenu et diffusion d’événements en direct.
+summary: Azure Media Services est une collection de services de workflow multimédias dans le cloud et en périphérie qui vous permettent de créer des solutions qui demandent une analytique vidéo en direct et par lots, un transcodage, des services de diffusion multi-appareils, une protection du contenu et une diffusion d’événements en direct à grande échelle.
 brand: azure
 metadata:
   title: Documentation Azure Media Services
-  description: Azure Media Services est une plateforme de workflow multimédia basée sur le cloud qui vous permet de créer des solutions nécessitant encodage, empaquetage, protection du contenu et diffusion d’événements en direct.
+  description: Azure Media Services est une collection de services de workflow multimédias dans le cloud et en périphérie qui vous permettent de créer des solutions qui demandent une analytique vidéo en direct et par lots, un transcodage, des services de diffusion multi-appareils, une protection du contenu et une diffusion d’événements en direct à grande échelle.
   services: media-services
   ms.service: media-services
   ms.subservice: 
@@ -13,12 +13,12 @@ metadata:
   author: Juliako
   ms.author: juliako
   ms.date: 07//2020
-  ms.openlocfilehash: 2f2049f710dcdbb210594331fa69e6743f5e431e
-  ms.sourcegitcommit: af1cbaaa4f0faa53f91fbde4d6009ffb7662f7eb
+  ms.openlocfilehash: fb258b634ff5511a9e795e8c0990a62bf2d0d22d
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/22/2020
-  ms.locfileid: "81869308"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "90056531"
 highlightedContent:
   items:
   - title: À propos d’Azure Media Services v3
@@ -33,15 +33,18 @@ highlightedContent:
   - title: Comparer les préréglages de Media Services v3 et de Video Indexer
     itemType: concept
     url: ./video-indexer/compare-video-indexer-with-media-services-presets.md
+  - title: Live Video Analytics sur IoT Edge (préversion)
+    itemType: overview
+    url: ./live-video-analytics-edge/overview.md
+  - title: Azure Media Player
+    itemType: overview
+    url: ./azure-media-player/azure-media-player-overview.md
   - title: À propos d’Azure Media Services v2 (hérité)
     itemType: overview
     url: ./previous/media-services-overview.md
   - title: Migrer Media Services v2 vers v3
     itemType: concept
     url: ./latest/migrate-from-v2-to-v3.md
-  - title: Azure Media Player
-    itemType: overview
-    url: azure-media-player/azure-media-player-overview.md
 conceptualContent:
   items:
   - title: Développer avec l’API Media Services v3
@@ -49,7 +52,7 @@ conceptualContent:
     - url: ./latest/media-services-apis-overview.md
       itemType: concept
       text: Développer avec Media Services v3
-    - url: https://docs.microsoft.com/samples/browse/?products=azure-media-services
+    - url: /samples/browse/?products=azure-media-services
       itemType: sample
       text: Exemples de code
     - url: ./latest/release-notes.md
@@ -110,15 +113,23 @@ conceptualContent:
     - url: media-services-fmp4-live-ingest-overview.md
       itemType: concept
       text: Protocole d’ingestion Smooth Streaming
+  - title: Live Video Analytics sur IoT Edge (préversion)
+    links:
+    - url: ./live-video-analytics-edge/overview.md
+      itemType: overview
+      text: Vue d’ensemble
+    - url: ./live-video-analytics-edge/use-your-model-quickstart.md
+      itemType: quickstart
+      text: Exécuter Live Video Analytics avec votre propre modèle
 additionalContent:
   sections:
   - items:
     - title: Stockage Azure
       summary: Découvrir les objets blob de blocs et les conteneurs
-      url: https://docs.microsoft.com/azure/storage/
+      url: ../storage/index.yml
     - title: CDN
       summary: Utilisez la puissance d’Azure CDN pour diffuser du contenu à grande échelle avec les services d’Akamai et de Verizon ou équilibrer la charge entre plusieurs réseaux de distribution de contenu.
-      url: https://docs.microsoft.com/azure/cdn
+      url: ../cdn/index.yml
     - title: Event Grid
       summary: Découvrir comment utiliser Azure Event Grid pour réagir à des événements pertinents
-      url: https://docs.microsoft.com/azure/event-grid/
+      url: ../event-grid/index.yml

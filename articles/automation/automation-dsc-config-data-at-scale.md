@@ -1,6 +1,6 @@
 ---
-title: Données de configuration à la bonne échelle – Azure Automation
-description: Découvrez comment configurer des données à la bonne échelle pour la configuration d’état dans Azure Automation.
+title: Configurer des données à grande échelle pour Azure Automation State Configuration
+description: Cet article explique comment configurer des données à grande échelle pour Azure Automation State Configuration.
 keywords: dsc,powershell,configuration,installation
 services: automation
 ms.service: automation
@@ -10,14 +10,14 @@ ms.author: migreene
 ms.date: 08/08/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 644ea1c00af7e71ff56852298fff18e5293c137b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bc55a4c5ab20cac041a00a0f924b207eb256ae8b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80585571"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86186518"
 ---
-# <a name="configuration-data-at-scale"></a>Données de configuration à grande échelle
+# <a name="configure-data-at-scale-for-azure-automation-state-configuration"></a>Configurer des données à grande échelle pour Azure Automation State Configuration
 
 > S’applique à : Windows PowerShell 5.1
 
@@ -44,13 +44,13 @@ Voici quelques exemples :
 Ces informations sont organisées dans le format de fichier de votre choix (JSON, YAML ou PSD1).
 Des applets de commande sont ensuite fournies pour générer des fichiers de données de configuration en [regroupant les informations](https://github.com/gaelcolas/Datum#datum-tree) de chaque fichier dans une même vue d’un serveur ou rôle de serveur.
 
-Une fois que les fichiers de données ont été générés, vous pouvez les utiliser avec des [scripts de configuration DSC](/powershell/scripting/dsc/configurations/write-compile-apply-configuration) pour générer des fichiers MOF et [charger ces mêmes fichiers MOF dans Azure Automation](/azure/automation/tutorial-configure-servers-desired-state#create-and-upload-a-configuration-to-azure-automation).
-Inscrivez ensuite vos serveurs [localement](/azure/automation/automation-dsc-onboarding#onboarding-physicalvirtual-windows-machines-on-premises-or-in-a-cloud-other-than-azure-including-aws-ec2-instances) ou [dans Azure](/azure/automation/automation-dsc-onboarding#onboarding-azure-vms) pour extraire les configurations.
+Une fois que les fichiers de données ont été générés, vous pouvez les utiliser avec des [scripts de configuration DSC](/powershell/scripting/dsc/configurations/write-compile-apply-configuration) pour générer des fichiers MOF et [charger ces mêmes fichiers MOF dans Azure Automation](./tutorial-configure-servers-desired-state.md#create-and-upload-a-configuration-to-azure-automation).
+Inscrivez ensuite vos serveurs [localement](./automation-dsc-onboarding.md#enable-physicalvirtual-linux-machines) ou [dans Azure](./automation-dsc-onboarding.md#enable-azure-vms) pour extraire les configurations.
 
 Pour tester Datum, accédez à [PowerShell Gallery](https://www.powershellgallery.com/packages/datum/) et téléchargez la solution ou cliquez sur « Project Site » pour afficher la [documentation](https://github.com/gaelcolas/Datum#2-getting-started--concepts).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Vue d’ensemble de la configuration d’état souhaité Windows PowerShell](/powershell/scripting/dsc/overview/overview)
-- [Ressources DSC](/powershell/scripting/dsc/resources/resources)
-- [Configuration de Local Configuration Manager](/powershell/scripting/dsc/managing-nodes/metaconfig)
+- Pour comprendre DSC PowerShell, consultez [Vue d’ensemble de la fonctionnalité Desired State Configuration de Windows PowerShell](/powershell/scripting/dsc/overview/overview).
+- Découvrez les ressources DSC PowerShell dans [Ressources DSC](/powershell/scripting/dsc/resources/resources).
+- Pour plus d’informations sur la configuration du Configuration Manager local, consultez [configuration du Configuration Manager local](/powershell/scripting/dsc/managing-nodes/metaconfig).

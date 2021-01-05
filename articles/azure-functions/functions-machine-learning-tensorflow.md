@@ -5,13 +5,13 @@ author: anthonychu
 ms.topic: tutorial
 ms.date: 01/15/2020
 ms.author: antchu
-ms.custom: mvc
-ms.openlocfilehash: 9d25e2e32f09cc681d85d5adffe53f1237d7200c
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.custom: mvc, devx-track-python, devx-track-azurepowershell
+ms.openlocfilehash: ca9ce27583168dfee1a597fce559afad38a3a8c7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81255496"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994602"
 ---
 # <a name="tutorial-apply-machine-learning-models-in-azure-functions-with-python-and-tensorflow"></a>Tutoriel : Appliquer des modèles Machine Learning dans Azure Functions avec Python et TensorFlow
 
@@ -86,7 +86,7 @@ cd start
 ```
 
 ```powershell
-py -m venv .venv
+py -3.7 -m venv .venv
 ```
 
 ```powershell
@@ -100,7 +100,7 @@ cd start
 ```
 
 ```cmd
-py -m venv .venv
+py -3.7 -m venv .venv
 ```
 
 ```cmd
@@ -133,7 +133,7 @@ Dans Azure Functions, un projet de fonction est un conteneur pour une ou plusieu
     func new --name classify --template "HTTP trigger"
     ```
 
-    Cette commande crée un dossier correspondant au nom de la fonction, *classify*. Dans ce dossier se trouvent deux fichiers : *\_\_init\_\_.py*, qui contient le code de la fonction, et *function.json*, qui décrit le déclencheur de la fonction, et ses liaisons d’entrée et de sortie. Pour plus d’informations sur le contenu de ces fichiers, consultez la section [Examiner le contenu du fichier](/azure/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-python#optional-examine-the-file-contents) du guide de démarrage rapide Python.
+    Cette commande crée un dossier correspondant au nom de la fonction, *classify*. Dans ce dossier se trouvent deux fichiers : *\_\_init\_\_.py*, qui contient le code de la fonction, et *function.json*, qui décrit le déclencheur de la fonction, et ses liaisons d’entrée et de sortie. Pour plus d’informations sur le contenu de ces fichiers, consultez la section [Examiner le contenu du fichier](./create-first-function-cli-python.md#optional-examine-the-file-contents) du guide de démarrage rapide Python.
 
 
 ## <a name="run-the-function-locally"></a>Exécuter la fonction localement

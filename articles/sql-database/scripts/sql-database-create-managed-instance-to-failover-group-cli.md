@@ -1,24 +1,24 @@
 ---
-title: Exemple CLI  – Groupe de basculement – Instance managée d’Azure SQL Database
-description: Exemple de script Azure CLI pour créer une instance managée d’Azure SQL Database, l’ajouter à un groupe de basculement et tester le basculement.
+title: 'Azure CLI : Ajouter une instance managée à un groupe de basculement'
+description: Découvrez comment créer deux instances gérées, les ajouter à un groupe de basculement, puis tester le basculement.
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
-ms.custom: ''
+ms.custom: devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: sample
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: carlrab
 ms.date: 07/16/2019
-ms.openlocfilehash: 792746ec3bfcf429afb7919458b9ac7ec8446b60
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: afefc556bcac096d67051f3014c31e449dbbca32
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80061847"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91323564"
 ---
-# <a name="use-cli-to-add-an-azure-sql-database-managed-instance-to-a-failover-group"></a>Utiliser CLI pour ajouter une instance managée d’Azure SQL Database à un groupe de basculement
+# <a name="use-cli-to-create-an-azure-sql-managed-instance-to-a-failover-group"></a>Utiliser l’interface CLI pour créer une instance Azure SQL Managed Instance pour un groupe de basculement
 
 Cet exemple Azure CLI crée deux instances managées, les ajoute à un groupe de basculement, puis teste le basculement de l’instance managée principale vers l’instance managée secondaire.
 
@@ -46,20 +46,20 @@ az group delete --name $resource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az network vnet](/cli/azure/network/vnet) | Commandes de réseau virtuel.  |
 | [az network vnet subnet](/cli/azure/network/vnet/subnet) | Commandes de sous-réseau de réseau virtuel. |
 | [az network nsg](/cli/azure/network/nsg) | Commandes de groupe de sécurité réseau. |
 | [az network nsg rule](/cli/azure/network/nsg/rule)| Commandes de règle de sécurité réseau. |
 | [az network route-table](/cli/azure/network/route-table) | Commandes de table de route. |
-| [az sql mi](/cli/azure/sql/mi) | Commandes d’instance managée. |
+| [az sql mi](/cli/azure/sql/mi) | Commandes SQL Managed Instance. |
 | [az network public-ip](/cli/azure/network/public-ip) | Commandes d’adresse IP publique réseau. |
 | [az network vnet-gateway](/cli/azure/network/vnet-gateway) | Commandes de passerelle de réseau virtuel |
-| [az sql instance-failover-group](/cli/azure/sql/instance-failover-group) | Commandes de groupe de basculement d’une instance managée. |
+| [az sql instance-failover-group](/cli/azure/sql/instance-failover-group) | Commandes de groupe de basculement SQL Managed Instance. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
-Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

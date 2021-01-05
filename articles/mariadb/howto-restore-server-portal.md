@@ -1,24 +1,24 @@
 ---
 title: Sauvegarde et restauration - Portail Azure - Azure Database for MariaDB
 description: Cet article décrit comment restaurer un serveur dans Azure Database for MariaDB à l’aide du portail Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
-ms.date: 3/27/2020
-ms.openlocfilehash: fa8ead8daa202f5747c134a62fbd43bcdf2af0d7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 6/30/2020
+ms.openlocfilehash: 4a5f2cc4cbf73f5c13533a94f1454022d3538880
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80369261"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94539623"
 ---
 # <a name="how-to-backup-and-restore-a-server-in-azure-database-for-mariadb-using-the-azure-portal"></a>Guide pratique pour sauvegarder et restaurer un serveur dans Azure Database for MariaDB à l’aide du portail Azure
 
 ## <a name="backup-happens-automatically"></a>La sauvegarde s’effectue automatiquement
 Les serveurs Azure Database for MariaDB sont sauvegardés régulièrement pour activer les fonctionnalités de restauration. À l’aide de cette fonctionnalité, vous pouvez restaurer le serveur et toutes ses bases de données à un point dans le temps antérieur, sur un nouveau serveur.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Pour utiliser ce guide pratique, il vous faut :
 - [Un serveur Azure Database for MariaDB et une base de données](quickstart-create-mariadb-server-database-using-azure-portal.md)
 
@@ -65,14 +65,13 @@ Les étapes suivantes restaurent l’exemple de serveur à un point dans le temp
 
    ![Azure Database for MariaDB - Informations de restauration](./media/howto-restore-server-portal/3-restore.png)
    - **Point de restauration** : sélectionnez le point dans le temps vers lequel vous souhaitez restaurer.
-   - **Serveur cible** : fournissez un nom pour le nouveau serveur.
-   - **Emplacement :** vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source.
-   - **Niveau tarifaire** : vous ne pouvez pas modifier ces paramètres lorsque vous effectuez une restauration à un point dans le temps. Elle est identique à celle du serveur source. 
+   - **Serveur cible** : Entrez un nom pour le nouveau serveur.
+   - **Emplacement** : vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source.
+   - **Niveau tarifaire** : vous ne pouvez pas modifier ces paramètres lorsque vous effectuez une restauration à un point dans le temps. Elle est identique à celle du serveur source. 
 
 4. Cliquez sur **OK** pour restaurer le serveur à un point dans le temps. 
 
 5. Une fois la restauration terminée, recherchez le nouveau serveur créé pour vérifier que les données ont été restaurées correctement.
-
 
 Le serveur créé par la restauration à un point dans le temps a les mêmes nom de connexion administrateur de serveur et mot de passe qui étaient valides pour le serveur existant au point dans le temps choisi. Vous pouvez modifier le mot de passe sur la page **Vue d’ensemble** du nouveau serveur.
 
@@ -82,18 +81,41 @@ Le nouveau serveur créé lors d’une restauration ne dispose pas des points de
 
 Si vous avez configuré votre serveur pour les sauvegardes redondantes géographiquement, un serveur peut être créé à partir de la sauvegarde de ce serveur existant. Ce nouveau serveur peut être créé dans toutes les régions dans lesquelles Azure Database for MariaDB est disponible.  
 
-1. Sélectionnez **Bases de données** > **Azure Database for MariaDB**. Vous pouvez également taper **MariaDB** dans la zone de recherche pour trouver le service.
+1. Cliquez sur le bouton **Créer une ressource** (+) dans le coin supérieur gauche du portail. Sélectionnez **Bases de données** > **Azure Database for MariaDB**.
 
-   ![Option Azure Database for MariaDB](./media/howto-restore-server-portal/2_navigate-to-mariadb.png)
+   :::image type="content" source="./media/howto-restore-server-portal/2_navigate-to-mariadb.png" alt-text="Accédez à Azure Database for MariaDB.":::
+ 
+2. Indiquez l’abonnement, le groupe de ressources et le nom du nouveau serveur. 
 
-2. Dans la liste déroulante **Sélectionner la source** du formulaire, choisissez **Sauvegarde**. Cette action charge une liste des serveurs pour lesquels les sauvegardes géoredondantes sont activées. Sélectionnez l’une de ces sauvegardes comme source pour votre nouveau serveur.
-   ![Sélectionner la source : sauvegarde et liste des sauvegardes géoredondantes](./media/howto-restore-server-portal/2-georestore.png)
-
+3. Sélectionnez **Sauvegarde** comme **Source de données**. Cette action charge une liste déroulante des serveurs pour lesquels les sauvegardes géoredondantes sont activées.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/3-geo-restore.png" alt-text="Sélectionnez la source de données.":::
+    
    > [!NOTE]
    > Lorsqu’un serveur est créé, il est possible qu’il ne soit pas immédiatement disponible pour la restauration géographique. Le remplissage des métadonnées nécessaires peut prendre quelques heures.
    >
 
-3. Renseignez le reste du formulaire avec vos préférences. Vous pouvez sélectionner n’importe quel **Emplacement**. Une fois l’emplacement sélectionné, vous pouvez sélectionner **Niveau tarifaire**. Par défaut, les paramètres du serveur existant à partir duquel vous effectuez la restauration sont affichés. Vous pouvez cliquer sur **OK** sans apporter de modifications pour hériter de ces paramètres. Sinon, vous pouvez modifier la **génération de calcul** (si disponible dans la région choisie), le nombre de **vCores**, la **période de rétention de sauvegarde** et **l’option de redondance de sauvegarde**. La modification du **niveau tarifaire** (De base, Usage général ou À mémoire optimisée) ou de la taille du**stockage** pendant la restauration n’est pas prise en charge.
+4. Sélectionnez la liste déroulante **Sauvegarde**.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/4-geo-restore-backup.png" alt-text="Sélectionnez la liste déroulante de sauvegarde.":::
+
+5. Sélectionnez le serveur source à partir duquel effectuer la restauration.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/5-select-backup.png" alt-text="Sélectionnez une sauvegarde.":::
+
+6. Le serveur utilisera par défaut les valeurs pour le nombre de **vCores**, la **période de conservation de sauvegarde**, l’**option de redondance de sauvegarde**, la **version du moteur** et les **informations d’identification d’administrateur**. Sélectionnez **Continuer**. 
+   
+   :::image type="content" source="./media/howto-restore-server-portal/6-accept-backup.png" alt-text="Poursuivez la sauvegarde.":::
+
+7. Renseignez le reste du formulaire avec vos préférences. Vous pouvez sélectionner n’importe quel **Emplacement**.
+
+    Après avoir sélectionné l’emplacement, vous pouvez sélectionner **Configurer le serveur** pour mettre à jour la **génération de calcul** (si disponible dans la région choisie), le nombre de **vCores**, la **période de conservation de sauvegarde** et l’**option de redondance de sauvegarde**. La modification du **niveau tarifaire** (De base, Usage général ou À mémoire optimisée) ou de la taille du **stockage** pendant la restauration n’est pas prise en charge.
+
+   :::image type="content" source="./media/howto-restore-server-portal/7-create.png" alt-text="Remplissez le formulaire."::: 
+
+8. Sélectionnez **Vérifier + créer** pour passer en revue vos sélections. 
+
+9. Sélectionnez **Créer** pour approvisionner le serveur. Cette opération peut prendre quelques minutes.
 
 Le serveur créé par la restauration géographique a les mêmes nom de connexion administrateur de serveur et mot de passe qui étaient valides pour le serveur existant au moment où la restauration a été initiée. Le mot de passe peut être modifié sur la page **Vue d’ensemble** du nouveau serveur.
 

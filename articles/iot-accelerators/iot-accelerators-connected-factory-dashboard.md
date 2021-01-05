@@ -8,14 +8,17 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 07/10/2018
 ms.author: dobett
-ms.openlocfilehash: b53177d578768428665891704269e63bd8edb09e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 797bd97940aa49db87b4ca4dd96f140208cd69b6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73820178"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011215"
 ---
 # <a name="use-features-in-the-connected-factory-solution-accelerator-dashboard"></a>Utiliser les fonctionnalités du tableau de bord de l’accélérateur de solution Usine connectée
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Le guide de démarrage rapide [Déployer une solution cloud pour gérer mes appareils IoT industriels](quickstart-connected-factory-deploy.md) vous a montré comment naviguer dans le tableau de bord et répondre aux alarmes. Ce guide pratique vous montre d’autres fonctionnalités du tableau de bord, que vous pouvez utiliser pour suivre et gérer vos appareils IoT industriels.
 
@@ -27,7 +30,7 @@ Vous pouvez filtrer les informations affichées dans le tableau de bord dans le 
 
 1. Le panneau des filtres s’affiche :
 
-    [![Filtres de l’accélérateur de solution Usine connectée](./media/iot-accelerators-connected-factory-dashboard/filterpanel-inline.png)](./media/iot-accelerators-connected-factory-dashboard/filterpanel-expanded.png#lightbox)
+    [![Filtres de l’accélérateur de solution d’usine connectée](./media/iot-accelerators-connected-factory-dashboard/filterpanel-inline.png)](./media/iot-accelerators-connected-factory-dashboard/filterpanel-expanded.png#lightbox)
 
 1. Choisissez le filtre nécessaire et cliquez sur **Appliquer**. Il est également possible d’entrer du texte libre dans les champs du filtre.
 
@@ -90,7 +93,7 @@ L’usine connectée vous permet de commander et de contrôler vos appareils ind
 
 1. Le panneau de contexte est mis à jour pour vous informer que l’appel de méthode a réussi. Vous pouvez vérifier que l’appel a réussi en lisant la valeur du nœud de pression mise à jour suite à l’appel.
 
-    [![Réussite de l’appel de l’accélérateur de solution Usine connectée](./media/iot-accelerators-connected-factory-dashboard/callsuccess-inline.png)](./media/iot-accelerators-connected-factory-dashboard/callsuccess-expanded.png#lightbox)
+    [![Réussite d’appel de l’accélérateur de solution d’usine connectée](./media/iot-accelerators-connected-factory-dashboard/callsuccess-inline.png)](./media/iot-accelerators-connected-factory-dashboard/callsuccess-expanded.png#lightbox)
 
 ## <a name="behind-the-scenes"></a>Dans les coulisses
 

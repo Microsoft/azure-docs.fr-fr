@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 10/26/2017
 ms.author: tomfitz
 ms.openlocfilehash: 3dbb88d53a961e277e102d7eec580309951c73b6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75649429"
 ---
 # <a name="work-with-resources-in-the-managed-resource-group-for-azure-managed-application"></a>Utiliser des ressources dans le groupe de ressources managé pour une application managée Azure

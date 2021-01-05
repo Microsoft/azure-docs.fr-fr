@@ -3,12 +3,12 @@ title: Informations de référence sur le fichier host.json pour Azure Functions
 description: Documentation de référence pour le fichier host.json d’Azure Functions avec le runtime v2.
 ms.topic: conceptual
 ms.date: 04/28/2020
-ms.openlocfilehash: 39e6ce5d6807a554cc1714a3970bed8303c31ce8
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 96d6b884e9e2c835316af01140c6fc7208ee5ab9
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82690900"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96746078"
 ---
 # <a name="hostjson-reference-for-azure-functions-2x-and-later"></a>Informations de référence sur le fichier host.json pour Azure Functions 2.x et ultérieur 
 
@@ -117,6 +117,11 @@ L’exemple de fichier *host.json* suivant pour la version 2.x+ contient toutes 
     "managedDependency": {
         "enabled": true
     },
+    "retry": {
+      "strategy": "fixedDelay",
+      "maxRetryCount": 5,
+      "delayInterval": "00:00:05"
+    },
     "singleton": {
       "lockPeriod": "00:00:15",
       "listenerLockPeriod": "00:01:00",
@@ -138,7 +143,7 @@ Les sections suivantes de cet article expliquent chaque propriété de niveau su
 
 Ce paramètre est un enfant de la [journalisation](#logging).
 
-Contrôle les options disponibles dans Application Insights, notamment les [options d’échantillonnage](./functions-monitoring.md#configure-sampling).
+Contrôle les options disponibles dans Application Insights, notamment les [options d’échantillonnage](./configure-monitoring.md#configure-sampling).
 
 Pour obtenir la structure JSON complète, reportez-vous à l’[exemple de fichier host.json](#sample-hostjson-file) précédent.
 
@@ -157,16 +162,18 @@ Pour obtenir la structure JSON complète, reportez-vous à l’[exemple de fichi
 
 ### <a name="applicationinsightssamplingsettings"></a>applicationInsights.samplingSettings
 
+Pour plus d'informations sur ces paramètres, consultez [Échantillonnage dans Application Insights](../azure-monitor/app/sampling.md). 
+
 |Propriété | Default | Description |
 | --------- | --------- | --------- | 
 | isEnabled | true | Active ou désactive l’échantillonnage. | 
 | maxTelemetryItemsPerSecond | 20 | Nombre cible d’éléments de télémétrie enregistrés par seconde sur chaque hôte de serveur. Si votre application s’exécute sur de nombreux ordinateurs hôtes, réduisez cette valeur pour rester dans votre taux de trafic cible global. | 
 | evaluationInterval | 01:00:00 | Intervalle auquel le taux actuel de télémétrie est réévalué. L’évaluation est effectuée sous forme de moyenne mobile. Vous souhaiterez peut-être raccourcir cet intervalle si vos données de télémétrie sont soumises à des pics soudains. |
-| initialSamplingPercentage| 1.0 | Pourcentage d’échantillonnage initial appliqué au début du processus d’échantillonnage pour faire varier dynamiquement le pourcentage. Ne diminuez pas la valeur pendant le débogage. |
+| initialSamplingPercentage| 100.0 | Pourcentage d’échantillonnage initial appliqué au début du processus d’échantillonnage pour faire varier dynamiquement le pourcentage. Ne diminuez pas la valeur pendant le débogage. |
 | samplingPercentageIncreaseTimeout | 00:00:01 | Lorsque la valeur de pourcentage d’échantillonnage change, cette propriété détermine le moment où Application Insights est autorisé à augmenter à nouveau le pourcentage d’échantillonnage pour capturer plus de données. |
 | samplingPercentageDecreaseTimeout | 00:00:01 | Lorsque la valeur de pourcentage d’échantillonnage change, cette propriété détermine le moment où Application Insights est autorisé à diminuer à nouveau le pourcentage d’échantillonnage pour capturer moins de données. |
 | minSamplingPercentage | 0.1 | Comme le pourcentage d’échantillonnage varie, cette propriété détermine le pourcentage d’échantillonnage autorisé minimal. |
-| minSamplingPercentage | 0.1 | Comme le pourcentage d’échantillonnage varie, cette propriété détermine le pourcentage d’échantillonnage autorisé maximal. |
+| minSamplingPercentage | 100.0 | Comme le pourcentage d’échantillonnage varie, cette propriété détermine le pourcentage d’échantillonnage autorisé maximal. |
 | movingAverageRatio | 1.0 | Lors du calcul de la moyenne mobile, poids affecté à la valeur la plus récente. Utilisez une valeur inférieure ou égale à 1. Plus les valeurs sont petites, moins l’algorithme est réactif en cas de modifications brusques. |
 | excludedTypes | null | Une liste délimitée par des points-virgules des types que vous ne souhaitez pas voir échantillonnés. Les types reconnus sont les suivants : `Dependency`, `Event`, `Exception`, `PageView`, `Request` et `Trace`. Toutes les instances des types spécifiés sont transmises ; les types qui ne sont pas spécifiés sont échantillonnés. |
 | includedTypes | null | Liste délimitée par des points-virgules des types que vous souhaitez échantillonner ; une liste vide signifie que tous les types sont impliqués. Le type répertorié dans `excludedTypes` remplace les types répertoriés ici. Les types reconnus sont les suivants : `Dependency`, `Event`, `Exception`, `PageView`, `Request` et `Trace`. Les instances des types spécifiés sont échantillonnées ; les types non spécifiés ou implicites sont transmis sans échantillonnage. |
@@ -181,7 +188,7 @@ Pour obtenir la structure JSON complète, reportez-vous à l’[exemple de fichi
 
 ### <a name="applicationinsightssnapshotconfiguration"></a>applicationInsights.snapshotConfiguration
 
-Pour plus d’informations sur les instantanés, consultez [Captures instantanées de débogage sur exceptions levées dans des applications .NET](/azure/azure-monitor/app/snapshot-debugger) et [Résoudre les problèmes d’activation du Débogueur de capture instantanée Application Insights ou d’affichage d’instantanés](/azure/azure-monitor/app/snapshot-debugger-troubleshoot).
+Pour plus d’informations sur les instantanés, consultez [Captures instantanées de débogage sur exceptions levées dans des applications .NET](../azure-monitor/app/snapshot-debugger.md) et [Résoudre les problèmes d’activation du Débogueur de capture instantanée Application Insights ou d’affichage d’instantanés](../azure-monitor/app/snapshot-debugger-troubleshoot.md).
 
 |Propriété | Default | Description |
 | --------- | --------- | --------- | 
@@ -211,6 +218,28 @@ Pour plus d’informations sur les instantanés, consultez [Captures instantané
 ## <a name="cosmosdb"></a>cosmosDb
 
 Le paramètre de configuration se trouve dans les [déclencheurs et liaisons Cosmos DB](functions-bindings-cosmosdb-v2-output.md#host-json).
+
+## <a name="customhandler"></a>customHandler
+
+Paramètres de configuration d’un gestionnaire personnalisé. Pour plus d’informations, consultez [Gestionnaires personnalisés Azure Functions](functions-custom-handlers.md#configuration).
+
+```json
+"customHandler": {
+  "description": {
+    "defaultExecutablePath": "server",
+    "workingDirectory": "handler",
+    "arguments": [ "--port", "%FUNCTIONS_CUSTOMHANDLER_PORT%" ]
+  },
+  "enableForwardingHttpRequest": false
+}
+```
+
+|Propriété | Default | Description |
+| --------- | --------- | --------- |
+| defaultExecutablePath | n/a | Exécutable à démarrer en tant que processus de gestionnaire personnalisé. Il s’agit d’un paramètre obligatoire lorsque vous utilisez des gestionnaires personnalisés et dont la valeur est relative à la racine de l’application de fonction. |
+| workingDirectory | *racine de l’application de fonction* | Répertoire de travail dans lequel démarrer le processus de gestionnaire personnalisé. Il s’agit d’un paramètre facultatif dont la valeur est relative à la racine de l’application de fonction. |
+| arguments | n/a | Tableau d’arguments de ligne de commande à transmettre au processus de gestionnaire personnalisé. |
+| enableForwardingHttpRequest | false | Si cette valeur est définie, toutes les fonctions qui se composent uniquement d’un déclencheur HTTP et d’une sortie HTTP sont transférées à la requête HTTP d’origine au lieu de la [charge utile de demande](functions-custom-handlers.md#request-payload) du gestionnaire personnalisé. |
 
 ## <a name="durabletask"></a>durableTask
 
@@ -242,11 +271,16 @@ Liste des fonctions que l’hôte de travail exécute. Un tableau vide désigne 
 
 ## <a name="functiontimeout"></a>functionTimeout
 
-Indique la durée avant expiration du délai de toutes les fonctions. Il suit le format de chaîne TimeSpan. Dans les plans de consommation serverless, la plage valide est comprise entre 1 seconde et 10 minutes, et la valeur par défaut est de 5 minutes.  
+Indique la durée avant expiration du délai de toutes les fonctions. Il suit le format de chaîne TimeSpan. 
 
-Dans le plan Premium, la plage valide est comprise entre 1 seconde et 60 minutes, et la valeur par défaut est de 30 minutes.
+| Type de plan | Par défaut (min) | Maximum (min) |
+| -- | -- | -- |
+| Consommation | 5 | 10 |
+| Premium<sup>1</sup> | 30 | -1 (non lié)<sup>2</sup> |
+| Dédié (App Service) | 30 | -1 (non lié)<sup>2</sup> |
 
-Dans un plan App Service dédié, il n’existe aucune limite globale, et la valeur par défaut est de 30 minutes. La valeur `-1` indique une exécution illimitée, mais il est recommandé de conserver une limite supérieure fixe.
+<sup>1</sup> L’exécution du plan Premium n’est garantie que pendant 60 minutes, mais techniquement illimitée.   
+<sup>2</sup> La valeur `-1` indique une exécution illimitée, mais il est recommandé de conserver une limite supérieure fixe.
 
 ```json
 {
@@ -305,7 +339,7 @@ Contrôle les comportements de journalisation de l’application de fonction, y 
 |Propriété  |Default | Description |
 |---------|---------|---------|
 |fileLoggingMode|debugOnly|Définit le niveau de journalisation de fichiers activé.  Options : `never`, `always`, `debugOnly`. |
-|logLevel|n/a|Objet qui définit le filtrage par catégorie du journal pour les fonctions de l’application. Les versions 2.x et ultérieures suivent la disposition d’ASP.NET Core pour le filtrage des catégories du journal. Ce paramètre vous permet de filtrer la journalisation pour des fonctions spécifiques. Pour plus d’informations, consultez [Filtrage de journal](https://docs.microsoft.com/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1#log-filtering) dans la documentation ASP.NET Core. |
+|logLevel|n/a|Objet qui définit le filtrage par catégorie du journal pour les fonctions de l’application. Les versions 2.x et ultérieures suivent la disposition d’ASP.NET Core pour le filtrage des catégories du journal. Ce paramètre vous permet de filtrer la journalisation pour des fonctions spécifiques. Pour plus d’informations, consultez [Filtrage de journal](/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&preserve-view=true#log-filtering) dans la documentation ASP.NET Core. |
 |console|n/a| Le paramètre de journalisation de la [console](#console). |
 |applicationInsights|n/a| Le paramètre [applicationInsights](#applicationinsights). |
 
@@ -344,6 +378,28 @@ La dépendance managée est une fonctionnalité qui est actuellement prise en ch
 ## <a name="queues"></a>queues
 
 Les paramètres de configuration se trouvent dans les [déclencheurs et liaisons de la file d'attente de stockage](functions-bindings-storage-queue-output.md#host-json).  
+
+## <a name="retry"></a>retry
+
+Contrôle les options de [stratégie de nouvelles tentatives](./functions-bindings-error-pages.md#retry-policies-preview) pour toutes les exécutions effectuées dans l’application.
+
+```json
+{
+    "retry": {
+        "strategy": "fixedDelay",
+        "maxRetryCount": 2,
+        "delayInterval": "00:00:03"  
+    }
+}
+```
+
+|Propriété  |Default | Description |
+|---------|---------|---------| 
+|strategy|null|Obligatoire. Stratégie de nouvelle tentative à utiliser. Les valeurs valides sont `fixedDelay` ou `exponentialBackoff`.|
+|maxRetryCount|null|Obligatoire. Nombre maximal de nouvelles tentatives autorisées par exécution de fonction. `-1` signifie qu’il faut effectuer ces nouvelles tentatives indéfiniment.|
+|delayInterval|null|Délai qui est utilisé entre les nouvelles tentatives avec une stratégie `fixedDelay`.|
+|minimumInterval|null|Délai minimal de nouvelle tentative lors de l’utilisation de la stratégie `exponentialBackoff`.|
+|maximumInterval|null|Délai maximal de nouvelle tentative lors de l’utilisation de la stratégie `exponentialBackoff`.| 
 
 ## <a name="sendgrid"></a>sendGrid
 

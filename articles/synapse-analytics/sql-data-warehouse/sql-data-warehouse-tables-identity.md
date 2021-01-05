@@ -1,34 +1,37 @@
 ---
 title: Utiliser IDENTITY pour créer des clés de substitution
-description: Recommandations et exemples d’utilisation de la propriété IDENTITY pour créer des clés de substitution dans des tables du pool SQL Synapse.
+description: Recommandations et exemples d’utilisation de la propriété IDENTITY pour créer des clés de substitution dans des tables du pool SQL dédié.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
-ms.date: 04/30/2019
+ms.subservice: sql-dw
+ms.date: 07/20/2020
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: e681e8ad655c31d5078b56b8f1a49cfd7c664533
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.openlocfilehash: 96e81b3d7781f1c6f7bf5743a083e9640dd6c831
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80742636"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93323585"
 ---
-# <a name="using-identity-to-create-surrogate-keys-in-synapse-sql-pool"></a>Utiliser IDENTITY pour créer des clés de substitution dans le pool SQL Synapse
+# <a name="using-identity-to-create-surrogate-keys-using-dedicated-sql-pool-in-azuresynapse-analytics"></a>Utilisation d’IDENTITY pour créer des clés de substitution à l’aide d’un pool SQL dédié dans AzureSynapse Analytics
 
-Recommandations et exemples d’utilisation de la propriété IDENTITY pour créer des clés de substitution dans des tables du pool SQL Synapse.
+Dans cet article, vous trouverez des recommandations et exemples d’utilisation de la propriété IDENTITY pour créer des clés de substitution dans des tables du pool SQL dédié.
 
 ## <a name="what-is-a-surrogate-key"></a>Qu’est-ce qu’une clé de substitution ?
 
-Une clé de substitution dans une table est une colonne avec un identificateur unique pour chaque ligne. La clé n’est pas générée à partir des données de la table. Les modélisateurs de données aiment créer des clés de substitution sur leurs tables lorsqu’ils conçoivent des modèles d’entrepôt de données. Vous pouvez utiliser la propriété IDENTITY pour atteindre cet objectif de manière simple et efficace, sans affecter les performances de chargement.  
+Une clé de substitution dans une table est une colonne avec un identificateur unique pour chaque ligne. La clé n’est pas générée à partir des données de la table. Les modélisateurs de données aiment créer des clés de substitution sur leurs tables lorsqu’ils conçoivent des modèles d’entrepôt de données. Vous pouvez utiliser la propriété IDENTITY pour atteindre cet objectif de manière simple et efficace, sans affecter les performances de chargement.
+> [!NOTE]
+> Dans Azure Synapse Analytics, la valeur IDENTITY augmente de façon autonome dans chaque distribution et ne chevauche pas les valeurs IDENTITY dans d’autres distributions.  Il n’est pas garanti que la valeur IDENTITY dans Synapse soit unique si l’utilisateur insère explicitement une valeur en double avec « SET IDENTITY_INSERT ON » ou réamorce IDENTITY. Pour plus d’informations, consultez [CREATE TABLE (Transact-SQL) IDENTITY (Propriété)](/sql/t-sql/statements/create-table-transact-sql-identity-property?view=azure-sqldw-latest). 
+
 
 ## <a name="creating-a-table-with-an-identity-column"></a>Création d’une table avec une colonne IDENTITY
 
-La propriété IDENTITY est conçue pour effectuer un scale-out sur toutes les distributions du pool SQL Synapse sans perturber les performances de chargement. Par conséquent, l’implémentation d’IDENTITY est adaptée pour atteindre ces objectifs.
+La propriété IDENTITY est conçue pour effectuer un scale-out sur toutes les distributions du pool SQL dédié sans perturber les performances de chargement. Par conséquent, l’implémentation d’IDENTITY est adaptée pour atteindre ces objectifs.
 
 Vous pouvez définir une table ayant la propriété IDENTITY lorsque vous créez la table à l’aide d’une syntaxe similaire à l’instruction suivante :
 
@@ -50,7 +53,7 @@ Le reste de cette section met en évidence les nuances de l’implémentation po
 
 ### <a name="allocation-of-values"></a>Allocation de valeurs
 
-La propriété IDENTITY ne garantit pas l’ordre dans lequel les valeurs de substitution sont alloués, ce qui reflète le comportement de SQL Server et d’Azure SQL Database. Toutefois, dans le pool SQL Synapse, l’absence de garantie est plus marquée.
+La propriété IDENTITY ne garantit pas l’ordre dans lequel les valeurs de substitution sont allouées en raison de l’architecture distribuée de l’entrepôt de données. La propriété IDENTITY est conçue pour effectuer un scale-out sur toutes les distributions du pool SQL dédié sans perturber les performances de chargement. 
 
 L’exemple suivant en est une illustration :
 
@@ -100,7 +103,7 @@ CREATE TABLE AS SELECT (CTAS) suit le même comportement SQL Server que celui do
 
 ## <a name="explicitly-inserting-values-into-an-identity-column"></a>Insérer explicitement des valeurs dans une colonne IDENTITY
 
-Le pool SQL Synapse prend en charge la syntaxe `SET IDENTITY_INSERT <your table> ON|OFF`. Vous pouvez utiliser cette syntaxe pour insérer explicitement des valeurs dans la colonne IDENTITY.
+Le pool SQL dédié prend en charge la syntaxe `SET IDENTITY_INSERT <your table> ON|OFF`. Vous pouvez utiliser cette syntaxe pour insérer explicitement des valeurs dans la colonne IDENTITY.
 
 Nombreux sont les modélisateurs de données à aimer utiliser des valeurs négatives prédéfinies pour certaines lignes dans leurs dimensions. Un exemple est la ligne -1 ou « membre inconnu ».
 
@@ -161,7 +164,7 @@ DBCC PDW_SHOWSPACEUSED('dbo.T1');
 > Il n’est pas possible d’utiliser `CREATE TABLE AS SELECT` actuellement lors du chargement des données dans une table comportant une colonne IDENTITY.
 >
 
-Pour plus d’informations sur le chargement de données, consultez [Conception du processus ELT pour le pool SQL Synapse](design-elt-data-loading.md) et [Meilleures pratiques de chargement](guidance-for-loading-data.md).
+Pour plus d’informations sur le chargement de données, consultez [Conception du processus ELT pour le pool SQL dédié](design-elt-data-loading.md) et [Meilleures pratiques de chargement](guidance-for-loading-data.md).
 
 ## <a name="system-views"></a>Vues système
 
@@ -195,7 +198,7 @@ La propriété IDENTITY ne peut pas être utilisée :
 - Lorsque la colonne est également la clé de distribution
 - Lorsque la table est une table externe
 
-Les fonctions associées suivantes ne sont pas prises en charge dans le pool SQL Synapse :
+Les fonctions associées suivantes ne sont pas prises en charge dans le pool SQL dédié :
 
 - [IDENTITY()](/sql/t-sql/functions/identity-function-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 - [@@IDENTITY](/sql/t-sql/functions/identity-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)

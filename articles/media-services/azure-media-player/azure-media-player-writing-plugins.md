@@ -6,12 +6,13 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: how-to
 ms.date: 04/20/2020
-ms.openlocfilehash: 7902dfdf81d8e44921a5218d56effc90f433f02d
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.custom: devx-track-js
+ms.openlocfilehash: c1a64bff8b81735d9c4c9a14d2c1e12bd0bfe57e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82857407"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91296159"
 ---
 # <a name="writing-plugins-for-azure-media-player"></a>Écriture de plug-ins pour le Lecteur multimédia Azure #
 

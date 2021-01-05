@@ -1,17 +1,17 @@
 ---
 title: Créer un runbook Python dans Azure Automation
-description: Tutoriel montrant comment créer, tester et publier un runbook Python simple
+description: Cet article vous apprend à créer, tester et publier un runbook Python simple.
 services: automation
 ms.subservice: process-automation
 ms.date: 04/19/2020
 ms.topic: tutorial
-ms.custom: has-adal-ref
-ms.openlocfilehash: 2b20796fdcf71ccfb60c519d081b42fba982f0b6
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: has-adal-ref, devx-track-python
+ms.openlocfilehash: e12327651165606e6a9b571d410f547a09a8ec8e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82608692"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87847922"
 ---
 # <a name="tutorial-create-a-python-runbook"></a>Tutoriel : Créer un runbook Python
 
@@ -31,7 +31,7 @@ Ce didacticiel vous guide dans la création d’un [Runbook Python](../automatio
 Pour réaliser ce didacticiel, vous avez besoin des éléments suivants :
 
 - Abonnement Azure. Si vous n’avez pas encore d’abonnement, vous pouvez [activer vos avantages abonnés MSDN](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/) ou créer [un compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- [compte Automation](../automation-offering-get-started.md) pour le stockage du Runbook et l’authentification auprès des ressources Azure. Ce compte doit avoir l’autorisation de démarrer et d’arrêter la machine virtuelle.
+- [compte Automation](../index.yml) pour le stockage du Runbook et l’authentification auprès des ressources Azure. Ce compte doit avoir l’autorisation de démarrer et d’arrêter la machine virtuelle.
 - Une machine virtuelle Azure. Vous arrêtez et démarrez cette machine afin qu’elle ne soit pas une machine virtuelle de production.
 
 ## <a name="create-a-new-runbook"></a>Créer un Runbook
@@ -79,13 +79,11 @@ Avant de publier le runbook pour le rendre disponible en production, vous voulez
 
 ## <a name="publish-and-start-the-runbook"></a>Publier et démarrer le Runbook
 
-Le runbook que vous avez créé est toujours en mode brouillon. Il faut le publier pour pouvoir l’exécuter en production.
-Lorsque vous publiez un Runbook, vous écrasez la version publiée existante par la version brouillon.
-Dans ce cas, vous n’avez pas encore de version publiée car vous venez de créer le runbook.
+Le runbook que vous avez créé est toujours en mode brouillon. Il faut le publier pour pouvoir l’exécuter en production. Lorsque vous publiez un Runbook, vous écrasez la version publiée existante par la version brouillon. Dans ce cas, vous n’avez pas encore de version publiée car vous venez de créer le runbook.
 
 1. Cliquez sur **Publier** pour publier le Runbook, puis sur **Oui** quand vous y êtes invité.
 
-2. Si vous faites défiler la page vers la gauche pour visualiser la page **Runbooks**, vous devriez voir l’**État de création** **Publié**.
+2. Si vous faites défiler vers la gauche pour visualiser la page Runbooks, vous devriez voir l’**État de création** **Publié**.
 
 3. Faites défiler la page vers la droite pour visualiser le volet **MyFirstRunbook-Python**.
 
@@ -163,7 +161,7 @@ Pour ce faire, le script doit s’authentifier à l’aide des informations d’
 
 ## <a name="add-code-to-create-python-compute-client-and-start-the-vm"></a>Ajouter du code pour créer le client Compute Python et démarrer la machine virtuelle
 
-Pour utiliser des machines virtuelles Azure, créez une instance du [client Compute Azure pour Python](https://docs.microsoft.com/python/api/azure-mgmt-compute/azure.mgmt.compute.computemanagementclient).
+Pour utiliser des machines virtuelles Azure, créez une instance du [client Compute Azure pour Python](/python/api/azure-mgmt-compute/azure.mgmt.compute.computemanagementclient).
 
 Utilisez le client Compute pour démarrer la machine virtuelle. Ajoutez le code suivant au Runbook :
 

@@ -1,16 +1,16 @@
 ---
-title: Liaisons Azure IoT Hub pour Azure Functions
+title: Déclencheur Azure IoT Hub pour Azure Functions
 description: Découvrez comment répondre aux événements envoyés à un flux d’événements IoT Hub dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/21/2020
 ms.author: cshoe
-ms.openlocfilehash: f63fe965b3f37add8ddf9d262f1ef1dae9fff966
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 25396da3fb9a4293633308bf2e9d3c6b3d07265d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77589604"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87041645"
 ---
 # <a name="azure-iot-hub-trigger-for-azure-functions"></a>Déclencheur Azure IoT Hub pour Azure Functions
 

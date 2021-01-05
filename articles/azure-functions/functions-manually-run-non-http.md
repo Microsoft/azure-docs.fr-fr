@@ -3,14 +3,14 @@ title: Exécuter manuellement une fonction Azure non déclenchée via HTTP
 description: Utiliser une requête HTTP pour exécuter une fonction Azure non déclenchée via HTTP
 author: craigshoemaker
 ms.topic: article
-ms.date: 12/12/2018
+ms.date: 04/23/2020
 ms.author: cshoe
-ms.openlocfilehash: 6571482d738549d2708fd8ab23eaf8c9f6fb1f70
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 79aebf7ed80fea370ff7a5d5cc40911da4144414
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80892357"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91537699"
 ---
 # <a name="manually-run-a-non-http-triggered-function"></a>Exécuter manuellement une fonction non déclenchée via HTTP
 
@@ -37,41 +37,47 @@ Vous utilisez cet emplacement de requête dans Postman, de même que la clé pri
 
 ## <a name="get-the-functions-master-key"></a>Obtenir la clé principale de la fonction
 
-Accédez à votre fonction dans le portail Azure. Cliquez sur **Gérer**, puis recherchez la section **Clés d’hôte**. Cliquez sur le Bouton **Copier** de la ligne *_master* pour copier la clé principale dans le Presse-papiers.
+1. Accédez à votre application de fonction dans le [portail Azure](https://portal.azure.com), sélectionnez **Clés d’application**, puis la clé `_master`. 
 
-![Copier la clé principale à partir de l’écran Gestion des fonctions](./media/functions-manually-run-non-http/azure-portal-functions-master-key.png)
+    :::image type="content" source="./media/functions-manually-run-non-http/azure-portal-functions-master-key.png" alt-text="Localisez la clé principale à copier." border="true":::
 
-Après avoir copié la clé principale, cliquez sur le nom de fonction pour revenir à la fenêtre du fichier de code. Cliquez ensuite sur l’onglet **Journaux d’activité**. Vous noterez ici la présence de messages émanant de la fonction consignée lors de l'exécution de la fonction à partir de Postman.
+1. Dans la section **Modifier la clé**, copiez la valeur de clé dans le Presse-papiers, puis sélectionnez **OK**.
+
+    :::image type="content" source="./media/functions-manually-run-non-http/azure-portal-functions-master-key-copy.png" alt-text="Localisez la clé principale à copier." border="true":::
+
+1. Après avoir copié la *_master*, sélectionnez **Code + Test**, puis sélectionnez **Journaux**. Vous noterez ici la présence de messages émanant de la fonction consignée lors de l'exécution de la fonction à partir de Postman.
+
+    :::image type="content" source="./media/functions-manually-run-non-http/azure-portal-function-log.png" alt-text="Localisez la clé principale à copier." border="true":::
 
 > [!CAUTION]  
-> En raison des autorisations élevées dans votre application de fonction accordées par la clé principale, vous ne devez pas partager celle-ci avec des tiers, ou la distribuer dans une application.
+> En raison des autorisations élevées dans votre application de fonction accordées par la clé principale, vous ne devez pas partager celle-ci avec des tiers, ou la distribuer dans une application. La clé ne doit être envoyée qu’à un point de terminaison HTTPS.
 
 ## <a name="call-the-function"></a>Appeler la fonction
 
 Ouvrez Postman et procédez comme suit :
 
 1. Entrez l'**emplacement de la requête dans la zone de texte de l'URL**.
-2. Vérifiez que la méthode HTTP est définie sur **POST**.
-3. **Cliquez** sur l'onglet **En-têtes**.
-4. Entrez **x-fonctions-key** en tant que première **clé** et collez la clé principale (à partir du Presse-papiers) dans la zone **Valeur**.
-5. Entrez **Content-Type** en tant que deuxième **clé** et entrez **application/json** en tant que **valeur**.
+1. Vérifiez que la méthode HTTP est définie sur **POST**.
+1. Sélectionnez l’onglet **En-têtes**.
+1. Tapez **x-fonctions-key** en tant que première clé et collez la clé principale (à partir du Presse-papiers) en tant que valeur.
+1. Tapez **Content-Type** comme deuxième clé et tapez **application/json** comme valeur.
 
-    ![Paramètres des en-têtes Postman](./media/functions-manually-run-non-http/functions-manually-run-non-http-headers.png)
+    :::image type="content" source="./media/functions-manually-run-non-http/functions-manually-run-non-http-headers.png" alt-text="Localisez la clé principale à copier." border="true":::
 
-6. **Cliquez** sur l'onglet **Corps**.
-7. Entrez **{ "input": "test" }** en tant que corps de la requête.
+1. Sélectionnez l’onglet **Corps** .
+1. Tapez **{ "input": "test" }** en tant que corps de la requête.
 
-    ![Paramètres de corps Postman](./media/functions-manually-run-non-http/functions-manually-run-non-http-body.png)
+    :::image type="content" source="./media/functions-manually-run-non-http/functions-manually-run-non-http-body.png" alt-text="Localisez la clé principale à copier." border="true":::
 
-8. Cliquez sur **Envoyer**.
+1. Sélectionnez **Envoyer**.
+        
+    :::image type="content" source="./media/functions-manually-run-non-http/functions-manually-run-non-http-send.png" alt-text="Localisez la clé principale à copier." border="true":::
 
-    ![Envoi d’une requête avec Postman](./media/functions-manually-run-non-http/functions-manually-run-non-http-send.png)
+    Postman indique alors un état **202 Accepté**.
 
-Postman indique alors un état **202 Accepté**.
+1. Revenez ensuite à votre fonction sur le Portail Azure. Consultez les journaux pour voir les messages émanant de l’appel manuel de la fonction.
 
-Revenez ensuite à votre fonction sur le Portail Azure. Reportez-vous à la fenêtre *Journaux d’activité* afin de consulter les messages émanant de l’appel manuel de la fonction.
-
-![Résultats du journal de la fonction à partir d'un appel manuel](./media/functions-manually-run-non-http/azure-portal-function-log.png)
+    :::image type="content" source="./media/functions-manually-run-non-http/azure-portal-functions-master-key-logs.png" alt-text="Localisez la clé principale à copier." border="true":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

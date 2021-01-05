@@ -1,19 +1,19 @@
 ---
 title: Configurer, optimiser et résoudre les problèmes de AzCopy avec le Stockage Azure | Microsoft Docs
-description: Configurer, optimiser et dépanner AzCopy
+description: Configurer, optimiser et résoudre les problèmes de AzCopy avec le Stockage Azure. Supprimer ou changer l’emplacement des fichiers journaux et de plan Modifier le niveau de consignation par défaut.
 author: normesta
 ms.service: storage
-ms.topic: conceptual
-ms.date: 04/10/2020
+ms.topic: how-to
+ms.date: 07/27/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: dineshm
-ms.openlocfilehash: c3ee0f335741c171c3a7ee1df3eea6dea9c4b728
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a54c77844498beb4fd052153cbcf8cbe498cdb75
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176156"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132208"
 ---
 # <a name="configure-optimize-and-troubleshoot-azcopy"></a>Configurer, optimiser et dépanner AzCopy
 
@@ -34,9 +34,20 @@ Pour configurer les paramètres de proxy pour AzCopy, définissez la variable d�
 |--------|-----------|
 | **Windows** | Dans une invite de commandes, tapez : `set https_proxy=<proxy IP>:<proxy port>`<br> Pour PowerShell, tapez : `$env:https_proxy="<proxy IP>:<proxy port>"`|
 | **Linux** | `export https_proxy=<proxy IP>:<proxy port>` |
-| **MacOS** | `export https_proxy=<proxy IP>:<proxy port>` |
+| **macOS** | `export https_proxy=<proxy IP>:<proxy port>` |
 
 Actuellement, AzCopy ne prend en charge les serveurs proxy qui requièrent une authentification avec NTLM ou Kerberos.
+
+### <a name="bypassing-a-proxy"></a>Contournement d’un proxy ###
+
+Si vous exécutez AzCopy sur Windows et souhaitez lui demander de n’utiliser aucun _proxy_ (au lieu de détecter automatiquement les paramètres), utilisez ces commandes. Avec ces paramètres, AzCopy ne recherche pas ou ne tente pas d’utiliser un proxy.
+
+| Système d’exploitation | Environnement | Commandes  |
+|--------|-----------|----------|
+| **Windows** | Invite de commandes (CMD) | `set HTTPS_PROXY=dummy.invalid` <br>`set NO_PROXY=*`|
+| **Windows** | PowerShell | `$env:HTTPS_PROXY="dummy.invalid"` <br>`$env:NO_PROXY="*"`<br>|
+
+Sur d’autres systèmes d’exploitation, laissez simplement la variable HTTPS_PROXY non définie si vous ne souhaitez pas utiliser de proxy.
 
 ## <a name="optimize-performance"></a>Optimiser les performances
 
@@ -52,27 +63,25 @@ Cette section vous aidera à effectuer les tâches d'optimisation suivantes :
 
 ### <a name="run-benchmark-tests"></a>Exécuter des tests d’évaluation
 
-Vous pouvez exécuter un test d’évaluation des performances sur des conteneurs d’objets blob spécifiques pour afficher des statistiques générales sur les performances et pour identifier les goulots d’étranglement des performances. 
+Vous pouvez exécuter un test d’évaluation des performances sur des conteneurs d’objets blob ou des partages de fichiers spécifiques pour afficher des statistiques générales sur les performances et identifier des goulots d’étranglement des performances. Vous pouvez exécuter le test en chargeant ou en téléchargeant des données de test générées. 
 
 Utilisez la commande suivante pour exécuter un test d’évaluation des performances.
 
 |    |     |
 |--------|-----------|
-| **Syntaxe** | `azcopy bench 'https://<storage-account-name>.blob.core.windows.net/<container-name>'` |
-| **Exemple** | `azcopy bench 'https://mystorageaccount.blob.core.windows.net/mycontainer/myBlobDirectory?sv=2018-03-28&ss=bjqt&srs=sco&sp=rjklhjup&se=2019-05-10T04:37:48Z&st=2019-05-09T20:37:48Z&spr=https&sig=%2FSOVEFfsKDqRry4bk3qz1vAQFwY5DDzp2%2B%2F3Eykf%2FJLs%3D'` |
+| **Syntaxe** | `azcopy benchmark 'https://<storage-account-name>.blob.core.windows.net/<container-name>'` |
+| **Exemple** | `azcopy benchmark 'https://mystorageaccount.blob.core.windows.net/mycontainer/myBlobDirectory?sv=2018-03-28&ss=bjqt&srs=sco&sp=rjklhjup&se=2019-05-10T04:37:48Z&st=2019-05-09T20:37:48Z&spr=https&sig=%2FSOVEFfsKDqRry4bk3qz1vAQFwY5DDzp2%2B%2F3Eykf%2FJLs%3D'` |
 
 > [!TIP]
 > Cet exemple englobe les arguments de chemin d’accès avec des guillemets simples (' '). Utilisez des guillemets simples dans tous les interpréteurs de commandes, à l’exception de l’interface de commande Windows (cmd. exe). Si vous utilisez une interface de commande Windows (cmd. exe), placez les arguments de chemin d’accès entre guillemets doubles (" ") au lieu de guillemets simples (' ').
 
 Cette commande exécute un test d’évaluation des performances en chargeant les données de test dans une destination spécifiée. Les données de test sont générées en mémoire, chargées dans la destination, puis supprimées de la destination une fois le test terminé. Vous pouvez spécifier le nombre de fichiers à générer et leur taille souhaitée à l’aide de paramètres de commande facultatifs.
 
-Pour obtenir des informations de référence détaillées, consultez [azcopy bench](storage-ref-azcopy-bench.md).
-
-Pour afficher une aide détaillée sur cette commande, tapez `azcopy bench -h` et appuyez sur la touche Entrée.
+Si vous préférez exécuter ce test en téléchargeant des données, définissez le paramètre `mode` sur `download`. Pour obtenir des informations de référence détaillées, consultez [benchmark azcopy](storage-ref-azcopy-bench.md). 
 
 ### <a name="optimize-throughput"></a>Optimiser le débit
 
-Vous pouvez utiliser l’indicateur `cap-mbps` dans vos commandes pour plafonner le débit de données. Par exemple, la commande suivante reprend un travail et applique au débit un plafond de `10` mégaoctets (Mo) par seconde. 
+Vous pouvez utiliser l’indicateur `cap-mbps` dans vos commandes pour plafonner le débit de données. Par exemple, la commande suivante reprend un travail et plafonne le débit à `10` mégabits (Mb) par seconde. 
 
 ```azcopy
 azcopy jobs resume <job-id> --cap-mbps 10
@@ -86,7 +95,7 @@ Si votre ordinateur dispose de moins de 5 unités centrales, la valeur de cette 
 |--------|-----------|
 | **Windows** | `set AZCOPY_CONCURRENCY_VALUE=<value>` |
 | **Linux** | `export AZCOPY_CONCURRENCY_VALUE=<value>` |
-| **MacOS** | `export AZCOPY_CONCURRENCY_VALUE=<value>` |
+| **macOS** | `export AZCOPY_CONCURRENCY_VALUE=<value>` |
 
 Utilisez `azcopy env` pour vérifier la valeur actuelle de cette variable. Si la valeur est vide, vous pouvez lire la valeur utilisée en examinant le début de tout fichier journal AzCopy. La valeur sélectionnée et la raison pour laquelle elle a été sélectionnée sont signalées ici.
 
@@ -101,7 +110,7 @@ Exprimez cette valeur en gigaoctets (Go).
 |--------|-----------|
 | **Windows** | `set AZCOPY_BUFFER_GB=<value>` |
 | **Linux** | `export AZCOPY_BUFFER_GB=<value>` |
-| **MacOS** | `export AZCOPY_BUFFER_GB=<value>` |
+| **macOS** | `export AZCOPY_BUFFER_GB=<value>` |
 
 ### <a name="optimize-file-synchronization"></a>Optimiser la synchronisation des fichiers
 
@@ -182,9 +191,9 @@ Utilisez l’une de ces commandes.
 
 | Système d’exploitation | Commande  |
 |--------|-----------|
-| **Windows** | `set AZCOPY_JOB_PLAN_LOCATION=<value>` |
+| **Windows** | PowerShell :`$env:AZCOPY_JOB_PLAN_LOCATION="<value>"` <br> Dans une invite de commandes, tapez : `set AZCOPY_JOB_PLAN_LOCATION=<value>` |
 | **Linux** | `export AZCOPY_JOB_PLAN_LOCATION=<value>` |
-| **MacOS** | `export AZCOPY_JOB_PLAN_LOCATION=<value>` |
+| **macOS** | `export AZCOPY_JOB_PLAN_LOCATION=<value>` |
 
 Utilisez `azcopy env` pour vérifier la valeur actuelle de cette variable. Si la valeur est vide, les fichiers de plan sont écrits à l’emplacement par défaut.
 
@@ -194,9 +203,9 @@ Utilisez l’une de ces commandes.
 
 | Système d’exploitation | Commande  |
 |--------|-----------|
-| **Windows** | `set AZCOPY_LOG_LOCATION=<value>` |
+| **Windows** | PowerShell :`$env:AZCOPY_LOG_LOCATION="<value>"` <br> Dans une invite de commandes, tapez : `set AZCOPY_LOG_LOCATION=<value>`|
 | **Linux** | `export AZCOPY_LOG_LOCATION=<value>` |
-| **MacOS** | `export AZCOPY_LOG_LOCATION=<value>` |
+| **macOS** | `export AZCOPY_LOG_LOCATION=<value>` |
 
 Utilisez `azcopy env` pour vérifier la valeur actuelle de cette variable. Si la valeur est vide, les journaux sont écrits à l’emplacement par défaut.
 

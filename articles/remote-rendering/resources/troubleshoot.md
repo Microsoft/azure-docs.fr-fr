@@ -5,34 +5,43 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/25/2020
 ms.topic: troubleshooting
-ms.openlocfilehash: c1b807c6e4fa269ac2ab8d7eacd3ca1d4f81a1ca
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 34a947a2a0f6d8c87c0580f273130b671b4f17fc
+ms.sourcegitcommit: a4533b9d3d4cd6bb6faf92dd91c2c3e1f98ab86a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792613"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "97722230"
 ---
 # <a name="troubleshoot"></a>Dépanner
 
 Cette page liste les problèmes courants qui interfèrent avec Azure Remote Rendering et les façons de les résoudre.
 
+## <a name="cant-link-storage-account-to-arr-account"></a>Impossibilité de lier un compte de stockage à un compte ARR
+
+Parfois, lors de la [liaison d’un compte de stockage](../how-tos/create-an-account.md#link-storage-accounts), le compte de rendu à distance (ARR, Remote Rendering Account) n’est pas répertorié. Pour résoudre ce problème, accédez au compte ARR dans le portail Azure, puis sélectionnez **Identité** dans le groupe **Paramètres** sur la gauche. Assurez-vous que l’**État** est **Activé**.
+![Débogueur de frames Unity](./media/troubleshoot-portal-identity.png)
+
 ## <a name="client-cant-connect-to-server"></a>Le client ne peut pas se connecter au serveur
 
-Vérifiez que vos pare-feu (sur l’appareil, dans les routeurs, etc.) ne bloquent pas les ports suivants :
+Assurez-vous que vos pare-feu (sur l’appareil, les routeurs internes, etc.) ne bloquent pas les ports mentionnés dans la [Configuration requise](../overview/system-requirements.md#network-firewall).
 
-* **50051 (TCP)**  : nécessaire pour la connexion initiale (négociation HTTP)
-* **8266 (TCP+UDP)**  : nécessaire pour le transfert de données
-* **5000 (TCP)** , **5433 (TCP)** , **8443 (TCP)**  : nécessaires pour [ArrInspector](tools/arr-inspector.md)
-
-## <a name="error-disconnected-videoformatnotavailable"></a>Erreur 'Déconnecté : VideoFormatNotAvailable'
+## <a name="error-disconnected-videoformatnotavailable"></a>Erreur : `Disconnected: VideoFormatNotAvailable`
 
 Vérifiez que votre GPU prend en charge le décodage vidéo matériel. Consultez [PC de développement](../overview/system-requirements.md#development-pc).
 
 Si vous travaillez sur un ordinateur portable avec deux GPU, il est possible que le GPU que vous utilisez par défaut n’offre pas de fonctionnalité de décodage vidéo matériel. Si c’est le cas, essayez de forcer votre application à utiliser l’autre GPU. Cela est souvent possible dans les paramètres du pilote GPU.
 
+## <a name="retrieve-sessionconversion-status-fails"></a>La récupération de l’état de la session/conversion échoue
+
+Une fréquence trop élevée d’envoi de commandes d’API REST entraîne une limitation du serveur, et finit par retourner un échec. Le code d’état http dans le cas de limitation est 429 (« trop de demandes »). En règle générale, il doit y avoir un délai de **5 à 10 secondes entre les appels successifs**.
+
+Notez que cette limite affecte non seulement les appels d’API REST effectués directement, mais aussi leurs équivalents C#/C++, tels que `Session.GetPropertiesAsync`, `Session.RenewAsync` ou `Frontend.GetAssetConversionStatusAsync`.
+
+Si vous rencontrez une limitation côté serveur, modifiez le code pour effectuer les appels moins fréquemment. Le serveur réinitialisant l’état de limitation à chaque minutes, vous pouvez sans problème réexécuter le code au bout d’une minute.
+
 ## <a name="h265-codec-not-available"></a>Codec H265 non disponible
 
-Le serveur peut refuser de se connecter avec une erreur **codec non disponible** pour deux raisons.
+Le serveur peut refuser de se connecter avec une erreur `codec not available` pour deux raisons.
 
 **Le codec H265 n’est pas installé :**
 
@@ -79,7 +88,7 @@ La qualité de la vidéo peut être compromise par la qualité du réseau ou par
 
 ## <a name="video-recorded-with-mrc-does-not-reflect-the-quality-of-the-live-experience"></a>La vidéo enregistrée avec la fonction MRC ne reflète pas la qualité de l’expérience en direct
 
-Une vidéo peut être enregistrée sur Hololens par le biais de la fonction [Mixed Reality Capture (MRC)](https://docs.microsoft.com/windows/mixed-reality/mixed-reality-capture-for-developers). Toutefois, la vidéo qui en résulte est de moins bonne qualité que l’expérience en direct pour deux raisons :
+Une vidéo peut être enregistrée sur HoloLens par le biais de la fonction [Mixed Reality Capture (MRC)](/windows/mixed-reality/mixed-reality-capture-for-developers). Toutefois, la vidéo qui en résulte est de moins bonne qualité que l’expérience en direct pour deux raisons :
 * La fréquence d’images vidéo est limitée à 30 Hz au lieu de 60 Hz.
 * Les images vidéo ne passent pas par l’étape de traitement [Reprojection en phase tardive](../overview/features/late-stage-reprojection.md), de sorte que la vidéo semble plus hachée.
 
@@ -100,9 +109,9 @@ Si ces deux étapes n’ont pas permis de résoudre le problème, il est nécess
 
 **Le modèle dépasse les limites de la machine virtuelle sélectionnée, notamment le nombre maximal de polygones :**
 
-Consultez les [limitations de taille de machine virtuelle](../reference/limits.md#overall-number-of-polygons) spécifiques.
+Consultez les [limites de taille de serveur](../reference/limits.md#overall-number-of-polygons) spécifiques.
 
-**Le modèle ne se trouve pas dans la vue de frustum :**
+**Le modèle ne se trouve pas dans le frustum de l’appareil photo :**
 
 Dans de nombreux cas, le modèle s’affiche correctement, mais il se trouve en dehors du frustum de l’appareil photo. Une raison courante à cela est que le modèle a été exporté avec un tableau croisé dynamique trop décentré, de sorte qu’il est coupé par le plan arrière de découpage de l’appareil photo. Cela permet d’interroger par programmation le cadre englobant du modèle et de visualiser la zone avec Unity sous la forme d’une zone de ligne ou d’imprimer ses valeurs dans le journal de débogage.
 
@@ -137,9 +146,20 @@ Ce cadre englobant peut présenter deux problèmes qui mènent à une géométri
 
 **Le pipeline de rendu Unity n’inclut pas les crochets de rendu :**
 
-Azure Remote Rendering se raccroche au pipeline de rendu Unity pour créer la composition du cadre avec la vidéo et effectuer la reprojection. Pour vérifier que ces crochets existent, ouvrez le menu *Window > Analysis > Frame Debug* (Fenêtre > Analyse > Débogage de frames). Activez-le et vérifiez qu’il existe deux entrées pour `HolographicRemotingCallbackPass` dans le pipeline :
+Azure Remote Rendering se raccroche au pipeline de rendu Unity pour créer la composition du cadre avec la vidéo et effectuer la reprojection. Pour vérifier que ces crochets, ouvrez le menu *:::no-loc text="Window > Analysis > Frame debugger":::* . Activez-le et vérifiez qu’il existe deux entrées pour `HolographicRemotingCallbackPass` dans le pipeline :
 
-![Débogueur de frames Unity](./media/troubleshoot-unity-pipeline.png)
+![Pipeline de rendu Unity](./media/troubleshoot-unity-pipeline.png)
+
+## <a name="checkerboard-pattern-is-rendered-after-model-loading"></a>Le modèle de damier est rendu après le chargement du modèle
+
+Si l’image rendue se présente comme suit : ![La capture d’écran présente une grille de carrés noirs et blancs avec un menu Outils.](../reference/media/checkerboard.png)
+alors le renderer atteint les [limites de polygones pour la taille de configuration standard](../reference/vm-sizes.md). Pour atténuer ce problème, basculez vers une taille de configuration **Premium** ou réduisez le nombre de polygones visibles.
+
+## <a name="the-rendered-image-in-unity-is-upside-down"></a>L’image rendue dans Unity est à l’envers
+
+Veillez à suivre à la lettre le [Tutoriel Unity : Afficher des modèles distants](../tutorials/unity/view-remote-models/view-remote-models.md). Une image à l’envers indique que Unity est nécessaire pour créer une cible de rendu hors écran. Ce comportement n’est pas pris en charge actuellement, et crée un impact énorme sur les performances sur HoloLens 2.
+
+Ce problème peut être lié à MSAA, à HDR ou à l’activation du post-traitement. Vérifiez que le profil de qualité inférieure est sélectionné et défini comme valeur par défaut dans Unity. Pour ce faire, accédez à *Edit > Project Settings... > Quality* (Modifier > Paramètres du projet... > Qualité).
 
 ## <a name="unity-code-using-the-remote-rendering-api-doesnt-compile"></a>Le code Unity utilisant l’API Remote Rendering ne se compile pas
 
@@ -150,22 +170,84 @@ Basculez le *type de build* de la solution Unity sur **Déboguer**. Lors du test
 ### <a name="compile-failures-when-compiling-unity-samples-for-hololens-2"></a>Échecs de compilation lors de la compilation d’exemples Unity pour HoloLens 2
 
 Nous avons constaté de faux échecs lors de tentative de compilation d’exemples Unity (démarrage rapide, ShowCaseApp, etc.) pour HoloLens 2. Visual Studio signale qu’il ne peut pas copier certains fichiers qui sont pourtant présents. Si vous avez rencontré ce problème :
-* Supprimez tous les fichiers Unity temporaires du projet, puis réessayez.
+* Supprimez tous les fichiers Unity temporaires du projet, puis réessayez. C’est-à-dire, fermez Unity, supprimez les dossiers *library* et *obj* temporaires dans le répertoire du projet, puis chargez/générez à nouveau le projet.
 * Vérifiez que les projets se trouvent dans un répertoire sur disque dont le chemin est relativement court, car l’étape de copie échoue parfois en présence de noms de fichiers longs.
 * Si cela n’est pas la cause, il est possible que MS Sense interfère avec l’étape de copie. Pour configurer une exception, exécutez cette commande de Registre à partir de la ligne de commande (nécessite des droits d’administrateur) :
     ```cmd
     reg.exe ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Advanced Threat Protection" /v groupIds /t REG_SZ /d "Unity”
     ```
     
+### <a name="arm64-builds-for-unity-projects-fail-because-audiopluginmshrtfdll-is-missing"></a>Les builds Arm64 pour les projets Unity échouent car AudioPluginMsHRTF.dll est manquant
+
+`AudioPluginMsHRTF.dll` pour Arm64 a été ajouté au package *Windows Mixed Reality* *(com.unity.xr.windowsmr.metro)* dans la version 3.0.1. Vérifiez que la version 3.0.1 ou ultérieure est installée par le biais de Unity Package Manager. Dans la barre de menus Unity, accédez à *Window > Package Manager* (Fenêtre > Gestionnaire de package) et recherchez le package *Windows Mixed Reality*.
+
+## <a name="native-c-based-application-does-not-compile"></a>L’application basée sur C++ native ne se compile pas
+
+### <a name="library-not-found-error-for-uwp-application-or-dll"></a>Erreur « bibliothèque introuvable » pour une application ou dll UWP
+
+Le package NuGet C++ contient un fichier `microsoft.azure.remoterendering.Cpp.targets` qui définit la version de fichier binaire à utiliser. Pour identifier `UWP`, les conditions dans le fichier vérifient la présence de `ApplicationType == 'Windows Store'`. Il faut donc vérifier que ce type est défini dans le projet. Cela devrait être le cas lors de la création d’une application ou dll UWP via l’Assistant Projet de Visual Studio.
+
 ## <a name="unstable-holograms"></a>Hologrammes instables
 
 Si les objets rendus semblent se déplacer avec les mouvements des têtes, vous rencontrez peut-être des problèmes avec la *Reprojection en phase tardive* (LSR). Pour obtenir des conseils sur la façon d’aborder une telle situation, consultez la section relative à la [reprojection en phase tardive](../overview/features/late-stage-reprojection.md).
 
 Les hologrammes instables (hologrammes qui oscillent, déformés, qui vacillent ou qui sautent) peuvent également s’expliquer par une mauvaise connectivité réseau, en particulier une bande passante réseau insuffisante ou une latence trop élevée. La valeur de [statistiques de performances](../overview/features/performance-queries.md) `ARRServiceStats.VideoFramesReused` constitue un bon indicateur de la qualité de votre connexion réseau. Les trames réutilisées indiquent les situations où une ancienne trame vidéo devait être réutilisée côté client car aucune nouvelle trame vidéo n’était disponible, par exemple en raison d’une perte de paquets ou de variations de la latence du réseau. Si `ARRServiceStats.VideoFramesReused` est souvent supérieur à zéro, cela indique un problème réseau.
 
-Une autre valeur à examiner est `ARRServiceStats.LatencyPoseToReceiveAvg`. Elle doit toujours être inférieure à 100 ms. Si vous voyez des valeurs plus élevées, cela indique que vous êtes connecté à un centre de données qui est trop éloigné.
+Une autre valeur à examiner est `ARRServiceStats.LatencyPoseToReceiveAvg`. Elle doit toujours être inférieure à 100 ms. Des valeurs plus élevées pourraient indiquer que vous êtes connecté à un centre de données qui est trop éloigné.
 
 Pour obtenir la liste des atténuations potentielles, consultez les [instructions pour la connectivité réseau](../reference/network-requirements.md#guidelines-for-network-connectivity).
+
+## <a name="z-fighting"></a>Z-fighting
+
+Bien qu’ARR propose une [fonctionnalité d’atténuation du Z-fighting](../overview/features/z-fighting-mitigation.md), il est possible que le Z-fighting soit encore visible dans la scène. Ce guide vise à résoudre ce problème.
+
+### <a name="recommended-steps"></a>Étapes recommandées
+
+Utilisez le workflow suivant pour atténuer le Z-fighting  :
+
+1. Testez la scène avec les paramètres par défaut d’ARR (atténuation du Z-fighting activée).
+
+1. Désactivez l’atténuation du Z-fighting par le biais de son [API](../overview/features/z-fighting-mitigation.md). 
+
+1. Changez les plans proche et lointain de la caméra de façon à obtenir une plage plus proche.
+
+1. Résolvez les problèmes de la scène à l’aide de la section suivante.
+
+### <a name="investigating-remaining-z-fighting"></a>Examen du Z-fighting restant
+
+Si vous avez effectué les étapes ci-dessus et que le Z-fighting restant est inacceptable, vous devez en rechercher la cause sous-jacente. Comme indiqué dans la [page de fonctionnalité d’atténuation du Z-fighting](../overview/features/z-fighting-mitigation.md), il existe deux raisons principales pour la présence de Z-fighting : la perte de précision de profondeur à l’extrémité lointaine de la plage de profondeur, et des surfaces qui se croisent tout en étant coplanaires. La perte de précision de profondeur est une éventualité mathématique qui ne peut être atténuée qu’en effectuant l’étape 3 ci-dessus. Des surfaces coplanaires traduisent un défaut d’élément multimédia source, et il est préférable de les corriger dans les données sources.
+
+ARR offre une fonctionnalité permettant de déterminer si des surfaces peuvent présenter un Z-fighting : la [mise en surbrillance du damier](../overview/features/z-fighting-mitigation.md). Vous pouvez également déterminer visuellement ce qui provoque le Z-fighting. La première animation ci-dessous montre un exemple de perte de précision de profondeur dans la distance, tandis que la deuxième montre un exemple de surfaces presque coplanaires :
+
+![L’animation montre un exemple de perte de précision de profondeur sur la distance.](./media/depth-precision-z-fighting.gif)  ![L’animation montre un exemple de surfaces presque coplanaires.](./media/coplanar-z-fighting.gif)
+
+Comparez ces exemples à votre Z-fighting pour en déterminer la cause, ou suivez éventuellement ce workflow pas à pas :
+
+1. Placez la caméra au-dessus des surfaces Z-fighting pour regarder directement la surface.
+1. Reculez lentement la caméra afin de l’éloigner des surfaces.
+1. Si le Z-fighting est visible à tout moment, les surfaces sont parfaitement coplanaires. 
+1. Si le Z-fighting est visible la plupart du temps, les surfaces sont presque coplanaires.
+1. Si le Z-fighting est uniquement visible de loin, la cause est un manque de précision de profondeur.
+
+Les surfaces coplanaires peuvent avoir plusieurs causes :
+
+* Un objet a été dupliqué par l’application d’exportation en raison d’une erreur ou d’approches de workflow différentes.
+
+    Vérifiez ces problèmes avec l’application concernée.
+
+* Les surfaces sont dupliquées et retournées de façon à apparaître recto verso dans les convertisseurs qui utilisent le front-face ou back-face culling.
+
+    L’importation par le biais de la [conversion de modèle](../how-tos/conversion/model-conversion.md) détermine le côté principal du modèle. Le caractère bilatéral est considéré comme la valeur par défaut. La surface sera rendue sous la forme d’un mur fin avec un éclairage physiquement correct des deux côtés. Le caractère unilatéral peut être impliqué par des indicateurs dans l’élément multimédia source, ou forcé explicitement pendant la [conversion de modèle](../how-tos/conversion/model-conversion.md). En outre, mais de manière facultative, le [mode unilatéral](../overview/features/single-sided-rendering.md) peut être défini sur « normal ».
+
+* Des objets se croisent dans les éléments multimédias sources.
+
+     Un Z-fighting peut aussi être créé quand des objets sont transformés de telle manière que certaines de leurs surfaces se chevauchent. La transformation de certaines parties de l’arborescence de la scène dans la scène importée dans ARR peut également créer ce problème.
+
+* Des surfaces sont intentionnellement créées pour se toucher, comme des décalques ou du texte sur des murs.
+
+## <a name="graphics-artifacts-using-multi-pass-stereo-rendering-in-native-c-apps"></a>Artefacts graphiques utilisant le rendu stéréo à plusieurs passes dans les applications C++ natives
+
+Dans certains cas, les applications C++ natives qui utilisent un mode de rendu stéréo à plusieurs passes pour le contenu local (rendu gauche et droite dans des passes séparées) après l’appel de [**BlitRemoteFrame**](../concepts/graphics-bindings.md#render-remote-image) peuvent déclencher un bogue du pilote. Le bogue entraîne des problèmes de pixellisation non déterministes, provoquant la disparition aléatoire de triangles individuels ou de parties de triangles du contenu local. Pour des raisons de performances, il est de toute manière recommandé de rendre le contenu local avec une technique de rendu stéréo en une seule passe plus moderne, par exemple utilisant **SV_RenderTargetArrayIndex**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

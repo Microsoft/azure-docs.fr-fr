@@ -3,16 +3,16 @@ title: Migration NAS locale vers Azure File Sync
 description: Découvrez comment migrer des fichiers d’un emplacement NAS (Network Attached Storage) vers un déploiement de cloud hybride à l’aide d’Azure File Sync et de partages de fichiers Azure.
 author: fauhse
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/19/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: 7b0c7a30580d3863a78e85b8b45287a598bbf394
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0d8d19256dfca21cc805c2689557099a6785f76b
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80247348"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94629204"
 ---
 # <a name="migrate-from-network-attached-storage-nas-to-a-hybrid-cloud-deployment-with-azure-file-sync"></a>Migrer de Network Attached Storage (NAS) vers un déploiement de cloud hybride avec Azure File Sync
 
@@ -124,7 +124,7 @@ Arrière-plan :
 :::row-end:::
 :::row:::
    :::column span="1":::
-      /UNILOG:\<nom de fichier\>
+      /UNILOG:\<file name\>
    :::column-end:::
    :::column span="1":::
       Renvoie l’état au fichier LOG au format UNICODE (remplace le journal existant).
@@ -208,13 +208,13 @@ Vous avez terminé la migration d’un partage/groupe de partages vers une racin
 Vous pouvez essayer d’exécuter quelques-unes de ces copies en parallèle. Nous vous recommandons de traiter l’étendue d’un partage de fichiers Azure à la fois.
 
 > [!WARNING]
-> Quand vous avez déplacé toutes les données de votre emplacement NAS vers le serveur Windows Server et que la migration est terminée : revenez à ***tous*** les groupes de synchronisation dans le portail Azure et définissez le pourcentage d’espace de volume libre assuré par la hiérarchisation cloud sur une valeur mieux adaptée à l’utilisation du cache, par exemple 20 %. 
+> Quand vous avez déplacé toutes les données de votre emplacement NAS vers le serveur Windows Server et que la migration est terminée : revenez à ***tous** les groupes de synchronisation dans le Portail Azure et définissez le pourcentage d’espace de volume libre assuré par la hiérarchisation cloud sur une valeur mieux adaptée à l’utilisation du cache, par exemple 20 %. 
 
 La stratégie de libération d’espace de volume par hiérarchisation cloud agit au niveau du volume avec potentiellement plusieurs points de terminaison pour la synchronisation à partir du volume. Si vous oubliez de définir l’espace libre sur un point de terminaison de serveur, la synchronisation continue d’appliquer la règle la plus restrictive et tente de conserver un espace disque disponible de 99 %. Dans ce cas, vous n’obtiendrez pas les performances attendues du cache local, sauf si vous souhaitez seulement disposer de l’espace de noms pour un volume contenant uniquement des données d’archivage rarement sollicitées et que vous réservez le reste de l’espace de stockage pour un autre scénario.
 
 ## <a name="troubleshoot"></a>Dépanner
 
-Le problème que vous êtes le plus susceptible de rencontrer est un échec de la commande RoboCopy de type *« Volume plein »* côté Windows Server. Toutes les heures, la hiérarchisation cloud retire le contenu du disque Windows Server local, qui a été synchronisé. Son objectif est d’atteindre 99 % d’espace libre sur le volume.
+Le problème que vous êtes le plus susceptible de rencontrer est un échec de la commande RoboCopy de type _« Volume plein » côté Windows Server. Toutes les heures, la hiérarchisation cloud retire le contenu du disque Windows Server local, qui a été synchronisé. Son objectif est d’atteindre 99 % d’espace libre sur le volume.
 
 Laissez la synchronisation s’effectuer et la hiérarchisation cloud libérer l’espace disque. Vous pouvez observer l’opération dans l’Explorateur de fichiers sur votre serveur Windows Server.
 
@@ -226,6 +226,6 @@ Pour plus d’informations sur la résolution des problèmes Azure File Sync, su
 
 Vous pouvez en apprendre davantage sur les partages de fichiers Azure et Azure File Sync. Les articles suivants vous aident à comprendre les options avancées et les meilleures pratiques et contiennent également des aides pour la résolution des problèmes. Ces articles sont liés à la [documentation relative aux partages de fichiers Azure](storage-files-introduction.md), le cas échéant.
 
-* [Vue d’ensemble d’AFS](https://aka.ms/AFS)
+* [Vue d’ensemble d’AFS](./storage-sync-files-planning.md)
 * [Déployer AFS](storage-files-deployment-guide.md)
 * [Résoudre les problèmes de synchronisation de fichiers Azure](storage-sync-files-troubleshoot.md)

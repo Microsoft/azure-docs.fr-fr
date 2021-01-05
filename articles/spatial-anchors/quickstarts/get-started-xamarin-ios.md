@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer une application Xamarin iOS'
 description: Dans ce démarrage rapide, vous allez apprendre à générer une application iOS avec Xamarin en utilisant Spatial Anchors.
-author: craigktreasure
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 07/22/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: c5e217a33c8b461a438e2d0209fe6733850634e6
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b62ca4b02a1bd28d150f233adf1dfb621995e1c4
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75465147"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96009736"
 ---
 # <a name="quickstart-create-a-xamarin-ios-app-with-azure-spatial-anchors"></a>Démarrage rapide : Créer une application Xamarin iOS avec Azure Spatial Anchors
 
@@ -33,7 +33,7 @@ Vous découvrirez comment effectuer les actions suivantes :
 Pour suivre ce guide de démarrage rapide, veillez à avoir :
 - Un Mac exécutant macOS High Sierra (10.13) ou une version ultérieure avec :
   - La dernière version du kit de développement logiciel (SDK) Xcode et iOS installée à partir de l’[App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12).
-  - Une version à jour de <a href="https://docs.microsoft.com/visualstudio/mac/installation?view=vsmac-2019" target="_blank">Visual Studio pour Mac 8.1+</a>.
+  - Une version à jour de <a href="/visualstudio/mac/installation?view=vsmac-2019" target="_blank">Visual Studio pour Mac 8.1+</a>.
   - <a href="https://git-scm.com/download/mac" target="_blank">Git pour macOS</a>.
   - <a href="https://git-lfs.github.com/">Git LFS</a>.
 
@@ -54,6 +54,8 @@ Ouvrez `Xamarin/SampleXamarin.Common/AccountDetails.cs`.
 Localisez le champ `SpatialAnchorsAccountKey` et remplacez `Set me` par la clé du compte.
 
 Localisez le champ `SpatialAnchorsAccountId` et remplacez `Set me` par l’identificateur du compte.
+
+Recherchez le champ `SpatialAnchorsAccountDomain` et remplacez `Set me` par le domaine du compte.
 
 ## <a name="deploy-the-app-to-your-ios-device"></a>Déployer l’application sur votre appareil iOS
 

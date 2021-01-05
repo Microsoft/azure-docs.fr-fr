@@ -3,25 +3,25 @@ title: Demander un package d’accès dans la gestion des droits d’utilisation
 description: Découvrez comment utiliser le portail Mon Accès pour demander l’accès à un package d’accès dans la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: mamtakumar
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/26/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: mamkumar
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4b1ccde2f1f92237978ab4e68acaa26393bbb9d8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 726507fa6ea0651b23d46424bda669a2d8ad41e0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230321"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996642"
 ---
 # <a name="request-access-to-an-access-package-in-azure-ad-entitlement-management"></a>Demander l’accès à un package d’accès dans la gestion des droits d’utilisation Azure AD
 
@@ -80,6 +80,12 @@ Une fois que vous avez trouvé le package d’accès dans le portail Mon Accès,
 Si vous demandez l’accès à un package d’accès auquel plusieurs stratégies s’appliquent, il pourra vous être demandé de sélectionner une stratégie. Par exemple, un gestionnaire de package d’accès peut configurer un package d’accès avec deux stratégies pour deux groupes d’employés internes. La première stratégie peut autoriser l’accès pendant 60 jours et nécessiter une approbation. La deuxième stratégie peut autoriser l’accès pendant 2 jours et ne nécessiter aucune approbation. Si vous rencontrez ce scénario, vous devez sélectionner la stratégie que vous souhaitez utiliser.
 
 ![Portail Mon Accès – Demander l’accès – plusieurs stratégies](./media/entitlement-management-request-access/my-access-multiple-policies.png)
+
+### <a name="fill-out-requestor-information"></a>Renseigner les informations relatives au demandeur
+
+Vous pouvez demander à accéder à un package d’accès qui requiert une justification métier et des informations supplémentaires sur le demandeur avant de vous autoriser à accéder au package d’accès. Renseignez toutes les informations relatives au demander pour accéder au package d’accès.
+
+![Portail Mon accès - Demander l’accès - Renseigner les informations relatives au demandeur](./media/entitlement-management-request-access/my-access-requestor-information.png)
 
 ## <a name="resubmit-a-request"></a>Resoumettre une demande
 

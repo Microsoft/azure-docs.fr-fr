@@ -1,18 +1,14 @@
 ---
 title: Abonnements Azure Event Grid via le portail
 description: Cet article explique comment créer des abonnements Event Grid pour les sources prises en charge, telles que Stockage Blob Azure, à l’aide du Portail Azure.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 599f48ed241010d8551bd110c7f778c9ef508eac
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/07/2020
+ms.openlocfilehash: e80e2243c93ab38187646256f567d6ab73c40100
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81393171"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995061"
 ---
 # <a name="subscribe-to-events-through-portal"></a>S’abonner à des événements via le portail
 
@@ -28,7 +24,7 @@ Pour créer un abonnement Event Grid pour une des [sources d’événements](ove
 
 1. Recherchez **Abonnements Event Grid**  et sélectionnez cette option parmi celles disponibles.
 
-   ![Recherche](./media/subscribe-through-portal/search.png)
+   ![La capture d’écran montre la recherche dans le portail Azure avec les abonnements Event Grid sélectionnés.](./media/subscribe-through-portal/search.png)
 
 1. Sélectionnez **+ Abonnement aux événements**.
 
@@ -44,7 +40,7 @@ Pour créer un abonnement Event Grid pour une des [sources d’événements](ove
 
 1. Spécifiez des détails supplémentaires sur l’abonnement aux événements, comme le point de terminaison pour la gestion des événements et un nom d’abonnement.
 
-   ![Spécifier les détails de l’abonnement](./media/subscribe-through-portal/provide-subscription-details.png)
+   ![Capture d’écran montrant les sections « Détails du point de terminaison » et « Détails de l’abonnement aux événements » avec une valeur de nom d’abonnement entrée.](./media/subscribe-through-portal/provide-subscription-details.png)
 
 1. Pour activer le lettrage mort et personnaliser les stratégies de nouvelle tentative, sélectionnez **Fonctionnalités supplémentaires**.
 

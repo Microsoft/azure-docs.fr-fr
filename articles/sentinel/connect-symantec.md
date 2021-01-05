@@ -1,6 +1,6 @@
 ---
 title: Connecter des données Symantec ICDx à Azure Sentinel | Microsoft Docs
-description: Découvrez comment connecter des données Symantec ICDx à Azure Sentinel.
+description: Découvrez comment utiliser le connecteur Symantec ICDx pour connecter facilement tous vos journaux de la solution de sécurité Symantec à Azure Sentinel.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/30/2019
 ms.author: yelevin
-ms.openlocfilehash: cac63aee5f9ebf3859b138e6444e40b1e2dd30f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 67fc80b5f34cf3a98fd39ddc352cb2dd9a5e7151
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77588091"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85564915"
 ---
 # <a name="connect-your-symantec-icdx-appliance"></a>Connecter votre appliance Symantec ICDx 
 

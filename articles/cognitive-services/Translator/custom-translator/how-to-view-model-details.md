@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 64f446c3b331c1aa6ddaae9081b7f61943f74ab2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 52e305f9d50ab0f383810778be681ac41be97c72
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68595568"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88509782"
 ---
 # <a name="view-model-details"></a>Afficher les détails du modèle
 
@@ -22,45 +22,45 @@ L’onglet Models (Modèles) qui se trouve sous le projet présente tous les mod
 
 Pour chacun des modèles du projet, ces informations s’affichent.
 
-1.  Name (Nom) : nom du modèle.
+1. Nom du modèle : affiche le nom d'un modèle donné.
 
-2.  Status (État) : état du modèle. Un nouvel apprentissage conserve l’état Submitted (Soumis) jusqu'à ce qu’il soit accepté. Il devient ensuite Dataprocessing (Traitement de données) lorsque le service évalue le contenu des documents. Une fois cette évaluation terminée, l’état passe à Running (En cours d’exécution) : vous pouvez alors voir le nombre de phrases impliquées dans l’apprentissage, y compris dans les jeux d’optimisation et de test qui sont créés automatiquement. Voici la liste des états des modèles.
+2. État : affiche l'état d'un modèle donné. Un nouvel apprentissage conserve l’état Submitted (Soumis) jusqu'à ce qu’il soit accepté. Il devient ensuite Dataprocessing (Traitement de données) lorsque le service évalue le contenu des documents. Une fois cette évaluation terminée, l’état passe à Running (En cours d’exécution) : vous pouvez alors voir le nombre de phrases impliquées dans l’apprentissage, y compris dans les jeux d’optimisation et de test qui sont créés automatiquement. Voici la liste des états des modèles.
 
-    -  Submitted (Soumis) : le backend traite les documents de ce modèle.
+    - Submitted : spécifie que le serveur principal traite les documents correspondant à ce modèle.
 
-    -  TrainingQueued (En file d’attente) : l’apprentissage est dans la file d’attente du système de traduction automatique pour ce modèle.
+    - TrainingQueued : spécifie que la formation se trouve dans la file d'attente du système de traduction automatique correspondant à ce modèle.
 
-    -  Running (En cours d’exécution) : l’apprentissage est en cours d’exécution dans le système de traduction automatique pour ce modèle.
+    - Running : spécifie que la formation est en cours d'exécution dans le système de traduction automatique correspondant à ce modèle.
 
-    -  Succeeded (Réussi) : l’apprentissage a réussi dans le système de traduction automatique et un modèle est disponible. Dans cet état, un score BLEU s’affiche pour ce modèle.
+    - Succeeded : spécifie que la formation a abouti dans le système de traduction automatique et qu'un modèle est disponible. Dans cet état, un score BLEU s’affiche pour ce modèle.
 
-    -  Deployed (Déployé) : le modèle entraîné est soumis au système de traduction automatique en vue de son déploiement.
+    - Deployed: spécifie que le modèle formé est soumis au système de traduction automatique en vue de son déploiement.
 
-    -  Undeploying (Déploiement en cours d’annulation) : le déploiement du modèle est en cours d’annulation.
+    - Undeploying : spécifie que le déploiement du modèle est en cours d'annulation.
 
-    -  Undeployed (Déploiement annulé) : le processus d’annulation du déploiement du modèle a réussi.
+    - Undeployed : spécifie que le processus d'annulation du déploiement d'un modèle a abouti.
 
-    -  Training Failed (Échec de l’apprentissage) : l’apprentissage a échoué. En cas d’échec de l’apprentissage, relancez la tâche d’apprentissage. Si l’erreur persiste, contactez-nous. Ne supprimez pas le modèle qui a échoué.
+    - Training Failed : spécifie que la formation a échoué. En cas d’échec de l’apprentissage, relancez la tâche d’apprentissage. Si l’erreur persiste, contactez-nous. Ne supprimez pas le modèle qui a échoué.
 
-    - DataProcessingFailed (Échec du traitement de données) : le traitement de données a échoué pour un ou plusieurs documents appartenant au modèle.
+    - DataProcessingFailed : spécifie que le traitement de données a échoué pour un ou plusieurs documents appartenant au modèle.
 
-    - DeploymentFailed (Échec du déploiement) : le déploiement du modèle a échoué.
+    - DeploymentFailed : spécifie que le déploiement du modèle a échoué.
 
-    - MigratedDraft (Brouillon migré) : le modèle est à l’état de brouillon après la migration de Hub vers Custom Translator.
+    - MigratedDraft : spécifie que le modèle est à l'état de brouillon après la migration de Hub vers Custom Translator.
 
-4.  BLEU Score (Score BLEU) : score BLEU (Bilingual Evaluation Understudy) du modèle. Il révèle la qualité du système de traduction, en indiquant dans quelle mesure les traductions effectuées par le système de traduction à l’issue de cet apprentissage correspondent aux phrases de référence du jeu de données de test. Le score BLEU apparaît si l’apprentissage s’est terminé avec succès. Si l’apprentissage n’est pas fini ou a échoué, il ne s’affiche pas.
+3. BLEU Score (Score BLEU) : score BLEU (Bilingual Evaluation Understudy) du modèle. Il révèle la qualité du système de traduction, en indiquant dans quelle mesure les traductions effectuées par le système de traduction à l’issue de cet apprentissage correspondent aux phrases de référence du jeu de données de test. Le score BLEU apparaît si l’apprentissage s’est terminé avec succès. Si l’apprentissage n’est pas fini ou a échoué, il ne s’affiche pas.
 
-5.  Training (Apprentissage) : nombre total de phrases utilisées dans le jeu d’apprentissage.
+4. Training Sentence count : nombre total de phrases utilisées dans le jeu d’apprentissage.
 
-6.  Tuning (Optimisation) : nombre total de phrases utilisées dans le jeu d’optimisation.
+5. Tuning Sentence count : nombre total de phrases utilisées dans le jeu d'optimisation.
 
-7.  Test (Test) : nombre total de phrases utilisées dans le jeu de test.
+6.  Training Sentence count : nombre total de phrases utilisées dans le jeu de test.
 
-8.  Mono (Mono) : nombre total de phrases utilisées dans le jeu mono.
+7.  Mono Sentence count : nombre total de phrases utilisées dans le jeu mono.
 
-9.  Bouton d’action Deploy (Déployer) : un modèle dont l’apprentissage a réussi, mais qui n’a pas été déployé présente le bouton Deploy (Déployer). Si le modèle est déployé, le bouton Undeploy (Annuler le déploiement) s’affiche.
+8.  Bouton d’action Deploy (Déployer) : un modèle dont l’apprentissage a réussi, mais qui n’a pas été déployé présente le bouton Deploy (Déployer). Si le modèle est déployé, le bouton Undeploy (Annuler le déploiement) s’affiche.
 
-10. Delete (Supprimer) : bouton permettant de supprimer le modèle. Le fait de supprimer un modèle n’entraîne pas la suppression des documents utilisés pour le créer.
+9. Supprimer : bouton permettant de supprimer le modèle. Le fait de supprimer un modèle n’entraîne pas la suppression des documents utilisés pour le créer.
 
     ![Afficher les détails du modèle](media/how-to/how-to-view-model-details.png)
 
@@ -71,25 +71,25 @@ Pour chacun des modèles du projet, ces informations s’affichent.
 
 Une fois l’apprentissage terminé, vous pouvez consulter des informations à ce sujet sur la page des détails. Sélectionnez un projet, recherchez et sélectionnez l’onglet Models (Modèles), puis choisissez un modèle.
 
-La page du modèle comporte deux onglets : Training Details (Détails de l’apprentissage) et Test (Test).
+La page de modèle comporte deux onglets : Détails de la formation et Test.
 
-1.  **Training Details (Détails de l’apprentissage) :** cet onglet présente la liste des documents utilisés dans l’apprentissage :
+1.  **Détails de la formation :** cet onglet présente la liste des documents utilisés pour la formation :
 
-    -  Name (Nom) : nom du document.
+    -  Nom du document : ce champ affiche le nom du document.
 
-    -  Type (Type) : type de document (en parallèle/mono).
+    -  Type du document : ce champ affiche le type du document (en parallèle/mono).
 
-    -  Nombre de phrases dans la langue source : nombre de phrases faisant partie de la langue source.
+    -  Nombre de phrases dans la langue source : ce champ affiche le nombre de phrases présentes dans la langue source.
 
-    -  Nombre de phrases dans la langue cible : nombre de phrases faisant partie de la langue cible.
+    -  Nombre de phrases dans la langue cible : ce champ affiche le nombre de phrases présentes dans la langue cible.
 
-    -  Aligned Sentences (Phrases alignées) : nombre de phrases alignées par Custom Translator pendant le processus d’alignement.
+    -  Phrases alignées : ce champ affiche le nombre de phrases alignées par Custom Translator pendant le processus d'alignement.
 
-    -  Used Sentences (Phrases utilisées) : nombre de phrases utilisées par Custom Translator pendant cet apprentissage.
+    -  Phrases utilisées : ce champ affiche le nombre de phrases utilisées par Custom Translator pendant cette formation.
 
     ![Informations d’apprentissage du modèle](media/how-to/how-to-model-training-details.png)
 
-2.  **Test (Test) :** cet onglet indique les détails du test d’un apprentissage réussi.
+2.  **Test :** cet onglet affiche les détails du test pour une formation réussie.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

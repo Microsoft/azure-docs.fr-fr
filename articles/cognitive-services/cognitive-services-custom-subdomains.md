@@ -7,18 +7,18 @@ author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: conceptual
-ms.date: 07/24/2019
+ms.date: 12/04/2020
 ms.author: erhopf
-ms.openlocfilehash: c7dd916b27cd8005162c09f7e6a090293e336719
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 4746aad2d7cd62cb309a1823f8c50487e6f7e87c
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83590636"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97032964"
 ---
 # <a name="custom-subdomain-names-for-cognitive-services"></a>Sous-domaines personnalisés pour Cognitive Services
 
-Azure Cognitive Services utilise des noms de sous-domaines personnalisés pour chaque ressource créée à l’aide du [portail Azure](https://portal.azure.com), [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) ou [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli). Contrairement aux points de terminaison régionaux, qui étaient communs à tous les clients dans une région Azure spécifique, les noms de sous-domaines personnalisés sont uniques à la ressource. Des noms de sous-domaines personnalisés sont requis pour activer des fonctionnalités telles que Azure Active Directory (Azure AD) pour l’authentification.
+Azure Cognitive Services utilise des noms de sous-domaines personnalisés pour chaque ressource créée à l’aide du [portail Azure](https://portal.azure.com), [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) ou [Azure CLI](/cli/azure/install-azure-cli). Contrairement aux points de terminaison régionaux, qui étaient communs à tous les clients dans une région Azure spécifique, les noms de sous-domaines personnalisés sont uniques à la ressource. Des noms de sous-domaines personnalisés sont requis pour activer des fonctionnalités telles que Azure Active Directory (Azure AD) pour l’authentification.
 
 ## <a name="how-does-this-impact-existing-resources"></a>Comment cela affecte-t-il les ressources existantes?
 
@@ -39,7 +39,7 @@ Non. Le point de terminaison régional continue de fonctionner pour les ressourc
 ## <a name="what-if-an-sdk-asks-me-for-the-region-for-a-resource"></a>Que se passe-t-il si un kit de développement logiciel (SDK) me demande la région d’une ressource ?
 
 > [!WARNING]
-> Les Speech Services **ne prennent pas en charge** les sous-domaines personnalisés pour l’instant. Utilisez les points de terminaison régionaux lorsque vous utilisez les Speech Services et les kits de développement logiciel (SDK) associés.
+> Les Speech Services utilisent des sous-domaines personnalisés avec de [points de terminaison privés](Speech-Service/speech-services-private-link.md) **uniquement**. Dans tous les autres cas, utilisez des **points de terminaison régionaux** avec les Speech Services et les kits de développement logiciel associés.
 
 Les points de terminaison régionaux et les noms de sous-domaines personnalisés sont pris en charge et peuvent être utilisés indifféremment. Toutefois, le point de terminaison complet est requis.
 
@@ -98,5 +98,5 @@ Oui. Il s’agit d’une liste de points de terminaison régionaux que vous pouv
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Présentation de Cognitive Services](Welcome.md)
+* [Présentation de Cognitive Services](./what-are-cognitive-services.md)
 * [Authentification](authentication.md)

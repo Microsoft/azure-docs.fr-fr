@@ -7,18 +7,18 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 12/13/2019
 ms.author: robinsh
-ms.openlocfilehash: 60d0ef30a1c7d948a9e837a8bc37c76ace415545
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0b8b499613f8234f449e6d72f6ed6ec1f2f21287
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82024963"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92545410"
 ---
 # <a name="automatic-iot-device-and-module-management-using-the-azure-cli"></a>Gestion automatique des Modules et des appareils IoT avec Azure CLI
 
 [!INCLUDE [iot-edge-how-to-deploy-monitor-selector](../../includes/iot-hub-auto-device-config-selector.md)]
 
-La gestion automatique des appareils dans Azure IoT Hub automatise une grande partie des tâches répétitives et complexes liées à la gestion de grandes flottes d’appareils. Avec la gestion automatique des appareils, vous pouvez cibler un ensemble d’appareils en fonction de leurs propriétés, définir la configuration souhaitée et laisser IoT Hub mettre à jour les appareils quand ils se trouvent dans l’étendue. Cette opération est effectuée à l’aide d’une _configuration d’appareil automatique_ou d’une _configuration de Module automatique_, qui vous permet de récapituler les données d’achèvement et de conformité, de gérer la fusion et les conflits, et de déployer les configurations de façon progressive.
+La gestion automatique des appareils dans Azure IoT Hub automatise une grande partie des tâches répétitives et complexes liées à la gestion de grandes flottes d’appareils. Avec la gestion automatique des appareils, vous pouvez cibler un ensemble d’appareils en fonction de leurs propriétés, définir la configuration souhaitée et laisser IoT Hub mettre à jour les appareils quand ils se trouvent dans l’étendue. Cette opération est effectuée à l’aide d’une _configuration d’appareil automatique_ ou d’une _configuration de Module automatique_ , qui vous permet de récapituler les données d’achèvement et de conformité, de gérer la fusion et les conflits, et de déployer les configurations de façon progressive.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
@@ -28,7 +28,7 @@ La gestion automatique des appareils fonctionne en mettant à jour un ensemble d
 
 * Le **contenu cible** définit les propriétés souhaitées à ajouter ou à mettre à jour dans les jumeaux d’appareil ou de Module ciblés. Le contenu inclut un chemin de la section des propriétés souhaitées à changer.
 
-* Les **métriques** définissent les nombres récapitulatifs des différents états de configuration tels que **Réussite**, **En cours** et **Erreur**. Les indicateurs de performance personnalisés sont spécifiés en tant que requêtes sur les propriétés signalées du jumeau.  Les indicateurs de performance système sont des indicateurs de performance par défaut qui mesurent l’état de la mise à jour des jumeaux, comme le nombre de jumeaux qui sont ciblés et le nombre de jumeaux qui ont été correctement mis à jour.
+* Les **métriques** définissent les nombres récapitulatifs des différents états de configuration tels que **Réussite** , **En cours** et **Erreur** . Les indicateurs de performance personnalisés sont spécifiés en tant que requêtes sur les propriétés signalées du jumeau.  Les indicateurs de performance système sont des indicateurs de performance par défaut qui mesurent l’état de la mise à jour des jumeaux, comme le nombre de jumeaux qui sont ciblés et le nombre de jumeaux qui ont été correctement mis à jour.
 
 Les configurations automatiques s’exécutent pour la première fois peu de temps après la création de la configuration, puis à cinq minutes d’intervalle. Les requêtes relatives aux métriques s’exécutent à chaque exécution de la configuration automatique.
 
@@ -36,7 +36,7 @@ Les configurations automatiques s’exécutent pour la première fois peu de tem
 
 * Un [hub IoT](../iot-hub/iot-hub-create-using-cli.md) dans votre abonnement Azure. 
 
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) dans votre environnement. Vous devez utiliser Azure CLI version 2.0.70 ou ultérieure. Utilisez `az –-version` pour valider. Cette version prend en charge les commandes d’extension az et introduit l’infrastructure de la commande Knack. 
+* [Azure CLI](/cli/azure/install-azure-cli) dans votre environnement. Vous devez utiliser Azure CLI version 2.0.70 ou ultérieure. Utilisez `az –-version` pour valider. Cette version prend en charge les commandes d’extension az et introduit l’infrastructure de la commande Knack. 
 
 * [Extension IoT pour Azure CLI](https://github.com/Azure/azure-cli).
 
@@ -136,7 +136,7 @@ Utilisez la commande suivante pour créer une configuration :
 
 * --**hub-name** : nom du hub IoT dans lequel la configuration sera créée. Le hub doit être dans l’abonnement actuel. Basculez vers l’abonnement souhaité avec la commande `az account set -s [subscription name]`.
 
-* --**target-condition** : entrez une condition cible pour déterminer quels sont les appareils ou Modules ciblés par cette configuration. Pour une configuration d’appareil automatique, la condition est basée sur les balises de jumeau d’appareil ou sur les propriétés souhaitées du jumeau d’appareil et doit correspondre au format de l’expression. Par exemple, `tags.environment='test'` ou `properties.desired.devicemodel='4000x'`. Pour la configuration de Module automatique, la condition est basée sur les balises ou les propriétés souhaitées d’un jumeau de Module. Par exemple, `from devices.modules where tags.environment='test'` ou `from devices.modules where properties.reported.chillerProperties.model='4000x'`.
+* --**target-condition** : entrez une condition cible pour déterminer quels sont les appareils ou Modules ciblés par cette configuration.  Pour une configuration d’appareil automatique, la condition est basée sur les balises de jumeau d’appareil ou sur les propriétés souhaitées du jumeau d’appareil et doit correspondre au format de l’expression.  Par exemple, `tags.environment='test'` ou `properties.desired.devicemodel='4000x'`.  Pour la configuration de Module automatique, la condition est basée sur les balises ou les propriétés souhaitées d’un jumeau de Module. Par exemple, `from devices.modules where tags.environment='test'` ou `from devices.modules where properties.reported.chillerProperties.model='4000x'`.
 
 * --**priority** : entier positif. Si deux ou plusieurs configurations sont ciblées sur le même appareil ou Module, la configuration ayant la valeur numérique la plus élevée pour Priority s’applique.
 
@@ -155,13 +155,13 @@ az iot hub configuration show --config-id [configuration id] \
 
 * --**hub-name** : nom du hub IoT dans lequel la configuration existe. Le hub doit être dans l’abonnement actuel. Basculez vers l’abonnement souhaité avec la commande `az account set -s [subscription name]`.
 
-Inspectez la configuration dans la fenêtre de commande. La propriété **metrics** répertorie un nombre pour chaque métrique évaluée par chaque hub :
+Inspectez la configuration dans la fenêtre de commande.  La propriété **metrics** répertorie un nombre pour chaque métrique évaluée par chaque hub :
 
 * **targetedCount** : métrique système qui spécifie le nombre de jumeaux d’appareil ou de Module dans le hub IoT qui correspondent à la condition de ciblage.
 
 * **appliedCount** : métrique système qui spécifie le nombre d’appareils ou de Modules pour lesquels le contenu cible a été appliqué.
 
-* **Votre métrique personnalisée** : les métriques que vous avez définies sont des métriques utilisateur.
+* **Votre métrique personnalisée**  : les métriques que vous avez définies sont des métriques utilisateur.
 
 Vous pouvez afficher une liste d’ID d’appareil, d’ID de Module ou d’objets pour chacune des métriques à l’aide de la commande suivante :
 
@@ -229,14 +229,13 @@ az iot hub configuration delete --config-id [configuration id] \
 Dans cet article, vous avez découvert comment configurer et superviser des appareils IoT à grande échelle. Suivez ces liens pour en savoir plus sur la gestion de Azure IoT Hub :
 
 * [Gestion de vos identités d’appareil IoT Hub en bloc](iot-hub-bulk-identity-mgmt.md)
-* [Métriques d’IoT Hub](iot-hub-metrics.md)
-* [Surveillance des opérations](iot-hub-operations-monitoring.md)
+* [Surveiller votre IoT Hub](monitor-iot-hub.md)
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
 * [Guide du développeur d’IoT Hub](iot-hub-devguide.md)
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)
 
 Pour savoir comment utiliser le service d’approvisionnement des appareils IoT Hub afin d’activer l’approvisionnement sans contact et juste-à-temps, consultez : 
 
-* [Service Azure IoT Hub Device Provisioning](/azure/iot-dps)
+* [Service Azure IoT Hub Device Provisioning](../iot-dps/index.yml)

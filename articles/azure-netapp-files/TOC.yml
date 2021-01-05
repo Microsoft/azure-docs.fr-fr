@@ -4,7 +4,9 @@
   items:
     - name: Présentation d’Azure NetApp Files
       href: azure-netapp-files-introduction.md
-    - name: Comprendre la hiérarchie de stockage
+    - name: Nouveautés
+      href: whats-new.md
+    - name: Hiérarchie de stockage d’Azure NetApp Files
       href: azure-netapp-files-understand-storage-hierarchy.md
 - name: Démarrages rapides
   expanded: true
@@ -27,24 +29,38 @@
           href: azure-netapp-files-performance-metrics-volumes.md
         - name: Test d’évaluation des performances pour Linux
           href: performance-benchmarks-linux.md
+        - name: Performances des bases de données Oracle sur des volumes uniques Azure NetApp Files
+          href: performance-oracle-single-volumes.md
         - name: Questions fréquentes (FAQ) sur les performances SMB
           href: azure-netapp-files-smb-performance.md
     - name: Modèle de coût pour Azure NetApp Files
       href: azure-netapp-files-cost-model.md
     - name: Consignes pour planifier un réseau Azure NetApp Files
       href: azure-netapp-files-network-topologies.md
+    - name: Pool de capacités QoS
+      href: manual-qos-capacity-pool-introduction.md
+    - name: Réplication entre régions
+      items:
+        - name: Comprendre la réplication interrégion
+          href: cross-region-replication-introduction.md
+        - name: Configuration requise et considérations pour la réplication interrégion
+          href: cross-region-replication-requirements-considerations.md
     - name: Solutions
       items:
         - name: Architectures de solution avec Azure NetApp Files
           href: azure-netapp-files-solution-architectures.md
-        - name: Solutions spécifiques
+        - name: Avantages d’Azure NetApp Files
           items:
             - name: Avantages de l’utilisation d’Azure NetApp Files avec Oracle Database
               href: solutions-benefits-azure-netapp-files-oracle-database.md
             - name: Avantages de l’utilisation d’Azure NetApp Files pour l’automatisation de la conception électronique
               href: solutions-benefits-azure-netapp-files-electronic-design-automation.md
+            - name: Avantages d’utiliser Azure NetApp Files avec Windows Virtual Desktop
+              href: solutions-windows-virtual-desktop.md
     - name: Questions fréquentes (FAQ) sur Azure NetApp Files
       href: azure-netapp-files-faqs.md
+    - name: "Qu’est-ce que l’outil Azure Application Consistent Snapshot Tool\_?"
+      href: azacsnap-introduction.md
 - name: Guides pratiques
   items:
     - name: S’inscrire à Azure NetApp Files
@@ -53,38 +69,96 @@
       href: azure-netapp-files-create-netapp-account.md
     - name: Configurer un pool de capacité
       href: azure-netapp-files-set-up-capacity-pool.md
+    - name: Gérer un pool de capacités de QoS manuel
+      href: manage-manual-qos-capacity-pool.md
     - name: Déléguer un sous-réseau à Azure NetApp Files
       href: azure-netapp-files-delegate-subnet.md
-    - name: Créer un volume SMB pour Azure NetApp Files
+    - name: Créer et gérer un volume NFS
+      items:
+        - name: Créer un volume NFS
+          href: azure-netapp-files-create-volumes.md
+        - name: "Configurer le domaine par défaut NFS\_v4.1"
+          href: azure-netapp-files-configure-nfsv41-domain.md
+        - name: "Configurer le chiffrement Kerberos NFS\_v4.1"
+          href: configure-kerberos-encryption.md
+        - name: Configurer un client NFS pour Azure NetApp Files
+          href: configure-nfs-clients.md
+        - name: Configurer une stratégie d’exportation pour un volume NFS
+          href: azure-netapp-files-configure-export-policy.md
+    - name: Créer un volume SMB
       href: azure-netapp-files-create-volumes-smb.md
-    - name: Créer un volume NFS pour Azure NetApp Files
-      href: azure-netapp-files-create-volumes.md
-    - name: Configurer le domaine par défaut NFSv4.1 pour Azure NetApp Files
-      href: azure-netapp-files-configure-nfsv41-domain.md
-    - name: Configurer une stratégie d’exportation pour un volume NFS
-      href: azure-netapp-files-configure-export-policy.md
-    - name: Gérer les volumes
-      href: azure-netapp-files-manage-volumes.md
+    - name: Créer un volume à deux protocoles
+      href: create-volumes-dual-protocol.md
     - name: Monter ou démonter un volume pour des machines virtuelles Windows ou Linux
       href: azure-netapp-files-mount-unmount-volumes-for-virtual-machines.md
     - name: Gérer les instantanés
       href: azure-netapp-files-manage-snapshots.md
     - name: Redimensionner un pool de capacités ou un volume
       href: azure-netapp-files-resize-capacity-pools-or-volumes.md
+    - name: Changer dynamiquement le niveau de service d’un volume
+      href: dynamic-change-volume-service-level.md
+    - name: Gérer la réplication interrégion
+      items:
+        - name: Créer une réplication de volume
+          href: cross-region-replication-create-peering.md
+        - name: Afficher l’état d’intégrité de la relation de réplication
+          href: cross-region-replication-display-health-status.md
+        - name: Gérer la reprise d’activité après sinistre
+          href: cross-region-replication-manage-disaster-recovery.md
+        - name: Supprimer des volumes ou des réplications de volume
+          href: cross-region-replication-delete.md
     - name: Développer
       items:
-        - name: REST
+        - name: API REST
           href: azure-netapp-files-develop-with-rest-api.md
-        - name: Kits SDK Azure NetApp Files et outils CLI
+        - name: API REST avec PowerShell
+          href: develop-rest-api-powershell.md
+        - name: 'Kits SDK, outils CLI et modèles ARM'
           href: azure-netapp-files-sdk-cli.md
-        - name: Corriger les erreurs du fournisseur de ressources Azure NetApp Files
+    - name: Résoudre les problèmes
+      items:
+        - name: Résoudre les problèmes de pools de capacités
+          href: troubleshoot-capacity-pools.md
+        - name: Résoudre les problèmes de réplication interrégion
+          href: troubleshoot-cross-region-replication.md
+        - name: Résoudre les problèmes des volumes à deux protocoles
+          href: troubleshoot-dual-protocol-volumes.md
+        - name: Résoudre les problèmes de stratégies d’instantanés
+          href: troubleshoot-snapshot-policies.md
+        - name: Résoudre les erreurs de fournisseur de ressources
           href: azure-netapp-files-troubleshoot-resource-provider-errors.md
 - name: Informations de référence
   items:
     - name: REST
-      href: 'https://docs.microsoft.com/rest/api/netapp/'
+      href: /rest/api/netapp/
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.netapp/allversions
+    - name: Outil Azure Application Consistent Snapshot Tool (AzAcSnap)
+      items:
+        - name: Bien démarrer avec AzAcSnap
+          href: azacsnap-get-started.md
+        - name: Installer AzAcSnap
+          href: azacsnap-installation.md
+        - name: Reprise d’activité avec AzAcSnap
+          href: azacsnap-disaster-recovery.md
+        - name: Conseils et astuces pour utiliser AzAcSnap
+          href: azacsnap-tips.md
+        - name: Résoudre les problèmes AzAcSnap
+          href: azacsnap-troubleshoot.md
+        - name: Informations de référence sur les commandes AzAcSnap
+          items:
+            - name: Configurer AzAcSnap
+              href: azacsnap-cmd-ref-configure.md
+            - name: Tester AzAcSnap
+              href: azacsnap-cmd-ref-test.md
+            - name: Sauvegarder avec AzAcSnap
+              href: azacsnap-cmd-ref-backup.md
+            - name: Obtenir des détails en utilisant AzAcSnap
+              href: azacsnap-cmd-ref-details.md
+            - name: Supprimer en utilisant AzAcSnap
+              href: azacsnap-cmd-ref-delete.md
+            - name: Restaurer en utilisant AzAcSnap
+              href: azacsnap-cmd-ref-restore.md
 - name: Ressources
   items:
     - name: Tarifs
@@ -93,5 +167,5 @@
       href: 'https://azure.microsoft.com/global-infrastructure/services/?products=netapp'
     - name: Contrat SLA
       href: 'https://azure.microsoft.com/support/legal/sla/netapp/'
-    - name: Videos
+    - name: Vidéos
       href: azure-netapp-files-videos.md

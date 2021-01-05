@@ -4,10 +4,10 @@ description: Explique en détail comment gérer efficacement la taille du regist
 ms.topic: article
 ms.date: 07/31/2019
 ms.openlocfilehash: 449a1c09bf88e3e0e0aeca4d3b687371d2a6b91a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78403343"
 ---
 # <a name="delete-container-images-in-azure-container-registry-using-the-azure-cli"></a>Supprimer des images conteneur dans Azure Container Registry à l’aide de l’interface de ligne de commande Azure

@@ -1,24 +1,15 @@
 ---
 title: Transferts, verrouillages et règlement des messages Azure Service Bus
 description: Cet article fournit une vue d’ensemble des opérations de transferts, verrouillages et règlement des messages Azure Service Bus.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2019
-ms.author: aschhab
-ms.openlocfilehash: a2c353d612280981a83b32463d34efdc70878495
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: fd71edd12e478bcd5f14815c105c14482cf7e2bd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230089"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89020029"
 ---
 # <a name="message-transfers-locks-and-settlement"></a>Transferts, verrouillages et règlement des messages
 

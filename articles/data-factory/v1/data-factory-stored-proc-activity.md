@@ -1,6 +1,6 @@
 ---
 title: Activité de procédure stockée SQL Server
-description: Découvrez comment utiliser l'activité de procédure stockée SQL Server pour appeler une procédure stockée dans une base de données Azure SQL ou un entrepôt Azure SQL Data Warehouse à partir d'un pipeline Data Factory.
+description: Découvrez comment utiliser l’activité de procédure stockée SQL Server pour appeler une procédure stockée dans Azure SQL Database ou Azure Synapse Analytics à partir d’un pipeline Data Factory.
 services: data-factory
 documentationcenter: ''
 ms.assetid: 1c46ed69-4049-44ec-9b46-e90e964a4a8e
@@ -12,12 +12,12 @@ author: nabhishek
 ms.author: abnarain
 manager: anandsub
 robots: noindex
-ms.openlocfilehash: 45aa49de51f42b26c653b15e79c865e3f5647c39
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f702633f6311d4ae4a79452e9b1c9176125c56f9
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74931629"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508397"
 ---
 # <a name="sql-server-stored-procedure-activity"></a>Activité de procédure stockée SQL Server
 > [!div class="op_single_selector" title1="Activités de transformation"]
@@ -26,8 +26,8 @@ ms.locfileid: "74931629"
 > * [Activité MapReduce](data-factory-map-reduce.md)
 > * [Activité de diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md)
 > * [Activité Spark](data-factory-spark.md)
-> * [Activité d’exécution par lot Machine Learning](data-factory-azure-ml-batch-execution-activity.md)
-> * [Activité des ressources de mise à jour de Machine Learning](data-factory-azure-ml-update-resource-activity.md)
+> * [Activité Exécution par lots Azure Machine Learning studio (classique)](data-factory-azure-ml-batch-execution-activity.md)
+> * [Activité Mettre à jour une ressource Azure Machine Learning studio (classique)](data-factory-azure-ml-update-resource-activity.md)
 > * [Activité de procédure stockée](data-factory-stored-proc-activity.md)
 > * [Activité U-SQL Data Lake Analytics](data-factory-usql-activity.md)
 > * [Activité personnalisée .NET](data-factory-use-custom-activities.md)
@@ -41,15 +41,15 @@ Vous utilisez des activités de transformation dans un [pipeline](data-factory-c
 Vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans l’une des banques de données suivantes dans votre entreprise ou sur une machine virtuelle Azure :
 
 - Azure SQL Database
-- Azure SQL Data Warehouse.
+- Azure Synapse Analytics
 - Base de données SQL Server Si vous utilisez SQL Server, installez la passerelle de gestion des données sur l’ordinateur qui héberge la base de données ou sur un autre ordinateur ayant accès à la base de données. La passerelle de gestion des données est un composant qui connecte des sources de données locales ou se trouvant sur une machine virtuelle Azure à des services cloud de manière gérée et sécurisée. Consultez l’article [Passerelle de gestion des données](data-factory-data-management-gateway.md) pour plus d’informations sur la passerelle.
 
 > [!IMPORTANT]
-> Lorsque vous copiez des données dans Azure SQL Database ou SQL Server, vous pouvez configurer l’élément **SqlSink** dans l’activité de copie pour appeler une procédure stockée en utilisant la propriété **sqlWriterStoredProcedureName**. Pour plus de détails, consultez l’article [Appeler une procédure stockée à partir d’une activité de copie](data-factory-invoke-stored-procedure-from-copy-activity.md). Pour plus d’informations sur la propriété, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties). L’appel d’une procédure stockée lors de la copie de données dans Azure SQL Data Warehouse avec une activité de copie n’est pas pris en charge. Toutefois, vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans SQL Data Warehouse.
+> Lorsque vous copiez des données dans Azure SQL Database ou SQL Server, vous pouvez configurer l’élément **SqlSink** dans l’activité de copie pour appeler une procédure stockée en utilisant la propriété **sqlWriterStoredProcedureName**. Pour plus de détails, consultez l’article [Appeler une procédure stockée à partir d’une activité de copie](data-factory-invoke-stored-procedure-from-copy-activity.md). Pour plus d’informations sur la propriété, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties). L’appel d’une procédure stockée lors de la copie de données dans Azure Synapse Analytics à l’aide d’une activité de copie n’est pas pris en charge. Toutefois, vous pouvez utiliser l’activité de procédure stockée pour appeler une procédure stockée dans Azure Synapse Analytics.
 >
-> Lors de la copie de données à partir d’Azure SQL Database, SQL Server ou Azure SQL Data Warehouse, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties), [Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties)
+> Lors de la copie de données à partir d’Azure SQL Database, de SQL Server ou d’Azure Synapse Analytics, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties), [Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties)
 
-La procédure pas à pas suivante utilise l’activité de procédure stockée dans un pipeline pour appeler une procédure stockée dans une base de données Azure SQL.
+La procédure pas à pas suivante utilise l’activité de procédure stockée dans un pipeline pour appeler une procédure stockée dans Azure SQL Database.
 
 ## <a name="walkthrough"></a>Procédure pas à pas
 ### <a name="sample-table-and-stored-procedure"></a>Exemple de table et de procédure stockée
@@ -70,7 +70,7 @@ La procédure pas à pas suivante utilise l’activité de procédure stockée d
     
     ![Exemples de données](./media/data-factory-stored-proc-activity/sample-data.png)
 
-    Dans cet exemple, la procédure stockée est dans Azure SQL Database. Si elle est dans Azure SQL Data Warehouse et dans SQL Server Database, l’approche est la même. Pour une base de données SQL Server, vous devez installer une [passerelle de gestion des données](data-factory-data-management-gateway.md).
+    Dans cet exemple, la procédure stockée est dans Azure SQL Database. Si la procédure stockée est dans Azure Synapse Analytics et SQL Server Database, l’approche est similaire. Pour une base de données SQL Server, vous devez installer une [passerelle de gestion des données](data-factory-data-management-gateway.md).
 2. Créez la **procédure stockée** suivante qui insère des données dans la table **sampletable**.
 
     ```SQL
@@ -90,10 +90,10 @@ La procédure pas à pas suivante utilise l’activité de procédure stockée d
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 2. Cliquez sur **NOUVEAU** dans le menu de gauche, puis sur **Intelligence + analyse** et sur **Data Factory**.
 
-    ![Nouvelle fabrique de données](media/data-factory-stored-proc-activity/new-data-factory.png)
+    ![Nouvelle fabrique de données 1](media/data-factory-stored-proc-activity/new-data-factory.png)
 3. Dans le panneau **Nouvelle fabrique de données**, entrez **SProcDF** dans le champ Nom. Les noms Azure Data Factory sont **globalement uniques**. Vous devez faire précéder le nom de la fabrique de données par votre nom, pour activer la création de la fabrique.
 
-   ![Nouvelle fabrique de données](media/data-factory-stored-proc-activity/new-data-factory-blade.png)
+   ![Nouvelle fabrique de données 2](media/data-factory-stored-proc-activity/new-data-factory-blade.png)
 4. Sélectionnez votre **abonnement Azure**.
 5. Pour **Groupe de ressources**, effectuez l’une des opérations suivantes :
    1. Cliquez sur **Créer un nouveau** et entrez un nom pour le groupe de ressources.
@@ -106,30 +106,30 @@ La procédure pas à pas suivante utilise l’activité de procédure stockée d
    ![Page d’accueil Data Factory](media/data-factory-stored-proc-activity/data-factory-home-page.png)
 
 ### <a name="create-an-azure-sql-linked-service"></a>Créer un service lié Azure SQL
-Après avoir créé la fabrique de données, vous créez un service lié Azure SQL reliant votre base de données Azure SQL, qui contient la table sampletable et la procédure stockée usp_sample, à votre fabrique de données.
+Après avoir créé la fabrique de données, vous créez un service lié Azure SQL reliant votre base de données dans Azure SQL Database, qui contient la table sampletable et la procédure stockée usp_sample, à votre fabrique de données.
 
 1. Dans le panneau **Fabrique de données**, cliquez sur **Créer et déployer** pour que **SProcDF** lance l’éditeur de la fabrique de données.
 2. Cliquez sur **Nouvelle banque de données** dans la barre de commandes et choisissez **Azure SQL Database**. Le script JSON de création d’un service lié Azure SQL doit apparaître dans l’éditeur.
 
-   ![Nouveau magasin de données](media/data-factory-stored-proc-activity/new-data-store.png)
+   ![Nouveau magasin de données 1](media/data-factory-stored-proc-activity/new-data-store.png)
 3. Dans le script JSON, apportez les modifications suivantes :
 
-   1. Remplacez `<servername>` par le nom de votre serveur Azure SQL Database.
+   1. Remplacez `<servername>` par le nom de votre serveur.
    2. Remplacez `<databasename>` par la base de données dans laquelle vous avez créé la table et la procédure stockée.
    3. Remplacez `<username@servername>` par le compte d’utilisateur qui a accès à la base de données.
    4. Remplacez `<password>` par le mot de passe du compte d’utilisateur.
 
-      ![Nouveau magasin de données](media/data-factory-stored-proc-activity/azure-sql-linked-service.png)
+      ![Nouveau magasin de données 2](media/data-factory-stored-proc-activity/azure-sql-linked-service.png)
 4. Pour déployer le service lié, cliquez sur **Déployer** dans la barre de commandes. Vérifiez que AzureSqlLinkedService apparaît dans l’arborescence à gauche.
 
-    ![arborescence avec service lié](media/data-factory-stored-proc-activity/tree-view.png)
+    ![arborescence avec service lié 1](media/data-factory-stored-proc-activity/tree-view.png)
 
 ### <a name="create-an-output-dataset"></a>Créer un jeu de données de sortie
-Vous devez spécifier un jeu de données de sortie pour une activité de procédure stockée même si la procédure stockée ne génère aucune donnée. C’est parce qu’il s’agit du jeu de données de sortie qui pilote le calendrier de l’activité (fréquence d’exécution de l’activité : horaire, quotidienne, etc.). Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL, à un Azure SQL Data Warehouse ou à une base de données SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice** (un jeu de données qui pointe vers une table qui ne possède pas vraiment de sortie de la procédure stockée). Ce jeu de données factice est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée.
+Vous devez spécifier un jeu de données de sortie pour une activité de procédure stockée même si la procédure stockée ne génère aucune donnée. C’est parce qu’il s’agit du jeu de données de sortie qui pilote le calendrier de l’activité (fréquence d’exécution de l’activité : horaire, quotidienne, etc.). Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL Database, Azure Synapse Analytics ou SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice** (un jeu de données qui pointe vers une table qui ne possède pas vraiment de sortie de la procédure stockée). Ce jeu de données factice est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée.
 
 1. Si ce bouton n'est pas affiché dans la barre d'outils, cliquez sur **... Plus** dans la barre d’outils, sur **Nouveau jeu de données**, puis sur **SQL Azure**. Cliquez sur **Nouveau jeu de données** dans la barre de commandes et sélectionnez **SQL Azure**.
 
-    ![arborescence avec service lié](media/data-factory-stored-proc-activity/new-dataset.png)
+    ![arborescence avec service lié 2](media/data-factory-stored-proc-activity/new-dataset.png)
 2. Copiez-collez le script JSON suivant dans l’éditeur JSON.
 
     ```JSON
@@ -200,14 +200,14 @@ Notez les propriétés suivantes :
 ### <a name="monitor-the-pipeline"></a>Surveiller le pipeline
 1. Cliquez sur **X** pour fermer les panneaux de Data Factory Editor et revenir au panneau Data Factory, puis cliquez sur **Diagramme**.
 
-    ![vignette schématique](media/data-factory-stored-proc-activity/data-factory-diagram-tile.png)
+    ![vignette de diagramme 1](media/data-factory-stored-proc-activity/data-factory-diagram-tile.png)
 2. Dans la **Vue de diagramme**, une vue d’ensemble des pipelines et des jeux de données utilisés dans ce didacticiel s’affiche.
 
-    ![vignette schématique](media/data-factory-stored-proc-activity/data-factory-diagram-view.png)
+    ![vignette de diagramme 2](media/data-factory-stored-proc-activity/data-factory-diagram-view.png)
 3. Dans la vue de diagramme, double-cliquez sur le jeu de données `sprocsampleout`. Les tranches s’affichent avec l’état Prêt. Il doit y avoir cinq tranches, car une tranche est produite pour chaque heure entre l’heure de début et l’heure de fin dans le JSON.
 
-    ![vignette schématique](media/data-factory-stored-proc-activity/data-factory-slices.png)
-4. Quand une tranche est à l’état **Prêt**, exécutez une requête `select * from sampletable` sur la base de données Azure SQL pour vérifier que les données ont été insérées dans la table par la procédure stockée.
+    ![vignette de diagramme 3](media/data-factory-stored-proc-activity/data-factory-slices.png)
+4. Quand une tranche est à l’état **Prêt**, exécutez une requête `select * from sampletable` sur la base de données pour vérifier que les données ont été insérées dans la table par la procédure stockée.
 
    ![Données de sortie](./media/data-factory-stored-proc-activity/output.png)
 
@@ -277,7 +277,7 @@ De même, pour lier l’activité de procédure stockée avec des **activités e
 > [!IMPORTANT]
 > Lorsque vous copiez des données dans Azure SQL Database ou SQL Server, vous pouvez configurer l’élément **SqlSink** dans l’activité de copie pour appeler une procédure stockée en utilisant la propriété **sqlWriterStoredProcedureName**. Pour plus de détails, consultez l’article [Appeler une procédure stockée à partir d’une activité de copie](data-factory-invoke-stored-procedure-from-copy-activity.md). Pour plus d’informations sur la propriété, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties).
 > 
-> Lors de la copie de données à partir d’Azure SQL Database, SQL Server ou Azure SQL Data Warehouse, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties), [Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties)
+> Lors de la copie de données à partir d’Azure SQL Database, de SQL Server ou d’Azure Synapse Analytics, vous pouvez configurer **SqlSource** dans l’activité de copie pour appeler une procédure stockée afin de lire les données à partir de la base de données source en utilisant la propriété **sqlReaderStoredProcedureName**. Pour plus d’informations, consultez les articles suivants sur les connecteurs : [Azure SQL Database](data-factory-azure-sql-connector.md#copy-activity-properties), [SQL Server](data-factory-sqlserver-connector.md#copy-activity-properties), [Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties)
 
 ## <a name="json-format"></a>Format JSON
 Voici le format JSON pour la définition d’une activité de procédure stockée :
@@ -309,8 +309,8 @@ Le tableau suivant décrit ces paramètres JSON :
 | description |Texte décrivant la raison motivant l’activité. |Non |
 | type | Doit être défini sur : **SqlServerStoredProcedure** | Oui |
 | inputs | facultatif. Si vous spécifiez un jeu de données d’entrée, il doit être disponible (à l’état Prêt) pour l’activité de procédure stockée à exécuter. Les jeux de données d’entrée ne peuvent pas être utilisés dans la procédure stockée en tant que paramètres. Cela sert uniquement à vérifier la dépendance avant de commencer l’activité de procédure stockée. |Non |
-| outputs | Vous devez spécifier un jeu de données de sortie pour une activité de procédure stockée. Le jeu de données de sortie spécifie la **planification** pour l’activité de procédure stockée (horaire, hebdomadaire, mensuelle, etc.). <br/><br/>Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL, à un Azure SQL Data Warehouse ou à une base de données SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. <br/><br/>Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. <br/><br/>Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice**, qui est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée. |Oui |
-| storedProcedureName |Spécifiez le nom de la procédure stockée dans la base de données Azure SQL, Azure SQL Data Warehouse ou SQL Server qui est représenté par le service lié utilisé par la table de sortie. |Oui |
+| outputs | Vous devez spécifier un jeu de données de sortie pour une activité de procédure stockée. Le jeu de données de sortie spécifie la **planification** pour l’activité de procédure stockée (horaire, hebdomadaire, mensuelle, etc.). <br/><br/>Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL Database, Azure Synapse Analytics ou SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. <br/><br/>Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. <br/><br/>Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice**, qui est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée. |Oui |
+| storedProcedureName |Spécifiez le nom de la procédure stockée dans Azure SQL Database, Azure Synapse Analytics ou SQL Server, qui est représentée par le service lié utilisé par la table de sortie. |Oui |
 | storedProcedureParameters |Spécifiez les valeurs des paramètres de procédure stockée. Si vous avez besoin de passer null pour un paramètre, utilisez la syntaxe : "param1": null (le tout en minuscules). Consultez l’exemple suivant pour en savoir plus sur l’utilisation de cette propriété. |Non |
 
 ## <a name="passing-a-static-value"></a>Transmission d’une valeur statique

@@ -7,19 +7,19 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: tutorial
-ms.date: 02/28/2020
-ms.openlocfilehash: ce3b3839319de38020b968ff8db1ee6713b29c47
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 09/25/2020
+ms.openlocfilehash: 7c88aea6aff942cdcf5cbc022df8f07cfe0d4cce
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78269975"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94701277"
 ---
 # <a name="tutorial-index-json-blobs-from-azure-storage-using-rest"></a>Tutoriel : Indexer des objets blob JSON à partir de Stockage Azure avec REST
 
 La recherche cognitive Azure peut indexer des tableaux et documents JSON dans le stockage d’objets blob Azure à l’aide d’un [indexeur](search-indexer-overview.md) qui sait comment lire des données semi-structurées. Les données semi-structurées contiennent des balises ou des marquages qui séparent le contenu au sein des données. Elles séparent les données non structurées, qui doivent être indexées entièrement, des données formellement structurées qui respectent un modèle de données (tel qu’un schéma de base de données relationnelle), qui peuvent être indexées par champ.
 
-Ce tutoriel utilise Postman et les [API REST de Recherche](https://docs.microsoft.com/rest/api/searchservice/) pour effectuer les tâches suivantes :
+Ce tutoriel utilise Postman et les [API REST de Recherche](/rest/api/searchservice/) pour effectuer les tâches suivantes :
 
 > [!div class="checklist"]
 > * Configurer une source de données de recherche cognitive Azure pour un conteneur d’objets blob Azure
@@ -31,7 +31,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 ## <a name="prerequisites"></a>Prérequis
 
-+ [Stockage Azure](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account)
++ [Stockage Azure](../storage/common/storage-account-create.md)
 + [Application de bureau Postman](https://www.getpostman.com/)
 + [Créer](search-create-service-portal.md) ou [rechercher un service de recherche existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) 
 
@@ -54,7 +54,7 @@ Si possible, créez les deux services dans la même région et le même groupe d
 
 1. Recherchez un *compte de stockage* et sélectionnez l’offre de compte de stockage Microsoft.
 
-   ![Créer un compte de stockage](media/cognitive-search-tutorial-blob/storage-account.png "Créer un compte de stockage")
+   :::image type="content" source="media/cognitive-search-tutorial-blob/storage-account.png" alt-text="Créer un compte de stockage" border="false":::
 
 1. Sous l’onglet Bases, les éléments suivants sont obligatoires. Acceptez les valeurs par défaut pour tout le reste.
 
@@ -72,15 +72,15 @@ Si possible, créez les deux services dans la même région et le même groupe d
 
 1. Cliquez sur le service **Objets blob**.
 
-1. [Créez un conteneur d’objets blob](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal) pour contenir des exemples de données. Vous pouvez définir le niveau d’accès public sur l’une de ses valeurs valides.
+1. [Créez un conteneur d’objets blob](../storage/blobs/storage-quickstart-blobs-portal.md) pour contenir des exemples de données. Vous pouvez définir le niveau d’accès public sur l’une de ses valeurs valides.
 
 1. Une fois le conteneur créé, ouvrez-le et sélectionnez **Charger** dans la barre de commandes.
 
-   ![Charger dans la barre de commandes](media/search-semi-structured-data/upload-command-bar.png "Charger dans la barre de commandes")
+   :::image type="content" source="media/search-semi-structured-data/upload-command-bar.png" alt-text="Charger dans la barre de commandes" border="false":::
 
 1. Accédez au dossier contenant les exemples de fichiers. Sélectionnez-les tous, puis cliquez sur **Charger**.
 
-   ![Charger des fichiers](media/search-semi-structured-data/clinicalupload.png "Charger des fichiers")
+   :::image type="content" source="media/search-semi-structured-data/clinicalupload.png" alt-text="Charger des fichiers" border="false":::
 
 Une fois le chargement terminé, les fichiers doivent apparaître dans leur propre sous-dossier au sein du conteneur de données.
 
@@ -98,27 +98,27 @@ Les appels REST requièrent l’URL du service et une clé d’accès et ce, sur
 
 1. Dans **Paramètres** > **Clés**, obtenez une clé d’administration pour avoir des droits d’accès complets sur le service. Il existe deux clés d’administration interchangeables, fournies pour assurer la continuité de l’activité au cas où vous deviez en remplacer une. Vous pouvez utiliser la clé primaire ou secondaire sur les demandes d’ajout, de modification et de suppression d’objets.
 
-![Obtenir un point de terminaison et une clé d’accès HTTP](media/search-get-started-postman/get-url-key.png "Obtenir un point de terminaison et une clé d’accès HTTP")
+:::image type="content" source="media/search-get-started-rest/get-url-key.png" alt-text="Obtenir un point de terminaison et une clé d’accès HTTP" border="false":::
 
 Toutes les demandes nécessitent une clé API sur chaque demande envoyée à votre service. L’utilisation d’une clé valide permet d’établir, en fonction de chaque demande, une relation de confiance entre l’application qui envoie la demande et le service qui en assure le traitement.
 
 ## <a name="2---set-up-postman"></a>2 - Configurer Postman
 
-Démarrez Postman et paramétrez une requête HTTP. Si vous ne connaissez pas bien cet outil, consultez [Explorer les API REST de Recherche cognitive Azure avec Postman](search-get-started-postman.md).
+Démarrez Postman et paramétrez une requête HTTP. Si vous ne connaissez pas bien cet outil, consultez [Explorer les API REST de la Recherche cognitive Azure](search-get-started-rest.md).
 
 Les méthodes de requête utilisées pour chaque appel dans ce tutoriel sont **POST** et **GET**. Vous allez faire trois appels d’API à votre service de recherche pour créer une source de données, un index et un indexeur. La source de données inclut un pointeur vers votre compte de stockage et vos données JSON. Votre service de recherche établit la connexion lors du chargement des données.
 
 Dans les en-têtes, définissez « Content-type » sur `application/json` et `api-key` sur la clé API d’administration de votre service Recherche cognitive Azure. Une fois que vous avez défini les en-têtes, vous pouvez les utiliser pour chaque demande de cet exercice.
 
-  ![URL et en-tête de requête Postman](media/search-get-started-postman/postman-url.png "URL et en-tête de requête Postman")
+  :::image type="content" source="media/search-get-started-rest/postman-url.png" alt-text="URL et en-tête de requête Postman" border="false":::
 
-Les URI doivent spécifier un élément « api-version » et chaque appel doit retourner une réponse **201 Créé**. L'api-version généralement disponible pour utiliser les tableaux JSON est `2019-05-06`.
+Les URI doivent spécifier un élément « api-version » et chaque appel doit retourner une réponse **201 Créé**. L'api-version généralement disponible pour utiliser les tableaux JSON est `2020-06-30`.
 
 ## <a name="3---create-a-data-source"></a>3 - Créer une source de données
 
-L’[API Create Data Source](https://docs.microsoft.com/rest/api/searchservice/create-data-source) crée un objet Recherche cognitive Azure qui spécifie les données à indexer.
+L’[API Create Data Source](/rest/api/searchservice/create-data-source) crée un objet Recherche cognitive Azure qui spécifie les données à indexer.
 
-1. Définissez le point de terminaison de cet appel sur `https://[service name].search.windows.net/datasources?api-version=2019-05-06`. Remplacez `[service name]` par le nom de votre service de recherche. 
+1. Définissez le point de terminaison de cet appel sur `https://[service name].search.windows.net/datasources?api-version=2020-06-30`. Remplacez `[service name]` par le nom de votre service de recherche. 
 
 1. Copiez le code JSON suivant dans le corps de la requête.
 
@@ -159,9 +159,9 @@ L’[API Create Data Source](https://docs.microsoft.com/rest/api/searchservice/c
 
 ## <a name="4---create-an-index"></a>4 - Créer un index
     
-Le deuxième appel est celui de l’[API de création d’index](https://docs.microsoft.com/rest/api/searchservice/create-index), qui permet de créer un index de recherche cognitive Azure pour stocker toutes les données pouvant faire l’objet de recherches. Un index spécifie tous les paramètres et leurs attributs.
+Le deuxième appel est celui de l’[API de création d’index](/rest/api/searchservice/create-index), qui permet de créer un index de recherche cognitive Azure pour stocker toutes les données pouvant faire l’objet de recherches. Un index spécifie tous les paramètres et leurs attributs.
 
-1. Définissez le point de terminaison de cet appel sur `https://[service name].search.windows.net/indexes?api-version=2019-05-06`. Remplacez `[service name]` par le nom de votre service de recherche.
+1. Définissez le point de terminaison de cet appel sur `https://[service name].search.windows.net/indexes?api-version=2020-06-30`. Remplacez `[service name]` par le nom de votre service de recherche.
 
 1. Copiez le code JSON suivant dans le corps de la requête.
 
@@ -234,9 +234,9 @@ Le deuxième appel est celui de l’[API de création d’index](https://docs.mi
 
 ## <a name="5---create-and-run-an-indexer"></a>5 - Créer et exécuter un indexeur
 
-Un indexeur se connecte à la source de données, importe les données dans l’index de recherche cible, et peut fournir une planification afin d’automatiser l’actualisation des données. L’API REST est celle qui consiste à [créer un indexeur](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
+Un indexeur se connecte à la source de données, importe les données dans l’index de recherche cible, et peut fournir une planification afin d’automatiser l’actualisation des données. L’API REST est celle qui consiste à [créer un indexeur](/rest/api/searchservice/create-indexer).
 
-1. Définissez l’URI pour cet appel sur `https://[service name].search.windows.net/indexers?api-version=2019-05-06`. Remplacez `[service name]` par le nom de votre service de recherche.
+1. Définissez l’URI pour cet appel sur `https://[service name].search.windows.net/indexers?api-version=2020-06-30`. Remplacez `[service name]` par le nom de votre service de recherche.
 
 1. Copiez le code JSON suivant dans le corps de la requête.
 
@@ -281,7 +281,7 @@ Vous pouvez démarrer la recherche dès que le premier document est chargé.
 
 1. Remplacez le verbe par **GET**.
 
-1. Définissez l’URI pour cet appel sur `https://[service name].search.windows.net/indexes/clinical-trials-json-index/docs?search=*&api-version=2019-05-06&$count=true`. Remplacez `[service name]` par le nom de votre service de recherche.
+1. Définissez l’URI pour cet appel sur `https://[service name].search.windows.net/indexes/clinical-trials-json-index/docs?search=*&api-version=2020-06-30&$count=true`. Remplacez `[service name]` par le nom de votre service de recherche.
 
 1. Envoyez la demande. Il s’agit d’une requête de recherche en texte intégral non spécifiée qui retourne tous les champs marqués comme récupérables dans l’index, ainsi qu’un nombre de documents. La réponse doit ressembler à ce qui suit :
 
@@ -313,13 +313,13 @@ Vous pouvez démarrer la recherche dès que le premier document est chargé.
             . . . 
     ```
 
-1. Ajoutez le paramètre de requête `$select` pour limiter les résultats à moins de champs : `https://[service name].search.windows.net/indexes/clinical-trials-json-index/docs?search=*&$select=Gender,metadata_storage_size&api-version=2019-05-06&$count=true`.  Pour cette requête, 100 documents correspondent, mais par défaut, Recherche cognitive Azure retourne seulement 50 dans les résultats.
+1. Ajoutez le paramètre de requête `$select` pour limiter les résultats à moins de champs : `https://[service name].search.windows.net/indexes/clinical-trials-json-index/docs?search=*&$select=Gender,metadata_storage_size&api-version=2020-06-30&$count=true`.  Pour cette requête, 100 documents correspondent, mais par défaut, Recherche cognitive Azure retourne seulement 50 dans les résultats.
 
-   ![Requête paramétrable](media/search-semi-structured-data/lastquery.png "Requête paramétrable")
+   :::image type="content" source="media/search-semi-structured-data/lastquery.png" alt-text="Requête paramétrable" border="false":::
 
 1. `$filter=MinimumAge ge 30 and MaximumAge lt 75` est un exemple de requête plus complexe qui retourne seulement les résultats pour lesquels le paramètre MinimumAge est supérieur ou égal à 30 et le paramètre MaximumAge inférieur à 75. Remplacez l’expression `$select` par l’expression `$filter`.
 
-   ![Recherche de données semi-structurées](media/search-semi-structured-data/metadatashort.png)
+   :::image type="content" source="media/search-semi-structured-data/metadatashort.png" alt-text="Recherche de données semi-structurées" border="false":::
 
 Vous pouvez aussi utiliser des opérateurs logiques (AND, OR, NOT) et des opérateurs de comparaison (eq, ne, gt, lt, ge, le). Les comparaisons de chaînes sont sensibles à la casse. Pour plus d’informations et d’exemples, consultez [Créer une requête simple](search-query-simple-examples.md).
 
@@ -333,7 +333,7 @@ Dans les premières étapes expérimentales du développement, l’approche la p
 Vous pouvez utiliser le portail pour supprimer les index, les indexeurs et les sources de données. Vous pouvez aussi utiliser **DELETE** et fournir des URL vers chaque objet. La commande suivante supprime un indexeur.
 
 ```http
-DELETE https://[YOUR-SERVICE-NAME].search.windows.net/indexers/clinical-trials-json-indexer?api-version=2019-05-06
+DELETE https://[YOUR-SERVICE-NAME].search.windows.net/indexers/clinical-trials-json-indexer?api-version=2020-06-30
 ```
 
 Le code d’état 204 est retourné lorsque la suppression réussit.

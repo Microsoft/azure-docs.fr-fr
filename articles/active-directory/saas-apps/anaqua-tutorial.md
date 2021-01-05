@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégrer ANAQUA à Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ANAQUA.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
+manager: CelesteDG
 ms.reviewer: celested
-ms.assetid: ab13b73e-ca4f-460c-8f79-fabf81b778c0
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 05/31/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 147ce4c898d29f08593019073d69bba78edb75b7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cf6f146265562e287df2cb3c4574742335d62efe
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67106867"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92318657"
 ---
 # <a name="tutorial-integrate-anaqua-with-azure-active-directory"></a>Tutoriel : Intégrer ANAQUA à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer ANAQUA à Azure Active Direc
 * Autoriser les utilisateurs à se connecter automatiquement à ANAQUA avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -139,12 +134,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans ANAQUA. 
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Quand vous sélectionnez la vignette ANAQUA dans le volet d’accès, vous devez être connecté automatiquement à l’application ANAQUA pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette ANAQUA dans le volet d’accès, vous devez être connecté automatiquement à l’application ANAQUA pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

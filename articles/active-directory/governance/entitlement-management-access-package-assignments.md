@@ -3,25 +3,25 @@ title: Afficher, ajouter et supprimer des affectations pour un package d’accè
 description: Découvrez comment afficher, ajouter et supprimer des affectations pour un package d’accès dans la gestion des droits d’utilisation d’Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/15/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 12e3b86f41e7188778393ab717554907ef5d44ec
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 18bc7ca9e108a35fd27f7b3155f186221a8caae3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631742"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90980056"
 ---
 # <a name="view-add-and-remove-assignments-for-an-access-package-in-azure-ad-entitlement-management"></a>Afficher, ajouter et supprimer des affectations pour un package d’accès dans la gestion des droits d’utilisation d’Azure Active Directory
 
@@ -36,7 +36,7 @@ Pour utiliser la gestion des droits d’utilisation Azure AD et affecter des ut
 
 ## <a name="view-who-has-an-assignment"></a>Afficher les utilisateurs qui ont une affectation
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 
@@ -58,13 +58,13 @@ Pour utiliser la gestion des droits d’utilisation Azure AD et affecter des ut
 
 ### <a name="viewing-assignments-programmatically"></a>Affichage d’affectations par programmation
 
-Vous pouvez également récupérer des affectations dans un package d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié avec une application disposant de l’autorisation `EntitlementManagement.ReadWrite.All` peut appeler l’API pour [répertorier les affectations accessPackageAssignments](https://docs.microsoft.com/graph/api/accesspackageassignment-list?view=graph-rest-beta).
+Vous pouvez également récupérer des affectations dans un package d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié avec une application disposant de l’autorisation `EntitlementManagement.ReadWrite.All` peut appeler l’API pour [répertorier les affectations accessPackageAssignments](/graph/api/accesspackageassignment-list?view=graph-rest-beta).
 
 ## <a name="directly-assign-a-user"></a>Affecter directement un utilisateur
 
 Dans certains cas, vous pouvez affecter directement des utilisateurs spécifiques à un package d'accès pour leur éviter d’avoir à passer par le processus de demande du package d'accès. Pour affecter directement des utilisateurs, le package d'accès doit avoir une stratégie qui autorise les affectations directes par l'administrateur.
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 
@@ -90,11 +90,11 @@ Dans certains cas, vous pouvez affecter directement des utilisateurs spécifique
 
 ### <a name="directly-assigning-users-programmatically"></a>Affectation d’utilisateurs directement par programmation
 
-Vous pouvez également affecter directement un utilisateur à un package d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié avec une application disposant de l’autorisation déléguée `EntitlementManagement.ReadWrite.All` peut appeler l’API pour [créer une demande accessPackageAssignmentRequest](https://docs.microsoft.com/graph/api/accesspackageassignmentrequest-post?view=graph-rest-beta).
+Vous pouvez également affecter directement un utilisateur à un package d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié avec une application disposant de l’autorisation déléguée `EntitlementManagement.ReadWrite.All` peut appeler l’API pour [créer une demande accessPackageAssignmentRequest](/graph/api/accesspackageassignmentrequest-post?view=graph-rest-beta).
 
 ## <a name="remove-an-assignment"></a>Supprimer une affectation
 
-**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs ou gestionnaire de package d’accès
+**Rôle prérequis :** Administrateur général, administrateur d’utilisateurs, gestionnaire de package d'accès ou gestionnaire d’affectation de package d’accès
 
 1. Dans le portail Azure, cliquez sur **Azure Active Directory**, puis sur **Identity Governance**.
 

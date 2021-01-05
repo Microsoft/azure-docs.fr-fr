@@ -3,13 +3,13 @@ title: Conteneuriser vos services Azure Service Fabric sur Windows
 description: Découvrez comment conteneuriser vos services Service Fabric Reliable Actors et Reliable Services sur Windows.
 ms.topic: conceptual
 ms.date: 5/23/2018
-ms.author: anmola
-ms.openlocfilehash: 9fe5980c13f655f8f30cc42771971a5015460420
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e0c5f3ecf0334ad2190d8542e54388a2a25d30fb
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75466191"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999805"
 ---
 # <a name="containerize-your-service-fabric-reliable-services-and-reliable-actors-on-windows"></a>Conteneuriser vos services Service Fabric Reliable Actors et Reliable Services sur Windows
 
@@ -93,7 +93,7 @@ Ce document fournit des conseils pour rendre votre service opérationnel à l’
    </Policies>
    ```
 
-9. Pour configurer le mode d’isolation de conteneur, voir [Configurer le mode d’isolation]( https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-containers#configure-isolation-mode). Windows prend en charge deux modes d’isolation pour les conteneurs : Processus et Hyper-V. Les extraits de code suivants montrent comment le mode d’isolation est spécifié dans le fichier manifeste de l’application.
+9. Pour configurer le mode d’isolation de conteneur, voir [Configurer le mode d’isolation]( ./service-fabric-get-started-containers.md#configure-isolation-mode). Windows prend en charge deux modes d’isolation pour les conteneurs : Processus et Hyper-V. Les extraits de code suivants montrent comment le mode d’isolation est spécifié dans le fichier manifeste de l’application.
 
    ```xml
    <Policies>

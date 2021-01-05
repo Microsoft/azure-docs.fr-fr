@@ -14,15 +14,16 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/05/2015
 ms.author: wpickett
-ms.openlocfilehash: d1441ede9f448b3e6ffb0726c2ee92f192369e9a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-dotnet
+ms.openlocfilehash: d36a2804519e5728dd068cc6c06ad005244e8c95
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81481833"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95524094"
 ---
 # <a name="multitenant-applications-in-azure"></a>Applications mutualisées dans Azure
-Une application mutualisée est une ressource partagée qui autorise des « utilisateurs de locataires distincts » à afficher l’application comme s’il s’agissait de la leur. Un scénario typique qui se prête à une application mutualisée est celui dans lequel tous les utilisateurs de l’application répartis dans différents locataires peuvent personnaliser leur expérience utilisateur, tout en ayant les mêmes besoins professionnels de base. Exemples d'applications mutualisées : Office 365, Outlook.com et visualstudio.com.
+Une application mutualisée est une ressource partagée qui autorise des « utilisateurs de locataires distincts » à afficher l’application comme s’il s’agissait de la leur. Un scénario typique qui se prête à une application mutualisée est celui dans lequel tous les utilisateurs de l’application répartis dans différents locataires peuvent personnaliser leur expérience utilisateur, tout en ayant les mêmes besoins professionnels de base. Exemples d'applications mutualisées : Microsoft 365, Outlook.com et visualstudio.com.
 
 Du point de vue du fournisseur d'application, les avantages d'une architecture mutualisée touchent principalement à l'efficacité opérationnelle et à la réduction des coûts. Une version de votre application peut répondre aux besoins de plusieurs locataires/clients, autorisant ainsi la consolidation des tâches d'administration système telles que la surveillance, le réglage des performances, les mises à jour logicielles et les sauvegardes de données.
 
@@ -42,7 +43,7 @@ Une application mutualisée correctement mise en œuvre offre les avantages suiv
 
 En résumé, bien que de nombreux aspects soient à prendre en compte pour fournir un service hautement évolutif, il y a également une série d’objectifs et d’exigences communs à de nombreuses applications mutualisées. Certains peuvent ne pas concerner des scénarios spécifiques, et l'importance d'objectifs et d'exigences individuels peut différer pour chaque scénario. En tant que fournisseur de l’application mutualisée, vous aurez également des objectifs et des exigences tels que la satisfaction des objectifs et des exigences des locataires, la rentabilité, la facturation, les niveaux de service multiples, l’approvisionnement, la surveillance de la maintenabilité et l’automatisation.
 
-Pour plus d'informations sur les considérations supplémentaires d'une application mutualisée en matière de conception, consultez la page [Hébergement d'une application mutualisée dans Azure][Hosting a Multi-Tenant Application on Azure]. Pour plus d’informations sur les modèles d’architecture de données courants pour les applications de base de données SaaS (software as a service) multilocataires, consultez [Modèles de conception pour les applications SaaS multilocataires avec Azure SQL Database](sql-database/sql-database-design-patterns-multi-tenancy-saas-applications.md). 
+Pour plus d'informations sur les considérations supplémentaires d'une application mutualisée en matière de conception, consultez la page [Hébergement d'une application mutualisée dans Azure][Hosting a Multi-Tenant Application on Azure]. Pour plus d’informations sur les modèles d’architecture de données courants pour les applications de base de données SaaS (software as a service) multilocataires, consultez [Modèles de conception pour les applications SaaS multilocataires avec Azure SQL Database](./azure-sql/database/saas-tenancy-app-design-patterns.md). 
 
 Azure offre de nombreuses fonctionnalités vous permettant de résoudre les problèmes clés rencontrés lors de la conception d'un système mutualisé.
 
@@ -91,5 +92,5 @@ Azure offre une série de méthodes permettant d’approvisionner de nouveaux lo
 
 <!--links-->
 
-[Hosting a Multi-Tenant Application on Azure]: https://msdn.microsoft.com/library/hh534480.aspx
+[Hosting a Multi-Tenant Application on Azure]: /previous-versions/msp-n-p/hh534480(v=pandp.10)
 [Designing Multitenant Applications on Azure]: https://msdn.microsoft.com/library/windowsazure/hh689716

@@ -1,0 +1,82 @@
+### YamlMime:Landing
+title: Documentation Azure Kinect DK
+summary: Azure Kinect DK est un SDK doté de capteurs avancés d’intelligence artificielle qui fournissent une vision informatique et des modèles vocaux sophistiqués. Kinect contient un capteur de profondeur, un réseau de microphones spatiaux avec une caméra vidéo et un capteur d’orientation, le tout présenté sous la forme d’un petit appareil tout-en-un proposant plusieurs modes, options et SDK.
+metadata:
+  title: Documentation Azure Kinect DK
+  description: Azure Kinect DK est un SDK doté de capteurs avancés d’intelligence artificielle qui fournissent une vision informatique et des modèles vocaux sophistiqués. Kinect contient un capteur de profondeur, un réseau de microphones spatiaux avec une caméra vidéo et un capteur d’orientation, le tout présenté sous la forme d’un petit appareil tout-en-un proposant plusieurs modes, options et SDK.
+  ms.prod: kinect-dk
+  ms.topic: landing-page
+  author: tesych
+  ms.author: tesych
+  ms.date: 03/11/2020
+  ms.openlocfilehash: f1691507d75d6de630f3c5a48cd59c8cc22b5999
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "85277886"
+landingContent:
+- title: À propos d’Azure Kinect DK
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Présentation d’Azure Kinect DK
+      url: about-azure-kinect-dk.md
+  - linkListType: reference
+    links:
+    - text: Spécifications matérielles
+      url: hardware-specification.md
+    - text: Configuration système requise
+      url: system-requirements.md
+- title: Bien démarrer
+  linkLists:
+  - linkListType: download
+    links:
+    - text: SDK du capteur Azure Kinect
+      url: sensor-sdk-download.md
+    - text: SDK Azure Kinect Body Tracking
+      url: body-sdk-download.md
+  - linkListType: quickstart
+    links:
+    - text: Configurer Azure Kinect DK
+      url: set-up-azure-kinect-dk.md
+    - text: Enregistrer des flux de capteur dans un fichier
+      url: record-sensor-streams-file.md
+    - text: Créer votre première application Azure Kinect
+      url: build-first-app.md
+    - text: Configurer le SDK Body Tracking
+      url: body-sdk-setup.md
+    - text: Créer votre première application Body Tracking
+      url: build-first-body-app.md
+- title: Utiliser le SDK du capteur
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Rechercher et ouvrir l’appareil
+      url: find-then-open-device.md
+    - text: Récupérer des données d’image
+      url: about-sensor-sdk.md
+    - text: Accès au microphone
+      url: access-mics.md
+    - text: Enregistrement et lecture
+      url: record-playback-api.md
+- title: Utiliser le SDK Body Tracking
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Obtenir les résultats Body Tracking
+      url: get-body-tracking-results.md
+    - text: Accéder aux données de la structure du corps
+      url: access-data-body-frame.md
+- title: Informations de référence
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: API du SDK Sensor
+      url: https://microsoft.github.io/Azure-Kinect-Sensor-SDK/master/index.html
+    - text: API du SDK Body Tracking
+      url: https://microsoft.github.io/Azure-Kinect-Body-Tracking/release/1.x.x/index.html
+    - text: Services de vision
+      url: https://azure.microsoft.com/services/cognitive-services/directory/vision/
+    - text: Services Speech
+      url: https://docs.microsoft.com/azure/cognitive-services/speech-service/

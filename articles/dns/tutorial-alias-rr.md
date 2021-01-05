@@ -9,10 +9,10 @@ ms.topic: tutorial
 ms.date: 9/25/2018
 ms.author: rohink
 ms.openlocfilehash: 2b122a34cfd382a58f7680743d3a1cb1ae598fd1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "76939247"
 ---
 # <a name="tutorial-create-an-alias-record-to-refer-to-a-zone-resource-record"></a>Tutoriel : Créer un enregistrement d’alias pour référencer un enregistrement de ressource de zone
@@ -58,7 +58,7 @@ Créez un enregistrement d’alias qui pointe vers un enregistrement de ressourc
 ## <a name="test-the-alias-record"></a>Tester l’enregistrement d’alias
 
 1. Lancez votre outil nslookup préféré. Une option est d’accéder à [https://network-tools.com/nslook](https://network-tools.com/nslook).
-2. Définissez le type de requête pour les enregistrements A et recherchez **test.\<votre nom de domaine\>** . La réponse est **10.10.10.10**.
+2. Définissez le type de requête pour les enregistrements A et recherchez **test.\<your domain name\>** . La réponse est **10.10.10.10**.
 3. Dans le portail Azure, changez l’enregistrement A **server** en **10.11.11.11**.
 4. Attendez quelques minutes, puis utilisez à nouveau nslookup pour l’enregistrement **test**. La réponse est **10.11.11.11**.
 

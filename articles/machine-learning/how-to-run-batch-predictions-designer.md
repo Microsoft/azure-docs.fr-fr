@@ -1,24 +1,24 @@
 ---
-title: Exécuter des prédictions par lots à l’aide du concepteur Azure Machine Learning (préversion)
+title: Exécuter des prédictions par lots à l’aide du concepteur Azure Machine Learning
 titleSuffix: Azure Machine Learning
-description: Découvrez comment entraîner un modèle et configurer un pipeline de prédiction par lots à l’aide du concepteur. Déployez le pipeline en tant que service web paramétrable, pouvant être déclenché à partir de n’importe quelle bibliothèque HTTP.
+description: Découvrez comment créer un pipeline de prédiction par lot. Déployez le pipeline en tant que service web paramétrable et déclenchez-le à partir de n’importe quelle bibliothèque HTTP.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
+ms.author: keli19
+author: likebupt
+ms.date: 09/09/2020
 ms.topic: conceptual
-ms.author: peterlu
-author: peterclu
-ms.date: 02/24/2020
-ms.custom: Ignite2019, designer
-ms.openlocfilehash: 5079953994b74378a54a316c288c77d13c3af782
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: how-to, designer
+ms.openlocfilehash: 2ef125f65e13f7a9fa756553b1de148d4849babc
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83653679"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94553944"
 ---
-# <a name="run-batch-predictions-using-azure-machine-learning-designer-preview"></a>Exécuter des prédictions par lots à l’aide du concepteur Azure Machine Learning (préversion)
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-enterprise-sku.md)]
+# <a name="run-batch-predictions-using-azure-machine-learning-designer"></a>Exécuter des prédictions par lots à l’aide du concepteur Azure Machine Learning
+
 
 Dans cet article, vous allez apprendre à utiliser le concepteur pour créer un pipeline de prédiction par lots. La prédiction par lots vous permet de noter en continu et à la demande des jeux de données volumineux via un service web qui peut être déclenché à partir de n'importe quelle bibliothèque HTTP.
 
@@ -29,11 +29,13 @@ Au cours de cette procédure, vous allez apprendre à effectuer les tâches suiv
 > * Utiliser un point de terminaison de pipeline
 > * Gérer les versions d'un point de terminaison
 
-Pour configurer les services de scoring par lots à l'aide du kit de développement logiciel (SDK), consultez cette [procédure](how-to-run-batch-predictions.md).
+Pour configurer les services de scoring par lots à l'aide du kit de développement logiciel (SDK), consultez cette [procédure](./tutorial-pipeline-batch-scoring-classification.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
 Cette procédure suppose que vous disposez déjà d'un pipeline de formation. Pour accéder à une présentation guidée du concepteur, suivez la [première partie du tutoriel du concepteur](tutorial-designer-automobile-price-train-score.md). 
+
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
 
 ## <a name="create-a-batch-inference-pipeline"></a>Créer un pipeline d’inférence par lots
 
@@ -69,7 +71,10 @@ Dans cette section, vous allez créer un paramètre de jeu de données afin de s
    
     Entrez un nom pour le paramètre, ou acceptez la valeur par défaut.
 
-## <a name="publish-your-batch-inferencing-pipeline"></a>Publier votre pipeline d'inférence par lots
+    > [!div class="mx-imgBorder"]
+    > ![Définir le jeu de données comme paramètre de pipeline](./media/how-to-run-batch-predictions-designer/set-dataset-as-pipeline-parameter.png)
+
+## <a name="publish-your-batch-inference-pipeline"></a>Publier votre pipeline d'inférence par lots
 
 Vous êtes maintenant prêt à déployer le pipeline d'inférence. Cela permettra de déployer le pipeline et de le mettre à la disposition d'autres utilisateurs.
 
@@ -124,9 +129,7 @@ Pour plus d'informations sur l'utilisation des points de terminaison de pipeline
 
 Vous trouverez le point de terminaison REST d'un point de terminaison de pipeline dans le panneau Vue d'ensemble de l'exécution. En appelant le point de terminaison, vous utilisez son pipeline publié par défaut.
 
-Vous pouvez également utiliser un pipeline publié sur la page **Pipelines publiés**. Sélectionnez un pipeline publié et recherchez le point de terminaison REST de celui-ci. 
-
-![Détails du point de terminaison REST](./media/how-to-run-batch-predictions-designer/rest-endpoint-details.png)
+Vous pouvez également utiliser un pipeline publié sur la page **Pipelines publiés**. Sélectionnez un pipeline publié. Vous pouvez y trouver le point de terminaison REST dans le volet **Vue d’ensemble des pipelines publiés** à droite du graphique. 
 
 Pour procéder à un appel REST, vous devez disposer d'un en-tête d'authentification de type porteur OAuth 2.0. Pour plus d’informations sur la configuration de l’authentification dans votre espace de travail et sur l’exécution d’un appel REST paramétrable, consultez [ce tutoriel](tutorial-pipeline-batch-scoring-classification.md#publish-and-run-from-a-rest-endpoint).
 
@@ -140,7 +143,7 @@ Lorsque vous publiez un pipeline, vous pouvez choisir de le définir comme nouve
 
 Vous pouvez également définir un nouveau pipeline par défaut sous l'onglet **Pipelines publiés** de votre point de terminaison.
 
-![Définir le pipeline par défaut](./media/how-to-run-batch-predictions-designer/set-new-default-pipeline.png)
+![Définir le pipeline par défaut sur la page du pipeline publié](./media/how-to-run-batch-predictions-designer/set-new-default-pipeline.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

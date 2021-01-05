@@ -8,14 +8,17 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: af5e511cbf273bc4e4fa0a08d089a955426fe75c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1b7564988c8a4d63a37b53d18ed3a7359e65d72
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75454188"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92926408"
 ---
 # <a name="use-the-opc-vault-certificate-management-service"></a>Utiliser le service de gestion de certificats OPC Vault
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Cet article explique comment inscrire des applications et émettre des certificats d’application signés pour vos appareils OPC UA.
 
@@ -38,7 +41,7 @@ Si vous ne l’avez pas encore fait, créez le certificat de l’autorité de ce
 
 1. Ouvrez votre service de certificats à l’adresse `https://myResourceGroup-app.azurewebsites.net`, puis connectez-vous.
 2. Accédez à **Register New** (Inscrire nouveau). Pour un inscrire une application, un utilisateur doit disposer au moins du rôle Rédacteur.
-2. Le formulaire d’entrée suit les conventions de nommage d’OPC UA. Par exemple, dans la capture d’écran suivante, les paramètres de l’exemple [Serveur de référence OPC UA](https://github.com/OPCFoundation/UA-.NETStandard/tree/master/SampleApplications/Workshop/Reference) de la pile .NET Standard sont présentés :
+2. Le formulaire d’entrée suit les conventions de nommage d’OPC UA. Par exemple, dans la capture d’écran suivante, les paramètres de l’exemple [Serveur de référence OPC UA](https://github.com/OPCFoundation/UA-.NETStandard/tree/master/Applications/ReferenceServer) de la pile .NET Standard sont présentés :
 
    ![Capture d’écran de l’inscription de serveur de référence UA](media/howto-opc-vault-secure/reference-server-registration.png "Inscription de serveur de référence UA")
 
@@ -61,7 +64,7 @@ Sécurisez votre application OPC UA en émettant un certificat signé basé sur 
 
 4. Complétez le formulaire avec un sujet et les noms de domaine. Pour la clé privée, choisissez PEM ou PFX avec mot de passe. Sélectionnez **Generate New KeyPair** (Générer une nouvelle paire de clés) pour créer la demande de certificat.
 
-   ![Capture d’écran d’affichage des détails de la demande de certificat](media/howto-opc-vault-secure/approve-reject.png "Approuver un certificat")
+   ![Capture d’écran de l’écran Afficher les détails de la demande de certificat et du bouton Générer une nouvelle paire de clés](media/howto-opc-vault-secure/approve-reject.png "Approuver un certificat")
 
 5. L’approbation exige que l’utilisateur possède le rôle Approbateur et des autorisations de signature dans Azure Key Vault. Dans le workflow classique, les rôles Approbateur et Demandeur doivent être attribués à des utilisateurs distincts. Sélectionnez **Approve** (Approuver) ou **Reject** (Rejeter) pour lancer ou annuler la création effective de la paire de clés et l’opération de signature. La nouvelle paire de clés est créée et stockée de manière sécurisé dans Azure Key Vault jusqu’à ce qu’elle soit téléchargée par le demandeur de certificat. Le certificat obtenu avec la clé publique est signé par l’autorité de certification. Ces opérations peuvent prendre quelques secondes.
 
@@ -90,7 +93,7 @@ Sécurisez votre application OPC UA en émettant un certificat signé basé sur 
 
 5. L’approbation exige que l’utilisateur possède le rôle Approbateur et des autorisations de signature dans Azure Key Vault. Sélectionnez **Approve** (Approuver) ou **Reject** (Rejeter) pour lancer ou annuler la l’opération de signature effective. Le certificat obtenu avec la clé publique est signé par l’autorité de certification. Cette opération peut prendre quelques secondes.
 
-   ![Capture d’écran d’affichage des détails d’une demande de certificat, avec message d’approbation au bas](media/howto-opc-vault-secure/view-cert-csr.png "Afficher un certificat")
+   ![Capture de l’option Afficher les détails de la demande de certificat, comportant un message d’approbation en bas](media/howto-opc-vault-secure/view-cert-csr.png "Afficher un certificat")
 
 6. Le certificat (DER) obtenu peut être téléchargé à partir de là en tant que fichier binaire. Une version encodée en base64 est aussi disponible, par exemple, pour copier et coller le certificat dans une ligne de commande ou une entrée de texte. 
 10. Après avoir téléchargé et stocké de manière sécurisée le certificat, vous pouvez sélectionner **Delete Certificate** (Supprimer le certificat).

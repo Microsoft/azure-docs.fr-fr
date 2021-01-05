@@ -5,163 +5,50 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,seoapr2020
+ms.topic: how-to
+ms.custom: hdinsightactive,seoapr2020, devx-track-azurecli
 ms.date: 04/24/2020
-ms.openlocfilehash: cd41c162d44320fc19af904118f202423e68e96a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: cc17cd23ae197db25fed440eb249f2cf069d4859
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195347"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92744582"
 ---
 # <a name="use-azure-data-lake-storage-gen2-with-azure-hdinsight-clusters"></a>Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight
 
-Azure Data Lake Storage Gen2 est un service de stockage cloud dédié à l’analytique de Big Data et intégré au Stockage Blob Azure. Data Lake Storage Gen2 réunit les capacités du Stockage Blob Azure et d’Azure Data Lake Storage Gen1. Le service qui en résulte offre des fonctionnalités d’Azure Data Lake Storage Gen1. Ces fonctionnalités incluent : la sémantique du système de fichiers, la sécurité au niveau des répertoires et des fichiers, ainsi que l’adaptabilité. En ce qui concerne les fonctionnalités à faible coût du stockage Blob Azure, elles comprennent le stockage hiérarchisé, la haute disponibilité et la récupération d’urgence.
-
-## <a name="data-lake-storage-gen2-availability"></a>Disponibilité de Data Lake Storage Gen2
-
-Data Lake Storage Gen2 est disponible comme option de stockage pour presque tous les types de clusters Azure HDInsight en tant que compte par défaut et compte de stockage supplémentaire. HBase, en revanche, ne peut avoir qu’un seul compte Data Lake Storage Gen2.
+[Azure Data Lake Storage Gen2](../storage/blobs/data-lake-storage-introduction.md) est un service de stockage cloud dédié à l’analytique Big Data et intégré au [Stockage Blob Azure](../storage/blobs/storage-blobs-introduction.md). Data Lake Storage Gen2 réunit les capacités du Stockage Blob Azure et d’Azure Data Lake Storage Gen1. Le service qui en résulte offre les fonctionnalités d’Azure Data Lake Storage Gen1, notamment la sémantique du système de fichiers, la sécurité au niveau des répertoires et des fichiers et l’adaptabilité. En ce qui concerne les fonctionnalités à faible coût du stockage Blob Azure, elles comprennent le stockage hiérarchisé, la haute disponibilité et la récupération d’urgence.
 
 Pour une comparaison complète des options de création de cluster à l'aide de Data Lake Storage Gen2, consultez [Comparer les options de stockage à utiliser avec les clusters Azure HDInsight](hdinsight-hadoop-compare-storage-options.md).
 
+[!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
+
+## <a name="data-lake-storage-gen2-availability"></a>Disponibilité de Data Lake Storage Gen2
+
+Data Lake Storage Gen2 est disponible comme option de stockage pour presque tous les types de clusters Azure HDInsight en tant que compte par défaut et compte de stockage supplémentaire. HBase, en revanche, ne peut avoir qu’un seul compte avec Data Lake Storage Gen2.
+
 > [!Note]  
-> Après avoir sélectionné Data Lake Storage Gen2 comme **type de stockage principal**, vous ne pouvez pas sélectionner un compte Data Lake Storage Gen1 comme stockage supplémentaire.
+> Après avoir sélectionné Data Lake Storage Gen2 comme **type de stockage principal** , il n’est pas possible de sélectionner Data Lake Storage Gen1 comme stockage supplémentaire.
 
-## <a name="create-a-cluster-with-data-lake-storage-gen2-through-the-azure-portal"></a>Créer un cluster avec Data Lake Storage Gen2 par le biais du portail Azure
+## <a name="create-hdinsight-clusters-using-data-lake-storage-gen2"></a>Création de clusters HDInsight avec Data Lake Storage Gen2
 
-Si vous souhaitez créer un cluster HDInsight qui utilise Data Lake Storage Gen2 comme stockage, effectuez les étapes suivantes pour configurer un compte Data Lake Storage Gen2.
+Suivez les liens ci-dessous pour obtenir des instructions détaillées sur la création de clusters HDInsight avec accès à Data Lake Storage Gen2.
 
-### <a name="create-a-user-assigned-managed-identity"></a>Créer une identité managée attribuée par l’utilisateur
-
-Créez une identité managée affectée à l’utilisateur, si vous n’en avez pas encore.
-
-1. Connectez-vous au [portail Azure](https://portal.azure.com).
-1. Dans le coin supérieur gauche, cliquez sur **Créer une ressource**.
-1. Dans la zone de recherche, tapez **user assigned (utilisateur affecté)** , puis cliquez sur **Identité managée affectée par l'utilisateur**.
-1. Cliquez sur **Créer**.
-1. Entrez un nom pour votre identité managée, sélectionnez l'abonnement, le groupe de ressources et l'emplacement correspondants.
-1. Cliquez sur **Créer**.
-
-Pour plus d’informations sur le fonctionnement des identités managées dans Azure HDInsight, consultez [Identités managées dans Azure HDInsight](hdinsight-managed-identities.md).
-
-![Créer une identité managée attribuée par l’utilisateur](./media/hdinsight-hadoop-use-data-lake-storage-gen2/create-user-assigned-managed-identity-portal.png)
-
-### <a name="create-a-data-lake-storage-gen2-account"></a>Créer un compte Data Lake Storage Gen2
-
-Créez un compte de stockage Azure Data Lake Storage Gen2.
-
-1. Connectez-vous au [portail Azure](https://portal.azure.com).
-1. Dans le coin supérieur gauche, cliquez sur **Créer une ressource**.
-1. Dans la zone de recherche, tapez **storage (stockage)** , puis cliquez sur **Compte de stockage**.
-1. Cliquez sur **Créer**.
-1. Sur l'écran **Créer un compte de stockage** :
-    1. Sélectionnez l’abonnement et le groupe de ressources correspondants.
-    1. Entrez un nom pour votre compte Data Lake Storage Gen2.
-    1. Cliquez sur l’onglet **Avancé**.
-    1. Cliquez sur **Activé** en regard de **Espace de noms hiérarchique** sous **Data Lake Storage Gen2**.
-    1. Cliquez sur **Vérifier + créer**.
-    1. Cliquez sur **Créer**
-
-Pour plus d'informations sur les autres options lors de la création d'un compte de stockage, voir [Démarrage rapide : Créer un compte de stockage Azure Data Lake Storage Gen2](../storage/blobs/data-lake-storage-quickstart-create-account.md).
-
-![Capture d’écran montrant la création du compte de stockage dans le portail Azure](./media/hdinsight-hadoop-use-data-lake-storage-gen2/azure-data-lake-storage-account-create-advanced.png)
-
-### <a name="set-up-permissions-for-the-managed-identity-on-the-data-lake-storage-gen2-account"></a>Définir les autorisations de l’identité managée sur le compte Data Lake Storage Gen2
-
-Affectez l’identité managée au rôle **Propriétaire des données Blob du stockage** sur le compte de stockage.
-
-1. Dans le [portail Azure](https://portal.azure.com), accédez à votre compte de stockage.
-1. Sélectionnez votre compte de stockage, puis sélectionnez **Contrôle d’accès (IAM)** pour afficher les paramètres de contrôle d’accès du compte. Sélectionnez l’onglet **Attributions de rôles** pour afficher la liste des attributions de rôles.
-
-    ![Capture d’écran montrant les paramètres de contrôle d’accès du stockage](./media/hdinsight-hadoop-use-data-lake-storage-gen2/portal-access-control.png)
-
-1. Sélectionnez le bouton **+ Ajouter une attribution de rôle** pour ajouter un nouveau rôle.
-1. Dans la fenêtre **Ajouter une attribution de rôle**, sélectionnez le rôle **Propriétaire des données Blob du stockage**. Ensuite, sélectionnez l’abonnement qui contient le compte de stockage et l’identité managée. Ensuite, recherchez l’identité managée affectée par l’utilisateur que vous avez créée. Pour finir, sélectionnez l’identité managée pour qu’elle soit listée sous **Membres sélectionnés**.
-
-    ![Capture d’écran montrant comment attribuer un rôle RBAC](./media/hdinsight-hadoop-use-data-lake-storage-gen2/add-rbac-role3-window.png)
-
-1. Sélectionnez **Enregistrer**. L’identité affectée par l’utilisateur que vous avez sélectionnée est maintenant listée sous le rôle sélectionné.
-1. Une fois cette configuration initiale terminée, vous pouvez créer un cluster par le biais du portail. Le cluster doit être dans la même région Azure que le compte de stockage. Sous l’onglet **Stockage** du menu de création du cluster, sélectionnez les options suivantes :
-
-    * Comme **Type de stockage principal**, sélectionnez **Azure Data Lake Storage Gen2**.
-    * Sous **Compte de stockage principal**, recherchez et sélectionnez le compte de stockage Data Lake Storage Gen2 nouvellement créé.
-
-    * Sous **Identité**, sélectionnez l’identité managée affectée par l’utilisateur nouvellement créée.
-
-        ![Paramètres de stockage pour l’utilisation de Data Lake Storage Gen2 avec Azure HDInsight](./media/hdinsight-hadoop-use-data-lake-storage-gen2/azure-portal-cluster-storage-gentwo.png)
-
-    > [!NOTE]
-    > * Pour ajouter un compte Azure Data Lake Storage Gen2 secondaire, au niveau du compte de stockage, attribuez simplement l’identité managée créée précédemment au nouveau compte de stockage Azure Data Lake Storage Gen2 que vous voulez ajouter. Sachez que l’ajout d’un compte Azure Data Lake Storage Gen2 secondaire via le panneau « Comptes de stockage supplémentaires » de HDInsight n’est pas pris en charge.
-    > * Vous pouvez activer RA-GRS ou RA-ZRS sur le compte de stockage Azure utilisé par HDInsight. La création d’un cluster sur le point de terminaison secondaire RA-GRS ou RA-ZRS n’est toutefois pas prise en charge.
-
-
-## <a name="create-a-cluster-with-data-lake-storage-gen2-through-the-azure-cli"></a>Créer un cluster avec Data Lake Storage Gen2 par le biais d’Azure CLI
-
-Vous pouvez [télécharger un exemple de fichier de modèle](https://github.com/Azure-Samples/hdinsight-data-lake-storage-gen2-templates/blob/master/hdinsight-adls-gen2-template.json) et [télécharger un exemple de fichier de paramètres](https://github.com/Azure-Samples/hdinsight-data-lake-storage-gen2-templates/blob/master/parameters.json). Avant d’utiliser le modèle et l’extrait de code Azure CLI ci-dessous, remplacez les espaces réservés suivants par leurs valeurs correctes :
-
-| Espace réservé | Description |
-|---|---|
-| `<SUBSCRIPTION_ID>` | L’ID de votre abonnement Azure |
-| `<RESOURCEGROUPNAME>` | Le groupe de ressources dans lequel vous souhaitez créer le cluster et le compte de stockage. |
-| `<MANAGEDIDENTITYNAME>` | Le nom de l’identité managée qui recevra les autorisations sur votre compte Azure Data Lake Storage Gen2. |
-| `<STORAGEACCOUNTNAME>` | Nouveau compte Azure Data Lake Storage Gen2 qui sera créé. |
-| `<CLUSTERNAME>` | Nom de votre cluster HDInsight |
-| `<PASSWORD>` | Le mot de passe que vous avez choisi pour vous connecter au cluster à l’aide de SSH et du tableau de bord Ambari. |
-
-L’extrait de code ci-dessous effectue les étapes initiales suivantes :
-
-1. Il établit la connexion à votre compte Azure.
-1. Il définit l’abonnement actif où les opérations de création seront effectuées.
-1. Il crée un groupe de ressources pour les nouvelles activités de déploiement.
-1. Il crée une identité managée attribuée par l’utilisateur.
-1. Il ajoute une extension à Azure CLI pour utiliser les fonctionnalités de Data Lake Storage Gen2.
-1. Il crée un compte Data Lake Storage Gen2 à l’aide de `--hierarchical-namespace true`l’indicateur.
-
-```azurecli
-az login
-az account set --subscription <SUBSCRIPTION_ID>
-
-# Create resource group
-az group create --name <RESOURCEGROUPNAME> --location eastus
-
-# Create managed identity
-az identity create -g <RESOURCEGROUPNAME> -n <MANAGEDIDENTITYNAME>
-
-az extension add --name storage-preview
-
-az storage account create --name <STORAGEACCOUNTNAME> \
-    --resource-group <RESOURCEGROUPNAME> \
-    --location eastus --sku Standard_LRS \
-    --kind StorageV2 --hierarchical-namespace true
-```
-
-Ensuite, connectez-vous au portail. Ajoutez la nouvelle identité managée affectée par l’utilisateur au rôle **Contributeur aux données Blob du stockage** sur le compte de stockage. Cette étape est décrite à l’étape 3 sous [Utilisation du Portail Azure](hdinsight-hadoop-use-data-lake-storage-gen2.md).
-
-Une fois que vous avez défini le rôle de l’identité managée affectée par l’utilisateur, déployez le modèle en utilisant l’extrait de code suivant.
-
-```azurecli
-az group deployment create --name HDInsightADLSGen2Deployment \
-    --resource-group <RESOURCEGROUPNAME> \
-    --template-file hdinsight-adls-gen2-template.json \
-    --parameters parameters.json
-```
-
-## <a name="create-a-cluster-with-data-lake-storage-gen2-through-azure-powershell"></a>Créer un cluster avec Data Lake Storage Gen2 par le biais d’Azure PowerShell
-
-L’utilisation de PowerShell pour créer un cluster HDInsight avec Azure Data Lake Storage Gen2 n’est actuellement pas prise en charge.
+* [Utilisation du portail](../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2-portal.md)
+* [Utilisation de l’interface de ligne de commande Azure](../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2-azure-cli.md)
+* PowerShell n’est pas pris en charge actuellement pour créer un cluster HDInsight avec Azure Data Lake Storage Gen2.
 
 ## <a name="access-control-for-data-lake-storage-gen2-in-hdinsight"></a>Contrôle d’accès à Data Lake Storage Gen2 dans HDInsight
 
 ### <a name="what-kinds-of-permissions-does-data-lake-storage-gen2-support"></a>Quels sont les types d’autorisation pris en charge par Data Lake Storage Gen2 ?
 
-Data Lake Storage Gen2 utilise un modèle de contrôle d’accès qui prend en charge le contrôle d’accès en fonction du rôle (RBAC) ainsi que les listes de contrôle d’accès (ACL) POSIX. Data Lake Storage Gen1 prend en charge les listes de contrôle d’accès uniquement pour contrôler l’accès aux données.
+Data Lake Storage Gen2 utilise un modèle de contrôle d’accès qui prend en charge le contrôle d’accès en fonction du rôle Azure (RBAC Azure) et les listes de contrôle d’accès (ACL) POSIX. Data Lake Storage Gen1 prend en charge les listes de contrôle d’accès uniquement pour contrôler l’accès aux données.
 
-RBAC utilise des attributions de rôles pour appliquer efficacement des ensembles d’autorisations aux utilisateurs, groupes et principaux de service des ressources Azure. En règle générale, ces ressources Azure sont limitées aux ressources de niveau supérieur (par exemple les comptes Stockage Azure). Pour le stockage Azure, et aussi Data Lake Storage Gen2, ce mécanisme a été étendu à la ressource du système de fichiers.
+Azure RBAC utilise des attributions de rôles pour appliquer efficacement des ensembles d’autorisations aux utilisateurs, groupes et principaux de service des ressources Azure. En règle générale, ces ressources Azure sont limitées aux ressources de niveau supérieur (par exemple, les comptes de stockage Blob Azure). Pour le Stockage Blob Azure, de même que Data Lake Storage Gen2, ce mécanisme a été étendu à la ressource du système de fichiers.
 
- Pour plus d’informations sur les autorisations de fichiers avec RBAC, consultez [Contrôle d’accès en fonction du rôle Azure (RBAC)](../storage/blobs/data-lake-storage-access-control.md#azure-role-based-access-control-rbac).
+Pour plus d’informations sur les autorisations de fichiers avec Azure RBAC, consultez [Contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../storage/blobs/data-lake-storage-access-control-model.md#role-based-access-control).
 
-Pour plus d’informations sur les autorisations de fichiers avec des listes ACL, consultez [Listes de contrôle d’accès sur les fichiers et répertoires](../storage/blobs/data-lake-storage-access-control.md#access-control-lists-on-files-and-directories).
+Pour plus d’informations sur les autorisations de fichiers avec des listes ACL, consultez [Listes de contrôle d’accès sur les fichiers et répertoires](../storage/blobs/data-lake-storage-access-control.md).
 
 ### <a name="how-do-i-control-access-to-my-data-in-data-lake-storage-gen2"></a>Comment contrôler l’accès à mes données dans Data Lake Storage Gen2 ?
 
@@ -169,7 +56,7 @@ La capacité de votre cluster HDInsight à accéder aux fichiers dans Data Lake 
 
 Les services Azure utilisent deux types d’identités managées : celles affectées par le système et celles affectées par l’utilisateur. HDInsight utilise des identités managées affectées par l’utilisateur pour accéder à Data Lake Storage Gen2. Une `user-assigned managed identity` est créée en tant que ressource Azure autonome. Via un processus de création, Azure crée une identité dans le locataire Azure AD approuvé par l’abonnement en cours d’utilisation. Une fois l’identité créée, elle peut être affectée à une ou plusieurs instances de service Azure.
 
-Le cycle de vie d’une identité attribuée par l’utilisateur est géré séparément du cycle de vie des instances de service Azure auxquelles elle est affectée. Pour plus d’informations sur les identités managées, consultez [Comment fonctionnent les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/overview.md#how-does-the-managed-identities-for-azure-resources-work)
+Le cycle de vie d’une identité attribuée par l’utilisateur est géré séparément du cycle de vie des instances de service Azure auxquelles elle est affectée. Pour en savoir plus sur les identités managées, consultez la section [Que sont les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/overview.md).
 
 ### <a name="how-do-i-set-permissions-for-azure-ad-users-to-query-data-in-data-lake-storage-gen2-by-using-hive-or-other-services"></a>Comment définir des autorisations pour que les utilisateurs Azure AD puissent interroger des données dans Data Lake Storage Gen2 avec Hive ou d’autres services ?
 
@@ -179,19 +66,19 @@ Pour définir des autorisations pour que les utilisateurs puissent interroger de
 
 Il existe plusieurs méthodes pour accéder aux fichiers dans Data Lake Storage Gen2 à partir d’un cluster HDInsight.
 
-* **Utilisation du nom complet**. Avec cette approche, vous fournissez le chemin d’accès complet au fichier auquel vous souhaitez accéder.
+* **Utilisation du nom complet** . Avec cette approche, vous fournissez le chemin d’accès complet au fichier auquel vous souhaitez accéder.
 
     ```
     abfs://<containername>@<accountname>.dfs.core.windows.net/<file.path>/
     ```
 
-* **Utilisation du format de chemin d’accès raccourci**. Avec cette approche, vous remplacez le chemin d’accès à la racine du cluster par :
+* **Utilisation du format de chemin d’accès raccourci** . Avec cette approche, vous remplacez le chemin d’accès à la racine du cluster par :
 
     ```
     abfs:///<file.path>/
     ```
 
-* **Utilisation du chemin d’accès relatif**. Avec cette approche, vous fournissez uniquement le chemin d’accès relatif au fichier auquel vous souhaitez accéder.
+* **Utilisation du chemin d’accès relatif** . Avec cette approche, vous fournissez uniquement le chemin d’accès relatif au fichier auquel vous souhaitez accéder.
 
     ```
     /<file.path>/

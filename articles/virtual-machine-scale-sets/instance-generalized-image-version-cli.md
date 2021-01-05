@@ -1,6 +1,6 @@
 ---
-title: Créer un groupe identique à partir d’une image généralisée
-description: Créez un groupe identique à l’aide d’une image généralisée dans une galerie d’images partagées.
+title: Créer un groupe identique à partir d’une image généralisée avec Azure CLI
+description: Créez un groupe identique à l’aide d’une image généralisée dans Shared Image Gallery en utilisant l’interface de ligne de commande Azure.
 author: cynthn
 ms.service: virtual-machine-scale-sets
 ms.subservice: imaging
@@ -9,14 +9,14 @@ ms.topic: how-to
 ms.date: 05/01/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: 59e29be2aade993c8aeae64b4aa4918b36a26b26
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 841247c03d9f3b151a0c75430715c03b009d831a
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82794005"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91287064"
 ---
-# <a name="create-a-scale-set-from-a-generalized-image"></a>Créer un groupe identique à partir d’une image généralisée
+# <a name="create-a-scale-set-from-a-generalized-image-with-azure-cli"></a>Créer un groupe identique à partir d’une image généralisée avec Azure CLI
 
 Créez un groupe identique à partir d’une version d’image généralisée stockée dans une [galerie d’images partagées](shared-image-galleries.md) à l’aide d’Azure CLI. Si vous souhaitez créer un groupe identique à l’aide d’une version d’image spécialisée, consultez [Créer des instances de groupe identique à partir d’une image spécialisée](instance-specialized-image-version-cli.md).
 
@@ -63,4 +63,4 @@ Vous pouvez également créer la ressource de galerie d’images partagées à l
 - [Créer une définition d’image dans une galerie d’images partagées](https://azure.microsoft.com/resources/templates/101-sig-image-definition-create/)
 - [Créer une version d’image dans une galerie d’images partagées](https://azure.microsoft.com/resources/templates/101-sig-image-version-create/)
 
-Pour plus d’informations sur les galeries d’images partagées, consultez la [vue d’ensemble](shared-image-galleries.md). Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](troubleshooting-shared-images.md).
+Pour plus d’informations sur les galeries d’images partagées, consultez la [vue d’ensemble](shared-image-galleries.md). Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](../virtual-machines/troubleshooting-shared-images.md).

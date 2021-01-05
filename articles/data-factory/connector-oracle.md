@@ -9,16 +9,17 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 04/09/2020
+ms.date: 09/28/2020
 ms.author: jingwang
-ms.openlocfilehash: d37a9bd4cc29ee60f9833ffbcb5a2701a19bbaa7
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: b4d2b277eea85fb8a5c9eb733e5bfd64d66f392c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416827"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91407824"
 ---
 # <a name="copy-data-from-and-to-oracle-by-using-azure-data-factory"></a>Copier des données depuis/vers Oracle à l’aide d’Azure Data Factory
+
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-onprem-oracle-connector.md)
 > * [Version actuelle](connector-oracle.md)
@@ -76,6 +77,8 @@ Le service lié Oracle prend en charge les propriétés suivantes :
 
 >[!TIP]
 >En cas d’erreur, « ORA-01025 : UPI parameter out of range » et que votre version d’Oracle est 8i, ajoutez `WireProtocolMode=1` à votre chaîne de connexion, puis réessayez.
+
+Si vous avez plusieurs instances Oracle pour le scénario de basculement, vous pouvez créer un service lié à Oracle et renseigner l’hôte principal, le port, le nom d’utilisateur, le mot de passe, etc., et ajouter une nouvelle propriété « **Propriétés de connexion supplémentaires** » avec le nom `AlternateServers` et la valeur `(HostName=<secondary host>:PortNumber=<secondary port>:ServiceName=<secondary service name>)`. N’oubliez pas les crochets et faites attention aux signes deux-points (`:`) utilisés comme séparateur. À titre d’exemple, la valeur suivante de serveurs secondaires définit deux serveurs de base de données de remplacement pour le basculement de connexion : `(HostName=AccountingOracleServer:PortNumber=1521:SID=Accounting,HostName=255.201.11.24:PortNumber=1522:ServiceName=ABackup.NA.MyCompany)`.
 
 Autres propriétés de connexion que vous pouvez définir dans la chaîne de connexion selon votre cas :
 
@@ -313,6 +316,9 @@ Il vous est recommandé d’activer la copie en parallèle avec partitionnement 
 | Chargement complet d’une table volumineuse, sans partitions physiques, avec une colonne entière pour le partitionnement des données. | **Options de partition** : Partition dynamique par spécification de plages de valeurs.<br>**Colonne de partition** : Spécifiez la colonne utilisée pour partitionner les données. Si la valeur n’est pas spécifiée, la colonne de la clé primaire est utilisée. |
 | Chargement d’une grande quantité de données à l’aide d’une requête personnalisée, avec des partitions physiques. | **Option de partition** : Partitions physiques de la table.<br>**Requête**: `SELECT * FROM <TABLENAME> PARTITION("?AdfTabularPartitionName") WHERE <your_additional_where_clause>`.<br>**Nom de la partition** : Spécifiez le(s) nom(s) de partition à copier. S’il n’est pas spécifié, Data Factory détecte automatiquement les partitions physiques de la table que vous avez spécifiée dans le jeu de données Oracle.<br><br>Pendant l’exécution, Data Factory remplace `?AdfTabularPartitionName` par le nom de la partition actuelle, et l’envoie à Oracle. |
 | Chargement d’une grande quantité de données à l’aide d’une requête personnalisée, sans partitions physiques, et avec une colonne entière pour le partitionnement des données. | **Options de partition** : Partition dynamique par spécification de plages de valeurs.<br>**Requête**: `SELECT * FROM <TABLENAME> WHERE ?AdfRangePartitionColumnName <= ?AdfRangePartitionUpbound AND ?AdfRangePartitionColumnName >= ?AdfRangePartitionLowbound AND <your_additional_where_clause>`.<br>**Colonne de partition** : Spécifiez la colonne utilisée pour partitionner les données. Vous pouvez procéder au partitionnement par rapport à la colonne avec le type de données entier.<br>**Limite supérieure de partition** et **limite inférieure de partition** : Indiquez si vous souhaitez filtrer le contenu par rapport à la colonne de partition pour récupérer uniquement les données entre les plages inférieure et supérieure.<br><br>Lors de l’exécution, Data Factory remplace `?AdfRangePartitionColumnName`, `?AdfRangePartitionUpbound` et `?AdfRangePartitionLowbound` par le nom réel de la colonne et les plages de valeurs de chaque partition, et les envoie à Oracle. <br>Par exemple, si l’ID de la colonne de partition « ID » est défini sur une limite inférieure de 1 et une limite supérieure de 80, avec une copie en parallèle définie sur 4, Data Factory récupère les données via 4 partitions. Les ID sont inclus entre [1,20], [21, 40], [41, 60] et [61, 80], respectivement. |
+
+> [!TIP]
+> Lorsque vous copiez des données à partir d’une table non partitionnée, vous pouvez utiliser l’option de partition « Plage dynamique » afin de partitionner par rapport à une colonne d’entiers. Si vos données sources n’incluent pas un tel type de colonne, vous pouvez tirer parti de la fonction [ORA_HASH]( https://docs.oracle.com/database/121/SQLRF/functions136.htm) dans une requête source pour générer une colonne et l’utiliser comme colonne de partition.
 
 **Exemple : requête avec partition physique**
 

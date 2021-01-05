@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 02/22/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 6ffc92fe8d17970e1408262387140331189d6e51
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: a32a5a04c5c71cc06d60f3d2f21946f5361a2afd
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200124"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843245"
 ---
 # <a name="understand-instance-ids-for-azure-vm-scale-set-vms"></a>Présentation des ID d’instance des machines virtuelles d’un groupe identique de machines virtuelles Azure
 Cet article décrit les ID d’instance des groupes identiques ainsi que les différents modes de surface.
@@ -23,19 +23,19 @@ Cet article décrit les ID d’instance des groupes identiques ainsi que les dif
 
 Chaque machine virtuelle d’un groupe identique obtient un ID d’instance qui l’identifie de façon unique. Cet ID d’instance est utilisé dans les API de groupes identiques pour effectuer des opérations sur une machine virtuelle particulière du groupe identique. Par exemple, vous pouvez spécifier un ID d’instance spécifique pour procéder à une réinitialisation lorsque vous utilisez l’API de réinitialisation :
 
-Une API REST : `POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage?api-version={apiVersion}` (pour plus d’informations, consultez la [documentation de l’API REST](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/reimage))
+Une API REST : `POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage?api-version={apiVersion}` (pour plus d’informations, consultez la [documentation de l’API REST](/rest/api/compute/virtualmachinescalesetvms/reimage))
 
-PowerShell : `Set-AzVmssVM -ResourceGroupName {resourceGroupName} -VMScaleSetName {vmScaleSetName} -InstanceId {instanceId} -Reimage` (pour plus d’informations, consultez la [documentation PowerShell](https://docs.microsoft.com/powershell/module/az.compute/set-azvmssvm))
+PowerShell : `Set-AzVmssVM -ResourceGroupName {resourceGroupName} -VMScaleSetName {vmScaleSetName} -InstanceId {instanceId} -Reimage` (pour plus d’informations, consultez la [documentation PowerShell](/powershell/module/az.compute/set-azvmssvm))
 
-L’interface CLI : `az vmss reimage -g {resourceGroupName} -n {vmScaleSetName} --instance-id {instanceId}` (pour plus d’informations, consultez la [documentation relative à l’interface CLI](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest))
+L’interface CLI : `az vmss reimage -g {resourceGroupName} -n {vmScaleSetName} --instance-id {instanceId}` (pour plus d’informations, consultez la [documentation relative à l’interface CLI](/cli/azure/vmss?view=azure-cli-latest))
 
 Vous pouvez obtenir la liste des ID d’instance en répertoriant toutes les instances dans un groupe identique :
 
-Une API REST : `GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines?api-version={apiVersion}` (pour plus d’informations, consultez la [documentation de l’API REST](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesetvms/list))
+Une API REST : `GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines?api-version={apiVersion}` (pour plus d’informations, consultez la [documentation de l’API REST](/rest/api/compute/virtualmachinescalesetvms/list))
 
-PowerShell : `Get-AzVmssVM -ResourceGroupName {resourceGroupName} -VMScaleSetName {vmScaleSetName}` (pour plus d’informations, consultez la [documentation PowerShell](https://docs.microsoft.com/powershell/module/az.compute/get-azvmssvm))
+PowerShell : `Get-AzVmssVM -ResourceGroupName {resourceGroupName} -VMScaleSetName {vmScaleSetName}` (pour plus d’informations, consultez la [documentation PowerShell](/powershell/module/az.compute/get-azvmssvm))
 
-L’interface CLI : `az vmss list-instances -g {resourceGroupName} -n {vmScaleSetName}` (pour plus d’informations, consultez la [documentation relative à l’interface CLI](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest))
+L’interface CLI : `az vmss list-instances -g {resourceGroupName} -n {vmScaleSetName}` (pour plus d’informations, consultez la [documentation relative à l’interface CLI](/cli/azure/vmss?view=azure-cli-latest))
 
 Vous pouvez également utiliser [resources.azure.com](https://resources.azure.com) ou les [SDK Azure](https://azure.microsoft.com/downloads/) pour répertorier les machines virtuelles d’un groupe identique.
 
@@ -66,7 +66,7 @@ Comme vous pouvez le voir, la propriété « instanceId » est simplement un nom
 
 L’exemple de sortie ci-dessus comprend également une propriété « name » pour la machine virtuelle. Le format du nom est le suivant : « {scale-set-name}_{instance-id} ». Ce nom est celui que vous voyez dans le portail Azure lorsque vous répertoriez les instances dans un groupe identique :
 
-![](./media/virtual-machine-scale-sets-instance-ids/vmssInstances.png)
+![Capture d’écran montrant une liste d’instances dans un groupe de machines virtuelles identiques dans le portail Azure.](./media/virtual-machine-scale-sets-instance-ids/vmssInstances.png)
 
 La partie {instance-id} du nom est le même nombre décimal que la propriété « instanceId » décrite précédemment.
 

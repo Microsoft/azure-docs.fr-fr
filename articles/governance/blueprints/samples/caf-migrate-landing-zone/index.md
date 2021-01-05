@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble de l’exemple de blueprint de zone d’accueil de migration du framework d’adoption du cloud
 description: Vue d’ensemble et architecture de l’exemple de blueprint de zone d’accueil de migration du framework d’adoption du cloud pour Azure.
-ms.date: 04/15/2020
+ms.date: 09/14/2020
 ms.topic: sample
-ms.openlocfilehash: c4720ec3e94ee928553cd62017831e5158ac9b97
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 6b8e3484690d263a43d3824c054b28344ea07fb1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81459863"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531676"
 ---
 # <a name="overview-of-the-microsoft-cloud-adoption-framework-for-azure-migration-landing-zone-blueprint-sample"></a>Vue d’ensemble de l’exemple de blueprint de zone d’accueil de migration du framework d’adoption de Microsoft Cloud pour Azure.
 
@@ -20,15 +20,16 @@ L’exemple de blueprint de [base du framework d’adoption du cloud](../caf-fou
 
 L’exemple de blueprint de zone d’accueil de migration du framework d’adoption du cloud déploie dans Azure des ressources d’infrastructure de base que les organisations peuvent utiliser pour préparer leur abonnement à accueillir la migration de machines virtuelles. Il aide également à mettre en place les contrôles de gouvernance nécessaires pour gérer leurs ressources cloud. Cet exemple déploie et applique des ressources, stratégies et modèles qui permettent à une organisation de commencer à utiliser Azure en toute confiance.
 
-:::image type="content" source="../../media/caf-blueprints/caf-migration-landing-zone-architecture.png" alt-text="Zone d’accueil de migration du framework d’adoption du cloud, image décrivant ce qui est installé conformément à ce que préconise le framework d’adoption du cloud en lien avec la zone d’accueil de migration" border="false":::
+:::image type="complex" source="../../media/caf-blueprints/caf-migration-landing-zone-architecture.png" alt-text="Zone d’atterrissage de migration C A F, image décrivant ce qui est installé conformément aux instructions du C A F pour la zone d’atterrissage initiale." border="false":::
+   Décrit une architecture Azure qui est obtenue en déployant le blueprint Migration C A F.  Il s’applique à un abonnement avec des groupes de ressources comprenant un réseau virtuel Azure, un compte de stockage pour stocker des journaux, Log Analytics configuré pour stocker dans le compte de stockage.  Il décrit également Azure Key Vault configuré et la configuration initiale d’Azure Migrate créée.  Toutes ces infrastructures de base sont accessibles avec Azure Active Directory.     
+:::image-end:::
 
 Cet environnement se compose de plusieurs services Azure utilisés pour fournir une gouvernance sécurisée, entièrement supervisée et prête pour les entreprises. Cet environnement comporte les éléments suivants :
 
 - Une instance [Azure Key Vault](../../../../key-vault/general/overview.md) destinée à héberger les secrets utilisés pour les certificats, clés et secret déployés dans l’environnement des services partagés
 - [Log Analytics](../../../../azure-monitor/overview.md) est déployé pour s’assurer que l’ensemble des actions et services journalisent dans un emplacement central dès l’instant où vous démarrez votre migration.
-- [Azure Security Center](../../../../security-center/security-center-intro.md) (version standard) assure la protection contre les menaces de vos charges de travail migrées.
 - [Réseau virtuel Azure](../../../../virtual-network/virtual-networks-overview.md) fournissant un réseau isolé et des sous-réseaux pour votre machine virtuelle.
-- [Projet Azure Migrate](../../../..//migrate/migrate-overview.md) pour la découverte et l’évaluation. Nous ajoutons les outils pour l’évaluation de serveur, la migration de serveur, l’évaluation de base de données et la migration de base de données.  
+- [Projet Azure Migrate](../../../../migrate/migrate-services-overview.md) pour la découverte et l’évaluation. Nous ajoutons les outils pour l’évaluation de serveur, la migration de serveur, l’évaluation de base de données et la migration de base de données.  
 
 
 Tous ces éléments se conforment aux pratiques éprouvées publiés dans [Centre des architectures Azure - Architectures de référence](/azure/architecture/reference-architectures/).

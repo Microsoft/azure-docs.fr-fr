@@ -6,23 +6,23 @@ author: anumjs
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/15/2019
 ms.author: anjangsh
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 0ac17579a1afedc3391b20f336ea9563b1c2d8f9
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: eaf41e903f1a55dd85c6b6282617564a32087707
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80350128"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96447813"
 ---
-# <a name="azure-synapse-analytics---sql-pool-videos"></a>Azure Synapse Analytics - Vidéos du pool SQL
+# <a name="azure-synapse-analytics---dedicated-sql-pool--formerly-sql-dw-videos"></a>Azure Synapse Analytics - Vidéos sur le pool SQL dédié (anciennement SQL DW)
 
-Regardez les dernières vidéos consacrées au pool SQL Azure Synapse pour en savoir plus sur les nouvelles fonctionnalités et améliorations de performances. 
+Pour plus d'informations sur les nouvelles fonctionnalités et les améliorations du niveau de performance, regardez les dernières vidéos consacrées au pool SQL dédié (anciennement SQL DW). 
 
-Commencez par sélectionner la vidéo de présentation ci-dessous pour en savoir plus sur les nouvelles mises à jour du pool SQL Azure Synapse. Découvrez également comment les modèles d’entrepôt de données moderne peuvent vous aider à faire face à des situations concrètes telles que la cybercriminalité.
+Commencez par sélectionner la vidéo de présentation ci-dessous pour en savoir plus sur les nouvelles mises à jour du pool SQL dédié. Découvrez également comment les modèles d’entrepôt de données moderne peuvent vous aider à faire face à des situations concrètes telles que la cybercriminalité.
 </br>
 
 <a href="https://www.youtube.com/watch?v=7MDCWgxPnVY&list=PLXtHYVsvn_b_v4EKljH6dGo9qJ7JjItWL&index=2">

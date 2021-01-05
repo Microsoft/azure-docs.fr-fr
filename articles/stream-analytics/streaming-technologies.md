@@ -7,12 +7,12 @@ ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 05/15/2019
-ms.openlocfilehash: 2146b1bd782aba5d98729a2d37d956744e469ba1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a204aacc0061091e0a273581e766bb669d191f0b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75860246"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90903711"
 ---
 # <a name="choose-a-real-time-analytics-and-streaming-processing-technology-on-azure"></a>Choisir une technologie de traitement de streaming et d’analytique en temps réel sur Azure
 
@@ -55,4 +55,4 @@ Azure Stream Analytics est une technologie propriétaire de Microsoft et est uni
 * [Créer un travail Stream Analytics à l’aide du portail Azure](stream-analytics-quick-create-portal.md)
 * [Créer un travail Stream Analytics à l’aide d’Azure PowerShell](stream-analytics-quick-create-powershell.md)
 * [Créer un travail Stream Analytics à l’aide de Visual Studio](stream-analytics-quick-create-vs.md)
-* [Créer un travail Stream Analytics à l’aide de Visual Studio Code](quick-create-vs-code.md)
+* [Créer un travail Stream Analytics à l’aide de Visual Studio Code](quick-create-visual-studio-code.md)

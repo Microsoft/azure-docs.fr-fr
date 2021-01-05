@@ -1,27 +1,22 @@
 ---
 title: Gérer des groupes d’applications pour Windows Virtual Desktop avec PowerShell - Azure
 description: Comment gérer des groupes d’applications Windows Virtual Desktop avec PowerShell.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 531c7a819bf83edff2756fe1e62859bcb8fef459
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: a6f24dea00a174aa0276a9b30add0854c3694056
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614218"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008642"
 ---
 # <a name="manage-app-groups-using-powershell"></a>Gérer des groupes d’applications à l’aide de PowerShell
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/manage-app-groups-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service, et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/manage-app-groups-2019.md).
 
 Le groupe d’applications par défaut créé pour un nouveau pool d’hôtes Windows Virtual Desktop publie également l’intégralité du bureau. De plus, vous pouvez créer un ou plusieurs groupes d’applications RemoteApp pour le pool d’hôtes. Suivez ce tutoriel pour créer un groupe d’applications RemoteApp et publier des applications individuelles du menu **Démarrer**.
 
@@ -54,43 +49,43 @@ Pour créer un groupe RemoteApp avec PowerShell :
 3. Exécutez l’applet de commande suivante pour obtenir la liste des applications du menu **Démarrer** de l’image de la machine virtuelle du pool d’hôtes. Notez les valeurs de **FilePath**, d’**IconPath** et d’**IconIndex**, ainsi que d’autres informations importantes concernant l’application que vous voulez publier.
 
    ```powershell
-   Get-AzWvdStartMenuItem -ApplicationGroupName <appgroupname> -ResourceGroupName <resourcegroupname> | Format-List | more 
+   Get-AzWvdStartMenuItem -ApplicationGroupName <appgroupname> -ResourceGroupName <resourcegroupname> | Format-List | more
    ```
 
    La sortie doit afficher tous les éléments du menu Démarrer dans un format comme suit :
 
    ```powershell
    AppAlias            : access
-   CommandLineArgument : 
-   FilePath            : C:\Program Files\Microsoft Office\root\Office16\MSACCESS.EXE 
-   FriendlyName        : 
-   IconIndex           : 0 
-   IconPath            : C:\Program Files\Microsoft Office\Root\VFS\Windows\Installer\{90160000-000F-0000-1000-0000000FF1CE}\accicons.exe 
-   Id                  : /subscriptions/resourcegroups/providers/Microsoft.DesktopVirtualization/applicationgroups/startmenuitems/Access 
-   Name                : 0301RAG/Access 
+   CommandLineArgument :
+   FilePath            : C:\Program Files\Microsoft Office\root\Office16\MSACCESS.EXE
+   FriendlyName        :
+   IconIndex           : 0
+   IconPath            : C:\Program Files\Microsoft Office\Root\VFS\Windows\Installer\{90160000-000F-0000-1000-0000000FF1CE}\accicons.exe
+   Id                  : /subscriptions/resourcegroups/providers/Microsoft.DesktopVirtualization/applicationgroups/startmenuitems/Access
+   Name                : 0301RAG/Access
    Type                : Microsoft.DesktopVirtualization/applicationgroups/startmenuitems
-   
-   AppAlias            : charactermap 
-   CommandLineArgument : 
-   FilePath            : C:\windows\system32\charmap.exe 
-   FriendlyName        : 
-   IconIndex           : 0 
-   IconPath            : C:\windows\system32\charmap.exe 
-   Id                  : /subscriptions/resourcegroups/providers/Microsoft.DesktopVirtualization/applicationgroups/startmenuitems/Character Map 
-   Name                : 0301RAG/Character Map 
-   Type                : Microsoft.DesktopVirtualization/applicationgroups/startmenuitems 
+
+   AppAlias            : charactermap
+   CommandLineArgument :
+   FilePath            : C:\windows\system32\charmap.exe
+   FriendlyName        :
+   IconIndex           : 0
+   IconPath            : C:\windows\system32\charmap.exe
+   Id                  : /subscriptions/resourcegroups/providers/Microsoft.DesktopVirtualization/applicationgroups/startmenuitems/Character Map
+   Name                : 0301RAG/Character Map
+   Type                : Microsoft.DesktopVirtualization/applicationgroups/startmenuitems
    ```
-   
+
 4. Exécutez l’applet de commande suivante pour installer l’application en fonction de son `AppAlias`. `AppAlias` devient visible quand vous exécutez la sortie de l’étape 3.
 
    ```powershell
-   New-AzWvdApplication -AppAlias <appalias> -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -CommandLineSetting <DoNotAllow|Allow|Require> 
+   New-AzWvdApplication -AppAlias <appalias> -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -CommandLineSetting <DoNotAllow|Allow|Require>
    ```
 
 5. (Facultatif) Exécutez l’applet de commande suivante pour publier un nouveau programme RemoteApp dans le groupe d’applications créé à l’étape 1.
 
    ```powershell
-   New-AzWvdApplication -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -Filepath <filepath> -IconPath <iconpath> -IconIndex <iconindex> -CommandLineSetting <DoNotAllow|Allow|Require> 
+   New-AzWvdApplication -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -Filepath <filepath> -IconPath <iconpath> -IconIndex <iconindex> -CommandLineSetting <DoNotAllow|Allow|Require>
    ```
 
 6. Pour vérifier que l’application a été publiée, exécutez l’applet de commande suivante.

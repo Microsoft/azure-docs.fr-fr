@@ -7,12 +7,12 @@ ms.service: web-application-firewall
 ms.topic: article
 ms.date: 10/25/2019
 ms.author: victorh
-ms.openlocfilehash: 4bca41effc4e9834f8c76308556facb0681717cd
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.openlocfilehash: 262987b5d5cdccec967193d855b17c5c74e16575
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82888891"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94563390"
 ---
 # <a name="resource-logs-for-azure-web-application-firewall"></a>Journaux de ressources pour le pare-feu d’applications web Azure
 
@@ -42,11 +42,11 @@ Pour stocker vos journaux d’activité, vous disposez de trois options :
 
 La journalisation d’activité est automatiquement activée pour chaque ressource Resource Manager. Vous devez activer la journalisation de l’accès et des performances pour commencer à collecter les données disponibles dans ces journaux d’activité. Pour activer la journalisation, utilisez les étapes suivantes :
 
-1. Notez l’ID de ressource de votre compte de stockage, où les données de journalisation sont stockées. Cette valeur a le format suivant : /abonnements/\<subscriptionId\>/resourceGroups/\<nom du groupe de ressources\>/providers/Microsoft.Storage/storageAccounts/\<nom du compte de stockage\>. Vous pouvez utiliser n’importe quel compte de stockage dans votre abonnement. Vous pouvez utiliser le portail Azure pour rechercher ces informations.
+1. Notez l’ID de ressource de votre compte de stockage, où les données de journalisation sont stockées. Cette valeur se présente sous la forme : /subscriptions/\<subscriptionId\>/resourceGroups/\<resource group name\>/providers/Microsoft.Storage/storageAccounts/\<storage account name\>. Vous pouvez utiliser n’importe quel compte de stockage dans votre abonnement. Vous pouvez utiliser le portail Azure pour rechercher ces informations.
 
     ![Portail : ID de ressource du compte de stockage](../media/web-application-firewall-logs/diagnostics1.png)
 
-2. Notez l’ID de ressource de votre passerelle Application Gateway pour laquelle la journalisation est activée. Cette valeur a le format suivant : /abonnements/\<subscriptionId\>/resourceGroups/\<nom du groupe de ressources\>/providers/Microsoft.Network/applicationGateways/\<nom de la passerelle Application Gateway\>. Vous pouvez utiliser le portail pour rechercher ces informations.
+2. Notez l’ID de ressource de votre passerelle Application Gateway pour laquelle la journalisation est activée. Cette valeur se présente sous la forme : /subscriptions/\<subscriptionId\>/resourceGroups/\<resource group name\>/providers/Microsoft.Network/applicationGateways/\<application gateway name\>. Vous pouvez utiliser le portail pour rechercher ces informations.
 
     ![Portail : ID de ressource de la passerelle Application Gateway](../media/web-application-firewall-logs/diagnostics2.png)
 
@@ -108,7 +108,7 @@ Le journal d’accès n’est généré que si vous l’avez activé sur chaque 
 {
     "resourceId": "/SUBSCRIPTIONS/{subscriptionId}/RESOURCEGROUPS/PEERINGTEST/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/{applicationGatewayName}",
     "operationName": "ApplicationGatewayAccess",
-    "time": "2017-04-26T19:27:38Z",
+    "timestamp": "2017-04-26T19:27:38Z",
     "category": "ApplicationGatewayAccessLog",
     "properties": {
         "instanceId": "ApplicationGatewayRole_IN_0",
@@ -285,7 +285,7 @@ Le journal du pare-feu n’est généré que si vous l’avez activé sur chaque
 Vous pouvez afficher et analyser les données du journal d’activité en utilisant l’une des méthodes suivantes :
 
 * **Outils Azure** : récupérez les informations du journal d’activité en utilisant Azure PowerShell, Azure CLI, l’API REST Azure ou le portail Azure. Des instructions pas à pas pour chaque méthode sont détaillées dans l’article [Opérations d’activité avec Resource Manager](../../azure-resource-manager/management/view-activity-logs.md).
-* **Power BI** : si vous n’avez pas encore de compte [Power BI](https://powerbi.microsoft.com/pricing), vous pouvez l’essayer gratuitement. À l’aide des [applications du modèle Power BI](https://docs.microsoft.com/power-bi/service-template-apps-overview), vous pouvez analyser vos données.
+* **Power BI** : si vous n’avez pas encore de compte [Power BI](https://powerbi.microsoft.com/pricing), vous pouvez l’essayer gratuitement. À l’aide des [applications du modèle Power BI](/power-bi/service-template-apps-overview), vous pouvez analyser vos données.
 
 ### <a name="view-and-analyze-the-access-performance-and-firewall-logs"></a>Affichage et analyse des journaux d’activité d’accès, des performances et du pare-feu
 

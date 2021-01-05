@@ -1,14 +1,17 @@
 ---
-title: Amélioration d’une base de connaissances - QnA Maker
+title: Questions suggérées pour l’apprentissage actif – QnA Maker
 description: Améliorez la qualité de votre base de connaissances avec l'apprentissage actif. Examinez, acceptez ou refusez, ajoutez sans supprimer ou modifier les questions existantes.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 04/06/2020
-ms.openlocfilehash: 2e074716e4342a8748de4fb4e217548f1cb731f6
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: a77083c721328a8df9facd2f4b320b863aa03c68
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83650764"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352403"
 ---
 # <a name="accept-active-learning-suggested-questions-in-the-knowledge-base"></a>Accepter des questions suggérées d’apprentissage actif dans la base de connaissances
 
@@ -19,7 +22,7 @@ L’apprentissage actif modifie la base de connaissances ou Search Service aprè
 
 ## <a name="turn-on-active-learning"></a>Activation de l’apprentissage actif
 
-Pour consulter les questions suggérées, vous devez [activer l'apprentissage actif](use-active-learning.md) pour votre ressource QnA Maker.
+Pour consulter les questions suggérées, vous devez [activer l'apprentissage actif](../concepts/active-learning-suggestions.md) pour votre ressource QnA Maker.
 
 ## <a name="view-suggested-questions"></a>Afficher les questions suggérées
 
@@ -199,7 +202,7 @@ Votre code d’infrastructure de bot doit appeler l’API Train si la requête d
 * Déterminer si la requête doit être utilisée pour l’apprentissage actif
 * Renvoyer la requête à l’API Train de QnA Maker pour l’apprentissage actif
 
-Dans [l’exemple de bot Azure](https://aka.ms/activelearningsamplebot), ces deux activités ont été programmées.
+Dans [l’exemple de bot Azure](https://github.com/microsoft/BotBuilder-Samples), ces deux activités ont été programmées.
 
 ### <a name="example-c-code-for-train-api-with-bot-framework-4x"></a>Exemple de code C# pour l’API Train avec Bot Framework 4.x
 

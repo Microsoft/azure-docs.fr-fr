@@ -6,14 +6,14 @@ ms.author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
 ms.topic: quickstart
-ms.date: 02/17/2020
+ms.date: 06/12/2020
 ms.reviewer: jeking
-ms.openlocfilehash: b6dd1aab4c0ce6c656600d7cc7c71233d256aa0b
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: e289bea6b1a23f1622ced62656164d9865303298
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82780536"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912822"
 ---
 # <a name="quickstart-analyze-data-with-databricks"></a>Démarrage rapide : Analyser des données avec Databricks
 
@@ -23,7 +23,7 @@ Dans ce guide de démarrage rapide, vous exécutez un travail Apache Spark avec 
 
 * Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 
-* Nom de votre compte de stockage Azure Data Lake Storage Gen2. [Créez un compte de stockage Azure Data Lake Storage Gen2](data-lake-storage-quickstart-create-account.md).
+* Un compte de stockage pour lequel la fonctionnalité d’espace de noms hiérarchique est activée. Pour en créer un, consultez [Créer un compte de stockage à utiliser avec Azure Data Lake Storage Gen2](create-data-lake-storage-account.md).
 
 * L’ID de locataire, l’ID d’application et le mot de passe d’un principal de service Azure auquel un rôle **Contributeur aux données blob du stockage** est attribué. [Créez un principal du service](../../active-directory/develop/howto-create-service-principal-portal.md).
 
@@ -86,7 +86,7 @@ Dans cette section, vous créez un bloc-notes dans l’espace de travail Azure D
 
 2. Dans le volet gauche, sélectionnez **Espace de travail**. Dans la liste déroulante **Espace de travail**, sélectionnez **Créer** > **Notebook**.
 
-    ![Créer un notebook dans Databricks](./media/data-lake-storage-quickstart-create-databricks-account/databricks-create-notebook.png "Créer un notebook dans Databricks")
+    ![Capture d’écran montrant comment créer un notebook dans Databricks et mettant en évidence l’option de menu Créer > Notebook.](./media/data-lake-storage-quickstart-create-databricks-account/databricks-create-notebook.png "Créer un notebook dans Databricks")
 
 3. Dans la boîte de dialogue **Créer un bloc-notes**, entrez un nom pour le bloc-notes. Sélectionnez **Scala** comme langage, puis sélectionnez le cluster Spark que vous avez créé précédemment.
 
@@ -117,13 +117,17 @@ Avant de commencer cette section, vous devez effectuer les prérequis suivants :
 
 Entrez le code suivant dans une cellule du bloc-notes :
 
-    %sh wget -P /tmp https://raw.githubusercontent.com/Azure/usql/master/Examples/Samples/Data/json/radiowebsite/small_radio_json.json
+```bash
+%sh wget -P /tmp https://raw.githubusercontent.com/Azure/usql/master/Examples/Samples/Data/json/radiowebsite/small_radio_json.json
+```
 
 Dans la cellule, appuyez sur **Maj+Entrée** pour exécuter le code.
 
 À présent, dans une nouvelle cellule en dessous de celle-ci, entrez le code suivant et remplacez les valeurs entre crochets par les valeurs que vous avez utilisées plus tôt :
 
-    dbutils.fs.cp("file:///tmp/small_radio_json.json", "abfss://<container-name>@<storage-account-name>.dfs.core.windows.net/")
+```python
+dbutils.fs.cp("file:///tmp/small_radio_json.json", "abfss://<container-name>@<storage-account-name>.dfs.core.windows.net/")
+```
 
 Dans la cellule, appuyez sur **Maj+Entrée** pour exécuter le code.
 
@@ -166,7 +170,7 @@ Effectuez les tâches suivantes pour exécuter une tâche SQL Spark sur les donn
 
 5. Dans **Personnaliser le traçage**, faites un glisser-déplacer des valeurs comme indiqué dans la capture d’écran.
 
-    ![Personnaliser le graphique à barres](./media/data-lake-storage-quickstart-create-databricks-account/databricks-notebook-customize-plot.png "Personnaliser le graphique à barres")
+    ![Capture d’écran montrant l’écran Personnaliser le tracé et les valeurs que vous pouvez glisser-déplacer.](./media/data-lake-storage-quickstart-create-databricks-account/databricks-notebook-customize-plot.png "Personnaliser le graphique à barres")
 
     - Définissez **Clés** sur **gender**.
     - Définissez **Regroupements de séries** sur **level**.
@@ -194,7 +198,7 @@ Dans cet article, vous avez créé un cluster Spark dans Azure Databricks et ex�
 Passez à l’article suivant pour savoir comment effectuer une opération ETL (extraction, transformation et chargement de données) à l’aide d’Azure Databricks.
 
 > [!div class="nextstepaction"]
->[Extraire, transformer et charger des données à l’aide d’Azure Databricks](../../azure-databricks/databricks-extract-load-sql-data-warehouse.md).
+>[Extraire, transformer et charger des données à l’aide d’Azure Databricks](/azure/databricks/scenarios/databricks-extract-load-sql-data-warehouse).
 
 - Pour découvrir comment importer des données à partir d’autres sources de données dans Azure Databricks, consultez [Sources de données Spark](https://docs.azuredatabricks.net/spark/latest/data-sources/index.html).
 

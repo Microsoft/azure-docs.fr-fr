@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 01/23/2020
 ms.author: tomfitz
-ms.openlocfilehash: 900f31ff87e6a588fc1d1e3efd854437d2c8c1b9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 915b8e13adaa440063f5db62b72fa39e1035d576
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76719940"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87460777"
 ---
 # <a name="create-event-grid-custom-topic-with-powershell"></a>Créer une rubrique personnalisée Event Grid avec PowerShell
 
@@ -36,9 +36,9 @@ Ce script utilise la commande suivante pour créer la rubrique personnalisée. C
 
 | Commande | Notes |
 |---|---|
-| [New-AzEventGridTopic](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridtopic) | Crée une rubrique personnalisée Event Grid. |
+| [New-AzEventGridTopic](/powershell/module/az.eventgrid/new-azeventgridtopic) | Crée une rubrique personnalisée Event Grid. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

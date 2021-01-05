@@ -13,28 +13,30 @@ ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
-ms.date: 07/12/2019
+ms.date: 08/07/2020
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2192c472e00d123780ec6bc5574e7b9fe326258b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9ff923d0231a1b00493a54996c2fcd489012bbe7
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75495307"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862035"
 ---
 # <a name="azure-ad-powershell-cmdlets-for-reporting"></a>Applets de commande Azure AD PowerShell pour la création de rapports
 
 > [!NOTE] 
-> Ces applets de commande PowerShell ne fonctionnent actuellement qu’avec le module en [préversion Azure AD](https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0-preview#directory_auditing). Notez que le module en préversion n’est pas proposé pour une utilisation en production. 
+> Ces applets de commande PowerShell ne fonctionnent actuellement qu’avec le module en [préversion Azure AD](/powershell/module/azuread/?view=azureadps-2.0-preview#directory_auditing). Notez que le module en préversion n’est pas proposé pour une utilisation en production. 
 
 Pour installer la préversion publique, utilisez ceci : 
 
 ```powershell
 Install-module AzureADPreview
 ```
-Pour plus d’informations sur la façon de se connecter à Azure AD à l’aide de PowerShell, consultez l’article [Azure AD PowerShell pour Graph](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0).  
+
+Pour plus d’informations sur la façon de se connecter à Azure AD à l’aide de PowerShell, consultez l’article [Azure AD PowerShell pour Graph](/powershell/azure/active-directory/install-adv2).  
 
 Avec les rapports Azure Active Directory (Azure AD), vous pouvez afficher des informations sur les activités concernant toutes les opérations d’écriture dans votre direction (journaux d’audit) et les données d’authentification (journaux de connexion). Bien que les informations soient disponibles à l’aide de MS API Graph, vous pouvez maintenant récupérer les mêmes données à l’aide des cmdlets PowerShell Azure AD pour la création de rapports.
 
@@ -50,14 +52,14 @@ Accédez aux journaux d’audit à l’aide de la cmdlet « AzureADAuditDirector
 | Scénario                      | Commande PowerShell |
 | :--                           | :--                |
 | Nom d’affichage de l’application      | Get-AzureADAuditDirectoryLogs -Filter "initiatedBy/app/displayName eq 'Azure AD Cloud Sync'" |
-| Category                      | Get-AzureADAuditDirectoryLogs -Filter "category eq 'Application Management'" |
+| Category                      | Get-AzureADAuditDirectoryLogs -Filter "category eq 'ApplicationManagement'" |
 | Heure/date d’activité            | Get-AzureADAuditDirectoryLogs -Filter "activityDateTime gt 2019-04-18" |
-| Toutes les options ci-dessus              | Get-AzureADAuditDirectoryLogs -Filter "initiatedBy/app/displayName eq 'Azure AD Cloud Sync' and category eq 'Application Management' and activityDateTime gt 2019-04-18"|
+| Toutes les options ci-dessus              | Get-AzureADAuditDirectoryLogs -Filter "initiatedBy/app/displayName eq 'Azure AD Cloud Sync' and category eq 'ApplicationManagement' and activityDateTime gt 2019-04-18"|
 
 
 L’illustration suivante montre un exemple de cette commande. 
 
-![Bouton « Synthèse des données »](./media/reference-powershell-reporting/get-azureadauditdirectorylogs.png)
+![Capture d’écran montrant le résultat de la commande Get-AzureADAuditDirectoryLogs.](./media/reference-powershell-reporting/get-azureadauditdirectorylogs.png)
 
 
 
@@ -79,7 +81,7 @@ Vous accédez aux journaux de connexion à l’aide de la cmdlet « AzureADAudit
 
 L’illustration suivante montre un exemple de cette commande. 
 
-![Bouton « Synthèse des données »](./media/reference-powershell-reporting/get-azureadauditsigninlogs.png)
+![Capture d’écran montrant le résultat de la commande Get-AzureADAuditSignInLogs.](./media/reference-powershell-reporting/get-azureadauditsigninlogs.png)
 
 
 

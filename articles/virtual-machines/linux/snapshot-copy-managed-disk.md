@@ -1,22 +1,22 @@
 ---
-title: Créer une capture instantanée d’un disque dur virtuel dans Azure
+title: Créer une capture instantanée d’un disque dur virtuel à l’aide d’Azure CLI
 description: Découvrez comment créer une copie d’un disque dur virtuel dans Azure pour l’utiliser comme sauvegarde ou pour la résolution de problèmes.
 author: roygara
 manager: twooley
 ms.service: virtual-machines
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/11/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: f2d905d041198bd35c4657052bf18d981904dc44
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 6374108247b9bfb950c42495b13b501ded8a02d2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758398"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015959"
 ---
-# <a name="create-a-snapshot"></a>Créer un instantané 
+# <a name="create-a-snapshot-using-the-portal-or-azure-cli"></a>Créer une capture instantanée à l’aide du portail ou d’Azure CLI
 
 Prenez une capture instantanée d’un système d’exploitation ou d’un disque de données pour la sauvegarde ou pour résoudre les problèmes de la machine virtuelle. Une capture instantanée est une copie complète en lecture seule d’un disque dur virtuel. 
 

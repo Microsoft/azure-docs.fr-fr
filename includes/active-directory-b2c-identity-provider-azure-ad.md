@@ -5,12 +5,12 @@ ms.subservice: B2C
 ms.topic: include
 ms.date: 04/07/2020
 ms.author: mimart
-ms.openlocfilehash: 818f33abfdb0655d96c0a8873a43903ee972b3bf
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.openlocfilehash: fb2ecd9ab63345954356d18164a2afe94a5aae24
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82925425"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96025849"
 ---
 ## <a name="register-an-azure-ad-app"></a>Inscrire une application Azure AD
 
@@ -36,7 +36,7 @@ Pour autoriser la connexion des utilisateurs d’une organisation Azure AD spéc
 
 ### <a name="configuring-optional-claims"></a>Configuration des revendications facultatives
 
-Si vous souhaitez obtenir les revendications `family_name` et `given_name` à partir d'Azure AD, vous pouvez configurer des revendications facultatives pour votre application dans l'interface utilisateur du portail Azure ou dans le manifeste de l'application. Pour plus d'informations, consultez [Procédure : Fournir des revendications facultatives à votre application Azure AD](/azure/active-directory/develop/active-directory-optional-claims).
+Si vous souhaitez obtenir les revendications `family_name` et `given_name` à partir d'Azure AD, vous pouvez configurer des revendications facultatives pour votre application dans l'interface utilisateur du portail Azure ou dans le manifeste de l'application. Pour plus d'informations, consultez [Procédure : Fournir des revendications facultatives à votre application Azure AD](../articles/active-directory/develop/active-directory-optional-claims.md).
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com). Recherchez et sélectionnez **Azure Active Directory**.
 1. Dans la section **Gérer**, sélectionnez **Inscriptions d’applications**.

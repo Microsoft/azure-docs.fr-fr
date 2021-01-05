@@ -14,12 +14,12 @@ ms.service: azure
 ms.tgt_pltfrm: multiple
 ms.topic: tutorial
 ms.workload: web
-ms.openlocfilehash: 5d4ac5435281f521c71556123f77d737ee6916e9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 65d8ade438228d7af71de1fc66639e5b6de2edda
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73161782"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93040793"
 ---
 # <a name="create-a-pivotal-cloud-foundry-cluster-on-azure"></a>Créer un cluster Pivotal Cloud Foundry sur Azure
 
@@ -36,13 +36,13 @@ Il existe plusieurs façons de générer une clé Secure Shell (SSH) publique so
 ssh-keygen -t rsa -b 2048
 ```
 
-Pour plus d’informations, consultez [Utiliser des clés SSH avec Windows sur Azure](https://docs.microsoft.com/azure/virtual-machines/linux/ssh-from-windows).
+Pour plus d’informations, consultez [Utiliser des clés SSH avec Windows sur Azure](../virtual-machines/linux/ssh-from-windows.md).
 
 ## <a name="create-a-service-principal"></a>Créer un principal du service
 
 > [!NOTE]
 >
-> Pour créer un principal du service, vous devez disposer de l’autorisation de compte propriétaire. Vous pouvez également créer un script pour automatiser la création du principal du service. Par exemple, vous pouvez utiliser la commande de l’interface de ligne de commande Azure [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest).
+> Pour créer un principal du service, vous devez disposer de l’autorisation de compte propriétaire. Vous pouvez également créer un script pour automatiser la création du principal du service. Par exemple, vous pouvez utiliser la commande de l’interface de ligne de commande Azure [az ad sp create-for-rbac](/cli/azure/ad/sp?view=azure-cli-latest).
 
 1. Connectez-vous à votre compte Azure.
 
@@ -84,7 +84,7 @@ Pour plus d’informations, consultez [Utiliser des clés SSH avec Windows sur A
 
     `az login --service-principal -u {appId} -p {your-password}  --tenant {tenantId}`
 
-7. Créez un fichier .json au format suivant. Utilisez les valeurs **ID d’abonnement**, **tenantID**, **clientID** et **clientSecret** que vous avez copiées précédemment. Enregistrez le fichier .
+7. Créez un fichier .json au format suivant. Utilisez les valeurs **ID d’abonnement** , **tenantID** , **clientID** et **clientSecret** que vous avez copiées précédemment. Enregistrez le fichier .
 
     ```json
     {
@@ -128,4 +128,3 @@ Entrez les paramètres et créez votre cluster PCF.
 5. Votre PCF Ops Manager affiche les instances Azure déployées. Vous pouvez maintenant déployer et gérer vos applications ici.
                
     ![Instance Azure déployée dans Pivotal](media/deploy/ops-mgr.png )
- 

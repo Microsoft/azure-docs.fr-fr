@@ -6,10 +6,10 @@ ms.author: jobreen
 author: jjbfour
 ms.date: 05/13/2019
 ms.openlocfilehash: 277faa2d47df9fddd1762d90d9aa2fb5bf00d4df
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82508125"
 ---
 # <a name="azure-managed-application-with-managed-identity"></a>Application managée Azure avec identité managée

@@ -1,6 +1,7 @@
 ---
-title: Créer un locataire Azure Active Directory
-description: Découvrez comment créer un locataire Azure AD à utiliser pour l'inscription et la création d'applications.
+title: 'Démarrage rapide : Créer un locataire Azure Active Directory'
+titleSuffix: Microsoft identity platform
+description: Dans ce guide de démarrage rapide, vous allez apprendre à créer un locataire Azure Active Directory à utiliser dans le développement d’applications qui utilisent la plateforme d’identités Microsoft pour l’authentification et l’autorisation.
 services: active-directory
 author: rwike77
 manager: CelesteDG
@@ -12,12 +13,12 @@ ms.date: 03/12/2020
 ms.author: ryanwi
 ms.reviewer: jmprieur
 ms.custom: aaddev, identityplatformtop40, fasttrack-edit
-ms.openlocfilehash: 0e2247e94b20846f19c2ed26c96a5dc53972e770
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: 60d789c4297c400b812cd6c5c19c8c6148cb347d
+ms.sourcegitcommit: a422b86148cba668c7332e15480c5995ad72fa76
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80883811"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91575977"
 ---
 # <a name="quickstart-set-up-a-tenant"></a>Démarrage rapide : Configurer un locataire
 
@@ -27,6 +28,10 @@ Le locataire est la représentation d’une organisation. Il s’agit d’une in
 
 Chaque locataire Azure AD est distinct et séparé des autres locataires Azure AD. Il dispose de sa propre représentation d’identités professionnelles et scolaires, d’identités des consommateurs (dans le cas de locataire Azure AD B2C) et d’inscriptions d’application. Dans votre locataire, une inscription d’application peut autoriser des authentifications à partir de comptes situés au sein de votre locataire uniquement ou bien à partir de tous les locataires.
 
+## <a name="prerequisites"></a>Prérequis
+
+- Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+
 ## <a name="determining-environment-type"></a>Déterminer le type d’environnement
 
 Vous pouvez créer deux types d’environnements. Pour décider celui dont vous avez besoin, vous devez déterminer le type d’utilisateurs authentifiés par votre application.
@@ -34,7 +39,7 @@ Vous pouvez créer deux types d’environnements. Pour décider celui dont vous 
 * Comptes professionnels et scolaires (comptes Azure AD) ou comptes Microsoft (par exemple, outlook.com et live.com)
 * Comptes sociaux et locaux (Azure AD B2C)
 
-Le guide de démarrage rapide comporte deux scénarios selon le type d’application que vous souhaitez générer. Si vous avez besoin d’aide pour cibler le type d’identité, jetez un œil à l’article relatif à [la plateforme d’identité Microsoft](about-microsoft-identity-platform.md).
+Le guide de démarrage rapide comporte deux scénarios selon le type d’application que vous souhaitez générer.
 
 ## <a name="work-and-school-accounts-or-personal-microsoft-accounts"></a>Comptes professionnels et scolaires ou comptes Microsoft personnels
 
@@ -71,6 +76,5 @@ Pour commencer à créer des applications pour connecter des comptes sociaux et 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Inscrivez une application](quickstart-register-app.md) et intégrez-la à la plateforme des identités Microsoft. 
-* Découvrez les [principes de base de l’authentification](authentication-scenarios.md).
-* Pour plus d’informations sur la relation entre les abonnements et un client Azure AD, consultez [Association des abonnements Azure avec Azure Active Directory](../fundamentals/active-directory-how-subscriptions-associated-directory.md).
+> [!div class="nextstepaction"]
+> [Inscrivez une application](quickstart-register-app.md) à intégrer à la plateforme d’identités Microsoft.

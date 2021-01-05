@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: 7a8c348340be143f7059ce7e64a1c66b66074a45
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 16c0b3e6dc4bd9097312e3a8c43618e66781ef85
+ms.sourcegitcommit: 30505c01d43ef71dac08138a960903c2b53f2499
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75430792"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92092883"
 ---
 # <a name="how-to-customize-the-azure-api-management-developer-portal-using-templates"></a>Comment personnaliser le portail des développeurs Gestion des API Azure à l’aide de modèles
 
@@ -39,9 +39,9 @@ Les modèles permettent de personnaliser le contenu des pages du portail des dé
 
 La modification des modèles s’effectue à partir du **portail des développeurs** lorsque vous êtes connecté en tant qu’administrateur. Pour y accéder, ouvrez tout d’abord le Portail Azure et cliquez sur **Portail des développeurs** dans la barre d’outils de services de votre instance Gestion des API.
 
-Pour accéder aux modèles du portail des développeurs, cliquez sur l’icône de personnalisation à gauche pour afficher le menu de personnalisation, puis cliquez sur **Templates**(Modèles).
+Pour accéder aux modèles du portail des développeurs, cliquez sur l’icône de personnalisation à gauche pour afficher le menu de personnalisation, puis cliquez sur **Templates** (Modèles).
 
-![Modèles du portail des développeurs][api-management-customize-menu]
+![Capture d’écran qui met en surbrillance l’icône Personnaliser pour afficher le menu de personnalisation.][api-management-customize-menu]
 
 La liste des modèles affiche plusieurs catégories de modèles applicables aux différentes pages du portail des développeurs. Chaque modèle est différent, mais les étapes pour les modifier et publier les modifications sont identiques. Pour modifier un modèle, cliquez sur le nom du modèle.
 
@@ -145,7 +145,7 @@ Les modèles enregistrés peuvent être publiés individuellement ou en bloc. Po
 
 Cliquez sur **Yes** (Oui) pour valider et rendre le modèle actif sur le portail des développeurs.
 
-![Confirmer une publication][api-management-publish-template-confirm]
+![Capture d’écran montrant où vous sélectionnez Oui pour rendre le modèle actif.][api-management-publish-template-confirm]
 
 Pour publier toutes les versions des modèles non publiés, cliquez sur **Publish** (Publier) dans la liste des modèles. Les modèles non publiés sont reconnaissables à la présence d’un astérisque après leur nom. Dans cet exemple, les modèles **Product list** et **Product** sont sur le point d’être publiés.
 
@@ -160,11 +160,11 @@ Les modèles nouvellement publiés prennent immédiatement effet dans le portail
 ## <a name="to-revert-a-template-to-the-previous-version"></a>Pour rétablir la version précédente d’un modèle
 Pour rétablir la version précédente d’un modèle publié, cliquez sur revert (rétablir) dans l’éditeur de modèle.
 
-![Rétablir un modèle][api-management-revert-template]
+![Capture d’écran qui met en surbrillance l’icône que vous utilisez pour rétablir un modèle.][api-management-revert-template]
 
 Cliquez sur **Oui** pour confirmer.
 
-![Confirmer][api-management-revert-template-confirm]
+![Capture d’écran montrant où vous sélectionnez Oui pour confirmer les modifications.][api-management-revert-template-confirm]
 
 La version précédente d’un modèle publié est actif dans le portail des développeurs dès que l’opération de rétablissement est terminée.
 

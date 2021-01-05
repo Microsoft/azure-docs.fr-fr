@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Keeper Password Manager & Digital Vault pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes d’utilisateur sur Keeper Password Manager & Digital Vault.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 05/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 236527a9889879f872ef8c3867a7ec3c1b1ba0a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2670dc0cb56805a2afa966bee1d2aa52b6c8e46a
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057517"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94358977"
 ---
 # <a name="tutorial-configure-keeper-password-manager--digital-vault-for-automatic-user-provisioning"></a>Tutoriel : Configurer Keeper Password Manager & Digital Vault pour l’approvisionnement automatique d’utilisateurs
 
@@ -49,7 +45,7 @@ Avant de configurer Keeper Password Manager & Digital Vault pour l’approvision
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -57,7 +53,7 @@ Avant de configurer Keeper Password Manager & Digital Vault pour l’approvision
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **Keeper Password Manager & Digital Vault**, sélectionnez **Keeper Password Manager & Digital Vault** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, entrez **Keeper Password Manager & Digital Vault** , sélectionnez **Keeper Password Manager & Digital Vault** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
     ![Keeper Password Manager & Digital Vault dans la liste des résultats](common/search-new-app.png)
 
@@ -84,7 +80,7 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 ### <a name="to-configure-automatic-user-provisioning-for-keeper-password-manager--digital-vault-in-azure-ad"></a>Pour configurer l’approvisionnement automatique d’utilisateurs pour Keeper Password Manager & Digital Vault dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -94,13 +90,13 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez les valeurs **URL de locataire** et **Jeton secret** de votre compte Keeper Password Manager & Digital Vault, comme cela est décrit dans l’étape 6.
+5. Dans la section **Informations d’identification de l’administrateur** , entrez les valeurs **URL de locataire** et **Jeton secret** de votre compte Keeper Password Manager & Digital Vault, comme cela est décrit dans l’étape 6.
 
 6. Connectez-vous à votre [console d’administration Keeper](https://keepersecurity.com/console/#login). Cliquez sur **Administrateur** et sélectionnez un nœud existant ou créez-en un. Accédez à l’onglet **Approvisionnement** et sélectionnez **Ajouter une méthode**.
 
@@ -122,25 +118,25 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-8. Dans le champ **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+8. Dans le champ **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 9. Cliquez sur **Enregistrer**.
 
-10. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Keeper Password Manager & Digital Vault**.
+10. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Keeper Password Manager & Digital Vault**.
 
     ![Keeper Mappages d’utilisateurs](media/keeper-password-manager-digitalvault-provisioning-tutorial/keeper-user-mappings.png)
 
-11. Dans la section **Mappages des attributs**, passez en revue les attributs d’utilisateurs qui sont synchronisés entre Azure AD et Keeper Password Manager & Digital Vault. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Keeper Password Manager & Digital Vault pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+11. Dans la section **Mappages des attributs** , passez en revue les attributs d’utilisateurs qui sont synchronisés entre Azure AD et Keeper Password Manager & Digital Vault. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Keeper Password Manager & Digital Vault pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Keeper Attributs utilisateur](media/keeper-password-manager-digitalvault-provisioning-tutorial/keeper-user-attributes.png)
 
-12. Dans la section **Mappages**, sélectionnez **Synchroniser les groupes Azure Active Directory avec Keeper Password Manager & Digital Vault**.
+12. Dans la section **Mappages** , sélectionnez **Synchroniser les groupes Azure Active Directory avec Keeper Password Manager & Digital Vault**.
 
     ![Keeper Mappages de groupes](media/keeper-password-manager-digitalvault-provisioning-tutorial/keeper-group-mappings.png)
 
-13. Dans la section **Mappages des attributs**, passez en revue les attributs de groupe qui sont synchronisés entre Azure AD et Keeper Password Manager & Digital Vault. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les groupes dans Keeper Password Manager & Digital Vault pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+13. Dans la section **Mappages des attributs** , passez en revue les attributs de groupe qui sont synchronisés entre Azure AD et Keeper Password Manager & Digital Vault. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les groupes dans Keeper Password Manager & Digital Vault pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Keeper Attributs de groupe](media/keeper-password-manager-digitalvault-provisioning-tutorial/keeper-group-attributes.png)
 

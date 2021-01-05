@@ -1,19 +1,19 @@
 ---
 title: 'Tutoriel : Concevoir une base de données Azure Database for MariaDB - Azure CLI'
 description: Ce tutoriel explique comment créer et gérer un serveur et une base de données Azure Database for MariaDB avec Azure CLI, depuis la ligne de commande.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: tutorial
 ms.date: 3/18/2020
-ms.custom: mvc
-ms.openlocfilehash: 455d7a0c1b3826060ade1083ec6eea99e397574b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 8f6f8d5a2cc9dc17d08486125fc2e44307c1be46
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79534845"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436655"
 ---
 # <a name="tutorial-design-an-azure-database-for-mariadb-using-azure-cli"></a>Tutoriel : Concevoir une base de données Azure Database for MariaDB à l’aide d’Azure CLI
 
@@ -30,11 +30,9 @@ Azure Database for MariaDB est un service de base de données relationnelle dans
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte Azure gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-Vous pouvez utiliser Azure Cloud Shell dans le navigateur ou [installer Azure CLI]( /cli/azure/install-azure-cli) sur votre ordinateur pour exécuter les blocs de code de ce tutoriel.
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-[!INCLUDE [cloud-shell-try-it](../../includes/cloud-shell-try-it.md)]
-
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 Si vous possédez plusieurs abonnements, sélectionnez l’abonnement approprié dans lequel la ressource existe ou est facturée. Sélectionnez un ID d’abonnement spécifique sous votre compte à l’aide de la commande [az account set](/cli/azure/account#az-account-set).
 ```azurecli-interactive
@@ -42,7 +40,7 @@ az account set --subscription 00000000-0000-0000-0000-000000000000
 ```
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
-Créez un [groupe de ressources Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) avec la commande [az group create](https://docs.microsoft.com/cli/azure/group#az-group-create). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
+Créez un [groupe de ressources Azure](../azure-resource-manager/management/overview.md) avec la commande [az group create](/cli/azure/group#az-group-create). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
 
 L’exemple suivant crée un groupe de ressources nommé `myresourcegroup` à l’emplacement `westus`.
 
@@ -175,9 +173,9 @@ Imaginez que vous avez supprimé cette table par erreur. Il s’agit de quelque 
 Pour effectuer la restauration, vous avez besoin des informations suivantes :
 
 - Point de restauration : sélectionnez un point dans le temps avant la modification du serveur. Doit être supérieure ou égale à la plus ancienne valeur de sauvegarde de la base de données source.
-- Serveur cible : indiquez le nom du nouveau serveur sur lequel vous souhaitez effectuer la restauration
+- Serveur cible : spécifiez un nouveau nom de serveur sur lequel vous souhaitez effectuer la restauration
 - Serveur source : indiquez le nom du serveur à partir duquel vous voulez effectuer la restauration
-- Localisation : vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source
+- Emplacement : vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source
 
 ```azurecli-interactive
 az mariadb server restore --resource-group myresourcegroup --name mydemoserver-restored --restore-point-in-time "2017-05-4 03:10" --source-server-name mydemoserver
@@ -185,9 +183,9 @@ az mariadb server restore --resource-group myresourcegroup --name mydemoserver-r
 
 La commande `az mariadb server restore` a besoin des paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources dans lequel se trouve le serveur source.  |
+| resource-group |  myResourceGroup |  Groupe de ressources dans lequel se trouve le serveur source.  |
 | name | mydemoserver-restored | Nom du serveur créé par la commande de restauration. |
 | restore-point-in-time | 2017-04-13T13:59:00Z | Choisissez la date et l’heure à utiliser pour la restauration. Elles doivent être comprises dans la période de rétention de la sauvegarde du serveur source. Utilisez le format de date et d’heure ISO8601. Par exemple, vous pouvez utiliser votre fuseau horaire local, comme `2017-04-13T05:59:00-08:00`, ou le format UTC Zulu `2017-04-13T13:59:00Z`. |
 | source-server | mydemoserver | Nom ou identifiant du serveur source à partir duquel la restauration s’effectuera. |

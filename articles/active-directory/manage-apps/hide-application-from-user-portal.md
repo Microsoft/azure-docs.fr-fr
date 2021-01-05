@@ -1,37 +1,37 @@
 ---
-title: Masquer une application de l’expérience utilisateur dans Azure AD
-description: Guide pratique pour masquer une application depuis l’expérience utilisateur dans les panneaux d’accès Azure Active Directory ou les lanceurs Office 365.
+title: Masquer une application d’entreprise de l’expérience utilisateur dans Azure AD
+description: Guide pratique pour masquer une application d’entreprise de l’expérience utilisateur dans les panneaux d’accès Azure Active Directory ou les lanceurs Microsoft 365.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/25/2020
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: kasimpso
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5718adf4fd76e2fbd0ff793dd2fa33ee08f7c0fe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ef1abd1d72e4435aa59bbb9a99f3cc423f11268e
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295047"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96858296"
 ---
-# <a name="hide-applications-from-end-users-in-azure-active-directory"></a>Masquer les applications aux utilisateurs finaux dans Azure Active Directory
+# <a name="hide-enterprise-applications-from-end-users-in-azure-active-directory"></a>Masquer des applications d’entreprise aux utilisateurs finaux dans Azure Active Directory
 
-Instructions pour masquer les applications du panneau MyApps ou du Lanceur Office 365 à l’utilisateur final. Lorsqu’une application est masquée, les utilisateurs ont toujours les autorisations à celle-ci. 
+Instructions pour masquer les applications du panneau MyApps ou du Lanceur Microsoft 365 à l’utilisateur final. Lorsqu’une application est masquée, les utilisateurs ont toujours les autorisations à celle-ci. 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-Les privilèges d’administrateur d’application sont nécessaires pour masquer une application du panneau MyApps et du Lanceur Office 365.
+Les privilèges Administrateur d’application sont nécessaires pour masquer une application du panneau MyApps et du Lanceur Microsoft 365.
 
-Les privilèges d’administrateur général sont nécessaires pour masquer toutes les applications Office 365.
+Les privilèges Administrateur général sont nécessaires pour masquer toutes les applications Microsoft 365.
 
 
 ## <a name="hide-an-application-from-the-end-user"></a>Masquer une application à l’utilisateur final
-Suivez ces étapes pour masquer une application dans le panneau MyApps et dans le lanceur d’applications Office 365.
+Suivez ces étapes pour masquer une application dans le panneau MyApps et dans le lanceur d’applications Microsoft 365.
 
 1.  Connectez-vous au [portail Azure](https://portal.azure.com) en tant qu’administrateur général de votre annuaire.
 2.  Sélectionnez **Azure Active Directory**.
@@ -42,9 +42,12 @@ Suivez ces étapes pour masquer une application dans le panneau MyApps et dans l
 7.  À la question **Visible par les utilisateurs ?** , cliquez sur **Non**.
 8.  Cliquez sur **Enregistrer**.
 
+> [!NOTE]
+> Ces instructions s’appliquent uniquement aux applications d’entreprise.
+
 ## <a name="use-azure-ad-powershell-to-hide-an-application"></a>Utiliser Azure AD PowerShell pour masquer une application
 
-Pour masquer une application dans le panneau MyApps, vous pouvez ajouter manuellement la balise HideApp au principal de service pour l’application. Exécutez les commandes [AzureAD PowerShell](https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0#service_principals) suivantes pour définir la propriété **Visible par les utilisateurs ?** de l’application sur **Non**. 
+Pour masquer une application dans le panneau MyApps, vous pouvez ajouter manuellement la balise HideApp au principal de service pour l’application. Exécutez les commandes [AzureAD PowerShell](/powershell/module/azuread/#service_principals) suivantes pour définir la propriété **Visible par les utilisateurs ?** de l’application sur **Non**. 
 
 ```PowerShell
 Connect-AzureAD
@@ -56,20 +59,20 @@ $tags += "HideApp"
 Set-AzureADServicePrincipal -ObjectId $objectId -Tags $tags
 ```
 
-## <a name="hide-office-365-applications-from-the-myapps-panel"></a>Masquer des applications Office 365 dans le panneau MyApps
+## <a name="hide-microsoft-365-applications-from-the-myapps-panel"></a>Masquer des applications Microsoft 365 dans le panneau MyApps
 
-Procédez comme suit pour masquer toutes les applications Office 365 dans le panneau MyApps. Les applications sont toujours visibles dans le portail Office 365.
+Procédez comme suit pour masquer toutes les applications Microsoft 365 dans le panneau MyApps. Les applications sont toujours visibles dans le portail Office 365.
 
 1.  Connectez-vous au [portail Azure](https://portal.azure.com) en tant qu’administrateur général de votre annuaire.
 2.  Sélectionnez **Azure Active Directory**.
-3.  Sélectionnez **Paramètres utilisateur**.
-4.  Sous **Applications d’entreprise**, cliquez sur **Gérer la façon dont les utilisateurs finaux lancent et affichent leurs applications**.
-5.  Pour **Les utilisateurs peuvent voir uniquement les applications Office 365 dans le portail Office 365**, cliquez sur **Oui**.
-6.  Cliquez sur **Enregistrer**.
+3.  Sélectionnez **Utilisateurs**.
+4.  Sélectionnez **Paramètres utilisateur**.
+5.  Sous **Applications d’entreprise**, cliquez sur **Gérer la façon dont les utilisateurs finaux lancent et affichent leurs applications**.
+6.  Pour **Les utilisateurs peuvent voir uniquement les applications Office 365 dans le portail Office 365**, cliquez sur **Oui**.
+7.  Cliquez sur **Enregistrer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Voir tous mes groupes](../fundamentals/active-directory-groups-view-azure-portal.md)
 * [Affecter un utilisateur ou un groupe à une application d’entreprise](assign-user-or-group-access-portal.md)
-* [Suppression d’une affectation d’utilisateur ou de groupe à partir d’une application d’entreprise](remove-user-or-group-access-portal.md)
-* [Modifier le nom ou le logo d’une application d’entreprise dans la version préliminaire d’Azure Active Directory](change-name-or-logo-portal.md)
-
+* [Suppression d’une affectation d’utilisateur ou de groupe à partir d’une application d’entreprise](./assign-user-or-group-access-portal.md)
+* [Modifier le nom ou le logo d’une application d’entreprise dans la version préliminaire d’Azure Active Directory](./add-application-portal-configure.md)

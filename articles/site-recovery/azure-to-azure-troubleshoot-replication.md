@@ -5,16 +5,16 @@ author: sideeksh
 manager: rochakm
 ms.topic: troubleshooting
 ms.date: 04/03/2020
-ms.openlocfilehash: 8cba02d3c7d1e649853570b199b646b1c4dcce2d
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: dc14334668b76ee8cbb81e48abfe1eecf17fa138
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80667412"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007356"
 ---
 # <a name="troubleshoot-replication-in-azure-vm-disaster-recovery"></a>Résoudre les problèmes de réplication dans le cadre de la reprise d’activité d’une machine virtuelle Azure
 
-Cet article décrit les problèmes courants rencontrés dans Azure Site Recovery quand vous répliquez et récupérez des machines virtuelles Azure d’une région vers une autre. Il explique également comment détecter les problèmes courants. Pour plus d’informations sur les configurations prises en charge, consultez la [matrice de prise en charge pour la réplication des machines virtuelles Azure](site-recovery-support-matrix-azure-to-azure.md).
+Cet article décrit les problèmes courants rencontrés dans Azure Site Recovery quand vous répliquez et récupérez des machines virtuelles Azure d’une région vers une autre. Il explique également comment détecter les problèmes courants. Pour plus d’informations sur les configurations prises en charge, consultez la [matrice de prise en charge pour la réplication des machines virtuelles Azure](./azure-to-azure-support-matrix.md).
 
 Azure Site Recovery réplique des données de manière cohérente de la région source vers la région de récupération d’urgence. Il crée également un point de récupération cohérent en cas d’incident toutes les 5 minutes. Si Site Recovery ne peut pas créer de points de récupération pendant 60 minutes, il vous en informe et vous communique les informations suivantes :
 
@@ -41,7 +41,7 @@ Si vous sélectionnez l’événement, vous pouvez consulter les informations re
 
 Le tableau suivant présente les limites d’Azure Site Recovery. Ces limites sont basées sur nos tests, mais ne peuvent pas couvrir toutes les combinaisons possibles d’entrée/sortie (E/S) d’application. Les résultats réels varient en fonction de la combinaison d’E/S de votre application.
 
-Deux limites sont à prendre en compte : le taux d’évolution des données par disque et le taux d’évolution des données par machine virtuelle. Par exemple, examinons le disque P20 Premium dans le tableau suivant. Pour une machine virtuelle unique, Site Recovery peut gérer 5 Mo/s d’évolution par disque, avec un maximum de 5 disques de ce type. Site Recovery a une limite de 25 Mo/s de l’évolution totale par machine virtuelle.
+Deux limites sont à prendre en compte : le taux d’évolution des données par disque et le taux d’évolution des données par machine virtuelle. Par exemple, examinons le disque P20 Premium dans le tableau suivant. Pour une machine virtuelle unique, Site Recovery peut gérer 5 Mo/s d’évolution par disque, avec un maximum de 5 disques de ce type. Site Recovery a une limite de 54 Mo/s de l’évolution totale par machine virtuelle.
 
 **Stockage de réplication cible** | **Taille moyenne des E/S du disque source** |**Activité moyenne des données du disque source** | **Activité totale des données par jour du disque de données source**
 ---|---|---|---
@@ -78,7 +78,7 @@ Un pic dans le taux de modification des données peut provenir d’une rafale oc
 
 Site Recovery envoie les données répliquées vers le compte de stockage de cache. Vous pouvez rencontrer une latence du réseau si le chargement des données entre une machine virtuelle et le compte de stockage de cache est inférieur à 4 Mo en 3 secondes.
 
-Pour vérifier s’il existe un problème lié à la latence, utilisez [AzCopy](/azure/storage/common/storage-use-azcopy). Vous pouvez utiliser cet utilitaire de ligne de commande pour charger des données de la machine virtuelle vers le compte de stockage de cache. Si la latence est élevée, vérifiez si vous utilisez une appliance virtuelle réseau (NVA) pour contrôler le trafic réseau sortant des machines virtuelles. L’appliance peut être limitée si tout le trafic de réplication passe par elle.
+Pour vérifier s’il existe un problème lié à la latence, utilisez [AzCopy](../storage/common/storage-use-azcopy-v10.md). Vous pouvez utiliser cet utilitaire de ligne de commande pour charger des données de la machine virtuelle vers le compte de stockage de cache. Si la latence est élevée, vérifiez si vous utilisez une appliance virtuelle réseau (NVA) pour contrôler le trafic réseau sortant des machines virtuelles. L’appliance peut être limitée si tout le trafic de réplication passe par elle.
 
 Nous vous recommandons de créer un point de terminaison de service réseau dans votre réseau virtuel pour « Stockage » afin que le trafic de réplication n’atteigne pas l’appliance virtuelle réseau. Pour plus d'informations, consultez [Configuration des appliances virtuelles réseau](azure-to-azure-about-networking.md#network-virtual-appliance-configuration).
 
@@ -105,6 +105,10 @@ Voici quelques-uns des problèmes les plus courants.
 ### <a name="youre-using-azure-storage-spaces-direct-configuration"></a>Vous utilisez la configuration des espaces de stockage direct Azure
 
 **Procédure de résolution** : Azure Site Recovery ne peut pas créer de point de récupération cohérent avec l’application pour la configuration des espaces de stockage direct. [Configurez la stratégie de réplication](azure-to-azure-how-to-enable-replication-s2d-vms.md).
+
+### <a name="app-consistency-not-enabled-on-linux-servers"></a>Cohérence des applications non activée sur les serveurs Linux
+
+**Procédure de résolution** : Azure Site Recovery pour le système d’exploitation Linux prend en charge les scripts personnalisés des applications à des fins de cohérence. Le script personnalisé avec options pré et post-script sera utilisé par l’agent Mobilité Azure Site Recovery pour la cohérence des applications. [Voici](./site-recovery-faq.md#replication) les étapes pour activer cela.
 
 ### <a name="more-causes-because-of-vss-related-issues"></a>Autres causes dues à des problèmes liés à VSS :
 

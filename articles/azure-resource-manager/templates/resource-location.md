@@ -1,18 +1,19 @@
 ---
 title: Emplacement de la ressource de modèle
-description: Décrit comment définir un emplacement de ressource dans un modèle Azure Resource Manager.
+description: Décrit comment définir un emplacement de ressource dans un modèle Azure Resource Manager (modèle ARM).
 ms.topic: conceptual
 ms.date: 09/04/2019
-ms.openlocfilehash: a8324dac1232eecd5624e5f1dc0e6656295c0a10
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: ''
+ms.openlocfilehash: 84a818109e6681b8d0e18de4d2d7969310582818
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80156427"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96922401"
 ---
 # <a name="set-resource-location-in-arm-template"></a>Définir l'emplacement des ressources dans un modèle Resource Manager
 
-Lorsque vous déployez un modèle Azure Resource Manager (ARM), vous devez fournir un emplacement pour chaque ressource. L’emplacement n’a pas à être le même que celui du groupe de ressources.
+Quand vous déployez un modèle Azure Resource Manager (modèle ARM), vous devez fournir un emplacement pour chaque ressource. L’emplacement n’a pas à être le même que celui du groupe de ressources.
 
 ## <a name="get-available-locations"></a>Obtenir les emplacements disponibles
 
@@ -44,7 +45,7 @@ L’exemple suivant illustre le déploiement d’un compte de stockage dans un e
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "storageAccountType": {
@@ -95,5 +96,5 @@ L’exemple suivant illustre le déploiement d’un compte de stockage dans un e
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour obtenir la liste complète des fonctions de modèle, consultez [Fonctions des modèles Azure Resource Manager](template-functions.md).
+* Pour obtenir la liste complète des fonctions de modèle, consultez [Fonctions des modèles ARM](template-functions.md).
 * Pour plus d'informations sur les fichiers de modèle, consultez [Comprendre la structure et la syntaxe des modèles Resource Manager](template-syntax.md).

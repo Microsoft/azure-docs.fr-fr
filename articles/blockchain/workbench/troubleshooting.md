@@ -2,14 +2,14 @@
 title: Dépannage Azure Blockchain Workbench
 description: Guide de dépannage d’une application Azure Blockchain Workbench Preview.
 ms.date: 10/14/2019
-ms.topic: article
+ms.topic: troubleshooting
 ms.reviewer: brendal
-ms.openlocfilehash: ef4bce4dfba77aafa9b86c6877c153534b54636e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 20c0f9bdd6f820a73b1ba6660de805268c0d8714
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74324300"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85212851"
 ---
 # <a name="azure-blockchain-workbench-preview-troubleshooting"></a>Résolution des problèmes d’Azure Blockchain Workbench Preview
 
@@ -35,7 +35,7 @@ git clone https://github.com/Azure-Samples/blockchain.git
 ## <a name="run-the-script"></a>Exécuter le script
 [!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install.md)]
 
-Exécutez le script `collectBlockchainWorkbenchTroubleshooting.ps1` pour collecter des journaux d’activité et créer un fichier ZIP contenant un dossier des données de dépannage. Par exemple : 
+Exécutez le script `collectBlockchainWorkbenchTroubleshooting.ps1` pour collecter des journaux d’activité et créer un fichier ZIP contenant un dossier des données de dépannage. Par exemple :
 
 ``` powershell
 collectBlockchainWorkbenchTroubleshooting.ps1 -SubscriptionID "<subscription_id>" -ResourceGroupName "workbench-resource-group-name"
@@ -46,11 +46,11 @@ Le script accepte les paramètres suivants :
 |---------|---------|----|
 | SubscriptionID | ID d’abonnement associé à la création ou l’emplacement de l’ensemble des ressources. | Oui |
 | ResourceGroupName | Nom du groupe de ressources Azure dans lequel a été déployé Blockchain Workbench. | Oui |
-| OutputDirectory | Chemin d’accès utilisé pour la création du fichier ZIP de sortie. S’il n’est pas spécifié, il est défini par défaut sur le répertoire actuel. | Non  |
-| LookbackHours | Nombre d’heures à utiliser lors de l’extraction des données de télémétrie. La valeur par défaut est de 24 heures. La valeur maximale est de 90 heures. | Non  |
-| OmsSubscriptionId | ID de l’abonnement dans lequel les journaux Azure Monitor sont déployés. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench.| Non  |
-| OmsResourceGroup |Groupe de ressources dans lequel les journaux Azure Monitor sont déployés. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench.| Non  |
-| OmsWorkspaceName | Nom de l’espace de travail Log Analytics. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench | Non  |
+| OutputDirectory | Chemin d’accès utilisé pour la création du fichier ZIP de sortie. S’il n’est pas spécifié, il est défini par défaut sur le répertoire actuel. | Non |
+| LookbackHours | Nombre d’heures à utiliser lors de l’extraction des données de télémétrie. La valeur par défaut est de 24 heures. La valeur maximale est de 90 heures. | Non |
+| OmsSubscriptionId | ID de l’abonnement dans lequel les journaux Azure Monitor sont déployés. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench.| Non |
+| OmsResourceGroup |Groupe de ressources dans lequel les journaux Azure Monitor sont déployés. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench.| Non |
+| OmsWorkspaceName | Nom de l’espace de travail Log Analytics. Transmettez ce paramètre uniquement si les journaux Azure Monitor associés au réseau blockchain sont déployés à l’extérieur du groupe de ressources Blockchain Workbench | Non |
 
 ## <a name="what-is-collected"></a>Quels sont les éléments collectés ?
 

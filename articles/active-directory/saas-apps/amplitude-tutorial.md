@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Amplitude | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Amplitude.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 496c9ffa-c833-41fa-8d17-2dc3044954d1
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/14/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5d077da34a6e82ced957c4da1e6abf7a5e294e78
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 889fa9b026b741cef438791daf136e0da7cecc24
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72596256"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92318670"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-amplitude"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Amplitude
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Amplitude à Azure Active Di
 * Permettre à vos utilisateurs de se connecter automatiquement à Amplitude avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -146,15 +141,15 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Cliquez sur **Plan Admin** (Admin de plan) dans la barre de navigation gauche.
 
-    ![Configure Single Sign-On](./media/amplitude-tutorial/configure1.png)
+    ![Capture d’écran montrant le menu Amplitude avec Plan Admin sélectionné.](./media/amplitude-tutorial/configure1.png)
 
 1. Sélectionnez **Microsoft Azure Active Directory Metadata** (Métadonnées Microsoft Azure Active Directory) dans **SSO Integration** (Intégration SSO).
 
-    ![Configure Single Sign-On](./media/amplitude-tutorial/configure2.png)
+    ![Capture d’écran montrant le volet Plan Admin avec le lien Microsoft Azure Active Directory Metadata activé.](./media/amplitude-tutorial/configure2.png)
 
 1. Dans la section **Setup Single Sign-On** , procédez comme suit :
 
-    ![Configure Single Sign-On](./media/amplitude-tutorial/configure3.png)
+    ![Capture d’écran montrant la section Set Up Single Sign-on avec les valeurs décrites à cette étape.](./media/amplitude-tutorial/configure3.png)
 
     a. Ouvrez le fichier **Metadata.Xml** téléchargé à partir du portail Azure dans le Bloc-notes, puis collez son contenu dans la zone de texte **Microsoft Azure Active Directory Metadata** (Métadonnées Microsoft Azure Active Directory).
 
@@ -173,14 +168,14 @@ Dans cette section, un utilisateur appelé B.Simon est créé dans Amplitude. Am
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Amplitude dans le panneau d’accès doit vous connecter automatiquement à l’application Amplitude pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Amplitude dans le panneau d’accès doit vous connecter automatiquement à l’application Amplitude pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Amplitude avec Azure AD](https://aad.portal.azure.com/)

@@ -12,24 +12,24 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/02/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9b2a0d0b77b6db481b13785907a1359d2bbe3e9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e4dcc7ed6076c3bac723d709f50f1b3ab2ce8f58
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80984502"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996557"
 ---
 # <a name="changing-the-adsync-service-account-password"></a>Modifier le mot de passe du compte de service ADSync
 Si vous modifiez le mot de passe du service ADSync, le service de synchronisation ne sera pas en mesure de démarrer correctement jusqu'à ce que vous abandonniez la clé de chiffrement et réinitialisiez le mot de passe du service ADSync. 
 
 Azure AD Connect, dans le cadre des services de synchronisation, utilise une clé de chiffrement pour stocker les mots de passe du compte de connecteur AD DS et du compte de service ADSync.  Ces comptes sont chiffrés avant d’être stockés dans la base de données. 
 
-La clé de chiffrement utilisée est sécurisée à l’aide de [l’API de protection des données Windows (DPAPI)](https://msdn.microsoft.com/library/ms995355.aspx). DPAPI protège la clé de chiffrement à l’aide du **compte de service ADSync**. 
+La clé de chiffrement utilisée est sécurisée à l’aide de [l’API de protection des données Windows (DPAPI)](/previous-versions/ms995355(v=msdn.10)). DPAPI protège la clé de chiffrement à l’aide du **compte de service ADSync**. 
 
 Si vous devez modifier le mot de passe du compte de service, vous pouvez utiliser les procédures présentées dans [Abandon de la clé de chiffrement du compte de service ADSync](#abandoning-the-adsync-service-account-encryption-key) pour y parvenir.  Ces procédures doivent également être utilisées si vous souhaitez abandonner la clé de chiffrement pour une raison quelconque.
 
@@ -52,7 +52,7 @@ Pour vous assurer que vous ne recevez pas ces erreurs, suivez les procédures de
  
 ## <a name="abandoning-the-adsync-service-account-encryption-key"></a>Abandon de la clé de chiffrement du compte de service ADSync
 >[!IMPORTANT]
->Les procédures suivantes s’appliquent uniquement à Azure AD Connect version 1.1.443.0 ou antérieure.
+>Les procédures suivantes s’appliquent uniquement à Azure AD Connect version 1.1.443.0 ou antérieure. Elles ne peuvent pas être utilisées pour les versions plus récentes d’Azure AD Connect, car l’abandon de la clé de chiffrement est géré par Azure AD Connect lui-même quand vous modifiez le mot de passe du compte de service de synchronisation AD, de sorte que les étapes suivantes ne sont pas nécessaires dans les versions plus récentes.   
 
 Utilisez les procédures suivantes pour abandonner la clé de chiffrement.
 
@@ -88,7 +88,7 @@ Abandonnez la clé de chiffrement existante pour que la nouvelle clé de chiffre
 
 4. Exécutez la commande `./miiskmu.exe /a`
 
-![Utilitaire de clé de chiffrement d’Azure AD Connect Sync](./media/how-to-connect-sync-change-serviceacct-pass/key5.png)
+![Capture d’écran montrant PowerShell après l’exécution de la commande.](./media/how-to-connect-sync-change-serviceacct-pass/key5.png)
 
 #### <a name="provide-the-password-of-the-ad-ds-connector-account"></a>Fournir le mot de passe du compte de connecteur AD DS
 Comme les mots de passe existants stockés dans la base de données ne peuvent plus être déchiffrés, vous devez fournir le mot de passe du compte de connecteur AD DS au service de synchronisation. Le service de synchronisation chiffre les mots de passe à l’aide de la nouvelle clé de chiffrement :
@@ -101,7 +101,7 @@ Comme les mots de passe existants stockés dans la base de données ne peuvent p
 5. Dans la boîte de dialogue contextuelle, sélectionnez **Se connecter à la forêt Active Directory** :
 6. Dans la zone de texte **Mot de passe**, tapez le mot de passe du compte AD DS. Si vous ne connaissez pas son mot de passe, vous devez le définir sur une valeur connue avant d’effectuer cette étape.
 7. Cliquez sur **OK** pour enregistrer le nouveau mot de passe et fermez la boîte de dialogue contextuelle.
-![Utilitaire de clé de chiffrement d’Azure AD Connect Sync](./media/how-to-connect-sync-change-serviceacct-pass/key6.png)
+![Screenshot that shows the "Connect to Active Directory Forest" page in the "Properties" window.](./media/how-to-connect-sync-change-serviceacct-pass/key6.png)
 
 #### <a name="reinitialize-the-password-of-the-adsync-service-account"></a>Réinitialiser le mot de passe du compte de service ADSync
 Vous ne pouvez pas directement fournir le mot de passe du compte de service Azure AD au service de synchronisation. Au lieu de cela, vous devez utiliser l’applet de commande **Add-ADSyncAADServiceAccount** pour réinitialiser le compte de service Azure AD. L’applet de commande réinitialise le mot de passe du compte et le rend disponible pour le service de synchronisation :

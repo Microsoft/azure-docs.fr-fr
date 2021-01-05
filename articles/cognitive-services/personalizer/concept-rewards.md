@@ -1,18 +1,20 @@
 ---
 title: Score de récompense - Personalizer
 description: Le score de récompense indique à quel point le choix de personnalisation, RewardActionID, était adapté à l’utilisateur. La valeur du score de récompense est déterminée par votre logique métier, en fonction des observations sur le comportement utilisateur. Personalizer effectue l’apprentissage de ses modèles Machine Learning en évaluant les récompenses.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.date: 02/20/2020
 ms.topic: conceptual
-ms.openlocfilehash: 734e4d0fdcec25884f8535ec61ccd10569fa8890
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f3249ba2089c3d9650aa46f665353ad392d0e773
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218575"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94365565"
 ---
 # <a name="reward-scores-indicate-success-of-personalization"></a>Les scores de récompense indiquent la réussite de la personnalisation
 
-Le score de récompense indique à quel point le choix de personnalisation, [RewardActionID](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/rank/rank#response), était adapté à l’utilisateur. La valeur du score de récompense est déterminée par votre logique métier, en fonction des observations sur le comportement utilisateur.
+Le score de récompense indique à quel point le choix de personnalisation, [RewardActionID](/rest/api/cognitiveservices/personalizer/rank/rank#response), était adapté à l’utilisateur. La valeur du score de récompense est déterminée par votre logique métier, en fonction des observations sur le comportement utilisateur.
 
 Personalizer effectue l’apprentissage de ses modèles Machine Learning en évaluant les récompenses.
 
@@ -20,11 +22,11 @@ Découvrez [comment](how-to-settings.md#configure-rewards-for-the-feedback-loop)
 
 ## <a name="use-reward-api-to-send-reward-score-to-personalizer"></a>Utiliser l’API Reward (Récompense) pour envoyer un score de récompense à Personalizer
 
-Les récompenses sont envoyées à Personalizer par l’[API Reward](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/events/reward). En général, une récompense est un nombre compris entre 0 et 1. Une récompense négative (avec la valeur -1) est possible dans certains scénarios, et ne doit être utilisée que si vous êtes familiarisé avec l’apprentissage par renforcement. Personalizer effectue l’apprentissage du modèle afin d’obtenir la somme la plus élevée possible de récompenses au fil du temps.
+Les récompenses sont envoyées à Personalizer par l’[API Reward](/rest/api/cognitiveservices/personalizer/events/reward). En général, une récompense est un nombre compris entre 0 et 1. Une récompense négative (avec la valeur -1) est possible dans certains scénarios, et ne doit être utilisée que si vous êtes familiarisé avec l’apprentissage par renforcement. Personalizer effectue l’apprentissage du modèle afin d’obtenir la somme la plus élevée possible de récompenses au fil du temps.
 
 Les récompenses sont envoyées une fois que le comportement de l’utilisateur a eu lieu, parfois plusieurs jours plus tard. La configuration du délai maximal après lequel Personalizer considère qu’un événement ne reçoit aucune récompense ou reçoit une récompense par défaut s’effectue avec le [Temps d’attente des récompenses](#reward-wait-time) dans le portail Azure.
 
-Si le score de récompense pour un événement n’a pas été reçu dans le **Temps d’attente des récompenses**, la **récompense par défaut** est appliquée. En règle générale, la **[récompense par défaut](how-to-settings.md#configure-reward-settings-for-the-feedback-loop-based-on-use-case)** est configurée sur zéro.
+Si le score de récompense pour un événement n’a pas été reçu dans le **Temps d’attente des récompenses** , la **récompense par défaut** est appliquée. En règle générale, la **[récompense par défaut](how-to-settings.md#configure-reward-settings-for-the-feedback-loop-based-on-use-case)** est configurée sur zéro.
 
 
 ## <a name="behaviors-and-data-to-consider-for-rewards"></a>Comportements et données à prendre en compte pour les récompenses
@@ -70,8 +72,8 @@ Vous pouvez également appeler l’API Reward en utilisant le même ID d’évé
 
 Valeurs d’agrégation :
 
-*  **First** : prend le premier score de récompense reçu pour l’événement et ignore le reste.
-* **Sum** : prend tous les scores de récompense collectés pour l’ID d’événement et les additionne.
+*  **First**  : prend le premier score de récompense reçu pour l’événement et ignore le reste.
+* **Sum**  : prend tous les scores de récompense collectés pour l’ID d’événement et les additionne.
 
 Toutes les récompenses pour un événement, qui sont reçues une fois que le **Temps d’attente des récompenses** s’est écoulé, sont ignorées et n’affectent pas l’apprentissage des modèles.
 

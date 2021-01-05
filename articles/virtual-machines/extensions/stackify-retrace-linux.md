@@ -8,17 +8,18 @@ manager: gwallace
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 04/12/2018
 ms.author: akjosh
-ms.openlocfilehash: 5914947bd994ee405f253e34c3dd919dd6561898
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0f9ac4f7c88e72cb6ddadc2450947697b0e3c6ef
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227873"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94961972"
 ---
 # <a name="stackify-retrace-linux-agent-extension"></a>Extension de l’agent Linux pour Stackify Retrace
 

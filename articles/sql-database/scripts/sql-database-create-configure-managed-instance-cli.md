@@ -1,29 +1,29 @@
 ---
-title: Exemple d’interface CLI - Créer une instance managée dans Azure SQL Database
-description: Exemple de script Azure CLI afin de créer une instance managée dans Azure SQL Database
+title: 'Azure CLI : Créer une instance gérée'
+description: Exemple de script Azure CLI permettant de créer une instance managée dans Azure SQL Managed Instance
 services: sql-database
 ms.service: sql-database
 ms.subservice: operations
-ms.custom: ''
+ms.custom: devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: sample
 author: stevestein
 ms.author: sstein
 ms.reviewer: carlrab
 ms.date: 03/25/2019
-ms.openlocfilehash: f52a460be33b23da3da0cb32075ab5f75bb8d129
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.openlocfilehash: 54e1aa993f177a4d3bc255287ae8c2fb14cf65af
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83772622"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87497271"
 ---
-# <a name="use-cli-to-create-an-azure-sql-database-managed-instance"></a>Utiliser CLI pour créer une instance managée Azure SQL Database
+# <a name="use-cli-to-create-an-azure-sql-managed-instance"></a>Utiliser l’interface CLI pour créer une instance Azure SQL Managed Instance
 
-Cet exemple de script Azure CLI crée une instance managée Azure SQL Database dans un sous-réseau dédié au sein d’un réseau virtuel. Il configure également une table de routage et un groupe de sécurité réseau pour le réseau virtuel. Une fois le script correctement exécuté, l’instance managée est accessible à partir du réseau virtuel ou d’un environnement local. Consultez [Configurer la machine virtuelle Azure pour qu’elle se connecte à une instance managée Azure SQL Database](../sql-database-managed-instance-configure-vm.md) et [Configurer une connexion point à site à une instance managée Azure SQL Database à partir d’un emplacement local](../sql-database-managed-instance-configure-p2s.md).
+Cet exemple de script Azure CLI crée une instance Azure SQL Managed Instance dans un sous-réseau dédié au sein d’un nouveau réseau virtuel. Il configure également une table de routage et un groupe de sécurité réseau pour le réseau virtuel. Une fois le script correctement exécuté, l’instance managée est accessible à partir du réseau virtuel ou d’un environnement local. Consultez [Configurer une machine virtuelle Azure pour qu’elle se connecte à une instance Azure SQL Managed Instance]../../azure-sql/managed-instance/connect-vm-instance-configure.md) et [Configurer une connexion point à site à une instance Azure SQL Managed Instance à partir d’un emplacement local](../../azure-sql/managed-instance/point-to-site-p2s-configure.md).
 
 > [!IMPORTANT]
-> Pour connaître les limitations, consultez les [régions prises en charge](../sql-database-managed-instance-resource-limits.md#supported-regions) et les [types d’abonnement pris en charge](../sql-database-managed-instance-resource-limits.md#supported-subscription-types).
+> Pour connaître les limitations, consultez les [régions prises en charge](../../azure-sql/managed-instance/resource-limits.md#supported-regions) et les [types d’abonnement pris en charge](../../azure-sql/managed-instance/resource-limits.md#supported-subscription-types).
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
@@ -49,15 +49,15 @@ az group delete --name $resource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az network vnet](/cli/azure/network/vnet) | Commandes de réseau virtuel. |
 | [az network vnet subnet](/cli/azure/network/vnet/subnet) | Commandes de sous-réseau de réseau virtuel. |
 | [az network route-table](/cli/azure/network/route-table) | Commandes de table de route réseau. |
-| [az sql mi](/cli/azure/sql/mi) | Commandes d’instance managée. |
+| [az sql mi](/cli/azure/sql/mi) | Commandes SQL Managed Instance. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
-Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

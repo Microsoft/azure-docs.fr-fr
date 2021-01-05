@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/19/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: ec684e5e6fa2ef8e9ed30be49f59e8aa7ef3a28b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a3c10ca35ee2f085d4ce41e862a895ff17ff63a0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79117103"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84317468"
 ---
 ### <a name="how-many-vpn-client-endpoints-can-i-have-in-my-point-to-site-configuration"></a>Combien de points de terminaison clients VPN puis-je avoir dans ma configuration point à site ?
 
@@ -29,6 +29,7 @@ Les systèmes d’exploitation clients pris en charge sont les suivants :
 * Windows Server 2012 (64 bits uniquement)
 * Windows Server 2012 R2 (64 bits uniquement)
 * Windows Server 2016 (64 bits uniquement)
+* Windows Server 2019 (64 bits uniquement)
 * Windows 10
 * Mac OS X version 10.11 ou ultérieure
 * Linux (StrongSwan)

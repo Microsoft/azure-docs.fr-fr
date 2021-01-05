@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 41b15cc998a7bacd033ef2fe083fc99f1bff0286
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 46a19cd4396e598a74f9099727ac80d44c0a44f5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68595857"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88507244"
 ---
 # <a name="document-formats-and-naming-convention-guidance"></a>Guide sur les formats de documents et les conventions d’affectation de noms
 

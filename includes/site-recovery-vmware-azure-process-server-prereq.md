@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 11/28/2019
 ms.author: raynew
 ms.openlocfilehash: de15e3028cf22cdd03ce29385278fc5e2babaa9b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74566259"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008472"
 ---
 Cet article suppose que vous possédez :
 

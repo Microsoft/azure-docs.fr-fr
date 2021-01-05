@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 539665c4756a7dc87078922421b45a88404f58f1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6ff057d99e29c7c6fe30e77f38a0bff265dbe7bf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81868139"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86998887"
 ---
 # <a name="accessing-your-cloudsimple-private-cloud-environment-and-applications-from-on-premises"></a>Accès à votre environnement de cloud privé CloudSimple et à vos applications à partir d’un emplacement local
 
@@ -35,7 +35,7 @@ Pour accéder à votre vCenter de cloud privé et au gestionnaire NSX-T, les por
 
 ## <a name="ports-required-for-using-on-premises-active-directory-as-an-identity-source"></a>Ports requis pour l’utilisation d’un Active Directory local en tant que source d’identité
 
-Pour configurer un Active Directory local en tant que source d’identité sur un vCenter de cloud privé, les ports définis dans le tableau doivent être ouverts.  Pour connaître les étapes de configuration, consultez [Use Azure AD as an identity provider for vCenter on CloudSimple Private Cloud](https://docs.microsoft.com/azure/vmware-cloudsimple/azure-ad/) (Utiliser Azure AD comme fournisseur d’identité pour vCenter sur un cloud privé CloudSimple).
+Pour configurer un Active Directory local en tant que source d’identité sur un vCenter de cloud privé, les ports définis dans le tableau doivent être ouverts.  Pour connaître les étapes de configuration, consultez [Use Azure AD as an identity provider for vCenter on CloudSimple Private Cloud](./azure-ad.md) (Utiliser Azure AD comme fournisseur d’identité pour vCenter sur un cloud privé CloudSimple).
 
 | Port         | Source                           | Destination                                         | Objectif                                                                                                                                          |
 |--------------|----------------------------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -60,6 +60,6 @@ L’accès aux machines virtuelles de charge de travail exécutées sur un cloud
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Créer et gérer des réseaux locaux virtuels et des sous-réseaux](https://docs.microsoft.com/azure/vmware-cloudsimple/create-vlan-subnet/)
-* [Se connecter à un réseau local à l’aide d’Azure ExpressRoute](https://docs.microsoft.com/azure/vmware-cloudsimple/on-premises-connection/)
-* [Configurer un VPN de site à site en local](https://docs.microsoft.com/azure/vmware-cloudsimple/vpn-gateway/)
+* [Créer et gérer des réseaux locaux virtuels et des sous-réseaux](./create-vlan-subnet.md)
+* [Se connecter à un réseau local à l’aide d’Azure ExpressRoute](./on-premises-connection.md)
+* [Configurer un VPN de site à site en local](./vpn-gateway.md)

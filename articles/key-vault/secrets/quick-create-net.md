@@ -1,318 +1,255 @@
 ---
-title: Démarrage rapide - Bibliothèque de client Azure Key Vault pour .NET (v4)
-description: Découvrez comment créer, récupérer et supprimer des secrets d’un coffre de clés Azure à l’aide de la bibliothèque cliente .NET (v4)
+title: Démarrage rapide - Bibliothèque de client de secrets Azure Key Vault pour .NET (version 4)
+description: Découvrez comment créer, récupérer et supprimer des secrets d’un coffre de clés Azure à l’aide de la bibliothèque de client .NET (version 4)
 author: msmbaldwin
 ms.author: mbaldwin
-ms.date: 03/12/2020
+ms.date: 09/23/2020
 ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
-ms.openlocfilehash: 5e62e8c3883ad8414d1fb550dd4221eb8b9e4056
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 7dd5725e55800034fc3d142ef47c61275dc165d1
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81421483"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97824624"
 ---
-# <a name="quickstart-azure-key-vault-client-library-for-net-sdk-v4"></a>Démarrage rapide : Bibliothèque de client Azure Key Vault pour .NET (SDK v4)
+# <a name="quickstart-azure-key-vault-secret-client-library-for-net-sdk-v4"></a>Démarrage rapide : Bibliothèque de client de secrets Azure Key Vault pour .NET (SDK v4)
 
-Bien démarrer avec la bibliothèque de client Azure Key Vault pour .NET. Suivez les étapes ci-dessous pour installer le package et tester un exemple de code relatif à des tâches de base.
+Bien démarrer avec la bibliothèque de client de secrets Azure Key Vault pour .NET. [Azure Key Vault](../general/overview.md) est un service cloud qui fournit un magasin de secrets sécurisé. Vous pouvez stocker des clés, des mots de passe, des certificats et d’autres secrets en toute sécurité. Vous pouvez créer et gérer des coffres de clés Azure grâce au portail Azure. Dans ce guide de démarrage rapide, vous allez découvrir comment créer, récupérer et supprimer des secrets dans un coffre de clés Azure à l’aide de la bibliothèque de client .NET.
 
-Azure Key Vault permet de protéger les clés de chiffrement et les secrets utilisés par les services et les applications cloud. Utilisez la bibliothèque de client Key Vault pour .NET pour :
+Ressources de la bibliothèque de client Key Vault :
 
-- Accroître la sécurité et le contrôle des clés et des mots de passe
-- Créer et importer des clés de chiffrement en quelques minutes
-- Réduire la latence avec la mise à l’échelle du cloud et la redondance globale
-- Simplifier et automatiser les tâches associées aux certificats TLS/SSL
-- Utiliser des HSM (modules de sécurité matériels) validés conformes à la norme FIPS 140-2 de niveau 2
+[Documentation de référence sur l’API](/dotnet/api/azure.security.keyvault.secrets?view=azure-dotnet&preserve-view=true) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)
 
-[Documentation de référence sur l’API](/dotnet/api/azure.security.keyvault.secrets?view=azure-dotnet) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault) | [Package (NuGet)](https://www.nuget.org/packages/Azure.Security.KeyVault.Secrets/)
+Pour plus d’informations sur Key Vault et les secrets, consultez :
+- [Vue d’ensemble du coffre de clés](../general/overview.md)
+- [Vue d’ensemble des secrets](about-secrets.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
-* Kit de développement logiciel (SDK) [.NET Core 2.1 ou version ultérieure](https://dotnet.microsoft.com/download/dotnet-core/2.1).
-* [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) ou [Azure PowerShell](/powershell/azure/overview)
+* Un abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/dotnet)
+* [SDK .NET Core 3.1 ou ultérieur](https://dotnet.microsoft.com/download/dotnet-core)
+* [Azure CLI](/cli/azure/install-azure-cli)
+* Un coffre de clés : vous pouvez en créer un en utilisant le [portail Azure](../general/quick-create-portal.md), [Azure CLI](../general/quick-create-cli.md) ou [Azure PowerShell](../general/quick-create-powershell.md)
 
-Ce guide de démarrage rapide suppose que vous exécutez les commandes `dotnet`, [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) et Windows dans un terminal Windows (par exemple [PowerShell Core](/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-6), [Windows PowerShell](/powershell/scripting/install/installing-windows-powershell?view=powershell-6) ou [Azure Cloud Shell](https://shell.azure.com/)).
+Ce guide de démarrage rapide utilise `dotnet` et Azure CLI
 
-## <a name="setting-up"></a>Configuration
+## <a name="setup"></a>Programme d’installation
+
+Ce guide de démarrage rapide utilise la bibliothèque Azure Identity avec Azure CLI pour authentifier l’utilisateur auprès des services Azure. Les développeurs peuvent également utiliser Visual Studio ou Visual Studio Code pour authentifier leurs appels. Pour plus d’informations, consultez [Authentifier le client avec la bibliothèque de client Azure Identity](/dotnet/api/overview/azure/identity-readme?#authenticate-the-client&preserve-view=true).
+
+### <a name="sign-in-to-azure"></a>Connexion à Azure
+
+1. Exécutez la commande `login`.
+
+    ```azurecli-interactive
+    az login
+    ```
+
+    Si l’interface CLI peut ouvrir votre navigateur par défaut, elle le fait et charge une page de connexion Azure par la même occasion.
+
+    Sinon, ouvrez une page de navigateur à l’adresse [https://aka.ms/devicelogin](https://aka.ms/devicelogin) et entrez le code d’autorisation affiché dans votre terminal.
+
+2. Dans le navigateur, connectez-vous avec les informations d’identification de votre compte.
+
+### <a name="grant-access-to-your-key-vault"></a>Accorder l’accès à votre coffre de clés
+
+Créez une stratégie d’accès pour votre coffre de clés, qui accorde des autorisations de secret à votre compte d’utilisateur.
+
+```console
+az keyvault set-policy --name <YourKeyVaultName> --upn user@domain.com --secret-permissions delete get list set purge
+```
 
 ### <a name="create-new-net-console-app"></a>Créer une application console .NET
 
-Dans une fenêtre de console, utilisez la commande `dotnet new` pour créer une application console .NET nommée `key-vault-console-app`.
+1. Dans un shell de commandes, exécutez la commande suivante pour créer un projet nommé `key-vault-console-app` :
 
-```console
-dotnet new console -n key-vault-console-app
-```
+    ```dotnetcli
+    dotnet new console --name key-vault-console-app
+    ```
 
-Déplacez vos répertoires vers le dossier d’application nouvellement créé. Vous pouvez générer l’application avec :
+1. Accédez au répertoire *key-vault-console-app* nouvellement créé, puis exécutez la commande suivante pour générer le projet :
 
-```console
-dotnet build
-```
+    ```dotnetcli
+    dotnet build
+    ```
 
-La sortie de génération ne doit contenir aucun avertissement ni erreur.
+    La sortie de génération ne doit contenir aucun avertissement ni erreur.
+    
+    ```console
+    Build succeeded.
+     0 Warning(s)
+     0 Error(s)
+    ```
 
-```console
-Build succeeded.
- 0 Warning(s)
- 0 Error(s)
-```
+### <a name="install-the-packages"></a>Installer les packages
 
-### <a name="install-the-package"></a>Installer le package
+Depuis le shell de commandes, installez la bibliothèque de client de secrets Azure Key Vault pour .NET :
 
-À partir de la fenêtre de la console, installez la bibliothèque de client Azure Key Vault pour .NET :
-
-```console
+```dotnetcli
 dotnet add package Azure.Security.KeyVault.Secrets
 ```
 
-Pour ce guide de démarrage rapide, vous devez également installer les packages suivants :
+Pour ce guide de démarrage rapide, vous devez également installer la bibliothèque de client du SDK Azure pour Azure Identity :
 
-```console
+```dotnetcli
 dotnet add package Azure.Identity
 ```
+#### <a name="set-environment-variables"></a>Définir des variables d’environnement
 
-### <a name="create-a-resource-group-and-key-vault"></a>Créer un groupe de ressources et un coffre de clés
+Cette application utilise le nom de coffre de clés en tant que variable d’environnement appelée `KEY_VAULT_NAME`.
 
-Ce guide de démarrage rapide utilise un coffre de clés Azure créé au préalable. Vous pouvez créer un coffre de clés en suivant les étapes décrites dans le [guide de démarrage rapide d’Azure CLI](quick-create-cli.md), le [guide de démarrage rapide d’Azure PowerShell](quick-create-powershell.md) ou le [guide de démarrage rapide du portail Azure](quick-create-portal.md). Sinon, vous pouvez simplement exécuter les commandes Azure CLI ci-dessous.
-
-> [!Important]
-> Chaque coffre de clés doit avoir un nom unique. Remplacez <your-unique-keyvault-name> par le nom de votre coffre de clés dans les exemples suivants.
-
-```azurecli
-az group create --name "myResourceGroup" -l "EastUS"
-
-az keyvault create --name <your-unique-keyvault-name> -g "myResourceGroup"
-```
-
-```azurepowershell
-New-AzResourceGroup -Name myResourceGroup -Location EastUS
-
-New-AzKeyVault -Name <your-unique-keyvault-name> -ResourceGroupName myResourceGroup -Location EastUS
-```
-
-### <a name="create-a-service-principal"></a>Créer un principal du service
-
-Le moyen le plus simple d’authentifier une application .NET cloud consiste à utiliser une identité managée. Pour plus d’informations, consultez [Utiliser une identité managée App Service pour accéder à Azure Key Vault](../general/managed-identity.md). Cependant, par souci de simplicité, ce guide de démarrage rapide crée une application console .NET. L’authentification d’une application de bureau auprès d’Azure nécessite l’utilisation d’un principal de service et d’une stratégie de contrôle d’accès.
-
-Créez un principal de service à l’aide de la commande Azure CLI [az ad sp create-for-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) :
-
-```azurecli
-az ad sp create-for-rbac -n "http://mySP" --sdk-auth
-```
-
-Cette opération retourne une série de paires clé/valeur. 
-
-```console
-{
-  "clientId": "7da18cae-779c-41fc-992e-0527854c6583",
-  "clientSecret": "b421b443-1669-4cd7-b5b1-394d5c945002",
-  "subscriptionId": "443e30da-feca-47c4-b68f-1636b75e16b3",
-  "tenantId": "35ad10f1-7799-4766-9acf-f2d946161b77",
-  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
-  "resourceManagerEndpointUrl": "https://management.azure.com/",
-  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
-  "galleryEndpointUrl": "https://gallery.azure.com/",
-  "managementEndpointUrl": "https://management.core.windows.net/"
-}
-```
-
-Créez un principal de service avec la commande Azure PowerShell [New-AzADServicePrincipal](/powershell/module/az.resources/new-azadserviceprincipal) :
-
-```azurepowershell
-# Create a new service principal
-$spn = New-AzADServicePrincipal -DisplayName "http://mySP"
-
-# Get the tenant ID and subscription ID of the service principal
-$tenantId = (Get-AzContext).Tenant.Id
-$subscriptionId = (Get-AzContext).Subscription.Id
-
-# Get the client ID
-$clientId = $spn.ApplicationId
-
-# Get the client Secret
-$bstr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($spn.Secret)
-$clientSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
-```
-
-Pour plus d’informations sur le principal de service avec Azure PowerShell, consultez [Créer un principal de service Azure avec Azure PowerShell](/powershell/azure/create-azure-service-principal-azureps).
-
-Notez les valeurs clientId, clientSecret et tenantId, car nous allons les utiliser dans les étapes suivantes.
-
-
-#### <a name="give-the-service-principal-access-to-your-key-vault"></a>Accorder au principal de service l’accès à votre coffre de clés
-
-Créez une stratégie d’accès pour votre coffre de clés qui accorde l’autorisation à votre principal de service en passant le clientId à la commande [az keyvault set-policy](/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-set-policy). Accordez au principal de service les autorisations get, list et set sur les clés et les secrets.
-
-```azurecli
-az keyvault set-policy -n <your-unique-keyvault-name> --spn <clientId-of-your-service-principal> --secret-permissions list get set delete purge
-```
-
-```azurepowershell
-Set-AzKeyVaultAccessPolicy -VaultName <your-unique-keyvault-name> -ServicePrincipalName <clientId-of-your-service-principal> -PermissionsToSecrets list,get,set,delete,purge
-```
-
-#### <a name="set-environmental-variables"></a>Définir des variables d’environnement
-
-La méthode DefaultAzureCredential dans notre application s’appuie sur trois variables d’environnement : `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET` et `AZURE_TENANT_ID`. Définissez ces variables sur les valeurs clientId, clientSecret et tenantId que vous avez notées à l’étape [Créer un principal de service](#create-a-service-principal) ci-dessus.
-
-Vous devrez également enregistrer votre nom de coffre de clés en tant que variable d’environnement appelée `KEY_VAULT_NAME` ;
-
-```console
-setx AZURE_CLIENT_ID <your-clientID>
-
-setx AZURE_CLIENT_SECRET <your-clientSecret>
-
-setx AZURE_TENANT_ID <your-tenantId>
-
-setx KEY_VAULT_NAME <your-key-vault-name>
+Windows
+```cmd
+set KEY_VAULT_NAME=<your-key-vault-name>
 ````
+Windows PowerShell
+```powershell
+$Env:KEY_VAULT_NAME=<your-key-vault-name>
+```
 
-Chaque fois que vous appelez `setx`, vous devez obtenir la réponse « RÉUSSITE : La valeur spécifiée a été enregistrée. »
-
-```shell
-AZURE_CLIENT_ID=<your-clientID>
-
-AZURE_CLIENT_SECRET=<your-clientSecret>
-
-AZURE_TENANT_ID=<your-tenantId>
-
-KEY_VAULT_NAME=<your-key-vault-name>
+macOS ou Linux
+```bash
+export KEY_VAULT_NAME=<your-key-vault-name>
 ```
 
 ## <a name="object-model"></a>Modèle objet
 
-La bibliothèque de client Azure Key Vault pour .NET vous permet de gérer les clés et les ressources associées, par exemple les certificats et les secrets. Les exemples de code ci-dessous vous montrent comment créer un client et définir, récupérer et supprimer un secret.
-
-L’application console complète est disponible à l’adresse https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart/tree/master/key-vault-console-app.
+La bibliothèque de client de secrets Azure Key Vault pour .NET vous permet de gérer des secrets. La section [Exemples de code](#code-examples) montre comment créer un client, et définir, récupérer et supprimer un secret.
 
 ## <a name="code-examples"></a>Exemples de code
 
 ### <a name="add-directives"></a>Ajouter des directives
 
-Ajoutez les directives suivantes en haut de votre code :
+Ajoutez les directives suivantes en haut de *Program.cs* :
 
-[!code-csharp[Directives](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=directives)]
+[!code-csharp[](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=directives)]
 
 ### <a name="authenticate-and-create-a-client"></a>Authentifier et créer un client
 
-L’authentification auprès de votre coffre de clés et la création d’un client de coffre de clés dépendent des variables d’environnement de l’étape [Définir des variables d’environnement](#set-environmental-variables) ci-dessus. Le nom de votre coffre de clés est étendu à l’URI du coffre de clés, au format « https://\<nom_de_votre_coffre_de_clés\>.vault.azure.net ».
+Dans ce guide de démarrage rapide, l’utilisateur connecté est utilisé pour l’authentification auprès du coffre de clés, qui est la méthode recommandée pour le développement local. Pour les applications déployées sur Azure, l’identité managée doit être affectée à App Service ou à une machine virtuelle. Pour plus d’informations, consultez [Vue d’ensemble des identités managées](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
 
-[!code-csharp[Directives](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=authenticate)]
+Dans l’exemple ci-dessous, le nom de votre coffre de clés est étendu à l’URI du coffre de clés, au format « https://\<your-key-vault-name\>.vault.azure.net ». Cet exemple utilise la classe [« DefaultAzureCredential() »](/dotnet/api/azure.identity.defaultazurecredential) de la [bibliothèque Azure Identity](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme), ce qui permet d’utiliser le même code dans différents environnements avec des options différentes pour fournir une identité. Pour plus d’informations sur l’authentification auprès du coffre de clés, consultez le [Guide du développeur](https://docs.microsoft.com/azure/key-vault/general/developers-guide#authenticate-to-key-vault-in-code).
+
+[!code-csharp[](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=authenticate)]
 
 ### <a name="save-a-secret"></a>Enregistrer un secret
 
-Une fois votre application authentifiée, vous pouvez placer un secret dans votre coffre de clés à l’aide de la [client.SetSecret method](/dotnet/api/microsoft.azure.keyvault.keyvaultclientextensions.setsecretasync). Cela nécessite un nom pour le secret ; nous allons utiliser mySecret ici.  
+Maintenant que l’application console est authentifiée, ajoutez un secret au coffre de clés. Pour cette tâche, utilisez la méthode [SetSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.setsecretasync). Le premier paramètre de la méthode accepte un nom pour le secret, qui est « mySecret » dans cet exemple.
 
-[!code-csharp[Set secret](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=setsecret)]
-
-Vous pouvez vérifier que le secret a été défini à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) :
-
-```azurecli
-az keyvault secret show --vault-name <your-unique-keyvault-name> --name mySecret
+```csharp
+await client.SetSecretAsync(secretName, secretValue);
 ```
 
-```azurepowershell
-(Get-AzKeyVaultSecret -VaultName <your-unique-keyvault-name> -Name mySecret).SecretValueText
-```
+> [!NOTE]
+> Si le nom du secret existe, le code ci-dessus crée une nouvelle version de ce secret.
+
 
 ### <a name="retrieve-a-secret"></a>Récupérer un secret
 
-Vous pouvez désormais récupérer la valeur définie avec la [client.GetSecret method](/dotnet/api/microsoft.azure.keyvault.keyvaultclientextensions.getsecretasync).
+Vous pouvez désormais récupérer la valeur définie avec la méthode [GetSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.getsecretasync).
 
-[!code-csharp[Get secret](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=getsecret)]
+```csharp
+var secret = await client.GetSecretAsync(secretName);
+```
 
 Votre secret est désormais enregistré en tant que `secret.Value`.
 
 ### <a name="delete-a-secret"></a>supprimer un secret
 
-Enfin, nous allons supprimer le secret de votre coffre de clés avec [la méthode client.DeleteSecret](/dotnet/api/microsoft.azure.keyvault.keyvaultclientextensions.getsecretasync).
+Pour terminer, nous allons supprimer le secret de votre coffre de clés avec les méthodes [StartDeleteSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.startdeletesecretasync) et [PurgeDeletedSecretAsync](/dotnet/api/azure.security.keyvault.keys.keyclient).
 
-[!code-csharp[Delete secret](~/samples-key-vault-dotnet-quickstart/key-vault-console-app/Program.cs?name=deletesecret)]
+```csharp
+var operation = await client.StartDeleteSecretAsync("mySecret");
+// You only need to wait for completion if you want to purge or recover the key.
+await operation.WaitForCompletionAsync();
 
-Vous pouvez vérifier que le secret a été effacé à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) :
-
-```azurecli
-az keyvault secret show --vault-name <your-unique-keyvault-name> --name mySecret
-```
-
-```azurepowershell
-(Get-AzKeyVaultSecret -VaultName <your-unique-keyvault-name> -Name mySecret).SecretValueText
-```
-
-## <a name="clean-up-resources"></a>Nettoyer les ressources
-
-Une fois que vous n’en avez plus besoin, vous pouvez supprimer votre coffre de clés et le groupe de ressources correspondant à l’aide d’Azure CLI ou d’Azure PowerShell.
-
-```azurecli
-az group delete -g "myResourceGroup"
-```
-
-```azurepowershell
-Remove-AzResourceGroup -Name "myResourceGroup"
+await client.PurgeDeletedKeyAsync("mySecret");
 ```
 
 ## <a name="sample-code"></a>Exemple de code
 
-```csharp
-using System;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
+Modifiez l’application console .NET Core pour interagir avec le coffre de clés en effectuant les étapes suivantes :
 
-namespace key_vault_console_app
-{
-    class Program
+1. Remplacez le code dans *Program.cs* par le code suivant :
+
+    ```csharp
+    using System;
+    using System.Threading.Tasks;
+    using Azure.Identity;
+    using Azure.Security.KeyVault.Secrets;
+    
+    namespace key_vault_console_app
     {
-        static void Main(string[] args)
+        class Program
         {
-            string secretName = "mySecret";
-
-            string keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
-            var kvUri = "https://" + keyVaultName + ".vault.azure.net";
-
-            var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
-
-            Console.Write("Input the value of your secret > ");
-            string secretValue = Console.ReadLine();
-
-            Console.Write("Creating a secret in " + keyVaultName + " called '" + secretName + "' with the value '" + secretValue + "` ...");
-
-            client.SetSecret(secretName, secretValue);
-
-            Console.WriteLine(" done.");
-
-            Console.WriteLine("Forgetting your secret.");
-            secretValue = "";
-            Console.WriteLine("Your secret is '" + secretValue + "'.");
-
-            Console.WriteLine("Retrieving your secret from " + keyVaultName + ".");
-
-            KeyVaultSecret secret = client.GetSecret(secretName);
-
-            Console.WriteLine("Your secret is '" + secret.Value + "'.");
-
-            Console.Write("Deleting your secret from " + keyVaultName + " ...");
-
-            client.StartDeleteSecret(secretName);
-
-            System.Threading.Thread.Sleep(5000);
-            Console.WriteLine(" done.");
-
+            static async Task Main(string[] args)
+            {
+                const string secretName = "mySecret";
+                var keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
+                var kvUri = $"https://{keyVaultName}.vault.azure.net";
+    
+                var client = new SecretClient(new Uri(kvUri), new DefaultAzureCredential());
+    
+                Console.Write("Input the value of your secret > ");
+                var secretValue = Console.ReadLine();
+    
+                Console.Write($"Creating a secret in {keyVaultName} called '{secretName}' with the value '{secretValue}' ...");
+                await client.SetSecretAsync(secretName, secretValue);
+                Console.WriteLine(" done.");
+    
+                Console.WriteLine("Forgetting your secret.");
+                secretValue = string.Empty;
+                Console.WriteLine($"Your secret is '{secretValue}'.");
+    
+                Console.WriteLine($"Retrieving your secret from {keyVaultName}.");
+                var secret = await client.GetSecretAsync(secretName);
+                Console.WriteLine($"Your secret is '{secret.Value}'.");
+    
+                Console.Write($"Deleting your secret from {keyVaultName} ...");
+                DeleteSecretOperation operation = await client.StartDeleteSecretAsync(secretName);
+                // You only need to wait for completion if you want to purge or recover the secret.
+                await operation.WaitForCompletionAsync();
+                Console.WriteLine(" done.");
+                
+                Console.Write($"Purging your secret from {keyVaultName} ...");
+                await client.PurgeDeletedSecretAsync(secretName);
+                Console.WriteLine(" done.");
+            }
         }
     }
-}
-```
+    ```
+### <a name="test-and-verify"></a>Tester et vérifier
 
+1. Exécutez la commande suivante pour exécuter l’application.
+
+    ```dotnetcli
+    dotnet run
+    ```
+
+1. Quand vous y êtes invité, entrez une valeur de secret. Par exemple, mySecretPassword.
+
+Une variante de la sortie suivante apparaît :
+
+```console
+Input the value of your secret > mySecretPassword
+Creating a secret in <your-unique-keyvault-name> called 'mySecret' with the value 'mySecretPassword' ... done.
+Forgetting your secret.
+Your secret is ''.
+Retrieving your secret from <your-unique-keyvault-name>.
+Your secret is 'mySecretPassword'.
+Deleting your secret from <your-unique-keyvault-name> ... done.    
+Purging your secret from <your-unique-keyvault-name> ... done.
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez créé un coffre de clés, enregistré un secret et récupéré ce secret. Accédez à l’[application console complète dans GitHub](https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart/tree/master/key-vault-console-app).
+Pour plus d’informations sur Key Vault et comment l’intégrer à vos applications, consultez les articles suivants :
 
-Pour en savoir plus sur Key Vault et sur la manière de l’intégrer à vos applications, consultez les articles ci-dessous.
-
-- Implémenter l’[authentification de service à service auprès d’Azure Key Vault à l’aide de .NET](../general/service-to-service-authentication.md)
 - Lire la [vue d’ensemble Azure Key Vault](../general/overview.md)
+- Consultez un [Tutoriel sur l’accès à Key Vault depuis une application App Service](../general/tutorial-net-create-vault-azure-web-app.md)
+- Consultez un [Tutoriel sur l’accès à Key Vault depuis une machine virtuelle](../general/tutorial-net-virtual-machine.md)
 - Consulter le [Guide du développeur Azure Key Vault](../general/developers-guide.md)
 - Passer en revue les [bonnes pratiques relatives à Azure Key Vault](../general/best-practices.md)

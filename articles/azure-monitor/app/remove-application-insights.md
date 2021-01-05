@@ -3,12 +3,12 @@ title: Supprimer Application Insights dans Visual Studio - Azure Monitor
 description: Guide pratique pour supprimer le kit SDK Application Insights pour ASP.NET et ASP.NET Core dans Visual Studio.
 ms.topic: conceptual
 ms.date: 04/06/2020
-ms.openlocfilehash: 1c9ff8d3d305645ac7d113421e2c6c5f8451bd2b
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 5bfa6ee21cc1a55f653c0e79807a14ac34082e73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80805251"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90981479"
 ---
 # <a name="how-to-remove-application-insights-in-visual-studio"></a>Guide pratique pour supprimer Application Insights dans Visual Studio
 
@@ -66,11 +66,11 @@ Pour supprimer Application Insights, vous devez supprimer les packages NuGet et 
 
 1. Sélectionner **Désinstaller**.
     
-    ![Cocher Supprimer les dépendances, puis désinstaller](./media/remove-application-insights/uninstall-framework.png)
+    ![La capture d’écran montre la fenêtre Microsoft.ApplicationInsights.Web avec l’option Supprimer les dépendances sélectionnée et Désinstaller en surbrillance.](./media/remove-application-insights/uninstall-framework.png)
 
     Une boîte de dialogue s’affiche pour montrer toutes les dépendances à supprimer de l’application. Sélectionnez **OK** pour désinstaller.
     
-    ![Cocher Supprimer les dépendances, puis désinstaller](./media/remove-application-insights/preview-uninstall-framework.png)
+    ![La capture d’écran montre une boîte de dialogue avec les dépendances à supprimer.](./media/remove-application-insights/preview-uninstall-framework.png)
     
 1.  Une fois que tout est désinstallé, vous pouvez toujours voir « ApplicationInsights.config » et « AiHandleErrorAttribute.cs » dans l’ *Explorateur de solutions*. Vous pouvez supprimer les deux fichiers manuellement.
 
@@ -229,4 +229,4 @@ Lorsque vous ajoutez Application Insights Telemetry à un projet de modèle Visu
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview)
+- [Azure Monitor](../overview.md)

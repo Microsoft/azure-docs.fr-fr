@@ -4,15 +4,15 @@ description: Cet article fournit des instructions sur la mise à l’échelle de
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 1169ed0e9a2b970ee0e30d73ea20c87001b62786
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a8f015085baa8fffa6f208e9d8dd749e397c76c3
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80239447"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397431"
 ---
 # <a name="autoscale-your-aks-pods-using-application-gateway-metrics-beta"></a>Mettre à l’échelle automatiquement vos pods AKS avec des métriques Application Gateway (bêta)
 
@@ -23,7 +23,7 @@ Dans le didacticiel suivant, nous expliquons comment vous pouvez utiliser les m�
 Nous allons utiliser les deux composants suivants :
 
 * [`Azure Kubernetes Metric Adapter`](https://github.com/Azure/azure-k8s-metrics-adapter) : nous allons utiliser l’adaptateur de métriques pour exposer les métriques Application Gateway par le biais du serveur de métriques. L’adaptateur de métriques Azure Kubernetes est un projet open source sous Azure, similaire au contrôleur d’entrée Application Gateway. 
-* [`Horizontal Pod Autoscaler`](https://docs.microsoft.com/azure/aks/concepts-scale#horizontal-pod-autoscaler) : nous allons nous servir de HPA pour utiliser des métriques Application Gateway et cibler un déploiement pour la mise à l’échelle.
+* [`Horizontal Pod Autoscaler`](../aks/concepts-scale.md#horizontal-pod-autoscaler) : nous allons nous servir de HPA pour utiliser des métriques Application Gateway et cibler un déploiement pour la mise à l’échelle.
 
 ## <a name="setting-up-azure-kubernetes-metric-adapter"></a>Configuration de l’adaptateur de métriques Azure Kubernetes
 
@@ -39,7 +39,7 @@ Nous allons utiliser les deux composants suivants :
 
     ```bash
     kubectl create namespace custom-metrics
-    # use values from service principle created above to create secret
+    # use values from service principal created above to create secret
     kubectl create secret generic azure-k8s-metrics-adapter -n custom-metrics \
         --from-literal=azure-tenant-id=<tenantid> \
         --from-literal=azure-client-id=<clientid> \
@@ -92,7 +92,7 @@ kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1/namespaces/default/appg
 
 ## <a name="using-the-new-metric-to-scale-up-the-deployment"></a>Utiliser la nouvelle métrique pour mettre à l’échelle le déploiement
 
-Une fois que nous sommes en mesure d’exposer `appgw-request-count-metric` par le biais du serveur de métriques, nous sommes prêts à utiliser [`Horizontal Pod Autoscaler`](https://docs.microsoft.com/azure/aks/concepts-scale#horizontal-pod-autoscaler) pour faire évoluer notre déploiement cible.
+Une fois que nous sommes en mesure d’exposer `appgw-request-count-metric` par le biais du serveur de métriques, nous sommes prêts à utiliser [`Horizontal Pod Autoscaler`](../aks/concepts-scale.md#horizontal-pod-autoscaler) pour faire évoluer notre déploiement cible.
 
 Dans l’exemple suivant, nous allons cibler un exemple de déploiement `aspnet`. Nous montons en puissance les pods lorsque `appgw-request-count-metric` > 200 par pod jusqu’à un maximum de `10` pods.
 

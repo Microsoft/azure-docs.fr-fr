@@ -1,21 +1,21 @@
 ---
-title: Enregistrer des éléments de données dans Azure Data Catalog
+title: 'Tutoriel : Enregistrer des éléments de données dans Azure Data Catalog'
 description: Ce tutoriel explique comment inscrire des ressources de données dans votre catalogue Azure Data Catalog.
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
 ms.topic: tutorial
 ms.date: 08/01/2019
-ms.openlocfilehash: 4bd2b7093100ff24b21b67ea84613ac9b2ec8299
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 66bacdf27b2ef9cf624b645cb6e4c123d9c3fa2a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68950249"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88135876"
 ---
 # <a name="tutorial-register-data-assets-in-azure-data-catalog"></a>Tutoriel : Enregistrer des éléments de données dans Azure Data Catalog
 
-Dans ce tutoriel, vous utilisez l’outil de référencement pour inscrire des ressources de données de l’exemple de base de données Azure SQL avec le catalogue. L’inscription est le processus par lequel les métadonnées structurelles clés (telles que les noms, les types et les emplacements) sont extraites de la source de données et des ressources qu’elle contient, puis copiées dans le catalogue. La source de données et les ressources de données restent au même endroit, mais les métadonnées sont utilisées par le catalogue pour faciliter leur découverte et leur compréhension.
+Dans ce tutoriel, vous utilisez l’outil de référencement pour inscrire des ressources de données de l’exemple de base de données avec le catalogue. L’inscription est le processus par lequel les métadonnées structurelles clés (telles que les noms, les types et les emplacements) sont extraites de la source de données et des ressources qu’elle contient, puis copiées dans le catalogue. La source de données et les ressources de données restent au même endroit, mais les métadonnées sont utilisées par le catalogue pour faciliter leur découverte et leur compréhension.
 
 Dans ce tutoriel, vous allez apprendre à :
 > [!div class="checklist"]
@@ -39,11 +39,11 @@ Pour configurer Data Catalog, vous devez être le propriétaire ou le coproprié
 
 ### <a name="register-a-data-source"></a>Référencer une source de données
 
-Vous inscrivez des ressources de données (tables) d’un [exemple de base de données Azure SQL](../sql-database/sql-database-single-database-get-started.md). Vous pouvez cependant utiliser n’importe quelle source de données prise en charge si vous préférez travailler avec des données plus familières et mieux adaptées à votre rôle. Pour obtenir la liste des sources de données prises en charge, consultez l’article [Sources de données prises en charge](data-catalog-dsr.md).
+Vous inscrivez des ressources de données (tables) d’un [exemple de base de données](../azure-sql/database/single-database-create-quickstart.md) pour Azure SQL Database. Vous pouvez cependant utiliser n’importe quelle source de données prise en charge si vous préférez travailler avec des données plus familières et mieux adaptées à votre rôle. Pour obtenir la liste des sources de données prises en charge, consultez l’article [Sources de données prises en charge](data-catalog-dsr.md).
 
-Le nom de base de données Azure SQL que nous utilisons dans ce tutoriel est *RLSTest*.
+Le nom de la base de données que nous utilisons dans ce tutoriel est *RLSTest*.
 
-Vous pouvez désormais inscrire des ressources de données de l’exemple de base de données Azure SQL à l’aide d’Azure Data Catalog.
+Vous pouvez désormais inscrire des ressources de données de l’exemple de base de données à l’aide d’Azure Data Catalog.
 
 1. Accédez à la [page d’accueil Azure Data Catalog](http://azuredatacatalog.com), puis sélectionnez **Publier des données**.
 
@@ -61,39 +61,39 @@ Vous pouvez désormais inscrire des ressources de données de l’exemple de bas
 
     ![Azure Data Catalog--sources de données](media/register-data-assets-tutorial/data-catalog-data-sources.png)
 
-5. Entrez les propriétés de connexion SQL Server pour votre exemple de base de données Azure SQL, puis sélectionnez **SE CONNECTER**.
+5. Entrez les propriétés de connexion SQL Server pour votre exemple de base de données dans Azure SQL Database, puis sélectionnez **SE CONNECTER**.
 
    ![Azure Data Catalog--paramètres de connexion à SQL Server](media/register-data-assets-tutorial/data-catalog-sql-server-connection.png)
 
-6. Enregistrez les métadonnées de votre ressource de données. Dans cet exemple, vous inscrivez les objets **Product** à partir de l’espace de noms de l’exemple de base de données Azure SQL :
+6. Enregistrez les métadonnées de votre ressource de données. Dans cet exemple, vous inscrivez les objets **Product** à partir de l’exemple d’espace de noms :
 
-    1. Dans l’arborescence **Hiérarchie du serveur**, développez votre exemple de base de données Azure SQL, puis sélectionnez **SalesLT**.
+   1. Dans l’arborescence **Hiérarchie du serveur**, développez votre exemple de base de données, puis sélectionnez **SalesLT**.
 
-    2. Appuyez sur la touche CTRL, puis sélectionnez **Product**, **ProductCategory**, **ProductDescription** et **ProductModel**.
+   2. Appuyez sur la touche CTRL, puis sélectionnez **Product**, **ProductCategory**, **ProductDescription** et **ProductModel**.
 
-    3. Sélectionnez la **flèche de déplacement de la sélection** ( **>** ). Cette action déplace tous les objets sélectionnés dans la liste **Objets à inscrire** .
+   3. Sélectionnez la **flèche de déplacement de la sélection** ( **>** ). Cette action déplace tous les objets sélectionnés dans la liste **Objets à inscrire** .
 
-          ![Didacticiel Azure Data Catalog--parcourir et sélectionner des objets](media/register-data-assets-tutorial/data-catalog-server-hierarchy.png)
+      ![Didacticiel Azure Data Catalog--parcourir et sélectionner des objets](media/register-data-assets-tutorial/data-catalog-server-hierarchy.png)
 
-    4. Sélectionnez **Include a Preview (Inclure un aperçu)** pour inclure un aperçu instantané des données. L’instantané inclut jusqu’à 20 enregistrements de chaque table et est copié dans le catalogue.
+   4. Sélectionnez **Include a Preview (Inclure un aperçu)** pour inclure un aperçu instantané des données. L’instantané inclut jusqu’à 20 enregistrements de chaque table et est copié dans le catalogue.
 
-    5. Sélectionnez **Inclure le profil de données** pour inclure un instantané des statistiques des objets du profil de données (par exemple, les valeurs minimale, maximale et moyenne d’une colonne ou le nombre de lignes).
+   5. Sélectionnez **Inclure le profil de données** pour inclure un instantané des statistiques des objets du profil de données (par exemple, les valeurs minimale, maximale et moyenne d’une colonne ou le nombre de lignes).
 
-    6. Dans le champ **Ajouter des étiquettes**, entrez **sales, product, azure sql**. Cette action ajoute des étiquettes de recherche à ces ressources de données. Les étiquettes sont un excellent moyen d’aider les utilisateurs à trouver une source de données inscrite.
+   6. Dans le champ **Ajouter des étiquettes**, entrez **sales, product, azure sql**. Cette action ajoute des étiquettes de recherche à ces ressources de données. Les étiquettes sont un excellent moyen d’aider les utilisateurs à trouver une source de données inscrite.
 
-    7. Spécifiez le nom d’un **expert** pour ces données (facultatif).
+   7. Spécifiez le nom d’un **expert** pour ces données (facultatif).
 
-          ![Didacticiel Azure Data Catalog--objets à inscrire](media/register-data-assets-tutorial/data-catalog-objects-register.png)
+      ![Didacticiel Azure Data Catalog--objets à inscrire](media/register-data-assets-tutorial/data-catalog-objects-register.png)
 
-    8. Sélectionnez **S’INSCRIRE**. Azure Data Catalog enregistre les objets que vous avez sélectionnés. Dans cet exercice, les objets sélectionnés dans votre exemple de base de données Azure SQL sont inscrits. L’outil de référencement extrait les métadonnées de la ressource de données et les copie dans le service Azure Data Catalog. Les données restent où elles se trouvent actuellement. Les données restent sous le contrôle des administrateurs et des stratégies du système d’origine.
+   8. Sélectionnez **S’INSCRIRE**. Azure Data Catalog enregistre les objets que vous avez sélectionnés. Dans cet exercice, les objets sélectionnés dans votre exemple de base de données sont inscrits. L’outil de référencement extrait les métadonnées de la ressource de données et les copie dans le service Azure Data Catalog. Les données restent où elles se trouvent actuellement. Les données restent sous le contrôle des administrateurs et des stratégies du système d’origine.
 
-          ![Azure Data Catalog--objets inscrits](media/register-data-assets-tutorial/data-catalog-registered-objects.png)
+      ![Azure Data Catalog--objets inscrits](media/register-data-assets-tutorial/data-catalog-registered-objects.png)
 
     9. Pour voir les objets sources de données que vous avez inscrits, sélectionnez **Afficher le portail**. Dans le portail Azure Data Catalog, vérifiez que les quatre tables et la base de données sont affichées en mode Grille (la barre de recherche doit être vide).
 
-        ![Objets dans le portail Azure Data Catalog](media/register-data-assets-tutorial/data-catalog-view-portal.png)
+       ![Objets dans le portail Azure Data Catalog](media/register-data-assets-tutorial/data-catalog-view-portal.png)
 
-Dans cet exercice, vous avez inscrit des objets de l’exemple de base de données Azure SQL afin que les utilisateurs de votre organisation puissent les découvrir facilement.
+Dans cet exercice, vous avez inscrit des objets de l’exemple de base de données pour Azure SQL Database afin que les utilisateurs de votre organisation puissent les découvrir facilement.
 
 Dans l’exercice suivant, vous apprenez à découvrir les ressources de données inscrites.
 
@@ -119,19 +119,20 @@ La recherche de base vous permet d’effectuer des recherches dans le catalogue 
 
 2. Dans la zone de recherche, entrez `product` et appuyez sur **ENTRÉE**.
 
-    ![Azure Data Catalog--recherche de texte de base](media/register-data-assets-tutorial/data-catalog-basic-text-search.png)
+   ![Azure Data Catalog--recherche de texte de base](media/register-data-assets-tutorial/data-catalog-basic-text-search.png)
 
 3. Vérifiez que les quatre tables et la base de données s’affichent dans les résultats. Vous pouvez basculer entre le **mode Grille** et le **mode Liste** en sélectionnant les boutons de la barre d’outils, comme l’illustre l’image suivante. Le mot clé de recherche est mis en surbrillance dans les résultats de recherche, car l’option **Mettre en surbrillance** est **ACTIVÉE**. Vous pouvez également spécifier le nombre de **résultats par page** dans les résultats de recherche.
 
-    ![Azure Data Catalog--résultats de recherche de texte de base](media/register-data-assets-tutorial/data-catalog-basic-text-search-results.png)
+   ![Azure Data Catalog--résultats de recherche de texte de base](media/register-data-assets-tutorial/data-catalog-basic-text-search-results.png)
 
-    Le panneau **Recherches** et le panneau **Propriétés** s’affichent respectivement à gauche et à droite. Le panneau **Recherches** vous permet de modifier les critères de recherche et de filtrer les résultats. Le panneau **Propriétés** affiche les propriétés d’un objet sélectionné dans la grille ou liste.
+   Le panneau **Recherches** et le panneau **Propriétés** s’affichent respectivement à gauche et à droite. Le panneau **Recherches** vous permet de modifier les critères de recherche et de filtrer les résultats. Le panneau **Propriétés** affiche les propriétés d’un objet sélectionné dans la grille ou liste.
 
 4. Sélectionnez **Product** dans les résultats de la recherche. Sélectionnez les onglets **Aperçu**, **Colonnes**, **Profil de données** et **Documentation**, ou sélectionnez la flèche pour développer le volet inférieur.  
 
-    ![Azure Data Catalog--volet inférieur](media/register-data-assets-tutorial/data-catalog-data-asset-preview.png)
+   ![Azure Data Catalog--volet inférieur](media/register-data-assets-tutorial/data-catalog-data-asset-preview.png)
 
-    L’aperçu des données de la table **Product** s’affiche dans l’onglet **Aperçu**.  
+   L’aperçu des données de la table **Product** s’affiche dans l’onglet **Aperçu**.
+
 5. Sélectionnez l’onglet **Colonnes** pour rechercher des informations sur les colonnes (comme le **nom** et le **type de données**) dans la ressource de données.
 
 6. Sélectionnez l’onglet **Profil de données** pour voir le profilage des données (par exemple, le nombre de lignes, la taille des données ou la valeur minimale dans une colonne) dans la ressource de données.
@@ -146,13 +147,13 @@ L’étendue de la propriété vous permet de découvrir les ressources de donn�
 
 3. Vérifiez que les tables et la base de données s’affichent dans les résultats.  
 
-    ![Data Catalog--résultats de recherche d’étendue de la propriété](media/register-data-assets-tutorial/data-catalog-property-scoping-results.png)
+   ![Data Catalog--résultats de recherche d’étendue de la propriété](media/register-data-assets-tutorial/data-catalog-property-scoping-results.png)
 
 ### <a name="save-the-search"></a>Enregistrer la recherche
 
 1. Dans le volet **Recherches** de la section **Recherche actuelle**, entrez un nom pour la recherche, puis sélectionnez **Enregistrer**.
 
-    ![Azure Data Catalog--enregistrer la recherche](media/register-data-assets-tutorial/data-catalog-save-search.png)
+   ![Azure Data Catalog--enregistrer la recherche](media/register-data-assets-tutorial/data-catalog-save-search.png)
 
 2. Vérifiez que la recherche enregistrée s’affiche sous **Recherches enregistrées**.
 
@@ -166,7 +167,7 @@ Les parenthèses de regroupement vous permettent de grouper les parties de la re
 
 2. Vérifiez que seule la table **Product** s’affiche dans les résultats de la recherche.
 
-    ![Azure Data Catalog--recherche par regroupement](media/register-data-assets-tutorial/data-catalog-grouping-search.png)
+   ![Azure Data Catalog--recherche par regroupement](media/register-data-assets-tutorial/data-catalog-grouping-search.png)
 
 ### <a name="comparison-operators"></a>Opérateurs de comparaison
 
@@ -178,9 +179,9 @@ Les opérateurs de comparaison vous permettent d’utiliser des comparaisons aut
 
 3. Appuyez sur **Entrée**.
 
-4. Vérifiez que les tables **Product**, **ProductCategory** et **ProductDescription** ainsi que la base de données Azure SQL que vous avez inscrites s’affichent dans les résultats de la recherche.
+4. Vérifiez que les tables **Product**, **ProductCategory** et **ProductDescription** ainsi que la base de données SQL que vous avez inscrites s’affichent dans les résultats de la recherche.
 
-    ![Azure Data Catalog--résultats de recherche par comparaison](media/register-data-assets-tutorial/data-catalog-comparison-operator-results.png)
+   ![Azure Data Catalog--résultats de recherche par comparaison](media/register-data-assets-tutorial/data-catalog-comparison-operator-results.png)
 
 Consultez [Guide pratique pour découvrir les ressources de données](data-catalog-how-to-discover.md) pour obtenir des informations détaillées sur la découverte des ressources de données. Pour plus d’informations sur la syntaxe de recherche, consultez [Informations de référence sur la syntaxe de recherche de Data Catalog](/rest/api/datacatalog/#search-syntax-reference).
 
@@ -233,25 +234,25 @@ Dans cet exercice, vous ouvrez les ressources de données dans un outil client i
 
 1. Sélectionnez **Produit** dans les résultats de la recherche. Dans la barre d’outils, sélectionnez **Ouvrir dans**, puis **Excel**.
 
-    ![Azure Data Catalog--se connecter à une ressource de données](media/register-data-assets-tutorial/data-catalog-connect1.png)
+   ![Azure Data Catalog--se connecter à une ressource de données](media/register-data-assets-tutorial/data-catalog-connect1.png)
 
 2. Sélectionnez **Ouvrir** dans la fenêtre contextuelle de téléchargement. Cette expérience peut varier en fonction du navigateur.
 
 3. Dans la fenêtre **Avis de sécurité Microsoft Excel**, sélectionnez **Activer**.
 
-    ![Azure Data Catalog--fenêtre contextuelle de sécurité Excel](media/register-data-assets-tutorial/data-catalog-excel-security-popup.png)
+   ![Azure Data Catalog--fenêtre contextuelle de sécurité Excel](media/register-data-assets-tutorial/data-catalog-excel-security-popup.png)
 
 4. Conservez les valeurs par défaut dans la boîte de dialogue **Importer des données**, puis sélectionnez **OK**.
 
-    ![Azure Data Catalog--données d’importation Excel](media/register-data-assets-tutorial/data-catalog-excel-import-data.png)
+   ![Azure Data Catalog--données d’importation Excel](media/register-data-assets-tutorial/data-catalog-excel-import-data.png)
 
 5. La source de données s’affiche dans Excel.
 
-    ![Azure Data Catalog--table de produits dans Excel](media/register-data-assets-tutorial/data-catalog-connect2.png)
+   ![Azure Data Catalog--table de produits dans Excel](media/register-data-assets-tutorial/data-catalog-connect2.png)
 
 ### <a name="sql-server-management-studio"></a>SQL Server Management Studio
 
-Dans cet exercice, vous vous êtes connecté aux ressources de données découvertes à l’aide d’Azure Data Catalog. Le portail Azure Data Catalog vous permet de vous connecter directement à l’aide d’applications clientes intégrées au menu **Ouvrir dans** . Vous pouvez également vous connecter avec l’application de votre choix en utilisant les informations d’emplacement de connexion incluses dans les métadonnées des ressources. Par exemple, vous pouvez utiliser SQL Server Management Studio pour vous connecter à la base de données Azure SQL afin d’accéder aux données des ressources de données inscrites dans ce tutoriel.
+Dans cet exercice, vous vous êtes connecté aux ressources de données découvertes à l’aide d’Azure Data Catalog. Le portail Azure Data Catalog vous permet de vous connecter directement à l’aide d’applications clientes intégrées au menu **Ouvrir dans** . Vous pouvez également vous connecter avec l’application de votre choix en utilisant les informations d’emplacement de connexion incluses dans les métadonnées des ressources. Par exemple, vous pouvez utiliser SQL Server Management Studio pour vous connecter à Azure SQL Database afin d’accéder aux données des ressources de données inscrites dans ce tutoriel.
 
 1. Ouvrez **SQL Server Management Studio**.
 
@@ -259,7 +260,7 @@ Dans cet exercice, vous vous êtes connecté aux ressources de données découve
 
 3. Utilisez l’authentification et les informations d’identification appropriées pour accéder à la ressource de données. Si vous n’avez pas accès à la ressource, utilisez les informations du champ **Demander l’accès** pour l’obtenir.
 
-    ![Azure Data Catalog--demander l’accès](media/register-data-assets-tutorial/data-catalog-request-access.png)
+   ![Azure Data Catalog--demander l’accès](media/register-data-assets-tutorial/data-catalog-request-access.png)
 
 Sélectionnez **Afficher les chaînes de connexion** pour afficher et copier les chaînes de connexion ADO.NET, ODBC et OLEDB dans le Presse-papiers pour les utiliser dans votre application.
 
@@ -299,18 +300,22 @@ Dans Azure Data Catalog, vous pouvez supprimer une ou plusieurs ressources.
 
 3. Sélectionnez un élément dans la liste des résultats, puis sélectionnez **Supprimer** dans la barre d’outils, comme illustré dans l’image suivante :
 
-    ![Azure Data Catalog--supprimer un élément de grille](media/register-data-assets-tutorial/data-catalog-delete-grid-item.png)
+   ![Azure Data Catalog--supprimer un élément de grille](media/register-data-assets-tutorial/data-catalog-delete-grid-item.png)
 
-    Si vous utilisez le mode Liste, la case à cocher se situe à gauche de l’élément, comme indiqué dans l’image suivante :
+   Si vous utilisez le mode Liste, la case à cocher se situe à gauche de l’élément, comme indiqué dans l’image suivante :
 
-    ![Azure Data Catalog--supprimer un élément de liste](media/register-data-assets-tutorial/data-catalog-delete-list-item.png)
+   ![Azure Data Catalog--supprimer un élément de liste](media/register-data-assets-tutorial/data-catalog-delete-list-item.png)
 
-    Vous pouvez également sélectionner et supprimer plusieurs ressources de données comme indiqué dans l’image suivante :
+   Vous pouvez également sélectionner et supprimer plusieurs ressources de données comme indiqué dans l’image suivante :
 
-    ![Azure Data Catalog--supprimer plusieurs ressources de données](media/register-data-assets-tutorial/data-catalog-delete-assets.png)
+   ![Azure Data Catalog--supprimer plusieurs ressources de données](media/register-data-assets-tutorial/data-catalog-delete-assets.png)
 
 > [!NOTE]
 > Par défaut, le catalogue permet aux utilisateurs d’inscrire n’importe quelle source de données et de supprimer toutes les ressources de données préalablement inscrites. Les fonctionnalités de gestion incluses dans l’édition Standard d’Azure Data Catalog offrent des options supplémentaires qui permettent l’appropriation de ressources, ce qui limite les fonctions de découverte et de suppression des ressources à certains utilisateurs.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Procédez de la manière décrite dans [Supprimer les ressources de données](#remove-data-assets) pour nettoyer les ressources que vous avez utilisées en suivant ce tutoriel.
 
 ## <a name="summary"></a>Résumé
 

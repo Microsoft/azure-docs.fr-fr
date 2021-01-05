@@ -4,20 +4,20 @@ description: Comment préparer une image de machine virtuelle Azure existante po
 author: danis
 ms.service: virtual-machines-linux
 ms.subservice: imaging
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/24/2019
 ms.author: danis
-ms.openlocfilehash: c41368b311708d5ead36d589cf9c320787e596ec
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 6785bb1f5ebde4f746dc8aa1ea9f586f406f8431
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792307"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87373672"
 ---
 # <a name="prepare-an-existing-linux-azure-vm-image-for-use-with-cloud-init"></a>Préparer une image de machine virtuelle Azure Linux existante pour une utilisation avec cloud-init
 Cet article explique comment prendre une machine virtuelle Azure existante et la préparer pour la redéployer et utiliser cloud-init. L’image obtenue peut être utilisée pour déployer une nouvelle machine virtuelle ou des groupes de machines virtuelles identiques, qui peuvent par la suite être personnalisés par cloud-init au moment du déploiement.  Ces scripts cloud-init s’exécutent au premier démarrage une fois que les ressources ont été approvisionnées par Azure. Pour plus d’informations sur le fonctionnement de cloud-init en mode natif dans Azure et sur les versions de Linux prises en charge, consultez [Présentation de cloud-init](using-cloud-init.md)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Ce document suppose que vous disposez déjà d’une machine virtuelle Azure exécutant une version prise en charge du système d’exploitation Linux. Vous avez déjà configuré la machine en fonction de vos besoins, installé tous les modules nécessaires, traité toutes les mises à jour requises et effectué des tests pour vous assurer qu’elle répond à vos exigences. 
 
 ## <a name="preparing-rhel-76--centos-76"></a>Préparation RHEL 7.6/CentOS 7.6

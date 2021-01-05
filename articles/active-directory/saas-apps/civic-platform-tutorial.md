@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Civic Platform | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Civic Platform.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 1d790454-143e-40ac-b3cb-5a256977b4db
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 07/25/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ccf124c5a4160715df4e685e405dcd591c49ae7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 26109d4b8875dd0b442521513dbd219dc0de06e0
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68496444"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92455967"
 ---
 # <a name="tutorial-integrate-civic-platform-with-azure-active-directory"></a>Tutoriel : Intégrer Civic Platform à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Civic Platform à Azur
 * Permettre à vos utilisateurs de se connecter automatiquement à Civic Platform avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -55,16 +50,16 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 Pour configurer l’intégration de Civic Platform à Azure AD, vous devez ajouter Civic Platform depuis la galerie à votre liste d’applications SaaS gérées.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
-1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **Civic Platform** dans la zone de recherche.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory** .
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications** .
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application** .
+1. Dans la section **Ajouter à partir de la galerie** , tapez **Civic Platform** dans la zone de recherche.
 1. Sélectionnez **Civic Platform** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Configurez et testez l’authentification unique Azure AD avec Civic Platform pour un utilisateur de test nommé **B.Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur Civic Platform associé.
+Configurez et testez l’authentification unique Azure AD avec Civic Platform pour un utilisateur de test nommé **B.Simon** . Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur Civic Platform associé.
 
 Pour configurer et tester l’authentification unique (SSO) Azure AD avec Civic Platform, suivez les indications des sections ci-après :
 
@@ -79,40 +74,40 @@ Pour configurer et tester l’authentification unique (SSO) Azure AD avec Civic
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Civic Platform**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet pour **Configuration SAML de base** afin de modifier les paramètres.
+1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Civic Platform** , recherchez la section **Gérer** et sélectionnez **Authentification unique** .
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML** .
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet pour **Configuration SAML de base** afin de modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la section **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<SUBDOMAIN>.accela.com`
+    a. Dans la zone de texte **URL de connexion** , saisissez une URL au format suivant : `https://<SUBDOMAIN>.accela.com`
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL : `civicplatform.accela.com`
 
     > [!NOTE]
     > La valeur d’URL de connexion n’est pas réelle. Mettez à jour cette valeur avec l’URL de connexion réelle. Pour obtenir cette valeur, contactez [l’équipe du support Civic Platform](mailto:skale@accela.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur le bouton Copier pour copier l’**URL des métadonnées de fédération d’application**, puis enregistrez-la sur votre ordinateur.
+1. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur le bouton Copier pour copier l’ **URL des métadonnées de fédération d’application** , puis enregistrez-la sur votre ordinateur.
 
-    ![Lien Téléchargement de certificat](common/copy-metadataurl.png)
+    ![Capture d’écran montrant la page SAML Signing Certificate, où vous pouvez copier l’URL des métadonnées de fédération d’application.](common/copy-metadataurl.png)
 
 1. Accédez à **Azure Active Directory** > **Inscriptions des applications** dans Azure AD et sélectionnez votre application.
 
-1. Copier l’**ID de l’annuaire (locataire)** et stockez-le dans le Bloc-notes.
+1. Copier l’ **ID de l’annuaire (locataire)** et stockez-le dans le Bloc-notes.
 
     ![Copier l’ID du répertoire (locataire) et le stocker dans votre code d’application](media/civic-platform-tutorial/directoryid.png)
 
-1. Copiez l’**ID d’application** et stockez-le dans le Bloc-notes.
+1. Copiez l’ **ID d’application** et stockez-le dans le Bloc-notes.
 
    ![Copier l’ID d’application (client)](media/civic-platform-tutorial/applicationid.png)
 
-1. Accédez à **Azure Active Directory** > **Inscriptions des applications** dans Azure AD et sélectionnez votre application. Cliquez sur **Certificats et secrets**.
+1. Accédez à **Azure Active Directory** > **Inscriptions des applications** dans Azure AD et sélectionnez votre application. Cliquez sur **Certificats et secrets** .
 
-1. Sélectionnez **Clés secrètes client -> Nouvelle clé secrète client**.
+1. Sélectionnez **Clés secrètes client -> Nouvelle clé secrète client** .
 
-1. Fournissez une description et la durée du secret. Quand vous avez terminé, sélectionnez **Ajouter**.
+1. Fournissez une description et la durée du secret. Quand vous avez terminé, sélectionnez **Ajouter** .
 
    > [!NOTE]
    > Une fois la clé secrète client enregistrée, la valeur de la clé secrète client s’affiche. Copiez cette valeur car vous ne pourrez pas récupérer la clé ultérieurement.
@@ -125,27 +120,27 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Cliquez sur **Standard Choices** (Choix standard).
 
-    ![Lien Téléchargement de certificat](media/civic-platform-tutorial/standard-choices.png)
+    ![Capture d’écran montrant le site Atlassian Cloud avec Standard Choices mis en évidence sous Administrator Tools.](media/civic-platform-tutorial/standard-choices.png)
 
-1. Créez un choix standard **ssoconfig**.
+1. Créez un choix standard **ssoconfig** .
 
 1. Recherchez **ssoconfig** et envoyez.
 
-    ![Lien Téléchargement de certificat](media/civic-platform-tutorial/sso-config.png)
+    ![Capture d’écran montrant une recherche dans Standard Choices avec le nom « sso config ».](media/civic-platform-tutorial/sso-config.png)
 
 1. Développez SSOCONFIG en cliquant sur le point rouge.
 
-    ![Lien Téléchargement de certificat](media/civic-platform-tutorial/sso-config01.png)
+    ![Capture d’écran montrant Standard Choices Browse avec SSO CONFIG disponible.](media/civic-platform-tutorial/sso-config01.png)
 
 1. Fournissez les informations de configuration liées à l’authentification unique à l’étape suivante :
 
-    ![Lien Téléchargement de certificat](media/civic-platform-tutorial/sso-config02.png)
+    ![Capture d’écran montrant Standard Choices - Item Edit pour SSO CONFIG.](media/civic-platform-tutorial/sso-config02.png)
 
-    1. Dans le champ **applicationid**, entrez la valeur de l’**ID d’application** que vous avez copiée à partir du portail Azure.
+    1. Dans le champ **applicationid** , entrez la valeur de l’ **ID d’application** que vous avez copiée à partir du portail Azure.
 
-    1. Dans le champ **clientSecret**, entrez la valeur du **Secret** que vous avez copiée à partir du portail Azure.
+    1. Dans le champ **clientSecret** , entrez la valeur du **Secret** que vous avez copiée à partir du portail Azure.
 
-    1. Dans le champ **directoryId**, entrez la valeur de l’**ID de l’annuaire (locataire)** que vous avez copiée à partir du portail Azure.
+    1. Dans le champ **directoryId** , entrez la valeur de l’ **ID de l’annuaire (locataire)** que vous avez copiée à partir du portail Azure.
 
     1. Entrez le idpName. Par exemple : `Azure`.
 
@@ -153,31 +148,31 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs** .
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
-   1. Cliquez sur **Créer**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe** .
+   1. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Civic Platform.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
-1. Dans la liste des applications, sélectionnez **Civic Platform**.
-1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications** .
+1. Dans la liste des applications, sélectionnez **Civic Platform** .
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes** .
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ### <a name="create-civic-platform-test-user"></a>Créer un utilisateur de test Civic Platform
 
@@ -187,13 +182,12 @@ Dans cette section, vous créez un utilisateur appelé B.Simon dans Civic Platfo
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Civic Platform dans le volet d’accès, vous devez être automatiquement connecté à l’application Civic Platform pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Civic Platform dans le volet d’accès, vous devez être automatiquement connecté à l’application Civic Platform pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 507afad294e8233ea4de4130795f29925870fcdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7323ae611431e1d91fd1a8471914be388fcc4712
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74888051"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92019509"
 ---
 # <a name="azure-media-services-fragmented-mp4-live-ingest-specification"></a>Spécification d’ingestion en direct au format MP4 fragmenté Azure Media Services 
 
@@ -39,7 +39,7 @@ Le diagramme suivant illustre l’architecture générale du service de streamin
 ![Flux d’ingestion][image1]
 
 ## <a name="3-bitstream-format--iso-14496-12-fragmented-mp4"></a>3. Format de flux binaire – MP4 fragmenté ISO 14496-12
-Le format câble utilisé pour l’ingestion du streaming en direct décrite dans ce document repose sur la norme [ISO 14496-12]. Pour obtenir une explication détaillée du format MP4 fragmenté et des extensions de fichiers vidéo à la demande et d’ingestion de streaming en direct, consultez [[MS-SSTR]](https://msdn.microsoft.com/library/ff469518.aspx).
+Le format câble utilisé pour l’ingestion du streaming en direct décrite dans ce document repose sur la norme [ISO 14496-12]. Pour obtenir une explication détaillée du format MP4 fragmenté et des extensions de fichiers vidéo à la demande et d’ingestion de streaming en direct, consultez [[MS-SSTR]](/openspecs/windows_protocols/ms-sstr/8383f27f-7efe-4c60-832a-387274457251).
 
 ### <a name="live-ingest-format-definitions"></a>Définitions de format de réception en temps réel
 La liste suivante décrit des définitions de formats spéciaux qui s’appliquent à l’ingestion en direct dans Azure Media Services :
@@ -48,7 +48,7 @@ La liste suivante décrit des définitions de formats spéciaux qui s’applique
 1. La section 3.3.2 dans [1] définit une zone facultative appelée **StreamManifestBox** pour l’ingestion en direct. En raison de la logique de routage de l’équilibreur de charge Azure, l’utilisation de cette zone est dépréciée. La zone NE DOIT PAS être présente au moment de l’ingestion dans Media Services. Si cette zone est présente, Media Services l’ignore en mode silencieux.
 1. La zone **TrackFragmentExtendedHeaderBox** définie à la section 3.2.3.2 dans [1] doit être présente pour chaque fragment.
 1. La version 2 de la zone **TrackFragmentExtendedHeaderBox** DOIT être utilisée pour générer des segments de médias ayant des URL identiques dans plusieurs centres de données. Le champ d’index de fragment est OBLIGATOIRE pour le basculement entre centres de données des formats de streaming basé sur les index comme Apple HLS et MPEG-DASH basée sur les index. Pour permettre un basculement entre centres de données, l’index de fragment DOIT être synchronisé entre plusieurs encodeurs et être augmenté de 1 pour chaque fragment multimédia successif, même entre les redémarrages ou échecs de l’encodeur.
-1. La section 3.3.6 dans [1] définit la zone appelée **MovieFragmentRandomAccessBox** (**mfra**) qui PEUT être envoyée à la fin de la réception en direct pour indiquer la fin du flux (EOS, End-of-Stream) au canal. En raison de la logique d’ingestion d’Azure Media Services, l’utilisation d’EOS est dépréciée et la zone **mfra** pour l’ingestion en direct ne DOIT PAS être envoyée. Si elle l’est, Media Services l’ignore en mode silencieux. Pour réinitialiser l’état du point d’ingestion, nous vous recommandons d’utiliser la [réinitialisation de canal](https://docs.microsoft.com/rest/api/media/operations/channel#reset_channels). Nous vous recommandons également d’utiliser [l’arrêt de programme](https://msdn.microsoft.com/library/azure/dn783463.aspx#stop_programs) pour terminer une présentation et un flux.
+1. La section 3.3.6 dans [1] définit la zone appelée **MovieFragmentRandomAccessBox** (**mfra**) qui PEUT être envoyée à la fin de la réception en direct pour indiquer la fin du flux (EOS, End-of-Stream) au canal. En raison de la logique d’ingestion d’Azure Media Services, l’utilisation d’EOS est dépréciée et la zone **mfra** pour l’ingestion en direct ne DOIT PAS être envoyée. Si elle l’est, Media Services l’ignore en mode silencieux. Pour réinitialiser l’état du point d’ingestion, nous vous recommandons d’utiliser la [réinitialisation de canal](/rest/api/media/operations/channel#reset_channels). Nous vous recommandons également d’utiliser [l’arrêt de programme](/rest/api/media/operations/program#stop_programs) pour terminer une présentation et un flux.
 1. La durée du fragment MP4 DOIT être une constante, pour réduire la taille des manifestes de client. En outre, une durée de fragment MP4 constante améliore la méthode heuristique de téléchargement client par le biais de l’utilisation de balises de répétition. La durée PEUT varier pour compenser les fréquences d’images non entières.
 1. La durée du fragment MP4 DOIT être comprise entre environ 2 et 6 secondes.
 1. Les horodatages et index du fragment MP4 (**TrackFragmentExtendedHeaderBox** `fragment_ absolute_ time` et `fragment_index`) DOIVENT normalement arriver dans l’ordre croissant. Bien que Media Services ne duplique pas les fragments, il est capable, de façon limitée, de réorganiser les fragments en fonction de la chronologie du média.
@@ -56,7 +56,7 @@ La liste suivante décrit des définitions de formats spéciaux qui s’applique
 ## <a name="4-protocol-format--http"></a>4. Format de protocole – HTTP
 L’ingestion en direct basée sur le format MP4 fragmenté ISO pour Media Services utilise une longue requête HTTP POST standard pour transmettre au service des données multimédias encodées qui sont empaquetées au format MP4 fragmenté. Chaque requête HTTP POST envoie un flux binaire (« stream ») MP4 fragmenté en commençant par les zones d’en-tête (zones **ftyp**, **Live Server Manifest Box** et **moov**) et en continuant avec une séquence de fragments (zones **moof** et **mdat**). Pour connaître la syntaxe URL de la requête HTTP POST, consultez la section 9.2 dans [1]. Voici un exemple d'URL POST : 
 
-    http://customer.channel.mediaservices.windows.net/ingest.isml/streams(720p)
+`http://customer.channel.mediaservices.windows.net/ingest.isml/streams(720p)`
 
 ### <a name="requirements"></a>Spécifications
 Voici les spécifications détaillées :
@@ -70,7 +70,7 @@ Voici les spécifications détaillées :
 1. Si la requête HTTP POST s’arrête ou expire avec une erreur TCP avant la fin du flux, l’encodeur DOIT émettre une nouvelle requête POST à l’aide d’une nouvelle connexion et suivre les exigences précédentes. En outre, l’encodeur DOIT renvoyer les deux fragments MP4 précédents pour chaque piste dans le flux et reprendre sans introduire de discontinuité dans la chronologie du média. Le renvoi des deux derniers fragments MP4 pour chaque piste garantit l'absence de perte de données. En d’autres termes, si un flux contient à la fois une piste audio et vidéo, et si la requête POST en cours échoue, l’encodeur doit se reconnecter et renvoyer les deux derniers fragments de la piste audio, lesquels ont déjà été envoyés correctement, ainsi que les deux derniers fragments de la piste vidéo, lesquels ont déjà été envoyés correctement, pour garantir l’absence de perte de données. L’encodeur DOIT conserver un tampon « de transfert » des fragments multimédias, qu’il renvoie quand il se reconnecte.
 
 ## <a name="5-timescale"></a>5. Échelle de temps
-[MS-SSTR](https://msdn.microsoft.com/library/ff469518.aspx) décrit l’utilisation de l’échelle de temps pour **SmoothStreamingMedia** (section 2.2.2.1), **StreamElement** (section 2.2.2.3), **StreamFragmentElement** (section 2.2.2.6) et **LiveSMIL** (section 2.2.7.3.1). Si la valeur de l’échelle de temps n’est pas présente, la valeur par défaut utilisée est 10 000 000 (10 MHz). Bien que la spécification du format Smooth Streaming ne bloque pas l’utilisation d’autres valeurs d’échelle de temps, la plupart des implémentations de l’encodeur utilisent cette valeur par défaut (10 MHz) pour générer les données d’ingestion Smooth Streaming. En raison de la fonctionnalité [Azure Media Dynamic Packaging](media-services-dynamic-packaging-overview.md), nous vous recommandons d’utiliser une échelle de temps de 90 kHz pour les flux vidéos et de 44,1 kHz ou de 48,1 kHz pour les flux audio. Si des valeurs d’échelle de temps différentes sont utilisées pour des flux différents, l’échelle de temps au niveau du flux DOIT être envoyée. Pour plus d’informations, consultez [[MS-SSTR]](https://msdn.microsoft.com/library/ff469518.aspx).     
+[MS-SSTR](/openspecs/windows_protocols/ms-sstr/8383f27f-7efe-4c60-832a-387274457251) décrit l’utilisation de l’échelle de temps pour **SmoothStreamingMedia** (section 2.2.2.1), **StreamElement** (section 2.2.2.3), **StreamFragmentElement** (section 2.2.2.6) et **LiveSMIL** (section 2.2.7.3.1). Si la valeur de l’échelle de temps n’est pas présente, la valeur par défaut utilisée est 10 000 000 (10 MHz). Bien que la spécification du format Smooth Streaming ne bloque pas l’utilisation d’autres valeurs d’échelle de temps, la plupart des implémentations de l’encodeur utilisent cette valeur par défaut (10 MHz) pour générer les données d’ingestion Smooth Streaming. En raison de la fonctionnalité [Azure Media Dynamic Packaging](./previous/media-services-dynamic-packaging-overview.md), nous vous recommandons d’utiliser une échelle de temps de 90 kHz pour les flux vidéos et de 44,1 kHz ou de 48,1 kHz pour les flux audio. Si des valeurs d’échelle de temps différentes sont utilisées pour des flux différents, l’échelle de temps au niveau du flux DOIT être envoyée. Pour plus d’informations, consultez [[MS-SSTR]](/openspecs/windows_protocols/ms-sstr/8383f27f-7efe-4c60-832a-387274457251).     
 
 ## <a name="6-definition-of-stream"></a>6. Définition de « stream »
 Stream est l’unité de base de l’opération dans l’ingestion en direct pour rédiger les présentations en direct, gérer le basculement du streaming et les scénarios de redondance. Stream se définit comme un seul flux binaire MP4 fragmenté pouvant contenir une piste unique ou plusieurs pistes. Une présentation en direct complète peut contenir un ou plusieurs flux, selon la configuration des encodeurs en direct. Les exemples suivants illustrent les différentes options d’utilisation des flux pour rédiger une présentation en direct.

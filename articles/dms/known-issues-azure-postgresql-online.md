@@ -3,8 +3,8 @@ title: 'Problèmes connus : Migrations en ligne de PostgreSQL vers Azure Databa
 titleSuffix: Azure Database Migration Service
 description: Découvrez les problèmes connus et les limitations relatifs aux migrations en ligne de PostgreSQL vers Azure Database pour PostgreSQL à l’aide d’Azure Database Migration Service.
 services: database-migration
-author: HJToland3
-ms.author: jtoland
+author: arunkumarthiags
+ms.author: arthiaga
 manager: craigg
 ms.reviewer: craigg
 ms.service: dms
@@ -12,14 +12,14 @@ ms.workload: data-services
 ms.custom:
 - seo-lt-2019
 - seo-dt-2019
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 02/20/2020
-ms.openlocfilehash: 3d1bc627ccb8814ab2dfb61fb0653ef0ac644038
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c3c1d28a7fbb3e3c9c449feb03a75d48178b718
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80235262"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97609035"
 ---
 # <a name="known-issuesmigration-limitations-with-online-migrations-from-postgresql-to-azure-db-for-postgresql"></a>Problèmes connus et limitations concernant les migrations en ligne de PostgreSQL vers Azure DB pour PostgreSQL
 
@@ -38,8 +38,8 @@ Les sections suivantes décrivent les problèmes connus et limitations associés
   2. Ajoutez l’adresse IP dans le fichier pg_hba.conf comme indiqué :
 
       ```
-          host  all     172.16.136.18/10    md5
-          host  replication postgres    172.16.136.18/10    md5
+          host    all    172.16.136.18/10    md5
+          host    replication postgres    172.16.136.18/10     md5
       ```
 
 - L’utilisateur doit disposer du rôle REPLICATION sur le serveur qui héberge la base de données source.
@@ -47,7 +47,7 @@ Les sections suivantes décrivent les problèmes connus et limitations associés
 - Le schéma de la base de données cible dans Azure Database pour PostgreSQL - Serveur unique ne doit pas inclure de clés étrangères. Pour supprimer les clés étrangères, utilisez la requête suivante :
 
     ```
-                                SELECT Queries.tablename
+                  SELECT Queries.tablename
            ,concat('alter table ', Queries.tablename, ' ', STRING_AGG(concat('DROP CONSTRAINT ', Queries.foreignkey), ',')) as DropQuery
                 ,concat('alter table ', Queries.tablename, ' ', 
                                                 STRING_AGG(concat('ADD CONSTRAINT ', Queries.foreignkey, ' FOREIGN KEY (', column_name, ')', 'REFERENCES ', foreign_table_name, '(', foreign_column_name, ')' ), ',')) as AddQuery
@@ -81,6 +81,8 @@ Les sections suivantes décrivent les problèmes connus et limitations associés
     SELECT Concat('DROP TRIGGER ', Trigger_Name, ';') FROM  information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = 'your_schema';
      ```
 
+## <a name="size-limitations"></a>Limitations de taille
+- Vous pouvez migrer jusqu’à 2 To de données de PostgreSQL vers Azure DB pour PostgreSQL à l’aide d’un seul service DMS.
 ## <a name="datatype-limitations"></a>Limitations relatives au type de données
 
   **Limitation** : S’il n’existe aucune clé primaire pour les tables, les modifications risquent de ne pas être synchronisées avec la base de données cible.
@@ -94,13 +96,13 @@ Lorsque vous essayez d’effectuer une migration en ligne depuis AWS RDS Postgre
 - **Erreur** : La valeur par défaut de la colonne '{colonne}' dans la table '{table}' de la base de données '{base de données}' est différente sur les serveurs source et cible. Elle est '{valeur sur la source}' sur la source et '{valeur sur la cible}' sur la cible.
 
   **Limitation** : Cette erreur se produit quand la valeur par défaut sur un schéma de colonne est différente entre les bases de données source et cible.
-  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema).
+  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](./tutorial-postgresql-azure-postgresql-online.md#migrate-the-sample-schema).
 
 - **Erreur** : La base de données cible '{base de données}' a '{nombre de tables}' tables alors que la base de données source '{base de données}' en a '{nombre de tables}'. Les bases de données source et cible doivent avoir le même nombre de tables.
 
   **Limitation** : Cette erreur se produit quand le nombre de tables est différent entre les bases de données source et cible.
 
-  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema).
+  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](./tutorial-postgresql-azure-postgresql-online.md#migrate-the-sample-schema).
 
 - **Erreur :** La base de données source {database} est vide.
 
@@ -111,7 +113,7 @@ Lorsque vous essayez d’effectuer une migration en ligne depuis AWS RDS Postgre
 - **Erreur :** La base de données cible {database} est vide. Migrez le schéma.
 
   **Limitation** : Cette erreur se produit quand il n’y a pas de schéma dans la base de données cible. Vérifiez que le schéma sur la cible correspond au schéma sur la source.
-  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema).
+  **Solution de contournement** : Vérifiez que le schéma sur la cible correspond au schéma sur la source. Pour en savoir plus sur la migration de schéma, reportez-vous à la [documentation sur la migration en ligne Azure PostgreSQL](./tutorial-postgresql-azure-postgresql-online.md#migrate-the-sample-schema).
 
 ## <a name="other-limitations"></a>Autres limitations
 

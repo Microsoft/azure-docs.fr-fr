@@ -15,7 +15,7 @@
     - name: API REST
       expanded: true
       items:
-        - name: 'Utilisation de C#'
+        - name: Utilisation de C#
           href: quickstarts/local-quickstart.md
         - name: Utilisation de Java
           href: quickstarts/local-search-java-quickstart.md
@@ -41,7 +41,7 @@
 - name: Ressources
   items:
     - name: Essayez Cognitive Services
-      href: 'https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api'
+      href: 'https://azure.microsoft.com/free/cognitive-services'
     - name: Informations sur la tarification
       href: 'https://azure.microsoft.com/pricing/details/cognitive-services/search-api/'
     - name: Conformité

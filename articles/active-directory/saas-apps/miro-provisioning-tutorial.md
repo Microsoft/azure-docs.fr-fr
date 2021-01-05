@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Miro pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur Miro.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 81eecaff-d888-472b-a1c2-0b7b0c9ccd8d
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/21/2019
 ms.author: Zhchia
-ms.openlocfilehash: b7e1907e3fa1eb9d775fb7662445b08d5671e0b6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d3dee76ada7a9ed48813928937f8f8da8be4add1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77063408"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348039"
 ---
 # <a name="tutorial-configure-miro-for-automatic-user-provisioning"></a>Tutoriel : Configurer Miro pour l’attribution automatique d’utilisateurs
 
@@ -83,7 +79,7 @@ Avant de configurer Miro pour l’approvisionnement automatique d’utilisateurs
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Miro en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Miro en suivant les instructions fournies dans le [didacticiel sur l’authentification unique pour Miro](https://docs.microsoft.com/azure/active-directory/saas-apps/miro-tutorial). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Miro en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Miro](./miro-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 > [!NOTE]
 > Pour en savoir plus sur le point de terminaison SCIM de Miro, reportez-vous à ce [document](https://help.miro.com/hc/en-us/articles/360036777814).
@@ -100,11 +96,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://miro.com/api/v1/scim` dans **URL de locataire**. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Miro. Si la connexion échoue, vérifiez que votre compte Miro dispose des autorisations d’administrateur et réessayez.
 
@@ -152,7 +148,7 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 
 ## <a name="connector-limitations"></a>Limitations du connecteur
 
-* Le point de terminaison SCIM Miro ne permet pas les opérations **Créer**et **Supprimer** sur les groupes. Il prend uniquement en charge l’opération **Mettre à jour**.
+* Le point de terminaison SCIM Miro ne permet pas les opérations **Créer** et **Supprimer** sur les groupes. Il prend uniquement en charge l’opération **Mettre à jour**.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -162,4 +158,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

@@ -8,18 +8,18 @@ author: asudbring
 keywords: IPv6, équilibreur de charge azure, double pile, adresse ip publique, ipv6 natif, mobile, iot
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
 ms.author: allensu
-ms.openlocfilehash: eb9703a1944a650f41d76c05d79764f8bdf8cd52
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 415c95a441ac0cc6ed2dbf2d6a37f57d7a9e7341
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76045453"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90562517"
 ---
 # <a name="deploy-an-internet-facing-load-balancer-solution-with-ipv6-using-a-template"></a>Déployer une solution d’équilibrage de charge sur Internet avec IPv6, à l’aide d’un modèle
 
@@ -38,7 +38,7 @@ Un équilibrage de charge Azure est de type Couche 4 (TCP, UDP). L’équilibra
 
 Le diagramme suivant illustre la solution d’équilibrage de charge déployée à l’aide de l’exemple de modèle décrit dans cet article.
 
-![Scénario d’équilibreur de charge](./media/load-balancer-ipv6-internet-template/lb-ipv6-scenario.png)
+![Le diagramme montre un exemple de scénario utilisé dans cet article, comprenant une station de travail cliente connectée à un équilibreur de charge Azure via Internet, connecté à son tour à deux machines virtuelles.](./media/load-balancer-ipv6-internet-template/lb-ipv6-scenario.png)
 
 Dans ce scénario, vous allez créer les ressources Azure suivantes :
 
@@ -55,43 +55,43 @@ Cet article fait référence à un modèle publié dans la galerie [Modèles de 
 1. Ouvrez le portail Azure, et connectez-vous avec un compte disposant des autorisations pour créer les machines virtuelles et les ressources de réseau au sein d’un abonnement Azure. En outre, sauf si vous utilisez des ressources existantes, le compte requiert une autorisation pour créer un groupe de ressources et un compte de stockage.
 2. Cliquez sur « +Nouveau » dans le menu, puis saisissez « modèle » dans la zone de recherche. Sélectionnez « Déploiement de modèle » dans les résultats de recherche.
 
-    ![lb-ipv6-portal-step2](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step2.png)
+    ![La capture d’écran montre le portail Azure avec les éléments Nouveau et Déploiement de modèle sélectionnés.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step2.png)
 
 3. Dans le panneau Tout, cliquez sur « Déploiement de modèle ».
 
-    ![lb-ipv6-portal-step3](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step3.png)
+    ![La capture d’écran montre Déploiement de modèle dans la place de marché.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step3.png)
 
 4. Cliquez sur « Créer ».
 
-    ![lb-ipv6-portal-step4](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step4.png)
+    ![La capture d’écran montre la description de Déploiement de modèle dans la place de marché.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step4.png)
 
 5. Cliquez sur « Modifier le modèle ». Supprimez le contenu existant et copiez/collez dans le contenu intégral du fichier de modèle (afin d’inclure les symboles { } de début et de fin), puis cliquez sur « Enregistrer ».
 
     > [!NOTE]
     > Si vous utilisez Microsoft Internet Explorer, lorsque vous procédez au collage, vous recevez une boîte de dialogue vous demandant d’autoriser l’accès au Presse-papiers Windows. Click « Autoriser l’accès ».
 
-    ![lb-ipv6-portal-step5](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step5.png)
+    ![La capture d’écran montre l’étape la plus active d’un déploiement personnalisé, qui consiste à modifier le modèle.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step5.png)
 
 6. Cliquez sur « Modifier les paramètres ». Dans le panneau Paramètres, spécifiez les valeurs suivant les instructions de la section Paramètres de modèle, puis cliquez sur « Enregistrer » pour fermer le volet Paramètres. Dans le volet Déploiement personnalisé, sélectionnez votre abonnement, un groupe de ressource existant, ou créez-en un. Si vous créez un groupe de ressources, sélectionnez un emplacement dédié. Ensuite, cliquez sur **Conditions juridiques**, puis sur **Achat** pour consulter les conditions juridiques. Azure commence le déploiement des ressources. Le déploiement de l’intégralité des ressources prend plusieurs minutes.
 
-    ![lb-ipv6-portal-step6](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step6.png)
+    ![La capture d’écran montre les étapes impliquées dans le déploiement personnalisé, en commençant par la saisie des valeurs des paramètres de modèle.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step6.png)
 
     Pour plus d’informations sur ces paramètres, consultez la section [Paramètres et variables de modèle](#template-parameters-and-variables) , plus loin dans cet article.
 
 7. Pour consulter les ressources créées par le modèle, cliquez sur Parcourir, faites défiler la liste vers le bas jusqu’à ce que « Groupes de ressources » apparaisse, puis cliquez dessus.
 
-    ![lb-ipv6-portal-step7](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step7.png)
+    ![La capture d’écran montre le portail Azure avec les éléments Parcourir et Groupes de ressources sélectionnés.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step7.png)
 
 8. Dans le volet Groupes de ressources, cliquez sur le nom spécifié à l’étape 6. L’ensemble des ressources déployées s’affichent. Si tout s’est bien passé, la mention « Réussi » apparaît en regard de « Dernier déploiement ». Dans le cas contraire, assurez-vous que le compte utilisé dispose des autorisations pour créer les ressources nécessaires.
 
-    ![lb-ipv6-portal-step8](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step8.png)
+    ![La capture d’écran affiche l’état du dernier déploiement d’un groupe de ressources, dans cet exemple, Réussi.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step8.png)
 
     > [!NOTE]
     > Si vous accédez directement à vos groupes de ressources après avoir suivi l’étape 6, « Dernier déploiement » comporte la mention « Déploiement en cours » pendant le déploiement des ressources.
 
 9. Cliquez sur « myIPv6PublicIP » dans la liste des ressources. Vous voyez que cet élément comporte une adresse IPv6 sous l’adresse IP, et que son nom DNS est la valeur spécifiée pour le paramètre dnsNameforIPv6LbIP à l’étape 6. Cette ressource est l’adresse IPv6 publique et le nom d’hôte qui sont accessibles aux clients Internet.
 
-    ![lb-ipv6-portal-step9](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step9.png)
+    ![La capture d’écran montre l’adresse publique IPv6.](./media/load-balancer-ipv6-internet-template/lb-ipv6-portal-step9.png)
 
 ## <a name="validate-connectivity"></a>Valider la connectivité
 

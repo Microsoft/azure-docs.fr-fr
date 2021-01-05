@@ -1,6 +1,6 @@
 ---
 title: Méthodes de création de certificats
-description: Modes de création d’un certificat dans Key Vault.
+description: Découvrez les différentes options permettant de créer ou d’importer un certificat Key Vault dans Azure Key Vault. Il existe plusieurs façons de créer un certificat de Key Vault.
 services: key-vault
 author: msmbaldwin
 manager: rkarlin
@@ -10,12 +10,12 @@ ms.subservice: certificates
 ms.topic: conceptual
 ms.date: 01/07/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 7450dd79247078afe02d1bb63727cfd260d674fc
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a9545c040809331a5556b11f6cc7536931e2d421
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81866250"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289582"
 ---
 # <a name="certificate-creation-methods"></a>Méthodes de création de certificats
 
@@ -82,7 +82,7 @@ La création du certificat peut être effectuée manuellement ou à l’aide d�
 
 |Fournisseur|Type de certificat|Configuration  
 |--------------|----------------------|------------------|  
-|DigiCert|Key Vault propose des certificats SSL OV ou EV avec DigiCert| [Guide d’intégration](https://docs.digicert.com/certificate-tools/azure-key-vault-integration-guide/)
+|DigiCert|Key Vault propose des certificats SSL OV ou EV avec DigiCert| [Guide d’intégration](./how-to-integrate-certificate-authority.md)
 |GlobalSign|Key Vault propose des certificats SSL OV ou EV avec GlobalSign| [Guide d’intégration](https://support.globalsign.com/digital-certificates/digital-certificate-installation/generating-and-importing-certificate-microsoft-azure-key-vault)
 
  L’émetteur de certificat est une entité représentée dans Azure Key Vault (KV) en tant que ressource CertificateIssuer. Il fournit des informations sur la source d’un certificat KV, ainsi que le nom de l’émetteur, le fournisseur, les informations d’identification et d’autres détails administratifs.
@@ -91,6 +91,6 @@ Notez que lorsqu’une commande est passée auprès du fournisseur émetteur, el
 
  Autorisation : nécessite l’autorisation de création/certificats.
 
-## <a name="see-also"></a> Voir aussi
+## <a name="see-also"></a>Voir aussi
 
  - [Surveiller et gérer la création de certificats](create-certificate-scenarios.md)

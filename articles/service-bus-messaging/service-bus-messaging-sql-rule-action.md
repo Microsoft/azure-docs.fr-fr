@@ -1,31 +1,19 @@
 ---
-title: Référence relative à la syntaxe SQLRuleAction dans Azure Service Bus
-description: Cet article fournit une référence relative à la syntaxe SQLRuleAction. Les actions sont écrites dans une syntaxe basée sur le langage SQL exécutée sur un message réparti.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: ''
-ms.service: service-bus-messaging
-ms.devlang: na
+title: Syntaxe d’action SQL pour les règles d’abonnement Azure Service Bus | Microsoft Docs
+description: Cet article fournit une référence pour la syntaxe d’action des règles SQL. Les actions sont écrites dans une syntaxe basée sur le langage SQL exécutée sur un message.
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 37615e39577ef60cccc9df91b61a6aa24ca794d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/24/2020
+ms.openlocfilehash: 7ce3332fb1a2025e89135e5e42e72d4afe1e7a5e
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76759626"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96489392"
 ---
-# <a name="sqlruleaction-syntax-reference-for-azure-service-bus"></a>Référence relative à la syntaxe SQLRuleAction pour Azure Service Bus
+# <a name="subscription-rule-sql-action-syntax"></a>Syntaxe d’action SQL pour les règles d’abonnement
 
-*SqlRuleAction* est une instance de la classe [SqlRuleAction](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction) et représente un ensemble d’actions écrites selon une syntaxe basée sur le langage SQL effectuées par rapport à un [BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage).   
+Une *action SQL* permet de manipuler les métadonnées d’un message après qu’un message a été sélectionné par un filtre d’une règle d’abonnement. Il s’agit d’une expression textuelle qui s’appuie sur un sous-ensemble de la norme SQL-92. Les expressions d’action sont utilisées avec l’élément `sqlExpression` de la propriété « action » d’un objet `Rule` Service Bus dans un [modèle Azure Resource Manager](service-bus-resource-manager-namespace-topic-with-rule.md), avec l’argument [`--action-sql-expression`](/cli/azure/servicebus/topic/subscription/rule?preserve-view=true&view=azure-cli-latest#az_servicebus_topic_subscription_rule_create) de la commande Azure CLI `az servicebus topic subscription rule create` et avec plusieurs fonctions de Kit de développement logiciel (SDK) qui autorisent la gestion des règles d’abonnement.
   
-Cet article répertorie les informations relatives à la syntaxe de l’action de règle SQL.  
   
 ```  
 <statements> ::=
@@ -67,7 +55,7 @@ Cet article répertorie les informations relatives à la syntaxe de l’action d
   
 -   `<scope>` est une chaîne facultative qui indique la portée de `<property_name>`. Les valeurs valides sont `sys` ou `user`. La valeur `sys` indique la portée du système où `<property_name>` est un nom de propriété publique de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). `user` indique la portée de l’utilisateur où `<property_name>` est une clé du dictionnaire de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). La portée de l’`user` est l’étendue par défaut si `<scope>` n’est pas défini.  
   
-### <a name="remarks"></a>Notes  
+### <a name="remarks"></a>Remarques  
 
 Une tentative d’accès à une propriété inexistante du système est une erreur, tandis qu’une tentative d’accès à une propriété d’utilisateur inexistante n’est pas une erreur. Au lieu de cela, une propriété d’utilisateur inexistante est évaluée en interne en tant que valeur inconnue. Une valeur inconnue est traitée spécialement lors de l’évaluation de l’opérateur.  
   
@@ -119,7 +107,7 @@ Une tentative d’accès à une propriété inexistante du système est une erre
       <expression>  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
  `<pattern>` doit être une expression évaluée comme chaîne. Il est utilisé comme modèle pour l’opérateur LIKE.      Il peut contenir les caractères génériques suivants :  
   
@@ -134,7 +122,7 @@ Une tentative d’accès à une propriété inexistante du système est une erre
       <expression>  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
  `<escape_char>` doit être une expression évaluée comme chaîne dont la longueur est 1. Il est utilisé comme caractère d’échappement pour l’opérateur LIKE.  
   
@@ -183,7 +171,7 @@ Une tentative d’accès à une propriété inexistante du système est une erre
       TRUE | FALSE  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
 Les constantes booléennes sont représentées par les mots clés `TRUE` ou `FALSE`. Les valeurs sont stockées en tant que `System.Boolean`.  
   
@@ -193,7 +181,7 @@ Les constantes booléennes sont représentées par les mots clés `TRUE` ou `FAL
 <string_constant>  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
 Les constantes de chaîne sont placées entre guillemets simples et incluent tout caractère Unicode valide. Un guillemet simple intégré à une constante de chaîne est représenté par deux guillemets simples.  
   
@@ -205,7 +193,7 @@ Les constantes de chaîne sont placées entre guillemets simples et incluent tou
       property(name) | p(name)  
 ```  
   
-### <a name="remarks"></a>Notes  
+### <a name="remarks"></a>Remarques  
 
 La fonction `newid()` renvoie un **System.Guid** généré par la méthode `System.Guid.NewGuid()`.  
   
@@ -222,5 +210,9 @@ La fonction `property(name)` renvoie la valeur de la propriété référencée p
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Classe SQLRuleAction](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction)
-- [Classe SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sqlfilter)
+- [Classe SQLRuleAction (.NET Framework)](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction)
+- [Classe SQLRuleAction (.NET Standard)](/dotnet/api/microsoft.azure.servicebus.sqlruleaction)
+- [Classe SqlRuleAction (Java)](/java/api/com.microsoft.azure.servicebus.rules.sqlruleaction)
+- [SqlRuleAction (JavaScript)](/javascript/api/@azure/service-bus/sqlruleaction)
+- [az servicebus topic subscription rule](/cli/azure/servicebus/topic/subscription/rule)
+- [New-AzServiceBusRule](/powershell/module/az.servicebus/new-azservicebusrule)

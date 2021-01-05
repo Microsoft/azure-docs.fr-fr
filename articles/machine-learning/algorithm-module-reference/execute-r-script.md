@@ -1,26 +1,26 @@
 ---
-title: 'Exécuter un script R : Informations de référence sur les modules'
+title: 'Exécuter un script R : sur le module Modifier les métadonnées'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Exécuter un script R dans Azure Machine Learning pour exécuter du code R.
+description: Découvrez comment utiliser le module Exécuter un script R dans le concepteur Azure Machine Learning pour exécuter du code R personnalisé.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 03/10/2020
-ms.openlocfilehash: eb778c8d24639320b60927438de76a29de724ac2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 12/02/2020
+ms.openlocfilehash: 57b4b6f3f49e9b82ada4b37c8e2de0697781e063
+ms.sourcegitcommit: df66dff4e34a0b7780cba503bb141d6b72335a96
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81684709"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96510588"
 ---
-# <a name="execute-r-script"></a>Exécuter un script R
+# <a name="execute-r-script-module"></a>Module Exécuter un script R
 
-Cet article explique comment utiliser le module **Exécuter un script R** pour exécuter du code R dans votre pipeline de concepteur Azure Machine Learning (préversion).
+Cet article explique comment utiliser le module Exécuter un script R pour exécuter du code R dans votre pipeline de concepteur Azure Machine Learning.
 
-R vous permet d’exécuter des tâches qui ne sont actuellement pas prises en charge par les modules existants, telles que : 
+R vous permet d'effectuer des tâches qui ne sont pas prises en charge par les modules existants, telles que : 
 - Créer des transformations de données personnalisées
 - Utiliser vos propres métriques pour évaluer des prédictions
 - Générer des modèles à l’aide d’algorithmes qui ne sont pas implémentés en tant que modules autonomes dans le concepteur
@@ -31,9 +31,9 @@ Le concepteur Azure Machine Learning utilise la distribution CRAN (Comprehensive
 
 ## <a name="supported-r-packages"></a>Packages R pris en charge
 
-L’environnement R est préinstallé avec plus de 100 packages. Pour obtenir la liste complète, consultez la section [Packages R préinstallés](#pre-installed-r-packages).
+L’environnement R est préinstallé avec plus de 100 packages. Pour obtenir la liste complète, consultez la section [Packages R préinstallés](#preinstalled-r-packages).
 
-Vous pouvez également ajouter le code suivant à tout module **Exécuter un script R** pour afficher les packages installés.
+Vous pouvez également ajouter le code suivant à tout module Exécuter un script R pour afficher les packages installés.
 
 ```R
 azureml_main <- function(dataframe1, dataframe2){
@@ -42,9 +42,11 @@ azureml_main <- function(dataframe1, dataframe2){
   return(list(dataset1=dataframe1, dataset2=dataframe2))
 }
 ```
+> [!NOTE]
+> Si votre pipeline contient plusieurs modules Execute R Script et que vous avez besoin de packages qui ne figurent pas dans la liste préinstallée, installez les packages dans chaque module. 
 
 ## <a name="installing-r-packages"></a>Installation des packages R
-Pour installer des packages R supplémentaires, utilisez la méthode `install.packages()`. Les packages sont installés pour chaque module **Exécuter un script R** et ne sont pas partagés entre d’autres modules **Exécuter un script R** .
+Pour installer des packages R supplémentaires, utilisez la méthode `install.packages()`. Les packages sont installés pour chaque module Exécuter un script R. Elles ne sont pas partagées entre les autres modules Exécuter un script R.
 
 > [!NOTE]
 > Spécifiez le référentiel CRAN lors de l’installation de packages, par exemple : `install.packages("zoo",repos = "http://cran.us.r-project.org")`.
@@ -52,12 +54,12 @@ Pour installer des packages R supplémentaires, utilisez la méthode `install.p
 Cet exemple montre comment installer Zoo :
 ```R
 # R version: 3.5.1
-# The script MUST contain a function named azureml_main
+# The script MUST contain a function named azureml_main,
 # which is the entry point for this module.
 
-# Please note that functions dependant on X11 library
-# such as "View" are not supported because X11 library
-# is not pre-installed.
+# Note that functions dependent on the X11 library,
+# such as "View," are not supported because the X11 library
+# is not preinstalled.
 
 # The entry point function MUST have two input arguments.
 # If the input port is not connected, the corresponding
@@ -74,27 +76,29 @@ azureml_main <- function(dataframe1, dataframe2){
 }
 ```
  > [!NOTE]
-  > Vérifiez si le package existe déjà avant de l’installer, afin d’éviter de répéter l’installation. Comme `  if(!require(zoo)) install.packages("zoo",repos = "http://cran.us.r-project.org")` dans l’exemple de code ci-dessus. Répéter l’installation peut entraîner l’expiration des requêtes de service web.     
+ > Avant d’installer un package, vérifiez s’il existe déjà, afin de ne pas répéter l’installation. Les installations répétées peuvent entraîner un dépassement du délai d’attente des demandes de service web.     
 
-## <a name="upload-files"></a>Charger des fichiers
-Le module **Exécuter un script R** prend en charge le chargement de fichiers à l'aide du kit de développement logiciel (SDK) Azure Machine Learning R.
+## <a name="access-to-registered-dataset"></a>Accès au jeu de données inscrit
 
-L'exemple suivant montre comment charger un fichier image dans le module **Exécuter un script R** :
+Vous pouvez vous référer à l’exemple de code suivant pour accéder aux [jeux de données inscrits](../how-to-create-register-datasets.md) dans votre espace de travail :
+
 ```R
+azureml_main <- function(dataframe1, dataframe2){
+  print("R script run.")
+  run = get_current_run()
+  ws = run$experiment$workspace
+  dataset = azureml$core$dataset$Dataset$get_by_name(ws, "YOUR DATASET NAME")
+  dataframe2 <- dataset$to_pandas_dataframe()
+  # Return datasets as a Named List
+  return(list(dataset1=dataframe1, dataset2=dataframe2))
+}
+```
 
-# R version: 3.5.1
-# The script MUST contain a function named azureml_main
-# which is the entry point for this module.
+## <a name="uploading-files"></a>Chargement de fichiers
+Le module Exécuter un script R prend en charge le chargement de fichiers à l'aide du kit de développement logiciel (SDK) Azure Machine Learning R.
 
-# Please note that functions dependant on X11 library
-# such as "View" are not supported because X11 library
-# is not pre-installed.
-
-# The entry point function MUST have two input arguments.
-# If the input port is not connected, the corresponding
-# dataframe argument will be null.
-#   Param<dataframe1>: a R DataFrame
-#   Param<dataframe2>: a R DataFrame
+L'exemple suivant montre comment charger un fichier image dans le module Exécuter un script R :
+```R
 azureml_main <- function(dataframe1, dataframe2){
   print("R script run.")
 
@@ -112,49 +116,44 @@ azureml_main <- function(dataframe1, dataframe2){
 }
 ```
 
-Une fois l’exécution du pipeline terminée, vous pouvez afficher un aperçu de l’image dans le panneau de droite du module
+Une fois l’exécution du pipeline terminée, vous pouvez afficher un aperçu de l’image dans le panneau de droite du module.
 
 > [!div class="mx-imgBorder"]
-> ![Image chargée](media/module/upload-image-in-r-script.png)
+> ![Aperçu de l’image chargée](media/module/upload-image-in-r-script.png)
 
 ## <a name="how-to-configure-execute-r-script"></a>Comment configurer le module Exécuter un script R
 
-Le module **Exécuter un script R** contient un exemple de code que vous pouvez utiliser comme point de départ. Pour configurer le module **Exécuter un script R**, indiquez un ensemble d’entrées et du code à exécuter.
+Le module Exécuter un script R contient un exemple de code comme point de départ.
 
-![R-module](media/module/execute-r-script.png)
+![Diagramme des entrées pour un module R](media/module/execute-r-script.png)
 
 Les jeux de données stockés dans le concepteur sont automatiquement convertis en trame de données R quand ils sont chargés avec ce module.
 
-1.  Ajoutez le module **Exécuter un script R** à votre pipeline.
+1.  Ajoutez le module **Exécuter un script R** à votre pipeline.  
 
-  
+1. Connectez les entrées dont le script a besoin. Les entrées sont facultatives et peuvent inclure des données ainsi que du code R supplémentaire.
 
-1. Connectez toutes les entrées requises par le script. Les entrées sont facultatives et peuvent inclure des données ainsi que du code R supplémentaire.
-
-    * **Dataset1** : Référencez la première entrée en tant que `dataframe1`. Le jeu de données d’entrée doit être au format CSV, TSV, ARFF, ou vous pouvez connecter un jeu de données Azure Machine Learning.
+    * **Dataset1** : Référencez la première entrée en tant que `dataframe1`. Le jeu de données d’entrée doit être au format CSV, TSV ou ARFF. Ou vous pouvez connecter un jeu de données Azure Machine Learning.
 
     * **Dataset2** : Référencez la deuxième entrée en tant que `dataframe2`. Ce jeu de données doit également se présenter sous la forme d’un fichier CSV, TSV, ARFF, ou d’un jeu de données Azure Machine Learning.
 
-    * **ScriptBundle** : La troisième entrée accepte des fichiers ZIP. Le fichier compressé peut contenir plusieurs fichiers et plusieurs types de fichiers.
+    * **ScriptBundle** : La troisième entrée accepte des fichiers .zip. Un fichier compressé peut contenir plusieurs fichiers et plusieurs types de fichiers.
 
 1. Dans la zone de texte **Script R**, tapez ou collez un script R valide.
 
     > [!NOTE]
-    > Soyez très prudent lorsque vous écrivez votre script et assurez-vous qu’il n’existe pas d’erreur de syntaxe, telle que l’utilisation d’une variable non déclarée ou d’une fonction ou d’un module non importé. Faites également attention à la liste des packages préinstallés à la fin de ce document. Pour utiliser des packages qui ne sont pas répertoriés, installez-les dans votre script, par exemple : `install.packages("zoo",repos = "http://cran.us.r-project.org")`.
-    
-    > [!NOTE]
-    > Les fonctions dépendantes de la bibliothèque X11 comme « Affichage » ne sont pas prises en charge, car la bibliothèque X11 n’est pas préinstallée.
+    > Faites preuve de prudence lors de l’écriture de votre script. Assurez-vous qu’il n’existe pas d’erreurs de syntaxe, comme l’utilisation de variables non déclarées, ou des modules ou fonctions non importés. Faites également attention à la liste des packages préinstallés à la fin de cet article. Pour utiliser des packages qui ne sont pas répertoriés, installez-les dans votre script. par exemple `install.packages("zoo",repos = "http://cran.us.r-project.org")`.
     
     Pour vous aider à commencer, la zone de texte **Script R** est préremplie avec un exemple de code, que vous pouvez modifier ou remplacer.
     
     ```R
     # R version: 3.5.1
-    # The script MUST contain a function named azureml_main
+    # The script MUST contain a function named azureml_main,
     # which is the entry point for this module.
 
-    # Please note that functions dependant on X11 library
-    # such as "View" are not supported because X11 library
-    # is not pre-installed.
+    # Note that functions dependent on the X11 library,
+    # such as "View," are not supported because the X11 library
+    # is not preinstalled.
     
     # The entry point function MUST have two input arguments.
     # If the input port is not connected, the corresponding
@@ -164,7 +163,7 @@ Les jeux de données stockés dans le concepteur sont automatiquement convertis 
     azureml_main <- function(dataframe1, dataframe2){
     print("R script run.")
 
-    # If a zip file is connected to the third input port, it is
+    # If a .zip file is connected to the third input port, it's
     # unzipped under "./Script Bundle". This directory is added
     # to sys.path.
 
@@ -173,23 +172,43 @@ Les jeux de données stockés dans le concepteur sont automatiquement convertis 
     }
     ```
 
- * Le script doit contenir une fonction nommée `azureml_main` qui est le point d’entrée pour ce module.
+    La fonction de point d’entrée doit avoir les arguments d’entrée : `Param<dataframe1>` et `Param<dataframe2>`, même lorsque ces arguments ne sont pas utilisés dans la fonction.
 
- * La fonction de point d’entrée doit avoir deux arguments d’entrée : `Param<dataframe1>` et `Param<dataframe2>`, même lorsque ces deux arguments ne sont pas utilisés dans la fonction.
-
-   > [!NOTE]
-    > Les données passées au module **Exécuter le script R** sont référencées en tant que `dataframe1` et `dataframe2`, ce qui est différent du concepteur Azure Machine Learning (référence de concepteur en tant que `dataset1`, `dataset2`). Vérifiez que les données d’entrée sont référencées correctement dans votre script.  
+    > [!NOTE]
+    > Les données passées au module Exécuter le script R sont référencées en tant que `dataframe1` et `dataframe2`, ce qui est différent du concepteur Azure Machine Learning (référence de concepteur en tant que `dataset1`, `dataset2`). Vérifiez que les données d’entrée sont référencées correctement dans votre script.  
  
     > [!NOTE]
-    >  Vous devrez peut-être apporter des modifications mineures au code R existant pour qu’il s’exécute dans un pipeline de concepteur. Par exemple, les données d’entrée que vous fournissez au format CSV doivent être explicitement converties en un jeu de données avant de pouvoir les utiliser dans votre code. Les types de données et de colonnes utilisés dans le langage R diffèrent également à certains égards des types de données et de colonnes utilisés dans le concepteur.
+    > Vous devrez peut-être apporter des modifications mineures au code R existant pour qu’il s’exécute dans un pipeline de concepteur. Par exemple, les données d’entrée que vous fournissez au format CSV doivent être explicitement converties en un jeu de données avant de pouvoir les utiliser dans votre code. Les types de données et de colonnes utilisés dans le langage R diffèrent également à certains égards des types de données et de colonnes utilisés dans le concepteur.
 
-1.  **Valeur de départ aléatoire** : Tapez une valeur à utiliser dans l’environnement R en tant que valeur de départ aléatoire. Ce paramètre revient à appeler `set.seed(value)` dans le code R.  
+1. Si la taille de votre script est supérieure à 16 Ko, utilisez le port **Script Bundle** pour éviter des erreurs comme *La ligne de commande dépasse la limite de 16597 caractères*. 
+    
+    1. Regroupez le script et d'autres ressources personnalisées dans un fichier zip.
+    1. Chargez le fichier zip en tant que **jeu de données** dans Studio. 
+    1. Faites glisser le module du jeu de données de la liste *Jeux de données* vers le volet de module de gauche sur la page de création du concepteur. 
+    1. Connectez le module de jeu de données au port **Script Bundle** du module **Exécuter le script R**.
+    
+    Voici l’exemple de code permettant d’utiliser le script dans le groupe de scripts :
+
+    ```R
+    azureml_main <- function(dataframe1, dataframe2){
+    # Source the custom R script: my_script.R
+    source("./Script Bundle/my_script.R")
+
+    # Use the function that defined in my_script.R
+    dataframe1 <- my_func(dataframe1)
+
+    sample <- readLines("./Script Bundle/my_sample.txt")
+    return (list(dataset1=dataframe1, dataset2=data.frame("Sample"=sample)))
+    }
+    ```
+
+1.  Pour **Valeur de départ aléatoire**, entrez une valeur à utiliser dans l’environnement R en tant que valeur de départ aléatoire. Ce paramètre revient à appeler `set.seed(value)` dans le code R.  
 
 1. Envoyez le pipeline.  
 
 ## <a name="results"></a>Résultats
 
-Les modules **Exécuter un script R** peuvent retourner plusieurs sorties, mais elles doivent être fournies sous forme de trames de données R. Les trames de données sont automatiquement converties en jeux de données dans le concepteur pour assurer la compatibilité avec d’autres modules.
+Les modules Exécuter un script R peuvent retourner plusieurs sorties, mais elles doivent être fournies sous forme de trames de données R. Le concepteur convertit automatiquement les trames de données en jeux de données pour assurer la compatibilité avec d'autres modules.
 
 Les erreurs et messages standard de R sont retournés dans le journal du module.
 
@@ -197,22 +216,22 @@ S'il vous faut imprimer les résultats dans le script R, les résultats imprimé
 
 ## <a name="sample-scripts"></a>Exemples de scripts
 
-Il existe de nombreuses façons d’étendre votre pipeline à l’aide d’un script R personnalisé.  Cette section fournit un exemple de code pour les tâches courantes.
+Il existe de nombreuses façons d’étendre votre pipeline à l’aide de scripts R personnalisés. Cette section fournit un exemple de code pour les tâches courantes.
 
 
-### <a name="add-r-script-as-an-input"></a>Ajouter un script R en tant qu’entrée
+### <a name="add-an-r-script-as-an-input"></a>Ajouter un script R en tant qu’entrée
 
-Le module **Exécuter un script R** prend en charge des fichiers de script R arbitraires en tant qu’entrées. Pour ce faire, ils doivent être chargés sur votre espace de travail en tant que partie du fichier ZIP.
+Le module Exécuter un script R prend en charge des fichiers de script R arbitraires en tant qu’entrées. Pour les utiliser, vous devez les télécharger sur votre espace de travail en tant que partie du fichier .zip.
 
-1. Pour charger un fichier ZIP contenant du code R sur votre espace de travail, accédez à la page de ressource **Jeux de données**, cliquez sur **Créer un jeu de données**, puis sélectionnez **Depuis un fichier local** et l’option de type de jeu de données **Fichier**.  
+1. Pour télécharger un fichier. zip contenant du code R dans votre espace de travail, accédez à la page de ressources **Jeux de données**. Sélectionnez **Créer un jeu de données**, puis sélectionnez **À partir d’un fichier local** et l’option de type de jeu de données **Fichier**.  
 
-1. Vérifiez que le fichier compressé est disponible dans la liste **Mes jeux de données** sous la catégorie **Jeux de données** dans l’arborescence du module de gauche.
+1. Vérifiez que le fichier compressé apparaît dans **Mes jeux de données** sous la catégorie **Jeux de données** de l'arborescence du module de gauche.
 
 1.  Connectez le jeu de données au port d’entrée **ScriptBundle**.
 
-1. Tous les fichiers qui sont contenus dans le fichier ZIP sont disponibles pendant la durée d’exécution du pipeline. 
+1. Tous les fichiers dans le fichier .zip sont disponibles pendant la durée d’exécution du pipeline. 
 
-    Si le fichier de script groupé est contenu dans une structure de répertoires, la structure est conservée. Toutefois, vous devez modifier votre code pour ajouter le répertoire **./ScriptBundle** au chemin.
+    Si le fichier de script groupé est contenu dans une structure de répertoires, la structure est conservée. Mais vous devez modifier votre code pour ajouter le répertoire **./ScriptBundle** au chemin.
 
 ### <a name="process-data"></a>Traitement des données
 
@@ -220,12 +239,12 @@ L’exemple suivant montre comment mettre à l’échelle et normaliser les donn
 
 ```R
 # R version: 3.5.1
-# The script MUST contain a function named azureml_main
+# The script MUST contain a function named azureml_main,
 # which is the entry point for this module.
 
-# Please note that functions dependant on X11 library
-# such as "View" are not supported because X11 library
-# is not pre-installed.
+# Note that functions dependent on the X11 library,
+# such as "View," are not supported because the X11 library
+# is not preinstalled.
 
 # The entry point function MUST have two input arguments.
 # If the input port is not connected, the corresponding
@@ -234,17 +253,17 @@ L’exemple suivant montre comment mettre à l’échelle et normaliser les donn
 #   Param<dataframe2>: a R DataFrame
 azureml_main <- function(dataframe1, dataframe2){
   print("R script run.")
-  # If a zip file is connected to the third input port, it is
+  # If a .zip file is connected to the third input port, it's
   # unzipped under "./Script Bundle". This directory is added
   # to sys.path.
   series <- dataframe1$width
-  # find the maximum and minimum values of width column in dataframe1
+  # Find the maximum and minimum values of the width column in dataframe1
   max_v <- max(series)
   min_v <- min(series)
-  # calculate the scale and bias
+  # Calculate the scale and bias
   scale <- max_v - min_v
   bias <- min_v / dis
-  # apply min-max normalizing
+  # Apply min-max normalizing
   dataframe1$width <- dataframe1$width / scale - bias
   dataframe2$width <- dataframe2$width / scale - bias
   # Return datasets as a Named List
@@ -252,12 +271,12 @@ azureml_main <- function(dataframe1, dataframe2){
 }
  ```
 
-### <a name="read-a-zip-file-as-input"></a>Lire un fichier ZIP en tant qu’entrée
+### <a name="read-a-zip-file-as-input"></a>Lire un fichier .zip en tant qu’entrée
 
-Cet exemple montre comment utiliser un jeu de données dans un fichier ZIP en tant qu’entrée pour le module **Exécuter un script R**.
+Cet exemple montre comment utiliser un jeu de données dans un fichier .zip en tant qu’entrée pour le module Exécuter un script R.
 
-1. Créez le fichier de données au format CSV et nommez-le « mydatafile.csv ».
-1. Créez un fichier ZIP et ajoutez le fichier CSV à l’archive.
+1. Créez le fichier de données au format CSV et nommez-le **mydatafile.csv**.
+1. Créez un fichier .zip et ajoutez le fichier CSV à l’archive.
 1. Chargez le fichier compressé sur votre espace de travail Azure Machine Learning. 
 1. Connectez le jeu de données obtenu à l’entrée **ScriptBundle** de votre module **Exécuter un script R**.
 1. Utilisez le code suivant pour lire les données CSV du fichier compressé.
@@ -290,9 +309,9 @@ azureml_main <- function(dataframe1, dataframe2){
 
 ### <a name="pass-r-objects-between-execute-r-script-modules"></a>Passer des objets R entre des modules Exécuter un script R
 
-Vous pouvez passer des objets R entre des instances du module **Exécuter un script R** en utilisant le mécanisme de sérialisation interne. Cet exemple suppose que vous souhaitez déplacer l’objet R nommé `A` entre deux modules **Exécuter un script R**.
+Vous pouvez passer des objets R entre des instances du module Exécuter un script R en utilisant le mécanisme de sérialisation interne. Cet exemple suppose que vous souhaitez déplacer l’objet R nommé `A` entre deux modules Exécuter un script R.
 
-1. Ajoutez le premier module **Exécuter un script R** à votre pipeline et entrez le code suivant dans la zone de texte **Script R** pour créer un objet sérialisé `A` comme colonne dans la table de données de sortie du module :  
+1. Ajoutez le premier module **Exécuter un script R** à votre pipeline. Puis, dans la zone de texte **Script R**, entrez le code suivant pour créer un objet sérialisé `A` en tant que colonne dans la table de données de sortie du module :  
   
     ```R
     azureml_main <- function(dataframe1, dataframe2){
@@ -321,13 +340,12 @@ Vous pouvez passer des objets R entre des instances du module **Exécuter un sc
     }
     ```
 
-## <a name="pre-installed-r-packages"></a>Packages R préinstallés
+## <a name="preinstalled-r-packages"></a>Packages R préinstallés
 
-Liste actuelle de packages R préinstallés pouvant être utilisés :
+Les packages R préinstallés suivants sont actuellement disponibles :
 
-|              |            | 
-|--------------|------------| 
 | Package      | Version    | 
+|--------------|------------| 
 | askpass      | 1.1        | 
 | assertthat   | 0.2.1      | 
 | backports    | 1.1.4      | 
@@ -473,4 +491,4 @@ Liste actuelle de packages R préinstallés pouvant être utilisés :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

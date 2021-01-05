@@ -1,19 +1,19 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-hub
 ms.service: iot-hub
-author: dominicbetts
+author: robinsh
 ms.topic: include
 ms.date: 02/17/2019
-ms.author: dobett
+ms.author: robinsh
 ms.custom: include file
-ms.openlocfilehash: 2514325c93f0f72aa979f871e86e465093479402
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f1f7d6f9ab6036fbcfcd1d19e175302bbd1a2a8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69558858"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87298879"
 ---
 ## <a name="customize-and-extend-the-device-management-actions"></a>Personnaliser et étendre les actions de gestion d’appareils
 

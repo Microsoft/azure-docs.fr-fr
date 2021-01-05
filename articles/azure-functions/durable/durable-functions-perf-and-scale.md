@@ -1,16 +1,16 @@
 ---
 title: Performances et mise à l’échelle dans Fonctions durables - Azure
-description: Introduction à l’extension Fonctions durables pour Azure Functions.
+description: Découvrez les caractéristiques de mise à l’échelle uniques de l’extension de Durable Functions pour Azure Functions.
 author: cgillum
 ms.topic: conceptual
 ms.date: 11/03/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 260811c4ae15b45de6f7bc1b22e3ed6dcea44259
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b9fc465b5e5f132264fd36e004fa3ee7623b87a5
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235293"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96854986"
 ---
 # <a name="performance-and-scale-in-durable-functions-azure-functions"></a>Performances et mise à l’échelle dans Fonctions durables (Azure Functions)
 
@@ -20,15 +20,15 @@ Pour comprendre le comportement lié à la mise à l’échelle, vous devez éga
 
 ## <a name="history-table"></a>Table d’historique
 
-La table d’**historique** est une table de stockage Azure qui contient les événements d’historique de toutes les instances d’orchestration au sein d’un hub de tâches. Le nom de la table apparaît sous la forme *TaskHubName*History. Au fur et à mesure que des instances sont exécutées, de nouvelles lignes sont ajoutées à cette table. La clé de partition de la table provient de l’ID d’instance de l’orchestration. Un identifiant d’instance est aléatoire dans la plupart des cas, ce qui garantit une distribution optimale des partitions internes dans le stockage Azure.
+La table d’**historique** est une table de stockage Azure qui contient les événements d’historique de toutes les instances d’orchestration au sein d’un hub de tâches. Le nom de la table apparaît sous la forme *TaskHubName* History. Au fur et à mesure que des instances sont exécutées, de nouvelles lignes sont ajoutées à cette table. La clé de partition de la table provient de l’ID d’instance de l’orchestration. Un identifiant d’instance est aléatoire dans la plupart des cas, ce qui garantit une distribution optimale des partitions internes dans le stockage Azure.
 
-Lorsqu’une instance d’orchestration doit s’exécuter, les lignes appropriées de la table d’historique sont chargées en mémoire. Ces *événements d’historique* sont ensuite relus dans le code de fonction d’orchestrateur pour revenir à l’état contrôlé précédemment. L’utilisation de l’historique d’exécution permettant de régénérer l’état de cette façon est influencée par le [modèle d’approvisionnement en événements](https://docs.microsoft.com/azure/architecture/patterns/event-sourcing).
+Lorsqu’une instance d’orchestration doit s’exécuter, les lignes appropriées de la table d’historique sont chargées en mémoire. Ces *événements d’historique* sont ensuite relus dans le code de fonction d’orchestrateur pour revenir à l’état contrôlé précédemment. L’utilisation de l’historique d’exécution permettant de régénérer l’état de cette façon est influencée par le [modèle d’approvisionnement en événements](/azure/architecture/patterns/event-sourcing).
 
 ## <a name="instances-table"></a>Table d’instances
 
-La table d’**instances** est une autre table de stockage Azure qui contient les états de toutes les instances d’orchestration et d’entité au sein d’un hub de tâches. Au fur et à mesure que des instances sont créées, des lignes sont ajoutées à cette table. La clé de partition de cette table est l’ID d’instance de l’orchestration ou la clé d’entité, tandis que la clé de ligne est une constante fixe. Il y a une ligne par instance d’orchestration ou d’entité.
+La table d’**instances** est une autre table de stockage Azure qui contient les états de toutes les instances d’orchestration et d’entité au sein d’un hub de tâches. Au fur et à mesure que des instances sont créées, des lignes sont ajoutées à cette table. La clé de partition de cette table est l’ID d’instance de l’orchestration ou la clé d’entité, et la clé de ligne est une chaîne vide. Il y a une ligne par instance d’orchestration ou d’entité.
 
-Cette table est utilisée pour répondre aux demandes de requête d’instance provenant des API `GetStatusAsync` (.NET) et `getStatus` (JavaScript) et de l’API [HTTP de requête d’état](durable-functions-http-api.md#get-instance-status). Sa cohérence avec le contenu de la table d’**historique** mentionnée précédemment est conservée. L’utilisation d’une table de stockage Azure distincte pour satisfaire les opérations de requête d’instance de cette façon est influencée par le [modèle de séparation des responsabilités en matière de commande et de requête (CQRS)](https://docs.microsoft.com/azure/architecture/patterns/cqrs).
+Cette table est utilisée pour répondre aux demandes de requête d’instance provenant des API `GetStatusAsync` (.NET) et `getStatus` (JavaScript) et de l’API [HTTP de requête d’état](durable-functions-http-api.md#get-instance-status). Sa cohérence avec le contenu de la table d’**historique** mentionnée précédemment est conservée. L’utilisation d’une table de stockage Azure distincte pour satisfaire les opérations de requête d’instance de cette façon est influencée par le [modèle de séparation des responsabilités en matière de commande et de requête (CQRS)](/azure/architecture/patterns/cqrs).
 
 ## <a name="internal-queue-triggers"></a>Déclencheurs de file d’attente interne
 
@@ -52,6 +52,13 @@ Le délai maximal d’interrogation est configurable via la propriété `maxQueu
 
 > [!NOTE]
 > Lorsqu’il est exécuté dans les plans Consommation et Premium d’Azure Functions, le [contrôleur de mise à l'échelle Azure Functions](../functions-scale.md#how-the-consumption-and-premium-plans-work) interrogera chaque contrôle et chaque file d'attente des éléments de travail toutes les 10 secondes. Cette interrogation supplémentaire est nécessaire pour déterminer quand activer les instances d'application de fonction et pour prendre des décisions de mise à l'échelle. Au moment d’écrire ces lignes, cet intervalle de 10 secondes est constant et ne peut pas être configuré.
+
+### <a name="orchestration-start-delays"></a>Retards de début de l’orchestration
+Les instances d’orchestration sont démarrées en plaçant un message `ExecutionStarted` dans l’une des files d’attente de contrôle du hub de tâches. Dans certaines conditions, vous pouvez observer des délais de plusieurs secondes entre le moment où l’exécution d’une orchestration est planifiée et le moment où elle commence à s’exécuter. Pendant ce laps de temps, l’instance d’orchestration reste dans l’état `Pending`. Il existe deux causes possibles pour ce retard :
+
+1. **Files d’attente de contrôle en backlog** : Si la file d’attente de contrôle de cette instance contient un grand nombre de messages, cela peut prendre du temps avant que le message `ExecutionStarted` ne soit reçu et traité par le runtime. Les backlogs de messages peuvent se produire lorsque des orchestrations traitent un grand nombre d’événements simultanément. Les événements qui se trouvent dans la file d’attente de contrôle incluent les événements de début d’orchestration, les saisies semi-automatiques d’activité, les minuteurs durables, l’achèvement et les événements externes. Si ce retard se produit dans des circonstances normales, envisagez de créer un hub de tâches avec un plus grand nombre de partitions. La configuration d’un plus grand nombre de partitions entraîne la création par le runtime d’autres files d’attente de contrôle pour la distribution de la charge.
+
+2. **Retards d’interrogation de secours** : Une autre cause courante des retards d’orchestration est le [comportement d’interrogation de secours précédemment décrit pour les files d’attente de contrôle](#queue-polling). Toutefois, ce retard est attendu uniquement en cas de Scale-out d’une application sur plusieurs instances. S’il n’existe qu’une seule instance d’application ou si l’instance d’application qui démarre l’orchestration est également la même instance qui interroge la file d’attente de contrôle cible, il n’y aura pas de retard d’interrogation de la file d’attente. Les retards d’interrogation de secours peuvent être réduits en mettant à jour les paramètres **host.json**, comme décrit précédemment.
 
 ## <a name="storage-account-selection"></a>Sélection du compte de stockage
 
@@ -217,6 +224,10 @@ Ce paramètre présente deux inconvénients potentiels à connaître :
 Par exemple, si `durableTask/extendedSessionIdleTimeoutInSeconds` est défini sur 30 secondes, un épisode de fonction d’orchestrateur ou d’entité de courte durée qui s’exécute en moins de 1 seconde occupe tout de même la mémoire pendant 30 secondes. Il est également comptabilisé dans le quota `durableTask/maxConcurrentOrchestratorFunctions` mentionné précédemment et empêche potentiellement l’exécution d’autres fonctions d’orchestrateur ou d’entité.
 
 Les effets spécifiques des sessions étendues sur les fonctions d’orchestrateur et d’entité sont décrits dans les sections suivantes.
+
+> [!NOTE]
+> Les sessions étendues ne sont actuellement prises en charge que dans les langages .NET, comme C# ou F#. La définition de `extendedSessionsEnabled` sur `true` pour d’autres plateformes peut entraîner des problèmes d’exécution, tels que l’exécution en mode silencieux de l’activité et des fonctions déclenchées par orchestration.
+
 
 ### <a name="orchestrator-function-replay"></a>Relecture de la fonction d’orchestrateur
 

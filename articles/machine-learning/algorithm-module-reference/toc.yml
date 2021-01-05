@@ -68,10 +68,14 @@
           href: boosted-decision-tree-regression.md
         - name: Régression de forêt d’arbres décisionnels
           href: decision-forest-regression.md
+        - name: Régression quantile de forêt rapide
+          href: fast-forest-quantile-regression.md
         - name: Régression linéaire
           href: linear-regression.md
         - name: Régression de réseau neuronal
           href: neural-network-regression.md
+        - name: Régression de Poisson
+          href: poisson-regression.md
     - name: Clustering
       items:
         - name: Clustering k-moyennes
@@ -88,6 +92,8 @@
           href: multiclass-neural-network.md
         - name: Une ou toutes les multiclasses
           href: one-vs-all-multiclass.md
+        - name: Une ou une multiclasse
+          href: one-vs-one-multiclass.md
         - name: Perceptron moyenné à deux classes
           href: two-class-averaged-perceptron.md
         - name: Arbre de décision optimisé à deux classes
@@ -106,6 +112,8 @@
       href: train-clustering-model.md
     - name: Entraîner le modèle
       href: train-model.md
+    - name: Entraîner un modèle Pytorch
+      href: train-pytorch-model.md
     - name: Optimiser les hyperparamètres du modèle
       href: tune-model-hyperparameters.md
 - name: Scoring et évaluation d’un modèle
@@ -118,6 +126,8 @@
       href: cross-validate-model.md
     - name: Évaluer le modèle
       href: evaluate-model.md
+    - name: Scorer un modèle d’image
+      href: score-image-model.md
     - name: Noter un modèle
       href: score-model.md
 - name: Langage Python
@@ -142,14 +152,36 @@
       href: preprocess-text.md
     - name: Allocation de Dirichlet latente
       href: latent-dirichlet-allocation.md
+    - name: Scorer le modèle Vowpal Wabbit
+      href: score-vowpal-wabbit-model.md
+    - name: Entraîner le modèle Vowpal Wabbit
+      href: train-vowpal-wabbit-model.md
+- name: Vision par ordinateur
+  items:
+    - name: Appliquer une transformation d’image
+      href: apply-image-transformation.md
+    - name: Convertir en répertoire d’images
+      href: convert-to-image-directory.md
+    - name: Lancer une transformation d’image
+      href: init-image-transformation.md
+    - name: Diviser un répertoire d’images
+      href: split-image-directory.md
+    - name: DenseNet
+      href: densenet.md
+    - name: ResNet
+      href: resnet.md
 - name: Recommandation
   items:
     - name: Évaluer le générateur de recommandations
       href: evaluate-recommender.md
     - name: Noter le générateur de recommandations SVD
       href: score-svd-recommender.md
+    - name: Générateur de recommandations Score Wide and Deep
+      href: score-wide-and-deep-recommender.md
     - name: Entraîner le générateur de recommandations SVD
       href: train-svd-recommender.md
+    - name: Générateur de recommandations Train Wide and Deep
+      href: train-wide-and-deep-recommender.md
 - name: Détection des anomalies
   items:
     - name: Détection des anomalies reposant sur le PCA
@@ -162,3 +194,5 @@
       href: web-service-input-output.md
 - name: Erreurs de module et résolution des problèmes
   href: designer-error-codes.md
+- name: Syntaxe des requêtes de recherche Graph
+  href: graph-search-syntax.md

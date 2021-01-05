@@ -2,13 +2,13 @@
 title: Configurer la probe liveness sur l’instance de conteneur
 description: Découvrez comment configurer les sondes probe liveness pour redémarrer les conteneurs non intègres dans Azure Container Instances.
 ms.topic: article
-ms.date: 01/30/2020
-ms.openlocfilehash: 11c6c9d39067c536bf4325f74eb24b2ab64ef515
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/02/2020
+ms.openlocfilehash: befe9693be1413abf455d915814c53aab20db53c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76934156"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169695"
 ---
 # <a name="configure-liveness-probes"></a>Configurer les probe liveness
 
@@ -26,7 +26,7 @@ Azure Container Instances prend également en charge les [sondes probe readiness
 Créez un fichier `liveness-probe.yaml` avec l’extrait de code suivant. Ce fichier définit un groupe composé d’un conteneur NGNIX qui finit par devenir non intègre.
 
 ```yaml
-apiVersion: 2018-10-01
+apiVersion: 2019-12-01
 location: eastus
 name: livenesstest
 properties:

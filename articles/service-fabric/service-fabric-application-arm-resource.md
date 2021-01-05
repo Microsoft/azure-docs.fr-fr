@@ -3,12 +3,12 @@ title: Déployer et mettre à niveau avec Azure Resource Manager
 description: Découvrez comment déployer des applications et services sur un cluster Service Fabric à l’aide d’un modèle Azure Resource Manager.
 ms.topic: conceptual
 ms.date: 12/06/2017
-ms.openlocfilehash: a2dfe54bf2c6b4fa8814f10c10576a73727a7417
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bb866eb24fb1b286f496bad9845d1ee557baa221
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75610248"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94681667"
 ---
 # <a name="manage-applications-and-services-as-azure-resource-manager-resources"></a>Gérer des applications et services en tant que ressources Azure Resource Manager
 
@@ -18,7 +18,7 @@ Nous vous recommandons cette méthode pour déployer toutes les applications de 
 
 Le cas échéant, gérez vos applications en tant que ressources Resource Manager pour améliorer les scénarios suivants :
 * Piste d’audit : Resource Manager audite chaque opération et conserve un *journal d’activité* détaillé qui peut vous aider à suivre les modifications apportées à ces applications et à votre cluster.
-* Contrôle d’accès en fonction du rôle (RBAC) : la gestion de l’accès aux clusters, ainsi qu’aux applications déployées sur le cluster, peut être effectuée par le biais du même modèle Resource Manager.
+* Contrôle d’accès en fonction du rôle Azure (Azure RBAC) : la gestion de l’accès aux clusters, ainsi qu’aux applications déployées sur le cluster, peut être effectuée par le biais du même modèle Resource Manager.
 * Azure Resource Manager (par le biais du portail Azure) devient un guichet unique pour la gestion de votre cluster et des déploiements d’applications critiques.
 
 L’extrait de code suivant montre les différents types de ressources qui peuvent être gérés au moyen d’un modèle :
@@ -261,13 +261,12 @@ Supprimer Microsoft.ServiceFabric/clusters/application du modèle ARM ne suffit 
 
 ## <a name="manage-an-existing-application-via-resource-manager"></a>Gérer une application existante par le biais de Resource Manager
 
-Si votre cluster est déjà disponible et que des applications que vous souhaitez gérer en tant que ressources Resource Manager y sont déjà déployées, au lieu de supprimer les applications et de les redéployer, vous pouvez utiliser un appel PUT avec les mêmes API pour que les applications soient reconnues en tant que ressources Resource Manager. Pour plus d’informations, consultez [Qu’est-ce qu’un modèle de ressource d’application Service Fabric ?](https://docs.microsoft.com/azure/service-fabric/service-fabric-concept-resource-model).
+Si votre cluster est déjà disponible et que des applications que vous souhaitez gérer en tant que ressources Resource Manager y sont déjà déployées, au lieu de supprimer les applications et de les redéployer, vous pouvez utiliser un appel PUT avec les mêmes API pour que les applications soient reconnues en tant que ressources Resource Manager. Pour plus d’informations, consultez [Qu’est-ce qu’un modèle de ressource d’application Service Fabric ?](./service-fabric-concept-resource-model.md).
 
 > [!NOTE]
-> Pour permettre une mise à niveau du cluster destinée à ignorer les applications non saines, le client peut spécifier « maxPercentUnhealthyApplications: 100 » dans la section « upgradeDescription/healthPolicy ». Les descriptions détaillées de tous les paramètres se trouvent dans la [documentation sur les stratégies de mise à niveau de cluster pour les API REST de Service Fabric](https://docs.microsoft.com/rest/api/servicefabric/sfrp-model-clusterupgradepolicy).
+> Pour permettre une mise à niveau du cluster destinée à ignorer les applications non saines, le client peut spécifier « maxPercentUnhealthyApplications: 100 » dans la section « upgradeDescription/healthPolicy ». Les descriptions détaillées de tous les paramètres se trouvent dans la [documentation sur les stratégies de mise à niveau de cluster pour les API REST de Service Fabric](/rest/api/servicefabric/sfrp-model-clusterupgradepolicy).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Utilisez [l’interface CLI Service Fabric](service-fabric-cli.md) ou [PowerShell](service-fabric-deploy-remove-applications.md) pour déployer d’autres applications sur votre cluster. 
 * [Mettez à niveau votre cluster Service Fabric](service-fabric-cluster-upgrade.md).
-

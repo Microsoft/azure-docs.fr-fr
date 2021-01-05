@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 07/15/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 214d379525f2ee534415d713aa298ec858a84c92
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7a38e2384c5f24bc3a72e1ef8e8f7119b2db0f2f
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81868843"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443940"
 ---
 # <a name="protected-web-api-app-registration"></a>API web protégée : Inscription d'application
 
@@ -29,15 +29,15 @@ Pour connaître les étapes courantes visant à inscrire une application, consul
 
 Le point de terminaison de la plateforme d’identités Microsoft peut émettre des jetons v1.0 et des jetons v2.0. Pour plus d’informations sur ces jetons, consultez [Jetons d’accès](access-tokens.md).
 
-La version de jeton acceptée varie selon la valeur **Types de comptes pris en charge** que vous avez choisie lorsque vous avez créé votre application.
+La version de jeton que votre API peut accepter dépend de la sélection de **Types de compte pris en charge** lorsque vous créez l’inscription de votre application API Web dans le Portail Azure.
 
-- Si la valeur **Types de comptes pris en charge** est **Comptes dans un annuaire organisationnel et comptes Microsoft personnels (par exemple, Skype, Xbox, Outlook.com)** , la version de jeton acceptée est v2.0.
+- Si la valeur de **Types de comptes pris en charge** est **Comptes dans un annuaire organisationnel et comptes personnels Microsoft (par exemple, Skype, Xbox, Outlook.com)** , la version de jeton acceptée est v2.0.
 - Sinon, la version de jeton acceptée est v1.0.
 
 Après avoir créé l’application, vous pouvez déterminer ou changer la version de jeton acceptée en procédant comme suit :
 
 1. Dans le Portail Azure, sélectionnez votre application puis **Manifeste**.
-1. Recherchez la propriété **accessTokenAcceptedVersion** dans le manifeste. La valeur par défaut de la propriété est 2.
+1. Recherchez la propriété **accessTokenAcceptedVersion** dans le manifeste.
 1. La valeur spécifie à Azure Active Directory (Azure AD) la version de jeton acceptée par l’API web.
     - Si la valeur est 2, l’API web accepte les jetons v2.0.
     - Si la valeur est **Null**, l’API web accepte les jetons v1.0.
@@ -52,7 +52,7 @@ Les API web n’ont pas besoin d’inscrire d’URI de redirection, car aucun ut
 
 ## <a name="exposed-api"></a>API exposée
 
-D’autres paramètres spécifiques aux API web sont l’API exposée et les étendues exposées.
+D’autres paramètres spécifiques aux API web sont l’API exposée et les étendues exposées ou rôles d’application.
 
 ### <a name="application-id-uri-and-scopes"></a>URI d’ID d’application et étendues
 
@@ -64,7 +64,7 @@ Lors de l’inscription de l’application, vous devez définir les paramètres 
 - Une ou plusieurs étendues
 - Un ou plusieurs rôles d’application
 
-Par défaut, le portail d’inscription des applications vous recommande d’utiliser l’URI de ressource `api://{clientId}`. Cet URI est unique, mais n’est pas lisible. Si vous modifiez l’URI, assurez-vous que la nouvelle valeur est unique.
+Par défaut, le portail d’inscription des applications vous recommande d’utiliser l’URI de ressource `api://{clientId}`. Cet URI est unique, mais n’est pas lisible. Si vous modifiez l’URI, assurez-vous que la nouvelle valeur est unique. Le portail d’inscription des applications s’assure que vous utilisez un [domaine de serveur de publication configuré](howto-configure-publisher-domain.md).
 
 Pour les applications clientes, les étendues s’affichent en tant que *permissions déléguées* et les rôles d’application en tant que *permissions d’application* pour votre API web.
 
@@ -72,6 +72,8 @@ Les étendues s’affichent également dans la fenêtre de consentement présent
 
 - Comme vue par un utilisateur.
 - Comme vue par l’administrateur client, qui peut accorder un consentement administrateur.
+
+Les rôles d’application ne peuvent pas être consentis par un utilisateur (car ils sont utilisés par une application qui appelle l’API Web pour son propre compte). Un administrateur client devra donner son consentement aux applications clientes de votre API Web qui exposent des rôles d’application. Pour plus d’informations, consultez [Consentement administrateur](v2-admin-consent.md)
 
 ### <a name="exposing-delegated-permissions-scopes"></a>Exposition d’autorisations déléguées (étendues)
 
@@ -141,7 +143,7 @@ Pour ajouter cette sécurité renforcée :
 
    > [!IMPORTANT]
    >
-   > Si vous définissez **Attribution de l’utilisateur requise ?** sur **Oui**, Azure AD vérifie les attributions de rôles d’application d’un client lorsqu’il demande un jeton d’accès pour l’API web. Si le client n’est attribué à aucun rôle d’application, Azure AD renvoie le message d’erreur « invalid_client: AADSTS501051: L’application \<nom d’application\> n’est pas attribuée à un rôle pour \<API web\> ».
+   > Si vous définissez **Attribution de l’utilisateur requise ?** sur **Oui**, Azure AD vérifie les attributions de rôles d’application d’un client lorsqu’il demande un jeton d’accès pour l’API web. Si le client n’est attribué à aucun rôle d’application, Azure AD renvoie le message d’erreur « invalid_client: AADSTS501051: L’application \<application name\> n’est pas affectée à un rôle pour \<web API\> ».
    >
    > Si vous maintenez l’option **Attribution de l’utilisateur requise ?** définie sur **Non**, Azure AD ne vérifiera pas les attributions de rôles d’application lorsqu’un client demandera un jeton d’accès pour votre API web. N’importe quel client démon, c’est-à-dire tous les clients utilisant le flux d’informations d’identification du client, peut obtenir un jeton d’accès pour l’API en spécifiant simplement son public. N’importe quelle application peut accéder à l’API sans avoir à demander de permissions pour cela.
    >
@@ -151,5 +153,4 @@ Pour ajouter cette sécurité renforcée :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Configuration du code d’application](scenario-protected-web-api-app-configuration.md)
+Passez à l’article suivant de ce scénario, [Configuration du code de l’application](scenario-protected-web-api-app-configuration.md).

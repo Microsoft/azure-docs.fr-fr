@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: b0a46dcf8fe298494a53713f122b1bda8ce07e5e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d400e6bcda0a2114d798a3289f01f52b677a6f94
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73954571"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656493"
 ---
 # <a name="architecture-for-vmwarephysical-server-replication-to-a-secondary-on-premises-site"></a>Architecture pour la réplication de machines virtuelles VMware ou de serveurs physiques vers un site local secondaire
 
@@ -31,15 +31,31 @@ Cet article décrit l’architecture et les processus utilisés quand vous confi
 **Serveur VMware ESX/ESXi et vCenter** |  Les machines virtuelles sont hébergées sur des hôtes ESX/ESXi. Les hôtes sont gérés avec un serveur vCenter | Vous avez besoin d’une infrastructure VMware pour répliquer des machines virtuelles VMware.
 **Machines virtuelles/serveurs physiques** |  L’Agent unifié installé sur les machines virtuelles VMware et les serveurs physiques que vous souhaitez répliquer. | Il joue le rôle de fournisseur de communication entre tous les composants.
 
+## <a name="set-up-outbound-network-connectivity"></a>Configurer la connectivité réseau sortante
+
+Pour que Site Recovery fonctionne comme prévu, vous devez modifier la connectivité réseau sortante pour permettre la réplication de votre environnement.
+
+> [!NOTE]
+> Site Recovery ne prend pas en charge l’utilisation d’un proxy d’authentification pour contrôler la connectivité réseau.
+
+### <a name="outbound-connectivity-for-urls"></a>Connectivité sortante pour les URL
+
+Si vous utilisez un proxy de pare-feu basé sur des URL pour contrôler la connectivité sortante, autorisez l’accès à ces URL :
+
+| **Nom**                  | **Commercial**                               | **Secteur public**                                 | **Description** |
+| ------------------------- | -------------------------------------------- | ---------------------------------------------- | ----------- |
+| Stockage                   | `*.blob.core.windows.net`                  | `*.blob.core.usgovcloudapi.net` | Permet d’écrire les données dans le compte de stockage de cache dans la région source à partir de la machine virtuelle. |
+| Azure Active Directory    | `login.microsoftonline.com`                | `login.microsoftonline.us`                   | Fournit l’autorisation et l’authentification aux URL du service Site Recovery. |
+| Réplication               | `*.hypervrecoverymanager.windowsazure.com` | `*.hypervrecoverymanager.windowsazure.com`   | Permet à la machine virtuelle de communiquer avec le service Site Recovery. |
+| Service Bus               | `*.servicebus.windows.net`                 | `*.servicebus.usgovcloudapi.net`             | Permet à la machine virtuelle d’écrire des données de surveillance et de diagnostic Site Recovery. |
+
 ## <a name="replication-process"></a>Processus de réplication
 
 1. Vous configurez les serveurs de composants dans chaque site (configuration, processus, cible maître) et installez l’Agent unifié sur les ordinateurs que vous souhaitez répliquer.
 2. Après la réplication initiale, l’agent de chaque machine envoie les modifications de réplication différentielle au serveur de traitement.
 3. Le serveur de traitement optimise ces données et les transfère vers le serveur cible maître du site secondaire. Le serveur de configuration gère le processus de réplication.
 
-**Figure 6 : réplication de VMware vers VMware**
-
-![VMware vers VMware](./media/site-recovery-components/vmware-to-vmware.png)
+![Diagramme montrant la réplication des machines virtuelles VMware et des serveurs physiques vers un centre de données secondaire](./media/site-recovery-components/vmware-to-vmware.png)
 
 
 

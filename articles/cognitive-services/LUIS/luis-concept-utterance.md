@@ -1,18 +1,20 @@
 ---
 title: Bons exemples d’énoncés - LUIS
 description: Les énoncés sont des entrées de l’utilisateur que votre application doit interpréter. Collectez des phrases dont vous pensez que les utilisateurs les entreront. Incluez des énoncés de sens identique, mais construits différemment sur le plan de la longueur et du positionnement des mots.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 05/04/2020
-ms.openlocfilehash: 184038ff2758fbe7c5834682c82c082ef6661234
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 05/19/2020
+ms.openlocfilehash: 96b9754908f437ccf81e002e9e9dd17af0bab4e3
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592863"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019073"
 ---
 # <a name="understand-what-good-utterances-are-for-your-luis-app"></a>Comprendre ce que sont les bons énoncés pour votre application LUIS
 
-Des **énoncés** sont des entrées de l’utilisateur que votre application doit interpréter. Pour que LUIS apprenne à en extraire des intentions et des entités, il est important de capturer une série d’exemples d’énoncés pour chaque intention. L’apprentissage actif, c’est-à-dire le processus d’apprentissage continu sur la base de nouveaux énoncés, est essentiel pour l’intelligence d’apprentissage automatique qu’offre LUIS.
+Des **énoncés** sont des entrées de l’utilisateur que votre application doit interpréter. Pour que LUIS apprenne à en extraire des intentions et des entités, il est important de capturer une série d’exemples d’énoncés pour chaque intention. L’apprentissage actif, c’est-à-dire le processus d’apprentissage continu sur la base de nouveaux énoncés, est essentiel pour l’intelligence de machine-learning qu’offre LUIS.
 
 Collectez des énoncés dont vous pensez que les utilisateurs les entreront. Incluez des énoncés qui signifient la même chose mais présentent des constructions différentes :
 
@@ -27,7 +29,7 @@ Collectez des énoncés dont vous pensez que les utilisateurs les entreront. Inc
 
 ## <a name="how-to-choose-varied-utterances"></a>Comment choisir les énoncés variés
 
-Lorsque vous commencez à [ajouter des exemples d’énoncé](luis-how-to-add-example-utterances.md) à votre modèle LUIS, voici quelques principes à garder à l’esprit.
+Lorsque vous commencez à [ajouter des exemples d’énoncé](./luis-how-to-add-entities.md) à votre modèle LUIS, voici quelques principes à garder à l’esprit.
 
 ### <a name="utterances-arent-always-well-formed"></a>Les énoncés ne sont pas toujours correctement formés
 
@@ -84,7 +86,7 @@ Définissez les paramètres de version sur le portail LUIS, dans la section **Ma
 
 ### <a name="word-forms"></a>Formes des mots
 
-La normalisation **word forms** (formes des mots) ignore les différences entre les mots qui se développent au-delà de leur racine. Par exemple, les mots `run`, `running` et `runs` correspondent à différentes formes de conjugaison.
+La normalisation **word forms** (formes des mots) ignore les différences entre les mots qui se développent au-delà de leur racine.
 
 <a name="utterance-normalization-for-diacritics-and-punctuation"></a>
 
@@ -145,5 +147,4 @@ Si vous souhaitez qu’une entité d’événement recherche toutes les données
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur la formation d’une application LUIS pour comprendre les énoncés des utilisateurs, voir [Ajouter des exemples d’énoncés](luis-how-to-add-example-utterances.md).
-
+Pour plus d’informations sur la formation d’une application LUIS pour comprendre les énoncés des utilisateurs, voir [Ajouter des exemples d’énoncés](./luis-how-to-add-entities.md).

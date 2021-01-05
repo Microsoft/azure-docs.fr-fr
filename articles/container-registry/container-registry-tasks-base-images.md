@@ -3,12 +3,12 @@ title: Mises à jour des images de base – Tâches
 description: Familiarisez-vous avec les images de base pour les images conteneurs d’application et découvrez comment la mise à jour d’une image de base peut déclencher une tâche Azure Container Registry.
 ms.topic: article
 ms.date: 01/22/2019
-ms.openlocfilehash: 017c8f8a3a15896bd6e14a54136ba713e9f9c499
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: df33096830cd7b34a288c38c105aff3610315337
+ms.sourcegitcommit: 17e9cb8d05edaac9addcd6e0f2c230f71573422c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617729"
+ms.lasthandoff: 12/21/2020
+ms.locfileid: "97707484"
 ---
 # <a name="about-base-image-updates-for-acr-tasks"></a>À propos des mises à jour des images de base pour ACR Tasks
 
@@ -22,9 +22,13 @@ Une image de base est souvent mise à jour par le chargé de maintenance des ima
 
 Dans certains cas, par exemple une équipe de développement privée, l’image de base spécifie plus que le système d’exploitation ou le framework. Par exemple, l’image de base peut être une image de composant de service partagé pour laquelle un suivi est nécessaire. Les membres d’une équipe peuvent avoir besoin d’effectuer le suivi de cette image de base à des fins de test ou de la mettre à jour régulièrement lors du développement d’images d’application.
 
+## <a name="maintain-copies-of-base-images"></a>Conserver des copies d’images de base
+
+Pour tout contenu de vos registres qui dépend d’un contenu de base conservé dans un registre public tel que Docker Hub, nous vous recommandons de copier le contenu dans un registre de conteneurs Azure ou dans un autre registre privé. Ensuite, assurez-vous de générer vos images d’application en référençant les images de base privées. Azure Container Registry fournit une capacité d’[importation d’images](container-registry-import-images.md) permettant de copier facilement le contenu des registres publics ou d’autres registres de conteneurs Azure. La section suivante décrit l’utilisation d’ACR Tasks pour suivre les mises à jour des images de base lors de la génération des mises à jour des applications. Vous pouvez suivre les mises à jour des images de base dans vos registres de conteneurs Azure et éventuellement dans les registres publics en amont.
+
 ## <a name="track-base-image-updates"></a>Suivi des mises à jour des images de base
 
-ACR Tasks vous permet de générer automatiquement des images lorsque l’image de base d’un conteneur est mise à jour.
+ACR Tasks vous permet de générer automatiquement des images lorsque l’image de base d’un conteneur est mise à jour. Vous pouvez utiliser cette capacité pour gérer et mettre à jour des copies d’images de base publiques dans vos registres de conteneurs Azure, puis pour régénérer les images d’application qui dépendent des images de base.
 
 ACR Tasks découvre dynamiquement les dépendances des images de base lorsqu’il génère une image conteneur. Par conséquent, il peut détecter quand l’image de base d’une image d’application est mise à jour. Avec une tâche de build préconfigurée, ACR Tasks est capable de reconstruire automatiquement chacune des images d’application faisant référence à l’image de base. Grâce à ces détection et regénération automatiques, ACR Tasks vous permet d’économiser le temps et les efforts normalement nécessaires au suivi et à la mise à jour manuels de chaque image d’application faisant référence à votre image de base mise à jour.
 
@@ -39,6 +43,13 @@ Pour les générations d’images à partir d’un fichier Dockerfile, une tâch
 
 Si l’image de base spécifiée dans l’instruction `FROM` se trouve à l’un de ces emplacements, la tâche ACR ajoute un hook pour que l’image soit bien regénérée à chaque mise à jour de sa base.
 
+## <a name="base-image-notifications"></a>Notifications d’images de base
+
+Le délai entre le moment où une image de base est mise à jour et le moment où la tâche dépendante est déclenchée dépend de l’emplacement de l’image de base :
+
+* **Images de base à partir d’un référentiel public dans Docker Hub ou MCR** : pour les images de base dans des référentiels publics, une tâche ACR vérifie les mises à jour de l’image à un intervalle aléatoire compris entre 10 et 60 minutes. Les tâches dépendantes sont exécutées en conséquence.
+* **Images de base à partir d’un registre de conteneurs Azure** : pour les images de base dans des registres de conteneurs Azure, une tâche ACR se déclenche immédiatement lorsque son image de base est mise à jour. L’image de base peut figurer dans le même ACR que celui dans lequel la tâche s’exécute, ou dans un ACR différent d’une autre région.
+
 ## <a name="additional-considerations"></a>Considérations supplémentaires
 
 * **Images de base pour les images d’application** : actuellement, une tâche ACR ne suit les mises à jour des images de base que pour les images d’application (*runtime*). Elles ne suivent pas les mises à jour des images de base pour les images intermédiaires (*au moment de la génération*) utilisées dans des Dockerfiles multiétapes.  
@@ -46,7 +57,7 @@ Si l’image de base spécifiée dans l’instruction `FROM` se trouve à l’un
 * **Activé par défaut** : lorsque vous créez une tâche ACR avec la commande [az acr task create][az-acr-task-create], elle est par défaut *activée* pour se déclencher par la mise à jour de l’image de base. Cela signifie que la propriété `base-image-trigger-enabled` est définie sur True. Si vous voulez désactiver ce comportement dans une tâche, mettez à jour la propriété sur False. Par exemple, exécutez la commande suivante [az acr task update][az-acr-task-update] :
 
   ```azurecli
-  az acr task update --myregistry --name mytask --base-image-trigger-enabled False
+  az acr task update --registry myregistry --name mytask --base-image-trigger-enabled False
   ```
 
 * **Déclencher pour le suivi des dépendances** : pour permettre à une tâche ACR de déterminer et de suivre les dépendances d’une image conteneur, y compris son image de base, vous devez d’abord déclencher la génération de l’image **au moins une fois**. Par exemple, déclenchez la tâche manuellement en utilisant la commande [az acr task run][az-acr-task-run].

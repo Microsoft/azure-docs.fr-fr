@@ -5,14 +5,14 @@ services: vpn-gateway
 author: scottnap
 ms.service: vpn-gateway
 ms.topic: conceptual
-ms.date: 03/21/2020
+ms.date: 09/08/2020
 ms.author: scottnap
-ms.openlocfilehash: 8a22e8f0bde2d13b4055566d96680fadc2db6e11
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 70b5732e1293e35127a19fbe736d8562056a870b
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80337089"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499677"
 ---
 # <a name="working-remotely-network-virtual-appliance-nva-considerations-for-remote-work"></a>Travail à distance : Considérations relatives aux appliances virtuelles réseau (NVA) pour le travail à distance
 
@@ -30,7 +30,7 @@ Tous les principaux fournisseurs d’appliances virtuelles réseausur la place d
 
 - **Capacité et nombre d’utilisateurs simultanés** : ce nombre est particulièrement important pour les utilisateurs VPN de point à site, car chaque utilisateur connecté crée un tunnel chiffré (VPN IPSec ou SSL).  
 - **Débit agrégé** : quelle est la bande passante agrégée dont vous avez besoin pour prendre en charge tous les utilisateurs auxquels vous devez fournir l’accès à distance.
-- **Taille de machine virtuelle nécessaire** : vous devez toujours utiliser les tailles de machines virtuelles recommandées par le fournisseur d’appliances virtuelles réseau.  Dans le cas d’un VPN de point à site, si vous avez des connexions utilisateur simultanées, vous devez utiliser des machines virtuelles de plus grande taille, par exemple des machines virtuelles [dv2 et DSv2](https://docs.microsoft.com/azure/virtual-machines/dv2-dsv2-series "Série dv2 et Dsv2"). Ces machines virtuelles ont en général plus de processeurs virtuels et peuvent gérer plus de sessions VPN simultanées.  En plus d’avoir davantage de cœurs virtuels, les machines virtuelles de grande taille dans Azure disposent de plus de capacité de bande passante que les machines virtuelles de petite taille.
+- **Taille de machine virtuelle nécessaire** : vous devez toujours utiliser les tailles de machines virtuelles recommandées par le fournisseur d’appliances virtuelles réseau.  Dans le cas d’un VPN de point à site, si vous avez des connexions utilisateur simultanées, vous devez utiliser des machines virtuelles de plus grande taille, par exemple des machines virtuelles [dv2 et DSv2](../virtual-machines/dv2-dsv2-series.md "Série dv2 et Dsv2"). Ces machines virtuelles ont en général plus de processeurs virtuels et peuvent gérer plus de sessions VPN simultanées.  En plus d’avoir davantage de cœurs virtuels, les machines virtuelles de grande taille dans Azure disposent de plus de capacité de bande passante que les machines virtuelles de petite taille.
     > **Important :** Chaque fournisseur utilise les ressources de façon différente.  S’il n’est pas évident de connaître les tailles d’instance que vous devez utiliser pour accueillir la charge utilisateur estimée, contactez le fournisseur du logiciel directement et demandez-lui conseil.
 - **Nombre d’instances** : si vous prévoyez un grand nombre d’utilisateurs et de connexions, certaines limites s’appliquent à la possibilité d’augmenter la taille des instances d’appliances virtuelles réseau.  Envisagez de déployer plusieurs instances de machine virtuelle.
 - **VPN IPSec et VPN SSL** : en général, les implémentations VPN IPSec fonctionnent mieux que les implémentations VPN SSL.  
@@ -53,6 +53,8 @@ La plupart de grands services d’appliances virtuelles réseau ont publié des 
 
 [Barracuda facilite le travail à domicile tout en sécurisant vos données pendant l’épidémie de COVID-19](https://www.barracuda.com/covid-19/work-from-home "Faciliter le travail à domicile tout en sécurisant vos données pendant l’épidémie de COVID-19")
 
+[Check Point - Personnel en distanciel sécurisé pendant le coronavirus](https://www.checkpoint.com/solutions/secure-remote-workforce-during-coronavirus/ "Personnel en distanciel sécurisé pendant le coronavirus")
+
 [Implémentation de Cisco AnyConnect et informations de référence sur les performances et la mise à l’échelle pour la préparation pendant le COVID-19](https://www.cisco.com/c/en/us/support/docs/security/anyconnect-secure-mobility-client/215331-anyconnect-implementation-and-performanc.html "Implémentation de Cisco AnyConnect et informations de référence sur les performances et la mise à l’échelle pour la préparation pendant le COVID-19")
 
 [Centre de support Citrix COVID-19](https://www.citrix.com/support/covid-19-coronavirus.html "Centre de support Citrix COVID-19")
@@ -62,3 +64,6 @@ La plupart de grands services d’appliances virtuelles réseau ont publié des 
 [Informations COVID-19 de Fortinet pour les clients et partenaires](https://www.fortinet.com/covid-19.html "Informations COVID-19 de Fortinet pour les clients et partenaires")
 
 [Centre de réponse COVID-19 de Palo Alto Networks](https://live.paloaltonetworks.com/t5/COVID-19-Response-Center/ct-p/COVID-19_Response_Center "Centre de réponse COVID-19 de Palo Alto Networks")
+
+[Kemp - Activer le travail à distance et expérience d’application toujours accessible pour la continuité de l’activité](https://kemptechnologies.com/remote-work-always-on-application-experience-business-continuity/ "Kemp - Activer le travail à distance et expérience d’application toujours accessible pour la continuité de l’activité")
+

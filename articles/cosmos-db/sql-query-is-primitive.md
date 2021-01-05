@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : IS_PRIMITIVE'
 description: Découvrez la fonction système SQL IS_PRIMITIVE dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 04c8e41f1a431b329f2093851e4430e69ab6aee3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6006a56fd9a8ed6bcb323aebb4e075fa42a2966e
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78303781"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341873"
 ---
 # <a name="is_primitive-azure-cosmos-db"></a>IS_PRIMITIVE (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une valeur booléenne indiquant si l’expression spécifiée est de type primitif (chaîne, booléen, numérique ou null).  
   
 ## <a name="syntax"></a>Syntaxe

@@ -3,21 +3,21 @@ title: Déployer des hôtes dédiés Azure à l’aide d’Azure PowerShell
 description: Déployez des machines virtuelles sur des hôtes dédiés à l’aide d’Azure PowerShell.
 author: cynthn
 ms.service: virtual-machines-windows
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
-ms.date: 08/01/2019
+ms.date: 11/12/2020
 ms.author: cynthn
 ms.reviewer: zivr
-ms.openlocfilehash: b90189c6ba5e51a24d0c248b5aa08e9a5e4bbd9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2f8f2d9eb14e1272af126c9a6d6663f41aaee33f
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82082847"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97005084"
 ---
 # <a name="deploy-vms-to-dedicated-hosts-using-the-azure-powershell"></a>Déployez des machines virtuelles sur des hôtes dédiés à l’aide d’Azure PowerShell
 
-Cet article vous guide dans la création d’un [hôte dédié](dedicated-hosts.md) Azure pour héberger vos machines virtuelles. 
+Cet article vous guide dans la création d’un [hôte dédié](../dedicated-hosts.md) Azure pour héberger vos machines virtuelles. 
 
 Assurez-vous d’avoir installé Azure PowerShell version 2.8.0 ou ultérieure et d’être connecté à un compte Azure avec `Connect-AzAccount`. 
 
@@ -49,6 +49,10 @@ $hostGroup = New-AzHostGroup `
    -ResourceGroupName $rgName `
    -Zone 1
 ```
+
+
+Ajoutez le paramètre `-SupportAutomaticPlacement true` pour que vos machines virtuelles et vos instances de groupes identiques soient placées automatiquement sur les hôtes au sein d’un groupe hôte. Pour plus d’informations, consultez [Sélection élective manuelle ou automatique](../dedicated-hosts.md#manual-vs-automatic-placement).
+
 
 ## <a name="create-a-host"></a>Créer un hôte
 
@@ -165,13 +169,34 @@ Location               : eastus
 Tags                   : {}
 ```
 
+## <a name="create-a-scale-set"></a>Créer un groupe identique 
+
+Lorsque vous déployez un groupe identique, vous spécifiez le groupe hôte.
+
+```azurepowershell-interactive
+New-AzVmss `
+  -ResourceGroupName "myResourceGroup" `
+  -Location "EastUS" `
+  -VMScaleSetName "myDHScaleSet" `
+  -VirtualNetworkName "myVnet" `
+  -SubnetName "mySubnet" `
+  -PublicIpAddressName "myPublicIPAddress" `
+  -LoadBalancerName "myLoadBalancer" `
+  -UpgradePolicyMode "Automatic"`
+  -HostGroupId $hostGroup.Id
+```
+
+Si vous souhaitez choisir manuellement l’hôte sur lequel déployer le groupe identique, ajoutez `--host` et le nom de l’hôte.
+
+
+
 ## <a name="add-an-existing-vm"></a>Ajouter une machine virtuelle existante 
 
 Vous pouvez ajouter une machine virtuelle existante à un hôte dédié, mais la machine virtuelle doit d’abord être arrêtée\libérée. Avant de déplacer une machine virtuelle vers un hôte dédié, vérifiez que la configuration de la machine virtuelle est prise en charge :
 
 - La taille de la machine virtuelle doit appartenir à la même famille de tailles que l’hôte dédié. Par exemple, si votre hôte dédié est DSv3, la taille de la machine virtuelle peut être Standard_D4s_v3, mais pas Standard_A4_v2. 
 - La machine virtuelle doit être située dans la même région que l’hôte dédié.
-- La machine virtuelle ne peut pas faire partie d’un groupe de placements de proximité. Supprimez la machine virtuelle du groupe de placements de proximité avant de la déplacer vers un hôte dédié. Pour plus d’informations, consultez [Déplacer une machine virtuelle hors d’un groupe de placements de proximité](https://docs.microsoft.com/azure/virtual-machines/windows/proximity-placement-groups#move-an-existing-vm-out-of-a-proximity-placement-group).
+- La machine virtuelle ne peut pas faire partie d’un groupe de placements de proximité. Supprimez la machine virtuelle du groupe de placements de proximité avant de la déplacer vers un hôte dédié. Pour plus d’informations, consultez [Déplacer une machine virtuelle hors d’un groupe de placements de proximité](./proximity-placement-groups.md#move-an-existing-vm-out-of-a-proximity-placement-group).
 - La machine virtuelle ne peut pas se trouver dans un groupe à haute disponibilité.
 - Si la machine virtuelle se trouve dans une zone de disponibilité, il doit s’agir de la même zone de disponibilité que celle du groupe hôte. Les paramètres de zone de disponibilité de la machine virtuelle et du groupe hôte doivent correspondre.
 
@@ -244,4 +269,4 @@ Remove-AzResourceGroup -Name $rgName
 
 - Un exemple de modèle, disponible [ici](https://github.com/Azure/azure-quickstart-templates/blob/master/201-vm-dedicated-hosts/README.md), utilise les zones et les domaines d’erreur pour offrir une résilience maximale dans une région.
 
-- Le [Portail Microsoft Azure](dedicated-hosts-portal.md) permet également de déployer des hôtes dédiés.
+- Le [Portail Microsoft Azure](../dedicated-hosts-portal.md) permet également de déployer des hôtes dédiés.

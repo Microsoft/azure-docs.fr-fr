@@ -5,16 +5,16 @@ description: Découvrez comment créer une passerelle d’application qui héber
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/13/2019
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: 0a92d0f7d17f6bb83efbe94434c25072975dbe57
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 350962aed89d04c5508e7b2c50e8a838cd5a7174
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74047357"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566144"
 ---
 # <a name="create-an-application-gateway-that-hosts-multiple-web-sites-using-the-azure-cli"></a>Créer une passerelle d’application qui héberge plusieurs sites web à l’aide d’Azure CLI
 
@@ -22,23 +22,22 @@ Vous pouvez utiliser Azure CLI pour [configurer l’hébergement de plusieurs si
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle Application Gateway
-> * Créer des écouteurs principaux
-> * Créer des règles d’acheminement
-> * Créer des groupes de machines virtuelles identiques avec les pools principaux
-> * Créer un enregistrement CNAME dans votre domaine
+* Configurer le réseau
+* Créer une passerelle Application Gateway
+* Créer des écouteurs principaux
+* Créer des règles d’acheminement
+* Créer des groupes de machines virtuelles identiques avec les pools principaux
+* Créer un enregistrement CNAME dans votre domaine
 
-![Exemple de routage multisite](./media/tutorial-multiple-sites-cli/scenario.png)
+:::image type="content" source="./media/tutorial-multiple-sites-cli/scenario.png" alt-text="Passerelle d’application multisite":::
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure PowerShell](tutorial-multiple-sites-powershell.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter la version Azure CLI 2.0.4 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Cet tutoriel nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -119,9 +118,13 @@ az network application-gateway address-pool create \
   --name fabrikamPool
 ```
 
-### <a name="add-backend-listeners"></a>Ajouter des écouteurs backend
+### <a name="add-listeners"></a>Ajouter des écouteurs
 
-Ajoutez les écouteurs backend nécessaires pour acheminer le trafic à l’aide de la commande [az network application-gateway http-listener create](/cli/azure/network/application-gateway/http-listener#az-network-application-gateway-http-listener-create).
+Ajoutez les écouteurs nécessaires pour acheminer le trafic à l’aide de la commande [az network application-gateway http-listener create](/cli/azure/network/application-gateway/http-listener#az-network-application-gateway-http-listener-create).
+
+>[!NOTE]
+> À l’aide du niveau tarifaire Application Gateway ou WAF v2, vous pouvez également configurer jusqu’à 5 noms d’hôte par écouteur et utiliser des caractères génériques dans le nom d’hôte. Pour plus d’informations, consultez les informations relatives aux [noms d’hôtes comportant des caractères génériques dans l’écouteur](multiple-site-overview.md#wildcard-host-names-in-listener-preview).
+>Pour utiliser plusieurs noms d’hôte et caractères génériques dans un écouteur à l’aide d’Azure CLI, vous devez utiliser `--host-names` au lieu de `--host-name`. Grâce au préfixe « host-names », vous pouvez spécifier jusqu’à cinq noms d’hôte comme valeurs séparées par une espace. Par exemple : `--host-names "*.contoso.com *.fabrikam.com"`
 
 ```azurecli-interactive
 az network application-gateway http-listener create \

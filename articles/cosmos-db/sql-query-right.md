@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : RIGHT'
 description: Découvrez la fonction système SQL RIGHT dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 247616d2ac4f2a5799a5896d679f6e6d5917d5a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: be950fed563d8e80339dc80181e7fe5a78092734
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302149"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341572"
 ---
 # <a name="right-azure-cosmos-db"></a>RIGHT (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne la partie droite d’une chaîne avec le nombre de caractères spécifié.  
   
 ## <a name="syntax"></a>Syntaxe

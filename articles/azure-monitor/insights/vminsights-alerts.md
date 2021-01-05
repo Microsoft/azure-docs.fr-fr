@@ -5,16 +5,19 @@ ms.subservice: ''
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/23/2020
-ms.openlocfilehash: 987537d8497b3d8f2728941334d8328320ec6997
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/10/2020
+ms.openlocfilehash: f582f0dc7547a607351fcfc4ff9d39e8c5a077df
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80289394"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94686175"
 ---
 # <a name="how-to-create-alerts-from-azure-monitor-for-vms"></a>Comment créer des alertes à partir d’Azure Monitor pour machines virtuelles
 [Les alertes dans Azure Monitor](../platform/alerts-overview.md) vous informent de façon proactive des données et des modèles intéressants dans vos données de surveillance. Azure Monitor pour machines virtuelles n’inclut pas de règles d’alerte préconfigurées, mais vous pouvez créer vos propres règles en fonction des données collectées. Cet article fournit des conseils sur la création de règles d’alerte, y compris un ensemble d’exemples de requêtes.
+
+> [!IMPORTANT]
+> Les alertes décrites dans cet article sont basées sur des requêtes de journal à partir de données collectées par Azure Monitor pour machines virtuelles. Cela diffère des alertes créées par [Intégrité des invités Azure Monitor pour machines virtuelles](vminsights-health-overview.md), qui est une fonctionnalité actuellement en préversion publique. À mesure que cette fonctionnalité se rapproche de la disponibilité générale, des conseils sur les alertes seront consolidés.
 
 
 ## <a name="alert-rule-types"></a>Types de règles d’alerte
@@ -22,8 +25,8 @@ Azure Monitor propose [différents types de règles d’alerte](../platform/aler
 
 Il existe deux types d’alertes de journal dans Azure Monitor :
 
-- Les [alertes sur le nombre de résultats](../platform/alerts-unified-log.md#number-of-results-alert-rules) créent une alerte unique lorsqu’une requête retourne au moins un nombre spécifié d’enregistrements. Elles sont idéales pour les données non numériques, comme les événements Windows et syslog collectés par [l’agent Log Analytics](../platform/log-analytics-agent.md) ou pour l’analyse des tendances de performances sur plusieurs ordinateurs.
-- Les [alertes de mesure de métrique](../platform/alerts-unified-log.md#metric-measurement-alert-rules) créent une alerte distincte pour chaque enregistrement dans une requête dont la valeur dépasse un seuil défini dans la règle d’alerte. Ces règles d’alerte sont idéales pour les données de performances collectées par Azure Monitor pour machines virtuelles, car elles peuvent créer des alertes individuelles pour chaque ordinateur.
+- Les [alertes sur le nombre de résultats](../platform/alerts-unified-log.md#count-of-the-results-table-rows) créent une alerte unique lorsqu’une requête retourne au moins un nombre spécifié d’enregistrements. Elles sont idéales pour les données non numériques, comme les événements Windows et syslog collectés par [l’agent Log Analytics](../platform/log-analytics-agent.md) ou pour l’analyse des tendances de performances sur plusieurs ordinateurs.
+- Les [alertes de mesure de métrique](../platform/alerts-unified-log.md#calculation-of-measure-based-on-a-numeric-column-such-as-cpu-counter-value) créent une alerte distincte pour chaque enregistrement dans une requête dont la valeur dépasse un seuil défini dans la règle d’alerte. Ces règles d’alerte sont idéales pour les données de performances collectées par Azure Monitor pour machines virtuelles, car elles peuvent créer des alertes individuelles pour chaque ordinateur.
 
 
 ## <a name="alert-rule-walkthrough"></a>Procédure pas à pas pour les règles d’alerte

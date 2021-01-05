@@ -8,24 +8,24 @@ ms.topic: conceptual
 ms.date: 03/10/2020
 ms.author: victorh
 ms.reviewer: tyao
-ms.openlocfilehash: e287da94a71fccabddb90f3f5a3699f4c4cf22a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fcd7a0fe60639bbb17661a906d15136996b325e4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79472603"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87005444"
 ---
-# <a name="what-is-geo-filtering-on-a-domain-for-azure-front-door"></a>Présentation du filtrage géographique sur un domaine Azure Front Door
+# <a name="what-is-geo-filtering-on-a-domain-for-azure-front-door-service"></a>Qu’est-ce que le filtrage géographique sur un domaine Azure Front Door Service ?
 
 Par défaut, Azure Front Door Service répond aux demandes de l’utilisateur, quel que soit son emplacement. Toutefois, dans certains cas, vous devrez peut-être limiter l’accès à vos applications web en fonction du pays/de la région. Le service de pare-feu d’applications web (WAF) au niveau de Front Door vous permet de définir une stratégie à l’aide de règles d’accès personnalisées pour un chemin d’accès spécifique à votre point de terminaison. Cette stratégie autorisera ou bloquera l’accès à partir de pays/régions spécifiés. 
 
-Une stratégie WAF est généralement constituée d’un ensemble de règles personnalisées. Une règle se compose de conditions de correspondance, d’une action et d’une priorité. Dans les conditions de correspondance, vous pourrez définir une variable de correspondance, un opérateur et une valeur de correspondance.  En ce qui concerne la règle de filtrage géographique, la variable de correspondance est REMOTE_ADDR, l’opérateur est GeoMatch, la valeur correspond à l’indicatif à deux lettres du pays d’intérêt. Vous pouvez combiner une condition GeoMatch et une condition de correspondance de chaîne REQUEST_URI pour créer une règle de filtrage géographique basé sur le chemin d’accès.
+Une stratégie WAF est généralement constituée d’un ensemble de règles personnalisées. Une règle se compose de conditions de correspondance, d’une action et d’une priorité. Dans les conditions de correspondance, vous pourrez définir une variable de correspondance, un opérateur et une valeur de correspondance.  En ce qui concerne la règle de filtrage géographique, la variable de correspondance est REMOTE_ADDR, l’opérateur est GeoMatch, la valeur correspond à l’indicatif à deux lettres du pays/région d’intérêt. Vous pouvez combiner une condition GeoMatch et une condition de correspondance de chaîne REQUEST_URI pour créer une règle de filtrage géographique basé sur le chemin d’accès.
 
 Vous pouvez configurer une stratégie de filtrage géographique pour votre porte d’entrée à l’aide d’[Azure PowerShell](waf-front-door-tutorial-geo-filtering.md) ou de notre [modèle de démarrage rapide](https://github.com/Azure/azure-quickstart-templates/tree/master/101-front-door-geo-filtering).
 
-## <a name="country-code-reference"></a>Référence de l’indicatif de pays
+## <a name="countryregion-code-reference"></a>Référence du code pays ou région
 
-|Code pays | Nom du pays |
+|Code pays ou région | Nom du pays ou de la région |
 | ----- | ----- |
 | AD | Andorre |
 | AE | Émirats Arabes Unis|
@@ -84,7 +84,7 @@ Vous pouvez configurer une stratégie de filtrage géographique pour votre porte
 | FJ | Fidji|
 | FM | Micronésie, États fédérés de|
 | FR | France|
-| Go | United Kingdom|
+| Go | Royaume-Uni|
 | GE | Géorgie|
 | GF | Guyane française|
 | GH | Ghana|
@@ -149,7 +149,7 @@ Vous pouvez configurer une stratégie de filtrage géographique pour votre porte
 | NE | Niger|
 | NG | Nigeria|
 | NI | Nicaragua|
-| NL | Pays-bas|
+| NL | Pays-Bas|
 | Non | Norvège|
 | NP | Népal|
 | NR | Nauru|

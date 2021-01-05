@@ -1,14 +1,16 @@
 ---
 title: Mode Apprenti - Personalizer
 description: ''
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 05/01/2020
-ms.openlocfilehash: 2697ab4b32edbd4841f2b11725fda46e90e7ae7e
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: f793535f04b36d231cec384b7acd66e38a7eb039
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599305"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91253528"
 ---
 # <a name="use-apprentice-mode-to-train-personalizer-without-affecting-your-existing-application"></a>Utilisez le mode Apprenti pour effectuer l'apprentissage de Personalizer sans affecter l'application existante
 
@@ -30,7 +32,7 @@ Le mode Apprenti vous permet de vous appuyer sur le service Personalizer et ses 
 
 Les deux principales raisons d'utiliser le mode Apprenti sont les suivantes :
 
-* Atténuation des **démarrages à froid** : Le mode Apprenti permet de gérer et d'évaluer le coût du temps d'apprentissage d'un « nouveau » modèle - lorsqu'il ne retourne pas la meilleure action et n'atteint pas un niveau d'efficacité satisfaisant de 75 à 85 %.
+* Atténuation des **démarrages à froid** : Le mode Apprenti permet de gérer et d’évaluer le coût du temps d’apprentissage d’un « nouveau » modèle – lorsqu’il ne retourne pas la meilleure action et n’atteint pas un niveau d’efficacité satisfaisant de 60 à 80 %.
 * **Validation des caractéristiques d'action et de contexte** : Les caractéristiques liées aux actions et au contexte peuvent être inadéquates ou inexactes - insuffisantes, trop nombreuses, incorrectes ou trop spécifiques pour effectuer l'apprentissage de Personalizer en vue d'atteindre le taux d'efficacité idéal. Utilisez les [évaluations des caractéristiques](concept-feature-evaluation.md) pour rechercher et résoudre les problèmes liés aux caractéristiques.
 
 ## <a name="when-should-you-use-apprentice-mode"></a>Quand devez-vous utiliser le mode Apprenti ?
@@ -68,7 +70,7 @@ L'apprentissage n'est pas le même en mode Apprenti et en mode En ligne.
 Remarque sur l'efficacité du mode Apprenti :
 
 * L'efficacité de Personalizer en mode Apprenti se rapproche rarement des 100 % de la référence de l'application ; et il ne fait jamais mieux.
-* Les meilleures pratiques consistent à ne pas essayer d'atteindre 100 %. Selon le cas d'usage, une fourchette de 75 à 85 % doit être visée.
+* Les bonnes pratiques consistent à ne pas essayer d’atteindre 100 %. Selon le cas d’usage, une fourchette de 60 à 80 % doit être ciblée.
 
 ## <a name="using-apprentice-mode-to-train-with-historical-data"></a>Utilisation du mode Apprenti pour effectuer l'apprentissage avec des données historiques
 

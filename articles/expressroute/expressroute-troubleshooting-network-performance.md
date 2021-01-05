@@ -2,18 +2,18 @@
 title: 'Détecter un problème de performance de la liaison réseau : Azure'
 description: Cette page fournit une méthode standardisée pour tester le niveau de performance de la liaison réseau Azure.
 services: expressroute
-author: tracsman
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 12/20/2017
-ms.author: jonor
+ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: bb68919fba731caa32dcca3f4c991b8881afc6f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a021d658711e77c3e3be0df722223cefe506abba
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74869644"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92204586"
 ---
 # <a name="troubleshooting-network-performance"></a>Résolution des problèmes de performances réseau
 ## <a name="overview"></a>Vue d’ensemble
@@ -121,7 +121,7 @@ Si vous ignorez le périmètre réel du cloud, l’isolation des composants Azur
 ![2][2]
 
 >[!NOTE]
-> Notez que MSEE ne se trouve pas dans le cloud Azure. ExpressRoute est en fait à la périphérie du réseau Microsoft, pas véritablement dans Azure. Une fois que vous êtes connecté avec ExpressRoute à un MSEE, vous êtes connecté au réseau de Microsoft, à partir duquel vous pouvez accéder à n’importe quels services cloud, tels qu’Office 365 (avec le peering Microsoft) ou Azure (avec le peering privé et/ou Microsoft).
+> Notez que MSEE ne se trouve pas dans le cloud Azure. ExpressRoute est en fait à la périphérie du réseau Microsoft, pas véritablement dans Azure. Une fois que vous êtes connecté avec ExpressRoute à MSEE, vous êtes connecté au réseau de Microsoft, à partir duquel vous pouvez accéder à n’importe quel service cloud, tel que Microsoft 365 (avec le Peering Microsoft) ou Azure (avec le Peering privé et/ou Microsoft).
 >
 >
 
@@ -177,9 +177,8 @@ Configuration des tests :
 >
 >
 
-| | | | | | |
-|-|-|-|-|-|-|
-|ExpressRoute<br/>Emplacement|Azure<br/>Région|Distance<br/>estimée (km)|Latence|1 Session<br/>Bande passante|Maximale<br/>Bande passante|
+| ExpressRoute<br/>Emplacement|Azure<br/>Région | Distance<br/>estimée (km) | Latence|1 Session<br/>Bande passante | Maximale<br/>Bande passante |
+| ------------------------------------------ | --------------------------- |  - | - | - | - |
 | Seattle | USA Ouest 2        |    191 km |   5 ms | 262,0 Mbits/s |  3,74 Gbits/s |
 | Seattle | USA Ouest          |  1\.094 km |  18 ms |  82,3 Mbits/s |  3,70 Gbits/s |
 | Seattle | USA Centre       |  2\.357 km |  40 ms |  38,8 Mbits/s |  2,55 Gbits/s |
@@ -210,6 +209,6 @@ Configuration des tests :
 <!--Link References-->
 [Performance Doc]: https://github.com/Azure/NetworkMonitoring/blob/master/AzureCT/PerformanceTesting.md
 [Availability Doc]: https://github.com/Azure/NetworkMonitoring/blob/master/AzureCT/AvailabilityTesting.md
-[Network Docs]: https://docs.microsoft.com/azure/index
+[Network Docs]: ../index.yml
 [Ticket Link]: https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview
 [ACT]: https://aka.ms/AzCT

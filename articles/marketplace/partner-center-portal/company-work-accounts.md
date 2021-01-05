@@ -1,18 +1,18 @@
 ---
 title: Comptes professionnels d’entreprise et Espace partenaires
 description: Comment vérifier si votre entreprise possède un compte professionnel configuré avec Microsoft, créer un nouveau compte professionnel ou configurer plusieurs comptes professionnels à utiliser avec l’Espace partenaires.
-author: dsindona
-ms.author: parthp
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
+author: parthpandyaMSFT
+ms.author: parthp
 ms.date: 05/30/2019
-ms.openlocfilehash: 3c0ee2f8d5291f7904435dea32d913adeaaf25c5
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 5b4aadc506b2f4a251ccef5e9488066b609ba5a5
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81262364"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130525"
 ---
 # <a name="company-work-accounts-and-partner-center"></a>Comptes professionnels d’entreprise et Espace partenaires
 
@@ -20,7 +20,7 @@ L’Espace partenaires utilise des comptes professionnels d’entreprise, égale
 
 ## <a name="check-whether-your-company-already-has-a-work-account"></a>Vérifier si votre entreprise possède déjà un compte professionnel
 
-Si votre entreprise s’est abonnée à un service de cloud Microsoft comme Azure, Microsoft Intune ou Office 365, vous disposez déjà d’un domaine de compte de messagerie (également appelé locataire Azure Active Directory) qui peut être utilisé avec l’Espace partenaires.
+Si votre entreprise s’est abonnée à un service cloud Microsoft comme Azure, Microsoft Intune ou Microsoft 365, vous disposez déjà d’un domaine de compte de messagerie (également appelé locataire Azure Active Directory) qui peut être utilisé avec l’Espace partenaires.
 
 Pour vérifier, procédez comme suit :
 1. Connectez-vous au portail d’administration Azure sur https://portal.azure.com.
@@ -44,7 +44,7 @@ Pour créer un nouveau compte professionnel pour votre entreprise, suivez les é
 
 L’adresse e-mail du compte d’utilisateur doit être un nom de domaine vérifié dans votre répertoire. Vous pouvez répertorier tous les domaines vérifiés dans votre répertoire en sélectionnant **Azure Active Directory** -> **Noms de domaine personnalisés** dans le menu de navigation de gauche.
 
-Pour en savoir plus sur l’ajout de domaines personnalisés dans Azure Active Directory, consultez [Ajouter ou associer un domaine dans Azure AD](https://docs.microsoft.com/azure/active-directory/active-directory-add-domain).
+Pour en savoir plus sur l’ajout de domaines personnalisés dans Azure Active Directory, consultez [Ajouter ou associer un domaine dans Azure AD](../../active-directory/fundamentals/add-custom-domain.md).
 
 ## <a name="troubleshoot-work-email-sign-in"></a>Résoudre les problèmes de connexion à la messagerie professionnelle
 
@@ -54,4 +54,4 @@ Si vous ne parvenez pas à vous connecter à votre compte professionnel (égalem
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Gérer votre compte Place de marché commerciale dans l’Espace partenaires](./manage-account.md) 
+- [Gérer votre compte Place de marché commerciale dans l’Espace partenaires](./manage-account.md)

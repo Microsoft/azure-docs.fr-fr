@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=weig, previous-ms.author=weig
-ms.openlocfilehash: 9612114bb368898ccf31b2c8692869b84544b652
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce37ee51e549a2bd6f2747f28af8c038c39d8f1f
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721976"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656833"
 ---
 # <a name="data-science-code-testing-on-azure-with-the-team-data-science-process-and-azure-devops-services"></a>Test de code de science des données dans Azure avec Team Data Science Process et Azure DevOps Services
 Cet article donne des recommandations préliminaires pour tester les codes dans un flux de travail de science des données. Ce type de test permet aux chercheurs de données de vérifier leur code systématiquement et efficacement pour en garantir la qualité et le résultat. Nous nous basons sur un projet TDSP (Team Data Science Process) [qui utilise le jeu de données UCI Adult Income](https://github.com/Azure/MachineLearningSamples-TDSPUCIAdultIncome) que nous avons publié précédemment afin de montrer comment tester les codes. 
@@ -124,7 +124,7 @@ Utilisez les étapes suivantes pour configurer et exécuter un test de code et u
 
     ![Liste des modèles et bouton Processus vide](./media/code-test/start_empty_process_template.PNG)
 
-    d. Donnez un nom à la build et sélectionnez l’agent. Vous pouvez choisir ici la valeur par défaut si vous souhaitez utiliser une machine DSVM et terminer le processus de génération. Pour plus d’informations sur la configuration des agents, voir [Créer et libérer des agents](https://docs.microsoft.com/azure/devops/pipelines/agents/agents?view=vsts).
+    d. Donnez un nom à la build et sélectionnez l’agent. Vous pouvez choisir ici la valeur par défaut si vous souhaitez utiliser une machine DSVM et terminer le processus de génération. Pour plus d’informations sur la configuration des agents, voir [Créer et libérer des agents](/azure/devops/pipelines/agents/agents?view=vsts).
     
     ![Sélections de la build et de l’agent](./media/code-test/select_agent.PNG)
 
@@ -142,7 +142,7 @@ Utilisez les étapes suivantes pour configurer et exécuter un test de code et u
 
     ![Bouton Save & queue (Enregistrer et mettre en file d’attente)](./media/code-test/save_and_queue_build_definition.PNG)
 
-Désormais, à chaque fois qu’une nouvelle validation sera transmise au référentiel du code, le processus de génération démarrera automatiquement. (Nous utilisons ici le référentiel de référence, mais vous pouvez définir n’importe quelle branche.) Le processus exécute le fichier **test1.py** sur l’ordinateur agent, l’objectif étant de s’assurer que tous les éléments définis dans le code s’exécutent correctement. 
+Désormais, à chaque fois qu’une nouvelle validation sera transmise au référentiel du code, le processus de génération démarrera automatiquement. Vous pouvez définir n’importe quelle branche. Le processus exécute le fichier **test1.py** sur l’ordinateur agent, l’objectif étant de s’assurer que tous les éléments définis dans le code s’exécutent correctement. 
 
 Si les alertes sont correctement définies, vous serez averti par courrier électronique une fois la build terminée. Vous pouvez également vérifier l’état de la build dans Azure DevOps. En cas d’échec, vous pouvez vérifier les détails de la build et déterminer quelle partie est défaillante.
 
@@ -155,7 +155,7 @@ Si les alertes sont correctement définies, vous serez averti par courrier élec
 * Appuyez-vous sur le plan et les exemples fournis précédemment dans le scénario UCI Income Prediction pour vos propres projets de science des données.
 
 ## <a name="references"></a>References
-* [Processus Team Data Science Process](https://aka.ms/tdsp)
+* [Processus Team Data Science Process](./index.yml)
 * [Outils de test Visual Studio](https://www.visualstudio.com/vs/features/testing-tools/)
 * [Ressources de test Azure DevOps](https://www.visualstudio.com/team-services/)
 * [Machines virtuelles Data Science](https://azure.microsoft.com/services/virtual-machines/data-science-virtual-machines/)

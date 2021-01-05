@@ -7,32 +7,48 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 03/30/2020
-ms.openlocfilehash: 270ff3c3e8e4cffbb1f4b1987ee497530d0c0982
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.date: 09/08/2020
+ms.openlocfilehash: 92dcbfd360938724bb65b734d7c69ea61d7826b0
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80546262"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96533041"
 ---
-# <a name="adjust-capacity-in-azure-cognitive-search"></a>Ajuster la capacité dans la Recherche cognitive Azure
+# <a name="adjust-the-capacity-of-an-azure-cognitive-search-service"></a>Ajuster la capacité d’un service Recherche cognitive Azure
 
-Avant de [provisionner un service de recherche](search-create-service-portal.md) et de choisir un niveau tarifaire particulier, prenez quelques minutes pour bien comprendre le rôle des réplicas et des partitions dans un service, et la manière dont vous pouvez ajuster la capacité d’un service en fonction des variations de la demande de ressources.
+Avant de [provisionner un service de recherche](search-create-service-portal.md) et de choisir un niveau tarifaire particulier, prenez quelques minutes pour bien comprendre le fonctionnement de la capacité et comment vous pouvez ajuster la capacité des réplicas et des partitions pour s’adapter à la fluctuation des charges de travail.
 
-La capacité est une fonction du [niveau que vous choisissez](search-sku-tier.md) (les niveaux déterminent les caractéristiques matérielles), et de la combinaison de réplicas et de partitions nécessaires pour les charges de travail projetées. Selon le niveau et la taille de l’ajustement, le processus d’ajout ou de réduction de capacité peut prendre de 15 minutes à plusieurs heures. 
+La capacité est une fonction du [niveau que vous choisissez](search-sku-tier.md) (les niveaux déterminent les caractéristiques matérielles), et de la combinaison de réplicas et de partitions nécessaires pour les charges de travail projetées. Lorsqu’un service est créé, vous pouvez augmenter ou diminuer le nombre de réplicas ou de partitions de manière indépendante. Les coûts augmenteront avec chaque ressource physique ajoutée, mais une fois les charges de travail importantes terminées, vous pouvez réduire la taille de votre infrastructure pour faire baisser votre facture. Selon le niveau et la taille de l’ajustement, le processus d’ajout ou de réduction de capacité peut prendre de 15 minutes à plusieurs heures.
 
-Si vous modifiez l’allocation des réplicas et des partitions, nous vous recommandons d’utiliser le portail Azure. Le portail applique des limites aux combinaisons autorisées inférieures aux limites maximales d’un niveau. Toutefois, si vous souhaitez suivre une approche de provisionnement basée sur un script ou du code, [Azure PowerShell](search-manage-powershell.md) et l’[API REST Gestion](https://docs.microsoft.com/rest/api/searchmanagement/services) constituent des solutions alternatives.
+Si vous modifiez l’allocation des réplicas et des partitions, nous vous recommandons d’utiliser le portail Azure. Le portail applique des limites aux combinaisons autorisées inférieures aux limites maximales d’un niveau. Toutefois, si vous souhaitez suivre une approche de provisionnement basée sur un script ou du code, [Azure PowerShell](search-manage-powershell.md) et l’[API REST Gestion](/rest/api/searchmanagement/services) constituent des solutions alternatives.
 
-## <a name="terminology-replicas-and-partitions"></a>Terminologie : réplicas et partitions
+## <a name="concepts-search-units-replicas-partitions-shards"></a>Concepts : unités de recherche, réplicas, partitions, shards
 
-|||
-|-|-|
-|*Partitions* | Fournissent un stockage des index et des E/S pour les opérations de lecture-écriture (par exemple, lors de la reconstruction ou de l’actualisation d’un index). Chaque partition se partage l’index total. Si vous allouez trois partitions, l’index est divisé en trois. |
-|*Réplicas* | Instances du service de recherche, principalement utilisées pour équilibrer la charge des opérations de requête. Chaque réplica est une copie d’un index. Si vous allouez trois réplicas, vous avez trois copies d’un index disponibles pour traiter les demandes de requête.|
+La capacité est exprimée en *unités de recherche* qui peuvent être allouées sous forme de combinaisons de *partitions* et de *réplicas*, en utilisant un mécanisme de *sharding* sous-jacent pour prendre en charge les configurations flexibles :
+
+| Concept  | Définition|
+|----------|-----------|
+|*Unité de recherche* | Incrément unique de la capacité disponible totale (36 unités). Il s’agit également de l’unité de facturation pour un service Recherche cognitive Azure. Le service a besoin au minimum d’une unité pour s’exécuter.|
+|*Réplica* | Instances du service de recherche, principalement utilisées pour équilibrer la charge des opérations de requête. Chaque réplica héberge une copie d’un index. Si vous allouez trois réplicas, vous avez trois copies d’un index disponibles pour traiter les demandes de requête.|
+|*Partition* | Stockage physique et E/S pour les opérations de lecture/écriture (par exemple, pendant la reconstruction ou l’actualisation d’un index). Chaque partition contient une section de l’index total. Si vous allouez trois partitions, l’index est divisé en trois. |
+|*Shard* | Bloc d’un index. Recherche cognitive Azure divise chaque index en shards pour accélérer le processus d’ajout de partitions (en déplaçant les shards vers de nouvelles unités de recherche).|
+
+Le diagramme suivant montre la relation entre réplicas, partitions, shards et unités de recherche. À travers un exemple, il montre comment un même index est réparti entre quatre unités de recherche dans un service constitué de deux réplicas et deux partitions. Chacune des quatre unités de recherche stocke uniquement la moitié des shards de l’index. Les unités de recherche de la colonne de gauche stockent la première moitié des shards, qui comprend la première partition, tandis que celles situées dans la colonne de droite stockent la deuxième moitié des shards, qui comprend la deuxième partition. Compte tenu de la présence de deux réplicas, il existe deux copies de chaque shard d’index. Les unités de recherche de la ligne du haut stockent une copie, comprenant le premier réplica, tandis que celles de la ligne du bas stockent une autre copie, comprenant le deuxième réplica.
+
+:::image type="content" source="media/search-capacity-planning/shards.png" alt-text="Les index de recherche font l’objet d’un sharding entre les partitions.":::
+
+Le diagramme ci-dessus n’est qu’un exemple parmi d’autres. De nombreuses combinaisons de partitions et de réplicas sont possibles, jusqu’à 36 unités de recherche au maximum.
+
+Dans Recherche cognitive, la gestion de shards est un détail d’implémentation et ne peut pas être configurée, mais le fait de savoir qu’un index fait l’objet d’un sharding aide à comprendre les anomalies occasionnelles dans les comportements de classement et d’autocomplétion :
+
++ Anomalies de classement : Les scores de recherche sont d’abord calculés au niveau des shards avant d’être agrégés dans un même jeu de résultats. Selon les caractéristiques du contenu des shards, les correspondances d’un shard peuvent être mieux classées que les correspondances d’un autre shard. Si vous notez la présence de classements non intuitifs dans des résultats de recherche, cela est probablement dû aux effets du sharding, tout particulièrement si les index sont de petite taille. Vous pouvez éviter ces anomalies de classement en choisissant de [calculer les scores globalement dans l’index tout entier](index-similarity-and-scoring.md#scoring-statistics-and-sticky-sessions), mais cela nuira aux performances.
+
++ Anomalies d’autocomplétion : Les requêtes autocomplétées, où les correspondances portent sur les premiers caractères d’un terme partiellement entré, acceptent un paramètre approximatif qui pardonne les petits écarts orthographiques. Pour l’autocomplétion, la correspondance approximative est limitée aux termes contenus dans le shard actif. Par exemple, si un shard contient « Microsoft » et que le terme partiel « micor » est entré, le moteur de recherche établit une correspondance avec « Microsoft » dans ce shard, mais pas dans ceux qui contiennent les autres parties de l’index.
 
 ## <a name="when-to-add-nodes"></a>Quand ajouter des nœuds
 
-Au départ, un service se voit allouer un niveau minimal de ressources consistant en une partition et un réplica. 
+Au départ, un service se voit allouer un niveau minimal de ressources consistant en une partition et un réplica.
 
 Un seul service doit avoir suffisamment de ressources pour gérer toutes les charges de travail (indexation et requêtes). Aucune charge de travail ne s’exécute en arrière-plan. Vous pouvez planifier l’indexation à des moments où les demandes de requête sont naturellement moins fréquentes, mais à part cela, le service n’établit pas de priorité entre les tâches. De plus, un certain degré de redondance lisse les performances des requêtes lorsque les services ou les nœuds sont mis à jour en interne.
 
@@ -59,7 +75,7 @@ En règle générale, les applications de recherche tendent à avoir besoin de p
 
    ![Ajouter des réplicas et des partitions](media/search-capacity-planning/2-add-2-each.png "Ajouter des réplicas et des partitions")
 
-1. Cliquez sur **Enregistrer** pour confirmer les modifications.
+1. Sélectionnez **Enregistrer** pour confirmer les modifications.
 
    ![Confirmer les modifications de la mise à l'échelle et de la facturation](media/search-capacity-planning/3-save-confirm.png "Confirmer les modifications de la mise à l'échelle et de la facturation")
 

@@ -4,14 +4,14 @@ description: Cet article traite de l’inscription des sources de données dans 
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: 0c5fdac7df41fec3a6206dbd78af74b7f1b58c7f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b8c6c6e33577fe3d49d8f0c7a94a941827f5cf68
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68736321"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86523432"
 ---
 # <a name="register-data-sources-in-azure-data-catalog"></a>Inscrire des sources de données dans Azure Data Catalog
 ## <a name="introduction"></a>Introduction

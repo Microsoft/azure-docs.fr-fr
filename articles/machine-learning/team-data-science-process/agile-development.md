@@ -10,12 +10,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: c097c14406349d973e905fadb806cc159d9b16d8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 113c11b749b42bbaf9e5e40cdf63623288997a92
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76722099"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89440284"
 ---
 # <a name="agile-development-of-data-science-projects"></a>Développement Agile de projets de science des données
 
@@ -39,7 +39,7 @@ Dans le framework de planification sprint TDSP, il existe quatre types d’*él�
 
 Voici les définitions des types d’éléments de travail :
 
-- **Caractéristique** : une fonctionnalité correspond à un engagement de projet. Les différents engagements avec un client constituent des fonctionnalités différentes, et il est préférable d’envisager les différentes phases d’un projet en tant que fonctionnalités différentes. Si vous choisissez un format tel que *\<NomClient>-\<NomEngagement>* pour nommer vos fonctionnalités, vous pourrez facilement connaître le contexte du projet et de l’engagement grâce au nom qu’il porte.
+- **Caractéristique** : une fonctionnalité correspond à un engagement de projet. Les différents engagements avec un client constituent des fonctionnalités différentes, et il est préférable d’envisager les différentes phases d’un projet en tant que fonctionnalités différentes. Si vous choisissez un format tel que *\<ClientName>-\<EngagementName>* pour nommer vos fonctionnalités, vous pourrez facilement connaître le contexte du projet et de l’engagement grâce au nom qu’il porte.
   
 - **Récit utilisateur** : les récits utilisateur sont des éléments de travail nécessaires pour effectuer une fonctionnalité de bout en bout. Voici quelques exemples de récits utilisateur :
   - Obtenir des données 
@@ -51,7 +51,7 @@ Voici les définitions des types d’éléments de travail :
   
 - **Tâche** : les tâches sont des éléments de travail assignables qui doivent être réalisées pour effectuer un récit utilisateur spécifique. Par exemple, les tâches du récit utilisateur *Obtention des données* pourraient être les suivantes :
   - Récupérer les informations d’identification SQL Server
-  - Charger les données sur SQL Data Warehouse
+  - Charger des données dans Azure Synapse Analytics
   
 - **Bogue** : les bogues sont des problèmes dans le code ou les documents existants qui doivent être corrigés pour effectuer une tâche. Si des bogues sont provoqués par des éléments de travail manquants, ils peuvent devenir des récits utilisateur ou des tâches. 
 

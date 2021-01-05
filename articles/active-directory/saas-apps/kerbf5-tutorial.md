@@ -1,27 +1,22 @@
 ---
-title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à F5 | Microsoft Docs'
+title: 'Tutoriel : Intégration de l’authentification unique Azure AD à F5 | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et F5.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 39382eab-05fe-4dc2-8792-62d742dfb4e1
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 11/19/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: a1f06b0b5aa59328d2fe39d501cfdf3ad7524427
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 161348f7566ff64858d563f34ad8f3f4c7511adf
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75431471"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009158"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-f5"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à F5
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer F5 à Azure Active Dir
 * Permettre à vos utilisateurs de se connecter automatiquement à F5 avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -42,11 +37,11 @@ Pour commencer, vous devez disposer de ce qui suit :
 * Un abonnement F5 pour lequel l’authentification unique est activée
 
 * Le déploiement de la solution conjointe nécessite la licence suivante :
-    * F5 BIG-IP® Best Bundle (ou)
+    * F5 BIG-IP&reg; Best Bundle (ou)
 
-    * Licence autonome F5 BIG-IP Access Policy Manager™ (APM)
+    * Licence autonome F5 BIG-IP Access Policy Manager&trade; (APM)
 
-    * Licence de composant additionnel F5 BIG-IP Access Policy Manager™ (APM) sur une instance existante de BIG-IP F5 BIG-IP® Local Traffic Manager™ (LTM).
+    * Licence de composant additionnel F5 BIG-IP Access Policy Manager&trade; (APM) sur une instance de BIG-IP F5 BIG-IP&reg; Local Traffic Manager&trade; (LTM) existante.
 
     * Outre la licence ci-dessus, il est possible de bénéficier d’une licence pour le système F5 avec :
 
@@ -64,7 +59,7 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 ## <a name="access-guided-configuration"></a>Configuration guidée de l’accès
 
-* La configuration guidée de l’accès est prise en charge sur F5 TMOS version 13.1.0.8 et supérieures. Si votre système BIG-IP exécute une version inférieure à 13.1.0.8, consultez la section **Configuration avancée**.
+* La configuration guidée de l’accès est prise en charge sur F5 TMOS version 13.1.0.8 et ultérieures. Si votre système BIG-IP exécute une version inférieure à 13.1.0.8, consultez la section **Configuration avancée**.
 
 * La configuration guidée de l’accès présente une expérience utilisateur entièrement nouvelle et simplifiée. Cette architecture à base de workflow propose des étapes de configuration intuitives réentrantes adaptées à la topologie choisie.
 
@@ -77,15 +72,15 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 2. Dans la page **Guided Configuration** (Configuration guidée), cliquez sur **Upgrade Guided Configuration** (Mettre à niveau la configuration guidée) dans l’angle supérieure gauche.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure14.png) 
+    ![Capture d’écran montrant la page « Guided Configuration » avec l’action « Upgrade Guided Configuration » sélectionnée.](./media/kerbf5-tutorial/configure14.png) 
 
 3. Dans l’écran contextuel Upgrade Guided Configuration (Mettre à niveau la configuration guidée), sélectionnez **Choose File** (Choisir un fichier) pour charger le pack de cas d’usage téléchargé, puis cliquez sur le bouton **Upload and Install** (Télécharger et installer).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure15.png) 
+    ![Capture d’écran montrant l’écran contextuel « Upgrade Guided Configuration » avec les options « Choose File » et « Upload and Install » sélectionnées.](./media/kerbf5-tutorial/configure15.png) 
 
 4. Une fois la mise à niveau terminée, cliquez sur le bouton **Continue** (Continuer).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure16.png)
+    ![Capture d’écran montrant la boîte de dialogue « Guided Configuration update is complete » et le bouton « Continue » sélectionné.](./media/kerbf5-tutorial/configure16.png)
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -218,60 +213,60 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Accédez à **System > Certificate Management > Traffic Certificate Management > SSL Certificate List** (Système > Gestion des certificats > Gestion des certificats de trafic > Liste des certificats SSL). Sélectionnez **Import** (Importer) en haut à droite. Spécifiez un nom de certificat dans le champ **Certificate Name** (sera référencé plus tard dans la configuration). Dans **Certificate Source** (Source du certificat), sélectionnez Upload File (Charger un fichier), spécifiez le certificat téléchargé à partir d’Azure pendant la configuration de l’authentification unique SAML. Cliquez sur **Importer**.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure01.png) 
+    ![Capture d’écran montrant la page « SSL Certificate/Key Source » avec le nom du certificat (« Certificate Name ») mis en évidence ainsi que l’option « Upload File » et le bouton « Import » sélectionnés.](./media/kerbf5-tutorial/configure01.png) 
 
 1. De plus, vous aurez besoin d’un **certificat SSL pour le nom d’hôte de l’application. Accédez à System > Certificate Management > Traffic Certificate Management > SSL Certificate List** (Système > Gestion des certificats > Gestion des certificats de trafic > Liste des certificats SSL). Sélectionnez **Import** (Importer) en haut à droite. **Import Type** (Type d’importation) aura la valeur **PKCS 12 (IIS)** . Spécifiez un nom de clé dans le champ **Key Name** (sera référencé plus tard dans la configuration), puis le fichier PFX. Spécifiez le mot de passe du fichier PFX dans le champ **Password**. Cliquez sur **Importer**.
 
     >[!NOTE]
     >Dans l’exemple, le nom de notre application est `Kerbapp.superdemo.live`, nous utilisons un certificat à caractères génériques, et le nom de clé est `WildCard-SuperDemo.live`.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure02.png) 
+    ![Capture d’écran montrant la page « SSL Certificate/Key Source » avec les valeurs entrées et le bouton « Import » sélectionné.](./media/kerbf5-tutorial/configure02.png) 
  
 1. Nous allons utiliser l’expérience guidée pour configurer l’accès à l’application et la fédération Azure AD. Dans F5 BIG-IP, accédez à l’onglet **Main** (Principal), puis sélectionnez **Access > Guided Configuration > Federation > SAML Service Provider** (Accès > Configuration guidée > Fédération > Fournisseur de services SAML). Cliquez sur **Next** (Suivant) et encore sur **Next** (Suivant) pour commencer la configuration.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure03.png) 
+    ![Capture d’écran montrant la page « Guided Configuration » avec l’icône « Federation » mise en évidence, et le choix « SAML Service Provider » sélectionné.](./media/kerbf5-tutorial/configure03.png) 
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure04.png)
+    ![Capture d’écran montrant la page « Guided Configuration - SAML Service Provider » avec le bouton « Next » sélectionné.](./media/kerbf5-tutorial/configure04.png)
 
 1. Attribuez un nom à la configuration dans le champ **Configuration Name**. Spécifiez l’ID d’entité dans le champ **Entity ID** (identique à celui que vous avez configuré dans la configuration de l’application Azure AD). Spécifiez le nom d’hôte dans le champ **Host**. Ajoutez une description dans le champ **Description** pour référence. Acceptez les entrées par défaut restantes, puis cliquez sur **Save & Next** (Enregistrer et suivant).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure05.png) 
+    ![Capture d’écran montrant la section « Service Provider Properties » avec les zones de texte « Host name » et « Description » mises en évidence ainsi que le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure05.png) 
 
 1. Dans cet exemple, nous créons un serveur virtuel dont l’adresse est 192.168.30.200 et le port 443. Spécifiez l’adresse IP du serveur virtuel dans le champ **Destination Address**. En dessous de **Client SSL Profile** (Profil SSL client), sélectionnez Create new (Créer nouveau). Spécifiez le certificat d’application chargé précédemment (le certificat à caractères génériques de cet exemple) et la clé associée, puis cliquez sur **Save & Next** (Enregistrer et suivant).
 
     >[!NOTE]
     >Dans cet exemple, notre serveur web interne s’exécute sur le port 80 et nous voulons le publier avec 443.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure06.png)
+    ![Capture d’écran montrant la page « Virtual Server Properties » avec la zone de texte « Destination Address » mise en évidence, et le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure06.png)
 
 1. Sous **Select method to configure your IdP connector** (Sélectionner une méthode pour configurer votre connecteur IdP), spécifiez Metadata (Métadonnées), cliquez sur Choose File (Choisir un fichier), puis chargez le fichier XML de métadonnées téléchargé précédemment à partir d’Azure AD. Attribuez un nom unique au connecteur IDP SAML dans le champ **Name**. Choisissez le certificat de signature de métadonnées (**Metadata Signing Certificate**) qui a été chargé précédemment. Cliquez sur **Save & Next** (Enregistrer et suivant).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure07.png)  
+    ![Capture d’écran montrant la page « External Identity Provider Connector Settings » avec la zone de texte « Name » mise en évidence, et le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure07.png)  
 
-1. Sous **Select a Pool** (Sélectionner un pool), spécifiez **Create New** (Créer nouveau) ou sélectionnez un pool qui existe déjà. Conservez les autres valeurs par défaut. Sous Pool Servers (Serveurs de pool), tapez l’adresse IP sous **IP Address/Node Name** (Adresse IP/Nom du nœud). Spécifiez le **Port**. Cliquez sur **Save & Next** (Enregistrer et suivant).
+1. Sous **Select a Pool** (Sélectionner un pool), spécifiez **Create New** (Créer nouveau) ou sélectionnez un pool qui existe déjà. Conservez les autres valeurs par défaut.    Sous Pool Servers (Serveurs de pool), tapez l’adresse IP sous **IP Address/Node Name** (Adresse IP/Nom du nœud). Spécifiez le **Port**. Cliquez sur **Save & Next** (Enregistrer et suivant).
  
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure08.png)
+    ![Capture d’écran montrant la page « Pool Properties » avec les zones de texte « IP Address/Node Name » et « Port » mises en évidence, et le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure08.png)
 
 1. Dans l’écran Single Sign-On Settings (Paramètres d’authentification unique), sélectionnez **Enable Single Sign-On** (Activer l’authentification unique). Sous **Selected Single Sign-On Type** (Type d’authentification unique sélectionné), choisissez **Kerberos**. Remplacez **session.saml.last.Identity** par **session.saml.last.attr.name.Identity** sous **Username Source** (Source du nom d’utilisateur). Cette variable est définie à partir du mappage de revendications dans Azure AD. Sélectionnez **Show Advanced Setting** (Afficher les options avancées). Sous **Kerberos Realm** (Domaine Kerberos), tapez le nom de domaine. Sous **Account Name/ Account Password** (Nom du compte/Mot de passe du compte), spécifiez le compte de délégation APM et le mot de passe. Spécifiez l’adresse IP du contrôleur de domaine dans le champ **KDC**. Cliquez sur **Save & Next** (Enregistrer et suivant).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure09.png)   
+    ![Capture d’écran montrant la page « Single Sign-On Settings » avec des zones de texte mises en évidence, et le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure09.png)   
 
 1. Dans le cadre de ce guide, nous allons passer les vérifications de point de terminaison.  Consultez la documentation F5 pour plus d’informations.  Dans l’écran, sélectionnez **Save & Next** (Enregistrer et suivant).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure10.png) 
+    ![Capture d’écran montrant la page « Endpoint Checks Properties » et le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure10.png) 
 
 1. Acceptez les valeurs par défaut et cliquez sur **Save & Next** (Enregistrer et suivant). Consultez la documentation F5 pour plus d’informations sur les paramètres de gestion de session SAML.
 
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure11.png) 
+    ![Capture d’écran montrant la page « Timeout Settings » avec le bouton « Save & Next » sélectionné.](./media/kerbf5-tutorial/configure11.png) 
  
 1. Passez en revue l’écran récapitulatif, puis sélectionnez **Deploy** (Déployer) pour configurer BIG-IP.
  
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure12.png)
+    ![Capture d’écran montrant la page « Your application is ready to be deployed » avec la section « Summary » mise en évidence, et le bouton « Deploy » sélectionné.](./media/kerbf5-tutorial/configure12.png)
 
 1. Une fois l’application configurée, cliquez sur **Finish** (Terminer).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure13.png)
+    ![Capture d’écran montrant la page « Your application is deployed » avec le bouton « Finish » sélectionné.](./media/kerbf5-tutorial/configure13.png)
 
 ## <a name="advanced-configuration"></a>Configuration avancée
 
@@ -282,33 +277,33 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manager (APM) pour spécifier les contrôleurs de domaine et les informations d’identification dont se servira APM pour authentifier les utilisateurs.
 
-1.  Sous l’onglet Main (Principal), cliquez sur **Access Policy > AAA Servers > Active Directory** (Stratégie d’accès > Serveurs AAA > Active Directory). L’écran listant les serveurs Active Directory s’ouvre.
+1. Sous l’onglet Main (Principal), cliquez sur **Access Policy > AAA Servers > Active Directory** (Stratégie d’accès > Serveurs AAA > Active Directory). L’écran listant les serveurs Active Directory s’ouvre.
 
-2.  Cliquez sur **Créer**. L’écran des propriétés du nouveau serveur s’ouvre.
+2. Cliquez sur **Créer**. L’écran des propriétés du nouveau serveur s’ouvre.
 
-3.  Dans le champ **Name**, tapez un nom unique pour le serveur d’authentification.
+3. Dans le champ **Name**, tapez un nom unique pour le serveur d’authentification.
 
-4.  Dans le champ **Domain Name**, tapez le nom du domaine Windows.
+4. Dans le champ **Domain Name**, tapez le nom du domaine Windows.
 
-5.  Pour le paramètre **Server Connection** (Connexion au serveur), sélectionnez l’une des options suivantes :
+5. Pour le paramètre **Server Connection** (Connexion au serveur), sélectionnez l’une des options suivantes :
 
-    * Sélectionnez **Use Pool** (Utiliser un pool) pour configurer la haute disponibilité pour le serveur AAA.
+   * Sélectionnez **Use Pool** (Utiliser un pool) pour configurer la haute disponibilité pour le serveur AAA.
 
-    * Sélectionnez **Direct** pour configurer le serveur AAA pour une fonctionnalité autonome.
+   * Sélectionnez **Direct** pour configurer le serveur AAA pour une fonctionnalité autonome.
 
-6.  Si vous avez sélectionné **Direct**, tapez un nom dans le champ **Domain Controller** (Contrôleur de domaine).
+6. Si vous avez sélectionné **Direct**, tapez un nom dans le champ **Domain Controller** (Contrôleur de domaine).
 
-7.  Si vous avez sélectionné **Use Pool** (Utiliser un pool), configurez le pool :
+7. Si vous avez sélectionné **Use Pool** (Utiliser un pool), configurez le pool :
 
-    * Tapez un nom dans le champ **Domain Controller Pool Name** (Nom du pool de contrôleurs de domaine).
+   * Tapez un nom dans le champ **Domain Controller Pool Name** (Nom du pool de contrôleurs de domaine).
 
-    * Spécifiez les **contrôleurs de domaine** du pool en tapant l’adresse IP et le nom d’hôte pour chacun d’eux, puis cliquez sur le bouton **Add** (Ajouter).
+   * Spécifiez les **contrôleurs de domaine** du pool en tapant l’adresse IP et le nom d’hôte pour chacun d’eux, puis cliquez sur le bouton **Add** (Ajouter).
 
-    * Pour superviser l’intégrité des serveurs AAA, vous pouvez sélectionner un moniteur d’intégrité : seul le moniteur **gateway_icmp** convient dans ce cas ; vous pouvez le sélectionner dans la liste **Server Pool Monitor** (Moniteur de pool de serveurs).
+   * Pour superviser l’intégrité des serveurs AAA, vous pouvez sélectionner un moniteur d’intégrité : seul le moniteur **gateway_icmp** convient dans ce cas ; vous pouvez le sélectionner dans la liste **Server Pool Monitor** (Moniteur de pool de serveurs).
 
-8.  Dans le champ **Admin Name** (Nom de l’administrateur), tapez le nom d’un administrateur qui dispose d’autorisations d’administration Active Directory en veillant à respecter la casse. APM utilise les informations contenues dans les champs **Admin Name** (Nom de l’administrateur) et **Admin Password** (Mot de passe de l’administrateur) pour la requête AD. Si Active Directory est configuré pour des requêtes anonymes, vous n’avez pas besoin d’indiquer le nom de l’administrateur. Dans le cas contraire, APM a besoin d’un compte doté de privilèges suffisants pour pouvoir se lier à un serveur Active Directory, récupérer des informations de groupe d’utilisateurs ainsi que les stratégies de mot de passe Active Directory afin de prendre en charge les fonctionnalités liées aux mots de passe. (APM doit extraire les stratégies de mot de passe, par exemple, si vous sélectionnez l’option Prévenir l’utilisateur qu’il doit changer son mot de passe avant qu’il n’expire dans une action de requête AD.) Si vous ne fournissez pas d’informations de compte d’administrateur dans cette configuration, APM utilise le compte d’utilisateur pour récupérer les informations. Ceci fonctionne si le compte d’utilisateur dispose de privilèges suffisants.
+8. Dans le champ **Admin Name** (Nom de l’administrateur), tapez le nom d’un administrateur qui dispose d’autorisations d’administration Active Directory en veillant à respecter la casse. APM utilise les informations contenues dans les champs **Admin Name** (Nom de l’administrateur) et **Admin Password** (Mot de passe de l’administrateur) pour la requête AD. Si Active Directory est configuré pour des requêtes anonymes, vous n’avez pas besoin d’indiquer le nom de l’administrateur. Dans le cas contraire, APM a besoin d’un compte doté de privilèges suffisants pour pouvoir se lier à un serveur Active Directory, récupérer des informations de groupe d’utilisateurs ainsi que les stratégies de mot de passe Active Directory afin de prendre en charge les fonctionnalités liées aux mots de passe. (APM doit extraire les stratégies de mot de passe, par exemple, si vous sélectionnez l’option Prévenir l’utilisateur qu’il doit changer son mot de passe avant qu’il n’expire dans une action de requête AD.) Si vous ne fournissez pas d’informations de compte d’administrateur dans cette configuration, APM utilise le compte d’utilisateur pour récupérer les informations. Ceci fonctionne si le compte d’utilisateur dispose de privilèges suffisants.
 
-9.  Dans le champ **Admin Password** (Mot de passe de l’administrateur), tapez le mot de passe d’administrateur associé au nom de domaine.
+9. Dans le champ **Admin Password** (Mot de passe de l’administrateur), tapez le mot de passe d’administrateur associé au nom de domaine.
 
 10. Dans le champ **Verify Admin Password** (Vérifier le mot de passe de l’administrateur), retapez le mot de passe d’administrateur associé au paramètre **Domain Name** (Nom de domaine).
 
@@ -322,48 +317,48 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
 
 15. Cliquez sur **Finished** (Terminé). Le nouveau serveur s’affiche dans la liste. Le nouveau serveur Active Directory est alors ajouté à la liste de serveurs Active Directory.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure17.png)
+    ![Capture d’écran montrant les sections « General Properties » et « Configuration ».](./media/kerbf5-tutorial/configure17.png)
 
 ### <a name="saml-configuration"></a>Configuration SAML
 
 1. Vous devrez importer le certificat de métadonnées dans F5 qui sera utilisé plus tard pendant l’installation. Accédez à **System > Certificate Management > Traffic Certificate Management > SSL Certificate List** (Système > Gestion des certificats > Gestion des certificats de trafic > Liste des certificats SSL). Sélectionnez **Import** (Importer) en haut à droite.
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure18.png)
+    ![Capture d’écran montrant la page « Import SSL Certificate/Key Source » avec le bouton « Import » sélectionné.](./media/kerbf5-tutorial/configure18.png)
 
 2. Pour configurer le fournisseur d’identité SAML, **accédez à Access > Federation > SAML: Service Provider > External Idp Connectors** (Accès > Fédération > SAML : Fournisseur de services > Connecteurs IDP externe), puis cliquez sur **Create > From Metadata** (Créer > À partir de métadonnées).
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure19.png)
+    ![Capture d’écran montrant la page « SAML Service Provider » avec l’option « From Metadata » sélectionnée dans la liste déroulante « Create ».](./media/kerbf5-tutorial/configure19.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure20.png)
+    ![Capture d’écran montrant la boîte de dialogue « Create New SAML IdP Connector ».](./media/kerbf5-tutorial/configure20.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure21.png)
+    ![Capture d’écran montrant la fenêtre « Edit SAML IdP Connector » avec l’élément « General Settings » sélectionné.](./media/kerbf5-tutorial/configure21.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure22.png)
+    ![Capture d’écran montrant la fenêtre « Edit SAML IdP Connector » avec l’élément « Single Sign On Service Settings » sélectionné.](./media/kerbf5-tutorial/configure22.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure23.png)
+    ![Capture d’écran montrant la fenêtre « Edit SAML IdP Connector » avec l’élément « Security Settings » sélectionné.](./media/kerbf5-tutorial/configure23.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure24.png)
+    ![Capture d’écran montrant la fenêtre « Edit SAML IdP Connector » avec l’élément « SLO Service Settings » sélectionnée.](./media/kerbf5-tutorial/configure24.png)
 
 1. Pour configurer le fournisseur de services SAML, accédez à **Access > Federation > SAML Service Provider > Local SP Services** (Accès > Fédération > Fournisseur de services SAML > Services SP locaux), puis cliquez sur **Create** (Créer). Fournissez les informations suivantes et cliquez sur **OK**.
 
     * Type Name (Nom de type) : KerbApp200SAML
-    * Entity ID (ID d’entité)* : https://kerbapp200.superdemo.live
+    * Entity ID (ID d’entité)* : https://kerb-app.com.cutestat.com
     * SP Name Settings (Paramètres du nom de fournisseur de services)
     * Scheme (Schéma) : https
     * Host (Hôte) : kerbapp200.superdemo.live
     * Description : kerbapp200.superdemo.live
 
-     ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure25.png)
+     ![Capture d’écran montrant la fenêtre « Edit SAML SP Service » avec l’élément « General Settings » sélectionné.](./media/kerbf5-tutorial/configure25.png)
 
      b. Sélectionnez la configuration de fournisseur de services KerbApp200SAML, puis cliquez sur **Bind/UnBind IdP Connectors** (Lier/Dissocier les connecteurs IdP).
 
-     ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure26.png)
+     ![Capture d’écran montrant la page « SAML Service Provider - Local SP Services » avec l’option « KerbAPP200 SAML » sélectionnée.](./media/kerbf5-tutorial/configure26.png)
 
-     ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure27.png)
+     ![Capture d’écran montrant le bouton « Bind/Unbind IdP Connectors » sélectionné.](./media/kerbf5-tutorial/configure27.png)
 
      c. Cliquez sur **Add New Row** (Ajouter une nouvelle ligne), sélectionnez le connecteur IdP externe (**External IdP connector**) créé à l’étape précédente, cliquez sur **Update** (Mettre à jour), puis cliquez sur **OK**.
 
-     ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure28.png)
+     ![Capture d’écran montrant la fenêtre « Edit SAML IdPs that use this SP » avec le bouton « Add New Row » sélectionné.](./media/kerbf5-tutorial/configure28.png)
 
 1. Pour configurer l’authentification unique Kerberos, accédez à **Access > Single Sign-On > Kerberos** (Accès > Authentification unique > Kerberos), fournissez les informations nécessaires et cliquez sur **Finished** (Terminé).
 
@@ -374,7 +369,7 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
 
     * **User Realm Source** (Source du domaine utilisateur) : session.logon.last.domain
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure29.png)
+        ![Capture d’écran montrant la page « Single Sign-On - Properties » avec les zones de texte « Username Source » et « User Realm Source » mises en évidence.](./media/kerbf5-tutorial/configure29.png)
 
 1. Pour configurer le profil d’accès, accédez à **Access > Profile/Policies > Access Profile (per session policies)** [Accès > Profil/Stratégies > Profil d’accès (par stratégies de session)], cliquez sur **Create** (Créer), fournissez les informations suivantes et cliquez sur **Finished** (Terminé).
 
@@ -383,38 +378,38 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
     * Profil Scope (Étendue de profil) : Profil
     * Langages : Anglais
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure30.png)
+        ![Capture d’écran montrant la page « Profiles/Policies - Properties » avec les zones de texte « Name », « Profile Type » et « Languages » mises en évidence.](./media/kerbf5-tutorial/configure30.png)
 
 1. Cliquez sur le nom KerbApp200, fournissez les informations suivantes, puis cliquez sur **Update** (Mettre à jour).
 
     * Domain Cookie (Cookie du domaine) : superdemo.live
     * SSO Configuration (Configuration SSO) : KerAppSSO_sso
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure31.png)
+        ![Capture d’écran montrant la page « SSD/Auth Domains » avec la zone de texte « Domain Cookie » et la liste déroulante « SSO Configuration » mises en évidence, et le bouton « Update » sélectionné.](./media/kerbf5-tutorial/configure31.png)
 
-1. Cliquez sur **Access Policy** (Stratégie d’accès), puis choisissez **Edit Access Policy** (Modifier la stratégie d’accès) pour le profil « KerbApp200 ».
+1. Cliquez sur **Stratégie d’accès**, puis choisissez **Modifier la stratégie d’accès** pour le profil « KerbApp200 ».
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure32.png)
+    ![Capture d’écran montrant la page « Access Policy » avec l’action « Edit Access Policy for Profile KerbApp200 » sélectionnée.](./media/kerbf5-tutorial/configure32.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure33.png)
+    ![Capture d’écran montrant la page « Access Policy » et la boîte de dialogue « SAML Authentication SP ».](./media/kerbf5-tutorial/configure33.png)
 
-    ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure34.png)
+    ![Capture d’écran montrant la page « Access Policy » et la boîte de dialogue « Variable Assign », avec la zone de texte « Assignment » mise en évidence.](./media/kerbf5-tutorial/configure34.png)
 
     * **session.logon.last.usernameUPN   expr {[mcget {session.saml.last.identity}]}**
 
     * **session.ad.lastactualdomain  TEXT superdemo.live**
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure35.png)
+        ![Capture d’écran montrant la page « Access Policy » et la boîte de dialogue « Active Directory », avec la zone de texte « SearchFilter » mise en évidence.](./media/kerbf5-tutorial/configure35.png)
 
     * **(userPrincipalName=%{session.logon.last.usernameUPN})**
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure36.png)
+        ![Capture d’écran montrant la page « Access Policy » avec la boîte de dialogue « AD Query - Branch Rules ».](./media/kerbf5-tutorial/configure36.png)
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure37.png)
+        ![Capture d’écran montrant les zones de texte « Custom Variable » et « Custom Expression » mises en évidence.](./media/kerbf5-tutorial/configure37.png)
 
     * **session.logon.last.username  expr { "[mcget {session.ad.last.attr.sAMAccountName}]" }**
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure38.png)
+        ![Capture d’écran montrant la zone de texte « Username from Logon » mise en évidence.](./media/kerbf5-tutorial/configure38.png)
 
     * **mcget {session.logon.last.username}**
     * **mcget {session.logon.last.password**
@@ -425,7 +420,7 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
     * Description : KerbApp200
     * Adresse : 192.168.20.200
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure39.png)
+        ![Capture d’écran montrant la page « New Node » avec les zones de texte « Name », « Description » et « Address » mises en évidence, et le bouton « Finished » sélectionné.](./media/kerbf5-tutorial/configure39.png)
 
 1. Pour créer un pool, accédez à **Local Traffic > Pools > Pool List** (Trafic local > Pools > Liste de pools), cliquez sur Create (Créer), fournissez les informations suivantes, puis cliquez sur **Finished** (Terminé).
 
@@ -435,7 +430,7 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
     * Adresse : 192.168.20.200
     * Service Port (Port du service) : 81
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure40.png)
+        ![Capture d’écran montrant la page « New Pool » avec des valeurs entrées, et le bouton « Finished » sélectionné.](./media/kerbf5-tutorial/configure40.png)
 
 1. Pour créer un serveur virtuel, accédez à **Local Traffic > Virtual Servers > Virtual Server List > +** (Trafic local > Serveurs virtuels > Liste de serveurs virtuels > +), complétez les informations suivantes, puis cliquez sur **Finished** (Terminé).
 
@@ -445,9 +440,9 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
     * Access Profile (Profil d’accès) : KerbApp200
     * Spécifiez le profil d’accès créé à l’étape précédente
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure41.png)
+        ![Capture d’écran montrant la page « Virtual Server List » avec les zones de texte « Name », « Destination Address/Mask » et « Service Port » mises en évidence.](./media/kerbf5-tutorial/configure41.png)
 
-        ![Configuration F5 (Kerberos)](./media/kerbf5-tutorial/configure42.png)
+        ![Capture d’écran montrant la page « Virtual Server List » avec la liste déroulante « Access Profile » mise en évidence.](./media/kerbf5-tutorial/configure42.png)
 
 ### <a name="setting-up-kerberos-delegation"></a>Configuration de la délégation Kerberos 
 
@@ -477,25 +472,24 @@ Vous pouvez configurer un serveur Active Directory AAA dans Access Policy Manage
 
 ### <a name="create-f5-test-user"></a>Créer un utilisateur de test F5
 
-Dans cette section, vous allez créer un utilisateur appelé B.Simon dans F5. Collaborez avec l’ [équipe du support client de F5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20APM45) pour ajouter des utilisateurs à la plateforme F5. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique. 
+Dans cette section, vous allez créer un utilisateur appelé B.Simon dans F5. Collaborez avec l’[équipe du support client de F5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20APM45) pour ajouter des utilisateurs à la plateforme F5. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique. 
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette F5 dans le volet d’accès, vous devez être connecté automatiquement à l’application F5 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette F5 dans le volet d’accès, vous devez être connecté automatiquement à l’application F5 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer F5 avec Azure AD](https://aad.portal.azure.com/)
 
 - [Configurer l’authentification unique F5 pour une application basée sur l’en-tête](headerf5-tutorial.md)
 
 - [Configurer l’authentification unique F5 pour une application Kerberos avancée](advance-kerbf5-tutorial.md)
-

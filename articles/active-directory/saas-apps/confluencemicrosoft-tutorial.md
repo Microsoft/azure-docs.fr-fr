@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Confluence SAML SSO by Microsoft | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Confluence SAML SSO by Microsoft.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 1ad1cf90-52bc-4b71-ab2b-9a5a1280fb2d
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 09/05/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: e6ea52474f3b352fabf19050f20012438e9d0c19
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: adee491625cec3b4a22cc7b3d1f3ba17595d9e87
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76120587"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673248"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-confluence-saml-sso-by-microsoft"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Confluence SAML SSO by Microsoft
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Confluence SAML SSO by Micro
 * Permettre à vos utilisateurs de se connecter automatiquement à Confluence SAML SSO by Microsoft avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="description"></a>Description :
 
@@ -53,6 +48,9 @@ Pour configurer l’intégration d’Azure AD à Confluence SAML SSO by Microsof
 > [!NOTE]
 > Il est déconseillé d’utiliser un environnement de production Confluence pour tester les étapes de ce didacticiel. Testez d’abord l’intégration dans l’environnement de développement ou l’environnement intermédiaire de l’application, puis passez à l’environnement de production.
 
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
+
 Pour commencer, vous devez disposer de ce qui suit :
 
 * N’utilisez pas votre environnement de production, sauf si cela est nécessaire.
@@ -65,7 +63,7 @@ Les versions suivantes de Confluence sont actuellement prises en charge :
 
 - Confluence : 5.0 à 5.10
 - Confluence : 6.0.1 à 6.15.9
-- Confluence : 7.0.1 à 7.1.0
+- Confluence : 7.0.1 à 7.9.3
 
 > [!NOTE]
 > Veuillez noter que nos plug-ins Confluence fonctionnent également sur Ubuntu Version 16.04
@@ -161,11 +159,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Pointez sur le roue dentée, puis cliquez sur **Modules complémentaires**.
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/addon1.png)
+    ![Capture d’écran montrant l’icône « Roue dentée » sélectionnée et « Add-ons » mis en évidence dans le menu déroulant.](./media/confluencemicrosoft-tutorial/addon1.png)
 
 1. Téléchargez le plug-in depuis le [Centre de téléchargement Microsoft](https://www.microsoft.com/download/details.aspx?id=56503). Chargez manuellement le plug-in fourni par Microsoft à l’aide du menu **Upload add-on** (Charger le module complémentaire). Le téléchargement du plug-in est couvert dans [Contrat de Services Microsoft](https://www.microsoft.com/servicesagreement/).
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/addon12.png)
+    ![Capture d’écran montrant la page « Manage add-ons » avec l’action « Upload add-on » sélectionnée.](./media/confluencemicrosoft-tutorial/addon12.png)
 
 1. Pour exécuter le scénario de proxy inverse Confluence ou le scénario d’équilibreur de charge, effectuez les étapes suivantes :
 
@@ -176,19 +174,19 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     `scheme="https" proxyName="<subdomain.domain.com>" proxyPort="<proxy_port>" secure="true"`
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/reverseproxy1.png)
+    ![Capture d’écran montrant le fichier « server.xml » avec l’attribut ajouté au port « connecteur ».](./media/confluencemicrosoft-tutorial/reverseproxy1.png)
 
     b. Modifiez l’**URL de base** dans les **paramètres système** en fonction du proxy/de l’équilibreur de charge.
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/reverseproxy2.png)
+    ![Capture d’écran montrant la page « Administration - Settings » avec « Base URL » mis en évidence.](./media/confluencemicrosoft-tutorial/reverseproxy2.png)
 
 1. Une fois que le plug-in est installé, il s’affiche sous **User Installed** (Installé par l’utilisateur), dans la section **Manage add-ons** (Gérer les modules complémentaires). Cliquez sur **Configurer** pour configurer le nouveau plug-in.
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/addon15.png)
+    ![Capture d’écran montrant la section « User Installed » avec le bouton « Configure » mis en évidence.](./media/confluencemicrosoft-tutorial/addon15.png)
 
 1. Effectuez les opérations suivantes dans la page de configuration :
 
-    ![Configure Single Sign-On](./media/confluencemicrosoft-tutorial/addon54.png)
+    ![Capture d’écran montrant la page de configuration de l’authentification unique.](./media/confluencemicrosoft-tutorial/addon54.png)
 
     > [!TIP]
     > Vérifiez qu’un seul certificat est associé à l’application pour éviter toute erreur liée à la résolution des métadonnées. Si plusieurs certificats sont associés, l’administrateur verra un message d’erreur s’afficher lors de la résolution des métadonnées.
@@ -198,7 +196,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
     1. Copiez les valeurs des champs **Identifier, Reply URL et Sign on URL**, puis collez-les dans les zones de texte **Identificateur, URL de réponse et URL de connexion** correspondantes dans la section **Configuration SAML de base** du portail Azure.
 
     1. Dans **Login Button Name** (Nom du bouton de connexion), tapez le nom du bouton que les utilisateurs doivent voir sur l’écran de connexion.
-    
+
     1. Dans **Login Button Description** (Description du bouton de connexion), tapez la description du bouton que les utilisateurs doivent voir sur l’écran de connexion.
 
     1. Dans **SAML User ID Locations** (Emplacements de l’identificateur d’utilisateur SAML), sélectionnez **User ID is in the NameIdentifier element of the Subject statement** (L’ID utilisateur se trouve dans l’élément NameIdentifier de l’instruction Subject ) ou **User ID is in an Attribute element** (L’identificateur d’utilisateur se trouve dans l’élément Attribute).  Cet ID doit être l’ID d’utilisateur Confluence. Si aucun ID d’utilisateur correspondant n’est trouvé, le système n’autorise pas l’utilisateur à se connecter. 
@@ -223,7 +221,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
     1. Cliquez sur **Enregistrer** pour enregistrer les paramètres.
 
        > [!NOTE]
-       > Pour plus d’informations sur l’installation et la résolution des problèmes, consultez le [Guide d’administration du connecteur d’authentification unique MS Confluence](../ms-confluence-jira-plugin-adminguide.md). Il existe également une page [FAQ](../ms-confluence-jira-plugin-faq.md) pour vous aider.
+       > Pour plus d’informations sur l’installation et la résolution des problèmes, consultez le [Guide d’administration du connecteur d’authentification unique MS Confluence](./ms-confluence-jira-plugin-adminguide.md). Il existe également une page [FAQ](./ms-confluence-jira-plugin-adminguide.md) pour vous aider.
 
 ### <a name="create-confluence-saml-sso-by-microsoft-test-user"></a>Créer un utilisateur de test Confluence SAML SSO by Microsoft
 
@@ -239,7 +237,7 @@ Pour pouvoir se connecter à un serveur local Confluence, les utilisateurs Azure
 
 1. Dans la section Utilisateurs, cliquez sur l’onglet **Add users** (Ajouter des utilisateurs). Dans la page de boîte de dialogue **Add a User** (Ajouter un utilisateur), procédez comme suit :
 
-    ![Ajouter un employé](./media/confluencemicrosoft-tutorial/user2.png)
+    ![Capture d’écran montrant l’administration Confluence avec l’onglet « Add Users » sélectionné et les informations « Add a User » entrées.](./media/confluencemicrosoft-tutorial/user2.png)
 
     a. Dans la zone de texte **Username** (Nom d’utilisateur), tapez le nom d’un utilisateur, par exemple B.Simon.
 
@@ -257,14 +255,14 @@ Pour pouvoir se connecter à un serveur local Confluence, les utilisateurs Azure
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Confluence SAML SSO by Microsoft dans le volet d’accès, vous devez être connecté automatiquement à l’application Confluence SAML SSO by Microsoft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Confluence SAML SSO by Microsoft dans le volet d’accès, vous devez être connecté automatiquement à l’application Confluence SAML SSO by Microsoft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Confluence SAML SSO by Microsoft avec Azure AD](https://aad.portal.azure.com/)

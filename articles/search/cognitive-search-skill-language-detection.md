@@ -7,33 +7,33 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 8439788c63ec1b9feaea148ab52aba498791dc12
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/17/2020
+ms.openlocfilehash: 087989638193bb59001ed33c4ee253d61682d8bf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76045022"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935991"
 ---
 #   <a name="language-detection-cognitive-skill"></a>Compétence cognitive Détection de la langue
 
-La compétence **Détection de langue** détecte la langue du texte d’entrée et renvoie un code de langue unique pour chaque document soumis dans la requête. Le code de langue est associé à un score indiquant la puissance de l’analyse. Cette compétence utilise les modèles Machine Learning fournis par [Analyse de texte](https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview) dans Cognitive Services.
+La compétence **Détection de langue** détecte la langue du texte d’entrée et renvoie un code de langue unique pour chaque document soumis dans la requête. Le code de langue est associé à un score indiquant la puissance de l’analyse. Cette compétence utilise les modèles Machine Learning fournis par [Analyse de texte](../cognitive-services/text-analytics/overview.md) dans Cognitive Services.
 
 Cette fonctionnalité est particulièrement utile lorsqu’il est nécessaire d’indiquer la langue du texte en entrée dans d’autres compétences (par exemple, la [compétence Analyse des sentiments](cognitive-search-skill-sentiment.md) ou la [compétence Fractionnement de texte](cognitive-search-skill-textsplit.md)).
 
-La détection de la langue s’appuie sur les bibliothèques de traitement en langage naturel de Bing, qui dépassent le nombre de [langues et régions prises en charge](https://docs.microsoft.com/azure/cognitive-services/text-analytics/language-support) répertoriées pour le service Analyse de texte. La liste exacte des langues n’est pas publiée, mais inclut toutes les langues courantes, ainsi que les variantes, dialectes et certaines langues régionales et culturelles. Si vous avez du contenu exprimé dans une langue moins fréquemment utilisée, vous pouvez [essayer l’API Détection de langue](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c7) pour voir si elle retourne un code. La réponse pour les langues qui ne peuvent pas être détectées est `unknown`.
+La détection de la langue s’appuie sur les bibliothèques de traitement en langage naturel de Bing, qui dépassent le nombre de [langues et régions prises en charge](../cognitive-services/text-analytics/language-support.md) répertoriées pour le service Analyse de texte. La liste exacte des langues n’est pas publiée, mais inclut toutes les langues courantes, ainsi que les variantes, dialectes et certaines langues régionales et culturelles. Si vous avez du contenu exprimé dans une langue moins fréquemment utilisée, vous pouvez [essayer l’API Détection de langue](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c7) pour voir si elle retourne un code. La réponse pour les langues qui ne peuvent pas être détectées est `unknown`.
 
 > [!NOTE]
 > Si vous élargissez le champ en augmentant la fréquence des traitements, en ajoutant des documents supplémentaires ou en ajoutant plusieurs algorithmes d’IA, vous devez [attacher une ressource Cognitive Services facturable](cognitive-search-attach-cognitive-services.md). Des frais s’appliquent durant l’appel des API dans Cognitive Services ainsi que pour l’extraction d’images dans le cadre de la phase de craquage de document de la Recherche cognitive Azure. L’extraction de texte à partir des documents est gratuite.
 >
-> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l’extraction d’images sont présentés sur la [page de tarification du service Recherche cognitive Azure](https://go.microsoft.com/fwlink/?linkid=2042400).
+> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l’extraction d’images sont présentés sur la [page de tarification du service Recherche cognitive Azure](https://azure.microsoft.com/pricing/details/search/).
 
 
 ## <a name="odatatype"></a>@odata.type  
 Microsoft.Skills.Text.LanguageDetectionSkill
 
 ## <a name="data-limits"></a>Limites de données
-La taille maximale d’un enregistrement doit être de 50 000 caractères telle que mesurée par [`String.Length`](https://docs.microsoft.com/dotnet/api/system.string.length). Si vous avez besoin de découper vos données avant de les envoyer à la compétence de détection de langage, vous pouvez utiliser la [compétence Fractionnement de texte](cognitive-search-skill-textsplit.md).
+La taille maximale d’un enregistrement doit être de 50 000 caractères telle que mesurée par [`String.Length`](/dotnet/api/system.string.length). Si vous avez besoin de découper vos données avant de les envoyer à la compétence de détection de langage, vous pouvez utiliser la [compétence Fractionnement de texte](cognitive-search-skill-textsplit.md).
 
 ## <a name="skill-inputs"></a>Entrées de la compétence
 
@@ -41,15 +41,15 @@ Les paramètres respectent la casse.
 
 | Entrées     | Description |
 |--------------------|-------------|
-| text | Texte à analyser.|
+| `text` | Texte à analyser.|
 
 ## <a name="skill-outputs"></a>Sorties de la compétence
 
 | Nom de sortie    | Description |
 |--------------------|-------------|
-| languageCode | Code ISO 6391 de la langue identifiée. Exemple : « en ». |
-| languageName | Nom de la langue. Exemple : « anglais ». |
-| score | Valeur comprise entre 0 et 1 correspondant à la probabilité que la langue soit correctement identifiée. Le score peut être inférieur à 1 si la phrase comporte plusieurs langues.  |
+| `languageCode` | Code ISO 6391 de la langue identifiée. Exemple : « en ». |
+| `languageName` | Nom de la langue. Exemple : « anglais ». |
+| `score` | Valeur comprise entre 0 et 1 correspondant à la probabilité que la langue soit correctement identifiée. Le score peut être inférieur à 1 si la phrase comporte plusieurs langues.  |
 
 ##  <a name="sample-definition"></a>Exemple de définition
 

@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à ArcGIS Online | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ArcGIS Online.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: a9e132a4-29e7-48bf-beb9-4148e617c8a9
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/19/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 74cf0c1e055570df7702465df79dcdfbd8ea9e9f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b004394d3f0cc1c4d285c9eba9952a43e8cf65f2
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74232094"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97674026"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-arcgis-online"></a>Didacticiel : Intégration d’Azure Active Directory à ArcGIS Online
 
@@ -32,7 +27,7 @@ L’intégration d’ArcGIS Online à Azure AD vous offre les avantages suivants
 * Vous pouvez permettre à vos utilisateurs d’être connectés automatiquement à ArcGIS Online (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -41,6 +36,9 @@ Pour configurer l’intégration d’Azure AD à ArcGIS Online, vous avez besoin
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
 * Abonnement ArcGIS Online pour lequel l’authentification unique est activée
+
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -68,7 +66,7 @@ Pour configurer l’intégration d’ArcGIS Online à Azure AD, vous devez ajout
 
 4. Dans la zone de recherche, tapez **ArcGIS Online**, sélectionnez **ArcGIS Online** dans le volet des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![ArcGIS Online dans la liste des résultats](common/search-new-app.png)
+    ![ArcGIS Online dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -168,7 +166,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -212,24 +210,24 @@ Pour ArcGIS Online, cette attribution s’effectue manuellement.
 1. Connectez-vous à votre locataire **ArcGIS** .
 
 2. Cliquez sur **Invite Members** (Inviter des membres).
-   
+
     ![Inviter des membres](./media/arcgis-tutorial/ic784747.png "Invite Members")
 
 3. Sélectionnez **Add members automatically without sending an email** (Ajouter des membres automatiquement sans envoyer d’e-mail), puis cliquez sur **Next** (Suivant).
-   
+
     ![Ajouter des membres automatiquement](./media/arcgis-tutorial/ic784748.png "Ajouter des membres automatiquement")
 
 4. Dans la page de boîte de dialogue **Members** , procédez comme suit :
-   
-     ![Ajouter et vérifier](./media/arcgis-tutorial/ic784749.png "Add And Review")
-    
+
+    ![Ajouter et vérifier](./media/arcgis-tutorial/ic784749.png "Add And Review")
+
      a. Entrez **l’adresse e-mail**, le **prénom** et le **nom** du compte Azure AD valide que vous voulez provisionner.
-  
+
      b. Cliquez sur **Add And Review** (Ajouter et vérifier).
 5. Passez en revue les données que vous avez entrées, puis cliquez sur **Add Members** (Ajouter des membres).
-   
+
     ![Ajouter un membre](./media/arcgis-tutorial/ic784750.png "Ajouter un membre")
-        
+
     > [!NOTE]
     > Le titulaire du compte Azure Active Directory reçoit un message électronique contenant un lien à suivre pour confirmer son compte et l’activer.
 
@@ -237,13 +235,12 @@ Pour ArcGIS Online, cette attribution s’effectue manuellement.
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette ArcGIS Online dans le panneau d’accès doit vous connecter automatiquement à l’application ArcGIS Online pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette ArcGIS Online dans le panneau d’accès doit vous connecter automatiquement à l’application ArcGIS Online pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

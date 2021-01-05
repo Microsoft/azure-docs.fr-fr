@@ -6,19 +6,19 @@ services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: tutorial
-ms.date: 11/14/2019
+ms.date: 08/27/2020
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: 87f6febaf89f82c2c81b397c94d744229b3f4b34
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 36ba593a1d8cd2e50293eaf77dc9ec864245df4c
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80239502"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566586"
 ---
 # <a name="tutorial-create-an-application-gateway-with-url-path-based-redirection-using-the-azure-cli"></a>Tutoriel : Créer une passerelle d’application avec une redirection basée sur un chemin d’accès d’URL à l’aide d’Azure CLI
 
-Vous pouvez utiliser Azure CLI pour configurer des [règles d’acheminement par chemin d’accès URL](tutorial-url-route-cli.md) lors de la création d’une [passerelle d’application](application-gateway-introduction.md). Ce didacticiel montre comment créer des pools principaux à l’aide de [groupes de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md). Vous créez ensuite des règles de routage d’URL garantissant que le trafic web est redirigé vers le pool principal approprié.
+Vous pouvez utiliser Azure CLI pour configurer des [règles d’acheminement par chemin d’accès URL](tutorial-url-route-cli.md) lors de la création d’une [passerelle d’application](./overview.md). Ce didacticiel montre comment créer des pools principaux à l’aide de [groupes de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md). Vous créez ensuite des règles de routage d’URL garantissant que le trafic web est redirigé vers le pool principal approprié.
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -34,11 +34,11 @@ L’exemple suivant montre le trafic du site en provenance des ports 8080 et 808
 
 Si vous préférez, vous pouvez effectuer ce didacticiel en utilisant [Azure PowerShell](tutorial-url-redirect-powershell.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce tutoriel nécessite l’exécution d’Azure CLI version 2.0.4 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0.4 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -316,4 +316,4 @@ az group delete --name myResourceGroupAG
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [En savoir plus sur ce que la passerelle d’application vous permet de faire](application-gateway-introduction.md)
+> [En savoir plus sur ce que la passerelle d’application vous permet de faire](./overview.md)

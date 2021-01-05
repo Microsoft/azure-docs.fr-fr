@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 12/06/2018
 ms.author: normesta
 ms.reviewer: sachins
-ms.openlocfilehash: ac4e126c7ecbd1fc781db74e5b19635b273bbb34
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0efcdfd1b14479edf84dc1892e7e1d9afabd5a81
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72299661"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913553"
 ---
 # <a name="best-practices-for-using-azure-data-lake-storage-gen2"></a>Bonnes pratiques d’utilisation d’Azure Data Lake Storage Gen2
 
@@ -21,7 +21,7 @@ Dans cet article, vous allez découvrir les bonnes pratiques et considérations 
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
-Azure Data Lake Storage Gen2 offre des contrôles d’accès POSIX pour les utilisateurs, les groupes et les principaux de service Azure Active Directory (Azure AD). Ces contrôles d’accès peuvent être définis pour des fichiers et des répertoires existants. Ils peuvent aussi être utilisés pour créer des autorisation par défauts pouvant être appliquées automatiquement à de nouveaux fichiers ou répertoires. Pour plus d’informations sur les listes de contrôle d’accès (ACL) Azure Data Lake Storage Gen2, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](storage-data-lake-storage-access-control.md).
+Azure Data Lake Storage Gen2 offre des contrôles d’accès POSIX pour les utilisateurs, les groupes et les principaux de service Azure Active Directory (Azure AD). Ces contrôles d’accès peuvent être définis pour des fichiers et des répertoires existants. Ils peuvent aussi être utilisés pour créer des autorisation par défauts pouvant être appliquées automatiquement à de nouveaux fichiers ou répertoires. Pour plus d’informations sur les listes de contrôle d’accès (ACL) Azure Data Lake Storage Gen2, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
 
 ### <a name="use-security-groups-versus-individual-users"></a>Utilisation de groupes de sécurité et utilisation d’utilisateurs individuels
 
@@ -41,7 +41,7 @@ Les principaux de service Azure Active Directory sont en général utilisés par
 
 Data Lake Storage Gen2 prend en charge l’option d’activation d’un pare-feu et de limitation de l’accès uniquement aux services Azure, ce qui est recommandé pour limiter le vecteur d’attaques extérieures. Le pare-feu peut être activé sur un compte de stockage dans le portail Azure par le biais des options **Pare-feu** > **Activer le pare-feu (ON)**  > **Autoriser l’accès aux services Azure**.
 
-Pour accéder à votre compte de stockage depuis Azure Databricks, déployez Azure Databricks sur votre réseau virtuel, puis ajoutez ce réseau virtuel à votre pare-feu. Consultez [Configurer des pare-feu Stockage Azure et des réseaux virtuels](https://docs.microsoft.com/azure/storage/common/storage-network-security).
+Pour accéder à votre compte de stockage depuis Azure Databricks, déployez Azure Databricks sur votre réseau virtuel, puis ajoutez ce réseau virtuel à votre pare-feu. Consultez [Configurer des pare-feu Stockage Azure et des réseaux virtuels](../common/storage-network-security.md).
 
 ## <a name="resiliency-considerations"></a>Remarques relatives à la résilience
 
@@ -49,7 +49,7 @@ Lors de la conception de l’architecture d’un système avec Data Lake Storage
 
 ### <a name="high-availability-and-disaster-recovery"></a>Haute disponibilité et récupération d’urgence
 
-La haute disponibilité et la récupération d’urgence peuvent parfois être combinées, bien qu’elles aient chacune une stratégie légèrement différente, surtout lorsqu’il s’agit de données. Data Lake Storage Gen2 gère déjà trois réplications en arrière-plan pour se protéger contre des défaillances matérielles localisées. De plus, d’autres options de réplication, comme ZRS ou GZRS (préversion), améliorent la haute disponibilité, tandis que GRS & RA-GRS améliorent la récupération d'urgence. Lorsque vous élaborez un plan pour la haute disponibilité, en cas d’interruption du service, la charge de travail doit accéder aux dernières données aussi vite que possible en passant à une instance répliquée séparément en local ou dans une nouvelle région.
+La haute disponibilité et la récupération d’urgence peuvent parfois être combinées, bien qu’elles aient chacune une stratégie légèrement différente, surtout lorsqu’il s’agit de données. Data Lake Storage Gen2 gère déjà trois réplications en arrière-plan pour se protéger contre des défaillances matérielles localisées. De plus, d’autres options de réplication, comme le stockage ZRS ou GZRS, améliorent la haute disponibilité, tandis que GRS & RA-GRS améliorent la reprise d’activité. Lorsque vous élaborez un plan pour la haute disponibilité, en cas d’interruption du service, la charge de travail doit accéder aux dernières données aussi vite que possible en passant à une instance répliquée séparément en local ou dans une nouvelle région.
 
 Dans une stratégie de reprise d’activité, pour se préparer à une improbable défaillance catastrophique d’une région, il est aussi important de disposer de données répliquées dans une autre région à l’aide de la réplication GRS ou RA-GRS. Vous devez aussi tenir compte de vos exigences pour des cas extrêmes comme l’altération des données, où vous voudrez peut-être créer régulièrement des instantanés sur lesquels vous replier. En fonction de l’importance et de la taille des données, pensez à prendre des instantanés delta à intervalles de 1, 6 et 24 heures, en fonction des tolérances au risque.
 
@@ -77,11 +77,11 @@ Lorsque des données arrivent dans Data Lake Store, il est important d’avoir p
 
 Dans des charges de travail IoT peuvent se trouver un grand nombre de données arrivées dans le magasin de données, couvrant de nombreux produits, appareils, organisations et clients. Il est important de planifier à l’avance la disposition du répertoire pour des questions d’organisation, de sécurité et de traitement efficace des données pour des consommateurs de flux. Voici un modèle général de disposition à prendre en compte :
 
-    {Region}/{SubjectMatter(s)}/{yyyy}/{mm}/{dd}/{hh}/
+*{Region}/{SubjectMatter(s)}/{yyyy}/{mm}/{dd}/{hh}/*
 
 Par exemple, la télémétrie d’arrivée d’un moteur d’avion dans le Royaume-Uni ressemble à la structure suivante :
 
-    UK/Planes/BA1293/Engine1/2017/08/11/12/
+*UK/Planes/BA1293/Engine1/2017/08/11/12/*
 
 Il est important de placer la date à la fin de la structure de répertoires. Si vous voulez verrouiller certaines régions ou certains thèmes à des utilisateurs/groupes, vous pouvez le faire facilement avec les autorisations POSIX. Sinon, s’il fallait restreindre l’affichage des données du Royaume-Uni ou de certains avions à certains groupes de sécurité, avec la structure de date au début, une autorisation différente serait nécessaire pour de nombreux répertoires sous chaque répertoire heure. De plus, placer la structure de date au début augmente grandement le nombre de répertoires à mesure que le temps passe.
 
@@ -91,13 +91,13 @@ Il est important de placer la date à la fin de la structure de répertoires. Si
 
 Parfois le traitement de fichiers échoue en raison de corruption des données ou de formats inattendus. Dans ces cas, la structure du répertoire peut profiter d’un dossier **/bad** où déplacer les fichiers pour une inspection plus en détail. La tâche de traitement par lots peut aussi gérer le rapport ou la notification de ces fichiers *bad* en vue d’une intervention manuelle. Considérez la structure de modèle suivante :
 
-    {Region}/{SubjectMatter(s)}/In/{yyyy}/{mm}/{dd}/{hh}/
-    {Region}/{SubjectMatter(s)}/Out/{yyyy}/{mm}/{dd}/{hh}/
-    {Region}/{SubjectMatter(s)}/Bad/{yyyy}/{mm}/{dd}/{hh}/
+*{Region}/{SubjectMatter(s)}/In/{yyyy}/{mm}/{dd}/{hh}/* \
+*{Region}/{SubjectMatter(s)}/Out/{yyyy}/{mm}/{dd}/{hh}/* \
+*{Region}/{SubjectMatter(s)}/Bad/{yyyy}/{mm}/{dd}/{hh}/*
 
 Par exemple, une firme marketing qui reçoit quotidiennement des extraits de données de mises à jour client de la part de leurs clients en Amérique du Nord. Avant et après avoir été traité, il peut ressembler à l’extrait de code suivant :
 
-    NA/Extracts/ACMEPaperCo/In/2017/08/14/updates_08142017.csv
-    NA/Extracts/ACMEPaperCo/Out/2017/08/14/processed_updates_08142017.csv
+*NA/Extracts/ACMEPaperCo/In/2017/08/14/updates_08142017.csv*\
+*NA/Extracts/ACMEPaperCo/Out/2017/08/14/processed_updates_08142017.csv*
 
 Dans le cas courant de traitement des données par lots dans des bases de données directement, telles que Hive ou des bases de données SQL traditionnelles, il n’y a pas besoin de dossiers **/in** ou **/out** car la sortie se trouve déjà dans un dossier différent pour le tableau Hive ou la base de données externe. Par exemple, des extraits quotidiens de la part de clients arrivent dans leurs dossiers respectifs, et l’orchestration par des outils comme Azure Data Factory, Apache Oozie ou Apache Airflow déclenche une tâche quotidienne Hive ou Spark pour traiter et écrire les données dans un tableau Hive.

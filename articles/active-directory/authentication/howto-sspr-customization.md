@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 04/14/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 07/17/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 54a45602b80db965e3cc79d188dd40034a320b79
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.openlocfilehash: 3766db0d5070f15216ac612353e2c25737ad092a
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393915"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741624"
 ---
 # <a name="customize-the-user-experience-for-azure-active-directory-self-service-password-reset"></a>Personnalisation de l’expérience utilisateur pour la réinitialisation de mot de passe en libre-service Azure Active Directory
 
@@ -50,7 +50,7 @@ L’e-mail de contact par défaut est envoyé aux destinataires dans l’ordre s
 
 Dans tous les cas, un maximum de 100 destinataires sont informés.
 
-Pour en savoir plus sur les différents rôles d’administrateur et sur la façon de les affecter, consultez [Attribution de rôles d’administrateur dans Azure Active Directory](../users-groups-roles/directory-assign-admin-roles.md).
+Pour en savoir plus sur les différents rôles d’administrateur et sur la façon de les affecter, consultez [Attribution de rôles d’administrateur dans Azure Active Directory](../roles/permissions-reference.md).
 
 ### <a name="disable-contact-your-administrator-emails"></a>Désactiver les e-mails « Contactez votre administrateur »
 
@@ -91,4 +91,4 @@ Set-ADFSGlobalWebContent -SigninPageDescriptionText "<p><a href='https://passwor
 
 Pour comprendre l’utilisation de la réinitialisation SSPR dans votre environnement, consultez [Options de reporting pour la gestion des mots de passe Azure AD](howto-sspr-reporting.md).
 
-Si vos utilisateurs ou vous-même rencontrez des problèmes de réinitialisation SSPR, consultez [Résolution des problèmes de réinitialisation de mot de passe en libre-service](active-directory-passwords-troubleshoot.md).
+Si vos utilisateurs ou vous-même rencontrez des problèmes de réinitialisation SSPR, consultez [Résolution des problèmes de réinitialisation de mot de passe en libre-service](./troubleshoot-sspr.md).

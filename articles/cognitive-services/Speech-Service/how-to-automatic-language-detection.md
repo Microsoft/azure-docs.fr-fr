@@ -8,15 +8,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 03/16/2020
+ms.date: 05/19/2020
 ms.author: trbye
-zone_pivot_groups: programming-languages-set-two
-ms.openlocfilehash: fefbe793fa4a6b90ba9bf8d468d42dcbd315759c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+zone_pivot_groups: programming-languages-speech-services-nomore-variant
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: 1d294bb4b3cae314e964407e5e75fcddf4fa5d92
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81402213"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91970994"
 ---
 # <a name="automatic-language-detection-for-speech-to-text"></a>Détection automatique de la langue pour la reconnaissance vocale
 
@@ -25,11 +26,11 @@ La détection automatique de la langue est utilisée pour déterminer la corresp
 Dans cet article, vous allez apprendre à utiliser `AutoDetectSourceLanguageConfig` pour construire un objet `SpeechRecognizer` et récupérer la langue détectée.
 
 > [!IMPORTANT]
-> Cette fonctionnalité est disponible uniquement pour le Kit de développement logiciel (SDK) Speech pour C#, C++, Java et Python.
+> Cette fonctionnalité est uniquement disponible pour le Kit de développement logiciel (SDK) Speech avec C#, C++, Java, Python, JavaScript et Objective-C.
 
 ## <a name="automatic-language-detection-with-the-speech-sdk"></a>Détection automatique de la langue avec le Kit de développement logiciel (SDK) Speech
 
-La détection automatique de la langue a actuellement une limite côté services de deux langues par détection. Gardez cette limitation à l’esprit lors de la construction de votre objet `AudoDetectSourceLanguageConfig`. Dans les exemples ci-dessous, vous allez créer un `AutoDetectSourceLanguageConfig`, puis l’utiliser pour construire une `SpeechRecognizer`.
+La détection automatique de la langue a actuellement une limite côté services de quatre langues par détection. Gardez cette limitation à l’esprit lors de la construction de votre objet `AudoDetectSourceLanguageConfig`. Dans les exemples ci-dessous, vous allez créer un `AutoDetectSourceLanguageConfig`, puis l’utiliser pour construire une `SpeechRecognizer`.
 
 > [!TIP]
 > Vous pouvez également spécifier un modèle personnalisé à utiliser lors de l’exécution de la reconnaissance vocale. Pour plus d’informations, voir [Utiliser un modèle personnalisé pour la détection automatique de la langue](#use-a-custom-model-for-automatic-language-detection).
@@ -66,7 +67,8 @@ auto autoDetectSourceLanguageConfig =
 auto recognizer = SpeechRecognizer::FromConfig(
     speechConfig,
     autoDetectSourceLanguageConfig,
-    audioConfig);
+    audioConfig
+    );
 
 speechRecognitionResult = recognizer->RecognizeOnceAsync().get();
 auto autoDetectSourceLanguageResult =
@@ -114,6 +116,37 @@ speech_recognizer = speechsdk.SpeechRecognizer(
 result = speech_recognizer.recognize_once()
 auto_detect_source_language_result = speechsdk.AutoDetectSourceLanguageResult(result)
 detected_language = auto_detect_source_language_result.language
+```
+
+::: zone-end
+
+::: zone pivot="programming-language-objectivec"
+
+```Objective-C
+NSArray *languages = @[@"zh-CN", @"de-DE"];
+SPXAutoDetectSourceLanguageConfiguration* autoDetectSourceLanguageConfig = \
+        [[SPXAutoDetectSourceLanguageConfiguration alloc]init:languages];
+SPXSpeechRecognizer* speechRecognizer = \
+        [[SPXSpeechRecognizer alloc] initWithSpeechConfiguration:speechConfig
+                           autoDetectSourceLanguageConfiguration:autoDetectSourceLanguageConfig
+                                              audioConfiguration:audioConfig];
+SPXSpeechRecognitionResult *result = [speechRecognizer recognizeOnce];
+SPXAutoDetectSourceLanguageResult *languageDetectionResult = [[SPXAutoDetectSourceLanguageResult alloc] init:result];
+NSString *detectedLanguage = [languageDetectionResult language];
+```
+
+::: zone-end
+
+::: zone pivot="programming-language-javascript"
+
+```Javascript
+var autoDetectConfig = SpeechSDK.AutoDetectSourceLanguageConfig.fromLanguages(["en-US", "de-DE"]);
+var speechRecognizer = SpeechSDK.SpeechRecognizer.FromConfig(speechConfig, autoDetectConfig, audioConfig);
+speechRecognizer.recognizeOnceAsync((result: SpeechSDK.SpeechRecognitionResult) => {
+        var languageDetectionResult = SpeechSDK.AutoDetectSourceLanguageResult.fromResult(result);
+        var detectedLanguage = languageDetectionResult.language;
+},
+{});
 ```
 
 ::: zone-end
@@ -182,6 +215,50 @@ AutoDetectSourceLanguageConfig autoDetectSourceLanguageConfig =
 
 ::: zone-end
 
+::: zone pivot="programming-language-objectivec"
+
+```Objective-C
+SPXSourceLanguageConfiguration* enLanguageConfig = [[SPXSourceLanguageConfiguration alloc]init:@"en-US"];
+SPXSourceLanguageConfiguration* frLanguageConfig = \
+        [[SPXSourceLanguageConfiguration alloc]initWithLanguage:@"fr-FR"
+                                                     endpointId:@"The Endpoint Id for custom model of fr-FR"];
+NSArray *languageConfigs = @[enLanguageConfig, frLanguageConfig];
+SPXAutoDetectSourceLanguageConfiguration* autoDetectSourceLanguageConfig = \
+        [[SPXAutoDetectSourceLanguageConfiguration alloc]initWithSourceLanguageConfigurations:languageConfigs];
+```
+
+::: zone-end
+
+::: zone pivot="programming-language-javascript"
+
+```Javascript
+var enLanguageConfig = SpeechSDK.SourceLanguageConfig.fromLanguage("en-US");
+var frLanguageConfig = SpeechSDK.SourceLanguageConfig.fromLanguage("fr-FR", "The Endpoint Id for custom model of fr-FR");
+var autoDetectConfig = SpeechSDK.AutoDetectSourceLanguageConfig.fromSourceLanguageConfigs([enLanguageConfig, frLanguageConfig]);
+```
+
+::: zone-end
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Documentation de référence du SDK Speech](speech-sdk.md)
+::: zone pivot="programming-language-csharp"
+* Pour en savoir plus sur la détection automatique de la langue, reportez-vous à l’[exemple de code](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/csharp/sharedcontent/console/speech_recognition_samples.cs#L741) sur GitHub.
+::: zone-end
+
+::: zone pivot="programming-language-cpp"
+* Pour en savoir plus sur la détection automatique de la langue, reportez-vous à l’[exemple de code](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/cpp/windows/console/samples/speech_recognition_samples.cpp#L507) sur GitHub.
+::: zone-end
+
+::: zone pivot="programming-language-java"
+* Pour en savoir plus sur la détection automatique de la langue, reportez-vous à l’[exemple de code](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/java/jre/console/src/com/microsoft/cognitiveservices/speech/samples/console/SpeechRecognitionSamples.java#L521) sur GitHub.
+::: zone-end
+
+::: zone pivot="programming-language-python"
+* Pour en savoir plus sur la détection automatique de la langue, reportez-vous à l’[exemple de code](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/python/console/speech_synthesis_sample.py#L434) sur GitHub.
+::: zone-end
+
+::: zone pivot="programming-language-objectivec"
+* Pour en savoir plus sur la détection automatique de la langue, reportez-vous à l’[exemple de code](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/objective-c/ios/speech-samples/speech-samples/ViewController.m#L494) sur GitHub.
+::: zone-end
+
+* [Documentation de référence du SDK Speech](speech-sdk.md)

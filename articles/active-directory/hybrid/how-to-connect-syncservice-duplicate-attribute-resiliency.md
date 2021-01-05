@@ -11,22 +11,22 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/15/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5585f0cd04dca4145f0322db9d625e35372b24b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e09dd6a127bd04ae698cb6cad2ffd7f35e3b51c3
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78298341"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94413426"
 ---
 # <a name="identity-synchronization-and-duplicate-attribute-resiliency"></a>Synchronisation des identités et résilience d’attribut en double
 La résilience d’attribut en double est une fonctionnalité d’Azure Active Directory qui élimine les problèmes liés aux conflits entre les valeurs **UserPrincipalName** et **ProxyAddress** SMTP lors de l’exécution de l’un des outils de synchronisation de Microsoft.
 
-Ces deux attributs doivent généralement être uniques pour tous les objets **Utilisateur**, **Groupe**, ou **Contact** dans un client Azure Active Directory donné.
+Ces deux attributs doivent généralement être uniques pour tous les objets **Utilisateur** , **Groupe** , ou **Contact** dans un client Azure Active Directory donné.
 
 > [!NOTE]
 > Seuls les Utilisateurs peuvent avoir des noms UPN.
@@ -40,11 +40,11 @@ En cas de tentative d’approvisionnement d’un nouvel objet avec une valeur UP
 
 ## <a name="behavior-with-duplicate-attribute-resiliency"></a>Comportement avec une résilience d’attribut en double
 Au lieu de rejeter l’approvisionnement ou la mise à jour d’un objet comportant un attribut en double, Azure Active Directory met en « quarantaine » l’attribut en double qui enfreint la contrainte d’unicité. Si cet attribut est requis pour l’approvisionnement, comme pour UserPrincipalName, le service affecte une valeur d’espace réservé. Le format de ces valeurs temporaires est  
-_**\<OriginalPrefix>+\<4DigitNumber>\@\<InitialTenantDomain>.onmicrosoft.com**_ .
+_**\<OriginalPrefix>+\<4DigitNumber>\@\<InitialTenantDomain>.onmicrosoft.com**_.
 
 Le processus de résilience d’attribut gère uniquement les valeurs **ProxyAddress** UPN et SMTP.
 
-Si l’attribut n’est pas obligatoire, comme **ProxyAddress**, Azure Active Directory met simplement en quarantaine l’attribut à l’origine du conflit et poursuit la création ou la mise à jour de l’objet.
+Si l’attribut n’est pas obligatoire, comme **ProxyAddress** , Azure Active Directory met simplement en quarantaine l’attribut à l’origine du conflit et poursuit la création ou la mise à jour de l’objet.
 
 Lorsque l’attribut est mis en quarantaine, des informations sur le conflit sont envoyées dans le même e-mail de rapport d’erreur utilisé avec l’ancien comportement. Toutefois, ces informations n’apparaissent qu’une fois dans le rapport d’erreurs (lors de la mise en quarantaine) ; elles ne sont pas consignées dans les e-mails suivants. En outre, étant donné que l’exportation de cet objet a réussi, le client de synchronisation ne consigne pas d’erreur et ne retente pas la création/la mise à jour lors des cycles de synchronisation suivants.
 
@@ -75,7 +75,7 @@ Il existe actuellement deux méthodes pour identifier les objets qui comportent 
 Pour les applets de commande PowerShell dans cette rubrique, les conditions suivantes sont vérifiées :
 
 * Toutes les applets de commande suivantes sont sensibles à la casse.
-* L’indicateur **–ErrorCategory PropertyConflict** doit toujours être inclus. Il n’existe actuellement pas d’autres types de **ErrorCategory**, mais cela pourrait changer.
+* L’indicateur **–ErrorCategory PropertyConflict** doit toujours être inclus. Il n’existe actuellement pas d’autres types de **ErrorCategory** , mais cela pourrait changer.
 
 Commencez par exécuter **Connect-MsolService** et entrer les informations d’identification d’un administrateur client.
 
@@ -111,7 +111,7 @@ Pour afficher les erreurs concernant une propriété spécifique, ajoutez l’in
 `Get-MsolDirSyncProvisioningError -ErrorCategory PropertyConflict -PropertyValue User@domain.com -PropertyName UserPrincipalName`
 
 #### <a name="using-a-string-search"></a>À l’aide d’une recherche de chaîne
-Pour effectuer une recherche de chaîne élargie, utilisez l’indicateur **-SearchString** . Il peut s’utiliser indépendamment des autres indicateurs ci-dessus, à l’exception de **-ErrorCategory PropertyConflict**, qui est toujours requis :
+Pour effectuer une recherche de chaîne élargie, utilisez l’indicateur **-SearchString** . Il peut s’utiliser indépendamment des autres indicateurs ci-dessus, à l’exception de **-ErrorCategory PropertyConflict** , qui est toujours requis :
 
 `Get-MsolDirSyncProvisioningError -ErrorCategory PropertyConflict -SearchString User`
 
@@ -124,23 +124,23 @@ Pour effectuer une recherche de chaîne élargie, utilisez l’indicateur **-Sea
 ## <a name="microsoft-365-admin-center"></a>Centre d’administration Microsoft 365
 Vous pouvez afficher les erreurs de synchronisation d’annuaires dans le Centre d’administration Microsoft 365. Le rapport dans le centre d’administration Microsoft 365 n’affiche que les objets **Utilisateur** qui présentent ces erreurs. Il n’indique pas d’informations sur les conflits entre **Groupes** et **Contacts**.
 
-![Utilisateurs actifs](./media/how-to-connect-syncservice-duplicate-attribute-resiliency/1234.png "Active users")
+![Screenshot that shows directory synchronization errors in the Microsoft 365 admin center.](./media/how-to-connect-syncservice-duplicate-attribute-resiliency/1234.png "Active users")
 
-Pour obtenir des instructions sur l’affichage des erreurs de synchronisation d’annuaires dans le Centre d’administration Microsoft 365, consultez [Identifier les erreurs de synchronisation d’annuaires dans Office 365](https://support.office.com/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067).
+Pour obtenir des instructions sur l’affichage des erreurs de synchronisation d’annuaires dans le Centre d’administration Microsoft 365, consultez [Identifier les erreurs de synchronisation d’annuaires dans Microsoft 365](https://support.office.com/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067).
 
 ### <a name="identity-synchronization-error-report"></a>Rapport d’erreur de synchronisation d’identité
 Lorsqu’un objet présentant un conflit d’attribut en double est traité avec ce nouveau comportement, une notification afférente est incluse dans l’e-mail standard contenant le rapport d’erreur de synchronisation d’identité. Ce dernier est envoyé au contact du client en charge des notifications techniques. Toutefois, ce comportement présente un changement majeur. Auparavant, les informations de conflit d’attribut en double apparaissaient dans chaque rapport d’erreurs généré jusqu’à la résolution du conflit. Avec ce nouveau comportement, la notification d’erreur pour un conflit donné n’apparaît qu’une fois : au moment où l’attribut en conflit est mis en quarantaine.
 
 Voici un exemple de notification par e-mail d’un conflit ProxyAddress :  
-    ![Utilisateurs actifs](./media/how-to-connect-syncservice-duplicate-attribute-resiliency/6.png "Active users")  
+    ![Screenshot that shows an example of an email notification for a ProxyAddress conflict.](./media/how-to-connect-syncservice-duplicate-attribute-resiliency/6.png "Active users")  
 
 ## <a name="resolving-conflicts"></a>Résolution des conflits
 Les stratégies et tactiques de résolution des problèmes pour ces erreurs ne doivent pas différer de la façon dont les erreurs d’attribut en double ont été traitées par le passé. La seule différence est que la tâche du minuteur effectue un balayage du client côté serveur afin d’ajouter automatiquement l’attribut en question à l’objet concerné lorsque le conflit est résolu.
 
-L’article suivant présente différentes stratégies de dépannage et de résolution : [Les attributs en double ou non valides empêchent la synchronisation d’annuaires dans Office 365](https://support.microsoft.com/kb/2647098).
+L’article suivant décrit les différentes stratégies de dépannage et de résolution : [Les attributs en double ou non valides empêchent la synchronisation d’annuaires dans Office 365](https://support.microsoft.com/kb/2647098).
 
 ## <a name="known-issues"></a>Problèmes connus
-Aucun de ces problèmes connus n’entraîne une dégradation du service ou une perte des données. Plusieurs d’entre eux relèvent de l’esthétisme ; d’autres génèrent des erreurs d’attribut en double («*pré-résilience*»), au lieu de mettre en quarantaine l’attribut à l’origine du conflit ; un dernier requiert un travail de correction manuelle supplémentaire pour certaines erreurs.
+Aucun de ces problèmes connus n’entraîne une dégradation du service ou une perte des données. Plusieurs d’entre eux relèvent de l’esthétisme ; d’autres génèrent des erreurs d’attribut en double (« *pré-résilience* »), au lieu de mettre en quarantaine l’attribut à l’origine du conflit ; un dernier requiert un travail de correction manuelle supplémentaire pour certaines erreurs.
 
 **Comportement de base :**
 
@@ -154,7 +154,7 @@ Aucun de ces problèmes connus n’entraîne une dégradation du service ou une 
     c. Lors de l’exportation, une erreur de **conflit ProxyAddress** est générée au lieu de la mise en quarantaine des attributs à l’origine du conflit. L’opération est retentée à chaque cycle de synchronisation, comme cela était le cas avant l’activation de la fonction de résilience.
 2. Si deux Groupes sont créés en local avec la même adresse SMTP, l’approvisionnement de l’un d’entre eux échoue à la première tentative, ce qui génère une erreur standard d’attribut **ProxyAddress** en double. Toutefois, la valeur en double est bien mise en quarantaine lors du prochain cycle de synchronisation.
 
-**Rapport du portail Office**:
+**Rapport du portail Office** :
 
 1. Le message d’erreur détaillé pour deux objets dans un ensemble de conflit UPN est le même. Cela indique que l’UPN des deux objets a changé/été mis en quarantaine, alors que seules les données de l’un d’entre eux ont changé.
 2. Le message d’erreur détaillé d’un conflit UPN affiche une propriété displayName incorrecte pour un utilisateur dont l’UPN a changé/été mis en quarantaine. Par exemple :
@@ -165,17 +165,16 @@ Aucun de ces problèmes connus n’entraîne une dégradation du service ou une 
    
     c. **L’UPN de l’utilisateur B** est remplacée par **User1234\@contoso.onmicrosoft.com** et **User\@contoso.com** est ajouté à **DirSyncProvisioningErrors** .
    
-    d. Le message d’erreur de l’**utilisateur B** doit indiquer que l’**utilisateur A** a déjà **User\@contoso.com** comme UPN, mais il affiche le paramètre displayName de l’**utilisateur B**.
+    d. Le message d’erreur de l’ **utilisateur B** doit indiquer que l’ **utilisateur A** a déjà **User\@contoso.com** comme UPN, mais il affiche le paramètre displayName de l’ **utilisateur B**.
 
 **Rapport d’erreur de synchronisation d’identité** :
 
 Le lien pour la *procédure à suivre pour résoudre ce problème* est incorrect :  
     ![Utilisateurs actifs](./media/how-to-connect-syncservice-duplicate-attribute-resiliency/6.png "Active users")  
 
-Il doit pointer vers [https://aka.ms/duplicateattributeresiliency](https://aka.ms/duplicateattributeresiliency).
+Il doit pointer vers [https://aka.ms/duplicateattributeresiliency]().
 
 ## <a name="see-also"></a>Voir aussi
 * [Synchronisation d’Azure AD Connect](how-to-connect-sync-whatis.md)
 * [Intégration des identités locales dans Azure Active Directory](whatis-hybrid-identity.md)
-* [Identifier les erreurs de synchronisation d’annuaires dans Office 365](https://support.office.com/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067)
-
+* [Identifier les erreurs de synchronisation d’annuaires dans Microsoft 365](https://support.office.com/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067)

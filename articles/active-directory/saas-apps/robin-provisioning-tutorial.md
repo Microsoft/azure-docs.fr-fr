@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Robin pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes utilisateur fournis par Robin.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 178ca5b3-4155-43ab-84f5-650d25c5a74a
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 09/12/2019
 ms.author: Zhchia
-ms.openlocfilehash: fabd8a1953bedf6c3db6da443903a6dbd965b01e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 83af1c3bc323546534613e6ff99c731010b103d7
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77060948"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352131"
 ---
 # <a name="tutorial-configure-robin-for-automatic-user-provisioning"></a>Tutoriel : Configurer Robin pour le provisionnement automatique d’utilisateurs
 
@@ -93,7 +89,7 @@ Avant de configurer Robin pour le provisionnement automatique d’utilisateurs a
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Robin, en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Robin, en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Robin](https://docs.microsoft.com/azure/active-directory/saas-apps/robin-tutorial). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Robin en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Robin](./robin-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
 
 ### <a name="to-configure-automatic-user-provisioning-for-robin-in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour Robin dans Azure AD :
 
@@ -107,11 +103,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://api.robinpowered.com/v1.0/scim-2` dans **URL de locataire**. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Robin. Si la connexion échoue, vérifiez que votre compte Robin dispose des autorisations d’administrateur et réessayez.
 
@@ -167,4 +163,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

@@ -1,24 +1,24 @@
 ---
-title: Se connecter à l’aide de MySQL Workbench – Azure Database for MariaDB
+title: 'Démarrage rapide : Se connecter à MySQL Workbench – Azure Database for MariaDB'
 description: Ce démarrage rapide décrit les étapes à suivre pour utiliser MySQL Workbench afin de se connecter à des données et de les interroger à partir d’Azure Database for MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.custom: mvc
 ms.topic: quickstart
 ms.date: 3/18/2020
-ms.openlocfilehash: 4bb1a71c5d8a58e6d94007554c72019001d395db
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 209c793903f1f706fc27102a783aa76e65382fcd
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79528998"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541094"
 ---
-# <a name="azure-database-for-mariadb-use-mysql-workbench-to-connect-and-query-data"></a>Azure Database for MariaDB : Utiliser MySQL Workbench pour se connecter et interroger des données
+# <a name="quickstart-azure-database-for-mariadb-use-mysql-workbench-to-connect-and-query-data"></a>Démarrage rapide : Azure Database for MariaDB : Utiliser MySQL Workbench pour se connecter et interroger des données
 
 Ce démarrage rapide explique comment se connecter à une instance d’Azure Database for MariaDB en utilisant MySQL Workbench. 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Ce démarrage rapide s’appuie sur les ressources créées dans l’un des guides suivants :
 

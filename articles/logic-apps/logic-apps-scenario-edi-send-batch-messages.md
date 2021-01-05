@@ -8,11 +8,11 @@ ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 08/19/2018
 ms.openlocfilehash: 6fc0833f70e3e9cd98100f193b52e5a1bfa4d651
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75666667"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000400"
 ---
 # <a name="exchange-edi-messages-as-batches-or-groups-between-trading-partners-in-azure-logic-apps"></a>Échanger des messages EDI sous forme de lots ou de groupes entre partenaires commerciaux dans Azure Logic Apps
 

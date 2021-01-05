@@ -9,11 +9,11 @@ ms.date: 07/17/2019
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: fe3d47d41d10a3abc8c9c889081af2db337963ad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68883741"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993285"
 ---
 <!-- This contains intro text for the "Get an IoT hub connection string" section in the iot-hub-lang-lang-module-twin-getstarted.md files-->
 

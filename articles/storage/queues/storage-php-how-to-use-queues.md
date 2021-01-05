@@ -6,14 +6,14 @@ ms.author: mhopkins
 ms.date: 01/11/2018
 ms.service: storage
 ms.subservice: queues
-ms.topic: conceptual
-ms.reviewer: cbrooks
-ms.openlocfilehash: 692c943e48c08771b5f1c60b66412270081cf0e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.reviewer: dineshm
+ms.openlocfilehash: 0e5b7ed75f22659a9a38ac761cc61c841102a067
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72302970"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93345837"
 ---
 # <a name="how-to-use-queue-storage-from-php"></a>Utilisation du stockage de files d'attente à partir de PHP
 
@@ -38,7 +38,7 @@ Dans ce guide, vous allez utiliser des fonctionnalités du service Stockage File
 ### <a name="install-via-composer"></a>Installation via Composer
 
 1. Créez un fichier nommé **composer.json** à la racine de votre projet et ajoutez-y le code suivant :
-   
+
     ```json
     {
       "require": {
@@ -46,9 +46,10 @@ Dans ce guide, vous allez utiliser des fonctionnalités du service Stockage File
       }
     }
     ```
+
 2. Téléchargez **[composer.phar][composer-phar]** à la racine du projet.
 3. Ouvrez une invite de commande et exécutez la commande suivante à la racine du projet
-   
+
     ```
     php composer.phar install
     ```
@@ -89,8 +90,9 @@ UseDevelopmentStorage=true
 
 Pour créer un client de service de file d’attente Azure, vous devez utiliser la classe **QueueRestProxy**. Vous pouvez utiliser une des techniques suivantes :
 
-* Lui passer directement la chaîne de connexion.
-* utiliser des variables d’environnement dans votre application web pour stocker la chaîne de connexion. Pour configurer des chaînes de connexion, consultez le document [Paramètres de configuration des applications web Azure](../../app-service/configure-common.md).
+- Lui passer directement la chaîne de connexion.
+- utiliser des variables d’environnement dans votre application web pour stocker la chaîne de connexion. Pour configurer des chaînes de connexion, consultez le document [Paramètres de configuration des applications web Azure](../../app-service/configure-common.md).
+
 Dans les exemples ci-dessous, la chaîne de connexion est passée directement.
 
 ```php
@@ -139,8 +141,6 @@ catch(ServiceException $e){
 
 > [!NOTE]
 > Ne tenez pas compte de la différence entre majuscules et minuscules pour les clés de métadonnées. Toutes les clés sont lues en minuscules sur le service.
-> 
-> 
 
 ## <a name="add-a-message-to-a-queue"></a>Ajout d'un message à une file d'attente
 
@@ -223,7 +223,7 @@ else{
 
 ## <a name="de-queue-the-next-message"></a>Enlèvement du message suivant de la file d'attente
 
-Votre code supprime un message d'une file d'attente en deux étapes. Tout d’abord, vous appelez **QueueRestProxy->listMessages**, ce qui rend le message invisible à tout autre code lu à partir de la file d’attente. Par défaut, ce message reste invisible pendant 30 secondes. (Si le message n’est pas supprimé pendant cette période, il redevient visible dans la file d’attente.) Pour finaliser la suppression du message de la file d’attente, vous devez appeler **QueueRestProxy->deleteMessage**. Ce processus de suppression d’un message en deux étapes garantit que, si votre code ne parvient pas à traiter un message à cause d’une défaillance matérielle ou logicielle, une autre instance de votre code peut obtenir le même message et réessayer. Votre code appelle **deleteMessage** juste après le traitement du message.
+Votre code supprime un message d'une file d'attente en deux étapes. Tout d’abord, vous appelez **QueueRestProxy->listMessages** , ce qui rend le message invisible à tout autre code lu à partir de la file d’attente. Par défaut, ce message reste invisible pendant 30 secondes. (Si le message n’est pas supprimé pendant cette période, il redevient visible dans la file d’attente.) Pour finaliser la suppression du message de la file d’attente, vous devez appeler **QueueRestProxy->deleteMessage**. Ce processus de suppression d’un message en deux étapes garantit que, si votre code ne parvient pas à traiter un message à cause d’une défaillance matérielle ou logicielle, une autre instance de votre code peut obtenir le même message et réessayer. Votre code appelle **deleteMessage** juste après le traitement du message.
 
 ```php
 require_once 'vendor/autoload.php';
@@ -425,8 +425,8 @@ catch(ServiceException $e){
 
 Maintenant que vous connaissez les bases du stockage des files d’attente Azure, consultez les liens suivants pour apprendre à effectuer des tâches de stockage plus complexes :
 
-* Visitez les [informations de référence sur l’API pour la bibliothèque de client PHP Stockage Azure](https://azure.github.io/azure-storage-php/)
-* Consultez l’[exemple de file d’attente avancée](https://github.com/Azure/azure-storage-php/blob/master/samples/QueueSamples.php).
+- Visitez les [informations de référence sur l’API pour la bibliothèque de client PHP Stockage Azure](https://azure.github.io/azure-storage-php/)
+- Consultez l’[exemple de file d’attente avancée](https://github.com/Azure/azure-storage-php/blob/master/samples/QueueSamples.php).
 
 Pour plus d’informations, consultez également le [Centre pour développeurs PHP](https://azure.microsoft.com/develop/php/).
 

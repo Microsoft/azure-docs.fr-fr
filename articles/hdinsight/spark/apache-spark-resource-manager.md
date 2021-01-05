@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/06/2019
-ms.openlocfilehash: 3aab89f86dcd48328771cd0fda03d1c9de4bc2c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5427077a4b07917c8852d0a63c815195e776b9de
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75932108"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017030"
 ---
 # <a name="manage-resources-for-apache-spark-cluster-on-azure-hdinsight"></a>Gérer les ressources du cluster Apache Spark dans Azure HDInsight
 
@@ -62,8 +62,10 @@ Pour les applications exécutées dans le bloc-notes Jupyter, vous pouvez utilis
 
 L’extrait de code suivant montre comment modifier la configuration d’une application exécutée dans Jupyter.
 
-    %%configure
-    {"executorMemory": "3072M", "executorCores": 4, "numExecutors":10}
+```scala
+%%configure
+{"executorMemory": "3072M", "executorCores": 4, "numExecutors":10}
+```
 
 Les paramètres de configuration doivent être passés en tant que chaîne JSON et spécifiés sur la ligne suivant la commande magique, comme indiqué dans l’exemple de colonne.
 
@@ -71,13 +73,17 @@ Les paramètres de configuration doivent être passés en tant que chaîne JSON 
 
 La commande suivante est un exemple de modification des paramètres de configuration d’une application de lot soumise à l’aide de `spark-submit`.
 
-    spark-submit --class <the application class to execute> --executor-memory 3072M --executor-cores 4 –-num-executors 10 <location of application jar file> <application parameters>
+```scala
+spark-submit --class <the application class to execute> --executor-memory 3072M --executor-cores 4 –-num-executors 10 <location of application jar file> <application parameters>
+```
 
 ### <a name="change-the-parameters-for-an-application-submitted-using-curl"></a>Modifier les paramètres d’une application soumise à l’aide de cURL
 
 La commande suivante est un exemple de modification des paramètres de configuration d’une application de lot soumise à l’aide de cURL.
 
-    curl -k -v -H 'Content-Type: application/json' -X POST -d '{"file":"<location of application jar file>", "className":"<the application class to execute>", "args":[<application parameters>], "numExecutors":10, "executorMemory":"2G", "executorCores":5' localhost:8998/batches
+```bash
+curl -k -v -H 'Content-Type: application/json' -X POST -d '{"file":"<location of application jar file>", "className":"<the application class to execute>", "args":[<application parameters>], "numExecutors":10, "executorMemory":"2G", "executorCores":5' localhost:8998/batches
+```
 
 ### <a name="change-these-parameters-on-a-spark-thrift-server"></a>Modifier ces paramètres sur un serveur Spark Thrift
 

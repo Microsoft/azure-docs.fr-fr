@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 05/01/2019
-ms.openlocfilehash: 8ff24d508eb35c4f2a04c7d024254fa6f1875da8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 53277f64c3d1b03572732157756da1fececbcd43
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77659281"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184567"
 ---
 # <a name="import-azure-monitor-log-data-into-power-bi"></a>Importation de données de journal Azure Monitor dans Power BI
 
@@ -21,14 +21,14 @@ ms.locfileid: "77659281"
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
-Pour importer les données d’un [espace de travail Log Analytics](manage-access.md) d’Azure Monitor dans Power BI, créez un jeu de données dans Power BI à partir d’une [requête de recherche dans les journaux](../log-query/log-query-overview.md) dans Azure Monitor.  La requête est exécutée chaque fois que le jeu de données est actualisé.  Vous pouvez ensuite créer des rapports Power BI qui utilisent les informations du jeu de données.  Pour créer le jeu de données dans Power BI, vous exportez votre requête depuis Log Analytics vers le [langage Power Query (M)](https://docs.microsoft.com/powerquery-m/power-query-m-language-specification).  Vous l'utilisez ensuite pour créer une requête dans Power BI Desktop, avant de la publier dans Power BI en tant que jeu de données.  Les détails de ce processus sont décrits ci-dessous.
+Pour importer les données d’un [espace de travail Log Analytics](manage-access.md) d’Azure Monitor dans Power BI, créez un jeu de données dans Power BI à partir d’une [requête de recherche dans les journaux](../log-query/log-query-overview.md) dans Azure Monitor.  La requête est exécutée chaque fois que le jeu de données est actualisé.  Vous pouvez ensuite créer des rapports Power BI qui utilisent les informations du jeu de données.  Pour créer le jeu de données dans Power BI, vous exportez votre requête depuis Log Analytics vers le [langage Power Query (M)](/powerquery-m/power-query-m-language-specification).  Vous l'utilisez ensuite pour créer une requête dans Power BI Desktop, avant de la publier dans Power BI en tant que jeu de données.  Les détails de ce processus sont décrits ci-dessous.
 
 ![Log Analytics vers Power BI](media/powerbi/overview.png)
 
 ## <a name="export-query"></a>Exporter une requête
-Commencez par créer une [requête de journal](../log-query/log-query-overview.md) qui renvoie les données que vous voulez ajouter au jeu de données Power BI.  Vous exportez ensuite cette requête dans le [langage Power Query (M)](https://docs.microsoft.com/powerquery-m/power-query-m-language-specification) qui peut être utilisé par Power BI Desktop.
+Commencez par créer une [requête de journal](../log-query/log-query-overview.md) qui renvoie les données que vous voulez ajouter au jeu de données Power BI.  Vous exportez ensuite cette requête dans le [langage Power Query (M)](/powerquery-m/power-query-m-language-specification) qui peut être utilisé par Power BI Desktop.
 
-1. [Créez la requête de journal Log Analytics](../log-query/get-started-portal.md) pour extraire les informations de votre jeu de données.
+1. [Créez la requête de journal Log Analytics](../log-query/log-analytics-tutorial.md) pour extraire les informations de votre jeu de données.
 2. Sélectionnez **Exporter** > **Requête Power BI (M)** .  Cela a pour effet d’exporter la requête vers un fichier texte intitulé **PowerBIQuery.txt**. 
 
     ![Exporter une recherche de journal](media/powerbi/export-analytics.png)
@@ -53,7 +53,7 @@ Power BI Desktop est une application de bureau qui vous permet de créer des jeu
 ## <a name="publish-to-power-bi"></a>Publier vers Power BI
 Lorsque vous publiez sur Power BI, un jeu de données et un rapport sont créés.  Si vous créez un rapport dans Power BI Desktop, celui-ci sera publié avec vos données.  Sinon, un rapport vide sera créé.  Vous pouvez modifier le rapport dans Power BI, ou en créer un basé sur le jeu de données.
 
-1. Créez un rapport basé sur vos données.  Consultez la [documentation Power BI Desktop](https://docs.microsoft.com/power-bi/desktop-report-view) si vous avez besoin d'aide.  
+1. Créez un rapport basé sur vos données.  Consultez la [documentation Power BI Desktop](/power-bi/desktop-report-view) si vous avez besoin d'aide.  
 1. Lorsque vous être prêt à envoyer le rapport à Power BI, cliquez sur **Publier**.  
 1. À l'invite, sélectionnez une destination dans votre compte Power BI.  À moins de vouloir choisir une destination spécifique, utilisez **Mon espace de travail**.
 

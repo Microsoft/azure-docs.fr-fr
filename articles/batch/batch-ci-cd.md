@@ -5,12 +5,12 @@ author: chrisreddington
 ms.author: chredd
 ms.date: 03/28/2019
 ms.topic: how-to
-ms.openlocfilehash: 72f976071a5fc65c8e96f6b3cd5c0094785e287b
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: e87be0db65cf12a265566e0c05815722ce3cc609
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726840"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94578873"
 ---
 # <a name="use-azure-pipelines-to-build-and-deploy-hpc-solutions"></a>Utiliser Azure Pipelines pour créer et déployer des solutions HPC
 
@@ -28,8 +28,8 @@ Dans cet exemple, nous allons créer un pipeline de build/mise en production pou
 
 Pour suivre les étapes décrites dans cet article, vous avez besoin d’une organisation Azure DevOps et d’un projet d’équipe.
 
-* [Créer une organisation Azure DevOps](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization?view=azure-devops)
-* [Créer un projet dans Azure DevOps](https://docs.microsoft.com/azure/devops/organizations/projects/create-project?view=azure-devops)
+* [Créer une organisation Azure DevOps](/azure/devops/organizations/accounts/create-organization)
+* [Créer un projet dans Azure DevOps](/azure/devops/organizations/projects/create-project)
 
 ### <a name="source-control-for-your-environment"></a>Contrôle de code source pour votre environnement
 
@@ -43,12 +43,12 @@ La structure du codebase utilisée dans cet exemple ressemble à celle-ci :
 
 * Un dossier **arm-templates** contenant un nombre de modèles Azure Resource Manager. Les modèles sont expliqués dans cet article.
 * Un dossier **client-application**, qui est une copie de l’exemple [Traitement des fichiers Azure Batch .NET avec ffmpeg](https://github.com/Azure-Samples/batch-dotnet-ffmpeg-tutorial). Cela n’est pas nécessaire pour cet article.
-* Un dossier **hpc-application**, qui est la version Windows 64 bits de [ffmpeg 3.4](https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-3.4-win64-static.zip).
+* Un dossier **hpc-application**, soit la version Windows 64 bits de [ffmpeg 4.3.1](https://github.com/GyanD/codexffmpeg/releases/tag/4.3.1-2020-11-08).
 * Un dossier **pipelines**. Il contient un fichier YAML décrivant notre processus de génération. Ce sujet est abordé dans cet article.
 
 Cette section part du principe que vous êtes familiarisé avec la gestion de version et la conception de modèles Resource Manager. Si vous n’êtes pas familiarisé avec ces concepts, consultez les pages suivantes pour plus d’informations.
 
-* [Qu’est-ce que le contrôle de code source ?](https://docs.microsoft.com/azure/devops/user-guide/source-control?view=azure-devops)
+* [Qu’est-ce que le contrôle de code source ?](/azure/devops/user-guide/source-control)
 * [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md)
 
 #### <a name="azure-resource-manager-templates"></a>Modèles Microsoft Azure Resource Manager
@@ -62,7 +62,7 @@ Pour cet exemple, il existe un modèle de solution de bout en bout (deployment.j
 
 ![Exemple de structure de modèle liée utilisant des modèles Azure Resource Manager](media/batch-ci-cd/ARMTemplateHierarchy.png)
 
-Le premier modèle que nous allons examiner est destiné à un compte Stockage Azure. Notre solution requiert un compte de stockage pour déployer l’application sur notre compte Batch. Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Storage](https://docs.microsoft.com/azure/templates/microsoft.storage/allversions) lors de la création de modèles Resource Manager pour les comptes Stockage.
+Le premier modèle que nous allons examiner est destiné à un compte Stockage Azure. Notre solution requiert un compte de stockage pour déployer l’application sur notre compte Batch. Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Storage](/azure/templates/microsoft.storage/allversions) lors de la création de modèles Resource Manager pour les comptes Stockage.
 
 ```json
 {
@@ -102,7 +102,7 @@ Le premier modèle que nous allons examiner est destiné à un compte Stockage A
 }
 ```
 
-Ensuite, nous allons examiner le modèle de compte Azure Batch. Le compte Azure Batch agit comme une plateforme pour exécuter de nombreuses applications entre les pools (regroupement de machines). Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Batch](https://docs.microsoft.com/azure/templates/microsoft.batch/allversions) lors de la création de modèles Resource Manager pour les comptes Batch.
+Ensuite, nous allons examiner le modèle de compte Azure Batch. Le compte Azure Batch agit comme une plateforme pour exécuter de nombreuses applications entre les pools (regroupement de machines). Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Batch](/azure/templates/microsoft.batch/allversions) lors de la création de modèles Resource Manager pour les comptes Batch.
 
 ```json
 {
@@ -141,7 +141,7 @@ Ensuite, nous allons examiner le modèle de compte Azure Batch. Le compte Azure 
 }
 ```
 
-Le modèle suivant présente un exemple de création d’un pool Azure Batch (les ordinateurs principaux pour traiter nos applications). Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Batch](https://docs.microsoft.com/azure/templates/microsoft.batch/allversions) lors de la création de modèles Resource Manager pour les pools du compte Batch.
+Le modèle suivant présente un exemple de création d’un pool Azure Batch (les ordinateurs principaux pour traiter nos applications). Il est important de connaître le [guide de référence de modèle Resource Manager pour les types de ressources Microsoft.Batch](/azure/templates/microsoft.batch/allversions) lors de la création de modèles Resource Manager pour les pools du compte Batch.
 
 ```json
 {
@@ -189,7 +189,7 @@ Le modèle suivant présente un exemple de création d’un pool Azure Batch (le
 
 Enfin, nous avons un modèle qui se comporte comme un orchestrateur. Ce modèle est responsable du déploiement des modèles de fonctionnalités.
 
-Vous trouverez également plus d’informations sur la [création de modèles Azure Resource Manager liés](../azure-resource-manager/templates/template-tutorial-create-linked-templates.md) dans un article distinct.
+Vous trouverez également plus d’informations sur la [création de modèles Azure Resource Manager liés](../azure-resource-manager/templates/deployment-tutorial-linked-template.md) dans un article distinct.
 
 ```json
 {
@@ -291,7 +291,7 @@ Vous trouverez également plus d’informations sur la [création de modèles Az
 
 L’infrastructure et le logiciel peuvent être définis en tant que code et figurer dans le même référentiel.
 
-Pour cette solution, le package ffmpeg est utilisé en tant que package d’application. Le package ffmpeg peut être téléchargé [ici](https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-3.4-win64-static.zip).
+Pour cette solution, le package ffmpeg est utilisé en tant que package d’application. Le package ffmpeg peut être téléchargé [ici](https://www.videohelp.com/software?d=ffmpeg-3.3.4-win64-static.zip).
 
 ![Exemple de structure de référentiel Git](media/batch-ci-cd/git-repository.jpg)
 
@@ -309,7 +309,7 @@ Maintenant que le code source est configuré, nous pouvons commencer la premièr
 
 ## <a name="continuous-integration"></a>Intégration continue
 
-[Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/get-started/?view=azure-devops) vous permet, au sein d’Azure DevOps Services, d’implémenter un pipeline de build, de test et de déploiement pour vos applications.
+[Azure Pipelines](/azure/devops/pipelines/get-started/) vous permet, au sein d’Azure DevOps Services, d’implémenter un pipeline de build, de test et de déploiement pour vos applications.
 
 Dans cette étape du pipeline, les tests sont généralement exécutés pour valider le code et générer les éléments appropriés du logiciel. Le nombre et les types de tests, ainsi que toutes les tâches supplémentaires que vous exécutez, dépendent du build le plus large et de la stratégie de publication.
 
@@ -323,9 +323,9 @@ Dans cet exemple, nous allons nous concentrer sur le dossier **hpc-application**
 
 1. Pour créer un pipeline de build, vous disposez de deux méthodes :
 
-    a. [À l’aide du concepteur visuel](https://docs.microsoft.com/azure/devops/pipelines/get-started-designer?view=azure-devops&tabs=new-nav). Pour cela, cliquez sur « Utiliser le concepteur visuel » sur la page **Nouveau pipeline**.
+    a. [À l’aide du concepteur visuel](/azure/devops/pipelines/get-started-designer). Pour cela, cliquez sur « Utiliser le concepteur visuel » sur la page **Nouveau pipeline**.
 
-    b. [À l’aide de builds YAML](https://docs.microsoft.com/azure/devops/pipelines/get-started-yaml?view=azure-devops). Vous pouvez créer un pipeline YAML en cliquant sur l’option Azure Repos ou GitHub sur la page Nouveau pipeline. Vous pouvez également stocker l’exemple ci-dessous dans votre contrôle de code source et référencer un fichier YAML existant en cliquant sur le concepteur visuel, puis à l’aide du modèle YAML.
+    b. [À l’aide de builds YAML](/azure/devops/pipelines/get-started-yaml). Vous pouvez créer un pipeline YAML en cliquant sur l’option Azure Repos ou GitHub sur la page Nouveau pipeline. Vous pouvez également stocker l’exemple ci-dessous dans votre contrôle de code source et référencer un fichier YAML existant en cliquant sur le concepteur visuel, puis à l’aide du modèle YAML.
 
     ```yml
     # To publish an application into Azure Batch, we need to
@@ -357,11 +357,11 @@ Dans cet exemple, nous allons nous concentrer sur le dossier **hpc-application**
     ![Afficher les sorties en direct à partir de votre build](media/batch-ci-cd/Build-1.jpg)
 
 > [!NOTE]
-> Si vous utilisez une application cliente pour exécuter votre application par lots HPC, vous devez créer une définition de build distincte pour l’application. Vous pouvez trouver différents guides pratiques dans la documentation [Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/get-started/index?view=azure-devops).
+> Si vous utilisez une application cliente pour exécuter votre application par lots HPC, vous devez créer une définition de build distincte pour l’application. Vous pouvez trouver différents guides pratiques dans la documentation [Azure Pipelines](/azure/devops/pipelines/get-started/index).
 
 ## <a name="continuous-deployment"></a>Déploiement continu
 
-Azure Pipelines peut également être utilisé pour déployer votre application et l’infrastructure sous-jacente. Les [pipeline de mise en production](https://docs.microsoft.com/azure/devops/pipelines/release) sont les composants qui permettent un déploiement continu et automatisent votre processus de publication.
+Azure Pipelines peut également être utilisé pour déployer votre application et l’infrastructure sous-jacente. Les [pipeline de mise en production](/azure/devops/pipelines/release) sont les composants qui permettent un déploiement continu et automatisent votre processus de publication.
 
 ### <a name="deploying-your-application-and-underlying-infrastructure"></a>Déploiement de l’application et de l’infrastructure sous-jacente
 

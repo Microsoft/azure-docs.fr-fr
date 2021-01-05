@@ -1,6 +1,6 @@
 ---
 title: FairPlay Streaming hors connexion pour iOS avec Azure Media Services v3
-description: Cette rubrique fournit une vue d’ensemble et montre comment utiliser Azure Media Services pour chiffrer dynamiquement votre contenu HTTP Live Streaming (HLS) avec Apple FairPlay en mode hors connexion.
+description: Cette rubrique fournit une vue d’ensemble et montre comment utiliser Azure Media Services v3 pour chiffrer dynamiquement votre contenu HTTP Live Streaming (HLS) avec Apple FairPlay en mode hors connexion.
 services: media-services
 keywords: HLS, DRM, FairPlay Streaming (FPS), hors connexion, iOS 10
 documentationcenter: ''
@@ -12,17 +12,20 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 01/08/2019
+ms.topic: how-to
+ms.date: 08/31/2020
 ms.author: willzhan
-ms.openlocfilehash: 0e65bf39db00f1277635d600da87346f19a881a6
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 886a8aa1a6f062b5fe01476e387742f34efc0c56
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83197172"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90532237"
 ---
 # <a name="offline-fairplay-streaming-for-ios-with-media-services-v3"></a>FairPlay Streaming hors connexion pour iOS avec Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
  Azure Media Services fournit un ensemble bien conçu de [services de protection de contenu](https://azure.microsoft.com/services/media-services/content-protection/), couvrant :
 

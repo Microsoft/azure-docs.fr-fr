@@ -7,12 +7,13 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 10/29/2018
 ms.author: robinsh
-ms.openlocfilehash: bcc53322ac6942b52853be561bc3441e23fbf53b
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.custom: devx-track-csharp
+ms.openlocfilehash: dbdc1c079f7ef2a06ece553e9fec542cbc05ea54
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632929"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147667"
 ---
 # <a name="iot-hub-query-language-for-device-and-module-twins-jobs-and-message-routing"></a>Langage de requête IoT Hub pour les jumeaux d’appareil et de module, les travaux et le routage des messages
 
@@ -233,7 +234,7 @@ L’objet de requête expose plusieurs valeurs **Next**, en fonction de l’opti
 ### <a name="limitations"></a>Limites
 
 > [!IMPORTANT]
-> Les résultats de la requête peuvent être produits avec quelques minutes de retard par rapport aux dernières valeurs dans les jumeaux d’appareil. Si vous interrogez des jumeaux d’appareil par ID, utilisez l’[API REST d’obtention de jumeau](https://docs.microsoft.com/rest/api/iothub/service/twin/getdevicetwin). Cette API retourne toujours les valeurs les plus récentes et ses seuils de limitation sont plus élevés. Vous pouvez émettre l’API REST directement ou utiliser la fonctionnalité équivalente dans l’un des [kits Azure IoT Hub Service SDK](iot-hub-devguide-sdks.md#azure-iot-hub-service-sdks).
+> Les résultats de la requête peuvent être produits avec quelques minutes de retard par rapport aux dernières valeurs dans les jumeaux d’appareil. Si vous interrogez des jumeaux d’appareil par ID, utilisez l’[API REST d’obtention de jumeau](/java/api/com.microsoft.azure.sdk.iot.device.devicetwin?view=azure-java-stable). Cette API retourne toujours les valeurs les plus récentes et ses seuils de limitation sont plus élevés. Vous pouvez émettre l’API REST directement ou utiliser la fonctionnalité équivalente dans l’un des [kits Azure IoT Hub Service SDK](iot-hub-devguide-sdks.md#azure-iot-hub-service-sdks).
 
 Actuellement, les comparaisons ne sont prises en charge qu’entre types primitifs (aucun objet), par exemple `... WHERE properties.desired.config = properties.reported.config` est pris en charge uniquement si ces propriétés ont des valeurs primitives.
 

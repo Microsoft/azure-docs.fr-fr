@@ -8,25 +8,30 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
-ms.custom: seodec2018
-ms.openlocfilehash: c1af1142faca76cc58b6b3ca9a7106bc0433ea18
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: seodec2018, devx-track-python
+ms.openlocfilehash: 5a9eff1ef012e66f661ee99852a8d82f117a45c4
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74976364"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350515"
 ---
-# <a name="quickstart-use-python-to-call-the-bing-web-search-api"></a>Démarrage rapide : Utiliser Python pour appeler l’API Recherche Web Bing  
+# <a name="quickstart-use-python-to-call-the-bing-web-search-api"></a>Démarrage rapide : Utiliser Python pour appeler l'API Recherche Web Bing  
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing et recevoir la réponse JSON. Cette application Python envoie une requête de recherche à l’API et affiche la réponse. Alors que cette application est écrite en Python, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
-Cet exemple est exécuté en tant que bloc-notes Jupyter sur [MyBinder](https://mybinder.org). Sélectionnez le badge de lancement Binder :
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing. Cette application Python envoie une requête de recherche à l’API et affiche la réponse JSON. Bien que cette application soit écrite en Python, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+
+Cet exemple est exécuté en tant que bloc-notes Jupyter sur [MyBinder](https://mybinder.org). Pour l’exécuter, sélectionnez le badge de lancement de Binder :
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/Microsoft/cognitive-services-notebooks/master?filepath=BingWebSearchAPI.ipynb)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Python 2.x ou 3.x](https://www.python.org/)
 
@@ -34,28 +39,30 @@ Cet exemple est exécuté en tant que bloc-notes Jupyter sur [MyBinder](https://
 
 ## <a name="define-variables"></a>Définir des variables
 
-Remplacez la valeur `subscription_key` par une clé d’abonnement valide à partir de votre compte Azure.
+1. Remplacez la valeur `subscription_key` par une clé d’abonnement valide à partir de votre compte Azure.
 
-```python
-subscription_key = "YOUR_ACCESS_KEY"
-assert subscription_key
-```
+   ```python
+   subscription_key = "YOUR_ACCESS_KEY"
+   assert subscription_key
+   ```
 
-Déclarez le point de terminaison de l’API Recherche Web Bing. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Déclarez le point de terminaison de l’API Recherche Web Bing. Vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
-```python
-search_url = "https://api.cognitive.microsoft.com/bing/v7.0/search"
-```
+   ```python
+   search_url = "https://api.cognitive.microsoft.com/bing/v7.0/search"
+   ```
 
-N’hésitez pas à personnaliser la requête de recherche en remplaçant la valeur de `search_term`.
+3. Si vous le souhaitez, vous pouvez personnaliser la requête de recherche en remplaçant la valeur de `search_term`.
 
-```python
-search_term = "Azure Cognitive Services"
-```
+   ```python
+   search_term = "Azure Cognitive Services"
+   ```
 
 ## <a name="make-a-request"></a>Exécuter une requête
 
-Ce bloc utilise la bibliothèque `requests` pour appeler l’API Recherche Web Bing et renvoyer les résultats en tant qu’objet JSON. La clé API est transmise au dictionnaire `headers`, tandis que les termes de recherche et les paramètres de requête sont transmis au dictionnaire `params`. Consultez la documentation [API Recherche Web Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference) pour obtenir la liste complète des options et paramètres.
+Ce code utilise la bibliothèque `requests` pour appeler l’API Recherche Web Bing et retourner les résultats en tant qu’objet JSON. La clé API est transmise au dictionnaire `headers`, tandis que les termes de recherche et les paramètres de requête sont transmis au dictionnaire `params`. 
+
+Pour obtenir la liste complète des options et paramètres, consultez [API Recherche Web Bing v7](/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference).
 
 ```python
 import requests
@@ -69,7 +76,7 @@ search_results = response.json()
 
 ## <a name="format-and-display-the-response"></a>Mettre en forme et afficher la réponse
 
-L’objet `search_results` inclut les résultats de la recherche, ainsi que les métadonnées comme les pages et les requêtes associées. Ce code utilise la bibliothèque `IPython.display` pour mettre en forme et afficher la réponse dans votre navigateur.
+L’objet `search_results` inclut les résultats de la recherche ainsi que des métadonnées telles que les pages et les requêtes associées. Ce code utilise la bibliothèque `IPython.display` pour mettre en forme et afficher la réponse dans votre navigateur.
 
 ```python
 from IPython.display import HTML
@@ -84,11 +91,11 @@ HTML("<table>{0}</table>".format(rows))
 
 ## <a name="sample-code-on-github"></a>Exemple de code sur GitHub
 
-Si vous souhaitez exécuter ce code localement, l’[exemple complet est disponible sur GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingWebSearchv7.py).
+Pour exécuter ce code localement, consultez l’[exemple complet disponible sur GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingWebSearchv7.py).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel sur l’application à page unique Recherche Web Bing](../tutorial-bing-web-search-single-page-app.md)
+> [Tutoriel sur l’application d’API Recherche Web Bing monopage](../tutorial-bing-web-search-single-page-app.md)
 
 [!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]

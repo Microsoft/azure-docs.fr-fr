@@ -10,29 +10,31 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 04/14/2020
 ms.author: pafarley
-ms.openlocfilehash: 36777208dc8ac179f1aaf345c374a33001e3f8bd
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: fe76e32bfd9b1734f3c84a400f897b7af7e3168b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81404260"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85800993"
 ---
 # <a name="learn-image-moderation-concepts"></a>Familiarisez-vous avec les concepts de modération d'image
 
-Utilisez la modération d'image assistée par ordinateur et l'[outil de révision à intervention humaine](Review-Tool-User-Guide/human-in-the-loop.md) de Content Moderator pour modérer les images incluant du contenu pour adultes et osé. Recherchez du contenu textuel dans les images, extrayez le texte et détectez les visages. Vous pouvez comparer des images à des listes personnalisées et prendre des mesures complémentaires.
+Utilisez la modération de l’image assistée par ordinateur de Content Moderator et l’[outil de révision](Review-Tool-User-Guide/human-in-the-loop.md) pour modérer les images incluant du contenu pour adultes et osé. Recherchez du contenu textuel dans les images, extrayez le texte et détectez les visages. Vous pouvez comparer des images à des listes personnalisées et prendre des mesures complémentaires.
 
 ## <a name="evaluating-for-adult-and-racy-content"></a>Évaluer du contenu pour adultes et osé
 
 L’opération **Évaluer** renvoie un score de confiance entre 0 et 1. Il renvoie également des données booléennes égales à true ou false. Ces valeurs prédisent si l’image contient un contenu potentiellement pour adultes ou osé. Lorsque vous appelez l’API avec votre image (fichier ou URL), la réponse renvoyée inclut les informations suivantes :
 
-    "ImageModeration": {
-      .............
-      "adultClassificationScore": 0.019196987152099609,
-      "isImageAdultClassified": false,
-      "racyClassificationScore": 0.032390203326940536,
-      "isImageRacyClassified": false,
-      ............
-      ],
+```json
+"ImageModeration": {
+    .............
+    "adultClassificationScore": 0.019196987152099609,
+    "isImageAdultClassified": false,
+    "racyClassificationScore": 0.032390203326940536,
+    "isImageRacyClassified": false,
+    ............
+    ],
+```
 
 > [!NOTE]
 > 
@@ -51,18 +53,19 @@ La réponse inclut les informations suivantes :
 
 Exemple d’extrait :
 
-    "TextDetection": {
-      "status": {
+```json
+"TextDetection": {
+    "status": {
         "code": 3000.0,
         "description": "OK",
         "exception": null
-      },
-      .........
-      "language": "eng",
-      "text": "IF WE DID \r\nALL \r\nTHE THINGS \r\nWE ARE \r\nCAPABLE \r\nOF DOING, \r\nWE WOULD \r\nLITERALLY \r\nASTOUND \r\nOURSELVE \r\n",
-      "candidates": []
     },
-
+    .........
+    "language": "eng",
+    "text": "IF WE DID \r\nALL \r\nTHE THINGS \r\nWE ARE \r\nCAPABLE \r\nOF DOING, \r\nWE WOULD \r\nLITERALLY \r\nASTOUND \r\nOURSELVE \r\n",
+    "candidates": []
+},
+```
 
 ## <a name="detecting-faces"></a>Détection des visages
 
@@ -75,29 +78,30 @@ Les réponses incluent ces informations :
 
 Exemple d’extrait :
 
-
-    "FaceDetection": {
-       ......
-      "result": true,
-      "count": 2,
-      "advancedInfo": [
-      .....
-      ],
-      "faces": [
+```json
+"FaceDetection": {
+    ......
+    "result": true,
+    "count": 2,
+    "advancedInfo": [
+        .....
+    ],
+    "faces": [
         {
-          "bottom": 598,
-          "left": 44,
-          "right": 268,
-          "top": 374
+            "bottom": 598,
+            "left": 44,
+            "right": 268,
+            "top": 374
         },
         {
-          "bottom": 620,
-          "left": 308,
-          "right": 532,
-          "top": 396
+            "bottom": 620,
+            "left": 308,
+            "right": 532,
+            "top": 396
         }
-      ]
-    }
+    ]
+}
+```
 
 ## <a name="creating-and-managing-custom-lists"></a>Création et gestion de listes personnalisées
 
@@ -124,7 +128,8 @@ Si une correspondance est trouvée, l’opération renvoie l’identificateur et
 
 Exemple d’extrait :
 
-    {
+```json
+{
     ..............,
     "IsMatch": true,
     "Matches": [
@@ -137,7 +142,8 @@ Exemple d’extrait :
         }
     ],
     ....
-    }
+}
+```
 
 ## <a name="review-tool"></a>Outil de révision
 
@@ -147,4 +153,4 @@ Pour des cas plus subtils, utilisez l'[outil de révision](Review-Tool-User-Guid
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Évaluez la [Console d’API Modération de l’image](try-image-api.md) et utilisez les exemples de code API REST. Consultez également la section Modération d’images du [Démarrage rapide du kit SDK .NET](dotnet-sdk-quickstart.md) si vous connaissez déjà Visual Studio et C#.
+Évaluez la [Console d’API Modération de l’image](try-image-api.md) et utilisez les exemples de code API REST. Consultez également [Révisions, flux de travail et travaux](./review-api.md) pour en savoir plus sur le mode de configuration des révisions humaines.

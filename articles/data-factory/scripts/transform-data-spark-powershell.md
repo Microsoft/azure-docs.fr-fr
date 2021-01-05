@@ -1,8 +1,8 @@
 ---
 title: Transformer des données dans le cloud à l’aide de PowerShell
 description: Ce script PowerShell transforme les données dans le cloud en exécutant le programme Spark sur un cluster Azure HDInsight Spark.
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
 ms.reviewer: maghan
 ms.service: data-factory
@@ -10,12 +10,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/12/2017
-ms.openlocfilehash: c09d0532b845472d0ccaac1ad57e3772630bb5c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9fe0efcb14c1da84ca5284d55366b6c7b79727b1
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74932062"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497008"
 ---
 # <a name="powershell-script---transform-data-in-cloud-using-azure-data-factory"></a>Script PowerShell - Transformer des données dans le cloud à l’aide d’Azure Data Factory
 
@@ -102,6 +102,6 @@ Ce script utilise les commandes suivantes :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).
 
 Des exemples supplémentaires de scripts PowerShell pour Azure Data Factory sont à votre disposition dans [Exemples PowerShell pour Azure Data Factory](../samples-powershell.md).

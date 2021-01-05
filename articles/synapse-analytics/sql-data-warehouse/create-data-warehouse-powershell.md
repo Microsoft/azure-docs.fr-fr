@@ -1,33 +1,33 @@
 ---
-title: Créer et interroger un pool SQL synapse avec Azure PowerShell
-description: Créez rapidement un serveur logique de pool SQL Synapse avec une règle de pare-feu au niveau du serveur à l’aide d’Azure PowerShell.
+title: 'Démarrage rapide : Créer un pool SQL dédié (anciennement SQL DW) avec Azure PowerShell'
+description: Créez rapidement un pool SQL dédié (anciennement SQL DW) avec une règle de pare-feu au niveau du serveur en utilisant Azure PowerShell.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 4/11/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 57564e9dffd6022e1e4fe464b4b26a5bb8eb318b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: seo-lt-2019, azure-synapse    , devx-track-azurepowershell
+ms.openlocfilehash: 0ce94b62d67048896cdf7355043ec2dde7f2df79
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80631341"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96456590"
 ---
-# <a name="quickstart-create-and-query-a-synapse-sql-pool-with-azure-powershell"></a>Démarrage rapide : Créer et interroger un pool SQL synapse avec Azure PowerShell
+# <a name="quickstart-create-a-dedicated-sql-pool-formerly-sql-dw-with-azure-powershell"></a>Démarrage rapide : Créer un pool SQL dédié (anciennement SQL DW) avec Azure PowerShell
 
-Créez un pool SQL synapse (entrepôt de données) dans Azure Synapse Analytics à l’aide d’Azure PowerShell.
+Créez un pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics en utilisant Azure PowerShell.
 
 ## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 > [!IMPORTANT]
-> La création d’un pool SQL peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
+> La création d’un pool SQL dédié (anciennement SQL DW) peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -59,7 +59,7 @@ Définissez des variables à utiliser dans les scripts de ce démarrage rapide.
 # The data center and resource name for your resources
 $resourcegroupname = "myResourceGroup"
 $location = "WestEurope"
-# The logical server name: Use a random value or replace with your own value (don't capitalize)
+# The server name: Use a random value or replace with your own value (don't capitalize)
 $servername = "server-$(Get-Random)"
 # Set an admin name and password for your database
 # The sign-in information for the server
@@ -74,15 +74,15 @@ $databasename = "mySampleDataWarehouse"
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un [groupe de ressources Azure](../../azure-resource-manager/management/overview.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe. L’exemple suivant crée un groupe de ressources nommé `myResourceGroup` à l’emplacement `westeurope`.
+Créez un [groupe de ressources Azure](../../azure-resource-manager/management/overview.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Un groupe de ressources est un conteneur dans lequel les ressources Azure sont déployées et gérées comme groupe. L’exemple suivant crée un groupe de ressources nommé `myResourceGroup` à l’emplacement `westeurope`.
 
 ```powershell
 New-AzResourceGroup -Name $resourcegroupname -Location $location
 ```
 
-## <a name="create-a-logical-server"></a>Création d'un serveur logique
+## <a name="create-a-server"></a>Créer un serveur
 
-Créez un [serveur logique SQL Azure](../../sql-database/sql-database-logical-servers.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzSqlServer](/powershell/module/az.sql/new-azsqlserver?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Un serveur logique contient un groupe de bases de données gérées en tant que groupe. L’exemple suivant illustre la création d’un serveur nommé de façon aléatoire dans votre groupe de ressources avec un utilisateur administrateur nommé `ServerAdmin` et un mot de passe `ChangeYourAdminPassword1`. Remplacez les valeurs prédéfinies par ce que vous souhaitez.
+Créez un [serveur SQL logique](../../azure-sql/database/logical-servers.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzSqlServer](/powershell/module/az.sql/new-azsqlserver?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Un serveur contient un groupe de bases de données gérées en tant que groupe. L’exemple suivant illustre la création d’un serveur nommé de façon aléatoire dans votre groupe de ressources avec un utilisateur administrateur nommé `ServerAdmin` et un mot de passe `ChangeYourAdminPassword1`. Remplacez les valeurs prédéfinies par ce que vous souhaitez.
 
 ```powershell
 New-AzSqlServer -ResourceGroupName $resourcegroupname `
@@ -91,9 +91,9 @@ New-AzSqlServer -ResourceGroupName $resourcegroupname `
     -SqlAdministratorCredentials $(New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $adminlogin, $(ConvertTo-SecureString -String $password -AsPlainText -Force))
 ```
 
-## <a name="configure-a-server-firewall-rule"></a>Configurer une règle de pare-feu du serveur
+## <a name="configure-a-server-level-firewall-rule"></a>Configurer une règle de pare-feu au niveau du serveur
 
-Créez une [règle de pare-feu de niveau serveur SQL Azure](../../sql-database/sql-database-firewall-configure.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzSqlServerFirewallRule](/powershell/module/az.sql/new-azsqlserverfirewallrule?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Une règle de pare-feu au niveau du serveur permet à une application externe, telle que SQL Server Management Studio ou l’utilitaire SQLCMD, de se connecter à un pool SQL à travers le pare-feu du service de pool SQL.
+Créez une [règle de pare-feu au niveau du serveur](../../azure-sql/database/firewall-configure.md?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json) avec la commande [New-AzSqlServerFirewallRule](/powershell/module/az.sql/new-azsqlserverfirewallrule?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). Une règle de pare-feu au niveau du serveur permet à une application externe, telle que SQL Server Management Studio ou l’utilitaire SQLCMD, de se connecter à un pool SQL dédié (anciennement SQL DW) à travers le pare-feu du service de pool SQL dédié.
 
 Dans l’exemple suivant, le pare-feu n’est ouvert qu’à d’autres ressources Azure. Pour activer la connectivité externe, remplacez l’adresse IP par une adresse correspondant à votre environnement. Pour ouvrir toutes les adresses IP, utilisez 0.0.0.0 comme adresse IP de début et 255.255.255.255 comme adresse de fin.
 
@@ -104,12 +104,12 @@ New-AzSqlServerFirewallRule -ResourceGroupName $resourcegroupname `
 ```
 
 > [!NOTE]
-> Les points de terminaison SQL communiquent via le port 1433. Si vous essayez de vous connecter à partir d’un réseau d’entreprise, le trafic sortant sur le port 1433 peut ne pas être autorisé par le pare-feu de votre réseau. Dans ce cas, vous ne pourrez pas vous connecter à votre serveur SQL Azure, sauf si votre service informatique ouvre le port 1433.
+> Les points de terminaison SQL communiquent via le port 1433. Si vous essayez de vous connecter à partir d’un réseau d’entreprise, le trafic sortant sur le port 1433 peut ne pas être autorisé par le pare-feu de votre réseau. Dans ce cas, vous ne pourrez pas vous connecter à votre serveur, sauf si votre service informatique ouvre le port 1433.
 >
 
-## <a name="create-a-sql-pool"></a>Créer un pool SQL
+## <a name="create-a-dedicated-sql-pool-formerly-sql-dw"></a>Créer un pool SQL dédié (anciennement SQL DW)
 
-Dans l’exemple suivant, un pool SQL est créé à l’aide des variables préalablement définies.  L’exemple spécifie que l’objectif du service est DW100c, ce qui correspond à un point de départ peu coûteux pour votre pool SQL.
+Dans l’exemple suivant, un pool SQL dédié (anciennement SQL DW) est créé à l’aide des variables préalablement définies.  L’exemple spécifie que l’objectif du service est DW100c, ce qui correspond à un point de départ peu coûteux pour votre pool SQL dédié (anciennement SQL DW).
 
 ```Powershell
 New-AzSqlDatabase `
@@ -125,10 +125,10 @@ New-AzSqlDatabase `
 Les paramètres obligatoires sont :
 
 * **RequestedServiceObjectiveName** : quantité de valeurs [Data Warehouse Unit](what-is-a-data-warehouse-unit-dwu-cdwu.md) que vous demandez. L’augmentation de cette quantité augmente les coûts de calcul. Pour obtenir la liste des valeurs prises en charge, consultez les [limites de mémoire et de concurrence](memory-concurrency-limits.md).
-* **DatabaseName** : nom du pool SQL que vous créez.
+* **DatabaseName** : nom du pool SQL dédié (anciennement SQL DW) que vous êtes en train de créer.
 * **ServerName** : nom du serveur que vous utilisez pour la création.
 * **ResourceGroupName** : groupe de ressources que vous utilisez. Pour trouver des groupes de ressources disponibles dans votre abonnement, utilisez Get-AzureResource.
-* **Edition** : l’édition doit être « DataWarehouse » pour créer un pool SQL.
+* **Edition** : doit être « DataWarehouse » pour créer un pool SQL dédié (anciennement SQL DW).
 
 Les paramètres facultatifs sont :
 
@@ -151,4 +151,4 @@ Remove-AzResourceGroup -ResourceGroupName $resourcegroupname
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous avez créé un pool SQL et une règle de pare-feu, vous vous êtes connecté au pool SQL et vous avez exécuté quelques requêtes. Pour en savoir plus, consultez l’article [Charger des données dans un pool SQL](load-data-from-azure-blob-storage-using-polybase.md).
+Vous avez créé un pool SQL dédié (anciennement SQL DW), une règle de pare-feu et vous êtes connecté à votre pool SQL dédié. Pour en savoir plus, consultez l’article [Charger des données dans un pool SQL dédié](load-data-from-azure-blob-storage-using-polybase.md).

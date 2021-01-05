@@ -9,12 +9,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 5/21/2017
 ms.author: raiye
-ms.openlocfilehash: ae2df6f47d99fc5d452a6d3ea70f2dd2e4e7416b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6de03969a22c5b699fdfd2be17a6ba65905d23e6
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68359581"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92073391"
 ---
 # <a name="guest-os-family-1-retirement-notice"></a>Informations relatives à la suppression de la famille 1 des systèmes d’exploitation invités
 La suppression de la famille 1 des systèmes d'exploitation a été annoncée le 1er juin 2013.
@@ -23,7 +23,7 @@ La suppression de la famille 1 des systèmes d'exploitation a été annoncée l
 
 **3 novembre 2014** La prise en charge étendue de la famille 1 des SE invités a pris fin et a été complètement supprimée. Tous les services toujours liés à la famille 1 seront affectés. Nous pouvons arrêter ces services à tout moment. Il n'existe aucune garantie que vos services continueront de s'exécuter, sauf si vous les mettez à niveau manuellement vous-même.
 
-Si vous avez d’autres questions, consultez les [Forums de services cloud](https://social.msdn.microsoft.com/Forums/home?forum=windowsazuredevelopment&filter=alltypes&sort=lastpostdesc) ou [contactez le support Azure](https://azure.microsoft.com/support/options/).
+Si vous avez d’autres questions, visitez la [page de questions Microsoft Q&R sur les services cloud](/answers/topics/azure-cloud-services.html) ou [Contactez le support 	Azure](https://azure.microsoft.com/support/options/).
 
 ## <a name="are-you-affected"></a>Êtes-vous concerné ?
 Vos services cloud sont concernés si l'une des conditions suivantes s'applique :
@@ -32,7 +32,7 @@ Vos services cloud sont concernés si l'une des conditions suivantes s'applique�
 2. Vous n'avez pas de valeur pour osFamily explicitement spécifiée dans le fichier ServiceConfiguration.cscfg pour votre service cloud. Actuellement, le système utilise la valeur par défaut « 1 » dans ce cas.
 3. Le portail Azure répertorie votre valeur de famille des systèmes d’exploitation invités en tant que « Windows Server 2008 ».
 
-Pour connaître la famille de systèmes d’exploitation exécutée par les services cloud, vous pouvez exécuter le script suivant dans Azure PowerShell. Vous devrez toutefois commencer par [configurer Azure PowerShell](/powershell/azureps-cmdlets-docs). Pour plus d’informations sur le script, consultez [Fin de vie de la famille 1 des SE invités d'Azure : juin 2014](https://blogs.msdn.com/b/ryberry/archive/2014/04/02/azure-guest-os-family-1-end-of-life-june-2014.aspx).
+Pour connaître la famille de systèmes d’exploitation exécutée par les services cloud, vous pouvez exécuter le script suivant dans Azure PowerShell. Vous devrez toutefois commencer par [configurer Azure PowerShell](/powershell/azure/). Pour plus d’informations sur le script, consultez [Fin de vie de la famille 1 des SE invités d’Azure : juin 2014](/archive/blogs/ryberry/azure-guest-os-family-1-end-of-life-june-2014).
 
 ```Powershell
 foreach($subscription in Get-AzureSubscription) {

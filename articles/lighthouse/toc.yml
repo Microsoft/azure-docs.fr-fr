@@ -10,9 +10,6 @@
     - name: Index
       displayName: 'template, sample'
       href: ./samples/index.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./samples/policy-samples.md
 - name: Concepts
   items:
     - name: Gestion des ressources déléguées Azure
@@ -27,9 +24,6 @@
     - name: Offres de services managés dans la Place de marché Azure
       displayName: 'azure marketplace, marketplace, managed service, private, plan'
       href: ./concepts/managed-services-offers.md
-    - name: Pratiques de sécurité recommandées
-      displayName: 'mfa, authentication, secure, group'
-      href: ./concepts/recommended-security-practices.md
     - name: Considérations sur le programme des fournisseurs de solutions cloud
       displayName: 'csp, aobo, partner'
       href: ./concepts/cloud-solution-provider.md
@@ -39,9 +33,16 @@
     - name: Applications managées Azure et Azure Lighthouse
       displayName: 'managed apps, ama'
       href: ./concepts/managed-applications.md
+    - name: Sécurité
+      items:
+        - name: Pratiques de sécurité recommandées
+          displayName: 'mfa, authentication, secure, group'
+          href: ./concepts/recommended-security-practices.md
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
-    - name: Intégrer un client dans la gestion des ressources déléguées Azure
+    - name: Intégrer un client à Azure Lighthouse
       displayName: resource management
       href: ./how-to/onboard-customer.md
     - name: Publier des offres de services managés sur la Place de marché Azure
@@ -50,9 +51,21 @@
     - name: Voir et gérer les clients
       displayName: my customers
       href: ./how-to/view-manage-customers.md
+    - name: Lier votre ID de partenaire
+      displayName: 'partner earned credit, pec, mpn'
+      href: ./how-to/partner-earned-credit.md
+    - name: Mettre à jour une délégation
+      displayName: upgrade
+      href: ./how-to/update-delegation.md
     - name: Supprimer l’accès à une délégation
       displayName: 'delete, undelegate'
       href: ./how-to/remove-delegation.md
+    - name: Intégration d’Azure Arc
+      displayName: 'server, kubernetes, hybrid, infrastructure'
+      href: ./how-to/manage-hybrid-infrastructure-arc.md
+    - name: Intégration d’Azure Migrate
+      displayName: 'migration, project, on-prem'
+      href: ./how-to/migration-at-scale.md
     - name: Intégration d’Azure Monitor
       items:
         - name: Utiliser les journaux Azure Monitor à grande échelle
@@ -69,6 +82,8 @@
         - name: Déployer une stratégie pouvant être corrigée
           displayName: 'deployIfNotExists, modify, managed identities, managed identity'
           href: ./how-to/deploy-policy-remediation.md
+    - name: Intégration Azure Sentinel
+      href: ./how-to/manage-sentinel-workspaces.md
     - name: Actions des clients
       items:
         - name: Voir et gérer les fournisseurs de services
@@ -80,26 +95,33 @@
 - name: Informations de référence
   items:
     - name: Azure CLI
-      href: 'https://docs.microsoft.com/cli/azure/managedservices?view=azure-cli-latest'
+      href: /cli/azure/managedservices
     - name: Azure PowerShell
-      href: 'https://docs.microsoft.com/powershell/module/az.managedservices/?view=azps-2.4.0#managed_services'
+      href: /powershell/module/az.managedservices#managed_services
     - name: Kit SDK Azure pour .NET
-      href: 'https://docs.microsoft.com/dotnet/api/Microsoft.Azure.Management.ManagedServices?view=azure-dotnet'
+      href: /dotnet/api/Microsoft.Azure.Management.ManagedServices
     - name: Kit SDK Azure pour .NET (NuGet)
       href: 'https://www.nuget.org/packages/Microsoft.Azure.Management.ManagedServices/'
     - name: Kit SDK Azure pour Python
-      href: 'https://docs.microsoft.com/python/api/azure-mgmt-managedservices'
+      href: /python/api/azure-mgmt-managedservices
     - name: REST
-      href: 'https://docs.microsoft.com/rest/api/managedservices/'
+      href: /rest/api/managedservices/
     - name: OpenAPI
       href: 'https://github.com/Azure/azure-rest-api-specs/tree/master/specification/managedservices/resource-manager/Microsoft.ManagedServices/preview/2018-06-01-preview'
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./samples/policy-reference.md
+    - name: Terraform
+      href: 'https://www.terraform.io/docs/providers/azurerm/r/lighthouse_assignment.html'
 - name: Ressources
   items:
     - name: Microsoft Q&A pour Azure Lighthouse
-      href: 'https://docs.microsoft.com/en-us/answers/topics/azure-lighthouse.html'
+      href: /answers/topics/azure-lighthouse.html
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Calculatrice de prix
       href: 'https://azure.microsoft.com/pricing/calculator/'
-    - name: UserVoice
+    - name: Disponibilité régionale
+      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=azure-lighthouse&regions=all'
+    - name: Commentaires sur le produit
       href: 'https://feedback.azure.com/forums/922753'

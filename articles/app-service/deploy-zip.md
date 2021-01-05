@@ -4,13 +4,13 @@ description: Découvrez comment déployer votre application sur Azure App Servic
 ms.topic: article
 ms.date: 08/12/2019
 ms.reviewer: sisirap
-ms.custom: seodec18
-ms.openlocfilehash: 716f6813e37aec086a7d496e001fe2ca0f4aab57
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 150f6b57f1dec0b6d925ef53b4a7001ae9f23607
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75945173"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97007906"
 ---
 # <a name="deploy-your-app-to-azure-app-service-with-a-zip-or-war-file"></a>Déployer votre application sur Azure App Service avec un fichier ZIP ou WAR
 
@@ -28,20 +28,23 @@ Pour plus d’informations, consultez la [documentation Kudu](https://github.com
 
 Le fichier [WAR](https://wikipedia.org/wiki/WAR_(file_format)) est déployé sur App Service pour exécuter votre application web Java. Consultez [Déployer un fichier WAR](#deploy-war-file).
 
+> [!NOTE]
+> Quand vous utilisez `ZipDeploy`, les fichiers sont copiés uniquement si leurs timestamps ne correspondent pas à ce qui est déjà déployé. La génération d’un fichier zip selon un processus de build qui met en cache les sorties contribue à accélérer les déploiements. Pour plus d’informations, consultez [Déploiement à partir d’un fichier zip ou d’une URL](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file-or-url).
+
 ## <a name="prerequisites"></a>Prérequis
 
-Pour effectuer les étapes de cet article, [créez une application App Service](/azure/app-service/) ou utilisez une application créée pour un autre didacticiel.
+Pour effectuer les étapes de cet article, [créez une application App Service](./index.yml) ou utilisez une application créée pour un autre didacticiel.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 [!INCLUDE [Create a project ZIP file](../../includes/app-service-web-deploy-zip-prepare.md)]
 
 [!INCLUDE [Deploy ZIP file](../../includes/app-service-web-deploy-zip.md)]
-Le point de terminaison ci-dessus ne fonctionne pas pour App Services Linux. Envisagez plutôt d’utiliser FTP ou l’[API de déploiement ZIP](https://docs.microsoft.com/azure/app-service/containers/app-service-linux-faq#continuous-integration-and-deployment).
+Le point de terminaison ci-dessus ne fonctionne pas pour App Services Linux. Envisagez plutôt d’utiliser FTP ou l’[API de déploiement ZIP](faq-app-service-linux.md#continuous-integration-and-deployment).
 
 ## <a name="deploy-zip-file-with-azure-cli"></a>Déployer le fichier ZIP avec Azure CLI
 
-Déployez le fichier ZIP chargé sur votre application web à l’aide de la commande [az webapp deployment source config-zip](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip).  
+Déployez le fichier ZIP chargé sur votre application web à l’aide de la commande [az webapp deployment source config-zip](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config-zip).  
 
 L’exemple suivant déploie le fichier ZIP que vous avez chargé. Quand vous utilisez une installation locale d’Azure CLI, spécifiez le chemin de votre fichier ZIP local pour `--src`.
 

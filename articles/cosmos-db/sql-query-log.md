@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : LOG'
 description: Découvrez la fonction système SQL LOG dans Azure Cosmos DB, qui retourne le logarithme naturel de l’expression numérique spécifiée
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 9213ef03f383dec7109652246411fac154b4a7f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 44a9d5b273e13886b0674b3b2e9f5f7a75e72fcc
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302506"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93338575"
 ---
 # <a name="log-azure-cosmos-db"></a>LOG (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le logarithme naturel de l'expression numérique spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe
@@ -39,9 +42,11 @@ LOG (<numeric_expr> [, <base>])
   
   Par défaut, LOG() renvoie le logarithme naturel. Vous pouvez modifier la base du logarithme avec une autre valeur en utilisant le paramètre de base facultatif.  
   
-  Le logarithme népérien est le logarithme en base **e**, où **e** est une constante irrationnelle environ égale à 2,718281828.  
+  Le logarithme népérien est le logarithme en base **e** , où **e** est une constante irrationnelle environ égale à 2,718281828.  
   
-  Le logarithme naturel de la valeur exponentielle d’un nombre est le nombre lui-même : LOG (EXP (n)) = n. Et la valeur exponentielle du logarithme naturel d’un nombre est le nombre lui-même : EXP (LOG (n)) = n.  
+  Le logarithme naturel de la valeur exponentielle d’un nombre est le nombre lui-même : LOG (EXP (n)) = n. Et la valeur exponentielle du logarithme naturel d’un nombre est le nombre lui-même : EXP (LOG (n)) = n.
+
+  Cette fonction système n’utilisera pas l’index.
   
 ## <a name="examples"></a>Exemples
   
@@ -68,10 +73,6 @@ SELECT EXP(LOG(10)) AS expLog
 ```json
 [{expLog: 10.000000000000002}]  
 ```  
-
-## <a name="remarks"></a>Notes
-
-Cette fonction système n’utilisera pas l’index.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

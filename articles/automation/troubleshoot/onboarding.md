@@ -1,23 +1,20 @@
 ---
-title: Résolution d’un problème d’intégration des solutions de gestion Azure Automation
-description: Découvrez comment résoudre des erreurs d’intégration de solution Azure Automation.
+title: Résoudre les problèmes de déploiement des fonctionnalités Azure Automation
+description: Cet article explique comment résoudre les problèmes de déploiement des fonctionnalités Azure Automation.
 services: automation
-author: mgoedtel
-ms.author: magoedte
-ms.date: 05/22/2019
+ms.date: 06/30/2020
 ms.topic: conceptual
 ms.service: automation
-manager: carmonm
-ms.openlocfilehash: 371094ecba5168fd32a7af9fb81a71eb722efc91
-ms.sourcegitcommit: 11572a869ef8dbec8e7c721bc7744e2859b79962
+ms.openlocfilehash: a6b8384193e821e6c41a0d4d979cda51f6c65b3a
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82836527"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92070484"
 ---
-# <a name="troubleshoot-solution-onboarding"></a>Résolution des problèmes d’intégration de solution
+# <a name="troubleshoot-feature-deployment-issues"></a>Résoudre les problèmes de déploiement de fonctionnalités
 
-Vous pouvez recevoir des messages d’erreur lors de l’intégration de la solution Azure Automation Update Management ou de la solution Change Tracking and Inventory. Cet article décrit les erreurs qui pourraient se produire et explique comment les résoudre.
+Vous pouvez recevoir des messages d’erreur lorsque vous déployez la fonctionnalité Update Management ou la fonctionnalité Change Tracking and Inventory d’Azure Automation sur vos machines virtuelles. Cet article décrit les erreurs qui pourraient se produire et explique comment les résoudre.
 
 ## <a name="known-issues"></a>Problèmes connus
 
@@ -39,7 +36,7 @@ Annulez l’inscription du nœud dans le service State Configuration d’Azure A
 
 #### <a name="issue"></a>Problème
 
-Quand vous vous connectez via une solution proxy qui met fin au trafic HTTPS, puis chiffre à nouveau le trafic à l’aide d’un nouveau certificat, le service n’autorise pas la connexion.
+Quand vous vous connectez via un proxy qui met fin au trafic HTTPS, puis chiffre à nouveau le trafic à l’aide d’un nouveau certificat, le service n’autorise pas la connexion.
 
 #### <a name="cause"></a>Cause
 
@@ -51,11 +48,11 @@ Il n’existe actuellement aucun moyen de contourner ce problème.
 
 ## <a name="general-errors"></a>Erreurs générales.
 
-### <a name="scenario-onboarding-fails-with-the-message-the-solution-cannot-be-enabled"></a><a name="missing-write-permissions"></a>Scénario : L’intégration échoue avec le message : « La solution ne peut pas être activée »
+### <a name="scenario-feature-deployment-fails-with-the-message-the-solution-cannot-be-enabled"></a><a name="missing-write-permissions"></a>Scénario : Le déploiement de la fonctionnalité échoue avec le message : « La solution ne peut pas être activée ».
 
 #### <a name="issue"></a>Problème
 
-L’un des messages suivants s’affiche lorsque vous essayez d’intégrer une machine virtuelle à une solution :
+L’un des messages suivants s’affiche lorsque vous tentez d’activer une fonctionnalité sur une machine virtuelle :
 
 ```error
 The solution cannot be enabled due to missing permissions for the virtual machine or deployments
@@ -71,13 +68,13 @@ Cette erreur est due à des autorisations incorrectes ou manquantes sur la machi
 
 #### <a name="resolution"></a>Résolution
 
-Vérifiez que vous avez les [autorisations nécessaires requises pour intégrer des machines](../automation-role-based-access-control.md#onboarding-permissions), puis réessayez d’intégrer la solution. Si le message d’erreur `The solution cannot be enabled on this VM because the permission to read the workspace is missing` s’affiche, assurez-vous que vous disposez de l’autorisation `Microsoft.OperationalInsights/workspaces/read` pour pouvoir déterminer si la machine virtuelle est intégrée à un espace de travail.
+Vérifiez que vous disposez des [autorisations de déploiement de fonctionnalité](../automation-role-based-access-control.md#feature-setup-permissions) nécessaires, puis réessayez de déployer la fonctionnalité. Si vous recevez le message d’erreur `The solution cannot be enabled on this VM because the permission to read the workspace is missing`, consultez les [informations de dépannage](update-management.md#failed-to-enable-error) suivantes.
 
-### <a name="scenario-onboarding-fails-with-the-message-failed-to-configure-automation-account-for-diagnostic-logging"></a><a name="diagnostic-logging"></a>Scénario : L’intégration échoue avec le message : « Échec de la configuration du compte Automation pour la journalisation des diagnostics »
+### <a name="scenario-feature-deployment-fails-with-the-message-failed-to-configure-automation-account-for-diagnostic-logging"></a><a name="diagnostic-logging"></a>Scénario : Le déploiement de la fonctionnalité échoue avec le message : « Échec de la configuration du compte Automation pour la journalisation des diagnostics »
 
 #### <a name="issue"></a>Problème
 
-Le message suivant s'affiche lorsque vous essayez d'intégrer une machine virtuelle à une solution :
+Le message suivant s’affiche lorsque vous tentez d’activer une fonctionnalité sur une machine virtuelle :
 
 ```error
 Failed to configure automation account for diagnostic logging
@@ -85,17 +82,17 @@ Failed to configure automation account for diagnostic logging
 
 #### <a name="cause"></a>Cause
 
-Cette erreur peut survenir si le niveau tarifaire ne correspond pas au modèle de facturation de l’abonnement. Pour plus d’informations, consultez [Surveiller l’utilisation et l’estimation des coûts dans Azure Monitor](https://aka.ms/PricingTierWarning).
+Cette erreur peut survenir si le niveau tarifaire ne correspond pas au modèle de facturation de l’abonnement. Pour plus d’informations, consultez [Surveiller l’utilisation et l’estimation des coûts dans Azure Monitor](../../azure-monitor/platform/usage-estimated-costs.md).
 
 #### <a name="resolution"></a>Résolution
 
-Créez votre espace de travail Log Analytics manuellement, puis répétez la procédure d’intégration pour sélectionner l’espace de travail créé.
+Créez votre espace de travail Log Analytics manuellement, puis répétez la procédure de déploiement de fonctionnalité pour sélectionner l’espace de travail créé.
 
 ### <a name="scenario-computergroupqueryformaterror"></a><a name="computer-group-query-format-error"></a>Scénario : ComputerGroupQueryFormatError
 
 #### <a name="issue"></a>Problème
 
-Ce code d’erreur signifie que la requête de recherche de groupe d’ordinateurs enregistrée utilisée pour cibler la solution n’est pas formatée correctement. 
+Ce code d’erreur signifie que la requête de recherche de groupe d’ordinateurs enregistrée utilisée pour cibler la fonctionnalité n’est pas au bon format. 
 
 #### <a name="cause"></a>Cause
 
@@ -103,7 +100,7 @@ Vous avez peut-être modifié la requête, ou le système l’a peut-être modif
 
 #### <a name="resolution"></a>Résolution
 
-Vous pouvez supprimer la requête pour cette solution, puis réintégrer celle-ci, ce qui a pour effet de recréer la requête. La requête se trouve dans votre espace de travail, sous **Recherches enregistrées**. Le nom de la requête est **MicrosoftDefaultComputerGroup**, et la catégorie de la requête est le nom de la solution associée. Si plusieurs solutions sont activées, la requête **MicrosoftDefaultComputerGroup** s’affiche plusieurs fois sous **Recherches enregistrées**.
+Vous pouvez supprimer la requête pour cette fonctionnalité, puis réactiver la fonctionnalité, ce qui aura pour effet de recréer la requête. La requête se trouve dans votre espace de travail, sous **Recherches enregistrées**. Le nom de la requête est **MicrosoftDefaultComputerGroup**, et la catégorie de la requête est le nom de la fonctionnalité associée. Si plusieurs fonctionnalités sont activées, la requête **MicrosoftDefaultComputerGroup** s’affiche plusieurs fois sous **Recherches enregistrées**.
 
 ### <a name="scenario-policyviolation"></a><a name="policy-violation"></a>Scénario : PolicyViolation
 
@@ -117,10 +114,10 @@ Une stratégie empêche l’opération de se terminer.
 
 #### <a name="resolution"></a>Résolution
 
-Pour déployer correctement la solution, vous devez envisager de modifier la stratégie indiquée. Étant donné qu’il existe plusieurs types de stratégies peuvent être définis, les modifications requises dépendent de la stratégie enfreinte. Par exemple, si une stratégie est définie sur un groupe de ressources qui refuse l’autorisation de modifier le contenu de certaines ressources contenues, vous pouvez choisir l’un de ces correctifs :
+Pour déployer correctement la fonctionnalité, vous devez modifier la stratégie indiquée. Étant donné qu’il existe plusieurs types de stratégies peuvent être définis, les modifications requises dépendent de la stratégie enfreinte. Par exemple, si une stratégie est définie sur un groupe de ressources qui refuse l’autorisation de modifier le contenu de certaines ressources contenues, vous pouvez choisir l’un de ces correctifs :
 
 * Retirer la stratégie.
-* Essayer d’intégrer la solution dans un groupe de ressources différent.
+* Essayez d’activer la fonctionnalité pour un autre groupe de ressources.
 * Ciblez de nouveau la stratégie sur une ressource spécifique, par exemple un compte Automation.
 * Révisez l’ensemble de ressources pour le refus desquelles cette stratégie a été configurée.
 
@@ -138,26 +135,26 @@ The link cannot be updated or deleted because it is linked to Update Management 
 
 #### <a name="cause"></a>Cause
 
-Cette erreur se produit lorsque des solutions de votre espace de travail Log Analytics qui dépendent de votre compte Automation et de votre espace de travail Log Analytics associé sont toujours actives.
+Cette erreur se produit lorsque des fonctionnalités de votre espace de travail Log Analytics qui dépendent de votre compte Automation et de l’espace de travail Log Analytics associé sont toujours actives.
 
 ### <a name="resolution"></a>Résolution
 
-Supprimez les solutions suivantes de votre espace de travail si vous les utilisez :
+Dans votre espace de travail, supprimez les ressources des fonctionnalités suivantes, si vous les utilisez :
 
 * Update Management
 * Suivi des modifications et inventaire
 * Démarrer/arrêter des machines virtuelles pendant les heures creuses
 
-Une fois les solutions supprimées, vous pouvez dissocier votre espace de travail. Il est important de supprimer tous les artefacts existants de ces solutions dans votre espace de travail et votre compte Automation.
+Une fois les ressources des fonctionnalités supprimées, vous pouvez dissocier votre espace de travail. Il est important de supprimer tous les artefacts existants de ces fonctionnalités dans votre espace de travail et votre compte Automation.
 
 * Pour Update Management, supprimez les **déploiements de mises à jour (planifications)** de votre compte Automation.
-* Pour Start/Stop VMs during off-hours, supprimez tous les verrous sur les composants de solution dans votre compte Automation sous **Paramètres** > **Verrous**. Pour plus d’informations, consultez [Supprimer la solution Start/Stop VMs during off-hours](../automation-solution-vm-management.md#remove-the-solution).
+* Pour « Start/Stop VMs during off-hours », supprimez tous les verrous des composants de la fonctionnalité dans votre compte Automation sous **Paramètres** > **Verrous**. Pour plus d’informations, consultez [Supprimer la fonctionnalité](../automation-solution-vm-management.md#remove-the-feature).
 
 ## <a name="log-analytics-for-windows-extension-failures"></a><a name="mma-extension-failures"></a>Log Analytics pour les échecs de l’extension Windows
 
 [!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)] 
 
-Une installation de l’agent Log Analytics pour l’extension Windows peut échouer pour diverses raisons. La section suivante décrit les problèmes d’intégration qui peuvent provoquer des échecs lors du déploiement de l’agent Log Analytics pour l’extension Windows.
+Une installation de l’agent Log Analytics pour l’extension Windows peut échouer pour diverses raisons. La section suivante décrit les problèmes de déploiement de fonctionnalité qui peuvent provoquer des échecs lors du déploiement de l’agent Log Analytics pour l’extension Windows.
 
 >[!NOTE]
 >L’agent Log Analytics pour Windows est le nom utilisé actuellement dans Azure Automation pour l’agent Microsoft Monitoring Agent (MMA).

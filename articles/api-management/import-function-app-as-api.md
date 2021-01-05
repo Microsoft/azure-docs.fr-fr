@@ -1,7 +1,7 @@
 ---
 title: Importer une application de fonction Azure en tant qu’API dans Gestion des API
 titleSuffix: Azure API Management
-description: Ce didacticiel vous montre comment importer une application de fonction Azure en tant qu’API dans le service Gestion des API Azure.
+description: Cet article vous montre comment importer une application Azure Function en tant qu’API dans le service Gestion des API Azure.
 services: api-management
 documentationcenter: ''
 author: mikebudzynski
@@ -10,15 +10,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 04/22/2020
 ms.author: apimpm
-ms.openlocfilehash: 6f4626a8c42f3a50fa273c55099158750241bfee
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 01ac59ec435b19f5da56ca345840628964263a47
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82202918"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93147026"
 ---
 # <a name="import-an-azure-function-app-as-an-api-in-azure-api-management"></a>Importer une application de fonction Azure en tant qu’API dans Gestion des API Azure
 
@@ -48,61 +48,61 @@ Suivez les étapes ci-dessous pour créer une nouvelle API à partir d’une app
 
 1. À partir du portail Azure, accédez à votre service Gestion des API, puis sélectionnez **API** dans le menu.
 
-2. Dans la liste **Ajouter une nouvelle API**, sélectionnez **Application de fonction**.
+2. Dans la liste **Ajouter une nouvelle API** , sélectionnez **Application de fonction**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-01.png)
+    ![Capture d’écran montrant la vignette Application de fonction.](./media/import-function-app-as-api/add-01.png)
 
 3. Cliquez sur **Parcourir** pour sélectionner des fonctions à importer.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-02.png)
+    ![Capture d’écran mettant en évidence le bouton Parcourir.](./media/import-function-app-as-api/add-02.png)
 
 4. Cliquez sur la section **Application de fonction** pour afficher la liste des applications de fonction disponibles.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-03.png)
+    ![Capture d’écran mettant en évidence la section Application de fonction.](./media/import-function-app-as-api/add-03.png)
 
 5. Recherchez l’application de fonction à partir de laquelle vous souhaitez importer des fonctions, cliquez dessus, puis appuyez sur **Sélectionner**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-04.png)
+    ![Capture d’écran mettant en évidence l’application de fonction à partir de laquelle vous souhaitez importer des fonctions et le bouton Sélectionner.](./media/import-function-app-as-api/add-04.png)
 
 6. Sélectionnez les fonctions que vous souhaitez importer et cliquez sur **Sélectionner**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-05.png)
+    ![Capture d’écran mettant en évidence les fonctions à importer et le bouton Sélectionner.](./media/import-function-app-as-api/add-05.png)
 
     > [!NOTE]
     > Vous pouvez importer uniquement des fonctions qui utilisent un déclencheur HTTP et dont le paramètre de niveau d’autorisation est défini sur *Anonyme* ou *Fonction*.
 
-7. Passez à la vue **Complète** et affectez **Produit** à votre nouvelle API. Si nécessaire, spécifiez d’autres champs lors de la création, ou configurez-les ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+7. Passez à la vue **Complète** et affectez **Produit** à votre nouvelle API. Si nécessaire, spécifiez d’autres champs lors de la création, ou configurez-les ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 8. Cliquez sur **Créer**.
 
 ## <a name="append-azure-function-app-to-an-existing-api"></a><a name="append-azure-function-app-to-api"></a> Ajouter une application de fonction Azure à une API existante
 
 Suivez les étapes ci-dessous pour ajouter une application de fonction Azure à une API existante.
 
-1. Dans votre instance du service **Gestion des API Azure**, sélectionnez **API** dans le menu de gauche.
+1. Dans votre instance du service **Gestion des API Azure** , sélectionnez **API** dans le menu de gauche.
 
 2. Choisissez l’API dans laquelle vous souhaitez importer une application de fonction Azure. Cliquez sur **...** et sélectionnez **Importer** dans le menu contextuel.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/append-01.png)
+    ![Capture d’écran mettant en évidence l’option de menu Importer.](./media/import-function-app-as-api/append-01.png)
 
 3. Cliquez sur la vignette **Application de fonction**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/append-02.png)
+    ![Capture d’écran mettant en évidence la vignette Application de fonction.](./media/import-function-app-as-api/append-02.png)
 
 4. Dans la fenêtre indépendante qui s’affiche, cliquez sur **Parcourir**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/append-03.png)
+    ![Capture d’écran montrant le bouton Parcourir.](./media/import-function-app-as-api/append-03.png)
 
 5. Cliquez sur la section **Application de fonction** pour afficher la liste des applications de fonction disponibles.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-03.png)
+    ![Capture d’écran mettant en évidence la liste d’applications de fonction.](./media/import-function-app-as-api/add-03.png)
 
 6. Recherchez l’application de fonction à partir de laquelle vous souhaitez importer des fonctions, cliquez dessus, puis appuyez sur **Sélectionner**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-04.png)
+    ![Capture d’écran mettant en évidence l’application de fonction à partir de laquelle vous souhaitez importer des fonctions.](./media/import-function-app-as-api/add-04.png)
 
 7. Sélectionnez les fonctions que vous souhaitez importer et cliquez sur **Sélectionner**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/add-05.png)
+    ![Capture d’écran mettant en évidence les fonctions que vous souhaitez importer.](./media/import-function-app-as-api/add-05.png)
 
 8. Cliquez sur **Importer**.
 
@@ -112,10 +112,10 @@ Suivez les étapes ci-dessous pour ajouter une application de fonction Azure à 
 
 L’importation d’une application de fonction Azure génère automatiquement :
 
-* Une clé d’hôte au sein de l’application de fonction portant le nom apim-{*nom de votre instance de service Gestion des API Azure*}.
-* Une valeur nommée au sein de l’instance de Gestion des API Azure portant le nom {*nom de votre instance d’Azure Function App*}-key, qui contient la clé d’hôte créée.
+* Une clé d’hôte au sein de l’application de fonction portant le nom apim-{ *nom de votre instance de service Gestion des API Azure* }.
+* Une valeur nommée au sein de l’instance de Gestion des API Azure portant le nom { *nom de votre instance d’Azure Function App* }-key, qui contient la clé d’hôte créée.
 
-Pour les API créées après le 4 avril 2019, la clé d’hôte est passée dans les requêtes HTTP de la Gestion des API vers l’application de fonction dans un en-tête. Les API plus anciennes transmettent la clé d’hôte sous la forme d’[un paramètre de requête](../azure-functions/functions-bindings-http-webhook-trigger.md#api-key-authorization). Vous pouvez changer ce comportement par le biais de l’[appel à l’API REST](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/backend/update#backendcredentialscontract) `PATCH Backend` sur l’entité *Backend* associée à l’application de fonction.
+Pour les API créées après le 4 avril 2019, la clé d’hôte est passée dans les requêtes HTTP de la Gestion des API vers l’application de fonction dans un en-tête. Les API plus anciennes transmettent la clé d’hôte sous la forme d’[un paramètre de requête](../azure-functions/functions-bindings-http-webhook-trigger.md#api-key-authorization). Vous pouvez changer ce comportement par le biais de l’ [appel à l’API REST](/rest/api/apimanagement/2019-12-01/backend/update#backendcredentialscontract) `PATCH Backend` sur l’entité *Backend* associée à l’application de fonction.
 
 > [!WARNING]
 > En cas de suppression ou de modification de la clé d’hôte Azure Function App ou de la valeur nommée de Gestion des API Azure, la communication entre les services sera interrompue. Les valeurs ne se synchronisent pas automatiquement.
@@ -128,11 +128,11 @@ Pour les API créées après le 4 avril 2019, la clé d’hôte est passée da
 
 2. Sélectionnez **Paramètres Function App** dans la vue d’ensemble.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/keys-02-a.png)
+    ![Capture d’écran mettant en évidence l’option des paramètres d’applications de fonction.](./media/import-function-app-as-api/keys-02-a.png)
 
 3. La clé s’affiche dans la section **Clés d’hôte**.
 
-    ![Ajouter à partir d’une application de fonction](./media/import-function-app-as-api/keys-02-b.png)
+    ![Capture d’écran mettant en évidence la section Clés d’accès.](./media/import-function-app-as-api/keys-02-b.png)
 
 ### <a name="access-the-named-value-in-azure-api-management"></a>Accéder à la valeur nommée dans le service Gestion des API Azure
 
@@ -150,7 +150,7 @@ Vous pouvez appeler des opérations directement depuis le portail Azure. Le port
 
 3. Sélectionnez une opération.
 
-    La page affiche des champs pour les paramètres de requête et des champs pour les en-têtes. L’un des en-têtes est **Ocp-Apim-Subscription-Key**, pour la clé d’abonnement du produit qui est associé à cette API. Si vous avez créé l’instance Gestion des API, la clé est renseignée automatiquement, car vous êtes déjà administrateur. 
+    La page affiche des champs pour les paramètres de requête et des champs pour les en-têtes. L’un des en-têtes est **Ocp-Apim-Subscription-Key** , pour la clé d’abonnement du produit qui est associé à cette API. Si vous avez créé l’instance Gestion des API, la clé est renseignée automatiquement, car vous êtes déjà administrateur. 
 
 4. Sélectionnez **Envoyer**.
 

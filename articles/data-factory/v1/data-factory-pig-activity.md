@@ -1,10 +1,10 @@
 ---
 title: Transformer des données à l’aide d’une activité Pig dans Azure Data Factory
-description: Découvrez comment utiliser l'activité pig d’une fabrique de données Azure pour exécuter des requêtes pig sur un cluster HDInsight à la demande/ou votre propre cluster.
+description: Découvrez comment vous pouvez utiliser l’activité Pig dans Azure Data Factory v1 pour exécuter des scripts Pig sur un cluster HDInsight à la demande ou votre propre cluster HDInsight.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.assetid: 5af07a1a-2087-455e-a67b-a79841b4ada5
@@ -12,12 +12,12 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 5b8e7201a6239ef1fe83fb89d4b361995e305bbf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0ad84a0e848abda1b786958947b4081b11b139a7
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74703207"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495343"
 ---
 # <a name="transform-data-using-pig-activity-in-azure-data-factory"></a>Transformer des données à l’aide d’une activité Pig dans Azure Data Factory
 > [!div class="op_single_selector" title1="Activités de transformation"]
@@ -26,8 +26,8 @@ ms.locfileid: "74703207"
 > * [Activité MapReduce](data-factory-map-reduce.md)
 > * [Activité de diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md)
 > * [Activité Spark](data-factory-spark.md)
-> * [Activité d’exécution par lot Machine Learning](data-factory-azure-ml-batch-execution-activity.md)
-> * [Activité des ressources de mise à jour de Machine Learning](data-factory-azure-ml-update-resource-activity.md)
+> * [Activité Exécution par lots Azure Machine Learning studio (classique)](data-factory-azure-ml-batch-execution-activity.md)
+> * [Activité Mettre à jour une ressource Azure Machine Learning studio (classique)](data-factory-azure-ml-update-resource-activity.md)
 > * [Activité de procédure stockée](data-factory-stored-proc-activity.md)
 > * [Activité U-SQL Data Lake Analytics](data-factory-usql-activity.md)
 > * [Activité personnalisée .NET](data-factory-use-custom-activities.md)

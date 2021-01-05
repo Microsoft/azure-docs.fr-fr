@@ -8,25 +8,42 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 02/15/2018
 ms.author: dobett
-ms.openlocfilehash: 7a2b167f90b4ec79f5fa515ded1c676ca7085e72
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1fd2b8461bd66c826dc4890c331b740c4703f896
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75647711"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96903987"
 ---
 # <a name="frequently-asked-questions-for-iot-solution-accelerators"></a>Questions fréquentes (FAQ) sur les accélérateurs de solution IoT
 
-Consultez également les [questions fréquentes sur la solution préconfigurée Usine connectée](iot-accelerators-faq-cf.md) et les [questions fréquentes sur la surveillance à distance](iot-accelerators-faq-rm-v2.md).
+Consultez également les [questions fréquentes (FAQ) spécifiques à l’usine connectée](iot-accelerators-faq-cf.md).
 
 ### <a name="where-can-i-find-the-source-code-for-the-solution-accelerators"></a>Où trouver le code source des accélérateurs de solution ?
 
 Le code source est stocké dans les référentiels GitHub suivants :
 
-* [Accélérateur de solution de supervision à distance (.NET)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet)
-* [Accélérateur de solution de supervision à distance (Java)](https://github.com/Azure/azure-iot-pcs-remote-monitoring-java)
-* [Accélérateur de solution de maintenance prédictive](https://github.com/Azure/azure-iot-predictive-maintenance)
 * [Accélérateur de solution Usine connectée](https://github.com/Azure/azure-iot-connected-factory)
+* [Accélérateur de solution de simulation d’appareil](https://github.com/Azure/device-simulation-dotnet)
+
+### <a name="where-can-i-find-the-remote-monitoring-and-predictive-maintenance-solution-accelerators"></a>Où trouver les accélérateurs de solutions de maintenance prédictive et de supervision à distance ?
+
+Depuis le 10 décembre 2020, les accélérateurs de maintenance prédictive et de supervision à distance ont été supprimés du site des [accélérateurs de solutions Azure IoT](https://www.azureiotsolutions.com/Accelerators) et ne sont plus disponibles pour les nouveaux déploiements. Les dépôts GitHub pour les deux accélérateurs ont été archivés. Le code est toujours disponible et accessible à tous, mais les dépôts ne prennent pas de nouvelles contributions.
+
+### <a name="what-happens-to-my-existing-remote-monitoring-and-predictive-maintenance-deployments"></a>Que deviennent mes déploiements de maintenance prédictive et de supervision à distance existants ?
+
+Les déploiements existants ne sont pas affectés par la suppression des accélérateurs de solutions de maintenance prédictive et de supervision à distance et continuent de fonctionner. Les dépôts dupliqués ne sont pas non plus affectés. Les dépôts principaux sur GitHub ont été archivés.
+
+### <a name="how-do-i-deploy-device-simulation-solution-accelerator"></a>Comment déployer l’accélérateur de solution de simulation d’appareil ?
+
+Pour déployer l’accélérateur de solution de simulation d’appareil, reportez-vous au dépôt GitHub de la [simulation d’appareil](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md).
+
+### <a name="where-can-i-find-information-about-the-removed-solution-accelerators"></a>Où trouver des informations sur les accélérateurs de solutions supprimés ?
+
+Consultez les pages suivantes sur le site des versions précédentes :
+
+* [Surveillance à distance](/previous-versions/azure/iot-accelerators/about-iot-accelerators)
+* [Maintenance prédictive](/previous-versions/azure/iot-accelerators/about-iot-accelerators)
 
 ### <a name="what-sdks-can-i-use-to-develop-device-clients-for-the-solution-accelerators"></a>Quels SDK puis-je utiliser afin de développer des clients d’appareils pour les accélérateurs de solution ?
 
@@ -34,21 +51,13 @@ Vous trouverez des liens vers les kits de développement logiciel des appareils 
 
 Si vous utilisez l’appareil DevKit, vous pouvez trouver des ressources et des exemples dans le dépôt GitHub [SDK IoT DevKit](https://github.com/Microsoft/devkit-sdk).
 
-### <a name="is-the-new-microservices-architecture-available-for-all-the-three-solution-accelerators"></a>La nouvelle architecture de microservices est-elle disponible pour les trois accélérateurs de solution ?
-
-Actuellement, la solution de supervision à distance utilise l’architecture de microservices, car elle couvre le scénario le plus large.
-
-### <a name="what-advantages-does-the-new-open-sourced-microservices-based-architecture-provide-in-the-new-update"></a>Quels sont les avantages de la nouvelle architecture basée sur des microservices open source dans la nouvelle mise à jour ?
-
-Ces deux dernières années, l’architecture cloud a considérablement évolué. Les microservices ont émergé comme un modèle efficace pour obtenir mise à l’échelle et flexibilité sans sacrifier la vitesse de développement. Plusieurs services de Microsoft utilisent ce modèle d’architecture en interne et obtiennent de très bons résultats en termes d’extensibilité et de fiabilité. Microsoft met ces apprentissages en pratique dans les accélérateurs de solution afin que les clients puissent en bénéficier.
-
 ### <a name="im-a-service-administrator-and-id-like-to-change-the-directory-mapping-between-my-subscription-and-a-specific-azure-ad-tenant-how-do-i-complete-this-task"></a>Je suis administrateur de service et je souhaite changer le mappage d’annuaire entre mon abonnement et un locataire Azure AD spécifique. Comment mener à bien cette tâche ?
 
 Voir [Comment ajouter un abonnement existant à votre répertoire Azure AD](../active-directory/fundamentals/active-directory-how-subscriptions-associated-directory.md#to-associate-an-existing-subscription-to-your-azure-ad-directory)
 
 ### <a name="i-want-to-change-a-service-administrator-or-co-administrator-when-logged-in-with-an-organizational-account"></a>Je souhaite modifier la fonctionnalité administrateur de service ou coadministrateur lors d’une connexion avec un compte de société
 
-Consultez l’article de support [Changement de l’administrateur et du co-administrateur de services lors d’une connexion avec un compte professionnel](https://azure.microsoft.com/support/changing-service-admin-and-co-admin).
+Voir l’article de support [Modification de la fonctionnalité Administrateur de service et Coadministrateur lors d’une connexion avec un compte de société](https://azure.microsoft.com/support/changing-service-admin-and-co-admin).
 
 ### <a name="why-am-i-seeing-this-error-your-account-does-not-have-the-proper-permissions-to-create-a-solution-please-check-with-your-account-administrator-or-try-with-a-different-account"></a>Pourquoi est-ce que je reçois cette erreur ? « Votre compte n’a pas les autorisations suffisantes pour créer une solution. Veuillez contacter votre administrateur de compte ou essayer avec un autre compte. »
 
@@ -62,14 +71,6 @@ Examinez le schéma suivant pour obtenir des conseils :
 ### <a name="why-am-i-seeing-this-error-when-i-have-an-azure-subscription-an-azure-subscription-is-required-to-create-pre-configured-solutions-you-can-create-a-free-trial-account-in-just-a-couple-of-minutes"></a>Pourquoi affiche-t-il cette erreur alors que j’ai un abonnement Azure ? « Vous devez avoir un abonnement Azure pour créer des solutions préconfigurées. Vous pouvez créer un compte d'essai gratuit en quelques minutes seulement. »
 
 Si vous êtes sûr de disposer d’un abonnement Azure, validez le mappage de locataire pour votre abonnement et vérifiez que c’est le locataire correct qui est sélectionné dans la liste déroulante. Si vous avez validé que le locataire est correct, suivez le schéma précédent et validez le mappage de votre abonnement et ce locataire Azure AD.
-
-### <a name="where-can-i-find-information-about-the-previous-version-of-the-remote-monitoring-solution"></a>Où puis-je trouver des informations sur la version précédente de la solution de supervision à distance ?
-
-La version précédente de l’accélérateur de solution de supervision à distance était la solution préconfigurée de supervision à distante IoT Suite. Vous trouverez la documentation archivée à l’emplacement [https://docs.microsoft.com/previous-versions/azure/iot-suite/](https://docs.microsoft.com/previous-versions/azure/iot-suite/).
-
-### <a name="is-the-new-solution-accelerator-available-in-the-same-geographic-region-as-the-existing-solution"></a>Le nouvel accélérateur de solution est-il disponible dans la même zone géographique que la solution existante ?
-
-Oui, la nouvelle solution de surveillance à distance est disponible dans les mêmes zones géographiques.
 
 ### <a name="whats-the-difference-between-deleting-a-resource-group-in-the-azure-portal-and-clicking-delete-on-a-solution-accelerator-in-azureiotsolutionscom"></a>Quelle est la différence entre supprimer un groupe de ressources dans le portail Azure et cliquer sur Supprimer pour un accélérateur de solution dans azureiotsolutions.com ?
 
@@ -88,10 +89,6 @@ Par défaut, vous pouvez approvisionner [10 instances IoT Hub par abonnement](
 
 Cinquante. Vous pouvez créer un [ticket de support Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade) pour augmenter cette limite, mais par défaut, vous ne pouvez approvisionner que 50 instances de Cosmos DB par abonnement.
 
-### <a name="how-many-free-bing-maps-apis-can-i-provision-in-a-subscription"></a>Combien d’API Bing Maps gratuites puis-je configurer dans un abonnement ?
-
-Deux. Vous pouvez créer uniquement deux cartes Bing - Transactions internes - Niveau 1 pour les plans d’entreprise dans un abonnement Azure. La solution de supervision à distance est provisionnée par défaut avec le plan Transactions internes - Niveau 1. Par conséquent, vous pouvez provisionner au plus deux solutions de surveillance à distance dans un abonnement sans modification.
-
 ### <a name="can-i-create-a-solution-accelerator-if-i-have-microsoft-azure-for-dreamspark"></a>Puis-je créer un accélérateur de solution si je dispose de Microsoft Azure pour DreamSpark ?
 
 > [!NOTE]
@@ -101,13 +98,11 @@ Il n’est pas possible de créer un accélérateur de solution avec un compte [
 
 ### <a name="how-do-i-delete-an-azure-ad-tenant"></a>Comment supprimer un client Azure AD ?
 
-Consultez le billet de blog d’Eric Golpe, [Procédure pas à pas pour la suppression d’un client Azure AD](https://blogs.msdn.com/b/ericgolpe/archive/2015/04/30/walkthrough-of-deleting-an-azure-ad-tenant.aspx).
+Consultez le billet de blog d’Eric Golpe, [Procédure pas à pas pour la suppression d’un client Azure AD](/archive/blogs/ericgolpe/walkthrough-of-deleting-an-azure-ad-tenant).
 
 ### <a name="next-steps"></a>Étapes suivantes
 
 Vous pouvez également explorer certaines des autres fonctionnalités des accélérateurs de solution IoT :
 
-* [Explorer les fonctionnalités de l’accélérateur de solution de supervision à distance](quickstart-remote-monitoring-deploy.md)
-* [Présentation de l’accélérateur de solution de maintenance prédictive](iot-accelerators-predictive-overview.md)
 * [Déployer l’accélérateur de solution Usine connectée](quickstart-connected-factory-deploy.md)
-* [Sécurisation de l’Internet des objets de bout en bout](/azure/iot-fundamentals/iot-security-ground-up)
+* [Sécurisation de l’Internet des objets de bout en bout](../iot-fundamentals/iot-security-ground-up.md)

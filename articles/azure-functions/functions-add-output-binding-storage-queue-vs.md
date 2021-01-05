@@ -4,12 +4,12 @@ description: Découvrez comment ajouter une liaison de sortie pour connecter vos
 ms.date: 07/22/2019
 ms.topic: quickstart
 ms.custom: mvc
-ms.openlocfilehash: 171479a0f60741b545a171315e99cc5e4e8bc843
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 635392212027c73e5aa954eb671be31228796a0d
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74849205"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185128"
 ---
 # <a name="connect-functions-to-azure-storage-using-visual-studio"></a>Connecter des fonctions à Stockage Azure avec Visual Studio
 
@@ -23,13 +23,13 @@ La plupart des liaisons requièrent une chaîne de connexion stockée que Functi
 
 Avant de commencer cet article : 
 
- - Effectuez la [partie 1 du guide de démarrage rapide de Visual Studio](./functions-create-first-function-vs-code.md). 
+ - Effectuez la [partie 1 du guide de démarrage rapide de Visual Studio](./functions-create-your-first-function-visual-studio.md). 
 
 - Connectez-vous à votre abonnement Azure à partir de Visual Studio.
 
 ## <a name="download-the-function-app-settings"></a>Télécharger les paramètres de l’application de fonction
 
-Dans l’[article du guide de démarrage rapide précédent](functions-create-first-function-vs-code.md), vous avez créé une application de fonction dans Azure ainsi que le compte de stockage nécessaire. La chaîne de connexion pour ce compte est stockée de manière sécurisée dans les paramètres d’application au sein d’Azure. Dans cet article, vous allez écrire des messages dans une file d’attente de stockage au sein du même compte. Pour vous connecter à votre compte de stockage lors de l’exécution de la fonction en local, vous devez télécharger les paramètres de l’application dans le fichier *local.settings.json*. 
+Dans l’[article du guide de démarrage rapide précédent](./create-first-function-vs-code-csharp.md), vous avez créé une application de fonction dans Azure ainsi que le compte de stockage nécessaire. La chaîne de connexion pour ce compte est stockée de manière sécurisée dans les paramètres d’application au sein d’Azure. Dans cet article, vous allez écrire des messages dans une file d’attente de stockage au sein du même compte. Pour vous connecter à votre compte de stockage lors de l’exécution de la fonction en local, vous devez télécharger les paramètres de l’application dans le fichier *local.settings.json*. 
 
 1. Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Publier**. 
 
@@ -106,7 +106,7 @@ Vous avez mis à jour votre fonction déclenchée via HTTP pour écrire des donn
 Ensuite, vous devez activer la supervision Application Insights pour votre application de fonction :
 
 > [!div class="nextstepaction"]
-> [Activer l’intégration à Application Insights](functions-monitoring.md#manually-connect-an-app-insights-resource)
+> [Activer l’intégration à Application Insights](configure-monitoring.md#add-to-an-existing-function-app)
 
 [Azure Storage Explorer]: https://storageexplorer.com/
 [article du guide de démarrage rapide précédent]: functions-create-your-first-function-visual-studio.md

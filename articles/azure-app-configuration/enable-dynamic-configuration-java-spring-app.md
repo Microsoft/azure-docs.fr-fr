@@ -3,17 +3,18 @@ title: Utiliser la configuration dynamique dans une application Spring Boot
 titleSuffix: Azure App Configuration
 description: Découvrez comment mettre à jour dynamiquement les données de configuration pour les applications Spring Boot.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: tutorial
-ms.date: 3/5/2020
-ms.author: lcozzens
-ms.openlocfilehash: 37c832e3b6d1430da0b45558c9632f0486a7233b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 08/06/2020
+ms.custom: devx-track-java
+ms.author: alkemper
+ms.openlocfilehash: c32e928bd4a83b4884c99e3ec3a9c647f5433e87
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79216756"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96929155"
 ---
 # <a name="tutorial-use-dynamic-configuration-in-a-java-spring-app"></a>Tutoriel : Utiliser la configuration dynamique dans une application Java Spring
 
@@ -35,7 +36,7 @@ Ensuite, ouvrez le fichier *pom.xml* dans un éditeur de texte, puis ajoutez un 
 <dependency>
     <groupId>com.microsoft.azure</groupId>
     <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.5</version>
 </dependency>
 ```
 
@@ -45,11 +46,33 @@ Ensuite, ouvrez le fichier *pom.xml* dans un éditeur de texte, puis ajoutez un 
 <dependency>
     <groupId>com.microsoft.azure</groupId>
     <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.7</version>
 </dependency>
 ```
 
-Enregistrez le fichier, puis créez et exécutez votre application comme d’habitude.
+## <a name="run-and-test-the-app-locally"></a>Exécuter et tester l’application localement
+
+1. Générez votre application Spring Boot avec Maven, puis exécutez-la.
+
+    ```shell
+    mvn clean package
+    mvn spring-boot:run
+    ```
+
+1. Ouvrez une fenêtre de navigateur, puis accédez à l’URL : `http://localhost:8080`.  Le message associé à votre clé s’affiche. 
+
+    Vous pouvez également utiliser *curl* pour tester votre application, par exemple : 
+    
+    ```cmd
+    curl -X GET http://localhost:8080/
+    ```
+
+1. Pour tester la configuration dynamique, ouvrez le portail Azure App Configuration associé à votre application. Sélectionnez l’**Explorateur de configurations**, et mettez à jour la valeur de votre clé affichée, par exemple :
+    | Clé | Valeur |
+    |---|---|
+    | application/config.message | Hello – Mis à jour |
+
+1. Actualisez la page du navigateur pour afficher le nouveau message.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,6 +1,6 @@
 ---
 title: Exemples Azure CLI - Utiliser une image de machine virtuelle personnalisée
-description: Ce script permet de créer un groupe de machines virtuelles identiques qui utilise une image de machine virtuelle personnalisée comme source pour les instances de machine virtuelle.
+description: Ce script Azure CLI permet de créer un groupe de machines virtuelles identiques qui utilise une image de machine virtuelle personnalisée comme source pour les instances de machines virtuelles.
 author: axayjo
 ms.author: akjosh
 ms.topic: sample
@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: imaging
 ms.date: 03/27/2018
 ms.reviewer: cynthn
-ms.custom: akjosh
-ms.openlocfilehash: 91673f945104bd7b26d21b11ec3b710bac9db9cb
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: akjosh, devx-track-azurecli
+ms.openlocfilehash: d5b7c2814bd6b4be5c0a2243cc61af3405054db4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83699908"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90526729"
 ---
 # <a name="create-a-virtual-machine-scale-set-from-a-custom-vm-image-with-the-azure-cli"></a>Créer un groupe de machines virtuelles identiques à partir d’une image de machine virtuelle personnalisée avec Azure CLI
 Ce script permet de créer un groupe de machines virtuelles identiques qui utilise une image de machine virtuelle personnalisée comme source pour les instances de machine virtuelle.
@@ -43,4 +43,4 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 | [az group delete](/cli/azure/ad/group) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure/overview).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure/overview).

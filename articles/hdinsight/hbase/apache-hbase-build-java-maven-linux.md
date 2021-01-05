@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,seodec18
+ms.topic: how-to
+ms.custom: hdinsightactive,seodec18, devx-track-java
 ms.date: 12/24/2019
-ms.openlocfilehash: 3e9b23ce450e45dfedcee8b20e09b1c2b52b6e68
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61b8aaf9ea61ebe85eac6708d7390c386dea2696
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75495788"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547909"
 ---
 # <a name="build-java-applications-for-apache-hbase"></a>Créer des applications Java pour Apache HBase
 
@@ -25,13 +25,13 @@ La procédure décrite dans ce document utilise [Apache Maven](https://maven.apa
 
 * Un cluster Apache HBase sur HDInsight. Consultez [Bien démarrer avec Apache HBase](./apache-hbase-tutorial-get-started-linux.md).
 
-* [Kit de développeur Java (JDK), version 8](https://aka.ms/azure-jdks).
+* [Kit de développeur Java (JDK), version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-* Si vous utilisez PowerShell, vous aurez besoin du [module AZ](https://docs.microsoft.com/powershell/azure/overview).
+* Si vous utilisez PowerShell, vous aurez besoin du [module AZ](/powershell/azure/).
 
 * Un éditeur de texte Cet article utilise Microsoft Notepad.
 
@@ -48,7 +48,7 @@ cd C:\HDI
 
 ## <a name="create-a-maven-project"></a>Création d’un projet Maven
 
-1. Entrez la commande suivante pour créer un projet Maven nommé **hbaseapp** :
+1. Entrez la commande suivante pour créer un projet Maven nommé **hbaseapp**  :
 
     ```cmd
     mvn archetype:generate -DgroupId=com.microsoft.examples -DartifactId=hbaseapp -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
@@ -95,7 +95,7 @@ Dans `pom.xml`, ajoutez le texte suivant dans la section `<dependencies>` :
 </dependency>
 ```  
 
-Cette section indique que le projet a besoin des composants **hbase-client** et **phoenix-core**. Au moment de la compilation, ces dépendances sont téléchargées à partir du référentiel Maven par défaut. Vous pouvez utiliser la [Recherche du référentiel central Maven](https://search.maven.org/artifact/org.apache.hbase/hbase-client/1.1.2/jar) pour en savoir plus sur cette dépendance.
+Cette section indique que le projet a besoin des composants **hbase-client** et **phoenix-core** . Au moment de la compilation, ces dépendances sont téléchargées à partir du référentiel Maven par défaut. Vous pouvez utiliser la [Recherche du référentiel central Maven](https://search.maven.org/artifact/org.apache.hbase/hbase-client/1.1.2/jar) pour en savoir plus sur cette dépendance.
 
 > [!IMPORTANT]  
 > Le numéro de version du client hbase doit correspondre à la version d’Apache HBase fournie avec votre cluster HDInsight. Utilisez le tableau suivant pour trouver le numéro de version correct.
@@ -425,12 +425,14 @@ Les étapes suivantes utilisent `scp` pour copier le fichier jar sur le nœud p
 
     Vous obtenez les résultats suivants :
 
-        Franklin Holtz - ID: 2
-        Franklin Holtz - franklin@contoso.com - ID: 2
-        Rae Schroeder - ID: 4
-        Rae Schroeder - rae@contoso.com - ID: 4
-        Gabriela Ingram - ID: 6
-        Gabriela Ingram - gabriela@contoso.com - ID: 6
+    ```console
+    Franklin Holtz - ID: 2
+    Franklin Holtz - franklin@contoso.com - ID: 2
+    Rae Schroeder - ID: 4
+    Rae Schroeder - rae@contoso.com - ID: 4
+    Gabriela Ingram - ID: 6
+    Gabriela Ingram - gabriela@contoso.com - ID: 6
+    ```
 
 5. Utilisez la commande suivante pour supprimer le tableau :
 
@@ -440,7 +442,7 @@ Les étapes suivantes utilisent `scp` pour copier le fichier jar sur le nœud p
 
 ## <a name="upload-the-jar-and-run-jobs-powershell"></a>Téléchargement du fichier JAR et exécution des travaux (PowerShell)
 
-Les étapes suivantes utilisent le [module AZ](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) Azure PowerShell pour charger le fichier jar dans le stockage par défaut de votre cluster Apache HBase. Des applets de commande HDInsight sont ensuite utilisés pour exécuter les exemples à distance.
+Les étapes suivantes utilisent le [module AZ](/powershell/azure/new-azureps-module-az) Azure PowerShell pour charger le fichier jar dans le stockage par défaut de votre cluster Apache HBase. Des applets de commande HDInsight sont ensuite utilisés pour exécuter les exemples à distance.
 
 1. Après avoir installé et configuré le module AZ, créez un fichier nommé `hbase-runner.psm1`. Utilisez le texte suivant comme contenu de ce fichier :
 
@@ -684,14 +686,16 @@ Les étapes suivantes utilisent le [module AZ](https://docs.microsoft.com/powers
 
     Cette commande utilise la classe `SearchByEmail` pour rechercher les lignes où la famille de colonnes `contactinformation` et la colonne `email` contiennent la chaîne `contoso.com`. Les résultats suivants doivent s'afficher :
 
-          Franklin Holtz - ID: 2
-          Franklin Holtz - franklin@contoso.com - ID: 2
-          Rae Schroeder - ID: 4
-          Rae Schroeder - rae@contoso.com - ID: 4
-          Gabriela Ingram - ID: 6
-          Gabriela Ingram - gabriela@contoso.com - ID: 6
+    ```output
+    Franklin Holtz - ID: 2
+    Franklin Holtz - franklin@contoso.com - ID: 2
+    Rae Schroeder - ID: 4
+    Rae Schroeder - rae@contoso.com - ID: 4
+    Gabriela Ingram - ID: 6
+    Gabriela Ingram - gabriela@contoso.com - ID: 6
+    ```
 
-    L’utilisation de **fabrikam.com** pour la valeur `-emailRegex` renvoie les utilisateurs dont le champ email contient **fabrikam.com**. Vous pouvez également utiliser des expressions régulières comme termes de recherche. Par exemple, **^r** renvoie les adresses e-mail qui commencent par la lettre « r ».
+    L’utilisation de **fabrikam.com** pour la valeur `-emailRegex` renvoie les utilisateurs dont le champ email contient **fabrikam.com** . Vous pouvez également utiliser des expressions régulières comme termes de recherche. Par exemple, **^r** renvoie les adresses e-mail qui commencent par la lettre « r ».
 
 7. Utilisez la commande suivante pour supprimer le tableau :
 

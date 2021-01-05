@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/23/2018
 ms.author: genli
-ms.openlocfilehash: 154160f9a3fbd485ee6383bf3d5ff1c291520a75
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6b5864d40d2a4d8f8d6cf404df29f909a73f04e2
+ms.sourcegitcommit: beacda0b2b4b3a415b16ac2f58ddfb03dd1a04cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71088522"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97832041"
 ---
 # <a name="remote-desktop-license-server-isnt-available-when-you-connect-to-an-azure-vm"></a>Le serveur de licences des services Bureau à distance n’est pas disponible lorsque vous vous connectez à une machine virtuelle Azure
 
@@ -87,7 +87,9 @@ Pour résoudre ce problème, [sauvegardez le disque du système d’exploitation
     2. Utilisez la commande suivante pour vérifier les stratégies et, au besoin, reconfigurez-les :
 
        ```
-        reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\Licensing Core" /v LicensingMode reg query "HKLM\SYSTEM\CurrentControlSet\Services\TermService\Parameters" /v SpecifiedLicenseServers
+        reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\Licensing Core" /v LicensingMode
+
+        reg query "HKLM\SYSTEM\CurrentControlSet\Services\TermService\Parameters" /v SpecifiedLicenseServers
        ```
 
         Si **LicensingMode** a une valeur autre que 4, par utilisateur, réglez-le sur 4 :
@@ -122,7 +124,7 @@ Pour résoudre ce problème, [sauvegardez le disque du système d’exploitation
        telnet <FQDN / IP License Server> 135
        ```
 
-3. S’il n’y a aucun serveur de licences des services Bureau à distance dans l’environnement et que vous en souhaitez un, vous pouvez [installer un service de rôle Gestionnaire de licences des services Bureau à distance](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc731765(v=ws.11)). [Configurer ensuite les licences des services Bureau à distance](https://techcommunity.microsoft.com/t5/Ask-The-Performance-Team/RD-Licensing-Configuration-on-Windows-Server-2012/ba-p/375383).
+3. S’il n’y a aucun serveur de licences des services Bureau à distance dans l’environnement et que vous en souhaitez un, vous pouvez [installer un service de rôle Gestionnaire de licences des services Bureau à distance](/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/cc731765(v=ws.11)). [Configurer ensuite les licences des services Bureau à distance](https://techcommunity.microsoft.com/t5/Ask-The-Performance-Team/RD-Licensing-Configuration-on-Windows-Server-2012/ba-p/375383).
 
 4. Si un serveur de licences des services Bureau à distance est configuré et intègre, assurez-vous qu’il est activé avec des licences d’accès client.
 

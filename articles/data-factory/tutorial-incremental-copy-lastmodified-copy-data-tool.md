@@ -11,13 +11,13 @@ ms.workload: data-services
 ms.devlang: na
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 3/18/2020
-ms.openlocfilehash: 3098ca0d3d5e41c298d3058ffa84fcf129648281
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 11/09/2020
+ms.openlocfilehash: f94975b91a332e480a1b570c29f02040a1047f75
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81399481"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94555411"
 ---
 # <a name="incrementally-copy-new-and-changed-files-based-on-lastmodifieddate-by-using-the-copy-data-tool"></a>Copier les fichiers nouveaux et modifiés selon LastModifiedDate à l’aide de l’outil Copier des données de façon incrémentielle
 
@@ -52,7 +52,7 @@ Préparez votre Stockage Blob pour le tutoriel :
 
 ## <a name="create-a-data-factory"></a>Créer une fabrique de données
 
-1. Dans le volet de gauche, sélectionnez **Créer une ressource**. Sélectionnez **Analytique** > **Data Factory** :
+1. Dans le volet de gauche, sélectionnez **Créer une ressource**. Sélectionnez **Intégration** > **Data Factory** :
 
    ![Sélection de Data Factory](./media/doc-common-process/new-azure-data-factory-menu.png)
 
@@ -150,7 +150,7 @@ Préparez votre Stockage Blob pour le tutoriel :
 
 10. Notez que l’onglet **Surveiller** sur la gauche est sélectionné automatiquement. L’application bascule vers l’onglet **Surveiller**. Vous voyez l’état du pipeline. Sélectionnez **Actualiser** pour actualiser la liste. Sélectionnez le lien qui se trouve sous **NOM DU PIPELINE** pour afficher les détails de l’exécution d’activité ou réexécuter le pipeline.
 
-    ![Actualisation de la liste et affichage des détails de l’exécution d’activité](./media/tutorial-incremental-copy-lastmodified-copy-data-tool/monitor-pipeline-runs1.png)
+    ![Actualisation de la liste et affichage des détails de l’exécution d’activité](./media/tutorial-incremental-copy-lastmodified-copy-data-tool/monitor-pipeline-runs-1.png)
 
 11. Il n’y a qu’une seule activité (l’activité de copie) dans le pipeline ; vous ne voyez donc qu’une seule entrée. Pour obtenir des détails sur l’opération de copie, sélectionnez le lien **Détails** (icône en forme de lunettes) dans la colonne **NOM DE L’ACTIVITÉ**. Pour plus d’informations sur les propriétés, consultez [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
 
@@ -165,8 +165,6 @@ Préparez votre Stockage Blob pour le tutoriel :
     ![Création du fichier file1.txt et chargement dans le conteneur source](./media/tutorial-incremental-copy-lastmodified-copy-data-tool/monitor-pipeline-runs3-1.png)
 
 13. Pour revenir à la vue **Exécutions de pipelines**, sélectionnez **Toutes les exécutions de pipelines** et attendez que le même pipeline soit à nouveau déclenché automatiquement.  
-
-    ![Sélection de Toutes les exécutions de pipelines](./media/tutorial-incremental-copy-lastmodified-copy-data-tool/monitor-pipeline-runs4.png)
 
 14. Une fois la deuxième exécution du pipeline terminée, suivez à nouveau la procédure précédente pour consulter les détails de l’exécution d’activité.  
 

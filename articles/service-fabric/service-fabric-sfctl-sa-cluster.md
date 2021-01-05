@@ -5,12 +5,12 @@ author: jeffj6123
 ms.topic: reference
 ms.date: 1/16/2020
 ms.author: jejarry
-ms.openlocfilehash: 233148c04fb1a9c6cf1d6c7042c12c54eebd0205
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e9f4b55945afc04e5c826b26632d68cb75e502f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76904925"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260265"
 ---
 # <a name="sfctl-sa-cluster"></a>sfctl sa-cluster
 Permet de gérer les clusters Service Fabric autonomes.
@@ -109,4 +109,4 @@ Permet d’obtenir les détails de l’état de mise à niveau de la configurati
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Configurez](service-fabric-cli.md) l’interface de ligne de commande Service Fabric.
-- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Découvrez comment utiliser l’interface de ligne de commande (CLI) Service Fabric à l’aide d’[exemples de scripts](./scripts/sfctl-upgrade-application.md).

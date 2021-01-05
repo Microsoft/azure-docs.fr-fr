@@ -12,12 +12,12 @@ ms.date: 04/24/2020
 ms.author: ryanwi
 ms.custom: aaddev
 ms.reviewer: jmprieur, saeeda, jesakowi, nacanuma
-ms.openlocfilehash: 9709cd3b6036b384fd9212a522c191d0695b9bb4
-ms.sourcegitcommit: fad3aaac5af8c1b3f2ec26f75a8f06e8692c94ed
+ms.openlocfilehash: b02329d624eda440230fb99e02e08c841c5580f2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82161722"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90705994"
 ---
 # <a name="microsoft-identity-platform-developer-glossary"></a>Glossaire du développeur de la plateforme d’identité Microsoft
 
@@ -117,7 +117,7 @@ Consultez [Informations de référence sur les jetons de la plateforme d’ident
 
 ## <a name="microsoft-identity-platform"></a>Plateforme d’identité Microsoft
 
-La plateforme d’identités Microsoft est une évolution de la plateforme de développeur et de service d’identité Azure Active Directory (Azure AD). Elle permet aux développeurs de générer des applications qui connectent toutes les identités Microsoft et obtiennent des jetons pour appeler Microsoft Graph, d’autres APIs Microsoft ou des API que des développeurs ont créées. C’est une plateforme complète qui se compose d’un service d’authentification, de bibliothèques, de fonctionnalités d’inscription et de configuration d’application, d’une documentation de développement exhaustive et d’exemples de code et autres contenus destinés aux développeurs. La plateforme d’identités Microsoft prend en charge les protocoles standard tels qu’OAuth 2.0 et OpenID Connect. Consultez [À propos de la plateforme d’identité Microsoft](about-microsoft-identity-platform.md) pour en savoir plus.
+La plateforme d’identités Microsoft est une évolution de la plateforme de développeur et de service d’identité Azure Active Directory (Azure AD). Elle permet aux développeurs de générer des applications qui connectent toutes les identités Microsoft et obtiennent des jetons pour appeler Microsoft Graph, d’autres APIs Microsoft ou des API que des développeurs ont créées. C’est une plateforme complète qui se compose d’un service d’authentification, de bibliothèques, de fonctionnalités d’inscription et de configuration d’application, d’une documentation de développement exhaustive et d’exemples de code et autres contenus destinés aux développeurs. La plateforme d’identités Microsoft prend en charge les protocoles standard tels qu’OAuth 2.0 et OpenID Connect.
 
 ## <a name="multi-tenant-application"></a>application mutualisée
 
@@ -154,7 +154,7 @@ Comme le définit [l’infrastructure d’autorisation OAuth2][OAuth2-Role-Def],
 
 Comme le définit l’[infrastructure d’autorisation OAuth2][OAuth2-Role-Def], serveur hébergeant des ressources protégées capable d’accepter et de répondre aux demandes de ressources protégées effectuées par les [applications clientes](#client-application) qui présentent un [jeton d’accès](#access-token). Également appelé serveur de ressources protégées ou application de ressources.
 
-Un serveur de ressources expose des API et applique l’accès à ses ressources protégées via des [étendues](#scopes) et des [rôles](#roles), en s’appuyant sur l’infrastructure d’autorisation OAuth 2.0. Citons par exemple l’[API Microsoft Graph][Microsoft-Graph], qui fournit un accès aux données du client Azure AD, et les API Office 365, qui fournissent un accès à des données telles que le courrier et le calendrier.
+Un serveur de ressources expose des API et applique l’accès à ses ressources protégées via des [étendues](#scopes) et des [rôles](#roles), en s’appuyant sur l’infrastructure d’autorisation OAuth 2.0. Citons, par exemple, l’[API Microsoft Graph][Microsoft-Graph] qui fournit un accès aux données du client Azure AD, et les API Microsoft 365 qui fournissent un accès à des données telles que le courrier et le calendrier.
 
 Tout comme une application cliente, la configuration d’identité d’une application de ressources est établie via [l’inscription](#application-registration) dans un client Azure AD, fournissant à la fois l’objet application et l’objet principal du service. Certaines API fournies par Microsoft, telles que l’API Microsoft Graph, proposent des principaux du service préinscrits mis à disposition dans tous les clients lors du provisionnement.
 
@@ -164,7 +164,7 @@ Comme les [étendues](#scopes), les rôles offrent au [serveur de ressources](#r
 
 Les rôles sont des chaînes définies par les ressources (par exemple, « Expense approver », « Read-only » ou « Directory.ReadWrite.All »), gérées dans le [portail Azure][AZURE-portal] via le [manifeste d’application](#application-manifest) de la ressource et stockées dans la [propriété appRoles][Graph-Sp-Resource] de cette dernière. Le portail Azure est également utilisé pour affecter des utilisateurs aux rôles « utilisateur » et pour configurer les [autorisations d’application](#permissions) du client, lui permettant d’accéder à un rôle « application ».
 
-Pour une présentation détaillée des rôles d’application exposés par l’API Microsoft Graph, consultez [Graph API Permission Scopes (Étendues des autorisations de l’API Graph)][Graph-Perm-Scopes]. Pour obtenir un exemple d’implémentation pas à pas, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources d’un abonnement Azure][AAD-RBAC].
+Pour une présentation détaillée des rôles d’application exposés par l’API Microsoft Graph, consultez [Graph API Permission Scopes (Étendues des autorisations de l’API Graph)][Graph-Perm-Scopes]. Pour obtenir un exemple d’implémentation pas à pas, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide du portail Azure][AAD-RBAC].
 
 ## <a name="scopes"></a>étendues
 
@@ -172,7 +172,7 @@ Comme les [rôles](#roles), les étendues offrent au [serveur de ressources](#re
 
 Les portées sont des chaînes définies par les ressources (par exemple, « Mail.Read » ou « Directory.ReadWrite.All »), gérées dans le [portail Azure][AZURE-portal] via le [manifeste d’application](#application-manifest) de la ressource et stockées dans la [propriété oauth2Permissions][Graph-Sp-Resource] de cette dernière. Le portail Azure est également utilisé pour configurer les [autorisations déléguées](#permissions) de l’application cliente, qui lui permettent d’accéder à une portée.
 
-Une convention d’affectation de noms recommandée consiste à utiliser le format « ressource.opération.contrainte ». Pour une présentation détaillée des étendues exposées par l’API Microsoft Graph, consultez [Graph API Permission Scopes (Étendues des autorisations de l’API Graph)][Graph-Perm-Scopes]. Pour les portées exposées par les services Office 365, consultez [Office 365 API permissions reference (Référence sur les autorisations des API Office 365)][O365-Perm-Ref].
+Une convention d’affectation de noms recommandée consiste à utiliser le format « ressource.opération.contrainte ». Pour une présentation détaillée des étendues exposées par l’API Microsoft Graph, consultez [Graph API Permission Scopes (Étendues des autorisations de l’API Graph)][Graph-Perm-Scopes]. Pour les étendues exposées par les services Microsoft 365, consultez [Référence des autorisations des API Microsoft 365][O365-Perm-Ref].
 
 ## <a name="security-token"></a>jeton de sécurité
 
@@ -202,7 +202,7 @@ Une instance d’un répertoire Azure AD est désignée sous le nom de client Az
 * l’authentification des comptes utilisateurs et des applications enregistrées
 * les points de terminaison REST requis pour prendre en charge différents protocoles, notamment OAuth2 et SAML, y compris le [point de terminaison d’autorisation](#authorization-endpoint), le [point de terminaison de jeton](#token-endpoint) et le point de terminaison « commun » utilisé par les [applications mutualisées](#multi-tenant-application).
 
-Les locataires Azure AD sont créés avec/associés à des abonnements Azure et Office 365 pendant l’inscription, fournissant des fonctionnalités de gestion des identités et des accès pour l’abonnement. Les administrateurs d’abonnement Azure peuvent également créer d’autres locataires Azure AD via le portail Azure. Pour plus d’informations sur les diverses méthodes permettant d’accéder à un locataire, consultez [Obtention d’un locataire Azure Active Directory][AAD-How-To-Tenant]. Pour plus d’informations sur la relation entre les abonnements et un client Azure AD, consultez [Association des abonnements Azure avec Azure Active Directory][AAD-How-Subscriptions-Assoc].
+Les locataires Azure AD sont créés/associés avec des abonnements Azure et Microsoft 365 pendant l’inscription, fournissant des fonctionnalités de gestion des identités et des accès pour l’abonnement. Les administrateurs d’abonnement Azure peuvent également créer d’autres locataires Azure AD via le portail Azure. Pour plus d’informations sur les diverses méthodes permettant d’accéder à un locataire, consultez [Obtention d’un locataire Azure Active Directory][AAD-How-To-Tenant]. Pour plus d’informations sur la relation entre les abonnements et un locataire Azure AD et pour obtenir des instructions sur l’association ou l’ajout d’un abonnement à un locataire Azure AD, consultez [Associer ou ajouter un abonnement Azure à votre locataire Azure Active Directory][AAD-How-Subscriptions-Assoc].
 
 ## <a name="token-endpoint"></a>point de terminaison de jeton
 
@@ -248,7 +248,7 @@ Utilisez la section des commentaires suivante pour fournir des commentaires et n
 [AAD-RBAC]: ../../role-based-access-control/role-assignments-portal.md
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32
 [Microsoft-Graph]: https://developer.microsoft.com/graph
-[O365-Perm-Ref]: https://msdn.microsoft.com/office/office365/howto/application-manifest
+[O365-Perm-Ref]: /graph/permissions-reference
 [OAuth2-Access-Token-Scopes]: https://tools.ietf.org/html/rfc6749#section-3.3
 [OAuth2-AuthZ-Endpoint]: https://tools.ietf.org/html/rfc6749#section-3.1
 [OAuth2-AuthZ-Grant-Types]: https://tools.ietf.org/html/rfc6749#section-1.3

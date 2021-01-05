@@ -2,18 +2,18 @@
 title: Configuration des pilotes GPU de série N Azure pour Linux
 description: Procédure de configuration des pilotes GPU NVIDIA pour les machines virtuelles série N exécutant Linux dans Azure
 services: virtual-machines-linux
-author: vikancha
+author: vikancha-MSFT
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 01/09/2019
 ms.author: vikancha
-ms.openlocfilehash: e4ee760acb441cdf70e588004d2f380ead07cd34
-ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+ms.openlocfilehash: 716a8853a2e2e0988cc50f5289f448d7a4adc9be
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83779356"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608705"
 ---
 # <a name="install-nvidia-gpu-drivers-on-n-series-vms-running-linux"></a>Installer les pilotes GPU NVIDIA sur les machines virtuelles série N exécutant Linux
 
@@ -21,7 +21,10 @@ Pour tirer parti des fonctionnalités GPU de machines virtuelles de la série N 
 
 Si vous choisissez d’installer manuellement les pilotes GPU NVIDIA, cet article indique les distributions prises en charge, les pilotes et les étapes d’installation et de vérification. Des informations de configuration manuelle du pilote sont également disponibles pour [les machines virtuelles Windows](../windows/n-series-driver-setup.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-Pour plus d’informations sur les spécifications, les capacités de stockage et les disques des machines virtuelles série N, consultez l’article [Tailles de machine virtuelle Linux GPU](sizes-gpu.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). 
+Pour plus d’informations sur les spécifications, les capacités de stockage et les disques des machines virtuelles série N, consultez l’article [Tailles de machine virtuelle Linux GPU](../sizes-gpu.md?toc=/azure/virtual-machines/linux/toc.json). 
+
+> [!NOTE]
+> Cet article contient des références au terme *liste noire*, un terme que Microsoft n’utilise plus. Lorsque le terme sera supprimé du logiciel, nous le supprimerons de cet article.
 
 [!INCLUDE [virtual-machines-n-series-linux-support](../../../includes/virtual-machines-n-series-linux-support.md)]
 
@@ -98,7 +101,9 @@ sudo reboot
   
    sudo reboot
 
-2. Install the latest [Linux Integration Services for Hyper-V and Azure](https://www.microsoft.com/download/details.aspx?id=55106).
+2. Install the latest [Linux Integration Services for Hyper-V and Azure](https://www.microsoft.com/download/details.aspx?id=55106). Check if LIS is required by verifying the results of lspci. If all GPU devices are listed as expected, installing LIS is not required.
+
+Skip this step if you plan to use CentOS 7.8(or higher) as LIS is no longer required for these versions.
 
    ```bash
    wget https://aka.ms/lis
@@ -161,6 +166,23 @@ Déployez des machines virtuelles de série N compatibles RDMA à partir de l’
   [!INCLUDE [virtual-machines-common-ubuntu-rdma](../../../includes/virtual-machines-common-ubuntu-rdma.md)]
 
 * **CentOS 7.4 HPC** - Les pilotes RDMA et Intel MPI 5.1 sont installés sur la machine virtuelle.
+
+* **HPC basé sur CentOS** - CentOS-HPC 7.6 et versions ultérieures (pour les références SKU où InfiniBand est pris en charge sur SR-IOV). Ces images ont des bibliothèques Mellanox OFED et MPI préinstallées.
+
+> [!NOTE]
+> Les cartes CX3 Pro sont prises en charge uniquement par le biais des versions LTS de Mellanox OFED. Utilisez la version LTS de Mellanox OFED (4.9-0.1.7.0) sur les machines virtuelles de la série N avec des cartes ConnectX3-Pro. Pour plus d’informations, consultez [Pilotes Linux](https://www.mellanox.com/products/infiniband-drivers/linux/mlnx_ofed).
+>
+> En outre, certaines des dernières images HPC de la Place de marché Azure ont Mellanox OFED 5.1 ou des versions ultérieures ; ces versions ne prennent pas en charge les cartes ConnectX3-Pro. Vérifiez la version de Mellanox OFED dans l’image HPC avant de l’utiliser sur des machines virtuelles avec des cartes ConnectX3-Pro.
+>
+> Les images suivantes sont les dernières images CentOS-HPC qui prennent en charge les cartes ConnectX3-Pro :
+>
+> - OpenLogic:CentOS-HPC:7.6:7.6.2020062900
+> - OpenLogic:CentOS-HPC:7_6gen2:7.6.2020062901
+> - OpenLogic:CentOS-HPC:7.7:7.7.2020062600
+> - OpenLogic:CentOS-HPC:7_7-gen2:7.7.2020062601
+> - OpenLogic:CentOS-HPC:8_1:8.1.2020062400
+> - OpenLogic:CentOS-HPC:8_1-gen2:8.1.2020062401
+>
 
 ## <a name="install-grid-drivers-on-nv-or-nvv3-series-vms"></a>Installer les pilotes GRID sur les machines virtuelles de série NV ou NVv3
 
@@ -247,7 +269,7 @@ Pour installer les pilotes GRID NVIDIA sur les machines virtuelles de série NV 
    sudo yum install hyperv-daemons
    ```
 
-2. Désactivez le pilote du noyau Nouveau, qui n’est pas compatible avec le pilote NVIDIA. (Utilisez uniquement le pilote NVIDIA sur les machines virtuelles NV ou NVv2.) Pour ce faire, créez un fichier `/etc/modprobe.d` nommé `nouveau.conf` avec le contenu suivant :
+2. Désactivez le pilote du noyau Nouveau, qui n’est pas compatible avec le pilote NVIDIA. (Utilisez uniquement le pilote NVIDIA sur les machines virtuelles NV ou NV3.) Pour ce faire, créez un fichier `/etc/modprobe.d` nommé `nouveau.conf` avec le contenu suivant :
 
    ```
    blacklist nouveau
@@ -255,7 +277,9 @@ Pour installer les pilotes GRID NVIDIA sur les machines virtuelles de série NV 
    blacklist lbm-nouveau
    ```
  
-3. Redémarrez la machine virtuelle, reconnectez-vous et installez les derniers composants [Linux Integration Services pour Hyper-V et Azure](https://www.microsoft.com/download/details.aspx?id=55106).
+3. Redémarrez la machine virtuelle, reconnectez-vous et installez les derniers composants [Linux Integration Services pour Hyper-V et Azure](https://www.microsoft.com/download/details.aspx?id=55106). Vérifiez si LIS est requis en vérifiant les résultats d’lspci. Si tous les périphériques GPU sont répertoriés comme prévu, il n’est pas nécessaire d’installer LIS. 
+
+Ignorez cette étape si vous utilisez CentOS/RHEL 7.8 et une version ultérieure.
  
    ```bash
    wget https://aka.ms/lis
@@ -310,7 +334,7 @@ Pour interroger l’état de l’appareil GPU, connectez-vous par SSH à la mach
 
 Si le pilote est installé, vous obtenez un résultat qui ressemble à celui indiqué. Notez que **GPU-Util** affiche 0 %, sauf si vous exécutez actuellement une charge de travail GPU sur la machine virtuelle. La version de votre pilote et vos détails de GPU peuvent différer de ceux indiqués.
 
-![État de l’appareil NVIDIA](./media/n-series-driver-setup/smi-nv.png)
+![Capture d’écran montrant la sortie lors de l’interrogation de l’état de l’appareil GPU.](./media/n-series-driver-setup/smi-nv.png)
  
 
 ### <a name="x11-server"></a>Serveur X11
@@ -355,7 +379,8 @@ Ensuite, créez une entrée pour votre script de mise à jour dans `/etc/rc.d/rc
 ## <a name="troubleshooting"></a>Dépannage
 
 * Vous pouvez définir le mode de persistance à l’aide de `nvidia-smi`. De cette façon, la sortie de la commande est plus rapide quand vous avez besoin d’effectuer une requête sur les cartes. Pour définir le mode de persistance, exécutez `nvidia-smi -pm 1`. Notez que si la machine virtuelle est redémarrée, le paramètre du mode n’est pas conservé. Vous pouvez toujours définir le paramètre du mode dans un script à exécuter au démarrage.
-* Si vous avez mis à jour les pilotes NVIDIA CUDA vers la dernière version et constatez que le connectivité RDMA ne fonctionne plus, [réinstallez les pilotes RDMA](https://docs.microsoft.com/azure/virtual-machines/linux/n-series-driver-setup#rdma-network-connectivity) pour rétablir cette connectivité. 
+* Si vous avez mis à jour les pilotes NVIDIA CUDA vers la dernière version et constatez que le connectivité RDMA ne fonctionne plus, [réinstallez les pilotes RDMA](#rdma-network-connectivity) pour rétablir cette connectivité. 
+* Si une certaine version du système d’exploitation CentOS/RHEL (ou du noyau) n’est pas prise en charge pour LIS, une erreur « Version de noyau non prise en charge » s’affiche. Signalez cette erreur en même temps que les versions du système d’exploitation et du noyau.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,20 +1,17 @@
 ---
 title: Gestion d’Azure Data Lake Analytics à l’aide du kit de développement logiciel (SDK) Azure pour Node.js
 description: Cet article décrit comment utiliser le kit de développement logiciel (SDK) Azure pour Node.js pour gérer des comptes Azure Data Lake Analytics, des sources de données, des travaux et des utilisateurs.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: saveenr
-ms.author: saveenr
-ms.reviewer: jasonwhowell
-ms.assetid: 9de1bcf4-b15b-4d0b-9284-8889ecf0c438
-ms.topic: conceptual
+ms.reviewer: jasonh
+ms.topic: how-to
 ms.date: 12/05/2016
-ms.openlocfilehash: 21d59f6543df7fe9d1fad47a006260bff9c93e2b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: ca1c865b31739e7163b0db26cb666a8a42edbaa2
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76988054"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92218457"
 ---
 # <a name="manage-azure-data-lake-analytics-using-azure-sdk-for-nodejs"></a>Gestion d’Azure Data Lake Analytics à l’aide du kit de développement logiciel (SDK) Azure pour Node.js
 [!INCLUDE [manage-selector](../../includes/data-lake-analytics-selector-manage.md)]

@@ -7,19 +7,20 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: ralphe
-ms.openlocfilehash: 92fc7aeec87015a9ddbe4e52f870334582e28c14
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a8aa2fc0b5ba76a92a0aa0234635dadee5a00f28
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80671077"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91377268"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, assurez-vous de :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](../../../../get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](../../../../quickstarts/setup-platform.md?tabs=dotnet&pivots=programming-language-csharp)
 
 ## <a name="add-sample-code"></a>Ajouter un exemple de code
@@ -201,7 +202,7 @@ Avant de commencer, assurez-vous de :
 
 1. Dans le même fichier, remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement Cognitive Speech.
 
-1. Remplacez la chaîne `YourServiceRegion` par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement (par exemple, `westus` pour l’abonnement à un essai gratuit).
+1. Remplacez la chaîne `YourServiceRegion` par la [région](~/articles/cognitive-services/Speech-Service/regions.md) associée à votre abonnement.
 
 1. Dans la barre de menus, choisissez **Fichier** > **Enregistrer tout**.
 

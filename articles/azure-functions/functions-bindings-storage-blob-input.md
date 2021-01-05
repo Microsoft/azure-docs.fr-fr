@@ -1,16 +1,17 @@
 ---
 title: Liaison d’entrée Stockage Blob Azure pour Azure Functions
-description: Découvrez comment fournir des données Stockage Blob Azure à une fonction Azure.
+description: Découvrez comment fournir des données de liaison d’entrée de Stockage Blob Azure à une fonction Azure.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/13/2020
 ms.author: cshoe
-ms.openlocfilehash: 33db9a8d86e02db2076cdb85170d466697930b96
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: 1a46c272ee2f7aa2d6621e3dc2db81605ba0363f
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80633882"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94833110"
 ---
 # <a name="azure-blob-storage-input-binding-for-azure-functions"></a>Liaison d’entrée Stockage Blob Azure pour Azure Functions
 
@@ -174,6 +175,15 @@ Dans le fichier *function.json*, la propriété de métadonnées `queueTrigger` 
 
 La section [configuration](#configuration) décrit ces propriétés.
 
+La propriété `dataType` détermine la liaison utilisée. Les valeurs suivantes sont disponibles pour prendre en charge différentes stratégies de liaison :
+
+| Valeur de liaison | Default | Description | Exemple |
+| --- | --- | --- | --- |
+| `undefined` | O | Utilise une liaison riche | `def main(input: func.InputStream)` |
+| `string` | N | Utilise une liaison générique et effectue un cast du type d’entrée en tant que `string` | `def main(input: str)` |
+| `binary` | N | Utilise une liaison générique et effectue un cast de l’objet blob d’entrée en tant qu’objet Python `bytes` | `def main(input: bytes)` |
+
+
 Voici le code Python :
 
 ```python
@@ -308,6 +318,7 @@ Le tableau suivant décrit les propriétés de configuration de liaison que vous
 |**name** | n/a | Nom de la variable qui représente l’objet blob dans le code de la fonction.|
 |**path** |**BlobPath** | Chemin de l’objet blob. |
 |**connection** |**Connection**| Nom d’un paramètre d’application comportant la [chaîne de connexion de stockage](../storage/common/storage-configure-connection-string.md) à utiliser pour cette liaison. Si le nom du paramètre d’application commence par « AzureWebJobs », vous ne pouvez spécifier que le reste du nom ici. Par exemple, si vous définissez `connection` sur « MyStorage », le runtime Functions recherche un paramètre d’application nommé « AzureWebJobsMyStorage ». Si vous laissez `connection` vide, le runtime Functions utilise la chaîne de connexion de stockage par défaut dans le paramètre d’application nommé `AzureWebJobsStorage`.<br><br>La chaîne de connexion doit être pour un compte de stockage à usage général, et non pour un [compte de stockage d’objets blob uniquement](../storage/common/storage-account-overview.md#types-of-storage-accounts).|
+|**dataType**| n/a | Pour les langages dont le type est dynamique, spécifie le type de données sous-jacent. Les valeurs possibles sont `string`, `binary` ou `stream`. Pour plus d’informations, reportez-vous aux [concepts des déclencheurs et liaisons](functions-triggers-bindings.md?tabs=python#trigger-and-binding-definitions). |
 |n/a | **y accéder** | Indique si vous lirez ou écrirez. |
 
 [!INCLUDE [app settings to local.settings.json](../../includes/functions-app-settings-local.md)]
@@ -328,7 +339,7 @@ Accédez aux données des objets blob à l'aide de `context.bindings.<NAME>`, sa
 
 # <a name="python"></a>[Python](#tab/python)
 
-Accédez aux données blob via le paramètre de type [InputStream](https://docs.microsoft.com/python/api/azure-functions/azure.functions.inputstream?view=azure-python). Reportez-vous à l’[exemple d’entrée](#example) pour plus d'informations.
+Accédez aux données blob via le paramètre de type [InputStream](/python/api/azure-functions/azure.functions.inputstream?view=azure-python). Reportez-vous à l’[exemple d’entrée](#example) pour plus d'informations.
 
 # <a name="java"></a>[Java](#tab/java)
 

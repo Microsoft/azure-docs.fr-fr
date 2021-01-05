@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à FloQast | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et FloQast.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 013cb57d-567c-44d0-a119-e6ba6e607153
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/10/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 92572d2f829f1f3a1727c7f349aa25f7113ec104
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ed35a0b6e6f2ad620b528283a332507845e4f00d
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72792407"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588265"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-floqast"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à FloQast
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer FloQast à Azure AD (A
 * Permettre à vos utilisateurs de se connecter automatiquement à FloQast avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -56,7 +51,6 @@ Pour configurer l’intégration de FloQast à Azure AD, vous devez ajouter Flo
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
 1. Dans la section **Ajouter à partir de la galerie**, tapez **FloQast** dans la zone de recherche.
 1. Sélectionnez **FloQast** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
-
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-floqast"></a>Configurer et tester l’authentification unique Azure AD pour FloQast
 
@@ -97,9 +91,9 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     | Nom | Attribut source|
     | ------------- | -------------- |
-    | FirstName           | user.givenname |
-    | LastName            | user.surname |
-    | E-mail               | user.mail    |
+    | FirstName | user.givenname |
+    | LastName | user.surname |
+    | E-mail | user.mail    |
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -109,11 +103,11 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     ![Modifier le certificat de signature SAML](common/edit-certificate.png)
 
-    a. Sélectionnez **Signer la réponse et l’assertion SAML** dans **Option de signature**.
-    
-    b. Cliquez sur **Enregistrer**.
+    1. Sélectionnez **Signer la réponse et l’assertion SAML** dans **Option de signature**.
 
-    ![Option de signature Communifire](./media/floqast-tutorial/tutorial-floqast-signing-option.png)
+    1. Cliquez sur **Enregistrer**.
+
+        ![Option de signature Communifire](./media/floqast-tutorial/tutorial-floqast-signing-option.png)
 
 1. Dans la section **Configurer FloQast**, copiez la ou les URL appropriées en fonction de vos besoins.
 
@@ -155,20 +149,20 @@ Pour configurer l’authentification unique côté **FloQast**, vous devez envoy
 
 ### <a name="create-floqast-test-user"></a>Créer un utilisateur de test FloQast
 
-Dans cette section, vous allez créer un utilisateur appelé B.Simon dans FloQast. Collaborez avec l’ [équipe du support technique FloQast](mailto:support@floqast.com) pour ajouter des utilisateurs à la plateforme FloQast. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé B.Simon dans FloQast. Collaborez avec l’[équipe du support technique FloQast](mailto:support@floqast.com) pour ajouter des utilisateurs dans la plate-forme FloQast. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette FloQast dans le volet d’accès, vous devez être connecté automatiquement à l’application FloQast pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette FloQast dans le volet d’accès, vous devez être connecté automatiquement à l’application FloQast pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer FloQast avec Azure AD](https://aad.portal.azure.com/)

@@ -1,26 +1,15 @@
 ---
 title: Azure Event Hubs - Envoyer/recevoir des événements avec .NET Framework
 description: 'Démarrage rapide : Cet article décrit la procédure de création d’une application .NET Framework qui envoie des événements à Azure Event Hubs.'
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: c4974bd3-2a79-48a1-aa3b-8ee2d6655b28
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.custom: seodec18
-ms.date: 12/20/2019
-ms.author: shvija
-ms.openlocfilehash: 385430d993afe8b7a0ad57991d3c93eebd46ddcb
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: ea3ad7e90a947269833a03a4cacf3d4fe76a6620
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79216047"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91334274"
 ---
 # <a name="quickstart-send-events-to-or-receive-events-from-azure-event-hubs-using-net-framework"></a>Démarrage rapide : Envoyer vers ou recevoir des événements d’Azure Event Hubs avec .NET Framework
 Azure Event Hubs est une plateforme de diffusion de données volumineuses et un service d’ingestion d’événements, capable de recevoir et de traiter des millions d’événements par seconde. Les concentrateurs d’événements peuvent traiter et stocker des événements, des données ou la télémétrie produits par des logiciels et appareils distribués. Les données envoyées à un concentrateur d’événements peuvent être transformées et stockées à l’aide d’adaptateurs de traitement par lot/stockage ou d’un fournisseur d’analyse en temps réel. Pour une présentation détaillée d’Event Hubs, consultez [Vue d’ensemble d’Event Hubs](event-hubs-about.md) et [Fonctionnalités d’Event Hubs](event-hubs-features.md).
@@ -40,7 +29,7 @@ Cette section vous montre comment créer une application console .NET Framework 
 
 Dans Visual Studio, créez un projet d'application de bureau Visual C# à l'aide du modèle de projet d' **application de console** . Nommez le projet **Sender**.
    
-![Création d’une application de console](./media/event-hubs-dotnet-framework-getstarted-send/create-sender-csharp1.png)
+![Capture d’écran montrant la fenêtre « Nouveau projet » avec « Application console (.NET Framework) » sélectionnée, le nom de projet « expéditeur » et le bouton « OK » en surbrillance.](./media/event-hubs-dotnet-framework-getstarted-send/create-sender-csharp1.png)
 
 ### <a name="add-the-event-hubs-nuget-package"></a>Ajout du package NuGet Event Hubs
 

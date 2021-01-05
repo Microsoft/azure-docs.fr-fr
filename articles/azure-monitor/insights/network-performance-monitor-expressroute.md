@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: abshamsft
 ms.author: absha
 ms.date: 11/27/2018
-ms.openlocfilehash: 6ac610d7dcf9849b6b439741957684867b9d01aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a9f268e5080a5c04c5cdb4767f2db5fd2d77cd3c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77660748"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87326152"
 ---
 # <a name="expressroute-monitor"></a>Moniteur ExpressRoute
 
@@ -140,4 +140,5 @@ Vous pouvez afficher les codes de notification et définir des alertes avec **Lo
  
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Rechercher dans les journaux d’activité](../../azure-monitor/log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+[Rechercher dans les journaux d’activité](../log-query/log-query-overview.md) pour afficher des enregistrements de données détaillées sur les performances réseau.
+

@@ -8,11 +8,9 @@
   items:
     - name: Exiger l’acceptation des conditions d’utilisation
       href: require-tou.md
-    - name: Bloquer l’accès lorsqu’un risque de session est détecté
-      href: app-sign-in-risk.md
 - name: Tutoriels
   items:
-    - name: Exiger l’utilisation d’Azure Multi-Factor Authentication
+    - name: "Demander l’authentification multifacteur Azure\_AD"
       href: ../authentication/tutorial-enable-azure-mfa.md?toc=/azure/active-directory/conditional-access/toc.json&bc=/azure/active-directory/conditional-access/breadcrumb/toc.json
 - name: Concepts
   expanded: false
@@ -35,8 +33,6 @@
           href: concept-conditional-access-grant.md
         - name: session
           href: concept-conditional-access-session.md
-    - name: Insights et rapports
-      href: howto-conditional-access-insights-reporting.md
     - name: Mode Rapport uniquement
       href: concept-conditional-access-report-only.md
     - name: Dépendances de services
@@ -45,19 +41,19 @@
       href: location-condition.md
     - name: Outil de simulation
       href: what-if-tool.md
+    - name: Évaluation de l’accès continu
+      href: concept-continuous-access-evaluation.md
     - name: Contrôles personnalisés
       href: controls.md
     - name: Migrations de stratégies classiques
       href: policy-migration.md
-    - name: Stratégies de protection de la base de référence
-      href: concept-baseline-protection.md
 - name: Guides pratiques
   expanded: true
   items:
     - name: Planifier votre déploiement d’accès conditionnel
       href: plan-conditional-access.md
-    - name: Meilleures pratiques
-      href: best-practices.md
+    - name: API d’accès conditionnel
+      href: howto-conditional-access-apis.md
     - name: Stratégies d’accès conditionnel courantes
       items:
         - name: Bloquer l’authentification héritée
@@ -68,8 +64,10 @@
           href: howto-conditional-access-policy-azure-management.md
         - name: Exiger MFA pour tous les utilisateurs
           href: howto-conditional-access-policy-all-users-mfa.md
-        - name: Accès conditionnel basé sur les risques
+        - name: Accès conditionnel basé sur les risques de connexion
           href: howto-conditional-access-policy-risk.md
+        - name: Accès conditionnel basé sur les risques d’utilisateur
+          href: howto-conditional-access-policy-risk-user.md
         - name: Sécuriser l’inscription des informations de sécurité
           href: howto-conditional-access-policy-registration.md
         - name: Bloquer l’accès par emplacement
@@ -80,6 +78,8 @@
           href: howto-conditional-access-policy-block-access.md
     - name: Bloquer l’authentification héritée
       href: block-legacy-authentication.md
+    - name: Configurer le mode rapport seul
+      href: howto-conditional-access-insights-reporting.md
     - name: Exiger des applications client approuvées
       href: app-based-conditional-access.md
     - name: Exiger une stratégie de protection des applications
@@ -90,12 +90,8 @@
       href: untrusted-networks.md
     - name: Exiger des conditions d’utilisation
       href: terms-of-use.md
-    - name: Configurer le mode Rapport uniquement
-      href: howto-conditional-access-report-only.md
     - name: Contrôles de la fréquence des connexions et de la persistance du navigateur
       href: howto-conditional-access-session-lifetime.md
-    - name: Migrer les stratégies classiques
-      href: policy-migration-mfa.md
     - name: Dépannage
       items:
         - name: Résoudre les problèmes de connexion
@@ -104,12 +100,26 @@
           href: troubleshoot-conditional-access-what-if.md
         - name: Questions fréquentes (FAQ)
           href: faqs.md
+    - name: Migrer les stratégies classiques
+      href: policy-migration-mfa.md
+- name: Informations de référence
+  items:
+    - name: API Graph Bêta
+      items:
+        - name: API conditionalAccessPolicy
+          href: /graph/api/resources/conditionalaccesspolicy?view=graph-rest-beta
+        - name: API namedLocation
+          href: /graph/api/resources/namedlocation?view=graph-rest-beta
+        - name: API countryNamedLocation
+          href: /graph/api/resources/countrynamedlocation?view=graph-rest-beta
+        - name: API ipNamedLocation
+          href: /graph/api/resources/ipnamedlocation?view=graph-rest-beta
 - name: Ressources
   items:
     - name: Forum de commentaires Azure
       href: 'https://feedback.azure.com/forums/169401-azure-active-directory'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-active-directory.html'
+      href: /answers/topics/azure-active-directory.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/active-directory/'
     - name: Mises à jour de service

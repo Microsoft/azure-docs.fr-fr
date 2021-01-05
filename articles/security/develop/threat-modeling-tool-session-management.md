@@ -1,6 +1,6 @@
 ---
 title: Gestion des sessions - Outil Microsoft de modélisation des menaces - Azure | Microsoft Docs
-description: Mesures de correction des menaces exposées dans l’outil de modélisation des menaces
+description: En savoir plus sur l’atténuation des menaces exposées dans l’outil Threat Modeling Tool, possible grâce à la gestion des sessions. Voir les informations sur l’atténuation et les exemples de code.
 services: security
 documentationcenter: na
 author: jegeib
@@ -15,19 +15,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/07/2017
 ms.author: jegeib
-ms.custom: has-adal-ref
-ms.openlocfilehash: 7ddc8c3016487ce56bc1a54d74aa94064cef24e4
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: has-adal-ref, devx-track-js, devx-track-csharp
+ms.openlocfilehash: a1f4d4a3bb78da82753d651e1a73cf244096d5df
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198876"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94518099"
 ---
 # <a name="security-frame-session-management"></a>Infrastructure de sécurité : Gestion des sessions
 | Produit/Service | Article |
 | --------------- | ------- |
 | **Azure AD**    | <ul><li>[Implémenter une déconnexion appropriée à l’aide de méthodes ADAL lors de l’utilisation d’Azure AD](#logout-adal)</li></ul> |
-| Appareil IoT | <ul><li>[Utiliser des durées de vie limitées pour les jetons SaS générés](#finite-tokens)</li></ul> |
+| **Appareil IoT** | <ul><li>[Utiliser des durées de vie limitées pour les jetons SaS générés](#finite-tokens)</li></ul> |
 | **Azure Document DB** | <ul><li>[Utiliser des durées de vie de jeton minimales pour les jetons de ressource générés](#resource-tokens)</li></ul> |
 | **ADFS** | <ul><li>[Implémenter une déconnexion appropriée à l’aide de méthodes WsFederation lors de l’utilisation d’ADFS](#wsfederation-logout)</li></ul> |
 | **Serveur d’identité** | <ul><li>[Implémenter une déconnexion appropriée lors de l’utilisation d’IdentityServer](#proper-logout)</li></ul> |
@@ -50,7 +50,7 @@ ms.locfileid: "83198876"
 HttpContext.GetOwinContext().Authentication.SignOut(OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType)
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Il est également nécessaire de détruire la session de l’utilisateur en appelant la méthode Session.Abandon(). La méthode ci-après présente une implémentation sécurisée de la déconnexion d’un utilisateur :
 ```csharp
     [HttpPost]
@@ -102,7 +102,7 @@ Il est également nécessaire de détruire la session de l’utilisateur en appe
 | **Informations de référence**              | N/A  |
 | **Étapes** | Si l’application s’appuie sur un jeton STS (service d’émission de jeton de sécurité) émis par les services ADFS (Active Directory Federation Services), le gestionnaire d’événements de déconnexion doit appeler la méthode WSFederationAuthenticationModule.FederatedSignOut() pour déconnecter l’utilisateur. En outre, la session actuelle doit être détruite, et la valeur de jeton de session doit être réinitialisée et annulée.|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 ```csharp
         [HttpPost, ValidateAntiForgeryToken]
         [Authorization]
@@ -159,10 +159,10 @@ Il est également nécessaire de détruire la session de l’utilisateur en appe
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | EnvironmentType - OnPrem |
-| **Informations de référence**              | [httpCookies, élément (Schéma des paramètres ASP.NET)](https://msdn.microsoft.com/library/ms228262(v=vs.100).aspx), [HttpCookie.Secure Property (Propriété HttpCookie.Secure)](https://msdn.microsoft.com/library/system.web.httpcookie.secure.aspx) |
+| **Informations de référence**              | [httpCookies, élément (Schéma des paramètres ASP.NET)](/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)), [HttpCookie.Secure Property (Propriété HttpCookie.Secure)](/dotnet/api/system.web.httpcookie.secure) |
 | **Étapes** | Normalement, les cookies sont uniquement accessibles au domaine auquel ils ont été étendus. Malheureusement, la définition du terme « domaine » n’inclut pas le protocole, de sorte que les cookies créés par le biais du protocole HTTPS sont accessibles par l’intermédiaire de HTTP. L’attribut « secure » indique donc au navigateur que le cookie doit uniquement être accessible via HTTPS. Assurez-vous que tous les cookies définis sur HTTPS utilisent l’attribut **secure**. Il est possible d’appliquer cette exigence dans le fichier web.config en définissant l’attribut requireSSL sur la valeur true. Cette approche est recommandée, car elle appliquera l’attribut **secure** à tous les cookies actuels et futurs sans nécessiter aucune modification de code supplémentaire.|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 ```csharp
 <configuration>
   <system.web>
@@ -181,7 +181,7 @@ Le paramètre est appliqué même en cas d’utilisation du protocole HTTP pour 
 | **Informations de référence**              | N/A  |
 | **Étapes** | Lorsque l’application web constitue la partie de confiance et que le fournisseur d’identité est le serveur ADFS, il est possible de configurer l’attribut secure du jeton FedAuth en définissant l’élément requireSSL sur la valeur True dans la section `system.identityModel.services` du fichier web.config :|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 ```csharp
   <system.identityModel.services>
     <federationConfiguration>
@@ -203,7 +203,7 @@ Le paramètre est appliqué même en cas d’utilisation du protocole HTTP pour 
 | **Informations de référence**              | [Secure Cookie Attribute (Attribut de cookie sécurisé)](https://en.wikipedia.org/wiki/HTTP_cookie#Secure_cookie) |
 | **Étapes** | Pour atténuer les risques de divulgation d’informations découlant d’une attaque par exécution de scripts intersites (XSS), le nouvel attribut httpOnly a été introduit pour les cookies et est pris en charge par tous les principaux navigateurs. L’attribut indique qu’un cookie n’est pas accessible par le biais d’un script. En utilisant des cookies HttpOnly, une application web réduit les risques que des informations sensibles contenues dans le cookie soient volées par l’intermédiaire d’un script et envoyées au site web d’un attaquant. |
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Toutes les applications basées sur HTTP qui utilisent des cookies doivent spécifier l’attribut HttpOnly dans la définition des cookies en implémentant la configuration suivante dans le fichier web.config :
 ```XML
 <system.web>
@@ -221,10 +221,10 @@ Toutes les applications basées sur HTTP qui utilisent des cookies doivent spéc
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Web Forms |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [FormsAuthentication.RequireSSL Property (Propriété FormsAuthentication.RequireSSL)](https://msdn.microsoft.com/library/system.web.security.formsauthentication.requiressl.aspx) |
+| **Informations de référence**              | [FormsAuthentication.RequireSSL Property (Propriété FormsAuthentication.RequireSSL)](/dotnet/api/system.web.security.formsauthentication.requiressl) |
 | **Étapes** | La valeur de propriété RequireSSL est définie dans le fichier de configuration d’une application ASP.NET à l’aide de l’attribut requireSSL de l’élément de configuration. Dans le fichier web.config de votre application ASP.NET, vous pouvez définir l’attribut requireSSL afin de spécifier si TLS (Transport Layer Security), anciennement appelé SSL (Secure Sockets Layer), est requis pour renvoyer le cookie d’authentification par formulaire au serveur.|
 
-### <a name="example"></a> Exemple 
+### <a name="example"></a>Exemple 
 L’exemple de code ci-après définit l’attribut requireSSL dans le fichier web.config.
 ```XML
 <authentication mode="Forms">
@@ -238,10 +238,10 @@ L’exemple de code ci-après définit l’attribut requireSSL dans le fichier w
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | MVC5 |
 | **Attributs**              | EnvironmentType - OnPrem |
-| **Informations de référence**              | [Windows Identity Foundation (WIF) Configuration – Part II (Configuration de Windows Identity Foundation (WIF) - Partie II)](https://blogs.msdn.microsoft.com/alikl/2011/02/01/windows-identity-foundation-wif-configuration-part-ii-cookiehandler-chunkedcookiehandler-customcookiehandler/) |
+| **Informations de référence**              | [Windows Identity Foundation (WIF) Configuration – Part II (Configuration de Windows Identity Foundation (WIF) - Partie II)](/archive/blogs/alikl/windows-identity-foundation-wif-configuration-part-ii-cookiehandler-chunkedcookiehandler-customcookiehandler) |
 | **Étapes** | Pour définir l’attribut httpOnly pour les cookies FedAuth, définissez l’attribut hideFromCsript sur la valeur True. |
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Le code ci-après présente la configuration appropriée :
 ```XML
 <federatedAuthentication>
@@ -291,7 +291,7 @@ Le code ci-après présente la configuration appropriée :
 </form>
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Au même moment, Html.AntiForgeryToken() fournit au visiteur un cookie appelé __RequestVerificationToken, présentant la même valeur que la valeur masquée aléatoire indiquée ci-dessus. Ensuite, pour valider une publication de formulaire entrante, ajoutez le filtre [ValidateAntiForgeryToken] à la méthode d’action cible. Par exemple :
 ```
 [ValidateAntiForgeryToken]
@@ -305,7 +305,7 @@ Un filtre d’autorisation qui vérifie les éléments suivants :
 * La demande entrante comporte une entrée `Request.Form` appelée __RequestVerificationToken
 * Ce cookie et ces valeurs `Request.Form` correspondent. Si tout va bien, la demande s’exécute normalement. Dans le cas contraire, un échec d’autorisation survient avec le message « Un jeton anti-contrefaçon requis n’a pas été fourni ou n’est pas valide ». 
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Anti-CSRF et AJAX : le jeton de formulaire peut se révéler problématique pour les requêtes AJAX, car une requête AJAX risque d’envoyer des données JSON, et non des données de formulaire HTML. L’une des solutions consiste à envoyer les jetons dans un en-tête HTTP personnalisé. Le code ci-après utilise la syntaxe Razor pour générer les jetons, puis ajoute les jetons à une demande AJAX. 
 ```csharp
 <script>
@@ -330,7 +330,7 @@ Anti-CSRF et AJAX : le jeton de formulaire peut se révéler problématique pou
 </script>
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Lorsque vous traitez la demande, extrayez les jetons de l’en-tête de la demande. Ensuite, appelez la méthode AntiForgery.Validate pour valider les jetons. Si les jetons ne sont pas valides, la méthode Validate lève une exception.
 ```csharp
 void ValidateRequestHeader(HttpRequestMessage request)
@@ -358,10 +358,10 @@ void ValidateRequestHeader(HttpRequestMessage request)
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Web Forms |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Utilisation des fonctionnalités intégrées ASP.NET pour repousser les attaques Web](https://msdn.microsoft.com/library/ms972969.aspx#securitybarriers_topic2) |
+| **Informations de référence**              | [Utilisation des fonctionnalités intégrées ASP.NET pour repousser les attaques Web](/previous-versions/dotnet/articles/ms972969(v=msdn.10)#securitybarriers_topic2) |
 | **Étapes** | Il est possible de prévenir les attaques CSRF dans les applications reposant sur WebForm en définissant l’élément ViewStateUserKey sur une chaîne aléatoire qui varie selon chaque utilisateur (identifiant utilisateur ou, mieux encore, identifiant de session). Pour un certain nombre de raisons techniques et sociales, l’identifiant de session constitue un bien meilleur choix, car ce type d’identifiant est imprévisible, arrive à expiration et varie selon chaque utilisateur.|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Voici le code qui doit apparaître dans toutes vos pages :
 ```csharp
 void Page_Init (object sender, EventArgs e) {
@@ -378,10 +378,10 @@ void Page_Init (object sender, EventArgs e) {
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [HttpSessionState.Timeout Property (Propriété HttpSessionState.Timeout)](https://msdn.microsoft.com/library/system.web.sessionstate.httpsessionstate.timeout(v=vs.110).aspx) |
+| **Informations de référence**              | [HttpSessionState.Timeout Property (Propriété HttpSessionState.Timeout)](/dotnet/api/system.web.sessionstate.httpsessionstate.timeout) |
 | **Étapes** | Un événement d’expiration de session survient lorsqu’un utilisateur n’exécute aucune action sur un site web au cours d’un intervalle de temps donné (défini par le serveur web). Côté serveur, cet événement redéfinit l’état de la session utilisateur comme non valide (par exemple, « plus utilisé ») et demande au serveur web de détruire la session (en supprimant toutes les données qu’elle contient). L’exemple de code ci-après définit l’attribut d’expiration de session sur 15 minutes dans le fichier web.config.|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 ```XML 
 <configuration>
   <system.web>
@@ -398,10 +398,10 @@ void Page_Init (object sender, EventArgs e) {
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Web Forms |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Élément Forms pour l'authentification (schéma des paramètres ASP.NET)](https://msdn.microsoft.com/library/1d3t3c61(v=vs.100).aspx) |
+| **Informations de référence**              | [Élément Forms pour l'authentification (schéma des paramètres ASP.NET)](/previous-versions/dotnet/netframework-4.0/1d3t3c61(v=vs.100)) |
 | **Étapes** | Définissez le délai d’expiration du cookie du ticket d’authentification par formulaire sur 15 minutes.|
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 ```XML
 <forms  name=".ASPXAUTH" loginUrl="login.aspx"  defaultUrl="default.aspx" protection="All" timeout="15" path="/" requireSSL="true" slidingExpiration="true"/>
 </forms>
@@ -434,7 +434,7 @@ void Page_Init (object sender, EventArgs e) {
   </system.identityModel.services>
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Définissez également la durée de vie du jeton de revendication SAML émis par ADFS sur 15 minutes en exécutant la commande PowerShell ci-après sur le serveur ADFS :
 ```csharp
 Set-ADFSRelyingPartyTrust -TargetName "<RelyingPartyWebApp>" -ClaimsProviderName @("Active Directory") -TokenLifetime 15 -AlwaysRequireAuthentication $true
@@ -494,7 +494,7 @@ Set-ADFSRelyingPartyTrust -TargetName "<RelyingPartyWebApp>" -ClaimsProviderName
 </script>
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Lorsque vous traitez la demande, extrayez les jetons de l’en-tête de la demande. Ensuite, appelez la méthode AntiForgery.Validate pour valider les jetons. Si les jetons ne sont pas valides, la méthode Validate lève une exception.
 ```csharp
 void ValidateRequestHeader(HttpRequestMessage request)
@@ -516,7 +516,7 @@ void ValidateRequestHeader(HttpRequestMessage request)
 }
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Formulaires anti-CSRF et MVC ASP.NET - Utilisez la méthode d’assistance AntiForgeryToken sur les vues ; placez un élément Html.AntiForgeryToken() dans le formulaire, par exemple,
 ```csharp
 @using (Html.BeginForm("UserProfile", "SubmitUpdate")) { 
@@ -526,7 +526,7 @@ Formulaires anti-CSRF et MVC ASP.NET - Utilisez la méthode d’assistance AntiF
 }
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Le résultat de l’exemple ci-dessus devrait ressembler à ceci :
 ```csharp
 <form action="/UserProfile/SubmitUpdate" method="post">
@@ -535,7 +535,7 @@ Le résultat de l’exemple ci-dessus devrait ressembler à ceci :
 </form>
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 Au même moment, Html.AntiForgeryToken() fournit au visiteur un cookie appelé __RequestVerificationToken, présentant la même valeur que la valeur masquée aléatoire indiquée ci-dessus. Ensuite, pour valider une publication de formulaire entrante, ajoutez le filtre [ValidateAntiForgeryToken] à la méthode d’action cible. Par exemple :
 ```
 [ValidateAntiForgeryToken]
@@ -558,7 +558,7 @@ Un filtre d’autorisation qui vérifie les éléments suivants :
 | **Informations de référence**              | [Secure a Web API with Individual Accounts and Local Login in ASP.NET Web API 2.2 (Sécuriser une API Web avec des comptes individuels et une connexion locale dans API Web ASP.NET 2.2)](https://www.asp.net/web-api/overview/security/individual-accounts-in-web-api) |
 | **Étapes** | Si l’API Web est sécurisée à l’aide d’OAuth 2.0, elle attend un jeton du porteur dans l’en-tête de la demande d’autorisation et n’accorde l’accès à la demande que si le jeton est valide. Contrairement à l’authentification basée sur les cookies, les navigateurs n’attachent pas les jetons du porteur aux demandes. Le client effectuant la demande doit attacher explicitement le jeton du porteur dans l’en-tête de la demande. Par conséquent, dans le cas des API Web ASP.NET protégées à l’aide d’OAuth 2.0, les jetons du porteur sont considérés comme un moyen de défense contre les attaques CSRF. Notez que si la partie MVC de l’application utilise l’authentification par formulaire (autrement dit, des cookies), l’application web MVC doit recourir à des jetons anti-contrefaçon. |
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 L’API Web doit être informée qu’elle doit UNIQUEMENT se fier aux jetons du porteur, et non aux cookies. Cette opération peut être effectuée par le biais de la configuration ci-après dans la méthode `WebApiConfig.Register` :
 
 ```csharp

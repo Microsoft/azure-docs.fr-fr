@@ -9,20 +9,20 @@ ms.topic: include
 ms.date: 08/02/2019
 ms.author: cshoe
 ms.custom: include file
-ms.openlocfilehash: 3788fdb954917f28f64a0dfe035bed4ded0932d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f4e6d5fb41769544b7be0f689447364988d0380d
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "69641873"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95998829"
 ---
-Le déclencheur d’objet blob fournit plusieurs propriétés de métadonnées. Ces propriétés peuvent être utilisées dans les expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Ces valeurs ont la même sémantique que le type [CloudBlob](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.blob.cloudblob?view=azure-dotnet).
+Le déclencheur d’objet blob fournit plusieurs propriétés de métadonnées. Ces propriétés peuvent être utilisées dans les expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Ces valeurs ont la même sémantique que le type [CloudBlob](/dotnet/api/microsoft.azure.storage.blob.cloudblob?view=azure-dotnet).
 
 |Propriété  |Type  |Description  |
 |---------|---------|---------|
 |`BlobTrigger`|`string`|Chemin de l’objet blob déclencheur.|
 |`Uri`|`System.Uri`|URI de l’objet blob pour l’emplacement principal.|
-|`Properties` |[BlobProperties](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.blob.blobproperties)|Propriétés système de l’objet blob. |
+|`Properties` |[BlobProperties](/dotnet/api/microsoft.azure.storage.blob.blobproperties)|Propriétés système de l’objet blob. |
 |`Metadata` |`IDictionary<string,string>`|Métadonnées définies par l’utilisateur pour l’objet blob.|
 
 Par exemple, les exemples JavaScript et Script C# suivants enregistrent le chemin d’accès à l’objet blob déclencheur, notamment le conteneur :

@@ -1,7 +1,7 @@
 ---
 title: 'Ajouter des lignes : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Ajouter des lignes dans Azure Machine Learning pour concaténer deux jeux de données.
+description: Découvrez comment utiliser le module Ajouter des lignes dans le concepteur Azure Machine Learning pour concaténer deux jeux de données.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/22/2020
-ms.openlocfilehash: cd9b5f8f182c4deab746d2c41e516a6ac23fb7aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c2a74ee88e7161ab8dd1701ef4d105df67c0938
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477729"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421938"
 ---
 # <a name="add-rows-module"></a>Module Ajouter des lignes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour concaténer 2 jeux de données. Dans la concaténation, les lignes du deuxième jeu de données sont ajoutées à la fin du premier jeu de données.  
   

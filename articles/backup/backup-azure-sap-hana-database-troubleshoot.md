@@ -3,12 +3,12 @@ title: Résoudre les erreurs de sauvegarde de bases de données SAP HANA
 description: Décrit comment résoudre les erreurs courantes qui peuvent survenir lorsque vous utilisez le service Sauvegarde Azure pour sauvegarder des bases de données SAP HANA.
 ms.topic: troubleshooting
 ms.date: 11/7/2019
-ms.openlocfilehash: 6520f106011b632da2725f456aeb278c7748ddc9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b9fa73ee38e337a547816432212bc68d419f40bb
+ms.sourcegitcommit: 1d366d72357db47feaea20c54004dc4467391364
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79459308"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95411323"
 ---
 # <a name="troubleshoot-backup-of-sap-hana-databases-on-azure"></a>Résoudre les problèmes de sauvegarde des bases de données SAP HANA sur Azure
 
@@ -22,7 +22,7 @@ Reportez-vous aux sections [Conditions préalables](tutorial-backup-sap-hana-db.
 
 ### <a name="usererrorhanainternalrolenotpresent"></a>UserErrorHANAInternalRoleNotPresent
 
-| **Message d’erreur**      | <span style="font-weight:normal">La sauvegarde Azure ne dispose pas des privilèges de rôle requis pour effectuer la sauvegarde</span>    |
+| **Message d’erreur**      | <span style="font-weight:normal">Sauvegarde Azure ne dispose pas des privilèges de rôle nécessaires pour effectuer la sauvegarde</span>    |
 | ---------------------- | ------------------------------------------------------------ |
 | **Causes possibles**    | Le rôle a peut-être été modifié.                          |
 | **Action recommandée** | Pour résoudre le problème, exécutez le script à partir du volet **Discover DB** ou téléchargez-le [ici](https://aka.ms/scriptforpermsonhana). Vous pouvez également ajouter le rôle « SAP_INTERNAL_HANA_SUPPORT » à l’utilisateur de sauvegarde de charge de travail (AZUREWLBACKUPHANAUSER). |
@@ -31,7 +31,7 @@ Reportez-vous aux sections [Conditions préalables](tutorial-backup-sap-hana-db.
 
 | Message d’erreur      | <span style="font-weight:normal">Échec de la connexion au système HANA</span>                        |
 | ------------------ | ------------------------------------------------------------ |
-| **Causes possibles**    | L’instance SAP HANA est peut-être inactive.<br/>Les autorisations requises pour que Sauvegarde Azure interagisse avec la base de données HANA ne sont pas définies. |
+| **Causes possibles**    | L’instance SAP HANA est peut-être inactive.<br/>Les autorisations permettant à Sauvegarde Azure d’interagir avec la base de données HANA ne sont pas définies. |
 | **Action recommandée** | Vérifiez que la base de données SAP HANA est active. Si la base de données est opérationnelle, vérifiez que toutes les autorisations requises sont définies. Si une autorisation est absente, exécutez le [script de préinscription](https://aka.ms/scriptforpermsonhana) pour l’ajouter. |
 
 ### <a name="usererrorhanainstancenameinvalid"></a>UserErrorHanaInstanceNameInvalid
@@ -46,14 +46,14 @@ Reportez-vous aux sections [Conditions préalables](tutorial-backup-sap-hana-db.
 | Message d’erreur      | <span style="font-weight:normal">L’opération SAP HANA spécifiée n’est pas prise en charge</span>              |
 | ------------------ | ------------------------------------------------------------ |
 | **Causes possibles**    | Sauvegarde Azure pour SAP HANA ne prend pas en charge la sauvegarde incrémentielle et les actions effectuées sur des clients natifs SAP HANA (Studio/ Cockpit/ DBA Cockpit) |
-| **Action recommandée** | Pour plus d’informations, consultez [cette page](https://docs.microsoft.com/azure/backup/sap-hana-backup-support-matrix#scenario-support). |
+| **Action recommandée** | Pour plus d’informations, consultez [cette page](./sap-hana-backup-support-matrix.md#scenario-support). |
 
 ### <a name="usererrorhanapodoesnotsupportbackuptype"></a>UserErrorHANAPODoesNotSupportBackupType
 
 | Message d’erreur      | <span style="font-weight:normal">Cette base de données SAP HANA ne prend pas en charge le type de sauvegarde demandé</span>  |
 | ------------------ | ------------------------------------------------------------ |
 | **Causes possibles**    | Sauvegarde Azure ne prend pas en charge la sauvegarde incrémentielle et les sauvegardes utilisant des instantanés |
-| **Action recommandée** | Pour plus d’informations, consultez [cette page](https://docs.microsoft.com/azure/backup/sap-hana-backup-support-matrix#scenario-support). |
+| **Action recommandée** | Pour plus d’informations, consultez [cette page](./sap-hana-backup-support-matrix.md#scenario-support). |
 
 ### <a name="usererrorhanalsnvalidationfailure"></a>UserErrorHANALSNValidationFailure
 
@@ -62,26 +62,26 @@ Reportez-vous aux sections [Conditions préalables](tutorial-backup-sap-hana-db.
 | **Causes possibles**    | La destination de sauvegarde des journaux a peut-être été modifiée depuis l’opération backint sur le système de fichiers ou le fichier exécutable backint a été modifié |
 | **Action recommandée** | Déclenchez une sauvegarde complète pour résoudre le problème                   |
 
-### <a name="usererrorincomaptiblesrctargetsystsemsforrestore"></a>UserErrorIncomaptibleSrcTargetSystsemsForRestore
-
-| Message d’erreur      | <span style="font-weight:normal">Les systèmes source et cible pour la restauration ne sont pas compatibles</span>    |
-| ------------------ | ------------------------------------------------------------ |
-| **Causes possibles**    | Le système cible pour la restauration n’est pas compatible avec le système source |
-| **Action recommandée** | Reportez-vous à la note SAP [1642148](https://launchpad.support.sap.com/#/notes/1642148) pour connaître les types de restauration actuellement pris en charge |
-
 ### <a name="usererrorsdctomdcupgradedetected"></a>UserErrorSDCtoMDCUpgradeDetected
 
 | Message d’erreur      | <span style="font-weight:normal">Mise à niveau de SDC vers MDC détectée</span>                                   |
 | ------------------ | ------------------------------------------------------------ |
 | **Causes possibles**    | L’instance SAP HANA a été mise à niveau de SDC vers MDC. Les sauvegardes échoueront après la mise à jour. |
-| **Action recommandée** | Suivez la procédure décrite dans la [section Mise à niveau de SAP HANA 1.0 vers 2.0](https://docs.microsoft.com/azure/backup/backup-azure-sap-hana-database-troubleshoot#upgrading-from-sap-hana-10-to-20) pour résoudre le problème |
+| **Action recommandée** | Pour résoudre le problème, procédez de la manière décrite dans [Mise à niveau de SDC vers MDC détectée](#sdc-to-mdc-upgrade-with-a-change-in-sid) |
 
 ### <a name="usererrorinvalidbackintconfiguration"></a>UserErrorInvalidBackintConfiguration
 
 | Message d’erreur      | <span style="font-weight:normal">Configuration backint non valide détectée</span>                       |
 | ------------------ | ------------------------------------------------------------ |
 | **Causes possibles**    | Les paramètres de sauvegarde ne sont pas spécifiés correctement pour Sauvegarde Azure |
-| **Action recommandée** | Vérifiez que les paramètres suivants (backint) sont définis :<br/>\* [catalog_backup_using_backint:true]<br/>\* [enable_accumulated_catalog_backup:false]<br/>\* [parallel_data_backup_backint_channels:1]<br/>\* [log_backup_timeout_s:900)]<br/>\* [backint_response_timeout:7200]<br/>Si les paramètres basés sur backint sont présents au niveau de l’HÔTE, supprimez-les. Si les paramètres ne sont pas présents au niveau de l’HÔTE, mais ont été modifiés manuellement au niveau de la base de données, rétablissez les valeurs appropriées comme décrit précédemment. Sinon, sur le Portail Microsoft Azure, exécutez [Arrêter la protection et conserver les données de sauvegarde](https://docs.microsoft.com/azure/backup/sap-hana-db-manage#stop-protection-for-an-sap-hana-database), puis sélectionnez **Reprendre la sauvegarde**. |
+| **Action recommandée** | Vérifiez que les paramètres suivants (backint) sont définis :<br/>\* [catalog_backup_using_backint:true]<br/>\* [enable_accumulated_catalog_backup:false]<br/>\* [parallel_data_backup_backint_channels:1]<br/>\* [log_backup_timeout_s:900)]<br/>\* [backint_response_timeout:7200]<br/>Si les paramètres basés sur backint sont présents au niveau de l’HÔTE, supprimez-les. Si les paramètres ne sont pas présents au niveau de l’HÔTE, mais ont été modifiés manuellement au niveau de la base de données, rétablissez les valeurs appropriées comme décrit précédemment. Sinon, sur le Portail Microsoft Azure, exécutez [Arrêter la protection et conserver les données de sauvegarde](./sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database), puis sélectionnez **Reprendre la sauvegarde**. |
+
+### <a name="usererrorincompatiblesrctargetsystemsforrestore"></a>UserErrorIncompatibleSrcTargetSystemsForRestore
+
+|Message d’erreur  |Les systèmes source et cible pour la restauration ne sont pas compatibles  |
+|---------|---------|
+|Causes possibles   | Les systèmes source et cible pour la restauration ne sont pas compatibles        |
+|Action recommandée   |   Assurez-vous que votre scénario de restauration ne figure pas dans la liste suivante des restaurations potentiellement incompatibles : <br><br>   **Cas 1 :** SYSTEMDB ne peut pas être renommé lors de la restauration.  <br><br> **Cas 2 :** Source – SDC et Cible – MDC : La base de données source ne peut pas être restaurée en tant que SYSTEMDB ou base de données de locataire sur la cible. <br><br> **Cas 3 :** Source – MDC et Cible – SDC : Impossible de restaurer la base de données source (SYSTEMDB ou base de données de locataire) sur la cible. <br><br>  Pour plus d’informations, consultez la note **1642148** dans [SAP ONE Support Launchpad](https://launchpad.support.sap.com). |
 
 ## <a name="restore-checks"></a>Restaurer les vérifications
 
@@ -97,32 +97,90 @@ Notez les points suivants :
 
 - Par défaut, le nom de la base de données restaurée est renseigné avec le nom de l’élément de sauvegarde. Dans ce cas, il s’agit de h21(sdc).
 - La sélection de la cible en tant que H11 ne modifie pas automatiquement le nom de la base de données restaurée. **Elle doit être modifiée en H11 (SDC)** . Concernant SDC, le nom de la base de données restaurée sera l’ID d’instance cible avec des lettres minuscules suivi de « sdc » entre crochets.
-- Étant donné que SDC ne peut avoir qu’une seule base de données, vous devez également activer la case à cocher pour autoriser le remplacement des données de la base de données existantes par les données du point de récupération.
+- Étant donné que SDC ne peut avoir qu’une seule base de données, vous devez aussi cocher la case pour autoriser le remplacement des données de la base de données existantes par les données du point de récupération.
 - Linux respecte la casse. Par conséquent, veillez à la conserver.
 
 ### <a name="multiple-container-database-mdc-restore"></a>Restauration de la base de données à conteneurs multiples (MDC)
 
 Dans plusieurs bases de données de conteneur pour HANA, la configuration standard est SYSTEMDB + 1 ou plusieurs bases de données de locataire. La restauration d’une instance de SAP HANA entière signifie qu’il faut restaurer les bases de données SYSTEMDB et de locataire. L’une restaure d’abord SYSTEMDB, puis procède à la restauration de la base de données du locataire. La base de données système signifie essentiellement remplacer les informations système sur la cible sélectionnée. Cette restauration remplace également les informations relatives à BackInt dans l’instance cible. Par conséquent, une fois la base système restaurée vers une instance cible, vous devez réexécuter le script de préinscription. C’est uniquement à ce moment-là que les restaurations ultérieures de la base de données locataire réussiront.
 
-## <a name="upgrading-from-sap-hana-10-to-20"></a>Mise à niveau de SAP HANA 1.0 vers 2.0
+## <a name="back-up-a-replicated-vm"></a>Sauvegarder une machine virtuelle répliquée
 
-Si vous protégez des bases de données SAP HANA 1.0 et voulez les mettre à niveau vers la version 2.0, procédez comme suit :
+### <a name="scenario-1"></a>Scénario 1
 
-- [Arrêtez la protection](sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database) avec conservation des données pour l’ancienne base de données SDC.
-- Effectuez la mise à niveau. À l’issue de l’opération, HANA est maintenant MDC avec une base de données système et une ou plusieurs bases de données locataire.
-- Réexécutez le [script de préinscription](https://aka.ms/scriptforpermsonhana) avec les détails (sid et mdc) corrects.
-- Réinscrivez l’extension pour la même machine dans le portail Azure (Sauvegarde > Afficher les détails > Sélectionner la machine virtuelle Azure appropriée > Réinscrire).
-- Cliquez sur Redécouvrir les bases de données pour la même machine virtuelle. Cette action a pour effet de faire apparaître les nouvelles bases de données de l’étape 2 avec des détails corrects (SYSTEMDB et Tenant DB, et non SDC).
-- Configurer la sauvegarde de ces nouvelles bases de données.
+La machine virtuelle d’origine a été répliquée à l’aide d’Azure Site Recovery ou d’une Sauvegarde des machines virtuelles Azure. La nouvelle machine virtuelle a été créée pour simuler l’ancienne . Autrement dit, les paramètres sont exactement les mêmes (cela est dû au fait que la machine virtuelle d’origine a été supprimée et que la restauration a été effectuée à partir de la sauvegarde de machine virtuelle ou d’Azure Site Recovery).
 
-## <a name="upgrading-without-an-sid-change"></a>Mise à niveau sans modification du SID
+Ce scénario peut inclure deux cas. Découvrez comment sauvegarder la machine virtuelle répliquée dans les deux cas ci-dessous :
 
-Les mises à niveau vers OS ou SAP HANA qui n’entraînent pas de modification du SID peuvent être gérées de la façon suivante :
+1. La nouvelle machine virtuelle créée porte le même nom et se trouve dans les mêmes groupe de ressources et abonnement que la machine virtuelle supprimée.
 
-- [Arrêter la protection](sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database) avec conservation des données pour la base de données
-- Effectuez la mise à niveau.
-- Réexécutez le [script de préinscription](https://aka.ms/scriptforpermsonhana). En règle générale, nous avons vu que le processus de mise à niveau supprime les rôles nécessaires. L’exécution du script de préinscription permet de vérifier tous les rôles requis.
-- [Réactiver la protection](sap-hana-db-manage.md#resume-protection-for-an-sap-hana-database) de la base de données
+    - L’extension est déjà présente sur la machine virtuelle, mais n’est visible pour aucun des services.
+    - Réexécutez le script de préinscription.
+    - Réinscrivez l’extension pour la même machine dans le portail Azure (**Sauvegarde** -> **Afficher les détails** > sélectionner la machine virtuelle Azure appropriée -> Réinscrire).
+    - La sauvegarde des bases de données sauvegardées (à partir de la machine virtuelle supprimée) doit ensuite démarrer correctement.
+
+2. La nouvelle machine virtuelle créée présente l’une des caractéristiques suivantes :
+
+    - Elle porte un nom différent de celui de la machine virtuelle supprimée.
+    - Elle porte le même nom que la machine virtuelle supprimée, mais se trouve dans un groupe de ressources ou un abonnement différents de ceux de la machine virtuelle supprimée.
+
+    Si c’est le cas, procédez comme suit :
+
+    - L’extension est déjà présente sur la machine virtuelle, mais n’est visible pour aucun des services.
+    - Exécutez le script de préinscription.
+    - Si vous découvrez et protégez les nouvelles bases de données, vous commencez à voir des bases de données actives en double dans le portail. Pour éviter cela, vous devez [Arrêter la protection avec données conservées](sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database) pour les anciennes bases de données. Ensuite, passez aux étapes restantes.
+    - Détecter les bases de données pour activer la sauvegarde.
+    - Activez les sauvegardes sur ces bases de données.
+    - Les bases de données déjà sauvegardées (à partir de la machine virtuelle supprimée) continueront d’être stockées dans le coffre (avec leurs sauvegardes conservées conformément à la stratégie).
+
+### <a name="scenario-2"></a>Scénario 2
+
+La machine virtuelle d’origine a été répliquée à l’aide d’Azure Site Recovery ou d’une sauvegarde de machine virtuelle Azure. La nouvelle machine virtuelle a été créée à partir du contenu, pour être utilisée comme modèle. Il s’agit d’une nouvelle machine virtuelle avec un nouveau SID.
+
+Procédez comme suit pour activer les sauvegardes sur la nouvelle machine virtuelle :
+
+- L’extension est déjà présente sur la machine virtuelle, mais n’est visible pour aucun des services.
+- Exécutez le script de préinscription. En fonction du SID de la nouvelle machine virtuelle, deux scénarios peuvent se produire :
+  - La machine virtuelle d’origine et la nouvelle machine virtuelle ont le même SID. Le script de pré-inscription s’exécutera correctement.
+  - La machine virtuelle d’origine et la nouvelle machine virtuelle ont des SID différents. Le script de pré-inscription échouera. Contactez le support technique pour obtenir de l’aide dans ce scénario.
+- Détectez les bases de données que vous souhaitez sauvegarder.
+- Activez les sauvegardes sur ces bases de données.
+
+## <a name="sdc-version-upgrade-or-mdc-version-upgrade-on-the-same-vm"></a>Mise à niveau de la version de SDC ou de MDC sur la même machine virtuelle
+
+Les mises à niveau du système d’exploitation et les changements de version de SDC ou de MDC qui n’entraînent pas de modification du SID peuvent être gérées comme suit :
+
+- Assurez-vous que les nouvelles versions du système d’exploitation, de SDC ou de MDC sont actuellement [prises en charge par Sauvegarde Azure](sap-hana-backup-support-matrix.md#scenario-support).
+- [Arrêtez la protection avec données conservées](sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database) pour la base de données.
+- Effectuez la mise à niveau ou la mise à jour.
+- Réexécutez le script de préinscription. Souvent, le processus de mise à niveau peut supprimer [les rôles nécessaires](tutorial-backup-sap-hana-db.md#what-the-pre-registration-script-does). L’exécution du script de préinscription permet de vérifier tous les rôles requis.
+- Réactivez la protection de la base de données.
+
+## <a name="sdc-to-mdc-upgrade-with-no-change-in-sid"></a>Mise à niveau de SDC vers MDC sans modification du SID
+
+Vous pouvez gérer les mises à niveau de SDC vers MDC qui n’entraînent pas de modification du SID comme suit :
+
+- Assurez-vous que la nouvelle version de MDC est actuellement [prise en charge par Sauvegarde Azure](sap-hana-backup-support-matrix.md#scenario-support).
+- [Arrêtez la protection avec données conservées](sap-hana-db-manage.md#stop-protection-for-an-sap-hana-database) pour l’ancienne base de données SDC.
+- Effectuez la mise à niveau. À l’issue de l’opération, le système HANA est maintenant MDC avec une base de données système et une ou plusieurs bases de données de locataire.
+- Réexécuter le [script de préinscription](https://aka.ms/scriptforpermsonhana)
+- Réinscrivez l’extension pour la même machine dans le portail Azure (**Sauvegarde** -> **Afficher les détails** > sélectionner la machine virtuelle Azure appropriée -> Réinscrire).
+- Sélectionnez **Redécouvrir les bases de données** pour la même machine virtuelle. Cette action a pour effet de faire apparaître les nouvelles bases de données de l’étape 3 en tant que SYSTEMDB et Tenant DB, et non SDC.
+- L’ancienne base de données SDC continue d’exister dans le coffre, et les anciennes données sauvegardées sont conservées conformément à la stratégie.
+- Configurez la sauvegarde de ces bases de données.
+
+## <a name="sdc-to-mdc-upgrade-with-a-change-in-sid"></a>Mise à niveau de SDC vers MDC avec modification du SID
+
+Vous pouvez gérer les mises à niveau de SDC vers MDC qui entraînent une modification du SID comme suit :
+
+- Assurez-vous que la nouvelle version de MDC est actuellement [prise en charge par Sauvegarde Azure](sap-hana-backup-support-matrix.md#scenario-support).
+- **Arrêtez la protection avec données conservées** pour l’ancienne base de données SDC.
+- Effectuez la mise à niveau. À l’issue de l’opération, le système HANA est maintenant MDC avec une base de données système et une ou plusieurs bases de données de locataire.
+- Réexécutez le [script de préinscription](https://aka.ms/scriptforpermsonhana) avec les détails (nouveaux SID et MDC) corrects. En raison d’une modification du SID, vous risquez de rencontrer des problèmes avec l’exécution du script. Si vous rencontrez des problèmes, contactez le support de Sauvegarde Azure.
+- Réinscrivez l’extension pour la même machine dans le portail Azure (**Sauvegarde** -> **Afficher les détails** > sélectionner la machine virtuelle Azure appropriée -> Réinscrire).
+- Sélectionnez **Redécouvrir les bases de données** pour la même machine virtuelle. Cette action a pour effet de faire apparaître les nouvelles bases de données de l’étape 3 en tant que SYSTEMDB et Tenant DB, et non SDC.
+- L’ancienne base de données SDC continue d’exister dans le coffre, et les anciennes données sauvegardées sont conservées conformément à la stratégie.
+- Configurez la sauvegarde de ces bases de données.
 
 ## <a name="re-registration-failures"></a>Échecs de réinscription
 
@@ -146,4 +204,4 @@ Dans les scénarios précédents, nous vous recommandons de déclencher une opé
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez les [questions fréquentes (FAQ)](https://docs.microsoft.com/azure/backup/sap-hana-faq-backup-azure-vm) sur la sauvegarde des bases de données SAP HANA sur des machines virtuelles Azure.
+- Consultez les [questions fréquentes (FAQ)](./sap-hana-faq-backup-azure-vm.md) sur la sauvegarde des bases de données SAP HANA sur des machines virtuelles Azure.

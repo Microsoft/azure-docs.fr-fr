@@ -9,13 +9,13 @@ services: iot-hub
 ms.devlang: java
 ms.topic: conceptual
 ms.date: 08/16/2019
-ms.custom: mqtt
-ms.openlocfilehash: 5e3f4f4aedb0bc3fb1f8ea11001b08daa57aafc1
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: mqtt, devx-track-java
+ms.openlocfilehash: 36092e0bb7d0249837d2eaa7898e9231ecb5f5a9
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732483"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147005"
 ---
 # <a name="schedule-and-broadcast-jobs-java"></a>Planifier et diffuser des travaux (Java)
 
@@ -31,9 +31,9 @@ Un travail encapsule l’une de ces actions et suit l’exécution sur un ensemb
 
 Pour plus d’informations sur chacune de ces fonctionnalités, consultez les pages :
 
-* Jumeau d’appareil et propriétés : [Prise en main des représentations d’appareils (Node)](iot-hub-java-java-twin-getstarted.md)
+* Jumeau d’appareil et propriétés : [Prise en main des représentations d’appareils](iot-hub-java-java-twin-getstarted.md)
 
-* Méthodes directes : [Guide du développeur IoT Hub - Méthodes directes](iot-hub-devguide-direct-methods.md) et [Didacticiel : utilisation des méthodes directes](quickstart-control-device-java.md)
+* Méthodes directes : [Guide du développeur IoT Hub - méthodes directes](iot-hub-devguide-direct-methods.md) et [Didacticiel : Utiliser des méthodes directes](quickstart-control-device-java.md)
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
@@ -52,15 +52,15 @@ Ce didacticiel vous explique les procédures suivantes :
 > [!NOTE]
 > L’article relatif aux [Kits de développement logiciel (SDK) Azure IoT](iot-hub-devguide-sdks.md) fournit des informations sur les Kits de développement logiciel (SDK) Azure que l’on peut utiliser pour générer des applications pour périphérique et des applications principales.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Java SE Development Kit 8](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
+* [Java SE Development Kit 8](/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
 
 * [Maven 3](https://maven.apache.org/download.cgi)
 
 * Un compte Azure actif. (Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes seulement.)
 
-* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 

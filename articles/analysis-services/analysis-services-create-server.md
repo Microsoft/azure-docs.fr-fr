@@ -1,18 +1,18 @@
 ---
 title: 'Démarrage rapide : Créer un serveur Analysis Services sur le Portail Azure | Microsoft Docs'
-description: Découvrez comment créer rapidement une instance serveur Azure Analysis Services avec le Portail Azure.
+description: Ce guide de démarrage rapide explique comment créer une instance serveur Azure Analysis Services avec le portail Azure.
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: quickstart
-ms.date: 05/19/2020
+ms.date: 08/31/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 36899aa789f4947fe860621bc1795bfbe2ff1ecf
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: 488e7c84e481edd1b136fe90ab948d3cfb51ed2c
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697472"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89230778"
 ---
 # <a name="quickstart-create-a-server---portal"></a>Démarrage rapide : créer un serveur - Portail
 
@@ -58,6 +58,4 @@ Quand vous n’en avez plus besoin, supprimez votre serveur. Dans la page **Vue 
 Dans ce démarrage rapide, vous avez appris à créer un serveur dans votre abonnement Azure. Maintenant que vous avez serveur, vous pouvez le sécuriser en configurant un pare-feu de serveur (facultatif). Vous pouvez également ajouter un modèle de données d’exemple de base à votre serveur directement à partir du portail. Un exemple de modèle permet d’en savoir plus sur la configuration des rôles de base de données de modèle et le test des connexions client. Pour en savoir plus, passez au tutoriel sur l’ajout d’un exemple de modèle.
 
 > [!div class="nextstepaction"]
-> [Démarrage rapide : configurer un pare-feu de serveur - Portail](analysis-services-qs-firewall.md)   
-> [!div class="nextstepaction"]
-> [Tutoriel : ajouter un exemple de modèle à votre serveur](analysis-services-create-sample-model.md)
+> [Démarrage rapide : Configurer un pare-feu de serveur - Portail](analysis-services-qs-firewall.md)   

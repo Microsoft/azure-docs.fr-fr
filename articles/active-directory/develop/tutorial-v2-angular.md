@@ -1,9 +1,9 @@
 ---
-title: Tutoriel sur les applications monopages Angular - Azure
+title: 'Tutoriel : Créer une application Angular qui utilise la plateforme d’identités Microsoft pour l’authentification | Azure'
 titleSuffix: Microsoft identity platform
-description: Découvrez comment les applications monopages Angular peuvent appeler une API qui exige des jetons d’accès en provenance du point de terminaison de la plateforme d’identités Microsoft.
+description: Dans ce tutoriel, vous allez créer une application monopage Angular qui utilise la plateforme d’identités Microsoft pour connecter les utilisateurs et obtenir un jeton d’accès pour appeler l’API Microsoft Graph en leur nom.
 services: active-directory
-author: hahamil
+author: hamiltonha
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
@@ -11,34 +11,37 @@ ms.topic: tutorial
 ms.workload: identity
 ms.date: 03/05/2020
 ms.author: hahamil
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: c645ab45711698e4a6f582678e2a850e15dea62a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: aaddev, identityplatformtop40, devx-track-js
+ms.openlocfilehash: c4c7d021c7c3a5a32d537a50fa45449fdee7e817
+ms.sourcegitcommit: f311f112c9ca711d88a096bed43040fcdad24433
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181594"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94979927"
 ---
 # <a name="tutorial-sign-in-users-and-call-the-microsoft-graph-api-from-an-angular-single-page-application"></a>Tutoriel : Connecter des utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage Angular
 
-> [!IMPORTANT]
-> Actuellement, cette fonctionnalité est uniquement disponible en tant que version préliminaire. Les préversions sont à votre disposition, à condition que vous acceptiez les [conditions d’utilisation supplémentaires](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). Certains aspects de cette fonctionnalité sont susceptibles d’être changés avant la disponibilité générale (GA).
+Dans ce tutoriel, vous créez une application monopage (SPA) Angular qui connecte les utilisateurs et appelle l’API Microsoft Graph.
 
-Ce guide montre comment une application monopage Angular peut :
-- Se connecter à des comptes personnels, professionnels ou scolaires.
-- Obtenez un jeton d’accès.
-- Appeler l’API Microsoft Graph ou d’autres API qui exigent des jetons d’accès provenant du *point de terminaison de la plateforme d’identités Microsoft*.
+Dans ce tutoriel, vous allez :
 
->[!NOTE]
->Ce tutoriel vous explique pas à pas comment créer une application monopage Angular en utilisant la bibliothèque d’authentification Microsoft (MSAL). Si vous souhaitez télécharger un exemple d’application, consultez le [démarrage rapide](quickstart-v2-angular.md).
+> [!div class="checklist"]
+> * Créer un projet angulaire avec `npm`.
+> * Inscrire l’application dans le Portail Azure
+> * Ajouter du code pour prendre en charge la connexion et la déconnexion des utilisateurs
+> * Ajouter du code pour appeler l’API Microsoft Graph
+> * Test de l'application
+
+## <a name="prerequisites"></a>Prérequis
+
+* [Node.js](https://nodejs.org/en/download/) pour l’exécution d’un serveur web local
+* [Visual Studio Code](https://code.visualstudio.com/download) ou un autre éditeur pour la modification des fichiers projet
 
 ## <a name="how-the-sample-app-works"></a>Fonctionnement de l’exemple d’application
 
-![Schéma illustrant le fonctionnement de l’exemple d’application généré dans ce tutoriel](media/active-directory-develop-guidedsetup-javascriptspa-introduction/javascriptspa-intro.svg)
+![Schéma illustrant le fonctionnement de l’exemple d’application généré dans ce tutoriel](./media/tutorial-v2-angular/diagram-auth-flow-spa-angular.svg)
 
-### <a name="more-information"></a>Informations complémentaires
-
-L’exemple d’application créé dans ce tutoriel permet à une application monopage Angular d’interroger l’API Microsoft Graph ou une API web qui accepte les jetons en provenance du point de terminaison de la plateforme d’identités Microsoft. La bibliothèque MSAL pour Angular est un wrapper de la bibliothèque MSAL.js de base. Il permet aux applications Angular (6+) d’authentifier les utilisateurs d’entreprise à l’aide de Microsoft Azure Active Directory, de comptes d’utilisateurs Microsoft et d’identités d’utilisateurs de réseaux sociaux (comme Facebook, Google et LinkedIn). La bibliothèque permet aussi aux applications d’accéder aux services de cloud computing Microsoft ou à Microsoft Graph.
+L’exemple d’application créé dans ce tutoriel permet à une application monopage Angular d’interroger l’API Microsoft Graph ou une API web qui accepte des jetons émis par la plateforme d’identités Microsoft. Elle utilise la bibliothèque d’authentification Microsoft (MSAL) pour Angular, wrapper de la bibliothèque MSAL.js principale. MSAL Angular permet aux applications Angular 6+ d’authentifier les utilisateurs en entreprise avec Azure Active Directory (Azure AD) ainsi que les utilisateurs qui ont des comptes d’utilisateur Microsoft et des identités de réseaux sociaux tels que Facebook, Google et LinkedIn. La bibliothèque permet aussi aux applications d’accéder aux services cloud Microsoft et à Microsoft Graph.
 
 Dans ce scénario, une fois qu’un utilisateur s’est connecté, un jeton d’accès est demandé et ajouté aux requêtes HTTP par le biais de l’en-tête d’autorisation. Les opérations d’acquisition et de renouvellement de jetons sont gérées par MSAL.
 
@@ -52,28 +55,22 @@ Ce tutoriel utilise la bibliothèque suivante :
 
 Vous trouverez le code source de la bibliothèque MSAL.js dans le dépôt [AzureAD/microsoft-authentication-library-for-js](https://github.com/AzureAD/microsoft-authentication-library-for-js) sur GitHub.
 
-## <a name="prerequisites"></a>Prérequis
-
-Pour suivre ce didacticiel, vous avez besoin des éléments suivants :
-
-* Un serveur web local, tel que [Node.js](https://nodejs.org/en/download/). Les instructions de ce tutoriel sont basées sur Node.js.
-* Un environnement de développement intégré (IDE), comme [Visual Studio Code](https://code.visualstudio.com/download), pour modifier les fichiers projet.
-
 ## <a name="create-your-project"></a>Créer votre projet
 
 Générez une nouvelle application Angular à l’aide des commandes npm suivantes :
 
-```Bash
+```bash
 npm install -g @angular/cli@8                    # Install the Angular CLI
-npm install @angular/material@8 @angular/cdk@8   # Install the Angular Material component library (optional, for UI)
 ng new my-application --routing=true --style=css # Generate a new Angular app
+cd my-application                                # Change to the app directory
+npm install @angular/material@8 @angular/cdk@8   # Install the Angular Material component library (optional, for UI)
 npm install msal @azure/msal-angular             # Install MSAL and MSAL Angular in your application
 ng generate component page-name                  # To add a new page (such as a home or profile page)
 ```
 
 ## <a name="register-your-application"></a>Inscrivez votre application
 
-Suivez les [instructions pour inscrire une application monopage](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) sur le portail Azure.
+Suivez les [instructions pour inscrire une application monopage](./scenario-spa-app-registration.md) sur le portail Azure.
 
 Dans la page **Vue d’ensemble** de votre inscription, notez la valeur de **ID d’application (client)** pour une utilisation ultérieure.
 
@@ -126,7 +123,7 @@ Inscrivez la valeur de votre **URI de redirection** sous la forme **http://local
     |Nom de la valeur|À propos|
     |---------|---------|
     |Enter_the_Application_Id_Here|Dans la page **Vue d’ensemble** de l’inscription de votre application, il s’agit de la valeur de votre **ID d’application (client)** . |
-    |Enter_the_Cloud_Instance_Id_Here|Il s’agit de l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez **https://login.microsoftonline.com** . Pour les clouds nationaux (par exemple Chine), consultez [Clouds nationaux](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud).|
+    |Enter_the_Cloud_Instance_Id_Here|Il s’agit de l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez **https://login.microsoftonline.com** . Pour les clouds nationaux (par exemple Chine), consultez [Clouds nationaux](./authentication-national-cloud.md).|
     |Enter_the_Tenant_Info_Here| Définissez cette valeur sur une des options suivantes : Si votre application prend en charge les *comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’ID de l’annuaire (locataire) ou le nom du locataire (par exemple, **contoso.microsoft.com**). Si votre application prend en charge les *Comptes dans un annuaire organisationnel*, remplacez cette valeur par **organizations**. Si votre application prend en charge les *Comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par **common**. Pour limiter la prise en charge aux *Comptes Microsoft personnels uniquement*, remplacez cette valeur par **consumers**. |
     |Enter_the_Redirect_Uri_Here|À remplacer par **http://localhost:4200** .|
 
@@ -141,7 +138,7 @@ Inscrivez la valeur de votre **URI de redirection** sous la forme **http://local
 3. Ajoutez les instructions import suivantes en haut du fichier `src/app/app.component.ts` :
 
     ```javascript
-    import { MsalService } from '@azure/msal-angular';
+    import { MsalService, BroadcastService } from '@azure/msal-angular';
     import { Component, OnInit } from '@angular/core';
     ```
 ## <a name="sign-in-a-user"></a>Connecter un utilisateur
@@ -151,6 +148,8 @@ Ajoutez le code suivant à `AppComponent` pour connecter un utilisateur :
 ```javascript
 export class AppComponent implements OnInit {
     constructor(private broadcastService: BroadcastService, private authService: MsalService) { }
+
+    ngOnInit() { }
 
     login() {
         const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -195,7 +194,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 }
 ```
 
-Ensuite, fournissez une carte des ressources protégées à `MsalModule.forRoot()` en tant que `protectedResourceMap` et incluez ces étendues dans `consentScopes` :
+Ensuite, fournissez une carte des ressources protégées à `MsalModule.forRoot()` en tant que `protectedResourceMap` et incluez ces étendues dans `consentScopes`. Les URL que vous fournissez dans la collection `protectedResourceMap` sont sensibles à la casse.
 
 ```javascript
 @NgModule({
@@ -343,7 +342,7 @@ Si une API back-end ne nécessite pas d’étendue (non recommandé), vous pouv
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-À présent, découvrez comment connecter un utilisateur et acquérir des jetons dans le tutoriel Angular :
+Approfondissez le développement d’applications monopages sur la plateforme d’identités Microsoft grâce à notre série d’articles.
 
 > [!div class="nextstepaction"]
-> [Tutoriel Angular](https://docs.microsoft.com/azure/active-directory/develop/tutorial-v2-angular)
+> [Scénario : Application monopage](scenario-spa-overview.md)

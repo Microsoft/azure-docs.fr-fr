@@ -10,18 +10,19 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: f0b2f8f0-e798-4176-8217-017afe147917
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 05/05/2017
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 86094fd7ff9550946e1b1c13e0773f025a0e977c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5d7904b950fa79f9ccbf98ec08f09aa6688f8a99
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77623815"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957892"
 ---
 # <a name="utilize-azure-infrastructure-vm-restart-to-achieve-higher-availability-of-an-sap-system"></a>Utiliser le redémarrage de la machine virtuelle d’infrastructure Azure pour permettre une plus haute disponibilité d’un système SAP
 
@@ -210,7 +211,7 @@ ms.locfileid: "77623815"
 
 > Cette section s’applique à :
 >
-> ![Windows][Logo_Windows] Windows et ![Linux][Logo_Linux] Linux
+> ![Logo Windows.][Logo_Windows] Windows et ![Logo Linux.][Logo_Linux] Linux
 >
 
 Si vous décidez de ne pas utiliser des fonctionnalités telles que le clustering de basculement Windows Server (WSFC) ou Pacemaker sur Linux (actuellement prises en charge pour SUSE Linux Enterprise Server [SLES] 12 et versions ultérieures uniquement), le redémarrage de la machine virtuelle Azure est utilisé. Il protège les systèmes SAP contre les temps d’arrêt planifiés ou non de l’infrastructure de serveur physique Azure et de la plateforme Azure sous-jacente globale.
@@ -228,7 +229,7 @@ Les disques managés Azure sont automatiquement placés dans le domaine d’erre
 
 Voici un exemple de ce à quoi pourrait ressembler une architecture de système SAP NetWeaver utilisant la haute disponibilité d’infrastructure Azure et des comptes de stockage :
 
-![Utiliser la haute disponibilité de l’infrastructure Azure pour permettre une plus haute disponibilité des applications SAP][planning-guide-figure-2900]
+![Diagramme illustrant l’architecture d’un système SAP NetWeaver qui utilise la haute disponibilité et les comptes de stockage de l’infrastructure Azure.][planning-guide-figure-2900]
 
 Voici un exemple de ce à quoi pourrait ressembler une architecture de système SAP NetWeaver utilisant la haute disponibilité d’infrastructure Azure et des disques managés :
 
@@ -267,7 +268,7 @@ SAP propose un paramètre qui vous permet de démarrer automatiquement des insta
 
 Dans l’hypothèse d’un scénario Azure classique d’une seule instance de serveur d’applications SAP sur une machine virtuelle et dans le cas du redémarrage éventuel d’une seule machine virtuelle, le démarrage automatique n’est pas critique. Mais vous pouvez l’activer en ajoutant le paramètre suivant dans le profil de démarrage de l’instance SAP Advanced Business Application Programming (ABAP) ou Java :
 
-      Autostart = 1
+`Autostart = 1`
 
 
   > [!NOTE]

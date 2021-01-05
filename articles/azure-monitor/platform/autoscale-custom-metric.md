@@ -4,18 +4,18 @@ description: Découvrez comment mettre à l’échelle votre ressource par une m
 ms.topic: conceptual
 ms.date: 05/07/2017
 ms.subservice: autoscale
-ms.openlocfilehash: 7758c440c75af5819099110dcbdaf5a86a1d2a04
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8e744e6a91eb6fbe23a6b45f95c39b1acfdcb61f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77425117"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86539582"
 ---
 # <a name="get-started-with-auto-scale-by-custom-metric-in-azure"></a>Prise en main de la mise à l’échelle automatique par métrique personnalisée dans Azure
 Cet article décrit comment mettre à l’échelle votre ressource par une mesure personnalisée dans le portail Azure.
 
 La mise à l’échelle automatique Azure Monitor s’applique uniquement à [Virtual Machine Scale Sets](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Azure Cloud Services](https://azure.microsoft.com/services/cloud-services/), [App Service – Web Apps](https://azure.microsoft.com/services/app-service/web/), [Azure Data Explorer Cluster](https://azure.microsoft.com/services/data-explorer/),   
-l’environnement de service d’intégration et aux [services Gestion des API](https://docs.microsoft.com/azure/api-management/api-management-key-concepts).
+l’environnement de service d’intégration et aux [services Gestion des API](../../api-management/api-management-key-concepts.md).
 
 ## <a name="lets-get-started"></a>Prise en main
 Cet article suppose que vous disposez d’une application web avec Application Insights déjà configuré. Si vous n’en avez pas encore, vous pouvez [configurer Application Insights pour votre site web ASP.NET][1].
@@ -41,11 +41,10 @@ Félicitations ! Vous avez correctement créé vos valeurs de mise à l’éche
 > Remarque : Les mêmes étapes sont applicables pour commencer avec un rôle de service cloud ou un jeu de mise à l’échelle de machine virtuelle.
 
 <!--Reference-->
-[1]: https://docs.microsoft.com/azure/application-insights/app-insights-asp-net
+[1]: ../app/asp-net.md
 [2]: https://portal.azure.com
 [3]: ./media/autoscale-custom-metric/azure-monitor-launch.png
 [4]: ./media/autoscale-custom-metric/discover-autoscale-azure-monitor.png
 [5]: ./media/autoscale-custom-metric/scale-setting-new-web-app.png
 [6]: ./media/autoscale-custom-metric/scale-by-custom-metric.png
 [7]: ./media/autoscale-custom-metric/autoscale-setting-custom-metrics-ai.png
-

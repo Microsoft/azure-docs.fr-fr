@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 11/21/2019
 ms.author: sagonzal
 ms.reviewer: nacanuma
-ms.custom: aaddev
-ms.openlocfilehash: 3d834a8d1524595304c22fed9897094622dfd93f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: aaddev, devx-track-java
+ms.openlocfilehash: 5d01d1143563637e21aaa06a3f997c1507e4d8f1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76696212"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88114776"
 ---
 # <a name="active-directory-federation-services-support-in-msal-for-java"></a>Prendre en charge les services de fédération Active Directory (AD FS) dans MSAL pour Java
 
@@ -48,4 +48,4 @@ Lorsque vous obtenez un jeton via `ConfidentialClientApplication.AcquireToken()`
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour l'authentification fédérée, consultez [Configurer le comportement de la connexion Azure Active Directory pour une application à l'aide d'une stratégie de découverte du domaine d'accueil](https://docs.microsoft.com/azure/active-directory/manage-apps/configure-authentication-for-federated-users-portal).
+Pour l'authentification fédérée, consultez [Configurer le comportement de la connexion Azure Active Directory pour une application à l'aide d'une stratégie de découverte du domaine d'accueil](../manage-apps/configure-authentication-for-federated-users-portal.md).

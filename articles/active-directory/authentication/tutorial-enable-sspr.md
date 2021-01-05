@@ -5,24 +5,24 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: tutorial
-ms.date: 02/04/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 07/13/2020
+ms.author: justinha
+author: justinha
 ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c84aa99608a4fc2ac1842c617cca54e2afc3cdbe
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 924ff6091e7eb6633d36f75fd6d53745139454d7
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82201990"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741063"
 ---
 # <a name="tutorial-enable-users-to-unlock-their-account-or-reset-passwords-using-azure-active-directory-self-service-password-reset"></a>Tutoriel : Permettre aux utilisateurs de déverrouiller leur compte ou de réinitialiser des mots de passe à l’aide de la réinitialisation de mot de passe en libre-service Azure Active Directory
 
 La réinitialisation de mot de passe en libre-service (SSPR) Azure Active Directory (Azure AD) permet aux utilisateurs de changer ou de réinitialiser leur mot de passe sans intervention d’un administrateur ou d’un agent du support technique. Si le compte d’un utilisateur est verrouillé ou si ce dernier oublie son mot de passe, il peut suivre des invites afin de se débloquer et de reprendre son travail. Cette fonctionnalité réduit les appels au support technique et la perte de productivité quand l’utilisateur ne parvient pas à se connecter à son appareil ou à une application.
 
 > [!IMPORTANT]
-> Ce guide de démarrage rapide montre comment un administrateur peut activer la réinitialisation de mot de passe en libre-service. Si vous êtes un utilisateur final déjà inscrit pour la réinitialisation de mot de passe en libre-service et que vous devez récupérer votre compte, accédez à https://aka.ms/sspr.
+> Ce tutoriel montre comment un administrateur peut activer la réinitialisation de mot de passe en libre-service. Si vous êtes un utilisateur final déjà inscrit pour la réinitialisation de mot de passe en libre-service et que vous devez récupérer votre compte, accédez à https://aka.ms/sspr.
 >
 > Si votre équipe informatique n’a pas activé la réinitialisation de votre propre mot de passe, contactez votre support technique pour obtenir une assistance supplémentaire.
 
@@ -37,17 +37,22 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 Pour effectuer ce tutoriel, vous avez besoin des ressources et des privilèges suivants :
 
-* Un locataire Azure AD fonctionnel avec au moins une licence d’essai active.
+* Un locataire Azure AD actif sur lequel au moins une licence Azure AD Free ou une licence d’évaluation est activée. Dans le niveau G, SSPR ne fonctionne que pour les utilisateurs cloud dans Azure AD.
+    * Dans les tutoriels suivants de cette série, une licence Azure AD Premium P1 ou une licence d’évaluation est requise pour la réécriture locale du mot de passe.
     * Si nécessaire, [créez-en un gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 * Un compte avec des privilèges d’*Administrateur général*.
 * Un utilisateur non-administrateur avec un mot de passe que vous connaissez, par exemple *testuser*. Dans ce tutoriel, vous testez l’expérience SSPR de l’utilisateur final à l’aide de ce compte.
-    * Si vous devez créer un utilisateur, consultez [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](../add-users-azure-active-directory.md).
+    * Si vous devez créer un utilisateur, consultez [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](../fundamentals/add-users-azure-active-directory.md).
 * Un groupe dont l’utilisateur non-administrateur est membre, par exemple *SSPR-Test-Group*. Vous activez SSPR pour ce groupe dans ce tutoriel.
-    * Si vous devez créer un groupe, consultez la procédure à suivre dans [Créer un groupe et ajouter des membres dans Azure Active Directory](../active-directory-groups-create-azure-portal.md).
+    * Si vous devez créer un groupe, consultez la procédure à suivre dans [Créer un groupe et ajouter des membres dans Azure Active Directory](../fundamentals/active-directory-groups-create-azure-portal.md).
 
 ## <a name="enable-self-service-password-reset"></a>Activer la réinitialisation du mot de passe libre-service
 
-Azure AD vous permet d’activer l’option SSPR pour *Aucun* utilisateur, pour les utilisateurs *sélectionnés* ou pour *Tous* les utilisateurs. Cette capacité à indiquer la précision vous permet de choisir un sous-ensemble d’utilisateurs pour tester le processus d’inscription et le workflow SSPR. Quand que vous vous êtes familiarisé avec le processus et que vous pouvez communiquer les exigences avec un ensemble d’utilisateurs plus large, vous pouvez sélectionner des groupes d’utilisateurs supplémentaires à activer pour SSPR. Vous pouvez également activer SSPR pour tous les membres du locataire Azure AD.
+Azure AD vous permet d’activer l’option SSPR pour *Aucun* utilisateur, pour les utilisateurs *sélectionnés* ou pour *Tous* les utilisateurs. Cette capacité à indiquer la précision vous permet de choisir un sous-ensemble d’utilisateurs pour tester le processus d’inscription et le workflow SSPR. Une fois que vous êtes familiarisé avec le processus et que vous pouvez communiquer les exigences avec un ensemble plus large d’utilisateurs, vous pouvez sélectionner un groupe d’utilisateurs à activer pour SSPR. Vous pouvez également activer SSPR pour tous les membres du locataire Azure AD.
+
+> [!NOTE]
+>
+> Un seul groupe Azure AD peut actuellement être activé pour SSPR à l’aide du portail Azure. Dans le cadre d’un déploiement plus étendu de SSPR, les groupes imbriqués sont pris en charge. Vérifiez que les licences appropriées sont attribuées aux utilisateurs des groupes que vous choisissez. Il n’existe actuellement aucun processus de validation pour ces exigences de licences.
 
 Dans ce tutoriel, vous allez configurer SSPR pour un ensemble d’utilisateurs dans un groupe de test. Dans l’exemple suivant, le groupe *SSPR-Test-Group* est utilisé. Spécifiez votre propre groupe Azure AD en fonction des besoins :
 
@@ -56,9 +61,7 @@ Dans ce tutoriel, vous allez configurer SSPR pour un ensemble d’utilisateurs d
 1. Dans la page **Propriétés**, sous l’option *Réinitialisation de mot de passe en libre-service activée*, choisissez **Sélectionner un groupe**.
 1. Recherchez et sélectionnez votre groupe Azure AD, par exemple *SSPR-Test-Group*, puis choisissez *Sélectionner*.
 
-    [![](media/tutorial-enable-sspr/enable-sspr-for-group-cropped.png "Select a group in the Azure portal to enable for self-service password reset")](media/tutorial-enable-sspr/enable-sspr-for-group.png#lightbox)
-
-    Dans le cadre d’un déploiement plus étendu de SSPR, les groupes imbriqués sont pris en charge. Vérifiez que les licences appropriées sont attribuées aux utilisateurs des groupes que vous choisissez. Il n’existe actuellement aucun processus de validation pour ces exigences de licences.
+    [ ![Sélectionner un groupe sur le portail Azure pour activer la réinitialisation de mot de passe en libre-service](media/tutorial-enable-sspr/enable-sspr-for-group-cropped.png) ](media/tutorial-enable-sspr/enable-sspr-for-group.png#lightbox)
 
 1. Pour activer SSPR pour les utilisateurs sélectionnés, sélectionnez **Enregistrer**.
 
@@ -76,7 +79,8 @@ Quand les utilisateurs doivent déverrouiller leur compte ou réinitialiser leur
     * *Code de l’application mobile*
     * *E-mail*
     * *Téléphone mobile*
-    * *Téléphone de bureau*
+
+    Des méthodes d’authentification supplémentaires, telles que *Téléphone professionnel* ou *Questions de sécurité*, peuvent être activées si nécessaire pour répondre aux besoins de votre entreprise.
 
 1. Pour appliquer les méthodes d’authentification, sélectionnez **Enregistrer**.
 
@@ -92,7 +96,7 @@ Un administrateur peut spécifier manuellement ces informations de contact, ou l
 
 ## <a name="configure-notifications-and-customizations"></a>Configurer les notifications et les personnalisations
 
-Pour informer les utilisateurs de l’activité des comptes, vous pouvez configurer l’envoi de notifications par e-mail quand un événement SSPR se produit. Ces notifications peuvent couvrir les comptes d’utilisateur standard et les comptes d’administrateur. Pour les comptes d’administrateur, cette notification fournit une couche de sensibilisation supplémentaire quand un mot de passe de compte d’administrateur privilégié est réinitialisé à l’aide de SSPR.
+Pour informer les utilisateurs de l’activité des comptes, vous pouvez configurer l’envoi de notifications par e-mail quand un événement SSPR se produit. Ces notifications peuvent couvrir les comptes d’utilisateur standard et les comptes d’administrateur. Pour les comptes d’administrateur, cette notification fournit une couche de sensibilisation supplémentaire quand un mot de passe de compte d’administrateur privilégié est réinitialisé à l’aide de SSPR. Tous les administrateurs généraux sont avertis lorsque SSPR est utilisé sur un compte d’administrateur.
 
 1. Dans la page **Notifications** du menu de gauche, configurez les options suivantes :
 
@@ -112,7 +116,7 @@ Si les utilisateurs ont besoin d’aide supplémentaire avec le processus SSPR, 
 Avec l’option SSPR activée et configurée, testez le processus SSPR avec un utilisateur qui fait partie du groupe que vous avez sélectionné dans la section précédente, par exemple *Test-SSPR-Group*. Dans l’exemple suivant, le compte *testuser* est utilisé. Spécifiez votre propre compte d’utilisateur qui fait partie du groupe que vous avez activé pour SSPR dans la première section de ce tutoriel.
 
 > [!NOTE]
-> Quand vous testez la réinitialisation de mot de passe en libre-service, utilisez un compte non-administrateur. Les administrateurs bénéficient toujours du libre-service pour la réinitialisation de leur mot de passe, et doivent utiliser deux méthodes d’authentification pour réinitialiser leur mot de passe.
+> Quand vous testez la réinitialisation de mot de passe en libre-service, utilisez un compte non-administrateur. Par défaut, les administrateurs bénéficient du libre-service pour la réinitialisation de leur mot de passe, et doivent utiliser deux méthodes d’authentification pour réinitialiser leur mot de passe. Pour plus d’informations, consultez [Différences en matière de stratégie de réinitialisation par l’administrateur](concept-sspr-policy.md#administrator-reset-policy-differences).
 
 1. Pour voir le processus d’inscription manuelle, ouvrez une nouvelle fenêtre de navigateur dans InPrivate ou en mode de navigation privée, et accédez à [https://aka.ms/ssprsetup](https://aka.ms/ssprsetup). Les utilisateurs doivent être redirigés vers ce portail d’inscription lors de leur prochaine connexion.
 1. Connectez-vous avec un utilisateur test non-administrateur, par exemple *testuser*, et inscrivez vos informations de contact pour les méthodes d’authentification.
@@ -145,4 +149,4 @@ Dans ce tutoriel, vous avez activé la réinitialisation de mot de passe Azure 
 > * Tester le processus SSPR en tant qu’utilisateur
 
 > [!div class="nextstepaction"]
-> [Activation d’Azure Multi-Factor Authentication](tutorial-mfa-applications.md)
+> [Activer Azure AD Multi-Factor Authentication](./tutorial-enable-azure-mfa.md)

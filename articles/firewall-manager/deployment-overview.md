@@ -1,24 +1,22 @@
 ---
-title: Vue d’ensemble du déploiement d’Azure Firewall Manager Preview
-description: Découvrez les étapes de déploiement de haut niveau requises pour Azure Firewall Manager Preview
+title: Vue d’ensemble du déploiement d’Azure Firewall Manager
+description: Découvrez les étapes générales de déploiement nécessaires pour Azure Firewall Manager.
 author: vhorne
 ms.service: firewall-manager
 services: firewall-manager
-ms.topic: overview
-ms.date: 02/18/2020
+ms.topic: conceptual
+ms.date: 08/28/2020
 ms.author: victorh
-ms.openlocfilehash: c3a94cea838609f65511a21ee2f64e8782a6adea
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: ceb6e84b31067f7289b9e003a4fb273ce717de33
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77443123"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079096"
 ---
-# <a name="azure-firewall-manager-preview-deployment-overview"></a>Vue d’ensemble du déploiement d’Azure Firewall Manager Preview
+# <a name="azure-firewall-manager-deployment-overview"></a>Vue d’ensemble du déploiement d’Azure Firewall Manager
 
-[!INCLUDE [Preview](../../includes/firewall-manager-preview-notice.md)]
-
-Azure Firewall Manager Preview peut être déployé de différentes manières, mais la procédure générale suivante est recommandée.
+Azure Firewall Manager peut être déployé de différentes manières, mais la procédure générale suivante est recommandée.
 
 ## <a name="general-deployment-process"></a>Processus général de déploiement
 
@@ -67,7 +65,16 @@ Azure Firewall Manager Preview peut être déployé de différentes manières, m
 > - Seul un hub par WAN virtuel par région est autorisé. Vous pouvez cependant ajouter plusieurs WAN virtuels dans la région.
 > - Les espaces d’adresses IP des hubs ne doivent pas se chevaucher dans un vWAN.
 > - Vos connexions de réseau virtuel de hub doivent se trouver dans la même région que le hub.
+>
+> Pour plus d’informations sur les problèmes connus, consultez [Qu’est-ce qu’Azure Firewall Manager ?](overview.md#known-issues)
+
+## <a name="convert-virtual-networks"></a>Convertir des réseaux virtuels
+
+Les informations suivantes s’appliquent si vous convertissez un réseau virtuel existant en réseau virtuel hub :
+
+- Si le réseau virtuel possède un pare-feu Azure, vous sélectionnez une stratégie de pare-feu à associer au pare-feu. L’état de provisionnement du pare-feu est mis à jour quand la stratégie de pare-feu remplace les règles de pare-feu. Pendant l’état de provisionnement, le pare-feu continue de traiter le trafic et n’a pas de temps d’arrêt. Vous pouvez importer des règles existantes dans une stratégie de pare-feu à l’aide de Firewall Manager ou d’Azure PowerShell.
+- Si le réseau virtuel n’est associé à aucun pare-feu Azure, un pare-feu est déployé et la stratégie de pare-feu est associée au nouveau pare-feu.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Tutoriel : Sécuriser votre réseau cloud avec Azure Firewall Manager Preview à l’aide du portail Azure](secure-cloud-network.md)
+- [Tutoriel : Sécuriser votre réseau cloud avec Azure Firewall Manager à l’aide du Portail Azure](secure-cloud-network.md)

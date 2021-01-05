@@ -1,33 +1,27 @@
 ---
 title: Tailles des machines virtuelles – GPU | Microsoft Docs
 description: Répertorie les différentes tailles de GPU optimisées disponibles pour les machines virtuelles dans Azure. Répertorie des informations sur le nombre de processeurs virtuels, de disques de données et de cartes réseau, ainsi que sur le débit de stockage et la bande passante réseau pour les tailles disponibles dans cette série.
-services: virtual-machines
-documentationcenter: ''
-author: vikancha
-manager: gwallace
-editor: ''
-tags: azure-resource-manager,azure-service-management
-ms.assetid: ''
+author: vikancha-MSFT
 ms.service: virtual-machines
-ms.devlang: na
-ms.topic: article
+ms.subservice: sizes
+ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 02/03/2020
-ms.author: jonbeck
-ms.openlocfilehash: 5d36ba05d2138a06ebb2ef4e49aadb6032b62b92
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.author: jushiman
+ms.openlocfilehash: fb534ae4a59c9a5c87a7eb7ab268a40b9771fdb2
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82627039"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91876224"
 ---
 # <a name="gpu-optimized-virtual-machine-sizes"></a>Tailles de machine virtuelle à GPU optimisé
 
 Les tailles de machine virtuelle au GPU optimisé sont des machines virtuelles spécialisées disponibles avec des GPU uniques, multiples ou fractionnaires. Ces tailles sont conçues pour des charges de travail de visualisation, mais également de calcul et d’affichage graphique intensifs. Cet article donne des informations sur le nombre et le type de GPU, de processeurs virtuels, de disques de données et de cartes réseau. Le débit de stockage et la bande passante réseau sont également inclus pour chacune des tailles de ce regroupement.
 
-- Les tailles des séries [NC](nc-series.md), [NCv2](ncv2-series.md) et [NCv3](ncv3-series.md) sont optimisées pour les algorithmes et les applications nécessitant beaucoup de ressources réseau et de calculs. En voici quelques exemples : les applications et les simulations CUDA et OpenCL, l’intelligence artificielle et l’apprentissage profond (Deep Learning). Équipée du GPU Tesla V100 de NVIDIA, la série NCv3 est axée sur les charges de travail informatiques à hautes performances. La série NC utilise le processeur Intel Xeon E5-2690 v3 2.60GHz v3 (Haswell) et les machines virtuelles de la série NCv2 et NCv3 sont dotées du processeur Intel Xeon E5-2690 v4 (Broadwell).
+- Les tailles [Série NCv3](ncv3-series.md) et [Série NC T4_v3](nct4-v3-series.md) sont optimisées pour les applications à accélération GPU nécessitant beaucoup de ressources système. En voici quelques exemples : les applications et les simulations CUDA et OpenCL, l’intelligence artificielle et l’apprentissage profond (Deep Learning). La série NC T4 v3 est axée sur les charges de travail d’inférence comprenant le GPU Tesla T4 de NVIDIA et le processeur AMD EPYC2 Rome. Équipée du GPU Tesla V100 de NVIDIA, la série NCv3 est axée sur les charges de travail informatiques et IA à hautes performances.
 
-- Les tailles des séries [ND](nd-series.md) et [NDv2](ndv2-series.md) sont destinées à l’exécution de scénarios d’apprentissage et d’inférence pour l’apprentissage profond (Deep Learning). Elles utilisent le GPU NVIDIA Tesla P40 et le processeur Intel Xeon E5-2690 v4 (Broadwell). La série NDv2 utilise le processeur Intel Xeon Platinum 8168 (Skylake).
+- La [série NDv2](ndv2-series.md) est axée sur les applications de Deep Learning avec montée en puissance et scale-out. La série NDv2 utilise NVIDIA Volta V100 le processeur Intel Xeon Platinum 8168 (Skylake).
 
 - Les tailles des séries [NV](nv-series.md) et [NVv3](nvv3-series.md) sont optimisées et conçues pour la visualisation à distance, la diffusion en continu, les jeux, l’encodage et les scénarios de VDI utilisant des infrastructures comme OpenGL ou DirectX. Ces machines virtuelles reposent sur le GPU Tesla M60 de NVIDIA.
 
@@ -37,11 +31,11 @@ Les tailles de machine virtuelle au GPU optimisé sont des machines virtuelles s
 
 Pour tirer parti des fonctionnalités GPU des machines virtuelles Azure de série N, installez des pilotes GPU NVIDIA ou AMD.
 
-- Pour les machines virtuelles s’appuyant sur des GPU NVIDIA, l’[extension Pilote GPU NVIDIA](/azure/virtual-machines/extensions/hpccompute-gpu-windows) installe les pilotes CUDA ou GRID NVIDIA appropriés. Installez ou gérez l’extension à l’aide du portail Azure ou d’outils tels qu’Azure PowerShell ou les modèles Azure Resource Manager. Consultez la [documentation sur l’extension du pilote GPU NVIDIA](/azure/virtual-machines/extensions/hpccompute-gpu-windows) pour connaître les systèmes d’exploitation pris en charge et les étapes de déploiement. Pour des informations générales sur les extensions de machine virtuelle, consultez [Extensions et fonctionnalités des machines virtuelles Azure](/azure/virtual-machines/extensions/overview).
+- Pour les machines virtuelles s’appuyant sur des GPU NVIDIA, l’[extension Pilote GPU NVIDIA](./extensions/hpccompute-gpu-windows.md) installe les pilotes CUDA ou GRID NVIDIA appropriés. Installez ou gérez l’extension à l’aide du portail Azure ou d’outils tels qu’Azure PowerShell ou les modèles Azure Resource Manager. Consultez la [documentation sur l’extension du pilote GPU NVIDIA](./extensions/hpccompute-gpu-windows.md) pour connaître les systèmes d’exploitation pris en charge et les étapes de déploiement. Pour des informations générales sur les extensions de machine virtuelle, consultez [Extensions et fonctionnalités des machines virtuelles Azure](./extensions/overview.md).   
 
-   Vous pouvez également installer les pilotes GPU NVIDIA manuellement. Pour connaître les systèmes d’exploitation et pilotes pris en charge, ainsi que les étapes d’installation et de vérification, consultez [Installer les pilotes GPU NVIDIA sur les machines virtuelles de série N exécutant Windows](/azure/virtual-machines/windows/n-series-driver-setup) ou [Installer les pilotes GPU NVIDIA sur les machines virtuelles de série N exécutant Linux](/azure/virtual-machines/linux/n-series-driver-setup).
+   Vous pouvez également installer les pilotes GPU NVIDIA manuellement. Pour connaître les systèmes d’exploitation et pilotes pris en charge, ainsi que les étapes d’installation et de vérification, consultez [Installer les pilotes GPU NVIDIA sur les machines virtuelles de série N exécutant Windows](./windows/n-series-driver-setup.md) ou [Installer les pilotes GPU NVIDIA sur les machines virtuelles de série N exécutant Linux](./linux/n-series-driver-setup.md).
 
-- Pour les machines virtuelles s’appuyant sur des GPU AMD, consultez [Installer les pilotes GPU AMD sur les machines virtuelles de série N exécutant Windows](/azure/virtual-machines/windows/n-series-amd-driver-setup) pour connaître les systèmes d’exploitation et pilotes pris en charge, ainsi que les étapes d’installation et de vérification.
+- Pour les machines virtuelles s’appuyant sur des GPU AMD, consultez [Installer les pilotes GPU AMD sur les machines virtuelles de série N exécutant Windows](./windows/n-series-amd-driver-setup.md) pour connaître les systèmes d’exploitation et pilotes pris en charge, ainsi que les étapes d’installation et de vérification.
 
 ## <a name="deployment-considerations"></a>Points à prendre en considération pour le déploiement
 

@@ -1,20 +1,21 @@
 ---
 title: Forum aux questions (FAQ) sur Cloudyn dans Azure
-description: Cet article fournit des réponses à certaines questions fréquemment posées sur Cloudyn.
+description: Découvrez comment utiliser le portail Cloudyn pour résoudre les problèmes courants de configuration d’entreprise indirects et répondre à d’autres questions fréquemment posées.
 author: bandersmsft
 ms.author: banders
-ms.date: 03/12/2020
+ms.date: 10/23/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.reviewer: benshy
 ms.custom: seodec18
 ROBOTS: NOINDEX
-ms.openlocfilehash: b1ec81ea135079defb390becc025f51cde2dad7f
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: 92a62de4223d2ec6d0441840b90fdce20c656d02
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411241"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92546226"
 ---
 # <a name="frequently-asked-questions-for-cloudyn"></a>Forum aux questions (FAQ) sur Cloudyn
 
@@ -26,7 +27,7 @@ Cet article traite des questions courantes relatives à Cloudyn. Si vous avez de
 
 Lorsque vous utilisez le portail Cloudyn pour la première fois, les messages suivants peuvent s’afficher si vous disposez d’un contrat Entreprise ou de fournisseur de solutions cloud (CSP) :
 
-- Le message « La clé d’API spécifiée n’est pas une clé d’inscription de niveau supérieur » s’est affiché dans l’Assistant **Configurer Cloudyn**.
+- Le message « La clé d’API spécifiée n’est pas une clé d’inscription de niveau supérieur » s’est affiché dans l’Assistant **Configurer Cloudyn** .
 - « Inscription directe – Non », sur le portail Contrat Entreprise.
 - « Aucune donnée d’utilisation trouvée pour les 30 derniers jours. Contactez votre distributeur pour vous assurer que le balisage a été activé pour votre compte Azure », sur le portail Cloudyn.
 
@@ -36,7 +37,7 @@ Voici comment corriger les problèmes :
 
 1. Votre revendeur doit activer le _balisage_ pour votre compte. Consultez les instructions sous [Indirect Customer Onboarding Guide](https://ea.azure.com/api/v3Help/v2IndirectCustomerOnboardingGuide) (Guide d’intégration de client indirecte).
 
-2. Vous générez la clé Azure Enterprise Agreement à utiliser avec Cloudyn. Consultez les instructions sous [Adding Your Azure EA](quick-register-ea.md#register-with-cloudyn) (Ajout de votre Azure EA) ou [How to Find Your EA Enrollment ID and API Key](https://youtu.be/u_phLs_udig) (Comment trouver l’ID d’inscription EA et la clé API).
+2. Vous générez la clé Azure Enterprise Agreement à utiliser avec Cloudyn.
 
 Seul un administrateur de service Azure peut activer Cloudyn. Les autorisations de coadministrateur sont insuffisantes.
 
@@ -50,7 +51,7 @@ Vous devrez peut-être également accorder aux administrateurs de service, propr
 
 ## <a name="why-dont-i-see-optimizer-recommendations"></a>Pourquoi je ne vois pas les recommandations de l’optimiseur ?
 
-Les informations de recommandation ne sont disponibles que pour les comptes activés. Vous ne verrez pas d’informations de recommandation dans les catégories de rapport de l’**optimiseur** pour les comptes qui sont *désactivés*, y compris :
+Les informations de recommandation ne sont disponibles que pour les comptes activés. Vous ne verrez pas d’informations de recommandation dans les catégories de rapport de l’ **optimiseur** pour les comptes qui sont *désactivés* , y compris :
 
 - Gestionnaire d’optimisation
 - Optimisation des prix
@@ -61,11 +62,11 @@ Si vous ne pouvez pas afficher les données de recommandation de l’optimiseur,
 Pour activer un compte :
 
 1.    Dans le portail Cloudyn, cliquez sur **Settings (Paramètres)** dans le coin supérieur droit et sélectionnez **Cloud Accounts (comptes cloud)** .
-2.    Dans l’onglet Comptes Microsoft Azure, recherchez les comptes dont l’abonnement est **désactivé**.
+2.    Dans l’onglet Comptes Microsoft Azure, recherchez les comptes dont l’abonnement est **désactivé** .
 3.    À la droite d’un compte désactivé, cliquez sur le symbole **Modifier** qui ressemble à un crayon.
-4.    Vos ID client et ID taux sont détectés automatiquement. Cliquez sur **Suivant**.
+4.    Vos ID client et ID taux sont détectés automatiquement. Cliquez sur **Suivant** .
 5.    Vous êtes redirigé vers le portail Azure. Connectez-vous au portail et autorisez le collecteur Cloudyn à accéder à vos données Azure.
-6.    Ensuite, vous êtes redirigé vers la page de gestion des comptes Cloudyn et votre abonnement est mis à jour avec un état du compte **actif**. Il affiche un symbole de coche verte.
+6.    Ensuite, vous êtes redirigé vers la page de gestion des comptes Cloudyn et votre abonnement est mis à jour avec un état du compte **actif** . Il affiche un symbole de coche verte.
 7.    Si vous ne voyez pas un symbole de coche verte pour un ou plusieurs des abonnements, cela signifie que vous n’avez pas d’autorisations pour créer une application de lecteur (le CloudynCollector) pour l’abonnement. Un utilisateur avec des autorisations plus élevées pour l’abonnement doit répéter les étapes 3 et 4.  
 
 Après avoir effectué les étapes précédentes, vous pouvez afficher les recommandations de l’optimiseur au bout d’un ou deux jours. Toutefois, cela peut prendre jusqu’à cinq jours avant que les données complètes d’optimisation ne soient disponibles.
@@ -73,11 +74,11 @@ Après avoir effectué les étapes précédentes, vous pouvez afficher les recom
 
 ## <a name="how-do-i-enable-suspended-or-locked-out-users"></a>Comment faire pour activer les utilisateurs suspendus ou verrouillés ?
 
-Examinons tout d’abord le scénario le plus courant qui met les comptes d’utilisateur à l’état *initiallySuspended*.
+Examinons tout d’abord le scénario le plus courant qui met les comptes d’utilisateur à l’état *initiallySuspended* .
 
-> L’administrateur 1 peut être un fournisseur de solutions Microsoft Cloud ou un utilisateur de contrat d’entreprise. Son organisation est prête à commencer à utiliser Cloudyn.  Il s’inscrit via le portail Azure et se connecte au portail Cloudyn. En tant que la personne qui inscrit le service Cloudyn et qui se connecte au portail Cloudyn, l'administrateur 1 devient *l’administrateur principal*. L’administrateur 1 ne crée pas de comptes utilisateur. Toutefois, à l’aide du portail Cloudyn, il crée des comptes Azure et définit une hiérarchie d’entité. L’administrateur 1 informe l’administrateur 2, un administrateur locataire, qu’il doit s’inscrire auprès de Cloudyn et se connecter au portail Cloudyn.
+> L’administrateur 1 peut être un fournisseur de solutions Microsoft Cloud ou un utilisateur de contrat d’entreprise. Son organisation est prête à commencer à utiliser Cloudyn.  Il s’inscrit via le portail Azure et se connecte au portail Cloudyn. En tant que la personne qui inscrit le service Cloudyn et qui se connecte au portail Cloudyn, l'administrateur 1 devient *l’administrateur principal* . L’administrateur 1 ne crée pas de comptes utilisateur. Toutefois, à l’aide du portail Cloudyn, il crée des comptes Azure et définit une hiérarchie d’entité. L’administrateur 1 informe l’administrateur 2, un administrateur locataire, qu’il doit s’inscrire auprès de Cloudyn et se connecter au portail Cloudyn.
 >
-> L’administrateur 2 s’inscrit via le portail Azure. Toutefois, lorsqu’il tente de se connecter au portail Cloudyn, il reçoit un message d’erreur indiquant que son compte est **suspendu**. L’administrateur principal, ou administrateur 1, est averti de la suspension du compte. L’administrateur 1 doit activer le compte de l’administrateur 2 et accorder l’*accès à l’entité administrateur* pour les entités appropriées, autorise l’accès à la gestion utilisateur et active le compte d’utilisateur.
+> L’administrateur 2 s’inscrit via le portail Azure. Toutefois, lorsqu’il tente de se connecter au portail Cloudyn, il reçoit un message d’erreur indiquant que son compte est **suspendu** . L’administrateur principal, ou administrateur 1, est averti de la suspension du compte. L’administrateur 1 doit activer le compte de l’administrateur 2 et accorder l’ *accès à l’entité administrateur* pour les entités appropriées, autorise l’accès à la gestion utilisateur et active le compte d’utilisateur.
 
 
 Si vous recevez une alerte vous demandant d’autoriser l’accès pour un utilisateur, vous devez activer le compte d’utilisateur.
@@ -105,7 +106,7 @@ Dès que vos comptes Azure sont découverts par Cloudyn, les données de coût s
 
 Pour ajouter des informations d’identification Azure pour un compte, dans le portail Cloudyn, sélectionnez le symbole de modification à droite du nom du compte, pas de l’abonnement.
 
-Tant que vos informations d’identification Azure ne sont pas ajoutées dans Cloudyn, le compte apparaît comme étant _non activé_.
+Tant que vos informations d’identification Azure ne sont pas ajoutées dans Cloudyn, le compte apparaît comme étant _non activé_ .
 
 ## <a name="how-do-i-add-multiple-accounts-and-entities-to-an-existing-subscription"></a>Comment ajouter plusieurs comptes et entités à un abonnement existant ?
 
@@ -113,7 +114,7 @@ Les entités supplémentaires sont utilisées pour ajouter des Contrats Entrepri
 
 Pour les CSP :
 
-Pour ajouter des comptes CSP supplémentaires à une entité, sélectionnez **MSP Access** (Accès MSP) au lieu de **Enterprise** (Entreprise) lorsque vous créez la nouvelle entité. Si votre compte est inscrit en tant qu’Accord Entreprise et si vous souhaitez ajouter des informations d’identification CSP, le service de support technique Cloudyn devra peut-être modifier les paramètres de votre compte. Si vous êtes un abonné Azure payant, vous pouvez créer une nouvelle demande de support dans le portail Azure. Sélectionnez **Aide + Support**, puis **Nouvelle demande de support**.
+Pour ajouter des comptes CSP supplémentaires à une entité, sélectionnez **MSP Access** (Accès MSP) au lieu de **Enterprise** (Entreprise) lorsque vous créez la nouvelle entité. Si votre compte est inscrit en tant qu’Accord Entreprise et si vous souhaitez ajouter des informations d’identification CSP, le service de support technique Cloudyn devra peut-être modifier les paramètres de votre compte. Si vous êtes un abonné Azure payant, vous pouvez créer une nouvelle demande de support dans le portail Azure. Sélectionnez **Aide + Support** , puis **Nouvelle demande de support** .
 
 ## <a name="currency-symbols-in-cloudyn-reports"></a>Symboles monétaires dans les rapports Cloudyn
 

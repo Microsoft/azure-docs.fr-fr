@@ -9,12 +9,12 @@ metadata:
   author: florianborn71
   ms.author: flborn
   ms.date: 03/26/2020
-  ms.openlocfilehash: e379515ea34206e21f80ceb23a465858d6d4da81
-  ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+  ms.openlocfilehash: e740fd08dc3e616b0768c6c15fd4191cb58e261a
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/21/2020
-  ms.locfileid: "83773217"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "85565433"
 landingContent:
 - title: À propos d’Azure Remote Rendering
   linkLists:
@@ -52,17 +52,27 @@ landingContent:
       url: quickstarts/deploy-to-hololens.md
     - text: Déployer l’exemple Unity sur un Bureau
       url: quickstarts/deploy-to-desktop.md
+    - text: Déployer l’exemple C++ natif sur HoloLens
+      url: quickstarts/native-cpp/hololens/deploy-native-cpp-tutorial.md
     - text: Convertir un modèle pour le rendu
       url: quickstarts/convert-model.md
-- title: Apprendre à créer sa propre application dans Unity
+- title: Apprendre à créer votre propre application
   linkLists:
   - linkListType: tutorial
     links:
-    - text: 'Unity : Configuration d’un projet en partant de zéro'
-      url: tutorials/unity/project-setup.md
-    - text: 'Unity : Utilisation d’entités distantes'
-      url: tutorials/unity/working-with-remote-entities.md
-    - text: 'Unity : Changement d’environnement et de matériaux'
-      url: tutorials/unity/changing-environment-and-materials.md
+    - text: Vue d’ensemble
+      url: tutorials/unity/tutorial-landing.md
+    - text: Affichage d’un modèle rendu à distance
+      url: tutorials/unity/view-remote-models/view-remote-models.md
+    - text: Chargement de modèles personnalisés
+      url: tutorials/unity/custom-models/custom-models.md
+    - text: Manipulation de modèles
+      url: tutorials/unity/manipulate-models/manipulate-models.md
+    - text: Affinage des matériaux, de l’éclairage et des effets
+      url: tutorials/unity/materials-lighting-effects/materials-lighting-effects.md
+    - text: Sécurisation d’Azure Remote Rendering et du stockage de modèles
+      url: tutorials/unity/security/security.md
+    - text: Création d’une application Azure Remote Rendering prête à la commercialisation
+      url: tutorials/unity/commercial-ready/commercial-ready.md
     - text: 'C++ natif : Intégrer Remote Rendering dans une application holographique HoloLens'
       url: tutorials/native-cpp/hololens/integrate-remote-rendering-into-holographic-app.md

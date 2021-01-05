@@ -10,13 +10,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 04/08/2020
-ms.openlocfilehash: 2e4e554bb6564adb8c6722533e127a758e5a9c24
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 10/28/2020
+ms.openlocfilehash: c0f7df8db79f549dfeca15e6411ae72cbe66d2bd
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415401"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97346280"
 ---
 # <a name="copy-and-transform-data-in-azure-data-lake-storage-gen2-using-azure-data-factory"></a>Copier et transformer des données dans Data Lake Storage Gen2 avec Data Factory
 
@@ -46,10 +46,6 @@ Pour l’activité de copie, avec ce connecteur, vous pouvez effectuer les opér
 - [La conservation des métadonnées de fichier lors de la copie](#preserve-metadata-during-copy).
 - [Conserver les listes de contrôle d’accès](#preserve-acls) lors de la copie à partir d’Azure Data Lake Storage Gen1/Gen2.
 
->[!IMPORTANT]
->Si vous activez l’option **Autoriser les services Microsoft approuvés à accéder à ce compte de stockage** dans les paramètres du pare-feu Stockage Azure et que vous souhaitez utiliser le runtime d’intégration Azure pour vous connecter à Data Lake Storage Gen2, vous devez utiliser une [authentification d’identité managée](#managed-identity) pour ADLS Gen2.
-
-
 ## <a name="get-started"></a>Bien démarrer
 
 >[!TIP]
@@ -68,7 +64,8 @@ Le connecteur Azure Data Lake Storage Gen2 prend en charge les types d’authent
 - [Identités managées pour authentifier les ressources Azure](#managed-identity)
 
 >[!NOTE]
->Lorsque vous utilisez PolyBase pour charger des données dans SQL Data Warehouse, si votre instance Data Lake Storage Gen2 source est configurée avec le point de terminaison de réseau virtuel, vous devez utiliser l’authentification par identité managée comme requis par PolyBase. Pour en savoir plus sur la configuration requise, voir la section sur l’[authentification par identité managée](#managed-identity).
+>- Si vous utilisez le runtime d’intégration Azure public pour vous connecter à Data Lake Storage Gen2 avec l’option **Autoriser les services Microsoft approuvés à accéder à ce compte de stockage** activée sur le pare-feu Stockage Azure, vous devez recourir à [l’authentification par identité managée](#managed-identity).
+>- Si vous utilisez PolyBase ou l’instruction COPY pour charger des données dans Azure Synapse Analytics et que votre Data Lake Storage Gen2 source ou de préproduction est configuré avec un point de terminaison de réseau virtuel Azure, vous devez utiliser l’authentification par identité managée comme l’exige Synapse. Pour en savoir plus sur la configuration requise, voir la section sur l’[authentification par identité managée](#managed-identity).
 
 ### <a name="account-key-authentication"></a>Authentification par clé de compte
 
@@ -131,11 +128,16 @@ Ces propriétés sont prises en charge pour le service lié :
 | type | La propriété type doit être définie sur **AzureBlobFS**. |Oui |
 | url | Point de terminaison pour Data Lake Storage Gen2 avec le modèle de `https://<accountname>.dfs.core.windows.net`. | Oui |
 | servicePrincipalId | Spécifiez l’ID client de l’application. | Oui |
-| servicePrincipalKey | Spécifiez la clé de l’application. Marquez ce champ comme `SecureString` pour le stocker de façon sécurisée dans Data Factory. Vous pouvez également [référencer un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| servicePrincipalCredentialType | Type d’informations d’identification à utiliser pour l’authentification de principal du service. Les valeurs autorisées sont **ServicePrincipalKey** et **ServicePrincipalCert**. | Oui |
+| servicePrincipalCredential | Informations d’identification du principal du service. <br/> Quand vous utilisez **ServicePrincipalKey** comme type d’informations d’identification, spécifiez la clé de l’application. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). <br/> Quand vous utilisez **ServicePrincipalCert** comme informations d’identification, référencez un certificat dans Azure Key Vault. | Oui |
+| servicePrincipalKey | Spécifiez la clé de l’application. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). <br/> Cette propriété est toujours prise en charge telle quelle pour `servicePrincipalId` + `servicePrincipalKey`. Comme ADF ajoute une nouvelle authentification par certificat du principal du service, le nouveau modèle pour l’authentification de principal du service est `servicePrincipalId` + `servicePrincipalCredentialType` + `servicePrincipalCredential`. | Non |
 | tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. Récupérez-les en pointant la souris dans le coin supérieur droit du Portail Azure. | Oui |
+| azureCloudType | Pour l’authentification du principal du service, spécifiez le type d’environnement cloud Azure auprès duquel votre application Azure Active Directory est inscrite. <br/> Les valeurs autorisées sont **AzurePublic**, **AzureChina**, **AzureUsGovernment** et **AzureGermany**. Par défaut, l’environnement cloud de la fabrique de données est utilisé. | Non |
 | connectVia | Le [runtime d’intégration](concepts-integration-runtime.md) à utiliser pour se connecter à la banque de données. Vous pouvez utiliser le runtime d'intégration Azure ou un runtime d’intégration auto-hébergé si votre banque de données se trouve sur un réseau privé. À défaut de spécification, l’Azure Integration Runtime par défaut est utilisé. |Non |
 
-**Exemple :**
+**Exemple : utilisation de l’authentification de la clé du principal de service**
+
+Vous pouvez également stocker la clé du principal du service dans Azure Key Vault.
 
 ```json
 {
@@ -145,9 +147,38 @@ Ces propriétés sont prises en charge pour le service lié :
         "typeProperties": {
             "url": "https://<accountname>.dfs.core.windows.net", 
             "servicePrincipalId": "<service principal id>",
-            "servicePrincipalKey": {
+            "servicePrincipalCredentialType": "ServicePrincipalKey",
+            "servicePrincipalCredential": {
                 "type": "SecureString",
                 "value": "<service principal key>"
+            },
+            "tenant": "<tenant info, e.g. microsoft.onmicrosoft.com>" 
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+**Exemple : utilisation de l’authentification par certificat du principal du service**
+```json
+{
+    "name": "AzureDataLakeStorageGen2LinkedService",
+    "properties": {
+        "type": "AzureBlobFS",
+        "typeProperties": {
+            "url": "https://<accountname>.dfs.core.windows.net", 
+            "servicePrincipalId": "<service principal id>",
+            "servicePrincipalCredentialType": "ServicePrincipalCert",
+            "servicePrincipalCredential": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<AKV reference>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<certificate name in AKV>" 
             },
             "tenant": "<tenant info, e.g. microsoft.onmicrosoft.com>" 
         },
@@ -176,7 +207,7 @@ Pour utiliser les identités managées afin d’authentifier les ressources Azur
 >Si vous utilisez l’interface utilisateur de Data Factory pour la création et que l’identité managée n’est pas définie avec le rôle « Lecteur des données Blob du stockage/Contributeur aux données Blob du stockage » dans IAM, quand vous effectuez une connexion de test ou accédez à des dossiers, choisissez « Tester la connexion au chemin du fichier » ou « Parcourir à partir du chemin spécifié », puis spécifiez un chemin avec l’autorisation **Lecture + Exécution** pour continuer.
 
 >[!IMPORTANT]
->Si vous utilisez PolyBase pour charger des données à partir de Data Lake Storage Gen2 dans SQL Data Warehouse, lors de l’utilisation de l’authentification d’identité managée pour Data Lake Storage Gen2, veillez à suivre également les étapes 1 et 2 de [ce guide](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md#impact-of-using-vnet-service-endpoints-with-azure-storage) pour 1) inscrire votre serveur SQL Database auprès d’Azure Active Directory (Azure AD) et pour 2) attribuer le rôle de contributeur aux données Blob Storage à votre serveur SQL Database. Le reste est géré par Data Factory. Si votre instance Data Lake Storage Gen2 source est configurée avec un point de terminaison de réseau virtuel Azure, pour utiliser PolyBase depuis cet emplacement, vous devez utiliser l’authentification par identité managée comme requis par PolyBase.
+>Si vous utilisez PolyBase ou l’instruction COPY pour charger des données de Data Lake Storage Gen2 dans Azure Synapse Analytics et que vous avez recours à l’authentification par identité managée pour Data Lake Storage Gen2, veillez également à suivre les étapes 1 à 3 de [cette aide](../azure-sql/database/vnet-service-endpoint-rule-overview.md#impact-of-using-virtual-network-service-endpoints-with-azure-storage). Ces étapes inscrivent votre serveur auprès d’Azure AD et attribuent le rôle de contributeur aux données de l’objet blob de stockage. Data Factory gère le reste. Si vous configurez le Stockage Blob avec un point de terminaison de réseau virtuel Azure, vous devez également activer **Autoriser les services Microsoft approuvés à accéder à ce compte de stockage** dans le menu des paramètres **Pare-feu et réseaux virtuels** du compte Stockage Azure, comme l’exige Synapse.
 
 Ces propriétés sont prises en charge pour le service lié :
 
@@ -254,16 +285,29 @@ Pour obtenir la liste complète des sections et des propriétés disponibles pou
 
 [!INCLUDE [data-factory-v2-file-formats](../../includes/data-factory-v2-file-formats.md)] 
 
+Vous avez plusieurs options pour copier des données à partir de ADLS Gen2 :
+
+- Copier à partir du chemin d’accès spécifié dans le jeu de données.
+- Filtre de caractères génériques sur le chemin d’accès du dossier ou le nom du fichier, consultez `wildcardFolderPath` et `wildcardFileName`.
+- Copier les fichiers définis dans un fichier texte donné en tant que jeu de fichiers, consultez `fileListPath`.
+
 Les propriétés suivantes sont prises en charge pour Data Lake Storage Gen2 dans les paramètres `storeSettings` de la source de copie basée sur le format :
 
 | Propriété                 | Description                                                  | Obligatoire                                      |
 | ------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
 | type                     | La propriété type sous `storeSettings` doit être définie sur **AzureBlobFSReadSettings**. | Oui                                           |
-| recursive                | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. Les valeurs autorisées sont **true** (par défaut) et **false**. | Non                                            |
-| wildcardFolderPath       | Chemin d’accès du dossier avec des caractères génériques sous le système de fichiers configuré dans le jeu de données pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont les suivants : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère). Utilisez `^` comme caractère d’échappement si le nom réel de votre dossier contient un caractère générique ou ce caractère d’échappement. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
-| wildcardFileName         | Nom du fichier avec des caractères génériques situé dans le chemin d’accès système de fichiers + folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont les suivants : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère). Utilisez `^` comme caractère d’échappement si le nom réel de votre dossier contient un caractère générique ou ce caractère d’échappement. Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui, si `fileName` n’est pas spécifié dans le jeu de données. |
-| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut Dernière modification. Les fichiers sont sélectionnés si leur heure de dernière modification se trouve dans l’intervalle de temps situé entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent être NULL, ce qui signifie qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données. Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés. Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés. | Non                                            |
+| **_Rechercher les fichiers à copier :_* _ |  |  |
+| OPTION 1 : chemin d’accès statique<br> | Copie à partir du système de fichiers donné ou du chemin d’accès au dossier/fichier spécifié dans le jeu de données. Si vous souhaitez copier tous les fichiers d’un système de fichiers/dossier, spécifiez en plus `wildcardFileName` comme `_`. |  |
+| OPTION 2 : caractère générique<br>- wildcardFolderPath | Chemin d’accès du dossier avec des caractères génériques sous le système de fichiers configuré dans le jeu de données pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de dossier contient effectivement ce caractère d’échappement ou générique. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
+| OPTION 2 : caractère générique<br>- wildcardFileName | Nom du fichier avec des caractères génériques situé dans le chemin d’accès système de fichiers + folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de fichier contient effectivement ce caractère d’échappement ou générique.  Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui |
+| OPTION 3 : liste de fichiers<br>- fileListPath | Indique de copier un ensemble de fichiers donné. Pointez vers un fichier texte contenant la liste des fichiers que vous voulez copier, un fichier par ligne indiquant le chemin d’accès relatif configuré dans le jeu de données.<br/>Si vous utilisez cette option, ne spécifiez pas de nom de fichier dans le jeu de données. Pour plus d’exemples, consultez [Exemples de listes de fichiers](#file-list-examples). |Non |
+| ***Paramètres supplémentaires :** _ |  | |
+| recursive | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Notez que lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. <br>Les valeurs autorisées sont _ *true** (par défaut) et **false**.<br>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. |Non |
+| deleteFilesAfterCompletion | Indique si les fichiers binaires seront supprimés du magasin source après leur déplacement vers le magasin de destination. La suppression se faisant par fichier, lorsque l’activité de copie échoue, vous pouvez constater que certains fichiers ont déjà été copiés vers la destination et supprimés de la source, tandis que d’autres restent dans le magasin source. <br/>Cette propriété est valide uniquement dans un scénario de copie de fichiers binaires. La valeur par défaut est false. |Non |
+| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut : Dernière modification. <br>Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent avoir la valeur Null, ce qui a pour effet qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés.<br/>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. | Non                                            |
 | modifiedDatetimeEnd      | Identique à ce qui précède.                                               | Non                                            |
+| enablePartitionDiscovery | Pour les fichiers partitionnés, spécifiez s’il faut analyser les partitions à partir du chemin d’accès au fichier et les ajouter en tant que colonnes sources supplémentaires.<br/>Les valeurs autorisées sont **false** (par défaut) et **true**. | Non                                            |
+| partitionRootPath | Lorsque la découverte de partition est activée, spécifiez le chemin d’accès racine absolu pour pouvoir lire les dossiers partitionnés en tant que colonnes de données.<br/><br/>S’il n’est pas spécifié, par défaut :<br/>– Quand vous utilisez le chemin d’accès du fichier dans le jeu de données ou la liste des fichiers sur la source, le chemin racine de la partition est le chemin d’accès configuré dans le jeu de données.<br/>– Quand vous utilisez le filtre de dossiers de caractères génériques, le chemin d’accès racine de la partition est le sous-chemin d’accès avant le premier caractère générique.<br/><br/>Par exemple, en supposant que vous configurez le chemin d’accès dans le jeu de données en tant que « root/folder/year=2020/month=08/day=27 » :<br/>– Si vous spécifiez le chemin d’accès racine de la partition en tant que « root/folder/year=2020 », l’activité de copie génère deux colonnes supplémentaires, `month` et `day`, ayant respectivement la valeur « 08 » et « 27 », en plus des colonnes contenues dans les fichiers.<br/>– Si le chemin d’accès racine de la partition n’est pas spécifié, aucune colonne supplémentaire n’est générée. | Non                                            |
 | maxConcurrentConnections | Nombre de connexions simultanées au magasin de stockage. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non                                            |
 
 **Exemple :**
@@ -309,7 +353,7 @@ Les propriétés suivantes sont prises en charge pour Data Lake Storage Gen2 dan
 
 ### <a name="azure-data-lake-storage-gen2-as-a-sink-type"></a>Azure Data Lake Storage Gen2 comme type de récepteur
 
-[!INCLUDE [data-factory-v2-file-formats](../../includes/data-factory-v2-file-formats.md)] 
+[!INCLUDE [data-factory-v2-file-sink-formats](../../includes/data-factory-v2-file-sink-formats.md)]
 
 Les propriétés suivantes sont prises en charge pour Data Lake Storage Gen2 dans les paramètres `storeSettings` du récepteur de copie basée sur le format :
 
@@ -317,7 +361,7 @@ Les propriétés suivantes sont prises en charge pour Data Lake Storage Gen2 dan
 | ------------------------ | ------------------------------------------------------------ | -------- |
 | type                     | La propriété type sous `storeSettings` doit être définie sur **AzureBlobFSWriteSettings**. | Oui      |
 | copyBehavior             | Définit le comportement de copie lorsque la source est constituée de fichiers d’une banque de données basée sur un fichier.<br/><br/>Les valeurs autorisées sont les suivantes :<br/><b>- PreserveHierarchy (par défaut)</b> : conserve la hiérarchie des fichiers dans le dossier cible. Le chemin relatif du fichier source vers le dossier source est identique au chemin relatif du fichier cible vers le dossier cible.<br/><b>- FlattenHierarchy</b> : tous les fichiers du dossier source figurent dans le premier niveau du dossier cible. Les noms des fichiers cibles sont générés automatiquement. <br/><b>- MergeFiles</b> : fusionne tous les fichiers du dossier source dans un seul fichier. Si le nom de fichier est spécifié, le nom de fichier fusionné est le nom spécifié. Dans le cas contraire, il s’agit d’un nom de fichier généré automatiquement. | Non       |
-| blockSizeInMB | Spécifiez la taille du bloc (en Mo) qui est utilisée pour écrire des données dans ADLS Gen2. En savoir plus sur les [objets blob de blocs](https://docs.microsoft.com/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-block-blobs) <br/>Les valeurs valides sont comprises **entre 4 et 100 Mo**. <br/>Par défaut, ADF détermine automatiquement la taille du bloc en fonction du type et des données de votre magasin source. Pour une copie non binaire dans ADLS Gen2, la taille de bloc par défaut est de 100 Mo, ce qui permet le stockage de 4,95 To de données au maximum. Cela peut ne pas être optimal si vos données ne sont pas volumineuses, en particulier si vous utilisez des runtimes d’intégration auto-hébergés avec un réseau insuffisant qui entraîne l’expiration des opérations ou un problème de performances. Vous pouvez spécifier explicitement une taille de bloc, tout en veillant à ce que blockSizeInMB*50000 soit suffisant pour stocker les données. Si ce n’est pas le cas, l’exécution de l’activité de copie échouera. | Non |
+| blockSizeInMB | Spécifiez la taille du bloc (en Mo) qui est utilisée pour écrire des données dans ADLS Gen2. En savoir plus sur les [objets blobs de blocs](/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-block-blobs). <br/>Les valeurs autorisées sont comprises **entre 4 et 100 Mo**. <br/>Par défaut, ADF détermine automatiquement la taille du bloc en fonction du type et des données de votre magasin source. Pour une copie non binaire dans ADLS Gen2, la taille de bloc par défaut est de 100 Mo, ce qui permet le stockage de 4,95 To de données au maximum. Cela peut ne pas être optimal si vos données ne sont pas volumineuses, en particulier si vous utilisez des runtimes d’intégration auto-hébergés avec un réseau insuffisant qui entraîne l’expiration des opérations ou un problème de performances. Vous pouvez spécifier explicitement une taille de bloc, tout en veillant à ce que blockSizeInMB*50000 soit suffisant pour stocker les données. Si ce n’est pas le cas, l’exécution de l’activité de copie échouera. | Non |
 | maxConcurrentConnections | Nombre de connexions simultanées au magasin de données. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non       |
 
 **Exemple :**
@@ -366,6 +410,17 @@ Cette section décrit le comportement résultant de l’utilisation de filtres d
 | `Folder*` | `*.csv` | false | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier5.csv<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 | `Folder*` | `*.csv` | true | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 
+### <a name="file-list-examples"></a>Exemples de liste de fichiers
+
+Cette section décrit le comportement résultant de l’utilisation du chemin d’accès à la liste de fichiers dans la source de l’activité de copie.
+
+En supposant que vous disposez de la structure de dossiers source suivante et que vous souhaitez copier les fichiers en gras :
+
+| Exemple de structure source                                      | Contenu de FileListToCopy.txt                             | Configuration ADF                                            |
+| ------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------ |
+| filesystem<br/>&nbsp;&nbsp;&nbsp;&nbsp;DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Métadonnées<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FileListToCopy.txt | File1.csv<br>Subfolder1/File3.csv<br>Subfolder1/File5.csv | **Dans le jeu de données :**<br>- système de fichiers : `filesystem`<br>- chemin d’accès du dossier : `FolderA`<br><br>**Dans la source de l’activité de copie :**<br>- chemin d’accès à la liste de fichiers : `filesystem/Metadata/FileListToCopy.txt` <br><br>Le chemin d’accès à la liste de fichiers pointe vers un fichier texte dans le même magasin de données qui contient la liste de fichiers que vous voulez copier, un fichier par ligne étant le chemin d’accès relatif au chemin d’accès configuré dans le jeu de données. |
+
+
 ### <a name="some-recursive-and-copybehavior-examples"></a>Quelques exemples de valeurs recursive et copyBehavior
 
 Cette section décrit le comportement résultant de l’opération de copie pour différentes combinaisons de valeurs recursive et copyBehavior.
@@ -392,7 +447,16 @@ Lorsque vous copiez des fichiers à partir d’Azure Data Lake Storage Gen1/Gen2
 
 ## <a name="mapping-data-flow-properties"></a>Propriétés du mappage de flux de données
 
-Lors de la transformation de données dans le flux de données de mappage, vous pouvez lire et écrire des fichiers depuis Azure Data Lake Storage Gen2 au format JSON, Avro, de texte délimité ou Parquet. Pour plus d’informations, consultez les sections consacrées à la [transformation de la source](data-flow-source.md) et à la [transformation du récepteur](data-flow-sink.md) dans la fonctionnalité de flux de données de mappage.
+Lorsque vous transformez des données en flux de données de mappage, vous pouvez lire et écrire des fichiers à partir d’Azure Data Lake Storage Gen2 aux formats suivants :
+* [Avro](format-avro.md#mapping-data-flow-properties)
+* [Common Data Model (préversion)](format-common-data-model.md#mapping-data-flow-properties)
+* [Texte délimité](format-delimited-text.md#mapping-data-flow-properties)
+* [Delta](format-delta.md#mapping-data-flow-properties)
+* [Excel](format-excel.md#mapping-data-flow-properties)
+* [JSON](format-json.md#mapping-data-flow-properties)
+* [Parquet](format-parquet.md#mapping-data-flow-properties)
+
+Les paramètres spécifiques du format se trouvent dans la documentation de ce format. Pour plus d’informations, consultez [Transformation de source en flux de données de mappage](data-flow-source.md) et [Transformation de récepteur en flux de données de mappage](data-flow-sink.md).
 
 ### <a name="source-transformation"></a>Transformation de la source
 

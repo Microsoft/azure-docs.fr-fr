@@ -3,7 +3,7 @@ title: Fonctionnement d’Azure Traffic Manager | Microsoft Docs
 description: Cet article vous aide à comprendre la manière dont Traffic Manager achemine le trafic afin d’optimiser les performances et la disponibilité de vos applications web.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 manager: twooley
 ms.service: traffic-manager
 ms.devlang: na
@@ -11,13 +11,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/05/2019
-ms.author: rohink
-ms.openlocfilehash: 4863ffd383cfcd46bad462156e26293d145fd418
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 471895f1a615770521584a627e6bca850b87d0ac
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80294866"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89462630"
 ---
 # <a name="how-traffic-manager-works"></a>Fonctionnement de Traffic Manager
 
@@ -62,8 +62,8 @@ Dans la continuation de l’exemple précédent, quand un client demande la page
     - l’état actuel de chaque point de terminaison, tel qu’il ressort des contrôles d’intégrité de Traffic Manager (pour plus d’informations, voir la rubrique relative à la [surveillance des points de terminaison avec Traffic Manager](traffic-manager-monitoring.md)) ;
     - la méthode de routage du trafic choisie (pour plus d’informations, voir [Méthodes de routage de Traffic Manager](traffic-manager-routing-methods.md)).
 
-5. Le point de terminaison choisi est retourné en tant qu’autre enregistrement CNAME DNS. Dans ce cas, supposons que contoso-us.cloudapp.net est retourné.
-6. Ensuite, le service DNS récursif recherche les serveurs de noms pour le domaine « cloudapp.net ». Il contacte ces serveurs de noms pour demander l’enregistrement DNS « contoso-us.cloudapp.net ». Un enregistrement DNS « A » contenant l’adresse IP du point de terminaison de service basé aux États-Unis est retourné.
+5. Le point de terminaison choisi est retourné en tant qu’autre enregistrement CNAME DNS. Dans ce cas, supposons que contoso-eu.cloudapp.net est retourné.
+6. Ensuite, le service DNS récursif recherche les serveurs de noms pour le domaine « cloudapp.net ». Il contacte ces serveurs de noms pour demander l’enregistrement DNS « contoso-eu.cloudapp.net ». Un enregistrement DNS « A » contenant l’adresse IP du point de terminaison de service basé en Europe est retourné.
 7. Le service DNS récursif consolide les résultats et renvoie une seule réponse DNS au client.
 8. Le client reçoit les résultats DNS et se connecte à l’adresse IP donnée. Notez qu’il se connecte directement au point de terminaison du service d’application, et non via Traffic Manager. Puisqu’il s’agit d’un point de terminaison HTTPS, le client exécute la négociation SSL/TLS nécessaire, puis soumet une demande HTTP GET pour la page « /login.aspx ».
 

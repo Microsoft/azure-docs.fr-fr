@@ -11,17 +11,17 @@ ms.workload: identity
 ms.date: 09/08/2019
 ms.author: jmprieur
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: de259daa7fd27cc4f138c294a7f347502ca482a4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: b4eff5910ff5230902d497b55b2afbe6d605365a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77185827"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89177429"
 ---
 # <a name="migrate-ios-applications-that-use-microsoft-authenticator-from-adalnet-to-msalnet"></a>Migrer des applications iOS d’ADAL.NET vers MSAL.NET en utilisant Microsoft Authenticator
 
-Vous utilisez la bibliothèque d’authentification Azure Active Directory pour .NET (ADAL.NET) et le répartiteur iOS. Il est maintenant temps de migrer vers la [bibliothèque d'authentification Microsoft](msal-overview.md) pour .NET (MSAL.NET) qui prend en charge le répartiteur sur iOS depuis la version 4.3. 
+Vous utilisez la bibliothèque d’authentification Azure Active Directory pour .NET (ADAL.NET) et le répartiteur iOS. Il est maintenant temps de migrer vers la [bibliothèque d'authentification Microsoft](msal-overview.md) pour .NET (MSAL.NET) qui prend en charge le répartiteur sur iOS depuis la version 4.3.
 
 Par où démarrer ? Cet article vous aide à migrer votre application Xamarin iOS d'ADAL vers MSAL.
 
@@ -32,13 +32,13 @@ Cet article part du principe que vous disposez déjà d’une application Xamari
 
 ### <a name="what-are-brokers"></a>Que sont les répartiteurs ?
 
-Les répartiteurs sont des applications fournies par Microsoft sur Android et iOS. (Voir l'application [Microsoft Authenticator](https://www.microsoft.com/p/microsoft-authenticator/9nblgggzmcj6) sur iOS et Android, ainsi que l’application Portail d'entreprise Intune sur Android.) 
+Les répartiteurs sont des applications fournies par Microsoft sur Android et iOS. (Voir l'application [Microsoft Authenticator](https://www.microsoft.com/p/microsoft-authenticator/9nblgggzmcj6) sur iOS et Android, ainsi que l’application Portail d'entreprise Intune sur Android.)
 
 Ils permettent d’effectuer les opérations suivantes :
 
 - Authentification unique.
 - Identification d’appareil requise par certaines [stratégies d’accès conditionnel](../conditional-access/overview.md). Pour plus d’informations, consultez [Gestion des appareils](../conditional-access/concept-conditional-access-conditions.md#device-platforms).
-- Vérification de l’identification de l'application, également requise dans certains scénarios d’entreprise. Pour plus d'informations, consultez [Gestion des applications mobiles Intune (GAM)](https://docs.microsoft.com/intune/mam-faq).
+- Vérification de l’identification de l'application, également requise dans certains scénarios d’entreprise. Pour plus d'informations, consultez [Gestion des applications mobiles Intune (GAM)](/intune/mam-faq).
 
 ## <a name="migrate-from-adal-to-msal"></a>Migrer d’ADAL vers MSAL
 
@@ -47,21 +47,21 @@ Ils permettent d’effectuer les opérations suivantes :
 <table>
 <tr><td>Code ADAL actuel :</td><td>Contrepartie MSAL :</td></tr>
 <tr><td>
-Dans ADAL.NET, la prise en charge du répartiteur était activée pour chaque contexte d’authentification. Elle est désactivée par défaut. Vous deviez définir un 
+Dans ADAL.NET, la prise en charge du répartiteur était activée pour chaque contexte d’authentification. Elle est désactivée par défaut. Vous deviez définir un
 
 indicateur `useBroker` sur la valeur true dans le constructeur `PlatformParameters` pour appeler le répartiteur :
 
 ```csharp
 public PlatformParameters(
-        UIViewController callerViewController, 
+        UIViewController callerViewController,
         bool useBroker)
 ```
-Par ailleurs, dans le code spécifique de la plateforme de cet exemple, dans le convertisseur de page pour iOS, vous devez définir l’indicateur `useBroker` 
+Par ailleurs, dans le code spécifique de la plateforme de cet exemple, dans le convertisseur de page pour iOS, vous devez définir l’indicateur `useBroker`
 sur true :
 ```csharp
 page.BrokerParameters = new PlatformParameters(
-          this, 
-          true, 
+          this,
+          true,
           PromptBehavior.SelectAccount);
 ```
 
@@ -70,15 +70,15 @@ Ensuite, incluez les paramètres dans l’appel d’acquisition de jeton :
  AuthenticationResult result =
                     await
                         AuthContext.AcquireTokenAsync(
-                              Resource, 
-                              ClientId, 
-                              new Uri(RedirectURI), 
+                              Resource,
+                              ClientId,
+                              new Uri(RedirectURI),
                               platformParameters)
                               .ConfigureAwait(false);
 ```
 
 </td><td>
-Dans MSAL.NET, la prise en charge du répartiteur est activée pour chaque application cliente publique (PublicClientApplication). Elle est désactivée par défaut. Pour l’activer, utilisez le 
+Dans MSAL.NET, la prise en charge du répartiteur est activée pour chaque application cliente publique (PublicClientApplication). Elle est désactivée par défaut. Pour l’activer, utilisez le
 
 le paramètre `WithBroker()` (défini sur true par défaut) pour appeler répartiteur :
 
@@ -98,24 +98,25 @@ result = await app.AcquireTokenInteractive(scopes)
 </table>
 
 ### <a name="step-2-set-a-uiviewcontroller"></a>Étape 2 : Définir un UIViewController()
-Dans ADAL.NET, vous avez transmis un UIViewController dans le cadre de `PlatformParameters`. (Voir l'exemple de l'étape 1.) Dans MSAL.NET, pour offrir plus de flexibilité aux développeurs, une fenêtre d’objet est utilisée, mais n’est pas obligatoire dans l’utilisation normale d’iOS. Pour pouvoir utiliser le répartiteur, définissez la fenêtre d’objet pour qu’elle envoie et reçoive des réponses du répartiteur. 
+Dans ADAL.NET, vous avez transmis un UIViewController dans le cadre de `PlatformParameters`. (Voir l'exemple de l'étape 1.) Dans MSAL.NET, pour offrir plus de flexibilité aux développeurs, une fenêtre d’objet est utilisée, mais n’est pas obligatoire dans l’utilisation normale d’iOS. Pour pouvoir utiliser le répartiteur, définissez la fenêtre d’objet pour qu’elle envoie et reçoive des réponses du répartiteur.
 <table>
 <tr><td>Code ADAL actuel :</td><td>Contrepartie MSAL :</td></tr>
 <tr><td>
-Un UIViewController est transmis dans 
+Un UIViewController est transmis dans
 
 `PlatformParameters` dans la plateforme spécifique à iOS.
 
 ```csharp
 page.BrokerParameters = new PlatformParameters(
-          this, 
-          true, 
+          this,
+          true,
           PromptBehavior.SelectAccount);
 ```
 </td><td>
 Dans MSAL.NET, vous devez effectuer deux opérations pour définir la fenêtre d’objet pour iOS :
 
-1. Dans `AppDelegate.cs`, définissez `App.RootViewController` sur un nouveau `UIViewController()`. Cette affectation vérifie l’existence d’un UIViewController avec l’appel au répartiteur. S’il n’est pas défini correctement, vous pouvez recevoir cette erreur : `"uiviewcontroller_required_for_ios_broker":"UIViewController is null, so MSAL.NET cannot invoke the iOS broker. See https://aka.ms/msal-net-ios-broker"`
+1. Dans `AppDelegate.cs`, définissez `App.RootViewController` sur un nouveau `UIViewController()`.
+Cette affectation vérifie l’existence d’un UIViewController avec l’appel au répartiteur. S’il n’est pas défini correctement, vous pouvez recevoir cette erreur : `"uiviewcontroller_required_for_ios_broker":"UIViewController is null, so MSAL.NET cannot invoke the iOS broker. See https://aka.ms/msal-net-ios-broker"`
 1. Dans l’appel AcquireTokenInteractive, utilisez `.WithParentActivityOrWindow(App.RootViewController)` et transmettez la référence à la fenêtre d’objet que vous allez utiliser.
 
 **Par exemple :**
@@ -151,9 +152,9 @@ ADAL.NET et MSAL.NET utilisent des URL pour appeler le répartiteur, avant de re
 <tr><td>
 Le modèle d’URL est propre à votre application.
 </td><td>
-Les 
+Les
 
-`CFBundleURLSchemes` doit inclure 
+`CFBundleURLSchemes` doit inclure
 
 `msauth.`
 
@@ -189,7 +190,7 @@ ADAL.NET et MSAL.NET utilisent `-canOpenURL:` pour vérifier si le répartiteur 
 <table>
 <tr><td>Code ADAL actuel :</td><td>Contrepartie MSAL :</td></tr>
 <tr><td>
-Utilisations 
+Utilisations
 
 `msauth`
 
@@ -201,7 +202,7 @@ Utilisations
 </array>
 ```
 </td><td>
-Utilisations 
+Utilisations
 
 `msauthv2`
 
@@ -215,16 +216,16 @@ Utilisations
 ```
 </table>
 
-### <a name="step-6-register-your-redirect-uri-in-the-portal"></a>Étape 6 : Inscrire votre URI de redirection dans le portail
+### <a name="step-6-register-your-redirect-uri-in-the-azure-portal"></a>Étape 6 : Inscrire votre URI de redirection dans le portail Azure
 
-ADAL.NET et MSAL.NET ajoutent tous deux une exigence supplémentaire à l'URI de redirection lorsqu'il cible le répartiteur. Enregistrez l’URI de redirection avec votre application sur le portail.
+ADAL.NET et MSAL.NET ajoutent tous deux une exigence supplémentaire à l'URI de redirection lorsqu'il cible le répartiteur. Enregistrez l’URI de redirection avec votre application sur le portail Azure.
 <table>
 <tr><td>Code ADAL actuel :</td><td>Contrepartie MSAL :</td></tr>
 <tr><td>
 
 `"<app-scheme>://<your.bundle.id>"`
 
-Exemple : 
+Exemple :
 
 `mytestiosapp://com.mycompany.myapp`
 </td><td>
@@ -237,8 +238,21 @@ Exemple :
 
 </table>
 
-Pour plus d’informations sur l’inscription de l'URI de redirection dans le portail, consultez [Utiliser le répartiteur dans des applications Xamarin iOS](msal-net-use-brokers-with-xamarin-apps.md#step-8-make-sure-the-redirect-uri-is-registered-with-your-app).
+Pour plus d’informations sur l’inscription de l’URI de redirection dans le Portail Azure, consultez [Étape 7 : Ajouter un URI de redirection à l’inscription de votre application](msal-net-use-brokers-with-xamarin-apps.md#step-7-add-a-redirect-uri-to-your-app-registration).
+
+### <a name="step-7-set-the-entitlementsplist"></a>**Étape 7 : Définir les droits Entitlements.plist**
+
+Activer l’accès au trousseau dans le fichier de*Entitlements.plist* :
+
+```xml
+ <key>keychain-access-groups</key>
+    <array>
+      <string>$(AppIdentifierPrefix)com.microsoft.adalcache</string>
+    </array>
+```
+
+Pour plus d’informations sur l’activation de l’accès au trousseau, consultez [Activer l’accès au trousseau](msal-net-xamarin-ios-considerations.md#enable-keychain-access).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez les [considérations spécifiques de Xamarin iOS avec MSAL.NET](msal-net-xamarin-ios-considerations.md). 
+Découvrez les [considérations spécifiques de Xamarin iOS avec MSAL.NET](msal-net-xamarin-ios-considerations.md).

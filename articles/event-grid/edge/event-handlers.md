@@ -1,19 +1,14 @@
 ---
 title: Gestionnaires d’événements et destinations – Azure Event Grid IoT Edge | Microsoft Docs
 description: Gestionnaires d’événements et destinations dans Event Grid sur Edge
-author: banisadr
-ms.author: babanisa
-ms.reviewer: spelluru
-ms.date: 01/09/2020
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 35bf5af90aa5f0456aa8d68f0e4e8aaacc6cf84f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 18e2b944f60ebdf8a1b0c60ba446a13df13134c5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76851324"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171582"
 ---
 # <a name="event-handlers-and-destinations-in-event-grid-on-edge"></a>Gestionnaires d’événements et destinations dans Event Grid sur Edge
 

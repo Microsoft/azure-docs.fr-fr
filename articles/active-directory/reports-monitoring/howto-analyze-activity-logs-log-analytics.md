@@ -9,7 +9,7 @@ editor: ''
 ms.assetid: 4535ae65-8591-41ba-9a7d-b7f00c574426
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
@@ -17,12 +17,12 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2d6212692465270182db541889bed5f03a08a345
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0c4fde22b1b8d72ae8ae775c090e0da25ce0665f
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74008287"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96181167"
 ---
 # <a name="analyze-azure-ad-activity-logs-with-azure-monitor-logs"></a>Analyser les journaux d'activité Azure AD à l'aide des journaux Azure Monitor
 
@@ -36,9 +36,9 @@ Cet article vous montre comment analyser les journaux d’activité Azure AD dan
 
 Pour suivre l’article, vous devez préalablement :
 
-* Espace de travail Log Analytics dans votre abonnement Azure. Découvrez comment [créer un espace de travail Log Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
+* Espace de travail Log Analytics dans votre abonnement Azure. Découvrez comment [créer un espace de travail Log Analytics](../../azure-monitor/learn/quick-create-workspace.md).
 * Effectuer les étapes nécessaires pour [envoyer les journaux d’activité Azure AD dans votre espace de travail Log Analytics](howto-integrate-activity-logs-with-log-analytics.md).
-*  [Accéder](https://docs.microsoft.com/azure/azure-monitor/platform/manage-access#manage-access-using-workspace-permissions) à l’espace de travail Log Analytics
+*  [Accéder](../../azure-monitor/platform/manage-access.md#manage-access-using-workspace-permissions) à l’espace de travail Log Analytics
 * Les rôles suivants dans Azure Active Directory (si vous accédez à Log Analytics via le portail Azure Active Directory)
     - Administrateur de la sécurité
     - Lecteur de sécurité
@@ -60,7 +60,7 @@ Les journaux d’activité sont envoyés (push) dans les tableaux **AuditLogs** 
 
 1. Dans la vue de la requête par défaut, de la section précédente, sélectionnez **Schéma** et développez l’espace de travail. 
 
-2. Développez la section **Gestion des journaux**, puis développez **AuditLogs** ou **SignInLogs** pour afficher le schéma des journaux.
+2. Développez la section **Gestion des journaux**, puis développez **AuditLogs** ou **SigninLogs** pour afficher le schéma des journaux.
     ![Journaux d’audit](./media/howto-analyze-activity-logs-log-analytics/auditlogschema.png) ![Journaux de connexion](./media/howto-analyze-activity-logs-log-analytics/signinlogschema.png)
 
 ## <a name="query-the-azure-ad-activity-logs"></a>Exécuter des requêtes sur les journaux d’activité Azure AD
@@ -96,23 +96,20 @@ Vous pouvez également définir des alertes sur votre requête. Par exemple, pou
 
 3. Entrez un nom et une description pour l’alerte, et choisissez le niveau de gravité. Dans notre exemple, nous pourrions choisir le niveau **Information**.
 
-4. Sélectionnez le **groupe d’actions** auquel envoyer l’alerte si le signal se produit. Vous pouvez choisir d’avertir votre équipe par e-mail ou SMS, ou automatiser l’action avec des webhooks, des fonctions Azure ou des applications logiques. Découvrez plus en détail comment [créer et gérer des groupes d’alertes dans le portail Azure](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups).
+4. Sélectionnez le **groupe d’actions** auquel envoyer l’alerte si le signal se produit. Vous pouvez choisir d’avertir votre équipe par e-mail ou SMS, ou automatiser l’action avec des webhooks, des fonctions Azure ou des applications logiques. Découvrez plus en détail comment [créer et gérer des groupes d’alertes dans le portail Azure](../../azure-monitor/platform/action-groups.md).
 
 5. Une fois que vous avez défini l’alerte, sélectionnez **Créer l’alerte** pour l’activer. 
 
-## <a name="install-and-use-pre-built-views-for-azure-ad-activity-logs"></a>Installer et utiliser les vues prédéfinies pour les journaux d’activité Azure AD
+## <a name="use-pre-built-workbooks-for-azure-ad-activity-logs"></a>Utilisation de classeurs prédéfinis pour les journaux d’activité Azure AD
 
-Vous pouvez également télécharger les vues Log Analytics prédéfinies pour les journaux d’activité Azure AD. Les vues fournissent plusieurs rapports utilisés dans des scénarios courants impliquant des d’événements d’audit et de connexion. Vous pouvez aussi créer des alertes sur les données figurant dans ces rapports, en effectuant les étapes décrites dans la section précédente.
+Les classeurs fournissent plusieurs rapports liés à des scénarios courants impliquant des d’événements d’audit, de connexion et de provisionnement. Vous pouvez aussi créer des alertes sur les données figurant dans ces rapports, en effectuant les étapes décrites dans la section précédente.
 
-* **Événements de provisionnement de compte Azure AD** : Cette vue affiche les rapports d’audit de l’activité de provisionnement. Elle indique notamment le nombre de nouveaux utilisateurs attribués et les échecs d’attribution, le nombre d’utilisateurs mis à jour et les échecs de mise à jour, ainsi que le nombre d’utilisateurs dont l’attribution a été annulée et les échecs d’annulation d’attribution.    
-* **Événements de connexion** : Cette vue affiche les rapports les plus pertinents relatifs à la supervision de l’activité de connexion, par exemple, les connexions par application, utilisateur et appareil, ainsi qu’un récapitulatif de l’ensemble des connexions effectuées.
-* **Consentement des utilisateurs** : Cette vue affiche les rapports relatifs au consentement des utilisateurs, comme le consentement donné par utilisateur, les connexions par les utilisateurs qui ont donné leur consentement ainsi que les connexions par application pour toutes les applications basées sur le consentement. 
-
-Découvrez comment [installer et utiliser les vues Log Analytics pour les journaux d’activité Azure AD](howto-install-use-log-analytics-views.md). 
-
+* **Analyse du provisionnement** : ce [classeur](../app-provisioning/application-provisioning-log-analytics.md) affiche les rapports d’audit de l’activité de provisionnement (par exemple, le nombre de nouveaux utilisateurs attribués et les échecs d’attribution, le nombre d’utilisateurs mis à jour et les échecs de mise à jour, ainsi que le nombre d’utilisateurs dont l’attribution a été annulée et les échecs d’annulation d’attribution).    
+* **Événements de connexion** : ce classeur affiche les rapports les plus pertinents relatifs à la supervision de l’activité de connexion (par exemple, les connexions par application, par utilisateur et par appareil, ainsi qu’un récapitulatif de l’évolution du nombre de connexions).
+* **Insights sur l’accès conditionnel** : le [classeur](../conditional-access/howto-conditional-access-insights-reporting.md) Insights et rapports sur l’accès conditionnel vous permet de comprendre l’évolution de l’impact des stratégies d’accès conditionnel sur votre organisation. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Bien démarrer avec les requêtes de journal d’activité Azure Monitor](https://docs.microsoft.com/azure/log-analytics/query-language/get-started-queries)
-* [Créer et gérer des groupes d’alertes dans le portail Azure](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups)
+* [Bien démarrer avec les requêtes de journal d’activité Azure Monitor](../../azure-monitor/log-query/get-started-queries.md)
+* [Créer et gérer des groupes d’alertes dans le portail Azure](../../azure-monitor/platform/action-groups.md)
 * [Installer et utiliser les vues Log Analytics pour Azure Active Directory](howto-install-use-log-analytics-views.md)

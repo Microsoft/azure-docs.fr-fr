@@ -3,35 +3,35 @@ title: Publier des applications clientes natives - Azure AD | Microsoft Docs
 description: Explique comment activer des applications clientes natives de manière à communiquer avec le connecteur de proxy d'application Azure AD pour fournir un accès à distance sécurisé à vos applications locales.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 04/15/2019
-ms.author: mimart
+ms.topic: how-to
+ms.date: 05/12/2020
+ms.author: kenwith
 ms.reviewer: japere
-ms.custom: it-pro, has-adal-ref
+ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a649a6fab1fe85efc4edcfd2d3151ab85302101b
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 09e813e0dff09885f104e43099b10d6f6f8a7f9b
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82610273"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94657429"
 ---
 # <a name="how-to-enable-native-client-applications-to-interact-with-proxy-applications"></a>Comment autoriser les applications clientes natives à interagir avec des applications de proxy
 
-Vous pouvez utiliser le proxy d’application Azure Active Directory (Azure AD) pour publier des applications web, mais aussi pour publier des applications clientes natives configurées avec la bibliothèque Azure AD Authentication (ADAL). Les applications clientes natives sont différentes des applications web parce qu’elles sont installées sur un appareil alors que les applications web sont accessibles via un navigateur.
+Vous pouvez utiliser le proxy d’application Azure Active Directory (Azure AD) pour publier des applications web, mais aussi pour publier des applications clientes natives configurées avec la bibliothèque d’authentification Microsoft (MSAL). Les applications clientes natives sont différentes des applications web parce qu’elles sont installées sur un appareil alors que les applications web sont accessibles via un navigateur.
 
 Pour prendre en charge les applications clientes natives, le proxy d’application accepte les jetons émis par Azure AD qui sont envoyés dans l’en-tête. Le service de proxy d’application effectue l’authentification pour les utilisateurs. Cette solution n’utilise aucun jeton d’application pour l’authentification.
 
 ![Relation entre les utilisateurs finaux, Azure Active Directory et les applications publiées](./media/application-proxy-configure-native-client-application/richclientflow.png)
 
-Pour publier des applications natives, utilisez la bibliothèque Azure AD Authentication, qui prend en charge l’authentification et de nombreux environnements clients. Le proxy d'application est conforme au [scénario Application Native vers API Web](../azuread-dev/native-app.md).
+Pour publier des applications natives, utilisez la bibliothèque d’authentification Microsoft, qui prend en charge l’authentification et de nombreux environnements clients. Le proxy d’application s’intègre au scénario [Application de bureau qui appelle une API web pour le compte d’un utilisateur connecté](../develop/authentication-flows-app-scenarios.md#desktop-app-that-calls-a-web-api-on-behalf-of-a-signed-in-user).
 
 Cet article vous guide dans quatre étapes pour publier une application native avec le proxy d’application et la bibliothèque Azure AD Authentication.
 
@@ -56,8 +56,7 @@ Vous devez désormais enregistrer votre application dans Azure AD, en procédant
    - Pour cibler uniquement les comptes internes de votre organisation, sélectionnez **Comptes dans cet annuaire organisationnel uniquement**.
    - Pour cibler uniquement les clients professionnels et dans l’éducation, sélectionnez **Comptes dans un annuaire organisationnel**.
    - Pour cibler le plus grand jeu d’identités Microsoft, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft**.
-
-1. Dans l’en-tête **URI de redirection**, sélectionnez **Client public (mobile et bureau)** , puis saisissez l’URI de redirection de votre application.
+1. Sous **URI de redirection**, sélectionnez **Client public (mobile et bureau)** , puis saisissez l’URI de redirection `https://login.microsoftonline.com/common/oauth2/nativeclient` pour votre application.
 1. Sélectionnez et lisez les **stratégies de la plateforme Microsoft**, puis sélectionnez **Inscrire**. Une page présentant la nouvelle inscription d’application est créée et affichée.
 
 Pour en savoir plus sur la création d’une inscription d’application, voir [Integrating applications with Azure Active Directory](../develop/quickstart-register-app.md) (Intégration d’applications à Azure Active Directory).
@@ -73,38 +72,56 @@ Maintenant que vous avez inscrit votre application native, vous pouvez lui donne
 1. Dans le titre **Quel type d'autorisation votre application nécessite-t-elle ?** , sélectionnez le type d’autorisation. Si votre application native doit accéder à l’API de l’application proxy en tant qu’utilisateur connecté, choisissez **Autorisations déléguées**.
 1. Dans l’en-tête **Sélectionner les autorisations**, choisissez l’autorisation voulue, puis cliquez sur **Ajout d’autorisations**. La page **Autorisations des API** de votre application native affiche désormais l’application proxy et l’API d’autorisation que vous avez ajoutées.
 
-## <a name="step-4-edit-the-active-directory-authentication-library"></a>Étape 4 : Modifier la bibliothèque d’authentification Active Directory
+## <a name="step-4-add-the-microsoft-authentication-library-to-your-code-net-c-sample"></a>Étape 4 : Ajoutez la bibliothèque d’authentification Microsoft à votre code (exemple C# .NET)
 
-Modifiez le code de l’application native dans le contexte de l’authentification de l’Active Directory Authentication Library (ADAL) de manière à inclure le texte suivant :
+Modifiez le code de l’application native dans le contexte de l’authentification de la bibliothèque d’authentification Microsoft (MSAL) de manière à inclure le texte suivant : 
 
-```
+```         
 // Acquire Access Token from AAD for Proxy Application
-AuthenticationContext authContext = new AuthenticationContext("https://login.microsoftonline.com/<Tenant ID>");
-AuthenticationResult result = await authContext.AcquireTokenAsync("< External Url of Proxy App >",
-        "<App ID of the Native app>",
-        new Uri("<Redirect Uri of the Native App>"),
-        PromptBehavior.Never);
+IPublicClientApplication clientApp = PublicClientApplicationBuilder
+.Create(<App ID of the Native app>)
+.WithDefaultRedirectUri() // will automatically use the default Uri for native app
+.WithAuthority("https://login.microsoftonline.com/{<Tenant ID>}")
+.Build();
 
-//Use the Access Token to access the Proxy Application
-HttpClient httpClient = new HttpClient();
-httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-HttpResponseMessage response = await httpClient.GetAsync("< Proxy App API Url >");
+AuthenticationResult authResult = null;
+var accounts = await clientApp.GetAccountsAsync();
+IAccount account = accounts.FirstOrDefault();
+
+IEnumerable<string> scopes = new string[] {"<Scope>"};
+
+try
+ {
+    authResult = await clientApp.AcquireTokenSilent(scopes, account).ExecuteAsync();
+ }
+    catch (MsalUiRequiredException ex)
+ {
+     authResult = await clientApp.AcquireTokenInteractive(scopes).ExecuteAsync();                
+ }
+
+if (authResult != null)
+ {
+  //Use the Access Token to access the Proxy Application
+
+  HttpClient httpClient = new HttpClient();
+  HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
+  HttpResponseMessage response = await httpClient.GetAsync("<Proxy App Url>");
+ }
 ```
 
 Les informations requises dans l’exemple de code sont disponibles dans le portail Azure AD, comme suit :
 
 | Informations requises | Emplacement dans le portail Azure AD |
 | --- | --- |
-| \<ID de locataire> | **Azure Active Directory** > **Propriétés** > **ID de répertoire** |
-| \<URL externe de l’application proxy> | **Applications d’entreprise** > *Votre application proxy* > **Proxy d’application** > **URL externe** |
-| \<ID de l’application native> | **Applications d’entreprise** > *Votre application native* > **Propriétés** > **ID d’application** |
-| \<URI de redirection de l’application native> | **Azure Active Directory** > **Inscriptions d’applications** > *Votre application native* > **URI de redirection** |
-| \<URL de l’API de l’application proxy> | **Azure Active Directory** > **Inscriptions d’applications** > *votre application native* > **Autorisations d’API** > **NOM DES AUTORISATIONS/API** |
+| \<Tenant ID> | **Azure Active Directory** > **Propriétés** > **ID de répertoire** |
+| \<App ID of the Native app> | **Inscription d’application** > *votre application native* > **Présentation** > **ID d’application** |
+| \<Scope> | **Inscription d’application** > *votre application native* > **Autorisations de l’API** > Cliquez sur l’API d’autorisation (user_impersonation). > Un panneau avec la légende **user_impersonation** apparaît sur le côté droit. > L’étendue est l’URL dans la zone d’édition.
+| \<Proxy App Url> | URL externe et chemin d’accès à l’API
 
-Une fois que vous avez modifié la bibliothèque ADAL avec ces paramètres, vos utilisateurs peuvent s’authentifier auprès des applications clientes natives, même lorsqu’ils ne sont pas sur le réseau d’entreprise.
+Une fois que vous avez modifié le code MSAL avec ces paramètres, vos utilisateurs peuvent s’authentifier auprès des applications clientes natives, même lorsqu’ils ne sont pas sur le réseau d’entreprise.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour en savoir plus sur le flux d’application native, voir [Applications natives dans Azure Active Directory](../azuread-dev/native-app.md).
 
-Découvrez comment configurer [l’authentification unique SAML auprès des applications dans Azure Active Directory](what-is-single-sign-on.md#choosing-a-single-sign-on-method).
+Découvrez comment configurer [l’authentification unique SAML auprès des applications dans Azure Active Directory](sso-options.md#choosing-a-single-sign-on-method).

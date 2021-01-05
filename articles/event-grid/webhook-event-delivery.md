@@ -1,26 +1,21 @@
 ---
 title: Remise d’événement WebHook
 description: Cet article décrit la remise des événements webhook et la validation des points de terminaison lors de l’utilisation de webhooks.
-services: event-grid
-author: banisadr
-manager: timlt
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 03/06/2020
-ms.author: babanisa
-ms.openlocfilehash: 7ae8a21d4ea9216bea13d47ad5ae41f3bc1c2089
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 07/07/2020
+ms.openlocfilehash: e9a52d0cb3e4e880d91e1b748d97ef3041298930
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629770"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87461236"
 ---
 # <a name="webhook-event-delivery"></a>Remise d’événements webhook
 Un Webhook constitue l’un des nombreux moyens de recevoir des événements provenant d’Azure Event Grid. Lorsqu'un nouvel événement est prêt, le service Event Grid envoie une requête HTTP (POST) au point de terminaison configuré avec l'événement dans le corps de la requête.
 
 Comme de nombreux autres services qui prennent en charge les Webhooks, Event Grid vous demande de prouver que vous êtes propriétaire de votre point de terminaison Webhook avant de démarrer la diffusion d'événements vers ce point de terminaison. Cette condition empêche tout utilisateur malveillant d'inonder votre point de terminaison d'événements. Lorsque vous utilisez un des trois services Azure répertoriés ci-dessous, l'infrastructure Azure gère automatiquement cette validation :
 
-- Azure Logic Apps avec [connecteur Event Grid](https://docs.microsoft.com/connectors/azureeventgrid/)
+- Azure Logic Apps avec [connecteur Event Grid](/connectors/azureeventgrid/)
 - Azure Automation via [webhook](../event-grid/ensure-tags-exists-on-new-virtual-machines.md)
 - Azure Functions avec [déclencheur Event Grid](../azure-functions/functions-bindings-event-grid.md)
 
@@ -38,7 +33,7 @@ Si vous utilisez un autre type de point de terminaison, comme une fonction Azure
    Ce mécanisme d’authentification requiert également que le point de terminaison webhook retourne un code d’état HTTP 200 afin qu’il sache que le POST pour l’événement de validation a été accepté avant qu’il ne puisse être placé dans le mode de validation manuelle. En d'autres termes, si le point de terminaison renvoie un code 200 mais ne renvoie pas de réponse de validation de manière synchrone, le mode est transmis au mode de validation manuelle. S’il y a une opération GET sur l’URL de validation dans les 5 minutes, l’établissement de liaison de validation est considéré comme réussi.
 
 > [!NOTE]
-> L’utilisation de certificats auto-signés pour la validation n’est pas prise en charge. Utilisez plutôt un certificat signé auprès d’une autorité de certification (AC).
+> L’utilisation de certificats auto-signés pour la validation n’est pas prise en charge. Utilisez plutôt un certificat signé auprès d’une autorité de certification commerciale (AC).
 
 ### <a name="validation-details"></a>Détails de validation
 

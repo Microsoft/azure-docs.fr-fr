@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Tables ARP - Dépannage : classique'
 description: Cette page fournit des instructions sur l'obtention des tables ARP pour un circuit ExpressRoute - modèle de déploiement classique.
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 01/30/2017
-ms.author: charwen
-ms.openlocfilehash: a7a24fc6674adca21e01d2502263c9767510469e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.openlocfilehash: 7c83b6d25936e184c70d4bf0a51636a3986bf4b2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80618622"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89394837"
 ---
 # <a name="getting-arp-tables-in-the-classic-deployment-model"></a>Obtention de tables ARP dans le modèle de déploiement classique
 > [!div class="op_single_selector"]
@@ -41,10 +41,12 @@ Les tables ARP permettent de valider la configuration de la couche 2 et de réso
 
 Vous trouverez ci-dessous un exemple de table ARP :
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           10.0.0.1   ffff.eeee.dddd
+  0 Microsoft         10.0.0.2   aaaa.bbbb.cccc
+```
 
 
 La section suivante fournit des informations sur l’affichage des tables ARP vues par les routeurs périphériques ExpressRoute.
@@ -63,67 +65,81 @@ Cette section fournit des instructions sur l’affichage des tables ARP pour cha
 ### <a name="arp-tables-for-azure-private-peering"></a>Tables ARP pour le peering privé Azure
 L’applet de commande suivante fournit les tables ARP pour le peering privé Azure :
 
-        # Required variables
-        $ckt = "<your Service Key here>
+```azurepowershell
+# Required variables
+$ckt = "<your Service Key here>
 
-        # ARP table for Azure private peering--primary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Primary
+# ARP table for Azure private peering--primary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Primary
 
-        # ARP table for Azure private peering--secondary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Secondary
+# ARP table for Azure private peering--secondary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Private -Path Secondary
+```
 
 Vous trouverez ci-dessous un exemple de sortie pour l’un des chemins d’accès :
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           10.0.0.1   ffff.eeee.dddd
+  0 Microsoft         10.0.0.2   aaaa.bbbb.cccc
+```
 
 
 ### <a name="arp-tables-for-azure-public-peering"></a>Tables ARP pour le peering public Azure :
 L’applet de commande suivante fournit les tables ARP pour le peering public Azure :
 
-        # Required variables
-        $ckt = "<your Service Key here>
+```azurepowershell
+# Required variables
+$ckt = "<your Service Key here>
 
-        # ARP table for Azure public peering--primary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Primary
+# ARP table for Azure public peering--primary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Primary
 
-        # ARP table for Azure public peering--secondary path
-        Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Secondary
-
-Vous trouverez ci-dessous un exemple de sortie pour l’un des chemins d’accès :
-
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           10.0.0.1 ffff.eeee.dddd
-          0 Microsoft         10.0.0.2 aaaa.bbbb.cccc
-
+# ARP table for Azure public peering--secondary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Public -Path Secondary
+```
 
 Vous trouverez ci-dessous un exemple de sortie pour l’un des chemins d’accès :
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           64.0.0.1 ffff.eeee.dddd
-          0 Microsoft         64.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           10.0.0.1   ffff.eeee.dddd
+  0 Microsoft         10.0.0.2   aaaa.bbbb.cccc
+```
+
+
+Vous trouverez ci-dessous un exemple de sortie pour l’un des chemins d’accès :
+
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           64.0.0.1   ffff.eeee.dddd
+  0 Microsoft         64.0.0.2   aaaa.bbbb.cccc
+```
 
 
 ### <a name="arp-tables-for-microsoft-peering"></a>Tables ARP pour le peering Microsoft
 L’applet de commande suivante fournit les tables ARP du peering Microsoft :
 
-    # ARP table for Microsoft peering--primary path
-    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Microsoft -Path Primary
+```azurepowershell
+# ARP table for Microsoft peering--primary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Microsoft -Path Primary
 
-    # ARP table for Microsoft peering--secondary path
-    Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Microsoft -Path Secondary
+# ARP table for Microsoft peering--secondary path
+Get-AzureDedicatedCircuitPeeringArpInfo -ServiceKey $ckt -AccessType Microsoft -Path Secondary
+```
 
 
 Un exemple de sortie est affiché ci-dessous pour l’un des chemins d’accès :
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           65.0.0.1 ffff.eeee.dddd
-          0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           65.0.0.1   ffff.eeee.dddd
+  0 Microsoft         65.0.0.2   aaaa.bbbb.cccc
+```
 
 
 ## <a name="how-to-use-this-information"></a>Utilisation de ces informations
@@ -135,17 +151,21 @@ La table ARP d’un peering peut servir à valider la connectivité et la config
 * Le dernier octet de l’adresse IP Microsoft est toujours un nombre pair.
 * La même adresse MAC s’affiche côté Microsoft pour les trois peerings (principaux/secondaires).
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-         10 On-Prem           65.0.0.1 ffff.eeee.dddd
-          0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+ 10 On-Prem           65.0.0.1   ffff.eeee.dddd
+  0 Microsoft         65.0.0.2   aaaa.bbbb.cccc
+```
 
 ### <a name="arp-table-when-its-on-premises-or-when-the-connectivity-provider-side-has-problems"></a>Table ARP en cas de problèmes en local ou côté fournisseur de connectivité
  Une seule entrée apparaît dans la table ARP. Elle affiche le mappage entre l’adresse MAC et l’adresse IP utilisée côté Microsoft.
 
-        Age InterfaceProperty IpAddress  MacAddress    
-        --- ----------------- ---------  ----------    
-          0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
+```output
+Age InterfaceProperty IpAddress  MacAddress    
+--- ----------------- ---------  ----------    
+   0 Microsoft         65.0.0.2  aaaa.bbbb.cccc
+```
 
 > [!NOTE]
 > Si vous rencontrez un problème de ce type, ouvrez une demande de support auprès de votre fournisseur de connectivité pour le résoudre.

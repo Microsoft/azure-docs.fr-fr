@@ -1,19 +1,14 @@
 ---
 title: Vue d’ensemble de la limitation Azure Service Bus | Microsoft Docs
 description: Vue d’ensemble de la limitation Service Bus – Niveaux Standard et Premium.
-services: service-bus-messaging
-author: axisc
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 10/01/2019
-ms.author: aschhab
-ms.openlocfilehash: f852ad70b2eb97e2b8b3e40d086e98b3836c3592
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: 436f9a40269f7eea4e31b55b9657d38849876eb4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77598287"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85340942"
 ---
 # <a name="throttling-operations-on-azure-service-bus"></a>Opérations de limitation dans Azure Service Bus
 

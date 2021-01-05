@@ -13,17 +13,20 @@ ms.devlang: ne
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: a1da207a295b40f8d455635d687083bf69e90fdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4ac981fb3aa17cbc242b5cc51cd579f926bad034
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67068889"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89257974"
 ---
 # <a name="copying-existing-blobs-into-a-media-services-asset"></a>Copie d’objets blob dans un élément multimédia Media Services
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Cet article montre comment copier des objets blob à partir d’un compte de stockage dans un nouvel élément multimédia Azure Media Services (AMS) à l’aide des [extensions du kit SDK Azure Media Services pour .NET](https://github.com/Azure/azure-sdk-for-media-services-extensions/).
 
@@ -386,4 +389,3 @@ Vous pouvez également utiliser les fonctions Azure pour déclencher une tâche 
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

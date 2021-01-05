@@ -4,15 +4,15 @@ description: Découvrez comment renouveler un certificat associé à un écouteu
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 8/15/2018
 ms.author: victorh
-ms.openlocfilehash: 4c0c0ab84e60335f58ac075459b95cfabb9135ac
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 413ae2ee19f0b8e427de9167b52971e413cdf573
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81311963"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397210"
 ---
 # <a name="renew-application-gateway-certificates"></a>Renouveler des certificats Application Gateway
 
@@ -62,4 +62,4 @@ az network application-gateway ssl-cert update \
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour découvrir comment configurer le déchargement TLS avec la passerelle Azure Application Gateway, consultez la [configuration du déchargement TLS](application-gateway-ssl-portal.md)
+Pour découvrir comment configurer le déchargement TLS avec la passerelle Azure Application Gateway, consultez la [configuration du déchargement TLS](./create-ssl-portal.md)

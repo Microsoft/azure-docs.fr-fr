@@ -10,12 +10,12 @@ metadata:
   author: philmea
   ms.author: philmea
   ms.date: 10/25/2019
-  ms.openlocfilehash: f62c2249f6a29e8bda04c3056da5c9fcf639b85e
-  ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+  ms.openlocfilehash: dde929044d3d7067d350e556e772a244ce754596
+  ms.sourcegitcommit: b8a175b6391cddd5a2c92575c311cc3e8c820018
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/22/2020
-  ms.locfileid: "82024572"
+  ms.lasthandoff: 11/25/2020
+  ms.locfileid: "96122639"
 landingContent:
 - title: Créer des solutions énergétiques
   linkLists:
@@ -31,22 +31,30 @@ landingContent:
       text: Créer une application intelligente de suivi de compteurs
     - url: tutorial-solar-panel-app.md
       text: Créer une application de suivi de panneaux solaires
-- title: Se connecter
+- title: Connecter et développer des appareils
   linkLists:
+  - linkListType: overview
+    links:
+    - text: Vue d’ensemble pour les développeurs d’appareils
+      url: ../core/overview-iot-central-developer.md
   - linkListType: tutorial
     links:
-    - text: Configurer un modèle d’appareil
-      url: ../core/howto-set-up-template.md
-    - text: Connexion d'un appareil
-      url: ../core/tutorial-connect-device-nodejs.md
-    - text: Connecter un appareil IoT Plug-and-Play (préversion)
-      url: ../core/tutorial-connect-pnp-device.md
+    - text: Créer et connecter un appareil
+      url: ../core/tutorial-connect-device.md
+  - linkListType: concept
+    links:
+    - text: Connectivité des appareils
+      url: ../core/concepts-get-connected.md
+    - text: Modèles d’appareil
+      url: ../core/concepts-device-templates.md
   - linkListType: how-to-guide
     links:
-    - text: Préparer et connecter un kit de développement IoT MX Chip
-      url: ../core/howto-connect-devkit.md
-    - text: Connecter d’autres clouds IoT
-      url: ../core/howto-build-iotc-device-bridge.md
+    - text: Configurer un modèle
+      url: ../core/howto-set-up-template.md
+    - text: Connecter un appareil Azure Sphere
+      url: ../core/howto-connect-sphere.md
+    - text: Résolution des problèmes de connectivité des appareils
+      url: ../core/troubleshoot-connection.md
 - title: Rester connecté
   linkLists:
   - linkListType: tutorial

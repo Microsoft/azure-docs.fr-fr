@@ -8,10 +8,10 @@ ms.author: daberry
 ms.topic: article
 ms.date: 12/03/2019
 ms.openlocfilehash: 54828dded5196c86946d99a9cd8cec7a42533661
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83117561"
 ---
 # <a name="handle-large-messages-with-chunking-in-azure-logic-apps"></a>Gérer les messages volumineux avec la segmentation dans Azure Logic Apps

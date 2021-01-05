@@ -16,15 +16,15 @@ ms.date: 04/29/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0d970fd133f8c43319e7f1fdb6b3a50c3c05f687
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 57990fda7475b95bd6582fa5a495ac8d24aa55d5
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64918443"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94408530"
 ---
 # <a name="determine-content-management-requirements-for-your-hybrid-identity-solution"></a>Déterminer les exigences de gestion de contenu pour votre solution d'identité hybride
-La compréhension des exigences de gestion de contenu pour votre entreprise peut affecter directement votre décision quant à la solution identité hybride à utiliser. Avec la prolifération des appareils multiples et la possibilité pour les utilisateurs d'apporter leurs appareils ([BYOD](https://aka.ms/byodcg)), la société doit protéger ses données, mais elle doit également préserver la confidentialité de l'utilisateur. Généralement, lorsqu'un utilisateur a son propre appareil, il a peut-être également plusieurs informations d'identification qu’il utilisera en alternance en fonction de l'application utilisée. Il est important de faire la différence entre le contenu créé avec des informations d'identification personnelles et celui créé avec des informations d'identification d’entreprise. Votre solution d'identité doit être en mesure d'interagir avec les services du cloud pour fournir une expérience transparente à l'utilisateur final, tout en garantissant sa confidentialité et en augmentant la protection contre les fuites de données. 
+La compréhension des exigences de gestion de contenu pour votre entreprise peut affecter directement votre décision quant à la solution identité hybride à utiliser. Avec la prolifération des appareils multiples et la possibilité pour les utilisateurs d'apporter leurs appareils ([BYOD](/mem/intune/fundamentals/byod-technology-decisions)), la société doit protéger ses données, mais elle doit également préserver la confidentialité de l'utilisateur. Généralement, lorsqu'un utilisateur a son propre appareil, il a peut-être également plusieurs informations d'identification qu’il utilisera en alternance en fonction de l'application utilisée. Il est important de faire la différence entre le contenu créé avec des informations d'identification personnelles et celui créé avec des informations d'identification d’entreprise. Votre solution d'identité doit être en mesure d'interagir avec les services du cloud pour fournir une expérience transparente à l'utilisateur final, tout en garantissant sa confidentialité et en augmentant la protection contre les fuites de données. 
 
 Votre solution d'identité sera exploitée par différents contrôles techniques afin de fournir une gestion de contenu comme indiqué dans la figure ci-dessous :
 
@@ -69,4 +69,3 @@ Lors de la planification de votre solution d'identité hybride, veillez à ce qu
 
 ## <a name="see-also"></a>Voir aussi
 [Présentation des considérations relatives à la conception](plan-hybrid-identity-design-considerations-overview.md)
-

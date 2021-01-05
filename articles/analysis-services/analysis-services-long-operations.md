@@ -2,16 +2,16 @@
 title: Meilleures pratiques en matière d'opérations de longue durée dans Azure Analysis Services | Microsoft Docs
 description: Cet article décrit les meilleures pratiques en matière d'opérations de longue durée.
 author: minewiskan
-ms.service: analysis-services
+ms.service: azure-analysis-services
 ms.topic: conceptual
 ms.date: 04/14/2020
 ms.author: owend
-ms.openlocfilehash: 3f6b2194cc422a827bbc7a15c012173b3f814b52
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 4e069effae0cb7f834b2c3dac696d05304d841a7
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426485"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92014832"
 ---
 # <a name="best-practices-for-long-running-operations"></a>Meilleures pratiques en matière d'opérations de longue durée
 
@@ -50,5 +50,4 @@ Lorsque vous utilisez des réplicas de requête en lecture seule et si les actua
 [Actualisation asynchrone avec l’API REST](analysis-services-async-refresh.md)  
 [Scale-out d’Azure Analysis Services](analysis-services-scale-out.md)  
 [Haute disponibilité Analysis Services](analysis-services-bcdr.md)  
-[Guide du mécanisme de nouvelle tentative relatif aux services Azure](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)   
-
+[Guide du mécanisme de nouvelle tentative relatif aux services Azure](/azure/architecture/best-practices/retry-service-specific)

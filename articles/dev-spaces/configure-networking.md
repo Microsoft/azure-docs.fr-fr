@@ -5,14 +5,16 @@ ms.date: 03/17/2020
 ms.topic: conceptual
 description: Décrit la configuration réseau requise pour l’exécution d’Azure Dev Spaces dans Azure Kubernetes Service
 keywords: Azure Dev Spaces, Dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, CNI, kubenet, SDN, réseau
-ms.openlocfilehash: 3e344576caf276ae7cb5fe00395c84810a4e7d32
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 09114ab13555cbf9ef42b37c86ffb76a8fe3ab3f
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81262041"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91970336"
 ---
 # <a name="configure-networking-for-azure-dev-spaces-in-different-network-topologies"></a>Configurer la mise en réseau pour Azure Dev Spaces dans différentes topologies de réseau
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
 
 Azure Dev Spaces s’exécute sur les clusters Azure Kubernetes Service (AKS) avec la configuration de mise en réseau par défaut. Si vous souhaitez modifier la configuration de mise en réseau de votre cluster AKS, par exemple, placer le cluster derrière un pare-feu, utiliser des groupes de sécurité réseau ou utiliser des stratégies réseau, vous devez incorporer des considérations supplémentaires pour l’exécution d’Azure Dev Spaces.
 
@@ -33,9 +35,8 @@ Azure Dev Spaces a besoin d’un trafic d’entrée et de sortie pour les noms d
 | cloudflare.docker.com      | HTTPS : 443 | Pour tirer (pull) des images Docker pour Azure Dev Spaces |
 | gcr.io                     | HTTPS : 443 | Pour tirer (pull) des images Helm pour Azure Dev Spaces |
 | storage.googleapis.com     | HTTPS : 443 | Pour tirer (pull) des images Helm pour Azure Dev Spaces |
-| azds-*.azds.io             | HTTPS : 443 | Pour communiquer avec les services back-end Azure Dev Spaces pour le contrôleur Azure Dev Spaces. Le nom de domaine complet exact est disponible dans *dataplaneFqdn*, dans `USERPROFILE\.azds\settings.json` |
 
-Mettez à jour votre configuration de pare-feu ou de sécurité pour autoriser le trafic réseau vers et depuis tous les noms de domaine complets ci-dessus. Par exemple, si vous utilisez un pare-feu pour sécuriser votre réseau, les noms de domaine complets (FQDN) ci-dessus doivent être ajoutés à la règle d’application du pare-feu pour autoriser le trafic à destination et en provenance de ces domaines.
+Mettez à jour la configuration de votre pare-feu ou de votre sécurité pour autoriser le trafic réseau à destination et en provenance de tous les noms de domaine complets ci-dessus et des [services d’infrastructure Azure Dev Spaces][service-tags]. Par exemple, si vous utilisez un pare-feu pour sécuriser votre réseau, les noms de domaine complets ci-dessus doivent être ajoutés à la règle d’application du pare-feu. L’étiquette du service Azure Dev Spaces doit également être [ajoutée au pare-feu][firewall-service-tags]. Ces deux mises à jour du pare-feu sont nécessaires pour autoriser le trafic vers et à partir de ces domaines.
 
 ### <a name="ingress-only-network-traffic-requirements"></a>Exigences en matière de trafic réseau d’entrée uniquement
 
@@ -47,7 +48,7 @@ AKS vous permet d’utiliser des [stratégies réseau][aks-network-policies] pou
 
 ### <a name="ingress-and-egress-network-traffic-requirements"></a>Exigences en matière de trafic réseau d’entrée et de sortie
 
-Azure Dev Spaces vous permet de communiquer directement avec un pod dans un espace de développement sur votre cluster à des fins de débogage. Pour que cette fonctionnalité fonctionne, ajoutez une stratégie réseau qui autorise la communication d’entrée et de sortie vers les adresses IP de l’infrastructure Azure Dev Spaces, qui [varient selon la région][dev-spaces-ip-auth-range-regions].
+Azure Dev Spaces vous permet de communiquer directement avec un pod dans un espace de développement sur votre cluster à des fins de débogage. Pour que cette fonctionnalité fonctionne, ajoutez une stratégie réseau qui autorise la communication d’entrée et de sortie vers les adresses IP de l’infrastructure Azure Dev Spaces, qui [varient selon la région][service-tags].
 
 ### <a name="ingress-only-network-traffic-requirements"></a>Exigences en matière de trafic réseau d’entrée uniquement
 
@@ -59,7 +60,7 @@ Par défaut, les clusters AKS sont configurés pour utiliser [kubenet][aks-kuben
 
 ## <a name="using-api-server-authorized-ip-ranges"></a>Utilisation des plages d’adresses IP autorisées du serveur d’API
 
-Les clusters AKS vous permettent de configurer une sécurité supplémentaire qui limite l’adresse IP pouvant interagir avec vos clusters, par exemple, en utilisant des réseaux virtuels personnalisés ou [en sécurisant l’accès au serveur d’API à l’aide de plages d’adresses IP autorisées][aks-ip-auth-ranges]. Pour utiliser Azure Dev Spaces dans le cadre de l’utilisation de cette sécurité supplémentaire lors de la [création][aks-ip-auth-range-create] de votre cluster, vous devez [autoriser des plages supplémentaires en fonction de votre région][dev-spaces-ip-auth-range-regions]. Vous pouvez également [mettre à jour][aks-ip-auth-range-update] un cluster existant pour autoriser ces plages supplémentaires. Vous devez également autoriser l’adresse IP de toutes les machines de développement qui se connectent à votre cluster AKS à des fins de débogage, à se connecter à votre serveur d’API.
+Les clusters AKS vous permettent de configurer une sécurité supplémentaire qui limite l’adresse IP pouvant interagir avec vos clusters, par exemple, en utilisant des réseaux virtuels personnalisés ou [en sécurisant l’accès au serveur d’API à l’aide de plages d’adresses IP autorisées][aks-ip-auth-ranges]. Pour utiliser Azure Dev Spaces dans le cadre de l’utilisation de cette sécurité supplémentaire lors de la [création][aks-ip-auth-range-create] de votre cluster, vous devez [autoriser des plages supplémentaires en fonction de votre région][service-tags]. Vous pouvez également [mettre à jour][aks-ip-auth-range-update] un cluster existant pour autoriser ces plages supplémentaires. Vous devez également autoriser l’adresse IP de toutes les machines de développement qui se connectent à votre cluster AKS à des fins de débogage, à se connecter à votre serveur d’API.
 
 ## <a name="using-aks-private-clusters"></a>Utilisation des clusters privés AKS
 
@@ -84,14 +85,14 @@ az aks use-dev-spaces -g MyResourceGroup -n MyAKS -e private
 
 ## <a name="client-requirements"></a>Configuration requise des clients
 
-Azure Dev Spaces utilise des outils côté client, tels que l’extension d’interface CLI Azure Dev Spaces, l’extension Visual Studio Code et l’extension Visual Studio, pour communiquer avec votre cluster AKS à des fins de débogage. Pour utiliser les outils côté client Azure Dev Spaces, autorisez le trafic à partir des machines de développement vers le domaine *azds-\*.azds.io*. Consultez *dataplaneFqdn* dans `USERPROFILE\.azds\settings.json` pour connaître le nom de domaine complet exact. Si vous utilisez des [plages d’adresses IP autorisées du serveur d’API][auth-range-section], vous devez également autoriser l’adresse IP de toutes les machines de développement qui se connectent à votre cluster AKS à des fins de débogage, à se connecter à votre serveur d’API.
+Azure Dev Spaces utilise des outils côté client, tels que l’extension d’interface CLI Azure Dev Spaces, l’extension Visual Studio Code et l’extension Visual Studio, pour communiquer avec votre cluster AKS à des fins de débogage. Pour utiliser les outils Azure Dev Spaces côté client, autorisez le trafic à partir des machines de développement vers l’[infrastructure Azure Dev Spaces][dev-spaces-allow-infrastructure]. Si vous utilisez des [plages d’adresses IP autorisées du serveur d’API][auth-range-section], vous devez également autoriser l’adresse IP de toutes les machines de développement qui se connectent à votre cluster AKS à des fins de débogage, à se connecter à votre serveur d’API.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment Azure Dev Spaces vous aide à développer des applications plus complexes sur plusieurs conteneurs, et comment vous pouvez simplifier le développement collaboratif en utilisant différentes versions ou branches de votre code dans différents espaces.
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
 
 > [!div class="nextstepaction"]
-> [Développement en équipe dans Azure Dev Spaces][team-quickstart]
+> [Fonctionnement d’Azure Dev Spaces](how-dev-spaces-works.md)
 
 [aks-cni]: ../aks/configure-azure-cni.md
 [aks-cni-ip-planning]: ../aks/configure-azure-cni.md#plan-ip-addressing-for-your-cluster
@@ -104,10 +105,11 @@ Découvrez comment Azure Dev Spaces vous aide à développer des applications pl
 [aks-private-clusters]: ../aks/private-clusters.md
 [auth-range-section]: #using-api-server-authorized-ip-ranges
 [azure-cli-install]: /cli/azure/install-azure-cli
-[dev-spaces-ip-auth-range-regions]: https://github.com/Azure/dev-spaces/tree/master/public-ips
+[dev-spaces-allow-infrastructure]: #virtual-network-or-subnet-configurations
 [dev-spaces-routing]: how-dev-spaces-works-routing.md
 [endpoint-options]: #using-different-endpoint-options
+[firewall-service-tags]: ../firewall/service-tags.md
 [traefik-ingress]: how-to/ingress-https-traefik.md
 [nginx-ingress]: how-to/ingress-https-nginx.md
 [sample-repo]: https://github.com/Azure/dev-spaces/tree/master/advanced%20networking
-[team-quickstart]: quickstart-team-development.md
+[service-tags]: ../virtual-network/service-tags-overview.md#available-service-tags

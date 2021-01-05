@@ -1,5 +1,5 @@
 ---
-title: Configuration d’Azure File Sync
+title: Configurer Azure File Sync
 description: Configurez Azure File Sync. Bloc de texte commun, partagé entre plusieurs documents de migration.
 author: fauhse
 ms.service: storage
@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 2/20/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: 562099c65273cad50596268b89055ec78d92d18a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 64b99976a306c3c8423f5115c95a15158a3ddb51
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82143616"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93043193"
 ---
 Cette étape lie l’ensemble des ressources et dossiers que vous avez configurés sur votre instance Windows Server au cours des étapes précédentes.
 

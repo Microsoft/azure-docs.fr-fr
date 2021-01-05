@@ -3,7 +3,7 @@ title: Bien démarrer avec l’authentification Azure AD
 description: Découvrez comment accéder à l’authentification Azure Active Directory (Azure AD) pour consommer l’API Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
@@ -11,16 +11,18 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
-ms.date: 05/21/2020
-ms.author: juliako
-ms.openlocfilehash: 9788c4663908497b51fbaaf7f824125d857e7c81
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 00808c25ac84da852cce6169fb210767ee2b56cf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83774414"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89265879"
 ---
-# <a name="get-credentials-to-access-media-services-api"></a>Obtenir des informations d’identification pour accéder à l’API Media Services  
+# <a name="get-credentials-to-access-media-services-api"></a>Obtenir des informations d’identification pour accéder à l’API Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Quand vous utilisez l’authentification Azure AD pour accéder à l’API Azure Media Services, vous disposez de deux options d’authentification :
 
@@ -38,14 +40,14 @@ Cet article décrit les étapes permettant d’obtenir des informations d’iden
 - Un compte Azure. Si vous n’avez pas de compte, commencez avec un [essai gratuit Azure](https://azure.microsoft.com/pricing/free-trial/). 
 - Un compte Media Services. Pour plus d’informations, consultez [Création d’un compte Azure Media Services à l’aide du portail Azure](create-account-howto.md).
 
-## <a name="use-the-azure-portal"></a>Utilisation du portail Azure
+## <a name="portal"></a>[Portail](#tab/portal/)
 
-### <a name="api-access"></a>Accès d’API 
+### <a name="api-access"></a>Accès d’API
 
 La page **Accès d’API** vous permet de sélectionner la méthode d’authentification que vous souhaitez utiliser pour vous connecter à l’API. Elle fournit également les valeurs dont vous avez besoin pour vous connecter à l’API.
 
 1. Dans le [portail Azure](https://portal.azure.com/), sélectionnez votre compte Media Services.
-2. Choisissez comment vous connecter à l’API Media Services.
+2. Sélectionnez le panneau **Accès d’API (nouveau)** dans la barre de navigation de gauche.
 3. Sous **Se connecter à l’API Media Services**, sélectionnez la version de l’API Media Services à laquelle vous souhaitez vous connecter (V3 est la dernière version du service).
 
 ### <a name="service-principal-authentication--recommended"></a>Authentification d’un principal du service (recommandée)
@@ -56,7 +58,7 @@ Authentifie un service à l’aide d’une application Azure Active Directory (A
 
 La section **Gérer votre application AAD et votre secret** vous permet de sélectionner ou de créer une application Azure AD et de générer un secret. Pour des raisons de sécurité, le secret ne peut pas être affiché après la fermeture du panneau. L’application utilise l’ID d’application et le secret pour l’authentification afin d’obtenir un jeton valide pour Media Services.
 
-Veillez à avoir les autorisations suffisantes pour inscrire une application auprès de votre locataire Azure AD et pour attribuer l’application à un rôle dans votre abonnement Azure. Pour plus d’informations, consultez [Autorisations requises](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#required-permissions).
+Veillez à avoir les autorisations suffisantes pour inscrire une application auprès de votre locataire Azure AD et pour attribuer l’application à un rôle dans votre abonnement Azure. Pour plus d’informations, consultez [Autorisations requises](../../active-directory/develop/howto-create-service-principal-portal.md#permissions-required-for-registering-an-app).
 
 #### <a name="connect-to-media-services-api"></a>Se connecter à l’API Media Services
 
@@ -70,7 +72,7 @@ Cette option peut être utilisée pour authentifier un employé ou un membre d�
 
 Copiez vos informations d’identification pour connecter votre application utilisateur à partir de la section **Se connecter à l’API Media Services**. Vous pouvez récupérer des valeurs de texte ou copier les blocs JSON ou XML.
 
-[!INCLUDE [media-services-cli-instructions](../../../includes/media-services-cli-instructions.md)]
+## <a name="cli"></a>[INTERFACE DE LIGNE DE COMMANDE](#tab/cli/)
 
 [!INCLUDE [media-services-v3-cli-access-api-include](../../../includes/media-services-v3-cli-access-api-include.md)]
 

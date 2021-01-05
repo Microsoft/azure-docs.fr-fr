@@ -4,14 +4,15 @@ description: Découvrez comment créer et gérer la prise en charge de réseau v
 author: yegu-ms
 ms.author: yegu
 ms.service: cache
+ms.custom: devx-track-csharp
 ms.topic: conceptual
-ms.date: 05/15/2017
-ms.openlocfilehash: 2821ee637b2562b5287dd3d59cf943b3dcb7ef97
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.date: 10/09/2020
+ms.openlocfilehash: 5fd82105c94bb9be2d07c8843834465821acd8bc
+ms.sourcegitcommit: 6a770fc07237f02bea8cc463f3d8cc5c246d7c65
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81010883"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95803774"
 ---
 # <a name="how-to-configure-virtual-network-support-for-a-premium-azure-cache-for-redis"></a>Comment configurer la prise en charge de réseau virtuel pour un Cache Azure Premium pour Redis
 Le Cache Azure pour Redis offre différents types de caches permettant de choisir parmi plusieurs tailles et fonctionnalités de caches, notamment les fonctionnalités de niveau Premium telles que le clustering, la persistance et la prise en charge du réseau virtuel. Un réseau VNet est un réseau privé dans le cloud. Lorsqu’une instance de Cache Azure pour Redis est configurée avec un réseau virtuel, elle n’est pas adressable publiquement et est accessible uniquement à partir de machines virtuelles et d’applications sur le réseau virtuel. Cet article décrit comment configurer la prise en charge de réseau virtuel pour une instance Premium de Cache Azure pour Redis.
@@ -21,56 +22,85 @@ Le Cache Azure pour Redis offre différents types de caches permettant de choisi
 > 
 > 
 
-Pour plus d’informations sur les autres fonctionnalités du cache Premium, consultez [Introduction au niveau Premium du Cache Redis Azure](cache-premium-tier-intro.md).
-
 ## <a name="why-vnet"></a>Pourquoi un réseau virtuel ?
 Le déploiement [Réseau virtuel Azure](https://azure.microsoft.com/services/virtual-network/) fournit une sécurité et une isolation améliorées pour le cache Azure pour Redis, ainsi que des sous-réseaux, des stratégies de contrôle d’accès et d’autres fonctionnalités permettant de restreindre davantage l’accès.
 
 ## <a name="virtual-network-support"></a>Prise en charge des réseaux virtuels
 La configuration de la prise en charge du réseau virtuel (VNet) s’effectue dans le panneau **Nouveau cache Azure pour Redis** lors de la création du cache. 
 
-[!INCLUDE [redis-cache-create](../../includes/redis-cache-premium-create.md)]
+1. Pour créer un cache Premium, connectez-vous au [portail Azure](https://portal.azure.com), puis sélectionnez **Créer une ressource**. Notez que, en plus de créer des caches dans le portail Azure, vous pouvez en créer à l’aide de modèles Resource Manager, de PowerShell ou d’Azure CLI. Pour plus d’informations sur la création d’un cache Azure pour Redis, consultez la section [Création d’un cache](cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache).
 
-Une fois que vous avez sélectionné le niveau tarifaire Premium, vous pouvez configurer l’intégration du réseau virtuel Redis en sélectionnant un réseau virtuel situé dans le même abonnement et le même emplacement que votre cache. Pour utiliser un nouveau réseau virtuel, vous devez tout d’abord le créer en suivant les étapes indiquées dans [Créer un réseau virtuel à l’aide du Portail Azure](../virtual-network/manage-virtual-network.md#create-a-virtual-network) ou [Créer un réseau virtuel (classique) à l’aide du Portail Azure](../virtual-network/virtual-networks-create-vnet-classic-pportal.md). Revenez ensuite au panneau **Nouveau cache Azure pour Redis** pour créer et configurer votre cache Premium.
+    :::image type="content" source="media/cache-private-link/1-create-resource.png" alt-text="Créer une ressource.":::
+   
+2. Dans la page **Nouvelle**, sélectionnez **Bases de données**, puis **Azure Cache pour Redis**.
 
-Pour configurer le réseau virtuel pour votre nouveau cache, cliquez sur **Réseau virtuel** dans le panneau **Nouveau cache Azure pour Redis**, puis sélectionnez le réseau virtuel souhaité dans la liste déroulante.
+    :::image type="content" source="media/cache-private-link/2-select-cache.png" alt-text="Sélectionnez Azure Cache pour Redis.":::
 
-![Réseau virtuel][redis-cache-vnet]
+3. Dans la page **Nouveau cache Redis**, configurez les paramètres du nouveau cache Premium.
+   
+   | Paramètre      | Valeur suggérée  | Description |
+   | ------------ |  ------- | -------------------------------------------------- |
+   | **Nom DNS** | Entrez un nom globalement unique. | Le nom du cache doit être une chaîne de 1 à 63 caractères ne contenant que des chiffres, des lettres et des traits d’union. Le nom doit commencer et se terminer par un chiffre ou une lettre, et ne peut pas contenir de traits d’union consécutifs. Le *nom d’hôte* de votre instance de cache sera *\<DNS name>.redis.cache.windows.net*. | 
+   | **Abonnement** | Dans la liste déroulante, sélectionnez votre abonnement. | Abonnement sous lequel créer cette nouvelle instance d’Azure Cache pour Redis. | 
+   | **Groupe de ressources** | Dans la liste déroulante, sélectionnez un groupe de ressources ou choisissez **Créer nouveau**, puis entrez un nouveau nom de groupe de ressources. | Nom du groupe de ressources dans lequel créer votre cache et d’autres ressources. En plaçant toutes les ressources de votre application dans un seul groupe de ressources, vous pouvez facilement les gérer ou les supprimer ensemble. | 
+   | **Lieu** | Dans la liste déroulante, sélectionnez un emplacement. | Choisissez une [Région](https://azure.microsoft.com/regions/) proche d’autres services qui utiliseront votre cache. |
+   | **Type de cache** | Dans la liste déroulante, sélectionnez un cache Premium pour configurer les fonctionnalités Premium. Pour plus d’informations, consultez la page [Tarification Azure Cache pour Redis](https://azure.microsoft.com/pricing/details/cache/). |  Le niveau tarifaire détermine la taille, les performances et les fonctionnalités disponibles pour le cache. Pour plus d’informations, consultez [Présentation du cache Azure pour Redis](cache-overview.md). |
 
-Sélectionnez le sous-réseau de votre choix dans la liste déroulante **Sous-réseau**.  Si vous le souhaitez, spécifiez une **adresse IP statique**. Le champ **Adresse IP statique** est facultatif. Si aucune n’est spécifiée, une adresse IP statique sera choisie dans le sous-réseau sélectionné.
+4. Sélectionnez l’onglet **Réseau** ou cliquez sur le bouton **Réseau** au bas de la page.
 
-> [!IMPORTANT]
-> Lorsque vous déployez un Cache Azure pour Redis vers un réseau virtuel Gestionnaire des ressources, le cache doit se trouver dans un sous-réseau dédié ne contenant pas de ressources autres que des instances du Cache Azure pour Redis. Si vous tentez de déployer un Cache Azure pour Redis sur un réseau virtuel Gestionnaire des ressources vers un sous-réseau contenant d’autres ressources, le déploiement échoue.
-> 
-> 
+5. Sous l’onglet **Réseau**, sélectionnez **Réseaux virtuels** comme méthode de connectivité. Pour utiliser un nouveau réseau virtuel, vous devez tout d’abord le créer en suivant les étapes indiquées dans [Créer un réseau virtuel à l’aide du portail Azure](../virtual-network/manage-virtual-network.md#create-a-virtual-network) ou [Créer un réseau virtuel (classique) à l’aide du portail Azure](/previous-versions/azure/virtual-network/virtual-networks-create-vnet-classic-pportal). Revenez ensuite au panneau **Nouveau cache Azure pour Redis** pour créer et configurer votre cache Premium.
 
-![Réseau virtuel][redis-cache-vnet-ip]
+   > [!IMPORTANT]
+   > Lorsque vous déployez un Cache Azure pour Redis vers un réseau virtuel Gestionnaire des ressources, le cache doit se trouver dans un sous-réseau dédié ne contenant pas de ressources autres que des instances du Cache Azure pour Redis. Si vous tentez de déployer un Cache Azure pour Redis sur un réseau virtuel Gestionnaire des ressources vers un sous-réseau contenant d’autres ressources, le déploiement échoue.
+   > 
+   > 
 
-> [!IMPORTANT]
-> Azure réserve dans chaque sous-réseau des adresses IP qui ne peuvent pas être utilisées. Les première et dernière adresse IP des sous-réseaux sont réservées à la conformité du protocole, et 3 adresses supplémentaires sont utilisées pour les services Azure. Pour plus d’informations, consultez [Existe-t-il des restrictions sur l’utilisation des adresses IP au sein de ces sous-réseaux ?](../virtual-network/virtual-networks-faq.md#are-there-any-restrictions-on-using-ip-addresses-within-these-subnets)
-> 
-> Outre les adresses IP utilisées par l’infrastructure réseau virtuel Azure, chaque d’instance Redis dans le sous-réseau utilise deux adresses IP par partition et une adresse IP supplémentaire pour l’équilibrage de charge. Un cache non cluster est considéré comme ayant une seule partition.
-> 
-> 
+   | Paramètre      | Valeur suggérée  | Description |
+   | ------------ |  ------- | -------------------------------------------------- |
+   | **Réseau virtuel** | Dans la liste déroulante, sélectionnez votre réseau virtuel. | Sélectionnez un réseau virtuel qui se trouve dans le même abonnement et au même emplacement que votre cache. | 
+   | **Sous-réseau** | Dans la liste déroulante, sélectionnez votre sous-réseau. | La plage d’adresses du sous-réseau doit être en notation CIDR (par exemple, 192.168.1.0/24). Elle doit être contenue dans l’espace d’adressage du réseau virtuel. | 
+   | **Adresse IP statique** | (Facultatif) Entrez une adresse IP statique. | Si vous ne spécifiez pas d’adresse IP statique, une adresse IP est choisie automatiquement. | 
 
-Une fois le cache créé, vous pouvez afficher la configuration du réseau virtuel en cliquant sur **Réseau virtuel** dans le **menu Ressource**.
+   > [!IMPORTANT]
+   > Azure réserve dans chaque sous-réseau des adresses IP qui ne peuvent pas être utilisées. Les première et dernière adresse IP des sous-réseaux sont réservées à la conformité du protocole, et 3 adresses supplémentaires sont utilisées pour les services Azure. Pour plus d’informations, consultez [Existe-t-il des restrictions sur l’utilisation des adresses IP au sein de ces sous-réseaux ?](../virtual-network/virtual-networks-faq.md#are-there-any-restrictions-on-using-ip-addresses-within-these-subnets)
+   > 
+   > Outre les adresses IP utilisées par l’infrastructure réseau virtuel Azure, chaque d’instance Redis dans le sous-réseau utilise deux adresses IP par partition et une adresse IP supplémentaire pour l’équilibrage de charge. Un cache non cluster est considéré comme ayant une seule partition.
+   > 
+   > 
+
+6. Sélectionnez le bouton **Suivant : Avancé** ou cliquez sur le bouton **Suivant : Avancé** en bas de la page.
+
+7. Sous l’onglet **Avancé** d’une instance de cache Premium, configurez les paramètres pour le port non TLS, le clustering et la persistance des données. 
+
+8. Sélectionnez le bouton **Suivant : Étiquettes** ou cliquez sur le bouton **Suivant : Étiquettes** au bas de la page.
+
+9. Si vous le voulez, sous l’onglet **Étiquettes**, entrez le nom et la valeur si vous souhaitez catégoriser la ressource. 
+
+10. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers l’onglet Vérifier + créer où Azure valide votre configuration.
+
+11. Une fois que le message vert Validation réussie s’affiche, sélectionnez **Créer**.
+
+La création du cache prend un certain temps. Vous pouvez surveiller la progression dans la page **Vue d’ensemble** du Azure Cache pour Redis. Lorsque **État** indique **En cours d’exécution**, le cache est prêt pour utilisation. Une fois le cache créé, vous pouvez afficher la configuration du réseau virtuel en cliquant sur **Réseau virtuel** dans le **menu Ressource**.
 
 ![Réseau virtuel][redis-cache-vnet-info]
 
 Pour vous connecter à votre instance du Cache Azure pour Redis lorsque vous utilisez un réseau virtuel, spécifiez le nom d’hôte de votre cache dans la chaîne de connexion, comme indiqué dans l’exemple suivant :
 
-    private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+```csharp
+private static Lazy<ConnectionMultiplexer>
+    lazyConnection = new Lazy<ConnectionMultiplexer> (() =>
     {
         return ConnectionMultiplexer.Connect("contoso5premium.redis.cache.windows.net,abortConnect=false,ssl=true,password=password");
     });
 
-    public static ConnectionMultiplexer Connection
+public static ConnectionMultiplexer Connection
+{
+    get
     {
-        get
-        {
-            return lazyConnection.Value;
-        }
+        return lazyConnection.Value;
     }
+}
+```
 
 ## <a name="azure-cache-for-redis-vnet-faq"></a>FAQ sur les réseaux virtuels de cache Azure pour Redis
 La liste suivante présente différentes réponses aux questions les plus fréquemment posées sur la mise à l’échelle du cache Azure pour Redis.
@@ -96,12 +126,12 @@ Lorsque le Cache Azure pour Redis est hébergé dans un réseau virtuel, les por
 
 #### <a name="outbound-port-requirements"></a>Configuration requise de port sortant
 
-Il existe neuf configurations requises de port sortant. Les demandes sortantes dans ces plages sont soit sortantes vers d’autres services nécessaires au cache pour fonctionner, soit internes au sous-réseau Redis pour la communication entre les nœuds. Pour la géoréplication, des exigences sortantes supplémentaires existent pour la communication entre les sous-réseaux du cache principal et du cache secondaire.
+Il existe neuf configurations requises de port sortant. Les demandes sortantes dans ces plages sont soit sortantes vers d’autres services nécessaires au cache pour fonctionner, soit internes au sous-réseau Redis pour la communication entre les nœuds. Pour la géoréplication, il existe d’autres règles de trafic sortant pour la communication entre les sous-réseaux du cache principal et de réplica.
 
 | Port(s) | Sens | Protocole de transfert | Objectif | Adresse IP locale | Adresse IP distante |
 | --- | --- | --- | --- | --- | --- |
-| 80, 443 |Règle de trafic sortant |TCP |Dépendances Redis sur Azure Storage/l’infrastructure à clé publique (Internet) | (sous-réseau Redis) |* |
-| 443 | Règle de trafic sortant | TCP | Dépendances Redis sur Azure Key Vault | (sous-réseau Redis) | AzureKeyVault <sup>1</sup> |
+| 80, 443 |Règle de trafic sortant |TCP |Dépendances Redis sur Azure Storage/l’infrastructure à clé publique (Internet) | (sous-réseau Redis) |* <sup>4</sup> |
+| 443 | Règle de trafic sortant | TCP | Dépendance Redis à Azure Key Vault et à Azure Monitor | (sous-réseau Redis) | AzureKeyVault, AzureMonitor<sup>1</sup> |
 | 53 |Règle de trafic sortant |TCP/UDP |Dépendances Redis sur le DNS (Internet/réseau virtuel) | (sous-réseau Redis) | 168.63.129.16 et 169.254.169.254 <sup>2</sup> et n’importe quel serveur DNS personnalisé pour le sous-réseau <sup>3</sup> |
 | 8443 |Règle de trafic sortant |TCP |Communications internes pour Redis | (sous-réseau Redis) | (sous-réseau Redis) |
 | 10221-10231 |Règle de trafic sortant |TCP |Communications internes pour Redis | (sous-réseau Redis) | (sous-réseau Redis) |
@@ -110,11 +140,13 @@ Il existe neuf configurations requises de port sortant. Les demandes sortantes d
 | 15000-15999 |Règle de trafic sortant |TCP |Communications internes pour Redis et géoréplication | (sous-réseau Redis) |(Sous-réseau Redis) (Sous-réseau d’homologues géo-réplica) |
 | 6379-6380 |Règle de trafic sortant |TCP |Communications internes pour Redis | (sous-réseau Redis) |(sous-réseau Redis) |
 
-<sup>1</sup> Vous pouvez utiliser la balise de service « AzureKeyVault » avec les groupes de sécurité réseau Resource Manager.
+<sup>1</sup> Vous pouvez utiliser les étiquettes de service « AzureKeyVault » et « AzureMonitor » avec des groupes de sécurité réseau Resource Manager.
 
 <sup>2</sup> Ces adresses IP appartenant à Microsoft sont utilisées pour adresser la machine virtuelle hôte qui sert Azure DNS.
 
 <sup>3</sup> Non nécessaire pour les sous-réseaux sans serveur DNS personnalisé, ou pour des caches Redis plus récentes qui ignorent les DNS personnalisés.
+
+<sup>4</sup> Pour plus d’informations, consultez [Exigences supplémentaires de connectivité réseau VNET](#additional-vnet-network-connectivity-requirements).
 
 #### <a name="geo-replication-peer-port-requirements"></a>Exigences relatives aux ports homologues de géoréplication
 
@@ -126,13 +158,13 @@ Il existe huit configurations requises de port entrant. Les requêtes entrantes 
 
 | Port(s) | Sens | Protocole de transfert | Objectif | Adresse IP locale | Adresse IP distante |
 | --- | --- | --- | --- | --- | --- |
-| 6379, 6380 |Trafic entrant |TCP |Communication client avec Redis, équilibrage de charge Azure | (sous-réseau Redis) | (sous-réseau Redis), Réseau virtuel, Azure Load Balancer <sup>1</sup> |
+| 6379, 6380 |Trafic entrant |TCP |Communication client avec Redis, équilibrage de charge Azure | (sous-réseau Redis) | (sous-réseau Redis), (sous-réseau client), AzureLoadBalancer <sup>1</sup> |
 | 8443 |Trafic entrant |TCP |Communications internes pour Redis | (sous-réseau Redis) |(sous-réseau Redis) |
-| 8500 |Trafic entrant |TCP/UDP |Équilibrage de charge Azure | (sous-réseau Redis) |Azure Load Balancer |
-| 10221-10231 |Trafic entrant |TCP |Communications internes pour Redis | (sous-réseau Redis) |(Sous-réseau Redis) Azure Load Balancer |
-| 13000-13999 |Trafic entrant |TCP |Communication client avec les clusters Redis, équilibrage de charge Azure | (sous-réseau Redis) |Réseau virtuel, Azure Load Balancer |
-| 15000-15999 |Trafic entrant |TCP |Communication client avec les clusters Redis, équilibrage de charge Azure et géoréplication | (sous-réseau Redis) |Réseau virtuel, Azure Load Balancer, (sous-réseau d'homologues géo-réplica) |
-| 16001 |Trafic entrant |TCP/UDP |Équilibrage de charge Azure | (sous-réseau Redis) |Azure Load Balancer |
+| 8500 |Trafic entrant |TCP/UDP |Équilibrage de charge Azure | (sous-réseau Redis) | AzureLoadBalancer |
+| 10221-10231 |Trafic entrant |TCP |Communication client avec les clusters Redis, communications internes pour Redis | (sous-réseau Redis) |(Sous-réseau Redis), AzureLoadBalancer, (Sous-réseau client) |
+| 13000-13999 |Trafic entrant |TCP |Communication client avec les clusters Redis, équilibrage de charge Azure | (sous-réseau Redis) | (sous-réseau Redis), (sous-réseau client), AzureLoadBalancer |
+| 15000-15999 |Trafic entrant |TCP |Communication client avec les clusters Redis, équilibrage de charge Azure et géoréplication | (sous-réseau Redis) | (sous-réseau Redis), (sous-réseau client), AzureLoadBalancer, (sous-réseau homologue avec géoréplication) |
+| 16001 |Trafic entrant |TCP/UDP |Équilibrage de charge Azure | (sous-réseau Redis) | AzureLoadBalancer |
 | 20226 |Trafic entrant |TCP |Communications internes pour Redis | (sous-réseau Redis) |(sous-réseau Redis) |
 
 <sup>1</sup> Vous pouvez utiliser la balise de service « AzureLoadBalancer » (Resource Manager) (ou « AZURE_LOADBALANCER » pour le mode classique) dans la création de règles de groupe de sécurité réseau.
@@ -142,14 +174,14 @@ Il existe huit configurations requises de port entrant. Les requêtes entrantes 
 Il existe des exigences de connectivité réseau pour le Cache Azure pour Redis qui peuvent ne pas être initialement satisfaites dans un réseau virtuel. Le Cache Azure pour Redis nécessite tous les éléments suivants pour fonctionner correctement lorsqu’il est utilisé dans un réseau virtuel.
 
 * Connectivité réseau sortante à des points de terminaison Azure Storage dans le monde entier. Cela inclut les points de terminaison situés dans la même région que le cache Azure pour Redis, ainsi que les points de terminaison de stockage situés dans d’**autres** régions Azure. Les points de terminaison du Stockage Azure se résolvent dans les domaines DNS suivants : *table.core.windows.net*, *blob.core.windows.net*, *queue.core.windows.net* et *file.core.windows.net*. 
-* Connectivité réseau sortante à *ocsp.msocsp.com*, *mscrl.microsoft.com* et *crl.microsoft.com*. Cette connectivité est nécessaire pour prendre en charge la fonctionnalité TSL/SSL.
+* Connectivité réseau sortante à *ocsp.digicert.com*, *crl4.digicert.com*, *ocsp.msocsp.com*, *mscrl.microsoft.com*, *crl3.digicert.com*, *cacerts.digicert.com*, *oneocsp.microsoft.com* et *crl.microsoft.com*. Cette connectivité est nécessaire pour prendre en charge la fonctionnalité TSL/SSL.
 * La configuration DNS pour le réseau virtuel doit être capable de résoudre tous les points de terminaison et les domaines mentionnés dans les points précédents. La configuration DNS requise peut être satisfaite en garantissant qu'une infrastructure DNS valide est configurée et gérée pour le réseau virtuel.
-* Connectivité réseau sortante aux points de terminaison de surveillance Azure suivants qui se résolvent dans les domaines DNS suivants : shoebox2-black.shoebox2.metrics.nsatc.net, north-prod2.prod2.metrics.nsatc.net, azglobal-black.azglobal.metrics.nsatc.net, shoebox2-red.shoebox2.metrics.nsatc.net, east-prod2.prod2.metrics.nsatc.net et azglobal-red.azglobal.metrics.nsatc.net.
+* Connectivité réseau sortante aux points de terminaison Azure Monitor suivants qui se résolvent dans les domaines DNS suivants : *shoebox2-black.shoebox2.metrics.nsatc.net*, *north-prod2.prod2.metrics.nsatc.net*, *azglobal-black.azglobal.metrics.nsatc.net*, *shoebox2-red.shoebox2.metrics.nsatc.net*, *east-prod2.prod2.metrics.nsatc.net* et *azglobal-red.azglobal.metrics.nsatc.net*.
 
 ### <a name="how-can-i-verify-that-my-cache-is-working-in-a-vnet"></a>Comment puis-je vérifier que mon cache fonctionne dans un réseau virtuel ?
 
 >[!IMPORTANT]
->Lors de la connexion à une instance Azure Cache pour Redis hébergée dans un réseau virtuel, vos clients de cache doivent figurer dans le même réseau virtuel ou dans un réseau virtuel pour lequel le VNET Peering est activé dans la même région Azure. Le VNET Peering global n’est pas pris en charge actuellement. Cela inclut les applications de test ou les outils de requête de diagnostic. Quel que soit l’endroit où l’application cliente est hébergée, les groupes de sécurité réseau doivent être configurés de façon à ce que le trafic réseau du client soit autorisé à atteindre l’instance Redis.
+>Lors de la connexion à une instance Azure Cache pour Redis hébergée dans un réseau virtuel, vos clients de cache doivent figurer dans le même réseau virtuel ou dans un réseau virtuel pour lequel le VNET Peering est activé dans la même région Azure. Le VNET Peering global n’est pas pris en charge actuellement. Cela inclut les applications de test ou les outils de requête de diagnostic. Quel que soit l’endroit où l’application cliente est hébergée, les groupes de sécurité réseau ou d’autres couches réseau doivent être configurés de façon à ce que le trafic du client soit autorisé à atteindre l’instance Redis.
 >
 >
 
@@ -188,19 +220,19 @@ Si vous ne parvenez pas à résoudre le nom DNS, des bibliothèques clientes inc
 Vous ne pouvez utiliser des réseaux virtuels qu’avec les caches de niveau Premium.
 
 ### <a name="why-does-creating-an-azure-cache-for-redis-fail-in-some-subnets-but-not-others"></a>Pourquoi la création d’un cache Azure pour Redis échoue-t-elle dans certains sous-réseaux mais pas d’autres ?
-Si vous déployez un Cache Azure pour Redis sur un réseau virtuel Gestionnaire des ressources, le cache doit se trouver dans un sous-réseau dédié qui ne contient aucun autre type de ressource. Si vous tentez de déployer un Cache Azure pour Redis sur un sous-réseau de réseau virtuel Gestionnaire des ressources contenant d’autres ressources, le déploiement échoue. Vous devez supprimer les ressources existantes dans le sous-réseau avant de pouvoir créer un nouveau Cache Azure pour Redis.
+Si vous déployez une instance Azure Cache pour Redis sur un réseau virtuel, le cache doit se trouver dans un sous-réseau dédié qui ne contient aucun autre type de ressource. Si vous tentez de déployer une instance Azure Cache pour Redis sur un sous-réseau de réseau virtuel Resource Manager contenant d’autres ressources (comme des passerelles Application Gateway, des règles NAT de trafic sortant, etc.), le déploiement échoue en général. Vous devez supprimer les autres types de ressources existantes avant de pouvoir créer une nouvelle instance Azure Cache pour Redis.
 
-Vous pouvez déployer plusieurs types de ressources sur un réseau virtuel classique, à condition de disposer de suffisamment d’adresses IP disponibles.
+Vous devez également disposer de suffisamment d’adresses IP disponibles dans le sous-réseau.
 
 ### <a name="what-are-the-subnet-address-space-requirements"></a>Quelles sont les exigences d’espace d’adressage du sous-réseau ?
 Azure réserve dans chaque sous-réseau des adresses IP qui ne peuvent pas être utilisées. Les première et dernière adresse IP des sous-réseaux sont réservées à la conformité du protocole, et 3 adresses supplémentaires sont utilisées pour les services Azure. Pour plus d’informations, consultez [Existe-t-il des restrictions sur l’utilisation des adresses IP au sein de ces sous-réseaux ?](../virtual-network/virtual-networks-faq.md#are-there-any-restrictions-on-using-ip-addresses-within-these-subnets)
 
-Outre les adresses IP utilisées par l’infrastructure réseau virtuel Azure, chaque d’instance Redis dans le sous-réseau utilise deux adresses IP par partition et une adresse IP supplémentaire pour l’équilibrage de charge. Un cache non cluster est considéré comme ayant une seule partition.
+Outre les adresses IP utilisées par l’infrastructure de réseau virtuel Azure, chaque instance Redis dans le sous-réseau utilise deux adresses IP par partition de cluster (plus des adresses IP supplémentaires pour les réplicas additionnels, le cas échéant) et une adresse IP supplémentaire pour l’équilibreur de charge. Un cache non cluster est considéré comme ayant une seule partition.
 
 ### <a name="do-all-cache-features-work-when-hosting-a-cache-in-a-vnet"></a>Toutes les fonctionnalités fonctionnent-elles lorsque vous hébergez un cache dans un réseau virtuel ?
 Quand votre cache fait partie d’un réseau virtuel, seuls les clients de ce réseau virtuel peuvent accéder au cache. Par conséquent, les fonctionnalités de gestion de cache suivantes ne fonctionnent pas pour l’instant.
 
-* Console redis. Console Redis s’exécutant dans votre navigateur local situé à l’extérieur du réseau virtuel, il ne peut pas se connecter à votre cache.
+* Console Redis : étant donné que la console Redis s’exécute dans votre navigateur local, qui est généralement situé sur un ordinateur de développement qui n’est pas connecté au réseau virtuel, elle ne peut pas se connecter à votre cache.
 
 
 ## <a name="use-expressroute-with-azure-cache-for-redis"></a>Utiliser ExpressRoute avec le Cache Azure pour Redis
@@ -234,9 +266,9 @@ Vous trouverez des informations générales sur les itinéraires définis par l'
 Pour plus d’informations sur ExpressRoute, voir [Aperçu technique d’ExpressRoute](../expressroute/expressroute-introduction.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
-Découvrez comment utiliser davantage de fonctionnalités de cache de niveau Premium.
+En savoir plus sur les fonctionnalités d’Azure Cache pour Redis.
 
-* [Introduction au niveau Premium du Cache Redis Azure](cache-premium-tier-intro.md)
+* [Niveaux de service Premium Azure Cache pour Redis](cache-overview.md#service-tiers)
 
 <!-- IMAGES -->
 

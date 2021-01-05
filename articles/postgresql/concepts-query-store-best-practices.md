@@ -1,17 +1,17 @@
 ---
 title: Bonnes pratiques relatives au Magasin des requêtes dans Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit les bonnes pratiques relatives au Magasin des requêtes dans Azure Database pour PostgreSQL - Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: 51239f4cf49784dd47470e1272b90508eaf25e6f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dd39b7ecd51902f5035b4cd17d59dea964d0c962
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70764236"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91708830"
 ---
 # <a name="best-practices-for-query-store"></a>Bonnes pratiques relatives au Magasin des requêtes
 

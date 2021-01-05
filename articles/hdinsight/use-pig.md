@@ -7,20 +7,20 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: ea960a92aee1c9447bb12d27cffdc42de9fd907a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9474a1845898e3fda0c810314f41f6f4deabc96b
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77672121"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92538729"
 ---
 # <a name="use-apache-pig-with-apache-hadoop-on-hdinsight"></a>Utiliser Apache Pig avec Apache Hadoop sur HDInsight
 
 Découvrez comment utiliser [Apache Pig](https://pig.apache.org/) avec HDInsight.
 
-Apache Pig est une plateforme qui permet de créer des programmes pour Apache Hadoop dans un langage procédural appelé *Pig Latin*. Pig est une alternative à Java, dédiée à la création de solutions *MapReduce* , qui est incluse avec Azure HDInsight. Utilisez le tableau suivant pour découvrir les différentes façons dont Pig peut être utilisé avec HDInsight :
+Apache Pig est une plateforme qui permet de créer des programmes pour Apache Hadoop dans un langage procédural appelé *Pig Latin* . Pig est une alternative à Java, dédiée à la création de solutions *MapReduce* , qui est incluse avec Azure HDInsight. Utilisez le tableau suivant pour découvrir les différentes façons dont Pig peut être utilisé avec HDInsight :
 
 ## <a name="why-use-apache-pig"></a><a id="why"></a>Pourquoi utiliser Apache Pig
 
@@ -48,7 +48,9 @@ HDInsight propose différents exemples de jeux de données, qui sont stockés da
 
 Chaque journal à l'intérieur du fichier est constitué d'une ligne de champs qui contient un champ `[LOG LEVEL]` pour indiquer le type et la gravité, par exemple :
 
-    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```output
+2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+```
 
 Dans l'exemple précédent, le niveau de journal est ERROR.
 
@@ -59,15 +61,15 @@ Dans l'exemple précédent, le niveau de journal est ERROR.
 
 Le travail Pig Latin suivant charge le fichier `sample.log` depuis le stockage par défaut de votre cluster HDInsight. Elle effectue ensuite une série de transformations qui créent un décompte du nombre de fois où chaque niveau du journal s'est produit dans les données d'entrée. Les résultats sont écrits en STDOUT.
 
-    ```
-    LOGS = LOAD 'wasb:///example/data/sample.log';
-    LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
-    FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
-    GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
-    FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
-    RESULT = order FREQUENCIES by COUNT desc;
-    DUMP RESULT;
-    ```
+```output
+LOGS = LOAD 'wasb:///example/data/sample.log';
+LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;
+FILTEREDLEVELS = FILTER LEVELS by LOGLEVEL is not null;
+GROUPEDLEVELS = GROUP FILTEREDLEVELS by LOGLEVEL;
+FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;
+RESULT = order FREQUENCIES by COUNT desc;
+DUMP RESULT;
+```
 
 L’image suivante montre un résumé de ce qu’effectue chaque transformation sur les données.
 
@@ -93,15 +95,15 @@ Maintenant que vous avez vu comment utiliser Pig avec HDInsight, utilisez les li
 
 * [Téléchargement de données vers HDInsight](hdinsight-upload-data.md)
 * [Utilisation d’Apache Hive avec HDInsight](./hadoop/hdinsight-use-hive.md)
-* [Utiliser Apache Sqoop avec HDInsight](hdinsight-use-sqoop.md)
+* [Utiliser Apache Sqoop avec HDInsight](./hadoop/hdinsight-use-sqoop.md)
 * [Utilisation des tâches MapReduce avec HDInsight](./hadoop/hdinsight-use-mapreduce.md)
 
 [apachepig-home]: https://pig.apache.org/
 [putty]: https://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 [curl]: https://curl.haxx.se/
-[pigtask]: https://msdn.microsoft.com/library/mt146781(v=sql.120).aspx
-[connectionmanager]: https://msdn.microsoft.com/library/mt146773(v=sql.120).aspx
-[ssispack]: https://msdn.microsoft.com/library/mt146770(v=sql.120).aspx
+[pigtask]: /sql/integration-services/control-flow/azure-hdinsight-pig-task?viewFallbackFrom=sql-server-2014
+[connectionmanager]: /sql/integration-services/connection-manager/azure-subscription-connection-manager?viewFallbackFrom=sql-server-2014
+[ssispack]: /sql/integration-services/azure-feature-pack-for-integration-services-ssis?viewFallbackFrom=sql-server-2014
 [hdinsight-admin-powershell]: hdinsight-administer-use-powershell.md
 
 [hdinsight-use-hive]:../hdinsight-use-hive.md
@@ -109,7 +111,7 @@ Maintenant que vous avez vu comment utiliser Pig avec HDInsight, utilisez les li
 [hdinsight-provision]: hdinsight-hadoop-provision-linux-clusters.md
 [hdinsight-submit-jobs]:submit-apache-hadoop-jobs-programmatically.md#mapreduce-sdk
 
-[Powershell-install-configure]: /powershell/azureps-cmdlets-docs
+[Powershell-install-configure]: /powershell/azure/
 
 [powershell-start]: https://technet.microsoft.com/library/hh847889.aspx
 

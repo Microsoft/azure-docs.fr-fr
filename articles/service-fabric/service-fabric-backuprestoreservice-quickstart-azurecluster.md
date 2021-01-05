@@ -1,16 +1,14 @@
 ---
 title: Sauvegarde et restauration périodiques dans Azure Service Fabric
 description: Utilisez la fonctionnalité de sauvegarde et de restauration périodiques de Service Fabric pour activer la sauvegarde périodique des données de votre application.
-author: hrushib
 ms.topic: conceptual
 ms.date: 5/24/2019
-ms.author: hrushib
-ms.openlocfilehash: f56fcb7d1dde700d954c3b55bcf8cd7759893521
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 18d10b365cb2e4f4b4e3592233d5f467714bd5b5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229477"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91538668"
 ---
 # <a name="periodic-backup-and-restore-in-an-azure-service-fabric-cluster"></a>Sauvegarde et restauration périodiques dans un cluster Azure Service Fabric
 > [!div class="op_single_selector"]
@@ -304,7 +302,7 @@ Pour afficher les sauvegardes dans Service Fabric Explorer, accédez à une part
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Présentation de la configuration de la sauvegarde périodique](./service-fabric-backuprestoreservice-configure-periodic-backup.md)
-- [Informations de référence sur l’API REST de sauvegarde et restauration](https://docs.microsoft.com/rest/api/servicefabric/sfclient-index-backuprestore)
+- [Informations de référence sur l’API REST de sauvegarde et restauration](/rest/api/servicefabric/sfclient-index-backuprestore)
 
 [0]: ./media/service-fabric-backuprestoreservice/partition-backedup-health-event-azure.png
 [1]: ./media/service-fabric-backuprestoreservice/enable-backup-restore-service-with-portal.png

@@ -4,15 +4,14 @@ description: Découvrez comment demander une augmentation de la limite de quota 
 author: sowmyavenkat86
 ms.author: svenkat
 ms.date: 01/27/2020
-ms.topic: article
-ms.service: azure-supportability
+ms.topic: how-to
 ms.assetid: ce37c848-ddd9-46ab-978e-6a1445728a3b
-ms.openlocfilehash: de06375dad5999a29691435317e62585a2ea7f64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5db3e538a64e275313e1e0ab01f6cc6350eabb77
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76843719"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745432"
 ---
 # <a name="standard-quota-increase-limits-by-vm-series"></a>Quota standard : augmenter les limites par série de machines virtuelles
 
@@ -26,11 +25,11 @@ Le quota de processeurs virtuels standard pour le paiement à l’utilisation et
 * Le premier niveau correspond à la *limite du nombre total de processeurs virtuels régionaux* dans toutes les séries de machines virtuelles.
 * Le deuxième niveau correspond à la *limite du nombre de processeurs virtuels pour chaque série de machines virtuelles*, par exemple les processeurs virtuels de série Dv3.
 
-Chaque fois qu’une nouvelle machine virtuelle Spot est déployée, l’utilisation totale des processeurs virtuels nouveaux et existants appartenant à cette série de machines virtuelles ne doit pas dépasser le quota de processeurs virtuels approuvé pour cette série. De plus, le nombre total de processeurs virtuels nouveaux et existants déployés sur toutes les séries de machines virtuelles ne doit pas dépasser le quota total des processeurs virtuels de toutes les régions qui a été approuvé pour l’abonnement. Si l’un de ces quotas est dépassé, le déploiement de la machine virtuelle n’est pas autorisé.
+Chaque fois qu’une nouvelle machine virtuelle Spot est déployée, l’utilisation totale des processeurs virtuels nouveaux et existants de toutes les instances de machine virtuelle Spot ne doit pas dépasser la limite du quota de processeurs virtuels Spot approuvée. Si le quota Spot est dépassé, le déploiement de machine virtuelle Spot n’est pas autorisé.
 
 Vous pouvez demander une augmentation de la limite de quota de processeurs virtuels pour une série de machines virtuelles à partir du portail Azure. L’augmentation du quota des séries de machines virtuelles augmente automatiquement la limite totale des processeurs virtuels régionaux de la même valeur.
 
-Pour plus d’informations sur les quotas de processeurs virtuels standard, consultez [Quotas de processeurs virtuels pour les machines virtuelles](../../virtual-machines/windows/quotas.md) et [Limites des abonnements et services Azure](https://docs.microsoft.com/azure/azure-supportability/classic-deployment-model-quota-increase-requests).
+Pour plus d’informations sur les quotas de processeurs virtuels standard, consultez [Quotas de processeurs virtuels pour les machines virtuelles](../../virtual-machines/windows/quotas.md) et [Limites des abonnements et services Azure](./classic-deployment-model-quota-increase-requests.md).
 
 Pour savoir comment augmenter le nombre maximal de processeurs virtuels par région pour le quota Standard, consultez [Quota standard : augmenter les limites par région](regional-quota-requests.md).
 

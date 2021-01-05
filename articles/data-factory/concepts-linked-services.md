@@ -3,20 +3,20 @@ title: Services liés dans Azure Data Factory
 description: Apprenez-en davantage sur les services liés dans Azure Data Factory. Les services liés lient le calcul et les banques de données à une fabrique de données.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 04/25/2019
-ms.openlocfilehash: a6002ed173ca5358df4257f4c8b41c88bcf60ad8
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 08/21/2020
+ms.openlocfilehash: 172694363b482edf6d463aa74b85e81c91fa6a9c
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418371"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500102"
 ---
 # <a name="linked-services-in-azure-data-factory"></a>Services liés dans Azure Data Factory
 
@@ -32,7 +32,7 @@ Si vous débutez avec Data Factory, consultez [Présentation d’Azure Data Fact
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Une fabrique de données peut avoir un ou plusieurs pipelines. Un **pipeline** constitue un regroupement logique d’**activités** qui exécutent ensemble une tâche. Les activités d’un pipeline définissent les actions à effectuer sur les données. Par exemple, vous pouvez utiliser une activité de copie pour copier des données d’un serveur SQL Server local vers un stockage Blob Azure. Ensuite, vous pouvez utiliser une activité Hive qui exécute un script Hive sur un cluster Azure HDInsight pour traiter les données du stockage Blob afin de produire des données de sortie. Enfin, vous pouvez utiliser une deuxième activité de copie pour copier les données de sortie dans Azure SQL Data Warehouse sur lequel des solutions de génération de rapports décisionnelles sont développées. Pour plus d’informations sur les pipelines et les activités, voir [Pipelines et activités dans Azure Data Factory](concepts-pipelines-activities.md).
+Une fabrique de données peut avoir un ou plusieurs pipelines. Un **pipeline** constitue un regroupement logique d’**activités** qui exécutent ensemble une tâche. Les activités d’un pipeline définissent les actions à effectuer sur les données. Par exemple, vous pouvez utiliser une activité de copie pour copier des données d’un serveur SQL Server vers un stockage Blob Azure. Ensuite, vous pouvez utiliser une activité Hive qui exécute un script Hive sur un cluster Azure HDInsight pour traiter les données du stockage Blob afin de produire des données de sortie. Enfin, vous pouvez utiliser une deuxième activité de copie pour copier les données de sortie dans Azure Synapse Analytics sur lequel des solutions de génération de rapports d’aide à la décision sont développées. Pour plus d’informations sur les pipelines et les activités, voir [Pipelines et activités dans Azure Data Factory](concepts-pipelines-activities.md).
 
 À présent, un **jeu de données** est une vue de données nommée qui pointe ou fait référence simplement aux données que vous souhaitez utiliser dans vos **activités** en tant qu’entrées et sorties.
 
@@ -69,19 +69,19 @@ La table suivante décrit les propriétés dans le JSON ci-dessus :
 Propriété | Description | Obligatoire |
 -------- | ----------- | -------- |
 name | Nom du service lié. Voir [Azure Data Factory - Règles d’affectation des noms](naming-rules.md). |  Oui |
-type | Type du service lié. Par exemple : Stockage Azure (magasin de données) ou AzureBatch (calcul). Consultez la description de typeProperties. | Oui |
-typeProperties | Les propriétés type sont différentes pour chaque magasin de données et chaque unité de calcul. <br/><br/> Vous trouverez la liste des types de magasins de données pris en charge et leurs propriétés dans le tableau [type de jeu de données](concepts-datasets-linked-services.md#dataset-type) de cet article. Accédez à l’article sur le connecteur de magasin de données pour en savoir plus sur les propriétés de type propres à un magasin de données. <br/><br/> Vous trouverez la liste des types de calcul pris en charge et leurs propriétés sur la page [Services liés de calcul](compute-linked-services.md). | Oui |
+type | Type du service lié. Par exemple : AzureBlobStorage (magasin de données) ou AzureBatch (calcul). Consultez la description de typeProperties. | Oui |
+typeProperties | Les propriétés type sont différentes pour chaque magasin de données et chaque unité de calcul. <br/><br/> Vous trouverez la liste des types de magasins de données pris en charge et leurs propriétés dans l’article [vue d’ensemble du connecteur](copy-activity-overview.md#supported-data-stores-and-formats). Accédez à l’article sur le connecteur de magasin de données pour en savoir plus sur les propriétés de type propres à un magasin de données. <br/><br/> Vous trouverez la liste des types de calcul pris en charge et leurs propriétés sur la page [Services liés de calcul](compute-linked-services.md). | Oui |
 connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Vous pouvez utiliser Azure Integration Runtime ou Integration Runtime auto-hébergé (si votre magasin de données se trouve dans un réseau privé). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. | Non
 
 ## <a name="linked-service-example"></a>Exemple de service lié
 
-Le service lié suivant est un service lié Stockage Azure. Notez que le type est défini sur Stockage Azure. Les propriétés de type du service lié Stockage Azure comprennent une chaîne de connexion. Le service Data Factory l’utilise pour se connecter au magasin de données à l’exécution.
+Le service lié suivant est un service lié au stockage d’objets blob. Notez que le type est défini sur Stockage d’objets blob Azure. Les propriétés de type du service lié au stockage d’objets blob Azure comprennent une chaîne de connexion. Le service Data Factory l’utilise pour se connecter au magasin de données à l’exécution.
 
 ```json
 {
-    "name": "AzureStorageLinkedService",
+    "name": "AzureBlobStorageLinkedService",
     "properties": {
-        "type": "AzureStorage",
+        "type": "AzureBlobStorage",
         "typeProperties": {
             "connectionString": "DefaultEndpointsProtocol=https;AccountName=<accountname>;AccountKey=<accountkey>"
         },
@@ -95,7 +95,10 @@ Le service lié suivant est un service lié Stockage Azure. Notez que le type es
 
 ## <a name="create-linked-services"></a>Créez des services liés
 
-Vous pouvez créer des services liés en utilisant l’un des outils ou Kits de développement logiciel (SDK) suivants : [.NET API](quickstart-create-data-factory-dot-net.md), [PowerShell](quickstart-create-data-factory-powershell.md), [REST API](quickstart-create-data-factory-rest-api.md), modèle Azure Resource Manager et Portail Azure
+Il est possible de créer des services liés dans l’expérience utilisateur Azure Data Factory via le [hub de gestion](author-management-hub.md) et des activités, jeux de données ou flux de données qui y font référence.
+
+Vous pouvez créer des services liés en utilisant l’un de ces outils ou des kits de développement logiciel (SDK) [API .NET](quickstart-create-data-factory-dot-net.md), [PowerShell](quickstart-create-data-factory-powershell.md), [API REST](quickstart-create-data-factory-rest-api.md), du modèle Azure Resource Manager ainsi que du portail Azure.
+
 
 ## <a name="data-store-linked-services"></a>Services liés de banque de données
 

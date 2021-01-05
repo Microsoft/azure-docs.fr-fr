@@ -2,27 +2,31 @@
 title: Azure Application Insights pour les applications console | Microsoft Docs
 description: Surveiller la disponibilité, les performances et l’utilisation.des applications Web.
 ms.topic: conceptual
-ms.date: 12/02/2019
+ms.date: 05/21/2020
+ms.custom: devx-track-csharp
 ms.reviewer: lmolkova
-ms.openlocfilehash: baaea0f8055eeff0314fcf5fde00729ea8091d12
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa39a1eca04621fc4db75f755402d3679403e814
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655427"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96920597"
 ---
 # <a name="application-insights-for-net-console-applications"></a>Application Insights pour les applications console .NET
 
-[Application Insights](../../azure-monitor/app/app-insights-overview.md) vous permet de surveiller la disponibilité, les performances et l’utilisation de votre application web.
+[Application Insights](./app-insights-overview.md) vous permet de surveiller la disponibilité, les performances et l’utilisation de votre application web.
 
 Vous avez besoin d’un abonnement à [Microsoft Azure](https://azure.com). Connectez-vous avec un compte Microsoft, que vous pouvez avoir pour Windows, Xbox Live ou d’autres services cloud de Microsoft. Si votre équipe dispose d’un abonnement d’organisation, demandez à son propriétaire d’y ajouter votre compte Microsoft.
 
 > [!NOTE]
-> Il existe un nouveau Kit de développement logiciel (SDK) Application Insights appelé [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) qui permet d’activer Application Insights pour tout type d’application console. Il est recommandé d’utiliser ce package et les instructions associées à partir de [cette page](../../azure-monitor/app/worker-service.md). Ce package cible [`NetStandard2.0`](https://docs.microsoft.com/dotnet/standard/net-standard) et peut donc être utilisé dans .NET Core 2.0 ou version ultérieure, et dans .NET Framework 4.7.2 ou version ultérieure.
+> Il est *vivement recommandé* d’utiliser le package de [Microsoft. ApplicationInsights. WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) et les instructions associées de [ici](./worker-service.md) pour toutes les applications console. Ce package cible [`NetStandard2.0`](/dotnet/standard/net-standard) et peut donc être utilisé dans .NET Core 2.1 ou version ultérieure, et dans .NET Framework 4.7.2 ou version ultérieure.
 
 ## <a name="getting-started"></a>Prise en main
 
-* Dans le [portail Azure](https://portal.azure.com), [créez une ressource Application Insights](../../azure-monitor/app/create-new-resource.md). Choisissez **Général** comme type d’application.
+> [!IMPORTANT]
+> Les nouvelles régions Azure **exigent** l’utilisation de chaînes de connexion au lieu de clés d’instrumentation. Une [chaîne de connexion](./sdk-connection-string.md?tabs=net) identifie la ressource à laquelle vous souhaitez associer vos données de télémétrie. Elle vous permet également de modifier les points de terminaison que votre ressource utilisera comme destination pour votre télémétrie. Vous devrez copier la chaîne de connexion et l’ajouter au code de votre application ou à une variable d’environnement.
+
+* Dans le [portail Azure](https://portal.azure.com), [créez une ressource Application Insights](./create-new-resource.md). Choisissez **Général** comme type d’application.
 * Copiez la clé d'instrumentation. Recherchez la clé dans la liste déroulante **Essentials** de la ressource créée.
 * Installez le package [Microsoft.ApplicationInsights](https://www.nuget.org/packages/Microsoft.ApplicationInsights) le plus récent.
 * Définissez la clé d’instrumentation dans votre code avant d’effectuer le suivi de la télémétrie (ou définissez la variable d’environnement APPINSIGHTS_INSTRUMENTATIONKEY). Après cela, vous devriez pouvoir suivre manuellement les données de télémétrie et les visualiser dans le portail Azure.
@@ -36,7 +40,7 @@ telemetryClient.TrackTrace("Hello World!");
 ```
 
 > [!NOTE]
-> Les données de télémétrie ne sont pas envoyées instantanément. Les éléments de télémétrie sont traités par lot et envoyés par le SDK Application Insights. Dans les applications de console, qui se ferment juste après avoir appelé des méthodes `Track()`, la télémétrie ne peut pas être envoyée, sauf si `Flush()` et `Sleep` sont exécutés avant l’arrêt de l’application, comme le montre l’[exemple complet](#full-example) plus loin dans cet article.
+> Les données de télémétrie ne sont pas envoyées instantanément. Les éléments de télémétrie sont traités par lot et envoyés par le SDK Application Insights. Dans les applications de console, qui se ferment juste après avoir appelé des méthodes `Track()`, la télémétrie ne peut pas être envoyée, sauf si `Flush()` et `Sleep`/`Delay` sont exécutés avant l’arrêt de l’application, comme le montre l’[exemple complet](#full-example) plus loin dans cet article. `Sleep` n’est pas requis si vous utilisez `InMemoryChannel`. Il existe un problème actif concernant le besoin de `Sleep` qui est suivi ici : [ApplicationInsights-dotnet/issues/407](https://github.com/microsoft/ApplicationInsights-dotnet/issues/407)
 
 
 * Installez la version la plus récente du package [Microsoft.ApplicationInsights.DependencyCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.DependencyCollector) : il effectue automatiquement le suivi des appels SQL, HTTP ou autres appels de dépendance externe.
@@ -96,7 +100,7 @@ Vous pouvez obtenir un exemple complet du fichier de configuration en installant
 
 ### <a name="configuring-telemetry-collection-from-code"></a>Configuration de la collecte de données de télémétrie à partir du code
 > [!NOTE]
-> La lecture du fichier config n’est pas pris en charge sur .NET Core. Vous pouvez envisager d’utiliser [Application Insights SDK pour ASP.NET Core](../../azure-monitor/app/asp-net-core.md)
+> La lecture du fichier config n’est pas pris en charge sur .NET Core. Vous pouvez envisager d’utiliser [Application Insights SDK pour ASP.NET Core](./asp-net-core.md)
 
 * Lors du démarrage de l’application, créez et configurez une instance de `DependencyTrackingTelemetryModule` : il doit s’agir d’un singleton, et elle doit être conservée pendant toute la durée de vie de l’application.
 
@@ -131,7 +135,7 @@ Si vous avez créé une configuration avec un constructeur `TelemetryConfigurati
 configuration.TelemetryInitializers.Add(new OperationCorrelationTelemetryInitializer());
 ```
 
-* Vous pouvez également vouloir installer et initialiser le module collecteur Compteur de performances comme décrit [ici](https://apmtips.com/blog/2017/02/13/enable-application-insights-live-metrics-from-code/)
+* Vous pouvez également vouloir installer et initialiser le module collecteur Compteur de performances comme décrit [ici](https://apmtips.com/posts/2017-02-13-enable-application-insights-live-metrics-from-code/)
 
 
 #### <a name="full-example"></a>Exemple complet
@@ -172,7 +176,8 @@ namespace ConsoleApp
             // before exit, flush the remaining data
             telemetryClient.Flush();
 
-            // flush is not blocking so wait a bit
+            // flush is not blocking when not using InMemoryChannel so wait a bit. There is an active issue regarding the need for `Sleep`/`Delay`
+            // which is tracked here: https://github.com/microsoft/ApplicationInsights-dotnet/issues/407
             Task.Delay(5000).Wait();
 
         }
@@ -206,5 +211,6 @@ namespace ConsoleApp
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Surveillez les dépendances](../../azure-monitor/app/asp-net-dependencies.md) pour voir si des ressources REST, SQL ou d’autres ressources externes vous ralentissent.
-* [Utilisez l’API](../../azure-monitor/app/api-custom-events-metrics.md) pour envoyer vos propres événements et mesures pour obtenir une vue plus détaillée des performances et de l’utilisation de votre application.
+* [Surveillez les dépendances](./asp-net-dependencies.md) pour voir si des ressources REST, SQL ou d’autres ressources externes vous ralentissent.
+* [Utilisez l’API](./api-custom-events-metrics.md) pour envoyer vos propres événements et mesures pour obtenir une vue plus détaillée des performances et de l’utilisation de votre application.
+

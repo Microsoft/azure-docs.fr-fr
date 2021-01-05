@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: end-user-help
 ms.date: 01/15/2020
 ms.author: curtand
-ms.openlocfilehash: 60c2b3ed1f367dc5c501a51ed52440f7d9d3ed6b
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 7f4c09a32794e13b0e0041ee916401b714d8509e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83741189"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90055229"
 ---
 # <a name="what-is-the-microsoft-authenticator-app"></a>Qu’est-ce que l’application Microsoft Authenticator ?
 
@@ -33,7 +33,7 @@ Vous pouvez utiliser l’application Microsoft Authenticator de plusieurs maniè
 > [!Important]
 > L’application Microsoft Authenticator fonctionne avec tout compte utilisant une vérification en deux étapes et prenant en charge les mots de passe à usage unique et durée définie (normes TOTP).
 >
->Cet article s’adresse aux utilisateurs qui essaient de télécharger et d’utiliser l’application Microsoft Authenticator comme méthode de vérification de sécurité. Si vous êtes administrateur et que vous recherchez des informations sur la façon d’activer la connexion sans mot de passe à l’aide de l’application Authenticator pour vos employés et d’autres utilisations, consultez [Activer la connexion sans mot de passe avec l’application Microsoft Authenticator (préversion)](https://docs.microsoft.com/azure/active-directory/authentication/howto-authentication-passwordless-phone).
+>Cet article s’adresse aux utilisateurs qui essaient de télécharger et d’utiliser l’application Microsoft Authenticator comme méthode de vérification de sécurité. Si vous êtes administrateur et que vous recherchez des informations sur la façon d’activer la connexion sans mot de passe à l’aide de l’application Authenticator pour vos employés et d’autres utilisations, consultez [Activer la connexion sans mot de passe avec l’application Microsoft Authenticator (préversion)](../authentication/howto-authentication-passwordless-phone.md).
 
 ## <a name="terminology"></a>Terminologie
 
@@ -41,8 +41,8 @@ Vous pouvez utiliser l’application Microsoft Authenticator de plusieurs maniè
 | ----|-----------|
 | Vérification à deux facteurs | Un processus de vérification qui vous oblige à utiliser seulement deux éléments d’information de vérification, comme un mot de passe et un code PIN. L’application Microsoft Authenticator prend en charge à la fois la vérification à deux facteurs standard et la connexion sans mot de passe. |
 | Authentification multifacteur (MFA) | La vérification à deux facteurs est une authentification multifacteur, qui vous oblige à utiliser *au moins* deux éléments d’information de vérification, en fonction des exigences de votre organisation. |
-| Compte Microsoft (également appelé MSA) | Vous créez vos propres comptes personnels pour accéder à vos produits et services cloud Microsoft orientés consommateurs, comme Outlook, OneDrive, Xbox LIVE ou Office 365. Votre compte Microsoft est créé et stocké dans le système de comptes d’identité des consommateurs de Microsoft. |
-| Comptes professionnels ou scolaires | Votre organisation crée votre compte professionnel ou scolaire (comme alain@contoso.com) pour vous permettre d’accéder à des ressources internes et potentiellement restreintes, comme Microsoft Azure, Windows Intune et Office 365. |
+| Compte Microsoft (également appelé MSA) | Vous créez vos propres comptes personnels pour accéder à vos produits et services cloud Microsoft orientés consommateurs, comme Outlook, OneDrive, Xbox LIVE ou Microsoft 365. Votre compte Microsoft est créé et stocké dans le système de comptes d’identité des consommateurs de Microsoft. |
+| Comptes professionnels ou scolaires | Votre organisation crée votre compte professionnel ou scolaire (comme alain@contoso.com) pour vous permettre d’accéder à des ressources internes et potentiellement restreintes, telles que Microsoft Azure, Windows Intune et Microsoft 365. |
 | Code de vérification | Code à six chiffres qui s’affiche dans l’application d’authentification, sous chaque compte ajouté. Le code de vérification change toutes les 30 secondes, ce qui empêche quiconque d’utiliser plusieurs fois un même code. Ce code est également appelé « code secret à usage unique (OTP) ». |
 
 ## <a name="how-two-factor-verification-works-with-the-app"></a>Fonctionnement de la vérification à deux facteurs avec l’application

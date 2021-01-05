@@ -3,19 +3,19 @@ title: Expressions et fonctions dans Azure Data Factory
 description: Cet article fournit des informations sur les expressions et fonctions que vous pouvez utiliser pour la création d’entités de fabrique de données.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 11/25/2019
-ms.openlocfilehash: 1ce6da555bc8777bdb9671df1567f06227b74b6c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3c966f0efc51a3b2fa8908e060b4031ae1ad1e50
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82192797"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500017"
 ---
 # <a name="expressions-and-functions-in-azure-data-factory"></a>Expressions et fonctions dans Azure Data Factory
 
@@ -64,6 +64,11 @@ Les expressions peuvent apparaître n’importe où dans une valeur de chaîne J
 |"Answer is: \@\@{pipeline().parameters.myNumber}"| Retourne la chaîne `Answer is: @{pipeline().parameters.myNumber}`.|  
   
 ## <a name="examples"></a>Exemples
+
+### <a name="complex-expression-example"></a>Exemple d’expression complexe
+L’exemple ci-dessous montre un exemple complexe qui fait référence à un sous-champ profond d’une sortie d’activité. Pour faire référence à un paramètre de pipeline qui prend la valeur d’un sous-champ, utilisez la syntaxe [] au lieu de l’opérateur point(.) (comme dans le cas de subfield1 et subfield2)
+
+@activity('*activityName*').output.*subfield1*.*subfield2*[pipeline().parameters.*subfield3*].*subfield4*
 
 ### <a name="a-dataset-with-a-parameter"></a>Un jeu de données avec un paramètre
 Dans l’exemple suivant, BlobDataset prend un paramètre nommé **path**. Sa valeur est utilisée pour donner une valeur à la propriété **folderPath** à l’aide de l’expression : `dataset().path`. 
@@ -147,7 +152,7 @@ Cela [tutoriel](https://azure.microsoft.com/mediahandler/files/resourcefiles/azu
 
 Vous pouvez appeler des fonctions dans des expressions. Les sections suivantes fournissent des informations sur les fonctions qui peut être utilisées dans une expression.  
 
-## <a name="string-functions"></a>Fonctions de chaînes  
+## <a name="string-functions"></a>Fonctions de chaîne  
 
 Pour travailler avec des chaînes, vous pouvez utiliser ces fonctions de chaîne, ainsi que certaines [fonctions de collection](#collection-functions).
 Les fonctions de chaîne sont uniquement utilisables sur des chaînes.
@@ -325,7 +330,7 @@ addDays('<timestamp>', <days>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*days*> | Oui | Integer | Nombre de jours positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -367,7 +372,7 @@ addHours('<timestamp>', <hours>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*hours*> | Oui | Integer | Nombre d’heures positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -409,7 +414,7 @@ addMinutes('<timestamp>', <minutes>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*minutes*> | Oui | Integer | Nombre de minutes positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -451,7 +456,7 @@ addSeconds('<timestamp>', <seconds>, '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*seconds*> | Oui | Integer | Nombre de secondes positif ou négatif à ajouter |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -495,7 +500,7 @@ addToTime('<timestamp>', <interval>, '<timeUnit>', '<format>'?)
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à ajouter |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -527,26 +532,26 @@ Et retourne le résultat en utilisant le format « D » facultatif : `"Tuesday, 
 
 ### <a name="and"></a>and
 
-Vérifie si toutes les expressions sont vraies.
-Retourne la valeur true lorsque toutes les expressions sont vraies ou la valeur false lorsque au moins une expression est fausse.
+Vérifie si les deux expressions sont vraies.
+Retourne la valeur true lorsque les deux expressions sont vraies ou la valeur false lorsque au moins une expression est fausse.
 
 ```
-and(<expression1>, <expression2>, ...)
+and(<expression1>, <expression2>)
 ```
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*expression1*>, <*expression2*>... | Oui | Boolean | Expressions à vérifier |
+| <*expression1*>, <*expression2*> | Oui | Boolean | Expressions à vérifier |
 |||||
 
 | Valeur retournée | Type | Description |
 | ------------ | -----| ----------- |
-| True ou False | Boolean | Retourne la valeur true si toutes les expressions sont vraies. Retourne la valeur false si au moins une expression est fausse. |
+| True ou False | Boolean | Retourne la valeur true lorsque les deux expressions sont vraies. Retourne la valeur false si au moins une expression est fausse. |
 ||||
 
 *Exemple 1*
 
-Ces exemples vérifient si toutes les valeurs booléennes spécifiées sont vraies :
+Ces exemples vérifient si les valeurs booléennes spécifiées sont vraies :
 
 ```
 and(true, true)
@@ -562,7 +567,7 @@ Et retournent les résultats suivants :
 
 *Exemple 2*
 
-Ces exemples vérifient si toutes les expressions spécifiées sont vraies :
+Ces exemples vérifient si les expressions spécifiées sont vraies :
 
 ```
 and(equals(1, 1), equals(2, 2))
@@ -894,7 +899,7 @@ convertFromUtc('<timestamp>', '<destinationTimeZone>', '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -910,7 +915,7 @@ Cet exemple illustre la conversion d’un horodatage au fuseau horaire spécifi�
 convertFromUtc('2018-01-01T08:00:00.0000000Z', 'Pacific Standard Time')
 ```
 
-Et retourne ce résultat : `"2018-01-01T00:00:00.0000000"`
+Et retourne ce résultat : `"2018-01-01T00:00:00Z"`
 
 *Exemple 2*
 
@@ -937,7 +942,7 @@ convertTimeZone('<timestamp>', '<sourceTimeZone>', '<destinationTimeZone>', '<fo
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
 | <*destinationTimeZone*> | Oui | String | Nom du fuseau horaire cible. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -979,7 +984,7 @@ convertToUtc('<timestamp>', '<sourceTimeZone>', '<format>'?)
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*sourceTimeZone*> | Oui | String | Nom du fuseau horaire source. Pour les noms de fuseau horaire, consultez [Valeurs d’index de fuseau horaire Microsoft](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), mais vous devrez peut-être supprimer les signes de ponctuation du nom de fuseau horaire. |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1581,7 +1586,7 @@ formatDateTime('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1613,7 +1618,7 @@ getFutureTime(<interval>, <timeUnit>, <format>?)
 | --------- | -------- | ---- | ----------- |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à ajouter |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1657,7 +1662,7 @@ getPastTime(<interval>, <timeUnit>, <format>?)
 | --------- | -------- | ---- | ----------- |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à soustraire |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -1779,7 +1784,7 @@ guid('<format>')
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*format*> | Non  | String | Un seul [spécificateur de format](https://msdn.microsoft.com/library/97af8hh4) pour le GUID retourné. Par défaut, il s’agit du format « D », mais vous pouvez utiliser « N », « D », « B », « P » ou « X ». |
+| <*format*> | Non | String | Un seul [spécificateur de format](/dotnet/api/system.guid.tostring) pour le GUID retourné. Par défaut, il s’agit du format « D », mais vous pouvez utiliser « N », « D », « B », « P » ou « X ». |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2384,20 +2389,20 @@ Et retournent les résultats suivants :
 ### <a name="or"></a>or
 
 Vérifie si au moins une expression est vraie.
-Retourne la valeur true si au moins une expression est vraie ou la valeur false si toutes les expressions sont fausses.
+Retourne la valeur true si au moins une expression est vraie ou la valeur false si les expressions sont fausses.
 
 ```
-or(<expression1>, <expression2>, ...)
+or(<expression1>, <expression2>)
 ```
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*expression1*>, <*expression2*>... | Oui | Boolean | Expressions à vérifier |
+| <*expression1*>, <*expression2*> | Oui | Boolean | Expressions à vérifier |
 |||||
 
 | Valeur retournée | Type | Description |
 | ------------ | ---- | ----------- |
-| True ou False | Boolean | Retourne la valeur true si au moins une expression est vraie. Retourne la valeur false lorsque toutes les expressions sont fausses. |
+| True ou False | Boolean | Retourne la valeur true si au moins une expression est vraie. Retourne la valeur false lorsque les expressions sont fausses. |
 ||||
 
 *Exemple 1*
@@ -2597,7 +2602,7 @@ startOfDay('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2628,7 +2633,7 @@ startOfHour('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2659,7 +2664,7 @@ startOfMonth('<timestamp>', '<format>'?)
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -2840,7 +2845,7 @@ subtractFromTime('<timestamp>', <interval>, '<timeUnit>', '<format>'?)
 | <*timestamp*> | Oui | String | Chaîne qui contient l’horodatage |
 | <*interval*> | Oui | Integer | Nombre d’unités de temps spécifiées à soustraire |
 | <*timeUnit*> | Oui | String | L’unité de temps à utiliser avec *interval* : "Second", "Minute", "Hour", "Day", "Week", "Month", "Year" |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |
@@ -3158,7 +3163,7 @@ Si vous le souhaitez, vous pouvez spécifier un autre format avec le paramètre 
 
 | Paramètre | Obligatoire | Type | Description |
 | --------- | -------- | ---- | ----------- |
-| <*format*> | Non  | String | [Spécificateur de format unique](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](https://docs.microsoft.com/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
+| <*format*> | Non | String | [Spécificateur de format unique](/dotnet/standard/base-types/standard-date-and-time-format-strings) ou [modèle de format personnalisé](/dotnet/standard/base-types/custom-date-and-time-format-strings). Le format par défaut de l’horodatage est [« o »](/dotnet/standard/base-types/standard-date-and-time-format-strings) (aaaa-MM-jjT:mm:ss:fffffffK), qui est conforme à la norme [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) et conserve les informations de fuseau horaire. |
 |||||
 
 | Valeur retournée | Type | Description |

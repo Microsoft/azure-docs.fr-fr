@@ -7,12 +7,12 @@ ms.date: 04/04/2019
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: 0ded494debab19daa15a953715b1ab7b0b10ad18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e5cc5b557aa4dff793f7e87093eeb65028da4f8c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74974902"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010943"
 ---
 # <a name="how-to-reprovision-devices"></a>Comment reprovisionner des appareils
 
@@ -75,7 +75,7 @@ Les étapes suivantes configurent la stratégie d’allocation pour l’inscript
 
 4. Cliquez sur **Enregistrer** pour activer le reprovisionnement de l’appareil en fonction de vos modifications.
 
-    ![Sélectionner la stratégie d’allocation de l’inscription](./media/how-to-reprovision/reprovisioning-policy.png)
+    ![Capture d’écran qui met en évidence les modifications que vous avez apportées et le bouton Enregistrer.](./media/how-to-reprovision/reprovisioning-policy.png)
 
 
 

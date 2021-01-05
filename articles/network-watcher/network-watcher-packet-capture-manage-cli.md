@@ -7,17 +7,17 @@ author: damendo
 ms.assetid: cb0c1d10-f7f2-4c34-b08c-f73452430be8
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 7a69610d1ac176354a9d7e388a12ccc7f064d848
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.openlocfilehash: 6e5f2a519564716d426c50bb9cc8dd245774321e
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382713"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966494"
 ---
 # <a name="manage-packet-captures-with-azure-network-watcher-using-the-azure-cli"></a>Gérer les captures de paquets avec Azure Network Watcher à l’aide d’Azure CLI
 
@@ -46,7 +46,7 @@ Cet article part du principe que vous disposez des ressources suivantes :
 - Une machine virtuelle avec l’extension de capture de paquets activée.
 
 > [!IMPORTANT]
-> La capture de paquets nécessite l’exécution d’un agent sur la machine virtuelle. L’Agent est installé en tant qu’extension. Pour obtenir des instructions sur les extensions de machine virtuelle, consultez [Extensions et fonctionnalités de machine virtuelle pour Windows](../virtual-machines/windows/extensions-features.md).
+> La capture de paquets nécessite l’exécution d’un agent sur la machine virtuelle. L’Agent est installé en tant qu’extension. Pour obtenir des instructions sur les extensions de machine virtuelle, consultez [Extensions et fonctionnalités de machine virtuelle pour Windows](../virtual-machines/extensions/features-windows.md).
 
 ## <a name="install-vm-extension"></a>Installer une extension de machine virtuelle
 
@@ -192,13 +192,13 @@ L’exemple suivant présente la sortie de la commande `az network watcher packe
   "additionalProperties": {
     "status": "Succeeded"
   },
-  "captureStartTime": "2016-12-06T17:20:01.5671279Z",
-  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westcentralus/pa
+  "captureStartTime": "2016-12-06T17:20:01.5671279Z",
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westcentralus/pa
 cketCaptures/packetCaptureName",
-  "name": "packetCaptureName",
+  "name": "packetCaptureName",
   "packetCaptureError": [],
-  "packetCaptureStatus": "Stopped",
-  "stopReason": "TimeExceeded"
+  "packetCaptureStatus": "Stopped",
+  "stopReason": "TimeExceeded"
 }
 ```
 

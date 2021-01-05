@@ -9,12 +9,12 @@ ms.subservice: powershell
 ms.date: 11/08/2018
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: 999a869ec30316a330413f309e1e7431d92fac9f
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: e783f7f0a9be413679e509e4d6124d50bb811821
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83195923"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87059283"
 ---
 # <a name="tutorial-install-applications-in-virtual-machine-scale-sets-with-azure-powershell"></a>Didacticiel : Installer des applications dans des groupes identiques de machines virtuelles avec Azure PowerShell
 
@@ -35,7 +35,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 ## <a name="what-is-the-azure-custom-script-extension"></a>Qu’est-ce que l’extension de script personnalisé Azure ?
 L’extension de script personnalisé télécharge et exécute des scripts sur des machines virtuelles Azure. Cette extension est utile pour la configuration post-déploiement, l’installation de logiciels ou toute autre tâche de configuration ou de gestion. Des scripts peuvent être téléchargés à partir de Stockage Azure ou de GitHub, ou fournis dans le portail Azure lors de l’exécution de l’extension.
 
-L’extension de script personnalisé est compatible avec les modèles Azure Resource Manager. Elle peut également être utilisée avec Azure CLI, Azure PowerShell, le portail Azure ou l’API REST. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/windows/extensions-customscript.md).
+L’extension de script personnalisé est compatible avec les modèles Azure Resource Manager. Elle peut également être utilisée avec Azure CLI, Azure PowerShell, le portail Azure ou l’API REST. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/extensions/custom-script-windows.md).
 
 Pour voir l’extension de script personnalisé en action, créez un groupe identique qui installe le serveur web IIS et qui affiche le nom d’hôte de l’instance de machine virtuelle du groupe identique. La définition de l’extension de script personnalisé télécharge un exemple de script à partir de GitHub, installe les packages requis, puis écrit le nom d’hôte de l’instance de machine virtuelle sur une page HTML de base.
 

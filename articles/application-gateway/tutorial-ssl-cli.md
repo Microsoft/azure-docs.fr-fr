@@ -4,36 +4,36 @@ description: Découvrez comment créer une passerelle d’application et ajouter
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2019
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: 6cd8cca65762de3da6a0e69e93c8d79bbe498dde
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 24dafd63de1a37140c6a56547c4701729df1c8fb
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81311979"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566552"
 ---
 # <a name="create-an-application-gateway-with-tls-termination-using-the-azure-cli"></a>Créer une passerelle d’application avec un arrêt TLS à l’aide de l’interface CLI Azure
 
-Vous pouvez utiliser Azure CLI pour créer une [passerelle d’application](overview.md) avec un certificat pour la [terminaison TLS](ssl-overview.md). Pour les serveurs principaux, vous pouvez utiliser un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md). Dans cet exemple, le groupe identique contient deux instances de machine virtuelle qui sont ajoutées au pool backend par défaut de la passerelle d’application.
+Vous pouvez utiliser Azure CLI pour créer une [passerelle d’application](overview.md) avec un certificat pour la [terminaison TLS](ssl-overview.md). Pour les serveurs principaux, vous pouvez utiliser un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md). Dans cet exemple, le groupe identique contient deux instances de machine virtuelle qui sont ajoutées au pool backend par défaut de la passerelle d’application.
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Créer un certificat auto-signé
-> * Configurer un réseau
-> * Créer une passerelle d’application avec le certificat
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+* Créer un certificat auto-signé
+* Configurer un réseau
+* Créer une passerelle d’application avec le certificat
+* Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure PowerShell](tutorial-ssl-powershell.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, cet article nécessite l’exécution d’Azure CLI version 2.0.4 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
+
+ - Cet tutoriel nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-self-signed-certificate"></a>Créer un certificat auto-signé
 

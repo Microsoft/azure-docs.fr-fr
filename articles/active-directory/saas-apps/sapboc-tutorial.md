@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à SAP Analytics Cloud | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et SAP Analytics Cloud.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 6c5e44f0-4e52-463f-b879-834d80a55cdf
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 07/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1fd01c86086c7491d22f655fcba5da237286412f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 84b0a761b52baca4ae1ab81b3c67f18f6b14db92
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68347801"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608831"
 ---
 # <a name="tutorial-integrate-sap-analytics-cloud-with-azure-active-directory"></a>Tutoriel : Intégrer SAP Analytics Cloud à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous découvrez comment intégrer SAP Analytics Cloud à Azure
 * Permettre à vos utilisateurs de se connecter automatiquement à SAP Analytics Cloud avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -85,17 +80,13 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     a. Dans la zone de texte **URL de connexion**, entrez une URL au format suivant :
 
-    | |
-    |-|-|
-    | `https://<sub-domain>.sapanalytics.cloud/` |
-    | `https://<sub-domain>.sapbusinessobjects.cloud/` |
+    - `https://<sub-domain>.sapanalytics.cloud/`
+    - `https://<sub-domain>.sapbusinessobjects.cloud/`
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant :
-    
-    | |
-    |-|-|
-    | `<sub-domain>.sapbusinessobjects.cloud` |
-    | `<sub-domain>.sapanalytics.cloud` |
+
+    - `<sub-domain>.sapbusinessobjects.cloud`
+    - `<sub-domain>.sapanalytics.cloud`
 
     > [!NOTE] 
     > Les valeurs de ces URL servent uniquement à des fins de démonstration. Mettez à jour les valeurs avec les URL de connexion et de l’identificateur réels. Pour obtenir l’URL de connexion, contactez [l’équipe du support client SAP Analytics Cloud](https://help.sap.com/viewer/product/SAP_BusinessObjects_Cloud/release/). Vous pouvez obtenir l’URL de l’identificateur en téléchargeant les métadonnées de SAP Analytics Cloud depuis la console d’administration. Une explication sera fournie plus loin dans ce didacticiel.
@@ -192,33 +183,32 @@ Pour approvisionner un compte d’utilisateur :
 
     Effectuez ensuite les tâches suivantes :
 
-    a. Dans la zone **ID UTILISATEUR**, entrez l’ID utilisateur de l’utilisateur, par exemple **B**.
+    1. Dans la zone **ID UTILISATEUR**, entrez l’ID utilisateur de l’utilisateur, par exemple **B**.
 
-    b. Dans la zone **PRÉNOM**, entrez le prénom de l’utilisateur, par exemple **B**.
+    1. Dans la zone **PRÉNOM**, entrez le prénom de l’utilisateur, par exemple **B**.
 
-    c. Dans la boîte **NOM**, entrez le prénom de l’utilisateur, par exemple **Simon**.
+    1. Dans la boîte **NOM**, entrez le prénom de l’utilisateur, par exemple **Simon**.
 
-    d. Dans la zone **NOM D’AFFICHAGE**, entrez le nom complet de l’utilisateur, par exemple **B.Simon**.
+    1. Dans la zone **NOM D’AFFICHAGE**, entrez le nom complet de l’utilisateur, par exemple **B.Simon**.
 
-    e. Dans la zone **E-MAIL**, entrez l’adresse e-mail de l’utilisateur, par exemple `b.simon@contoso.com`.
+    1. Dans la boîte **E-MAIL**, entrez l’adresse e-mail de l’utilisateur, par exemple `b.simon@contoso.com`.
 
-    f. Dans la page **Sélectionner des rôles**, sélectionnez le rôle approprié pour l’utilisateur, puis **OK**.
+    1. Dans la page **Sélectionner des rôles**, sélectionnez le rôle approprié pour l’utilisateur, puis **OK**.
 
-      ![Sélectionner un rôle](./media/sapboc-tutorial/user3.png)
+        ![Sélectionner un rôle](./media/sapboc-tutorial/user3.png)
 
-    g. Sélectionnez l’icône **Enregistrer**.
+    1. Sélectionnez l’icône **Enregistrer**.
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette SAP Analytics Cloud dans le volet d’accès, vous devez être connecté automatiquement à l’application SAP Analytics Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette SAP Analytics Cloud dans le volet d’accès, vous devez être connecté automatiquement à l’application SAP Analytics Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

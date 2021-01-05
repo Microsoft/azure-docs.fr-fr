@@ -1,19 +1,19 @@
 ---
 title: Disponibilité générale de Microsoft Threat Modeling Tool version du 09/04/2019
 titleSuffix: Azure
-description: Compilation des notes de publication pour l’outil de modélisation des menaces
+description: Compilation des notes de publication pour l’outil de modélisation des menaces version 7.1.60408.1.
 author: jegeib
 ms.author: jegeib
 ms.service: security
 ms.subservice: security-develop
 ms.topic: article
 ms.date: 04/03/2019
-ms.openlocfilehash: 59d385ba7de5bf7bceae4dc8ddadbca813046094
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 69dd2c6cdba41779849b4eb6b889cde9b1d6e5c9
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78269729"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92913566"
 ---
 # <a name="threat-modeling-tool-update-release-71604081---492019"></a>Mise à jour de Threat Modeling Tool version 7.1.60408.1 - 09/04/2019
 
@@ -28,7 +28,7 @@ La version 7.1.60408.1 de Microsoft Threat Modeling Tool (TMT) a été publiée 
 
 ### <a name="new-stencils-for-azure-key-vault-and-azure-traffic-manager"></a>Nouveaux gabarits pour Azure Key Vault et Azure Traffic Manager
 
-![Gabarit Azure Key Vault](./media/threat-modeling-tool-releases-71604081/tmt_keyvault_trafficmanager.PNG)
+![Capture d’écran des icônes Azure Key Vault et Azure Traffic Manager](./media/threat-modeling-tool-releases-71604081/tmt_keyvault_trafficmanager.PNG)
 
 De nouveaux gabarits et de nouvelles menaces pour Azure Key Vault et Azure Traffic Manager ont été ajoutés à l’ensemble de gabarits Azure. Lors de l’ouverture de modèles basés sur l’ensemble de gabarits Azure, les utilisateurs seront invités à mettre à jour le gabarit associé au modèle. La mise à jour d’un modèle basé sur l’ensemble de gabarits Azure peut également être initiée manuellement à l’aide de la commande « Appliquer le modèle » dans le menu « Fichier » et en appliquant à nouveau le dernier fichier Services.tb7 d’Azure Cloud.
 
@@ -36,7 +36,7 @@ De nouveaux gabarits et de nouvelles menaces pour Azure Key Vault et Azure Traff
 
 La version du client de Threat Modeling Tool est maintenant affichée sur l’écran d’accueil de l’application pour faciliter l’accès.
 
-![Gabarit Azure Key Vault](./media/threat-modeling-tool-releases-71604081/tmt_version.PNG)
+![Capture d’écran de Microsoft Threat Modeling Tool avec le numéro de version du client](./media/threat-modeling-tool-releases-71604081/tmt_version.PNG)
 
 ### <a name="support-links-have-been-updated"></a>Les liens de support ont été mis à jour
 

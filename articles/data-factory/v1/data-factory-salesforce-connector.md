@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 07/18/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 8b94f6388d77cca2ef74c802aec7648091172775
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba95ba57bb57b1b2e9ecde3ad27f6bb5fbca66cb
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236285"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93124881"
 ---
 # <a name="move-data-from-salesforce-by-using-azure-data-factory"></a>Déplacer des données depuis Salesforce à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -51,7 +51,7 @@ Vous pouvez créer un pipeline avec une activité de copie qui déplace les donn
 
 Le moyen le plus simple de créer un pipeline consiste à utiliser **l’Assistant Copie**. Voir le [tutoriel : Créer un pipeline avec l’activité de copie à l’aide de l’Assistant Copie](data-factory-copy-data-wizard-tutorial.md) pour obtenir une procédure pas à pas rapide sur la création d’un pipeline à l’aide de l’Assistant Copie de données.
 
-Vous pouvez également utiliser les outils suivants pour créer un pipeline : **Visual Studio**, **Azure PowerShell**, **modèle Azure Resource Manager**, **.NET API** et **API REST**. Pour obtenir des instructions détaillées sur la création d’un pipeline avec une activité de copie, consultez le [didacticiel sur l’activité de copie](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+Vous pouvez également utiliser les outils suivants pour créer un pipeline : **Visual Studio** , **Azure PowerShell** , **modèle Azure Resource Manager** , **.NET API** et **API REST**. Pour obtenir des instructions détaillées sur la création d’un pipeline avec une activité de copie, consultez le [didacticiel sur l’activité de copie](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 Que vous utilisiez des outils ou des API, la création d’un pipeline qui déplace les données d’un magasin de données source vers un magasin de données récepteur implique les étapes suivantes :
 
@@ -86,7 +86,7 @@ La section **typeProperties** est différente pour chaque type de jeu de donnée
 > [!IMPORTANT]
 > La partie « __c » du nom de l’API est requise pour tout objet personnalisé.
 
-![Connexion Salesforce - Data Factory - Nom de l’API](media/data-factory-salesforce-connector/data-factory-salesforce-api-name.png)
+![Capture d’écran montrant le détail de la définition d’objet personnalisé dans lequel vous pouvez voir les noms d’API des objets personnalisés.](media/data-factory-salesforce-connector/data-factory-salesforce-api-name.png)
 
 ## <a name="copy-activity-properties"></a>Propriétés de l’activité de copie
 Pour obtenir la liste complète des sections et des propriétés disponibles pour la définition des activités, consultez l’article [Création de pipelines](data-factory-create-pipelines.md). Les propriétés telles que le nom, la description, les tables d’entrée et de sortie, les différentes stratégies, etc. sont disponibles pour tous les types d’activités.
@@ -102,14 +102,14 @@ Dans l’activité de copie, lorsque la source est de type **RelationalSource** 
 > [!IMPORTANT]
 > La partie « __c » du nom de l’API est requise pour tout objet personnalisé.
 
-![Connexion Salesforce - Data Factory - Nom de l’API](media/data-factory-salesforce-connector/data-factory-salesforce-api-name-2.png)
+![Capture d’écran montrant les champs et relations personnalisés où vous pouvez voir les noms d’API des objets personnalisés.](media/data-factory-salesforce-connector/data-factory-salesforce-api-name-2.png)
 
 ## <a name="query-tips"></a>Conseils pour les requêtes
 ### <a name="retrieving-data-using-where-clause-on-datetime-column"></a>Récupération de données à l’aide de la clause where sur la colonne DateTime
 Lorsque vous spécifiez une requête SOQL ou SQL, faites attention à la différence de format DateTime. Par exemple :
 
-* **Exemple SOQL** : `$$Text.Format('SELECT Id, Name, BillingCity FROM Account WHERE LastModifiedDate >= {0:yyyy-MM-ddTHH:mm:ssZ} AND LastModifiedDate < {1:yyyy-MM-ddTHH:mm:ssZ}', WindowStart, WindowEnd)`
-* **Exemple SQL** :
+* **Exemple SOQL**  : `$$Text.Format('SELECT Id, Name, BillingCity FROM Account WHERE LastModifiedDate >= {0:yyyy-MM-ddTHH:mm:ssZ} AND LastModifiedDate < {1:yyyy-MM-ddTHH:mm:ssZ}', WindowStart, WindowEnd)`
+* **Exemple SQL**  :
     * **Utilisation de l’Assistant de copie pour spécifier la requête :** `$$Text.Format('SELECT * FROM Account WHERE LastModifiedDate >= {{ts\'{0:yyyy-MM-dd HH:mm:ss}\'}} AND LastModifiedDate < {{ts\'{1:yyyy-MM-dd HH:mm:ss}\'}}', WindowStart, WindowEnd)`
     * **Utilisation de la modification JSON pour spécifier la requête (caractère d’échappement correct) :** `$$Text.Format('SELECT * FROM Account WHERE LastModifiedDate >= {{ts\\'{0:yyyy-MM-dd HH:mm:ss}\\'}} AND LastModifiedDate < {{ts\\'{1:yyyy-MM-dd HH:mm:ss}\\'}}', WindowStart, WindowEnd)`
 
@@ -119,8 +119,8 @@ Vous pouvez récupérer des données à partir de rapports Salesforce en spécif
 ### <a name="retrieving-deleted-records-from-salesforce-recycle-bin"></a>Récupération d’enregistrements supprimés dans la Corbeille Salesforce
 Pour interroger les enregistrements supprimés de manière réversible dans la Corbeille Salesforce, vous pouvez spécifier **« IsDeleted = 1 »** dans votre requête. Par exemple,
 
-* Pour interroger uniquement les enregistrements supprimés, spécifiez « select * from MyTable__c **where IsDeleted= 1** »
-* Pour interroger tous les enregistrements, notamment ceux existants et supprimés, spécifiez « select * from MyTable__c **where IsDeleted = 0 or IsDeleted = 1** »
+* Pour interroger uniquement les enregistrements supprimés, spécifiez « select * from MyTable__c **where IsDeleted= 1**  »
+* Pour interroger tous les enregistrements, notamment ceux existants et supprimés, spécifiez « select * from MyTable__c **where IsDeleted = 0 or IsDeleted = 1**  »
 
 ## <a name="json-example-copy-data-from-salesforce-to-azure-blob"></a>Exemple JSON : Copier des données de Salesforce vers Stockage Blob Azure
 L’exemple suivant présente des exemples de définitions de JSON que vous pouvez utiliser pour créer un pipeline à l’aide de [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md) ou d’[Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md). Ils indiquent comment copier des données depuis Salesforce vers Azure Blob Storage. Toutefois, les données peuvent être copiées vers l’un des récepteurs indiqués [ici](data-factory-data-movement-activities.md#supported-data-stores-and-formats) , via l’activité de copie d’Azure Data Factory.
@@ -192,12 +192,12 @@ Cet exemple utilise le service lié **Salesforce** . Consultez la section [Servi
 }
 ```
 
-La définition de **external** sur **true** informe le service Data Factory qu’il s’agit d’un jeu de données qui est externe à la Data Factory et non produit par une activité dans la Data Factory.
+La définition de **external**  sur **true** informe le service Data Factory qu’il s’agit d’un jeu de données qui est externe à la Data Factory et non produit par une activité dans la Data Factory.
 
 > [!IMPORTANT]
 > La partie « __c » du nom de l’API est requise pour tout objet personnalisé.
 
-![Connexion Salesforce - Data Factory - Nom de l’API](media/data-factory-salesforce-connector/data-factory-salesforce-api-name.png)
+![Capture d’écran montrant le détail d’une définition d’objet personnalisé dans lequel vous pouvez voir une étiquette au singulier, une étiquette au pluriel, un nom d’objet et un nom d’API.](media/data-factory-salesforce-connector/data-factory-salesforce-api-name.png)
 
 **Jeu de données de sortie d’objet Blob Azure**
 
@@ -278,7 +278,7 @@ Pour obtenir la liste des propriétés prises en charge par RelationalSource, vo
 > [!IMPORTANT]
 > La partie « __c » du nom de l’API est requise pour tout objet personnalisé.
 
-![Connexion Salesforce - Data Factory - Nom de l’API](media/data-factory-salesforce-connector/data-factory-salesforce-api-name-2.png)
+![Capture d’écran montrant les champs et relations personnalisés avec les noms d’API en évidence.](media/data-factory-salesforce-connector/data-factory-salesforce-api-name-2.png)
 
 
 ### <a name="type-mapping-for-salesforce"></a>Mappage de type pour Salesforce

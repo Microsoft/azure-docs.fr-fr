@@ -11,17 +11,17 @@ ms.assetid: ''
 ms.service: virtual-network
 ms.subservice: ip-services
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/22/2020
 ms.author: allensu
-ms.openlocfilehash: 8ff958b7bab7be3124452c1206baf64d0f8ccb7a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 265ed0f4cb58a321bde78714f36123bf197d42f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82142502"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84710998"
 ---
 # <a name="add-change-or-remove-ip-addresses-for-an-azure-network-interface"></a>Ajouter, modifier ou supprimer des adresses IP pour une interface réseau Azure
 
@@ -169,7 +169,7 @@ Les adresses IP privées et publiques sont assignées à l’aide d’une des m�
 Les adresses IPv4 et (éventuellement) IPv6 privées dynamiques sont assignées par défaut.
 
 - **Publique uniquement** : Azure attribue l’adresse à partir d’une plage propre à chaque région Azure. Pour savoir quelles plages sont affectées à chaque région, consultez [Microsoft Azure Datacenter IP Ranges](https://www.microsoft.com/download/details.aspx?id=41653) (Plages d’adresses IP du centre de données Azure Microsoft). L’adresse peut changer lorsqu’une machine virtuelle est arrêtée (désallouée), puis redémarrée. Vous ne pouvez pas assigner d’adresse IPv6 publique à une configuration IP, quelle que soit la méthode employée.
-- **Privée uniquement** : Azure réserve les quatre premières adresses dans chaque plage d’adresses de sous-réseau, sans les attribuer. Azure assigne la prochaine adresse disponible à une ressource de la plage d’adresses du sous-réseau. Par exemple, si la plage d’adresses du sous-réseau est 10.0.0.0/16, et que les adresses 10.0.0.0.4 à 10.0.0.14 (celles de .0 à .3 sont réservées), Azure assigne alors l’adresse 10.0.0.15 à la ressource. La méthode d’allocation par défaut est dynamique. Une fois assignées, les adresses IP dynamiques ne sont libérées que si l’interface réseau est supprimée, assignée à un sous-réseau différent au sein du même réseau virtuel ou bien si la méthode d’allocation devient statique et qu’une adresse IP différente est spécifiée. Par défaut, Azure définit l’adresse statique sur l’adresse dynamique attribuée précédemment quand vous sélectionnez la méthode d’allocation statique à la place de la méthode dynamique. 
+- **Privée uniquement** : Azure réserve les quatre premières adresses dans chaque plage d’adresses de sous-réseau, sans les attribuer. Azure assigne la prochaine adresse disponible à une ressource de la plage d’adresses du sous-réseau. Par exemple, si la plage d’adresses du sous-réseau est 10.0.0.0/16, et que les adresses 10.0.0.4 à 10.0.0.14 sont déjà attribuées (celles de .0 à .3 sont réservées), Azure attribue l’adresse 10.0.0.15 à la ressource. La méthode d’allocation par défaut est dynamique. Une fois assignées, les adresses IP dynamiques ne sont libérées que si l’interface réseau est supprimée, assignée à un sous-réseau différent au sein du même réseau virtuel ou bien si la méthode d’allocation devient statique et qu’une adresse IP différente est spécifiée. Par défaut, Azure définit l’adresse statique sur l’adresse dynamique attribuée précédemment quand vous sélectionnez la méthode d’allocation statique à la place de la méthode dynamique. 
 
 ### <a name="static"></a>statique
 

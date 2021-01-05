@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: availability
 ms.date: 02/26/2020
 ms.reviewer: jushiman
-ms.custom: avverma
-ms.openlocfilehash: 8c4944da8ffcaa75e6448483918a29809c32830b
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: avverma, devx-track-azurecli
+ms.openlocfilehash: 59720a3e89db29ba3eb0829084dd5252e27e9cc9
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124055"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746794"
 ---
 # <a name="instance-protection-for-azure-virtual-machine-scale-set-instances"></a>Protection des instances pour les groupes de machines virtuelles identiques Azure
 
@@ -50,11 +50,11 @@ Il existe plusieurs façons d'appliquer la protection contre les opérations sca
 Vous pouvez appliquer une protection contre les opérations scale-in à une instance du groupe identique via le portail Azure. Vous ne pouvez pas ajuster plusieurs instances à la fois. Répétez les étapes pour chacune des instances que vous souhaitez protéger.
  
 1. Accédez à un groupe de machines virtuelles identiques existant.
-1. Sélectionnez **Instances** dans le menu de gauche, sous **Paramètres**.
+1. Sélectionnez **Instances** dans le menu de gauche, sous **Paramètres** .
 1. Sélectionnez le nom de l'instance à protéger.
-1. Sélectionnez l'onglet **Stratégie de protection**.
-1. Dans le panneau **Stratégie de protection**, sélectionnez l'option **Protection contre les opérations scale-in**.
-1. Sélectionnez **Enregistrer**. 
+1. Sélectionnez l'onglet **Stratégie de protection** .
+1. Dans le panneau **Stratégie de protection** , sélectionnez l'option **Protection contre les opérations scale-in** .
+1. Sélectionnez **Enregistrer** . 
 
 ### <a name="rest-api"></a>API REST
 
@@ -118,11 +118,11 @@ Il existe plusieurs façons d'appliquer la protection contre les actions de grou
 Vous pouvez appliquer une protection contre les actions de groupe identique à une instance du groupe identique via le portail Azure. Vous ne pouvez pas ajuster plusieurs instances à la fois. Répétez les étapes pour chacune des instances que vous souhaitez protéger.
  
 1. Accédez à un groupe de machines virtuelles identiques existant.
-1. Sélectionnez **Instances** dans le menu de gauche, sous **Paramètres**.
+1. Sélectionnez **Instances** dans le menu de gauche, sous **Paramètres** .
 1. Sélectionnez le nom de l'instance à protéger.
-1. Sélectionnez l'onglet **Stratégie de protection**.
-1. Dans le panneau **Stratégie de protection**, sélectionnez l'option **Protection contre les actions de groupe identique**.
-1. Sélectionnez **Enregistrer**. 
+1. Sélectionnez l'onglet **Stratégie de protection** .
+1. Dans le panneau **Stratégie de protection** , sélectionnez l'option **Protection contre les actions de groupe identique** .
+1. Sélectionnez **Enregistrer** . 
 
 ### <a name="rest-api"></a>API REST
 

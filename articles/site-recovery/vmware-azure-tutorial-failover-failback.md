@@ -5,12 +5,12 @@ ms.service: site-recovery
 ms.topic: tutorial
 ms.date: 12/16/2019
 ms.custom: MVC
-ms.openlocfilehash: 8501bb1a998eb08984a118bfa5d52d1e3f3e4f84
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bf47f08ac555cf60f59ba2b1a84750b6a9e2e0a1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75498089"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86131998"
 ---
 # <a name="fail-over--vmware-vms"></a>Effectuer le basculement de machines virtuelles VMware
 
@@ -87,7 +87,7 @@ Dans certains scénarios, le basculement nécessite un traitement supplémentair
 
 ## <a name="connect-to-failed-over-vm"></a>Se connecter à une machine virtuelle basculée
 
-1. Si vous souhaitez vous connecter à des machines virtuelles Azure après le basculement en utilisant le protocole RDP (Remote Desktop Protocol) et Secure Shell (SSH), vérifiez que les conditions ont été remplies (failover-failback-overview.md#connect-to-azure-after-failover).
+1. Si vous souhaitez vous connecter à des machines virtuelles Azure après le basculement en utilisant le protocole RDP (Remote Desktop Protocol) et Secure Shell (SSH), [vérifiez que les exigences ont été satisfaites](failover-failback-overview.md#connect-to-azure-after-failover).
 2. Une fois le basculement effectué, accédez à la machine virtuelle et validez-la en vous [connectant](../virtual-machines/windows/connect-logon.md) à celle-ci.
 3. Utilisez **Changer le point de récupération**, si vous souhaitez vous servir d’un autre point de récupération après le basculement. Une fois le basculement validé au cours de l’étape suivante, cette option n’est plus disponible.
 4. Une fois la validation effectuée, sélectionnez **Valider** pour finaliser le point de récupération de la machine virtuelle après le basculement.

@@ -3,17 +3,20 @@ title: Utiliser l’estimateur de flux de modification - Azure Cosmos DB
 description: Découvrez comment utiliser l’estimateur de flux de modification pour analyser la progression de votre processeur de flux de modification.
 author: ealsur
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 08/15/2019
 ms.author: maquaran
-ms.openlocfilehash: 0023f68400b36b9abd3b9d4a789895e79f67aa03
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a44557d15f437317c2b5fa659ab8d4ca3c208edf
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77585286"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339833"
 ---
 # <a name="use-the-change-feed-estimator"></a>Utilisation de l’estimateur de flux de modification
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article décrit comment superviser la progression de vos instances de [processeur de flux de modification](./change-feed-processor.md) au fur et à mesure qu’elles lisent le flux de modification.
 
@@ -63,4 +66,4 @@ Vous pouvez envoyer cette estimation à votre solution de supervision et l’uti
 Pour plus d’informations sur le processeur de flux de modification, consultez les articles suivants :
 
 * [Vue d’ensemble du processeur de flux de modification](change-feed-processor.md)
-* [Heure de début du processeur de flux de modification](how-to-configure-change-feed-start-time.md)
+* [Heure de début du processeur de flux de modification](./change-feed-processor.md#starting-time)

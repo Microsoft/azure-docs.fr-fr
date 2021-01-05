@@ -14,19 +14,22 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 2a7f15eb7e90ba4dec9bc614a45d2de46c07bdfd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: c6c1dcb0af500c47aabbd8e8193c066bb4a921c5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64868104"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89267766"
 ---
-# <a name="use-azure-queue-storage-to-monitor-media-services-job-notifications-with-net"></a>Utiliser Azure Queue Storage pour surveiller les notifications de travaux Media Services avec .NET 
+# <a name="use-azure-queue-storage-to-monitor-media-services-job-notifications-with-net"></a>Utiliser Azure Queue Storage pour surveiller les notifications de travaux Media Services avec .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
-Lorsque vous exécutez des travaux d’encodage, vous avez généralement besoin de faire appel à une méthode de suivi de la progression du travail. Vous pouvez configurer Media Services pour transmettre des notifications à [Azure Queue storage](../../storage/storage-dotnet-how-to-use-queues.md). Vous pouvez vérifier la progression des tâches en obtenant des notifications à partir de Queue Storage. 
+Lorsque vous exécutez des travaux d’encodage, vous avez généralement besoin de faire appel à une méthode de suivi de la progression du travail. Vous pouvez configurer Media Services pour transmettre des notifications à [Azure Queue storage](../../storage/queues/storage-dotnet-how-to-use-queues.md). Vous pouvez vérifier la progression des tâches en obtenant des notifications à partir de Queue Storage. 
 
 Les messages transmis au stockage de files d’attente sont accessibles n’importe où dans le monde. L’architecture de messagerie de Stockage File d’attente est hautement évolutive. L’interrogation du Stockage File d’attente pour les messages est préférable aux autres méthodes.
 
@@ -37,10 +40,10 @@ Cet article explique comment obtenir des messages de notification à partir de S
 ## <a name="considerations"></a>Considérations
 Considérez les éléments suivants lors du développement d’applications Media Services qui utilisent le Stockage File d’attente :
 
-* Le Stockage File d’attente ne garantit pas une remise dans l’ordre d’arrivée (FIFO). Pour plus d'informations, consultez [Files d'attente Azure et files d'attente Azure Service Bus - comparaison et différences](https://msdn.microsoft.com/library/azure/hh767287.aspx).
+* Le Stockage File d’attente ne garantit pas une remise dans l’ordre d’arrivée (FIFO). Pour plus d'informations, consultez [Files d'attente Azure et files d'attente Azure Service Bus - comparaison et différences](/previous-versions/azure/hh767287(v=azure.100)).
 * Le Stockage File d’attente n’est pas un service push. Vous devez interroger la file d’attente.
-* Le nombre de files d’attente est illimité. Pour plus d'informations, consultez [API REST du service de file d'attente](https://docs.microsoft.com/rest/api/storageservices/Queue-Service-REST-API).
-* Le Stockage File d’attente a certaines limitations et spécificités que vous devez connaître. Celles-ci sont décrites dans [Files d’attente Azure et files d’attente Azure Service Bus - comparaison et différences](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted).
+* Le nombre de files d’attente est illimité. Pour plus d'informations, consultez [API REST du service de file d'attente](/rest/api/storageservices/queue-service-rest-api).
+* Le Stockage File d’attente a certaines limitations et spécificités que vous devez connaître. Celles-ci sont décrites dans [Files d’attente Azure et files d’attente Azure Service Bus - comparaison et différences](../../service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted.md).
 
 ## <a name="net-code-example"></a>Exemple de code .NET
 
@@ -53,7 +56,10 @@ L’exemple de code de cette section permet d’effectuer les opérations suivan
 5. Associer le point de terminaison de notification à la tâche et soumettre la tâche d’encodage. Vous pouvez avoir plusieurs points de terminaison de notification associés à une tâche.
 6. Transmettre **NotificationJobState.FinalStatesOnly** à la méthode **AddNew**. (Dans cet exemple, nous nous intéressons uniquement aux derniers états du traitement du travail.)
 
-        job.JobNotificationSubscriptions.AddNew(NotificationJobState.FinalStatesOnly, _notificationEndPoint);
+    ```csharp
+    job.JobNotificationSubscriptions.AddNew(NotificationJobState.FinalStatesOnly, _notificationEndPoint);
+    ```
+
 7. Si vous transmettez **NotificationJobState.All**, vous obtenez toutes les notifications de modification des états suivantes : en attente, planifié, traitement en cours et terminé. Toutefois, comme indiqué précédemment, le Stockage File d’attente ne garantit pas une remise dans l’ordre d’arrivée. Vous pouvez utiliser la propriété **Timestamp** (définie sur le type **EncodingJobMessage** dans l’exemple ci-dessous) pour ordonner les messages. Les messages en double sont possibles. Utilisez la **propriété ETag** (définie sur le type **EncodingJobMessage**) pour rechercher les éventuels doublons. Il se peut également que certaines notifications de modification d’état soient ignorées.
 8. Attendre que la tâche atteigne l’état Terminé en vérifiant la file d’attente toutes les 10 secondes. Supprimer les messages une fois qu’ils ont été traités.
 9. Supprimer la file d’attente et le point de terminaison de notification.
@@ -344,31 +350,32 @@ namespace JobNotification
 
 L’exemple ci-dessus produit le résultat suivant : Vos valeurs varieront.
 
-    Created assetFile BigBuckBunny.mp4
-    Upload BigBuckBunny.mp4
-    Done uploading of BigBuckBunny.mp4
+```output
+Created assetFile BigBuckBunny.mp4
+Upload BigBuckBunny.mp4
+Done uploading of BigBuckBunny.mp4
 
-    EventType: NotificationEndPointRegistration
-    MessageVersion: 1.0
-    ETag: e0238957a9b25bdf3351a88e57978d6a81a84527fad03bc23861dbe28ab293f6
-    TimeStamp: 2013-05-14T20:22:37
-        NotificationEndPointId: nb:nepid:UUID:d6af9412-2488-45b2-ba1f-6e0ade6dbc27
-        State: Registered
-        Name: dde957b2-006e-41f2-9869-a978870ac620
-        Created: 2013-05-14T20:22:35
+EventType: NotificationEndPointRegistration
+MessageVersion: 1.0
+ETag: e0238957a9b25bdf3351a88e57978d6a81a84527fad03bc23861dbe28ab293f6
+TimeStamp: 2013-05-14T20:22:37
+    NotificationEndPointId: nb:nepid:UUID:d6af9412-2488-45b2-ba1f-6e0ade6dbc27
+    State: Registered
+    Name: dde957b2-006e-41f2-9869-a978870ac620
+    Created: 2013-05-14T20:22:35
 
-    EventType: JobStateChange
-    MessageVersion: 1.0
-    ETag: 4e381f37c2d844bde06ace650310284d6928b1e50101d82d1b56220cfcb6076c
-    TimeStamp: 2013-05-14T20:24:40
-        JobId: nb:jid:UUID:526291de-f166-be47-b62a-11ffe6d4be54
-        JobName: My MP4 to Smooth Streaming encoding job
-        NewState: Finished
-        OldState: Processing
-        AccountName: westeuropewamsaccount
-    job with Id: nb:jid:UUID:526291de-f166-be47-b62a-11ffe6d4be54 reached expected
-    State: Finished
-
+EventType: JobStateChange
+MessageVersion: 1.0
+ETag: 4e381f37c2d844bde06ace650310284d6928b1e50101d82d1b56220cfcb6076c
+TimeStamp: 2013-05-14T20:24:40
+    JobId: nb:jid:UUID:526291de-f166-be47-b62a-11ffe6d4be54
+    JobName: My MP4 to Smooth Streaming encoding job
+    NewState: Finished
+    OldState: Processing
+    AccountName: westeuropewamsaccount
+job with Id: nb:jid:UUID:526291de-f166-be47-b62a-11ffe6d4be54 reached expected
+State: Finished
+```
 
 ## <a name="next-step"></a>Étape suivante
 Consultez les parcours d’apprentissage de Media Services.

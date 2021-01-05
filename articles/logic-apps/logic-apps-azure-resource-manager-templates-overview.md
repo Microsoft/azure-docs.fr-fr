@@ -3,15 +3,15 @@ title: Vue d’ensemble – Automatiser le déploiement pour le service Azure Lo
 description: Apprenez-en davantage sur l’utilisation de modèles Resource Manager afin d’automatiser le déploiement pour le service Azure Logic Apps
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: logicappspm
 ms.topic: article
-ms.date: 07/25/2019
-ms.openlocfilehash: 7a99038f41043b899886c7161f9b12c77c807c4c
-ms.sourcegitcommit: d791f8f3261f7019220dd4c2dbd3e9b5a5f0ceaf
+ms.date: 11/06/2020
+ms.openlocfilehash: 4070f373175f3497156ced011a57e2ed7bd6e770
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81641825"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009770"
 ---
 # <a name="overview-automate-deployment-for-azure-logic-apps-by-using-azure-resource-manager-templates"></a>Présentation : Automatiser le déploiement pour le service Azure Logic Apps à l’aide de modèles Resource Manager
 
@@ -34,12 +34,14 @@ Pour plus d’informations sur les modèles Resource Manager, voir les rubriques
 * [Meilleures pratiques relatives aux modèles Azure Resource Manager](../azure-resource-manager/templates/template-best-practices.md)
 * [Développer des modèles Azure Resource Manager pour la cohérence du cloud](../azure-resource-manager/templates/templates-cloud-consistency.md)
 
+Pour plus d’informations sur les ressources de modèle spécifiques pour les applications logiques, les comptes d’intégration, les artefacts de compte d’intégration et les environnements de service d’intégration, consultez [Types de ressources Microsoft.Logic](/azure/templates/microsoft.logic/allversions).
+
 Pour des exemples de modèles d’applications logiques, voir :
 
 * le [modèle complet](#full-example-template) utilisé pour les exemples de cette rubrique ;
 * l’[exemple de modèle d’application logique de démarrage rapide](https://github.com/Azure/azure-quickstart-templates/blob/master/101-logic-app-create) dans GitHub.
 
-Pour plus d’informations sur les ressources de modèle spécifiques pour les applications logiques, les comptes d’intégration et les artefacts de compte d’intégration, voir [Types de ressources Microsoft.Logic](https://docs.microsoft.com/azure/templates/microsoft.logic/allversions).
+Pour l’API REST Logic Apps, commencez par la [Vue d’ensemble de l’API REST Azure Logic Apps](/rest/api/logic).
 
 <a name="template-structure"></a>
 
@@ -265,6 +267,12 @@ Votre modèle inclut un objet `resources` qui est un tableau contenant des défi
 > [!NOTE]
 > Des modèles pouvant inclure des définitions de ressources pour plusieurs applications logiques, assurez-vous que toutes vos ressources d’application logique spécifient le même groupe de ressources Azure. Lorsque vous déployez le modèle sur un groupe de ressources Azure à l’aide de Visual Studio, vous êtes invité à indiquer l’application logique que vous voulez ouvrir. Par ailleurs, votre projet de groupe de ressources Azure pouvant contenir plusieurs modèles, veillez à sélectionner le fichier de paramètres approprié lorsque vous y êtes invité.
 
+<a name="view-resource-definitions"></a>
+
+### <a name="view-resource-definitions"></a>Afficher les définitions de ressources
+
+Pour passer en revue les définitions de toutes les ressources d’un groupe de ressources Azure, [téléchargez votre application logique dans Visual Studio à partir d’Azure](../logic-apps/manage-logic-apps-with-visual-studio.md), qui est le moyen le plus simple de créer un modèle d’application logique paramétré valide et dans l’ensemble prêt à être déployé.
+
 Pour des informations générales sur les ressources de modèle et leurs attributs, voir les rubriques suivantes :
 
 * [Ressources – Structure et syntaxe de modèle Resource Manager](../azure-resource-manager/templates/template-syntax.md#resources)
@@ -274,13 +282,13 @@ Pour des informations générales sur les ressources de modèle et leurs attribu
 
 ### <a name="logic-app-resource-definition"></a>Définition de ressource d’application logique
 
-La définition de ressource de votre application logique commence par l’objet `properties` qui contient les informations suivantes :
+La [définition de ressource de flux de travail dans un modèle](/azure/templates/microsoft.logic/workflows) de votre application logique commence par l’objet `properties` qui contient les informations suivantes :
 
 * État de votre application logique lors du déploiement
 * ID de tout compte d’intégration utilisé par votre application logique
 * Définition de flux de travail de votre application logique
 * Objet `parameters` qui définit les valeurs à utiliser lors de l’exécution
-* Autres informations de ressources concernant votre application logique, telles que le nom, le type, l’emplacement, etc.
+* Autres informations de ressources concernant votre application logique, telles que le nom, le type, l’emplacement, les paramètres de configuration du runtime, etc.
 
 ```json
 {
@@ -299,7 +307,8 @@ La définition de ressource de votre application logique commence par l’objet 
             },
             "definition": {<workflow-definition>},
             "parameters": {<workflow-definition-parameter-values>},
-            "accessControl": {}
+            "accessControl": {},
+            "runtimeConfiguration": {}
          },
          "name": "[parameters('LogicAppName')]", // Template parameter reference
          "type": "Microsoft.Logic/workflows",
@@ -326,9 +335,34 @@ Voici les attributs spécifiques de la définition de ressource de votre applica
 | `definition` | Oui | Object | Définition de flux de travail sous-jacent de votre application logique, qui est l’objet qui s’affiche en mode Code et qui est décrit en détail dans la rubrique [Référence de schéma pour le langage de définition de flux de travail](../logic-apps/logic-apps-workflow-definition-language.md). Dans cette définition de flux de travail, l’objet `parameters` déclare des paramètres pour les valeurs à utiliser lors de l’exécution de l’application logique. Pour plus d’informations, voir [Définition et paramètres de flux de travail](#workflow-definition-parameters). <p><p>Pour afficher les attributs dans la définition de flux de travail de votre application logique, passez du « mode Création » au « mode Code » dans le portail Azure ou Visual Studio, ou en vous servant d’un outil tel qu’[Azure Resource Explorer](https://resources.azure.com). |
 | `parameters` | Non | Object | [Valeurs de paramètre de définition de flux de travail](#workflow-definition-parameters) à utiliser lors de l’exécution d’une application logique. Les définitions de paramètre de ces valeurs apparaissent dans l’[objet de paramètres de votre définition de flux de travail​​](#workflow-definition-parameters). De plus, si votre application logique utilise des [connecteurs managés](../connectors/apis-list.md) pour accéder à d’autres services et systèmes, cet objet inclut un objet `$connections` qui définit les valeurs de connexion à utiliser lors de l’exécution. |
 | `accessControl` | Non | Object | Utilisé pour spécifier des attributs de sécurité pour votre application logique, tels qu’une restriction d’accès IP aux déclencheurs de demandes ou aux entrées et sorties de l’historique d’exécution. Pour plus d’informations, voir [Accès sécurisé aux applications logiques](../logic-apps/logic-apps-securing-a-logic-app.md). |
-||||
+| `runtimeConfiguration` | Non | Object | Pour spécifier des propriétés `operationOptions` qui contrôlent le comportement de votre application logique au moment de l’exécution. Par exemple, vous pouvez exécuter votre application logique en [mode de débit élevé](../logic-apps/logic-apps-limits-and-config.md#run-high-throughput-mode). |
+|||||
 
-Pour plus d’informations sur les ressources de modèle spécifiques pour les applications logiques, les comptes d’intégration et les artefacts de compte d’intégration, voir [Types de ressources Microsoft.Logic](https://docs.microsoft.com/azure/templates/microsoft.logic/allversions).
+Pour plus d’informations sur les définitions de ressources pour ces objets Logic Apps, consultez [Types de ressources Microsoft.Logic](/azure/templates/microsoft.logic/allversions) :
+
+* [Définition de ressource de flux de travail](/azure/templates/microsoft.logic/workflows)
+* [Définition de ressource d’environnement de service d’intégration](/azure/templates/microsoft.logic/integrationserviceenvironments)
+* [Définition de ressource d’API gérée d’environnement de service d’intégration](/azure/templates/microsoft.logic/integrationserviceenvironments/managedapis)
+
+* [Définition de ressource de compte d’intégration](/azure/templates/microsoft.logic/integrationaccounts)
+
+* Artefacts de compte d’intégration :
+
+  * [Définition de ressource de contrat](/azure/templates/microsoft.logic/integrationaccounts/agreements)
+
+  * [Définition de ressource d’assembly](/azure/templates/microsoft.logic/integrationaccounts/assemblies)
+
+  * [Définition de ressource de configuration de lot](/azure/templates/microsoft.logic/integrationaccounts/batchconfigurations)
+
+  * [Définition de ressource de certificat](/azure/templates/microsoft.logic/integrationaccounts/certificates)
+
+  * [Définition de ressource de carte](/azure/templates/microsoft.logic/integrationaccounts/maps)
+
+  * [Définition de ressource de partenaire](/azure/templates/microsoft.logic/integrationaccounts/partners)
+
+  * [Définition de ressource de schéma](/azure/templates/microsoft.logic/integrationaccounts/schemas)
+
+  * [Définition de ressource de session](/azure/templates/microsoft.logic/integrationaccounts/sessions)
 
 <a name="workflow-definition-parameters"></a>
 
@@ -405,7 +439,7 @@ Cette syntaxe indique où vous pouvez déclarer des paramètres aux niveaux de d
 }
 ```
 
-<a name="secure-workflow-definition-parmameters"></a>
+<a name="secure-workflow-definition-parameters"></a>
 
 ### <a name="secure-workflow-definition-parameters"></a>Paramètres de définition du flux de travail sécurisé
 
@@ -568,7 +602,7 @@ Pour plus d’informations sur les paramètres de définition de flux de travail
 
 ## <a name="connection-resource-definitions"></a>Définitions de ressources de connexion
 
-Lorsque votre application logique crée et utilise des connexions à d’autres services et système à l’aide de [connecteurs managés](../connectors/apis-list.md), l’objet `resources` de votre modèle contient les définitions de ressources pour ces connexions.
+Lorsque votre application logique crée et utilise des connexions à d’autres services et système à l’aide de [connecteurs managés](../connectors/apis-list.md), l’objet `resources` de votre modèle contient les définitions de ressources pour ces connexions. Bien que vous ayez créé des connexions à partir d’une application logique, les connexions sont des ressources Azure distinctes avec leurs propres définitions de ressource. Pour passer en revue ces définitions de ressources de connexion, [téléchargez votre application logique dans Visual Studio à partir d’Azure](../logic-apps/manage-logic-apps-with-visual-studio.md), qui est le moyen le plus simple de créer un modèle d’application logique paramétré valide et dans l’ensemble prêt à être déployé.
 
 ```json
 {
@@ -910,7 +944,7 @@ Voici un exemple fournissant le nom du compte et la clé d’accès pour une con
 
 ### <a name="authenticate-connections"></a>Authentifiez les connexions
 
-Après le déploiement, votre application logique fonctionne de bout en bout avec des paramètres valides. Toutefois, vous devez encore autoriser les connexions OAuth à générer des jetons d’accès valides pour l’[authentification de vos informations d’identification](../active-directory/develop/authentication-scenarios.md). Pour plus d’informations, voir [Autoriser des connexions OAuth](../logic-apps/logic-apps-deploy-azure-resource-manager-templates.md#authorize-oauth-connections).
+Après le déploiement, votre application logique fonctionne de bout en bout avec des paramètres valides. Toutefois, vous devez encore autoriser les connexions OAuth à générer des jetons d’accès valides pour l’[authentification de vos informations d’identification](../active-directory/develop/authentication-vs-authorization.md). Pour plus d’informations, voir [Autoriser des connexions OAuth](../logic-apps/logic-apps-deploy-azure-resource-manager-templates.md#authorize-oauth-connections).
 
 Certaines connexions prennent en charge l’utilisation d’un [principal de service](../active-directory/develop/app-objects-and-service-principals.md) Azure Active Directory (Azure AD) pour autoriser les connexions d’une application logique [inscrite dans Azure AD](../active-directory/develop/quickstart-register-app.md). Par exemple, cette définition de ressource de connexion Azure Data Lake montre comment référencer les paramètres de modèle qui gèrent les informations du principal de service, et comment le modèle déclare ces paramètres :
 
@@ -1006,14 +1040,14 @@ L’objet `parameters` de niveau supérieur du modèle déclare ces paramètres 
 Pour plus d’informations sur l’utilisation des principaux de service, voir les rubriques suivantes :
 
 * [Création d’un principal de service à l’aide du portail Azure](../active-directory/develop/howto-create-service-principal-portal.md)
-* [Créer un principal de service Azure à l’aide d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/create-azure-service-principal-azureps)
+* [Créer un principal de service Azure à l’aide d’Azure PowerShell](/powershell/azure/create-azure-service-principal-azureps)
 * [Créer un principal de service avec un certificat à l’aide d’Azure PowerShell](../active-directory/develop/howto-authenticate-service-principal-powershell.md)
 
 <a name="parameter-references"></a>
 
 ## <a name="references-to-parameters"></a>Références aux paramètres
 
-Pour référencer des paramètres de modèle, vous pouvez utiliser des expressions de modèle avec des [fonctions de modèle](../azure-resource-manager/templates/template-functions.md) qui sont évaluées lors du déploiement. Les expressions de modèle utilisent des crochets ( **[]** ) :
+Pour référencer des paramètres de modèle, vous pouvez utiliser des expressions de modèle avec des [fonctions de modèle](../azure-resource-manager/templates/template-functions.md) qui sont évaluées lors du déploiement. Les expressions de modèle utilisent des crochets (**[]**) :
 
 `"<attribute-name>": "[parameters('<template-parameter-name>')]"`
 

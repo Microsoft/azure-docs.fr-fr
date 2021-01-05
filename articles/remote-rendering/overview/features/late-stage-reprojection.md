@@ -5,12 +5,12 @@ author: sebastianpick
 ms.author: sepick
 ms.date: 02/04/2020
 ms.topic: article
-ms.openlocfilehash: 4aa1148e544ff3451aa1cb956bc4a5fb932b9611
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: f0951415bba22a226dadb7f2a115cede451399bc
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679135"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92205640"
 ---
 # <a name="late-stage-reprojection"></a>Reprojection en phase tardive
 
@@ -24,7 +24,7 @@ Les deux modes LSR améliorent la stabilité des hologrammes, bien qu’ils aien
 
 ## <a name="choose-lsr-mode-in-unity"></a>Choisir le mode LSR dans Unity
 
-Dans l’éditeur Unity, accédez à *File > Build Settings*. Sélectionnez *Player Settings* en bas à gauche, puis cochez la case sous *Player > XR Settings > Virtual Reality SDKs > Windows Mixed Reality* si l’option **Enable Depth Buffer Sharing** (Activer le partage du tampon de profondeur) est cochée :
+Dans l’éditeur Unity, accédez à *:::no-loc text="File > Build Settings":::* . Sélectionnez *:::no-loc text="Player Settings":::* en bas à gauche, puis vérifiez sous *:::no-loc text="Player > XR Settings > Virtual Reality SDKs > Windows Mixed Reality":::* si la case **:::no-loc text="Enable Depth Buffer Sharing":::** est cochée :
 
 ![Indicateur d’activation du partage du tampon de profondeur](./media/unity-depth-buffer-sharing-enabled.png)
 
@@ -34,7 +34,9 @@ Si c’est le cas, votre application utilisera Depth LSR, sinon, elle utilisera 
 
 Pour que Depth LSR fonctionne, l’application cliente doit fournir un tampon de profondeur valide qui contient toutes les géométries appropriées à prendre en compte pendant la reprojection en phase tardive.
 
-Depth LSR tente de stabiliser la trame vidéo en fonction du contenu du tampon de profondeur fourni. Ainsi, le contenu qui n’y a pas été rendu, tel que les objets transparents, ne peut pas être ajusté par LSR mais présenter une instabilité et des artefacts de reprojection.
+Depth LSR tente de stabiliser la trame vidéo en fonction du contenu du tampon de profondeur fourni. Ainsi, le contenu qui n’y a pas été rendu, tel que les objets transparents, ne peut pas être ajusté par LSR mais présenter une instabilité et des artefacts de reprojection. 
+
+Pour atténuer l’instabilité de la reprojection pour les objets transparents, vous pouvez forcer l’écriture dans le tampon de profondeur. Consultez l’indicateur de matériau *TransparencyWritesDepth* pour les matériaux [Couleur](color-materials.md) et [PBR](pbr-materials.md). Notez toutefois que la qualité visuelle de l’interaction entre l’objet transparent et l’objet opaque peut souffrir de cet indicateur.
 
 ## <a name="planar-lsr"></a>Planar LSR
 
@@ -44,7 +46,7 @@ Planar LSR reprojette de façon optimale les objets qui se trouvent le plus prè
 
 ### <a name="configure-planar-lsr-in-unity"></a>Configurer Planar LSR dans Unity
 
-Les paramètres de plan sont dérivés de ce qui est appelé une *zone de focus*, pour laquelle vous devez fournir chaque frame via `UnityEngine.XR.WSA.HolographicSettings.SetFocusPointForFrame`. Pour plus d’informations, consultez [API Unity Focus Point](https://docs.microsoft.com/windows/mixed-reality/focus-point-in-unity). Si vous ne définissez pas de zone de focus, une solution de secours sera choisie pour vous. Pour autant, ce point de secours automatique aboutit souvent à des résultats inférieurs.
+Les paramètres de plan sont dérivés de ce qui est appelé une *zone de focus*, pour laquelle vous devez fournir chaque frame via `UnityEngine.XR.WSA.HolographicSettings.SetFocusPointForFrame`. Pour plus d’informations, consultez [API Unity Focus Point](/windows/mixed-reality/focus-point-in-unity). Si vous ne définissez pas de zone de focus, une solution de secours sera choisie pour vous. Pour autant, ce point de secours automatique aboutit souvent à des résultats inférieurs.
 
 Vous pouvez calculer vous-même la zone de focus, bien qu’il puisse paraître judicieux de la baser sur celle qui est calculée par l’hôte Remote Rendering. Appelez `RemoteManagerUnity.CurrentSession.GraphicsBinding.GetRemoteFocusPoint` pour l’obtenir. Il vous est demandé de fournir un cadre de coordonnées dans lequel exprimer la zone de focus. Bien souvent, le résultat obtenu à partir de `UnityEngine.XR.WSA.WorldManager.GetNativeISpatialCoordinateSystemPtr` est suffisant.
 

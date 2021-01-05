@@ -1,14 +1,14 @@
 ---
 title: Présentation de Service Health | Microsoft Docs
-description: Obtenez des informations personnalisées concernant l’incidence des problèmes et de la maintenance actuels et futurs d’Azure sur vos applications Azure.
+description: Découvrez comment Service Health fournit un tableau de bord personnalisable qui suit l’intégrité de vos services Azure dans les régions où vous les utilisez.
 ms.topic: conceptual
 ms.date: 05/10/2019
-ms.openlocfilehash: 2d98a909a45c9dd00b3174f495a15cd18ced11f9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8246b0ab93b95c13858e4ff96d0f24b255d05e55
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82146917"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90967788"
 ---
 # <a name="service-health-overview"></a>Présentation de Service Health
 
@@ -21,7 +21,7 @@ Service Health suit quatre types d'événements d'intégrité qui peuvent avoir 
 1. **Problèmes liés aux services** : problèmes touchant les services Azure qui vous affectent en ce moment même. 
 2. **Maintenance planifiée** : maintenance à venir qui pourra avoir une incidence sur la disponibilité de vos services.  
 3. **Health advisories** (Avis concernant l’intégrité) : modifications apportées aux services Azure qui nécessitent votre attention. Il peut s’agir par exemple de la dépréciation de fonctionnalités Azure ou d’exigences de mise à niveau (par exemple une mise à niveau vers un framework PHP pris en charge).
-4. **Avis de sécurité (préversion)**  : notifications liées à la sécurité qui peuvent affecter la disponibilité de vos services Azure.
+4. **Avis de sécurité** : notifications liées à la sécurité ou les violations qui peuvent affecter la disponibilité de vos services Azure.
 
 > [!NOTE]
 > Pour voir les événements Service Health, les utilisateurs doivent [avoir le rôle Lecteur](../role-based-access-control/role-assignments-portal.md) dans un abonnement.
@@ -36,11 +36,11 @@ Pour lancer votre tableau de bord Service Health, sélectionnez la vignette Serv
 
 La vue **Problèmes liés aux services** affiche tous les problèmes touchant actuellement les services Azure qui ont une incidence sur vos ressources. Vous pouvez savoir quand le problème a commencé et quels services et régions sont concernés. Vous pouvez également accéder aux informations les plus récentes pour comprendre ce qui est fait pour résoudre le problème. 
 
-![Gérer des problèmes liés au service](./media/service-health-overview/azure-service-health-overview-2.png)
+[![Gérer des problèmes liés au service](./media/service-health-overview/azure-service-health-overview-2.png)](./media/service-health-overview/azure-service-health-overview-2.png#lightbox)
 
 Choisissez l’onglet **Impact potentiel** pour afficher la liste spécifique des ressources que vous détenez pouvant être affectées par le problème. Vous pouvez télécharger une liste au format CSV de ces ressources pour la partager avec votre équipe.
 
-![Gestion des problèmes liés au service - Impact](./media/service-health-overview/azure-service-health-overview-4.png)
+[![Gestion des problèmes liés au service - Impact](./media/service-health-overview/azure-service-health-overview-4.png)](./media/service-health-overview/azure-service-health-overview-4.png#lightbox)
 
 ## <a name="see-emerging-issues-which-may-impact-your-services"></a>Consultez les nouveaux problèmes qui peuvent avoir un impact sur vos services
 
@@ -52,7 +52,7 @@ Dans certaines situations, des problèmes de service étendus peuvent être publ
 
 Vous pouvez obtenir un lien pour le problème afin de l’utiliser dans votre système de gestion des problèmes. Vous pouvez télécharger des fichiers PDF et parfois CSV pour les partager avec des collaborateurs qui n'ont pas accès au portail Azure.   
 
-![Gestion des problèmes liés aux services - Gestion des problèmes](./media/service-health-overview/azure-service-health-overview-3.png)
+[![Gestion des problèmes liés aux services - Gestion des problèmes](./media/service-health-overview/azure-service-health-overview-3.png)](./media/service-health-overview/azure-service-health-overview-3.png#lightbox)
 
 ## <a name="get-support-from-microsoft"></a>Obtenir l’aide du support Microsoft
 
@@ -62,13 +62,13 @@ Contactez le support si votre ressource présente encore un état incorrect apr�
 
 Filtrez Service Health pour afficher vos abonnements, régions et types de ressources stratégiques. Enregistrez le filtre et épinglez une carte mondiale d’intégrité personnalisée à votre tableau de bord du portail. 
 
-![Mappage de l’intégrité personnalisée des filtres](./media/service-health-overview/azure-service-health-overview-6a.png)
+[![Mappage de l’intégrité personnalisée des filtres](./media/service-health-overview/azure-service-health-overview-6a.png)](./media/service-health-overview/azure-service-health-overview-6a.png#lightbox)
 
 ![Épingler un mappage de l’intégrité personnalisée](./media/service-health-overview/azure-service-health-overview-6b.png)
 
 ## <a name="configure-service-health-alerts"></a>Configurer des alertes d’intégrité de service
 
-Service Health s’intègre à Azure Monitor pour vous avertir au moyen d’e-mails, de SMS et de notifications webhook quand certaines de vos ressources stratégiques sont impactées. Configurez une alerte de journal d’activité pour l’événement d’intégrité de service approprié. Acheminez cette alerte aux personnes appropriées de votre organisation à l’aide de groupes d’actions. Pour plus d’informations sur la configuration d’alertes pour Service Health, consultez [cet article](../azure-monitor/platform/alerts-activity-log-service-notifications.md).
+Service Health s’intègre à Azure Monitor pour vous avertir au moyen d’e-mails, de SMS et de notifications webhook quand certaines de vos ressources stratégiques sont impactées. Configurez une alerte de journal d’activité pour l’événement d’intégrité de service approprié. Acheminez cette alerte aux personnes appropriées de votre organisation à l’aide de groupes d’actions. Pour plus d’informations sur la configuration d’alertes pour Service Health, consultez [cet article](./alerts-activity-log-service-notifications-portal.md).
 
 >[!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2OaXt]
 

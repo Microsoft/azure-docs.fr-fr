@@ -2,11 +2,37 @@
   href: index.yml
 - name: Introduction
   href: introduction.md
-- name: Security Controls
+- name: Contrôles de sécurité (v2)
   expanded: true
   items:
     - name: Vue d’ensemble des contrôles de sécurité Azure
       href: overview.md
+    - name: Sécurité du réseau
+      href: security-controls-v2-network-security.md
+    - name: Gestion des identités
+      href: security-controls-v2-identity-management.md
+    - name: Accès privilégié
+      href: security-controls-v2-privileged-access.md
+    - name: Protection des données
+      href: security-controls-v2-data-protection.md
+    - name: Gestion des ressources
+      href: security-controls-v2-asset-management.md
+    - name: Journalisation et détection des menaces
+      href: security-controls-v2-logging-threat-detection.md
+    - name: Réponse aux incidents
+      href: security-controls-v2-incident-response.md
+    - name: Gestion des postures et des vulnérabilités
+      href: security-controls-v2-posture-vulnerability-management.md
+    - name: Sécurité des points de terminaison
+      href: security-controls-v2-endpoint-security.md
+    - name: Sauvegarde et récupération
+      href: security-controls-v2-backup-recovery.md
+    - name: Gouvernance et stratégie
+      href: security-controls-v2-governance-strategy.md
+- name: Contrôles de sécurité (v1)
+  items:
+    - name: Vue d’ensemble des contrôles de sécurité Azure (v1)
+      href: overview-v1.md
     - name: Sécurité du réseau
       href: security-control-network-security.md
     - name: Enregistrement et surveillance
@@ -35,35 +61,169 @@
       href: security-baselines-overview.md
     - name: Base de référence de la sécurité Gestion des API
       href: ../../api-management/security-baseline.md
+    - name: Base de référence de la sécurité App Service
+      href: ../../app-service/security-baseline.md
+    - name: Base de référence de la sécurité Application Gateway
+      href: ../../application-gateway/security-baseline.md
+    - name: Base de référence de sécurité relative à l’automatisation
+      href: ../../automation/security-baseline.md
+    - name: Base de référence de la sécurité Azure Advisor
+      href: ../../advisor/security-baseline.md
+    - name: Base de référence de la sécurité Azure App Configuration
+      href: ../../azure-app-configuration/security-baseline.md
+    - name: Base de référence de sécurité pour Sauvegarde Azure
+      href: ../../backup/security-baseline.md
+    - name: Base de référence de la sécurité Azure Bastion
+      href: ../../bastion/security-baseline.md
+    - name: Base de référence de la sécurité Azure Bot Network
+      href: /azure/bot-service/security-baseline?view=azure-bot-service-4.0
     - name: Base de référence de la sécurité Azure Cache pour Redis
       href: ../../azure-cache-for-redis/security-baseline.md
-    - name: Base de référence de la sécurité Sauvegarde
-      href: ../../backup/security-baseline.md
+    - name: Base de référence de la sécurité pour la Recherche cognitive Azure
+      href: ../../search/security-baseline.md
+    - name: "Base de référence de la sécurité Azure Cosmos\_DB"
+      href: ../../cosmos-db/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Data Box
+      href: ../../databox/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Data Explorer
+      href: /azure/data-explorer/security-baseline
+    - name: Base de référence de sécurité pour Azure Data Factory
+      href: ../../data-factory/security-baseline.md
+    - name: Base de référence de la sécurité Azure Data Share
+      href: ../../data-share/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Database pour MySQL
+      href: ../../mysql/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Database for MariaDB
+      href: ../../mariadb/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Database Migration Service
+      href: ../../dms/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Database pour PostgreSQL - Hyperscale
+      href: ../../postgresql/postgresql-hyperscale-security-baseline.md
+    - name: Base de référence de sécurité pour Azure Database pour PostgreSQL - Serveur unique
+      href: ../../postgresql/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Databricks
+      href: /azure/databricks/scenarios/security-baseline
+    - name: Base de référence de la sécurité Azure DDOS Protection Standard
+      href: ../fundamentals/ddos-protection-security-baseline.md
+    - name: Base de référence de la sécurité Azure Defender pour IoT
+      href: ../../defender-for-iot/security-baseline.md
+    - name: Base de référence de sécurité pour Azure DevTest Labs
+      href: ../../devtest-labs/security-baseline.md
+    - name: Base de référence de sécurité pour Azure DNS
+      href: ../../dns/security-baseline.md
+    - name: Base de référence de sécurité pour le Pare-feu Azure
+      href: ../../firewall/security-baseline.md
+    - name: Base de référence de la sécurité Azure Firewall Manager
+      href: ../../firewall-manager/security-baseline.md
+    - name: Base de référence de la sécurité Azure Front Door
+      href: ../../frontdoor/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Functions
+      href: ../../azure-functions/security-baseline.md
+    - name: Base de référence de la sécurité Azure HPC Cache
+      href: ../../hpc-cache/security-baseline.md
+    - name: Base de référence de la sécurité Azure Information Protection
+      href: /azure/information-protection/security-baseline
+    - name: Bases de référence de la sécurité Azure Kubernetes Service
+      href: ../../aks/security-baseline.md
+    - name: Base de référence de la sécurité Azure Lighthouse
+      href: ../../lighthouse/security-baseline.md
+    - name: Base de référence de la sécurité Azure Load Balancer
+      href: ../../load-balancer/security-baseline.md
+    - name: Base de référence de la sécurité Azure Machine Learning
+      href: ../../machine-learning/security-baseline.md
+    - name: Base de référence de la sécurité pour Applications managées Azure
+      href: ../../azure-resource-manager/managed-applications/security-baseline.md
+    - name: Base de référence de la sécurité Azure Monitor
+      href: ../../azure-monitor/security-baseline.md
+    - name: Base de référence de la sécurité Azure Migrate
+      href: ../../migrate/security-baseline.md
+    - name: Base de référence de la sécurité Azure Policy
+      href: ../../governance/policy/concepts/azure-security-benchmark-baseline.md
+    - name: Base de référence de sécurité pour Azure Private Link
+      href: ../../private-link/security-baseline.md
+    - name: Base de référence de sécurité pour les adresses IP publiques Azure
+      href: ../../virtual-network/public-ip-security-baseline.md
+    - name: Base de référence de sécurité pour Azure Resource Graph
+      href: ../../governance/resource-graph/concepts/azure-security-benchmark-baseline.md
+    - name: Base de référence de la sécurité Azure Resource Manager
+      href: ../../azure-resource-manager/management/security-baseline.md
+    - name: Base de référence de sécurité pour Azure Sentinel
+      href: ../../sentinel/security-baseline.md
+    - name: Base de référence de la sécurité Azure SignalR Service
+      href: ../../azure-signalr/security-baseline.md
+    - name: Base de référence de sécurité pour Azure SQL Database
+      href: ../../azure-sql/database/security-baseline.md
+    - name: Base de référence de sécurité pour Stockage Azure
+      href: ../../storage/common/security-baseline.md
+    - name: Base de référence de la sécurité Azure Web Application Firewall
+      href: ../../web-application-firewall/security-baseline.md
     - name: Base de référence de la sécurité Batch
       href: ../../batch/security-baseline.md
+    - name: Base de référence de la sécurité Cloud Services
+      href: ../../cloud-services/security-baseline.md
+    - name: Base de référence de la sécurité Cloud Shell
+      href: ../../cloud-shell/security-baseline.md
+    - name: Base de référence de la sécurité Cognitive Services
+      href: ../../cognitive-services/security-baseline.md
+    - name: Base de référence de la sécurité Container Instances
+      href: ../../container-instances/security-baseline.md
     - name: Base de référence de la sécurité Container Registry
       href: ../../container-registry/security-baseline.md
-    - name: "Base de référence de la sécurité Cosmos\_DB"
-      href: ../../cosmos-db/security-baseline.md
-    - name: Base de référence de sécurité Data Explorer
-      href: /azure/data-explorer/security-baseline
-    - name: Base de référence de la sécurité Databricks
-      href: ../../azure-databricks/security-baseline.md
+    - name: Base de référence de la sécurité Content Delivery Network
+      href: ../../cdn/security-baseline.md
+    - name: Base de référence de la sécurité Cost Management
+      href: ../../cost-management-billing/security-baseline.md
+    - name: Base de référence de la sécurité Customer Lockbox
+      href: ../fundamentals/customer-lockbox-security-baseline.md
+    - name: Base de référence de sécurité pour Data Lake Analytics
+      href: ../../data-lake-analytics/security-baseline.md
+    - name: Base de référence de la sécurité Event Grid
+      href: ../../event-grid/security-baseline.md
     - name: Base de référence de la sécurité Event Hubs
       href: ../../event-hubs/security-baseline.md
-    - name: Base de référence de la sécurité Functions
-      href: ../../azure-functions/security-baseline.md
+    - name: Base de référence de sécurité ExpressRoute
+      href: ../../expressroute/security-baseline.md
     - name: Base de référence de la sécurité HDInsight
       href: ../../hdinsight/security-baseline.md
+    - name: Base de référence de la sécurité IoT Hub
+      href: ../../iot-hub/security-baseline.md
     - name: Base de référence de la sécurité Key Vault
-      href: ../../key-vault/security-baseline.md
-    - name: Base de référence de la sécurité MariaDB
-      href: ../../mariadb/security-baseline.md
-    - name: Base de référence de la sécurité MySQL
-      href: ../../mysql/security-baseline.md
-    - name: Base de référence de la sécurité PostgreSQL
-      href: ../../postgresql/security-baseline.md
-    - name: Base de référence de la sécurité SQL Database
-      href: ../../sql-database/security-baseline.md
-    - name: Base de référence de la sécurité Stockage
-      href: ../../storage/common/security-baseline.md
+      href: ../../key-vault/general/security-baseline.md
+    - name: Base de référence de sécurité Logic Apps
+      href: ../../logic-apps/security-baseline.md
+    - name: Base de référence de la sécurité Microsoft Cloud App Security
+      href: 'https://docs.microsoft.com/cloud-app-security/security-baseline'
+    - name: Base de référence de la sécurité Microsoft Defender pour Identity
+      href: 'https://docs.microsoft.com/defender-for-identity/security-baseline'
+    - name: Base de référence de sécurité Network Watcher
+      href: ../../network-watcher/security-baseline.md
+    - name: "Base de référence de la sécurité Power\_BI"
+      href: /power-bi/fundamentals/security-baseline
+    - name: Base de référence Security Center
+      href: ../../security-center/security-baseline.md
+    - name: Base de référence Service Bus
+      href: ../../service-bus-messaging/security-baseline.md
+    - name: Base de référence de sécurité pour Service Fabric
+      href: ../../service-fabric/security-baseline.md
+    - name: Base de référence de la sécurité Site Recovery
+      href: ../../site-recovery/security-baseline.md
+    - name: Base de référence de la sécurité Stream Analytics
+      href: ../../stream-analytics/security-baseline.md
+    - name: Base de référence de la sécurité Azure Synapse Analytics
+      href: ../../synapse-analytics/security-baseline.md
+    - name: Base de référence de la sécurité Traffic Manager
+      href: ../../traffic-manager/security-baseline.md
+    - name: Base de référence de sécurité pour Virtual Machine Scale Sets
+      href: ../../virtual-machine-scale-sets/security-baseline.md
+    - name: Base de référence de sécurité pour Machines virtuelles Linux
+      href: ../../virtual-machines/linux/security-baseline.md
+    - name: Base de référence de sécurité pour Machines virtuelles Windows
+      href: ../../virtual-machines/windows/security-baseline.md
+    - name: Base de référence de la sécurité pour Réseau virtuel
+      href: ../../virtual-network/security-baseline.md
+    - name: Base de référence de la sécurité des réseaux virtuels NAT
+      href: ../../virtual-network/nat-security-baseline.md
+    - name: Base de référence de la sécurité Virtual WAN
+      href: ../../virtual-wan/security-baseline.md
+    - name: Base de référence de la sécurité pour la passerelle VPN
+      href: ../../vpn-gateway/security-baseline.md

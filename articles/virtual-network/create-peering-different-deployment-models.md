@@ -4,24 +4,24 @@ description: Découvrez comment créer un peering de réseaux virtuels entre des
 services: virtual-network
 documentationcenter: ''
 author: KumudD
-manager: twooley
+manager: mtillman
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/15/2018
 ms.author: kumud
 ms.reviewer: anavin
-ms.openlocfilehash: 61df13e78dc7115d4f4d45ab18b9ffdae107dc96
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 148d57da549e8364620c8417cbd61d975cea1498
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77023257"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87046088"
 ---
 # <a name="create-a-virtual-network-peering---different-deployment-models-same-subscription"></a>Créer un peering de réseaux virtuels Azure - Modèles de déploiement différents, même abonnement
 
@@ -145,7 +145,7 @@ Effectuez les étapes suivantes à l’aide de l’interface Azure Classic CLI e
 
 ## <a name="create-peering---powershell"></a><a name="powershell"></a>Créer un peering - PowerShell
 
-1. Installez la dernière version des modules PowerShell [Azure](https://www.powershellgallery.com/packages/Azure) et [Az](https://www.powershellgallery.com/packages/Az/). Si vous débutez dans l’utilisation d’Azure PowerShell, voir [Vue d’ensemble d’Azure PowerShell](/powershell/azure/overview?toc=%2fazure%2fvirtual-network%2ftoc.json).
+1. Installez la dernière version des modules PowerShell [Azure](https://www.powershellgallery.com/packages/Azure) et [Az](https://www.powershellgallery.com/packages/Az/). Si vous débutez dans l’utilisation d’Azure PowerShell, voir [Vue d’ensemble d’Azure PowerShell](/powershell/azure/?toc=%2fazure%2fvirtual-network%2ftoc.json).
 2. Démarrez une session PowerShell.
 3. Dans PowerShell, connectez-vous à Azure en entrant la commande `Add-AzureAccount`. Le compte auquel vous vous connectez doit avoir les autorisations nécessaires pour créer un peering de réseaux virtuels. Pour obtenir une liste d’autorisations, consultez [Autorisations de peering de réseau virtuel](virtual-network-manage-peering.md#requirements-and-constraints).
 4. Pour créer un réseau virtuel (classique) avec PowerShell, vous devez créer un fichier de configuration réseau ou en modifier un existant. Pour découvrir [comment exporter, mettre à jour et importer des fichiers de configuration réseau, consultez cet article](virtual-networks-using-network-configuration-file.md). Le fichier doit inclure l’élément **VirtualNetworkSite** suivant pour le réseau virtuel utilisé dans ce didacticiel :

@@ -11,13 +11,13 @@ metadata:
   author: mtillman
   ms.author: mtillman
   manager: daveba
-  ms.date: 05/19/2020
-  ms.openlocfilehash: 4e1b18e1037b37deba3e037f3e896bf1536f4fd7
-  ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+  ms.date: 12/01/2020
+  ms.openlocfilehash: 5261d535170feb5c0aaac3731cd27e0af7847cfa
+  ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/19/2020
-  ms.locfileid: "83591911"
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "96498045"
 highlightedContent:
   items:
   - title: Présentation d’Azure AD
@@ -28,29 +28,29 @@ highlightedContent:
     url: ./fundamentals/whats-new.md
   - title: Sécuriser votre personnel à distance
     itemType: get-started
-    url: https://docs.microsoft.com/enterprise-mobility-security/remote-work/
+    url: /enterprise-mobility-security/remote-work/
   - title: Attribuer des rôles aux utilisateurs
     itemType: how-to-guide
     url: ./fundamentals/active-directory-users-assign-role-azure-portal.md
   - title: Checklist du déploiement d’Azure AD
     itemType: concept
     url: ./fundamentals/active-directory-deployment-checklist-p2.md
-  - title: Ajouter un abonnement à votre locataire
-    itemType: how-to-guide
-    url: ./fundamentals/active-directory-how-subscriptions-associated-directory.md
+  - title: Créer une résilience dans la gestion des identités et des accès avec Azure AD
+    itemType: overview
+    url: ./fundamentals/resilience-overview.md
 conceptualContent:
   items:
   - title: Gestion des applications
     links:
-    - url: ./manage-apps/what-is-single-sign-on.md
-      itemType: concept
-      text: Qu’est-ce que l’authentification unique ?
-    - url: ./manage-apps/user-provisioning.md
-      itemType: tutorial
-      text: Provisionnement automatique d'utilisateurs
-    - url: ./manage-apps/application-proxy.md
-      itemType: concept
-      text: Proxy d’application pour applications locales
+    - url: ./manage-apps/what-is-application-management.md
+      itemType: overview
+      text: Qu’est-ce que la gestion des applications ?
+    - url: ./manage-apps/view-applications-portal.md
+      itemType: quickstart
+      text: Afficher les applications qui utilisent votre locataire pour la gestion des identités
+    - url: ./manage-apps/add-application-portal-setup-sso.md
+      itemType: quickstart
+      text: Configurer l’authentification unique SAML
     footerLink:
       url: ./manage-apps/index.yml
       text: En savoir plus
@@ -78,7 +78,7 @@ conceptualContent:
       text: Activer la réinitialisation du mot de passe libre-service
     - url: ./authentication/tutorial-enable-azure-mfa.md
       itemType: tutorial
-      text: Activation d’Azure Multi-Factor Authentication
+      text: Activer l’authentification multifacteur Azure AD
     footerLink:
       url: ./authentication/index.yml
       text: En savoir plus
@@ -101,7 +101,7 @@ conceptualContent:
     - url: ./conditional-access/overview.md
       itemType: overview
       text: Qu’est-ce que l’accès conditionnel ?
-    - url: ./conditional-access/app-based-mfa.md
+    - url: ./authentication/tutorial-enable-azure-mfa.md
       itemType: quickstart
       text: Exiger l’authentification multifacteur pour les applications spécifiques
     - url: ./conditional-access/location-condition.md
@@ -109,20 +109,6 @@ conceptualContent:
       text: Conditions en fonction de l’emplacement
     footerLink:
       url: ./conditional-access/index.yml
-      text: En savoir plus
-  - title: Développeurs
-    links:
-    - url: ./develop/v2-overview.md
-      itemType: overview
-      text: À propos de la plateforme d’identités Microsoft
-    - url: ./develop/v2-oauth2-auth-code-flow.md
-      itemType: concept
-      text: Octroi de flux de code OAuth 2.0
-    - url: ./develop/quickstart-register-app.md
-      itemType: quickstart
-      text: Inscrire une application à l’aide de la plateforme d’identités Microsoft
-    footerLink:
-      url: ./develop/index.yml
       text: En savoir plus
   - title: Gestion des appareils
     links:
@@ -140,13 +126,13 @@ conceptualContent:
       text: En savoir plus
   - title: Services de domaine
     links:
-    - url: ../active-directory-domain-services/active-directory-ds-overview.md
+    - url: ../active-directory-domain-services/overview.md
       itemType: overview
       text: Présentation d’Azure AD Domain Services
-    - url: ../active-directory-domain-services/active-directory-ds-getting-started.md
+    - url: ../active-directory-domain-services/tutorial-create-instance.md
       itemType: quickstart
       text: Activer Azure AD Domain Services
-    - url: ../active-directory-domain-services/active-directory-ds-admin-guide-administer-group-policy.md
+    - url: ../active-directory-domain-services/manage-group-policy.md
       itemType: how-to-guide
       text: Administrer la stratégie de groupe
     footerLink:
@@ -154,31 +140,31 @@ conceptualContent:
       text: En savoir plus
   - title: Utilisateurs d’entreprise
     links:
-    - url: ./users-groups-roles/groups-create-rule.md
+    - url: ./enterprise-users/groups-create-rule.md
       itemType: how-to-guide
       text: Créer un groupe dynamique
-    - url: ./users-groups-roles/groups-settings-v2-cmdlets.md
+    - url: ./enterprise-users/groups-settings-v2-cmdlets.md
       itemType: how-to-guide
       text: PowerShell pour les groupes Azure AD
-    - url: ./users-groups-roles/directory-service-limits-restrictions.md
+    - url: ./enterprise-users/directory-service-limits-restrictions.md
       itemType: reference
       text: Restrictions et limites du service Azure Active Directory
     footerLink:
-      url: ./users-groups-roles/index.yml
+      url: ./enterprise-users/index.yml
       text: En savoir plus
   - title: Identités externes
     links:
-    - url: ./b2b/compare-with-b2c.md
+    - url: ./external-identities/compare-with-b2c.md
       itemType: overview
       text: Comparer les solutions pour les utilisateurs externes
-    - url: ../active-directory-b2c/active-directory-b2c-overview.md
+    - url: ../active-directory-b2c/overview.md
       itemType: overview
       text: Adapter l’échelle de vos applications aux consommateurs (B2C)
-    - url: ./b2b/what-is-b2b.md
+    - url: ./external-identities/what-is-b2b.md
       itemType: overview
       text: Collaborer avec des utilisateurs en dehors de votre organisation (B2B)
     footerLink:
-      url: ./b2b/index.yml
+      url: ./external-identities/index.yml
       text: En savoir plus
   - title: Identité hybride
     links:
@@ -236,6 +222,20 @@ conceptualContent:
     footerLink:
       url: ./managed-identities-azure-resources/index.yml
       text: En savoir plus
+  - title: Plateforme d’identité Microsoft
+    links:
+    - url: ./develop/v2-overview.md
+      itemType: overview
+      text: À propos de la plateforme d’identités Microsoft
+    - url: ./develop/v2-oauth2-auth-code-flow.md
+      itemType: concept
+      text: Octroi de flux de code OAuth 2.0
+    - url: ./develop/quickstart-register-app.md
+      itemType: quickstart
+      text: Inscrire une application à l’aide de la plateforme d’identités Microsoft
+    footerLink:
+      url: ./develop/index.yml
+      text: En savoir plus
   - title: Privileged Identity Management (PIM)
     links:
     - url: ./privileged-identity-management/pim-getting-started.md
@@ -264,15 +264,43 @@ conceptualContent:
     footerLink:
       url: ./reports-monitoring/index.yml
       text: En savoir plus
+  - title: Rôles
+    links:
+    - url: ./roles/groups-assign-role.md
+      itemType: concept
+      text: Comprendre les rôles Azure AD
+    - url: ./roles/concept-understand-roles.md
+      itemType: how-to-guide
+      text: Créer un rôle personnalisé
+    - url: ./roles/groups-view-assignments.md
+      itemType: reference
+      text: Voir les rôles attribués à un groupe
+    footerLink:
+      url: ./roles/index.yml
+      text: En savoir plus
+  - title: Applications tierces
+    links:
+    - url: ./saas-apps/amazon-web-service-tutorial.md
+      itemType: tutorial
+      text: Intégration de l’authentification unique Azure AD à Amazon Web Services
+    - url: ./saas-apps/workday-inbound-tutorial.md
+      itemType: tutorial
+      text: Configurer Workday pour l'approvisionnement automatique d'utilisateurs
+    - url: ./develop/v2-howto-app-gallery-listing.md
+      itemType: get-started
+      text: Demander d’ajouter votre application à la Galerie
+    footerLink:
+      url: ./saas-apps/tutorial-list.md
+      text: Voir plus d’applications
 additionalContent:
   sections:
   - items:
     - title: Microsoft 365
       summary: Explorez Microsoft 365, solution complète qui inclut Azure AD.
-      url: https://docs.microsoft.com/microsoft-365/
+      url: /microsoft-365/
     - title: Azure AD PowerShell
       summary: Découvrez comment installer et utiliser le module PowerShell Azure AD.
-      url: https://docs.microsoft.com/powershell/module/azuread/
+      url: /powershell/module/azuread/
     - title: Commandes Azure CLI pour Azure AD
       summary: Rechercher les commandes Azure AD dans les informations de référence de l’interface CLI.
-      url: https://docs.microsoft.com/cli/azure/ad
+      url: /cli/azure/ad

@@ -9,12 +9,12 @@ ms.topic: troubleshooting
 ms.date: 01/30/2020
 ms.author: jlian
 ms.custom: mqtt
-ms.openlocfilehash: c8cb91aa0c7ce1610320d4107db282d3c34407ba
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 673a76417739fa59a91979cca7c6807a584868f0
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758723"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92538253"
 ---
 # <a name="404104-deviceconnectionclosedremotely"></a>404104 DeviceConnectionClosedRemotely
 
@@ -24,15 +24,15 @@ Cet article décrit les causes et solutions des erreurs **404104 DeviceConnectio
 
 ### <a name="symptom-1"></a>Symptôme 1
 
-Les appareils se déconnectent à intervalles réguliers (toutes les 65 minutes, par exemple) et **404104 DeviceConnectionClosedRemotely** s'affiche dans les journaux de diagnostic IoT Hub. Parfois, **401003 IoTHubUnauthorized** s'affiche, de même qu'un événement de connexion d'appareil réussie moins d'une minute plus tard.
+Les appareils se déconnectent à intervalles réguliers (toutes les 65 minutes, par exemple) et **404104 DeviceConnectionClosedRemotely** apparaît dans les journaux de ressources IoT Hub. Parfois, **401003 IoTHubUnauthorized** s'affiche, de même qu'un événement de connexion d'appareil réussie moins d'une minute plus tard.
 
 ### <a name="symptom-2"></a>Symptôme 2
 
-Les appareils se déconnectent de façon aléatoire et **404104 DeviceConnectionClosedRemotely** s'affiche dans les journaux de diagnostic IoT Hub.
+Les appareils se déconnectent de façon aléatoire et **404104 DeviceConnectionClosedRemotely** apparaît dans les journaux de ressources IoT Hub.
 
 ### <a name="symptom-3"></a>Symptôme 3
 
-De nombreux appareils se déconnectent en même temps et vous constatez une baisse au niveau des [métriques des appareils connectés](iot-hub-metrics.md). De plus, les journaux de diagnostic présentent un plus grand nombre d'erreurs **404104 DeviceConnectionClosedRemotely** et d'[erreurs internes 500xxx](iot-hub-troubleshoot-error-500xxx-internal-errors.md).
+De nombreux appareils se déconnectent en même temps et vous constatez une baisse au niveau des [métriques des appareils connectés (connectedDeviceCount)](monitor-iot-hub-reference.md). De plus, les journaux Azure Monitor présentent un plus grand nombre d'erreurs **404104 DeviceConnectionClosedRemotely** et d'[erreurs internes 500xxx](iot-hub-troubleshoot-error-500xxx-internal-errors.md).
 
 ## <a name="causes"></a>Causes
 

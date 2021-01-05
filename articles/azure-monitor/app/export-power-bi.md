@@ -3,20 +3,20 @@ title: Exporter vers Power BI à partir d’Azure Application Insights | Micros
 description: Les requêtes Analytics peuvent être affichées dans Power BI.
 ms.topic: conceptual
 ms.date: 08/10/2018
-ms.openlocfilehash: 0e17ca6e07ec76f0a7a1cb04f7aa13619fb9970c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1e88d60cd9a9d0e6267998237b33a361b12ffd84
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77663995"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186998"
 ---
 # <a name="feed-power-bi-from-application-insights"></a>Alimentation de Power BI à partir d’Application Insights
-[Power BI](https://www.powerbi.com/) est une suite d’outils métier permettant d’analyser les données et de partager les informations. Chaque périphérique bénéficie de tableaux de bord riches. Vous pouvez combiner des données provenant de nombreuses sources, notamment des requêtes Analytics d’[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md).
+[Power BI](https://www.powerbi.com/) est une suite d’outils métier permettant d’analyser les données et de partager les informations. Chaque périphérique bénéficie de tableaux de bord riches. Vous pouvez combiner des données provenant de nombreuses sources, notamment des requêtes Analytics d’[Azure Application Insights](./app-insights-overview.md).
 
 Pour exporter des données d’Application Insights vers Power BI, il existe trois méthodes :
 
 * [**Exporter des requêtes Analytics**](#export-analytics-queries). Ceci est la méthode privilégiée. Écrivez une requête et exportez-la vers Power BI. Vous pouvez placer cette requête sur un tableau de bord, avec d’autres données.
-* [**Exportation continue et Azure Stream Analytics**](../../azure-monitor/app/export-stream-analytics.md). Cette méthode est utile si vous souhaitez stocker vos données pendant de longues périodes. Si vous n’avez pas d’exigence concernant une conservation étendue des données, utilisez la méthode Exporter une requête Analytics. Exportation continue et Stream Analytics : implique un travail supplémentaire de configuration et des frais de stockage supplémentaires.
+* [**Exportation continue et Azure Stream Analytics**](./export-stream-analytics.md). Cette méthode est utile si vous souhaitez stocker vos données pendant de longues périodes. Si vous n’avez pas d’exigence concernant une conservation étendue des données, utilisez la méthode Exporter une requête Analytics. Exportation continue et Stream Analytics : implique un travail supplémentaire de configuration et des frais de stockage supplémentaires.
 * **Adaptateur Power BI**. L’ensemble de graphiques est prédéfini, mais vous pouvez ajouter vos propres requêtes à partir d’autres sources.
 
 > [!NOTE]
@@ -31,7 +31,7 @@ Pour importer votre requête Application Insights, vous utilisez la version pour
 Installez [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
 
 ### <a name="export-an-analytics-query"></a>Exporter une requête Analytics
-1. [Ouvrez Analytics et écrivez votre requête](../../azure-monitor/log-query/get-started-portal.md).
+1. [Ouvrez Analytics et écrivez votre requête](../log-query/log-analytics-tutorial.md).
 2. Testez et affinez la requête jusqu'à ce que vous soyez satisfait des résultats. Vérifiez que la requête s’exécute correctement dans Analytics avant de l’exporter.
 3. Dans le menu **Exporter**, choisissez **Power BI (M)** . Enregistrez le fichier texte.
    
@@ -56,7 +56,7 @@ Installez [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
 8. Actualisez le rapport manuellement selon des intervalles ou configurez une actualisation planifiée dans la page des options.
 
 ### <a name="export-a-funnel"></a>Exporter un entonnoir
-1. [Créez votre entonnoir](../../azure-monitor/app/usage-funnels.md).
+1. [Créez votre entonnoir](./usage-funnels.md).
 2. Sélectionnez **Power BI**.
 
    ![Capture d’écran du bouton Power BI](./media/export-power-bi/button.png)
@@ -67,11 +67,11 @@ Installez [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/).
 
    Collez le script de langage M exporté dans l’Éditeur avancé. 
 
-   ![Capture d’écran de Power BI Desktop, avec l’Éditeur avancé mis en surbrillance](./media/export-power-bi/advancedquery.png)
+   ![Capture d'écran de Power BI Desktop, avec l'Éditeur avancé mis en surbrillance](./media/export-power-bi/advancedquery.png)
 
 4. Sélectionnez des éléments dans la requête et choisissez une visualisation en entonnoir.
 
-   ![Capture d’écran des options de visualisation de Power BI Desktop](./media/export-power-bi/selectsequence.png)
+   ![Capture d'écran des options de visualisation en entonnoir de Power BI Desktop](./media/export-power-bi/selectsequence.png)
 
 5. Changez le titre pour le rendre plus significatif et publiez votre rapport sur votre espace de travail cloud Power BI. 
 
@@ -86,7 +86,7 @@ Cela peut se produire si votre jeton d’actualisation n’a pas été mis à jo
 
 1. Connectez-vous au Portail Azure et vérifiez que vous avez accès à la ressource.
 2. Essayez d’actualiser les informations d’identification du tableau de bord.
-3. Essayez d’effacer le cache de votre bureau PowerBI.
+3. Essayez d'effacer le cache de votre instance de Power BI Desktop.
 
 
    Si vous avez accès et que l’actualisation des informations d’identification échoue, ouvrez un ticket de support.
@@ -112,7 +112,7 @@ Si la réduction du jeu de données provenant de la requête Analytics ne vous c
  ```
 
 ## <a name="about-sampling"></a>À propos de l’échantillonnage
-Selon la quantité de données envoyées par votre application, vous pouvez essayer d’utiliser la fonctionnalité d’échantillonnage adaptatif pour envoyer seulement un pourcentage de vos données de télémétrie. Il en est de même si vous avez défini manuellement l’échantillonnage dans le Kit SDK ou sur ingestion. [En savoir plus sur l'échantillonnage](../../azure-monitor/app/sampling.md).
+Selon la quantité de données envoyées par votre application, vous pouvez essayer d’utiliser la fonctionnalité d’échantillonnage adaptatif pour envoyer seulement un pourcentage de vos données de télémétrie. Il en est de même si vous avez défini manuellement l’échantillonnage dans le Kit SDK ou sur ingestion. [En savoir plus sur l'échantillonnage](./sampling.md).
 
 ## <a name="power-bi-adapter-deprecated"></a>Adaptateur Power BI (déconseillé)
 Cette méthode crée un tableau de bord complet des données de télémétrie. Le jeu de données initial est prédéfini, mais vous pouvez y ajouter plus de données.
@@ -121,14 +121,14 @@ Cette méthode crée un tableau de bord complet des données de télémétrie. L
 1. Connectez-vous à [Power BI](https://app.powerbi.com/).
 2. Ouvrez **Obtenir les données** ![Screenshot of GetData Icon in lower left corner](./media/export-power-bi/001.png), puis **Services**.
 
-    ![Captures d’écran de l’obtention à partir d’une source de données Application Insights](./media/export-power-bi/002.png)
+    ![Captures d'écran du bouton Obtenir dans la fenêtre Services.](./media/export-power-bi/002.png)
 
 3. Sélectionnez **Obtenir** sous Application Insights.
 
    ![Captures d’écran de l’obtention à partir d’une source de données Application Insights](./media/export-power-bi/003.png)
 4. Fournissez les détails de votre ressource Application Insights, puis **connectez-vous**.
 
-    ![Capture d’écran de l’obtention à partir d’une source de données Application Insights](./media/export-power-bi/005.png)
+    ![Capture d'écran de la fenêtre Se connecter à Application Insights.](./media/export-power-bi/005.png)
 
      Vous trouverez ces informations dans le volet Vue d’ensemble d’Application Insights :
 
@@ -146,5 +146,4 @@ Après l’importation initiale, le tableau de bord et les rapports sont mis à 
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Power BI - En savoir plus](https://www.powerbi.com/learning/)
-* [Didacticiel Analytics](../../azure-monitor/log-query/get-started-portal.md)
-
+* [Didacticiel Analytics](../log-query/log-analytics-tutorial.md)

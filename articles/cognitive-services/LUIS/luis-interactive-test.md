@@ -1,14 +1,16 @@
 ---
 title: Tester une application dans le portail LUIS
 description: Utilisez LUIS (Language Understanding) pour travailler en continu sur votre application afin d’affiner et d’améliorer sa compréhension de la langue.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 05/07/2020
-ms.openlocfilehash: cb4559e6d3582a337cbc32ef986bec5db5940ef9
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 06/02/2020
+ms.openlocfilehash: b6fcc294c2b8c131d9a4a058c653ae1f64652ccf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83591860"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91324856"
 ---
 # <a name="test-your-luis-app-in-the-luis-portal"></a>Tester votre application LUIS dans le portail LUIS
 
@@ -42,33 +44,52 @@ L’énoncé de test ne doit pas être exactement le même que les exemples d’
 
 1. L’énoncé, son intention principale et son score sont ajoutés à la liste des énoncés sous la zone de texte.
 
-    ![Le test interactif identifie l’intention incorrecte](./media/luis-how-to-interactive-test/test-weather-1.png)
+    > [!div class="mx-imgBorder"]
+    > ![Le test interactif identifie l’intention incorrecte](./media/luis-how-to-interactive-test/test-weather-1.png)
 
-## <a name="inspect-score"></a>Inspecter le score
+## <a name="inspect-the-prediction"></a>Inspecter la prédiction
 
 Vous inspectez les détails du résultat du test dans le panneau **Inspecter**.
 
 1. Avec le panneau déroulant **Test** ouvert, sélectionnez **Inspecter** pour consulter un énoncé à comparer.
 
-    ![Sélectionnez le bouton Inspecter pour voir plus de détails sur les résultats de test](./media/luis-how-to-interactive-test/inspect.png)
+    > [!div class="mx-imgBorder"]
+    > ![Sélectionnez le bouton Inspecter pour afficher plus de détails sur les résultats de test](./media/luis-how-to-interactive-test/inspect.png)
 
-1. Le panneau **Inspection** s’affiche. Le panneau inclut l’intention de score la plus élevée, ainsi que toutes les entités identifiées. Le panneau affiche le résultat de l’énoncé sélectionné.
+1. Le panneau **Inspection** s’affiche. Le panneau inclut l’intention de score la plus élevée, ainsi que toutes les entités identifiées. Le panneau affiche la prédiction de l’énoncé sélectionné.
 
-    ![Le panneau inclut l’intention de score la plus élevée, ainsi que toutes les entités identifiées. Le panneau affiche le résultat de l’énoncé sélectionné.](./media/luis-how-to-interactive-test/inspect-panel.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran partielle du panneau Inspection de test](./media/luis-how-to-interactive-test/inspect-panel.png)
 
-## <a name="correct-top-scoring-intent"></a>Intention correcte avec le score le plus élevé
+## <a name="add-to-example-utterances"></a>Ajouter des exemples d’énoncés
 
-1. Si l’intention avec le score le plus élevé est incorrecte, sélectionnez le bouton **Modifier**.
+À partir du panneau d’inspection, vous pouvez ajouter l’énoncé de test à une intention en sélectionnant **Ajouter aux exemples d’énoncés**.
 
-1.  Dans la liste déroulante, sélectionnez l’intention appropriée pour l’énoncé.
+## <a name="disable-required-features"></a>Désactiver les fonctionnalités requises
 
-    ![Sélectionner l’intention correcte](./media/luis-how-to-interactive-test/intent-select.png)
+Ce bouton permet de déterminer si l’application formée prédit correctement les entités en fonction des fonctionnalités requises. Le réglage par défaut consiste à appliquer la caractéristique comme requis lors de la prédiction. Sélectionnez ce bouton pour voir quelle serait la prédiction si la caractéristique de la sous-entité n’était pas requise.
+
+### <a name="when-to-disable-required-features"></a>Quand désactiver les caractéristiques requises
+
+L’application formée peut prédire de manière erronée une entité issue du Machine Learning en fonction de l’un des éléments suivants :
+* Étiquetage incorrect des énoncés d’exemples.
+* Non-correspondance entre le texte et la caractéristique obligatoire.
+
+Par exemple : une entité issue du Machine Learning avec une sous-entité du nom d’une personne.
+
+:::image type="content" source="media/luis-how-to-interactive-test/disable-required-feature.png" alt-text="Capture d’écran du portail LUIS : schéma d’entités issues du Machine Learning avec la caractéristique requise":::
+
+Voici un exemple d’énoncé pour cette entité issue du Machine Learning : `Assign Bob Jones to work on the new security feature`.
+
+L’extraction doit être `security feature` comme description de ticket et `Bob Jones` comme ingénieur, deux sous-entités de l’entité `Assign ticket`.
+
+Pour aider la sous-entité à prédire correctement, ajoutez l’entité prédéfinie [PersonName](luis-reference-prebuilt-person.md) comme caractéristique à la sous-entité `engineer`. Si vous rendez la caractéristique obligatoire, cela signifie que la sous-entité sera extraite uniquement si l’entité prédéfinie PersonName est prédite pour le texte. Cela signifie que tout nom figurant dans le texte qui n’est pas prévisible avec la sous-entité PersonName ne sera pas retourné comme sous-entité étiquetée `engineer`.
+
+Lorsque vous utilisez le volet de test interactif et que vous voyez qu’une sous-entité, avec une caractéristique obligatoire, n’est pas prédite, désactivez ce paramètre pour voir si la sous-entité serait prédite sans que la caractéristique ne soit obligatoire. Il est possible que la sous-entité puisse être correctement prédite sans la caractéristique obligatoire en raison de l’étiquetage correct des énoncés d’exemple.
 
 ## <a name="view-sentiment-results"></a>Afficher les résultats des sentiments
 
 Si **Analyse des sentiments** est configurée sur la page **[Publier](luis-how-to-publish-app.md#enable-sentiment-analysis)** , les résultats du test incluent le sentiment trouvé dans l’énoncé.
-
-![Image du panneau Test avec l’analyse des sentiments](./media/luis-how-to-interactive-test/sentiment.png)
 
 ## <a name="correct-matched-patterns-intent"></a>Corriger l’intention du modèle mis en correspondance
 
@@ -78,12 +99,14 @@ Si vous utilisez [Modèles](luis-concept-patterns.md) et si l’énoncé a été
 
 Vous pouvez tester la version active de votre application avec la version de [point de terminaison](luis-glossary.md#endpoint) publiée. Dans le panneau **Inspecter**, sélectionnez **Comparer avec la version publiée**. Tout test exécuté sur le modèle publié est déduit du solde de votre quota d’abonnement Azure.
 
-![Comparer avec la version publiée](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
+> [!div class="mx-imgBorder"]
+> ![Comparer avec la version publiée](./media/luis-how-to-interactive-test/inspect-panel-compare.png)
 
 ## <a name="view-endpoint-json-in-test-panel"></a>Afficher le JSON de point de terminaison dans le panneau de test
 Vous pouvez afficher le JSON de point de terminaison retourné pour la comparaison en sélectionnant la **vue Afficher JSON**.
 
-![Réponse JSON publiée](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
+> [!div class="mx-imgBorder"]
+> ![Réponse JSON publiée](./media/luis-how-to-interactive-test/inspect-panel-compare-json.png)
 
 ## <a name="additional-settings-in-test-panel"></a>Paramètres supplémentaires dans le panneau de test
 

@@ -1,6 +1,6 @@
 ---
 title: Concept de la sécurité d’Azure IoT Hub X.509 | Microsoft Docs
-description: Présentation du concept des certificats de l’autorité de certification X.509 en matière d’authentification et de fabrication de l’appareil IoT.
+description: Présentation du concept des certificats d'autorité de certification X.509 en matière d'authentification et de fabrication de l'appareil IoT.
 author: eustacea
 manager: arjmands
 ms.service: iot-hub
@@ -8,12 +8,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 09/18/2017
 ms.author: eustacea
-ms.openlocfilehash: 3c7e1167b3326620863d35cb2d4b07235cbd5517
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 877200cbafbe68fa6161025572abfddad651e172
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61320235"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96490718"
 ---
 # <a name="conceptual-understanding-of-x509-ca-certificates-in-the-iot-industry"></a>Informations conceptuelles sur les certificats de l’autorité de certification X.509 dans l’industrie IoT
 
@@ -29,6 +29,8 @@ Cet article aborde les points suivants :
 
 * Comment les appareils approuvés par l’autorité de certification X.509 se connectent à IoT Hub
 
+[!INCLUDE [iot-hub-include-x509-ca-signed-support-note](../../includes/iot-hub-include-x509-ca-signed-support-note.md)]
+
 ## <a name="overview"></a>Vue d’ensemble
 
 L’authentification par l’autorité de certification X.509 est une approche permettant d’authentifier les appareils dans IoT Hub à l’aide d’une méthode qui simplifie considérablement la création d’une identité d’appareil et la gestion du cycle de vie dans la chaîne logistique.
@@ -38,6 +40,8 @@ Un attribut distinctif de l’authentification de l’autorité de certification
 Un autre attribut important de l’authentification de l’autorité de certification X.509 est la simplification de la gestion de la chaîne logistique. L’authentification sécurisée des appareils nécessite que chaque appareil soit associé à un secret unique servant de clé pour l’approbation. Dans l’authentification basée sur les certificats, ce secret est une clé privée. Les flux classiques de fabrication d’appareils impliquent plusieurs étapes et opérateurs. La gestion sécurisée des clés privées des appareils entre plusieurs opérateurs et le maintien de la conformité sont difficiles et coûteux. Le recours aux autorités de certification résout ce problème : chaque opérateur s’inscrit dans une chaîne de confiance cryptographique au lieu de se voir remettre des clés privées d’appareils. Chaque opérateur approuve à son tour les appareils à son étape du processus de fabrication. Résultat : une chaîne logistique optimale avec responsabilité intégrée grâce à l’utilisation d’une chaîne de confiance cryptographique. Il est important de noter que ce processus est le plus sécurisé lorsque les appareils protègent leurs clés privées uniques. À cette fin, nous conseillons vivement l’utilisation de modèles de sécurité matériels capables de générer en interne des clés privées qui ne sortiront jamais du système.
 
 Cet article offre une vue complète de l’utilisation de l’authentification de l’autorité de certification X.509, de la configuration de la chaîne logistique à la connexion des appareils, tout en exploitant un exemple réel pour rendre la présentation plus claire.
+
+Vous pouvez également utiliser des groupes d’inscription avec le Service IoT Hub Device Provisioning (DPS) Azure pour gérer l’approvisionnement des appareils aux hubs. Pour plus d’informations sur l’utilisation de DPS pour approvisionner des appareils de certificat X.509, consultez [Didacticiel : Provisionner plusieurs appareils X.509 à l’aide de groupes d’inscriptions](../iot-dps/tutorial-custom-hsm-enrollment-group-x509.md).
 
 ## <a name="introduction"></a>Introduction
 
@@ -63,17 +67,17 @@ La réalisation de ces étapes diffère en fonction des prestataires de services
 
 ### <a name="purchasing-an-x509-ca-certificate"></a>Achat d’un certificat de l’autorité de certification X.509
 
-En achetant un certificat d’autorité de certification, une autorité de certification racine connue agit comme un tiers de confiance pour garantir la légitimité de vos appareils IoT lors de leur connexion. L’entreprise X optera pour cette option si elle souhaite que ses widgets Smart-X interagissent avec des produits ou services tiers après la connexion initiale à IoT Hub.
+En achetant un certificat d’autorité de certification, une autorité de certification racine connue agit comme un tiers de confiance pour garantir la légitimité de vos appareils IoT lors de leur connexion. L'entreprise X optera pour cette option si elle souhaite que ses widgets Smart-X interagissent avec des produits ou services tiers après la connexion initiale à IoT Hub.
 
 Pour acheter un certificat de l’autorité de certification X.509, l’entreprise X choisira un prestataire de services de certificats racine. Pour trouver de bons prospects, il suffit de rechercher « Autorité de certification racine » sur Internet. L’autorité de certification racine aidera l’entreprise X à créer la paire de clés publique/privée et à générer une demande de signature de certificat pour ses services. Une demande de signature de certificat correspond au processus formel de demande de certificat auprès d’une autorité de certification. Le résultat de cet achat est un certificat à utiliser comme certificat d’autorité. Étant donné l’omniprésence des certificats X.509, le certificat aura certainement été correctement mis en forme conformément à la norme RFC 5280 de l’IETF.
 
 ### <a name="creating-a-self-signed-x509-ca-certificate"></a>Création d’un certificat de l’autorité de certification X.509 auto-signé
 
-Le processus de création d’un certificat de l’autorité de certification X.509 auto-signé est similaire au processus d’achat, hormis qu’un signataire tiers, comme l’autorité de certification racine, est impliqué. Dans notre exemple, l’entreprise X signe son certificat d’autorité à la place d’une autorité de certification racine. L’entreprise X peut choisir cette option à des fins de test, jusqu'à ce qu’elle soit prête à acheter un certificat d’autorité. L’entreprise X peut également utiliser un certificat de l’autorité de certification X.509 auto-signé en production, si le widget Smart-X n’est pas destiné à se connecter à des services tiers en dehors d’IoT Hub.
+Le processus de création d'un certificat d'autorité de certification X.509 auto-signé est similaire au processus d'achat, hormis qu'un signataire tiers, comme l'autorité de certification racine, est impliqué. Dans notre exemple, l’entreprise X signe son certificat d’autorité à la place d’une autorité de certification racine. L’entreprise X peut choisir cette option à des fins de test, jusqu'à ce qu’elle soit prête à acheter un certificat d’autorité. L'entreprise X peut également utiliser un certificat d'autorité de certification X.509 auto-signé en production, si le widget Smart-X n'est pas destiné à se connecter à des services tiers en dehors d'IoT Hub.
 
 ## <a name="register-the-x509-certificate-to-iot-hub"></a>Inscrire le certificat X.509 dans IoT Hub
 
-L’entreprise X doit inscrire l’autorité de certification X.509 dans IoT Hub, où elle servira à authentifier les widgets Smart-X lors de leur connexion. Il s’agit d’un processus unique qui permet d’authentifier et de gérer autant de widgets Smart-X que vous le souhaitez. Ce processus est unique en raison de la relation un-à-plusieurs entre le certificat d’autorité et les appareils. Il constitue également l’un des principaux avantages de l’utilisation de la méthode d’authentification via l’autorité de certification X.509. L’autre solution consiste à télécharger les empreintes de chaque certificat pour chaque widget Smart-X, ce qui augmente les coûts d’exploitation.
+L’entreprise X doit inscrire l’autorité de certification X.509 dans IoT Hub, où elle servira à authentifier les widgets Smart-X lors de leur connexion. Il s’agit d’un processus unique qui permet d’authentifier et de gérer autant de widgets Smart-X que vous le souhaitez. Il s’agit d’un processus unique en raison d’une relation un-à-plusieurs entre le certificat de l’autorité de certification et les certificats de l’appareil signés par le certificat de l’autorité de certification ou un certificat intermédiaire. Cette relation constitue l’un des principaux avantages de l’utilisation de la méthode d’authentification de l’autorité de certification X.509. L’autre solution consiste à télécharger les empreintes de chaque certificat pour chaque widget Smart-X, ce qui augmente les coûts d’exploitation.
 
 L’inscription du certificat de l’autorité de certification X.509 est un processus en deux étapes, qui comprend le chargement du certificat et une preuve de possession du certificat.
 
@@ -85,7 +89,7 @@ Le processus de chargement du certificat de l’autorité de certification X.509
 
 ### <a name="proof-of-possession-of-the-certificate"></a>Preuve de possession du certificat
 
-Le certificat de l’autorité de certification X.509, tout comme n’importe quel certificat numérique, constitue des informations publiques qui sont susceptibles d’être volées. Par conséquent, une personne malveillante peut intercepter un certificat et essayer de le charger comme s’il s’agissait du sien. Dans notre exemple, IoT Hub veut s’assurer que le certificat de l’autorité de certification que charge l’entreprise X appartient réellement à l’entreprise X. Pour ce faire, IoT Hub demande à l’entreprise X de prouver qu’elle possède effectivement le certificat via un [flux de preuve de possession](https://tools.ietf.org/html/rfc5280#section-3.1). Le flux de preuve de possession implique qu’IoT Hub génère un numéro aléatoire que l’entreprise X doit signer à l’aide de sa clé privée. Si l’entreprise X a bien suivi les meilleures pratiques de l’infrastructure de clé publique et a correctement protégé sa clé privée, alors elle est la seule à pouvoir répondre correctement au défi de la preuve de possession. IoT Hub poursuit l’inscription du certificat de l’autorité de certification X.509 en cas de réponse correcte au défi de la preuve de possession.
+Le certificat de l’autorité de certification X.509, tout comme n’importe quel certificat numérique, constitue des informations publiques qui sont susceptibles d’être volées. Par conséquent, une personne malveillante peut intercepter un certificat et essayer de le charger comme s’il s’agissait du sien. Dans notre exemple, IoT Hub veut s’assurer que le certificat de l’autorité de certification que charge l’entreprise X appartient réellement à l’entreprise X. Pour ce faire, IoT Hub demande à l'entreprise X de prouver qu'elle possède effectivement le certificat via un [flux de preuve de possession](https://tools.ietf.org/html/rfc5280#section-3.1). Le flux de preuve de possession implique qu’IoT Hub génère un numéro aléatoire que l’entreprise X doit signer à l’aide de sa clé privée. Si l’entreprise X a bien suivi les meilleures pratiques de l’infrastructure de clé publique et a correctement protégé sa clé privée, alors elle est la seule à pouvoir répondre correctement au défi de la preuve de possession. IoT Hub poursuit l’inscription du certificat de l’autorité de certification X.509 en cas de réponse correcte au défi de la preuve de possession.
 
 En cas de réponse correcte d’IoT Hub au défi de la preuve de possession, l’inscription de l’autorité de certification X.509 est terminée.
 

@@ -1,17 +1,17 @@
 ---
 title: Grouper des machines pour l’évaluation avec Azure Migrate | Microsoft Docs
 description: Explique comment grouper des machines avant d’exécuter une évaluation avec le service Azure Migrate.
-author: rayne-wiselman
-ms.service: azure-migrate
-ms.topic: article
+author: rashi-ms
+ms.author: rajosh
+ms.manager: abhemraj
+ms.topic: how-to
 ms.date: 07/17/2019
-ms.author: hamusa
-ms.openlocfilehash: 13c640d25265b2663520ef7ab203b0b0a33829e2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 364b5949e944a4317aa25f1f1b12545122881cec
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68301702"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96752105"
 ---
 # <a name="create-a-group-for-assessment"></a>Créer un groupe pour l’évaluation
 
@@ -37,17 +37,17 @@ Si vous souhaitez créer un groupe manuellement en dehors de la création d’un
 
 1. Dans le projet Azure Migrate > **Vue d’ensemble**, cliquez sur **Évaluer et migrer des serveurs**. Dans **Azure Migrate : Évaluation de serveur**, cliquez sur **Groupes**
     - Si vous n’avez pas encore ajouté l’outil Azure Migrate : Évaluation de serveur, cliquez pour l’ajouter. [Plus d’informations](how-to-assess.md)
-    - Si vous n’avez pas encore créé de projet Azure Migrate, [cliquez ici pour en savoir plus](how-to-add-tool-first-time.md).
+    - Si vous n’avez pas encore créé de projet Azure Migrate, [cliquez ici pour en savoir plus](./create-manage-projects.md).
 
     ![Sélection de groupes](./media/how-to-create-a-group/select-groups.png)
 
 2. Cliquez sur l’icône **Groupe**.
 3. Dans **Créer un groupe**, spécifiez un nom de groupe et, dans **Nom de l’appliance**, sélectionnez l’appliance Azure Migrate que vous utilisez pour la détection de machines.
-1. Dans la liste de machine, sélectionnez les machines que vous souhaitez ajouter au groupe > **Créer**.
+4. Dans la liste de machine, sélectionnez les machines que vous souhaitez ajouter au groupe > **Créer**.
 
     ![Créer un groupe](./media/how-to-create-a-group/create-group.png)
 
-Vous pouvez maintenant utiliser ce groupe lorsque vous [Créez une évaluation](how-to-create-assessment.md).
+Vous pouvez maintenant utiliser ce groupe lorsque vous [Créez une évaluation de machine virtuelle Azure](how-to-create-assessment.md) ou [une Évaluation Azure VMware Solution (AVS)](how-to-create-azure-vmware-solution-assessment.md). Notez que vous pouvez créer une évaluation AVS sur des groupes avec uniquement des machines virtuelles VMware. 
 
 ## <a name="refine-a-group-with-dependency-mapping"></a>Affiner un groupe avec un mappage des dépendances
 
@@ -89,4 +89,3 @@ Si vous avez déjà [configuré le mappage des dépendances](how-to-create-group
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez comment configurer et utiliser le [mappage des dépendances](how-to-create-group-machine-dependencies.md) pour créer des groupes de confiance élevée.
-

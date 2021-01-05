@@ -6,14 +6,17 @@ ms.service: spring-cloud
 ms.topic: conceptual
 ms.date: 04/10/2020
 ms.author: brendm
-ms.openlocfilehash: 70a9e6392e21422d7513197fbf7a1a75e1f6ab8f
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.custom: devx-track-java
+ms.openlocfilehash: ec87c5523d6f608363ca615037f20365705609df
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82568510"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90892863"
 ---
 # <a name="understanding-app-status-in-azure-spring-cloud"></a>Présentation de l’état des applications dans Azure Spring Cloud
+
+**Cet article s'applique à :** ✔️ Java ✔️ C#
 
 L’interface utilisateur d’Azure Spring Cloud fournit des informations sur l’état des applications en cours d’exécution.  Il existe une option **Applications** pour chaque groupe de ressources dans un abonnement qui affiche l’état général des types d’applications.  Pour chaque type d’application, il y a un affichage des **instances d’application**.
 
@@ -29,20 +32,20 @@ Pour afficher l’état général d’un type d’application, sélectionnez **A
 
 **Les différents états de déploiement signalés sont les suivants :**
 
-| Enum | Définition |
+| Énumération | Définition |
 |:--:|:----------------:|
-| Exécution en cours | Le déploiement DOIT être en cours d’exécution. |
+| En cours d’exécution | Le déploiement DOIT être en cours d’exécution. |
 | Arrêté | Le déploiement DOIT être arrêté. |
 
 **L’état d’approvisionnement n’est accessible qu’à partir de l’interface CLI.  Les différents états signalés sont les suivants :**
 
-| Enum | Définition |
+| Énumération | Définition |
 |:--:|:----------------:|
 | Creating | La ressource est en cours de création. |
 | Mise à jour | La ressource est en cours de mise à jour. |
-| Opération réussie | A approvisionné les ressources et déploie le binaire. |
-| Échec | N’a pas atteint l’objectif *Opération réussie*. |
-| En cours de suppression | La ressource est en cours de suppression. Cela empêche l’opération et la ressource n’est pas disponible dans cet état. |
+| Succès | A approvisionné les ressources et déploie le binaire. |
+| Failed | N’a pas atteint l’objectif *Opération réussie*. |
+| Suppression | La ressource est en cours de suppression. Cela empêche l’opération et la ressource n’est pas disponible dans cet état. |
 
 ## <a name="app-instances-status"></a>État des instances d’application
 
@@ -54,16 +57,16 @@ Pour afficher l’état d’une instance spécifique d’une application déploy
 
 **Les différents états d’instance signalés sont les suivants :**
 
-| Enum | Définition |
+| Énumération | Définition |
 |:--:|:----------------:|
 | Démarrage en cours | Le binaire est correctement déployé sur l’instance donnée. L’instance qui démarre le fichier jar peut échouer, car jar ne peut pas s’exécuter correctement. |
-| Exécution en cours | L’instance fonctionne. |
-| Échec | L’instance d’application n’a pas pu démarrer le binaire de l’utilisateur après plusieurs tentatives. |
+| En cours d’exécution | L’instance fonctionne. |
+| Failed | L’instance d’application n’a pas pu démarrer le binaire de l’utilisateur après plusieurs tentatives. |
 | Fin d’exécution | L’instance d’application est en cours d’arrêt. |
 
 **Les différents états de découverte de l’instance qui sont signalés sont les suivants :**
 
-| Enum | Définition |
+| Énumération | Définition |
 |:--:|:----------------:|
 | UP | L’instance d’application est inscrite auprès d’Eureka et prête à recevoir le trafic. |
 | OUT_OF_SERVICE | L’instance d’application est inscrite auprès d’Eureka et peut recevoir le trafic, mais s’arrête pour le trafic intentionnellement. |
@@ -71,4 +74,4 @@ Pour afficher l’état d’une instance spécifique d’une application déploy
 
 
 ## <a name="see-also"></a>Voir aussi
-* [Préparer une application Spring Java pour le déploiement dans Azure Spring Cloud](spring-cloud-tutorial-prepare-app-deployment.md)
+* [Préparer le déploiement d’une application Spring ou Steeltoe dans Azure Spring Cloud](spring-cloud-tutorial-prepare-app-deployment.md)

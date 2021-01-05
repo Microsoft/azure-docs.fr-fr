@@ -4,33 +4,33 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 03/05/2019
 ms.author: cshoe
-ms.openlocfilehash: e055f2d7b98df9357ecdee5e044305e35935682e
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 0cd514c852e13b83a679821ca2d940e4ed112bd8
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791632"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95560310"
 ---
 Utilisez le déclencheur de fonction pour répondre à un événement envoyé à un flux d’événements d’un hub d’événements. Vous devez disposer de l’accès en lecture au hub d’événements sous-jacent pour configurer le déclencheur. Une fois la fonction déclenchée, le message passé à la fonction est du type chaîne.
 
 ## <a name="scaling"></a>Mise à l'échelle
 
-Chaque instance d’une fonction déclenchée par un événement est sauvegardée par une seule instance [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor). Le déclencheur (alimenté par Event Hubs) garantit qu’une seule instance [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) peut obtenir un bail sur une partition donnée.
+Chaque instance d’une fonction déclenchée par un événement est sauvegardée par une seule instance [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor). Le déclencheur (alimenté par Event Hubs) garantit qu’une seule instance [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor) peut obtenir un bail sur une partition donnée.
 
 Prenons, par exemple, le hub d’événements suivant :
 
 * 10 partitions
 * 1 000 événements répartis uniformément sur toutes les partitions, avec 100 messages dans chaque partition
 
-Lorsque votre fonction est activée pour la première fois, il n’existe qu’une seule instance de cette fonction. Nous appellerons la première instance de fonction `Function_0`. La fonction `Function_0` comprend une seule instance de [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) qui détient un bail sur les dix partitions. Cette instance lit les événements des partitions 0 à 9. À partir de là, l’un des événements suivants se produit :
+Lorsque votre fonction est activée pour la première fois, il n’existe qu’une seule instance de cette fonction. Nous appellerons la première instance de fonction `Function_0`. La fonction `Function_0` comprend une seule instance de [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor) qui détient un bail sur les dix partitions. Cette instance lit les événements des partitions 0 à 9. À partir de là, l’un des événements suivants se produit :
 
 * **Les nouvelles instances de fonction ne sont pas nécessaires** : `Function_0` est capable de traiter l’ensemble des 1 000 événements avant que la logique de mise à l’échelle Functions ne prenne effet. Dans ce cas, l’intégralité des 1 000 messages sont traités par `Function_0`.
 
-* **Une instance de fonction supplémentaire est ajoutée** : la logique de mise à l’échelle Functions détermine que si `Function_0` a plus de messages qu’elle ne peut en traiter, une instance d’application de fonction (`Function_1`) est ajoutée. Cette nouvelle fonction a également une instance associée de [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor). Comme les Event Hubs sous-jacents détectent qu’une nouvelle instance d’hôte tente de lire des messages, ils équilibrent la charge des partitions entre les instances d’hôte. Par exemple, les partitions 0 à 4 peuvent être affectées à `Function_0`, et les partitions 5 à 9 à `Function_1`.
+* **Une instance de fonction supplémentaire est ajoutée** : la logique de mise à l’échelle Functions détermine que si `Function_0` a plus de messages qu’elle ne peut en traiter, une instance d’application de fonction (`Function_1`) est ajoutée. Cette nouvelle fonction a également une instance associée de [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor). Comme les Event Hubs sous-jacents détectent qu’une nouvelle instance d’hôte tente de lire des messages, ils équilibrent la charge des partitions entre les instances d’hôte. Par exemple, les partitions 0 à 4 peuvent être affectées à `Function_0`, et les partitions 5 à 9 à `Function_1`.
 
 * **N instances de fonction supplémentaires sont ajoutées** : Si la logique de mise à l’échelle de Functions détermine que `Function_0` et `Function_1` ont plus de messages qu’elles ne peuvent en traiter, de nouvelles instances d’application de fonction `Functions_N` sont créées.  Des applications sont créées jusqu’au point où `N` est supérieur au nombre de partitions de hub d’événements. Dans notre exemple, Event Hubs équilibre la charge des partitions, en l’occurrence, sur les instances `Function_0`...`Functions_9`.
 
-Au fur et à mesure de la mise à l’échelle, `N` instances est un nombre supérieur à celui des partitions du Event Hub. Ce modèle est utilisé pour garantir que les instances [EventProcessorHost](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.processor) sont toujours disponibles pour obtenir des verrous sur les partitions, à mesure que celles-ci sont mises à disposition par les autres instances. Vous n’êtes facturé que pour les ressources utilisées lors de l’exécution de l’instance de la fonction. En d’autres mots, vous n’êtes pas facturé pour cet approvisionnement excessif.
+Au fur et à mesure de la mise à l’échelle, `N` instances est un nombre supérieur à celui des partitions du Event Hub. Ce modèle est utilisé pour garantir que les instances [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor) sont toujours disponibles pour obtenir des verrous sur les partitions, à mesure que celles-ci sont mises à disposition par les autres instances. Vous n’êtes facturé que pour les ressources utilisées lors de l’exécution de l’instance de la fonction. En d’autres mots, vous n’êtes pas facturé pour cet approvisionnement excessif.
 
 Quand toutes les exécutions de fonction se terminent (avec ou sans erreurs), des points de contrôle sont ajoutés au compte de stockage associé. Une fois les points de contrôle correctement créés, les 1 000 messages ne sont plus jamais récupérés.
 
@@ -285,6 +285,10 @@ def main(event: func.EventHubEvent):
     logging.info('  EnqueuedTimeUtc =', event.enqueued_time)
     logging.info('  SequenceNumber =', event.sequence_number)
     logging.info('  Offset =', event.offset)
+
+    # Metadata
+    for key in event.metadata:
+        logging.info(f'Metadata: {key} = ', event.metadata[key])
 ```
 
 # <a name="java"></a>[Java](#tab/java)
@@ -339,7 +343,7 @@ Les attributs ne sont pas pris en charge par Python.
 
 # <a name="java"></a>[Java](#tab/java)
 
-À partir de la [bibliothèque du runtime des fonctions](https://docs.microsoft.com/java/api/overview/azure/functions/runtime) Java, utilisez l’annotation [EventHubTrigger](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.eventhubtrigger) sur les paramètres dont la valeur proviendrait d’Event Hub. Les paramètres ayant ces annotations entraînent l’exécution de la fonction quand un événement se produit. Vous pouvez utiliser cette annotation avec des types Java natifs, des objets POJO ou des valeurs Null à l’aide de `Optional<T>`.
+À partir de la [bibliothèque du runtime des fonctions](/java/api/overview/azure/functions/runtime) Java, utilisez l’annotation [EventHubTrigger](/java/api/com.microsoft.azure.functions.annotation.eventhubtrigger) sur les paramètres dont la valeur proviendrait d’Event Hub. Les paramètres ayant ces annotations entraînent l’exécution de la fonction quand un événement se produit. Vous pouvez utiliser cette annotation avec des types Java natifs, des objets POJO ou des valeurs Null à l’aide de `Optional<T>`.
 
 ---
 
@@ -353,20 +357,20 @@ Le tableau suivant décrit les propriétés de configuration de liaison que vous
 |**direction** | n/a | Cette propriété doit être définie sur `in`. Cette propriété est définie automatiquement lorsque vous créez le déclencheur dans le portail Azure. |
 |**name** | n/a | Nom de la variable qui représente l’élément d’événement dans le code de la fonction. |
 |**path** |**EventHubName** | Functions 1.x uniquement. Nom du hub d’événements. Lorsque le nom d’Event Hub est également présent dans la chaîne de connexion, sa valeur remplace cette propriété lors de l’exécution. |
-|**eventHubName** |**EventHubName** | Functions 2.x et versions ultérieures. Nom du hub d’événements. Lorsque le nom d’Event Hub est également présent dans la chaîne de connexion, sa valeur remplace cette propriété lors de l’exécution. Peut être référencé via les paramètres d’application %eventHubName% |
+|**eventHubName** |**EventHubName** | Functions 2.x et versions ultérieures. Nom du hub d’événements. Lorsque le nom d’Event Hub est également présent dans la chaîne de connexion, sa valeur remplace cette propriété lors de l’exécution. Peut être référencé via les [paramètres d’application](../articles/azure-functions/functions-bindings-expressions-patterns.md#binding-expressions---app-settings) `%eventHubName%` |
 |**consumerGroup** |**ConsumerGroup** | Propriété facultative qui définit le [groupe de consommateurs](../articles/event-hubs/event-hubs-features.md#event-consumers) utilisé pour l’abonnement à des événements dans le hub. En cas d’omission, le groupe de consommateurs `$Default` est utilisé. |
-|**cardinalité** | n/a | Pour JavaScript. Définissez sur `many` afin d’activer le traitement par lot.  Si omis ou défini sur `one`, un message unique est transmis à la fonction. |
+|**cardinalité** | n/a | Utilisé pour toutes les autres langages non-C#. Définissez sur `many` afin d’activer le traitement par lot.  Si omis ou défini sur `one`, un message unique est transmis à la fonction.<br><br>En C#, cette propriété est affectée automatiquement chaque fois que le déclencheur a un tableau pour le type.|
 |**connection** |**Connection** | Le nom d’un paramètre d’application qui contient la chaîne de connexion à l’espace de noms du hub d’événements. Copiez cette chaîne de connexion en cliquant sur le bouton **Informations de connexion** pour [l’espace de noms](../articles/event-hubs/event-hubs-create.md#create-an-event-hubs-namespace), et non pour le hub d’événements lui-même. Cette chaîne de connexion doit avoir au moins des droits de lecture pour activer le déclencheur.|
 
 [!INCLUDE [app settings to local.settings.json](../articles/azure-functions/../../includes/functions-app-settings-local.md)]
 
 ## <a name="event-metadata"></a>Métadonnées d’événement
 
-Le déclencheur Event Hubs fournit plusieurs [propriétés de métadonnées](../articles/azure-functions/./functions-bindings-expressions-patterns.md). Les propriétés de métadonnées peuvent être utilisées dans le cadre d’expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Les propriétés proviennent de la classe [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata).
+Le déclencheur Event Hubs fournit plusieurs [propriétés de métadonnées](../articles/azure-functions/./functions-bindings-expressions-patterns.md). Les propriétés de métadonnées peuvent être utilisées dans le cadre d’expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Les propriétés proviennent de la classe [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata).
 
 |Propriété|Type|Description|
 |--------|----|-----------|
-|`PartitionContext`|[PartitionContext](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.partitioncontext)|Instance `PartitionContext`.|
+|`PartitionContext`|[PartitionContext](/dotnet/api/microsoft.servicebus.messaging.partitioncontext)|Instance `PartitionContext`.|
 |`EnqueuedTimeUtc`|`DateTime`|Le temps de file d’attente en UTC.|
 |`Offset`|`string`|Le décalage des données par rapport au flux de données de la partition Event Hub. Le décalage est une marque ou un identificateur pour un événement au sein du flux Event Hubs. L’identificateur est unique au sein d’une partition du flux Event Hubs.|
 |`PartitionKey`|`string`|La partition vers laquelle les données d’événement doivent être envoyées.|

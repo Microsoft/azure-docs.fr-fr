@@ -1,6 +1,6 @@
 ---
 title: Dépannage d’appliance virtuelle réseau dans Azure | Microsoft Docs
-description: Découvrez comment dépanner une appliance virtuelle réseau dans Azure.
+description: Résolvez les problèmes liés aux appliances virtuelles réseau (NVA) dans Azure et validez les exigences de base de la plateforme Azure pour les configurations NVA.
 services: virtual-network
 documentationcenter: na
 author: genlin
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/26/2018
 ms.author: genli
-ms.openlocfilehash: b998043bc7d896989590ac21db5f309a81cc02bd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3a8982b5626e3c19dbd49a3d2e20542d44b1a1da
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71056829"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368585"
 ---
 # <a name="network-virtual-appliance-issues-in-azure"></a>Problèmes d’appliance virtuelle réseau dans Azure
 
@@ -71,7 +71,7 @@ Utiliser PowerShell
    Get-AzNetworkInterface -ResourceGroupName <ResourceGroupName> -Name <NicName>
    ```
 
-3. Vérifiez la propriété **EnableIPForwarding**.
+3. Vérifiez la propriété **EnableIPForwarding** .
 4. Si le transfert IP n’est pas activé, exécutez les commandes suivantes pour l’activer :
 
    ```powershell
@@ -87,15 +87,15 @@ Utiliser PowerShell
 
 **Vérifier si le trafic peut être routé vers l’appliance virtuelle réseau**
 
-1. Sur [le portail Azure](https://portal.azure.com), ouvrez **Network Watcher**, puis sélectionnez **Tronçon suivant**.
+1. Sur [le portail Azure](https://portal.azure.com), ouvrez **Network Watcher** , puis sélectionnez **Tronçon suivant** .
 2. Spécifiez une machine virtuelle qui est configurée pour rediriger le trafic vers l’appliance virtuelle réseau, et une adresse IP de destination à laquelle afficher le tronçon suivant. 
-3. Si l’appliance virtuelle réseau n’est pas répertoriée comme le **tronçon suivant**, vérifiez et mettez à jour les tables de routage Azure.
+3. Si l’appliance virtuelle réseau n’est pas répertoriée comme le **tronçon suivant** , vérifiez et mettez à jour les tables de routage Azure.
 
 **Vérifier si le trafic peut atteindre l’appliance virtuelle réseau**
 
-1. Dans le [portail Azure](https://portal.azure.com), ouvrez **Network Watcher**, puis sélectionnez **Vérification du flux IP**. 
+1. Dans le [portail Azure](https://portal.azure.com), ouvrez **Network Watcher** , puis sélectionnez **Vérification du flux IP** . 
 2. Spécifiez la machine virtuelle et l’adresse IP de l’appliance virtuelle réseau, puis vérifiez si le trafic est bloqué par des groupes de sécurité réseau (NSG).
-3. S’il existe une règle de groupe de sécurité réseau qui bloque le trafic, localisez le groupe de sécurité réseau dans les règles de **sécurité efficace**, puis mettez-le à jour pour autoriser le passage du trafic. Réexécutez ensuite la **Vérification du flux IP** et utilisez la **Résolution des problèmes de connexion** pour tester les communications TCP entre la machine virtuelle et votre adresse IP interne ou externe.
+3. S’il existe une règle de groupe de sécurité réseau qui bloque le trafic, localisez le groupe de sécurité réseau dans les règles de **sécurité efficace** , puis mettez-le à jour pour autoriser le passage du trafic. Réexécutez ensuite la **Vérification du flux IP** et utilisez la **Résolution des problèmes de connexion** pour tester les communications TCP entre la machine virtuelle et votre adresse IP interne ou externe.
 
 **Vérifier si l’appliance virtuelle réseau et les machines virtuelles écoutent le trafic attendu**
 
@@ -103,11 +103,15 @@ Utiliser PowerShell
 
     Pour Windows :
 
-        netstat -an
+    ```console
+   netstat -an
+    ```
 
     Pour Linux :
 
-        netstat -an | grep -i listen
+    ```console
+   netstat -an | grep -i listen
+    ```
 2. Si vous ne voyez pas le port TCP utilisé par le logiciel de l’appliance virtuelle réseau répertorié dans les résultats, vous devez configurer l’application sur l’appliance virtuelle réseau et la machine virtuelle pour écouter le trafic qui atteint ces ports et y répondre. [Contactez le fournisseur de l’appliance virtuelle réseau au besoin](https://support.microsoft.com/help/2984655/support-for-azure-market-place-for-virtual-machines).
 
 ## <a name="check-nva-performance"></a>Vérifier les performances de l’appliance virtuelle réseau
@@ -123,7 +127,7 @@ Si l’utilisation du réseau de machines virtuelles présente des pics ou des p
 ## <a name="advanced-network-administrator-troubleshooting"></a>Dépannage d’administrateur réseau avancé
 
 ### <a name="capture-network-trace"></a>Capturer la trace réseau
-Capturez une trace réseau simultanée sur la machine virtuelle source, l’appliance virtuelle réseau et la machine virtuelle de destination pendant que vous exécutez **[PsPing](https://docs.microsoft.com/sysinternals/downloads/psping)** ou **Nmap**, puis arrêtez la capture de la trace.
+Capturez une trace réseau simultanée sur la machine virtuelle source, l’appliance virtuelle réseau et la machine virtuelle de destination pendant que vous exécutez **[PsPing](https://docs.microsoft.com/sysinternals/downloads/psping)** ou **Nmap** , puis arrêtez la capture de la trace.
 
 1. Pour capturer une trace réseau simultanée, exécutez la commande suivante :
 
@@ -136,7 +140,7 @@ Capturez une trace réseau simultanée sur la machine virtuelle source, l’appl
    sudo tcpdump -s0 -i eth0 -X -w vmtrace.cap
 
 2. Utilisez **PsPing** ou **Nmap** à partir de la machine virtuelle source vers la machine virtuelle de destination (par exemple, `PsPing 10.0.0.4:80` ou `Nmap -p 80 10.0.0.4`).
-3. Ouvrez la trace réseau à partir de la machine virtuelle de destination en utilisant le [Moniteur réseau](https://www.microsoft.com/download/details.aspx?id=4865) ou la commande tcpdump. Appliquez un filtre d’affichage pour l’adresse IP de la machine virtuelle Source à partir de laquelle vous avez exécuté **PsPing** ou **Nmap**, par exemple, `IPv4.address==10.0.0.4 (Windows netmon)` ou `tcpdump -nn -r vmtrace.cap src or dst host 10.0.0.4` (Linux).
+3. Ouvrez la trace réseau à partir de la machine virtuelle de destination en utilisant le [Moniteur réseau](https://download.cnet.com/s/network-monitor) ou la commande tcpdump. Appliquez un filtre d’affichage pour l’adresse IP de la machine virtuelle Source à partir de laquelle vous avez exécuté **PsPing** ou **Nmap** , par exemple, `IPv4.address==10.0.0.4 (Windows netmon)` ou `tcpdump -nn -r vmtrace.cap src or dst host 10.0.0.4` (Linux).
 
 ### <a name="analyze-traces"></a>Analyser les traces
 

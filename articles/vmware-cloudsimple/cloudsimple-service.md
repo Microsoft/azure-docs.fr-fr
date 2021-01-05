@@ -1,6 +1,6 @@
 ---
 title: Azure VMware Solution by CloudSimple - Service
-description: Fournit une vue d’ensemble des concepts et du service CloudSimple.
+description: Découvrez le service CloudSimple avec sa présentation. En créant ce service, vous pouvez acheter, réserver des nœuds et créer des clouds privés.
 author: sharaths-cs
 ms.author: b-shsury
 ms.date: 08/20/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: d128a248c2e6e1e2e35e3b633975ba081e77f028
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec77209c0995bf5aec0957c8d4d2269f27d743bc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024949"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88142126"
 ---
 # <a name="cloudsimple-service-overview"></a>Vue d’ensemble du service CloudSimple
 

@@ -3,13 +3,13 @@ title: Intégrer Gestion des API à Service Fabric dans Azure
 description: Découvrez comment démarrer rapidement avec Gestion des API Azure et comment router le trafic vers un service backend dans Service Fabric.
 ms.topic: conceptual
 ms.date: 07/10/2019
-ms.custom: mvc
-ms.openlocfilehash: 7bd781a21a32ca29fe3f5dd2f4432dbf1e5ca411
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: b89204e2df5c8e79200b780de38d06b1a93c1fa3
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80292139"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97702189"
 ---
 # <a name="integrate-api-management-with-service-fabric-in-azure"></a>Intégrer Gestion des API à Service Fabric dans Azure
 
@@ -30,7 +30,7 @@ Cet article vous montre comment configurer [Gestion des API Azure](../api-manage
 Avant de commencer :
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
-* Installez [Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps) ou [Azure CLI](/cli/azure/install-azure-cli).
+* Installez [Azure PowerShell](/powershell/azure/install-az-ps) ou [Azure CLI](/cli/azure/install-azure-cli).
 * Créez un [cluster Windows](service-fabric-tutorial-create-vnet-and-windows-cluster.md) sécurisé dans un groupe de sécurité réseau.
 * Si vous déployez un cluster Windows, configurez un environnement de développement Windows. Installez les charges de travail [Visual Studio 2019](https://www.visualstudio.com) et le **développement Azure**, **ASP.NET et le développement web**, ainsi que **Développement multiplateforme .NET Core**.  Ensuite, configurez un [environnement de développement .NET](service-fabric-get-started.md).
 
@@ -151,9 +151,9 @@ Pour ajouter une opération d’API frontale, renseignez les valeurs suivantes :
 
 ### <a name="microsoftapimanagementserviceapispolicies"></a>Microsoft.ApiManagement/service/apis/policies
 
-[Microsoft.ApiManagement/service/apis/policies](/azure/templates/microsoft.apimanagement/service/apis/policies) crée une stratégie de principal qui lie tout ensemble. Elle permet de configurer le service principal Service Fabric vers lequel les requêtes sont acheminées. Vous pouvez appliquer cette stratégie à une opération d’API.  Pour plus d’informations, voir [Vue d’ensemble des stratégies](/azure/api-management/api-management-howto-policies).
+[Microsoft.ApiManagement/service/apis/policies](/azure/templates/microsoft.apimanagement/service/apis/policies) crée une stratégie de principal qui lie tout ensemble. Elle permet de configurer le service principal Service Fabric vers lequel les requêtes sont acheminées. Vous pouvez appliquer cette stratégie à une opération d’API.  Pour plus d’informations, voir [Vue d’ensemble des stratégies](../api-management/api-management-howto-policies.md).
 
-La [configuration du principal de Service Fabric](/azure/api-management/api-management-transformation-policies#SetBackendService) fournit les contrôles de routage de requête suivants :
+La [configuration du principal de Service Fabric](../api-management/api-management-transformation-policies.md#SetBackendService) fournit les contrôles de routage de requête suivants :
 
 * Sélection d’une instance de service en spécifiant un nom d’instance de service Service Fabric, codé en dur (par exemple, `"fabric:/myapp/myservice"`) ou généré à partir de la requête HTTP (par exemple, `"fabric:/myapp/users/" + context.Request.MatchedParameters["name"]`).
 * Résolution de partition en générant une clé de partition à l’aide d’un modèle de partitionnement de Service Fabric.
@@ -180,7 +180,7 @@ La [configuration du principal de Service Fabric](/azure/api-management/api-mana
 </policies>
 ```
 
-Pour un ensemble complet d’attributs de stratégie de principal de Service Fabric, reportez-vous à la [documentation sur le principal de Gestion des API](https://docs.microsoft.com/azure/api-management/api-management-transformation-policies#SetBackendService)
+Pour un ensemble complet d’attributs de stratégie de principal de Service Fabric, reportez-vous à la [documentation sur le principal de Gestion des API](../api-management/api-management-transformation-policies.md#SetBackendService)
 
 ## <a name="set-parameters-and-deploy-api-management"></a>Définir les paramètres et déployer le service Gestion des API
 
@@ -243,9 +243,9 @@ New-AzResourceGroupDeployment -ResourceGroupName $groupname -TemplateFile "$temp
 
 ```azurecli
 ResourceGroupName="sfclustertutorialgroup"
-az group deployment create --name ApiMgmtNetworkDeployment --resource-group $ResourceGroupName --template-file network-apim.json --parameters @network-apim.parameters.json
+az deployment group create --name ApiMgmtNetworkDeployment --resource-group $ResourceGroupName --template-file network-apim.json --parameters @network-apim.parameters.json
 
-az group deployment create --name ApiMgmtDeployment --resource-group $ResourceGroupName --template-file apim.json --parameters @apim.parameters.json
+az deployment group create --name ApiMgmtDeployment --resource-group $ResourceGroupName --template-file apim.json --parameters @apim.parameters.json
 ```
 
 ## <a name="test-it"></a>Testez-le
@@ -291,9 +291,9 @@ az group delete --name $ResourceGroupName
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez plus d’informations sur [Gestion des API](/azure/api-management/import-and-publish).
+Découvrez plus d’informations sur [Gestion des API](../api-management/import-and-publish.md).
 
-[azure-powershell]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
+[azure-powershell]: /powershell/azure/
 
 [apim-arm]:https://github.com/Azure/service-fabric-scripts-and-templates/blob/master/templates/service-integration/apim.json
 [apim-parameters-arm]:https://github.com/Azure/service-fabric-scripts-and-templates/blob/master/templates/service-integration/apim.parameters.json

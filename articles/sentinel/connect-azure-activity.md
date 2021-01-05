@@ -1,6 +1,6 @@
 ---
 title: Connecter des données d’activité Azure à Azure Sentinel | Microsoft Docs
-description: Découvrez comment connecter des données d’activité Azure à Azure Sentinel.
+description: Diffusez des journaux d’activité Azure dans Azure Sentinel en un seul clic. Le journal d’activité enregistre et affiche les événements au niveau de l’abonnement dans Azure.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/22/2020
 ms.author: yelevin
-ms.openlocfilehash: 82dfcaf3394703aae531c828a1b96ad290bab798
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 88f363406ec40dfa439a52ad351501d1c64dce95
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80124987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85564491"
 ---
 # <a name="connect-data-from-azure-activity-log"></a>Connecter des données à partir du journal d’activité Azure
 
@@ -46,4 +46,4 @@ Vous pouvez diffuser des journaux dans Azure Sentinel en un seul clic à partir
 ## <a name="next-steps"></a>Étapes suivantes
 Dans ce document, vous avez appris à connecter le journal d’activité Azure à Azure Sentinel. Pour en savoir plus sur Azure Sentinel, voir les articles suivants :
 - Découvrez comment [avoir une visibilité sur vos données et les menaces potentielles](quickstart-get-visibility.md).
-- Prise en main de la détection des menaces avec Azure Sentinel à l’aide de règles [intégrées](tutorial-detect-threats-built-in.md) ou [personnalisées](tutorial-detect-threats-custom.md).
+- Commencez à détecter les menaces avec Azure Sentinel à l’aide de règles [intégrées](tutorial-detect-threats-built-in.md) ou [personnalisées](tutorial-detect-threats-custom.md).

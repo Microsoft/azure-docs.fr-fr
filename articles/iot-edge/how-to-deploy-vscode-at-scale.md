@@ -9,16 +9,16 @@ ms.date: 1/8/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 92540c57179ae0198f78b588681167fe48097362
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7f6e90edc0503326dc9dbb06abfcf59fa2d51e1e
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82134037"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92043814"
 ---
 # <a name="deploy-iot-edge-modules-at-scale-using-visual-studio-code"></a>Déployer des modules IoT Edge à l’échelle à l’aide de Visual Studio Code
 
-Vous pouvez créer un **déploiement automatique IoT Edge** à l’aide de Visual Studio Code pour gérer les déploiements en cours de plusieurs appareils à la fois. Les déploiements automatiques IoT Edge font partie de la fonctionnalité [Gestion automatique des appareils](/azure/iot-hub/iot-hub-automatic-device-management) d’IoT Hub. Les déploiements sont des processus dynamiques qui vous permettent de déployer plusieurs modules sur plusieurs appareils. Vous pouvez également suivre l’état et l’intégrité des modules et apporter des modifications le cas échéant.
+Vous pouvez créer un **déploiement automatique IoT Edge** à l’aide de Visual Studio Code pour gérer les déploiements en cours de plusieurs appareils à la fois. Les déploiements automatiques IoT Edge font partie de la fonctionnalité [Gestion automatique des appareils](../iot-hub/iot-hub-automatic-device-management.md) d’IoT Hub. Les déploiements sont des processus dynamiques qui vous permettent de déployer plusieurs modules sur plusieurs appareils. Vous pouvez également suivre l’état et l’intégrité des modules et apporter des modifications le cas échéant.
 
 Pour plus d’informations, consultez [Comprendre les déploiements automatiques IoT Edge pour un seul ou de nombreux appareils](module-deployment-monitoring.md).
 
@@ -27,7 +27,10 @@ Dans cet article, vous configurez Visual Studio Code et l’extension IoT. Vous 
 ## <a name="prerequisites"></a>Prérequis
 
 * Un [hub IoT](../iot-hub/iot-hub-create-through-portal.md) dans votre abonnement Azure.
-* Un [appareil IoT Edge](how-to-register-device.md#register-with-visual-studio-code) avec le runtime IoT Edge installé.
+* Un ou plusieurs appareils IoT Edge.
+
+  Si vous n’avez aucun appareil IoT Edge configuré, vous pouvez en créer un sur une machine virtuelle Azure. Suivez les étapes décrites dans l’un des articles de démarrage rapide pour [Créer un appareil Linux virtuel](quickstart-linux.md) ou [Créer un appareil Windows virtuel](quickstart.md).
+
 * [Visual Studio Code](https://code.visualstudio.com/).
 * [Outils Azure IoT](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools#overview) pour Visual Studio Code.
 
@@ -57,13 +60,16 @@ Pour déployer des modules à l’aide de Visual Studio Code, enregistrez locale
 
 Par exemple, voici un manifeste de déploiement de base comportant un seul module :
 
+>[!NOTE]
+>Cet exemple de manifeste de déploiement utilise la version de schéma 1.1 pour l’agent et le hub IoT Edge. La version de schéma 1.1 a été publiée avec IoT Edge version 1.0.10 ; elle fournit des fonctionnalités telles que l’ordre de démarrage des modules et la hiérarchisation des routes.
+
 ```json
 {
   "content": {
     "modulesContent": {
       "$edgeAgent": {
         "properties.desired": {
-          "schemaVersion": "1.0",
+          "schemaVersion": "1.1",
           "runtime": {
             "type": "docker",
             "settings": {
@@ -92,7 +98,7 @@ Par exemple, voici un manifeste de déploiement de base comportant un seul modul
           },
           "modules": {
             "SimulatedTemperatureSensor": {
-              "version": "1.0",
+              "version": "1.1",
               "type": "docker",
               "status": "running",
               "restartPolicy": "always",
@@ -223,8 +229,8 @@ Une fois que vous avez configuré le manifeste de déploiement et configuré des
   | Paramètre | Description |
   | --- | --- |
   | ID de déploiement | Nom du déploiement à créer dans le hub IoT. Donnez à votre déploiement un nom unique comportant au plus 128 lettres minuscules. Évitez les espaces et les caractères non valides suivants : `& ^ [ ] { } \ | " < > /`. |
-  | Condition cible | Entrez une condition cible pour déterminer quels sont les appareils ciblés par ce déploiement. La condition est basée sur les balises de jumeau d’appareil ou sur les propriétés signalées du jumeau d’appareil et doit correspondre au format de l’expression. Par exemple, `tags.environment='test' and properties.reported.devicemodel='4000x'`. |
-  | Priority |  Entier positif. Si deux ou plusieurs déploiements sont ciblés sur le même appareil, le déploiement ayant la valeur numérique la plus élevée pour Priority s’applique. |
+  | Condition cible | Entrez une condition cible pour déterminer quels sont les appareils ciblés par ce déploiement.  La condition est basée sur les balises de jumeau d’appareil ou sur les propriétés signalées du jumeau d’appareil et doit correspondre au format de l’expression. Par exemple, `tags.environment='test' and properties.reported.devicemodel='4000x'`.  |
+  | Priorité |  Entier positif. Si deux ou plusieurs déploiements sont ciblés sur le même appareil, le déploiement ayant la valeur numérique la plus élevée pour Priority s’applique. |
 
   Une fois la priorité spécifiée, le terminal doit afficher une sortie similaire à la description suivante :
 

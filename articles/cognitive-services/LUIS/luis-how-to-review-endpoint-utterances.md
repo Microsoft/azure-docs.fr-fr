@@ -3,26 +3,24 @@ title: Passer en revue les énoncés de l’utilisateur – LUIS
 titleSuffix: Azure Cognitive Services
 description: Passez en revue les énoncés capturés par l’apprentissage actif afin de sélectionner l’intention et marquer les entités pour les énoncés du monde réel ; acceptez les modifications, entraînez et publiez.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
-ms.date: 05/07/2020
-ms.author: diberry
-ms.openlocfilehash: c976d3b74badc4eeb5978af352fe425089f2fbfb
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.topic: how-to
+ms.date: 12/08/2020
+ms.openlocfilehash: ea2b44d05d25756a16b6b84f0734966b1f579848
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83584962"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97007600"
 ---
 # <a name="how-to-improve-the-luis-app-by-reviewing-endpoint-utterances"></a>Comment améliorer l’application LUIS en examinant les énoncés de point de terminaison
 
 Le processus de vérification des énoncés de point de terminaison pour obtenir des prédictions correctes est appelé [apprentissage actif](luis-concept-review-endpoint-utterances.md). L’apprentissage actif capture les requêtes de point de terminaison et sélectionne les énoncés de point de terminaison de l’utilisateur dont il n’est pas sûr. Vous passez en revue ces énoncés pour sélectionner l’intention et marquez des entités pour ces énoncés réalistes. Acceptez ces modifications dans vos exemples d’énoncés, puis formez et publiez. Ensuite, LUIS identifie les énoncés de manière plus précise.
 
-## <a name="enable-active-learning"></a>Activer l’apprentissage actif
+## <a name="log-user-queries-to-enable-active-learning"></a>Enregistrer les requêtes utilisateur pour activer l’apprentissage actif
 
 Pour activer l’apprentissage actif, vous devez enregistrer des requêtes utilisateur. Pour cela, vous appelez la [requête de point de terminaison](luis-get-started-create-app.md#query-the-v3-api-prediction-endpoint) avec la valeur et le paramètre querystring `log=true`.
 
@@ -34,7 +32,7 @@ Utilisez le portail LUIS pour créer la requête de point de terminaison correct
 1. Pour la ressource de prédiction assignée, sélectionnez **Change query parameters** (Modifier les paramètres de requête).
 
     > [!div class="mx-imgBorder"]
-    > ![Utilisez le portail LUIS pour enregistrer les journaux, ce qui est nécessaire pour l’apprentissage actif.](./media/luis-tutorial-review-endpoint-utterances/azure-portal-change-query-url-settings.png)
+    > ![Capture d'écran représentant le lien de modification des paramètres de requête.](./media/luis-tutorial-review-endpoint-utterances/azure-portal-change-query-url-settings.png)
 
 1. Activez **Save logs** (Enregistrer les journaux), puis enregistrez en sélectionnant **Done**.
 

@@ -11,12 +11,12 @@ metadata:
   author: gvashishtha
   ms.author: gopalv
   ms.date: 09/13/2019
-  ms.openlocfilehash: 5e1aa239d375b6985d7c2a58086d416f745098b8
-  ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+  ms.openlocfilehash: 6cce3a1c8ec5c330c84009a8c20cbddd769b129c
+  ms.sourcegitcommit: 9889a3983b88222c30275fd0cfe60807976fd65b
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80755092"
+  ms.lasthandoff: 11/20/2020
+  ms.locfileid: "94985771"
 landingContent:
 - title: Bien démarrer avec votre instance Data Science Virtual Machine
   linkLists:
@@ -24,8 +24,6 @@ landingContent:
     links:
     - text: Qu’est-ce que Data Science Virtual Machine ?
       url: overview.md
-    - text: Qu’est-ce que Geo AI Data Science Virtual Machine ?
-      url: geo-ai-dsvm-overview.md
     - text: Outils inclus dans Data Science Virtual Machine
       url: tools-included.md
     - text: Notes de publication
@@ -36,8 +34,6 @@ landingContent:
       url: provision-vm.md
     - text: Créer une instance Ubuntu de Data Science Virtual Machine
       url: dsvm-ubuntu-intro.md
-    - text: Créer une instance Geo AI de Data Science Virtual Machine
-      url: provision-geo-ai-dsvm.md
 - title: Gérer votre instance Data Science Virtual Machine
   linkLists:
   - linkListType: architecture
@@ -56,7 +52,7 @@ landingContent:
   linkLists:
   - linkListType: learn
     links:
-    - text: Azure Machine Learning
-      url: /azure/machine-learning/
+    - text: Instance de calcul Azure Machine Learning
+      url: ../concept-compute-instance.md
     - text: Comparer nos produits ML
-      url: https://docs.microsoft.com/azure/architecture/data-guide/technology-choices/data-science-and-machine-learning?context=azure/machine-learning/studio/context/ml-context
+      url: /azure/architecture/data-guide/technology-choices/data-science-and-machine-learning?context=%2fazure%2fmachine-learning%2fstudio%2fcontext%2fml-context

@@ -8,12 +8,13 @@ ms.date: 03/21/2019
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 1c625e628f53d156ad56a1c69df1c23aec9120ac
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9feef9ec04bcc44bc09d55202b72ada4adc94cf5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76548711"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89017054"
 ---
 # <a name="understand-azure-iot-edge-modules"></a>Présentation des modules Azure IoT Edge
 

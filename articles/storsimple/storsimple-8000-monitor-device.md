@@ -3,15 +3,15 @@ title: Superviser votre appareil StorSimple 8000 Series
 description: Décrit comment utiliser le service StorSimple Device Manager pour surveiller l’utilisation, les performances E/S et l’utilisation de la capacité de l’appareil.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/17/2017
 ms.author: alkohli
-ms.openlocfilehash: b3b77024606c5cdb02ff7bdd357c2d14a2415efa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: de4cae90f2cc1223271672d9fc5ba5b42e4409e4
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76277054"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962431"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-monitor-your-storsimple-device"></a>Utilisation du service StorSimple Device Manager pour surveiller votre appareil StorSimple
 
@@ -77,7 +77,7 @@ Si vous exécutez l’Update 3 ou une version ultérieure, vous pouvez afficher 
 
 Vous pouvez cliquer sur chacun des volumes de la liste et consulter l’utilisation correspondante.
 
-![Utilisation de la capacité principale pour tous les volumes épinglés localement](./media/storsimple-8000-monitor-device/device-primary-storage-usage-by-volume.png)
+![Utilisation de la capacité principale pour tous les volumes épinglés localement 2](./media/storsimple-8000-monitor-device/device-primary-storage-usage-by-volume.png)
 
 ### <a name="cloud-storage-usage"></a>Utilisation du stockage cloud
 Ces graphiques montrent la quantité de stockage cloud utilisé. Les données sont dédupliquées et compressées. Cette quantité inclut les instantanés cloud qui peuvent contenir des données qui ne sont pas reflétées dans un volume principal et qui sont conservées à des fins de rétention obligatoire ou héritée. Vous pouvez comparer les chiffres de la consommation du stockage principal et du stockage cloud pour obtenir une idée du taux de réduction des données, même si le chiffre ne sera pas exact.
@@ -139,6 +139,5 @@ La section **Utilisation de l’UC** effectue le suivi des mesures relatives à 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Découvrez comment [utiliser le tableau de bord de l’appareil du service StorSimple Device Manager](storsimple-device-dashboard.md).
-* Découvrez comment [utiliser le service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-manager-service-administration.md).
-
+* Découvrez comment [utiliser le tableau de bord de l’appareil du service StorSimple Device Manager](./storsimple-8000-device-dashboard.md).
+* Découvrez comment [utiliser le service StorSimple Device Manager pour gérer votre appareil StorSimple](./storsimple-8000-manager-service-administration.md).

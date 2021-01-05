@@ -1,23 +1,14 @@
 ---
 title: Azure Event Hubs – Exceptions Resource Manager | Microsoft Docs
 description: Liste des exceptions Azure Event Hubs signalées par Azure Resource Manager et actions suggérées.
-services: service-bus-messaging
-documentationcenter: na
-author: spelluru
-editor: spelluru
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 12/08/2019
-ms.author: spelluru
-ms.openlocfilehash: e6ee1137fce97cbe5a64aa5287223f6ba09dcf47
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: cec24696d0d49ba408860f6562c34dd14876c311
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74936107"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91334206"
 ---
 # <a name="azure-event-hubs---resource-manager-exceptions"></a>Azure Event Hubs – Exceptions Resource Manager
 Cet article répertorie les exceptions générées lors de l’interaction avec Azure Event Hubs à l’aide d’Azure Resource Manager par le biais de modèles ou d’appels directs.
@@ -53,7 +44,7 @@ Les sections suivantes indiquent différentes exceptions ou erreurs signalées p
 | BadRequest | Aucun | Impossible de mettre à jour un espace de noms secondaire. | L’espace de noms ne peut pas être mis à jour, car il s’agit de l’espace de noms secondaire dans une [association GéoDR](event-hubs-geo-dr.md). | Le cas échéant, modifiez l’espace de noms principal dans cette association à la place. Sinon, vous pouvez arrêter l’association GéoDR pour effectuer la modification. |
 | BadRequest | Aucun | Impossible de définir l’augmentation automatique de la référence SKU de base. | L’augmentation automatique ne peut pas être activée sur les espaces de noms Event Hubs de niveau De base. | Pour [activer l’augmentation automatique](event-hubs-auto-inflate.md) sur un espace de noms, assurez-vous qu’il s’agit d’un niveau Standard. |
 | BadRequest | Aucun | La capacité est insuffisante pour créer l’espace de noms. Contactez votre administrateur Event Hubs. | La région sélectionnée est au maximum de sa capacité et d’autres espaces de noms ne peuvent pas être créés. | Sélectionnez une autre région pour héberger votre espace de noms. |
-| BadRequest | Aucun | L’opération ne peut pas être effectuée sur le type d’entité « ConsumerGroup », car l’espace de noms « nom de l’espace de noms » utilise le niveau « De base ».  | Les espaces de noms Event Hubs de niveau De base ont un [quota]\((event-hubs-quotas.md#event-hubs-basic-and-standard---quotas-and-limits) d’un groupe de consommateurs (valeur par défaut). La création de groupes de consommateurs supplémentaires n’est pas prise en charge. | Continuez d’utiliser le groupe de consommateurs par défaut ($Default) ou, si vous avez besoin de plus de groupes, envisagez plutôt d’utiliser un espace de noms Event Hubs de niveau Standard. | 
+| BadRequest | Aucun | L’opération ne peut pas être effectuée sur le type d’entité « ConsumerGroup », car l’espace de noms « nom de l’espace de noms » utilise le niveau « De base ».  | Les espaces de noms Event Hubs de niveau De base ont un quota(event-hubs-quotas.md) de groupe de consommateurs (par défaut). La création de groupes de consommateurs supplémentaires n’est pas prise en charge. | Continuez d’utiliser le groupe de consommateurs par défaut ($Default) ou, si vous avez besoin de plus de groupes, envisagez plutôt d’utiliser un espace de noms Event Hubs de niveau Standard. | 
 | BadRequest | Aucun | L’espace de noms « nom de l’espace de noms » n’existe pas. | L’espace de noms fourni est introuvable. | Vérifiez que le nom de l’espace de noms est correct et qu’il se trouve dans votre abonnement. Si ce n’est pas le cas, [créez un espace de noms Event Hubs](event-hubs-create.md). | 
 | BadRequest | Aucun | La propriété d’emplacement de la ressource ne correspond pas à son Espace de noms conteneur. | La création d’un Event Hub dans une région spécifique a échoué, car celle-ci ne correspondait pas à la région de l’espace de noms. | Essayez de créer l’Event Hub dans la même région que l’espace de noms. | 
 

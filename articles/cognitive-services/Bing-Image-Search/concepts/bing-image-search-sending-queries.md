@@ -11,14 +11,19 @@ ms.subservice: bing-image-search
 ms.topic: conceptual
 ms.date: 06/27/2019
 ms.author: aahi
-ms.openlocfilehash: d833b017004365e9dad7241e360f42ff41a55883
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2566b2cf950df915f8ea843c34ea1fb6f8e7ea21
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67542756"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96342003"
 ---
 # <a name="customize-and-suggest-image-search-queries"></a>Personnaliser et suggérer des requêtes de recherche d’images
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Utilisez cet article pour apprendre à personnaliser les requêtes et suggérer des termes de recherche à envoyer à l’API Recherche d’images Bing.
 
@@ -28,7 +33,7 @@ Si votre application comprend une zone de recherche où les termes de recherche 
 
 ## <a name="pivot-the-query"></a>Ajouter un tableau croisé dynamique à la requête
 
-Si Bing peut segmenter la requête de recherche d’origine, l’objet [Images](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) retourné contient `pivotSuggestions`. Les suggestions de tableau croisé dynamique peuvent être affichées comme des termes de recherche facultatifs à l’utilisateur. Par exemple, Bing peut segmenter la requête d’origine *Microsoft Surface* en *Microsoft* et *Surface* et suggérer des tableaux croisés dynamiques pour chacun. Ces suggestions peuvent être affichées comme des termes de requête facultatifs à l’utilisateur.
+Si Bing peut segmenter la requête de recherche d’origine, l’objet [Images](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) retourné contient `pivotSuggestions`. Les suggestions de tableau croisé dynamique peuvent être affichées comme des termes de recherche facultatifs à l’utilisateur. Par exemple, Bing peut segmenter la requête d’origine *Microsoft Surface* en *Microsoft* et *Surface* et suggérer des tableaux croisés dynamiques pour chacun. Ces suggestions peuvent être affichées comme des termes de requête facultatifs à l’utilisateur.
 
 L’exemple suivant montre les suggestions de tableau croisé dynamique pour *Microsoft Surface* :  
 
@@ -89,7 +94,7 @@ L’exemple suivant montre les suggestions de tableau croisé dynamique pour *Mi
 }
 ```
 
-Le champ `pivotSuggestions` contient la liste des segments (tableaux croisés dynamiques) composant la requête d’origine. Pour chaque tableau croisé dynamique, la réponse contient une liste d’objets [Query](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#query_obj) contenant les requêtes suggérées. Le champ `text` contient la requête suggérée. Le champ `displayText` contient le terme qui remplace le tableau croisé dynamique dans la requête d’origine. Il peut s’agir par exemple de la date de lancement de Surface.
+Le champ `pivotSuggestions` contient la liste des segments (tableaux croisés dynamiques) composant la requête d’origine. Pour chaque tableau croisé dynamique, la réponse contient une liste d’objets [Query](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#query_obj) contenant les requêtes suggérées. Le champ `text` contient la requête suggérée. Le champ `displayText` contient le terme qui remplace le tableau croisé dynamique dans la requête d’origine. Il peut s’agir par exemple de la date de lancement de Surface.
 
 Si la chaîne de requête du tableau croisé dynamique est vraiment ce que l’utilisateur recherche, utilisez les champs `text` et `thumbnail` pour présenter les requêtes du tableau croisé dynamique. Pour rendre la miniature et le texte interactifs, utilisez l’URL `webSearchUrl` ou l’URL `searchLink`. Utilisez `webSearchUrl` pour envoyer l’utilisateur vers les résultats de recherche Bing. Si vous fournissez votre propre page de résultats, utilisez `searchLink`.
 
@@ -101,7 +106,7 @@ The following shows an example of the pivot queries.
 
 ## <a name="expand-the-query"></a>Développer la requête
 
-Si Bing peut développer la requête pour affiner la recherche d’origine, l’objet [Images](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) contient le champ `queryExpansions`. Par exemple, si la requête était *Microsoft Surface*, les requêtes développées peuvent être :
+Si Bing peut développer la requête pour affiner la recherche d’origine, l’objet [Images](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#images) contient le champ `queryExpansions`. Par exemple, si la requête était *Microsoft Surface*, les requêtes développées peuvent être :
 - Microsoft Surface **Pro 3**.
 - Microsoft Surface **RT**.
 - Microsoft Surface **Phone**.
@@ -147,7 +152,7 @@ L’exemple suivant montre les requêtes développées pour *Microsoft Surface*.
 }
 ```
 
-Le champ `queryExpansions` contient une liste d’objets [Query](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#query_obj). Le champ `text` contient la requête développée. Le champ `displayText` contient le terme de développement. Si la chaîne de requête développée est vraiment ce que l’utilisateur recherche, utilisez les champs `text` et `thumbnail` pour présenter les requêtes de requête développée. Pour rendre la miniature et le texte interactifs, utilisez l’URL `webSearchUrl` ou l’URL `searchLink`. Utilisez `webSearchUrl` pour envoyer l’utilisateur vers les résultats de recherche Bing. Si vous fournissez votre propre page de résultats, utilisez `searchLink`.
+Le champ `queryExpansions` contient une liste d’objets [Query](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#query_obj). Le champ `text` contient la requête développée. Le champ `displayText` contient le terme de développement. Si la chaîne de requête développée est vraiment ce que l’utilisateur recherche, utilisez les champs `text` et `thumbnail` pour présenter les requêtes de requête développée. Pour rendre la miniature et le texte interactifs, utilisez l’URL `webSearchUrl` ou l’URL `searchLink`. Utilisez `webSearchUrl` pour envoyer l’utilisateur vers les résultats de recherche Bing. Si vous fournissez votre propre page de résultats, utilisez `searchLink`.
 
 <!-- Removing until we can replace with a sanitized image.
 The following shows an example Bing implementation that uses expanded queries. If the user clicks the Microsoft Surface Pro 3 link, they're taken to the Bing search results page, which shows them images of the Pro 3.

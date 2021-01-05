@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/01/2020
-ms.openlocfilehash: 924b1132efeb3ee4211593da190f5b7251029ae3
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: 3db411df69a754857220867865522f8e4fa24030
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80587329"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011487"
 ---
 # <a name="gateway-deep-dive-and-best-practices-for-apache-hive-in-azure-hdinsight"></a>Présentation approfondie de la passerelle et meilleures pratiques pour Apache Hive dans Azure HDInsight
 
@@ -56,9 +56,9 @@ Il existe plusieurs moyens d’atténuer et de comprendre les problèmes de perf
 
 * Utilisez la clause **LIMIT** lors de l’exécution de requêtes **SELECT** volumineuses. La clause **LIMIT** permet de réduire le nombre total de lignes signalées à l’hôte client. La clause **LIMIT** concerne uniquement la génération de résultats et ne modifie pas le plan de requête. Pour appliquer la clause **LIMIT** au plan de requête, utilisez la configuration `hive.limit.optimize.enable`. **LIMIT** peut être combinée à un décalage à l’aide de la forme d’argument **LIMIT x,y**.
 
-* Nommez les colonnes qui vous intéressent lorsque vous exécutez des requêtes **SELECT** au lieu d’utiliser **SELECT\*** . Si vous sélectionnez moins de colonnes, la quantité de données lues diminue.
+* Nommez les colonnes qui vous intéressent lorsque vous exécutez des requêtes **SELECT** au lieu d’utiliser **SELECT \** _. Si vous sélectionnez moins de colonnes, la quantité de données lues diminue.
 
-* Essayez d’exécuter la requête qui vous intéresse par le biais d’Apache Beeline. Si la récupération des résultats via Apache Beeline prend beaucoup de temps, attendez-vous à des retards lorsque vous récupérez les mêmes résultats via des outils externes.
+_ Essayez d’exécuter la requête qui vous intéresse par le biais d’Apache Beeline. Si la récupération des résultats via Apache Beeline prend beaucoup de temps, attendez-vous à des retards lorsque vous récupérez les mêmes résultats via des outils externes.
 
 * Testez une requête Hive de base pour vous assurer qu’une connexion à la Passerelle HDInsight peut être établie. Essayez d’exécuter une requête de base à partir de deux outils externes ou plus pour vous assurer qu’aucun outil ne rencontre de problème.
 
@@ -80,7 +80,7 @@ Il existe plusieurs moyens d’atténuer et de comprendre les problèmes de perf
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Apache Beeline sur HDInsight](https://docs.microsoft.com/azure/hdinsight/hadoop/apache-hadoop-use-hive-beeline)
-* [Étapes de résolution du problème d’expiration du délai de la passerelle HDInsight](https://docs.microsoft.com/azure/hdinsight/interactive-query/troubleshoot-gateway-timeout)
-* [Réseaux virtuels pour HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-plan-virtual-network-deployment)
-* [HDInsight avec Express Route](https://docs.microsoft.com/azure/hdinsight/connect-on-premises-network)
+* [Apache Beeline sur HDInsight](../hadoop/apache-hadoop-use-hive-beeline.md)
+* [Étapes de résolution du problème d’expiration du délai de la passerelle HDInsight](./troubleshoot-gateway-timeout.md)
+* [Réseaux virtuels pour HDInsight](../hdinsight-plan-virtual-network-deployment.md)
+* [HDInsight avec Express Route](../connect-on-premises-network.md)

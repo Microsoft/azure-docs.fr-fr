@@ -14,12 +14,12 @@ ms.author: ryanwi
 ms.reviewer: hirsin
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: eef8174056be7e6be35cea56788c0a519d02944e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b719e866852d2e865c16c62fddd8c549ae505b7d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154438"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85551553"
 ---
 # <a name="authorize-access-to-web-applications-using-openid-connect-and-azure-active-directory"></a>Autoriser l’accès aux applications web à l’aide d’OpenID Connect et d’Azure Active Directory
 
@@ -108,7 +108,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7
 ```
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | tenant |Obligatoire |La valeur `{tenant}` dans le chemin d’accès de la requête peut être utilisée pour contrôler les utilisateurs qui peuvent se connecter à l’application. Les valeurs autorisées sont les identificateurs du client, par exemple `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com` ou `common` pour les jetons indépendants du client |
 | client_id |Obligatoire |L’ID de l’application assignée à votre application lorsque vous l’avez inscrite auprès d’Azure AD. Vous le trouverez sur le portail Azure. Cliquez sur **Azure Active Directory**, puis sur **Inscriptions des applications**. Sélectionnez ensuite l’application et recherchez son ID sur la page de l’application. |
@@ -197,7 +197,7 @@ post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
 
 ```
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | post_logout_redirect_uri |recommandé |URL vers laquelle l’utilisateur doit être redirigé après la déconnexion.  Cette URL doit correspondre exactement à l’un des URI de redirection inscrits pour votre application dans le portail d’inscription des applications.  Si *post_logout_redirect_uri* n’est pas inclus, un message générique est présenté à l’utilisateur. |
 

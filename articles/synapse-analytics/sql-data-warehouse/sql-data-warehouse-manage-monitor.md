@@ -1,24 +1,24 @@
 ---
-title: Superviser la charge de travail de votre pool SQL à l’aide de vues de gestion dynamique
-description: Découvrez comment superviser la charge de travail de votre pool SQL Azure Synapse Analytics et l’exécution de requêtes à l’aide de vues de gestion dynamique.
+title: Superviser la charge de travail de votre pool SQL dédié à l’aide de vues de gestion dynamique
+description: Découvrez comment superviser la charge de travail de votre pool SQL dédié Azure Synapse Analytics et l’exécution de requêtes à l’aide de vues de gestion dynamique.
 services: synapse-analytics
 author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/24/2020
 ms.author: rortloff
 ms.reviewer: igorstan
 ms.custom: synapse-analytics
-ms.openlocfilehash: 5360d91a17a7eee2dd0373ac311c79d22e085939
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1992c3d525fc1f5a098e1969887a752233d47990
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81416096"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96453797"
 ---
-# <a name="monitor-your-azure-synapse-analytics-sql-pool-workload-using-dmvs"></a>Superviser la charge de travail de votre pool SQL Azure Synapse Analytics à l’aide de vues de gestion dynamique
+# <a name="monitor-your-azure-synapse-analytics-dedicated-sql-pool-workload-using-dmvs"></a>Superviser la charge de travail de votre pool SQL dédié Azure Synapse Analytics à l’aide de vues de gestion dynamique
 
 Cet article décrit comment utiliser les vues de gestion dynamique (DMV) pour superviser votre charge de travail notamment en analysant l’exécution des requêtes dans le pool SQL.
 
@@ -102,8 +102,8 @@ Lorsqu’un plan DSQL prend plus de temps que prévu, la cause peut être un pla
 
 Pour examiner les détails d’une seule étape, vérifiez la colonne *operation_type* de l’étape de la requête longue et notez **l’index de l’étape** :
 
-* Passez à l’étape 3a pour les **opérations SQL** : OnOperation, RemoteOperation, ReturnOperation.
-* Passez à l’étape 3b pour les **opérations de déplacement des données** : ShuffleMoveOperation, BroadcastMoveOperation, TrimMoveOperation, PartitionMoveOperation, MoveOperation, CopyOperation.
+* Passez à l’étape 3 pour les **opérations SQL** : OnOperation, RemoteOperation, ReturnOperation.
+* Passez à l’étape 4 pour les **opérations de déplacement des données** : ShuffleMoveOperation, BroadcastMoveOperation, TrimMoveOperation, PartitionMoveOperation, MoveOperation, CopyOperation.
 
 ### <a name="step-3-investigate-sql-on-the-distributed-databases"></a>ÉTAPE 3 : examiner SQL dans les bases de données distribuées
 
@@ -139,7 +139,7 @@ WHERE request_id = 'QID####' AND step_index = 2;
 ```
 
 * Vérifiez la colonne *total_elapsed_time* pour voir si une distribution particulière prend un temps significativement plus important que les autres pour le déplacement des données.
-* Pour la distribution longue, consultez la colonne *rows_processed* pour voir si le nombre de lignes déplacées dans le cadre de cette distribution est nettement plus élevé que les autres. Dans ce cas, cette recherche peut indiquer un décalage des données sous-jacentes.
+* Pour la distribution longue, consultez la colonne *rows_processed* pour voir si le nombre de lignes déplacées dans le cadre de cette distribution est nettement plus élevé que les autres. Dans ce cas, cette recherche peut indiquer un décalage des données sous-jacentes. L’une des causes de l’asymétrie des données est la distribution sur une colonne avec de nombreuses valeurs NULL (dont les lignes sont toutes placées dans la même distribution). Réduisez les requêtes lentes en évitant la distribution sur ces types de colonnes ou en filtrant votre requête pour éliminer les valeurs NULL lorsque cela est possible. 
 
 Si la requête est en cours d’exécution, vous pouvez utiliser [DBCC PDW_SHOWEXECUTIONPLAN](/sql/t-sql/database-console-commands/dbcc-pdw-showexecutionplan-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) pour récupérer le plan estimé de SQL Server auprès du cache de plans SQL Serveur pour l’étape SQL en cours d’exécution dans une distribution particulière.
 

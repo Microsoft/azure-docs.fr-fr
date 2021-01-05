@@ -7,10 +7,10 @@ ms.author: pharring
 ms.date: 03/28/2019
 ms.reviewer: mbullwin
 ms.openlocfilehash: 6991db6055ca8556adff67f194bac0f4aa04cb06
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77671390"
 ---
 # <a name="upgrading-the-snapshot-debugger"></a>Mise à niveau du Débogueur de capture instantanée

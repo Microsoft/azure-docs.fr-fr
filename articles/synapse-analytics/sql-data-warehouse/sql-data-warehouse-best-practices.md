@@ -1,25 +1,25 @@
 ---
-title: Meilleures pratiques pour le pool SQL Synapse dans Azure Synapse Analytics (anciennement SQL DW)
-description: Recommandations et meilleures pratiques pour le développement de solutions pour le pool SQL dans Azure Synapse Analytics (anciennement SQL DW).
+title: Meilleures pratiques pour un pool SQL dédié (anciennement SQL DW)
+description: Recommandations et meilleures pratiques pour le développement de solutions pour un pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics.
 services: synapse-analytics
 author: mlee3gsd
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 11/04/2019
 ms.author: martinle
 ms.reviewer: igorstan
-ms.openlocfilehash: 4462bf0fc2057922340eb01cb8c786dbc63ce290
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.openlocfilehash: 9802e6553d553aae4f13194dc9951d1a17af6f66
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80745359"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462879"
 ---
-# <a name="best-practices-for-synapse-sql-pool-in-azure-synapse-analytics-formerly-sql-dw"></a>Meilleures pratiques pour le pool SQL Synapse dans Azure Synapse Analytics (anciennement SQL DW)
+# <a name="best-practices-for-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics"></a>Meilleures pratiques pour un pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics
 
-Cet article rassemble les meilleures pratiques qui vous permettront d’obtenir des performances optimales de votre déploiement de [pool SQL](sql-data-warehouse-overview-what-is.md).  L’objectif de cet article est de vous fournir des conseils de base et de mettre l’accent sur les points importants.  
+Cet article rassemble les meilleures pratiques qui vous aideront à obtenir des performances optimales de votre déploiement de [pool SQL dédié (anciennement SQL DW)](sql-data-warehouse-overview-what-is.md).  L’objectif de cet article est de vous fournir des conseils de base et de mettre l’accent sur les points importants.  
 
 ## <a name="reduce-cost-with-pause-and-scale"></a>Réduire les coûts avec les opérations de suspension et de mise à l’échelle
 
@@ -27,7 +27,7 @@ Pour plus d’informations sur la réduction des coûts à l’aide de la suspen
 
 ## <a name="maintain-statistics"></a>Mettre à jour les statistiques
 
-Le pool SQL peut être configuré pour détecter et créer automatiquement des statistiques sur les colonnes.  Les plans de requête créés par l’optimiseur sont aussi bons que les statistiques disponibles.  
+Vous pouvez configurer un pool SQL dédié (anciennement SQL DW) pour détecter et créer automatiquement des statistiques sur des colonnes.  Les plans de requête créés par l’optimiseur sont aussi bons que les statistiques disponibles.  
 
 Nous vous recommandons d’activer AUTO_CREATE_STATISTICS pour vos bases de données et de conserver les statistiques mises à jour quotidiennement ou après chaque charge pour vous assurer que les statistiques sur les colonnes utilisées dans vos requêtes sont toujours à jour.
 
@@ -38,11 +38,11 @@ Si vous trouvez que la mise à jour de toutes vos statistiques prend trop de tem
 
 Voir aussi [Gestion des statistiques sur les tables](sql-data-warehouse-tables-statistics.md), [CREATE STATISTICS](/sql/t-sql/statements/create-statistics-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) et [UPDATE STATISTICS](/sql/t-sql/statements/update-statistics-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
 
-## <a name="use-dmvs-to-monitor-and-optimize-your-queries"></a>Utiliser des vues de gestion dynamique pour surveiller et optimiser vos requêtes
+## <a name="use-dmvs-to-monitor-and-optimize-your-queries"></a>Utiliser des DMV pour surveiller et optimiser vos requêtes
 
-Le pool SQL dispose de plusieurs vues de gestion dynamique qui peuvent être utilisées pour surveiller l’exécution de la requête.  L’article Surveiller votre charge de travail à l’aide de vues de gestion dynamique fournit des instructions étape par étape sur la façon d’examiner les détails d’une requête en cours d’exécution.  
+Un pool SQL dédié (anciennement SQL DW) offre plusieurs vues de gestion dynamique permettant de surveiller l’exécution des requêtes.  L’article [Surveiller votre charge de travail à l’aide de vues de gestion dynamique](sql-data-warehouse-manage-monitor.md) fournit des instructions pas à pas sur la façon d’examiner les détails d’une requête en cours d’exécution.  
 
-Pour trouver rapidement des requêtes dans ces vues de gestion dynamique, l’utilisation de l’option LABEL avec vos requêtes peut aider.
+Pour trouver rapidement des requêtes dans ces DMV, l’utilisation de l’option LABEL avec vos requêtes peut aider.
 
 Voir aussi [Surveiller votre charge de travail à l’aide de vues de gestion dynamique](sql-data-warehouse-manage-monitor.md), [LABEL](sql-data-warehouse-develop-label.md), [OPTION](/sql/t-sql/queries/option-clause-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [sys.dm_exec_sessions](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-sessions-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [sys.dm_pdw_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [sys.dm_pdw_request_steps](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-request-steps-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [sys.dm_pdw_sql_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-sql-requests-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [sys.dm_pdw_dms_workers](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-dms-workers-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest), [DBCC PDW_SHOWEXECUTIONPLAN](/sql/t-sql/database-console-commands/dbcc-pdw-showexecutionplan-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) et [sys.dm_pdw_waits](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-waits-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
 
@@ -62,9 +62,9 @@ Voir aussi [INSERT](/sql/t-sql/statements/insert-transact-sql?toc=/azure/synapse
 
 ## <a name="use-polybase-to-load-and-export-data-quickly"></a>Utiliser PolyBase pour charger et exporter rapidement des données
 
-Le pool SQL prend en charge le chargement et l’exportation de données via plusieurs outils dont Azure Data Factory, PolyBase et BCP.  Pour les petits volumes de données où les performances ne sont pas essentielles, n’importe quel outil peut suffire à vos besoins.  Toutefois, lorsque vous chargez ou exportez de gros volumes de données ou si des performances de vitesse sont nécessaires, PolyBase représente le meilleur choix.  
+Un pool SQL dédié (anciennement SQL DW) prend en charge le chargement et l’exportation de données via plusieurs outils dont Azure Data Factory, PolyBase et BCP.  Pour les petits volumes de données où les performances ne sont pas essentielles, n’importe quel outil peut suffire à vos besoins.  Toutefois, lorsque vous chargez ou exportez de gros volumes de données ou si des performances de vitesse sont nécessaires, PolyBase représente le meilleur choix.  
 
-PolyBase est conçu pour tirer parti de l’architecture MPP (Massively Parallel Processing) et, par conséquent, chargera et exportera les magnitudes des données plus rapidement que n’importe quel autre outil.  Les charges PolyBase peuvent être exécutées à l’aide de CTAS ou d’INSERT INTO.  
+PolyBase est conçu pour tirer parti de la nature distribuée du système et chargera et exportera les magnitudes des données plus rapidement que n’importe quel autre outil.  Les charges PolyBase peuvent être exécutées à l’aide de CTAS ou d’INSERT INTO.   
 
 > [!TIP]
 > L’utilisation de CTAS permet de minimiser la journalisation des transactions et constitue le moyen le plus rapide de charger vos données.
@@ -74,13 +74,13 @@ Azure Data Factory prend également en charge les charges PolyBase et peut attei
 > [!NOTE]
 > Pour maximiser le débit lors de l’utilisation de fichiers texte gzip, divisez les fichiers en 60 fichiers ou plus pour optimiser le parallélisme de votre charge.  Pour un débit total plus rapide, envisagez le chargement simultané des données.
 
-Consultez aussi [Chargement de données](design-elt-data-loading.md), [Guide d’utilisation de PolyBase](guidance-for-loading-data.md), [Modèles et stratégies de pool SQL](https://blogs.msdn.microsoft.com/sqlcat/20../../), [Téléchargement de données avec Azure Data Factory]( ../../data-factory/load-azure-sql-data-warehouse.md), [Déplacer des données à l’aide d’Azure Data Factory](../../data-factory/transform-data-using-machine-learning.md), [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) et [Create table as select (CTAS)](sql-data-warehouse-develop-ctas.md).
+Consultez aussi [Chargement de données](design-elt-data-loading.md), [Guide d’utilisation de PolyBase](guidance-for-loading-data.md), [Modèles et stratégies de chargement de pool SQL dédié](https://blogs.msdn.microsoft.com/sqlcat/20../../), [Téléchargement de données avec Azure Data Factory]( ../../data-factory/load-azure-sql-data-warehouse.md), [Déplacer des données à l’aide d’Azure Data Factory](../../data-factory/transform-data-using-machine-learning.md), [CREATE EXTERNAL FILE FORMAT](/sql/t-sql/statements/create-external-file-format-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) et [Create table as select (CTAS)](sql-data-warehouse-develop-ctas.md).
 
 ## <a name="load-then-query-external-tables"></a>Charger, puis interroger les tables externes
 
 Si Polybase, également appelé tables externes, peut être le moyen le plus rapide pour charger les données, il n’est pas optimal pour les requêtes. Les tables Polybase ne prennent actuellement en charge que les fichiers d’objets blob Azure et le stockage Azure Data Lake. Aucune ressource de calcul ne se charge de la sauvegarde de ces fichiers.  
 
-Par conséquent, le pool SQL ne peut pas décharger ce travail et doit donc lire le fichier entier en le chargeant dans tempdb pour lire les données.  Donc, si vous disposez de plusieurs requêtes qui vont interroger ces données, il est préférable de charger ces données une fois et que les requêtes utilisent la table locale.
+Par conséquent, un pool SQL dédié ne peut pas décharger ce travail et doit lire le fichier entier en le chargeant dans tempdb pour lire les données.  Donc, si vous disposez de plusieurs requêtes qui vont interroger ces données, il est préférable de charger ces données une fois et que les requêtes utilisent la table locale.
 
 Voir aussi [Guide d’utilisation de PolyBase](guidance-for-loading-data.md).
 
@@ -101,9 +101,9 @@ Voir aussi [Vue d’ensemble des tables](sql-data-warehouse-tables-overview.md),
 
 ## <a name="do-not-over-partition"></a>Ne pas créer trop de partitions
 
-Bien que le partitionnement des données peut être efficace pour mettre à jour vos données grâce au basculement de partitions ou à l’optimisation des analyses avec élimination des partitions, avoir un trop grand nombre de partitions peut ralentir vos requêtes.  Souvent, une stratégie de partitionnement à granularité élevée qui peut fonctionner correctement sur SQL Server peut poser des problèmes dans un pool SQL.  
+Bien que le partitionnement des données peut être efficace pour mettre à jour vos données grâce au basculement de partitions ou à l’optimisation des analyses avec élimination des partitions, avoir un trop grand nombre de partitions peut ralentir vos requêtes.  Souvent, une stratégie de partitionnement à granularité élevée qui peut fonctionner correctement sur SQL Server peut poser des problèmes dans un pool SQL dédié (anciennement SQL DW).  
 
-Un trop grand nombre de partitions peut également réduire l’efficacité des index columnstore en cluster si chaque partition possède moins d’1 million de lignes.  N’oubliez pas que, en arrière-plan, le pool SQL partitionne vos données en 60 bases de données, donc si vous créez une table avec 100 partitions, cela produit en réalité 6 000 partitions.  
+Un trop grand nombre de partitions peut également réduire l’efficacité des index columnstore en cluster si chaque partition possède moins d’1 million de lignes.  N’oubliez pas qu’en arrière-plan un pool SQL dédié partitionne vos données en 60 bases de données. Ainsi, si vous créez une table avec 100 partitions, cela produit en réalité 6 000 partitions.  
 
 Chaque charge de travail est différente ; par conséquent, le meilleur conseil serait d’expérimenter le partitionnement pour voir ce qui fonctionne le mieux pour votre charge de travail.  Envisagez d’abaisser le niveau de granularité à un niveau inférieur à celui qui a fonctionné pour vous dans SQL Server.  Par exemple, utilisez plutôt des partitions hebdomadaires ou mensuelles plutôt que des partitions quotidiennes.
 
@@ -145,13 +145,13 @@ Voir aussi [Tables temporaires](sql-data-warehouse-tables-temporary.md), [CREATE
 
 ## <a name="optimize-clustered-columnstore-tables"></a>Optimiser les tables columnstore en clusters
 
-Les index columnstore en cluster sont l’une des méthodes les plus efficaces pour stocker vos données dans le pool SQL.  Par défaut, les tables dans le pool SQL sont créées en tant que ColumnStore en cluster.  Pour obtenir les meilleures performances pour les requêtes sur les tables columnstore, la qualité du segment est importante.  
+Les index columnstore en cluster sont l’une des méthodes les plus efficaces pour stocker vos données dans un pool SQL dédié.  Par défaut, les tables du pool SQL dédié sont créées en tant que ColumnStore en cluster.  Pour obtenir les meilleures performances pour les requêtes sur les tables columnstore, la qualité du segment est importante.  
 
 Lorsque les lignes sont écrites dans les tables columnstore avec une mémoire insuffisante, la qualité du segment columnstore peut être affectée.  La qualité du segment peut être mesurée par le nombre de lignes dans un groupe de lignes compressé.  Consultez la section [Causes de la qualité médiocre des index columnstore](sql-data-warehouse-tables-index.md#causes-of-poor-columnstore-index-quality) dans l’article [Index de table](sql-data-warehouse-tables-index.md) pour obtenir des instructions étape par étape sur la détection et l’amélioration de la qualité de segment pour les tables columnstore en cluster.  
 
 Étant donné que la qualité des segments columnstore est importante, nous vous conseillons d’utiliser des ID d’utilisateurs qui se trouvent dans la classe de ressource de moyenne ou grande taille pour le chargement des données. L’utilisation d’[unités DWU (Data Warehouse Unit)](what-is-a-data-warehouse-unit-dwu-cdwu.md) inférieures signifie que vous souhaitez assigner une classe de ressource plus grande à votre utilisateur de chargement.
 
-Étant donné que les tables columnstore ne transmettent généralement pas de données dans un segment columnstore compressé s’il existe moins de 1 million de lignes par table et si chaque table du pool SQL est partitionnée en 60 tables, en règle générale, les tables columnstore ne tireront aucun profit d’une requête, sauf si la table comporte plus de 60 millions de lignes.  Pour une table comportant moins de 60 millions de lignes, il ne sera peut-être pas judicieux d’avoir un index columnstore.  Mais cela ne peut pas nuire non plus.  
+Étant donné que les tables columnstore ne transmettent généralement pas de données dans un segment columnstore compressé s’il existe moins de 1 million de lignes par table et si chaque table du pool SQL dédié est partitionnée en 60 tables, en règle générale, les tables columnstore ne tireront aucun profit d’une requête, sauf si la table comporte plus de 60 millions de lignes.  Pour une table comportant moins de 60 millions de lignes, il ne sera peut-être pas judicieux d’avoir un index columnstore.  Mais cela ne peut pas nuire non plus.  
 
 En outre, si vous partitionnez vos données, vous souhaiterez peut-être estimer que chaque partition nécessitera 1 million de lignes pour bénéficier d’un index columnstore en cluster.  Si une table possède 100 partitions, elle devra avoir au moins 6 milliards de lignes pour bénéficier d’une banque de colonnes en cluster (60 distributions *100 partitions* 1 million de lignes).  
 
@@ -164,7 +164,7 @@ Voir aussi [Index de table](sql-data-warehouse-tables-index.md), [Guide des inde
 
 ## <a name="use-larger-resource-class-to-improve-query-performance"></a>Utiliser une classe de ressource plus grande pour améliorer les performances des requêtes
 
-Le pool SQL utilise des groupes de ressources pour allouer de la mémoire aux requêtes.  Dès le départ, tous les utilisateurs sont affectés à la petite classe de ressource qui accorde 100 Mo de mémoire par distribution.  Dans la mesure où il existe toujours 60 distributions et que chaque distribution reçoit un minimum de 100 Mo au niveau du système, l’allocation de mémoire totale est de 6 000 Mo, ou juste en dessous de 6 Go.  
+Un pool SQL dédié utilise des groupes de ressources pour allouer de la mémoire aux requêtes.  Dès le départ, tous les utilisateurs sont affectés à la petite classe de ressource qui accorde 100 Mo de mémoire par distribution.  Dans la mesure où il existe toujours 60 distributions et que chaque distribution reçoit un minimum de 100 Mo au niveau du système, l’allocation de mémoire totale est de 6 000 Mo, ou juste en dessous de 6 Go.  
 
 Certaines requêtes, telles que des grandes jointures ou des charges dans des tables columnstore en cluster, bénéficieront d’allocations de mémoire supérieures.  Certaines requêtes, comme les analyses pures, n’en tireront aucun bénéfice.  En revanche, l’utilisation de classes de ressource plus grandes réduit l’accès concurrentiel. Par conséquent, vous devez prendre cet impact en considération avant de déplacer tous les utilisateurs vers une grande classe de ressource.
 
@@ -180,7 +180,7 @@ Voir également [Classes de ressources pour la gestion des charges de travail](r
 
 Consultez également notre article [Dépannage](sql-data-warehouse-troubleshoot.md) concernant les problèmes courants et leurs solutions.
 
-Si vous ne trouvez pas ce que vous recherchez dans cet article, essayez d’utiliser la fonction de recherche de documents située sur le côté gauche de cette page pour rechercher tous les documents relatifs à Azure Synapse.  Le [Forum Azure Synapse](https://social.msdn.microsoft.com/Forums/sqlserver/home?forum=AzureSQLDataWarehouse) a été créé pour vous permettre de poser des questions à d’autres utilisateurs et au groupe de produits Azure Synapse. Nous suivons activement ce forum pour vous assurer que vos questions sont traitées par un autre utilisateur ou un membre de notre équipe.  
+Si vous ne trouvez pas ce que vous recherchez dans cet article, essayez d’utiliser la fonction de recherche de documents située sur le côté gauche de cette page pour rechercher tous les documents relatifs à Azure Synapse.  La [page de questions Microsoft Q&A sur Azure Synapse](https://docs.microsoft.com/answers/topics/azure-synapse-analytics.html) a été créée pour vous permettre de poser des questions à d’autres utilisateurs et au groupe de produits Azure Synapse. Nous suivons activement ce forum pour vous assurer que vos questions sont traitées par un autre utilisateur ou un membre de notre équipe.  
 
 Si vous préférez poser vos questions sur Stack Overflow, nous avons également un [Forum Azure Synapse Stack Overflow](https://stackoverflow.com/questions/tagged/azure-sqldw).
 

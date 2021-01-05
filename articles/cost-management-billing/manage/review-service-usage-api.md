@@ -1,17 +1,18 @@
 ---
 title: Passer en revue l’utilisation des ressources des services Azure avec l’API REST
-description: Découvrez comment utiliser les API REST Azure pour passer en revue l’utilisation des ressources des services Azure.
+description: Découvrez comment utiliser les API REST Azure pour passer en revue l’utilisation des ressources des services Azure. Créez un rapport de gestion des coûts et un filtre pour des types de ressources spécifiques.
 author: lleonard-msft
 ms.service: cost-management-billing
+ms.subservice: enterprise
 ms.topic: reference
-ms.date: 03/31/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 60a9e17b16f0b539693beb987b4d0610d11a3050
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 018e61fbc74091fa25211b8a25ce067862a0cc7d
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521202"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132395"
 ---
 # <a name="review-azure-resource-usage-using-the-rest-api"></a>Passer en revue l’utilisation des ressources Azure avec l’API REST
 
@@ -152,4 +153,4 @@ Attribuez à la définition `timeframe` la valeur `Custom` pour définir une pla
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-- [Bien démarrer avec l’API REST Azure](https://docs.microsoft.com/rest/api/azure/)   
+- [Bien démarrer avec l’API REST Azure](/rest/api/azure/)

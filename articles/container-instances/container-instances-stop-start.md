@@ -2,17 +2,19 @@
 title: Arrêter ou démarrer un groupe de conteneurs manuellement
 description: Découvrez comment arrêter ou démarrer manuellement des conteneurs dans Azure Container Instances.
 ms.topic: article
-ms.date: 04/15/2019
-ms.openlocfilehash: c9f8afea33c65df940d02823ec394697d2786d6a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/11/2020
+ms.openlocfilehash: f697f18459959cf40e71d3ca90cd8b42aaa74239
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74533419"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88799075"
 ---
 # <a name="manually-stop-or-start-containers-in-azure-container-instances"></a>Arrêter ou démarrer manuellement des conteneurs dans Azure Container Instances
 
 Le paramètre [Stratégie de redémarrage](container-instances-restart-policy.md) d’un groupe de conteneurs détermine la manière dont Container Instances démarre ou s'arrête par défaut. Vous pouvez remplacer le paramètre par défaut en arrêtant ou en démarrant manuellement un groupe de conteneurs.
+
+[!INCLUDE [container-instances-restart-ip](../../includes/container-instances-restart-ip.md)]
 
 ## <a name="stop"></a>Arrêter
 

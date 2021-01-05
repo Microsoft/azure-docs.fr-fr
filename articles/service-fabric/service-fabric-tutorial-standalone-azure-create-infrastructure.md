@@ -4,12 +4,12 @@ description: Dans ce tutoriel, vous découvrez comment configurer l’infrastruc
 ms.topic: tutorial
 ms.date: 07/22/2019
 ms.custom: mvc
-ms.openlocfilehash: 93a7e2507ab3a467ef83924479872694cae2dd5b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e9f62f944fff331bcf2dad1b380161e563614219
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75614007"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90561838"
 ---
 # <a name="tutorial-create-azure-vm-infrastructure-to-host-a-service-fabric-cluster"></a>Tutoriel : Créer l’infrastructure de machines virtuelles Azure pour héberger un cluster Service Fabric
 
@@ -49,7 +49,7 @@ Pour suivre ce tutoriel, vous devez disposer d’un abonnement Azure.  Si vous n
 
 8. Ensuite, définissez le **Groupe de sécurité réseau de la carte réseau** sur **Avancé**. Créer un groupe de sécurité, notez son nom et créez les règles suivantes pour autoriser le trafic TCP depuis n’importe quelle source :
 
-   ![sf-inbound][sf-inbound]
+   ![Capture d’écran montrant la création de règles pour autoriser le trafic TCP entrant.][sf-inbound]
 
    * Port `3389` pour RDP et ICMP (connectivité de base).
    * Ports `19000-19003` pour Service Fabric.
@@ -61,7 +61,7 @@ Pour suivre ce tutoriel, vous devez disposer d’un abonnement Azure.  Si vous n
 
 9. Ajoutez une autre règle. Définissez la source sur **Étiquette du Service** et définissez l’étiquette du service source sur **VirtualNetwork**. Service Fabric nécessite que les ports suivants soient ouverts pour la communication au sein du cluster : 135,137-139,445,20001-20031,20606-20861.
 
-   ![vnet-inbound][vnet-inbound]
+   ![Capture d’écran montrant la création de règles autorisant le trafic TCP pour un cluster.][vnet-inbound]
 
 10. Le reste des options peuvent être acceptées dans leur état par défaut. Passez-les en revue si vous le souhaitez, puis lancez votre machine virtuelle.
 

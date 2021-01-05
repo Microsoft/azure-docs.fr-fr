@@ -4,22 +4,18 @@ description: Décrit les différents types de clone et leur utilisation, et expl
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: timlt
-editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: TBD
-ms.date: 12/05/2017
+ms.topic: how-to
+ms.date: 07/15/2020
 ms.author: alkohli
-ms.openlocfilehash: 84734aefb72a3330d99c5707b461de2cd5e30484
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5ebb7f1d9440bc7a8b75afe64403762532213c1d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228245"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91767566"
 ---
 # <a name="use-the-storsimple-device-manager-service-in-azure-portal-to-clone-a-volume"></a>Utiliser le service StorSimple Device Manager dans le portail Azure pour cloner un volume
 
@@ -51,7 +47,7 @@ Tenez compte des informations suivantes lors du clonage d’un volume.
 
 Vous pouvez créer un clone sur le même appareil, sur un autre ou même une appliance cloud à l’aide d’un instantané local ou cloud.
 
-La procédure suivante décrit comment créer un clone à partir du catalogue de sauvegarde.  Une autre méthode pour lancer le clone consiste à accéder à **Volumes**, à sélectionner un volume, puis à cliquer avec le bouton droit pour appeler le menu contextuel et sélectionner **Cloner**.
+La procédure suivante décrit comment créer un clone à partir du catalogue de sauvegarde.  
 
 Procédez comme suit pour créer un clone de votre volume à partir du catalogue de sauvegarde.
 
@@ -68,11 +64,11 @@ Procédez comme suit pour créer un clone de votre volume à partir du catalogue
 
       Les sauvegardes associées au volume ou à la stratégie de sauvegarde sélectionné doivent figurer dans la liste des jeux de sauvegarde.
    
-      ![Liste des jeux de sauvegarde](./media/storsimple-8000-clone-volume-u2/bucatalog.png)
+      ![Liste des jeux de sauvegarde 2](./media/storsimple-8000-clone-volume-u2/bucatalog.png)
      
 3. Développez le jeu de sauvegarde pour afficher le volume associé et sélectionner un volume dans le jeu de sauvegarde. Cliquez dessus avec le bouton droit puis sélectionnez **Cloner** dans le menu contextuel.
 
-   ![Liste des jeux de sauvegarde](./media/storsimple-8000-clone-volume-u2/clonevol3b.png) 
+   ![Liste des jeux de sauvegarde 3](./media/storsimple-8000-clone-volume-u2/clonevol3b.png) 
 
 3. Dans le panneau **Cloner**, effectuez les étapes suivantes :
    
@@ -88,17 +84,17 @@ Procédez comme suit pour créer un clone de votre volume à partir du catalogue
           
    3. Sous **Hôtes connectés**, spécifiez un enregistrement de contrôle d’accès (ACR) pour le clone. Vous pouvez ajouter un nouvel ACR ou en choisir un dans la liste existante. L’ACR déterminera les hôtes qui peuvent accéder à ce clone.
       
-       ![Liste des jeux de sauvegarde](./media/storsimple-8000-clone-volume-u2/clonevol3a.png) 
+       ![Liste des jeux de sauvegarde 4](./media/storsimple-8000-clone-volume-u2/clonevol3a.png) 
 
    4. Cliquez sur **Cloner** pour terminer l’opération.
 
 4. Un travail de clonage est lancé et vous êtes informé lorsque le clone est créé avec succès. Cliquez sur la notification du travail ou accédez au panneau **Tâches** pour surveiller le travail de clonage.
 
-    ![Liste des jeux de sauvegarde](./media/storsimple-8000-clone-volume-u2/clonevol5.png)
+    ![Liste des jeux de sauvegarde 5](./media/storsimple-8000-clone-volume-u2/clonevol5.png)
 
 7. Lorsque le travail de clonage est terminé, accédez à votre appareil, puis cliquez sur **Volumes**. Dans la liste des volumes, vous devez voir le clone que vous venez de créer dans le même conteneur de volumes que le volume source.
 
-    ![Liste des jeux de sauvegarde](./media/storsimple-8000-clone-volume-u2/clonevol6.png)
+    ![Liste des jeux de sauvegarde 6](./media/storsimple-8000-clone-volume-u2/clonevol6.png)
 
 Un clone créé de cette manière est un clone temporaire. Pour plus d’informations sur les types de clone, consultez la page [Clones temporaires et permanents](#transient-vs-permanent-clones).
 

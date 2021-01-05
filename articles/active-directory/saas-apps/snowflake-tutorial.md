@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec Snowflake | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Snowflake.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 3488ac27-0417-4ad9-b9a3-08325fe8ea0d
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/27/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: fda662d7de66bfb56feba8f405bd0e52c4cf3e76
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3beb4e7831ce17a46f6daaa1258f284a0caefe8e
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76121350"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855127"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-snowflake"></a>Tutoriel : Intégration d’Azure Active Directory avec Snowflake
 
@@ -32,7 +27,7 @@ L’intégration de Snowflake avec Azure AD vous offre les avantages suivants 
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Snowflake (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -44,16 +39,16 @@ Pour configurer l’intégration d’Azure AD avec Snowflake, vous avez besoin 
 
 ## <a name="scenario-description"></a>Description du scénario
 
-Dans ce didacticiel, vous configurez et testez l’authentification unique Azure AD dans un environnement de test.
+Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
-* Snowflake prend en charge l’authentification unique initiée par **le fournisseur de services et le fournisseur d’identité**
-* Snowflake prend en charge le [provisionnement et le déprovisionnement automatisés des utilisateurs](snowflake-provisioning-tutorial.md) (recommandé)
+- Snowflake prend en charge l’authentification unique initiée par **le fournisseur de services et le fournisseur d’identité**
+- Snowflake prend en charge le [provisionnement et le déprovisionnement automatisés des utilisateurs](snowflake-provisioning-tutorial.md) (recommandé)
 
 ## <a name="adding-snowflake-from-the-gallery"></a>Ajout de Snowflake depuis la galerie
 
 Pour configurer l’intégration de Snowflake dans Azure AD, vous devez ajouter Snowflake à partir de la galerie à votre liste d’applications SaaS gérées.
 
-**Pour ajouter Snowflake depuis la galerie, procédez comme suit :**
+**Ajoutez Snowflake depuis la galerie :**
 
 1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
 
@@ -69,11 +64,11 @@ Pour configurer l’intégration de Snowflake dans Azure AD, vous devez ajouter
 
 4. Dans la zone de recherche, tapez **Snowflake**, sélectionnez **Snowflake** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Snowflake dans la liste des résultats](common/search-new-app.png)
+     ![Snowflake dans la liste des résultats](common/search-new-app-snowflake.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Snowflake avec un utilisateur de test appelé **Britta Simon**.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Snowflake avec un utilisateur de test appelé **Britta Simon**.
 Pour que l’authentification unique fonctionne, une relation entre l’utilisateur Azure AD et l’utilisateur Snowflake associé doit être établie.
 
 Pour configurer et tester l’authentification unique Azure AD avec Snowflake, vous devez suivre les indications des sections suivantes :
@@ -103,9 +98,9 @@ Pour configurer l’authentification unique Azure AD avec Snowflake, effectuez l
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Dans la section **Configuration SAML de base**, suivez les étapes ci-dessous, si vous souhaitez configurer l’application en mode démarré par **IDP** :
+4. Dans la section **Configuration SAML de base**, suivez les étapes ci-dessous si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité** :
 
-    ![Informations d’authentification unique dans Domaine et URL Snowflake](common/idp-intiated.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://<SNOWFLAKE-URL>.snowflakecomputing.com`
 
@@ -113,7 +108,7 @@ Pour configurer l’authentification unique Azure AD avec Snowflake, effectuez l
 
     c. Cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes si vous souhaitez configurer l’application en mode Initié par le fournisseur de services :
 
-    ![Informations d’authentification unique dans Domaine et URL Snowflake](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<SNOWFLAKE-URL>.snowflakecomputing.com`
     
@@ -238,13 +233,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Snowflake, vous deve
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Snowflake dans le panneau d’accès doit vous connecter automatiquement à l’application Snowflake pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Snowflake dans le panneau d’accès doit vous connecter automatiquement à l’application Snowflake pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

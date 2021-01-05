@@ -1,7 +1,7 @@
 ---
 title: Exemple de script Azure PowerShell – Configurer un front-end IPv6 avec Standard Load Balancer (préversion)
 titlesuffix: Azure Virtual Network
-description: Activer les points de terminaison IPv6 à l’aide de Powershell dans un réseau virtuel Azure
+description: En savoir plus sur la configuration d’un serveur frontal IPv6 dans un exemple de script de réseau virtuel avec Standard Load Balancer.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -11,12 +11,13 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 07/15/2019
 ms.author: kumud
-ms.openlocfilehash: 24d25813a5cafc98f04d3daef2803aa44acc7f69
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: d0116d903bab0cefc6ab58d37a66963da49a53c6
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77201320"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "96013902"
 ---
 # <a name="configure-ipv6-frontend-in-virtual-network-script-sample-with-standard-load-balancerpreview"></a>Configurer un front-end IPv6 dans un exemple de script de réseau virtuel avec Standard Load Balancer (préversion)
 
@@ -174,28 +175,28 @@ $nsg = New-AzNetworkSecurityGroup `
 # Create dual stack subnet
 $subnet = New-AzVirtualNetworkSubnetConfig `
 -Name "dsSubnet" `
--AddressPrefix "10.0.0.0/24","ace:cab:deca:deed::/64"
+-AddressPrefix "10.0.0.0/24","fd00:db8:deca:deed::/64"
 
 # Create the virtual network
 $vnet = New-AzVirtualNetwork `
 -ResourceGroupName $rg.ResourceGroupName `
 -Location $rg.Location  `
 -Name "dsVnet" `
--AddressPrefix "10.0.0.0/16","ace:cab:deca::/48"  `
+-AddressPrefix "10.0.0.0/16","fd00:db8:deca::/48"  `
 -Subnet $subnet
   
 #Create network interfaces (NICs)
-$Ip4Config=New-AzNetworkInterfaceIpConfig `
--Name dsIp4Config `
+$Ip4Config=New-AzNetworkInterfaceIpConfig `
+-Name dsIp4Config `
 -Subnet $vnet.subnets[0] `
--PrivateIpAddressVersion IPv4 `
+-PrivateIpAddressVersion IPv4 `
 -LoadBalancerBackendAddressPool $backendPoolv4 `
 -PublicIpAddress  $RdpPublicIP_1
     
-$Ip6Config=New-AzNetworkInterfaceIpConfig `
--Name dsIp6Config `
+$Ip6Config=New-AzNetworkInterfaceIpConfig `
+-Name dsIp6Config `
 -Subnet $vnet.subnets[0] `
--PrivateIpAddressVersion IPv6 `
+-PrivateIpAddressVersion IPv6 `
 -LoadBalancerBackendAddressPool $backendPoolv6
     
 $NIC_1 = New-AzNetworkInterface `
@@ -205,10 +206,10 @@ $NIC_1 = New-AzNetworkInterface `
 -NetworkSecurityGroupId $nsg.Id `
 -IpConfiguration $Ip4Config,$Ip6Config 
     
-$Ip4Config=New-AzNetworkInterfaceIpConfig `
--Name dsIp4Config `
+$Ip4Config=New-AzNetworkInterfaceIpConfig `
+-Name dsIp4Config `
 -Subnet $vnet.subnets[0] `
--PrivateIpAddressVersion IPv4 `
+-PrivateIpAddressVersion IPv4 `
 -LoadBalancerBackendAddressPool $backendPoolv4 `
 -PublicIpAddress  $RdpPublicIP_2  
 
@@ -268,6 +269,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
 
 Vous pouvez trouver des exemples supplémentaires de scripts PowerShell de mise en réseau dans la [documentation Vue d’ensemble de la mise en réseau Azure](../powershell-samples.md?toc=%2fazure%2fnetworking%2ftoc.json).

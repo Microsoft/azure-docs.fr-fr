@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/26/2019
 ms.author: juliako
-ms.openlocfilehash: 39a1dd5c3d26eeb6545a96aa35f9457bd9859c21
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a300345749351a360a16dc00424ee41ece7a17c9
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227089"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652967"
 ---
-# <a name="customizing-media-encoder-standard-presets"></a>Personnalisation des présélections de tâches Media Encoder Standard  
+# <a name="customizing-media-encoder-standard-presets"></a>Personnalisation des présélections de tâches Media Encoder Standard
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]  
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -30,7 +33,7 @@ Cet article explique comment exécuter un encodage avancé avec Media Encoder St
 Cet article vous explique comment personnaliser une présélection en utilisant la présélection [H264 - Vitesse de transmission multiple - 720 pixels](media-services-mes-preset-H264-Multiple-Bitrate-720p.md) et en réduisant le nombre de couches. L’article [Personnalisation des présélections de tâches Media Encoder Standard](media-services-advanced-encoding-with-mes.md) présente des présélections personnalisées qui peuvent être utilisées pour effectuer les tâches d’encodage avancées.
 
 > [!NOTE]
-> Les présélections personnalisées décrites dans cet article ne peuvent pas être utilisées dans les transformations [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/) ou les commandes CLI. Pour plus d’informations, consultez [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Les présélections personnalisées décrites dans cet article ne peuvent pas être utilisées dans les transformations [Media Services v3](../latest/index.yml) ou les commandes CLI. Pour plus d’informations, consultez [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 ## <a name="customizing-a-mes-preset"></a><a id="customizing_presets"></a> Personnalisation d'une présélection MES
 
@@ -43,74 +46,74 @@ Enregistrez l’élément JSON défini dans l’article [H264 - Vitesse de trans
 Ouvrez le fichier **CustomPreset_JSON.json** et supprimez tout d’abord les trois couches **H264Layers** afin que votre fichier ressemble à ceci.
 
 ```json 
-    {  
-      "Version": 1.0,  
-      "Codecs": [  
-        {  
-          "KeyFrameInterval": "00:00:02",  
-          "H264Layers": [  
-            {  
-              "Profile": "Auto",  
-              "Level": "auto",  
-              "Bitrate": 1000,  
-              "MaxBitrate": 1000,  
-              "BufferWindow": "00:00:05",  
-              "Width": 640,  
-              "Height": 360,  
-              "BFrames": 3,  
-              "ReferenceFrames": 3,  
-              "AdaptiveBFrame": true,  
-              "Type": "H264Layer",  
-              "FrameRate": "0/1"  
-            },  
-            {  
-              "Profile": "Auto",  
-              "Level": "auto",  
-              "Bitrate": 650,  
-              "MaxBitrate": 650,  
-              "BufferWindow": "00:00:05",  
-              "Width": 640,  
-              "Height": 360,  
-              "BFrames": 3,  
-              "ReferenceFrames": 3,  
-              "AdaptiveBFrame": true,  
-              "Type": "H264Layer",  
-              "FrameRate": "0/1"  
-            },  
-            {  
-              "Profile": "Auto",  
-              "Level": "auto",  
-              "Bitrate": 400,  
-              "MaxBitrate": 400,  
-              "BufferWindow": "00:00:05",  
-              "Width": 320,  
-              "Height": 180,  
-              "BFrames": 3,  
-              "ReferenceFrames": 3,  
-              "AdaptiveBFrame": true,  
-              "Type": "H264Layer",  
-              "FrameRate": "0/1"  
-            }  
-          ],  
-          "Type": "H264Video"  
-        },  
-        {  
-          "Profile": "AACLC",  
-          "Channels": 2,  
-          "SamplingRate": 48000,  
-          "Bitrate": 128,  
-          "Type": "AACAudio"  
-        }  
-      ],  
-      "Outputs": [  
-        {  
-          "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",  
-          "Format": {  
-            "Type": "MP4Format"  
+  {  
+    "Version": 1.0,  
+    "Codecs": [  
+      {  
+        "KeyFrameInterval": "00:00:02",  
+        "H264Layers": [  
+          {  
+            "Profile": "Auto",  
+            "Level": "auto",  
+            "Bitrate": 1000,  
+            "MaxBitrate": 1000,  
+            "BufferWindow": "00:00:05",  
+            "Width": 640,  
+            "Height": 360,  
+            "BFrames": 3,  
+            "ReferenceFrames": 3,  
+            "AdaptiveBFrame": true,  
+            "Type": "H264Layer",  
+            "FrameRate": "0/1"  
+          },  
+          {  
+            "Profile": "Auto",  
+            "Level": "auto",  
+            "Bitrate": 650,  
+            "MaxBitrate": 650,  
+            "BufferWindow": "00:00:05",  
+            "Width": 640,  
+            "Height": 360,  
+            "BFrames": 3,  
+            "ReferenceFrames": 3,  
+            "AdaptiveBFrame": true,  
+            "Type": "H264Layer",  
+            "FrameRate": "0/1"  
+          },  
+          {  
+            "Profile": "Auto",  
+            "Level": "auto",  
+            "Bitrate": 400,  
+            "MaxBitrate": 400,  
+            "BufferWindow": "00:00:05",  
+            "Width": 320,  
+            "Height": 180,  
+            "BFrames": 3,  
+            "ReferenceFrames": 3,  
+            "AdaptiveBFrame": true,  
+            "Type": "H264Layer",  
+            "FrameRate": "0/1"  
           }  
+        ],  
+        "Type": "H264Video"  
+      },  
+      {  
+        "Profile": "AACLC",  
+        "Channels": 2,  
+        "SamplingRate": 48000,  
+        "Bitrate": 128,  
+        "Type": "AACAudio"  
+      }  
+    ],  
+    "Outputs": [  
+      {  
+        "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",  
+        "Format": {  
+          "Type": "MP4Format"  
         }  
-      ]  
-    }  
+      }  
+    ]  
+  }  
 ```
 
 ## <a name="encoding-with-media-services-net-sdk"></a><a id="encoding_with_dotnet"></a>Encodage à l’aide du Kit de développement logiciel (SDK) .NET de Media Services
@@ -120,9 +123,11 @@ Le code suivant utilise le Kit de développement logiciel (SDK) .NET de Media Se
 - Création d’une tâche d’encodage.
 - Obtention d’une référence à l’encodeur Media Encoder Standard.
 - Chargez la présélection JSON personnalisée que vous avez créée à la section précédente. 
-  
-        // Load the JSON from the local file.
-        string configuration = File.ReadAllText(fileName);  
+
+    ```csharp
+    // Load the JSON from the local file.
+    string configuration = File.ReadAllText(fileName);  
+    ```
 
 - Ajout d’une tâche d’encodage au travail. 
 - Spécification de l’élément multimédia d’entrée à encoder.

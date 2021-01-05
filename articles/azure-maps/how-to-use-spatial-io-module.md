@@ -1,19 +1,20 @@
 ---
 title: Utiliser le module E/S spatiales Azure Maps | Microsoft Azure Maps
 description: Découvrez comment utiliser le module E/S spatiales fourni par le kit de développement logiciel (SDK) web Azure Maps. Ce module propose de puissantes fonctionnalités pour permettre aux développeurs d’intégrer facilement les données spatiales au kit de développement logiciel (SDK) web Azure Maps.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 02/28/2020
-ms.topic: conceptual
+ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 1de9dd9721700418b1aa9ba661fc070db1dbedcc
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.custom: devx-track-js
+ms.openlocfilehash: cd64c80acceb1542c080fc45efbce59f287d448a
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804637"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97680694"
 ---
 # <a name="how-to-use-the-azure-maps-spatial-io-module"></a>Utiliser le module E/S spatiales Azure Maps
 
@@ -29,17 +30,16 @@ Dans ce guide, nous allons apprendre à intégrer et à utiliser le module E/S s
 
 Cette vidéo fournit une vue d’ensemble du module E/S spatiales dans le Kit de développement logiciel (SDK) web Azure Maps.
 
-<br/>
+</br>
 
-<iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Easily-integrate-spatial-data-into-the-Azure-Maps/player" width="960" height="540" allowFullScreen frameBorder="0" title="Intégrez facilement des données spatiales dans Azure Maps – Vidéo Microsoft Channel 9"></iframe>
-
+> [!VIDEO https://channel9.msdn.com/Shows/Internet-of-Things-Show/Easily-integrate-spatial-data-into-the-Azure-Maps/player?format=ny]
 
 > [!WARNING]
 > Utilisez uniquement des données et des services qui proviennent d’une source de confiance, en particulier si vous la référencez à partir d’un autre domaine. Le module d’E/S spatiales prend des mesures pour réduire les risques, mais l’approche la plus sûre n’autorise pas les données dangereuses dans votre application en premier lieu. 
 
 ## <a name="prerequisites"></a>Prérequis
 
-Avant d'utiliser le module E/S spatiales, vous devez [créer un compte Azure Maps](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-account-with-azure-maps) et [obtenir la clé primaire d’abonnement pour votre compte](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#get-the-primary-key-for-your-account).
+Avant d'utiliser le module E/S spatiales, vous devez [créer un compte Azure Maps](./quick-demo-map-app.md#create-an-azure-maps-account) et [obtenir la clé primaire d’abonnement pour votre compte](./quick-demo-map-app.md#get-the-primary-key-for-your-account).
 
 ## <a name="installing-the-spatial-io-module"></a>Installation du module E/S spatiales
 
@@ -67,7 +67,7 @@ Vous pouvez charger le module E/S spatiales Azure Maps à l’aide de l'une des 
 
 1. Créez un fichier HTML.
 
-2. Chargez le kit de développement logiciel (SDK) web Azure Maps et initialisez le contrôle de carte. Pour plus d’informations, consultez le guide [Contrôle de carte Azure Maps](https://docs.microsoft.com/azure/azure-maps/how-to-use-map-control). Au terme de cette étape, votre fichier HTML devrait se présenter comme suit :
+2. Chargez le kit de développement logiciel (SDK) web Azure Maps et initialisez le contrôle de carte. Pour plus d’informations, consultez le guide [Contrôle de carte Azure Maps](./how-to-use-map-control.md). Au terme de cette étape, votre fichier HTML devrait se présenter comme suit :
 
     ```html
     <!DOCTYPE html>
@@ -255,4 +255,4 @@ La fonctionnalité présentée ici n’est qu’une des nombreuses fonctionnalit
 Reportez-vous à la documentation E/S spatiales Azure Maps :
 
 > [!div class="nextstepaction"]
-> [Package E/S spatiales Azure Maps](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/)
+> [Package E/S spatiales Azure Maps](/javascript/api/azure-maps-spatial-io/)

@@ -8,23 +8,25 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/04/2020
 ms.author: aahi
-ms.openlocfilehash: a37439d24a39a16e8bb51a09c9a33abecfa36fc0
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: 037137cf5a6e4ddd66fc15e8ad9775ea77177ef6
+ms.sourcegitcommit: 1cf157f9a57850739adef72219e79d76ed89e264
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78899393"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94625226"
 ---
 Utilisez ce guide de démarrage rapide pour effectuer votre première recherche d’images à l’aide de la bibliothèque de client Recherche d’images Bing, qui est un wrapper de l’API et contient les mêmes fonctionnalités. Cette application JavaScript simple envoie une requête de recherche d’image, analyse la réponse JSON et affiche l’URL de la première image retournée.
 
 Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/imageSearch.js) avec la gestion des erreurs et des annotations supplémentaires.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* Le [SDK Recherche d’images Cognitive Services pour Node.js](https://www.npmjs.com/package/@azure/cognitiveservices-imagesearch)
-    * Installer à l’aide de `npm install @azure/cognitiveservices-imagesearch`
-* Le module [Node.js Azure Rest](https://www.npmjs.com/package/ms-rest-azure)
-    * Installer à l’aide de `npm install ms-rest-azure`
+* La dernière version de [Node.js](https://nodejs.org/en/download/).
+* Le [SDK Recherche d’images Bing pour JavaScript](https://www.npmjs.com/package/@azure/cognitiveservices-imagesearch)
+     *  Pour l’installer, exécutez `npm install @azure/cognitiveservices-imagesearch`
+* La classe `CognitiveServicesCredentials` du package `@azure/ms-rest-azure-js` pour authentifier le client.
+     * Pour l’installer, exécutez `npm install @azure/ms-rest-azure-js`
 
 [!INCLUDE [cognitive-services-bing-image-search-signup-requirements](~/includes/cognitive-services-bing-image-search-signup-requirements.md)]
 
@@ -35,7 +37,7 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
     ```javascript
     'use strict';
     const ImageSearchAPIClient = require('@azure/cognitiveservices-imagesearch');
-    const CognitiveServicesCredentials = require('ms-rest-azure').CognitiveServicesCredentials;
+    const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
     ```
 
 2. Dans la méthode principale de votre projet, créez des variables pour votre clé d’abonnement valide, les résultats d’image devant être retournés par Bing et un terme de recherche. Ensuite, instanciez le client de recherche d’image à l’aide de la clé.
@@ -89,13 +91,12 @@ Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azu
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Tutoriel d’une application monopage Recherche d’images Bing](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/tutorial-bing-image-search-single-page-app)
+> [Tutoriel d’une application monopage Recherche d’images Bing](../../tutorial-bing-image-search-single-page-app.md)
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Qu’est-ce que la Recherche d’images Bing ?](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/overview)
+* [Qu’est-ce que la Recherche d’images Bing ?](../../overview.md)
 * [Essayez une démonstration interactive en ligne](https://azure.microsoft.com/services/cognitive-services/bing-image-search-api/)
-* [Obtenir une clé d’accès Cognitive Services gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-image-search-api)
 * [Exemples Node.js pour le SDK Azure Cognitive Services](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples)
-* [Documentation Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services)
-* [Informations de référence sur l’API Recherche d’images Bing](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)
+* [Documentation Azure Cognitive Services](../../../index.yml)
+* [Informations de référence sur l’API Recherche d’images Bing](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)

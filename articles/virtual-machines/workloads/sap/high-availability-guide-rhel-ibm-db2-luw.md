@@ -9,21 +9,25 @@ editor: ''
 tags: azure-resource-manager
 keywords: SAP
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 02/13/2020
+ms.date: 10/16/2020
 ms.author: juergent
-ms.openlocfilehash: 1a00a3c1e0d34a8c7abbcd5bfc7a6771d9e2a4c3
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.openlocfilehash: 85f268990ac9e0c04cba1b9c409a232a24ce0d61
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82983038"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608632"
 ---
 # <a name="high-availability-of-ibm-db2-luw-on-azure-vms-on-red-hat-enterprise-linux-server"></a>Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur Red Hat Enterprise Linux Server
 
 IBM Db2 pour Linux, UNIX et Windows (LUW) dans une [configuration de haute disponibilité et reprise d’activité (HADR)](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.admin.ha.doc/doc/c0011267.html) est constitué d’un nœud qui exécute une instance de base de données primaire et d’au moins un nœud qui exécute une instance de base de données secondaire. Les modifications apportées à l’instance de base de données primaire sont répliquées vers une instance de base de données secondaire de façon synchrone ou asynchrone, selon votre configuration. 
+
+> [!NOTE]
+> Cet article contient des références aux termes *maître* et *esclave*, termes que Microsoft n’utilise plus. Lorsque ces termes seront supprimés du logiciel, nous les supprimerons de cet article.
 
 Cet article décrit comment déployer et configurer les machines virtuelles Azure, installer le framework de cluster, et installer IBM Db2 LUW avec la configuration HADR. 
 
@@ -67,7 +71,7 @@ Avant de commencer une installation, consultez les notes SAP suivantes et la doc
 
 
 ## <a name="overview"></a>Vue d’ensemble
-Pour obtenir une haute disponibilité, IBM Db2 LUW avec HADR est installé sur au moins deux machines virtuelles Azure, qui sont déployées sur un [groupe à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets) ou des [zones de disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-ha-availability-zones). 
+Pour obtenir une haute disponibilité, IBM Db2 LUW avec HADR est installé sur au moins deux machines virtuelles Azure, qui sont déployées sur un [groupe à haute disponibilité Azure](../../windows/tutorial-availability-sets.md) ou des [zones de disponibilité Azure](./sap-ha-availability-zones.md). 
 
 Les graphiques suivants illustrent une configuration de deux machines virtuelles Azure de serveur de base de données. Les deux machines virtuelles Azure de serveur de base de données sont associées à leur propre système de stockage et sont opérationnelles. Dans HADR, une instance de base de données dans l’une des machines virtuelles Azure a le rôle de l’instance primaire. Tous les clients sont connectés à une instance primaire. Toutes les modifications dans les transactions de base de données sont conservées localement dans le journal des transactions Db2. Comme les enregistrements du journal des transactions sont conservés localement, les enregistrements sont transférés via TCP/IP à l’instance de base de données sur le second serveur de base de données, le serveur de secours ou une instance de secours. L’instance de secours met à jour la base de données locale en restaurant par progression les enregistrements du journal des transactions transférés. De cette façon, le serveur de secours est synchronisé avec le serveur principal.
 
@@ -144,7 +148,7 @@ Vérifiez que le système d’exploitation sélectionné est pris en charge par 
 
 ## <a name="create-the-pacemaker-cluster"></a>Créez le cluster Pacemaker
     
-Pour créer un cluster Pacemaker de base pour ce serveur IBM Db2, voir  [Configurer Pacemaker sur Red Hat Enterprise Linux dans Azure][rhel-pcs-azr]. 
+Pour créer un cluster Pacemaker de base pour ce serveur IBM Db2, consultez [Configurer Pacemaker sur Red Hat Enterprise Linux dans Azure][rhel-pcs-azr]. 
 
 ## <a name="install-the-ibm-db2-luw-and-sap-environment"></a>Installer l’environnement SAP et IBM Db2 LUW
 
@@ -398,11 +402,13 @@ Liste complète des ressources :
 
 
 ### <a name="configure-azure-load-balancer"></a>Configurer Azure Load Balancer
-Pour configurer Azure Load Balancer, nous vous recommandons d’utiliser la [référence SKU standard Azure Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-overview), puis de procéder comme suit :
+Pour configurer Azure Load Balancer, nous vous recommandons d’utiliser la [référence SKU standard Azure Load Balancer](../../../load-balancer/load-balancer-overview.md), puis de procéder comme suit :
 
 > [!NOTE]
-> La référence SKU Standard Load Balancer a des restrictions quant à l’accès aux adresses IP publiques à partir des nœuds situés sous le Load Balancer. L’article [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-standard-load-balancer-outbound-connections) décrit comment activer ces nœuds pour accéder aux adresses IP publiques.
+> La référence SKU Standard Load Balancer a des restrictions quant à l’accès aux adresses IP publiques à partir des nœuds situés sous le Load Balancer. L’article [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](./high-availability-guide-standard-load-balancer-outbound-connections.md) décrit comment activer ces nœuds pour accéder aux adresses IP publiques.
 
+> [!IMPORTANT]
+> L'adresse IP flottante n'est pas prise en charge sur une configuration d'adresse IP secondaire de carte réseau dans les scénarios d'équilibrage de charge. Pour plus d'informations, consultez [Limitations relatives à Azure Load Balancer](../../../load-balancer/load-balancer-multivip-overview.md#limitations). Si vous avez besoin d'une adresse IP supplémentaire pour la machine virtuelle, déployez une deuxième carte réseau.  
 
 
 1. Créez un pool d’adresses IP front-end :
@@ -511,7 +517,7 @@ Vous pouvez utiliser des partages NFS ou GlusterFS hautement disponibles existan
 
 - [GlusterFS sur les machines virtuelles Azure sur Red Hat Enterprise Linux pour SAP NetWeaver][glusterfs] 
 - [Haute disponibilité pour SAP NetWeaver sur des machines virtuelles Azure sur Red Hat Enterprise Linux avec Azure NetApp Files pour les applications SAP][anf-rhel]
-- [Azure NetApp Files](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-introduction) (pour créer des partages NFS)
+- [Azure NetApp Files](../../../azure-netapp-files/azure-netapp-files-introduction.md) (pour créer des partages NFS)
 
 ## <a name="test-the-cluster-setup"></a>Tester la configuration du cluster
 
@@ -557,7 +563,7 @@ L’état d’origine dans un système SAP est documenté dans Transaction DBACO
 > Avant de commencer le test, vérifiez les points suivants :
 > * Pacemaker ne comporte pas d’action ayant échoué (pcs status).
 > * Il n’existe aucune contrainte d’emplacement (reliquats d’un test de migration)
-> * La synchronisation HADR IBM Db2 fonctionne. Vérifiez auprès de l’utilisateur db2\<sid> <pre><code>db2pd -hadr -db \<DBSID></code></pre>
+> * La synchronisation HADR IBM Db2 fonctionne. Vérifiez avec l’utilisateur db2\<sid> <pre><code>db2pd -hadr -db \<DBSID></code></pre>
 
 
 Migrez le nœud qui exécute la base de données Db2 primaire en exécutant la commande suivante :
@@ -816,7 +822,7 @@ rsc_st_azure    (stonith:fence_azure_arm):      Started az-idb02
      nc_db2id2_ID2      (ocf::heartbeat:azure-lb):      Started az-idb02</code></pre>
 
 ## <a name="next-steps"></a>Étapes suivantes
-- [Scénarios et architecture de haute disponibilité pour SAP NetWeaver](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-architecture-scenarios)
+- [Scénarios et architecture de haute disponibilité pour SAP NetWeaver](./sap-high-availability-architecture-scenarios.md)
 - [Configuration de Pacemaker sur Red Hat Entreprise Linux dans Azure][rhel-pcs-azr]
 
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533

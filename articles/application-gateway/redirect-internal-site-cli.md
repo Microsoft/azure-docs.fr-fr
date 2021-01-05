@@ -5,15 +5,15 @@ description: Découvrez comment créer une passerelle d’application qui rediri
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: 7d37e36a4cdfed462904e2d02871345ad89d7ac9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b443fa7c2d6c644fc1173295f89813c18657d160
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74074549"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566722"
 ---
 # <a name="create-an-application-gateway-with-internal-redirection-using-the-azure-cli"></a>Créer une passerelle d’application avec redirection interne à l’aide d’Azure CLI
 
@@ -21,18 +21,17 @@ Vous pouvez utiliser l’interface CLI Azure pour configurer une [redirection du
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle Application Gateway
-> * Ajouter des écouteurs et une règle de redirection
-> * Créer un groupe de machines virtuelles identiques avec le pool backend
-> * Créer un enregistrement CNAME dans votre domaine
+* Configurer le réseau
+* Créer une passerelle Application Gateway
+* Ajouter des écouteurs et une règle de redirection
+* Créer un groupe de machines virtuelles identiques avec le pool backend
+* Créer un enregistrement CNAME dans votre domaine
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0.4 ou une version ultérieure pour poursuivre la procédure décrite dans ce guide de démarrage rapide. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Cet tutoriel nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

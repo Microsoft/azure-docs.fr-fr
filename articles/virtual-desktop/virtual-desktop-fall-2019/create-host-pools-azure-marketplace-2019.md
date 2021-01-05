@@ -1,24 +1,22 @@
 ---
-title: Pool d’hôtes Windows Virtual Desktop Place de marché Azure - Azure
-description: Guide pratique pour créer un pool d’hôtes Windows Virtual Desktop à l’aide de la Place de marché Azure.
-services: virtual-desktop
+title: Pool d’hôtes Windows Virtual Desktop (classique) de la Place de marché Azure – Azure
+description: Guide pratique pour créer un pool d’hôtes Windows Virtual Desktop (classique) à l’aide de la Place de marché Azure.
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: tutorial
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 741bd94b290560bdc850cbf7bc24ec57104d8a66
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 04184a658ae1efd03afd3e920818eb5317bc7553
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613855"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008591"
 ---
-# <a name="tutorial-create-a-host-pool-by-using-the-azure-marketplace"></a>Tutoriel : Créer un pool d’hôtes en utilisant la Place de marché Azure
+# <a name="tutorial-create-a-host-pool-in-windows-virtual-desktop-classic"></a>Tutoriel : Créer un pool d’hôtes dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../create-host-pools-azure-marketplace.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../create-host-pools-azure-marketplace.md).
 
 Dans ce tutoriel, vous allez apprendre à créer un pool d’hôtes avec un locataire Windows Virtual Desktop à l’aide d’une offre de la Place de marché Microsoft Azure.
 
@@ -154,7 +152,7 @@ Les utilisateurs que vous ajoutez au groupe d’applications de bureau peuvent s
 
 Voici les clients actuellement pris en charge :
 
-* [Client Bureau à distance pour Windows 7 et Windows 10](../connect-windows-7-and-10.md)
+* [Client Bureau à distance pour Windows 7 et Windows 10](connect-windows-7-10-2019.md)
 * [Client web Windows Virtual Desktop](connect-web-2019.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -162,4 +160,4 @@ Voici les clients actuellement pris en charge :
 Vous avez créé un pool d’hôtes et affecté des utilisateurs pour qu’ils puissent accéder à son bureau. Vous pouvez remplir votre pool d’hôtes avec des programmes RemoteApp. Pour en savoir plus sur la façon de gérer des applications dans Windows Virtual Desktop, consultez ce tutoriel :
 
 > [!div class="nextstepaction"]
-> [Gérer les groupes d’applications](../manage-app-groups.md)
+> [Gérer les groupes d’applications](manage-app-groups-2019.md)

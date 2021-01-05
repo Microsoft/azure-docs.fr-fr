@@ -8,19 +8,24 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 5f3e05752967be8872c0e6fd9008bfae05d950fa
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: d4db5843d9cd3bd42780636c43aa96ce9192bf73
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76169535"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350498"
 ---
 # <a name="quickstart-use-ruby-to-call-the-bing-web-search-api"></a>Démarrage rapide : Utiliser Ruby pour appeler l’API Recherche Web Bing  
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing et recevoir la réponse JSON. Cette application Ruby envoie une requête de recherche à l’API et affiche la réponse. Alors que cette application est écrite en Ruby, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing. Cette application Ruby envoie une requête de recherche à l’API et affiche la réponse JSON. Bien que cette application est écrite en Ruby, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -33,7 +38,7 @@ Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage r
 
 ## <a name="create-a-project-and-declare-required-modules"></a>Créer un projet et déclarer les modules requis
 
-Créez un projet Ruby dans l’éditeur ou l’IDE de votre choix. Exigez ensuite `net/https` pour les requêtes, `uri` pour le traitement des URI, et `json` à l’analyse de la réponse.
+Créez un projet Ruby dans l’éditeur ou l’IDE de votre choix. Exigez ensuite `net/https` pour les requêtes, `uri` pour le traitement des URI et `json` pour l’analyse de la réponse.
 
 ```ruby
 require 'net/https'
@@ -43,7 +48,13 @@ require 'json'
 
 ## <a name="define-variables"></a>Définir des variables
 
-Quelques variables doivent être définies avant de continuer. `uri` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. Vérifiez que `uri` et `path` sont valides et remplacez la valeur `accessKey` par une clé d’abonnement valide à partir de votre compte Azure. N’hésitez pas à personnaliser la requête de recherche en remplaçant la valeur de `term`.
+Quelques variables doivent être définies avant de continuer :
+
+1. Pour la valeur `uri`, vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. 
+
+2. Vérifiez que les valeurs `uri` et `path` sont valides et remplacez la valeur `accessKey` par une clé d’abonnement à partir de votre compte Azure. 
+
+3. Si vous le souhaitez, vous pouvez personnaliser la requête de recherche en remplaçant la valeur de `term`.
 
 ```ruby
 accessKey = "YOUR_SUBSCRIPTION_KEY"
@@ -60,18 +71,33 @@ end
 
 ## <a name="make-a-request"></a>Exécuter une requête
 
-Utilisez ce code pour effectuer une requête et gérer la réponse.
+Utilisez ce code pour effectuer une requête et gérer la réponse :
 
 ```ruby
 # Construct the endpoint uri.
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 uri = URI(uri + path + "?q=" + URI.escape(term))
 puts "Searching the Web for: " + term
 
 # Create the request.
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 request = Net::HTTP::Get.new(uri)
 request['Ocp-Apim-Subscription-Key'] = accessKey
 
 # Get the response.
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
     http.request(request)
 end
@@ -96,7 +122,7 @@ puts JSON::pretty_generate(JSON(response.body))
 
 ## <a name="put-it-all-together"></a>Assemblage
 
-La dernière étape consiste à valider votre code et à l’exécuter ! Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
+La dernière étape consiste à valider votre code et à l’exécuter. Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
 
 ```ruby
 require 'net/https'
@@ -135,7 +161,7 @@ puts "\nJSON Response:\n\n"
 puts JSON::pretty_generate(JSON(response.body))
 ```
 
-## <a name="sample-response"></a>Exemple de réponse
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
 Les réponses à partir de l’API Recherche Web Bing sont retournées au format JSON. Cet exemple de réponse a été tronqué pour afficher un résultat unique.
 
@@ -264,6 +290,6 @@ Les réponses à partir de l’API Recherche Web Bing sont retournées au format
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel sur l’application à page unique Recherche Web Bing](../tutorial-bing-web-search-single-page-app.md)
+> [Tutoriel sur l’application d’API Recherche Web Bing monopage](../tutorial-bing-web-search-single-page-app.md)
 
 [!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]

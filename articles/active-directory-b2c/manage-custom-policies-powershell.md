@@ -6,16 +6,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: ebf0cfffa410d8dfe2f0e0b42a0fee0c16106fde
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fcc482e215e646fec20516f35641bd05398d2f2d
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78187404"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96928713"
 ---
 # <a name="manage-azure-ad-b2c-custom-policies-with-azure-powershell"></a>Gérer les stratégies personnalisées Azure AD B2C avec Azure PowerShell
 
@@ -29,15 +29,15 @@ Azure PowerShell fournit différentes cmdlet pour la gestion basée sur ligne de
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-* [Locataire Azure AD B2C](tutorial-create-tenant.md) et informations d'identification d'un utilisateur de l'annuaire disposant du rôle [Administrateur de stratégies B2C IEF](../active-directory/users-groups-roles/directory-assign-admin-roles.md#b2c-ief-policy-administrator)
+* [Locataire Azure AD B2C](tutorial-create-tenant.md) et informations d'identification d'un utilisateur de l'annuaire disposant du rôle [Administrateur de stratégies B2C IEF](../active-directory/roles/permissions-reference.md#b2c-ief-policy-administrator)
 * [Stratégies personnalisées](custom-policy-get-started.md) téléchargées sur votre locataire
-* [Azure AD PowerShell pour Graph **- Module disponible en préversion**](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0)
+* [Azure AD PowerShell pour Graph **- Module disponible en préversion**](/powershell/azure/active-directory/install-adv2)
 
 ## <a name="connect-powershell-session-to-b2c-tenant"></a>Connecter la session PowerShell au locataire B2C
 
 Pour utiliser des stratégies personnalisées dans votre locataire Azure AD B2C, vous devez d'abord connecter votre session PowerShell au locataire à l'aide de la commande [Connect-AzureAD][Connect-AzureAD].
 
-Exécutez la commande suivante, en remplaçant `{b2c-tenant-name}` par le nom de votre locataire Azure AD B2C. Connectez-vous à l'aide d'un compte de l'annuaire auquel le rôle [Administrateur de stratégies B2C IEF](../active-directory/users-groups-roles/directory-assign-admin-roles.md#b2c-ief-policy-administrator) a été attribué.
+Exécutez la commande suivante, en remplaçant `{b2c-tenant-name}` par le nom de votre locataire Azure AD B2C. Connectez-vous à l'aide d'un compte de l'annuaire auquel le rôle [Administrateur de stratégies B2C IEF](../active-directory/roles/permissions-reference.md#b2c-ief-policy-administrator) a été attribué.
 
 ```PowerShell
 Connect-AzureAD -Tenant "{b2c-tenant-name}.onmicrosoft.com"
@@ -191,15 +191,15 @@ Message: Validation failed: 1 validation error(s) found in policy "B2C_1A_SIGNUP
 ...
 ```
 
-Pour plus d'informations sur la résolution des problèmes de stratégies personnalisées, consultez [Résoudre les problèmes liés aux stratégies personnalisées Azure AD B2C et à Identity Experience Framework](active-directory-b2c-guide-troubleshooting-custom.md).
+Pour plus d'informations sur la résolution des problèmes de stratégies personnalisées, consultez [Résoudre les problèmes liés aux stratégies personnalisées Azure AD B2C et à Identity Experience Framework](./troubleshoot-custom-policies.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d'informations sur l'utilisation de PowerShell pour déployer des stratégies personnalisées dans le cadre d'un pipeline d'intégration/livraison continue (CI/CD), consultez [Déployer des stratégies personnalisées à partir d'un pipeline Azure DevOps](deploy-custom-policies-devops.md).
 
 <!-- LINKS - External -->
-[Connect-AzureAD]: https://docs.microsoft.com/powershell/module/azuread/get-azureadmstrustframeworkpolicy
-[Get-AzureADMSTrustFrameworkPolicy]: https://docs.microsoft.com/powershell/module/azuread/get-azureadmstrustframeworkpolicy
-[New-AzureADMSTrustFrameworkPolicy]: https://docs.microsoft.com/powershell/module/azuread/new-azureadmstrustframeworkpolicy
-[Remove-AzureADMSTrustFrameworkPolicy]: https://docs.microsoft.com/powershell/module/azuread/remove-azureadmstrustframeworkpolicy
-[Set-AzureADMSTrustFrameworkPolicy]: https://docs.microsoft.com/powershell/module/azuread/set-azureadmstrustframeworkpolicy
+[Connect-AzureAD]: /powershell/module/azuread/get-azureadmstrustframeworkpolicy
+[Get-AzureADMSTrustFrameworkPolicy]: /powershell/module/azuread/get-azureadmstrustframeworkpolicy
+[New-AzureADMSTrustFrameworkPolicy]: /powershell/module/azuread/new-azureadmstrustframeworkpolicy
+[Remove-AzureADMSTrustFrameworkPolicy]: /powershell/module/azuread/remove-azureadmstrustframeworkpolicy
+[Set-AzureADMSTrustFrameworkPolicy]: /powershell/module/azuread/set-azureadmstrustframeworkpolicy

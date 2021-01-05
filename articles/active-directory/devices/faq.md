@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: ravenn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c238600d412e53ad665214492e292aa395655b78
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: dd438a09b929274808984322981f6d21da0bf68f
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79497524"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96860947"
 ---
 # <a name="azure-active-directory-device-management-faq"></a>FAQ sur la gestion des appareils Azure Active Directory
 
@@ -25,7 +25,7 @@ ms.locfileid: "79497524"
 ### <a name="q-i-registered-the-device-recently-why-cant-i-see-the-device-under-my-user-info-in-the-azure-portal-or-why-is-the-device-owner-marked-as-na-for-hybrid-azure-active-directory-azure-ad-joined-devices"></a>Q : J’ai enregistré récemment l’appareil. Pourquoi ne puis-je pas voir l’appareil sous mes informations d’utilisateur dans le Portail Microsoft Azure ? Ou pourquoi le propriétaire de l’appareil est-il marqué N/A pour les appareils joints à Azure Active Directory (Azure AD) hybrides ?
 
 **R :** Les appareils Windows 10 qui sont joints à Azure AD de manière hybride ne s’affichent pas en tant **qu’appareils UTILISATEUR**.
-Vous devez utiliser la vue **Tous les appareils** dans le portail Azure. Vous pouvez également utiliser une cmdlet PowerShell [Get-MsolDevice](/powershell/module/msonline/get-msoldevice?view=azureadps-1.0).
+Vous devez utiliser la vue **Tous les appareils** dans le portail Azure. Vous pouvez également utiliser une cmdlet PowerShell [Get-MsolDevice](/powershell/module/msonline/get-msoldevice).
 
 Seuls les appareils suivants sont répertoriés en tant **qu’appareils UTILISATEUR** :
 
@@ -62,7 +62,7 @@ Seuls les appareils suivants sont répertoriés en tant **qu’appareils UTILISA
 - L’utilisateur désactive l’appareil à partir du portail Mes applications. 
 - Un administrateur (ou un utilisateur) supprime ou désactive l’appareil dans le portail Azure ou à l’aide de PowerShell.
 - Valable uniquement pour les appareils hybrides joints à Azure AD : Un administrateur supprime l’unité d’organisation Appareils de l’étendue de synchronisation, ce qui entraîne la suppression des appareils dans Azure AD.
-- Mise à niveau d’Azure AD connecté à la version 1.4.xx.x. [Comprendre Azure AD Connect 1.4.xx.x et la disparition des appareils](/azure/active-directory/hybrid/reference-connect-device-disappearance).
+- Mise à niveau d’Azure AD connecté à la version 1.4.xx.x. [Comprendre Azure AD Connect 1.4.xx.x et la disparition des appareils](../hybrid/reference-connect-device-disappearance.md).
 
 
 Pour savoir comment remédier à cela, lisez la section ci-dessous.
@@ -176,6 +176,8 @@ Les utilisateurs supprimés ou désactivés qui ne se sont pas connectés préc�
 
 **R :** Actuellement, les UPN ne sont pas entièrement pris en charge sur les appareils joints Azure AD. Dès lors, leur authentification auprès d’Azure AD échoue après la modification de leur UPN. C'est la raison pour laquelle les utilisateurs rencontrent des problèmes liés à l'authentification unique et à l'accès conditionnel sur leurs appareils. Pour l'instant, les utilisateurs doivent se connecter à Windows via la vignette « Autre utilisateur » à l’aide de leur nouvel UPN pour résoudre ce problème. Nous mettons tout en œuvre pour résoudre ce problème. Cela étant, les utilisateurs qui se connectent avec Windows Hello Entreprise ne rencontrent pas ce problème. 
 
+Les modifications d’UPN sont prises en charge avec la mise à jour Windows 10 2004. Les utilisateurs d’appareils comportant cette mise à jour n’auront pas de problèmes après avoir modifié leurs UPN
+
 ---
 
 ### <a name="q-my-users-cant-search-printers-from-azure-ad-joined-devices-how-can-i-enable-printing-from-those-devices"></a>Q : Mes utilisateurs ne peuvent pas rechercher d’imprimantes à partir d’appareils joints à Azure AD. Comment activer l’impression à partir de ces appareils ?
@@ -196,7 +198,7 @@ Les utilisateurs supprimés ou désactivés qui ne se sont pas connectés préc�
 
 ---
 
-### <a name="q-why-dont-some-of-my-users-get-azure-multi-factor-authentication-prompts-on-azure-ad-joined-devices"></a>Q : Pourquoi certains de mes utilisateurs ne reçoivent pas d’invites pour l’authentification multifacteur Azure sur des appareils joints à Azure AD ?
+### <a name="q-why-dont-some-of-my-users-get-azure-ad-multi-factor-authentication-prompts-on-azure-ad-joined-devices"></a>Q : Pourquoi certains de mes utilisateurs ne reçoivent pas d'invites Azure AD Multi-Factor Authentication sur les appareils joints à Azure AD ?
 
 **R :** Un utilisateur peut joindre ou inscrire un appareil à Azure AD à l’aide de l’authentification multifacteur. L’appareil lui-même devient alors un second facteur approuvé pour cet utilisateur. À chaque fois que le même utilisateur se connecte à l’appareil et accède à une application, Azure AD prend en compte l’appareil comme second facteur. Cela permet à cet utilisateur d’accéder en toute transparence aux applications sans invites d’authentification multifacteur supplémentaires. 
 
@@ -267,6 +269,8 @@ La jonction Azure AD Hybride est prioritaire sur l’état inscrit auprès d’A
 
 **R :** Actuellement, les UPN ne sont pas entièrement pris en charge sur les appareils joints Azure AD hybrides. Les utilisateurs peuvent se connecter à l’appareil et accéder à leurs applications locales, mais l’authentification auprès d’Azure AD échoue après la modification d'un UPN. C'est la raison pour laquelle les utilisateurs rencontrent des problèmes liés à l'authentification unique et à l'accès conditionnel sur leurs appareils. Pour l’instant, vous devez déconnecter l’appareil d’Azure AD (exécutez « dsregcmd /leave » avec des privilèges élevés) et le reconnecter (ce qui s’effectue automatiquement) pour résoudre le problème. Nous mettons tout en œuvre pour résoudre ce problème. Cela étant, les utilisateurs qui se connectent avec Windows Hello Entreprise ne rencontrent pas ce problème. 
 
+Les modifications d’UPN sont prises en charge avec la mise à jour Windows 10 2004. Les utilisateurs d’appareils comportant cette mise à jour n’auront pas de problèmes après avoir modifié leurs UPN
+
 ---
 
 ### <a name="q-do-windows-10-hybrid-azure-ad-joined-devices-require-line-of-sight-to-the-domain-controller-to-get-access-to-cloud-resources"></a>Q : Des appareils joints Azure AD hybrides Windows 10 nécessitent-ils une visibilité du contrôleur de domaine pour accéder aux ressources cloud ?
@@ -308,7 +312,7 @@ La jonction Azure AD Hybride est prioritaire sur l’état inscrit auprès d’A
 **R :** Procédez comme suit :
 
 1.    [Créez une stratégie de conformité](/intune/compliance-policy-create-mac-os)
-1.    [Définissez une stratégie d’accès conditionnel pour les appareils macOS](../active-directory-conditional-access-azure-portal.md) 
+1.    [Définissez une stratégie d’accès conditionnel pour les appareils macOS](../conditional-access/overview.md) 
 
 **Remarques :**
 

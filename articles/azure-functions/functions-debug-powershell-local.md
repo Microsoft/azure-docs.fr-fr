@@ -1,17 +1,17 @@
 ---
 title: Déboguer localement des fonctions PowerShell Azure
-description: Découvrez comment développer des fonctions à l’aide de PowerShell.
+description: Découvrez comment déboguer des fonctions PowerShell en cas d’exécution locale.
 author: tylerleonhardt
 ms.topic: conceptual
 ms.date: 04/22/2019
 ms.author: tyleonha
 ms.reviewer: glenga
-ms.openlocfilehash: 133e89bd9187ae5e48fa208b407678760d31adfd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a668024db126c82f96756555aba513b77f7d7366
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78163758"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93422958"
 ---
 # <a name="debug-powershell-azure-functions-locally"></a>Déboguer localement des fonctions PowerShell Azure
 
@@ -38,7 +38,7 @@ PSFunctionApp
  | - profile.ps1
 ```
 
-Cette application de fonction est semblable à celle que vous obtenez lorsque vous effectuez les procédures de [démarrage rapide PowerShell](functions-create-first-function-powershell.md).
+Cette application de fonction est semblable à celle que vous obtenez lorsque vous effectuez les procédures de [démarrage rapide PowerShell](./create-first-function-vs-code-powershell.md).
 
 Le code de fonction dans `run.ps1` ressemble au script suivant :
 
@@ -66,6 +66,9 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
 
 Pour déboguer une fonction PowerShell quelconque, la fonction doit s’arrêter pour que le débogueur soit attaché. L’applet de commande `Wait-Debugger` arrête son exécution et attend le débogueur.
 
+>[!NOTE]
+>Lorsque vous utilisez PowerShell 7, vous n’avez pas besoin d’ajouter l’appel `Wait-Debugger` à votre code.
+
 Il vous suffit d’ajouter un appel à l’applet de commande `Wait-Debugger` juste au-dessus de l’instruction `if`, comme suit :
 
 ```powershell
@@ -92,10 +95,10 @@ Avec `Wait-Debugger` en place, vous pouvez maintenant déboguer les fonctions à
 Pour déboguer vos fonctions PowerShell dans Visual Studio Code, les éléments suivants doivent être installés :
 
 * [Extension PowerShell pour Visual Studio Code](/powershell/scripting/components/vscode/using-vscode)
-* [Extension Azure Functions pour Visual Studio Code](functions-create-first-function-vs-code.md)
+* [Extension Azure Functions pour Visual Studio Code](./create-first-function-cli-powershell.md)
 * [PowerShell Core 6.2 ou version ultérieure](/powershell/scripting/install/installing-powershell-core-on-windows)
 
-Après avoir installé ces dépendances, chargez un projet de fonctions PowerShell existant ou [créez votre premier projet de fonctions PowerShell](functions-create-first-function-powershell.md).
+Après avoir installé ces dépendances, chargez un projet de fonctions PowerShell existant ou [créez votre premier projet de fonctions PowerShell](./create-first-function-vs-code-powershell.md).
 
 >[!NOTE]
 > Si votre projet n’a pas les fichiers de configuration nécessaires, vous êtes invité à les ajouter.
@@ -108,7 +111,7 @@ PowerShell Core s’installe côte à côte avec Windows PowerShell. Définissez
 
 1. Choisissez **PowerShell : Afficher le menu de session**.
 
-1. Si votre **session active** n’est pas **PowerShell Core 6**, choisissez **Basculer vers : PowerShell Core 6**.
+1. Si votre **session active** n’est pas **PowerShell Core 6** , choisissez **Basculer vers : PowerShell Core 6**.
 
 Lorsqu’un fichier PowerShell est ouvert, vous voyez la version affichée en vert en bas à droite de la fenêtre. La sélection de ce texte affiche également le menu de la session. Pour plus d’informations, consultez [Choisir la version de PowerShell à utiliser avec l’extension](/powershell/scripting/components/vscode/using-vscode#choosing-a-version-of-powershell-to-use-with-the-extension).
 
@@ -116,7 +119,7 @@ Lorsqu’un fichier PowerShell est ouvert, vous voyez la version affichée en ve
 
 Vérifiez que `Wait-Debugger` est défini dans la fonction où vous souhaitez attacher le débogueur.  Avec `Wait-Debugger` ajouté, vous pouvez déboguer votre application de fonction à l’aide de Visual Studio Code.
 
-Choisissez le volet **Déboguer**, puis **Attacher à la fonction PowerShell**.
+Choisissez le volet **Déboguer** , puis **Attacher à la fonction PowerShell**.
 
 ![débogueur](https://user-images.githubusercontent.com/2644648/56166073-8a7b3780-5f89-11e9-85ce-36ed38e221a2.png)
 
@@ -242,6 +245,16 @@ L’extension PowerShell utilise `Debug-Runspace`, qui à son tour dépend de la
 Le runtime Azure Functions exécute quelques commandes avant d’appeler véritablement votre script `run.ps1`. Il est donc possible que le débogueur finisse par s’arrêter au sein de `Microsoft.Azure.Functions.PowerShellWorker.psm1` ou de `Microsoft.Azure.Functions.PowerShellWorker.psd1`.
 
 Si cet arrêt doit se produire, exécutez la commande `continue` ou `c` pour ignorer ce point d’arrêt. Vous vous arrêtez ensuite au point d’arrêt attendu.
+
+## <a name="troubleshooting"></a>Dépannage
+
+Si vous rencontrez des difficultés pendant le débogage, vous devez vérifier les éléments suivants :
+
+| Vérification | Action |
+|------|------|
+| Exécutez `func --version` à partir du terminal. Si vous recevez une erreur indiquant que `func` est introuvable, il se peut que Core Tools (func.exe) soit absent de la variable `path` locale.| [Réinstallez Core Tools](functions-run-local.md#v2).|  
+| Dans Visual Studio Code, le terminal par défaut doit avoir accès à func.exe. Vérifiez que vous n’utilisez pas un terminal par défaut sur lequel Core Tools n’est pas installé, tel que le sous-système Windows pour Linux (WSL).  | Définissez PowerShell 7 (recommandé) ou Windows PowerShell 5.1 comme interpréteur de commandes par défaut dans Visual Studio Code.|
+  
 
 ## <a name="next-steps"></a>Étapes suivantes
 

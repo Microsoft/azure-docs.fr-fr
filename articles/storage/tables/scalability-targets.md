@@ -10,10 +10,10 @@ ms.date: 03/09/2020
 ms.author: tamram
 ms.subservice: tables
 ms.openlocfilehash: b6455733e4955bd1fb5b27e3551e41e5f711df21
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78943546"
 ---
 # <a name="scalability-and-performance-targets-for-table-storage"></a>Objectifs d'extensibilité et de performances du service Stockage Table
@@ -27,6 +27,6 @@ ms.locfileid: "78943546"
 ## <a name="see-also"></a>Voir aussi
 
 - [Liste de contrôle sur les performances et l'extensibilité du service Stockage Table](storage-performance-checklist.md)
-- [Cibles de scalabilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md)
-- [Cibles de scalabilité pour le fournisseur de ressources pour le Stockage Azure](../common/scalability-targets-resource-provider.md)
+- [Objectifs d'extensibilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md)
+- [Objectifs d’extensibilité pour le fournisseur de ressources de stockage Azure](../common/scalability-targets-resource-provider.md)
 - [Quotas et limites d’abonnement Azure](../../azure-resource-manager/management/azure-subscription-service-limits.md)

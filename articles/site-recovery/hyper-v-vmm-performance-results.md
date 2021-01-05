@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 12/27/2018
 ms.author: sutalasi
-ms.openlocfilehash: 3edd182e335bc679d95d7be64f45b617a9f54c1a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6c8219214e7053dcf6b119f6cd5dc97daaa355f7
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73663172"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92327635"
 ---
 # <a name="test-results-for-hyper-v-replication-to-a-secondary-site"></a>Résultats des tests de la réplication Hyper-V vers un site secondaire
 
@@ -47,7 +47,7 @@ Voici ce que nous avons fait lors des tests :
 * Ce réplica utilise le cache mémoire autogéré pour réduire le dépassement de capacité d’E/S par seconde lors du suivi. Il stocke les écritures du disque VHDX en mémoire, puis vide la mémoire dans le fichier journal avant l’envoi de ce dernier vers le site de récupération. Un vidage disque se produit également si les écritures atteignent une limite prédéfinie.
 * Le graphe ci-dessous présente la surcharge d’E/S par seconde à l’état stationnaire lors d’une réplication. Comme nous pouvons le voir, la surcharge d’E/S par seconde liée à la réplication se monte à 5 %, ce qui est assez faible.
 
-  ![Résultats principaux](./media/hyper-v-vmm-performance-results/IC744913.png)
+  ![Graphique montrant la surcharge d’IOPS à l’état stationnaire lors d’une réplication.](./media/hyper-v-vmm-performance-results/IC744913.png)
 
 Le Réplica Hyper-V utilise la mémoire du serveur principal pour optimiser les performances des disques. Comme indiqué dans le graphe suivant, le dépassement de capacité de mémoire sur tous les serveurs du cluster principal est mineur. Le dépassement de capacité de mémoire indiqué correspond au pourcentage de mémoire utilisée par la réplication, par rapport à la mémoire totale installée sur le serveur Hyper-V.
 
@@ -55,20 +55,20 @@ Le Réplica Hyper-V utilise la mémoire du serveur principal pour optimiser les
 
 Par ailleurs, le Réplica Hyper-V présente une surcharge minimale pour les processeurs. Comme indiqué dans le graphe, la surcharge de réplication est incluse entre 2 et 3 %.
 
-![Résultats principaux](./media/hyper-v-vmm-performance-results/IC744915.png)
+![Graphique montrant que la surcharge de réplication est incluse entre 2 et 3 %.](./media/hyper-v-vmm-performance-results/IC744915.png)
 
 ## <a name="secondary-server-performance"></a>Performances du serveur secondaire
 
 Le Réplica Hyper-V utilise une petite quantité de mémoire sur le serveur de récupération, afin d’optimiser le nombre d’opérations de stockage. Le graphe résume le taux d’utilisation de la mémoire sur le serveur de récupération. Le dépassement de capacité de mémoire indiqué correspond au pourcentage de mémoire utilisée par la réplication, par rapport à la mémoire totale installée sur le serveur Hyper-V.
 
-![Résultats secondaires](./media/hyper-v-vmm-performance-results/IC744916.png)
+![Graphique qui résume l’utilisation de la mémoire sur le serveur de récupération.](./media/hyper-v-vmm-performance-results/IC744916.png)
 
 La quantité d’opérations d’E/S sur le site de récupération correspond à une fonction du nombre d’opérations d’écriture sur le site principal. Examinons à présent le nombre total d’opérations d’E/S sur le site de récupération, par rapport au nombre total d’opérations d’E/S et d’écriture sur le site principal. Les graphes indiquent que le nombre total d’E/S par seconde sur le site de récupération :
 
 * se monte à environ 1,5 fois le nombre d’E/S par seconde en écriture sur le site principal ;
 * se monte à environ 37 % du nombre total d’E/S par seconde sur le site principal.
 
-![Résultats secondaires](./media/hyper-v-vmm-performance-results/IC744917.png)
+![Graphique illustrant une comparaison des IOPS sur les sites principaux et secondaires.](./media/hyper-v-vmm-performance-results/IC744917.png)
 
 ![Résultats secondaires](./media/hyper-v-vmm-performance-results/IC744918.png)
 
@@ -175,10 +175,10 @@ Ce tableau récapitule les mesures de performances et les compteurs utilisés lo
 | UC |\Processor(_Total)\% temps processeur |
 | Mémoire disponible |\Memory\Available MBytes |
 | E/S par seconde |\PhysicalDisk(_Total)\Disk Transfers/sec |
-| Nombre d’opérations d’E/S par seconde en lecture de la VM |\Hyper-V Virtual Storage Device(\<VHD>)\Nombre d’opérations de lecture/sec |
-| Nombre d’opérations d’E/S par seconde en écriture de la VM |\Hyper-V Virtual Storage Device(\<VHD>)\Nombre d’opérations d’écriture/sec |
-| Débit de lecture des VM |\Hyper-V Virtual Storage Device(\<VHD>)\Octets lus/sec |
-| Débit d’écriture des VM |\Hyper-V Virtual Storage Device(\<VHD>)\Octets écrits/sec |
+| Nombre d’opérations d’E/S par seconde en lecture de la VM |\Hyper-V Virtual Storage Device(\<VHD>)\Read Operations/Sec |
+| Nombre d’opérations d’E/S par seconde en écriture de la VM |\Hyper-V Virtual Storage Device(\<VHD>)\Write Operations/S |
+| Débit de lecture des VM |\Hyper-V Virtual Storage Device(\<VHD>)\Read Bytes/sec |
+| Débit d’écriture des VM |\Hyper-V Virtual Storage Device(\<VHD>)\Write Bytes/sec |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

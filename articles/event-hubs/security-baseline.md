@@ -6,25 +6,25 @@ ms.service: security
 ms.topic: conceptual
 ms.date: 03/25/2020
 ms.author: mbaldwin
-ms.custom: security-benchmark
-ms.openlocfilehash: c60c1d33954b5e12038fd66787225f4d0aeba62d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: subject-security-benchmark
+ms.openlocfilehash: 9386b154148cf5b5b6b7cd0b43f5a4b4aa741059
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82184705"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96339691"
 ---
 # <a name="azure-security-baseline-for-event-hubs"></a>Base de référence de sécurité Azure pour Event Hubs
 
 La base de référence de sécurité Azure pour Event Hubs contient des recommandations qui vous aideront à améliorer la situation de sécurité de votre déploiement.
 
-La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](https://docs.microsoft.com/azure/security/benchmarks/overview), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
+La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](../security/benchmarks/overview.md), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
 
-Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview).
+Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](../security/benchmarks/security-baselines-overview.md).
 
 ## <a name="network-security"></a>Sécurité réseau
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](https://docs.microsoft.com/azure/security/benchmarks/security-control-network-security).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="11-protect-resources-using-network-security-groups-or-azure-firewall-on-your-virtual-network"></a>1.1 : Protéger les ressources à l'aide de groupes de sécurité réseau ou du Pare-feu Azure sur votre réseau virtuel
 
@@ -56,7 +56,7 @@ Activer les journaux de flux NSG : https://docs.microsoft.com/azure/network-wat
 
 Comprendre la sécurité réseau fournie par Azure Security Center : https://docs.microsoft.com/azure/security-center/security-center-network-recommendations
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
@@ -70,13 +70,13 @@ Comprendre la sécurité réseau fournie par Azure Security Center : https://do
 
 ### <a name="14-deny-communications-with-known-malicious-ip-addresses"></a>1.4 : Refuser les communications présentant des adresses IP connues comme étant malveillantes
 
-**Aide** : Activez le service Protection DDoS Standard sur les réseaux virtuels associés à vos hubs d’événements à des fins de protection contre les attaques par déni de service distribué (DDoS). Utilisez la fonctionnalité de renseignement sur les menaces intégrée à Azure Security Center pour refuser les communications avec des adresses IP Internet connues comme étant malveillantes ou inutilisées.
+**Conseils** : Activez le service Protection DDoS Standard sur les réseaux virtuels associés à vos hubs d’événements à des fins de protection contre les attaques par déni de service distribué (DDoS). Utilisez la fonctionnalité de renseignement sur les menaces intégrée à Azure Security Center pour refuser les communications avec des adresses IP Internet connues comme étant malveillantes ou inutilisées.
 
-Comment configurer la protection DDoS : [https://docs.microsoft.com/azure/virtual-network/manage-ddos-protection](/azure/virtual-network/manage-ddos-protection)
+Comment configurer la protection DDoS : [https://docs.microsoft.com/azure/virtual-network/manage-ddos-protection](../ddos-protection/manage-ddos-protection.md)
 
 Pour plus d’informations sur la fonctionnalité de renseignement sur les menaces intégrée à Azure Security Center : https://docs.microsoft.com/azure/security-center/security-center-alerts-service-layer
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
@@ -174,11 +174,11 @@ Créer des alertes dans Azure Monitor : https://docs.microsoft.com/azure/azure-
 
 ## <a name="logging-and-monitoring"></a>Journalisation et supervision
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](https://docs.microsoft.com/azure/security/benchmarks/security-control-logging-monitoring).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](../security/benchmarks/security-control-logging-monitoring.md).*
 
 ### <a name="21-use-approved-time-synchronization-sources"></a>2.1 : Utiliser des sources de synchronisation date/heure approuvées
 
-**Aide** : Non applicable. Microsoft conserve la source de temps utilisée pour les ressources Azure, par exemple, Azure Event Hubs, pour les timestamps dans les journaux.
+**Conseils** : Non applicable. Microsoft conserve la source de temps utilisée pour les ressources Azure, par exemple, Azure Event Hubs, pour les timestamps dans les journaux.
 
 **Supervision d’Azure Security Center** : Non applicable
 
@@ -198,7 +198,7 @@ Présentation du journal d’activité Azure : https://docs.microsoft.com/azure
 
 ### <a name="23-enable-audit-logging-for-azure-resources"></a>2.3 : Activer la journalisation d’audit pour les ressources Azure
 
-**Aide** : Activez les paramètres de diagnostic pour votre espace de noms Azure Event Hubs. Il existe trois catégories de paramètres de diagnostic pour Azure Event Hubs : journaux d’archivage, Journaux des opérations et journaux de mise à l’échelle automatique. Activez les journaux des opérations pour capturer les informations relatives à ce qui se passe pendant les opérations Event Hubs, en particulier le type d’opération tel que la création d’un hub d’événements, les ressources utilisées et l’état de l’opération.
+**Conseils** : Activez les paramètres de diagnostic pour votre espace de noms Azure Event Hubs. Il existe trois catégories de paramètres de diagnostic pour Azure Event Hubs : journaux d’archivage, Journaux des opérations et journaux de mise à l’échelle automatique. Activez les journaux des opérations pour capturer les informations relatives à ce qui se passe pendant les opérations Event Hubs, en particulier le type d’opération tel que la création d’un hub d’événements, les ressources utilisées et l’état de l’opération.
 
 En outre, vous pouvez activer les paramètres de diagnostic des journaux d’activité Azure et les envoyer vers un compte de stockage Azure, un hub d’événements ou un espace de travail Log Analytics. Les journaux d’activité fournissent des insights sur les opérations qui ont été effectuées sur vos ressources Azure Event Hubs et autres. À l’aide des journaux d’activité, vous pouvez déterminer « qui, quand et quoi » pour toutes les opérations d’écriture (PUT, POST, DELETE) sur vos espaces de noms Azure Event Hubs.
 
@@ -214,7 +214,7 @@ Comment activer les paramètres de diagnostic pour le journal d’activité : h
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -287,7 +287,7 @@ Comment intégrer Azure Sentinel : https://docs.microsoft.com/azure/sentinel/qu
 
 ## <a name="identity-and-access-control"></a>Contrôle des accès et des identités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](https://docs.microsoft.com/azure/security/benchmarks/security-control-identity-access-control).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3.1 : Tenir un inventaire des comptes d’administration
 
@@ -297,13 +297,13 @@ Comment obtenir un rôle d’annuaire dans Azure AD avec PowerShell : https://d
 
 Comment obtenir les membres d’un rôle d’annuaire dans Azure AD avec PowerShell : https://docs.microsoft.com/powershell/module/azuread/get-azureaddirectoryrolemember?view=azureadps-2.0
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
 ### <a name="32-change-default-passwords-where-applicable"></a>3.2 : Modifier les mots de passe par défaut lorsque cela est possible
 
-**Aide** : L’accès au plan de contrôle pour Event Hubs est contrôlé par le biais d’Azure Active Directory (AD). Azure AD n’intègre pas le concept des mots de passe par défaut.
+**Conseils** : L’accès au plan de contrôle pour Event Hubs est contrôlé par le biais d’Azure Active Directory (AD). Azure AD n’intègre pas le concept des mots de passe par défaut.
 
 L’accès au plan de données pour Event Hubs est contrôlé par le biais d’Azure AD avec des identités managées ou des inscriptions d’applications ainsi que des signatures d’accès partagé. Les signatures d’accès partagé sont utilisées par les clients qui se connectent à vos hubs d’événements et peuvent être regénérées à tout moment.
 
@@ -315,7 +315,7 @@ Comprendre les signatures d’accès partagé pour Event Hubs : https://docs.mi
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3.3 : Utiliser des comptes d’administration dédiés
 
-**Aide** : Créez des procédures standard autour de l’utilisation de comptes d’administration dédiés. Utilisez la gestion des identités et des accès dans Azure Security Center pour superviser le nombre de comptes d’administration.
+**Conseils** : Créez des procédures standard autour de l’utilisation de comptes d’administration dédiés. Utilisez la gestion des identités et des accès dans Azure Security Center pour superviser le nombre de comptes d’administration.
 
 En outre, pour vous aider à suivre les comptes d’administration dédiés, vous pouvez utiliser des recommandations d’Azure Security Center ou des stratégies Azure intégrées, telles que les suivantes :
 
@@ -329,13 +329,13 @@ Comment utiliser Azure Security Center pour superviser l’identité et l’acc�
 
 Comment utiliser Azure Policy : https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
 ### <a name="34-use-single-sign-on-sso-with-azure-active-directory"></a>3.4 : Utiliser l’authentification unique (SSO) avec Azure Active Directory
 
-**Aide** : Microsoft Azure offre la gestion du contrôle d’accès intégré pour les ressources et les applications basées sur Azure Active Directory (AD). L’un des principaux avantages de l’utilisation d’Azure AD avec Azure Event Hubs est que vous n’avez plus besoin de stocker vos informations d’identification dans le code. Au lieu de cela, vous pouvez demander un jeton d’accès OAuth 2.0 à partir de la Plateforme d’identité Microsoft. Le nom de ressource à utiliser pour demander un jeton est https:\//eventhubs.azure.net/. Azure AD authentifie le principal de sécurité (un utilisateur, un groupe ou un principal de service) qui exécute l’application. Si l’authentification réussit, Azure AD retourne un jeton d’accès à l’application et l’application peut ensuite l’utiliser pour autoriser les demandes vers les ressources Azure Event Hubs.
+**Conseils** : Microsoft Azure offre la gestion du contrôle d’accès intégré pour les ressources et les applications basées sur Azure Active Directory (AD). L’un des principaux avantages de l’utilisation d’Azure AD avec Azure Event Hubs est que vous n’avez plus besoin de stocker vos informations d’identification dans le code. Au lieu de cela, vous pouvez demander un jeton d’accès OAuth 2.0 à partir de la Plateforme d’identité Microsoft. Le nom de ressource à utiliser pour demander un jeton est https:\//eventhubs.azure.net/. Azure AD authentifie le principal de sécurité (un utilisateur, un groupe ou un principal de service) qui exécute l’application. Si l’authentification réussit, Azure AD retourne un jeton d’accès à l’application et l’application peut ensuite l’utiliser pour autoriser les demandes vers les ressources Azure Event Hubs.
 
 Comment authentifier une application avec Azure AD pour accéder aux ressources Event Hubs : https://docs.microsoft.com/azure/event-hubs/authenticate-application
 
@@ -347,13 +347,13 @@ Comprendre l’authentification unique (SSO) avec Azure AD : https://docs.micro
 
 ### <a name="35-use-multi-factor-authentication-for-all-azure-active-directory-based-access"></a>3.5 : Utiliser l’authentification multifacteur pour tous les accès basés sur Azure Active Directory
 
-**Aide** : Activez Azure Active Directory Multi-Factor Authentication (MFA) et suivez les recommandations Azure Security Center sur la gestion des identités et des accès pour protéger vos ressources Event Hub.
+**Conseils** : Activez Azure Active Directory Multi-Factor Authentication (MFA) et suivez les recommandations Azure Security Center sur la gestion des identités et des accès pour protéger vos ressources Event Hub.
 
 Comment activer l’authentification multifacteur dans Azure : https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted
 
 Comment surveiller l’identité et l’accès dans Azure Security Center : https://docs.microsoft.com/azure/security-center/security-center-identity-access
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
@@ -379,7 +379,7 @@ Comprendre les détections des risques Azure AD : https://docs.microsoft.com/az
 
 Comment configurer des groupes d’actions pour générer des alertes et des notifications personnalisées : https://docs.microsoft.com/azure/azure-monitor/platform/action-groups
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
@@ -397,7 +397,7 @@ Comment configurer des emplacements nommés dans Azure : https://docs.microsoft
 
 ### <a name="39-use-azure-active-directory"></a>3.9 : Utiliser Azure Active Directory
 
-**Aide** : Utilisez Azure Active Directory (AD) comme système central d’authentification et d’autorisation pour des ressources Azure telles qu’Event Hubs. Ainsi, le mécanisme de contrôle d’accès en fonction du rôle (RBAC) est applicable aux ressources administratives sensibles.
+**Aide** : Utilisez Azure Active Directory (AD) comme système central d’authentification et d’autorisation pour des ressources Azure telles qu’Event Hubs. Ainsi, le mécanisme de contrôle d’accès en fonction du rôle Azure (Azure RBAC) est applicable aux ressources administratives sensibles.
 
  Comment créer et configurer une instance Azure AD : https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-access-create-new-tenant
 
@@ -453,7 +453,7 @@ Comment intégrer Azure Sentinel : https://docs.microsoft.com/azure/sentinel/qu
 
 ### <a name="313-provide-microsoft-with-access-to-relevant-customer-data-during-support-scenarios"></a>3.13 : Fournir à Microsoft un accès aux données client pertinentes pendant les scénarios de support
 
-**Aide** : Non disponible ; Customer Lockbox n’est pas encore pris en charge pour Event Hubs.
+**Conseils** : Non disponible ; Customer Lockbox n’est pas encore pris en charge pour Event Hubs.
 
 Liste des services pris en charge par Customer Lockbox : https://docs.microsoft.com/azure/security/fundamentals/customer-lockbox-overview#supported-services-and-scenarios-in-general-availability
 
@@ -463,7 +463,7 @@ Liste des services pris en charge par Customer Lockbox : https://docs.microsoft
 
 ## <a name="data-protection"></a>Protection des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-protection).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4.1 : Conserver un inventaire des informations sensibles
 
@@ -527,21 +527,21 @@ Pour comprendre les fonctionnalités de sécurité d’Event Hubs, consultez Sé
 
 ### <a name="45-use-an-active-discovery-tool-to-identify-sensitive-data"></a>4.5 : Utiliser un outil de découverte actif pour identifier les données sensibles
 
-**Aide** : Les fonctionnalités d’identification des données, de classification des données et de protection contre la perte de données ne sont pas encore disponibles pour Azure Event Hubs. Implémentez une solution tierce si nécessaire à des fins de conformité.
+**Conseils** : Les fonctionnalités d’identification des données, de classification des données et de protection contre la perte de données ne sont pas encore disponibles pour Azure Event Hubs. Implémentez une solution tierce si nécessaire à des fins de conformité.
 
 Pour la plateforme sous-jacente managée par Microsoft, Microsoft considère tout le contenu client comme sensible et met tout en œuvre pour empêcher la perte et l’exposition des données client. Pour garantir la sécurité des données client dans Azure, Microsoft a implémenté et tient à jour une suite de contrôles et de fonctionnalités de protection des données robustes.
 
 Comprendre la protection des données client dans Azure : https://docs.microsoft.com/azure/security/fundamentals/protection-customer-data
 
-**Supervision d’Azure Security Center** : actuellement non disponible
+**Supervision Azure Security Center** : actuellement non disponible
 
 **Responsabilité** : Partagé
 
 ### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4.6 : Utiliser Azure RBAC pour contrôler l’accès aux ressources
 
-**Aide** : Azure Event Hubs prend en charge l’utilisation d’Azure Active Directory (AD) pour autoriser les requêtes de ressources Event Hubs. Avec Azure AD, vous pouvez utiliser le contrôle d’accès en fonction du rôle (RBAC) pour accorder des autorisations à un principal de sécurité, qui peut être un utilisateur ou un principal de service d’application.
+**Aide** : Azure Event Hubs prend en charge l’utilisation d’Azure Active Directory (AD) pour autoriser les requêtes de ressources Event Hubs. Azure AD vous permet d’utiliser le contrôle d’accès en fonction du rôle (Azure RBAC) pour accorder des autorisations à un principal de sécurité, qui peut être un utilisateur ou un principal de service d’application.
 
-Comprendre les rôles Azure AD RBAC et disponibles pour Azure Event Hubs : https://docs.microsoft.com/azure/event-hubs/authorize-access-azure-active-directory
+Comprendre les rôles Azure RBAC et disponibles pour Azure Event Hubs : https://docs.microsoft.com/azure/event-hubs/authorize-access-azure-active-directory
 
 **Supervision d’Azure Security Center** : Non applicable
 
@@ -581,7 +581,7 @@ Comment créer des alertes pour les événements du journal d’activité Azure�
 
 ## <a name="vulnerability-management"></a>Gestion des vulnérabilités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](https://docs.microsoft.com/azure/security/benchmarks/security-control-vulnerability-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](../security/benchmarks/security-control-vulnerability-management.md).*
 
 ### <a name="51-run-automated-vulnerability-scanning-tools"></a>5.1 : Exécuter les outils d’analyse des vulnérabilités automatisés
 
@@ -625,11 +625,11 @@ Comment créer des alertes pour les événements du journal d’activité Azure�
 
 ## <a name="inventory-and-asset-management"></a>Gestion des stocks et des ressources
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](https://docs.microsoft.com/azure/security/benchmarks/security-control-inventory-asset-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](../security/benchmarks/security-control-inventory-asset-management.md).*
 
 ### <a name="61-use-azure-asset-discovery"></a>6.1 : Utiliser la découverte de ressources Azure
 
-**Aide** : Utilisez Azure Resource Graph pour interroger et découvrir toutes les ressources (y compris les espaces de noms Azure Event Hubs) au sein de vos abonnements. Vérifiez que vous disposez des autorisations (en lecture) appropriées dans votre locataire et pouvez répertorier tous les abonnements Azure ainsi que les ressources qu’ils contiennent.
+**Conseils** : Utilisez Azure Resource Graph pour interroger et découvrir toutes les ressources (y compris les espaces de noms Azure Event Hubs) au sein de vos abonnements. Vérifiez que vous disposez des autorisations (en lecture) appropriées dans votre locataire et pouvez répertorier tous les abonnements Azure ainsi que les ressources qu’ils contiennent.
 
 Créer des requêtes avec Azure Resource Graph : https://docs.microsoft.com/azure/governance/resource-graph/first-query-portal
 
@@ -653,7 +653,7 @@ Comment créer et utiliser des étiquettes : https://docs.microsoft.com/azure/a
 
 ### <a name="63-delete-unauthorized-azure-resources"></a>6.3 : Supprimer des ressources Azure non autorisées
 
-**Aide** : Utilisez des étiquettes, des groupes d’administration, voire des abonnements séparés, pour organiser et suivre les espaces de noms Azure Event Hubs et les ressources associées. Rapprochez régulièrement l’inventaire et assurez-vous que les ressources non autorisées sont supprimées de l’abonnement en temps utile.
+**Conseils** : Utilisez des étiquettes, des groupes d’administration, voire des abonnements séparés, pour organiser et suivre les espaces de noms Azure Event Hubs et les ressources associées. Rapprochez régulièrement l’inventaire et assurez-vous que les ressources non autorisées sont supprimées de l’abonnement en temps utile.
 
 Créer des abonnements Azure supplémentaires : https://docs.microsoft.com/azure/billing/billing-create-subscription
 
@@ -687,7 +687,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 Créer des requêtes avec Azure Graph : https://docs.microsoft.com/azure/governance/resource-graph/first-query-portal
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -695,7 +695,7 @@ Créer des requêtes avec Azure Graph : https://docs.microsoft.com/azure/govern
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -711,13 +711,13 @@ Créer des requêtes avec Azure Graph : https://docs.microsoft.com/azure/govern
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
 ### <a name="69-use-only-approved-azure-services"></a>6.9 : Utiliser des services Azure approuvés uniquement
 
-**Aide** : Appliquez des restrictions quant au type de ressources pouvant être créées dans les abonnements clients, en utilisant Azure Policy avec les définitions intégrées suivantes :
+**Conseils** : Appliquez des restrictions quant au type de ressources pouvant être créées dans les abonnements clients, en utilisant Azure Policy avec les définitions intégrées suivantes :
 
 - Types de ressources non autorisés
 
@@ -727,7 +727,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 Comment refuser un type de ressource spécifique avec Azure Policy : https://docs.microsoft.com/azure/governance/policy/samples/not-allowed-resource-types
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -735,7 +735,7 @@ Comment refuser un type de ressource spécifique avec Azure Policy : https://do
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -753,7 +753,7 @@ Configurer l’accès conditionnel pour bloquer l’accès à Azure Resource Man
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -767,7 +767,7 @@ Configurer l’accès conditionnel pour bloquer l’accès à Azure Resource Man
 
 ## <a name="secure-configuration"></a>Configuration sécurisée
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](https://docs.microsoft.com/azure/security/benchmarks/security-control-secure-configuration).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](../security/benchmarks/security-control-secure-configuration.md).*
 
 ### <a name="71-establish-secure-configurations-for-all-azure-resources"></a>7.1 : Établir des configurations sécurisées pour toutes les ressources Azure
 
@@ -783,7 +783,7 @@ Affichage des alias Azure Policy disponibles : https://docs.microsoft.com/power
 
 Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -791,7 +791,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -812,19 +812,19 @@ Pour plus d’informations sur les effets d’Azure Policy : https://docs.micro
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
 ### <a name="75-securely-store-configuration-of-azure-resources"></a>7.5 : Stocker en toute sécurité la configuration des ressources Azure
 
-**Aide** : Si vous utilisez des définitions Azure Policy personnalisées pour vos ressources Event Hubs ou associées, utilisez Azure Repos pour stocker et gérer votre code de manière sécurisée.
+**Conseils** : Si vous utilisez des définitions Azure Policy personnalisées pour vos ressources Event Hubs ou associées, utilisez Azure Repos pour stocker et gérer votre code de manière sécurisée.
 
 Stocker du code dans Azure DevOps : https://docs.microsoft.com/azure/devops/repos/git/gitworkflow?view=azure-devops
 
 Documentation Azure Repos : https://docs.microsoft.com/azure/devops/repos/index?view=azure-devops
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -832,7 +832,7 @@ Documentation Azure Repos : https://docs.microsoft.com/azure/devops/repos/index
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -842,7 +842,7 @@ Documentation Azure Repos : https://docs.microsoft.com/azure/devops/repos/index
 
 Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -850,7 +850,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -860,7 +860,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -868,7 +868,7 @@ Configurer et gérer Azure Policy : https://docs.microsoft.com/azure/governance
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -882,9 +882,11 @@ Configurer des clés gérées par le client pour Event Hubs : https://docs.micr
 
 Intégration aux identités managées Azure : https://docs.microsoft.com/azure/azure-app-configuration/howto-integrate-azure-managed-service-identity
 
-Pour créer un coffre de clés : https://docs.microsoft.com/azure/key-vault/quick-create-portal
+Pour créer un coffre de clés : https://docs.microsoft.com/azure/key-vault/general/quick-create-portal
 
-Fournir une authentification Key Vault avec une identité managée : https://docs.microsoft.com/azure/key-vault/managed-identity
+Comment s’authentifier auprès de Key Vault : https://docs.microsoft.com/azure/key-vault/general/authentication
+
+Comment attribuer une stratégie d’accès Key Vault : https://docs.microsoft.com/azure/key-vault/general/assign-access-policy-portal
 
 **Supervision d’Azure Security Center** : Oui
 
@@ -892,7 +894,7 @@ Fournir une authentification Key Vault avec une identité managée : https://do
 
 ### <a name="712-manage-identities-securely-and-automatically"></a>7.12 : Gérer les identités de façon sécurisée et automatique
 
-**Aide** : Pour les machines virtuelles Azure ou les applications web s’exécutant sur Azure App Service utilisées pour accéder à vos hubs d’événements, utilisez Managed Service Identity conjointement avec Azure Key Vault pour simplifier et sécuriser Azure Event Hubs. Vérifiez que la suppression réversible est activée dans Key Vault.
+**Conseils** : Pour les machines virtuelles Azure ou les applications web s’exécutant sur Azure App Service utilisées pour accéder à vos hubs d’événements, utilisez Managed Service Identity conjointement avec Azure Key Vault pour simplifier et sécuriser Azure Event Hubs. Vérifiez que la suppression réversible est activée dans Key Vault.
 
 Utilisez des identités managées pour fournir aux services Azure une identité gérée automatiquement dans Azure Active Directory (AD). Les identités managées vous permettent de vous authentifier auprès d’un service qui prend en charge l’authentification Azure AD, y compris Azure Key Vault, sans informations d’identification dans votre code.
 
@@ -914,13 +916,13 @@ Intégration aux identités managées Azure : https://docs.microsoft.com/azure/
 
 Configuration de Credential Scanner : https://secdevtools.azurewebsites.net/helpcredscan.html
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
 ## <a name="malware-defense"></a>Défense contre les programmes malveillants
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](https://docs.microsoft.com/azure/security/benchmarks/security-control-malware-defense).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](../security/benchmarks/security-control-malware-defense.md).*
 
 ### <a name="81-use-centrally-managed-anti-malware-software"></a>8.1 : Utiliser un logiciel anti-programme malveillant géré de manière centralisée
 
@@ -946,13 +948,13 @@ Microsoft Antimalware est activé sur l’hôte sous-jacent qui prend en charge 
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
 ## <a name="data-recovery"></a>Récupération des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-recovery).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](../security/benchmarks/security-control-data-recovery.md).*
 
 ### <a name="91-ensure-regular-automated-back-ups"></a>9.1 : garantir des sauvegardes automatisées régulières
 
@@ -1008,7 +1010,7 @@ Suppression réversible pour les objets blob de Stockage Azure : https://docs.m
 
 ## <a name="incident-response"></a>Réponse aux incidents
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](https://docs.microsoft.com/azure/security/benchmarks/security-control-incident-response).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10.1 : Créer un guide de réponse aux incidents
 
@@ -1036,13 +1038,13 @@ Comment configurer des automatisations de workflow dans Azure Security Center :
 
 Reportez-vous à la publication du NIST : « Guide to Test, Training, and Exercise Programs for IT Plans and Capabilities » : https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
 ### <a name="104-provide-security-incident-contact-details-and-configure-alert-notifications-for-security-incidents"></a>10.4 : Fournir des informations de contact pour les incidents de sécurité et configurer des notifications d’alerte pour les incidents de sécurité
 
-**Aide** : Les informations de contact d’incident de sécurité seront utilisées par Microsoft pour vous contacter si Microsoft Security Response Center (MSRC) découvre que les données du client ont été utilisées par un tiers illégal ou non autorisé.  Examinez les incidents après les faits pour vous assurer que les problèmes sont résolus. 
+**Conseils** : Les informations de contact d’incident de sécurité seront utilisées par Microsoft pour vous contacter si Microsoft Security Response Center (MSRC) découvre que les données du client ont été utilisées par un tiers illégal ou non autorisé.  Examinez les incidents après les faits pour vous assurer que les problèmes sont résolus. 
 
 Comment définir le contact de sécurité d’Azure Security Center : https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details
 
@@ -1074,7 +1076,7 @@ Comment configurer l’automatisation des workflows et Logic Apps : https://doc
 
 ## <a name="penetration-tests-and-red-team-exercises"></a>Tests d’intrusion et exercices Red Team
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](https://docs.microsoft.com/azure/security/benchmarks/security-control-penetration-tests-red-team-exercises).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings-within-60-days"></a>11.1 : Procédez régulièrement à des tests d’intrusion de vos ressources Azure et veillez à résoudre tous les problèmes de sécurité critiques détectés dans un délai de 60 jours
 
@@ -1087,5 +1089,5 @@ Vous trouverez plus d’informations sur la stratégie de Microsoft et l’exéc
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez le [benchmark de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/overview)
-- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview)
+- Consultez le [benchmark de sécurité Azure](../security/benchmarks/overview.md)
+- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](../security/benchmarks/security-baselines-overview.md)

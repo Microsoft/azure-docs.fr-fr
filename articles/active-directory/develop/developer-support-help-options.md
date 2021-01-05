@@ -12,12 +12,12 @@ ms.date: 05/23/2019
 ms.author: ryanwi
 ms.reviewer: jmprieur, saeeda
 ms.custom: aaddev
-ms.openlocfilehash: ea1afd2ecac8974c0e865e235288da545a9f1244
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: af363bb30d6515ce969afe146c780baa4b31cd83
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80885529"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88117207"
 ---
 # <a name="support-and-help-options-for-developers"></a>Options d’aide et de support pour les développeurs
 
@@ -62,7 +62,7 @@ Si vous ne trouvez pas de réponse à votre question par l'intermédiaire de la 
 | Bibliothèque ADAL | [[adal]](https://stackoverflow.com/questions/tagged/adal) |
 | Bibliothèque MSAL     | [[msal]](https://stackoverflow.com/questions/tagged/msal) |
 | Intergiciel (middleware) OWIN  | [[azure-active-directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |
-| [Azure B2B](https://docs.microsoft.com/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b)  | [[azure-ad-b2b]](https://stackoverflow.com/questions/tagged/azure-ad-b2b) |
+| [Azure B2B](../external-identities/what-is-b2b.md)  | [[azure-ad-b2b]](https://stackoverflow.com/questions/tagged/azure-ad-b2b) |
 | [Azure B2C](https://azure.microsoft.com/services/active-directory-b2c/)  | [[azure-ad-b2c]](https://stackoverflow.com/questions/tagged/azure-ad-b2c) |
 | [API Microsoft Graph](https://developer.microsoft.com/graph/) | [[microsoft-graph]](https://stackoverflow.com/questions/tagged/microsoft-graph) |
 | Toute autre zone liée à des sujets sur l’authentification ou les autorisations | [[azure-active-directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |

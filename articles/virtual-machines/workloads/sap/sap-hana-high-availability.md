@@ -7,17 +7,18 @@ author: rdeltcheva
 manager: juergent
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/11/2020
+ms.date: 10/16/2020
 ms.author: radeltch
-ms.openlocfilehash: 501d49feef877addd2f3e5364a06caf1d273ca83
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 5af2c40dd1efa542ac13bd4cf96ba3017810bf00
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83196865"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608671"
 ---
 # <a name="high-availability-of-sap-hana-on-azure-vms-on-suse-linux-enterprise-server"></a>Haute disponibilité de SAP HANA sur les machines virtuelles Azure sur SUSE Linux Enterprise Server
 
@@ -112,7 +113,7 @@ Suivez ces étapes pour déployer le modèle :
     - **Disponibilité du système** : Sélectionnez la haute disponibilité **(HA)** .
     - **Nom d’utilisateur et mot de passe administrateur** : Un utilisateur pouvant être utilisé pour se connecter à la machine est créé.
     - **Sous-réseau nouveau ou existant** : Détermine s’il faut créer un réseau virtuel et un sous-réseau, ou utiliser un sous-réseau existant. Si vous disposez déjà d’un réseau virtuel connecté à votre réseau local, sélectionnez **Existant**.
-    - **ID de sous-réseau** : Si vous voulez déployer la machine virtuelle dans un réseau virtuel existant où vous avez défini un sous-réseau auquel la machine virtuelle doit être attribuée, nommez l’ID de ce sous-réseau spécifique. L’ID se présente généralement comme suit : **/subscriptions/\<ID_abonnement/\<resourceGroups/nom_groupe_ressources>/providers/Microsoft.Network/virtualNetworks/\<nom_réseau_virtuel>/subnets/\<nom_sous_réseau>** .
+    - **ID de sous-réseau** : Si vous voulez déployer la machine virtuelle dans un réseau virtuel existant où vous avez défini un sous-réseau auquel la machine virtuelle doit être attribuée, nommez l’ID de ce sous-réseau spécifique. L’identifiant se présente généralement sous la forme **/subscriptions/\<subscription ID>/resourceGroups/\<resource group name>/providers/Microsoft.Network/virtualNetworks/\<virtual network name>/subnets/\<subnet name>** .
 
 ### <a name="manual-deployment"></a>Déploiement manuel
 
@@ -124,7 +125,7 @@ Suivez ces étapes pour déployer le modèle :
 1. Créez un réseau virtuel.
 1. Créer un groupe à haute disponibilité.
    - Définir le domaine de mise à jour maximal.
-1. Créer un équilibrage de charge (interne). Nous vous recommandons [Standard Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-overview).
+1. Créer un équilibrage de charge (interne). Nous vous recommandons [Standard Load Balancer](../../../load-balancer/load-balancer-overview.md).
    - Sélectionnez le réseau virtuel créé à l’étape 2.
 1. Créez la machine virtuelle 1.
    - Utilisez une image SLES4SAP de la galerie Azure prise en charge pour SAP HANA sur le type de machine virtuelle que vous avez sélectionné.
@@ -133,6 +134,13 @@ Suivez ces étapes pour déployer le modèle :
    - Utilisez une image SLES4SAP de la galerie Azure prise en charge pour SAP HANA sur le type de machine virtuelle que vous avez sélectionné.
    - Sélectionnez le groupe à haute disponibilité créé à l’étape 3. 
 1. Ajoutez des disques de données.
+
+> [!IMPORTANT]
+> Une adresse IP flottante n’est pas prise en charge sur une configuration IP secondaire de carte réseau pour des scénarios d’équilibrage de charge. Pour plus d'informations, consultez [Limitations relatives à Azure Load Balancer](../../../load-balancer/load-balancer-multivip-overview.md#limitations). Si vous avez besoin d’une adresse IP supplémentaire pour la machine virtuelle, déployez une deuxième carte réseau.   
+
+> [!Note]
+> Lorsque des machines virtuelles sans adresse IP publique sont placées dans le pool principal d’Azure Standard Load Balancer interne (aucune adresse IP publique), il n’y a pas de connectivité Internet sortante, sauf si une configuration supplémentaire est effectuée pour autoriser le routage vers des points de terminaison publics. Pour savoir plus en détails comment bénéficier d’une connectivité sortante, voir [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](./high-availability-guide-standard-load-balancer-outbound-connections.md).  
+
 1. Si vous utilisez Standard Load Balancer, suivez ces étapes de configuration :
    1. Commencez par créer un pool d’adresses IP frontales :
    
@@ -156,7 +164,7 @@ Suivez ces étapes pour déployer le modèle :
    
       1. Ouvrez l’équilibrage de charge, sélectionnez les **sondes d’intégrité**, puis cliquez sur **Ajouter**.
       1. Entrez le nom de la nouvelle sonde d’intégrité (par exemple **hana-hp**).
-      1. Sélectionnez **TCP** pour le protocole et le port 625**03**. Consersez la valeur **Intervalle** à 5, et la valeur **Seuil de défaillance** à 2.
+      1. Sélectionnez **TCP** pour le protocole et le port 625 **03**. Consersez la valeur **Intervalle** à 5, et la valeur **Seuil de défaillance** à 2.
       1. Sélectionnez **OK**.
    
    1. Ensuite, créez les règles d’équilibrage de charge :
@@ -168,9 +176,6 @@ Suivez ces étapes pour déployer le modèle :
       1. Augmentez le **délai d’inactivité** à 30 minutes.
       1. Veillez à **activer l’IP flottante** .
       1. Sélectionnez **OK**.
-
-   > [!Note]
-   > Lorsque des machines virtuelles sans adresse IP publique sont placées dans le pool principal d’Azure Standard Load Balancer interne (aucune adresse IP publique), il n’y a pas de connectivité Internet sortante, sauf si une configuration supplémentaire est effectuée pour autoriser le routage vers des points de terminaison publics. Pour savoir plus en détails comment bénéficier d’une connectivité sortante, voir [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-standard-load-balancer-outbound-connections).  
 
 1. Si à l’inverse votre scénario exige d’utiliser l’équilibreur de charge de base, suivez ces étapes de configuration :
    1. Commencez par créer un pool d’adresses IP frontales :
@@ -194,46 +199,46 @@ Suivez ces étapes pour déployer le modèle :
    
       1. Ouvrez l’équilibrage de charge, sélectionnez les **sondes d’intégrité**, puis cliquez sur **Ajouter**.
       1. Entrez le nom de la nouvelle sonde d’intégrité (par exemple **hana-hp**).
-      1. Sélectionnez **TCP** pour le protocole et le port 625**03**. Consersez la valeur **Intervalle** à 5, et la valeur **Seuil de défaillance** à 2.
+      1. Sélectionnez **TCP** pour le protocole et le port 625 **03**. Consersez la valeur **Intervalle** à 5, et la valeur **Seuil de défaillance** à 2.
       1. Sélectionnez **OK**.
    
    1. Pour SAP HANA 1.0, créez les règles d’équilibrage de charge :
    
       1. Ouvrez l’équilibrage de charge, sélectionnez **Règles d’équilibrage de charge**, puis cliquez sur **Ajouter**.
-      1. Entrer le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3**03**15).
+      1. Entrer le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3 **03** 15).
       1. Sélectionnez l’adresse IP du serveur frontal, le pool principal et la sonde d’intégrité que vous avez créée précédemment (par exemple, **hana-frontend**).
-      1. Conservez le **Protocole**à **TCP**, puis entrez le port 3**03**15.
+      1. Conservez le **Protocole** à **TCP**, puis entrez le port 3 **03** 15.
       1. Augmentez le **délai d’inactivité** à 30 minutes.
       1. Veillez à **activer l’IP flottante** .
       1. Sélectionnez **OK**.
-      1. Répétez ces étapes pour le port 3**03**17.
+      1. Répétez ces étapes pour le port 3 **03** 17.
    
    1. Pour SAP HANA 2.0, créez les règles d’équilibrage de charge pour la base de données du système :
    
       1. Ouvrez l’équilibrage de charge, sélectionnez **Règles d’équilibrage de charge**, puis cliquez sur **Ajouter**.
-      1. Entrez le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3**03**13).
+      1. Entrez le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3 **03** 13).
       1. Sélectionnez l’adresse IP du serveur frontal, le pool principal et la sonde d’intégrité que vous avez créée précédemment (par exemple, **hana-frontend**).
-      1. Conservez le **Protocole** à **TCP**, puis entrez le port 3**03**13.
+      1. Conservez le **Protocole** à **TCP**, puis entrez le port 3 **03** 13.
       1. Augmentez le **délai d’inactivité** à 30 minutes.
       1. Veillez à **activer l’IP flottante** .
       1. Sélectionnez **OK**.
-      1. Répétez ces étapes pour le port 3**03**14.
+      1. Répétez ces étapes pour le port 3 **03** 14.
    
    1. Pour SAP HANA 2.0, créez d’abord les règles d’équilibrage de charge pour la base de données locataire :
    
       1. Ouvrez l’équilibrage de charge, sélectionnez **Règles d’équilibrage de charge**, puis cliquez sur **Ajouter**.
-      1. Entrez le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3**03**40).
+      1. Entrez le nom de la nouvelle règle d’équilibrage de charge (par exemple hana-lb-3 **03** 40).
       1. Sélectionnez l’adresse IP du serveur frontal, le pool principal et la sonde d’intégrité créés précédemment (par exemple **hana-frontend**).
-      1. Conservez le **Protocole** à **TCP**, puis entrez le port 3**03**40.
+      1. Conservez le **Protocole** à **TCP**, puis entrez le port 3 **03** 40.
       1. Augmentez le **délai d’inactivité** à 30 minutes.
       1. Veillez à **activer l’IP flottante** .
       1. Sélectionnez **OK**.
-      1. Répétez ces étapes pour les ports 3**03**41 et 3**03**42.
+      1. Répétez ces étapes pour les ports 3 **03** 41 et 3 **03** 42.
 
    Pour plus d’informations sur les ports requis pour SAP HANA, consultez le chapitre [Connections to Tenant Databases](https://help.sap.com/viewer/78209c1d3a9b41cd8624338e42a12bf6/latest/en-US/7a9343c9f2a2436faa3cfdb5ca00c052.html) (Connexions aux bases de données locataires) dans le guide [SAP HANA Tenant Databases](https://help.sap.com/viewer/78209c1d3a9b41cd8624338e42a12bf6) (Bases de données locataires SAP HANA) ou la [Note SAP 2388694][2388694].
 
 > [!IMPORTANT]
-> N’activez pas les timestamps TCP sur des machines virtuelles Azure placées derrière Azure Load Balancer. L’activation des timestamps TCP entraîne l’échec des sondes d’intégrité. Définissez le paramètre **net.ipv4.tcp_timestamps** sur **0**. Pour plus d’informations, consultez [Load Balancer health probes](https://docs.microsoft.com/azure/load-balancer/load-balancer-custom-probe-overview) (Sondes d’intégrité Load Balancer).
+> N’activez pas les timestamps TCP sur des machines virtuelles Azure placées derrière Azure Load Balancer. L’activation des timestamps TCP entraîne l’échec des sondes d’intégrité. Définissez le paramètre **net.ipv4.tcp_timestamps** sur **0**. Pour plus d’informations, consultez [Load Balancer health probes](../../../load-balancer/load-balancer-custom-probe-overview.md) (Sondes d’intégrité Load Balancer).
 > Voir aussi la note SAP [2382421](https://launchpad.support.sap.com/#/notes/2382421). 
 
 ## <a name="create-a-pacemaker-cluster"></a>Créez un cluster Pacemaker
@@ -277,11 +282,11 @@ Les étapes de cette section utilisent les préfixes suivants :
    sudo vgcreate vg_hana_shared_<b>HN1</b> /dev/disk/azure/scsi1/lun3
    </code></pre>
 
-   Créez les volumes logiques. Un volume linéaire est créé lorsque vous utilisez `lvcreate` sans le commutateur `-i`. Nous vous suggérons de créer un volume agrégé par bandes pour obtenir de meilleures performances d’E/S, et d’aligner les tailles des bandes sur les valeurs décrites dans [Configurations de stockage de machines virtuelles SAP HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-vm-operations-storage). L’argument `-i` doit indiquer le nombre de volumes physiques sous-jacents et l’argument `-I` la taille de bande. Dans ce document, deux volumes physiques sont utilisés pour le volume de données. Par conséquent, l’argument de commutateur `-i` est défini sur **2**. La taille de bande pour le volume de données est de **256 Kio**. Un volume physique étant utilisé pour le volume du fichier journal, aucun commutateur `-i` ou `-I` n’est utilisé explicitement pour les commandes de volume du fichier journal.  
+   Créez les volumes logiques. Un volume linéaire est créé lorsque vous utilisez `lvcreate` sans le commutateur `-i`. Nous vous suggérons de créer un volume agrégé par bandes pour obtenir de meilleures performances d’E/S, et d’aligner les tailles des bandes sur les valeurs décrites dans [Configurations de stockage de machines virtuelles SAP HANA](./hana-vm-operations-storage.md). L’argument `-i` doit indiquer le nombre de volumes physiques sous-jacents et l’argument `-I` la taille de bande. Dans ce document, deux volumes physiques sont utilisés pour le volume de données. Par conséquent, l’argument de commutateur `-i` est défini sur **2**. La taille de bande pour le volume de données est de **256 Kio**. Un volume physique étant utilisé pour le volume du fichier journal, aucun commutateur `-i` ou `-I` n’est utilisé explicitement pour les commandes de volume du fichier journal.  
 
    > [!IMPORTANT]
    > Utilisez le commutateur `-i` et définissez sa valeur sur le nombre de volumes physiques sous-jacents lorsque vous utilisez plusieurs volumes physiques pour chaque volume de données, volume de journal ou volume partagé. Utilisez le commutateur `-I` pour spécifier la taille de bande lors de la création d’un volume agrégé par bandes.  
-   > Pour connaître les configurations de stockage recommandées, notamment les tailles de bande et le nombre de disques, consultez [Configurations de stockage de machines virtuelles SAP HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-vm-operations-storage).  
+   > Pour connaître les configurations de stockage recommandées, notamment les tailles de bande et le nombre de disques, consultez [Configurations de stockage de machines virtuelles SAP HANA](./hana-vm-operations-storage.md).  
 
    <pre><code>sudo lvcreate <b>-i 2</b> <b>-I 256</b> -l 100%FREE -n hana_data vg_hana_data_<b>HN1</b>
    sudo lvcreate -l 100%FREE -n hana_log vg_hana_log_<b>HN1</b>
@@ -523,7 +528,11 @@ Ensuite, créez les ressources HANA :
 > - Pour SLES 15/15 SP1, la version minimum est resource-agents-4.3.0184.6ee15eb2-4.13.1.  
 >
 > Notez que la modification nécessitera un bref temps d’arrêt.  
-> Pour les clusters Pacemaker existants, si la configuration a déjà été modifiée pour utiliser socat comme décrit à la page [Azure Load-Balancer Detection Hardening](https://www.suse.com/support/kb/doc/?id=7024128), il n'est pas nécessaire de passer immédiatement à l'agent de ressources azure-lb.
+> Pour les clusters Pacemaker existants, si la configuration a déjà été modifiée pour utiliser socat comme décrit à la page [Azure Load-Balancer Detection Hardening](https://www.suse.com/support/kb/doc/?id=7024128), il n’est pas nécessaire de passer immédiatement à l’agent de ressources azure-lb.
+
+
+> [!NOTE]
+> Cet article contient des références aux termes *maître* et *esclave*, termes que Microsoft n’utilise plus. Lorsque ces termes seront supprimés du logiciel, nous les supprimerons de cet article.
 
 <pre><code># Replace the bold string with your instance number, HANA system ID, and the front-end IP address of the Azure load balancer. 
 
@@ -575,7 +584,6 @@ Vérifiez que l’état du cluster est OK et que toutes les ressources sont dém
 # Full list of resources:
 #
 # stonith-sbd     (stonith:external/sbd): Started hn1-db-0
-# rsc_st_azure    (stonith:fence_azure_arm):      Started hn1-db-1
 # Clone Set: cln_SAPHanaTopology_HN1_HDB03 [rsc_SAPHanaTopology_HN1_HDB03]
 #     Started: [ hn1-db-0 hn1-db-1 ]
 # Master/Slave Set: msl_SAPHana_HN1_HDB03 [rsc_SAPHana_HN1_HDB03]
@@ -1138,4 +1146,3 @@ REMARQUE :  Les tests suivants doivent être exécutés de façon séquentielle
 * [Planification et implémentation de machines virtuelles Azure pour SAP][planning-guide]
 * [Déploiement de machines virtuelles Azure pour SAP][deployment-guide]
 * [Déploiement SGBD de machines virtuelles Azure pour SAP][dbms-guide]
-

@@ -11,12 +11,12 @@ ms.topic: quickstart
 ms.custom: mvc
 ms.date: 03/24/2020
 ms.author: mbaldwin
-ms.openlocfilehash: b0d6221aaafe3ade70bc23ce4196a7b53c9474c5
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 0a2c1b39f5688b4fc544e5456666ccb8b4801517
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81421033"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91281047"
 ---
 # <a name="quickstart-set-and-retrieve-a-certificate-from-azure-key-vault-using-the-azure-portal"></a>Démarrage rapide : Définir et récupérer un certificat dans Azure Key Vault à l’aide du portail Azure
 
@@ -45,7 +45,7 @@ Connectez-vous au portail Azure sur https://portal.azure.com.
 Notez les deux propriétés ci-dessous :
 
 * **Nom du coffre** : dans l’exemple, il s’agit d’**Example-Vault**. Vous allez utiliser ce nom pour les autres étapes.
-* **URI du coffre** : dans l’exemple, il s’agit de https://example-vault.vault.azure.net/. Les applications qui utilisent votre coffre via son API REST doivent utiliser cet URI.
+* **URI du coffre** : dans l’exemple, il s’agit de `https://example-vault.vault.azure.net/`. Les applications qui utilisent votre coffre via son API REST doivent utiliser cet URI.
 
 À ce stade, votre compte Azure est le seul autorisé à effectuer des opérations sur ce nouveau coffre.
 
@@ -67,6 +67,7 @@ Lorsque vous recevez le message confirmant la création du certificat, vous pouv
 
 ![Propriétés du certificat](../media/certificates/quick-create-portal/current-version-hidden.png)
 
+## <a name="export-certificate-from-key-vault"></a>Exporter un certificat à partir de Key Vault
 En cliquant sur le bouton « Télécharger au format CER » ou « Télécharger au format PFX/PEM », vous pouvez télécharger le certificat. 
 
 ![Téléchargement du certificat](../media/certificates/quick-create-portal/current-version-shown.png)

@@ -9,12 +9,12 @@ ms.subservice: general
 ms.topic: conceptual
 ms.date: 12/02/2019
 ms.author: mbaldwin
-ms.openlocfilehash: f32a988ec0d75ca8d8eca04e69edd7226bf283b4
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 5b60f290f6d3ca184e25edd2984ad5b2d1ff2bdf
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427709"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289681"
 ---
 # <a name="azure-key-vault-throttling-guidance"></a>Aide sur la limitation de requêtes Azure Key Vault
 
@@ -47,8 +47,8 @@ Si les conseils ou bonnes pratiques ci-dessus ne vous permettent pas de résoudr
 
 Si une capacité supplémentaire est approuvée, notez les conséquences suivantes d’une augmentation de la capacité :
 1. Modifications du modèle de cohérence des données. Une fois qu’un coffre est autorisé avec une capacité de débit supplémentaire, la cohérence des données du service Key Vault garantit l’application des modifications (ce qui est nécessaire pour traiter un volume RPS plus élevé qui ne peut pas l’être par le service Stockage Azure sous-jacent).  En résumé :
-  1. **Sans autorisation** : le service Key Vault reflètera les résultats d’une opération d’écriture (par exemple, SecretSet, CreateKey) immédiatement dans les appels suivants (par exemple, SecretGet, KeySign).
-  1. **Avec autorisation** : le service Key Vault reflètera les résultats d’une opération d’écriture (par exemple, SecretSet, CreateKey) dans un délai de 60 secondes dans les appels suivants (par exemple, SecretGet, KeySign).
+  1. **Sans autorisation**  : le service Key Vault reflètera les résultats d’une opération d’écriture (par exemple, SecretSet, CreateKey) immédiatement dans les appels suivants (par exemple, SecretGet, KeySign).
+  1. **Avec autorisation**  : le service Key Vault reflètera les résultats d’une opération d’écriture (par exemple, SecretSet, CreateKey) dans un délai de 60 secondes dans les appels suivants (par exemple, SecretGet, KeySign).
 1. Le code client doit respecter la stratégie de backoff entre les nouvelles tentatives (code de réponse 429). Le code client qui appelle le service Key Vault ne doit pas réessayer les requêtes de Key Vault immédiatement après avoir reçu un code de réponse 429.  La présente aide sur la limitation de requêtes Azure Key Vault vous conseille d’appliquer un backoff exponentiel pour les codes de réponse HTTP 429 reçus.
 
 Si vous avez un scénario valide justifiant une limitation supérieure, contactez-nous.
@@ -75,7 +75,7 @@ SecretClientOptions options = new SecretClientOptions()
             Mode = RetryMode.Exponential
          }
     };
-    var client = new SecretClient(new Uri(https://keyVaultName.vault.azure.net"), new DefaultAzureCredential(),options);
+    var client = new SecretClient(new Uri("https://keyVaultName.vault.azure.net"), new DefaultAzureCredential(),options);
                                  
     //Retrieve Secret
     secret = client.GetSecret(secretName);
@@ -98,5 +98,4 @@ En cas de code d’erreur HTTP 429, commencez à limiter votre client suivant un
 
 ## <a name="see-also"></a>Voir aussi
 
-Pour orienter la limitation de façon plus approfondie sur Microsoft Cloud, consultez la page [Modèle de limitation](https://docs.microsoft.com/azure/architecture/patterns/throttling).
-
+Pour orienter la limitation de façon plus approfondie sur Microsoft Cloud, consultez la page [Modèle de limitation](/azure/architecture/patterns/throttling).

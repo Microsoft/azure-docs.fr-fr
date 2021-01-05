@@ -1,19 +1,19 @@
 ---
 title: Créer et localiser des ancres - Vue d’ensemble
 description: Explication détaillée du processus de création et de localisation d’ancres à l’aide d’Azure Spatial Anchors.
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: overview
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: f406edb42204e7ffc94bcbfa1e22b269aea67b32
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 2f1888cf6db8eb1ff27a2381f282785d677ffe5f
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74270455"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95506985"
 ---
 # <a name="how-to-create-and-locate-anchors-using-azure-spatial-anchors"></a>Guide pratique pour créer et localiser des ancres à l’aide d’Azure Spatial Anchors
 

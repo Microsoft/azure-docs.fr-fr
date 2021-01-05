@@ -1,22 +1,20 @@
 ---
-title: Fonctionnalités – LUIS
+title: Utiliser les fonctionnalités pour améliorer la liste de mots LUIS
 titleSuffix: Azure Cognitive Services
 description: Utiliser Language Understanding (LUIS) pour ajouter des fonctionnalités d’application pouvant améliorer la détection ou la prédiction d’intentions et d’entités dans des catégories et des modèles
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
-ms.date: 05/06/2020
-ms.author: diberry
-ms.openlocfilehash: 12445ec5b14f4c274e471bf1b061a3b221664d20
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.topic: how-to
+ms.date: 05/17/2020
+ms.openlocfilehash: 33435d2367b92f312d41f0e32fdbb3a93d59a9fd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592302"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999924"
 ---
 # <a name="use-features-to-boost-signal-of-word-list"></a>Utiliser des fonctionnalités pour améliorer le signal de liste de mots
 
@@ -49,8 +47,23 @@ Passez en revue les [concepts](luis-concept-feature.md) pour comprendre quand et
 <a name="delete-phrase-list"></a>
 <a name="deactivate-phrase-list"></a>
 
+
 > [!Note]
 > Vous pouvez supprimer ou désactiver une liste d’expressions dans la barre d’outils contextuelle de la page **Fonctionnalités ML**.
+
+## <a name="global-phrase-list-applies-to-entire-app"></a>La liste des expressions globales s’applique à l’ensemble de l’application
+
+Une liste d’expressions doit être appliquée à l’intention ou à l’entité qu’elle est destinée à aider, mais il peut arriver qu’une liste d’expressions soit appliquée à l’application entière en tant que fonctionnalité **Globale**.
+
+Dans la page Fonctionnalités ML, sélectionnez la liste d’expressions, puis sélectionnez **Rendre global** dans la barre d’outils contextuelle supérieure.
+
+## <a name="model-as-a-feature"></a>Modèle en tant que fonctionnalité
+
+Une entité peut être une [fonctionnalité ajoutée à une intention ou une entité](luis-concept-feature.md).
+
+Pour ajouter une entité en tant que fonctionnalité à une intention, sélectionnez l’intention dans la page intentions, puis sélectionnez **+ Ajouter une fonctionnalité** au-dessus de la barre d’outils contextuelle. La liste inclut toutes les listes d’expressions et les entités qui peuvent être appliquées en tant que fonctionnalités.
+
+Pour ajouter une entité en tant que fonctionnalité à une autre entité, vous pouvez ajouter la fonctionnalité sur la page de détails d’intention à l’aide de la [Palette d’entités](label-entity-example-utterance.md#adding-entity-as-a-feature-from-the-entity-palette) ou vous pouvez [Ajouter la fonctionnalité](luis-how-to-add-entities.md#add-a-feature-to-a-machine-learned-entity) sur la page de détails de l’entité.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

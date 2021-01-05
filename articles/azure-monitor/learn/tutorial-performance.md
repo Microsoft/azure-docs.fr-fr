@@ -3,16 +3,16 @@ title: Diagnostiquer les problèmes de performances à l’aide d’Azure Applic
 description: Didacticiel vous permettant de rechercher et de diagnostiquer les problèmes de performances dans votre application à l’aide d’Azure Application Insights.
 ms.subservice: application-insights
 ms.topic: tutorial
-author: mrbullwinkle
-ms.author: mbullwin
-ms.date: 08/13/2019
+author: lgayhardt
+ms.author: lagayhar
+ms.date: 06/15/2020
 ms.custom: mvc
-ms.openlocfilehash: 98d7c1552a7b1f2b02ae4df1cad24e20f7ac76e1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: df7cfff7d5bf1b89f88105f79c072d1d7e731b31
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79223676"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005484"
 ---
 # <a name="find-and-diagnose-performance-issues-with-azure-application-insights"></a>Rechercher et diagnostiquer les problèmes de performances à l’aide d’Azure Application Insights
 
@@ -25,15 +25,15 @@ Azure Application Insights collecte des données de télémétrie à partir de v
 > * Analyser les détails des affichages de page à l’aide du langage de requête
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce tutoriel :
 
 - Installez [Visual Studio 2019](https://www.visualstudio.com/downloads/) avec les charges de travail suivantes :
     - Développement web et ASP.NET
     - Développement Azure
-- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../../azure-monitor/app/asp-net.md).
-- [Activer le profileur Application Insights](../../azure-monitor/app/profiler.md#installation) pour votre application.
+- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../app/asp-net.md).
+- [Activer le profileur Application Insights](../app/profiler.md#installation) pour votre application.
 
 ## <a name="log-in-to-azure"></a>Connexion à Azure
 Connectez-vous au portail Azure à l’adresse [https://portal.azure.com](https://portal.azure.com).
@@ -56,12 +56,12 @@ Application Insights collecte des informations sur les performances pour les dif
 
 4.  Le panneau de performances sur la droite affiche la distribution des durées pour différentes requêtes de l’opération sélectionnée.  Réduisez la fenêtre pour démarrer autour du 95e centile. La carte insights des « 3 principales dépendances » peut vous indiquer d’un coup d’œil que les dépendances externes contribuent probablement aux transactions lentes.  Cliquez sur le bouton avec le nombre d’exemples pour afficher la liste des exemples. Vous pouvez ensuite sélectionner un exemple quelconque pour afficher les détails de la transaction.
 
-5.  Vous pouvez voir d’un coup d’œil que l’appel à la Table Azure Fabrikamaccount contribue le plus à la durée totale de la transaction. Vous pouvez également voir qu’une exception a provoqué son échec. Vous pouvez cliquer sur n’importe quel élément dans la liste pour afficher ses détails sur le côté droit. [En savoir plus sur l’expérience de diagnostic des transactions](../../azure-monitor/app/transaction-diagnostics.md)
+5.  Vous pouvez voir d’un coup d’œil que l’appel à la Table Azure Fabrikamaccount contribue le plus à la durée totale de la transaction. Vous pouvez également voir qu’une exception a provoqué son échec. Vous pouvez cliquer sur n’importe quel élément dans la liste pour afficher ses détails sur le côté droit. [En savoir plus sur l’expérience de diagnostic des transactions](../app/transaction-diagnostics.md)
 
     ![Informations de bout en bout de l’opération](media/tutorial-performance/4-end-to-end.png)
     
 
-6.  Le **Profileur** vous aide à en apprendre davantage sur les diagnostics de niveau de code en affichant le code qui s’exécutait pour l’opération et le temps nécessaire à chaque étape. Certaines opérations peuvent ne pas avoir de suivi car le profileur s’exécute périodiquement.  Au fil du temps, d’autres opérations devraient avoir un suivi.  Pour démarrer le profileur pour l’opération, cliquez sur **Suivis du Profileur**.
+6.  Le [**Profileur**](../app/profiler-overview.md) vous aide à en apprendre davantage sur les diagnostics au niveau du code en affichant le code qui s’exécutait pour l’opération et le temps nécessaire à chaque étape. Certaines opérations peuvent ne pas avoir de suivi car le profileur s’exécute périodiquement.  Au fil du temps, d’autres opérations devraient avoir un suivi.  Pour démarrer le profileur pour l’opération, cliquez sur **Suivis du Profileur**.
 5.  Le suivi affiche les événements individuels pour chaque opération pour vous permettre d’identifier la cause de la durée de l’opération globale.  Cliquez sur un des exemples en haut de la liste, dont la durée est la plus longue.
 6.  Cliquez sur **Chemin réactif** pour mettre en surbrillance le chemin d’accès spécifique aux événements qui contribuent le plus à la durée totale de l’opération.  Dans cet exemple, vous pouvez remarquer que l’appel le plus lent provient de la méthode *FabrikamFiberAzureStorage.GetStorageTableData*. La partie qui prend le plus de temps est la méthode *CloudTable.CreateIfNotExist*. Si cette ligne de code est exécutée chaque fois que la fonction est appelée, les appels réseau inutiles et les ressources du processeur sont consommées. La meilleure façon de corriger votre code est de placer cette ligne dans une méthode de démarrage qui s’exécutera une seule fois.
 
@@ -103,13 +103,9 @@ Comme avec les données collectées pour les performances du serveur, Applicatio
 
     ![Requête Logs](media/tutorial-performance/10-page-view-logs.png)
 
-3.  Smart Diagnostics est une fonctionnalité de Logs qui identifie des modèles uniques dans les données. Lorsque vous cliquez sur le point Smart Diagnostics dans le graphique en courbes, la même requête est exécutée sans les enregistrements qui ont provoqué l’anomalie. Les détails de ces enregistrements sont affichés dans la section des commentaires de la requête pour vous permettre d’identifier les propriétés de ces affichages de page qui sont à l’origine de la durée excessive.
-
-    ![Logs avec les diagnostics intelligents](media/tutorial-performance/11-page-view-logs-dsmart.png)
-
-
 ## <a name="next-steps"></a>Étapes suivantes
 Maintenant que vous avez appris à identifier les exceptions d’exécution, passez à l’étape suivante du didacticiel pour apprendre à créer des alertes en réponse aux défaillances.
 
 > [!div class="nextstepaction"]
-> [Alerter sur l’intégrité des applications](../../azure-monitor/learn/tutorial-alert.md)
+> [Alerter sur l’intégrité des applications](./tutorial-alert.md)
+

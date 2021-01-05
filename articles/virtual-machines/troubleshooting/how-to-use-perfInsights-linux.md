@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-linux
 ms.topic: troubleshooting
 ms.date: 7/10/2019
 ms.author: genli
-ms.openlocfilehash: 19b2fcaed2c80d4ca52ada9f9f0898479e73bcf2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f785f44b88c7f0d5f0b6f43114070888bb23146d
+ms.sourcegitcommit: ab94795f9b8443eef47abae5bc6848bb9d8d8d01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231933"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96302483"
 ---
 # <a name="how-to-use-perfinsights"></a>Utilisation de PerfInsights
 
@@ -44,7 +44,7 @@ Ce scénario collecte des informations de base, telles que la configuration du s
 
 - Informations sur le stockage
 
-- Configuration des machines virtuelles Azure (collectée avec [Azure Instance Metadata Service](https://docs.microsoft.com/azure/virtual-machines/windows/instance-metadata-service))
+- Configuration des machines virtuelles Azure (collectée avec [Azure Instance Metadata Service](../windows/instance-metadata-service.md))
 
 - Liste des processus exécutés, utilisation du disque, de la mémoire et du processeur
 
@@ -99,6 +99,7 @@ Les informations relatives à la machine virtuelle Linux, au système d’exploi
   - /var/log/boot.log
   - /var/log/yum.log
   - /var/log/dpkg.log
+  - /var/log/sysstat or /var/log/sa [`**`]
   - /var/log/cloud-init.log
   - /var/log/cloud-init-output.log
   - /var/log/gpu-manager.log
@@ -109,10 +110,12 @@ Les informations relatives à la machine virtuelle Linux, au système d’exploi
   - /etc/waagent.config
   - Sortie de journalctl des cinq derniers jours
 
-- [Métadonnées d’instance de machine virtuelle Azure](https://docs.microsoft.com/azure/virtual-machines/windows/instance-metadata-service)
+- [Métadonnées d’instance de machine virtuelle Azure](../windows/instance-metadata-service.md)
 
 >[!Note]
->[`*`] Les informations PCI ne sont pas encore collectées sur les distributions Debian et SLES
+>[`*`] Les informations PCI ne sont pas encore collectées sur les distributions Debian et SLES.
+> 
+>[`**`] /var/log/sysstat ou/var/log/sa contient les fichiers de rapport d’activité système (SAR) qui sont collectés par le package sysstat. Si le package sysstat n’est pas installé sur la machine virtuelle, l’outil PerfInsights recommande de l’installer.
 
 ## <a name="run-the-perfinsights-linux-on-your-vm"></a>Exécuter PerfInsights Linux sur votre machine virtuelle
 
@@ -121,16 +124,16 @@ Les informations relatives à la machine virtuelle Linux, au système d’exploi
 #### <a name="tool-requirements"></a>Exigences de l’outil
 
 - Cet outil doit être exécuté sur la machine virtuelle qui présente le problème de performances.
-- Python 2.7 doit être installé sur la machine virtuelle
+- Python 3.x ou Python 2.7 doit être installé sur la machine virtuelle.
 
 - Les distributions prises en charge sont les suivantes :
 
     | Distribution               | Version                                         |
     |----------------------------|-------------------------------------------------|
-    | Oracle Linux Server        | 6.10 [`*`], 7.3, 7.6, 7.5 (Oracle-Database-Ee 13.8 marketplace image)|
+    | Oracle Linux Server        | 6.10 [`*`], 7.3, 7.6, 7.5 |
     | CentOS                     | 6.5 [`*`], 7.6                                    |
-    | RHEL                       | 7.2, 7.5, 8.0 [`*`]                               |
-    | Ubuntu                     | 14.04, 16.04, 18.04                               |
+    | RHEL                       | 7.6, 7.7, 7.8, 7.9                                |
+    | Ubuntu                     | 14.04, 16.04, 18.04, 20.04                               |
     | Debian                     | 8, 9, 10 [`*`]                                    |
     | SLES                       | 12 SP4 [`*`]                                      |
     |                            |                                                   |
@@ -215,8 +218,8 @@ Le fichier **PerformanceDiagnostics\_aaaa-MM-jj\_hh-mm-ss-fff.tar.gz** peut incl
 
 L’onglet **Overview** fournit des détails de base sur l’exécution et des informations sur les machines virtuelles. L’onglet **Findings** affiche un résumé des recommandations de toutes les différentes sections du rapport PerfInsights.
 
-![Capture d’écran du rapport PerfInsights](media/how-to-use-perfinsights-linux/perfinsights-linux-overview.png)  
-![Capture d’écran du rapport PerfInsights](media/how-to-use-perfinsights-linux/perfinsights-linux-findings-tab.png)
+![Capture d’écran de l’onglet Vue d’ensemble du rapport PerfInsights.](media/how-to-use-perfinsights-linux/perfinsights-linux-overview.png)  
+![Capture d’écran de l’onglet Linux du rapport PerfInsights.](media/how-to-use-perfinsights-linux/perfinsights-linux-findings-tab.png)
 
 > [!NOTE]
 > Les conclusions identifiées comme étant d’importance élevée sont des problèmes connus qui peuvent conduire à des problèmes de performances. Les conclusions identifiées comme étant d’importance moyenne représentent des configurations non optimales ne provoquant pas forcément de problèmes de performances. Les conclusions identifiées comme étant d’importance faible sont des instructions données à titre informatif uniquement.

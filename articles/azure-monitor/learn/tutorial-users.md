@@ -7,12 +7,12 @@ author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 09/20/2017
 ms.custom: mvc
-ms.openlocfilehash: cc6c7fc94e940732ba180c83344eabf29597d849
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ce9bf6fe6d130cf8511db2b2351c0de01b753d81
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77670353"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87318400"
 ---
 # <a name="use-azure-application-insights-to-understand-how-customers-are-using-your-application"></a>Utiliser Azure Application Insights pour comprendre comment les clients utilisent votre application
 
@@ -36,9 +36,9 @@ Pour suivre ce tutoriel :
     - Développement web et ASP.NET
     - Développement Azure
 - Téléchargez et installez le [débogueur d'instantané de Visual Studio](https://aka.ms/snapshotdebugger).
-- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../../azure-monitor/app/asp-net.md). 
-- [Envoyez des données de télémétrie à partir de votre application](../../azure-monitor/app/usage-overview.md#send-telemetry-from-your-app) pour ajouter des affichages d’événement/de page personnalisés.
-- Envoyez un [contexte utilisateur](https://docs.microsoft.com/azure/application-insights/app-insights-usage-send-user-context) pour suivre les actions d’un utilisateur au fil du temps et exploiter pleinement les fonctionnalités d’utilisation.
+- Déployez une application .NET pour Azure et [activez le Kit SDK Application Insights](../app/asp-net.md). 
+- [Envoyez des données de télémétrie à partir de votre application](../app/usage-overview.md#send-telemetry-from-your-app) pour ajouter des affichages d’événement/de page personnalisés.
+- Envoyez un [contexte utilisateur](../app/usage-send-user-context.md) pour suivre les actions d’un utilisateur au fil du temps et exploiter pleinement les fonctionnalités d’utilisation.
 
 ## <a name="log-in-to-azure"></a>Connexion à Azure
 Connectez-vous au portail Azure à l’adresse [https://portal.azure.com](https://portal.azure.com).
@@ -102,16 +102,16 @@ Alors que les panneaux précédents se concentrent sur ce que les utilisateurs o
 
 1. Sélectionnez **Entonnoirs** dans le menu, puis cliquez sur **Nouveau**. 
 
-    ![](media/tutorial-users/funnelsnew.png)
+    ![Capture d’écran montrant comment créer un tunnel.](media/tutorial-users/funnelsnew.png)
 
 2. Tapez un **nom d’entonnoir**.
 3. Créez un entonnoir avec au moins deux étapes en sélectionnant une action pour chaque étape.  La liste d’actions est générée à partir des données d’utilisation collectées par Application Insights.
 
-    ![](media/tutorial-users/funnelsedit.png)
+    ![Capture d’écran montrant comment créer des étapes dans un nouveau tunnel.](media/tutorial-users/funnelsedit.png)
 
 4. Cliquez sur **Enregistrer** pour enregistrer l’entonnoir, puis affichez les résultats.  La fenêtre à droite de l’entonnoir montre les événements les plus courants avant la première activité et après la dernière activité pour vous aider à comprendre les tendances des utilisateurs qui caractérisent la séquence particulière.
 
-    ![](media/tutorial-users/funnelsright.png)
+    ![Capture d’écran montrant les résultats d’événement d’un tunnel récemment créé.](media/tutorial-users/funnelsright.png)
 
 
 ## <a name="learn-which-customers-return"></a>Identifier les clients récurrents
@@ -120,11 +120,11 @@ L’option **Rétention** vous aide à identifier les utilisateurs qui retournen
 1. Sélectionnez **Rétention** dans le menu.
 2. Par défaut, les informations analysées incluent les utilisateurs qui ont effectué une action, puis qui sont retournés dans l’application pour effectuer à nouveau une action.  Vous pouvez modifier ce filtre, par exemple pour inclure uniquement les utilisateurs qui y sont retournés après avoir effectué un achat.
 
-    ![](media/tutorial-users/retentionquery.png)
+    ![Capture d’écran montrant comment définir un filtre de rétention.](media/tutorial-users/retentionquery.png)
 
 3. Les utilisateurs récurrents qui répondent aux critères apparaissent sous forme d’un graphique et d’un tableau pour différentes durées.  Le modèle par défaut montre une baisse progressive des utilisateurs récurrents au fil du temps.  Une baisse soudaine d’une période à une autre peut indiquer un problème. 
 
-    ![](media/tutorial-users/retentiongraph.png)
+    ![Capture d’écran montrant un graphe pour les utilisateurs correspondant aux critères définis pour un filtre de rétention.](media/tutorial-users/retentiongraph.png)
 
 ## <a name="analyze-user-navigation"></a>Analyser la navigation de l’utilisateur
 Un **flux utilisateur** permet de visualiser la façon dont vos utilisateurs naviguent entre les pages et les fonctionnalités de votre application.  Cela vous permet de répondre à certaines questions, par exemple à quel moment les utilisateurs quittent une page particulière, comment ils ferment votre application, et si des actions sont répétées régulièrement.
@@ -133,15 +133,15 @@ Un **flux utilisateur** permet de visualiser la façon dont vos utilisateurs nav
 2.  Cliquez sur **Nouveau** pour créer un flux utilisateur, puis sur **Modifier** pour modifier ses détails.
 3.  Augmentez l’**intervalle de temps** à 7 jours, puis sélectionnez un événement initial.  Le flux effectuera le suivi des sessions utilisateur qui commencent par cet événement.
 
-    ![](media/tutorial-users/flowsedit.png)
+    ![Capture d’écran montrant comment créer un flux d’utilisateur.](media/tutorial-users/flowsedit.png)
 
 4.  Le flux d’utilisateur s’affiche et montre les différents chemins d’accès des utilisateurs et leur nombre de sessions.  Les lignes bleues indiquent une action effectuée par l’utilisateur après l’action en cours.  Une ligne rouge indique la fin de la session de l’utilisateur.
 
-    ![](media/tutorial-users/flows.png)
+    ![Capture d’écran montrant l’affichage de chemins d’accès d’utilisateur et de nombres de sessions pour un flux d’utilisateur.](media/tutorial-users/flows.png)
 
 5.  Pour supprimer un événement du flux, cliquez sur le signe **x** dans l’angle de l’action, puis sur **Créer un graphique**.  Le graphique est redessiné et toutes les instances de cet événement sont supprimées.  Cliquez sur **Modifier** pour constater que l’événement est désormais ajouté à la liste des **événements exclus**.
 
-    ![](media/tutorial-users/flowsexclude.png)
+    ![Capture d’écran montrant la liste d’événements exclus pour un flux d’utilisateur.](media/tutorial-users/flowsexclude.png)
 
 ## <a name="consolidate-usage-data"></a>Consolider les données d’utilisation
 Les **classeurs** associent des visualisations de données, des requêtes Analytics et du texte dans des documents interactifs.  Vous pouvez utiliser des classeurs pour regrouper les informations d’utilisation communes, consolider les informations d’un incident spécifique, ou fournir à votre équipe des détails sur l’utilisation de votre application.
@@ -150,12 +150,12 @@ Les **classeurs** associent des visualisations de données, des requêtes Analyt
 2.  Cliquez sur **Nouveau** pour créer un classeur.
 3.  Une requête est déjà fournie et inclut toutes les données d’utilisation du dernier jour sous la forme d’un graphique à barres.  Vous pouvez utiliser cette requête, la modifier manuellement, ou cliquer sur **Exemples de requêtes** pour sélectionner d’autres requêtes utiles.
 
-    ![](media/tutorial-users/samplequeries.png)
+    ![Capture d’écran montrant une liste d’exemples de requêtes que vous pouvez utiliser.](media/tutorial-users/samplequeries.png)
 
 4.  Cliquez sur **Fin de l'édition**.
 5.  Cliquez sur **Modifier** dans le volet supérieur pour modifier le texte en haut du classeur.  Le texte est mis en forme à l’aide de markdown.
 
-    ![](media/tutorial-users/markdown.png)
+    ![Capture d’écran montrant comment modifier le texte en haut du classeur.](media/tutorial-users/markdown.png)
 
 6.  Cliquez sur **Ajouter des utilisateurs** pour ajouter un graphique avec des informations sur les utilisateurs.  Modifiez les détails du graphique si vous le souhaitez, puis cliquez sur **Fin de l'édition** pour enregistrer le graphique.
 
@@ -164,4 +164,5 @@ Les **classeurs** associent des visualisations de données, des requêtes Analyt
 Maintenant que vous avez appris à analyser vos utilisateurs, passez à l’étape suivante du didacticiel pour apprendre à créer des tableaux de bord personnalisés qui combinent ces informations avec d’autres données utiles concernant votre application.
 
 > [!div class="nextstepaction"]
-> [Créer des tableaux de bord personnalisés](../../azure-monitor/learn/tutorial-app-dashboards.md)
+> [Créer des tableaux de bord personnalisés](./tutorial-app-dashboards.md)
+

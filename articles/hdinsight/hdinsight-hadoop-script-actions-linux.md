@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/28/2019
-ms.openlocfilehash: db37a56ffbf0cb64530f8f7af38841bac72c77d4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f7959b639b75d912d44670c8b00a7327cb7857d6
+ms.sourcegitcommit: 3e8058f0c075f8ce34a6da8db92ae006cc64151a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81767537"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92629440"
 ---
 # <a name="script-action-development-with-hdinsight"></a>Développement d’actions de script avec HDInsight
 
@@ -239,7 +239,7 @@ Les programmes d’assistance suivants disponibles pour une utilisation dans vot
 | --- | --- |
 | `download_file SOURCEURL DESTFILEPATH [OVERWRITE]` |Télécharge un fichier de l’URI source vers le chemin d’accès de fichier spécifié. Par défaut, il ne remplace pas un fichier existant. |
 | `untar_file TARFILE DESTDIR` |Extrait un fichier tar (à l’aide de `-xf`,) dans le répertoire de destination. |
-| `test_is_headnode` |Lorsqu’il est exécuté sur un nœud principal de cluster, la valeur 1 est renvoyée ; dans le cas contraire, c’est la valeur 0. |
+| `test_is_headnode` |Lorsque le script est exécuté sur un nœud principal de cluster, la valeur 1 est renvoyée ; dans le cas contraire, c’est la valeur 0. |
 | `test_is_datanode` |Si le nœud actuel est un nœud de données (worker), la valeur 1 est renvoyée ; dans le cas contraire, c’est la valeur 0. |
 | `test_is_first_datanode` |Si le nœud actuel est le premier nœud de données (worker) (nommé workernode0,) la valeur 1 est renvoyée ; dans le cas contraire, c’est la valeur 0. |
 | `get_headnodes` |Renvoie le nom de domaine complet des nœuds principaux dans le cluster. Les noms sont séparés par des virgules. Une chaîne vide est renvoyée en cas d’erreur. |
@@ -264,11 +264,15 @@ Les valeurs transmises au script comme paramètres doivent être entourées de g
 
 La définition d’une variable d’environnement est effectuée de la façon suivante :
 
-    VARIABLENAME=value
+```bash
+VARIABLENAME=value
+```
 
-Où VARIABLENAME est le nom de la variable. Pour accéder à la variable, utilisez `$VARIABLENAME`. Par exemple, pour affecter une valeur fournie par un paramètre de positionnement tel qu’une variable d’environnement nommée PASSWORD, utilisez l’instruction suivante :
+Dans l’exemple précédent, `VARIABLENAME` est le nom de la variable. Pour accéder à la variable, utilisez `$VARIABLENAME`. Par exemple, pour affecter une valeur fournie par un paramètre de positionnement tel qu’une variable d’environnement nommée PASSWORD, utilisez l’instruction suivante :
 
-    PASSWORD=$1
+```bash
+PASSWORD=$1
+```
 
 Lors des accès ultérieurs aux informations, il est possible d’utiliser `$PASSWORD`.
 
@@ -288,7 +292,7 @@ Les scripts utilisés pour personnaliser un cluster doivent être stockés dans 
 
 * Une __URI lisible publiquement__. Par exemple, une URL menant aux données stockées sur OneDrive, Dropbox ou un autre service d’hébergement de fichiers.
 
-* Un compte __Azure Data Lake Storage__ associé à un groupe de ressources Azure. Pour plus d’informations sur l’utilisation d’Azure Data Lake Storage avec HDInsight, consultez [Démarrage rapide : Configurer des clusters dans HDInsight](../storage/data-lake-storage/quickstart-create-connect-hdi-cluster.md).
+* Un compte __Azure Data Lake Storage__ associé à un groupe de ressources Azure. Pour plus d’informations sur l’utilisation d’Azure Data Lake Storage avec HDInsight, consultez [Démarrage rapide : Configurer des clusters dans HDInsight](./hdinsight-hadoop-provision-linux-clusters.md).
 
     > [!NOTE]  
     > Le principal de service utilisé par HDInsight pour accéder à Data Lake Storage doit avoir accès en lecture au script.
@@ -328,13 +332,13 @@ Microsoft fournit des exemples de scripts pour installer des composants sur un c
 
 Voici des erreurs susceptibles de se produire quand vous utilisez les scripts que vous avez développés :
 
-**Erreur** : `$'\r': command not found`. Parfois suivi par `syntax error: unexpected end of file`.
+**Erreur**  : `$'\r': command not found`. Parfois suivi par `syntax error: unexpected end of file`.
 
-*Cause* : Cette erreur se produit lorsque les lignes d’un script se terminent par CRLF. Les systèmes UNIX attendent seulement LF comme fin de ligne.
+*Cause*  : Cette erreur se produit lorsque les lignes d’un script se terminent par CRLF. Les systèmes UNIX attendent seulement LF comme fin de ligne.
 
 Ce problème se produit souvent lorsque le script est créé dans un environnement Windows, car CRLF est une fin de ligne commune à de nombreux éditeurs de texte sous Windows.
 
-*Résolution* : Si c’est une option dans votre éditeur de texte, sélectionnez le format Unix ou LF comme fin de ligne. Vous pouvez également utiliser les commandes suivantes sur un système Unix pour changer la séquence CRLF en LF :
+*Résolution*  : Si c’est une option dans votre éditeur de texte, sélectionnez le format Unix ou LF comme fin de ligne. Vous pouvez également utiliser les commandes suivantes sur un système Unix pour changer la séquence CRLF en LF :
 
 > [!NOTE]  
 > Les commandes suivantes sont à peu près équivalentes dans la mesure où elles doivent changer les fins de ligne CRLF en LF. Sélectionnez-en une basée sur les utilitaires disponibles sur votre système.
@@ -346,18 +350,20 @@ Ce problème se produit souvent lorsque le script est créé dans un environneme
 | `perl -pi -e 's/\r\n/\n/g' INFILE` | Modifie directement le fichier |
 | ```sed 's/$'"/`echo \\\r`/" INFILE > OUTFILE``` |OUTFILE contient une version avec des terminaisons LF uniquement. |
 
-**Erreur** : `line 1: #!/usr/bin/env: No such file or directory`.
+**Erreur**  : `line 1: #!/usr/bin/env: No such file or directory`.
 
-*Cause* : Cette erreur se produit lorsque le script a été enregistré au format UTF-8 avec une marque d’ordre d’octet (BOM).
+*Cause*  : Cette erreur se produit lorsque le script a été enregistré au format UTF-8 avec une marque d’ordre d’octet (BOM).
 
-*Résolution* : Enregistrez le fichier au format ASCII ou UTF-8 sans marque d’ordre d’octet. Vous pouvez également utiliser la commande suivante sur un système Linux ou Unix pour créer un fichier sans marque d’ordre d’octet :
+*Résolution*  : Enregistrez le fichier au format ASCII ou UTF-8 sans marque d’ordre d’octet. Vous pouvez également utiliser la commande suivante sur un système Linux ou Unix pour créer un fichier sans marque d’ordre d’octet :
 
-    awk 'NR==1{sub(/^\xef\xbb\xbf/,"")}{print}' INFILE > OUTFILE
+```bash
+awk 'NR==1{sub(/^\xef\xbb\xbf/,"")}{print}' INFILE > OUTFILE
+```
 
 Remplacez `INFILE` par le fichier contenant la marque d’ordre d’octet. `OUTFILE` doit être un nouveau nom de fichier contenant le script sans la marque d’ordre d’octet.
 
 ## <a name="next-steps"></a><a name="seeAlso"></a>Étapes suivantes
 
 * Découvrez comment [Personnaliser des clusters HDInsight à l’aide d’une action de script](hdinsight-hadoop-customize-cluster-linux.md)
-* Utilisez la [Référence du Kit de développement logiciel (SDK) .NET HDInsight](https://docs.microsoft.com/dotnet/api/overview/azure/hdinsight) pour en savoir plus sur la création d’applications .NET qui gèrent HDInsight
-* Utilisez l’ [API REST HDInsight](https://msdn.microsoft.com/library/azure/mt622197.aspx) pour savoir comment utiliser REST pour effectuer des actions de gestion sur des clusters HDInsight.
+* Utilisez la [Référence du Kit de développement logiciel (SDK) .NET HDInsight](/dotnet/api/overview/azure/hdinsight) pour en savoir plus sur la création d’applications .NET qui gèrent HDInsight
+* Utilisez l’ [API REST HDInsight](/rest/api/hdinsight/) pour savoir comment utiliser REST pour effectuer des actions de gestion sur des clusters HDInsight.

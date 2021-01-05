@@ -1,26 +1,28 @@
 ---
 title: Diffuser en streaming des fichiers vidéo avec Azure Media Services et Azure CLI
-description: Suivez les étapes de tutoriel pour créer un compte Azure Media Services, encoder un fichier et le diffuser en continu sur Lecteur multimédia Azure.
+description: Suivez les étapes de ce tutoriel utiliser Azure CLI afin de créer un compte Azure Media Services, encoder un fichier et le streamer vers le Lecteur multimédia Azure.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 keywords: azure media services, diffuser en continu
 ms.service: media-services
 ms.workload: media
 ms.topic: tutorial
-ms.custom: ''
-ms.date: 08/19/2019
-ms.author: juliako
-ms.openlocfilehash: 91259e10966173cb701b867f5b3ed362112beef3
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.custom: devx-track-azurecli
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: f4a71509c29555da2fdbc1e7eed2fd985237d6a5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382781"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91268772"
 ---
 # <a name="tutorial-encode-a-remote-file-based-on-url-and-stream-the-video---azure-cli"></a>Tutoriel : Encoder un fichier distant basé sur une URL et diffuser la vidéo en streaming - Azure CLI
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Ce tutoriel vous montre combien il est facile d’encoder et de diffuser en continu des vidéos sur divers navigateurs et appareils à l’aide d’Azure Media Services et d’Azure CLI. Vous pouvez spécifier un contenu d’entrée à l’aide d’URL HTTPS ou SAP ou de chemins d’accès aux fichiers situés dans le Stockage Blob Azure.
 

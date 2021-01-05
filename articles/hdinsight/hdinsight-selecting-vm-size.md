@@ -9,12 +9,12 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 10/09/2019
-ms.openlocfilehash: a21e8d6c76c93b3084619c09f6a7664a25c1929c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d347707b0f48314dd872bc3ad34ac624817d2937
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73682202"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92535312"
 ---
 # <a name="selecting-the-right-vm-size-for-your-azure-hdinsight-cluster"></a>Sélection de la taille de machine virtuelle adaptée à votre cluster Azure HDInsight
 
@@ -32,7 +32,7 @@ La taille et le type de machine virtuelle sont déterminés par la puissance de 
 
 - RAM : la taille de machine virtuelle détermine également la quantité de RAM disponible sur la machine virtuelle. Pour les charges de travail qui stockent des données en mémoire pour le traitement, au lieu de lire à partir du disque, vérifiez que vos nœuds worker disposent de suffisamment de mémoire pour stocker les données.
 
-- Réseau : pour la plupart des types de clusters, les données traitées par le cluster ne se trouvent pas sur le disque local, mais dans un service de stockage externe comme Data Lake Storage ou Stockage Azure. Prenez en compte le débit et la bande passante réseau entre la machine virtuelle du nœud et le service de stockage. La bande passante accessible à une machine virtuelle augmente généralement avec la taille. Pour plus d’informations, consultez [Tailles des machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/linux/sizes).
+- Réseau : pour la plupart des types de clusters, les données traitées par le cluster ne se trouvent pas sur le disque local, mais dans un service de stockage externe comme Data Lake Storage ou Stockage Azure. Prenez en compte le débit et la bande passante réseau entre la machine virtuelle du nœud et le service de stockage. La bande passante accessible à une machine virtuelle augmente généralement avec la taille. Pour plus d’informations, consultez [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/sizes.md).
 
 ## <a name="understanding-vm-optimization"></a>Comprendre l’optimisation des machines virtuelles
 
@@ -40,10 +40,10 @@ Les familles de machines virtuelles dans Azure sont optimisées pour répondre �
 
 | Type                     | Tailles           |    Description       |
 |--------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| [Entrée de gamme](../virtual-machines/linux/sizes-general.md)          | A, Av2  | Les machines virtuelles affichent des performances d’unité centrale et des configurations de mémoire idéales pour les charges de travail de niveau d’entrée, propres au développement et au test. Elles sont économiques et offrent une solution à faible coût pour démarrer avec Azure. |
-| [Usage général](../virtual-machines/linux/sizes-general.md)          | D, DSv2, Dv2  | Ratio processeur/mémoire équilibré. Idéal pour le test et le développement, les bases de données petites à moyennes et les serveurs web au trafic faible à moyen. |
-| [Optimisé pour le calcul](../virtual-machines/linux/sizes-compute.md)        | F           | Ratio processeur/mémoire élevé. Convient pour les serveurs web au trafic moyen, les appareils réseau, les processus de traitement par lots et les serveurs d’application.        |
-| [Mémoire optimisée](../virtual-machines/linux/sizes-memory.md)         | Esv3, Ev3  | Ratio mémoire/processeur élevé. Idéal pour les serveurs de base de données relationnelle, les caches moyens à grands et l’analytique en mémoire.                 |
+| [Entrée de gamme](../virtual-machines/sizes-general.md)          | A, Av2  | Les machines virtuelles affichent des performances d’unité centrale et des configurations de mémoire idéales pour les charges de travail de niveau d’entrée, propres au développement et au test. Elles sont économiques et offrent une solution à faible coût pour démarrer avec Azure. |
+| [Usage général](../virtual-machines/sizes-general.md)          | D, DSv2, Dv2  | Ratio processeur/mémoire équilibré. Idéal pour le test et le développement, les bases de données petites à moyennes et les serveurs web au trafic faible à moyen. |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md)        | F           | Ratio processeur/mémoire élevé. Convient pour les serveurs web au trafic moyen, les appareils réseau, les processus de traitement par lots et les serveurs d’application.        |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md)         | Esv3, Ev3  | Ratio mémoire/processeur élevé. Idéal pour les serveurs de base de données relationnelle, les caches moyens à grands et l’analytique en mémoire.                 |
 
 - Pour plus d’informations sur la tarification des instances de machine virtuelle disponibles dans les régions prises en charge par HDInsight, consultez la [Tarification de HDInsight](https://azure.microsoft.com/pricing/details/hdinsight/).
 
@@ -74,4 +74,4 @@ Pour plus d’informations sur les benchmarks pour les différentes tailles de c
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Configurations de nœuds prises en charge pour Azure HDInsight](hdinsight-supported-node-configuration.md)
-- [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/linux/sizes.md)
+- [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/sizes.md)

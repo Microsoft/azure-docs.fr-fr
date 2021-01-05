@@ -1,19 +1,16 @@
 ---
 title: Conseils sur la reprise d’activité pour Azure Data Lake Analytics
 description: Découvrez comment planifier la reprise d’activité après sinistre pour vos comptes Azure Data Lake Analytics.
-services: data-lake-analytics
-author: MikeRys
-ms.author: mrys
-ms.reviewer: jasonwhowell
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: f9b22e6b806f76189134ec63c83d48f48bf95587
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce5e96bf464eebb9b91e3ffac9312e89df9cbabe
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73889762"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220973"
 ---
 # <a name="disaster-recovery-guidance-for-azure-data-lake-analytics"></a>Conseils sur la reprise d’activité pour Azure Data Lake Analytics
 

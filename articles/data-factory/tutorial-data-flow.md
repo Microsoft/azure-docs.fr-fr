@@ -1,19 +1,19 @@
 ---
 title: Transformer des données avec un flux de données de mappage
 description: Ce tutoriel fournit des instructions détaillées sur l’utilisation d’Azure Data Factory pour transformer des données à l’aide d’un flux de données de mappage
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.reviewer: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 10/07/2019
-ms.openlocfilehash: 917a8d6edf04d8a160c3a6a5ac59949623dfee5c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/09/2019
+ms.openlocfilehash: b0f564f68a638e7efd1cd1ce9116a26f4d19f277
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418675"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497042"
 ---
 # <a name="transform-data-using-mapping-data-flows"></a>Transformer des données avec des flux de données de mappage
 
@@ -36,14 +36,14 @@ Dans ce tutoriel, vous effectuez les étapes suivantes :
 * **Abonnement Azure**. Si vous n’avez pas d’abonnement Azure, créez un [compte Azure gratuit](https://azure.microsoft.com/free/) avant de commencer.
 * **Compte Azure Storage**. Vous utilisez le stockage ADLS comme magasins de données *source* et *récepteur*. Si vous ne possédez pas de compte de stockage, consultez l’article [Créer un compte de stockage Azure](../storage/common/storage-account-create.md) pour découvrir comment en créer un.
 
-Le fichier que nous transformons dans ce tutoriel est MoviesDB.csv, qui se trouve [ici](https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv). Pour récupérer le fichier à partir de GitHub, copiez le contenu dans l’éditeur de texte de votre choix pour l’enregistrer localement sous la forme d’un fichier .csv. Pour charger le fichier dans votre compte de stockage, consultez [Charger des objets blob avec le portail Azure](../storage/blobs/storage-quickstart-blobs-portal.md). Les exemples feront référence à un conteneur nommé « sample-data ».
+Le fichier que nous transformons dans ce tutoriel est MoviesDB.csv, qui se trouve [ici](https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv). Pour récupérer le fichier à partir de GitHub, copiez le contenu dans l’éditeur de texte de votre choix pour l’enregistrer localement sous la forme d’un fichier .csv. Pour charger le fichier dans votre compte de stockage, consultez [Chargement d’objets blob avec le Portail Azure](../storage/blobs/storage-quickstart-blobs-portal.md). Les exemples feront référence à un conteneur nommé « sample-data ».
 
 ## <a name="create-a-data-factory"></a>Créer une fabrique de données
 
 Au cours de cette étape, vous allez créer une fabrique de données et ouvrir l’interface utilisateur de Data Factory afin de créer un pipeline dans la fabrique de données.
 
 1. Ouvrez **Microsoft Edge** ou **Google Chrome**. L’interface utilisateur de Data Factory n’est actuellement prise en charge que par les navigateurs web Microsoft Edge et Google Chrome.
-2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Analytics** > **Data Factory** :
+2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Intégration** > **Data Factory** :
 
    ![Sélection Data Factory dans le volet « Nouveau »](./media/doc-common-process/new-azure-data-factory-menu.png)
 
@@ -80,10 +80,10 @@ Au cours de cette étape, vous allez créer un pipeline qui contient une activit
     ![Activité de flux de données](media/tutorial-data-flow/dataflow1.png)
 1. Dans le volet **Activités**, développez la section **Déplacer et transformer**. Faites glisser et déposez l’activité **Flux de données** à partir du volet vers le canevas du pipeline.
 
-    ![Activité de flux de données](media/tutorial-data-flow/activity1.png)
+    ![Capture d’écran montrant le canevas du pipeline dans lequel vous pouvez supprimer l’activité Flux de données.](media/tutorial-data-flow/activity1.png)
 1. Dans la fenêtre contextuelle **Ajout de flux de données**, sélectionnez **Créer un flux de données**, puis nommez votre flux de données **TransformMovies**. Une fois que vous avez fini, cliquez sur Terminer.
 
-    ![Activité de flux de données](media/tutorial-data-flow/activity2.png)
+    ![Capture d’écran montrant où nommer votre flux de données lorsque vous en créez un.](media/tutorial-data-flow/activity2.png)
 
 ## <a name="build-transformation-logic-in-the-data-flow-canvas"></a>Générer une logique de transformation dans le canevas de flux de données
 
@@ -91,19 +91,19 @@ Une fois que vous avez créé votre flux de données, vous êtes automatiquement
 
 1. Dans le canevas de flux de données, ajoutez une source en cliquant sur la zone **Ajouter une source**.
 
-    ![Canevas de flux de données](media/tutorial-data-flow/dataflow2.png)
+    ![Capture d’écran montrant la zone Ajouter une source.](media/tutorial-data-flow/dataflow2.png)
 1. Nommez votre source **MoviesDB**. Cliquez sur **Nouveau** pour créer un jeu de données source.
 
-    ![Canevas de flux de données](media/tutorial-data-flow/dataflow3.png)
+    ![Capture d’écran montrant où sélectionner Nouveau après avoir nommé votre source.](media/tutorial-data-flow/dataflow3.png)
 1. Choisissez **Azure Data Lake Storage Gen2**. Cliquez sur Continuer.
 
-    ![Dataset](media/tutorial-data-flow/dataset1.png)
+    ![Capture d’écran montrant la vignette Azure Data Lake Storage Gen2.](media/tutorial-data-flow/dataset1.png)
 1. Choisissez **DelimitedText**. Cliquez sur Continuer.
 
-    ![Dataset](media/tutorial-data-flow/dataset2.png)
+    ![Capture d’écran montrant la vignette DelimitedText.](media/tutorial-data-flow/dataset2.png)
 1. Nommez votre jeu de données **MoviesDB**. Dans la liste déroulante des services liés, choisissez **Nouveau**.
 
-    ![Dataset](media/tutorial-data-flow/dataset3.png)
+    ![Capture d’écran montrant la liste déroulante Service lié.](media/tutorial-data-flow/dataset3.png)
 1. Dans l’écran de création de service lié, nommez votre service lié ADLS Gen2 **ADLSGen2**, puis spécifiez votre méthode d’authentification. Entrez ensuite vos informations d’identification de connexion. Dans ce tutoriel, nous utilisons une clé de compte pour nous connecter à notre compte de stockage. Vous pouvez cliquer sur **Tester la connexion** pour vérifier que vos informations d’identification ont été entrées correctement. Quand vous avez terminé, cliquez sur Créer.
 
     ![Service lié](media/tutorial-data-flow/ls1.png)
@@ -112,13 +112,13 @@ Une fois que vous avez créé votre flux de données, vous êtes automatiquement
     ![Groupes de données](media/tutorial-data-flow/dataset4.png)
 1. Si votre cluster de débogage a démarré, accédez à l’onglet **Aperçu des données**  de la transformation de la source, puis cliquez sur **Actualiser** pour obtenir une capture instantanée des données. Vous pouvez utiliser l’aperçu des données pour vérifier que votre transformation est correctement configurée.
 
-    ![Canevas de flux de données](media/tutorial-data-flow/dataflow4.png)
+    ![Capture d’écran montrant où afficher un aperçu de vos données pour vérifier que votre transformation est correctement configurée.](media/tutorial-data-flow/dataflow4.png)
 1. En regard de votre nœud source dans le canevas de flux de données, cliquez sur l’icône plus (+) pour ajouter une nouvelle transformation. La première transformation que vous ajoutez est un **Filtre**.
 
     ![Canevas de flux de données](media/tutorial-data-flow/dataflow5.png)
 1. Nommez votre transformation de filtre **FilterYears**. Cliquez sur la zone d’expression en regard de **Filtrer sur** pour ouvrir le générateur d’expressions. Ici, vous allez spécifier votre condition de filtrage.
 
-    ![Filtrer](media/tutorial-data-flow/filter1.png)
+    ![Capture d’écran montrant la zone d’expression Filtrer sur.](media/tutorial-data-flow/filter1.png)
 1. Le générateur d’expressions de flux de données vous permet de générer de manière interactive des expressions à utiliser dans diverses transformations. Les expressions peuvent inclure des fonctions intégrées, des colonnes du schéma d’entrée et des paramètres définis par l’utilisateur. Pour plus d’informations sur la génération d’expressions, consultez [Générateur d’expressions de flux de données](concepts-data-flow-expression-builder.md).
 
     Dans ce tutoriel, vous voulez filtrer les films du genre comédie qui sont sortis entre 1910 et 2000. Comme l’année est actuellement une chaîne, vous devez la convertir en un entier à l’aide de la fonction ```toInteger()```. Utilisez les opérateurs supérieur ou égal à (>=) et inférieur ou égal à (<=) pour effectuer une comparaison avec les valeurs d’années (year) littérales 1910 et 2000. Unissez ces expressions avec l’opérateur And (&&). L’expression se présente comme suit :
@@ -137,35 +137,35 @@ Une fois que vous avez créé votre flux de données, vous êtes automatiquement
 
 1. Pour vérifier que le filtre fonctionne correctement, récupérez un **Aperçu des données**.
 
-    ![Filtrer](media/tutorial-data-flow/filter3.png)
+    ![Capture d’écran montrant l’aperçu des données que vous avez récupéré (fetch).](media/tutorial-data-flow/filter3.png)
 1. La transformation suivante que vous allez ajouter est une transformation **Agrégation** sous **Modificateur de schéma**.
 
-    ![Agrégat](media/tutorial-data-flow/agg1.png)
+    ![Capture d’écran montrant le modificateur de schéma Agrégation.](media/tutorial-data-flow/agg1.png)
 1. Nommez votre transformation d’agrégation **AggregateComedyRatings**. Sous l’onglet **Grouper par**, sélectionnez **year** (année) dans la liste déroulante pour regrouper les agrégations par année de sortie des films.
 
-    ![Agrégat](media/tutorial-data-flow/agg2.png)
+    ![Capture d’écran montrant l’option Year (Année) sous l’onglet Grouper par dans les paramètres d’agrégation.](media/tutorial-data-flow/agg2.png)
 1. Accédez à l’onglet **Agrégats**. Dans la zone de texte de gauche, nommez la colonne d’agrégation **AverageComedyRating**. Cliquez sur la zone d’expression de droite pour entrer l’expression d’agrégation par le biais du générateur d’expressions.
 
-    ![Agrégat](media/tutorial-data-flow/agg3.png)
+    ![Capture d’écran montrant l’option Year (Année) sous l’onglet Agrégats dans les paramètres d’agrégation.](media/tutorial-data-flow/agg3.png)
 1. Pour afficher la moyenne de la colonne **Évaluation**, utilisez la fonction d’agrégation ```avg()```. Comme **Évaluation** est une chaîne et que ```avg()``` prend une entrée numérique, nous devons convertir la valeur en nombre à l’aide de la fonction ```toInteger()```. Voici comment se présente l’expression :
 
     ```avg(toInteger(Rating))```
 
     Quand vous avez terminé, cliquez sur **Enregistrer et terminer**.
 
-    ![Agrégat](media/tutorial-data-flow/agg4.png)
+    ![Capture d’écran montrant l’expression enregistrée.](media/tutorial-data-flow/agg4.png)
 1. Accédez à l’onglet **Aperçu des données** pour afficher la sortie de la transformation. Notez que seules deux colonnes sont affichées : **year** et **AverageComedyRating**.
 
     ![Agrégat](media/tutorial-data-flow/agg3.png)
 1. Ensuite, vous voulez ajouter une transformation **Récepteur** sous **Destination**.
 
-    ![Récepteur](media/tutorial-data-flow/sink1.png)
+    ![Capture d’écran montrant où ajouter une transformation de récepteur sous Destination.](media/tutorial-data-flow/sink1.png)
 1. Nommez votre récepteur **Sink**. Cliquez sur **Nouveau** pour créer votre jeu de données récepteur.
 
-    ![Récepteur](media/tutorial-data-flow/sink2.png)
+    ![Capture d’écran montrant où nommer votre récepteur et créer un jeu de données récepteur.](media/tutorial-data-flow/sink2.png)
 1. Choisissez **Azure Data Lake Storage Gen2**. Cliquez sur Continuer.
 
-    ![Dataset](media/tutorial-data-flow/dataset1.png)
+    ![Capture d’écran montrant la vignette Azure Data Lake Storage Gen2 que vous pouvez sélectionner.](media/tutorial-data-flow/dataset1.png)
 1. Choisissez **DelimitedText**. Cliquez sur Continuer.
 
     ![Dataset](media/tutorial-data-flow/dataset2.png)
@@ -181,13 +181,13 @@ Vous pouvez déboguer un pipeline avant de le publier. Au cours de cette étape,
 
 1. Accédez au canevas du pipeline. Cliquez sur **Déboguer** pour déclencher une exécution de débogage.
 
-    ![Pipeline](media/tutorial-data-flow/pipeline1.png)
+    ![Capture d’écran montrant le canevas du pipeline avec l’option Déboguer mise en évidence.](media/tutorial-data-flow/pipeline1.png)
 1. Le débogage de pipeline des activités de flux de données utilise le cluster de débogage actif, mais son initialisation prend toujours au moins une minute. Vous pouvez suivre la progression par le biais de l’onglet **Sortie**. Une fois l’exécution réussie, cliquez sur l’icône en forme de lunettes pour ouvrir le volet de supervision.
 
     ![Pipeline](media/tutorial-data-flow/pipeline2.png)
 1. Dans le volet de supervision, vous pouvez voir le nombre de lignes et de temps passé dans chaque étape de transformation.
 
-    ![Surveillance](media/tutorial-data-flow/pipeline3.png)
+    ![Capture d’écran montrant le volet de supervision dans lequel vous pouvez voir le nombre de lignes et le temps passé à chaque étape de transformation.](media/tutorial-data-flow/pipeline3.png)
 1. Cliquez sur une transformation pour obtenir des informations détaillées sur les colonnes et le partitionnement des données.
 
     ![Surveillance](media/tutorial-data-flow/pipeline4.png)

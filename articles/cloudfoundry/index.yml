@@ -3,7 +3,7 @@ title: Documentation Cloud Foundry sur Azure
 summary: Cloud Foundry est une solution de type plate-forme en tant que service (PaaS) open source pour la génération, le déploiement et l’exploitation d’applications 12 facteurs développées dans plusieurs langages et infrastructures.
 metadata:
   title: Documentation Cloud Foundry sur Azure
-  description: Cloud Foundry est une solution de type plate-forme en tant que service (PaaS) open source pour la génération, le déploiement et l’exploitation d’applications 12 facteurs développées dans plusieurs langages et infrastructures.
+  description: Cloud Foundry est une PaaS open source qui permet de générer, déployer et exploiter des applications 12 facteurs développées dans plusieurs langages et frameworks.
   services: multiple
   ms.service: multiple
   ms.devlang: devops
@@ -11,19 +11,19 @@ metadata:
   author: georgewallace
   ms.author: gwallace
   ms.date: 03/08/2020
-  ms.openlocfilehash: 5c2ad3d9e471c339223ad21092b89e6aee64995d
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 8191a179474db5e9d60e0cd10fb1efff189a3a73
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78943171"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88224966"
 landingContent:
 - title: À propos de Cloud Foundry sur Azure
   linkLists:
   - linkListType: overview
     links:
     - text: Vue d’ensemble de Cloud Foundry sur Azure
-      url: ../virtual-machines/linux/cloudfoundry-get-started.md
+      url: cloudfoundry-get-started.md
 - title: Bien démarrer
   linkLists:
   - linkListType: quickstart
@@ -33,7 +33,7 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Déployer votre première application
-      url: ../virtual-machines/linux/cloudfoundry-deploy-your-first-app.md
+      url: cloudfoundry-deploy-your-first-app.md
 - title: Ressources
   linkLists:
   - linkListType: reference

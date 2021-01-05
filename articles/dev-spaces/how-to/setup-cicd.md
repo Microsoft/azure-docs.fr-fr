@@ -8,14 +8,16 @@ ms.topic: conceptual
 manager: gwallace
 description: Découvrez comment configurer l’intégration continue/le déploiement continu à l’aide d’Azure DevOps avec Azure Dev Spaces
 keywords: Docker, Kubernetes, Azure, AKS, Azure Container Service, conteneurs
-ms.openlocfilehash: f2eb9449518b32ab74f2dbbca6b5489aed325db7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: de409aa060034c9ba0faaaa56ce21f904b02cdac
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81685631"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017778"
 ---
 # <a name="use-cicd-with-azure-dev-spaces"></a>Utiliser CI/CD avec Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Cet article vous guide tout au long de la configuration de l’intégration continue/du déploiement continu (CI/CD) sur Azure Kubernetes Service (AKS) où Dev Spaces est activé. CI/CD vers AKS permet de déployer automatiquement des mises à jour d’application chaque fois que du code validé est envoyé (push) à votre dépôt source. L’utilisation de CI/CD conjointement avec un cluster compatible Dev Spaces est utile, car elle permet de tenir à jour une base de référence de l’application que l’équipe peut utiliser.
 
@@ -24,9 +26,9 @@ Cet article vous guide tout au long de la configuration de l’intégration cont
 Bien que cet article vous guide avec Azure DevOps, les mêmes concepts sont applicables aux systèmes CI/CD tels que Jenkins, TeamCity, etc.
 
 ## <a name="prerequisites"></a>Prérequis
-* [Cluster AKS (Azure Kubernetes Service) avec Azure Dev Spaces activé](../get-started-netcore.md)
+* Cluster AKS (Azure Kubernetes Service) avec Azure Dev Spaces activé
 * [Interface CLI Azure Dev Spaces installée](upgrade-tools.md)
-* [Organisation Azure DevOps avec un projet](https://docs.microsoft.com/azure/devops/user-guide/sign-up-invite-teammates?view=vsts)
+* [Organisation Azure DevOps avec un projet](/azure/devops/user-guide/sign-up-invite-teammates?view=vsts)
 * [ACR (Azure Container Registry)](../../container-registry/container-registry-get-started-azure-cli.md)
     * Détails du [compte d’administrateur](../../container-registry/container-registry-authentication.md#admin-account) Azure Container Registry disponibles
 * [Autoriser votre cluster AKS à tirer (pull) de votre registre Azure Container Registry](../../aks/cluster-container-registry-integration.md)
@@ -41,7 +43,7 @@ Créez un espace appelé _dev_ à l’aide de la commande `azds space select`. L
 azds space select -n dev
 ```
 
-Quand vous êtes invité à sélectionner un espace dev parent, sélectionnez _\<aucun\>_ .
+Quand vous êtes invité à sélectionner un espace de développement parent, sélectionnez _\<none\>_ .
 
 Une fois que votre espace de développement a été créé, vous devez déterminer le suffixe de l’hôte. Utilisez la commande `azds show-context` pour afficher le suffixe d’hôte du contrôleur d’entrée Azure Dev Spaces.
 
@@ -68,7 +70,7 @@ L’option à désactiver :
 > [!Note]
 > La fonctionnalité en préversion _Nouvelle expérience utilisateur de création de pipeline YAML_ Azure DevOps est en conflit avec la création de pipelines de build prédéfinis pour l’instant. Vous devez la désactiver pour le moment afin de déployer notre pipeline de build prédéfini.
 
-Dans la branche _azds_updates_, nous avons inclus un simple [pipeline YAML Azure](https://docs.microsoft.com/azure/devops/pipelines/yaml-schema?view=vsts&tabs=schema) qui définit les étapes de génération nécessaires pour *mywebapi* et *webfrontend*.
+Dans la branche _azds_updates_, nous avons inclus un simple [pipeline YAML Azure](/azure/devops/pipelines/yaml-schema?view=vsts&tabs=schema) qui définit les étapes de génération nécessaires pour *mywebapi* et *webfrontend*.
 
 Selon le langage que vous avez choisi, le pipeline YAML a été archivé dans un chemin semblable à : `samples/dotnetcore/getting-started/azure-pipelines.dotnetcore.yml`
 
@@ -185,5 +187,7 @@ Voici un exemple de structure d’espace de noms qui prend en charge le dévelop
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
+
 > [!div class="nextstepaction"]
-> [En savoir plus sur le développement en équipe avec Azure Dev Spaces](../team-development-netcore.md)
+> [Fonctionnement d’Azure Dev Spaces](../how-dev-spaces-works.md)

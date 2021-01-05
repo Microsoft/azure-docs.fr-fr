@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: aa2af4302613aad23bfd78b4883bbb46c5e5ddbb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3571455db6ecc600bf0948087b40c281d72512ce
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76960394"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87091247"
 ---
 # <a name="enable-cloudsimple-private-cloud-dns-servers-to-forward-dns-lookup-of-on-premises-resources-to-your-dns-servers"></a>Permettre à des serveurs DNS de cloud privé CloudSimple de transférer une recherche DNS de ressources locales à vos serveurs DNS
 
@@ -32,7 +32,7 @@ Le transfert de recherche DNS pour votre serveur DNS local vous permet d’utili
 Une connexion réseau doit être établie de votre réseau de cloud privé à votre réseau local pour que le transfert DNS fonctionne.  Vous pouvez configurer la connexion réseau comme suit :
 
 * [Connecter un réseau local à CloudSimple à l’aide d’ExpressRoute](on-premises-connection.md)
-* [Configurer une passerelle VPN site à site](https://docs.microsoft.com/azure/vmware-cloudsimple/vpn-gateway#set-up-a-site-to-site-vpn-gateway)
+* [Configurer une passerelle VPN site à site](./vpn-gateway.md#set-up-a-site-to-site-vpn-gateway)
 
 Les ports de pare-feu doivent être ouverts sur cette connexion pour que le transfert DNS fonctionne.  Les ports utilisés sont le port TCP 53 ou le port UDP 53.
 

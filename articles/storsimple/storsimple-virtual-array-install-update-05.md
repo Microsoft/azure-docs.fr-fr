@@ -1,6 +1,6 @@
 ---
 title: Installation d’Update 0.5 sur une instance StorSimple Virtual Array | Microsoft Docs
-description: Décrit comment utiliser l’interface utilisateur web de StorSimple Virtual Array pour appliquer des mises à jour à l’aide du portail Azure et de la méthode de correctifs logiciels
+description: Explique comment utiliser l’interface utilisateur web de StorSimple Virtual Array pour appliquer la mise à jour 0.5 à l’aide du Portail Azure et de la méthode des correctifs logiciels.
 services: storsimple
 documentationcenter: NA
 author: alkohli
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 05/10/2017
 ms.author: alkohli
-ms.openlocfilehash: e09ff4bcbc141b1a1f80bc278918a291639c1885
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5723e8d9fc7b0a72393dda1b225ca073a6474a0a
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61445301"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94534311"
 ---
 # <a name="install-update-05-on-your-storsimple-virtual-array"></a>Installation d’Update 0.5 sur StorSimple Virtual Array
 
@@ -92,26 +92,26 @@ Cette méthode permet d’installer les mises à jour sur un appareil exécutant
 
 1. Dans l’interface utilisateur web locale, accédez à **Maintenance** > **Mise à jour logicielle**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-05/update1m.png)
+    ![Capture d’écran montrant les Mises à jour logicielles sélectionnées dans le menu Maintenance.](./media/storsimple-virtual-array-install-update-05/update1m.png)
 
 2. Dans le **chemin d’accès au fichier de mise à jour**, entrez le nom du fichier de mise à jour ou de correctif. Vous pouvez également accéder au fichier d'installation de la mise à jour ou du correctif si celui-ci est placé sur un partage réseau. Cliquez sur **Appliquer**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-05/update2m.png)
+    ![Capture d’écran montrant la zone de texte Mise à jour du chemin du fichier sur la page Mise à jour logicielle.](./media/storsimple-virtual-array-install-update-05/update2m.png)
 
 3. Un avertissement s’affiche. Puisqu’il s’agit d’un appareil à nœud unique, l’application de la mise à jour entraîne le redémarrage de l’appareil et provoque un temps d’arrêt. Cliquez sur l’icône en forme de coche.
    
-   ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-05/update3m.png)
+   ![Capture d’écran montrant une boîte de dialogue avertissant d’un temps d’arrêt.](./media/storsimple-virtual-array-install-update-05/update3m.png)
 
 4. La mise à jour démarre. Une fois l’appareil correctement mis à jour, il est redémarré. L’interface utilisateur locale n’est pas accessible pendant cet intervalle.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-05/update5m.png)
+    ![Capture d’écran montrant un message confirmant la réussite de la mise à jour.](./media/storsimple-virtual-array-install-update-05/update5m.png)
 
 5. Une fois le redémarrage effectué, vous êtes redirigé vers la page **Se connecter** . Pour vérifier que le logiciel de l’appareil a été mis à jour, accédez à **Maintenance** > **Mise à jour logicielle** dans l’interface utilisateur web locale. La version du logiciel doit être **10.0.0.0.0.10290.0** pour Update 0.5.
    
    > [!NOTE]
    > L’affichage des versions logicielles diffère légèrement entre l’interface utilisateur web locale et le portail Azure. Par exemple, la même version est signalée par **10.0.0.0.0.10290** dans l’interface utilisateur web locale et par **10.0.10290.0** sur le portail Azure.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-05/update6m.png)
+    ![Capture d’écran montrant la page des mises à jour logicielles avec la version actuelle du logiciel.](./media/storsimple-virtual-array-install-update-05/update6m.png)
 
 6. L’étape suivante consiste à mettre à jour l’agent MDS. Sur la page **Mise à jour logicielle**, accédez au **Chemin d’accès du fichier de mise à jour** et accédez au fichier `GenevaMonitoringAgentPackageInstaller.msi`. Répétez les étapes 2 à 4. Après le redémarrage de la baie virtuelle, connectez-vous à l’interface utilisateur web locale.
 

@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 07/15/2019
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: b3bc87b183803c0854542d6925af7429b593d2af
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b18e1cd20a4b0a886258fd56003cd273d92381fa
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605167"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97093976"
 ---
 # <a name="sap-hana-large-instances-network-architecture"></a>Architecture réseau de SAP HANA (grandes instances)
 
@@ -75,7 +76,7 @@ Les différences dans les déploiements SAP dans Azure sont les suivantes :
 
 Avec la Révision 3 des tampons Grande instance HANA, la latence du réseau rencontrée entre les machines virtuelles et les unités de grande instance HANA peut être supérieure à la latence standard aller-retour sur un réseau de machine virtuelle à machine virtuelle. En fonction de la région Azure, les valeurs mesurées peuvent dépasser une latence aller-retour de 0,7 ms, classée en dessous de la moyenne dans [Remarque SAP n° 1100926 - FAQ : Performances du réseau](https://launchpad.support.sap.com/#/notes/1100926/E). Selon la région Azure et l’outil utilisé pour mesurer la latence aller-retour entre une machine virtuelle Azure et une unité de grande instance SAP HANA, la latence mesurée peut avoisiner les 2 millisecondes maximum. Néanmoins, les clients déploient des applications SAP de production basées sur SAP HANA avec succès sur la grande instance SAP HANA. Vérifiez avoir testé minutieusement vos processus métier dans la Grande instance HANA Azure. Une nouvelle fonctionnalité nommée ExpressRoute Fast Path permet de réduire considérablement la latence réseau entre les Grandes instances HANA et les machines virtuelles de la couche Application en grande partie dans Azure (voir ci-dessous). 
 
-Avec la Révision 4 des tampons Grande instance HANA, la latence du réseau entre les machines virtuelles Azure déployées à proximité du tampon Grande instance Hana respecte la classification Moyenne ou Supérieure à la moyenne, tel qu’indiqué dans [Remarque SAP n° 1100926 - FAQ : Performances du réseau](https://launchpad.support.sap.com/#/notes/1100926/E) si le chemin rapide Azure ExpressRoute est configuré (voir ci-dessous). Pour déployer des machines virtuelles Azure à proximité des unités Grande instance Hana de la Révision 4, vous devez tirer parti des [groupes de placements de proximité Azure](https://docs.microsoft.com/azure/virtual-machines/linux/co-location). La méthode d’utilisation des groupes de placement de proximité pour localiser la couche d’application SAP dans le même centre de données Azure que les unités de grande instance HANA hébergées en version 4 est décrite dans la section [Groupes de placement de proximité Azure pour une latence réseau optimale avec les applications SAP](sap-proximity-placement-scenarios.md).
+Avec la Révision 4 des tampons Grande instance HANA, la latence du réseau entre les machines virtuelles Azure déployées à proximité du tampon Grande instance Hana respecte la classification Moyenne ou Supérieure à la moyenne, tel qu’indiqué dans [Remarque SAP n° 1100926 - FAQ : Performances du réseau](https://launchpad.support.sap.com/#/notes/1100926/E) si le chemin rapide Azure ExpressRoute est configuré (voir ci-dessous). Pour déployer des machines virtuelles Azure à proximité des unités Grande instance Hana de la Révision 4, vous devez tirer parti des [groupes de placements de proximité Azure](../../linux/co-location.md). La méthode d’utilisation des groupes de placement de proximité pour localiser la couche d’application SAP dans le même centre de données Azure que les unités de grande instance HANA hébergées en version 4 est décrite dans la section [Groupes de placement de proximité Azure pour une latence réseau optimale avec les applications SAP](sap-proximity-placement-scenarios.md).
 
 Afin d’offrir une latence réseau déterministe entre les machines virtuelles Azure et une Grande instance HANA, le choix de la référence SKU de la passerelle ExpressRoute est essentiel. Contrairement aux modèles de trafic entre machines locales et machines virtuelles, le modèle de trafic entre les machines virtuelles et la grande instance HANA peut développer des pics courts mais élevés de requêtes et de volumes de données à transmettre. Pour bien gérer ces pics, nous vous recommandons fortement d’utiliser la référence SKU de passerelle UltraPerformance. Pour les références SKU de Grande instance HANA de classe Type II, l’utilisation de la référence SKU de la passerelle UltraPerformance en tant que passerelle ExpressRoute est obligatoire.
 
@@ -86,10 +87,10 @@ Afin d’offrir une latence réseau déterministe entre les machines virtuelles 
 Pour réduire la latence, ExpressRoute Fast Path a été introduit et publié en mai 2019 pour la connectivité spécifique des Grandes instances HANA aux réseaux virtuels Azure qui hébergent les machines virtuelles exécutant l’application SAP. La principale différence par rapport à la solution déployée jusqu’à présent est que les flux de données entre les machines virtuelles et les Grandes instances HANA ne sont plus routés via la passerelle ExpressRoute. Au lieu de cela, les machines virtuelles affectés dans les sous-réseaux du réseau virtuel Azure communiquent directement avec le routeur de périphérie d’entreprise dédié. 
 
 > [!IMPORTANT] 
-> La fonctionnalité ExpressRoute Fast Path nécessite que les sous-réseaux exécutant les machines virtuelles d’application SAP se trouvent dans le réseau virtuel Azure connecté aux Grandes instances HANA. Les machines virtuelles situées dans des réseaux virtuels Azure appairés au réseau virtuel Azure connecté directement aux unités de Grande instance HANA ne bénéficient pas d’ExpressRoute Fast Path. En conséquence, pour les conceptions de réseau virtuel hub-and-spoke (en étoile) typiques, où les circuits ExpressRoute se connectent à un réseau virtuel faisant office de hub, et où les réseaux virtuels contenant la couche Application SAP (spokes) sont appairés, l’optimisation par ExpressRoute Fast Path ne fonctionne pas. De plus, ExpressRoute Fast Path ne prend pas en charge actuellement les règles de routage définies par l’utilisateur. Pour plus d’informations, voir [Passerelle de réseau virtuel ExpressRoute et FastPath](https://docs.microsoft.com/azure/expressroute/expressroute-about-virtual-network-gateways). 
+> La fonctionnalité ExpressRoute Fast Path nécessite que les sous-réseaux exécutant les machines virtuelles d’application SAP se trouvent dans le réseau virtuel Azure connecté aux Grandes instances HANA. Les machines virtuelles situées dans des réseaux virtuels Azure appairés au réseau virtuel Azure connecté directement aux unités de Grande instance HANA ne bénéficient pas d’ExpressRoute Fast Path. En conséquence, pour les conceptions de réseau virtuel hub-and-spoke (en étoile) typiques, où les circuits ExpressRoute se connectent à un réseau virtuel faisant office de hub, et où les réseaux virtuels contenant la couche Application SAP (spokes) sont appairés, l’optimisation par ExpressRoute Fast Path ne fonctionne pas. De plus, ExpressRoute Fast Path ne prend pas en charge actuellement les règles de routage définies par l’utilisateur. Pour plus d’informations, voir [Passerelle de réseau virtuel ExpressRoute et FastPath](../../../expressroute/expressroute-about-virtual-network-gateways.md). 
 
 
-Pour plus d’informations sur la configuration ExpressRoute Fast Path, voir [Connecter un réseau virtuel à de Grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-connect-vnet-express-route).    
+Pour plus d’informations sur la configuration ExpressRoute Fast Path, voir [Connecter un réseau virtuel à de Grandes instances HANA](./hana-connect-vnet-express-route.md).    
 
 > [!NOTE]
 > Une passerelle ExpressRoute UltraPerformance est nécessaire pour qu’ExpressRoute Fast Path fonctionne
@@ -124,7 +125,7 @@ Pour une architecture réseau plus évolutive :
 
 ![Déployer la couche Application SAP sur plusieurs réseaux virtuels](./media/hana-overview-architecture/image4-networking-architecture.png)
 
-En fonction des règles et restrictions que vous souhaitez appliquer entre les différents réseaux virtuels hébergeant des machines virtuelles de différents systèmes SAP, vous devez appairer ces réseaux virtuels. Pour plus d’informations sur le peering du réseau virtuel, consultez [Peering de réseaux virtuels](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview).
+En fonction des règles et restrictions que vous souhaitez appliquer entre les différents réseaux virtuels hébergeant des machines virtuelles de différents systèmes SAP, vous devez appairer ces réseaux virtuels. Pour plus d’informations sur le peering du réseau virtuel, consultez [Peering de réseaux virtuels](../../../virtual-network/virtual-network-peering-overview.md).
 
 
 ## <a name="routing-in-azure"></a>Routage dans Azure
@@ -148,7 +149,7 @@ Par défaut, le routage transitif ne fonctionne pas dans les scénarios suivants
 Il existe trois façons d’activer le routage transitif dans ces scénarios :
 
 - Un proxy inverse pour router les données, dans un sens et dans l’autre. Par exemple, F5 BIG-IP, NGINX avec Traffic Manager déployé dans le réseau virtuel Azure qui se connecte aux Grandes instances HANA et au réseau local en tant que solution de routage de pare-feu/trafic virtuel.
-- Utilisation des [règles IPTables](http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_%3a_Ch14_%3a_Linux_Firewalls_Using_iptables#.Wkv6tI3rtaQ) sur une machine virtuelle Linux pour activer le routage entre des emplacements locaux et des unités de grande instance HANA ou entre des unités de grande instance HANA dans différentes régions. La machine virtuelle exécutant IPTables doit être déployée sur le réseau virtuel Azure qui se connecte aux Grandes instances HANA et au réseau local. La machine virtuelle doit être dimensionnée en conséquence, de sorte que son débit réseau soit suffisant pour le trafic réseau attendu. Pour plus d’informations sur la bande passante réseau machines virtuelles, voir l’article [Tailles des machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/linux/sizes?toc=%2fazure%2fvirtual-network%2ftoc.json).
+- Utilisation des règles IPTables sur une machine virtuelle Linux pour activer le routage entre des emplacements locaux et des unités de grande instance HANA ou entre des unités de grande instance HANA dans différentes régions. La machine virtuelle exécutant IPTables doit être déployée sur le réseau virtuel Azure qui se connecte aux Grandes instances HANA et au réseau local. La machine virtuelle doit être dimensionnée en conséquence, de sorte que son débit réseau soit suffisant pour le trafic réseau attendu. Pour plus d’informations sur la bande passante réseau machines virtuelles, voir l’article [Tailles des machines virtuelles Linux dans Azure](../../sizes.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 - Un [Pare-feu Azure](https://azure.microsoft.com/services/azure-firewall/) serait une autre solution pour permettre un trafic direct entre le réseau local et les unités de Grande instance HANA. 
 
 Tout le trafic de ces solutions serait acheminé via un réseau virtuel Azure. De ce fait, le trafic pourrait également être limité par les appliances logicielles utilisées ou par des groupes de sécurité réseau Azure. Ainsi, certaines adresses ou plages d’adresses IP du réseau local pourraient être bloquées ou explicitement autorisées à accéder aux Grandes instances HANA. 
@@ -157,7 +158,7 @@ Tout le trafic de ces solutions serait acheminé via un réseau virtuel Azure. D
 > N’oubliez pas que l’implémentation et la prise en charge des solutions personnalisées qui impliquent des appliances réseau ou IPTables tierces n’est pas fournie par Microsoft. La prise en charge doit être réalisée par le fournisseur du composant utilisé ou de l’intégrateur. 
 
 #### <a name="express-route-global-reach"></a>ExpressRoute Global Reach
-Microsoft a introduit une nouvelle fonctionnalité appelée [ExpressRoute Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach). Global Reach est utilisable pour les Grandes instances HANA dans deux scénarios :
+Microsoft a introduit une nouvelle fonctionnalité appelée [ExpressRoute Global Reach](../../../expressroute/expressroute-global-reach.md). Global Reach est utilisable pour les Grandes instances HANA dans deux scénarios :
 
 - Permettre l’accès direct à partir du réseau local à vos unités de Grande instance HANA déployées dans différentes régions
 - Permettre une communication directe entre vos unités de Grande instance HANA déployées dans différentes régions
@@ -175,7 +176,7 @@ De la même manière, ExpressRoute Global Reach pouvant être utilisé pour la c
 > [!IMPORTANT]  
 > Les flux de données et de contrôle du trafic réseau entre les différents locataires de Grande instance HANA ne sont pas routés via des réseaux Azure. Par conséquent, vous ne pouvez pas utiliser de fonctionnalité Azure ou d’appliances de réseau virtuel pour appliquer des restrictions de communication entre vos deux locataires de Grande instance HANA. 
 
-Pour plus d’informations sur l’activation d’ExpressRoute Global Reach, voir [Connecter un réseau virtuel à de Grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-connect-vnet-express-route).
+Pour plus d’informations sur l’activation d’ExpressRoute Global Reach, voir [Connecter un réseau virtuel à de Grandes instances HANA](./hana-connect-vnet-express-route.md).
 
 
 ## <a name="internet-connectivity-of-hana-large-instance"></a>Connectivité internet de la grande instance HANA
@@ -194,7 +195,7 @@ Pour réaliser des configurations de récupération d’urgence, vous devez disp
 
 ![Réseau virtuel connecté aux tampons de grande instance Azure dans différentes régions Azure](./media/hana-overview-architecture/image8-multiple-regions.png)
 
-La figure illustre comment les différents réseaux virtuels dans les deux régions sont connectés à deux circuits ExpressRoute distincts utilisés pour se connecter à SAP HANA sur Azure (Grandes instances) dans les deux régions Azure (lignes grises). Ces deux interconnexions visent à offrir une protection contre les pannes de routeur de périphérie d’entreprise Microsoft (MSEE) de chaque côté. Le flux de communication entre les deux réseaux virtuels dans les deux régions Azure est censé être géré via le [peering mondial](https://blogs.msdn.microsoft.com/azureedu/2018/04/24/how-to-setup-global-vnet-peering-in-azure/) des deux réseaux virtuels dans les deux régions (ligne pointillée bleue). La ligne rouge épaisse décrit la connexion ExpressRoute Global Reach qui permet aux unités de Grande instance HANA de vos locataires dans deux régions différentes de communiquer entre elles. 
+La figure illustre comment les différents réseaux virtuels dans les deux régions sont connectés à deux circuits ExpressRoute distincts utilisés pour se connecter à SAP HANA sur Azure (Grandes instances) dans les deux régions Azure (lignes grises). Ces deux interconnexions visent à offrir une protection contre les pannes de routeur de périphérie d’entreprise Microsoft (MSEE) de chaque côté. Le flux de communication entre les deux réseaux virtuels dans les deux régions Azure est censé être géré via le [peering mondial](/archive/blogs/azureedu/how-to-setup-global-vnet-peering-in-azure) des deux réseaux virtuels dans les deux régions (ligne pointillée bleue). La ligne rouge épaisse décrit la connexion ExpressRoute Global Reach qui permet aux unités de Grande instance HANA de vos locataires dans deux régions différentes de communiquer entre elles. 
 
 > [!IMPORTANT] 
 > Si plusieurs circuits ExpressRoute sont utilisés, les paramètres de préfixation AS PATH et Local Preference BGP doivent être utilisés pour garantir le routage correct du trafic.

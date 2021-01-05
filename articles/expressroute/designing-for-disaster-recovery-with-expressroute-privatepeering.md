@@ -2,23 +2,27 @@
 title: 'Azure ExpressRoute : Conception pour la récupération d’urgence'
 description: Cette page fournit des conseils sur l’architecture pour une reprise d’activité lors de l’utilisation d’Azure ExpressRoute.
 services: expressroute
-author: rambk
+author: duongau
 ms.service: expressroute
 ms.topic: article
 ms.date: 05/25/2019
-ms.author: rambala
-ms.openlocfilehash: 726a014983c0da959d72b7976fef2ebb2c6e9b9e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 2a5730cd75ccb76d25897e9109555113f7355c2f
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74076705"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "92202411"
 ---
 # <a name="designing-for-disaster-recovery-with-expressroute-private-peering"></a>Conception pour une reprise d’activité avec le peering privé ExpressRoute
 
 ExpressRoute est conçu pour la haute disponibilité afin de fournir à l’opérateur une connectivité de réseau privé de qualité aux ressources Microsoft. En d’autres termes, il n’existe aucun point de défaillance unique dans le chemin d’accès ExpressRoute au sein du réseau de Microsoft. Pour des considérations de conception visant à optimiser la disponibilité d’un circuit ExpressRoute, consultez [Conception pour une haute disponibilité avec ExpressRoute][HA].
 
 Toutefois, prenant en considération l’adage populaire de Murphy, selon lequel *si quelque chose peut mal tourner, c’est ce qui va arriver*, nous nous concentrons dans cet article sur des solutions qui vont au-delà des défaillances qui peuvent être traitées à l’aide d’un simple circuit ExpressRoute. En d’autres termes, dans cet article, nous allons nous intéresser à l’architecture des réseaux du point de vue de la création d’une connectivité réseau back-end robuste favorisant la reprise d’activité à l’aide de circuits ExpressRoute géoredondants.
+
+>[!NOTE]
+>Les concepts décrits dans cet article s’appliquent tout autant lorsqu’un circuit ExpressRoute est créé sous Virtual WAN ou à l’extérieur de celui-ci.
+>
 
 ## <a name="need-for-redundant-connectivity-solution"></a>Nécessité d’une solution de connectivité redondante
 
@@ -147,13 +151,8 @@ Dans cet article, nous avons abordé la conception de la reprise d’activité d
 [10]: ./media/designing-for-disaster-recovery-with-expressroute-pvt/multi-region-sol2.png "Circuits ExpressRoute en mode actif-actif - Solution 2"
 
 <!--Link References-->
-[HA]: https://docs.microsoft.com/azure/expressroute/designing-for-high-availability-with-expressroute
+[HA]: ./designing-for-high-availability-with-expressroute.md
 [Enterprise DR]: https://azure.microsoft.com/solutions/architecture/disaster-recovery-enterprise-scale-dr/
 [SMB DR]: https://azure.microsoft.com/solutions/architecture/disaster-recovery-smb-azure-site-recovery/
-[con wgt]: https://docs.microsoft.com/azure/expressroute/expressroute-optimize-routing#solution-assign-a-high-weight-to-local-connection
-[AS Path Pre]: https://docs.microsoft.com/azure/expressroute/expressroute-optimize-routing#solution-use-as-path-prepending
-
-
-
-
-
+[con wgt]: ./expressroute-optimize-routing.md#solution-assign-a-high-weight-to-local-connection
+[AS Path Pre]: ./expressroute-optimize-routing.md#solution-use-as-path-prepending

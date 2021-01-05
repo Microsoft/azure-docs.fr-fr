@@ -1,24 +1,24 @@
 ---
 title: Associer une adresse IP publique à une machine virtuelle
 titlesuffix: Azure Virtual Network
-description: Découvrez comment associer une adresse IP publique à une machine virtuelle.
+description: Apprenez à associer une IP publique à une machine virtuelle à l’aide du portail Azure ou de l’interface de ligne de commande Azure.
 services: virtual-network
 documentationcenter: ''
 author: asudbring
 ms.service: virtual-network
 ms.subservice: ip-services
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/21/2019
 ms.author: allensu
-ms.openlocfilehash: 2170a4d5f66cf6d1f699ae943f2a80b1b8127e39
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9b5fc9e4118d98905138b7f205f61d85a96b60b0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82146580"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88035465"
 ---
 # <a name="associate-a-public-ip-address-to-a-virtual-machine"></a>Associer une adresse IP publique à une machine virtuelle
 

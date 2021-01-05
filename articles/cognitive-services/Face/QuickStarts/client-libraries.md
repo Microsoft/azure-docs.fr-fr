@@ -5,35 +5,43 @@ description: L’API Visage propose des bibliothèques de client qui facilitent 
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
-zone_pivot_groups: programming-languages-set-eighteen
+zone_pivot_groups: programming-languages-set-face
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: quickstart
-ms.date: 04/24/2020
+ms.date: 12/15/2020
 ms.author: pafarley
-ms.openlocfilehash: f9e37439cd32fea3a12e06a108ae6929782afbc8
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python, devx-track-csharp, cog-serv-seo-aug-2020
+keywords: recherche de visage par image, recherche de reconnaissance faciale, reconnaissance faciale, application de reconnaissance faciale
+ms.openlocfilehash: 688845134aaaeea708fd56d4dd6b10a517869677
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82148408"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97562920"
 ---
 # <a name="quickstart-use-the-face-client-library"></a>Démarrage rapide : Utiliser la bibliothèque de client Visage
 
 ::: zone pivot="programming-language-csharp"
 
-[!INCLUDE [C# quickstart](../includes/quickstarts/face-client-library-csharp.md)]
+[!INCLUDE [C# quickstart](../includes/quickstarts/csharp-sdk.md)]
 
 ::: zone-end
 
 ::: zone pivot="programming-language-python"
 
-[!INCLUDE [Python quickstart](../includes/quickstarts/face-client-library-python.md)]
+[!INCLUDE [Python quickstart](../includes/quickstarts/python-sdk.md)]
 
 ::: zone-end
 
 ::: zone pivot="programming-language-go"
 
-[!INCLUDE [Go quickstart](../includes/quickstarts/face-client-library-go.md)]
+[!INCLUDE [Go quickstart](../includes/quickstarts/go-sdk.md)]
+
+::: zone-end
+
+::: zone pivot="programming-language-rest-api"
+
+[!INCLUDE [cURL quickstart](../includes/quickstarts/rest-api.md)]
 
 ::: zone-end

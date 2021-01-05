@@ -3,16 +3,16 @@ title: Monter le stockage de fichiers Azure sur les machines virtuelles Linux à
 description: Procédure de montage du stockage de fichiers Azure sur les machines virtuelles Linux à l’aide de SMB avec Azure CLI
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 06/28/2018
 ms.author: cynthn
-ms.openlocfilehash: 0314095a053087a7d490926c41c6ae386c304919
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a5d4f388d9e5f47a13812687489525590c520c3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80066643"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016095"
 ---
 # <a name="mount-azure-file-storage-on-linux-vms-using-smb"></a>Monter le stockage de fichiers Azure sur les machines virtuelles Linux à l’aide de SMB
 
@@ -35,7 +35,7 @@ az group create --name myResourceGroup --location eastus
 
 ## <a name="create-a-storage-account"></a>Créez un compte de stockage.
 
-Créez un compte de stockage, au sein du groupe de ressources que vous avez créé, à l’aide de la commande [az storage account create](/cli/azure/storage/account). Cet exemple crée un compte de stockage nommé *mySTORAGEACCT\<numéro aléatoire>* et place le nom de ce compte de stockage dans la variable **STORAGEACCT**. Les noms de compte de stockage doivent être uniques ; l’utilisation de `$RANDOM` ajoute un numéro à la fin pour les rendre uniques.
+Créez un compte de stockage, au sein du groupe de ressources que vous avez créé, à l’aide de la commande [az storage account create](/cli/azure/storage/account). Cet exemple crée un compte de stockage nommé *mySTORAGEACCT\<random number>* et place le nom de ce compte de stockage dans la variable **STORAGEACCT**. Les noms de compte de stockage doivent être uniques ; l’utilisation de `$RANDOM` ajoute un numéro à la fin pour les rendre uniques.
 
 ```azurecli
 STORAGEACCT=$(az storage account create \
@@ -63,7 +63,7 @@ STORAGEKEY=$(az storage account keys list \
 
 Créez le partage de stockage de fichiers à l’aide de la commande [az storage share create](/cli/azure/storage/share). 
 
-Le nom des partages ne doit contenir que des minuscules, des nombres et des traits d’union uniques, mais ne peut commencer par un trait d’union. Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez la rubrique [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](https://docs.microsoft.com/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
+Le nom des partages ne doit contenir que des minuscules, des nombres et des traits d’union uniques, mais ne peut commencer par un trait d’union. Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez la rubrique [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](/rest/api/storageservices/naming-and-referencing-shares--directories--files--and-metadata).
 
 Cet exemple crée un partage nommé *myshare* avec un quota de 10 Gio. 
 
@@ -111,4 +111,3 @@ Pour renforcer la sécurité dans les environnements de production, vous devez s
 - [Utilisation de cloud-init pour personnaliser une machine virtuelle Linux lors de la création](using-cloud-init.md)
 - [Ajouter un disque à une machine virtuelle Linux](add-disk.md)
 - [Azure Disk Encryption pour les machines virtuelles Linux](disk-encryption-overview.md)
-

@@ -3,17 +3,19 @@ title: Questions fréquentes (FAQ) sur l’API Table dans Azure Cosmos DB
 description: Obtenir des réponses aux questions fréquentes sur l’API Table dans Azure Cosmos DB
 author: SnehaGunda
 ms.service: cosmos-db
+ms.subservice: cosmosdb-table
 ms.topic: conceptual
-ms.date: 04/28/2020
+ms.date: 08/12/2020
 ms.author: sngun
-ms.openlocfilehash: 981c6f145f0bf06fbe81234d473b9fbcd2235174
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: c5404c026385f9ebf06c4f0289a4db0bf944d172
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613978"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341231"
 ---
 # <a name="frequently-asked-questions-about-the-table-api-in-azure-cosmos-db"></a>Questions fréquentes (FAQ) sur l’API Table dans Azure Cosmos DB
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 L’API Table dans Azure Cosmos DB est disponible dans le [portail Azure](https://portal.azure.com). Vous devez d’abord vous inscrire pour obtenir un abonnement Azure. Une fois inscrit, vous pouvez ajouter un compte d’API Table d’Azure Cosmos DB à votre abonnement Azure, puis ajouter des tables à votre compte. Vous trouverez les langages pris en charge et les démarrages rapides associés dans [Présentation de l’API Table d’Azure Cosmos DB](table-introduction.md).
 
@@ -45,10 +47,10 @@ Si vous avez déjà créé des tables dans le stockage Table Azure et que vous s
 
   | Méthode(s) REST | Option de point de terminaison/requête REST | URL vers la documentation | Explication |
   | ------------| ------------- | ---------- | ----------- |
-  | GET, PUT | `/?restype=service@comp=properties`| [Définir les propriétés du service Table](https://docs.microsoft.com/rest/api/storageservices/set-table-service-properties) et [Obtenir les propriétés du service Table](https://docs.microsoft.com/rest/api/storageservices/get-table-service-properties) | Ce point de terminaison est utilisé pour définir les règles CORS, la configuration de Storage Analytics et les paramètres de journalisation. CORS n’est pas actuellement pris en charge, et l’analytique et la journalisation sont gérées différemment dans Azure Cosmos DB et dans les tables Stockage Azure. |
-  | OPTIONS | `/<table-resource-name>` | [Requête de table CORS préliminaire](https://docs.microsoft.com/rest/api/storageservices/preflight-table-request) | Cette option fait partie de CORS, qui n’est pas pris en charge par Azure Cosmos DB pour l’instant. |
-  | GET | `/?restype=service@comp=stats` | [Obtenir les statistiques du service Table](https://docs.microsoft.com/rest/api/storageservices/get-table-service-stats) | Fournit des informations sur la rapidité de la réplication des données entre un emplacement principal et un emplacement secondaire. Cette option est inutile dans Cosmos DB puisque la réplication fait partie des écritures. |
-  | GET, PUT | `/mytable?comp=acl` | [Obtenir la liste de contrôle d’accès de la table](https://docs.microsoft.com/rest/api/storageservices/get-table-acl) et [Définir la liste de contrôle d’accès de la table](https://docs.microsoft.com/rest/api/storageservices/set-table-acl) | Obtient et définit les stratégies d’accès stocké utilisées pour gérer les signatures d’accès partagé. Bien que ces signatures soient prises en charge, elles sont définies et gérées différemment. |
+  | GET, PUT | `/?restype=service@comp=properties`| [Définir les propriétés du service Table](/rest/api/storageservices/set-table-service-properties) et [Obtenir les propriétés du service Table](/rest/api/storageservices/get-table-service-properties) | Ce point de terminaison est utilisé pour définir les règles CORS, la configuration de Storage Analytics et les paramètres de journalisation. CORS n’est pas actuellement pris en charge, et l’analytique et la journalisation sont gérées différemment dans Azure Cosmos DB et dans les tables Stockage Azure. |
+  | OPTIONS | `/<table-resource-name>` | [Requête de table CORS préliminaire](/rest/api/storageservices/preflight-table-request) | Cette option fait partie de CORS, qui n’est pas pris en charge par Azure Cosmos DB pour l’instant. |
+  | GET | `/?restype=service@comp=stats` | [Obtenir les statistiques du service Table](/rest/api/storageservices/get-table-service-stats) | Fournit des informations sur la rapidité de la réplication des données entre un emplacement principal et un emplacement secondaire. Cette option est inutile dans Cosmos DB puisque la réplication fait partie des écritures. |
+  | GET, PUT | `/mytable?comp=acl` | [Obtenir la liste de contrôle d’accès de la table](/rest/api/storageservices/get-table-acl) et [Définir la liste de contrôle d’accès de la table](/rest/api/storageservices/set-table-acl) | Obtient et définit les stratégies d’accès stocké utilisées pour gérer les signatures d’accès partagé. Bien que ces signatures soient prises en charge, elles sont définies et gérées différemment. |
 
 * L’API Table d’Azure Cosmos DB prend uniquement en charge le format JSON, pas le format ATOM.
 
@@ -97,7 +99,7 @@ Vous pouvez utiliser le portail Azure pour parcourir les données. Vous pouvez �
 
 ### <a name="which-tools-work-with-the-table-api"></a>Quels sont les outils qui fonctionnent avec l’API Table ?
 
-Vous pouvez utiliser [l’Explorateur Stockage Azure](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
+Vous pouvez utiliser [l’Explorateur Stockage Azure](../vs-azure-tools-storage-manage-with-storage-explorer.md).
 
 Les outils offrant la flexibilité nécessaire pour prendre une chaîne de connexion au format spécifié précédemment peuvent prendre en charge la nouvelle API Table. Vous trouverez une liste des outils de table dans la page [Outils clients d’Azure Storage](../storage/common/storage-explorers.md).
 
@@ -115,9 +117,9 @@ Oui, vous pouvez vous connecter en créant deux instances distinctes de CloudTab
 
 ### <a name="how-do-i-migrate-an-existing-azure-table-storage-application-to-this-offering"></a>Comment faire pour migrer une application de stockage Table Azure existante vers cette offre ?
 
-[AzCopy](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy) et [l‘outil de migration de données Azure Cosmos DB](import-data.md) sont tous les deux pris en charge.
+[AzCopy](../storage/common/storage-use-azcopy-v10.md) et [l‘outil de migration de données Azure Cosmos DB](import-data.md) sont tous les deux pris en charge.
 
-### <a name="how-is-expansion-of-the-storage-size-done-for-this-service-if-for-example-i-start-with-n-gb-of-data-and-my-data-will-grow-to-1-tb-over-time"></a>Comment l’extension de la taille de stockage est-elle gérée pour ce service, par exemple, si je commence par *n* Go de données et que le volume de celles-ci passe à 1 To au fil du temps ?
+### <a name="how-is-expansion-of-the-storage-size-done-for-this-service-if-for-example-i-start-with-n-gb-of-data-and-my-data-will-grow-to-1-tb-over-time"></a>Comment l’extension de la taille de stockage est-elle gérée pour ce service, par exemple, si je commence par *n*  Go de données et que le volume de celles-ci passe à 1 To au fil du temps ?
 
 Azure Cosmos DB est conçu pour offrir une capacité de stockage illimitée via l’utilisation de la mise à l’échelle horizontale. Le service peut surveiller votre stockage et en augmenter efficacement le volume.
 
@@ -195,7 +197,7 @@ Oui, l’API Table d’Azure Cosmos DB assure l’indexation automatique de tous
 
 Oui, vous pouvez modifier la stratégie d’indexation en fournissant la définition d’index. Vous devez correctement encoder et placer dans une séquence d’échappement les paramètres.
 
-Pour les kits SDK non-.NET, la stratégie d’indexation peut uniquement être définie dans le portail au niveau de l’**Explorateur de données**. Naviguez jusqu’à la table à changer, accédez à **Mise à l‘échelle et paramètres** -> Stratégie d‘indexation, effectuez le changement souhaité, puis cliquez sur **Enregistrer**.
+Pour les kits SDK non-.NET, la stratégie d’indexation peut uniquement être définie dans le portail au niveau de l’ **Explorateur de données**. Naviguez jusqu’à la table à changer, accédez à **Mise à l‘échelle et paramètres**  -> Stratégie d‘indexation, effectuez le changement souhaité, puis cliquez sur **Enregistrer**.
 
 À partir du kit SDK .NET, vous pouvez la soumettre dans le fichier app.config :
 
@@ -231,7 +233,7 @@ Pour les kits SDK non-.NET, la stratégie d’indexation peut uniquement être d
 
 ### <a name="azure-cosmos-db-as-a-platform-seems-to-have-lot-of-capabilities-such-as-sorting-aggregates-hierarchy-and-other-functionality-will-you-be-adding-these-capabilities-to-the-table-api"></a>Azure Cosmos DB en tant que plateforme semble avoir de nombreuses fonctionnalités, telles que le tri, l’agrégation, la hiérarchisation et autres. Allez-vous ajouter ces fonctionnalités à l’API Table ?
 
-L’API Table offre les mêmes fonctionnalités de requête que le stockage Table Azure. Azure Cosmos DB prend également en charge le tri, les agrégats, les requêtes géospatiales, les hiérarchies et un large éventail de fonctions intégrées. Pour plus d’informations, consultez la section [Requêtes SQL](how-to-sql-query.md).
+L’API Table offre les mêmes fonctionnalités de requête que le stockage Table Azure. Azure Cosmos DB prend également en charge le tri, les agrégats, les requêtes géospatiales, les hiérarchies et un large éventail de fonctions intégrées. Pour plus d’informations, consultez la section [Requêtes SQL](./sql-query-getting-started.md).
 
 ### <a name="when-should-i-change-tablethroughput-for-the-table-api"></a>Quand dois-je changer le débit de table (TableThroughput) pour l’API Table ?
 
@@ -274,7 +276,7 @@ Azure Cosmos DB est conçu pour être un système distribué globalement basé s
 
 ### <a name="i-never-get-a-quota-full-notification-indicating-that-a-partition-is-full-when-i-ingest-data-into-azure-table-storage-with-the-table-api-i-do-get-this-message-is-this-offering-limiting-me-and-forcing-me-to-change-my-existing-application"></a>Je ne reçois jamais de notification de « quota complet » (indiquant qu’une partition est pleine) lorsque j’ingère des données dans le stockage Table Azure. Avec l’API Table, je reçois ce message. Cette offre me limite-t-elle et m’oblige-t-elle à modifier mon application existante ?
 
-Azure Cosmos DB est un système basé sur un contrat de niveau de service (SLA) permettant une mise à l’échelle illimitée, avec des garanties en matière de latence, de débit, de disponibilité et de cohérence. Pour être certain de bénéficier des performances premium garanties, assurez-vous que la taille de vos données et votre index sont gérables et extensibles. La limite de 10 Go appliquée au nombre d’entités ou d’éléments par clé de partition nous permet de garantir des performances de recherche et de requête exceptionnelles. Pour vous assurer que la mise à l’échelle de votre application fonctionne correctement, même pour le stockage Azure, nous vous recommandons de ne *pas* créer de partition sensible en stockant toutes les informations dans une seule partition et en interrogeant celle-ci.
+Azure Cosmos DB est un système basé sur un contrat de niveau de service (SLA) permettant une mise à l’échelle illimitée, avec des garanties en matière de latence, de débit, de disponibilité et de cohérence. Pour être certain de bénéficier des performances premium garanties, assurez-vous que la taille de vos données et votre index sont gérables et extensibles. La limite de 20 Go appliquée au nombre d’entités ou d’éléments par clé de partition nous permet de garantir des performances de recherche et de requête exceptionnelles. Pour vous assurer que la mise à l’échelle de votre application fonctionne correctement, même pour le stockage Azure, nous vous recommandons de ne *pas* créer de partition sensible en stockant toutes les informations dans une seule partition et en interrogeant celle-ci.
 
 ### <a name="so-partitionkey-and-rowkey-are-still-required-with-the-table-api"></a>Si je comprends bien, une clé de partition et une clé de ligne sont toujours exigées avec l’API Table ?
 
@@ -293,7 +295,7 @@ Azure Cosmos DB est un système basé sur un contrat de niveau de service (SLA) 
 Vous pouvez partager vos commentaires par les biais suivants :
 
 * [User voice](https://feedback.azure.com/forums/263030-azure-cosmos-db)
-* [Forum MSDN](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurecosmosdb)
+* [Page de questions Microsoft Q&R](/answers/topics/azure-cosmos-db.html)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-cosmosdb). Consultez Stack Overflow pour les questions sur la programmation. Par souci de clarté et afin d’obtenir une réponse, vérifiez que votre question est [appropriée](https://stackoverflow.com/help/on-topic) et [ fournit un maximum de détails](https://stackoverflow.com/help/how-to-ask).
 
 ## <a name="next-steps"></a>Étapes suivantes

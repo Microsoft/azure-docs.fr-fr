@@ -5,12 +5,12 @@ author: cgillum
 ms.topic: overview
 ms.date: 09/08/2019
 ms.author: azfuncdf
-ms.openlocfilehash: caa62483373a240991cfec96437cea7849d9b19c
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 5eec15871279f3ca38c726fcd1ef1b21d0d38699
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79290107"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88750187"
 ---
 # <a name="durable-orchestrations"></a>Orchestrations durables
 
@@ -41,9 +41,9 @@ L’ID d’instance d’une orchestration est un paramètre obligatoire pour la 
 
 ## <a name="reliability"></a>Fiabilité
 
-Les fonctions d’orchestrateur conservent de façon fiable leur état d’exécution à l’aide du modèle de conception [approvisionnement d’événements](https://docs.microsoft.com/azure/architecture/patterns/event-sourcing). Au lieu de stocker directement l’état actuel d’une orchestration, le framework Durable Task utilise un magasin d’ajout uniquement pour enregistrer toute la série d’actions effectuées par l’orchestration de fonction. Un magasin d’ajout uniquement présente de nombreux avantages par rapport au « vidage » de l’état d’exécution complet. Ces avantages incluent l’amélioration des performances, de l’extensibilité et de la réactivité. Vous bénéficiez aussi de la cohérence finale des données transactionnelles, ainsi que de pistes d’audit et d’un historique complets. Les pistes d’audit permettent des actions de compensation fiables.
+Les fonctions d’orchestrateur conservent de façon fiable leur état d’exécution à l’aide du modèle de conception [approvisionnement d’événements](/azure/architecture/patterns/event-sourcing). Au lieu de stocker directement l’état actuel d’une orchestration, le framework Durable Task utilise un magasin d’ajout uniquement pour enregistrer toute la série d’actions effectuées par l’orchestration de fonction. Un magasin d’ajout uniquement présente de nombreux avantages par rapport au « vidage » de l’état d’exécution complet. Ces avantages incluent l’amélioration des performances, de l’extensibilité et de la réactivité. Vous bénéficiez aussi de la cohérence finale des données transactionnelles, ainsi que de pistes d’audit et d’un historique complets. Les pistes d’audit permettent des actions de compensation fiables.
 
-Durable Functions utilise l’approvisionnement d’événements en toute transparence. En coulisse, l’opérateur `await` (C#) ou `yield` (JavaScript) d’une fonction d’orchestrateur cède le contrôle du thread orchestrateur au répartiteur Durable Task Framework. Le répartiteur valide ensuite dans le stockage toutes les actions que la fonction d’orchestrateur a planifiées (par exemple, l’appel d’une ou plusieurs fonctions enfant ou la planification d’un minuteur durable). L’action de validation transparente s’ajoute à l’historique d’exécution de l’instance d’orchestration. L’historique est stocké dans une table de stockage. L’action de validation ajoute ensuite des messages à une file d’attente pour planifier le travail réel. À ce stade, la fonction d’orchestrateur peut être déchargée de la mémoire.
+Durable Functions utilise l’approvisionnement d’événements en toute transparence. En coulisse, l’opérateur `await` (C#) ou `yield` (JavaScript/Python) d’une fonction d’orchestrateur repasse le contrôle du thread orchestrateur au répartiteur Durable Task Framework. Le répartiteur valide ensuite dans le stockage toutes les actions que la fonction d’orchestrateur a planifiées (par exemple, l’appel d’une ou plusieurs fonctions enfant ou la planification d’un minuteur durable). L’action de validation transparente s’ajoute à l’historique d’exécution de l’instance d’orchestration. L’historique est stocké dans une table de stockage. L’action de validation ajoute ensuite des messages à une file d’attente pour planifier le travail réel. À ce stade, la fonction d’orchestrateur peut être déchargée de la mémoire.
 
 Lorsqu’une fonction d’orchestration reçoit plus de tâches à effectuer (par exemple, un message de réponse est reçu ou un minuteur durable expire), l’orchestrateur sort à nouveau de veille et réexécute toute la fonction depuis le début afin de reconstruire l’état local. Si, au cours de la réexécution, le code tente d’appeler une fonction (ou effectue toute autre tâche asynchrone), l’infrastructure Durable Task Framework consulte l’historique d’exécution de l’orchestration en cours. Si elle constate que la [fonction d’activité](durable-functions-types-features-overview.md#activity-functions) a déjà été exécutée et a produit un résultat, elle réexécute le résultat de cette fonction, et le code d’orchestrateur continue de s’exécuter. La réexécution se poursuit jusqu’à ce que le code de la fonction s’achève ou jusqu’à ce qu’il ait planifié une nouvelle tâche asynchrone.
 
@@ -51,7 +51,7 @@ Lorsqu’une fonction d’orchestration reçoit plus de tâches à effectuer (pa
 > Pour que le modèle de relecture fonctionne correctement et de manière fiable, le code de fonction orchestrator doit être *déterministe*. Pour plus d’informations sur les restrictions de code pour les fonctions orchestrator, consultez la rubrique [Contraintes du code des fonctions](durable-functions-code-constraints.md).
 
 > [!NOTE]
-> Si une fonction orchestrator émet des messages de journal, le comportement de relecture peut provoquer l’émission de messages de journal en double. Pour en savoir plus sur la raison pour laquelle ce comportement se produit et sur la façon de contourner ce problème, consultez la rubrique [Journalisation](durable-functions-diagnostics.md#logging).
+> Si une fonction orchestrator émet des messages de journal, le comportement de relecture peut provoquer l’émission de messages de journal en double. Consultez la rubrique [Journalisation](durable-functions-diagnostics.md#app-logging) pour découvrir les causes de ce comportement et le techniques pour le contourner.
 
 ## <a name="orchestration-history"></a>Historique d’orchestration
 
@@ -91,9 +91,23 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    result1 = yield context.call_activity('SayHello', "Tokyo")
+    result2 = yield context.call_activity('SayHello', "Seattle")
+    result3 = yield context.call_activity('SayHello', "London")
+    return [result1, result2, result3]
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 ---
 
-À chaque instruction `await` (C#) ou `yield` (JavaScript), le framework Durable Task crée un point de contrôle de l’état d’exécution de la fonction dans un back-end de stockage durable (généralement le Stockage Table Azure). Cet état est appelé *historique d’orchestration*.
+À chaque instruction `await` (C#) ou `yield` (JavaScript/Python), Durable Task Framework crée un point de contrôle de l’état d’exécution de la fonction dans un back-end de stockage durable (généralement le Stockage Table Azure). Cet état est appelé *historique d’orchestration*.
 
 ### <a name="history-table"></a>Table d’historique
 
@@ -110,7 +124,7 @@ Une fois le point de contrôle terminé, la fonction d’orchestrateur peut êtr
 
 Une fois que vous avez terminé, l’historique de la fonction présentée précédemment ressemble au tableau suivant dans le Stockage Table Azure (présentation raccourcie à des fins d’illustration) :
 
-| PartitionKey (InstanceId)                     | Type d’événement             | Timestamp               | Entrée | Name             | Résultats                                                    | Statut |
+| PartitionKey (InstanceId)                     | Type d’événement             | Timestamp               | Entrée | Nom             | Résultats                                                    | Statut |
 |----------------------------------|-----------------------|----------|--------------------------|-------|------------------|-----------------------------------------------------------|
 | eaee885b | ExecutionStarted      | 2017-05-05T18:45:28.852Z | null  | E1_HelloSequence |                                                           |                     |
 | eaee885b | OrchestratorStarted   | 2017-05-05T18:45:32.362Z |       |                  |                                                           |                     |
@@ -131,27 +145,27 @@ Une fois que vous avez terminé, l’historique de la fonction présentée préc
 
 Quelques remarques sur les valeurs de colonne :
 
-* **PartitionKey** : contient l’ID d’instance de l’orchestration.
-* **EventType** : représente le type de l’événement, qui peut être l’un des suivants :
-  * **OrchestrationStarted** : la fonction d’orchestrateur a repris après une expression await ou s’exécute pour la première fois. La colonne `Timestamp` indique la valeur déterministe pour les API `CurrentUtcDateTime` (.NET) `currentUtcDateTime` (JavaScript).
-  * **ExecutionStarted** : la fonction d’orchestrateur a commencé à s’exécuter pour la première fois. Cet événement contient également l’entrée de la fonction dans la colonne `Input`.
-  * **TaskScheduled** : une fonction d’activité a été planifiée. Le nom de la fonction d’activité est indiqué dans la colonne `Name`.
-  * **TaskCompleted** : une fonction d’activité s’est terminée. Le résultat de la fonction se trouve dans la colonne `Result`.
-  * **TimerCreated** : un minuteur durable a été créé. La colonne `FireAt` contient l’heure UTC planifiée à laquelle le minuteur expire.
-  * **TimerFired** : un minuteur durable s’est déclenché.
-  * **EventRaised** : un événement externe a été envoyé à l’instance d’orchestration. La colonne `Name` indique le nom de l’événement et la colonne `Input` indique la charge utile de l’événement.
-  * **OrchestratorCompleted** : la fonction d’orchestrateur a attendu.
-  * **ContinueAsNew** : la fonction d’orchestrateur s’est terminée et a redémarré avec un nouvel état. La colonne `Result` contient la valeur, qui est utilisée comme entrée dans l’instance redémarrée.
-  * **ExecutionCompleted** : la fonction d’orchestrateur s’est exécutée entièrement (ou a échoué). Les sorties de la fonction ou les détails de l’erreur sont stockés dans la colonne `Result`.
+* **PartitionKey** : contient l’ID d’instance de l’orchestration.
+* **EventType** : représente le type de l’événement. qui peut être l’un des suivants :
+  * **OrchestrationStarted** : la fonction orchestrator a repris après une expression await ou s’exécute pour la première fois. La colonne `Timestamp` indique la valeur déterministe pour les API `CurrentUtcDateTime` (.NET), `currentUtcDateTime` (JavaScript) ou `current_utc_datetime` (Python).
+  * **ExecutionStarted** : la fonction orchestrator a commencé à s’exécuter pour la première fois. Cet événement contient également l’entrée de la fonction dans la colonne `Input`.
+  * **TaskScheduled** : une fonction d’activité a été planifiée. Le nom de la fonction d’activité est indiqué dans la colonne `Name`.
+  * **TaskCompleted** : une fonction d’activité s’est terminée. Le résultat de la fonction se trouve dans la colonne `Result`.
+  * **TimerCreated** : un minuteur durable a été créé. La colonne `FireAt` contient l’heure UTC planifiée à laquelle le minuteur expire.
+  * **TimerFired** : un minuteur durable s’est déclenché.
+  * **EventRaised** : un événement externe a été envoyé à l’instance d’orchestration. La colonne `Name` indique le nom de l’événement et la colonne `Input` indique la charge utile de l’événement.
+  * **OrchestratorCompleted** : la fonction orchestrator a attendu.
+  * **ContinueAsNew** : la fonction orchestrator s’est terminée et a redémarré avec un nouvel état. La colonne `Result` contient la valeur, qui est utilisée comme entrée dans l’instance redémarrée.
+  * **ExecutionCompleted** : la fonction orchestrator s’est exécutée entièrement (ou a échoué). Les sorties de la fonction ou les détails de l’erreur sont stockés dans la colonne `Result`.
 * **Timestamp** : horodatage UTC de l’événement d’historique.
-* **Name** : nom de la fonction qui a été appelée.
-* **Input** : entrée au format JSON de la fonction.
-* **Result** : sortie de la fonction ; autrement dit, sa valeur renvoyée.
+* **Name** : nom de la fonction qui a été appelée.
+* **Entrée**: entrée au format JSON de la fonction.
+* **Result** : sortie de la fonction ; autrement dit, sa valeur renvoyée.
 
 > [!WARNING]
 > Même si cette table est utile en tant qu’outil de débogage, vous ne devez pas en dépendre. Elle peut changer à mesure que l’extension Fonctions durables évolue.
 
-Chaque fois que la fonction reprend après une expression `await` (C#) ou `yield` (JavaScript), Durable Task Framework réexécute la fonction orchestrator depuis le début. À chaque réexécution, il consulte l’historique d’exécution pour déterminer si l’opération asynchrone en cours a eu lieu.  Si l’opération a eu lieu, le framework réexécute immédiatement la sortie de cette opération et passe à l’expression `await` (C#) ou `yield` (JavaScript) suivante. Ce processus se poursuit jusqu’à ce que tout l’historique ait été réexécuté. Une fois l’historique actuel relu, les variables locales sont restaurées à leurs valeurs précédentes.
+Chaque fois que la fonction reprend après une expression `await` (C#) ou `yield` (JavaScript/Python), Durable Task Framework réexécute la fonction d’orchestrateur depuis le début. À chaque réexécution, il consulte l’historique d’exécution pour déterminer si l’opération asynchrone en cours a eu lieu.  Si l’opération a eu lieu, le framework réexécute immédiatement la sortie de cette opération et passe à l’expression `await` (C#) ou `yield` (JavaScript/Python) suivante. Ce processus se poursuit jusqu’à ce que tout l’historique ait été réexécuté. Une fois l’historique actuel relu, les variables locales sont restaurées à leurs valeurs précédentes.
 
 ## <a name="features-and-patterns"></a>Fonctionnalités et modèles
 
@@ -165,7 +179,7 @@ Pour obtenir plus d’informations et des exemples, consultez l’article [Orche
 
 ### <a name="durable-timers"></a>Minuteurs durables
 
-Les orchestrations peuvent planifier des *minuteurs durables* pour implémenter des retards ou configurer le traitement des délais d’expiration sur les actions asynchrones. Utilisez les minuteurs durables dans les fonctions de l’orchestrateur à la place de `Thread.Sleep` et `Task.Delay` (C#) ou de `setTimeout()` et `setInterval()` (JavaScript).
+Les orchestrations peuvent planifier des *minuteurs durables* pour implémenter des retards ou configurer le traitement des délais d’expiration sur les actions asynchrones. Utilisez les minuteurs durables dans les fonctions d’orchestrateur à la place de `Thread.Sleep` et `Task.Delay` (C#), de `setTimeout()` et `setInterval()` (JavaScript), ou de `time.sleep()` (Python).
 
 Pour obtenir plus d’informations et des exemples, consultez l’article [Minuteurs durables](durable-functions-timers.md).
 
@@ -252,6 +266,18 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    url = context.get_input()
+    res = yield context.call_http('GET', url)
+    if res.status_code >= 400:
+        # handing of error code goes here
+```
 ---
 
 En plus de prendre en charge les modèles de requête/réponse de base, la méthode prend en charge la gestion automatique des modèles d’interrogation HTTP 202 asynchrones courants ainsi que l’authentification avec des services externes en utilisant des [identités managées](../../active-directory/managed-identities-azure-resources/overview.md).
@@ -267,7 +293,7 @@ Il n’est pas possible de passer directement plusieurs paramètres à une fonct
 
 # <a name="c"></a>[C#](#tab/csharp)
 
-Dans .NET, vous pouvez également utiliser des objets [ValueTuples](https://docs.microsoft.com/dotnet/csharp/tuples). Dans l’exemple suivant, de nouvelles fonctionnalités des objets [ValueTuples](https://docs.microsoft.com/dotnet/csharp/tuples) sont ajoutées avec [C# 7](https://docs.microsoft.com/dotnet/csharp/whats-new/csharp-7#tuples) :
+Dans .NET, vous pouvez également utiliser des objets [ValueTuples](/dotnet/csharp/tuples). Dans l’exemple suivant, de nouvelles fonctionnalités des objets [ValueTuples](/dotnet/csharp/tuples) sont ajoutées avec [C# 7](/dotnet/csharp/whats-new/csharp-7#tuples) :
 
 ```csharp
 [FunctionName("GetCourseRecommendations")]
@@ -322,7 +348,7 @@ module.exports = df.orchestrator(function*(context) {
 };
 ```
 
-#### <a name="activity"></a>Activité
+#### <a name="getweather-activity"></a>`GetWeather` Activité
 
 ```javascript
 module.exports = async function (context, location) {
@@ -330,6 +356,36 @@ module.exports = async function (context, location) {
 
     // ...
 };
+```
+
+# <a name="python"></a>[Python](#tab/python)
+
+#### <a name="orchestrator"></a>Un orchestrateur
+
+```python
+from collections import namedtuple
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    Location = namedtuple('Location', ['city', 'state'])
+    location = Location(city='Seattle', state= 'WA')
+
+    weather = yield context.call_activity("GetWeather", location)
+
+    # ...
+
+```
+#### <a name="getweather-activity"></a>`GetWeather` Activité
+
+```python
+from collections import namedtuple
+
+Location = namedtuple('Location', ['city', 'state'])
+
+def main(location: Location) -> str:
+    city, state = location
+    return f"Hello {city}, {state}!"
 ```
 
 ---

@@ -1,30 +1,31 @@
 ---
 title: Journalisation Azure Storage Analytics
-description: Découvrez comment journaliser les détails des requêtes effectuées sur le Stockage Azure.
+description: Utilisez Storage Analytics pour consigner des détails sur les demandes de stockage Azure. Consultez les demandes journalisées, la façon dont les journaux sont stockés, comment activer la journalisation du stockage, et bien plus encore.
 author: normesta
 ms.service: storage
 ms.subservice: common
 ms.topic: conceptual
-ms.date: 03/11/2019
+ms.date: 07/23/2020
 ms.author: normesta
 ms.reviewer: fryu
-ms.openlocfilehash: 1e41eb02f4b02078dbf4d42c46cab574cf8d0701
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.custom: monitoring, devx-track-csharp
+ms.openlocfilehash: eb71de223e2d840e0caa0444b837e16e1f091414
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204064"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96484785"
 ---
 # <a name="azure-storage-analytics-logging"></a>Journalisation Azure Storage Analytics
 
 Storage Analytics enregistre des informations détaillées sur les demandes ayant réussi ou échoué pour un service de stockage. Ces informations peuvent servir à analyser des demandes individuelles et à diagnostiquer les problèmes au niveau d'un service de stockage. Les demandes sont enregistrées sur la base du meilleur effort.
 
- La journalisation Storage Analytics n’est pas activée par défaut pour votre compte de stockage. Vous pouvez l’activer dans le [portail Azure](https://portal.azure.com/). Pour plus d’informations, consultez l’article [Surveillance d’un compte de stockage dans le portail Azure](/azure/storage/storage-monitor-storage-account). Vous pouvez également activer Storage Analytics par programmation via l'API REST ou la bibliothèque cliente. Utilisez les opérations [Get Blob Service Properties](https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API), [Get Queue Service Properties](https://docs.microsoft.com/rest/api/storageservices/Get-Queue-Service-Properties) et [Get Table Service Properties](https://docs.microsoft.com/rest/api/storageservices/Get-Table-Service-Properties) pour activer Storage Analytics pour chaque service.
+ La journalisation Storage Analytics n’est pas activée par défaut pour votre compte de stockage. Vous pouvez l’activer dans le [portail Azure](https://portal.azure.com/). Pour plus d’informations, consultez l’article [Surveillance d’un compte de stockage dans le portail Azure](./storage-monitor-storage-account.md). Vous pouvez également activer Storage Analytics par programmation via l'API REST ou la bibliothèque cliente. Utilisez les opérations [Get Blob Service Properties](/rest/api/storageservices/Blob-Service-REST-API), [Get Queue Service Properties](/rest/api/storageservices/Get-Queue-Service-Properties) et [Get Table Service Properties](/rest/api/storageservices/Get-Table-Service-Properties) pour activer Storage Analytics pour chaque service.
 
  Les entrées de journal sont créées uniquement si des demandes sont effectuées sur le point de terminaison de service. Par exemple, si un compte de stockage a une activité dans son point de terminaison Blob, mais pas dans ses points de terminaison de Table ou de File d’attente, seuls des journaux d’activité relatifs au service BLOB seront créés.
 
 > [!NOTE]
->  La journalisation Storage Analytics est disponible pour les services Blob, File d’attente et de Table. Un compte de stockage Premium n’est toutefois pas pris en charge.
+>  La journalisation Storage Analytics est disponible pour les services Blob, File d’attente et de Table. La journalisation Storage Analytics est également disponible pour les comptes [BlockBlobStorage](../blobs/storage-blob-create-account-block-blob.md) avec des performances Premium. Toutefois, elle n’est pas disponible pour les comptes v2 à usage général avec des performances Premium.
 
 ## <a name="requests-logged-in-logging"></a>Requêtes consignées lors de la journalisation
 ### <a name="logging-authenticated-requests"></a>Enregistrement des demandes authentifiées
@@ -63,7 +64,7 @@ Si vous avez un volume élevé de données de journal avec plusieurs fichiers po
 La plupart des outils de navigation du stockage vous permettent d’afficher les métadonnées d’objets Blob. Vous pouvez également lire ces informations à l’aide de PowerShell ou par programmation. L’extrait de code PowerShell suivant est un exemple de filtrage de la liste d’objets Blob de journal par nom pour spécifier une heure et par métadonnées pour identifier uniquement les journaux qui contiennent des opérations d’**écriture**.  
 
  ```powershell
- Get-AzureStorageBlob -Container '$logs' |  
+ Get-AzStorageBlob -Container '$logs' |  
  Where-Object {  
      $_.Name -match 'table/2014/05/21/05' -and   
      $_.ICloudBlob.Metadata.LogType -match 'write'  
@@ -76,7 +77,7 @@ La plupart des outils de navigation du stockage vous permettent d’afficher les
  }  
  ```  
 
-Pour plus d’informations sur la liste d’objets Blob par programmation, consultez [Énumération de ressources d’objet Blob](https://msdn.microsoft.com/library/azure/hh452233.aspx) et [Définition et récupération de propriétés et métadonnées de ressources d’objets Blob](https://msdn.microsoft.com/library/azure/dd179404.aspx).  
+Pour plus d’informations sur la liste d’objets Blob par programmation, consultez [Énumération de ressources d’objet Blob](/rest/api/storageservices/Enumerating-Blob-Resources) et [Définition et récupération de propriétés et métadonnées de ressources d’objets Blob](/rest/api/storageservices/Setting-and-Retrieving-Properties-and-Metadata-for-Blob-Resources).  
 
 ### <a name="log-naming-conventions"></a>Conventions d'appellation de journal
 
@@ -136,23 +137,23 @@ Vous pouvez spécifier les services de stockage que vous souhaitez consigner et 
 
 ### <a name="enable-storage-logging-using-powershell"></a>Activer la journalisation du stockage à l’aide de PowerShell  
 
- Vous pouvez utiliser PowerShell sur votre ordinateur local pour configurer la journalisation du stockage dans votre compte de stockage. Utilisez la cmdlet Azure PowerShell **Get-AzureStorageServiceLoggingProperty** pour récupérer les paramètres actuels et la cmdlet **Set-AzureStorageServiceLoggingProperty** pour modifier les paramètres actuels.  
+ Vous pouvez utiliser PowerShell sur votre ordinateur local pour configurer la journalisation du stockage dans votre compte de stockage. Utilisez la cmdlet Azure PowerShell **Get-AzStorageServiceLoggingProperty** pour récupérer les paramètres actuels et la cmdlet **Set-AzStorageServiceLoggingProperty** pour modifier les paramètres actuels.  
 
  Les cmdlets qui contrôlent la journalisation du stockage utilisent un paramètre **LoggingOperations**, une chaîne contenant une liste de types de requêtes à consigner séparée par des virgules. Les trois types de requêtes possibles sont **lire**, **écrire** et **supprimer**. Pour désactiver la journalisation, utilisez la valeur **aucun** pour le paramètre **LoggingOperations**.  
 
  La commande suivante active la journalisation des requêtes de lecture, d’écriture et de suppression dans le service de File d’attente de votre compte de stockage par défaut avec une rétention de cinq jours :  
 
 ```powershell
-Set-AzureStorageServiceLoggingProperty -ServiceType Queue -LoggingOperations read,write,delete -RetentionDays 5  
+Set-AzStorageServiceLoggingProperty -ServiceType Queue -LoggingOperations read,write,delete -RetentionDays 5  
 ```  
 
  La commande suivante désactive la journalisation du service de table dans votre compte de stockage par défaut :  
 
 ```powershell
-Set-AzureStorageServiceLoggingProperty -ServiceType Table -LoggingOperations none  
+Set-AzStorageServiceLoggingProperty -ServiceType Table -LoggingOperations none  
 ```  
 
- Pour plus d’informations sur la configuration des applets de commande Azure PowerShell avec votre abonnement Azure et sur la sélection du compte de stockage par défaut à utiliser, consultez : [Guide pratique pour installer et configurer Azure PowerShell](https://azure.microsoft.com/documentation/articles/install-configure-powershell/).  
+ Pour plus d’informations sur la configuration des applets de commande Azure PowerShell avec votre abonnement Azure et sur la sélection du compte de stockage par défaut à utiliser, consultez : [Guide pratique pour installer et configurer Azure PowerShell](/powershell/azure/).  
 
 ### <a name="enable-storage-logging-programmatically"></a>Activer la journalisation du stockage par programmation  
 
@@ -178,9 +179,9 @@ queueClient.SetServiceProperties(serviceProperties);
 ---
 
 
- Pour plus d’informations sur l’utilisation d’un langage .NET pour configurer la journalisation du stockage, consultez la [référence sur la bibliothèque cliente de stockage](https://msdn.microsoft.com/library/azure/dn261237.aspx).  
+ Pour plus d’informations sur l’utilisation d’un langage .NET pour configurer la journalisation du stockage, consultez la [référence sur la bibliothèque cliente de stockage](/previous-versions/azure/dn261237(v=azure.100)).  
 
- Pour obtenir des informations générales sur la configuration de la journalisation du stockage avec l’API REST, consultez [Activation et configuration de Storage Analytics](https://msdn.microsoft.com/library/azure/hh360996.aspx).  
+ Pour obtenir des informations générales sur la configuration de la journalisation du stockage avec l’API REST, consultez [Activation et configuration de Storage Analytics](/rest/api/storageservices/Enabling-and-Configuring-Storage-Analytics).  
 
 ## <a name="download-storage-logging-log-data"></a>Télécharger les données du journal de journalisation du stockage
 
@@ -203,9 +204,9 @@ L’exemple suivant montre comment vous pouvez télécharger les données de jou
 azcopy copy 'https://mystorageaccount.blob.core.windows.net/$logs/queue' 'C:\Logs\Storage' --include-path '2014/05/20/09;2014/05/20/10;2014/05/20/11' --recursive
 ```
 
-Pour en savoir plus sur le téléchargement de fichiers spécifiques, consultez [Télécharger des fichiers spécifiques](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-blobs?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#download-specific-files).
+Pour en savoir plus sur le téléchargement de fichiers spécifiques, consultez [Télécharger des fichiers spécifiques](./storage-use-azcopy-blobs.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#download-specific-files).
 
-Lorsque vous avez téléchargé vos données de journal, vous pouvez afficher les entrées de journal dans les fichiers. Ces fichiers journaux utilisent un format de texte délimité que de nombreux outils de lecture de journaux sont en mesure d’analyser, dont Microsoft Message Analyzer (pour plus d’informations, consultez le guide [Surveiller, diagnostiquer et résoudre les problèmes liés à Microsoft Azure Storage](storage-monitoring-diagnosing-troubleshooting.md)). Différents outils possèdent des fonctionnalités différentes de mise en forme, de filtrage, de tri et de recherche de contenu de vos fichiers journaux. Pour plus d’informations sur le format du fichier journal de journalisation du stockage et son contenu, consultez [Format du journal de l’analyse de stockage](/rest/api/storageservices/storage-analytics-log-format) et [Opérations et messages d’état enregistrés Storage Analytics](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages).
+Lorsque vous avez téléchargé vos données de journal, vous pouvez afficher les entrées de journal dans les fichiers. Ces fichiers journaux utilisent un format de texte délimité que de nombreux outils de lecture de journaux sont en mesure d’analyser (pour plus d’informations, consultez le guide [Surveiller, diagnostiquer et résoudre les problèmes liés au service Stockage Microsoft Azure](storage-monitoring-diagnosing-troubleshooting.md)). Différents outils possèdent des fonctionnalités différentes de mise en forme, de filtrage, de tri et de recherche de contenu de vos fichiers journaux. Pour plus d’informations sur le format du fichier journal de journalisation du stockage et son contenu, consultez [Format du journal de l’analyse de stockage](/rest/api/storageservices/storage-analytics-log-format) et [Opérations et messages d’état enregistrés Storage Analytics](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

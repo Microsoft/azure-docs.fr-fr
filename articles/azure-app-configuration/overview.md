@@ -1,17 +1,17 @@
 ---
 title: Présentation d’Azure App Configuration
-description: Vue d’ensemble du service Azure App Configuration.
-author: lisaguthrie
-ms.author: lcozzens
+description: Lire une vue d’ensemble du service Azure App Configuration. Comprenez pourquoi utiliser App Configuration, puis apprenez à l’utiliser.
+author: AlexandraKemperMS
+ms.author: alkemper
 ms.service: azure-app-configuration
 ms.topic: overview
 ms.date: 02/19/2020
-ms.openlocfilehash: 1f1cec68813d33e7fa19a414a30adfc9a41df91f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9786ff20c1d3f467e217d5fe34518fcc9494863e
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "77523473"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930107"
 ---
 # <a name="what-is-azure-app-configuration"></a>Présentation d’Azure App Configuration
 

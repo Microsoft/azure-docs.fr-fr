@@ -1,25 +1,31 @@
 ---
 title: 'Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et Node.js'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing.
+description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing et Node.js.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 05/06/2020
 ms.author: aahi
-ms.openlocfilehash: 11dc0d4f80e14c293fde4e84b5e97d39fe594629
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-js
+ms.openlocfilehash: 03545aafa1cbf6efa82ae063e7e966443b1d5e8b
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80238957"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106119"
 ---
 # <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-nodejs"></a>Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et Node.js
 
-Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API Suggestion automatique Bing et à obtenir la réponse JSON. Cette application Node.js simple envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en JavaScript, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingAutosuggestv7.js)
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Suivez ce démarrage rapide pour apprendre à effectuer des appels à l’API Suggestion automatique Bing et à lire la réponse JSON. Cette application Node.js simple envoie une requête de recherche partielle à l’API et renvoie des suggestions pour les recherches. Alors que cette application est écrite en JavaScript, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingAutosuggestv7.js)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -37,7 +43,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
     let https = require ('https');
     ```
 
-2. Créez des variables pour l’hôte et le chemin d’accès du point de terminaison d’API, votre clé d’abonnement, le [code marché](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et un terme de recherche. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Créez des variables pour l’hôte et le chemin d’accès du point de terminaison d’API, votre clé d’abonnement, le [code marché](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et un terme de recherche. Utilisez le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```javascript
     // Replace the subscriptionKey string value with your valid subscription key.
@@ -74,13 +80,13 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
     }
     ```
 
-    1. Dans la même fonction, utilisez la bibliothèque de requêtes pour envoyer votre requête à l’API. `response_handler` sera défini dans la section suivante.
+ 1. Dans la même fonction, utilisez la bibliothèque de requêtes pour envoyer votre requête à l’API. `response_handler` est défini dans la section suivante.
     
-        ```javascript
+    ```javascript
         //...
         let req = https.request(request_params, response_handler);
         req.end();
-        ```
+    ```
 
 ## <a name="create-a-search-handler"></a>Créer un gestionnaire de recherche
 
@@ -94,7 +100,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
         };
         ```
 
-    2. Stockez le corps de la réponse quand l’indicateur **data** est appelé.
+    2. Stockez le corps de la réponse quand l’indicateur `data` est appelé.
         
         ```javascript
         response.on ('data', function (d) {
@@ -102,7 +108,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
         });
         ```
 
-    3. Quand un indicateur **fin** est signalé, l’utilisateur `JSON.parse()` et `JSON.stringify()` pour imprimer la réponse.
+    3. Quand un indicateur `end` est signalé, utilisez `JSON.parse()` et `JSON.stringify()` pour imprimer la réponse.
     
         ```javascript
         response.on ('end', function () {
@@ -191,4 +197,4 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 > [Créer une application web monopage](../tutorials/autosuggest.md)
 
 - [Qu’est-ce que la Suggestion automatique Bing ?](../get-suggested-search-terms.md)
-- [Informations de référence sur l’API Suggestion automatique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)
+- [Informations de référence sur l’API Suggestion automatique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)

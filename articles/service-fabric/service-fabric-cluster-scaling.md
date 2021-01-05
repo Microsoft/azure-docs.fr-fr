@@ -4,12 +4,12 @@ description: En savoir plus sur la mise à l’échelle de clusters Azure Servic
 ms.topic: conceptual
 ms.date: 11/13/2018
 ms.author: atsenthi
-ms.openlocfilehash: a21182c974d6141264c8ca0c36bfc8f6a366d6f3
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 126be55c63c625995ad52b84a51a8983e220652d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793174"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85610198"
 ---
 # <a name="scaling-azure-service-fabric-clusters"></a>Mise à l’échelle des clusters Azure Service Fabric
 Un cluster Service Fabric est un groupe de machines virtuelles ou physiques connectées au réseau, sur lequel vos microservices sont déployés et gérés. Une machine ou une machine virtuelle faisant partie d’un cluster est appelée un nœud. Les clusters peuvent potentiellement comporter des milliers de nœuds. Une fois que vous avez créé un cluster Service Fabric, vous pouvez le mettre à l’échelle horizontalement (modifier le nombre de nœuds) ou verticalement (modifier les ressources des nœuds).  Une mise à l’échelle peut s’effectuer à tout moment, même lorsque des charges de travail sont en cours d’exécution sur le cluster.  Lorsque vous mettez vos nœuds à l’échelle, vos applications sont automatiquement mises à l’échelle.
@@ -28,7 +28,7 @@ Lors de la mise à l’échelle d’un cluster Azure, gardez les instructions su
 - Les types de nœud principal exécutant des charges de travail de production doivent toujours comporter au moins cinq nœuds.
 - Les types de nœud non principal exécutant des charges de travail de production avec état doivent toujours comporter au moins cinq nœuds.
 - Les types de nœud non principal exécutant des charges de travail de production sans état doivent toujours comporter au moins deux nœuds.
-- Tout type de nœud dont le [niveau de durabilité](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster) est Gold ou Silver doit toujours comporter au moins cinq nœuds.
+- Tout type de nœud dont le [niveau de durabilité](service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster) est Gold ou Silver doit toujours comporter au moins cinq nœuds.
 - Ne supprimez pas d’instances de machine virtuelle/de nœuds aléatoires d’un type de nœud. Utilisez toujours la fonctionnalité de scale-in du groupe de machines virtuelles identiques. La suppression d’instances de machine virtuelle aléatoires peut réduire la capacité des systèmes à équilibrer la charge de manière appropriée.
 - Si vous utilisez des règles de mise à l’échelle automatique, définissez-les de manière à ce que la diminution de la taille des instances s’effectue nœud par nœud. La descente en puissance de plusieurs instances en même temps présente des risques.
 
@@ -59,14 +59,10 @@ Modifie les ressources (processeur, mémoire ou stockage) des nœuds du cluster.
 - Avantages : l’architecture de l’application et du logiciel demeure identique.
 - Inconvénients : mise à l’échelle limitée, dans la mesure où l’augmentation des ressources sur les nœuds individuels est limitée. Des temps d’arrêt, car il vous faudra mettre hors ligne les machines physiques ou virtuelles afin d’ajouter ou de supprimer des ressources.
 
-Les jeux de mise à l’échelle de machine virtuelle sont des ressources de calcul Azure que vous pouvez utiliser pour déployer et gérer une collection de machines virtuelles en tant que jeu. Chaque type de nœud défini dans un cluster Azure est [ configuré comme un groupe identique distinct](service-fabric-cluster-nodetypes.md). Chaque type de nœud peut alors faire l’objet d’une gestion séparée.  Une montée ou une descente en puissance d’un type de nœud implique la modification de la référence des instances de machines virtuelles dans le groupe identique. 
-
-> [!WARNING]
-> Nous vous recommandons de ne pas modifier la référence des machines virtuelles d’un type de nœud/d’un groupe identique présentant un niveau de [durabilité inférieur à Silver](service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster). Modifier la taille de référence (SKU) des machines virtuelles est une opération d’infrastructure sur place destructrice de données. Faute de pouvoir ne serait-ce que retarder ou surveiller cette modification, il est possible que l’opération occasionne une perte de données pour les services avec état ou provoque d’autres problèmes opérationnels imprévus, même pour les charges de travail sans état. 
->
+Les jeux de mise à l’échelle de machine virtuelle sont des ressources de calcul Azure que vous pouvez utiliser pour déployer et gérer une collection de machines virtuelles en tant que jeu. Chaque type de nœud défini dans un cluster Azure est [ configuré comme un groupe identique distinct](service-fabric-cluster-nodetypes.md). Chaque type de nœud peut alors faire l’objet d’une gestion séparée.  La mise à l’échelle d’un type de nœud vers le haut ou vers le bas implique l’ajout d’un nouveau type de nœud (avec la référence SKU de machine virtuelle mise à jour) et la suppression de l’ancien type de nœud.
 
 Lors de la mise à l’échelle d’un cluster Azure, gardez les instructions suivantes à l’esprit :
-- Pour la descente en puissance d’un type de nœud principal, vous ne devez jamais aller en dessous du [niveau de fiabilité](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster).
+- Pour la descente en puissance d’un type de nœud principal, vous ne devez jamais aller en dessous du [niveau de fiabilité](service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster).
 
 Le processus de montée ou descente en puissance d’un type de nœud diffère selon qu’il s’agisse d’un type de nœud principal ou non principal.
 
@@ -74,9 +70,9 @@ Le processus de montée ou descente en puissance d’un type de nœud diffère s
 Créez un nouveau type de nœud avec les ressources dont vous avez besoin.  Mettez à jour les contraintes de placement des services en cours d’exécution afin d’inclure le nouveau type de nœud.  Progressivement (une à la fois), réduisez le nombre d’instances de l’ancien type de nœud à une valeur nulle, de manière à ne pas affecter la fiabilité du cluster.  Les services migrent progressivement vers le nouveau type de nœud, à mesure de la désactivation de l’ancien type de nœud.
 
 ### <a name="scaling-the-primary-node-type"></a>Mise à l’échelle du type de nœud principal
-Nous vous recommandons de ne pas modifier la référence des machines virtuelles du type de nœud principal. Si vous avez besoin d’accroître la capacité du cluster, nous vous recommandons d’ajouter davantage d’instances. 
+Déployez un nouveau type de nœud principal avec la référence SKU de machine virtuelle mise à jour, puis désactivez les instances de type de nœud principal d’origine une à la fois afin que les services système migrent vers le nouveau groupe identique. Vérifiez que le cluster et les nouveaux nœuds sont intègres, puis supprimez le groupe identique d’origine et l’état du nœud pour les nœuds supprimés.
 
-Si cela n’est pas possible, créez un cluster et [restaurez l’état des applications](service-fabric-reliable-services-backup-restore.md) (le cas échéant) de votre ancien cluster. Vous n’avez pas besoin de restaurer l’état des services système ; ceux-ci sont recréés pendant le déploiement de vos applications sur le nouveau cluster. Si les applications que vous exécutiez sur votre cluster étaient sans état, tout ce que vous avez à faire, c’est déployer vos applications sur le nouveau cluster, sans rien avoir à restaurer. Si vous décidez de suivre la méthode non prise en charge et que vous voulez modifier la référence (SKU) des machines virtuelles, modifiez la définition du modèle de groupe de machines virtuelles identiques en fonction de la nouvelle référence. Si votre cluster n’a qu’un seul type de nœud, assurez-vous que toutes les applications avec état répondent à tous les [événements de cycle de vie de réplica de service](service-fabric-reliable-services-lifecycle.md) (par exemple, le blocage de la création d’un réplica) en temps opportun, et que la durée de recréation du réplica de service est inférieure à cinq minutes (pour le niveau de durabilité Silver). 
+Si cela n’est pas possible, créez un cluster et [restaurez l’état des applications](service-fabric-reliable-services-backup-restore.md) (le cas échéant) de votre ancien cluster. Vous n’avez pas besoin de restaurer l’état des services système ; ceux-ci sont recréés pendant le déploiement de vos applications sur le nouveau cluster. Si les applications que vous exécutiez sur votre cluster étaient sans état, tout ce que vous avez à faire, c’est déployer vos applications sur le nouveau cluster, sans rien avoir à restaurer.
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Découvrez-en plus sur l’[extensibilité des applications](service-fabric-concepts-scalability.md).

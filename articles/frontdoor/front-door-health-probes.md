@@ -3,27 +3,27 @@ title: Azure Front Door – Supervision de l’intégrité du serveur principal 
 description: Cet article explique comment Azure Front Door supervise l’intégrité de vos serveurs principaux
 services: frontdoor
 documentationcenter: ''
-author: sharad4u
+author: duongau
 ms.service: frontdoor
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 09/10/2018
-ms.author: sharadag
-ms.openlocfilehash: e2e656c395f1a31c1f5ebbd46d5a18a046f854f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/28/2020
+ms.author: duau
+ms.openlocfilehash: 4cbeea8ad20d41daff3d4ad086a36df5e988991f
+ms.sourcegitcommit: 3792cf7efc12e357f0e3b65638ea7673651db6e1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79471572"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91449251"
 ---
 # <a name="health-probes"></a>Sondes d’intégrité
 
-Pour permettre la détermination de l’intégrité et de la proximité de chaque serveur principal d’un environnement de service Front Door donné, celui-ci envoie régulièrement une requête HTTP/HTTPS synthétique à chaque serveur principal configuré. Sur la base des réponses fournies par les sondes, la porte d’entrée identifie les « meilleurs » backends vers lesquels elle doit acheminer les demandes réelles des clients. 
+Pour déterminer l’intégrité et de la proximité de chaque serveur principal d’un environnement de service Front Door donné, celui-ci envoie régulièrement une requête HTTP/HTTPS synthétique à chaque serveur principal configuré. Front Door utilise alors les réponses fournies par la sonde pour identifier les « meilleurs » backends vers lesquels acheminer les demandes de vos clients. 
 
 > [!WARNING]
-> Dans la mesure où le service Front Door a de nombreux environnements de périphérie, le volume des requêtes de sonde d’intégrité adressées à vos serveurs principaux peut être conséquent, allant de 25 à 1200 requêtes par minute, en fonction de la fréquence configurée de la sonde d’intégrité. À la fréquence de sonde par défaut de 30 secondes, le volume des requêtes de sonde sur votre serveur principal doit être d’environ 200 requêtes par minute.
+> Dans la mesure où le service Front Door a de nombreux environnements de périphérie, le volume de sonde d’intégrité adressées à vos serveurs principaux peut être conséquent, allant de 25 à 1 200 requêtes par minute, en fonction de la fréquence configurée de la sonde d’intégrité. À la fréquence de sonde par défaut de 30 secondes, le volume des requêtes de sonde sur votre serveur principal doit être d’environ 200 requêtes par minute.
 
 ## <a name="supported-protocols"></a>Protocoles pris en charge
 
@@ -59,7 +59,7 @@ Pour déterminer l’intégrité, le service Azure Front Door utilise le même p
 
     * Pour configurer la valeur _x_, modifiez la propriété SuccessfulSamplesRequired dans les paramètres d’équilibrage de charge.
 
-3. Par ailleurs, la porte d’entrée mesure et maintient la latence (durée aller-retour) pour chaque backend considéré comme sain.
+3. Front Door mesure et maintient la latence (durée aller-retour) pour chaque ensemble de backends considérés comme sains.
 
 
 ## <a name="complete-health-probe-failure"></a>Mettre fin à l’échec des sondes d’intégrité

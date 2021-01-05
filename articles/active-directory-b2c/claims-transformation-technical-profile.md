@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 84c1cf798e88e4067da8a495c1591143d2ee1bd0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6553b9ec120ca0e1e479b400495b61bc68c88cf3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78189784"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85201206"
 ---
 # <a name="define-a-claims-transformation-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique de transformation de revendications dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -30,7 +30,7 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `Prop
 
 L’exemple suivant montre un profil technique de transformation de revendications :
 
-```XML
+```xml
 <TechnicalProfile Id="Facebook-OAUTH-UnLink">
     <DisplayName>Unlink Facebook</DisplayName>
     <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -52,7 +52,7 @@ L’élément **OutputClaims** est obligatoire. Vous devez fournir au moins une 
 
 L’élément **OutputClaimsTransformations** peut contenir une collection d’éléments **OutputClaimsTransformation** qui sont utilisés pour modifier les revendications ou en générer de nouvelles. Le profil technique suivant appelle la transformation de revendications **RemoveAlternativeSecurityIdByIdentityProvider**. Cette transformation de revendications un identification sociale de la collection **AlternativeSecurityIds**. Les revendications de sortie de ce profil technique sont **identityProvider2**, qui est défini sur `facebook.com`, et **AlternativeSecurityIds**, qui contient la liste des identités sociales associé à ce utilisateur après la suppression de l’identité facebook.com.
 
-```XML
+```xml
 <ClaimsTransformations>
   <ClaimsTransformation Id="RemoveAlternativeSecurityIdByIdentityProvider"
 TransformationMethod="RemoveAlternativeSecurityIdByIdentityProvider">
@@ -84,7 +84,7 @@ TransformationClaimType="collection" />
 
 Le profil technique de transformation de revendications permet d’exécuter une transformation de revendications à partir de n’importe quelle étape d’orchestration du parcours de l’utilisateur. Dans l’exemple suivant, l’étape d’orchestration appelle un des profils techniques unlink, comme **UnLink-Facebook-OAUTH**. Ce profil technique appelle le profil technique de transformation de revendications **RemoveAlternativeSecurityIdByIdentityProvider**, ce qui génère une nouvelle revendication **AlternativeSecurityIds2** qui contient la liste des identités sociales de l’utilisateur, tout en supprimant l’identité Facebook des collections.
 
-```XML
+```xml
 <UserJourney Id="AccountUnLink">
   <OrchestrationSteps>
     ...
@@ -110,7 +110,7 @@ Le profil technique de transformation de revendications permet d’exécuter une
 
 Un profil technique de transformation de revendications peut être utilisé pour valider des informations. Dans l’exemple suivant, le [profil technique autodéclaré](self-asserted-technical-profile.md) nommé **LocalAccountSignUpWithLogonEmail** demande à l’utilisateur d’entrer l’adresse e-mail à deux reprises, puis appelle le [profil technique de validation](validation-technical-profile.md) nommé **Validate-Email** pour valider les e-mails. Le profil technique **Validate-Email** appelle la transformation de revendications **AssertEmailAreEqual** pour comparer les deux revendications **email** et **emailRepeat**  et envoie une exception s’ils ne sont pas égaux selon la comparaison spécifiée.
 
-```XML
+```xml
 <ClaimsTransformations>
   <ClaimsTransformation Id="AssertEmailAreEqual" TransformationMethod="AssertStringClaimsAreEqual">
     <InputClaims>
@@ -126,7 +126,7 @@ Un profil technique de transformation de revendications peut être utilisé pour
 
 Les profil technique de transformation de revendications appelle la transformation de revendications **AssertEmailAreEqual**, qui déclare que les e-mails fournis par l’utilisateur sont identiques.
 
-```XML
+```xml
 <TechnicalProfile Id="Validate-Email">
   <DisplayName>Unlink Facebook</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -145,7 +145,7 @@ Les profil technique de transformation de revendications appelle la transformati
 
 Un profil technique autodéclaré peut appeler le profil technique de validation et afficher le message d’erreur spécifié dans les métadonnées **UserMessageIfClaimsTransformationStringsAreNotEqual**.
 
-```XML
+```xml
 <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
   <DisplayName>User ID signup</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />

@@ -5,15 +5,15 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 03/21/2018
+ms.date: 10/16/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: d36d2be59010c47348a8e196b28d87e5b967868e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b8a61586acd888301350277d924f3d4fe176b4c8
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67176934"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148225"
 ---
 ### <a name="step-1-navigate-to-the-virtual-network-gateway"></a>Étape 1 : Accès à la passerelle de réseau virtuel
 

@@ -1,21 +1,20 @@
 ---
 title: Créer un service basé sur un acteur sur Azure Service Fabric
 description: Découvrez comment créer, déboguer et déployer votre premier service basé sur un acteur en C# à l’aide de Service Fabric Reliable Actors.
-author: vturecek
 ms.topic: conceptual
 ms.date: 07/10/2019
-ms.author: vturecek
-ms.openlocfilehash: a6e4fb48653572139463738c82de632ff7d55074
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 225ccb67153a33ed47af68ebb1549dce37426278
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75466254"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96573459"
 ---
 # <a name="getting-started-with-reliable-actors"></a>Prise en main de Reliable Actors
 > [!div class="op_single_selector"]
 > * [C# sur Windows](service-fabric-reliable-actors-get-started.md)
-> * [Java sur Linux](service-fabric-reliable-actors-get-started-java.md)
+> * [Java sur Linux](./service-fabric-create-your-first-linux-application-with-java.md)
 
 Cet article décrit la création et le débogage d'une simple application Reliable Actors dans Visual Studio. Pour plus d’informations sur Reliable Actors, consultez l’article [Présentation du modèle Reliable Actors de Service Fabric](service-fabric-reliable-actors-introduction.md).
 
@@ -107,7 +106,7 @@ Créez une application de console simple pour appeler le service d'acteur.
 
     Le package NuGet et toutes ses dépendances sont installés dans le projet ActorClient.
 
-5. Le projet client nécessite également une référence au projet d'interfaces.  Dans le projet ActorClient, cliquez avec le bouton droit sur **Dépendances**, puis cliquez sur **Ajouter une référence...** .  Sélectionnez **Projets > Solution** (le cas échéant), puis cochez la case **HelloWorld.Interfaces**.  Cliquez sur **OK**.
+5. Le projet client nécessite également une référence au projet d'interfaces.  Dans le projet ActorClient, cliquez avec le bouton droit sur **Dépendances**, puis cliquez sur **Ajouter une référence de projet...** .  Sélectionnez **Projets > Solution** (le cas échéant), puis cochez la case **HelloWorld.Interfaces**.  Cliquez sur **OK**.
     
     ![Boîte de dialogue Ajouter une référence][7]
 

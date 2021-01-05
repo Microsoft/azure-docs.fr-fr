@@ -6,22 +6,22 @@ author: cynthn
 ms.service: virtual-machines-windows
 ms.subservice: disks
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/02/2018
 ms.author: cynthn
-ms.openlocfilehash: 15df3178f2860fa066a82cb1429e0c1a6e5c2b08
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: cae29954211e62601debb35d76f938fb6a92779e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82083420"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019801"
 ---
 # <a name="use-the-d-drive-as-a-data-drive-on-a-windows-vm"></a>Utilisation du lecteur D comme lecteur de données sur une machine virtuelle Windows
 Si votre application doit utiliser le lecteur D pour stocker des données, suivez ces instructions pour utiliser une autre lettre de lecteur pour le disque temporaire. N'utilisez jamais le disque temporaire pour stocker des données à conserver.
 
 Si vous procédez au redimensionnement ou à l’ **arrêt (désallocation)** d’une machine virtuelle, il est possible que cela déclenche le placement de la machine virtuelle sur un nouvel hyperviseur. Ce placement peut également être déclenché par un événement de maintenance planifié ou non planifié. Dans ce scénario, le disque temporaire est réaffecté à la première lettre de lecteur disponible. Si vous avez une application qui nécessite spécifiquement le lecteur D:, vous devez suivre ces étapes pour déplacer temporairement pagefile.sys, associer un nouveau disque de données et lui attribuer la lettre D, puis replacer pagefile.sys sur le disque temporaire. Lorsque vous avez terminé, Azure ne reprend pas le lecteur D: si la machine virtuelle est déplacée vers un autre hyperviseur.
 
-Pour plus d’informations sur l’utilisation du disque temporaire par Azure, consultez [Présentation du lecteur temporaire sur Microsoft Azure Virtual Machines](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
+Pour plus d’informations sur l’utilisation du disque temporaire par Azure, consultez [Présentation du lecteur temporaire sur Microsoft Azure Virtual Machines](/archive/blogs/mast/understanding-the-temporary-drive-on-windows-azure-virtual-machines)
 
 ## <a name="attach-the-data-disk"></a>Association du disque de données
 Tout d'abord, vous devrez attacher le disque de données à la machine virtuelle. Pour ce faire en utilisant le portail, consultez [Attacher un disque de données géré dans le Portail Azure](attach-managed-disk-portal.md).
@@ -59,4 +59,3 @@ Tout d'abord, vous devrez attacher le disque de données à la machine virtuelle
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Vous pouvez augmenter l’espace de stockage disponible pour votre machine virtuelle en y [attachant un disque de données supplémentaire](attach-managed-disk-portal.md).
-

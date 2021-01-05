@@ -1,22 +1,22 @@
 ---
-title: 'Démarrage rapide : Création de votre première application web statique avec Azure Static Web Apps'
-description: Apprenez à créer une instance Azure Static Web Apps avec votre framework frontal favori.
+title: 'Démarrage rapide : Création de votre premier site statique avec le service Azure Static Web Apps'
+description: Apprenez à déployer un site statique sur Azure Static Web Apps.
 services: static-web-apps
 author: craigshoemaker
 ms.service: static-web-apps
 ms.topic: quickstart
-ms.date: 05/08/2020
+ms.date: 08/13/2020
 ms.author: cshoe
-ms.openlocfilehash: 14fd237b6437c15ede2da7c0694004f6c22736cc
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: eb2356451c349f894c9ca74b1359f6a02d0e002a
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599130"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97562512"
 ---
-# <a name="quickstart-building-your-first-static-web-app"></a>Démarrage rapide : Création de votre première application web statique
+# <a name="quickstart-building-your-first-static-site-with-azure-static-web-apps"></a>Démarrage rapide : Création de votre premier site statique avec Azure Static Web Apps
 
-Azure Static Web Apps publie les sites web dans un environnement de production en compilant les applications à partir d’un référentiel GitHub. Dans ce guide de démarrage rapide, vous créez une application web avec votre framework frontal par défaut à partir d’un référentiel GitHub.
+Azure Static Web Apps publie un site web dans un environnement de production en compilant les applications à partir d’un dépôt GitHub. Dans ce guide de démarrage rapide, vous déployez une application web dans Azure Static Web Apps à l’aide de l’extension Visual Studio Code.
 
 Si vous n’avez pas d’abonnement Azure, [créez un compte d’essai gratuit](https://azure.microsoft.com/free).
 
@@ -24,148 +24,97 @@ Si vous n’avez pas d’abonnement Azure, [créez un compte d’essai gratuit](
 
 - [GitHub](https://github.com)
 - Compte [Azure](https://portal.azure.com)
+- [Visual Studio Code](https://code.visualstudio.com)
+- [Extension Azure Static Web Apps pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps)
 
-## <a name="create-a-repository"></a>Créer un référentiel
+[!INCLUDE [create repository from template](../../includes/static-web-apps-get-started-create-repo.md)]
 
-Cet article utilise les référentiels de modèles GitHub pour vous permettre de créer facilement un nouveau référentiel. Les modèles sont des applications créées avec différents frameworks frontaux.
+[!INCLUDE [clone the repository](../../includes/static-web-apps-get-started-clone-repo.md)]
 
-# <a name="angular"></a>[Angular](#tab/angular)
-
-- Accédez à l’emplacement suivant pour créer un nouveau référentiel.
-  - https://github.com/staticwebdev/angular-basic/generate
-- Nommez votre référentiel **my-first-static-web-app**
-
-# <a name="react"></a>[React](#tab/react)
-
-- Accédez à l’emplacement suivant pour créer un nouveau référentiel.
-  - https://github.com/staticwebdev/react-basic/generate
-- Nommez votre référentiel **my-first-static-web-app**
-
-# <a name="vue"></a>[Vue](#tab/vue)
-
-- Accédez à l’emplacement suivant pour créer un nouveau référentiel.
-  - https://github.com/staticwebdev/vue-basic/generate
-- Nommez votre référentiel **my-first-static-web-app**
-
-# <a name="no-framework"></a>[Pas de framework](#tab/vanilla-javascript)
-
-- Accédez à l’emplacement suivant pour créer un nouveau référentiel.
-  - https://github.com/staticwebdev/vanilla-basic/generate
-- Nommez votre référentiel **my-first-static-web-app**
-
-> [!NOTE]
-> Azure Static Web Apps nécessite au moins un fichier HTML pour pouvoir créer une application web. Le référentiel que vous créez lors de cette étape comprend un seul _fichier index.html_.
-
----
-
-Cliquez sur le bouton **Créer un référentiel à partir du modèle**.
-
-:::image type="content" source="media/getting-started/create-template.png" alt-text="Créer un référentiel à partir du modèle":::
+Ensuite, ouvrez Visual Studio Code et accédez à **Fichier > Ouvrir le dossier** pour ouvrir le dépôt que vous venez de cloner sur votre machine dans l’éditeur.
 
 ## <a name="create-a-static-web-app"></a>Créer une application web statique
 
-Maintenant que le référentiel est créé, vous pouvez créer une application web statique à partir du Portail Azure.
+1. Dans Visual Studio Code, sélectionnez le logo Azure dans la barre d’activités pour ouvrir la fenêtre des extensions Azure.
 
-- Accéder au [portail Azure](https://portal.azure.com)
-- Cliquer sur **Créer une ressource**
-- Rechercher **Static Web Apps**
-- Cliquer sur **Static Web Apps (préversion)**
-- Cliquez sur **Créer**
+    :::image type="content" source="media/getting-started/extension-azure-logo.png" alt-text="Logo Azure":::
 
-### <a name="basics"></a>Concepts de base
+    > [!NOTE]
+    > Les connexions à Azure et GitHub sont nécessaires. Si vous n’êtes pas déjà connecté à Azure et à GitHub depuis Visual Studio Code, l’extension vous invite à le faire au cours du processus de création.
 
-Commencez par configurer votre nouvelle application et liez-la à un référentiel GitHub.
+1. Placez le pointeur de la souris sur l’étiquette _Static Web Apps_ et sélectionnez le **signe plus**.
 
-:::image type="content" source="media/getting-started/basics-tab.png" alt-text="Onglet Informations de base":::
+    :::image type="content" source="media/getting-started/extension-create-button.png" alt-text="Nom de l’application":::
 
-- Sélectionnez votre _abonnement Azure_.
-- Sélectionnez ou créez un _groupe de ressources_.
-- Nommez l’application **my-first-static-web-app**.
-  - Les caractères valides sont `a-z` (insensible à la casse), `0-9`et `_`.
-- Sélectionnez la _région_ la plus proche de vous.
-- Sélectionnez **SKU** _gratuite_.
-- Cliquez sur le bouton **Se connecter à GitHub** et authentifiez-vous auprès de GitHub.
+1. La palette de commandes s’ouvre en haut de l’éditeur et vous invite à nommer votre application.
 
-Une fois que vous êtes connecté avec GitHub, entrez les informations relatives au référentiel.
+    Tapez **my-first-static-web-app** et appuyez sur **Entrée**.
 
-:::image type="content" source="media/getting-started/repository-details.png" alt-text="Détails du référentiel":::
+    :::image type="content" source="media/getting-started/extension-create-app.png" alt-text="Création d’application web statique":::
 
-- Sélectionnez votre _organisation_ préférée.
-- Sélectionnez **my-first-web-static-app** dans la liste déroulante _Référentiel_.
-- Sélectionner **maître** dans la liste déroulante _Branche_.
-- Cliquez sur le bouton **Suivant : Compiler >** pour modifier la configuration de build.
+1. Sélectionnez la branche **main** , puis appuyez sur **Entrée**.
 
-:::image type="content" source="media/getting-started/next-build-button.png" alt-text="Bouton Compilation suivante":::
+    :::image type="content" source="media/getting-started/extension-branch.png" alt-text="Nom de la branche":::
 
-### <a name="build"></a>Build
+1. Sélectionnez **/** comme emplacement pour le code de l’application, puis appuyez sur **entrer**.
 
-Ensuite, ajoutez les détails de configuration spécifiques à votre framework frontal favori.
+    :::image type="content" source="media/getting-started/extension-app-location.png" alt-text="Emplacement du code de l’application":::
 
-# <a name="angular"></a>[Angular](#tab/angular)
+1. L’extension recherche l’emplacement de l’API dans votre application. Cet article n’implémente pas d’API.
 
-- Entrez **/** dans la zone _emplacement de l’application_.
-- Désactivez la valeur par défaut de la zone _Emplacement de l’API_.
-- Entrez **dist/angular-basic** dans la boîte _Emplacement de l’artefact d’application_.
+    Sélectionnez **Skip for now** (Ignorer pour le moment) et appuyez sur **Entrée**.
 
-# <a name="react"></a>[React](#tab/react)
+    :::image type="content" source="media/getting-started/extension-api-location.png" alt-text="Emplacement de l’API":::
 
-- Entrez **/** dans la zone _emplacement de l’application_.
-- Désactivez la valeur par défaut de la zone _Emplacement de l’API_.
-- Entrez **build** dans la zone _Emplacement de l’artefact d’application_.
+1. Sélectionnez l’emplacement où les fichiers sont générés pour la production dans votre application.
 
-# <a name="vue"></a>[Vue](#tab/vue)
+    # <a name="no-framework"></a>[Pas de framework](#tab/vanilla-javascript)
 
-- Entrez **/** dans la zone _emplacement de l’application_.
-- Désactivez la valeur par défaut de la zone _Emplacement de l’API_.
-- Entrez **dist** dans la zone _Emplacement de l’artefact d’application_.
+    Décochez la case et appuyez sur **Entrée**.
 
-# <a name="no-framework"></a>[Pas de framework](#tab/vanilla-javascript)
+    :::image type="content" source="media/getting-started/extension-artifact-no-framework.png" alt-text="Chemin des fichiers de l’application":::
 
-- Entrez **/** dans la zone _emplacement de l’application_.
-- Désactivez la valeur par défaut de la zone _Emplacement de l’API_.
-- Désactivez la valeur par défaut de la zone _Emplacement de l’artefact d’application_.
+    # <a name="angular"></a>[Angular](#tab/angular)
 
----
+    Tapez **dist/angular-basic** et appuyez sur **Entrée**.
 
-Cliquez sur le bouton **Vérifier + créer**.
+    :::image type="content" source="media/getting-started/extension-artifact-angular.png" alt-text="Chemin des fichiers de l’application Angular":::
 
-:::image type="content" source="media/getting-started/review-create.png" alt-text="Bouton Vérifier + créer":::
+    # <a name="react"></a>[React](#tab/react)
 
-### <a name="review--create"></a>Vérifier + créer
+    Tapez **build**, puis appuyez sur **Entrée**.
 
-Une fois la demande validée, vous pouvez continuer à créer l’application.
+    :::image type="content" source="media/getting-started/extension-artifact-react.png" alt-text="Chemin des fichiers de l’application React":::
 
-Cliquez sur le bouton **Créer**
+    # <a name="vue"></a>[Vue](#tab/vue)
 
-:::image type="content" source="media/getting-started/create-button.png" alt-text="Bouton Créer":::
+    Tapez **dist**, puis appuyez sur **Entrée**.
 
-Une fois la ressource créée, cliquez sur le bouton **Accéder à la ressource**.
+    :::image type="content" source="media/getting-started/extension-artifact-vue.png" alt-text="Chemin des fichiers de l’application Vue":::
 
-:::image type="content" source="media/getting-started/resource-button.png" alt-text="Accédez au bouton de ressources":::
+    ---
 
-## <a name="view-the-website"></a>Voir le site web
+1. Sélectionnez l’emplacement le plus proche de vous et appuyez sur **Entrée**.
 
-Le déploiement d’une application statique comporte deux aspects. Le premier provisionne les ressources Azure sous-jacentes qui composent votre application. Le second est un flux de travail GitHub Actions qui génère et publie votre application.
+    :::image type="content" source="media/getting-started/extension-location.png" alt-text="Emplacement de la ressource":::
 
-Avant de pouvoir accéder à votre nouveau site statique, la build de déploiement doit d’abord finir de s’exécuter.
+1. Une fois l’application créée, une notification de confirmation s’affiche dans Visual Studio Code.
 
-La fenêtre de vue d’ensemble de Static Web Apps présente des liens qui vous permettent d’interagir avec votre application web.
+    :::image type="content" source="media/getting-started/extension-confirmation.png" alt-text="Confirmation créée":::
 
-:::image type="content" source="media/getting-started/overview-window.png" alt-text="Fenêtre Vue d’ensemble":::
+1. Dans la fenêtre de l’Explorateur de Visual Studio Code, accédez au nœud qui porte le nom de votre abonnement et développez-le. Notez que le déploiement peut prendre quelques minutes. Ensuite, revenez à la section Static Web Apps et sélectionnez le nom de votre application, puis cliquez avec le bouton droit sur my-first-static-web-app et sélectionnez Ouvrir dans le portail pour afficher l’application dans le portail Azure.
 
-1. Cliquez sur la bannière intitulée « Cliquez ici pour vérifier l’état de vos GitHub Actions » pour accéder aux actions GitHub en cours d’exécution sur votre référentiel. Une fois que vous avez vérifié que le travail de déploiement est terminé, vous pouvez accéder à votre site web à l’aide de l’URL générée.
+    :::image type="content" source="media/getting-started/extension-open-in-portal.png" alt-text="Ouvrir le portail":::
 
-2. Une fois le flux de travail GitHub Actions terminé, vous pouvez cliquer sur l’_URL_ pour ouvrir le site web dans un nouvel onglet.
+[!INCLUDE [view website](../../includes/static-web-apps-get-started-view-website.md)]
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Si vous ne prévoyez pas de continuer à utiliser cette application, vous pouvez supprimer l’instance Azure Static Web Apps en effectuant les étapes suivantes :
+Si vous ne prévoyez pas de continuer à utiliser cette application, vous pouvez supprimer l’instance Azure Static Web Apps par le biais de l’extension.
 
-1. Ouvrez le [portail Azure](https://portal.azure.com)
-1. Recherchez **my-first-web-static-app** dans la barre de recherche supérieure.
-1. Cliquez sur le nom de l’application.
-1. Cliquez sur le bouton **Supprimer**.
-1. Cliquez sur **Oui** pour confirmer l’action de suppression.
+Dans la fenêtre de l’Explorateur Visual Studio Code, revenez à la section _Static Web Apps_ et cliquez avec le bouton droit sur **my-first-static-web-app**, puis sélectionnez **Supprimer**.
+
+:::image type="content" source="media/getting-started/extension-delete.png" alt-text="Supprimer l’application":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

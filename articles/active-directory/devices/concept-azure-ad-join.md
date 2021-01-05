@@ -1,34 +1,35 @@
 ---
 title: Qu’est-ce qu’un appareil joint Azure AD ?
-description: Découvrez comment la gestion d’identité des appareils peut vous aider à gérer les appareils qui accèdent aux ressources de votre environnement.
+description: Découvrez les appareils joints Azure AD et comment la gestion d’identité des appareils peut vous aider à gérer les appareils qui accèdent aux ressources de votre environnement.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
 ms.topic: conceptual
-ms.date: 06/27/2019
+ms.date: 07/20/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8e4521cb67ae95a1cd4a3e728a13e43bfd5773ab
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 2b7cc0535549f2dbcdef4ab043ee506527fdbc5f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83737025"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90601450"
 ---
 # <a name="azure-ad-joined-devices"></a>Appareils joints Azure AD
 
 La jonction Azure AD est destinée aux organisations axées en priorité ou uniquement sur le cloud. Toute organisation peut déployer des appareils joints Azure AD, quels que soient leur taille et leur secteur d’activité. La jonction Azure AD fonctionne même dans un environnement hybride et permet l’accès aux applications et ressources locales et cloud.
 
-|   | Azure AD Join |
+| Azure AD Join | Description |
 | --- | --- |
 | **Définition** | Joint uniquement à Azure AD et nécessitant un compte professionnel pour se connecter à l’appareil |
 | **Public principal** | Approprié pour les organisations utilisant uniquement le cloud et pour les organisations hybrides. |
 |   | S’applique à tous les utilisateurs d’une organisation |
 | **Appartenance de l’appareil** | Organisation |
-| **Systèmes d’exploitation** | Tous les appareils Windows 10 |
+| **Systèmes d’exploitation** | Tous les appareils Windows 10 à l’exception de Windows 10 Famille |
+|   | [Machines virtuelles Windows Server 2019 s’exécutant dans Azure](howto-vm-sign-in-azure-ad-windows.md) (Server Core n’est pas pris en charge) |
 | **Approvisionnement** | Libre-service : Windows OOBE ou Paramètres |
 |   | Inscription en bloc |
 |   | Windows Autopilot |
@@ -57,11 +58,11 @@ Bien qu’Azure AD Join soit principalement conçu pour les organisations qui ne
 
 - Vous souhaitez passer à une infrastructure cloud avec Azure AD et un système de gestion des appareils mobiles comme Intune.
 - Vous ne pouvez pas utiliser de jonction de domaine locale, par exemple, si vous avez besoin de contrôler des appareils mobiles, tels que des tablettes et des téléphones.
-- Vos utilisateurs ont principalement besoin d’accéder à Office 365 ou d’autres applications SaaS intégrées à Azure AD.
+- Vos utilisateurs ont principalement besoin d’accéder à Microsoft 365 ou d’autres applications SaaS intégrées à Azure AD.
 - Vous souhaitez gérer un groupe d’utilisateurs dans Azure AD et non dans un répertoire Active Directory. Par exemple, ce scénario peut concerner les travailleurs saisonniers, les prestataires ou les étudiants.
 - Vous souhaitez fournir des fonctionnalités de jonction aux travailleurs dans des succursales distantes avec une infrastructure locale limitée.
 
-Vous pouvez configurer des appareils joints Azure AD pour les appareils Windows 10.
+Vous pouvez configurer des appareils Azure AD joints pour tous les appareils Windows 10, à l’exception de Windows 10 Famille.
 
 Les appareils joints Azure AD ont pour objectif de simplifier :
 

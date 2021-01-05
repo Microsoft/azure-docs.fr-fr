@@ -3,24 +3,27 @@ title: Créer un localisateur de streaming et générer des URL - Azure Media Se
 description: Cet article montre comment créer un localisateur de streaming et générer des URL.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 03/04/2020
-ms.author: juliako
-ms.openlocfilehash: 2972c60aa5874c21a6f7bce21020ad58b5f3b556
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 916defd652ff9f4b3f372c609055d2a974126916
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78304372"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295714"
 ---
 # <a name="create-a-streaming-locator-and-build-urls"></a>Créer un localisateur de streaming et générer des URL
 
-Dans Azure Media Services, pour générer une URL de streaming, vous devez d’abord créer un [localisateur de streaming](streaming-locators-concept.md). Ensuite, vous concaténez le nom d’hôte du [point de terminaison de streaming](https://docs.microsoft.com/rest/api/media/streamingendpoints) et le chemin du **localisateur de streaming**. Dans cet exemple, le **point de terminaison de streaming** *par défaut* est utilisé. Quand vous créez pour la première fois un compte Media Services, ce **point de terminaison de streaming** *par défaut* est à l’état Arrêté. Vous devez donc appeler **Start** pour démarrer le streaming.
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+Dans Azure Media Services, pour générer une URL de streaming, vous devez d’abord créer un [localisateur de streaming](streaming-locators-concept.md). Ensuite, vous concaténez le nom d’hôte du [point de terminaison de streaming](/rest/api/media/streamingendpoints) et le chemin du **localisateur de streaming**. Dans cet exemple, le **point de terminaison de streaming** *par défaut* est utilisé. Quand vous créez pour la première fois un compte Media Services, ce **point de terminaison de streaming** *par défaut* est à l’état Arrêté. Vous devez donc appeler **Start** pour démarrer le streaming.
 
 Cet article montre comment créer un localisateur de streaming et générer une URL à l’aide des kits SDK Java et .NET.
 

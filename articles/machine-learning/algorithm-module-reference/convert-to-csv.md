@@ -1,7 +1,7 @@
 ---
 title: 'Convertir au format CSV : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Convertir au format CSV dans Azure Machine Learning pour convertir un jeu de données au format CSV qui peut être téléchargé, exporté ou partagé avec des modules de script R ou Python.
+description: Découvrez comment utiliser le module Convertir au format CSV dans le concepteur Azure Machine Learning Designer pour convertir un jeu de données en un fichier CSV réutilisable.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/22/2019
-ms.openlocfilehash: fc2a043e8f1565cf5fe45ba0b072ad015076635e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc58689e30e9b03e490c0871f3decd50372371fa
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477678"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421921"
 ---
 # <a name="convert-to-csv-module"></a>Module Convertir au format CSV
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour convertir un jeu de données dans un fichier au format CSV qui peut être téléchargé, exporté ou partagé avec des modules de script R ou Python.
 

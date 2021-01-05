@@ -5,14 +5,14 @@ author: su-jie
 ms.author: sujie
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/10/2018
-ms.openlocfilehash: 34c8555356d5c0142d7b677c8119fe66806ab064
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a921e51a3c63828602e7e21bfc96f507649236a5
+ms.sourcegitcommit: e0ec3c06206ebd79195d12009fd21349de4a995d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76834903"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97682834"
 ---
 # <a name="test-stream-analytics-queries-locally-with-visual-studio"></a>Tester des requêtes Stream Analytics localement avec Visual Studio
 
@@ -30,7 +30,7 @@ Dans votre projet Azure Stream Analytics, double-cliquez sur **Script.asaql** po
 
 Pour valider votre requête par rapport aux données statiques locales, cliquez avec le bouton droit sur l’entrée, et sélectionnez **Ajouter une entrée locale**.
    
-![Ajouter une entrée locale](./media/stream-analytics-vs-tools-local-run/stream-analytics-tools-for-vs-add-local-input-01.png)
+![Capture d’écran mettant en évidence l’option de menu Ajouter une entrée locale.](./media/stream-analytics-vs-tools-local-run/stream-analytics-tools-for-vs-add-local-input-01.png)
    
 Dans la fenêtre indépendante, sélectionnez l’exemple de données dans votre chemin local, puis **Enregistrer**.
    
@@ -75,5 +75,4 @@ Vous pouvez voir la progression de l’opération dans la fenêtre **Sortie**.
 * [Démarrage rapide : créer un travail Stream Analytics à l’aide de Visual Studio](stream-analytics-quick-create-vs.md)
 * [Utiliser Visual Studio pour afficher les tâches Azure Stream Analytics](stream-analytics-vs-tools.md)
 * [Tester des données actives localement à l’aide des outils Azure Stream Analytics pour Visual Studio (préversion)](stream-analytics-live-data-local-testing.md)
-* [Tutoriel : Déployer un travail Azure Stream Analytics avec CI/CD à l’aide d’Azure DevOps](stream-analytics-tools-visual-studio-cicd-vsts.md)
 * [Intégrer et développer en continu avec les outils Stream Analytics](stream-analytics-tools-for-visual-studio-cicd.md)

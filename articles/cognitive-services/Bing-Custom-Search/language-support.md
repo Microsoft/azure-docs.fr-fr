@@ -10,22 +10,27 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 09/25/2018
 ms.author: aahi
-ms.openlocfilehash: 85326ae9166f7ea15ec2f45c01755b8f9ef03aff
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 73b25ce1093ce697aa0937161d2af49526c231b7
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "66388560"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352352"
 ---
 # <a name="language-and-region-support-for-the-bing-custom-search-api"></a>Langues et régions prises en charge par l’API Recherche personnalisée Bing
 
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
 L’API Recherche personnalisée Bing prend en charge plus d’une trentaine de pays/régions, dont beaucoup possèdent plusieurs langues.
 
-La requête peut indiquer le paramètre [mkt](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché dont proviennent les résultats. Pour obtenir la liste complète des paramètres de requête facultatifs, consultez [Query Parameters](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters) (Paramètres de requête).
+La requête peut indiquer le paramètre [mkt](/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché dont proviennent les résultats. Pour obtenir la liste complète des paramètres de requête facultatifs, consultez [Query Parameters](/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#query-parameters) (Paramètres de requête).
 
 Vous pouvez spécifier un pays/une région à l’aide du paramètre de requête `cc`. Si vous spécifiez un pays/une région, vous devez également spécifier un ou plusieurs codes de langue à l’aide de l’en-tête `Accept-Language`. Les langues prises en charge varient selon le pays/la région ; elles sont indiquées pour chaque pays/région dans le tableau **Marchés**.
 
-Étant donné que l’en-tête `Accept-Language` et le paramètre de requête `setLang` s’excluent mutuellement, ne spécifiez pas les deux. Pour plus d’informations, consultez [Accept-Language](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#acceptlanguage).
+Étant donné que l’en-tête `Accept-Language` et le paramètre de requête `setLang` s’excluent mutuellement, ne spécifiez pas les deux. Pour plus d’informations, consultez [Accept-Language](/rest/api/cognitiveservices-bingsearch/bing-custom-search-api-v7-reference#acceptlanguage).
 
 ## <a name="countriesregions"></a>Pays/régions
 
@@ -50,7 +55,7 @@ Vous pouvez spécifier un pays/une région à l’aide du paramètre de requête
 |Corée du Sud|KR|
 |Malaisie|MY|
 |Mexique|MX|
-|Pays-bas|NL|
+|Pays-Bas|NL|
 |Nouvelle-Zélande|NZ|
 |Norvège|Non|
 |Chine|CN|
@@ -65,7 +70,7 @@ Vous pouvez spécifier un pays/une région à l’aide du paramètre de requête
 |Suisse|CH|
 |Taïwan|TW|
 |Turquie|TR|
-|United Kingdom|Go|
+|Royaume-Uni|Go|
 |États-Unis|US|
 
 
@@ -94,7 +99,7 @@ Vous pouvez spécifier un pays/une région à l’aide du paramètre de requête
 |Corée du Sud|Coréen|ko-KR|
 |Malaisie|Anglais|en-MY|
 |Mexique|Espagnol|es-MX|
-|Pays-bas|Néerlandais|nl-NL|
+|Pays-Bas|Néerlandais|nl-NL|
 |Nouvelle-Zélande|Anglais|en-NZ|
 |Norvège|Norvégien|no-NO|
 |Chine|Chinois|zh-CN|
@@ -110,6 +115,6 @@ Vous pouvez spécifier un pays/une région à l’aide du paramètre de requête
 |Suisse|Allemand|de-CH|
 |Taïwan|Chinois traditionnel|zh-TW|
 |Turquie|Turc|tr-TR|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |États-Unis|Anglais|fr-FR|
 |États-Unis|Espagnol|es-US|

@@ -1,8 +1,8 @@
 ---
-title: 'Démarrage rapide : Créer un profil pour la haute disponibilité des applications - Portail Azure - Azure Traffic Manager'
-description: Cet article de démarrage rapide décrit comment créer un profil Traffic Manager pour créer des applications web hautement disponibles.
+title: 'Démarrage rapide : Créer un profil pour la haute disponibilité des applications – Portail Azure – Azure Traffic Manager'
+description: Cet article de démarrage rapide décrit comment créer un profil Traffic Manager pour générer une application web hautement disponible à l’aide du portail Azure.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 manager: twooley
 Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
 ms.service: traffic-manager
@@ -10,14 +10,14 @@ ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 11/28/2018
-ms.author: rohink
-ms.openlocfilehash: 559ed0a134bb6db78d1e89634138b4025e04152b
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 10/15/2020
+ms.author: duau
+ms.openlocfilehash: 45489d3500a4a744f2aeb34dc21122d180797133
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76934763"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92101308"
 ---
 # <a name="quickstart-create-a-traffic-manager-profile-using-the-azure-portal"></a>Démarrage rapide : Créer un profil Traffic Manager à l’aide du portail Azure
 
@@ -27,85 +27,89 @@ Dans ce démarrage rapide, il est question de deux instances d’une application
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) maintenant.
 
-## <a name="sign-in-to-azure"></a>Connexion à Azure
-
-Connectez-vous au [portail Azure](https://portal.azure.com).
-
 ## <a name="prerequisites"></a>Prérequis
 
-Pour ce guide de démarrage rapide, vous aurez besoin de deux instances d’une application web déployée dans deux régions Azure différentes (*USA Est* et *Europe Ouest*). Chacune servira de point de terminaison principal et de point de terminaison de basculement à Traffic Manager.
+Pour ce guide de démarrage rapide, vous aurez besoin de deux instances d’une application web déployée dans deux régions Azure différentes ( *USA Est* et *Europe Ouest* ). Chacune servira de point de terminaison principal et de point de terminaison de basculement à Traffic Manager.
 
-1. En haut à gauche de l’écran, sélectionnez **Créer une ressource** > **Web** > **Application web**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Dans **Créer une application web**, tapez ou sélectionnez les valeurs suivantes sous l’onglet **De base** :
+1. Dans le coin supérieur gauche de l’écran, sélectionnez **Créer une ressource** . Recherchez **Application web** et sélectionnez **Créer** .
 
-   - **Abonnement** > **Groupe de ressources** : Sélectionnez **Créer un nouveau**, puis tapez **myResourceGroupTM1**.
-   - **Détails de l’instance** > **Nom** : Tapez *myWebAppEastUS*.
-   - **Détails de l’instance** > **Publier** : Sélectionnez **Code**.
-   - **Instance Details** > **Pile d’exécution** : Sélectionnez **ASP.net v 4.7**.
-   - **Détails de l’instance** > **Système d’exploitation** : Sélectionnez **Windows**.
-   - **Détails de l’instance** > **Région** :  Sélectionnez **USA Est**.
-   - **Plan App Service** > **Plan Windows (USA Est)**  : Sélectionnez **Créer un nouveau**, puis tapez **myAppServicePlanEastUS**
-   - **Plan App Service** > **Référence et taille** : Sélectionnez **Standard S1**.
+1. Dans **Créer une application web** , tapez ou sélectionnez les valeurs suivantes sous l’onglet **De base**  :
+
+    | Paramètre                 | Valeur |
+    | ---                     | --- |
+    | Abonnement            | Sélectionnez votre abonnement. |    
+    | Resource group          | Sélectionnez **Créer** et entrez *myResourceGroupTM1* dans la zone de texte.|
+    | Name                    | Attribuez un **Nom** unique à votre application web. Cet exemple utilise *myWebAppEastUS* . |
+    | Publish                 | Sélectionnez **Code** . |
+    | Pile d’exécution           | Sélectionnez **ASP.NET V4.7** . |
+    | Système d'exploitation        | Sélectionnez **Windows** . |
+    | Région                  | Sélectionnez **USA Est** . |
+    | Plan Windows            | Sélectionnez **Créer** et entrez *myAppServicePlanEastUS* dans la zone de texte. |
+    | SKU et taille            | Sélectionnez **Standard S1 100 ACU au total, 1,75 Go de mémoire** . |
    
-3. Sélectionnez l’onglet **Surveillance**, ou **Suivant:Surveillance**.  Sous **Surveillance**, définissez **Application Insights** > **Activer Application Insights** sur **Non**.
+1. Sélectionnez l’onglet **Surveillance** ou **Suivant : Supervision** .  Sous **Surveillance** , définissez **Application Insights** > **Activer Application Insights** sur **Non** .
 
-4. Sélectionnez **Examiner et créer**.
+1. Sélectionnez **Examiner et créer** .
 
-5. Vérifiez les paramètres, puis cliquez sur **Créer**.  Quand l’application web est déployé correctement, elle crée un site web par défaut.
+1. Passez en revue les paramètres, puis sélectionnez **Créer** .  Quand l’application web est déployé correctement, elle crée un site web par défaut.
 
-6. Suivez les étapes pour créer une deuxième application web nommée *myWebAppWestEurope*, avec le nom de **Groupe de ressources***myResourceGroupTM2*, la **Région***Europe Ouest*, le nom de **Plan App Service** **myAppServicePlanWestEurope** et tous les autres paramètres identiques à *myWebAppEastUS*.
+1. Suivez les étapes 1 à 6 pour créer une deuxième application web nommée *myWebAppWestEurope* . Le nom pour **Groupe de ressources** est *myResourceGroupTM2* , avec pour **Région** *Europe Ouest* et pour **Plan App Service** le nom **myAppServicePlanWestEurope** . Tous les autres paramètres sont les mêmes que pour *myWebAppEastUS* .
 
 ## <a name="create-a-traffic-manager-profile"></a>Créer un profil Traffic Manager
 
 Créez un profil Traffic Manager qui dirige le trafic utilisateur en fonction de la priorité du point de terminaison.
 
-1. En haut à gauche de l’écran, sélectionnez **Créer une ressource** > **Mise en réseau** > **Profil Traffic Manager**.
-2. Dans **Créer un profil Traffic Manager**, entrez ou sélectionnez ces paramètres :
+1. Dans le coin supérieur gauche de l’écran, sélectionnez **Créer une ressource** . Ensuite, recherchez **Profil Traffic Manager** et sélectionnez **Créer** .
+1. Dans **Créer un profil Traffic Manager** , entrez ou sélectionnez ces paramètres :
 
     | Paramètre | Valeur |
     | --------| ----- |
-    | Nom | Attribuez un nom unique à votre profil Traffic Manager.|
-    | Méthode de routage | Sélectionnez **Priorité**.|
+    | Name | Attribuez un nom unique à votre profil Traffic Manager.|
+    | Méthode de routage | Sélectionnez **Priorité** .|
     | Abonnement | Sélectionnez l’abonnement auquel vous souhaitez appliquer le profil Traffic Manager. |
-    | Resource group | Sélectionnez *myResourceGroupTM1*.|
-    | Emplacement |Ce paramètre fait référence à l’emplacement du groupe de ressources. Il n’a aucun effet sur le profil Traffic Manager qui sera déployé globalement.|
+    | Resource group | Sélectionnez *myResourceGroupTM1* .|
+    | Location |Ce paramètre fait référence à l’emplacement du groupe de ressources. Il n’a aucun effet sur le profil Traffic Manager qui sera déployé globalement.|
 
-3. Sélectionnez **Create** (Créer).
+1. Sélectionnez **Create** (Créer).
 
 ## <a name="add-traffic-manager-endpoints"></a>Ajouter des points de terminaison Traffic Manager
 
 Ajoutez le site web dans la région *USA Est* en tant que point de terminaison principal pour acheminer tout le trafic utilisateur. Ajoutez le site web dans la région *Europe Ouest* comme point de terminaison de basculement. Quand le point de terminaison principal n’est pas disponible, le trafic est automatiquement routé vers le point de terminaison de basculement.
 
 1. Dans la barre de recherche du portail, entrez le nom du profil Traffic Manager que vous avez créé dans la section précédente.
-2. Sélectionnez le profil dans les résultats de recherche.
-3. Dans **Profil Traffic Manager**, dans la section **Paramètres**, sélectionnez **Points de terminaison**, puis sélectionnez **Ajouter**.
-4. Entrez ou sélectionnez ces paramètres :
+1. Sélectionnez le profil dans les résultats de recherche.
+1. Dans **Profil Traffic Manager** , dans la section **Paramètres** , sélectionnez **Points de terminaison** , puis sélectionnez **Ajouter** .
+
+    :::image type="content" source="./media/quickstart-create-traffic-manager-profile/traffic-manager-endpoint-menu.png" alt-text="Paramètres des points de terminaison dans le profil Traffic Manager":::
+
+1. Entrez ou sélectionnez ces paramètres :
 
     | Paramètre | Valeur |
     | ------- | ------|
-    | Type | Sélectionnez **Point de terminaison Azure**. |
-    | Nom | Entrez *myPrimaryEndpoint*. |
-    | Type de ressource cible | Sélectionner **App Service**. |
-    | Ressource cible | Sélectionnez **Choisir un service d’application** > **USA Est**. |
-    | Priority | Sélectionnez **1**. Tout le trafic se dirige vers ce point de terminaison quand il est sain. |
+    | Type | Sélectionnez **Point de terminaison Azure** . |
+    | Name | Entrez *myPrimaryEndpoint* . |
+    | Type de ressource cible | Sélectionner **App Service** . |
+    | Ressource cible | Sélectionnez **Choisir un service d’application** > **USA Est** . |
+    | Priority | Sélectionnez **1** . Tout le trafic se dirige vers ce point de terminaison quand il est sain. |
 
-    ![Capture d’écran montrant à quel endroit vous ajoutez un point de terminaison à votre profil Traffic Manager.](./media/quickstart-create-traffic-manager-profile/add-traffic-manager-endpoint.png)
-
-5. Sélectionnez **OK**.
-6. Pour créer un point de terminaison de basculement pour votre deuxième région Azure, répétez les étapes 3 et 4 avec ces paramètres :
+    :::image type="content" source="./media/quickstart-create-traffic-manager-profile/add-traffic-manager-endpoint.png" alt-text="Paramètres des points de terminaison dans le profil Traffic Manager":::
+    
+1. Sélectionnez **OK** .
+1. Pour créer un point de terminaison de basculement pour votre deuxième région Azure, répétez les étapes 3 et 4 avec ces paramètres :
 
     | Paramètre | Valeur |
     | ------- | ------|
-    | Type | Sélectionnez **Point de terminaison Azure**. |
-    | Nom | Entrez *myFailoverEndpoint*. |
-    | Type de ressource cible | Sélectionner **App Service**. |
-    | Ressource cible | Sélectionnez **Choisir un service d’application** > **Europe Ouest**. |
-    | Priority | Sélectionnez **2**. Tout le trafic se dirige vers ce point de terminaison de basculement si le point de terminaison principal n’est pas sain. |
+    | Type | Sélectionnez **Point de terminaison Azure** . |
+    | Name | Entrez *myFailoverEndpoint* . |
+    | Type de ressource cible | Sélectionner **App Service** . |
+    | Ressource cible | Sélectionnez **Choisir un service d’application** > **Europe Ouest** . |
+    | Priority | Sélectionnez **2** . Tout le trafic se dirige vers ce point de terminaison de basculement si le point de terminaison principal n’est pas sain. |
 
-7. Sélectionnez **OK**.
+1. Sélectionnez **OK** .
 
-Une fois que vous avez ajouté les deux points de terminaison, il figurent dans **Profil Traffic Manager**. Notez que leur état de supervision est maintenant **En ligne**.
+Une fois que vous avez ajouté les deux points de terminaison, il figurent dans **Profil Traffic Manager** . Notez que leur état de supervision est maintenant **En ligne** .
 
 ## <a name="test-traffic-manager-profile"></a>Tester le profil Traffic Manager
 
@@ -114,26 +118,26 @@ Dans cette section, vous allez vérifier le nom de domaine de votre profil Traff
 ### <a name="check-the-dns-name"></a>Vérifier le nom DNS
 
 1. Dans la barre de recherche du portail, recherchez le nom du **profil Traffic Manager** que vous avez créé dans la section précédente.
-2. Sélectionnez le profil Traffic Manager. La **Vue d’ensemble** s’affiche.
-3. Le **profil Traffic Manager** affiche le nom DNS de votre profil Traffic Manager nouvellement créé.
+1. Sélectionnez le profil Traffic Manager. La **Vue d’ensemble** s’affiche.
+1. Le **profil Traffic Manager** affiche le nom DNS de votre profil Traffic Manager nouvellement créé.
   
-   ![Capture d’écran de l’emplacement du nom DNS de votre profil Traffic Manager](./media/quickstart-create-traffic-manager-profile/traffic-manager-dns-name.png)
+    :::image type="content" source="./media/quickstart-create-traffic-manager-profile/traffic-manager-dns-name.png" alt-text="Paramètres des points de terminaison dans le profil Traffic Manager":::
 
 ### <a name="view-traffic-manager-in-action"></a>Afficher Traffic Manager en action
 
 1. Dans un navigateur web, entrez le nom DNS de votre profil Traffic Manager pour afficher le site web par défaut de votre application web.
 
     > [!NOTE]
-    > Dans ce scénario de démarrage rapide, toutes les demandes sont routées vers le point de terminaison principal. Il est défini sur **Priorité 1**.
+    > Dans ce scénario de démarrage rapide, toutes les demandes sont routées vers le point de terminaison principal. Il est défini sur **Priorité 1** .
 
-    ![Capture d’écran de la page web permettant de vérifier la disponibilité du profil Traffic Manager](./media/quickstart-create-traffic-manager-profile/traffic-manager-test.png)
+    :::image type="content" source="./media/quickstart-create-traffic-manager-profile/traffic-manager-test.png" alt-text="Paramètres des points de terminaison dans le profil Traffic Manager":::
 
-2. Pour voir le basculement de Traffic Manager en action, désactivez votre site principal :
-    1. Dans la page Profil Traffic Manager, à partir de la **Vue d’ensemble**, sélectionnez **myPrimaryEndpoint**.
-    2. Dans *MyPrimaryEndpoint*, sélectionnez **Désactivé** > **Enregistrer**.
-    3. Fermez **myPrimaryEndpoint**. Notez que l’état est maintenant **Désactivé**.
-3. Copiez le nom DNS de votre profil Traffic Manager de l’étape précédente pour afficher le site web dans une nouvelle session de navigateur web.
-4. Vérifiez que l’application web est toujours disponible.
+1. Pour voir le basculement de Traffic Manager en action, désactivez votre site principal :
+    1. Dans la page Profil Traffic Manager, à partir de la **Vue d’ensemble** , sélectionnez **myPrimaryEndpoint** .
+    1. Dans *MyPrimaryEndpoint* , sélectionnez **Désactivé** > **Enregistrer** .
+    1. Fermez **myPrimaryEndpoint** . Notez que l’état est maintenant **Désactivé** .
+1. Copiez le nom DNS de votre profil Traffic Manager de l’étape précédente pour afficher le site web dans une nouvelle session de navigateur web.
+1. Vérifiez que l’application web est toujours disponible.
 
 Le point de terminaison principal n’étant pas disponible, vous avez été routé vers le point de terminaison de basculement.
 

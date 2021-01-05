@@ -3,20 +3,21 @@ title: Accéder aux propriétés des documents système via un graphe Azure Cosm
 description: Découvrir comment lire et écrire des propriétés des documents système Cosmos DB à l’aide de l’API Gremlin
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/10/2019
-author: luisbosquez
-ms.author: lbosq
-ms.openlocfilehash: 4ed7e67ae0ef027b260d0e0f0407e4e05ed5a8f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: SnehaGunda
+ms.author: sngun
+ms.openlocfilehash: 61814082ebe9828a08da1e8786890b500c239082
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898306"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93081839"
 ---
 # <a name="system-document-properties"></a>Propriétés des documents système
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
 
-Azure Cosmos DB a des [propriétés système](https://docs.microsoft.com/rest/api/cosmos-db/databases) comme ```_ts```, ```_self```, ```_attachments```, ```_rid``` et ```_etag``` sur chaque document. De plus, le moteur Gremlin ajoute les propriétés ```inVPartition``` et ```outVPartition``` sur les arêtes. Par défaut, ces propriétés sont disponibles pour la traversée. Toutefois, il est possible d’inclure des propriétés spécifiques, ou toutes les propriétés, dans la traversée Gremlin.
+Azure Cosmos DB a des [propriétés système](/rest/api/cosmos-db/databases) comme ```_ts```, ```_self```, ```_attachments```, ```_rid``` et ```_etag``` sur chaque document. De plus, le moteur Gremlin ajoute les propriétés ```inVPartition``` et ```outVPartition``` sur les arêtes. Par défaut, ces propriétés sont disponibles pour la traversée. Toutefois, il est possible d’inclure des propriétés spécifiques, ou toutes les propriétés, dans la traversée Gremlin.
 
 ```
 g.withStrategies(ProjectionStrategy.build().IncludeSystemProperties('_ts').create())

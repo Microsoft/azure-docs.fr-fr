@@ -14,14 +14,17 @@ ms.topic: article
 ms.date: 03/14/2019
 ms.author: willzhan
 ms.reviewer: kilroyh;yanmf;juliako
-ms.openlocfilehash: 68f42aa13288c2416257f3ba6c0b6072c1572977
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b98b66d8f0350c32e89d62d776ee1288d9271712
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162988"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010909"
 ---
-# <a name="design-of-a-content-protection-system-with-access-control-using-azure-media-services"></a>Conception d’un système de protection du contenu avec contrôle d’accès à l’aide d’Azure Media Services 
+# <a name="design-of-a-content-protection-system-with-access-control-using-azure-media-services"></a>Conception d’un système de protection du contenu avec contrôle d’accès à l’aide d’Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -227,15 +230,17 @@ Pour plus d’informations, consultez la page [JWT token authentication in Azure
 Pour plus d’informations sur Azure AD :
 
 * Vous pouvez trouver des informations pour les développeurs dans le [Guide du développeur Azure Active Directory](../../active-directory/azuread-dev/v1-overview.md).
-* Vous pouvez trouver des informations pour l’administrateur dans la rubrique [Administration de votre annuaire Azure AD](../../active-directory/fundamentals/active-directory-administer.md).
+* Vous pouvez trouver des informations pour l’administrateur dans la rubrique [Administration de votre annuaire Azure AD](../../active-directory/fundamentals/active-directory-whatis.md).
 
 ### <a name="some-issues-in-implementation"></a>Problèmes de mise en œuvre
 Utilisez les informations de dépannage suivantes pour résoudre vos éventuels problèmes d’implémentation.
 
 * L’URL de l’émetteur doit se terminer par « / ». L’audience doit être l’ID client de l’application de lecteur. Ajoutez également « / » à la fin de l’URL de l’émetteur.
 
-        <add key="ida:audience" value="[Application Client ID GUID]" />
-        <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/" />
+    ```xml
+    <add key="ida:audience" value="[Application Client ID GUID]" />
+    <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/" />
+    ```
 
     Dans le [Décodeur JWT](http://jwt.calebb.net/), **aud** et **iss** apparaissent comme suit dans le jeton JWT :
 
@@ -247,11 +252,15 @@ Utilisez les informations de dépannage suivantes pour résoudre vos éventuels 
 
 * Utilisez le bon émetteur lorsque vous configurez la protection CENC dynamique.
 
-        <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/"/>
+    ```xml
+    <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/"/>
+    ```
 
     Ce paramètre ne fonctionne pas :
 
-        <add key="ida:issuer" value="https://willzhanad.onmicrosoft.com/" />
+    ```xml
+    <add key="ida:issuer" value="https://willzhanad.onmicrosoft.com/" />
+    ```
 
     Le GUID est l’ID du locataire Azure AD. Vous trouverez le GUID dans le menu contextuel **Points de terminaison** du portail Azure.
 
@@ -261,7 +270,9 @@ Utilisez les informations de dépannage suivantes pour résoudre vos éventuels 
 
 * Définissez le TokenType approprié lorsque vous créez des conditions de restriction.
 
-        objTokenRestrictionTemplate.TokenType = TokenType.JWT;
+    ```csharp
+    objTokenRestrictionTemplate.TokenType = TokenType.JWT;
+    ```
 
     Puisque vous ajoutez la prise en charge de JWT (Azure AD) en plus des SWT (ACS), la valeur par défaut de TokenType est TokenType.JWT. Si vous utilisez SWT/ACS, vous devez définir le jeton sur TokenType.SWT.
 
@@ -288,7 +299,7 @@ La substitution de la clé de signature est un point important à prendre en com
 
 Azure AD utilise des normes reconnues pour établir une relation de confiance entre lui-même et les applications qui utilisent Azure AD. Azure AD utilise plus particulièrement une clé de signature se composant d’une paire clé publique-clé privée. Lorsqu’Azure AD crée un jeton de sécurité contenant des informations sur l’utilisateur, ce jeton est signé par Azure AD à l’aide d’une clé privée avant d’être renvoyé à l’application. Pour vérifier que le jeton est valide et qu’il a bien été émis par Azure AD, l’application doit valider la signature du jeton. L’application utilise la clé publique exposée par Azure AD, laquelle est contenue dans le document des métadonnées de fédération du locataire. Cette clé publique, de même que la clé de signature dont elle est dérivée, est la même que celle utilisée pour tous les locataires dans Azure AD.
 
-Pour plus d’informations sur la substitution de la clé Azure AD, consultez l’article [Substitution de la clé de signature dans Azure Active Directory](../../active-directory/active-directory-signing-key-rollover.md).
+Pour plus d’informations sur la substitution de la clé Azure AD, consultez l’article [Substitution de la clé de signature dans Azure Active Directory](../../active-directory/develop/active-directory-signing-key-rollover.md).
 
 Dans la [paire de clés publique-privée](https://login.microsoftonline.com/common/discovery/keys/) :
 
@@ -321,7 +332,7 @@ Si vous regardez comment une application web appelle une application API sous [I
 * Azure AD authentifie l’application et renvoie un jeton d’accès JWT, qui est utilisé pour appeler l’API web.
 * Sur HTTPS, l’application web utilise le jeton d’accès JWT renvoyé pour ajouter la chaîne JWT avec la mention « Porteur » dans l’en-tête « Autorisation » de la demande adressée à l’API web. L’API web valide ensuite le jeton JWT. Si la validation réussit, elle renvoie la ressource souhaitée.
 
-Dans ce flux d’identité de l’application, l’API web suppose que l’application web a authentifié l’utilisateur. C’est pour cette raison que ce modèle est appelé « sous-système approuvé ». Le [schéma de flux d’autorisation](https://docs.microsoft.com/azure/active-directory/active-directory-protocols-oauth-code) explique comment fonctionne le flux relatif au code d’autorisation.
+Dans ce flux d’identité de l’application, l’API web suppose que l’application web a authentifié l’utilisateur. C’est pour cette raison que ce modèle est appelé « sous-système approuvé ». Le [schéma de flux d’autorisation](../../active-directory/azuread-dev/v1-protocols-oauth-code.md) explique comment fonctionne le flux relatif au code d’autorisation.
 
 L’acquisition de licence avec restriction de jeton suit le même modèle de sous-système approuvé. Le service de distribution de licences dans Media Services est une ressource API web, ou bien la « ressource backend » à laquelle une application web doit accéder. Où se trouve le jeton d’accès ?
 
@@ -410,11 +421,11 @@ Les captures d’écran ci-dessous présentent les différentes pages de connexi
 
 **Compte de domaine client Azure AD personnalisé** : page de connexion personnalisée du domaine client Azure AD.
 
-![compte de domaine client Azure personnalisé](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain1.png)
+![Capture d’écran montrant la page de connexion personnalisée du domaine client Azure AD personnalisé.](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain1.png)
 
 **Compte de domaine Microsoft avec carte à puce** : page de connexion personnalisée par l’informatique d’entreprise Microsoft avec authentification à deux facteurs.
 
-![compte de domaine client Azure personnalisé](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain2.png)
+![Capture d’écran montrant la page de connexion personnalisée par l’informatique d’entreprise Microsoft avec authentification à deux facteurs.](./media/media-services-cenc-with-multidrm-access-control/media-services-ad-tenant-domain2.png)
 
 **Compte Microsoft** : page de connexion du compte Microsoft pour les consommateurs.
 

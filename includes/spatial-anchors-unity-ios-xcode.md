@@ -1,55 +1,45 @@
 ---
-author: ramonarguelles
+author: msftradford
 ms.service: azure-spatial-anchors
 ms.topic: include
-ms.date: 1/29/2019
-ms.author: rgarcia
-ms.openlocfilehash: b052772bbfe9d69e430d9f722d8db56b48db7610
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 11/20/2020
+ms.author: parkerra
+ms.openlocfilehash: d969b1639dbb39b920c985964abe1239f068d740
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "72933469"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185265"
 ---
-Sélectionnez **Build**. Dans la boîte de dialogue qui s’ouvre, sélectionnez un dossier de destination pour exporter le projet Xcode.
+Sélectionnez **Build**. Dans le volet qui s’ouvre, sélectionnez un dossier vers lequel exporter le projet Xcode.
 
-À l’issue de l’exportation, un dossier avec le projet Xcode exporté s’affiche.
+   À l’issue de l’exportation, un dossier contenant le projet Xcode exporté s’affiche.
 
-> [!NOTE]
-> Si une fenêtre vous demande de choisir remplacer ou ajouter, nous vous recommandons de sélectionner **Append** (Ajouter), car c’est plus rapide. Vous devez sélectionner **Replace** seulement si vous changez des ressources dans votre scène. (Par exemple, si vous ajoutez, supprimer ou changer des relations parent/enfant, ou si vous ajoutez, supprimer ou changer des propriétés.) Si vous changez seulement le code source, **Append** doit suffire.
+   > [!NOTE]
+   > Si une fenêtre affiche un message vous demandant de choisir entre remplacer ou ajouter, nous vous recommandons de sélectionner **Ajouter**, car c’est plus rapide. Vous devez sélectionner **Remplacer** seulement si vous modifiez des ressources dans votre scène. Par exemple, vous pouvez ajouter, supprimer ou modifier des relations parent/enfant ou des propriétés. Si vous changez seulement le code source, **Append** doit suffire.
 
-### <a name="convert-the-xcode-project-to-xcworkspace-containing-azure-spatial-anchors-references"></a>Convertir le projet Xcode en xcworkspace contenant les références Azure Spatial Anchors
+## <a name="open-the-xcode-project"></a>Ouvrir le projet Xcode
 
-Dans le dossier du projet Xcode exporté, exécutez cette commande dans le Terminal pour installer les CocoaPods nécessaires au projet :
+Vous pouvez maintenant ouvrir votre projet `Unity-iPhone.xcodeproj` dans Xcode. 
 
-```bash
-pod install --repo-update
+Vous pouvez soit lancer Xcode et ouvrir le projet `Unity-iPhone.xcodeproj` exporté, soit lancer le projet dans Xcode en exécutant la commande suivante à partir de l’emplacement vers lequel vous avez exporté le projet :
+
+ ```bash
+open ./Unity-iPhone.xcodeproj
 ```
-
-À présent, vous pouvez ouvrir `Unity-iPhone.xcworkspace` pour ouvrir le projet dans Xcode :
-
-```bash
-open ./Unity-iPhone.xcworkspace
-```
-
-> [!NOTE]
-> Si vous rencontrez des problèmes avec CocoaPod après la mise à niveau vers macOS Catalina (10.15), consultez ces [étapes de dépannage](../articles/spatial-anchors/quickstarts/get-started-unity-ios.md#cocoapods-issues-on-macos-catalina-1015).
 
 Sélectionnez le nœud racine **Unity-iPhone** pour voir les paramètres du projet, puis sélectionnez l’onglet **General**.
 
-Sous **Signing** (Signature), vérifiez que **Automatically manage signing** (Gérer automatiquement la signature) est activé. Sinon, activez-le, puis sélectionnez **Enable Automatic** (Activer la signature automatique) dans la boîte de dialogue qui s’affiche pour réinitialiser les paramètres de build.
+Sous **Signing** (Signature), vérifiez que l’option **Automatically manage signing** (Gérer automatiquement la signature) est activée. Si ce n’est pas le cas, activez-la, puis réinitialisez les paramètres de génération en sélectionnant **Enable Automatic** (Activer l’option automatique) dans le volet qui s’affiche.
 
-Sous **Deployment Info**, assurez-vous que **Deployment Target** est défini sur `11.0`.
+Sous **Deployment Info** (Informations sur le déploiement), assurez-vous que l’option **Deployment Target** (Cible de déploiement) est définie sur **11.0**.
 
-### <a name="deploy-the-app-to-your-ios-device"></a>Déployer l’application sur votre appareil iOS
+## <a name="deploy-the-app-to-your-ios-device"></a>Déployer l’application sur votre appareil iOS
 
 Connectez l’appareil iOS au Mac et définissez le **schéma actif** sur votre appareil iOS.
 
-![Sélectionner l’appareil](./media/spatial-anchors-unity/select-device.png)
+   ![Capture d’écran du bouton Mon iPhone pour la sélection de l’appareil.](./media/spatial-anchors-unity/select-device.png)
 
 Sélectionnez **Build and then run the current scheme**.
 
-![Déployer et exécuter](./media/spatial-anchors-unity/deploy-run.png)
-
-> [!NOTE]
-> Si l’erreur `library not found for -lPods-Unity-iPhone` s’affiche, vous avez probablement ouvert le fichier `.xcodeproj` à la place de `.xcworkspace`.
+   ![Capture d’écran du bouton fléché « Déployer et exécuter ».](./media/spatial-anchors-unity/deploy-run.png)

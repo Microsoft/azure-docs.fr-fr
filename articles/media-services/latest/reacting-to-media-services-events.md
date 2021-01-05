@@ -3,22 +3,24 @@ title: Réaction aux événements Azure Media Services | Microsoft Docs
 description: Cet article explique comment utiliser Azure Event Grid pour s’abonner à des événements Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 08/08/2019
-ms.author: juliako
-ms.openlocfilehash: e24bacb0ea7ab406442022915872fc77e9cc1a5e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 4ef6a920e9334c6e98b18d1db1abf39136c6f4e2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74887882"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289152"
 ---
 # <a name="handling-event-grid-events"></a>Traitement des événements Event Grid
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Les événements Media Services permettent aux applications de réagir à différents événements (par exemple, l’événement de changement d’état d’un travail) en utilisant des architectures sans serveur modernes. et sans qu’il soit nécessaire de faire appel à du code complexe ou à des services d’interrogation coûteux et inefficaces. Au lieu de cela, les événements sont envoyés via [Azure Event Grid](https://azure.microsoft.com/services/event-grid/) aux gestionnaires d’événements, comme [Azure Functions](https://azure.microsoft.com/services/functions/), [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps/), ou même à votre propre Webhook, et vous payez seulement pour ce que vous utilisez. Pour plus d’informations sur la tarification, consultez la page [Tarification Event Grid](https://azure.microsoft.com/pricing/details/event-grid/).
 

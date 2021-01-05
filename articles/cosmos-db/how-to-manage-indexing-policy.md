@@ -3,19 +3,25 @@ title: Gérer les stratégies d’indexation dans Azure Cosmos DB
 description: Découvrir comment gérer les stratégies d’indexation, inclure ou exclure une propriété de l’indexation et définir l’indexation à l’aide de différents Kits de développement logiciel (SDK) Azure Cosmos DB
 author: timsander1
 ms.service: cosmos-db
-ms.topic: conceptual
-ms.date: 04/28/2020
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
+ms.date: 11/02/2020
 ms.author: tisande
-ms.openlocfilehash: bdd5d986752e9d80d2967a8f5fd32491154fa236
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-python, devx-track-js, devx-track-azurecli, devx-track-csharp
+ms.openlocfilehash: cd51210a64223fab5d2d48a91bd3d0a6521a9627
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233925"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341312"
 ---
 # <a name="manage-indexing-policies-in-azure-cosmos-db"></a>Gérer les stratégies d’indexation dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Dans Azure Cosmos DB, les données sont indexées suivant les [stratégies d’indexation](index-policy.md) définies pour chaque conteneur. La stratégie d’indexation par défaut pour les conteneurs nouvellement créés applique des index de plage pour les chaînes ou les nombres. Vous pouvez remplacer cette stratégie par votre propre stratégie d’indexation personnalisée.
+
+> [!NOTE]
+> La méthode de mise à jour des stratégies d’indexation décrite dans cet article s’applique uniquement à l’API SQL (principale) de la base de données SQL Azure Cosmos. Apprenez-en davantage sur l’indexation dans [API d’Azure Cosmos DB pour MongoDB](mongodb-indexing.md) et [Indexation secondaire dans l’API Cassandra Azure Cosmos DB](cassandra-secondary-index.md).
 
 ## <a name="indexing-policy-examples"></a>Exemples de stratégie d’indexation
 
@@ -42,7 +48,7 @@ Voici quelques exemples de stratégies d’indexation au [format JSON](index-pol
     }
 ```
 
-Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet de définir manuellement les valeurs par défaut de ```kind```, ```dataType``` et ```precision```. Il n’est plus nécessaire de définir explicitement ces propriétés. Vous pouvez les omettre entièrement dans votre stratégie d’indexation (comme indiqué dans l’exemple ci-dessus).
+Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet de définir manuellement les valeurs par défaut de ```kind```, ```dataType``` et ```precision```. Il n’est plus nécessaire de définir explicitement ces propriétés. Vous devez les omettre entièrement dans votre stratégie d’indexation (comme indiqué dans l’exemple ci-dessus).
 
 ```json
     {
@@ -96,7 +102,7 @@ Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet
     }
 ```
 
-Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet de définir manuellement les valeurs par défaut de ```kind```, ```dataType``` et ```precision```. Il n’est plus nécessaire de définir explicitement ces propriétés. Vous pouvez les omettre entièrement dans votre stratégie d’indexation (comme indiqué dans l’exemple ci-dessus).
+Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet de définir manuellement les valeurs par défaut de ```kind```, ```dataType``` et ```precision```. Il n’est plus nécessaire de définir explicitement ces propriétés. Vous devez les omettre entièrement dans votre stratégie d’indexation (comme indiqué dans l’exemple ci-dessus).
 
 ```json
     {
@@ -138,7 +144,7 @@ Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet
 ```
 
 > [!NOTE]
-> Il est généralement recommandé d’utiliser une stratégie d’indexation de **refus** pour permettre à Azure Cosmos DB d’indexer de manière proactive toute nouvelle propriété qui peut être ajoutée à votre modèle.
+> Il est généralement recommandé d’utiliser une stratégie d’indexation de **refus** pour permettre à Azure Cosmos DB d’indexer de manière proactive toute nouvelle propriété qui peut être ajoutée à votre modèle de données.
 
 ### <a name="using-a-spatial-index-on-a-specific-property-path-only"></a>Utilisation d’un index spatial uniquement sur un chemin de propriété spécifique
 
@@ -172,7 +178,7 @@ Cette stratégie d’indexation est équivalente à celle ci-dessous, qui permet
 
 ## <a name="composite-indexing-policy-examples"></a>Exemples de stratégies d’indexation composite
 
-En plus d’inclure ou d’exclure des chemins pour les propriétés individuelles, vous pouvez également spécifier un index composite. Si vous souhaitez effectuer une requête qui a une `ORDER BY` clause pour plusieurs propriétés, un [index composite](index-policy.md#composite-indexes) sur ces propriétés est requis. De plus, les index composites présentent un avantage en matière de performances pour les requêtes qui ont un filtre et dont la clause ORDER BY spécifie des propriétés différentes.
+En plus d’inclure ou d’exclure des chemins pour les propriétés individuelles, vous pouvez également spécifier un index composite. Si vous souhaitez effectuer une requête qui a une `ORDER BY` clause pour plusieurs propriétés, un [index composite](index-policy.md#composite-indexes) sur ces propriétés est requis. De plus, les index composites présentent un avantage en matière de performances pour les requêtes qui ont des filtres multiples ou un filtre et une clause ORDER BY à la fois.
 
 > [!NOTE]
 > Un chemin composite a un `/?` implicite, car seule la valeur scalaire sur ce chemin est indexée. Le caractère générique `/*` n’est pas pris en charge dans les chemins composites. Vous ne devez pas spécifier `/?` ou `/*` dans un chemin composite.
@@ -309,7 +315,7 @@ Il est facultatif de spécifier l’ordre. S’il n’est pas spécifié, l’or
 
 ### <a name="excluding-all-property-paths-but-keeping-indexing-active"></a>Exclusion de tous les chemins de propriété mais maintien de l’indexation active
 
-Cette stratégie peut être utilisée dans les situations où la [fonctionnalité de durée de vie (TTL)](time-to-live.md) est active, mais aucun index secondaire n’est nécessaire (pour utiliser Azure Cosmos DB comme un magasin de clés-valeurs pur).
+Cette stratégie peut être utilisée dans les situations où la [fonctionnalité de durée de vie (TTL)](time-to-live.md) est active, mais où aucun index supplémentaire n’est nécessaire (pour utiliser Azure Cosmos DB comme magasin de clés-valeurs pur).
 
 ```json
     {
@@ -343,7 +349,7 @@ Dans Azure Cosmos DB, vous pouvez mettre à jour la stratégie d’indexation à
 Une [mise à jour de la stratégie d’indexation](index-policy.md#modifying-the-indexing-policy) déclenche une transformation d’index. La progression de cette transformation peut également être suivie à partir des SDK.
 
 > [!NOTE]
-> Lors de la mise à jour de la stratégie d’indexation, les écritures dans Azure Cosmos DB sont ininterrompues. Lors de la réindexation, les requêtes peuvent retourner des résultats partiels au fur et à mesure de la mise à jour de l’index.
+> Lors de la mise à jour de la stratégie d’indexation, les écritures dans Azure Cosmos DB sont ininterrompues. En savoir plus sur [l’indexation des transformations](index-policy.md#modifying-the-indexing-policy)
 
 ## <a name="use-the-azure-portal"></a>Utilisation du portail Azure
 
@@ -353,7 +359,7 @@ Les conteneurs Azure Cosmos stockent leur stratégie d’indexation sous la form
 
 1. Créez un compte Azure Cosmos ou sélectionnez un compte existant.
 
-1. Ouvrez le volet **Explorateur de données**, puis sélectionnez le conteneur avec lequel vous voulez travailler.
+1. Ouvrez le volet **Explorateur de données** , puis sélectionnez le conteneur avec lequel vous voulez travailler.
 
 1. Cliquez sur **Mise à l’échelle et paramètres**.
 
@@ -361,7 +367,7 @@ Les conteneurs Azure Cosmos stockent leur stratégie d’indexation sous la form
 
 1. Cliquez sur **Enregistrer** quand vous avez terminé.
 
-![Gérer l’indexation avec le portail Azure](./media/how-to-manage-indexing-policy/indexing-policy-portal.png)
+:::image type="content" source="./media/how-to-manage-indexing-policy/indexing-policy-portal.png" alt-text="Gérer l’indexation avec le Portail Azure":::
 
 ## <a name="use-the-azure-cli"></a>Utilisation de l’interface de ligne de commande Microsoft Azure
 
@@ -369,9 +375,11 @@ Pour créer un conteneur avec une stratégie d’indexation personnalisée, voir
 
 ## <a name="use-powershell"></a>Utiliser PowerShell
 
-Pour créer un conteneur avec une stratégie d’indexation personnalisée, voir [Créer un conteneur avec une stratégie d’index personnalisée à l’aide de PowerShell](manage-with-powershell.md#create-container-custom-index)
+Pour créer un conteneur avec une stratégie d’indexation personnalisée, consultez [Créer un conteneur avec une stratégie d’index personnalisée à l’aide de PowerShell](manage-with-powershell.md#create-container-custom-index).
 
-## <a name="use-the-net-sdk-v2"></a>Utiliser le SDK .NET V2
+## <a name="use-the-net-sdk"></a><a id="dotnet-sdk"></a>Utiliser le kit de développement logiciel (SDK) .NET
+
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 L’objet `DocumentCollection` du [SDK .NET v2](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/) expose une propriété `IndexingPolicy` qui vous permet de changer la valeur `IndexingMode`, et d’ajouter ou de supprimer des `IncludedPaths` et `ExcludedPaths`.
 
@@ -401,7 +409,7 @@ ResourceResponse<DocumentCollection> container = await client.ReadDocumentCollec
 long indexTransformationProgress = container.IndexTransformationProgress;
 ```
 
-## <a name="use-the-net-sdk-v3"></a>Utiliser le kit SDK .NET V3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 L’objet `ContainerProperties` du [SDK .NET v3](https://www.nuget.org/packages/Microsoft.Azure.Cosmos/) (voir [ce Guide de démarrage rapide](create-sql-api-dotnet.md) concernant son utilisation) expose une propriété `IndexingPolicy` qui vous permet de changer la valeur `IndexingMode`, et d’ajouter ou de supprimer des `IncludedPaths` et `ExcludedPaths`.
 
@@ -457,6 +465,7 @@ await client.GetDatabase("database").DefineContainer(name: "container", partitio
     .Attach()
     .CreateIfNotExistsAsync();
 ```
+---
 
 ## <a name="use-the-java-sdk"></a>Utiliser le SDK Java
 
@@ -610,7 +619,9 @@ const containerResponse = await client.database('database').container('container
 const indexTransformationProgress = replaceResponse.headers['x-ms-documentdb-collection-index-transformation-progress'];
 ```
 
-## <a name="use-the-python-sdk-v3"></a>Utiliser le kit de développement logiciel (SDK) Python V3
+## <a name="use-the-python-sdk"></a>Utiliser le SDK Python
+
+# <a name="python-sdk-v3"></a>[Python SDK V3](#tab/pythonv3)
 
 Lorsque vous utilisez le [kit de développement logiciel (SDK) Python V3](https://pypi.org/project/azure-cosmos/) (voir [ce Guide de démarrage rapide](create-sql-api-python.md) concernant son utilisation), la configuration du conteneur est gérée comme un dictionnaire. À partir de ce dictionnaire, il est possible d’accéder à la stratégie d’indexation et à tous ses attributs.
 
@@ -674,7 +685,7 @@ Mettre à jour le conteneur avec les modifications
 response = client.ReplaceContainer(containerPath, container)
 ```
 
-## <a name="use-the-python-sdk-v4"></a>Utiliser le kit de développement logiciel (SDK) Python V4
+# <a name="python-sdk-v4"></a>[Kit SDK Python v4](#tab/pythonv4)
 
 Lorsque vous utilisez le [kit de développement logiciel (SDK) Python V4](https://pypi.org/project/azure-cosmos/), la configuration du conteneur est gérée comme un dictionnaire. À partir de ce dictionnaire, il est possible d’accéder à la stratégie d’indexation et à tous ses attributs.
 
@@ -739,6 +750,14 @@ Mettre à jour le conteneur avec les modifications
 ```python
 response = database_client.replace_container(container_client, container['partitionKey'], indexingPolicy)
 ```
+
+Récupérer la progression de la transformation d’index à partir des en-têtes de réponse
+```python
+container_client.read(populate_quota_info = True,
+                      response_hook = lambda h,p: print(h['x-ms-documentdb-collection-index-transformation-progress']))
+```
+
+---
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 09/11/2019
 ms.author: spelluru
 ms.custom: include file
-ms.openlocfilehash: 6911f769b95967aac933dd9762263e7506aef4b5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6f490b6f25112ed8a10bbd865070bd07ea3ee84f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77193151"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016940"
 ---
 ## <a name="create-the-webapi-project"></a>Création du projet WebAPI
 
@@ -30,7 +30,7 @@ Pour créer le serveur principal WebAPI ASP.NET, procédez comme suit :
 >
 >Pour ce faire, lancez Visual Studio. Dans le menu **Outils**, sélectionnez **Extensions et mises à jour**. Recherchez **Gestionnaire de package NuGet** pour votre version de Visual Studio et vérifiez que vous disposez de la dernière version. Si vous ne disposez pas de la version la plus récente, désinstallez votre version actuelle et réinstallez le Gestionnaire de package NuGet.
 
-![][B4]
+![Capture d’écran de la boîte de dialogue Extensions et mises à jour avec le package Gestionnaire de package NuGet pour Visual Studio mis en évidence.][B4]
 
 > [!NOTE]
 > Assurez-vous que le [Kit de développement logiciel (SDK) Azure](https://azure.microsoft.com/downloads/) Visual Studio est installé, pour le déploiement du site web.
@@ -63,7 +63,7 @@ Pour créer le serveur principal WebAPI ASP.NET, procédez comme suit :
 
 ## <a name="authenticate-clients-to-the-webapi-backend"></a>Authentification des clients sur le serveur principal WebAPI
 
-Dans cette section, vous créez une classe de gestionnaire de messages nommée **AuthenticationTestHandler** pour le nouveau serveur principal. Cette classe est dérivée de [DelegatingHandler](https://msdn.microsoft.com/library/system.net.http.delegatinghandler.aspx) et ajoutée comme gestionnaire de messages afin de pouvoir traiter toutes les demandes entrantes dans le serveur principal.
+Dans cette section, vous créez une classe de gestionnaire de messages nommée **AuthenticationTestHandler** pour le nouveau serveur principal. Cette classe est dérivée de [DelegatingHandler](/previous-versions/visualstudio/hh193679(v=vs.118)) et ajoutée comme gestionnaire de messages afin de pouvoir traiter toutes les demandes entrantes dans le serveur principal.
 
 1. Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet **AppBackend**, puis sélectionnez **Ajouter** et **Classe**.
 2. Nommez la nouvelle classe **AuthenticationTestHandler.cs**, puis sélectionnez **Ajouter** pour générer la classe. Par souci de simplification, cette classe permet d’authentifier les utilisateurs via l’ *Authentification de base* . Votre application peut utiliser n’importe quel schéma d’authentification.
@@ -88,7 +88,7 @@ Dans cette section, vous créez une classe de gestionnaire de messages nommée *
 
    Sinon, la demande est rejetée. Cette authentification ne répond pas à une véritable approche d’authentification et d’autorisation. Il s’agit uniquement d’un exemple très simple pour ce didacticiel.
 
-   Si le message de la demande est authentifié et autorisé par `AuthenticationTestHandler`, l’utilisateur de l’authentification de base est attaché à la demande actuelle sur [HttpContext](https://msdn.microsoft.com/library/system.web.httpcontext.current.aspx). Les informations utilisateur dans HttpContext sont utilisées ultérieurement par un autre contrôleur (RegisterController) pour ajouter une [balise](https://msdn.microsoft.com/library/azure/dn530749.aspx) à la demande d’inscription aux notifications.
+   Si le message de la demande est authentifié et autorisé par `AuthenticationTestHandler`, l’utilisateur de l’authentification de base est attaché à la demande actuelle sur [HttpContext](/dotnet/api/system.web.httpcontext.current). Les informations utilisateur dans HttpContext sont utilisées ultérieurement par un autre contrôleur (RegisterController) pour ajouter une [balise](/previous-versions/azure/azure-services/dn530749(v=azure.100)) à la demande d’inscription aux notifications.
 
     ```csharp
     public class AuthenticationTestHandler : DelegatingHandler
@@ -333,7 +333,7 @@ Dans cette section, vous ajoutez un nouveau contrôleur qui montre aux appareils
 
     Ce code envoie un type de notification basé sur le paramètre `pns` du service de notification de plateforme. La valeur de `to_tag` permet de définir la balise *username* sur le message. Cette balise doit correspondre à une balise de nom d’utilisateur d’une inscription de hub de notification active. Le message de notification est extrait du corps de la demande POST et mis en forme pour le PNS cible.
 
-    Selon le service Platform Notification Service (PNS) que vos appareils pris en charge utilisent pour recevoir des notifications, ces dernières sont prises en charge dans plusieurs formats. Par exemple sur des appareils Windows, vous pouvez utiliser une [notification toast avec WNS](https://msdn.microsoft.com/library/windows/apps/br230849.aspx) qui n’est pas directement prise en charge par un autre service PNS. Dans une instance de ce type, votre serveur principal doit formater la notification dans un format pris en charge pour le service PNS des appareils que vous envisagez de prendre en charge. Utilisez ensuite l’API d’envoi appropriée sur la [classe NotificationHubClient](https://msdn.microsoft.com/library/azure/microsoft.azure.notificationhubs.notificationhubclient_methods.aspx).
+    Selon le service Platform Notification Service (PNS) que vos appareils pris en charge utilisent pour recevoir des notifications, ces dernières sont prises en charge dans plusieurs formats. Par exemple sur des appareils Windows, vous pouvez utiliser une [notification toast avec WNS](/uwp/schemas/tiles/toastschema/schema-root) qui n’est pas directement prise en charge par un autre service PNS. Dans une instance de ce type, votre serveur principal doit formater la notification dans un format pris en charge pour le service PNS des appareils que vous envisagez de prendre en charge. Utilisez ensuite l’API d’envoi appropriée sur la [classe NotificationHubClient](/dotnet/api/microsoft.azure.notificationhubs.notificationhubclient).
 
     ```csharp
     public async Task<HttpResponseMessage> Post(string pns, [FromBody]string message, string to_tag)

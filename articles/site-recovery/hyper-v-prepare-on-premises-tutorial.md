@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 11/12/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: b36e4688ebd6e929a56869a6bb191d98b2f1f432
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6f24a259d2d71aa6599f6dd417d5e9fc99734e99
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79224026"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86135660"
 ---
 # <a name="prepare-on-premises-hyper-v-servers-for-disaster-recovery-to-azure"></a>Préparer des serveurs Hyper-V locaux à la récupération d’urgence vers Azure
 
@@ -56,12 +56,12 @@ Si les hôtes Hyper-V sont gérés par VMM, vous devez préparer le serveur VMM 
 
 ### <a name="prepare-vmm-for-network-mapping"></a>Préparer VMM pour le mappage réseau
 
-Si vous utilisez VMM, le [mappage réseau](site-recovery-network-mapping.md) effectue un mappage entre les réseaux de machines virtuelles VMM locales et les réseaux virtuels Azure. Le mappage garantit que les machines virtuelles Azure soient connectées au réseau adéquat lorsqu’elles sont créées après le basculement.
+Si vous utilisez VMM, le [mappage réseau](./hyper-v-vmm-network-mapping.md) effectue un mappage entre les réseaux de machines virtuelles VMM locales et les réseaux virtuels Azure. Le mappage garantit que les machines virtuelles Azure soient connectées au réseau adéquat lorsqu’elles sont créées après le basculement.
 
 Préparez VMM pour le mappage réseau comme suit :
 
-1. Vérifiez que vous disposez d’un [réseau logique VMM](https://docs.microsoft.com/system-center/vmm/network-logical) qui est associé au cloud dans lequel se trouvent les hôtes Hyper-V.
-2. Assurez-vous d’avoir un [réseau de machines virtuelles](https://docs.microsoft.com/system-center/vmm/network-virtual) liées au réseau logique.
+1. Vérifiez que vous disposez d’un [réseau logique VMM](/system-center/vmm/network-logical) qui est associé au cloud dans lequel se trouvent les hôtes Hyper-V.
+2. Assurez-vous d’avoir un [réseau de machines virtuelles](/system-center/vmm/network-virtual) liées au réseau logique.
 3. Dans VMM, connectez les machines virtuelles au réseau de machines virtuelles.
 
 ## <a name="verify-internet-access"></a>Vérifiez l’accès à Internet
@@ -94,5 +94,5 @@ Après le basculement, vous pouvez accéder à des machines virtuelles Azure à 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Configurer la récupération d’urgence dans Azure pour les machines virtuelles Hyper-V](tutorial-hyper-v-to-azure.md)
-> [Configurer la récupération d’urgence dans Azure pour les machines virtuelles Hyper-V dans les clouds VMM](tutorial-hyper-v-vmm-to-azure.md)
+> [Configurer la récupération d’urgence dans Azure pour les machines virtuelles Hyper-V](./hyper-v-azure-tutorial.md)
+> [Configurer la récupération d’urgence dans Azure pour les machines virtuelles Hyper-V dans les clouds VMM](./hyper-v-vmm-azure-tutorial.md)

@@ -8,21 +8,20 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
-ms.date: 04/24/2020
+ms.date: 05/26/2020
 ms.author: swmachan
-ms.custom: seodec18
-ms.openlocfilehash: 1a26b00a95b1b71993385e816d06d6686f89a5a1
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: a9050b85c974a3c04ca717e8fe3d5188c1bf7a40
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599357"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88244310"
 ---
 # <a name="how-to-sign-up-for-translator"></a>Comment s’inscrire pour le Traducteur
 
 ## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure.
 
-- Vous n’avez pas de compte ? Vous pouvez créer un [compte gratuit](https://azure.microsoft.com/free/) pour le tester sans frais.
+- Vous n’avez pas de compte ? Vous pouvez créer un [compte gratuit](https://azure.microsoft.com/free/cognitive-services) pour le tester sans frais.
 - Vous disposez déjà d’un compte ? [Connexion](https://ms.portal.azure.com/)
 
 ## <a name="create-a-subscription-for-translator"></a>Créer un abonnement pour le Traducteur

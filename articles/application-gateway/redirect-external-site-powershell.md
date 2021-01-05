@@ -5,15 +5,15 @@ description: Découvrez comment créer une passerelle d’application qui rediri
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/14/2019
+ms.topic: how-to
+ms.date: 09/24/2020
 ms.author: victorh
-ms.openlocfilehash: 6596cdb2df0a916c49086f80466db60b02a81467
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5b2bb50fc2ad8084d79097fe7acb449821d0a4da
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74047751"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91331061"
 ---
 # <a name="create-an-application-gateway-with-external-redirection-using-azure-powershell"></a>Créer une passerelle d’application avec redirection externe à l’aide d’Azure PowerShell
 
@@ -21,10 +21,9 @@ Vous pouvez utiliser Azure PowerShell pour configurer une [redirection du trafic
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer un écouteur et une règle de redirection
-> * Créer une passerelle Application Gateway
+* Configurer le réseau
+* Créer un écouteur et une règle de redirection
+* Créer une passerelle Application Gateway
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -157,9 +156,4 @@ Le site *bing.com* devrait s’afficher dans votre navigateur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans cet article, vous avez appris à effectuer les opérations suivantes :
-
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer un écouteur et une règle de redirection
-> * Créer une passerelle Application Gateway
+- [Créer une passerelle d’application avec redirection interne à l’aide d’Azure PowerShell](redirect-internal-site-powershell.md)

@@ -4,15 +4,15 @@ description: Découvrez comment vous connecter à un serveur Azure Analysis Serv
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 03/30/2020
+ms.date: 12/01/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 6205c4189abfefc2ee9c4a273ebfd6773ea609b6
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: ed0f3d379ca961c610958c073c27c6fc9583252b
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411355"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500918"
 ---
 # <a name="connect-with-power-bi"></a>Se connecter avec Power BI
 
@@ -37,6 +37,9 @@ Une fois que vous avez créé un serveur dans Azure avant d’y déployer un mod
 
 5. Entrez vos informations d’identification si elles vous sont demandées. 
 
+   > [!NOTE]
+   > Les comptes à code secret à usage unique ne sont pas pris en charge. 
+
 6. Dans le **Navigateur**, développez le serveur, puis sélectionnez le modèle ou la perspective auquel vous souhaitez vous connecter, puis cliquez sur **Se connecter**. Cliquez sur un modèle ou une perspective pour afficher tous les objets de cette vue.
 
     Le modèle s’ouvre dans Power BI Desktop avec un rapport vierge dans l’affichage Rapport. La liste Champs affiche tous les objets du modèle qui ne sont pas cachés. L’état de la connexion se trouve dans le coin inférieur droit.
@@ -48,5 +51,4 @@ Une fois que vous avez créé un serveur dans Azure avant d’y déployer un mod
 
 ## <a name="see-also"></a>Voir aussi
 [Connect to an Azure Analysis Services server](analysis-services-connect.md)  (Se connecter à un serveur Azure Analysis Services)  
-[Fournisseurs de données pour la connexion à Azure Analysis Services](analysis-services-data-providers.md)
-
+[Fournisseurs de données pour la connexion à Azure Analysis Services](/analysis-services/client-libraries?view=azure-analysis-services-current&preserve-view=true)

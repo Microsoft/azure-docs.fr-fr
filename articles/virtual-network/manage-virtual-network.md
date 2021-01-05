@@ -1,23 +1,23 @@
 ---
 title: Créer, modifier ou supprimer un réseau virtuel Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment créer, modifier ou supprimer un réseau virtuel dans Azure.
+description: Créez et supprimez un réseau virtuel et modifiez des paramètres, comme les serveurs DNS et les espaces d’adressage IP, pour un réseau virtuel existant.
 services: virtual-network
 documentationcenter: na
 author: KumudD
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/10/2019
 ms.author: kumud
-ms.openlocfilehash: 643f326952f72f952aa946079e56f1fb56373c9f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5581a4c43f0b78dc8c14c44bfb1ded371a925fd0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82182869"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88706028"
 ---
 # <a name="create-change-or-delete-a-virtual-network"></a>Créer, modifier ou supprimer un réseau virtuel
 
@@ -49,9 +49,8 @@ Avant de suivre les étapes décrites dans les sections de cet article, accompli
 
      Si vous ne pouvez définir qu’une seule plage d’adresses durant la création du réseau virtuel dans le portail, vous pouvez en ajouter d’autres à l’espace d’adressage une fois le réseau virtuel créé. Pour savoir comment ajouter une plage d’adresses à un réseau virtuel existant, consultez [Ajouter ou supprimer une plage d’adresses](#add-or-remove-an-address-range).
 
-     >[!WARNING]
-     >Si un réseau virtuel comporte des plages d’adresses qui chevauchent celles d’un autre réseau virtuel ou local, il est impossible de connecter les deux réseaux. Avant de définir une plage d’adresses, demandez-vous si vous souhaiteriez peut-être connecter le réseau virtuel à d’autres réseaux virtuels ou locaux par la suite.
-     >
+     > [!WARNING]
+     > Si un réseau virtuel comporte des plages d’adresses qui chevauchent celles d’un autre réseau virtuel ou local, il est impossible de connecter les deux réseaux. Avant de définir une plage d’adresses, demandez-vous si vous souhaiteriez peut-être connecter le réseau virtuel à d’autres réseaux virtuels ou locaux par la suite. Microsoft recommande de configurer des plages d’adresses de réseau virtuel avec un espace d’adressage privé ou public appartenant à votre organisation.
      >
 
      - **Nom du sous-réseau** : Le nom du sous-réseau doit être unique au sein du réseau virtuel. Vous ne pouvez pas modifier le nom du sous-réseau une fois celui-ci créé. Lorsque vous créez un réseau virtuel, le portail exige que vous définissiez un sous-réseau, même si un réseau virtuel ne doit pas obligatoirement comprendre des sous-réseaux. Dans le portail, vous ne pouvez définir qu’un seul sous-réseau lorsque vous créez un réseau virtuel. Vous pouvez ajouter des sous-réseaux au réseau virtuel une fois celui-ci créé. Pour ajouter un sous-réseau à un réseau virtuel, consultez [Gérer des sous-réseaux](virtual-network-manage-subnet.md). Vous pouvez créer un réseau virtuel comprenant plusieurs sous-réseaux en utilisant PowerShell ou Azure CLI.

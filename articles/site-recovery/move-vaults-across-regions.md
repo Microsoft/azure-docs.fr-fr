@@ -2,18 +2,18 @@
 title: Déplacer un coffre Azure Site Recovery vers une autre région
 description: Explique comment déplacer un coffre Recovery Services (Azure Site Recovery) vers une autre région Azure
 services: site-recovery
-author: rajani-janaki-ram
+author: Sharmistha-Rai
 ms.service: site-recovery
 ms.topic: tutorial
 ms.date: 07/31/2019
-ms.author: rajanaki
+ms.author: sharrai
 ms.custom: MVC
-ms.openlocfilehash: 32dff9a165125ab1949560ce36438ae266cd3036
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a8cb5ec782b5932c13e321b2ba2d6513597fef52
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74090308"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87422638"
 ---
 # <a name="move-a-recovery-services-vault-and-azure-site-recovery-configuration-to-another-azure-region"></a>Déplacer un coffre Recovery Services et une configuration Azure Site Recovery vers une autre région Azure
 

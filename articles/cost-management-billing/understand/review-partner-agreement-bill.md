@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: judupont
 tags: billing
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/13/2020
+ms.subservice: billing
+ms.topic: tutorial
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 61d47c2f308555265ccabad4d7456026ee9a639c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 9e5ecc67fe86afa15c66d175f0705818154588bf
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78299310"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88684352"
 ---
 # <a name="tutorial-review-your-microsoft-partner-agreement-invoice"></a>Tutoriel : Passer en revue votre facture de Contrat Partenaire Microsoft
 

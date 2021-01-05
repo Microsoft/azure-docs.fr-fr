@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 07/31/2019
 ms.author: apimpm
-ms.openlocfilehash: 6054c595bca26dc2a0432c53369a60a61e3efde0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0832c975ecb410b97a24c975f9fc0f4799120abd
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76841861"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93145512"
 ---
 # <a name="using-azure-api-management-service-with-an-internal-virtual-network"></a>Utiliser le service Gestion des API Azure avec un réseau virtuel interne
 Avec les réseaux virtuels Azure, la Gestion des API Azure peut gérer des API inaccessibles sur Internet. Plusieurs technologies VPN sont disponibles pour établir la connexion. La Gestion des API peut être déployée selon deux modes principaux à l’intérieur d’un réseau virtuel :
@@ -51,7 +51,7 @@ Pour effectuer les étapes décrites dans cet article, vous devez disposer des �
 + Lorsqu’un service Gestion des API est déployé dans un réseau virtuel, une [liste de ports](./api-management-using-with-vnet.md#required-ports) est utilisée et ces derniers doivent être ouverts. 
 
 ## <a name="creating-an-api-management-in-an-internal-virtual-network"></a><a name="enable-vpn"> </a>Créer une Gestion des API dans un réseau virtuel interne
-Le service Gestion des API dans un réseau virtuel interne est hébergé derrière un [équilibreur de charge interne (classique)](https://docs.microsoft.com/azure/load-balancer/load-balancer-get-started-ilb-classic-cloud). Il s'agit là de la seule option disponible et elle ne peut pas être modifiée.
+Le service Gestion des API dans un réseau virtuel interne est hébergé derrière un [équilibreur de charge interne (classique)](/previous-versions/azure/load-balancer/load-balancer-get-started-ilb-classic-cloud). Il s'agit là de la seule option disponible et elle ne peut pas être modifiée.
 
 ### <a name="enable-a-virtual-network-connection-using-the-azure-portal"></a>Activer une connexion de réseau virtuel à l’aide du portail Azure
 
@@ -70,7 +70,9 @@ Une fois le déploiement réussi, l'adresse IP virtuelle **privée** et l'adress
 > [!NOTE]
 > La Console de test disponible sur le portail Azure ne fonctionnera pas pour le service de réseau VNET **Interne** déployé, car l’URL de la passerelle n’est pas inscrite sur le DNS Public. À la place, vous devez utiliser la Console de test fournie sur le **Portail des développeurs**.
 
-### <a name="enable-a-virtual-network-connection-by-using-powershell-cmdlets"></a>Activer une connexion de réseau virtuel à l’aide des applets de commande PowerShell
+### <a name="deploy-api-management-into-virtual-network"></a><a name="deploy-apim-internal-vnet"> </a>Déployer Gestion des API dans Réseau virtuel
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-api-management-create-with-internal-vnet%2Fazuredeploy.json)
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -81,7 +83,7 @@ Vous pouvez également activer une connectivité de réseau virtuel à l’aide 
 * Mettre à jour le déploiement existant d'un service Gestion des API au sein d’un réseau virtuel : utilisez la cmdlet [Update-AzApiManagementRegion](/powershell/module/az.apimanagement/update-azapimanagementregion) pour déplacer un service Gestion des API existant au sein d’un réseau virtuel et le configurer de sorte qu’il utilise le type de réseau virtuel interne.
 
 ## <a name="dns-configuration"></a><a name="apim-dns-configuration"></a>Configuration DNS
-Lorsque la Gestion des API se trouve en mode réseau virtuel externe, le DNS est géré par Azure. En mode réseau virtuel interne, vous devez gérer votre propre routage.
+Lorsque la Gestion des API se trouve en mode réseau virtuel externe, le DNS est géré par Azure. En mode réseau virtuel interne, vous devez gérer votre propre serveur DNS.
 
 > [!NOTE]
 > Le service Gestion des API n’écoute pas les demandes provenant des adresses IP. Il répond uniquement aux demandes pour le nom d’hôte configuré sur ses points de terminaison de service. Ces points de terminaison incluent une passerelle, le portail Azure, le portail des développeurs, un point de terminaison de gestion directe et Git.
@@ -143,5 +145,4 @@ Pour en savoir plus, consultez les articles suivants :
 [Create API Management service]: get-started-create-service-instance.md
 [Common network configuration problems]: api-management-using-with-vnet.md#network-configuration-issues
 
-[ServiceTags]: ../virtual-network/security-overview.md#service-tags
-
+[ServiceTags]: ../virtual-network/network-security-groups-overview.md#service-tags

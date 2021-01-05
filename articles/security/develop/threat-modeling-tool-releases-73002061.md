@@ -1,17 +1,17 @@
 ---
 title: Disponibilité générale de Microsoft Threat Modeling Tool version du 02/11/2020 – Azure
-description: Compilation des notes de publication pour l’outil de modélisation des menaces
+description: Compilation des notes de publication pour l’outil de modélisation des menaces version 7.3.00206.1.
 author: jegeib
 ms.author: jegeib
 ms.service: security
 ms.topic: article
 ms.date: 02/25/2020
-ms.openlocfilehash: 354707aec90375b4bf25aea6e1baa743d85f20aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9f9b162460cd2e7a624c1ad3f992011487d1b795
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77624532"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94516932"
 ---
 # <a name="threat-modeling-tool-update-release-73002061---02112020"></a>Version mise à jour de Threat Modeling Tool 7.3.00206.1 – 02/11/2020
 
@@ -25,9 +25,11 @@ La version 7.3.00206.1 de Microsoft Threat Modeling Tool (TMT) a été publiée
 
 Certains clients ont signalé la réception du message d’erreur suivant lors de l’ouverture des fichiers créés dans « Threat Modeling Tool 2016 » ou des modèles personnalisés :
 
-    System.InvalidOperationException: Invalid Priority value. Accepted values are [0..4] and 'High', 'Medium', 'Low' at ThreatModeling.Model.Threat.get_Priority()
-    
-    System.ArgumentOutOfRangeException: Accepted values are 'High', 'Medium', and 'Low' Parameter name: value Actual value was 5.6. at ThreatModeling.Model.Threat.set_Priority(String value)
+```output
+System.InvalidOperationException: Invalid Priority value. Accepted values are [0..4] and 'High', 'Medium', 'Low' at ThreatModeling.Model.Threat.get_Priority()
+
+System.ArgumentOutOfRangeException: Accepted values are 'High', 'Medium', and 'Low' Parameter name: value Actual value was 5.6. at ThreatModeling.Model.Threat.set_Priority(String value)
+```
 
 Ce problème a été résolu dans cette version.
 
@@ -42,7 +44,7 @@ Ce problème a été résolu dans cette version.
 
 ## <a name="documentation-and-feedback"></a>Documentation et commentaires
 
-- La documentation de Threat Modeling Tool se trouve sur [docs.microsoft.com](https://docs.microsoft.com/azure/security/azure-security-threat-modeling-tool) et contient des informations [sur l’utilisation de l’outil](https://docs.microsoft.com/azure/security/azure-security-threat-modeling-tool-getting-started).
+- La documentation de Threat Modeling Tool se trouve sur [docs.microsoft.com](./threat-modeling-tool.md) et contient des informations [sur l’utilisation de l’outil](./threat-modeling-tool-getting-started.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

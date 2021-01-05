@@ -4,17 +4,20 @@ description: Découvrez comment importer ou ingérer des données dans Azure Cos
 author: ealsur
 ms.author: maquaran
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: tutorial
-ms.date: 11/04/2019
+ms.date: 09/21/2020
 ms.reviewer: sngun
-ms.openlocfilehash: 79771e082a4a6ffae15f33f636b0300e93bcdaba
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 6cf0e77657175449b126eeca02a12c164478e568
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77587564"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96548067"
 ---
 # <a name="bulk-import-data-to-azure-cosmos-db-sql-api-account-by-using-the-net-sdk"></a>Importer des données en bloc dans un compte d’API SQL Azure Cosmos DB à l’aide du kit SDK .NET
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Ce tutoriel vous montre comment créer une application console .NET qui optimise le débit approvisionné (RU/s) requis pour importer des données dans Azure Cosmos DB. Dans cet article, vous allez lire des données à partir d’un exemple de source de données et les importer dans un conteneur Azure Cosmos.
 Ce tutoriel utilise la [Version 3.0+](https://www.nuget.org/packages/Microsoft.Azure.Cosmos) du kit de développement logiciel (SDK) .NET Azure Cosmos DB, qui peut être ciblé sur le .NET Framework ou .NET Core.
@@ -85,7 +88,7 @@ L’exemple d’application doit s’authentifier auprès de votre compte Azure 
 1.  Accédez à votre compte Azure Cosmos.
 1.  Ouvrez le volet **Clés** et copiez l’**URI** et la **CLÉ PRIMAIRE** de votre compte.
 
-Si vous utilisez l’émulateur Azure Cosmos DB, obtenez les [informations d’identification à partir de cet article](local-emulator.md#authenticating-requests).
+Si vous utilisez l’émulateur Azure Cosmos DB, obtenez les [informations d’identification à partir de cet article](local-emulator.md#authenticate-requests).
 
 ## <a name="step-5-initialize-the-cosmosclient-object-with-bulk-execution-support"></a>Étape 5 : Initialiser l’objet CosmosClient avec prise en charge de l’exécution en bloc
 
@@ -172,7 +175,7 @@ Pour exécuter l’exemple, vous pouvez tout simplement utiliser la commande `do
 
 Si vous n’avez pas le temps de suivre les étapes de ce didacticiel, ou que vous voulez simplement télécharger les exemples de code, vous pouvez les obtenir à partir de [GitHub](https://github.com/Azure-Samples/cosmos-dotnet-bulk-import-throughput-optimizer).
 
-Après avoir cloné le projet, assurez-vous de mettre à jour les informations d’identification souhaitées dans [Program.cs](https://github.com/Azure-Samples/cosmos-dotnet-bulk-import-throughput-optimizer/blob/master/src/Program.cs#L25).
+Après avoir cloné le projet, assurez-vous de mettre à jour les informations d’identification souhaitées dans [Program.cs](https://github.com/Azure-Samples/cosmos-dotnet-bulk-import-throughput-optimizer/blob/main/src/Program.cs#L25).
 
 Pour exécuter l'exemple, vous utilisez le répertoire du référentiel et `dotnet` :
 

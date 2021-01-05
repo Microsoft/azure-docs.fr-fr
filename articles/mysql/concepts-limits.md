@@ -1,161 +1,35 @@
 ---
 title: Limitations - Azure Database pour MySQL
 description: Cet article décrit les limitations dans Azure Database pour MySQL, telles que le nombre de connexions et les options du moteur de stockage.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 4/1/2020
-ms.openlocfilehash: 6ca09ab0578fb88e443d6e9e1f920c22457eb042
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/1/2020
+ms.openlocfilehash: b4f828c675df9625d6d4889dbc31bbc4b9f887ed
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80548469"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97386712"
 ---
 # <a name="limitations-in-azure-database-for-mysql"></a>Limitations dans Azure Database pour MySQL
 Les sections suivantes abordent la capacité, la prise en charge du moteur de stockage, la prise en charge des privilèges, la prise en charge des instructions de manipulation des données et les limites fonctionnelles du service de base de données. Vous pouvez aussi consulter les [limitations générales](https://dev.mysql.com/doc/mysql-reslimits-excerpt/5.6/en/limits.html) qui sont applicables au moteur de base de données MySQL.
 
 ## <a name="server-parameters"></a>Paramètres de serveur
 
-Les valeurs minimales et maximales de plusieurs paramètres de serveur populaires sont déterminées par le niveau tarifaire et les vCores. Reportez-vous aux tableaux ci-dessous pour connaître les limites.
-
-### <a name="max_connections"></a>max_connections
-
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|50|10|50|
-|De base|2|100|10|100|
-|Usage général|2|300|10|600|
-|Usage général|4|625|10|1250|
-|Usage général|8|1250|10|2 500|
-|Usage général|16|2 500|10|5 000|
-|Usage général|32|5 000|10|10000|
-|Usage général|64|10000|10|20000|
-|Mémoire optimisée|2|600|10|800|
-|Mémoire optimisée|4|1250|10|2 500|
-|Mémoire optimisée|8|2 500|10|5 000|
-|Mémoire optimisée|16|5 000|10|10000|
-|Mémoire optimisée|32|10000|10|20000|
-
-Lorsque la limite du nombre de connexions est dépassée, vous pouvez recevoir l’erreur suivante :
-> ERREUR 1040 (08004) : Trop de connexions
-
-> [!IMPORTANT]
-> Pour une expérience optimale, nous vous recommandons d’utiliser un regroupement de connexions comme ProxySQL pour gérer efficacement les connexions.
-
-La création de connexions clientes à MySQL prend du temps et, une fois établies, ces connexions occupent des ressources de base de données, même lorsqu’elles sont inactives. La plupart des applications requièrent de nombreuses connexions à courte durée, ce qui aggrave la situation. Par conséquent, il y a moins de ressources disponibles pour votre charge de travail réelle; ce qui entraîne une diminution des performances. Un regroupement de connexions qui réduit les connexions inactives et réutilise les connexions existantes permet d’éviter cela. Pour en savoir plus sur la configuration de ProxySQL, consultez notre [billet de blog](https://techcommunity.microsoft.com/t5/azure-database-for-mysql/load-balance-read-replicas-using-proxysql-in-azure-database-for/ba-p/880042).
-
-### <a name="query_cache_size"></a>query_cache_size
-
-Le cache des requêtes est désactivé par défaut. Pour activer le cache des requêtes, configurez le paramètre `query_cache_type`. 
-
-Consultez la [documentation MySQL](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_query_cache_size) pour en savoir plus sur ce paramètre.
-
 > [!NOTE]
-> Le cache des requêtes est déconseillé à partir de MySQL 5.7.20 et a été supprimé de MySQL 8.0
+> Si vous recherchez des valeurs minimales/maximales pour des paramètres de serveur comme `max_connections` et `innodb_buffer_pool_size`, ces informations ont été déplacées vers l’article **[Paramètres du serveur](./concepts-server-parameters.md)** .
 
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|Non configurable dans le niveau de base|N/A|N/A|
-|De base|2|Non configurable dans le niveau de base|N/A|N/A|
-|Usage général|2|0|0|16777216|
-|Usage général|4|0|0|33554432|
-|Usage général|8|0|0|67108864|
-|Usage général|16|0|0|134217728|
-|Usage général|32|0|0|134217728|
-|Usage général|64|0|0|134217728|
-|Mémoire optimisée|2|0|0|33554432|
-|Mémoire optimisée|4|0|0|67108864|
-|Mémoire optimisée|8|0|0|134217728|
-|Mémoire optimisée|16|0|0|134217728|
-|Mémoire optimisée|32|0|0|134217728|
+Azure Database pour MySQL prend en charge le réglage des valeurs des paramètres de serveur. Les valeurs minimale et maximale de certains paramètres (par exemple, `max_connections`, `join_buffer_size`, `query_cache_size`) sont déterminées par le niveau tarifaire et les vCores du serveur. Pour plus d’informations sur ces limites, consultez [Paramètres du serveur](./concepts-server-parameters.md).
 
-### <a name="sort_buffer_size"></a>sort_buffer_size
+Lors du déploiement initial, un serveur Azure pour MySQL contient des tableaux système pour les informations de fuseau horaire, mais ces tableaux ne sont pas remplis. Les tables de fuseaux horaires peuvent être remplies en appelant la procédure stockée `mysql.az_load_timezone` à partir d’un outil tel que la ligne de commande MySQL ou MySQL Workbench. Pour savoir comment appeler la procédure stockée et définir les fuseaux horaires au niveau global ou au niveau de la session, consultez les articles relatifs au [Portail Azure](howto-server-parameters.md#working-with-the-time-zone-parameter) ou à [Azure CLI](howto-configure-server-parameters-using-cli.md#working-with-the-time-zone-parameter).
 
-Consultez la [documentation MySQL](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_sort_buffer_size) pour en savoir plus sur ce paramètre.
+Les plug-ins de mot de passe tels que « validate_password » et « caching_sha2_password » ne sont pas pris en charge par le service.
 
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|Non configurable dans le niveau de base|N/A|N/A|
-|De base|2|Non configurable dans le niveau de base|N/A|N/A|
-|Usage général|2|524 288|32 768|4 194 304|
-|Usage général|4|524 288|32 768|8388608|
-|Usage général|8|524 288|32 768|16777216|
-|Usage général|16|524 288|32 768|33554432|
-|Usage général|32|524 288|32 768|33554432|
-|Usage général|64|524 288|32 768|33554432|
-|Mémoire optimisée|2|524 288|32 768|8388608|
-|Mémoire optimisée|4|524 288|32 768|16777216|
-|Mémoire optimisée|8|524 288|32 768|33554432|
-|Mémoire optimisée|16|524 288|32 768|33554432|
-|Mémoire optimisée|32|524 288|32 768|33554432|
+## <a name="storage-engines"></a>Moteurs de stockage
 
-### <a name="join_buffer_size"></a>join_buffer_size
-
-Consultez la [documentation MySQL](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_join_buffer_size) pour en savoir plus sur ce paramètre.
-
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|Non configurable dans le niveau de base|N/A|N/A|
-|De base|2|Non configurable dans le niveau de base|N/A|N/A|
-|Usage général|2|262 144|128|268435455|
-|Usage général|4|262 144|128|536870912|
-|Usage général|8|262 144|128|1073741824|
-|Usage général|16|262 144|128|2147483648|
-|Usage général|32|262 144|128|4294967295|
-|Usage général|64|262 144|128|4294967295|
-|Mémoire optimisée|2|262 144|128|536870912|
-|Mémoire optimisée|4|262 144|128|1073741824|
-|Mémoire optimisée|8|262 144|128|2147483648|
-|Mémoire optimisée|16|262 144|128|4294967295|
-|Mémoire optimisée|32|262 144|128|4294967295|
-
-### <a name="max_heap_table_size"></a>max_heap_table_size
-
-Consultez la [documentation MySQL](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_heap_table_size) pour en savoir plus sur ce paramètre.
-
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|Non configurable dans le niveau de base|N/A|N/A|
-|De base|2|Non configurable dans le niveau de base|N/A|N/A|
-|Usage général|2|16777216|16384|268435455|
-|Usage général|4|16777216|16384|536870912|
-|Usage général|8|16777216|16384|1073741824|
-|Usage général|16|16777216|16384|2147483648|
-|Usage général|32|16777216|16384|4294967295|
-|Usage général|64|16777216|16384|4294967295|
-|Mémoire optimisée|2|16777216|16384|536870912|
-|Mémoire optimisée|4|16777216|16384|1073741824|
-|Mémoire optimisée|8|16777216|16384|2147483648|
-|Mémoire optimisée|16|16777216|16384|4294967295|
-|Mémoire optimisée|32|16777216|16384|4294967295|
-
-### <a name="tmp_table_size"></a>tmp_table_size
-
-Consultez la [documentation MySQL](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_tmp_table_size) pour en savoir plus sur ce paramètre.
-
-|**Niveau tarifaire**|**vCore(s)**|**Valeur par défaut**|**Valeur minimale**|**Valeur maximale**|
-|---|---|---|---|---|
-|De base|1|Non configurable dans le niveau de base|N/A|N/A|
-|De base|2|Non configurable dans le niveau de base|N/A|N/A|
-|Usage général|2|16777216|1 024|67108864|
-|Usage général|4|16777216|1 024|134217728|
-|Usage général|8|16777216|1 024|268435456|
-|Usage général|16|16777216|1 024|536870912|
-|Usage général|32|16777216|1 024|1073741824|
-|Usage général|64|16777216|1 024|1073741824|
-|Mémoire optimisée|2|16777216|1 024|134217728|
-|Mémoire optimisée|4|16777216|1 024|268435456|
-|Mémoire optimisée|8|16777216|1 024|536870912|
-|Mémoire optimisée|16|16777216|1 024|1073741824|
-|Mémoire optimisée|32|16777216|1 024|1073741824|
-
-### <a name="time_zone"></a>time_zone
-
-Les tables de fuseaux horaires peuvent être remplies en appelant la procédure stockée `mysql.az_load_timezone` à partir d’un outil tel que la ligne de commande MySQL ou MySQL Workbench. Pour savoir comment appeler la procédure stockée et définir les fuseaux horaires au niveau global ou au niveau de la session, consultez les articles relatifs au [Portail Azure](howto-server-parameters.md#working-with-the-time-zone-parameter) ou à [Azure CLI](howto-configure-server-parameters-using-cli.md#working-with-the-time-zone-parameter).
-
-## <a name="storage-engine-support"></a>Prise en charge du moteur de stockage
+MySQL prend en charge de nombreux moteurs de stockage. Sur le Serveur flexible Azure Database pour MySQL, les moteurs de stockage suivants sont pris en charge ou ne le sont pas :
 
 ### <a name="supported"></a>Prise en charge
 - [InnoDB](https://dev.mysql.com/doc/refman/5.7/en/innodb-introduction.html)
@@ -167,20 +41,24 @@ Les tables de fuseaux horaires peuvent être remplies en appelant la procédure 
 - [ARCHIVE](https://dev.mysql.com/doc/refman/5.7/en/archive-storage-engine.html)
 - [FEDERATED](https://dev.mysql.com/doc/refman/5.7/en/federated-storage-engine.html)
 
-## <a name="privilege-support"></a>Prise en charge des privilèges
+## <a name="privileges--data-manipulation-support"></a>Prise en charge des privilèges et de la manipulation des données
+
+De nombreux paramètres de serveur peuvent dégrader de façon inattendue les performances du serveur, ou nier les propriétés ACID du serveur MySQL. Afin de préserver l’intégrité du service et le contrat SLA au niveau du produit, ce service n’expose pas plusieurs rôles. 
+
+Le service MySQL n’autorise pas l’accès direct au système de fichiers sous-jacent. Certaines commandes de manipulation de données ne sont pas prises en charge. 
 
 ### <a name="unsupported"></a>Non pris en charge
-- Rôle d’administrateur de base de données : plusieurs paramètres de serveur peuvent dégrader de façon inattendue les performances du serveur ou nier les propriétés ACID du système de gestion de base de données. Par conséquent, pour préserver l’intégrité du service et le contrat SLA au niveau du produit, ce service n’expose pas le rôle d’administrateur de bases de données. Le compte d’utilisateur par défaut, qui est créé en même temps qu’une instance de base de données, permet à l’utilisateur d’exécuter la plupart des instructions DDL et DML dans l’instance de base de données gérée. 
-- Privilège de superutilisateur : de la même façon, les [privilèges de superutilisateur](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_super) sont eux aussi limités.
-- DEFINER : requiert des privilèges de superutilisateur pour créer et est limité. Si vous importez des données à l'aide d'une sauvegarde, supprimez les commandes `CREATE DEFINER` manuellement ou à l'aide de la commande `--skip-definer` lors de l'exécution de mysqldump.
 
-## <a name="data-manipulation-statement-support"></a>Prise en charge des instructions de manipulation des données
+Les éléments suivants ne sont pas pris en charge :
+- Rôle d’administrateur de base de données : Restreint. Sinon, vous pouvez utiliser le rôle d’utilisateur Administrateur (généré lors de la création d’un serveur) qui vous permet d’exécuter la plupart des instructions DDL et DML. 
+- Privilège de superutilisateur : de la même façon, le [privilège de superutilisateur](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_super) est limité.
+- DEFINER : requiert des privilèges de superutilisateur pour créer et est limité. Si vous importez des données à l'aide d'une sauvegarde, supprimez les commandes `CREATE DEFINER` manuellement ou à l'aide de la commande `--skip-definer` lors de l'exécution de mysqldump.
+- Bases de données système : La [base de données système mysql](https://dev.mysql.com/doc/refman/5.7/en/system-schema.html) est en lecture seule ; elle est utilisée pour prendre en charge diverses fonctionnalités PaaS. Vous ne pouvez pas apporter de modifications à la base de données système `mysql`.
+- `SELECT ... INTO OUTFILE`: Pas de prise en charge dans le service.
+- `LOAD_FILE(file_name)`: Pas de prise en charge dans le service.
 
 ### <a name="supported"></a>Prise en charge
 - `LOAD DATA INFILE` est prise en charge, mais le paramètre `[LOCAL]` doit être spécifié et dirigé vers un chemin d'accès UNC (stockage Azure monté via SMB).
-
-### <a name="unsupported"></a>Non pris en charge
-- `SELECT ... INTO OUTFILE`
 
 ## <a name="functional-limitations"></a>Limitations fonctionnelles
 

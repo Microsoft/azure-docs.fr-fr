@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 01/22/2020
+ms.date: 09/10/2020
 ms.author: victorh
-ms.openlocfilehash: 89c6700d5df3bcef1332121c3cf7d8f720fe054c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 69890e2d846a63a70c1b7459b1df13ce5e891289
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76315029"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94659469"
 ---
 # <a name="azure-firewall-logs-and-metrics"></a>Journaux et métriques du pare-feu Azure
 
@@ -73,6 +73,49 @@ Les métriques sont légères et peuvent prendre en charge des scénarios en tem
 
    ```
 
+* **Journal du proxy DNS**
+
+   Le journal du proxy DNS est enregistré dans un compte de stockage, transmis en continu au service Event Hubs et/ou envoyé vers les journaux Azure Monitor uniquement si vous l’avez activé pour chaque pare-feu Azure. Ce journal effectue le suivi des messages DNS envoyés à un serveur DNS configuré à l’aide du proxy DNS. Les données sont journalisées au format JSON, comme indiqué dans les exemples suivants :
+
+
+   ```
+   Category: DNS proxy logs.
+   Time: log timestamp.
+   Properties: currently contains the full message.
+   note: this field will be parsed to specific fields in the future, while maintaining backward compatibility with the existing properties field.
+   ```
+
+   Réussite :
+   ```json
+   {
+     "category": "AzureFirewallDnsProxy",
+     "time": "2020-09-02T19:12:33.751Z",
+     "resourceId": "/SUBSCRIPTIONS/{subscriptionId}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/AZUREFIREWALLS/{resourceName}",
+     "operationName": "AzureFirewallDnsProxyLog",
+     "properties": {
+         "msg": "DNS Request: 11.5.0.7:48197 – 15676 AAA IN md-l1l1pg5lcmkq.blob.core.windows.net. udp 55 false 512 NOERROR - 0 2.000301956s"
+     }
+   }
+   ```
+
+   Échec :
+
+   ```json
+   {
+     "category": "AzureFirewallDnsProxy",
+     "time": "2020-09-02T19:12:33.751Z",
+     "resourceId": "/SUBSCRIPTIONS/{subscriptionId}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/AZUREFIREWALLS/{resourceName}",
+     "operationName": "AzureFirewallDnsProxyLog",
+     "properties": {
+         "msg": " Error: 2 time.windows.com.reddog.microsoft.com. A: read udp 10.0.1.5:49126->168.63.129.160:53: i/o timeout”
+     }
+   }
+   ```
+
+   Format du message :
+
+   `[client’s IP address]:[client’s port] – [query ID] [type of the request] [class of the request] [name of the request] [protocol used] [request size in bytes] [EDNS0 DO (DNSSEC OK) bit set in the query] [EDNS0 buffer size advertised in the query] [response CODE] [response flags] [response size] [response duration]`
+
 Pour stocker vos journaux d’activité, vous disposez de trois options :
 
 * **Compte de stockage** : les comptes de stockage conviennent parfaitement aux journaux d’activité quand ils sont stockés pour une durée plus longue et consultés quand cela est nécessaire.
@@ -99,9 +142,13 @@ Les métriques suivantes sont disponibles pour le pare-feu Azure :
 
     Nombre d’unité : nombre
 
-- **Données traitées** : quantité de données qui transitent par le pare-feu.
+- **Données traitées** : somme des données qui traversent le pare-feu dans une fenêtre temporelle donnée.
 
     Unité : octets
+
+- **Débit** : nombre de données traversant le pare-feu par seconde.
+
+    Unité : bits par seconde
 
 - **État d'intégrité du pare-feu** : indique l'intégrité du pare-feu en fonction de la disponibilité du port SNAT.
 
@@ -121,11 +168,11 @@ Les métriques suivantes sont disponibles pour le pare-feu Azure :
 
     Unité : pourcentage
 
-   Lorsque vous ajoutez d’autres adresses IP publiques à votre pare-feu, davantage de ports SNAT sont disponibles, ce qui réduit l’utilisation des ports SNAT. De plus, lorsque le pare-feu est mis à l’échelle pour différentes raisons (par exemple, UC ou débit), des ports SNAT supplémentaires sont également rendus disponibles. De fait, un pourcentage donné de l’utilisation des ports SNAT peut baisser sans que vous ajoutiez d’adresses IP publiques, juste parce que le service est mis à l’échelle. Vous pouvez contrôler directement le nombre d’adresses IP publiques disponibles pour augmenter les ports disponibles sur votre pare-feu. Toutefois, vous ne pouvez pas contrôler directement la mise à l’échelle du pare-feu. Actuellement, les ports SNAT sont ajoutés uniquement pour les cinq premières adresses IP publiques.   
+   Lorsque vous ajoutez d’autres adresses IP publiques à votre pare-feu, davantage de ports SNAT sont disponibles, ce qui réduit l’utilisation des ports SNAT. De plus, lorsque le pare-feu est mis à l’échelle pour différentes raisons (par exemple, UC ou débit), des ports SNAT supplémentaires sont également rendus disponibles. De fait, un pourcentage donné de l’utilisation des ports SNAT peut baisser sans que vous ajoutiez d’adresses IP publiques, juste parce que le service est mis à l’échelle. Vous pouvez contrôler directement le nombre d’adresses IP publiques disponibles pour augmenter les ports disponibles sur votre pare-feu. Toutefois, vous ne pouvez pas contrôler directement la mise à l’échelle du pare-feu.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour savoir comment superviser les métriques et les journaux de Pare-feu Azure, consultez le [Tutoriel : Surveiller les journaux d’activité de pare-feu Azure](tutorial-diagnostics.md).
+- Pour savoir comment superviser les métriques et les journaux de Pare-feu Azure, consultez le [Tutoriel : Surveiller les journaux d’activité de pare-feu Azure](./firewall-diagnostics.md).
 
 - Pour en savoir plus sur les métriques dans Azure Monitor, consultez [Métriques dans Azure Monitor](../azure-monitor/platform/data-platform-metrics.md).

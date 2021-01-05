@@ -3,12 +3,12 @@ title: Tests unitaires de l’extension Fonctions durables Azure
 description: Découvrez comment effectuer des tests unitaires sur l’extension Fonctions durables.
 ms.topic: conceptual
 ms.date: 11/03/2019
-ms.openlocfilehash: 86733f8b5b80799bad3e52c643ed27465dfc7641
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7786a0a2e2d31086e1938b70e63fe2374e16fe7f
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74231222"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601354"
 ---
 # <a name="durable-functions-unit-testing"></a>Tests unitaires de l’extension Fonctions durables
 
@@ -25,7 +25,7 @@ Les exemples de cet article exigent de connaître les concepts et frameworks sui
 
 * Fonctions durables
 
-* [xUnit](https://xunit.github.io/) : framework de test
+* [xUnit](https://github.com/xunit/xunit) : framework de test
 
 * [moq](https://github.com/moq/moq4) : framework de simulation
 
@@ -179,6 +179,6 @@ De son côté, le test unitaire vérifie le format de la sortie. Les tests unita
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [En savoir plus sur xUnit](https://xunit.github.io/docs/getting-started-dotnet-core)
+> [En savoir plus sur xUnit](https://xunit.net/docs/getting-started/netcore/cmdline)
 > 
 > [En savoir plus sur moq](https://github.com/Moq/moq4/wiki/Quickstart)

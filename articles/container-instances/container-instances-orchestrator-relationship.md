@@ -4,12 +4,12 @@ description: Découvrez comment se passe l’interaction entre Azure Container I
 ms.topic: article
 ms.date: 04/15/2019
 ms.custom: mvc
-ms.openlocfilehash: f3f8693d1a9a12e7c35d126ab3e3ca53448e5e40
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c7faeecfcc3a1d006cc923b48339a1242a0b9e9b
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74533660"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148597"
 ---
 # <a name="azure-container-instances-and-container-orchestrators"></a>Azure Container Instances et les orchestrateurs de conteneurs
 
@@ -54,7 +54,7 @@ Au lieu de mettre à l’échelle le nombre de machines virtuelles dans votre cl
 
 Pour rapidement mettre à l’échelle des charges de travail dans un cluster [Azure Kubernetes Service](../aks/intro-kubernetes.md) (AKS), vous pouvez utiliser des *nœuds virtuels* créés dynamiquement dans Azure Container Instances. Les nœuds virtuels permettent la communication réseau entre les pods qui s’exécutent dans ACI et le cluster AKS. 
 
-Les nœuds virtuels prennent actuellement en charge les instances de conteneur Linux. Découvrez les nœuds virtuels avec [Azure CLI](https://go.microsoft.com/fwlink/?linkid=2047538) ou le [Portail Azure](https://go.microsoft.com/fwlink/?linkid=2047545).
+Les nœuds virtuels prennent actuellement en charge les instances de conteneur Linux. Découvrez les nœuds virtuels avec [Azure CLI](../aks/virtual-nodes-cli.md) ou le [Portail Azure](../aks/virtual-nodes-portal.md).
 
 Les nœuds virtuels utilisent [Virtual Kubelet][aci-connector-k8s] open source pour imiter le [kubelet][kubelet-doc] dans Kubernetes en s’inscrivant en tant que nœud avec une capacité illimitée. Le kubelet virtuel distribue la création de [pods][pod-doc] en tant que groupes de conteneurs dans Azure Container Instances.
 

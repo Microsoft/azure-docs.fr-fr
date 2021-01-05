@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 02/28/2019
 ms.author: mayg
-ms.openlocfilehash: eb7e891c031be5ac01295905d5c3304dc6818737
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: ff612b7c052ead5658ea4bbfafd7aace51ba3c02
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478967"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017438"
 ---
 # <a name="manage-the-configuration-server-for-physical-server-disaster-recovery"></a>Gérer le serveur de configuration pour la reprise après sinistre d’un serveur physique
 
@@ -35,8 +35,8 @@ Le tableau répertorie les prérequis du déploiement d'une machine de serveur d
 | Paramètres régionaux du système d’exploitation | Anglais (US)|
 | Version VMware vSphere PowerCLI | Non requis|
 | Rôles Windows Server | N’activez pas ces rôles : <br> - Active Directory Domain Services <br>- Internet Information Services <br> - Hyper-V |
-| Stratégies de groupe| N’activez pas ces stratégies de groupe : <br> - Empêcher l’accès à l’invite de commandes <br> - Empêcher l’accès aux outils de modification du Registre <br> - Logique de confiance pour les pièces jointes <br> - Activer l’exécution des scripts <br> [En savoir plus](https://technet.microsoft.com/library/gg176671(v=ws.10).aspx)|
-| IIS | - Aucun site web par défaut préexistant <br> - Activer l’[authentification anonyme](https://technet.microsoft.com/library/cc731244(v=ws.10).aspx) <br> - Activer le paramètre [FastCGI](https://technet.microsoft.com/library/cc753077(v=ws.10).aspx)  <br> - Aucune application/aucun site web préexistants ne doivent écouter le port 443<br>|
+| Stratégies de groupe| N’activez pas ces stratégies de groupe : <br> - Empêcher l’accès à l’invite de commandes <br> - Empêcher l’accès aux outils de modification du Registre <br> - Logique de confiance pour les pièces jointes <br> - Activer l’exécution des scripts <br> [En savoir plus](/previous-versions/windows/it-pro/windows-7/gg176671(v=ws.10))|
+| IIS | - Aucun site web par défaut préexistant <br> - Activer l’[authentification anonyme](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc731244(v=ws.10)) <br> - Activer le paramètre [FastCGI](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753077(v=ws.10))  <br> - Aucune application/aucun site web préexistants ne doivent écouter le port 443<br>|
 | Type de carte réseau | VMXNET3 (en cas de déploiement comme machine virtuelle VMware) |
 | Type d’adresse IP | statique |
 | Accès à Internet | Le serveur doit également accéder à ces URL : <br> - \*.accesscontrol.windows.net<br> - \*.backup.windowsazure.com <br>- \*.store.core.windows.net<br> - \*.blob.core.windows.net<br> - \*.hypervrecoverymanager.windowsazure.com <br> - `https://management.azure.com` <br> - *.services.visualstudio.com <br> - https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-5.7.20.0.msi (non requis pour les serveurs de processus de Scale-out) <br> - time.nist.gov <br> - time.windows.com |
@@ -267,7 +267,7 @@ Mettez à niveau le serveur comme suit :
 
 ## <a name="delete-or-unregister-a-configuration-server-powershell"></a>Supprimer ou désinscrire un serveur de configuration (PowerShell)
 
-1. [Installez](https://docs.microsoft.com/powershell/azure/install-Az-ps) le module Azure PowerShell.
+1. [Installez](/powershell/azure/install-Az-ps) le module Azure PowerShell.
 2. Connectez-vous à votre compte Azure à l’aide de la commande suivante :
     
     `Connect-AzAccount`
@@ -315,5 +315,4 @@ Pour les déploiements de serveurs de configuration effectués avant mai 2016, l
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez les tutoriels pour en savoir plus sur la configuration de la reprise après sinistre de [serveurs physiques](tutorial-physical-to-azure.md) sur Azure.
-
+Consultez les tutoriels pour en savoir plus sur la configuration de la reprise après sinistre de [serveurs physiques](./physical-azure-disaster-recovery.md) sur Azure.

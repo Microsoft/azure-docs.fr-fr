@@ -11,12 +11,12 @@ metadata:
   author: PatrickFarley
   ms.author: pafarley
   ms.date: 09/05/2019
-  ms.openlocfilehash: de869fd9beb66a4122c1204648d17cff480e4b7f
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: a94e30beb495d3ead38a14ef86c050dfc1afd0fd
+  ms.sourcegitcommit: 5ef018fdadd854c8a3c360743245c44d306e470d
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "78206484"
+  ms.lasthandoff: 01/01/2021
+  ms.locfileid: "97845267"
 landingContent:
 - title: À propos de Form Recognizer
   linkLists:
@@ -37,15 +37,15 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utilisation du kit de développement logiciel (SDK) .NET
-      url: quickstarts/dotnet-sdk.md
-    - text: Utilisation de l’API REST (Python)
-      url: quickstarts/python-train-extract.md
+      url: quickstarts/client-library.md?pivots=programming-language-csharp
+    - text: Utilisation du Kit de développement logiciel (SDK) Python
+      url: quickstarts/client-library.md?pivots=programming-language-python
+    - text: Utilisation du Kit de développement logiciel (SDK) Java
+      url: quickstarts/client-library.md?pivots=programming-language-java
+    - text: Utilisation du kit SDK JavaScript
+      url: quickstarts/client-library.md?pivots=programming-language-javascript
     - text: Utilisation de l’API REST (cURL)
-      url: quickstarts/curl-train-extract.md
-  - linkListType: tutorial
-    links:
-    - text: Utiliser Form Recognizer avec Logic Apps
-      url: tutorial-form-recognizer-with-logic-apps.md
+      url: quickstarts/client-library.md?pivots=programming-language-rest-api
 - title: Créer un jeu de données d’entraînement
   linkLists:
   - linkListType: how-to-guide
@@ -62,22 +62,60 @@ landingContent:
     links:
     - text: Entraîner avec l’exemple d’outil d’étiquetage
       url: quickstarts/label-tool.md
-    - text: Entraîner avec des étiquettes en utilisant l’API REST et Python
-      url: quickstarts/python-labeled-data.md
 - title: Extraire les données de reçus
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Utilisation de l’API REST (Python)
-      url: quickstarts/python-receipts.md
+    - text: Utilisation du kit de développement logiciel (SDK) .NET
+      url: quickstarts/client-library.md?pivots=programming-language-csharp
+    - text: Utilisation du Kit de développement logiciel (SDK) Python
+      url: quickstarts/client-library.md?pivots=programming-language-python
+    - text: Utilisation du Kit de développement logiciel (SDK) Java
+      url: quickstarts/client-library.md?pivots=programming-language-java
+    - text: Utilisation du kit SDK JavaScript
+      url: quickstarts/client-library.md?pivots=programming-language-javascript
     - text: Utilisation de l’API REST (cURL)
-      url: quickstarts/curl-receipts.md
-- title: Obtenir des informations de disposition du texte
+      url: quickstarts/client-library.md?pivots=programming-language-rest-api
+  - linkListType: concept
+    links:
+    - text: Concepts relatifs aux reçus
+      url: concept-receipts.md?
+- title: Extraire des données à partir de cartes de visite
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Utilisation de l’API REST (Python)
-      url: quickstarts/python-layout.md
+    - text: Utilisation du kit de développement logiciel (SDK) .NET
+      url: quickstarts/client-library.md?pivots=programming-language-csharp
+    - text: Utilisation du Kit de développement logiciel (SDK) Python
+      url: quickstarts/client-library.md?pivots=programming-language-python
+    - text: Utilisation du Kit de développement logiciel (SDK) Java
+      url: quickstarts/client-library.md?pivots=programming-language-java
+    - text: Utilisation du kit SDK JavaScript
+      url: quickstarts/client-library.md?pivots=programming-language-javascript
+    - text: Utilisation de l’API REST (cURL)
+      url: quickstarts/client-library.md?pivots=programming-language-rest-api
+  - linkListType: concept
+    links:
+    - text: Concepts relatifs aux cartes de visite
+      url: concept-business-cards.md?
+- title: Obtenir des informations de disposition du texte
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Concepts de disposition
+      url: concept-layout.md?
+  - linkListType: quickstart
+    links:
+    - text: Utilisation du kit de développement logiciel (SDK) .NET
+      url: quickstarts/client-library.md?pivots=programming-language-csharp
+    - text: Utilisation du Kit de développement logiciel (SDK) Python
+      url: quickstarts/client-library.md?pivots=programming-language-python
+    - text: Utilisation du Kit de développement logiciel (SDK) Java
+      url: quickstarts/client-library.md?pivots=programming-language-java
+    - text: Utilisation du kit SDK JavaScript
+      url: quickstarts/client-library.md?pivots=programming-language-javascript
+    - text: Utilisation de l’API REST (cURL)
+      url: quickstarts/client-library.md?pivots=programming-language-rest-api
 - title: Utiliser des conteneurs
   linkLists:
   - linkListType: get-started
@@ -97,20 +135,22 @@ landingContent:
   - linkListType: reference
     links:
     - text: API Form Recognizer v2.0
-      url: https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/AnalyzeWithCustomForm
-    - text: API Form Recognizer v1.0
-      url: https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeWithCustomModel
+      url: https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2/operations/AnalyzeWithCustomForm
     - text: Kit de développement logiciel (SDK) .NET
-      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/formrecognizer?view=azure-dotnet-preview
+      url: /dotnet/api/overview/azure/ai.formrecognizer-readme
+    - text: Kit de développement logiciel (SDK) Python
+      url: /python/api/azure-ai-formrecognizer/?view=azure-python
+    - text: Kit de développement logiciel (SDK) Java
+      url: /java/api/overview/azure/ai-formrecognizer-readme
+    - text: Kit de développement logiciel (SDK) JavaScript
+      url: /javascript/api/overview/azure/ai-form-recognizer-readme
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+      url: /powershell/module/az.cognitiveservices/#cognitive_services
     - text: Interface de ligne de commande Azure (CLI)
-      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
+      url: /cli/azure/cognitiveservices#az-cognitiveservices-list
 - title: Aide et commentaires
   linkLists:
   - linkListType: reference
     links:
-    - text: UserVoice
-      url: https://go.microsoft.com/fwlink/?linkid=2090535
-    - text: Stack Overflow
-      url: https://go.microsoft.com/fwlink/?linkid=2087186
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/form-recognizer/context/context

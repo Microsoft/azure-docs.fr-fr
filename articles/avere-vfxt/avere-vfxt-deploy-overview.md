@@ -1,17 +1,17 @@
 ---
 title: Vue d’ensemble du déploiement - Avere vFXT pour Azure
-description: Vue d’ensemble du déploiement d’Avere vFXT pour Azure
+description: Découvrez dans cette présentation comment déployer un cluster Avere vFXT pour Azure. Les articles connexes comportent des instructions de déploiement spécifiques.
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 01/13/2020
 ms.author: rohogue
-ms.openlocfilehash: 78140fea74272dff6056bebfbd44ed9d55b0e1db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4c63fdf2164dd4dce12912669eec29c79755cc2a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76153681"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88271224"
 ---
 <!-- filename is linked to in the marketplace template, make sure it gets a redirect if we rename it -->
 

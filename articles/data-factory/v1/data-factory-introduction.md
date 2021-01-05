@@ -1,10 +1,10 @@
 ---
 title: Introduction à Data Factory, un service d’intégration de données
-description: 'Découvrez Azure Data Factory : un service d’intégration de données cloud qui gère et automatise le déplacement et la transformation des données.'
+description: Découvrez Azure Data Factory, un service cloud d’intégration de données qui gère et automatise le déplacement et la transformation des données.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.assetid: cec68cb5-ca0d-473b-8ae8-35de949a009e
@@ -12,12 +12,12 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: overview
 ms.date: 01/22/2018
-ms.openlocfilehash: 30578f204ff05443de82015627d67d3d4d357dce
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 101de32aea47bb3dd3c8a04434993c8614939c37
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73666797"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495563"
 ---
 # <a name="introduction-to-azure-data-factory"></a>Présentation d’Azure Data Factory 
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -35,7 +35,7 @@ Par exemple, une entreprise qui produit des jeux collecte des journaux d’activ
 
 Pour analyser ces journaux d’activité, l’entreprise doit utiliser des données de référence comme des informations sur le client, des informations sur les jeux et des informations sur la campagne marketing qui sont contenues dans un magasin de données local. L’entreprise souhaite donc ingérer des données de journal du magasin de données cloud et des données de référence du magasin de données local. 
 
-Ensuite, elle souhaite traiter les données à l’aide de Hadoop dans le cloud (Azure HDInsight). Elle souhaite publier les données de résultat dans un entrepôt de données cloud comme Azure SQL Data Warehouse ou un magasin de données local tel que SQL Server. L’entreprise souhaite exécuter ce flux de travail une fois par semaine. 
+Ensuite, elle souhaite traiter les données à l’aide de Hadoop dans le cloud (Azure HDInsight). Elle souhaite publier les données de résultat dans un entrepôt de données cloud comme Azure Synapse Analytics ou un magasin de données local tel que SQL Server. L’entreprise souhaite exécuter ce flux de travail une fois par semaine. 
 
 L’entreprise a besoin d’une plateforme où elle peut créer un flux de travail pouvant ingérer des données venant de magasins de données locales ou sur le cloud. L’entreprise doit également être en mesure de transformer ou de traiter des données à l’aide de services de calcul existants tels que Hadoop, et publier les résultats dans un magasin de données local ou sur le cloud pour les applications BI à consommer. 
 
@@ -47,7 +47,7 @@ Azure Data Factory est la plateforme pour ce genre de scénarios. Il s’agit d�
 
 - Traiter ou transformer les données à l’aide de services de calcul tels que Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics et Azure Machine Learning.
 
--  Publier des données de sortie vers des magasins de données tels que Azure SQL Data Warehouse pour que des applications décisionnelles (BI) puissent les utiliser.  
+-  Publier des données de sortie sur des magasins de données comme Azure Synapse Analytics pour que des applications décisionnelles (BI) puissent les utiliser.  
 
 Il s’agit plus d’une plateforme d’extraction et de chargement (EL) et de transformation et chargement (TL) qu’une plateforme d’extraction, de transformation-et de chargement (ETL) traditionnelle. Les transformations traitent des données à l’aide de services de calcul plutôt qu’en ajoutant des colonnes dérivées, en comptant le nombre de lignes, en triant des données et ainsi de suite. 
 
@@ -112,13 +112,13 @@ Par exemple, un service lié Stockage Azure spécifie une chaîne de connexion a
 
 Data Factory fait appel aux services liés pour deux raisons :
 
-* Pour représenter un *magasin de données* qui inclut, sans s’y limiter, une base de données SQL Server, une base de données Oracle, un partage de fichiers locaux ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des banques de données prises en charge, consultez la section [Activités de déplacement des données](#data-movement-activities) .
+* Pour représenter un *magasin de données* qui inclut, sans s’y limiter, une base de données SQL Server, une base de données Oracle, un partage de fichiers ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des banques de données prises en charge, consultez la section [Activités de déplacement des données](#data-movement-activities) .
 
 * Pour représenter une *ressource de calcul* qui peut héberger l’exécution d’une activité. Par exemple, l’activité HDInsightHive s’exécute sur un cluster HDInsight Hadoop. Pour obtenir la liste des environnements de calcul pris en charge, consultez la section [Activités de transformation des données](#data-transformation-activities).
 
 ### <a name="relationship-between-data-factory-entities"></a>Relation entre des entités Data Factory
 
-![Diagramme : Data Factory, un service d’intégration de données cloud - Concepts clés](./media/data-factory-introduction/data-integration-service-key-concepts.png)
+![Diagramme : Data Factory, un service cloud d’intégration de données - Concepts clés](./media/data-factory-introduction/data-integration-service-key-concepts.png)
 
 ## <a name="supported-regions"></a>Régions prises en charge
 Actuellement, vous pouvez créer des fabriques de données dans les régions USA Ouest, USA Est et Europe Nord. Une fabrique de données peut toutefois accéder à des magasins de données et à des services de calcul situés dans d’autres régions Azure pour déplacer des données entre des magasins de données ou pour traiter des données à l’aide des services de calcul.
@@ -142,6 +142,6 @@ Pour découvrir comment créer des fabriques de données avec des pipelines de d
 
 | Didacticiel | Description |
 | --- | --- |
-| [Déplacer des données entre deux magasins de données cloud](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) |Créez une fabrique de données avec un pipeline qui déplace des données de Blob Storage vers une base de données SQL. |
+| [Déplacer des données entre deux magasins de données cloud](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) |Créez une fabrique de données avec un pipeline qui déplace des données du stockage blob vers SQL Database. |
 | [Transformer des données à l’aide du cluster Hadoop](data-factory-build-your-first-pipeline.md) |Générez votre première fabrique de données Azure avec un pipeline de données qui traite les données en exécutant le script Hive sur un cluster Azure HDInsight (Hadoop). |
-| [Déplacer des données entre un magasin de données locale et un magasin de données cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) |Créez une fabrique de données avec un pipeline qui déplace des données d’une base de données SQL Server locale vers un objet blob Azure. Dans le cadre de la procédure pas à pas, vous installez et configurez la passerelle de gestion des données sur votre ordinateur. |
+| [Déplacer des données entre un magasin de données locale et un magasin de données cloud à l’aide de la passerelle de gestion des données](data-factory-move-data-between-onprem-and-cloud.md) |Créez une fabrique de données avec un pipeline qui déplace des données d’une base de données SQL Server vers un objet blob Azure. Dans le cadre de la procédure pas à pas, vous installez et configurez la passerelle de gestion des données sur votre ordinateur. |

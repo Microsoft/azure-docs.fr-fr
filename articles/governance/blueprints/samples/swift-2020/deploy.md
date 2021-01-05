@@ -1,14 +1,14 @@
 ---
 title: Déployer l’exemple de blueprint SWIFT CSP-CSCF v2020
 description: Étapes de déploiement pour l’exemple de blueprint SWIFT CSP-CSCF v2020 et informations détaillées sur les paramètres d’artefact de blueprint.
-ms.date: 05/13/2020
+ms.date: 08/18/2020
 ms.topic: sample
-ms.openlocfilehash: 971b69dcc5c64d7e51e9237e09ee8474551ac43a
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 973cd0076ae03fd32db5fc9be262b2c5300fdf16
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83657052"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91949409"
 ---
 # <a name="deploy-the-swift-csp-cscf-v2020-blueprint-sample"></a>Déployer l’exemple de blueprint SWIFT CSP-CSCF v2020
 
@@ -93,18 +93,16 @@ Le tableau suivant fournit la liste des paramètres d’artefact de blueprint :
 
 |Nom de l’artefact|Type d’artefact|Nom du paramètre|Description|
 |-|-|-|-|
-|\[Préversion\] : Auditer les contrôles SWIFT CSP-CSCF v2020 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [schémas de journaux de diagnostic Azure Monitor](../../../../azure-monitor/platform/diagnostic-logs-schema.md#supported-log-categories-per-resource-type).|
+|\[Préversion\] : Auditer les contrôles SWIFT CSP-CSCF v2020 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [catégories de journaux de ressources Azure Monitor](../../../../azure-monitor/platform/resource-logs-categories.md#supported-log-categories-per-resource-type).|
 |\[Préversion\] : Auditer les contrôles SWIFT CSP-CSCF v2020 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|ID d’espaces de travail connectés|Liste délimitée par des points-virgules des ID d’espaces de travail auxquels l’agent Log Analytics doit être connecté|
 |\[Préversion\] : Auditer les contrôles SWIFT CSP-CSCF v2020 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des utilisateurs qui doivent être inclus dans le groupe Administrateurs de machines virtuelles Windows|Liste séparée par des points-virgules des membres qui doivent être inclus dans le groupe Administrateurs local. Exemple : Administrator; myUser1; myUser2|
 |\[Préversion\] : Auditer les contrôles SWIFT CSP-CSCF v2020 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Nom de domaine (FQDN)|Nom de domaine complet (FQDN) auquel les machines virtuelles Windows doivent être jointes|
-|\[Préversion\] : Déployer Log Analytics Agent pour Linux VM Scale Sets (VMSS)|Affectation de rôle|Espace de travail Log Analytics pour Linux VM Scale Sets (VMSS)|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
-|\[Préversion\] : Déployer Log Analytics Agent pour Linux VM Scale Sets (VMSS)|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Linux pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
-|\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Linux|Affectation de rôle|Espace de travail Log Analytics pour les machines virtuelles Linux|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
-|\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Linux|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Linux pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
-|\[Préversion\] : Déployer Log Analytics Agent pour Windows VM Scale Sets (VMSS)|Affectation de rôle|Espace de travail Log Analytics pour Windows VM Scale Sets (VMSS)|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
-|\[Préversion\] : Déployer Log Analytics Agent pour Windows VM Scale Sets (VMSS)|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Windows pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
-|\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Windows|Affectation de rôle|Espace de travail Log Analytics pour les machines virtuelles Windows|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
-|\[Préversion\] : Déployer Log Analytics Agent pour les machines virtuelles Windows|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Windows pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
+|Déployer Log Analytics Agent pour les machines virtuelles Linux|Affectation de rôle|Espace de travail Log Analytics pour les machines virtuelles Linux|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
+|Déployer Log Analytics Agent pour les machines virtuelles Linux|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Linux pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
+|Déployer Log Analytics Agent pour Windows VM Scale Sets (VMSS)|Affectation de rôle|Espace de travail Log Analytics pour Windows VM Scale Sets (VMSS)|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
+|Déployer Log Analytics Agent pour Windows VM Scale Sets (VMSS)|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Windows pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
+|Déployer Log Analytics Agent pour les machines virtuelles Windows|Affectation de rôle|Espace de travail Log Analytics pour les machines virtuelles Windows|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|
+|Déployer Log Analytics Agent pour les machines virtuelles Windows|Affectation de rôle|Facultatif : Liste des images de machine virtuelle ayant un système d’exploitation Windows pris en charge à ajouter à l’étendue|Un tableau vide peut être utilisé pour indiquer l’absence de paramètres facultatifs : \[\]|
 |Déployer Advanced Threat Protection sur les comptes de stockage|Affectation de rôle|Résultat|Vous trouverez des informations sur les effets de la stratégie dans [Comprendre les effets d’Azure Policy](../../../policy/concepts/effects.md).|
 |Déployer l’audit sur des serveurs SQL|Affectation de rôle|Valeur en jours de la période de conservation (0 indique une conservation illimitée)|Durée de conservation en jours (facultatif ; 180 jours si non spécifié)|
 |Déployer l’audit sur des serveurs SQL|Affectation de rôle|Nom du groupe de ressources pour le compte de stockage pour l’audit SQL Server|L’audit écrit des événements de base de données dans un journal d’audit dans votre compte Stockage Azure (un compte de stockage sera créé dans chaque région où est créé un serveur SQL Server qui sera partagé par tous les serveurs de cette région). Important : Pour un bon fonctionnement de l’audit, vous ne devez ni supprimer ni renommer le groupe de ressources ou les comptes de stockage.|

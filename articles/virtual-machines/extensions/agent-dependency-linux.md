@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 03/29/2019
 ms.author: magoedte
-ms.openlocfilehash: 82f9c5a67cb056752cf8310be3b7c9f0bd2501e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c8427e92f89804f64741ab86aa9903b0de23b3ec
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227949"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966851"
 ---
 # <a name="azure-monitor-dependency-virtual-machine-extension-for-linux"></a>Extension de machine virtuelle Azure Monitor Dependency pour Linux
 
@@ -154,7 +155,7 @@ az vm extension list --resource-group myResourceGroup --vm-name myVM -o table
 La sortie de l’exécution de l’extension est enregistrée dans le fichier suivant :
 
 ```
-/opt/microsoft/dependcency-agent/log/install.log 
+/opt/microsoft/dependency-agent/log/install.log 
 ```
 
 ### <a name="support"></a>Support

@@ -4,17 +4,17 @@ description: Dans ce tutoriel, vous allez créer un modèle Azure Machine Learni
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 11/11/2019
+ms.date: 07/29/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: 5bfbf4a432f720b683ded4c85530135d86b24eba
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: fd297ec5cfb7831a438fc51e72e3c2fc163eff49
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76773002"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88271275"
 ---
 # <a name="tutorial-deploy-azure-machine-learning-as-an-iot-edge-module-preview"></a>Tutoriel : Déployer Azure Machine Learning en tant que module IoT Edge (préversion)
 
@@ -49,7 +49,7 @@ Ressources cloud :
 
 * Un niveau gratuit ou standard [IoT Hub](../iot-hub/iot-hub-create-through-portal.md) dans Azure.
 * Un espace de travail Azure Machine Learning. Pour savoir comment créer et utiliser un module Azure Machine Learning, suivez les instructions fournies dans [Utiliser le portail Azure pour bien démarrer avec Azure Machine Learning](../machine-learning/tutorial-1st-experiment-sdk-setup.md).
-  * Notez le nom de l’espace de travail, le groupe de ressources et l’ID de l’abonnement. Ces valeurs sont toutes disponibles dans la vue d’ensemble de l’espace de travail, sur le portail Azure. Vous utiliserez ces valeurs plus tard dans ce tutoriel pour connecter un notebook Azure aux ressources de votre espace de travail.
+  * Notez le nom de l’espace de travail, le groupe de ressources et l’ID de l’abonnement. Ces valeurs sont toutes disponibles dans la vue d’ensemble de l’espace de travail, sur le portail Azure. Vous utiliserez ces valeurs plus tard dans ce tutoriel pour connecter un fichier Azure Notebooks aux ressources de votre espace de travail.
 
 ## <a name="create-and-deploy-azure-machine-learning-module"></a>Créer et déployer un module Azure Machine Learning
 
@@ -94,13 +94,13 @@ Vérifiez que votre image conteneur a bien été créée et qu’elle est stock�
 
 2. La section **Vue d’ensemble** regroupe les informations concernant l’espace de travail et les ressources associées. Sélectionnez la valeur de **Registre**, qui doit être composée du nom de votre espace de travail, suivi de nombres aléatoires.
 
-3. Dans le registre de conteneurs, sélectionnez **Référentiels**. Vous devez voir le référentiel nommé **tempanomalydetection**, qui a été créé par le notebook que vous avez exécuté dans la section précédente.
+3. Dans le registre de conteneurs, sous **Services**, sélectionnez **Référentiels**. Vous devez voir le référentiel nommé **tempanomalydetection**, qui a été créé par le notebook que vous avez exécuté dans la section précédente.
 
 4. Sélectionnez **tempanomalydetection**. Vous devez voir que le référentiel a une étiquette : **1**.
 
-   Maintenant que vous connaissez le nom du registre, le nom du référentiel et l’étiquette, vous connaissez le chemin complet de l’image conteneur. Les chemins d’image ressemblent à ceci **\<nom_registre\>.azurecr.io/tempanomalydetection:1**. Vous pouvez utiliser le chemin de l’image pour déployer ce conteneur sur les appareils IoT Edge.
+   Maintenant que vous connaissez le nom du registre, le nom du référentiel et l’étiquette, vous connaissez le chemin complet de l’image conteneur. Les chemins d’image ressemblent à ceci : **\<registry_name\>.azurecr.io/tempanomalydetection:1**. Vous pouvez utiliser le chemin de l’image pour déployer ce conteneur sur les appareils IoT Edge.
 
-5. Dans le registre de conteneurs, sélectionnez **Clés d’accès**. Vous devez voir des informations d’identification d’accès, notamment les informations du **serveur de connexion**, ainsi que le **nom d’utilisateur** et le **mot de passe** de l’administrateur.
+5. Dans le registre de conteneurs, sous **Paramètres**, sélectionnez **Clés d’accès**. Vous devez voir des informations d’identification d’accès, notamment les informations du **serveur de connexion**, ainsi que le **nom d’utilisateur** et le **mot de passe** de l’administrateur.
 
    Ces informations d’identification peuvent être ajoutées au manifeste de déploiement pour permettre à votre appareil IoT Edge de tirer (pull) des images conteneurs à partir du registre.
 
@@ -134,17 +134,11 @@ Vous pouvez afficher les messages appareil-à-cloud reçus par votre hub IoT à 
 
 Les étapes suivantes montrent comment configurer Visual Studio Code pour surveiller les messages appareil-à-cloud reçus par votre hub IoT.
 
-1. Dans Visual Studio Code, sélectionnez **Appareils IoT Hub**.
+1. Dans l’Explorateur Visual Studio Code, sous la section **Azure IoT Hub**, développez **Appareils** pour voir votre liste d’appareils IoT.
 
-2. Sélectionnez **...** , puis **Définir la chaîne de connexion IoT Hub** dans le menu.
+2. Cliquez avec le bouton droit sur le nom de votre appareil IoT Edge, puis sélectionnez **Démarrer la supervision du point de terminaison d’événements intégré**.
 
-   ![Définir la chaîne de connexion IoT Hub](./media/tutorial-deploy-machine-learning/set-connection.png)
-
-3. Dans la zone de texte qui s’ouvre en haut de la page, entrez la chaîne de connexion iothubowner de votre hub IoT. Votre appareil IoT Edge devrait apparaître dans la liste Appareils IoT Hub.
-
-4. Sélectionnez de nouveau **...** , puis sélectionnez **Démarrer la supervision du point de terminaison d’événements intégré**.
-
-5. Observez les messages en provenance de tempSensor toutes les cinq secondes. Le corps du message contient une propriété appelée **anomaly**, qui est fournie par machinelearningmodule avec la valeur true ou false. La propriété **AzureMLResponse** contient la valeur « OK » si le modèle a été exécuté correctement.
+3. Observez les messages en provenance de tempSensor toutes les cinq secondes. Le corps du message contient une propriété appelée **anomalie** fournie par machinelearningmodule avec une valeur true ou false. La propriété **AzureMLResponse** contient la valeur « OK » si le modèle a été exécuté correctement.
 
    ![Réponse d'Azure Machine Learning dans le corps du message](./media/tutorial-deploy-machine-learning/ml-output.png)
 

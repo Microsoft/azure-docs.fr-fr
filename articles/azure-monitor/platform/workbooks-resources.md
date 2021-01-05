@@ -1,20 +1,18 @@
 ---
 title: Paramètres de ressources des classeurs Azure Monitor
-description: Créer des rapports complexes en toute simplicité grâce à des classeurs paramétrables prédéfinis et personnalisés
+description: Découvrez comment utiliser les paramètres de ressources pour choisir des ressources dans les classeurs. Utilisez les paramètres des ressources pour définir l’étendue à partir de laquelle les données sont extraites.
 services: azure-monitor
-author: mrbullwinkle
 manager: carmonm
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
 ms.date: 10/23/2019
-ms.author: mbullwin
-ms.openlocfilehash: cc2cde7932f783f63ee2783f0589ce4f88f248a2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 27e98ae51cbea654ca0f06979b289a497a5aedf3
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658100"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92143514"
 ---
 # <a name="workbook-resource-parameters"></a>Paramètres de ressources des classeurs
 
@@ -61,7 +59,7 @@ La valeur des sélecteurs de ressources peut provenir du contexte du classeur, d
 > [!NOTE]
 > Azure Resource Graph n’est pas encore disponible dans tous les clouds. Si vous choisissez cette approche, vérifiez qu’elle est prise en charge dans votre cloud cible.
 
-[Documentation Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/overview)
+[Documentation Azure Resource Graph](../../governance/resource-graph/overview.md)
 
 ## <a name="creating-a-resource-parameter--json-list"></a>Créer un paramètre de ressource (liste JSON)
 1. Démarrez avec un classeur vide en mode d’édition.
@@ -113,5 +111,5 @@ La valeur des sélecteurs de ressources peut provenir du contexte du classeur, d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Commencez](workbooks-visualizations.md) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
+* [Commencez](./workbooks-overview.md#visualizations) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
 * [Contrôlez](workbooks-access-control.md) et partagez l’accès à vos ressources de classeur.

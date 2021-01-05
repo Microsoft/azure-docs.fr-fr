@@ -5,16 +5,14 @@ author: arduppal
 manager: brymat
 ms.author: arduppal
 ms.reviewer: spelluru
-ms.date: 12/13/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 3360b92a1b71adcbf0364a16c197aecdab5700db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 230e158a970f8c815b1575403c013e30749124c5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77086609"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005059"
 ---
 # <a name="tutorial-react-to-blob-storage-events-on-iot-edge-preview"></a>Tutoriel : Réagir aux événements du module Stockage Blob sur IoT Edge (préversion)
 Cet article explique comment déployer le Stockage Blob Azure sur le module IoT, qui agirait en tant que serveur de publication Event Grid pour envoyer des événements lors de la création et de la suppression d’objets Blob à Event Grid.  
@@ -343,12 +341,12 @@ L’objet de données comporte les propriétés suivantes :
 | -------- | ---- | ----------- |
 | api | string | Opération qui a déclenché l’événement. Ce peut être l’une des valeurs suivantes : <ul><li>BlobCreated – Les valeurs autorisées sont : `PutBlob` et `PutBlockList`</li><li>BlobDeleted – Les valeurs autorisées sont `DeleteBlob`, `DeleteAfterUpload` et `AutoDelete`. <p>L’événement `DeleteAfterUpload` est généré lorsque l’objet blob est supprimé automatiquement, parce que la propriété deleteAfterUpload souhaitée a la valeur true. </p><p>L’événement `AutoDelete` est généré lorsque l’objet blob est supprimé automatiquement, parce que la valeur la propriété deleteAfterMinutes souhaitée a expiré.</p></li></ul>|
 | clientRequestId | string | ID de requête fourni par le client pour l’opération d’API de stockage. Cet ID peut être utilisé pour mettre en corrélation les journaux de diagnostic Stockage Azure en utilisant le champ « client-request-id » dans les journaux, et peut être fourni dans des requêtes du client à l’aide de l’en-tête « x-ms-client-request-id ». Pour plus d’informations, voir [Format de journal](/rest/api/storageservices/storage-analytics-log-format). |
-| requestId | string | ID de requête généré par le service pour l’opération de l’API de stockage. Peut être utilisé pour mettre en corrélation les journaux de diagnostic de stockage Azure en utilisant le champ « request-id-header » dans les journaux d’activité et est retourné lors de l’initialisation de l’appel d’API dans l’en-tête ’x-ms-request-id’. Consultez [Format de journal](https://docs.microsoft.com/rest/api/storageservices/storage-analytics-log-format). |
+| requestId | string | ID de requête généré par le service pour l’opération de l’API de stockage. Peut être utilisé pour mettre en corrélation les journaux de diagnostic de stockage Azure en utilisant le champ « request-id-header » dans les journaux d’activité et est retourné lors de l’initialisation de l’appel d’API dans l’en-tête ’x-ms-request-id’. Consultez [Format de journal](/rest/api/storageservices/storage-analytics-log-format). |
 | eTag | string | Valeur que vous pouvez utiliser pour effectuer des opérations de manière conditionnelle. |
 | contentType | string | Type de contenu spécifié pour l’objet blob. |
 | contentLength | entier | Taille de l’objet blob en octets. |
 | blobType | string | Type d’objet blob. Les valeurs valides sont « BlockBlob » ou « PageBlob ». |
-| url | string | Chemin de l’objet blob. <br>Si le client utilise une API REST d’objet blob, l’URL présente la structure suivante : *\<nom-compte-stockage\>.blob.core.windows.net/\<nom-conteneur\>/\<nom-fichier\>* . <br>Si le client utilise une API REST Data Lake Storage, l’URL présente la structure suivante : *\<nom-compte-stockage\>.dfs.core.windows.net/\<nom-système-fichiers\>/\<nom-fichier\>* . |
+| url | string | Chemin de l’objet blob. <br>Si le client utilise une API REST Blob, la structure de l’URL est *\<storage-account-name\>.blob.core.windows.net/\<container-name\>/\<file-name\>* . <br>Si le client utilise une API REST Data Lake Storage, la structure de l’URL est *\<storage-account-name\>.dfs.core.windows.net/\<file-system-name\>/\<file-name\>* . |
 
 
 ## <a name="next-steps"></a>Étapes suivantes

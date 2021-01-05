@@ -11,30 +11,30 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 4/15/2019
+ms.topic: troubleshooting
+ms.date: 07/27/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ae83cea866367fa6a6596caa683d0287bea96c29
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 251f9a2b075189f19b9e943ff660baaba93ec33b
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60456123"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652039"
 ---
 # <a name="troubleshoot-azure-active-directory-pass-through-authentication"></a>Résolution des problèmes d’authentification directe Azure Active Directory
 
 Cet article fournit des informations sur les problèmes courants liés à l’authentification directe Azure AD.
 
 >[!IMPORTANT]
->Si vous êtes confronté à des problèmes de connexion utilisateur avec l’authentification directe, ne désactivez pas la fonctionnalité. En outre, ne désinstallez pas les agents d’authentification directe si vous ne disposez pas d’un compte d’administrateur général cloud comme solution de secours. Découvrez comment [ajouter un compte d’administrateur général de type cloud uniquement](../active-directory-users-create-azure-portal.md). Cette étape est essentielle pour éviter que votre locataire ne soit verrouillé.
+>Si vous êtes confronté à des problèmes de connexion utilisateur avec l’authentification directe, ne désactivez pas la fonctionnalité. En outre, ne désinstallez pas les agents d’authentification directe si vous ne disposez pas d’un compte d’administrateur général cloud comme solution de secours. Découvrez comment [ajouter un compte d’administrateur général de type cloud uniquement](../fundamentals/add-users-azure-active-directory.md). Cette étape est essentielle pour éviter que votre locataire ne soit verrouillé.
 
 ## <a name="general-issues"></a>Problèmes d’ordre général
 
 ### <a name="check-status-of-the-feature-and-authentication-agents"></a>Vérifiez l’état de la fonctionnalité et des agents d’authentification
 
-Assurez-vous que la fonctionnalité d’authentification directe est toujours **activée** sur votre locataire et l’état de l’agent d’authentification indique **actif**et non **inactif**. Vous pouvez vérifier l’état en accédant au panneau **Azure AD Connect** dans le [Centre d’administration Azure Active Directory](https://aad.portal.azure.com/).
+Assurez-vous que la fonctionnalité d’authentification directe est toujours **activée** sur votre locataire et l’état de l’agent d’authentification indique **actif** et non **inactif**. Vous pouvez vérifier l’état en accédant au panneau **Azure AD Connect** dans le [Centre d’administration Azure Active Directory](https://aad.portal.azure.com/).
 
 ![Centre d’administration Azure Active Directory - panneau Azure AD Connect](./media/tshoot-connect-pass-through-authentication/pta7.png)
 
@@ -51,6 +51,31 @@ Si l’utilisateur ne peut pas se connecter avec l’authentification directe, l
 |AADSTS80004|Le nom d’utilisateur envoyé à l’agent n’était pas valide|Vérifiez que l’utilisateur tente de se connecter avec le nom d’utilisateur correct.
 |AADSTS80005|La validation a rencontré une WebException imprévisible|Erreur temporaire. Relancez la requête. Si l’erreur se reproduit, contactez le Support Microsoft.
 |AADSTS80007|Une erreur s’est produite lors de la communication avec Active Directory|Consultez les journaux d’activité de l’agent pour plus d’informations, et vérifiez qu’Active Directory fonctionne comme prévu.
+
+### <a name="users-get-invalid-usernamepassword-error"></a>Les utilisateurs obtiennent une erreur de nom d’utilisateur/mot de passe non valide 
+
+Cela peut se produire lorsque le nom d’utilisateur local UserPrincipalName (UPN) d’un utilisateur est différent de l’UPN cloud de l’utilisateur.
+
+Pour confirmer qu’il s’agit du problème, commencez par vérifier que l’agent d’authentification directe fonctionne correctement :
+
+
+1. Créez un compte de test.  
+2. Importez le module PowerShell sur l’ordinateur de l’agent :
+
+ ```powershell
+ Import-Module "C:\Program Files\Microsoft Azure AD Connect Authentication Agent\Modules\PassthroughAuthPSModule\PassthroughAuthPSModule.psd1"
+ ```
+3. Exécutez la commande Invoke PowerShell : 
+
+ ```powershell
+ Invoke-PassthroughAuthOnPremLogonTroubleshooter 
+ ``` 
+4. Lorsque vous êtes invité à entrer des informations d’identification, entrez les mêmes nom d’utilisateur et mot de passe que ceux utilisés pour vous connecter à https://login.microsoftonline.com).
+
+Si vous obtenez la même erreur de nom d’utilisateur/mot de passe, cela signifie que l’agent d’authentification directe fonctionne correctement et que le problème est que l’UPN local n’est peut-être pas routable. Pour en savoir plus, consultez [Configuration d’un ID secondaire de connexion](/windows-server/identity/ad-fs/operations/configuring-alternate-login-id).
+
+> [!IMPORTANT]
+> Si le serveur Azure AD Connect n’est pas joint à un domaine (condition mentionnée dans les [prérequis d’installation d’Azure AD Connect](./how-to-connect-install-prerequisites.md#installation-prerequisites)), le problème de nom d’utilisateur/mot de passe non valide survient.
 
 ### <a name="sign-in-failure-reasons-on-the-azure-active-directory-admin-center-needs-premium-license"></a>Raisons des échecs de connexion dans le Centre d’administration Azure Active Directory (licence Premium requise)
 
@@ -71,9 +96,10 @@ Accédez à **Azure Active Directory** -> **Connexions** dans le [Centre d’adm
 | 80007 | L’Agent d’authentification ne peut pas se connecter à Active Directory. | Vérifiez que l’agent d’authentification peut accéder à Active Directory.
 | 80010 | L’Agent d’authentification ne peut pas déchiffrer le mot de passe. | Si le problème se produit régulièrement, installez un nouvel agent d’authentification, puis inscrivez-le. Veillez à désinstaller l’agent actuel. 
 | 80011 | L’Agent d’authentification n’a pas pu récupérer la clé de déchiffrement. | Si le problème se produit régulièrement, installez un nouvel agent d’authentification, puis inscrivez-le. Veillez à désinstaller l’agent actuel.
+| 80014 | La demande de validation a répondu après dépassement du temps maximal. | L’agent d’authentification a expiré. Ouvrez un ticket de support avec le code d’erreur, l’ID de corrélation et l’horodatage pour obtenir plus de détails sur cette erreur.
 
 >[!IMPORTANT]
->Les Agents d'authentification directe authentifient les utilisateurs Azure AD en vérifiant leur nom d'utilisateur et leur mot de passe par rapport à Active Directory et en appelant l'API [Win32 LogonUser](https://msdn.microsoft.com/library/windows/desktop/aa378184.aspx). Par conséquent, si vous avez configuré le paramètre « Connexion à » d'Active Directory de manière à limiter l'accès des stations de travail, vous devez également ajouter les serveurs qui hébergent les Agents d'authentification directe à la liste des serveurs « Connexion à ». Si vous ne le faites pas, vos utilisateurs ne pourront pas se connecter à Azure AD.
+>Les Agents d'authentification directe authentifient les utilisateurs Azure AD en vérifiant leur nom d'utilisateur et leur mot de passe par rapport à Active Directory et en appelant l'API [Win32 LogonUser](/windows/win32/api/winbase/nf-winbase-logonusera). Par conséquent, si vous avez configuré le paramètre « Connexion à » d'Active Directory de manière à limiter l'accès des stations de travail, vous devez également ajouter les serveurs qui hébergent les Agents d'authentification directe à la liste des serveurs « Connexion à ». Si vous ne le faites pas, vos utilisateurs ne pourront pas se connecter à Azure AD.
 
 ## <a name="authentication-agent-installation-issues"></a>Problèmes d’installation de l’agent d’authentification
 
@@ -130,6 +156,8 @@ Pour vérifier les erreurs liées à l’installation, consultez les journaux d�
 Pour les erreurs relatives à l’agent d’authentification, ouvrez l’application Observateur d’événements sur le serveur et cherchez dans **Application and Service Logs\Microsoft\AzureAdConnect\AuthenticationAgent\Admin**.
 
 Pour une analyse détaillée, activez le journal « Session » (pour accéder à cette option, cliquez avec le bouton droit de la souris sur l'application Observateur d'événements). N’exécutez pas l’agent d’authentification lorsque ce journal est activé pendant le fonctionnement normal. Utilisez-le uniquement pour la résolution des problèmes. Le contenu du journal n’est visible qu’une fois celui-ci désactivé.
+
+Le manifeste d’événements de l’agent PTA est disponible [ici](https://msazure.visualstudio.com/One/_git/AD-AppProxy?path=%2Fsrc%2FProduct%2FMUC%2FPTADiagnosticsResource%2FPTADiagnosticsResource%2FPTAConnectorDiagnosticsResource%2FPTAConnectorEventManifest.man&_a=contents&version=GBmaster).
 
 ### <a name="detailed-trace-logs"></a>Journaux d’activité de suivi détaillés
 

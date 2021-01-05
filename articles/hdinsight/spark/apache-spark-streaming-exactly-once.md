@@ -6,14 +6,14 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/15/2018
-ms.openlocfilehash: ee4f9b84e822cb370e5fe3d55fcceb9c8a9f2ab9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8e0037f6aea4aef53efc192066027e0a0143bda1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74228973"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86086175"
 ---
 # <a name="create-apache-spark-streaming-jobs-with-exactly-once-event-processing"></a>Créer des tâches Apache Spark Streaming avec traitement unique des événements
 

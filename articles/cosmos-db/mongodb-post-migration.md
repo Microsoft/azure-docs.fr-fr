@@ -1,20 +1,21 @@
 ---
 title: Étapes d’optimisation post-migration avec l’API Azure Cosmos DB pour MongoDB
 description: Ce document fournit les techniques d’optimisation post-migration de MongoDB vers l’API Azure Cosmos DB pour Mongo DB.
-author: LuisBosquez
+author: christopheranderson
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/20/2020
-ms.author: lbosq
-ms.openlocfilehash: ce33651aae64d0a90264dde6da64b4044c6ce132
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: chrande
+ms.openlocfilehash: 300177b9d5a20ce8082db57837be3ff461fd51a0
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80063618"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93361654"
 ---
 # <a name="post-migration-optimization-steps-when-using-azure-cosmos-dbs-api-for-mongodb"></a>Étapes d’optimisation post-migration lors de l’utilisation de l’API Azure Cosmos DB pour MongoDB
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 Après avoir migré les données stockées dans la base de données MongoDB vers l’API Azure Cosmos DB pour MongoDB, vous pouvez vous connecter à Azure Cosmos DB et gérer les données. Ce guide fournit les étapes que vous pouvez effectuer après la migration. Pour connaître les étapes de migration, consultez le tutoriel [Migrer MongoDB vers l’API Azure Cosmos DB pour MongoDB](../dms/tutorial-mongodb-cosmos-db.md).
 
@@ -35,7 +36,7 @@ Dans ce guide, vous allez apprendre à :
 2. Dans le [portail Azure](https://www.portal.azure.com/), dans le volet gauche, ouvrez le menu **Toutes les ressources** et recherchez le compte Azure Cosmos DB vers lequel vous avez migré vos données.
 3. Ouvrez le panneau **Chaîne de connexion**. Le volet droit contient toutes les informations dont vous avez besoin pour vous connecter à votre compte.
 4. Utilisez les informations de connexion dans la configuration de votre application (ou d’autres emplacements pertinents) afin de refléter la connexion de l’API Azure Cosmos DB pour MongoDB dans votre application.
-![Chaîne-de-connexion](./media/mongodb-post-migration/connection-string.png)
+:::image type="content" source="./media/mongodb-post-migration/connection-string.png" alt-text="Capture d’écran montrant les paramètres d’une chaîne de connexion.":::
 
 Pour plus d’informations, consultez la page [Connecter une application MongoDB à Azure Cosmos DB](connect-mongodb-account.md).
 
@@ -53,12 +54,12 @@ Pour distribuer vos données à l’échelle mondiale, consultez [Distribuer des
 
 ## <a name="set-consistency-level"></a>Définir le niveau de cohérence
 
-Azure Cosmos DB offre cinq [niveaux de cohérence](consistency-levels.md) bien définis. Pour en savoir plus sur les correspondances entre les niveaux de cohérence MongoDB et Azure Cosmos DB, consultez [Niveaux de cohérence et API Azure Cosmos DB](consistency-levels-across-apis.md). Le niveau de cohérence par défaut est le niveau de cohérence de la session. Le changement du niveau de cohérence est facultatif, et vous pouvez l’optimiser pour votre application. Pour changer le niveau de cohérence à l’aide du portail Azure :
+Azure Cosmos DB offre cinq [niveaux de cohérence](consistency-levels.md) bien définis. Pour en savoir plus sur les correspondances entre les niveaux de cohérence MongoDB et Azure Cosmos DB, consultez [Niveaux de cohérence et API Azure Cosmos DB](./consistency-levels.md). Le niveau de cohérence par défaut est le niveau de cohérence de la session. Le changement du niveau de cohérence est facultatif, et vous pouvez l’optimiser pour votre application. Pour changer le niveau de cohérence à l’aide du portail Azure :
 
 1. Accédez au panneau **Cohérence par défaut** sous Paramètres.
 2. Sélectionnez votre [niveau de cohérence](consistency-levels.md)
 
-La plupart des utilisateurs laissent le niveau de cohérence sur le paramètre de cohérence de session par défaut. Toutefois, il existe des [compromis entre disponibilité et performances pour différents niveaux de cohérence](consistency-levels-tradeoffs.md).
+La plupart des utilisateurs laissent le niveau de cohérence sur le paramètre de cohérence de session par défaut. Toutefois, il existe des [compromis entre disponibilité et performances pour différents niveaux de cohérence](./consistency-levels.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

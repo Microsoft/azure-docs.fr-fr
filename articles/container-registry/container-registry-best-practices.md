@@ -3,12 +3,12 @@ title: Bonnes pratiques concernant les registres
 description: Découvrez comment utiliser votre instance Azure Container Registry de manière efficace en suivant ces meilleures pratiques.
 ms.topic: article
 ms.date: 09/27/2018
-ms.openlocfilehash: 233d84b8bfa6f3d8c800e76032ef74a643db11ca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fc84fb8cb98f58e28570095370d55a7358ce3a99
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225805"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83682689"
 ---
 # <a name="best-practices-for-azure-container-registry"></a>Meilleures pratiques pour Azure Container Registry
 
@@ -59,7 +59,7 @@ Pour obtenir des informations détaillées sur l’authentification Azure Contai
 
 ## <a name="manage-registry-size"></a>Gérer la taille du registre
 
-Les contraintes de stockage de chacune des [références SKU du registre de conteneurs][container-registry-skus] s'appliquent à un scénario spécifique : **De base** pour la mise en route, **Standard** pour la majorité des applications de production et **Premium** pour les performances à très grande échelle et la [géoréplication][container-registry-geo-replication]. Pendant toute la durée de vie de votre registre, vous devez gérer sa taille en supprimant régulièrement le contenu inutilisé.
+Les contraintes de stockage de chaque [niveau de service du registre de conteneurs][container-registry-skus] s’appliquent à un scénario spécifique : **De base** pour la mise en route, **Standard** pour la majorité des applications de production et **Premium** pour les performances à très grande échelle et la [géoréplication][container-registry-geo-replication]. Pendant toute la durée de vie de votre registre, vous devez gérer sa taille en supprimant régulièrement le contenu inutilisé.
 
 Utilisez la commande Azure CLI [az acr show-usage][az-acr-show-usage] pour afficher la taille actuelle de votre registre :
 
@@ -86,7 +86,7 @@ Pour en savoir plus sur la suppression des données image de votre registre, not
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Azure Container Registry est disponible en plusieurs niveaux, appelés références SKU, qui fournissent chacun des fonctionnalités différentes. Pour plus d’informations sur les références SKU disponibles, consultez [Références (SKU) Azure Container Registry](container-registry-skus.md).
+Azure Container Registry est disponible en plusieurs niveaux, (également appelés références SKU), qui fournissent chacun des fonctionnalités différentes. Pour plus d’informations sur les niveaux de service disponibles, consultez [Niveaux de service Azure Container Registry](container-registry-skus.md).
 
 <!-- IMAGES -->
 [delete-repository-portal]: ./media/container-registry-best-practices/delete-repository-portal.png

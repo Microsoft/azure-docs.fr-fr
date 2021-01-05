@@ -4,21 +4,30 @@
   expanded: true
   items:
     - name: Présentation de Cognitive Services
-      href: Welcome.md
+      href: what-are-cognitive-services.md
+    - name: Documentation sur les nouveautés Cognitive Services
+      href: whats-new-docs.md
     - name: Cognitive Services et machine learning
       href: cognitive-services-and-machine-learning.md
+    - name: Options de développement Cognitive Services
+      href: cognitive-services-development-options.md
     - name: Sous-domaines personnalisés pour Cognitive Services
       href: cognitive-services-custom-subdomains.md
-    - name: Processus de contrôle Cognitive Services
-      href: cognitive-services-gating-process.md
     - name: Support multilingue
       href: language-support.md
+    - name: Prévoir et gérer les coûts
+      href: plan-manage-costs.md
 - name: Démarrages rapides
   items:
     - name: Créer une ressource en utilisant le portail Azure
       href: cognitive-services-apis-create-account.md
     - name: Créer une ressource en utilisant Azure CLI
       href: cognitive-services-apis-create-account-cli.md
+    - name: Créer une ressource en utilisant la bibliothèque de client
+      href: cognitive-services-apis-create-account-client-library.md
+    - name: Créer une ressource à l’aide d’un modèle ARM
+      displayName: Resource Manager
+      href: create-account-resource-manager-template.md
     - name: la journalisation des diagnostics.
       href: diagnostic-logging.md
 - name: Sécurité
@@ -31,11 +40,13 @@
       href: ./encryption/cognitive-services-encryption-keys-portal.md
     - name: Authentifier des requêtes auprès de Cognitive Services
       href: authentication.md
+    - name: Base de référence de la sécurité
+      href: security-baseline.md
 - name: Support pour les conteneurs
   items:
     - name: Support pour les conteneurs
       href: cognitive-services-container-support.md
-    - name: Étiquettes des images conteneur
+    - name: Étiquettes d’image conteneur et notes de publication
       href: ./containers/container-image-tags.md
     - name: Questions fréquentes (FAQ) sur les conteneurs
       href: ./containers/container-faq.md
@@ -57,8 +68,35 @@
           href: ../container-registry/container-registry-get-started-azure-cli.md
         - name: Azure Kubernetes Service (AKS)
           href: ../aks/tutorial-kubernetes-prepare-app.md
+    - name: Documentation sur les conteneurs Cognitive Services
+      href: containers/index.yml
+- name: Big Data
+  items:
+    - name: Cognitive Services pour le Big Data
+      href: ./big-data/cognitive-services-for-big-data.md
+    - name: Prise en main
+      href: ./big-data/getting-started.md
+    - name: Exemples
+      items:
+        - name: Python
+          href: ./big-data/samples-python.md
+        - name: Scala
+          href: ./big-data/samples-scala.md
+    - name: Recettes
+      items:
+        - name: "Recette\_: Le détecteur d’anomalies"
+          href: ./big-data/recipes/anomaly-detection.md
+        - name: "Recette\_: Art Explorer"
+          href: ./big-data/recipes/art-explorer.md
+- name: Informations de référence
+  items:
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: cognitive-services-support-options.md
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=cognitive-services'
     - name: Tarifs
@@ -67,11 +105,9 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Conformité
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Options d’aide et de support
-      href: cognitive-services-support-options.md
     - name: Contrat de Niveau de Service (SLA)
       href: 'https://azure.microsoft.com/support/legal/sla/cognitive-services/v1_1/'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=cognitive-services'
     - name: Blog
       href: 'https://azure.microsoft.com/blog/topics/cognitive-services/'

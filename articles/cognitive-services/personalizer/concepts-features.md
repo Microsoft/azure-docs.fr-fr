@@ -3,31 +3,29 @@ title: 'Fonctionnalités : Action et contexte - Personalizer'
 titleSuffix: Azure Cognitive Services
 description: Personalizer utilise des caractéristiques, qui sont des informations sur les actions et sur le contexte, pour faire de meilleures suggestions de classement. Les caractéristiques peuvent être très génériques ou bien spécifiques à un élément.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 10/14/2019
-ms.author: diberry
-ms.openlocfilehash: 408501232891a7971d03c89acc647d9ed19609b3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: edd1549ddabef0ae1ba37150ad75a371ac6e6d85
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77026147"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94365514"
 ---
 # <a name="features-are-information-about-actions-and-context"></a>Les caractéristiques sont des informations sur les actions et sur le contexte
 
 Le service Personalizer fonctionne en apprenant ce que votre application devrait montrer aux utilisateurs dans un contexte donné.
 
-Personalizer utilise des **caractéristiques**, qui sont des informations sur le **contexte actuel** pour choisir la meilleure **action**. Les caractéristiques représentent toutes les informations dont vous pensez qu’elles peuvent aider la personnalisation à obtenir des récompenses plus élevées. Les caractéristiques peuvent être très génériques ou bien spécifiques à un élément. 
+Personalizer utilise des **caractéristiques** , qui sont des informations sur le **contexte actuel** pour choisir la meilleure **action**. Les caractéristiques représentent toutes les informations dont vous pensez qu’elles peuvent aider la personnalisation à obtenir des récompenses plus élevées. Les caractéristiques peuvent être très génériques ou bien spécifiques à un élément. 
 
 Par exemple, vous pouvez avoir une **caractéristique** sur :
 
-* Le _personnage de l’utilisateur_, par exemple, `Sports_Shopper`. Il ne doit pas s’agir d’un ID utilisateur. 
-* Le _contenu_, par exemple si une vidéo est du type `Documentary`, `Movie` ou `TV Series`, ou si un élément en vente est disponible en magasin.
-* La période de temps _actuelle_, comme le jour de la semaine.
+* Le _personnage de l’utilisateur_ , par exemple, `Sports_Shopper`. Il ne doit pas s’agir d’un ID utilisateur. 
+* Le _contenu_ , par exemple si une vidéo est du type `Documentary`, `Movie` ou `TV Series`, ou si un élément en vente est disponible en magasin.
+* La période de temps _actuelle_ , comme le jour de la semaine.
 
 Personalizer n’impose pas, ne limite pas ou ne corrige pas les caractéristiques que vous pouvez envoyer pour les actions et le contexte :
 
@@ -154,16 +152,16 @@ Par exemple :
 
 Vous pouvez utiliser plusieurs autres services [Azure Cognitive Services](https://www.microsoft.com/cognitive-services), comme
 
-* [Entity Linking](../entitylinking/home.md)
+* [Entity Linking](../text-analytics/index.yml)
 * [Analyse de texte](../text-analytics/overview.md)
-* [Émotion](../emotion/home.md)
-* [Vision par ordinateur](../computer-vision/home.md)
+* [Émotion](../face/overview.md)
+* [Vision par ordinateur](../computer-vision/overview.md)
 
 ## <a name="actions-represent-a-list-of-options"></a>Les actions représentent une liste d’options
 
 Chaque action :
 
-* A un ID d’_événement_. Si vous disposez déjà d’un ID d’événement, vous devez l’envoyer. Si vous ne disposez pas d’un ID d’événement, il n’est pas nécessaire d’en envoyer un. Personalizer va en créer un pour vous et le retourner dans la réponse de la requête Rank. L’ID est associé à l’événement Rank, et non à l’utilisateur. Si vous devez créer un ID, il est préférable d’utiliser un GUID. 
+* A un ID d’ _événement_. Si vous disposez déjà d’un ID d’événement, vous devez l’envoyer. Si vous ne disposez pas d’un ID d’événement, il n’est pas nécessaire d’en envoyer un. Personalizer va en créer un pour vous et le retourner dans la réponse de la requête Rank. L’ID est associé à l’événement Rank, et non à l’utilisateur. Si vous devez créer un ID, il est préférable d’utiliser un GUID. 
 * A une liste de caractéristiques.
 * La liste des caractéristiques peut être grande (plusieurs centaines), mais nous recommandons d’évaluer l’efficacité des caractéristiques de façon à supprimer celles qui ne contribuent pas à l’obtention des récompenses. 
 * Les caractéristiques des **actions** peuvent ou non avoir une corrélation avec les caractéristiques du **contexte** utilisées par Personalizer.
@@ -324,4 +322,4 @@ Les objets JSON peuvent inclure des objets JSON imbriqués et de simples valeurs
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Apprentissage par renforcement](concepts-reinforcement-learning.md) 
+[Apprentissage par renforcement](concepts-reinforcement-learning.md)

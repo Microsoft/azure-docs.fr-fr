@@ -3,16 +3,16 @@ title: Présentation de FreeBSD sur Azure
 description: Apprenez à utiliser des machines virtuelles FreeBSD sur Azure
 author: thomas1206
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 09/13/2017
 ms.author: mimckitt
-ms.openlocfilehash: 0825a29b45ea701315a57ff5248731e64e29de32
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 23f14e14bea665f838919ae357d11db32bddfa7f
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81261633"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94579417"
 ---
 # <a name="introduction-to-freebsd-on-azure"></a>Présentation de FreeBSD sur Azure
 Cet article offre une vue d’ensemble de l’exécution d’une machine virtuelle FreeBSD dans Azure.
@@ -22,33 +22,33 @@ FreeBSD pour Microsoft Azure est un système d’exploitation informatique avanc
 
 Microsoft Corporation rend disponibles des images de FreeBSD sur Azure avec [l’Agent invité de machine virtuelle Azure](https://github.com/Azure/WALinuxAgent/) préconfiguré. Actuellement, les versions FreeBSD suivantes sont proposées sous forme d’images par Microsoft :
 
-- [FreeBSD 10.4 sur la Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD104)
-- [FreeBSD 11.2 sur la Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD112)
-- [FreeBSD 12.0 sur la Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD120)
+- FreeBSD 10.4 sur la Place de marché Azure
+- FreeBSD 11.2 sur la Place de marché Azure
+- FreeBSD 12.0 sur la Place de marché Azure
 
 L’agent est responsable de la communication entre la machine virtuelle FreeBSD et Azure Fabric pour les opérations telles que l’approvisionnement de la machine virtuelle à la première utilisation (nom d’utilisateur, mot de passe ou clé SSH, nom d’hôte, etc.) et l’activation de fonctionnalités pour certaines extensions de machines virtuelles.
 
 Comme pour les versions futures de FreeBSD, la stratégie consiste à rester à jour et à rendre disponibles les dernières versions dès qu’elles sont publiées par l’équipe d’ingénieurs de lancement de FreeBSD.
 
 ### <a name="create-a-freebsd-vm-through-azure-cli-on-freebsd"></a>Créer une machine virtuelle FreeBSD avec Azure CLI sur FreeBSD
-Vous devez d’abord installer [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) à l’aide de la commande suivante sur une machine FreeBSD.
+Vous devez d’abord installer [Azure CLI](/cli/azure/get-started-with-azure-cli) à l’aide de la commande suivante sur une machine FreeBSD.
 
-```bash 
+```bash 
 curl -L https://aka.ms/InstallAzureCli | bash
 ```
 
-Si l’interpréteur de commandes n’est pas installé sur votre ordinateur FreeBSD, exécutez la commande suivante avant l’installation. 
+Si l’interpréteur de commandes n’est pas installé sur votre ordinateur FreeBSD, exécutez la commande suivante avant l’installation. 
 
 ```bash
 sudo pkg install bash
 ```
 
-Si python n’est pas installé sur votre ordinateur FreeBSD, exécutez les commandes suivantes avant l’installation. 
+Si python n’est pas installé sur votre ordinateur FreeBSD, exécutez les commandes suivantes avant l’installation. 
 
 ```bash
 sudo pkg install python35
-cd /usr/local/bin 
-sudo rm /usr/local/bin/python 
+cd /usr/local/bin 
+sudo rm /usr/local/bin/python 
 sudo ln -s /usr/local/bin/python3.5 /usr/local/bin/python
 ```
 
@@ -57,7 +57,7 @@ Pendant l’installation, vous devez répondre à la question suivante : `Modify
 Vous pouvez maintenant vous connecter à Azure et créer votre machine virtuelle FreeBSD. Voici un exemple de création d’une machine virtuelle FreeBSD 11.0. Vous pouvez également ajouter le paramètre `--public-ip-address-dns-name` avec un nom DNS global unique pour une adresse IP publique nouvellement créée. 
 
 ```azurecli
-az login 
+az login 
 az group create --name myResourceGroup --location eastus
 az vm create --name myFreeBSD11 \
     --resource-group myResourceGroup \
@@ -119,4 +119,4 @@ Vous pouvez éventuellement obtenir un interpréteur de commandes root avec `sud
 [L’agent invité de machine virtuelle Azure](https://github.com/Azure/WALinuxAgent/) version 2.2.2 présente un [problème connu](https://github.com/Azure/WALinuxAgent/pull/517) qui provoque l’échec de l’approvisionnement des machines virtuelles FreeBSD sur Azure. Le correctif a été capturé par l’[Agent invité de machine virtuelle Azure](https://github.com/Azure/WALinuxAgent/) 2.2.3 et versions ultérieures. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Accédez à [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD112) pour créer une machine virtuelle FreeBSD.
+* Accédez à [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/thefreebsdfoundation.freebsd-12_1?tab=Overview) pour créer une machine virtuelle FreeBSD.

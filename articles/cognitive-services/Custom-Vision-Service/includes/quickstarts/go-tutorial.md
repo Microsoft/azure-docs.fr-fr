@@ -2,24 +2,27 @@
 author: areddish
 ms.author: areddish
 ms.service: cognitive-services
-ms.date: 04/14/2020
-ms.openlocfilehash: 0efc0f1e07ef9370dbc8e300cd6bd3410f0265d3
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 09/15/2020
+ms.openlocfilehash: 27eb4383084e9a782e0c2cb8ff734fba8496c9f1
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82135078"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97582546"
 ---
-Cet article fournit des informations et un exemple de code pour vous aider à prendre en main le SDK Custom Vision avec Go, afin de générer un modèle de classification d’images. Après la création du projet, vous pouvez ajouter des étiquettes, charger des images, entraîner le projet, obtenir l’URL du point de terminaison de prédiction publié du projet et utiliser ce point de terminaison pour tester programmatiquement une image. Utilisez cet exemple comme modèle pour générer votre propre application Go. Si vous voulez générer et utiliser un modèle de classification _sans_ code, consultez le [guide basé sur navigateur](../../getting-started-build-a-classifier.md).
+Ce guide fournit des instructions et un exemple de code pour vous aider à commencer à utiliser la bibliothèque de client Custom Vision pour Go afin de générer un modèle de classification d’images. Vous allez créer un projet, ajouter des étiquettes, entraîner le projet et utiliser l’URL de point de terminaison de prédiction du projet pour le tester programmatiquement. Utilisez cet exemple comme modèle pour générer votre propre application de reconnaissance d’image.
+
+> [!NOTE]
+> Si vous souhaitez créer et entraîner un modèle de classification _sans_ écrire de code, consultez à la place les [instructions basées sur le navigateur](../../getting-started-build-a-classifier.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
 - [Go 1.8+](https://golang.org/doc/install)
 - [!INCLUDE [create-resources](../../includes/create-resources.md)]
 
-## <a name="install-the-custom-vision-sdk"></a>Installer le kit de développement logiciel (SDK) Vision personnalisée
+## <a name="install-the-custom-vision-client-library"></a>Installer la bibliothèque de client Custom Vision
 
-Pour installer le SDK du service Custom Vision pour Go, exécutez la commande suivante dans PowerShell :
+Pour écrire une application d’analyse d’image avec Custom Vision pour Go, vous avez besoin de la bibliothèque de client du service Custom Vision. Exécutez la commande suivante dans PowerShell :
 
 ```shell
 go get -u github.com/Azure/azure-sdk-for-go/...
@@ -38,11 +41,11 @@ dep ensure -add github.com/Azure/azure-sdk-for-go
 
 Créez un fichier nommé *sample.go* dans le répertoire de projet de votre choix.
 
-### <a name="create-the-custom-vision-service-project"></a>Créer le projet Service Vision personnalisée
+## <a name="create-the-custom-vision-project"></a>Créer le projet Custom Vision
 
 Pour créer un nouveau projet Service Vision personnalisée, ajoutez le code suivant à votre script. Insérez vos clés d’abonnement dans les définitions appropriées. Récupérez l’URL de votre point de terminaison à partir de la page Paramètres du site web Custom Vision.
 
-Consultez la méthode [CreateProject](https://docs.microsoft.com/java/api/com.microsoft.azure.cognitiveservices.vision.customvision.training.trainings.createproject?view=azure-java-stable#com_microsoft_azure_cognitiveservices_vision_customvision_training_Trainings_createProject_String_CreateProjectOptionalParameter_) pour spécifier d’autres options quand vous créez votre projet (procédure expliquée dans le guide du portail web [Créer un classifieur](../../getting-started-build-a-classifier.md)).
+Consultez la méthode [CreateProject](/java/api/com.microsoft.azure.cognitiveservices.vision.customvision.training.trainings.createproject?view=azure-java-stable#com_microsoft_azure_cognitiveservices_vision_customvision_training_Trainings_createProject_String_CreateProjectOptionalParameter_) pour spécifier d’autres options quand vous créez votre projet (procédure expliquée dans le guide du portail web [Créer un classifieur](../../getting-started-build-a-classifier.md)).
 
 ```go
 import(
@@ -80,7 +83,7 @@ func main() {
     }
 ```
 
-### <a name="create-tags-in-the-project"></a>Créer des balises dans un projet
+## <a name="create-tags-in-the-project"></a>Créer des balises dans un projet
 
 Pour créer des balises de classification dans votre projet, ajoutez le code suivant à la fin du fichier *sample.go* :
 
@@ -90,7 +93,7 @@ hemlockTag, _ := trainer.CreateTag(ctx, *project.ID, "Hemlock", "Hemlock tree ta
 cherryTag, _ := trainer.CreateTag(ctx, *project.ID, "Japanese Cherry", "Japanese cherry tree tag", string(training.Regular))
 ```
 
-### <a name="upload-and-tag-images"></a>Charger et étiqueter des images
+## <a name="upload-and-tag-images"></a>Charger et étiqueter des images
 
 Pour ajouter les exemples d’images au projet, insérez le code suivant après la création de mots clés. Ce code charge chaque image avec la balise correspondante. Vous pouvez charger jusqu’à 64 images dans un même lot.
 
@@ -123,7 +126,7 @@ for _, file := range japaneseCherryImages {
 }
 ```
 
-### <a name="train-the-classifier-and-publish"></a>Entraîner le classifieur et publier
+## <a name="train-and-publish-the-project"></a>Entraîner et publier le projet
 
 Ce code crée la première itération du modèle de prédiction, puis publie cette itération sur le point de terminaison de prédiction. Le nom donné à l’itération publiée peut être utilisé pour envoyer des requêtes de prédiction. Les itérations ne sont pas disponibles sur le point de terminaison de prédiction tant qu’elles n’ont pas été publiées.
 
@@ -143,7 +146,7 @@ fmt.Println("Training status: " + *iteration.Status)
 trainer.PublishIteration(ctx, *project.ID, *iteration.ID, iteration_publish_name, prediction_resource_id))
 ```
 
-### <a name="get-and-use-the-published-iteration-on-the-prediction-endpoint"></a>Obtenir et utiliser l’itération publiée sur le point de terminaison de prédiction
+## <a name="use-the-prediction-endpoint"></a>Utiliser le point de terminaison de prédiction
 
 Pour envoyer une image au point de terminaison de prédiction et récupérer la prédiction, ajoutez le code suivant à la fin du fichier :
 
@@ -186,6 +189,8 @@ Done!
 
 Vous pouvez ensuite vérifier que l’image test (trouvée dans **<base_image_url>/Images/Test**) est balisée de façon appropriée. Vous pouvez aussi revenir sur le [site web Custom Vision](https://customvision.ai) et consulter l’état actuel de votre nouveau projet.
 
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
 [!INCLUDE [clean-ic-project](../../includes/clean-ic-project.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -194,3 +199,7 @@ Vous savez maintenant comment effectuer la détection d’objet dans le code. Ce
 
 > [!div class="nextstepaction"]
 > [Tester et réentraîner un modèle](../../test-your-model.md)
+
+* Qu’est-ce que Custom Vision ?
+* [Documentation de référence du SDK (entraînement)](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/customvision/training)
+* [Documentation de référence du SDK (prédiction)](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction)

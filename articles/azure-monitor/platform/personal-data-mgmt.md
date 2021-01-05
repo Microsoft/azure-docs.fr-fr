@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 05/18/2018
-ms.openlocfilehash: 569731faffd97e816567af3f6ed1cf8cdf49f240
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 2bb1e667758a1430e34d222b9a5c537381c07624
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83740448"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97505271"
 ---
 # <a name="guidance-for-personal-data-stored-in-log-analytics-and-application-insights"></a>Guide pour les données personnelles stockées dans Log Analytics et Application Insights
 
@@ -48,7 +48,7 @@ Log Analytics est un store flexible qui, tout en prescrivant un schéma pour vos
     ```
   N’oubliez pas de rechercher non seulement les noms d’utilisateur explicites, mais aussi les GUID, qui peuvent permettre de remonter directement à un utilisateur particulier !
 * *ID d’appareil* : comme les ID d’utilisateur, les ID d’appareil sont parfois considérés « privés ». Utilisez la même approche que ci-dessus pour les ID d’utilisateur, pour identifier les tables où cela peut poser un problème. 
-* *Données personnalisées* : Log Analytics permet la collecte selon différentes méthodes : journaux d’activité personnalisés et champs personnalisés, [l’API du collecteur de données HTTP](../../azure-monitor/platform/data-collector-api.md) et les données personnalisées collectées dans le cadre de journaux des événements système. Tous ces éléments sont susceptibles de contenir des données privées et ils doivent être examinés pour vérifier si de telles données s’y trouvent.
+* *Données personnalisées* : Log Analytics permet la collecte selon différentes méthodes : journaux d’activité personnalisés et champs personnalisés, [l’API du collecteur de données HTTP](./data-collector-api.md) et les données personnalisées collectées dans le cadre de journaux des événements système. Tous ces éléments sont susceptibles de contenir des données privées et ils doivent être examinés pour vérifier si de telles données s’y trouvent.
 * *Données capturées par les solutions* : comme le mécanisme des solutions est ouvert, nous vous recommandons d’examiner toutes les tables générées par les solutions pour vérifier leur conformité.
 
 ### <a name="application-data"></a>Données d'application
@@ -67,8 +67,8 @@ Log Analytics est un store flexible qui, tout en prescrivant un schéma pour vos
     | where timestamp > ago(1d)
     | project $table, timestamp, name, customDimensions 
     ```
-* *Données en mémoire et en transit* : Application Insights effectue le suivi des exceptions, requêtes, appels de dépendance et traces. Les données privées peuvent souvent être collectées au niveau du code et des appels HTTP. Examinez les tables contenant des exceptions, requêtes, dépendances et traces pour identifier ces données. Utilisez si possible des [initialiseurs de télémétrie](https://docs.microsoft.com/azure/application-insights/app-insights-api-filtering-sampling) afin de brouiller ces données.
-* *Captures du débogueur de capture instantanée* : la fonctionnalité [Débogueur de capture instantanée](https://docs.microsoft.com/azure/application-insights/app-insights-snapshot-debugger) d’Application Insights vous permet de collecter des instantanés de débogage chaque fois qu’une exception est interceptée sur l’instance de production de votre application. Les instantanés exposeront la trace de pile complète conduisant à des exceptions, ainsi que les valeurs des variables locales à chaque étape de la pile. Malheureusement, cette fonctionnalité ne permet pas la suppression sélective de points d’ancrage, ou l’accès par programme aux données de l’instantané. Par conséquent, si le taux de rétention des instantanés par défaut ne répond pas à vos exigences de conformité, il est recommandé de désactiver cette fonctionnalité.
+* *Données en mémoire et en transit* : Application Insights effectue le suivi des exceptions, requêtes, appels de dépendance et traces. Les données privées peuvent souvent être collectées au niveau du code et des appels HTTP. Examinez les tables contenant des exceptions, requêtes, dépendances et traces pour identifier ces données. Utilisez si possible des [initialiseurs de télémétrie](../app/api-filtering-sampling.md) afin de brouiller ces données.
+* *Captures du débogueur de capture instantanée* : la fonctionnalité [Débogueur de capture instantanée](../app/snapshot-debugger.md) d’Application Insights vous permet de collecter des instantanés de débogage chaque fois qu’une exception est interceptée sur l’instance de production de votre application. Les instantanés exposeront la trace de pile complète conduisant à des exceptions, ainsi que les valeurs des variables locales à chaque étape de la pile. Malheureusement, cette fonctionnalité ne permet pas la suppression sélective de points d’ancrage, ou l’accès par programme aux données de l’instantané. Par conséquent, si le taux de rétention des instantanés par défaut ne répond pas à vos exigences de conformité, il est recommandé de désactiver cette fonctionnalité.
 
 ## <a name="how-to-export-and-delete-private-data"></a>Comment exporter et supprimer des données privées
 
@@ -81,14 +81,17 @@ Comme mentionné plus haut dans la section [Stratégie de gestion des données p
 Pour les requêtes d’affichage et d’exportation des données, vous devez utiliser l’[API de requête Log Analytics](https://dev.loganalytics.io/) ou l’[API de requête Application Insights](https://dev.applicationinsights.io/quickstart). L’implémentation de la logique pour convertir la forme des données selon un format approprié pour vos utilisateurs dépend de vous. [Azure Functions](https://azure.microsoft.com/services/functions/) est l’endroit idéal pour héberger cette logique.
 
 > [!IMPORTANT]
->  Alors que la grande majorité des opérations de vidage peuvent être effectuées beaucoup plus rapidement que ce que prévoit le contrat SLA, **le contrat SLA formel pour la réalisation des opérations de vidage est défini à 30 jours** en raison de leur impact important sur la plateforme de données utilisée. Il s’agit d’un processus automatisé, ce qui exclut la possibilité de demander qu’une opération soit gérée plus rapidement.
+>  Alors que la grande majorité des opérations de vidage peuvent être effectuées beaucoup plus rapidement que ce que prévoit le contrat SLA, **le contrat SLA formel pour la réalisation des opérations de vidage est défini à 30 jours** en raison de leur impact important sur la plateforme de données utilisée. Ce contrat SLA répond aux exigences du RGPD. Comme il s’agit d’un processus automatisé, il n’est pas possible de demander qu’une opération soit gérée plus rapidement. 
 
-### <a name="delete"></a>DELETE
+### <a name="delete"></a>Supprimer
 
 > [!WARNING]
 > Les suppressions dans Log Analytics sont destructrices et non réversibles ! Soyez très prudents quand vous les réalisez.
 
 Nous avons rendu disponible un chemin d’API *de vidage* dans le cadre d’une gestion de la confidentialité. Ce chemin doit être utilisé avec prudence en raison du risque associé à cette opération, de l’impact potentiel sur les performances, et de la possibilité d’influer sur les agrégations, les mesures et d’autres aspects de vos données Log Analytics. Pour d’autres approches de la gestion des données privées, consultez la section [Stratégie de gestion des données personnelles](#strategy-for-personal-data-handling).
+
+> [!NOTE]
+> Une fois l’opération de vidage effectuée, les données ne sont pas accessibles tant que l’[état de l’opération de vidage](https://docs.microsoft.com/rest/api/loganalytics/workspacepurge/getpurgestatus) est *en attente*. 
 
 Le vidage est une opération nécessitant des privilèges élevés, qu’aucune application ni utilisateur dans Azure (y compris même le propriétaire de la ressource) n’a l’autorisation d’exécuter sans qu’un rôle lui soit explicitement accordé dans Azure Resource Manager. Ce rôle est _Videur de données_ et il doit être délégué avec prudence en raison du risque de perte de données. 
 
@@ -101,7 +104,7 @@ Une fois que le rôle Azure Resource Manager a été affecté, deux nouveaux che
 
 #### <a name="log-data"></a>Données de journal
 
-* [POST purge](https://docs.microsoft.com/rest/api/loganalytics/workspacepurge/purge) - prend un objet spécifiant les paramètres des données à supprimer et retourne un GUID de référence 
+* [POST purge](/rest/api/loganalytics/workspacepurge/purge) - prend un objet spécifiant les paramètres des données à supprimer et retourne un GUID de référence 
 * GET purge status - l’appel de POST purge retourne un en-tête « x-ms-état-location » qui inclut une URL que vous pouvez appeler pour déterminer l’état de votre API de vidage. Par exemple :
 
     ```
@@ -113,7 +116,7 @@ Une fois que le rôle Azure Resource Manager a été affecté, deux nouveaux che
 
 #### <a name="application-data"></a>Données d'application
 
-* [POST purge](https://docs.microsoft.com/rest/api/application-insights/components/purge) - prend un objet spécifiant les paramètres des données à supprimer et retourne un GUID de référence
+* [POST purge](/rest/api/application-insights/components/purge) - prend un objet spécifiant les paramètres des données à supprimer et retourne un GUID de référence
 * GET purge status - l’appel de POST purge retourne un en-tête « x-ms-état-location » qui inclut une URL que vous pouvez appeler pour déterminer l’état de votre API de vidage. Par exemple :
 
    ```
@@ -124,5 +127,6 @@ Une fois que le rôle Azure Resource Manager a été affecté, deux nouveaux che
 >  Alors que la grande majorité des opérations de vidage peuvent être effectuées beaucoup plus rapidement que ce que prévoit le contrat SLA, en raison de leur impact important sur la plateforme de données utilisée par Application Insights, **le contrat SLA formel pour la réalisation des opérations de vidage est défini à 30 jours**.
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Pour plus d’informations sur la façon dont les données Log Analytics sont collectées, traitées et sécurisées, consultez [Sécurité des données Log Analytics](../../azure-monitor/platform/data-security.md).
-- Pour plus d’informations sur la façon dont les données Application Insights sont collectées, traitées et sécurisées, consultez [Sécurité des données Application Insights](../../azure-monitor/app/data-retention-privacy.md).
+- Pour plus d’informations sur la façon dont les données Log Analytics sont collectées, traitées et sécurisées, consultez [Sécurité des données Log Analytics](./data-security.md).
+- Pour plus d’informations sur la façon dont les données Application Insights sont collectées, traitées et sécurisées, consultez [Sécurité des données Application Insights](../app/data-retention-privacy.md).
+

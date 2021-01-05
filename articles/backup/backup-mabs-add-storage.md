@@ -3,12 +3,12 @@ title: Utiliser un stockage de sauvegarde moderne avec un Serveur de sauvegarde 
 description: Découvrez les nouvelles fonctionnalités du Serveur de sauvegarde Azure. Cet article décrit comment mettre à niveau votre installation de serveur de sauvegarde.
 ms.topic: conceptual
 ms.date: 11/13/2018
-ms.openlocfilehash: c6346d7b0275a00271c1787b378a63b8365edf2d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b077296e58e1193e454a686a392d802e905500a5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74172375"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91292895"
 ---
 # <a name="add-storage-to-azure-backup-server"></a>Ajouter du stockage à un serveur de sauvegarde Azure
 
@@ -18,7 +18,7 @@ Azure Backup Server V2 et les versions ultérieures prennent en charge le stocka
 > Pour utiliser le stockage de sauvegarde moderne, vous devez exécuter le Serveur de sauvegarde V2 ou V3 sur Windows Server 2016 ou V3 sur Windows Server 2019.
 > Si vous exécutez le Serveur de sauvegarde V2 sur une version antérieure de Windows Server, le Serveur de sauvegarde Azure ne peut pas tirer parti du stockage de sauvegarde moderne. Au lieu de cela, il protège les charges de travail comme il le fait avec le Serveur de sauvegarde V1. Pour plus d’informations, voir la [matrice protection](backup-mabs-protection-matrix.md) de la version du Serveur de sauvegarde.
 >
-> Pour améliorer les performances de sauvegarde, nous vous recommandons de déployer MABS v3 avec un stockage hiérarchisé sur Windows Server 2019. Découvrez comment configurer un stockage hiérarchisé dans l’article DPM intitulé « [Configurer MBS avec un stockage hiérarchisé](https://docs.microsoft.com/system-center/dpm/add-storage?view=sc-dpm-2019#set-up-mbs-with-tiered-storage) ».
+> Pour améliorer les performances de sauvegarde, nous vous recommandons de déployer MABS v3 avec un stockage hiérarchisé sur Windows Server 2019. Reportez-vous à la section « [Configurer MBS avec un stockage hiérarchisé](/system-center/dpm/add-storage#set-up-mbs-with-tiered-storage) » de l'article DPM pour apprendre à configurer un stockage hiérarchisé.
 
 ## <a name="volumes-in-backup-server"></a>Volumes dans le Serveur de sauvegarde
 
@@ -103,13 +103,13 @@ La mise à jour des groupes de protection pour qu’ils utilisent Modern Backup 
 
 1. Dans la console Administrateur du serveur de sauvegarde, sélectionnez la fonctionnalité **Protection**. Dans la liste **Membre du groupe de Protection**, cliquez sur le membre, puis sélectionnez **Arrêter la protection du membre**.
 
-   ![Arrêter la protection du membre](https://docs.microsoft.com/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-stop-protection1.png)
+   ![Arrêter la protection du membre](/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-stop-protection1.png)
 
-2. Dans la boîte de dialogue **Supprimer du groupe**, vérifiez l’espace disque utilisé et l’espace libre disponible pour le pool de stockage. La valeur par défaut consiste à conserver les points de récupération sur le disque et à les laisser expirer suivant la stratégie de rétention associée. Cliquez sur **OK**.
+2. Dans la boîte de dialogue **Supprimer du groupe**, vérifiez l’espace disque utilisé et l’espace libre disponible pour le pool de stockage. La valeur par défaut consiste à conserver les points de récupération sur le disque et à les laisser expirer suivant la stratégie de rétention associée. Sélectionnez **OK**.
 
    Si vous souhaitez restituer immédiatement l’espace disque utilisé pour le pool de stockage libre, sélectionnez la case à cocher **Supprimer le réplica sur le disque** pour supprimer les données de sauvegarde (et les points de récupération) associées à ce membre.
 
-   ![Boîte de dialogue Supprimer du groupe](https://docs.microsoft.com/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-retain-data.png)
+   ![Boîte de dialogue Supprimer du groupe](/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-retain-data.png)
 
 3. Créez un groupe de protection qui utilise Modern Backup Storage. Incluez les sources de données non protégées.
 
@@ -121,7 +121,7 @@ Pour ajouter un stockage sur disque :
 
 1. Dans la console Administrateur, sélectionnez **Gestion** > **Stockage sur disque** > **Ajouter**.
 
-    ![Boîte de dialogue Ajouter un stockage sur disque](https://docs.microsoft.com/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-add-disk-storage.png)
+    ![Boîte de dialogue Ajouter un stockage sur disque](/system-center/dpm/media/upgrade-to-dpm-2016/dpm-2016-add-disk-storage.png)
 
 2. Dans la boîte de dialogue **Ajouter un stockage sur disque**, sélectionnez **Ajouter des disques**.
 

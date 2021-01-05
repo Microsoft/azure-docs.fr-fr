@@ -1,24 +1,22 @@
 ---
-title: Machines virtuelles Windows 7 sur Windows Virtual Desktop – Azure
-description: Apprenez à résoudre les problèmes liés aux machines virtuelles Windows 7 dans un environnement Windows Virtual Desktop.
-services: virtual-desktop
+title: Machines virtuelles Windows 7 sur Windows Virtual Desktop (classique) – Azure
+description: Apprenez à résoudre les problèmes liés aux machines virtuelles Windows 7 dans un environnement Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 74f2e22bcc9d75070e4f7af304f92d9c5640ca7a
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 1d71b4472b16372927db56b20eca4fcbde0cc625
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614222"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88005412"
 ---
-# <a name="troubleshoot-windows-7-virtual-machines-in-windows-virtual-desktop"></a>Résoudre les problèmes de machines virtuelles Windows 7 dans Windows Virtual Desktop
+# <a name="troubleshoot-windows-7-virtual-machines-in-windows-virtual-desktop-classic"></a>Résoudre les problèmes de machines virtuelles Windows 7 dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop.
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager.
 
 Utilisez cet article pour résoudre les problèmes rencontrés lors de la configuration des machines virtuelles hôtes de session Windows Virtual Desktop.
 
@@ -47,7 +45,7 @@ Pour y remédier, ajoutez l'utilisateur au groupe d'utilisateurs du Bureau à di
 2. Sélectionnez la machine virtuelle sur laquelle le message d'erreur est apparu.
 3. Sélectionnez **Exécuter une commande**.
 4. Exécutez la commande suivante en remplaçant `<username>` par le nom de l'utilisateur que vous souhaitez ajouter :
-   
+
    ```cmd
    net localgroup "Remote Desktop Users" <username> /add
    ```

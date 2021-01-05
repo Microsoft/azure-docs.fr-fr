@@ -3,12 +3,13 @@ title: Créer une image avec Cloud Native Buildpack
 description: Utilisez la commande AZ ACR Pack Build pour créer une image conteneur à partir d’une application et effectuer une transmission de type envoi (push) vers Azure Container Registry, sans utiliser de fichier dockerfile.
 ms.topic: article
 ms.date: 10/24/2019
-ms.openlocfilehash: c42bde6bbab5973094302a2d41f004d7600bdf9e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js, devx-track-azurecli
+ms.openlocfilehash: 264fc7314c78088ebfefb9ddb8edbe38fa16581a
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79087083"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92736638"
 ---
 # <a name="build-and-push-an-image-from-an-app-using-a-cloud-native-buildpack"></a>Générer et envoyer (push) une image à partir d’une application à l’aide d’un Cloud Native Buildpack
 
@@ -44,7 +45,7 @@ az acr pack build \
     https://github.com/Azure-Samples/nodejs-docs-hello-world.git
 ```
 
-Cet exemple génère l'image `node-app` avec la balise `1.0` et l'envoie (push) au registre de conteneurs *myregistry*. Dans cet exemple, le nom du registre cible est explicitement ajouté au nom de l’image. S’il n’est pas spécifié, le nom du serveur de connexion au registre est automatiquement ajouté au nom de l’image.
+Cet exemple génère l'image `node-app` avec la balise `1.0` et l'envoie (push) au registre de conteneurs *myregistry* . Dans cet exemple, le nom du registre cible est explicitement ajouté au nom de l’image. S’il n’est pas spécifié, le nom du serveur de connexion au registre est automatiquement ajouté au nom de l’image.
 
 La sortie de la commande affiche la progression de la génération et de l’envoi de l’image. 
 
@@ -74,7 +75,7 @@ az acr pack build \
     https://github.com/buildpack/sample-java-app.git
 ```
 
-Cet exemple génère l'image `java-app` marquée avec l’ID d’exécution de la commande et l'envoie (push) au registre de conteneurs *myregistry*.
+Cet exemple génère l'image `java-app` marquée avec l’ID d’exécution de la commande et l'envoie (push) au registre de conteneurs *myregistry* .
 
 La sortie de la commande affiche la progression de la génération et de l’envoi de l’image. 
 
@@ -84,7 +85,7 @@ Une fois l’image créée, vous pouvez l’exécuter avec Docker, si vous l’a
 az acr login --name myregistry
 ```
 
-Exécutez l’image en remplaçant la balise d'image pour *runid* :
+Exécutez l’image en remplaçant la balise d'image pour *runid*  :
 
 ```console
 docker run --rm -p 8080:8080 myregistry.azurecr.io/java-app:runid
@@ -95,7 +96,7 @@ Accédez à `localhost:8080` dans votre navigateur favori pour voir l’exemple 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois que vous avez généré et envoyé une image conteneur avec `az acr pack build`, vous pouvez la déployer comme n’importe quelle image vers une cible de votre choix. Les options de déploiement Azure incluent l'exécution de cette opération dans [App Service](../app-service/containers/tutorial-custom-docker-image.md) ou le [Azure Kubernetes Service](../aks/tutorial-kubernetes-deploy-cluster.md), entre autres.
+Une fois que vous avez généré et envoyé une image conteneur avec `az acr pack build`, vous pouvez la déployer comme n’importe quelle image vers une cible de votre choix. Les options de déploiement Azure incluent l'exécution de cette opération dans [App Service](../app-service/tutorial-custom-container.md) ou le [Azure Kubernetes Service](../aks/tutorial-kubernetes-deploy-cluster.md), entre autres.
 
 Pour plus d’informations sur les fonctionnalités des tâches ACR, consultez [Automatiser les builds d’image de conteneur et la maintenance avec les tâches ACR](container-registry-tasks-overview.md).
 

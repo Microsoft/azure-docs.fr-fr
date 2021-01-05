@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Opal | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Opal.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 434fc204-e9f9-4678-ad5f-054d621bb2f9
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/24/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 19f8d5fdc1b2d5098d67f7ecf2c81e6c29a38a3b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 80c4b1998872c749228d7352484fd5af22b6d23d
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75561726"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608338"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-opal"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Opal
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Opal à Azure Active D
 * Permettre à vos utilisateurs de se connecter automatiquement à Opal avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,12 +39,10 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
-
 * Opal prend en charge l’authentification unique lancée par le **fournisseur d’identité**
 
 > [!NOTE]
 > L’identificateur de cette application étant une valeur de chaîne fixe, une seule instance peut être configurée dans un locataire.
-
 
 ## <a name="adding-opal-from-the-gallery"></a>Ajout d’Opal à partir de la galerie
 
@@ -61,7 +54,6 @@ Pour configurer l’intégration de Opal à Azure AD, vous devez ajouter Opal �
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
 1. Dans la section **Ajouter à partir de la galerie**, tapez **Opal** dans la zone de recherche.
 1. Sélectionnez **Opal** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
-
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-opal"></a>Configurer et tester l’authentification unique Azure AD pour Opal
 
@@ -88,12 +80,14 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, entrez les valeurs pour les champs suivants :
 
-    a. Dans la zone de texte **Identificateur**, tapez une URL : `Opal`
+    1. Dans la zone de texte **Identificateur**, tapez une URL : `Opal`
 
-    b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://<subdomain>.ouropal.com/auth/saml/callback`
+    1. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
 
-    > [!NOTE]
-    > La valeur de l’URL de réponse n’est pas réelle. Mettez à jour la valeur avec l’URL de réponse réelle. Pour obtenir cette valeur, contactez l’[équipe du support technique Opal](mailto:support@workwithopal.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+        `https://<subdomain>.ouropal.com/auth/saml/callback`
+
+        > [!NOTE]
+        > La valeur de l’URL de réponse n’est pas réelle. Mettez à jour la valeur avec l’URL de réponse réelle. Pour obtenir cette valeur, contactez l’[équipe du support technique Opal](mailto:support@workwithopal.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 1. Votre application Opal s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration des attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut.
 
@@ -103,8 +97,8 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     | Nom | Attribut source|
     | ---------------| --------------- |
-    | firstname           | user.givenname |
-    | lastname        | user.surname |
+    | firstname | user.givenname |
+    | lastname | user.surname |
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération** et sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -121,7 +115,7 @@ Dans cette section, vous allez créer un utilisateur de test appelé B. Simon da
 1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
 1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
+   1. Dans le champ **Nom**, entrez `B.Simon`.
    1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
    1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
    1. Cliquez sur **Créer**.
@@ -150,21 +144,20 @@ Pour configurer l’authentification unique côté **Opal**, vous devez envoyer 
 
 ### <a name="create-opal-test-user"></a>Créer un utilisateur de test Opal
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Opal. Collaborez avec l’ [équipe de support technique Opal](mailto:support@workwithopal.com) pour ajouter des utilisateurs à la plateforme Opal. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Opal. Collaborez avec [l’équipe de support technique Opal](mailto:support@workwithopal.com) pour ajouter des utilisateurs dans la plateforme Opal. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Opal dans le volet d’accès doit vous connecter automatiquement à l’application Opal pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Opal dans le volet d’accès doit vous connecter automatiquement à l’application Opal pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Opal avec Azure AD](https://aad.portal.azure.com/)
-

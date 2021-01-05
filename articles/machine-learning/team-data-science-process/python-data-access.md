@@ -10,13 +10,13 @@ ms.subservice: team-data-science-process
 ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
-ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 93ec5e740ac6acf9420a9d980092ed772ac1618e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, devx-track-python, previous-author=deguhath, previous-ms.author=deguhath
+ms.openlocfilehash: 497b8f5598cf7aa7720f47863d465f5e29789b07
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720977"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93321959"
 ---
 # <a name="access-datasets-with-python-using-the-azure-machine-learning-python-client-library"></a>Accédez aux jeux de données avec Python grâce à la bibliothèque cliente Python d'Azure Machine Learning
 L’aperçu de la bibliothèque cliente Python de Microsoft Azure Machine Learning offre un accès sécurisé à vos jeux de données Azure Machine Learning à partir d’un environnement Python local et permet la création et la gestion de jeux de données dans un espace de travail.
@@ -40,21 +40,26 @@ Il a une dépendance sur les packages suivants :
 * python-dateutil
 * pandas
 
-Nous vous invitons à utiliser une distribution Python telle qu’[Anaconda](http://continuum.io/downloads#all) ou [Canopy](https://store.enthought.com/downloads/), qui est fournie avec Python, IPython et les trois packages listés ci-dessus installés. Bien que IPython n'est pas formellement requis, il s'agit d'un environnement idéal pour la manipulation et la visualisation interactive des données.
+Nous vous invitons à utiliser une distribution Python telle qu’[Anaconda](https://www.anaconda.com/) ou [Canopy](https://store.enthought.com/downloads/), qui est fournie avec Python, IPython et les trois packages listés ci-dessus installés. Bien que IPython n'est pas formellement requis, il s'agit d'un environnement idéal pour la manipulation et la visualisation interactive des données.
 
 ### <a name="how-to-install-the-azure-machine-learning-python-client-library"></a><a name="installation"></a>Installation de la bibliothèque cliente Python d'Azure Machine Learning
 Installez la bibliothèque cliente Python d’Azure Machine Learning pour effectuer les tâches décrites dans cette rubrique. Cette bibliothèque est disponible depuis le [Python Package Index](https://pypi.python.org/pypi/azureml). Pour l'installer dans votre environnement Python, exécutez la commande suivante à partir de votre environnement Python local :
 
-    pip install azureml
+```console
+pip install azureml
+```
 
 Vous pouvez également la télécharger et l’installer à partir des sources disponibles sur [GitHub](https://github.com/Azure/Azure-MachineLearning-ClientLibrary-Python).
 
-    python setup.py install
+```console
+python setup.py install
+```
 
 Si vous avez installé git sur votre ordinateur, vous pouvez utiliser pip pour l'installer directement à partir du référentiel git :
 
-    pip install git+https://github.com/Azure/Azure-MachineLearning-ClientLibrary-Python.git
-
+```console
+pip install git+https://github.com/Azure/Azure-MachineLearning-ClientLibrary-Python.git
+```
 
 ## <a name="use-code-snippets-to-access-datasets"></a><a name="datasetAccess"></a>Utilisation des extraits de code pour accéder aux jeux de données
 La bibliothèque cliente Python vous offre un accès par programme à vos jeux de données existants à partir des expériences qui ont été exécutées.
@@ -66,9 +71,9 @@ Les extraits de code fournis par Azure Machine Learning Studio (classique) pour 
 
 Pour des raisons de sécurité, la fonctionnalité d'extrait de code est uniquement disponible pour les utilisateurs qui ont leur rôle défini en tant que **Propriétaire** de l'espace de travail. Votre rôle s’affiche dans Azure Machine Learning Studio (classique) dans la page **UTILISATEURS** sous **Paramètres**.
 
-![Sécurité][security]
+![Capture d’écran montrant les paramètres de la page UTILISATEURS d’Azure Machine Learning Studio.][security]
 
-Si votre rôle n’est pas défini en tant que **Propriétaire**, vous pouvez demander à être invité à nouveau en tant que propriétaire ou demander au propriétaire de l’espace de travail de vous fournir l’extrait de code.
+Si votre rôle n’est pas défini en tant que **Propriétaire** , vous pouvez demander à être invité à nouveau en tant que propriétaire ou demander au propriétaire de l’espace de travail de vous fournir l’extrait de code.
 
 Pour obtenir le jeton d’autorisation, vous pouvez choisir l’une des options suivantes :
 
@@ -87,7 +92,7 @@ Les jetons d’autorisation sont gérés sur la page **JETONS D’AUTORISATION**
 2. Sélectionnez le jeu de données auquel vous souhaitez accéder. Vous pouvez sélectionner un des jeux de données depuis la liste **MES JEUX DE DONNÉES** ou **EXEMPLES**.
 3. Dans la barre d’outils inférieure, cliquez sur **Générer un code d’accès aux données**. Ce bouton est désactivé si les données sont dans un format incompatible avec la bibliothèque cliente Python.
    
-    ![Groupes de données][datasets]
+    ![Capture d’écran montrant les jeux de données avec l’option GENERATE DATA ACCESS CODE (Générer le code d’accès aux données).][datasets]
 4. Sélectionnez l'extrait de code dans la fenêtre qui s'affiche et copiez-le dans votre presse-papiers.
    
     ![Bouton Générer le fichier de code d’accès aux données][dataset-access-code]
@@ -143,98 +148,119 @@ Les étapes suivantes proposent un exemple qui créé une expérience, l'exécut
 ### <a name="workspace"></a>Espace de travail
 L'espace de travail est le point d'entrée de la bibliothèque cliente Python. Il fournit la classe `Workspace` avec l’ID de votre espace de travail et le jeton d’autorisation pour créer une instance :
 
-    ws = Workspace(workspace_id='4c29e1adeba2e5a7cbeb0e4f4adfb4df',
-                   authorization_token='f4f3ade2c6aefdb1afb043cd8bcf3daf')
-
+```python
+ws = Workspace(workspace_id='4c29e1adeba2e5a7cbeb0e4f4adfb4df',
+               authorization_token='f4f3ade2c6aefdb1afb043cd8bcf3daf')
+```
 
 ### <a name="enumerate-datasets"></a>Énumérer les jeux de données
 Pour énumérer tous les jeux de données dans un espace de travail donné :
 
-    for ds in ws.datasets:
-        print(ds.name)
+```python
+for ds in ws.datasets:
+    print(ds.name)
+```
 
 Pour énumérer uniquement les jeux de données créés par l'utilisateur :
 
-    for ds in ws.user_datasets:
-        print(ds.name)
+```python
+for ds in ws.user_datasets:
+    print(ds.name)
+```
 
 Pour énumérer uniquement les exemples de jeux de données :
 
-    for ds in ws.example_datasets:
-        print(ds.name)
+```python
+for ds in ws.example_datasets:
+    print(ds.name)
+```
 
 Vous pouvez accéder à un jeu de données par son nom (qui respecte la casse) :
 
-    ds = ws.datasets['my dataset name']
+```python
+ds = ws.datasets['my dataset name']
+```
 
 Vous pouvez également y accéder par l'index :
 
-    ds = ws.datasets[0]
-
+```python
+ds = ws.datasets[0]
+```
 
 ### <a name="metadata"></a>Métadonnées
 Les jeux de données ont des métadonnées, en plus du contenu. (Les jeux de données intermédiaires sont une exception à cette règle et n'ont pas de métadonnées.)
 
 Certaines valeurs de métadonnées sont affectées par l'utilisateur lors de la création :
 
-    print(ds.name)
-    print(ds.description)
-    print(ds.family_id)
-    print(ds.data_type_id)
+* `print(ds.name)`
+* `print(ds.description)`
+* `print(ds.family_id)`
+* `print(ds.data_type_id)`
 
 D'autres sont des valeurs affectées par Azure ML :
 
-    print(ds.id)
-    print(ds.created_date)
-    print(ds.size)
+* `print(ds.id)`
+* `print(ds.created_date)`
+* `print(ds.size)`
 
 Consultez la classe `SourceDataset` pour plus d'informations sur les métadonnées disponibles.
 
 ### <a name="read-contents"></a>Lire le contenu
 Les extraits de code fournis par Machine Learning Studio (classique) téléchargent et désérialisent automatiquement le jeu de données vers un objet DataFrame Pandas. Cette opération est effectuée à l'aide de la méthode `to_dataframe` :
 
-    frame = ds.to_dataframe()
+```python
+frame = ds.to_dataframe()
+```
 
 Si vous préférez télécharger les données brutes et procéder vous-même à la désérialisation, cela est possible. Pour le moment, il s'agit de la seule option pour les formats tels que « ARFF » que la bibliothèque cliente Python ne peut pas désérialiser.
 
 Pour lire le contenu en texte :
 
-    text_data = ds.read_as_text()
+```python
+text_data = ds.read_as_text()
+```
 
 Pour lire le contenu en binaire :
 
-    binary_data = ds.read_as_binary()
+```python
+binary_data = ds.read_as_binary()
+```
 
 Vous pouvez également ouvrir un simple flux vers le contenu :
 
-    with ds.open() as file:
-        binary_data_chunk = file.read(1000)
-
+```python
+with ds.open() as file:
+    binary_data_chunk = file.read(1000)
+```
 
 ### <a name="create-a-new-dataset"></a>Créer un nouveau jeu de données
 La bibliothèque cliente Python vous permet de télécharger des jeux de données depuis votre programme Python. Ces jeux de données sont alors disponibles pour une utilisation dans votre espace de travail.
 
 Si vous avez vos données dans un DataFrame de pandas, utilisez le code suivant :
 
-    from azureml import DataTypeIds
+```python
+from azureml import DataTypeIds
 
-    dataset = ws.datasets.add_from_dataframe(
-        dataframe=frame,
-        data_type_id=DataTypeIds.GenericCSV,
-        name='my new dataset',
-        description='my description'
-    )
+dataset = ws.datasets.add_from_dataframe(
+    dataframe=frame,
+    data_type_id=DataTypeIds.GenericCSV,
+    name='my new dataset',
+    description='my description'
+)
+```
 
 Si vos données sont déjà sérialisées, vous pouvez utiliser :
 
-    from azureml import DataTypeIds
+```python
+from azureml import DataTypeIds
 
-    dataset = ws.datasets.add_from_raw_data(
-        raw_data=raw_data,
-        data_type_id=DataTypeIds.GenericCSV,
-        name='my new dataset',
-        description='my description'
-    )
+dataset = ws.datasets.add_from_raw_data(
+    raw_data=raw_data,
+    data_type_id=DataTypeIds.GenericCSV,
+    name='my new dataset',
+    description='my description'
+)
+```
 
 La bibliothèque cliente Python est en mesure de sérialiser un DataFrame de pandas aux formats suivants (ces constantes sont dans la classe `azureml.DataTypeIds` ) :
 
@@ -249,66 +275,76 @@ Si vous essayez de télécharger un nouveau jeu de données avec un nom qui corr
 
 Pour mettre à jour un jeu de données existant, vous devez d'abord obtenir la référence d'un jeu de données existant :
 
-    dataset = ws.datasets['existing dataset']
+```python
+dataset = ws.datasets['existing dataset']
 
-    print(dataset.data_type_id) # 'GenericCSV'
-    print(dataset.name)         # 'existing dataset'
-    print(dataset.description)  # 'data up to jan 2015'
+print(dataset.data_type_id) # 'GenericCSV'
+print(dataset.name)         # 'existing dataset'
+print(dataset.description)  # 'data up to jan 2015'
+```
 
 Utilisez ensuite `update_from_dataframe` pour sérialiser et remplacer le contenu du jeu de données sur Azure :
 
-    dataset = ws.datasets['existing dataset']
+```python
+dataset = ws.datasets['existing dataset']
 
-    dataset.update_from_dataframe(frame2)
+dataset.update_from_dataframe(frame2)
 
-    print(dataset.data_type_id) # 'GenericCSV'
-    print(dataset.name)         # 'existing dataset'
-    print(dataset.description)  # 'data up to jan 2015'
+print(dataset.data_type_id) # 'GenericCSV'
+print(dataset.name)         # 'existing dataset'
+print(dataset.description)  # 'data up to jan 2015'
+```
 
 Si vous souhaitez sérialiser les données dans un format différent, spécifiez une valeur pour le paramètre en option `data_type_id` .
 
-    from azureml import DataTypeIds
+```python
+from azureml import DataTypeIds
 
-    dataset = ws.datasets['existing dataset']
+dataset = ws.datasets['existing dataset']
 
-    dataset.update_from_dataframe(
-        dataframe=frame2,
-        data_type_id=DataTypeIds.GenericTSV,
-    )
+dataset.update_from_dataframe(
+    dataframe=frame2,
+    data_type_id=DataTypeIds.GenericTSV,
+)
 
-    print(dataset.data_type_id) # 'GenericTSV'
-    print(dataset.name)         # 'existing dataset'
-    print(dataset.description)  # 'data up to jan 2015'
+print(dataset.data_type_id) # 'GenericTSV'
+print(dataset.name)         # 'existing dataset'
+print(dataset.description)  # 'data up to jan 2015'
+```
 
 Vous pouvez éventuellement définir une nouvelle description en spécifiant une valeur pour le paramètre `description` .
 
-    dataset = ws.datasets['existing dataset']
+```python
+dataset = ws.datasets['existing dataset']
 
-    dataset.update_from_dataframe(
-        dataframe=frame2,
-        description='data up to feb 2015',
-    )
+dataset.update_from_dataframe(
+    dataframe=frame2,
+    description='data up to feb 2015',
+)
 
-    print(dataset.data_type_id) # 'GenericCSV'
-    print(dataset.name)         # 'existing dataset'
-    print(dataset.description)  # 'data up to feb 2015'
+print(dataset.data_type_id) # 'GenericCSV'
+print(dataset.name)         # 'existing dataset'
+print(dataset.description)  # 'data up to feb 2015'
+```
 
 Vous pouvez éventuellement définir un nouveau nom en spécifiant une valeur pour le paramètre `name` . À partir de maintenant, vous allez récupérer le jeu de données uniquement à l'aide du nouveau nom. Le code suivant met à jour les données, le nom et la description.
 
-    dataset = ws.datasets['existing dataset']
+```python
+dataset = ws.datasets['existing dataset']
 
-    dataset.update_from_dataframe(
-        dataframe=frame2,
-        name='existing dataset v2',
-        description='data up to feb 2015',
-    )
+dataset.update_from_dataframe(
+    dataframe=frame2,
+    name='existing dataset v2',
+    description='data up to feb 2015',
+)
 
-    print(dataset.data_type_id)                    # 'GenericCSV'
-    print(dataset.name)                            # 'existing dataset v2'
-    print(dataset.description)                     # 'data up to feb 2015'
+print(dataset.data_type_id)                    # 'GenericCSV'
+print(dataset.name)                            # 'existing dataset v2'
+print(dataset.description)                     # 'data up to feb 2015'
 
-    print(ws.datasets['existing dataset v2'].name) # 'existing dataset v2'
-    print(ws.datasets['existing dataset'].name)    # IndexError
+print(ws.datasets['existing dataset v2'].name) # 'existing dataset v2'
+print(ws.datasets['existing dataset'].name)    # IndexError
+```
 
 Les paramètres `data_type_id`, `name` et `description` sont facultatifs. Par défaut, ils indiquent leur valeur précédente. Le paramètre `dataframe` est toujours requis.
 
@@ -328,6 +364,5 @@ Si vos données sont déjà sérialisées, utilisez `update_from_raw_data` au l
 
 
 <!-- Module References -->
-[convert-to-csv]: https://msdn.microsoft.com/library/azure/faa6ba63-383c-4086-ba58-7abf26b85814/
-[split]: https://msdn.microsoft.com/library/azure/70530644-c97a-4ab6-85f7-88bf30a8be5f/
-
+[convert-to-csv]: /azure/machine-learning/studio-module-reference/convert-to-csv
+[split]: /azure/machine-learning/studio-module-reference/split-data

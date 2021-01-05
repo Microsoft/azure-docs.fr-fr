@@ -4,15 +4,15 @@ description: Modèles de mise à l’échelle automatique d’Azure pour Web App
 ms.topic: conceptual
 ms.date: 07/07/2017
 ms.subservice: autoscale
-ms.openlocfilehash: a05cf87e660cc6c388ea2055bb174c47b99da4a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7fdb3588833dd9bcf989e020cd1dd861c6e28f37
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226373"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95745314"
 ---
 # <a name="best-practices-for-autoscale"></a>Meilleures pratiques pour la mise à l’échelle automatique
-La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](https://docs.microsoft.com/azure/api-management/api-management-key-concepts).
+La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](../../api-management/api-management-key-concepts.md).
 
 ## <a name="autoscale-concepts"></a>Concepts de la mise à l’échelle automatique
 
@@ -22,7 +22,7 @@ La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [g
   Un paramètre de mise à l’échelle automatique a une valeur d’instances maximum, minimum et par défaut.
 * Une tâche de mise à l’échelle automatique lit la mesure associée à mettre à l’échelle, en vérification qu’elle a dépassé le seuil configuré pour l’augmentation ou la diminution de taille d’instance. Vous pouvez afficher une liste des mesures pour la mise à l’échelle automatique dans la rubrique [Mesures courantes de mise à l’échelle automatique Azure Monitor](autoscale-common-metrics.md).
 * Tous les seuils sont calculés au niveau de l’instance. Par exemple, « effectuer un scale-out d’une instance lorsque l’UC moyenne est supérieure à 80 % quand le nombre d’instances est égal à 2 » signifie effectuer un scale-out lorsque l’UC moyenne sur toutes les instances est supérieure à 80 %.
-* Tous les échecs de mise à l’échelle automatique sont enregistrés dans le journal d’activité. Vous pouvez ensuite configurer une [alerte de journal d’activité](./../../azure-monitor/platform/activity-log-alerts.md) pour être informé par e-mail, SMS ou webhooks à chaque fois qu’un échec de mise à l’échelle automatique se produit.
+* Tous les échecs de mise à l’échelle automatique sont enregistrés dans le journal d’activité. Vous pouvez ensuite configurer une [alerte de journal d’activité](./activity-log-alerts.md) pour être informé par e-mail, SMS ou webhooks à chaque fois qu’un échec de mise à l’échelle automatique se produit.
 * De même, toutes les opérations de mise à l’échelle réussies sont consignées dans le journal d’activité. Vous pouvez ensuite configurer une alerte de journal d’activité pour être informé par e-mail, SMS ou webhooks à chaque fois qu’une opération de mise à l’échelle automatique se termine avec succès. Vous pouvez également configurer des notifications par e-mail ou webhook pour être averti en cas d’action de mise à l’échelle réussie via l’onglet Notifications du paramètre de mise à l’échelle automatique.
 
 ## <a name="autoscale-best-practices"></a>Meilleures pratiques relatives à la mise à l’échelle automatique
@@ -74,6 +74,9 @@ Dans ce cas
 4. La règle de diminution de la taille des instances de la mise à l’échelle automatique évalue l’état final en cas de diminution de la taille des instances. Par exemple, 60 x 3 (nombre d’instances actuel) = 180 / 2 (nombre final d’instances lors de la descente en puissance) = 90. Par conséquent, la mise à l’échelle automatique ne diminue pas la taille des instances, car il lui faudrait de nouveau monter en puissance immédiatement. Au lieu de cela, elle ignore la descente en puissance.
 5. Lors de la vérification de mise à l’échelle de temps suivante, l’UC continue sa diminution à 50. Une nouvelle estimation est effectuée : 3 x 50 instances = 150 / 2 instances = 75, ce qui est inférieur au seuil d’augmentation de la taille des instances qui est de 80, la diminution de la taille des instances s’exécute pour obtenir 2 instances.
 
+> [!NOTE]
+> Si le moteur de mise à l’échelle automatique détecte un risque de bagottement en raison de la mise à l’échelle vers le nombre cible d’instances, il essaie également d’effectuer une mise à l’échelle avec un nombre différent d’instances entre le nombre actuel et le nombre cible. Si le bagottement ne se produit pas dans cette plage, la mise à l’échelle automatique continue l’opération de mise à l’échelle avec la nouvelle cible.
+
 ### <a name="considerations-for-scaling-threshold-values-for-special-metrics"></a>Considérations relatives aux valeurs de seuil de la mise à l’échelle pour les mesures spéciales
  Pour les mesures spéciales, telles que les mesures de longueur de file d’attente Service Bus ou de stockage, le seuil correspond au nombre moyen de messages disponibles en fonction du nombre actuel d’instances. Choisissez soigneusement la valeur de seuil pour ce métrique.
 
@@ -103,7 +106,7 @@ Si une condition de profil est remplie, la mise à l’échelle automatique ne v
 
 Examinons cela à l’aide d’un exemple :
 
-L’image ci-dessous illustre un paramètre de mise à l’échelle automatique avec un profil par défaut d’instances minimum = 2 et d’instances maximum = 10. Dans cet exemple, les règles sont configurées pour effectuer un scale-out lorsque le nombre de messages dans la file d’attente est supérieur à 10 et effectuer un scale-in lorsque le nombre de messages dans la file d’attente est inférieur à trois. À présent, la ressource peut être mise à l’échelle entre deux et dix instances.
+L’image ci-dessous illustre un paramètre de mise à l’échelle automatique avec un profil par défaut d’instances minimum = 2 et d’instances maximum = 10. Dans cet exemple, les règles sont configurées pour la montée en charge lorsque le nombre de messages dans la file d’attente est supérieur à 10 et la diminution de la taille des instances lorsque le nombre de messages dans la file d’attente est inférieur à trois. À présent, la ressource peut être mise à l’échelle entre deux et dix instances.
 
 En outre, il existe un profil récurrent défini pour Lundi. Il est défini pour des instances minimum = 3 et des instances maximum = 10. Cela signifie que le lundi, la première fois que la mise à l’échelle automatique vérifie cette condition, si le nombre d’instances est égal à deux, il est mis à l’échelle pour correspondre au nouveau niveau minimum de trois. Tant que la mise à l’échelle automatique rencontre cette condition de profil respectée (lundi), elle ne traite que les règles de montée/descente en puissance basées sur le processeur configurées pour ce profil. À ce stade, elle ne vérifie pas la longueur de la file d’attente. Toutefois, si vous souhaitez également que la condition de longueur de la file d’attente soit vérifiée, vous devez inclure les règles du profil par défaut dans votre profil de Lundi.
 
@@ -127,8 +130,8 @@ Pour illustrer cela, supposons que vous disposez des quatre règles de mise à l
 
 Alors, ce qui suit se produit :
 
-* Si le processeur est de 76 % et la mémoire est de 50 %, nous effectuons un scale-out.
-* Si le processeur est de 50 % et la mémoire est de 76 %, nous effectuons un scale-out.
+* Si le processeur est de 76 % et la mémoire est de 50 %, une augmentation de la taille des instances se produit.
+* Si le processeur est de 50 % et la mémoire est de 76 %, une augmentation de la taille des instances se produit.
 
 En revanche, si le processeur est de 25 % et la mémoire est de 51 %, la mise à l’échelle automatique ne diminue **pas** la taille des instances. Pour diminuer la taille des instances, le processeur doit être de 29 % et la mémoire de 49 %.
 
@@ -143,12 +146,14 @@ Les événements de mise à l’échelle automatique sont enregistrés dans le j
 * Le service de mise à l’échelle automatique ne parvient pas à terminer une opération de mise à l’échelle avec succès
 * Les mesures ne sont pas disponibles pour que le service de mise à l’échelle automatique prenne une décision de mise à l’échelle.
 * Les mesures sont de nouveau disponibles (récupération) pour prendre une décision de mise à l’échelle.
+* La mise à l’échelle automatique détecte un bagottement et abandonne la tentative de mise à l’échelle. Vous verrez un type de journal `Flapping` dans cette situation. Si vous voyez cela, déterminez si vos seuils sont trop rapprochés.
+* La mise à l’échelle automatique détecte un bagottement mais reste en mesure d’effectuer correctement la mise à l’échelle. Vous verrez un type de journal `FlappingOccurred` dans cette situation. Si vous voyez cela, le moteur de mise à l’échelle automatique a tenté une mise à l’échelle (par exemple, de 4 instances à 2), mais a déterminé que cela entraînerait un bagottement. Au lieu de cela, le moteur de mise à l’échelle automatique a pris en compte une mise à l’échelle vers un nombre d’instances différent (par exemple, en utilisant 3 instances au lieu de 2), ce qui ne provoque plus de bagottement, et a donc effectué la mise à l’échelle vers ce nombre d’instances.
 
-Vous pouvez également utiliser une alerte de journal d’activité pour surveiller l’intégrité du moteur de mise à l’échelle automatique. Voici des exemples pour [créer une alerte de journal d’activité pour surveiller toutes les opérations du moteur de mise à l’échelle automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-alert) ou [créer une alerte de journal d’activité pour surveiller tous les échecs d’opérations de scale-in/scale-out de la mise à l’échelle automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert).
+Vous pouvez également utiliser une alerte de journal d’activité pour surveiller l’intégrité du moteur de mise à l’échelle automatique. Voici des exemples pour [créer une alerte de journal d’activité pour surveiller toutes les opérations du moteur de mise à l’échelle automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-alert) ou [créer une alerte de journal d’activité pour surveiller tous les échecs d’opérations de mise à l’échelle automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert).
 
 Outre l’activation des alertes de journal d’activité, vous pouvez configurer des notifications par e-mail ou webhook pour être averti en cas d’action de mise à l’échelle réussie via l’onglet Notifications du paramètre de mise à l’échelle automatique.
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Créez une alerte de journal d’activité pour surveiller toutes les opérations du moteur de mise à l’échelle automatique dans votre abonnement.](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-alert)
-- [Créer une alerte de journal d’activité pour surveiller tous les échecs d’opérations de scale-in/scale-out automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert)
+- [Créer une alerte de journal d’activité pour surveiller tous les échecs d’opérations de mise à l’échelle automatique dans votre abonnement](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert)
 

@@ -1,22 +1,21 @@
 ---
 title: Déterminer les causes de non-conformité
 description: De nombreuses raisons peuvent expliquer une ressource non conforme. Découvrez comment identifier l'origine d'une non-conformité.
-ms.date: 04/26/2019
+ms.date: 09/30/2020
 ms.topic: how-to
-ms.openlocfilehash: 395c70309ceca6e38f9f62522d80fb588821b886
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: df1eefec782835838add0beb8939bf4ff1a8a194
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82182580"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91541269"
 ---
 # <a name="determine-causes-of-non-compliance"></a>Déterminer les causes de non-conformité
 
 Lorsqu'une ressource Azure est jugée non conforme par rapport à une règle de stratégie, il est important d'identifier la partie de la règle concernée. Il est également important d'identifier la modification qui a transformé une ressource conforme en ressource non conforme. Pour ce faire, il existe deux moyens :
 
-> [!div class="checklist"]
-> - [Détails de conformité](#compliance-details)
-> - [Historique des changements (préversion)](#change-history)
+- [Détails de conformité](#compliance-details)
+- [Historique des changements (préversion)](#change-history)
 
 ## <a name="compliance-details"></a>Détails de conformité
 
@@ -31,17 +30,17 @@ Lorsqu’une ressource est non conforme, les détails de conformité de cette re
 
 Pour afficher les détails de conformité, procédez comme suit :
 
-1. Lancez le service Azure Policy dans le portail Azure en cliquant sur **Tous les services**, puis en recherchant et en cliquant sur **Stratégie**.
+1. Lancez le service Azure Policy dans le portail Azure en sélectionnant **Tous les services**, puis en recherchant et en sélectionnant **Policy**.
 
 1. Sur la page **Vue d'ensemble** ou **Conformité**, sélectionnez une stratégie affichant un **état de conformité**_Non conforme_.
 
 1. Sous l'onglet **Conformité des ressources** de la page **Conformité à la stratégie**, cliquez avec le bouton droit ou sélectionnez les points de suspension d’une ressource affichant un **état de conformité**_non conforme_. Sélectionnez ensuite **Afficher les détails de la conformité**.
 
-   :::image type="content" source="../media/determine-non-compliance/view-compliance-details.png" alt-text="Option Afficher les détails de la conformité" border="false":::
+   :::image type="content" source="../media/determine-non-compliance/view-compliance-details.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
 1. Le volet **Détails de conformité** affiche des informations issues de la dernière évaluation de la ressource ayant trait à l'attribution de stratégie actuelle. Dans cet exemple, le champ **Microsoft.Sql/servers/version** indique _12.0_ alors que la définition de la stratégie attendait _14.0_. Si la ressource est non conforme pour plusieurs raisons, ces différentes raisons sont répertoriées dans ce volet.
 
-   :::image type="content" source="../media/determine-non-compliance/compliance-details-pane.png" alt-text="Volet Détails de conformité et motifs de non conformité" border="false":::
+   :::image type="content" source="../media/determine-non-compliance/compliance-details-pane.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
    Pour une définition de stratégie **auditIfNotExists** ou **deployIfNotExists**, les détails incluent la propriété **details.type** et autres propriétés facultatives. Pour une liste, consultez [Propriétés auditIfNotExists](../concepts/effects.md#auditifnotexists-properties) et [Propriétés deployIfNotExists](../concepts/effects.md#deployifnotexists-properties). **Dernière ressource évaluée** correspond à une ressource liée dans la section **Détails** de la définition.
 
@@ -70,7 +69,7 @@ Pour afficher les détails de conformité, procédez comme suit :
    }
    ```
 
-   :::image type="content" source="../media/determine-non-compliance/compliance-details-pane-existence.png" alt-text="Volet Détails de conformité - *ifNotExists" border="false":::
+   :::image type="content" source="../media/determine-non-compliance/compliance-details-pane-existence.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
 > [!NOTE]
 > Pour protéger les données, lorsqu’une valeur de propriété correspond à un _secret_, la valeur actuelle est remplacée par des astérisques.
@@ -105,23 +104,29 @@ La matrice suivante mappe chaque _motif_ possible à la [condition](../concepts/
 |La valeur actuelle ne doit pas correspondre à la valeur cible (non-sensibilité à la casse). |notMatchInsensitively ou **not** matchInsensitively |
 |Aucune ressource associée ne correspond aux détails de l'effet dans la définition de stratégie. |Aucune ressource du type défini dans **then.details.type** n'est associée à la ressource définie dans la portion **if**. |
 
+## <a name="component-details-for-resource-provider-modes"></a>Détails du composant pour les modes du fournisseur de ressources
+
+Pour les affectations avec un [mode Fournisseur de ressources](../concepts/definition-structure.md#resource-manager-modes), sélectionnez la ressource _non conforme_ pour ouvrir une vue plus détaillée. Sous l’onglet **Conformité des composants**, vous pouvez obtenir des informations supplémentaires spécifiques au mode Fournisseur de ressources sur la stratégie attribuée, qui indique le _composant_ **non conforme** et l’**ID du composant**.
+
+:::image type="content" source="../media/getting-compliance-data/compliance-components.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
+
 ## <a name="compliance-details-for-guest-configuration"></a>Détails de conformité pour Guest Configuration
 
 Pour les stratégies _auditIfNotExists_ de la catégorie _Guest Configuration_, plusieurs paramètres peuvent être évalués dans la machine virtuelle et vous devez examiner les détails par paramètre. Par exemple, si vous effectuez un audit pour obtenir la liste des stratégies de mot de passe et qu’une seule d’entre-elles a l’état _Non conforme_, vous devez connaître les stratégies de mot de passe spécifiques qui ne sont pas conformes et pourquoi.
 
-Vous ne serez peut-être pas autorisé à vous connecter directement à la machine virtuelle, mais devrez indiquer pourquoi la machine virtuelle est _Non conforme_.
+Vous ne serez peut-être pas autorisé à vous connecter directement à la machine virtuelle, mais devrez indiquer pourquoi elle est _Non conforme_.
 
 ### <a name="azure-portal"></a>Portail Azure
 
 Commencez par suivre les étapes de la section ci-dessus pour afficher les détails de conformité à la stratégie.
 
-Dans le volet **Détails de conformité**, cliquez sur le lien **Dernière ressource évaluée**.
+Dans le volet Détails de conformité, sélectionnez le lien **Dernière ressource évaluée**.
 
-:::image type="content" source="../media/determine-non-compliance/guestconfig-auditifnotexists-compliance.png" alt-text="Afficher les détails de la définition auditIfNotExists" border="false":::
+:::image type="content" source="../media/determine-non-compliance/guestconfig-auditifnotexists-compliance.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
-La page **Affectation d'invité** affiche les détails de conformité disponibles. Chaque ligne de la vue représente une évaluation effectuée au sein de la machine. Dans la colonne **Raison**, une phrase décrivant pourquoi l'attribution d'invité est _Non conforme_ s’affiche. Par exemple, si vous auditez les stratégies de mot de passe, la colonne **Raison** affiche du texte, dont la valeur actuelle de chaque paramètre.
+La page **Affectation d'invité** affiche les détails de conformité disponibles. Chaque ligne de la vue représente une évaluation effectuée au sein de la machine. Dans la colonne **Raison**, une phrase s’affiche pour décrire la raison pour laquelle l’attribution d’invité est _Non conforme_. Par exemple, si vous auditez les stratégies de mot de passe, la colonne **Raison** affiche du texte, dont la valeur actuelle de chaque paramètre.
 
-:::image type="content" source="../media/determine-non-compliance/guestconfig-compliance-details.png" alt-text="Afficher les détails de conformité" border="false":::
+:::image type="content" source="../media/determine-non-compliance/guestconfig-compliance-details.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
 ### <a name="azure-powershell"></a>Azure PowerShell
 
@@ -134,7 +139,7 @@ Install-Module Az.GuestConfiguration
 Vous pouvez afficher l’état actuel de toutes les attributions d’invités pour une machine virtuelle à l’aide de la commande suivante :
 
 ```azurepowershell-interactive
-Get-AzVMGuestPolicyReport -ResourceGroupName <resourcegroupname> -VMName <vmname>
+Get-AzVMGuestPolicyStatus -ResourceGroupName <resourcegroupname> -VMName <vmname>
 ```
 
 ```output
@@ -147,7 +152,7 @@ Audit that an application is not installed inside Windows VMs.            {[Inst
 Pour afficher uniquement sous forme de phrase la _raison_ qui explique pourquoi la machine virtuelle est _non conforme_, renvoyez uniquement la propriété enfant Raison.
 
 ```azurepowershell-interactive
-Get-AzVMGuestPolicyReport -ResourceGroupName <resourcegroupname> -VMName <vmname> | % ComplianceReasons | % Reasons | % Reason
+Get-AzVMGuestPolicyStatus -ResourceGroupName <resourcegroupname> -VMName <vmname> | % ComplianceReasons | % Reasons | % Reason
 ```
 
 ```output
@@ -188,11 +193,11 @@ Audit that an application is installed inside Windows VMs.                Compli
 Audit that an application is installed inside Windows VMs                 NonCompliant                       02/09/2019 09:00:20 AM 02/09/2019 09:00:23 AM VM01  ../15ze1...
 ```
 
-## <a name="change-history-preview"></a><a name="change-history"/>Historique des modifications (préversion)
+## <a name="change-history-preview"></a><a name="change-history"></a>Historique des modifications (préversion)
 
-Dans le cadre d’une nouvelle **préversion publique**, l'historique des modifications des 14 derniers jours est disponible pour toutes les ressources Azure prenant en charge la [suppression du mode](../../../azure-resource-manager/templates/complete-mode-deletion.md). L'historique des modifications indique quand une modification a été détectée et fournit un _différentiel visuel_ pour chaque modification. Une détection de modification est déclenchée lorsque les propriétés Resource Manager sont ajoutées, supprimées ou modifiées.
+Dans le cadre d’une nouvelle **préversion publique**, l'historique des modifications des 14 derniers jours est disponible pour toutes les ressources Azure prenant en charge la [suppression du mode](../../../azure-resource-manager/templates/complete-mode-deletion.md). L'historique des modifications indique quand une modification a été détectée et fournit un _différentiel visuel_ pour chaque modification. Une détection de modification est déclenchée lorsque les propriétés Azure Resource Manager sont ajoutées, supprimées ou modifiées.
 
-1. Lancez le service Azure Policy dans le portail Azure en cliquant sur **Tous les services**, puis en recherchant et en cliquant sur **Stratégie**.
+1. Lancez le service Azure Policy dans le portail Azure en sélectionnant **Tous les services**, puis en recherchant et en sélectionnant **Policy**.
 
 1. Sur la page **Vue d'ensemble** ou **Conformité**, sélectionnez une stratégie dans un **état de conformité**.
 
@@ -200,11 +205,11 @@ Dans le cadre d’une nouvelle **préversion publique**, l'historique des modifi
 
 1. Sélectionnez l'onglet **Historique des modifications (préversion)** de la page **Conformité des ressources**. La liste des modifications détectées, le cas échéant, s'affiche.
 
-   :::image type="content" source="../media/determine-non-compliance/change-history-tab.png" alt-text="Onglet Historique des modifications Azure Policy de la page Conformité des ressources" border="false":::
+   :::image type="content" source="../media/determine-non-compliance/change-history-tab.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
 1. Sélectionnez une des modifications détectées. Le _différentiel visuel_ de la ressource est présenté sur la page **Historique des modifications**.
 
-   :::image type="content" source="../media/determine-non-compliance/change-history-visual-diff.png" alt-text="Différentiel visuel de l’historique des modifications Azure Policy de la page Historique des modifications" border="false":::
+   :::image type="content" source="../media/determine-non-compliance/change-history-visual-diff.png" alt-text="Capture d’écran du lien « Afficher les détails de la conformité » sous l’onglet Conformité des ressources." border="false":::
 
 Le _différentiel visuel_ aide à identifier les modifications apportées à une ressource. Les modifications détectées peuvent ne pas être liées à l’état de conformité actuel de la ressource.
 

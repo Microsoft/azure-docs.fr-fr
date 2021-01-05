@@ -4,15 +4,15 @@ description: Utilisez le moteur de règles de Microsoft Standard Azure Content D
 services: cdn
 author: asudbring
 ms.service: azure-cdn
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/01/2019
 ms.author: allensu
-ms.openlocfilehash: 91a442573139bf4fdd09978290bf2380c8bcb97e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1c596bf10d8afbce504b5abf04eacb877989521a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259921"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84887532"
 ---
 # <a name="set-up-the-standard-rules-engine-for-azure-cdn"></a>Configurer le moteur de règles Standard pour Azure CDN
 

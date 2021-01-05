@@ -1,17 +1,17 @@
 ---
 title: Déboguer une application web Azure Service Fabric Mesh s’exécutant localement
 description: Dans ce didacticiel, vous allez déboguer une application de maillage Azure Service Fabric s’exécutant dans votre cluster local.
-author: dkkapur
+author: georgewallace
 ms.topic: tutorial
 ms.date: 10/31/2018
-ms.author: dekapur
+ms.author: gwallace
 ms.custom: mvc, devcenter
-ms.openlocfilehash: c36d45919ae8a17026fc91f8e9040f3bb11d3eb0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 56cc8b4010dc17cf2b723a72898034de8d6a7175
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75494948"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91843292"
 ---
 # <a name="tutorial-debug-a-service-fabric-mesh-application-running-in-your-local-development-cluster"></a>Tutoriel : Déboguer une application Service Fabric Mesh s’exécutant dans votre cluster de développement local
 
@@ -77,7 +77,7 @@ Il existe actuellement un problème entraînant l’échec de la connexion au se
 
 Si vous obtenez l’erreur **No Service Fabric local cluster is running** (Aucun cluster Service Fabric local n’est en cours d’exécution), assurez-vous que le gestionnaire de cluster local (LCM) Service Fabric est en cours d’exécution, cliquez avec le bouton droit sur l’icône LCM dans la barre des tâches, puis cliquez sur **Démarrer le cluster local**. Une fois le cluster démarré, revenez à Visual Studio et appuyez sur la touche **F5**.
 
-Si vous obtenez une erreur **404** lorsque l’application démarre, cela signifie probablement que vos variables d’environnement dans le fichier **service.yaml** sont incorrectes. Assurez-vous que les valeurs `ApiHostPort` et `ToDoServiceName` sont correctement définies conformément aux instructions de l’article [Créer des variables d’environnement](https://docs.microsoft.com/azure/service-fabric-mesh/service-fabric-mesh-tutorial-create-dotnetcore#create-environment-variables).
+Si vous obtenez une erreur **404** lorsque l’application démarre, cela signifie probablement que vos variables d’environnement dans le fichier **service.yaml** sont incorrectes. Assurez-vous que les valeurs `ApiHostPort` et `ToDoServiceName` sont correctement définies conformément aux instructions de l’article [Créer des variables d’environnement](./service-fabric-mesh-tutorial-create-dotnetcore.md#create-environment-variables).
 
 Si vous obtenez des erreurs de build dans le fichier **service.yaml**, assurez-vous que des espaces, et non des tabulations, sont utilisés pour mettre en retrait les lignes. En outre, pour l’instant, vous devez générer l’application en utilisant les paramètres régionaux anglais.
 

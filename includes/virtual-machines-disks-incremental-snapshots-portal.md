@@ -9,11 +9,11 @@ ms.date: 04/02/2020
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: de0cf260207747f4acb02a377819a13de8b8ba22
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80628413"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002514"
 ---
 [!INCLUDE [virtual-machines-disks-incremental-snapshots-description](virtual-machines-disks-incremental-snapshots-description.md)]
 

@@ -1,47 +1,51 @@
 ---
-title: 'Tutoriel : Connecter SQL à la demande (préversion) à Power BI Desktop et créer un rapport'
-description: Dans ce tutoriel, vous allez apprendre à connecter SQL à la demande (préversion) dans Azure Synapse Analytics à Power BI Desktop et à créer un rapport de démonstration basé sur une vue.
+title: 'Tutoriel : Connecter un pool SQL serverless à Power BI Desktop et créer un rapport'
+description: Dans ce tutoriel, vous allez voir comment connecter un pool SQL serverless dans Azure Synapse Analytics à Power BI Desktop, et comment créer un rapport de démonstration basé sur une vue.
 services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: tutorial
-ms.subservice: ''
-ms.date: 04/15/2020
-ms.author: v-stazar
-ms.reviewer: jrasnick, carlrab
-ms.openlocfilehash: 1bdf2d0e3613af7eec339194d6d8a446be83f365
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.subservice: sql
+ms.date: 05/20/2020
+ms.author: stefanazaric
+ms.reviewer: jrasnick
+ms.openlocfilehash: 6b45bad7c439fb98737f0caee08b2996323fbd3b
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692404"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96602697"
 ---
-# <a name="tutorial-use-sql-on-demand-preview-with-power-bi-desktop--create-a-report"></a>Tutoriel : Utiliser SQL à la demande (préversion) avec Power BI Desktop et créer un rapport
+# <a name="tutorial-use-serverless-sql-pool-with-power-bi-desktop--create-a-report"></a>Tutoriel : Utiliser un pool SQL serverless avec Power BI Desktop et créer un rapport
 
-Dans ce tutoriel, vous allez apprendre à :
+Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 >
 > - Créer une base de données de démonstration
 > - Créer une vue utilisée pour le rapport
-> - Connecter Power BI Desktop à SQL à la demande
+> - Connecter Power BI Desktop à un pool SQL serverless
 > - Créer un rapport basé sur une vue
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour ce tutoriel, vous devez disposer des logiciels suivants :
+Pour effectuer ce didacticiel, vous avez besoin de ce qui suit :
+
+- [Power BI Desktop](https://powerbi.microsoft.com/downloads/) : nécessaire pour visualiser les données et créer un rapport.
+- [Espace de travail Azure Synapse](https://docs.microsoft.com/azure/synapse-analytics/quickstart-synapse-studio) : nécessaire pour créer une base de données, une source de données externe et une vue.
+
+Facultatif :
 
 - Un outil de requête SQL, tel qu’[Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio) ou [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms).
-- [Power BI Desktop](https://powerbi.microsoft.com/downloads/).
 
 Valeurs pour les paramètres suivants :
 
 | Paramètre                                 | Description                                                   |
 | ----------------------------------------- | ------------------------------------------------------------- |
-| Adresse de point de terminaison de service SQL à la demande    | Utilisée comme nom de serveur                                   |
-| Région de point de terminaison de service SQL à la demande     | Utilisée pour déterminer le stockage utilisé dans les exemples. |
+| Adresse du point de terminaison de service du pool SQL serverless    | Utilisée comme nom de serveur                                   |
+| Région du point de terminaison de service du pool SQL serverless     | Utilisée pour déterminer le stockage utilisé dans les exemples. |
 | Nom d’utilisateur et mot de passe pour l’accès au point de terminaison | Utilisés pour accéder au point de terminaison                               |
-| Base de données à utiliser pour créer des vues     | Base de données utilisée comme point de départ dans les exemples       |
+| La base de données que vous allez utiliser pour créer des vues     | Base de données utilisée comme point de départ dans les exemples       |
 
 ## <a name="1---create-database"></a>1 - Créer la base de données
 
@@ -51,10 +55,7 @@ Créez la base de données de démonstration (et supprimez une base de données 
 
 ```sql
 -- Drop database if it exists
-IF EXISTS (SELECT * FROM sys.databases WHERE name = 'Demo')
-BEGIN
-    DROP DATABASE Demo
-END;
+DROP DATABASE IF EXISTS Demo
 GO
 
 -- Create new database
@@ -62,23 +63,16 @@ CREATE DATABASE [Demo];
 GO
 ```
 
-## <a name="2---create-credential"></a>2 - Créer des informations d’identification
+## <a name="2---create-data-source"></a>2 - Créer une source de données
 
-Les informations d’identification permettent au service SQL à la demande d’accéder aux fichiers dans le stockage. Créez les informations d’identification pour un compte de stockage qui se trouve dans la même région que votre point de terminaison. Bien que SQL à la demande puisse accéder aux comptes de stockage dans différentes régions, le fait d’avoir le stockage et le point de terminaison dans la même région offre de meilleures performances.
+Une source de données est nécessaire pour permettre au service de pool SQL serverless d’accéder aux fichiers dans le stockage. Créez la source de données pour un compte de stockage qui se trouve dans la même région que votre point de terminaison. Même si le pool SQL serverless peut accéder aux comptes de stockage dans différentes régions, le fait d’avoir le stockage et le point de terminaison dans la même région offre de meilleures performances.
 
-Créez les informations d’identification en exécutant le script Transact-SQL (T-SQL) suivant :
+Créez la source de données en exécutant le script Transact-SQL (T-SQL) suivant :
 
 ```sql
-IF EXISTS (SELECT * FROM sys.credentials WHERE name = 'https://azureopendatastorage.blob.core.windows.net/censusdatacontainer')
-DROP CREDENTIAL [https://azureopendatastorage.blob.core.windows.net/censusdatacontainer];
-GO
-
--- Create credentials for Census Data container which resides in a azure open data storage account
--- There is no secret. We are using public storage account which doesn't need a secret.
-CREATE CREDENTIAL [https://azureopendatastorage.blob.core.windows.net/censusdatacontainer]
-WITH IDENTITY='SHARED ACCESS SIGNATURE',
-SECRET = '';
-GO
+-- There is no credential in data surce. We are using public storage account which doesn't need a secret.
+CREATE EXTERNAL DATA SOURCE AzureOpenData
+WITH ( LOCATION = 'https://azureopendatastorage.blob.core.windows.net/')
 ```
 
 ## <a name="3---prepare-view"></a>3 - Préparer la vue
@@ -96,7 +90,8 @@ SELECT
     *
 FROM
     OPENROWSET(
-        BULK 'https://azureopendatastorage.blob.core.windows.net/censusdatacontainer/release/us_population_county/year=20*/*.parquet',
+        BULK 'censusdatacontainer/release/us_population_county/year=20*/*.parquet',
+        DATA_SOURCE = 'AzureOpenData',
         FORMAT='PARQUET'
     ) AS uspv;
 ```
@@ -163,7 +158,7 @@ Une fois que vous avez fini d’utiliser ce rapport, supprimez les ressources en
 1. Supprimer les informations d’identification du compte de stockage
 
    ```sql
-   DROP CREDENTIAL [https://azureopendatastorage.blob.core.windows.net/censusdatacontainer];
+   DROP EXTERNAL DATA SOURCE AzureOpenData
    ```
 
 2. Supprimer la vue

@@ -1,23 +1,14 @@
 ---
 title: Créer par programmation des tableaux de bord Azure
 description: Utilisez un tableau de bord du portail Azure comme modèle pour créer par programmation des tableaux de bord Azure. Comprend une référence JSON.
-services: azure-portal
-documentationcenter: ''
-author: adamabmsft
-manager: mtillman
-ms.service: azure-portal
-ms.devlang: NA
-ms.topic: conceptual
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 03/23/2020
-ms.author: mblythe
-ms.openlocfilehash: 9ec9a4daad139a4930174ba9e3445e1cda1f8c54
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 12/4/2020
+ms.openlocfilehash: e69d3f3cea0ff63f94e797047eb10b9583678b1b
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461308"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745806"
 ---
 # <a name="programmatically-create-azure-dashboards"></a>Créer par programmation des tableaux de bord Azure
 
@@ -55,7 +46,7 @@ Après avoir configuré le tableau de bord, l’étape suivante consiste à publ
 
 ![partager un tableau de bord](./media/azure-portal-dashboards-create-programmatically/share-command.png)
 
-Si vous sélectionnez **Partager**, vous serez invité à choisir l'abonnement et le groupe de ressources dans lesquels vous souhaitez publier le tableau de bord. Vous devez disposer d'un accès en écriture à l'abonnement et au groupe de ressources que vous choisissez. Pour plus d'informations, consultez [Ajouter ou supprimer des attributions de rôles à l'aide du RBAC Azure et du portail Azure](../role-based-access-control/role-assignments-portal.md).
+Si vous sélectionnez **Partager**, vous serez invité à choisir l'abonnement et le groupe de ressources dans lesquels vous souhaitez publier le tableau de bord. Vous devez disposer d'un accès en écriture à l'abonnement et au groupe de ressources que vous choisissez. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôles Azure à l’aide du portail Azure](../role-based-access-control/role-assignments-portal.md).
 
 ![apporter des modifications au partage et à l'accès](./media/azure-portal-dashboards-create-programmatically/sharing-and-access.png)
 
@@ -78,13 +69,13 @@ Pour publier ce tableau de bord pour toutes les prochaines machines virtuelles, 
 Il existe deux approches pour les API qui créent des ressources dans Azure :
 
 * Les API impératives créent une ressource à la fois. Pour plus d’informations, consultez [Ressources](/rest/api/resources/resources).
-* Un système de déploiement basé sur un modèle crée plusieurs ressources dépendantes avec un seul appel d'API. Pour plus d'informations, consultez [Déployer des ressources à l'aide de modèles Resource Manager et d'Azure PowerShell](../azure-resource-manager/resource-group-template-deploy.md).
+* Un système de déploiement basé sur un modèle crée plusieurs ressources dépendantes avec un seul appel d'API. Pour plus d'informations, consultez [Déployer des ressources à l'aide de modèles Resource Manager et d'Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md).
 
 Le déploiement basé sur un modèle prend en charge le paramétrage et la création de modèles. Il s'agit de l'approche utilisée dans cet article.
 
 ## <a name="programmatically-create-a-dashboard-from-your-template-using-a-template-deployment"></a>Créer par programmation un tableau de bord à partir de votre modèle à l’aide d’un déploiement de modèle
 
-Azure offre la possibilité d’orchestrer le déploiement de plusieurs ressources. Vous créez un modèle de déploiement qui exprime l’ensemble des ressources à déployer et les relations qui existent entre elles.  Le format JSON de chaque ressource est le même que si vous les créiez une par une. La différence est que le langage de gabarit ajoute quelques concepts comme les variables, les paramètres, les fonctions de base, etc. Cette syntaxe étendue est uniquement prise en charge dans le cadre du déploiement d'un modèle. Elle ne fonctionne pas si elle est utilisée avec les API impératives mentionnées précédemment. Pour plus d'informations, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../azure-resource-manager/resource-group-authoring-templates.md).
+Azure offre la possibilité d’orchestrer le déploiement de plusieurs ressources. Vous créez un modèle de déploiement qui exprime l’ensemble des ressources à déployer et les relations qui existent entre elles.  Le format JSON de chaque ressource est le même que si vous les créiez une par une. La différence est que le langage de gabarit ajoute quelques concepts comme les variables, les paramètres, les fonctions de base, etc. Cette syntaxe étendue est uniquement prise en charge dans le cadre du déploiement d'un modèle. Elle ne fonctionne pas si elle est utilisée avec les API impératives mentionnées précédemment. Pour plus d'informations, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md).
 
 Le paramétrage doit être effectué en utilisant la syntaxe des paramètres du modèle.  Vous remplacez toutes les instances de l'ID de ressource que nous avons trouvé précédemment, comme indiqué ici.
 
@@ -125,7 +116,7 @@ Déclarez les métadonnées de modèle requises et les paramètres situés en ha
 Après avoir configuré votre modèle, déployez-le en utilisant l'une des méthodes suivantes :
 
 * [API REST](/rest/api/resources/deployments)
-* [PowerShell](../azure-resource-manager/resource-group-template-deploy.md)
+* [PowerShell](../azure-resource-manager/templates/deploy-powershell.md)
 * [Azure CLI](/cli/azure/group/deployment#az-group-deployment-create)
 * [Page de déploiement du modèle sur le portail Azure](https://portal.azure.com/#create/Microsoft.Template)
 
@@ -658,3 +649,49 @@ Cet exemple déploie un tableau de bord par lui-même, mais le langage de modèl
 ```
 
 Maintenant que vous avez vu un exemple d’utilisation d’un modèle paramétrable pour déployer un tableau de bord, vous pouvez essayer de déployer le modèle en utilisant les [API REST Azure Resource Manager](/rest/api/), [Azure CLI](/cli/azure) ou les [commandes Azure PowerShell](/powershell/azure/get-started-azureps).
+
+## <a name="programmatically-create-a-dashboard-by-using-azure-cli"></a>Créer par programmation un tableau de bord à l’aide d’Azure CLI
+
+Préparez votre environnement pour l’interface Azure CLI.
+
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
+
+- Ces exemples utilisent le tableau de bord suivant : [portal-dashboard-template-testvm.json](https://raw.githubusercontent.com/Azure/azure-docs-powershell-samples/master/azure-portal/portal-dashboard-template-testvm.json). Remplacez le contenu entre crochets par vos valeurs.
+
+Exécutez la commande [az portal dashboard create](/cli/azure/ext/portal/portal/dashboard#ext_portal_az_portal_dashboard_create) pour créer un tableau de bord :
+
+```azurecli
+az portal dashboard create --resource-group myResourceGroup --name 'Simple VM Dashboard' \
+   --input-path portal-dashboard-template-testvm.json --location centralus
+```
+
+Vous pouvez mettre à jour un tableau de bord à l’aide de la commande [az portal dashboard update](/cli/azure/ext/portal/portal/dashboard#ext_portal_az_portal_dashboard_update) :
+
+```azurecli
+az portal dashboard update --resource-group myResourceGroup --name 'Simple VM Dashboard' \
+--input-path portal-dashboard-template-testvm.json --location centralus
+```
+
+Pour afficher les détails d’un tableau de bord, exécutez la commande [az portal dashboard show](/cli/azure/ext/portal/portal/dashboard#ext_portal_az_portal_dashboard_show) :
+
+```azurecli
+az portal dashboard show --resource-group myResourceGroup --name 'Simple VM Dashboard'
+```
+
+Pour voir tous les tableaux de bord de l’abonnement actif, utilisez [az portal dashboard list](/cli/azure/ext/portal/portal/dashboard#ext_portal_az_portal_dashboard_list) :
+
+```azurecli
+az portal dashboard list
+```
+
+Vous pouvez aussi voir tous les tableaux de bord d’un groupe de ressources :
+
+```azurecli
+az portal dashboard list --resource-group myResourceGroup
+```
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Pour plus d’informations sur les appareils de bureau, consultez [Gérer les paramètres et les préférences du portail Azure](set-preferences.md).
+
+Pour plus d’informations sur la prise en charge d’Azure CLI pour les tableaux de bord, consultez [az portal dashboard](/cli/azure/ext/portal/portal/dashboard).

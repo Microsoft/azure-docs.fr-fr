@@ -3,15 +3,15 @@ title: Résoudre les problèmes liés aux codes d’erreur Azure Stream Analytic
 description: Résolvez les problèmes Azure Stream Analytics liés aux codes d'erreur interne.
 ms.author: mamccrea
 author: mamccrea
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 05/07/2020
 ms.service: stream-analytics
-ms.openlocfilehash: 2e101747322baac860cbde02aca341171aa0cc1d
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 9dc3d873ddfef9a729f583cd914ca4700d562ff3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83658348"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86045227"
 ---
 # <a name="azure-stream-analytics-internal-error-codes"></a>Codes d’erreur interne Azure Stream Analytics
 

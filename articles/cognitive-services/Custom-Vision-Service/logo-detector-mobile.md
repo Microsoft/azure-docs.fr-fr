@@ -8,14 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: tutorial
-ms.date: 04/14/2020
+ms.date: 11/23/2020
 ms.author: pafarley
-ms.openlocfilehash: 0962afb360df0ec6a414f676a2c280b3837c687d
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: e5e344aa84bfc6912266720083f0cd15f575883c
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81403665"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95740248"
 ---
 # <a name="tutorial-recognize-azure-service-logos-in-camera-pictures"></a>Tutoriel : Reconnaître les logos des services Azure dans les images de l’appareil photo
 
@@ -28,14 +29,14 @@ Ce didacticiel vous explique comment :
 > - Connecter votre application aux services Azure Vision par ordinateur et Custom Vision.
 > - Créer un compte de principal de service Azure pour déployer des services Azure à partir de l’application.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer. 
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer. 
 
 ## <a name="prerequisites"></a>Prérequis
 
 - [Visual Studio 2017 ou version ultérieure](https://www.visualstudio.com/downloads/)
-- La charge de travail Xamarin pour Visual Studio (voir [Installation de Xamarin](https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/windows))
+- La charge de travail Xamarin pour Visual Studio (voir [Installation de Xamarin](/xamarin/cross-platform/get-started/installation/windows))
 - Un émulateur iOS ou Android pour Visual Studio
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?view=azure-cli-latest) (facultatif)
+- [Azure CLI](/cli/azure/install-azure-cli-windows?view=azure-cli-latest) (facultatif)
 
 ## <a name="get-the-source-code"></a>Obtenir le code source
 
@@ -93,7 +94,7 @@ Pour en savoir plus sur la façon dont l’application gère ces données, déma
 
 La partie Custom Vision du tutoriel est terminée. Si vous voulez exécuter l’application, vous devez également intégrer le service Vision par ordinateur. L’application utilise la fonctionnalité de reconnaissance de texte de Vision par ordinateur pour compléter le processus de détection de logos. Un logo Azure est reconnaissable à son aspect *ou* au texte apposé en regard. Contrairement aux modèles Custom Vision, le service Vision par ordinateur est déjà entraîné pour effectuer certaines opérations sur les images ou vidéos.
 
-Abonnez-vous au service Vision par ordinateur pour obtenir une clé et une URL de point de terminaison. Pour obtenir de l’aide sur cette étape, consultez [Comment obtenir des clés d’abonnement](https://docs.microsoft.com/azure/cognitive-services/computer-vision/vision-api-how-to-topics/howtosubscribe).
+Abonnez-vous au service Vision par ordinateur pour obtenir une clé et une URL de point de terminaison. Pour obtenir de l’aide sur cette étape, consultez [Comment obtenir des clés d’abonnement](../cognitive-services-apis-create-account.md?tabs=singleservice%2Cwindows).
 
 ![Service Vision par ordinateur dans le portail Azure. Menu Démarrage rapide sélectionné. Un lien est entouré pour les clés, ainsi que l’URL de point de terminaison de l’API](media/azure-logo-tutorial/comvis-keys.png)
 
@@ -103,7 +104,7 @@ Ensuite, ouvrez le fichier *Source\VisualProvision\AppSettings.cs* et affectez d
 
 ## <a name="create-a-service-principal"></a>Créer un principal du service
 
-L’application nécessite un compte de principal de service Azure pour déployer des services dans le cadre de votre abonnement Azure. Un principal de service vous permet de déléguer des autorisations spécifiques à une application à l’aide du contrôle d’accès en fonction du rôle. Pour en savoir plus, consultez le [guide des principaux du service](https://docs.microsoft.com/azure/azure-stack/user/azure-stack-create-service-principals).
+L’application nécessite un compte de principal de service Azure pour déployer des services dans le cadre de votre abonnement Azure. Un principal de service vous permet de déléguer des autorisations spécifiques à une application à l’aide du contrôle d’accès en fonction du rôle Azure. Pour en savoir plus, consultez le [guide des principaux du service](/azure-stack/operator/azure-stack-create-service-principals).
 
 Vous pouvez créer un principal du service à l’aide d’Azure Cloud Shell ou de l’interface de ligne de commande Azure, comme indiqué ici. Pour commencer, connectez-vous et sélectionnez l’abonnement à utiliser.
 
@@ -175,7 +176,7 @@ Pour exécuter l’application, procédez comme suit :
 
 Si vous avez suivi toutes les étapes de ce scénario et utilisé l’application pour déployer des services Azure sur votre compte, accédez au [portail Azure](https://ms.portal.azure.com/). Là, annulez les services que vous ne voulez pas utiliser.
 
-Si vous envisagez de créer votre propre projet de détection d’objets avec Custom Vision, vous pouvez supprimer le projet de détection de logos que vous avez créé dans ce tutoriel. Un essai gratuit de Custom Vision permet d’utiliser deux projets uniquement. Pour supprimer le projet de détection de logos, sur le [site web Custom Vision](https://customvision.ai), ouvrez **Projets**, puis sélectionnez l’icône de corbeille sous **Mon nouveau projet**.
+Si vous envisagez de créer votre propre projet de détection d’objets avec Custom Vision, vous pouvez supprimer le projet de détection de logos que vous avez créé dans ce tutoriel. Un abonnement gratuit à Custom Vision permet d’utiliser deux projets uniquement. Pour supprimer le projet de détection de logos, sur le [site web Custom Vision](https://customvision.ai), ouvrez **Projets**, puis sélectionnez l’icône de corbeille sous **Mon nouveau projet**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

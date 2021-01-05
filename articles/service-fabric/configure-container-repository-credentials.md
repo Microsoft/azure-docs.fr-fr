@@ -3,13 +3,12 @@ title: Azure Service Fabric - Configurer les informations d’identification au 
 description: Configurer les informations d’identification au référentiel pour télécharger des images du registre de conteneurs
 ms.topic: conceptual
 ms.date: 12/09/2019
-ms.custom: sfrev
-ms.openlocfilehash: 9bd6e6a0a22f7568760f014897fd28ff47e9450b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0c6421fed88a3909db717c13a6b3faf51c4491cd
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76934992"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574817"
 ---
 # <a name="configure-repository-credentials-for-your-application-to-download-container-images"></a>Configurer les informations d’identification au référentiel de votre applications pour télécharger des images du registre de conteneurs
 
@@ -96,6 +95,9 @@ Service Fabric prend en charge l’utilisation de jetons en tant qu’informatio
 1. Vérifiez que l’option *Identité managée affectée par le système* est activée pour la machine virtuelle.
 
     ![Portail Azure : Créer une option d’identité de groupe de machines virtuelles identiques](./media/configure-container-repository-credentials/configure-container-repository-credentials-acr-iam.png)
+
+> [!NOTE]
+> Pour une identité managée affectée par l’utilisateur, ignorez cette étape. Les étapes restantes ci-dessous fonctionnent de la même manière, à condition que le groupe identique ne soit associé qu’à une seule identité managée affectée par l’utilisateur.
 
 2. Accordez au groupe de machines virtuelles identiques les autorisations nécessaires pour extraire/lire des images à partir du Registre. Dans le panneau Access Control (IAM) de votre Azure Container Registry sur le Portail Azure, ajoutez une *attribution de rôle* pour votre machine virtuelle :
 

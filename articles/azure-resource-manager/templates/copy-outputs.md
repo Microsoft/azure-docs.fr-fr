@@ -1,18 +1,18 @@
 ---
 title: Définition de plusieurs instances d’une valeur de sortie
-description: Utilisez l’opération copy dans un modèle Azure Resource Manager pour retourner une valeur à partir d’un déploiement sur plusieurs itérations.
+description: Utilisez l’opération copy dans un modèle Azure Resource Manager (modèle ARM) pour retourner une valeur à partir d’un déploiement sur plusieurs itérations.
 ms.topic: conceptual
 ms.date: 04/17/2020
-ms.openlocfilehash: 50c4b4b8f301ad88d3dfde98ace1aed4431693db
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 5ae20ed9ec3fdb3b76adbd370f5ba22f9386d613
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583430"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905942"
 ---
 # <a name="output-iteration-in-arm-templates"></a>Itération de sortie dans les modèles ARM
 
-Cet article explique comment créer plusieurs valeurs pour une sortie dans votre modèle Azure Resource Manager (ARM). En ajoutant l’élément **copy** dans la section outputs de votre modèle, vous pouvez retourner dynamiquement un nombre d’éléments pendant le déploiement.
+Cet article explique comment créer plusieurs valeurs pour une sortie dans votre modèle Azure Resource Manager (modèle ARM). En ajoutant l’élément `copy` dans la section outputs de votre modèle, vous pouvez retourner dynamiquement plusieurs éléments pendant le déploiement.
 
 Il est également possible d’utiliser copy avec des [ressources](copy-resources.md), des [propriétés dans une ressource](copy-properties.md) et des [variables](copy-variables.md).
 
@@ -27,9 +27,9 @@ L’élément copy utilise le format général suivant :
 }
 ```
 
-La propriété **count** indique le nombre d’itérations souhaité pour la valeur de sortie.
+La propriété `count` indique le nombre d’itérations souhaité pour la valeur de sortie.
 
-La propriété **input** spécifie les propriétés que vous souhaitez répéter. Vous créez un tableau d’éléments construits à partir de la valeur de la propriété **input**. Il peut s’agir d’une propriété unique (par exemple, une chaîne) ou d’un objet avec plusieurs propriétés.
+La propriété `input` spécifie les propriétés que vous souhaitez répéter. Vous créez un tableau d’éléments construits à partir de la valeur de la propriété `input`. Il peut s’agir d’une propriété unique (par exemple, une chaîne) ou d’un objet avec plusieurs propriétés.
 
 ## <a name="copy-limits"></a>Limites de copie
 
@@ -166,11 +166,10 @@ L’exemple précédent retourne un tableau avec les valeurs suivantes :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressource à l’aide de modèles ARM](template-tutorial-create-multiple-instances.md).
+* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressources grâce à des modèles ARM](template-tutorial-create-multiple-instances.md).
 * Pour connaître les autres utilisations de l’élément copy, consultez :
   * [Itération de ressource dans les modèles ARM](copy-resources.md)
   * [Itération de propriété dans les modèles ARM](copy-properties.md)
   * [Itération de variable dans les modèles ARM](copy-variables.md)
-* Pour en savoir plus sur les sections d’un modèle, consultez [Création de modèles ARM](template-syntax.md).
-* Pour savoir comment déployer votre modèle, consultez [Déployer une application avec un modèle ARM](deploy-powershell.md).
-
+* Pour plus d’informations sur les différentes sections d’un modèle, consultez [Présentation de la structure et de la syntaxe des modèles ARM](template-syntax.md).
+* Pour savoir comment déployer votre modèle, consultez [Déployer des ressources avec des modèles ARM et Azure PowerShell](deploy-powershell.md).

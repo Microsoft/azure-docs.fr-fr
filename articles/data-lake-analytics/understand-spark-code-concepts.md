@@ -1,19 +1,17 @@
 ---
 title: Comprendre les concepts de code Apache Spark pour les développeurs U-SQL d’Azure Data Lake Analytics.
 description: Cet article décrit les concepts d’Apache Spark pour aider les développeurs U-SQL à comprendre les concepts du code Spark.
-author: guyhay
-ms.author: guyhay
 ms.reviewer: jasonh
 ms.service: data-lake-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: Understand-apache-spark-code-concepts
 ms.date: 10/15/2019
-ms.openlocfilehash: bdb38e36a9f1344a3adde15d349a2ec176c0fe95
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2abd5882e310b17c633a82009f44624fad156f14
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74424006"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221126"
 ---
 # <a name="understand-apache-spark-code-for-u-sql-developers"></a>Comprendre le code Apache Spark pour les développeurs U-SQL
 
@@ -131,7 +129,7 @@ Le tableau suivant donne les types équivalents en Spark, Scala et PySpark pour 
 Pour plus d'informations, consultez les pages suivantes :
 
 - [org.apache.spark.sql.types](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.types.package)
-- [Types Spark SQL et DataFrames](https://spark.apache.org/docs/latest/sql-reference.html#data-types)
+- [Types Spark SQL et DataFrames](https://spark.apache.org/docs/latest/sql-ref-datatypes.html)
 - [Types valeur Scala](https://www.scala-lang.org/api/current/scala/AnyVal.html)
 - [pyspark.sql.types](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.types)
 
@@ -183,7 +181,7 @@ U-SQL offre également un large éventail d’autres fonctionnalités et concept
 
 ### <a name="federated-queries-against-sql-server-databasesexternal-tables"></a>Requêtes fédérées par rapport à des bases de données SQL Server/tables externes
 
-U-SQL fournit une source de données et des tables externes, ainsi que des requêtes directes par rapport à Azure SQL Database. Si Spark n’offre pas les mêmes abstractions d’objet, il fournit un [connecteur Spark pour Azure SQL Database](../sql-database/sql-database-spark-connector.md) qui peut être utilisé pour interroger des bases de données SQL.
+U-SQL fournit une source de données et des tables externes, ainsi que des requêtes directes par rapport à Azure SQL Database. Si Spark n’offre pas les mêmes abstractions d’objet, il fournit un [connecteur Spark pour Azure SQL Database](../azure-sql/database/spark-connector.md) qui peut être utilisé pour interroger des bases de données SQL.
 
 ### <a name="u-sql-parameters-and-variables"></a>Paramètres et variables U-SQL
 
@@ -216,8 +214,8 @@ L’optimiseur de requête basé sur les coûts de Spark possède ses propres fo
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Comprendre les formats de données Spark pour les développeurs U-SQL](understand-spark-data-formats.md)
-- [.NET pour Apache Spark](https://docs.microsoft.com/dotnet/spark/what-is-apache-spark-dotnet)
-- [Mettre à niveau vos solutions d’analytique de Big Data d’Azure Data Lake Storage Gen1 vers Azure Data Lake Storage Gen2](../storage/blobs/data-lake-storage-upgrade.md)
+- [.NET pour Apache Spark](/dotnet/spark/what-is-apache-spark-dotnet)
+- [Mettre à niveau vos solutions d’analytique de Big Data d’Azure Data Lake Storage Gen1 vers Azure Data Lake Storage Gen2](../storage/blobs/data-lake-storage-migrate-gen1-to-gen2.md)
 - [Transformer des données à l’aide d’une activité Spark dans Azure Data Factory](../data-factory/transform-data-using-spark.md)
 - [Transformer des données à l’aide d’une activité Hadoop Hive dans Azure Data Factory](../data-factory/transform-data-using-hadoop-hive.md)
 - [Présentation d’Apache Spark dans Azure HDInsight](../hdinsight/spark/apache-spark-overview.md)

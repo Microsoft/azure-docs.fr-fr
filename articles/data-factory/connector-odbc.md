@@ -1,6 +1,6 @@
 ---
-title: Copier des données de sources ODBC à l’aide d’Azure Data Factory
-description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory pour copier des données de sources OData vers des banques de données réceptrices prises en charge.
+title: Copier des données depuis/vers des banques de données ODBC à l’aide d’Azure Data Factory
+description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory pour copier des données vers et à partir de magasins de données ODBC.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 01/09/2020
+ms.date: 04/22/2020
 ms.author: jingwang
-ms.openlocfilehash: da5c53f8953960c382070be658add2877fff3f8c
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: c92428666f0766f78475be16416027cdc6e71f20
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416893"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85506529"
 ---
 # <a name="copy-data-from-and-to-odbc-data-stores-using-azure-data-factory"></a>Copier des données depuis/vers des banques de données ODBC à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -35,7 +35,7 @@ Ce connecteur ODBC est pris en charge pour les activités suivantes :
 
 Vous pouvez copier des données d’une source ODBC vers toute banque de données réceptrice prise en charge, ou à partir de toute banque de données source prise en charge vers un récepteur ODBC. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Plus précisément, ce connecteur ODBC prend en charge la copie de données depuis/vers **toute banque de données compatible ODBC** à l’aide d’une authentification **De base** ou **Anonyme**. Un **pilote ODBC 64 bits** est requis.
+Plus précisément, ce connecteur ODBC prend en charge la copie de données depuis/vers **toute banque de données compatible ODBC** à l’aide d’une authentification **De base** ou **Anonyme**. Un **pilote ODBC 64 bits** est requis. Pour le récepteur ODBC, ADF prend en charge ODBC version 2.0 standard.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -236,48 +236,9 @@ Pour copier des données vers une banque de données compatible ODBC, définisse
 ]
 ```
 
-## <a name="sap-hana-sink"></a>Récepteur SAP HANA
-
->[!NOTE]
->Pour copier des données d’une banque de données SAP HANA, reportez-vous à la documentation du [connecteur SAP HANA](connector-sap-hana.md) natif. Pour copier des données vers SAP HANA, suivez cette instruction pour utiliser un connecteur ODBC. Notez que les services liés pour les connecteurs SAP HANA et ODBC sont de types différents et qu’ils ne peuvent donc pas être réutilisées.
->
-
-Vous pouvez copier des données vers une base de données SAP HANA à l’aide du connecteur ODBC générique.
-
-Configurez un runtime d’intégration auto-hébergé sur une machine ayant accès à votre banque de données. Le runtime d’intégration utilise le pilote ODBC pour SAP HANA pour se connecter à la banque de données. Par conséquent, installez le pilote s’il ne l’est pas encore sur la même machine. Pour plus d’informations, voir la section [Conditions préalables](#prerequisites).
-
-Avant d’utiliser le récepteur SAP HANA dans une solution de fabrique de données, vérifiez si l’Integration Runtime peut se connecter à la banque de données en suivant les instructions de la section [Résoudre les problèmes de connectivité](#troubleshoot-connectivity-issues).
-
-Créez un service lié ODBC pour lier une banque de données SAP HANA à une fabrique de données Azure comme dans l’exemple suivant :
-
-```json
-{
-    "name": "SAPHANAViaODBCLinkedService",
-    "properties": {
-        "type": "Odbc",
-        "typeProperties": {
-            "connectionString": "Driver={HDBODBC};servernode=<HANA server>.clouddatahub-int.net:30015",
-            "authenticationType": "Basic",
-            "userName": "<username>",
-            "password": {
-                "type": "SecureString",
-                "value": "<password>"
-            }
-        },
-        "connectVia": {
-            "referenceName": "<name of Integration Runtime>",
-            "type": "IntegrationRuntimeReference"
-        }
-    }
-}
-```
-
-Pour une présentation détaillée de l'utilisation de banques de données ODBC en tant que banques de données de sources/réceptrices dans une opération de copie, lisez l'article depuis le début.
-
 ## <a name="lookup-activity-properties"></a>Propriétés de l’activité Lookup
 
 Pour en savoir plus sur les propriétés, consultez [Activité Lookup](control-flow-lookup-activity.md).
-
 
 ## <a name="troubleshoot-connectivity-issues"></a>Résoudre les problèmes de connectivité
 

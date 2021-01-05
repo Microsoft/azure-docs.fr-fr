@@ -11,16 +11,20 @@ ms.date: 06/21/2019
 ms.custom:
 - mvc
 - mqtt
-ms.openlocfilehash: a7e68999bf516bffa08fb97eb8c88f2f8abb428d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- devx-track-js
+- devx-track-azurecli
+ms.openlocfilehash: 9ec2c51f01d6b13f33bc2d537a8f73a6721967d4
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81767809"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96572522"
 ---
 <!-- **TODO** Update publish config with repo paths before publishing! -->
 
-# <a name="tutorial-configure-your-devices-from-a-back-end-service"></a>Didacticiel : Configurer vos appareils à partir d’un service back-end
+# <a name="tutorial-configure-your-devices-from-a-back-end-service"></a>Tutoriel : Configurer vos appareils à partir d’un service backend
 
 Outre la réception de données de télémétrie à partir de vos appareils, vous devrez peut-être configurer vos appareils à partir de votre service back-end. Lorsque vous envoyez une configuration souhaitée à vos appareils, vous pouvez choisir de recevoir des mises à jour d’état et de conformité de ces appareils. Par exemple, vous pouvez définir une plage de température de fonctionnement cible pour un appareil ou collecter des informations sur la version du microprogramme auprès de vos appareils.
 
@@ -35,11 +39,9 @@ Dans ce didacticiel, vous allez effectuer les tâches suivantes :
 > * Utiliser les propriétés souhaitées pour envoyer des informations d’état à votre appareil simulé.
 > * Utiliser les propriétés rapportées pour recevoir des informations d’état de votre appareil simulé.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 Les deux exemples d’applications que vous exécutez dans ce guide de démarrage rapide sont écrits à l’aide de Node.js. Votre ordinateur de développement doit disposer de Node.js v10.x.x ou ultérieur.
 
@@ -53,7 +55,7 @@ node --version
 
 Téléchargez l’exemple de projet Node.js à partir de https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip et extrayez l’archive ZIP.
 
-Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Dans certains environnements réseau professionnels et scolaires, ce port peut être bloqué. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="set-up-azure-resources"></a>Configurer les ressources Azure
 
@@ -188,11 +190,11 @@ node ServiceClient.js "{your service connection string}"
 
 La capture d’écran suivante montre le résultat de l’application d’appareil simulé et comment celle-ci gère une mise à jour de la propriété souhaitée **maxTemperature**. Vous pouvez voir de quelle manière le gestionnaire de niveau supérieur et les gestionnaires du composant climat s’exécutent :
 
-![Appareil simulé](./media/tutorial-device-twins/SimulatedDevice1.png)
+![Capture d’écran qui montre comment s’exécutent le gestionnaire de niveau supérieur et les gestionnaires du composant climat.](./media/tutorial-device-twins/SimulatedDevice1.png)
 
 La capture d’écran suivante montre le résultat de l’application back-end et comment celle-ci envoie une mise à jour de la propriété souhaitée **maxTemperature** :
 
-![Application back-end](./media/tutorial-device-twins/BackEnd1.png)
+![Capture d’écran qui montre la sortie de l’application back-end et comment celle-ci envoie une mise à jour.](./media/tutorial-device-twins/BackEnd1.png)
 
 ## <a name="receive-state-information"></a>Recevoir des informations d’état
 

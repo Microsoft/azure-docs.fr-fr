@@ -1,23 +1,23 @@
 ### YamlMime:Landing
 title: Documentation Gestion des applications
-summary: Azure Active Directory fournit un accès sécurisé et fluide aux applications cloud et locales. De plus, vous n’avez pas besoin de gérer les mots de passe. Vos utilisateurs peuvent se connecter une fois pour accéder à Office 365 et à des milliers d’autres applications. Découvrez comment gérer et déployer des applications avec nos guides de démarrage rapide, tutoriels et conseils.
+summary: Azure Active Directory est un système de gestion des identités et des accès (IAM). Il offre un emplacement unique pour stocker des informations sur les identités numériques. Vous pouvez configurer vos applications logicielles de façon à ce qu’elles utilisent Azure AD comme emplacement de stockage des informations utilisateur.
 metadata:
   title: Documentation Gestion des applications
-  description: Azure Active Directory fournit un accès sécurisé et fluide aux applications cloud et locales. De plus, vous n’avez pas besoin de gérer les mots de passe. Vos utilisateurs peuvent se connecter une fois pour accéder à Office 365 et à des milliers d’autres applications. Découvrez comment gérer et déployer des applications avec nos guides de démarrage rapide, tutoriels et conseils.
+  description: Azure AD est un système de gestion des identités et des accès (IAM). Il offre un emplacement unique pour stocker des informations sur les identités numériques. Vous pouvez configurer vos applications logicielles de façon à ce qu’elles utilisent Azure AD comme emplacement de stockage des informations utilisateur.
   ms.service: active-directory
   ms.subservice: app-mgmt
   ms.workload: identity
   ms.topic: landing-page
-  ms.date: 10/10/2019
-  author: msmimart
-  ms.author: mimart
+  ms.date: 09/28/2020
+  author: kenwith
+  ms.author: kenwith
   manager: celested
-  ms.openlocfilehash: 3bea7dda1cf44548ea924ffa84fb922410242f27
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: 66d2691d1e8c10c21b419cc5c6672179f89171a9
+  ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "77063470"
+  ms.lasthandoff: 10/22/2020
+  ms.locfileid: "92372444"
 landingContent:
 - title: À propos de la gestion des applications
   linkLists:
@@ -25,79 +25,91 @@ landingContent:
     links:
     - text: Qu’est-ce que la gestion des applications ?
       url: what-is-application-management.md
-    - text: Tutoriels sur les applications SaaS
-      url: /azure/active-directory/saas-apps/
-- title: Gérer les applications cloud et l’authentification unique
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: Compréhension de l’authentification unique
+    - text: Qu’est-ce que l’authentification unique ?
       url: what-is-single-sign-on.md
-    - text: Expériences d’utilisateur final
-      url: end-user-experiences.md
+- title: Prise en main
+  linkLists:
   - linkListType: quickstart
     links:
-    - text: Ajouter une application galerie
+    - text: Voir vos applications
+      url: view-applications-portal.md
+    - text: Ajouter une application
       url: add-application-portal.md
-  - linkListType: how-to-guide
-    links:
-    - text: Ajouter une application non-galerie
-      url: add-non-gallery-app.md
-    - text: Configurer l’authentification unique
-      url: configure-single-sign-on-non-gallery-applications.md
-    - text: Affecter un utilisateur ou un groupe à une application
-      url: assign-user-or-group-access-portal.md
-- title: Provisionner des utilisateurs et des groupes dans une application
+- title: Ajouter et configurer des applications
   linkLists:
-  - linkListType: overview
+  - linkListType: learn
     links:
-    - text: Qu’est-ce que le provisionnement d’application ?
-      url: /azure/active-directory/app-provisioning/user-provisioning?context=azure/active-directory/manage-apps/context/manage-apps-context
-  - linkListType: tutorial
-    links:
-    - text: Tutoriels sur le provisionnement des applications SaaS
-      url: /azure/active-directory/saas-apps/
-  - linkListType: how-to-guide
-    links:
-    - text: Vous créez une application ? Utiliser SCIM pour le provisionnement (documentation sur le provisionnement d’application)
-      url: /azure/active-directory/app-provisioning/use-scim-to-provision-users-and-groups
-    - text: Vous ajoutez application de la galerie ? Configurer le provisionnement (documentation sur le provisionnement d’application)
-      url: /azure/active-directory/app-provisioning/configure-automatic-user-provisioning-portal
-- title: Publier des applications locales avec le proxy d’application
+    - text: Ajouter une application
+      url: add-application-portal.md
+    - text: Configurer une application
+      url: add-application-portal-configure.md
+- title: Gérer des applications
   linkLists:
-  - linkListType: overview
+  - linkListType: learn
     links:
-    - text: Présentation de Proxy d’application
+    - text: meilleures pratiques recommandées.
+      url: application-management-fundamentals.md
+    - text: Scénarios courants
+      url: common-scenarios.md
+- title: Comprendre l’authentification unique
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Concepts de l’authentification unique
+      url: what-is-single-sign-on.md
+    - text: Options d’authentification unique
+      url: sso-options.md
+- title: Consentement de l’application
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Configurer le consentement de l’utilisateur
+      url: configure-user-consent.md
+    - text: Configurer le consentement de l’administrateur
+      url: configure-admin-consent-workflow.md
+- title: Migrer des applications
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Ressources de migration
+      url: migration-resources.md
+    - text: Migrer une application AD FS vers Azure
+      url: migrate-adfs-apps-to-azure.md
+- title: Utiliser des applications locales
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Qu’est-ce qu’un proxy d’application ?
       url: what-is-application-proxy.md
-  - linkListType: concept
-    links:
-    - text: Planifier le proxy d’application
+    - text: Déploiement d’un proxy d’application
       url: application-proxy-deployment-plan.md
-  - linkListType: tutorial
-    links:
-    - text: Ajouter une application locale
-      url: application-proxy-add-on-premises-application.md
-  - linkListType: how-to-guide
-    links:
-    - text: Configurer des connecteurs avec des serveurs proxy
-      url: application-proxy-configure-connectors-with-proxy-servers.md
-    - text: Configurer une page d’accueil personnalisée
-      url: application-proxy-configure-custom-home-page.md
-  - linkListType: deploy
-    links:
-    - text: Publier le Bureau à distance avec le proxy d’application
-      url: application-proxy-integrate-with-remote-desktop-services.md
-    - text: Activer l’accès distant à SharePoint avec le proxy d’application Azure AD
-      url: application-proxy-integrate-with-sharepoint-server.md
-- title: Sécuriser les applications héritées avec les réseaux et les contrôleurs de livraison d’applications
+- title: Applications sécurisées
   linkLists:
-  - linkListType: overview
+  - linkListType: learn
     links:
-    - text: Sécuriser l’accès hybride pour les applications héritées (cloud et locales)
-      url: secure-hybrid-access.md
-  - linkListType: how-to-guide
+    - text: Gérer l’accès aux applications
+      url: what-is-access-management.md
+    - text: Gérer les restrictions de locataire
+      url: tenant-restrictions.md
+- title: Configurer Mes applications
+  linkLists:
+  - linkListType: learn
     links:
-    - text: Protéger vos applications avec F5 Big-IP APM
-      url: https://aka.ms/f5-hybridaccessguide
-    - text: Protéger vos applications avec Zscaler ZPA
-      url: https://aka.ms/zscaler-hybridaccessguide
+    - text: Planifier un déploiement de Mes applications
+      url: access-panel-deployment-plan.md
+    - text: Créer des regroupements
+      url: access-panel-collections.md
+- title: Développer de nouvelles applications
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Aide pour les développeurs
+      url: developer-guidance-for-integrating-applications.md
+    - text: Comprendre la plateforme
+      url: ../develop/v2-overview.md
+- title: Nouveau dans la documentation
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Nouveautés dans la documentation
+      url: whats-new-docs.md

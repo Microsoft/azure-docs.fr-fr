@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/14/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 13089a2514229c5c5bc7b40d9447719247b23405
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 76a602ae722bd975e634631819ebc703e8896c98
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67176900"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96028269"
 ---
 ### <a name="to-modify-local-network-gateway-ip-address-prefixes---no-gateway-connection"></a><a name="noconnection"></a>Pour modifier des préfixes d’adresses IP de passerelle de réseau local - sans connexion de passerelle
 
@@ -70,7 +70,7 @@ Si vous disposez d’une connexion de passerelle et que vous souhaitez ajouter o
    Set-AzLocalNetworkGateway -LocalNetworkGateway $local `
    -AddressPrefix @('10.101.0.0/24','10.101.1.0/24')
    ```
-3. Créez la connexion. Dans cet exemple, nous allons configurer un type de connexion IPsec. Lorsque vous recréez votre connexion, utilisez le type de connexion spécifié pour votre configuration. Pour les autres types de connexion, consultez la page sur [les applets de commande PowerShell](https://msdn.microsoft.com/library/mt603611.aspx) .
+3. Créez la connexion. Dans cet exemple, nous allons configurer un type de connexion IPsec. Lorsque vous recréez votre connexion, utilisez le type de connexion spécifié pour votre configuration. Pour les autres types de connexion, consultez la page sur [les applets de commande PowerShell](/powershell/module/Azurerm.Network/New-AzureRmVirtualNetworkGatewayConnection) .
    
    Définissez la variable pour VirtualNetworkGateway.
 

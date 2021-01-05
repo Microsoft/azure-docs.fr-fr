@@ -8,12 +8,13 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: tutorial
 ms.date: 06/27/2019
-ms.openlocfilehash: f6139bb98fa0272e43c8e180d4ec029f7a7538bb
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 211b23db56b6deebb519b9eaac4164ea83edabac
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73494330"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078569"
 ---
 # <a name="tutorial-query-apache-hive-with-odbc-and-powershell"></a>Tutoriel : Requête Apache Hive avec ODBC et PowerShell
 

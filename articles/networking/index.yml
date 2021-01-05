@@ -11,13 +11,13 @@ metadata:
   author: KumudD
   ms.author: kumud
   manager: mtillman
-  ms.date: 03/17/2020
-  ms.openlocfilehash: eba71e790c9da1978e0c9cac84b1913447972db2
-  ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+  ms.date: 09/28/2020
+  ms.openlocfilehash: e348e1e93506a668f448e834ad1eaa5ce0c36d4a
+  ms.sourcegitcommit: 693df7d78dfd5393a28bf1508e3e7487e2132293
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/22/2020
-  ms.locfileid: "83800709"
+  ms.lasthandoff: 10/28/2020
+  ms.locfileid: "92900301"
 highlightedContent:
   items:
   - title: Qu’est-ce qu’Azure Networking ?
@@ -32,9 +32,9 @@ highlightedContent:
   - title: Topologie réseau hub-and-spoke dans Azure
     itemType: architecture
     url: https://docs.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke
-  - title: Qu’est-ce qu’une préférence de routage ?
+  - title: Présentation d’Azure Orbital
     itemType: concept
-    url: ../virtual-network/routing-preference-overview.md
+    url: azure-orbital-overview.md
   - title: Travail à distance à l’aide des services Azure
     itemType: concept
     url: working-remotely-support.md
@@ -113,12 +113,12 @@ conceptualContent:
     - url: ../load-balancer/load-balancer-overview.md
       itemType: overview
       text: Qu’est-ce qu’Azure Load Balancer ?
+    - url: https://azure.microsoft.com/updates/?category=networking&query=load%20balancer
+      itemType: whats-new
+      text: Nouveautés
     - url: ../load-balancer/quickstart-load-balancer-standard-public-portal.md
       itemType: quickstart
       text: Équilibrer la charge de trafic internet vers des machines virtuelles
-    - url: ../load-balancer/tutorial-load-balancer-port-forwarding-portal.md
-      itemType: tutorial
-      text: Configurer le réacheminement de port
     - url: ../load-balancer/load-balancer-troubleshoot.md
       itemType: how-to-guide
       text: Résoudre les problèmes liés à Azure Load Balancer
@@ -268,17 +268,17 @@ conceptualContent:
       text: En savoir plus
   - title: Protection DDOS
     links:
-    - url: ../virtual-network/ddos-protection-overview.md
+    - url: ../ddos-protection/ddos-protection-overview.md
       itemType: overview
       text: Qu’est-ce que le service Protection DDos standard Azure ?
-    - url: ../virtual-network/manage-ddos-protection.md
+    - url: ../ddos-protection/manage-ddos-protection.md
       itemType: how-to-guide
       text: Gérer la protection DDoS
-    - url: ../virtual-network/ddos-protection-partner-onboarding.md
+    - url: ../ddos-protection/ddos-protection-partner-onboarding.md
       itemType: concept
       text: Partenaires d’intégration
     footerLink:
-      url: https://docs.microsoft.com/azure/security/fundamentals/ddos-best-practices
+      url: ../ddos-protection/index.yml
       text: En savoir plus
   - title: Réseau de distribution de contenu
     links:

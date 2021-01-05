@@ -2,26 +2,21 @@
 title: 'Didacticiel : intégration d’Azure Active Directory à SAP HANA | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et SAP HANA.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: cef4a146-f4b0-4e94-82de-f5227a4b462c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/27/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 44a34fe5637e895ea69b6fc4c277b7722b306c97
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 748566cf5b25157fcb8a2938a3f4bd307c930874
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73161183"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993218"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-sap-hana"></a>Didacticiel : Intégration d’Azure Active Directory à SAP HANA
 
@@ -32,7 +27,7 @@ L’intégration de SAP HANA à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à SAP HANA (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -126,13 +121,13 @@ Pour configurer l’authentification unique Azure AD avec SAP HANA, procédez co
 
 5. L’application SAP HANA attend les assertions SAML dans un format spécifique. Configurez les revendications suivantes pour cette application. Vous pouvez gérer les valeurs de ces attributs à partir de la section **Attributs utilisateur** sur la page d’intégration des applications. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Attributs utilisateur**.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant la section « User Attributes » avec l’icône « Edit » sélectionnée.](common/edit-attribute.png)
 
 6. Dans la section **Attributs utilisateur** de la boîte de dialogue **Attributs et revendications de l’utilisateur**, procédez comme suit :
  
     a. Cliquez sur l’**icône Modifier** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](./media/saphana-tutorial/tutorial_usermail.png)
+    ![Capture d’écran montrant la boîte de dialogue « Attributs utilisateur et revendications » avec le bouton « Modifier » sélectionné.](./media/saphana-tutorial/tutorial_usermail.png)
 
     ![image](./media/saphana-tutorial/tutorial_usermailedit.png)
 
@@ -159,7 +154,7 @@ Pour configurer l’authentification unique Azure AD avec SAP HANA, procédez co
 
     a. Dans le volet **d’ajout des informations sur le fournisseur d’identité**, collez le contenu du fichier XML de métadonnées que vous avez téléchargé à partir du portail Azure dans la zone **Métadonnées**.
 
-    ![Paramètres d’ajout d’un fournisseur d’identité](./media/saphana-tutorial/sap2.png)
+    ![Capture d’écran montrant le volet « Add Identity Provider Info » avec les zones « Metadata » et « Name » mises en évidence.](./media/saphana-tutorial/sap2.png)
 
     b. Si le contenu du document XML est valide, le processus d’analyse extrait les informations requises pour les champs **Subject, Entity ID et Issuer** (Sujet, ID d’entité et Émetteur) dans la zone d’écran **General data** (Données générales). Il extrait également les informations nécessaires pour les champs d’URL dans la zone d’écran **Destination**, tels que les champs **Base URL and SingleSignOn URL (*)** (URL de base et URL d’authentification unique).
 
@@ -265,13 +260,12 @@ Si vous avez besoin de créer un utilisateur manuellement, effectuez les étapes
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette SAP HANA dans le panneau d’accès doit vous connecter automatiquement à l’application SAP HANA pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette SAP HANA dans le panneau d’accès doit vous connecter automatiquement à l’application SAP HANA pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

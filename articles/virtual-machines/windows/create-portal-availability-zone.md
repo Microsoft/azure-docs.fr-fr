@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 03/27/2018
 ms.author: cynthn
 ms.custom: ''
-ms.openlocfilehash: b8a5f6543bc265605361b7875fad5232d428e27e
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 339c093e5444839f9b106cd08980438a864c0474
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208990"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87828912"
 ---
 # <a name="create-a-windows-virtual-machine-in-an-availability-zone-with-the-azure-portal"></a>Créer une machine virtuelle Windows dans une zone de disponibilité avec le portail Azure
 
@@ -68,4 +68,4 @@ Vous pouvez confirmer les paramètres de zone pour ces ressources dans le portai
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](availability.md) des machines virtuelles Azure.
+Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](../availability.md) des machines virtuelles Azure.

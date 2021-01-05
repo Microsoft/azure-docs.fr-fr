@@ -8,12 +8,12 @@ ms.service: azure
 ms.topic: overview
 ms.workload: infrastructure
 ms.date: 08/24/2018
-ms.openlocfilehash: 4f9da6cbfe8d1e6b92c39148b275de193730c8f1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 7b9e95c06dd48e78e42244d27d27d063bf5f0be7
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77623576"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92327771"
 ---
 # <a name="get-started-for-azure-it-operators"></a>Prise en main pour les opérateurs informatiques Azure
 
@@ -50,7 +50,7 @@ Pour plus d’informations sur les régions Azure disponibles, consultez [Régio
 Azure utilise un modèle de cloud computing basé sur les catégories de service fournies aux clients. Les trois catégories de service incluent l’IaaS (infrastructure as a service), le PaaS (platform as a service) et le SaaS (software as a service). Les fournisseurs partagent tout ou partie de la responsabilité pour les composants dans la pile informatique dans chacune de ces catégories. Jetons un œil à chacune des catégories pour le cloud computing.
 ![Comparaison de pile de cloud computing](./media/cloud-computing-comparison.png)
 
-#### <a name="iaas-infrastructure-as-a-service"></a>IaaS : Infrastructure as a Service
+#### <a name="iaas-infrastructure-as-a-service"></a>IaaS : Infrastructure as a service
 
 Un fournisseur de cloud IaaS exécute et gère toutes les ressources de calcul physiques ainsi que les logiciels nécessaires à la virtualisation de l’ordinateur. Un client de ce service déploie les machines virtuelles dans ces centres de données hébergés. Même si les machines virtuelles sont situées dans un centre de données hors site, le consommateur IaaS garde le contrôle sur la configuration et la gestion du système d’exploitation laissant l’infrastructure sous-jacente au fournisseur de cloud.
 
@@ -58,17 +58,17 @@ Azure comprend plusieurs solutions IaaS, notamment les machines virtuelles, les 
 
 Les groupes de machines virtuelles identiques reposent sur des machines virtuelles Microsoft Azure et offrent un moyen facile de déployer des clusters de machines virtuelles identiques. Les groupes de machines virtuelles identiques prennent également en charge la mise à l’échelle automatique afin de pouvoir déployer les nouvelles machines virtuelles automatiquement à la demande. Les groupes de machines virtuelles identiques offrent une plateforme idéale pour héberger les clusters de calcul de microservice plus importants, tels que Azure Service Fabric et Azure Container Service.
 
-#### <a name="paas-platform-as-a-service"></a>PaaS : Platform as a Service
+#### <a name="paas-platform-as-a-service"></a>PaaS : Platform as a service
 
 Avec PaaS, vous déployez votre application dans un environnement qui est fourni par le prestataire de services cloud. Le fournisseur s’occupe de toute la gestion de l’infrastructure pour vous permettre de vous consacrer au développement d’applications et à la gestion de données.
 
 Azure fournit plusieurs offres de calcul PaaS, notamment le composant Web Apps d’Azure App Service et d’Azure Cloud Services (rôles web et de travail). Dans un cas comme dans l’autre, les développeurs ont à leur disposition plusieurs moyens de déployer leur application sans avoir à se préoccuper de l’infrastructure qui les prend en charge. Les développeurs n’ont aucun besoin de créer des machines virtuelles, ni d’utiliser le protocole RDP (Remote Desktop Protocol) pour se connecter à chacune d’elles, ni même d’installer l’application. Ils appuient simplement sur un bouton (ou peu s’en faut) et les outils fournis par Microsoft approvisionnent les machines virtuelles, puis déploient et installent l’application sur celles-ci.
 
-#### <a name="saas-software-as-a-service"></a>SaaS : Software as a Service
+#### <a name="saas-software-as-a-service"></a>SaaS : Software as a service
 
 SaaS est un logiciel qui est hébergé et géré de manière centralisée. Il s’appuie généralement sur une architecture multilocataire, où une seule version de l’application est utilisée pour tous les clients. Il peut être monté en charge parallèle sur plusieurs instances pour garantir des performances optimales dans tous les emplacements. Le logiciel SaaS est généralement concédé sous licence, par abonnement mensuel ou annuel. Les éditeurs de logiciels SaaS sont responsables de tous les composants de la pile logicielle afin de vous faire gérer uniquement les services fournis.
 
-Microsoft Office 365 constitue un bon exemple pour illustrer une offre SaaS. Les abonnés payent un abonnement mensuel ou annuel pour obtenir Microsoft Exchange, Microsoft OneDrive et le reste de la suite Microsoft Office en tant que service. Les abonnés bénéficient toujours de la version la plus récente et n’ont pas besoin de gérer le serveur Exchange. Par rapport à l’installation et à la mise à jour annuelle d’Office, cette solution est moins onéreuse et demande moins d’efforts.
+Microsoft 365 constitue un bon exemple d’offre SaaS. Les abonnés payent un abonnement mensuel ou annuel pour obtenir Microsoft Exchange, Microsoft OneDrive et le reste de la suite Microsoft Office en tant que service. Les abonnés bénéficient toujours de la version la plus récente et n’ont pas besoin de gérer le serveur Exchange. Par rapport à l’installation et à la mise à jour annuelle d’Office, cette solution est moins onéreuse et demande moins d’efforts.
 
 ## <a name="azure-services"></a>Services Azure
 
@@ -130,7 +130,7 @@ Services de mise en réseau au sein d’Azure et entre Azure et les centres de d
 
 - Azure Content Delivery Network
 
-Pour obtenir une documentation détaillée des services Azure, consultez [Documentation des services Azure](https://docs.microsoft.com/azure).
+Pour obtenir une documentation détaillée des services Azure, consultez [Documentation des services Azure](/azure).
 
 ## <a name="azure-key-concepts"></a>Principaux concepts Azure
 
@@ -142,7 +142,7 @@ L’un des avantages à utiliser Azure est de pouvoir déployer des applications
 
 ### <a name="azure-portal"></a>Portail Azure
 
-Le portail Azure est une application web qui peut être utilisée pour créer, gérer et supprimer des services et des ressources Azure. Le portail Azure se trouve à l’adresse [portal.azure.com](https://portal.azure.com). Il comprend un tableau de bord personnalisable et des outils de gestion des ressources Azure. Il fournit également des informations de facturation et d’abonnement. Pour plus d’informations, consultez [Présentation du portail Microsoft Azure](https://azure.microsoft.com/documentation/articles/azure-portal-overview/) et [Gérer des ressources Azure sur le portail](https://docs.microsoft.com/azure/azure-portal/resource-group-portal).
+Le portail Azure est une application web qui peut être utilisée pour créer, gérer et supprimer des services et des ressources Azure. Le portail Azure se trouve à l’adresse [portal.azure.com](https://portal.azure.com). Il comprend un tableau de bord personnalisable et des outils de gestion des ressources Azure. Il fournit également des informations de facturation et d’abonnement. Pour plus d’informations, consultez [Présentation du portail Microsoft Azure](https://azure.microsoft.com/documentation/articles/azure-portal-overview/) et [Gérer des ressources Azure sur le portail](../../azure-resource-manager/management/manage-resources-portal.md).
 
 ### <a name="resources"></a>Ressources
 
@@ -170,37 +170,37 @@ L’interface de ligne de commande Azure est un outil que vous pouvez utiliser p
 
 #### <a name="rest-apis"></a>API REST
 
-Azure repose sur un ensemble d’API REST qui prennent en charge l’interface utilisateur du portail Azure. La plupart de ces API REST sont également prises en charge pour vous permettre de configurer et de gérer par programmation vos ressources et applications Azure à partir de n’importe quel appareil connecté à Internet. Pour plus d’informations, consultez [Informations de référence sur les API REST Azure](https://docs.microsoft.com/rest/api/index).
+Azure repose sur un ensemble d’API REST qui prennent en charge l’interface utilisateur du portail Azure. La plupart de ces API REST sont également prises en charge pour vous permettre de configurer et de gérer par programmation vos ressources et applications Azure à partir de n’importe quel appareil connecté à Internet. Pour plus d’informations, consultez [Informations de référence sur les API REST Azure](/rest/api/index).
 
 ### <a name="azure-cloud-shell"></a>Azure Cloud Shell
 
-Les administrateurs peuvent accéder à Azure PowerShell et Azure CLI par l’intermédiaire d’une expérience appelée Azure Cloud Shell et accessible via le navigateur. Cette interface interactive fournit un outil flexible pour que les administrateurs Linux et Windows utilisent leur interface de ligne de commande de choix, Bash ou PowerShell. Azure Cloud Shell est accessible via le portail, comme une interface web autonome à [shell.azure.com](https://shell.azure.com), ou à partir de plusieurs autres points d’accès. Pour plus d’informations, voir la [présentation d’Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview).
+Les administrateurs peuvent accéder à Azure PowerShell et Azure CLI par l’intermédiaire d’une expérience appelée Azure Cloud Shell et accessible via le navigateur. Cette interface interactive fournit un outil flexible pour que les administrateurs Linux et Windows utilisent leur interface de ligne de commande de choix, Bash ou PowerShell. Azure Cloud Shell est accessible via le portail, comme une interface web autonome à [shell.azure.com](https://shell.azure.com), ou à partir de plusieurs autres points d’accès. Pour plus d’informations, voir la [présentation d’Azure Cloud Shell](../../cloud-shell/overview.md).
 
 ## <a name="azure-subscriptions"></a>Abonnements Azure
 
-Un abonnement est un regroupement logique de services Azure, associé à un compte Azure. Un seul compte Azure peut contenir plusieurs abonnements. La facturation des services Azure est effectuée par abonnement. Les abonnements Azure sont dotés d’un Administrateur de compte ayant un contrôle total sur l’abonnement et d’un Administrateur de service ayant le contrôle sur tous les services de l’abonnement. Pour plus d’informations sur les administrateurs d’abonnements classiques, consultez [Ajouter ou changer des administrateurs d’abonnements Azure](../../cost-management-billing/manage/add-change-subscription-administrator.md). En plus des administrateurs, les comptes individuels peuvent bénéficier d’un contrôle détaillé des ressources Azure en utilisant [RBAC (contrôle d’accès en fonction du rôle)](../../role-based-access-control/overview.md).
+Un abonnement est un regroupement logique de services Azure, associé à un compte Azure. Un seul compte Azure peut contenir plusieurs abonnements. La facturation des services Azure est effectuée par abonnement. Les abonnements Azure sont dotés d’un Administrateur de compte ayant un contrôle total sur l’abonnement et d’un Administrateur de service ayant le contrôle sur tous les services de l’abonnement. Pour plus d’informations sur les administrateurs d’abonnements classiques, consultez [Ajouter ou changer des administrateurs d’abonnements Azure](../../cost-management-billing/manage/add-change-subscription-administrator.md). En plus des administrateurs, les comptes individuels peuvent bénéficier d’un contrôle détaillé des ressources Azure en utilisant un [Contrôle d’accès en fonction du rôle (RBAC) Azure](../../role-based-access-control/overview.md).
 
 ### <a name="select-and-enable-an-azure-subscription"></a>Sélectionner et activer un abonnement Azure
 
 Avant de pouvoir utiliser les services Azure, vous devez vous abonner. Plusieurs types d’abonnements sont disponibles.
 
-**Comptes gratuits** : le lien pour s’abonner à un compte gratuit se trouve sur le [site web Azure](https://azure.microsoft.com/). Vous disposez d’un crédit valable sur une période de 30 jours, pour essayer la combinaison de ressources de votre choix dans Azure. Si vous dépassez le montant du crédit alloué, votre compte est suspendu. À la fin de la période d’essai, vos services sont désactivés et ne fonctionnent plus. Vous pouvez à tout moment passer à un abonnement avec paiement à l’utilisation.
+**Comptes gratuits**  : Le lien pour s’abonner à un compte gratuit se trouve sur le [site web Azure](https://azure.microsoft.com/). Vous disposez d’un crédit valable sur une période de 30 jours, pour essayer la combinaison de ressources de votre choix dans Azure. Si vous dépassez le montant du crédit alloué, votre compte est suspendu. À la fin de la période d’essai, vos services sont désactivés et ne fonctionnent plus. Vous pouvez à tout moment passer à un abonnement avec paiement à l’utilisation.
 
-**Abonnements MSDN** : si vous avez un abonnement MSDN, vous disposez d’un crédit Azure d’un montant spécifique tous les mois. Par exemple, si vous utilisez une édition de Microsoft Visual Studio Enterprise avec un abonnement MSDN, vous bénéficiez d’un crédit Azure de \$150 USD par mois.
+**Abonnements MSDN**  : Si vous avez un abonnement MSDN, vous obtenez un crédit Azure d’un montant spécifique tous les mois. Par exemple, si vous utilisez une édition de Microsoft Visual Studio Enterprise avec un abonnement MSDN, vous bénéficiez d’un crédit Azure de \$150 USD par mois.
 
 Si vous dépassez le montant du crédit, vos services sont désactivés jusqu’au début du mois suivant. Vous pouvez désactiver le plafond des dépenses et ajouter une carte de crédit à utiliser pour les dépassements. Certains de ces coûts bénéficient de remise pour les comptes MSDN. Par exemple, vous pouvez payer le prix Linux pour les machines virtuelles exécutant Windows Server, sans aucuns frais supplémentaires pour les serveurs Microsoft tels que Microsoft SQL Server. Les comptes MSDN s’avèrent ainsi parfaits pour les scénarios de développement et de test.
 
-**Les comptes BizSpark** : le programme Microsoft BizSpark présente de nombreux avantages pour les start-ups. Vous bénéficiez notamment de l’accès à tous les logiciels Microsoft dans les environnements de développement et de test pour cinq comptes MSDN maximum. Vous obtenez 150 USD de crédit Azure pour chacun de ces cinq comptes MSDN et profitez de tarifs réduits pour plusieurs services Azure tels que Machines virtuelles.
+**Comptes BizSpark**  : Le programme Microsoft BizSpark présente de nombreux avantages pour les start-ups. Vous bénéficiez notamment de l’accès à tous les logiciels Microsoft dans les environnements de développement et de test pour cinq comptes MSDN maximum. Vous obtenez 150 USD de crédit Azure pour chacun de ces cinq comptes MSDN et profitez de tarifs réduits pour plusieurs services Azure tels que Machines virtuelles.
 
-**Paiement à l’utilisation** : avec cet abonnement, vous payez uniquement ce que vous utilisez en associant une carte de crédit ou de débit à ce compte. Si vous êtes une organisation, vous pouvez également être approuvé pour la facturation.
+**Paiement à l’utilisation**  : Avec cet abonnement, vous payez uniquement ce que vous utilisez en associant une carte de crédit ou de débit au compte. Si vous êtes une organisation, vous pouvez également être approuvé pour la facturation.
 
-**Accords Entreprise** : avec un accord Entreprise, vous vous engagez à utiliser un certain nombre de services dans Azure sur l’année à venir et vous payez ce montant à l’avance. L’engagement que vous contractez court tout au long de l’année. Si vous dépassez le montant de l’engagement, vous pouvez régler le surplus en retard. Selon le montant de l’engagement, vous bénéficiez d’une remise sur les services dans Azure.
+**Contrats Entreprise**  : Avec un contrat Entreprise, vous vous engagez à utiliser un certain nombre de services dans Azure sur l’année à venir et vous payez ce montant à l’avance. L’engagement que vous contractez court tout au long de l’année. Si vous dépassez le montant de l’engagement, vous pouvez régler le surplus en retard. Selon le montant de l’engagement, vous bénéficiez d’une remise sur les services dans Azure.
 
 ### <a name="grant-administrative-access-to-an-azure-subscription"></a>Accorder un accès administratif à un abonnement Azure
 
-RBAC possède plusieurs rôles prédéfinis que vous pouvez utiliser pour assigner des autorisations. Pour faire d’un utilisateur un administrateur d’un abonnement Azure, attribuez-lui le rôle [Propriétaire](../../role-based-access-control/built-in-roles.md#owner) au niveau de l’abonnement. Le rôle Propriétaire donne à l’utilisateur un accès total à toutes les ressources de l’abonnement, ainsi que le droit de déléguer l’accès à d’autres personnes.
+Azure RBAC présente plusieurs rôles intégrés que vous pouvez utiliser pour attribuer des autorisations. Pour faire d’un utilisateur un administrateur d’un abonnement Azure, attribuez-lui le rôle [Propriétaire](../../role-based-access-control/built-in-roles.md#owner) au niveau de l’abonnement. Le rôle Propriétaire donne à l’utilisateur un accès total à toutes les ressources de l’abonnement, ainsi que le droit de déléguer l’accès à d’autres personnes.
 
-Pour plus d’informations, consultez [Gérer l’accès à l’aide de RBAC et du portail Azure](../../role-based-access-control/role-assignments-portal.md).
+Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôles Azure à l’aide du portail Azure](../../role-based-access-control/role-assignments-portal.md).
 
 ### <a name="view-billing-information-in-the-azure-portal"></a>Afficher les informations de facturation dans le portail Azure
 
@@ -226,7 +226,7 @@ Le tarif de chaque service dans Azure est différent. De nombreux services Azure
 
 Azure Resource Manager est un système de déploiement, de gestion et d’organisation des ressources Azure. En l’utilisant, vous pouvez rassembler de nombreuses ressources individuelles dans un groupe de ressources.
 
-Il comporte également des fonctionnalités de déploiement permettant un déploiement personnalisable et la configuration des ressources associées. Ainsi, en utilisant Azure Resource Manager, vous pouvez déployer une application composée de plusieurs machines virtuelles, d’un équilibreur de charge et d’une base de données SQL comme une unité unique. Vous développez ces déploiements à l’aide d’un modèle Azure Resource Manager.
+Il comporte également des fonctionnalités de déploiement permettant un déploiement personnalisable et la configuration des ressources associées. Ainsi, en utilisant Resource Manager, vous pouvez déployer une application composée de plusieurs machines virtuelles, d’un équilibreur de charge et d’une base de données dans Azure SQL Database sous la forme d’une unité unique. Vous développez ces déploiements à l’aide d’un modèle Azure Resource Manager.
 
 Resource Manager offre plusieurs avantages :
 
@@ -238,7 +238,7 @@ Resource Manager offre plusieurs avantages :
 
 - Vous pouvez définir les dépendances entre les ressources afin de les déployer dans le bon ordre.
 
-- Vous pouvez appliquer un contrôle d’accès à tous les services de votre groupe de ressources, car RBAC est intégré en mode natif à la plateforme de gestion.
+- Vous pouvez appliquer un contrôle d’accès à tous les services de votre groupe de ressources, car Azure RBAC est intégré en mode natif à la plateforme de gestion.
 
 - Vous pouvez appliquer des marqueurs aux ressources pour organiser logiquement toutes les ressources de votre abonnement.
 
@@ -266,27 +266,27 @@ Les modèles Resource Manager définissent de façon déclarative les ressources
 
 Un modèle Resource Manager se compose de quatre sections :
 
-- **Paramètres** : il s’agit d’entrées pour le déploiement. Les valeurs des paramètres peuvent être fournies par un être humain ou un processus automatisé. Un exemple de paramètre peut être le nom d’utilisateur de l’administrateur et le mot de passe associé pour une machine virtuelle Windows. Les valeurs des paramètres sont utilisées dans le déploiement lorsqu’elles sont spécifiées.
+- **Paramètres**  : Il s’agit d’entrées pour le déploiement. Les valeurs des paramètres peuvent être fournies par un être humain ou un processus automatisé. Un exemple de paramètre peut être le nom d’utilisateur de l’administrateur et le mot de passe associé pour une machine virtuelle Windows. Les valeurs des paramètres sont utilisées dans le déploiement lorsqu’elles sont spécifiées.
 
-- **Variables** : elles servent à contenir les valeurs qui sont utilisées dans le déploiement. Contrairement aux paramètres, une valeur de variable n’est pas fournie au moment du déploiement. Au lieu de cela, elle est codée en dur ou générée de façon dynamique.
+- **Variables**  : Elles servent à contenir les valeurs qui sont utilisées dans le déploiement. Contrairement aux paramètres, une valeur de variable n’est pas fournie au moment du déploiement. Au lieu de cela, elle est codée en dur ou générée de façon dynamique.
 
-- **Ressources** : cette section du modèle définit les ressources à déployer, telles que les machines virtuelles, les comptes de stockage et les réseaux virtuels.
+- **Ressources**  : Cette section du modèle définit les ressources à déployer, comme les machines virtuelles, les comptes de stockage et les réseaux virtuels.
 
-- **Sortie** : à l’issue d’un déploiement, Resource Manager peut retourner des données, telles que les chaînes de connexion générées dynamiquement.
+- **Sortie** : Après un déploiement, Resource Manager peut retourner des données, comme des chaînes de connexion générées dynamiquement.
 
 Les mécanismes suivants sont disponibles pour l’automatisation du déploiement :
 
-- **Fonctions** : vous pouvez utiliser plusieurs fonctions dans les modèles Resource Manager. Celles-ci incluent des opérations, telles que la conversion d’une chaîne en minuscules, le déploiement de plusieurs instances d’une ressource définie, et le retour de façon dynamique du groupe de ressources cible. Les fonctions Resource Manager permettent de créer des déploiements dynamiques.
+- **Fonctions**  : Vous pouvez utiliser plusieurs fonctions dans les modèles Resource Manager. Celles-ci incluent des opérations, telles que la conversion d’une chaîne en minuscules, le déploiement de plusieurs instances d’une ressource définie, et le retour de façon dynamique du groupe de ressources cible. Les fonctions Resource Manager permettent de créer des déploiements dynamiques.
 
-- **Dépendances de ressource** : lorsque vous déployez plusieurs ressources, certaines ont une dépendance sur d’autres. Pour faciliter le déploiement, vous pouvez utiliser une déclaration de dépendance, afin que les ressources dépendantes soient déployées avant les autres.
+- **Dépendances des ressources**  : Quand vous déployez plusieurs ressources, certaines ont une dépendance sur d’autres. Pour faciliter le déploiement, vous pouvez utiliser une déclaration de dépendance, afin que les ressources dépendantes soient déployées avant les autres.
 
-- **Liaison de modèle** : à partir d’un modèle Resource Manager, vous pouvez lier à un autre modèle. Cela permet une décomposition du déploiement en un ensemble de modèles dont les usages sont spécifiques et ciblés.
+- **Liaison de modèles**  : À partir d’un modèle Resource Manager, vous pouvez lier un autre modèle. Cela permet une décomposition du déploiement en un ensemble de modèles dont les usages sont spécifiques et ciblés.
 
-Vous pouvez générer des modèles Resource Manager dans n’importe quel éditeur de texte. Cela dit, le kit SDK Azure pour Visual Studio comprend des outils pour vous aider. À l’aide de Visual Studio, vous pouvez ajouter des ressources au modèle par l’intermédiaire d’un Assistant, puis déployer et déboguer le modèle directement à partir de Visual Studio. Pour plus d’informations, consultez [Création de modèles Azure Resource Manager](../../resource-group-authoring-templates.md).
+Vous pouvez générer des modèles Resource Manager dans n’importe quel éditeur de texte. Cela dit, le kit SDK Azure pour Visual Studio comprend des outils pour vous aider. À l’aide de Visual Studio, vous pouvez ajouter des ressources au modèle par l’intermédiaire d’un Assistant, puis déployer et déboguer le modèle directement à partir de Visual Studio. Pour plus d’informations, consultez [Création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md).
 
 Enfin, vous pouvez convertir des groupes de ressources existants en modèles réutilisables à partir du portail Azure. Cela peut être utile si vous souhaitez créer un modèle de déploiement pour un groupe de ressources existant, ou que vous voulez simplement examiner le JSON sous-jacent. Pour exporter un groupe de ressources, sélectionnez le bouton **Script d’automatisation** dans les paramètres du groupe de ressources.
 
-## <a name="security-of-azure-resources-rbac"></a>Sécurité des ressources Azure (RBAC)
+## <a name="security-of-azure-resources-azure-rbac"></a>Sécurité des ressources Azure (Azure RBAC)
 
 Vous pouvez accorder l’accès fonctionnel aux comptes d’utilisateur dans une étendue spécifiée : abonnement, groupe de ressources ou ressources individuelles. Cela signifie que vous pouvez déployer un ensemble de ressources dans un groupe de ressources, telles qu’une machine virtuelle et toutes les ressources associées, et accorder des autorisations à un utilisateur ou un groupe spécifique. Cette approche limite l’accès aux seules ressources qui appartiennent au groupe de ressources cible. Vous pouvez également accorder l’accès à une ressource unique, telle qu’une machine virtuelle ou un réseau virtuel.
 
@@ -294,19 +294,19 @@ Pour accorder l’accès, vous assignez un rôle à l’utilisateur ou au groupe
 
 Voici quelques exemples de [rôles intégrés dans Azure](../../role-based-access-control/built-in-roles.md) :
 
-- **Propriétaire** : un utilisateur disposant de ce rôle peut tout gérer, y compris l’accès.
+- **Propriétaire** : Un utilisateur avec ce rôle peut tout gérer, y compris l’accès.
 
-- **Lecteur** : un utilisateur disposant de ce rôle peut lire les ressources de tous les types (à l’exception des secrets), mais ne peut pas apporter de modifications.
+- **Lecteur** : Un utilisateur avec ce rôle peut lire les ressources de tous les types (à l’exception des secrets), mais ne peut pas faire de changements.
 
-- **Contributeur de machines virtuelles** : un utilisateur disposant de ce rôle peut gérer des machines virtuelles, mais ne peut pas gérer le réseau virtuel sur lequel il est connecté, ni le compte de stockage où réside le fichier VHD.
+- **Contributeur de machine virtuelle** : Un utilisateur avec ce rôle peut gérer des machines virtuelles, mais ne peut pas gérer le réseau virtuel auxquelles elle sont connectées, ni le compte de stockage où réside le fichier VHD.
 
-- **Contributeur de SQL DB** : un utilisateur disposant de ce rôle peut gérer des bases de données SQL, mais pas leurs stratégies de sécurité.
+- **Contributeur de base de données SQL**  : Un utilisateur avec ce rôle peut gérer des bases de données SQL, mais pas leurs stratégies de sécurité.
 
-- **Gestionnaire de sécurité SQL** : un utilisateur disposant de ce rôle peut gérer les stratégies de sécurité des serveurs et bases de données SQL.
+- **Gestionnaire de sécurité SQL**  : Un utilisateur avec ce rôle peut gérer les stratégies de sécurité des serveurs et bases de données SQL.
 
-- **Contributeur de comptes de stockage** : un utilisateur disposant de ce rôle peut gérer les comptes de stockage, mais ne peut pas en gérer l’accès.
+- **Contributeur de compte de stockage**  : Un utilisateur avec ce rôle peut gérer les comptes de stockage, mais ne peut pas en gérer l’accès.
 
-Pour plus d’informations, consultez [Gérer l’accès à l’aide de RBAC et du portail Azure](../../role-based-access-control/role-assignments-portal.md).
+Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôles Azure à l’aide du portail Azure](../../role-based-access-control/role-assignments-portal.md).
 
 ## <a name="azure-virtual-machines"></a>Machines virtuelles Azure
 
@@ -314,7 +314,7 @@ Parmi les services IaaS d’Azure, Machines virtuelles Azure est l’un des plus
 
 Lorsque vous déployez une machine virtuelle Azure, vous pouvez sélectionner une image à partir de la Place de marché Azure, ou fournir votre propre image généralisée. Cette image est utilisée pour appliquer le système d’exploitation et la configuration initiale. Lors du déploiement, Resource Manager gère certains paramètres de configuration, tels que l’attribution du nom de l’ordinateur, les informations d’identification d’administration et la configuration réseau. Vous pouvez utiliser des extensions de machine virtuelle Azure pour automatiser davantage les configurations, telles que l’installation de logiciels, la configuration d’antivirus et la surveillance des solutions.
 
-Vous pouvez créer des machines virtuelles de tailles très différentes. La taille d’une machine virtuelle détermine l’allocation des ressources, telles que les capacités de traitement, de mémoire et de stockage. Dans certains cas, des composants spécifiques, tels que les cartes réseau compatibles RDMA et les disques SSD, sont uniquement disponibles dans certaines tailles de machine virtuelle. Pour obtenir une liste complète des possibilités et des tailles de machine virtuelle, consultez « Tailles des machines virtuelles dans Azure » pour [Windows](../../virtual-machines/windows/sizes.md) et [Linux](../../virtual-machines/linux/sizes.md).
+Vous pouvez créer des machines virtuelles de tailles très différentes. La taille d’une machine virtuelle détermine l’allocation des ressources, telles que les capacités de traitement, de mémoire et de stockage. Dans certains cas, des composants spécifiques, tels que les cartes réseau compatibles RDMA et les disques SSD, sont uniquement disponibles dans certaines tailles de machine virtuelle. Pour obtenir une liste complète des possibilités et des tailles de machine virtuelle, consultez « Tailles des machines virtuelles dans Azure » pour [Windows](../../virtual-machines/sizes.md) et [Linux](../../virtual-machines/sizes.md).
 
 ### <a name="use-cases"></a>Cas d'utilisation
 
@@ -344,7 +344,7 @@ De même, vous pouvez utiliser l’interface de ligne de commande Azure pour dé
 
 ### <a name="access-and-security-for-virtual-machines"></a>Accès et sécurité des machines virtuelles
 
-L’accès à une machine virtuelle depuis Internet nécessite que l’interface du réseau associé, ou le cas échéant de l’équilibreur de charge, soit configuré avec une adresse IP publique. L’adresse IP publique inclut un nom DNS qui se résout sur la machine virtuelle ou l’équilibreur de charge. Pour plus d’informations, consultez [Adresses IP dans Azure](../../virtual-network/virtual-network-ip-addresses-overview-arm.md).
+L’accès à une machine virtuelle depuis Internet nécessite que l’interface du réseau associé, ou le cas échéant de l’équilibreur de charge, soit configuré avec une adresse IP publique. L’adresse IP publique inclut un nom DNS qui se résout sur la machine virtuelle ou l’équilibreur de charge. Pour plus d’informations, consultez [Adresses IP dans Azure](../../virtual-network/public-ip-addresses.md).
 
 Vous gérez l’accès à la machine virtuelle sur l’adresse IP publique à l’aide d’une ressource de groupe de sécurité réseau. Un groupe de sécurité réseau (NSG, Network Security Group) agit comme un pare-feu et autorise ou refuse le trafic via l’interface réseau ou le sous-réseau sur un ensemble de ports définis. Par exemple, pour créer une session Bureau à distance avec une machine virtuelle Azure, vous devez configurer le NSG de manière à autoriser le trafic entrant sur le port 3389. Pour plus d’informations, consultez [Ouverture de ports sur une machine virtuelle dans Azure à l’aide du portail Azure](../../virtual-machines/windows/nsg-quickstart-portal.md).
 
@@ -352,7 +352,7 @@ Enfin, comme c’est le cas pour la gestion de tout système informatique, vous 
 
 ## <a name="azure-storage"></a>Stockage Azure
 
-Stockage Azure est un service géré par Microsoft qui fournit un stockage redondant, évolutif et durable. En tant que ressource, vous pouvez ajouter un compte de stockage Azure à n’importe quel groupe de ressources au moyen d’une méthode de déploiement de ressource. Azure comprend quatre types de stockage : le stockage Blob, le stockage Fichier, le stockage Table et le stockage File d’attente. Lors du déploiement d’un compte de stockage, deux types de comptes sont disponibles, l’un à usage général, l’autre de stockage blob. Un compte de stockage à usage général vous donne accès aux quatre types de stockage. Les comptes de stockage blob sont similaires aux comptes à usage général, mais contiennent des objets blob spécialisés qui incluent les niveaux d’accès à chaud et à froid. Pour plus d’informations sur le stockage d’objets blob, consultez [Stockage Blob Azure](../../storage/blobs/storage-blob-storage-tiers.md).
+Stockage Azure est un service géré par Microsoft qui fournit un stockage redondant, évolutif et durable. En tant que ressource, vous pouvez ajouter un compte de stockage Azure à n’importe quel groupe de ressources au moyen d’une méthode de déploiement de ressource. Azure comporte quatre types de stockage : Stockage Blob, stockage Fichier, stockage Table et stockage File d’attente. Lors du déploiement d’un compte de stockage, deux types de comptes sont disponibles, l’un à usage général, l’autre de stockage blob. Un compte de stockage à usage général vous donne accès aux quatre types de stockage. Les comptes de stockage blob sont similaires aux comptes à usage général, mais contiennent des objets blob spécialisés qui incluent les niveaux d’accès à chaud et à froid. Pour plus d’informations sur le stockage d’objets blob, consultez [Stockage Blob Azure](../../storage/blobs/storage-blob-storage-tiers.md).
 
 Les comptes de stockage Azure peuvent être configurés selon différents niveaux de redondance :
 
@@ -368,7 +368,7 @@ Chaque type de stockage convient à une utilisation différente.
 
 #### <a name="blob-storage"></a>Stockage d'objets blob
 
-Le mot *blob* est l’acronyme de « binary large object », un *objet binaire volumineux*. Les objets blob sont des fichiers non structurés, comme ceux que vous stockez sur votre ordinateur. Ce service peut stocker tout type de données texte ou binaires, par exemple, un document, un fichier multimédia ou un programme d’installation d’application. Le stockage d’objets blob est également appelé Stockage Blob. Le Stockage Blob Azure conserve également les disques de données des machines virtuelles Azure.
+Le mot *blob* est l’acronyme de « binary large object », un *objet binaire volumineux* . Les objets blob sont des fichiers non structurés, comme ceux que vous stockez sur votre ordinateur. Ce service peut stocker tout type de données texte ou binaires, par exemple, un document, un fichier multimédia ou un programme d’installation d’application. Le stockage d’objets blob est également appelé Stockage Blob. Le Stockage Blob Azure conserve également les disques de données des machines virtuelles Azure.
 
 Ce type de stockage Azure prend en charge trois types d’objets blob :
 
@@ -378,7 +378,7 @@ Ce type de stockage Azure prend en charge trois types d’objets blob :
 
 - **Objets blob d’ajout** Ces objets se composent de blocs, comme les objets blob de blocs, mais sont optimisés pour les opérations d’ajout. Leur utilisation est fréquente pour l’enregistrement d’informations à partir d’une ou de plusieurs sources dans le même objet blob. Vous pouvez, par exemple, écrire toute la journalisation du suivi dans le même objet blob d’ajout pour une application qui s’exécute sur plusieurs machines virtuelles. La taille d’un seul objet blob d’ajout peut atteindre 195 Go.
 
-Pour plus d’informations, consultez [Bien démarrer avec le Stockage Blob Azure à l’aide de .NET](../../storage/blobs/storage-dotnet-how-to-use-blobs.md).
+Pour plus d’informations, consultez [Bien démarrer avec le Stockage Blob Azure à l’aide de .NET](../../storage/blobs/storage-quickstart-blobs-dotnet.md).
 
 #### <a name="file-storage"></a>Stockage Fichier
 
@@ -394,7 +394,7 @@ Le stockage de tables Azure est un service qui stocke des données NoSQL structu
 
 Vous pouvez utiliser le stockage de tables pour stocker des jeux de données flexibles, par exemple, des données utilisateur pour des applications Web, des carnets d'adresses, des informations sur les périphériques et tout autre type de métadonnées requis par votre service. Vous pouvez stocker le nombre d’entités que vous voulez dans une table. Un compte de stockage peut contenir n’importe quel nombre de tables, jusqu’à la limite de capacité du compte de stockage.
 
-Pour plus d’informations, consultez [Bien démarrer avec Stockage Table Azure](../../cosmos-db/table-storage-how-to-use-dotnet.md).
+Pour plus d’informations, consultez [Bien démarrer avec Stockage Table Azure](../../cosmos-db/tutorial-develop-table-dotnet.md).
 
 #### <a name="queue-storage"></a>Stockage de files d'attente
 
@@ -414,15 +414,15 @@ En plus du déploiement d’un compte de stockage à partir du portail Azure, vo
 
 #### <a name="powershell"></a>PowerShell
 
-Le déploiement d’un compte de stockage Azure à l’aide de PowerShell permet l’automatisation du déploiement complet du compte de stockage. Pour plus d’informations, consultez [Utilisation d’Azure PowerShell avec Stockage Azure](../../storage/common/storage-powershell-guide-full.md).
+Le déploiement d’un compte de stockage Azure à l’aide de PowerShell permet l’automatisation du déploiement complet du compte de stockage. Pour plus d’informations, consultez [Utilisation d’Azure PowerShell avec Stockage Azure](/powershell/module/az.storage/).
 
 En plus de déployer des ressources Azure individuellement, vous pouvez utiliser le module Azure PowerShell pour déployer un modèle Azure Resource Manager. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../../azure-resource-manager/templates/deploy-powershell.md).
 
 #### <a name="command-line-interface-cli"></a>Interface de ligne de commande (CLI)
 
-À l’instar du module PowerShell, l’interface de ligne de commande Azure assure l’automatisation du déploiement et s’utilise sur les systèmes Windows, OS X ou Linux. Vous pouvez utiliser la commande d’Azure CLI **storage account create** pour créer un compte de stockage. Pour plus d’informations, consultez [Utilisation de l’interface de ligne de commande Azure avec Stockage Azure](../../storage/common/storage-azure-cli.md).
+À l’instar du module PowerShell, l’interface de ligne de commande Azure assure l’automatisation du déploiement et s’utilise sur les systèmes Windows, OS X ou Linux. Vous pouvez utiliser la commande d’Azure CLI **storage account create** pour créer un compte de stockage. Pour plus d’informations, consultez [Utilisation de l’interface de ligne de commande Azure avec Stockage Azure](../../storage/blobs/storage-quickstart-blobs-cli.md).
 
-De même, vous pouvez utiliser l’interface de ligne de commande Azure pour déployer un modèle Azure Resource Manager. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../../resource-group-template-deploy-cli.md).
+De même, vous pouvez utiliser l’interface de ligne de commande Azure pour déployer un modèle Azure Resource Manager. Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../../azure-resource-manager/templates/deploy-cli.md).
 
 ### <a name="access-and-security-for-azure-storage"></a>Accès et sécurité pour Stockage Azure
 
@@ -446,7 +446,7 @@ Chaque compte de stockage a deux clés d’authentification, une clé principale
 
 #### <a name="shared-access-signatures"></a>Signatures d’accès partagé
 
-Si vous devez autoriser un accès contrôlé à vos ressources de stockage pour des utilisateurs, vous pouvez créer une signature d’accès partagé. Une signature d’accès partagé est un jeton qu’il est possible d’ajouter à une URL qui permet alors un accès délégué à une ressource de stockage. Quiconque possède le jeton peut accéder à la ressource qu’il désigne avec les autorisations qu’il spécifie, pendant son délai de validité. Pour plus d’informations, consultez [Utilisation des signatures d’accès partagé](../../storage/common/storage-dotnet-shared-access-signature-part-1.md).
+Si vous devez autoriser un accès contrôlé à vos ressources de stockage pour des utilisateurs, vous pouvez créer une signature d’accès partagé. Une signature d’accès partagé est un jeton qu’il est possible d’ajouter à une URL qui permet alors un accès délégué à une ressource de stockage. Quiconque possède le jeton peut accéder à la ressource qu’il désigne avec les autorisations qu’il spécifie, pendant son délai de validité. Pour plus d’informations, consultez [Utilisation des signatures d’accès partagé](../../storage/common/storage-sas-overview.md).
 
 ## <a name="azure-virtual-network"></a>Réseau virtuel Azure
 
@@ -456,7 +456,7 @@ Des réseaux virtuels sont nécessaires pour prendre en charge les communication
 
 Par défaut, un réseau virtuel Azure est accessible uniquement aux ressources stockées dans Azure. Les ressources connectées au même réseau virtuel peuvent communiquer entre elles. Vous pouvez associer des interfaces réseau de machine virtuelle à des équilibreurs de charge au moyen d’une adresse IP publique et rendre ainsi la machine virtuelle accessible sur Internet. Vous pouvez aider à sécuriser l’accès aux ressources exposées publiquement à l’aide d’un groupe de sécurité réseau.
 
-![Réseau virtuel Azure pour une application web à 2 niveaux](https://docs.microsoft.com/azure/load-balancer/media/load-balancer-internal-overview/ic744147.png)
+![Réseau virtuel Azure pour une application web à 2 niveaux](/azure/load-balancer/media/load-balancer-internal-overview/ic744147.png)
 
 ### <a name="hybrid-virtual-networks"></a>Réseaux virtuels hybrides
 
@@ -473,13 +473,13 @@ Il existe plusieurs options pour déployer un réseau virtuel.
 
 - Modèles Azure Resource Manager
 
-> **Application** : chaque fois que vous utilisez des machines virtuelles dans Azure, vous utilisez des réseaux virtuels. Ainsi, vous pouvez segmenter vos machines virtuelles en sous-réseaux publics et privés, à l’image des centres de données locaux.
+> **Quand les utiliser**  : Chaque fois que vous utilisez des machines virtuelles dans Azure, vous utilisez des réseaux virtuels. Ainsi, vous pouvez segmenter vos machines virtuelles en sous-réseaux publics et privés, à l’image des centres de données locaux.
 >
-> **Prise en main** : le déploiement d’un réseau virtuel Azure à l’aide du portail Azure ne requiert qu’un abonnement Azure actif et l’accès à un navigateur web. Vous pouvez déployer un nouveau réseau virtuel dans un groupe de ressources existant ou nouveau. Lorsque vous créez une machine virtuelle à partir du portail, vous pouvez sélectionner un réseau virtuel existant ou en créer un. Pour commencer, [créez un réseau virtuel à l’aide du portail Azure](../../virtual-network/quick-create-portal.md).
+> **Prise en main**  : Le déploiement d’un réseau virtuel Azure à l’aide du portail Azure ne demande qu’un abonnement Azure actif et l’accès à un navigateur web. Vous pouvez déployer un nouveau réseau virtuel dans un groupe de ressources existant ou nouveau. Lorsque vous créez une machine virtuelle à partir du portail, vous pouvez sélectionner un réseau virtuel existant ou en créer un. Pour commencer, [créez un réseau virtuel à l’aide du portail Azure](../../virtual-network/quick-create-portal.md).
 
 ### <a name="access-and-security-for-virtual-networks"></a>Accès et sécurité des réseaux virtuels
 
-Vous pouvez aider à sécuriser les réseaux virtuels Azure à l’aide d’un groupe de sécurité réseau (NSG). Les groupes NSG contiennent des règles de liste de contrôle d’accès (ACL) qui autorisent ou rejettent le trafic réseau vers vos instances de machine virtuelle dans un réseau virtuel. Vous pouvez associer des NSG à des sous-réseaux ou à des instances de machine virtuelle individuelle au sein de ce sous-réseau. Lorsque vous associez un NSG à un sous-réseau, les règles ACL s’appliquent à toutes les instances de machine virtuelle présentes dans ce sous-réseau. Qui plus est, vous pouvez limiter davantage le trafic vers une machine virtuelle individuelle par l’association directe d’un NSG avec la machine virtuelle. Pour plus d’informations, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](../../virtual-network/security-overview.md).
+Vous pouvez aider à sécuriser les réseaux virtuels Azure à l’aide d’un groupe de sécurité réseau (NSG). Les groupes NSG contiennent des règles de liste de contrôle d’accès (ACL) qui autorisent ou rejettent le trafic réseau vers vos instances de machine virtuelle dans un réseau virtuel. Vous pouvez associer des NSG à des sous-réseaux ou à des instances de machine virtuelle individuelle au sein de ce sous-réseau. Lorsque vous associez un NSG à un sous-réseau, les règles ACL s’appliquent à toutes les instances de machine virtuelle présentes dans ce sous-réseau. Qui plus est, vous pouvez limiter davantage le trafic vers une machine virtuelle individuelle par l’association directe d’un NSG avec la machine virtuelle. Pour plus d’informations, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](../../virtual-network/network-security-groups-overview.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

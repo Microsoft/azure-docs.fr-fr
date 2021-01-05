@@ -1,15 +1,15 @@
 ---
 title: Stocker des données non structurées à l’aide d’Azure Cosmos DB et d’Azure Functions
 description: Stocker des données non structurées à l’aide d’Azure Functions et de Cosmos DB
-ms.topic: how-to
-ms.date: 10/01/2018
-ms.custom: mvc
-ms.openlocfilehash: d11b7e7d55d0327bdec0a8bd6c73571cf846fd3c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: quickstart
+ms.date: 10/01/2020
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 5bc3895cb219338acde492b871dce806db70622b
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80756657"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91661157"
 ---
 # <a name="store-unstructured-data-using-azure-functions-and-azure-cosmos-db"></a>Stocker des données non structurées à l’aide d’Azure Cosmos DB et d’Azure Functions
 
@@ -20,9 +20,7 @@ ms.locfileid: "80756657"
 
 Dans Azure Functions, les liaisons d’entrée et de sortie fournissent une méthode déclarative pour se connecter à des données de service externe à partir de votre fonction. Dans cet article, découvrez comment mettre à jour une fonction existante pour ajouter une liaison de sortie qui stocke des données non structurées dans un document Azure Cosmos DB.
 
-![Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-cosmosdb.png)
-
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce tutoriel :
 
@@ -36,30 +34,30 @@ Vous devez disposer d’un compte Azure Cosmos DB qui utilise l’API SQL avant 
 
 ## <a name="add-an-output-binding"></a>Ajouter une liaison de sortie
 
-1. Dans le portail, accédez à l’application de fonction que vous avez créée précédemment, puis développez votre application de fonction et votre fonction.
+1. Dans le portail Azure, accédez à l’application de fonction que vous avez créée précédemment et sélectionnez-la.
 
-1. Sélectionnez **Intégrer** et **+ Nouvelle sortie**, en haut à droite de la page. Choisissez **Azure Cosmos DB**, puis cliquez sur **Sélectionner**.
+1. Sélectionnez **Fonctions**, puis sélectionnez la fonction HttpTrigger.
 
-    ![Ajout d’une liaison de sortie Azure Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-integrate-tab-add-new-output-binding.png)
+    :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-select-http-function.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
-1. Si vous obtenez un message **Extensions non installées**, choisissez **Installer** pour installer l’extension de liaisons Azure Cosmos DB dans l’application de fonction. L’installation peut prendre une à deux minutes.
+1. Sélectionnez **Intégration** et **+ Ajouter une sortie**.
 
-    ![Installation de l’extension de liaison Azure Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-integrate-install-binding-extension.png)
+     :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-add-output-binding.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
-1. Utilisez les paramètres de la **sortie Azure Cosmos** comme spécifié dans le tableau :
+1. Utilisez les paramètres **Créer une sortie** comme spécifié dans le tableau :
 
-    ![Configurer la liaison de sortie Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-integrate-tab-configure-cosmosdb-binding.png)
+     :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-configure-cosmosdb-binding.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
     | Paramètre      | Valeur suggérée  | Description                                |
     | ------------ | ---------------- | ------------------------------------------ |
+    | **Type de liaison** | Azure Cosmos DB | Nom du type de liaison à sélectionner pour créer la liaison de sortie à Azure Cosmos DB. |
     | **Nom du paramètre de document** | taskDocument | Nom qui fait référence à l’objet Cosmos DB dans le code. |
     | **Nom de la base de données** | taskDatabase | Nom de la base de données pour l’enregistrement des documents. |
-    | **Nom de la collection** | TaskCollection | Nom de la collection de bases de données. |
-    | **Si la valeur est true, crée la collection et la base de données Cosmos DB** | Activé | La collection n’existe pas, vous devez la créer. |
-    | **Connexion de compte Azure Cosmos DB** | Nouveau paramètre | Sélectionnez **Nouveau**, puis choisissez votre **Abonnement**, le **Compte de base de données** que vous avez créé précédemment, puis **Sélectionner**. Crée un paramètre d’application pour votre connexion de compte. Ce paramètre est utilisé par la liaison pour se connecter à la base de données. |
-    | **Débit de collection** |400 RU| Si vous souhaitez réduire la latence, vous pourrez augmenter le débit par la suite. |
+    | **Nom de la collection** | taskCollection | Nom de la collection de bases de données. |
+    | **Si la valeur est true, crée la collection et la base de données Cosmos DB** | Oui | La collection n’existe pas, vous devez la créer. |
+    | **Connexion au compte Cosmos DB** | Nouveau paramètre | Sélectionnez **Nouveau**, puis choisissez **Compte Azure Cosmos DB**, le **Compte de base de données** que vous avez créé précédemment, puis sélectionnez **OK**. Crée un paramètre d’application pour votre connexion de compte. Ce paramètre est utilisé par la liaison pour se connecter à la base de données. |
 
-1. Sélectionnez **Enregistrer** pour créer la liaison.
+1. Sélectionnez **OK** pour créer la liaison.
 
 ## <a name="update-the-function-code"></a>Mettre à jour le code de fonction
 
@@ -134,25 +132,29 @@ Cet exemple de code lit les chaînes de requête HTTP et les assigne aux champs 
 
 ## <a name="test-the-function-and-database"></a>Tester la fonction et la base de données
 
-1. Développez la fenêtre de droite et sélectionnez **Test**. Sous **Requête**, cliquez sur **+ Ajouter un paramètre** et ajoutez les paramètres suivants à la chaîne de requête :
+1. Sélectionnez **Test/exécution**. Sous **Requête**, sélectionnez **+ Ajouter un paramètre** et ajoutez les paramètres suivants à la chaîne de requête :
 
     + `name`
     + `task`
     + `duedate`
 
-1. Cliquez sur **Exécuter** et vérifiez que l’état 200 est renvoyé.
+    :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-test-function.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
-    ![Configurer la liaison de sortie Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-test-function.png)
 
-1. Sur le côté gauche du portail Azure, développez la barre d’icônes, tapez `cosmos` dans le champ de recherche, puis sélectionnez **Azure Cosmos DB**.
+1. Sélectionnez **Exécuter** et vérifiez que l’état 200 est renvoyé.
 
-    ![Rechercher le service Azure Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-search-cosmos-db.png)
+    :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-test-function-output.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
+
+
+1. Dans le portail Azure, recherchez et sélectionnez **Azure Cosmos DB**.
+
+    :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-search-cosmos-db.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
 1. Sélectionnez votre compte Azure Cosmos DB, puis sélectionnez **Explorateur de données**.
 
-1. Développez les nœuds **Collections**, sélectionnez le nouveau document et confirmez que le document contient des valeurs de votre chaîne de requête, ainsi que des métadonnées supplémentaires.
+1. Développez les nœuds **TaskCollection**, sélectionnez le nouveau document et confirmez que le document contient des valeurs de votre chaîne de requête, ainsi que des métadonnées supplémentaires.
 
-    ![Vérifiez l’entrée Cosmos DB](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-verify-cosmosdb-output.png)
+    :::image type="content" source="./media/functions-integrate-store-unstructured-data-cosmosdb/functions-data-explorer-check-document.png" alt-text="Dans le portail Azure, sélectionnez votre fonction HTTP." border="true":::
 
 Vous êtes parvenu à ajouter une liaison à votre déclencheur HTTP pour stocker des données non structurées dans une base de données Azure Cosmos DB.
 

@@ -2,13 +2,13 @@
 title: Collecter et analyser les journaux de ressources
 description: Enregistrez et analysez les événements des journaux des ressources pour Azure Container Registry tels que l’authentification, l’envoi (push) d’images et le tirage (pull) d’images.
 ms.topic: article
-ms.date: 01/03/2020
-ms.openlocfilehash: 00f9468721126bd166051df47cec1596356e9b54
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/01/2020
+ms.openlocfilehash: 8b05d34e6c50fea3760e30d28f59e55d8c5f211a
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79409641"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348583"
 ---
 # <a name="azure-container-registry-logs-for-diagnostic-evaluation-and-auditing"></a>Journaux d’Azure Container Registry pour l’évaluation et l’audit de diagnostics
 
@@ -24,12 +24,14 @@ La collecte de données de journal de ressources à l’aide d’Azure Monitor p
 
 Les événements suivants au niveau du référentiel pour les images et autres artefacts sont actuellement journalisés :
 
-* **Événements d’envoi (push)**
-* **Événements de tirage (pull)**
-* **Événements de suppression d’étiquette**
-* **Événements de suppression** (y compris les événements de suppression de référentiel)
+* **Envoi (push)**
+* **Tirage (pull)**
+* **Suppression de balise**
+* **Suppression** (y compris les événements de suppression de référentiel)
+* **Vidage de balise** et **Vider de manifeste**
 
-Événements au niveau du référentiel qui ne sont pas journalisés actuellement : Événements de suppression définitive.
+> [!NOTE]
+> Les événements de vidage sont journalisés uniquement si une [stratégie de rétention](container-registry-retention-policy.md) du registre est configurée.
 
 ## <a name="registry-resource-logs"></a>Journaux de ressources de registre
 
@@ -79,29 +81,70 @@ L’image suivante présente un exemple de sortie :
 
 ![Interroger des données de journal](media/container-registry-diagnostics-audit-logs/azure-monitor-query.png)
 
-Pour obtenir un didacticiel sur l’utilisation de Log Analytics dans le Portail Azure, consultez [Bien démarrer avec Azure Monitor Log Analytics](../azure-monitor/log-query/get-started-portal.md), ou essayez l’[Environnement de démonstration](https://portal.loganalytics.io/demo) Log Analytics. 
+Pour obtenir un didacticiel sur l’utilisation de Log Analytics dans le Portail Azure, consultez [Bien démarrer avec Azure Monitor Log Analytics](../azure-monitor/log-query/log-analytics-tutorial.md), ou essayez l’[Environnement de démonstration](https://portal.loganalytics.io/demo) Log Analytics. 
 
 Pour plus d’informations sur les requêtes de journal, consultez [Vue d’ensemble des requêtes de journal dans Azure Monitor](../azure-monitor/log-query/log-query-overview.md).
 
-### <a name="additional-query-examples"></a>Exemples de requêtes supplémentaires
+## <a name="query-examples"></a>Exemples de requêtes
 
-#### <a name="100-most-recent-registry-events"></a>Les 100 événements de registre les plus récents
+### <a name="error-events-from-the-last-hour"></a>Événements d’erreur au cours de la dernière heure
+
+```Kusto
+union Event, Syslog // Event table stores Windows event records, Syslog stores Linux records
+| where TimeGenerated > ago(1h)
+| where EventLevelName == "Error" // EventLevelName is used in the Event (Windows) records
+    or SeverityLevel== "err" // SeverityLevel is used in Syslog (Linux) records
+```
+
+### <a name="100-most-recent-registry-events"></a>Les 100 événements de registre les plus récents
 
 ```Kusto
 ContainerRegistryRepositoryEvents
 | union ContainerRegistryLoginEvents
 | top 100 by TimeGenerated
-| project TimeGenerated, LoginServer , OperationName , Identity , Repository , DurationMs , Region , ResultType
+| project TimeGenerated, LoginServer, OperationName, Identity, Repository, DurationMs, Region , ResultType
 ```
+
+### <a name="identity-of-user-or-object-that-deleted-repository"></a>Identité de l’utilisateur ou de l’objet qui a supprimé le référentiel
+
+```Kusto
+ContainerRegistryRepositoryEvents
+| where OperationName contains "Delete"
+| project LoginServer, OperationName, Repository, Identity, CallerIpAddress
+```
+
+### <a name="identity-of-user-or-object-that-deleted-tag"></a>Identité de l’utilisateur ou de l’objet qui a supprimé la balise
+
+```Kusto
+ContainerRegistryRepositoryEvents
+| where OperationName contains "Untag"
+| project LoginServer, OperationName, Repository, Tag, Identity, CallerIpAddress
+```
+
+### <a name="repository-level-operation-failures"></a>Échecs d’opérations au niveau du référentiel
+
+```kusto
+ContainerRegistryRepositoryEvents 
+| where ResultDescription contains "40"
+| project TimeGenerated, OperationName, Repository, Tag, ResultDescription
+```
+
+### <a name="registry-authentication-failures"></a>Échecs d’authentification du registre
+
+```kusto
+ContainerRegistryLoginEvents 
+| where ResultDescription != "200"
+| project TimeGenerated, Identity, CallerIpAddress, ResultDescription
+```
+
 
 ## <a name="additional-log-destinations"></a>Destinations de journal supplémentaires
 
 En plus d’envoyer les journaux à Log Analytics, ou comme alternative, un scénario courant consiste à sélectionner un compte de stockage Azure comme destination du journal. Pour archiver les journaux dans le stockage Azure, créez un compte de stockage avant d’activer l’archivage via les paramètres de diagnostic.
 
-Vous pouvez également diffuser en continu les événements du journal de diagnostic vers un service [Azure Event Hub](../event-hubs/event-hubs-what-is-event-hubs.md). Le service Event Hubs peut traiter à chaque seconde des millions d’événements que vous pouvez transformer et stocker à l’aide de tout fournisseur d’analyses en temps réel. 
+Vous pouvez également diffuser en continu les événements du journal de diagnostic vers un service [Azure Event Hub](../event-hubs/event-hubs-about.md). Le service Event Hubs peut traiter à chaque seconde des millions d’événements que vous pouvez transformer et stocker à l’aide de tout fournisseur d’analyses en temps réel. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur l’utilisation de [Log Analytics](../azure-monitor/log-query/get-started-portal.md) et la création de [requêtes de journal](../azure-monitor/log-query/get-started-queries.md).
+* En savoir plus sur l’utilisation de [Log Analytics](../azure-monitor/log-query/log-analytics-tutorial.md) et la création de [requêtes de journal](../azure-monitor/log-query/get-started-queries.md).
 * Consultez [vue d’ensemble des journaux de plateforme Azure](../azure-monitor/platform/platform-logs-overview.md) pour en savoir plus sur les journaux de plateforme disponibles dans différentes couches d’Azure.
-

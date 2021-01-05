@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 03/18/2020
 ms.author: sideeksh
-ms.openlocfilehash: 3d33b5a89a718a41e5c547551f6e7eb4f7033a63
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 429ffcab147142ae2e96de13b7c9e1e5ee1ac7ba
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79504121"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86133230"
 ---
 # <a name="configure-mobility-service-proxy-settings-for-azure-to-azure-disaster-recovery"></a>Configurer les paramètres proxy du service Mobilité pour la reprise d’activité d’Azure vers Azure
 
@@ -54,5 +54,5 @@ Dans ce cas, le client fournit des paramètres proxy d’application personnalis
 ProxyInfo.conf contient le modèle suivant [proxy] Address=http://1.2.3.4 Port=5678 BypassList=hypervrecoverymanager.windowsazure.com,login.microsoftonline.com,blob.core.windows.net. BypassList ne prend pas en charge les caractères génériques tels que '*.windows.net', mais fournir windows.net suffit pour effectuer le contournement. 
 
 ## <a name="next-steps"></a>Étapes suivantes :
-- Lisez les [instructions sur le réseau](site-recovery-azure-to-azure-networking-guidance.md) pour la réplication des machines virtuelles Azure.
-- Déployez la reprise d’activité en [répliquant des machines virtuelles Azure](site-recovery-azure-to-azure.md).
+- Lisez les [instructions sur le réseau](./azure-to-azure-about-networking.md) pour la réplication des machines virtuelles Azure.
+- Déployez la reprise d’activité en [répliquant des machines virtuelles Azure](./azure-to-azure-quickstart.md).

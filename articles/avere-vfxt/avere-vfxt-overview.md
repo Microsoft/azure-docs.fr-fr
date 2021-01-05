@@ -1,17 +1,17 @@
 ---
 title: Avere vFXT pour Azure
-description: Introduction à Avere vFXT pour Azure, une couche de mise en cache cloud pour HPC
+description: Découvrez Avere vFXT pour Azure, une solution de mise en cache de système de fichiers basé sur le cloud pour des tâches de calcul à hautes performances et forte intensité de données.
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: overview
 ms.date: 01/13/2020
 ms.author: rohogue
-ms.openlocfilehash: a9dab2ca844feb1c24dfffc48b4f29cd1a311314
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 5095f05b0c9ce9061781c3558ca6c7091ef37aa5
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76153189"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88270954"
 ---
 # <a name="what-is-avere-vfxt-for-azure"></a>En quoi consiste Avere vFXT pour Azure ?
 
@@ -66,7 +66,7 @@ Le cluster Avere vFXT met en cache les fichiers lorsqu’ils sont demandés. Les
 
 Avere vFXT pour Azure utilise les ressources Azure suivantes :
 
-|Composant Azure|   |
+|Composant Azure| Ressource |
 |----------|-----------|
 |Machines virtuelles|3 E32s_v3 ou plus|
 |Stockage SSD Premium|200 Go d’espace de système d’exploitation, et de 1 To à 4 To d’espace de cache par nœud |

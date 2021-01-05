@@ -2,15 +2,16 @@
 title: Prise en charge du mappage de source pour les applications JavaScript – Azure Monitor Application Insights
 description: Découvrez comment charger des mappages de source dans le conteneur Blob de votre propre compte de stockage avec Application Insights.
 ms.topic: conceptual
-author: markwolff
-ms.author: marwolff
-ms.date: 03/04/2020
-ms.openlocfilehash: 4b452b31338760a8f53eed54420319101836bc00
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: DavidCBerry13
+ms.author: daberry
+ms.date: 06/23/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: 9326531d9071305ad804e9c60f8ac90bcb5eaee6
+ms.sourcegitcommit: 31d242b611a2887e0af1fc501a7d808c933a6bf6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79474881"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97809630"
 ---
 # <a name="source-map-support-for-javascript-applications"></a>Prise en charge du mappage de source pour les applications JavaScript
 
@@ -23,7 +24,7 @@ Les mappages de source peuvent être utilisés pour déminifier les piles d’ap
 
 Si vous disposez déjà d’un compte de stockage ou d’un conteneur d’objets blob, vous pouvez ignorer cette étape.
 
-1. [Créer un compte de stockage][create storage account].
+1. [Créer un compte de stockage][create storage account]
 2. [Créez un conteneur d’objets blob][create blob container] à l’intérieur de votre compte de stockage. Veillez à définir le « niveau d’accès public » sur `Private` de sorte que vos mappages de source ne soient pas accessibles publiquement.
 
 > [!div class="mx-imgBorder"]
@@ -31,7 +32,9 @@ Si vous disposez déjà d’un compte de stockage ou d’un conteneur d’objets
 
 ## <a name="push-your-source-maps-to-your-blob-container"></a>Envoyer (push) vos mappages de source à votre conteneur Blob
 
-Vous devez intégrer votre pipeline de déploiement continu à votre compte de stockage en le configurant de telle sorte qu’il charge automatiquement vos mappages de source dans le conteneur Blob configuré. Vous ne devez pas charger vos mappages de source dans un sous-dossier du conteneur Blob ; pour l’heure, le mappage de source est extrait uniquement à partir du dossier racine.
+Vous devez intégrer votre pipeline de déploiement continu à votre compte de stockage en le configurant de telle sorte qu’il charge automatiquement vos mappages de source dans le conteneur Blob configuré.
+
+Les mappages de sources peuvent être téléchargés vers votre conteneur de stockage d’objets BLOB avec la même structure de dossiers que celle dans laquelle ils ont été compilés et déployés. Un cas d’usage courant consiste à préfixer un dossier de déploiement avec sa version, par exemple `1.2.3/static/js/main.js`. Lors de la déminimisation via un conteneur d’objets BLOB Azure appelé `sourcemaps`, il tente de récupérer un mappage source situé dans `sourcemaps/1.2.3/static/js/main.js.map`.
 
 ### <a name="upload-source-maps-via-azure-pipelines-recommended"></a>Charger les mappages de source via Azure Pipelines (recommandé)
 
@@ -64,7 +67,7 @@ Si vous souhaitez configurer ou changer le compte de stockage ou le conteneur Bl
 
 ## <a name="troubleshooting"></a>Dépannage
 
-### <a name="required-role-based-access-control-rbac-settings-on-your-blob-container"></a>Paramètres de contrôle d’accès en fonction du rôle nécessaires sur votre conteneur Blob
+### <a name="required-azure-role-based-access-control-azure-rbac-settings-on-your-blob-container"></a>Paramètres de contrôle d’accès en fonction du rôle Azure (Azure RBAC) nécessaires sur votre conteneur Blob
 
 Tout utilisateur sur le portail utilisant cette fonctionnalité doit au moins disposer d’une autorisation [Lecteur de données Blob de stockage][storage blob data reader] sur votre conteneur Blob. Vous devez attribuer ce rôle à toute autre personne appelée à utiliser les mappages de source via cette fonctionnalité.
 
@@ -80,13 +83,13 @@ Tout utilisateur sur le portail utilisant cette fonctionnalité doit au moins di
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Tâche Copie de fichiers Azure](https://docs.microsoft.com/azure/devops/pipelines/tasks/deploy/azure-file-copy?view=azure-devops)
+* [Tâche Copie de fichiers Azure](/azure/devops/pipelines/tasks/deploy/azure-file-copy?view=azure-devops)
 
 
 <!-- Remote URLs -->
-[create storage account]: https://docs.microsoft.com/azure/storage/common/storage-account-create?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal
-[create blob container]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal
-[storage blob data reader]: https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
+[create storage account]: ../../storage/common/storage-account-create.md?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal
+[create blob container]: ../../storage/blobs/storage-quickstart-blobs-portal.md
+[storage blob data reader]: ../../role-based-access-control/built-in-roles.md#storage-blob-data-reader
 [ApplicationInsights-JS]: https://github.com/microsoft/applicationinsights-js
 [ApplicationInsights-Node.js]: https://github.com/microsoft/applicationinsights-node.js
 [azure file copy]: https://aka.ms/azurefilecopyreadme

@@ -11,14 +11,14 @@ ms.topic: conceptual
 ms.workload: identity
 ms.date: 08/28/2019
 ms.author: negoe
-ms.reviewer: negoe,celested
-ms.custom: aaddev
-ms.openlocfilehash: 9a8d9c5c0a24e59c8f6345666f8838aa4c41d0f9
-ms.sourcegitcommit: 1f25aa993c38b37472cf8a0359bc6f0bf97b6784
+ms.reviewer: marsma, negoe,celested
+ms.custom: aaddev,references_regions
+ms.openlocfilehash: da1ea6462d22242d23629bcec192d7760314dfed
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83845183"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444806"
 ---
 # <a name="national-clouds"></a>Clouds nationaux
 
@@ -60,14 +60,14 @@ Le tableau suivant répertorie les URL de base des points de terminaison Azure A
 
 Vous pouvez former des requêtes pour les points de terminaison de jeton ou d’autorisation Azure AD à l’aide de l’URL de base spécifique de la région appropriée. Par exemple, pour Azure Allemagne :
 
-  - Le point de terminaison d’autorisation commun est `https://login.microsoftonline.de/common/oauth2/v2.0/authorize`.
-  - Le point de terminaison de jeton commun est `https://login.microsoftonline.de/common/oauth2/v2.0/token`.
+- Le point de terminaison d’autorisation commun est `https://login.microsoftonline.de/common/oauth2/v2.0/authorize`.
+- Le point de terminaison de jeton commun est `https://login.microsoftonline.de/common/oauth2/v2.0/token`.
 
 Pour les applications à client unique, remplacez « common » dans les URL ci-dessus par l’ID ou le nom de votre locataire. par exemple `https://login.microsoftonline.de/contoso.com`.
 
 ## <a name="microsoft-graph-api"></a>API Microsoft Graph
 
-Pour savoir comment appeler les API Microsoft Graph dans un environnement de cloud national, accédez à [Microsoft Graph in national cloud deployments (Microsoft Graph dans les déploiements sur les clouds nationaux)](https://developer.microsoft.com/graph/docs/concepts/deployments).
+Pour savoir comment appeler les API Microsoft Graph dans un environnement de cloud national, accédez à [Microsoft Graph in national cloud deployments (Microsoft Graph dans les déploiements sur les clouds nationaux)](/graph/deployments).
 
 > [!IMPORTANT]
 > Certains services et fonctionnalités dans des régions spécifiques du service global peuvent ne pas être disponibles dans l’ensemble des clouds nationaux. Pour connaître les services disponibles, accédez à la [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/?products=all&regions=usgov-non-regional,us-dod-central,us-dod-east,usgov-arizona,usgov-iowa,usgov-texas,usgov-virginia,china-non-regional,china-east,china-east-2,china-north,china-north-2,germany-non-regional,germany-central,germany-northeast).
@@ -76,9 +76,10 @@ Pour savoir comment créer une application à l’aide de la plateforme d’iden
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus :
+Découvrez comment utiliser la [Bibliothèque d’authentification Microsoft (MSAL) dans un environnement cloud national](msal-national-cloud.md).
 
-- [Azure Government](https://docs.microsoft.com/azure/azure-government/)
-- [Azure China 21Vianet](https://docs.microsoft.com/azure/china/)
-- [Azure Allemagne](https://docs.microsoft.com/azure/germany/)
-- [Principes fondamentaux de l’authentification Azure AD](authentication-scenarios.md)
+Documentation sur le cloud national :
+
+- [Azure Government](../../azure-government/index.yml)
+- [Azure China 21Vianet](/azure/china/)
+- [Azure Allemagne](../../germany/index.yml)

@@ -6,17 +6,17 @@ author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 09/04/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 9c4f08b143ab4a0d3e780f68f8d5ab823d4eae12
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.openlocfilehash: f8db19b209ddefebd4a297f18fb9b178fcf40f21
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80745364"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89457904"
 ---
 # <a name="development-best-practices-for-synapse-sql-pool"></a>Meilleures pratiques de développement pour le pool SQL Synapse
 
@@ -120,8 +120,8 @@ Voir aussi [Index de table](sql-data-warehouse-tables-index.md), [Guide des inde
 
 Si vous ne trouvez pas ce que vous recherchez dans cet article, essayez d’utiliser la fonction de recherche de documents située sur le côté gauche de cette page pour rechercher tous les documents relatifs à Azure Synapse.  
 
-Le [Forum Azure Synapse](https://social.msdn.microsoft.com/Forums/sqlserver/home?forum=AzureSQLDataWarehouse) a été créé pour vous permettre de poser des questions à d’autres utilisateurs et au groupe de produits Azure Synapse.  Nous suivons activement ce forum pour vous assurer que vos questions sont traitées par un autre utilisateur ou un membre de notre équipe.  
+La [page de questions Microsoft Q&A sur Azure Synapse](https://docs.microsoft.com/answers/topics/azure-synapse-analytics.html) a été créée pour vous permettre de poser des questions à d’autres utilisateurs et au groupe de produits Azure Synapse.  Nous suivons activement ce forum pour vous assurer que vos questions sont traitées par un autre utilisateur ou un membre de notre équipe.  
 
-Si vous préférez poser vos questions sur Stack Overflow, nous avons également un [Forum Azure SQL Data Warehouse Stack Overflow](https://stackoverflow.com/questions/tagged/azure-sqldw).
+Si vous préférez poser vos questions sur Stack Overflow, nous avons également un [Forum Stack Overflow sur Azure Synapse Analytics](https://stackoverflow.com/questions/tagged/azure-sqldw).
 
 Utilisez la page des [commentaires relatifs à Azure Synapse](https://feedback.azure.com/forums/307516-sql-data-warehouse) pour effectuer des demandes de fonctionnalités.  L’ajout de vos demandes ou la confirmation des autres demandes nous permet vraiment de hiérarchiser les fonctions.

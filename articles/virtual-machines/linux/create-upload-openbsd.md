@@ -3,15 +3,15 @@ title: Créer et charger une image OpenBSD
 description: Découvrir comment créer et télécharger un disque dur virtuel (VHD) contenant le système d’exploitation OpenBSD pour créer une machine virtuelle Azure via Azure CLI
 author: gbowerman
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/24/2017
 ms.author: guybo
-ms.openlocfilehash: 1ad1a66d67be7aefe4d9a7acae993e8788cbb193
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 08b18dae6cec3f30ba9ecc69a3537eec428cc9ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80066743"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87372720"
 ---
 # <a name="create-and-upload-an-openbsd-disk-image-to-azure"></a>Créer et charger une image de disque OpenBSD sur Azure
 Cet article montre comment créer et charger un disque dur virtuel (VHD) contenant le système d’exploitation OpenBSD. Après l’avoir chargé, vous pouvez l’utiliser comme image personnelle pour créer une machine virtuelle (VM) dans Azure via Azure CLI.
@@ -22,7 +22,7 @@ Cet article part du principe que vous disposez des éléments suivants :
 
 * **Abonnement Azure** : si vous ne possédez pas de compte, vous pouvez en créer un en quelques minutes. Si vous disposez d’un abonnement MSDN, consultez [Crédit Azure mensuel pour les abonnés Visual Studio](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/). Dans le cas contraire, découvrez comment [créer un compte d'essai gratuit](https://azure.microsoft.com/pricing/free-trial/).  
 * **Azure CLI** : Vérifiez que vous avez installé la dernière version [d’Azure CLI](/cli/azure/install-azure-cli) et que vous êtes connecté à votre compte Azure avec [az login](/cli/azure/reference-index).
-* **Système d’exploitation OpenBSD installé dans un fichier .vhd** : un système d’exploitation OpenBSD pris en charge ([version 6.6 AMD64](https://ftp.openbsd.org/pub/OpenBSD/6.6/amd64/)) doit être installé sur un disque dur virtuel. Plusieurs outils permettent de créer des fichiers .vhd. Par exemple, vous pouvez utiliser une solution de virtualisation comme Hyper-V pour créer le fichier .vhd et installer le système d'exploitation. Pour obtenir des instructions pour installer et utiliser Hyper-V, consultez la page [Installer Hyper-V et créer une machine virtuelle](https://technet.microsoft.com/library/hh846766.aspx).
+* **Système d’exploitation OpenBSD installé dans un fichier .vhd** : un système d’exploitation OpenBSD pris en charge ([version 6.6 AMD64](https://ftp.openbsd.org/pub/OpenBSD/6.6/amd64/)) doit être installé sur un disque dur virtuel. Plusieurs outils permettent de créer des fichiers .vhd. Par exemple, vous pouvez utiliser une solution de virtualisation comme Hyper-V pour créer le fichier .vhd et installer le système d'exploitation. Pour obtenir des instructions pour installer et utiliser Hyper-V, consultez la page [Installer Hyper-V et créer une machine virtuelle](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh846766(v=ws.11)).
 
 
 ## <a name="prepare-openbsd-image-for-azure"></a>Préparer l’image OpenBSD pour Azure
@@ -87,7 +87,7 @@ Vous pouvez à présent arrêter votre machine virtuelle.
 
 
 ## <a name="prepare-the-vhd"></a>Préparer le disque dur virtuel
-Azure ne prend pas en charge le format VHDX, seulement le **VHD fixe**. Vous pouvez convertir le disque au format VHD fixe à l’aide du Gestionnaire Hyper-V ou de l’applet de commande Powershell [convert-vhd](https://technet.microsoft.com/itpro/powershell/windows/hyper-v/convert-vhd). Voici un exemple.
+Azure ne prend pas en charge le format VHDX, seulement le **VHD fixe**. Vous pouvez convertir le disque au format VHD fixe à l’aide du Gestionnaire Hyper-V ou de l’applet de commande Powershell [convert-vhd](/powershell/module/hyper-v/convert-vhd?view=win10-ps). Voici un exemple.
 
 ```powershell
 Convert-VHD OpenBSD61.vhdx OpenBSD61.vhd -VHDType Fixed

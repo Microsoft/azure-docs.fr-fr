@@ -16,10 +16,10 @@ ms.workload: infrastructure-services
 ms.date: 08/28/2019
 ms.author: kaushika
 ms.openlocfilehash: 9685c1739a00788a974c200ddabb8cc975696b62
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83587729"
 ---
 # <a name="troubleshoot-virtual-network-peering-issues"></a>Résoudre les problèmes d’appairage de réseaux virtuels

@@ -1,6 +1,7 @@
 ---
-title: Tutoriel d’application monopage JavaScript – Plateforme d’identités Microsoft | Azure
-description: Comment les applications monopages (SPA) JavaScript peuvent appeler une API qui nécessite des jetons d’accès à partir d’un point de terminaison Azure Active Directory v2.0
+title: 'Tutoriel : Créer une application monopage JavaScript qui utilise la Plateforme d’identités Microsoft pour l’authentification | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce tutoriel, vous allez créer une application monopage JavaScript qui utilise la plateforme d’identités Microsoft pour connecter les utilisateurs et obtenir un jeton d’accès pour appeler l’API Microsoft Graph en leur nom.
 services: active-directory
 author: navyasric
 manager: CelesteDG
@@ -8,41 +9,45 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 03/20/2019
+ms.date: 08/06/2020
 ms.author: nacanuma
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 6f0253490d39e69d491dd5fd3ab0d0d0a32d47bb
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: aaddev, identityplatformtop40, devx-track-js
+ms.openlocfilehash: 4eb3c2905f3c1ccfa63da1bb4a8c81decdbc2f2b
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181560"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507725"
 ---
-# <a name="sign-in-users-and-call-the-microsoft-graph-api-from-a-javascript-single-page-application-spa"></a>Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage (SPA) JavaScript
+# <a name="tutorial-sign-in-users-and-call-the-microsoft-graph-api-from-a-javascript-single-page-application-spa"></a>Tutoriel : Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage (SPA) JavaScript
 
-Ce guide montre comment une application monopage (SPA) JavaScript peut :
-- Se connecter à des comptes personnels, ainsi qu’à des comptes professionnels et scolaires
-- Obtenir un jeton d’accès
-- Appeler l’API Microsoft Graph ou d’autres API qui demandent des jetons d’accès provenant du *point de terminaison de la plateforme d’identités Microsoft*
+Dans ce tutoriel, vous créez une application monopage (SPA) JavaScript qui connecte les utilisateurs et appelle Microsoft Graph en utilisant le flux implicite. L’application monopage que vous créez utilise la bibliothèque d’authentification Microsoft (MSAL) pour JavaScript v1.0.
 
->[!NOTE]
-> Si vous êtes un nouvel utilisateur de la plateforme d’identités Microsoft, nous vous recommandons de commencer avec le guide de démarrage rapide [Connecter des utilisateurs et obtenir un jeton d’accès dans une application SPA JavaScript](quickstart-v2-javascript.md).
+Dans ce tutoriel, vous allez :
+
+> [!div class="checklist"]
+> * Créer un projet JavaScript avec `npm`.
+> * Inscrire l’application dans le Portail Azure
+> * Ajouter du code pour prendre en charge la connexion et la déconnexion des utilisateurs
+> * Ajouter du code pour appeler l’API Microsoft Graph
+> * Test de l'application
+
+>[!TIP]
+> Ce tutoriel utilise MSAL.js v1.x, qui est limité à l’utilisation du flux d’octroi implicite pour les applications monopages. Nous recommandons que toutes les nouvelles applications utilisent plutôt [MSAL.js 2.x et le flux de code d’autorisation avec la prise en charge de PKCE et CORS](tutorial-v2-javascript-auth-code.md).
+
+## <a name="prerequisites"></a>Prérequis
+
+* [Node.js](https://nodejs.org/en/download/) pour l’exécution d’un serveur web local
+* [Visual Studio Code](https://code.visualstudio.com/download) ou un autre éditeur pour la modification des fichiers projet
+* Un navigateur web moderne. **Internet Explorer** n’est **pas pris en charge** par l’application que vous générez dans ce tutoriel, en raison de l’utilisation par l’application des conventions [ES6](http://www.ecma-international.org/ecma-262/6.0/).
 
 ## <a name="how-the-sample-app-generated-by-this-guide-works"></a>Fonctionnement de l’exemple d’application de ce guide
 
 ![Fonctionnement de l’exemple d’application généré par ce tutoriel](media/active-directory-develop-guidedsetup-javascriptspa-introduction/javascriptspa-intro.svg)
 
-### <a name="more-information"></a>Informations complémentaires
+L’exemple d’application créé par ce guide permet à une application monopage (SPA) JavaScript d’interroger l’API Microsoft Graph ou une API web qui accepte les jetons provenant du point de terminaison de la plateforme d’identités Microsoft. Dans ce scénario, une fois qu’un utilisateur s’est connecté, un jeton d’accès est demandé et ajouté aux requêtes HTTP par le biais de l’en-tête d’autorisation. Ce jeton sera utilisé pour acquérir le profil et les e-mails de l’utilisateur via l’**API MS Graph**.
 
-L’exemple d’application créé par ce guide permet à une application monopage (SPA) JavaScript d’interroger l’API Microsoft Graph ou une API web qui accepte les jetons provenant du point de terminaison de la plateforme d’identités Microsoft. Dans ce scénario, une fois qu’un utilisateur s’est connecté, un jeton d’accès est demandé et ajouté aux requêtes HTTP par le biais de l’en-tête d’autorisation. Ce jeton sera utilisé pour acquérir le profil et les e-mails de l’utilisateur via l’**API MS Graph**. L’acquisition et le renouvellement des jetons sont gérés par la **bibliothèque d’authentification Microsoft (MSAL) pour JavaScript**.
-
-### <a name="libraries"></a>Bibliothèques
-
-Ce guide utilise la bibliothèque suivante :
-
-|Bibliothèque|Description|
-|---|---|
-|[msal.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)|Bibliothèque d’authentification Microsoft pour JavaScript|
+L’acquisition et le renouvellement des jetons sont gérés par la [bibliothèque d’authentification Microsoft (MSAL) pour JavaScript](https://github.com/AzureAD/microsoft-authentication-library-for-js).
 
 ## <a name="set-up-your-web-server-or-project"></a>Configurer le serveur web ou projet
 
@@ -50,19 +55,24 @@ Ce guide utilise la bibliothèque suivante :
 >
 > Pour configurer l’exemple de code avant de l’exécuter, passez à l’[étape de configuration](#register-your-application).
 
-## <a name="prerequisites"></a>Prérequis
-
-* L’exécution de ce didacticiel requiert un serveur web local tel que [Node.js](https://nodejs.org/en/download/), [.NET Core](https://www.microsoft.com/net/core) ou l’intégration d’IIS Express à [Visual Studio 2017](https://www.visualstudio.com/downloads/).
-
-* Les instructions de ce guide sont basées sur un serveur web intégré à Node.js. Nous vous recommandons d’utiliser [Visual Studio Code](https://code.visualstudio.com/download) comme environnement de développement intégré (IDE).
-
 ## <a name="create-your-project"></a>Créer votre projet
 
 Vérifiez que [Node.js](https://nodejs.org/en/download/) est installé, puis créez un dossier pour héberger votre application. Nous allons y implémenter un serveur web [Express](https://expressjs.com/) simple pour servir votre fichier `index.html`.
 
-1. Tout d’abord, à l’aide du terminal intégré Visual Studio Code, localisez votre dossier de projet, puis installez Express à l’aide de NPM.
+1. À l’aide d’un terminal (par exemple, le terminal intégré de Visual Studio Code), localisez votre dossier de projet, puis tapez :
 
-1. Ensuite, créez un fichier .js nommé `server.js`, puis ajoutez le code suivant :
+   ```console
+   npm init
+   ```
+
+2. Installez ensuite les dépendances nécessaires :
+
+   ```console
+   npm install express --save
+   npm install morgan --save
+   ```
+
+1. À présent, créez un fichier .js nommé `server.js`, puis ajoutez le code suivant :
 
    ```JavaScript
    const express = require('express');
@@ -255,16 +265,17 @@ Vous disposez maintenant d’un serveur simple pour servir votre application mon
 
 Avant de poursuivre l’authentification, inscrivez votre application sur **Azure Active Directory**.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com/).
-1. Si votre compte vous donne accès à plusieurs locataires, sélectionnez le compte en haut à droite, puis définissez votre session de portail sur le locataire Azure AD que vous voulez utiliser.
-1. Accédez à la page [Inscriptions d’applications](https://go.microsoft.com/fwlink/?linkid=2083908) de la plateforme d’identité Microsoft pour les développeurs.
-1. Lorsque la page **Inscrire une application** s’affiche, entrez le nom de votre application.
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+1. Recherchez et sélectionnez **Azure Active Directory**.
+1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+1. Entrez un **nom** pour votre application. Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
 1. Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft**.
 1. Dans la section **URI de redirection**, sélectionnez la plateforme **Web** dans la liste déroulante, puis définissez la valeur sur l’URL de l’application en fonction de votre serveur web.
 1. Sélectionnez **Inscription**.
 1. Dans la page **Vue d’ensemble**, notez la valeur de **ID d’application (client)** pour une utilisation ultérieure.
-1. Ce démarrage rapide requiert l’activation du [flux d’octroi implicite](v2-oauth2-implicit-grant-flow.md). Dans le volet gauche de l’application inscrite, sélectionnez **Authentification**.
-1. Dans **Paramètres avancés**, sous **Octroi implicite**, cochez les cases **Jetons d’ID** et **Jetons d’accès**. Des jetons d’ID et des jetons d’accès sont nécessaires car cette application doit connecter des utilisateurs et appeler une API.
+1. Sous **Gérer**, sélectionnez **Authentification**.
+1. Dans la section **Octroi implicite**, sélectionnez **Jetons d’ID** et **Jetons d’accès**. Des jetons d’ID et des jetons d’accès sont nécessaires car cette application doit connecter des utilisateurs et appeler une API.
 1. Sélectionnez **Enregistrer**.
 
 > ### <a name="set-a-redirect-url-for-nodejs"></a>Définir d’une URL de redirection pour Node.js
@@ -309,8 +320,8 @@ Créez un fichier .js nommé `authConfig.js`, qui contiendra vos paramètres de
 
  Où :
  - *\<Enter_the_Application_Id_Here>* est l’**ID d’application (client)** de l’application que vous avez inscrite.
- - *\<Enter_the_Cloud_Instance_Id_Here>* est l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez simplement *https://login.microsoftonline.com* . Pour les clouds **nationaux** (par exemple, Chine), consultez [Clouds nationaux](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud).
- - *\<Enter_the_Tenant_info_here >* est défini sur une des options suivantes :
+ - *\<Enter_the_Cloud_Instance_Id_Here>* est l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez simplement *https://login.microsoftonline.com* . Pour les clouds **nationaux** (par exemple, Chine), consultez [Clouds nationaux](./authentication-national-cloud.md).
+ - *\<Enter_the_Tenant_info_here>* est défini sur l’une des options suivantes :
    - Si votre application prend en charge les *Comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’**ID de locataire** ou le **nom du locataire** (par exemple, *contoso.microsoft.com*).
    - Si votre application prend en charge les *Comptes dans un annuaire organisationnel*, remplacez cette valeur par **organizations**.
    - Si votre application prend en charge les *Comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par **common**. Pour limiter la prise en charge aux *Comptes Microsoft personnels uniquement*, remplacez cette valeur par **consumers**.
@@ -433,7 +444,7 @@ La méthode `acquireTokenSilent` gère l’acquisition et le renouvellement de j
    ```
 
    Où :
-   - *\<Enter_the_Graph_Endpoint_Here>* est l’instance de l’API MS Graph. Pour utiliser le point de terminaison global de l’API MS Graph, remplacez simplement cette chaîne par `https://graph.microsoft.com`. Pour des déploiements sur les clouds nationaux, consultez la [documentation de l’API Graph](https://docs.microsoft.com/graph/deployments).
+   - *\<Enter_the_Graph_Endpoint_Here>* est l’instance de l’API MS Graph. Pour utiliser le point de terminaison global de l’API MS Graph, remplacez simplement cette chaîne par `https://graph.microsoft.com`. Pour des déploiements sur les clouds nationaux, consultez la [documentation de l’API Graph](/graph/deployments).
 
 1. Ensuite, créez un fichier .js nommé `graph.js`, qui effectuera un appel REST à l’API Microsoft Graph, et ajoutez le code suivant :
 
@@ -472,8 +483,6 @@ Dans l’exemple d’application créé par ce guide, la méthode `callMSGraph()
    ```
 1. Dans votre navigateur, entrez **http://localhost:3000** ou **http://localhost:{port}** , où *port* est le port que votre serveur web écoute. Vous devez voir apparaître le contenu de votre fichier *index.html*, ainsi que le bouton **Se connecter**.
 
-## <a name="test-your-application"></a>Tester votre application
-
 Une fois que le navigateur a chargé votre fichier *index.html*, sélectionnez **Se connecter**. Vous êtes invité à vous connecter avec le point de terminaison de la plateforme d’identités Microsoft :
 
 ![La fenêtre de connexion au compte JavaScript SPA](media/active-directory-develop-guidedsetup-javascriptspa-test/javascriptspascreenshot1.png)
@@ -497,6 +506,11 @@ L’API Microsoft Graph nécessite l’étendue *user.read* pour lire le profil 
 > [!NOTE]
 > L’utilisateur peut être invité à donner des consentements supplémentaires à mesure que vous augmentez le nombre d’étendues.
 
-Si une API back-end ne nécessite pas d’étendue (non recommandé), vous pouvez utiliser *clientId* comme étendue dans les appels pour acquérir des jetons.
-
 [!INCLUDE [Help and support](../../../includes/active-directory-develop-help-support-include.md)]
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Approfondissez le développement d’applications monopages sur la plateforme d’identités Microsoft grâce à notre série de scénarios en plusieurs parties.
+
+> [!div class="nextstepaction"]
+> [Scénario : Application monopage](scenario-spa-overview.md)

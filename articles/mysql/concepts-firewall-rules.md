@@ -1,17 +1,17 @@
 ---
 title: Règles de pare-feu - Azure Database pour MySQL
 description: Découvrez comment utiliser des règles de pare-feu pour activer les connexions à votre serveur Azure Database pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 01/15/2020
-ms.openlocfilehash: a82d2317314c79a82fe80c5a25afc950fb728815
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/17/2020
+ms.openlocfilehash: eb178e38001e54ac39a269c8b8cdef12c77d74cf
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76155194"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96901947"
 ---
 # <a name="azure-database-for-mysql-server-firewall-rules"></a>Règles de pare-feu d’un serveur de base de données Azure pour MySQL
 Le pare-feu empêche tout accès à votre serveur de base de données jusqu’à ce que vous spécifiiez les ordinateurs qui disposent d’autorisations. Le pare-feu octroie l’accès au serveur en fonction de l’adresse IP d’origine de chaque demande.
@@ -25,7 +25,7 @@ Tous les accès au serveur Azure Database pour MySQL sont par défaut bloqués p
 
 Les tentatives de connexion à partir d’Internet et d’Azure doivent franchir le pare-feu pour pouvoir atteindre votre base de données Azure pour MySQL, comme l’illustre le diagramme suivant :
 
-![Exemple de flux de fonctionnement du pare-feu](./media/concepts-firewall-rules/1-firewall-concept.png)
+:::image type="content" source="./media/concepts-firewall-rules/1-firewall-concept.png" alt-text="Exemple de flux de fonctionnement du pare-feu":::
 
 ## <a name="connecting-from-the-internet"></a>Connexion à partir d’Internet
 Les règles de pare-feu au niveau du serveur s’appliquent à toutes les bases de données qui se trouvent sur le serveur de base de données Azure pour MySQL.
@@ -43,7 +43,7 @@ Si aucune adresse IP sortante fixe n’est disponible pour votre service Azure,
 > L’option **Autoriser l’accès aux services Azure** configure le pare-feu pour autoriser toutes les connexions à partir d’Azure, notamment les connexions issues des abonnements d’autres clients. Lorsque vous sélectionnez cette option, vérifiez que votre connexion et vos autorisations utilisateur limitent l’accès aux seuls utilisateurs autorisés.
 > 
 
-![Configurer Autoriser l’accès aux services Azure dans le portail](./media/concepts-firewall-rules/allow-azure-services.png)
+:::image type="content" source="./media/concepts-firewall-rules/allow-azure-services.png" alt-text="Configurer Autoriser l’accès aux services Azure dans le portail":::
 
 ### <a name="connecting-from-a-vnet"></a>Connexion à partir d’un réseau virtuel
 Pour vous connecter de manière sécurisée à votre serveur Azure Database pour MySQL à partir d’un réseau virtuel, vous pouvez utiliser des [points de terminaison de service de réseau virtuel](./concepts-data-access-and-security-vnet.md). 
@@ -66,8 +66,14 @@ Tenez compte des points suivants quand l’accès au service de serveur Azure Da
 
 * **L’adresse IP du serveur semble être publique :** les connexions au serveur Azure Database pour MySQL sont routées par le biais d’une passerelle Azure accessible publiquement. Toutefois, l’adresse IP réelle du serveur est protégée par le pare-feu. Pour plus d’informations, consultez l’article [Architecture de connectivité](concepts-connectivity-architecture.md). 
 
+* **Impossible de se connecter à partir d’une ressource Azure avec l’adresse IP autorisée :** vérifiez si le point de terminaison de service **Microsoft.Sql** est activé pour le sous-réseau à partir duquel vous vous connectez. Si **Microsoft.Sql** est activé, il signifie que vous souhaitez utiliser uniquement les [règles de point de terminaison de service de réseau virtuel](concepts-data-access-and-security-vnet.md) sur ce sous-réseau.
+
+   Par exemple, vous pouvez voir l’erreur suivante si vous vous connectez à partir d’une machine virtuelle Azure dans un sous-réseau où **Microsoft.Sql** est activé, mais qui n’a pas de règle de réseau virtuel correspondante : `FATAL: Client from Azure Virtual Networks is not allowed to access the server`.
+
+* **La règle de pare-feu n’est pas disponible pour le format IPv6 :** Les règles de pare-feu doivent être au format IPv4. Si vous spécifiez des règles de pare-feu au format IPv6, l’erreur de validation s’affiche.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Créer et gérer des règles de pare-feu Base de données Azure pour MySQL à l’aide du portail Azure](./howto-manage-firewall-using-portal.md)
 * [Créer et gérer des règles de pare-feu Azure Database pour MySQL à l’aide de l’interface de ligne de commande Azure](./howto-manage-firewall-using-cli.md)
-- [Points de terminaison de service de réseau virtuel dans Azure Database pour MySQL](./concepts-data-access-and-security-vnet.md)
+* [Points de terminaison de service de réseau virtuel dans Azure Database pour MySQL](./concepts-data-access-and-security-vnet.md)

@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 11/09/2018
 ms.author: cynthn
 ms.openlocfilehash: a3dfc2b1beeb262000204deb2be60fad1ec0870d
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82616065"
 ---
 | Ressource | Limite |

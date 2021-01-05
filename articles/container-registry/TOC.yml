@@ -17,6 +17,9 @@
           href: container-registry-get-started-portal.md
         - name: Créer un registre de conteneurs - PowerShell
           href: container-registry-get-started-powershell.md
+        - name: Créer un registre de conteneurs - Modèle ARM
+          displayName: Resource Manager
+          href: container-registry-get-started-geo-replication-template.md
         - name: Envoyer des événements à Event Grid - CLI
           href: container-registry-event-grid-quickstart.md
         - name: Créer et envoyer (push) des images Java - CLI
@@ -32,16 +35,14 @@
               href: container-registry-tutorial-deploy-app.md
             - name: 3 - Mettre à jour l’application web
               href: container-registry-tutorial-deploy-update.md
-    - name: Exemples
-      items:
-        - name: Éléments intégrés Azure Policy
-          displayName: 'samples, policies, definitions'
-          href: ./policy-samples.md
     - name: Concepts
       expanded: false
       items:
         - name: Sécurité
           items:
+            - name: Contrôles de sécurité par Azure Policy
+              displayName: 'regulatory, compliance, standards, domains'
+              href: ./security-controls-policy.md
             - name: Base de référence de la sécurité
               href: security-baseline.md
         - name: Niveaux et limites des registres de conteneurs
@@ -56,8 +57,13 @@
           href: container-registry-image-tag-version.md
         - name: Géoréplication
           href: container-registry-geo-replication.md
+        - name: Redondance de zone
+          displayName: availability zone
+          href: zone-redundancy.md
         - name: Bonnes pratiques concernant les registres
           href: container-registry-best-practices.md
+        - name: Gérer les images publiques
+          href: buffer-gate-public-content.md
     - name: Guides pratiques
       expanded: false
       items:
@@ -107,6 +113,8 @@
                   href: container-registry-auth-service-principal.md
                 - name: Authentifier avec l’identité gérée
                   href: container-registry-authentication-managed-identity.md
+                - name: S’authentifier avec un jeton (préversion)
+                  href: container-registry-repository-scoped-permissions.md
                 - name: S’authentifier à partir d’Azure Container Instances
                   href: container-registry-auth-aci.md
                 - name: S’authentifier auprès de Kubernetes avec un secret de tirage
@@ -115,12 +123,13 @@
                   href: ../aks/cluster-container-registry-integration.md?toc=/azure/container-registry/toc.json&bc=/azure/container-registry/breadcrumb/toc.json
                 - name: S’authentifier avec un jeton limité à un référentiel (préversion)
                   href: container-registry-repository-scoped-permissions.md
-            - name: Contrôle d’accès en fonction du rôle
+            - name: Contrôle d'accès en fonction du rôle Azure
               href: container-registry-roles.md
+              displayName: 'permissions, authorization'
             - name: Approbation du contenu
               href: container-registry-content-trust.md
             - name: Analyse des images avec Security Center
-              href: ../security-center/azure-container-registry-integration.md?toc=/azure/container-registry/toc.json&bc=/azure/container-registry/breadcrumb/toc.json
+              href: ../security-center/defender-for-container-registries-introduction.md?bc=%2fazure%2fcontainer-registry%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fcontainer-registry%2ftoc.json
         - name: Registres et autres services Azure
           expanded: false
           items:
@@ -135,11 +144,17 @@
           items:
             - name: Journaux de diagnostic et d’audit
               href: container-registry-diagnostics-audit-logs.md
-            - name: Auditer la conformité avec Azure Policy (préversion)
+            - name: Auditer la conformité avec Azure Policy
               href: container-registry-azure-policy.md
         - name: Dépanner
           expanded: false
           items:
+            - name: Résoudre les problèmes de connexion
+              href: container-registry-troubleshoot-login.md
+            - name: Résoudre les problèmes réseau
+              href: container-registry-troubleshoot-access.md
+            - name: Résoudre les problèmes de performances de registre
+              href: container-registry-troubleshoot-performance.md
             - name: Détecter les problèmes courants
               href: container-registry-check-health.md
             - name: Questions fréquentes (FAQ)
@@ -147,7 +162,7 @@
 - name: Tâches
   expanded: true
   items:
-    - name: Vue d’ensemble
+    - name: Vue d'ensemble
       expanded: false
       items:
         - name: À propos d’ACR Tasks
@@ -198,6 +213,10 @@
               href: container-registry-tasks-authentication-key-vault.md
         - name: Exécution de tâche rapide avec un modèle Resource Manager
           href: container-registry-task-run-template.md
+        - name: Exécuter une tâche sur un pool d’agents dédié (préversion)
+          href: tasks-agent-pools.md
+        - name: Consommer et gérer le contenu public
+          href: tasks-consume-public-content.md
         - name: Créer une image avec Buildpacks (préversion)
           href: container-registry-tasks-pack-build.md
         - name: Afficher les journaux d’activité de tâches
@@ -229,6 +248,9 @@
       href: ../event-grid/event-schema-container-registry.md?toc=/azure/container-registry/toc.json&bc=/azure/container-registry/breadcrumb/toc.json
     - name: Erreurs de contrôle d’intégrité
       href: container-registry-health-error-reference.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   expanded: false
   items:
@@ -242,5 +264,5 @@
       href: 'https://feedback.azure.com/forums/903958-azure-container-registry'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-container-registry'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=container-registry&sort=newest'

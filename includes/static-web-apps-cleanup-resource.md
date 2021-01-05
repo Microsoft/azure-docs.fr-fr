@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 05/08/2020
 ms.author: aapowell
 ms.openlocfilehash: e06e1ec848f9553b88578616f38ec70184d79dae
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83593366"
 ---
 Si vous n’envisagez pas de continuer à utiliser cette application, vous pouvez supprimer la ressource Azure Static Web App en procédant comme suit :

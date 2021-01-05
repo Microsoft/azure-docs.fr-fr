@@ -80,7 +80,7 @@
               href: data-factory-azure-search-connector.md
             - name: Azure SQL Database
               href: data-factory-azure-sql-connector.md
-            - name: Azure SQL Data Warehouse.
+            - name: Azure Synapse Analytics
               href: data-factory-azure-sql-data-warehouse-connector.md
             - name: Stockage de table Azure
               href: data-factory-azure-table-connector.md
@@ -139,9 +139,9 @@
           href: data-factory-hadoop-streaming-activity.md
         - name: Activité Spark HDInsight
           href: data-factory-spark.md
-        - name: Activité d’exécution par lot Machine Learning
+        - name: Activité d’exécution par lot Azure Machine Learning Studio (classique)
           href: data-factory-azure-ml-batch-execution-activity.md
-        - name: "Activité des ressources de mise à jour de Machine\_Learning"
+        - name: Activité de ressource de mise à jour Azure Machine Learning Studio (classique)
           href: data-factory-azure-ml-update-resource-activity.md
         - name: Activité de procédure stockée
           href: data-factory-stored-proc-activity.md
@@ -199,10 +199,8 @@
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Études de cas
       href: data-factory-customer-case-studies.md
-    - name: Parcours d’apprentissage
-      href: 'https://azure.microsoft.com/documentation/learning-paths/data-factory'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-data-factory.html'
+      href: /answers/topics/azure-data-factory.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/data-factory/'
     - name: Calculatrice de prix
@@ -215,7 +213,7 @@
       href: 'https://azure.microsoft.com/updates/?product=data-factory'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-data-factory'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=data-factory'
     - name: Traiter des jeux de données volumineux à l’aide de Data Factory et Batch
       href: data-factory-data-processing-using-batch.md

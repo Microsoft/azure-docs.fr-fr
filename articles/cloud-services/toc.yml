@@ -12,6 +12,12 @@
       href: cloud-services-dotnet-get-started.md
     - name: Exemple de service cloud avec les outils Python pour Visual Studio
       href: cloud-services-python-ptvs.md
+- name: Concepts
+  items:
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Procédure
   items:
     - name: Plan
@@ -151,6 +157,8 @@
           href: cloud-services-disaster-recovery-guidance.md
         - name: Workflow de l’architecture de machine virtuelle classique
           href: cloud-services-workflow-process.md
+        - name: Prise en charge de Resource Health pour les services cloud
+          href: resource-health-for-cloud-services.md
         - name: Forum aux questions sur les services cloud
           items:
             - name: FAQ sur la disponibilité de l’application et du service
@@ -190,14 +198,14 @@
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=compute'
     - name: Parcours d’apprentissage
-      href: 'https://azure.microsoft.com/documentation/learning-paths/cloud-services/'
+      href: /learn/paths/azure-fundamentals/
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-cloud-services.html'
+      href: /answers/topics/azure-cloud-services.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/cloud-services/'
     - name: Calculatrice de prix
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=cloud-services&updatetype=&platform='
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=cloud-services'

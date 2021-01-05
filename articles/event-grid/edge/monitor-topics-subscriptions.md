@@ -1,19 +1,14 @@
 ---
 title: Superviser les rubriques et les abonnements aux événements - Azure Event Grid IoT Edge | Microsoft Docs
 description: Superviser les rubriques et les abonnements aux événements
-author: banisadr
-ms.author: babanisa
-ms.reviewer: spelluru
-ms.date: 01/09/2020
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: ce7c92f121fb458d528d63d0af0aad025b377386
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d230be4f74abd61ad7b7f0fdb3facb32ee63da73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77086678"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171531"
 ---
 # <a name="monitor-topics-and-event-subscriptions"></a>Superviser les rubriques et les abonnements aux événements
 

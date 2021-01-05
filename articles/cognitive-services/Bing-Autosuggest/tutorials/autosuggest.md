@@ -10,14 +10,20 @@ ms.subservice: bing-autosuggest
 ms.topic: tutorial
 ms.date: 03/05/2019
 ms.author: aahi
-ms.openlocfilehash: 10e25338ab6960addeebcc224d0a6633df451964
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: 6a2c69735c36c06cdf72efc812aa1ac4020ff00a
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78943142"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96342224"
 ---
 # <a name="tutorial-get-search-suggestions-on-a-web-page"></a>Tutoriel : Obtention de suggestions de recherche sur une page web
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Dans ce didacticiel, nous allons générer une page web qui permet aux utilisateurs d’interroger l’API Suggestion automatique Bing.
 
@@ -29,7 +35,7 @@ Ce didacticiel vous explique les procédures suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour suivre le didacticiel, vous avez besoin d’une clé d’abonnement pour l’API Suggestion automatique Bing. Si vous n’en avez pas, [créez une ressource Suggestion automatique Bing](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesBingAutosuggest-v7) dans le portail Azure. Vous pouvez également utiliser une [clé d’essai](https://azure.microsoft.com/try/cognitive-services/).
+Pour suivre le didacticiel, vous avez besoin d’une clé d’abonnement pour l’API Suggestion automatique Bing. Si vous n’en avez pas, [créez une ressource Suggestion automatique Bing](https://portal.azure.com/#create/Microsoft.CognitiveServicesBingAutosuggest-v7) dans le portail Azure.
 
 ## <a name="create-a-new-web-page"></a>Créer une page web
 
@@ -352,4 +358,4 @@ Ouvrez la page web dans votre navigateur. À l’invite, entrez votre clé d’a
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Conditions d’utilisation et d’affichage](../UseAndDisplayRequirements.md)
+> [Conditions d’utilisation et d’affichage](../../bing-web-search/use-display-requirements.md)

@@ -3,14 +3,15 @@ title: Utilisation d’une valeur de retour dans Azure Functions
 description: Découvrez comment gérer les valeurs de retour pour Azure Functions.
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 01/14/2019
 ms.author: cshoe
-ms.openlocfilehash: 7ba104e288204dfbf3d24f5783bf69682a286553
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 58ee9b682bc97dc4044d811392cf4ff5b51a69fd
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74480579"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94491356"
 ---
 # <a name="using-the-azure-function-return-value"></a>Utilisation de la valeur de retour Azure Functions
 
@@ -128,6 +129,27 @@ module.exports = function (context, input) {
     context.log('Node.js script processed queue message', json);
     context.done(null, json);
 }
+```
+# <a name="powershell"></a>[PowerShell](#tab/PowerShell)
+
+Voici la liaison de sortie dans le fichier *function.json* :
+
+```json
+{
+    "name": "Response",
+    "type": "blob",
+    "direction": "out",
+    "path": "output-container/{blobname}"
+}
+```
+
+Voici le code PowerShell qui utilise la valeur de retour pour une liaison de sortie http :
+
+```powershell
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = [HttpStatusCode]::OK
+    Body = $blobname
+    })
 ```
 
 # <a name="python"></a>[Python](#tab/python)

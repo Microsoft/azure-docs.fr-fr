@@ -12,17 +12,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/12/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 35e04be046e20883f60c576745a29342add68a81
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4077146292db1266d5dbc51cc577f952b2bff191
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60241587"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85357509"
 ---
 # <a name="changing-the-ad-ds-account-password"></a>Modifier le mot de passe du compte AD DS
 Le compte AD DS fait référence au compte d’utilisateur utilisé par Azure AD Connect pour communiquer avec le répertoire Active Directory local. Si vous modifiez le mot de passe du compte AD DS, vous devez mettre à jour le service de synchronisation Azure AD Connect avec le nouveau mot de passe. Dans le cas contraire, la synchronisation avec le répertoire Active Directory local ne s’effectue plus correctement et les erreurs suivantes apparaissent :

@@ -3,18 +3,18 @@ title: 'Azure Data Factory : Forum aux questions '
 description: Réponses aux questions les plus fréquentes concernant Azure Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 02/10/2020
-ms.openlocfilehash: 8d0b49b73ef6b67653fbf32db1174880a51d432d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2d1b9f0e25c460b7f26c31c3d2c6ebe51d958017
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81412944"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96485012"
 ---
 # <a name="azure-data-factory-faq"></a>Forum Aux Questions Azure Data Factory
 
@@ -70,7 +70,7 @@ Les outils visuels d’Azure Data Factory autorisent le développement et le dé
 Vous n’êtes pas obligé de publier les modifications que vous avez apportées aux données sur le service Data Factory avant de sélectionner **Déboguer**. Ceci est pratique dans les scénarios où vous voulez être sûr que les nouveaux ajouts ou modifications fonctionnent comme prévu avant de mettre à jour les flux de travail de votre fabrique de données dans des environnements de développement, de test ou de production. 
 
 ### <a name="ability-to-deploy-ssis-packages-to-azure"></a>Capacité à déployer des packages SSIS sur Azure 
-Si vous voulez déplacer vos charges de travail SSIS, vous pouvez créer une fabrique de données et provisionner un runtime d’intégration Azure-SSIS. Un runtime d’intégration Azure-SSIS est un cluster entièrement managé de machines virtuelles Azure (nœuds) dédiées à l’exécution de vos packages SSIS dans le cloud. Pour obtenir des instructions pas à pas, consultez le didacticiel [Déployer des packages SSIS vers Azure](tutorial-create-azure-ssis-runtime-portal.md). 
+Si vous voulez déplacer vos charges de travail SSIS, vous pouvez créer une fabrique de données et provisionner un runtime d’intégration Azure-SSIS. Un runtime d’intégration Azure-SSIS est un cluster entièrement managé de machines virtuelles Azure (nœuds) dédiées à l’exécution de vos packages SSIS dans le cloud. Pour obtenir des instructions pas à pas, consultez le didacticiel [Déployer des packages SSIS vers Azure](./tutorial-deploy-ssis-packages-azure.md). 
  
 ### <a name="sdks"></a>Kits SDK
 Si vous êtes un utilisateur avancé et que vous recherchez une interface de programmation, Data Factory offre un ensemble étendu de SDK que vous pouvez utiliser pour créer, gérer ou superviser les pipelines avec votre IDE favori. La prise en charge des langages inclut .NET, PowerShell, Python et REST.
@@ -83,11 +83,11 @@ Depuis la préversion publique initiale de 2017, les fonctionnalités suivantes 
 
 -    Prise en charge de trois configurations/variantes supplémentaires d’Azure SQL Database pour héberger la base de données SSIS (SSISDB) des projets/packages :
 -    SQL Database avec points de terminaison de service de réseau virtuel
--    Instance gérée
+-    Instance managée SQL
 -    Pool élastique
 -    Prise en charge d’un réseau virtuel Azure Resource Manager sur un réseau virtuel classique qui sera dépréciée dans le futur : ceci vous permet d’injecter/joindre votre runtime d’intégration Azure-SSIS à un réseau virtuel configuré pour SQL Database avec des points de terminaison de service de réseau virtuel/MI/accès aux données locales. Pour plus d’informations, consultez également [Joindre un runtime d’intégration Azure-SSIS à un réseau virtuel](join-azure-ssis-integration-runtime-virtual-network.md).
 -    Prise en charge de l’authentification Azure Active Directory (AAD) et de l’authentification SQL pour se connecter à la SSISDB : ceci vous permet d’utiliser l’authentification Azure AD avec votre identité managée Data Factory pour des ressources Azure
--    Prise en charge de votre propre licence SQL Server locale pour réaliser des économies substantielles avec l’option Azure Hybrid Benefit
+-    Prise en charge de votre licence SQL Server existante pour réaliser des économies substantielles avec l’option Azure Hybrid Benefit
 -    Prise en charge de l’édition Entreprise du runtime d’intégration Azure-SSIS, qui vous permet d’utiliser des fonctionnalités avancées/Premium, un programme d’installation personnalisé pour installer des composants/extensions supplémentaires, et un écosystème de partenaires. Pour plus d’informations, consultez également [Enterprise Edition, Custom Setup, and 3rd Party Extensibility for SSIS in ADF](https://blogs.msdn.microsoft.com/ssis/2018/04/27/enterprise-edition-custom-setup-and-3rd-party-extensibility-for-ssis-in-adf/). 
 -    Une intégration plus étroite de SSIS dans Data Factory, qui vous permet d’appeler/déclencher des activités étendues d’exécution de package SSIS dans des pipelines Data Factory et de les planifier via SSMS. Pour plus d’informations, consultez [Modernize and extend your ETL/ELT workflows with SSIS activities in ADF pipelines](https://blogs.msdn.microsoft.com/ssis/2018/05/23/modernize-and-extend-your-etlelt-workflows-with-ssis-activities-in-adf-pipelines/).
 
@@ -126,7 +126,7 @@ Les services liés ressemblent à des chaînes de connexion. Ils définissent le
 
 Les services liés ont deux objectifs dans Data Factory :
 
-- Représenter un *magasin de données* qui inclut, mais sans s’y limiter, une base de données SQL Server locale, une instance de base de données Oracle, un partage de fichiers ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des magasins de données pris en charge, consultez [Activité de copie dans Azure Data Factory](copy-activity-overview.md).
+- Représenter un *magasin de données* qui inclut, mais sans s’y limiter, une instance SQL Server, une instance de base de données Oracle, un partage de fichiers ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des magasins de données pris en charge, consultez [Activité de copie dans Azure Data Factory](copy-activity-overview.md).
 - Pour représenter une *ressource de calcul* qui peut héberger l’exécution d’une activité. Par exemple, l’activité HDInsight Hive s’exécute sur un cluster HDInsight Hadoop. Pour obtenir la liste des activités de transformation et des environnements de calcul pris en charge, consultez [Transformer des données dans Azure Data Factory](transform-data.md).
 
 ### <a name="triggers"></a>Déclencheurs
@@ -159,7 +159,7 @@ Pour plus d’informations sur la tarification d’Azure Data Factory, consultez
 Pour obtenir les informations les plus récentes sur Azure Data Factory, consultez les sites suivants :
 
 - [Blog](https://azure.microsoft.com/blog/tag/azure-data-factory/)
-- [Page d’accueil de la documentation](/azure/data-factory)
+- [Page d’accueil de la documentation](./index.yml)
 - [Page d’accueil du produit](https://azure.microsoft.com/services/data-factory/)
 
 ## <a name="technical-deep-dive"></a>Présentation technique approfondie 
@@ -190,7 +190,7 @@ Quand Microsoft fournit une aide ou une assistance au dépannage pour des flux d
 
 ### <a name="how-do-i-access-data-by-using-the-other-90-dataset-types-in-data-factory"></a>Comment accéder à des données à l’aide des 90 autres types de jeux de données dans Data Factory ?
 
-La fonctionnalité de mappage de flux de données autorise actuellement Azure SQL Database, Azure SQL Data Warehouse, les fichiers texte délimités à partir de Stockage Blob Azure ou Azure Data Lake Storage Gen2, et les fichiers Parquet à partir du stockage d’objets blob ou Data Lake Storage Gen2 en mode natif pour la source et le récepteur. 
+La fonctionnalité de flux de données de mappage autorise actuellement Azure SQL Database, Azure Synapse Analytics, les fichiers texte délimités à partir de Stockage Blob Azure ou Azure Data Lake Storage Gen2, et les fichiers Parquet à partir du stockage d’objets blob ou Data Lake Storage Gen2 en mode natif pour la source et le récepteur. 
 
 Utilisez l’activité de copie pour indexer les données des autres connecteurs, puis exécutez une activité de flux de données pour transformer les données une fois qu’elles ont été indexées. Par exemple, votre pipeline copiera tout d’abord dans le stockage d’objets blob, puis une activité de flux de données utilisera un jeu de données dans la source pour transformer ces données.
 

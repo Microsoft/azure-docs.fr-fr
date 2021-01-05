@@ -11,13 +11,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 12/24/2018
-ms.openlocfilehash: 4da54318bea21daf9ec363be61bea18adaa2ce63
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 12/09/2020
+ms.openlocfilehash: 3f15ffd6f7ed784cce398d419e013a69c60289d8
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629029"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96921806"
 ---
 # <a name="delta-copy-from-a-database-with-a-control-table"></a>Copie delta à partir d’une base de données avec une table de contrôle
 
@@ -45,7 +45,7 @@ Le modèle définit les paramètres suivants :
 - Le paramètre *Data_Source_WaterMarkColumn* est le nom de la colonne dans la table source qui permet d’identifier les lignes nouvelles ou mises à jour. Le type de cette colonne est généralement *datetime*, *INT* ou un type similaire.
 - *Data_Destination_Container* indique l’emplacement racine où les données sont copiées dans votre magasin de destination.
 - *Data_Destination_Directory* est le chemin du répertoire sous la racine de l’emplacement où les données sont copiées dans votre magasin de destination.
-- *Data_Destination_Table_Name* est l’endroit où les données sont copiées dans votre magasin de destination (applicable lorsque « Azure Synapse Analytics (anciennement SQL DW) » est sélectionné comme destination des données).
+- *Data_Destination_Table_Name* est l’endroit où les données sont copiées dans votre magasin de destination (applicable quand « Azure Synapse Analytics » est sélectionné en tant que destination des données).
 - *Data_Destination_Folder_Path* est l’endroit où les données sont copiées dans votre magasin de destination (applicable lorsque « Système de fichiers » ou « Azure Data Lake Storage Gen1 » est sélectionné comme destination des données).
 - Le paramètre *Control_Table_Table_Name* indique la table de contrôle externe où la valeur de limite supérieure est stockée.
 - Le paramètre *Control_Table_Column_Name* indique la colonne dans la table de contrôle externe où la valeur de limite supérieure est stockée.
@@ -140,7 +140,7 @@ Le modèle définit les paramètres suivants :
 
     Vous pouvez voir que seules les nouvelles lignes ont été copiées dans la destination.
 
-15. (Facultatif :) Si vous avez choisi Azure Synapse Analytics (anciennement SQL DW) comme destination des données, vous devez également fournir une connexion à un Stockage Blob Azure pour la mise en lots, conformément aux exigences de SQL Data Warehouse Polybase. Le modèle génère un chemin d’accès au conteneur pour vous. Après l’exécution du pipeline, vérifiez si le conteneur a été créé dans le stockage d’objets Blob.
+15. (Facultatif :) Si vous avez choisi Azure Synapse Analytics comme destination des données, vous devez également fournir une connexion à un Stockage Blob Azure pour la mise en lots, conformément aux exigences d’Azure Synapse Analytics Polybase. Le modèle génère un chemin d’accès au conteneur pour vous. Après l’exécution du pipeline, vérifiez si le conteneur a été créé dans le stockage d’objets Blob.
     
     ![Configurer Polybase](media/solution-template-delta-copy-with-control-table/DeltaCopyfromDB_with_ControlTable15.png)
     

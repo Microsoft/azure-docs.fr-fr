@@ -6,12 +6,12 @@ ms.service: storsimple
 ms.topic: conceptual
 ms.date: 04/23/2018
 ms.author: alkohli
-ms.openlocfilehash: a56610dd81d6e50da11bbd65bcf0682e399b1783
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c9feb1131f6d2d0eb75ac71e27dc46c226c52c1
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232229"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94961054"
 ---
 # <a name="deploy-your-on-premises-storsimple-device-update-3-and-later"></a>Déployer votre appareil StorSimple local (Update 3 et ultérieure)
 
@@ -166,7 +166,7 @@ Vous avez terminé la configuration de l’appareil.
 ## <a name="configure-a-new-storage-account-for-the-service"></a>Configuration d’un compte de stockage pour le service
 Il s’agit d’une étape facultative que vous devez exécuter uniquement si vous n’avez pas activé la création automatique d’un compte de stockage avec votre service. Un compte de stockage Microsoft Azure est requis pour créer un conteneur de volumes StorSimple.
 
-Si vous devez créer un compte de stockage Azure dans une autre région, consultez la page [À propos des comptes de stockage Azure](../storage/common/storage-create-storage-account.md) pour obtenir des instructions détaillées.
+Si vous devez créer un compte de stockage Azure dans une autre région, consultez la page [À propos des comptes de stockage Azure](../storage/common/storage-account-create.md) pour obtenir des instructions détaillées.
 
 Procédez comme suit dans le portail Azure, sur la page **Service StorSimple Device Manager**.
 
@@ -207,4 +207,3 @@ L’extrémité de la prise stéréo correspond à PIN 3 RX, le milieu correspon
 ## <a name="next-steps"></a>Étapes suivantes
 * [Configurer StorSimple Cloud Appliance](storsimple-8000-cloud-appliance-u2.md).
 * [Utilisez le service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-8000-manager-service-administration.md).
-

@@ -1,19 +1,19 @@
 ---
-title: Fichier Include
+title: Fichier include
 description: connecteurs pris en charge pour l’activité de recherche
 services: data-factory
 author: linda33wj
 ms.service: data-factory
 ms.topic: include
-ms.date: 12/13/2019
+ms.date: 12/18/2020
 ms.author: jingwang
 ms.custom: include file
-ms.openlocfilehash: fb44f217b7a940bc07a164e482b67ddb53835715
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a749de57a1c57c828332957def27d68a121318b1
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75440480"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97691939"
 ---
 | Category | Banque de données |
 |:--- |:--- |
@@ -25,10 +25,11 @@ ms.locfileid: "75440480"
 | &nbsp; |[Azure Database for MariaDB](../articles/data-factory/connector-azure-database-for-mariadb.md) |
 | &nbsp; |[Azure Database pour MySQL](../articles/data-factory/connector-azure-database-for-mysql.md) |
 | &nbsp; |[Base de données Azure pour PostgreSQL](../articles/data-factory/connector-azure-database-for-postgresql.md) |
+| &nbsp; |[Azure Databricks Delta Lake](../articles/data-factory/connector-azure-databricks-delta-lake.md) |
 | &nbsp; |[Azure Files](../articles/data-factory/connector-azure-file-storage.md) |
 | &nbsp; |[Azure SQL Database](../articles/data-factory/connector-azure-sql-database.md) |
-| &nbsp; |[Azure SQL Database Managed Instance](../articles/data-factory/connector-azure-sql-database-managed-instance.md) |
-| &nbsp; |[Azure Synapse Analytics (anciennement SQL Data Warehouse)](../articles/data-factory/connector-azure-sql-data-warehouse.md) |
+| &nbsp; |[Azure SQL Managed Instance](../articles/azure-sql/managed-instance/sql-managed-instance-paas-overview.md) |
+| &nbsp; |[Azure Synapse Analytics](../articles/data-factory/connector-azure-sql-data-warehouse.md) |
 | &nbsp; |[Stockage Table Azure](../articles/data-factory/connector-azure-table-storage.md) |
 | **Sauvegarde de la base de données** |[Amazon Redshift](../articles/data-factory/connector-amazon-redshift.md) |
 | &nbsp; |[DB2](../articles/data-factory/connector-db2.md) |
@@ -46,11 +47,12 @@ ms.locfileid: "75440480"
 | &nbsp; |[Oracle](../articles/data-factory/connector-oracle.md) |
 | &nbsp; |[Phoenix](../articles/data-factory/connector-phoenix.md) |
 | &nbsp; |[PostgreSQL](../articles/data-factory/connector-postgresql.md) 
-| &nbsp; |[Presto (préversion)](../articles/data-factory/connector-presto.md) |
+| &nbsp; |[Presto](../articles/data-factory/connector-presto.md) |
 | &nbsp; |[SAP Business Warehouse Open Hub](../articles/data-factory/connector-sap-business-warehouse-open-hub.md) |
 | &nbsp; |[SAP Business Warehouse via MDX](../articles/data-factory/connector-sap-business-warehouse.md) |
 | &nbsp; |[SAP HANA](../articles/data-factory/connector-sap-hana.md) |
 | &nbsp; |[SAP Table](../articles/data-factory/connector-sap-table.md) |
+| &nbsp; |[Snowflake](../articles/data-factory/connector-snowflake.md) |
 | &nbsp; |[Spark](../articles/data-factory/connector-spark.md) |
 | &nbsp; |[SQL Server](../articles/data-factory/connector-sql-server.md) |
 | &nbsp; |[Sybase](../articles/data-factory/connector-sybase.md) |
@@ -74,7 +76,7 @@ ms.locfileid: "75440480"
 | &nbsp; |[Dynamics AX](../articles/data-factory/connector-dynamics-ax.md) |
 | &nbsp; |[Dynamics CRM](../articles/data-factory/connector-dynamics-crm-office-365.md) |
 | &nbsp; |[Google AdWords](../articles/data-factory/connector-google-adwords.md) |
-| &nbsp; |[HubSpot (préversion)](../articles/data-factory/connector-hubspot.md) |
+| &nbsp; |[HubSpot](../articles/data-factory/connector-hubspot.md) |
 | &nbsp; |[Jira](../articles/data-factory/connector-jira.md) |
 | &nbsp; |[Magento (préversion)](../articles/data-factory/connector-magento.md) |
 | &nbsp; |[Marketo (préversion)](../articles/data-factory/connector-marketo.md) |
@@ -90,6 +92,7 @@ ms.locfileid: "75440480"
 | &nbsp; |[SAP ECC](../articles/data-factory/connector-sap-ecc.md) |
 | &nbsp; |[ServiceNow](../articles/data-factory/connector-servicenow.md) |
 | &nbsp; |[Shopify (préversion)](../articles/data-factory/connector-shopify.md) |
+| &nbsp; |[Liste SharePoint Online](../articles/data-factory/connector-sharepoint-online-list.md) |
 | &nbsp; |[Square (préversion)](../articles/data-factory/connector-square.md) |
 | &nbsp; |[Table web (table HTML)](../articles/data-factory/connector-web-table.md) 
 | &nbsp; |[Xero](../articles/data-factory/connector-xero.md) |

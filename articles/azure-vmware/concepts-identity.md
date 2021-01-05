@@ -1,26 +1,26 @@
 ---
 title: Concepts - Identité et accès
-description: Découvrir les concepts d’identité et d’accès de la solution Azure VMware (AVS)
+description: Découvrir les concepts d’identité et d’accès de Azure VMware Solution
 ms.topic: conceptual
-ms.date: 05/04/2020
-ms.openlocfilehash: ce85b60b38db86af14b9e9aa06e568436dc76658
-ms.sourcegitcommit: d9cd51c3a7ac46f256db575c1dfe1303b6460d04
+ms.date: 11/11/2020
+ms.openlocfilehash: e9c0d62968d94e2b018186f67072b6ae7078db02
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82739965"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536096"
 ---
-# <a name="azure-vmware-solution-avs-identity-concepts"></a>Concepts d’identité de la solution Azure VMware (AVS)
+# <a name="azure-vmware-solution-identity-concepts"></a>Concepts d’identité d’Azure VMware Solution
 
-Un serveur vCenter et un gestionnaire NSX-T sont provisionnés au cours du déploiement d’un cloud privé. Vous utilisez vCenter pour gérer les charges de travail des machines virtuelles, et le gestionnaire NSX-T pour étendre le réseau à définition logicielle du cloud privé.
+Les clouds privés Azure VMware Solution sont approvisionnés avec un serveur VMware vCenter et NSX-T Manager. Vous utilisez vCenter pour gérer les charges de travail des machines virtuelles. Vous utilisez NSX-T Manager pour étendre le cloud privé.
 
-La gestion des accès et des identités utilise des privilèges de groupe CloudAdmin pour vCenter, et des droits d’administrateur restreints pour le gestionnaire NSX-T. Cette stratégie vous assure que votre plateforme de cloud privé peut être mise à niveau automatiquement. Les fonctionnalités et correctifs les plus récents sont fournis régulièrement. Pour plus d’informations sur les mises à niveau de cloud privé, consultez [l’article sur les concepts des mises à niveau des clouds privés][concepts-upgrades].
+La gestion des accès et des identités utilise des privilèges de groupe CloudAdmin pour vCenter et des droits d’administrateur restreints pour NSX-T Manager. Il garantit que votre plateforme de cloud privé est mise à niveau automatiquement avec les fonctionnalités et correctifs les plus récents.  Pour plus d’informations, consultez l’[article sur les concepts relatifs aux mises à niveau de cloud privé][concepts-upgrades].
 
 ## <a name="vcenter-access-and-identity"></a>Identité et accès vCenter
 
-Les privilèges dans vCenter sont fournis par l’intermédiaire du groupe CloudAdmin. Ce groupe peut être géré localement dans vCenter, ou par le biais de l’intégration de l’authentification unique LDAP vCenter à Azure Active Directory. Vous êtes en mesure d’activer cette intégration après avoir déployé un cloud privé.
+Le groupe CloudAdmin fournit les privilèges dans vCenter. Vous gérez le groupe localement dans vCenter. Une autre option consiste à utiliser l’intégration de l’authentification unique LDAP vCenter avec Azure Active Directory. Vous activez cette intégration après avoir déployé votre cloud privé. 
 
-Les privilèges CloudAdmin et CloudGlobalAdmin sont présentés dans le tableau ci-dessous.
+Le tableau suivant répertorie les privilèges **CloudAdmin** et **CloudGlobalAdmin**.
 
 |  Ensemble de privilèges           | CloudAdmin | CloudGlobalAdmin | Commentaire |
 | :---                     |    :---:   |       :---:      |   :--:  |
@@ -49,7 +49,7 @@ Les privilèges CloudAdmin et CloudGlobalAdmin sont présentés dans le tableau 
 
 ## <a name="nsx-t-manager-access-and-identity"></a>Identité et accès du gestionnaire NSX-T
 
-Vous accédez au gestionnaire NSX-T en utilisant le compte « administrateur ». Ce compte dispose de privilèges complets ; il vous permet de créer et de gérer des routeurs T1, des commutateurs logiques et tous les services. Les privilèges complets dans NSX-T vous permettent également d’accéder au routeur NSX-T T0. Une modification apportée au routeur T0 peut entraîner une dégradation des performances réseau ou une perte de l’accès à un cloud privé. Afin de vous conformer aux conditions de prise en charge, vous devez ouvrir une demande de support dans le portail Azure pour demander que soient apportées des modifications à votre routeur NSX-T T0.
+Utilisez le compte « administrateur » pour accéder au gestionnaire NSX-T. Ce compte dispose de privilèges complets et vous permet de créer et de gérer des routeurs T1, des commutateurs logiques et tous les services. Les privilèges vous permettent d’accéder au routeur NSX-T T0. Une modification apportée au routeur T0 peut entraîner une dégradation des performances réseau ou une perte de l’accès à un cloud privé. Ouvrez une demande de support dans le Portail Azure pour demander des modifications apportées à votre routeur NSX-T T0.
   
 ## <a name="next-steps"></a>Étapes suivantes
 

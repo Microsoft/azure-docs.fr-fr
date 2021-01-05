@@ -4,20 +4,30 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/13/2020
 ms.author: trbye
-ms.openlocfilehash: 09f08e314a634de13a683440ad9fead97ad8a260
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: d5489c5c548d1242ebac9f17faa8ed55fa79108b
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81399600"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94425033"
 ---
+L’une des principales fonctionnalités du service Speech est la possibilité de reconnaître la parole humaine et de la traduire dans d’autres langues. Dans ce démarrage rapide, vous allez apprendre à utiliser le Kit de développement logiciel (SDK) Speech dans vos applications et produits afin d’effectuer une traduction vocale de qualité. Ce démarrage rapide couvre les sujets suivants :
+
+* Conversion de parole en texte
+* Traduction de la parole en plusieurs langues cibles
+* Réalisation d’une traduction directe de la parole en parole
+
+## <a name="skip-to-samples-on-github"></a>Passer aux exemples sur GitHub
+
+Si vous souhaitez passer directement à l’exemple de code, consultez les [exemples de démarrage rapide C++](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/quickstart/cpp/windows/translate-speech-to-text) sur GitHub.
+
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../get-started.md).
+Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free).
 
 ## <a name="install-the-speech-sdk"></a>Installer le Kit de développement logiciel (SDK) Speech
 
-Avant de pouvoir faire quoi que ce soit, vous devez installer le SDK Speech. Selon votre plateforme, suivez les instructions fournies dans la section <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-sdk#get-the-speech-sdk" target="_blank">Obtenir le kit SDK Speech <span class="docon docon-navigate-external x-hidden-focus"></span></a> de l’article Kit SDK Speech.
+Avant de pouvoir faire quoi que ce soit, vous devez installer le SDK Speech. Selon votre plateforme, suivez les instructions fournies dans la section <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-sdk#get-the-speech-sdk" target="_blank">Obtenir le kit SDK Speech <span class="docon docon-navigate-external x-hidden-focus"></span></a> de l’article _À propos du kit SDK Speech_.
 
 ## <a name="import-dependencies"></a>Importer les dépendances
 
@@ -60,7 +70,7 @@ Vous pouvez initialiser une [`SpeechTranslationConfig`][config] de plusieurs fa�
 * Avec un hôte : transmettez une adresse d’hôte. Une clé ou un jeton d’autorisation est facultatif.
 * Avec un jeton d’autorisation : transmettez un jeton d’autorisation et la région associée.
 
-Examinons comment créer une classe [`SpeechTranslationConfig`][config] à l’aide d’une clé et d’une région. Consultez la page de [prise en charge des régions](https://docs.microsoft.com/azure/cognitive-services/speech-service/regions#speech-sdk) pour rechercher l’identificateur de votre région.
+Examinons comment créer une classe [`SpeechTranslationConfig`][config] à l’aide d’une clé et d’une région. Pour obtenir ces informations d’identification, suivez les étapes décrites dans [Essayer le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free).
 
 ```cpp
 auto SPEECH__SUBSCRIPTION__KEY = getenv("SPEECH__SUBSCRIPTION__KEY");
@@ -96,7 +106,7 @@ La propriété [`SpeechRecognitionLanguage`][recognitionlang] attend une chaîne
 
 ## <a name="add-translation-language"></a>Ajout d’une langue de traduction
 
-Une autre tâche courante de traduction vocale consiste à spécifier les langues de traduction cibles. S’il en faut au moins une, il est aussi possible d’en indiquer plusieurs. Dans l’extrait de code suivant, les langues de traduction cibles sont le français et l’allemand.
+Une autre tâche courante de traduction vocale consiste à spécifier les langues de traduction cibles. S’il en faut au moins une, il est aussi possible d’en indiquer plusieurs. Dans l’extrait de code suivant, le français et l’allemand sont définis comme langues de traduction cibles.
 
 ```cpp
 void translateSpeech() {
@@ -211,7 +221,7 @@ void translateSpeech() {
 }
 ```
 
-Pour plus d’informations sur la conversion de parole en texte, consultez [Informations de base sur la reconnaissance vocale](../../../speech-to-text-basics.md).
+Pour plus d’informations sur la conversion de parole en texte, consultez [Informations de base sur la reconnaissance vocale](../../../get-started-speech-to-text.md).
 
 ## <a name="synthesize-translations"></a>Synthèse des traductions
 
@@ -319,13 +329,13 @@ void translateSpeech() {
 }
 ```
 
-Pour plus d’informations sur la synthèse vocale, consultez [Informations de base sur la synthèse vocale](../../../text-to-speech-basics.md).
+Pour plus d’informations sur la synthèse vocale, consultez [Informations de base sur la synthèse vocale](../../../get-started-text-to-speech.md).
 
-[config]: https://docs.microsoft.com/cpp/cognitive-services/speech/translation-speechtranslationconfig
-[audioconfig]: https://docs.microsoft.com/cpp/cognitive-services/speech/audio-audioconfig
-[recognizer]: https://docs.microsoft.com/cpp/cognitive-services/speech/translation-translationrecognizer
-[recognitionlang]: https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig#setspeechrecognitionlanguage
-[addlang]: https://docs.microsoft.com/cpp/cognitive-services/speech/translation-speechtranslationconfig#addtargetlanguage
-[translations]: https://docs.microsoft.com/cpp/cognitive-services/speech/translation-translationrecognitionresult#translations
-[voicename]: https://docs.microsoft.com/cpp/cognitive-services/speech/translation-speechtranslationconfig#setvoicename
-[speechsynthesisvoicename]: https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig#setspeechsynthesisvoicename
+[config]: /cpp/cognitive-services/speech/translation-speechtranslationconfig
+[audioconfig]: /cpp/cognitive-services/speech/audio-audioconfig
+[recognizer]: /cpp/cognitive-services/speech/translation-translationrecognizer
+[recognitionlang]: /cpp/cognitive-services/speech/speechconfig#setspeechrecognitionlanguage
+[addlang]: /cpp/cognitive-services/speech/translation-speechtranslationconfig#addtargetlanguage
+[translations]: /cpp/cognitive-services/speech/translation-translationrecognitionresult#translations
+[voicename]: /cpp/cognitive-services/speech/translation-speechtranslationconfig#setvoicename
+[speechsynthesisvoicename]: /cpp/cognitive-services/speech/speechconfig#setspeechsynthesisvoicename

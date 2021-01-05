@@ -1,39 +1,40 @@
 ---
-title: Meilleures pratiques d’utilisation du service Route d’Azure Maps | Microsoft Azure Maps
-description: Découvrez comment définir un itinéraire de façon efficace à l’aide du service Route de Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 03/11/2020
+title: Bonnes pratiques pour le service Route Azure Maps de Microsoft Azure Maps
+description: Découvrez comment définir un itinéraire efficace pour les véhicules à l’aide du service Route de Microsoft Azure Maps.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 09/02/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 85ce29d088b8fbd110988db67776d89346215e5a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 743710ea0d40eb31375236d4e59b0b138a217518
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335416"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92895543"
 ---
 # <a name="best-practices-for-azure-maps-route-service"></a>Meilleures pratiques d’utilisation du service Route Azure Maps
 
-Les API Route Directions et Route Matrix du [service Route](https://docs.microsoft.com/rest/api/maps/route) d’Azure Maps peuvent être utilisées pour calculer les heures d’arrivée estimées pour chaque itinéraire demandé. Les API Route tiennent compte de facteurs tels que les informations de trafic en temps réel et les données de trafic historiques, comme les vitesses routières typiques au jour ou à l’heure demandée. Les API retournent les itinéraires les plus courts ou les plus rapides disponibles vers plusieurs destinations à la fois à la suite ou dans un ordre optimisé, en fonction de l’heure ou de la distance. Les utilisateurs peuvent également demander des itinéraires spécialisés et des informations pour les piétons, les cyclistes et les véhicules commerciaux tels que les camions. Cet article vous présente les meilleures pratiques concernant l’appel du [service Route](https://docs.microsoft.com/rest/api/maps/route) d’Azure Maps et vous montre comment effectuer les opérations suivantes :
+Les API Route Directions et Route Matrix du [service Route](/rest/api/maps/route) d’Azure Maps peuvent être utilisées pour calculer les heures d’arrivée estimées pour chaque itinéraire demandé. Les API Route tiennent compte de facteurs tels que les informations de trafic en temps réel et les données de trafic historiques, comme les vitesses routières typiques au jour ou à l’heure demandée. Les API retournent les itinéraires les plus courts ou les plus rapides disponibles vers plusieurs destinations à la fois à la suite ou dans un ordre optimisé, en fonction de l’heure ou de la distance. Les utilisateurs peuvent également demander des itinéraires spécialisés et des informations pour les piétons, les cyclistes et les véhicules commerciaux tels que les camions. Cet article vous présente les meilleures pratiques concernant l’appel du [service Route](/rest/api/maps/route) d’Azure Maps et vous montre comment effectuer les opérations suivantes :
 
-* Choisir entre les API Route Directions et Matrix Routing
-* Demander les temps de trajet prédits et historiques, en fonction des données de trafic historiques et en temps réel
-* Demander des détails sur l’itinéraire, comme la durée et la distance, pour l’itinéraire entier et chaque tronçon de l’itinéraire
-* Demander un itinéraire pour un véhicule commercial, comme un camion
-* Demander des informations sur le trafic sur un itinéraire, comme les embouteillages et les informations de péage
-* Demander un itinéraire constitué d’un ou de plusieurs arrêts (étapes)
-* Optimiser un itinéraire d’un ou de plusieurs arrêts pour obtenir le meilleur ordre pour visiter chaque arrêt (étape)
-* Optimiser les itinéraires alternatifs à l’aide des points de prise en charge (par exemple, proposer des itinéraires alternatifs qui passent par une station de recharge de véhicule électrique)
-* Utiliser le [service Route](https://docs.microsoft.com/rest/api/maps/route) avec le SDK web Azure Maps
+ * Choisir entre les API Route Directions et Matrix Routing
+ * Demander les temps de trajet prédits et historiques, en fonction des données de trafic historiques et en temps réel
+ * Demander des détails sur l’itinéraire, comme la durée et la distance, pour l’itinéraire entier et chaque tronçon de l’itinéraire
+ * Demander un itinéraire pour un véhicule commercial, comme un camion
+ * Demander des informations sur le trafic sur un itinéraire, comme les embouteillages et les informations de péage
+ * Demander un itinéraire constitué d’un ou de plusieurs arrêts (étapes)
+ * Optimiser un itinéraire d’un ou de plusieurs arrêts pour obtenir le meilleur ordre pour visiter chaque arrêt (étape)
+ * Optimiser les itinéraires alternatifs à l’aide des points de prise en charge (par exemple, proposer des itinéraires alternatifs qui passent par une station de recharge de véhicule électrique)
+ * Utiliser le [service Route](/rest/api/maps/route) avec le SDK web Azure Maps
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour appeler les API Azure Maps, vous avez besoin d’un compte et d’une clé Azure Maps. Pour plus d’informations, voir [Créer un compte](quick-demo-map-app.md#create-an-account-with-azure-maps) et [Obtenir une clé primaire](quick-demo-map-app.md#get-the-primary-key-for-your-account). La clé primaire est également appelée clé d’abonnement principale ou clé d’abonnement.
+1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account)
+2. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement.
 
-Pour plus d’informations sur l’authentification dans Azure Maps, voir [Gérer l’authentification dans Azure Maps](./how-to-manage-authentication.md). Pour plus d’informations sur la couverture du service Route, consultez la [couverture des itinéraires](routing-coverage.md).
+Pour plus d’informations sur la couverture du service Route, consultez [Couverture de routage](routing-coverage.md).
 
 Cet article utilise l’[application Postman](https://www.postman.com/downloads/) pour générer des appels REST, mais vous pouvez choisir l’environnement de développement d’API de votre choix.
 
@@ -56,7 +57,7 @@ Envisagez d’appeler l’API Matrix Routing si votre scénario consiste à :
 
 Voici une comparaison pour illustrer certaines fonctionnalités des API Route Directions et Matrix :
 
-| API Azure Maps | Nombre maximal de requêtes dans la demande | Zones à éviter | Acheminement des camions et véhicules électriques | Étapes et optimisation « Voyageur de commerce » | Points de prise en charge |
+| API Azure Maps | Nombre maximal de requêtes dans la demande | Zones à éviter | Acheminement des camions et véhicules électriques | Étapes et optimisation « Voyageur de commerce » | Points de prise en charge |
 | :--------------: |  :--------------: |  :--------------: | :--------------: | :--------------: | :--------------: |
 | Get Route Directions (Obtenir des directions) | 1 | | X | X | |
 | Post Route Directions (Publier des directions) | 1 | X | X | X | X |
@@ -89,7 +90,7 @@ Dans le premier exemple ci-dessous, l’heure de départ est définie sur le fut
 https://atlas.microsoft.com/route/directions/json?subscription-key=<Your-Azure-Maps-Primary-Subscription-Key>&api-version=1.0&query=51.368752,-0.118332:51.385426,-0.128929&travelMode=car&traffic=true&departAt=2025-03-29T08:00:20&computeTravelTimeFor=all
 ```
 
-La réponse contient un élément Summary, comme celui ci-dessous. Étant donné que l’heure de départ est définie sur le futur, la valeur **trafficDelayInSeconds** est égale à zéro. La valeur **travelTimeInSeconds** est calculée à l’aide des données de trafic historiques en fonction d’un horaire donné. Ainsi, dans ce cas, la valeur **travelTimeInSeconds** est égale à la valeur **historicTrafficTravelTimeInSeconds**.
+La réponse contient un élément Summary, comme celui ci-dessous. Étant donné que l’heure de départ est définie sur le futur, la valeur **trafficDelayInSeconds** est égale à zéro. La valeur **travelTimeInSeconds** est calculée à l’aide des données de trafic historiques en fonction d’un horaire donné. Ainsi, dans ce cas, la valeur **travelTimeInSeconds** est égale à la valeur **historicTrafficTravelTimeInSeconds** .
 
 ```json
 "summary": {
@@ -112,7 +113,7 @@ Dans le deuxième exemple ci-dessous, nous disposons d’une demande d’itinér
 https://atlas.microsoft.com/route/directions/json?subscription-key=<Your-Azure-Maps-Primary-Subscription-Key>&api-version=1.0&query=47.6422356,-122.1389797:47.6641142,-122.3011268&travelMode=car&traffic=true&computeTravelTimeFor=all
 ```
 
-La réponse contient un résumé comme indiqué ci-dessous. En raison des embouteillages, la valeur **trafficDelaysInSeconds** est supérieure à zéro. Elle est également supérieure à **historicTrafficTravelTimeInSeconds**.
+La réponse contient un résumé comme indiqué ci-dessous. En raison des embouteillages, la valeur **trafficDelaysInSeconds** est supérieure à zéro. Elle est également supérieure à **historicTrafficTravelTimeInSeconds** .
 
 ```json
 "summary": {
@@ -133,43 +134,23 @@ Par défaut, le service Route retourne un tableau de coordonnées. La réponse c
 
 L’illustration suivante montre l’élément `points`.
 
-<center>
-
-![Liste de points](media/how-to-use-best-practices-for-routing/points-list-is-hidden-img.png)
-
-</center>
+![Élément Points](media/how-to-use-best-practices-for-routing/points-list-is-hidden-img.png)
 
 Développez l’élément `point` pour afficher la liste des coordonnées du trajet :
 
-<center>
+![Élément Points développé](media/how-to-use-best-practices-for-routing/points-list-img.png)
 
-![Liste de points](media/how-to-use-best-practices-for-routing/points-list-img.png)
-
-</center>
-
-Les API Route Directions prennent en charge différents formats d’instructions qui peuvent être utilisés en spécifiant le paramètre **instructionsType**. Pour mettre en forme les instructions et en faciliter le traitement informatique, utilisez **instructionsType=coded**. Utilisez **instructionsType =tagged** pour afficher des instructions sous forme de texte pour l’utilisateur. En outre, les instructions peuvent être mises en forme en tant que texte où certains éléments des instructions sont marqués, et l’instruction est présentée avec une mise en forme spéciale. Pour plus d’informations, consultez la [liste des types d’instructions pris en charge](https://docs.microsoft.com/rest/api/maps/route/postroutedirections#routeinstructionstype).
+Les API Route Directions prennent en charge différents formats d’instructions qui peuvent être utilisés en spécifiant le paramètre **instructionsType** . Pour mettre en forme les instructions et en faciliter le traitement informatique, utilisez **instructionsType=coded** . Utilisez **instructionsType =tagged** pour afficher des instructions sous forme de texte pour l’utilisateur. En outre, les instructions peuvent être mises en forme en tant que texte où certains éléments des instructions sont marqués, et l’instruction est présentée avec une mise en forme spéciale. Pour plus d’informations, consultez la [liste des types d’instructions pris en charge](/rest/api/maps/route/postroutedirections#routeinstructionstype).
 
 Lorsque des instructions sont demandées, la réponse retourne un nouvel élément nommé `guidance`. L’élément `guidance` contient deux éléments d’information : les directions virage par virage et les instructions résumées.
 
-<center>
-
 ![Type d’instructions](media/how-to-use-best-practices-for-routing/instructions-type-img.png)
-
-</center>
 
 L’élément `instructions` contient des instructions virage par virage pour le trajet et l’élément `instructionGroups` contient des instructions résumées. Chaque résumé des instructions couvre un segment du trajet qui peut couvrir plusieurs routes. Les API peuvent retourner des détails pour les sections d’un itinéraire. Par exemple, la plage de coordonnées d’un embouteillage ou la vitesse actuelle du trafic.
 
-<center>
-
 ![Instructions virage par virage](media/how-to-use-best-practices-for-routing/instructions-turn-by-turn-img.png)
 
-</center>
-
-<center>
-
 ![Instructions résumées](media/how-to-use-best-practices-for-routing/instructions-summary-img.png)
-
-</center>
 
 ## <a name="request-a-route-for-a-commercial-vehicle"></a>Demander un itinéraire pour un véhicule commercial
 
@@ -185,11 +166,7 @@ https://atlas.microsoft.com/route/directions/json?subscription-key=<Your-Azure-M
 
 L’API Route retourne des directions qui prennent en compte les dimensions du camion et les déchets dangereux. Vous pouvez lire les instructions d’itinéraire en développant l’élément `guidance`.
 
-<center>
-
 ![Camion avec déchets de classe 1](media/how-to-use-best-practices-for-routing/truck-with-hazwaste-img.png)
-
-</center>
 
 ### <a name="sample-query"></a>Exemple de requête
 
@@ -201,15 +178,15 @@ https://atlas.microsoft.com/route/directions/json?subscription-key=<Your-Azure-M
 
 La réponse ci-dessous concerne un camion transportant une substance dangereuse de classe 9, qui est moins dangereuse qu’un matériau dangereux de classe 1. Lorsque vous développez l’élément `guidance` pour lire les directions, vous remarquez que les directions ne sont pas les mêmes. Il existe davantage d’instructions d’itinéraire pour le camion qui transporte un matériau dangereux de classe 1.
 
-<center>
+
 
 ![Camion avec déchets de classe 9](media/how-to-use-best-practices-for-routing/truck-with-hazwaste9-img.png)
 
-</center>
+
 
 ## <a name="request-traffic-information-along-a-route"></a>Demander des informations de circulation sur un itinéraire
 
-Avec les API Route Directions d’Azure Maps, les développeurs peuvent demander des détails pour chaque type de section en incluant le paramètre `sectionType` dans la demande. Par exemple, vous pouvez demander les informations de vitesse pour chaque segment de l’embouteillage. Reportez-vous à la [liste de valeurs pour la clé sectionType](https://docs.microsoft.com/rest/api/maps/route/getroutedirections#sectiontype) afin d’en savoir plus sur les différents détails que vous pouvez demander.
+Avec les API Route Directions d’Azure Maps, les développeurs peuvent demander des détails pour chaque type de section en incluant le paramètre `sectionType` dans la demande. Par exemple, vous pouvez demander les informations de vitesse pour chaque segment de l’embouteillage. Reportez-vous à la [liste de valeurs pour la clé sectionType](/rest/api/maps/route/getroutedirections#sectiontype) afin d’en savoir plus sur les différents détails que vous pouvez demander.
 
 ### <a name="sample-query"></a>Exemple de requête
 
@@ -221,31 +198,23 @@ https://atlas.microsoft.com/route/directions/json?subscription-key=<Your-Azure-M
 
 La réponse contient les sections qui conviennent au trafic le long des coordonnées données.
 
-<center>
-
-![Sections du trafic](media/how-to-use-best-practices-for-routing/traffic-section-type-img.png)
-
-</center>
+![Sections de trafic](media/how-to-use-best-practices-for-routing/traffic-section-type-img.png)
 
 Cette option peut être utilisée pour colorer les sections lors du rendu de la carte, comme dans l’image ci-dessous : 
 
-<center>
-
-![Sections du trafic](media/how-to-use-best-practices-for-routing/show-traffic-sections-img.png)
-
-</center>
+![Sections colorées affichées sur la carte](media/how-to-use-best-practices-for-routing/show-traffic-sections-img.png)
 
 ## <a name="calculate-and-optimize-a-multi-stop-route"></a>Calculer et optimiser un itinéraire à plusieurs arrêts
 
 Azure Maps fournit actuellement deux formes d’optimisations d’itinéraire :
 
-* Optimisations basées sur le type d’itinéraire demandé, sans modifier l’ordre des étapes. Vous trouverez ici les [types d’itinéraires pris en charge](https://docs.microsoft.com/rest/api/maps/route/postroutedirections#routetype)
+* Optimisations basées sur le type d’itinéraire demandé, sans modifier l’ordre des étapes. Vous trouverez ici les [types d’itinéraires pris en charge](/rest/api/maps/route/postroutedirections#routetype)
 
 * L’optimisation des voyageurs de commerce, qui modifie l’ordre des étapes pour obtenir le meilleur ordre pour visiter chaque arrêt
 
 Pour un itinéraire incluant plusieurs arrêts, jusqu’à 150 étapes peuvent être spécifiées dans une même demande d’itinéraire. Les coordonnées de début et de fin peuvent être les mêmes, dans le cas par exemple d’un aller-retour. Toutefois, vous devez fournir au moins une étape supplémentaire pour effectuer le calcul de l’itinéraire. Les étapes peuvent être ajoutées à la requête entre les coordonnées d’origine et de destination.
 
-Si vous souhaitez optimiser le meilleur ordre pour visiter les étapes données, vous devez spécifier **computeBestOrder=true**. Ce scénario est également appelé « problème d’optimisation du voyageur de commerce ».
+Si vous souhaitez optimiser le meilleur ordre pour visiter les étapes données, vous devez spécifier **computeBestOrder=true** . Ce scénario est également appelé « problème d’optimisation du voyageur de commerce ».
 
 ### <a name="sample-query"></a>Exemple de requête
 
@@ -257,19 +226,13 @@ https://atlas.microsoft.com/route/directions/json?api-version=1.0&subscription-k
 
 La réponse décrit une longueur de trajet de 140 851 mètres et une durée de trajet de 9 991 secondes.
 
-<center>
-
 ![Réponse non optimisée](media/how-to-use-best-practices-for-routing/non-optimized-response-img.png)
-
-</center>
 
 L’image ci-dessous illustre le trajet résultant de cette requête. Ce trajet est un itinéraire possible. Ce n’est pas le trajet optimal en fonction de l’heure ou de la distance.
 
-<center>
-
 ![Image non optimisée](media/how-to-use-best-practices-for-routing/non-optimized-image-img.png)
 
-</center>
+
 
 L’ordre des étapes de cet itinéraire est le suivant : 0, 1, 2, 3, 4, 5 et 6.
 
@@ -283,19 +246,11 @@ https://atlas.microsoft.com/route/directions/json?api-version=1.0&subscription-k
 
 La réponse décrit une longueur de trajet de 91 814 mètres et une durée de trajet de 7 797 secondes. La distance de déplacement et le temps de trajet sont inférieurs ici, car l’API a retourné l’itinéraire optimisé.
 
-<center>
-
-![Réponse non optimisée](media/how-to-use-best-practices-for-routing/optimized-response-img.png)
-
-</center>
+![Réponse optimisée](media/how-to-use-best-practices-for-routing/optimized-response-img.png)
 
 L’image ci-dessous illustre le trajet résultant de cette requête.
 
-<center>
-
-![Image non optimisée](media/how-to-use-best-practices-for-routing/optimized-image-img.png)
-
-</center>
+![Image optimisée](media/how-to-use-best-practices-for-routing/optimized-image-img.png)
 
 L’itinéraire optimal présente l’ordre suivant pour les étapes : 0, 5, 1, 2, 4, 3 et 6.
 
@@ -307,36 +262,32 @@ L’itinéraire optimal présente l’ordre suivant pour les étapes : 0, 5, 1,
 Vous pouvez avoir des situations où vous souhaitez recréer un itinéraire pour calculer zéro ou plusieurs itinéraires alternatifs pour un itinéraire de référence. Par exemple, vous voulez montrer aux clients des itinéraires alternatifs qui passent devant votre magasin. Dans ce cas, vous devez définir un emplacement à l’aide de points de prise en charge. Voici les étapes à suivre pour définir un emplacement :
 
 1. Calculer un itinéraire en l’état et obtenir le trajet à partir de la réponse du service Route
-2. Utilisez le trajet de l’itinéraire pour rechercher les emplacements souhaités le long du trajet de l’itinéraire ou à proximité. Par exemple, vous pouvez utiliser l’[API de point d’intérêt](https://docs.microsoft.com/rest/api/maps/search/getsearchpoi) Azure Maps ou interroger vos propres données dans votre base de données.  
+2. Utilisez le trajet de l’itinéraire pour rechercher les emplacements souhaités le long du trajet de l’itinéraire ou à proximité. Par exemple, vous pouvez utiliser l’[API de point d’intérêt](/rest/api/maps/search/getsearchpoi) Azure Maps ou interroger vos propres données dans votre base de données.  
 3. Ordonner les emplacements en fonction de la distance depuis le début de l’itinéraire
-4. Ajoutez ces emplacements en tant que points de prise en charge dans une nouvelle demande d’itinéraire à l’[API Post Route Directions](https://docs.microsoft.com/rest/api/maps/route/postroutedirections). Pour en savoir plus sur les points de prise en charge, consultez la documentation sur l’[API Post Route Directions](https://docs.microsoft.com/rest/api/maps/route/postroutedirections#supportingpoints). 
+4. Ajoutez ces emplacements en tant que points de prise en charge dans une nouvelle demande d’itinéraire à l’[API Post Route Directions](/rest/api/maps/route/postroutedirections). Pour en savoir plus sur les points de prise en charge, consultez la documentation sur l’[API Post Route Directions](/rest/api/maps/route/postroutedirections#supportingpoints). 
 
-Lors de l’appel de l’[API Post Route Directions](https://docs.microsoft.com/rest/api/maps/route/postroutedirections), vous pouvez définir le temps de déviation minimal ou les contraintes de distance, ainsi que les points de prise en charge. Utilisez ces paramètres si vous souhaitez proposer d’autres itinéraires et que vous souhaitez également limiter le temps de trajet. Lorsque ces contraintes sont utilisées, les itinéraires secondaires suivent l’itinéraire de référence à partir du point d’origine pour le temps ou la distance donnés. En d’autres termes, les autres itinéraires divergent de l’itinéraire de référence en fonction des contraintes données.
+Lors de l’appel de l’[API Post Route Directions](/rest/api/maps/route/postroutedirections), vous pouvez définir le temps de déviation minimal ou les contraintes de distance, ainsi que les points de prise en charge. Utilisez ces paramètres si vous souhaitez proposer d’autres itinéraires et que vous souhaitez également limiter le temps de trajet. Lorsque ces contraintes sont utilisées, les itinéraires secondaires suivent l’itinéraire de référence à partir du point d’origine pour le temps ou la distance donnés. En d’autres termes, les autres itinéraires divergent de l’itinéraire de référence en fonction des contraintes données.
 
 L’image ci-dessous est un exemple de rendu d’itinéraires alternatifs avec des limites de déviation spécifiées pour le temps et la distance.
 
-<center>
-
 ![Autres itinéraires](media/how-to-use-best-practices-for-routing/alternative-routes-img.png)
-
-</center>
 
 ## <a name="use-the-routing-service-in-a-web-app"></a>Utiliser le service Route dans une application web
 
-Le SDK web Azure Maps fournit un [module Service](https://docs.microsoft.com/javascript/api/azure-maps-rest/?view=azure-maps-typescript-latest). Ce module est une bibliothèque d’assistance facilitant l’utilisation des API REST Azure Maps dans des applications web ou Node.js, en utilisant JavaScript ou TypeScript. Le module Service peut être utilisé pour restituer les itinéraires retournés sur la carte. Le module détermine automatiquement l’API à utiliser avec les demandes GET et POST.
+Le SDK web Azure Maps fournit un [module Service](/javascript/api/azure-maps-rest/). Ce module est une bibliothèque d’assistance facilitant l’utilisation des API REST Azure Maps dans des applications web ou Node.js, en utilisant JavaScript ou TypeScript. Le module Service peut être utilisé pour restituer les itinéraires retournés sur la carte. Le module détermine automatiquement l’API à utiliser avec les demandes GET et POST.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations, consultez :
 
 > [!div class="nextstepaction"]
-> [Service Route Azure Maps](https://docs.microsoft.com/rest/api/maps/route)
+> [Service Route Azure Maps](/rest/api/maps/route)
 
 > [!div class="nextstepaction"]
-> [Utiliser le module Service](https://docs.microsoft.com/azure/azure-maps/how-to-use-services-module)
+> [Utiliser le module Service](./how-to-use-services-module.md)
 
 > [!div class="nextstepaction"]
-> [Afficher un itinéraire sur la carte](https://docs.microsoft.com/azure/azure-maps/map-route)
+> [Afficher un itinéraire sur la carte](./map-route.md)
 
 > [!div class="nextstepaction"]
 > [Package NPM Azure Maps](https://www.npmjs.com/package/azure-maps-rest  )

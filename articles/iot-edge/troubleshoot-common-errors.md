@@ -4,19 +4,19 @@ description: Cet article vous donne des conseils pour résoudre des problèmes c
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 04/27/2020
+ms.date: 11/10/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: ed93d24bc06a6622a8ace2b0ab6b44582da001c0
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: 98ee865a3ddf6c26ffe9cb77767f3872b42018d8
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82782618"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442359"
 ---
 # <a name="common-issues-and-resolutions-for-azure-iot-edge"></a>Problèmes courants et résolutions pour Azure IoT Edge
 
@@ -222,7 +222,7 @@ Lorsque vous voyez cette erreur, vous pouvez la résoudre par la configuration d
    ![Configurer le nom DNS de la machine virtuelle](./media/troubleshoot/configure-dns.png)
 
 3. Fournissez une valeur pour **l’étiquette de nom DNS** et sélectionnez **Enregistrer**.
-4. Copiez le nouveau nom DNS, qui doit être au format **\<DNSnamelabel\>.\<vmlocation\>.cloudapp.azure.com**.
+4. Copiez le nouveau nom DNS qui doit être au format **\<DNSnamelabel\>.\<vmlocation\>.cloudapp.azure.com**.
 5. À l’intérieur de la machine virtuelle, utilisez la commande suivante pour installer le runtime IoT Edge avec votre nom DNS :
 
    * Sur Linux :
@@ -331,6 +331,25 @@ Si un déploiement automatique cible un appareil, il est prioritaire sur la déf
 Utilisez un seul type de mécanisme de déploiement par appareil, qu’il s’agisse d’un déploiement automatique ou de déploiements d’appareils individuels. Si vous avez plusieurs déploiements automatiques ciblant un appareil, vous pouvez changer la priorité ou les descriptions des cibles pour être sûr que le déploiement approprié est effectué sur l’appareil. Vous pouvez également mettre à jour le jumeau d’appareil pour qu’il ne corresponde plus à la description de la cible du déploiement automatique.
 
 Pour plus d’informations, consultez [Comprendre les déploiements automatiques IoT Edge pour un seul ou de nombreux appareils](module-deployment-monitoring.md).
+
+<!-- <1.2> -->
+::: moniker range=">=iotedge-2020-11"
+
+## <a name="iot-edge-behind-a-gateway-cannot-perform-http-requests-and-start-edgeagent-module"></a>IoT Edge derrière une passerelle ne peut pas exécuter de requêtes HTTP ni démarrer le module edgeAgent
+
+**Comportement observé :**
+
+Le démon IoT Edge est actif avec un fichier de configuration valide, mais il ne peut pas démarrer le module edgeAgent. La commande `iotedge list` retourne une liste vide. Le démon IoT Edge enregistre le rapport `Could not perform HTTP request`.
+
+**Cause racine :**
+
+Les appareils IoT Edge derrière une passerelle obtiennent leurs images de module à partir de l’appareil IoT Edge parent spécifié dans le champ `parent_hostname` du fichier config.yaml. L’erreur `Could not perform HTTP request` signifie que l’appareil enfant n’est pas en mesure d’atteindre son appareil parent via HTTP.
+
+**Résolution :**
+
+Assurez-vous que l’appareil de IoT Edge parent peut recevoir des demandes entrantes de l’appareil IoT Edge enfant. Ouvrez le trafic réseau sur les ports 443 et 6617 pour les requêtes provenant de l’appareil enfant.
+
+:::moniker-end
 
 ## <a name="next-steps"></a>Étapes suivantes
 

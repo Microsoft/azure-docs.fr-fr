@@ -3,23 +3,27 @@ title: 'Démarrage rapide : API Cassandra avec .NET - Azure Cosmos DB'
 description: Ce guide de démarrage rapide montre comment utiliser l’API Cassandra Azure Cosmos DB pour créer une application de profil avec le portail Azure et .NET
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-author: SnehaGunda
-ms.author: sngun
+author: TheovanKraay
+ms.author: thvankra
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 09/24/2018
-ms.openlocfilehash: 1afdc0319ae26fcd6c8cb3ada0b4aa8c31fe1fbb
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 10/01/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 13706b900c64b1d0aa5ce03fc95442e8dfc41051
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215007"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93099825"
 ---
 # <a name="quickstart-build-a-cassandra-app-with-net-sdk-and-azure-cosmos-db"></a>Démarrage rapide : Générer une application Cassandra avec le SDK .NET et Azure Cosmos DB
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-cassandra-dotnet.md)
-> * [Java](create-cassandra-java.md)
+> * [.NET Core](create-cassandra-dotnet-core.md)
+> * [Java v3](create-cassandra-java.md)
+> * [Java v4](create-cassandra-java-v4.md)
 > * [Node.JS](create-cassandra-nodejs.md)
 > * [Python](create-cassandra-python.md)
 >  
@@ -94,7 +98,7 @@ Cette étape est facultative. Si vous voulez savoir comment le code crée les re
 * Insérez des entités utilisateur à l’aide de l’objet IMapper avec une nouvelle session qui se connecte à l’espace de clés uprofile.
 
     ```csharp
-    mapper.Insert<User>(new User(1, "LyubovK", "Dubai"));
+    mapper.Insert<User>(new User(1, "LyubovK", "Dubai"));
     ```
     
 * Faites une requête pour obtenir les informations de tous les utilisateurs.
@@ -118,31 +122,31 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
 1. Dans le [portail Azure](https://portal.azure.com/), sélectionnez **Chaîne de connexion**.
 
-    Utilisez le ![bouton Copier](./media/create-cassandra-dotnet/copy.png) à droite de l’écran pour copier la valeur NOM D'UTILISATEUR.
+1. Utilisez le bouton :::image type="icon" source="./media/create-cassandra-dotnet/copy.png"::: à droite de l’écran pour copier la valeur NOM D’UTILISATEUR.
 
-    ![Afficher et copier une clé d'accès dans la page Chaîne de connexion du portail Azure](./media/create-cassandra-dotnet/keys.png)
+   :::image type="content" source="./media/create-cassandra-dotnet/keys.png" alt-text="Afficher et copier une clé d’accès dans la page Chaîne de connexion du portail Azure":::
 
-2. Dans Visual Studio, ouvrez le fichier Program.cs. 
+1. Dans Visual Studio, ouvrez le fichier Program.cs. 
 
-3. Collez la valeur NOM D’UTILISATEUR à partir du portail sur `<FILLME>` à la ligne 13.
+1. Collez la valeur NOM D’UTILISATEUR à partir du portail sur `<FILLME>` à la ligne 13.
 
     La ligne 13 du fichier Program.cs doit maintenant ressembler à la ligne suivante : 
 
     `private const string UserName = "cosmos-db-quickstart";`
 
-3. Revenez au portail et copiez la valeur MOT DE PASSE. Collez la valeur MOT DE PASSE à partir du portail sur `<FILLME>` à la ligne 14.
+1. Revenez au portail et copiez la valeur MOT DE PASSE. Collez la valeur MOT DE PASSE à partir du portail sur `<FILLME>` à la ligne 14.
 
     La ligne 14 du fichier Program.cs doit maintenant ressembler à la ligne suivante : 
 
     `private const string Password = "2Ggkr662ifxz2Mg...==";`
 
-4. Revenez au portail et copiez la valeur POINT DE CONTACT. Collez la valeur POINT DE CONTACT à partir du portail sur `<FILLME>` à la ligne 15.
+1. Revenez au portail et copiez la valeur POINT DE CONTACT. Collez la valeur POINT DE CONTACT à partir du portail sur `<FILLME>` à la ligne 15.
 
     La ligne 15 du fichier Program.cs doit maintenant ressembler à la ligne suivante : 
 
     `private const string CassandraContactPoint = "cosmos-db-quickstarts.cassandra.cosmosdb.azure.com"; //  DnsName`
 
-5. Enregistrez le fichier Program.cs.
+1. Enregistrez le fichier Program.cs.
     
 ## <a name="run-the-net-app"></a>Exécuter l’application .NET
 
@@ -155,13 +159,13 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
     ```
 3. Appuyez sur Ctrl + F5 pour exécuter l’application. Votre application s’affiche dans la fenêtre de votre console. 
 
-    ![Consulter et vérifier la sortie](./media/create-cassandra-dotnet/output.png)
+    :::image type="content" source="./media/create-cassandra-dotnet/output.png" alt-text="Afficher et vérifier la sortie":::
 
     Appuyez sur CTRL + C pour arrêter l’exécution du programme et fermer la fenêtre de console. 
     
 4. Dans le portail Azure, ouvrez **l’Explorateur de données** pour interroger, modifier et utiliser ces nouvelles données.
 
-    ![Afficher les données dans l’Explorateur de données](./media/create-cassandra-dotnet/data-explorer.png)
+    :::image type="content" source="./media/create-cassandra-dotnet/data-explorer.png" alt-text="Afficher les données dans l’Explorateur de données":::
 
 ## <a name="review-slas-in-the-azure-portal"></a>Vérification des contrats SLA dans le portail Azure
 

@@ -1,9 +1,9 @@
 ---
 title: Exemples d’interfaces de ligne de commande Azure pour Traffic Manager | Microsoft Docs
-description: Exemples d’interface de ligne de commande Azure
+description: En savoir plus sur un script Azure CLI que vous pouvez utiliser pour diriger le trafic dans plusieurs régions pour une haute disponibilité des applications.
 services: virtual-network
 documentationcenter: virtual-network
-author: rohinkoul
+author: duongau
 manager: twooley
 ms.service: virtual-network
 ms.devlang: na
@@ -11,13 +11,14 @@ ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 10/23/2018
-ms.author: rohink
-ms.openlocfilehash: 3b14cf2058f425f650d827e10ef0ca77f1278b55
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: f547305dd492f8e8587514474e4602f2214009cb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76938014"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89400832"
 ---
 # <a name="azure-cli-samples-for-traffic-manager"></a>Exemples d’interfaces de ligne de commande Azure pour Traffic Manager
 

@@ -1,18 +1,18 @@
 ---
 title: Mises à jour et mises à niveau de composants dans Azure Site Recovery
 description: Fournit une vue d’ensemble des mises à jour du service Azure Site Recovery et des mises à niveau des composants.
-author: rajani-janaki-ram
+author: Rajeswari-Mamilla
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 07/31/2019
-ms.author: rajanaki
-ms.openlocfilehash: 3489f7f812798504d0c57a265a04e57344105419
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: ramamill
+ms.openlocfilehash: a1ea8b6fb9800d796670161288be0d86ce6ffc42
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229113"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89424937"
 ---
 # <a name="service-updates-in-site-recovery"></a>Mises à jour de service dans Site Recovery
 
@@ -90,14 +90,13 @@ Dans ce scénario, nous vous recommandons vivement d’[activer les mises à jou
 - Pendant le processus d’activation de la réplication.
 - En définissant les paramètres de mise à jour de l’extension dans le coffre.
 
-Si vous souhaitez gérer manuellement les mises à jour, procédez comme suit :
+Si vous souhaitez gérer manuellement les mises à jour, vous pouvez choisir l’une des options suivantes :
 
-1. Dans le coffre > **Éléments répliqués**, cliquez sur cette notification en haut de l'écran : 
+1. Quand une nouvelle mise à jour de l’agent est disponible, Site Recovery fournit une notification dans le coffre vers le haut de la page. Dans le coffre > **Éléments répliqués**, cliquez sur cette notification en haut de l'écran : 
     
-    **Une nouvelle mise à jour de l’agent de réplication Site Recovery est disponible. Cliquez pour installer ->**
+    **Une nouvelle mise à jour de l’agent de réplication Site Recovery est disponible. Cliquez pour installer ->** <br/><br/>Sélectionnez les machines virtuelles auxquelles vous souhaitez appliquer la mise à jour, puis cliquez sur **OK**.
 
-4. Sélectionnez les machines virtuelles auxquelles vous souhaitez appliquer la mise à jour, puis cliquez sur **OK**.
-
+2. Sur la page vue d’ensemble de la récupération d’urgence de la machine virtuelle, vous trouverez le champ « État de l’agent » qui indique « Mise à niveau critique » si l’agent est en attente d’expiration. Cliquez dessus et suivez les instructions suivantes pour mettre à niveau manuellement la machine virtuelle.
 
 ## <a name="vmware-vmphysical-server-disaster-recovery-to-azure"></a>Récupération d’urgence des machines virtuelles VMware/serveurs physiques sur Azure
 

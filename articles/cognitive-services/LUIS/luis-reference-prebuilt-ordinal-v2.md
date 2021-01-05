@@ -3,20 +3,18 @@ title: Entité prédéfinie V2 ordinal - LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie V2 ordinal dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 09/27/2019
-ms.author: diberry
-ms.openlocfilehash: 5e852313db75e598da647ea0f985e2ee18af16de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3fd80389dfa54cb8386c13e0e05a1e71ac4bd956
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270498"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91541932"
 ---
 # <a name="ordinal-v2-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie V2 ordinal pour une application LUIS
 Le numéro V2 ordinal développe [Ordinal](luis-reference-prebuilt-ordinal.md) pour fournir des références relatives telles que `next`, `last`, et `previous`. Ces informations ne sont pas extraites à l’aide de l’entité prédéfinie ordinale.

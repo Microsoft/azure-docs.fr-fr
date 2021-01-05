@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.date: 02/28/2020
-ms.openlocfilehash: f7dc7b520cba2bbf2351d93795a1a26b3b5124be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d2e59b35a30bd838eab2b05dcacf83d8b2c21236
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79471351"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92540395"
 ---
 # <a name="what-is-apache-hive-and-hiveql-on-azure-hdinsight"></a>Présentation d’Apache Hive et HiveQL sur Azure HDInsight
 
@@ -72,14 +72,14 @@ Pour plus d’informations sur les formats de fichier pris en charge par Hive, c
 
 Hive vous permet de créer deux types de tables :
 
-* __Interne__ : Les données sont stockées dans l’entrepôt de données Hive. L’entrepôt de données se trouve dans `/hive/warehouse/` sur le stockage par défaut du cluster.
+* __Interne__  : Les données sont stockées dans l’entrepôt de données Hive. L’entrepôt de données se trouve dans `/hive/warehouse/` sur le stockage par défaut du cluster.
 
     Utilisez des tables internes lorsque l’une des conditions suivantes s’applique :
 
     * les données sont temporaires.
     * Vous voulez que Hive gère le cycle de vie de la table et des données.
 
-* __Externe__ : Les données sont stockées en dehors de l’entrepôt de données. Les données peuvent être stockées sur tout stockage accessible par le cluster.
+* __Externe__  : Les données sont stockées en dehors de l’entrepôt de données. Les données peuvent être stockées sur tout stockage accessible par le cluster.
 
     Utilisez des tables externes lorsque l’une des conditions suivantes s’applique :
 
@@ -88,7 +88,7 @@ Hive vous permet de créer deux types de tables :
     * Vous avez besoin d’un emplacement personnalisé, par exemple un compte de stockage non sélectionné par défaut.
     * Un programme autre que Hive gère le format de données, l’emplacement, etc.
 
-Pour plus d’informations, consultez le billet de blog [Introduction aux tables interne et externe Hive](https://blogs.msdn.microsoft.com/cindygross/2013/02/05/hdinsight-hive-internal-and-external-tables-intro/).
+Pour plus d’informations, consultez le billet de blog [Introduction aux tables interne et externe Hive](/archive/blogs/cindygross/hdinsight-hive-internal-and-external-tables-intro).
 
 ## <a name="user-defined-functions-udf"></a>Fonctions définies par l’utilisateur (UDF)
 
@@ -100,7 +100,7 @@ Hive peut également être étendu via des **fonctions définies par l'utilisate
 
 * [Utiliser une fonction C# définie par l’utilisateur avec Apache Hive](../hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md)
 
-* [Guide pratique pour ajouter à HDInsight une fonction Apache Hive définie par l’utilisateur](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/14/how-to-add-custom-hive-udfs-to-hdinsight.aspx)
+* [Guide pratique pour ajouter à HDInsight une fonction Apache Hive définie par l’utilisateur](/archive/blogs/bigdatasupport/how-to-add-custom-hive-udfs-to-hdinsight)
 
 * [Exemple de fonction Apache Hive définie par l’utilisateur pour convertir les formats date/heure en horodatage Hive](https://github.com/Azure-Samples/hdinsight-java-hive-udf)
 
@@ -137,7 +137,7 @@ Dans l’exemple précédent, les instructions HiveQL effectuent les opérations
 |CREATE EXTERNAL TABLE|Crée une table **externe** dans Hive. Les tables externes stockent uniquement la définition de table dans Hive. Les données restent à l’emplacement d’origine, dans le format d’origine.|
 |ROW FORMAT|indique à Hive la façon dont les données sont mises en forme. Dans ce cas, les champs de chaque journal sont séparés par un espace.|
 |STORED AS TEXTFILE LOCATION|Indique à Hive où sont stockées les données (répertoire `example/data`) et qu’elles sont stockées sous forme de texte. Les données peuvent être dans un seul fichier ou réparties sur plusieurs fichiers dans le répertoire.|
-|SELECT|Sélectionne toutes les lignes où la colonne **t4** contient la valeur **[ERROR]** . Cette instruction renvoie la valeur **3**, car trois lignes contiennent cette valeur.|
+|SELECT|Sélectionne toutes les lignes où la colonne **t4** contient la valeur **[ERROR]** . Cette instruction renvoie la valeur **3** , car trois lignes contiennent cette valeur.|
 |INPUT__FILE__NAME LIKE '%.log'|Hive tente d’appliquer le schéma à tous les fichiers dans le répertoire. Dans ce cas, le répertoire contient des fichiers qui ne correspondent pas au schéma. Pour éviter que des données incorrectes n’apparaissent dans les résultats, cette instruction indique à Hive de retourner uniquement des données provenant de fichiers se terminant par .log.|
 
 > [!NOTE]  
@@ -168,7 +168,7 @@ Ces instructions effectuent les opérations suivantes :
 |---|---|
 |CREATE TABLE IF NOT EXISTS|Si la table n’existe pas, créez-la. Étant donné que le mot clé **EXTERNAL** n’est pas utilisé, cette instruction crée une table interne. La table est stockée dans l’entrepôt de données Hive et gérée intégralement par Hive.|
 |STORED AS ORC|Stocke les données dans un format ORC (Optimized Row Columnar). ORC est un format particulièrement efficace et optimisé pour le stockage de données Hive.|
-|INSERT OVERWRITE ... SELECT|Sélectionne des lignes de la table **log4jLogs** qui contient **[ERROR]** , puis insère les données dans la table **errorLogs**.|
+|INSERT OVERWRITE ... SELECT|Sélectionne des lignes de la table **log4jLogs** qui contient **[ERROR]** , puis insère les données dans la table **errorLogs** .|
 
 > [!NOTE]  
 > Contrairement aux tables externes, la suppression d’une table interne entraîne également la suppression des données sous-jacentes.
@@ -197,11 +197,11 @@ Azure Data Factory permet d’utiliser HDInsight dans le cadre d’un pipeline D
 
 Vous pouvez utiliser les services SQL Server Integration Services (SSIS) pour exécuter un travail Hive. Le pack de fonctionnalités Azure pour SSIS fournit les composants suivants, compatibles avec les tâches Hive sur HDInsight.
 
-* [Tâche Hive d’Azure HDInsight](https://docs.microsoft.com/sql/integration-services/control-flow/azure-hdinsight-hive-task)
+* [Tâche Hive d’Azure HDInsight](/sql/integration-services/control-flow/azure-hdinsight-hive-task)
 
-* [Gestionnaire de connexions d’abonnement Azure](https://docs.microsoft.com/sql/integration-services/connection-manager/azure-subscription-connection-manager)
+* [Gestionnaire de connexions d’abonnement Azure](/sql/integration-services/connection-manager/azure-subscription-connection-manager)
 
-Pour plus d’informations, consultez la documentation relative au [Feature Pack Azure](https://docs.microsoft.com/sql/integration-services/azure-feature-pack-for-integration-services-ssis).
+Pour plus d’informations, consultez la documentation relative au [Feature Pack Azure](/sql/integration-services/azure-feature-pack-for-integration-services-ssis).
 
 ### <a name="apache-oozie"></a>Apache Oozie
 

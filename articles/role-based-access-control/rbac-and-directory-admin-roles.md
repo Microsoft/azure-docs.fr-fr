@@ -11,16 +11,16 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: overview
-ms.date: 02/27/2020
+ms.date: 07/07/2020
 ms.author: rolyon
 ms.reviewer: bagovind
 ms.custom: it-pro;
-ms.openlocfilehash: 70baddf86207c490d3b85e0f584525592f8a7ad7
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: cc4f775c3cf4c016173c485d57f203b4665c6393
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735801"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92370642"
 ---
 # <a name="classic-subscription-administrator-roles-azure-roles-and-azure-ad-roles"></a>Rôles d’administrateur d’abonnement classique, rôles Azure et rôles Azure AD
 
@@ -44,11 +44,11 @@ Dans Azure, les trois rôles d’administrateur d’abonnements classique sont A
 
 | Administrateur d’abonnements classiques | Limite | Autorisations | Notes |
 | --- | --- | --- | --- |
-| Administrateur de comptes | 1 par compte Azure | <ul><li>Accès au [Centre des comptes Azure](https://account.azure.com/Subscriptions)</li><li>Gestion de tous les abonnements d’un compte</li><li>Création de nouveaux abonnements</li><li>Annulation d’abonnements</li><li>Changement du mode de facturation d’un abonnement</li><li>Changement d’administrateur de services</li></ul> | Le concept est qu’il est propriétaire de la facturation de l’abonnement.<br>L’Administrateur de compte n’a pas accès au portail Azure. |
+| Administrateur de comptes | 1 par compte Azure | <ul><li>Gérer la facturation sur le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade)</li><li>Gestion de tous les abonnements d’un compte</li><li>Création de nouveaux abonnements</li><li>Annulation d’abonnements</li><li>Changement du mode de facturation d’un abonnement</li><li>Changement d’administrateur de services</li></ul> | Le concept est qu’il est propriétaire de la facturation de l’abonnement.<br>L’Administrateur de compte n’a pas accès au portail Azure. |
 | Administrateur de services | 1 par abonnement Azure | <ul><li>Gestion des services dans le [portail Azure](https://portal.azure.com)</li><li>Annuler l’abonnement</li><li>Attribution d’utilisateurs au rôle Coadministrateur</li></ul> | Par défaut, pour un nouvel abonnement, l’administrateur de compte est également l’administrateur de services fédérés.<br>L’administrateur de services dispose de l’accès équivalent à un utilisateur qui se voit attribuer le rôle Propriétaire sur l’étendue de l’abonnement.<br>L’Administrateur de service a un accès complet au portail Azure. |
 | Coadministrateur | 200 par abonnement | <ul><li>Mêmes privilèges d’accès que l’administrateur de services, à ceci près qu’il ne peut pas changer l’association des abonnements aux annuaires Azure</li><li>Attribution des utilisateurs au rôle Coadministrateur, mais ne peut pas changer d’administrateur de services</li></ul> | Le coadministrateur dispose de l’accès équivalent à un utilisateur qui se voit attribuer le rôle Propriétaire sur l’étendue de l’abonnement. |
 
-Sur le portail Azure, vous pouvez gérer les Coadministrateurs ou afficher l’Administrateur de Service sous l’onglet **Administrateurs classiques**.
+Sur le portail Azure, vous pouvez gérer les Coadministrateurs ou afficher l’Administrateur de Service sous l’onglet **Administrateurs classiques** .
 
 ![Administrateurs d’abonnement Azure Classic sur le portail Azure](./media/rbac-and-directory-admin-roles/subscription-view-classic-administrators.png)
 
@@ -66,7 +66,7 @@ Les abonnements Azure vous permettent d’organiser l’accès aux ressources Az
 
 Chaque abonnement est associé à un annuaire Azure AD. Pour identifier l’annuaire auquel est associé l’abonnement, ouvrez **Abonnements** dans le portail Azure, puis sélectionnez un abonnement pour voir l’annuaire.
 
-Les comptes et les abonnements sont gérés dans le [Centre des comptes Azure](https://account.azure.com/Subscriptions).
+Les comptes et les abonnements sont gérés sur le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
 
 ## <a name="azure-roles"></a>Rôles Azure
 
@@ -87,7 +87,7 @@ Dans le portail Azure, les attributions de rôles avec le contrôle RBAC Azure s
 
 ![Panneau Contrôle d’accès IAM dans le portail Azure](./media/rbac-and-directory-admin-roles/access-control-role-assignments.png)
 
-Quand vous cliquez sur l’onglet **Rôles**, vous voyez la liste des rôles intégrés et personnalisés.
+Quand vous cliquez sur l’onglet **Rôles** , vous voyez la liste des rôles intégrés et personnalisés.
 
 ![Rôles intégrés dans le portail Azure](./media/rbac-and-directory-admin-roles/roles-list.png)
 
@@ -99,11 +99,11 @@ Les rôles Azure AD sont utilisés pour gérer les ressources Azure AD d’un an
 
 | Rôle Azure AD | Autorisations | Notes |
 | --- | --- | --- |
-| [Administrateur général](../active-directory/users-groups-roles/directory-assign-admin-roles.md#company-administrator-permissions) | <ul><li>Gestion de l’accès à toutes les fonctionnalités d’administration dans Azure Active Directory, ainsi que les services qui sont fédérés à Azure Active Directory</li><li>Attribution des rôles d’administrateur à d’autres personnes</li><li>Réinitialisation des mots de passe des utilisateurs et de tous les autres administrateurs</li></ul> | La personne qui s’inscrit au locataire Azure Active Directory devient administrateur général. |
-| [Administrateur d’utilisateurs](../active-directory/users-groups-roles/directory-assign-admin-roles.md#user-administrator) | <ul><li>Création et gestion de tous les aspects liés aux utilisateurs et aux groupes</li><li>Gestion des tickets de support</li><li>Suivi de l’intégrité des services</li><li>Changement des mots de passe des utilisateurs, des administrateurs du support technique et autres administrateurs d’utilisateurs</li></ul> |  |
-| [Administrateur de facturation](../active-directory/users-groups-roles/directory-assign-admin-roles.md#billing-administrator) | <ul><li>Achats</li><li>Gérer les abonnements</li><li>Gestion des tickets de support</li><li>Suivi de l’intégrité des services</li></ul> |  |
+| [Administrateur général](../active-directory/roles/permissions-reference.md#company-administrator-permissions) | <ul><li>Gestion de l’accès à toutes les fonctionnalités d’administration dans Azure Active Directory, ainsi que les services qui sont fédérés à Azure Active Directory</li><li>Attribution des rôles d’administrateur à d’autres personnes</li><li>Réinitialisation des mots de passe des utilisateurs et de tous les autres administrateurs</li></ul> | La personne qui s’inscrit au locataire Azure Active Directory devient administrateur général. |
+| [Administrateur d’utilisateurs](../active-directory/roles/permissions-reference.md#user-administrator) | <ul><li>Création et gestion de tous les aspects liés aux utilisateurs et aux groupes</li><li>Gestion des tickets de support</li><li>Suivi de l’intégrité des services</li><li>Changement des mots de passe des utilisateurs, des administrateurs du support technique et autres administrateurs d’utilisateurs</li></ul> |  |
+| [Administrateur de facturation](../active-directory/roles/permissions-reference.md#billing-administrator) | <ul><li>Achats</li><li>Gérer les abonnements</li><li>Gestion des tickets de support</li><li>Suivi de l’intégrité des services</li></ul> |  |
 
-Dans le portail Azure, vous pouvez voir la liste des rôles Azure AD dans le panneau **Rôles et administrateurs**. Pour obtenir une liste de tous les rôles Azure AD, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/users-groups-roles/directory-assign-admin-roles.md).
+Dans le portail Azure, vous pouvez voir la liste des rôles Azure AD dans le panneau **Rôles et administrateurs** . Pour obtenir une liste de tous les rôles Azure AD, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/roles/permissions-reference.md).
 
 ![Rôles Azure AD dans le portail Azure](./media/rbac-and-directory-admin-roles/directory-admin-roles.png)
 
@@ -120,15 +120,14 @@ Globalement, les rôles Azure contrôlent les autorisations pour gérer les ress
 
 ### <a name="do-azure-roles-and-azure-ad-roles-overlap"></a>Les rôles Azure et les rôles Azure AD se chevauchent-ils ?
 
-Par défaut, les rôles Azure et les rôles Azure AD ne couvrent pas Azure et Azure AD. Toutefois, si un administrateur général élève son accès en choisissant **L’administrateur général peut gérer les groupes d’administration et les abonnements Azure** dans le portail Azure, il reçoit le rôle [Administrateur de l’accès utilisateur](built-in-roles.md#user-access-administrator) (rôle Azure) sur tous les abonnements d’un locataire spécifique. Le rôle Administrateur de l’accès utilisateur permet à l’utilisateur d’accorder à d’autres utilisateurs l’accès aux ressources Azure. Ce commutateur peut être utile pour récupérer l’accès à un abonnement. Pour plus d’informations, consultez [Élever l’accès pour gérer tous les abonnements et groupes d’administration Azure](elevate-access-global-admin.md).
+Par défaut, les rôles Azure et les rôles Azure AD ne couvrent pas Azure et Azure AD. Toutefois, si un administrateur général élève son accès en choisissant le commutateur **Gestion de l’accès pour les ressources Azure** dans le portail Azure, il reçoit le rôle [Administrateur de l’accès utilisateur](built-in-roles.md#user-access-administrator) (rôle Azure) sur tous les abonnements d’un locataire spécifique. Le rôle Administrateur de l’accès utilisateur permet à l’utilisateur d’accorder à d’autres utilisateurs l’accès aux ressources Azure. Ce commutateur peut être utile pour récupérer l’accès à un abonnement. Pour plus d’informations, consultez [Élever l’accès pour gérer tous les abonnements et groupes d’administration Azure](elevate-access-global-admin.md).
 
-Plusieurs rôles Azure AD couvrent Azure AD et Microsoft Office 365, tels que les rôles Administrateur général et Administrateur d’utilisateurs. Par exemple, si vous êtes membre du rôle Administrateur général, vous disposez des fonctionnalités de l’administrateur général dans Azure AD et Office 365, avec par exemple la possibilité d’apporter des changements dans Microsoft Exchange et Microsoft SharePoint. Toutefois, par défaut, l’administrateur général n’a pas accès aux ressources Azure.
+Plusieurs rôles Azure AD couvrent Azure AD et Microsoft 365, tels que les rôles d’administrateur général et d’administrateur d’utilisateurs. Par exemple, si vous êtes membre du rôle Administrateur général, vous disposez des fonctionnalités de l’administrateur général dans Azure AD et Microsoft 365, avec par exemple la possibilité d’apporter des changements dans Microsoft Exchange et Microsoft SharePoint. Toutefois, par défaut, l’administrateur général n’a pas accès aux ressources Azure.
 
 ![Rôles RBAC Azure et rôles Azure AD](./media/rbac-and-directory-admin-roles/azure-office-roles.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Qu’est-ce que le contrôle d’accès en fonction du rôle Azure (RBAC Azure) ?](overview.md)
-- [Autorisations des rôles d'administrateur dans Azure Active Directory](../active-directory/users-groups-roles/directory-assign-admin-roles.md)
+- [Autorisations des rôles d'administrateur dans Azure Active Directory](../active-directory/roles/permissions-reference.md)
 - [Administrateurs d’abonnement Azure Classic](classic-administrators.md)
-- [Framework d’adoption du cloud : Gestion de l’accès aux ressources dans Azure](/azure/cloud-adoption-framework/govern/resource-consistency/resource-access-management)

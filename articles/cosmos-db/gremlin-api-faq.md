@@ -3,17 +3,19 @@ title: Questions fréquentes sur l’API Gremlin dans Azure Cosmos DB
 description: Obtenez des réponses aux questions fréquentes sur l’API Gremlin dans Azure Cosmos DB
 author: SnehaGunda
 ms.service: cosmos-db
+ms.subservice: cosmosdb-graph
 ms.topic: conceptual
 ms.date: 04/28/2020
 ms.author: sngun
-ms.openlocfilehash: 416cf4f027b6f1e72641324be39ba0304301db37
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 0374886482b43eefe6df5e107fd4da371633099d
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613982"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97359776"
 ---
 # <a name="frequently-asked-questions-about-the-gremlin-api-in-azure-cosmos-db"></a>Questions fréquentes sur l’API Gremlin dans Azure Cosmos DB
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
 
 Cet article apporte des réponses à certaines questions fréquentes sur l’API Gremlin dans Azure Cosmos DB.
 
@@ -99,7 +101,7 @@ Les frais de RU sont basés sur le jeu de données de travail de la traversée, 
 
 ### <a name="whats-the-maximum-scale-that-a-graph-database-can-have-in-azure-cosmos-db-gremlin-api"></a>Quelle est la mise à l’échelle maximale qu’une base de données de graphe peut présenter dans l’API Gremlin Azure Cosmos DB ?
 
-Azure Cosmos DB utilise le [partitionnement horizontal](partition-data.md) pour répondre automatiquement aux exigences d’augmentation de stockage et de débit. Le débit et la capacité de stockage maximum d’une charge de travail sont déterminés par le nombre de partitions associées à un conteneur donné. Toutefois, un conteneur d’API Gremlin comporte un ensemble spécifique d’instructions pour garantir une expérience de performances à l’échelle correcte. Pour plus d’informations sur le partitionnement de données et les meilleurs pratiques, voir l’article sur le [partitionnement dans Azure Cosmos DB](partition-data.md).
+Azure Cosmos DB utilise le [partitionnement horizontal](partitioning-overview.md) pour répondre automatiquement aux exigences d’augmentation de stockage et de débit. Le débit et la capacité de stockage maximum d’une charge de travail sont déterminés par le nombre de partitions associées à un conteneur donné. Toutefois, un conteneur d’API Gremlin comporte un ensemble spécifique d’instructions pour garantir une expérience de performances à l’échelle correcte. Pour plus d’informations sur le partitionnement de données et les meilleurs pratiques, voir l’article sur le [partitionnement dans Azure Cosmos DB](partitioning-overview.md).
 
 ### <a name="for-cnet-development-should-i-use-the-microsoftazuregraphs-package-or-gremlinnet"></a>Pour le développement en C#/.NET, dois-je utiliser le package Microsoft.Azure.Graphs ou Gremlin.NET ?
 
@@ -107,7 +109,7 @@ L’API Gremlin d’Azure Cosmos DB se sert des pilotes open source comme connec
 
 ### <a name="how-can-i-protect-against-injection-attacks-using-gremlin-drivers"></a>Comment puis-je me protéger contre les attaques par injection à l’aide de pilotes Gremlin ?
 
-La majorité des pilotes Apache Tinkerpop Gremlin natifs offrent la possibilité de fournir un dictionnaire de paramètres pour l’exécution des requêtes. Voici un exemple montrant comment le faire sous [Gremlin.Net](https://tinkerpop.apache.org/docs/3.2.7/reference/#gremlin-DotNet) et [Gremlin-Javascript](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started/blob/master/app.js).
+La majorité des pilotes Apache Tinkerpop Gremlin natifs offrent la possibilité de fournir un dictionnaire de paramètres pour l’exécution des requêtes. Voici un exemple montrant comment le faire sous [Gremlin.Net](https://tinkerpop.apache.org/docs/3.2.7/reference/#gremlin-DotNet) et [Gremlin-Javascript](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started/blob/main/app.js).
 
 ### <a name="why-am-i-getting-the-gremlin-query-compilation-error-unable-to-find-any-method-error"></a>Pourquoi est-ce que je reçois le message d’erreur « Erreur de compilation de la requête Gremlin : Impossible de trouver une méthode » ?
 

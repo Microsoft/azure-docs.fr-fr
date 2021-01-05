@@ -1,6 +1,6 @@
 ---
 title: Azure VMware Solution by CloudSimple - Passerelles VPN
-description: En savoir plus sur les concepts VPN de site à site et de point à site CloudSimple
+description: Découvrez les passerelles VPN de site à site et de point à site CloudSimple utilisées pour envoyer du trafic chiffré entre une région CloudSimple et d’autres ressources.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 08/20/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 662fa342b3a18f726b418c496ff3fda937445301
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e013bb96990a8f3a0ef7d3a58529b200919e276
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024855"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88140630"
 ---
 # <a name="vpn-gateways-overview"></a>Vue d’ensemble des passerelles VPN
 

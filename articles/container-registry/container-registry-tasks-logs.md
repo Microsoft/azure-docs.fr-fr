@@ -3,12 +3,12 @@ title: Afficher les journaux d’exécution des tâches - Tâches
 description: Guide pratique pour afficher et gérer les journaux d’exécution générés par les tâches ACR.
 ms.topic: article
 ms.date: 03/09/2020
-ms.openlocfilehash: f7098f470a3f8a0cdac019f4bf8eb8fe14330337
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b2a10d4a3a2746acf38445673af994c6317c77de
+ms.sourcegitcommit: daab0491bbc05c43035a3693a96a451845ff193b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225773"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93027174"
 ---
 # <a name="view-and-manage-task-run-logs"></a>Afficher et gérer les journaux d’exécution des tâches
 
@@ -60,19 +60,19 @@ Run ID: cf4 was successful after 5s
 
 Azure Container Registry stocke les journaux d’exécution de toutes les tâches. Vous pouvez afficher les journaux d’exécution stockés dans le portail Azure. Ou utilisez la commande [az acr task logs](/cli/azure/acr/task#az-acr-task-logs) pour afficher un journal sélectionné. Par défaut, les journaux d’activité sont conservés 30 jours.
 
-Si une tâche est déclenchée automatiquement, par exemple par une mise à jour du code source, l’accès aux journaux stockés est l’*unique* moyen d’afficher les journaux d’exécution. Les déclencheurs de tâches automatiques incluent les validations de code source ou les requêtes de tirage, les mises à jour d’image de base et les déclencheurs de minuteur.
+Si une tâche est déclenchée automatiquement, par exemple par une mise à jour du code source, l’accès aux journaux stockés est l’ *unique* moyen d’afficher les journaux d’exécution. Les déclencheurs de tâches automatiques incluent les validations de code source ou les requêtes de tirage, les mises à jour d’image de base et les déclencheurs de minuteur.
 
 Pour afficher les journaux d’exécution dans le portail :
 
 1. Accédez à votre registre de conteneurs.
-1. Dans **Services**, sélectionnez **Tâches** > **Exécutions**.
+1. Dans **Services** , sélectionnez **Tâches** > **Exécutions**.
 1. Sélectionnez un **ID d’exécution** pour afficher l’état d’exécution et les journaux d’exécution. Le journal contient les mêmes informations qu’un journal diffusé en continu, le cas échéant.
 
 ![Afficher l’exécution d’une tâche dans le portail de connexion](./media/container-registry-tasks-logs/portal-task-run-logs.png)
 
 Pour afficher un journal à l’aide de l’interface de ligne de commande Azure, exécutez [az acr task logs](/cli/azure/acr/task#az-acr-task-logs), puis spécifiez un ID d’exécution, un nom de tâche ou une image spécifique créée par une tâche de génération. Si un nom de tâche est spécifié, la commande affiche le journal de la dernière exécution créée.
 
-L’exemple suivant génère le journal pour l’exécution dont l’ID est *CF4* :
+L’exemple suivant génère le journal pour l’exécution dont l’ID est *CF4*  :
 
 ```azurecli
 az acr task logs --registry mycontainerregistry1220 \
@@ -94,18 +94,10 @@ az acr task logs --registry mycontainerregistry1220 \
 
 Vous pouvez également enregistrer les fichiers journaux locaux dans le Stockage Azure. Par exemple, utilisez l’[interface de ligne de commande Azure](../storage/blobs/storage-quickstart-blobs-cli.md), le [portail Azure](../storage/blobs/storage-quickstart-blobs-portal.md) ou d’autres méthodes pour charger des fichiers dans un compte de stockage.
 
-
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les [tâches Azure Container Registry](container-registry-tasks-overview.md)
 
-<!-- LINKS - External -->
-[base-alpine]: https://hub.docker.com/_/alpine/
-[base-dotnet]: https://hub.docker.com/r/microsoft/dotnet/
-[base-node]: https://hub.docker.com/_/node/
-[base-windows]: https://hub.docker.com/r/microsoft/nanoserver/
-[sample-archive]: https://github.com/Azure-Samples/acr-build-helloworld-node/archive/master.zip
-[terms-of-use]: https://azure.microsoft.com/support/legal/preview-supplemental-terms/
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli

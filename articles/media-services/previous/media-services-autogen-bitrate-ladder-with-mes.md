@@ -13,14 +13,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: b7f0b77ba11a0c9c1670ec240caf45fcf61a934d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0309579a674533ebd056c8493b149cc78beef607
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74896018"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89254059"
 ---
-#  <a name="use-media-encoder-standard-to-auto-generate-a-bitrate-ladder"></a>Utiliser Media Encoder Standard pour générer automatiquement une échelle des vitesses de transmission  
+#  <a name="use-media-encoder-standard-to-auto-generate-a-bitrate-ladder"></a>Utiliser Media Encoder Standard pour générer automatiquement une échelle des vitesses de transmission
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]  
 
 ## <a name="overview"></a>Vue d’ensemble
 

@@ -6,30 +6,31 @@ author: filippopovic
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
 ms.custom: ''
-ms.openlocfilehash: 261f75344d250ae8a8d9687f4bcd80535d11716b
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: d160040620fcaa60a8adc955efcc54ac3ca2609e
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426773"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93321433"
 ---
 # <a name="group-by-options-in-synapse-sql"></a>Options de l’instruction GROUP BY dans SQL Synapse
+
 SQL Synapse permet de développer des solutions en implémentant différentes options de l’instruction GROUP BY. 
 
-## <a name="what-does-group-by-do"></a>Action de l’instruction GROUP BY
+## <a name="what-group-by-does"></a>Action de GROUP BY
 
-La clause [GROUP BY](/sql/t-sql/queries/select-group-by-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) T-SQL agrège des données en un ensemble de lignes récapitulatives.
+La clause [GROUP BY](/sql/t-sql/queries/select-group-by-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) T-SQL agrège des données en un ensemble de lignes récapitulatives.
 
-SQL à la demande prend en charge l’ensemble des options de l’instruction GROUP BY. Le pool SQL prend en charge un nombre limité d’options de l’instruction GROUP BY.
+Un pool SQL serverless prend en charge l’ensemble des options de l’instruction GROUP BY. Le pool SQL dédié prend en charge un nombre limité d’options de l’instruction GROUP BY.
 
-## <a name="group-by-options-supported-in-sql-pool"></a>Options de l’instruction GROUP BY prises en charge dans le pool SQL
+## <a name="group-by-options-supported-in-dedicated-sql-pool"></a>Options de l’instruction GROUP BY prises en charge dans le pool SQL dédié
 
-Le pool SQL ne prend pas en charge certaines options de l’instruction GROUP BY. Ces options comportent des solutions de contournement, qui sont les suivantes :
+Le pool SQL dédié ne prend pas en charge certaines options de l’instruction GROUP BY. Ces options comportent des solutions de contournement, qui sont les suivantes :
 
 * GROUP BY avec ROLLUP
 * GROUPING SETS
@@ -124,7 +125,7 @@ SELECT Cols
 FROM GrpCube;
 ```
 
-L’image suivante illustre les résultats de l’instruction [CREATE TABLE AS SELECT](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) :
+L’image suivante illustre les résultats de l’instruction [CREATE TABLE AS SELECT](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) :
 
 ![Regrouper par cube](./media/develop-group-by-options/develop-group-by-cube.png)
 

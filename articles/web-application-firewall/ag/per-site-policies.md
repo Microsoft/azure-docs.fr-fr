@@ -5,15 +5,15 @@ description: Découvrez comment configurer des stratégies de pare-feu d’appli
 services: web-application-firewall
 author: winthrop28
 ms.service: web-application-firewall
-ms.date: 01/24/2020
+ms.date: 12/08/2020
 ms.author: victorh
-ms.topic: conceptual
-ms.openlocfilehash: 1301db56cab36ae623bb94cfac97b8e4bdb934e5
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.topic: how-to
+ms.openlocfilehash: f282cfa6347dd6e6d591ac5cd8b1785e405c6c02
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81682482"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905976"
 ---
 # <a name="configure-per-site-waf-policies-using-azure-powershell"></a>Configurer des stratégies WAF par site à l’aide d’Azure PowerShell
 
@@ -25,14 +25,13 @@ En appliquant des stratégies WAF à un écouteur, vous pouvez configurer des p
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une stratégie de pare-feu d’applications web (WAF)
-> * Créer une passerelle d’application avec WAF activé
-> * Appliquer la stratégie WAF globalement, par site et par URI
-> * Créer un groupe de machines virtuelles identiques
-> * Créer un compte de stockage et configurer des diagnostics
-> * Tester la passerelle d’application
+* Configurer le réseau
+* Créer une stratégie de pare-feu d’applications web (WAF)
+* Créer une passerelle d’application avec WAF activé
+* Appliquer la stratégie WAF globalement, par site et par URI 
+* Créer un groupe de machines virtuelles identiques
+* Créer un compte de stockage et configurer des diagnostics
+* Tester la passerelle d’application
 
 ![Exemple de pare-feu d’applications web](../media/tutorial-restrict-web-traffic-powershell/scenario-waf.png)
 
@@ -145,23 +144,23 @@ $rule = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 5
 
 $variable1 = New-AzApplicationGatewayFirewallMatchVariable -VariableName RequestUri
 $condition1 = New-AzApplicationGatewayFirewallCondition -MatchVariable $variable1 -Operator Contains -MatchValue "globalBlock" 
-$rule1 = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 10 -RuleType MatchRule -MatchCondition $condition1 -Action Block
+$rule1 = New-AzApplicationGatewayFirewallCustomRule -Name globalBlock -Priority 10 -RuleType MatchRule -MatchCondition $condition1 -Action Block
 
 $variable2 = New-AzApplicationGatewayFirewallMatchVariable -VariableName RequestUri
 $condition2 = New-AzApplicationGatewayFirewallCondition -MatchVariable $variable2 -Operator Contains -MatchValue "siteAllow" 
-$rule2 = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 5 -RuleType MatchRule -MatchCondition $condition2 -Action Allow
+$rule2 = New-AzApplicationGatewayFirewallCustomRule -Name siteAllow -Priority 5 -RuleType MatchRule -MatchCondition $condition2 -Action Allow
 
 $variable3 = New-AzApplicationGatewayFirewallMatchVariable -VariableName RequestUri
 $condition3 = New-AzApplicationGatewayFirewallCondition -MatchVariable $variable3 -Operator Contains -MatchValue "siteBlock" 
-$rule3 = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 10 -RuleType MatchRule -MatchCondition $condition3 -Action Block
+$rule3 = New-AzApplicationGatewayFirewallCustomRule -Name siteBlock -Priority 10 -RuleType MatchRule -MatchCondition $condition3 -Action Block
 
 $variable4 = New-AzApplicationGatewayFirewallMatchVariable -VariableName RequestUri
 $condition4 = New-AzApplicationGatewayFirewallCondition -MatchVariable $variable4 -Operator Contains -MatchValue "URIAllow" 
-$rule4 = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 5 -RuleType MatchRule -MatchCondition $condition4 -Action Allow
+$rule4 = New-AzApplicationGatewayFirewallCustomRule -Name URIAllow -Priority 5 -RuleType MatchRule -MatchCondition $condition4 -Action Allow
 
 $variable5 = New-AzApplicationGatewayFirewallMatchVariable -VariableName RequestUri
 $condition5 = New-AzApplicationGatewayFirewallCondition -MatchVariable $variable5 -Operator Contains -MatchValue "URIBlock" 
-$rule5 = New-AzApplicationGatewayFirewallCustomRule -Name globalAllow -Priority 10 -RuleType MatchRule -MatchCondition $condition5 -Action Block
+$rule5 = New-AzApplicationGatewayFirewallCustomRule -Name URIBlock -Priority 10 -RuleType MatchRule -MatchCondition $condition5 -Action Block
 
 $policySettingGlobal = New-AzApplicationGatewayFirewallPolicySetting `
   -Mode Prevention `
@@ -290,7 +289,7 @@ Add-AzApplicationGatewayRequestRoutingRule -ApplicationGateway $AppGw `
   -Name "RequestRoutingRule" `
   -RuleType PathBasedRouting `
   -HttpListener $siteListener `
-  -UrlPathMapId $URLPathMap.Id
+  -UrlPathMap $URLPathMap
 ```
 
 ## <a name="create-a-virtual-machine-scale-set"></a>Créer un groupe de machines virtuelles identiques
@@ -307,7 +306,7 @@ $appgw = Get-AzApplicationGateway `
   -Name myAppGateway
 
 $backendPool = Get-AzApplicationGatewayBackendAddressPool `
-  -Name defaultPool `
+  -Name appGatewayBackendPool `
   -ApplicationGateway $appgw
 
 $ipConfig = New-AzVmssIpConfig `
@@ -398,7 +397,7 @@ $store = Get-AzStorageAccount `
 Set-AzDiagnosticSetting `
   -ResourceId $appgw.Id `
   -StorageAccountId $store.Id `
-  -Categories ApplicationGatewayAccessLog, ApplicationGatewayPerformanceLog, ApplicationGatewayFirewallLog `
+  -Category ApplicationGatewayAccessLog, ApplicationGatewayPerformanceLog, ApplicationGatewayFirewallLog `
   -Enabled $true `
   -RetentionEnabled $true `
   -RetentionInDays 30

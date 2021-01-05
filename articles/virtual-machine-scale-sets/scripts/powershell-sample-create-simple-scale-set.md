@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: powershell
 ms.date: 03/27/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 3d49212e6d35e2a348a7e31ff7d2f0ad49eabfc2
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: 021719751d1f1cc93d1ad841429c2e025a902c8a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83699503"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078892"
 ---
 # <a name="create-a-basic-virtual-machine-scale-set-with-powershell"></a>Créer un groupe de machines virtuelles identiques de base à l’aide de PowerShell
 Ce script crée un groupe de machines virtuelles identiques exécutant Windows Server 2016. Une fois que vous avez exécuté le script, vous pouvez accéder aux instances de la machine virtuelle via RDP.
@@ -44,4 +44,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

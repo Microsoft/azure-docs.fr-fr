@@ -8,12 +8,12 @@ ms.author: dobett
 ms.date: 08/23/2019
 ms.topic: how-to
 manager: philmea
-ms.openlocfilehash: 02481d5dcbaba15c9b17a27348207d9af64f3355
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: 43c201150ab0b2d5d350aa228a4ade5e2faf3461
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80982036"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92123111"
 ---
 # <a name="create-and-manage-an-azure-iot-central-application-from-the-csp-portal"></a>Créer et gérer une application Azure IoT Central sur le portail des CSP
 
@@ -35,7 +35,7 @@ Vous êtes dirigé vers la page Gestionnaire d’applications d’Azure IoT Cent
 
 Pour créer une application Azure IoT Central, sélectionnez **Créer** dans le menu de gauche. Choisissez l’un des modèles sectoriels, ou bien **Application personnalisée** pour créer une application à partir de zéro. Ceci charge la page de création d’application. Vous devez renseigner tous les champs de cette page, puis choisir **Créer**. Vous pouvez trouver plus d’informations sur chacun des champs ci-dessous.
 
-![Page Créer une application pour les fournisseurs de solutions cloud](media/howto-create-and-manage-applications-csp/image4.png)
+![Capture d’écran montrant la page « Créer votre application IoT » avec le bouton « Générer » sélectionné.](media/howto-create-and-manage-applications-csp/image4.png)
 
 ![Page Créer une application pour les fournisseurs de solutions cloud](media/howto-create-and-manage-applications-csp/image4-1.png)
 
@@ -63,7 +63,7 @@ Dans la mesure où Azure IoT Central dispose du contexte indiquant que vous ête
 
 Un locataire Azure Active Directory contient les identités des utilisateurs, les informations d’identification et d’autres informations de l’organisation. Vous pouvez associer plusieurs abonnements Azure à un même locataire Azure Active Directory.
 
-Pour plus d’informations, consultez [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/).
+Pour plus d’informations, consultez [Azure Active Directory](../../active-directory/index.yml).
 
 ## <a name="azure-subscription"></a>Abonnement Azure
 
@@ -71,7 +71,7 @@ Un abonnement Azure vous permet de créer des instances de services Azure. Azure
 
 Si vous n’avez pas d’abonnement Azure, vous pouvez en créer un dans le Microsoft Partner Center. Après avoir créé l’abonnement Azure, revenez à la page **Créer une application**. Votre nouvel abonnement apparaît dans la liste déroulante **Abonnement Azure**.
 
-Pour plus d’informations, consultez [Abonnements Azure](https://docs.microsoft.com/azure/guides/developer/azure-developer-guide#understanding-accounts-subscriptions-and-billing).
+Pour plus d’informations, consultez [Abonnements Azure](../../guides/developer/azure-developer-guide.md#understanding-accounts-subscriptions-and-billing).
 
 ## <a name="location"></a>Emplacement
 

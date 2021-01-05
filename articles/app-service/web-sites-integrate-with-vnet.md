@@ -4,29 +4,25 @@ description: Intégrez une application à Azure App Service avec des réseaux vi
 author: ccompy
 ms.assetid: 90bc6ec6-133d-4d87-a867-fcf77da75f5a
 ms.topic: article
-ms.date: 04/16/2020
+ms.date: 08/05/2020
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 78b49b8b7e17f12d49825390a302e28a61e10d16
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 764e0262c8a26511c55740aa1797b5ec9b59cc8e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81770838"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999432"
 ---
 # <a name="integrate-your-app-with-an-azure-virtual-network"></a>Intégrer votre application à un réseau virtuel Azure
 
-Cet article décrit la fonctionnalité d’intégration au réseau virtuel d’Azure App Service et explique comment la configurer avec des applications dans [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714). Les [réseaux virtuels Azure][VNETOverview] vous permettent de placer un grand nombre de vos ressources Azure dans un réseau routable non-Internet.
+Cet article décrit la fonctionnalité d’intégration au réseau virtuel d’Azure App Service et explique comment la configurer avec des applications dans [Azure App Service](./overview.md). Les [réseaux virtuels Azure][VNETOverview] vous permettent de placer un grand nombre de vos ressources Azure dans un réseau routable non-Internet. La fonctionnalité d’intégration au réseau virtuel permet à vos applications d’accéder à des ressources dans ou via un réseau virtuel. Elle n’autorise pas l’accès privé à vos applications.
 
-Azure App Service propose deux variantes :
+Azure App Service propose deux variantes de la fonctionnalité d’intégration au réseau virtuel :
 
 [!INCLUDE [app-service-web-vnet-types](../../includes/app-service-web-vnet-types.md)]
 
 ## <a name="enable-vnet-integration"></a>Activer une intégration au réseau virtuel
-
-> [!NOTE]
-> Si le panneau « Mise en réseau » est désactivé (grisé) dans le menu de vos applications Linux, cela signifie que la fonctionnalité n’est pas disponible actuellement.
->
 
 1. Accédez à l’interface utilisateur **Réseau** dans le portail App Service. Sous **Intégration de réseau virtuel**, sélectionnez **Cliquez ici pour configurer**.
 
@@ -58,6 +54,10 @@ Les applications contenues dans App Service sont hébergées dans des rôles de 
 
 Quand l’intégration au réseau virtuel régional est activée, votre application continue de passer des appels sortants vers Internet en empruntant les mêmes canaux que d’habitude. Les adresses sortantes figurant sur le portail des propriétés de l’application sont toujours les adresses qu’utilise votre application. Ce qui change pour votre application, c’est que les appels aux services sécurisés de point de terminaison de service ou aux adresses RFC 1918 accèdent à votre réseau virtuel. Si WEBSITE_VNET_ROUTE_ALL a la valeur 1, tout le trafic sortant peut être envoyé dans votre réseau virtuel.
 
+> [!NOTE]
+> `WEBSITE_VNET_ROUTE_ALL` n’est actuellement pas pris en charge dans les conteneurs Windows.
+> 
+
 La fonctionnalité ne prend en charge qu’une seule interface virtuelle par Worker. Une interface virtuelle par Worker signifie une intégration au réseau virtuel régional par plan App Service. Toutes les applications d’un même plan App Service peuvent utiliser la même intégration de réseau virtuel. Si vous avez besoin d’une application pour vous connecter à un autre réseau virtuel, vous devez créer un autre plan App Service. L’interface virtuelle utilisée n’est pas une ressource à laquelle les clients peuvent accéder directement.
 
 Compte tenu du mode de fonctionnement de cette technologie, le trafic utilisé avec l’intégration au réseau virtuel n’apparaît pas dans les journaux de flux du groupe de sécurité réseau (NSG) ou d’Azure Network Watcher.
@@ -75,8 +75,9 @@ L’intégration au réseau virtuel avec passerelle obligatoire prend en charge 
 
 Vous ne pouvez pas utiliser l’intégration au réseau virtuel avec passerelle obligatoire :
 
-* Avec des applications Linux.
 * Avec un réseau virtuel connecté au moyen d’Azure ExpressRoute.
+* À partir d’une application Linux.
+* À partir d’un [conteneur Windows](quickstart-custom-container.md).
 * Pour accéder à des ressources sécurisées de points de terminaison de service.
 * Avec une passerelle de coexistence qui prend en charge à la fois les connexions ExpressRoute et les VPN de point à site ou site à site.
 
@@ -84,7 +85,7 @@ Vous ne pouvez pas utiliser l’intégration au réseau virtuel avec passerelle 
 
 Pour créer une passerelle :
 
-1. [Créez un sous-réseau de passerelle][creategatewaysubnet] dans votre réseau virtuel.  
+1. [Créez un sous-réseau de passerelle][creategatewaysubnet] dans votre réseau virtuel.
 
 1. [Créez la passerelle VPN][creategateway]. Sélectionnez un type de VPN basé sur les routes.
 
@@ -106,8 +107,8 @@ Aucune configuration supplémentaire n’est nécessaire pour permettre à la fo
 
 > [!NOTE]
 > La fonctionnalité d’intégration au réseau virtuel avec passerelle obligatoire n’intègre pas une application à un réseau virtuel doté d’une passerelle ExpressRoute. Même si la passerelle ExpressRoute est configurée en [mode de coexistence][VPNERCoex], l’intégration au réseau virtuel ne fonctionne pas. Si vous avez besoin d’accéder à des ressources via une connexion ExpressRoute, utilisez la fonctionnalité d’intégration au réseau virtuel régional ou un [environnement ASE (App Service Environment)][ASE], qui s’exécute dans votre réseau virtuel.
-> 
-> 
+>
+>
 
 ### <a name="peering"></a>Peering
 
@@ -127,7 +128,7 @@ La seule opération que vous pouvez effectuer dans la vue d’application de vot
 
 L’interface utilisateur de l’intégration du réseau virtuel du plan App Service vous montre toutes les intégrations de réseau virtuel utilisées par les applications de votre plan App Service. Pour voir des détails supplémentaires sur chaque réseau virtuel, sélectionnez le réseau virtuel qui vous intéresse. Vous pouvez effectuer deux actions ici pour l’intégration au réseau virtuel avec passerelle obligatoire :
 
-* **Synchroniser le réseau** : L’opération de synchronisation du réseau s’adresse uniquement à la fonctionnalité d’intégration au réseau virtuel dépendante de la passerelle. L’exécution d’une opération de synchronisation du réseau est l’assurance que vos certificats et informations réseau sont synchronisés. Si vous ajoutez ou changez le DNS de votre réseau virtuel, effectuez une opération de synchronisation du réseau. Cette opération redémarre toutes les applications qui utilisent ce réseau virtuel.
+* **Synchroniser le réseau** : L’opération de synchronisation du réseau s’adresse uniquement à la fonctionnalité d’intégration au réseau virtuel dépendante de la passerelle. L’exécution d’une opération de synchronisation du réseau est l’assurance que vos certificats et informations réseau sont synchronisés. Si vous ajoutez ou changez le DNS de votre réseau virtuel, effectuez une opération de synchronisation du réseau. Cette opération redémarre toutes les applications qui utilisent ce réseau virtuel. Cette opération ne fonctionnera pas si l’application et le réseau virtuel utilisés appartiennent à différents abonnements.
 * **Ajouter des routes** : L’ajout de routes achemine le trafic sortant vers votre réseau virtuel.
 
 ### <a name="gateway-required-vnet-integration-routing"></a>Routage dans une intégration au réseau virtuel avec passerelle obligatoire
@@ -143,11 +144,15 @@ L’utilisation de la fonctionnalité d’intégration au réseau virtuel régio
 
 Trois types de frais sont appliqués en cas d’utilisation de la fonctionnalité d’intégration au réseau virtuel avec passerelle obligatoire :
 
-* **Frais liés au niveau tarifaire du plan App Service** : Vos applications doivent se trouver dans un plan App Service Standard, Premium ou PremiumV2. Pour plus d’informations sur ces frais, consultez [Tarification d’App Service][ASPricing].
+* **Frais liés au niveau tarifaire du plan App Service** : Vos applications doivent être dans un plan App Service Standard, Premium, PremiumV2 ou PremiumV3. Pour plus d’informations sur ces frais, consultez [Tarification d’App Service][ASPricing].
 * **Coût de transfert des données** : Les sorties de données engendrent des coûts, même si le réseau virtuel est dans le même centre de données. Ces coûts sont décrits dans [Détails de tarification des transferts de données][DataPricing].
 * **Coûts de la passerelle VPN** : La passerelle de réseau virtuel nécessaire pour la connexion VPN de point à site engendre un coût. Pour plus d’informations, consultez [Tarification Passerelle VPN][VNETPricing].
 
 ## <a name="troubleshooting"></a>Dépannage
+
+> [!NOTE]
+> L’intégration au réseau virtuel n’est pas prise en charge pour les scénarios Docker Compose dans App Service.
+>
 
 [!INCLUDE [app-service-web-vnet-troubleshooting](../../includes/app-service-web-vnet-troubleshooting.md)]
 
@@ -155,25 +160,55 @@ Trois types de frais sont appliqués en cas d’utilisation de la fonctionnalit�
 
 Une prise en charge de l’interface CLI est disponible pour l’intégration au réseau virtuel régional. Pour accéder aux commandes suivantes, [installez l’interface de ligne de commande Azure][installCLI].
 
-        az webapp vnet-integration --help
+```azurecli
+az webapp vnet-integration --help
 
-        Group
-            az webapp vnet-integration : Methods that list, add, and remove virtual network integrations
-            from a webapp.
-                This command group is in preview. It may be changed/removed in a future release.
-        Commands:
-            add    : Add a regional virtual network integration to a webapp.
-            list   : List the virtual network integrations on a webapp.
-            remove : Remove a regional virtual network integration from webapp.
+Group
+    az webapp vnet-integration : Methods that list, add, and remove virtual network
+    integrations from a webapp.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    add    : Add a regional virtual network integration to a webapp.
+    list   : List the virtual network integrations on a webapp.
+    remove : Remove a regional virtual network integration from webapp.
 
-        az appservice vnet-integration --help
+az appservice vnet-integration --help
 
-        Group
-            az appservice vnet-integration : A method that lists the virtual network integrations used in an
-            appservice plan.
-                This command group is in preview. It may be changed/removed in a future release.
-        Commands:
-            list : List the virtual network integrations used in an appservice plan.
+Group
+    az appservice vnet-integration : A method that lists the virtual network
+    integrations used in an appservice plan.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    list : List the virtual network integrations used in an appservice plan.
+```
+
+La prise en charge PowerShell de l’intégration au réseau virtuel régional est également disponible, mais vous devez créer une ressource générique avec un tableau de propriétés de resourceID du sous-réseau
+
+```azurepowershell
+# Parameters
+$sitename = 'myWebApp'
+$resourcegroupname = 'myRG'
+$VNetname = 'myVNet'
+$location = 'myRegion'
+$integrationsubnetname = 'myIntegrationSubnet'
+$subscriptionID = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+
+#Property array with the SubnetID
+$properties = @{
+  subnetResourceId = "/subscriptions/$subscriptionID/resourceGroups/$resourcegroupname/providers/Microsoft.Network/virtualNetworks/$VNetname/subnets/$integrationsubnetname"
+}
+
+#Creation of the VNet integration
+$vNetParams = @{
+  ResourceName = "$sitename/VirtualNetwork"
+  Location = $location
+  ResourceGroupName = $resourcegroupname
+  ResourceType = 'Microsoft.Web/sites/networkConfig'
+  PropertyObject = $properties
+}
+New-AzResource @vNetParams
+```
+
 
 Pour l’intégration au réseau virtuel avec passerelle obligatoire, vous pouvez intégrer App Service à un réseau virtuel Azure à l’aide de PowerShell. Pour obtenir un script prêt à l’exécution, consultez [Connect an app in Azure App Service to an Azure Virtual Network](https://gallery.technet.microsoft.com/scriptcenter/Connect-an-app-in-Azure-ab7527e3).
 
@@ -187,19 +222,19 @@ Pour l’intégration au réseau virtuel avec passerelle obligatoire, vous pouve
 
 
 <!--Links-->
-[VNETOverview]: https://azure.microsoft.com/documentation/articles/virtual-networks-overview/ 
+[VNETOverview]: ../virtual-network/virtual-networks-overview.md
 [AzurePortal]: https://portal.azure.com/
 [ASPricing]: https://azure.microsoft.com/pricing/details/app-service/
 [VNETPricing]: https://azure.microsoft.com/pricing/details/vpn-gateway/
 [DataPricing]: https://azure.microsoft.com/pricing/details/data-transfers/
-[V2VNETP2S]: https://azure.microsoft.com/documentation/articles/vpn-gateway-howto-point-to-site-rm-ps/
+[V2VNETP2S]: ../vpn-gateway/vpn-gateway-howto-point-to-site-rm-ps.md
 [ILBASE]: environment/create-ilb-ase.md
 [V2VNETPortal]: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md
 [VPNERCoex]: ../expressroute/expressroute-howto-coexist-resource-manager.md
 [ASE]: environment/intro.md
 [creategatewaysubnet]: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md#creategw
-[creategateway]: https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal#creategw
-[setp2saddresses]: https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal#addresspool
-[VNETRouteTables]: https://docs.microsoft.com/azure/virtual-network/manage-route-table/
-[installCLI]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest/
+[creategateway]: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md#creategw
+[setp2saddresses]: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md#addresspool
+[VNETRouteTables]: ../virtual-network/manage-route-table.md
+[installCLI]: /cli/azure/install-azure-cli?view=azure-cli-latest%2f
 [privateendpoints]: networking/private-endpoint.md

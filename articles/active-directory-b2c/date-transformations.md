@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/16/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c02ac9392d6f3f95deef38ff86250e96dfb76d96
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: eaf58b964517162ee7f7eb925e1e64830eedc087
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79476686"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85202549"
 ---
 # <a name="date-claims-transformations"></a>Transformations de revendications Date
 
@@ -41,7 +41,7 @@ La transformation de revendication **AssertDateTimeIsGreaterThan** est toujours 
 
 L’exemple suivant compare la revendication `currentDateTime` à la revendication `approvedDateTime`. Une erreur est générée si `currentDateTime` est postérieur à `approvedDateTime`. La transformation traite les valeurs comme étant égales si elles ont une différence de 5 minutes (30 000 millisecondes).
 
-```XML
+```xml
 <ClaimsTransformation Id="AssertApprovedDateTimeLaterThanCurrentDateTime" TransformationMethod="AssertDateTimeIsGreaterThan">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="approvedDateTime" TransformationClaimType="leftOperand" />
@@ -56,7 +56,7 @@ L’exemple suivant compare la revendication `currentDateTime` à la revendicati
 ```
 
 Le profil technique de validation `login-NonInteractive` appelle la transformation de revendication `AssertApprovedDateTimeLaterThanCurrentDateTime`.
-```XML
+```xml
 <TechnicalProfile Id="login-NonInteractive">
   ...
   <OutputClaimsTransformations>
@@ -67,7 +67,7 @@ Le profil technique de validation `login-NonInteractive` appelle la transformati
 
 Le profil technique autodéclaré appelle le profil technique de validation **login-NonInteractive**.
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
   <Metadata>
     <Item Key="DateTimeGreaterThan">Custom error message if the provided left operand is greater than the right operand.</Item>
@@ -96,7 +96,7 @@ Convertit un ClaimType **Date** en un ClaimType **DateTime**. La transformation 
 
 L’exemple suivant illustre la conversion de la revendication `dateOfBirth` (type de données de date) en une autre revendication `dateOfBirthWithTime` (type de données date/heure).
 
-```XML
+```xml
   <ClaimsTransformation Id="ConvertToDateTime" TransformationMethod="ConvertDateToDateTimeClaim">
     <InputClaims>
       <InputClaim ClaimTypeReferenceId="dateOfBirth" TransformationClaimType="inputClaim" />
@@ -125,7 +125,7 @@ Convertit un ClaimType **DateTime** en un ClaimType **Date**. La transformation 
 
 L’exemple suivant illustre la conversion de la revendication `systemDateTime` (type de données dateTime ) en une autre revendication `systemDate` (type de données date).
 
-```XML
+```xml
 <ClaimsTransformation Id="ConvertToDate" TransformationMethod="ConvertDateTimeToDateClaim">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="systemDateTime" TransformationClaimType="inputClaim" />
@@ -151,7 +151,7 @@ Obtient la date et l’heure UTC actuelles et ajoute la valeur à un ClaimType.
 | ---- | ----------------------- | --------- | ----- |
 | OutputClaim | currentDateTime | dateTime | ClaimType généré après l’appel de cette ClaimsTransformation. |
 
-```XML
+```xml
 <ClaimsTransformation Id="GetSystemDateTime" TransformationMethod="GetCurrentDateTime">
   <OutputClaims>
     <OutputClaim ClaimTypeReferenceId="systemDateTime" TransformationClaimType="currentDateTime" />
@@ -179,7 +179,7 @@ Détermine si un dateTime est postérieur, antérieur ou égal à un autre. Le r
 Utilisez cette transformation de revendication pour déterminer si deux ClaimTypes sont égales, ou antérieure ou postérieure à l’autre. Par exemple, vous pouvez stocker la dernière fois qu’un utilisateur a accepté vos conditions d’utilisation du service. Après 3 mois, vous pouvez de nouveau lui demander d’accepter les conditions d’utilisation.
 Pour exécuter la transformation de revendication,vous devez d’abord obtenir le dateTime actuel et la dernière fois que l’utilisateur a accepté les conditions d’utilisation.
 
-```XML
+```xml
 <ClaimsTransformation Id="CompareLastTOSAcceptedWithCurrentDateTime" TransformationMethod="DateTimeComparison">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="currentDateTime" TransformationClaimType="firstDateTime" />

@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec TimeLive | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et TimeLive.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 34123629-4ad5-465c-a4c1-8299f857e720
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: a3f1e74b67d30fc5d0b994093f159de0cc833628
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 49dff636e7ffb9889219abfae80a4bd8b1c0da1f
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67088582"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92516407"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-timelive"></a>Didacticiel : Intégration d’Azure Active Directory avec TimeLive
 
@@ -31,7 +27,7 @@ L’intégration de TimeLive avec Azure AD offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à TimeLive (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -59,7 +55,7 @@ Pour configurer l’intégration de TimeLive avec Azure AD, vous devez ajouter T
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez l’option **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -67,7 +63,7 @@ Pour configurer l’intégration de TimeLive avec Azure AD, vous devez ajouter T
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **TimeLive**, sélectionnez **TimeLive** dans le panneau des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **TimeLive** , sélectionnez **TimeLive** dans le panneau des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
      ![TimeLive dans la liste des résultats](common/search-new-app.png)
 
@@ -91,34 +87,34 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD avec TimeLive, procédez comme suit :
 
-1. Dans le [portail Azure](https://portal.azure.com/), sur la page d’intégration de l’application **TimeLive**, sélectionnez **Authentification unique**.
+1. Dans le [portail Azure](https://portal.azure.com/), sur la page d’intégration de l’application **TimeLive** , sélectionnez **Authentification unique**.
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
+2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
+3. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
+4. Dans la section **Configuration SAML de base** , effectuez les étapes suivantes :
 
     ![Informations d’authentification unique dans Domaine et URL TimeLive](common/sp-identifier.png)
 
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<domainname>.livetecs.com/`
+    a. Dans la zone de texte **URL de connexion** , saisissez une URL au format suivant : `https://<domainname>.livetecs.com/`
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://<domainname>.livetecs.com/`
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez l’[équipe de support technique TimeLive](mailto:support@livetecs.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
+5. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-6. Dans la section **Configurer TimeLive**, copiez la ou les URL appropriées en fonction de vos besoins.
+6. Dans la section **Configurer TimeLive** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -132,23 +128,23 @@ Pour configurer l’authentification unique Azure AD avec TimeLive, procédez c
 
 1. Dans une autre fenêtre de navigateur web, connectez-vous à votre site d’entreprise TimeLive en tant qu’administrateur.
 
-2. Sous **Options d’administration**, sélectionnez **Préférences**.
+2. Sous **Options d’administration** , sélectionnez **Préférences**.
 
-    ![Configuration de TimeLive](./media/timelive-tutorial/configure1.png)
+    ![Capture d’écran montrant les options d’administration avec l’option Préférences sélectionnée.](./media/timelive-tutorial/configure1.png)
 
-3. Dans la section **Préférence d’application**, procédez comme suit :
+3. Dans la section **Préférence d’application** , procédez comme suit :
     
-    ![Configuration de TimeLive](./media/timelive-tutorial/configure2.png)
+    ![Capture d’écran montrant la section Préférence d’application, dans laquelle vous pouvez entrer les valeurs décrites.](./media/timelive-tutorial/configure2.png)
 
     a. Sélectionnez l’onglet **Sécurité**.
 
     b. Activez la case à cocher **Activer l’authentification unique (SSO)** .
 
-    c. Dans le menu déroulant intitulé **Se connecter à l’aide de l’authentification unique (SSO) avec**, sélectionnez **SAML**.
+    c. Dans le menu déroulant intitulé **Se connecter à l’aide de l’authentification unique (SSO) avec** , sélectionnez **SAML**.
 
-    d. Dans le champ **URL d’authentification unique SAML**, collez la valeur de l’**URL de connexion** que vous avez copiée à partir du portail Azure.
+    d. Dans le champ **URL d’authentification unique SAML** , collez la valeur de l’ **URL de connexion** que vous avez copiée à partir du portail Azure.
 
-    e. Dans le champ **URL de déconnexion distante**, collez la valeur de l’**URL de déconnexion** que vous avez copiée à partir du portail Azure.
+    e. Dans le champ **URL de déconnexion distante** , collez la valeur de l’ **URL de déconnexion** que vous avez copiée à partir du portail Azure.
 
     f. Dans le Bloc-notes, ouvrez le **certificat codé en base 64** téléchargé du portail Azure, copiez son contenu, puis collez-le dans la zone de texte **X.509 Certificate** (Certificat X.509).
 
@@ -158,7 +154,7 @@ Pour configurer l’authentification unique Azure AD avec TimeLive, procédez c
 
 L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory** , sélectionnez **Utilisateurs** , puis sélectionnez **Tous les utilisateurs**.
 
     ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
 
@@ -170,11 +166,11 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
+    a. Dans le champ **Nom** , entrez **BrittaSimon**.
   
-    b. Dans le champ **Nom d’utilisateur**, tapez brittasimon@yourcompanydomain.extension. Par exemple : BrittaSimon@contoso.com
+    b. Dans le champ **Nom d’utilisateur** , tapez brittasimon@yourcompanydomain.extension. Par exemple : BrittaSimon@contoso.com
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+    c. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ Mot de passe.
 
     d. Cliquez sur **Créer**.
 
@@ -182,7 +178,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à TimeLive.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **TimeLive**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , **Toutes les applications** , puis **TimeLive**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -194,15 +190,15 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
     ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+4. Cliquez sur le bouton **Ajouter un utilisateur** , puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+5. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+7. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer**.
 
 ### <a name="create-timelive-test-user"></a>Créer un utilisateur de test TimeLive
 
@@ -212,13 +208,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans TimeLive
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette TimeLive dans le volet d’accès, vous devez être connecté automatiquement à l’application TimeLive pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette TimeLive dans le volet d’accès, vous devez être connecté automatiquement à l’application TimeLive pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

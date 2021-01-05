@@ -3,24 +3,24 @@ title: Qu’est-ce que le Gestionnaire d’instantanés StorSimple ? | Microsof
 description: Décrit le Gestionnaire d’instantanés StorSimple, son architecture et ses fonctionnalités.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 6094c31e-e2d9-4592-8a15-76bdcf60a754
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
-ms.author: twooley
+ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: e58e2d929dd1e4db16ce495ad54045e9dc3a6fb1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2214f085c30419cefb3f6f84139d5592873173f7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232065"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017982"
 ---
 # <a name="an-introduction-to-storsimple-snapshot-manager"></a>Présentation de StorSimple Snapshot Manager
 
@@ -79,7 +79,7 @@ Avec le Gestionnaire d’instantanés StorSimple, vous créez dans un premier te
 
 Le Gestionnaire d’instantanés StorSimple utilise des groupes de volumes pour créer des copies de sauvegarde cohérentes avec les applications. On parle de cohérence des applications lorsque tous les fichiers connexes et les bases de données sont synchronisés et reflètent l’état réel de l’application à un moment précis dans le temps. Les groupes de volumes (également appelés *groupes de cohérence*) constituent la base d’une tâche de sauvegarde ou de restauration.
 
-Les groupes de volumes ne sont pas équivalents aux conteneurs de volumes. Un conteneur de volume contient un ou plusieurs volumes qui partagent un compte de stockage cloud et d’autres attributs, tels que le chiffrement et la consommation de bande passante. Un conteneur de volumes peut contenir jusqu’à 256 volumes StorSimple alloués de façon dynamique. Pour plus d’informations sur les conteneurs de volumes, consultez la page [Gérer vos conteneurs de volumes](storsimple-manage-volume-containers.md). Les groupes de volumes sont des ensembles de volumes que vous configurez pour faciliter les opérations de sauvegarde. Si vous sélectionnez deux volumes appartenant à des conteneurs de volumes distincts, placez-les dans un seul groupe de volumes, puis créez une stratégie de sauvegarde pour ce groupe de volumes. Chaque volume sera sauvegardé dans le conteneur de volumes approprié à l’aide du compte de stockage approprié.
+Les groupes de volumes ne sont pas équivalents aux conteneurs de volumes. Un conteneur de volume contient un ou plusieurs volumes qui partagent un compte de stockage cloud et d’autres attributs, tels que le chiffrement et la consommation de bande passante. Un conteneur de volumes peut contenir jusqu’à 256 volumes StorSimple alloués de façon dynamique. Pour plus d’informations sur les conteneurs de volumes, consultez la page [Gérer vos conteneurs de volumes](./storsimple-8000-manage-volume-containers.md). Les groupes de volumes sont des ensembles de volumes que vous configurez pour faciliter les opérations de sauvegarde. Si vous sélectionnez deux volumes appartenant à des conteneurs de volumes distincts, placez-les dans un seul groupe de volumes, puis créez une stratégie de sauvegarde pour ce groupe de volumes. Chaque volume sera sauvegardé dans le conteneur de volumes approprié à l’aide du compte de stockage approprié.
 
 > [!NOTE]
 > Tous les volumes d’un groupe de volumes doivent provenir d’un fournisseur de services cloud unique.
@@ -140,4 +140,3 @@ Pour plus d’informations sur l’analyse des tâches de sauvegarde, accédez a
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur [l’utilisation du Gestionnaire d’instantanés StorSimple pour gérer votre solution StorSimple](storsimple-snapshot-manager-admin.md).
 * [Télécharger le Gestionnaire d’instantanés StorSimple](https://www.microsoft.com/download/details.aspx?id=44220).
-

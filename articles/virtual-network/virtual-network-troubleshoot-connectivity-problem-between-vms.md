@@ -1,6 +1,6 @@
 ---
 title: Résolution des problèmes de connectivité entre machines virtuelles Azure | Microsoft Docs
-description: Découvrez comment résoudre les problèmes de connectivité entre machines virtuelles Azure.
+description: Découvrez comment dépanner et résoudre les problèmes de connectivité que vous pouvez rencontrer entre des machines virtuelles Azure.
 services: virtual-network
 documentationcenter: na
 author: chadmath
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/30/2018
 ms.author: genli
-ms.openlocfilehash: ab3ae45081ecc481cb90af8961174e23c86e84b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: eb94b67b026ed108f31f6cd802010577665ec0d8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71056816"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87286085"
 ---
 # <a name="troubleshooting-connectivity-problems-between-azure-vms"></a>Résolution des problèmes de connectivité entre machines virtuelles Azure
 
@@ -81,11 +81,15 @@ Vous pouvez utiliser une des méthodes suivantes pour vérifier si une applicati
 
 **Machine virtuelle Windows**
 
-    netstat –ano
+```console
+netstat –ano
+```
 
 **Machine virtuelle Linux**
 
-    netstat -l
+```console
+netstat -l
+```
 
 - Exécutez la commande **telnet** sur la machine virtuelle elle-même pour tester le port. Si le test échoue, l’application ou le service n’est pas configuré pour écouter sur ce port.
 

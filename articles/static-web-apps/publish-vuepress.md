@@ -7,12 +7,13 @@ ms.service: static-web-apps
 ms.topic: tutorial
 ms.date: 05/08/2020
 ms.author: aapowell
-ms.openlocfilehash: bd9eaad0c141eda815da159e3c13d6c51f5e6200
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-js
+ms.openlocfilehash: 72b1bd4d46b0b04364b25a8460361d6a008d42a6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83593597"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91250128"
 ---
 # <a name="tutorial-publish-a-vuepress-site-to-azure-static-web-apps-preview"></a>Tutoriel : Publier un site VuePress dans Azure Static Web Apps en préversion
 
@@ -76,7 +77,7 @@ Créer une application VuePress à partir de l’interface CLI :
     echo 'node_modules' > .gitignore
     ```
 
-1. Initialisez un référentiel Git.
+1. Initialisez un dépôt Git.
 
    ```bash
     git init
@@ -109,26 +110,26 @@ Les étapes suivantes vous montrent comment créer une nouvelle application Stat
 ### <a name="create-the-application"></a>Création de l'application
 
 1. Accéder au [portail Azure](https://portal.azure.com)
-1. Cliquer sur **Créer une ressource**
-1. Rechercher **Static Web Apps**
-1. Cliquer sur **Static Web Apps (préversion)**
+1. Cliquez sur **Create a Resource** (Créer une ressource).
+1. Recherchez **Static Web Apps**.
+1. Cliquez sur **Static Web Apps (Preview)** (Static Web Apps (préversion))
 1. Cliquez sur **Créer**
 
-   :::image type="content" source="./media/publish-vuepress/create-in-portal.png" alt-text="Créer une application Static Web Apps (préversion) dans le portail":::
+   :::image type="content" source="./media/publish-vuepress/create-in-portal.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 1. Pour **Abonnement**, acceptez l’abonnement qui est listé ou sélectionnez-en un nouveau dans la liste déroulante.
 
 1. Dans _Groupe de ressources_, sélectionnez **Nouveau**. Dans _Nom du nouveau groupe de ressources_, entrez **vuepress-static-app**, puis sélectionnez **OK**.
 
-1. Indiquez ensuite un nom unique pour votre application dans la zone **Nom**. Les caractères valides sont `a-z`, `A-Z`, `0-9` et `-`. Cette valeur est utilisée comme préfixe d’URL pour votre application statique au format `https://<APP_NAME>.azurestaticapps.net`.
+1. Ensuite, entrez un nom pour votre application dans la zone **Nom**. Les caractères valides sont `a-z`, `A-Z`, `0-9` et `-`.
 
-1. Dans _Région_, sélectionnez une région disponible proche de vous.
+1. Dans _Region_ (Région), sélectionnez une région disponible proche de vous.
 
-1. Pour _Référence (SKU)_ , sélectionnez **Gratuit**.
+1. Pour _SKU_, sélectionnez **Free** (Gratuit).
 
-   :::image type="content" source="./media/publish-vuepress/basic-app-details.png" alt-text="Champs renseignés":::
+   :::image type="content" source="./media/publish-vuepress/basic-app-details.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
-1. Cliquez sur le bouton **Se connecter avec GitHub**.
+1. Cliquez sur le bouton **Sign in with GitHub** (Se connecter avec GitHub).
 
 1. Sélectionnez l’**organisation** sous laquelle vous avez créé le référentiel.
 
@@ -136,13 +137,13 @@ Les étapes suivantes vous montrent comment créer une nouvelle application Stat
 
 1. Pour _Branche_, sélectionnez **maître**.
 
-   :::image type="content" source="./media/publish-vuepress/completed-github-info.png" alt-text="Champs GitHub renseignés":::
+   :::image type="content" source="./media/publish-vuepress/completed-github-info.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ### <a name="build"></a>Build
 
 Vous ajoutez ensuite les paramètres de configuration utilisés par le processus de génération pour générer votre application. Les paramètres suivants configurent le fichier de workflow d’action GitHub.
 
-1. Cliquez sur le bouton **Suivant : Générer >** pour modifier la configuration de build.
+1. Cliquez sur le bouton **Next: Build >** (Suivant : générer >) pour modifier la configuration de la génération.
 
 1. Définissez _Emplacement de l’application_ sur **/** .
 
@@ -150,19 +151,19 @@ Vous ajoutez ensuite les paramètres de configuration utilisés par le processus
 
 Il n’est pas nécessaire de fournir une valeur pour _Emplacement de l’API_ puisque vous ne déployez pas d’API pour le moment.
 
-   :::image type="content" source="./media/publish-vuepress/build-details.png" alt-text="Paramètres de génération":::
+   :::image type="content" source="./media/publish-vuepress/build-details.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ### <a name="review-and-create"></a>Examiner et créer
 
-1. Cliquez sur le bouton **Vérifier + créer** pour vérifier l’exactitude des informations.
+1. Pour vérifier que les informations sont correctes, cliquez sur le bouton **Review + Create** (Vérifier + créer).
 
 1. Cliquez sur **Créer** pour commencer la création de l’application Azure Static Web Apps et approvisionner une action GitHub pour le déploiement.
 
 1. Une fois le déploiement terminé, cliquez sur **Accéder à la ressource**.
 
-1. Sur l’écran de la ressource, cliquez sur le lien _URL_ pour ouvrir votre application déployée. Vous devrez peut-être patienter une ou deux minutes, le temps que l’action GitHub soit terminée.
+1. Sur l’écran de la ressource, cliquez sur le lien _URL_ pour ouvrir l’application que vous avez déployée. Vous devrez peut-être patienter une ou deux minutes, le temps que l’action GitHub soit terminée.
 
-   :::image type="content" source="./media/publish-vuepress/deployed-app.png" alt-text="Application déployée":::
+   :::image type="content" source="./media/publish-vuepress/deployed-app.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ### <a name="clean-up-resources"></a>Nettoyer les ressources
 

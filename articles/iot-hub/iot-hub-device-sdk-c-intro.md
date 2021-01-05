@@ -11,16 +11,21 @@ ms.author: robinsh
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: a2c2a1d817dbe88bebc36f66b441e609b5faea2a
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+ms.openlocfilehash: 9b870e21ffd5c6a8261b6731b939b5dff558256d
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629352"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96501190"
 ---
 # <a name="azure-iot-device-sdk-for-c"></a>Azure IoT device SDK pour C
 
 Le **Kit de développement logiciel (SDK) d’appareil Azure IoT** (Azure IoT device SDK) est un ensemble de bibliothèques conçu pour simplifier le processus d’envoi et de réception de messages vers et à partir du service **Azure IoT Hub**. Il existe différentes variantes de ce kit de développement logiciel, chacune concernant une plateforme spécifique, mais cet article met l'accent sur le **kit de développement logiciel Azure IoT device SDK pour C**.
+
+> [!NOTE]
+> Le kit SDK Embedded C est une alternative pour les appareils avec contraintes qui prend en charge l’approche BYON (Bring Your Own Network). Les développeurs IoT ont la liberté d’apporter le client MQTT, le protocole TLS et le socket de leur choix pour créer une solution d’appareil. [En savoir plus sur le kit SDK Embedded C](https://github.com/Azure/azure-sdk-for-c/tree/master/sdk/docs/iot).
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
@@ -36,7 +41,7 @@ Cet article, vous initie à l’architecture du kit de développement logiciel (
 
 ## <a name="sdk-architecture"></a>Architecture du kit de développement logiciel (SDK)
 
-Vous trouverez [**Azure IoT device SDK pour C**](https://github.com/Azure/azure-iot-sdk-c) dans le référentiel GitHub. Vous pouvez consulter les détails de l’[API dans Référence de l’API C](https://docs.microsoft.com/azure/iot-hub/iot-c-sdk-ref/).
+Vous trouverez [**Azure IoT device SDK pour C**](https://github.com/Azure/azure-iot-sdk-c) dans le référentiel GitHub. Vous pouvez consulter les détails de l’[API dans Référence de l’API C](/azure/iot-hub/iot-c-sdk-ref/).
 
 Vous trouverez la dernière version des bibliothèques dans la branche **maître** du référentiel :
 
@@ -585,4 +590,4 @@ Pour en savoir plus sur le développement pour IoT Hub, consultez les [Kits de d
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)

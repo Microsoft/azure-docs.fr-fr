@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Provisionner un appareil TPM simulé auprès du service Azure IoT Hub à l’aide de C'
+title: Démarrage rapide - Provisionner un appareil TPM simulé auprès du service Azure IoT Hub à l’aide de C#
 description: Ce démarrage rapide utilise des inscriptions individuelles. Dans ce guide de démarrage rapide, vous allez créer et provisionner un appareil TPM simulé à l’aide du SDK d’appareil C auprès du service Azure IoT Hub Device Provisioning (DPS).
 author: wesmc7777
 ms.author: wesmc
@@ -12,20 +12,20 @@ ms.custom:
 - mvc
 - amqp
 - mqtt
-ms.openlocfilehash: 5d52cd134c8c0f1702f57bff1f60bffa12ef6f4d
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: e2930a3ca2ecb9d8217fdfea1cbcb0e669f61775
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687220"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94960034"
 ---
-# <a name="quickstart-provision-a-simulated-tpm-device-using-the-azure-iot-c-sdk"></a>Démarrage rapide : Approvisionner un appareil TPM simulé à l'aide du Kit de développement logiciel (SDK) Azure IoT pour C
+# <a name="quickstart-provision-a-simulated-tpm-device-using-the-azure-iot-c-sdk"></a>Démarrage rapide: Approvisionner un appareil TPM simulé à l’aide du kit de développement logiciel (SDK) C Azure IoT
 
 [!INCLUDE [iot-dps-selector-quick-create-simulated-device-tpm](../../includes/iot-dps-selector-quick-create-simulated-device-tpm.md)]
 
 Dans ce démarrage rapide, vous allez apprendre à créer et exécuter un simulateur d’appareil de module de plateforme sécurisée (TPM) sur une machine de développement Windows. Vous allez connecter cet appareil simulé à un hub IoT à l’aide d’une instance de service Device Provisioning. L’exemple de code du [kit de développement logiciel (SDK) C Azure IoT](https://github.com/Azure/azure-iot-sdk-c) sera utilisé pour inscrire l’appareil avec une instance de service Device Provisioning et simuler une séquence de démarrage de l’appareil.
 
-Si vous ne connaissez pas le processus de provisionnement automatique, veuillez consulter [Concepts de provisionnement automatique](concepts-auto-provisioning.md). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md) avant de poursuivre ce démarrage rapide. 
+Si vous ne connaissez pas le processus de provisionnement automatique, veuillez consulter la vue d’ensemble du [provisionnement](about-iot-dps.md#provisioning-process). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md) avant de poursuivre ce démarrage rapide. 
 
 Le service Azure IoT Device Provisioning prend en charge deux types d’inscriptions :
 - [Groupes d’inscription](concepts-service.md#enrollment-group) : utilisés pour inscrire plusieurs appareils connexes.
@@ -39,7 +39,7 @@ Cet article présente les inscriptions individuelles.
 
 Les prérequis suivants s’appliquent à un environnement de développement Windows. Pour Linux ou macOS, consultez la section appropriée de [Préparer votre environnement de développement](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md) dans la documentation du kit de développement logiciel (SDK).
 
-* [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](https://docs.microsoft.com/cpp/?view=vs-2019#pivot=workloads) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
+* [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](/cpp/ide/using-the-visual-studio-ide-for-cpp-desktop-development) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
 
 * Dernière version de [Git](https://git-scm.com/download/) installée.
 
@@ -47,7 +47,7 @@ Les prérequis suivants s’appliquent à un environnement de développement Win
 
 ## <a name="prepare-a-development-environment-for-the-azure-iot-c-sdk"></a>Préparer un environnement de développement pour le Kit de développement logiciel (SDK) Azure IoT pour C
 
-Dans cette section, vous allez préparer un environnement de développement pour générer le [kit de développement logiciel (SDK) C Azure IoT](https://github.com/Azure/azure-iot-sdk-c) et l’exemple de simulateur d’appareil [TPM](https://docs.microsoft.com/windows/device-security/tpm/trusted-platform-module-overview).
+Dans cette section, vous allez préparer un environnement de développement pour générer le [kit de développement logiciel (SDK) C Azure IoT](https://github.com/Azure/azure-iot-sdk-c) et l’exemple de simulateur d’appareil [TPM](/windows/device-security/tpm/trusted-platform-module-overview).
 
 1. Téléchargez le [système de génération CMake](https://cmake.org/download/).
 
@@ -74,7 +74,7 @@ Dans cette section, vous allez préparer un environnement de développement pour
 
 ## <a name="build-the-sdk-and-run-the-tpm-device-simulator"></a>Générer le kit de développement logiciel (SDK) et exécuter le simulateur d’appareil TPM
 
-Dans cette section, vous allez générer le kit de développement logiciel (SDK) C Azure IoT, qui inclut l’exemple de code du simulateur d’appareil TPM. Cet exemple fournit un [mécanisme d’attestation](concepts-security.md#attestation-mechanism) TPM via l’authentification par jeton de signature d’accès partagé (SAP).
+Dans cette section, vous allez générer le kit de développement logiciel (SDK) C Azure IoT, qui inclut l’exemple de code du simulateur d’appareil TPM. Cet exemple fournit un [mécanisme d’attestation](concepts-service.md#attestation-mechanism) TPM via l’authentification par jeton de signature d’accès partagé (SAP).
 
 1. À partir du sous-répertoire `cmake` que vous avez créé dans le référentiel Git azure-iot-sdk-c, exécutez la commande suivante pour générer l’exemple. Une solution Visual Studio pour l’appareil simulé sera également générée par cette commande de génération.
 
@@ -82,7 +82,7 @@ Dans cette section, vous allez générer le kit de développement logiciel (SDK)
     cmake -Duse_prov_client:BOOL=ON -Duse_tpm_simulator:BOOL=ON ..
     ```
 
-    Si `cmake` ne trouve pas votre compilateur C++, vous obtiendrez peut-être des erreurs de build lors de l’exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](https://docs.microsoft.com/dotnet/framework/tools/developer-command-prompt-for-vs). 
+    Si `cmake` ne trouve pas votre compilateur C++, vous obtiendrez peut-être des erreurs de build lors de l’exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](/dotnet/framework/tools/developer-command-prompt-for-vs). 
 
     Une fois la génération terminée, les dernières lignes de sortie doivent ressembler à la sortie suivante :
 
@@ -100,7 +100,7 @@ Dans cette section, vous allez générer le kit de développement logiciel (SDK)
     -- Build files have been written to: E:/IoT Testing/azure-iot-sdk-c/cmake
     ```
 
-2. Accédez au dossier racine du référentiel Git que vous avez cloné, et exécutez le simulateur [TPM](https://docs.microsoft.com/windows/device-security/tpm/trusted-platform-module-overview) à l’aide du chemin d’accès ci-dessous. Ce simulateur écoute un socket sur les ports 2321 et 2322. Ne fermez pas cette fenêtre de commande ; vous devez laisser ce simulateur s’exécuter jusqu’à la fin de ce démarrage rapide. 
+2. Accédez au dossier racine du référentiel Git que vous avez cloné, et exécutez le simulateur [TPM](/windows/device-security/tpm/trusted-platform-module-overview) à l’aide du chemin d’accès ci-dessous. Ce simulateur écoute un socket sur les ports 2321 et 2322. Ne fermez pas cette fenêtre de commande ; vous devez laisser ce simulateur s’exécuter jusqu’à la fin de ce démarrage rapide. 
 
    Si vous êtes dans le dossier *cmake*, exécutez les commandes suivantes :
 
@@ -123,7 +123,7 @@ Dans cette section, vous allez générer et exécuter un exemple qui lit la pair
 
 3. Dans la fenêtre *Explorateur de solutions* de Visual Studio, accédez au dossier **Provision\_Tools**. Cliquez avec le bouton droit sur le projet **tpm_device_provision** et sélectionnez **Définir comme projet de démarrage**. 
 
-4. Dans le menu Visual Studio, sélectionnez **Déboguer** > **Exécuter sans débogage** pour exécuter la solution. L’application lit et affiche un **_ID d’inscription_** et une **_paire de clés de type EK_** . Notez ou copiez ces valeurs. Ils seront utilisés dans la section suivante pour l’inscription d’appareil. 
+4. Dans le menu Visual Studio, sélectionnez **Déboguer** > **Exécuter sans débogage** pour exécuter la solution. L’application lit et affiche un **_ID d’inscription_** et une **_paire de clés de type EK_**. Notez ou copiez ces valeurs. Ils seront utilisés dans la section suivante pour l’inscription d’appareil. 
 
 
 <a id="portalenrollment"></a>
@@ -154,7 +154,7 @@ Dans cette section, vous allez générer et exécuter un exemple qui lit la pair
 
 Dans cette section, vous allez configurer des exemples de code pour utiliser le [protocole AMQP (Advance Message Queuing Protocol)](https://wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) pour envoyer la séquence de démarrage de l’appareil à votre instance Device Provisioning. Cette séquence de démarrage entraîne la reconnaissance et l’affectation de l’appareil à un hub IoT lié à l’instance de service Device Provisioning.
 
-1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et copiez la valeur **_Étendue de l’ID_** .
+1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et copiez la valeur **_Étendue de l’ID_**.
 
     ![Extraire des informations de point de terminaison de service Device Provisioning dans le portail](./media/quick-create-simulated-device/extract-dps-endpoints.png) 
 

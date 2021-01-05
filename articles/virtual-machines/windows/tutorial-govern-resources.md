@@ -1,6 +1,6 @@
 ---
 title: 'Tutoriel : Gérer des machines virtuelles avec PowerShell'
-description: Avec ce didacticiel, vous allez apprendre à utiliser Azure PowerShell afin de gérer les machines virtuelles Azure en appliquant le RBAC, des stratégies, des verrous et des balises
+description: Dans ce tutoriel, vous découvrez comment utiliser Azure PowerShell afin de gérer les machines virtuelles Azure en appliquant le contrôle RBAC Azure, des stratégies, des verrous et des balises
 author: tfitzmac
 ms.service: virtual-machines-windows
 ms.workload: infrastructure
@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 12/05/2018
 ms.author: tomfitz
 ms.custom: mvc
-ms.openlocfilehash: b4ce4cd53f9dda3d0f96e892128d543e59c83b26
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 393606eb4211131b2b530e3900746e5024321aa3
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100360"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844248"
 ---
 # <a name="tutorial-learn-about-windows-virtual-machine-management-with-azure-powershell"></a>Tutoriel : Découvrez-en plus sur la gestion des machines virtuelles Windows avec Azure PowerShell.
 
@@ -39,9 +39,9 @@ New-AzResourceGroup -Name myResourceGroup -Location EastUS
 
 Pour le moment, le groupe de ressources est vide.
 
-## <a name="role-based-access-control"></a>Contrôle d’accès en fonction du rôle
+## <a name="azure-role-based-access-control"></a>Contrôle d'accès en fonction du rôle Azure
 
-Vous devez vous assurer que les utilisateurs de votre organisation disposent du niveau d’accès approprié à ces ressources. Il n’est pas question de leur accorder un accès illimité, mais de faire en sorte qu’ils puissent accomplir leur travail. Le [contrôle d’accès en fonction du rôle](../../role-based-access-control/overview.md) vous permet de définir les utilisateurs autorisés à effectuer des actions spécifiques dans une étendue.
+Vous devez vous assurer que les utilisateurs de votre organisation disposent du niveau d’accès approprié à ces ressources. Il n’est pas question de leur accorder un accès illimité, mais de faire en sorte qu’ils puissent accomplir leur travail. Le [contrôle d'accès en fonction du rôle (Azure RBAC)](../../role-based-access-control/overview.md) vous permet de définir les utilisateurs autorisés à effectuer des actions spécifiques dans une étendue.
 
 Pour créer et supprimer des attributions de rôles, les utilisateurs doivent disposer d’un accès `Microsoft.Authorization/roleAssignments/*`. Cet accès est accordé par le biais du rôle Propriétaire ou Administrateur de l’accès utilisateur.
 
@@ -53,7 +53,7 @@ Pour gérer les solutions de machine virtuelle, il existe trois rôles de ressou
 
 Au lieu d’assigner des rôles à des utilisateurs, il est souvent plus facile d’utiliser un groupe Azure Active Directory hébergeant les utilisateurs qui ont besoin d’effectuer des actions similaires. Ensuite, vous affectez ce groupe au rôle approprié. Pour cet article, utilisez un groupe existant pour la gestion de la machine virtuelle, ou utilisez le portail pour [créer un groupe Azure Active Directory](../../active-directory/fundamentals/active-directory-groups-create-azure-portal.md).
 
-Après avoir créé un groupe ou trouvé un groupe existant, utilisez la commande [New-AzRoleAssignment](https://docs.microsoft.com/powershell/module/az.resources/new-azroleassignment) pour assigner le groupe Azure Active Directory au rôle Contributeur de machine virtuelle pour le groupe de ressources.  
+Après avoir créé un groupe ou trouvé un groupe existant, utilisez la commande [New-AzRoleAssignment](/powershell/module/az.resources/new-azroleassignment) pour assigner le groupe Azure Active Directory au rôle Contributeur de machine virtuelle pour le groupe de ressources.  
 
 ```azurepowershell-interactive
 $adgroup = Get-AzADGroup -DisplayName <your-group-name>
@@ -69,7 +69,7 @@ En règle générale, vous répétez ce processus pour *Contributeur de réseaux
 
 ## <a name="azure-policy"></a>Azure Policy
 
-[Azure Policy](../../governance/policy/overview.md) vous permet de vous assurer que toutes les ressources de l’abonnement répondent aux normes de l’entreprise. Votre abonnement comprend déjà plusieurs définitions de stratégie. Pour afficher les définitions de stratégie disponibles, utilisez la commande [Get-AzPolicyDefinition](https://docs.microsoft.com/powershell/module/az.resources/Get-AzPolicyDefinition) :
+[Azure Policy](../../governance/policy/overview.md) vous permet de vous assurer que toutes les ressources de l’abonnement répondent aux normes de l’entreprise. Votre abonnement comprend déjà plusieurs définitions de stratégie. Pour afficher les définitions de stratégie disponibles, utilisez la commande [Get-AzPolicyDefinition](/powershell/module/az.resources/get-azpolicydefinition) :
 
 ```azurepowershell-interactive
 (Get-AzPolicyDefinition).Properties | Format-Table displayName, policyType
@@ -81,7 +81,7 @@ Vous voyez les définitions de stratégie existantes. Le type de stratégie est 
 * Limitent les références SKU pour les machines virtuelles
 * Auditent les machines virtuelles qui n’utilisent pas de disques managés
 
-L’exemple suivant vous permet de récupérer trois définitions de stratégie basées sur le nom d’affichage. Vous utilisez la commande [New-AzPolicyAssignment](https://docs.microsoft.com/powershell/module/az.resources/new-azpolicyassignment) pour assigner ces définitions au groupe de ressources. Pour certaines stratégies, vous devez fournir des valeurs de paramètre pour définir les valeurs autorisées.
+L’exemple suivant vous permet de récupérer trois définitions de stratégie basées sur le nom d’affichage. Vous utilisez la commande [New-AzPolicyAssignment](/powershell/module/az.resources/new-azpolicyassignment) pour assigner ces définitions au groupe de ressources. Pour certaines stratégies, vous devez fournir des valeurs de paramètre pour définir les valeurs autorisées.
 
 ```azurepowershell-interactive
 # Values to use for parameters
@@ -93,7 +93,7 @@ $rg = Get-AzResourceGroup -Name myResourceGroup
 
 # Get policy definitions for allowed locations, allowed SKUs, and auditing VMs that don't use managed disks
 $locationDefinition = Get-AzPolicyDefinition | where-object {$_.properties.displayname -eq "Allowed locations"}
-$skuDefinition = Get-AzPolicyDefinition | where-object {$_.properties.displayname -eq "Allowed virtual machine SKUs"}
+$skuDefinition = Get-AzPolicyDefinition | where-object {$_.properties.displayname -eq "Allowed virtual machine size SKUs"}
 $auditDefinition = Get-AzPolicyDefinition | where-object {$_.properties.displayname -eq "Audit VMs that do not use managed disks"}
 
 # Assign policy for allowed locations
@@ -135,7 +135,7 @@ Une fois votre déploiement terminé, vous pouvez appliquer davantage de paramè
 
 Les [verrous de ressources](../../azure-resource-manager/management/lock-resources.md) empêchent les utilisateurs de votre organisation de supprimer ou de modifier accidentellement des ressources critiques. Contrairement au contrôle d’accès basé sur les rôles, les verrous de ressources permettent d’appliquer une restriction à tous les utilisateurs et rôles. Vous pouvez définir le niveau de verrouillage sur *CanNotDelete* ou *ReadOnly*.
 
-Pour verrouiller la machine virtuelle et le groupe de sécurité réseau, utilisez la commande [New-AzResourceLock](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcelock) :
+Pour verrouiller la machine virtuelle et le groupe de sécurité réseau, utilisez la commande [New-AzResourceLock](/powershell/module/az.resources/new-azresourcelock) :
 
 ```azurepowershell-interactive
 # Add CanNotDelete lock to the VM
@@ -167,7 +167,7 @@ Vous allez appliquer des [balises](../../azure-resource-manager/management/tag-r
 
 [!INCLUDE [Resource Manager governance tags Powershell](../../../includes/resource-manager-governance-tags-powershell.md)]
 
-Pour appliquer des balises à une machine virtuelle, utilisez la commande [Set-AzResource](https://docs.microsoft.com/powershell/module/az.resources/set-azresource) :
+Pour appliquer des balises à une machine virtuelle, utilisez la commande [Set-AzResource](/powershell/module/az.resources/set-azresource) :
 
 ```azurepowershell-interactive
 # Get the virtual machine
@@ -181,7 +181,7 @@ Set-AzResource -Tag @{ Dept="IT"; Environment="Test"; Project="Documentation" } 
 
 ### <a name="find-resources-by-tag"></a>Rechercher des ressources à l’aide de leurs balises
 
-Pour rechercher des ressources avec le nom et la valeur d’une balise, utilisez la commande [Get-AzResource](https://docs.microsoft.com/powershell/module/az.resources/get-azresource) :
+Pour rechercher des ressources avec le nom et la valeur d’une balise, utilisez la commande [Get-AzResource](/powershell/module/az.resources/get-azresource) :
 
 ```azurepowershell-interactive
 (Get-AzResource -Tag @{ Environment="Test"}).Name
@@ -199,7 +199,7 @@ Get-AzResource -Tag @{ Environment="Test"} | Where-Object {$_.ResourceType -eq "
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Vous ne pouvez pas supprimer le groupe de sécurité réseau verrouillé tant que vous n’avez pas supprimé le verrou. Pour supprimer le verrou, utilisez la commande [Remove-AzResourceLock](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcelock) :
+Vous ne pouvez pas supprimer le groupe de sécurité réseau verrouillé tant que vous n’avez pas supprimé le verrou. Pour supprimer le verrou, utilisez la commande [Remove-AzResourceLock](/powershell/module/az.resources/remove-azresourcelock) :
 
 ```azurepowershell-interactive
 Remove-AzResourceLock -LockName LockVM `
@@ -212,11 +212,15 @@ Remove-AzResourceLock -LockName LockNSG `
   -ResourceGroupName myResourceGroup
 ```
 
-Quand vous n’en avez plus besoin, vous pouvez utiliser la commande [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées.
+Quand vous n’en avez plus besoin, vous pouvez utiliser la commande [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées.
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name myResourceGroup
 ```
+
+## <a name="manage-costs"></a>Gérer les coûts
+
+[!INCLUDE [cost-management-horizontal](../../../includes/cost-management-horizontal.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -232,4 +236,3 @@ Passez au tutoriel suivant pour apprendre à identifier les changements et à g�
 
 > [!div class="nextstepaction"]
 > [Gestion des machines virtuelles](tutorial-config-management.md)
-

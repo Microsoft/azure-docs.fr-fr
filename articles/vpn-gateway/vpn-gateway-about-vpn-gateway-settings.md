@@ -1,18 +1,18 @@
 ---
 title: 'Passerelle VPN Azure : paramètres de configuration'
-description: Découvrez les paramètres de passerelle VPN pour les passerelles de réseau virtuel Azure.
+description: En savoir plus sur les ressources et les paramètres de la passerelle VPN pour un réseau virtuel créé dans le modèle de déploiement Resource Manager.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: conceptual
-ms.date: 01/10/2020
+ms.date: 10/21/2020
 ms.author: cherylmc
-ms.openlocfilehash: d7a2040748d170b4e536df59947ea811f149d931
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1aba87b2139fb8a7d395fb3180d2074e47310fa9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225125"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010818"
 ---
 # <a name="about-vpn-gateway-configuration-settings"></a>À propos des paramètres de configuration de la passerelle VPN
 
@@ -27,8 +27,6 @@ Les valeurs figurant dans cet article s’appliquent à des passerelles VPN (pas
 * Pour les passerelles redondantes interzone, consultez l’article [À propos des passerelles redondantes pour les Zones de disponibilité](about-zone-redundant-vnet-gateways.md).
 
 * Pour le service Virtual WAN, consultez l’article [À propos du WAN virtuel](../virtual-wan/virtual-wan-about.md).
-
-
 
 ## <a name="gateway-types"></a><a name="gwtype"></a>Types de passerelle
 
@@ -55,11 +53,11 @@ New-AzVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
 
 ### <a name="configure-a-gateway-sku"></a>Configurer une référence SKU de passerelle
 
-#### <a name="azure-portal"></a>Portail Azure
+**Azure portal**
 
 Si vous utilisez le portail Azure pour créer une passerelle de réseau virtuel Resource Manager, vous pouvez sélectionner la référence SKU de la passerelle dans la liste déroulante. Les options qui vous sont présentées correspondent au type de passerelle et au type de VPN sélectionnés.
 
-#### <a name="powershell"></a>PowerShell
+**PowerShell**
 
 L’exemple PowerShell suivant spécifie la `-GatewaySku` en tant que VpnGw1. Lorsque vous utilisez PowerShell pour créer une passerelle, vous devez d’abord créer la configuration IP, puis utiliser une variable qui y fait référence. Dans cet exemple, la variable de configuration est $gwipconfig.
 
@@ -69,7 +67,7 @@ New-AzVirtualNetworkGateway -Name VNet1GW -ResourceGroupName TestRG1 `
 -GatewayType Vpn -VpnType RouteBased
 ```
 
-#### <a name="azure-cli"></a>Azure CLI
+**Azure CLI**
 
 ```azurecli
 az network vnet-gateway create --name VNet1GW --public-ip-address VNet1GWPIP --resource-group TestRG1 --vnet VNet1 --gateway-type Vpn --vpn-type RouteBased --sku VpnGw1 --no-wait
@@ -84,6 +82,12 @@ Si vous disposez d’une passerelle VPN et que vous souhaitez utiliser une autre
 3. Vous **ne pouvez pas** effectuer de redimensionnement pour passer des références SKU de base/standard/haute performance à des références SKU VpnGw. Au lieu de cela, vous devez [effectuer la modification](#change) vers les nouvelles références SKU.
 
 #### <a name="to-resize-a-gateway"></a><a name="resizegwsku"></a>Pour redimensionner une passerelle
+
+**Azure portal**
+
+[!INCLUDE [Resize a SKU - portal](../../includes/vpn-gateway-resize-gw-portal-include.md)]
+
+**PowerShell**
 
 [!INCLUDE [Resize a SKU](../../includes/vpn-gateway-gwsku-resize-include.md)]
 
@@ -152,9 +156,9 @@ Add-AzVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -AddressPrefix 10.0.3.0/2
 
 ## <a name="local-network-gateways"></a><a name="lng"></a>Passerelles de réseau local
 
- Une passerelle de réseau local diffère d'une passerelle de réseau virtuel. Lorsque vous créez une configuration de passerelle VPN, la passerelle du réseau local représente généralement votre emplacement local. Dans le modèle de déploiement classique, la passerelle de réseau local a été appelée Site local.
+Une passerelle de réseau local diffère d'une passerelle de réseau virtuel. Lorsque vous créez une configuration de passerelle VPN, la passerelle du réseau local représente généralement votre réseau et l’appareil VPN correspondant. Dans le modèle de déploiement classique, la passerelle de réseau local a été appelée Site local.
 
-Vous donnez un nom à la passerelle de réseau local (l’adresse IP publique du périphérique VPN local) et spécifiez les préfixes d’adresse qui se situent dans l’emplacement local. Azure examine les préfixes d’adresse de destination pour le trafic réseau, consulte la configuration que vous avez spécifiée pour votre passerelle de réseau local, et route les paquets en conséquence. Vous spécifiez également des passerelles de réseau local pour les configurations avec interconnexion de réseaux virtuels qui utilisent une connexion de passerelle VPN.
+Vous donnez un nom ou nom de domaine complet à la passerelle de réseau local (l’adresse IP publique de l’appareil VPN local) et spécifiez les préfixes d’adresse qui se situent dans l’emplacement local. Azure examine les préfixes d’adresse de destination pour le trafic réseau, consulte la configuration que vous avez spécifiée pour votre passerelle de réseau local, et route les paquets en conséquence. Si vous utilisez Border Gateway Protocol (BGP) sur votre périphérique VPN, vous devez fournir l’adresse IP du pair BGP de votre périphérique VPN et le numéro de système autonome (ASN) de votre réseau local. Vous spécifiez également des passerelles de réseau local pour les configurations avec interconnexion de réseaux virtuels qui utilisent une connexion de passerelle VPN.
 
 L’exemple PowerShell suivant crée une nouvelle passerelle de réseau local :
 
@@ -172,7 +176,7 @@ Pour accéder à des ressources techniques supplémentaires et connaître les ex
 | **Classique** | **Resource Manager** |
 | --- | --- |
 | [PowerShell](/powershell/module/az.network/#networking) |[PowerShell](/powershell/module/az.network#vpn) |
-| [REST API](https://msdn.microsoft.com/library/jj154113) |[REST API](/rest/api/network/virtualnetworkgateways) |
+| [REST API](/previous-versions/azure/reference/jj154113(v=azure.100)) |[REST API](/rest/api/network/virtualnetworkgateways) |
 | Non pris en charge | [Azure CLI](/cli/azure/network/vnet-gateway)|
 
 ## <a name="next-steps"></a>Étapes suivantes

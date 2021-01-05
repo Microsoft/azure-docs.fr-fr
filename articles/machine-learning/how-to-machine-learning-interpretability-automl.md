@@ -1,24 +1,25 @@
 ---
-title: Explicabilité dans Machine Learning automatisé
+title: Explicabilité dans ML automatisé (version préliminaire)
 titleSuffix: Azure Machine Learning
 description: Découvrez comment obtenir des explications sur la façon dont votre modèle de Machine Learning automatisé détermine l’importance d’une caractéristique et effectue des prédictions lors de l’utilisation du Kit de développement logiciel (SDK) Azure Machine Learning.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
-ms.author: mesameki
-author: mesameki
-ms.date: 03/11/2020
-ms.openlocfilehash: e0ec6cbc4cea926dfc50cdae247aea5d765c20ca
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.custom: how-to, automl
+ms.author: mithigpe
+author: minthigpen
+ms.date: 07/09/2020
+ms.openlocfilehash: cf1eb1c72cc93fcb72862b15f3884969915c24dd
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691223"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93360647"
 ---
-# <a name="interpretability-model-explanations-in-automated-machine-learning"></a>Interprétabilité : explications des modèles en Machine Learning automatisé
+# <a name="interpretability-model-explanations-in-automated-machine-learning-preview"></a>Interprétabilité : explications des modèles en machine learning automatisé (version préliminaire)
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Cet article explique comment obtenir des explications pour le Machine Learning (ML) automatisé dans Azure Machine Learning. Le ML automatisé vous aide à comprendre l’importance des caractéristiques traitées. 
 
@@ -32,19 +33,27 @@ Dans cet article, vous apprendrez comment :
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Fonctionnalités d’interprétabilité. Exécutez `pip install azureml-interpret azureml-contrib-interpret` pour obtenir les packages nécessaires.
+- Fonctionnalités d’interprétabilité. Exécutez `pip install azureml-interpret` pour obtenir le package nécessaire.
 - Des connaissances en matière de génération d’expériences de ML automatisé. Pour plus d’informations sur la façon d’utiliser le Kit de développement logiciel (SDK) Azure Machine Learning, suivez ce [tutoriel sur les modèles de régression](tutorial-auto-train-models.md) ou consultez la rubrique [Configurer des expériences de ML automatisé](how-to-configure-auto-train.md).
 
 ## <a name="interpretability-during-training-for-the-best-model"></a>Interprétabilité pendant l’entraînement pour le meilleur modèle
 
 Récupérez l’explication à partir de `best_run`, qui inclut des explications pour les caractéristiques traitées.
 
+> [!Warning]
+> L’interprétation, la meilleure explication du modèle, n’est pas disponible pour les expériences de prévision de ML automatique, qui recommandent les algorithmes suivants comme meilleur modèle : 
+> * ForecastTCN
+> * Moyenne 
+> * Naive
+> * Moyenne saisonnière 
+> * Naive saisonnière
+
 ### <a name="download-engineered-feature-importance-from-artifact-store"></a>Télécharger l’importance des caractéristiques d’ingénierie à partir de la boutique d’artefacts
 
 Vous pouvez utiliser `ExplanationClient` pour télécharger des explications de caractéristiques traitées à partir du magasin d’artefacts de `best_run`. 
 
 ```python
-from azureml.explain.model._internal.explanation_client import ExplanationClient
+from azureml.interpret import ExplanationClient
 
 client = ExplanationClient.from_run(best_run)
 engineered_explanations = client.download_model_explanation(raw=False)
@@ -90,7 +99,7 @@ Afin de générer une explication pour les modèles AutoML, utilisez la classe `
 MimicWrapper prend également l’objet `automl_run` où les explications de caractéristiques traitées seront chargées.
 
 ```python
-from azureml.explain.model.mimic_wrapper import MimicWrapper
+from azureml.interpret import MimicWrapper
 
 # Initialize the Mimic Explainer
 explainer = MimicWrapper(ws, automl_explainer_setup_obj.automl_estimator,
@@ -111,7 +120,7 @@ engineered_explanations = explainer.explain(['local', 'global'], eval_dataset=au
 print(engineered_explanations.get_feature_importance_dict())
 ```
 
-### <a name="interpretability-during-inference"></a>Interprétabilité pendant l’inférence
+## <a name="interpretability-during-inference"></a>Interprétabilité pendant l’inférence
 
 Dans cette section, vous allez apprendre à rendre un modèle de ML automatisé opérationnel avec l’explicatif qui a été utilisé pour calculer les explications dans la section précédente.
 

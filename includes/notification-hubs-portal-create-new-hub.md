@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 01/17/2019
 ms.author: jowargo
 ms.custom: include file
-ms.openlocfilehash: 5afcc8e4524a0e8353766ba239d5ab9161b29d86
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 2ec602f056b339a1b1dcb78d6b8d7583aeaf0434
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "67509112"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009101"
 ---
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
@@ -41,7 +41,7 @@ ms.locfileid: "67509112"
 
 1. Sélectionnez **Notifications** (icône de cloche), puis **Accéder à la ressource**. Vous pouvez également actualiser la liste dans la page **Notification Hubs** et sélectionner votre hub.
 
-      ![Portail Azure -> Notifications -> Accéder à la ressource](./media/notification-hubs-portal-create-new-hub/go-to-notification-hub.png)
+      ![Portail Azure -Accéder à la ressource](./media/notification-hubs-portal-create-new-hub/go-to-notification-hub.png)
 
 1. Sélectionnez **Stratégies d’accès** dans la liste. Notez que les deux chaînes de connexion sont disponibles pour vous. Vous en aurez besoin pour gérer les notifications Push.
 

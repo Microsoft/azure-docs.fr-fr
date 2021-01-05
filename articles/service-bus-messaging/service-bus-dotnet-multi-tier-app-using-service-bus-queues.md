@@ -1,22 +1,16 @@
 ---
 title: Application multiniveau .NET utilisant Azure Service Bus | Microsoft Docs
 description: Un didacticiel .NET qui vous permet de développer dans Azure une application multiniveau qui utilise les files d’attente de Service Bus pour communiquer entre les différents niveaux.
-services: service-bus-messaging
-documentationcenter: .net
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 01/23/2019
-ms.author: aschhab
-ms.openlocfilehash: d4d837bb49e4ce80340d59f8a01334f3c80ff413
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 40529df5195a29fbf2ff4887311932c2ffbf471d
+ms.sourcegitcommit: 2e9643d74eb9e1357bc7c6b2bca14dbdd9faa436
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60403094"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96029893"
 ---
 # <a name="net-multi-tier-application-using-azure-service-bus-queues"></a>Application multiniveau .NET avec les files d’attente Azure Service Bus
 
@@ -31,11 +25,11 @@ Vous allez apprendre les opérations suivantes :
 
 [!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
-Dans ce didacticiel, vous allez générer et exécuter l'application multiniveau dans un service cloud Azure. Le composant frontal est un rôle web ASP.NET MVC et le composant principal est un rôle de travail qui utilise une file d’attente Service Bus. Vous pouvez créer la même application multiniveau avec le composant frontal comme projet web déployé sur un site web Azure au lieu d’un service cloud. Vous pouvez également essayer le didacticiel [Application hybride .NET locale/dans le cloud](../service-bus-relay/service-bus-dotnet-hybrid-app-using-service-bus-relay.md).
+Dans ce didacticiel, vous allez générer et exécuter l'application multiniveau dans un service cloud Azure. Le composant frontal est un rôle web ASP.NET MVC et le composant principal est un rôle de travail qui utilise une file d’attente Service Bus. Vous pouvez créer la même application multiniveau avec le composant frontal comme projet web déployé sur un site web Azure au lieu d’un service cloud. Vous pouvez également essayer le didacticiel [Application hybride .NET locale/dans le cloud](../azure-relay/service-bus-dotnet-hybrid-app-using-service-bus-relay.md).
 
 La capture d’écran suivante présente l’application terminée.
 
-![][0]
+![Capture d’écran de la page d’envoi de l’application.][0]
 
 ## <a name="scenario-overview-inter-role-communication"></a>Vue d’ensemble du scénario : communication entre les rôles
 Pour envoyer une commande en traitement, le composant frontal d’interface utilisateur qui s’exécute dans le rôle web doit communiquer avec la logique centrale qui s’exécute dans le rôle de travail. Cet exemple utilise la messagerie Service Bus pour la communication entre les niveaux.
@@ -44,7 +38,7 @@ L’utilisation de la messagerie Service Bus entre les niveaux Web et central d�
 
 Service Bus fournit deux entités pour prendre en charge la messagerie répartie : les files d’attente et les rubriques. Avec les files d'attente, chaque message envoyé à la file d'attente est utilisé par un seul destinataire. Les rubriques prennent en charge le modèle de publication/d’abonnement, dans lequel chaque message publié est mis à la disposition d’un abonnement inscrit dans la rubrique. Chaque abonnement gère de façon logique sa propre file d’attente de messages. Les abonnements peuvent également être configurés avec des règles de filtrage, qui ne transmettent à la file d’attente de l’abonnement que les messages correspondant aux critères du filtre. L’exemple suivant utilise les files d’attente Service Bus.
 
-![][1]
+![Diagramme montrant la communication entre le rôle Web, Service Bus et le rôle de travail.][1]
 
 Ce mécanisme de communication présente plusieurs avantages par rapport à la messagerie directe :
 
@@ -52,7 +46,7 @@ Ce mécanisme de communication présente plusieurs avantages par rapport à la m
 * **Nivellement de charge.** Dans de nombreuses applications, la charge système varie dans le temps, alors que le temps de traitement nécessaire à chaque élément de travail est normalement constant. L'ajout d'une file d'attente entre les producteurs et les consommateurs des messages fait que l'application de destination (le rôle de travail) n'a besoin d'être configurée que pour une charge de travail moyenne, plutôt que pour une charge de travail maximale. La file d’attente s’allonge et se raccourcit en fonction de la charge entrante. Ceci permet de faire des économies en termes d'infrastructures nécessaires pour faire face à la charge de travail de l'application.
 * **Équilibrage de la charge.** À mesure que la charge augmente, d'autres processus de travail peuvent être ajoutés pour lire les éléments de la file d'attente. Chaque message est traité par un seul des processus de travail. De plus, cet équilibrage de la charge basé sur l’extraction permet une utilisation optimale des ordinateurs de travail, même si ceux-ci diffèrent en termes de puissance de traitement, car ils extraient les messages au maximum de leur capacité. Ce modèle est souvent appelé modèle *consommateur concurrent*.
   
-  ![][2]
+  ![Diagramme montrant la communication entre le rôle Web, Service Bus et les deux rôles de travail.][2]
 
 Les sections qui suivent présentent le code de mise en œuvre de cette architecture.
 
@@ -69,29 +63,29 @@ Ensuite, ajoutez le code permettant d’envoyer les éléments à une file d’a
 
 ### <a name="create-the-project"></a>Créer le projet
 
-1. Lancez Visual Studio avec des privilèges d’administrateur : cliquez avec le bouton droit sur l’icône du programme **Visual Studio**, puis cliquez sur **Exécuter en tant qu’administrateur**. L’émulateur de calcul Azure, présenté plus loin dans cet article , nécessite que Visual Studio soit démarré avec les privilèges d’administrateur.
+1. Lancez Visual Studio avec des privilèges d’administrateur : cliquez avec le bouton droit sur l’icône du programme **Visual Studio**, puis cliquez sur **Exécuter en tant qu’administrateur**. L’Émulateur de calcul Azure, présenté plus loin dans cet article, nécessite que Visual Studio soit démarré avec des privilèges d’administrateur.
    
    Dans Visual Studio, dans le menu **Fichier**, cliquez sur **Nouveau**, puis sur **Projet**.
 2. Dans **Modèles installés**, sous **Visual C#** , cliquez sur **Cloud**, puis sur **Azure Cloud Service**. Nommez ce projet **MultiTierApp**. Cliquez ensuite sur **OK**.
    
-   ![][9]
+   ![Capture d’écran de la boîte de dialogue Nouveau projet avec Cloud sélectionné et Azure Cloud Service Visual C# mis en surbrillance et délimité en rouge.][9]
 3. À partir du volet **Rôles**, double-cliquez sur **Rôle Web ASP.NET**.
    
-   ![][10]
+   ![Capture d’écran de la boîte de dialogue Nouveau service Microsoft Azure Cloud avec le rôle Web ASP.NET sélectionné et WebRole1 également sélectionné.][10]
 4. Passez la souris sur **WebRole1** sous **Azure Cloud Service Solution**, cliquez sur l’icône en forme de crayon et renommez le rôle Web **FrontendWebRole**. Cliquez ensuite sur **OK**. (Entrez bien « Frontend » avec un « e » minuscule, et non « FrontEnd ».)
    
-   ![][11]
+   ![Capture d’écran de la boîte de dialogue Nouveau service Microsoft Azure Cloud avec la solution renommée FrontendWebRole.][11]
 5. Dans la liste **Sélectionner un modèle** de la boîte de dialogue **Nouveau projet ASP.NET**, cliquez sur **MVC**.
    
-   ![][12]
+   ![Capture d’écran de la boîte de dialogue Nouveau projet ASP.NET avec MVC mis en surbrillance et délimité en rouge, ainsi que l’option Modifier l’authentification, délimitée en rouge.][12]
 6. Toujours dans la boîte de dialogue **Nouveau projet ASP.NET**, cliquez sur le bouton **Modifier l’authentification**. Dans la boîte de dialogue **Modifier l’authentification**, vérifiez que l’option **Aucune authentification** est sélectionnée et cliquez sur **OK**. Pour ce didacticiel, vous déployez une application qui n’a pas besoin de connexion de l’utilisateur.
    
-    ![][16]
+    ![Capture d’écran de la boîte de dialogue Modifier l’authentification avec l’option Aucune authentification sélectionnée et délimitée en rouge.][16]
 7. Dans la boîte de dialogue **Nouveau projet ASP.NET**, cliquez sur **OK** pour créer le projet.
 8. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur **Références** dans le projet **FrontendWebRole**, puis cliquez sur **Gérer les packages NuGet**.
 9. Cliquez sur l’onglet **Parcourir**, puis recherchez **WindowsAzure.ServiceBus**. Sélectionnez le package **WindowsAzure.ServiceBus**, cliquez sur **Installer**, puis acceptez les conditions d’utilisation.
    
-   ![][13]
+   ![Capture d’écran de la boîte de dialogue Gérer les packages NuGet avec WindowsAzure.ServiceBus mis en surbrillance et l’option Installer délimitée en rouge.][13]
    
    Notez que les assemblys client nécessaires sont maintenant référencés et que certains nouveaux fichiers de code ont été ajoutés.
 10. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur **Modèles** et cliquez sur **Ajouter**, puis sur **Classe**. Dans la zone **Nom**, saisissez le nom **OnlineOrder.cs**. Cliquez ensuite sur **Ajouter**.
@@ -173,16 +167,16 @@ Dans cette section, vous créez les différentes pages affichées par votre appl
 4. Dans le menu **Générer**, cliquez sur **Générer la solution** pour vérifier que votre travail est correct.
 5. Maintenant, créez l’affichage de la méthode `Submit()` créée auparavant. Cliquez avec le bouton droit dans la méthode `Submit()` (la surcharge de `Submit()` qui n’accepte aucun paramètre), puis choisissez **Ajouter une vue**.
    
-   ![][14]
+   ![Capture d’écran du code avec focalisation sur la méthode Envoyer et une liste déroulante avec l’option Ajouter une vue mise en surbrillance.][14]
 6. La boîte de dialogue qui s’affiche permet de créer l’affichage. Dans la liste **Modèle**, choisissez **Créer**. Dans la liste **Classe de modèle**, sélectionnez la classe **OnlineOrder**.
    
-   ![][15]
+   ![Capture d’écran de la boîte de dialogue Ajouter une vue avec les listes déroulantes Modèle et Classe de modèle, délimitées en rouge.][15]
 7. Cliquez sur **Add**.
 8. À présent, modifiez le nom affiché de votre application. Dans **l’Explorateur de solutions**, double-cliquez sur le fichier **Views\Shared\\_Layout.cshtml** pour l’ouvrir dans l’éditeur de Visual Studio.
 9. Remplacez toutes les occurrences de **Mon application ASP.NET** par **Northwind Traders Products**.
 10. Supprimez les liens **Home**, **About** et **Contact**. Supprimez le code en surbrillance :
     
-    ![][28]
+    ![Capture d’écran du code avec trois lignes de code de lien d’action H T M L mis en surbrillance.][28]
 11. Enfin, modifiez la page d'envoi pour inclure des informations sur la file d'attente. Dans **l’Explorateur de solutions**, double-cliquez sur le fichier **Views\Home\Submit.cshtml** pour l’ouvrir dans l’éditeur de Visual Studio. Ajoutez la ligne suivante après `<h2>Submit</h2>`. À ce stade, `ViewBag.MessageCount` est vide. Vous le remplirez plus tard.
     
     ```html
@@ -190,7 +184,7 @@ Dans cette section, vous créez les différentes pages affichées par votre appl
     ```
 12. Vous avez maintenant implémenté votre interface utilisateur. Vous pouvez appuyer sur **F5** pour exécuter votre application et vérifier qu’elle apparaît bien comme vous le souhaitez.
     
-    ![][17]
+    ![Capture d’écran de la page d’envoi de l’application.][17]
 
 ### <a name="write-the-code-for-submitting-items-to-a-service-bus-queue"></a>Écriture de code pour l'envoi d'éléments dans une file d'attente Service Bus
 Maintenant, ajoutez le code pour envoyer des éléments dans une file d’attente. Tout d’abord, vous créez une classe qui contient les informations de connexion à votre file d’attente Service Bus. Ensuite, initialisez votre connexion à partir de Global.aspx.cs. Enfin, mettez à jour le code d’envoi que vous avez créé précédemment dans HomeController.cs pour qu’il envoie réellement les éléments dans une file d’attente Service Bus.
@@ -297,13 +291,13 @@ Maintenant, ajoutez le code pour envoyer des éléments dans une file d’attent
        }
        else
        {
-           return View(order);
+           return View(order); 
        }
    }
    ```
 9. Vous pouvez maintenant réexécuter l'application. À chaque fois que vous envoyez une commande, le nombre de messages augmente.
    
-   ![][18]
+   ![Capture d’écran de la page d’envoi de l’application avec le nombre de messages incrémenté à 1.][18]
 
 ## <a name="create-the-worker-role"></a>Création du rôle de travail
 Vous allez maintenant créer le rôle de travail qui traite les commandes envoyées. Cet exemple utilise le modèle de projet Visual Studio **Rôle de travail avec file d’attente Service Bus**. Vous avez déjà obtenu les informations d’identification requises à partir du portail.
@@ -312,19 +306,19 @@ Vous allez maintenant créer le rôle de travail qui traite les commandes envoy�
 2. Dans Visual Studio, dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le dossier **Rôles** sous le projet **MultiTierApp**.
 3. Cliquez sur **Ajouter**, puis sur **Nouveau projet de rôle de travail**. La boîte de dialogue **Ajouter un nouveau projet de rôle** s’affiche.
    
-   ![][26]
+   ![Capture d’écran du volet Explorateur de solutions avec l’option Nouveau projet de rôle de travail et l’option Ajouter mises en surbrillance.][26]
 4. Dans la boîte de dialogue **Ajouter un nouveau projet de rôle**, cliquez sur **Rôle de travail avec file d’attente Service Bus**.
    
-   ![][23]
+   ![Capture d’écran de la boîte de dialogue Nouveau projet de rôle Active Directory avec l’option Rôle de travail avec file d'attente Service Bus mise en surbrillance et délimitée en rouge.][23]
 5. Dans la boîte de dialogue **Nom**, saisissez le nom de projet **OrderProcessingRole**. Cliquez ensuite sur **Ajouter**.
 6. Copiez la chaîne de connexion que vous avez obtenue à l’étape 9 de la section « Création d’un espace de noms Service Bus » dans le Presse-papiers.
 7. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur l’élément **OrderProcessingRole**, créé à l’étape 5 (assurez-vous de bien cliquer avec le bouton droit sur **OrderProcessingRole** sous **Rôles**, et pas dans la classe). Cliquez ensuite sur **Propriétés**.
 8. Sous l’onglet **Paramètres** de la boîte de dialogue **Propriétés**, cliquez dans la zone **Valeur** de l’élément **Microsoft.ServiceBus.ConnectionString**, puis collez la valeur du point de terminaison que vous avez copiée à l’étape 6.
    
-   ![][25]
-9. Créez une classe **OnlineOrder**pour représenter les commandes à mesure que vous les traitez dans la file d’attente. Vous pouvez réutiliser une classe que vous avez déjà créée. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur la classe **OrderProcessingRole** (sur l’icône de la classe, non sur le rôle). Cliquez sur **Ajouter**, puis sur **Élément existant**.
+   ![Capture d’écran de la boîte de dialogue Propriétés avec l’onglet Paramètres sélectionné et la ligne de la table Microsoft.ServiceBus.ConnectionString délimitée en rouge.][25]
+9. Créez une classe **OnlineOrder** pour représenter les commandes à mesure que vous les traitez dans la file d’attente. Vous pouvez réutiliser une classe que vous avez déjà créée. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur la classe **OrderProcessingRole** (sur l’icône de la classe, non sur le rôle). Cliquez sur **Ajouter**, puis sur **Élément existant**.
 10. Accédez au sous-dossier **FrontendWebRole\Models**, puis double-cliquez sur **OnlineOrder.cs** pour l’ajouter à ce projet.
-11. Dans**WorkerRole.cs**, remplacez la valeur de variable **QueueName**`"ProcessingQueue"` par `"OrdersQueue"`, comme dans le code suivant.
+11. Dans **WorkerRole.cs**, remplacez la valeur de variable **QueueName**`"ProcessingQueue"` par `"OrdersQueue"`, comme dans le code suivant.
     
     ```csharp
     // The name of your queue.
@@ -344,11 +338,11 @@ Vous allez maintenant créer le rôle de travail qui traite les commandes envoy�
     Trace.WriteLine(order.Customer + ": " + order.Product, "ProcessingMessage");
     receivedMessage.Complete();
     ```
-14. Vous avez terminé l'application. Vous pouvez tester l’application complète en cliquant avec le bouton droit sur le projet MultiTierApp dans l’Explorateur de solutions, puis en sélectionnant **Définir comme projet de démarrage**et en appuyant sur F5. Notez que le nombre de messages n'augmente pas, car le rôle de travail traite les éléments de la file d'attente et les marque comme terminés. Vous pouvez voir le résultat du suivi de votre rôle de travail en affichant l'interface utilisateur de l'émulateur de calcul Azure. Pour cela, cliquez avec le bouton droit sur l’icône de l’émulateur dans la zone de notification de la barre des tâches, puis sélectionnez l’**interface utilisateur de l’émulateur de calcul Azure**.
+14. Vous avez terminé l'application. Vous pouvez tester l’application complète en cliquant avec le bouton droit sur le projet MultiTierApp dans l’Explorateur de solutions, puis en sélectionnant **Définir comme projet de démarrage** et en appuyant sur F5. Notez que le nombre de messages n'augmente pas, car le rôle de travail traite les éléments de la file d'attente et les marque comme terminés. Vous pouvez voir le résultat du suivi de votre rôle de travail en affichant l'interface utilisateur de l'émulateur de calcul Azure. Pour cela, cliquez avec le bouton droit sur l’icône de l’émulateur dans la zone de notification de la barre des tâches, puis sélectionnez l’**interface utilisateur de l’émulateur de calcul Azure**.
     
-    ![][19]
+    ![Capture d’écran de ce qui s’affiche lorsque vous cliquez sur l’icône de l’émulateur. Afficher l'IU de l'émulateur de calcul se trouve dans la liste d’options.][19]
     
-    ![][20]
+    ![Capture d’écran de la boîte de dialogue Émulateur de calcul Microsoft Azure (Express).][20]
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour en savoir plus sur Service Bus, consultez les ressources suivantes :  

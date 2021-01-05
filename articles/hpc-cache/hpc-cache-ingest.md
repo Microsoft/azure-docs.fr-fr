@@ -3,15 +3,15 @@ title: Déplacer des données vers un conteneur cloud Azure HPC Cache
 description: Comment ajouter des données au stockage Blob Azure en vue de l’utiliser avec Azure HPC Cache
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/30/2019
-ms.author: rohogue
-ms.openlocfilehash: fd21a78d0271f91d334bba5aba748f3770ad38cf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: v-erkel
+ms.openlocfilehash: 0da8a4fc1b59976c50cd96f2155715a4cb178cc9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537931"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87072761"
 ---
 # <a name="move-data-to-azure-blob-storage"></a>Déplacer les données dans le stockage d’objets blob Azure
 

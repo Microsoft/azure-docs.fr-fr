@@ -9,10 +9,10 @@ ms.date: 08/10/2018
 ms.author: kgremban
 ms.custom: include file
 ms.openlocfilehash: c1e5027b192f32b50af10a2bdfbadfeb123b39ce
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67177179"
 ---
 ### <a name="delete-azure-resources"></a>Supprimer les ressources Azure 

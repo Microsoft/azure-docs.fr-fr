@@ -1,6 +1,6 @@
 ---
 title: Expressions de stratégie de la Gestion des API Azure | Microsoft Docs
-description: Découvrez les expressions de stratégie dans la Gestion des API Azure.
+description: Découvrez les expressions de stratégie dans la Gestion des API Azure. Consultez des exemples et affichez des ressources disponibles supplémentaires.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 03/22/2019
 ms.author: apimpm
-ms.openlocfilehash: 6614e70d130abe46067c657bda3ccdd7000caddc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ab83344f779f93107b59ca28348da3a66f1efc1a
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224861"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92076859"
 ---
 # <a name="api-management-policy-expressions"></a>Expressions de stratégie de la Gestion des API
 Cet article décrit la syntaxe des expressions de stratégie dans C# 7. Chaque expression a accès à la variable de [contexte](api-management-policy-expressions.md#ContextVariables) fournie implicitement et à un [sous-ensemble](api-management-policy-expressions.md#CLRTypes) autorisé de types .NET Framework.
@@ -27,7 +27,7 @@ Pour plus d'informations :
 
 - Découvrez comment fournir des informations de contexte à votre service backend. Utilisez les stratégies [Set query string parameter](api-management-transformation-policies.md#SetQueryStringParameter) et [Set HTTP header](api-management-transformation-policies.md#SetHTTPheader) pour fournir ces informations.
 - Découvrez comment utiliser la stratégie [Validate JWT](api-management-access-restriction-policies.md#ValidateJWT) pour pré-autoriser l’accès aux opérations à partir de revendications de jetons.
-- Découvrez comment utiliser une trace [Inspecteur d’API](https://azure.microsoft.com/documentation/articles/api-management-howto-api-inspector/) pour voir comment les stratégies sont évaluées et connaître les résultats des évaluations.
+- Découvrez comment utiliser une trace [Inspecteur d’API](./api-management-howto-api-inspector.md) pour voir comment les stratégies sont évaluées et connaître les résultats des évaluations.
 - Découvrez comment utiliser les expressions avec les stratégies [Get from cache](api-management-caching-policies.md#GetFromCache) et [Store to cache](api-management-caching-policies.md#StoreToCache) pour configurer la durée de mise en cache des réponses de Gestion des API. Définissez une durée qui correspond à la mise en cache des réponses du service principal comme le spécifie la directive `Cache-Control` du service principal.
 - Découvrez comment effectuer le filtrage de contenu. Supprimez des éléments de données de la réponse reçue du service principal à l’aide des stratégies [Control flow](api-management-advanced-policies.md#choose) et [Set body](api-management-transformation-policies.md#SetBody).
 - Pour télécharger les instructions de stratégie, consultez le référentiel GitHub [api-management-samples/policies](https://github.com/Azure/api-management-samples/tree/master/policies).
@@ -104,7 +104,7 @@ Le tableau suivant liste les types .NET Framework et leurs membres qui sont auto
 |System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>|Tous|
 |System.Collections.Generic.ISet\<T>|Tous|
 |System.Collections.Generic.KeyValuePair<TKey, TValue>|Tous|
-|System.Collections.Generic.List\<T>|Tous|
+|System.Collections.Generic.IList\<T>|Tous|
 |System.Collections.Generic.Queue\<T>|Tous|
 |System.Collections.Generic.Stack\<T>|Tous|
 |System.Convert|Tous|
@@ -235,7 +235,7 @@ Une variable nommée `context` est implicitement disponible dans toutes les [exp
 |BasicAuthCredentials|Password: string<br /><br /> UserId: string|
 |Jwt AsJwt(input: this string)|input: string<br /><br /> Si le paramètre d’entrée contient une valeur valide d’en-tête de jeton JWT, la méthode renvoie un objet de type `Jwt` ; sinon, la méthode renvoie `null`.|
 |bool TryParseJwt(input: this string, result: out Jwt)|input: string<br /><br /> result: out Jwt<br /><br /> Si le paramètre d’entrée contient une valeur valide d’en-tête de jeton JWT, la méthode renvoie `true` et le paramètre de résultats contient une valeur de type `Jwt` ; sinon, la méthode renvoie `false`.|
-|Jwt|Algorithm: string<br /><br /> Audience: IEnumerable<string\><br /><br /> Claims: IReadOnlyDictionary<string, string[]><br /><br /> ExpirationTime: DateTime?<br /><br /> Id: string<br /><br /> Issuer: string<br /><br /> IssuedAt: DateTime?<br /><br /> NotBefore: DateTime?<br /><br /> Subject: string<br /><br /> Type: string|
+|Jwt|Algorithm: string<br /><br /> Audiences: IEnumerable<string\><br /><br /> Claims: IReadOnlyDictionary<string, string[]><br /><br /> ExpirationTime: DateTime?<br /><br /> Id: string<br /><br /> Issuer: string<br /><br /> IssuedAt: DateTime?<br /><br /> NotBefore: DateTime?<br /><br /> Subject: string<br /><br /> Type: string|
 |string Jwt.Claims.GetValueOrDefault(claimName: string, defaultValue: string)|claimName: string<br /><br /> defaultValue: string<br /><br /> Renvoie des valeurs de revendication séparées par des virgules ou `defaultValue` si l’en-tête est introuvable.|
 |byte[] Encrypt(input: this byte[], alg: string, key:byte[], iv:byte[])|input - texte brut à déchiffrer<br /><br />alg - nom de l'algorithme de chiffrement symétrique<br /><br />key - clé de chiffrement<br /><br />iv - vecteur d'initialisation<br /><br />Renvoie un texte brut chiffré.|
 |byte[] Encrypt(input: this byte[], alg: System.Security.Cryptography.SymmetricAlgorithm)|input - texte brut à déchiffrer<br /><br />alg - algorithme de chiffrement<br /><br />Renvoie un texte brut chiffré.|
@@ -252,5 +252,5 @@ Pour plus d’informations sur l’utilisation de stratégies, consultez les pag
 
 + [Stratégies dans Gestion des API](api-management-howto-policies.md)
 + [Transform and protect your API](transform-api.md) (Transformer et protéger votre API)
-+ [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
-+ [Exemples de stratégie](policy-samples.md)
++ [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
++ [Exemples de stratégie](./policy-reference.md)

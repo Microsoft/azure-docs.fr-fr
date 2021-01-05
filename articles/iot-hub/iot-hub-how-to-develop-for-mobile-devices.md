@@ -7,16 +7,16 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 04/16/2018
 ms.author: robinsh
-ms.openlocfilehash: 945b02003a443c04e692fdc06ca5714de362d074
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 63fade17d10189cbe8e775b2a859902f1c2bb004
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68883097"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151644"
 ---
 # <a name="develop-for-mobile-devices-using-azure-iot-sdks"></a>Développer pour les appareils mobiles à l’aide des Kits de développement logiciels (SDK) Azure IoT
 
-Les « objets » de l’Internet des objets peuvent désigner un large éventail d’appareils dotés de capacités diverses, tels que les capteurs, les microcontrôleurs, les smart devices, les passerelles industrielles et même les appareils mobiles.  Un appareil mobile peut être un appareil IoT qui envoie des données de télémétrie appareil-à-cloud et est géré par le cloud.  Il peut également faire office d’appareil exécutant une application de service principal qui gère les autres appareils IoT.  Dans les deux cas, les [kits SDK Azure IoT Hub](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-sdks) peuvent être utilisés pour développer des applications fonctionnant sur appareil mobile.  
+Les « objets » de l’Internet des objets peuvent désigner un large éventail d’appareils dotés de capacités diverses, tels que les capteurs, les microcontrôleurs, les smart devices, les passerelles industrielles et même les appareils mobiles.  Un appareil mobile peut être un appareil IoT qui envoie des données de télémétrie appareil-à-cloud et est géré par le cloud.  Il peut également faire office d’appareil exécutant une application de service principal qui gère les autres appareils IoT.  Dans les deux cas, les [kits SDK Azure IoT Hub](./iot-hub-devguide-sdks.md) peuvent être utilisés pour développer des applications fonctionnant sur appareil mobile.  
 
 ## <a name="develop-for-native-ios-platform"></a>Développer pour la plateforme iOS native
 
@@ -52,5 +52,5 @@ Les documents qui suivent vous guident dans le développement d’une applicatio
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Informations de référence sur l’API REST d’IoT Hub](https://docs.microsoft.com/rest/api/iothub/)
+* [Informations de référence sur l’API REST d’IoT Hub](/rest/api/iothub/)
 * [Code source du SDK C Azure IoT](https://github.com/Azure/azure-iot-sdk-c)

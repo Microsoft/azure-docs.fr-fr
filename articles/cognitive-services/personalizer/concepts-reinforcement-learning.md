@@ -3,19 +3,17 @@ title: Apprentissage par renforcement - Personalizer
 titleSuffix: Azure Cognitive Services
 description: Personalizer utilise des informations sur les actions et sur le contexte pour faire de meilleures suggestions de classement. Les informations sur ces actions et ce contexte sont des attributs ou des propriétés qui sont appelés « caractéristiques ».
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 05/07/2019
-ms.author: diberry
-ms.openlocfilehash: 36071cdee25cfa99fc54b0e5c0c0aa822cb5fe2f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b97221de4921e06ddfab610618f37683b990181
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68662832"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87132736"
 ---
 # <a name="what-is-reinforcement-learning"></a>Qu’est-ce que l’apprentissage par renforcement ?
 

@@ -10,12 +10,12 @@ ms.workload: infrastructure
 ms.date: 11/29/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: c9f514b70eda7d74950576a1a6f3a1199cddb232
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 528fe5dea533faf9447e03dd901568d783891ce9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100326"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88718932"
 ---
 # <a name="tutorial---manage-azure-disks-with-azure-powershell"></a>Didacticiel : gérer les disques Azure avec Azure PowerShell
 
@@ -40,7 +40,7 @@ Lorsqu’une machine virtuelle Azure est créée, deux disques sont automatiquem
 
 **Disque de système d’exploitation** : la taille des disques de système d’exploitation peut atteindre 4 To ; ces disques hébergent le système d’exploitation des machines virtuelles. Si vous créez une machine virtuelle à partir d’une image de la [Place de marché Azure](https://azure.microsoft.com/marketplace/), sa taille est généralement de 127 Go (mais certaines images ont des tailles de disque de système d’exploitation plus petites). Le disque de système d’exploitation se voit attribuer la lettre de lecteur *C:* par défaut. La configuration de la mise en cache de disque de système d’exploitation est optimisée pour les performances du système d’exploitation. Le disque de système d’exploitation **ne doit pas** héberger d’applications ou de données. Pour héberger ce type de contenu, utilisez plutôt un disque de données, qui est décrit plus loin dans cet article.
 
-**Disque temporaire** : les disques temporaires utilisent un disque SSD qui se trouve sur le même hôte Azure que la machine virtuelle. Les disques temporaires sont extrêmement performants et peuvent être utilisés pour des opérations telles que le traitement de données temporaires. Toutefois, si la machine virtuelle est déplacée vers un nouvel hôte, toutes les données stockées sur un disque temporaire sont supprimées. La taille du disque temporaire est déterminée par la [taille de la machine virtuelle](sizes.md). Les disques temporaires se voient attribuer la lettre de lecteur *D:* par défaut.
+**Disque temporaire** : les disques temporaires utilisent un disque SSD qui se trouve sur le même hôte Azure que la machine virtuelle. Les disques temporaires sont extrêmement performants et peuvent être utilisés pour des opérations telles que le traitement de données temporaires. Toutefois, si la machine virtuelle est déplacée vers un nouvel hôte, toutes les données stockées sur un disque temporaire sont supprimées. La taille du disque temporaire est déterminée par la [taille de la machine virtuelle](../sizes.md). Les disques temporaires se voient attribuer la lettre de lecteur *D:* par défaut.
 
 ## <a name="azure-data-disks"></a>Disques de données Azure
 
@@ -52,21 +52,22 @@ Azure propose deux types de disque.
 
 **Disques Standard** : ils s’appuient sur des disques durs et offrent un stockage économique qui n’en est pas moins performant. Les disques Standard constituent la solution idéale pour une charge de travail de développement et de test économique.
 
-**Disques Premium** : ils reposent sur un disque SSD à faible latence et hautes performances. Ils conviennent parfaitement aux machines virtuelles exécutant une charge de travail en production. Le stockage Premium prend en charge les machines virtuelles des séries DS, DSv2, GS et FS. Les disques Premium sont de cinq types (P10, P20, P30, P40, P50). La taille du disque détermine le type de disque. Lorsque vous sélectionnez une taille de disque, la valeur est arrondie au type suivant. Par exemple, si la taille est inférieure à 128 Go, le disque est de type P10. Si elle est comprise entre 129 Go et 512 Go, le disque est de type P20.
-
-### <a name="premium-disk-performance"></a>Performances du disque Premium
+**Disques Premium** : ils reposent sur un disque SSD à faible latence et hautes performances. Ils conviennent parfaitement aux machines virtuelles exécutant une charge de travail en production. Les machines virtuelles dont le [nom de la taille](../vm-naming-conventions.md) contient un **S** prennent généralement en charge le stockage Premium. Par exemple, les machines virtuelles Azure des séries DS, DSv2, GS et FS prennent en charge le stockage Premium. Lorsque vous sélectionnez une taille de disque, la valeur est arrondie au type suivant. Par exemple, si la taille du disque est supérieure à 64 Go, mais inférieure à 128 Go, le type de disque est P10. 
+<br>
 [!INCLUDE [disk-storage-premium-ssd-sizes](../../../includes/disk-storage-premium-ssd-sizes.md)]
 
-Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, 64 disques de données peuvent être attachés à la machine virtuelle Standard_GS5. Si chacun de ces disques est de type P30, vous pouvez atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre maximal d’E/S par seconde par machine virtuelle, consultez [Types et tailles des machines virtuelles](./sizes.md).
+Lorsque vous configurez un disque de stockage Premium, contrairement au stockage standard, la capacité, les E/S par seconde et le débit de ce disque sont assurés. Par exemple, si vous créez un disque P50, Azure configure une capacité de stockage de 4 095 Go, 7 500 E/S par seconde et un débit de 250 Mo/s pour ce disque. Votre application peut utiliser tout ou partie de la capacité et des performances. Les disques SSD Premium sont conçus pour fournir des latences faibles de quelques millisecondes ainsi que l’IOPS et le débit cibles décrits dans le précédent tableau 99,9 % du temps.
+
+Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, 64 disques de données peuvent être attachés à la machine virtuelle Standard_GS5. Si chacun de ces disques est de type P30, vous pouvez atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre maximal d’E/S par seconde par machine virtuelle, consultez [Types et tailles des machines virtuelles](../sizes.md).
 
 ## <a name="create-and-attach-disks"></a>Créer et attacher des disques
 
 Pour exécuter l’exemple dans ce didacticiel, vous devez disposer d’une machine virtuelle. Si nécessaire, créez une machine virtuelle à l’aide des commandes ci-dessous.
 
-Définissez le nom d’utilisateur et le mot de passe pour le compte d’administrateur sur la machine virtuelle avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential) :
+Définissez le nom d’utilisateur et le mot de passe pour le compte d’administrateur sur la machine virtuelle avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1) :
 
 
-Créez la machine virtuelle avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). Vous êtes invité à entrer un nom d’utilisateur et un mot de passe pour le compte administrateur de la machine virtuelle.
+Créez la machine virtuelle avec [New-AzVM](/powershell/module/az.compute/new-azvm). Vous êtes invité à entrer un nom d’utilisateur et un mot de passe pour le compte administrateur de la machine virtuelle.
 
 ```azurepowershell-interactive
 New-AzVm `
@@ -80,7 +81,7 @@ New-AzVm `
 ```
 
 
-Créez la configuration initiale avec [New-ADiskConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azdiskconfig). L’exemple suivant configure un disque d’une taille de 128 Go.
+Créez la configuration initiale avec [New-ADiskConfig](/powershell/module/az.compute/new-azdiskconfig). L’exemple suivant configure un disque d’une taille de 128 Go.
 
 ```azurepowershell-interactive
 $diskConfig = New-AzDiskConfig `
@@ -89,7 +90,7 @@ $diskConfig = New-AzDiskConfig `
     -DiskSizeGB 128
 ```
 
-Créez le disque de données avec la commande [New-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/new-Azdisk).
+Créez le disque de données avec la commande [New-AzDisk](/powershell/module/az.compute/new-azdisk).
 
 ```azurepowershell-interactive
 $dataDisk = New-AzDisk `
@@ -98,13 +99,13 @@ $dataDisk = New-AzDisk `
     -Disk $diskConfig
 ```
 
-Obtenez la machine virtuelle que vous souhaitez ajouter au disque de données avec la commande [Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm).
+Obtenez la machine virtuelle que vous souhaitez ajouter au disque de données avec la commande [Get-AzVM](/powershell/module/az.compute/get-azvm).
 
 ```azurepowershell-interactive
 $vm = Get-AzVM -ResourceGroupName "myResourceGroupDisk" -Name "myVM"
 ```
 
-Ajoutez le disque de données à la configuration de la machine virtuelle avec la commande [Add-AzVMDataDisk](https://docs.microsoft.com/powershell/module/az.compute/add-azvmdatadisk).
+Ajoutez le disque de données à la configuration de la machine virtuelle avec la commande [Add-AzVMDataDisk](/powershell/module/az.compute/add-azvmdatadisk).
 
 ```azurepowershell-interactive
 $vm = Add-AzVMDataDisk `
@@ -115,7 +116,7 @@ $vm = Add-AzVMDataDisk `
     -Lun 1
 ```
 
-Mettez à jour la machine virtuelle avec la commande [Update-AzVM](https://docs.microsoft.com/powershell/module/az.compute/add-azvmdatadisk).
+Mettez à jour la machine virtuelle avec la commande [Update-AzVM](/powershell/module/az.compute/add-azvmdatadisk).
 
 ```azurepowershell-interactive
 Update-AzVM -ResourceGroupName "myResourceGroupDisk" -VM $vm

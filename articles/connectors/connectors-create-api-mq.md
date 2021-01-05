@@ -5,16 +5,16 @@ services: logic-apps
 ms.suite: integration
 author: ChristopherHouser
 ms.author: chrishou
-ms.reviewer: valthom, logicappspm
+ms.reviewer: valthom, estfan, logicappspm
 ms.topic: article
-ms.date: 03/31/2020
+ms.date: 05/14/2020
 tags: connectors
-ms.openlocfilehash: 737c5b90b216156ca08346f4a64fd0b421ad6c19
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: e9e554fdc092e49f5a87049de0e3dc3163105f58
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80410270"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85609501"
 ---
 # <a name="connect-to-an-ibm-mq-server-from-azure-logic-apps"></a>Se connecter à un serveur IBM MQ depuis Azure Logic Apps
 
@@ -33,6 +33,7 @@ Voici les versions d’IBM WebSphere MQ officiellement prises en charge :
   * MQ 7.5
   * MQ 8.0
   * MQ 9.0
+  * MQ 9.1
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -93,7 +94,7 @@ Lorsque votre application logique tente de se connecter à votre serveur MQ loca
      > [!IMPORTANT]
      > Veillez à installer le certificat dans le magasin **Certificats - Ordinateur local** > **Autorités de certification racines de confiance**.
 
-* Le serveur MQ requiert la définition de la spécification de chiffrement que vous souhaitez utiliser pour les connexions SSL. Toutefois, SsLStream dans .NET ne vous permet pas de spécifier l’ordre des spécifications de chiffrement. Pour contourner cette limitation, vous pouvez modifier la configuration de votre serveur MQ afin qu’elle corresponde à la première spécification de chiffrement de la suite que le connecteur envoie dans la négociation SSL.
+* Le serveur MQ vous demande de définir la spécification de chiffrement que vous souhaitez utiliser pour les connexions TLS/SSL. Toutefois, SslStream dans .NET ne vous permet pas de spécifier l’ordre des spécifications de chiffrement. Pour contourner cette limitation, vous pouvez modifier la configuration de votre serveur MQ afin qu’elle corresponde à la première spécification de chiffrement de la suite que le connecteur envoie dans la négociation TLS/SSL.
 
   Lorsque vous essayez la connexion, le serveur MQ enregistre un message d’événement qui indique que la connexion a échoué, car l’autre terminaison a utilisé la mauvaise spécification de chiffrement. Le message d’événement contient la spécification de chiffrement qui apparaît en premier dans la liste. Mettez à jour la spécification de chiffrement dans la configuration du canal pour qu’elle corresponde à la spécification de chiffrement du message d’événement.
 

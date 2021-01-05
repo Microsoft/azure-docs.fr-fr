@@ -1,22 +1,22 @@
 ---
 title: Convertir la classe de ressources en groupe de charge de travail
-description: Découvrez comment créer un groupe de charge de travail similaire à une classe de ressources dans Azure SQL Data Warehouse.
+description: Découvrez comment créer un groupe de charge de travail similaire à une classe de ressources dans un pool SQL dédié.
 services: synapse-analytics
 author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 08/13/2020
 ms.author: rortloff
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 5d73ba8f21fe7731fb751d42a8497ff8e1ebba7d
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: b82342ffb76f8bb58b8f6875751601094d6131ca
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383625"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461898"
 ---
 # <a name="convert-resource-classes-to-workload-groups"></a>Convertir les classes de ressources en groupes de charge de travail
 
@@ -38,19 +38,19 @@ SELECT Request_min_resource_grant_percent = Effective_request_min_resource_grant
 > [!NOTE]
 > Les groupes de charges de travail fonctionnent selon le pourcentage de ressources système globales.  
 
-Étant donné que les groupes de charges de travail fonctionnent selon le pourcentage de ressources système globales, à mesure que vous montez ou descendez en puissance, le pourcentage de ressources allouées aux classes de ressources statiques par rapport aux modifications globales des ressources système est modifié.  Par exemple, staticrc40 avec Dw1000c alloue 9,6 % des ressources système globales.  19,2 % sont alloués avec DW2000c.  Ce modèle est similaire que vous souhaitiez mettre à l’échelle à des fins concurrentielles ou allouer plus de ressources par requête.
+Étant donné que les groupes de charges de travail fonctionnent selon le pourcentage de ressources système globales, à mesure que vous montez ou descendez en puissance, le pourcentage de ressources allouées aux classes de ressources statiques par rapport aux modifications globales des ressources système est modifié.  Par exemple, staticrc40 avec DW1000c alloue 19,2 % des ressources système globales.  9,6 % sont alloués avec DW2000c.  Ce modèle est similaire que vous souhaitiez mettre à l’échelle à des fins concurrentielles ou allouer plus de ressources par requête.
 
 ## <a name="create-workload-group"></a>Créer le groupe de charge de travail
 
 Avec le `REQUEST_MIN_RESOURCE_GRANT_PERCENT` connu, vous pouvez utiliser la syntaxe <link> CREATE WORKLOAD GROUP pour créer le groupe de charge de travail.  Vous pouvez éventuellement spécifier un `MIN_PERCENTAGE_RESOURCE` supérieur à zéro pour isoler les ressources pour le groupe de charge de travail.  En outre, vous pouvez éventuellement spécifier `CAP_PERCENTAGE_RESOURCE` inférieur à 100 pour limiter la quantité de ressources que le groupe de charge de travail peut consommer.  
 
-L’exemple ci-dessous définit la `MIN_PERCENTAGE_RESOURCE` pour dédier 9,6 % des ressources système à `wgDataLoads` et garantit qu’une requête pourra être exécutée à chaque fois.  En outre, `CAP_PERCENTAGE_RESOURCE` a la valeur 38,4 % et limite ce groupe de charge de travail à quatre requêtes simultanées.  En définissant le paramètre `QUERY_EXECUTION_TIMEOUT_SEC` sur 3 600, toute requête qui s’exécute pendant plus d’une heure est automatiquement annulée.
+Basé sur l’exemple mediumrc, le code ci-dessous définit la valeur `MIN_PERCENTAGE_RESOURCE` pour dédier 10 % des ressources système à `wgDataLoads`, et garantit qu’une requête pourra être exécutée à chaque fois.  En outre, `CAP_PERCENTAGE_RESOURCE` a la valeur 40 % et limite ce groupe de charge de travail à quatre requêtes simultanées.  En définissant le paramètre `QUERY_EXECUTION_TIMEOUT_SEC` sur 3 600, toute requête qui s’exécute pendant plus d’une heure est automatiquement annulée.
 
 ```sql
 CREATE WORKLOAD GROUP wgDataLoads WITH  
-( REQUEST_MIN_RESOURCE_GRANT_PERCENT = 9.6
- ,MIN_PERCENTAGE_RESOURCE = 9.6
- ,CAP_PERCENTAGE_RESOURCE = 38.4
+( REQUEST_MIN_RESOURCE_GRANT_PERCENT = 10
+ ,MIN_PERCENTAGE_RESOURCE = 10
+ ,CAP_PERCENTAGE_RESOURCE = 40
  ,QUERY_EXECUTION_TIMEOUT_SEC = 3600)
 ```
 

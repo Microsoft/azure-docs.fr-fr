@@ -4,15 +4,16 @@ description: Cet article vous guide dans la configuration de BGP avec des passer
 services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 04/12/2017
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: yushwang
-ms.openlocfilehash: 78147a96d6d9e92c2602b6a83cbed743cf2abf37
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 8573d9e55299382392927b532966a6e6fdd8c439
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152038"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94659758"
 ---
 # <a name="how-to-configure-bgp-on-azure-vpn-gateways-using-powershell"></a>Configurer BGP sur des passerelles VPN Azure à l’aide de PowerShell
 Cet article vous guide pas à pas dans l’activation de BGP sur une connexion VPN de site à site (S2S) et une connexion de réseau virtuel à réseau virtuel, à l’aide du modèle de déploiement de Resource Manager et de PowerShell.
@@ -45,7 +46,7 @@ Les étapes suivantes configurent les paramètres BGP de la passerelle VPN Azure
 
 ### <a name="before-you-begin"></a>Avant de commencer
 * Assurez-vous de disposer d’un abonnement Azure. Si vous ne disposez pas déjà d’un abonnement Azure, vous pouvez activer vos [avantages abonnés MSDN](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/) ou créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/).
-* Installez les applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview). 
+* Installez les applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/). 
 
 ### <a name="step-1---create-and-configure-vnet1"></a>Étape 1 – Créer et configurer le réseau virtuel VNet1
 #### <a name="1-declare-your-variables"></a>1. Déclarer vos variables
@@ -74,7 +75,7 @@ $Connection15 = "VNet1toSite5"
 ```
 
 #### <a name="2-connect-to-your-subscription-and-create-a-new-resource-group"></a>2. Se connecter à votre abonnement et créer un groupe de ressources
-Pour utiliser les applets de commande Resource Manager, passez au mode PowerShell. Pour plus d’informations, consultez la page [Utilisation de Windows PowerShell avec Resource Manager](../powershell-azure-resource-manager.md).
+Pour utiliser les applets de commande Resource Manager, passez au mode PowerShell. Pour plus d’informations, consultez la page [Utilisation de Windows PowerShell avec Resource Manager](../azure-resource-manager/management/manage-resources-powershell.md).
 
 Ouvrez la console PowerShell et connectez-vous à votre compte. Utilisez l’exemple suivant pour faciliter votre connexion :
 
@@ -213,7 +214,7 @@ La connexion est établie après quelques minutes, et la session de peering BGP 
 
 Cette section ajoute une connexion de réseau virtuel à réseau virtuel avec le protocole BGP, comme illustré dans le diagramme ci-dessous :
 
-![BGP pour une connexion de réseau virtuel à réseau virtuel](./media/vpn-gateway-bgp-resource-manager-ps/bgp-vnet2vnet.png)
+![Diagramme montrant une connexion de réseau virtuel à réseau virtuel.](./media/vpn-gateway-bgp-resource-manager-ps/bgp-vnet2vnet.png)
 
 Ces instructions ci-dessous sont la suite des étapes précédentes. Vous devez terminer la [Partie 1](#enablebgp) pour créer et configurer TestVNet1 et la passerelle VPN avec le protocole BGP. 
 
@@ -314,4 +315,4 @@ Si vous avez effectué les trois parties de cet exercice, vous avez obtenu une t
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Consultez [Création d’une machine virtuelle](../virtual-machines/virtual-machines-windows-hero-tutorial.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) pour connaître les différentes étapes.
+Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Consultez [Création d’une machine virtuelle](../virtual-machines/windows/quick-create-portal.md) pour connaître les différentes étapes.

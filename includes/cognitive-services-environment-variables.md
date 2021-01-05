@@ -4,12 +4,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 06/24/2019
 ms.author: aahi
-ms.openlocfilehash: 367ae27a6afec803d2e3f98f54bdcf852330ddc6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 95bd83575809f6ecda716ff751b47b7bb499cae3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "70274668"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85073310"
 ---
 ## <a name="configure-an-environment-variable-for-authentication"></a>Configurer une variable d’environnement pour l’authentification
 
@@ -41,6 +41,6 @@ Modifiez votre profil bash_profile, et ajoutez la variable d’environnement :
 export COGNITIVE_SERVICE_KEY=your-key
 ```
 
-Après avoir ajouté la variable d’environnement, exécutez `source .bash_profile` depuis la fenêtre de console pour appliquer les changements.
+Après avoir ajouté la variable d’environnement, exécutez `source ~/.bash_profile` depuis la fenêtre de console pour appliquer les changements.
 
 ***

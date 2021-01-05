@@ -8,17 +8,14 @@ ms.date: 3/24/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 57630b789233dd23e61398f445b434e4ba08b48e
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.openlocfilehash: 757e34fd45b7d3d9703aa09daa7f040c5f605637
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80236017"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932385"
 ---
 # <a name="tutorial-train-and-deploy-an-azure-machine-learning-model"></a>Tutoriel : Entraîner et déployer un modèle Azure Machine Learning
-
-> [!NOTE]
-> Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Si vous êtes arrivé directement à cet article, nous vous encourageons à commencer par le [premier article](tutorial-machine-learning-edge-01-intro.md) de la série afin d’obtenir de meilleurs résultats.
 
 Dans cet article, vous allez effectuer les tâches suivantes :
 
@@ -30,6 +27,18 @@ Azure Notebooks bénéficie d’un espace de travail Azure Machine Learning, mod
 
 Les étapes de cet article peuvent être généralement effectuées par les scientifiques de données.
 
+Dans cette section du tutoriel, vous allez apprendre à :
+
+> [!div class="checklist"]
+>
+> * Créer un projet Azure Notebooks pour entraîner un modèle Machine Learning.
+> * Conteneuriser le modèle Machine Learning entraîné.
+> * Créer un module Azure IoT Edge à partir du modèle Machine Learning conteneurisé.
+
+## <a name="prerequisites"></a>Prérequis
+
+Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Chaque article de la série s’appuie sur le travail réalisé dans le cadre de l’article précédent. Si vous êtes tombé directement sur cet article, reportez-vous au [premier article](tutorial-machine-learning-edge-01-intro.md) de la série.
+
 ## <a name="set-up-azure-notebooks"></a>Configurer Azure Notebooks
 
 Nous utilisons Azure Notebooks pour héberger les deux Notebooks Jupyter et les fichiers de prise en charge. Ici, nous créons et configurons un projet Azure Notebooks. Si vous n’avez pas utilisé Jupyter et/ou Azure Notebooks, voici quelques documents de présentation :
@@ -37,7 +46,7 @@ Nous utilisons Azure Notebooks pour héberger les deux Notebooks Jupyter et les 
 * **Démarrage rapide :** [Créer et partager un notebook](../notebooks/quickstart-create-share-jupyter-notebook.md)
 * **Tutoriel :** [Créer et exécuter un notebook Jupyter avec Python](../notebooks/tutorial-create-run-jupyter-notebook.md)
 
-L’utilisation d’Azure Notebooks garantit un environnement cohérent pour l’exercice.
+L’utilisation d’Azure Notebooks garantit un environnement cohérent pour cet exercice.
 
 > [!NOTE]
 > Une fois installé, le service Azure Notebooks est accessible depuis n’importe quelle machine. Pendant la configuration, vous devez utiliser la machine virtuelle de développement, qui contient tous les fichiers dont vous aurez besoin.
@@ -80,7 +89,7 @@ Nous allons charger des exemples de fichiers notebooks dans un nouveau projet Az
 
 1. Sélectionnez **Charger** pour commencer le téléchargement, puis sélectionnez **Terminé** une fois le processus terminé.
 
-### <a name="azure-notebook-files"></a>Fichiers de notebooks Azure
+### <a name="azure-notebook-files"></a>Fichiers Azure Notebooks
 
 Passons en revue les fichiers que vous avez chargés dans votre projet Azure Notebooks. Les activités de cette partie du tutoriel sont réparties entre deux fichiers de notebooks, qui utilisent quelques fichiers de prise en charge.
 
@@ -178,6 +187,10 @@ Pour vérifier si les notebooks se sont correctement exécutés, regardez si cer
 Vous pouvez insérer des instructions Python dans le notebook pour le débogage, telles que la commande `print()` pour afficher des valeurs. Si vous voyez des variables ou des objets qui ne sont pas définis, exécutez les cellules là où ils sont déclarés ou instanciés en premier.
 
 Vous devrez peut-être supprimer les ressources Azure et les fichiers créés si vous avez besoin de restaurer les notebooks.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Ce tutoriel fait partie d’une série où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

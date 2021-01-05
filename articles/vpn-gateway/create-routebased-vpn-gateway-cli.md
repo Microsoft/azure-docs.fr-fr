@@ -1,28 +1,30 @@
 ---
 title: 'Créez une passerelle VPN Azure basée sur des routes : Interface de ligne de commande'
-description: Apprenez rapidement à créer une passerelle VPN à l’aide de l’interface de ligne de commande (CLI).
+description: Créez rapidement une passerelle VPN Azure basée sur des itinéraires à l’aide d’Azure CLI, pour une connexion VPN à un réseau local ou pour connecter des réseaux virtuels.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 10/04/2018
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: 121790fce220874babedf67cd72471caa7e92ae6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2bbd7e39ee65ba304ec62697b6fcc77bea133b41
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80241101"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94737215"
 ---
 # <a name="create-a-route-based-vpn-gateway-using-cli"></a>Créer une passerelle VPN basée sur des itinéraires à l’aide de l’interface CLI
 
 Cet article vous aidera à créer rapidement une passerelle VPN Azure basée sur des itinéraires à l’aide d’Azure CLI. Une passerelle VPN permet de créer une connexion VPN à un réseau local. Vous pouvez également vous en servir pour connecter des réseaux virtuels.
 
-Les étapes décrites dans cet article permettent de créer un réseau virtuel, un sous-réseau, un sous-réseau de passerelle et une passerelle VPN basée sur des itinéraires (passerelle de réseau virtuel). La création de la passerelle de réseau virtuel peut prendre 45 minutes, voire plus. Vous pourrez ensuite créer des connexions. Ces étapes nécessitent un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Les étapes décrites dans cet article permettent de créer un réseau virtuel, un sous-réseau, un sous-réseau de passerelle et une passerelle VPN basée sur des itinéraires (passerelle de réseau virtuel). La création de la passerelle de réseau virtuel peut prendre 45 minutes, voire plus. Vous pourrez ensuite créer des connexions. Ces étapes nécessitent un abonnement Azure.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0.4 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Pour trouver la version installée, exécutez `az --version`. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
+
+- Cet article demande la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -56,7 +58,7 @@ az network vnet subnet create \
   --vnet-name VNet1 \
   -n GatewaySubnet \
   -g TestRG1 \
-  --address-prefix 10.1.255.0/27 
+  --address-prefix 10.1.255.0/27 
 ```
 
 ## <a name="request-a-public-ip-address"></a><a name="PublicIP"></a>Demander une adresse IP publique
@@ -67,7 +69,7 @@ Une passerelle VPN doit présenter une adresse IP publique allouée dynamiquemen
 az network public-ip create \
   -n VNet1GWIP \
   -g TestRG1 \
-  --allocation-method Dynamic 
+  --allocation-method Dynamic 
 ```
 
 ## <a name="create-the-vpn-gateway"></a><a name="CreateGateway"></a>Créer la passerelle VPN

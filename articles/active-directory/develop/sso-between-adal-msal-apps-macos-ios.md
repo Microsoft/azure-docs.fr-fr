@@ -13,10 +13,10 @@ ms.author: marsma
 ms.reviewer: ''
 ms.custom: aaddev
 ms.openlocfilehash: 7a8a1667ba1ca2a99c053c6941e3ba778299fd53
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80880748"
 ---
 # <a name="how-to-sso-between-adal-and-msal-apps-on-macos-and-ios"></a>Procédure : Authentification unique entre les applications ADAL et MSAL sur macOS et iOS

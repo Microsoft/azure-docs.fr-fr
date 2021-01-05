@@ -1,6 +1,6 @@
 ---
-title: Lister les définitions de rôles dans le RBAC Azure avec le portail Azure, Azure PowerShell, Azure CLI ou l’API REST | Microsoft Docs
-description: Découvrez comment lister les rôles intégrés et personnalisés dans le RBAC Azure en utilisant le portail Azure, Azure PowerShell, Azure CLI ou l’API REST.
+title: Lister les définitions de rôles Azure - RBAC Azure
+description: Découvrez comment lister les rôles intégrés et personnalisés Azure en utilisant le portail Azure, Azure PowerShell, Azure CLI ou l’API REST.
 services: active-directory
 documentationcenter: ''
 author: rolyon
@@ -8,24 +8,24 @@ manager: mtillman
 ms.assetid: 8078f366-a2c4-4fbb-a44b-fc39fd89df81
 ms.service: role-based-access-control
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 03/19/2020
+ms.date: 06/17/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: aa888eedc81ceb3188f801e273c70722207bf512
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f5421efc96b957f5ae96515bbcf17c8a773397c9
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80062981"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368245"
 ---
-# <a name="list-role-definitions-in-azure-rbac"></a>Lister les définitions de rôles dans le RBAC Azure
+# <a name="list-azure-role-definitions"></a>Lister les définitions de rôles Azure
 
 Une définition de rôle est une collection d’autorisations qui peuvent être effectuées, comme lire, écrire et supprimer. Elle est généralement simplement appelée « rôle ». Le [contrôle d’accès en fonction du rôle (RBAC) Azure](overview.md) compte plus de 120 [rôles intégrés](built-in-roles.md). Vous pouvez également créer vos propres rôles personnalisés. Cet article explique comment lister les rôles intégrés et personnalisés que vous pouvez utiliser pour accorder l’accès aux ressources Azure.
 
-Pour voir la liste des rôles d’administrateur pour Azure Active Directory, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/users-groups-roles/directory-assign-admin-roles.md).
+Pour voir la liste des rôles d’administrateur pour Azure Active Directory, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/roles/permissions-reference.md).
 
 ## <a name="azure-portal"></a>Portail Azure
 
@@ -33,7 +33,7 @@ Pour voir la liste des rôles d’administrateur pour Azure Active Directory, co
 
 Suivez ces étapes pour lister tous les rôles dans le portail Azure.
 
-1. Dans le portail Azure, cliquez sur **Tous les services**, puis sélectionnez n’importe quelle étendue. Par exemple, vous pouvez sélectionner **Groupes d’administration**, **Abonnements**, **Groupes de ressources**, ou une ressource.
+1. Dans le portail Azure, cliquez sur **Tous les services** , puis sélectionnez n’importe quelle étendue. Par exemple, vous pouvez sélectionner **Groupes d’administration** , **Abonnements** , **Groupes de ressources** , ou une ressource.
 
 1. Cliquez sur la ressource spécifique.
 
@@ -175,50 +175,56 @@ az role definition list
 L’exemple suivant liste le nom et la description de toutes les définitions de rôles disponibles :
 
 ```azurecli
-az role definition list --output json | jq '.[] | {"roleName":.roleName, "description":.description}'
+az role definition list --output json --query '[].{roleName:roleName, description:description}'
 ```
 
-```Output
-{
-  "roleName": "API Management Service Contributor",
-  "description": "Can manage service and the APIs"
-}
-{
-  "roleName": "API Management Service Operator Role",
-  "description": "Can manage service but not the APIs"
-}
-{
-  "roleName": "API Management Service Reader Role",
-  "description": "Read-only access to service and APIs"
-}
+```json
+[
+  {
+    "description": "Can manage service and the APIs",
+    "roleName": "API Management Service Contributor"
+  },
+  {
+    "description": "Can manage service but not the APIs",
+    "roleName": "API Management Service Operator Role"
+  },
+  {
+    "description": "Read-only access to service and APIs",
+    "roleName": "API Management Service Reader Role"
+  },
 
-...
+  ...
+
+]
 ```
 
 L’exemple suivant liste tous les rôles intégrés.
 
 ```azurecli
-az role definition list --custom-role-only false --output json | jq '.[] | {"roleName":.roleName, "description":.description, "roleType":.roleType}'
+az role definition list --custom-role-only false --output json --query '[].{roleName:roleName, description:description, roleType:roleType}'
 ```
 
-```Output
-{
-  "roleName": "API Management Service Contributor",
-  "description": "Can manage service and the APIs",
-  "roleType": "BuiltInRole"
-}
-{
-  "roleName": "API Management Service Operator Role",
-  "description": "Can manage service but not the APIs",
-  "roleType": "BuiltInRole"
-}
-{
-  "roleName": "API Management Service Reader Role",
-  "description": "Read-only access to service and APIs",
-  "roleType": "BuiltInRole"
-}
+```json
+[
+  {
+    "description": "Can manage service and the APIs",
+    "roleName": "API Management Service Contributor",
+    "roleType": "BuiltInRole"
+  },
+  {
+    "description": "Can manage service but not the APIs",
+    "roleName": "API Management Service Operator Role",
+    "roleType": "BuiltInRole"
+  },
+  {
+    "description": "Read-only access to service and APIs",
+    "roleName": "API Management Service Reader Role",
+    "roleType": "BuiltInRole"
+  },
+  
+  ...
 
-...
+]
 ```
 
 ### <a name="list-a-role-definition"></a>Lister les définitions de rôle
@@ -226,36 +232,36 @@ az role definition list --custom-role-only false --output json | jq '.[] | {"rol
 Pour lister les détails d’un rôle, utilisez [az role definition list](/cli/azure/role/definition#az-role-definition-list).
 
 ```azurecli
-az role definition list --name <role_name>
+az role definition list --name {roleName}
 ```
 
-L’exemple suivant liste la définition de rôle *Contributeur* :
+L’exemple suivant liste la définition de rôle *Contributeur*  :
 
 ```azurecli
 az role definition list --name "Contributor"
 ```
 
-```Output
+```json
 [
   {
-    "additionalProperties": {},
     "assignableScopes": [
       "/"
     ],
     "description": "Lets you manage everything except access to resources.",
-    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
     "name": "b24988ac-6180-42a0-ab88-20f7382dd24c",
     "permissions": [
       {
         "actions": [
           "*"
         ],
-        "additionalProperties": {},
         "dataActions": [],
         "notActions": [
           "Microsoft.Authorization/*/Delete",
           "Microsoft.Authorization/*/Write",
-          "Microsoft.Authorization/elevateAccess/Action"
+          "Microsoft.Authorization/elevateAccess/Action",
+          "Microsoft.Blueprint/blueprintAssignments/write",
+          "Microsoft.Blueprint/blueprintAssignments/delete"
         ],
         "notDataActions": []
       }
@@ -269,46 +275,57 @@ az role definition list --name "Contributor"
 
 ### <a name="list-permissions-of-a-role-definition"></a>Lister les autorisations d’une définition de rôle
 
-L’exemple suivant liste simplement les *actions* et les *notActions* du rôle *Contributeur*.
+L’exemple suivant liste simplement les *actions* et les *notActions* du rôle *Contributeur* .
 
 ```azurecli
-az role definition list --name "Contributor" --output json | jq '.[] | {"actions":.permissions[0].actions, "notActions":.permissions[0].notActions}'
+az role definition list --name "Contributor" --output json --query '[].{actions:permissions[0].actions, notActions:permissions[0].notActions}'
 ```
 
-```Output
-{
-  "actions": [
-    "*"
-  ],
-  "notActions": [
-    "Microsoft.Authorization/*/Delete",
-    "Microsoft.Authorization/*/Write",
-    "Microsoft.Authorization/elevateAccess/Action"
-  ]
-}
-```
-
-L’exemple suivant liste simplement les actions du rôle *Contributeur de machines virtuelles*.
-
-```azurecli
-az role definition list --name "Virtual Machine Contributor" --output json | jq '.[] | .permissions[0].actions'
-```
-
-```Output
+```json
 [
-  "Microsoft.Authorization/*/read",
-  "Microsoft.Compute/availabilitySets/*",
-  "Microsoft.Compute/locations/*",
-  "Microsoft.Compute/virtualMachines/*",
-  "Microsoft.Compute/virtualMachineScaleSets/*",
-  "Microsoft.Insights/alertRules/*",
-  "Microsoft.Network/applicationGateways/backendAddressPools/join/action",
-  "Microsoft.Network/loadBalancers/backendAddressPools/join/action",
+  {
+    "actions": [
+      "*"
+    ],
+    "notActions": [
+      "Microsoft.Authorization/*/Delete",
+      "Microsoft.Authorization/*/Write",
+      "Microsoft.Authorization/elevateAccess/Action",
+      "Microsoft.Blueprint/blueprintAssignments/write",
+      "Microsoft.Blueprint/blueprintAssignments/delete"
+    ]
+  }
+]
+```
 
-  ...
+L’exemple suivant liste simplement les actions du rôle *Contributeur de machines virtuelles* .
 
-  "Microsoft.Storage/storageAccounts/listKeys/action",
-  "Microsoft.Storage/storageAccounts/read"
+```azurecli
+az role definition list --name "Virtual Machine Contributor" --output json --query '[].permissions[0].actions'
+```
+
+```json
+[
+  [
+    "Microsoft.Authorization/*/read",
+    "Microsoft.Compute/availabilitySets/*",
+    "Microsoft.Compute/locations/*",
+    "Microsoft.Compute/virtualMachines/*",
+    "Microsoft.Compute/virtualMachineScaleSets/*",
+    "Microsoft.Compute/disks/write",
+    "Microsoft.Compute/disks/read",
+    "Microsoft.Compute/disks/delete",
+    "Microsoft.DevTestLab/schedules/*",
+    "Microsoft.Insights/alertRules/*",
+    "Microsoft.Network/applicationGateways/backendAddressPools/join/action",
+    "Microsoft.Network/loadBalancers/backendAddressPools/join/action",
+
+    ...
+
+    "Microsoft.Storage/storageAccounts/listKeys/action",
+    "Microsoft.Storage/storageAccounts/read",
+    "Microsoft.Support/*"
+  ]
 ]
 ```
 
@@ -344,6 +361,55 @@ Pour répertorier les définitions de rôles, utilisez l’API REST [Définition
     > | `$filter=atScopeAndBelow()` | Répertorie les définitions de rôles pour l’étendue spécifiée et toutes les sous-étendues. |
     > | `$filter=type+eq+'{type}'` | Répertorie les définitions de rôles du type spécifié. Le type de rôle peut être `CustomRole` ou `BuiltInRole`. |
 
+La requête suivante répertorie les définitions de rôle personnalisées dans l’étendue de l’abonnement :
+
+```http
+GET https://management.azure.com/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleDefinitions?api-version=2015-07-01&$filter=type+eq+'CustomRole'
+```
+
+Voici un exemple de sortie :
+
+```json
+{
+    "value": [
+        {
+            "properties": {
+                "roleName": "Billing Reader Plus",
+                "type": "CustomRole",
+                "description": "Read billing data and download invoices",
+                "assignableScopes": [
+                    "/subscriptions/{subscriptionId1}"
+                ],
+                "permissions": [
+                    {
+                        "actions": [
+                            "Microsoft.Authorization/*/read",
+                            "Microsoft.Billing/*/read",
+                            "Microsoft.Commerce/*/read",
+                            "Microsoft.Consumption/*/read",
+                            "Microsoft.Management/managementGroups/read",
+                            "Microsoft.CostManagement/*/read",
+                            "Microsoft.Billing/invoices/download/action",
+                            "Microsoft.CostManagement/exports/*"
+                        ],
+                        "notActions": [
+                            "Microsoft.CostManagement/exports/delete"
+                        ]
+                    }
+                ],
+                "createdOn": "2020-02-21T04:49:13.7679452Z",
+                "updatedOn": "2020-02-21T04:49:13.7679452Z",
+                "createdBy": "{createdByObjectId1}",
+                "updatedBy": "{updatedByObjectId1}"
+            },
+            "id": "/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId1}",
+            "type": "Microsoft.Authorization/roleDefinitions",
+            "name": "{roleDefinitionId1}"
+        }
+    ]
+}
+```
+
 ### <a name="list-a-role-definition"></a>Lister les définitions de rôle
 
 Pour répertorier les détails d’un rôle spécifique, utilisez l'API REST [Role Definitions - Get](/rest/api/authorization/roledefinitions/get) ou [Role Definitions - Get By Id](/rest/api/authorization/roledefinitions/getbyid).
@@ -372,9 +438,45 @@ Pour répertorier les détails d’un rôle spécifique, utilisez l'API REST [Ro
      
 1. Remplacez *{roleDefinitionId}* par l’identificateur de définition de rôle.
 
+La requête suivante répertorie la définition du rôle [Lecteur](built-in-roles.md#reader) :
+
+```http
+GET https://management.azure.com/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7?api-version=2015-07-01
+```
+
+Voici un exemple de sortie :
+
+```json
+{
+    "properties": {
+        "roleName": "Reader",
+        "type": "BuiltInRole",
+        "description": "Lets you view everything, but not make any changes.",
+        "assignableScopes": [
+            "/"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "*/read"
+                ],
+                "notActions": []
+            }
+        ],
+        "createdOn": "2015-02-02T21:55:09.8806423Z",
+        "updatedOn": "2019-02-05T21:24:35.7424745Z",
+        "createdBy": null,
+        "updatedBy": null
+    },
+    "id": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "type": "Microsoft.Authorization/roleDefinitions",
+    "name": "acdd72a7-3385-48ef-bd42-f606fba81ae7"
+}
+```
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Rôles intégrés pour les ressources Azure](built-in-roles.md)
-- [Rôles intégrés pour les ressources Azure](custom-roles.md)
-- [Lister les attributions de rôles à l’aide du RBAC Azure et du portail Azure](role-assignments-list-portal.md)
-- [Ajouter ou supprimer des attributions de rôles à l’aide du RBAC Azure et du portail Azure](role-assignments-portal.md)
+- [Rôles intégrés Azure](built-in-roles.md)
+- [Rôle personnalisés Azure](custom-roles.md)
+- [Répertorier les attributions de rôles Azure à l’aide du portail Azure](role-assignments-list-portal.md)
+- [Ajouter ou supprimer des attributions de rôles Azure avec le portail Azure](role-assignments-portal.md)

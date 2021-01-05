@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 7188cb5774699fc6e31fc3b8c78068bb33c6f552
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cd0f389615c95ef9b9bc8280b6486740ddba4fb4
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236289"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96456825"
 ---
 # <a name="repeatable-copy-in-azure-data-factory"></a>Copie répétable dans Azure Data Factory
 
@@ -104,7 +104,7 @@ L’activité de copie a exécuté le script de nettoyage pour supprimer les don
 
 ### <a name="mechanism-2-using-sliceidentifiercolumnname"></a>Mécanisme 2 : utilisation du paramètre sliceIdentifierColumnName
 > [!IMPORTANT]
-> Pour le moment, le paramètre sliceIdentifierColumnName n’est pas pris en charge par Azure SQL Data Warehouse. 
+> Actuellement, sliceIdentifierColumnName n’est pas pris en charge pour Azure Synapse Analytics. 
 
 Un deuxième mécanisme pour obtenir la répétabilité consiste à disposer d’une colonne dédiée (sliceIdentifierColumnName) dans la table cible. Cette colonne peut être utilisée par Azure Data Factory pour s’assurer que la source et la destination restent synchronisées. Cette approche fonctionne s’il existe une flexibilité dans la modification ou la définition du schéma de table SQL de destination. 
 
@@ -151,5 +151,5 @@ Comme pour le mécanisme 1, l’activité de copie nettoie automatiquement les 
 Pour accéder à des exemples JSON complets, consultez les articles suivants sur les connecteurs : 
 
 - [Azure SQL Database](data-factory-azure-sql-connector.md)
-- [Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md)
+- [Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md)
 - [SQL Server](data-factory-sqlserver-connector.md)

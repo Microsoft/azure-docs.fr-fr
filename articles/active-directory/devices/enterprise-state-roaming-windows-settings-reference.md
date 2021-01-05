@@ -4,19 +4,19 @@ description: Paramètres pour l’itinérance ou la sauvegarde dans Windows 10 
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
-ms.topic: troubleshooting
+ms.topic: reference
 ms.date: 02/12/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: na
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3a7abc402f1fc2e449e7aac5effdb01b6b941100
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6048ee9237640799b7bec37083e607fc74ffb8e4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672626"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85252965"
 ---
 # <a name="windows-10-roaming-settings-reference"></a>Référence des paramètres d’itinérance Windows 10
 

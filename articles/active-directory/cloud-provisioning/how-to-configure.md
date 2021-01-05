@@ -6,17 +6,17 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/26/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c086227d23901cb7904d8cc0a768e9f4b5ad43db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c8b18629a776dd98950f49b1f607cbc876abcd9c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77620967"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91628885"
 ---
 # <a name="create-a-new-configuration-for-azure-ad-connect-cloud-based-provisioning"></a>Créer une configuration pour le provisionnement cloud Azure AD Connect
 
@@ -25,67 +25,68 @@ Une fois l’agent installé, vous devez vous connecter au portail Azure et conf
 ## <a name="configure-provisioning"></a>Configurer le provisionnement
 Pour configurer le provisionnement, effectuez les étapes suivantes.
 
-1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
-1.  Sélectionnez ensuite **Azure AD Connect**.
-1.  Sélectionnez **Gérer le provisionnement (préversion)** .
+ 1. Dans le portail Azure, sélectionnez **Azure Active Directory**.
+ 2. Sélectionnez ensuite **Azure AD Connect**.
+ 3. Sélectionnez **Gérer le provisionnement**.
 
-    ![Gérer le provisionnement (préversion)](media/how-to-configure/manage1.png)
+ ![Gérer le provisionnement](media/how-to-configure/manage1.png)
+ 
+ 4. Sélectionnez **Nouvelle configuration**.
+ 5. Dans l’écran Configuration, sélectionnez votre domaine et indiquez si vous souhaitez activer ou non la synchronisation du hachage de mot de passe.  Cliquez sur **Créer**.  
+ 
+ ![Créer une configuration](media/how-to-configure/configure1.png)
 
-1.  Sélectionnez **Nouvelle configuration**.
-1.  Dans l’écran de configuration, le domaine local est prérempli.
-1.  Entrez une adresse **E-mail de notification**. Une notification est envoyée à cette adresse e-mail si le provisionnement n’est pas sain.
-1.  Déplacez le sélecteur sur **Activer**, puis sélectionnez **Enregistrer**.
 
-    ![Provisionnement Azure AD (préversion)](media/tutorial-single-forest/configure2.png)
+ 6.  L’écran Modifier la configuration de l’approvisionnement s’ouvre.
+
+   ![Modifier la configuration](media/how-to-configure/configure2.png)
+
+ 7. Entrez une adresse **E-mail de notification**. Une notification est envoyée à cette adresse e-mail si le provisionnement n’est pas sain.
+ 8. Déplacez le sélecteur sur Activer, puis sélectionnez Enregistrer.
 
 ## <a name="scope-provisioning-to-specific-users-and-groups"></a>Limiter l’étendue du provisionnement à certains utilisateurs ou groupes
 Vous pouvez limiter l’étendue de l’agent afin de synchroniser des utilisateurs ou des groupes à l’aide d’unités d’organisation ou de groupes Active Directory locaux. Vous ne pouvez pas configurer des groupes et des unités d’organisation au sein d’une configuration. 
 
-1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
-1.  Sélectionnez ensuite **Azure AD Connect**.
-1.  Sélectionnez **Gérer le provisionnement (préversion)** .
-1.  Sous **Configuration**, sélectionnez votre configuration.
+ 1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
+ 2. Sélectionnez ensuite **Azure AD Connect**.
+ 3. Sélectionnez **Gérer le provisionnement (préversion)** .
+ 4. Sous **Configuration**, sélectionnez votre configuration.
 
-    ![Section de configuration](media/how-to-configure/scope1.png)
+ ![Section de configuration](media/how-to-configure/scope1.png)
+ 
+ 5. Sous **Configurer**, sélectionnez **Modifier les filtres d’étendue** pour modifier l’étendue de la règle de configuration.
+ ![Edit scope](media/how-to-configure/scope3.png)
+ 7. Sur la droite, vous pouvez modifier l’étendue.  Cliquez sur **Terminé** et **Enregistrer** une fois que vous avez terminé.
+ 8. Une fois que vous avez changé l’étendue, vous devez [redémarrer le provisionnement](#restart-provisioning) pour lancer une synchronisation immédiate des changements.
 
-1.  Sous **Configurer**, sélectionnez **Tous les utilisateurs** pour modifier l’étendue de la règle de configuration.
+## <a name="attribute-mapping"></a>Mappage d’attributs
+L’approvisionnement cloud Azure AD Connect vous permet de mapper facilement les attributs entre vos objets utilisateur/groupe locaux et les objets dans Azure AD.  Vous pouvez personnaliser les mappages d’attributs par défaut en fonction des besoins de votre organisation. Vous pouvez ainsi modifier ou supprimer des mappages d’attributs existants ou en créer de nouveaux.  Pour plus d’informations, consultez [Mappage d’attributs](how-to-attribute-mapping.md).
 
-    ![Option Tous les utilisateurs](media/how-to-configure/scope2.png)
-
-1. Sur la droite, vous pouvez modifier l’étendue pour n’y inclure que des groupes de sécurité. Entrez le nom unique du groupe, puis sélectionnez **Ajouter**.
-
-    ![Option Groupes de sécurité sélectionnés](media/how-to-configure/scope3.png)
-
-1.  Vous pouvez également modifier l’étendue pour n’y inclure que certaines unités d’organisation. Sélectionnez **Terminé**, puis **Enregistrer**.  
-2.  Une fois que vous avez changé l’étendue, vous devez [redémarrer le provisionnement](#restart-provisioning) pour lancer une synchronisation immédiate des changements.
-
-    ![Option Unités d’organisation sélectionnées](media/how-to-configure/scope4.png)
-
+## <a name="on-demand-provisioning"></a>Approvisionnement à la demande
+L’approvisionnement cloud Azure AD Connect vous permet de tester les modifications de configuration, en appliquant ces modifications à un seul utilisateur ou groupe.  Vous pouvez l’utiliser pour valider et vérifier que les modifications apportées à la configuration ont été appliquées correctement et sont correctement synchronisées avec Azure AD.  Pour plus d’informations, consultez [Approvisionnement à la demande](how-to-on-demand-provision.md).
 
 ## <a name="restart-provisioning"></a>Redémarrer le provisionnement 
 Si vous ne souhaitez pas attendre la prochaine exécution planifiée, déclenchez l’exécution du provisionnement à l’aide du bouton **Redémarrer le provisionnement**. 
-1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
-1.  Sélectionnez ensuite **Azure AD Connect**.
-1.  Sélectionnez **Gérer le provisionnement (préversion)** .
-1.  Sous **Configuration**, sélectionnez votre configuration.
+ 1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
+ 2. Sélectionnez ensuite **Azure AD Connect**.
+ 3.  Sélectionnez **Gérer le provisionnement (préversion)** .
+ 4. Sous **Configuration**, sélectionnez votre configuration.
 
-    ![Sélection de la configuration pour redémarrer le provisionnement](media/how-to-configure/scope1.png)
+   ![Sélection de la configuration pour redémarrer le provisionnement](media/how-to-configure/scope1.png)
 
-1.  En haut de la page, sélectionnez **Redémarrer le provisionnement**.
+ 5. En haut de la page, sélectionnez **Redémarrer le provisionnement**.
 
 ## <a name="remove-a-configuration"></a>Supprimer une configuration
 Pour supprimer une configuration, effectuez les étapes suivantes.
 
-1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
-1.  Sélectionnez ensuite **Azure AD Connect**.
-1.  Sélectionnez **Gérer le provisionnement (préversion)** .
-1.  Sous **Configuration**, sélectionnez votre configuration.
+ 1.  Dans le portail Azure, sélectionnez **Azure Active Directory**.
+ 2. Sélectionnez ensuite **Azure AD Connect**.
+ 3. Sélectionnez **Gérer le provisionnement (préversion)** .
+ 4. Sous **Configuration**, sélectionnez votre configuration.
+   
+   ![Sélection de la configuration pour supprimer la configuration](media/how-to-configure/scope1.png)
 
-    ![Sélection de la configuration pour supprimer la configuration](media/how-to-configure/scope1.png)
-
-1.  En haut de l’écran de configuration, sélectionnez **Supprimer**.
-
-    ![Bouton Supprimer](media/how-to-configure/remove1.png)
+ 5. En haut de l’écran de configuration, sélectionnez **Supprimer**.
 
 >[!IMPORTANT]
 >Lorsque vous supprimez une configuration, aucune demande de confirmation ne s’affiche. Vous devez donc être sûr de vous avant de sélectionner **Supprimer**.

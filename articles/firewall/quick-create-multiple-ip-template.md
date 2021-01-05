@@ -1,45 +1,48 @@
 ---
 title: 'Démarrage rapide : Créer un pare-feu Azure avec plusieurs adresses IP publiques - modèle Resource Manager'
-description: Découvrez comment utiliser un modèle Resource Manager pour créer un pare-feu Azure avec plusieurs adresses IP publiques.
+description: Dans ce guide de démarrage rapide, découvrez comment utiliser un modèle Azure Resource Manager (modèle ARM) pour créer un pare-feu Azure avec plusieurs adresses IP publiques.
 services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: quickstart
 ms.custom: subject-armqs
-ms.date: 04/14/2020
+ms.date: 08/28/2020
 ms.author: victorh
-ms.openlocfilehash: b81362f191e6317aa7ffa974a6d432b0c7514d8f
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 33d110f327a381241fd9dbf55996a6e3f9fd3a43
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83680540"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92057975"
 ---
-# <a name="quickstart-create-an-azure-firewall-with-multiple-public-ip-addresses---resource-manager-template"></a>Démarrage rapide : Créer un pare-feu Azure avec plusieurs adresses IP publiques - modèle Resource Manager
+# <a name="quickstart-create-an-azure-firewall-with-multiple-public-ip-addresses---arm-template"></a>Démarrage rapide : Créer un pare-feu Azure avec plusieurs adresses IP publiques - Modèle ARM
 
-Dans ce guide de démarrage rapide, vous utilisez un modèle Resource Manager pour déployer un pare-feu Azure avec plusieurs adresses IP publiques. Le pare-feu déployé présente des règles de collection de règles NAT qui autorisent les connexions RDP à deux machines virtuelles Windows Server 2019.
+Dans ce guide de démarrage rapide, vous utilisez un modèle Azure Resource Manager (modèle ARM) pour déployer un pare-feu Azure avec plusieurs adresses IP publiques à partir d’un préfixe d’adresses IP publique. Le pare-feu déployé présente des règles de collection de règles NAT qui autorisent les connexions RDP à deux machines virtuelles Windows Server 2019.
 
 [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
 
 Pour plus d’informations sur le pare-feu Azure avec plusieurs adresses IP publiques, consultez [Déployer un pare-feu Azure avec plusieurs adresses IP publiques à l’aide d’Azure PowerShell](deploy-multi-public-ip-powershell.md).
 
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Ffw-docs-qs%2Fazuredeploy.json)
+
 ## <a name="prerequisites"></a>Prérequis
 
 - Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
-## <a name="create-an-azure-firewall"></a>Créer un pare-feu Azure
+## <a name="review-the-template"></a>Vérifier le modèle
 
 Ce modèle crée un pare-feu Azure avec deux adresses IP publiques ainsi que les ressources nécessaires à la prise en charge du pare-feu Azure.
 
-### <a name="review-the-template"></a>Vérifier le modèle
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/fw-docs-qs).
 
-Le modèle utilisé dans ce guide de démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/fw-docs-qs).
-
-:::code language="json" source="~/quickstart-templates/fw-docs-qs/azuredeploy.json" range="001-391" highlight="238-370":::
+:::code language="json" source="~/quickstart-templates/fw-docs-qs/azuredeploy.json":::
 
 Plusieurs ressources Azure sont définies dans le modèle :
 
 - [**Microsoft.Network/networkSecurityGroups**](/azure/templates/microsoft.network/networksecuritygroups)
+- [**Microsoft.Network/publicIPPrefix**](/azure/templates/microsoft.network/publicipprefixes)
 - [**Microsoft.Network/publicIPAddresses**](/azure/templates/microsoft.network/publicipaddresses)
 - [**Microsoft.Network/virtualNetworks**](/azure/templates/microsoft.network/virtualnetworks)
 - [**Microsoft.Compute/virtualMachines**](/azure/templates/microsoft.compute/virtualmachines)
@@ -48,9 +51,9 @@ Plusieurs ressources Azure sont définies dans le modèle :
 - [**Microsoft.Network/azureFirewalls**](/azure/templates/microsoft.network/azureFirewalls)
 - [**Microsoft.Network/routeTables**](/azure/templates/microsoft.network/routeTables)
 
-### <a name="deploy-the-template"></a>Déployer le modèle
+## <a name="deploy-the-template"></a>Déployer le modèle
 
-Déployez le modèle Resource Manager sur Azure :
+Déployez le modèle ARM sur Azure :
 
 1. Sélectionnez **Déployer sur Azure** pour vous connecter à Azure et ouvrir le modèle. Le modèle crée un pare-feu Azure, l’infrastructure réseau et deux machines virtuelles.
 

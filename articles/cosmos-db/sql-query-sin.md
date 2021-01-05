@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : SIN'
 description: Découvrez la fonction système SQL SIN dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 25e7cf66fdd55a0b641c35443e38b0a67cbe365d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd7abb4364cf10e01008b980211949a65027d6a2
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78303101"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93335396"
 ---
 # <a name="sin-azure-cosmos-db"></a>SIN (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le sinus trigonométrique de l’angle spécifié, en radians, dans l’expression spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe

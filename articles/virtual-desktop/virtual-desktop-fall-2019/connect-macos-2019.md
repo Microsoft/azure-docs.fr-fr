@@ -1,26 +1,24 @@
 ---
-title: 'Se connecter à Windows Virtual Desktop à partir de macOS : Azure'
-description: Comment se connecter à Windows Virtual Desktop à l’aide du client macOS.
-services: virtual-desktop
-author: heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+title: Se connecter à Windows Virtual Desktop (classique) à partir de macOS - Azure
+description: Explique comment se connecter à Windows Virtual Desktop (classique) à l’aide du client macOS.
+author: Heidilohr
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 79eaefb5cd8181bd471618761255bf38f464d735
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: a0d2bd6a07cfc9e5ebe205322550c9e898022846
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614110"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008438"
 ---
-# <a name="connect-with-the-macos-client"></a>Se connecter avec le client macOS
+# <a name="connect-to-windows-virtual-desktop-classic-with-the-macos-client"></a>Se connecter à Windows Virtual Desktop (classique) avec le client macOS
 
 > S’applique à : macOS 10.12 ou version ultérieure
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../connect-macos.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../connect-macos.md).
 
 Vous pouvez accéder aux ressources Windows Virtual Desktop à partir de vos appareils macOS avec notre client téléchargeable. Ce guide vous explique comment configurer le client.
 

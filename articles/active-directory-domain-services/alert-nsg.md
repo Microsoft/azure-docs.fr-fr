@@ -2,21 +2,21 @@
 title: Résoudre les alertes de groupe de sécurité réseau dans Azure AD DS | Microsoft Docs
 description: Découvrez comment résoudre les alertes liées à la configuration du groupe de sécurité réseau pour Azure Active Directory Domain Services.
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.assetid: 95f970a7-5867-4108-a87e-471fa0910b8c
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: troubleshooting
-ms.date: 09/19/2019
-ms.author: iainfou
-ms.openlocfilehash: 959f1e3f25602938d769c574ea975c4bba9300e1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: d8f2e77b7225306844cec85363a2971eaac4eebd
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71258004"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96620254"
 ---
 # <a name="known-issues-network-configuration-alerts-in-azure-active-directory-domain-services"></a>Problèmes connus : Alertes de configuration réseau dans Azure Active Directory Domain Services
 
@@ -34,7 +34,7 @@ Les règles de groupe de sécurité réseau non valides sont la cause la plus co
 
 ## <a name="default-security-rules"></a>Règles de sécurité par défaut
 
-Les règles de sécurité de trafic entrant et sortant par défaut suivantes sont appliquées au groupe de sécurité réseau d'un domaine managé Azure AD DS. Ces règles sécurisent Azure AD DS et permettent à la plateforme Azure de surveiller, de gérer et de mettre à jour le domaine managé. Vous pouvez [configurer LDAP sécurisé][configure-ldaps] pour disposer d'une règle supplémentaire autorisant le trafic entrant.
+Les règles de sécurité de trafic entrant et sortant par défaut suivantes sont appliquées au groupe de sécurité réseau d'un domaine managé. Ces règles sécurisent Azure AD DS et permettent à la plateforme Azure de surveiller, de gérer et de mettre à jour le domaine managé.
 
 ### <a name="inbound-security-rules"></a>Règles de sécurité de trafic entrant
 
@@ -46,6 +46,9 @@ Les règles de sécurité de trafic entrant et sortant par défaut suivantes son
 | 65 000    | AllVnetInBound | Quelconque | Quelconque | VirtualNetwork | VirtualNetwork | Allow |
 | 65 001    | AllowAzureLoadBalancerInBound | Quelconque | Quelconque | AzureLoadBalancer | Quelconque | Allow |
 | 65 500    | DenyAllInBound | Quelconque | Quelconque | Quelconque | Quelconque | Deny |
+
+> [!NOTE]
+> Vous pouvez [configurer LDAP sécurisé][configure-ldaps] pour disposer d'une règle supplémentaire autorisant le trafic entrant. Cette règle supplémentaire est requise pour une communication LDAPS correcte.
 
 ### <a name="outbound-security-rules"></a>Règles de sécurité de trafic entrant
 
@@ -68,7 +71,7 @@ Pour vérifier les règles de sécurité existantes et vous assurer que les port
 
     Examinez les règles de trafic entrant et sortant, puis comparez-les à la liste des règles requises dans la section précédente. Si nécessaire, sélectionnez et supprimez toutes les règles personnalisées qui bloquent le trafic requis. Si l’une des règles requises est manquante, ajoutez une règle dans la section suivante.
 
-    Après avoir ajouté ou supprimé des règles pour autoriser le trafic requis, l’intégrité du domaine managé Azure AD DS se met automatiquement à jour dans les deux heures, et l’alerte est supprimée.
+    Après avoir ajouté ou supprimé des règles pour autoriser le trafic requis, l’intégrité du domaine managé se met automatiquement à jour dans les deux heures, et l’alerte est supprimée.
 
 ### <a name="add-a-security-rule"></a>Ajouter une règle de sécurité
 

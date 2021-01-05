@@ -13,12 +13,12 @@ ms.topic: overview
 ms.date: 11/15/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: 8d7fa8b8119ddf1769b36bcb55831047d6242470
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 85fa79cdfc7036be5b0ab20e49986a1d075152c5
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215207"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "86254654"
 ---
 # <a name="about-api-management"></a>En savoir plus sur la Gestion des API
 
@@ -102,7 +102,7 @@ Pour plus d'informations, consultez les pages [Création ou invitation de dével
 ## <a name="policies"></a><a name="policies"> </a> Stratégies
 Les stratégies sont une fonctionnalité puissante de Gestion des API. Elles permettent au portail Azure de modifier le comportement de l’API grâce à la configuration. Les stratégies sont un ensemble d'instructions qui sont exécutées dans l'ordre sur demande ou sur réponse d'une API. Les instructions les plus utilisées comprennent la conversion du format XML au format JSON et la limitation du débit d'appels pour restreindre le nombre d'appels entrants d'un développeur. De nombreuses autres stratégies sont disponibles.
 
-Les expressions de stratégie peuvent être utilisées comme valeurs d’attribut ou valeurs de texte dans l’une des stratégies de Gestion des API, sauf si la stratégie le spécifie autrement. Certaines stratégies, telles que les stratégies [Control flow](/azure/api-management/api-management-advanced-policies#choose) et [Set variable](/azure/api-management/api-management-advanced-policies#set-variable), sont basées sur des expressions de stratégie. Pour plus d’informations, consultez les rubriques [Stratégies avancées](/azure/api-management/api-management-advanced-policies#AdvancedPolicies) et [Expressions de stratégie](/azure/api-management/api-management-policy-expressions).
+Les expressions de stratégie peuvent être utilisées comme valeurs d’attribut ou valeurs de texte dans l’une des stratégies de Gestion des API, sauf si la stratégie le spécifie autrement. Certaines stratégies, telles que les stratégies [Control flow](./api-management-advanced-policies.md#choose) et [Set variable](./api-management-advanced-policies.md#set-variable), sont basées sur des expressions de stratégie. Pour plus d’informations, consultez les rubriques [Stratégies avancées](./api-management-advanced-policies.md#AdvancedPolicies) et [Expressions de stratégie](./api-management-policy-expressions.md).
 
 
 Pour obtenir la liste complète des stratégies Gestion des API, consultez la page [Référence de stratégie][Policy reference]. Pour plus d'informations sur l'utilisation et la configuration des stratégies, consultez la page [Stratégies Gestion des API][API Management policies]. Pour consulter un didacticiel sur la création d'un produit avec des stratégies de limite de débit et de quota, consultez la page [Création et configuration de paramètres produit avancés][How create and configure advanced product settings].
@@ -135,17 +135,13 @@ Terminez le démarrage rapide suivant et commencez à utiliser la Gestion des AP
 [Policies]: #policies
 [Developer portal]: #developer-portal
 
-[How to create APIs]: api-management-howto-create-apis.md
-[How to add operations to an API]: api-management-howto-add-operations.md
+[How to create APIs]: ./import-and-publish.md
+[How to add operations to an API]: ./mock-api-responses.md
 [How to create and publish a product]: api-management-howto-add-products.md
 [How to create and use groups]: api-management-howto-create-groups.md
 [How to associate groups with developers]: api-management-howto-create-groups.md#associate-group-developer
 [How create and configure advanced product settings]: transform-api.md
 [How to create or invite developers]: api-management-howto-create-or-invite-developers.md
-[Policy reference]: api-management-policy-reference.md
+[Policy reference]: ./api-management-policies.md
 [API Management policies]: api-management-howto-policies.md
 [Create an API Management service instance]: get-started-create-service-instance.md
-
-
-
-

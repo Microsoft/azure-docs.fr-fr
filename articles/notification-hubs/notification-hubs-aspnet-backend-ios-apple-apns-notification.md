@@ -1,27 +1,25 @@
 ---
 title: Envoyer des notifications Push vers des utilisateurs spécifiques à l’aide d’Azure Notification Hubs | Microsoft Docs
-description: Découvrez comment envoyer des notifications Push à des utilisateurs spécifiques à l’aide de Azure Notification Hubs.
+description: Découvrez comment envoyer des notifications Push à des utilisateurs spécifiques d’iOS à l’aide d’Azure Notification Hubs.
 documentationcenter: ios
-author: sethm
+author: sethmanheim
 manager: femila
-editor: jwargo
 services: notification-hubs
-ms.assetid: 1f7d1410-ef93-4c4b-813b-f075eed20082
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
-ms.date: 01/04/2019
+ms.date: 08/07/2020
 ms.author: sethm
-ms.reviewer: jowargo
+ms.reviewer: thsomasu
 ms.lastreviewed: 01/04/2019
-ms.openlocfilehash: 48135ea614bbab4ca6649a83895ae5f632918c61
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 167c666c536ee33531fd069dbd1edb530331a9f3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72387474"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016939"
 ---
 # <a name="tutorial-send-push-notifications-to-specific-users-using-azure-notification-hubs"></a>Tutoriel : Envoyer des notifications Push vers des utilisateurs spécifiques à l’aide d’Azure Notification Hubs
 
@@ -42,17 +40,17 @@ Dans ce tutoriel, vous effectuez les étapes suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-Ce didacticiel repose sur l'hypothèse que vous avez créé et configuré votre hub de notification comme décrit dans [Prise en main de Notification Hubs (iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md). Ce didacticiel est également un prérequis pour le didacticiel sur les [notifications Push sécurisées (iOS)](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) .
-Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article [Mobile Apps concernant la prise en main des notifications Push](../app-service-mobile/app-service-mobile-ios-get-started-push.md).
+Ce didacticiel repose sur l'hypothèse que vous avez créé et configuré votre hub de notification comme décrit dans [Envoyer des notification Push à des applications iOS avec Azure Notification Hubs](ios-sdk-get-started.md). Ce didacticiel est également un prérequis pour le didacticiel sur les [notifications Push sécurisées (iOS)](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) .
+Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article [Mobile Apps concernant la prise en main des notifications Push](/previous-versions/azure/app-service-mobile/app-service-mobile-ios-get-started-push).
 
 [!INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
 
 ## <a name="modify-your-ios-app"></a>Modification de votre application iOS
 
-1. Ouvrez l'application d'affichage Page simple que vous avez créée dans le didacticiel [Prise en main de Notification Hubs (iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md) .
+1. Ouvrez l’application en mode page unique que vous avez créée dans le tutoriel [Envoyer des notifications Push vers des applications iOS à l’aide d’Azure Notification Hubs](ios-sdk-get-started.md).
 
    > [!NOTE]
-   > Cette section suppose que vous avez configuré votre projet avec un nom d’organisation vide. Si ce n’est pas le cas, vous devez ajouter le nom de votre organisation à tous les noms de classe.
+   > Cette section suppose que vous avez configuré votre projet avec un nom d’organisation vide. Si ce n’est pas le cas, ajoutez le nom de votre organisation à tous les noms de classe.
 
 2. Dans le fichier `Main.storyboard`, ajoutez les composants indiqués dans la capture d’écran de la bibliothèque d’objets.
 
@@ -66,9 +64,9 @@ Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article
    * **APNS** : étiquette et commutateur pour activer l’envoi de la notification au service de notification de la plateforme Apple.
    * **Nom d'utilisateur du destinataire**: champ UITextField avec du texte d'espace réservé, *Balise du nom d'utilisateur du destinataire*, juste en dessous de l'étiquette GCM et entre les marges gauche et droite, en dessous de l'étiquette GCM.
 
-     Certains composants ont été ajoutés dans le didacticiel [Prise en main de Notification Hubs (iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md) .
+     Certains composants ont été ajoutés au tutoriel [Envoyer des notifications Push à des applications iOS avec Azure Notification Hubs](ios-sdk-get-started.md).
 
-3. Faites glisser les composants de l’affichage vers `ViewController.h` en maintenant la touche **Ctrl** enfoncée, puis ajoutez ces nouvelles sorties.
+3. Faites glisser les composants de l’affichage vers `ViewController.h` en maintenant la touche **Ctrl** enfoncée, puis ajoutez ces nouvelles sorties :
 
     ```objc
     @property (weak, nonatomic) IBOutlet UITextField *UsernameField;
@@ -88,13 +86,13 @@ Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article
     - (IBAction)LogInAction:(id)sender;
     ```
 
-4. Dans `ViewController.h`, ajoutez le code `#define` suivant après vos instructions d’importation. Remplacez l’espace réservé `<Enter Your Backend Endpoint>` par l’URL de destination que vous avez utilisée pour déployer votre serveur principal d’application dans la section précédente. Par exemple : `http://your_backend.azurewebsites.net`.
+4. Dans `ViewController.h`, ajoutez le code `#define` suivant après vos instructions d’importation. Remplacez l’espace réservé `<Your backend endpoint>` par l’URL de destination que vous avez utilisée pour déployer votre serveur principal d’application dans la section précédente. Par exemple, `http://your_backend.azurewebsites.net`:
 
     ```objc
-    #define BACKEND_ENDPOINT @"<Enter Your Backend Endpoint>"
+    #define BACKEND_ENDPOINT @"<Your backend endpoint>"
     ```
 
-5. Dans votre projet, créez une classe Cocoa Touch nommée `RegisterClient` pour communiquer avec le serveur principal ASP.NET que vous avez créé. Créez la classe en héritant de `NSObject`. Ajoutez ensuite le code suivant dans `RegisterClient.h`.
+5. Dans votre projet, créez une classe Cocoa Touch nommée `RegisterClient` pour communiquer avec le serveur principal ASP.NET que vous avez créé. Créez la classe en héritant de `NSObject`. Ajoutez ensuite le code suivant dans `RegisterClient.h` :
 
     ```objc
     @interface RegisterClient : NSObject
@@ -343,7 +341,7 @@ Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article
     }
     ```
 
-    Remarquez la façon dont le jeton de l’appareil active le bouton de connexion. Ceci est dû au fait que dans le cadre de l’action de connexion, le contrôleur d’affichage s’inscrit aux notifications Push auprès du serveur principal d’application. De ce fait, l’action de connexion ne doit pas être accessible tant que le jeton de l’appareil n’a pas été correctement configuré. Vous pouvez découpler la connexion de l’inscription aux notifications Push dans la mesure où la connexion se produit avant l’inscription.
+    Remarquez la façon dont le jeton de l’appareil active le bouton **Connexion**. Ceci est dû au fait que dans le cadre de l’action de connexion, le contrôleur d’affichage s’inscrit aux notifications Push auprès du serveur principal d’application. Vous ne voulez pas que l’action **Se connecter** soit accessible tant que le jeton de l’appareil n’a pas été correctement configuré. Vous pouvez découpler la connexion de l’inscription aux notifications Push dans la mesure où la connexion se produit avant l’inscription.
 
 11. Dans ViewController.m, utilisez les extraits de code suivants pour implémenter la méthode d'action de votre bouton **Connexion** et une méthode pour envoyer le message de notification à l'aide du serveur principal ASP.NET.
 
@@ -496,7 +494,7 @@ Si vous souhaitez utiliser Mobile Apps comme service principal, voir l’article
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez appris à envoyer des notifications Push à des utilisateurs spécifiques ayant des balises associées à leurs enregistrements. Pour savoir comment envoyer des notifications basées sur l’emplacement, passez au tutoriel suivant : 
+Dans ce tutoriel, vous avez appris à envoyer des notifications Push à des utilisateurs spécifiques ayant des balises associées à leurs enregistrements. Pour savoir comment envoyer des notifications basées sur l’emplacement, passez au tutoriel suivant :
 
 > [!div class="nextstepaction"]
 >[Notifications Push en fonction de la localisation](notification-hubs-push-bing-spatial-data-geofencing-notification.md)

@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/19/2017
 ms.author: alkohli
-ms.openlocfilehash: 956cf45eb9e246f2e1f917f2bf487ac14deba90e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 48671e7558ea1bd613d33372c96fa3c563407e81
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65204245"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017217"
 ---
 # <a name="configure-web-proxy-for-your-storsimple-device"></a>Configurer le proxy web pour votre appareil StorSimple
 
@@ -154,6 +154,5 @@ Si les paramètres du proxy web sont mal configurés, des messages d’erreur s�
 > * Les erreurs liées aux paramètres du proxy web ne s’afficheront pas dans le portail Azure de votre service StorSimple Device Manager. Si un problème survient au niveau du proxy web après la configuration, l’état de l’appareil affiche **Hors connexion** dans le portail Azure Classic.|
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Si vous rencontrez des problèmes lors du déploiement de votre appareil ou la configuration des paramètres de proxy web, voir [Dépannage du déploiement de votre appareil StorSimple](storsimple-troubleshoot-deployment.md).
+* Si vous rencontrez des problèmes lors du déploiement de votre appareil ou la configuration des paramètres de proxy web, voir [Dépannage du déploiement de votre appareil StorSimple](./storsimple-8000-troubleshoot-deployment.md).
 * Pour apprendre à utiliser le service StorSimple Device Manager, consultez [Use the StorSimple Device Manager service to administer your StorSimple device](storsimple-8000-manager-service-administration.md) (Utiliser le service StorSimple Device Manager pour gérer votre appareil StorSimple).
-

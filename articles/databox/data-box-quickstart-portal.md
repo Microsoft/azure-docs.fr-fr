@@ -1,6 +1,6 @@
 ---
 title: Démarrage rapide pour Microsoft Azure Data Box | Microsoft Docs
-description: Découvrez comment déployer rapidement votre Azure Data Box dans le portail Azure
+description: Dans ce guide de démarrage rapide, découvrez comment déployer Azure Data Box à l’aide du portail Azure pour une commande d’importation. Configurez Azure Data Box et copiez les données à charger dans Azure.
 services: databox
 author: alkohli
 ms.service: databox
@@ -9,18 +9,18 @@ ms.topic: quickstart
 ms.date: 09/03/2019
 ms.author: alkohli
 ms.localizationpriority: high
-ms.openlocfilehash: 04343f684539307957cd635822ba1ba5a1ce24c9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 81dee0c63db711b39ff8fd2123623a16b2b9cb91
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76313771"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92122787"
 ---
-# <a name="get-started-with-azure-data-box"></a>Bien démarrer avec Azure Data Box 
+# <a name="get-started-with-azure-data-box-to-import-data-into-azure"></a>Bien démarrer avec Azure Data Box pour importer des données dans Azure
 
 ::: zone target="docs"
 
-Ce démarrage rapide explique comment déployer Azure Data Box à l’aide du portail Azure. Ces étapes précisent comment brancher les câbles, puis configurer et copier des données vers Data Box données afin de les charger dans Azure. Le démarrage rapide est effectué dans le portail Azure et sur l’interface utilisateur web locale de l’appareil.
+Ce guide de démarrage rapide explique comment déployer Azure Data Box à l’aide du portail Azure pour une commande d’importation. Ces étapes précisent comment brancher les câbles, puis configurer et copier des données vers Data Box données afin de les charger dans Azure. Les étapes de ce guide de démarrage rapide sont à effectuer dans le portail Azure et dans l’interface utilisateur web locale de l’appareil.
 
 Pour obtenir des instructions pas à pas sur le déploiement et le suivi, consultez [Tutoriel : Commander Azure Data Box](data-box-deploy-ordered.md)
 
@@ -28,7 +28,7 @@ Pour obtenir des instructions pas à pas sur le déploiement et le suivi, consul
 
 ::: zone target="chromeless"
 
-Ce guide explique comment déployer Azure Data Box à partir du portail Azure. Les étapes incluent la vérification des prérequis, le câblage et la connexion de votre appareil ainsi que la copie des données sur votre appareil de façon à les charger dans Azure.
+Ce guide explique comment déployer Azure Data Box à partir du portail Azure pour une importation de données. Les étapes incluent la vérification des prérequis, le câblage et la connexion de votre appareil ainsi que la copie des données sur votre appareil de façon à les charger dans Azure.
 
 ::: zone-end
 
@@ -40,7 +40,7 @@ Avant de commencer :
 
 - L’abonnement que vous utilisez pour le service Data Box est un des types suivants :
     - Contrat Entreprise (EA) Microsoft. En savoir plus sur les [abonnements EA](https://azure.microsoft.com/pricing/enterprise-agreement/).
-    - Fournisseur de solutions cloud (CSP). En savoir plus sur le [programme Azure CSP](https://docs.microsoft.com/azure/cloud-solution-provider/overview/azure-csp-overview).
+    - Fournisseur de solutions cloud (CSP). En savoir plus sur le [programme Azure CSP](/azure/cloud-solution-provider/overview/azure-csp-overview).
     - Microsoft Azure Sponsorship. En savoir plus sur le [programme Azure Sponsorship](https://azure.microsoft.com/offers/ms-azr-0036p/). 
 
 - Vous disposez d’un accès propriétaire ou contributeur à l’abonnement pour créer une commande Data Box.
@@ -131,7 +131,7 @@ Cette étape prend environ 5 à 7 minutes.
 
 Le temps nécessaire à cette opération dépend de la taille de vos données et la vitesse du réseau.
  
-1. Si vous utilisez un hôte Windows, utilisez un outil de copie de fichiers compatible avec SMB tel que Robocopy. Pour l’hôte NFS, utilisez la commande `cp` ou `rsync` pour copier les données. Connectez l’outil à votre appareil et commencez la copie des données vers les partages. Pour plus d’informations sur l’utilisation de Robocopy pour copier des données, consultez [Robocopy](https://technet.microsoft.com/library/ee851678.aspx).
+1. Si vous utilisez un hôte Windows, utilisez un outil de copie de fichiers compatible avec SMB tel que Robocopy. Pour l’hôte NFS, utilisez la commande `cp` ou `rsync` pour copier les données. Connectez l’outil à votre appareil et commencez la copie des données vers les partages. Pour plus d’informations sur l’utilisation de Robocopy pour copier des données, consultez [Robocopy](/previous-versions/technet-magazine/ee851678(v=msdn.10)).
 2. Connectez-vous aux partages en utilisant le chemin d’accès :`\\<IP address of your device>\ShareName`. Pour obtenir les informations d'identification d'accès aux partages, accédez à la page **Connexion et copie** de l'interface utilisateur web locale de Data Box.
 3. Assurez-vous que les noms des partages, des dossiers, et les données suivent les instructions décrites dans la section [Limites des services Stockage Azure et Data Box](data-box-limits.md).
 
@@ -170,5 +170,3 @@ Dans ce démarrage rapide, vous avez déployé un appareil Azure Data Box pour f
 > [Use the Azure portal to administer Data Box](data-box-portal-admin.md) (Utiliser le portail Azure pour administrer Data Box)
 
 ::: zone-end
-
-

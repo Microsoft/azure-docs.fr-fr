@@ -11,10 +11,10 @@ ms.custom:
 - amqp
 - mqtt
 ms.openlocfilehash: 7b3dcfc51df7f0fe4291e9c5babccc1444ad32e9
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81730748"
 ---
 # <a name="communicate-with-your-iot-hub-by-using-the-amqp-protocol"></a>Communication avec votre IoT Hub à l’aide du protocole AMQP

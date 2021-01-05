@@ -1,6 +1,7 @@
 ---
-title: Démon Python de plateforme d’identité Microsoft | Azure
-description: Découvrez comment un processus Python peut obtenir un jeton d’accès et appeler une API protégée par un point de terminaison de plateforme d’identité Microsoft à l’aide de l’identité de l’application
+title: 'Démarrage rapide : Appeler Microsoft Graph à partir d’un démon Python | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce guide de démarrage rapide, vous allez découvrir comment un processus Python peut obtenir un jeton d’accès et appeler une API protégée par un point de terminaison de plateforme d’identités Microsoft à l’aide de la propre identité de l’application
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -10,17 +11,17 @@ ms.topic: quickstart
 ms.workload: identity
 ms.date: 10/22/2019
 ms.author: jmprieur
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:Python
-ms.openlocfilehash: 3c6cb6303734b5336b3e9a7646e5eb3310d0f236
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.custom: aaddev, identityplatformtop40, devx-track-python, scenarios:getting-started, languages:Python
+ms.openlocfilehash: 3d4d671fed675de4cb2684d205f8e8b62d3b95cd
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81536044"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107904"
 ---
 # <a name="quickstart-acquire-a-token-and-call-microsoft-graph-api-from-a-python-console-app-using-apps-identity"></a>Démarrage rapide : acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application console Python à l’aide de l’identité de l’application
 
-Dans ce démarrage rapide, écrivez une application Python qui obtient un jeton d’accès à l’aide de l’identité de l’application, puis appelle l’API Microsoft Graph pour afficher une [liste d’utilisateurs](https://docs.microsoft.com/graph/api/user-list) dans l’annuaire. Ce scénario est utile dans les situations où un travail sans périphérique de contrôle et sans assistance ou un service Windows doit s’exécuter avec une identité d’application au lieu d’une identité d’utilisateur.
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment une application Python peut obtenir un jeton d’accès à l’aide de l’identité de l’application pour appeler l’API Microsoft Graph et afficher une [liste des utilisateurs](/graph/api/user-list) dans l’annuaire. L’exemple de code montre comment un travail sans assistance ou un service Windows peut s’exécuter avec l’identité d’une application, au lieu de l’identité d’un utilisateur. 
 
 > [!div renderon="docs"]
 > ![Montre le fonctionnement de l’exemple d’application généré par ce guide de démarrage rapide](media/quickstart-v2-netcore-daemon/netcore-daemon-intro.svg)
@@ -51,17 +52,17 @@ Pour exécuter cet exemple, vous avec besoin de ce qui suit :
 > #### <a name="step-1-register-your-application"></a>Étape 1 : Inscrivez votre application
 > Pour inscrire votre application et ajouter manuellement les informations d’inscription de l’application à votre solution, procédez comme suit :
 >
-> 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-> 1. Si votre compte vous propose un accès à plusieurs locataires, sélectionnez votre compte en haut à droite et définissez votre session de portail sur le locataire Azure AD souhaité.
-> 1. Accédez à la page [Inscriptions des applications](https://go.microsoft.com/fwlink/?linkid=2083908) de la plateforme d’identité Microsoft pour les développeurs.
-> 1. Sélectionnez **Nouvelle inscription**.
-> 1. Lorsque la page **Inscrire une application** s’affiche, saisissez les informations d’inscription de votre application.
-> 1. Dans la section **Nom**, entrez un nom d’application pertinent qui sera visible par les utilisateurs de l’application, par exemple `Daemon-console`, puis sélectionnez **Inscrire** pour créer l’application.
-> 1. Après l’inscription, sélectionnez le menu **Certificats et secrets**.
-> 1. Sous **Secrets client** , sélectionnez **+ Nouveau secret client**. Donnez-lui un nom et sélectionnez **Ajouter**. Copiez le secret dans un emplacement sûr. Vous en aurez besoin plus tard dans votre code.
-> 1. À présent, sélectionnez le menu **Autorisations de l’API**, sélectionnez le bouton **+ Ajouter une autorisation** et sélectionnez **Microsoft Graph**.
+> 1. Connectez-vous au [portail Azure](https://portal.azure.com).
+> 1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+> 1. Recherchez et sélectionnez **Azure Active Directory**.
+> 1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+> 1. Entrez un **nom** pour votre application (par exemple, `Daemon-console`). Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
+> 1. Sélectionnez **Inscription**.
+> 1. Sous **Gérer**, sélectionnez **Certificats et secrets**.
+> 1. Sous **Secrets du client**, sélectionnez **Nouveau secret client**, entrez un nom, puis sélectionnez **Ajouter**. Enregistrez la valeur secrète dans un emplacement sûr pour l’utiliser dans une étape ultérieure.
+> 1. Sous **Gérer**, sélectionnez **Autorisations de l’API** > **Ajouter une autorisation**. Sélectionnez **Microsoft Graph**.
 > 1. Sélectionnez **Autorisations de l’application**.
-> 1. Sous le nœud **Utilisateur**, sélectionnez **User.Read.All**, puis sélectionnez **Ajouter des autorisations**
+> 1. Sous le nœud **Utilisateur**, sélectionnez **User.Read.All**, puis sélectionnez **Ajouter des autorisations**.
 
 > [!div class="sxs-lookup" renderon="portal"]
 > ### <a name="download-and-configure-your-quickstart-app"></a>Télécharger et configurer votre application de démarrage rapide
@@ -79,7 +80,7 @@ Pour exécuter cet exemple, vous avec besoin de ce qui suit :
 > [!div renderon="docs"]
 > [Télécharger le projet de démon Python](https://github.com/Azure-Samples/ms-identity-python-daemon/archive/master.zip)
 
-> [!div renderon="portal" id="autoupdate" class="nextstepaction"]
+> [!div renderon="portal" id="autoupdate" class="sxs-lookup nextstepaction"]
 > [Téléchargez l’exemple de code](https://github.com/Azure-Samples/ms-identity-python-daemon/archive/master.zip).
 
 > [!div class="sxs-lookup" renderon="portal"]
@@ -189,11 +190,11 @@ app = msal.ConfidentialClientApplication(
     client_credential=config["secret"])
 ```
 
-> | Où : ||
+> | Où : |Description |
 > |---------|---------|
 > | `config["secret"]` | Est le secret client créé pour l’application dans le portail Azure. |
 > | `config["client_id"]` | Est l’**ID d’application (client)** de l’application inscrite dans le portail Azure. Vous pouvez retrouver cette valeur dans la page **Vue d’ensemble** de l’application dans le portail Azure. |
-> | `config["authority"]`    | Point de terminaison STS pour l’utilisateur à authentifier. Généralement <https://login.microsoftonline.com/{tenant}> pour un cloud public, où {tenant} est le nom ou l’ID de votre locataire.|
+> | `config["authority"]`    | Point de terminaison STS pour l’utilisateur à authentifier. Généralement `https://login.microsoftonline.com/{tenant}` pour un cloud public, où {tenant} est le nom ou l’ID de votre locataire.|
 
 Pour plus d’informations, consultez la [documentation de référence sur `ConfidentialClientApplication`](https://msal-python.readthedocs.io/en/latest/#confidentialclientapplication)
 
@@ -210,7 +211,7 @@ if not result:
     result = app.acquire_token_for_client(scopes=config["scope"])
 ```
 
-> |Où :| |
+> |Où :| Description |
 > |---------|---------|
 > | `config["scope"]` | Contient les étendues demandées. Pour les clients confidentiels, utilisez un format similaire à `{Application ID URI}/.default`. Ce format indique que les étendues demandées sont celles qui sont définies de manière statique dans l’objet application défini dans le portail Azure (pour Microsoft Graph, `{Application ID URI}` pointe vers `https://graph.microsoft.com`). Pour les API web personnalisées, `{Application ID URI}` est défini sous la section **Exposer une API** dans Inscription de l’application (préversion) sur le portail Azure. |
 
@@ -224,18 +225,3 @@ Pour en savoir plus sur les applications démon, consultez la page de destinatio
 
 > [!div class="nextstepaction"]
 > [Application démon qui appelle des API web](scenario-daemon-overview.md)
-
-Pour le tutoriel d’application démon, consultez :
-
-> [!div class="nextstepaction"]
-> [Didacticiel de la console Python du démon](https://github.com/Azure-Samples/ms-identity-python-daemon)
-
-En savoir plus sur les autorisations et le consentement :
-
-> [!div class="nextstepaction"]
-> [Autorisations et consentement](v2-permissions-and-consent.md)
-
-Pour en savoir plus sur le flux d’authentification applicable à ce scénario, consultez les informations sur le flux d’informations d’identification du client OAuth 2.0 :
-
-> [!div class="nextstepaction"]
-> [Flux d’informations d’identification du client OAuth](v2-oauth2-client-creds-grant-flow.md)

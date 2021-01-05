@@ -6,12 +6,12 @@ ms.author: yegu
 ms.service: cache
 ms.topic: conceptual
 ms.date: 03/22/2018
-ms.openlocfilehash: bd2da798cae92a7e47bd879b69dd108618463402
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.openlocfilehash: 4ca8980123240a90f73a4866c37a79800ce403d1
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81010764"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92538015"
 ---
 # <a name="how-to-use-the-redis-command-line-tool-with-azure-cache-for-redis"></a>Utiliser l’outil en ligne de commande Redis avec le Cache Azure pour Redis
 
@@ -27,8 +27,8 @@ Si vous souhaitez exécuter l’outil en ligne de commande sur une autre platefo
 
 Vous pouvez collecter les informations nécessaires pour accéder au cache à l’aide de trois méthodes :
 
-1. Azure CLI, en utilisant [az redis list-keys](https://docs.microsoft.com/cli/azure/redis?view=azure-cli-latest#az-redis-list-keys)
-2. Azure PowerShell, en utilisant [Get-AzRedisCacheKey](https://docs.microsoft.com/powershell/module/az.rediscache/Get-AzRedisCacheKey)
+1. Azure CLI, en utilisant [az redis list-keys](/cli/azure/redis?view=azure-cli-latest#az-redis-list-keys)
+2. Azure PowerShell, en utilisant [Get-AzRedisCacheKey](/powershell/module/az.rediscache/Get-AzRedisCacheKey)
 3. En utilisant le portail Azure
 
 Dans cette section, vous extrairez les clés du portail Azure.
@@ -72,9 +72,9 @@ Quand vous utilisez stunnel, exécutez *redis-cli.exe* et passez uniquement vos 
 redis-cli.exe -p 6380 -a YourAccessKey
 ```
 
-![stunnel avec redis-cli](media/cache-how-to-redis-cli-tool/cache-redis-cli-stunnel.png)
+![Capture d’écran montrant que votre connexion au cache est réussie.](media/cache-how-to-redis-cli-tool/cache-redis-cli-stunnel.png)
 
-Si vous utilisez un cache de test avec le port non-TLS **non sécurisé**, exécutez `redis-cli.exe` et passez vos *nom d’hôte*, *port* et *clé d’accès* (principale ou secondaire) pour vous connecter au cache de test.
+Si vous utilisez un cache de test avec le port non-TLS **non sécurisé** , exécutez `redis-cli.exe` et passez vos *nom d’hôte* , *port* et *clé d’accès* (principale ou secondaire) pour vous connecter au cache de test.
 
 ```
 redis-cli.exe -h yourcachename.redis.cache.windows.net -p 6379 -a YourAccessKey
@@ -88,4 +88,3 @@ redis-cli.exe -h yourcachename.redis.cache.windows.net -p 6379 -a YourAccessKey
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez-en plus sur l’utilisation de la [console Redis](cache-configure.md#redis-console) pour émettre des commandes.
-

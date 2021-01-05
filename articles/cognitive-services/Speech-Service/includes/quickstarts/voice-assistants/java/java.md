@@ -8,13 +8,14 @@ ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: include
 ms.date: 03/20/2020
+ms.custom: devx-track-java
 ms.author: travisw
-ms.openlocfilehash: 42c835a42bf9172e602d9425659243aff3e118a0
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: f2a4f7881eaaac5093200f130c360bfb6b8c64d7
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80241777"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187643"
 ---
 **Choisir votre environnement cible**
 

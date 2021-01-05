@@ -7,16 +7,16 @@ manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.topic: overview
-ms.date: 12/05/2019
+ms.date: 12/11/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a86d34fca9a88b0df601533a0f3de1cc97ad1a2f
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 0acef468aa53e456cd6fb416fe45558aee064699
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80050598"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97355815"
 ---
 # <a name="what-is-azure-ad-connect-cloud-provisioning"></a>Qu’est-ce que le provisionnement cloud Azure AD Connect ?
 Le provisionnement cloud Azure AD Connect est un nouvel agent Microsoft conçu pour répondre à vos objectifs d’identité hybrides, et vous permettre de les atteindre en matière de synchronisation des utilisateurs, des groupes et des contacts sur Azure AD.  Il peut être utilisé avec la synchronisation Azure AD Connect, et offre les avantages suivants :
@@ -30,6 +30,14 @@ Le provisionnement cloud Azure AD Connect est un nouvel agent Microsoft conçu p
 
 ## <a name="how-is-azure-ad-connect-cloud-provisioning-different-from-azure-ad-connect-sync"></a>En quoi le provisionnement cloud Azure AD Connect est-il différent de la synchronisation Azure AD Connect ?
 Avec le provisionnement cloud Azure AD Connect, le provisionnement d’Active Directory sur Azure AD est orchestré dans Microsoft Online Services. Une organisation a uniquement besoin de déployer, dans son environnement IaaS local, un agent léger qui fait office de pont entre Azure AD et Active Directory. La configuration du provisionnement est stockée dans Azure AD et gérée dans le cadre du service.
+
+## <a name="azure-ad-connect-cloud-provisioning-video"></a>Vidéo du provisionnement cloud Azure AD Connect
+La brève vidéo suivante donne une excellente vue d’ensemble du provisionnement cloud Azure AD Connect :
+
+> [!VIDEO https://youtube.com/embed/mOT3ID02_YQ]
+
+
+## <a name="comparison-between-azure-ad-connect-and-cloud-provisioning"></a>Comparaison entre Azure AD Connect et le provisionnement cloud
 
 Le tableau suivant présente une comparaison entre Azure AD Connect et le provisionnement cloud Azure AD Connect :
 
@@ -62,8 +70,9 @@ Le tableau suivant présente une comparaison entre Azure AD Connect et le provis
 | Autorisation de la personnalisation avancée pour les flux d’attributs |● | |
 | Prise en charge de la réécriture (mots de passe, appareils, groupes) |● | |
 | Support Azure AD Domain Services|● | |
-| [Écriture différée Exchange hybride](../hybrid/reference-connect-sync-attributes-synchronized.md#exchange-hybrid-writeback) |● | |
+| [Écriture différée d’Exchange hybride](../hybrid/reference-connect-sync-attributes-synchronized.md#exchange-hybrid-writeback) |● | |
 | Prise en charge de plus de 50 000 objets par domaine AD |● | |
+| Références entre les domaines|● | |
 
 ## <a name="next-steps"></a>Étapes suivantes 
 

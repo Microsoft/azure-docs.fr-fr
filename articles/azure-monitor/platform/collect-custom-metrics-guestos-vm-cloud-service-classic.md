@@ -7,18 +7,18 @@ ms.topic: conceptual
 ms.date: 09/09/2019
 ms.author: ancav
 ms.subservice: metrics
-ms.openlocfilehash: 3b390ffa20cf3cf79b8fb6311ad05b2978bd5d24
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f539786de589dbab3a191a5343ba315349533447
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655789"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91360988"
 ---
 # <a name="send-guest-os-metrics-to-the-azure-monitor-metric-store-classic-cloud-services"></a>Envoyer des métriques de système d’exploitation invité au magasin de métriques Azure Monitor pour les services cloud classiques 
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Avec [l’extension Diagnostics](diagnostics-extension-overview.md) d’Azure Monitor, vous pouvez collecter des métriques et des journaux d’activité à partir du système d’exploitation invité qui est exécuté dans le cadre d’une machine virtuelle, d’un service cloud ou d’un cluster Service Fabric. L’extension peut envoyer des données de télémétrie à de [nombreux emplacements différents](https://docs.microsoft.com/azure/monitoring/monitoring-data-collection?toc=/azure/azure-monitor/toc.json).
+Avec [l’extension Diagnostics](diagnostics-extension-overview.md) d’Azure Monitor, vous pouvez collecter des métriques et des journaux d’activité à partir du système d’exploitation invité qui est exécuté dans le cadre d’une machine virtuelle, d’un service cloud ou d’un cluster Service Fabric. L’extension peut envoyer des données de télémétrie à de [nombreux emplacements différents](./data-platform.md?toc=/azure/azure-monitor/toc.json).
 
 Cet article décrit le processus permettant d’envoyer au magasin de métriques Azure Monitor les métriques de performances du système d’exploitation invité concernant les services cloud classiques Azure. À partir de la version 1.11 de l’extension Diagnostics, vous pouvez écrire des métriques directement dans le magasin de métriques Azure Monitor, où les métriques standard de la plateforme sont déjà collectées. 
 
@@ -26,13 +26,13 @@ En les stockant dans cet emplacement, vous avez accès aux mêmes actions que ce
 
 Le processus décrit dans cet article fonctionne uniquement pour les compteurs de performances des services cloud Azure. Il ne fonctionne pas pour les autres métriques personnalisées. 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 - Vous devez être [administrateur ou coadministrateur de services fédérés](../../cost-management-billing/manage/add-change-subscription-administrator.md) dans votre abonnement Azure. 
 
-- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services). 
+- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](../../azure-resource-manager/management/resource-providers-and-types.md). 
 
-- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview).
+- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](../../cloud-shell/overview.md).
 
 - Votre service cloud doit se trouver dans une région [ prenant en charge les métriques personnalisées](metrics-custom-overview.md#supported-regions).
 
@@ -46,7 +46,7 @@ Le processus décrit dans cet article fonctionne uniquement pour les compteurs d
 
 ## <a name="create-a-service-principal"></a>Créer un principal du service 
 
-Créez un principal de service dans votre locataire Azure Active Directory à l’aide des instructions fournies dans [Utiliser le portail pour créer une application et un principal du service Azure Active Directory pouvant accéder aux ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal). Notez ce qui suit au cours de ce processus : 
+Créez un principal du service dans votre locataire Azure Active Directory à l’aide des instructions fournies dans [Utiliser le portail pour créer une application et un principal du service Azure Active Directory pouvant accéder aux ressources](../../active-directory/develop/howto-create-service-principal-portal.md). Notez ce qui suit au cours de ce processus : 
 
 - Vous pouvez indiquer n’importe quelle URL pour l’URL de connexion.  
 - Créez un secret client pour cette application.  
@@ -173,7 +173,7 @@ Set-AzureServiceDiagnosticsExtension -ServiceName <classicCloudServiceName> -Sto
 
 1. Accédez au portail Azure. 
 
-   ![Métriques dans le Portail Azure](./media/collect-custom-metrics-guestos-vm-cloud-service-classic/navigate-metrics.png)
+   ![Capture d’écran montrant le portail Azure avec les options Moniteur et Métriques sélectionnées.](./media/collect-custom-metrics-guestos-vm-cloud-service-classic/navigate-metrics.png)
 
 2. Dans le menu de gauche, sélectionnez **Surveiller**.
 
@@ -187,9 +187,8 @@ Set-AzureServiceDiagnosticsExtension -ServiceName <classicCloudServiceName> -Sto
 
 Vous pouvez utiliser les fonctionnalités de filtrage et de fractionnement des dimensions pour afficher la mémoire totale utilisée par un rôle ou une instance de rôle. 
 
- ![Métriques dans le Portail Azure](./media/collect-custom-metrics-guestos-vm-cloud-service-classic/metrics-graph.png)
+ ![Capture d’écran montrant des données métriques.](./media/collect-custom-metrics-guestos-vm-cloud-service-classic/metrics-graph.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - En savoir plus sur les [métriques personnalisées](metrics-custom-overview.md).
-

@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/31/2020
 ms.author: rdhillon
-ms.openlocfilehash: fcc482e6231bbd925fd500a37989052765dede58
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f861f9efa6ecc1886647ed6c460b6718ff97e8a1
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77538532"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95522326"
 ---
 # <a name="troubleshoot-azure-private-endpoint-connectivity-problems"></a>Résoudre les problèmes de connectivité d’Azure Private Endpoint
 
@@ -56,7 +56,7 @@ Passez en revue ces étapes pour vous assurer que toutes les configurations habi
     
        ![Configuration du réseau virtuel et du DNS](./media/private-endpoint-tsg/vnet-dns-configuration.png)
     
-1. Utilisez [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview) pour vérifier que les données sont transmises.
+1. Utilisez [Azure Monitor](../azure-monitor/overview.md) pour vérifier que les données sont transmises.
 
     a. Sur la ressource du point de terminaison privé, sélectionnez **Superviser**.
      - Sélectionnez **Données entrantes** ou **Données sortantes**. 
@@ -93,7 +93,7 @@ Passez en revue ces étapes pour vous assurer que toutes les configurations habi
        - Vérifiez que l'enregistrement de la zone DNS privée existe. Si ce n’est pas le cas, créez-le.
      - Si vous utilisez un DNS personnalisé :
        - vérifiez que vos paramètres DNS personnalisés et la configuration DNS sont corrects.
-       Pour obtenir de l’aide, voir [Présentation du point de terminaison privé : configuration DNS](https://docs.microsoft.com/azure/private-link/private-endpoint-overview#dns-configuration).
+       Pour obtenir de l’aide, voir [Présentation du point de terminaison privé : configuration DNS](./private-endpoint-overview.md#dns-configuration).
 
     b. Si la connectivité est défaillante en raison de groupes de sécurité du réseau (NSG) ou d’itinéraires définis par l'utilisateur :
      - Passez en revue les règles de trafic sortant du groupe de sécurité réseau et créez des règles de trafic sortant appropriées pour autoriser le trafic.
@@ -107,5 +107,5 @@ Passez en revue ces étapes pour vous assurer que toutes les configurations habi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
- * [Créer un point de terminaison privé sur le sous-réseau mis à jour (portail Azure)](https://docs.microsoft.com/azure/private-link/create-private-endpoint-portal)
+ * [Créer un point de terminaison privé sur le sous-réseau mis à jour (portail Azure)](./create-private-endpoint-portal.md)
  * [Guide de résolution des problèmes de liaison privée Azure](troubleshoot-private-link-connectivity.md)

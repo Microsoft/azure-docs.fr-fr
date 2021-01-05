@@ -6,16 +6,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 07/24/2018
+ms.topic: how-to
+ms.date: 10/15/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: f04a3fea3801f917a3ae4aced04ef3824d1cfa82
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fadc739f16ce9690a735be22758f58857ff8b9ff
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184517"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94951619"
 ---
 # <a name="manage-user-access-in-azure-active-directory-b2c"></a>Gérer l’accès utilisateur dans Azure Active Directory B2C
 
@@ -46,17 +46,17 @@ Selon la législation relative à l’application, il peut être nécessaire d�
 
 Voici un exemple de flux utilisateur pour le recueil du consentement parental :
 
-1. Une opération de l’[API Microsoft Graph](https://docs.microsoft.com/graph/use-the-api) identifie l’utilisateur comme étant mineur et retourne les données utilisateur à l’application sous la forme d’un jeton JSON non signé.
+1. Une opération de l’[API Microsoft Graph](/graph/use-the-api) identifie l’utilisateur comme étant mineur et retourne les données utilisateur à l’application sous la forme d’un jeton JSON non signé.
 
 2. L’application traite le jeton JSON et affiche un écran à l’intention du mineur pour l’informer que le consentement parental est nécessaire et pour le demander à un parent en ligne.
 
-3. Azure AD B2C affiche un parcours d’authentification que l’utilisateur peut suivre pour se connecter normalement, et émet un jeton à l’application qui doit inclure **legalAgeGroupClassification = “minorWithParentalConsent”** . L’application collecte l’adresse e-mail du parent et vérifie que ce dernier est un adulte. Pour ce faire, elle fait appel à une source de confiance, par exemple un bureau des cartes d’identité, la vérification du permis de conduire ou une preuve de possession d’une carte de crédit. Si la vérification réussit, l’application demande au mineur de se connecter à l’aide du flux utilisateur Azure AD B2C. Si le consentement est refusé (par exemple, si **legalAgeGroupClassification = "minorWithoutParentalConsent"** ), Azure AD B2C retourne un jeton JSON (et non un compte de connexion) à destination de l’application afin de recommencer le processus de consentement. Il est possible de personnaliser le flux utilisateur de façon à ce qu’un mineur ou un adulte puisse récupérer l’accès au compte d’un mineur en envoyant un code d’inscription à l’adresse e-mail du mineur ou à l’adresse e-mail de l’adulte enregistré.
+3. Azure AD B2C affiche un parcours d’authentification que l’utilisateur peut suivre pour se connecter normalement, et émet un jeton à l’application qui doit inclure **legalAgeGroupClassification = "minorWithParentalConsent"** . L’application collecte l’adresse e-mail du parent et vérifie que ce dernier est un adulte. Pour ce faire, elle fait appel à une source de confiance, par exemple un bureau des cartes d’identité, la vérification du permis de conduire ou une preuve de possession d’une carte de crédit. Si la vérification réussit, l’application demande au mineur de se connecter à l’aide du flux utilisateur Azure AD B2C. Si le consentement est refusé (par exemple, si **legalAgeGroupClassification = "minorWithoutParentalConsent"** ), Azure AD B2C retourne un jeton JSON (et non un compte de connexion) à destination de l’application afin de recommencer le processus de consentement. Il est possible de personnaliser le flux utilisateur de façon à ce qu’un mineur ou un adulte puisse récupérer l’accès au compte d’un mineur en envoyant un code d’inscription à l’adresse e-mail du mineur ou à l’adresse e-mail de l’adulte enregistré.
 
 4. L’application permet au mineur de révoquer le consentement.
 
 5. Quand un mineur ou un adulte révoque le consentement, l’API Microsoft Graph peut être utilisée pour changer la valeur de **consentProvidedForMinor** en **denied**. L’application peut également supprimer un mineur dont le consentement a été révoqué. Il est possible de personnaliser le flux utilisateur de façon à ce que le mineur authentifié (ou le parent utilisant le compte du mineur) puisse révoquer le consentement. Azure AD B2C enregistre **consentProvidedForMinor** avec la valeur **denied**.
 
-Pour plus d’informations sur **legalAgeGroupClassification**, **consentProvidedForMinor** et **ageGroup**, consultez [Type de ressource utilisateur](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/user). Pour plus d’informations sur les attributs personnalisés, consultez [Utiliser des attributs personnalisés pour recueillir des informations sur vos consommateurs](user-flow-custom-attributes.md). Quand vous traitez des attributs étendus en utilisant l’API Microsoft Graph, vous devez utiliser la version longue de l’attribut, comme *extension_18b70cf9bb834edd8f38521c2583cd86_dateOfBirth* : *2011-01-01T00:00:00Z*.
+Pour plus d’informations sur **legalAgeGroupClassification**, **consentProvidedForMinor** et **ageGroup**, consultez [Type de ressource utilisateur](/graph/api/resources/user). Pour plus d’informations sur les attributs personnalisés, consultez [Utiliser des attributs personnalisés pour recueillir des informations sur vos consommateurs](user-flow-custom-attributes.md). Quand vous traitez des attributs étendus en utilisant l’API Microsoft Graph, vous devez utiliser la version longue de l’attribut, comme *extension_18b70cf9bb834edd8f38521c2583cd86_dateOfBirth* : *2011-01-01T00:00:00Z*.
 
 ## <a name="gather-date-of-birth-and-countryregion-data"></a>Recueillir des données sur la date de naissance et le pays/région
 
@@ -66,15 +66,15 @@ Un flux utilisateur personnalisé peut recueillir les informations sur la date d
 
 Les étapes suivantes illustrent la logique utilisée pour calculer **ageGroup** à partir de la date de naissance de l’utilisateur :
 
-1. Essayez de rechercher le pays en fonction du code de pays dans la liste. Si vous ne trouvez pas le pays, revenez à la valeur **Default**.
+1. Essayez de trouver le pays ou la région à l’aide de leur code dans la liste. Si vous ne trouvez pas le pays ou la région, revenez à la valeur **Default**.
 
-2. Si le nœud **MinorConsent** est présent dans l’élément de pays :
+2. Si le nœud **MinorConsent** est présent dans l’élément de pays/région :
 
     a. Calculez la date à laquelle l’utilisateur doit être né pour être considéré comme un adulte. Par exemple, si la date actuelle est le 14 mars 2015, et que **MinorConsent** est 18, la date de naissance doit être au plus tard le 14 mars 2000.
 
     b. Comparez la date de naissance minimale avec la date de naissance réelle. Si la date de naissance minimale se situe avant la date de naissance de l’utilisateur, le calcul renvoie **Minor** lors du calcul de la tranche d’âge.
 
-3. Si le nœud **MinorNoConsentRequired** est présent dans l’élément de pays, répétez les étapes 2a et 2 b avec la valeur issue de **MinorNoConsentRequired**. La sortie de l’étape 2b retourne **MinorNoConsentRequired** si la date de naissance minimale se situe avant la date de naissance de l’utilisateur.
+3. Si le nœud **MinorNoConsentRequired** est présent dans l’élément de pays/région, répétez les étapes 2a et 2 b avec la valeur issue de **MinorNoConsentRequired**. La sortie de l’étape 2b retourne **MinorNoConsentRequired** si la date de naissance minimale se situe avant la date de naissance de l’utilisateur.
 
 4. Si aucun des deux calculs ne renvoie la valeur true, le calcul renvoie **Adult**.
 
@@ -114,7 +114,7 @@ L’image suivante montre le flux utilisateur recommandé :
 
 ![Diagramme illustrant le flux utilisateur d'acceptation recommandé](./media/manage-user-access/user-flow.png)
 
-Voici un exemple de consentement pour des conditions d’utilisation basées sur la date et l’heure dans une revendication :
+Voici un exemple de consentement pour des conditions d’utilisation basées sur la date dans une revendication. Si la revendication de `extension_termsOfUseConsentDateTime` est plus ancienne que `2025-01-15T00:00:00`, forcez une nouvelle acceptation en vérifiant la revendication booléenne `termsOfUseConsentRequired` et en affichant un écran auto-déclaré. 
 
 ```xml
 <ClaimsTransformations>
@@ -128,7 +128,7 @@ Voici un exemple de consentement pour des conditions d’utilisation basées sur
       <InputClaim ClaimTypeReferenceId="extension_termsOfUseConsentDateTime" TransformationClaimType="termsOfUseConsentDateTime" />
     </InputClaims>
     <InputParameters>
-      <InputParameter Id="termsOfUseTextUpdateDateTime" DataType="dateTime" Value="2098-01-30T23:03:45" />
+      <InputParameter Id="termsOfUseTextUpdateDateTime" DataType="dateTime" Value="2025-01-15T00:00:00" />
     </InputParameters>
     <OutputClaims>
       <OutputClaim ClaimTypeReferenceId="termsOfUseConsentRequired" TransformationClaimType="result" />
@@ -137,7 +137,7 @@ Voici un exemple de consentement pour des conditions d’utilisation basées sur
 </ClaimsTransformations>
 ```
 
-Voici un exemple de consentement pour des conditions d’utilisation basées sur la version dans une revendication :
+Voici un exemple de consentement pour des conditions d’utilisation basées sur la version dans une revendication. Si la revendication de `extension_termsOfUseConsentVersion` n’est pas égale à `V1`, forcez une nouvelle acceptation en vérifiant la revendication booléenne `termsOfUseConsentRequired` et en affichant un écran auto-déclaré.
 
 ```xml
 <ClaimsTransformations>

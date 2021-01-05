@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Oneteam | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Oneteam.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 2e94916c-64ae-4e1a-a8b5-bc6ef7d28c29
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/13/2019
 ms.author: jeedes
-ms.openlocfilehash: 875114c53cb3193b1b140e95be19daf7fb6415a9
-ms.sourcegitcommit: af1cbaaa4f0faa53f91fbde4d6009ffb7662f7eb
+ms.openlocfilehash: 6db722a303cf4b5782578f58ff7afb9a9a1936b6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81870310"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019087"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-oneteam"></a>Tutoriel : Intégration d’Azure Active Directory à Oneteam
 
@@ -31,7 +27,7 @@ L’intégration de Oneteam dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à Oneteam (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -105,7 +101,7 @@ Pour configurer l’authentification unique Azure AD avec Oneteam, effectuez les
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL Oneteam](common/idp-intiated.png)
+    ![Capture d’écran montrant la section « Configuration SAML de base » avec les zones de texte « Identificateur » et« URL de réponse » mises en évidence, et le bouton « Enregistrer » sélectionné.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://api.one-team.io/teams/<team name>`
 
@@ -200,13 +196,12 @@ Dans cette section, un utilisateur nommé Britta Simon est créé dans Oneteam. 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Oneteam dans le volet d’accès doit vous connecter automatiquement à l’application Oneteam pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Oneteam dans le volet d’accès doit vous connecter automatiquement à l’application Oneteam pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -8,12 +8,13 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 12/19/2018
 ms.author: liydu
-ms.openlocfilehash: 8e840a1ae7161ea3e7b370889a1f0fb648ca120e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: be26c6fe03dac9b9ff9dbff4a2bdce391ec0837e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73953351"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024161"
 ---
 # <a name="use-iot-devkit-az3166-with-azure-functions-and-cognitive-services-to-make-a-language-translator"></a>Utiliser le DevKit IoT AZ3166 avec Azure Functions et Cognitive Services pour créer un traducteur
 
@@ -25,7 +26,7 @@ Dans cet article, vous découvrez comment transformer IoT DevKit en traducteur �
 
 Pour effectuer les étapes de ce didacticiel, commencez par exécuter les tâches suivantes :
 
-* Préparez le DevKit en suivant les étapes contenues dans l’article [Connecter IoT DevKit AZ3166 à Azure IoT Hub dans le cloud](/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started).
+* Préparez le DevKit en suivant les étapes contenues dans l’article [Connecter IoT DevKit AZ3166 à Azure IoT Hub dans le cloud](./iot-hub-arduino-iot-devkit-az3166-get-started.md).
 
 ## <a name="create-azure-cognitive-service"></a>Créer Azure Cognitive Service
 
@@ -151,4 +152,4 @@ Vous avez appris à utiliser le Devkit IoT comme traducteur à l’aide d’Azur
 Passez aux autres tutoriels pour apprendre à :
 
 > [!div class="nextstepaction"]
-> [Connecter IoT DevKit AZ3166 à l’accélérateur de solution de supervision à distance Azure IoT](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-devkit-remote-monitoring)
+> [Connecter IoT DevKit AZ3166 à l’accélérateur de solution de supervision à distance Azure IoT](./iot-hub-arduino-iot-devkit-az3166-devkit-remote-monitoring.md)

@@ -1,6 +1,6 @@
 ---
 title: FAQ - Azure VMware Solution by CloudSimple
-description: Questions fréquentes sur Azure VMware Solution by CloudSimple
+description: Ces questions fréquemment posées sur Azure VMware Solution par CloudSimple incluent la connectivité, la mise en réseau, la sécurité, le stockage, l’intégration d’Azure, etc.
 author: sharaths-cs
 ms.author: b-shsury
 ms.date: 08/15/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 95d8c2974ea372dd59d15a9f2cc31ed171acd932
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0db8c13a7467ed864c0845319b37f958f60fa4d9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77025059"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88140885"
 ---
 # <a name="frequently-asked-questions-about-vmware-solution-by-cloudsimple"></a>Questions fréquentes sur VMware Solution by CloudSimple
 

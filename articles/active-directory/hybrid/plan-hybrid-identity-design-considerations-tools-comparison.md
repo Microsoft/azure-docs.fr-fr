@@ -15,18 +15,18 @@ ms.date: 04/07/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 052d99a819aee415d5e7ad6dc00b8c786af0f636
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: d9c8f5a75fea6ddd85026407fe4784c8a4589e33
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811110"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89278307"
 ---
 # <a name="hybrid-identity-directory-integration-tools-comparison"></a>Identité hybride : Comparaison des outils d’intégration d’annuaire
 Au fil des années, les outils d’intégration de répertoire ont évolué et se sont améliorés.  
 
 
-- [FIM](https://docs.microsoft.com/previous-versions/windows/desktop/forefront-2010/ff182370%28v%3dvs.100%29) et [MIM](https://docs.microsoft.com/microsoft-identity-manager/microsoft-identity-manager-2016) sont toujours pris en charge et permettent principalement la synchronisation entre les systèmes locaux.   Le [connecteur Azure AD pour FIM Windows](https://docs.microsoft.com/previous-versions/mim/dn511001(v=ws.10)?redirectedfrom=MSDN) est pris en charge à la fois dans FIM et MIM, mais n’est pas recommandé pour les nouveaux déploiements : les clients avec des sources locales telles que Notes ou SAP HCM doivent utiliser MIM pour remplir Active Directory Domain Services (AD DS), puis utiliser la synchronisation Azure AD Connect ou le provisionnement cloud Azure AD Connect pour effectuer une synchronisation d’AD DS à Azure AD.
+- [FIM](/previous-versions/windows/desktop/forefront-2010/ff182370(v=vs.100)) et [MIM](/microsoft-identity-manager/microsoft-identity-manager-2016) sont toujours pris en charge et permettent principalement la synchronisation entre les systèmes locaux.   Le [connecteur Azure AD pour FIM Windows](/previous-versions/mim/dn511001(v=ws.10)) est pris en charge à la fois dans FIM et MIM, mais n’est pas recommandé pour les nouveaux déploiements : les clients avec des sources locales telles que Notes ou SAP HCM doivent utiliser MIM pour remplir Active Directory Domain Services (AD DS), puis utiliser la synchronisation Azure AD Connect ou le provisionnement cloud Azure AD Connect pour effectuer une synchronisation d’AD DS à Azure AD.
 - La [synchronisation Azure AD Connect](how-to-connect-sync-whatis.md) intègre les composants et fonctionnalités précédemment publiés dans DirSync et Azure AD Sync pour la synchronisation entre les forêts AD DS et Azure AD.  
 - [L’approvisionnement cloud Azure AD Connect](../cloud-provisioning/what-is-cloud-provisioning.md) est un nouvel agent Microsoft pour la synchronisation entre AD DS et Azure AD, utile pour des scénarios tels que les fusions et acquisitions, où les forêts AD de la société acquise sont isolées de celles de l’entreprise parente.
 
@@ -34,4 +34,3 @@ Pour en savoir plus sur les différences entre la synchronisation Azure AD Conne
 
 ## <a name="next-steps"></a>Étapes suivantes
 En savoir plus sur l’ [intégration de vos identités locales avec Azure Active Directory](whatis-hybrid-identity.md).
-

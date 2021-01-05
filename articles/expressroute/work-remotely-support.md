@@ -2,17 +2,17 @@
 title: Utilisation d’Azure ExpressRoute pour prendre en charge les utilisateurs distants
 description: Cette page décrit comment tirer parti d’Azure ExpressRoute pour permettre le travail à distance dans le contexte de l’épidémie de COVID-19.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/22/2020
-ms.author: ajitbhu
-ms.openlocfilehash: 2fe990fd9c5922dd2e059dbb212cd8bb1cd3726e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.openlocfilehash: d51f47b73fe572ce81d3e7b54f902f94fcd11b5b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80336650"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89567671"
 ---
 # <a name="using-azure-expressroute-to-create-hybrid-connectivity-to-support-remote-users"></a>Utilisation d’Azure ExpressRoute pour créer une connectivité hybride pour prendre en charge les utilisateurs distants
 
@@ -31,7 +31,7 @@ Cet article explique comment utiliser ExpressRoute, Azure, Microsoft Network et 
 * [Comment augmenter la bande passante pour le circuit ExpressRoute existant](expressroute-howto-circuit-portal-resource-manager.md#modify)
 * [Surveillance, indicateurs de performance et alertes ExpressRoute](expressroute-monitoring-metrics-alerts.md#expressroute-gateway-connections-in-bitsseconds)
 * [Optimisation de l’itinéraire sur ExpressRoute](expressroute-optimize-routing.md)
-* [Azure ExpressRoute pour O365](https://docs.microsoft.com/office365/enterprise/azure-expressroute?redirectSourcePath=%252farticle%252f6d2534a2-c19c-4a99-be5e-33a0cee5d3bd)
+* [Azure ExpressRoute pour Microsoft 365](/microsoft-365/enterprise/azure-expressroute)
 * [Considérations relatives au routage asymétrique](expressroute-asymmetric-routing.md)
 * [Comment ouvrir une demande de support dans le portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)
 

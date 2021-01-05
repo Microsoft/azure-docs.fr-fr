@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 108bdf057cd375e28b10a6838ec5c8c6f57749a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fb91a09ed31658c2d547a7b46cf2f986bfbd0e50
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236261"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508286"
 ---
 # <a name="move-data-from-sap-business-warehouse-using-azure-data-factory"></a>Déplacer des données depuis SAP Business Warehouse à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -277,8 +277,6 @@ Le pipeline contient une activité de copie qui est configurée pour utiliser le
     }
 }
 ```
-
-
 
 ### <a name="type-mapping-for-sap-bw"></a>Mappage de type pour SAP BW
 Comme mentionné dans l’article consacré aux [activités de déplacement de données](data-factory-data-movement-activities.md) , l’activité de copie convertit automatiquement des types source en types récepteur à l’aide de l’approche en deux étapes suivante :

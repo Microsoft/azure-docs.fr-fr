@@ -4,14 +4,14 @@ description: Article de procédure relatif au glossaire métier d’Azure Data C
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: 1065abecb1f0ef57eb13b1ec3f194f07ae01eaee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f91728435b885f3b4d9415bc81e18fdaaea0148f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68976789"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021943"
 ---
 # <a name="set-up-the-business-glossary-for-governed-tagging"></a>Configurer le glossaire métier pour un balisage géré
 

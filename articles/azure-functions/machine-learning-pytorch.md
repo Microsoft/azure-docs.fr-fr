@@ -5,12 +5,13 @@ author: gvashishtha
 ms.topic: tutorial
 ms.date: 02/28/2020
 ms.author: gopalv
-ms.openlocfilehash: 2dd911eff1ba98341451ef9826b8053bc8059047
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.custom: devx-track-python, devx-track-azurepowershell
+ms.openlocfilehash: 8891c29e5d8d06df6292d06ec06e5e57fb9880e7
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82581528"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93422839"
 ---
 # <a name="tutorial-deploy-a-pre-trained-image-classification-model-to-azure-functions-with-pytorch"></a>Tutoriel : Déployer un modèle de classification d’image préentraîné dans Azure Functions avec PyTorch
 
@@ -55,7 +56,7 @@ Dans cet article, vous allez découvrir comment utiliser Python, PyTorch et Azur
 
 ## <a name="create-and-activate-a-python-virtual-environment"></a>Créer et activer un environnement virtuel Python
 
-Accédez au dossier *start*, et exécutez les commandes suivantes pour créer et activer un environnement virtuel nommé `.venv`.
+Accédez au dossier *start* , et exécutez les commandes suivantes pour créer et activer un environnement virtuel nommé `.venv`.
 
 
 # <a name="bash"></a>[bash](#tab/bash)
@@ -97,7 +98,7 @@ Vous devez exécuter toutes les commandes suivantes dans cet environnement virtu
 
 Dans Azure Functions, un projet de fonction est un conteneur pour une ou plusieurs fonctions individuelles qui répond chacune à un déclencheur spécifique. Toutes les fonctions d’un projet partagent les mêmes configurations locales et d’hébergement. Dans cette section, vous créez un projet de fonction qui contient une seule fonction réutilisable nommée `classify`, qui fournit un point de terminaison HTTP. Vous y ajoutez du code spécifique dans une section ultérieure.
 
-1. Dans le dossier *start*, utilisez Azure Functions Core Tools pour initialiser une application de fonction Python :
+1. Dans le dossier *start* , utilisez Azure Functions Core Tools pour initialiser une application de fonction Python :
 
     ```
     func init --worker-runtime python
@@ -114,12 +115,12 @@ Dans Azure Functions, un projet de fonction est un conteneur pour une ou plusieu
     func new --name classify --template "HTTP trigger"
     ```
 
-    Cette commande crée un dossier correspondant au nom de la fonction, *classify*. Dans ce dossier se trouvent deux fichiers : *\_\_init\_\_.py*, qui contient le code de la fonction, et *function.json*, qui décrit le déclencheur de la fonction, et ses liaisons d’entrée et de sortie. Pour plus d’informations sur le contenu de ces fichiers, consultez la section [Examiner le contenu du fichier](/azure/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-python#optional-examine-the-file-contents) du guide de démarrage rapide Python.
+    Cette commande crée un dossier correspondant au nom de la fonction, *classify*. Dans ce dossier se trouvent deux fichiers : *\_\_init\_\_.py* , qui contient le code de la fonction, et *function.json* , qui décrit le déclencheur de la fonction, et ses liaisons d’entrée et de sortie. Pour plus d’informations sur le contenu de ces fichiers, consultez la section [Examiner le contenu du fichier](./create-first-function-cli-python.md#optional-examine-the-file-contents) du guide de démarrage rapide Python.
 
 
 ## <a name="run-the-function-locally"></a>Exécuter la fonction localement
 
-1. Démarrez la fonction en démarrant l’hôte du runtime Azure Functions local dans le dossier *start* :
+1. Démarrez la fonction en démarrant l’hôte du runtime Azure Functions local dans le dossier *start*  :
 
     ```
     func start
@@ -134,7 +135,7 @@ Dans Azure Functions, un projet de fonction est un conteneur pour une ou plusieu
 
 Pour modifier la fonction `classify` en vue de classifier une image en fonction de son contenu, utilisez un modèle [ResNet](https://arxiv.org/abs/1512.03385) préentraîné. Le modèle préentraîné, fourni par [PyTorch](https://pytorch.org/hub/pytorch_vision_resnet/), classifie une image comme faisant partie de l’une des 1 000 [classes ImageNet](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a). Vous ajoutez ensuite du code helper et des dépendances à votre projet.
 
-1. Dans le dossier *start*, exécutez la commande suivante pour copier le code de prédiction et les étiquettes dans le dossier *classify*.
+1. Dans le dossier *start* , exécutez la commande suivante pour copier le code de prédiction et les étiquettes dans le dossier *classify*.
 
     # <a name="bash"></a>[bash](#tab/bash)
 
@@ -171,7 +172,7 @@ Pour modifier la fonction `classify` en vue de classifier une image en fonction 
     torchvision==0.6.0+cpu
     ```
 
-1. Enregistrez *requirements.txt*, puis exécutez la commande suivante à partir du dossier *start* pour installer les dépendances.
+1. Enregistrez *requirements.txt* , puis exécutez la commande suivante à partir du dossier *start* pour installer les dépendances.
 
 
     ```
@@ -184,7 +185,7 @@ L’installation peut prendre quelques minutes, pendant lesquelles vous pouvez m
 
 ## <a name="update-the-function-to-run-predictions"></a>Mettre à jour la fonction pour effectuer des prédictions
 
-1. Ouvrez *classify/\_\_init\_\_.py* dans un éditeur de texte et ajoutez les lignes suivantes après les instructions `import` existantes pour importer la bibliothèque JSON standard et les helpers *predict* :
+1. Ouvrez *classify/\_\_init\_\_.py* dans un éditeur de texte et ajoutez les lignes suivantes après les instructions `import` existantes pour importer la bibliothèque JSON standard et les helpers *predict*  :
 
     :::code language="python" source="~/functions-pytorch/end/classify/__init__.py" range="1-6" highlight="5-6":::
 

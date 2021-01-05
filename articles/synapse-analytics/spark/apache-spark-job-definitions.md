@@ -1,177 +1,209 @@
 ---
-title: 'Tutoriel – Apache Spark pour Azure Synapse Analytics : Définition de travaux Apache Spark pour Synapse'
+title: 'Tutoriel : Créer une définition de travail Apache Spark dans Synapse Studio'
 description: 'Tutoriel : utiliser Azure Synapse Analytics pour créer des définitions de travaux Spark et les envoyer à un pool Apache Spark pour Azure Synapse Analytics.'
-author: hrasheed-msft
+author: Jejiang
 ms.author: jejiang
 ms.reviewer: jasonh
-ms.service: hdinsight
-ms.custom: hdinsightactive
+ms.service: synapse-analytics
 ms.topic: tutorial
-ms.date: 04/15/2020
-ms.openlocfilehash: 5fc9dffaa73d195c842381b6682a00e9834c0fe7
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.subservice: spark
+ms.date: 10/16/2020
+ms.openlocfilehash: b8c7792a09dd86e7d4ac043c572f69fc47ee6e63
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83587933"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93307178"
 ---
-# <a name="tutorial-use-azure-synapse-analytics-to-create-apache-spark-job-definitions-for-synapse-spark-pools"></a>Tutoriel : Utiliser Azure Synapse Analytics afin de créer des définitions de travaux Apache Spark pour des pools Synapse Spark
+# <a name="tutorial-create-apache-spark-job-definition-in-synapse-studio"></a>Tutoriel : Créer une définition de travail Apache Spark dans Synapse Studio
 
-Ce tutoriel montre comment utiliser Azure Synapse Analytics pour créer des définitions de travaux Spark, puis les envoyer à un pool Synapse Spark. Vous pouvez utiliser le plug-in de différentes manières :
+Ce tutoriel montre comment utiliser Azure Synapse Studio pour créer des définitions de travaux Apache Spark et les envoyer à un pool Apache Spark serverless.
 
-* Développez et soumettez une définition de travail Spark sur un pool Synapse Spark.
-* Affichez les détails du travail après l’envoi.
-
-Dans ce tutoriel, vous allez apprendre à :
-
+Ce tutoriel décrit les tâches suivantes :
 > [!div class="checklist"]
 >
-> * Développer et soumettre une définition de travail Spark sur un pool Synapse Spark.
-> * Afficher les détails du travail après l’envoi.
+> - Créer une définition de travail Apache Spark pour PySpark (Python)
+> - Créer une définition de travail Apache Spark pour Spark(Scala)
+> - Créer une définition de travail Apache Spark pour .NET Spark (C#/F#)
+> - Envoyer une définition de travail Apache Spark en tant que traitement par lots
+> - Ajouter une définition de travail Apache Spark dans le pipeline
 
 ## <a name="prerequisites"></a>Prérequis
 
+Avant de commencer le didacticiel, veillez à disposer des éléments suivants :
+
 * Un espace de travail Azure Synapse Analytics. Pour obtenir des instructions, consultez [Créer un espace de travail Azure Synapse Analytics](../../machine-learning/how-to-manage-workspace.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json#create-a-workspace).
+* Pool Apache Spark serverless.
+* Un compte de stockage ADLS Gen2. Vous devez être le **propriétaire des données Blob du stockage** du système de fichiers ADLS Gen2 que vous souhaitez utiliser. Si ce n’est pas le cas, vous devez ajouter l’autorisation manuellement.
+* Si vous ne souhaitez pas utiliser le stockage par défaut de l’espace de travail, liez le compte de stockage ADLS Gen2 nécessaire à Synapse Studio. 
 
-## <a name="get-started"></a>Bien démarrer
+## <a name="create-an-apache-spark-job-definition-for-pyspark-python"></a>Créer une définition de travail Apache Spark pour PySpark (Python)
 
-Pour soumettre une définition de travail Spark, vous devez être le propriétaire des données Blob du stockage du système de fichiers ADLS Gen2 que vous souhaitez utiliser. Si ce n’est pas le cas, vous devez ajouter l’autorisation manuellement.
+Dans cette section, vous allez créer une définition de travail Apache Spark pour PySpark (Python).
 
-### <a name="scenario-1-add-permission"></a>Scénario 1 : Ajouter une autorisation
+1. Ouvrez [Azure Synapse Studio](https://web.azuresynapse.net/).
 
-1. Ouvrez [Microsoft Azure](https://ms.portal.azure.com), puis ouvrez le compte de stockage.
+2. Vous pouvez accéder aux [exemples de fichiers pour la création de définitions de travaux Apache Spark](https://github.com/Azure-Samples/Synapse/tree/master/Spark/Python) afin de télécharger des **exemples de fichiers pour python.zip**. Ensuite, vous pouvez décompresser le package puis extraire les fichiers **wordcount.py** et **shakespeare.txt**. 
 
-2. Cliquez sur **Conteneurs**, puis créez un **système de fichiers**. Ce didacticiel utilise `sparkjob`.
+     ![exemples de fichiers](./media/apache-spark-job-definitions/sample-files.png)
 
-    ![Cliquez sur le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/open-azure-container.png)
+3. Sélectionnez **Données** -> **Liées** -> **Azure Data Lake Storage Gen2**, puis chargez **wordcount.py** et **shakespeare.txt** dans votre système de fichiers ADLS Gen2. 
 
-    ![Boîte de dialogue Spark Submission (Envoi Spark)](./media/apache-spark-job-definitions/create-new-filesystem.png)
+     ![chargement du fichier python](./media/apache-spark-job-definitions/upload-python-file.png)
 
-3. Ouvrez `sparkjob`, cliquez sur **Contrôle d’accès (IAM)** , puis cliquez sur **Ajouter** et sélectionnez **Ajouter une attribution de rôle**.
+4. Sélectionnez le hub **Développer**, sélectionnez l’icône « + », puis sélectionnez **Définition d’un travail Spark** pour créer une définition de travail Spark. 
 
-    ![Cliquez sur le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/add-role-assignment-01.png)
+     ![création d’une définition pour python](./media/apache-spark-job-definitions/create-new-definition.png)
 
-    ![Cliquez sur le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/add-role-assignment-02.png)
+5. Sélectionnez **PySpark (Python)** dans la liste déroulante Langage de la fenêtre principale de la définition de travail Apache Spark.
 
-4. Cliquez sur **Attributions de rôles**, entrez un nom d’utilisateur, puis vérifiez le rôle d’utilisateur.
+     ![Sélectionner Python](./media/apache-spark-job-definitions/select-python.png)
 
-    ![Cliquez sur le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/verify-user-role.png)
+6. Renseignez les informations pour la définition de travail Apache Spark. 
 
-### <a name="scenario-2-prepare-folder-structure"></a>Scénario 2 : Préparer la structure de dossiers
+     |  Propriété   | Description   |  
+     | ----- | ----- |  
+     |Nom de la définition de travail| Entrez un nom pour votre définition de travail Apache Spark. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié. <br> Exemple : `job definition sample`|
+     |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier PY à partir de votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage. <br> Exemple : `abfss://…/path/to/wordcount.py`|
+     |Arguments de ligne de commande| Arguments facultatifs du travail. <br> Exemple : `abfss://…/path/to/shakespeare.txt` `abfss://…/path/to/result` <br> *Remarque : Dans l’exemple de définition de travail, deux arguments sont séparés par un espace.*|
+     |Fichiers de référence| Fichiers supplémentaires utilisés en guise de référence dans le fichier de définition principal. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage. |
+     |Pool Spark| Le travail sera envoyé au pool Apache Spark sélectionné.|
+     |Version de Spark| Version d’Apache Spark exécutée par le pool Apache Spark.|
+     |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Apache Spark spécifié pour le travail.|
+     |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Apache Spark spécifié du travail.|  
+     |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Apache Spark spécifié du travail.|
 
-Avant d’envoyer une définition de travail Spark, l’une des tâches que vous devez effectuer consiste à charger des fichiers sur ADLS Gen2 et à y préparer la structure de dossiers. Nous utilisons le nœud Storage dans Synapse Studio pour stocker les fichiers.
+     ![Définir les valeurs de la définition de travail Spark pour Python](./media/apache-spark-job-definitions/create-py-definition.png)
 
-1. Ouvrez [Azure Synapse Analytics](https://web.azuresynapse.net/).
+7. Sélectionnez **Publier** pour enregistrer la définition de travail Apache Spark.
 
-2. Cliquez sur **Données**, sélectionnez **Comptes de stockage**, puis chargez les fichiers appropriés sur votre système de fichiers ADLS Gen2. Nous prenons en charge Scala, Java, .NET et Python. Ce tutoriel utilise l’exemple de la figure comme démonstration, mais vous pouvez changer la structure de projet comme vous le souhaitez.
+     ![publication de la définition py](./media/apache-spark-job-definitions/publish-py-definition.png)
 
-    ![Définissez la valeur de la définition de travail Spark](./media/apache-spark-job-definitions/prepare-project-structure.png)
+## <a name="create-an-apache-spark-job-definition-for-apache-sparkscala"></a>Créer une définition de travail Apache Spark pour Apache Spark(Scala)
 
-## <a name="create-a-spark-job-definition"></a>Créer une définition de travail Spark
+Dans cette section, vous allez créer une définition de travail Apache Spark pour Apache Spark(Scala).
 
-1. Ouvrez [Azure Synapse Analytics](https://web.azuresynapse.net/), puis sélectionnez **Développer**.
+ 1. Ouvrez [Azure Synapse Studio](https://web.azuresynapse.net/).
 
-2. Sélectionnez **Définitions des travaux Spark** dans le volet gauche.
+ 2. Vous pouvez accéder aux [exemples de fichiers pour la création de définitions de travaux Apache Spark](https://github.com/Azure-Samples/Synapse/tree/master/Spark/Scala) afin de télécharger des **exemples de fichiers pour scala.zip**. Ensuite, vous pouvez décompresser le package puis extraire les fichiers **wordcount.jar** et **shakespeare.txt**. 
+ 
+     ![Exemples de fichiers Scala](./media/apache-spark-job-definitions/sample-files-scala.png)
 
-3. Cliquez sur le nœud **Actions** à droite de « Définitions des travaux Spark ».
+ 3. Sélectionnez **Données** -> **Liées** -> **Azure Data Lake Storage Gen2**, puis chargez **wordcount.jar** et **shakespeare.txt** dans votre système de fichiers ADLS Gen2.
+ 
+     ![préparation de la structure scala](./media/apache-spark-job-definitions/prepare-scala-structure.png)
 
-     ![Créez une définition de travail Spark](./media/apache-spark-job-definitions/create-new-definition-01.png)
+ 4. Sélectionnez le hub **Développer**, sélectionnez l’icône « + », puis sélectionnez **Définition d’un travail Spark** pour créer une définition de travail Spark. L’exemple d’image est le même que celui de l’étape 4 de la section **Créer une définition de travail Apache Spark (Python) pour PySpark**.
 
-4. Dans la liste déroulante **Actions**, sélectionnez **Nouvelle définition de travail Spark**.
+ 5. Sélectionnez **Spark(Scala)** dans la liste déroulante Langage de la fenêtre principale de la définition de travail Apache Spark.
 
-     ![Créez une définition de travail Spark](./media/apache-spark-job-definitions/create-new-definition-02.png)
+     ![Sélectionner Scala](./media/apache-spark-job-definitions/select-scala.png)
 
-5. Dans la fenêtre Nouvelle définition de travail Spark, sélectionnez Langage, puis indiquez les informations suivantes :  
+ 6. Renseignez les informations pour la définition de travail Apache Spark. Vous pouvez copier les exemples d’informations.
 
-   * Définissez **Langage** sur **Spark (Scala)** .
+     |  Propriété   | Description   |  
+     | ----- | ----- |  
+     |Nom de la définition de travail| Entrez un nom pour votre définition de travail Apache Spark. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié. <br> Exemple : `scala`|
+     |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier JAR à partir de votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage. <br> Exemple : `abfss://…/path/to/wordcount.jar`|
+     |Main class name| Identificateur complet ou classe principale qui se trouve dans le fichier de définition principal. <br> Exemple : `WordCount`|
+     |Arguments de ligne de commande| Arguments facultatifs du travail. <br> Exemple : `abfss://…/path/to/shakespeare.txt` `abfss://…/path/to/result` <br> *Remarque : Dans l’exemple de définition de travail, deux arguments sont séparés par un espace.* |
+     |Fichiers de référence| Fichiers supplémentaires utilisés en guise de référence dans le fichier de définition principal. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
+     |Pool Spark| Le travail sera envoyé au pool Apache Spark sélectionné.|
+     |Version de Spark| Version d’Apache Spark exécutée par le pool Apache Spark.|
+     |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Apache Spark spécifié pour le travail.|  
+     |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Apache Spark spécifié du travail.|
+     |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Apache Spark spécifié du travail.|
 
-    |  Propriété   | Description   |  
-    | ----- | ----- |  
-    |Nom de la définition de travail| Entrez un nom pour votre définition de travail Spark.  Ce didacticiel utilise `job definition sample`. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié.|  
-    |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier JAR à partir de votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage. |
-    |Main class name| Identificateur complet ou classe principale qui se trouve dans le fichier de définition principal.|
-    |Arguments de ligne de commande| Arguments facultatifs du travail.|
-    |Fichiers de référence| Fichiers supplémentaires utilisés en guise de référence dans le fichier de définition principal. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
-    |Pool Spark| Le travail sera envoyé au pool Spark sélectionné.|
-    |Version de Spark| Version de Spark exécutée par le pool Spark.|
-    |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Spark spécifié pour le travail.|
-    |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Spark spécifié pour le travail.|  
-    |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Spark spécifié pour le travail.|
+     ![Définir les valeurs de la définition de travail Spark pour Scala](./media/apache-spark-job-definitions/create-scala-definition.png)
 
-    ![Définissez la valeur de la définition de travail Spark](./media/apache-spark-job-definitions/create-scala-definition.png)
+ 7. Sélectionnez **Publier** pour enregistrer la définition de travail Apache Spark.
 
-   * Définissez **Langage** sur **PySpark (Python)** .
+      ![publication de la définition scala](./media/apache-spark-job-definitions/publish-scala-definition.png)
 
-    |  Propriété   | Description   |  
-    | ----- | ----- |  
-    |Nom de la définition de travail| Entrez un nom pour votre définition de travail Spark.  Ce didacticiel utilise `job definition sample`. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié.|  
-    |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier PY à partir de votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
-    |Arguments de ligne de commande| Arguments facultatifs du travail.|
-    |Fichiers de référence| Fichiers supplémentaires utilisés en guise de référence dans le fichier de définition principal. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
-    |Pool Spark| Le travail sera envoyé au pool Spark sélectionné.|
-    |Version de Spark| Version de Spark exécutée par le pool Spark.|
-    |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Spark spécifié pour le travail.|
-    |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Spark spécifié pour le travail.|  
-    |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Spark spécifié pour le travail.|
+## <a name="create-an-apache-spark-job-definition-for-net-sparkcf"></a>Créer une définition de travail Apache Spark pour .NET Spark (C#/F#)
 
-    ![Définissez la valeur de la définition de travail Spark](./media/apache-spark-job-definitions/create-py-definition.png)
+Dans cette section, vous créez une définition de travail Apache Spark pour .NET Spark (C#/F#).
+ 1. Ouvrez [Azure Synapse Studio](https://web.azuresynapse.net/).
 
-   * Définissez **Langage** sur **.NET Spark(C#/F#)** .
+ 2. Vous pouvez accéder aux [exemples de fichiers pour la création de définitions de travaux Apache Spark](https://github.com/Azure-Samples/Synapse/tree/master/Spark/DotNET) afin de télécharger des **exemples de fichiers pour dotnet.zip**. Ensuite, vous pouvez décompresser le package puis extraire les fichiers **wordcount.zip** et **shakespeare.txt**. 
 
-    |  Propriété   | Description   |  
-    | ----- | ----- |  
-    |Nom de la définition de travail| Entrez un nom pour votre définition de travail Spark.  Ce didacticiel utilise `job definition sample`. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié.|  
-    |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier ZIP contenant votre application .NET pour Spark (c’est-à-dire, le fichier exécutable principal, les DLL contenant les fonctions définies par l’utilisateur et d’autres fichiers requis) à partir de votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
-    |Fichier exécutable principal| Fichier exécutable principal dans le fichier ZIP de définition principal.|
-    |Arguments de ligne de commande| Arguments facultatifs du travail.|
-    |Fichiers de référence| Fichiers supplémentaires nécessaires aux nœuds worker pour l’exécution de l’application .NET pour Spark qui n’est pas incluse dans le fichier ZIP de définition principal (autrement dit, les fichiers jar dépendants, les DLL de fonctions définies par l’utilisateur supplémentaires et d’autres fichiers de configuration). Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
-    |Pool Spark| Le travail sera envoyé au pool Spark sélectionné.|
-    |Version de Spark| Version de Spark exécutée par le pool Spark.|
-    |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Spark spécifié pour le travail.|
-    |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Spark spécifié pour le travail.|  
-    |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Spark spécifié pour le travail.|
+     ![Exemple dotnet](./media/apache-spark-job-definitions/sample-dotnet.png)
 
-    ![Définissez la valeur de la définition de travail Spark](./media/apache-spark-job-definitions/create-net-definition.png)
+ 3. Sélectionnez **Données** -> **Liées** -> **Azure Data Lake Storage Gen2**, puis chargez **wordcount.zip** et **shakespeare.txt** dans votre système de fichiers ADLS Gen2.
+ 
+     ![préparation de la structure dotnet](./media/apache-spark-job-definitions/prepare-dotnet-structure.png)
 
-6. Sélectionnez **Publier** pour enregistrer la définition de travail Spark.
+ 4. Sélectionnez le hub **Développer**, sélectionnez l’icône « + », puis sélectionnez **Définition d’un travail Spark** pour créer une définition de travail Spark. L’exemple d’image est le même que celui de l’étape 4 de la section **Créer une définition de travail Apache Spark (Python) pour PySpark**.
 
-    ![Publiez la définition de travail Spark](./media/apache-spark-job-definitions/publish-net-definition.png)
+ 5. Sélectionnez **.NET Spark(C#/F#)** dans la liste déroulante Langage de la fenêtre principale Définition de travail Apache Spark.
 
-## <a name="submit-a-spark-job-definition"></a>Envoyer une définition de travail Spark
+     ![Sélectionner dotnet](./media/apache-spark-job-definitions/select-dotnet.png)
 
-Après avoir créé une définition de travail Spark, vous pouvez l’envoyer à un pool Synapse Spark. Avant d’essayer les exemples fournis dans cette partie, assurez-vous d’avoir parcouru les étapes de la section **Bien démarrer**.
+ 6. Renseignez les informations pour la définition de travail Apache Spark. Vous pouvez copier les exemples d’informations.
+    
+     |  Propriété   | Description   |  
+     | ----- | ----- |  
+     |Nom de la définition de travail| Entrez un nom pour votre définition de travail Apache Spark. Ce nom peut être mis à jour à tout moment jusqu’à ce qu’il soit publié. <br> Exemple : `dotnet`|
+     |Fichier de définition principal| Fichier principal utilisé pour le travail. Sélectionnez un fichier ZIP contenant votre application .NET pour Apache Spark (c’est-à-dire le fichier exécutable principal, les DLL contenant les fonctions définies par l’utilisateur et d’autres fichiers nécessaires) dans votre stockage. Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage. <br> Exemple : `abfss://…/path/to/wordcount.zip`|
+     |Fichier exécutable principal| Fichier exécutable principal dans le fichier ZIP de définition principal. <br> Exemple : `WordCount`|
+     |Arguments de ligne de commande| Arguments facultatifs du travail. <br> Exemple : `abfss://…/path/to/shakespeare.txt` `abfss://…/path/to/result` <br> *Remarque : Dans l’exemple de définition de travail, deux arguments sont séparés par un espace.* |
+     |Fichiers de référence| Fichiers supplémentaires nécessaires aux nœuds Worker pour l’exécution de l’application .NET pour Apache Spark qui n’est pas incluse dans le fichier ZIP de définition principal (autrement dit, les fichiers jar dépendants, les DLL supplémentaires de fonctions définies par l’utilisateur et d’autres fichiers de configuration). Vous pouvez sélectionner **Charger le fichier** pour charger le fichier sur un compte de stockage.|
+     |Pool Spark| Le travail sera envoyé au pool Apache Spark sélectionné.|
+     |Version de Spark| Version d’Apache Spark exécutée par le pool Apache Spark.|
+     |Exécuteurs| Nombre d’exécuteurs à attribuer dans le pool Apache Spark spécifié pour le travail.|  
+     |Taille de l’exécuteur| Nombre de cœurs et mémoire à utiliser pour les exécuteurs dans le pool Apache Spark spécifié du travail.|
+     |Taille du pilote| Nombre de cœurs et mémoire à utiliser pour le pilote dans le pool Apache Spark spécifié du travail.|
 
-### <a name="scenario-1-submit-spark-job-definition"></a>Scénario 1 : Envoyer une définition de travail Spark
+     ![Définir les valeurs de la définition de travail Spark pour dotnet](./media/apache-spark-job-definitions/create-dotnet-definition.png)
 
-1. Ouvrez une fenêtre de définition de travail Spark en cliquant sur la définition concernée.
+ 7. Sélectionnez **Publier** pour enregistrer la définition de travail Apache Spark.
+
+      ![publication de la définition dotnet](./media/apache-spark-job-definitions/publish-dotnet-definition.png)
+
+## <a name="submit-an-apache-spark-job-definition-as-a-batch-job"></a>Envoyer une définition de travail Apache Spark en tant que traitement par lots
+
+Après avoir créé une définition de travail Apache Spark, vous pouvez l’envoyer à un pool Apache Spark. Vérifiez que vous êtes bien le **propriétaire des données Blob du stockage** du système de fichiers ADLS Gen2 que vous souhaitez utiliser. Si ce n’est pas le cas, vous devez ajouter l’autorisation manuellement.
+
+### <a name="scenario-1-submit-apache-spark-job-definition"></a>Scénario 1 : Envoyer une définition de travail Apache Spark
+ 1. Ouvrez une fenêtre de définition de travail Apache Spark en sélectionnant la définition concernée.
 
       ![Ouvrez la définition de travail Spark à envoyer ](./media/apache-spark-job-definitions/open-spark-definition.png)
 
-2. Cliquez sur l’icône **Envoyer** pour envoyer votre projet au pool Spark sélectionné. Vous pouvez cliquer sur l’**URL de supervision Spark** pour voir les informations LogQuery de l’application Spark.
+ 2. Sélectionnez le bouton **Envoyer** pour envoyer votre projet au pool Apache Spark sélectionné. Vous pouvez sélectionner l’**URL de supervision Spark** pour afficher les informations LogQuery de l’application Apache Spark.
 
-    ![Cliquez sur le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/submit-spark-definition.png)
+    ![Sélectionnez le bouton Envoyer pour envoyer la définition de travail Spark](./media/apache-spark-job-definitions/submit-spark-definition.png)
 
     ![Boîte de dialogue Spark Submission (Envoi Spark)](./media/apache-spark-job-definitions/submit-definition-result.png)
 
-### <a name="scenario-2-view-spark-job-running-progress"></a>Scénario 2 : Afficher la progression de l’exécution du travail Spark
+### <a name="scenario-2-view-apache-spark-job-running-progress"></a>Scénario 2 : Afficher la progression de l’exécution du travail Apache Spark
 
-1. Cliquez sur **Superviser**, puis sélectionnez l’option **Applications Spark**. Vous pouvez trouver l’application Spark envoyée.
+ 1. Sélectionnez **Superviser**, puis sélectionnez l’option **Applications Apache Spark**. Vous pouvez trouver l’application Apache Spark envoyée.
 
-    ![Affichez l’application Spark](./media/apache-spark-job-definitions/view-spark-application.png)
+     ![Afficher l’application Spark](./media/apache-spark-job-definitions/view-spark-application.png)
 
-2. Cliquez ensuite sur l’application Spark afin d’ouvrir la fenêtre **LogQuery**. Vous pouvez voir la progression de l’exécution du travail dans **LogQuery**.
-
-    ![Affichez les informations LogQuery de l’application Spark](./media/apache-spark-job-definitions/view-job-log-query.png)
+ 2. Ensuite, sélectionnez une application Apache Spark pour afficher la fenêtre du travail **SparkJobDefinition**. Vous pourrez y voir la progression de l’exécution du travail.
+     
+     ![Affichez les informations LogQuery de l’application Spark](./media/apache-spark-job-definitions/view-job-log-query.png)
 
 ### <a name="scenario-3-check-output-file"></a>Scénario 3 : Vérifier le fichier de sortie
 
- 1. Cliquez sur **Données**, puis sélectionnez **Comptes de stockage**. Après une exécution réussie, vous pouvez accéder au stockage ADLS Gen2 et vérifier que les sorties sont générées.
+ 1. Sélectionnez **Données** -> **Liées** -> **Azure Data Lake Storage Gen2** (hozhaobdbj), puis ouvrez le dossier **result** créé précédemment. Vous pouvez accéder au dossier result pour voir si la sortie a été générée.
 
-    ![Affichez le fichier de sortie](./media/apache-spark-job-definitions/view-output-file.png)
+     ![Affichez le fichier de sortie](./media/apache-spark-job-definitions/view-output-file.png)
+
+## <a name="add-an-apache-spark-job-definition-into-pipeline"></a>Ajouter une définition de travail Apache Spark dans le pipeline
+
+Dans cette section, vous allez ajouter une définition de travail Apache Spark dans le pipeline.
+
+ 1. Ouvrez une définition de travail Apache Spark existante.
+
+ 2. Sélectionnez l’icône en haut à droite de la définition de travail Apache Spark, puis choisissez **Pipeline existant** ou **Nouveau pipeline**. Vous pouvez consulter la page Pipeline pour plus d’informations.
+
+     ![add to pipeline1](./media/apache-spark-job-definitions/add-to-pipeline01.png)
+
+     ![add to pipeline2](./media/apache-spark-job-definitions/add-to-pipeline02.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Ce tutoriel vous a montré comment utiliser Azure Synapse Analytics pour créer des définitions de travaux Spark, puis les envoyer à un pool Synapse Spark. À présent, vous pouvez utiliser Azure Synapse Analytics pour créer des jeux de données Power BI et gérer des données Power BI. 
+À présent, vous pouvez utiliser Azure Synapse Studio pour créer des jeux de données Power BI et gérer des données Power BI. Pour en savoir plus, consultez l’article [Liaison d’un espace de travail Power BI à un espace de travail Synapse](../quickstart-power-bi.md). 
 
-- [Se connecter aux données dans Power BI Desktop](https://docs.microsoft.com/power-bi/desktop-quickstart-connect-to-data)
-- [Visualiser des données avec Power BI](../sql-data-warehouse/sql-data-warehouse-get-started-visualize-with-power-bi.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json)

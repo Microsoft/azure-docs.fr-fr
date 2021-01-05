@@ -2,15 +2,16 @@
 title: Informations de référence sur le point de terminaison RESTful C# de fournisseur personnalisé
 description: Fournit une référence de base sur le point de terminaison RESTful C# des fournisseurs personnalisés Azure. Ce point de terminaison est fourni via une application de fonction Azure.
 ms.topic: conceptual
+ms.custom: devx-track-csharp
 ms.author: jobreen
 author: jjbfour
 ms.date: 06/20/2019
-ms.openlocfilehash: b6ecb22cb968e0d963242c8c2d5dd1a6cb24229c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ce329e7cd8db73e217162fa0bc1bb433d57e9971
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649417"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935634"
 ---
 # <a name="custom-provider-c-restful-endpoint-reference"></a>Informations de référence sur le point de terminaison RESTful C# de fournisseur personnalisé
 

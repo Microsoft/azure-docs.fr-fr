@@ -1,17 +1,18 @@
 ---
 title: Gérer des réplicas en lecture - AZURE CLI, API REST - Azure Database pour MySQL
 description: Découvrez comment configurer et gérer des réplicas en lecture dans Azure Database pour MySQL à partir d’Azure CLI ou de l’API REST.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: ed57003c7a9a5a1a9d87aa2e8934af8c48b1d819
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 6/10/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 1a5bc9638e2e6eeff8f2176247f579b64beede90
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80063331"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94540210"
 ---
 # <a name="how-to-create-and-manage-read-replicas-in-azure-database-for-mysql-using-the-azure-cli-and-rest-api"></a>Comment créer et gérer des réplicas en lecture dans Azure Database pour MySQL à l’aide d’Azure CLI et de l’API REST
 
@@ -20,15 +21,18 @@ Dans cet article, vous allez apprendre à créer et à gérer des réplicas en l
 ## <a name="azure-cli"></a>Azure CLI
 Vous pouvez créer et gérer des réplicas en lecture à l’aide d’Azure CLI.
 
-### <a name="prerequisites"></a>Conditions préalables requises
+### <a name="prerequisites"></a>Prérequis
 
-- [Installation d’Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
-- Un [serveur Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-portal.md) qui sera utilisé comme serveur maître. 
+- [Installation d’Azure CLI 2.0](/cli/azure/install-azure-cli)
+- Un [serveur Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-portal.md) qui sera utilisé comme serveur source. 
 
 > [!IMPORTANT]
-> La fonctionnalité de réplica en lecture est disponible uniquement pour les serveurs Azure Database pour MySQL dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur maître se trouve dans l’un de ces niveaux tarifaires.
+> La fonctionnalité de réplica en lecture est disponible uniquement pour les serveurs Azure Database pour MySQL dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur source se trouve dans l’un de ces niveaux tarifaires.
 
 ### <a name="create-a-read-replica"></a>Créer un réplica en lecture
+
+> [!IMPORTANT]
+> Lorsque vous créez un réplica pour un serveur source qui n’en a pas, ce dernier commence par redémarrer afin de se préparer à la réplication. Tenez-en compte et effectuez ces opérations en période creuse.
 
 Un serveur réplica en lecture peut être créé en utilisant la commande suivante :
 
@@ -38,11 +42,11 @@ az mysql server replica create --name mydemoreplicaserver --source-server mydemo
 
 La commande `az mysql server replica create` requiert les paramètres suivants :
 
-| Paramètre | Valeur d'exemple | Description  |
+| Paramètre | Valeur d'exemple | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources dans lequel le serveur réplica sera créé.  |
+| resource-group |  myResourceGroup |  Groupe de ressources dans lequel le serveur réplica sera créé.  |
 | name | mydemoreplicaserver | Nom du nouveau serveur réplica créé. |
-| source-server | mydemoserver | Nom ou ID du serveur maître à partir duquel le serveur réplica sera créé. |
+| source-server | mydemoserver | Nom ou ID du serveur source à partir duquel la réplication doit être effectuée. |
 
 Pour créer un réplica en lecture entre régions, utilisez le paramètre `--location`. L’exemple CLI ci-dessous crée le réplica dans la région USA Ouest.
 
@@ -54,12 +58,12 @@ az mysql server replica create --name mydemoreplicaserver --source-server mydemo
 > Pour en savoir plus sur les régions dans lesquelles vous pouvez créer un réplica, consultez l’article [Concepts relatifs aux réplicas en lecture](concepts-read-replicas.md). 
 
 > [!NOTE]
-> Les réplicas en lecture sont créés avec la même configuration de serveur que le serveur maître. La configuration du serveur réplica peut être modifiée après la création de ce dernier. Il est recommandé que la configuration du serveur réplica soit maintenue à des valeurs égales ou supérieures à celles du serveur maître pour garantir que le serveur réplica est à la hauteur du serveur maître.
+> Les réplicas en lecture sont créés avec la même configuration de serveur que le serveur maître. La configuration du serveur réplica peut être modifiée après la création de ce dernier. Il est recommandé de maintenir la configuration du serveur réplica à des valeurs égales ou supérieures à celles du serveur source pour garantir que le réplica sera à la hauteur du serveur maître.
 
 
-### <a name="list-replicas-for-a-master-server"></a>Répertorier les réplicas d'un serveur maître
+### <a name="list-replicas-for-a-source-server"></a>Répertorier les réplicas d'un serveur source
 
-Pour afficher tous les réplicas d'un serveur maître donné, exécutez la commande suivante : 
+Pour afficher tous les réplicas d'un serveur source donné, exécutez la commande suivante : 
 
 ```azurecli-interactive
 az mysql server replica list --server-name mydemoserver --resource-group myresourcegroup
@@ -67,15 +71,15 @@ az mysql server replica list --server-name mydemoserver --resource-group myresou
 
 La commande `az mysql server replica list` requiert les paramètres suivants :
 
-| Paramètre | Valeur d'exemple | Description  |
+| Paramètre | Valeur d'exemple | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources dans lequel le serveur réplica sera créé.  |
-| server-name | mydemoserver | Nom ou ID du serveur maître. |
+| resource-group |  myResourceGroup |  Groupe de ressources dans lequel le serveur réplica sera créé.  |
+| server-name | mydemoserver | Nom ou ID du serveur source. |
 
 ### <a name="stop-replication-to-a-replica-server"></a>Arrêter la réplication vers un serveur réplica
 
 > [!IMPORTANT]
-> L’arrêt de la réplication vers un serveur est irréversible. Une fois la réplication entre un serveur maître et un serveur réplica arrêtée, elle ne peut pas être annulée. Le serveur réplica devient un serveur autonome et prend désormais en charge la lecture et les écritures. Ce serveur ne peut pas être à nouveau transformé en réplica.
+> L’arrêt de la réplication vers un serveur est irréversible. Une fois la réplication entre un serveur source et un serveur réplica arrêtée, il est impossible de revenir en arrière. Le serveur réplica devient un serveur autonome et prend désormais en charge la lecture et les écritures. Ce serveur ne peut pas être à nouveau transformé en réplica.
 
 La réplication d'un serveur réplica en lecture peut être arrêtée en utilisant la commande suivante :
 
@@ -85,9 +89,9 @@ az mysql server replica stop --name mydemoreplicaserver --resource-group myresou
 
 La commande `az mysql server replica stop` requiert les paramètres suivants :
 
-| Paramètre | Valeur d'exemple | Description  |
+| Paramètre | Valeur d'exemple | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur réplica.  |
+| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur réplica.  |
 | name | mydemoreplicaserver | Nom du serveur réplica pour lequel arrêter la réplication. |
 
 ### <a name="delete-a-replica-server"></a>Supprimer un serveur réplica
@@ -98,12 +102,12 @@ La suppression d’un serveur réplica en lecture peut être effectuée en exéc
 az mysql server delete --resource-group myresourcegroup --name mydemoreplicaserver
 ```
 
-### <a name="delete-a-master-server"></a>Supprimer un serveur maître
+### <a name="delete-a-source-server"></a>Supprimer un serveur source
 
 > [!IMPORTANT]
-> La suppression d’un serveur maître arrête la réplication vers tous les serveurs réplicas et supprime le serveur maître lui-même. Les serveurs réplicas deviennent des serveurs autonomes qui prennent désormais en charge la lecture et les écritures.
+> La suppression d’un serveur source arrête la réplication vers tous les serveurs réplicas et supprime le serveur source proprement dit. Les serveurs réplicas deviennent des serveurs autonomes qui prennent désormais en charge la lecture et les écritures.
 
-Pour supprimer un serveur maître, vous pouvez exécuter la commande **[az mysql server delete](/cli/azure/mysql/server)** .
+Pour supprimer un serveur source, vous pouvez exécuter la commande **[az mysql server delete](/cli/azure/mysql/server)** .
 
 ```azurecli-interactive
 az mysql server delete --resource-group myresourcegroup --name mydemoserver
@@ -133,25 +137,25 @@ PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
 > [!NOTE]
 > Pour en savoir plus sur les régions dans lesquelles vous pouvez créer un réplica, consultez l’article [Concepts relatifs aux réplicas en lecture](concepts-read-replicas.md). 
 
-Si vous n’avez pas affecté au paramètre `azure.replication_support` la valeur **REPLICA** sur un serveur maître à usage général ou à mémoire optimisée, et que vous avez redémarré le serveur, vous recevez une erreur. Effectuez ces deux étapes avant de créer un réplica.
+Si vous n'avez pas affecté au paramètre `azure.replication_support` la valeur **REPLICA** sur un serveur source à usage général ou à mémoire optimisée, et que vous avez redémarré le serveur, vous recevez une erreur. Effectuez ces deux étapes avant de créer un réplica.
 
-Le réplica doit être créé en utilisant les mêmes paramètres de calcul et de stockage que le serveur maître. Une fois le réplica créé, vous pouvez changer plusieurs paramètres indépendamment du serveur maître : génération de calcul, vCores, stockage et période de conservation de la sauvegarde. Le niveau tarifaire peut également être changé indépendamment, sauf vers ou depuis le niveau De base.
+Le réplica doit être créé en utilisant les mêmes paramètres de calcul et de stockage que le serveur maître. Une fois le réplica créé, vous pouvez changer plusieurs paramètres indépendamment du serveur source : génération de calcul, vCores, stockage et durée de conservation des sauvegardes. Le niveau tarifaire peut également être changé indépendamment, sauf vers ou depuis le niveau De base.
 
 
 > [!IMPORTANT]
-> Avant de modifier un paramètre du serveur maître, remplacez la valeur du paramètre du réplica par une valeur supérieure ou égale à celle du serveur maître. Vous garantissez ainsi l’alignement du réplica sur les changements apportés au serveur maître.
+> Avant de modifier un paramètre du serveur source, remplacez la valeur du paramètre du réplica par une valeur supérieure ou égale à celle du serveur maître. Vous garantissez ainsi l’alignement du réplica sur les changements apportés au serveur maître.
 
 ### <a name="list-replicas"></a>Lister les réplicas
-Vous pouvez afficher la liste des réplicas d’un serveur maître à l’aide de l’[API de liste de réplicas](/rest/api/mysql/replicas/listbyserver) :
+Vous pouvez afficher la liste des réplicas d'un serveur source à l'aide de l'[API Lister les réplicas](/rest/api/mysql/replicas/listbyserver) :
 
 ```http
 GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{masterServerName}/Replicas?api-version=2017-12-01
 ```
 
 ### <a name="stop-replication-to-a-replica-server"></a>Arrêter la réplication vers un serveur réplica
-Vous pouvez arrêter la réplication entre un serveur maître et un réplica en lecture à l’aide de l’[API de mise à jour](/rest/api/mysql/servers/update).
+Vous pouvez arrêter la réplication entre un serveur source et un réplica en lecture à l'aide de l'[API de mise à jour](/rest/api/mysql/servers/update).
 
-Une fois que vous avez arrêté la réplication entre un serveur maître et un réplica en lecture, vous ne pouvez plus l’annuler. Le réplica en lecture devient un serveur autonome qui prend en charge les lectures et les écritures. Le serveur autonome ne peut pas être retransformé en réplica.
+Une fois que vous avez arrêté la réplication entre un serveur source et un réplica en lecture, vous ne pouvez pas revenir en arrière. Le réplica en lecture devient un serveur autonome qui prend en charge les lectures et les écritures. Le serveur autonome ne peut pas être retransformé en réplica.
 
 ```http
 PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{masterServerName}?api-version=2017-12-01
@@ -165,10 +169,10 @@ PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups
 }
 ```
 
-### <a name="delete-a-master-or-replica-server"></a>Supprimer un serveur maître ou réplica
-Pour supprimer un serveur maître ou réplica, vous devez utiliser l’[API de suppression](/rest/api/mysql/servers/delete) :
+### <a name="delete-a-source-or-replica-server"></a>Supprimer un serveur source ou réplica
+Pour supprimer un serveur source ou réplica, vous devez utiliser l'[API de suppression](/rest/api/mysql/servers/delete) :
 
-Quand vous supprimez un serveur maître, la réplication est arrêtée sur tous les réplicas en lecture. Les réplicas en lecture deviennent des serveurs autonomes qui prennent désormais en charge les lectures et les écritures.
+Lorsque vous supprimez un serveur source, la réplication est arrêtée sur tous les réplicas en lecture. Les réplicas en lecture deviennent des serveurs autonomes qui prennent désormais en charge les lectures et les écritures.
 
 ```http
 DELETE https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}?api-version=2017-12-01

@@ -4,28 +4,27 @@ description: Apprenez à créer une passerelle d’application avec redirection 
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/14/2019
+ms.topic: how-to
+ms.date: 09/28/2020
 ms.author: victorh
-ms.openlocfilehash: d905be7c4a922a1a7eb3d1318be28da896e8a7e9
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 86eaa645cd6a81b9180d1241695240a71aa8202d
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312022"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397261"
 ---
 # <a name="create-an-application-gateway-with-http-to-https-redirection-using-azure-powershell"></a>Créer une passerelle d’application avec redirection de HTTP vers HTTPS à l’aide d’Azure PowerShell
 
-Vous pouvez utiliser Azure PowerShell pour créer une [passerelle d’application](overview.md) avec un certificat pour la terminaison TLS/SSL. Une règle de routage est utilisée pour rediriger le trafic HTTP vers le port HTTPS dans votre passerelle d’application. Dans cet exemple, vous créez également un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md) pour le pool backend de la passerelle d’application qui contient deux instances de machine virtuelle. 
+Vous pouvez utiliser Azure PowerShell pour créer une [passerelle d’application](overview.md) avec un certificat pour la terminaison TLS/SSL. Une règle de routage est utilisée pour rediriger le trafic HTTP vers le port HTTPS dans votre passerelle d’application. Dans cet exemple, vous créez également un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md) pour le pool backend de la passerelle d’application qui contient deux instances de machine virtuelle. 
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Créer un certificat auto-signé
-> * Configurer un réseau
-> * Créer une passerelle d’application avec le certificat
-> * Ajouter un écouteur et une règle de redirection
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+* Créer un certificat auto-signé
+* Configurer un réseau
+* Créer une passerelle d’application avec le certificat
+* Ajouter un écouteur et une règle de redirection
+* Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -35,7 +34,7 @@ Ce didacticiel requiert le module Azure PowerShell version 1.0.0 ou version ult�
 
 ## <a name="create-a-self-signed-certificate"></a>Créer un certificat auto-signé
 
-Dans un environnement de production, vous devez importer un certificat valide signé par un fournisseur approuvé. Pour ce didacticiel, vous créez un certificat auto-signé à l’aide de [New-SelfSignedCertificate](https://docs.microsoft.com/powershell/module/pkiclient/new-selfsignedcertificate). Vous pouvez utiliser [Export-PfxCertificate](https://docs.microsoft.com/powershell/module/pkiclient/export-pfxcertificate) avec l’empreinte numérique qui a été retournée pour exporter un fichier pfx du certificat.
+Dans un environnement de production, vous devez importer un certificat valide signé par un fournisseur approuvé. Pour ce didacticiel, vous créez un certificat auto-signé à l’aide de [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate). Vous pouvez utiliser [Export-PfxCertificate](/powershell/module/pkiclient/export-pfxcertificate) avec l’empreinte numérique qui a été retournée pour exporter un fichier pfx du certificat.
 
 ```powershell
 New-SelfSignedCertificate `
@@ -328,17 +327,10 @@ Get-AzPublicIPAddress -ResourceGroupName myResourceGroupAG -Name myAGPublicIPAdd
 
 ![Avertissement de sécurité](./media/redirect-http-to-https-powershell/application-gateway-secure.png)
 
-Pour accepter l’avertissement de sécurité si vous avez utilisé un certificat auto-signé, sélectionnez **Détails**, puis **Atteindre la page web**. Votre site IIS sécurisé apparaît maintenant comme dans l’exemple suivant :
+Pour accepter l’avertissement de sécurité si vous avez utilisé un certificat auto-signé, sélectionnez **Détails** , puis **Atteindre la page web**. Votre site IIS sécurisé apparaît maintenant comme dans l’exemple suivant :
 
 ![Tester l’URL de base dans la passerelle d’application](./media/redirect-http-to-https-powershell/application-gateway-iistest.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce didacticiel, vous avez appris à :
-
-> [!div class="checklist"]
-> * Créer un certificat auto-signé
-> * Configurer un réseau
-> * Créer une passerelle d’application avec le certificat
-> * Ajouter un écouteur et une règle de redirection
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+- [Réécrire des en-têtes HTTP et une URL à l’aide d’Application Gateway](rewrite-http-headers-url.md)

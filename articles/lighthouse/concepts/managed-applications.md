@@ -1,18 +1,21 @@
 ---
 title: Azure Lighthouse et applications managées Azure
-description: Azure Lighthouse et applications managées Azure
-ms.date: 05/01/2020
+description: Découvrez comment les applications gérées par Azure Lighthouse et Azure peuvent vous aider à activer différents scénarios et comment elles peuvent être utilisées ensemble.
+ms.date: 08/12/2020
 ms.topic: conceptual
-ms.openlocfilehash: d9923d31e78675927b4ca235607b2a61b24ccc41
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: b3d6c83a50f1da006f2618f7f4ff59759dac2555
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82782582"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436519"
 ---
 # <a name="azure-lighthouse-and-azure-managed-applications"></a>Azure Lighthouse et applications managées Azure
 
 Azure Lighthouse et les applications managées Azure sont deux solutions qui permettent à un fournisseur de services d’accéder aux ressources qui résident dans le locataire du client. Il est utile de comprendre en quoi le fonctionnement de ces solutions diffère, les scénarios pour lesquels elles sont pertinentes ainsi que la façon dont elles peuvent être utilisées ensemble.
+
+> [!TIP]
+> Même si nous faisons référence aux fournisseurs de services et aux clients dans cette rubrique, les [entreprises gérant plusieurs locataires](enterprise.md) peuvent utiliser les mêmes processus et outils.
 
 ## <a name="comparing-azure-lighthouse-and-azure-managed-applications"></a>Comparaison d’Azure Lighthouse et des applications managées Azure
 
@@ -20,7 +23,7 @@ Azure Lighthouse et les applications managées Azure sont deux solutions qui per
 
 Avec [Azure Lighthouse](../overview.md), un fournisseur de services peut effectuer une grande diversité de tâches de gestion directement sur l’abonnement d’un client (ou groupe de ressources). Cet accès s’effectue au moyen d’une projection logique, qui permet au fournisseur de services de se connecter à son propre locataire et d’accéder aux ressources qui appartiennent au locataire du client. Le client détermine quels abonnements ou groupes de ressources il souhaite déléguer au fournisseur de services, et il assure l’accès total à ces ressources. Il peut également supprimer l’accès du fournisseur de services à tout moment.
 
-Pour pouvoir utiliser Azure Lighthouse, les clients sont intégrés à la [gestion des ressources déléguées Azure](azure-delegated-resource-management.md) soit en [déployant des modèles ARM](../how-to/onboard-customer.md), soit en publiant une [offre de service managé sur la Place de marché Azure](managed-services-offers.md). Vous pouvez suivre votre impact sur les engagements des clients en [liant votre ID partenaire](../../cost-management-billing/manage/link-partner-id.md).
+Pour pouvoir utiliser Azure Lighthouse, les clients sont intégrés à la [gestion des ressources déléguées Azure](azure-delegated-resource-management.md) soit en [déployant des modèles ARM](../how-to/onboard-customer.md), soit en publiant une [offre de service managé sur la Place de marché Azure](managed-services-offers.md). Vous pouvez suivre votre impact sur les engagements des clients en [liant votre ID partenaire](../how-to/partner-earned-credit.md).
 
 Azure Lighthouse est généralement utilisé dans les scénarios où un fournisseur de services effectue des tâches de gestion pour un client de manière continue.
 
@@ -32,7 +35,7 @@ Dans une application managée, les ressources utilisées par l’application son
 
 Les applications managées prennent en charge les [expériences personnalisées dans le Portail Azure](../../azure-resource-manager/managed-applications/concepts-view-definition.md) et l’[intégration avec des fournisseurs personnalisés](../../azure-resource-manager/managed-applications/tutorial-create-managed-app-with-custom-provider.md). Ces options permettent d’offrir une expérience encore plus personnalisée et intégrée, et rendre ainsi certaines tâches de gestion plus faciles à effectuer par les clients eux-mêmes.
 
-Les applications managées peuvent être [publiées sur la Place de marché Azure](../../azure-resource-manager/managed-applications/publish-marketplace-app.md), soit en tant qu’offre privée pour une utilisation particulière d’un client, soit en tant qu’offre publique que plusieurs clients peuvent acheter. Elles peuvent également être fournies aux utilisateurs dans votre organisation par la [publication d’applications managées dans votre catalogue de services](../../azure-resource-manager/managed-applications/publish-service-catalog-app.md). Vous pouvez déployer des instances du catalogue de services et de la Place de marché à l’aide de modèles ARM, qui contiennent éventuellement l’identificateur unique du partenaire de la Place de marché commerciale pour suivre l’[attribution de l’utilisation de client](../../marketplace/azure-partner-customer-usage-attribution.md).
+Les applications managées peuvent être [publiées sur la Place de marché Azure](../../marketplace/create-new-azure-apps-offer.md), soit en tant qu’offre privée pour une utilisation particulière d’un client, soit en tant qu’offre publique que plusieurs clients peuvent acheter. Elles peuvent également être fournies aux utilisateurs dans votre organisation par la [publication d’applications managées dans votre catalogue de services](../../azure-resource-manager/managed-applications/publish-service-catalog-app.md). Vous pouvez déployer des instances du catalogue de services et de la Place de marché à l’aide de modèles ARM, qui contiennent éventuellement l’identificateur unique du partenaire de la Place de marché commerciale pour suivre l’[attribution de l’utilisation de client](../../marketplace/azure-partner-customer-usage-attribution.md).
 
 Les applications managées Azure sont généralement utilisées quand il est possible de répondre à un besoin spécifique du client au moyen d’une solution clés en main entièrement managée par le fournisseur de services.
 
@@ -47,4 +50,4 @@ Les clients peuvent également être intéressés par les applications managées
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Découvrez les [applications managées Azure](../../azure-resource-manager/managed-applications/overview.md).
-- Découvrez comment [intégrer un abonnement dans la gestion des ressources déléguées Azure](../how-to/onboard-customer.md).
+- Découvrez comment [intégrer un abonnement à Azure Lighthouse](../how-to/onboard-customer.md).

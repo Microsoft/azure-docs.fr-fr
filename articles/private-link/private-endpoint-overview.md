@@ -5,14 +5,14 @@ services: private-link
 author: malopMSFT
 ms.service: private-link
 ms.topic: conceptual
-ms.date: 01/09/2020
+ms.date: 06/18/2020
 ms.author: allensu
-ms.openlocfilehash: c0cf8a91ee1dbdd70f1b911dba24fb69ee7bc0e3
-ms.sourcegitcommit: 3beb067d5dc3d8895971b1bc18304e004b8a19b3
+ms.openlocfilehash: 8021d659c144bfb68c2714f1680b6ad27a51b56a
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82744404"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95522343"
 ---
 # <a name="what-is-azure-private-endpoint"></a>Qu’est-ce qu’Azure Private Endpoint ?
 
@@ -28,14 +28,16 @@ Azure Private Endpoint est une interface réseau qui vous permet de vous connect
 |Subnet    |  Le sous-réseau pour déployer et allouer des adresses IP privées à partir d’un réseau virtuel. Pour connaître la configuration requise pour le sous-réseau, consultez la section Limitations de cet article.         |
 |Ressource Private Link    |   Ressource Private Link à connecter avec l’ID de ressource ou l’alias dans la liste des types disponibles. Un identificateur réseau unique sera généré pour tout le trafic envoyé à cette ressource.       |
 |Sous-ressource cible   |      Sous-ressource à connecter. Chaque type de ressource Private Link a différentes options à sélectionner en fonction de vos préférences.    |
-|Méthode d’approbation de la connexion    |  Automatique ou manuel. En fonction des autorisations de contrôle d’accès en fonction du rôle (RBAC), Private Endpoint peut être approuvé automatiquement. Si vous essayez de vous connecter à une ressource Private Link sans RBAC, utilisez la méthode manuelle pour permettre au propriétaire de la ressource d’approuver la connexion.        |
+|Méthode d’approbation de la connexion    |  Automatique ou manuel. Selon les autorisations de contrôle d’accès Azure en fonction du rôle (Azure RBAC), votre point de terminaison privé peut être approuvé automatiquement. Si vous essayez de vous connecter à une ressource Private Link sans Azure RBAC, utilisez la méthode manuelle pour permettre au propriétaire de la ressource d’approuver la connexion.        |
 |Message de requête     |  Vous pouvez spécifier un message pour que les connexions demandées soient approuvées manuellement. Ce message peut être utilisé pour identifier une demande spécifique.        |
 |État de la connexion   |   Propriété en lecture seule qui spécifie si Private Endpoint est actif. Seules les instances Private Endpoint dans un état approuvé peuvent être utilisées pour envoyer du trafic. États supplémentaires disponibles : <br>-**Approuvé** : La connexion a été approuvée automatiquement ou manuellement et est prête à être utilisée.</br><br>-**En attente** : La connexion a été créée manuellement et est en attente d’approbation par le propriétaire de la ressource Private Link.</br><br>-**Rejeté** : La connexion a été rejetée par le propriétaire de la ressource Private Link.</br><br>-**Déconnecté** : La connexion a été supprimée par le propriétaire de la ressource Private Link. Private Endpoint devient informatif et doit être supprimé pour le nettoyage. </br>|
 
 Voici quelques détails clés sur Private Endpoint : 
 - Private Endpoint permet la connectivité entre consommateurs à partir du même réseau virtuel, des réseaux virtuels avec homologation globale et locaux l’aide d’un [VPN](https://azure.microsoft.com/services/vpn-gateway/) ou [d’Express Route](https://azure.microsoft.com/services/expressroute/) et des services basés sur Private Link.
  
-- Lors de la création d’un point de terminaison privé, une interface réseau en lecture seule est également créée pour le cycle de vie de la ressource. Une adresse IP privée est attribuée à l’interface à partir du sous-réseau qui est mappé à la ressource de liaison privée.
+- Les connexions réseau ne peuvent être initiées que par des clients se connectant au point de terminaison privé ; les fournisseurs de services n’ont pas de configuration de routage pour initier des connexions aux consommateurs du service. Les connexions peuvent uniquement être établies dans une seule direction.
+
+- Lors de la création d’un point de terminaison privé, une interface réseau en lecture seule est également créée pour le cycle de vie de la ressource. Des adresses IP privées sont attribuées dynamiquement à l’interface à partir du sous-réseau qui est mappé à la ressource de liaison privée. La valeur de l’adresse IP privée reste inchangée pour l’intégralité du cycle de vie du point de terminaison privé.
  
 - Private Endpoint doit être déployé dans la même région que le réseau virtuel. 
  
@@ -43,8 +45,9 @@ Voici quelques détails clés sur Private Endpoint :
  
 - Vous pouvez créer plusieurs instances Private Endpoint à l’aide de la même ressource Private Link. Pour un réseau unique qui utilise une configuration de serveur DNS commune, il est recommandé d’utiliser Private Endpoint pour une ressource Private Link donnée afin d’éviter les entrées en double ou les conflits dans la résolution DNS. 
  
-- Plusieurs instances Private Endpoint privées peuvent être créées sur des sous-réseaux identiques ou différents au sein du même réseau virtuel. Il existe des limites au nombre d’instances Private Endpoint que vous pouvez créer dans un abonnement. Pour plus d’informations, consultez  [Limites Azure](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#networking-limits).
+- Plusieurs instances Private Endpoint privées peuvent être créées sur des sous-réseaux identiques ou différents au sein du même réseau virtuel. Il existe des limites au nombre d’instances Private Endpoint que vous pouvez créer dans un abonnement. Pour plus d’informations, consultez  [Limites Azure](../azure-resource-manager/management/azure-subscription-service-limits.md#networking-limits).
 
+- L’abonnement de la ressource de lien privé doit également être inscrit auprès du fournisseur de ressources Microsoft Network. Pour plus d’informations, consultez  [Fournisseurs de ressources Azure](../azure-resource-manager/management/resource-providers-and-types.md).
 
  
 ## <a name="private-link-resource"></a>Ressource Private Link 
@@ -53,6 +56,7 @@ Une ressource Private Link est la cible de destination d’une instance Private 
 |Nom de la ressource Private Link  |Type de ressource   |Sous-ressources  |
 |---------|---------|---------|
 |**Service Private Link** (votre propre service)   |  Microsoft.Network/privateLinkServices       | empty |
+|**Azure Automation** |  Microsoft.Automation/automationAccounts | Webhook, DSCAndHybridWorker |
 |**Azure SQL Database** | Microsoft.Sql/servers    |  Sql Server (sqlServer)        |
 |**Azure Synapse Analytics** | Microsoft.Sql/servers    |  Sql Server (sqlServer)        | 
 |**Stockage Azure**  | Microsoft.Storage/storageAccounts    |  Blob (blob, blob_secondary)<BR> Table (table, table_secondary)<BR> File d'attente (queue, queue_secondary)<BR> Fichier (file, file_secondary)<BR> Web (web, web_secondary)        |
@@ -61,19 +65,27 @@ Une ressource Private Link est la cible de destination d’une instance Private 
 |**Azure Database pour PostgreSQL – Serveur unique** | Microsoft.DBforPostgreSQL/servers    | postgresqlServer |
 |**Azure Database pour MySQL** | Microsoft.DBforMySQL/servers    | mysqlServer |
 |**Azure Database for MariaDB** | Microsoft.DBforMariaDB/servers    | mariadbServer |
+|**Azure IoT Hub** | Microsoft.Devices/IotHubs    | iotHub |
 |**Azure Key Vault** | Microsoft.KeyVault/vaults    | coffre |
-|**Azure Kubernetes Service – API Kubernetes** | Microsoft.ContainerService/managedClusters    | managedCluster |
+|**Azure Kubernetes Service – API Kubernetes** | Microsoft.ContainerService/managedClusters    | gestion |
 |**Azure Search** | Microsoft.Search/searchService| searchService|  
 |**Azure Container Registry** | Microsoft.ContainerRegistry/registries    | Registre |
-|**Azure App Configuration** | Microsoft.Appconfiguration/configurationStores    | configurationStore |
+|**Azure App Configuration** | Microsoft.Appconfiguration/configurationStores    | configurationStores |
 |**Azure Backup** | Microsoft.RecoveryServices/vaults    | coffre |
 |**Azure Event Hub** | Microsoft.EventHub/namespaces    | espace de noms |
 |**Azure Service Bus** | Microsoft.ServiceBus/namespaces | espace de noms |
 |**Azure Relay** | Microsoft.Relay/namespaces | espace de noms |
 |**Azure Event Grid** | Microsoft.EventGrid/topics    | topic |
 |**Azure Event Grid** | Microsoft.EventGrid/domains    | domaine |
-|**Azure WebApps** | Microsoft.Web/sites    | site |
+|**Azure App Service** | Microsoft.Web/sites    | sites |
 |**Azure Machine Learning** | Microsoft.MachineLearningServices/workspaces    | espace de travail |
+|**SignalR** | Microsoft.SignalRService/SignalR    | signalR |
+|**Azure Monitor** | Microsoft.Insights/privateLinkScopes    | azuremonitor |
+|**Cognitive Services** | (Microsoft.CognitiveServices/accounts    | account |
+|**Azure File Sync** | Microsoft.StorageSync/storageSyncServices    | Afs |
+    
+  
+
   
  
 ## <a name="network-security-of-private-endpoints"></a>Sécurité réseau de Private Endpoint 
@@ -121,10 +133,10 @@ Le tableau suivant répertorie les limitations connues lors de l’utilisation d
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-- [Créer un point de terminaison privé pour un serveur SQL Database à l’aide du portail](create-private-endpoint-portal.md)
-- [Créer un point de terminaison privé pour un serveur SQL Database à l’aide de PowerShell](create-private-endpoint-powershell.md)
-- [Créer un point de terminaison privé pour un serveur SQL Database à l’aide de l’interface CLI](create-private-endpoint-cli.md)
-- [Créer un point de terminaison privé pour un compte de stockage à l’aide du portail](create-private-endpoint-storage-portal.md)
+- [Créer un point de terminaison privé pour SQL Database à l’aide du portail](create-private-endpoint-portal.md)
+- [Créer un point de terminaison privé pour SQL Database à l’aide de PowerShell](create-private-endpoint-powershell.md)
+- [Créer un point de terminaison privé pour SQL Database à l’aide de l’interface CLI](create-private-endpoint-cli.md)
+- [Créer un point de terminaison privé pour un compte de stockage à l’aide du portail](./tutorial-private-endpoint-storage-portal.md)
 - [Créer un point de terminaison privé pour un compte Cosmos Azure à l’aide du portail](../cosmos-db/how-to-configure-private-endpoints.md)
 - [Créer votre propre service Liaison privée à l’aide d’Azure PowerShell](create-private-link-service-powershell.md)
 - [Créer votre propre liaison privée pour Azure Database pour PostgreSQL – Serveur unique à l’aide du portail](../postgresql/howto-configure-privatelink-portal.md)
@@ -133,3 +145,4 @@ Le tableau suivant répertorie les limitations connues lors de l’utilisation d
 - [Créer votre propre liaison privée pour Azure Database pour MySQL à l’aide de l’interface CLI](../mysql/howto-configure-privatelink-cli.md)
 - [Créer votre propre liaison privée pour Azure Database for MariaDB à l’aide du portail](../mariadb/howto-configure-privatelink-portal.md)
 - [Créer votre propre liaison privée pour Azure Database for MariaDB à l’aide de l’interface CLI](../mariadb/howto-configure-privatelink-cli.md)
+- [Créer votre propre liaison privée pour Azure Key Vault à l’aide du portail et de l’interface CLI](../key-vault/general/private-link-service.md)

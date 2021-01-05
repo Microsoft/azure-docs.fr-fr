@@ -1,49 +1,75 @@
 ---
 title: Installer et configurer l’extension Diagnostics Azure pour Windows (WAD)
-description: Découvrez comment collecter les données de diagnostics Azure dans un compte Stockage Azure afin de pouvoir les afficher avec l’un des outils disponibles.
+description: Découvrez comment installer et configurer l’extension Diagnostics Windows. Vous trouverez également une description de la façon dont les données sont stockées dans un compte de stockage Azure.
 services: azure-monitor
 author: bwren
 ms.subservice: diagnostic-extension
 ms.topic: conceptual
 ms.date: 02/17/2020
 ms.author: bwren
-ms.openlocfilehash: dd18fd484ac456f0c38cd6d9b73a2395a08ad5d0
-ms.sourcegitcommit: d815163a1359f0df6ebfbfe985566d4951e38135
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: e6ccba27fb599cb26da86e94d3500f4f806ecb76
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82883105"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91328868"
 ---
 # <a name="install-and-configure-windows-azure-diagnostics-extension-wad"></a>Installer et configurer l’extension Diagnostics Azure pour Windows (WAD)
-L’extension Diagnostics Azure est un agent présent dans Azure Monitor qui collecte des données de supervision dans le système d’exploitation invité et des charges de travail de machines virtuelles Azure et d’autres ressources de calcul. Cet article fournit des détails sur l’installation et la configuration de l’extension de diagnostic Windows et une description de la façon dont les données sont stockées dans un compte Stockage Azure.
+L’[extension Diagnostics Azure](diagnostics-extension-overview.md) est un agent présent dans Azure Monitor qui collecte des données de supervision dans le système d’exploitation invité, des charges de travail de machines virtuelles Azure et d’autres ressources de calcul. Cet article fournit des détails sur l’installation et la configuration de l’extension de diagnostic Windows et une description de la façon dont les données sont stockées dans un compte Stockage Azure.
 
 L’extension de diagnostic étant implémentée comme [extension de machine virtuelle](../../virtual-machines/extensions/overview.md) dans Azure, elle prend en charge les mêmes options d’installation à l’aide de modèles Resource Manager, de PowerShell et de l’interface CLI. Pour plus d’informations sur l’installation et la maintenance des extensions de machine virtuelle, consultez [Extensions et fonctionnalités de machine virtuelle pour Windows](../../virtual-machines/extensions/features-windows.md).
+
+## <a name="overview"></a>Vue d’ensemble
+Quand vous configurez l’extension Diagnostics Azure pour Windows, vous devez spécifier un compte de stockage dans lequel toutes les données spécifiées seront envoyées. Vous pouvez éventuellement en ajouter un pour plusieurs *récepteurs de données* pour envoyer les données vers différents emplacements.
+
+- Récepteur Azure Monitor : envoie les données de performances de l’invité dans les métriques Azure Monitor.
+- Récepteur Event Hub : envoie les données de performances et de journal de l’invité aux Event Hubs Azure en vue d’une transmission en dehors d’Azure. Ce récepteur ne peut pas être configuré dans le portail Azure.
+
 
 ## <a name="install-with-azure-portal"></a>Installer avec Portail Azure
 Vous pouvez installer et configurer l’extension de diagnostics sur une machine virtuelle individuelle dans le Portail Azure qui vous fournit une interface au lieu de travailler directement avec la configuration. Lorsque vous activez l’extension de diagnostic, elle utilise automatiquement une configuration par défaut avec les compteurs de performance et les événements les plus courants. Vous pouvez modifier cette configuration par défaut en fonction de vos besoins spécifiques.
 
 > [!NOTE]
-> Il existe des paramètres d’extension de diagnostic que vous ne pouvez pas configurer à l’aide du Portail Azure, notamment l’envoi de données à Azure Event Hubs. Vous devez utiliser l’une des autres méthodes de configuration pour ces paramètres.
+> Les éléments suivants décrivent les paramètres les plus courants pour l’extension de diagnostic. Pour plus d’informations sur toutes les options de configuration, consultez [Schéma d’extension de diagnostic Windows](diagnostics-extension-schema-windows.md).
 
 1. Ouvrez le menu d’une machine virtuelle dans le Portail Azure.
+
 2. Cliquez sur **Paramètres de diagnostic** dans la section **Surveillance** du menu de la machine virtuelle.
+
 3. Cliquez sur **Activer la supervision d’invités** si l’extension de diagnostic n’a pas déjà été activée.
-4. Un nouveau compte Stockage Azure sera créé pour la machine virtuelle, dont le nom sera basé sur le nom du groupe de ressources de la machine virtuelle. Vous pouvez attacher la machine virtuelle à un autre compte de stockage en sélectionnant l’onglet **Agent**.
 
-![Paramètres de diagnostic](media/diagnostics-extension-windows-install/diagnostic-settings.png)
+   ![Activer la supervision](media/diagnostics-extension-windows-install/enable-monitoring.png)
 
+4. Un nouveau compte Stockage Azure sera créé pour la machine virtuelle, dont le nom sera basé sur celui du groupe de ressources de la machine virtuelle, et un ensemble par défaut de compteurs de performances et de journaux de l’invité sera sélectionné.
 
-Vous pouvez modifier la configuration par défaut une fois l’extension d diagnostic activée. Le tableau suivant décrit les options que vous pouvez modifier dans les différents onglets. Certaines options ont une commande **personnalisée** qui vous permet de spécifier une configuration plus détaillée. Pour plus d’informations sur les différents paramètres, consultez [Schéma d’extension de diagnostic Windows](diagnostics-extension-schema-windows.md).
+   ![Paramètres de diagnostic](media/diagnostics-extension-windows-install/diagnostic-settings.png)
 
-| Onglet | Description |
-|:---|:---|
-| Vue d’ensemble | Affiche la configuration actuelle avec des liens vers les autres onglets. |
-| Compteurs de performance | Sélectionnez les compteurs de performances à collecter et l’échantillonnage pour chacun d’entre eux.  |
-| Journaux d’activité | Sélectionnez les données du journal à collecter. Cela comprend les journaux d’événements Windows, les journaux IIS, les journaux d’applications .NET et les événements ETW.  |
-| Vidages sur incident | Activez le vidage sur incident pour différents processus. |
-| Récepteurs | Activez les récepteurs de données pour envoyer des données aux destinations en plus de Stockage Azure.<br>Azure Monitor : envoie des données de performances aux mesures Azure Monitor.<br>Application Insights : envoie des données à une application Application Insights. |
-| Agent | Modifiez la configuration suivante pour l’agent :<br>- Modifiez le compte de stockage.<br>- Spécifiez le disque local maximal utilisé pour l’agent.<br>- Configurer les journaux d’activité pour l’intégrité de l’agent lui-même.|
+5. Dans l’onglet **Compteurs de performances**, sélectionnez les métriques d’invité que vous souhaitez collecter sur cette machine virtuelle. Utilisez le paramètre **Personnaliser** pour une sélection plus avancée.
 
+   ![Compteurs de performance](media/diagnostics-extension-windows-install/performance-counters.png)
+
+6. Dans l’onglet **Journaux**, sélectionnez les journaux à collecter sur la machine virtuelle. Les journaux peuvent être envoyés au stockage ou à des Event Hubs, mais pas à Azure Monitor. Utilisez l’[agent Log Analytics ](log-analytics-agent.md) pour collecter des journaux d’invité et les envoyer à Azure Monitor.
+
+   ![Capture d’écran présentant l’onglet Journaux avec différents journaux sélectionnés pour une machine virtuelle.](media/diagnostics-extension-windows-install/logs.png)
+
+7. Dans l’onglet **Vidages sur incident**, spécifiez les processus pour collecter des images mémoire après un incident. Les données seront écrites dans le compte de stockage pour le paramètre de diagnostic, et vous pouvez éventuellement spécifier un conteneur de blobs.
+
+   ![Vidages sur incident](media/diagnostics-extension-windows-install/crash-dumps.png)
+
+8. Dans l’onglet **Récepteurs**, indiquez si vous souhaitez envoyer les données vers des emplacements autres que le stockage Azure. Si vous sélectionnez **Azure Monitor**, les données de performances de l’invité seront envoyées aux métriques Azure Monitor. Vous ne pouvez pas configurer le récepteur d’Event Hubs dans le portail Azure.
+
+   ![Capture d’écran présentant l’onglet Récepteurs dont l’option Envoyer des données de diagnostic à Azure Monitor est activée.](media/diagnostics-extension-windows-install/sinks.png)
+   
+   Si vous n’avez pas activé une identité affectée par le système configurée pour votre machine virtuelle, l’avertissement ci-dessous peut s’afficher lorsque vous enregistrez une configuration avec le récepteur Azure Monitor. Cliquez sur la bannière pour activer l’identité affectée par le système.
+   
+   ![Entité gérée](media/diagnostics-extension-windows-install/managed-entity.png)
+
+9. Dans l’onglet **Agent**, vous pouvez modifier le compte de stockage, définir le quota de disque et spécifier s’il faut collecter les journaux de l’infrastructure de diagnostic.  
+
+   ![Capture d’écran présentant l’onglet Agent avec l’option qui permet de définir le compte de stockage.](media/diagnostics-extension-windows-install/agent.png)
+
+10. Pour enregistrer la configuration, cliquez sur **Enregistrer**. 
 
 > [!NOTE]
 > Bien que la configuration de l’extension de diagnostic puisse être au format JSON ou XML, toute configuration effectuée dans le Portail Azure est toujours stockée au format JSON. Si vous utilisez XML avec une autre méthode de configuration, puis modifiez votre configuration avec le Portail Azure, les paramètres seront modifiés en format JSON.
@@ -52,7 +78,7 @@ Vous pouvez modifier la configuration par défaut une fois l’extension d diagn
 Pour plus d’informations sur le déploiement de l’extension de diagnostic à l’aide de vos modèles Azure Resource Manager, consultez [Utiliser la surveillance et les diagnostics avec une machine virtuelle Windows et des modèles Azure Resource Manager](../../virtual-machines/extensions/diagnostics-template.md). 
 
 ## <a name="azure-cli-deployment"></a>Déploiement de l’interface de ligne de commande Azure
-Vous pouvez utiliser Azure CLI pour déployer l’extension Diagnostics Azure sur une machine virtuelle existante à l’aide de la commande [az vm extension set](https://docs.microsoft.com/cli/azure/vm/extension?view=azure-cli-latest#az-vm-extension-set), comme indiqué dans l’exemple suivant. 
+Vous pouvez utiliser Azure CLI pour déployer l’extension Diagnostics Azure sur une machine virtuelle existante à l’aide de la commande [az vm extension set](/cli/azure/vm/extension?view=azure-cli-latest#az-vm-extension-set), comme indiqué dans l’exemple suivant. 
 
 ```azurecli
 az vm extension set \
@@ -73,6 +99,7 @@ Les paramètres protégés sont définis dans l’[élément PrivateConfig](diag
     "storageAccountEndPoint": "https://mystorageaccount.blob.core.windows.net"
 }
 ```
+
 Les paramètres publics sont définis dans l’[élément PublicConfig](diagnostics-extension-schema-windows.md#publicconfig-element) du schéma de configuration. Voici l’exemple minimal d’un fichier de paramètres publics qui permet la collecte de journaux d’infrastructure de diagnostic, d’un seul compteur de performances et d’un seul journal des événements. Pour plus d’informations sur les paramètres publics, consultez [Exemple de configuration](diagnostics-extension-schema-windows.md#publicconfig-element).
 
 ```JSON
@@ -107,7 +134,7 @@ Les paramètres publics sont définis dans l’[élément PublicConfig](diagnost
 
 
 ## <a name="powershell-deployment"></a>Déploiement PowerShell
-Vous pouvez utiliser PowerShell pour déployer l’extension Diagnostics Azure sur une machine virtuelle existante à l’aide de la commande [Set-AzVMDiagnosticsExtension](https://docs.microsoft.com/powershell/module/servicemanagement/azure/set-azurevmdiagnosticsextension), comme indiqué dans l’exemple suivant. 
+Vous pouvez utiliser PowerShell pour déployer l’extension Diagnostics Azure sur une machine virtuelle existante à l’aide de la commande [Set-AzVMDiagnosticsExtension](/powershell/module/servicemanagement/azure.service/set-azurevmdiagnosticsextension), comme indiqué dans l’exemple suivant. 
 
 ```powershell
 Set-AzVMDiagnosticsExtension -ResourceGroupName "myvmresourcegroup" `

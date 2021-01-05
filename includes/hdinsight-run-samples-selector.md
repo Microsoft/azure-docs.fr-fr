@@ -4,16 +4,14 @@ ms.service: hdinsight
 ms.topic: include
 ms.date: 10/25/2018
 ms.author: jasonh
-ms.openlocfilehash: 2366ac1b2cbb916afef7e1921ca201125b507585
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8674c69ababdf872bc0f856d05f9c7f77ba25d61
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177663"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95554402"
 ---
 > [!div class="op_single_selector"]
 > * [Cluster Linux](../articles/hdinsight/hadoop/apache-hadoop-run-samples-linux.md)
-> * [Cluster Windows](../articles/hdinsight/hdinsight-run-samples.md)
 > 
-> 
-
+>

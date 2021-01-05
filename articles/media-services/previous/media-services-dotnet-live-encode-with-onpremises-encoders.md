@@ -13,23 +13,27 @@ ms.devlang: ne
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 11c6da0b79f169b250dc0178f76dcd885ce91668
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d513a11761fec64c8d0732a61740475be52d727f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162869"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89262026"
 ---
 # <a name="how-to-perform-live-streaming-with-on-premises-encoders-using-net"></a>Streaming en direct avec des encodeurs locaux avec .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [Portail](media-services-portal-live-passthrough-get-started.md)
 > * [.NET](media-services-dotnet-live-encode-with-onpremises-encoders.md)
-> * [REST](https://docs.microsoft.com/rest/api/media/operations/channel)
+> * [REST](/rest/api/media/operations/channel)
 > 
 > 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Ce didacticiel vous guide tout au long des étapes d’utilisation du Kit de développement logiciel (SDK) .NET Azure Media Services afin de créer un **canal** configuré pour une livraison directe. 
 
@@ -406,4 +410,3 @@ Consulter les parcours d’apprentissage de Media Services
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

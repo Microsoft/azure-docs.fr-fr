@@ -2,16 +2,14 @@
 title: Mettre à l’échelle un cluster Azure Kubernetes Service (AKS)
 description: Apprenez à mettre le nombre de nœuds à l'échelle dans un cluster Azure Kubernetes Service (AKS).
 services: container-service
-author: iainfoulds
 ms.topic: article
-ms.date: 05/31/2019
-ms.author: iainfou
-ms.openlocfilehash: 55d7a00a0a8c0b655f06810f8bcea7126bb9167f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/16/2020
+ms.openlocfilehash: d5686a74ffe138af51d2319c839a3a5c5887f992
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79368415"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90902933"
 ---
 # <a name="scale-the-node-count-in-an-azure-kubernetes-service-aks-cluster"></a>Mettre le nombre de nœuds à l'échelle dans un cluster Azure Kubernetes Service (AKS)
 
@@ -41,7 +39,7 @@ L'exemple suivant montre que le *nom* est *nodepool1* :
 ]
 ```
 
-Utilisez la commande [az aks scale][az-aks-scale] pour mettre à l’échelle les nœuds du cluster. L’exemple suivant met à l’échelle un cluster nommé *myAKSCluster* vers un nœud unique. Indiquez le nom du pool de nœuds ( *--nodepool-name*) obtenu à l'aide de la commande précédente, par exemple *nodepool1* :
+Utilisez la commande [az aks scale][az-aks-scale] pour mettre à l’échelle les nœuds du cluster. L’exemple suivant met à l’échelle un cluster nommé *myAKSCluster* vers un nœud unique. Indiquez le nom du pool de nœuds `--nodepool-name` obtenu à l'aide de la commande précédente, par exemple *nodepool1* :
 
 ```azurecli-interactive
 az aks scale --resource-group myResourceGroup --name myAKSCluster --node-count 1 --nodepool-name <your node pool name>
@@ -69,6 +67,20 @@ L'exemple suivant montre que le cluster a été mis à l'échelle avec succès s
 }
 ```
 
+
+## <a name="scale-user-node-pools-to-0"></a>Mise à l’échelle des pools de nœuds `User` à 0
+
+Contrairement aux pools de nœuds `System` qui requièrent toujours des nœuds en cours d’exécution, les pools de nœuds `User` vous permettent de mettre à l’échelle à 0. Pour en savoir plus sur les différences entre les pools de nœuds système et utilisateur, consultez [Pools de nœuds système et utilisateur](use-system-pools.md).
+
+Pour mettre à l’échelle un pool d’utilisateurs à 0, vous pouvez utiliser [az aks nodepool scale][az-aks-nodepool-scale] en remplacement de la commande `az aks scale` ci-dessus et définir 0 comme nombre de nœuds.
+
+
+```azurecli-interactive
+az aks nodepool scale --name <your node pool name> --cluster-name myAKSCluster --resource-group myResourceGroup  --node-count 0 
+```
+
+Vous pouvez également mettre à l’échelle automatiquement les pools de nœuds `User` à 0 nœud, en affectant la valeur 0 au paramètre `--min-count` de l’[Autoscaler de cluster](cluster-autoscaler.md).
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans cet article, vous avez mis à l’échelle un cluster AKS manuellement pour augmenter ou réduire le nombre de nœuds. Vous pouvez également utiliser l’[autoscaler de cluster][cluster-autoscaler] pour mettre à l’échelle votre cluster automatiquement.
@@ -81,3 +93,4 @@ Dans cet article, vous avez mis à l’échelle un cluster AKS manuellement pour
 [az-aks-show]: /cli/azure/aks#az-aks-show
 [az-aks-scale]: /cli/azure/aks#az-aks-scale
 [cluster-autoscaler]: cluster-autoscaler.md
+[az-aks-nodepool-scale]: /cli/azure/aks/nodepool?view=azure-cli-latest#az-aks-nodepool-scale&preserve-view=true

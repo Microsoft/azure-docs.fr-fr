@@ -3,20 +3,20 @@ title: Utilisation de PowerShell pour gérer Traffic Manager dans Azure
 description: Avec ce parcours d’apprentissage, commencez à utiliser Azure PowerShell pour Traffic Manager.
 services: traffic-manager
 documentationcenter: na
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
-ms.author: rohink
-ms.openlocfilehash: 7886764a69eefa68be071a801bea65ae995fbdc3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 21076fe23301c189d9987f78706cc81691ce7a4f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938510"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89400532"
 ---
 # <a name="using-powershell-to-manage-traffic-manager"></a>Utilisation de PowerShell pour gérer Traffic Manager
 
@@ -30,7 +30,7 @@ Azure Traffic Manager est configuré à l'aide d'un ensemble de paramètres appe
 
 Chaque profil Traffic Manager est représenté par une ressource de type « TrafficManagerProfiles ». Au niveau de l'API REST, l'URI de chaque profil est la suivante :
 
-    https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/trafficManagerProfiles/{profile-name}?api-version={api-version}
+`https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Network/trafficManagerProfiles/{profile-name}?api-version={api-version}`
 
 ## <a name="setting-up-azure-powershell"></a>Configuration d’Azure PowerShell
 
@@ -38,7 +38,7 @@ Chaque profil Traffic Manager est représenté par une ressource de type « Tra
 
 Ces instructions utilisent Microsoft Azure PowerShell. L’article suivant explique comment installer et configurer Azure PowerShell.
 
-* [Installation et configuration d’Azure PowerShell](/powershell/azure/overview)
+* [Installation et configuration d’Azure PowerShell](/powershell/azure/)
 
 Les exemples de cet article supposent que vous disposez déjà d’un groupe de ressources. Vous pouvez en créer un à l’aide de la commande suivante :
 

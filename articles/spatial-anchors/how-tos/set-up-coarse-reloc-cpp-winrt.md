@@ -1,19 +1,19 @@
 ---
 title: Relocalisation grossière en C++/WinRT
 description: Explication détaillée de la création et de la localisation d’ancres avec la relocalisation approximative en C++/WinRT.
-author: bucurb
-manager: dacoghl
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: bobuc
-ms.date: 09/19/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 6d2bb4c563bd7bae186ce9832ff0472f17a8afd3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7068ecb7fcfe888118396523e0e3d997e5a59e9a
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76548286"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96005008"
 ---
 # <a name="how-to-create-and-locate-anchors-using-coarse-relocalization-in-cwinrt"></a>Guide pratique pour créer et localiser des ancres avec la relocalisation approximative en C++/WinRT
 
@@ -31,7 +31,7 @@ Azure Spatial Anchors peut associer des données de capteur de positionnement in
 
 Pour suivre ce guide, veillez à disposer des éléments suivants :
 
-- Connaissances de base sur C++ et les <a href="https://docs.microsoft.com/windows/uwp/cpp-and-winrt-apis/intro-to-using-cpp-with-winrt" target="_blank">API Windows Runtime</a>.
+- Connaissances de base sur C++ et les <a href="/windows/uwp/cpp-and-winrt-apis/intro-to-using-cpp-with-winrt" target="_blank">API Windows Runtime</a>.
 - Lisez la page [Vue d’ensemble d’Azure Spatial Anchors](../overview.md).
 - Effectuez l’un des [guides de démarrage rapide de 5 minutes](../index.yml).
 - Lisez le [Guide pratique pour la création et la localisation des ancres](../create-locate-anchors-overview.md).

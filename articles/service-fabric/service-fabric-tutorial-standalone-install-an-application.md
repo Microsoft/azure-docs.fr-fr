@@ -1,17 +1,15 @@
 ---
 title: Installer une application sur un cluster autonome
 description: Dans ce tutoriel, vous allez apprendre à installer une application dans votre cluster Service Fabric autonome.
-author: dkkapur
 ms.topic: tutorial
 ms.date: 07/22/2019
-ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: 124fc6035c1d0ad504a34b7db227f0f4675f24f7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ae946321b34f12c816a717db4a3d07f57feefe52
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75613956"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96485358"
 ---
 # <a name="tutorial-deploy-an-application-on-your-service-fabric-standalone-cluster"></a>Didacticiel : déployer une application sur votre cluster autonome Service Fabric
 
@@ -19,7 +17,7 @@ Les clusters autonomes Service Fabric vous permettent de choisir votre propre en
 
 Ce tutoriel est le troisième de la série.  Les clusters autonomes Service Fabric vous permettent de choisir votre propre environnement et de créer un cluster dans le cadre de l’approche « n’importe quel SE, n’importe quel cloud » avec Service Fabric. Ce didacticiel vous montre comment créer l’infrastructure AWS nécessaire pour héberger ce cluster autonome.
 
-Dans ce troisième volet, vous apprenez à :
+Dans cet article, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Télécharger l’exemple d’application
@@ -52,7 +50,7 @@ git clone https://github.com/Azure-Samples/service-fabric-dotnet-quickstart
 
 4. Cliquez avec le bouton droit sur le projet de l’application `Voting` dans l’Explorateur de solutions et choisissez **Publier**.
 
-5. Sélectionnez la flèche déroulante pour le **point de terminaison de connexion** et entrez le nom DNS public de l’un des nœuds de votre cluster.  Par exemple : `ec2-34-215-183-77.us-west-2.compute.amazonaws.com:19000`. Notez que dans Azure, un nom de domaine complet (FQDN) n’est pas accordé automatiquement, mais peut facilement [être défini sur la page Vue d’ensemble de la machine virtuelle.](https://docs.microsoft.com/azure/virtual-machines/linux/portal-create-fqdn)
+5. Sélectionnez la flèche déroulante pour le **point de terminaison de connexion** et entrez le nom DNS public de l’un des nœuds de votre cluster.  Par exemple : `ec2-34-215-183-77.us-west-2.compute.amazonaws.com:19000`. Dans Azure, un nom de domaine complet (FQDN) n’est pas accordé automatiquement, mais peut facilement [être défini dans la page Vue d’ensemble de la machine virtuelle.](../virtual-machines/create-fqdn.md)
 
 6. Ouvrez votre navigateur préféré et tapez l’adresse du cluster (le point de terminaison de connexion, cette application se déploie sur le port 8080 - par exemple, ec2-34-215-183-77.us-west-2.compute.amazonaws.com:8080).
 
@@ -60,7 +58,7 @@ git clone https://github.com/Azure-Samples/service-fabric-dotnet-quickstart
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans le troisième volet de la série, vous avez appris à déployer une application sur votre cluster :
+Dans cet article, vous avez découvert comment déployer une application sur votre cluster :
 
 > [!div class="checklist"]
 > * Télécharger l’exemple d’application

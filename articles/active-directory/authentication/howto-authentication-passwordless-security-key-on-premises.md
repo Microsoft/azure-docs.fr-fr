@@ -6,26 +6,24 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 03/09/2020
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: librown, aakapo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 181e8192170cd7394d6817edd655f4e8257b48a4
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: e1459442f7d99d1de88a685eed34493da530c1a4
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80654039"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743477"
 ---
 # <a name="enable-passwordless-security-key-sign-in-to-on-premises-resources-with-azure-active-directory-preview"></a>Activer la connexion par clé de sécurité sans mot de passe à des ressources locales avec Azure Active Directory (préversion)
 
 Ce document se concentre sur l’activation de l’authentification sans mot de passe à des ressources locales pour des environnements composés d’appareils Windows 10 de types **Joint à Azure AD** et **Joint à une version hybride d’Azure AD**. Cette fonctionnalité fournit une authentification unique (SSO) transparente auprès de ressources locales en utilisant des clés de sécurité compatibles Microsoft.
 
-|     |
-| --- |
-| Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).|
-|     |
+> [!NOTE]
+> Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="sso-to-on-premises-resources-using-fido2-keys"></a>Authentification unique auprès de ressources locales à l’aide de clés FIDO2
 
@@ -48,9 +46,9 @@ Les organisations doivent effectuer les étapes permettant d’[activer la conne
 
 Les organisations doivent également présenter la configuration logicielle suivante.
 
-- Les appareils doivent exécuter Windows 10 Insider Build 18945 ou une version ultérieure.
+- Les appareils doivent exécuter Windows 10 version 2004 ou ultérieure.
 - Vous devez disposer de la version 1.4.32.0 ou ultérieure d’[Azure AD Connect](../hybrid/how-to-connect-install-roadmap.md#install-azure-ad-connect).
-  - Pour plus d’informations sur les options d’authentification hybride Azure AD disponibles, consultez [Choisir la méthode d’authentification adaptée à votre solution d’identité hybride Azure Active Directory](../../security/fundamentals/choose-ad-authn.md) et [Sélectionner le type d’installation à utiliser pour Azure AD Connect](../hybrid/how-to-connect-install-select-installation.md).
+  - Pour plus d’informations sur les options d’authentification hybride Azure AD disponibles, consultez [Choisir la méthode d’authentification adaptée à votre solution d’identité hybride Azure Active Directory](../hybrid/choose-ad-authn.md) et [Sélectionner le type d’installation à utiliser pour Azure AD Connect](../hybrid/how-to-connect-install-select-installation.md).
 - Les correctifs logiciels suivants doivent être installés sur vos contrôleurs de domaine Windows Server :
     - Pour Windows Server 2016 : https://support.microsoft.com/help/4534307/windows-10-update-kb4534307
     - Pour Windows Server 2019 : https://support.microsoft.com/help/4534321/windows-10-update-kb4534321
@@ -59,7 +57,7 @@ Les organisations doivent également présenter la configuration logicielle suiv
 
 Le scénario prend en charge l’authentification unique (SSO) dans les deux scénarios suivants :
 
-- Pour les ressources cloud telles qu’Office 365 et d’autres applications compatibles SAML.
+- Pour les ressources cloud telles que Microsoft 365 et d’autres applications compatibles SAML.
 - Pour les ressources locales et l’Authentification Windows intégrée sur les sites web. Les ressources peuvent inclure des sites web et des sites SharePoint qui requièrent une authentification IIS et/ou des ressources qui utilisent l’authentification NTLM.
 
 ### <a name="unsupported-scenarios"></a>Scénarios non pris en charge

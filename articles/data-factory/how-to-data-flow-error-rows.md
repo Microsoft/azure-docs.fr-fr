@@ -6,24 +6,32 @@ author: kromerm
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 04/20/2020
+ms.date: 11/22/2020
 ms.author: makromer
-ms.openlocfilehash: 8225143bb75118620b45c2520bb62ea30501a617
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c8b0ae7058aecc1813d720a3fbb2a1a1f967cf40
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81732683"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352597"
 ---
 # <a name="handle-sql-truncation-error-rows-in-data-factory-mapping-data-flows"></a>Gérer les lignes d’erreur de troncation SQL dans Data Factory en mappant les flux de données
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
-Un scénario courant dans Data Factory lors de l’utilisation du mappage de flux de données consiste à écrire vos données transformées dans une base de données SQL Azure. Dans ce scénario, une condition d’erreur courante que vous devez éviter est une troncation de colonne possible. Procédez comme suit pour fournir la journalisation des colonnes qui ne tiennent pas dans une colonne de chaîne cible. Cela permet à votre workflow de continuer dans ces scénarios.
+Un scénario courant dans Data Factory lors de l’utilisation de flux de données de mappage consiste à écrire vos données transformées dans Azure SQL Database. Dans ce scénario, une condition d’erreur courante que vous devez éviter est une troncation de colonne possible.
+
+Il existe deux méthodes principales pour gérer correctement les erreurs lors de l’écriture de données vers votre récepteur de base de données dans les flux de données ADF :
+
+* Définissez le récepteur [Gestion des lignes d’erreur](./connector-azure-sql-database.md#error-row-handling) sur « Continuer en cas d’erreur » lors du traitement des données de base de données. Cette méthode d’interception automatique ne nécessite pas de logique personnalisée dans votre flux de données.
+* Vous pouvez également procéder comme suit pour fournir la journalisation des colonnes qui ne tiennent pas dans une colonne de chaîne cible. Cela permet à votre flux de données de se poursuivre.
+
+> [!NOTE]
+> Lorsque vous activez la gestion automatique des lignes d’erreur, par opposition à la méthode ci-dessous d’écriture de votre propre logique de gestion des erreurs, cela se traduit par une baisse des performances et implique une étape supplémentaire par ADF afin d’effectuer une opération en 2 phases pour intercepter les erreurs.
 
 ## <a name="scenario"></a>Scénario
 
-1. Nous disposons d’une table de base de données Azure SQL cible qui comprend une colonne ```nvarchar(5)``` nommée « name ».
+1. Nous disposons d’une table de base de données cible qui comprend une colonne ```nvarchar(5)``` nommée « name ».
 
 2. Dans notre flux de données, nous voulons mapper des titres de films de notre récepteur à cette colonne « name » cible.
 
@@ -49,6 +57,10 @@ Cette vidéo présente un exemple de configuration de la logique de gestion des 
 4. Le flux de données terminé est illustré ci-dessous. Nous sommes maintenant en mesure de fractionner les lignes d’erreur afin d’éviter les erreurs de troncation SQL et de placer ces entrées dans un fichier journal. Pendant ce temps, les lignes réussies peuvent continuer d’écrire dans notre base de données cible.
 
     ![compléter le flux de données](media/data-flow/error2.png)
+
+5. Si vous choisissez l’option de gestion des lignes d’erreur dans la transformation du récepteur et définissez « Lignes d’erreur de sortie », ADF génère automatiquement une sortie de fichier CSV de vos données de ligne, ainsi que les messages d’erreur signalés par le pilote. Avec cette autre option, vous n’êtes pas tenu d’ajouter manuellement cette logique à votre flux de données. Cette option entraîne une légère baisse des performances pour permettre à ADF d’implémenter une méthodologie en 2 phases afin d’intercepter et de consigner les erreurs.
+
+    ![Flux de données terminé avec lignes d’erreur](media/data-flow/error-row-3.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

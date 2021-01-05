@@ -1,29 +1,31 @@
 ---
-title: Utiliser des filtres de fonctionnalités afin d'activer une fonctionnalité pour un sous-ensemble d'utilisateurs
+title: Utiliser des filtres de fonctionnalités pour activer les indicateurs de fonctionnalité conditionnels
 titleSuffix: Azure App Configuration
-description: Apprenez à utiliser des filtres de fonctionnalités afin d'activer une fonctionnalité pour un sous-ensemble d'utilisateurs
+description: Découvrez comment utiliser des filtres de fonctionnalités pour activer les indicateurs de fonctionnalité conditionnels
 ms.service: azure-app-configuration
-author: lisaguthrie
-ms.author: lcozzens
+ms.custom: devx-track-csharp
+author: AlexandraKemperMS
+ms.author: alkemper
 ms.topic: conceptual
 ms.date: 3/9/2020
-ms.openlocfilehash: 181c97615985283011834dcf9145810b1563fb4a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9a6ae1581b3958495010b032980b0de2e267088b
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80057011"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96931875"
 ---
-# <a name="use-feature-filters-to-enable-a-feature-for-a-subset-of-users"></a>Utiliser des filtres de fonctionnalités afin d'activer une fonctionnalité pour un sous-ensemble d'utilisateurs
+# <a name="use-feature-filters-to-enable-conditional-feature-flags"></a>Utiliser des filtres de fonctionnalités pour activer les indicateurs de fonctionnalité conditionnels
 
 Les indicateurs de fonctionnalités vous permettent d'activer ou de désactiver des fonctionnalités dans votre application. Un indicateur de fonctionnalité simple est activé ou désactivé. L'application se comporte toujours de la même façon. Par exemple, vous pouvez déployer une nouvelle fonctionnalité derrière un indicateur de fonctionnalité. Lorsque l'indicateur de fonctionnalité est activé, tous les utilisateurs voient la nouvelle fonctionnalité. La désactivation de l'indicateur de fonctionnalité masque la nouvelle fonctionnalité.
 
 En revanche, un _indicateur de fonctionnalité conditionnel_ permet d'activer ou de désactiver dynamiquement l'indicateur de fonctionnalité. L'application peut se comporter différemment, selon les critères de l'indicateur de fonctionnalité. Supposons que vous souhaitiez commencer par présenter votre nouvelle fonctionnalité à un petit sous-ensemble d'utilisateurs. Un indicateur de fonctionnalité conditionnel vous permet d'activer l'indicateur de fonctionnalité pour certains utilisateurs et de le désactiver pour d'autres. Les _filtres de fonctionnalités_ déterminent l'état de l'indicateur de fonctionnalité chaque fois qu'il est évalué.
 
-La bibliothèque `Microsoft.FeatureManagement` comprend deux filtres de fonctionnalités :
+La bibliothèque `Microsoft.FeatureManagement` comprend trois filtres de fonctionnalités :
 
 - `PercentageFilter` active l'indicateur de fonctionnalité sur la base d'un pourcentage.
 - `TimeWindowFilter` active l'indicateur de fonctionnalité pendant un laps de temps spécifié.
+- `TargetingFilter` active l’indicateur de fonctionnalité pour les utilisateurs et les groupes spécifiés.
 
 Vous pouvez également créer un filtre de fonctionnalités qui implémente l'[interface Microsoft.FeatureManagement.IFeatureFilter](/dotnet/api/microsoft.featuremanagement.ifeaturefilter).
 
@@ -83,9 +85,9 @@ Vous pouvez configurer ces paramètres pour les indicateurs de fonctionnalités 
 Pour voir les effets de cet indicateur de fonctionnalité, lancez l'application et appuyez plusieurs fois sur le bouton **Actualiser** de votre navigateur. Vous constaterez que l'élément *Beta* apparaît environ 50 % du temps sur la barre d'outils. Le reste du temps, il est masqué car `PercentageFilter` désactive la fonctionnalité *Beta* pour un sous-ensemble de requêtes. La vidéo suivante illustre ce comportement.
 
 > [!div class="mx-imgBorder"]
-> ![PercentageFilter en action](./media/feature-flags-percentagefilter.gif)
+> ![TargetingFilter en action](./media/feature-flags-percentagefilter.gif)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Vue d'ensemble de la gestion des fonctionnalités](./concept-feature-management.md)
+> [Activer le déploiement échelonné des fonctionnalités pour des audiences ciblées](./howto-targetingfilter-aspnet-core.md)

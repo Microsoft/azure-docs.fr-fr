@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Effectuer une recherche avec PHP - API Recherche Web Bing'
+title: 'Démarrage rapide : Effectuer une recherche avec PHP - API Recherche Web Bing'
 titleSuffix: Azure Cognitive Services
 description: Utilisez ce démarrage rapide pour envoyer des requêtes à l’API REST Recherche Web Bing à l’aide de PHP et recevoir une réponse JSON
 services: cognitive-services
@@ -8,21 +8,26 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 58192845e0119ce96ea2577007d211f075d3e419
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 979d5f3d249f9711905c6115cee52a22fbe7eebc
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76169725"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350532"
 ---
 # <a name="quickstart-use-php-to-call-the-bing-web-search-api"></a>Démarrage rapide : Utiliser PHP pour appeler l’API Recherche Web Bing  
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing et recevoir la réponse JSON. Cette application Node.js envoie une demande de recherche à l’API et affiche la réponse. Alors que cette application est écrite en JavaScript, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing. Cette application Node.js envoie une demande de recherche à l’API et affiche la réponse JSON. Bien que cette application soit écrite en JavaScript, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+
+## <a name="prerequisites"></a>Prérequis
 
 Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage rapide :
 
@@ -33,7 +38,7 @@ Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage r
 
 ## <a name="enable-secure-http-support"></a>Activer la prise en charge du HTTP sécurisé
 
-Avant de commencer, recherchez `php.ini` et supprimez les marques de commentaires de cette ligne :
+Avant de commencer, recherchez php.ini et supprimez les marques de commentaires de cette ligne :
 
 ```php
 ; extension=php_openssl.dll
@@ -41,9 +46,13 @@ Avant de commencer, recherchez `php.ini` et supprimez les marques de commentaire
 
 ## <a name="create-a-project-and-define-variables"></a>Créer un projet et définir des variables
 
-Créez un projet PHP dans votre éditeur ou IDE favori. N’oubliez pas d’ajouter des balises d’ouverture et de fermeture `<?php` et `?>`.
+1. Créez un projet PHP dans votre éditeur ou IDE favori. Ajoutez les balises d’ouverture et de fermeture `<?php` et `?>`.
 
-Quelques variables doivent être définies avant de continuer. `$endpoint` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. Vérifiez que le `$endpoint` est correct et remplacez la valeur `$accesskey` par une clé d’abonnement valide à partir de votre compte Azure. N’hésitez pas à personnaliser la requête de recherche en remplaçant la valeur de `$term`.
+2. Pour la valeur `$endpoint`, vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. 
+
+3. Vérifiez que la valeur `$endpoint` est correcte et remplacez la valeur `$accesskey` par une clé d’abonnement valide à partir de votre compte Azure. 
+
+4. Si vous le souhaitez, vous pouvez personnaliser la requête de recherche en remplaçant la valeur de `$term`.
 
 ```php
 $accessKey = 'enter key here';
@@ -113,7 +122,7 @@ if (strlen($accessKey) == 32) {
 
 ## <a name="put-it-all-together"></a>Assemblage
 
-La dernière étape consiste à valider votre code et à l’exécuter ! Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
+La dernière étape consiste à valider votre code et à l’exécuter. Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
 
 ```php
 <?php
@@ -155,7 +164,7 @@ if (strlen($accessKey) == 32) {
 ?>
 ```
 
-## <a name="sample-response"></a>Exemple de réponse
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
 Les réponses à partir de l’API Recherche Web Bing sont retournées au format JSON. Cet exemple de réponse a été tronqué pour afficher un résultat unique.  
 
@@ -284,6 +293,6 @@ Les réponses à partir de l’API Recherche Web Bing sont retournées au format
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel sur l’application à page unique Recherche Web Bing](../tutorial-bing-web-search-single-page-app.md)
+> [Tutoriel sur l’application d’API Recherche Web Bing monopage](../tutorial-bing-web-search-single-page-app.md)
 
 [!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]

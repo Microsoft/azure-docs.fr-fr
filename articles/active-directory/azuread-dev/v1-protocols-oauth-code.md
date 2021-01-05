@@ -14,12 +14,12 @@ ms.author: ryanwi
 ms.reviewer: hirsin
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: 3ec7cf5a45ce31cde923dce521636589cfcda786
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f987ab15201e4c4dabf147ac468184881e9ed17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154455"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85551648"
 ---
 # <a name="authorize-access-to-azure-active-directory-web-applications-using-the-oauth-20-code-grant-flow"></a>Autoriser l’accès aux applications web Azure Active Directory à l’aide du flux d’octroi de code OAuth 2.0
 
@@ -78,7 +78,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &state=12345
 ```
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | tenant |Obligatoire |La valeur `{tenant}` dans le chemin d’accès de la requête peut être utilisée pour contrôler les utilisateurs qui peuvent se connecter à l’application. Les valeurs autorisées sont les identificateurs du client, par exemple `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com` ou `common` pour les jetons indépendants du client |
 | client_id |Obligatoire |L’ID de l’application assignée à votre application lorsque vous l’avez inscrite auprès d’Azure AD. Vous le trouverez sur le portail Azure. Cliquez sur **Azure Active Directory** dans le volet de services, sur **Inscriptions des applications**, puis choisissez l’application. |
@@ -163,7 +163,7 @@ grant_type=authorization_code
 //NOTE: client_secret only required for web apps
 ```
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | tenant |Obligatoire |La valeur `{tenant}` dans le chemin d’accès de la requête peut être utilisée pour contrôler les utilisateurs qui peuvent se connecter à l’application. Les valeurs autorisées sont les identificateurs du client, par exemple `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com` ou `common` pour les jetons indépendants du client |
 | client_id |Obligatoire |L’ID d’application attribué à votre application lorsque vous l’avez inscrite auprès d’Azure AD. Vous le trouverez sur le portail Azure. L’ID d’application s’affiche dans les paramètres de l’inscription de l’application. |

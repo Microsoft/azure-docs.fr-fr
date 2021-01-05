@@ -1,23 +1,22 @@
 ---
 title: Azure App Configuration – Bonnes pratiques | Microsoft Docs
-description: Découvrir comment utiliser au mieux Azure App Configuration
+description: Découvrez les meilleures pratiques lors de l’utilisation d’Azure App Configuration. Parmi les sujets abordés figurent les regroupements de clés, les compositions clé-valeur, l’amorçage d’App Configuration et plus encore.
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.assetid: ''
 ms.service: azure-app-configuration
 ms.topic: conceptual
 ms.date: 05/02/2019
-ms.author: lcozzens
-ms.custom: mvc
-ms.openlocfilehash: df56f53b64a35737700529b80c004efeb31eaabc
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.author: alkemper
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 038d19270fbdb672d397eb2bd56bd27e17ea7af9
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80348674"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96929087"
 ---
 # <a name="azure-app-configuration-best-practices"></a>Azure App Configuration – Bonnes pratiques
 
@@ -69,7 +68,7 @@ Une meilleure option consiste à utiliser la fonctionnalité d’identités mana
 Vous pouvez fournir un accès à App Configuration pour les applications web ou les fonctions en utilisant une des méthodes suivantes :
 
 * À partir du portail Azure, entrez la chaîne de connexion à votre magasin App Configuration dans les paramètres Application d’App Service.
-* Stockez la chaîne de connexion à votre magasin App Configuration dans Key Vault et [faites-y référence dans App Service](https://docs.microsoft.com/azure/app-service/app-service-key-vault-references).
+* Stockez la chaîne de connexion à votre magasin App Configuration dans Key Vault et [faites-y référence dans App Service](../app-service/app-service-key-vault-references.md).
 * Utilisez les identités managées Azure pour accéder au magasin App Configuration. Pour plus d’informations, consultez [S’intégrer avec des identités managées Azure](howto-integrate-azure-managed-service-identity.md).
 * Envoyer (push) la configuration d’App Configuration vers App Service. App Configuration propose une fonction d’exportation (sur le portail Azure et dans Azure CLI) qui envoie directement les données dans App Service. Avec cette méthode, vous n’avez pas du tout besoin de modifier le code d’application.
 
@@ -85,7 +84,11 @@ Un nombre excessif de requêtes envoyées à App Configuration peut entraîner d
 
 ## <a name="importing-configuration-data-into-app-configuration"></a>Importation des données de configuration dans App Configuration
 
-App Configuration vous offre la possibilité d’[importer](https://aka.ms/azconfig-importexport1) en bloc vos paramètres de configuration à partir de vos fichiers config actuels à l’aide du Portail Azure ou de l’interface CLI. Vous pouvez également utiliser les mêmes options pour exporter des valeurs depuis App Configuration, par exemple entre des magasins associés. Si vous souhaitez configurer une synchronisation continu avec votre référentiel GitHub, vous pouvez utiliser notre [action GitHub](https://aka.ms/azconfig-gha2) afin de pouvoir continuer à utiliser vos pratiques existantes de contrôle de code source tout en bénéficiant des avantages d’App Configuration.
+App Configuration vous offre la possibilité d’[importer](./howto-import-export-data.md) en bloc vos paramètres de configuration à partir de vos fichiers config actuels à l’aide du Portail Azure ou de l’interface CLI. Vous pouvez également utiliser les mêmes options pour exporter des valeurs depuis App Configuration, par exemple entre des magasins associés. Si vous souhaitez configurer une synchronisation continu avec votre référentiel GitHub, vous pouvez utiliser notre [action GitHub](./concept-github-action.md) afin de pouvoir continuer à utiliser vos pratiques existantes de contrôle de code source tout en bénéficiant des avantages d’App Configuration.
+
+## <a name="multi-region-deployment-in-app-configuration"></a>Déploiement multirégional dans App Configuration
+
+App Configuration est service régional. Pour les applications ayant des configurations différentes par région, le stockage de ces configurations dans une seule instance peut créer un point de défaillance unique. Le déploiement multirégional d’App Configuration, à raison d’une instance par région, peut être une meilleure option. Il peut contribuer à la récupération d’urgence, aux performances et au cloisonnement de la sécurité au niveau régional. La configuration par région améliore également la latence et utilise des quotas de limitation distincts, puisque chaque instance a sa propre limitation. Pour appliquer l’atténuation de la récupération d’urgence, vous pouvez utiliser [plusieurs magasins de configuration](./concept-disaster-recovery.md). 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

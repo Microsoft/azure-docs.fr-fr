@@ -3,12 +3,12 @@ title: Informations sur les plans de récupération dans Azure Site Recovery
 description: Apprenez-en plus sur les plans de récupération dans Azure Site Recovery.
 ms.topic: conceptual
 ms.date: 01/23/2020
-ms.openlocfilehash: beb92bd62d011ef8aaf304dbb769e7694e6d7e60
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8d191781cacc37242dd1be31d6cb87ef196e5e7a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229097"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84343912"
 ---
 # <a name="about-recovery-plans"></a>À propos des plans de récupération
 
@@ -17,7 +17,7 @@ Cet article propose une vue d’ensemble des plans de récupération dans [Azure
 Un plan de récupération rassemble les machines dans des groupes de récupération à des fins de basculement. Un plan de récupération vous permet de définir un processus de récupération systématique en créant de petites unités indépendantes que vous pouvez basculer. Une unité représente généralement une application dans votre environnement.
 
 - Un plan de récupération définit comment les machines basculent et l’ordre dans lequel elles démarrent après un basculement.
-- Les plans de récupération sont utilisés pour basculer vers Azure, mais ne permettent pas la restauration automatique à partir d'Azure.
+- Vous pouvez utiliser des plans de récupération pour le basculement vers Azure et la restauration automatique à partir d’Azure.
 - Vous pouvez ajouter jusqu’à 100 instances protégées à un même plan de récupération.
 - Vous pouvez personnaliser un plan en y ajoutant un ordre, des instructions et des tâches.
 - Lorsqu’un plan est défini, vous pouvez basculer vers celui-ci.
@@ -62,11 +62,11 @@ Avec cette personnalisation, voici ce qui se passe lorsque vous exécutez un bas
 
 La récupération d’applications de grande taille peut être une tâche complexe. Les étapes manuelles du processus sont source d’erreurs et la personne qui exécute le basculement n’a peut-être pas connaissance de toutes les subtilités de l’application. Vous pouvez utiliser un plan de récupération pour imposer un ordre et automatiser les actions nécessaires à chaque étape, à l’aide de runbooks Azure Automation pour le basculement vers Azure, ou de scripts. Pour les tâches qui ne peuvent pas être automatisées, vous pouvez insérer des pauses pour des actions manuelles dans les plans de récupération. Vous pouvez configurer deux types de tâches :
 
-* **Tâches sur la machine virtuelle Azure après le basculement** : lorsque vous basculez vers Azure, vous devez généralement effectuer des actions afin de pouvoir vous connecter à la machine virtuelle après le basculement. Par exemple : 
+* **Tâches sur la machine virtuelle Azure après le basculement** : quand vous basculez vers Azure, vous devez généralement effectuer des actions afin de pouvoir vous connecter à la machine virtuelle après le basculement. Par exemple : 
     * Créer une adresse IP publique sur la machine virtuelle Azure.
     * Associer un groupe de sécurité réseau à la carte réseau de la machine virtuelle Azure.
     * Ajouter un équilibreur de charge à un groupe à haute disponibilité
-* **Tâches dans la machine virtuelle après le basculement** : ces tâches reconfigurent généralement l’application exécutée sur la machine afin qu’elle continue à fonctionner correctement dans le nouvel environnement. Par exemple :
+* **Tâches dans la machine virtuelle après le basculement** : ces tâches reconfigurent généralement l’application exécutée sur la machine afin qu’elle continue à fonctionner correctement dans le nouvel environnement. Par exemple :
     * Modifier la chaîne de connexion de base de données dans la machine.
     * Modifier les règles ou la configuration du serveur web
 

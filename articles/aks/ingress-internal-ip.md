@@ -4,13 +4,13 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrez comment installer et configurer un contrôleur d’entrée NGINX pour un réseau privé interne dans un cluster Azure Kubernetes Service (AKS).
 services: container-service
 ms.topic: article
-ms.date: 04/27/2020
-ms.openlocfilehash: 749c9904244dd702e41a63e0266c5ff6b1344261
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.date: 08/17/2020
+ms.openlocfilehash: 6c848160afc6a6a755e967dd8517e48240bc113e
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82561945"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685883"
 ---
 # <a name="create-an-ingress-controller-to-an-internal-virtual-network-in-azure-kubernetes-service-aks"></a>Créer un contrôleur d’entrée pour un réseau virtuel interne dans Azure Kubernetes Service (AKS)
 
@@ -27,7 +27,7 @@ Vous pouvez également :
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Cet article utilise [Helm 3][helm] pour installer le contrôleur d’entrée NGINX et cert-manager. Pour plus d’informations sur la configuration et l’utilisation de Helm, consultez [Installer des applications avec Helm dans Azure Kubernetes Service (AKS)][use-helm].
+Cet article utilise [Helm 3][helm] pour installer le contrôleur d’entrée NGINX. Assurez-vous que vous utilisez la version la plus récente de Helm et que vous avez accès au référentiel Helm *ingress-nginx*. Pour plus d’informations sur la configuration et l’utilisation de Helm, consultez [Installer des applications avec Helm dans Azure Kubernetes Service (AKS)][use-helm].
 
 Pour les besoins de cet article, vous devez également exécuter Azure CLI version 2.0.64 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][azure-cli-install].
 
@@ -35,7 +35,7 @@ Pour les besoins de cet article, vous devez également exécuter Azure CLI versi
 
 Par défaut, un contrôleur d’entrée NGINX est créé avec une affectation d’adresse IP publique dynamique. Une exigence de configuration courante est celle d’utiliser un réseau privé interne et une adresse IP. Cette approche vous permet de limiter l’accès à vos services aux utilisateurs internes, en excluant tout accès externe.
 
-Créez un fichier nommé *interne ingress.yaml* en utilisant l’exemple suivant de fichier manifeste. Cet exemple attribue l’adresse *10.240.0.42* à la ressource *loadBalancerIP*. Fournissez votre propre adresse IP interne pour une utilisation avec le contrôleur d’entrée. Assurez-vous que cette adresse IP est pas utilisée au sein de votre réseau virtuel.
+Créez un fichier nommé *interne ingress.yaml* en utilisant l’exemple suivant de fichier manifeste. Cet exemple attribue l’adresse *10.240.0.42* à la ressource *loadBalancerIP*. Fournissez votre propre adresse IP interne pour une utilisation avec le contrôleur d’entrée. Assurez-vous que cette adresse IP est pas utilisée au sein de votre réseau virtuel. En outre, si vous utilisez un réseau virtuel et un sous-réseau existants, vous devez configurer votre cluster AKS avec les autorisations appropriées afin de pouvoir les gérer. Pour plus d’informations, consultez [Utiliser la mise en réseau kubenet avec vos propres plages d’adresses IP dans Azure Kubernetes Service (AKS)][aks-configure-kubenet-networking] ou [Configurer un réseau Azure CNI dans Azure Kubernetes Service (AKS)][aks-configure-advanced-networking].
 
 ```yaml
 controller:
@@ -50,17 +50,20 @@ controller:
 Le contrôleur d’entrée doit également être planifié sur un nœud Linux. Les nœuds Windows Server ne doivent pas exécuter le contrôleur d’entrée. Un sélecteur de nœud est spécifié en utilisant le paramètre `--set nodeSelector` pour que le planificateur Kubernetes exécute le contrôleur d’entrée NGINX sur un nœud Linux.
 
 > [!TIP]
-> L’exemple suivant crée un espace de noms Kubernetes pour les ressources d’entrée *ingress-basic*. Spécifiez un espace de noms de votre propre environnement, si besoin. Si le contrôle d’accès en fonction du rôle (RBAC) n’est pas activé sur votre cluster AKS, ajoutez `--set rbac.create=false` aux commandes Helm.
+> L’exemple suivant crée un espace de noms Kubernetes pour les ressources d’entrée *ingress-basic*. Spécifiez un espace de noms de votre propre environnement, si besoin. Si le contrôle d’accès en fonction du rôle (RBAC Kubernetes) n’est pas activé sur votre cluster AKS, ajoutez `--set rbac.create=false` aux commandes Helm.
 
 > [!TIP]
-> Si vous souhaitez activer la [préservation de l’adresse IP source du client][client-source-ip] pour les requêtes aux conteneurs de votre cluster, ajoutez `--set controller.service.externalTrafficPolicy=Local` à la commande d’installation Helm. L’IP source du client est stockée dans l’en-tête de la requête sous *X-Forwarded-For*. Lors de l’utilisation d’un contrôleur d’entrée pour lequel la conservation de l’adresse IP source du client est activée, le protocole TLS direct ne fonctionnera pas.
+> Si vous souhaitez activer la [préservation de l’adresse IP source du client][client-source-ip] pour les requêtes aux conteneurs de votre cluster, ajoutez `--set controller.service.externalTrafficPolicy=Local` à la commande d’installation Helm. L’IP source du client est stockée dans l’en-tête de la requête sous *X-Forwarded-For*. Lors de l’utilisation d’un contrôleur d’entrée pour lequel la conservation de l’adresse IP source du client est activée, un transfert direct TLS ne fonctionne pas.
 
 ```console
 # Create a namespace for your ingress resources
 kubectl create namespace ingress-basic
 
+# Add the ingress-nginx repository
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
 # Use Helm to deploy an NGINX ingress controller
-helm install nginx-ingress stable/nginx-ingress \
+helm install nginx-ingress ingress-nginx/ingress-nginx \
     --namespace ingress-basic \
     -f internal-ingress.yaml \
     --set controller.replicaCount=2 \
@@ -68,21 +71,26 @@ helm install nginx-ingress stable/nginx-ingress \
     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
 
-Lorsque le service équilibreur de charge Kubernetes est créé pour le contrôleur d’entrée NGINX, votre adresse IP interne est affectée, comme indiqué dans l’exemple de sortie suivant :
+Lorsque le service équilibreur de charge Kubernetes est créé pour le contrôleur d’entrée NGINX, votre adresse IP interne est attribuée. Pour obtenir l’adresse IP publique, utilisez la commande `kubectl get service`.
+
+```console
+kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
+```
+
+L’attribution de l’adresse IP au service peut prendre quelques minutes, comme dans l’exemple de sortie suivant :
 
 ```
-$ kubectl get service -l app=nginx-ingress --namespace ingress-basic
+$ kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
 
-NAME                             TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
-nginx-ingress-controller         LoadBalancer   10.0.61.144    10.240.0.42   80:30386/TCP,443:32276/TCP   6m2s
-nginx-ingress-default-backend    ClusterIP      10.0.192.145   <none>        80/TCP                       6m2s
+NAME                                     TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)                      AGE   SELECTOR
+nginx-ingress-ingress-nginx-controller   LoadBalancer   10.0.74.133   EXTERNAL_IP     80:32486/TCP,443:30953/TCP   44s   app.kubernetes.io/component=controller,app.kubernetes.io/instance=nginx-ingress,app.kubernetes.io/name=ingress-nginx
 ```
 
 Aucune règle d’entrée n’a encore été créée. Par conséquent, la page 404 par défaut du contrôleur d’entrée NGINX s’affiche si vous accédez à l’adresse IP interne. Les étapes suivantes permettent de configurer les règles d’entrée.
 
 ## <a name="run-demo-applications"></a>Exécuter des applications de démonstration
 
-Pour voir le contrôleur d’entrée à l’œuvre, exécutons deux applications de démonstration dans votre cluster AKS. Pour cet exemple, utilisez `kubectl apply` en vue de déployer deux instances d’une application *Hello world*.
+Pour voir le contrôleur d’entrée en action, exécutons deux applications de démonstration dans votre cluster AKS. Pour cet exemple, utilisez `kubectl apply` en vue de déployer deux instances d’une application *Hello world*.
 
 Créez un fichier *aks-helloworld.yaml* et copiez-le dans l’exemple de YAML suivant :
 
@@ -103,7 +111,7 @@ spec:
     spec:
       containers:
       - name: aks-helloworld
-        image: neilpeterson/aks-helloworld:v1
+        image: mcr.microsoft.com/azuredocs/aks-helloworld:v1
         ports:
         - containerPort: 80
         env:
@@ -141,7 +149,7 @@ spec:
     spec:
       containers:
       - name: ingress-demo
-        image: neilpeterson/aks-helloworld:v1
+        image: mcr.microsoft.com/azuredocs/aks-helloworld:v1
         ports:
         - containerPort: 80
         env:
@@ -176,7 +184,7 @@ Dans l’exemple suivant, le trafic vers l’adresse `http://10.240.0.42/` est a
 Créez un fichier nommé `hello-world-ingress.yaml` et copiez-y l’exemple de code YAML suivant.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: hello-world-ingress
@@ -184,6 +192,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
@@ -192,14 +201,24 @@ spec:
       - backend:
           serviceName: aks-helloworld
           servicePort: 80
-        path: /(.*)
+        path: /hello-world-one(/|$)(.*)
       - backend:
           serviceName: ingress-demo
           servicePort: 80
         path: /hello-world-two(/|$)(.*)
+      - backend:
+          serviceName: aks-helloworld
+          servicePort: 80
+        path: /(.*)
 ```
 
 Créez la ressource d’entrée avec la commande `kubectl apply -f hello-world-ingress.yaml`.
+
+```console
+kubectl apply -f hello-world-ingress.yaml
+```
+
+L’exemple de sortie suivant montre la ressource d’entrée créée.
 
 ```
 $ kubectl apply -f hello-world-ingress.yaml
@@ -267,7 +286,13 @@ kubectl delete namespace ingress-basic
 
 ### <a name="delete-resources-individually"></a>Supprimer les ressources individuellement
 
-Sinon, une approche plus précise consiste à supprimer les ressources individuelles créées. Listez les versions de Helm avec la commande `helm list`. Recherchez les graphiques nommés *nginx-ingress* et *aks-helloworld*, comme illustré dans l’exemple de sortie suivant :
+Sinon, une approche plus précise consiste à supprimer les ressources individuelles créées. Listez les versions de Helm avec la commande `helm list`. 
+
+```console
+helm list --namespace ingress-basic
+```
+
+Recherchez les graphiques nommés *nginx-ingress* et *aks-helloworld*, comme illustré dans l’exemple de sortie suivant :
 
 ```
 $ helm list --namespace ingress-basic
@@ -276,7 +301,13 @@ NAME                    NAMESPACE       REVISION        UPDATED                 
 nginx-ingress           ingress-basic   1               2020-01-06 19:55:46.358275 -0600 CST    deployed        nginx-ingress-1.27.1    0.26.1  
 ```
 
-Désinstallez les versions avec la commande `helm uninstall`. L’exemple suivant désinstalle le déploiement d’entrée NGINX.
+Désinstallez les versions avec la commande `helm uninstall`.
+
+```console
+helm uninstall nginx-ingress --namespace ingress-basic
+```
+
+L’exemple suivant désinstalle le déploiement d’entrée NGINX.
 
 ```
 $ helm uninstall nginx-ingress --namespace ingress-basic
@@ -319,7 +350,7 @@ Vous pouvez également :
 
 <!-- LINKS - external -->
 [helm]: https://helm.sh/
-[helm-cli]: https://docs.microsoft.com/azure/aks/kubernetes-helm
+[helm-cli]: ./kubernetes-helm.md
 [nginx-ingress]: https://github.com/kubernetes/ingress-nginx
 
 <!-- LINKS - internal -->
@@ -331,3 +362,5 @@ Vous pouvez également :
 [aks-http-app-routing]: http-application-routing.md
 [aks-ingress-own-tls]: ingress-own-tls.md
 [client-source-ip]: concepts-network.md#ingress-controllers
+[aks-configure-kubenet-networking]: configure-kubenet.md
+[aks-configure-advanced-networking]: configure-azure-cni.md

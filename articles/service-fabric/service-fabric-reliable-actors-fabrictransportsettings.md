@@ -5,25 +5,25 @@ author: suchiagicha
 ms.topic: conceptual
 ms.date: 04/20/2017
 ms.author: pepogors
-ms.openlocfilehash: 182b35194a647f5de706f9ada07b8e9db51bb4c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e3c20d86bd29d60eca328a44ab5d5d600bbf4da4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645580"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89010934"
 ---
 # <a name="configure-fabrictransport-settings-for-reliable-actors"></a>Configuration des paramètres de FabricTransport pour Reliable Actors
 
 Voici les paramètres que vous pouvez configurer :
-- C# : [FabricTransportRemotingSettings](
-https://docs.microsoft.com/java/api/microsoft.servicefabric.services.remoting.fabrictransport.fabrictransportremotingsettings)
-- Java : [FabricTransportRemotingSettings](https://docs.microsoft.com/java/api/microsoft.servicefabric.services.remoting.fabrictransport.fabrictransportremotingsettings)
+- C# : [FabricTransportRemotingSettings](/java/api/microsoft.servicefabric.services.remoting.fabrictransport.fabrictransportremotingsettings)
+- Java : [FabricTransportRemotingSettings](/java/api/microsoft.servicefabric.services.remoting.fabrictransport.fabrictransportremotingsettings)
 
 Vous pouvez modifier la configuration par défaut de FabricTransport des manières suivantes.
 
 ## <a name="assembly-attribute"></a>Attribut d’assembly
 
-L’attribut [FabricTransportActorRemotingProvider](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.actors.remoting.fabrictransport.fabrictransportactorremotingproviderattribute?redirectedfrom=MSDN) doit être appliqué au niveau des assemblys du client et du service de l’intervenant.
+L’attribut [FabricTransportActorRemotingProvider](/dotnet/api/microsoft.servicefabric.actors.remoting.fabrictransport.fabrictransportactorremotingproviderattribute) doit être appliqué au niveau des assemblys du client et du service de l’intervenant.
 
 L’exemple suivant montre comment modifier la valeur par défaut des paramètres de FabricTransport OperationTimeout :
 

@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/27/2019
-ms.openlocfilehash: cd515bfd1dc57e78a041ed96686e1ba692bf6d3f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7750544367044cab2a0243577c200025bb9ff693
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79082861"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86083030"
 ---
 # <a name="access-grafana-in-azure-hdinsight"></a>Accéder à Grafana dans Azure HDInsight
 

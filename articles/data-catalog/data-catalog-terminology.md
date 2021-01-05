@@ -6,12 +6,12 @@ ms.author: jasonh
 ms.service: data-catalog
 ms.topic: conceptual
 ms.date: 08/01/2019
-ms.openlocfilehash: d6c813dec3922334f7462b1226ea22371fd5f43b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e636a039302d2ea61c7135bff1fceb4763f25df
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68736289"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151455"
 ---
 # <a name="azure-data-catalog-terminology"></a>Terminologie d’Azure Data Catalog
 
@@ -39,7 +39,7 @@ Les métadonnées structurelles sont des métadonnées extraites d'une source de
 
 ## <a name="descriptive-metadata"></a>Métadonnée descriptive
 
-Les métadonnées descriptives sont des métadonnées qui décrivent l'objectif d'une ressource de données. En règle générale, les métadonnées descriptives sont ajoutées par les utilisateurs du catalogue à l'aide du portail Azure Data Catalog, mais elles peuvent être également extraites de la source de données pendant l'inscription. Par exemple, l’outil de référencement pour Azure Data Catalog extrait les descriptions de la propriété Description dans SQL Server Analysis Services et SQL Server Reporting Services, et de la [propriété étendue ms_description](https://technet.microsoft.com/library/ms190243.aspx) dans les bases de données SQL Server, si ces propriétés ont été remplies avec des valeurs.
+Les métadonnées descriptives sont des métadonnées qui décrivent l'objectif d'une ressource de données. En règle générale, les métadonnées descriptives sont ajoutées par les utilisateurs du catalogue à l'aide du portail Azure Data Catalog, mais elles peuvent être également extraites de la source de données pendant l'inscription. Par exemple, l’outil de référencement pour Azure Data Catalog extrait les descriptions de la propriété Description dans SQL Server Analysis Services et SQL Server Reporting Services, et de la [propriété étendue ms_description](/previous-versions/sql/sql-server-2008-r2/ms190243(v=sql.105)) dans les bases de données SQL Server, si ces propriétés ont été remplies avec des valeurs.
 
 ## <a name="request-access"></a>Demander l'accès
 
@@ -86,4 +86,4 @@ L'inscription représente le fait d’extraire des métadonnées de ressources d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Démarrage rapide : Créer un catalogue Azure Data Catalog](data-catalog-get-started.md) 
+[Démarrage rapide : Créer un catalogue Azure Data Catalog](data-catalog-get-started.md)

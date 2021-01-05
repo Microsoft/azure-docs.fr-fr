@@ -4,16 +4,16 @@ description: Explique comment activer un nouvel appareil StorSimple, comment act
 author: alkohli
 ms.assetid: 8e9c6e6c-965c-4a81-81bd-e1c523a14c82
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2018
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 1319583569a8abc619ad902a87ee551b476f88eb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c8f4269235c494ff9dd8d1bf8e0ef940562f8927
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228129"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85515264"
 ---
 # <a name="turn-on-or-turn-off-your-storsimple-8000-series-device"></a>Activation ou désactivation de votre appareil StorSimple série 8000
 
@@ -86,12 +86,12 @@ Une panne de courant ou une interruption peut entraîner l’arrêt d’un appar
 * [Appareil avec boîtier principal uniquement](#8100)
 * [Appareil avec boîtier EBOD](#8600)
 
-### <a name="device-with-primary-enclosure-only-a-name8100"></a>Appareil avec boîtier principal uniquement <a name="8100">
+### <a name="device-with-primary-enclosure-only"></a>Appareil avec boîtier principal uniquement <a name="8100"></a>
 Le système peut poursuivre son fonctionnement normal même en cas de panne de l'une de ses alimentations. Toutefois, pour garantir la haute disponibilité de l'appareil, restaurez l'alimentation dès que possible.
 
 En cas de panne de courant ou d'interruption sur les deux alimentations, le système s'arrête de façon ordonnée et contrôlée. Lorsque l'alimentation est restaurée, le système redémarre automatiquement.
 
-### <a name="device-with-ebod-enclosure-a-name8600"></a>Appareil avec boîtier EBOD <a name="8600">
+### <a name="device-with-ebod-enclosure"></a>Appareil avec boîtier EBOD <a name="8600"></a>
 #### <a name="power-loss-on-one-power-supply"></a>Panne de courant sur une alimentation
 Le système peut poursuivre son fonctionnement normal même en cas de panne de l'une de ses alimentations sur le boîtier principal ou le boîtier EBOD. Toutefois, pour garantir la haute disponibilité de l'appareil, restaurez l'alimentation dès que possible.
 
@@ -140,7 +140,7 @@ Il peut être nécessaire d’arrêter un appareil StorSimple en cours d’exéc
 * [Appareil avec boîtier principal](#8100a)
 * [Appareil avec boîtier EBOD](#8600a)
 
-### <a name="device-with-primary-enclosure-a-name8100a"></a>Appareil avec boîtier principal <a name="8100a">
+### <a name="device-with-primary-enclosure"></a>Appareil avec boîtier principal <a name="8100a"></a>
 Pour arrêter l’appareil de façon correcte et contrôlée, vous pouvez utiliser le portail Azure ou Windows PowerShell pour StorSimple. 
 
 > [!IMPORTANT]
@@ -152,7 +152,7 @@ Pour arrêter l’appareil de façon correcte et contrôlée, vous pouvez utilis
 
 Une fois que vous accédez à Windows PowerShell pour StorSimple ou au portail Azure, suivez les étapes de la rubrique [Arrêter un appareil StorSimple](storsimple-8000-manage-device-controller.md#shut-down-a-storsimple-device). 
 
-### <a name="device-with-ebod-enclosure-a-name8600a"></a>Appareil avec boîtier EBOD <a name="8600a">
+### <a name="device-with-ebod-enclosure"></a>Appareil avec boîtier EBOD <a name="8600a"></a>
 > [!IMPORTANT]
 > Avant d'arrêter le boîtier principal et le boîtier EBOD, assurez-vous que tous les composants de l'appareil sont intègres. Dans le portail Azure, accédez à **Appareils** > **Surveiller** > **Intégrité matérielle** et assurez-vous que tous les composants sont sains.
 

@@ -1,14 +1,14 @@
 ---
 title: 'Démarrage rapide : Votre première requête dans le portail'
 description: Dans ce guide de démarrage rapide, vous suivez les étapes pour exécuter votre première requête à partir du portail Azure en utilisant l’Explorateur Azure Resource Graph.
-ms.date: 11/21/2019
+ms.date: 10/14/2020
 ms.topic: quickstart
-ms.openlocfilehash: 5cf355e78ad51e06d7ba27d48dd352f35b4c0740
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b5f5203b3842ebc3edbd97bca1ca3c101f47e397
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74406791"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92057380"
 ---
 # <a name="quickstart-run-your-first-resource-graph-query-using-azure-resource-graph-explorer"></a>Démarrage rapide : Exécuter votre première requête Resource Graph à l’aide de l’Explorateur Azure Resource Graph
 
@@ -36,11 +36,11 @@ Ouvrez le [portail Azure](https://portal.azure.com) pour rechercher et utiliser 
 1. Mettez à jour la requête pour la trier (`order by`) en fonction de la propriété **name** : `Resources | project name, type | limit 5 | order by name asc`. Sélectionnez ensuite **Exécuter la requête**.
 
    > [!NOTE]
-   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cela signifie que les résultats de la requête sont d’abord limités avant d’être triés.
+   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cet ordre de commande limite d’abord les résultats de la requête, puis les classe.
 
 1. Mettez à jour la requête pour la trier (`order by`) d’abord en fonction de la propriété **name**, puis limitez `limit` les résultats aux cinq premiers : `Resources | project name, type | order by name asc | limit 5`. Sélectionnez ensuite **Exécuter la requête**.
 
-Si votre environnement ne change pas et si vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et conformes aux attentes. En effet, ils sont classés en fonction de la propriété **name** et limités aux cinq premiers.
+Si votre environnement ne change pas et si vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et classés en fonction de la propriété **Name**, mais toujours limités aux cinq premiers.
 
 ### <a name="schema-browser"></a>Navigateur de schémas
 
@@ -51,7 +51,7 @@ Le navigateur de schémas est un excellent moyen de découvrir les propriétés 
 
 ## <a name="create-a-chart-from-the-resource-graph-query"></a>Créer un graphique à partir de la requête Resource Graph
 
-Après avoir exécuté la dernière requête ci-dessus, si vous sélectionnez l’onglet **Graphiques**, vous obtenez le message suivant : « Le jeu de résultats n’est pas compatible avec une visualisation de graphique à secteurs ». Les requêtes qui listent des résultats ne peuvent pas être converties en graphique, mais les requêtes qui fournissent des décomptes de ressources le peuvent. À l’aide de l’[exemple de requête Nombre de machines virtuelles par type d’OS](./samples/starter.md#count-virtual-machines-by-os-type), créons une visualisation à partir de la requête Resource Graph.
+Après avoir exécuté la requête précédente, si vous sélectionnez l’onglet **Graphiques**, vous obtenez le message suivant : « Le jeu de résultats n’est pas compatible avec une visualisation de graphique à secteurs ». Les requêtes qui listent des résultats ne peuvent pas être converties en graphique, mais les requêtes qui fournissent des décomptes de ressources le peuvent. À l’aide de l’[exemple de requête Nombre de machines virtuelles par type d’OS](./samples/starter.md#count-os), créons une visualisation à partir de la requête Resource Graph.
 
 1. Dans la partie **Requête 1** de la fenêtre, entrez la requête suivante, puis sélectionnez  **Exécuter la requête**.
 
@@ -67,7 +67,7 @@ Après avoir exécuté la dernière requête ci-dessus, si vous sélectionnez l�
 
 ## <a name="pin-the-query-visualization-to-a-dashboard"></a>Épingler la visualisation de requête à un tableau de bord
 
-Une fois que vous avez obtenu les résultats d’une requête qui peut être visualisée, vous pouvez ensuite épingler cette visualisation des données à l’un de vos tableaux de bord. Après avoir exécuté la requête ci-dessus, effectuez les étapes suivantes :
+Une fois que vous avez obtenu les résultats d’une requête qui peut être visualisée, vous pouvez ensuite épingler cette visualisation des données à l’un de vos tableaux de bord. Après avoir exécuté la requête précédente, effectuez les étapes suivantes :
 
 1. Sélectionnez **Enregistrer**, puis indiquez le nom « Machine virtuelle par type d’OS ». Sélectionnez ensuite **Enregistrer** en bas du volet droit.
 
@@ -90,11 +90,11 @@ Pour disposer d’exemples de requêtes Resource Graph et savoir comment utilise
 
 - [Explorateur Resource Graph - Exemple de tableau de bord n° 1](https://github.com/Azure-Samples/Governance/blob/master/src/resource-graph/portal-dashboards/sample-1/resourcegraphexplorer-sample-1.json)
 
-  [![Exemple d’image pour l’exemple de tableau de bord n° 1](./media/arge-sample1-small.png)](./media/arge-sample1-large.png#lightbox)
+  :::image type="content" source="./media/arge-sample1-small.png" alt-text="Exemple d’image pour l’exemple de tableau de bord n° 1" lightbox="./media/arge-sample1-large.png":::
 
 - [Explorateur Resource Graph - Exemple de tableau de bord n° 2](https://github.com/Azure-Samples/Governance/blob/master/src/resource-graph/portal-dashboards/sample-2/resourcegraphexplorer-sample-2.json)
 
-  [![Exemple d’image pour l’exemple de tableau de bord n° 2](./media/arge-sample2-small.png)](./media/arge-sample2-large.png#lightbox)
+  :::image type="content" source="./media/arge-sample2-small.png" alt-text="Exemple d’image pour l’exemple de tableau de bord n° 1" lightbox="./media/arge-sample2-large.png":::
 
 > [!NOTE]
 > Les nombres et les graphiques dans les exemples de captures d’écran de tableau de bord ci-dessus varient en fonction de votre environnement Azure.

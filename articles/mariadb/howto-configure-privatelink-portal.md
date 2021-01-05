@@ -1,17 +1,17 @@
 ---
 title: Private Link – Portail Azure – Azure Database for MariaDB
 description: Découvrez comment configurer une instance Private Link pour Azure Database for MariaDB à partir du portail Azure
-author: kummanish
-ms.author: manishku
+author: mksuni
+ms.author: sumuth
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2020
-ms.openlocfilehash: 3f421cad64caf91b898bb1ec13dc909b93b7f72d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 79b3c3f8eca2fa4442a7845ca4aa3921d0302453
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79370336"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005042"
 ---
 # <a name="create-and-manage-private-link-for-azure-database-for-mariadb-using-portal"></a>Création et gestion de Private Link pour Azure Database for MariaDB avec le portail
 
@@ -20,7 +20,7 @@ Private Endpoint est le composant fondamental de Private Link dans Azure. Il per
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 > [!NOTE]
-> Cette fonctionnalité est disponible dans toutes les régions Azure où Azure Database for MariaDB prend en charge les niveaux tarifaires Usage général et Mémoire optimisée.
+> La fonctionnalité de lien privé est disponible uniquement pour les serveurs Azure Database for MariaDB dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur de base de données se trouve dans l’un de ces niveaux tarifaires.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 Connectez-vous au [portail Azure](https://portal.azure.com).
@@ -116,18 +116,22 @@ Dans cette section, vous allez créer un serveur Azure Database for MariaDB dans
     |Version  | Sélectionnez la version de base de données du serveur MariaDB qui est requise.|
     | Calcul + Stockage| Sélectionnez le niveau tarifaire requis pour le serveur en fonction de la charge de travail. |
     |||
- 
+
 7. Sélectionnez **OK**. 
 8. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
 9. Quand le message Validation réussie s’affiche, sélectionnez **Créer**. 
 10. Quand le message Validation réussie s’affiche, sélectionnez Créer. 
 
+> [!NOTE]
+> Il peut arriver que l’instance Azure Database for MariaDB et le sous-réseau de réseau virtuel se trouvent dans des abonnements différents. Dans ce cas, vous devez vérifier les configurations suivantes :
+> - Assurez-vous que le fournisseur de ressources **Microsoft.DBforMariaDB** est inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
+
 ## <a name="create-a-private-endpoint"></a>Créer un Private Endpoint
 
 Dans cette section, vous allez créer un point de terminaison privé pour l’ajouter au serveur MariaDB. 
 
-1. En haut à gauche de l’écran du Portail Azure, sélectionnez **Créer une ressource** > **Réseaux** > **Liaison privée**.
-2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **générer une connexion privée à un service**, sélectionnez **Démarrer**.
+1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Mise en réseau** > **Liaison privée**.
+2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **Générer une connexion privée à un service**, sélectionnez **Démarrer**.
 
     ![Présentation de Private Link](media/concepts-data-access-and-security-private-link/privatelink-overview.png)
 
@@ -166,6 +170,9 @@ Dans cette section, vous allez créer un point de terminaison privé pour l’aj
     |Zone DNS privée |Sélectionnez *(New)privatelink.mariadb.database.azure.com* |
     |||
 
+    > [!Note] 
+    > Utilisez la zone DNS privée prédéfinie pour votre service ou indiquez le nom de la zone DNS de votre choix. Pour plus d’informations, reportez-vous à la [Configuration de la zone DNS des services Azure](../private-link/private-endpoint-dns.md).
+
 1. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
 2. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**. 
 
@@ -202,7 +209,7 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 
 ## <a name="access-the-mariadb-server-privately-from-the-vm"></a>Accéder au serveur MariaDB en privé à partir de la machine virtuelle
 
-1. Dans le Bureau à distance de  *myVM*, ouvrez PowerShell.
+1. Dans le Bureau à distance de *myVM*, ouvrez PowerShell.
 
 2. Entrez `nslookup mydemomserver.privatelink.mariadb.database.azure.com`. 
 
@@ -233,15 +240,18 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 
 6. (Facultatif) Parcourez les bases de données à partir du menu de gauche et créez ou interrogez des informations à partir de la base de données MariaDB
 
-7. Fermez la connexion Bureau à distance à myVm.
+7. Fermez la connexion Bureau à distance avec myVm.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 Lorsque vous avez fini d’utiliser le point de terminaison privé, le serveur MariaDB et la machine virtuelle, supprimez le groupe de ressources et toutes les ressources qu’il contient :
 
-1. Entrez *myResourceGroup* dans la zone **Rechercher** en haut du portail, puis sélectionnez *myResourceGroup* dans les résultats de la recherche.
+1. Entrez  *myResourceGroup* dans la zone **Rechercher** en haut du portail, puis sélectionnez  *myResourceGroup* dans les résultats de la recherche.
 2. Sélectionnez **Supprimer le groupe de ressources**.
 3. Entrez myResourceGroup dans **TAPER LE NOM DU GROUPE DE RESSOURCES**, puis sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database for MariaDB et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur MariaDB via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](https://docs.microsoft.com/azure/private-link/private-endpoint-overview)
+Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database for MariaDB et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur MariaDB via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](../private-link/private-endpoint-overview.md)
+
+<!-- Link references, to text, Within this same GitHub repo. -->
+[resource-manager-portal]: ../azure-resource-manager/management/resource-providers-and-types.md

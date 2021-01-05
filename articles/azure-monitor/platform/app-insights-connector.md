@@ -6,27 +6,27 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 02/13/2019
-ms.openlocfilehash: c143d8aa24d3479f4619ea2c220d4a0c593f9cb1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e426962310417fdca56ea2f7d45a6ea820d41981
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77665151"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94335874"
 ---
 # <a name="application-insights-connector-management-solution-deprecated"></a>Solution de gestion Application Insights Connector (déconseillée)
 
 ![Symbole Application Insights](./media/app-insights-connector/app-insights-connector-symbol.png)
 
 >[!NOTE]
-> Grâce à la prise en charge des [requêtes inter-ressources](../../azure-monitor/log-query/cross-workspace-query.md), la solution de gestion d’Application Insights Connector n’est plus nécessaire. Elle a été déconseillée et supprimée de la place de marché Azure, de même que le portail OMS, qui a été officiellement déconseillé le 15 janvier 2019 pour le cloud commercial Azure. Elle sera retirée le 30 mars 2019 pour le cloud Azure US Government.
+> Grâce à la prise en charge des [requêtes inter-ressources](../log-query/cross-workspace-query.md), la solution de gestion d’Application Insights Connector n’est plus nécessaire. Elle a été déconseillée et supprimée de la place de marché Azure, de même que le portail OMS, qui a été officiellement déconseillé le 15 janvier 2019 pour le cloud commercial Azure. Elle sera retirée le 30 mars 2019 pour le cloud Azure US Government.
 >
 >Les connexions existantes continueront de fonctionner jusqu'au 30 juin 2019.  Une fois le portail OMS déconseillé, il ne sera pas possible de configurer et de supprimer les connexions existantes du portail. Consultez [Suppression du connecteur avec PowerShell](#removing-the-connector-with-powershell) ci-dessous afin d’obtenir un script sur l’utilisation de PowerShell pour supprimer des connexions existantes.
 >
->Pour obtenir des conseils sur l’interrogation de données de journal d’Application Insights pour plusieurs applications, consultez [Unifier plusieurs ressources Application Insights Azure Monitor](../log-query/unify-app-resource-data.md). Pour plus d’informations sur la dépréciation du portail OMS, consultez la page [Migration du portail OMS vers Azure](../../azure-monitor/platform/oms-portal-transition.md).
+>Pour obtenir des conseils sur l’interrogation de données de journal d’Application Insights pour plusieurs applications, consultez [Unifier plusieurs ressources Application Insights Azure Monitor](../log-query/unify-app-resource-data.md). Pour plus d’informations sur la dépréciation du portail OMS, consultez la page [Migration du portail OMS vers Azure](./oms-portal-transition.md).
 >
 > 
 
-La solution Application Insights Connector vous aide à diagnostiquer les problèmes de performances et à comprendre ce que les utilisateurs font avec votre application lorsqu’[Application Insights](../../azure-monitor/app/app-insights-overview.md) les surveille. Dans Log Analytics, vous pouvez voir les mêmes données de télémétrie que les développeurs voient dans Application Insights. Toutefois, lorsque vous intégrez vos applications Application Insights à Log Analytics, la visibilité de vos applications augmente lorsque les données de fonctionnement et d’application se trouvent au même emplacement. Avoir les mêmes vues vous aide à collaborer avec vos développeurs d’applications. Les vues communes peuvent aider à réduire le temps nécessaire à la détection et à la résolution des problèmes d’application et de plateforme.
+La solution Application Insights Connector vous aide à diagnostiquer les problèmes de performances et à comprendre ce que les utilisateurs font avec votre application lorsqu’[Application Insights](../app/app-insights-overview.md) les surveille. Dans Log Analytics, vous pouvez voir les mêmes données de télémétrie que les développeurs voient dans Application Insights. Toutefois, lorsque vous intégrez vos applications Application Insights à Log Analytics, la visibilité de vos applications augmente lorsque les données de fonctionnement et d’application se trouvent au même emplacement. Avoir les mêmes vues vous aide à collaborer avec vos développeurs d’applications. Les vues communes peuvent aider à réduire le temps nécessaire à la détection et à la résolution des problèmes d’application et de plateforme.
 
 Lorsque vous utilisez la solution, vous pouvez :
 
@@ -44,10 +44,10 @@ Contrairement à la plupart des autres solutions Log Analytics, les données ne 
 
 | Source connectée | Prise en charge | Description |
 | --- | --- | --- |
-| [Agents Windows](../../azure-monitor/platform/agent-windows.md) | Non | La solution ne collecte aucune information à partir d’agents Windows. |
-| [Agents Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) | Non | La solution ne collecte aucune information à partir d’agents Linux. |
-| [Groupe d’administration SCOM](../../azure-monitor/platform/om-agents.md) | Non | La solution ne collecte aucune information à partir d’agents dans un groupe d’administration SCOM connecté. |
-| [Compte Azure Storage](collect-azure-metrics-logs.md) | Non | La solution ne collecte aucune information à partir de stockage Azure. |
+| [Agents Windows](./agent-windows.md) | Non | La solution ne collecte aucune information à partir d’agents Windows. |
+| [Agents Linux](../learn/quick-collect-linux-computer.md) | Non | La solution ne collecte aucune information à partir d’agents Linux. |
+| [Groupe d’administration SCOM](./om-agents.md) | Non | La solution ne collecte aucune information à partir d’agents dans un groupe d’administration SCOM connecté. |
+| [Compte Azure Storage](./resource-logs.md#send-to-log-analytics-workspace) | Non | La solution ne collecte aucune information à partir de stockage Azure. |
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -57,9 +57,9 @@ Contrairement à la plupart des autres solutions Log Analytics, les données ne 
 
 ## <a name="configuration"></a>Configuration
 
-1. Activez la solution Azure Web Apps Analytics depuis la [Place de marché Microsoft Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AppInsights?tab=Overview) ou en procédant de la manière décrite dans [Ajouter des solutions Log Analytics à partir de la galerie de solutions](../../azure-monitor/insights/solutions.md).
+1. Activez la solution Azure Web Apps Analytics depuis la [Place de marché Microsoft Azure](https://azuremarketplace.microsoft.com/marketplace/apps) ou en procédant de la manière décrite dans [Ajouter des solutions Log Analytics à partir de la galerie de solutions](../insights/solutions.md).
 2. Accédez au [portail Azure](https://portal.azure.com). Sélectionnez **Tous les services** pour ouvrir Application Insights. Recherchez alors Application Insights. 
-3. Sous **Abonnements**, sélectionnez un abonnement qui contient des ressources Application Insights, puis, sous **Nom**, sélectionnez une ou plusieurs applications.
+3. Sous **Abonnements** , sélectionnez un abonnement qui contient des ressources Application Insights, puis, sous **Nom** , sélectionnez une ou plusieurs applications.
 4. Cliquez sur **Enregistrer**.
 
 Après environ 30 minutes, les données deviennent disponibles et la vignette Application Insights est mise à jour avec les données, comme sur l’image suivante :
@@ -83,9 +83,9 @@ Les sections suivantes expliquent comment vous pouvez utiliser les panneaux affi
 
 Cliquez sur la vignette **Application Insights** pour ouvrir le tableau de bord **Application Insights** et afficher les panneaux suivants.
 
-![Tableau de bord Application Insights](./media/app-insights-connector/app-insights-dash01.png)
+![Capture d'écran du tableau de bord d'Application Insights, avec les panneaux Applications, Volume de données et Disponibilité.](./media/app-insights-connector/app-insights-dash01.png)
 
-![Tableau de bord Application Insights](./media/app-insights-connector/app-insights-dash02.png)
+![Capture d'écran du tableau de bord d'Application Insights, avec les panneaux Requêtes de serveur, Échecs et Exceptions.](./media/app-insights-connector/app-insights-dash02.png)
 
 Le tableau de bord comprend les panneaux figurant dans le tableau. Chaque panneau répertorie jusqu'à 10 éléments répondant à ses critères en ce qui concerne l’étendue et l’intervalle de temps spécifiés. Vous pouvez exécuter une recherche dans les journaux qui renvoie tous les enregistrements lorsque vous cliquez sur **Afficher tout** en bas du panneau ou lorsque vous cliquez sur l’en-tête de panneau.
 
@@ -113,15 +113,15 @@ Le panneau **Disponibilité** affiche une autre perspective, qui vous permet de 
 
 ![Perspective Disponibilité d’Application Insights](./media/app-insights-connector/availability-blade-drill-search.png)
 
-Lorsque vous cliquez n’importe où dans les panneaux **Requêtes de serveur** ou **Échecs**, les composants de perspective changent afin de vous donner une visualisation associée aux requêtes.
+Lorsque vous cliquez n’importe où dans les panneaux **Requêtes de serveur** ou **Échecs** , les composants de perspective changent afin de vous donner une visualisation associée aux requêtes.
 
 ![Panneau Échecs d’Application Insights](./media/app-insights-connector/server-requests-failures-drill-search.png)
 
-Lorsque vous cliquez n’importe où dans le panneau **Exceptions**, vous voyez une visualisation spécialement adaptée aux exceptions.
+Lorsque vous cliquez n’importe où dans le panneau **Exceptions** , vous voyez une visualisation spécialement adaptée aux exceptions.
 
 ![Panneau Exceptions d’Application Insights](./media/app-insights-connector/exceptions-blade-drill-search.png)
 
-Que vous cliquiez ou non sur un élément du tableau de bord **Application Insights Connector**, sur la page **Recherche** proprement dite, toute requête renvoyant des données Application Insights affiche la perspective Application Insights. Par exemple, si vous consultez les données Application Insights, une requête **&#42;** affiche également l’onglet de la perspective comme sur l’image suivante :
+Que vous cliquiez ou non sur un élément du tableau de bord **Application Insights Connector** , sur la page **Recherche** proprement dite, toute requête renvoyant des données Application Insights affiche la perspective Application Insights. Par exemple, si vous consultez les données Application Insights, une requête **&#42;** affiche également l’onglet de la perspective comme sur l’image suivante :
 
 ![Application Insights](./media/app-insights-connector/app-insights-search.png)
 
@@ -144,7 +144,7 @@ Pour ouvrir l’application, cliquez sur l’ellipse ( **...** ) qui apparaît �
 
 ### <a name="sample-corrected-data"></a>Données corrigées par l’exemple
 
-Application Insights fournit une *[correction par échantillonnage](../../azure-monitor/app/sampling.md)* pour aider à réduire le trafic de données de télémétrie. Lorsque vous activez l’échantillonnage sur votre application Application Insights, vous obtenez un nombre limité d’entrées stockées à la fois dans Application Insights et dans Log Analytics. La cohérence des données est conservée sur la page **Application Insights Connector** et dans les perspectives, mais vous devez corriger manuellement les données échantillonnées pour vos requêtes personnalisées.
+Application Insights fournit une *[correction par échantillonnage](../app/sampling.md)* pour aider à réduire le trafic de données de télémétrie. Lorsque vous activez l’échantillonnage sur votre application Application Insights, vous obtenez un nombre limité d’entrées stockées à la fois dans Application Insights et dans Log Analytics. La cohérence des données est conservée sur la page **Application Insights Connector** et dans les perspectives, mais vous devez corriger manuellement les données échantillonnées pour vos requêtes personnalisées.
 
 Voici un exemple de correction par échantillonnage dans une requête de recherche dans les journaux :
 
@@ -154,7 +154,7 @@ ApplicationInsights | summarize AggregatedValue = sum(SampledCount) by Telemetry
 
 Le champ **Sampled Count** (Nombre d’éléments échantillonnés) est présent dans toutes les entrées et indique le nombre de points de données représentés par l’entrée. Si vous activez l’échantillonnage pour votre application Application Insights, la valeur du champ **Sampled Count** (Nombre d’éléments échantillonnés) est supérieure à 1. Pour compter le nombre d’entrées réellement générées par votre application, additionnez les champs **Sampled Count** (Nombre d’éléments échantillonnés).
 
-L’échantillonnage affecte uniquement le nombre total d’entrées générées par votre application. Vous n’avez pas besoin de corriger l’échantillonnage pour les champs de mesure tels que **RequestDuration** ou **AvailabilityDuration**, car ces champs affichent la moyenne des entrées représentées.
+L’échantillonnage affecte uniquement le nombre total d’entrées générées par votre application. Vous n’avez pas besoin de corriger l’échantillonnage pour les champs de mesure tels que **RequestDuration** ou **AvailabilityDuration** , car ces champs affichent la moyenne des entrées représentées.
 
 ## <a name="input-data"></a>Données d’entrée
 
@@ -163,8 +163,8 @@ La solution reçoit les types de données de télémétrie suivants à partir de
 - Disponibilité
 - Exceptions
 - Demandes
-- Affichages de pages – Pour que votre espace de travail reçoive des affichages de pages, vous devez configurer vos applications pour recueillir ces informations. Pour plus d’informations, voir [PageViews](../../azure-monitor/app/api-custom-events-metrics.md#page-views).
-- Événements personnalisés – Pour que votre espace de travail reçoive des événements personnalisés, vous devez configurer vos applications pour recueillir ces informations. Pour plus d’informations, voir [TrackEvent](../../azure-monitor/app/api-custom-events-metrics.md#trackevent).
+- Affichages de pages – Pour que votre espace de travail reçoive des affichages de pages, vous devez configurer vos applications pour recueillir ces informations. Pour plus d’informations, voir [PageViews](../app/api-custom-events-metrics.md#page-views).
+- Événements personnalisés – Pour que votre espace de travail reçoive des événements personnalisés, vous devez configurer vos applications pour recueillir ces informations. Pour plus d’informations, voir [TrackEvent](../app/api-custom-events-metrics.md#trackevent).
 
 Log Analytics reçoit les données en provenance d’Application Insights dès qu’elles sont disponibles.
 
@@ -304,7 +304,7 @@ $Headers = @{
 $Connections = Invoke-RestMethod -Method "GET" -Uri "https://management.azure.com$($LAWorkspace.ResourceId)/dataSources/?%24filter=kind%20eq%20'ApplicationInsights'&api-version=2015-11-01-preview" -Headers $Headers
 $ConnectionsJson = $Connections | ConvertTo-Json
 ```
-Ce script nécessite un jeton d’authentification du porteur pour l’authentification auprès d’Azure Active Directory. Une manière de récupérer ce jeton est décrite dans un article du [site de documentation de l’API REST](https://docs.microsoft.com/rest/api/loganalytics/datasources/createorupdate). Cliquez sur **Essayer** et connectez-vous à votre abonnement Azure. Vous pouvez copier le jeton du porteur à partir de l’**Aperçu de la demande** comme indiqué dans l’image suivante.
+Ce script nécessite un jeton d’authentification du porteur pour l’authentification auprès d’Azure Active Directory. Une manière de récupérer ce jeton est décrite dans un article du [site de documentation de l’API REST](/rest/api/loganalytics/datasources/createorupdate). Cliquez sur **Essayer** et connectez-vous à votre abonnement Azure. Vous pouvez copier le jeton du porteur à partir de l’ **Aperçu de la demande** comme indiqué dans l’image suivante.
 
 
 ![Jeton du porteur](media/app-insights-connector/bearer-token.png)
@@ -318,4 +318,5 @@ ApplicationInsights | summarize by ApplicationName
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Utilisez [Recherche dans les journaux](../../azure-monitor/log-query/log-query-overview.md) pour afficher des informations détaillées sur vos applications Application Insights.
+- Utilisez [Recherche dans les journaux](../log-query/log-query-overview.md) pour afficher des informations détaillées sur vos applications Application Insights.
+

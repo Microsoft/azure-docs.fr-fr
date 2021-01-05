@@ -3,59 +3,18 @@ title: Suppression réversible pour les charges de travail SQL Server dans Azure
 description: Découvrez comment la suppression réversible pour les charges de travail SQL Server dans Azure VM et SAP HANA dans Azure VM permet de rendre les sauvegardes plus sécurisées.
 ms.topic: conceptual
 ms.date: 04/27/2020
-ms.openlocfilehash: f1e3ecae5d643b8e32f8f4f07808d56cdc421163
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 2a442997d426ff0bf4c74b0b45f7657cc0593b82
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791372"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91254293"
 ---
 # <a name="soft-delete-for-sql-server-in-azure-vm-and-sap-hana-in-azure-vm-workloads"></a>Suppression réversible pour les charges de travail SQL Server dans Azure VM et SAP HANA dans Azure VM
 
 Le service Sauvegarde Azure propose désormais la suppression réversible pour les charges de travail SQL Server dans Azure VM et SAP HANA dans Azure VM. Ceci s’ajoute au [scénario de suppression réversible de machine virtuelle Azure](soft-delete-virtual-machines.md) déjà pris en charge.
 
 La [suppression réversible](backup-azure-security-feature-cloud.md) est une fonctionnalité de sécurité qui permet de protéger les données de sauvegarde même après leur suppression. Avec la suppression réversible, même si un intervenant malveillant supprime la sauvegarde d’une base de données (ou même si les données de sauvegarde sont accidentellement supprimées), les données de sauvegarde sont conservées pendant 14 jours supplémentaires. Cela permet de récupérer cet élément de sauvegarde sans perte de données. Cette conservation durant 14 jours supplémentaires des données de sauvegarde à l’état de « suppression réversible » n’entraîne aucun frais pour le client.
-
->[!NOTE]
->Une fois que la préversion est activée pour un abonnement, il n’est plus possible de désactiver la suppression réversible uniquement pour les bases de données SQL Server ou SAP HANA, tout en la gardant activée pour les machines virtuelles présentes dans le même coffre. Vous pouvez créer des coffres distincts pour un contrôle plus précis.
-
-## <a name="steps-to-enroll-in-preview"></a>Étapes d’inscription à la préversion
-
-1. Connectez-vous à votre compte Azure.
-
-   ```powershell
-   Login-AzureRmAccount
-   ```
-
-2. Sélectionnez l’abonnement que vous souhaitez inscrire dans le cadre de la préversion :
-
-   ```powershell
-   Get-AzureRmSubscription –SubscriptionName "Subscription Name" | Select-AzureRmSubscription
-   ```
-
-3. Inscrivez cet abonnement au programme de la préversion :
-
-   ```powershell
-   Register-AzureRMProviderFeature -FeatureName WorkloadBackupSoftDelete -ProviderNamespace Microsoft.RecoveryServices
-   ```
-
-4. Attendez 30 minutes pour que l’abonnement soit inscrit à la préversion.
-
-5. Pour vérifier l’état, exécutez les cmdlets suivantes :
-
-   ```powershell
-   Get-AzureRmProviderFeature -FeatureName WorkloadBackupSoftDelete -ProviderNamespace Microsoft.RecoveryServices
-   ```
-
-6. Une fois que l’abonnement indique que l’inscription a été effectuée, exécutez la commande suivante :
-
-   ```powershell
-   Register-AzureRmResourceProvider -ProviderNamespace Microsoft.RecoveryServices
-   ```
-
->[!NOTE]
->Chaque fois qu’un ou plusieurs coffres sont créés dans l’abonnement où la suppression réversible est activée, vous devez réexécuter la commande suivante afin d’activer la fonctionnalité pour les coffres créés.<BR>
-> `Register-AzureRmResourceProvider -ProviderNamespace Microsoft.RecoveryServices`
 
 ## <a name="soft-delete-for-sql-server-in-azure-vm-using-azure-portal"></a>Suppression réversible pour SQL Server dans Azure VM via le portail Azure
 
@@ -99,7 +58,7 @@ La séquence d’étapes pour l’utilisation d’Azure PowerShell est la même 
 
 ### <a name="delete-the-backup-item-using-azure-powershell"></a>Supprimer l’élément de sauvegarde à l’aide d’Azure PowerShell
 
-Supprimez l’élément de sauvegarde en utilisant l’applet de commande PS [Disable-AzRecoveryServicesBackupProtection](https://docs.microsoft.com/powershell/module/az.recoveryservices/Disable-AzRecoveryServicesBackupProtection?view=azps-1.5.0).
+Supprimez l’élément de sauvegarde en utilisant l’applet de commande PowerShell [Disable-AzRecoveryServicesBackupProtection](/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection).
 
 ```powershell
 Disable-AzRecoveryServicesBackupProtection -Item $myBkpItem -RemoveRecoveryPoints -VaultId $myVaultID -Force
@@ -109,7 +68,7 @@ La valeur **DeleteState** de l’élément de sauvegarde passe de **NotDeleted**
 
 ### <a name="undoing-the-deletion-operation-using-azure-powershell"></a>Annulation de l’opération de suppression à l’aide d’Azure PowerShell
 
-Tout d’abord, récupérez l’élément de sauvegarde approprié qui est dans l’état de suppression réversible (c’est-à-dire sur le point d’être supprimé).
+Tout d’abord, récupérez l’élément de sauvegarde approprié qui est en état de suppression réversible (c’est-à-dire, sur le point d’être supprimé).
 
 ```powershell
 Get-AzRecoveryServicesBackupItem -BackupManagementType AzureWorkload -WorkloadType SQLDataBase -VaultId $myVaultID | Where-Object {$_.DeleteState -eq "ToBeDeleted"}
@@ -117,7 +76,7 @@ Get-AzRecoveryServicesBackupItem -BackupManagementType AzureWorkload -WorkloadTy
 $myBkpItem = Get-AzRecoveryServicesBackupItem -BackupManagementType AzureWorkload -WorkloadType SQLDataBase -VaultId $myVaultID -Name AppVM1
 ```
 
-Ensuite, effectuez l’opération d’annulation de suppression en utilisant l’applet de commande PS [Undo-AzRecoveryServicesBackupItemDeletion](https://docs.microsoft.com/powershell/module/az.recoveryservices/undo-azrecoveryservicesbackupitemdeletion?view=azps-3.8.0).
+Ensuite, effectuez l’opération d’annulation de suppression en utilisant l’applet de commande PowerShell [Undo-AzRecoveryServicesBackupItemDeletion](/powershell/module/az.recoveryservices/undo-azrecoveryservicesbackupitemdeletion).
 
 ```powershell
 Undo-AzRecoveryServicesBackupItemDeletion -Item $myBKpItem -VaultId $myVaultID -Force

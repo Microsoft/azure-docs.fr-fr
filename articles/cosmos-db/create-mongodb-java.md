@@ -8,15 +8,16 @@ ms.subservice: cosmosdb-mongo
 ms.devlang: java
 ms.topic: quickstart
 ms.date: 12/26/2018
-ms.custom: seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 5036b433da39359ef61e87d9ec083056cf50a7ea
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 8a8fa9e15630aea3fb92571fd88a0ce01d3c9211
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83701675"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349110"
 ---
 # <a name="quickstart-create-a-console-app-with-java-and-the-mongodb-api-in-azure-cosmos-db"></a>Démarrage rapide : Créer une application console avec Java et l’API MongoDB dans Azure Cosmos DB
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-mongodb-dotnet.md)
@@ -136,4 +137,4 @@ Vous pouvez maintenant utiliser [Robomongo](mongodb-robomongo.md) / [Studio 3T](
 Dans ce guide de démarrage rapide, vous avez appris à créer une API Azure Cosmos DB pour un compte Mongo DB, à ajouter une base de données et un conteneur avec l’Explorateur de données et à ajouter des données avec une application console Java. Vous pouvez maintenant importer des données supplémentaires dans votre base de données Cosmos. 
 
 > [!div class="nextstepaction"]
-> [Importer des données MongoDB dans Azure Cosmos DB](mongodb-migrate.md)
+> [Importer des données MongoDB dans Azure Cosmos DB](../dms/tutorial-mongodb-cosmos-db.md?toc=%2fazure%2fcosmos-db%2ftoc.json%253ftoc%253d%2fazure%2fcosmos-db%2ftoc.json)

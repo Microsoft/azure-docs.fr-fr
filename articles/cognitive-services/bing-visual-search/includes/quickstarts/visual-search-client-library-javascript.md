@@ -8,24 +8,25 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/26/2020
 ms.author: aahi
-ms.openlocfilehash: 404529bf269f899603b92c6c23b0d95cd2749ee5
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.custom: devx-track-js
+ms.openlocfilehash: a87a5f7208e4966b6afba0b939be42726ca20365
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80573127"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94371989"
 ---
 Utilisez ce guide de démarrage rapide pour commencer à obtenir des insights sur les images à partir du service Recherche visuelle Bing, en utilisant la bibliothèque de client JavaScript. Si l’outil Recherche visuelle Bing dispose d’une API REST compatible avec la plupart des langages de programmation, la bibliothèque de client offre quant à elle un moyen simple d’intégrer le service à vos applications. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/visualSearch.js). 
 
-[Documentation de référence](https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-visualsearch/?view=azure-node-latest) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/cognitiveservices/cognitiveservices-visualsearch) | [Package (NPM)](https://www.npmjs.com/package/@azure/cognitiveservices-visualsearch) | [Exemples](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/)
+[Documentation de référence](/javascript/api/@azure/cognitiveservices-visualsearch/?preserve-view=true&view=azure-node-latest) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/cognitiveservices/cognitiveservices-visualsearch) | [Package (NPM)](https://www.npmjs.com/package/@azure/cognitiveservices-visualsearch) | [Exemples](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/)
 
 ## <a name="prerequisites"></a>Prérequis
-* [Node.JS](https://www.nodejs.org/)
-* La bibliothèque de client Recherche visuelle Bing pour JavaScript
-    * Pour configurer une application console en utilisant la bibliothèque de client Recherche visuelle Bing, exécutez les commandes suivantes :
-        1. `npm install ms-rest-azure`
-        2. `npm install azure-cognitiveservices-visualsearch`.
 
+* La dernière version de [Node.js](https://nodejs.org/en/download/).
+* Le [SDK Recherche visuelle Bing pour JavaScript](https://www.npmjs.com/package/@azure/cognitiveservices-visualsearch)
+     *  Pour l’installer, exécutez `npm install @azure/cognitiveservices-visualsearch`
+* La classe `CognitiveServicesCredentials` du package `@azure/ms-rest-azure-js` pour authentifier le client.
+     * Pour l’installer, exécutez `npm install @azure/ms-rest-azure-js`
 
 [!INCLUDE [cognitive-services-bing-visual-search-signup-requirements](~/includes/cognitive-services-bing-visual-search-signup-requirements.md)]
 
@@ -39,8 +40,8 @@ Utilisez ce guide de démarrage rapide pour commencer à obtenir des insights su
     const os = require("os");
     const async = require('async');
     const fs = require('fs');
-    const Search = require('azure-cognitiveservices-visualsearch');
-    const CognitiveServicesCredentials = require('ms-rest-azure').CognitiveServicesCredentials;
+    const Search = require('@azure/cognitiveservices-visualsearch');
+    const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
     
     let keyVar = 'YOUR-VISUAL-SEARCH-ACCESS-KEY';
     let credentials = new CognitiveServicesCredentials(keyVar);

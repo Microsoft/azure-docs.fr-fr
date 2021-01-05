@@ -1,7 +1,7 @@
 ---
 title: Media Services et prise en charge de la licence Apple FairPlay - Azure | Microsoft Docs
 description: Cette rubrique présente une vue d’ensemble de la configuration et des conditions de licence Apple FairPlay.
-author: juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 services: media-services
@@ -10,18 +10,20 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 12/08/2018
-ms.author: juliako
-ms.custom: seodec18
-ms.openlocfilehash: d348f2696ef865616669af311477cb3a90a59a50
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: 09068064f24594ef35a8a1bf64213b48d83873ca
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82995863"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018730"
 ---
-# <a name="apple-fairplay-license-requirements-and-configuration"></a>Configuration et conditions de licence Apple FairPlay 
+# <a name="apple-fairplay-license-requirements-and-configuration"></a>Configuration et conditions de licence Apple FairPlay
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Azure Media Services vous permet de chiffrer votre contenu HLS avec **Apple FairPlay** (AES-128 CBC). Media Services fournit également un service de remise de licences FairPlay. Quand un lecteur tente de lire votre contenu protégé par FairPlay, une demande est envoyée au service de remise de licence pour obtenir une licence. Si le service de licence approuve la requête, il émet la licence qui est envoyée au client et sert à déchiffrer et lire le contenu spécifié.
 
@@ -61,6 +63,9 @@ Les éléments suivants sont nécessaires lors de l’utilisation de Media Servi
   * Fichier .der
   * Fichier .pfx
   * Mot de passe du fichier .pfx
+  
+> [!NOTE]
+> Azure Media Services ne vérifie pas la date d’expiration du certificat lors de l’empaquetage ou de la remise de clé. Il continue à fonctionner après l’expiration du certificat.
 
 ## <a name="fairplay-and-player-apps"></a>Applications FairPlay et de lecteur
 
@@ -81,7 +86,7 @@ Vous pouvez utiliser l’API Media Services pour configurer des licences FairPla
 > [!NOTE]
 > Généralement, vous n’aurez à configurer les options de stratégie FairPlay qu’une seule fois, car vous n’aurez qu’un seul jeu de certification et de clé ASK.
 
-L’exemple suivant utilise le kit [SDK .NET Media Services ](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models?view=azure-dotnet) pour configurer la licence.
+L’exemple suivant utilise le kit [SDK .NET Media Services ](/dotnet/api/microsoft.azure.management.media.models?view=azure-dotnet) pour configurer la licence.
 
 ```csharp
 private static ContentKeyPolicyFairPlayConfiguration ConfigureFairPlayPolicyOptions()

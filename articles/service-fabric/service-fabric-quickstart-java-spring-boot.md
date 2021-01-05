@@ -1,17 +1,15 @@
 ---
 title: 'Démarrage rapide : Créer une application Spring Boot sur Azure Service Fabric'
 description: Dans ce guide de démarrage rapide, vous déployez une application Spring Boot sur Azure Service Fabric à l’aide de l’exemple d’application Spring Boot.
-author: suhuruli
 ms.topic: quickstart
 ms.date: 01/29/2019
-ms.author: suhuruli
-ms.custom: mvc, devcenter, seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: eb96989b4a2731e78471b848d690b48352408d1c
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devcenter, seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 84ce5920af95113801f468e3149421f3b9bd8901
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77121484"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91529998"
 ---
 # <a name="quickstart-deploy-a-java-spring-boot-app-on-azure-service-fabric"></a>Démarrage rapide : Déployer une application Java Spring Boot sur Azure Service Fabric
 
@@ -21,14 +19,14 @@ Dans ce guide de démarrage rapide, vous déployez une application Java Spring B
 
 #### <a name="linux"></a>[Linux](#tab/linux)
 
-- [Environnement Java](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#set-up-java-development) et [Yeoman](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#set-up-yeoman-generators-for-containers-and-guest-executables)
-- [SDK Service Fabric et interface de ligne de commande (CLI) Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#installation-methods)
+- [Environnement Java](./service-fabric-get-started-linux.md#set-up-java-development) et [Yeoman](./service-fabric-get-started-linux.md#set-up-yeoman-generators-for-containers-and-guest-executables)
+- [SDK Service Fabric et interface de ligne de commande (CLI) Service Fabric](./service-fabric-get-started-linux.md#installation-methods)
 - [Git](https://git-scm.com/downloads)
 
 #### <a name="macos"></a>[MacOS](#tab/macos)
 
-- [Environnement Java et Yeoman](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-mac#create-your-application-on-your-mac-by-using-yeoman)
-- [SDK Service Fabric et interface de ligne de commande (CLI) Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-cli#cli-mac)
+- [Environnement Java et Yeoman](./service-fabric-get-started-mac.md#create-your-application-on-your-mac-by-using-yeoman)
+- [SDK Service Fabric et interface de ligne de commande (CLI) Service Fabric](./service-fabric-cli.md#cli-mac)
 - [Git](https://git-scm.com/downloads)
 
 --- 
@@ -61,7 +59,7 @@ Dans le répertoire *gs-spring-boot/complete*, exécutez la commande ci-après p
     #!/bin/bash
     BASEDIR=$(dirname $0)
     cd $BASEDIR
-    java -jar gs-spring-boot-0.1.0.jar
+    java -jar *spring-boot*.jar
     ```
 
 1. Ajoutez la ressource **Endpoints** dans le fichier *gs-spring-boot/SpringServiceFabric/SpringServiceFabric/SpringGettingStartedPkg/ServiceManifest.xml*.
@@ -113,7 +111,7 @@ Dans le répertoire *gs-spring-boot/complete*, exécutez la commande ci-après p
     sudo /opt/microsoft/sdk/servicefabric/common/clustersetup/devclustersetup.sh
     ```
 
-    Si vous utilisez un Mac, démarrez le cluster local à partir de l’image Docker (cette opération implique que vous ayez respecté les [prérequis](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-mac#create-a-local-container-and-set-up-service-fabric) pour configurer votre cluster local pour Mac). 
+    Si vous utilisez un Mac, démarrez le cluster local à partir de l’image Docker (cette opération implique que vous ayez respecté les [prérequis](./service-fabric-get-started-mac.md#create-a-local-container-and-set-up-service-fabric) pour configurer votre cluster local pour Mac). 
 
     ```bash
     docker run --name sftestcluster -d -p 19080:19080 -p 19000:19000 -p 25100-25200:25100-25200 -p 8080:8080 mysfcluster

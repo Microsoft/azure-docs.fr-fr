@@ -1,28 +1,18 @@
 ---
 title: Azure Relay - Migrer vers l’autorisation de signature d’accès partagé
 description: Explique comment faire passer les applications Azure Relay d’une utilisation d’Azure Active Directory Access Control Service à une utilisation de l’autorisation de signature d’accès partagé.
-services: service-bus-relay
-documentationcenter: ''
-author: clemensv
-manager: timlt
-editor: ''
-ms.service: service-bus-relay
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/21/2020
-ms.author: spelluru
-ms.openlocfilehash: 59b9e734526c56016e2ddf59c2afb5b8f7b4ad09
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.openlocfilehash: 3b793173270b0ddf25f0e971dbb2fed97cb10a55
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204568"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87532864"
 ---
 # <a name="azure-relay---migrate-from-azure-active-directory-access-control-service-to-shared-access-signature-authorization"></a>Azure Relay - Migrer depuis le service Access Control Service d’Azure Active Directory vers l’autorisation de signature d’accès partagé
 
-Les applications Azure Relay avaient historiquement la possibilité d’utiliser deux modèles d’autorisation différents : le modèle de jeton de la [Signature d’accès partagé (SAP)](../service-bus-messaging/service-bus-sas.md) fourni directement par le service Relay et un modèle fédéré où la gestion des règles d’autorisation se fait en interne par le service Access Control Service (ACS) d’[Azure Active Directory](/azure/active-directory/) et où les jetons obtenus à partir d’Access Control Service sont passés à Relay pour autoriser l’accès aux fonctionnalités souhaitées.
+Les applications Azure Relay avaient historiquement la possibilité d’utiliser deux modèles d’autorisation différents : le modèle de jeton de la [Signature d’accès partagé (SAP)](../service-bus-messaging/service-bus-sas.md) fourni directement par le service Relay et un modèle fédéré où la gestion des règles d’autorisation se fait en interne par le service Access Control Service (ACS) d’[Azure Active Directory](../active-directory/index.yml) et où les jetons obtenus à partir d’Access Control Service sont passés à Relay pour autoriser l’accès aux fonctionnalités souhaitées.
 
 Le modèle d’autorisation d’Access Control Service a longtemps été remplacé par l’[autorisation de signature d’accès partagé](../service-bus-messaging/service-bus-authentication-and-authorization.md) en tant que modèle par défaut et toute la documentation, les conseils et les exemples utilisent exclusivement la signature d’accès partagé. En outre, il n’est plus possible de créer de nouveaux espaces de noms Relay associés à Access Control Service.
 
@@ -66,5 +56,3 @@ Pour en savoir plus sur l’authentification Azure Relay, consultez les sujets s
 
 * [Authentification et autorisation Azure Relay](relay-authentication-and-authorization.md)
 * [Authentification Service Bus avec les signatures d’accès partagé](../service-bus-messaging/service-bus-sas.md)
-
-

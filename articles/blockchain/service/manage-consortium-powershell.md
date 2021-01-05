@@ -2,14 +2,14 @@
 title: Gérer les membres d’un consortium Azure Blockchain Service – PowerShell
 description: Découvrez comment gérer les membres d’un consortium Azure Blockchain Service à l’aide d’Azure PowerShell.
 ms.date: 10/14/2019
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: zeyadr
-ms.openlocfilehash: e819dd39481b58d446384a5e2253c548ce0c267c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d40e55f177bda9edb40383b6e2c61c32633cd005
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77505984"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85211338"
 ---
 # <a name="manage-consortium-members-in-azure-blockchain-service-using-powershell"></a>Gérer les membres d’un consortium dans Azure Blockchain Service à l’aide de PowerShell
 
@@ -64,7 +64,7 @@ Recherchez les autres valeurs dans le portail Azure :
 
     ![Vue d’ensemble du membre](./media/manage-consortium-powershell/member-overview.png)
 
-    Remplacez *\<Member account\>* et *\<RootContract address\>* par les valeurs issues du portail.
+    Remplacez *\<Member account\>* et *\<RootContract address\>* par les valeurs du portail.
 
 1. Pour l’adresse du point de terminaison, sélectionnez **Nœuds de transaction**, puis sélectionnez le **nœud de transaction par défaut**. Le nœud par défaut a le même nom que le membre blockchain.
 1. Sélectionnez **Chaînes de connexion**.

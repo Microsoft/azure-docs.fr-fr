@@ -6,12 +6,12 @@ ms.service: azure-functions
 ms.topic: quickstart
 ms.date: 03/25/2020
 ms.author: dglover
-ms.openlocfilehash: 2eb1a016e04a4150a76112c68683926810f5c66d
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: 09dd868dc9e05241943899654d7c8bb427a8f268
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80674550"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92104833"
 ---
 # <a name="quickstart-create-your-first-http-triggered-function-with-kotlin-and-intellij"></a>Démarrage rapide : Créer votre première fonction déclenchée par HTTP avec Kotlin et IntelliJ
 
@@ -23,10 +23,10 @@ Cet article vous montre comment créer un projet de fonction [serverless](https:
 
 Pour développer une fonction avec Kotlin et IntelliJ, installez les logiciels suivants :
 
-- [Kit de développeur Java](https://aka.ms/azure-jdks) (JDK), version 8
+- [Kit de développeur Java](/azure/developer/java/fundamentals/java-jdk-long-term-support) (JDK), version 8
 - [Apache Maven](https://maven.apache.org), version 3.0 ou ultérieure
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/download), versions Community ou Ultimate avec Maven
-- [Azure CLI](https://docs.microsoft.com/cli/azure)
+- [Azure CLI](/cli/azure)
 - [Version 2.x](functions-run-local.md#v2) d’Azure Functions Core Tools. Il fournit un environnement de développement local pour l’écriture, l’exécution et le débogage des fonctions Azure Functions.
 
 > [!IMPORTANT]
@@ -45,7 +45,7 @@ Pour développer une fonction avec Kotlin et IntelliJ, installez les logiciels s
 1. Sélectionnez **OK**, puis **Suivant**.
 1. Entrez les détails de votre projet en cours et sélectionnez **Finish** (Terminer).
 
-Maven crée les fichiers projet dans un nouveau dossier avec le même nom que la valeur _ArtifactId_. Le code généré du projet est une fonction simple, [déclenchée par HTTP](/azure/azure-functions/functions-bindings-http-webhook), qui retourne le corps de la requête HTTP à l’origine du déclenchement.
+Maven crée les fichiers projet dans un nouveau dossier avec le même nom que la valeur _ArtifactId_. Le code généré du projet est une fonction simple, [déclenchée par HTTP](./functions-bindings-http-webhook.md), qui retourne le corps de la requête HTTP à l’origine du déclenchement.
 
 ## <a name="run-functions-locally-in-the-ide"></a>Exécuter des fonctions localement dans l’IDE
 

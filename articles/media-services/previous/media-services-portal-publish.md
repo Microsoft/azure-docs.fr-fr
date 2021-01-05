@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: abdb926825abcac4485cb11b71bdc82597391727
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9f86f7a0a7eaef7c0dc244a2e089596de3779eae
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176819"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92018954"
 ---
-# <a name="publish-content-in-the-azure-portal"></a>Publier du contenu dans le portail Azure  
+# <a name="publish-content-in-the-azure-portal"></a>Publier du contenu dans le portail Azure
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [Portail](media-services-portal-publish.md)
 > * [.NET](media-services-deliver-streaming-content.md)
@@ -42,19 +45,19 @@ Pour fournir aux utilisateurs une URL pouvant être utilisée pour diffuser en c
 
 Pour créer une URL de streaming HLS, ajoutez *(format=m3u8-aapl)* à l’URL :
 
-    {streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest(format=m3u8-aapl)
+`{streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest(format=m3u8-aapl)`
 
 Pour générer une URL de streaming afin de lire les actifs multimédias Smooth Streaming, utilisez le format d’URL suivant :
 
-    {streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest
+`{streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest`
 
 Pour créer une URL de streaming MPEG DASH, ajoutez *(format=mpd-time-csf)* à l’URL :
 
-    {streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest(format=mpd-time-csf)
+`{streaming endpoint name-media services account name}/{locator ID}/{file name}.ism/Manifest(format=mpd-time-csf)`
 
 Une URL de signature d’accès partagé a le format suivant :
 
-    {blob container name}/{asset name}/{file name}/{shared access signature}
+`{blob container name}/{asset name}/{file name}/{shared access signature}`
 
 Pour plus d’informations, consultez [Vue d’ensemble de la fourniture de contenu](media-services-deliver-content-overview.md).
 
@@ -63,7 +66,7 @@ Pour plus d’informations, consultez [Vue d’ensemble de la fourniture de cont
 > 
 > 
 
-Pour mettre à jour la date d’expiration d’un localisateur, vous pouvez utiliser une [API REST](https://docs.microsoft.com/rest/api/media/operations/locator#update_a_locator) ou une [API .NET](https://go.microsoft.com/fwlink/?LinkID=533259). 
+Pour mettre à jour la date d’expiration d’un localisateur, vous pouvez utiliser une [API REST](/rest/api/media/operations/locator#update_a_locator) ou une [API .NET](/dotnet/api/microsoft.windowsazure.mediaservices.client.ilocator). 
 
 > [!NOTE]
 > Lorsque vous mettez à jour la date d’expiration d’un localisateur de signature d’accès partagé, l’URL est modifiée.
@@ -97,4 +100,3 @@ Certaines considérations s’appliquent :
 
 ## <a name="next-steps"></a>Étapes suivantes
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
-

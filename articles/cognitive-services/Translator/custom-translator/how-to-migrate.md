@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 05/26/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 5705e5f29bc851d615f91d902fd505a69b5cfd12
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 64c449bdefe6fb067a7c0e26b155b58b6f00c399
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83586985"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368282"
 ---
 # <a name="migrate-hub-workspace-and-projects-to-custom-translator"></a>Migrer un espace de travail et des projets Microsoft Hub vers Custom Translator
 
@@ -27,7 +27,7 @@ Les actions suivantes sont effectuées pendant la migration :
 * Vous pouvez à tout moment accéder au score BLEU migré à partir de l’entraînement Hub dans la page TrainingDetails du modèle sous le titre « Bleu score in MT Hub ».
 
 > [!Note] 
-> Pour une formation réussie, Custom Translator nécessite au moins 10 000 phrases extraites uniques. Custom Translator ne peut pas effectuer l’apprentissage avec moins du [minimum suggéré](https://docs.microsoft.com/azure/cognitive-services/translator/custom-translator/sentence-alignment#suggested-minimum-number-of-sentences).
+> Pour une formation réussie, Custom Translator nécessite au moins 10 000 phrases extraites uniques. Custom Translator ne peut pas effectuer l’apprentissage avec moins du [minimum suggéré](./sentence-alignment.md#suggested-minimum-number-of-sentences).
 
 ## <a name="find-custom-translator-workspace-id"></a>Rechercher l’ID de l’espace de travail Custom Translator
 
@@ -55,7 +55,7 @@ Pour migrer un projet :
 
 3. Cliquez sur le lien « Migrate » (Migrer) du projet correspondant.
 
-    ![Migrer à partir du hub](media/how-to/how-to-migrate-from-hub.png)
+    ![Capture d’écran mettant en évidence le bouton Migrer pour le projet sélectionné.](media/how-to/how-to-migrate-from-hub.png)
 
 4. Quand vous appuyez sur le lien de migration, vous obtenez un formulaire dans lequel vous pouvez effectuer les tâches suivantes :
    * Spécifier l’espace de travail vers lequel effectuer un transfert dans Custom Translator.
@@ -76,7 +76,7 @@ Pour migrer un espace de travail :
 
 3. Dans la page « Settings » (Paramètres), cliquez sur « Migrate Workspace data to Custom Translator » (Migrer les données de l’espace de travail vers Custom Translator).
 
-    ![Migrer à partir du hub](media/how-to/how-to-migrate-workspace-from-hub.png)
+    ![Capture d’écran mettant en évidence l’option Migrer les données de l’espace de travail vers Custom Translator.](media/how-to/how-to-migrate-workspace-from-hub.png)
 
 4. Dans la page suivante, sélectionnez une de ces deux options :
 
@@ -92,7 +92,7 @@ Pour migrer un espace de travail :
 
 ## <a name="migration-history"></a>Historique des migrations
 
-Lorsque vous avez demandé la migration d’un espace de travail/projet à partir du Hub, vous trouverez l’historique des migrations dans la page des paramètres de Custom Translator.
+Quand vous demandez la migration d’un espace de travail/projet à partir du Hub, l’historique des migrations se trouve dans la page des paramètres de Custom Translator.
 
 Pour afficher l’historique des migrations, procédez comme suit :
 
@@ -119,10 +119,10 @@ La page de l’historique des migrations s’affiche après les informations sui
 Si vous souhaitez obtenir un rapport plus détaillé sur la migration de vos projets, formations et documents, vous pouvez exporter ces informations au format CSV.
 
 ## <a name="implementation-notes"></a>Remarques relatives à l’implémentation
-* Les systèmes avec des paires de langues PAS encore disponibles dans Custom Translator seront disponibles uniquement pour accéder aux données ou annuler le déploiement via Custom Translator. Ces projets porteront la mention « Non disponible » sur la page Projets. Au fur et à mesure de l’activation de nouvelles paires de langage avec Custom Translator, les projets deviennent actifs pour entraîner et déployer. 
+* Les systèmes avec des paires de langues PAS encore disponibles dans Custom Translator seront disponibles uniquement pour accéder aux données ou annuler le déploiement via Custom Translator. Ces projets sont marqués comme étant « Non disponible » dans la page Projets. Au fur et à mesure de l’activation de nouvelles paires de langage avec Custom Translator, les projets deviennent actifs pour entraîner et déployer. 
 * La migration d’un projet Hub vers Custom Translator n’a aucun impact sur vos entraînements ou projets Hub. Nous ne supprimons pas les projets ou documents Hub durant une migration et n’annulons pas le déploiement de modèles.
 * Vous ne pouvez migrer un projet qu’une seule fois. Si vous avez besoin de répéter la migration d’un projet, contactez-nous.
-* Custom Translator prend en charge les paires de langues NMT depuis et vers l’anglais. [Affichez la liste complète des langues prises en charge](https://docs.microsoft.com/azure/cognitive-services/translator/language-support#customization). Hub ne nécessite pas de modèles de base et prend donc en charge plusieurs milliers de langues. Vous pouvez migrer une paire de langues non prise en charge, mais nous migrons uniquement les documents et définitions de projet. Nous ne pouvons pas entraîner le nouveau modèle. Par ailleurs, ces documents et projets apparaissent comme inactifs pour indiquer que vous ne pouvez pas les utiliser. Si ces projets et/ou documents sont un jour pris en charge, ils deviennent actifs et peuvent être entraînés.
+* Custom Translator prend en charge les paires de langues NMT depuis et vers l’anglais. [Affichez la liste complète des langues prises en charge](../language-support.md#customization). Hub ne nécessite pas de modèles de base et prend donc en charge plusieurs milliers de langues. Vous pouvez migrer une paire de langues non prise en charge, mais nous migrons uniquement les documents et définitions de projet. Nous ne pouvons pas entraîner le nouveau modèle. Par ailleurs, ces documents et projets apparaissent comme inactifs pour indiquer que vous ne pouvez pas les utiliser. Si ces projets et/ou documents sont un jour pris en charge, ils deviennent actifs et peuvent être entraînés.
 * Actuellement, Custom Translator ne gère pas les données d’entraînement monolingues. Vous pouvez, au même titre que les paires de langues non prises en charge, migrer des documents monolingues. Toutefois, ils apparaissent comme inactifs jusqu’à ce que les données monolingues soient pris en charge.
 * L’entraînement de Custom Translator nécessite 10 000 phrases parallèles. Microsoft Hub peut s’entraîner sur un plus petit jeu de données. Si un entraînement ne respectant pas cette condition est migré, la procédure d’entraînement n’est pas effectuée.
 
@@ -130,20 +130,20 @@ Si vous souhaitez obtenir un rapport plus détaillé sur la migration de vos pro
 
 Ce tableau compare les fonctionnalités de Microsoft Translator Hub et celles de Custom Translator.
 
-|   | Hub | Custom Translator |
-|:-----|:----:|:----:|
-|État de la fonctionnalité de personnalisation   | Disponibilité générale  | Disponibilité générale |
-| Version de l'API de texte  | V2    | V3  |
-| Personnalisation TA statistique | Oui   | Non |
-| Personnalisation TA neuronale | Non    | Oui |
-| Nouvelle personnalisation unifiée des services vocaux | Non    | Oui |
+| Fonctionnalité | Hub | Custom Translator |
+| ------- | :-: | :---------------: |
+| État de la fonctionnalité de personnalisation    | Disponibilité générale    | Disponibilité générale |
+| Version de l'API de texte    | V2     | V3  |
+| Personnalisation TA statistique    | Oui    | Non |
+| Personnalisation TA neuronale    | Non    | Oui |
+| Nouvelle personnalisation unifiée des services vocaux    | Non    | Oui |
 | Sans trace | Oui | Oui |
 
 ## <a name="new-languages"></a>Nouvelles langues
 
-Si vous êtes une communauté ou une organisation travaillant sur la création d’un nouveau système de langue pour Microsoft Translator, contactez [custommt@microsoft.com](mailto:custommt@microsoft.com) pour plus d’informations.
+Si vous êtes une communauté ou une organisation travaillant sur la création d’un nouveau système de langue pour Translator, contactez [custommt@microsoft.com](mailto:custommt@microsoft.com) pour obtenir plus d’informations.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Effectuer l’apprentissage d’un modèle](how-to-train-model.md).
-- Commencez à utiliser votre modèle de traduction personnalisé déployé via [Translator V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl).
+- Commencez à utiliser votre modèle de traduction personnalisé déployé via [Translator V3](../reference/v3-0-translate.md?tabs=curl).

@@ -7,32 +7,41 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/13/2020
-ms.openlocfilehash: 6961b7bd94c9b3fe70365055851c488efa2cbeca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d06501abe69ce9b06656cfa8949c42bb53a03983
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480009"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019036"
 ---
-# <a name="azure-monitor-logs-connector-for-logic-apps-and-flow"></a>Connecteur Azure Monitor Logs pour Logic Apps et Flow
-[Azure Logic Apps](/azure/logic-apps/) et [Power Automate](https://ms.flow.microsoft.com) vous permettent de créer des workflows automatisés utilisant des centaines d’actions pour divers services. Le connecteur Azure Monitor Logs vous permet de générer des workflows qui récupèrent des données à partir d’un espace de travail Log Analytics ou d’une application Application Insights dans Azure Monitor. Cet article décrit les actions incluses dans le connecteur et montre pas à pas comment générer un workflow utilisant ces données.
+# <a name="azure-monitor-logs-connector-for-logic-apps-and-power-automate"></a>Connecteur Azure Monitor Logs pour Logic Apps et Power Automate
+[Azure Logic Apps](../../logic-apps/index.yml) et [Power Automate](https://flow.microsoft.com) vous permettent de créer des workflows automatisés utilisant des centaines d’actions pour divers services. Le connecteur Azure Monitor Logs vous permet de générer des workflows qui récupèrent des données à partir d’un espace de travail Log Analytics ou d’une application Application Insights dans Azure Monitor. Cet article décrit les actions incluses dans le connecteur et montre pas à pas comment générer un workflow utilisant ces données.
 
 Par exemple, vous pouvez créer une application logique pour utiliser les données de journal Azure Monitor contenues dans une notification par e-mail en provenance d’Office 365, créer un bogue dans Azure DevOps ou poster un message Slack.  Vous pouvez déclencher un flux de travail à l’aide d’un calendrier ou d’une action d’un service connecté, telle que la réception d’un e-mail ou d’un tweet. 
+
+## <a name="connector-limits"></a>Limites des connecteurs
+Le connecteur de journaux Azure Monitor a les limites suivantes :
+* Taille maximale des données : 16 Mo
+* Taille maximale de la réponse aux requêtes : 100 Mo
+* Nombre maximal d’enregistrements : 500 000
+* Délai d’expiration maximal des requêtes : 110 secondes.
+
+En fonction de la taille de vos données et de la requête que vous utilisez, le connecteur peut atteindre ses limites et échouer. Vous pouvez contourner ce type de situation en ajustant la périodicité du déclencheur pour que le connecteur s’exécute plus fréquemment et interroge moins de données. Vous pouvez utiliser des requêtes qui agrègent vos données pour retourner moins d’enregistrements et de colonnes.
 
 ## <a name="actions"></a>Actions
 Le tableau suivant décrit les actions incluses dans le connecteur Azure Monitor Logs. Les deux vous permettent d’exécuter une requête de journal sur un espace de travail Log Analytics ou une application Application Insights. La différence réside dans la façon dont les données sont retournées.
 
 > [!NOTE]
-> Le connecteur Azure Monitor Logs remplace le [connecteur Azure Log Analytics](https://docs.microsoft.com/connectors/azureloganalytics/) et le [connecteur Azure Application Insights](https://docs.microsoft.com/connectors/applicationinsights/). Ce connecteur propose les mêmes fonctionnalités que les autres et constitue la meilleure méthode pour exécuter une requête sur un espace de travail Log Analytics ou une application Application Insights.
+> Le connecteur Azure Monitor Logs remplace le [connecteur Azure Log Analytics](/connectors/azureloganalytics/) et le [connecteur Azure Application Insights](/connectors/applicationinsights/). Ce connecteur propose les mêmes fonctionnalités que les autres et constitue la meilleure méthode pour exécuter une requête sur un espace de travail Log Analytics ou une application Application Insights.
 
 
 | Action | Description |
 |:---|:---|
-| [Exécuter la requête et répertorier les résultats](https://docs.microsoft.com/connectors/azuremonitorlogs/#run-query-and-list-results) | Retourne chaque ligne comme son propre objet. Utilisez cette action quand vous voulez utiliser chaque ligne séparément dans le reste du workflow. L’action est généralement suivie d’une [activité Foreach](../../logic-apps/logic-apps-control-flow-loops.md#foreach-loop). |
-| [Exécuter une requête et visualiser les résultats](https://docs.microsoft.com/connectors/azuremonitorlogs/#run-query-and-visualize-results) | Retourne toutes les lignes dans le jeu de résultats sous la forme d’un objet mis en forme unique. Utilisez cette action quand vous voulez utiliser l’ensemble du jeu de résultats dans le reste du workflow, par exemple pour envoyer les résultats dans un message.  |
+| [Exécuter la requête et répertorier les résultats](/connectors/azuremonitorlogs/#run-query-and-list-results) | Retourne chaque ligne comme son propre objet. Utilisez cette action quand vous voulez utiliser chaque ligne séparément dans le reste du workflow. L’action est généralement suivie d’une [activité Foreach](../../logic-apps/logic-apps-control-flow-loops.md#foreach-loop). |
+| [Exécuter une requête et visualiser les résultats](/connectors/azuremonitorlogs/#run-query-and-visualize-results) | Retourne toutes les lignes dans le jeu de résultats sous la forme d’un objet mis en forme unique. Utilisez cette action quand vous voulez utiliser l’ensemble du jeu de résultats dans le reste du workflow, par exemple pour envoyer les résultats dans un message.  |
 
 ## <a name="walkthroughs"></a>Procédures pas à pas
-Les tutoriels suivants illustrent l’utilisation des connecteurs Azure Monitor dans Azure Logic Apps. Vous pouvez effectuer ces mêmes exemples avec Power Automate, la seule différence étant la façon dont le workflow initial est créé puis exécuté une fois celui-ci finalisé. La configuration du workflow et des actions est identique dans les deux cas. Pour commencer, consultez [Créer un flux à partir d’un modèle dans Power Automate](https://docs.microsoft.com/power-automate/get-started-logic-template).
+Les tutoriels suivants illustrent l’utilisation des connecteurs Azure Monitor dans Azure Logic Apps. Vous pouvez effectuer ces mêmes exemples avec Power Automate, la seule différence étant la façon dont le workflow initial est créé puis exécuté une fois celui-ci finalisé. La configuration du workflow et des actions est identique dans les deux cas. Pour commencer, consultez [Créer un flux à partir d’un modèle dans Power Automate](/power-automate/get-started-logic-template).
 
 
 ### <a name="create-a-logic-app"></a>Créer une application logique
@@ -57,9 +66,9 @@ Cliquez sur **+ Nouvelle étape** pour ajouter une action qui s’exécute aprè
 
 ![Action Azure Monitor Logs](media/logicapp-flow-connector/select-azure-monitor-connector.png)
 
-Cliquez sur **Azure Log Analytics – Exécuter une requête et visualiser les résultats**.
+Cliquez sur **Azure Log Analytics – Exécuter la requête et visualiser les résultats**.
 
-![Exécuter une requête et visualiser les résultats](media/logicapp-flow-connector/select-query-action-visualize.png)
+![Capture d’écran de l’ajout d’une action à une étape dans le Concepteur d’application logique. Azure Monitor Logs est mis en surbrillance sous Choisir une action.](media/logicapp-flow-connector/select-query-action-visualize.png)
 
 
 ### <a name="add-azure-monitor-logs-action"></a>Ajouter l’action Azure Monitor Logs
@@ -78,7 +87,7 @@ Event
 
 Sélectionnez *Définir dans la requête* pour **Période** et **Table HTML** pour **Type de graphique** .
    
-![Action Exécuter une requête et visualiser les résultats](media/logicapp-flow-connector/run-query-visualize-action.png)
+![Capture d’écran des paramètres de la nouvelle action Azure Monitor Logs nommée Exécuter une requête et visualiser les résultats.](media/logicapp-flow-connector/run-query-visualize-action.png)
 
 Le courrier est envoyé par le compte associé à la connexion active. Vous pouvez spécifier un autre compte en cliquant sur **Modifier la connexion**.
 
@@ -109,13 +118,12 @@ Cliquez sur **Enregistrer** puis sur **Exécuter** pour effectuer une série de 
 
 Une fois que l’application logique a terminé, consultez l’e-mail du destinataire que vous avez spécifié.  Il doit avoir reçu un e-mail dont le corps est semblable à ceci :
 
-![Exemple d’e-mail](media/logicapp-flow-connector/sample-mail.png)
+![Exemple de message électronique](media/logicapp-flow-connector/sample-mail.png)
 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - En savoir plus sur les [requêtes de journal dans Azure Monitor](../log-query/log-query-overview.md).
-- Découvrez plus en détail [Logic Apps](/azure/logic-apps/).
-- Découvrez [Microsoft Flow](https://ms.flow.microsoft.com).
-
+- Découvrez plus en détail [Logic Apps](../../logic-apps/index.yml).
+- En savoir plus sur [Power Automate](https://flow.microsoft.com).

@@ -14,14 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: a686465b0006c2e9aac6e06cb4ab12d30921e8c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b615e6526eb4187d354c4e276147743156b10bc1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227057"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266008"
 ---
 # <a name="managing-assets-and-related-entities-with-media-services-net-sdk"></a>Gestion des éléments multimédias et des entités connexes avec le Kit de développement logiciel (SDK) Media Services .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [.NET](media-services-dotnet-manage-entities.md)
 > * [REST](media-services-rest-manage-entities.md)
@@ -29,7 +33,7 @@ ms.locfileid: "79227057"
 > 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Cette rubrique montre comment gérer les entités Azure Media Services avec .NET.
 
@@ -429,4 +433,3 @@ L’exemple de code suivant montre comment obtenir une référence pointant vers
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

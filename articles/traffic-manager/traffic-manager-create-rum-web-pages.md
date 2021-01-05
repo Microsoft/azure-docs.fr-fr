@@ -3,22 +3,22 @@ title: Mesures utilisateur réelles avec des pages web - Azure Traffic Manager
 description: Cet article vous aide à configurer vos pages web pour envoyer les mesures utilisateur réelles à Azure Traffic Manager.
 services: traffic-manager
 documentationcenter: traffic-manager
-author: rohinkoul
+author: duongau
 manager: twooley
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 03/16/2018
-ms.author: rohink
+ms.author: duau
 ms.custom: ''
-ms.openlocfilehash: 927d774ee30a291607a8a47fc2fd6878c1bc6fee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8606e89a40e9cfd2c0f55df2c65532928c0d11f8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938695"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95972587"
 ---
 # <a name="how-to-send-real-user-measurements-to-azure-traffic-manager-using-web-pages"></a>Comment envoyer les mesures des utilisateurs réels à Azure Traffic Manager avec des pages web
 

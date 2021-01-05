@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: allensu
-ms.openlocfilehash: d0c438aee7f56e96feb7167fad718fd9519a9f76
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a226682c2580a871e1b2fc4db71f369f3bcc3abb
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253711"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010161"
 ---
 # <a name="how-caching-works"></a>Comment la mise en cache fonctionne
 
@@ -65,7 +65,7 @@ Deux en-têtes peuvent être utilisés pour définir l’actualisation du cache�
 ## <a name="cache-directive-headers"></a>En-têtes de la directive du cache
 
 > [!IMPORTANT]
-> Par défaut, un point de terminaison Azure CDN optimisé pour DSA ignore les en-têtes de la directive du cache et la mise en cache. En ce qui concerne les profils **Azure CDN Standard de Verizon** et **Azure CDN Standard d’Akamai**, vous pouvez ajuster la manière dont un point de terminaison Azure CDN traite ces en-têtes en utilisant des [règles de mise en cache CDN](cdn-caching-rules.md) pour activer la mise en cache. Dans le cas des profils **Azure CDN Premium de Verizon**, vous utiliserez pour cela le [moteur de règles](cdn-rules-engine.md).
+> Par défaut, un point de terminaison Azure CDN optimisé pour DSA ignore les en-têtes de la directive du cache et la mise en cache. En ce qui concerne les profils **Azure CDN Standard de Verizon** et **Azure CDN Standard d’Akamai**, vous pouvez ajuster la manière dont un point de terminaison Azure CDN traite ces en-têtes en utilisant des [règles de mise en cache CDN](cdn-caching-rules.md) pour activer la mise en cache. Dans le cas des profils **Azure CDN Premium de Verizon**, vous utiliserez pour cela le [moteur de règles](./cdn-verizon-premium-rules-engine.md).
 
 Azure CDN prend en charge les en-têtes de la directive de cache HTTP suivants, qui définissent la durée et le partage du cache.
 
@@ -112,11 +112,11 @@ Lorsque le cache est périmé, les validateurs de cache HTTP sont utilisés pour
 
 Toutes les ressources ne peuvent pas être mises en cache. Le tableau suivant montre quelles ressources peuvent être mises en cache, en fonction du type de réponse HTTP. Les ressources fournies avec des réponses HTTP ne remplissant pas toutes ces conditions ne peuvent pas être mises en cache. Dans le cas **d’Azure CDN Premium de Verizon** uniquement, il est possible d’utiliser le moteur de règles pour personnaliser certaines de ces conditions.
 
-|                   | Azure CDN de Microsoft          | Azure CDN de Verizon | Azure CDN d’Akamai        |
-|-------------------|-----------------------------------|------------------------|------------------------------|
-| Codes d’état HTTP | 200, 203, 206, 300, 301, 410, 416 | 200                    | 200, 203, 300, 301, 302, 401 |
-| Méthodes HTTP      | GET, HEAD                         | GET                    | GET                          |
-| Limites de taille de fichiers  | 300 Go                            | 300 Go                 | - Optimisation de la livraison web générale : 1,8 Go<br />- Optimisation de la diffusion multimédia en continu : 1,8 Go<br />- Optimisation des fichiers volumineux : 150 Go |
+|                       | Azure CDN de Microsoft          | Azure CDN de Verizon | Azure CDN d’Akamai        |
+|-----------------------|-----------------------------------|------------------------|------------------------------|
+| **Codes d’état HTTP** | 200, 203, 206, 300, 301, 410, 416 | 200                    | 200, 203, 300, 301, 302, 401 |
+| **Méthodes HTTP**      | GET, HEAD                         | GET                    | GET                          |
+| **Limites de taille de fichiers**  | 300 Go                            | 300 Go                 | - Optimisation de la livraison web générale : 1,8 Go<br />- Optimisation de la diffusion multimédia en continu : 1,8 Go<br />- Optimisation des fichiers volumineux : 150 Go |
 
 Pour permettre l’activation de la mise en cache d’**Azure CDN Standard de Microsoft** sur une ressource, le serveur d’origine doit prendre en charge les requêtes HTTP HEAD et GET et les valeurs content-length doivent être identiques pour l’ensemble des réponses HTTP HEAD et GET associées à la ressource. Dans le cas d’une requête HEAD, le serveur d’origine doit prendre en charge la requête et répondre avec les en-têtes qu’il aurait utilisé s’il avait reçu une requête GET.
 
@@ -137,6 +137,3 @@ Le tableau suivant décrit le comportement de mise en cache par défaut des prod
 
 - Pour savoir comment personnaliser et remplacer le comportement de mise en cache par défaut sur CDN par le biais de règles de mise en cache, consultez [Contrôler le comportement de mise en cache d’Azure CDN avec des règles de mise en cache](cdn-caching-rules.md). 
 - Pour savoir comment utiliser des chaînes de requête pour contrôler le comportement de mise en cache, consultez [Contrôler le comportement de mise en cache d’Azure CDN avec des chaînes de requête](cdn-query-string.md).
-
-
-

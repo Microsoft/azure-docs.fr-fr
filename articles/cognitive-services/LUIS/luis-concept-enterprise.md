@@ -3,20 +3,18 @@ title: Concepts d’entreprise – LUIS
 titleSuffix: Azure Cognitive Services
 description: Découvrez les principes de conception de grandes applications LUIS ou de plusieurs applications incluant à la fois LUIS et QnA Maker.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 07/29/2019
-ms.author: diberry
-ms.openlocfilehash: efef3faf3cc4ff04235254f0ff6538d92a831196
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2e2165b81c7cd634fe79ec4438a550ad365f5a30
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79219191"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019175"
 ---
 # <a name="enterprise-strategies-for-a-luis-app"></a>Stratégies d’entreprise pour une application LUIS
 Révisez ces stratégies de conception pour votre application d’entreprise.
@@ -31,7 +29,7 @@ Si le taux de demandes de votre application LUIS dépasse le [quota](https://azu
 * Créez et [attribuez plusieurs clés](#assign-multiple-luis-keys-to-same-app) à l’application. 
 
 ### <a name="use-multiple-apps-with-same-app-definition"></a>Utiliser plusieurs applications avec la même définition d’application
-Exportez l’application LUIS originale, puis réimportez-la dans des applications distinctes. Chaque application a son propre ID d’application. Lorsque vous publiez, au lieu d’utiliser la même clé pour toutes les applications, créez une clé distincte pour chaque application. Équilibrez la charge sur toutes les applications afin qu’aucune application unique ne soit surchargée. Ajoutez [Application Insights](luis-tutorial-bot-csharp-appinsights.md) pour surveiller l’utilisation. 
+Exportez l’application LUIS originale, puis réimportez-la dans des applications distinctes. Chaque application a son propre ID d’application. Lorsque vous publiez, au lieu d’utiliser la même clé pour toutes les applications, créez une clé distincte pour chaque application. Équilibrez la charge sur toutes les applications afin qu’aucune application unique ne soit surchargée. Ajoutez [Application Insights](./luis-csharp-tutorial-bf-v4.md) pour surveiller l’utilisation. 
 
 Pour obtenir la même intention principale dans toutes les applications, vérifiez que la prédiction d’intention entre la première et la deuxième intention est assez variée pour ne pas provoquer de confusion chez LUIS en donnant des résultats différents d’une application à l’autre en raison de variations mineures des énoncés. 
 
@@ -50,10 +48,10 @@ Si votre application est destinée à prédire une grande variété d’énoncé
 Pour un apprentissage actif, planifiez une [révision d’énoncés de point de terminaison](luis-how-to-review-endpoint-utterances.md) à intervalles réguliers, par exemple toutes les deux semaines, puis entraînez et publiez à nouveau. 
 
 ## <a name="when-you-need-to-have-more-than-500-intents"></a>Lorsque vous avez besoin de plus de 500 intentions
-Par exemple, supposons que vous développez un compagnon Office qui a plus de 500 intentions. Si 200 intentions sont liées à la planification des réunions, 200 sont des rappels, 200 concernent l’obtention d’informations sur les collègues et 200 sont destinées à l’envoi de courrier électronique, groupez les intentions afin que chaque groupe soit dans une même application, puis créez une application de niveau supérieur qui contient chaque intention. Utilisez le [modèle de répartition](#dispatch-tool-and-model) pour créer l’application de niveau supérieur. Modifiez ensuite votre bot pour utiliser l’appel en cascade comme indiqué dans le [didacticiel du modèle de répartition](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&branch=master&tabs=cs). 
+Par exemple, supposons que vous développez un compagnon Office qui a plus de 500 intentions. Si 200 intentions sont liées à la planification des réunions, 200 sont des rappels, 200 concernent l’obtention d’informations sur les collègues et 200 sont destinées à l’envoi de courrier électronique, groupez les intentions afin que chaque groupe soit dans une même application, puis créez une application de niveau supérieur qui contient chaque intention. Utilisez le [modèle de répartition](#dispatch-tool-and-model) pour créer l’application de niveau supérieur. Modifiez ensuite votre bot pour utiliser l’appel en cascade comme indiqué dans le [didacticiel du modèle de répartition](/azure/bot-service/bot-builder-tutorial-dispatch?branch=master&tabs=cs&view=azure-bot-service-4.0). 
 
 ## <a name="when-you-need-to-combine-several-luis-and-qna-maker-apps"></a>Lorsque vous souhaitez combiner plusieurs applications LUIS et QnA Maker
-Si vous avez plusieurs applications LUIS et QnA Maker qui doivent répondre à un bot, utilisez le [modèle de répartition](#dispatch-tool-and-model) pour générer l’application de niveau supérieur.  Modifiez ensuite votre bot pour utiliser l’appel en cascade comme indiqué dans le [didacticiel du modèle de répartition](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&branch=master&tabs=cs). 
+Si vous avez plusieurs applications LUIS et QnA Maker qui doivent répondre à un bot, utilisez le [modèle de répartition](#dispatch-tool-and-model) pour générer l’application de niveau supérieur.  Modifiez ensuite votre bot pour utiliser l’appel en cascade comme indiqué dans le [didacticiel du modèle de répartition](/azure/bot-service/bot-builder-tutorial-dispatch?branch=master&tabs=cs&view=azure-bot-service-4.0). 
 
 ## <a name="dispatch-tool-and-model"></a>Outil et modèle de répartition
 Utilisez l’outil en ligne de commande [Répartir][dispatch-tool] disponible dans [BotBuilder-tools](https://github.com/Microsoft/botbuilder-tools) pour combiner plusieurs applications LUIS et/ou QnA Maker dans une application LUIS parente. Cette approche vous permet d’avoir un domaine parent incluant tous les sujets et différents domaines de sujets enfants dans des applications distinctes. 
@@ -64,7 +62,7 @@ Le domaine parent est noté dans LUIS avec une version nommée `Dispatch` dans l
 
 Le chatbot reçoit l’énoncé, puis l’envoie à l’application LUIS parente pour la prédiction. L’intention prédite principale provenant de l’application parente détermine quelle application LUIS enfant est appelée ensuite. Le chatbot envoie l’énoncé à l’application enfant pour une prédiction plus précise.
 
-Comprendre comment cette hiérarchie d’appels est établie à partir de Bot Builder v4 [dispatcher-application-tutorial](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&branch=master&tabs=cs).  
+Comprendre comment cette hiérarchie d’appels est établie à partir de Bot Builder v4 [dispatcher-application-tutorial](/azure/bot-service/bot-builder-tutorial-dispatch?branch=master&tabs=cs&view=azure-bot-service-4.0).  
 
 ### <a name="intent-limits-in-dispatch-model"></a>Limites des intentions dans le modèle de répartition
 Une application de répartition a 500 sources de répartition maximum, ce qui équivaut à 500 intentions. 
@@ -72,7 +70,7 @@ Une application de répartition a 500 sources de répartition maximum, ce qui é
 ## <a name="more-information"></a>Informations complémentaires
 
 * [Kit de développement logiciel (SDK) Bot Framework](https://github.com/Microsoft/botframework)
-* [Didacticiel du modèle de répartition](https://docs.microsoft.com/azure/bot-service/bot-builder-tutorial-dispatch?view=azure-bot-service-4.0&branch=master&tabs=cs)
+* [Didacticiel du modèle de répartition](/azure/bot-service/bot-builder-tutorial-dispatch?branch=master&tabs=cs&view=azure-bot-service-4.0)
 * [CLI Dispatch](https://github.com/Microsoft/botbuilder-tools)
 * Exemple de bot du modèle de répartition – [.NET](https://github.com/microsoft/BotBuilder-Samples/tree/master/samples/csharp_dotnetcore/14.nlp-with-dispatch), [Node.js](https://github.com/microsoft/BotBuilder-Samples/tree/master/samples/javascript_nodejs/14.nlp-with-dispatch)
 
@@ -80,5 +78,5 @@ Une application de répartition a 500 sources de répartition maximum, ce qui é
 
 * Découvrir comment [tester un lot](luis-how-to-batch-test.md)
 
-[dispatcher-application-tutorial]: https://aka.ms/bot-dispatch
+[dispatcher-application-tutorial]: /azure/bot-service/bot-builder-tutorial-dispatch?branch=master
 [dispatch-tool]: https://aka.ms/dispatch-tool

@@ -12,12 +12,13 @@ ms.custom:
 - mvc
 - amqp
 - mqtt
-ms.openlocfilehash: c568dddcbbf57ebd6ed5906bb83af01a84dafa41
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+- devx-track-js
+ms.openlocfilehash: 58891bdb4601744129c97454f43202d3ba07b709
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81683825"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852555"
 ---
 # <a name="create-an-advanced-device-model"></a>Créer un modèle d’appareil avancé
 
@@ -25,19 +26,15 @@ Ce guide décrit les fichiers JSON et JavaScript qui définissent un modèle d�
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre les étapes de ce guide pratique, vous avez besoin d’une instance déployée de la simulation d’appareil dans votre abonnement Azure.
 
-Si vous n’avez pas encore déployé la Simulation d’appareil, vous devez terminer le guide de démarrage rapide [Déployer et exécuter une simulation d’appareil IoT dans Azure](quickstart-device-simulation-deploy.md).
+Si vous n’avez pas encore déployé la simulation d’appareil, consultez [Déploiement de la simulation d’appareil](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) sur GitHub.
 
 ### <a name="open-device-simulation"></a>Ouvrir la Simulation d’appareil
 
-Pour exécuter la Simulation d’appareil dans votre navigateur, accédez d’abord aux [Accélérateurs de solution Microsoft Azure IoT](https://www.azureiotsolutions.com).
-
-Vous pouvez être invité à vous connecter les informations d’identification de votre abonnement Azure.
-
-Ensuite, cliquez sur **Lancer** sur la mosaïque de la Simulation d’appareil que vous avez déployée dans le guide de démarrage rapide [Déployer et exécuter une simulation d’appareil IoT dans Azure](quickstart-device-simulation-deploy.md).
+Si vous n’avez pas encore déployé la simulation d’appareil, consultez [Déploiement de la simulation d’appareil](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) sur GitHub.
 
 ## <a name="device-models"></a>Modèles d’appareils
 
@@ -59,7 +56,7 @@ Un modèle d’appareil classique comprend :
 Chaque fichier de définition d’appareil contient les détails d’un modèle d’appareil simulé, notamment les informations suivantes :
 
 * Nom du modèle d’appareil : chaîne.
-* Protocole : AMQP | MQTT | HTTP.
+* Protocole : AMQP | MQTT | HTTP.
 * État initial de l'appareil.
 * Fréquence d’actualisation de l’état de l’appareil.
 * Fichiers JavaScript à utiliser pour actualiser l’état de l’appareil.
@@ -519,4 +516,4 @@ Si vos fichiers passent la validation, cliquez sur **Enregistrer** et votre mod�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide pratique, vous avez appris à créer les fichiers du modèle d’appareil utilisés dans la simulation d’appareils et à établir un modèle d’appareil avancé. Vous voudrez ensuite peut-être explorer comment [Utiliser Time Series Insights pour visualiser les données de télémétrie envoyées par l’accélérateur de solution de simulation d’appareil](https://docs.microsoft.com/azure/iot-accelerators/iot-accelerators-device-simulation-time-series-insights).
+Dans ce guide pratique, vous avez appris à créer les fichiers du modèle d’appareil utilisés dans la simulation d’appareils et à établir un modèle d’appareil avancé. Vous voudrez ensuite peut-être explorer comment [Utiliser Time Series Insights pour visualiser les données de télémétrie envoyées par l’accélérateur de solution de simulation d’appareil](./iot-accelerators-device-simulation-time-series-insights.md).

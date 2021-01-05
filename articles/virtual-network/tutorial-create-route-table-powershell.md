@@ -4,25 +4,25 @@ description: Dans cet article, découvrez comment acheminer le trafic réseau av
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
-manager: twooley
+manager: mtillman
 editor: ''
 tags: azure-resource-manager
 Customer intent: I want to route traffic from one subnet, to a different subnet, through a network virtual appliance.
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: ''
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 03/13/2018
 ms.author: kumud
-ms.custom: ''
-ms.openlocfilehash: 986371e479f7718fff2e1699401987cb0ca8f623
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 41c0f9546b07158a2c7fb3344698598f0c38521f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73163992"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96492078"
 ---
 # <a name="route-network-traffic-with-a-route-table-using-powershell"></a>Acheminer le trafic réseau avec une table de routage à l’aide de PowerShell
 
@@ -121,7 +121,7 @@ Set-AzVirtualNetworkSubnetConfig `
   -VirtualNetwork $virtualNetwork `
   -Name 'Public' `
   -AddressPrefix 10.0.0.0/24 `
-  -RouteTable $routeTablePublic | `
+  -RouteTable $myRouteTablePublic | `
 Set-AzVirtualNetwork
 ```
 
@@ -240,7 +240,7 @@ mstsc /v:<publicIpAddress>
 
 Ouvrez le fichier .rdp téléchargé. Si vous y êtes invité, sélectionnez **Connexion**.
 
-Entrez le nom d’utilisateur et le mot de passe spécifiés lors de la création de la machine virtuelle (il se peut que vous deviez choisir **Plus de choix**, puis **Utiliser un compte différent** pour spécifier les informations d’identification que vous avez entrées lors de la création de la machine virtuelle), puis sélectionnez **OK**. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Sélectionnez**Oui** pour poursuivre le processus de connexion.
+Entrez le nom d’utilisateur et le mot de passe spécifiés lors de la création de la machine virtuelle (il se peut que vous deviez choisir **Plus de choix**, puis **Utiliser un compte différent** pour spécifier les informations d’identification que vous avez entrées lors de la création de la machine virtuelle), puis sélectionnez **OK**. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Sélectionnez **Oui** pour poursuivre le processus de connexion.
 
 À une étape ultérieure, la commande `tracert.exe` est utilisée pour tester le routage. Tracert utilise le protocole ICMP (Internet Control Message Protocol), qui est refusé via le Pare-feu Windows. Autorisez le protocole ICMP dans le pare-feu Windows en entrant la commande suivante de PowerShell sur la machine virtuelle *myVmPrivate* :
 

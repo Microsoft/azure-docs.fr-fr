@@ -3,15 +3,15 @@ title: Contourner les paramètres du pare-feu de stockage
 description: Un paramètre de pare-feu réseau de compte de stockage peut entraîner un échec lors de la création d’une cible de stockage Blob Azure dans Azure HPC Cache. Cet article fournit une solution de contournement pour la limitation jusqu’à ce qu’un correctif logiciel soit en place.
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 11/7/2019
-ms.author: rohogue
-ms.openlocfilehash: 6643662d498db8cbcffcb120a9ceabc46cfc04cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: v-erkel
+ms.openlocfilehash: 6916c79e9110a88beff65d487fac72441382c2f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74174182"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87092368"
 ---
 # <a name="work-around-blob-storage-account-firewall-settings"></a>Contourner les paramètres de pare-feu de compte de stockage Blob
 

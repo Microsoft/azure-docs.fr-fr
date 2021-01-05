@@ -2,26 +2,21 @@
 title: 'Tutoriel : Configurer Zendesk pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes d’utilisateur sur Zendesk.
 services: active-directory
-documentationcenter: ''
 author: zhchia
 writer: zhchia
-manager: beatrizd-msft
-ms.assetid: 01d5e4d5-d856-42c4-a504-96fa554baf66
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/06/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: a480119ee88521b920be88669f6d80e3754d24d3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 620dd8fd586352ebeaf097a8f870a606f8e06c01
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77062740"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94359712"
 ---
 # <a name="tutorial-configure-zendesk-for-automatic-user-provisioning"></a>Tutoriel : Configurer Zendesk pour le provisionnement automatique d’utilisateurs
 
@@ -48,7 +43,7 @@ Pour ajouter Zendesk à partir de la Place de marché, procédez comme suit.
 
     ![Icône Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -56,7 +51,7 @@ Pour ajouter Zendesk à partir de la Place de marché, procédez comme suit.
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **Zendesk**, puis, dans le panneau des résultats, sélectionnez **Zendesk**. Pour ajouter l’application, sélectionnez **Ajouter**.
+4. Dans la zone de recherche, entrez **Zendesk** , puis, dans le panneau des résultats, sélectionnez **Zendesk**. Pour ajouter l’application, sélectionnez **Ajouter**.
 
     ![Zendesk dans la liste des résultats](common/search-new-app.png)
 
@@ -99,13 +94,13 @@ Cette section vous guide dans la procédure de configuration du service d’appr
 
     ![Mode d’approvisionnement de Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk1.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez le nom d’utilisateur de l’administrateur, le jeton secret et le domaine de votre compte Zendesk. Voici des exemples de valeurs :
+5. Dans la section **Informations d’identification de l’administrateur** , entrez le nom d’utilisateur de l’administrateur, le jeton secret et le domaine de votre compte Zendesk. Voici des exemples de valeurs :
 
-   * Dans la zone **Nom d’utilisateur de l’administrateur**, entrez le nom d’utilisateur du compte administrateur sur votre locataire Zendesk. par exemple admin@contoso.com.
+   * Dans la zone **Nom d’utilisateur de l’administrateur** , entrez le nom d’utilisateur du compte administrateur sur votre locataire Zendesk. par exemple admin@contoso.com.
 
-   * Dans la zone **Jeton secret**, indiquez le jeton secret comme décrit à l’étape 6.
+   * Dans la zone **Jeton secret** , indiquez le jeton secret comme décrit à l’étape 6.
 
-   * Dans la zone **Domaine**, indiquez le sous-domaine de votre locataire Zendesk. Par exemple, pour un compte avec l’URL de locataire `https://my-tenant.zendesk.com`, votre sous-domaine est **my-tenant**.
+   * Dans la zone **Domaine** , indiquez le sous-domaine de votre locataire Zendesk. Par exemple, pour un compte avec l’URL de locataire `https://my-tenant.zendesk.com`, votre sous-domaine est **my-tenant**.
 
 6. Le jeton secret pour votre compte Zendesk se trouve dans **Admin** > **API** > **Paramètres**. Assurez-vous que **Jeton d’accès** est défini sur **Activé**.
 
@@ -117,25 +112,25 @@ Cette section vous guide dans la procédure de configuration du service d’appr
 
     ![Tester la connexion Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk19.png)
 
-8. Dans la zone **E-mail de notification**, entrez l’adresse e-mail de la personne ou du groupe devant recevoir les notifications d’erreur d’approvisionnement. Cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+8. Dans la zone **E-mail de notification** , entrez l’adresse e-mail de la personne ou du groupe devant recevoir les notifications d’erreur d’approvisionnement. Cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk9.png)
 
 9. Sélectionnez **Enregistrer**.
 
-10. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Zendesk**.
+10. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Zendesk**.
 
     ![Synchronisation des utilisateurs de Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk10.png)
 
-11. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et ZenDesk. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Zendesk pour les opérations de mise à jour. Pour enregistrer les modifications, sélectionnez **Enregistrer**.
+11. Dans la section **Mappages des attributs** , passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et ZenDesk. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Zendesk pour les opérations de mise à jour. Pour enregistrer les modifications, sélectionnez **Enregistrer**.
 
     ![Zendesk : mise en correspondance des attributs utilisateur](./media/zendesk-provisioning-tutorial/ZenDesk11.png)
 
-12. Dans la section **Mappages**, sélectionnez **Synchroniser les groupes Azure Active Directory avec Zendesk**.
+12. Dans la section **Mappages** , sélectionnez **Synchroniser les groupes Azure Active Directory avec Zendesk**.
 
     ![Synchronisation des groupes Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk12.png)
 
-13. Dans la section **Mappages des attributs**, passez en revue les attributs de groupe qui sont synchronisés entre Azure AD et Zendesk. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les groupes dans Zendesk pour les opérations de mise à jour. Pour enregistrer les modifications, sélectionnez **Enregistrer**.
+13. Dans la section **Mappages des attributs** , passez en revue les attributs de groupe qui sont synchronisés entre Azure AD et Zendesk. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les groupes dans Zendesk pour les opérations de mise à jour. Pour enregistrer les modifications, sélectionnez **Enregistrer**.
 
     ![Zendesk : mise en correspondance des attributs de groupe](./media/zendesk-provisioning-tutorial/ZenDesk13.png)
 
@@ -145,7 +140,7 @@ Cette section vous guide dans la procédure de configuration du service d’appr
 
     ![État d’approvisionnement de Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk14.png)
 
-16. Définissez les utilisateurs ou groupes que vous souhaitez approvisionner dans Zendesk. Dans la section **Paramètres**, sélectionnez les valeurs souhaitées sous **Étendue**.
+16. Définissez les utilisateurs ou groupes que vous souhaitez approvisionner dans Zendesk. Dans la section **Paramètres** , sélectionnez les valeurs souhaitées sous **Étendue**.
 
     ![Étendue de Zendesk](./media/zendesk-provisioning-tutorial/ZenDesk15.png)
 

@@ -6,19 +6,19 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: cf5b2b84142c9104ea5b3afa3ad179fd0ec07449
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e5d360933cbeb611046aede6164ec2e2fa497664
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80370134"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347793"
 ---
 # <a name="sentence-pairing-and-alignment-in-parallel-documents"></a>Appairage et alignement des phrases dans des documents parallèles
 
-Pendant l’apprentissage, les phrases présentes dans les documents parallèles sont appariées ou alignées. Custom Translator indique le nombre de phrases qu’il a pu apparier comme Phrases alignées dans chacun des jeux de données.
+Une fois les documents chargés, les phrases présentes dans les documents parallèles sont appairées ou alignées. Custom Translator indique le nombre de phrases qu’il a pu apparier comme Phrases alignées dans chacun des jeux de données.
 
 ## <a name="pairing-and-alignment-process"></a>Processus d’appairage et d’alignement
 
@@ -28,7 +28,7 @@ Custom Translator apprend la traduction de phrases à raison d’une phrase à l
 
 Si vous savez que vous avez des documents parallèles, vous pouvez remplacer l’alignement des phrases en fournissant des fichiers texte préalignés. Vous pouvez extraire toutes les phrases des deux documents dans un fichier texte, organiser une phrase par ligne et le charger avec une extension `.align`. L’extension `.align` signale à Custom Translator qu’il doit ignorer l’alignement des phrases.
 
-Pour de meilleurs résultats, assurez-vous d’avoir une phrase par ligne dans vos fichiers. Évitez d’avoir des caractères de saut de ligne au sein d’une phrase, car cela entraîne des alignements médiocres.
+Pour de meilleurs résultats, assurez-vous d’avoir une phrase par ligne dans vos fichiers.  Évitez d’avoir des caractères de saut de ligne au sein d’une phrase, car cela entraîne des alignements médiocres.
 
 ## <a name="suggested-minimum-number-of-sentences"></a>Nombre minimal de phrases suggéré
 
@@ -44,7 +44,7 @@ Pour qu’un entraînement réussisse, le tableau ci-dessous indique le nombre m
 > [!NOTE]
 > - L’entraînement ne commencera pas et échouera si le nombre minimal de 10 000 phrases d’entraînement n’est pas atteint. 
 > - Le réglage et le test sont facultatifs. Si vous ne les fournissez pas, le système supprime un pourcentage approprié de l’entraînement à utiliser pour la validation et le test. 
-> - Il est possible d’entraîner un modèle en n’utilisant que des données de dictionnaire. Reportez-vous à [Qu’est-ce qu’un dictionnaire ?](https://docs.microsoft.com/azure/cognitive-services/translator/custom-translator/what-is-dictionary).
+> - Il est possible d’entraîner un modèle en n’utilisant que des données de dictionnaire. Reportez-vous à [Qu’est-ce qu’un dictionnaire ?](./what-is-dictionary.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

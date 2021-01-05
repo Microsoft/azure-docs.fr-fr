@@ -1,18 +1,18 @@
 ---
-title: Automatiser des workflows de tâches dans Visual Studio
-description: Créer, planifier et exécuter des workflows récurrents pour l’intégration d’entreprise avec Azure Logic Apps et Visual Studio
+title: Automatiser des tâches et des workflows avec Visual Studio
+description: Créer, planifier et exécuter des workflows automatisés pour l’intégration d’entreprise avec Azure Logic Apps et Visual Studio
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: logicappspm
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 11/08/2019
-ms.openlocfilehash: 3311d1143c0eca0c2b57e89e98dc22ab14fd9308
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 10/27/2020
+ms.openlocfilehash: ff195f7a0071c06d5309f95f77e32ae75f584f82
+ms.sourcegitcommit: 003ac3b45abcdb05dc4406661aca067ece84389f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82147722"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96749162"
 ---
 # <a name="quickstart-create-automated-tasks-processes-and-workflows-with-azure-logic-apps---visual-studio"></a>Démarrage rapide : Créer des tâches, des processus et des workflows automatisés avec Azure Logic Apps - Visual Studio
 
@@ -20,15 +20,15 @@ Avec [Azure Logic Apps](../logic-apps/logic-apps-overview.md) et Visual Studio, 
 
 Si vous êtes débutant avec Azure Logic Apps et si vous souhaitez seulement connaître les concepts de base, essayez le [guide de démarrage rapide pour créer une application logique dans le portail Azure](../logic-apps/quickstart-create-first-logic-app-workflow.md). Le Concepteur d’application logique fonctionne de façon similaire dans le portail Azure et dans Visual Studio.
 
-Dans ce guide de démarrage rapide, vous créez la même application logique avec Visual Studio que dans le guide de démarrage rapide du portail Azure. Cette application logique supervise les flux RSS d’un site web et envoie un e-mail pour chaque nouvel élément dans le flux. Votre application logique terminée ressemble au workflow général suivant :
+Dans ce guide de démarrage rapide, vous créez la même application logique avec Visual Studio que dans le guide de démarrage rapide du portail Azure. Vous pouvez aussi apprendre à [créer un exemple d’application dans Visual Studio Code](quickstart-create-logic-apps-visual-studio-code.md), et à [créer et gérer des applications logiques à l’aide de l’interface de ligne de commande Azure (Azure CLI)](quickstart-logic-apps-azure-cli.md). Cette application logique supervise le flux RSS d’un site web et envoie un e-mail pour chaque nouvel élément publié dans ce flux. Votre application logique terminée ressemble au workflow général suivant :
 
-![Application logique terminée](./media/quickstart-create-logic-apps-with-visual-studio/high-level-workflow-overview.png)
+![Capture d’écran montrant le flux de travail de haut niveau d’une application logique terminée.](./media/quickstart-create-logic-apps-with-visual-studio/high-level-workflow-overview.png)
 
 <a name="prerequisites"></a>
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un abonnement Azure. Si vous n’avez pas encore d’abonnement, vous pouvez [vous inscrire pour obtenir un compte Azure gratuitement](https://azure.microsoft.com/free/).
+* Un compte et un abonnement Azure. Si vous n’avez pas encore d’abonnement, vous pouvez [vous inscrire pour obtenir un compte Azure gratuitement](https://azure.microsoft.com/free/). Si vous avez un abonnement Azure Government, suivez ces étapes supplémentaires pour [configurer Visual Studio pour Azure Government Cloud](#azure-government).
 
 * Téléchargez et installez ces outils, si vous ne les avez pas déjà :
 
@@ -37,7 +37,7 @@ Dans ce guide de démarrage rapide, vous créez la même application logique ave
     > [!IMPORTANT]
     > Quand vous installez Visual Studio 2019 ou 2017, veillez à sélectionner la charge de travail **Développement Azure**.
 
-  * [Kit de développement logiciel (SDK) Microsoft Azure pour .NET (version 2.9.1 ou ultérieure)](https://azure.microsoft.com/downloads/). En savoir plus sur [Azure SDK pour .NET](https://docs.microsoft.com/dotnet/azure/dotnet-tools?view=azure-dotnet).
+  * [Kit de développement logiciel (SDK) Microsoft Azure pour .NET (version 2.9.1 ou ultérieure)](https://azure.microsoft.com/downloads/). En savoir plus sur [Azure SDK pour .NET](/dotnet/azure/intro).
 
   * [Azure PowerShell](https://github.com/Azure/azure-powershell#installation)
 
@@ -49,16 +49,44 @@ Dans ce guide de démarrage rapide, vous créez la même application logique ave
 
     * [Visual Studio 2015](https://aka.ms/download-azure-logic-apps-tools-visual-studio-2015)
   
-    Vous pouvez télécharger et installer les outils Azure Logic Apps directement à partir de Visual Studio Marketplace ou en apprendre davantage sur [l’installation de cette extension dans Visual Studio](https://docs.microsoft.com/visualstudio/ide/finding-and-using-visual-studio-extensions). Veillez à redémarrer Visual Studio après l’installation.
+    Vous pouvez télécharger et installer les outils Azure Logic Apps directement à partir de Visual Studio Marketplace ou en apprendre davantage sur [l’installation de cette extension dans Visual Studio](/visualstudio/ide/finding-and-using-visual-studio-extensions). Veillez à redémarrer Visual Studio après l’installation.
 
 * Accès au web lors de l’utilisation du Concepteur d’application logique intégré
 
-  Le Concepteur a besoin d’une connexion Internet pour créer des ressources dans Azure et pour lire des propriétés et données à partir de connecteurs dans votre application logique. Par exemple, pour les connexions Dynamics CRM Online, le Concepteur recherche les propriétés par défaut et personnalisées dans votre instance CRM.
+  Le Concepteur a besoin d’une connexion Internet pour créer des ressources dans Azure et pour lire des propriétés et données à partir de connecteurs dans votre application logique.
 
-* Un compte de messagerie pris en charge par Logic Apps, par exemple Office 365 Outlook, Outlook.com ou Gmail. Pour les autres fournisseurs, consultez la [liste des connecteurs ici](https://docs.microsoft.com/connectors/). Office 365 Outlook est utilisé dans cet exemple. Si vous utilisez un autre fournisseur, les étapes générales sont identiques, mais votre interface utilisateur peut être légèrement différente.
+* Un compte de messagerie pris en charge par Logic Apps, par exemple Outlook pour Microsoft 365, Outlook.com ou Gmail. Pour les autres fournisseurs, consultez la [liste des connecteurs ici](/connectors/). Office 365 Outlook est utilisé dans cet exemple. Si vous utilisez un autre fournisseur, les étapes générales sont identiques, mais votre interface utilisateur peut être légèrement différente.
 
   > [!IMPORTANT]
-  > Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans les applications logiques. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur uniquement avec certains services approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification avec votre connecteur Gmail](https://docs.microsoft.com/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
+  > Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans Logic Apps. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur uniquement avec certains services approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification avec votre connecteur Gmail](/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
+
+<a name="azure-government"></a>
+
+## <a name="set-up-visual-studio-for-azure-government"></a>Configurer Visual Studio pour Azure Government
+
+### <a name="visual-studio-2017"></a>Visual Studio 2017
+
+Vous pouvez utiliser l’[extension Visual Studio du sélecteur d’environnement Azure](https://devblogs.microsoft.com/azuregov/introducing-the-azure-environment-selector-visual-studio-extension/) que vous pouvez télécharger et installer à partir du [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=SteveMichelotti.AzureEnvironmentSelector).
+
+### <a name="visual-studio-2019"></a>Visual Studio 2019
+
+Pour travailler avec des abonnements Azure Government dans Azure Logic Apps, vous devez [ajouter à Visual Studio un point de terminaison de découverte pour Azure Government Cloud](../azure-government/documentation-government-connect-vs.md). Toutefois, *avant de vous connecter à Visual Studio avec votre compte Azure Government*, vous devez renommer le fichier JSON généré après avoir ajouté le point de terminaison de découverte en procédant comme suit :
+
+1. Fermez Visual Studio.
+
+1. Recherchez le fichier JSON généré nommé `Azure U.S. Government-A3EC617673C6C70CC6B9472656832A26.Configuration` à cet emplacement :
+
+   `%localappdata%\.IdentityService\AadConfigurations`
+ 
+1. Renommez le fichier JSON en `AadProvider.Configuration.json`.
+
+1. Démarrez Visual Studio.
+
+1. Poursuivez avec les étapes pour vous connecter avec votre compte Azure Government.
+
+Pour annuler cette configuration, supprimez le fichier JSON à l’emplacement suivant, puis redémarrez Visual Studio :
+
+`%localappdata%\.IdentityService\AadConfigurations\AadProvider.Configuration.json`
 
 <a name="create-resource-group-project"></a>
 

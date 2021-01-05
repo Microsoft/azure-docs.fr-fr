@@ -9,13 +9,13 @@ services: iot-hub
 ms.devlang: java
 ms.topic: conceptual
 ms.date: 08/20/2019
-ms.custom: mqtt
-ms.openlocfilehash: 75d89b54bae6eb8166d44e08ea020a0da67ad20c
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: mqtt, devx-track-java
+ms.openlocfilehash: 28b82c87442257124f286a5e7c949afe7f001019
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732553"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92146922"
 ---
 # <a name="get-started-with-device-management-java"></a>Prise en main de la gestion d’appareils (Java)
 
@@ -54,7 +54,7 @@ Ce didacticiel vous explique les procédures suivantes :
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Java SE Development Kit 8](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
+* [Java SE Development Kit 8](/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
 
 * [Maven 3](https://maven.apache.org/download.cgi)
 

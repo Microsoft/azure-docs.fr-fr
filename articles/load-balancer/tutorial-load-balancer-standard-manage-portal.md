@@ -16,10 +16,10 @@ ms.date: 03/11/2019
 ms.author: allensu
 ms.custom: seodec18
 ms.openlocfilehash: 8961a50490bdbf8b456e87e1c00577c2c8afd050
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80240364"
 ---
 # <a name="tutorial-load-balance-internet-traffic-to-vms-using-the-azure-portal"></a>Tutoriel : Équilibrer la charge du trafic Internet sur les machines virtuelles avec le portail Azure
@@ -122,12 +122,12 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | myResourceGroupSLB (sélectionnez un groupe de ressources existant) |
-| **\<nom_réseau_virtuel>** | myVNet          |
-| **\<nom_région>**          | Europe Ouest      |
-| **\<espace_d’adressage_IPv4>**   | 10.1.0.0/16          |
-| **\<nom_sous-réseau>**          | mySubnet        |
-| **\<plage_adresses_sous-réseau>** | 10.1.0.0/24          |
+| **\<resource-group-name>**  | myResourceGroupSLB (sélectionnez un groupe de ressources existant) |
+| **\<virtual-network-name>** | myVNet          |
+| **\<region-name>**          | Europe Ouest      |
+| **\<IPv4-address-space>**   | 10.1.0.0/16          |
+| **\<subnet-name>**          | mySubnet        |
+| **\<subnet-address-range>** | 10.1.0.0/24          |
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 
@@ -149,7 +149,7 @@ Le service Standard Load Balancer ne prend en charge que des machines virtuelles
    - Vérifiez que les éléments suivants sont sélectionnés :
        - **Réseau virtuel** : **MyVNet**
        - **Sous-réseau** : **MyBackendSubnet**
-       - **Adresse IP publique** > sélectionnez **Créer**, puis, dans la fenêtre **Créer une adresse IP publique**, pour **Référence (SKU)** , sélectionnez **Standard** et, pour **Zone de disponibilité**, sélectionnez **Redondant interzone**.
+       - **Adresse IP publique** > sélectionnez **Créer**, puis, dans la fenêtre **Créer une adresse IP publique**, pour **Référence (SKU)**, sélectionnez **Standard** et, pour **Zone de disponibilité**, sélectionnez **Redondant interzone**.
       
    - Pour créer un groupe de sécurité réseau (NSG, un type de pare-feu), sous **Groupe de sécurité réseau**, sélectionnez **Avancé**. 
        1. Dans le champ **Configurer le groupe de sécurité réseau**, sélectionnez **Créer**. 
@@ -162,7 +162,7 @@ Le service Standard Load Balancer ne prend en charge que des machines virtuelles
 1. Sélectionnez l’onglet **Gestion** ou sélectionnez **Suivant** > **Gestion**. Sous **Supervision**, définissez **Diagnostics de démarrage** sur **Désactivé**. 
 1. Sélectionnez **Revoir + créer**.   
 1. Passez en revue les paramètres, puis sélectionnez **Créer**.
-1. Suivez les étapes pour créer deux machines virtuelles supplémentaires, *myVM2* et *myVM3*, avec une adresse IP publique de référence SKU standard respectivement dans **Zone de disponibilité** **2** et **3**, avec tous les autres paramètres identiques à ceux de *myVM1*.  
+1. Suivez les étapes pour créer deux machines virtuelles supplémentaires, *myVM2* et *myVM3*, avec une adresse IP publique de référence (SKU) standard dans **Zone de disponibilité** **2** et **3**, avec tous les autres paramètres identiques à ceux de *myVM1*.  
 
 ### <a name="create-network-security-group-rule"></a>Créer une règle de groupe de sécurité réseau
 

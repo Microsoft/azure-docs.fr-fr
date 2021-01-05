@@ -1,22 +1,21 @@
 ---
-title: Présentation d’Azure Key Vault - Azure Key Vault | Microsoft Docs
-description: Azure Key Vault est un service cloud qui fonctionne comme un magasin des secrets sécurisé.
+title: Vue d’ensemble d’Azure Key Vault - Azure Key Vault | Microsoft Docs
+description: Azure Key Vault est un magasin de secrets sécurisé, qui fournit des solutions de gestion des secrets, des clés et des certificats et ce, en s’appuyant sur les modules de sécurité matériels.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: overview
 ms.custom: mvc
-ms.date: 01/07/2019
+ms.date: 10/01/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 9334cd0fa54212eac937742215f9c2e704a8bd9c
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 5025c4ad81433b6eb18f5beded860625791ffce5
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81688035"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94445096"
 ---
 # <a name="about-azure-key-vault"></a>À propos d’Azure Key Vault
 
@@ -24,8 +23,9 @@ Azure Key Vault aide à résoudre les problèmes suivants :
 
 - **Gestion des secrets** : Azure Key Vault peut être utilisé pour stocker en toute sécurité les jetons, mots de passe, certificats, clés API et autres secrets, et pour en contrôler étroitement l’accès.
 - **Gestion des clés** : Azure Key Vault peut également servir de solution de gestion de clés. Azure Key Vault simplifie la création et le contrôle des clés de chiffrement utilisées pour chiffrer vos données. 
-- **Gestion des certificats** : Azure Key Vault est également un service qui vous permet de provisionner, gérer et déployer facilement des certificats SSL/TLS publics et privés pour une utilisation avec Azure et vos ressources connectées internes. 
-- **Stockage de secrets protégés par des modules de sécurité matériels** : les secrets et les clés peuvent être protégés soit par logiciel, soit par des modules de sécurité matériels validés FIPS 140-2 de niveau 2.
+- **Gestion des certificats** : Azure Key Vault est également un service qui vous permet de provisionner, gérer et déployer facilement des certificats SSL/TLS publics et privés pour une utilisation avec Azure et vos ressources connectées internes.
+
+Azure Key Vault a deux niveaux de service : Standard, qui chiffre avec une clé logicielle, et Premium, qui inclut des clés protégées par HSM. Pour obtenir une comparaison entre les niveaux Standard et Premium, consultez la page de [tarification d’Azure Key Vault](https://azure.microsoft.com/pricing/details/key-vault/).
 
 ## <a name="why-use-azure-key-vault"></a>Pourquoi utiliser Azure Key Vault ?
 
@@ -37,13 +37,11 @@ Vos applications peuvent accéder en toute sécurité aux informations nécessai
 
 ### <a name="securely-store-secrets-and-keys"></a>Stocker en toute sécurité les secrets et clés
 
-Les secrets et les clés sont protégés par Azure, à l’aide d’algorithmes standards, de longueurs de clé et de modules de sécurité matériel (HSM). Les HSM utilisés sont garantis conformes aux normes FIPS (Federal Information Processing Standard) 140-2 de niveau 2.
-
 L’accès à un coffre de clés par un appelant (utilisateur ou application) requiert une authentification et une autorisation adéquates. L’authentification établit l’identité de l’appelant, tandis que l’autorisation détermine les opérations que ce dernier est autorisé à effectuer.
 
-L’authentification s’effectue par le biais d’Azure Active Directory. L’autorisation peut être assurée par l’intermédiaire du mécanisme de contrôle d’accès en fonction du rôle (RBQC) ou d’une stratégie d’accès à Key Vault. RBAC est utilisé dans le cadre de la gestion des coffres, et la stratégie d’accès au coffre de clés est appliquée lors d’une tentative d’accès aux données stockées dans un coffre.
+L’authentification s’effectue par le biais d’Azure Active Directory. L’autorisation peut être assurée par l’intermédiaire du mécanisme de contrôle d’accès en fonction du rôle Azure (Azure RBAC) ou d’une stratégie d’accès à Key Vault. Azure RBAC est utilisé dans le cadre de la gestion des coffres, et la stratégie d’accès au coffre de clés est appliquée lors d’une tentative d’accès aux données stockées dans un coffre.
 
-Azure Key Vault peut être protégé par un logiciel ou par un HSM matériel. Dans les situations qui nécessitent un surcroît de vigilance, vous pouvez importer ou générer des clés dans des HSM dont les clés ne franchissent jamais les limites. Microsoft utilise les modules de sécurité matériels nCipher. Pour déplacer une clé de votre HSM vers Azure Key Vault, vous pouvez utiliser les outils nCipher.
+Les coffres de clés Azure Key Vault peuvent être protégés par logiciel ou, avec le niveau Premium, protégés par des modules de sécurité matériels (HSM, Hardware Security Module). Les clés, les secrets et les certificats protégés par logiciel sont gardés par Azure, en utilisant des algorithmes et des longueurs de clé standard.  Dans les situations qui nécessitent un surcroît de sécurité, vous pouvez importer ou générer des clés dans des HSM dont les clés ne quittent jamais la limite du HSM. Azure Key Vault utilise des HSM nCipher, qui sont certifiés FIPS (Federal Information Processing Standards) 140-2 de niveau 2. Pour déplacer une clé de votre HSM vers Azure Key Vault, vous pouvez utiliser les outils nCipher.
 
 Enfin, Azure Key Vault a été conçu de façon que Microsoft ne puisse pas visualiser ni extraire vos données.
 
@@ -73,7 +71,7 @@ En outre, les coffres de clé Azure vous permettent de séparer les secrets d’
 
 En tant que banque d’informations sécurisée dans Azure, Key Vault a été utilisé pour simplifier les scénarios, tels que :
 -  [Azure Disk Encryption](../../security/fundamentals/encryption-overview.md)
--  La fonctionnalité [Always encrypted]( https://docs.microsoft.com/sql/relational-databases/security/encryption/always-encrypted-database-engine) dans SQL Server et Azure SQL Database
+-  Les fonctionnalités [Always encrypted]( https://docs.microsoft.com/sql/relational-databases/security/encryption/always-encrypted-database-engine) et [Transparent Data Encryption]( https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver15) dans SQL Server et Azure SQL Database
 - [Azure App Service]( https://docs.microsoft.com/azure/app-service/configure-ssl-certificate). 
 
 La solution Key Vault proprement dite peut s’intégrer aux comptes de stockage, ainsi qu’aux services Event Hubs et Log Analytics.

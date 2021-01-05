@@ -1,19 +1,19 @@
 ---
-title: Ajouter un calque de mosaïques à des cartes Android | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à afficher un calque de mosaïques sur une carte à l’aide de l’Android SDK Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
+title: Ajouter un calque de mosaïques à une carte à l’aide de l’Android SDK Azure Maps
+description: Découvrez comment ajouter une couche de mosaïques à une carte. Consultez un exemple qui utilise le SDK Microsoft Azure Maps Android pour ajouter un calque de radar météo à une carte.
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 04/26/2019
-ms.topic: conceptual
+ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: f98598bd1307bb1b46ff23814780c5f809b9ac90
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 22618a28f1a87e68c19467aedf639e96ec2fb91e
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335560"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532674"
 ---
 # <a name="add-a-tile-layer-to-a-map-using-the-azure-maps-android-sdk"></a>Ajouter un calque de mosaïques à une carte à l’aide de l’Android SDK Azure Maps
 
@@ -39,7 +39,7 @@ L’URL de la mosaïque passée à une couche de mosaïques doit être l’URL H
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-Pour suivre la procédure décrite dans cet article, vous devez installer [Android SDK Azure Maps](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) afin de charger une carte.
+Pour suivre la procédure décrite dans cet article, vous devez installer [Android SDK Azure Maps](./how-to-use-android-map-control-library.md) afin de charger une carte.
 
 
 ## <a name="add-a-tile-layer-to-the-map"></a>Ajouter un calque de mosaïques à une carte
@@ -179,4 +179,4 @@ Vous pouvez ajouter un calque de mosaïques à la carte en suivant les étapes c
 Pour plus d’informations sur les différentes manières de définir des styles de carte, consultez l'article
 
 > [!div class="nextstepaction"]
-> [Change map styles in Android maps](https://docs.microsoft.com/azure/azure-maps/set-android-map-styles) (Modifier les styles de carte dans les cartes Android)
+> [Change map styles in Android maps](./set-android-map-styles.md) (Modifier les styles de carte dans les cartes Android)

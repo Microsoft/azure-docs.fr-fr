@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 11/02/2017
 ms.author: tomfitz
 ms.openlocfilehash: 05302d92f2304be35a7b88fac6fabfc17b13c63e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75649585"
 ---
 # <a name="publish-a-service-catalog-application-through-azure-portal"></a>Publier une application du catalogue de services en utilisant le portail Azure

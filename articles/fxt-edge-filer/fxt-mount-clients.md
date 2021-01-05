@@ -6,12 +6,12 @@ ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 06/20/2019
 ms.author: rohogue
-ms.openlocfilehash: 43223db298e4ad170ea6d0687a342b3aee35500e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: fa1f9da2c60aaf4c552916d16c266e984bf08892
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80130770"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92340510"
 ---
 # <a name="tutorial-mount-the-cluster"></a>Tutoriel : Monter le cluster
 
@@ -20,6 +20,7 @@ Ce didacticiel vous apprend à monter des clients NFS pour le cluster Azure FXT 
 Ce didacticiel présente :
 
 > [!div class="checklist"]
+>
 > * Les stratégies d’équilibrage de charge pour les clients de toute la plage d’adresses IP exposées aux clients
 > * La méthode de construction d’un chemin de montage à partir d’une adresse IP exposée aux clients et d’une jonction d’espace de noms
 > * Les arguments à utiliser dans une commande mount
@@ -93,14 +94,14 @@ Pour garantir un montage sans interruption du client, passez les paramètres et 
 
 ``mount -o hard,nointr,proto=tcp,mountproto=tcp,retry=30 ${VSERVER_IP_ADDRESS}:/${NAMESPACE_PATH} ${LOCAL_FILESYSTEM_MOUNT_POINT}``
 
-| Paramètres obligatoires | |
+| Paramètres obligatoires | Description |
 --- | ---
 ``hard`` | Les montages conditionnels sur le cluster Azure FXT Edge Filer sont associés à des échecs d’application et à des pertes de données possibles.
 ``proto=netid`` | Cette option prend en charge la gestion appropriée des erreurs réseau NFS.
 ``mountproto=netid`` | Cette option prend en charge la gestion appropriée des erreurs réseau pour les opérations de montage.
 ``retry=n`` | Définissez ``retry=30`` pour éviter les échecs de montage temporaires. (Une valeur différente est recommandée dans les montages de premier plan.)
 
-| Paramètres favoris  | |
+| Paramètres favoris  | Description |
 --- | ---
 ``nointr``            | Si vos clients utilisent des noyaux de systèmes d’exploitation plus anciens (datant d’avant avril 2008) qui prennent en charge cette option, utilisez-la. Notez que l’option « intr » est la valeur par défaut.
 
@@ -108,6 +109,6 @@ Pour garantir un montage sans interruption du client, passez les paramètres et 
 
 Une fois que vous avez monté des clients, vous pouvez tester votre flux de travail et apprendre à utiliser votre cluster.
 
-Si vous avez besoin de déplacer des données vers un core filer cloud, tirez parti de la structure du cache en utilisant une ingestion des données parallèle. Certaines stratégies sont décrites dans l’article [Déplacement des données vers un cluster vFXT](https://docs.microsoft.com/azure/avere-vfxt/avere-vfxt-data-ingest). (Avere vFXT pour Azure est un produit basé sur le cloud qui utilise une technologie de mise en cache très similaire à celle d’Azure FXT Edge Filer.)
+Si vous avez besoin de déplacer des données vers un core filer cloud, tirez parti de la structure du cache en utilisant une ingestion des données parallèle. Certaines stratégies sont décrites dans l’article [Déplacement des données vers un cluster vFXT](../avere-vfxt/avere-vfxt-data-ingest.md). (Avere vFXT pour Azure est un produit basé sur le cloud qui utilise une technologie de mise en cache très similaire à celle d’Azure FXT Edge Filer.)
 
 Si vous avez besoin d’aide pour résoudre des problèmes de matériel, veuillez consulter la section [Superviser l’état du matériel Azure FXT Edge Filer](fxt-monitor.md).

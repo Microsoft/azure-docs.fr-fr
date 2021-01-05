@@ -3,30 +3,30 @@ title: Tutoriel`:` Utiliser une identité managée pour accéder à Stockage Azu
 description: Tutoriel montrant comment utiliser une identité managée affectée par le système de machine virtuelle Windows pour accéder au Stockage Azure en utilisant des informations d’identification SAP au lieu d’une clé d’accès au compte de stockage.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: daveba
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 01/24/2019
-ms.author: markvi
+ms.date: 12/15/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c344c25a696500182030ff849a001ad586c92032
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba8c88f040bbd527b0d9f219a81fa090f53c84ed
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74232157"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590543"
 ---
 # <a name="tutorial-use-a-windows-vm-system-assigned-managed-identity-to-access-azure-storage-via-a-sas-credential"></a>Tutoriel : Utiliser une identité managée affectée par le système de machine virtuelle Windows pour accéder au Stockage Azure via des informations d’identification SAP
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
-Ce tutoriel vous indique comment utiliser une identité affectée par le système pour une machine virtuelle Windows afin d’obtenir des informations d’identification SAP (signature d’accès partagé) de stockage. Plus précisément, des [informations d’identification SAP de service](/azure/storage/common/storage-dotnet-shared-access-signature-part-1?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#types-of-shared-access-signatures). 
+Ce tutoriel vous indique comment utiliser une identité affectée par le système pour une machine virtuelle Windows afin d’obtenir des informations d’identification SAP (signature d’accès partagé) de stockage. Plus précisément, des [informations d’identification SAP de service](../../storage/common/storage-sas-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#types-of-shared-access-signatures). 
 
 Une SAP de service offre la possibilité d’accorder un accès limité à des objets dans un compte de stockage, pendant une durée limitée et pour un service spécifique (en l’occurrence, le service BLOB), sans exposer de clé d’accès de compte. Vous pouvez utiliser des informations d’identification SAP comme d’habitude lors de l’exécution d’opérations de stockage, par exemple, lors de l’utilisation du SDK Stockage Azure. Ce didacticiel montre le chargement et le téléchargement d’un objet blob à l’aide de Stockage Azure PowerShell. Vous apprendrez à :
 
@@ -37,7 +37,11 @@ Une SAP de service offre la possibilité d’accorder un accès limité à des o
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-[!INCLUDE [msi-tut-prereqs](../../../includes/active-directory-msi-tut-prereqs.md)]
+- Compréhension des identités managées. Si vous n’êtes pas familiarisé de la fonctionnalité identités managées pour ressources Azure, consultez cette [Vue d’ensemble](overview.md). 
+- Un compte Azure. [Inscrivez-vous pour obtenir un compte gratuit](https://azure.microsoft.com/free/).
+- Des autorisations « Propriétaire » avec l’étendue appropriée (votre abonnement ou groupe de ressources) pour effectuer les étapes de création de ressource et de gestion de rôles nécessaires. Si vous avez besoin d’aide concernant l’attribution de rôle, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources d’un abonnement Azure](../../role-based-access-control/role-assignments-portal.md).
+- Vous avez également besoin d’une machine virtuelle Windows sur laquelle les identités managées attribuées par le système sont activées.
+  - Si vous devez créer une machine virtuelle pour ce tutoriel, vous pouvez suivre les instructions de l’article intitulé [Créer une machine virtuelle avec une identité affectée par le système activée](./qs-configure-portal-windows-vm.md#system-assigned-managed-identity)
 
 [!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
 
@@ -79,16 +83,16 @@ Le stockage Azure ne prend pas en charge l’authentification Azure AD en mode n
 
     ![Texte de remplacement d’image](./media/msi-tutorial-linux-vm-access-storage/msi-storage-role-sas.png)
 
-## <a name="get-an-access-token-using-the-vms-identity-and-use-it-to-call-azure-resource-manager"></a>Obtenir un jeton d’accès à l’aide de l’identité de la machine virtuelle et l’utiliser pour appeler Azure Resource Manager 
+## <a name="get-an-access-token-using-the-vms-identity-and-use-it-to-call-azure-resource-manager"></a>Obtenir un jeton d’accès à l’aide de l’identité de la machine virtuelle et l’utiliser pour appeler Azure Resource Manager 
 
-Pour la suite de ce didacticiel, nous allons utiliser la machine virtuelle que nous avons créée précédemment.
+Pour la suite de ce tutoriel, nous allons utiliser votre machine virtuelle.
 
-Dans cette partie, vous devez utiliser les applets de commande PowerShell d’Azure Resource Manager.  Si vous ne l’avez pas installé, [téléchargez la dernière version](https://docs.microsoft.com/powershell/azure/overview) avant de continuer.
+Dans cette partie, vous devez utiliser les applets de commande PowerShell d’Azure Resource Manager.  Si vous ne l’avez pas installé, [téléchargez la dernière version](/powershell/azure/) avant de continuer.
 
 1. Dans le portail Azure, accédez à **Machines virtuelles**, accédez à votre machine virtuelle Windows, puis, en haut de la page **Vue d’ensemble**, cliquez sur **Se connecter**.
 2. Entrez le **Nom d’utilisateur** et le **Mot de passe** que vous avez ajoutés lorsque vous avez créé la machine virtuelle Windows. 
-3. Maintenant que vous avez créé une **Connexion au Bureau à distance** avec la machine virtuelle, ouvrez PowerShell dans la session à distance. 
-4. À l’aide d’Invoke-WebRequest de Powershell, envoyez une requête à l’identité managée locale pour le point de terminaison de ressources Azure afin d’obtenir un jeton d’accès pour Azure Resource Manager.
+3. Maintenant que vous avez créé une **Connexion Bureau à distance** avec la machine virtuelle.
+4. Ouvrez PowerShell dans la session à distance et utilisez Invoke-WebRequest pour obtenir un jeton Azure Resource Manager à partir de l’identité managée locale pour le point de terminaison des ressources Azure.
 
     ```powershell
        $response = Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -Method GET -Headers @{Metadata="true"}
@@ -205,6 +209,4 @@ Name              : testblob
 Dans ce tutoriel, vous avez appris à utiliser une identité managée affectée par le système de machine virtuelle Windows pour accéder au Stockage Azure à l’aide d’informations d’identification SAP.  Pour en savoir plus sur le Stockage Azure SAP, consultez :
 
 > [!div class="nextstepaction"]
->[Utilisation des signatures d’accès partagé (SAP)](/azure/storage/common/storage-dotnet-shared-access-signature-part-1)
-
-
+>[Utilisation des signatures d’accès partagé (SAP)](../../storage/common/storage-sas-overview.md)

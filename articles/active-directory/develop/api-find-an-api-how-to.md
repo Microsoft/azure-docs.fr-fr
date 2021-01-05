@@ -10,12 +10,12 @@ ms.workload: identity
 ms.topic: conceptual
 ms.date: 06/28/2019
 ms.author: ryanwi
-ms.openlocfilehash: cd3b21050c6a442284647212fdf7c5707943ffc1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8c3d79211ce594ec4c175aa6f6b5f8df3a7c4ba8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885614"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88115541"
 ---
 # <a name="how-to-find-a-specific-api-needed-for-a-custom-developed-application"></a>Comment rechercher une API spécifique requise pour une application personnalisée
 
@@ -31,4 +31,4 @@ Lorsque vous ajoutez des autorisations à l’inscription de votre application, 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Connaître le manifeste d’application Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-application-manifest)
+- [Connaître le manifeste d’application Azure Active Directory](./reference-app-manifest.md)

@@ -4,14 +4,14 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 07/30/2019
 ms.author: erhopf
-ms.openlocfilehash: ffefde7d692950fc272ab2502ad8afe254bf48f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c9d73804484ea7cc72e0198b857099fd8fba46d5
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73590706"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95562012"
 ---
-Les limites suivantes concernent le nombre de ressources Cognitive Services par abonnement Azure. Chaque service Cognitive Services peut présenter des limitations supplémentaires. Pour en savoir plus, consultez la section relative à [Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/).
+Les limites suivantes concernent le nombre de ressources Cognitive Services par abonnement Azure. Chaque service Cognitive Services peut présenter des limitations supplémentaires. Pour en savoir plus, consultez la section relative à [Azure Cognitive Services](../articles/cognitive-services/index.yml).
 
 | Type | Limite | Exemple |
 |------|-------|---------|

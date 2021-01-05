@@ -1,29 +1,31 @@
 ---
-title: Démarrage rapide Azure - Exécution d’un travail Batch - .NET
-description: Exécutez rapidement un exemple de travail Azure Batch et ses tâches à partir d’une application C# en utilisant la bibliothèque cliente .NET de Batch.
+title: 'Démarrage rapide : exécution de votre premier travail Microsoft Azure Batch avec l’API .NET'
+description: Dans ce guide de démarrage rapide, vous exécutez rapidement un exemple de travail Azure Batch et ses tâches à partir d’une application C# en utilisant la bibliothèque cliente .NET de Batch.
 ms.topic: quickstart
-ms.date: 11/29/2018
-ms.custom: mvc
-ms.openlocfilehash: 1163d63f8cbd6afedfb6e5323fa469059fa8021c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 08/17/2020
+ms.custom: mvc, devx-track-csharp
+ms.openlocfilehash: 9087261865b07d32afab65012e04ea478cb60611
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82117214"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88921645"
 ---
-# <a name="quickstart-run-your-first-azure-batch-job-with-the-net-api"></a>Démarrage rapide : exécution de votre premier travail Microsoft Azure Batch avec l’API .NET
+# <a name="quickstart-run-your-first-azure-batch-job-with-the-net-api"></a>Démarrage rapide : exécution de votre premier travail Microsoft Azure Batch avec l’API .NET
 
-Ce démarrage rapide exécute un travail Azure Batch à partir d’une application C# basée sur l’API .NET Azure Batch. L’application télécharge plusieurs fichiers de données d’entrée vers Stockage Azure, puis crée un *pool* de nœuds de calcul Azure Batch (machines virtuelles). Ensuite, elle crée un exemple de *travail* qui exécute des *tâches* pour traiter chaque fichier d’entrée sur le pool à l’aide d’une commande de base. À l’issue de ce démarrage rapide, vous maîtriserez les concepts clés du service Batch et serez prêt à essayer Azure Batch avec des charges de travail plus réalistes à plus grande échelle.
+Démarrez avec Azure Batch en exécutant un travail d’une application C# basée sur l’API .NET Azure Batch. L’application télécharge plusieurs fichiers de données d’entrée vers Stockage Azure, puis crée un pool de nœuds de calcul Azure Batch (machines virtuelles). Ensuite, elle crée un exemple de travail qui exécute des tâches pour traiter chaque fichier d’entrée sur le pool à l’aide d’une commande de base.
 
-![Flux de travail d’application du démarrage rapide](./media/quick-run-dotnet/sampleapp.png)
+À l’issue de ce démarrage rapide, vous maîtriserez les concepts clés du service Batch et serez prêt à essayer Azure Batch avec des charges de travail plus réalistes à plus grande échelle.
 
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+![Diagramme montrant une vue d’ensemble du flux de travail de l’application Azure Batch.](./media/quick-run-dotnet/sampleapp.png)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Visual Studio 2017 ou version ultérieure](https://www.visualstudio.com/vs), ou [.NET Core 2.1](https://www.microsoft.com/net/download/dotnet-core/2.1) pour Linux, macOS ou Windows. 
+- Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
-* Un compte Batch et un compte Stockage Azure lié. Pour créer ces comptes, consultez les démarrages rapides Azure Batch à l’aide du [portail Azure](quick-create-portal.md) ou de l’[interface de ligne de commande Azure](quick-create-cli.md). 
+- Un compte Batch et un compte Stockage Azure lié. Pour créer ces comptes, consultez les démarrages rapides Azure Batch à l’aide du [portail Azure](quick-create-portal.md) ou de l’[interface de ligne de commande Azure](quick-create-cli.md).
+
+- [Visual Studio 2017 ou version ultérieure](https://www.visualstudio.com/vs), ou [.NET Core 2.1](https://www.microsoft.com/net/download/dotnet-core/2.1) pour Linux, macOS ou Windows. 
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -60,11 +62,11 @@ private const string StorageAccountKey  = "xxxxxxxxxxxxxxxxy4/xxxxxxxxxxxxxxxxfw
 
 Pour afficher le flux de travail Batch en action, générer et exécuter l’application dans Visual Studio ou sur la ligne de commande avec les commandes `dotnet build` et `dotnet run`. Après avoir exécuté l’application, passez en revue le code pour savoir ce que fait chaque partie de l’application. Par exemple, dans Visual Studio :
 
-* Cliquez avec le bouton droit dans l’Explorateur de solutions, puis cliquez sur **Générer la solution**. 
+- Cliquez avec le bouton droit dans l’Explorateur de solutions, puis cliquez sur **Générer la solution**. 
 
-* Si vous y êtes invité, confirmez la restauration de tous les packages NuGet. Si vous devez télécharger des packages manquants, vérifiez que le [Gestionnaire de Package NuGet](https://docs.nuget.org/consume/installing-nuget) est installé.
+- Si vous y êtes invité, confirmez la restauration de tous les packages NuGet. Si vous devez télécharger des packages manquants, vérifiez que le [Gestionnaire de Package NuGet](https://docs.nuget.org/consume/installing-nuget) est installé.
 
-Puis exécutez-le. Lorsque vous exécutez l’exemple d’application, la sortie de la console est identique à ce qui suit. Pendant l’exécution, l’étape `Monitoring all tasks for 'Completed' state, timeout in 00:30:00...` fait l’objet d’une pause correspondant au démarrage des nœuds de calcul du pool. Les tâches sont mises en file d’attente pour s’exécuter dès que le premier nœud de calcul est en cours d’exécution. Accédez à votre compte Batch dans le [portail Azure](https://portal.azure.com) pour surveiller le pool, les nœuds de calcul, les travaux et les tâches.
+Lorsque vous exécutez l’exemple d’application, la sortie de la console est identique à ce qui suit. Pendant l’exécution, l’étape `Monitoring all tasks for 'Completed' state, timeout in 00:30:00...` fait l’objet d’une pause correspondant au démarrage des nœuds de calcul du pool. Les tâches sont mises en file d’attente pour s’exécuter dès que le premier nœud de calcul est en cours d’exécution. Accédez à votre compte Batch dans le [portail Azure](https://portal.azure.com) pour surveiller le pool, les nœuds de calcul, les travaux et les tâches.
 
 ```
 Sample start: 11/16/2018 4:02:54 PM
@@ -93,17 +95,16 @@ stderr:
 
 Le temps d’exécution standard de l’application est d’environ 5 minutes lorsque l’application fonctionne dans sa configuration par défaut. La configuration du pool initial prend le plus de temps. Pour réexécuter le travail, supprimez le travail de l’exécution précédente et ne supprimez pas le pool. Sur un pool préconfiguré, le travail se termine en quelques secondes.
 
-
 ## <a name="review-the-code"></a>Vérifier le code
 
 L’application .NET dans ce démarrage rapide effectue les opérations suivantes :
 
-* Chargement de trois petits fichiers texte dans un conteneur blob sur votre compte de stockage Azure. Ces fichiers sont des entrées pour le traitement par Azure Batch.
-* Création d’un pool de nœuds de calcul exécutant Windows Server.
-* Création d’un travail et de trois tâches à exécuter sur les nœuds. Chaque tâche traite l’un des fichiers d’entrée à l’aide d’une ligne de commande Windows. 
-* Affichage de fichiers retournés par les tâches.
+- Chargement de trois petits fichiers texte dans un conteneur blob sur votre compte de stockage Azure. Ces fichiers sont des entrées pour le traitement par Azure Batch.
+- Création d’un pool de nœuds de calcul exécutant Windows Server.
+- Création d’un travail et de trois tâches à exécuter sur les nœuds. Chaque tâche traite l’un des fichiers d’entrée à l’aide d’une ligne de commande Windows. 
+- Affichage de fichiers retournés par les tâches.
 
-Consultez le fichier `Program.cs` et les sections suivantes pour plus de détails. 
+Consultez le fichier `Program.cs` et les sections suivantes pour plus de détails.
 
 ### <a name="preliminaries"></a>Étapes préalables
 
@@ -245,7 +246,6 @@ Lorsque vous n’en avez plus besoin, supprimez le groupe de ressources, le comp
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans ce guide de démarrage rapide, vous avez exécuté une petite application générée à l’aide de l’API .NET Batch pour créer un pool et un travail Batch. Le travail a exécuté des tâches d’exemple et téléchargé des sorties créées sur les nœuds. Maintenant que vous maîtriserez les concepts clés du service Batch, vous êtres prêt à essayer Azure Batch avec des charges de travail plus réalistes à plus grande échelle. Pour en savoir plus sur Azure Batch et parcourir une charge de travail parallèle avec une application réelle, accédez au didacticiel .NET Batch.
-
 
 > [!div class="nextstepaction"]
 > [Traitement d’une charge de travail parallèle avec .NET](tutorial-parallel-dotnet.md)

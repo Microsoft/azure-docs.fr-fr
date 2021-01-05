@@ -5,12 +5,12 @@ author: uhabiba04
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: v-umha
-ms.openlocfilehash: 3431576acbb01a0cc3a5f372460b28be05bf7ce7
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: ef74c4b799c3a24636f88a8e704bf726104b034f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437467"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001590"
 ---
 # <a name="sensor-partner-integration"></a>Intégration de partenaire de capteur
 
@@ -48,7 +48,7 @@ Les API incluent une documentation technique Swagger. Pour plus d’informations
 
 FarmBeats utilise l’authentification Microsoft Azure Active Directory. Azure App Service offre une prise en charge intégrée de l’authentification et de l’autorisation.
 
-Pour plus d’informations, consultez [Azure Active Directory](https://docs.microsoft.com/azure/app-service/overview-authentication-authorization).
+Pour plus d’informations, consultez [Azure Active Directory](../../app-service/overview-authentication-authorization.md).
 
 FarmBeats Datahub utilise l’authentification du porteur, qui nécessite les informations d’identification suivantes :
    - ID client
@@ -64,22 +64,27 @@ headers = {"Authorization": "Bearer " + access_token, …} 
 L’exemple de code Python ci-après donne le jeton d’accès, qui peut être utilisé pour les appels d’API suivants à FarmBeats.
 
 ```python
-import azure 
+import requests
+import json
+import msal
 
-from azure.common.credentials import ServicePrincipalCredentials 
-import adal 
-#FarmBeats API Endpoint 
-ENDPOINT = "https://<yourdatahub>.azurewebsites.net" [Azure website](https://<yourdatahub>.azurewebsites.net)
-CLIENT_ID = "<Your Client ID>"   
-CLIENT_SECRET = "<Your Client Secret>"   
-TENANT_ID = "<Your Tenant ID>" 
-AUTHORITY_HOST = 'https://login.microsoftonline.com' 
-AUTHORITY = AUTHORITY_HOST + '/' + TENANT_ID 
-#Authenticating with the credentials 
-context = adal.AuthenticationContext(AUTHORITY) 
-token_response = context.acquire_token_with_client_credentials(ENDPOINT, CLIENT_ID, CLIENT_SECRET) 
-#Should get an access token here 
-access_token = token_response.get('accessToken') 
+# Your service principal App ID
+CLIENT_ID = "<CLIENT_ID>"
+# Your service principal password
+CLIENT_SECRET = "<CLIENT_SECRET>"
+# Tenant ID for your Azure subscription
+TENANT_ID = "<TENANT_ID>"
+
+AUTHORITY_HOST = 'https://login.microsoftonline.com'
+AUTHORITY = AUTHORITY_HOST + '/' + TENANT_ID
+
+ENDPOINT = "https://<yourfarmbeatswebsitename-api>.azurewebsites.net"
+SCOPE = ENDPOINT + "/.default"
+
+context = msal.ConfidentialClientApplication(CLIENT_ID, authority=AUTHORITY, client_credential=CLIENT_SECRET)
+token_response = context.acquire_token_for_client(SCOPE)
+# We should get an access token here
+access_token = token_response.get('access_token')
 ```
 
 
@@ -96,7 +101,7 @@ Acceptation | Format de la réponse. Pour les API FarmBeats Datahub, le format e
 
 **Requêtes d’API**
 
-Pour effectuer une demande d’API REST, vous associez la méthode HTTP (GET, POST ou PUT), l’URL du service API, l’URI (Uniform Resource Identifier) d’une ressource à interroger, vers laquelle envoyer des données, à mettre à jour ou à supprimer et un ou plusieurs en-têtes de requête HTTP. L’URL du service API est le point de terminaison API que vous fournissez. Voici un exemple : https://\<yourdatahub-website>.azurewebsites.net
+Pour effectuer une demande d’API REST, vous associez la méthode HTTP (GET, POST ou PUT), l’URL du service API, l’URI (Uniform Resource Identifier) d’une ressource à interroger, vers laquelle envoyer des données, à mettre à jour ou à supprimer et un ou plusieurs en-têtes de requête HTTP. L’URL du service API est le point de terminaison API que vous fournissez. Voici un exemple : https://\<yourdatahub-website-name>.azurewebsites.net
 
 Si vous le souhaitez, vous pouvez inclure des paramètres de requête à des appels GET pour filtrer les données dans les réponses, en limiter la taille et les trier.
 
@@ -126,7 +131,7 @@ FarmBeats Datahub offre les API suivantes, qui permettent aux partenaires d’ap
 - /**SensorModel** : SensorModel correspond aux métadonnées du capteur, telles que le fabricant, le type de capteur (analogique ou numérique) et la mesure effectuée par le capteur (température ambiante, pression, etc.).
 - /**Sensor** : Sensor correspond à un capteur physique qui enregistre des valeurs. Un capteur est généralement connecté à un appareil avec une identité d’appareil.
 
-  **DeviceModel** |  |
+  DeviceModel | Description |
   --- | ---
   Type (nœud, passerelle)  | Type de l’appareil – Nœud ou passerelle |
   Fabricant  | Nom du fabricant |
@@ -135,7 +140,7 @@ FarmBeats Datahub offre les API suivantes, qui permettent aux partenaires d’ap
   Nom  | Nom destiné à identifier la ressource. Par exemple, le nom du modèle ou du produit. |
   Description  | Description explicite du modèle. |
   Propriétés  | Propriétés supplémentaires fournies par le fabricant. |
-  **Appareil** |  |
+  **Appareil** | **Description** |
   DeviceModelId  |ID du modèle d’appareil associé. |
   HardwareId   |ID unique de l’appareil, par exemple l’adresse MAC.  |
   ReportingInterval |Intervalle de rapport en secondes. |
@@ -144,7 +149,7 @@ FarmBeats Datahub offre les API suivantes, qui permettent aux partenaires d’ap
   Nom  | Nom destiné à identifier la ressource. Les partenaires d’appareil doivent envoyer un nom correspondant à celui de l’appareil côté partenaire. Si le nom de l’appareil est défini par l’utilisateur côté partenaire, ce nom doit être propagé sur FarmBeats.  |
   Description  | Description explicite.  |
   Propriétés  |Propriétés supplémentaires fournies par le fabricant.  |
-  **SensorModel** |  |
+  **SensorModel** | **Description** |
   Type (analogique, numérique)  |Mentionne le type de capteur (analogique ou numérique).|
   Fabricant  | Nom du fabricant. |
   ProductCode  | Code produit ou nom ou numéro du modèle. Par exemple, RS-CO2-N01.  |
@@ -158,7 +163,7 @@ FarmBeats Datahub offre les API suivantes, qui permettent aux partenaires d’ap
   Nom  | Nom destiné à identifier la ressource. Par exemple, le nom du modèle ou du produit.
   Description  | Description explicite du modèle.
   Propriétés  | Propriétés supplémentaires fournies par le fabricant.
-  **Capteur**  |  |
+  **Capteur**  | **Description** |
   HardwareId  | ID unique du capteur défini par le fabricant.
   SensorModelId  | ID du modèle de capteur associé.
   Emplacement  | Latitude (-90 à +90), longitude (-180 à 180) et élévation (en mètres) du capteur.
@@ -196,7 +201,7 @@ Les données de télémétrie sont mappées à un message canonique publié sur 
 
 ## <a name="send-telemetry-data-to-farmbeats"></a>Envoyer des données de télémétrie à FarmBeats
 
-Pour envoyer des données de télémétrie à FarmBeats, créez un client qui envoie des messages à un Event Hub dans FarmBeats. Pour plus d’informations sur les données de télémétrie, consultez [Envoi de données de télémétrie à un Event Hub](https://docs.microsoft.com/azure/event-hubs/event-hubs-dotnet-standard-getstarted-send).
+Pour envoyer des données de télémétrie à FarmBeats, créez un client qui envoie des messages à un Event Hub dans FarmBeats. Pour plus d’informations sur les données de télémétrie, consultez [Envoi de données de télémétrie à un Event Hub](../../event-hubs/event-hubs-dotnet-standard-getstarted-send.md).
 
 Voici un exemple de code Python qui envoie des données de télémétrie en tant que client à un Event Hub spécifié.
 

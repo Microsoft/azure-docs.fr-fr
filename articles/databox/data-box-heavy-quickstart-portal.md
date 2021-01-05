@@ -1,20 +1,20 @@
 ---
 title: Démarrage rapide pour Microsoft Azure Data Box Heavy | Microsoft Docs
-description: Découvrez comment déployer rapidement votre Azure Data Box Heavy dans le portail Azure
+description: Dans ce guide de démarrage rapide, découvrez comment déployer Azure Data Box Heavy à l’aide du portail Azure, notamment comment brancher les câbles, configurer et copier des données à charger dans Azure.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: heavy
 ms.topic: quickstart
-ms.date: 09/03/2019
+ms.date: 11/04/2020
 ms.author: alkohli
 ms.localizationpriority: high
-ms.openlocfilehash: 9d007f4fa8721214a7c97595fa297ef44199119f
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 3a7f9179822720b0e5ffc21bc560b4c6ccad9463
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83199123"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93347420"
 ---
 ::: zone target = "docs"
 
@@ -60,6 +60,8 @@ Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.az
 
 ## <a name="order"></a>JSON
 
+### <a name="portal"></a>[Portail](#tab/azure-portal)
+
 Cette étape prend environ 5 minutes.
 
 1. Créez une ressource Azure Data Box dans le portail Azure.
@@ -68,6 +70,77 @@ Cette étape prend environ 5 minutes.
 4. Entrez les détails de la commande et les informations d’expédition. Si le service est disponible dans votre région, fournissez les adresses e-mail de notification, vérifiez le résumé, puis créez la commande.
 
 Une fois la commande créée, l’appareil est préparé pour l’expédition.
+
+### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+Utilisez ces commandes Azure CLI pour créer un travail Data Box Heavy.
+
+[!INCLUDE [azure-cli-prepare-your-environment-h3.md](../../includes/azure-cli-prepare-your-environment-h3.md)]
+
+1. Exécutez la commande [az group create](/cli/azure/group#az_group_create) pour créer un groupe de ressources ou utiliser un groupe de ressources existant :
+
+   ```azurecli
+   az group create --name databox-rg --location westus 
+   ```
+
+1. Utilisez la commande [az storage account create](/cli/azure/storage/account#az_storage_account_create) pour créer un compte de stockage ou utiliser un compte de stockage existant :
+
+   ```azurecli
+   az storage account create --resource-group databox-rg --name databoxtestsa
+   ```
+
+1. Exécutez la commande [az databox job create](/cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_create) pour créer un travail Data Box avec la valeur **--sku** `DataBoxHeavy` :
+
+   ```azurecli
+   az databox job create --resource-group databox-rg --name databoxheavy-job \
+       --location westus --sku DataBoxHeavy --contact-name "Jim Gan" --phone 4085555555 \
+       --city Sunnyvale --email-list JimGan@contoso.com --street-address1 "1020 Enterprise Way" \
+       --postal-code 94089 --country US --state-or-province CA --storage-account databoxtestsa \
+       --staging-storage-account databoxtestsa --resource-group-for-managed-disk rg-for-md
+   ```
+
+   > [!NOTE]
+   > Vérifiez que votre abonnement prend en charge Data Box Heavy.
+
+1. Exécutez la commande [az databox job update](/cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_update) pour mettre à jour un travail, comme dans cet exemple, où vous changez le nom et l’adresse e-mail du contact :
+
+   ```azurecli
+   az databox job update -g databox-rg --name databox-job --contact-name "Robert Anic" --email-list RobertAnic@contoso.com
+   ```
+
+   Exécutez la commande [az databox job show](/cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_show) pour obtenir des informations sur le travail :
+
+   ```azurecli
+   az databox job show --resource-group databox-rg --name databox-job
+   ```
+
+   Utilisez la commande [az databox job list]( /cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_list) pour voir tous les travaux Data Box liés à un groupe de ressources :
+
+   ```azurecli
+   az databox job list --resource-group databox-rg
+   ```
+
+   Exécutez la commande [az databox job cancel](/cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_cancel) pour annuler un travail :
+
+   ```azurecli
+   az databox job cancel –resource-group databox-rg --name databox-job --reason "Cancel job."
+   ```
+
+   Exécutez la commande [az databox job delete](/cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_delete) pour supprimer un travail :
+
+   ```azurecli
+   az databox job delete –resource-group databox-rg --name databox-job
+   ```
+
+1. Pour lister les informations d’identification d’un travail Data Box, utilisez la commande [az databox job list-credentials]( /cli/azure/ext/databox/databox/job#ext_databox_az_databox_job_list_credentials) :
+
+   ```azurecli
+   az databox job list-credentials --resource-group "databox-rg" --name "databoxdisk-job"
+   ```
+
+Une fois la commande créée, l’appareil est préparé pour l’expédition.
+
+---
 
 ::: zone-end
 
@@ -124,7 +197,7 @@ Le temps nécessaire à cette opération dépend de la taille de vos données et
  
 1. Copiez les données sur les deux nœuds de l’appareil en utilisant les deux interfaces de données 40 Gbit/s en parallèle.
 
-    - Si vous utilisez un hôte Windows, utilisez un outil de copie de fichiers compatible avec SMB tel que [Robocopy](https://technet.microsoft.com/library/ee851678.aspx).
+    - Si vous utilisez un hôte Windows, utilisez un outil de copie de fichiers compatible avec SMB tel que [Robocopy](/previous-versions/technet-magazine/ee851678(v=msdn.10)).
     - Pour l’hôte NFS, utilisez la commande `cp` ou `rsync` pour copier les données.
 2. Connectez-vous aux partages sur l’appareil en utilisant le chemin d’accès :`\\<IP address of your device>\ShareName`. Pour obtenir les informations d'identification d'accès aux partages, accédez à la page **Connexion et copie** de l'interface utilisateur web locale de Data Box Heavy.
 3. Assurez-vous que les noms des partages, des dossiers, et les données suivent les instructions décrites dans la section [Limites des services Stockage Azure et Data Box Heavy](data-box-heavy-limits.md).

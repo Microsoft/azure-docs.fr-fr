@@ -1,6 +1,6 @@
 ---
 title: Création de filtres avec le Kit de développement logiciel (SDK) .NET Azure Media Services
-description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Media Services crée des manifestes dynamiques pour obtenir cette diffusion sélective.
+description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Le SDK .NET Media Services crée des manifestes dynamiques pour obtenir cette diffusion sélective.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -15,14 +15,18 @@ ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
 ms.reviewer: cenkdin
-ms.openlocfilehash: c60b223f91a151bf63cabc5e95816f2545022503
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 862385d1117e0a1b5d2220c06885e0fd0ecfa4d7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69016604"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531625"
 ---
-# <a name="creating-filters-with-media-services-net-sdk"></a>Création de filtres à l’aide du Kit de développement logiciel (SDK) .NET Media Services 
+# <a name="creating-filters-with-media-services-net-sdk"></a>Création de filtres à l’aide du Kit de développement logiciel (SDK) .NET Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [.NET](media-services-dotnet-dynamic-manifest.md)
 > * [REST](media-services-rest-dynamic-manifest.md)
@@ -40,10 +44,10 @@ Notez que si vous mettez à jour un filtre, il peut falloir jusqu’à deux minu
 ## <a name="types-used-to-create-filters"></a>Types utilisés pour créer des filtres
 Les types suivants sont utilisés lors de la création de filtres : 
 
-* **IStreamingFilter**.  Ce type est basé sur l’API REST suivante : [Filter](https://docs.microsoft.com/rest/api/media/operations/filter)
-* **IStreamingAssetFilter**. Ce type est basé sur l’API REST suivante : [AssetFilter](https://docs.microsoft.com/rest/api/media/operations/assetfilter)
-* **PresentationTimeRange**. Ce type est basé sur l’API REST suivante : [PresentationTimeRange](https://docs.microsoft.com/rest/api/media/operations/presentationtimerange)
-* **FilterTrackSelectStatement** et **IFilterTrackPropertyCondition**. Ces types sont basés sur les API REST suivantes [FilterTrackSelect et FilterTrackPropertyCondition](https://docs.microsoft.com/rest/api/media/operations/filtertrackselect)
+* **IStreamingFilter**.  Ce type est basé sur l’API REST suivante : [Filter](/rest/api/media/operations/filter)
+* **IStreamingAssetFilter**. Ce type est basé sur l’API REST suivante : [AssetFilter](/rest/api/media/operations/assetfilter)
+* **PresentationTimeRange**. Ce type est basé sur l’API REST suivante : [PresentationTimeRange](/rest/api/media/operations/presentationtimerange)
+* **FilterTrackSelectStatement** et **IFilterTrackPropertyCondition**. Ces types sont basés sur les API REST suivantes [FilterTrackSelect et FilterTrackPropertyCondition](/rest/api/media/operations/filtertrackselect)
 
 ## <a name="createupdatereaddelete-global-filters"></a>Création/Mise à jour/Lecture/Suppression de filtres globaux
 Le code suivant montre comment utiliser .NET pour créer, mettre à jour, lire et supprimer des filtres d’éléments multimédias.
@@ -114,19 +118,19 @@ Les exemples suivants montrent comment ajouter des filtres à vos URL de diffusi
 
 **MPEG DASH** 
 
-    http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
+`http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)`
 
 **Apple HTTP Live Streaming (HLS) V4**
 
-    http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
+`http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)`
 
 **Apple HTTP Live Streaming (HLS) V3**
 
-    http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
+`http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)`
 
 **Smooth Streaming**
 
-    http:\//testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
+`http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)`
 
 
 ## <a name="media-services-learning-paths"></a>Parcours d’apprentissage de Media Services
@@ -137,4 +141,3 @@ Les exemples suivants montrent comment ajouter des filtres à vos URL de diffusi
 
 ## <a name="see-also"></a>Voir aussi
 [Vue d'ensemble des manifestes dynamiques](media-services-dynamic-manifest-overview.md)
-

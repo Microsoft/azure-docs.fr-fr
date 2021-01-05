@@ -1,26 +1,17 @@
 ---
 title: Diagnostics et traçage de bout en bout d’Azure Service Bus | Microsoft Docs
 description: Vue d’ensemble des diagnostics et du traçage de bout en bout du client Service Bus (client via tous les services impliqués dans le traitement).
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 7c2efc9c736097873201505f280af5d47bed4847
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: bc7dab21fc01b624e8ab122fe883be89ea8633f6
+ms.sourcegitcommit: 8be279f92d5c07a37adfe766dc40648c673d8aa8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80294174"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97832690"
 ---
-# <a name="distributed-tracing-and-correlation-through-service-bus-messaging"></a>Traçage et corrélation distribués par le biais de la messagerie Service Bus
+# <a name="distributed-tracing-and-correlation-through-service-bus-messaging"></a>Suivi distribué et corrélation via la messagerie Service Bus
 
 L’un des défis que pose couramment le développement de microservices est la capacité à tracer l’opération d’un client à travers tous les services impliqués dans le traitement. Le traçage facilite le débogage, l’analyse des performances, les tests A/B et d’autres diagnostics standard.
 L’un des aspects du problème a trait au suivi d’éléments de travail logiques. Ceux-ci comptent notamment le résultat et la latence du traitement des messages, et les appels de dépendances externes. Un autre aspect du problème est la mise en corrélation de ces événements de diagnostic au-delà des limites de traitement.
@@ -202,7 +193,7 @@ TaskStatus status = (TaskStatus)evnt.Value.GetProperty("Status");
 var tagsList = new StringBuilder();
 foreach (var tags in currentActivity.Tags)
 {
-    tagsList.Append($", "{tags.Key}={tags.Value}");
+    tagsList.Append($", {tags.Key}={tags.Value}");
 }
 
 serviceBusLogger.LogInformation($"{currentActivity.OperationName} is finished, Duration={currentActivity.Duration}, Status={status}, Id={currentActivity.Id}, StartTime={currentActivity.StartTimeUtc}{tagsList}");

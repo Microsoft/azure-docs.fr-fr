@@ -4,17 +4,16 @@ description: Utilisez votre IoT Hub dans le Portail Azure pour envoyer (push) un
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 12/30/2019
+ms.date: 10/13/2020
 ms.topic: conceptual
-ms.reviewer: menchi
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 754c106db42f3f0695ad023e736993bee82e9757
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ef3f09648e0d9101d07c6d8941ee7f79ae97b2b8
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133919"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92048030"
 ---
 # <a name="deploy-azure-iot-edge-modules-from-the-azure-portal"></a>Déployer des modules Azure IoT Edge à partir du portail Azure
 
@@ -25,13 +24,20 @@ Cet article explique comment le portail Azure vous aide à créer un manifeste d
 ## <a name="prerequisites"></a>Prérequis
 
 * Un [hub IoT](../iot-hub/iot-hub-create-through-portal.md) dans votre abonnement Azure.
-* Un [appareil IoT Edge](how-to-register-device.md#register-in-the-azure-portal) avec le runtime IoT Edge installé.
+* Un appareil IoT Edge.
+
+  Si vous n’avez aucun appareil IoT Edge configuré, vous pouvez en créer un sur une machine virtuelle Azure. Suivez les étapes décrites dans l’un des articles de démarrage rapide pour [Créer un appareil Linux virtuel](quickstart-linux.md) ou [Créer un appareil Windows virtuel](quickstart.md).
 
 ## <a name="configure-a-deployment-manifest"></a>Configurer un manifeste de déploiement
 
 Un manifeste de déploiement est un document JSON qui décrit les modules à déployer, le flux des données entre les modules et les propriétés souhaitées des jumeaux de module. Pour plus d’informations sur le fonctionnement et la création des manifestes de déploiement, consultez [Comprendre comment les modules IoT Edge peuvent être utilisés, configurés et réutilisés](module-composition.md).
 
 Le portail Azure comprend un Assistant qui vous guide à travers la création du manifeste de déploiement, vous évitant de générer le document JSON manuellement. Il comporte trois étapes : **Ajouter des modules**, **Spécifier des routes** et **Vérifier le déploiement**.
+
+>[!NOTE]
+>La procédure décrite dans cet article reflète la dernière version de schéma du hub et de l’agent IoT Edge. La version de schéma 1.1 a été publiée avec IoT Edge version 1.0.10 et active les fonctionnalités d’ordre de démarrage des modules et de hiérarchisation des itinéraires.
+>
+>Si vous déployez vers un appareil exécutant la version 1.0.9 ou une version antérieure, modifiez les **paramètres du runtime** dans l’étape **Modules** de l’Assistant pour utiliser la version 1.0 du schéma.
 
 ### <a name="select-device-and-add-modules"></a>Sélectionner l’appareil et ajouter des modules
 
@@ -41,21 +47,30 @@ Le portail Azure comprend un Assistant qui vous guide à travers la création du
 1. Dans la barre supérieure, sélectionnez **Définir des modules**.
 1. Dans la section **Paramètres de Container Registry** de la page, fournissez les informations d’identification permettant d’accéder à n’importe quels registres de conteneurs privés qui contiennent des images de module.
 1. Dans la section **Modules IoT Edge** de la page, sélectionnez **Ajouter**.
-1. Examinez les types de modules dans le menu déroulant :
+1. Choisissez l’un des trois types de modules dans le menu déroulant :
 
    * **Module IoT Edge** : vous fournissez le nom du module et l’URI de l’image conteneur. Par exemple, l’URI de l’image de l’exemple de module SimulatedTemperatureSensor est `mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0`. Si l’image de module est stockée dans un registre de conteneurs privé, ajoutez les informations d’identification sur cette page pour accéder à l’image.
    * **Module Marketplace** : modules hébergés dans la Place de marché Azure. Certains modules de la Place de marché requièrent une configuration supplémentaire. passez donc en revue les détails du module dans la liste [Modules IoT Edge de la Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules).
    * **Module Azure Stream Analytics** : les modules générés à partir d’une charge de travail Azure Stream Analytics.
 
-1. Après avoir ajouté un module, sélectionnez le nom du module dans la liste pour ouvrir les paramètres du module. Renseignez les champs facultatifs si nécessaire. Pour plus d’informations sur les options de création de conteneur, la stratégie de redémarrage et l’état souhaité, consultez [Propriétés souhaitées pour EdgeAgent](module-edgeagent-edgehub.md#edgeagent-desired-properties). Pour plus d’informations sur le jumeau de module, consultez [Définir ou mettre à jour les propriétés souhaitées](module-composition.md#define-or-update-desired-properties).
-1. Si nécessaire, répétez les étapes 5 à 8 pour ajouter d’autres modules à votre déploiement.
+1. Après avoir ajouté un module, sélectionnez le nom du module dans la liste pour ouvrir les paramètres du module. Renseignez les champs facultatifs si nécessaire.
+
+   Pour en savoir plus sur les paramètres des modules disponibles, consultez l’article [Configuration et gestion des modules](module-composition.md#module-configuration-and-management).
+
+   Pour plus d’informations sur le jumeau de module, consultez [Définir ou mettre à jour les propriétés souhaitées](module-composition.md#define-or-update-desired-properties).
+
+1. Répétez les étapes 6 à 8 pour ajouter d’autres modules à votre déploiement.
 1. Sélectionnez **Suivant : Itinéraires** pour passer à la section Itinéraires.
 
 ### <a name="specify-routes"></a>Spécifier des routes
 
-Sous l’onglet **Itinéraires**, vous définissez la manière dont les messages sont transmis entre les modules et IoT Hub. Les messages sont construits à l’aide de paires nom/valeur. Par défaut, un itinéraire est nommé **route** et défini sous la forme **FROM /messages/\* INTO $upstream**, ce qui signifie que tous les messages issus des modules sont envoyés à votre hub IoT.  
+Sous l’onglet **Routes**, vous définissez la manière dont les messages sont transmis entre les modules et le hub IoT. Les messages sont construits à l’aide de paires nom/valeur. Par défaut, le premier déploiement d’un nouvel appareil inclut un itinéraire nommé **route** et défini sous la forme **FROM /messages/\* INTO $upstream**, ce qui signifie que tous les messages issus des modules sont envoyés à votre hub IoT.  
 
-Ajoutez ou mettez à jour les itinéraires avec des informations issues de [Déclarer des itinéraires](module-composition.md#declare-routes), puis sélectionnez **Suivant : Vérifier + créer** pour passer à l’étape suivante de l’Assistant.
+Les paramètres **Priorité** et **Durée de vie** sont des paramètres facultatifs que vous pouvez inclure dans une définition d’itinéraire. Le paramètre Priorité vous permet de choisir les itinéraires dont les messages doivent être traités en premier ou les itinéraires à traiter en dernier. La priorité est déterminée en définissant un nombre entre 0 et 9, 0 étant la priorité la plus haute. La paramètre Durée de vie vous permet de déclarer la durée de conservation des messages dans cet itinéraire avant qu’ils soient traités ou supprimés de la file d’attente.
+
+Pour plus d’informations sur la création d’itinéraires, consultez [Déclarer des itinéraires](module-composition.md#declare-routes).
+
+Une fois les itinéraires déclarés, sélectionnez **Suivant : Vérifier + créer** pour passer à l’étape suivante de l’Assistant.
 
 ### <a name="review-deployment"></a>Vérifier le déploiement
 
@@ -97,7 +112,7 @@ Vous pouvez rapidement déployer un module à partir de la Place de marché Azur
 
 ![Ajouter un module dans IoT Hub](./media/how-to-deploy-modules-portal/iothub-add-module.png)
 
-Choisissez un module dans la page **Module de la Place de marché IoT Edge**. Le module que vous sélectionnez est automatiquement configuré pour vos abonnement, groupe de ressources et appareil. Il apparaît ensuite dans votre liste de modules IoT Edge. Certains modules peuvent nécessiter une configuration supplémentaire.
+Choisissez un module dans la page **Place de marché de module IoT Edge**. Le module que vous sélectionnez est automatiquement configuré pour vos abonnement, groupe de ressources et appareil. Il apparaît ensuite dans votre liste de modules IoT Edge. Certains modules peuvent nécessiter une configuration supplémentaire.
 
 > [!TIP]
 > Les informations relatives aux modules IoT Edge à partir du IoT Hub Azure sont limitées. Vous pouvez d’abord en savoir plus sur les [modules IoT Edge](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules) dans la Place de marché Azure.

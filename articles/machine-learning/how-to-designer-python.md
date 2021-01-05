@@ -1,23 +1,23 @@
 ---
-title: Python
+title: Exécuter un script Python dans le concepteur
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser Python dans le concepteur Azure Machine Learning pour transformer des données.
+description: Découvrez comment utiliser le modèle Exécuter un script Python dans le concepteur Azure Machine Learning pour exécuter des opérations personnalisées écrites en Python.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
+author: likebupt
+ms.author: keli19
+ms.date: 09/09/2020
 ms.topic: conceptual
-author: peterclu
-ms.author: peterlu
-ms.date: 02/28/2020
-ms.custom: designer
-ms.openlocfilehash: e27844f9f534ea4db1aba53c12fb3947e7269846
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: how-to, designer, devx-track-python
+ms.openlocfilehash: dcc28d98efbc82079586de8cfbecd35effc93d6e
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83644466"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94556231"
 ---
-# <a name="execute-python-code-in-azure-machine-learning-designer"></a>Exécuter du code Python dans le concepteur Azure Machine Learning
+# <a name="run-python-code-in-azure-machine-learning-designer"></a>Exécuter du code Python dans le concepteur Azure Machine Learning
 
 Dans cet article, vous allez apprendre à utiliser le module [Exécuter le script Python](algorithm-module-reference/execute-python-script.md) pour ajouter une logique personnalisée au concepteur Azure Machine Learning. Dans la procédure suivante, vous utilisez la bibliothèque Pandas pour effectuer une ingénierie de fonctionnalité simple.
 
@@ -26,6 +26,8 @@ Vous pouvez utiliser l’éditeur de code intégré pour ajouter rapidement une 
 L’environnement d’exécution par défaut utilise la distribution Anacondas de Python. Pour obtenir la liste complète des packages préinstallés, consultez la [page de référence du module Exécuter le script Python](algorithm-module-reference/execute-python-script.md).
 
 ![Mappage des entrées de l’exécution d’un script Python](media/how-to-designer-python/execute-python-map.png)
+
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
 
 ## <a name="execute-python-written-in-the-designer"></a>Exécuter Python écrit dans le concepteur
 

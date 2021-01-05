@@ -1,14 +1,16 @@
 ---
 title: Stratégie d’apprentissage - Personalizer
 description: Les paramètres d’apprentissage déterminent les *hyperparamètres* d'apprentissage des modèles. Deux modèles contenant des données identiques, mais ayant été entraînés à l’aide de paramètres d’apprentissage différents, se révéleront différents.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 02/20/2020
-ms.openlocfilehash: abe6a2a2ec9b9978230d894c69193469f6e932e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1d2038e3796df843736eb80f7e5645f4141c82f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218567"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91253630"
 ---
 # <a name="learning-policy-and-settings"></a>Stratégie et paramètres d’apprentissage
 

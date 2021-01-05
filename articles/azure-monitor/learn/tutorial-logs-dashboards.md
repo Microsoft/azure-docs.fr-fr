@@ -5,14 +5,14 @@ ms.subservice: logs
 ms.topic: tutorial
 author: bwren
 ms.author: bwren
-ms.date: 06/19/2019
+ms.date: 05/28/2020
 ms.custom: mvc
-ms.openlocfilehash: 76ba79561df4a75004369d24c4c6af82de9b1cfc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 880d173c6eef9d267e8860ebad805e071706de42
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77661530"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186148"
 ---
 # <a name="create-and-share-dashboards-of-log-analytics-data"></a>Créer et partager des tableaux de bord de données Log Analytics
 
@@ -36,6 +36,14 @@ Sélectionnez **Tableau de bord** pour ouvrir votre [tableau de bord](../../azur
 
 Celui-ci vous permet de rassembler les données opérationnelles les plus importantes pour le service informatique dans toutes vos ressources Azure, notamment les données de télémétrie d’Azure Log Analytics.  Avant d’aborder la visualisation d’une requête de journal, commençons par créer et partager un tableau de bord.  Vous pouvez ensuite vous concentrer sur notre exemple de requête dans le journal de performances, qui sera restituée sous forme de graphique en courbes, et l’ajouter ensuite au tableau de bord.  
 
+> [!NOTE]
+> Les types de graphiques suivants sont pris en charge dans les tableaux de bord Azure à l’aide des requêtes de journal :
+> - Graphique en aires
+> - Histogramme
+> - Graphique à secteurs (s’affiche dans le tableau de bord sous forme de bouée)
+> - Nuage de points
+> - Graphique temporel
+
 Pour créer un tableau de bord, sélectionnez le bouton **Nouveau tableau de bord** en regard du nom du tableau de bord actuel.
 
 ![Créer un tableau de bord dans le portail Azure](media/tutorial-logs-dashboards/log-analytics-create-dashboard-01.png)
@@ -46,10 +54,10 @@ Par défaut, lorsque vous créez un tableau de bord, celui-ci est privé, ce qui
 
 ![Partager un nouveau tableau de bord dans le portail Azure](media/tutorial-logs-dashboards/log-analytics-share-dashboard.png) 
 
-Vous êtes invité à choisir un abonnement et un groupe de ressources dans lesquels votre tableau de bord doit être publié. Pour plus de commodité, l’expérience de publication du portail vous guide vers un modèle dans lequel vous placez les tableaux de bord dans un groupe de ressources appelé **tableaux de bord**.  Vérifiez l’abonnement sélectionné, puis cliquez sur **Publier**.  L’accès aux informations figurant dans le tableau de bord est contrôlé par le [Contrôle d’accès en fonction des ressources Azure](../../role-based-access-control/role-assignments-portal.md).   
+Vous êtes invité à choisir un abonnement et un groupe de ressources dans lesquels votre tableau de bord doit être publié. Pour plus de commodité, l’expérience de publication du portail vous guide vers un modèle dans lequel vous placez les tableaux de bord dans un groupe de ressources appelé **tableaux de bord**.  Vérifiez l’abonnement sélectionné, puis cliquez sur **Publier**.  L’accès aux informations figurant dans le tableau de bord est contrôlé par un [Contrôle d’accès en fonction du rôle (RBAC) Azure](../../role-based-access-control/role-assignments-portal.md).   
 
 ## <a name="visualize-a-log-query"></a>Visualiser une requête de journal
-[Log Analytics](../log-query/get-started-portal.md) est un portail dédié qui permet d’utiliser des requêtes de journal et leurs résultats. Ces fonctionnalités incluent la possibilité de modifier une requête sur plusieurs lignes et d’exécuter de façon sélective du code, des données Intellisense contextuelles et Smart Analytics. Dans ce tutoriel, vous utilisez Log Analytics pour créer une vue des performances sous forme graphique, l’enregistrer pour une requête ultérieure et l’épingler au tableau de bord partagé créé précédemment.
+[Log Analytics](../log-query/log-analytics-tutorial.md) est un portail dédié qui permet d’utiliser des requêtes de journal et leurs résultats. Ces fonctionnalités incluent la possibilité de modifier une requête sur plusieurs lignes et d’exécuter de façon sélective du code, des données Intellisense contextuelles et Smart Analytics. Dans ce tutoriel, vous utilisez Log Analytics pour créer une vue des performances sous forme graphique, l’enregistrer pour une requête ultérieure et l’épingler au tableau de bord partagé créé précédemment.
 
 Ouvrez Log Analytics en sélectionnant **Journaux** dans le menu Azure Monitor. Une nouvelle requête vide s’affiche.
 

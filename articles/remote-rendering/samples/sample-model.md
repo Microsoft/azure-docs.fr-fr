@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 01/29/2020
 ms.topic: sample
-ms.openlocfilehash: 0c28d36c7934fbbac0ddd11562c8dc237b0360ee
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 8e5dcb6c9dfa08efc0889fcab779d6cb333d2330
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80678490"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88507533"
 ---
 # <a name="sample-models"></a>Exemples de modèles
 
@@ -26,7 +26,7 @@ Statistiques du modèle :
 
 | Nom | Valeur |
 |-----------|:-----------|
-| [Taille de machine virtuelle nécessaire](../how-tos/session-rest-api.md#create-a-session) | standard |
+| [Taille de serveur requise](../how-tos/session-rest-api.md#create-a-session) | standard |
 | Nombre de triangles | 18,7 millions |
 | Nombre de pièces mobiles | 2 073 |
 | Nombre de matériaux | 94 |

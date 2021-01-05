@@ -1,25 +1,26 @@
 ---
-title: Liaison d'entrée Azure Cosmos DB pour Functions 2.x
+title: Liaison d'entrée Azure Cosmos DB pour Functions 2.x et versions ultérieures
 description: Apprenez à utiliser la liaison d'entrée Azure Cosmos DB dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/24/2020
 ms.author: cshoe
-ms.openlocfilehash: eabcf40e28927919215979ccc46fa029d19adbfe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: dec41a5e05d22891aae9d16280ebb6b0c8da3f20
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78943418"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185111"
 ---
-# <a name="azure-cosmos-db-input-binding-for-azure-functions-2x"></a>Liaison d'entrée Azure Cosmos DB pour Azure Functions 2.x
+# <a name="azure-cosmos-db-input-binding-for-azure-functions-2x-and-higher"></a>Liaison d'entrée Azure Cosmos DB pour Azure Functions 2.x et versions ultérieures
 
 La liaison d’entrée Azure Cosmos DB utilise l’API SQL pour récupérer un ou plusieurs documents Azure Cosmos DB et les transmet au paramètre d’entrée de la fonction. L’ID du document ou les paramètres de requête peuvent être déterminés en fonction du déclencheur qui appelle la fonction.
 
 Pour plus d’informations sur les détails d’installation et de configuration, consultez la [vue d’ensemble](./functions-bindings-cosmosdb-v2.md).
 
 > [!NOTE]
-> Si la collection est [partitionnée](../cosmos-db/partition-data.md#logical-partitions), les opérations de recherche doivent également spécifier la valeur de clé de partition.
+> Si la collection est [partitionnée](../cosmos-db/partitioning-overview.md#logical-partitions), les opérations de recherche doivent également spécifier la valeur de clé de partition.
 >
 
 <a id="example" name="example"></a>
@@ -42,8 +43,12 @@ namespace CosmosDBSamplesV2
 {
     public class ToDoItem
     {
+        [JsonProperty("id")]
         public string Id { get; set; }
+        
+        [JsonProperty("partitionKey")]
         public string PartitionKey { get; set; }
+        
         public string Description { get; set; }
     }
 }
@@ -207,7 +212,7 @@ L’exemple suivant illustre une [fonction C#](functions-dotnet-class-library.md
 L’exemple montre comment utiliser une expression de liaison dans le paramètre `SqlQuery`. Vous pouvez valider des données de routage sur le paramètre `SqlQuery` comme indiqué, mais actuellement [vous ne pouvez pas valider des valeurs de chaînes de requête](https://github.com/Azure/azure-functions-host/issues/2554#issuecomment-392084583).
 
 > [!NOTE]
-> Si vous devez interroger uniquement à l’aide de l’ID, il est recommandé d’utiliser une recherche, comme dans les [exemples précédents](#http-trigger-look-up-id-from-query-string-c), car cela consomme moins d’[unités de requête](../cosmos-db/request-units.md). Les opérations de lecture à point (GET) sont [plus efficaces](../cosmos-db/optimize-cost-queries.md) que les requêtes par ID.
+> Si vous devez interroger uniquement à l’aide de l’ID, il est recommandé d’utiliser une recherche, comme dans les [exemples précédents](#http-trigger-look-up-id-from-query-string-c), car cela consomme moins d’[unités de requête](../cosmos-db/request-units.md). Les opérations de lecture à point (GET) sont [plus efficaces](../cosmos-db/optimize-cost-reads-writes.md) que les requêtes par ID.
 >
 
 ```cs
@@ -295,7 +300,7 @@ namespace CosmosDBSamplesV2
 L’exemple suivant illustre une [fonction C#](functions-dotnet-class-library.md) qui récupère une liste de documents. Cette fonction est déclenchée par une requête HTTP. Le code utilise une instance `DocumentClient` fournie par la liaisonAzure Cosmos DB pour lire une liste de documents. L’instance `DocumentClient` peut également être utilisée pour les opérations d’écriture.
 
 > [!NOTE]
-> Vous pouvez également utiliser l’interface [IDocumentClient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.idocumentclient?view=azure-dotnet) pour faciliter le test.
+> Vous pouvez également utiliser l’interface [IDocumentClient](/dotnet/api/microsoft.azure.documents.idocumentclient?view=azure-dotnet) pour faciliter le test.
 
 ```cs
 using Microsoft.AspNetCore.Http;
@@ -860,7 +865,7 @@ Voici le fichier *function.json* :
       "name": "toDoItem",
       "databaseName": "ToDoItems",
       "collectionName": "Items",
-      "connection": "CosmosDBConnection",
+      "connectionStringSetting": "CosmosDBConnection",
       "direction": "in",
       "Id": "{id}",
       "PartitionKey": "{partitionKeyValue}"
@@ -1017,7 +1022,6 @@ Voici le fichier *function.json* :
       "PartitionKey": "{Query.partitionKeyValue}"
     }
   ],
-  "disabled": true,
   "scriptFile": "__init__.py"
 }
 ```
@@ -1311,7 +1315,7 @@ public class DocByIdFromRoute {
 L’exemple suivant illustre une fonction Java qui récupère un document unique. La fonction est déclenchée par une requête HTTP qui utilise un paramètre de routage afin de spécifier l’ID à rechercher. Cet ID est utilisé pour récupérer un document à partir de la base de données et de la collection spécifiées, en convertissant le jeu de résultats en ```ToDoItem[]```, étant donné que de nombreux documents peuvent être retournés, en fonction des critères de la requête.
 
 > [!NOTE]
-> Si vous devez interroger uniquement à l’aide de l’ID, il est recommandé d’utiliser une recherche, comme dans les [exemples précédents](#http-trigger-look-up-id-from-query-string---pojo-parameter-java), car cela consomme moins d’[unités de requête](../cosmos-db/request-units.md). Les opérations de lecture à point (GET) sont [plus efficaces](../cosmos-db/optimize-cost-queries.md) que les requêtes par ID.
+> Si vous devez interroger uniquement à l’aide de l’ID, il est recommandé d’utiliser une recherche, comme dans les [exemples précédents](#http-trigger-look-up-id-from-query-string---pojo-parameter-java), car cela consomme moins d’[unités de requête](../cosmos-db/request-units.md). Les opérations de lecture à point (GET) sont [plus efficaces](../cosmos-db/optimize-cost-reads-writes.md) que les requêtes par ID.
 >
 
 ```java
@@ -1420,7 +1424,7 @@ Les attributs ne sont pas pris en charge par Python.
 
 # <a name="java"></a>[Java](#tab/java)
 
-Dans la [bibliothèque du runtime des fonctions Java](https://docs.microsoft.com/java/api/overview/azure/functions/runtime), utilisez l’annotation `@CosmosDBOutput` sur des paramètres qui écrivent dans Cosmos DB. Le type de paramètre d’annotation doit être `OutputBinding<T>`, où `T` désigne un type Java natif ou un POJO.
+Dans la [bibliothèque du runtime des fonctions Java](/java/api/overview/azure/functions/runtime), utilisez l’annotation `@CosmosDBOutput` sur des paramètres qui écrivent dans Cosmos DB. Le type de paramètre d’annotation doit être `OutputBinding<T>`, où `T` désigne un type Java natif ou un POJO.
 
 ---
 
@@ -1438,7 +1442,7 @@ Le tableau suivant décrit les propriétés de configuration de liaison que vous
 |**id**    | **Id** | ID du document à récupérer. Cette propriété prend en charge les [expressions de liaison](./functions-bindings-expressions-patterns.md). Ne définissez pas à la fois les propriétés `id` et **sqlQuery**. Si vous ne définissez aucune des deux, l’ensemble de la collection est récupéré. |
 |**sqlQuery**  |**SqlQuery**  | Requête SQL Azure Cosmos DB utilisée pour récupérer plusieurs documents. La propriété prend en charge les liaisons d’exécution, comme dans cet exemple : `SELECT * FROM c where c.departmentId = {departmentId}`. Ne définissez pas à la fois les propriétés `id` et `sqlQuery`. Si vous ne définissez aucune des deux, l’ensemble de la collection est récupéré.|
 |**connectionStringSetting**     |**ConnectionStringSetting**|Nom du paramètre d’application contenant votre chaîne de connexion Azure Cosmos DB. |
-|**partitionKey**|**PartitionKey**|Spécifie la valeur de la clé de partition pour la recherche. Peut inclure des paramètres de liaison. Requis pour les recherches dans les collections [partitionnées](../cosmos-db/partition-data.md#logical-partitions).|
+|**partitionKey**|**PartitionKey**|Spécifie la valeur de la clé de partition pour la recherche. Peut inclure des paramètres de liaison. Requis pour les recherches dans les collections [partitionnées](../cosmos-db/partitioning-overview.md#logical-partitions).|
 |**preferredLocations**| **PreferredLocations**| (Facultatif) Définit les endroits par défaut (régions) des comptes de base de données géorépliqués dans le service Azure Cosmos DB. Les valeurs doivent être séparées par des virgules. Par exemple, « USA Est, USA Centre Sud, Europe Nord ». |
 
 [!INCLUDE [app settings to local.settings.json](../../includes/functions-app-settings-local.md)]
@@ -1463,7 +1467,7 @@ Les données sont mises à la disposition de la fonction via un paramètre `Docu
 
 # <a name="java"></a>[Java](#tab/java)
 
-À partir de la [bibliothèque du runtime des fonctions Java](https://docs.microsoft.com/java/api/overview/azure/functions/runtime), l’annotation [@CosmosDBInput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.cosmosdbinput) expose les données de Cosmos DB à la fonction. Vous pouvez utiliser cette annotation avec des types Java natifs, des objets POJO ou des valeurs Null à l’aide de `Optional<T>`.
+À partir de la [bibliothèque du runtime des fonctions Java](/java/api/overview/azure/functions/runtime), l’annotation [@CosmosDBInput](/java/api/com.microsoft.azure.functions.annotation.cosmosdbinput) expose les données de Cosmos DB à la fonction. Vous pouvez utiliser cette annotation avec des types Java natifs, des objets POJO ou des valeurs Null à l’aide de `Optional<T>`.
 
 ---
 

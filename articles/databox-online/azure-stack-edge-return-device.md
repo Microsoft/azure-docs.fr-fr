@@ -1,38 +1,40 @@
 ---
-title: Retourner ou remplacer votre appareil Azure Stack Edge | Microsoft Docs
-description: Décrit comment retourner ou remplacer l’appareil Azure Stack Edge.
+title: Retourner votre appareil Azure Stack Edge Pro | Microsoft Docs
+description: Apprenez à effacer les données et à retourner votre appareil Azure Stack Edge Pro, puis à supprimer la ressource associée à l’appareil.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
-ms.topic: article
-ms.date: 02/26/2020
+ms.topic: how-to
+ms.date: 07/27/2020
 ms.author: alkohli
-ms.openlocfilehash: bb73494dd5fe22c3be645f732f9d0958e48edb64
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 730774f33d43754d4ca198ed170159fa4f872e09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743637"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90903678"
 ---
-# <a name="return-or-replace-your-azure-stack-edge-device"></a>Retourner ou remplacer votre appareil Azure Stack Edge
+# <a name="return-your-azure-stack-edge-pro-device"></a>Retourner votre appareil Azure Stack Edge Pro
 
-Cet article décrit comment effacer les données, puis retourner votre appareil Azure Stack Edge. Une fois que vous avez retourné l’appareil, vous pouvez également supprimer la ressource associée à l’appareil ou commander un appareil de remplacement.
+Cet article décrit comment effacer les données, puis retourner votre appareil Azure Stack Edge Pro. Une fois que vous avez retourné l’appareil, vous pouvez également supprimer la ressource associée à l’appareil.
 
 Dans cet article, vous apprendrez comment :
 
 > [!div class="checklist"]
+>
 > * Effacer les données des disques de données sur l’appareil
-> * Ouvrir un ticket de support pour retourner votre appareil
+> * Initier le retour de l’appareil dans le portail Azure
 > * Emballer l’appareil et planifier un enlèvement
 > * Supprimer la ressource dans le Portail Azure
-> * Obtenir un appareil de remplacement
 
 ## <a name="erase-data-from-the-device"></a>Effacer les données de l’appareil
 
 Pour effacer les données des disques de données de votre appareil, vous devez réinitialiser votre appareil. Vous pouvez réinitialiser votre appareil à l’aide de l’interface utilisateur web locale ou de l’interface PowerShell.
 
 Avant de réinitialiser, créez une copie des données locales sur l’appareil si nécessaire. Vous pouvez copier les données de l’appareil dans un conteneur de Stockage Azure.
+
+Vous pouvez initier le retour de l’appareil même avant la réinitialisation de l’appareil. 
 
 Pour réinitialiser votre appareil à l’aide de l’interface utilisateur web locale, effectuez les étapes suivantes.
 
@@ -53,19 +55,50 @@ Vous pouvez également vous connecter à l’interface PowerShell de l’apparei
 > - Si vous échangez pour ou effectuez une mise à niveau vers un nouvel appareil, nous vous recommandons de ne réinitialiser votre appareil que lorsque vous avez reçu le nouvel appareil.
 > - La réinitialisation de l’appareil supprime uniquement les données locales de l’appareil. Les données qui se trouvent dans le cloud ne sont pas supprimées et entraîne des [frais](https://azure.microsoft.com/pricing/details/storage/). Ces données doivent être supprimées séparément à l’aide d’un outil de gestion de stockage cloud tel que [Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/).
 
-## <a name="open-a-support-ticket"></a>Ouverture d’un ticket de support
+## <a name="initiate-device-return"></a>Commencer la configuration de l’appareil
 
 Pour commencer le processus de retour, effectuez les étapes suivantes.
 
-1. Ouvrez un ticket de support auprès du Support Microsoft indiquant que vous souhaitez retourner l’appareil. Sélectionnez le type de problème **Matériel Azure Stack Edge**.
+1. Accédez à votre ressource Azure Stack Edge Pro/Data Box Gateway dans le portail Azure. Dans la **Vue d’ensemble**, accédez à la barre de commandes dans le volet droit, puis sélectionnez **Retourner l’appareil**. 
 
-    ![Ouverture d’un ticket de support](media/azure-stack-edge-return-device/open-support-ticket-1.png)  
+    ![Retourner l’appareil 1](media/azure-stack-edge-return-device/return-device-1.png)  
 
-2. Un ingénieur du Support Microsoft vous contactera. Fournissez les informations d’expédition.
-3. Si vous avez besoin d’une boîte d’expédition de retour, vous pouvez en demander une. Répondez **Oui** à la question **Need an empty box to return** (Besoin d’une boîte vide pour le retour).
+2. Dans le panneau **Retourner l’appareil**, sous **Détails de base** :
 
+    1. Indiquez le numéro de série de l’appareil. Pour récupérer le numéro de série de l’appareil, accédez à l’interface utilisateur web locale de l’appareil, puis accédez à **Vue d’ensemble**.  
+    
+    ![Numéro de série de l’appareil 1](media/azure-stack-edge-return-device/device-serial-number-1.png) 
+
+    2. Entrez le numéro d’étiquette de service qui correspond à un identificateur de cinq caractères ou plus propre à votre appareil. L’étiquette de service se trouve dans le coin inférieur droit de l’appareil (quand vous êtes en face de l’appareil). Retirez l’étiquette d’informations (panneau d’étiquette coulissant). Ce panneau contient des informations système telles que l’étiquette de service, la carte d’interface réseau, l’adresse MAC, etc. 
+    
+    ![Numéro d’étiquette de service 1](media/azure-stack-edge-return-device/service-tag-number-1.png)
+
+    3. Dans la liste déroulante, choisissez une raison pour le retour.
+
+    ![Retourner l’appareil 2](media/azure-stack-edge-return-device/return-device-2.png) 
+
+3. Sous **Informations de livraison** :
+
+    1. Indiquez votre nom, le nom de votre société et l’adresse complète de votre entreprise. Entrez un numéro de téléphone professionnel, en incluant l’indicatif régional et un ID d’e-mail pour la notification.
+    2. Si vous avez besoin d’une boîte d’expédition de retour, vous pouvez en demander une. Répondez **Oui** à la question **Need an empty box to return** (Besoin d’une boîte vide pour le retour).
+
+    ![Retourner l’appareil 3](media/azure-stack-edge-return-device/return-device-3.png)
+
+4. Passez en revue les **conditions de confidentialité** et cochez la case en regard de la note disant que vous avez lu et acceptez les conditions de confidentialité.
+
+5. Sélectionnez **Initier le retour**.
+
+    ![Retourner l’appareil 4](media/azure-stack-edge-return-device/return-device-4.png) 
+
+6. Une fois que les détails du retour de l’appareil ont été capturés, vous pouvez informer l’équipe des opérations Azure Stack Edge Pro par e-mail. Vous pouvez utiliser votre application de messagerie, en supposant que l’application de messagerie est installée et configurée. Vous pouvez également copier les données pour créer et envoyer un e-mail.
+
+    ![Retourner l’appareil 5](media/azure-stack-edge-return-device/return-device-5.png) 
+
+7. Une fois que l’équipe des opérations Azure Stack Edge Pro reçoit l’e-mail, elle vous envoie une étiquette de livraison de retour. Lorsque vous recevez cette étiquette, vous pouvez planifier la collecte de l’appareil avec le transporteur. 
 
 ## <a name="schedule-a-pickup"></a>Planification d’un enlèvement
+
+Pour planifier une collecte, procédez comme suit.
 
 1. Arrêtez l’appareil. Sur l’interface utilisateur web locale, accédez à **Maintenance > Paramètres d'alimentation**.
 2. Sélectionnez **Arrêter**. Lorsque la boîte de dialogue de confirmation apparaît, cliquez sur **Oui** pour continuer. Pour plus d’informations, consultez [Gérer l’alimentation](data-box-gateway-manage-access-power-connectivity-mode.md#manage-power).
@@ -78,19 +111,20 @@ Pour commencer le processus de retour, effectuez les étapes suivantes.
     2. Lors de votre appel, indiquez le numéro de suivi de retour mentionné sur votre étiquette imprimée.
     3. Si le numéro de suivi n’est pas indiqué, UPS vous facturera des frais supplémentaires à l’enlèvement.
 
-    Au lieu de planifier l’enlèvement, vous pouvez également déposer le disque Azure Stack Edge au point de dépôt le plus proche.
+    Au lieu de planifier l’enlèvement, vous pouvez également déposer le disque Azure Stack Edge Pro au point de dépôt le plus proche.
 
 ## <a name="delete-the-resource"></a>Supprimer la ressource
 
 Lorsque l’appareil est reçu par le centre de données Azure, il est inspecté pour rechercher des dommages ou des signes de falsification.
 
-- Si l’appareil arrive intact et en bon état, le compteur de facturation s’arrête pour cette ressource. Le Support Microsoft vous contactera pour confirmer que l’appareil a été retourné. Vous pouvez alors supprimer la ressource associée à l’appareil dans le Portail Azure.
+- Si l’appareil arrive intact et en bon état, le compteur de facturation s’arrête pour cette ressource. L’équipe des opérations Azure Stack Edge Pro vous contactera pour confirmer que l’appareil a été renvoyé. Vous pouvez alors supprimer la ressource associée à l’appareil dans le Portail Azure.
 - Si l’appareil arrive sérieusement endommagé, des amendes peuvent s’appliquer. Pour plus de détails, consultez le [FAQ relatif aux appareils perdus ou endommagés](https://azure.microsoft.com/pricing/details/databox/edge/) et les [conditions d’utilisation du produit](https://www.microsoft.com/licensing/product-licensing/products).  
 
 
 Vous pouvez supprimer l’appareil dans le Portail Azure :
--    Après avoir passé la commande et avant la préparation de l’appareil par Microsoft.
--    Lorsque vous avez retourné l’appareil à Microsoft, il est soumis à une inspection physique dans le centre de données Azure, et le Support Microsoft vous appelle pour confirmer que l’appareil a été retourné.
+
+- Après avoir passé la commande et avant la préparation de l’appareil par Microsoft.
+- Lorsque vous avez retourné l’appareil à Microsoft, il est soumis à une inspection physique dans le centre de données Azure, et l’équipe d’opérations Azure Stack Edge Pro vous appelle pour confirmer que l’appareil a été retourné.
 
 Si vous avez activé l’appareil sur un autre abonnement ou à un autre emplacement, Microsoft déplacera votre commande vers le nouvel abonnement ou emplacement dans un délai d’un jour ouvrable. Lorsque la commande est déplacée, vous pouvez supprimer cette ressource.
 
@@ -107,21 +141,7 @@ Effectuez les étapes suivantes pour supprimer l’appareil et la ressource dans
 
 Vous êtes informé lorsque l’appareil et la ressource associée ont bien été supprimés.
 
-## <a name="get-a-replacement-device"></a>Obtenir un appareil de remplacement
-
-Un appareil de remplacement est nécessaire lorsque l’appareil existant présente une défaillance matérielle ou a besoin d’une mise à niveau. Procédez comme suit lorsque votre appareil présente une défaillance matérielle :
-
-1. [Ouvrez un ticket de support de support pour problème matériel](#open-a-support-ticket). Le support Microsoft déterminera qu’une unité de remplacement de champ (FRU) n’est pas disponible pour cette instance ou que l’appareil a besoin d’une mise à niveau matérielle. Dans les deux cas, le support commandera un appareil de remplacement.
-2. [Créer une nouvelle ressource](azure-stack-edge-deploy-prep.md#create-a-new-resource) pour le périphérique de remplacement. Veillez à activer la case à cocher **Je possède un appareil Azure Stack Edge**. 
-3. Une fois que vous avez reçu un appareil de remplacement, [installez](azure-stack-edge-deploy-install.md) et [activez](azure-stack-edge-deploy-connect-setup-activate.md) l’appareil de remplacement par rapport à la nouvelle ressource.
-4. Suivez toutes les étapes pour retourner l’appareil d’origine :
-    1. Ouvrez un autre ticket pour retourner l’appareil d’origine.
-    2. [Effacez les données sur l’appareil](#erase-data-from-the-device).
-    3. [Planifiez un enlèvement](#schedule-a-pickup).
-    5. [Supprimez la ressource](#delete-the-resource) associée à l’appareil retourné.
-
-
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment [gérer la bande passante](azure-stack-edge-manage-bandwidth-schedules.md).
+- Découvrez comment [Obtenir un appareil Azure Stack Edge Pro de remplacement](azure-stack-edge-replace-device.md).

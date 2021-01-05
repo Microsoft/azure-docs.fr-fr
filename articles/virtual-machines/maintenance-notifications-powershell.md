@@ -4,27 +4,39 @@ description: Affichez les notifications de maintenance pour les machines virtuel
 author: shants123
 ms.service: virtual-machines
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/19/2019
 ms.author: shants
-ms.openlocfilehash: b23c210d7c8a9f1d42e6e1b46e0f7f81bda857b2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9942ad359bf1e1e7a02f30979ba4a9325d90d484
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77916080"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91336052"
 ---
 # <a name="handling-planned-maintenance-using-powershell"></a>Gestion de la maintenance planifiée à l’aide de PowerShell
 
 **Cet article s’applique aux machines virtuelles exécutant Linux et Windows.**
 
-Vous pouvez utiliser Azure PowerShell pour savoir quand la [maintenance](maintenance-notifications.md) des machines virtuelles a été planifiée. Les informations de maintenance planifiée sont disponibles à partir de la cmdlet [Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) lorsque vous utilisez le paramètre `-status`.
+Vous pouvez utiliser Azure PowerShell pour savoir quand la [maintenance](maintenance-notifications.md) des machines virtuelles a été planifiée. Les informations de maintenance planifiée sont disponibles à partir de la cmdlet [Get-AzVM](/powershell/module/az.compute/get-azvm) lorsque vous utilisez le paramètre `-status`.
   
 Les informations de maintenance sont retournées uniquement en cas de maintenance planifiée. Si aucune maintenance planifiée n’impacte la machine virtuelle, l’applet de commande ne retourne pas d’informations de maintenance. 
 
 
 ```powershell
 Get-AzVM -ResourceGroupName myResourceGroup -Name myVM -Status
+```
+
+Sortie
+
+```
+MaintenanceRedeployStatus               : 
+  IsCustomerInitiatedMaintenanceAllowed : True
+  PreMaintenanceWindowStartTime         : 5/14/2018 12:30:00 PM
+  PreMaintenanceWindowEndTime           : 5/19/2018 12:30:00 PM
+  MaintenanceWindowStartTime            : 5/21/2018 4:30:00 PM
+  MaintenanceWindowEndTime              : 6/4/2018 4:30
+  LastOperationResultCode               : None 
 ```
 
 Les propriétés suivantes sont retournées sous MaintenanceRedeployStatus : 
@@ -40,7 +52,7 @@ Les propriétés suivantes sont retournées sous MaintenanceRedeployStatus :
 
 
 
-Vous pouvez également obtenir l'état de maintenance de toutes les machines virtuelles d'un groupe de ressources à l'aide de [Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) sans spécifier de machine virtuelle.
+Vous pouvez également obtenir l'état de maintenance de toutes les machines virtuelles d'un groupe de ressources à l'aide de [Get-AzVM](/powershell/module/az.compute/get-azvm) sans spécifier de machine virtuelle.
  
 ```powershell
 Get-AzVM -ResourceGroupName myResourceGroup -Status

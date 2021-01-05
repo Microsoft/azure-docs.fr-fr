@@ -1,28 +1,19 @@
 ---
-title: Partager des tableaux de bord du portail Azure à l'aide du contrôle d'accès en fonction du rôle
-description: Cet article vous explique comment partager un tableau de bord dans le portail Azure en utilisant le contrôle d'accès en fonction du rôle.
-services: azure-portal
-documentationcenter: ''
-author: mgblythe
-manager: mtillman
+title: Partager des tableaux de bord du portail Azure à l’aide du contrôle d’accès en fonction du rôle Azure
+description: Cet article vous explique comment partager un tableau de bord dans le portail Azure en utilisant le contrôle d’accès en fonction du rôle Azure.
 ms.assetid: 8908a6ce-ae0c-4f60-a0c9-b3acfe823365
-ms.service: azure-portal
-ms.devlang: NA
-ms.topic: conceptual
-ms.tgt_pltfrm: NA
-ms.workload: na
+ms.topic: how-to
 ms.date: 03/23/2020
-ms.author: mblythe
-ms.openlocfilehash: 4eef5a9e3f010e19871471d007ff2a0cc24d3834
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: de2efd75d07c3dc7df771aad1bd9c73453dad212
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461376"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745976"
 ---
-# <a name="share-azure-dashboards-by-using-role-based-access-control"></a>Partager des tableaux de bord Azure à l’aide du contrôle d’accès en fonction du rôle
+# <a name="share-azure-dashboards-by-using-azure-role-based-access-control"></a>Partager des tableaux de bord Azure à l’aide du contrôle d’accès en fonction du rôle Azure
 
-Après avoir configuré un tableau de bord, vous pouvez le publier et le partager avec d’autres utilisateurs de votre organisation. Vous permettez à d'autres utilisateurs de voir votre tableau de bord au moyen du [contrôle d'accès en fonction du rôle (RBAC)](../role-based-access-control/role-assignments-portal.md) Azure. Attribuez un rôle à un utilisateur ou à un groupe d'utilisateurs. Ce rôle détermine si ces utilisateurs peuvent consulter ou modifier le tableau de bord publié.
+Après avoir configuré un tableau de bord, vous pouvez le publier et le partager avec d’autres utilisateurs de votre organisation. Vous permettez à d'autres utilisateurs de voir votre tableau de bord au moyen du [contrôle d'accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/role-assignments-portal.md). Attribuez un rôle à un utilisateur ou à un groupe d'utilisateurs. Ce rôle détermine si ces utilisateurs peuvent consulter ou modifier le tableau de bord publié.
 
 Tous les tableaux de bord publiés sont implémentés en tant que ressources Azure. Ceux-ci constituent des éléments gérables de votre abonnement et sont contenus dans un groupe de ressources. En termes de contrôle d’accès, les tableaux de bord sont traités de la même manière que les autres ressources, telles qu’une machine virtuelle ou un compte de stockage.
 
@@ -33,7 +24,7 @@ Tous les tableaux de bord publiés sont implémentés en tant que ressources Azu
 
 ## <a name="understanding-access-control-for-dashboards"></a>Présentation du contrôle d’accès relatif aux tableaux de bord
 
-Le contrôle d’accès en fonction du rôle (RBAC) vous permet d’attribuer des utilisateurs à des rôles avec trois niveaux d’étendue distincts :
+Le contrôle d’accès en fonction du rôle Azure (Azure RBAC) vous permet d’attribuer des utilisateurs à des rôles avec trois niveaux d’étendue distincts :
 
 * subscription
 * resource group
@@ -87,6 +78,5 @@ Vous pouvez attribuer un rôle à un groupe d'utilisateurs pour ce tableau de bo
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour obtenir la liste des rôles, consultez [Rôles intégrés pour les ressources Azure](../role-based-access-control/built-in-roles.md).
-* Pour en savoir plus sur la gestion des ressources, consultez [Gérer des ressources Azure à l'aide du portail Azure](resource-group-portal.md).
-
+* Pour obtenir la liste des rôles, voir [Rôles Azure intégrés](../role-based-access-control/built-in-roles.md).
+* Pour en savoir plus sur la gestion des ressources, consultez [Gérer des ressources Azure à l'aide du portail Azure](../azure-resource-manager/management/manage-resources-portal.md).

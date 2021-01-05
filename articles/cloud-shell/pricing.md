@@ -15,10 +15,10 @@ ms.topic: article
 ms.date: 09/25/2017
 ms.author: damaerte
 ms.openlocfilehash: 2834bc7d9456c1177bdd2c235b8211a1edde6e42
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "60199412"
 ---
 # <a name="pricing"></a>Tarifs

@@ -3,20 +3,22 @@ title: Frais associés aux unités de demande pour Azure Cosmos DB en tant que m
 description: Découvrez les frais des unités de demande pour Azure Cosmos DB pour de simples opérations de lecture et d’écriture lorsqu’il est utilisé comme magasin de valeurs de clés.
 author: SnehaGunda
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 08/23/2019
 ms.author: sngun
 ms.custom: seodec18
-ms.openlocfilehash: 5b2ee8b5bf19f16d7f7f04e9515fe591db7132f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9354ae0a22ef2e8ab4ee6a57563d3f3c4c8e4547
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77647502"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339298"
 ---
 # <a name="azure-cosmos-db-as-a-key-value-store--cost-overview"></a>Azure Cosmos DB comme magasin de valeurs de clés – Synthèse des coûts
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Azure Cosmos DB est un service de base de données multimodèle, distribué dans le monde entier, qui permet de créer facilement des applications à grande échelle et à haute disponibilité. Par défaut, Azure Cosmos DB indexe automatiquement et efficacement toutes les données qu’il reçoit. Vous pouvez ainsi créer des requêtes [SQL](how-to-sql-query.md) (et [JavaScript](stored-procedures-triggers-udfs.md)) rapides et cohérentes sur les données. 
+Azure Cosmos DB est un service de base de données multimodèle, distribué dans le monde entier, qui permet de créer facilement des applications à grande échelle et à haute disponibilité. Par défaut, Azure Cosmos DB indexe automatiquement et efficacement toutes les données qu’il reçoit. Vous pouvez ainsi créer des requêtes [SQL](./sql-query-getting-started.md) (et [JavaScript](stored-procedures-triggers-udfs.md)) rapides et cohérentes sur les données. 
 
 Cet article décrit le coût qu’implique l’utilisation d’Azure Cosmos DB pour de simples opérations de lecture et d’écriture lorsqu’il est utilisé comme magasin de valeurs de clés. Les opérations d’écriture incluent des insertions, des remplacements, des suppressions et des upserts d’éléments de données. En plus d’un contrat SLA de disponibilité de 99,999 % pour tous les comptes multirégions, Azure Cosmos DB garantit une latence inférieure à 10 ms pour les opérations de lecture et d’écriture (indexées), au 99e centile. 
 
@@ -48,4 +50,3 @@ La plupart des magasins d’objets et d’objets Blob de base facturent 0,40 $ l
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Utilisez la [calculatrice d’unités de requête](https://cosmos.azure.com/capacitycalculator/) pour estimer le débit de vos charges de travail.
-

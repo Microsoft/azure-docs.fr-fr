@@ -7,12 +7,13 @@ ms.service: virtual-machines-windows
 ms.subservice: security
 ms.topic: quickstart
 ms.date: 05/17/2019
-ms.openlocfilehash: 6f564a9a4f13136bbe7e28a3600ca71892c82439
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: a50b62a7c6064672dfbf7d609b6053d7be6fdb77
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82081589"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89079487"
 ---
 # <a name="quickstart-create-and-encrypt-a-windows-virtual-machine-in-azure-with-powershell"></a>Démarrage rapide : Créer et chiffrer une machine virtuelle Windows dans Azure avec PowerShell
 

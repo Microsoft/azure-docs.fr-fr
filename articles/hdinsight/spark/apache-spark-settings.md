@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/24/2020
-ms.openlocfilehash: cdef21c69e8f05924097d57bbe78b86d38497b86
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c2e2daf6d8c9afa6ffef03b088ec9a7dc144cf47
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188155"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97504931"
 ---
 # <a name="configure-apache-spark-settings"></a>Configurer les paramètres d’Apache Spark
 
@@ -23,13 +23,13 @@ Le cluster Apache Spark HDInsight par défaut comporte les nœuds suivants : tr
 
 ![Architecture de HDInsight Spark](./media/apache-spark-settings/spark-hdinsight-arch.png)
 
-Le nombre et la taille des machines virtuelles pour les nœuds du cluster HDInsight peuvent avoir une incidence sur la configuration Spark. Les valeurs de configuration HDInsight autres que les valeurs par défaut nécessitent souvent des valeurs de configuration Spark spécifiques. Quand vous créez un cluster HDInsight Spark, des tailles de machine virtuelle vous sont suggérées pour chacun des composants. Les [tailles de machine virtuelle Linux à mémoire optimisée](../../virtual-machines/linux/sizes-memory.md) pour Azure sont D12 v2 ou supérieur.
+Le nombre et la taille des machines virtuelles pour les nœuds du cluster HDInsight peuvent avoir une incidence sur la configuration Spark. Les valeurs de configuration HDInsight autres que les valeurs par défaut nécessitent souvent des valeurs de configuration Spark spécifiques. Quand vous créez un cluster HDInsight Spark, des tailles de machine virtuelle vous sont suggérées pour chacun des composants. Les [tailles de machine virtuelle Linux à mémoire optimisée](../../virtual-machines/sizes-memory.md) pour Azure sont D12 v2 ou supérieur.
 
 ## <a name="apache-spark-versions"></a>Versions d’Apache Spark
 
 Utilisez la version de Spark la mieux adaptée à votre cluster.  Le service HDInsight inclut plusieurs versions de Spark et de HDInsight.  Chaque version de Spark comprend un ensemble de paramètres de cluster par défaut.  
 
-Lorsque vous créez un cluster, différentes versions de Spark sont disponibles. Pour connaître la liste complète, consultez [Composants et versions de HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-component-versioning).
+Lorsque vous créez un cluster, différentes versions de Spark sont disponibles. Pour connaître la liste complète, consultez [Composants et versions de HDInsight](../hdinsight-component-versioning.md).
 
 > [!NOTE]  
 > La version par défaut d’Apache Spark dans le service HDInsight peut changer sans préavis. Si vous êtes dépendant d’une version, Microsoft vous recommande de spécifier cette version quand vous créez des clusters à l’aide du SDK .NET, d’Azure PowerShell et d’Azure Classic CLI.
@@ -121,7 +121,7 @@ YARN contrôle la somme maximale de mémoire utilisée par les conteneurs sur ch
 
 ![Gestion de la mémoire Spark avec YARN](./media/apache-spark-settings/hdi-yarn-spark-memory.png)
 
-## <a name="change-parameters-for-an-application-running-in-jupyter-notebook"></a>Changer des paramètres d’une application exécutée dans un bloc-notes Jupyter
+## <a name="change-parameters-for-an-application-running-in-jupyter-notebook"></a>Changer les paramètres d’une application exécutée dans Jupyter Notebook
 
 Les clusters Spark dans HDInsight incluent un certain nombre de composants par défaut. Chacun de ces composants inclut des valeurs de configuration par défaut qui peuvent être remplacées en fonction des besoins.
 
@@ -133,12 +133,12 @@ Les clusters Spark dans HDInsight incluent un certain nombre de composants par d
 |Notebooks Jupyter et Apache Zeppelin|Interface utilisateur interactive sur navigateur permettant d’interagir avec le cluster Spark.|
 |Pilote ODBC|Connecte les clusters Spark dans HDInsight à des outils décisionnels comme Microsoft Power BI et Tableau.|
 
-Pour les applications exécutées dans le bloc-notes Jupyter, utilisez la commande `%%configure` afin d’apporter des modifications à la configuration depuis le bloc-notes. Ces modifications de configuration sont appliquées aux travaux Spark exécutés à partir de votre instance de bloc-notes. Effectuez ces modifications au début de l’application, avant d’exécuter la première cellule de code. La configuration modifiée est appliquée à la session Livy au moment de sa création.
+Pour les applications exécutées dans Jupyter Notebook, utilisez la commande `%%configure` afin d’apporter des modifications à la configuration depuis le notebook. Ces modifications de configuration sont appliquées aux travaux Spark exécutés à partir de votre instance de bloc-notes. Effectuez ces modifications au début de l’application, avant d’exécuter la première cellule de code. La configuration modifiée est appliquée à la session Livy au moment de sa création.
 
 > [!NOTE]  
 > Pour changer la configuration ultérieurement dans l’application, utilisez le paramètre `-f` (forcer). Néanmoins, toute la progression de l’application est alors perdue.
 
-Le code ci-dessous montre comment changer la configuration d’une application exécutée dans un bloc-notes Jupyter.
+Le code ci-dessous montre comment changer la configuration d’une application exécutée dans Jupyter Notebook.
 
 ```
 %%configure

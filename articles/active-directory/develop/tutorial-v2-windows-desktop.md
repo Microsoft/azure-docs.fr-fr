@@ -1,6 +1,7 @@
 ---
-title: Bien démarrer avec la plateforme d’identités Microsoft et Windows Desktop
-description: Découvrez comment une application de bureau Windows .NET (XAML) peut obtenir un jeton d’accès et appeler une API protégée par la plateforme d’identités Microsoft.
+title: 'Tutoriel : Créer une application Windows Presentation Foundation (WPF) qui utilise la plateforme d’identité Microsoft pour l’authentification | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce tutoriel, vous allez créer une application WPF qui utilise la plateforme d’identité Microsoft pour connecter les utilisateurs et obtenir un jeton d’accès pour appeler l’API Microsoft Graph en leur nom.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -11,24 +12,32 @@ ms.workload: identity
 ms.date: 12/12/2019
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: a865bab690c79288bdffcd7cebe424d1bb1969c0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5fb7c0df653048adcffceda4d8a384be823b5c3a
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181532"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507691"
 ---
-# <a name="call-the-microsoft-graph-api-from-a-windows-desktop-app"></a>Appeler l’API Microsoft Graph à partir d’une application de bureau Windows
+# <a name="tutorial-call-the-microsoft-graph-api-from-a-windows-desktop-app"></a>Tutoriel : Appeler l’API Microsoft Graph à partir d’une application de bureau Windows
 
-Ce guide explique comment une application de bureau Windows .NET (XAML) native utilise un jeton d’accès pour appeler l’API Microsoft Graph. L’application peut également accéder aux autres API qui nécessitent des jetons d’accès d’un point de terminaison de la plateforme d’identité Microsoft v2.0 pour les développeurs. Cette plateforme était anciennement Azure AD.
+Dans ce tutoriel, vous allez créer une application Windows Desktop .NET (XAML) native qui connecte des utilisateurs et obtient un jeton d’accès pour appeler l’API Microsoft Graph. 
 
 À la fin de ce guide, votre application sera capable d’appeler une API protégée utilisant des comptes personnels (y compris outlook.com, live.com, etc.). L’application utilisera également des comptes professionnels et scolaires de toute entreprise ou organisation utilisant Azure Active Directory.
 
-> [!NOTE]
-> Ce guide nécessite Visual Studio 2015 Update 3, Visual Studio 2017 ou Visual Studio 2019. Vous n’avez aucune de ces versions ? [Téléchargez Visual Studio 2019 gratuitement](https://www.visualstudio.com/downloads/).
+Dans ce tutoriel, vous allez :
 
->[!NOTE]
-> Si vous êtes un nouvel utilisateur de la Plateforme d’identités Microsoft, nous vous recommandons de commencer avec l’article [Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application de bureau Windows](quickstart-v2-windows-desktop.md).
+> [!div class="checklist"]
+> * Créez un projet *Windows Presentation Foundation (WPF)* dans Visual Studio
+> * Installer la bibliothèque Microsoft Authentication Library (MSAL) pour .NET
+> * Inscrire l’application dans le Portail Azure
+> * Ajouter du code pour prendre en charge la connexion et la déconnexion des utilisateurs
+> * Ajouter du code pour appeler l’API Microsoft Graph
+> * Test de l'application
+
+## <a name="prerequisites"></a>Prérequis
+
+* [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
 
 ## <a name="how-the-sample-app-generated-by-this-guide-works"></a>Fonctionnement de l’exemple d’application de ce guide
 
@@ -95,18 +104,17 @@ Vous pouvez inscrire rapidement votre application en procédant comme suit :
 ### <a name="option-2-advanced-mode"></a>Option n°2 : Mode Avancé
 
 Pour inscrire votre application et ajouter les informations d’inscription de l’application à votre solution, procédez comme suit :
-1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-1. Si votre compte vous propose un accès à plusieurs locataires, sélectionnez votre compte en haut à droite et définissez votre session de portail sur le locataire Azure AD souhaité.
-1. Accédez à la page [Inscriptions des applications](https://go.microsoft.com/fwlink/?linkid=2083908) de la plateforme d’identité Microsoft pour les développeurs.
-1. Sélectionnez **Nouvelle inscription**.
-   - Dans la section **Nom**, saisissez un nom d’application cohérent qui s’affichera pour les utilisateurs de l’application, par exemple `Win-App-calling-MsGraph`.
-   - Dans la section **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft (par exemple, Skype, Xbox, Outlook.com)** .
-   - Sélectionnez **Inscrire** pour créer l’application.
-1. Dans la liste des pages de l’application, sélectionnez **Authentification**.
-   1. Dans la section **URI de redirection**, dans la liste des URI de redirection :
-   1. Dans la colonne **TYPE**, sélectionnez **Client public/natif (mobile & bureau)** .
-   1. Dans la colonne **URI de redirection**, entrez `https://login.microsoftonline.com/common/oauth2/nativeclient`.
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+1. Recherchez et sélectionnez **Azure Active Directory**.
+1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+1. Entrez un **nom** pour votre application (par exemple, `Win-App-calling-MsGraph`). Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
+1. Dans la section **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire d’organisation (tout annuaire Azure AD - Multilocataire) et comptes Microsoft personnels (par exemple, Skype, Xbox)** .
 1. Sélectionnez **Inscription**.
+1. Sous **Gérer**, sélectionnez **Authentification** > **Ajouter une plateforme**.
+1. Sélectionnez **Applications de bureau et mobiles**.
+1. Dans la section **URI de redirection**, sélectionnez **https://login.microsoftonline.com/common/oauth2/nativeclient** .
+1. Sélectionnez **Configurer**.
 1. Accédez à Visual Studio, ouvrez le fichier *App.xaml.cs*, puis remplacez `Enter_the_Application_Id_here` dans l’extrait de code ci-dessous par l’ID de l’application que vous venez d’inscrire et de copier.
 
     ```csharp
@@ -158,7 +166,7 @@ Dans cette étape, vous allez créer une classe pour gérer l’interaction avec
 
 La section suivante explique comment une application peut interroger un serveur principal protégé tel que Microsoft Graph.
 
-Un fichier *MainWindow.xaml* doit être automatiquement créé dans le cadre de votre modèle de projet. Ouvrez ce fichier et remplacez le nœud *\<Grid>* de votre application par le code suivant :
+Un fichier *MainWindow.xaml* doit être automatiquement créé dans le cadre de votre modèle de projet. Ouvrez ce fichier, puis remplacez le nœud *\<Grid>* de votre application par le code suivant :
 
 ```xml
 <Grid>
@@ -250,6 +258,7 @@ Dans cette section, vous allez utiliser MSAL pour obtenir un jeton pour l’API 
                 DisplayBasicTokenInfo(authResult);
                 this.SignOutButton.Visibility = Visibility.Visible;
             }
+        }
         }
     ```
 
@@ -367,3 +376,10 @@ private void DisplayBasicTokenInfo(AuthenticationResult authResult)
 Outre le jeton d’accès qui est utilisé pour appeler l’API Microsoft Graph, MSAL obtient également un jeton d’ID une fois l’utilisateur connecté. Ce jeton contient un petit sous-ensemble d’informations pertinentes pour les utilisateurs. La méthode `DisplayBasicTokenInfo` affiche les informations de base du jeton. Par exemple, le nom affiché et l’ID de l’utilisateur, ainsi que la date d’expiration du jeton et la chaîne qui représente le jeton d’accès lui-même. Si vous cliquez plusieurs fois sur le bouton *Call Microsoft Graph API* (Appeler l’API Microsoft Graph), vous observerez que le même jeton a été réutilisé pour les demandes suivantes. Vous constatez également que la date d’expiration est différée lorsque MSAL détermine qu’il est temps de renouveler le jeton.
 
 [!INCLUDE [5. Test and Validate](../../../includes/active-directory-develop-guidedsetup-windesktop-test.md)]
+
+## <a name="next-steps"></a>Étapes suivantes
+
+En savoir plus sur la création d’applications de bureau qui appellent des API Web protégées dans notre série de scénarios en plusieurs parties :
+
+> [!div class="nextstepaction"]
+> [Scénario : Application de bureau qui appelle des API web](scenario-desktop-overview.md)

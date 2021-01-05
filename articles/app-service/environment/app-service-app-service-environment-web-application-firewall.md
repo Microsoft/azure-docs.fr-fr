@@ -7,17 +7,17 @@ ms.topic: tutorial
 ms.date: 03/03/2018
 ms.author: stefsch
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 33fd0b6a3a07fa4fbc5448a97ca93c75a3e239d5
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 354568fa3ab3816b643a8f08305ab55868a9b0b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83684219"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90973703"
 ---
 # <a name="configuring-a-web-application-firewall-waf-for-app-service-environment"></a>Configuration d'un pare-feu d'applications Web (WAF) pour un environnement App Service
 ## <a name="overview"></a>Vue d’ensemble
 
-Les pare-feu d’applications web (WAF) permettent de sécuriser vos applications web en inspectant le trafic web entrant pour bloquer les injections SQL, les attaques XSS, les téléchargements de programmes malveillants, les attaques DDoS, ainsi que les autres attaques. Ils inspectent également les réponses des serveurs web principaux pour la prévention de perte de données (DLP). En association avec l'isolement et la mise à l'échelle supplémentaire fournis par les environnements App Service, ceci fournit un environnement idéal pour héberger des applications Web professionnelles critiques qui doivent résister aux requêtes malveillantes et à un volume de trafic élevé. Azure fournit une fonctionnalité WAF avec le service [Application Gateway](https://docs.microsoft.com/azure/application-gateway/application-gateway-introduction).  Pour savoir comment intégrer votre environnement App Service à un service Application Gateway, consultez le document [Intégrer votre environnement App Service ILB à l’aide d’une passerelle d’application](https://docs.microsoft.com/azure/app-service/environment/integrate-with-application-gateway).
+Les pare-feu d’applications web (WAF) permettent de sécuriser vos applications web en inspectant le trafic web entrant pour bloquer les injections SQL, les attaques XSS, les téléchargements de programmes malveillants, les attaques DDoS, ainsi que les autres attaques. Ils inspectent également les réponses des serveurs web principaux pour la prévention de perte de données (DLP). En association avec l'isolement et la mise à l'échelle supplémentaire fournis par les environnements App Service, ceci fournit un environnement idéal pour héberger des applications Web professionnelles critiques qui doivent résister aux requêtes malveillantes et à un volume de trafic élevé. Azure fournit une fonctionnalité WAF avec le service [Application Gateway](../../application-gateway/overview.md).  Pour savoir comment intégrer votre environnement App Service à un service Application Gateway, consultez le document [Intégrer votre environnement App Service ILB à l’aide d’une passerelle d’application](./integrate-with-application-gateway.md).
 
 En plus du service Azure Application Gateway, de nombreuses options de marketplace comme le [WAF Barracuda pour Azure](https://www.barracuda.com/programs/azure) sont disponibles sur la [Place de marché Microsoft Azure](https://azuremarketplace.microsoft.com/marketplace/apps/barracudanetworks.waf?tab=PlansAndPrice). Le reste de ce document se concentre sur l’intégration de votre environnement App Service à un appareil WAF Barracuda.
 
@@ -26,7 +26,7 @@ En plus du service Azure Application Gateway, de nombreuses options de marketpla
 ## <a name="setup"></a>Programme d’installation
 Pour ce document, nous configurons l’environnement App Service derrière plusieurs instances à charge équilibrée de WAF Barracuda, afin que seul le trafic provenant du WAF puisse atteindre l’environnement App Service. Il n’est pas accessible depuis la zone DMZ. Nous avons également Azure Traffic Manager devant les instances WAF Barracuda pour équilibrer la charge entre les régions et les centres de données Azure. Un diagramme de haut niveau de la configuration ressemblerait à l’image suivante :
 
-![Architecture][Architecture] 
+![Le diagramme montre une instance Traffic Manager Azure facultative qui se connecte aux instances Web Application Firewall, en se connectant à la liste de contrôle d’accès (ACL) réseau pour autoriser uniquement le trafic à partir du pare-feu dans un environnement App Service Environment qui contient l’API web, et une application mobile pour deux régions.][Architecture] 
 
 > [!NOTE]
 > Avec l’introduction de la [prise en charge de l’équilibreur de charge interne pour l’environnement App Service](app-service-environment-with-internal-load-balancer.md), vous pouvez configurer l’ASE de façon à ce qu’il soit inaccessible depuis le DMZ et uniquement disponible pour le réseau privé. 
@@ -34,7 +34,7 @@ Pour ce document, nous configurons l’environnement App Service derrière plusi
 > 
 
 ## <a name="configuring-your-app-service-environment"></a>Configuration de votre environnement App Service
-Pour configurer un environnement App Service, consultez [notre documentation](app-service-web-how-to-create-an-app-service-environment.md) sur le sujet. Une fois qu’un environnement App Service est créé, vous pouvez y créer des applications web, des applications d’API et des [applications mobiles](../../app-service-mobile/app-service-mobile-value-prop.md), qui seront toutes protégées derrière le WAF que nous allons configurer dans la section suivante.
+Pour configurer un environnement App Service, consultez [notre documentation](app-service-web-how-to-create-an-app-service-environment.md) sur le sujet. Une fois qu’un environnement App Service est créé, vous pouvez y créer des applications web, des applications d’API et des [applications mobiles](/previous-versions/azure/app-service-mobile/app-service-mobile-value-prop), qui seront toutes protégées derrière le WAF que nous allons configurer dans la section suivante.
 
 ## <a name="configuring-your-barracuda-waf-cloud-service"></a>Configuration de votre service cloud WAF Barracuda
 Barracuda propose un [article détaillé](https://campus.barracuda.com/product/webapplicationfirewall/article/WAF/DeployWAFInAzure) sur le déploiement de son WAF sur une machine virtuelle dans Azure. Mais étant donné que nous voulons la redondance sans introduire aucun point de défaillance, vous devez déployer au moins deux machines virtuelles d’instances WAF dans le même service cloud.
@@ -89,9 +89,11 @@ Pour transférer les exécutions de commande ping de Traffic Manager à partir d
 ![Traductions de site Web][WebsiteTranslations]
 
 ## <a name="securing-traffic-to-app-service-environment-using-network-security-groups-nsg"></a>Sécurisation du trafic vers un environnement App Service à l’aide de groupes de sécurité réseau (NSG)
-Consultez la [documentation relative au contrôle du trafic entrant](app-service-app-service-environment-control-inbound-traffic.md) pour plus d’informations sur la restriction du trafic du WAF vers votre environnement App Service uniquement en utilisant l’adresse IP virtuelle de votre service cloud. Voici un exemple de commande Powershell pour effectuer cette tâche pour le port TCP 80.
+Consultez la [documentation relative au contrôle du trafic entrant](app-service-app-service-environment-control-inbound-traffic.md) pour plus d’informations sur la restriction du trafic du WAF vers votre environnement App Service uniquement en utilisant l’adresse IP virtuelle de votre service cloud. Voici un exemple de commande PowerShell pour effectuer cette tâche pour le port TCP 80.
 
-    Get-AzureNetworkSecurityGroup -Name "RestrictWestUSAppAccess" | Set-AzureNetworkSecurityRule -Name "ALLOW HTTP Barracuda" -Type Inbound -Priority 201 -Action Allow -SourceAddressPrefix '191.0.0.1'  -SourcePortRange '*' -DestinationAddressPrefix '*' -DestinationPortRange '80' -Protocol TCP
+```azurepowershell-interactive
+Get-AzureNetworkSecurityGroup -Name "RestrictWestUSAppAccess" | Set-AzureNetworkSecurityRule -Name "ALLOW HTTP Barracuda" -Type Inbound -Priority 201 -Action Allow -SourceAddressPrefix '191.0.0.1'  -SourcePortRange '*' -DestinationAddressPrefix '*' -DestinationPortRange '80' -Protocol TCP
+```
 
 Remplacez SourceAddressPrefix par l'adresse IP virtuelle (VIP) du service cloud de votre WAF.
 

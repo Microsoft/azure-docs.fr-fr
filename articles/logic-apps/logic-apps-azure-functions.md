@@ -6,12 +6,13 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 10/01/2019
-ms.openlocfilehash: 29713622be90ea280bff3c002be746bf1615718f
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.custom: devx-track-js
+ms.openlocfilehash: 75693c57a8d120aad53a15d03ae4054bac8262af
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81605911"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023055"
 ---
 # <a name="call-azure-functions-from-azure-logic-apps"></a>Appeler des fonctions Azure à partir d’Azure Logic Apps
 
@@ -200,7 +201,7 @@ Pour déclencher une application logique à partir d’une fonction Azure, l’a
 
 ## <a name="enable-authentication-for-azure-functions"></a>Activer l’authentification pour les fonctions Azure
 
-Pour authentifier l’accès aux ressources dans d’autres locataires Azure Active Directory (Azure AD) sans avoir à vous connecter ni à fournir des informations d’identification ou des secrets, votre application logique peut utiliser une [identité managée](../active-directory/managed-identities-azure-resources/overview.md) (anciennement appelée MSI ou Managed Service Identity). Azure gère cette identité pour vous et vous aide à sécuriser vos informations d’identification, car vous n’êtes pas obligé de fournir ni de faire pivoter des secrets. En savoir plus sur les [services Azure qui prennent en charge les identités managées pour l’authentification Azure AD](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-azure-ad-authentication).
+Pour authentifier facilement l’accès à d’autres ressources qui sont protégées par Azure Active Directory (Azure AD) sans avoir à vous connecter ni à fournir des informations d’identification ou des secrets, votre application logique peut utiliser une [identité managée](../active-directory/managed-identities-azure-resources/overview.md) (anciennement appelée MSI ou Managed Service Identity). Azure gère cette identité pour vous et vous aide à sécuriser vos informations d’identification, car vous n’êtes pas obligé de fournir ni de faire pivoter des secrets. En savoir plus sur les [services Azure qui prennent en charge les identités managées pour l’authentification Azure AD](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-azure-ad-authentication).
 
 Si vous configurez votre application logique pour utiliser l’identité affectée par le système ou une identité affectée par l’utilisateur créée manuellement, les fonctions Azure de votre application logique peuvent également utiliser cette même identité pour l’authentification. Pour en savoir plus sur la prise en charge de l’authentification pour les fonctions Azure dans les applications logiques, consultez [Ajouter l’authentification aux appels sortants](../logic-apps/logic-apps-securing-a-logic-app.md#add-authentication-outbound).
 
@@ -257,7 +258,7 @@ Avant de commencer cette tâche, recherchez et mettez ces valeurs de côté pour
 
 * L’ID de répertoire de votre locataire dans Azure Active Directory (Azure AD)
 
-  Pour récupérer l’ID de répertoire de votre locataire, vous pouvez exécuter la commande PowerShell [`Get-AzureAccount`](https://docs.microsoft.com/powershell/module/servicemanagement/azure/get-azureaccount). Ou, dans le portail Azure, procédez comme suit :
+  Pour récupérer l’ID de répertoire de votre locataire, vous pouvez exécuter la commande PowerShell [`Get-AzureAccount`](/powershell/module/servicemanagement/azure.service/get-azureaccount). Ou, dans le portail Azure, procédez comme suit :
 
   1. Dans le [portail Azure](https://portal.azure.com), recherchez et sélectionnez votre application de fonction.
 

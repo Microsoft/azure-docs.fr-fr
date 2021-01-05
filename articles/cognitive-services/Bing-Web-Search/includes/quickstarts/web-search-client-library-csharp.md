@@ -6,14 +6,15 @@ author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 03/05/2020
+ms.date: 10/19/2020
 ms.author: aahi
-ms.openlocfilehash: 32a31892317cadb37f16e48df80bef7d6d8a99ef
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d391586ade9e9a58344f9b1666802a453770152a
+ms.sourcegitcommit: 8a1ba1ebc76635b643b6634cc64e137f74a1e4da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78926012"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94386566"
 ---
 La bibliothèque de client de l’API Recherche Web Bing simplifie l’intégration de l’API dans votre application C#. Dans ce démarrage rapide, vous allez apprendre à instancier un client, envoyer une requête et imprimer la réponse.
 
@@ -35,7 +36,7 @@ Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage r
 > [!TIP]
 > Récupérer le dernier code en tant que solution Visual Studio à partir de [GitHub](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/).
 
-La première étape consiste à créer un nouveau projet de console. Si vous avez besoin d’aide pour configurer un projet de console, consultez [Hello World--votre premier programme (Guide de programmation C#)](https://docs.microsoft.com/dotnet/csharp/programming-guide/inside-a-program/hello-world-your-first-program). Pour utiliser le kit de développement logiciel de l’API Recherche Web Bing dans votre application, vous devrez installer `Microsoft.Azure.CognitiveServices.Search.WebSearch` à l’aide du gestionnaire de package NuGet.
+La première étape consiste à créer un nouveau projet de console. Si vous avez besoin d’aide pour configurer un projet de console, consultez [Hello World--votre premier programme (Guide de programmation C#)](/dotnet/csharp/programming-guide/inside-a-program/hello-world-your-first-program). Pour utiliser le kit de développement logiciel de l’API Recherche Web Bing dans votre application, vous devrez installer `Microsoft.Azure.CognitiveServices.Search.WebSearch` à l’aide du gestionnaire de package NuGet.
 
 Le [package du kit de développement Web de l’API Recherche Web Bing](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.WebSearch/1.2.0) installe également :
 
@@ -53,6 +54,7 @@ using System.Collections.Generic;
 using Microsoft.Azure.CognitiveServices.Search.WebSearch;
 using Microsoft.Azure.CognitiveServices.Search.WebSearch.Models;
 using System.Linq;
+using System.Threading.Tasks;
 ```
 
 ## <a name="create-project-scaffolding"></a>Créer la génération de modèles automatique du projet
@@ -78,7 +80,7 @@ Dans les sections suivantes, nous allons créer notre exemple d’application au
 Ce code construit la requête de la recherche.
 
 ```csharp
-public static async void WebResults(WebSearchClient client)
+public static async Task WebResults(WebSearchClient client)
 {
     try
     {
@@ -205,11 +207,11 @@ else
 Dans cette application, la méthode principale inclut le code qui instancie le client, valide le `subscriptionKey`et appelle `WebResults`. Assurez-vous que vous entrez une clé d’abonnement valide pour votre compte Azure avant de continuer.
 
 ```csharp
-static void Main(string[] args)
+static async Task Main(string[] args)
 {
     var client = new WebSearchClient(new ApiKeyServiceClientCredentials("YOUR_SUBSCRIPTION_KEY"));
 
-    WebResults(client);
+    await WebResults(client);
 
     Console.WriteLine("Press any key to exit...");
     Console.ReadKey();
@@ -235,7 +237,7 @@ Cet exemple utilise les paramètres `count` et `offset` pour limiter le nombre d
 1. Ajoutez ce code à votre projet de console :
 
     ```csharp
-    public static async void WebResultsWithCountAndOffset(WebSearchClient client)
+    public static async Task WebResultsWithCountAndOffset(WebSearchClient client)
     {
         try
         {
@@ -272,13 +274,13 @@ Cet exemple utilise les paramètres `count` et `offset` pour limiter le nombre d
 2. Ajoutez `WebResultsWithCountAndOffset` à `main` :
 
     ```csharp
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var client = new WebSearchClient(new ApiKeyServiceClientCredentials("YOUR_SUBSCRIPTION_KEY"));
 
-        WebResults(client);
+        await WebResults(client);
         // Search with count and offset...
-        WebResultsWithCountAndOffset(client);  
+        await WebResultsWithCountAndOffset(client);  
 
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
@@ -294,7 +296,7 @@ Cet exemple utilise le paramètre `response_filter` pour filtrer les résultats 
 1. Ajoutez ce code à votre projet de console :
 
     ```csharp
-    public static async void WebSearchWithResponseFilter(WebSearchClient client)
+    public static async Task WebSearchWithResponseFilter(WebSearchClient client)
     {
         try
         {
@@ -333,15 +335,15 @@ Cet exemple utilise le paramètre `response_filter` pour filtrer les résultats 
 2. Ajoutez `WebResultsWithCountAndOffset` à `main` :
 
     ```csharp
-    static void Main(string[] args)
+    static Task Main(string[] args)
     {
         var client = new WebSearchClient(new ApiKeyServiceClientCredentials("YOUR_SUBSCRIPTION_KEY"));
 
-        WebResults(client);
+        await WebResults(client);
         // Search with count and offset...
-        WebResultsWithCountAndOffset(client);  
+        await WebResultsWithCountAndOffset(client);  
         // Search with news filter...
-        WebSearchWithResponseFilter(client);
+        await WebSearchWithResponseFilter(client);
 
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
@@ -357,7 +359,7 @@ Cet exemple utilise les paramètres `answer_count`, `promote` et `safe_search` p
 1. Ajoutez ce code à votre projet de console :
 
     ```csharp
-    public static async void WebSearchWithAnswerCountPromoteAndSafeSearch(WebSearchClient client)
+    public static async Task WebSearchWithAnswerCountPromoteAndSafeSearch(WebSearchClient client)
     {
         try
         {
@@ -395,17 +397,17 @@ Cet exemple utilise les paramètres `answer_count`, `promote` et `safe_search` p
 2. Ajoutez `WebResultsWithCountAndOffset` à `main` :
 
     ```csharp
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var client = new WebSearchClient(new ApiKeyServiceClientCredentials("YOUR_SUBSCRIPTION_KEY"));
 
-        WebResults(client);
+        await WebResults(client);
         // Search with count and offset...
-        WebResultsWithCountAndOffset(client);  
+        await WebResultsWithCountAndOffset(client);  
         // Search with news filter...
-        WebSearchWithResponseFilter(client);
+        await WebSearchWithResponseFilter(client);
         // Search with answer count, promote, and safe search
-        WebSearchWithAnswerCountPromoteAndSafeSearch(client);
+        await WebSearchWithAnswerCountPromoteAndSafeSearch(client);
 
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();
@@ -422,4 +424,3 @@ Lorsque vous avez terminé ce projet, veillez à supprimer votre clé d’abonne
 
 > [!div class="nextstepaction"]
 > [Exemples du SDK Node.js Cognitive Services](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/)
-                                    

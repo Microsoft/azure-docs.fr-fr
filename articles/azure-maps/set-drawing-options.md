@@ -1,27 +1,28 @@
 ---
 title: Module Outils de dessin | Microsoft Azure Maps
 description: Dans cet article, vous allez apprendre à définir des données d’options de dessin à l’aide du kit SDK Web Microsoft Azure Maps
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 01/29/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 711609f9382e2153cbc738d544933796dbbe2e99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 95a04d763fa5982181cc1c797bce969d9857ae4b
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334307"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92890630"
 ---
 # <a name="use-the-drawing-tools-module"></a>Utiliser le module Outils de dessin
 
-Le SDK web Azure Maps fournit un *module Outils de dessin*. Ce module facilite le dessin et la modification des formes sur la carte à l’aide d’un périphérique d’entrée tel qu’un écran tactile ou une souris. La classe de base de ce module est le [gestionnaire de dessins](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager?view=azure-node-latest#setoptions-drawingmanageroptions-). Le gestionnaire de dessins fournit toutes les fonctionnalités nécessaires pour dessiner et modifier des formes sur la carte. Il peut être utilisé directement et est intégré à une interface utilisateur de barre d’outils personnalisée. Vous pouvez également utiliser la classe de [barre d’outils de dessin](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar?view=azure-node-latest) intégrée. 
+Le SDK web Azure Maps fournit un *module Outils de dessin* . Ce module facilite le dessin et la modification des formes sur la carte à l’aide d’un périphérique d’entrée tel qu’un écran tactile ou une souris. La classe de base de ce module est le [gestionnaire de dessins](/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager#setoptions-drawingmanageroptions-). Le gestionnaire de dessins fournit toutes les fonctionnalités nécessaires pour dessiner et modifier des formes sur la carte. Il peut être utilisé directement et est intégré à une interface utilisateur de barre d’outils personnalisée. Vous pouvez également utiliser la classe de [barre d’outils de dessin](/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar) intégrée. 
 
 ## <a name="loading-the-drawing-tools-module-in-a-webpage"></a>Chargement du module Outils de dessin dans une page web
 
-1. Créez un fichier HTML et [implémentez la carte comme d’habitude](https://docs.microsoft.com/azure/azure-maps/how-to-use-map-control).
+1. Créez un fichier HTML et [implémentez la carte comme d’habitude](./how-to-use-map-control.md).
 2. Chargez le module Outils de dessin d’Azure Maps. Vous pouvez le faire de deux façons :
     - Utiliser la version d’Azure Content Delivery Network du module des services Azure Maps hébergée globalement. Ajoutez une référence au code JavaScript et à la feuille de style CSS dans l’élément `<head>` du fichier :
 
@@ -43,13 +44,13 @@ Le SDK web Azure Maps fournit un *module Outils de dessin*. Ce module facilite l
 
 ## <a name="use-the-drawing-manager-directly"></a>Utiliser le gestionnaire de dessins directement
 
-Une fois le module Outils de dessin chargé dans votre application, vous pouvez activer les fonctionnalités de dessin et d’édition à l’aide du [gestionnaire de dessins](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager?view=azure-node-latest#setoptions-drawingmanageroptions-). Vous pouvez spécifier des options pour le gestionnaire de dessins lors de l’instanciation ou utiliser la fonction `drawingManager.setOptions()`.
+Une fois le module Outils de dessin chargé dans votre application, vous pouvez activer les fonctionnalités de dessin et d’édition à l’aide du [gestionnaire de dessins](/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager#setoptions-drawingmanageroptions-). Vous pouvez spécifier des options pour le gestionnaire de dessins lors de l’instanciation ou utiliser la fonction `drawingManager.setOptions()`.
 
 ### <a name="set-the-drawing-mode"></a>Définir le mode dessin
 
-Le code suivant crée une instance du gestionnaire de dessins et définit l’option de mode **dessin**. 
+Le code suivant crée une instance du gestionnaire de dessins et définit l’option de mode **dessin** . 
 
-```Javascript
+```javascript
 //Create an instance of the drawing manager and set drawing mode.
 drawingManager = new atlas.drawing.DrawingManager(map,{
     mode: "draw-polygon"
@@ -75,7 +76,7 @@ Pour tracer des formes, le gestionnaire de dessins prend en charge trois modes d
 
 Le code suivant active le mode dessin de polygone et définit sur `freehand` le type d’interaction de dessin auquel le gestionnaire de dessins doit adhérer. 
 
-```Javascript
+```javascript
 //Create an instance of the drawing manager and set drawing mode.
 drawingManager = new atlas.drawing.DrawingManager(map,{
     mode: "draw-polygon",
@@ -121,10 +122,10 @@ Découvrez comment utiliser les fonctionnalités supplémentaires du module Outi
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [Map](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map?view=azure-iot-typescript-latest)
+> [Map](/javascript/api/azure-maps-control/atlas.map)
 
 > [!div class="nextstepaction"]
-> [Gestionnaire de dessins](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager?view=azure-node-latest)
+> [Gestionnaire de dessins](/javascript/api/azure-maps-drawing-tools/atlas.drawing.drawingmanager)
 
 > [!div class="nextstepaction"]
-> [Barre d’outils de dessin](https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar?view=azure-node-latest)
+> [Barre d’outils de dessin](/javascript/api/azure-maps-drawing-tools/atlas.control.drawingtoolbar)

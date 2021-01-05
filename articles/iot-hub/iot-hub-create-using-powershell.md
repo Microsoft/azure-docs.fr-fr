@@ -7,12 +7,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/29/2018
 ms.author: robinsh
-ms.openlocfilehash: 9c49f7ac744ee516aefc1571d50264132035ba8a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: da021e3ba0fd93a182ea76a1ba4b7042b325aacc
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73890606"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92142368"
 ---
 # <a name="create-an-iot-hub-using-the-new-aziothub-cmdlet"></a>Créez un IoT Hub à l’aide de la cmdlet New-AzIotHub
 
@@ -41,7 +41,7 @@ Login-AzAccount
 
 Vous avez besoin d’un groupe de ressources pour déployer un IoT Hub. Vous pouvez utiliser un groupe de ressources existant ou en créer un.
 
-Pour créer un groupe de ressources pour votre hub IoT, utilisez la commande [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.Resources/New-azResourceGroup). Cet exemple crée un groupe de ressources appelé **MyIoTRG1** dans la région **USA Est** :
+Pour créer un groupe de ressources pour votre hub IoT, utilisez la commande [New-AzResourceGroup](/powershell/module/az.Resources/New-azResourceGroup). Cet exemple crée un groupe de ressources appelé **MyIoTRG1** dans la région **USA Est** :
 
 ```azurepowershell-interactive
 New-AzResourceGroup -Name MyIoTRG1 -Location "East US"
@@ -49,7 +49,7 @@ New-AzResourceGroup -Name MyIoTRG1 -Location "East US"
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 
-Pour créer un hub IoT dans le groupe de ressources que vous avez créé à l’étape précédente, utilisez la commande [New-AzIotHub](https://docs.microsoft.com/powershell/module/az.IotHub/New-azIotHub). Cet exemple crée un hub **S1** appelé **MyTestIoTHub** dans la région **USA Est** :
+Pour créer un hub IoT dans le groupe de ressources que vous avez créé à l’étape précédente, utilisez la commande [New-AzIotHub](/powershell/module/az.IotHub/New-azIotHub). Cet exemple crée un hub **S1** appelé **MyTestIoTHub** dans la région **USA Est** :
 
 ```azurepowershell-interactive
 New-AzIotHub `
@@ -63,7 +63,7 @@ Le nom du hub IoT doit être globalement unique.
 
 [!INCLUDE [iot-hub-pii-note-naming-hub](../../includes/iot-hub-pii-note-naming-hub.md)]
 
-Vous pouvez afficher tous les hubs IoT de votre abonnement à l’aide de la commande [Get-AzIotHub](https://docs.microsoft.com/powershell/module/az.IotHub/Get-azIotHub) :
+Vous pouvez afficher tous les hubs IoT de votre abonnement à l’aide de la commande [Get-AzIotHub](/powershell/module/az.IotHub/Get-azIotHub) :
 
 ```azurepowershell-interactive
 Get-AzIotHub
@@ -71,7 +71,7 @@ Get-AzIotHub
 
 Cet exemple montre le hub IoT Standard S1 que vous avez créé à l’étape précédente.
 
-Vous pouvez supprimer le hub IoT à l’aide de la commande [Remove-AzIotHub](https://docs.microsoft.com/powershell/module/az.iothub/remove-aziothub) :
+Vous pouvez supprimer le hub IoT à l’aide de la commande [Remove-AzIotHub](/powershell/module/az.iothub/remove-aziothub) :
 
 ```azurepowershell-interactive
 Remove-AzIotHub `
@@ -79,7 +79,7 @@ Remove-AzIotHub `
     -Name MyTestIoTHub
 ```
 
-Vous pouvez également supprimer un groupe de ressources et toutes les ressources qu’il contient à l’aide de la commande [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.Resources/Remove-azResourceGroup) :
+Vous pouvez également supprimer un groupe de ressources et toutes les ressources qu’il contient à l’aide de la commande [Remove-AzResourceGroup](/powershell/module/az.Resources/Remove-azResourceGroup) :
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name MyIoTRG1
@@ -89,9 +89,9 @@ Remove-AzResourceGroup -Name MyIoTRG1
 
 Ayant déployé un hub IoT à l’aide d’une applet de commande PowerShell, vous pouvez aller encore plus loin en consultant les articles suivants :
 
-* [Applets de commande PowerShell pour utiliser votre hub IoT](https://docs.microsoft.com/powershell/module/az.iothub/).
+* [Applets de commande PowerShell pour utiliser votre hub IoT](/powershell/module/az.iothub/).
 
-* [API REST de fournisseur de ressources IoT Hub](https://docs.microsoft.com/rest/api/iothub/iothubresource).
+* [API REST de fournisseur de ressources IoT Hub](/rest/api/iothub/iothubresource).
 
 Pour en savoir plus sur le développement pour IoT Hub, consultez les articles suivants :
 
@@ -101,4 +101,4 @@ Pour en savoir plus sur le développement pour IoT Hub, consultez les articles s
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)

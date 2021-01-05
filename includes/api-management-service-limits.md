@@ -9,12 +9,12 @@ ms.topic: include
 ms.date: 04/14/2020
 ms.author: vlvinogr
 ms.custom: include file
-ms.openlocfilehash: 072f13f5a0884cf95fe760e17ff0d770111f4da0
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: cf051d96651161658796689639b5d268230d4b5a
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204456"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95559026"
 ---
 | Ressource | Limite |
 | ---------------------------------------------------------------------- | -------------------------- |
@@ -39,9 +39,9 @@ ms.locfileid: "82204456"
 <sup>2</sup>La taille du cache par unité varie selon le niveau tarifaire. Pour consulter les niveaux tarifaires et leurs limites de mise à l’échelle, voir [Tarification de la gestion des API](https://azure.microsoft.com/pricing/details/api-management/).<br/>
 <sup>3</sup>Les connexions sont regroupées et réutilisées, sauf si elles sont explicitement fermées par le back-end.<br/>
 <sup>4</sup>Cette limite est appliquée par unité des niveaux De base, Standard et Premium. Le niveau Développeur est limité à 1 024. Cette limite ne s’applique pas au niveau Consommation.<br/>
-<sup>5</sup>Cette limite est appliquée aux niveaux De base, Standard et Premium. Dans le niveau Consommation, la taille des documents de stratégies est limitée à 4 Kio.<br/>
+<sup>5</sup>Cette limite est appliquée aux niveaux De base, Standard et Premium. Dans le niveau Consommation, la taille des documents de stratégie est limitée à 16 Kio.<br/>
 <sup>6</sup>Les domaines personnalisés multiples sont pris en charge uniquement dans les niveaux Développeur et Premium.<br/>
 <sup>7</sup>Les certificats d’autorité de certification ne sont pas pris en charge dans le niveau Consommation.<br/>
-<sup>8</sup>Cette ressource s’applique au niveau Consommation uniquement.<br/>
+<sup>8</sup>Cette limite s’applique au niveau Consommation uniquement. Il n’existe aucune limite dans ces catégories pour les autres niveaux.<br/>
 <sup>9</sup> S’applique au niveau Consommation uniquement. Comprend une chaîne de requête longue allant jusqu’à 2048 octets.<br/>
-<sup>10</sup>Les passerelles auto-hébergées sont prises en charge uniquement dans les niveaux Développeur et Premium. Cette limite s’applique au nombre de [ressources des passerelles auto-hébergées](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/gateway). Pour augmenter cette limite, contactez le [support](https://azure.microsoft.com/support/options/). Notez que le nombre de nœuds (ou réplicas) associés à une ressource de passerelle auto-hébergée est illimité dans le niveau Premium, mais limité à un seul nœud dans le niveau Développeur.
+<sup>10</sup>Les passerelles auto-hébergées sont prises en charge uniquement dans les niveaux Développeur et Premium. Cette limite s’applique au nombre de [ressources des passerelles auto-hébergées](/rest/api/apimanagement/2019-12-01/gateway). Pour augmenter cette limite, contactez le [support](https://azure.microsoft.com/support/options/). Notez que le nombre de nœuds (ou réplicas) associés à une ressource de passerelle auto-hébergée est illimité dans le niveau Premium, mais limité à un seul nœud dans le niveau Développeur.

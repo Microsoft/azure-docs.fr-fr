@@ -8,54 +8,55 @@ manager: femila
 ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
-ms.date: 05/15/2019
+ms.date: 11/23/2019
 ms.author: juliako
-ms.openlocfilehash: 1c3326456fefbbef9228cf26b5821f306cd21601
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1ca7c677e5f1eb55d74cca45e757676674f303c
+ms.sourcegitcommit: 2e9643d74eb9e1357bc7c6b2bca14dbdd9faa436
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80127907"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96030536"
 ---
 # <a name="search-for-exact-moments-in-videos-with-video-indexer"></a>Rechercher des moments précis dans des vidéos avec Video Indexer
 
-Cette rubrique vous montre les options de recherche vous permettant de rechercher des moments précis dans des vidéos.
+Cette rubrique montre comment utiliser le site web Video Indexer pour rechercher des moments précis dans des vidéos.
 
 1. Accédez au site web [Video Indexer](https://www.videoindexer.ai/), puis connectez-vous.
-2. Rechercher parmi toutes les vidéos de votre compte.
+1. Spécifiez les mots clés de recherche, et la recherche sera effectuée parmi toutes les vidéos de la bibliothèque de votre compte. 
 
-    Dans l’exemple suivant, nous recherchons toutes les vidéos portant sur la sécurité et dans lesquelles Satya apparaît.
+    Vous pouvez filtrer votre recherche en sélectionnant **Filtres**. Dans l’exemple ci-dessous, nous effectuons une recherche sur « Microsoft » qui s’affiche sous forme de texte à l’écran uniquement (OCR).
 
-    ![Rechercher des vidéos dans Video Indexer](./media/video-indexer-search/video-indexer-search01.png)
+    :::image type="content" source="./media/video-indexer-search/filter.png" alt-text="Filtrer, texte uniquement":::
+1. Appuyez sur **Search** pour afficher le résultat.
 
-3. Rechercher les insights résumés de la vidéo.
+    :::image type="content" source="./media/video-indexer-search/results.png" alt-text="Résultats de recherche de vidéos":::
 
-    Vous pouvez ensuite effectuer une recherche dans une vidéo en sélectionnant **Lire** sur la vidéo. Ensuite, vous pouvez rechercher des moments précis dans la vidéo en sélectionnant l’onglet **Recherche**.
+    Si vous sélectionnez l’un des résultats, le lecteur vous amène à ce moments précis de la vidéo.
+1. Affichez et recherchez les insights résumés de la vidéo en cliquant sur **Lecture** dans la vidéo ou en sélectionnant l’un des résultats de la recherche d’origine. 
 
-    Dans l’exemple suivant, nous recherchons le terme « sécurisé » dans la vidéo sélectionnée.
+    Vous pouvez afficher, rechercher et modifier les **insights**. Lorsque vous sélectionnez l’un des insights, le lecteur vous amène à ce moments précis de la vidéo.  
 
-    ![Effectuer une recherche dans une vidéo avec Video Indexer](./media/video-indexer-search/video-indexer-search02.png)
+    :::image type="content" source="./media/video-indexer-search/insights.png" alt-text="Afficher, rechercher et modifier les insights de la vidéo":::
 
-    Si vous sélectionnez l’un des résultats, le lecteur vous amène à ce moments précis de la vidéo. Vous pouvez obtenir la vue et la synchronisation du lecteur/des insights dans votre application. Pour plus d’informations, consultez [Incorporer des widgets Video Indexer dans votre application](video-indexer-embed-widgets.md).
+    Si vous incorporez la vidéo par le biais de widgets Video Indexer, vous pouvez obtenir la vue Lecteur/Insights et la synchronisation dans votre application. Pour plus d’informations, consultez [Incorporer des widgets Video Indexer dans votre application](video-indexer-embed-widgets.md).
+1. Vous pouvez afficher, rechercher et modifier les transcriptions en cliquant sur l’onglet **Chronologie**. 
 
-4. Recherchez la répartition détaillée de la vidéo.
+    :::image type="content" source="./media/video-indexer-search/timeline.png" alt-text="Afficher, rechercher et modifier les transcriptions de la vidéo":::
 
-    Si vous voulez créer votre propre clip à partir de la vidéo que vous avez trouvée, sélectionnez le bouton **Modifier**. Cette page vous montre la vidéo, ainsi que ses insights sous forme de filtres. Pour plus d’informations, voir [Afficher et modifier les insights de Video Indexer](video-indexer-view-edit.md).
+    Pour modifier le texte, sélectionnez **Modifier** en haut à droite et modifiez le texte comme vous le souhaitez. 
 
-    Vous pouvez rechercher des moments précis dans la vidéo pour voir uniquement les lignes qui vous intéressent. Utilisez les insights sur le côté pour filtrer les parties que vous voulez voir. Quand vous avez terminé, vous pouvez voir un aperçu de votre clip et sélectionner **Publier** pour créer le clip qui apparaît dans votre galerie.
+    Vous pouvez également traduire et télécharger les transcriptions en sélectionnant l’option appropriée dans l’angle supérieur droit. 
 
-    Dans l’exemple suivant, nous avons recherché pour le texte « réalité mixte ». Nous avons également appliqué des filtres supplémentaires, comme indiqué dans l’écran ci-dessous.
+## <a name="embed-download-create-projects"></a>Incorporer, télécharger, créer des projets
 
-    ![Rechercher un moment précis avec Video Indexer](./media/video-indexer-search/video-indexer-search03.png)
+Vous pouvez incorporer votre vidéo en sélectionnant **</> Incorporer** sous votre vidéo. Pour plus d’informations, consultez [Incorporer des widgets visuels dans votre application](video-indexer-embed-widgets.md).
+
+Vous pouvez télécharger la vidéo source, les insights de la vidéo et les transcriptions en cliquant sur **Télécharger** sous votre vidéo.
+
+Vous pouvez créer un clip basé sur votre vidéo avec des lignes et des moments spécifiques en cliquant sur **Ouvrir dans l’éditeur**, en modifiant la vidéo, puis en enregistrant le projet. Pour plus d’informations, consultez [Ajouter des clips vidéo à votre projet](use-editor-create-project.md).
+
+:::image type="content" source="./media/video-indexer-search/embed-download-create-projects.png" alt-text="Incorporer, télécharger, créer des projets de la vidéo":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois que vous trouvez le moment précis de la vidéo que vous voulez utiliser, vous pouvez continuer de traiter la vidéo. Pour plus d'informations, voir les rubriques suivantes :
-
-- [Utiliser les insights approfondis de vos vidéos](use-editor-create-project.md)
-- [Traiter du contenu avec l’API REST de Video Indexer](video-indexer-use-apis.md)
-- [Incorporer des widgets visuels dans votre application](video-indexer-embed-widgets.md)
-
-## <a name="see-also"></a>Voir aussi
-
-[Présentation de Video Indexer](video-indexer-overview.md)
+[Traiter du contenu avec l’API REST de Video Indexer](video-indexer-use-apis.md)

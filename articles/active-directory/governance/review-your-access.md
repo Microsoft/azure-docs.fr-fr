@@ -9,18 +9,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 04/30/2020
+ms.date: 12/22/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0de10534cb00c66ad914b2c64ac2547b0e3fe03b
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: b3fef2f85ca7e7b4034c8582477796d49446ea44
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611069"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746777"
 ---
 # <a name="review-access-for-yourself-to-groups-or-applications-in-azure-ad-access-reviews"></a>Réviser votre accès à des groupes ou applications dans Azure AD
 
@@ -33,7 +33,7 @@ Cet article décrit comment réviser votre propre accès à un groupe ou une app
 La première étape pour effectuer une révision d’accès consiste à rechercher et ouvrir la révision d’accès.
 
 >[!IMPORTANT]
-> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Liste verte azure-noreply@microsoft.com pour vous assurer que vous recevez tous les e-mails.
+> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Ajoutez azure-noreply@microsoft.com à votre liste de destinataires approuvés pour vous assurer de recevoir tous les e-mails.
 
 1. Recherchez un e-mail de Microsoft vous invitant à réviser les accès. Voici un exemple d’e-mail vous invitant à réviser votre accès à un groupe.
 
@@ -65,13 +65,13 @@ Une fois que vous avez ouvert la révision d’accès, vous pouvez voir votre ac
 
     Si la requête vise à réviser l’accès d’autres utilisateurs, la page aura un aspect différent. Pour plus d’informations, consultez [Réviser l’accès à des groupes ou à des applications](perform-access-review.md).
 
-    ![Ouvrir la révision d’accès en vous demandant si vous avez toujours besoin de l’accès à un groupe](./media/review-your-access/perform-access-review.png)
+    ![Capture d’écran montrant une révision d’accès ouverte qui vous demande si vous avez toujours besoin d’accéder à un groupe.](./media/review-your-access/perform-access-review.png)
 
 1. Cliquez sur **Oui** pour conserver votre accès ou sur **Non** pour supprimer votre accès.
 
 1. Si vous cliquez sur **Oui**, vous devrez peut-être spécifier une justification dans la zone **Raison**.
 
-    ![Révision d’accès déterminant si vous avez toujours besoin de l’accès à un groupe terminée](./media/review-your-access/perform-access-review-submit.png)
+    ![Capture d’écran montrant une révision d’accès terminée qui vous demande si vous avez toujours besoin d’accéder à un groupe, avec l’option « Oui » sélectionnée.](./media/review-your-access/perform-access-review-submit.png)
 
 1. Cliquez sur **Envoyer**.
 
@@ -106,7 +106,7 @@ Vous pouvez essayer la nouvelle expérience avec l’interface utilisateur mise 
 ### <a name="email"></a>E-mail
 
 >[!IMPORTANT]
-> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Liste verte azure-noreply@microsoft.com pour vous assurer que vous recevez tous les e-mails.
+> Il peut y avoir des retards dans la réception de l’e-mail et, dans certains cas, cela peut prendre jusqu’à 24 heures. Ajoutez azure-noreply@microsoft.com à votre liste de destinataires approuvés pour vous assurer de recevoir tous les e-mails.
 
 1. Recherchez un e-mail de Microsoft vous invitant à réviser les accès. Vous pouvez voir un exemple d’e-mail ci-dessous :
 

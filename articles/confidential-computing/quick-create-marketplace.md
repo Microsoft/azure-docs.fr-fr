@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: quickstart
 ms.date: 04/06/2020
 ms.author: JenCook
-ms.openlocfilehash: 62ee8ddb03c00ba7d6ae495ee360c708b00c615c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 82d9c143f84dfced639c928bf12693024079c2ba
+ms.sourcegitcommit: b48e8a62a63a6ea99812e0a2279b83102e082b61
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82208633"
+ms.lasthandoff: 09/28/2020
+ms.locfileid: "91409491"
 ---
 # <a name="quickstart-deploy-an-azure-confidential-computing-vm-in-the-marketplace"></a>Démarrage rapide : Déployer une machine virtuelle d’informatique confidentielle Azure dans la Place de marché
 
@@ -61,7 +61,7 @@ Si vous n’avez pas d’abonnement Azure, [créez un compte](https://azure.micr
     * **Type d'authentification** : Sélectionnez **Clé publique SSH** si vous créez une machine virtuelle Linux. 
 
          > [!NOTE]
-         > Vous pouvez choisir d’utiliser une clé publique SSH ou un mot de passe pour l’authentification. L’utilisation d’une clé SSH est plus sécurisée. Pour savoir comment générer une clé SSH, consultez [Créer des clés SSH sur Linux et Mac pour les machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys).
+         > Vous pouvez choisir d’utiliser une clé publique SSH ou un mot de passe pour l’authentification. L’utilisation d’une clé SSH est plus sécurisée. Pour savoir comment générer une clé SSH, consultez [Créer des clés SSH sur Linux et Mac pour les machines virtuelles Linux dans Azure](../virtual-machines/linux/mac-create-ssh-keys.md).
 
     * **Nom d’utilisateur** : indiquez le nom d’administrateur pour la machine virtuelle.
 
@@ -179,9 +179,7 @@ Sélectionnez le groupe de ressources de la machine virtuelle, puis sélectionne
 
 Dans ce guide de démarrage rapide, vous avez déployé une machine virtuelle d’informatique confidentielle et installé le SDK Open Enclave. Pour plus d’informations sur les machines virtuelles d’informatique confidentielle sur Azure, consultez [Solutions sur les machines virtuelles](virtual-machine-solutions.md). 
 
-Si vous avez déployé une machine virtuelle Windows, découvrez comment créer des applications avec les [exemples du SDK OE pour Windows](https://github.com/openenclave/openenclave/blob/master/samples/README_Windows.md) sur GitHub. 
-
-Découvrez comment créer des applications d’informatique confidentielle sur Linux en accédant aux exemples du SDK Open Enclave sur GitHub. 
+Découvrez comment créer des applications d’informatique confidentielle en accédant aux exemples du SDK Open Enclave sur GitHub. 
 
 > [!div class="nextstepaction"]
-> [Génération des exemples du SDK Open Enclave sur Linux](https://github.com/openenclave/openenclave/blob/master/samples/README_Linux.md)
+> [Création d’exemples de SDK Open Enclave](https://github.com/openenclave/openenclave/blob/master/samples/README.md)

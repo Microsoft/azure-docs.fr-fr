@@ -2,20 +2,20 @@
 title: Fonctionnement des approbations pour Azure AD Domain Services | Microsoft Docs
 description: En savoir plus sur le fonctionnement des approbations de forêt avec Azure AD Domain Services
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 03/30/2020
-ms.author: iainfou
-ms.openlocfilehash: 903881a1d15c1f043e381f50e5b69d661cd08192
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: 5c72ab7d085de558ee95f3c602ccc6be6160b322
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80476440"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96620203"
 ---
 # <a name="how-trust-relationships-work-for-resource-forests-in-azure-active-directory-domain-services"></a>Fonctionnement des relations d’approbation pour les forêts de ressources dans Azure Active Directory Domain Services
 
@@ -26,6 +26,10 @@ Pour vérifier cette relation d’approbation, le système de sécurité de Wind
 Les mécanismes de contrôle d’accès fournis par AD DS et le modèle de sécurité distribué de Windows fournissent un environnement pour le fonctionnement des approbations de domaine et de forêt. Afin que ces approbations fonctionnent correctement, chaque ressource ou ordinateur doit être doté d’un chemin d’approbation direct vers un contrôleur de domaine dans le domaine où il se trouve.
 
 Le chemin d’approbation est implémenté par le service Net Logon, au moyen d’une connexion authentifiée d’appel de procédure distante (RPC) à l’autorité de domaine approuvé. Un canal sécurisé s’étend également à d’autres domaines AD DS par le biais de relations d’approbation entre domaines. Ce canal sécurisé est utilisé pour obtenir et vérifier des informations de sécurité, entre autres les identificateurs de sécurité (SID) pour les utilisateurs et les groupes.
+
+Pour une vue d’ensemble de la manière dont les approbations s’appliquent à Azure AD DS, reportez-vous à [Concepts et fonctionnalités de la forêt de ressources][create-forest-trust].
+
+Pour commencer à utiliser des approbations dans Azure AD DS, [créez un domaine managé qui utilise des approbations de forêt][tutorial-create-advanced].
 
 ## <a name="trust-relationship-flows"></a>Flux des relations d’approbation
 
@@ -58,7 +62,7 @@ La transitivité détermine si une approbation peut être étendue en dehors des
 
 Chaque fois que vous créez un domaine dans une forêt, une relation d’approbation transitive bidirectionnelle est automatiquement créée entre le nouveau domaine et son domaine parent. Si des domaines enfants sont ajoutés au nouveau domaine, le chemin d’approbation remonte la hiérarchie de domaine, étendant le chemin d’approbation initial créé entre le nouveau domaine et son domaine parent. Les relations d’approbation transitive remontent dans une arborescence de domaine au fur et à mesure qu’elle se forme, créant ainsi des approbations transitives entre tous les domaines de l’arborescence de domaine.
 
-Les demandes d’authentification suivent ces chemins d’approbation, si bien que les comptes de n’importe quel domaine de la forêt peuvent être authentifiés par n’importe quel autre domaine de la forêt. Avec un processus d’ouverture de session unique, les comptes disposant des autorisations appropriées peuvent accéder aux ressources de n’importe quel domaine de la forêt.
+Les demandes d’authentification suivent ces chemins d’approbation, si bien que les comptes de n’importe quel domaine de la forêt peuvent être authentifiés par n’importe quel autre domaine de la forêt. Avec un processus d’authentification unique, les comptes disposant des autorisations appropriées peuvent accéder aux ressources de n’importe quel domaine de la forêt.
 
 ## <a name="forest-trusts"></a>Approbations de forêts
 
@@ -70,7 +74,7 @@ Une approbation de forêt peut uniquement être créée entre un domaine racine 
 
 Le schéma suivant illustre deux relations d’approbation de forêt distinctes entre trois forêts AD DS d’une même organisation.
 
-![Diagramme des relations d’approbation de forêt au sein d’une même organisation](./media/concepts-forest-trust/forest-trusts.png)
+![Diagramme des relations d’approbation de forêt au sein d’une même organisation](./media/concepts-forest-trust/forest-trusts-diagram.png)
 
 Cet exemple de configuration fournit l’accès suivant :
 
@@ -95,12 +99,12 @@ Par exemple, lorsqu’une approbation de forêt unidirectionnelle est créée en
 Avant de pouvoir créer une approbation de forêt, vous devez vérifier que vous disposez de l’infrastructure DNS (Domain Name System) appropriée. Les approbations de forêt ne peuvent être créées que si l’une des configurations DNS suivantes est disponible :
 
 * Un serveur DNS racine unique est le serveur DNS racine pour les deux espaces de noms DNS de forêt : la zone racine contient les délégations de chaque espace de noms DNS, et les indications de racine de tous les serveurs DNS incluent le serveur DNS racine.
-* En l’absence de serveur DNS racine partagé, les serveurs DNS racines de chaque espace de noms DNS de forêt utilisent des redirecteurs conditionnels DNS, afin que chaque espace de noms DNS achemine les requêtes de noms dans l’autre espace de noms.
+* En l’absence de serveur DNS racine partagé, les serveurs DNS racines de chaque espace de noms DNS de forêt utilisent des redirecteurs conditionnels DNS, afin que chaque espace de noms DNS route les requêtes de noms dans l’autre espace de noms.
 
     > [!IMPORTANT]
     > La forêt de ressources Azure AD Domain Services doit utiliser cette configuration DNS. L’hébergement d’un espace de noms DNS autre que l’espace de noms DNS de la forêt de ressources n’est pas une fonctionnalité d’Azure AD Domain Services. L’utilisation de redirecteurs conditionnels constitue la configuration appropriée.
 
-* En l’absence de serveur DNS racine partagé, les serveurs DNS racines de chaque espace de noms DNS de forêt utilise des zones secondaires DNS, configurées dans chaque espace de noms DNS pour acheminer les requêtes de noms dans l’autre espace de noms.
+* En l’absence de serveur DNS racine partagé, les serveurs DNS racines de chaque espace de noms DNS de forêt utilisent des zones secondaires DNS, configurées dans chaque espace de noms DNS pour router les requêtes de noms dans l’autre espace de noms.
 
 Pour créer une approbation de forêt, vous devez être membre du groupe Admins du domaine (dans le domaine racine de la forêt), ou du groupe Administrateurs de l’entreprise dans Active Directory. Chaque approbation se voit attribuer un mot de passe que les administrateurs des deux forêts doivent connaître. Les membres administrateurs de l’entreprise dans les deux forêts peuvent créer les approbations dans les deux forêts à la fois et, dans ce scénario, un mot de passe aléatoire par chiffrement est généré et écrit automatiquement pour les deux forêts.
 
@@ -128,7 +132,7 @@ Si le client utilise Kerberos V5 pour l’authentification, il demande un ticket
 
 2. Existe-t-il une relation d’approbation transitive entre le domaine actuel et le prochain domaine sur le chemin d’approbation ?
     * Si c’est le cas, envoyez au client une référence au prochain domaine sur le chemin d’approbation.
-    * Sinon, envoyez un message de connexion refusée au client.
+    * Sinon, envoyez un message d’authentification refusée au client.
 
 ### <a name="ntlm-referral-processing"></a>Traitement de la référence NTLM
 
@@ -152,7 +156,7 @@ Lorsque deux forêts sont connectées par une approbation de forêt, les demande
 
 Lorsqu’une approbation de forêt est établie pour la première fois, chaque forêt collecte tous les espaces de noms approuvés dans sa forêt partenaire, et stocke les informations dans un [objet domaine approuvé](#trusted-domain-object). Les espaces de noms approuvés incluent les noms d’arborescence de domaine, les suffixes de nom d’utilisateur principal (UPN), les suffixes de nom de principal du service (SPN) et les espaces de noms d’ID de sécurité (SID) utilisés dans l’autre forêt. Les objets domaine approuvé (TDO) sont répliqués dans le catalogue global.
 
-Avant que les protocoles d’authentification puissent suivre le chemin d’approbation de la forêt, le nom de principal du service (SPN) de l’ordinateur de la ressource doit être résolu en un emplacement dans l’autre forêt. Un SPN peut être un des éléments suivants :
+Avant que les protocoles d’authentification puissent suivre le chemin d’approbation de la forêt, le nom de principal du service (SPN) de l’ordinateur de la ressource doit être résolu en un emplacement dans l’autre forêt. Un principal du service peut porter l’un des noms suivants :
 
 * le nom DNS d’un hôte ;
 * le nom DNS d’un domaine ;
@@ -162,9 +166,9 @@ Quand une station de travail dans une forêt tente d’accéder à des données 
 
 Le schéma et les étapes ci-dessous fournissent une description détaillée du processus d’authentification Kerberos qui est utilisé lorsque des ordinateurs exécutant Windows essaient d’accéder aux ressources depuis un ordinateur situé dans une autre forêt.
 
-![Diagramme du processus Kerberos sur une approbation de forêt](media/concepts-forest-trust/kerberos-over-forest-trust-process.png)
+![Diagramme du processus Kerberos sur une approbation de forêt](media/concepts-forest-trust/kerberos-over-forest-trust-process-diagram.png)
 
-1. L’*Utilisateur1* se connecte à la *StationDeTravail1* à l’aide des informations d’identification depuis le domaine *europe.tailspintoys.com*. L’utilisateur tente ensuite d’accéder à une ressource partagée sur le *ServeurDeFichiers1* situé dans la forêt *usa.wingtiptoys.com*.
+1. *Utilisateur1* s’authentifie sur *StationDeTravail1* à l’aide des informations d’identification depuis le domaine *europe.tailspintoys.com*. L’utilisateur tente ensuite d’accéder à une ressource partagée sur le *ServeurDeFichiers1* situé dans la forêt *usa.wingtiptoys.com*.
 
 2. La *StationDeTravail1* contacte le KDC Kerberos sur un contrôleur de domaine de son domaine, le *CDEnfant1*, et demande un ticket de service pour obtenir le SPN du *ServeurDeFichiers1*.
 
@@ -228,7 +232,7 @@ Une modification de mot de passe n’est pas finalisée tant que l’authentific
 
 Si l’authentification avec le nouveau mot de passe échoue, à cause du mot de passe non valide, le contrôleur de domaine d’approbation tente de procéder à l’authentification à l’aide de l’ancien mot de passe. S’il s’authentifie correctement avec l’ancien mot de passe, il reprend le processus de modification du mot de passe dans un délai de 15 minutes.
 
-Les mises à jour des mots de passe d’approbation doivent être répliquées dans un délai de 30 jours sur les contrôleurs de domaine des deux parties de l’approbation. Si le mot de passe d’approbation est modifié après ce délai de 30 jours, et qu’un contrôleur de domaine ne possède alors que le mot de passe N-2, il ne peut pas utiliser l’approbation depuis la partie d’approbation, et il ne peut pas créer de canal sécurisé dans la partie approuvée.
+Les mises à jour des mots de passe d’approbation doivent être répliquées dans un délai de 30 jours sur les contrôleurs de domaine des deux parties de l’approbation. Si le mot de passe d’approbation est modifié après ce délai de 30 jours, et qu’un contrôleur de domaine ne possède que le mot de passe N-2, il ne peut pas utiliser l’approbation depuis la partie d’approbation, et il ne peut pas créer de canal sécurisé dans la partie approuvée.
 
 ## <a name="network-ports-used-by-trusts"></a>Ports réseau utilisés par les approbations
 
@@ -276,7 +280,7 @@ Les administrateurs peuvent utiliser *Domaines et approbations Active Directory*
 
 Pour en savoir plus sur les forêts de ressources, consultez [Fonctionnement des approbations de forêt dans Azure AD DS][concepts-trust]
 
-Pour commencer la création d’un domaine managé Azure AD DS avec une forêt de ressources, consultez [Créer et configurer un domaine managé Azure AD][tutorial-create-advanced]. Vous pouvez ensuite [Créer une approbation de forêt sortante vers un domaine local (préversion)][create-forest-trust].
+Pour prendre en main la création d’un domaine managé avec une forêt de ressources, consultez [Créer et configurer un domaine managé Azure AD DS][tutorial-create-advanced]. Vous pouvez ensuite [créer une approbation de forêt sortante vers un domaine local][create-forest-trust].
 
 <!-- LINKS - INTERNAL -->
 [concepts-trust]: concepts-forest-trust.md

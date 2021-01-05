@@ -1,18 +1,17 @@
 ---
 title: 'Migrer des machines virtuelles VMware vers Azure avec le chiffrement côté serveur (SSE) et les clés gérées par le client (CMK) en utilisant Azure Migrate : Migration de serveurs'
 description: 'Découvrez comment migrer des machines virtuelles VMware vers Azure avec le chiffrement côté serveur (SSE) et les clés gérées par le client (CMK) en utilisant Azure Migrate : Migration de serveurs'
-author: bsiva
-ms.service: azure-migrate
-ms.manager: carmonm
-ms.topic: article
+author: anvar-ms
+ms.author: anvar
+ms.manager: bsiva
+ms.topic: how-to
 ms.date: 03/12/2020
-ms.author: raynew
-ms.openlocfilehash: c6b791fda43a018a26204b2b43dc1e581ff3a945
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8a174c3b2bfb390eb7d691ae1bdcb0e28dde9032
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232701"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96751085"
 ---
 # <a name="migrate-vmware-vms-to-azure-vms-enabled-with-server-side-encryption-and-customer-managed-keys"></a>Migrer des machines virtuelles VMware vers des machines virtuelles Azure configurées pour le chiffrement côté serveur et les clés gérées par le client
 
@@ -22,12 +21,12 @@ L’expérience du portail Azure Migrate : Migration de serveurs vous permet de
 
 Les exemples de cet article utilisent [Azure PowerShell](/powershell/azure/new-azureps-module-az) pour effectuer les tâches nécessaires à la création et au déploiement du modèle Resource Manager.
 
-[Découvrez plus d’informations](../virtual-machines/windows/disk-encryption.md) sur le chiffrement côté serveur avec des clés gérées par le client pour les disques managés.
+[Découvrez plus d’informations](../virtual-machines/disk-encryption.md) sur le chiffrement côté serveur avec des clés gérées par le client pour les disques managés.
 
 ## <a name="prerequisites"></a>Prérequis
 
 - [Passez en revue le tutoriel](tutorial-migrate-vmware.md) sur la migration de machines virtuelles VMware vers Azure avec la réplication sans agent pour comprendre les exigences des outils.
-- [Suivez ces instructions](how-to-add-tool-first-time.md) pour créer un projet Azure Migrate et ajouter l’outil **Azure Migrate : Migration de serveurs** au projet.
+- [Suivez ces instructions](./create-manage-projects.md) pour créer un projet Azure Migrate et ajouter l’outil **Azure Migrate : Migration de serveurs** au projet.
 - [Suivez ces instructions](how-to-set-up-appliance-vmware.md) pour configurer l’appliance Azure Migrate pour VMware dans votre environnement local et pour effectuer la découverte.
 
 ## <a name="prepare-for-replication"></a>Préparer pour la réplication
@@ -58,7 +57,11 @@ L’expérience du portail Migration de serveurs simplifie la préparation de l�
 
 Un objet de jeu de chiffrement de disque mappe les disques managés à un coffre de clés contenant les clés gérées par le client à utiliser pour le chiffrement côté serveur. Pour répliquer des machines virtuelles avec des clés gérées par le client, vous allez créer un jeu de chiffrement de disque et le passer comme entrée à l’opération de réplication.
 
-Suivez l’exemple [ici](../virtual-machines/windows/disk-encryption.md#powershell) pour créer un jeu de chiffrement de disque avec Azure PowerShell. Vérifiez que le jeu de chiffrement de disque est créé dans l’abonnement cible vers lequel les machines virtuelles doivent être migrées et dans la région Azure cible de la migration.
+Suivez l’exemple [ici](../virtual-machines/windows/disks-enable-customer-managed-keys-powershell.md) pour créer un jeu de chiffrement de disque avec Azure PowerShell. Vérifiez que le jeu de chiffrement de disque est créé dans l’abonnement cible vers lequel les machines virtuelles doivent être migrées et dans la région Azure cible de la migration.
+
+Le jeu de chiffrement de disque peut être configuré pour chiffrer les disques managés avec une clé gérée par le client, ou pour le double chiffrement avec une clé gérée par le client et une clé de plateforme. Pour utiliser l’option double chiffrement au repos, configurez le chiffrement de disque défini comme décrit [ici](../virtual-machines/windows/disks-enable-double-encryption-at-rest-powershell.md).
+
+Dans l’exemple ci-dessous, l’ensemble de chiffrement du disque est configuré pour utiliser une clé gérée par le client.
 
 ```azurepowershell
 $Location = "southcentralus"                           #Target Azure region for migration 

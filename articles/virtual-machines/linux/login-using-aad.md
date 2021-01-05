@@ -1,18 +1,18 @@
 ---
 title: Se connecter à une machine virtuelle Linux avec les informations d’identification d’Azure Active Directory
 description: Découvrez comment créer et configurer une machine virtuelle Linux pour utiliser l’authentification Azure Active Directory.
-author: iainfoulds
+author: SanDeo-MSFT
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
-ms.date: 08/29/2019
-ms.author: iainfou
-ms.openlocfilehash: 2731693667d2129a72da72455c6bbdd74c277697
-ms.sourcegitcommit: 07d62796de0d1f9c0fa14bfcc425f852fdb08fb1
+ms.date: 11/17/2020
+ms.author: sandeo
+ms.openlocfilehash: b4fc6b9facc79db109c5ce5be09576b16a2abdc7
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80366487"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97510887"
 ---
 # <a name="preview-log-in-to-a-linux-virtual-machine-in-azure-using-azure-active-directory-authentication"></a>Aperçu : Se connecter à une machine virtuelle Linux dans Azure via l’authentification Azure Active Directory
 
@@ -35,7 +35,7 @@ Les avantages liés à l’utilisation de l’authentification Azure AD pour se 
   - Pour sécuriser davantage la connexion aux machines virtuelles Azure, vous pouvez configurer l’authentification multifacteur.
   - La possibilité de se connecter à des machines virtuelles Linux avec Azure Active Directory fonctionne également pour les clients qui utilisent [Federation Services](../../active-directory/hybrid/how-to-connect-fed-whatis.md).
 
-- **Une collaboration parfaite :** le contrôle d’accès en fonction du rôle (RBAC) vous permet de spécifier qui peut se connecter à une machine virtuelle donnée en tant qu’utilisateur standard ou avec des privilèges d’administrateur. Lorsque des utilisateurs rejoignent ou quittent votre équipe, vous pouvez mettre à jour la stratégie RBAC pour la machine virtuelle pour accorder les accès appropriés. Cette expérience est beaucoup plus simple que d’avoir à nettoyer les machines virtuelles pour supprimer les clés publiques SSH inutiles. Lorsque des employés quittent votre organisation et que leur compte d’utilisateur est désactivé ou supprimé d’Azure AD, ils n’ont plus accès à vos ressources.
+- **Une collaboration parfaite :** le contrôle d’accès en fonction du rôle Azure (Azure RBAC) vous permet de spécifier qui peut se connecter à une machine virtuelle donnée en tant qu’utilisateur standard ou avec des privilèges d’administrateur. Lorsque des utilisateurs rejoignent ou quittent votre équipe, vous pouvez mettre à jour la stratégie Azure RBAC pour la machine virtuelle pour accorder les accès appropriés. Cette expérience est beaucoup plus simple que d’avoir à nettoyer les machines virtuelles pour supprimer les clés publiques SSH inutiles. Lorsque des employés quittent votre organisation et que leur compte d’utilisateur est désactivé ou supprimé d’Azure AD, ils n’ont plus accès à vos ressources.
 
 ## <a name="supported-azure-regions-and-linux-distributions"></a>Régions Azure et distributions Linux prises en charge
 
@@ -109,19 +109,19 @@ az vm extension set \
     --vm-name myVM
 ```
 
-Le paramètre *provisioningState* défini sur *Succeeded* s’affiche une fois que l’extension est installée sur la machine virtuelle. La machine virtuelle a besoin d’un agent de machine virtuelle en cours d’exécution pour installer l’extension. Pour plus d’informations, consultez [Vue d'ensemble de l'agent de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-windows).
+Le paramètre *provisioningState* défini sur *Succeeded* s’affiche une fois que l’extension est installée sur la machine virtuelle. La machine virtuelle a besoin d’un agent de machine virtuelle en cours d’exécution pour installer l’extension. Pour plus d’informations, consultez [Vue d'ensemble de l'agent de machine virtuelle](../extensions/agent-windows.md).
 
 ## <a name="configure-role-assignments-for-the-vm"></a>Configurer des attributions de rôle pour la machine virtuelle
 
-La stratégie RBAC Azure détermine qui peut se connecter à la machine virtuelle. Deux rôles RBAC sont utilisés pour autoriser la connexion aux machines virtuelles :
+La stratégie de contrôle d’accès en fonction du rôle Azure (Azure RBAC) détermine qui peut se connecter à la machine virtuelle. Deux rôles Azure sont utilisés pour autoriser la connexion aux machines virtuelles :
 
 - **Connexion de l’administrateur aux machines virtuelles** : les utilisateurs auxquels ce rôle est attribué peuvent se connecter à une machine virtuelle Azure avec des privilèges d’administrateur Windows ou d’utilisateur racine Linux.
 - **Connexion de l’utilisateur aux machines virtuelles** : les utilisateurs auxquels ce rôle est attribué peuvent se connecter à une machine virtuelle Azure avec des privilèges d’utilisateur standard.
 
 > [!NOTE]
-> Pour autoriser un utilisateur à se connecter à la machine virtuelle via le protocole SSH, vous devez attribuer le rôle *Connexion de l’administrateur aux machines virtuelles* ou *Connexion de l’utilisateur aux machines virtuelles*. Un utilisateur Azure auquel le rôle *Propriétaire* ou *Contributeur* est attribué pour une machine virtuelle ne possède pas automatiquement les privilèges pour se connecter à la machine virtuelle via le protocole SSH.
+> Pour autoriser un utilisateur à se connecter à la machine virtuelle via le protocole SSH, vous devez attribuer le rôle *Connexion de l’administrateur aux machines virtuelles* ou *Connexion de l’utilisateur aux machines virtuelles*. Les rôles Connexion de l’administrateur aux machines virtuelles et Connexion de l’utilisateur aux machines virtuelles utilisant dataActions, ils ne peuvent pas être attribués à l’étendue du groupe d’administration. Actuellement, ces rôles peuvent être attribués uniquement à l’étendue de l’abonnement, du groupe de ressources ou de la ressource. Un utilisateur Azure auquel le rôle *Propriétaire* ou *Contributeur* est attribué pour une machine virtuelle ne possède pas automatiquement les privilèges pour se connecter à la machine virtuelle via le protocole SSH. 
 
-L’exemple suivant illustre l’utilisation de la commande [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create) pour attribuer le rôle *Connexion de l’administrateur aux machines virtuelles* à la machine virtuelle de votre utilisateur Azure actuel. Le nom d’utilisateur de votre compte Azure actif est obtenu à l’aide de la commande [az account show](/cli/azure/account#az-account-show), et *l’étendue* est définie sur la machine virtuelle créée dans une étape précédente avec [az vm show](/cli/azure/vm#az-vm-show). L’étendue peut également être attribuée au niveau d’un groupe de ressources ou d’un abonnement, et les autorisations d’héritage RBAC normales s’appliquent. Pour plus d’informations, consultez la page [Contrôle d’accès en fonction du rôle](../../role-based-access-control/overview.md).
+L’exemple suivant illustre l’utilisation de la commande [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create) pour attribuer le rôle *Connexion de l’administrateur aux machines virtuelles* à la machine virtuelle de votre utilisateur Azure actuel. Le nom d’utilisateur de votre compte Azure actif est obtenu à l’aide de la commande [az account show](/cli/azure/account#az-account-show), et *l’étendue* est définie sur la machine virtuelle créée dans une étape précédente avec [az vm show](/cli/azure/vm#az-vm-show). L’étendue peut également être attribuée au niveau d’un groupe de ressources ou d’un abonnement, et les autorisations d’héritage Azure RBAC normales s’appliquent. Pour plus d’informations, consultez [Azure RBAC](../../role-based-access-control/overview.md).
 
 ```azurecli-interactive
 username=$(az account show --query user.name --output tsv)
@@ -136,9 +136,14 @@ az role assignment create \
 > [!NOTE]
 > Si votre domaine AAD et le domaine du nom d’utilisateur d’ouverture de session ne correspondent pas, vous devez spécifier l’ID d’objet de votre compte d’utilisateur avec *--assignee-object-id*, pas seulement le nom d’utilisateur pour *--assignee*. Vous pouvez obtenir l’ID d’objet de votre compte d’utilisateur avec [az ad user list](/cli/azure/ad/user#az-ad-user-list).
 
-Pour plus d’informations sur l’utilisation du contrôle d’accès en fonction du rôle (RBAC) pour gérer l’accès aux ressources de votre abonnement Azure, consultez les rubriques relatives à l’utilisation [d’Azure CLI](../../role-based-access-control/role-assignments-cli.md), au [portail Azure](../../role-based-access-control/role-assignments-portal.md) ou à [Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
+Pour plus d’informations sur l’utilisation du contrôle d’accès en fonction du rôle Azure (Azure RBAC) pour gérer l’accès aux ressources de votre abonnement Azure, consultez les rubriques relatives à l’utilisation d’[Azure CLI](../../role-based-access-control/role-assignments-cli.md), du [portail Azure](../../role-based-access-control/role-assignments-portal.md) ou d’[Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md).
 
-Vous pouvez également configurer Azure AD pour exiger l’authentification multifacteur pour qu’un utilisateur spécifique se connecte à la machine virtuelle Linux. Pour plus d’informations, consultez [Prise en main d’Azure Multi-Factor Authentication dans le cloud](../../multi-factor-authentication/multi-factor-authentication-get-started-cloud.md).
+## <a name="using-conditional-access"></a>Utilisation d’un accès conditionnel
+
+Vous pouvez appliquer des stratégies d’accès conditionnel, telles qu’une authentification multifacteur ou une vérification du risque de connexion utilisateur, avant d’autoriser l’accès à des machines virtuelles Linux dans Azure qui sont activées avec une connexion à Azure AD. Pour appliquer une stratégie d’accès conditionnel, vous devez sélectionner l’application « Connexion à une machine virtuelle Linux Azure » à partir de l’option d’affectation d’applications ou d’actions cloud, puis utiliser le risque de connexion comme condition et/ou exiger une authentification multifacteur comme contrôle d’octroi d’accès. 
+
+> [!WARNING]
+> Le service Azure AD Multi-Factor Authentication activé/appliqué par utilisateur n’est pas pris en charge pour la connexion à une machine virtuelle.
 
 ## <a name="log-in-to-the-linux-virtual-machine"></a>Se connecter à la machine virtuelle Linux
 
@@ -181,11 +186,11 @@ Avec cette ligne :
 
 ## <a name="troubleshoot-sign-in-issues"></a>Résoudre les problèmes de connexion
 
-Certaines erreurs courantes se produisent lorsque vous essayez de vous connecter via le protocole SSH avec des informations d’identification Azure AD, notamment l’absence de l’attribution de rôles RBAC et des invites répétées à se connecter. Consultez les sections suivantes pour corriger ces problèmes.
+Certaines erreurs courantes se produisent lorsque vous essayez de vous connecter via le protocole SSH avec des informations d’identification Azure AD, notamment l’absence de l’attribution de rôles Azure et des invites répétées à se connecter. Consultez les sections suivantes pour corriger ces problèmes.
 
-### <a name="access-denied-rbac-role-not-assigned"></a>Accès refusé : rôle RBAC non attribué
+### <a name="access-denied-azure-role-not-assigned"></a>Accès refusé : rôle Azure non attribué
 
-Si vous voyez l’erreur suivante à l’invite SSH, vérifiez que vous disposez de stratégies RBAC configurées pour la machine virtuelle qui accordent à l’utilisateur le rôle *Connexion de l’administrateur aux machines virtuelles* ou *Connexion de l’utilisateur aux machines virtuelles* :
+Si vous voyez l’erreur suivante sur l’invite SSH, vérifiez que vous avez configuré des stratégies Azure RBAC pour la machine virtuelle qui accordent à l’utilisateur le rôle *Connexion de l’administrateur aux machines virtuelles* ou *Connexion de l’utilisateur aux machines virtuelles* :
 
 ```output
 login as: azureuser@contoso.onmicrosoft.com
@@ -195,6 +200,8 @@ Using keyboard-interactive authentication.
 Access denied:  to sign-in you be assigned a role with action 'Microsoft.Compute/virtualMachines/login/action', for example 'Virtual Machine User Login'
 Access denied
 ```
+> [!NOTE]
+> Si vous rencontrez des problèmes avec des attributions de rôles Azure, consultez [Résoudre les problèmes liés à Azure RBAC](https://docs.microsoft.com/azure/role-based-access-control/troubleshooting#azure-role-assignments-limit).
 
 ### <a name="continued-ssh-sign-in-prompts"></a>Invites de connexion SSH continues
 

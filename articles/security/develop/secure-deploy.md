@@ -13,15 +13,15 @@ ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.openlocfilehash: dfe4f09d00a5629249a3041946190f56e83c3480
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4c71ddbf1d2b435697b2707acf0b1262f2c5dc31
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68934883"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517187"
 ---
 # <a name="deploy-secure-applications-on-azure"></a>Déployer des applications sécurisées sur Azure
-Cet article présente les activités et contrôles de sécurité à prendre en compte lorsque vous déployez des applications pour le cloud. Les questions et concepts de sécurité à prendre en compte pendant les phases de mise en production et de réponse du [Microsoft Security Development Lifecycle](https://msdn.microsoft.com/library/windows/desktop/84aed186-1d75-4366-8e61-8d258746bopq.aspx) y sont abordés. L’objectif est de vous aider à définir les activités et services Azure que vous pouvez utiliser pour déployer une application plus sécurisée.
+Cet article présente les activités et contrôles de sécurité à prendre en compte lorsque vous déployez des applications pour le cloud. Les questions et concepts de sécurité à prendre en compte pendant les phases de mise en production et de réponse du [Microsoft Security Development Lifecycle](/previous-versions/windows/desktop/cc307891(v=msdn.10)) y sont abordés. L’objectif est de vous aider à définir les activités et services Azure que vous pouvez utiliser pour déployer une application plus sécurisée.
 
 Les phases de Microsoft Security Development Lifecycle suivantes sont traitées dans cet article :
 
@@ -40,7 +40,7 @@ Vérifiez les performances de l’application avant de la lancer ou de déployer
 
 Les applications Web sont de plus en plus la cible d’attaques malveillantes qui exploitent des vulnérabilités connues. Les types d’attaques les plus courantes sont l’injection de code SQL et les attaques de script site à site. Il peut s’avérer difficile d’empêcher ces attaques dans le code de l’application. Cela peut nécessiter une maintenance rigoureuse, une mise à jour corrective et la surveillance au niveau de nombreuses couches de la topologie de l’application. Un pare-feu d’applications web (WAF) centralisé permet de simplifier la gestion de la sécurité. Une solution WAF peut également réagir à une menace de sécurité en exécutant la mise à jour corrective d’une vulnérabilité connue dans un emplacement central plutôt que de sécuriser individuellement chaque application web.
 
-La fonctionnalité [WAF d’Azure Application Gateway](../../application-gateway/waf-overview.md) permet de protéger de manière centralisée vos applications web contre les vulnérabilités courantes et le code malveillant exploitant. Le WAF suit les règles des [ensembles de règles de base OWASP](https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project) 3.0 ou 2.2.9.
+La fonctionnalité [WAF d’Azure Application Gateway](../../web-application-firewall/ag/ag-overview.md) permet de protéger de manière centralisée vos applications web contre les vulnérabilités courantes et le code malveillant exploitant. Le WAF suit les règles des [ensembles de règles de base OWASP](https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project) 3.0 ou 2.2.9.
 
 ### <a name="create-an-incident-response-plan"></a>Créer un plan de réponse aux incidents
 
@@ -75,9 +75,9 @@ Services Azure permettant d’aider à la surveillance des applications :
 
 #### <a name="azure-security-center"></a>Azure Security Center
 
-[Azure Security Center](../../security-center/security-center-intro.md) vous aide à prévenir, détecter et résoudre les menaces grâce à une visibilité et un contrôle accrus de la sécurité de vos ressources Azure, notamment des applications web. Azure Security Center vous aide à détecter les menaces qui pourraient passer inaperçues. Il fonctionne avec différentes solutions de sécurité.
+[Azure Security Center](../../security-center/security-center-introduction.md) vous aide à prévenir, détecter et résoudre les menaces grâce à une visibilité et un contrôle accrus de la sécurité de vos ressources Azure, notamment des applications web. Azure Security Center vous aide à détecter les menaces qui pourraient passer inaperçues. Il fonctionne avec différentes solutions de sécurité.
 
-Le niveau gratuit de Security Center offre une sécurité limitée pour vos ressources Azure uniquement. Le [niveau Standard de Security Center](../../security-center/security-center-onboarding.md) étend ces fonctionnalités aux ressources locales et à d’autres clouds.
+Le niveau gratuit de Security Center offre une sécurité limitée pour vos ressources Azure uniquement. Le [niveau Standard de Security Center](../../security-center/security-center-get-started.md) étend ces fonctionnalités aux ressources locales et à d’autres clouds.
 Le niveau Standard de Security Center vous aide à :
 
   - détecter et corriger les failles de sécurité ;

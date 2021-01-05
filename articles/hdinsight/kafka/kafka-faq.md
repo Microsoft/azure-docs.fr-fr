@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 08/14/2019
-ms.openlocfilehash: d27c648980338b3a9e12bd618eb4620fe9988fd7
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 84c48f14ae57cfa4aa3290924d3d170c075fe3a6
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80436909"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92532536"
 ---
 # <a name="frequently-asked-questions-about-apache-kafka-in-azure-hdinsight"></a>Forum aux questions sur Apache Kafka dans Azure HDInsight
 
@@ -68,7 +68,7 @@ Pour augmenter la quantité d’espace disponible pour les messages Kafka, vous 
 
 ## <a name="can-a-kafka-cluster-work-with-databricks"></a>Un cluster Kafka peut-il fonctionner avec Databricks ? 
 
-Oui, les clusters Kafka peuvent fonctionner avec Databricks tant qu’ils se trouvent dans le même réseau virtuel. Pour utiliser un cluster Kafka avec Databricks, créez un réseau virtuel avec un cluster HDInsight Kafka dans celui-ci, puis spécifiez ce réseau virtuel lorsque vous créez votre espace de travail Databricks et utilisez l’injection de réseau virtuel. Pour plus d’informations, consultez [Déployer Azure Databricks dans votre propre réseau virtuel Azure (injection de réseau virtuel)](https://docs.microsoft.com/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject). Vous devrez fournir les noms du répartiteur de démarrage du cluster Kafka lors de la création de l’espace de travail Databricks. Pour plus d’informations sur la récupération des noms de service du répartiteur Kafka, consultez [Obtenir les informations sur les hôtes Apache Zookeeper et Répartiteur](https://docs.microsoft.com/azure/hdinsight/kafka/apache-kafka-get-started#getkafkainfo).
+Oui, les clusters Kafka peuvent fonctionner avec Databricks tant qu’ils se trouvent dans le même réseau virtuel. Pour utiliser un cluster Kafka avec Databricks, créez un réseau virtuel avec un cluster HDInsight Kafka dans celui-ci, puis spécifiez ce réseau virtuel lorsque vous créez votre espace de travail Databricks et utilisez l’injection de réseau virtuel. Pour plus d’informations, consultez [Déployer Azure Databricks dans votre propre réseau virtuel Azure (injection de réseau virtuel)](/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject). Vous devrez fournir les noms du répartiteur de démarrage du cluster Kafka lors de la création de l’espace de travail Databricks. Pour plus d’informations sur la récupération des noms de service du répartiteur Kafka, consultez [Obtenir les informations sur les hôtes Apache Zookeeper et Répartiteur](./apache-kafka-get-started.md#getkafkainfo).
 
 ## <a name="how-can-i-have-maximum-data-durability"></a>Comment puis-je bénéficier d’une durabilité maximale des données ?
 

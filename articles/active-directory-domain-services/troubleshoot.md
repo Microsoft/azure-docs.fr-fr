@@ -2,21 +2,21 @@
 title: Résolution des problèmes liés à Azure Active Directory Domain Services | Microsoft Docs'
 description: Découvrez comment résoudre les erreurs qui se produisent couramment pendant la création ou la gestion des services Azure AD DS
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.assetid: 4bc8c604-f57c-4f28-9dac-8b9164a0cf0b
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: troubleshooting
-ms.date: 01/21/2020
-ms.author: iainfou
-ms.openlocfilehash: 84efe294533186fdcf2e0a3356a7d6b01eccaf5f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: 89b04f86d41f8e4828580f70a9aec8acea3e0053
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80654391"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96618448"
 ---
 # <a name="common-errors-and-troubleshooting-steps-for-azure-active-directory-domain-services"></a>Erreurs courantes et étapes de dépannage pour Azure Active Directory Domain Services
 
@@ -45,7 +45,7 @@ Si vous avez des difficultés à activer Azure AD DS, examinez ci-dessous les er
 
 Vérifiez que vous n’avez pas d’environnement AD DS existant avec le même nom de domaine sur le même réseau virtuel ou sur un réseau virtuel appairé. Par exemple, si vous disposez d’un domaine AD DS nommé *aaddscontoso.com* qui s’exécute sur des machines virtuelles Azure. Quand vous essayez d’activer un domaine managé Azure AD DS avec le même nom de domaine (*aaddscontoso.com*) sur le réseau virtuel, l’opération demandée échoue.
 
-Cet échec est dû à des conflits de noms pour le nom de domaine sur le réseau virtuel. Une recherche DNS vérifie si un environnement AD DS existant répond au nom de domaine demandé. Pour résoudre cet échec, utilisez un nom différent pour configurer votre domaine managé Azure AD DS ou déprovisionnez le domaine AD DS existant, puis réessayez d’activer Azure AD DS.
+Cet échec est dû à des conflits de noms pour le nom de domaine sur le réseau virtuel. Une recherche DNS vérifie si un environnement AD DS existant répond au nom de domaine demandé. Pour résoudre cet échec, utilisez un nom différent pour configurer votre domaine managé, ou supprimez le domaine AD DS existant, puis réessayez d’activer Azure AD DS.
 
 ### <a name="inadequate-permissions"></a>Autorisations inappropriées
 
@@ -126,7 +126,7 @@ Pour vérifier l’état de cette application existante et l’activer si néces
 
 ## <a name="users-are-unable-to-sign-in-to-the-azure-ad-domain-services-managed-domain"></a>Les utilisateurs sont incapables de se connecter aux services de domaine Asure AD gérés
 
-Si des utilisateurs de votre locataire Azure AD ne peuvent pas se connecter au domaine managé Azure AD DS, effectuez les étapes de dépannage suivantes :
+Si des utilisateurs de votre locataire Azure AD ne peuvent pas se connecter au domaine managé, effectuez les étapes de dépannage suivantes :
 
 * **Format d’informations d’identification** – Essayez d’utiliser le format UPN pour spécifier les informations d’identification, par exemple `dee@aaddscontoso.onmicrosoft.com`. Le format UPN est la méthode recommandée pour spécifier les informations d’identification dans Azure AD DS. Vérifiez que cet UPN est correctement configuré dans Azure AD.
 
@@ -137,7 +137,7 @@ Si des utilisateurs de votre locataire Azure AD ne peuvent pas se connecter au d
     
       * Vous avez déployé la [dernière version recommandée d’Azure AD Connect](https://www.microsoft.com/download/details.aspx?id=47594) ou procédé à une mise à jour vers cette version.
       * Vous avez configuré Azure AD Connect pour [effectuer une synchronisation complète][hybrid-phs].
-      * Selon la taille de votre annuaire, la mise à disposition des comptes d’utilisateurs et des hachages d’informations d’identification dans Azure AD DS peut prendre un certain temps. Veillez à attendre suffisamment longtemps avant d’essayer de vous authentifier pour le domaine managé.
+      * Selon la taille de votre répertoire, la mise à disposition des comptes d’utilisateurs et des hachages d’informations d’identification dans le domaine managé peut prendre un certain temps. Veillez à attendre suffisamment longtemps avant d’essayer de vous authentifier pour le domaine managé.
       * Si le problème persiste après la vérification des étapes précédentes, essayez de redémarrer *Microsoft Azure Active Directory Sync Services*. À partir de votre serveur Azure AD Connect, ouvrez une invite de commandes et exécutez les commandes suivantes :
     
         ```console
@@ -145,27 +145,27 @@ Si des utilisateurs de votre locataire Azure AD ne peuvent pas se connecter au d
         net start 'Microsoft Azure AD Sync'
         ```
 
-    * **Comptes cloud uniquement** : si le compte d’utilisateur en question est un compte d’utilisateur cloud uniquement, vérifiez que l’[utilisateur a changé son mot de passe après que vous avez activé Azure AD DS][cloud-only-passwords]. Cette réinitialisation de mot de passe entraîne la génération des hachages d’informations d’identification nécessaires à Azure AD Domain Services.
+    * **Comptes cloud uniquement** : si le compte d’utilisateur en question est un compte d’utilisateur cloud uniquement, vérifiez que l’[utilisateur a changé son mot de passe après que vous avez activé Azure AD DS][cloud-only-passwords]. Cette réinitialisation de mot de passe entraîne la génération des hachages d’informations d’identification nécessaires à la génération du domaine managé.
 
 * **Vérifiez que le compte d’utilisateur est actif**: par défaut, cinq tentatives de saisie de mot de passe non valide en 2 minutes dans le domaine managé entraînent le verrouillage d’un compte d’utilisateur pendant 30 minutes. L’utilisateur ne peut pas se connecter tant que le compte est verrouillé. Après ces 30 minutes, le compte d’utilisateur est automatiquement déverrouillé.
-  * Les tentatives de saisie de mot de passe non valide dans le domaine managé Azure AD DS ne verrouillent pas le compte d’utilisateur dans Azure AD. Le compte d’utilisateur est verrouillé uniquement dans votre domaine managé. Vérifiez l’état du compte d’utilisateur dans la *console d’administration Active Directory (ADAC)* en utilisant la [machine virtuelle de gestion][management-vm], et non dans Azure AD.
+  * Les tentatives de saisie de mot de passe non valide dans le domaine managé ne verrouillent pas le compte d’utilisateur dans Azure AD. Le compte d’utilisateur est verrouillé uniquement dans votre domaine managé. Vérifiez l’état du compte d’utilisateur dans la *console d’administration Active Directory (ADAC)* en utilisant la [machine virtuelle de gestion][management-vm], et non dans Azure AD.
   * Vous pouvez aussi [configurer des stratégies de mot de passe affinées][password-policy] pour modifier le seuil et la durée de verrouillage par défaut.
 
 * **Comptes externes** – Vérifiez que le compte d’utilisateur en question n’est pas un compte externe dans le locataire Azure AD. Les comptes Microsoft comme `dee@live.com` ou les comptes d’utilisateurs d’un annuaire Azure AD externe sont des exemples de comptes externes. Azure AD DS ne stocke pas les informations d’identification pour les comptes d’utilisateurs externes et ne peut donc pas se connecter au domaine managé.
 
 ## <a name="there-are-one-or-more-alerts-on-your-managed-domain"></a>Il existe une ou plusieurs alertes sur votre domaine géré
 
-La présence d’alertes actives dans le domaine managé Azure AD DS peut empêcher le bon fonctionnement du processus d’authentification.
+La présence d’alertes actives dans le domaine managé peut empêcher le bon fonctionnement du processus d’authentification.
 
-Pour savoir s’il existe des alertes actives, [vérifiez l’état d’intégrité d’un domaine managé Azure AD DS][check-health]. Si des alertes sont présentes, [résolvez les problèmes associés][troubleshoot-alerts].
+Pour savoir s’il existe des alertes actives, [vérifiez l’état d’intégrité d’un domaine managé][check-health]. Si des alertes sont présentes, [résolvez les problèmes associés][troubleshoot-alerts].
 
 ## <a name="users-removed-from-your-azure-ad-tenant-are-not-removed-from-your-managed-domain"></a>Les utilisateurs supprimés de votre client Azure AD ne sont pas supprimés de votre domaine géré
 
-Azure AD protège contre la suppression accidentelle d’objets utilisateur. Quand vous supprimez un compte d’utilisateur d’un locataire Azure AD, l’objet utilisateur correspondant est déplacé dans la corbeille. Quand cette opération de suppression est synchronisée avec votre domaine managé Azure AD DS, le compte d’utilisateur correspondant est marqué comme étant désactivé. Cette fonctionnalité vous permet de récupérer le compte d’utilisateur, c’est-à-dire d’annuler sa suppression.
+Azure AD protège contre la suppression accidentelle d’objets utilisateur. Quand vous supprimez un compte d’utilisateur d’un locataire Azure AD, l’objet utilisateur correspondant est déplacé dans la corbeille. Quand cette opération de suppression est synchronisée avec votre domaine managé, le compte d’utilisateur correspondant est marqué comme étant désactivé. Cette fonctionnalité vous permet de récupérer le compte d’utilisateur, c’est-à-dire d’annuler sa suppression.
 
-Le compte d’utilisateur reste dans un état désactivé dans le domaine managé Azure AD DS, même si vous recréez un compte d’utilisateur avec le même UPN dans l’annuaire Azure AD. Pour supprimer le compte d’utilisateur du domaine managé Azure AD DS, vous devez forcer sa suppression dans le locataire Azure AD.
+Le compte d’utilisateur reste dans un état désactivé dans le domaine managé, même si vous recréez un compte d’utilisateur avec le même UPN dans le répertoire Azure AD. Pour supprimer le compte d’utilisateur du domaine managé, vous devez forcer sa suppression dans le locataire Azure AD.
 
-Pour supprimer entièrement un compte d’utilisateur d’un domaine managé Azure AD DS, supprimez définitivement l’utilisateur de votre locataire Azure AD à l’aide de l’applet de commande PowerShell [Remove-MsolUser][Remove-MsolUser] avec le paramètre `-RemoveFromRecycleBin`.
+Pour supprimer entièrement un compte d’utilisateur d’un domaine managé, supprimez définitivement l’utilisateur de votre locataire Azure AD à l’aide du cmdlet PowerShell [Remove-MsolUser][Remove-MsolUser] avec le paramètre `-RemoveFromRecycleBin`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

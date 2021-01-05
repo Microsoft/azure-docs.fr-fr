@@ -4,15 +4,15 @@ description: Étapes pour connecter des réseaux virtuels classiques à des rés
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2019
 ms.author: cherylmc
-ms.openlocfilehash: 5e64cb2db2bd16a881334779a1c6f1ef19296da2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f307ff9e7d609628bc22374fc5874dcbf993e4c2
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152021"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94661186"
 ---
 # <a name="connect-virtual-networks-from-different-deployment-models-using-the-portal"></a>Connecter des réseaux virtuels utilisant des modèles de déploiement différents dans le portail
 
@@ -34,7 +34,7 @@ Si vous n’avez pas encore de passerelle de réseau virtuel et que vous ne souh
 
 * Ces étapes supposent que les deux réseaux virtuels ont déjà été créés. Si vous utilisez cet article en guise d’exercice et que vous ne disposez pas de réseaux virtuels, vous trouverez des liens dans les étapes pour vous aider à les créer.
 * Vérifiez que les plages d’adresses des réseaux virtuels ne se chevauchent pas ou ne chevauchent aucune des plages des autres connexions susceptibles d’être utilisées par les passerelles.
-* Installez les dernières applets de commande PowerShell pour le Gestionnaire de ressources et pour la Gestion des services (classique). Dans cet article, nous utilisons le portail Azure et PowerShell. PowerShell est requis pour créer la connexion à partir du réseau virtuel classique vers le réseau virtuel Resource Manager. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/overview). 
+* Installez les dernières applets de commande PowerShell pour le Gestionnaire de ressources et pour la Gestion des services (classique). Dans cet article, nous utilisons le portail Azure et PowerShell. PowerShell est requis pour créer la connexion à partir du réseau virtuel classique vers le réseau virtuel Resource Manager. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/). 
 
 ### <a name="example-settings"></a><a name="values"></a>Exemples de paramètres
 
@@ -86,7 +86,7 @@ Dans cette section, vous créez le réseau virtuel classique, le réseau local (
 
 ### <a name="1-create-a-classic-vnet"></a>1. <a name="classicvnet"></a>Créer un réseau virtuel classique
 
-Si vous n’avez pas de réseau virtuel classique et que vous exécutez ces étapes en guise d’exercice, vous pouvez créer un réseau virtuel à l’aide de [cet article](../virtual-network/virtual-networks-create-vnet-classic-pportal.md) et les valeurs de paramètres [d’exemple](#values) ci-dessus.
+Si vous n’avez pas de réseau virtuel classique et que vous exécutez ces étapes en guise d’exercice, vous pouvez créer un réseau virtuel à l’aide de [cet article](/previous-versions/azure/virtual-network/virtual-networks-create-vnet-classic-pportal) et les valeurs de paramètres [d’exemple](#values) ci-dessus.
 
 Si vous disposez déjà d’un réseau virtuel avec une passerelle VPN, vérifiez que la passerelle est dynamique. Si elle est statique, vous devez d’abord supprimer la passerelle VPN avant de passer à [Configurer le site local](#local).
 
@@ -162,7 +162,7 @@ Dans cette étape, vous créez la passerelle de réseau virtuel de votre réseau
 * Sous-réseau de passerelle = 192.168.0.0/26 <br>
 * Première configuration IP = rmgwpip <br>
 
-[!INCLUDE [vpn-gateway-add-gw-rm-portal](../../includes/vpn-gateway-add-gw-rm-portal-include.md)]
+[!INCLUDE [Add gateway](../../includes/vpn-gateway-add-gw-rm-portal-empty.md)]
 
 [!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
@@ -177,7 +177,7 @@ Dans cette étape, vous créez la passerelle de réseau virtuel de votre réseau
 
 La passerelle de réseau local spécifie la plage d’adresses et l’adresse IP publique associées à votre réseau virtuel classique et à la passerelle de réseau virtuel. Si vous effectuez ces étapes en guise d’exercice, consultez les exemples de valeurs.
 
-[!INCLUDE [vpn-gateway-add-lng-rm-portal](../../includes/vpn-gateway-add-lng-rm-portal-include.md)]
+[!INCLUDE [Add local network gateway](../../includes/vpn-gateway-add-local-network-gateway-portal-ip-empty.md)]
 
 ## <a name="section-3---modify-the-classic-vnet-local-site-settings"></a><a name="modifylng"></a>Section 3 - Modifier les paramètres de site local du réseau virtuel classique
 

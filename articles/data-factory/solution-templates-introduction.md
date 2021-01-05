@@ -11,12 +11,12 @@ author: djpmsft
 manager: anandsub
 ms.custom: seo-lt-2019
 ms.date: 01/04/2019
-ms.openlocfilehash: b5e4512030431b6d2e5d0f849e82a281c882b177
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 2725d498b6fded56ad28235b051b1e8f4fbadadb
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628944"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461204"
 ---
 # <a name="templates"></a>Modèles
 
@@ -68,9 +68,9 @@ Data Factory utilise des modèles Azure Resource Manager pour enregistrer des mo
 
         -   De SQL Server en local vers Azure SQL Database
 
-        -   De SQL Server en local vers Azure SQL Data Warehouse
+        -   De SQL Server en local vers Azure Synapse Analytics
 
-        -   D’Oracle en local vers Azure SQL Data Warehouse
+        -   D’Oracle en local vers Azure Synapse Analytics
 
 -   Modèles SSIS
 

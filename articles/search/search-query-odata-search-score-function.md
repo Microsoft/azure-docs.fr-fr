@@ -19,12 +19,12 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: 2439d4f03184f8dbb85b229b3908dff95013b4bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0a84d0310573a1210e21157102a445fff9244782
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113140"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88923974"
 ---
 # <a name="odata-searchscore-function-in-azure-cognitive-search"></a>Fonction `search.score` OData dans Recherche cognitive Azure
 
@@ -38,10 +38,12 @@ La syntaxe pour `search.score` dans **$orderby** est `search.score()`. La foncti
 
 Trier les hôtels par ordre décroissant sur `search.score` et `rating`, puis par ordre croissant sur la distance à partir des coordonnées spécifiées, de sorte qu’entre deux d’hôtels avec une évaluation identique, le plus proche soit listé en premier :
 
+```odata-filter-expr
     search.score() desc,rating desc,geo.distance(location, geography'POINT(-122.131577 47.678581)') asc
+```
 
 ## <a name="next-steps"></a>Étapes suivantes  
 
 - [Vue d’ensemble du langage d’expression OData pour Recherche cognitive Azure](query-odata-filter-orderby-syntax.md)
 - [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md)
-- [Rechercher des documents &#40;API REST Recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Rechercher des documents &#40;API REST Recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents)

@@ -1,17 +1,15 @@
 ---
 title: Déboguer une application Java sur un cluster Service Fabric local
 description: Dans ce didacticiel, découvrez comment déboguer et obtenir des journaux d’activité à partir d’une application Java Service Fabric s’exécutant sur un cluster local.
-author: suhuruli
 ms.topic: tutorial
 ms.date: 02/26/2018
-ms.author: suhuruli
-ms.custom: mvc
-ms.openlocfilehash: c664b586260957138249028e4d521c29b411d56d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-java
+ms.openlocfilehash: 801702d43bae6d925fa4f7fbc37cf44bf585fa6d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75465384"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91531988"
 ---
 # <a name="tutorial-debug-a-java-application-deployed-on-a-local-service-fabric-cluster"></a>Tutoriel : Déboguer une application Java déployée sur un cluster Service Fabric local
 

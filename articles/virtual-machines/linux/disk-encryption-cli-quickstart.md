@@ -7,12 +7,13 @@ ms.service: virtual-machines-linux
 ms.subservice: security
 ms.topic: quickstart
 ms.date: 05/17/2019
-ms.openlocfilehash: 1362844de0a6b5d8cee4555c3d24833affe71640
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 3a9c859c32ef9ad387c56d5fc20f2173ee14fac5
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80385144"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91975176"
 ---
 # <a name="quickstart-create-and-encrypt-a-linux-vm-with-the-azure-cli"></a>Démarrage rapide : Créer et chiffrer une machine virtuelle Linux avec Azure CLI
 
@@ -32,7 +33,7 @@ az group create --name "myResourceGroup" --location "eastus"
 
 ## <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
 
-Créez une machine virtuelle avec la commande [az vm create](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-create). L’exemple suivant permet de créer une machine virtuelle nommée *myVM*.
+Créez une machine virtuelle avec la commande [az vm create](/cli/azure/vm?view=azure-cli-latest#az-vm-create). L’exemple suivant permet de créer une machine virtuelle nommée *myVM*.
 
 ```azurecli-interactive
 az vm create \
@@ -80,7 +81,7 @@ az vm encryption enable -g "MyResourceGroup" --name "myVM" --disk-encryption-key
 Après quelques instants, le processus retournera, « The encryption request was accepted. Please use 'show' command to monitor the progress. ». La commande « show » mentionnée est [az vm show](/cli/azure/vm/encryption#az-vm-encryption-show).
 
 ```azurecli-interactive
-az vm show --name "myVM" -g "MyResourceGroup"
+az vm encryption show --name "myVM" -g "MyResourceGroup"
 ```
 
 Lorsque le chiffrement est activé, vous verrez les éléments suivants dans la sortie retournée :

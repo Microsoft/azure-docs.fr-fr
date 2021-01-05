@@ -3,12 +3,12 @@ title: Créer un cluster Service Fabric dans le portail Azure
 description: Apprenez à configurer un cluster Service Fabric sécurisé dans Azure à l’aide du portail Azure et d’Azure Key Vault.
 ms.topic: conceptual
 ms.date: 09/06/2018
-ms.openlocfilehash: 64a4c430cc7402419d64b77fdcc9a6389cf9de6d
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: c679a804db09b1034f31e9d8da1f7d2ad206f684
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792477"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90563724"
 ---
 # <a name="create-a-service-fabric-cluster-in-azure-using-the-azure-portal"></a>Création d’un cluster Service Fabric dans Azure à partir du portail Azure
 > [!div class="op_single_selector"]
@@ -121,49 +121,49 @@ Configurez vos nœuds de cluster. Les types de nœuds définissent les tailles d
 ### <a name="3-security"></a>3. Sécurité
 ![Capture d’écran des configurations de sécurité sur le portail Azure.][BasicSecurityConfigs]
 
-Pour faciliter la configuration d’un cluster de test sécurisé pour vous, nous vous avons fourni l’option **De base**. Si vous disposez déjà d’un certificat et que vous l’avez téléchargé dans votre [coffre de clés](/azure/key-vault/) (et activé le coffre de clés pour le déploiement), utilisez l’option **Personnalisé**.
+Pour faciliter la configuration d’un cluster de test sécurisé pour vous, nous vous avons fourni l’option **De base**. Si vous disposez déjà d’un certificat et que vous l’avez téléchargé dans votre [coffre de clés](../key-vault/index.yml) (et activé le coffre de clés pour le déploiement), utilisez l’option **Personnalisé**.
 
 #### <a name="basic-option"></a>Option de base
 Suivez les écrans suivants pour ajouter ou réutiliser un coffre de clés existant et ajouter un certificat. L’ajout du certificat est un processus synchrone, et par conséquent, vous devez attendre que le certificat soit créé.
 
 Résistez à la tentation de quitter l’écran jusqu'à la fin de la procédure précédente.
 
-![CreateKeyVault]
+![La capture d’écran montre la page Sécurité avec l’option De base sélectionnée ainsi que le volet Coffre de clés et le volet Créer un coffre de clés.][CreateKeyVault]
 
 Maintenant que le coffre de clés est créé, modifiez les stratégies d’accès pour votre coffre de clés. 
 
-![CreateKeyVault2]
+![La capture d’écran montre le volet Créer un cluster Service Fabric avec l’option 3, Sécurité, sélectionnée et une explication indiquant que le coffre de clés n’est pas activé.][CreateKeyVault2]
 
 Cliquez sur **Modifier les stratégies d'accès**, puis sur **Afficher les stratégies d'accès avancé** et activez l’accès aux machines virtuelles Azure pour le déploiement. Il est recommandé d’activer aussi le déploiement du modèle. Une fois que vous avez effectué vos sélections, n’oubliez pas de cliquer sur le bouton **Enregistrer** et de fermer le panneau **Stratégies d’accès**.
 
-![CreateKeyVault3]
+![La capture d’écran montre le volet Créer un cluster Service Fabric avec le volet Sécurité ouvert et le volet Stratégies d’accès ouvert.][CreateKeyVault3]
 
 Entrez le nom du certificat, puis cliquez sur **OK**.
 
-![CreateKeyVault4]
+![La capture d’écran montre le volet Créer un cluster Service Fabric avec l’option Sécurité sélectionnée comme avant, mais sans l’explication indiquant que le coffre de clés n’est pas activé.][CreateKeyVault4]
 
 #### <a name="custom-option"></a>Option Personnalisé
 Ignorez cette section si vous avez déjà effectué les étapes décrites dans l’option **De base**.
 
-![SecurityCustomOption]
+![La capture d’écran montre la boîte de dialogue Sécurité, Configurer les paramètres de sécurité du cluster.][SecurityCustomOption]
 
 Vous aurez besoin du coffre de clés source, de l’URL du certificat et des informations relatives à l’empreinte du certificat pour la page de sécurité. Si vous ne les avez pas sous la main, ouvrez une autre fenêtre de navigateur et effectuez les opérations suivantes dans le portail Azure
 
 1. Accédez à votre service de coffre de clés.
 2. Sélectionnez l’onglet « Propriétés » et copiez l’ID de ressource pour « Coffre de clés source » sur l’autre fenêtre de navigateur 
 
-    ![CertInfo0]
+    ![La capture d’écran montre la fenêtre Propriétés pour le coffre de clés.][CertInfo0]
 
 3. Sélectionnez maintenant l’onglet Certificats.
 4. Cliquez sur l’empreinte numérique du certificat, ce qui vous redirige vers la page Versions.
 5. Cliquez sur les GUID que vous voyez sous la version actuelle.
 
-    ![CertInfo1]
+    ![La capture d’écran montre la fenêtre Certificats pour le coffre de clés.][CertInfo1]
 
 6. Vous devez maintenant sur l’écran ci-dessous. Copiez l’empreinte numérique hexadécimale SHA-1 dans « Empreinte numérique du certificat » sur l’autre fenêtre de navigateur
 7. Copiez l’Identificateur Secret' pour l’« URL du certificat » dans l’autre fenêtre de navigateur.
 
-    ![CertInfo2]
+    ![La capture d’écran montre la boîte de dialogue Version du certificat avec une option permettant de copier l’identificateur de certificat.][CertInfo2]
 
 Activez la case **Configurer les paramètres avancés** pour saisir les certificats clients pour le **Client d’administration** et le **Client en lecture seule**. Dans ces champs, saisissez l’empreinte de votre certificat de client d’administration et l’empreinte de votre certificat de client en lecture seule, le cas échéant. Lorsque les administrateurs tentent de se connecter au cluster, ils se voient attribuer l’accès uniquement s’ils disposent d’un certificat avec une empreinte qui correspond aux valeurs entrées ici.  
 
@@ -173,7 +173,7 @@ Vous êtes maintenant prêt à déployer le cluster. Avant cela, téléchargez l
 
 Pour terminer la création du cluster, cliquez sur **Créer**. Vous pouvez éventuellement télécharger le modèle.
 
-![Résumé]
+![La capture d’écran montre la page Résumé du volet Créer un cluster Service Fabric avec un lien permettant d’afficher et de télécharger un certificat.][Summary]
 
 Vous pouvez voir la progression de la création dans les notifications. (Cliquez sur l’icône représentant une cloche près de la barre d’état dans l’angle supérieur droit de votre écran.) Si vous avez cliqué sur **Épingler au tableau d’accueil** pendant la création du cluster, **Déploiement du cluster Service Fabric** apparaît épinglé au **tableau d’accueil**. Ce processus prend un certain temps. 
 
@@ -202,14 +202,14 @@ Chacune des valeurs NodeTypes que vous spécifiez dans votre cluster entraîne l
 À ce stade, vous avez un cluster sécurisé à l’aide de certificats pour l’authentification de la gestion. Ensuite, [connectez-vous à votre cluster](service-fabric-connect-to-secure-cluster.md) et découvrez comment [gérer les secrets d’application](service-fabric-application-secret-management.md).  Découvrez également les [options de support de Service Fabric](service-fabric-support.md).
 
 <!-- Links -->
-[azure-powershell]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
+[azure-powershell]: /powershell/azure/
 [azure-portal]: https://portal.azure.com/
 [key-vault-get-started]: ../key-vault/general/overview.md
 [create-cluster-arm]: service-fabric-cluster-creation-via-arm.md
 [service-fabric-cluster-security]: service-fabric-cluster-security.md
 [service-fabric-cluster-security-roles]: service-fabric-cluster-security-roles.md
 [service-fabric-cluster-capacity]: service-fabric-cluster-capacity.md
-[service-fabric-cluster-durability]: service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster
+[service-fabric-cluster-durability]: service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster
 [service-fabric-connect-and-communicate-with-services]: service-fabric-connect-and-communicate-with-services.md
 [service-fabric-health-introduction]: service-fabric-health-introduction.md
 [service-fabric-reliable-services-backup-restore]: service-fabric-reliable-services-backup-restore.md
@@ -230,7 +230,7 @@ Chacune des valeurs NodeTypes que vous spécifiez dans votre cluster entraîne l
 [CertInfo2]: ./media/service-fabric-cluster-creation-via-portal/CertInfo2.PNG
 [SecurityCustomOption]: ./media/service-fabric-cluster-creation-via-portal/SecurityCustomOption.PNG
 [DownloadCert]: ./media/service-fabric-cluster-creation-via-portal/DownloadCert.PNG
-[Résumé]: ./media/service-fabric-cluster-creation-via-portal/Summary.PNG
+[Summary]: ./media/service-fabric-cluster-creation-via-portal/Summary.PNG
 [SecurityConfigs]: ./media/service-fabric-cluster-creation-via-portal/SecurityConfigs.png
 [Notifications]: ./media/service-fabric-cluster-creation-via-portal/notifications.png
 [ClusterDashboard]: ./media/service-fabric-cluster-creation-via-portal/ClusterDashboard.png

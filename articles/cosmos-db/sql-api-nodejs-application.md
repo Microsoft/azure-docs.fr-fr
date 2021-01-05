@@ -8,20 +8,22 @@ ms.devlang: nodejs
 ms.topic: tutorial
 ms.date: 11/05/2019
 ms.author: sngun
-ms.openlocfilehash: 9257a87c69e98db1107528551fe9ce0553c50f75
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.custom: devx-track-js
+ms.openlocfilehash: 49cf54bda985f7d97b2db6a3ada7859aee829cff
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858153"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97359538"
 ---
 # <a name="tutorial-build-a-nodejs-web-app-using-the-javascript-sdk-to-manage-a-sql-api-account-in-azure-cosmos-db"></a>Tutoriel : Créer une application web Node.js avec le Kit de développement logiciel (SDK) JavaScript pour gérer un compte d’API SQL dans Azure Cosmos DB 
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](sql-api-dotnet-application.md)
 > * [Java](sql-api-java-application.md)
 > * [Node.JS](sql-api-nodejs-application.md)
-> * [Python](sql-api-python-application.md)
+> * [Python](./create-sql-api-python.md)
 > * [Xamarin](mobile-apps-with-xamarin.md)
 > 
 
@@ -84,7 +86,7 @@ Voyons maintenant comment créer un projet Node.js « Hello World » de base à 
 
 1. Vous pouvez afficher votre nouvelle application en accédant à l’adresse `http://localhost:3000` dans votre navigateur.
    
-   ![Découverte de Node.js - Capture d’écran de l’application Hello World dans une fenêtre de navigateur](./media/sql-api-nodejs-application/cosmos-db-node-js-express.png)
+   :::image type="content" source="./media/sql-api-nodejs-application/cosmos-db-node-js-express.png" alt-text="Découvrir Node.js - Capture d’écran de l’application Hello World dans une fenêtre de navigateur":::
 
    Arrêtez l’application en appuyant sur CTRL + C dans la fenêtre de terminal, puis sélectionnez **y** pour arrêter le programme de traitement par lots.
 
@@ -438,7 +440,7 @@ Maintenant que vous avez créé l’application, vous pouvez l’exécuter local
 
 1. Pour tester l’application sur votre machine locale, exécutez la commande `npm start` dans le terminal pour démarrer votre application, puis actualisez la page `http://localhost:3000` dans votre navigateur. La page devrait maintenant ressembler à ce qui est présenté dans la capture d’écran suivante :
    
-    ![Capture d'écran de l'application MyTodo List dans une fenêtre de navigateur](./media/sql-api-nodejs-application/cosmos-db-node-js-localhost.png)
+    :::image type="content" source="./media/sql-api-nodejs-application/cosmos-db-node-js-localhost.png" alt-text="Capture d’écran de l’application My Todo List dans une fenêtre de navigateur":::
 
     > [!TIP]
     > Si vous recevez une erreur liée à la mise en retrait dans le fichier layout.jade ou index.jade, assurez-vous que les deux premières lignes des deux fichiers sont justifiées à gauche et ne présentent aucun espace. Supprimez tout espace éventuel dans les deux premières lignes, enregistrez les deux fichiers, puis actualisez la fenêtre du navigateur. 
@@ -447,7 +449,7 @@ Maintenant que vous avez créé l’application, vous pouvez l’exécuter local
 
 3. La page doit se mettre à jour et afficher le nouvel élément créé dans la liste des tâches.
    
-    ![Capture d'écran de l'application avec un nouvel élément dans la liste de tâches](./media/sql-api-nodejs-application/cosmos-db-node-js-added-task.png)
+    :::image type="content" source="./media/sql-api-nodejs-application/cosmos-db-node-js-added-task.png" alt-text="Capture d’écran de l’application avec un nouvel élément dans la liste des tâches":::
 
 4. Pour terminer une tâche, cochez la case dans la colonne Complete, puis sélectionnez **Mettre à jour les tâches**. Cela met à jour le document que vous avez déjà créé et le supprime de la vue.
 
@@ -468,7 +470,7 @@ Lorsque votre application a bien été exécutée localement, vous pouvez la dé
 3. Déployez l’application en l’envoyant à l’appareil distant.
    
    ```bash
-   git push azure master
+   git push azure main
    ```
 
 4. Dans quelques secondes, votre application web sera publiée et lancée dans un navigateur.
@@ -486,4 +488,3 @@ Dès que vous n’avez plus besoin de ces ressources, vous pouvez supprimer le g
 [Node.js]: https://nodejs.org/
 [Git]: https://git-scm.com/
 [GitHub]: https://github.com/Azure-Samples/azure-cosmos-db-sql-api-nodejs-todo-app
-

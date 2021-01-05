@@ -5,27 +5,28 @@ services: data-factory
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 08/13/2018
+ms.date: 07/09/2020
 author: swinarko
 ms.author: sawinark
 manager: mflasko
 ms.reviewer: douglasl
-ms.openlocfilehash: 02952c3baea5d9089061b10f2429be57a9322398
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 3539b867d8f03d11e7799498d0207a65ac9db7d8
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81606176"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92636627"
 ---
 # <a name="clean-up-ssisdb-logs-with-azure-elastic-database-jobs"></a>Nettoyer les journaux d’activité SSISDB avec les travaux de base de données élastique Azure
 
-[!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
+[!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
 Cet article explique comment utiliser des travaux de base de données élastique Azure pour déclencher la procédure stockée qui nettoie les journaux d’activité pour la base de données de catalogue SQL Server Integration Services, `SSISDB`.
 
 Les travaux de base de données élastique constituent un service Azure qui simplifie l’automatisation et l’exécution de travaux par rapport à une base de données ou un groupe de bases de données. Vous pouvez planifier, exécuter et surveiller ces travaux à l’aide du portail Azure, Transact-SQL, PowerShell ou des API REST. Utilisez le travail de base de données élastique pour déclencher la procédure stockée de nettoyage unique du journal ou selon une planification. Vous pouvez choisir l’intervalle de planification en fonction de l’utilisation des ressources SSISDB afin d’éviter une lourde charge de base de données.
 
-Pour plus d’informations, consultez [Gérer des groupes de bases de données avec des travaux de base de données élastique](../sql-database/elastic-jobs-overview.md).
+Pour plus d’informations, consultez [Gérer des groupes de bases de données avec des travaux de base de données élastique](../azure-sql/database/elastic-jobs-overview.md).
 
 Les sections suivantes décrivent comment déclencher la procédure stockée `[internal].[cleanup_server_retention_window_exclusive]`, qui supprime les journaux d’activité SSISDB en dehors de la fenêtre de rétention définie par l’administrateur.
 
@@ -33,7 +34,7 @@ Les sections suivantes décrivent comment déclencher la procédure stockée `[i
 
 [!INCLUDE [requires-azurerm](../../includes/requires-azurerm.md)]
 
-Les exemples de scripts PowerShell suivants créent un nouveau travail élastique pour déclencher la procédure stockée de nettoyage du journal SSISDB. Pour plus d’informations, consultez [Créer un agent de travail élastique à l’aide de PowerShell](../sql-database/elastic-jobs-powershell.md).
+Les exemples de scripts PowerShell suivants créent un nouveau travail élastique pour déclencher la procédure stockée de nettoyage du journal SSISDB. Pour plus d’informations, consultez [Créer un agent de travail élastique à l’aide de PowerShell](../azure-sql/database/elastic-jobs-powershell-create.md).
 
 ### <a name="create-parameters"></a>Créer des paramètres
 
@@ -41,7 +42,7 @@ Les exemples de scripts PowerShell suivants créent un nouveau travail élastiqu
 # Parameters needed to create the Job Database
 param(
 $ResourceGroupName = $(Read-Host "Please enter an existing resource group name"),
-$AgentServerName = $(Read-Host "Please enter the name of an existing Azure SQL server(for example, yhxserver) to hold the SSISDBLogCleanup job database"),
+$AgentServerName = $(Read-Host "Please enter the name of an existing logical SQL server(for example, yhxserver) to hold the SSISDBLogCleanup job database"),
 $SSISDBLogCleanupJobDB = $(Read-Host "Please enter a name for the Job Database to be created in the given SQL Server"),
 # The Job Database should be a clean,empty,S0 or higher service tier. We set S0 as default.
 $PricingTier = "S0",
@@ -52,7 +53,7 @@ $SSISDBLogCleanupAgentName = $(Read-Host "Please enter a name for your new Elast
 # Parameters needed to create the job credential in the Job Database to connect to SSISDB
 $PasswordForSSISDBCleanupUser = $(Read-Host "Please provide a new password for SSISDBLogCleanup job user to connect to SSISDB database for log cleanup"),
 # Parameters needed to create a login and a user in the SSISDB of the target server
-$SSISDBServerEndpoint = $(Read-Host "Please enter the name of the target Azure SQL server which contains SSISDB you need to cleanup, for example, myserver") + '.database.windows.net',
+$SSISDBServerEndpoint = $(Read-Host "Please enter the name of the target logical SQL server which contains SSISDB you need to cleanup, for example, myserver") + '.database.windows.net',
 $SSISDBServerAdminUserName = $(Read-Host "Please enter the target server admin username for SQL authentication"),
 $SSISDBServerAdminPassword = $(Read-Host "Please enter the target server admin password for SQL authentication"),
 $SSISDBName = "SSISDB",
@@ -159,7 +160,7 @@ $Job | Set-AzureRmSqlElasticJob -IntervalType $IntervalType -IntervalCount $Inte
 
 ## <a name="clean-up-logs-with-transact-sql"></a>Nettoyer les journaux d’activité avec Transact-SQL
 
-Les exemples de scripts Transact-SQL suivants créent un nouveau travail élastique pour déclencher la procédure stockée de nettoyage du journal SSISDB. Pour plus d’informations, consultez [Utiliser Transact-SQL (T-SQL) pour créer et gérer des travaux de base de données élastique](../sql-database/elastic-jobs-tsql.md).
+Les exemples de scripts Transact-SQL suivants créent un nouveau travail élastique pour déclencher la procédure stockée de nettoyage du journal SSISDB. Pour plus d’informations, consultez [Utiliser Transact-SQL (T-SQL) pour créer et gérer des travaux de base de données élastique](../azure-sql/database/elastic-jobs-tsql-create-manage.md).
 
 1. Créez ou identifiez une base de données Azure SQL S0 ou supérieur vide comme base de données des travaux SSISDBCleanup. Créez ensuite un agent de travail élastique dans le [portail Azure](https://ms.portal.azure.com/#create/Microsoft.SQLElasticJobAgent).
 
@@ -191,7 +192,7 @@ Les exemples de scripts Transact-SQL suivants créent un nouveau travail élasti
     SELECT * FROM jobs.target_groups WHERE target_group_name = 'SSISDBTargetGroup';
     SELECT * FROM jobs.target_group_members WHERE target_group_name = 'SSISDBTargetGroup';
     ```
-4. Accordez des autorisations appropriées pour la base de données SSISDB. Le catalogue SSISDB doit disposer des autorisations appropriées pour la procédure stockée afin d’exécuter le nettoyage du journal SSISDB avec succès. Pour obtenir des instructions détaillées, consultez [Gérer les connexions](../sql-database/sql-database-manage-logins.md).
+4. Accordez des autorisations appropriées pour la base de données SSISDB. Le catalogue SSISDB doit disposer des autorisations appropriées pour la procédure stockée afin d’exécuter le nettoyage du journal SSISDB avec succès. Pour obtenir des instructions détaillées, consultez [Gérer les connexions](../azure-sql/database/logins-create-manage.md).
 
     ```sql
     -- Connect to the master database in the target server including SSISDB 

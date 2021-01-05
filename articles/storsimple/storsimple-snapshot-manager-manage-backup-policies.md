@@ -3,23 +3,23 @@ title: Stratégies de sauvegarde du Gestionnaire d’instantanés StorSimple | 
 description: Explique comment utiliser le composant logiciel enfichable MMC Gestionnaire d’instantanés StorSimple pour créer et gérer les stratégies de sauvegarde qui contrôlent les sauvegardes planifiées.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 04415d0b-42f0-4737-8afa-257fb2dbe5d0
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
-ms.author: twooley
-ms.openlocfilehash: 7b2df6c8384e78094d80a17d8982b0db9edf73e1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 745aeb9844f1abad075d34b34735563200ea618b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75933358"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90054940"
 ---
 # <a name="use-storsimple-snapshot-manager-to-create-and-manage-backup-policies"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour créer et gérer des stratégies de sauvegarde
 ## <a name="overview"></a>Vue d’ensemble

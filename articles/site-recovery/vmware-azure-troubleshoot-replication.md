@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 08/2/2019
 ms.author: mayg
-ms.openlocfilehash: f91ee5654b4add37d3cce4f875be1f9c2b398ab9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8b44a1d6119cc658b9460e0a52fa0629f759964a
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259491"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91336203"
 ---
 # <a name="troubleshoot-replication-issues-for-vmware-vms-and-physical-servers"></a>Résoudre les problèmes de réplication pour les serveurs physiques et machines virtuelles VMware
 
@@ -77,7 +77,7 @@ Pour résoudre le problème :
     - Accédez au panneau Disques de la machine répliquée concernée et copiez le nom du disque de réplica.
     - Accédez à ce disque managé de réplica.
     - Vous pouvez voir une bannière dans le panneau Vue d’ensemble indiquant qu’une URL de signature d’accès partagé a été générée. Cliquez sur cette bannière et annulez l’exportation. Ignorez cette étape si vous ne voyez pas la bannière.
-    - Dès que l’URL de la signature d’accès partagé est révoquée, accédez au panneau Configuration du disque managé et augmentez la taille de manière à ce que la récupération automatique du système prenne en charge le débit observé sur le disque source.
+    - Dès que l’URL de la signature d’accès partagé est révoquée, accédez au panneau Configuration du disque managé et augmentez la taille de manière à ce qu’Azure Site Recovery prenne en charge le débit observé sur le disque source.
 - Si le taux d’évolution observé est temporaire, attendez quelques heures que le chargement des données en attente rattrape son retard et crée des points de récupération.
 - Si le disque contient des données non critiques, comme des journaux temporaires ou des données de test, déplacez ces données ou excluez l’intégralité de ce disque de la réplication.
 - Si le problème persiste, utilisez le [Planificateur de déploiement](site-recovery-deployment-planner.md#overview) Site Recovery pour faciliter la planification de la réplication.
@@ -95,16 +95,16 @@ Pour résoudre ce problème, procédez comme suit pour vérifier la connectivit�
    - Service d’application InMage Scout
 4. Sur la machine source, examinez les journaux à l’emplacement ci-après pour obtenir les détails de l’erreur :
 
-       C:\Program Files (X86)\Microsoft Azure Site Recovery\agent\svagents*log
+    *C:\Program Files (X86)\Microsoft Azure Site Recovery\agent\svagents\*.log*
 
 ### <a name="process-server-with-no-heartbeat-error-806"></a>Serveur de processus dépourvu de pulsation [erreur 806]
 Si le serveur de processus est dépourvu de pulsation, vérifiez les points suivants :
 1. La machine virtuelle du serveur de processus est opérationnelle.
 2. Consultez les journaux ci-après sur le serveur de processus pour obtenir les détails de l’erreur :
 
-       C:\ProgramData\ASR\home\svsystems\eventmanager*.log
-       and
-       C:\ProgramData\ASR\home\svsystems\monitor_protection*.log
+    *C:\ProgramData\ASR\home\svsystems\eventmanager\*.log*\
+    et
+    *C:\ProgramData\ASR\home\svsystems\monitor_protection\*.log*
 
 ### <a name="master-target-server-with-no-heartbeat-error-78022"></a>Serveur cible maître dépourvu de pulsation [erreur 78022]
 
@@ -117,7 +117,7 @@ Pour résoudre ce problème, vérifiez l’état du service en procédant comme 
     - Vérifiez que le service svagents est en cours d’exécution. S’il l’est, redémarrez-le.
     - Vérifiez les journaux à l’emplacement ci-après pour obtenir les détails de l’erreur :
 
-          C:\Program Files (X86)\Microsoft Azure Site Recovery\agent\svagents*log
+        *C:\Program Files (X86)\Microsoft Azure Site Recovery\agent\svagents\*.log*
 3. Pour inscrire le serveur cible maître auprès du serveur de configuration, accédez au dossier **%PROGRAMDATA%\ASR\Agent**, puis exécutez ce qui suit dans l’invite de commandes :
    ```
    cmd
@@ -146,28 +146,30 @@ Certains des problèmes les plus courants sont répertoriés ci-dessous
 #### <a name="cause-3-known-issue-in-sql-server-2016-and-2017"></a>Cause 3 : Problème connu dans SQL Server 2016 et 2017
 **Procédure de résolution** : Référez-vous à cet [article](https://support.microsoft.com/help/4493364/fix-error-occurs-when-you-back-up-a-virtual-machine-with-non-component) de la base de connaissances
 
+#### <a name="cause-4-app-consistency-not-enabled-on-linux-servers"></a>Cause 4 : Cohérence des applications non activée sur les serveurs Linux
+**Procédure de résolution** : Azure Site Recovery pour le système d’exploitation Linux prend en charge les scripts personnalisés des applications à des fins de cohérence. Le script personnalisé avec options pré et post-script sera utilisé par l’agent Mobilité Azure Site Recovery pour la cohérence des applications. [Voici](./site-recovery-faq.md#replication) les étapes pour l’activer.
 
 ### <a name="more-causes-due-to-vss-related-issues"></a>Autres causes provoquées par des problèmes liés à VSS :
 
 Pour mieux résoudre le problème, vérifiez les fichiers sur la machine source pour obtenir le code d’erreur exact de l’échec :
 
-    C:\Program Files (x86)\Microsoft Azure Site Recovery\agent\Application Data\ApplicationPolicyLogs\vacp.log
+*C:\Program Files (x86)\Microsoft Azure Site Recovery\agent\Application Data\ApplicationPolicyLogs\vacp.log*
 
 Comment localiser les erreurs dans le fichier ?
 Recherchez la chaîne « vacpError » en ouvrant le fichier vacp.log dans un éditeur
 
-    Ex: vacpError:220#Following disks are in FilteringStopped state [\\.\PHYSICALDRIVE1=5, ]#220|^|224#FAILED: CheckWriterStatus().#2147754994|^|226#FAILED to revoke tags.FAILED: CheckWriterStatus().#2147754994|^|
+`Ex: `**`vacpError`**`:220#Following disks are in FilteringStopped state [\\.\PHYSICALDRIVE1=5, ]#220|^|224#FAILED: CheckWriterStatus().#2147754994|^|226#FAILED to revoke tags.FAILED: CheckWriterStatus().#2147754994|^|`
 
 Dans l’exemple ci-dessus, **2147754994** est le code d’erreur qui vous informe de l’échec, comme indiqué ci-dessous
 
 #### <a name="vss-writer-is-not-installed---error-2147221164"></a>L’enregistreur VSS n’est pas installé - erreur 2147221164
 
-*Procédure de résolution* : Pour générer une balise de cohérence d’application, Azure Site Recovery utilise le service VSS (cliché instantané de volume) de Microsoft. Il installe un fournisseur VSS pour que l’opération prenne des clichés instantanés de la cohérence d’application. Ce fournisseur VSS est installé en tant que service. Si le service de fournisseur VSS n’est pas installé, la création de clichés instantanés de la cohérence d’application échoue et l’ID d’erreur 0x80040154 « Classe non inscrite » s’affiche. </br>
-Consultez [l’article relatif au dépannage de l’installation de l’enregistreur VSS](https://docs.microsoft.com/azure/site-recovery/vmware-azure-troubleshoot-push-install#vss-installation-failures)
+*Procédure de résolution* : Pour générer une balise de cohérence d’application, Azure Site Recovery utilise le service VSS (cliché instantané de volume) de Microsoft. Il installe un fournisseur VSS pour que l’opération prenne des clichés instantanés de la cohérence d’application. Ce fournisseur VSS est installé en tant que service. Si le service de fournisseur VSS n’est pas installé, la création de clichés instantanés de la cohérence d’application échoue et l’ID d’erreur 0x80040154 « Classe non inscrite » s’affiche. </br>
+Consultez [l’article relatif au dépannage de l’installation de l’enregistreur VSS](./vmware-azure-troubleshoot-push-install.md#vss-installation-failures)
 
 #### <a name="vss-writer-is-disabled---error-2147943458"></a>L’enregistreur VSS est désactivé - erreur 2147943458
 
-**Procédure de résolution** : Pour générer une balise de cohérence d’application, Azure Site Recovery utilise le service VSS (cliché instantané de volume) de Microsoft. Il installe un fournisseur VSS pour que l’opération prenne des clichés instantanés de la cohérence d’application. Ce fournisseur VSS est installé en tant que service. Si le service de fournisseur VSS est désactivé, la création de clichés instantanés de la cohérence d’application échoue et l’ID d’erreur « Le service spécifié est désactivé et ne peut pas être démarré (0x80070422) » s’affiche. </br>
+**Procédure de résolution** : Pour générer une balise de cohérence d’application, Azure Site Recovery utilise le service VSS (cliché instantané de volume) de Microsoft. Il installe un fournisseur VSS pour que l’opération prenne des clichés instantanés de la cohérence d’application. Ce fournisseur VSS est installé en tant que service. Si le service de fournisseur VSS est désactivé, la création de clichés instantanés de la cohérence d’application échoue et l’ID d’erreur « Le service spécifié est désactivé et ne peut pas être démarré (0x80070422) » s’affiche. </br>
 
 - Si le service VSS est désactivé :
     - Vérifiez que le type de démarrage du service fournisseur VSS est défini sur **Automatique**.
@@ -191,6 +193,24 @@ Vérifiez que le type de démarrage du service fournisseur VSS est défini sur *
         - Fournisseur VSS d’Azure Site Recovery
         - Service VDS (Virtual Disk Service)
 
+## <a name="error-id-95001---insufficient-permissions-found"></a>ID d’erreur 95001 : Autorisations insuffisantes
+
+Cette erreur se produit lorsque vous tentez d’activer la réplication alors que les dossiers d’application ne disposent pas d’autorisations suffisantes.
+
+**Procédure de résolution** : Pour résoudre ce problème, assurez-vous que l’utilisateur IUSR détient le rôle de propriétaire pour tous les dossiers indiqués ci-dessous :
+
+- *C\ProgramData\Microsoft Azure Site Recovery\private*
+- Répertoire d’installation. Par exemple, si le répertoire d’installation est le lecteur F, fournissez les autorisations nécessaires pour :
+    - *F:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems*
+- Dossier *\pushinstallsvc* dans le répertoire d’installation. Par exemple, si le répertoire d’installation est le lecteur F, fournissez les autorisations nécessaires pour :
+    - *F:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems\pushinstallsvc*
+- Dossier *\etc* dans le répertoire d’installation. Par exemple, si le répertoire d’installation est le lecteur F, fournissez les autorisations nécessaires pour :
+    - *F:\Program Files (x86)\Microsoft Azure Site Recovery\home\svsystems\etc*
+- *C:\Temp*
+- *C:\thirdparty\php5nts*
+- Tous les éléments sur le chemin ci-dessous :
+    - *C:\thirdparty\rrdtool-1.2.15-win32-perl58\rrdtool\Release\**
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous avez besoin d’aide, publiez votre question sur le [forum Azure Site Recovery](https://social.msdn.microsoft.com/Forums/azure/home?forum=hypervrecovmgr). Nous avons une communauté active et l’un de nos ingénieurs peut vous aider.
+Si vous avez besoin d’aide supplémentaire, publiez votre question sur la [page de questions Microsoft Q&R sur Azure Site Recovery](/answers/topics/azure-site-recovery.html). Nous avons une communauté active et l’un de nos ingénieurs peut vous aider.

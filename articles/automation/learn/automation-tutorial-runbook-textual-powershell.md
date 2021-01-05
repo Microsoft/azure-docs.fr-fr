@@ -1,30 +1,27 @@
 ---
 title: Créer un runbook PowerShell dans Azure Automation
-description: Tutoriel montrant comment créer, tester et publier un runbook PowerShell simple
+description: Cet article vous apprend à créer, tester et publier un runbook PowerShell simple.
 keywords: azure powershell, didacticiel sur le script powershell, automatisation powershell
 services: automation
 ms.subservice: process-automation
 ms.date: 04/19/2020
 ms.topic: tutorial
-ms.openlocfilehash: b94969ff0973f68b57a1f43aa9d3205901bb1436
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: a1b0dff9421f493958554c659043c49ff2874379
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81725083"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87014998"
 ---
 # <a name="tutorial-create-a-powershell-runbook"></a>Tutoriel : Créer un runbook PowerShell
 
-Ce didacticiel vous guide dans la création d’un [Runbook PowerShell](../automation-runbook-types.md#powershell-runbooks) dans Azure Automation. Les Runbooks PowerShell sont basés sur Windows PowerShell. Vous modifiez directement le code du Runbook à l'aide de l'éditeur de texte du portail Azure.
+Ce didacticiel vous guide dans la création d’un [Runbook PowerShell](../automation-runbook-types.md#powershell-runbooks) dans Azure Automation. Les Runbooks PowerShell sont basés sur Windows PowerShell. Vous pouvez modifier directement le code du runbook à l’aide de l’éditeur de texte du portail Azure.
 
 > [!div class="checklist"]
 > * Créer un runbook PowerShell simple
 > * Tester et publier le runbook
 > * Exécuter le travail du runbook et en suivre l’état
 > * Mettre à jour le runbook pour démarrer une machine virtuelle Azure avec des paramètres de runbook
-
->[!NOTE]
->Cet article a été mis à jour pour tenir compte de l’utilisation du nouveau module Az d’Azure PowerShell. Vous pouvez toujours utiliser le module AzureRM, qui continue à recevoir des correctifs de bogues jusqu’à au moins décembre 2020. Pour en savoir plus sur le nouveau module Az et la compatibilité avec AzureRM, consultez [Présentation du nouveau module Az d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-3.5.0). Pour obtenir des instructions relatives à l’installation du module Az sur votre Runbook Worker hybride, voir [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps?view=azps-3.5.0). Pour votre compte Automation, vous pouvez mettre à jour vos modules vers la dernière version en suivant les instructions du [Guide de mise à jour des modules Azure PowerShell dans Azure Automation](../automation-update-azure-modules.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -46,7 +43,7 @@ Les runbooks PowerShell ont les mêmes cycle de vie, fonctionnalités et mode de
 | Exécution des commandes | Prennent uniquement en charge l’exécution en série. | Prennent en charge à la fois l’exécution en série et l’exécution parallèle.|
 | Instance d'exécution | Une instance d’exécution exécute tout ce qui se trouve dans un script. | Une instance d’exécution distincte peut être utilisée pour une activité, une commande ou un bloc de script. |
 
-En plus de ces différences, les runbooks PowerShell présentent des [différences syntaxiques](https://technet.microsoft.com/magazine/dn151046.aspx) par rapport aux runbooks PowerShell Workflow.
+En plus de ces différences, les runbooks PowerShell présentent des [différences syntaxiques](/previous-versions/technet-magazine/dn151046(v=msdn.10)) par rapport aux runbooks PowerShell Workflow.
 
 ## <a name="step-1---create-runbook"></a>Étape 1 - Création d’un Runbook
 
@@ -134,7 +131,7 @@ Le runbook que vous avez créé est toujours en mode Brouillon. Il doit être pu
 
 Vous avez testé et publié votre runbook, mais jusqu’à présent, il ne fait rien d’utile. Vous souhaitez qu’il gère les ressources Azure. Pour ce faire, le runbook doit pouvoir s’authentifier à l’aide du compte d’identification qui a été créé automatiquement lors de la création de votre compte Automation.
 
-Comme le montre l’exemple ci-dessous, la connexion d’identification est établie avec l’applet de commande [Connect-AzAccount](https://docs.microsoft.com/powershell/module/az.accounts/connect-azaccount?view=azps-3.5.0). Si vous gérez des ressources associées à plusieurs abonnements, utilisez le paramètre `AzContext` avec [Get-AzContext](https://docs.microsoft.com/powershell/module/Az.Accounts/Get-AzContext?view=azps-3.5.0).
+Comme le montre l’exemple ci-dessous, la connexion d’identification est établie avec l’applet de commande [Connect-AzAccount](/powershell/module/az.accounts/connect-azaccount?view=azps-3.5.0). Si vous gérez des ressources associées à plusieurs abonnements, utilisez le paramètre `AzContext` avec [Get-AzContext](/powershell/module/Az.Accounts/Get-AzContext?view=azps-3.5.0).
 
 > [!NOTE]
 > Pour les runbooks PowerShell, `Add-AzAccount` et `Add-AzureRMAccount` sont des alias de `Connect-AzAccount`. Vous pouvez utiliser ces cmdlets ou [mettre à jour vos modules](../automation-update-azure-modules.md) dans votre compte Automation vers les dernières versions. Il est possible que vous deviez mettre à jour vos modules, même si vous venez de créer un compte Automation.
@@ -147,15 +144,15 @@ Comme le montre l’exemple ci-dessous, la connexion d’identification est éta
 
    # Wrap authentication in retry logic for transient network failures
    $logonAttempt = 0
-   while(!($connectionResult) -And ($logonAttempt -le 10))
+   while(!($connectionResult) -and ($logonAttempt -le 10))
    {
        $LogonAttempt++
        # Logging in to Azure...
-       $connectionResult =    Connect-AzAccount `
-                                  -ServicePrincipal `
-                                  -Tenant $connection.TenantID `
-                                  -ApplicationId $connection.ApplicationID `
-                                  -CertificateThumbprint $connection.CertificateThumbprint
+       $connectionResult = Connect-AzAccount `
+                               -ServicePrincipal `
+                               -Tenant $connection.TenantID `
+                               -ApplicationId $connection.ApplicationID `
+                               -CertificateThumbprint $connection.CertificateThumbprint
 
        Start-Sleep -Seconds 30
    }
@@ -177,15 +174,15 @@ Comme le montre l’exemple ci-dessous, la connexion d’identification est éta
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
 
-   while(!($connectionResult) -And ($logonAttempt -le 10))
+   while(!($connectionResult) -and ($logonAttempt -le 10))
    {
        $LogonAttempt++
        # Logging in to Azure...
-       $connectionResult =    Connect-AzAccount `
-                                  -ServicePrincipal `
-                                  -Tenant $connection.TenantID `
-                                  -ApplicationId $connection.ApplicationID `
-                                  -CertificateThumbprint $connection.CertificateThumbprint
+       $connectionResult = Connect-AzAccount `
+                               -ServicePrincipal `
+                               -Tenant $connection.TenantID `
+                               -ApplicationId $connection.ApplicationID `
+                               -CertificateThumbprint $connection.CertificateThumbprint
 
        Start-Sleep -Seconds 30
    }
@@ -201,22 +198,22 @@ Comme le montre l’exemple ci-dessous, la connexion d’identification est éta
 
 À présent que votre runbook s’authentifie auprès de votre abonnement Azure, vous pouvez gérer les ressources. Ajoutons une commande pour démarrer une machine virtuelle. Vous pouvez choisir n’importe quelle machine virtuelle dans votre abonnement Azure et coder pour l’instant ce nom en dur dans le runbook.
 
-1. Pour votre script de runbook, ajoutez l’applet de commande [Start-AzVM](https://docs.microsoft.com/powershell/module/Az.Compute/Start-AzVM?view=azps-3.5.0) pour démarrer la machine virtuelle. Comme indiqué ci-dessous, l’applet de commande démarre une machine virtuelle nommée `VMName` et avec un groupe de ressources nommé `ResourceGroupName`.
+1. Pour votre script de runbook, ajoutez l’applet de commande [Start-AzVM](/powershell/module/Az.Compute/Start-AzVM?view=azps-3.5.0) pour démarrer la machine virtuelle. Comme indiqué ci-dessous, l’applet de commande démarre une machine virtuelle nommée `VMName` et avec un groupe de ressources nommé `ResourceGroupName`.
 
    ```powershell
    # Ensures you do not inherit an AzContext in your runbook
    Disable-AzContextAutosave –Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
-   while(!($connectionResult) -And ($logonAttempt -le 10))
+   while(!($connectionResult) -and ($logonAttempt -le 10))
    {
        $LogonAttempt++
        # Logging in to Azure...
-       $connectionResult =    Connect-AzAccount `
-                                  -ServicePrincipal `
-                                  -Tenant $connection.TenantID `
-                                  -ApplicationId $connection.ApplicationID `
-                                  -CertificateThumbprint $connection.CertificateThumbprint
+       $connectionResult = Connect-AzAccount `
+                               -ServicePrincipal `
+                               -Tenant $connection.TenantID `
+                               -ApplicationId $connection.ApplicationID `
+                               -CertificateThumbprint $connection.CertificateThumbprint
 
        Start-Sleep -Seconds 30
    }
@@ -243,15 +240,15 @@ Votre runbook démarre actuellement la machine virtuelle que vous avez codée en
    Disable-AzContextAutosave –Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
-   while(!($connectionResult) -And ($logonAttempt -le 10))
+   while(!($connectionResult) -and ($logonAttempt -le 10))
    {
        $LogonAttempt++
        # Logging in to Azure...
-       $connectionResult =    Connect-AzAccount `
-                                  -ServicePrincipal `
-                                  -Tenant $connection.TenantID `
-                                  -ApplicationId $connection.ApplicationID `
-                                  -CertificateThumbprint $connection.CertificateThumbprint
+       $connectionResult = Connect-AzAccount `
+                               -ServicePrincipal `
+                               -Tenant $connection.TenantID `
+                               -ApplicationId $connection.ApplicationID `
+                               -CertificateThumbprint $connection.CertificateThumbprint
 
        Start-Sleep -Seconds 30
    }
@@ -278,8 +275,7 @@ Votre runbook démarre actuellement la machine virtuelle que vous avez codée en
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour plus d’informations sur PowerShell, notamment le langage de référence et les modules d’apprentissage, consultez la [Documentation PowerShell](/powershell/scripting/overview).
-* Pour obtenir des informations de référence sur les cmdlets PowerShell, consultez [Az.Automation](https://docs.microsoft.com/powershell/module/az.automation/?view=azps-3.7.0#automation
-).
+* Pour obtenir des informations de référence sur les cmdlets PowerShell, consultez [Az.Automation](/powershell/module/az.automation/?view=azps-3.7.0#automation).
 * Pour démarrer avec les runbooks graphiques, consultez [Créer un runbook graphique](automation-tutorial-runbook-graphical.md).
 * Pour démarrer avec les runbooks de workflow PowerShell, consultez [Créer un runbook de workflow PowerShell](automation-tutorial-runbook-textual.md).
 * Pour en savoir plus sur les types de runbook, leurs avantages et leurs limites, consultez [Types de runbooks Azure Automation](../automation-runbook-types.md).

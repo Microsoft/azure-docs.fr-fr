@@ -4,10 +4,10 @@ description: Décrit comment définir le nom et le type des ressources enfants d
 ms.topic: conceptual
 ms.date: 08/26/2019
 ms.openlocfilehash: 3a69829e674925982c618807f49433a033d8c5f9
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80743840"
 ---
 # <a name="set-name-and-type-for-child-resources"></a>Définir le nom et le type des ressources enfants

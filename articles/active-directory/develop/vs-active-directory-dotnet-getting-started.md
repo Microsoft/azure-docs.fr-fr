@@ -6,16 +6,16 @@ manager: jillfra
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/12/2018
 ms.author: ghogen
-ms.custom: aaddev, vs-azure
-ms.openlocfilehash: fe408e965c528db1d82b73ee7b20bbe3b3933657
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp, aaddev, vs-azure
+ms.openlocfilehash: 15a7c873e4d1e5c962a89b03f2a5cafc88843192
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80886124"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88165462"
 ---
 # <a name="getting-started-with-azure-active-directory-aspnet-mvc-projects"></a>Bien démarrer avec Azure Active Directory (projets MVC ASP.NET)
 
@@ -82,5 +82,5 @@ Pour ajouter les commandes Connexion/Déconnexion à l’un de vos affichages, v
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Scénarios d’authentification pour Azure Active Directory](authentication-scenarios.md)
+- [Scénarios d’authentification pour Azure Active Directory](./authentication-vs-authorization.md)
 - [Ajouter la connexion avec Microsoft à une application web ASP.NET](quickstart-v2-aspnet-webapp.md)

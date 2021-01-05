@@ -7,15 +7,15 @@ ms.topic: quickstart
 ms.date: 10/26/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: c419c2127b1c5fe3aaa60c6e828ff0c5a6676c07
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 8b4bd9ece5f010f1294356ad4673543834e5076a
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77598542"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94626909"
 ---
 # <a name="quickstart-create-and-manage-an-azure-file-share-with-azure-powershell"></a>Démarrage rapide : créer et gérer un partage de fichiers Azure avec Azure PowerShell 
-Ce guide vous explique les bases de l’utilisation du [partage de fichiers](storage-files-introduction.md) Azure avec PowerShell. Le partage de fichiers Azure est similaire à d’autres partages de fichiers, mais est stocké dans le cloud et s’appuie sur la plateforme Azure. Il prend en charge le protocole SMB de norme industrielle et permet le partage de fichiers entre plusieurs machines, applications et instances. 
+Ce guide vous explique les bases de l’utilisation du [partage de fichiers](storage-files-introduction.md) Azure avec PowerShell. Le partage de fichiers Azure est similaire à d’autres partages de fichiers, mais est stocké dans le cloud et s’appuie sur la plateforme Azure. Les partages de fichiers Azure prennent en charge le protocole SMB (Server Message Block) standard, le protocole NFS (Network File System) (en préversion) et permettent de partager des fichiers sur plusieurs machines, applications et instances. 
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -40,7 +40,7 @@ New-AzResourceGroup `
 ## <a name="create-a-storage-account"></a>Créez un compte de stockage.
 Un compte de stockage est un pool partagé de stockage que vous pouvez utiliser pour déployer des partages de fichiers Azure. Un compte de stockage peut contenir un nombre illimité de partages, et un partage peut stocker un nombre illimité de fichiers, dans les limites de capacité du compte de stockage. Cet exemple crée une version 2 à usage général (compte de stockage GPv2), qui peut stocker des partages de fichiers Azure standard ou d’autres ressources de stockage, comme des objets blob ou des files d’attente, sur un média à rotation de lecteur de disque dur (HDD). Azure Files prend aussi en charge les disques SSD Premium ; des partages de fichiers Azure Premium peuvent être créés dans des comptes de stockage FileStorage.
 
-Cet exemple crée un compte de stockage à l’aide de l’applet de commande [New-AzStorageAccount](/powershell/module/az.storage/new-azstorageaccount). Le compte de stockage est nommé *mystorageaccount\<nombre aléatoire>* et une référence à ce compte de stockage est stockée dans la variable **$storageAcct**. Les noms de compte de stockage doivent être uniques. Par conséquent, utilisez `Get-Random` pour ajouter un numéro au nom pour le rendre unique. 
+Cet exemple crée un compte de stockage à l’aide de l’applet de commande [New-AzStorageAccount](/powershell/module/az.storage/new-azstorageaccount). Le compte de stockage est nommé *mystorageaccount\<random number>* et une référence à ce compte de stockage est stockée dans la variable **$storageAcct**. Les noms de compte de stockage doivent être uniques. Par conséquent, utilisez `Get-Random` pour ajouter un numéro au nom pour le rendre unique. 
 
 ```azurepowershell-interactive 
 $storageAccountName = "mystorageacct$(Get-Random)"
@@ -66,13 +66,14 @@ $shareName = "myshare"
 New-AzRmStorageShare `
     -StorageAccount $storageAcct `
     -Name $shareName `
+    -EnabledProtocol SMB `
     -QuotaGiB 1024 | Out-Null
 ```
 
-Les noms de partage ne doivent contenir que des minuscules, des nombres et des traits d’union uniques, mais ne peut commencer par un trait d’union. Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez la rubrique [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](https://docs.microsoft.com/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
+Les noms de partage ne doivent contenir que des minuscules, des nombres et des traits d’union uniques, mais ne peut commencer par un trait d’union. Pour plus d’informations sur la façon de nommer des partages de fichiers et des fichiers, consultez la rubrique [Affectation de noms et références aux partages, répertoires, fichiers et métadonnées](/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
 
 ## <a name="use-your-azure-file-share"></a>Utiliser votre partage de fichiers Azure
-Azure Files offre deux méthodes pour utiliser les fichiers et dossiers au sein de votre partage de fichiers Azure : le [protocole Server Message Block (SMB)](https://msdn.microsoft.com/library/windows/desktop/aa365233.aspx) de norme industrielle et le [protocole REST de fichier](https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api). 
+Azure Files offre deux méthodes pour utiliser les fichiers et dossiers au sein de votre partage de fichiers Azure : le [protocole Server Message Block (SMB)](/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview) de norme industrielle et le [protocole REST de fichier](/rest/api/storageservices/file-service-rest-api). 
 
 Pour monter un partage de fichiers avec SMB, consultez le document suivant en fonction de votre système d’exploitation :
 - [Windows](storage-how-to-use-files-windows.md)
@@ -88,7 +89,7 @@ Dans la plupart des cas, vous allez utiliser votre partage de fichiers Azure sur
 - Vous tirez profit de ressources serverless, comme [Azure Functions](../../azure-functions/functions-overview.md) par exemple. 
 - Vous créez un service à valeur ajoutée qui interagit avec de nombreux partages de fichiers Azure, par exemple en effectuant des sauvegardes ou des analyses antivirus.
 
-Les exemples suivants montrent comment utiliser le module Azure PowerShell pour manipuler votre partage de fichiers Azure avec le protocole REST de fichier. Le paramètre `-Context` sert à récupérer la clé de compte du stockage pour effectuer les actions indiquées sur le partage de fichiers. Pour récupérer la clé du compte de stockage, vous devez disposer du rôle RBAC `Owner` sur le compte de stockage.
+Les exemples suivants montrent comment utiliser le module Azure PowerShell pour manipuler votre partage de fichiers Azure avec le protocole REST de fichier. Le paramètre `-Context` sert à récupérer la clé de compte du stockage pour effectuer les actions indiquées sur le partage de fichiers. Pour récupérer la clé du compte de stockage, vous devez disposer du rôle Azure `Owner` sur le compte de stockage.
 
 #### <a name="create-directory"></a>Créer un répertoire
 Pour créer un répertoire nommé *myDirectory* à la racine de votre partage de fichiers Azure, utilisez l’applet de commande [New-AzStorageDirectory](/powershell/module/az.storage/New-AzStorageDirectory).
@@ -161,6 +162,7 @@ $otherShareName = "myshare2"
 New-AzRmStorageShare `
     -StorageAccount $storageAcct `
     -Name $otherShareName `
+    -EnabledProtocol SMB `
     -QuotaGiB 1024 | Out-Null
   
 New-AzStorageDirectory `
@@ -186,12 +188,12 @@ Get-AzStorageFile `
     -Path "myDirectory2" 
 ```
 
-Bien que l’applet de commande `Start-AzStorageFileCopy` soit pratique pour les déplacements de fichiers ad hoc entre les partages de fichiers Azure, pour les migrations et les déplacements de données plus importants, nous préconisons `robocopy` sur Windows et `rsync` sur macOS et Linux. Pour effectuer les déplacements de données, `robocopy` et `rsync` utilisent SMB plutôt que l’API FileREST.
+Bien que l’applet de commande `Start-AzStorageFileCopy` soit pratique pour les déplacements de fichiers ad hoc entre les partages de fichiers Azure, pour les migrations et les déplacements de données plus importants, nous préconisons `robocopy` sur Windows et `rsync` sur macOS et Linux. `robocopy` et `rsync` utilisent SMB pour effectuer les déplacement de données et non l’API FileREST.
 
 ## <a name="create-and-manage-share-snapshots"></a>Créer et gérer des instantanés de partage
 Avec un partage de fichiers Azure, vous pouvez aussi créer des instantanés de partage. Un instantané conserve un point dans le temps pour un partage de fichiers Azure. Les instantanés de partage sont similaires aux technologies de systèmes d’exploitation que vous connaissez peut-être déjà comme :
 
-- Le [service VSS](https://docs.microsoft.com/windows/desktop/VSS/volume-shadow-copy-service-portal) pour les systèmes de fichiers Windows comme NTFS et ReFS.
+- Le [service VSS](/windows/desktop/VSS/volume-shadow-copy-service-portal) pour les systèmes de fichiers Windows comme NTFS et ReFS.
 - Les instantanés du [gestionnaire de volumes logiques (LVM)](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)#Basic_functionality) pour les systèmes Linux.
 - Les instantanés du [système de fichiers Apple (APFS)](https://developer.apple.com/library/content/documentation/FileManagement/Conceptual/APFS_Guide/Features/Features.html) pour macOS. 
 
@@ -199,7 +201,7 @@ Vous pouvez créer un instantané de partage pour un partage à l’aide de la m
 
 ```azurepowershell-interactive
 $share = Get-AzStorageShare -Context $storageAcct.Context -Name $shareName
-$snapshot = $share.Snapshot()
+$snapshot = $share.CloudFileShare.Snapshot()
 ```
 
 ### <a name="browse-share-snapshots"></a>Parcourir les instantanés de partage

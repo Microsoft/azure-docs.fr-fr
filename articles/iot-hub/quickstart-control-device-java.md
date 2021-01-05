@@ -13,13 +13,15 @@ ms.custom:
 - seo-java-august2019
 - seo-java-september2019
 - mqtt
+- devx-track-java
+- devx-track-azurecli
 ms.date: 06/21/2019
-ms.openlocfilehash: d73fab92535820186fcce997c2a5c72abf130c18
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 25ed259fa1f2858c0c818eafbdc7b35226067bc4
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81770995"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843058"
 ---
 # <a name="quickstart-control-a-device-connected-to-an-azure-iot-hub-with-java"></a>Démarrage rapide : Contrôler un appareil connecté à un hub IoT Azure avec Java
 
@@ -31,47 +33,39 @@ Dans ce guide de démarrage rapide, vous utilisez une méthode directe pour cont
 
 * Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 
-* Java SE Development Kit 8. Dans [Prise en charge à long terme de Java pour Azure et Azure Stack](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable), sous **Prise en charge à long terme**, sélectionnez **Java 8**.
+* Java SE Development Kit 8. Dans [Prise en charge à long terme de Java pour Azure et Azure Stack](/java/azure/jdk/?view=azure-java-stable), sous **Prise en charge à long terme**, sélectionnez **Java 8**.
+
+    Vous pouvez vérifier la version actuelle de Java sur votre machine de développement à l’aide de la commande suivante :
+
+    ```cmd/sh
+    java -version
+    ```
 
 * [Apache Maven 3](https://maven.apache.org/download.cgi).
 
+    Vous pouvez vérifier la version actuelle de Maven sur votre machine de développement à l’aide de la commande suivante :
+
+    ```cmd/sh
+    mvn --version
+    ```
+
 * [Un exemple de projet Java](https://github.com/Azure-Samples/azure-iot-samples-java/archive/master.zip).
 
-* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-Vous pouvez vérifier la version actuelle de Java sur votre machine de développement à l’aide de la commande suivante :
-
-```cmd/sh
-java -version
-```
-
-Vous pouvez vérifier la version actuelle de Maven sur votre machine de développement à l’aide de la commande suivante :
-
-```cmd/sh
-mvn --version
-```
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-### <a name="add-azure-iot-extension"></a>Ajouter une extension Azure IoT
-
-Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et du service IoT Hub Device Provisioning (DPS) à Azure CLI.
-
-```azurecli-interactive
-az extension add --name azure-iot
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 
-Si vous avez terminé le précédent [Démarrage rapide : Envoyer des données de télémétrie d’un appareil à un hub IoT](quickstart-send-telemetry-java.md), vous pouvez ignorer cette étape.
+Si vous avez terminé le [Démarrage rapide : envoyer des données de télémétrie à partir d’un appareil à un IoT Hub](quickstart-send-telemetry-java.md) précédent, vous pouvez ignorer cette étape.
 
 [!INCLUDE [iot-hub-include-create-hub](../../includes/iot-hub-include-create-hub.md)]
 
 ## <a name="register-a-device"></a>Inscrire un appareil
 
-Si vous avez terminé le précédent [Démarrage rapide : Envoyer des données de télémétrie d’un appareil à un hub IoT](quickstart-send-telemetry-java.md), vous pouvez ignorer cette étape.
+Si vous avez terminé le [Démarrage rapide : envoyer des données de télémétrie à partir d’un appareil à un IoT Hub](quickstart-send-telemetry-java.md) précédent, vous pouvez ignorer cette étape.
 
 Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dans ce démarrage rapide, vous utilisez Azure Cloud Shell pour inscrire un appareil simulé.
 

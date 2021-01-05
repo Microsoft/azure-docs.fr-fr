@@ -4,16 +4,16 @@ description: Déplacez, en toute sécurité, des fichiers vers et depuis une mac
 author: cynthn
 ms.service: virtual-machines-linux
 ms.workload: infrastructure
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/12/2017
 ms.author: cynthn
 ms.subservice: disks
-ms.openlocfilehash: a0837790b70de42073338bf085ee0f3976b866f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f56118750fc980c249c88b796728f4ecb2641a88
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78969606"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86510954"
 ---
 # <a name="move-files-to-and-from-a-linux-vm-using-scp"></a>Déplacer des fichiers vers et depuis une machine virtuelle Linux à l’aide de SCP
 
@@ -69,4 +69,4 @@ L’indicateur `-r` indique à SCP de copier de manière récursive les fichiers
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Gérer les utilisateurs, SSH et vérifier ou réparer les disques de machines virtuelles Azure Linux à l'aide de l’extension VMAccess](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Gérer les utilisateurs, SSH et vérifier ou réparer les disques de machines virtuelles Azure Linux à l'aide de l’extension VMAccess](../extensions/vmaccess.md?toc=/azure/virtual-machines/linux/toc.json)

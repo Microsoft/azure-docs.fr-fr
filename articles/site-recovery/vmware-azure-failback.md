@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.date: 01/15/2019
 ms.topic: conceptual
 ms.author: mayg
-ms.openlocfilehash: cd4cc90fb102d517a47ba458619e22b8921dd498
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aed015b67aa36e7678b31d7f2f047cb1e77c6a3d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75495326"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004192"
 ---
 # <a name="fail-back-vmware-vms-to-on-premises-site"></a>Restaurer automatiquement des machines virtuelles VMware sur un site local
 
@@ -29,7 +29,7 @@ Cet article explique comment restaurer automatiquement des machines virtuelles A
 
 ## <a name="run-a-failover-to-fail-back"></a>Exécuter un basculement pour effectuer une restauration automatique
 
-1. Assurez-vous que les machines virtuelles Azure sont reprotégées et répliquées sur le site local. 
+1. Assurez-vous que les machines virtuelles Azure sont reprotégées et répliquées sur le site local.
     - Une machine virtuelle a besoin d’au moins un point de récupération pour pouvoir être restaurée.
     - Si vous restaurez un plan de récupération, tous les ordinateurs du plan doivent avoir au moins un point de récupération.
 2. Dans le coffre > **Éléments répliqués**, sélectionnez la machine virtuelle. Cliquez avec le bouton droit sur la machine virtuelle > **Basculement non planifié**.

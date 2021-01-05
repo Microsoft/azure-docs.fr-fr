@@ -3,16 +3,16 @@ title: Connexion à distance à votre appareil StorSimple
 description: Explique comment configurer votre appareil pour la gestion à distance et comment se connecter à Windows PowerShell for StorSimple par HTTP ou HTTPS.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/02/2018
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 58d61df932da06e32bb4c8f21a3a296b185f02d9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1da688dfb00b26ca6b561d5aa0fb548c221381c5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80299002"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85514571"
 ---
 # <a name="connect-remotely-to-your-storsimple-8000-series-device"></a>Connexion à distance à votre appareil StorSimple série 8000
 

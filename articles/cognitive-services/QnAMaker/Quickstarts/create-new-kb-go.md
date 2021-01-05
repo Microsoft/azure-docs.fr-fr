@@ -1,26 +1,28 @@
 ---
 title: 'Démarrage rapide : Créer une base de connaissances - REST, Go - QnA Maker'
 description: Ce guide de démarrage rapide basé sur GO REST vous guide dans la création, par programmation, d’un exemple de base de connaissances QnA Maker qui apparaîtra dans le tableau de bord Azure de votre compte d’API Cognitive Services.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.date: 12/16/2019
 ROBOTS: NOINDEX,NOFOLLOW
 ms.custom: RESTCURL2020FEB27
-ms.topic: conceptual
-ms.openlocfilehash: 221220345f4f3b7aff2a32c956d921f677ca0627
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: cff2d141e8108d9a3e2e12764174a0bf4978182f
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78851631"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352318"
 ---
 # <a name="quickstart-create-a-knowledge-base-in-qna-maker-using-go"></a>Démarrage rapide : Créer une base de connaissances dans QnA Maker à l’aide de Go
 
-Ce démarrage rapide vous aide à créer par programmation un exemple de base de connaissances QnA Maker. QnA Maker extrait automatiquement les questions et les réponses à partir du contenu semi-structuré, telles que les FAQ, de [sources de données](../Concepts/knowledge-base.md). Le modèle de la base de connaissances est défini dans le code JSON envoyé dans le corps de la requête d’API.
+Ce démarrage rapide vous aide à créer par programmation un exemple de base de connaissances QnA Maker. QnA Maker extrait automatiquement les questions et les réponses à partir du contenu semi-structuré, telles que les FAQ, de [sources de données](../index.yml). Le modèle de la base de connaissances est défini dans le code JSON envoyé dans le corps de la requête d’API.
 
 Ce démarrage rapide fait appel aux API QnA Maker :
-* [Créer la base de connaissances](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/create)
-* [Obtenir les détails de l’opération](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/operations/getdetails)
+* [Créer la base de connaissances](/rest/api/cognitiveservices/qnamaker/knowledgebase/create)
+* [Obtenir les détails de l’opération](/rest/api/cognitiveservices/qnamaker/operations/getdetails)
 
-[Documentation de référence](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase) | [Exemple GO](https://github.com/Azure-Samples/cognitive-services-qnamaker-go/blob/master/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go)
+[Documentation de référence](/rest/api/cognitiveservices/qnamaker/knowledgebase) | [Exemple GO](https://github.com/Azure-Samples/cognitive-services-qnamaker-go/blob/master/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go)
 
 [!INCLUDE [Custom subdomains notice](../../../../includes/cognitive-services-custom-subdomains-note.md)]
 
@@ -37,44 +39,34 @@ Créez un fichier appelé `create-new-knowledge-base.go`.
 
 En haut de `create-new-knowledge-base.go`, ajoutez les lignes suivantes pour ajouter les dépendances nécessaires au projet :
 
-[!code-go[Add the required dependencies](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=1-11 "Add the required dependencies")]
-
-## <a name="add-the-required-constants"></a>Ajouter les constantes nécessaires
-Après les dépendances nécessaires précédentes, ajoutez les constantes nécessaires pour accéder à QnA Maker.
-
-Définissez les valeurs suivantes :
-
-* `<your-qna-maker-subscription-key>` – La clé (**key**) est une chaîne de 32 caractères qui est disponible sur le portail Azure, dans la ressource QnA Maker, dans la page Démarrage rapide. Il ne s’agit pas de la clé du point de terminaison de prédiction.
-* `{your-resource-name}` – Votre nom de ressource (**resource name**) est utilisé pour construire l’URL du point de terminaison de création au format `https://YOUR-RESOURCE-NAME.cognitiveservices.azure.com`. Il ne s’agit pas de l’URL employée pour interroger le point de terminaison de prédiction.
-
-[!code-go[Add the required constants](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=13-20 "Add the required constants")]
+:::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="dependencies":::
 
 ## <a name="add-the-kb-model-definition"></a>Ajouter la définition du modèle de base de connaissances
 Après les constantes, ajoutez la définition du modèle de base de connaissances suivante. Après la définition, le modèle est converti en une chaîne.
 
-[!code-go[Add the KB model definition](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=22-44 "Add the KB model definition")]
+:::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="model":::
 
 ## <a name="add-supporting-structures-and-functions"></a>Ajouter les fonctions et les structures de prise en charge
 
 Ajoutez ensuite les fonctions de prise en charge suivantes.
 
-1. Ajoutez la structure pour une requête HTTP :
+1. Ajoutez la structure pour une réponse HTTP :
 
-    [!code-go[Add the structure for an HTTP request](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=46-49 "Add the structure for an HTTP request")]
+    :::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="response":::
 
-2. Ajoutez la méthode suivante pour gérer une requête POST dans les API QnA Maker. Pour ce guide de démarrage rapide, la requête POST est utilisée pour envoyer la définition de la base de connaissances dans QnA Maker.
+1. Ajoutez la méthode suivante pour gérer une requête POST dans les API QnA Maker. Pour ce guide de démarrage rapide, la requête POST est utilisée pour envoyer la définition de la base de connaissances dans QnA Maker.
 
-    [!code-go[Add the POST method](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=51-66 "Add the POST method")]
+    :::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="post":::
 
-3. Ajoutez la méthode suivante pour gérer une requête GET dans les API QnA Maker. Pour ce guide de démarrage rapide, la requête GET est utilisée pour vérifier le statut de l’opération de création.
+1. Ajoutez la méthode suivante pour gérer une requête GET dans les API QnA Maker. Pour ce guide de démarrage rapide, la requête GET est utilisée pour vérifier le statut de l’opération de création.
 
-    [!code-go[Add the GET method](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=68-83 "Add the GET method")]
+    :::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="get":::
 
 ## <a name="add-function-to-create-kb"></a>Ajouter une fonction pour créer la base de connaissances
 
-Ajoutez les fonctions suivantes pour exécuter une requête HTTP POST afin de créer la base de connaissances. L’_ID d’opération_ **create** (créer) est retourné dans le champ **Location** (Emplacement) de l’en-tête de réponse POST. Il est ensuite utilisé dans la route de la requête GET. `Ocp-Apim-Subscription-Key` correspond à la clé de service QnA Maker, utilisée pour l’authentification.
+Ajoutez les fonctions suivantes pour exécuter une requête HTTP POST afin de créer la base de connaissances. L’**ID d’opération** _create_ (créer) est retourné dans le champ **Location** (Emplacement) de l’en-tête de réponse POST. Il est ensuite utilisé dans la route de la requête GET. `Ocp-Apim-Subscription-Key` correspond à la clé de service QnA Maker, utilisée pour l’authentification.
 
-[!code-go[Add the create_kb method](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=85-97 "Add the create_kb method")]
+:::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="create_kb":::
 
 Cet appel d’API renvoie une réponse JSON qui inclut l’ID d’opération. Utilisez l’ID d’opération pour déterminer si la base de connaissances a bien été créée.
 
@@ -92,7 +84,7 @@ Cet appel d’API renvoie une réponse JSON qui inclut l’ID d’opération. Ut
 
 Ajoutez la fonction suivante pour exécuter une requête HTTP GET afin de vérifier l’état de l’opération. `Ocp-Apim-Subscription-Key` correspond à la clé de service QnA Maker, utilisée pour l’authentification.
 
-[!code-go[Add the check_status method](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=99-108 "Add the check_status method")]
+:::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="get_status":::
 
 Répétez l’appel jusqu’à ce que l’opération réussisse ou échoue :
 
@@ -110,7 +102,7 @@ Répétez l’appel jusqu’à ce que l’opération réussisse ou échoue :
 
 La fonction suivante est la fonction principale, crée la base de connaissances et répète les vérifications de l’état. Étant donné que la création de la base de connaissances peut prendre un certain temps, vous devez répéter les appels pour vérifier l’état jusqu’à ce que l’état indique une réussite ou un échec.
 
-[!code-go[Add the main method](~/samples-qnamaker-go/documentation-samples/quickstarts/create-knowledge-base/create-new-knowledge-base.go?range=110-140 "Add the main method")]
+:::code language="go" source="~/cognitive-services-quickstart-code/go/QnAMaker/rest/create-kb.go" id="main":::
 
 
 ## <a name="compile-the-program"></a>Compiler le programme
@@ -135,4 +127,4 @@ Une fois votre base de connaissances créée, vous pouvez l’afficher dans votr
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Documentation de référence pour l’API REST QnA Maker (V4)](https://go.microsoft.com/fwlink/?linkid=2092179)
+> [Documentation de référence pour l’API REST QnA Maker (V4)](/rest/api/cognitiveservices/qnamaker4.0/knowledgebase)

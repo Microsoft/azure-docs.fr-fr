@@ -3,19 +3,19 @@ title: Guide pratique pour configurer un conteneur pour l’API Détecteur d’a
 titleSuffix: Azure Cognitive Services
 description: L’environnement d’exécution de conteneur de l’API Détecteur d’anomalies est configuré avec les arguments de la commande `docker run`. Ce conteneur a plusieurs paramètres obligatoires et quelques paramètres facultatifs.
 services: cognitive-services
-author: aahill
+author: mrbullwinkle
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
 ms.topic: conceptual
 ms.date: 05/07/2020
-ms.author: aahi
-ms.openlocfilehash: 29e790959e941abc133f95297dc09c951152a503
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.author: mbullwin
+ms.openlocfilehash: c175a52259e9cfe5b4d03ce0279bbe24d16a48ae
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83593305"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94363712"
 ---
 # <a name="configure-anomaly-detector-containers"></a>Configurer des conteneurs Détecteur d’anomalies
 
@@ -28,7 +28,7 @@ Ce conteneur a les paramètres de configuration suivants :
 |Obligatoire|Paramètre|Objectif|
 |--|--|--|
 |Oui|[ApiKey](#apikey-configuration-setting)|Utilisé pour le suivi des informations de facturation.|
-|Non|[ApplicationInsights](#applicationinsights-setting)|Vous permet d’ajouter la prise en charge de la télémétrie [Azure Application Insights](https://docs.microsoft.com/azure/application-insights) à votre conteneur.|
+|Non|[ApplicationInsights](#applicationinsights-setting)|Vous permet d’ajouter la prise en charge de la télémétrie [Azure Application Insights](/azure/application-insights) à votre conteneur.|
 |Oui|[Billing](#billing-configuration-setting)|Spécifie l’URI de point de terminaison de la ressource de service sur Azure.|
 |Oui|[Eula](#eula-setting)| Indique que vous avez accepté la licence pour le conteneur.|
 |Non|[Fluentd](#fluentd-settings)|Écrire les données des journaux et, éventuellement, des métriques, sur un serveur Fluentd.|
@@ -45,7 +45,7 @@ Le paramètre `ApiKey` spécifie la clé de ressource Azure utilisée pour effec
 
 Vous trouverez ce paramètre à l’emplacement suivant :
 
-* Portail Azure : Gestion des ressources du **Détecteur d’anomalies**, sous **Clés**
+* Portail Azure : Gestion des ressources du **Détecteur d’anomalies** , sous **Clés**
 
 ## <a name="applicationinsights-setting"></a>Paramètre ApplicationInsights
 
@@ -57,7 +57,7 @@ Le paramètre `Billing` permet de spécifier l’URI de point de terminaison de 
 
 Vous trouverez ce paramètre à l’emplacement suivant :
 
-* Portail Azure : Vue d’ensemble du **Détecteur d’anomalies**, avec l’étiquette `Endpoint`
+* Portail Azure : Vue d’ensemble du **Détecteur d’anomalies** , avec l’étiquette `Endpoint`
 
 |Obligatoire| Nom | Type de données | Description |
 |--|------|-----------|-------------|
@@ -97,8 +97,8 @@ La syntaxe exacte de l’emplacement de montage d’hôte varie en fonction du s
 
 Les exemples suivants utilisent les paramètres de configuration pour illustrer comment écrire et utiliser des commandes `docker run`.  Une fois en cours d’exécution, le conteneur continue à s’exécuter jusqu’à ce que vous l’[arrêtiez](anomaly-detector-container-howto.md#stop-the-container).
 
-* **Caractère de continuation de ligne** : Les commandes Docker dans les sections suivantes utilisent la barre oblique inverse, `\`, comme caractère de continuation de ligne pour un interpréteur de commandes bash. Remplacez-la ou supprimez-la en fonction des exigences de votre système d’exploitation hôte. Par exemple, le caractère de continuation de ligne pour les fenêtres est un accent circonflexe, `^`. Remplacez la barre oblique inverse par l’accent circonflexe. 
-* **Ordre des arguments** : Ne changez pas l’ordre des arguments, sauf si vous avez une connaissance approfondie des conteneurs Docker.
+* **Caractère de continuation de ligne**  : Les commandes Docker dans les sections suivantes utilisent la barre oblique inverse, `\`, comme caractère de continuation de ligne pour un interpréteur de commandes bash. Remplacez-la ou supprimez-la en fonction des exigences de votre système d’exploitation hôte. Par exemple, le caractère de continuation de ligne pour les fenêtres est un accent circonflexe, `^`. Remplacez la barre oblique inverse par l’accent circonflexe. 
+* **Ordre des arguments**  : Ne changez pas l’ordre des arguments, sauf si vous avez une connaissance approfondie des conteneurs Docker.
 
 Remplacez la valeur entre accolades, `{}`, par vos propres valeurs :
 
@@ -121,7 +121,7 @@ Les exemples Docker suivants s’appliquent au conteneur Détecteur d’anomalie
 
   ```Docker
   docker run --rm -it -p 5000:5000 --memory 4g --cpus 1 \
-  mcr.microsoft.com/azure-cognitive-services/anomaly-detector \
+  mcr.microsoft.com/azure-cognitive-services/decision/anomaly-detector \
   Eula=accept \
   Billing={ENDPOINT_URI} \
   ApiKey={API_KEY} 
@@ -131,7 +131,7 @@ Les exemples Docker suivants s’appliquent au conteneur Détecteur d’anomalie
 
   ```Docker
   docker run --rm -it -p 5000:5000 --memory 4g --cpus 1 \
-  mcr.microsoft.com/azure-cognitive-services/anomaly-detector \
+  mcr.microsoft.com/azure-cognitive-services/decision/anomaly-detector \
   Eula=accept \
   Billing={ENDPOINT_URI} ApiKey={API_KEY} \
   Logging:Console:LogLevel:Default=Information

@@ -1,8 +1,8 @@
 ---
 title: Utiliser différents mécanismes d’attestation avec le Kit de développement logiciel (SDK) client du service IoT Hub Device Provisioning Azure
 description: 'Guide pratique Azure : Utilisation de différents mécanismes d’attestation avec le Kit de développement logiciel (SDK) client Device Provisioning Service (DPS) dans Azure'
-author: robinsh
-ms.author: robinsh
+author: wesmc7777
+ms.author: wesmc
 ms.date: 03/30/2018
 ms.topic: conceptual
 ms.service: iot-dps
@@ -10,16 +10,16 @@ services: iot-dps
 ms.custom:
 - mvc
 - amqp
-ms.openlocfilehash: c110e90f26f595bcbf181b72e13f12a6de2fa8ce
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 0a32e2f055b2914fa0008e043e80092ac2da0814
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687206"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531506"
 ---
 # <a name="how-to-use-different-attestation-mechanisms-with-device-provisioning-service-client-sdk-for-c"></a>Utiliser différents mécanismes d’attestation avec le Kit de développement logiciel (SDK) Device Provisioning Service Client pour C
 
-Cet article explique comment utiliser différents [mécanismes d’attestation](concepts-security.md#attestation-mechanism) avec le Kit de développement logiciel (SDK) Device Provisioning Service Client pour C. Vous pouvez choisir d’utiliser un appareil physique ou un simulateur. Le service de provisionnement prend en charge l’authentification pour deux types de mécanismes d’attestation : X.509 et Module de plateforme sécurisée (TPM).
+Cet article explique comment utiliser différents [mécanismes d’attestation](concepts-service.md#attestation-mechanism) avec le Kit de développement logiciel (SDK) Device Provisioning Service Client pour C. Vous pouvez choisir d’utiliser un appareil physique ou un simulateur. Le service de provisionnement prend en charge l’authentification pour deux types de mécanismes d’attestation : X.509 et Module de plateforme sécurisée (TPM).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -31,9 +31,9 @@ En tant que fabricant d’appareils, vous devez d’abord choisir un mécanisme 
 
 - [Module de plateforme sécurisée (TPM)](https://en.wikipedia.org/wiki/Trusted_Platform_Module) : Le module TPM est une norme établie pour la plupart des plateformes d’appareils Windows, ainsi que pour quelques appareils Linux/Ubuntu. En tant que fabricant d’appareils, vous pouvez choisir ce mécanisme d’attestation si l’un de ces systèmes d’exploitation s’exécute sur vos appareils et si vous recherchez une norme établie. Avec les processeurs TPM, vous pouvez uniquement inscrire chaque appareil individuellement auprès du service Device Provisioning. À des fins de développement, vous pouvez utiliser le simulateur TPM sur votre machine de développement Windows ou Linux.
 
-- [X.509](https://cryptography.io/en/latest/x509/) : Les certificats X.509 peuvent être stockés dans des processeurs relativement plus récents appelés [Modules de sécurité matériels (HSM)](concepts-security.md#hardware-security-module). Microsoft continue de travailler sur des processeurs RIoT ou DICE, qui implémentent les certificats X.509. Avec les processeurs X.509, vous pouvez effectuer une inscription d’appareils en bloc dans le portail. En outre, certains systèmes non-Windows, comme embedOS, sont pris en charge. À des fins de développement, le SDK client du service Device Provisioning prend en charge un simulateur d’appareil X.509. 
+- [X.509](https://cryptography.io/en/latest/x509/) : Les certificats X.509 peuvent être stockés dans des processeurs relativement plus récents appelés [Modules de sécurité matériels (HSM)](concepts-service.md#hardware-security-module). Microsoft continue de travailler sur des processeurs RIoT ou DICE, qui implémentent les certificats X.509. Avec les processeurs X.509, vous pouvez effectuer une inscription d’appareils en bloc dans le portail. En outre, certains systèmes non-Windows, comme embedOS, sont pris en charge. À des fins de développement, le SDK client du service Device Provisioning prend en charge un simulateur d’appareil X.509. 
 
-Pour plus d’informations, consultez les [concepts de sécurité](concepts-security.md) et les [concepts d’approvisionnement automatique](/azure/iot-dps/concepts-auto-provisioning) du service IoT Hub Device Provisioning.
+Pour plus d’informations, consultez les [mécanismes d’attestation](concepts-service.md#attestation-mechanism) du Service IoT Hub Device Provisioning.
 
 ## <a name="enable-authentication-for-supported-attestation-mechanisms"></a>Activer l’authentification pour les mécanismes d’attestation pris en charge
 

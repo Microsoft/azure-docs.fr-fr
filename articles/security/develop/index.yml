@@ -12,23 +12,13 @@ metadata:
   ms.author: terrylan
   manager: rkarlin
   ms.date: 10/24/2019
-  ms.openlocfilehash: 6ca73686874b1a90d5374d7d6326c4f121d928f9
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 7018e9607065fcea90b70d41d917b70d7d645088
+  ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78970013"
+  ms.lasthandoff: 11/11/2020
+  ms.locfileid: "94517918"
 landingContent:
-- title: Développer des exemples d’applications sécurisées
-  linkLists:
-  - linkListType: tutorial
-    links:
-    - text: Application web dans un conteneur Linux
-      url: secure-web-app.md
-    - text: Application web avec Azure Active Directory
-      url: secure-aad-app.md
-    - text: Payment card industry
-      url: secure-pci-web-app.md
 - title: Bien démarrer
   linkLists:
   - linkListType: concept
@@ -54,6 +44,6 @@ landingContent:
   - linkListType: learn
     links:
     - text: Top 5 des éléments de sécurité
-      url: https://docs.microsoft.com/learn/modules/top-5-security-items-to-consider
+      url: /learn/modules/top-5-security-items-to-consider
     - text: Sécuriser vos applications cloud dans Azure
-      url: https://docs.microsoft.com/learn/paths/secure-your-cloud-apps
+      url: /learn/paths/secure-your-cloud-apps

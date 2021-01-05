@@ -1,22 +1,17 @@
 ---
 title: 'Démarrage rapide : Diffusion de données en continu avec Azure Event Hubs en utilisant le protocole Kafka'
 description: 'Démarrage rapide : Cet article fournit des informations sur la façon d’effectuer une diffusion en continu dans Azure Event Hubs à l’aide du protocole Kafka et d’API.'
-services: event-hubs
-author: ShubhaVijayasarathy
-ms.author: shvija
-ms.service: event-hubs
 ms.topic: quickstart
-ms.custom: seodec18
-ms.date: 02/12/2020
-ms.openlocfilehash: 67ee882acab22d977f08124591289e9cfc7cded1
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.date: 06/23/2020
+ms.openlocfilehash: 2020534a3984453bcd6eff7ad0f5c02d9e7a29ff
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261820"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368347"
 ---
 # <a name="quickstart-data-streaming-with-event-hubs-using-the-kafka-protocol"></a>Démarrage rapide : Streaming de données avec Event Hubs en utilisant le protocole Kafka
-Ce guide de démarrage rapide montre comment diffuser en streaming des données dans Event Hubs, sans changer vos protocoles clients ni exécuter vos propres clusters. Vous allez voir comment utiliser vos producteurs et vos consommateurs pour communiquer avec Event Hubs, avec seulement un changement de configuration dans vos applications. Azure Event Hubs prend en charge [Apache Kafka version 1.0.](https://kafka.apache.org/10/documentation.html)
+Ce guide de démarrage rapide montre comment diffuser en streaming des données dans Event Hubs, sans changer vos protocoles clients ni exécuter vos propres clusters. Vous allez voir comment utiliser vos producteurs et vos consommateurs pour communiquer avec Event Hubs, avec seulement un changement de configuration dans vos applications. 
 
 > [!NOTE]
 > Cet exemple est disponible sur [GitHub](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/java).
@@ -27,13 +22,13 @@ Pour suivre ce démarrage rapide, vérifiez que vous avez :
 
 * Lisez l’article [Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md).
 * Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
-* [Java Development Kit (JDK) 1.7+](https://aka.ms/azure-jdks).
+* [Java Development Kit (JDK) 1.7+](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 * [Téléchargez](https://maven.apache.org/download.cgi) et [installez](https://maven.apache.org/install.html) une archive binaire Maven.
 * [Git](https://www.git-scm.com/)
 
 
 ## <a name="create-an-event-hubs-namespace"></a>Créer un espace de noms Event Hubs
-Quand vous créez un espace de noms Event Hubs de niveau **Standard**, le point de terminaison Kafka pour l’espace de noms est automatiquement activé. Vous pouvez alors transmettre les événements de vos applications qui utilisent le protocole Kafka vers l’espace de noms Event Hubs de niveau Standard. Suivez les instructions pas à pas de l’article [Créer un hub d’événements avec le portail Azure](event-hubs-create.md) pour créer un espace de noms Event Hubs de niveau **Standard**. 
+Quand vous créez un espace de noms Event Hubs de niveau **Standard** , le point de terminaison Kafka pour l’espace de noms est automatiquement activé. Vous pouvez alors transmettre les événements de vos applications qui utilisent le protocole Kafka vers l’espace de noms Event Hubs de niveau Standard. Suivez les instructions pas à pas de l’article [Créer un hub d’événements avec le portail Azure](event-hubs-create.md) pour créer un espace de noms Event Hubs de niveau **Standard**. 
 
 > [!NOTE]
 > Event Hubs pour Kafka est disponible uniquement avec le niveau **Standard** et les niveaux **dédiés**. Le niveau **De base** ne prend pas en charge Kafka sur Event Hubs.
@@ -54,7 +49,11 @@ Quand vous créez un espace de noms Event Hubs de niveau **Standard**, le point 
     sasl.mechanism=PLAIN
     sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
     ```
-    **OAuth** :
+    
+    > [!IMPORTANT]
+    > Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`.
+
+    **OAuth**  :
 
     ```xml
     bootstrap.servers=NAMESPACENAME.servicebus.windows.net:9093
@@ -85,7 +84,10 @@ Quand vous créez un espace de noms Event Hubs de niveau **Standard**, le point 
     sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
     ```
 
-    **OAuth** :
+    > [!IMPORTANT]
+    > Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`.
+
+    **OAuth**  :
 
     ```xml
     bootstrap.servers=NAMESPACENAME.servicebus.windows.net:9093
@@ -108,4 +110,4 @@ Quand vous créez un espace de noms Event Hubs de niveau **Standard**, le point 
 Si votre cluster Kafka Event Hubs a des événements, vous devez maintenant commencer à les recevoir du consommateur.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans cet article, vous avez appris à diffuser en streaming dans Event Hubs sans changer vos clients de protocole ni exécuter vos propres clusters. Pour en savoir plus, consultez [Guide du développeur Apache Kafka pour Azure Event Hubs](apache-kafka-developer-guide.md). 
+Dans cet article, vous avez appris à diffuser en streaming dans Event Hubs sans changer vos clients de protocole ni exécuter vos propres clusters. Pour en savoir plus, consultez [Guide du développeur Apache Kafka pour Azure Event Hubs](apache-kafka-developer-guide.md).

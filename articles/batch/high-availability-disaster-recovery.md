@@ -3,12 +3,12 @@ title: Haute disponibilité et récupération d’urgence
 description: Apprenez à concevoir votre application Azure Batch afin de faire face à une panne régionale.
 ms.topic: how-to
 ms.date: 01/29/2019
-ms.openlocfilehash: 1e22cb19aba1dcedc4ece7ddc2d1de0ab3233238
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: c77e6fa672d26545af47b262a982a7d0d7303eec
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83725735"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92058010"
 ---
 # <a name="design-your-application-for-high-availability"></a>Concevoir votre application à des fins de haute disponibilité
 
@@ -39,5 +39,5 @@ Lors de la conception d'une solution capable de basculer, tenez compte des point
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez-en plus sur la création de comptes Batch avec le [portail Azure](batch-account-create-portal.md), l’interface [Azure CLI](cli-samples.md), [PowerShell](batch-powershell-cmdlets-get-started.md) ou l’[API Gestion du service Batch](batch-management-dotnet.md).
+- Découvrez-en plus sur la création de comptes Batch avec le [portail Azure](batch-account-create-portal.md), l’interface [Azure CLI](./scripts/batch-cli-sample-create-account.md), [PowerShell](batch-powershell-cmdlets-get-started.md) ou l’[API Gestion du service Batch](batch-management-dotnet.md).
 - Des quotas par défaut sont associés à un compte Batch ; [cet article](batch-quota-limit.md) détaille les valeurs des quotas par défaut et explique comment augmenter les quotas.

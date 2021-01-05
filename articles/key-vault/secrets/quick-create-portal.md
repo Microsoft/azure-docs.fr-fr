@@ -11,59 +11,47 @@ ms.topic: quickstart
 ms.custom: mvc
 ms.date: 09/03/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 33842707f04e55b311aeeabe2f1bbc83204ec0c9
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 3d7e6357fd8f1091509cbf27875c028d3af310cb
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83652278"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96445915"
 ---
 # <a name="quickstart-set-and-retrieve-a-secret-from-azure-key-vault-using-the-azure-portal"></a>Démarrage rapide : Définir et récupérer un secret depuis Azure Key Vault à l’aide du portail Azure
 
-Azure Key Vault est un service cloud qui fonctionne comme un magasin sécurisé contenant des secrets. Vous pouvez stocker des clés, des mots de passe, des certificats et d’autres secrets en toute sécurité. Vous pouvez créer et gérer des coffres de clés Azure grâce au portail Azure. Dans ce démarrage rapide, vous créez un coffre de clés, puis l’utilisez pour stocker un secret. Pour plus d’informations sur Key Vault, consultez la [présentation](../general/overview.md).
+Azure Key Vault est un service cloud qui fonctionne comme un magasin sécurisé contenant des secrets. Vous pouvez stocker des clés, des mots de passe, des certificats et d’autres secrets en toute sécurité. Vous pouvez créer et gérer des coffres de clés Azure grâce au portail Azure. Dans ce démarrage rapide, vous créez un coffre de clés, puis l’utilisez pour stocker un secret. 
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Pour plus d’informations, consultez 
+- [Vue d’ensemble du coffre de clés](../general/overview.md)
+- [Vue d’ensemble des secrets](about-secrets.md).
+
+## <a name="prerequisites"></a>Prérequis
+
+Pour accéder à Azure Key Vault, vous avez besoin d’un abonnement Azure. Si vous n’avez pas d’abonnement, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+
+Tout accès aux secrets s’effectue par le biais d’Azure Key Vault. Pour ce guide de démarrage rapide, créez un coffre de clés à l’aide du [portail Azure](../general/quick-create-portal.md), de l’interface [Azure CLI](../general/quick-create-cli.md) ou d’[Azure PowerShell](../general/quick-create-powershell.md).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
 Connectez-vous au portail Azure sur https://portal.azure.com.
 
-## <a name="create-a-vault"></a>Création d'un coffre
-
-1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
-2. Dans la zone de recherche, entrez **Key Vault**.
-3. Dans la liste des résultats, choisissez **Key Vault**.
-4. Dans la section Key Vault, choisissez **Créer**.
-5. Dans la section **Créer un coffre de clés**, renseignez les informations suivantes :
-    - **Name** : un nom unique est obligatoire. Pour ce démarrage rapide, nous utilisons **Contoso-vault2**. 
-    - **Abonnement**: Choisissez un abonnement.
-    - Sous **Groupe de ressources**, choisissez **Créer** et entrez le nom du groupe de ressources.
-    - Dans le menu déroulant **Emplacement**, choisissez un emplacement.
-    - Conservez les valeurs par défaut des autres options.
-6. Après avoir renseigné les informations ci-dessus, sélectionnez **Créer**.
-
-Notez les deux propriétés ci-dessous :
-
-* **Nom du coffre** : dans l’exemple, il s’agit de **Contoso-Vault2**. Vous allez utiliser ce nom pour les autres étapes.
-* **URI du coffre** : dans l’exemple, il s’agit de https://contoso-vault2.vault.azure.net/. Les applications qui utilisent votre coffre via son API REST doivent utiliser cet URI.
-
-À ce stade, votre compte Azure est le seul autorisé à effectuer des opérations sur ce nouveau coffre.
-
-![Sortie après la création du coffre de clés](../media/quick-create-portal/vault-properties.png)
-
 ## <a name="add-a-secret-to-key-vault"></a>Ajouter un secret au coffre de clés
 
-Pour ajouter un secret au coffre, vous devez effectuer deux autres opérations. Dans ce cas, nous ajoutons un mot de passe qu’une application est susceptible d’utiliser. Le mot de passe est appelé **ExamplePassword** et nous y stockons la valeur **hVFkk965BuUv**.
+Pour ajouter un secret au coffre, procédez comme suit :
 
-1. Dans les pages des propriétés Key Vault, sélectionnez **Secrets**.
-2. Cliquez sur **Generate/Import (Générer/Importer)** .
-3. Dans l’écran **Create a secret (Créer un secret)** , choisissez les valeurs suivantes :
+1. Accédez à votre nouveau coffre de clés dans le portail Azure.
+1. Dans les pages des paramètres de coffre de clés, sélectionnez **Secrets**.
+1. Cliquez sur **Generate/Import (Générer/Importer)** .
+1. Dans l’écran **Create a secret (Créer un secret)** , choisissez les valeurs suivantes :
     - **Options de chargement** : Manuel.
-    - **Name** : ExamplePassword.
-    - **Valeur** : hVFkk965BuUv
+    - **Nom** : Entrez un nom pour le secret. Le nom du secret doit être unique dans le coffre de clés. Le nom doit être une chaîne comprise entre 1 et 127 caractères, commençant par une lettre et qui doit contenir uniquement des chiffres, des lettres et des tirets (0-9, a-z, A-Z et -). Pour plus d’informations sur le nommage, consultez [Objets, identificateurs et gestion de versions Key Vault](../general/about-keys-secrets-certificates.md#objects-identifiers-and-versioning).
+    - **Valeur** : Entrez une valeur pour le secret. Les API Key Vault acceptent et retournent des valeurs de secret sous forme de chaînes. 
     - Conservez les valeurs par défaut des autres options. Cliquez sur **Créer**.
 
 Lorsque vous recevez le message confirmant la création du secret, cliquez dessus dans la liste. 
+
+Pour plus d’informations sur les attributs des secrets, consultez [À propos des secrets Azure Key Vault](./about-secrets.md).
 
 ## <a name="retrieve-a-secret-from-key-vault"></a>Récupérer un secret à partir de Key Vault
 
@@ -75,6 +63,8 @@ Vous pouvez afficher la valeur masquée en cliquant sur le bouton « Afficher l
 
 ![Valeur secrète affichée](../media/quick-create-portal/current-version-shown.png)
 
+Vous pouvez également utiliser l’interface [Azure CLI]() ou [Azure PowerShell]() pour récupérer le secret créé précédemment.
+
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 D’autres démarrages rapides et didacticiels sur les coffres de clés reposent sur ce démarrage rapide. Si vous prévoyez d’utiliser d’autres démarrages rapides et didacticiels, il peut être utile de conserver ces ressources.
@@ -84,11 +74,16 @@ Si vous n’en avez plus besoin, supprimez le groupe de ressources. Ce faisant, 
 2. Sélectionnez **Supprimer le groupe de ressources**.
 3. Dans le champ **TYPE THE RESOURCE GROUP NAME: (TAPER LE NOM DU GROUPE DE RESSOURCES :)** , tapez le nom du groupe de ressources et sélectionnez **Supprimer**.
 
+> [!NOTE]
+> Il est important de noter qu’après la suppression d’un secret, d’une clé, d’un certificat ou d’un coffre de clés, ces derniers restent récupérables pendant une période configurable de 7 à 90 jours civils. Si aucune configuration n’est spécifiée, la période de récupération par défaut est définie sur 90 jours. Les utilisateurs disposent ainsi de suffisamment de temps pour remarquer la suppression accidentelle d’un secret et y remédier. Pour plus d’informations sur la suppression et la récupération des coffres de clés et des objets de coffre de clés, consultez [Vue d’ensemble de la suppression réversible d’Azure Key Vault](../general/soft-delete-overview.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans ce guide de démarrage rapide, vous avez créé un coffre de clés et vous y avez stocké un secret. Pour en savoir plus sur Key Vault et sur la manière de l’intégrer à vos applications, consultez les articles ci-dessous.
 
 - Lire la [vue d’ensemble Azure Key Vault](../general/overview.md)
+- Lire [Sécuriser l’accès à un coffre de clés](../general/secure-your-key-vault.md)
+- Consulter [Utiliser Key Vault avec une application web App Service](../general/tutorial-net-create-vault-azure-web-app.md)
+- Consulter [Utiliser Key Vault avec une application déployée sur une machine virtuelle](../general/tutorial-net-virtual-machine.md)
 - Consulter le [Guide du développeur Azure Key Vault](../general/developers-guide.md)
 - Passer en revue les [bonnes pratiques relatives à Azure Key Vault](../general/best-practices.md)

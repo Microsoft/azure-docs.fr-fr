@@ -1,25 +1,19 @@
 ---
 title: Concevoir et implémenter une base de données Oracle sur Azure | Microsoft Docs
 description: Concevez et implémentez une base de données Oracle dans votre environnement Azure.
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: ad446180b3bd864c5b6df808e6e4efac7d6c1c65
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: 5e9ddecd694a9051e746d07cbc1bee4d98bf5829
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81687541"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96484428"
 ---
 # <a name="design-and-implement-an-oracle-database-in-azure"></a>Concevoir et implémenter une base de données Oracle dans Azure
 
@@ -43,17 +37,17 @@ L’une des principales différences est que, dans une implémentation Azure, le
 
 Le tableau suivant liste certaines des différences qui existent entre une implémentation locale et une implémentation Azure d’une base de données Oracle.
 
-> 
-> |  | **Implémentation locale** | **Implémentation Azure** |
-> | --- | --- | --- |
-> | **Mise en réseau** |LAN/WAN  |SDN (Software-Defined Networking)|
-> | **Groupe de sécurité** |Outils de restriction d’adresse IP/de port |[Groupe de sécurité réseau](https://azure.microsoft.com/blog/network-security-groups) |
-> | **Résilience** |MTBF (temps moyen entre les défaillances) |MTTR (temps moyen de récupération)|
-> | **Maintenance planifiée** |Correctifs/mises à niveau|[Groupes à haute disponibilité](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-availability-sets-guidelines) (correctifs/mises à niveau gérés par Azure) |
-> | **Ressource** |Dédié  |Partagée avec d’autres clients|
-> | **Régions** |Centres de données |[Paires de régions](https://docs.microsoft.com/azure/virtual-machines/windows/regions#region-pairs)|
-> | **Stockage** |SAN/disques physiques |[Stockage géré par Azure](https://azure.microsoft.com/pricing/details/managed-disks/?v=17.23h)|
-> | **Mettre à l'échelle** |Mise à l’échelle verticale |Mise à l’échelle horizontale|
+
+|  | Implémentation locale | Implémentation d’Azure |
+| --- | --- | --- |
+| **Mise en réseau** |LAN/WAN  |SDN (Software-Defined Networking)|
+| **Groupe de sécurité** |Outils de restriction d’adresse IP/de port |[Groupe de sécurité réseau](https://azure.microsoft.com/blog/network-security-groups) |
+| **Résilience** |MTBF (temps moyen entre les défaillances) |MTTR (temps moyen de récupération)|
+| **Maintenance planifiée** |Correctifs/mises à niveau|[Groupes à haute disponibilité](/previous-versions/azure/virtual-machines/windows/infrastructure-example) (correctifs/mises à niveau gérés par Azure) |
+| **Ressource** |Dédié  |Partagée avec d’autres clients|
+| **Régions** |Centres de données |[Paires de régions](../../regions.md#region-pairs)|
+| **Stockage** |SAN/disques physiques |[Stockage géré par Azure](https://azure.microsoft.com/pricing/details/managed-disks/?v=17.23h)|
+| **Mettre à l'échelle** |Mise à l’échelle verticale |Mise à l’échelle horizontale|
 
 
 ### <a name="requirements"></a>Spécifications
@@ -108,19 +102,19 @@ Vous pouvez examiner les cinq principaux événements de premier plan expirés, 
 
 Par exemple, dans le diagramme suivant, la synchronisation des fichiers journaux se trouve en haut. Cela indique le nombre d’attentes nécessaires pour que le LGWR écrive le tampon journal dans le fichier journal Redo. Ces résultats indiquent qu’un stockage ou des disques plus performants sont nécessaires. Le diagramme montre aussi le nombre de processeurs (cœurs) et la quantité de mémoire.
 
-![Capture d’écran de la page Rapport AWR](./media/oracle-design/cpu_memory_info.png)
+![Capture d’écran montrant la synchronisation des fichiers journaux en haut du tableau.](./media/oracle-design/cpu_memory_info.png)
 
 Le diagramme suivant montre le nombre total d’E/S de lecture et d’écriture. 59 Go ont été lus et 247,3 Go ont été écrits au moment de la création du rapport.
 
-![Capture d’écran de la page Rapport AWR](./media/oracle-design/io_info.png)
+![Capture d’écran montrant le nombre total d’E/S de lecture et d’écriture.](./media/oracle-design/io_info.png)
 
 #### <a name="2-choose-a-vm"></a>2. Choisir une machine virtuelle
 
-À partir des informations collectées dans le rapport AWR, l’étape suivante consiste à choisir une machine virtuelle de taille similaire qui répond à vos besoins. Vous trouverez la liste des machines virtuelles disponibles dans l’article [Mémoire optimisée](../../linux/sizes-memory.md).
+À partir des informations collectées dans le rapport AWR, l’étape suivante consiste à choisir une machine virtuelle de taille similaire qui répond à vos besoins. Vous trouverez la liste des machines virtuelles disponibles dans l’article [Mémoire optimisée](../../sizes-memory.md).
 
 #### <a name="3-fine-tune-the-vm-sizing-with-a-similar-vm-series-based-on-the-acu"></a>3. Ajuster la taille de la machine virtuelle aux séries de machines virtuelles similaires en fonction de l’ACU
 
-Une fois que vous avez choisi la machine virtuelle, faites attention à sa valeur ACU. Vous choisirez peut-être une autre machine virtuelle en fonction de la valeur ACU, qui répondra mieux à vos besoins. Pour plus d’informations, consultez [Unité de calcul Azure (ACU)](https://docs.microsoft.com/azure/virtual-machines/windows/acu).
+Une fois que vous avez choisi la machine virtuelle, faites attention à sa valeur ACU. Vous choisirez peut-être une autre machine virtuelle en fonction de la valeur ACU, qui répondra mieux à vos besoins. Pour plus d’informations, consultez [Unité de calcul Azure (ACU)](../../acu.md).
 
 ![Capture d’écran de la page Unités ACU](./media/oracle-design/acu_units.png)
 
@@ -143,8 +137,8 @@ Selon vos besoins en bande passante réseau, vous pouvez choisir différents typ
 
 - La latence réseau est supérieure par rapport à un déploiement local. La diminution des allers-retours réseau peut considérablement améliorer les performances.
 - Pour réduire le nombre d’allers-retours, regroupez les applications avec un nombre élevé de transactions et les applications « bavardes » sur une même machine virtuelle.
-- Utilisez des machines virtuelles avec la [mise en réseau accélérée](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli) pour améliorer les performances réseau.
-- Pour certaines distributions de Linux, pensez à activer la [prise en charge de TRIM/UNMAP](https://docs.microsoft.com/azure/virtual-machines/linux/configure-lvm#trimunmap-support).
+- Utilisez des machines virtuelles avec la [mise en réseau accélérée](../../../virtual-network/create-vm-accelerated-networking-cli.md) pour améliorer les performances réseau.
+- Pour certaines distributions Linux, pensez à activer la [prise en charge de TRIM/UNMAP](/previous-versions/azure/virtual-machines/linux/configure-lvm#trimunmap-support).
 - Installez [Oracle Enterprise Manager](https://www.oracle.com/technetwork/oem/enterprise-manager/overview/index.html) sur une machine virtuelle distincte.
 - Les Huge Pages ne sont pas activées par défaut sur Linux. Envisagez d’activer les Huge Pages et définissez `use_large_pages = ONLY` sur Oracle DB. Cela peut aider à améliorer les performances. Des informations supplémentaires sont disponibles [ici](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/USE_LARGE_PAGES.html#GUID-1B0F4D27-8222-439E-A01D-E50758C88390).
 
@@ -187,7 +181,7 @@ Une fois que vous avez une vision claire de vos besoins en E/S, vous pouvez choi
 - Utilisez la compression de données pour réduire les E/S (données et index).
 - Placez les flux de transport Redo, System, Temp et Undo sur des disques de données distincts.
 - Ne placez pas de fichiers d’application sur les disques du système d’exploitation par défaut (/dev/sda). Ces disques sont optimisés pour les démarrages rapides de machine virtuelle et risquent de ne pas fournir de performances optimales pour votre application.
-- Lorsque vous utilisez des machines virtuelles de série M sur le stockage Premium, activez [l’Accélérateur d'écriture](https://docs.microsoft.com/azure/virtual-machines/linux/how-to-enable-write-accelerator) sur le disque des journaux d’activité de rétablissement.
+- Lorsque vous utilisez des machines virtuelles de série M sur le stockage Premium, activez [l’Accélérateur d'écriture](../../how-to-enable-write-accelerator.md) sur le disque des journaux d’activité de rétablissement.
 
 ### <a name="disk-cache-settings"></a>Paramètres de cache des disques
 
@@ -203,7 +197,7 @@ Il existe trois solutions pour la mise en cache de l’hôte :
 
 Pour optimiser le débit, il est recommandé de commencer par **Aucun** pour la mise en cache de l’hôte. Pour le stockage Premium, vous devez désactiver les barrières lorsque vous montez le système de fichiers conformément aux options **Lecture seule** ou **Aucun**. Mettez à jour le fichier/etc/fstab avec l’UUID sur les disques.
 
-![Capture d’écran de la page de disque managé](./media/oracle-design/premium_disk02.png)
+![Capture d’écran de la page disque managé qui affiche les options ReadOnly et None.](./media/oracle-design/premium_disk02.png)
 
 - Pour les disques du système d’exploitation, utilisez la mise en cache par défaut **Lecture/Écriture**.
 - Pour SYSTEM, TEMP et UNDO, utilisez **Aucun** pour la mise en cache.
@@ -230,7 +224,7 @@ Une fois votre environnement Azure configuré, l’étape suivante consiste à s
 - [Configurer Oracle ASM](configure-oracle-asm.md)
 - [Implémenter Oracle Data Guard sur une machine virtuelle Linux Azure](configure-oracle-dataguard.md)
 - [Implémenter Oracle Golden Gate sur une machine virtuelle Linux Azure](configure-oracle-golden-gate.md)
-- [Sauvegarde et récupération Oracle](oracle-backup-recovery.md)
+- [Sauvegarde et récupération Oracle](./oracle-overview.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -3,14 +3,15 @@ title: Liaisons d’entrée SignalR Service Azure Functions
 description: Découvrez comment retourner une URL de point de terminaison SignalR Service et un jeton d’accès dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 02/20/2020
 ms.author: cshoe
-ms.openlocfilehash: 53d336aff3177a76c5e02266ffb8484bd9945119
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 326115a2a6cf29fcf211cdbd918edd0994fe45ed
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77530194"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88212120"
 ---
 # <a name="signalr-service-input-binding-for-azure-functions"></a>Liaisons d’entrée SignalR Service pour Azure Functions
 

@@ -5,12 +5,12 @@ author: sunasing
 ms.topic: article
 ms.date: 03/11/2020
 ms.author: sunasing
-ms.openlocfilehash: f717903b3f953e04c793092c86802f2006de7e82
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: b9067e2f78c8098d4a21263ac89caf03da631274
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80349801"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92677481"
 ---
 # <a name="query-ingested-telemetry-data"></a>Interroger les données de télémétrie ingérées
 
@@ -40,7 +40,7 @@ Suivez les étapes pour interroger les données de télémétrie de capteur ing�
 1. Identifiez le capteur qui vous intéresse. Pour ce faire, vous pouvez exécuter une requête d’extraction sur l’API /Sensor.
 
 > [!NOTE]
-> Notez l’**id** et le **sensorModelId** de l’objet capteur qui vous intéresse.
+> Notez l’ **id** et le **sensorModelId** de l’objet capteur qui vous intéresse.
 
 2. Exécutez une opération GET/{id} sur l’API /SensorModel pour le **sensorModelId** comme indiqué à l’étape 1. Le modèle de capteur contient toutes les métadonnées et les détails relatifs à la télémétrie ingérée du capteur. Par exemple, la **Mesure de capteur** dans l’objet **Modèle de capteur** contient des détails sur les mesures envoyées par le capteur et sur les types et les unités. Par exemple,
 
@@ -111,12 +111,12 @@ Dans l’exemple de réponse ci-dessus, la télémétrie de capteur interrogée 
 
 FarmBeats s’appuie sur [Azure Time Series Insights (TSI)](https://azure.microsoft.com/services/time-series-insights/) pour ingérer, stocker, interroger et visualiser les données à l’échelle IoT, données qui sont hautement contextuelles et optimisées pour les séries chronologiques.
 
-Les données de télémétrie sont reçues sur un EventHub, puis traitées et transmises à un environnement TSI au sein du groupe de ressources FarmBeats. Les données peuvent ensuite être interrogées directement à partir de STI. Pour plus d’informations, consultez la [documentation sur TSI](https://docs.microsoft.com/azure/time-series-insights/time-series-insights-explorer).
+Les données de télémétrie sont reçues sur un EventHub, puis traitées et transmises à un environnement TSI au sein du groupe de ressources FarmBeats. Les données peuvent ensuite être interrogées directement à partir de STI. Pour plus d’informations, consultez la [documentation sur TSI](../../time-series-insights/time-series-insights-explorer.md).
 
 Procédez comme suit pour visualiser les données sur TSI :
 
-1. Accédez au **Portail Azure** > **Groupe de ressources FarmBeats Datahub** > sélectionnez l’environnement **Time Series Insights** (tsi-xxxx) > **Stratégies d’accès aux données**. Ajoutez un utilisateur avec un accès Lecteur ou Contributeur.
-2. Accédez à la page **Présentation** de l’environnement **Time Series Insights** (tsi-xxxx) et sélectionnez l’**URL de l’Explorateur Time Series Insights**. Vous pouvez maintenant visualiser la télémétrie ingérée.
+1. Accédez au **Portail Azure** > **Groupe de ressources FarmBeats Datahub**  > sélectionnez l’environnement **Time Series Insights** (tsi-xxxx) > **Stratégies d’accès aux données** . Ajoutez un utilisateur avec un accès Lecteur ou Contributeur.
+2. Accédez à la page **Présentation** de l’environnement **Time Series Insights** (tsi-xxxx) et sélectionnez l’ **URL de l’Explorateur Time Series Insights** . Vous pouvez maintenant visualiser la télémétrie ingérée.
 
 Outre le stockage, l’interrogation et la visualisation des données de télémétrie, TSI autorise également l’intégration à un tableau de bord Power BI. Vous trouverez plus d’informations [ici]( https://docs.microsoft.com/azure/time-series-insights/how-to-connect-power-bi).
 

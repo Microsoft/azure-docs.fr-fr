@@ -1,20 +1,15 @@
 ---
 title: Authentification d’une identité managée avec Azure Active Directory
 description: Cet article fournit des informations sur l’authentification d’une identité managée avec Azure Active Directory pour accéder aux ressources Azure Event Hubs.
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
-manager: ''
 ms.topic: conceptual
-ms.date: 02/12/2020
-ms.author: spelluru
-ms.openlocfilehash: dfc60fbc03021e72dccc0f60a7ac34d204ef6df9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: c6b43cc48663be28d12fa788d92286be6f47ef08
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82025184"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993531"
 ---
 # <a name="authenticate-a-managed-identity-with-azure-active-directory-to-access-event-hubs-resources"></a>Authentifier une identité managée avec Azure Active Directory pour accéder aux ressources Event Hubs
 Azure Event Hubs prend en charge l’authentification Azure Active Directory (Azure AD) avec des [identités managées pour ressources Azure](../active-directory/managed-identities-azure-resources/overview.md). Les identités managées pour ressources Azure peuvent autoriser l’accès à des ressources Event Hubs en utilisant les informations d’identification Azure AD d’applications s’exécutant dans des machines virtuelles Azure, des applications de fonction, le service Virtual Machine Scale Sets et d’autres services. En utilisant des identités managées pour ressources Azure et Azure AD Authentication, vous pouvez éviter de stocker des informations d’identification avec les applications qui s’exécutent dans le cloud.
@@ -24,21 +19,21 @@ Cet article montre comment autoriser l’accès à un hub d’événements en ut
 ## <a name="enable-managed-identities-on-a-vm"></a>Activer les identités managées sur une machine virtuelle
 Avant de pouvoir utiliser les identités managées pour ressources Azure en vue d’autoriser l’accès aux ressources Event Hubs à partir de votre machine virtuelle, vous devez les activer sur la machine virtuelle. Pour savoir comment activer des identités managées pour ressources Azure, consultez un de ces articles :
 
-- [Azure portal](../active-directory/managed-service-identity/qs-configure-portal-windows-vm.md)
+- [Azure portal](../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md)
 - [Azure PowerShell](../active-directory/managed-identities-azure-resources/qs-configure-powershell-windows-vm.md)
 - [Azure CLI](../active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm.md)
 - [Modèle Azure Resource Manager](../active-directory/managed-identities-azure-resources/qs-configure-template-windows-vm.md)
 - [Bibliothèques clientes Azure Resource Manager](../active-directory/managed-identities-azure-resources/qs-configure-sdk-windows-vm.md)
 
 ## <a name="grant-permissions-to-a-managed-identity-in-azure-ad"></a>Octroyer des autorisations à une identité managée dans Azure AD
-Pour autoriser une requête auprès du service Event Hubs à partir d’une identité managée dans votre application, commencez par configurer les paramètres du contrôle d’accès en fonction du rôle (RBAC) pour cette identité managée. Azure Event Hubs définit les rôles RBAC qui englobent les autorisations d’envoi et de lecture à partir d’Event Hubs. Quand le rôle RBAC est attribué à une identité managée, celle-ci est autorisée à accéder aux données Event Hubs selon l’étendue appropriée.
+Pour autoriser une requête auprès du service Event Hubs à partir d’une identité managée dans votre application, commencez par configurer les paramètres du contrôle d’accès en fonction du rôle Azure (Azure RBAC) pour cette identité managée. Azure Event Hubs définit les rôles Azure qui englobent les autorisations d’envoi et de lecture à partir d’Event Hubs. Quand le rôle Azure est attribué à une identité managée, celle-ci est autorisée à accéder aux données Event Hubs selon l’étendue appropriée.
 
-Pour plus d’informations sur l’attribution de rôles RBAC, consultez [Autoriser l’accès aux ressources Event Hubs à l’aide d’Azure Active Directory](authorize-access-azure-active-directory.md).
+Pour plus d’informations sur l’attribution des rôles Azure, consultez [Autoriser l’accès aux ressources Event Hubs à l’aide d’Azure Active Directory](authorize-access-azure-active-directory.md).
 
 ## <a name="use-event-hubs-with-managed-identities"></a>Utiliser Event Hubs avec des identités managées
-Pour utiliser Event Hubs avec des identités managées, vous devez attribuer le rôle et l’étendue appropriés à l’identité. La procédure décrite dans cette section utilise une application simple qui s’exécute sous une identité managée et accède aux ressources Event Hubs.
+Pour utiliser Event Hubs avec des identités managées, vous devez attribuer le rôle et l'étendue appropriée à l'identité. La procédure décrite dans cette section utilise une application simple qui s’exécute sous une identité managée et accède aux ressources Event Hubs.
 
-Ici, nous utilisons un exemple d’application web hébergée dans [Azure App Service](https://azure.microsoft.com/services/app-service/). Pour obtenir des instructions pas à pas sur la création d’une application web, consultez [Créer une application web ASP.NET Core dans Azure](../app-service/app-service-web-get-started-dotnet.md)
+Ici, nous utilisons un exemple d’application web hébergée dans [Azure App Service](https://azure.microsoft.com/services/app-service/). Pour obtenir des instructions pas à pas sur la création d’une application web, consultez [Créer une application web ASP.NET Core dans Azure](../app-service/quickstart-dotnetcore.md)
 
 Une fois que vous avez créé l’application, suivez ces étapes : 
 
@@ -52,7 +47,7 @@ Une fois ce paramètre activé, une identité de service est créée dans votre 
 
 À présent, attribuez cette identité de service à un rôle dans l’étendue requise dans vos ressources Event Hubs.
 
-### <a name="to-assign-rbac-roles-using-the-azure-portal"></a>Pour attribuer des rôles RBAC à l’aide du portail Azure
+### <a name="to-assign-azure-roles-using-the-azure-portal"></a>Pour attribuer des rôles Azure à l’aide du portail Azure
 Pour attribuer un rôle aux ressources Event Hubs, accédez à cette ressource dans le portail Azure. Affichez les paramètres Contrôle d’accès (IAM) pour la ressource et suivez ces instructions pour gérer les attributions de rôle :
 
 > [!NOTE]

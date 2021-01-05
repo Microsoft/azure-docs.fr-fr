@@ -5,12 +5,13 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 2/25/2019
 ms.author: srrengar
-ms.openlocfilehash: cde24657cc8ed78b91e72df16d51df4077a6e030
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a80eea5a50aa7b1e441049eeb2cae381994cd3ec
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75463094"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006334"
 ---
 # <a name="event-aggregation-and-collection-using-eventflow"></a>Agrégation et collection d’événements avec EventFlow
 

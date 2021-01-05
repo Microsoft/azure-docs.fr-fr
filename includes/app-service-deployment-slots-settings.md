@@ -4,12 +4,12 @@ ms.service: app-service
 ms.topic: include
 ms.date: 09/18/2019
 ms.author: cephalin
-ms.openlocfilehash: b4234acb2ce32980a268e389cb31de9a57ed18e6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7458f6868d7fbee72b55ad002148691a113c269d
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131936"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97532013"
 ---
 Lorsque vous clonez la configuration depuis un autre emplacement de déploiement, celle-ci est modifiable. Au cours d’un échange, certains éléments de configuration suivent le contenu (éléments non propres à un emplacement) tandis que d’autres restent dans le même emplacement après l’échange (éléments propres à un emplacement). Les listes suivantes représentent les paramètres qui évoluent lorsque vous échangez les emplacements.
 
@@ -22,7 +22,6 @@ Lorsque vous clonez la configuration depuis un autre emplacement de déploiement
 * Certificats publics
 * Contenu WebJobs
 * Connexions hybrides*
-* Intégration du réseau virtuel*
 * Points de terminaison de service*
 * Azure Content Delivery Network*
 
@@ -39,7 +38,10 @@ Il est prévu que les fonctionnalités marquées d’un astérisque (*) ne soien
 * Always On
 * Paramètres de diagnostic
 * Partage des ressources cross-origin (CORS)
+* Intégration du réseau virtuel
 
 > [!NOTE]
+> Pour rendre ces paramètres remplaçables, ajoutez le paramètre d’application `WEBSITE_OVERRIDE_PRESERVE_DEFAULT_STICKY_SLOT_SETTINGS` dans chaque emplacement de l’application et définissez sa valeur sur `0` ou `false`. Ces paramètres sont tous remplaçables ou aucun d’entre eux ne l’est. Vous ne pouvez pas rendre certains paramètres remplaçables et d’autres, pas.
+
 > Certains paramètres d’application qui s’appliquent à des paramètres non échangés ne sont pas non plus échangés. Par exemple, étant donné que les paramètres de diagnostic ne sont pas échangés, les paramètres d’application associés comme `WEBSITE_HTTPLOGGING_RETENTION_DAYS` et `DIAGNOSTICS_AZUREBLOBRETENTIONDAYS` ne sont pas non plus échangés, même s’ils n’apparaissent pas comme des paramètres d’emplacement.
 >

@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 10a4078f49abbdf431f42c6cde7cf882112e5848
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 128303cb51b39db8442fdda71f949db17923bfa2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60384701"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90088968"
 ---
 # <a name="azure-ad-connect-sync-service-shadow-attributes"></a>Attributs de clichés instantanés du service de synchronisation Azure AD Connect
 La plupart des attributs sont représentés de la même façon dans Azure AD qu’ils le sont dans votre Active Directory local. Toutefois, certains attributs ont une gestion spéciale, et la valeur d’attribut dans Azure AD peut être différente de ce qu’Azure AD Connect synchronise.
@@ -32,7 +32,7 @@ Certains attributs ont deux représentations dans Azure AD. La valeur locale et 
 Vous ne voyez pas les attributs de cliché instantané en utilisant le portail Azure ou avec PowerShell. Mais comprendre le concept vous aide à corriger certains scénarios où l’attribut a des valeurs différentes en local et dans le cloud.
 
 Pour mieux comprendre le comportement, observez cet exemple de Fabrikam :  
-![Domaines](./media/how-to-connect-syncservice-shadow-attributes/domains.png)  
+![Capture d'écran montrant le suffixe UPN Active Directory de plusieurs exemples, avec la valeur de domaine Azure AD correspondante Non ajouté, Non vérifié ou Vérifié.](./media/how-to-connect-syncservice-shadow-attributes/domains.png)  
 Ils ont plusieurs suffixes UPN dans leur Active Directory local, mais ils n’en ont vérifié qu’un.
 
 ### <a name="userprincipalname"></a>userPrincipalName

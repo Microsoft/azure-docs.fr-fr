@@ -4,31 +4,37 @@ description: Azure IoT Edge utilise un certificat pour valider les appareils, le
 author: stevebus
 manager: philmea
 ms.author: stevebus
-ms.date: 10/29/2019
+ms.date: 08/12/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mqtt
-ms.openlocfilehash: d3e456d57d98b796fb1aea2e82de51f9fae40c68
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: d1d4abbcc0768915d7d2e693cfc76a699ed21a91
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733158"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89669617"
 ---
 # <a name="understand-how-azure-iot-edge-uses-certificates"></a>Comprendre Azure IoT Edge utilise les certificats
 
 Les certificats IoT Edge sont utilisés par les modules et les appareils IoT en aval afin de vérifier l’identité et la légitimité du module d’exécution du [hub IoT Edge](iot-edge-runtime.md#iot-edge-hub). Ces vérifications permettent une connexion sécurisée TLS entre le runtime, les modules et les appareils IoT. Tout comme IoT Hub, IoT Edge nécessite une connexion sécurisée et chiffrée à partir d’appareils IoT en aval (ou feuilles) et de modules IoT Edge. Pour établir une connexion TLS sécurisée, le module du hub IoT Edge présente une chaîne d’approbation de serveur aux clients qui se connectent pour que ces derniers puissent vérifier son identité.
 
+>[!NOTE]
+>Cet article présente les certificats utilisés pour sécuriser les connexions entre les différents composants d’un appareil IoT Edge ou entre un appareil IoT Edge et des appareils de nœuds terminaux. Vous pouvez également utiliser des certificats pour authentifier votre appareil IoT Edge pour IoT Hub. Ces certificats d’authentification sont différents et ne sont pas abordés dans cet article. Pour plus d’informations sur l’authentification de votre appareil avec des certificats, consultez [Créer et provisionner un appareil IoT Edge à l’aide de certificats X.509](how-to-auto-provision-x509-certs.md).
+
 Cet article explique comment les certificats IoT Edge fonctionnent dans un environnement de production, de développement et de test. Bien que les scripts diffèrent (PowerShell/bash), les concepts sont identiques pour Linux et Windows.
 
 ## <a name="iot-edge-certificates"></a>Certificats IoT Edge
 
-En règle générale, les fabricants ne sont pas les utilisateurs finaux des appareils IoT Edge. Parfois, la seule relation qui existe entre les deux est lorsque l’utilisateur final (ou opérateur) achète un appareil générique fabriqué par le fabricant. Il est possible aussi que le fabricant travaille sous contrat afin de créer un appareil personnalisé pour l’opérateur. La conception de certificat IoT Edge tente de tenir compte de ces deux scénarios.
+Il existe deux scénarios courants pour configurer des certificats sur un appareil IoT Edge. Parfois, l’utilisateur final, ou l’opérateur, d’un appareil achète un appareil générique créé par un fabricant, puis gère lui-même les certificats. Dans d’autres cas, le fabricant travaille sous contrat et crée un appareil personnalisé destiné à l’opérateur, puis effectue une signature de certificat initiale avant de lui remettre l’appareil. La conception de certificat IoT Edge tente de tenir compte de ces deux scénarios.
 
 Le schéma suivant illustre l’utilisation des certificats par IoT Edge. Il peut y avoir un ou plusieurs certificats de signature intermédiaires (ou aucun) entre le certificat d’autorité de certification racine et le certificat d’autorité de certification de l’appareil, selon le nombre d’entités impliquées. Ici, nous ne montrons qu’un seul cas.
 
 ![Diagramme des relations de certificat standard](./media/iot-edge-certs/edgeCerts-general.png)
+
+> [!NOTE]
+> Il existe actuellement dans libiothsm une limitation empêchant l’utilisation de certificats qui expirent le 1er janvier 2038 ou après cette date. Cette limitation s'applique au certificat d'autorité de certification de l'appareil, à tous les certificats du bundle de confiance et aux certificats d'identité d'appareil utilisés pour les méthodes d'approvisionnement X.509.
 
 ### <a name="certificate-authority"></a>Autorité de certification
 

@@ -3,25 +3,25 @@ title: Déléguer la gouvernance des accès aux créateurs de catalogue dans la 
 description: Découvrez comment déléguer la gouvernance des accès des administrateurs informatiques aux créateurs de catalogue et chefs de projet pour qu’ils puissent gérer les accès eux-mêmes.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/26/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 51e37ad006da5042291614c773f242b5a1f3be97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e41f372cd0105896765d5a267456b6bda767dd4d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77120196"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87798424"
 ---
 # <a name="delegate-access-governance-to-catalog-creators-in-azure-ad-entitlement-management"></a>Déléguer la gouvernance des accès aux créateurs de catalogue dans la gestion des droits d’utilisation Azure AD
 

@@ -1,10 +1,10 @@
-- name: "Windows Virtual Desktop - Version Automne\_2019"
+- name: Windows Virtual Desktop (classique)
   href: ../index.yml
 - name: Vue d’ensemble
   items:
     - name: "Qu’est-ce que Windows Virtual Desktop\_?"
       href: ../overview.md
-    - name: "Documentation de la version Printemps\_2020"
+    - name: Documentation Windows Virtual Desktop
       href: ../create-host-pools-azure-marketplace.md
 - name: Tutoriels
   items:
@@ -22,8 +22,12 @@
       href: set-up-service-alerts-2019.md
 - name: Procédures
   items:
+    - name: Migrer manuellement
+      href: ../manual-migration.md
     - name: Se connecter à des ressources Windows Virtual Desktop
       items:
+        - name: Se connecter avec le client Windows Desktop
+          href: connect-windows-7-10-2019.md
         - name: Se connecter avec le client web
           href: connect-web-2019.md
         - name: Se connecter avec le client Android
@@ -68,6 +72,8 @@
           href: diagnostics-log-analytics-2019.md
     - name: Publier des applications intégrées
       href: publish-apps-2019.md
+    - name: "Configurer l’authentification multifacteur Azure\_AD"
+      href: ../set-up-mfa.md
 - name: Concepts
   items:
     - name: Environnement Windows Virtual Desktop

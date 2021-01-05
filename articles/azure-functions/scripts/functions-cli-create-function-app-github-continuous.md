@@ -3,13 +3,13 @@ title: Créer une application de fonction avec déploiement de GitHub - Azure CL
 description: Créez une application de fonction et déployez le code de fonction à partir d’un référentiel GitHub à l’aide d’Azure Functions.
 ms.date: 07/03/2018
 ms.topic: sample
-ms.custom: mvc
-ms.openlocfilehash: e424737b67be58ac0c3880ad2454c87fab803a15
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 752d8a729c56fc2e0e110fcedc263eab4ba7a96b
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75922736"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565305"
 ---
 # <a name="create-a-function-app-in-azure-that-is-deployed-from-github"></a>Créer une application de fonction déployée à partir de GitHub dans Azure
 
@@ -22,9 +22,9 @@ Dans cet exemple, vous aurez besoin des éléments suivants :
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous préférez utiliser Azure CLI localement, vous devez installer et utiliser la version 2.0 ou une version ultérieure. Pour déterminer la version Azure CLI, exécutez `az --version`. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 

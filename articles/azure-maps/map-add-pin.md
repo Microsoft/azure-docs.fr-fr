@@ -1,6 +1,6 @@
 ---
 title: Ajouter une couche de symboles à une carte | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir comment utiliser la couche de symboles pour personnaliser un symbole et ajouter des symboles sur une carte à l’aide du SDK web Microsoft Azure Maps.
+description: En savoir plus sur l’ajout de symboles personnalisés, tels que du texte ou des icônes, aux cartes. Voir comment utiliser les sources de données et les couches de symboles dans le Kit de développement logiciel (SDK) web Azure Maps à cette fin.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 07/29/2019
@@ -8,13 +8,13 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: b8d131dcc798fb2fe1d4bb650cd5b0a68903381b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: c5434406af1f912c1c89123baa344dd3f9c7ff91
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77209696"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891052"
 ---
 # <a name="add-a-symbol-layer-to-a-map"></a>Ajouter une couche de symboles à une carte
 
@@ -65,7 +65,7 @@ L’exemple de code suivant crée une géométrie de points GeoJSON et la transm
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Switch pin location' src='//codepen.io/azuremaps/embed/ZqJjRP/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/ZqJjRP/'>Switch pin location</a> (Changer l’emplacement du repère) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur le site <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Switch pin location' src='//codepen.io/azuremaps/embed/ZqJjRP/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/ZqJjRP/'>Switch pin location</a> (Changer l’emplacement du repère) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur le site <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 > [!TIP]
@@ -77,7 +77,7 @@ Les couches de symboles sont affichées à l’aide de WebGL. Toutes les ressour
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Icône de l’image de symbole personnalisée' src='//codepen.io/azuremaps/embed/WYWRWZ/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/WYWRWZ/'>Custom Symbol Image Icon</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Icône de l’image de symbole personnalisée' src='//codepen.io/azuremaps/embed/WYWRWZ/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/WYWRWZ/'>Custom Symbol Image Icon</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 > [!TIP]
@@ -89,7 +89,7 @@ Il y a de nombreuses options de style disponibles pour la couche de symboles. Vo
 
 <br/>
 
-<iframe height='700' scrolling='no' title='Options de la couche de symboles' src='//codepen.io/azuremaps/embed/PxVXje/?height=700&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/PxVXje/'>Symbol Layer Options</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='700' scrolling='no' title='Options de la couche de symboles' src='//codepen.io/azuremaps/embed/PxVXje/?height=700&theme-id=0&default-tab=result' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/PxVXje/'>Symbol Layer Options</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 > [!TIP]
@@ -100,16 +100,16 @@ Il y a de nombreuses options de style disponibles pour la couche de symboles. Vo
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [SymbolLayer](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.layer.symbollayer?view=azure-iot-typescript-latest)
+> [SymbolLayer](/javascript/api/azure-maps-control/atlas.layer.symbollayer)
 
 > [!div class="nextstepaction"]
-> [SymbolLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.symbollayeroptions?view=azure-iot-typescript-latest)
+> [SymbolLayerOptions](/javascript/api/azure-maps-control/atlas.symbollayeroptions)
 
 > [!div class="nextstepaction"]
-> [IconOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.iconoptions?view=azure-iot-typescript-latest)
+> [IconOptions](/javascript/api/azure-maps-control/atlas.iconoptions)
 
 > [!div class="nextstepaction"]
-> [TextOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.textoptions?view=azure-iot-typescript-latest)
+> [TextOptions](/javascript/api/azure-maps-control/atlas.textoptions)
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 

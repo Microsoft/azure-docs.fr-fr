@@ -8,17 +8,17 @@ manager: rkarlin
 ms.assetid: 70c076ef-3ad4-4000-a0c1-0ac0c9796ff1
 ms.service: security-center
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: overview
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/31/2020
 ms.author: memildin
-ms.openlocfilehash: 3c8bf69b745f5dba8c08556908df4d4ae5b5769f
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 31ff3620bcab6b10b59582daa255ff1f259ab0d3
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521914"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852640"
 ---
 # <a name="supported-platforms"></a>Plateformes prises en charge 
 
@@ -39,13 +39,15 @@ Dans le cas d’un environnement Azure activé sur un abonnement Azure, Azure Se
 
 Security Center dépend de l’[agent Log Analytics](../azure-monitor/platform/agents-overview.md#log-analytics-agent). Vérifiez que vos machines exécutent l’un des systèmes d’exploitation pris en charge pour cet agent, comme décrit dans les pages suivantes :
 
-* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Windows](../azure-monitor/platform/log-analytics-agent.md#supported-windows-operating-systems)
-* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Linux](../azure-monitor/platform/log-analytics-agent.md#supported-linux-operating-systems)
+* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Windows](../azure-monitor/platform/agents-overview.md#supported-operating-systems)
+* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Linux](../azure-monitor/platform/agents-overview.md#supported-operating-systems)
 
 Vérifiez également que votre agent Log Analytics est [correctement configuré pour envoyer des données à Security Center](security-center-enable-data-collection.md#manual-agent).
 
-> [!TIP]
-> Pour en savoir plus sur des fonctionnalités Security Center spécifiques disponibles sur Windows et Linux, consultez [Couverture des fonctionnalités pour les machines](security-center-services.md).
+Pour en savoir plus sur des fonctionnalités Security Center spécifiques disponibles sur Windows et Linux, consultez [Couverture des fonctionnalités pour les machines](security-center-services.md).
+
+> [!NOTE]
+> Même si Azure Defender est conçu pour protéger les serveurs, la plupart des fonctionnalités d’**Azure Defender pour les serveurs** sont prises en charge pour les ordinateurs Windows 10. Une fonctionnalité qui n’est actuellement pas prise en charge est la [solution PEPT intégrée de Security Center : Microsoft Defender pour point de terminaison](security-center-wdatp.md).
 
 ## <a name="managed-virtual-machine-services"></a>Services de machine virtuelle managés <a name="virtual-machine"></a>
 
@@ -55,7 +57,7 @@ Des machines virtuelles sont également créées dans un abonnement client dans 
 
 Les machines virtuelles s’exécutant dans un service cloud sont également prises en charge. Seuls les rôles de travail et web des services cloud en cours d’exécution dans des emplacements de production sont surveillés. Pour en savoir plus sur les services cloud, consultez [Vue d’ensemble d’Azure Cloud Services](../cloud-services/cloud-services-choose-me.md).
 
-La protection des machines virtuelles résidant dans Azure Stack est également prise en charge. Pour plus d’informations sur l’intégration de Security Center avec Azure Stack, consultez [Intégrer vos machines virtuelles Azure Stack à Security Center](https://docs.microsoft.com/azure/security-center/quick-onboard-azure-stack).
+La protection des machines virtuelles résidant dans Azure Stack est également prise en charge. Pour plus d’informations sur l’intégration de Security Center avec Azure Stack, consultez [Intégrer vos machines virtuelles Azure Stack à Security Center](quickstart-onboard-machines.md). 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

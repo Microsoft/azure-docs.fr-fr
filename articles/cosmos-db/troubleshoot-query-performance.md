@@ -4,50 +4,50 @@ description: Apprenez à identifier, diagnostiquer et résoudre les problèmes d
 author: timsander1
 ms.service: cosmos-db
 ms.topic: troubleshooting
-ms.date: 04/22/2020
+ms.date: 10/12/2020
 ms.author: tisande
 ms.subservice: cosmosdb-sql
 ms.reviewer: sngun
-ms.openlocfilehash: b3c6926f17e8378fd3b53bfd59a7c5ea8141adb4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 42f01b140a44d7aa6d75dece9a4398fd7b41bf5a
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82097232"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905109"
 ---
 # <a name="troubleshoot-query-issues-when-using-azure-cosmos-db"></a>Résoudre des problèmes de requête lors de l’utilisation d’Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Cet article décrit une approche générale recommandée pour le dépannage des requêtes dans Azure Cosmos DB. Bien que vous ne devriez pas considérer les étapes décrites dans cet article comme une protection complète contre les problèmes de requête potentiels, nous avons inclus ici les conseils sur les performances les plus courants. Vous devez utiliser cet article comme point de départ pour le dépannage des requêtes lentes ou coûteuses dans l’API Core (SQL) d’Azure Cosmos DB. Vous pouvez également utiliser des [journaux de diagnostic](cosmosdb-monitor-resource-logs.md) pour identifier les requêtes qui sont lentes ou qui consomment un débit significatif.
+Cet article décrit une approche générale recommandée pour le dépannage des requêtes dans Azure Cosmos DB. Bien que vous ne devriez pas considérer les étapes décrites dans cet article comme une protection complète contre les problèmes de requête potentiels, nous avons inclus ici les conseils sur les performances les plus courants. Vous devez utiliser cet article comme point de départ pour le dépannage des requêtes lentes ou coûteuses dans l’API Core (SQL) d’Azure Cosmos DB. Vous pouvez également utiliser des [journaux de diagnostic](cosmosdb-monitor-resource-logs.md) pour identifier les requêtes qui sont lentes ou qui consomment un débit significatif. Si vous utilisez l’API d’Azure Cosmos DB pour MongoDB, vous devez utiliser le [guide de résolution des problèmes de requête relatif à l’API d’Azure Cosmos DB pour MongoDB](mongodb-troubleshoot-query.md).
 
-Vous pouvez grosso modo classer les optimisations de requêtes dans Azure Cosmos DB en deux catégories :
+Les optimisations de requête dans Azure Cosmos DB sont classées de manière générale comme suit :
 
 - celles qui réduisent les frais en unités de requête (RU) de la requête
 - Optimisations qui réduisent simplement la latence
 
-Si vous réduisez les frais en RU d’une requête, vous diminuez presque certainement aussi la latence.
+Si vous réduisez les frais en RU d’une requête, vous diminuez généralement aussi la latence.
 
-Cet article fournit des exemples que vous pouvez recréer à l’aide du jeu de données [nutrition](https://github.com/CosmosDB/labs/blob/master/dotnet/setup/NutritionData.json).
+Cet article fournit des exemples que vous pouvez recréer à l’aide du [jeu de données nutrition](https://github.com/CosmosDB/labs/blob/master/dotnet/setup/NutritionData.json).
 
 ## <a name="common-sdk-issues"></a>Problèmes courants du Kit de développement logiciel (SDK)
 
 Avant de lire ce guide, il est utile de prendre en compte les problèmes courants liés au Kit de développement logiciel (SDK) et qui ne sont pas liés au moteur de requête.
 
-- Pour des performances optimales, suivez les [conseils relatifs aux performances](performance-tips.md).
-    > [!NOTE]
-    > Le processus hôte Windows 64 bits est recommandé pour améliorer les performances. Le kit de développement logiciel (SDK) SQL intègre un fichier ServiceInterop.dll natif pour analyser et optimiser les requêtes localement. ServiceInterop.dll est uniquement pris en charge sur la plateforme Windows x64. Pour Linux et les autres plateformes non prises en charge où ServiceInterop.dll n’est pas disponible, il procède à un appel réseau supplémentaire à destination de la passerelle afin d'obtenir la requête optimisée.
+- Suivez les [conseils relatifs aux performances du kit SDK](performance-tips.md).
+    - [Guide de résolution des problèmes du kit SDK .NET](troubleshoot-dot-net-sdk.md)
+    - [Guide de résolution des problèmes du kit SDK Java](troubleshoot-java-sdk-v4-sql.md)
 - Le Kit de développement logiciel (SDK) permet de définir un paramètre `MaxItemCount` pour vos requêtes, mais vous ne pouvez pas spécifier un nombre minimal d’éléments.
     - Le code doit gérer toute taille de page comprise entre zéro et le `MaxItemCount`.
-    - Le nombre d’éléments dans une page est toujours inférieur ou égal au `MaxItemCount`spécifié. Toutefois, `MaxItemCount` est strictement une valeur maximum et le nombre de résultats peut y être inférieur.
 - Parfois, les requêtes peuvent avoir des pages vides, même si des résultats se trouvent sur une page ultérieure. Les raisons peuvent être les suivantes :
     - Le Kit de développement logiciel (SDK) peut effectuer plusieurs appels réseau.
     - La requête peut prendre beaucoup de temps pour récupérer les documents.
-- Toutes les requêtes ont un jeton de continuation qui permet à la requête de continuer. Veillez à vider complètement la requête. Examinez les exemples du kit de développement logiciel (SDK) et utilisez une boucle `while` sur `FeedIterator.HasMoreResults` pour vider l’intégralité de la requête.
+- Toutes les requêtes ont un jeton de continuation qui permet à la requête de continuer. Veillez à vider complètement la requête. En savoir plus sur la [gestion de plusieurs pages de résultats](sql-query-pagination.md#handling-multiple-pages-of-results)
 
 ## <a name="get-query-metrics"></a>Obtenir les métriques de requête
 
 Lors de l’optimisation d’une requête dans Azure Cosmos DB, la première étape consiste toujours à [obtenir les métriques de requête](profile-sql-api-query.md) pour votre requête. Ces métriques sont également disponibles par le biais du portail Azure. Une fois que vous avez exécuté votre requête dans l’Explorateur de données, les métriques de requête apparaissent en regard de l’onglet **Résultats** :
 
-[ ![Obtention de métriques de requête](./media/troubleshoot-query-performance/obtain-query-metrics.png) ](./media/troubleshoot-query-performance/obtain-query-metrics.png#lightbox)
+:::image type="content" source="./media/troubleshoot-query-performance/obtain-query-metrics.png" alt-text="Obtention de métriques de requête" lightbox="./media/troubleshoot-query-performance/obtain-query-metrics.png":::
 
 Après avoir obtenu les métriques de requête, comparez le **nombre de documents récupérés** au **nombre de documents de sortie** pour votre requête. Utilisez cette comparaison pour identifier les sections pertinentes à vérifier dans cet article.
 
@@ -192,15 +192,14 @@ Stratégie d’indexation mise à jour :
 
 **Frais en RU :** 2.98 RU
 
-Vous pouvez ajouter des propriétés à la stratégie d’indexation à tout moment, sans impact sur les performances ou la disponibilité en écriture. Si vous ajoutez une nouvelle propriété à l’index, les requêtes qui utilisent la propriété utiliseront immédiatement le nouvel index disponible. La requête utilisera le nouvel index pendant sa construction. Ainsi, les résultats de la requête peuvent être incohérents pendant que la reconstruction de l’index est en cours. Si une nouvelle propriété est indexée, les requêtes qui utilisent uniquement des index existants ne seront pas affectées lors de la reconstruction de l’index. Vous pouvez [suivre la progression de la transformation d’index](https://docs.microsoft.com/azure/cosmos-db/how-to-manage-indexing-policy#use-the-net-sdk-v3).
+Vous pouvez ajouter des propriétés à la stratégie d’indexation à tout moment, sans impact sur la disponibilité en lecture ou en écriture. Vous pouvez [suivre la progression de la transformation d’index](./how-to-manage-indexing-policy.md#dotnet-sdk).
 
 ### <a name="understand-which-system-functions-use-the-index"></a>Comprendre quelles fonctions système utilisent l’index
 
-Si une expression peut être convertie en une plage de valeurs de chaîne, elle peut utiliser l’index. Dans le cas contraire, elle ne peut pas le faire.
+La plupart des fonctions système utilisent des index. Voici une liste de certaines fonctions de chaîne courantes qui utilisent des index :
 
-Voici la liste de certaines fonctions de chaîne courantes qui peuvent utiliser l’index :
-
-- STARTSWITH(str_expr, str_expr)
+- STARTSWITH(str_expr1, str_expr2, bool_expr)  
+- CONTAINS(str_expr, str_expr, bool_expr)
 - LEFT(str_expr, num_expr) = str_expr
 - SUBSTRING(str_expr, num_expr, num_expr) = str_expr, mais seulement si la première num_expr est 0
 
@@ -208,13 +207,31 @@ Voici quelques fonctions système courantes qui n’utilisent pas l’index et d
 
 | **Fonction système**                     | **Idées pour l’optimisation**             |
 | --------------------------------------- |------------------------------------------------------------ |
-| CONTAINS                                | Utilisez Recherche Azure pour la recherche en texte intégral.                        |
 | UPPER/LOWER                             | Au lieu d’utiliser la fonction système pour normaliser les données pour les comparaisons, normalisez la casse lors de l’insertion. Une requête telle que ```SELECT * FROM c WHERE UPPER(c.name) = 'BOB'``` devient ```SELECT * FROM c WHERE c.name = 'BOB'```. |
 | Fonctions mathématiques (non-agrégations) | Si vous devez calculer fréquemment une valeur dans votre requête, stockez cette valeur en tant que propriété dans votre document JSON. |
 
 ------
 
-D’autres parties de la requête peuvent toujours utiliser l’index même si les fonctions système ne le peuvent pas.
+Si une fonction système utilise des index et qu’elle a toujours des frais en RU (unités de requête) élevés, vous pouvez essayer d’ajouter `ORDER BY` à la requête. Dans certains cas, l’ajout de `ORDER BY` peut améliorer l’utilisation d’index de fonction système, en particulier si la requête est à exécution longue ou s’étend sur plusieurs pages.
+
+Prenons l’exemple de la requête ci-dessous avec `CONTAINS`. `CONTAINS` doit utiliser un index, mais supposons qu’après avoir ajouté l’index approprié, vous observez toujours des frais en RU (unités de requête) très élevés lors de l’exécution de la requête ci-dessous :
+
+Requête d’origine :
+
+```sql
+SELECT *
+FROM c
+WHERE CONTAINS(c.town, "Sea")
+```
+
+Requête mise à jour avec `ORDER BY` :
+
+```sql
+SELECT *
+FROM c
+WHERE CONTAINS(c.town, "Sea")
+ORDER BY c.town
+```
 
 ### <a name="understand-which-aggregate-queries-use-the-index"></a>Identifier les requêtes d’agrégation qui utilisent l’index
 
@@ -470,7 +487,7 @@ Voici l’index composite approprié :
 
 ## <a name="optimizations-that-reduce-query-latency"></a>Optimisations qui réduisent la latence des requêtes
 
-Dans de nombreux cas, les frais en RU peuvent être acceptables, même si la latence des requêtes est encore trop élevée. Les sections suivantes présentent différents conseils pour réduire la latence des requêtes. Si vous exécutez la même requête plusieurs fois sur le même jeu de données, elle aura les mêmes frais en RU à chaque fois. Mais la latence des requêtes peut varier d’une exécution de requête à une autre.
+Dans de nombreux cas, les frais en RU peuvent être acceptables, même si la latence des requêtes est encore trop élevée. Les sections suivantes présentent différents conseils pour réduire la latence des requêtes. Si vous exécutez la même requête plusieurs fois sur le même jeu de données, elle aura généralement les mêmes frais de RU à chaque fois. Mais la latence des requêtes peut varier d’une exécution de requête à une autre.
 
 ### <a name="improve-proximity"></a>Améliorer la proximité
 
@@ -492,5 +509,6 @@ Les requêtes sont conçues pour pré-extraire les résultats pendant que le lot
 Reportez-vous aux articles suivants pour des informations sur la mesure des unités de requête par requête et pour obtenir des statistiques d’exécution afin d’optimiser vos requêtes, entre autres :
 
 * [Obtenir des métriques sur l’exécution des requêtes SQL à l’aide du SDK .NET](profile-sql-api-query.md)
-* [Réglage des performances de requête avec Azure Cosmos DB](sql-api-sql-query-metrics.md)
+* [Réglage des performances de requête avec Azure Cosmos DB](./sql-api-query-metrics.md)
 * [Conseils en matière de performances pour le Kit de développement logiciel (SDK) .NET](performance-tips.md)
+* [Conseils en matière de performances pour le Kit de développement logiciel (SDK) Java v4](performance-tips-java-sdk-v4-sql.md)

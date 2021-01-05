@@ -2,16 +2,31 @@
 title: Mise à niveau des applications Service Fabric
 description: Cet article fournit une introduction à la mise à niveau d'une application Service Fabric, y compris le choix des modes de mise à niveau et les vérifications d'intégrité exécutées.
 ms.topic: conceptual
-ms.date: 2/23/2018
-ms.openlocfilehash: 2dc484b49c5250510e5f018cbbc2da107573d452
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 8/5/2020
+ms.openlocfilehash: 8eecd923b009ecbe9f4e607ad57a99b3f20955b9
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229489"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92309848"
 ---
 # <a name="service-fabric-application-upgrade"></a>Mise à niveau des applications Service Fabric
 Une application Azure Service Fabric est une collection de services. Pendant une mise à niveau, Service Fabric compare le nouveau [manifeste d'application](service-fabric-application-and-service-manifests.md) à la version précédente et détermine les services qui, dans l'application, nécessitent des mises à jour. Service Fabric compare les numéros des versions dans les manifestes de service avec les numéros des versions dans la version précédente. Si un service n'a pas changé, ce service n'est pas mis à niveau.
+
+> [!NOTE]
+> Les [ApplicationParameter](/dotnet/api/system.fabric.description.applicationdescription.applicationparameters?view=azure-dotnet#System_Fabric_Description_ApplicationDescription_ApplicationParameters) ne sont pas conservés dans une mise à niveau d’application. Pour conserver les paramètres d’application actuels, l’utilisateur doit d’abord récupérer les paramètres et les transmettre à l’appel d’API de mise à niveau, comme ci-dessous :
+```powershell
+$myApplication = Get-ServiceFabricApplication -ApplicationName fabric:/myApplication
+$appParamCollection = $myApplication.ApplicationParameters
+
+$applicationParameterMap = @{}
+foreach ($pair in $appParamCollection)
+{
+    $applicationParameterMap.Add($pair.Name, $pair.Value);
+}
+
+Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/myApplication -ApplicationTypeVersion 2.0.0 -ApplicationParameter $applicationParameterMap -Monitored -FailureAction Rollback
+```
 
 ## <a name="rolling-upgrades-overview"></a>Vue d'ensemble des mises à niveau propagées
 Une mise à niveau d'application propagée s'effectue par étapes. À chaque étape, la mise à niveau est appliquée à un sous-ensemble de nœuds du cluster, appelé domaine de mise à jour. Ainsi, l'application demeure disponible tout au long de la mise à niveau. Au cours de la mise à niveau, le cluster peut contenir une combinaison des versions ancienne et nouvelle.
@@ -37,7 +52,7 @@ Le mode que nous recommandons pour la mise à niveau d’application est le mode
 Le mode manuel non surveillé nécessite une intervention manuelle après chaque mise à niveau sur un domaine de mise à jour pour lancer la mise à niveau sur le domaine de mise à jour suivant. Aucune vérification de l'intégrité de Service Fabric n'est effectuée. L'administrateur effectue les vérifications d'intégrité ou d'état avant de commencer la mise à niveau dans le domaine de mise à jour suivant.
 
 ## <a name="upgrade-default-services"></a>Mettre à niveau les services par défaut
-Certains paramètres de service par défaut définis dans le [manifeste de l’application](service-fabric-application-and-service-manifests.md) peuvent aussi être mis à niveau dans le cadre d’une mise à niveau de l’application. Seuls les paramètres de service qui prennent une modification par le biais de [Update-ServiceFabricService](https://docs.microsoft.com/powershell/module/servicefabric/update-servicefabricservice?view=azureservicefabricps) peuvent être modifiés dans le cadre d’une mise à niveau. Le comportement de modification des services par défaut au cours de la mise à niveau de l’application est le suivant :
+Certains paramètres de service par défaut définis dans le [manifeste de l’application](service-fabric-application-and-service-manifests.md) peuvent aussi être mis à niveau dans le cadre d’une mise à niveau de l’application. Seuls les paramètres de service qui prennent une modification par le biais de [Update-ServiceFabricService](/powershell/module/servicefabric/update-servicefabricservice?view=azureservicefabricps) peuvent être modifiés dans le cadre d’une mise à niveau. Le comportement de modification des services par défaut au cours de la mise à niveau de l’application est le suivant :
 
 1. Les services par défaut du nouveau manifeste de l’application qui n’existent pas déjà dans le cluster sont créés.
 2. Les services par défaut qui existent dans les manifestes de l’application précédent et nouveau sont mis à jour. Les paramètres du service par défaut dans le nouveau manifeste de l’application remplacent ceux du service existant. La mise à niveau de l’application est restaurée automatiquement en cas d’échec de la mise à jour d’un service par défaut.

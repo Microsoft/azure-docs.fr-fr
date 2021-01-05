@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Moxtra | Microsoft Docs'
 description: Découvrez comment configurer l'authentification unique entre Azure Active Directory et Moxtra.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 2aed2d4b-1dcd-4839-8fed-9419d107c61c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/05/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: d3e53ba11744b0e78287ffc46c4aac7b99b16b23
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: be63ea7ebf905b825ffe73dfc2b37dcdc3bb88fd
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74889547"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92507514"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-moxtra"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Moxtra
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Moxtra à Azure Active Direc
 * Permettre à vos utilisateurs de se connecter automatiquement à Moxtra avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +39,7 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
-* Moxtra prend en charge l’authentification unique (SSO) initiée par le **fournisseur de services**.
+* Moxtra prend en charge l’authentification unique (SSO) initiée par le **fournisseur de services** .
 
 > [!NOTE]
 > L’identificateur de cette application étant une valeur de chaîne fixe, une seule instance peut être configurée dans un locataire.
@@ -54,16 +49,16 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 Pour configurer l'intégration de Moxtra à Azure AD, vous devez ajouter Moxtra à votre liste d'applications SaaS gérées à partir de la galerie.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
-1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **Moxtra** dans la zone de recherche.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory** .
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications** .
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application** .
+1. Dans la section **Ajouter à partir de la galerie** , tapez **Moxtra** dans la zone de recherche.
 1. Sélectionnez **Moxtra** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-moxtra"></a>Configurer et tester l’authentification unique Azure AD pour Moxtra
 
-Configurez et testez l’authentification unique Azure AD avec Moxtra à l’aide d’un utilisateur de test nommé **B. Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur Moxtra associé.
+Configurez et testez l’authentification unique Azure AD avec Moxtra à l’aide d’un utilisateur de test nommé **B. Simon** . Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur Moxtra associé.
 
 Pour configurer et tester l’authentification unique Azure AD auprès de Moxtra, suivez les indications des sections ci-après :
 
@@ -78,15 +73,15 @@ Pour configurer et tester l’authentification unique Azure AD auprès de Moxtra
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Moxtra**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
+1. Dans le [portail Azure](https://portal.azure.com/), accédez à la page d’intégration de l’application **Moxtra** , recherchez la section **Gérer** et sélectionnez **Authentification unique** .
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML** .
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la section **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    Dans la zone de texte **URL de connexion**, tapez une URL : `https://www.moxtra.com/service/#login`
+    Dans la zone de texte **URL de connexion** , tapez une URL : `https://www.moxtra.com/service/#login`
 
 1. L’application Moxtra attend les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à la configuration des attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut. Cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue Attributs d’utilisateur.
 
@@ -103,25 +98,25 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
     > [!Note]
     > La valeur de l’attribut **idpid** n’est pas réelle. Vous pouvez trouver la valeur réelle dans la section **Configurer Moxtra** à partir de l’étape 8. 
 
-    1. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
+    1. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs** .
 
-    1. Dans la zone de texte **Attribut**, indiquez le nom d’attribut pour cette ligne.
+    1. Dans la zone de texte **Attribut** , indiquez le nom d’attribut pour cette ligne.
 
     1. Laissez le champ **Espace de noms** vide.
 
-    1. Sélectionnez Source comme **Attribut**.
+    1. Sélectionnez Source comme **Attribut** .
 
-    1. Dans la liste **Attribut de la source**, tapez la valeur d’attribut indiquée pour cette ligne.
+    1. Dans la liste **Attribut de la source** , tapez la valeur d’attribut indiquée pour cette ligne.
 
     1. Cliquez sur **OK**
 
-    1. Cliquez sur **Enregistrer**.
+    1. Cliquez sur **Enregistrer** .
 
-1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **Certificat (en base64)** , puis sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
+1. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , recherchez **Certificat (en base64)** , puis sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-1. Dans la section **Configurer Moxtra**, copiez la ou les URL appropriées en fonction de vos besoins.
+1. Dans la section **Configurer Moxtra** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -129,62 +124,62 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs** .
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
-   1. Cliquez sur **Créer**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe** .
+   1. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Moxtra.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
-1. Dans la liste des applications, sélectionnez **Moxtra**.
-1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications** .
+1. Dans la liste des applications, sélectionnez **Moxtra** .
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes** .
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ## <a name="configure-moxtra-sso"></a>Configurer l’authentification unique Moxtra
 
 1. Dans une autre fenêtre de navigateur, connectez-vous à votre site d'entreprise Moxtra en tant qu'administrateur.
 
-2. Dans la barre d’outils située à gauche, cliquez sur **Console Administrateur > Authentification unique SAML**, puis sur **Nouveau**.
+2. Dans la barre d’outils située à gauche, cliquez sur **Console Administrateur > Authentification unique SAML** , puis sur **Nouveau** .
    
-    ![Configure Single Sign-On](./media/moxtra-tutorial/tutorial_moxtra_06.png) 
+    ![Capture d’écran montrant la page d’authentification unique SAML, avec l’option permettant de créer une authentification unique SAML.](./media/moxtra-tutorial/tutorial_moxtra_06.png) 
 
 3. Sur la page **SAML** , procédez comme suit :
    
-    ![Configure Single Sign-On](./media/moxtra-tutorial/tutorial_moxtra_08.png)   
+    ![Capture d’écran montrant la page SAML dans laquelle vous pouvez indiquer les valeurs décrites.](./media/moxtra-tutorial/tutorial_moxtra_08.png)   
  
-    a. Dans la zone de texte **Nom**, entrez le nom de votre configuration (par exemple, *SAML*). 
+    a. Dans la zone de texte **Nom** , entrez le nom de votre configuration (par exemple, *SAML* ). 
   
-    b. Dans la zone de texte **IdP Entity ID** (Identificateur d’entité du fournisseur d’identité), collez l’**Identificateur Azure AD** que vous avez copié dans le portail Azure. 
+    b. Dans la zone de texte **IdP Entity ID** (Identificateur d’entité du fournisseur d’identité), collez l’ **Identificateur Azure AD** que vous avez copié dans le portail Azure. 
  
     c. Dans la zone de texte **Login URL** (URL de connexion), collez la valeur **URL de connexion** que vous avez copiée dans le Portail Azure. 
  
-    d. Dans la zone de texte **AuthnContextClassRef**, tapez **urn:oasis:names:tc:SAML:2.0:ac:classes:Password**. 
+    d. Dans la zone de texte **AuthnContextClassRef** , tapez **urn:oasis:names:tc:SAML:2.0:ac:classes:Password** . 
  
-    e. Dans la zone de texte **Format NameID**, entrez **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**. 
+    e. Dans la zone de texte **Format NameID** , entrez **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress** . 
  
-    f. Dans le bloc-notes, ouvrez le certificat que vous avez téléchargé depuis le portail Azure, copiez son contenu, puis collez-le dans la zone de texte **Certificat**.    
+    f. Dans le bloc-notes, ouvrez le certificat que vous avez téléchargé depuis le portail Azure, copiez son contenu, puis collez-le dans la zone de texte **Certificat** .    
  
     g. Dans la zone de texte du domaine de messagerie SAML, tapez votre domaine de messagerie SAML.    
   
     >[!NOTE]
-    >Pour connaître les étapes de vérification du domaine, cliquez sur le «**i**» ci-dessous.
+    >Pour connaître les étapes de vérification du domaine, cliquez sur le « **i** » ci-dessous.
 
-    h. Cliquez sur **Update**.
+    h. Cliquez sur **Update** .
 
 ### <a name="create-moxtra-test-user"></a>Créer un utilisateur de test Moxtra
 
@@ -194,39 +189,38 @@ L’objectif de cette section est de créer un utilisateur appelé B.Simon dans 
 
 1. Connectez-vous à votre site d’entreprise Moxtra en tant qu’administrateur.
 
-1. Dans la barre d’outils située à gauche, cliquez sur **Console Administrateur > Gestion des utilisateurs**, puis sur **Ajouter un utilisateur**.
+1. Dans la barre d’outils située à gauche, cliquez sur **Console Administrateur > Gestion des utilisateurs** , puis sur **Ajouter un utilisateur** .
    
-    ![Configure Single Sign-On](./media/moxtra-tutorial/tutorial_moxtra_10.png) 
+    ![Capture d’écran montrant la page User Management avec l’élément Users sélectionné.](./media/moxtra-tutorial/tutorial_moxtra_10.png) 
 
-1. Dans la boîte de dialogue **Ajouter un utilisateur**, procédez comme suit :
+1. Dans la boîte de dialogue **Ajouter un utilisateur** , procédez comme suit :
   
-    a. Dans la zone de texte **First Name**, tapez **B**.
+    a. Dans la zone de texte **First Name** , tapez **B** .
   
-    b. Dans la zone de texte **Last Name**, tapez **Simon**.
+    b. Dans la zone de texte **Last Name** , tapez **Simon** .
   
-    c. Dans la zone de texte **Email**, entrez l’adresse e-mail de B.Simon, telle qu’elle est indiquée dans le portail Azure.
+    c. Dans la zone de texte **Email** , entrez l’adresse e-mail de B.Simon, telle qu’elle est indiquée dans le portail Azure.
   
-    d. Dans la zone de texte **Division**, saisissez **Développement**.
+    d. Dans la zone de texte **Division** , saisissez **Développement** .
   
-    e. Dans la zone de texte **Service**, saisissez **Informatique**.
+    e. Dans la zone de texte **Service** , saisissez **Informatique** .
   
-    f. Sélectionnez **Administrateur**.
+    f. Sélectionnez **Administrateur** .
   
-    g. Cliquez sur **Add**.
+    g. Cliquez sur **Add** .
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Moxtra dans le panneau d’accès doit vous connecter automatiquement à l’application Moxtra pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Moxtra dans le panneau d’accès doit vous connecter automatiquement à l’application Moxtra pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Moxtra avec Azure AD](https://aad.portal.azure.com/)
-

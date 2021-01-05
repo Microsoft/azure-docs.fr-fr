@@ -10,18 +10,19 @@ ms.subservice: content-moderator
 ms.topic: how-to
 ms.date: 05/18/2020
 ms.author: pafarley
-ms.openlocfilehash: 081f512fd421bf46a86f3789eadd75e178e1b6f5
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4f98eac4305333ec7225c90da2777b7e02f050a0
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83685310"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96853530"
 ---
 # <a name="analyze-video-content-for-objectionable-material-in-c"></a>Analyser la présence de matériau répréhensible dans du contenu vidéo en C#
 
 Cet article donne des informations et des exemples de code qui vous aideront à bien démarrer avec le [Kit de développement logiciel (SDK) Content Moderator pour .NET](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) afin d’analyser la présence de contenu suggestif ou pour adultes dans du contenu vidéo.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer. 
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 - N’importe quelle édition de [Visual Studio 2015 ou 2017](https://www.visualstudio.com/downloads/)
@@ -32,7 +33,7 @@ Les fonctionnalités de modération de vidéos de Content Moderator sont disponi
 
 ### <a name="create-an-azure-media-services-account"></a>Créer un compte Azure Media Services
 
-Suivez les instructions de [Créer un compte Azure Media Services](https://docs.microsoft.com/azure/media-services/media-services-portal-create-account) pour vous abonner à AMS et créer un compte de stockage Azure associé. Dans ce compte de stockage, créez un conteneur de stockage Blob.
+Suivez les instructions de [Créer un compte Azure Media Services](../../media-services/previous/media-services-portal-create-account.md) pour vous abonner à AMS et créer un compte de stockage Azure associé. Dans ce compte de stockage, créez un conteneur de stockage Blob.
 
 ### <a name="create-an-azure-active-directory-application"></a>Créer une application Azure Active Directory
 
@@ -42,7 +43,7 @@ Dans la section **Application Azure AD**, sélectionnez **Créer** et donnez un 
 
 Sélectionnez votre inscription d’application et cliquez sur le bouton **Gérer l’application** qui se trouve en dessous. Notez la valeur du champ **ID d’application** ; vous en aurez besoin plus tard. Sélectionnez **Paramètres** > **Clés**, puis entrez la description de la nouvelle clé (par exemple, « VideoModKey »). Cliquez sur **Enregistrer**, puis copiez la nouvelle valeur de clé et enregistrez-la dans un endroit sûr.
 
-Pour une présentation plus détaillée de la procédure ci-dessus, voir [Bien démarrer avec l’authentification Azure AD](https://docs.microsoft.com/azure/media-services/media-services-portal-get-started-with-aad).
+Pour une présentation plus détaillée de la procédure ci-dessus, voir [Bien démarrer avec l’authentification Azure AD](../../media-services/previous/media-services-portal-get-started-with-aad.md).
 
 Vous pourrez ensuite utiliser le processeur multimédia de modération de vidéos de deux manières différentes.
 
@@ -429,9 +430,5 @@ Une fois le travail de modération du contenu accompli, analysez la réponse JSO
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez comment générer des [analyses vidéo](video-reviews-quickstart-dotnet.md) à partir du résultat de votre modération.
-
-Ajoutez une [modération des transcriptions](video-transcript-moderation-review-tutorial-dotnet.md) à vos analyses vidéo.
-
-Consultez le didacticiel détaillé sur la création d’une [solution de modération complète des vidéos et transcriptions](video-transcript-moderation-review-tutorial-dotnet.md).
 
 [Téléchargez la solution Visual Studio](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) pour ce guide de démarrage rapide et d’autres guides de démarrage rapide Content Moderator pour .NET.

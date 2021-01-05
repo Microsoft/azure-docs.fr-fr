@@ -7,12 +7,12 @@ ms.date: 02/26/2018
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: b008c4ebc83200043d51fc8ef367f1983c549949
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 50e8dfd2998b50bfff7341e49ac4d0770c115166
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74973439"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90530860"
 ---
 # <a name="how-to-do-proof-of-possession-for-x509-ca-certificates-with-your-device-provisioning-service"></a>Effectuer une preuve de possession pour les certificats d’autorité de certification X.509 avec votre service Device Provisioning
 
@@ -23,7 +23,7 @@ La preuve de possession implique les étapes suivantes :
 2. Créer un certificat de vérification X.509 avec le code de vérification en tant que sujet et signer le certificat avec la clé privée associée à votre certificat d’autorité de certification X.509.
 3. Charger le certificat de vérification signé dans le service. Le service valide le certificat de vérification à l’aide de la partie publique du certificat d’autorité de certification à vérifier, prouvant ainsi que vous êtes en possession de la clé privée du certificat de l’autorité de certification.
 
-Les certificats vérifiés jouent un rôle important lors de l’utilisation de groupes d’inscription. La vérification de la propriété du certificat fournit un niveau de sécurité supplémentaire en permettant de s’assurer que l’utilisateur qui a chargé le certificat est en possession de la clé privée associée. La vérification empêche tout acteur malveillant qui intercepte votre trafic d’extraire un certificat intermédiaire et de l’utiliser pour créer un groupe d’inscription dans son propre service d’approvisionnement à des fins de détournement de vos appareils. En prouvant que vous êtes le propriétaire du certificat racine ou d’un certificat intermédiaire dans une chaîne d’approbation, vous prouvez que vous êtes autorisé à générer des certificats feuilles pour les appareils qui seront inscrits dans le cadre de ce groupe d’inscription. Par conséquent, le certificat racine ou intermédiaire configuré dans un groupe d’inscription doit être un certificat vérifié ou être associé à un certificat vérifié dans la chaîne d’approbation présentée par un appareil lors de son authentification auprès du service. Pour en savoir plus sur les groupes d’inscription, consultez [Certificats X.509](concepts-security.md#x509-certificates) et [Contrôle de l’accès des appareils au service de provisionnement avec des certificats X.509](concepts-security.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates).
+Les certificats vérifiés jouent un rôle important lors de l’utilisation de groupes d’inscription. La vérification de la propriété du certificat fournit un niveau de sécurité supplémentaire en permettant de s’assurer que l’utilisateur qui a chargé le certificat est en possession de la clé privée associée. La vérification empêche tout acteur malveillant qui intercepte votre trafic d’extraire un certificat intermédiaire et de l’utiliser pour créer un groupe d’inscription dans son propre service d’approvisionnement à des fins de détournement de vos appareils. En prouvant que vous êtes le propriétaire du certificat racine ou d’un certificat intermédiaire dans une chaîne d’approbation, vous prouvez que vous êtes autorisé à générer des certificats feuilles pour les appareils qui seront inscrits dans le cadre de ce groupe d’inscription. Par conséquent, le certificat racine ou intermédiaire configuré dans un groupe d’inscription doit être un certificat vérifié ou être associé à un certificat vérifié dans la chaîne d’approbation présentée par un appareil lors de son authentification auprès du service. Pour en savoir plus sur l’attestation de certificat X.509, consultez [Certificats X.509](concepts-x509-attestation.md) et [Contrôle de l’accès des appareils au service de provisionnement avec des certificats X.509](concepts-x509-attestation.md#controlling-device-access-to-the-provisioning-service-with-x509-certificates).
 
 ## <a name="register-the-public-part-of-an-x509-certificate-and-get-a-verification-code"></a>Inscrire la partie publique d’un certificat X.509 et obtenir un code de vérification
 

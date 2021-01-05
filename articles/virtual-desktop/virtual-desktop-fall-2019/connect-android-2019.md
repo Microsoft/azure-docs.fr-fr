@@ -1,29 +1,24 @@
 ---
-title: Connexion à Windows Virtual Desktop via Android – Azure
-description: Comment se connecter à Windows Virtual Desktop à l’aide du client Android.
-services: virtual-desktop
-author: heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+title: Connexion à Windows Virtual Desktop (classique) via Android – Azure
+description: Comment se connecter à Windows Virtual Desktop (classique) à l’aide du client Android.
+author: Heidilohr
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 636a31cdb657ca95ea9ea0da6bb85caa61425e5a
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: b0fadcc592f5dd52bf1b72dc9d5658866ffba7f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614134"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008472"
 ---
-# <a name="connect-with-the-android-client"></a>Se connecter avec le client Android
+# <a name="connect-to-windows-virtual-desktop-classic-with-the-android-client"></a>Comment se connecter à Windows Virtual Desktop (classique) à l’aide du client Android.
 
 > S’applique à : Android 4.1 et versions ultérieures, Chromebooks avec ChromeOS 53 et versions ultérieures.
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../connect-android.md).
-
->[!NOTE]
-> La possibilité d’accéder aux ressources Windows Virtual Desktop à partir du client Android est actuellement disponible en préversion.
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../connect-android.md).
 
 Vous pouvez accéder aux ressources Windows Virtual Desktop à partir de votre appareil Android avec notre client téléchargeable. Vous pouvez également utiliser le client Android sur des appareils Chromebook qui prennent en charge le Google Play Store. Ce guide explique comment configurer le client Android.
 

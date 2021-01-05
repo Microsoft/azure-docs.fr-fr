@@ -6,16 +6,16 @@ manager: jillfra
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/12/2018
 ms.author: ghogen
 ms.custom: aaddev, vs-azure
-ms.openlocfilehash: 4b39aa77ea3895a606ad34a3bc9b70dba924a23f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7b437e3117540719c8c0adc5701ac1a5e934340b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80886090"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88114470"
 ---
 # <a name="diagnosing-errors-with-the-azure-active-directory-connected-service"></a>Diagnostic d’erreurs avec le service connecté Azure Active Directory
 
@@ -33,16 +33,20 @@ Le service connecté vérifie également les paramètres d’authentification qu
 
 Dans un projet MVC, le service connecté vérifie les paramètres suivants, qui résultent de l'utilisation précédente du service :
 
-    <add key="ida:ClientId" value="" />
-    <add key="ida:Tenant" value="" />
-    <add key="ida:AADInstance" value="" />
-    <add key="ida:PostLogoutRedirectUri" value="" />
+```xml
+<add key="ida:ClientId" value="" />
+<add key="ida:Tenant" value="" />
+<add key="ida:AADInstance" value="" />
+<add key="ida:PostLogoutRedirectUri" value="" />
+```
 
 En outre, le service connecté vérifie les paramètres suivants dans un projet Web API, ceux-ci résultant de l'utilisation précédente du service :
 
-    <add key="ida:ClientId" value="" />
-    <add key="ida:Tenant" value="" />
-    <add key="ida:Audience" value="" />
+```xml
+<add key="ida:ClientId" value="" />
+<add key="ida:Tenant" value="" />
+<add key="ida:Audience" value="" />
+```
 
 ## <a name="incompatible-authentication-code"></a>Code d’authentification incompatible
 
@@ -92,4 +96,4 @@ Pour détecter un ancien formulaire d’authentification d’un compte professio
 
 Pour modifier le type d'authentification, supprimez le type d'authentification incompatible, puis essayez d’ajouter le service connecté à nouveau.
 
-Pour plus d’informations, consultez la page [Scénarios d’authentification pour Azure AD](authentication-scenarios.md).
+Pour plus d’informations, consultez la page [Scénarios d’authentification pour Azure AD](./authentication-vs-authorization.md).

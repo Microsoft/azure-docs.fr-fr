@@ -7,25 +7,28 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 03/25/2019
 ms.author: ramamill
-ms.openlocfilehash: 9be758c286e072b0fbefc5f8b20b7accc4e6741b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d921bddf90c415cb244e2cc9ad98354392a537ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228849"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90530146"
 ---
 # <a name="manage-the-mobility-agent"></a>Gérer l’agent du service Mobilité 
 
 Quand vous utilisez Azure Site Recovery pour la récupération d'urgence de machines virtuelles VMware et de serveurs physiques sur Azure, vous devez configurer l’agent de mobilité sur votre serveur. L’agent de mobilité coordonne la communication entre votre ordinateur protégé, le serveur de configuration/serveur de traitement scale-out et gère la réplication des données. Cet article récapitule les tâches courantes de gestion de l’agent de mobilité après son déploiement.
 
+>[!TIP]
+>Pour télécharger le programme d’installation d’une distribution de Linux ou d’un système d’exploitation spécifique, reportez-vous au guide [ici](vmware-physical-mobility-service-overview.md#locate-installer-files). Pour effectuer une mise à jour automatique à partir du portail, vous n’avez pas besoin de télécharger le programme d’installation. [ASR récupère automatiquement le programme d’installation à partir du serveur de configuration, et met à jour l’agent](#update-mobility-service-from-azure-portal).
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="update-mobility-service-from-azure-portal"></a>Mettre à jour le service de mobilité à partir du portail Azure
 
 1. Avant de commencer, veillez à ce que le serveur de configuration, les serveurs de processus de scale-out et les serveurs cibles maîtres qui font partie de votre déploiement soient mis à jour avant de procéder à la mise à jour du service Mobilité sur les machines protégées.
-2. Sur le portail, ouvrez le coffre > **Éléments répliqués**.
-3. Si le serveur de configuration correspond à la dernière version, une notification doit s’afficher et indiquer « Une nouvelle mise à jour de l’agent de réplication Site Recovery est disponible. Cliquez pour installer. »
+    1. À partir de la version 9.36, pour SUSE Linux Enterprise Server 11 SP3, RHEL 5, CentOS 5, Debian 7, vérifiez que le programme d'installation le plus récent est [disponible sur le serveur de configuration et sur le serveur de processus de scale-out](vmware-physical-mobility-service-overview.md#download-latest-mobility-agent-installer-for-suse-11-sp3-rhel-5-debian-7-server).
+1. Sur le portail, ouvrez le coffre > **Éléments répliqués**.
+1. Si le serveur de configuration correspond à la dernière version, une notification doit s’afficher et indiquer « Une nouvelle mise à jour de l’agent de réplication Site Recovery est disponible. Cliquez pour installer. »
 
      ![Fenêtre Éléments répliqués](./media/vmware-azure-install-mobility-service/replicated-item-notif.png)
 
@@ -33,7 +36,7 @@ Quand vous utilisez Azure Site Recovery pour la récupération d'urgence de mach
 
      ![Éléments répliqués - Liste des machines virtuelles](./media/vmware-azure-install-mobility-service/update-okpng.png)
 
-5. La tâche Mettre à jour le service Mobilité est alors lancée pour chacune des machines sélectionnées.
+5. La tâche Mettre à jour le service Mobilité est alors lancée pour chacune des machines sélectionnées. L’agent de mobilité est mis à jour avec la version du serveur de configuration. Par exemple, si le serveur de configuration est sur la version 9.33, l’agent de mobilité sur une machine virtuelle protégée est également mis à jour vers la version 9.33.
 
 ## <a name="update-mobility-service-through-powershell-script-on-windows-server"></a>Mettre à jour le service de mobilité via le script powershell sur le serveur Windows
 

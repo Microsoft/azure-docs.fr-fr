@@ -1,24 +1,14 @@
 ---
 title: Opérations de demande/réponse AMQP 1.0 dans Azure Service Bus
 description: Cet article énumère les opérations basées sur une requête-réponse AMQP dans le service Microsoft Azure Service Bus.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-editor: spelluru
-ms.assetid: ''
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2020
-ms.author: aschhab
-ms.openlocfilehash: 338b411eade35fa357f64131c64b8ef2034c92b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: b845f4086ee1ac4fe868571c1754caf6d29b9021
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76761081"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88064412"
 ---
 # <a name="amqp-10-in-microsoft-azure-service-bus-request-response-based-operations"></a>AMQP 1.0 dans Microsoft Azure Service Bus : opérations basées sur les requêtes-réponses
 
@@ -706,4 +696,4 @@ Pour en savoir plus sur AMQP et Service Bus, consultez les liens suivants :
 
 [Vue d’ensemble du protocole AMQP de Service Bus]: service-bus-amqp-overview.md
 [Guide du protocole AMQP 1.0]: service-bus-amqp-protocol-guide.md
-[AMQP in Service Bus for Windows Server (AMQP dans Service Bus pour Windows Server)]: https://docs.microsoft.com/previous-versions/service-bus-archive/dn282144(v=azure.100)
+[AMQP in Service Bus for Windows Server (AMQP dans Service Bus pour Windows Server)]: /previous-versions/service-bus-archive/dn282144(v=azure.100)

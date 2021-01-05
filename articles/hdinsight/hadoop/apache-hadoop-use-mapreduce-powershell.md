@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 01/08/2020
-ms.openlocfilehash: b3c1abb7bff54e3e2d294b073b867c6c0e06f482
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b5f5a9fb8ddd25f750b19044bac7253bbff2f98
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75830069"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92545206"
 ---
 # <a name="run-mapreduce-jobs-with-apache-hadoop-on-hdinsight-using-powershell"></a>Exécuter des travaux MapReduce avec Apache Hadoop sur HDInsight à l’aide de PowerShell
 
@@ -25,7 +25,7 @@ Ce document fournit un exemple d’utilisation d’Azure PowerShell pour exécut
 
 * Un cluster Apache Hadoop sur HDInsight. Consultez [Créer des clusters Apache Hadoop à l’aide du Portail Azure](../hdinsight-hadoop-create-linux-clusters-portal.md).
 
-* Le [module Az](https://docs.microsoft.com/powershell/azure/overview) PowerShell installé.
+* Le [module Az](/powershell/azure/) PowerShell installé.
 
 ## <a name="run-a-mapreduce-job"></a>Exécuter une tâche MapReduce
 
@@ -43,27 +43,31 @@ Les applets de commande suivantes sont utilisées lors de l’exécution des tâ
 
 Les étapes suivantes montrent comment utiliser ces applets de commande pour exécuter une tâche sur votre cluster HDInsight.
 
-1. À l’aide d’un éditeur, enregistrez le code suivant sous **mapreducejob.ps1**.
+1. À l’aide d’un éditeur, enregistrez le code suivant sous **mapreducejob.ps1** .
 
     [!code-powershell[main](../../../powershell_scripts/hdinsight/use-mapreduce/use-mapreduce.ps1?range=5-69)]
 
 2. Ouvrez une invite de commandes **Azure PowerShell** . Accédez à l’emplacement du fichier **mapreducejob.ps1** , puis utilisez les éléments suivants pour exécuter le script :
 
-        .\mapreducejob.ps1
+    ```azurepowershell
+    .\mapreducejob.ps1
+    ```
 
     Lorsque vous exécutez le script, vous êtes invité à entrer le nom du cluster HDInsight et le nom de connexion du cluster. Vous pouvez également être invité à vous authentifier sur votre abonnement Azure.
 
 3. Une fois la tâche terminée, vous obtenez un résultat similaire au texte suivant :
 
-        Cluster         : CLUSTERNAME
-        ExitCode        : 0
-        Name            : wordcount
-        PercentComplete : map 100% reduce 100%
-        Query           :
-        State           : Completed
-        StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
-        SubmissionTime  : 12/5/2014 8:34:09 PM
-        JobId           : job_1415949758166_0071
+    ```output
+    Cluster         : CLUSTERNAME
+    ExitCode        : 0
+    Name            : wordcount
+    PercentComplete : map 100% reduce 100%
+    Query           :
+    State           : Completed
+    StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
+    SubmissionTime  : 12/5/2014 8:34:09 PM
+    JobId           : job_1415949758166_0071
+    ```
 
     Cela indique que la tâche a été effectuée avec succès.
 
@@ -81,7 +85,7 @@ Pour afficher les mots et les décomptes générés par la tâche, ouvrez le fic
 
 ## <a name="troubleshooting"></a>Dépannage
 
-Si aucune information n’est retournée lorsque la tâche est terminée, affichez les erreurs liées à cette tâche. Pour afficher les informations d’erreur pour ce projet, ajoutez la commande suivante à la fin du fichier **mapreducejob.ps1**. Ensuite, enregistrez le fichier et réexécutez le script.
+Si aucune information n’est retournée lorsque la tâche est terminée, affichez les erreurs liées à cette tâche. Pour afficher les informations d’erreur pour ce projet, ajoutez la commande suivante à la fin du fichier **mapreducejob.ps1** . Ensuite, enregistrez le fichier et réexécutez le script.
 
 ```powershell
 # Print the output of the WordCount job.

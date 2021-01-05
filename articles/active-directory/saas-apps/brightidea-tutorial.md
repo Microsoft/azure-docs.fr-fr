@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Brightidea | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Brightidea.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3adae3e0-f43b-492f-b373-6a512d2d6046
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/23/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: ff89f7323ba4cdf14ed1c052b2dd4e4e06356e00
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 9967f349011b52a2218681956885c33456ba1d46
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73157622"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672758"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-brightidea"></a>Tutoriel : Intégration d’Azure Active Directory à Brightidea
 
@@ -32,7 +27,7 @@ L’intégration de Brightidea à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs de se connecter automatiquement à Brightidea (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -71,7 +66,7 @@ Pour configurer l’intégration de Brightidea dans Azure AD, vous devez ajoute
 
 4. Dans la zone de recherche, tapez **Brightidea**, sélectionnez **Brightidea** dans le volet de résultats, puis cliquez sur **Ajouter** pour ajouter l’application.
 
-     ![Brightidea dans la liste des résultats](common/search-new-app.png)
+    ![Brightidea dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -117,14 +112,14 @@ Pour configurer l’authentification unique Azure AD auprès de Brightidea, eff
 
     c. Une fois le fichier de métadonnées correctement chargé, les valeurs **Identificateur** et **URL de réponse** se renseignent automatiquement dans la zone de texte de la section Brightidea :
 
-    ![image](common/idp-intiated.png)
+    ![Capture d’écran montrant Basic SAML Configuration, où vous pouvez entrer Identifier, et Reply URL, et sélectionner Save.](common/idp-intiated.png)
 
     > [!Note]
     > Si les valeurs **Identificateur** et **URL de réponse** ne sont pas automatiquement renseignées, renseignez-les manuellement en fonction de vos besoins.
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![image](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<SUBDOMAIN>.brightidea.com`
 
@@ -148,33 +143,33 @@ Pour configurer l’authentification unique Azure AD auprès de Brightidea, eff
 
 2. Pour accéder à la fonctionnalité d’authentification unique dans votre système Brightidea, accédez à **Enterprise Setup** -> **Authentication Tab**. Vous voyez alors deux sous-onglets : Auth Selection et SAML Profiles.
 
-    ![Configuration Brightidea](./media/brightidea-tutorial/configure1.png)
+    ![Capture d’écran montrant le site Brightidea avec l’onglet Authentication sélectionné.](./media/brightidea-tutorial/configure1.png)
 
 3. Sélectionnez **Auth Selection**. Par défaut, seules deux méthodes standard apparaissent : Brightidea Login et Registration. Quand une méthode d’authentification unique est ajoutée, elle figure dans la liste.
 
-    ![Configuration Brightidea](./media/brightidea-tutorial/configure2.png)
+    ![Capture d’écran montrant l’onglet Brightidea Authentication avec Auth Selection sélectionné.](./media/brightidea-tutorial/configure2.png)
 
 4. Sélectionnez **SAML Profiles** et effectuez les étapes suivantes :
 
-    ![Configuration Brightidea](./media/brightidea-tutorial/configure3.png)
+    ![Capture d’écran montrant l’onglet Brightidea Authentication avec SAML Profiles sélectionné, qui fournit des options pour Download Metadata et Add New.](./media/brightidea-tutorial/configure3.png)
 
     a. Cliquez sur **Télécharger les métadonnées** et chargez-les dans la section **Configuration SAML de base** du portail Azure.
 
     b. Cliquez sur le bouton **Ajouter nouveau** sous le **paramètre de fournisseur d’identité** et effectuez les étapes suivantes :
-    
-    ![Configuration Brightidea](./media/brightidea-tutorial/configure4.png)
-    
+
+    ![Capture d’écran montrant Brightidea Identity Provider Setting, où vous entrez des informations.](./media/brightidea-tutorial/configure4.png)
+
    * Entrez le **nom du profil SAML**, comme `Azure Ad SSO`
-    
+
    * Pour **charger les métadonnées**, cliquez pour choisir le fichier de métadonnées téléchargé à partir du portail Azure.
 
      > [!NOTE]
      > Après avoir chargé le fichier de métadonnées, les champs restants, **Service d’authentification unique, Émetteur du fournisseur d’identité, Télécharger la clé publique**, se renseignent automatiquement.
 
    * Dans la zone de texte **E-mail**, entrez la valeur `mail`.
-     
+
    * Dans la zone de texte **Nom d’écran**, entrez la valeur `givenName`.
-     
+
    * Cliquez sur **Enregistrer les modifications**.  
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
@@ -194,7 +189,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotresociété.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -236,13 +231,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans Brightid
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Brightidea dans le volet d’accès, vous devez être connecté automatiquement à l’application Brightidea pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Brightidea dans le volet d’accès, vous devez être connecté automatiquement à l’application Brightidea pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

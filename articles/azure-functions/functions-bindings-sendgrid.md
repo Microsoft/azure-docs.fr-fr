@@ -3,14 +3,15 @@ title: Liaisons SendGrid dans Azure Functions
 description: Informations de référence sur les liaisons SendGrid dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 11/29/2017
 ms.author: cshoe
-ms.openlocfilehash: 9ed2b81c12c698822b9542bb6903189c865b572b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b3d09ec4c4ab578a87f0d983c0f243bee2a84597
+ms.sourcegitcommit: 9889a3983b88222c30275fd0cfe60807976fd65b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235157"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94991228"
 ---
 # <a name="azure-functions-sendgrid-bindings"></a>Liaisons SendGrid dans Azure Functions
 
@@ -40,6 +41,7 @@ L’exemple suivant montre une [fonction C#](functions-dotnet-class-library.md) 
 
 ```cs
 using SendGrid.Helpers.Mail;
+using System.Text.Json;
 
 ...
 
@@ -48,7 +50,7 @@ public static void Run(
     [ServiceBusTrigger("myqueue", Connection = "ServiceBusConnection")] Message email,
     [SendGrid(ApiKey = "CustomSendGridKeyAppSettingName")] out SendGridMessage message)
 {
-var emailObject = JsonConvert.DeserializeObject<OutgoingEmail>(Encoding.UTF8.GetString(email.Body));
+var emailObject = JsonSerializer.Deserialize<OutgoingEmail>(Encoding.UTF8.GetString(email.Body));
 
 message = new SendGridMessage();
 message.AddTo(emailObject.To);
@@ -70,15 +72,16 @@ public class OutgoingEmail
 
 ```cs
 using SendGrid.Helpers.Mail;
+using System.Text.Json;
 
 ...
 
 [FunctionName("SendEmail")]
-public static async void Run(
+public static async Task Run(
  [ServiceBusTrigger("myqueue", Connection = "ServiceBusConnection")] Message email,
  [SendGrid(ApiKey = "CustomSendGridKeyAppSettingName")] IAsyncCollector<SendGridMessage> messageCollector)
 {
- var emailObject = JsonConvert.DeserializeObject<OutgoingEmail>(Encoding.UTF8.GetString(email.Body));
+ var emailObject = JsonSerializer.Deserialize<OutgoingEmail>(Encoding.UTF8.GetString(email.Body));
 
  var message = new SendGridMessage();
  message.AddTo(emailObject.To);
@@ -188,7 +191,7 @@ Voici le code JavaScript :
 ```javascript
 module.exports = function (context, input) {
     var message = {
-         "personalizations": [ { "to": [ { "email": "sample@sample.com" } ] } ],
+         "personalizations": [ { "to": [ { "email": "sample@sample.com" } ] } ],
         from: { email: "sender@contoso.com" },
         subject: "Azure news",
         content: [{

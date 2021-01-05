@@ -15,12 +15,12 @@ ms.workload: identity
 ms.date: 07/15/2019
 ms.author: rolyon
 ms.reviewer: skwan
-ms.openlocfilehash: f3341f1c30a1581b8507652c322c00581e3972aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a52635dbaa7a76034f3a535b099320a901e8c07
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77137407"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83758773"
 ---
 # <a name="manage-access-to-azure-management-with-conditional-access"></a>Gérer l’accès à la gestion Azure avec l’accès conditionnel
 
@@ -47,5 +47,4 @@ La stratégie que vous créez s’applique à tous les points de terminaison de 
 
 Notez que la stratégie s’applique à Azure PowerShell, qui appelle l’API Azure Resource Manager. Elle ne s’applique pas à [Azure AD PowerShell](/powershell/azure/active-directory/install-adv2), qui appelle Microsoft Graph.
 
-
-Pour plus d’informations sur la configuration et l’utilisation de l’accès conditionnel, consultez [Accès conditionnel dans Azure Active Directory](../active-directory/active-directory-conditional-access-azure-portal.md).
+Pour plus d’informations sur le mode de configuration d’un exemple de stratégie pour activer l’accès conditionnel pour la gestion de Microsoft Azure, consultez l’article [Accès conditionnel : Exiger MFA pour la gestion Azure](../active-directory/conditional-access/howto-conditional-access-policy-azure-management.md).

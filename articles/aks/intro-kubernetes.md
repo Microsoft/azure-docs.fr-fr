@@ -5,12 +5,12 @@ services: container-service
 ms.topic: overview
 ms.date: 05/06/2019
 ms.custom: mvc
-ms.openlocfilehash: c36d651fde4c10157979e12fda12604153aefdfc
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 75f4602be15ef2487272ed5790d92c4c884c551f
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82561877"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94681548"
 ---
 # <a name="azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS)
 
@@ -26,11 +26,11 @@ Pour commencer, effectuez le démarrage rapide d’AKS [dans le Portail Azure][a
 
 ## <a name="access-security-and-monitoring"></a>Accès, sécurité et surveillance
 
-Pour améliorer la sécurité et la gestion, AKS vous permet d’intégrer avec Azure Active Directory et d’utiliser les contrôles d’accès en fonction du rôle de Kubernetes. Vous pouvez également superviser l’intégrité de votre cluster et de vos ressources.
+Pour améliorer la sécurité et la gestion, vous pouvez intégrer AKS à Azure Active Directory et utiliser les contrôles d’accès en fonction du rôle (RBAC Kubernetes) de Kubernetes. Vous pouvez également superviser l’intégrité de votre cluster et de vos ressources.
 
 ### <a name="identity-and-security-management"></a>Gestion de la sécurité et identité
 
-Pour limiter l’accès aux ressources de cluster, AKS prend en charge le [contrôle d’accès en fonction du rôle (RBAC) de Kubernetes][kubernetes-rbac]. RBAC vous permet de contrôle l’accès aux ressources et aux espaces de noms Kubernetes, ainsi que les autorisations sur ces ressources. Un cluster AKS peut aussi être configuré pour s’intégrer à Azure Active Directory (AD). Avec l’intégration Azure AD, l’accès à Kubernetes peut être configuré en fonction de l’identité et de l’appartenance du groupe existantes. Vos utilisateurs et groupes Azure AD existants peuvent disposer de l’accès aux ressources AKS et avec une expérience d’authentification intégrée.
+Pour limiter l’accès aux ressources de cluster, AKS prend en charge le [contrôle d’accès en fonction du rôle (RBAC Kubernetes) de Kubernetes][kubernetes-rbac]. Le contrôle RBAC Kubernetes vous permet de contrôler l’accès aux ressources et aux espaces de noms Kubernetes, ainsi que les autorisations sur ces ressources. Un cluster AKS peut aussi être configuré pour s’intégrer à Azure Active Directory (AD). Avec l’intégration Azure AD, l’accès à Kubernetes peut être configuré en fonction de l’identité et de l’appartenance du groupe existantes. Vos utilisateurs et groupes Azure AD existants peuvent disposer de l’accès aux ressources AKS et avec une expérience d’authentification intégrée.
 
 Pour plus d’informations sur l’identité, consultez [Options d’accès et d’identité pour AKS][concepts-identity].
 
@@ -63,6 +63,12 @@ Pour plus d’informations sur les versions du cycle de vie, consultez [Versions
 AKS prend en charge la création de pools de nœuds avec processeur graphique (GPU). Azure fournit actuellement une ou plusieurs machines virtuelles avec processeur graphique (GPU). Les machines virtuelles avec processeur graphique (GPU) sont conçues pour des charges de travail de visualisation, mais également de calcul et d’affichage graphique intensifs.
 
 Pour plus d’informations, consultez [Utilisation des GPU sur AKS][aks-gpu].
+
+### <a name="confidential-computing-nodes-public-preview"></a>Nœuds d’informatique confidentielle (préversion publique)
+
+AKS prend en charge la création de pools de nœuds d’informatique confidentielle basés sur Intel SGX (machines virtuelles DCSv2). Les nœuds d’informatique confidentielle permettent aux conteneurs de s’exécuter dans un environnement d’exécution isolé et approuvé basé sur le matériel. L’isolement entre des conteneurs combinés avec l’intégrité du code par le biais d’une attestation peut être utile pour votre stratégie de sécurité de conteneur de défense en profondeur. Les nœuds d’informatique confidentielle prennent en charge à la fois les conteneurs confidentiels (applications Docker existantes) et les conteneurs reconnaissant les enclaves.
+
+Pour plus d’informations, consultez [Nœuds d’informatique confidentielle sur AKS][conf-com-node].
 
 ### <a name="storage-volume-support"></a>Prise en charge du volume de stockage
 
@@ -124,7 +130,7 @@ En savoir plus sur le déploiement et la gestion d’AKS avec le démarrage rapi
 
 <!-- LINKS - internal -->
 [acr-docs]: ../container-registry/container-registry-intro.md
-[aks-aad]: ./azure-ad-integration.md
+[aks-aad]: ./azure-ad-integration-cli.md
 [aks-cli]: ./kubernetes-walkthrough.md
 [aks-gpu]: ./gpu-cluster.md
 [aks-http-routing]: ./http-application-routing.md
@@ -132,14 +138,15 @@ En savoir plus sur le déploiement et la gestion d’AKS avec le démarrage rapi
 [aks-portal]: ./kubernetes-walkthrough-portal.md
 [aks-scale]: ./tutorial-kubernetes-scale.md
 [aks-upgrade]: ./upgrade-cluster.md
-[azure-dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/azure-dev-spaces
-[azure-devops]: https://docs.microsoft.com/azure/devops-project/overview
+[azure-dev-spaces]: ../dev-spaces/index.yml
+[azure-devops]: ../devops-project/overview.md
 [azure-disk]: ./azure-disks-dynamic-pv.md
 [azure-files]: ./azure-files-dynamic-pv.md
-[container-health]: ../monitoring/monitoring-container-health.md
+[container-health]: ../azure-monitor/insights/container-insights-overview.md
 [aks-master-logs]: view-master-logs.md
 [aks-supported versions]: supported-kubernetes-versions.md
 [concepts-clusters-workloads]: concepts-clusters-workloads.md
-[kubernetes-rbac]: concepts-identity.md#role-based-access-controls-rbac
+[kubernetes-rbac]: concepts-identity.md#kubernetes-role-based-access-control-kubernetes-rbac
 [concepts-identity]: concepts-identity.md
 [concepts-storage]: concepts-storage.md
+[conf-com-node]: ../confidential-computing/confidential-nodes-aks-overview.md

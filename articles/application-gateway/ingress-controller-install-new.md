@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur le déploiement d’un con
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: b46c9f8b0cad74f3a4e9be8903270a60993c01f4
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: 9f69f89f565b2d98e408b06e300ff781c13680ef
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80585899"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97693664"
 ---
 # <a name="how-to-install-an-application-gateway-ingress-controller-agic-using-a-new-application-gateway"></a>Comment installer un contrôleur d’entrée Application Gateway (AGIC) à l’aide d’une nouvelle instance Application Gateway
 
@@ -30,7 +30,7 @@ Vous pouvez également lancer Cloud Shell à partir du Portail Azure à l’aide
 
 Votre [Azure Cloud Shell](https://shell.azure.com/) contient déjà tous les outils nécessaires. Si vous choisissez d’utiliser un autre environnement, vérifiez que les outils en ligne de commande suivants sont installés :
 
-* `az` - Azure CLI : [instructions d’installation](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+* `az` - Azure CLI : [instructions d’installation](/cli/azure/install-azure-cli?view=azure-cli-latest)
 * `kubectl` -Outil en ligne de commande Kubernetes : [instructions d’installation](https://kubernetes.io/docs/tasks/tools/install-kubectl)
 * `helm` - Gestionnaire de package Kubernetes : [instructions d’installation](https://github.com/helm/helm/releases/latest)
 * `jq` -Processeur JSON en ligne de commande : [instructions d’installation](https://stedolan.github.io/jq/download/)
@@ -38,9 +38,9 @@ Votre [Azure Cloud Shell](https://shell.azure.com/) contient déjà tous les out
 
 ## <a name="create-an-identity"></a>Créer une identité
 
-Suivez les étapes ci-dessous pour créer un [objet principal du service](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object) Azure Active Directory (AAD). Enregistrez les valeurs `appId`, `password` et `objectId`,-celles-ci seront utilisées dans les étapes suivantes.
+Suivez les étapes ci-dessous pour créer un [objet principal du service](../active-directory/develop/app-objects-and-service-principals.md#service-principal-object) Azure Active Directory (AAD). Enregistrez les valeurs `appId`, `password` et `objectId`,-celles-ci seront utilisées dans les étapes suivantes.
 
-1. Créer un principal de service AD ([en savoir plus sur RBAC](https://docs.microsoft.com/azure/role-based-access-control/overview)) :
+1. Créer un principal de service AD ([En savoir plus sur Azure RBAC](../role-based-access-control/overview.md)) :
     ```azurecli
     az ad sp create-for-rbac --skip-assignment -o json > auth.json
     appId=$(jq -r ".appId" auth.json)
@@ -66,16 +66,16 @@ Suivez les étapes ci-dessous pour créer un [objet principal du service](https:
     }
     EOF
     ```
-    Pour déployer un cluster **RBAC** activé, définissez le champ `aksEnabledRBAC` sur `true`
+    Pour déployer un cluster sur lequel **Kubernetes RBAC** est activé, définissez le champ `aksEnableRBAC` sur `true`.
 
 ## <a name="deploy-components"></a>Déployer des composants
 Cette étape permet d’ajouter les composants suivants à votre abonnement :
 
-- [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/intro-kubernetes)
-- [Application Gateway](https://docs.microsoft.com/azure/application-gateway/overview) v2
-- [Réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview) avec 2 [sous-réseaux](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview)
-- [Adresse IP publique](https://docs.microsoft.com/azure/virtual-network/virtual-network-public-ip-address)
-- [Identité managée](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) qui sera utilisée par [AAD Pod Identity](https://github.com/Azure/aad-pod-identity/blob/master/README.md)
+- [Azure Kubernetes Service](../aks/intro-kubernetes.md)
+- [Application Gateway](./overview.md) v2
+- [Réseau virtuel](../virtual-network/virtual-networks-overview.md) avec 2 [sous-réseaux](../virtual-network/virtual-networks-overview.md)
+- [Adresse IP publique](../virtual-network/virtual-network-public-ip-address.md)
+- [Identité managée](../active-directory/managed-identities-azure-resources/overview.md) qui sera utilisée par [AAD Pod Identity](https://github.com/Azure/aad-pod-identity/blob/master/README.md)
 
 1. Téléchargez le modèle Azure Resource Manager et modifiez le modèle en fonction des besoins.
     ```bash
@@ -92,7 +92,7 @@ Cette étape permet d’ajouter les composants suivants à votre abonnement :
     az group create -n $resourceGroupName -l $location
 
     # modify the template as needed
-    az group deployment create \
+    az deployment group create \
             -g $resourceGroupName \
             -n $deploymentName \
             --template-file template.json \
@@ -101,7 +101,7 @@ Cette étape permet d’ajouter les composants suivants à votre abonnement :
 
 1. Une fois le déploiement terminé, téléchargez la sortie du déploiement dans un fichier nommé `deployment-outputs.json`.
     ```azurecli
-    az group deployment show -g $resourceGroupName -n $deploymentName --query "properties.outputs" -o json > deployment-outputs.json
+    az deployment group show -g $resourceGroupName -n $deploymentName --query "properties.outputs" -o json > deployment-outputs.json
     ```
 
 ## <a name="set-up-application-gateway-ingress-controller"></a>Configurer le contrôleur d’entrée Application Gateway
@@ -111,7 +111,7 @@ Avec les instructions de la section précédente, nous avons créé et configur�
 ### <a name="setup-kubernetes-credentials"></a>Configurer les informations d’identification Kubernetes
 Pour les étapes suivantes, nous avons besoin de configurer la commande [kubectl](https://kubectl.docs.kubernetes.io/), que nous utiliserons pour nous connecter à notre nouveau cluster Kubernetes. [Cloud Shell](https://shell.azure.com/) a `kubectl` déjà installé. Nous utiliserons `az` CLI pour obtenir des informations d’identification pour Kubernetes.
 
-Obtenir des informations d’identification pour votre AKS récemment déployé ([en savoir plus](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough#connect-to-the-cluster)) :
+Obtenir des informations d’identification pour votre AKS récemment déployé ([en savoir plus](../aks/kubernetes-walkthrough.md#connect-to-the-cluster)) :
 ```azurecli
 # use the deployment-outputs.json created after deployment to get the cluster name and resource group name
 aksClusterName=$(jq -r ".aksClusterName.value" deployment-outputs.json)
@@ -121,7 +121,7 @@ az aks get-credentials --resource-group $resourceGroupName --name $aksClusterNam
 ```
 
 ### <a name="install-aad-pod-identity"></a>Installer AAD Pod Identity
-  Azure Active Directory Pod Identity offre un accès à base de jeton à [Azure Resource Manager (ARM)](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview).
+  Azure Active Directory Pod Identity offre un accès à base de jeton à [Azure Resource Manager (ARM)](../azure-resource-manager/management/overview.md).
 
   [AAD Pod Identity](https://github.com/Azure/aad-pod-identity) ajoute les composants suivants à votre cluster Kubernetes :
    * [Définitions CRD](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/) Kubernetes : `AzureIdentity`, `AzureAssignedIdentity`, `AzureIdentityBinding`
@@ -131,24 +131,24 @@ az aks get-credentials --resource-group $resourceGroupName --name $aksClusterNam
 
 Pour installer AAD Pod Identity sur votre cluster :
 
-   - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) activé*
+   - Cluster AKS sur lequel *Kubernetes RBAC* est activé
 
      ```bash
      kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment-rbac.yaml
      ```
 
-   - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) désactivé*
+   - Cluster AKS sur lequel *Kubernetes RBAC* est désactivé
 
      ```bash
      kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml
      ```
 
 ### <a name="install-helm"></a>Installer Helm
-[Helm](https://docs.microsoft.com/azure/aks/kubernetes-helm) est un gestionnaire de package pour Kubernetes. Nous allons l’utiliser pour installer le package `application-gateway-kubernetes-ingress` :
+[Helm](../aks/kubernetes-helm.md) est un gestionnaire de package pour Kubernetes. Nous allons l’utiliser pour installer le package `application-gateway-kubernetes-ingress` :
 
-1. Installez [Helm](https://docs.microsoft.com/azure/aks/kubernetes-helm) et exécutez la commande suivante pour ajouter le package Helm `application-gateway-kubernetes-ingress` :
+1. Installez [Helm](../aks/kubernetes-helm.md) et exécutez la commande suivante pour ajouter le package Helm `application-gateway-kubernetes-ingress` :
 
-    - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) activé*
+    - Cluster AKS sur lequel *Kubernetes RBAC* est activé
 
         ```bash
         kubectl create serviceaccount --namespace kube-system tiller-sa
@@ -156,7 +156,7 @@ Pour installer AAD Pod Identity sur votre cluster :
         helm init --tiller-namespace kube-system --service-account tiller-sa
         ```
 
-    - Cluster AKS *contrôle d’accès en fonction du rôle (RBAC) désactivé*
+    - Cluster AKS sur lequel *Kubernetes RBAC* est désactivé
 
         ```bash
         helm init
@@ -228,7 +228,7 @@ Pour installer AAD Pod Identity sur votre cluster :
     #    secretJSON: <<Generate this value with: "az ad sp create-for-rbac --subscription <subscription-uuid> --sdk-auth | base64 -w0" >>
     
     ################################################################################
-    # Specify if the cluster is RBAC enabled or not
+    # Specify if the cluster is Kubernetes RBAC enabled or not
     rbac:
         enabled: false # true/false
     

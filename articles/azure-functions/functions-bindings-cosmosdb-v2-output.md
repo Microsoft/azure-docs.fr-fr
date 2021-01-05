@@ -1,18 +1,19 @@
 ---
-title: Liaison de sortie Azure Cosmos DB pour Functions 2.x
+title: Liaison de sortie Azure Cosmos DB pour Functions 2.x et versions ultérieures
 description: Découvrez comment utiliser la liaison de sortie Azure Cosmos DB dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/24/2020
 ms.author: cshoe
-ms.openlocfilehash: 743bd21a4fd974654760402a639c661fe086d2d5
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: 454ac9a377800bd11a53250569c3e7b65bac713a
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735009"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558791"
 ---
-# <a name="azure-cosmos-db-output-binding-for-azure-functions-2x"></a>Liaison de sortie Azure Cosmos DB pour Azure Functions 2.x
+# <a name="azure-cosmos-db-output-binding-for-azure-functions-2x-and-higher"></a>Liaison de sortie Azure Cosmos DB pour Azure Functions 2.x et versions ultérieures
 
 La liaison de sortie Azure Cosmos DB vous permet d’écrire un nouveau document dans une base de données Azure Cosmos DB en utilisant l’API SQL.
 
@@ -298,6 +299,29 @@ Voici le code JavaScript :
         address: context.bindings.myQueueItem.address
       });
 
+      context.done();
+    };
+```
+
+Pour BULK INSERT, commencez par créer les objets, puis exécutez la fonction de stringification. Voici le code JavaScript :
+
+```javascript
+    module.exports = function (context) {
+    
+        context.bindings.employeeDocument = JSON.stringify([
+        {
+            "id": "John Henry-123456",
+            "name": "John Henry",
+            "employeeId": "123456",
+            "address": "A town nearby"
+        },
+        {
+            "id": "John Doe-123457",
+            "name": "John Doe",
+            "employeeId": "123457",
+            "address": "A town far away"
+        }]);
+    
       context.done();
     };
 ```
@@ -590,7 +614,7 @@ Par défaut, lorsque vous écrivez dans le paramètre de sortie de votre fonctio
 
 | Liaison | Informations de référence |
 |---|---|
-| CosmosDB | [Codes d’erreur CosmosDB](https://docs.microsoft.com/rest/api/cosmos-db/http-status-codes-for-cosmosdb) |
+| CosmosDB | [Codes d’erreur CosmosDB](/rest/api/cosmos-db/http-status-codes-for-cosmosdb) |
 
 <a name="host-json"></a>
 

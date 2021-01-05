@@ -3,7 +3,7 @@ title: Éditer les visages avec Azure Media Analytics | Microsoft Docs
 description: Azure Media Redactor est un processeur multimédia Azure Media Analytics qui offre une fonctionnalité scalable d’édition des visages dans le cloud. Cet article explique comment éditer des visages avec Azure Media Analytics.
 services: media-services
 documentationcenter: ''
-author: juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
@@ -11,27 +11,34 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 03/18/2019
-ms.author: juliako
-ms.openlocfilehash: 6a1b7a76ef1efda51f09ac733b3d434235ff40ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/17/2020
+ms.author: inhenkel
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 1a7bd36a6e3f3cc5b785745fc51f0aede3b47b74
+ms.sourcegitcommit: 7e97ae405c1c6c8ac63850e1b88cf9c9c82372da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74900298"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97803304"
 ---
-# <a name="redact-faces-with-azure-media-analytics"></a>Éditer les visages avec Azure Media Analytique 
+# <a name="redact-faces-with-azure-media-analytics"></a>Éditer les visages avec Azure Media Analytique
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 ## <a name="overview"></a>Vue d’ensemble
-**Azure Media Redactor** est un processeur multimédia [Azure Media Analytics](media-services-analytics-overview.md) qui offre la rédaction de face évolutive dans le cloud. La rédaction de face vous permet de modifier votre vidéo afin de flouter les visages des individus sélectionnés. Vous souhaitez peut-être utiliser le service de rédaction de face dans des scénarios de média et de sécurité publics. Quelques minutes de séquences vidéo contenant plusieurs visages peuvent nécessiter des heures de traitement manuel, mais avec ce service, le processus de rédaction de face ne nécessitera que quelques étapes simples. Pour plus d’informations, consultez [ce blog](https://azure.microsoft.com/blog/azure-media-redactor/).
+
+**Azure Media Redactor** est un processeur multimédia [Azure Media Analytics](./legacy-components.md) qui offre la rédaction de face évolutive dans le cloud. La rédaction de face vous permet de modifier votre vidéo afin de flouter les visages des individus sélectionnés. Vous souhaitez peut-être utiliser le service de rédaction de face dans des scénarios de média et de sécurité publics. Quelques minutes de séquences vidéo contenant plusieurs visages peuvent nécessiter des heures de traitement manuel, mais avec ce service, le processus de rédaction de face ne nécessitera que quelques étapes simples.
 
 Cet article apporte des précisions sur **Azure Media Redactor** et illustre son utilisation avec le kit SDK Media Services pour .NET.
 
 ## <a name="face-redaction-modes"></a>Modes de rédaction de face
+
 La rédaction de face fonctionne en détectant les visages dans chaque image de la vidéo et en suivant l’objet de visage à la fois vers l’avant et l’arrière dans le temps, afin que la même personne puisse être floutée à partir d’autres angles également. Le processus d’édition automatisée est complexe et ne produit pas toujours le résultat souhaité à 100 %, c’est la raison pour laquelle Media Analytics vous fournit deux méthodes pour modifier le résultat final.
 
 En plus d’un mode entièrement automatique, il existe un flux de travail en deux passes qui permet la sélection/désélection des visages trouvés par le biais d’une liste d’ID. En outre, pour rendre arbitraires les réglages par image, le processeur multimédia utilise un fichier de métadonnées au format JSON. Ce flux de travail est divisé en modes **Analyser** et **Rédiger**. Vous pouvez combiner les deux modes en une seule passe qui exécute les deux tâches dans un travail ; ce mode est appelé **Combiné**.
 
 ### <a name="combined-mode"></a>Mode Combiné
+
 Un mp4 rédigé automatiquement est généré sans entrée manuelle.
 
 | Étape | Nom de fichier | Notes |
@@ -40,13 +47,8 @@ Un mp4 rédigé automatiquement est généré sans entrée manuelle.
 | Configuration d’entrée |Job configuration preset |{'version':'1.0', 'options': {'mode':'combined'}} |
 | Élément multimédia de sortie |foo_redacted.mp4 |Vidéo avec flou appliqué |
 
-#### <a name="input-example"></a>Exemple d’entrée :
-[regarder cette vidéo](https://ampdemo.azureedge.net/?url=https%3A%2F%2Freferencestream-samplestream.streaming.mediaservices.windows.net%2Fed99001d-72ee-4f91-9fc0-cd530d0adbbc%2FDancing.mp4)
-
-#### <a name="output-example"></a>Exemple de sortie :
-[regarder cette vidéo](https://ampdemo.azureedge.net/?url=https%3A%2F%2Freferencestream-samplestream.streaming.mediaservices.windows.net%2Fc6608001-e5da-429b-9ec8-d69d8f3bfc79%2Fdance_redacted.mp4)
-
 ### <a name="analyze-mode"></a>Mode Analyser
+
 La passe **Analyser** du flux de travail en deux passes accepte une entrée vidéo et produit un fichier JSON d’emplacements de visage et des images jpg de chaque visage détecté.
 
 | Étape | Nom de fichier | Notes |
@@ -56,58 +58,59 @@ La passe **Analyser** du flux de travail en deux passes accepte une entrée vid�
 | Élément multimédia de sortie |foo_annotations.json |Données d’annotation des emplacements de visage au format JSON. Cela peut être modifié par l’utilisateur pour changer les cadres de limitation du flou. Voir l’exemple ci-dessous. |
 | Élément multimédia de sortie |foo_thumb%06d.jpg [foo_thumb000001.jpg, foo_thumb000002.jpg] |Une image jpg rognée de chaque visage détecté, où le nombre indique l’ID d’étiquette du visage |
 
-#### <a name="output-example"></a>Exemple de sortie :
+#### <a name="output-example"></a>Exemple de sortie
 
 ```json
+{
+  "version": 1,
+  "timescale": 24000,
+  "offset": 0,
+  "framerate": 23.976,
+  "width": 1280,
+  "height": 720,
+  "fragments": [
     {
-      "version": 1,
-      "timescale": 24000,
-      "offset": 0,
-      "framerate": 23.976,
-      "width": 1280,
-      "height": 720,
-      "fragments": [
-        {
-          "start": 0,
-          "duration": 48048,
-          "interval": 1001,
-          "events": [
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [
-              {
-                "index": 13,
-                "id": 1138,
-                "x": 0.29537,
-                "y": -0.18987,
-                "width": 0.36239,
-                "height": 0.80335
-              },
-              {
-                "index": 13,
-                "id": 2028,
-                "x": 0.60427,
-                "y": 0.16098,
-                "width": 0.26958,
-                "height": 0.57943
-              }
-            ],
+      "start": 0,
+      "duration": 48048,
+      "interval": 1001,
+      "events": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [
+          {
+            "index": 13,
+            "id": 1138,
+            "x": 0.29537,
+            "y": -0.18987,
+            "width": 0.36239,
+            "height": 0.80335
+          },
+          {
+            "index": 13,
+            "id": 2028,
+            "x": 0.60427,
+            "y": 0.16098,
+            "width": 0.26958,
+            "height": 0.57943
+          }
+        ],
 
-    … truncated
+    ... truncated
 ```
 
 ### <a name="redact-mode"></a>Mode Rédiger
+
 La deuxième passe du flux de travail prend un plus grand nombre d’entrées qui doivent être combinées en un seul élément multimédia.
 
 Cela inclut une liste des ID à flouter, la vidéo d’origine et les annotations JSON. Ce mode utilise les annotations pour appliquer le flou sur la vidéo d’entrée.
@@ -123,15 +126,16 @@ La sortie de la passe Analyser n’inclut pas la vidéo d’origine. La vidéo d
 | Élément multimédia de sortie |foo_redacted.mp4 |Vidéo avec flou appliqué en fonction des annotations |
 
 #### <a name="example-output"></a>Exemple de sortie
+
 Il s’agit de la sortie à partir d’une liste d’ID avec un ID sélectionné.
 
-[regarder cette vidéo](https://ampdemo.azureedge.net/?url=https%3A%2F%2Freferencestream-samplestream.streaming.mediaservices.windows.net%2Fad6e24a2-4f9c-46ee-9fa7-bf05e20d19ac%2Fdance_redacted1.mp4)
-
 Exemple : foo_IDList.txt
- 
-     1
-     2
-     3
+
+```
+1
+2
+3
+```
 
 ## <a name="blur-types"></a>Types de flou
 
@@ -139,16 +143,22 @@ En mode **Combiné** ou **Rédiger**, 5 modes de flou sont disponibles par le b
 
 Vous trouverez des exemples de types de flou ci-dessous.
 
-### <a name="example-json"></a>Exemple JSON :
+### <a name="example-json"></a>Exemple JSON
 
 ```json
-    {'version':'1.0', 'options': {'Mode': 'Combined', 'BlurType': 'High'}}
+{
+    'version':'1.0',
+    'options': {
+        'Mode': 'Combined',
+        'BlurType': 'High'
+    }
+}
 ```
 
 #### <a name="low"></a>Faible
 
 ![Faible](./media/media-services-face-redaction/blur1.png)
- 
+
 #### <a name="med"></a>Med (Moyen)
 
 ![Med (Moyen)](./media/media-services-face-redaction/blur2.png)
@@ -187,11 +197,11 @@ Le programme suivant montre comment effectuer les tâches suivantes :
             }
     ```
 
-3. Télécharger les fichiers JSON de sortie. 
+3. Télécharger les fichiers JSON de sortie.
 
-#### <a name="create-and-configure-a-visual-studio-project"></a>Créer et configurer un projet Visual Studio
+### <a name="create-and-configure-a-visual-studio-project"></a>Créer et configurer un projet Visual Studio
 
-Configurez votre environnement de développement et ajoutez des informations de connexion au fichier app.config selon la procédure décrite dans l’article [Développement Media Services avec .NET](media-services-dotnet-how-to-use.md). 
+Configurez votre environnement de développement et ajoutez des informations de connexion au fichier app.config selon la procédure décrite dans l’article [Développement Media Services avec .NET](media-services-dotnet-how-to-use.md).
 
 #### <a name="example"></a>Exemple
 
@@ -368,10 +378,11 @@ namespace FaceRedaction
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
+
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
 ## <a name="related-links"></a>Liens connexes
-[Vue d’ensemble d’Azure Media Services Analytics](media-services-analytics-overview.md)
 
-[Démonstrations Azure Media Analytics](https://azuremedialabs.azurewebsites.net/demos/Analytics.html)
+[Vue d’ensemble d’Azure Media Services Analytics](./legacy-components.md)
 
+[Démonstrations Azure Media Analytics](http://amslabs.azurewebsites.net/demos/Analytics.html)

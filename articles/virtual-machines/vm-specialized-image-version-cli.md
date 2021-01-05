@@ -9,16 +9,17 @@ ms.topic: how-to
 ms.date: 04/23/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: 1ccf03deee2a2f72c1eb2008e1acc5bf67d16447
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 478413132a09334c6b5fe6e4d7c4c31c988cd38d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793893"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87501046"
 ---
 # <a name="create-a-vm-using-a-specialized-image-version-with-the-azure-cli"></a>Créer une machine virtuelle à l’aide d’une version d’image spécialisée avec Azure CLI
 
-Créez une machine virtuelle à partir d’une [version d’image spécialisée](https://docs.microsoft.com/azure/virtual-machines/linux/shared-image-galleries#generalized-and-specialized-images) stockée dans une galerie d’images partagées. Si vous souhaitez créer une machine virtuelle à l’aide d’une version d’image généralisée, consultez [Créer une machine virtuelle à partir d’une version d’image généralisée](vm-generalized-image-version-cli.md).
+Créez une machine virtuelle à partir d’une [version d’image spécialisée](./linux/shared-image-galleries.md#generalized-and-specialized-images) stockée dans une galerie d’images partagées. Si vous souhaitez créer une machine virtuelle à l’aide d’une version d’image généralisée, consultez [Créer une machine virtuelle à partir d’une version d’image généralisée](vm-generalized-image-version-cli.md).
 
 Remplacez les noms de ressources en fonction des besoins dans cet exemple. 
 
@@ -58,5 +59,3 @@ Vous pouvez également créer la ressource de galerie d’images partagées à l
 - [Créer une définition d’image dans une galerie d’images partagées](https://azure.microsoft.com/resources/templates/101-sig-image-definition-create/)
 - [Créer une version d’image dans une galerie d’images partagées](https://azure.microsoft.com/resources/templates/101-sig-image-version-create/)
 - [Créer une machine virtuelle à partir d’une version d’image](https://azure.microsoft.com/resources/templates/101-vm-from-sig/)
-
-

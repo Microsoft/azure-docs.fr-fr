@@ -13,12 +13,12 @@ ms.date: 04/28/2020
 ms.author: ryanwi
 ms.reviewer: jmprieur, saeeda, sureshja, hirsin
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: 774822eae5ab327f57da3eca4499ca14d3e0c7a1
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 5aca96a9c3bc4e8f1061f677e316565b10014ac9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584165"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88117479"
 ---
 # <a name="application-model"></a>Modèle d'application
 
@@ -86,4 +86,4 @@ Pour en savoir plus sur le modèle d’application :
 
 * Pour plus d’informations sur les objets d’application et les principaux de service dans la Plateforme d’identités Microsoft, consultez [Comment et pourquoi les applications sont ajoutées à Azure AD](active-directory-how-applications-are-added.md).
 * Pour plus d’informations sur les applications à locataire unique et les applications mutualisées, consultez [Location dans Azure Active Directory](single-and-multi-tenant-apps.md).
-* Pour plus d’informations sur la façon dont Azure AD fournit également Azure Active Directory B2C pour permettre aux organisations de connecter des utilisateurs, généralement des clients, à l’aide d’identités sociales telles qu’un compte Google, consultez la [documentation d’Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c).
+* Pour plus d’informations sur la façon dont Azure AD fournit également Azure Active Directory B2C pour permettre aux organisations de connecter des utilisateurs, généralement des clients, à l’aide d’identités sociales telles qu’un compte Google, consultez la [documentation d’Azure Active Directory B2C](../../active-directory-b2c/index.yml).

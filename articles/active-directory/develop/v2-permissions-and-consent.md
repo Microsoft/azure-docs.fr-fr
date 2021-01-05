@@ -1,6 +1,6 @@
 ---
 title: Étendues, autorisations et consentement de la plateforme d’identités Microsoft
-description: Il s’agit d’une description de l’autorisation dans le point de terminaison de la plateforme d’identités Microsoft, ce qui comprend notamment les étendues, les autorisations et les consentements.
+description: Découvrez l’autorisation dans le point de terminaison de la plateforme d’identités Microsoft, ce qui comprend notamment les étendues, les autorisations et les consentements.
 services: active-directory
 author: rwike77
 manager: CelesteDG
@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 1/3/2020
+ms.date: 09/23/2020
 ms.author: ryanwi
-ms.reviewer: hirsin, jesakowi, jmprieur
-ms.custom: aaddev, fasttrack-edit
-ms.openlocfilehash: 5495aa6fda189897985ed2f198f6e92c996f6fef
-ms.sourcegitcommit: af1cbaaa4f0faa53f91fbde4d6009ffb7662f7eb
+ms.reviewer: hirsin, jesakowi, jmprieur, marsma
+ms.custom: aaddev, fasttrack-edit, contperf-fy21q1, identityplatformtop40
+ms.openlocfilehash: 14b6d6ecc6523199102fd3ef9370fe901c4ff51d
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81868378"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97355696"
 ---
 # <a name="permissions-and-consent-in-the-microsoft-identity-platform-endpoint"></a>Autorisations et consentement dans le point de terminaison de la plateforme d’identités Microsoft
 
@@ -28,11 +28,11 @@ Les applications qui s’intègrent à la plateforme d’identité Microsoft sui
 La plateforme d’identité Microsoft implémente le protocole d’autorisation [OAuth 2.0](active-directory-v2-protocols.md). OAuth 2.0 est une méthode par le biais de laquelle une application tierce peut accéder aux ressources hébergées sur le web au nom d’un utilisateur. Les ressources hébergées sur le web qui s’intègrent à la plateforme d’identité Microsoft présentent un identificateur de ressource, également appelé *URI d’ID d’application*. Voici, par exemple, quelques-unes des ressources hébergées sur le Web de Microsoft :
 
 * Microsoft Graph : `https://graph.microsoft.com`
-* API de messagerie Office 365 : `https://outlook.office.com`
+* API de messagerie Microsoft 365 : `https://outlook.office.com`
 * Azure Key Vault : `https://vault.azure.net`
 
 > [!NOTE]
-> Nous vous recommandons fortement d’utiliser Microsoft Graph à la place de l’API de messagerie Office 365, etc.
+> Nous vous recommandons fortement d’utiliser Microsoft Graph à la place de l’API de messagerie Microsoft 365, etc.
 
 Cela s’applique également aux ressources tierces intégrées à la plateforme d’identité Microsoft. Ces ressources peuvent également définir un ensemble d’autorisations à utiliser pour diviser la fonctionnalité de cette ressource en fragments plus réduits. Par exemple, [Microsoft Graph](https://graph.microsoft.com) a défini des autorisations pour effectuer les tâches suivantes, entre autres :
 
@@ -48,19 +48,19 @@ Dans OAuth 2.0, ces types d’autorisations sont appelés des *étendues*. Ils 
 * Écrire dans le calendrier d’un utilisateur en utilisant `Calendars.ReadWrite`
 * Envoi de messages en tant qu’utilisateur en utilisant `Mail.Send`
 
-Généralement, une application peut demander ces autorisations en spécifiant les étendues dans les demandes dirigées vers le point de terminaison d’autorisation de la plateforme d’identités Microsoft. Toutefois, certaines autorisations à privilèges élevés peuvent uniquement être accordées par le biais du consentement de l’administrateur. Elles sont demandées/accordées à l’aide du [point de terminaison de consentement de l’administrateur](v2-permissions-and-consent.md#admin-restricted-permissions). Lisez la suite pour en savoir plus.
+Généralement, une application peut demander ces autorisations en spécifiant les étendues dans les demandes dirigées vers le point de terminaison d’autorisation de la plateforme d’identités Microsoft. Toutefois, certaines autorisations à privilèges élevés peuvent uniquement être accordées par le biais du consentement de l’administrateur. Elles sont demandées/accordées à l’aide du [point de terminaison de consentement de l’administrateur](#admin-restricted-permissions). Lisez la suite pour en savoir plus.
 
 ## <a name="permission-types"></a>Types d'autorisations
 
 La plateforme d’identité Microsoft prend en charge deux types d’autorisations : les **autorisations déléguées** et les **autorisations d’application**.
 
-* Les **autorisations déléguées** sont utilisées par les applications pour lesquelles un utilisateur est connecté et présent. Pour ces applications, l’utilisateur ou un administrateur accorde les autorisations que l’application demande. Ensuite, l’application se voit déléguer une autorisation d’agir pour le compte de l’utilisateur connecté lors des appels à une ressource cible. Certaines autorisations déléguées peuvent être accordées par des utilisateurs non administrateurs, mais certaines autorisations à privilèges élevés requièrent le [consentement de l’administrateur](v2-permissions-and-consent.md#admin-restricted-permissions). Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../users-groups-roles/directory-assign-admin-roles.md).
+* Les **autorisations déléguées** sont utilisées par les applications pour lesquelles un utilisateur est connecté et présent. Pour ces applications, l’utilisateur ou un administrateur accorde les autorisations que l’application demande. Ensuite, l’application se voit déléguer une autorisation d’agir pour le compte de l’utilisateur connecté lors des appels à une ressource cible. Certaines autorisations déléguées peuvent être accordées par des utilisateurs non administrateurs, mais certaines autorisations à privilèges élevés requièrent le [consentement de l’administrateur](#admin-restricted-permissions). Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../roles/permissions-reference.md).
 
-* Les **autorisations d’application** sont utilisées par les applications qui s’exécutent sans qu’un utilisateur soit connecté et présent (les applications qui s’exécutent en tant que services ou démons en arrière-plan, par exemple).  Les autorisations de l’application peuvent uniquement être [accordées par un administrateur](v2-permissions-and-consent.md#requesting-consent-for-an-entire-tenant).
+* Les **autorisations d’application** sont utilisées par les applications qui s’exécutent sans qu’un utilisateur soit connecté et présent (les applications qui s’exécutent en tant que services ou démons en arrière-plan, par exemple).  Les autorisations de l’application peuvent uniquement être [accordées par un administrateur](#requesting-consent-for-an-entire-tenant).
 
 Les _autorisations effectives_ correspondent aux autorisations accordées à votre application lorsqu’elle envoie des requêtes à une ressource cible. Vous devez comprendre la différence entre les autorisations déléguées, les autorisations d’application et les autorisations effectives que votre application reçoit lorsqu’elle interroge la ressource cible.
 
-- Pour les autorisations déléguées, les _autorisations effectives_ de votre application correspondent au niveau de privilège le moins élevé entre les autorisations déléguées que l’application a reçues (par le biais d’un consentement) et les privilèges de l’utilisateur actuellement connecté. Votre application ne peut jamais avoir plus de privilèges que l’utilisateur connecté. Au sein des organisations, les privilèges de l’utilisateur connecté peuvent être déterminés par la stratégie ou l’appartenance à un ou plusieurs rôles d’administrateur. Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../users-groups-roles/directory-assign-admin-roles.md).
+- Pour les autorisations déléguées, les _autorisations effectives_ de votre application correspondent au niveau de privilège le moins élevé entre les autorisations déléguées que l’application a reçues (par le biais d’un consentement) et les privilèges de l’utilisateur actuellement connecté. Votre application ne peut jamais avoir plus de privilèges que l’utilisateur connecté. Au sein des organisations, les privilèges de l’utilisateur connecté peuvent être déterminés par la stratégie ou l’appartenance à un ou plusieurs rôles d’administrateur. Pour connaître les rôles administrateur habilités à donner leur consentement pour les autorisations déléguées, consultez [Autorisations du rôle administrateur dans Azure AD](../roles/permissions-reference.md).
 
    Supposons que votre application ait reçu l’autorisation déléguée _User.ReadWrite.All_. Cette autorisation permet nominalement à votre application de lire et mettre à jour le profil de chaque utilisateur dans une organisation. Si l’utilisateur connecté est un administrateur général, votre application est en mesure de mettre à jour le profil de chaque utilisateur de l’organisation. Toutefois, si l’utilisateur connecté n’a pas de rôle d’administrateur, votre application peut uniquement mettre à jour le profil de l’utilisateur connecté. Elle ne peut pas mettre à jour les profils des autres utilisateurs de l’organisation, car l’utilisateur pour lequel elle est autorisée à agir n’a pas ces privilèges.
 
@@ -68,7 +68,9 @@ Les _autorisations effectives_ correspondent aux autorisations accordées à vot
 
 ## <a name="openid-connect-scopes"></a>Étendues OpenId Connect
 
-L’implémentation d’OpenID Connect de la plateforme d’identités Microsoft comprend quelques étendues bien définies qui ne s’appliquent pas à une ressource particulière : `openid`, `email`, `profile` et `offline_access`. Les étendues OpenID Connect `address` et `phone` ne sont pas prises en charge.
+L'implémentation d'OpenID Connect sur la plateforme d'identités Microsoft comprend quelques étendues bien définies qui sont également hébergées sur l'instance de Microsoft Graph : `openid`, `email`, `profile` et `offline_access`. Les étendues OpenID Connect `address` et `phone` ne sont pas prises en charge.
+
+En demandant les étendues OIDC et un jeton, vous obtiendrez un jeton pour appeler le [point de terminaison UserInfo](userinfo.md).
 
 ### <a name="openid"></a>openid
 
@@ -87,7 +89,7 @@ L’étendue `profile` peut être utilisée avec l’étendue `openid` ainsi que
 [L’étendue `offline_access`](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess) permet à votre application d’accéder aux ressources pour le compte de l’utilisateur pendant une période prolongée. Dans la page de consentement, cette étendue apparaît comme l’autorisation « Conserver l’accès aux données auxquelles vous lui avez donné l’accès ». Lorsqu’un utilisateur approuve l’étendue `offline_access`, votre application peut recevoir les jetons d’actualisation du point de terminaison des jetons de la plateforme d’identités Microsoft. Les jetons d’actualisation sont de longue durée. Votre application peut obtenir de nouveaux jetons d’accès lorsque les plus anciens arrivent à expiration.
 
 > [!NOTE]
-> Cette autorisation s’affiche sur tous les écrans de consentement du jour, même pour les flux qui ne fournissent pas de jeton d’actualisation (le [flux implicite](v2-oauth2-implicit-grant-flow.md)).  Cela permet de couvrir les scénarios dans lesquels un client peut commencer dans le cadre du flux implicite, puis passer au flux de code où un jeton d’actualisation est attendu.
+> Cette autorisation s’affiche sur tous les écrans de consentement du jour, même pour les flux qui ne fournissent pas de jeton d’actualisation (le [flux implicite](v2-oauth2-implicit-grant-flow.md)). Cela permet de couvrir les scénarios dans lesquels un client peut commencer dans le cadre du flux implicite, puis passer au flux de code où un jeton d’actualisation est attendu.
 
 Sur la plateforme d’identités Microsoft (requêtes adressées au point de terminaison v2.0), votre application doit demander explicitement l’étendue `offline_access` pour recevoir les jetons d’actualisation. Ainsi, lorsque vous échangez un code d’autorisation dans le [flux de code d’autorisation OAuth 2.0](active-directory-v2-protocols.md), vous recevez uniquement un jeton d’accès du point de terminaison `/token`. Le jeton d’accès est valide pendant une courte durée : il arrive généralement à expiration en une heure. À ce stade, votre application doit rediriger l’utilisateur vers le point de terminaison `/authorize` afin de récupérer un nouveau code d’autorisation. Pendant ce réacheminement, en fonction du type d’application, l’utilisateur peut devoir entrer à nouveau ses informations d’identification ou accepter une nouvelle fois les autorisations.
 
@@ -300,6 +302,16 @@ response_type=token            //code or a hybrid flow is also possible here
 
 Cela génère un écran de consentement pour toutes les autorisations inscrites (si cela est applicable en fonction des descriptions ci-dessus du consentement et de `/.default`), puis retourne un jeton id_token, plutôt qu’un jeton d’accès.  Ce comportement existe pour certains clients hérités qui passent de la bibliothèque ADAL à la bibliothèque MSAL et **ne doit pas** être utilisé par les nouveaux clients ciblant le point de terminaison de la plateforme d’identités Microsoft.
 
+### <a name="client-credentials-grant-flow-and-default"></a>Flux d’octroi des informations d’identification du client et /.default
+
+Une autre utilisation de `/.default` consiste à demander des autorisations d’application (ou des *rôles*) dans une application non interactive telle qu’une application démon qui utilise le flux d’octroi des [informations d’identification du client](v2-oauth2-client-creds-grant-flow.md) pour appeler une API Web.
+
+Pour créer des autorisations d’application (rôles) pour une API Web, consultez [Procédure : Ajouter des rôles d’application dans votre application](howto-add-app-roles-in-azure-ad-apps.md).
+
+Les demandes d’informations d’identification du client dans votre application cliente **doivent** inclure `scope={resource}/.default`, où `{resource}` est l’API Web que votre application envisage d’appeler. L’émission d’une demande d’informations d’identification du client avec des autorisations d’application individuelles (rôles) n’est **pas** prise en charge. Toutes les autorisations d’application (rôles) qui ont été accordées pour cette API Web seront incluses dans le jeton d’accès retourné.
+
+Pour accorder l’accès aux autorisations d’application que vous définissez, y compris l’octroi du consentement administrateur pour l’application, consultez [Démarrage rapide : Configurer une application cliente pour accéder à une API Web](quickstart-configure-app-access-web-apis.md).
+
 ### <a name="trailing-slash-and-default"></a>Barre oblique de fin et /.default
 
 Certains URI de ressource sont dotés d'une barre oblique de fin (`https://contoso.com/` par opposition à `https://contoso.com`), ce qui peut entraîner des problèmes de validation des jetons.  Cela survient principalement en cas de demande de jeton pour la gestion des ressources Azure (`https://management.azure.com/`), qui présente une barre oblique de fin dans leur URI de ressource et dont la présence est requise lorsque le jeton est demandé.  Ainsi, en cas de demande de jeton pour `https://management.azure.com/` et à l'aide de `/.default`, vous devez demander `https://management.azure.com//.default` (notez de la double barre oblique).
@@ -309,3 +321,8 @@ En général, si vous avez validé l'émission du jeton et que celui-ci est reje
 ## <a name="troubleshooting-permissions-and-consent"></a>Résolution des problèmes d’autorisations et de consentement
 
 Si vous, ou les utilisateurs de votre application, constatez des erreurs inattendues au cours du processus de consentement, consultez cet article pour connaître les étapes de dépannage : [Erreur inattendue lors du consentement à une application](../manage-apps/application-sign-in-unexpected-user-consent-error.md).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+* [Jetons d’ID | Plateforme d’identités Microsoft](id-tokens.md)
+* [Jetons d’accès | Plateforme d’identités Microsoft](access-tokens.md)

@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/28/2020
-ms.openlocfilehash: 01cdc121abded954c2443599c5d69689acd69b62
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: a93b3e0da7b881b80f7613907e40af509bffadbd
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82562336"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92545563"
 ---
 # <a name="apache-spark-guidelines"></a>Instructions Apache Spark
 
@@ -56,14 +56,14 @@ Cet article présente différentes instructions pour l’utilisation d’Apache 
 | Apache Hive sur HDInsight | [Intégrer Apache Spark et Apache Hive au le connecteur d’entrepôt Hive](../interactive-query/apache-hive-warehouse-connector.md) |
 | Apache HBase sur HDInsight | [Utiliser Apache Spark pour lire et écrire des données Apache HBase](../hdinsight-using-spark-query-hbase.md) |
 | Apache Kafka sur HDInsight | [Tutoriel : Utiliser Apache Spark Structured Streaming avec Apache Kafka sur HDInsight](../hdinsight-apache-kafka-spark-structured-streaming.md) |
-| Azure Cosmos DB | [Azure Cosmos DB : Implémenter une architecture lambda sur la plateforme Azure](../../cosmos-db/lambda-architecture.md) |
+| Azure Cosmos DB | [Azure Synapse Link pour Azure Cosmos DB](../../cosmos-db/synapse-link.md) |
 
 ## <a name="what-are-my-storage-options"></a>Quelles sont mes options de stockage ?
 
 | Option | Documents |
 |---|---|
-| Data Lake Storage Gen2 | [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../hdinsight-hadoop-use-data-lake-storage-gen2.md) |
-| Data Lake Storage Gen 1 | [Utiliser Data Lake Storage Gen1 avec des clusters Azure HDInsight](../hdinsight-hadoop-use-data-lake-store.md) |
+| Azure Data Lake Storage Gen2 | [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../hdinsight-hadoop-use-data-lake-storage-gen2.md) |
+| Azure Data Lake Storage Gen1 | [Utilisation d’Azure Data Lake Storage Gen1 avec des clusters Azure HDInsight](../hdinsight-hadoop-use-data-lake-storage-gen1.md) |
 | Stockage Blob Azure | [Utiliser Stockage Azure avec des clusters Azure HDInsight](../hdinsight-hadoop-use-blob-storage.md) |
 
 ## <a name="next-steps"></a>Étapes suivantes

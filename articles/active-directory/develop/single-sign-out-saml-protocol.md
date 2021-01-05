@@ -2,22 +2,22 @@
 title: Protocole SAML de déconnexion unique Azure
 description: Cet article décrit le protocole SAML de déconnexion unique dans Azure Active Directory
 services: active-directory
-author: rwike77
+author: kenwith
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 07/19/2017
-ms.author: ryanwi
+ms.author: kenwith
 ms.custom: aaddev
-ms.reviewer: hirsin
-ms.openlocfilehash: dbe21d020d5d01f24913b95587721403fa218cc8
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.reviewer: paulgarn
+ms.openlocfilehash: 1d09355993af96e9e0cd334c57174cdaa771b388
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80881263"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88118261"
 ---
 # <a name="single-sign-out-saml-protocol"></a>Protocole SAML de déconnexion unique
 
@@ -42,7 +42,7 @@ L’élément `LogoutRequest` envoyé à Azure AD requiert les attributs suivant
 
 * `ID` : identifie la demande de déconnexion. La valeur `ID` ne doit pas commencer par un chiffre. La méthode classique consiste à ajouter **id** à la représentation sous forme de chaîne d’un GUID.
 * `Version` : définissez la valeur de cet élément sur **2.0**. Cette valeur est requise.
-* `IssueInstant` : chaîne `DateTime` associée à une valeur UTC (temps universel coordonné) et au [format aller-retour (« o »)](https://msdn.microsoft.com/library/az4se3k1.aspx). Azure AD attend une valeur de ce type, mais ne l’applique pas.
+* `IssueInstant` : chaîne `DateTime` associée à une valeur UTC (temps universel coordonné) et au [format aller-retour (« o »)](/dotnet/standard/base-types/standard-date-and-time-format-strings). Azure AD attend une valeur de ce type, mais ne l’applique pas.
 
 ### <a name="issuer"></a>Émetteur
 L’élément `Issuer` dans `LogoutRequest` doit correspondre exactement à l’un des **ServicePrincipalNames** du service cloud dans Azure AD. En règle générale, il est défini sur **l’URI ID d’application** spécifié au moment de l’inscription de l’application.
@@ -66,7 +66,7 @@ Azure AD envoie une `LogoutResponse` en réponse à un élément `LogoutRequest`
 Azure AD définit les valeurs `ID`, `Version` et `IssueInstant` dans l’élément `LogoutResponse`. Il définit également l’élément `InResponseTo` sur la valeur de l’attribut `ID` de l’élément `LogoutRequest` qui a obtenu la réponse.
 
 ### <a name="issuer"></a>Émetteur
-Azure AD définit cette valeur sur `https://login.microsoftonline.com/<TenantIdGUID>/`, où \<TenantIdGUID> correspond à l’ID du locataire Azure AD.
+Azure AD définit cette valeur sur `https://login.microsoftonline.com/<TenantIdGUID>/`, où \<TenantIdGUID> correspond à l’ID client du client Azure AD.
 
 Pour évaluer la valeur de l’élément `Issuer` , utilisez la valeur de **l’URI ID d’application** spécifiée lors de l’inscription de l’application.
 

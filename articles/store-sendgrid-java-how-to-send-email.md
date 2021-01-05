@@ -15,12 +15,13 @@ ms.topic: article
 ms.date: 10/30/2014
 ms.author: erikre
 ms.reviewer: elmer.thomas@sendgrid.com; erika.berkland@sendgrid.com; vibhork
-ms.openlocfilehash: 8ae948e9c79cff4cd0c896b250743fd9dc521752
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: 9ff006b74b6202b02a2767aee4d853b1206ce60d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67876510"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015449"
 ---
 # <a name="how-to-send-email-using-sendgrid-from-java"></a>Envoi de courriers électroniques à l'aide de SendGrid depuis Java
 Ce guide présente l'exécution de tâches de programmation courantes avec le service de messagerie SendGrid dans Azure. Les exemples sont écrits en Java. Les scénarios traités incluent la **construction** et **l'envoi de courriers électroniques**, **l'ajout de pièces jointes**, **l'utilisation de filtres**, et la **mise à jour de propriétés**. Pour plus d'informations sur SendGrid et l'envoi de courriers électroniques, consultez la section [Étapes suivantes](#next-steps) .
@@ -45,134 +46,154 @@ Obtenez les bibliothèques javax.mail (à partir de <https://www.oracle.com/tech
 
 1. Spécifiez les valeurs SMTP, notamment le serveur SMTP qui, dans le cas de SendGrid, est smtp.sendgrid.net.
 
-```
-        import java.util.Properties;
-        import javax.mail.*;
-        import javax.mail.internet.*;
+    ```java
+    import java.util.Properties;
+    import javax.mail.*;
+    import javax.mail.internet.*;
 
-        public class MyEmailer {
-           private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
-           private static final String SMTP_AUTH_USER = "your_sendgrid_username";
-           private static final String SMTP_AUTH_PWD = "your_sendgrid_password";
+    public class MyEmailer {
+        private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
+        private static final String SMTP_AUTH_USER = "your_sendgrid_username";
+        private static final String SMTP_AUTH_PWD = "your_sendgrid_password";
 
-           public static void main(String[] args) throws Exception{
-               new MyEmailer().SendMail();
-           }
+        public static void main(String[] args) throws Exception{
+            new MyEmailer().SendMail();
+        }
 
-           public void SendMail() throws Exception
-           {
-              Properties properties = new Properties();
-                 properties.put("mail.transport.protocol", "smtp");
-                 properties.put("mail.smtp.host", SMTP_HOST_NAME);
-                 properties.put("mail.smtp.port", 587);
-                 properties.put("mail.smtp.auth", "true");
-                 // …
-```
+        public void SendMail() throws Exception
+        {
+            Properties properties = new Properties();
+                properties.put("mail.transport.protocol", "smtp");
+                properties.put("mail.smtp.host", SMTP_HOST_NAME);
+                properties.put("mail.smtp.port", 587);
+                properties.put("mail.smtp.auth", "true");
+                // …
+    ```
 
 1. Développez la classe *javax.mail.Authenticator*, puis, dans votre implémentation de la méthode *getPasswordAuthentication*, renvoyez votre nom d'utilisateur et votre mot de passe SendGrid.  
 
-       private class SMTPAuthenticator extends javax.mail.Authenticator {
-       public PasswordAuthentication getPasswordAuthentication() {
-          String username = SMTP_AUTH_USER;
-          String password = SMTP_AUTH_PWD;
-          return new PasswordAuthentication(username, password);
-       }
+    ```java
+    private class SMTPAuthenticator extends javax.mail.Authenticator {
+    public PasswordAuthentication getPasswordAuthentication() {
+        String username = SMTP_AUTH_USER;
+        String password = SMTP_AUTH_PWD;
+        return new PasswordAuthentication(username, password);
+    }
+    ```
 2. Créez une session de messagerie électronique authentifiée via un objet *javax.mail.Session* .  
 
-       Authenticator auth = new SMTPAuthenticator();
-       Session mailSession = Session.getDefaultInstance(properties, auth);
+    ```java
+    Authenticator auth = new SMTPAuthenticator();
+    Session mailSession = Session.getDefaultInstance(properties, auth);
+    ```
 3. Créez votre message et spécifiez des valeurs pour **À**, **De**, **Objet**. Cela est illustré dans la section [Comment créer un message électronique](#how-to-create-an-email).
 4. Envoyez le message via un objet *javax.mail.Transport* . Cela est illustré dans la section [Comment envoyer un message électronique][#comment-envoyer-un-message-électronique].
 
 ## <a name="how-to-create-an-email"></a>Procédure : créer un message électronique
 Le code suivant permet d'entrer des valeurs pour un message électronique.
 
-    MimeMessage message = new MimeMessage(mailSession);
-    Multipart multipart = new MimeMultipart("alternative");
-    BodyPart part1 = new MimeBodyPart();
-    part1.setText("Hello, Your Contoso order has shipped. Thank you, John");
-    BodyPart part2 = new MimeBodyPart();
-    part2.setContent(
-        "<p>Hello,</p>
-        <p>Your Contoso order has <b>shipped</b>.</p>
-        <p>Thank you,<br>John</br></p>",
-        "text/html");
-    multipart.addBodyPart(part1);
-    multipart.addBodyPart(part2);
-    message.setFrom(new InternetAddress("john@contoso.com"));
-    message.addRecipient(Message.RecipientType.TO,
-       new InternetAddress("someone@example.com"));
-    message.setSubject("Your recent order");
-    message.setContent(multipart);
+```java
+MimeMessage message = new MimeMessage(mailSession);
+Multipart multipart = new MimeMultipart("alternative");
+BodyPart part1 = new MimeBodyPart();
+part1.setText("Hello, Your Contoso order has shipped. Thank you, John");
+BodyPart part2 = new MimeBodyPart();
+part2.setContent(
+    "<p>Hello,</p>
+    <p>Your Contoso order has <b>shipped</b>.</p>
+    <p>Thank you,<br>John</br></p>",
+    "text/html");
+multipart.addBodyPart(part1);
+multipart.addBodyPart(part2);
+message.setFrom(new InternetAddress("john@contoso.com"));
+message.addRecipient(Message.RecipientType.TO,
+    new InternetAddress("someone@example.com"));
+message.setSubject("Your recent order");
+message.setContent(multipart);
+```
 
 ## <a name="how-to-send-an-email"></a>Procédure : Envoyer un e-mail
 Le code suivant permet d'envoyer un message électronique.
 
-    Transport transport = mailSession.getTransport();
-    // Connect the transport object.
-    transport.connect();
-    // Send the message.
-    transport.sendMessage(message, message.getAllRecipients());
-    // Close the connection.
-    transport.close();
+```java
+Transport transport = mailSession.getTransport();
+// Connect the transport object.
+transport.connect();
+// Send the message.
+transport.sendMessage(message, message.getAllRecipients());
+// Close the connection.
+transport.close();
+```
 
 ## <a name="how-to-add-an-attachment"></a>Procédure : ajouter une pièce jointe
 Le code suivant permet d'ajouter une pièce jointe.
 
-    // Local file name and path.
-    String attachmentName = "myfile.zip";
-    String attachmentPath = "c:\\myfiles\\";
-    MimeBodyPart attachmentPart = new MimeBodyPart();
-    // Specify the local file to attach.
-    DataSource source = new FileDataSource(attachmentPath + attachmentName);
-    attachmentPart.setDataHandler(new DataHandler(source));
-    // This example uses the local file name as the attachment name.
-    // They could be different if you prefer.
-    attachmentPart.setFileName(attachmentName);
-    multipart.addBodyPart(attachmentPart);
+```java
+// Local file name and path.
+String attachmentName = "myfile.zip";
+String attachmentPath = "c:\\myfiles\\";
+MimeBodyPart attachmentPart = new MimeBodyPart();
+// Specify the local file to attach.
+DataSource source = new FileDataSource(attachmentPath + attachmentName);
+attachmentPart.setDataHandler(new DataHandler(source));
+// This example uses the local file name as the attachment name.
+// They could be different if you prefer.
+attachmentPart.setFileName(attachmentName);
+multipart.addBodyPart(attachmentPart);
+```
 
 ## <a name="how-to-use-filters-to-enable-footers-tracking-and-analytics"></a>Procédure : utiliser des filtres pour activer les pieds de page, le suivi et l’analyse
 SendGrid offre des fonctionnalités de messagerie électronique supplémentaires grâce à l'utilisation des *filtres*. Il s'agit de paramètres que vous pouvez ajouter à un message électronique pour activer des fonctionnalités spécifiques telles que le suivi des clics, Google Analytics, le suivi d'abonnement, etc. Pour obtenir une liste exhaustive des filtres, consultez la page [Paramètres de filtre][Filter Settings].
 
 * Le code suivant permet d'insérer un filtre de pied de page entraînant l'affichage de texte HTML en bas du message électronique à envoyer.
 
-      message.addHeader("X-SMTPAPI",
-          "{\"filters\":
-          {\"footer\":
-          {\"settings\":
-          {\"enable\":1,\"text/html\":
-          \"<html><b>Thank you</b> for your business.</html>\"}}}}");
+    ```java
+    message.addHeader("X-SMTPAPI",
+        "{\"filters\":
+        {\"footer\":
+        {\"settings\":
+        {\"enable\":1,\"text/html\":
+        \"<html><b>Thank you</b> for your business.</html>\"}}}}");
+    ```
 * Parmi les exemples de filtres, on peut également citer le suivi des clics. Imaginons que le texte de votre courrier électronique contient un lien hypertexte comme celui qui suit, et que vous voulez suivre le taux de clics :
 
-      messagePart.setContent(
-          "Hello,
-          <p>This is the body of the message. Visit
-          <a href='http://www.contoso.com'>http://www.contoso.com</a>.</p>
-          Thank you.",
-          "text/html");
+    ```java
+    messagePart.setContent(
+        "Hello,
+        <p>This is the body of the message. Visit
+        <a href='http://www.contoso.com'>http://www.contoso.com</a>.</p>
+        Thank you.",
+        "text/html");
+    ```
 * Pour activer le suivi des clics, utilisez le code suivant :
 
-      message.addHeader("X-SMTPAPI",
-          "{\"filters\":
-          {\"clicktrack\":
-          {\"settings\":
-          {\"enable\":1}}}}");
+    ```java
+    message.addHeader("X-SMTPAPI",
+        "{\"filters\":
+        {\"clicktrack\":
+        {\"settings\":
+        {\"enable\":1}}}}");
+    ```
 
 ## <a name="how-to-update-email-properties"></a>Procédure : mettre à jour les propriétés du courrier électronique
 Vous pouvez remplacer certaines propriétés d’e-mail à l’aide de la **propriété set** ou en ajouter avec la **propriété add**.
 
 Par exemple, pour indiquer des adresses **ReplyTo** , utilisez le code suivant :
 
-    InternetAddress addresses[] =
-        { new InternetAddress("john@contoso.com"),
-          new InternetAddress("wendy@contoso.com") };
+```java
+InternetAddress addresses[] =
+    { new InternetAddress("john@contoso.com"),
+        new InternetAddress("wendy@contoso.com") };
 
-    message.setReplyTo(addresses);
+message.setReplyTo(addresses);
+```
 
 Pour ajouter un destinataire **Cc** , utilisez le code suivant :
 
-    message.addRecipient(Message.RecipientType.CC, new
-    InternetAddress("john@contoso.com"));
+```java
+message.addRecipient(Message.RecipientType.CC, new
+InternetAddress("john@contoso.com"));
+```
 
 ## <a name="how-to-use-additional-sendgrid-services"></a>Procédure : utiliser des services SendGrid supplémentaires
 SendGrid propose des API web qui peuvent vous aider à tirer parti de fonctionnalités SendGrid supplémentaires à partir de votre application Azure. Pour plus d'informations, consultez la [documentation de l'API SendGrid][SendGrid API documentation].

@@ -1,17 +1,16 @@
 ---
 title: Guide de démarrage rapide - Sauvegarder une machine virtuelle avec le portail Azure
 description: Dans ce démarrage rapide, découvrez comment créer un coffre Recovery Services, activer la protection sur une machine virtuelle Azure et sauvegarder la machine virtuelle avec le Portail Azure.
-ms.reviewer: saurse
 ms.devlang: azurecli
 ms.topic: quickstart
-ms.date: 02/06/2020
+ms.date: 05/12/2020
 ms.custom: mvc
-ms.openlocfilehash: 4bff53516447408486a6e40f2f7059ebc811aaa4
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: cd0d4928d5cd0eb15f4f1372a0a3417fc85d13bb
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215327"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91328771"
 ---
 # <a name="back-up-a-virtual-machine-in-azure"></a>Sauvegarder une machine virtuelle dans Azure
 
@@ -40,7 +39,7 @@ Un coffre Recovery Services est un conteneur logique qui stocke les données de 
 
     ![Activer la sauvegarde de machine virtuelle dans le portail Azure](./media/quick-backup-vm-portal/enable-backup.png)
 
-    Par défaut, le coffre est défini pour le stockage géo-redondant. Pour mieux protéger vos données, ce niveau de redondance de stockage garantit que vos données de sauvegarde sont répliquées dans une région Azure secondaire, située à des centaines de kilomètres de la région principale.
+    Par défaut, le coffre est défini pour le stockage géo-redondant. Pour mieux protéger vos données, ce niveau de redondance de stockage garantit que vos données de sauvegarde sont répliquées dans une région Azure secondaire située à des centaines de kilomètres de la région primaire.
 
     Vous créez et utilisez des stratégies pour définir l’exécution d’un travail de sauvegarde et la durée de stockage des points de récupération. La stratégie de protection par défaut exécute un travail de sauvegarde chaque jour, et conserve les points de récupération pendant 30 jours. Vous pouvez utiliser ces valeurs de stratégie par défaut pour protéger rapidement votre machine virtuelle.
 
@@ -70,7 +69,7 @@ Si vous vous apprêtez à passer à un didacticiel de sauvegarde expliquant comm
 
 1. Sélectionnez l’option **Sauvegarde** pour votre machine virtuelle.
 
-2. Sélectionnez **... Plus** pour afficher des options supplémentaires, puis choisissez **Arrêter la sauvegarde**.
+2. Choisissez **Arrêter la sauvegarde**.
 
     ![Arrêter la sauvegarde de machine virtuelle à partir du portail Azure](./media/quick-backup-vm-portal/stop-backup.png)
 
@@ -84,7 +83,7 @@ Si vous vous apprêtez à passer à un didacticiel de sauvegarde expliquant comm
 6. Dans la liste, choisissez votre groupe de ressources. Si vous avez utilisé les exemples de commandes de démarrage rapide de machine virtuelle, le groupe de ressources est nommé *myResourceGroup*.
 7. Sélectionnez **Supprimer le groupe de ressources**. Pour confirmer, entrez le nom de groupe de ressources, puis sélectionnez **Supprimer**.
 
-    ![Supprimer le groupe de ressources à partir du portail Azure](./media/quick-backup-vm-portal/delete-resource-group.png)
+    ![Supprimer le groupe de ressources à partir du portail Azure](./media/quick-backup-vm-portal/delete-resource-group-from-portal.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

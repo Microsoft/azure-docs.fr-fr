@@ -5,12 +5,12 @@ author: peterpogorski
 ms.topic: conceptual
 ms.date: 06/18/2019
 ms.author: pepogors
-ms.openlocfilehash: 46601fd91fccb5bd0866bd999cc7643c37c6d582
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 86a02fd489ca0eec61b798db7136f963277f6c82
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75551775"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86261092"
 ---
 # <a name="azure-service-fabric-application-and-cluster-best-practices"></a>Bonnes pratiques relatives aux applications et aux clusters Azure Service Fabric
 
@@ -27,7 +27,7 @@ Cet article fournit des liens vers les bonnes pratiques de gestion des clusters 
 ## <a name="compute-planning-and-scaling"></a>Planification et mise à l’échelle de la capacité de calcul
 
 * [Bonnes pratiques relatives à la mise à l’échelle de la capacité de calcul](service-fabric-best-practices-capacity-scaling.md)
-* [Planification de la capacité de calcul](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity)
+* [Planification de la capacité de calcul](./service-fabric-cluster-capacity.md)
 
 ## <a name="infrastructure-as-code"></a>Infrastructure as code
 
@@ -44,7 +44,7 @@ Cet article fournit des liens vers les bonnes pratiques de gestion des clusters 
 ## <a name="checklist"></a>Liste de contrôle
 
 Après avoir implémenté les pratiques suggérées dans les sections précédentes, vérifiez que vous avez intégré toutes les bonnes pratiques figurant dans la liste de contrôle de disponibilité de production :
-* [Liste de contrôle de disponibilité de production Azure Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-production-readiness-checklist)
+* [Liste de contrôle de disponibilité de production Azure Service Fabric](./service-fabric-production-readiness-checklist.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

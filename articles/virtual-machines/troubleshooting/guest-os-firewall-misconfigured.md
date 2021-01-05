@@ -15,10 +15,10 @@ ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
 ms.openlocfilehash: e6f42bdf462ac5261f77bc05c62e50500345fe37
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80422530"
 ---
 # <a name="azure-vm-guest-os-firewall-is-misconfigured"></a>Le pare-feu du système d'exploitation invité de la machine virtuelle Azure est mal configuré

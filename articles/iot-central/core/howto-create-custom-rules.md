@@ -7,20 +7,18 @@ ms.date: 12/02/2019
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 manager: philmea
-ms.openlocfilehash: 0e161cf83662df671b8cfb100ddc12c3b3e7359f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6c8272f736e2f83b4d33f3d61ce83356aa40e5d
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158144"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92126754"
 ---
 # <a name="extend-azure-iot-central-with-custom-rules-using-stream-analytics-azure-functions-and-sendgrid"></a>Étendre Azure IoT Central avec des règles personnalisées à l’aide de Stream Analytics, d’Azure Functions et de SendGrid
 
-
-
-Ce guide pratique vous montre comment étendre votre application IoT Central en tant que développeur de solutions avec des notifications et des règles personnalisées. L’exemple montre l’envoi d’une notification à un opérateur lorsqu’un appareil cesse d’envoyer des données de télémétrie. La solution utilise une requête [Azure Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/) pour détecter le moment où un appareil a arrêté d’envoyer des données de télémétrie. Le travail Stream Analytics utilise [Azure Functions](https://docs.microsoft.com/azure/azure-functions/) pour envoyer des notifications par e-mail via [SendGrid](https://sendgrid.com/docs/for-developers/partners/microsoft-azure/).
+Ce guide pratique vous montre comment étendre votre application IoT Central en tant que développeur de solutions avec des notifications et des règles personnalisées. L’exemple montre l’envoi d’une notification à un opérateur lorsqu’un appareil cesse d’envoyer des données de télémétrie. La solution utilise une requête [Azure Stream Analytics](../../stream-analytics/index.yml) pour détecter le moment où un appareil a arrêté d’envoyer des données de télémétrie. Le travail Stream Analytics utilise [Azure Functions](../../azure-functions/index.yml) pour envoyer des notifications par e-mail via [SendGrid](https://sendgrid.com/docs/for-developers/partners/microsoft-azure/).
 
 Ce guide pratique vous montre comment étendre IoT Central au-delà de ce qu’il peut déjà faire avec les actions et règles intégrées.
 

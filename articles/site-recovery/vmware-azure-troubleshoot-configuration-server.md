@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 02/13/2019
 ms.author: ramamill
-ms.openlocfilehash: 0383a512dfb7c2bb1ae2422b9ade1e3c7387a70c
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: b5fd014732fd4cdfaa52f971b5e4d2c74db580d2
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478308"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92371951"
 ---
 # <a name="troubleshoot-configuration-server-issues"></a>Résoudre les problèmes de serveur de configuration
 
@@ -22,36 +22,38 @@ Cet article vous aide à résoudre des problèmes qui se produisent lors du dép
 
 La machine source s’inscrit auprès du serveur de configuration lorsque vous installez l’agent de mobilité. Vous pouvez déboguer toute défaillance au cours de cette étape en suivant les instructions suivantes :
 
-1. Ouvrez le fichier C:\ProgramData\ASR\home\svsystems\var\configurator_register_host_static_info.log. (Le dossier ProgramData peut être masqué. Si vous ne le voyez pas, dans l’Explorateur de fichiers, sous l’onglet **Affichage**, dans la section **Afficher/Masquer**, activez la case à cocher **Éléments masqués**.) Des défaillances peuvent être causées par plusieurs problèmes.
+1. Ouvrez le fichier C:\ProgramData\ASR\home\svsystems\var\configurator_register_host_static_info.log. (Le dossier ProgramData peut être masqué. Si vous ne le voyez pas, dans l’Explorateur de fichiers, sous l’onglet **Affichage** , dans la section **Afficher/Masquer** , activez la case à cocher **Éléments masqués** .) Des défaillances peuvent être causées par plusieurs problèmes.
 
-2. Recherchez la chaîne **Aucune adresse IP valide trouvée**. Si la chaîne est trouvée :
+2. Recherchez la chaîne **Aucune adresse IP valide trouvée** . Si la chaîne est trouvée :
    1. Vérifiez que l’ID hôte demandé est identique à celui de la machine source.
    2. Vérifiez que la machine source dispose d’au moins une adresse IP affectée à la carte réseau physique. Pour que l’inscription de l’agent auprès du serveur de configuration réussisse, la machine source doit avoir au moins une adresse IP v4 valide affectée à la carte physique.
    3. Exécutez l’une des commandes suivantes sur la machine source pour obtenir toutes les adresses IP de celle-ci :
       - Pour Windows : `> ipconfig /all`
       - Pour Linux : `# ifconfig -a`
 
-3. Si la chaîne **Aucune adresse IP valide trouvée** n’est pas trouvée, recherchez la chaîne **Reason=>NULL**. Cette erreur se produit si la machine source utilise un hôte vide pour s’inscrire auprès du serveur de configuration. Si la chaîne est trouvée :
+3. Si la chaîne **Aucune adresse IP valide trouvée** n’est pas trouvée, recherchez la chaîne **Reason=>NULL** . Cette erreur se produit si la machine source utilise un hôte vide pour s’inscrire auprès du serveur de configuration. Si la chaîne est trouvée :
     - Après avoir résolu les problèmes, suivez les instructions de la section [Inscrire la machine source auprès du serveur de configuration](vmware-azure-troubleshoot-configuration-server.md#register-source-machine-with-configuration-server) pour réessayer d’effectuer l’inscription manuellement.
 
-4. Si la chaîne **Reason= >NULL** n’est pas trouvée, sur la machine source, ouvrez le fichier C:\ProgramData\ASRSetupLogs\UploadedLogs\ASRUnifiedAgentInstaller.log. (Le dossier ProgramData peut être masqué. Si vous ne le voyez pas, dans l’Explorateur de fichiers, sous l’onglet **Affichage**, dans la section **Afficher/Masquer**, activez la case à cocher **Éléments masqués**.) Des défaillances peuvent être causées par plusieurs problèmes. 
+4. Si la chaîne **Reason= >NULL** n’est pas trouvée, sur la machine source, ouvrez le fichier C:\ProgramData\ASRSetupLogs\UploadedLogs\ASRUnifiedAgentInstaller.log. (Le dossier ProgramData peut être masqué. Si vous ne le voyez pas, dans l’Explorateur de fichiers, sous l’onglet **Affichage** , dans la section **Afficher/Masquer** , activez la case à cocher **Éléments masqués** .) Des défaillances peuvent être causées par plusieurs problèmes. 
 
-5. Recherchez la chaîne **post request: (7) - Couldn't connect to server**. Si la chaîne est trouvée :
+5. Recherchez la chaîne **post request: (7) - Couldn't connect to server** . Si la chaîne est trouvée :
     1. Résolvez les problèmes de réseau entre la machine source et le serveur de configuration. Vérifiez que le serveur de configuration est accessible à partir de la machine source à l’aide d’outils réseau tels que ping et Détermination d’itinéraire, ou d’un navigateur web. Assurez-vous que la machine source peut atteindre le serveur de configuration via le port 443.
     2. Vérifiez si des règles de pare-feu sur la machine source bloquent la connexion entre celle-ci et le serveur de configuration. Collaborez avec vos administrateurs réseau pour débloquer d’éventuels problèmes de connexion.
     3. Vérifiez que les dossiers répertoriés dans [Site Recovery folder exclusions from antivirus programs](vmware-azure-set-up-source.md#azure-site-recovery-folder-exclusions-from-antivirus-program) (Dossiers de Site Recovery exclus des programmes antivirus) sont exclus du logiciel antivirus.
     4. Une fois les problèmes de réseau résolus, recommencez l’inscription en suivant les instructions de la section [Inscrire la machine source auprès du serveur de configuration](vmware-azure-troubleshoot-configuration-server.md#register-source-machine-with-configuration-server).
 
-6. Si la chaîne **post request: (7) - Couldn't connect to server** est introuvable, dans le même fichier journal, recherchez la chaîne **request: (60) - Peer certificate cannot be authenticated with given CA certificates**. Cette erreur peut se produire si le certificat du serveur de configuration a expiré ou si la machine source ne prend pas en charge TLS 1.0 ou des protocoles ultérieurs. Elle peut également se produire si un pare-feu bloque les communications TLS entre la machine source et le serveur de configuration. Si la chaîne est trouvée : 
+6. Si la chaîne **post request: (7) - Couldn't connect to server** est introuvable, dans le même fichier journal, recherchez la chaîne **request: (60) - Peer certificate cannot be authenticated with given CA certificates** . Cette erreur peut se produire si le certificat du serveur de configuration a expiré ou si la machine source ne prend pas en charge TLS 1.0 ou des protocoles ultérieurs. Elle peut également se produire si un pare-feu bloque les communications TLS entre la machine source et le serveur de configuration. Si la chaîne est trouvée : 
     1. Pour résoudre le problème, connectez-vous à l’adresse IP du serveur de configuration via un navigateur web sur la machine source. Utilisez l’URI https :\/\/<adresse IP du serveur configuration\>: 443/. Assurez-vous que la machine source peut atteindre le serveur de configuration via le port 443.
     2. Vérifier si des règles de pare-feu sur la machine source doivent être ajoutées ou supprimées pour que celle-ci puisse communiquer avec le serveur de configuration. Compte tenu de la diversité des logiciels de pare-feu susceptibles d’être utilisés, nous ne pouvons pas répertorier toutes les configurations de pare-feu requises. Collaborez avec vos administrateurs réseau pour débloquer d’éventuels problèmes de connexion.
     3. Vérifiez que les dossiers répertoriés dans [Site Recovery folder exclusions from antivirus programs](vmware-azure-set-up-source.md#azure-site-recovery-folder-exclusions-from-antivirus-program) (Dossiers de Site Recovery exclus des programmes antivirus) sont exclus du logiciel antivirus.  
     4. Après avoir résolu les problèmes, réessayez d’effectuer l’inscription en suivant les instructions de la section [Inscrire la machine source auprès du serveur de configuration](vmware-azure-troubleshoot-configuration-server.md#register-source-machine-with-configuration-server).
 
-7. Sous Linux, si la valeur de la plateforme dans <INSTALLATION_DIR\>/etc/drscout.conf est endommagée, l’inscription échoue. Pour identifier ce problème, ouvrez le fichier /var/log/ua_install.log. Recherchez la chaîne **Abandon de la configuration car la valeur de VM_PLATFORM est null ou n’est pas VmWare/Azure**. La plateforme définie doit être **VmWare** ou **Azure**. Si le fichier drscout.conf est endommagé, il est recommandé de [désinstaller l’agent de mobilité](vmware-physical-manage-mobility-service.md#uninstall-mobility-service), puis de le réinstaller. Si la désinstallation échoue, effectuez les étapes suivantes : a. Ouvrez le fichier Installation_Directory/uninstall.sh et commentez l’appel de la fonction **StopServices**.
-    b. Ouvrez le fichier de Installation_Directory/Vx/bin/uninstall.sh et commentez l’appel de la fonction **stop_services**.
+7. Sous Linux, si la valeur de la plateforme dans <INSTALLATION_DIR\>/etc/drscout.conf est endommagée, l’inscription échoue. Pour identifier ce problème, ouvrez le fichier /var/log/ua_install.log. Recherchez la chaîne **Abandon de la configuration car la valeur de VM_PLATFORM est null ou n’est pas VmWare/Azure** . La plateforme définie doit être **VmWare** ou **Azure** . Si le fichier drscout.conf est endommagé, il est recommandé de [désinstaller l’agent de mobilité](vmware-physical-manage-mobility-service.md#uninstall-mobility-service), puis de le réinstaller. Si la désinstallation échoue, effectuez les étapes suivantes : a. Ouvrez le fichier Installation_Directory/uninstall.sh et commentez l’appel de la fonction **StopServices** .
+    b. Ouvrez le fichier de Installation_Directory/Vx/bin/uninstall.sh et commentez l’appel de la fonction **stop_services** .
     c. Ouvrez le fichier Installation_Directory/Fx/uninstall et commentez toute la section qui tente d’arrêter le service Fx.
     d. [Désinstallez](vmware-physical-manage-mobility-service.md#uninstall-mobility-service) l’agent de mobilité. Après la désinstallation, redémarrez le système, puis tentez de réinstaller l’agent de mobilité.
+
+8. Assurez-vous que l’authentification multifacteur n’est pas activée pour le compte d’utilisateur. À ce jour, Azure Site Recovery ne prend pas en charge l’authentification multifacteur pour le compte d’utilisateur. Inscrivez le serveur de configuration sans compte d’utilisateur activé pour l’authentification multifacteur.  
 
 ## <a name="installation-failure-failed-to-load-accounts"></a>Échec de l’installation : Échec du chargement des comptes
 
@@ -61,7 +63,7 @@ Cette erreur se produit quand le service ne parvient pas à lire les données de
 
 Pour résoudre les échecs de découverte de vCenter, ajoutez le serveur vCenter aux paramètres de proxy de la liste de contournement. 
 
-- Téléchargez l’outil PsExec [ici](https://aka.ms/PsExec) pour accéder au contenu de l’utilisateur système.
+- Téléchargez l’outil PsExec [ici](/sysinternals/downloads/psexec) pour accéder au contenu de l’utilisateur système.
 - Ouvrez Internet Explorer dans le contenu de l’utilisateur système en exécutant la ligne de commande suivante : psexec -s -i "%programfiles%\Internet Explorer\iexplore.exe"
 - Ajoutez les paramètres du proxy dans Internet Explorer et redémarrez le service tmanssvc.
 - Pour configurer les paramètres du proxy DRA, exécutez cd C:\Program Files\Microsoft Azure Site Recovery Provider.
@@ -160,16 +162,18 @@ La mise à niveau du serveur de configuration échoue quand certains services ne
 
 Pour identifier le problème, accédez à C:\ProgramData\ASRSetupLogs\CX_TP_InstallLogFile sur le serveur de configuration. Si vous rencontrez les erreurs suivantes, utilisez les étapes ci-dessous pour résoudre le problème : 
 
-    2018-06-28 14:28:12.943   Successfully copied php.ini to C:\Temp from C:\thirdparty\php5nts
-    2018-06-28 14:28:12.943   svagents service status - SERVICE_RUNNING
-    2018-06-28 14:28:12.944   Stopping svagents service.
-    2018-06-28 14:31:32.949   Unable to stop svagents service.
-    2018-06-28 14:31:32.949   Stopping svagents service.
-    2018-06-28 14:34:52.960   Unable to stop svagents service.
-    2018-06-28 14:34:52.960   Stopping svagents service.
-    2018-06-28 14:38:12.971   Unable to stop svagents service.
-    2018-06-28 14:38:12.971   Rolling back the install changes.
-    2018-06-28 14:38:12.971   Upgrade has failed.
+```output
+2018-06-28 14:28:12.943   Successfully copied php.ini to C:\Temp from C:\thirdparty\php5nts
+2018-06-28 14:28:12.943   svagents service status - SERVICE_RUNNING
+2018-06-28 14:28:12.944   Stopping svagents service.
+2018-06-28 14:31:32.949   Unable to stop svagents service.
+2018-06-28 14:31:32.949   Stopping svagents service.
+2018-06-28 14:34:52.960   Unable to stop svagents service.
+2018-06-28 14:34:52.960   Stopping svagents service.
+2018-06-28 14:38:12.971   Unable to stop svagents service.
+2018-06-28 14:38:12.971   Rolling back the install changes.
+2018-06-28 14:38:12.971   Upgrade has failed.
+```
 
 Pour résoudre le problème :
 
@@ -190,8 +194,8 @@ Vos autorisations sont insuffisantes pour créer une application dans Azure Acti
 
 Pour résoudre ce problème, connectez-vous au portail Azure, puis effectuez l’une des opérations suivantes :
 
-- Demandez le rôle Développeur d’applications dans AAD. Pour plus d’informations sur le rôle Développeur d’applications, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/users-groups-roles/directory-assign-admin-roles.md).
-- Vérifiez que l’indicateur **L’utilisateur peut créer une application** a la valeur *true* dans AAD. Pour plus d’informations, consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](../active-directory/develop/howto-create-service-principal-portal.md#required-permissions).
+- Demandez le rôle Développeur d’applications dans AAD. Pour plus d’informations sur le rôle Développeur d’applications, consultez [Autorisations des rôles d’administrateur dans Azure Active Directory](../active-directory/roles/permissions-reference.md).
+- Vérifiez que l’indicateur **L’utilisateur peut créer une application** a la valeur *true* dans AAD. Pour plus d’informations, consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](../active-directory/develop/howto-create-service-principal-portal.md#permissions-required-for-registering-an-app).
 
 ## <a name="process-servermaster-target-are-unable-to-communicate-with-the-configuration-server"></a>Le serveur de processus/le serveur cible maître ne sont pas en mesure de communiquer avec le serveur de configuration 
 
@@ -203,14 +207,16 @@ En général, cela est dû à une erreur avec le port 443. Utilisez les étapes
 
 Pour vérifier que l’agent du serveur cible maître peut créer une session TCP pour l’adresse IP du serveur de configuration, recherchez une trace semblable à ce qui suit dans les journaux d’activité de l’agent du serveur cible maître :
 
-TCP \<Remplacer l’adresse IP par l’adresse IP du serveur CS ici>:52739 \<Remplacer l’adresse IP par l’adresse IP du serveur CS ici>:443 SYN_SENT 
+TCP \<Replace IP with CS IP here>:52739 \<Replace IP with CS IP here>:443 SYN_SENT 
 
 TCP    192.168.1.40:52739     192.168.1.40:443      SYN_SENT  // Remplacer l’adresse IP par l’adresse IP du serveur CS ici
 
 Si vous trouvez des traces similaires à ce qui suit dans les journaux d’activité de l’agent du serveur cible maître, l’agent du serveur cible maître signale les erreurs sur le port 443 :
 
-    #~> (11-20-2018 20:31:51):   ERROR  2508 8408 313 FAILED : PostToSVServer with error [at curlwrapper.cpp:CurlWrapper::processCurlResponse:212]   failed to post request: (7) - Couldn't connect to server
-    #~> (11-20-2018 20:31:54):   ERROR  2508 8408 314 FAILED : PostToSVServer with error [at curlwrapper.cpp:CurlWrapper::processCurlResponse:212]   failed to post request: (7) - Couldn't connect to server
+```output
+#~> (11-20-2018 20:31:51):   ERROR  2508 8408 313 FAILED : PostToSVServer with error [at curlwrapper.cpp:CurlWrapper::processCurlResponse:212]   failed to post request: (7) - Couldn't connect to server
+#~> (11-20-2018 20:31:54):   ERROR  2508 8408 314 FAILED : PostToSVServer with error [at curlwrapper.cpp:CurlWrapper::processCurlResponse:212]   failed to post request: (7) - Couldn't connect to server
+```
  
 Cette erreur peut se produire quand d’autres applications utilisent également le port 443 ou en raison d’un paramètre de pare-feu qui bloque le port.
 
@@ -252,4 +258,3 @@ Ce problème peut se produire quand l’heure système est incorrecte.
 Pour résoudre le problème :
 
 Définissez l’heure correcte sur l’ordinateur, puis réessayez la connexion. 
- 

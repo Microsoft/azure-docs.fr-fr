@@ -12,10 +12,10 @@ ms.topic: conceptual
 ms.date: 01/15/2018
 ms.author: abnarain
 ms.openlocfilehash: cd775c5a3bf367600a4537a9409a9bb8f902f588
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82628978"
 ---
 # <a name="encrypt-credentials-for-on-premises-data-stores-in-azure-data-factory"></a>Chiffrer des informations d’identification pour vos magasins de données locaux dans Azure Data Factory

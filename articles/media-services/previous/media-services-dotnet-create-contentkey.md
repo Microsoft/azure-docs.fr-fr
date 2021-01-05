@@ -1,6 +1,6 @@
 ---
 title: Création de ContentKeys avec .NET
-description: Cet article explique comment créer des clés de contenu qui fournissent un accès sécurisé aux ressources.
+description: Cet article explique comment créer des clés de contenu à l’aide de .NET. Ces clés fournissent un accès sécurisé aux ressources.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -14,14 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: aebd6dee9314d6e5641988767c024790b6b721f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d5efbc30c80a0052ed99cb129c2e5f9030482012
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227061"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91261224"
 ---
-# <a name="create-contentkeys-with-net"></a>Création de ContentKeys avec .NET 
+# <a name="create-contentkeys-with-net"></a>Création de ContentKeys avec .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+ 
 > [!div class="op_single_selector"]
 > * [REST](media-services-rest-create-contentkey.md)
 > * [.NET](media-services-dotnet-create-contentkey.md)

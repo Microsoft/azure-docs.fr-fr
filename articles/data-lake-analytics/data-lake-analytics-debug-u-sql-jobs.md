@@ -1,24 +1,20 @@
 ---
 title: Déboguer du code C# pour les travaux U-SQL Azure Data Lake
 description: Cet article décrit comment déboguer un échec du vertex U-SQL à l’aide d’Azure Data Lake Tools pour Visual Studio.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: yanancai
-ms.author: yanacai
-ms.reviewer: jasonwhowell
-ms.assetid: bcd0b01e-1755-4112-8e8a-a5cabdca4df2
-ms.topic: conceptual
+ms.reviewer: jasonh
+ms.topic: how-to
 ms.date: 11/30/2017
-ms.openlocfilehash: 72239fc1679d2ebbfd9c9b5be6b79b58efb760cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: db1d57e3904087bc5cb3711b23cfe6bcf18c3455
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71315811"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92218015"
 ---
 # <a name="debug-user-defined-c-code-for-failed-u-sql-jobs"></a>Débogage de code C# défini par l’utilisateur pour des travaux U-SQL ayant échoué
 
-U-SQL fournit un modèle d’extensibilité à l’aide de C#. Dans les scripts U-SQL, il est facile d’appeler des fonctions C# pour accomplir des fonctions d’analyse qu’un langage déclaratif apparenté à SQL ne prend pas en charge. Pour en savoir plus sur l’extensibilité U-SQL, consultez le [Guide de programmabilité U-SQL](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-u-sql-programmability-guide#use-user-defined-functions-udf). 
+U-SQL fournit un modèle d’extensibilité à l’aide de C#. Dans les scripts U-SQL, il est facile d’appeler des fonctions C# pour accomplir des fonctions d’analyse qu’un langage déclaratif apparenté à SQL ne prend pas en charge. Pour en savoir plus sur l’extensibilité U-SQL, consultez le [Guide de programmabilité U-SQL](./data-lake-analytics-u-sql-programmability-guide.md#use-user-defined-functions-udf). 
 
 Dans la pratique, un code peut nécessiter un débogage, mais il est difficile de déboguer une tâche distribuée par le biais d’un code personnalisé sur le cloud avec des fichiers journaux limités. [Azure Data Lake Tools pour Visual Studio](https://aka.ms/adltoolsvs) fournit une fonctionnalité appelée **Débogage d’échec du vertex** qui facilite le débogage des défaillances se produisant dans votre code personnalisé. En cas d’échec d’une tâche U-SQL, le service conserve l’état d’échec, et l’outil permet de télécharger l’environnement de défaillance du cloud sur l’ordinateur local en vue de l’opération de débogage. Le téléchargement local capture l’environnement cloud en entier, y compris les données d’entrée et le code utilisateur.
 
@@ -93,7 +89,7 @@ Après la définition de ces paramètres, démarrez le débogage avec **F5** et 
 
 Après le débogage, si le projet se termine correctement, la fenêtre de sortie affiche le message suivant :
 
-    The Program 'LocalVertexHost.exe' has exited with code 0 (0x0).
+`The Program 'LocalVertexHost.exe' has exited with code 0 (0x0).`
 
 ![Débogage U-SQL Azure Data Lake Analytics réussi](./media/data-lake-analytics-debug-u-sql-jobs/data-lake-analytics-debug-succeed.png)
 

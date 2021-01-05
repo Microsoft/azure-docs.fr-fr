@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 02/19/2020
+ms.date: 06/30/2020
 ms.author: victorh
-ms.openlocfilehash: b1e7dce6f652d8c9e0fcf5974c3e72be9e1e7844
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fa61046ee87c1cac3c8a8bb93ed97b577019e016
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77482176"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94628439"
 ---
 # <a name="azure-firewall-certifications"></a>Certifications de Pare-feu Azure
 
@@ -48,6 +48,8 @@ Les certifications Pare-feu Azure suivantes sont destinées à Azure global :
 - GLBA (États-Unis)
 - Allemagne C5
 - GxP (FDA 21 CFR Partie 11)
+- HIPAA
+- HITECH Act (États-Unis)
 - HITRUST
 - ISO 20000-1:2011
 - ISO 22301:2012
@@ -91,6 +93,8 @@ Les certifications Pare-feu Azure suivantes sont destinées à Azure Government�
 - EAR
 - FIPS 140-2
 - FedRAMP Niveau élevé
+- HIPAA
+- HITECH Act (États-Unis)
 - HITRUST
 - IRS 1075
 - ITAR

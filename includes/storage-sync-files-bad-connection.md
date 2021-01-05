@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 07/08/2018
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: b2ff542d2782293e89b66e5d25cb67a9bcde6da8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b26d4af29a92fb0f14c52e76a7eae1d0073a3aa0
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75773030"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96005312"
 ---
 Cette erreur peut se produire chaque fois que le service Azure File Sync n’est pas accessible à partir du serveur. Vous pouvez résoudre cette erreur en parcourant les étapes suivantes :
 
@@ -31,6 +31,6 @@ Cette erreur peut se produire chaque fois que le service Azure File Sync n’est
     Import-Module "$agentPath\StorageSync.Management.ServerCmdlets.dll"
     Get-StorageSyncProxyConfiguration
     ```
-4. Utilisez l’applet de commande Test-StorageSyncNetworkConnectivity pour vérifier la connectivité réseau aux points de terminaison de service. Pour plus d’informations, consultez [Tester la connectivité réseau aux points de terminaison de service](https://docs.microsoft.com/azure/storage/files/storage-sync-files-firewall-and-proxy#test-network-connectivity-to-service-endpoints).    
+4. Utilisez l’applet de commande Test-StorageSyncNetworkConnectivity pour vérifier la connectivité réseau aux points de terminaison de service. Pour plus d’informations, consultez [Tester la connectivité réseau aux points de terminaison de service](../articles/storage/files/storage-sync-files-firewall-and-proxy.md#test-network-connectivity-to-service-endpoints).    
 
 5. En cas de problèmes de connectivité réseau, contactez votre administrateur réseau pour obtenir une aide supplémentaire.

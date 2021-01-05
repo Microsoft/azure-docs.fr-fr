@@ -1,6 +1,6 @@
 ---
 title: Azure VMware Solution by CloudSimple
-description: Portail de documentation pour  Azure VMware Solution by CloudSimple .
+description: Découvrez les solutions Azure VMware Solution by CloudSimple, notamment une vue d’ensemble, des démarrages rapides, des concepts, des tutoriels et des guides pratiques.
 author: sharaths-cs
 ms.author: b-mashar
 ms.date: 08/20/2019
@@ -8,12 +8,14 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 936a9eb4d9b33b45800fab213fc72a306a04146e
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.custom: seo-azure-migrate
+keywords: prise en charge de vms, azure vmware solution by cloudsimple, cloudsimple azure, outils vms, documentation vmware
+ms.openlocfilehash: fffe0255bb905c0314e2ed59f5beab726e681e00
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "77025212"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89230634"
 ---
 # <a name="azure-vmware-solution-by-cloudsimple"></a>Azure VMware Solution by CloudSimple
 

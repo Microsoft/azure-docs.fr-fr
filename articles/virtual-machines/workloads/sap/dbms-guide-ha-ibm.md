@@ -1,30 +1,27 @@
 ---
 title: Configurer la haute disponibilité et reprise d’activité IBM Db2 sur les machines virtuelles Azure | Microsoft Docs
 description: Créez une haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure.
-services: virtual-machines-linux
-documentationcenter: ''
 author: msjuergent
-manager: patfilot
-editor: ''
-tags: azure-resource-manager
-keywords: SAP
-ms.service: virtual-machines-linux
+ms.service: virtual-machines
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
-ms.date: 03/06/2020
+ms.date: 10/16/2020
 ms.author: juergent
-ms.openlocfilehash: a9041b373c215ac226764b737ee3bf35b008e5db
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.reviewer: cynthn
+ms.openlocfilehash: 54bde8c9dd47e88ffdc831ccb9f7833720583238
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82978380"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96621380"
 ---
 # <a name="high-availability-of-ibm-db2-luw-on-azure-vms-on-suse-linux-enterprise-server-with-pacemaker"></a>Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Pacemaker
 
 IBM Db2 pour Linux, UNIX et Windows (LUW) dans une [configuration de haute disponibilité et reprise d’activité (HADR)](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.admin.ha.doc/doc/c0011267.html) est constitué d’un nœud qui exécute une instance de base de données primaire et d’au moins un nœud qui exécute une instance de base de données secondaire. Les modifications apportées à l’instance de base de données primaire sont répliquées vers une instance de base de données secondaire de façon synchrone ou asynchrone, selon votre configuration. 
 
+> [!NOTE]
+> Cet article contient des références aux termes *maître* et *esclave*, termes que Microsoft n’utilise plus. Lorsque ces termes seront supprimés du logiciel, nous les supprimerons de cet article.
+   
 Cet article décrit comment déployer et configurer les machines virtuelles Azure, installer le framework de cluster, et installer IBM Db2 LUW avec la configuration HADR. 
 
 L’article n’explique pas comment installer et configurer IBM Db2 LUW avec l’installation des logiciels SAP ou HADR. Pour vous aider à accomplir ces tâches, nous fournissons des références aux manuels d’installation SAP et IBM. Cet article se concentre sur des composants qui sont spécifiques à l’environnement Azure. 
@@ -60,7 +57,7 @@ Avant de commencer une installation, consultez les notes SAP suivantes et la doc
 | [IBM Db2 HADR R 10.5][db2-hadr-10.5] |
 
 ## <a name="overview"></a>Vue d’ensemble
-Pour obtenir une haute disponibilité, IBM Db2 LUW avec HADR est installé sur au moins deux machines virtuelles Azure, qui sont déployées sur un [groupe à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets) ou des [zones de disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-ha-availability-zones). 
+Pour obtenir une haute disponibilité, IBM Db2 LUW avec HADR est installé sur au moins deux machines virtuelles Azure, qui sont déployées sur un [groupe à haute disponibilité Azure](../../windows/tutorial-availability-sets.md) ou des [zones de disponibilité Azure](./sap-ha-availability-zones.md). 
 
 Les graphiques suivants illustrent une configuration de deux machines virtuelles Azure de serveur de base de données. Les deux machines virtuelles Azure de serveur de base de données sont associées à leur propre système de stockage et sont opérationnelles. Dans HADR, une instance de base de données dans l’une des machines virtuelles Azure a le rôle de l’instance primaire. Tous les clients sont connectés à cette instance primaire. Toutes les modifications dans les transactions de base de données sont conservées localement dans le journal des transactions Db2. Comme les enregistrements du journal des transactions sont conservés localement, les enregistrements sont transférés via TCP/IP à l’instance de base de données sur le second serveur de base de données, le serveur de secours ou une instance de secours. L’instance de secours met à jour la base de données locale en restaurant par progression les enregistrements du journal des transactions transférés. De cette façon, le serveur de secours est synchronisé avec le serveur principal.
 
@@ -110,7 +107,7 @@ Terminez le processus de planification avant d’exécuter le déploiement. La p
 | Azure Load Balancer | Utilisation du niveau De base ou Standard (recommandé), port de la sonde pour la base de données Db2 (notre recommandation est 62500) **probe-port**. |
 | Résolution de noms| Fonctionnement de la résolution de noms dans l’environnement. Le service DNS est fortement recommandé. Le fichier d’hôte local peut être utilisé. |
     
-Pour plus d’informations sur Linux Pacemaker dans Azure, consultez [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-pacemaker).
+Pour plus d’informations sur Linux Pacemaker dans Azure, consultez [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure](./high-availability-guide-suse-pacemaker.md).
 
 ## <a name="deployment-on-suse-linux"></a>Déploiement sur SUSE Linux
 
@@ -138,7 +135,7 @@ Vérifiez que le système d’exploitation sélectionné est pris en charge par 
 
 ## <a name="create-the-pacemaker-cluster"></a>Créez le cluster Pacemaker
     
-Pour créer un cluster Pacemaker de base pour ce serveur IBM Db2, voir  [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure][sles-pacemaker]. 
+Pour créer un cluster Pacemaker de base pour ce serveur IBM Db2, consultez [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure][sles-pacemaker]. 
 
 ## <a name="install-the-ibm-db2-luw-and-sap-environment"></a>Installer l’environnement SAP et IBM Db2 LUW
 
@@ -315,7 +312,7 @@ Les éléments suivants sont précédés de :
 
 **[A]** Prérequis pour la configuration Pacemaker :
 1. Arrêtez les deux serveurs de base de données avec l’utilisateur db2\<sid> avec db2stop.
-1. Remplacez l’environnement shell pour l’utilisateur db2\<sid> par */bin/ksh*. Nous vous recommandons d’utiliser l’outil Yast. 
+1. Remplacez l’environnement d’interpréteur de commandes pour l’utilisateur db2\<sid> par */bin/ksh*. Nous vous recommandons d’utiliser l’outil Yast. 
 
 
 ### <a name="pacemaker-configuration"></a>Configuration Pacemaker
@@ -396,10 +393,13 @@ sudo crm configure property maintenance-mode=false</pre></code>
 
 
 ### <a name="configure-azure-load-balancer"></a>Configurer Azure Load Balancer
-Pour configurer Azure Load Balancer, nous vous recommandons d’utiliser la [référence SKU standard Azure Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-overview), puis de procéder comme suit :
+Pour configurer Azure Load Balancer, nous vous recommandons d’utiliser la [référence SKU standard Azure Load Balancer](../../../load-balancer/load-balancer-overview.md), puis de procéder comme suit :
 
 > [!NOTE]
-> La référence SKU Standard Load Balancer a des restrictions quant à l’accès aux adresses IP publiques à partir des nœuds situés sous le Load Balancer. L’article [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-standard-load-balancer-outbound-connections) décrit comment activer ces nœuds pour accéder aux adresses IP publiques.
+> La référence SKU Standard Load Balancer a des restrictions quant à l’accès aux adresses IP publiques à partir des nœuds situés sous le Load Balancer. L’article [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](./high-availability-guide-standard-load-balancer-outbound-connections.md) décrit comment activer ces nœuds pour accéder aux adresses IP publiques.
+
+> [!IMPORTANT]
+> L'adresse IP flottante n'est pas prise en charge sur une configuration d'adresse IP secondaire de carte réseau dans les scénarios d'équilibrage de charge. Pour plus d'informations, consultez [Limitations relatives à Azure Load Balancer](../../../load-balancer/load-balancer-multivip-overview.md#limitations). Si vous avez besoin d'une adresse IP supplémentaire pour la machine virtuelle, déployez une deuxième carte réseau.  
 
 1. Créez un pool d’adresses IP front-end :
 
@@ -498,8 +498,8 @@ Nous vous recommandons de configurer un partage NFS commun dans lequel les journ
 Vous pouvez utiliser des partages NFS hautement disponibles existants pour les transports ou un répertoire de profil. Pour plus d'informations, consultez les pages suivantes :
 
 - [Haute disponibilité pour NFS sur les machines virtuelles Azure sur SUSE Linux Enterprise Server][nfs-ha] 
-- [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Azure NetApp Files pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-netapp-files)
-- [Azure NetApp Files](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-introduction) (pour créer des partages NFS)
+- [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Azure NetApp Files pour les applications SAP](./high-availability-guide-suse-netapp-files.md)
+- [Azure NetApp Files](../../../azure-netapp-files/azure-netapp-files-introduction.md) (pour créer des partages NFS)
 
 
 ## <a name="test-the-cluster-setup"></a>Tester la configuration du cluster
@@ -541,7 +541,7 @@ L’état d’origine dans un système SAP est documenté dans Transaction DBACO
 > Avant de commencer le test, vérifiez les points suivants :
 > * Pacemaker ne comporte pas d’action ayant échoué (crm status).
 > * Il n’existe aucune contrainte d’emplacement (reliquats d’un test de migration)
-> * La synchronisation HADR IBM Db2 fonctionne. Vérifiez auprès de l’utilisateur db2\<sid> <pre><code>db2pd -hadr -db \<DBSID></code></pre>
+> * La synchronisation HADR IBM Db2 fonctionne. Vérifiez avec l’utilisateur db2\<sid> <pre><code>db2pd -hadr -db \<DBSID></code></pre>
 
 
 Migrez le nœud qui exécute la base de données Db2 primaire en exécutant la commande suivante :
@@ -575,9 +575,9 @@ Ramenez la ressource vers *azibmdb01* et effacez les contraintes d’emplacement
 crm resource clear msl_<b>Db2_db2ptr_PTR</b>
 </code></pre>
 
-- **crm resource migrate \<nom_ressource> \<hôte> :** crée des contraintes d’emplacement et peut entraîner des problèmes de prise de contrôle
-- **crm resource clear \<nom_ressource>**  : efface les contraintes d’emplacement
-- **crm resource cleanup \<nom_ressource>**  : efface toutes les erreurs de la ressource
+- **crm resource migrate \<res_name> \<host> :** crée des contraintes d’emplacement et peut entraîner des problèmes de prise de contrôle
+- **crm resource clear \<res_name>**  : efface les contraintes d’emplacement
+- **crm resource cleanup \<res_name>**  : efface toutes les erreurs de la ressource
 
 ### <a name="test-the-fencing-agent"></a>Tester l’agent de délimitation
 
@@ -593,7 +593,7 @@ root       2380   2374  0 Feb05 ?        00:00:18 sbd: watcher: Cluster
 azibmdb01:~ # kill -9 2374
 </code></pre>
 
-Le nœud de cluster*azibmdb01* doit être redémarré. Le rôle HADR principal IBM Db2 va être déplacé vers *azibmdb02*. Quand *azibmdb01* est de nouveau en ligne, l’instance Db2 prend le rôle d’une instance de base de données secondaire. 
+Le nœud de cluster *azibmdb01* doit être redémarré. Le rôle HADR principal IBM Db2 va être déplacé vers *azibmdb02*. Quand *azibmdb01* est de nouveau en ligne, l’instance Db2 prend le rôle d’une instance de base de données secondaire. 
 
 Si le service Pacemaker ne démarre pas automatiquement sur l’ancien nœud primaire redémarré, veillez à le démarrer manuellement avec :
 
@@ -879,8 +879,8 @@ stonith-sbd     (stonith:external/sbd): Started azibmdb02
      Slaves: [ azibmdb01 ]</code></pre>
 
 ## <a name="next-steps"></a>Étapes suivantes
-- [Scénarios et architecture de haute disponibilité pour SAP NetWeaver](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-architecture-scenarios)
-- [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-pacemaker)
+- [Scénarios et architecture de haute disponibilité pour SAP NetWeaver](./sap-high-availability-architecture-scenarios.md)
+- [Configurer Pacemaker sur SUSE Linux Enterprise Server dans Azure](./high-availability-guide-suse-pacemaker.md)
 
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533
 [2015553]:https://launchpad.support.sap.com/#/notes/2015553

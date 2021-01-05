@@ -4,14 +4,14 @@ description: Connectez-vous à un réseau Azure Blockchain Service à l’aide d
 ms.date: 09/12/2019
 ms.topic: quickstart
 ms.reviewer: janders
-ms.openlocfilehash: c0bad9efde44ce53f6b0656af3ac4af32ffe051d
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4a45e02a861ff20a4dc774668a4e008f9b42aeea
+ms.sourcegitcommit: 03662d76a816e98cfc85462cbe9705f6890ed638
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79205114"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90530435"
 ---
-# <a name="quickstart-use-metamask-to-connect-and-deploy-a-smart-contract"></a>Démarrage rapide : Utiliser MetaMask pour vous connecter et déployer un contrat intelligent
+# <a name="quickstart-use-metamask-to-connect-and-deploy-a-smart-contract"></a>Utiliser MetaMask pour vous connecter et déployer un contrat intelligent
 
 Dans ce guide de démarrage rapide, vous allez utiliser MetaMask pour vous connecter à un réseau Azure Blockchain Service, puis vous allez utiliser Remix pour déployer un contrat intelligent. Metamask est une extension de navigateur qui permet de gérer un portefeuille Ether et d’effectuer des actions relatives aux contrats intelligents.
 
@@ -34,7 +34,7 @@ Vous avez besoin de l’adresse du point de terminaison Azure Blockchain Service
     ![Sélectionner le nœud de transaction par défaut](./media/connect-metamask/transaction-nodes.png)
 
 1. Sélectionnez **Chaînes de connexion > Clés d’accès**.
-1. Copiez l’adresse du point de terminaison située sous **HTTPS (Clé d’accès 1)** .
+1. Copiez l’adresse du point de terminaison située sous **HTTPS (Clé d’accès 1)**.
 
     ![Chaîne de connexion](./media/connect-metamask/connection-string.png)
 
@@ -89,7 +89,7 @@ Remix est un environnement de développement Solidity basé sur le navigateur. L
     Le **contrat Simple** déclare une variable d’état nommée **balance**. Deux fonctions sont définies. La fonction **add** ajoute un nombre à **balance**. La fonction **get** retourne la valeur de **balance**.
 1. Pour compiler le contrat, commencez par sélectionner le volet du compilateur Solidity, puis sélectionnez **Compile simple.sol** (Compiler simple.sol).
 
-    ![Compiler](./media/connect-metamask/compile.png)
+    ![La capture d’écran montre un contrat en cours de compilation.](./media/connect-metamask/compile.png)
 
 1. Sélectionnez le volet **Deploy & Run** (Déployer & exécuter), puis définissez **Environment** (Environnement) sur **Injected Web3** (Web3 injecté) pour vous connecter via MetaMask à votre membre blockchain.
 
@@ -97,7 +97,7 @@ Remix est un environnement de développement Solidity basé sur le navigateur. L
 
 1. Sélectionnez le contrat **simple**, puis **Deploy** (Déployer).
 
-    ![Déployer](./media/connect-metamask/deploy.png)
+    ![La capture d’écran montre le déploiement et l’exécution des transactions avec un contrat et l’option Deploy sélectionnés.](./media/connect-metamask/deploy.png)
 
 
 1. Une notification MetaMask vous informe que les fonds sont insuffisants pour effectuer la transaction.
@@ -128,9 +128,9 @@ Remix est un environnement de développement Solidity basé sur le navigateur. L
 
 Le volet de débogage de Remix affiche des détails sur les transactions de la blockchain :
 
-    ![Debug history](./media/connect-metamask/debug.png)
+![Historique du débogage](./media/connect-metamask/debug.png)
 
-    You can see the **simple** contract creation, transaction for **simple.add**, and call to **simple.get**.
+Vous pouvez voir la création du contrat **Simple**, la transaction pour **simple.add** et l’appel à **simple.get**.
 
 Pour voir l’historique des transactions dans MetaMask, ouvrez l’extension de navigateur MetaMask, puis recherchez dans la section **History** (Historique) un journal de déploiement du contrat et des transactions.
 

@@ -3,15 +3,15 @@ title: Gérer un compte Azure Data Lake Storage Gen1 – Azure CLI
 description: Utilisez Azure CLI pour créer un compte Data Lake Storage Gen1 et effectuer des opérations de base.
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/27/2018
 ms.author: twooley
-ms.openlocfilehash: 4e278981ce7647a53d2e80c5b835c8ed666db541
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: de98e25cf5703a43282e551a0eda20d7767c6ce8
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82688167"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92103626"
 ---
 # <a name="get-started-with-azure-data-lake-storage-gen1-using-the-azure-cli"></a>Bien démarrer avec Azure Data Lake Storage Gen1 à l’aide d’Azure CLI
 
@@ -26,7 +26,7 @@ ms.locfileid: "82688167"
 
 Découvrez comment utiliser Azure CLI pour créer un compte Azure Data Lake Storage Gen1 et effectuer des opérations de base telles que la création de dossiers, le chargement et le téléchargement de fichiers de données, la suppression de votre compte, etc. Pour plus d’informations sur Data Lake Store Gen1, consultez [Vue d’ensemble de Data Lake Storage Gen1](data-lake-store-overview.md).
 
-L’interface de ligne de commande Azure (Azure CLI) est l’expérience de ligne de commande d’Azure pour gérer les ressources Azure. Elle peut être utilisée sur macOS, Linux et Windows. Pour plus d’informations, consultez [Présentation d’Azure CLI](https://docs.microsoft.com/cli/azure). Pour obtenir la liste complète des commandes et de la syntaxe, consultez la [Référence Azure Data Lake Storage Gen1 CLI](https://docs.microsoft.com/cli/azure/dls).
+L’interface de ligne de commande Azure (Azure CLI) est l’expérience de ligne de commande d’Azure pour gérer les ressources Azure. Elle peut être utilisée sur macOS, Linux et Windows. Pour plus d’informations, consultez [Présentation d’Azure CLI](/cli/azure). Pour obtenir la liste complète des commandes et de la syntaxe, consultez la [Référence Azure Data Lake Storage Gen1 CLI](/cli/azure/dls).
 
 
 ## <a name="prerequisites"></a>Prérequis
@@ -34,11 +34,11 @@ Avant de commencer cet article, vous devez disposer des éléments suivants :
 
 * **Un abonnement Azure**. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
 
-* **Azure CLI** - Voir [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) pour plus d’instructions.
+* **Azure CLI** - Voir [Installer Azure CLI](/cli/azure/install-azure-cli) pour plus d’instructions.
 
 ## <a name="authentication"></a>Authentification
 
-Pour l’authentification auprès de Data Lake Storage Gen1, cet article utilise une approche plus simple où vous vous connectez en tant qu’utilisateur final. Le niveau d’accès au compte et au système de fichiers Data Lake Storage Gen1 est alors régi par le niveau d’accès de l’utilisateur connecté. Cependant, il existe d’autres approches pour l’authentification sur Data Lake Storage Gen1, à savoir **l’authentification de l’utilisateur final** ou **l’authentification de service à service**. Pour obtenir des instructions et plus d’informations sur l’authentification, consultez [l’authentification de l’utilisateur final](data-lake-store-end-user-authenticate-using-active-directory.md) ou [l’authentification de service à service](data-lake-store-authenticate-using-active-directory.md).
+Pour l’authentification auprès de Data Lake Storage Gen1, cet article utilise une approche plus simple où vous vous connectez en tant qu’utilisateur final. Le niveau d’accès au compte et au système de fichiers Data Lake Storage Gen1 est alors régi par le niveau d’accès de l’utilisateur connecté. Cependant, il existe d’autres approches pour l’authentification sur Data Lake Storage Gen1, à savoir **l’authentification de l’utilisateur final** ou **l’authentification de service à service**. Pour obtenir des instructions et plus d’informations sur l’authentification, consultez [l’authentification de l’utilisateur final](data-lake-store-end-user-authenticate-using-active-directory.md) ou [l’authentification de service à service](./data-lake-store-service-to-service-authenticate-using-active-directory.md).
 
 
 ## <a name="log-in-to-your-azure-subscription"></a>Connexion à votre abonnement Azure
@@ -110,23 +110,25 @@ az dls fs list --account mydatalakestoragegen1 --path /mynewfolder
 
 Le résultat doit ressembler à ceci :
 
-    [
-        {
-            "accessTime": 1491323529542,
-            "aclBit": false,
-            "blockSize": 268435456,
-            "group": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
-            "length": 1589881,
-            "modificationTime": 1491323531638,
-            "msExpirationTime": 0,
-            "name": "mynewfolder/vehicle1_09142014.csv",
-            "owner": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
-            "pathSuffix": "vehicle1_09142014.csv",
-            "permission": "770",
-            "replication": 1,
-            "type": "FILE"
-        }
-    ]
+```output
+[
+    {
+        "accessTime": 1491323529542,
+        "aclBit": false,
+        "blockSize": 268435456,
+        "group": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
+        "length": 1589881,
+        "modificationTime": 1491323531638,
+        "msExpirationTime": 0,
+        "name": "mynewfolder/vehicle1_09142014.csv",
+        "owner": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
+        "pathSuffix": "vehicle1_09142014.csv",
+        "permission": "770",
+        "replication": 1,
+        "type": "FILE"
+    }
+]
+```
 
 ## <a name="rename-download-and-delete-data-from-a-data-lake-storage-gen1-account"></a>Renommer, télécharger et supprimer des données d’un compte Data Lake Storage Gen1 
 
@@ -183,17 +185,19 @@ Dans cette section, vous allez apprendre à gérer les listes ACL et les autoris
 
     La sortie doit ressembler à ce qui suit :
 
-        {
-            "entries": [
-            "user::rwx",
-            "group::rwx",
-            "other::---"
-          ],
-          "group": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
-          "owner": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
-          "permission": "770",
-          "stickyBit": false
-        }
+    ```output
+    {
+        "entries": [
+        "user::rwx",
+        "group::rwx",
+        "other::---"
+        ],
+        "group": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
+        "owner": "1808bd5f-62af-45f4-89d8-03c5e81bac20",
+        "permission": "770",
+        "stickyBit": false
+    }
+    ```
 
 * **Pour définir une entrée pour une liste ACL**, utilisez la commande suivante :
 

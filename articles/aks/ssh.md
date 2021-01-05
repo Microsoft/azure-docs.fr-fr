@@ -4,12 +4,12 @@ description: Découvrez comment créer une connexion SSH avec des nœuds de clus
 services: container-service
 ms.topic: article
 ms.date: 07/31/2019
-ms.openlocfilehash: 70ebcb1f340ba28cf80ad3e24a464aad5584b3a4
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 50a52584618e505aa2ae7bd9ed7e0a9f6bc330a9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207154"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87015610"
 ---
 # <a name="connect-with-ssh-to-azure-kubernetes-service-aks-cluster-nodes-for-maintenance-or-troubleshooting"></a>Se connecter avec SSH à des nœuds de cluster AKS (Azure Kubernetes Service) pour effectuer des tâches de maintenance ou de dépannage
 
@@ -141,13 +141,15 @@ Pour créer une connexion SSH à un nœud AKS, vous exécutez un pod d’assista
 1. Exécutez une image conteneur `debian` et attachez-y une session de terminal. Vous pouvez ensuite utiliser ce conteneur pour créer une session SSH avec n’importe quel nœud du cluster AKS :
 
     ```console
-    kubectl run --generator=run-pod/v1 -it --rm aks-ssh --image=debian
+    kubectl run -it --rm aks-ssh --image=debian
     ```
 
     > [!TIP]
     > Si vous utilisez des nœuds Windows Server, ajoutez un sélecteur de nœud à la commande pour planifier le conteneur Debian sur un nœud Linux :
     >
-    > `kubectl run -it --rm aks-ssh --image=debian --overrides='{"apiVersion":"apps/v1","spec":{"template":{"spec":{"nodeSelector":{"beta.kubernetes.io/os":"linux"}}}}}'`
+    > ```console
+    > kubectl run -it --rm aks-ssh --image=debian --overrides='{"apiVersion":"v1","spec":{"nodeSelector":{"beta.kubernetes.io/os":"linux"}}}'
+    > ```
 
 1. Une fois la session du terminal connectée au conteneur, installez un client SSH en utilisant `apt-get` :
 

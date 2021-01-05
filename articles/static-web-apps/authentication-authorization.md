@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: conceptual
 ms.date: 05/08/2020
 ms.author: cshoe
-ms.openlocfilehash: cb6b99351a5cb995d87b482b7e707a3913fd86f2
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: e95cd313d341844eabf4f5c5feae8a8ca3dc9c2e
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594958"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91826541"
 ---
 # <a name="authentication-and-authorization-for-azure-static-web-apps-preview"></a>Authentification et autorisation pour les applications Azure Static Web Apps - Préversion
 
@@ -107,7 +107,7 @@ Lorsque vous supprimez un utilisateur, vous devez garder à l’esprit les consi
 
 Lorsque vous accordez un consentement à une application en tant qu’utilisateur final, l’application a accès à votre adresse e-mail ou à votre nom d’utilisateur, selon le fournisseur d’identité utilisé. Une fois ces informations fournies, le propriétaire de l’application décide comment traiter les informations d’identification personnelle.
 
-Les utilisateurs finaux doivent contacter l’administrateur de chaque application web pour révoquer ces informations.
+Les utilisateurs finaux doivent contacter l’administrateur de chaque application Web pour révoquer ces informations.
 
 Pour supprimer les informations d’identification personnelle de la plateforme Azure Static Web Apps et empêcher la plateforme de fournir ces informations lors de demandes ultérieures, envoyez une demande à l’aide de l’URL suivante :
 
@@ -118,7 +118,7 @@ https://identity.azurestaticapps.net/.auth/purge/<AUTHENTICATION_PROVIDER_NAME>
 Pour empêcher la plateforme de fournir ces informations lors de demandes ultérieures envoyées aux applications, envoyez une demande à l’URL suivante :
 
 ```url
-https://<WEB_APP_DOMAIN_NAME>/identity/.auth/purge/<AUTHENTICATION_PROVIDER_NAME>
+https://<WEB_APP_DOMAIN_NAME>/.auth/purge/<AUTHENTICATION_PROVIDER_NAME>
 ```
 
 ## <a name="system-folder"></a>Dossier système
@@ -154,6 +154,11 @@ Vous pouvez utiliser une [règle d’acheminement](routes.md) pour mapper un fou
 }
 ```
 
+### <a name="post-login-redirect"></a>Redirection après connexion
+
+Si vous souhaitez qu’un utilisateur retourne à une page spécifique après la connexion, indiquez une URL dans le paramètre de chaîne de requête `post_login_redirect_uri`.
+
+
 ## <a name="logout"></a>Logout
 
 L’itinéraire `/.auth/logout` déconnecte les utilisateurs du site web. Vous pouvez ajouter un lien vers votre navigation de site pour permettre à l’utilisateur de se déconnecter comme illustré dans l’exemple suivant.
@@ -171,6 +176,10 @@ Vous pouvez utiliser une [règle d’acheminement](routes.md) pour mapper un iti
 }
 ```
 
+### <a name="post-logout-redirect"></a>Redirection après la déconnexion
+
+Si vous souhaitez qu’un utilisateur retourne à une page spécifique après la déconnexion, indiquez une URL dans le paramètre de chaîne de requête `post_logout_redirect_uri`.
+
 ## <a name="block-an-authorization-provider"></a>Bloquer un fournisseur d’autorisation
 
 Vous souhaitez peut-être empêcher votre application d’utiliser un fournisseur d’autorisation. Par exemple, votre application peut choisir de n’utiliser que les [fournisseurs qui exposent les adresses e-mail](#provider-user-details).
@@ -183,6 +192,10 @@ Pour bloquer un fournisseur, vous pouvez créer des [règles d’acheminement](r
   "statusCode": "404"
 }
 ```
+
+## <a name="restrictions"></a>Restrictions
+
+Consultez [l’article sur les quotas](quotas.md) pour connaître les restrictions et les limitations générales.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -2,16 +2,16 @@
   items:
     - name: Vue d’ensemble
       items:
-        - name: "HPC pour machines virtuelles de série\_H"
+        - name: "HPC pour machines virtuelles de série\_H et de série\_N"
           href: overview.md
     - name: Configuration
       items:
-        - name: Optimisation pour Linux
+        - name: Configurer et optimiser les machines virtuelles
           href: configure.md
         - name: Activer InfiniBand
           href: enable-infiniband.md
-    - name: Configurer MPI
-      href: setup-mpi.md
+        - name: Configurer MPI
+          href: setup-mpi.md
     - name: Mise à l’échelle d’applications
       href: compiling-scaling-applications.md
     - name: Machines virtuelles
@@ -22,11 +22,17 @@
               href: hb-series-overview.md
             - name: Performances
               href: hb-series-performance.md
+        - name: Série HBv2
+          items:
+            - name: Vue d’ensemble
+              href: hbv2-series-overview.md
+            - name: Performances
+              href: hbv2-performance.md
         - name: Série HC
           items:
             - name: Vue d’ensemble
               href: hc-series-overview.md
             - name: Performances
               href: hc-series-performance.md
-        - name: Problèmes connus avec les machines virtuelles des séries HC et HB
+        - name: Problèmes connus avec les machines virtuelles des séries H et N
           href: hb-hc-known-issues.md

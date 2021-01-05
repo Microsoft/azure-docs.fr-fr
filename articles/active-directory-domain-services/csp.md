@@ -2,26 +2,26 @@
 title: Azure AD Domain Services pour les fournisseurs de solutions Cloud | Microsoft Docs
 description: Découvrez comment activer et gérer des domaines managés Azure Active Directory Domain Services pour les fournisseurs de solutions Azure Cloud
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 ms.assetid: 56ccb219-11b2-4e43-9f07-5a76e3cd8da8
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 03/31/2020
-ms.author: iainfou
-ms.openlocfilehash: e7276dcfca6ba033942d62f347ac3a799524cac4
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.date: 07/09/2020
+ms.author: justinha
+ms.openlocfilehash: d8edafff9b6534e5f1ce1c4581595ee187dfd432
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80519087"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96619897"
 ---
 # <a name="azure-active-directory-domain-services-deployment-and-management-for-azure-cloud-solution-providers"></a>Déploiement et gestion d'Azure Active Directory Domain Services pour les fournisseurs de solutions Azure Cloud
 
 Azure CSP (Fournisseurs de solutions Azure Cloud) est un programme destiné aux partenaires Microsoft qui fournit un canal de licence pour divers services cloud Microsoft. Azure CSP permet aux partenaires de gérer les ventes, de prendre en charge les relations relatives à la facturation, de fournir un support technique et sur la facturation et d’être le seul point de contact du client. De plus, Azure CSP fournit un ensemble complet d’outils, notamment un portail libre-service et des API connexes. Ces outils permettent aux partenaires CSP de provisionner et gérer facilement des ressources Azure et de fournir une facturation pour les clients et leurs abonnements.
 
-Le [portail Espace partenaires](https://docs.microsoft.com/azure/cloud-solution-provider/overview/partner-center-overview) est le point d’entrée de tous les partenaires Azure CSP. Il fournit des fonctionnalités de gestion de client riches, un traitement automatisé, etc. Les partenaires Azure CSP peuvent utiliser les fonctionnalités de l’Espace partenaires en utilisant une interface utilisateur basée sur le web ou PowerShell et différents appels d’API.
+Le [portail Espace partenaires](/partner-center/azure-plan-lp) est le point d’entrée de tous les partenaires Azure CSP. Il fournit des fonctionnalités de gestion de client riches, un traitement automatisé, etc. Les partenaires Azure CSP peuvent utiliser les fonctionnalités de l’Espace partenaires en utilisant une interface utilisateur basée sur le web ou PowerShell et différents appels d’API.
 
 Le schéma suivant illustre le fonctionnement général du modèle CSP. Ici, Contoso dispose d'un locataire Azure Active Directory (Azure AD). Il a un partenariat avec un fournisseur de solutions cloud, qui déploie et gère les ressources de son abonnement Azure CSP. Contoso peut également avoir des abonnements Azure ordinaires (directs), qui lui sont facturés directement.
 
@@ -33,7 +33,7 @@ Le groupe des agents d’*administration* est attribué au rôle d’administrat
 
 Quand le partenaire CSP provisionne un abonnement Azure CSP pour Contoso, son groupe d’agents d’administration est affecté au rôle de propriétaire pour cet abonnement. Ainsi, les agents d’administration du partenaire CSP ont les privilèges nécessaires pour provisionner des ressources Azure telles que des machines virtuelles, des réseaux virtuels et Azure AD Domain Services pour le compte de Contoso.
 
-Pour plus d’informations, consultez la [présentation d’Azure CSP](https://docs.microsoft.com/azure/cloud-solution-provider/overview/azure-csp-overview).
+Pour plus d’informations, consultez la [présentation d’Azure CSP](/partner-center/azure-plan-lp).
 
 ## <a name="benefits-of-using-azure-ad-ds-in-an-azure-csp-subscription"></a>Avantages d’utiliser Azure AD DS dans un abonnement Azure CSP
 
@@ -78,11 +78,11 @@ Ce modèle de déploiement peut être adapté aux scénarios où un éditeur de 
 
 Tenez compte des considérations importantes suivantes quand vous administrez un domaine managé dans un abonnement Azure CSP :
 
-* **Les agents d’administration CSP peuvent approvisionner un domaine managé à l’aide de leurs informations d’identification :** Azure AD DS prend en charge les abonnements Azure CSP. Les utilisateurs appartenant au groupe d’agents d’administration d’un partenaire CSP peuvent approvisionner un nouveau domaine managé Azure AD DS.
+* **Les agents d’administration CSP peuvent approvisionner un domaine managé à l’aide de leurs informations d’identification :** Azure AD DS prend en charge les abonnements Azure CSP. Les utilisateurs appartenant au groupe d’agents d’administration d’un partenaire CSP peuvent approvisionner un nouveau domaine managé.
 
 * **Les fournisseurs de solutions cloud peuvent programmer au moyen d’un script la création de domaines managés pour leurs clients à l’aide de PowerShell :** Pour plus d'informations, consultez [Activer Azure AD DS à l’aide de PowerShell](powershell-create-instance.md).
 
-* **Les agents d’administration CSP ne peuvent pas effectuer de tâches de gestion en continu sur le domaine managé à l’aide de leurs informations d’identification :** les utilisateurs administrateurs CSP ne peuvent pas effectuer de tâches de gestion courantes dans le domaine managé à l’aide de leurs informations d’identification. Ces utilisateurs étant externes au locataire Azure AD du client, leurs informations d’identification ne sont pas disponibles dans le locataire Azure AD du client. Azure AD DS n’a pas accès aux hachages de mot de passe Kerberos et NTLM pour ces utilisateurs. Dès lors, les utilisateurs ne peuvent pas être authentifiés sur les domaines managés Azure AD.
+* **Les agents d’administration CSP ne peuvent pas effectuer de tâches de gestion en continu sur le domaine managé à l’aide de leurs informations d’identification :** les utilisateurs administrateurs CSP ne peuvent pas effectuer de tâches de gestion courantes dans le domaine managé à l’aide de leurs informations d’identification. Ces utilisateurs étant externes au locataire Azure AD du client, leurs informations d’identification ne sont pas disponibles dans le locataire Azure AD du client. Azure AD DS n’a pas accès aux hachages de mot de passe Kerberos et NTLM pour ces utilisateurs. Dès lors, les utilisateurs ne peuvent pas être authentifiés sur les domaines managés.
 
   > [!WARNING]
   > Vous devez créer un compte d’utilisateur dans l’annuaire du client pour effectuer des tâches d’administration courantes sur le domaine managé.

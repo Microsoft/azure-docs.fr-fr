@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec Mozy Enterprise | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Mozy Enterprise.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 489b5e62-85c2-45c9-8766-326632d48114
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/01/2019
 ms.author: jeedes
-ms.openlocfilehash: 7d3b7f8982a24856818cbb6ce86060beac969fc2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 97294bdd088f50a46786c3568f4230706f750c4c
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74233508"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92520929"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-mozy-enterprise"></a>Didacticiel : Intégration d’Azure Active Directory avec Mozy Enterprise
 
@@ -31,7 +27,7 @@ L’intégration du logiciel Mozy Enterprise avec Azure AD vous offre les avanta
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Mozy Enterprise (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -53,11 +49,11 @@ Pour configurer l’intégration de Mozy Enterprise à Azure AD, vous devez ajou
 
 **Pour ajouter Mozy Enterprise à partir de la galerie, procédez comme suit :**
 
-1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
+1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory** .
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez l’option **Toutes les applications** .
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -65,13 +61,13 @@ Pour configurer l’intégration de Mozy Enterprise à Azure AD, vous devez ajou
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **Mozy Enterprise**, sélectionnez **Mozy Enterprise** dans le volet des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **Mozy Enterprise** , sélectionnez **Mozy Enterprise** dans le volet des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
      ![Mozy Enterprise dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Mozy Enterprise avec un utilisateur de test appelé **Britta Simon**.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec Mozy Enterprise avec un utilisateur de test appelé **Britta Simon** .
 Pour que l’authentification unique fonctionne, une relation entre l’utilisateur Azure AD et l’utilisateur Mozy Enterprise associé doit être établie.
 
 Pour configurer et tester l’authentification unique Azure AD avec Mozy Enterprise, vous devez suivre les indications des sections suivantes :
@@ -89,32 +85,32 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD avec Mozy Enterprise, procédez comme suit :
 
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Mozy Enterprise**, sélectionnez **Authentification unique**.
+1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Mozy Enterprise** , sélectionnez **Authentification unique** .
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
+2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
+3. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base** .
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
+4. Dans la section **Configuration SAML de base** , effectuez les étapes suivantes :
 
     ![Informations d’authentification unique de domaine et d’URL Mozy Enterprise](common/sp-signonurl.png)
 
-    Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<tenantname>.Mozyenterprise.com`
+    Dans la zone de texte **URL de connexion** , tapez une URL au format suivant : `https://<tenantname>.Mozyenterprise.com`
 
     > [!NOTE]
     > Cette valeur n’est pas la valeur réelle. Mettez à jour la valeur avec l’URL de connexion réelle. Contactez l’[équipe de support Mozy Enterprise](https://support.mozy.com/) pour obtenir la valeur. Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
+5. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-6. Dans la section **Configurer Mozy Enterprise**, copiez la ou les URL appropriées en fonction de vos besoins.
+6. Dans la section **Configurer Mozy Enterprise** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -128,35 +124,35 @@ Pour configurer l’authentification unique Azure AD avec Mozy Enterprise, proc�
 
 1. Dans une autre fenêtre de navigateur web, connectez-vous à votre site d’entreprise Mozy Enterprise en tant qu’administrateur.
 
-2. Dans la section **Configuration**, cliquez sur **Authentication Policy**.
+2. Dans la section **Configuration** , cliquez sur **Authentication Policy** .
    
-    ![Stratégie d’authentification](./media/mozy-enterprise-tutorial/ic777314.png "Authentication Policy")
+    ![Capture d’écran montrant l’élément Authentication Policy sélectionné à partir de Configuration.](./media/mozy-enterprise-tutorial/ic777314.png "Authentication Policy")
 
 3. Dans la section **Authentication Policy** , procédez comme suit :
    
-    ![Stratégie d’authentification](./media/mozy-enterprise-tutorial/ic777315.png "Authentication Policy")
+    ![Capture d’écran montrant la section Authentication Policy, dans laquelle vous pouvez entrer les valeurs décrites.](./media/mozy-enterprise-tutorial/ic777315.png "Authentication Policy")
    
-    a. Sélectionnez **Directory Service** comme **Provider**.
+    a. Sélectionnez **Directory Service** comme **Provider** .
    
-    b. Sélectionnez **Use LDAP Push**.
+    b. Sélectionnez **Use LDAP Push** .
    
     c. Cliquez sur l’onglet **SAML Authentication** .
    
-    d. Collez l’**URL de connexion**, que vous avez copiée dans le portail Azure, dans la zone de texte **Authentication URL** (URL d’authentification).
+    d. Collez l’ **URL de connexion** , que vous avez copiée dans le portail Azure, dans la zone de texte **Authentication URL** (URL d’authentification).
    
-    e. Collez l’**Identificateur Azure AD**, que vous avez copié sur le portail Azure, dans la zone de texte **Point de terminaison SAML**.
+    e. Collez l’ **Identificateur Azure AD** , que vous avez copié sur le portail Azure, dans la zone de texte **Point de terminaison SAML** .
    
-    f. Ouvrez votre certificat téléchargé, codé en base 64, dans le bloc-notes, copiez son contenu dans le Presse-papiers et collez-le dans la zone de texte **Certificat SAML**.
+    f. Ouvrez votre certificat téléchargé, codé en base 64, dans le bloc-notes, copiez son contenu dans le Presse-papiers et collez-le dans la zone de texte **Certificat SAML** .
    
-    g. Sélectionnez **Enable SSO for Admins to log in with their network credentials**.
+    g. Sélectionnez **Enable SSO for Admins to log in with their network credentials** .
    
-    h. Cliquez sur **Enregistrer les modifications**.
+    h. Cliquez sur **Enregistrer les modifications** .
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
 
 L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory** , sélectionnez **Utilisateurs** , puis sélectionnez **Tous les utilisateurs** .
 
     ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
 
@@ -168,40 +164,40 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
+    a. Dans le champ **Nom** , entrez **BrittaSimon** .
   
-    b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
+    b. Dans le champ **Nom d’utilisateur** , tapez **brittasimon\@domainedevotreentreprise.extension** .  
     Par exemple : BrittaSimon@contoso.com
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+    c. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ Mot de passe.
 
-    d. Cliquez sur **Créer**.
+    d. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Mozy Enterprise.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **Mozy Enterprise**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , **Toutes les applications** , puis **Mozy Enterprise** .
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
-2. Dans la liste des applications, sélectionnez **Mozy Enterprise**.
+2. Dans la liste des applications, sélectionnez **Mozy Enterprise** .
 
     ![Lien Mozy Enterprise dans la liste des applications](common/all-applications.png)
 
-3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes**.
+3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes** .
 
     ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+4. Cliquez sur le bouton **Ajouter un utilisateur** , puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+5. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+7. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ### <a name="create-mozy-enterprise-test-user"></a>Créer un utilisateur de test Mozy Enterprise
 
@@ -214,12 +210,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Mozy Enterprise, vou
 
 1. Connectez-vous à votre locataire **Mozy Enterprise** .
 
-2. Cliquez sur **Users**, puis sur **Add New User**.
+2. Cliquez sur **Users** , puis sur **Add New User** .
    
     ![Utilisateurs](./media/mozy-enterprise-tutorial/ic777317.png "Utilisateurs")
    
     >[!NOTE]
-    >L’option **Add New User** ne s’affiche que si **Mozy** est sélectionné comme fournisseur sous **Authentication policy**. Si l’authentification SAML est configurée, les utilisateurs sont ajoutés automatiquement lors de la première connexion à l’aide de l’authentification unique.
+    >L’option **Add New User** ne s’affiche que si **Mozy** est sélectionné comme fournisseur sous **Authentication policy** . Si l’authentification SAML est configurée, les utilisateurs sont ajoutés automatiquement lors de la première connexion à l’aide de l’authentification unique.
     
 3. Dans la boîte de dialogue New User, procédez comme suit :
    
@@ -233,7 +229,7 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Mozy Enterprise, vou
    
     d. Dans la zone de texte **Email** , tapez l’adresse de messagerie de l’utilisateur Azure AD.
    
-    e. Sélectionnez **Send user instruction email**.
+    e. Sélectionnez **Send user instruction email** .
    
     f. Cliquez sur **Add User(s)** .
 
@@ -244,13 +240,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Mozy Enterprise, vou
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Mozy Enterprise dans le panneau d’accès doit vous connecter automatiquement à l’application Mozy Enterprise pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Mozy Enterprise dans le panneau d’accès doit vous connecter automatiquement à l’application Mozy Enterprise pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

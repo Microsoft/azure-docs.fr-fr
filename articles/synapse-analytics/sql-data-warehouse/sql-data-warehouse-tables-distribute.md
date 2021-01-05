@@ -1,28 +1,28 @@
 ---
 title: Guide de conception de tables distribuées
-description: Recommandations pour la conception de tables distribuées par hachage et par tourniquet (round robin) dans un pool SQL Synapse.
+description: Recommandations pour la conception de tables distribuées par hachage et par tourniquet (round robin) à l’aide d’un pool SQL dédié dans Azure Synapse Analytics.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 599514f6e7b97208194fc4c1660712f4d5e0c4cb
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: c452d51018ef3f204cd7281971c07fb6337d39bf
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585349"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96449711"
 ---
-# <a name="guidance-for-designing-distributed-tables-in-synapse-sql-pool"></a>Guide de conception de tables distribuées dans un pool SQL Synapse
+# <a name="guidance-for-designing-distributed-tables-using-dedicated-sql-pool-in-azure-synapse-analytics"></a>Conseils pour la conception de tables distribuées à l’aide d’un pool SQL dédié dans Azure Synapse Analytics
 
-Recommandations pour la conception de tables distribuées par hachage et par tourniquet (round robin) dans des pools SQL Synapse.
+Recommandations pour la conception de tables distribuées par hachage et par tourniquet (round robin) dans des pools SQL dédiés.
 
-Cet article suppose que les concepts de distribution et de déplacement de données dans un pool SQL Synapse vous sont familiers.  Pour plus d'informations, consultez [Architecture de traitement massivement parallèle (MPP) Azure Synapse Analytics](massively-parallel-processing-mpp-architecture.md).
+Cet article suppose que les concepts de distribution et de déplacement de données dans un pool SQL dédié vous sont familiers.  Pour plus d'informations, consultez [Architecture Azure Synapse Analytics](massively-parallel-processing-mpp-architecture.md).
 
 ## <a name="what-is-a-distributed-table"></a>Qu’est-ce qu’une table distribuée ?
 
@@ -32,11 +32,11 @@ Les **tables distribuées par hachage** améliorent les performances des requêt
 
 Une autre option de stockage de table est de répliquer une petite table sur tous les nœuds de calcul. Pour plus d’informations, consultez [Guide de conception pour les tables répliquées](design-guidance-for-replicated-tables.md). Pour choisir rapidement parmi les trois options, consultez Tables distribuées dans la [vue d’ensemble des tables](sql-data-warehouse-tables-overview.md).
 
-Dans le cadre de la conception d’une table, essayez d’en savoir autant que possible sur vos données et la façon dont elles sont interrogées.  Considérez par exemple les questions suivantes :
+Dans le cadre de la conception d’une table, essayez d’en savoir autant que possible sur vos données et la façon dont elles sont interrogées.    Considérez par exemple les questions suivantes :
 
 - Quelle est la taille de la table ?
 - Quelle est la fréquence d’actualisation de la table ?
-- Est-ce que je dispose de tables de faits et de dimension dans un pool SQL Synapse ?
+- Est-ce que je dispose de tables de faits et de dimension dans un pool SQL dédié ?
 
 ### <a name="hash-distributed"></a>Distribution par hachage
 
@@ -44,7 +44,7 @@ Une table distribuée par hachage distribue les lignes de la table sur les nœud
 
 ![Table distribuée](./media/sql-data-warehouse-tables-distribute/hash-distributed-table.png "Table distribuée")  
 
-Comme les valeurs identiques sont toujours hachées sur la même distribution, l’entrepôt de données a une connaissance intégrée des emplacements des lignes. Dans un pool SQL Synapse, ces informations sont utilisées pour réduire le déplacement des données pendant les requêtes, ce qui améliore les performances de ces dernières.
+Comme les valeurs identiques sont toujours hachées sur la même distribution, SQL Analytics dispose d'une connaissance intégrée de l'emplacement des lignes. Dans un pool SQL dédié, ces informations sont utilisées pour réduire le déplacement des données pendant les requêtes, ce qui améliore les performances de ces dernières.
 
 Les tables distribuées par hachage fonctionnent correctement pour des tables de faits volumineuses dans un schéma en étoile. Elles peuvent contenir un très grand nombre de lignes et réaliser néanmoins des performances élevées. Il existe bien entendu certaines considérations relatives à la conception qui vous aident à obtenir les performances que le système distribué doit fournir. Le choix d’une colonne de distribution appropriée est l’une de ces considérations qui est décrite dans cet article.
 
@@ -113,7 +113,7 @@ Pour équilibrer le traitement parallèle, sélectionnez une colonne de distribu
 
 ### <a name="choose-a-distribution-column-that-minimizes-data-movement"></a>Choisir une colonne de distribution qui réduit le déplacement des données
 
-Pour obtenir un résultat de requête correct, les requêtes peuvent déplacer des données d’un nœud de calcul à un autre. Le déplacement des données se produit généralement quand les requêtes possèdent des jointures et agrégations sur des tables distribuées. Le choix d'une colonne de distribution qui réduit le déplacement des données est l'une des stratégies les plus importantes pour optimiser les performances votre pool SQL Synapse.
+Pour obtenir un résultat de requête correct, les requêtes peuvent déplacer des données d’un nœud de calcul à un autre. Le déplacement des données se produit généralement quand les requêtes possèdent des jointures et agrégations sur des tables distribuées. Le choix d’une colonne de distribution qui réduit le déplacement des données est l’une des stratégies les plus importantes pour optimiser les performances votre pool SQL dédié.
 
 Pour réduire le déplacement des données, sélectionnez une colonne de distribution qui :
 
@@ -225,5 +225,5 @@ RENAME OBJECT [dbo].[FactInternetSales_CustomerKey] TO [FactInternetSales];
 
 Pour créer une table distribuée, utilisez l’une de ces instructions :
 
-- [CREATE TABLE (pool SQL Synapse)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
-- [CREATE TABLE AS SELECT (pool SQL Synapse)](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+- [CREATE TABLE (pool SQL dédié)](/sql/t-sql/statements/create-table-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
+- [CREATE TABLE AS SELECT (pool SQL dédié)](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)

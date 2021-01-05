@@ -1,18 +1,18 @@
 ---
 title: Gestion des prospects dans Salesforce – Marketplace commercial de Microsoft
 description: Découvrez comment utiliser Salesforce pour configurer des prospects pour Microsoft AppSource et la Place de marché Azure.
-author: qianw211
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
+author: trkeya
+ms.author: trkeya
 ms.date: 03/30/2020
-ms.author: dsindona
-ms.openlocfilehash: 7d64b8914fa0b109dfc662a97a7f84d94e3491ec
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 73caf848ab5c6f8e973469066ce4612a075a52f5
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82789706"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94489316"
 ---
 # <a name="configure-lead-management-for-salesforce"></a>Configurer la gestion des prospects pour Salesforce
 
@@ -70,15 +70,15 @@ Lorsque vous êtes prêt à configurer les informations de gestion des prospects
 
 1. Sélectionnez votre offre, puis accédez à l’onglet **Configuration de l’offre**.
 
-1. Dans la section **Gestion des prospects**, sélectionnez **Connexion**. 
+1. Dans la section **Prospects** , sélectionnez **Se connecter**.
 
-    ![Section Gestion des prospects - bouton Se connecter](./media/commercial-marketplace-lead-management-instructions-salesforce/lead-management-connect.png)
+    :::image type="content" source="./media/commercial-marketplace-lead-management-instructions-salesforce/customer-leads.png" alt-text="Prospects":::
 
-1. Dans la fenêtre contextuelle **Détails de la connexion**, sélectionnez **Salesforce** pour définir **Destination du prospect** et collez la valeur `oid` du formulaire Web-to-Lead que vous avez créé dans le champ **Identificateur de l’organisation**.
+1. Dans la fenêtre contextuelle **Détails de la connexion** , sélectionnez **Salesforce** pour définir **Destination du prospect** et collez la valeur `oid` du formulaire Web-to-Lead que vous avez créé dans le champ **Identificateur de l’organisation**.
 
     ![Fenêtre contextuelle Détails de la connexion – zone de validation de l’adresse e-mail du contact](./media/commercial-marketplace-lead-management-instructions-salesforce/salesforce-connection-details.png)
 
-1. Sous **E-mail du contact**, entrez les adresses e-mail des personnes de votre société qui doivent recevoir des notifications par e-mail lors de la réception d’un nouveau prospect. Vous pouvez spécifier plusieurs e-mails en les séparant par un point-virgule.
+1. Sous **E-mail du contact** , entrez les adresses e-mail des personnes de votre société qui doivent recevoir des notifications par e-mail lors de la réception d’un nouveau prospect. Vous pouvez spécifier plusieurs e-mails en les séparant par un point-virgule.
 
 1. Sélectionnez **OK**.
 

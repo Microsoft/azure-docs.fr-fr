@@ -1,6 +1,6 @@
 ---
 title: Variables HTTP pour le moteur de règles Azure CDN | Microsoft Docs
-description: Les variables HTTP vous permettent de récupérer les métadonnées de requête et de réponse HTTP.
+description: Découvrez les variables HTTP qui vous permettent d’obtenir des métadonnées sur les requêtes et réponses HTTP pour certaines fonctionnalités du moteur de règles. Utilisez des métadonnées pour modifier une demande/réponse.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -14,21 +14,21 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/09/2018
 ms.author: allensu
-ms.openlocfilehash: b9ced5d4a81effcd73e0243d09bb83ed0fe7667c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a2d9fc98ba6f514afbd88e543a859a69e0fc6c6b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253694"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88192681"
 ---
 # <a name="http-variables-for-azure-cdn-rules-engine"></a>Variables HTTP pour le moteur de règles Azure CDN
 Les variables HTTP vous permettent de récupérer les métadonnées de requête et de réponse HTTP. Ces métadonnées peuvent ensuite servir à modifier une requête ou une réponse de façon dynamique. L’utilisation de variables HTTP est limitée aux fonctionnalités de moteur de règles suivantes :
 
-- [Cache-Key Rewrite](cdn-verizon-premium-rules-engine-reference-features.md#cache-key-rewrite)
-- [Modify Client Request Header](cdn-verizon-premium-rules-engine-reference-features.md#modify-client-request-header)
-- [Modify Client Response Header](cdn-verizon-premium-rules-engine-reference-features.md#modify-client-response-header)
-- [URL Redirect](cdn-verizon-premium-rules-engine-reference-features.md#url-redirect)
-- [URL Rewrite](cdn-verizon-premium-rules-engine-reference-features.md#url-rewrite)
+- [Cache-Key Rewrite](https://docs.vdms.com/cdn/Content/HRE/F/Cache-Key-Rewrite.htm)
+- [Modify Client Request Header](https://docs.vdms.com/cdn/Content/HRE/F/Modify-Client-Request-Header.htm)
+- [Modify Client Response Header](https://docs.vdms.com/cdn/Content/HRE/F/Modify-Client-Response-Header.htm)
+- [URL Redirect](https://docs.vdms.com/cdn/Content/HRE/F/URL-Redirect.htm)
+- [URL Rewrite](https://docs.vdms.com/cdn/Content/HRE/F/URL-Rewrite.htm)
 
 ## <a name="definitions"></a>Définitions
 Le tableau suivant décrit les variables HTTP prises en charge. Une valeur vide est retournée lorsque les métadonnées géographiques (par exemple, code postal) ne sont pas disponibles pour une requête particulière.
@@ -40,7 +40,7 @@ Le tableau suivant décrit les variables HTTP prises en charge. Une valeur vide 
 | Ville (demandeur) | %{geo_city} | Indique la ville du demandeur. | Los Angeles |
 | Continent (demandeur) | %{geo_continent} | Indique le continent du demandeur au travers de son abréviation. <br />Les valeurs autorisées sont : <br />AF : Afrique<br />AS : Asia<br />EU : Europe<br />NA : Amérique du Nord<br />OC : Océanie<br />SA : Amérique du Sud<br /><br />**Déprécié :** %{virt_dst_continent}. <br />Cette variable est dépréciée au profit de %{geo_continent}. <br />Bien que les règles utilisant cette variable dépréciée continuent à fonctionner, vous devez les mettre à jour pour utiliser la nouvelle variable.| N/A |
 | Valeur du cookie | %{cookie_Cookie} | Retourne la valeur correspondant à la clé de cookie identifiée par le terme Cookie. | Exemple d’utilisation : <br />%{cookie__utma}<br /><br />Exemple de valeur :<br />111662281.2.10.1222100123 |
-| Pays (demandeur) | %{geo_country} | Indique le pays d’origine du demandeur au travers de son code pays. <br />**Déprécié :** %{virt_dst_country}. <br /><br />Cette variable est dépréciée au profit de %{geo_country}. Bien que les règles utilisant cette variable dépréciée continuent à fonctionner, vous devez les mettre à jour pour utiliser la nouvelle variable. | US |
+| Pays/région (demandeur) | %{geo_country} | Indique le pays/la région d’origine du demandeur au travers de son préfixe international. <br />**Déprécié :** %{virt_dst_country}. <br /><br />Cette variable est dépréciée au profit de %{geo_country}. Bien que les règles utilisant cette variable dépréciée continuent à fonctionner, vous devez les mettre à jour pour utiliser la nouvelle variable. | US |
 | Designated Market Area (demandeur) | %{geo_dma_code} |Spécifie le marché des médias du demandeur au moyen de son code de région. <br /><br />Ce champ est uniquement applicable aux requêtes provenant des États-Unis.| 745 |
 | Méthode de requête HTTP | %{request_method} | Indique la méthode de requête HTTP. | GET |
 | Code d’état HTTP | %{status} | Indique le code d’état HTTP de la réponse. | 200 |
@@ -102,7 +102,7 @@ Les délimiteurs sont décrits dans le tableau suivant.
 | / | Délimite une variable HTTP ou un modèle. |
 | // | Recherche et remplace toutes les instances du modèle spécifié. |
 | /= | Recherche, copie et réécrit toutes les occurrences du modèle spécifié. |
-| . | Convertit la valeur associée à la variable HTTP en minuscules. |
+| , | Convertit la valeur associée à la variable HTTP en minuscules. |
 | ^ | Convertit la valeur associée à la variable HTTP en majuscules. |
 | ,, | Convertit toutes les instances du caractère spécifié dans la valeur associée à la variable HTTP en minuscules. |
 | ^^ | Convertit toutes les instances du caractère spécifié dans la valeur associée à la variable HTTP en majuscules. |
@@ -187,7 +187,7 @@ Dans cet exemple de scénario, la variable *request_uri* est définie sur :
 
 Le tableau suivant illustre le fonctionnement de cette syntaxe.
 
-| Exemple de syntaxe | Résultats | |
+| Exemple de syntaxe | Résultats | Description |
 | ------------- | ------- | --- |
 | %{request_uri#/800001}/customerorigin | /customerorigin/myorigin/marketing/product.html?language=en-US | Étant donné que la variable commence par le modèle, ce dernier a été remplacé. |
 | %{request_uri%html}htm | /800001/myorigin/marketing/product.html?language=en-US | Étant donné que la variable ne se termine pas par le modèle, il n’y a aucune modification.|

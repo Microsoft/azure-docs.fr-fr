@@ -1,18 +1,18 @@
 ---
 title: 'ExpressRoute : Déplacer des circuits de Classic vers Azure Resource Manager'
-description: Vue d’ensemble du pont entre les modèles de déploiement classique et Resource Manager.
+description: Découvrez les enjeux de la migration d’un circuit ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Azure Resource Manager.
 services: expressroute
-author: ganesr
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/07/2018
-ms.author: ganesr
-ms.openlocfilehash: c4fed30f7f4b723f04cd59b2a987b498e3d614a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 649174e59c3e58b4675393ce665cf765016d5551
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645903"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92331547"
 ---
 # <a name="moving-expressroute-circuits-from-the-classic-to-the-resource-manager-deployment-model"></a>Migration de circuits ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager
 Cet article décrit les enjeux de la migration d’un circuit ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager.
@@ -85,7 +85,7 @@ Cette section décrit les opérations prises en charge pour les circuits Express
 Cette section décrit les opérations non prises en charge pour les circuits ExpressRoute :
 
 * Gestion du cycle de vie d’un circuit ExpressRoute à partir du modèle de déploiement classique.
-* Prise en charge du contrôle RBAC (Role-Based Access Control) dans le modèle de déploiement classique. Vous ne pouvez effectuer aucun contrôle RBAC sur un circuit dans le modèle de déploiement classique. Un administrateur/coadministrateur de l’abonnement peut lier des réseaux virtuels au circuit (ou les en dissocier).
+* Prise en charge du contrôle Azure RBAC (Role-Based Access Control) dans le modèle de déploiement classique. Vous ne pouvez effectuer aucun contrôle Azure RBAC sur un circuit dans le modèle de déploiement classique. Un administrateur/coadministrateur de l’abonnement peut lier des réseaux virtuels au circuit (ou les en dissocier).
 
 ## <a name="configuration"></a>Configuration
 Suivez les instructions dans [Migration d’un circuit ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager](expressroute-howto-move-arm.md).

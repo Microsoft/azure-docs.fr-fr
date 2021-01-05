@@ -1,6 +1,6 @@
 ---
-title: Utilisation de plusieurs locataires par les fournisseurs de services MSSP dans Azure Sentinel | Microsoft Docs
-description: Comment les fournisseurs de services MSSP peuvent utiliser plusieurs locataires dans Azure Sentinel.
+title: Gérer plusieurs locataires dans Azure Sentinel en tant que fournisseur de services de sécurité gérée | Microsoft Docs
+description: Intégration et gestion de plusieurs locataires dans Azure Sentinel en tant que fournisseur de services de sécurité gérée (MSSP) à l’aide d’Azure Lighthouse.
 services: sentinel
 documentationcenter: na
 author: yelevin
@@ -9,41 +9,49 @@ editor: ''
 ms.service: azure-sentinel
 ms.subservice: azure-sentinel
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/23/2019
+ms.date: 09/29/2020
 ms.author: yelevin
-ms.openlocfilehash: fdb58686fcdd18a8e2861aab533717dbc91e8893
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 011ddb883c028a954a8b0683c220bf6341eddb66
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79476013"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91578142"
 ---
-# <a name="work-with-multiple-tenants-in-azure-sentinel"></a>Utiliser plusieurs locataires dans Azure Sentinel 
+# <a name="manage-multiple-tenants-in-azure-sentinel-as-an-mssp"></a>Gérer plusieurs locataires dans Azure Sentinel en tant que MSSP
 
-Si vous êtes un fournisseur de services de sécurité managés (MSSP, managed security service provider) et que vous utilisez [Azure Lighthouse](../lighthouse/overview.md) pour gérer les centres d’opérations de sécurité de vos clients, vous pouvez gérer les ressources Azure Sentinel de vos clients sans vous connecter directement au locataire du client, à partir de votre propre locataire Azure. 
+Si vous êtes un fournisseur de services de sécurité gérée (MSSP, managed security service provider) et que vous utilisez [Azure Lighthouse](../lighthouse/overview.md) pour offrir des services de centre d’opérations de sécurité à vos clients, vous pouvez gérer les ressources Azure Sentinel de vos clients directement depuis votre propre locataire Azure, sans avoir à vous connecter au locataire du client. 
 
 ## <a name="prerequisites"></a>Prérequis
-- [Intégrez Azure Lighthouse](../lighthouse/how-to/onboard-customer.md).
-- Pour que le processus fonctionne correctement, votre locataire doit être inscrit auprès du fournisseur de ressources Azure Sentinel sur au moins un abonnement. Si votre locataire dispose d’une solution Azure Sentinel inscrite, vous êtes prêt à commencer. Dans le cas contraire, sélectionnez **Abonnements** dans le portail Azure, puis **Fournisseurs de ressources**.  Ensuite, dans l’écran **SOC - Fournisseurs de ressources**, recherchez et sélectionnez `Microsoft.OperationalInsights` et `Microsoft.SecurityInsights`, puis sélectionnez **Inscrire**.
-   ![Vérification des fournisseurs de ressources](media/multiple-tenants-service-providers/check-resource-provider.png)
-## <a name="how-to-access-azure-sentinel-from-other-tenants"></a>Accéder à Azure Sentinel à partir d’autres locataires
-1. Sous **Répertoire + abonnement**, sélectionnez les répertoires délégués et les abonnements où se trouvent les espaces de travail Azure Sentinel de votre client.
 
-   ![Générer des incidents de sécurité](media/multiple-tenants-service-providers/directory-subscription.png)
+- [Intégrez Azure Lighthouse](../lighthouse/how-to/onboard-customer.md).
+
+- Pour que le processus fonctionne correctement, votre locataire (le locataire MSSP) doit disposer de fournisseurs de ressources Azure Sentinel inscrits sur au moins un abonnement. En outre, les fournisseurs de ressources doivent être inscrits pour chacun des locataires de vos clients. Si vous avez inscrit Azure Sentinel dans votre locataire et vos clients dans le leur, vous êtes prêt à commencer. Pour vérifier l’inscription, procédez comme suit :
+
+    1. Sélectionnez **Abonnements** dans le portail Azure, puis sélectionnez un abonnement approprié dans le menu.
+
+    1. Dans le menu de navigation de l’écran d’abonnement, sous **Paramètres**, sélectionnez **Fournisseurs de ressources**.
+
+    1. À partir de l’écran ***nom de l’abonnement* | Fournisseurs de ressources**, recherchez et sélectionnez *Microsoft.OperationalInsights* et *Microsoft.SecurityInsights*, puis vérifiez la colonne **État**. Si l’état du fournisseur est *NotRegistered*, sélectionnez **Inscrire**.
+    
+        :::image type="content" source="media/multiple-tenants-service-providers/check-resource-provider.png" alt-text="Vérification des fournisseurs de ressources":::
+
+## <a name="how-to-access-azure-sentinel-in-managed-tenants"></a>Accéder à Azure Sentinel dans des locataires gérés
+
+1. Sous **Répertoire + abonnement**, sélectionnez les répertoires délégués (répertoire = locataire) et les abonnements où se trouvent les espaces de travail Azure Sentinel de votre client.
+
+    :::image type="content" source="media/multiple-tenants-service-providers/directory-subscription.png" alt-text="Vérification des fournisseurs de ressources":::
 
 1. Ouvrez Azure Sentinel. Vous voyez tous les espaces de travail des abonnements sélectionnés. Vous pourrez les utiliser en toute transparence comme n’importe quel espace de travail de votre propre locataire.
 
 > [!NOTE]
 > Vous ne pourrez pas déployer de connecteurs dans Azure Sentinel à partir d’un espace de travail managé. Pour déployer un connecteur, vous devez vous connecter directement au locataire sur lequel vous souhaitez le déployer et vous authentifier avec les autorisations nécessaires.
 
-
-
-
-
 ## <a name="next-steps"></a>Étapes suivantes
+
 Ce document vous a permis d’apprendre à gérer plusieurs locataires Azure Sentinel en toute transparence. Pour en savoir plus sur Azure Sentinel, voir les articles suivants :
 - Découvrez comment [avoir une visibilité sur vos données et les menaces potentielles](quickstart-get-visibility.md).
 - Prise en main de la [détection des menaces avec Azure Sentinel](tutorial-detect-threats-built-in.md).

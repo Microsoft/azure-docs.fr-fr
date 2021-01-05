@@ -8,16 +8,16 @@ metadata:
   ms.service: active-directory
   ms.subservice: devices
   ms.topic: landing-page
-  author: MarkusVi
-  ms.author: markvi
+  author: barclayn
+  ms.author: barclayn
   ms.date: 08/29/2019
   ms.collection: M365-identity-device-management
-  ms.openlocfilehash: 2a403b66cfd1005e86f269d4affe4086564e291c
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 0cecb8d1b27e6e236c02e9c70ed2e24095d9ee73
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "70162552"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89018346"
 landingContent:
 - title: À propos des identités managées
   linkLists:

@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 12/17/2019
+ms.date: 10/2/2020
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: e25af1f629ea6fa7db14ce89dfffaa340486a989
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 89a4c62044e3be849650de703d2daa9ca3e2a975
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82689784"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91932581"
 ---
 # <a name="microsoft-identity-platform-and-the-oauth-20-client-credentials-flow"></a>Plateforme d’identités Microsoft et flux d’informations d’identification du client OAuth 2.0
 
@@ -27,7 +27,7 @@ Cet article explique comment programmer directement par rapport au protocole dan
 
 Le flux d’octroi des informations d’identification du client OAuth 2.0 permet à un service web (client confidentiel) d’utiliser ses propres informations d’identification pour s’authentifier lorsqu’il appelle un autre service web, au lieu d’emprunter l’identité d’un utilisateur. Dans ce scénario, le client est généralement un service web de niveau intermédiaire, un service démon ou un site web. Pour augmenter le niveau d’assurance, la plateforme d’identités Microsoft autorise également le service d’appel à utiliser un certificat (au lieu d’un secret partagé) comme une information d’identification.
 
-Dans l’octroi *OAuth à trois branches* le plus courant, une application cliente est autorisée à accéder à une ressource pour le compte d’un utilisateur spécifique. L’autorisation est déléguée de l’utilisateur à l’application, en général, durant le processus de [consentement](v2-permissions-and-consent.md). Toutefois, dans le flux des informations d’identification du client (*OAuth à deux branches*), les autorisations sont accordées directement à l’application elle-même. Lorsque l’application présente un jeton à une ressource, la ressource impose que l’application elle-même, et non pas l’utilisateur, ait l’autorisation d’effectuer une action.
+Dans le flux des informations d’identification du client, les autorisations sont accordées directement à l’application elle-même par l’administrateur. Lorsque l’application présente un jeton à une ressource, la ressource impose que l’application elle-même, et non pas l'utilisateur (puisqu’il n’est pas impliqué, ait l’autorisation d’effectuer une action.  Cet article décrit les étapes nécessaires pour [autoriser une application à appeler une API](#application-permissions), ainsi que [comment récupérer les jetons nécessaires pour appeler cette API](#get-a-token).
 
 ## <a name="protocol-diagram"></a>Schéma de protocole
 
@@ -52,6 +52,12 @@ Un cas d’utilisation typique consiste à utiliser une liste ACL afin d'exécut
 
 Ce type d’autorisation est courant pour les démons et les comptes de service qui doivent accéder à des données qui appartiennent à des utilisateurs avec des comptes Microsoft personnels. Pour les données appartenant à des organisations, nous vous recommandons d’acquérir l’autorisation requise via les autorisations de l’application.
 
+#### <a name="controlling-tokens-without-the-roles-claim"></a>Contrôle des jetons sans la revendication `roles`
+
+Pour activer ce modèle d’autorisation par listes ACL, Azure AD n’impose pas que les applications soient autorisées à obtenir des jetons pour une autre application. Les jetons de type application uniquement peuvent ainsi être émis sans revendication `roles`. Les applications qui exposent des API doivent implémenter des vérifications d’autorisation afin d’accepter les jetons.
+
+Si vous souhaitez empêcher les applications d’obtenir des jetons d’accès de type application uniquement sans rôle pour votre application, [veillez à ce que les exigences d’affectation d’utilisateurs soient activées pour votre application](../manage-apps/assign-user-or-group-access-portal.md#configure-an-application-to-require-user-assignment). Ainsi, les utilisateurs et les applications dépourvus de rôles ne pourront pas récupérer de jeton pour cette application. 
+
 ### <a name="application-permissions"></a>Autorisations de l’application
 
 Au lieu d’utiliser des listes ACL, vous pouvez utiliser des API pour exposer un ensemble d’**autorisations d’application**. Une autorisation de l’application est accordée à une application par un administrateur d’une organisation et peut uniquement être utilisée pour accéder aux données appartenant à cette organisation et ses employés. Par exemple, Microsoft Graph expose plusieurs autorisations d’application pour effectuer les opérations suivantes :
@@ -61,21 +67,11 @@ Au lieu d’utiliser des listes ACL, vous pouvez utiliser des API pour exposer u
 * Envoyer des messages en tant que n’importe quel utilisateur
 * Lire les données du répertoire
 
-Pour plus d’informations sur les autorisations d’application, consultez la page [Microsoft Graph](https://developer.microsoft.com/graph).
+Pour utiliser des autorisations d’application avec votre propre API (par opposition à Microsoft Graph), vous devez d’abord [exposer l’API](quickstart-configure-app-expose-web-apis.md) en définissant des étendues dans l’inscription de l’application de l’API dans le Portail Azure. Ensuite, [configurer l’accès à l’API](quickstart-configure-app-access-web-apis.md) en sélectionnant ces autorisations dans l’inscription de l’application de votre application cliente. Si vous n’avez pas exposé d’étendues dans l’inscription de l’application de votre API, vous ne pouvez pas spécifier d’autorisations d’application pour cette API dans l’inscription de l’application de votre application cliente dans le Portail Azure.
 
-Pour utiliser les autorisations d’application dans votre application, suivez la procédure décrite dans les sections suivantes.
+Lors de l’authentification en tant qu’application (par opposition à l’authentification avec un utilisateur), vous ne pouvez pas utiliser *d’autorisations déléguées*, étendues accordées par un utilisateur. Vous devez utiliser des autorisations d’application, également appelées « rôles », accordées par un administrateur pour l’application ou par le biais d’une pré-autorisation par l’API web.
 
-
-> [!NOTE]
-> Lors de l’authentification en tant qu’application, par opposition à l’authentification avec un utilisateur, vous ne pouvez pas utiliser d’« autorisations déléguées » (étendues accordées par un utilisateur).  Vous devez utiliser des « autorisations d’application », également appelées « rôles », accordées par un administrateur pour l’application (ou par le biais d’une pré-autorisation par l’API web).
-
-
-#### <a name="request-the-permissions-in-the-app-registration-portal"></a>Demander les autorisations dans le portail d’inscription de l’application
-
-1. Créez et inscrivez une application via la nouvelle [expérience Inscriptions d’applications (préversion)](quickstart-register-app.md).
-2. Accédez à votre application avec l’expérience Inscriptions d’applications (préversion). Accédez à la section **Certificats et clés secrètes** et ajoutez une **nouvelle clé secrète client**, qui vous sera utile pour demander un jeton.
-3. Recherchez la section **Autorisations d’API** puis ajoutez les **autorisations d’application** dont votre application a besoin.
-4. **Enregistrez** l’inscription de l’application.
+Pour en savoir plus sur les autorisations d’application, consultez [Autorisation et Consentement](v2-permissions-and-consent.md#permission-types).
 
 #### <a name="recommended-sign-the-user-into-your-app"></a>Recommandé : connecter l’utilisateur à votre application
 

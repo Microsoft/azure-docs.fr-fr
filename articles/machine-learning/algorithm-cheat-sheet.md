@@ -10,10 +10,10 @@ author: FrancescaLazzeri
 ms.author: lazzeri
 ms.date: 03/05/2020
 ms.openlocfilehash: b824604ce9d0171b5612ab559eace4b35fd01eb8
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82890975"
 ---
 # <a name="machine-learning-algorithm-cheat-sheet-for-azure-machine-learning-designer"></a>Aide-mémoire de l’algorithme Machine Learning pour le concepteur Azure Machine Learning

@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 03/20/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: f50373b0841b7626bc405f121015c15ae1587a97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77bb53e2605913fcee6999284acb04616efc53af
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80088869"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85201410"
 ---
 # <a name="define-an-application-insights-technical-profile-in-an-azure-ad-b2c-custom-policy"></a>Définir un profil technique Application Insights dans une stratégie personnalisée Azure AD B2C
 
@@ -47,7 +47,7 @@ L’exemple suivant montre le profil technique Application Insights habituel. D�
 
 L’élément **InputClaims** contient une liste des revendications à envoyer à Application Insights. Vous pouvez également mapper le nom de votre revendication à un nom que vous préférez afficher dans Application Insights. L’exemple suivant montre comment envoyer des télémétries à Application Insights. Les propriétés d’un événement sont ajoutées via la syntaxe `{property:NAME}`, où NAME représente la propriété ajoutée à l’événement. DefaultValue peut être une valeur statique ou une valeur résolue par l’un des [programmes de résolution des revendications](claim-resolver-overview.md) pris en charge.
 
-```XML
+```xml
 <InputClaims>
   <InputClaim ClaimTypeReferenceId="PolicyId" PartnerClaimType="{property:Policy}" DefaultValue="{Policy:PolicyId}" />
   <InputClaim ClaimTypeReferenceId="CorrelationId" PartnerClaimType="{property:JourneyId}" DefaultValue="{Context:CorrelationId}" />

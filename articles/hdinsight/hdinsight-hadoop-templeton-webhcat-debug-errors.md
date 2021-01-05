@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.custom: hdinsightactive
-ms.date: 01/01/2020
-ms.openlocfilehash: 011ef4f192bbae12be7d2464d5b0526f584821a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 04/14/2020
+ms.openlocfilehash: 951dba6e64561301dc7dbb6ebd6fd6b641c90a47
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75638848"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93285676"
 ---
 # <a name="understand-and-resolve-errors-received-from-webhcat-on-hdinsight"></a>Compréhension et résolution des erreurs reçues à partir de WebHCat sur HDInsight
 
@@ -39,41 +39,45 @@ Le dépassement des valeurs par défaut suivantes peut entraîner une baisse des
 
 ## <a name="too-many-requests"></a>Trop de demandes
 
-**Code d’état HTTP**: 429
+**Code d’état HTTP** : 429
 
-| Cause : | Résolution |
+| Cause | Résolution |
 | --- | --- |
 | Vous avez dépassé le nombre maximal de demandes simultanées prises en charge par WebHCat par minute (20 par défaut) |Réduisez votre charge de travail pour vérifier que vous n’avez pas dépassé le nombre maximal de demandes simultanées ou pour augmenter la limite de demandes simultanées en modifiant `templeton.exec.max-procs`. Pour en savoir plus, consultez la section [Modification de la configuration](#modifying-configuration) |
 
 ## <a name="server-unavailable"></a>Serveur non disponible
 
-**Code d’état HTTP**: 503
+**Code d’état HTTP** : 503
 
-| Cause : | Résolution |
+| Cause | Résolution |
 | --- | --- |
 | Ce code d’état se produit généralement lors du basculement entre le HeadNode principal et secondaire du cluster. |Veuillez patienter deux minutes, puis recommencez l’opération. |
 
-## <a name="bad-request-content-could-not-find-job"></a>Contenu de demande erroné : impossible de trouver la tâche
+## <a name="bad-request-content-could-not-find-job"></a>Contenu de requête erroné : travail introuvable
 
-**Code d’état HTTP**: 400
+**Code d’état HTTP** : 400
 
-| Cause : | Résolution |
+| Cause | Résolution |
 | --- | --- |
 | Les informations détaillées de la tâche ont été nettoyées par la tâche de nettoyage de l’historique |La période de conservation par défaut de l’historique des tâches est de 7 jours. La période de rétention par défaut peut être changée en modifiant `mapreduce.jobhistory.max-age-ms`. Pour en savoir plus, consultez la section [Modification de la configuration](#modifying-configuration) |
-| La tâche a été arrêtée en raison d’un basculement |Veuillez patienter deux minutes avant de renvoyer la tâche |
+| Le travail a été supprimé en raison d’un basculement |Veuillez patienter deux minutes avant de renvoyer la tâche |
 | ID de travail utilisé non valide |Vérifiez l’ID de travail |
 
 ## <a name="bad-gateway"></a>Passerelle incorrecte
 
-**Code d’état HTTP**: 502
+**Code d’état HTTP** : 502
 
-| Cause : | Résolution |
+| Cause | Résolution |
 | --- | --- |
 | Le nettoyage de la mémoire interne coïncide avec le processus de WebHCat |Veuillez attendre que le nettoyage de la mémoire se termine ou redémarrez le service WebHCat |
 | Le délai d’attente d’une réponse du service ResourceManager a expiré. Cette erreur peut se produire lorsque le nombre d’applications actives dépasse le nombre maximal configuré (10 000 par défaut) |Veuillez attendre que les tâches en cours d’exécution se terminent ou augmentez la limite de tâches simultanées en modifiant `yarn.scheduler.capacity.maximum-applications`. Pour en savoir plus, consultez la section [Modification de la configuration](#modifying-configuration). |
 | Tentative de récupération de toutes les tâches par le biais de l’appel [GET /jobs](https://cwiki.apache.org/confluence/display/Hive/WebHCat+Reference+Jobs) lorsque `Fields` est défini sur `*` |Ne récupérez pas *tous* les détails des tâches. Utilisez plutôt `jobid` pour récupérer uniquement les détails des tâches dont l’ID a une valeur supérieure à un ID de tâche particulier. Ou, n’utilisez pas `Fields` |
 | Le service WebHCat est arrêté pendant le basculement du HeadNode |Veuillez patienter deux minutes, puis recommencez l’opération |
 | Plus de 500 tâches en attente ont été envoyées via WebHCat |Veuillez patienter le temps que les tâches en attente se terminent avant d’envoyer d’autres tâches |
+
+## <a name="next-steps"></a>Étapes suivantes
+
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]
 
 [maximum-applications]: https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.1.3/bk_system-admin-guide/content/setting_application_limits.html
 [max-procs]: https://cwiki.apache.org/confluence/display/Hive/WebHCat+Configure#WebHCatConfigure-WebHCatConfiguration

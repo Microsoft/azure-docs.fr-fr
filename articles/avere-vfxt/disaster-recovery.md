@@ -6,12 +6,12 @@ ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 12/10/2019
 ms.author: rohogue
-ms.openlocfilehash: 28278f76497d6e9d0fee221bb4ef32fe6d369db0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5cc4678b082aa5a4a3f90518ff8fac448f414f1a
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75966648"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342244"
 ---
 # <a name="disaster-recovery-guidance-for-avere-vfxt-for-azure"></a>Guide pour la reprise d’activité pour Avere vFXT pour Azure
 
@@ -117,7 +117,7 @@ Pour accéder au conteneur de sauvegarde à partir d’un cluster Avere vFXT pou
 * Pour plus d’informations sur la personnalisation des paramètres pour Avere vFXT pour Azure, consultez [Optimisation du cluster](avere-vfxt-tuning.md).
 * Découvrez plus d’informations sur la reprise d’activité et la création d’applications résilientes dans Azure :
 
-  * [Guide technique de la résilience Azure](https://docs.microsoft.com/azure/architecture/framework/resiliency/overview)
-  * [Récupérer après une interruption de service à l’échelle de la région](https://docs.microsoft.com/azure/architecture/resiliency/recovery-loss-azure-region)
-  * [Récupération d’urgence et haute disponibilité pour les applications Azure](<https://docs.microsoft.com/azure/resiliency/resiliency-disaster-recovery-high-availability-azure-applications>)
+  * [Guide technique de la résilience Azure](/azure/architecture/framework/resiliency/overview)
+  * [Récupérer après une interruption de service à l’échelle de la région](/azure/architecture/resiliency/recovery-loss-azure-region)
+  * [Récupération d’urgence et haute disponibilité pour les applications Azure](/azure/architecture/framework/resiliency/backup-and-recovery)
   <!-- can't find these in the source tree to use relative links -->

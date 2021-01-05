@@ -2,13 +2,14 @@
 title: Développer Azure Functions avec Visual Studio Code
 description: Découvrez comment développer et tester Azure Functions à l’aide de l’extension Azure Functions pour Visual Studio Code.
 ms.topic: conceptual
+ms.custom: devx-track-csharp
 ms.date: 08/21/2019
-ms.openlocfilehash: 2d33b7dddf29d37d174bdb7734e9048bc1658840
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 573177615ff898326eb29649a7f766b5df34b587
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235065"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96168427"
 ---
 # <a name="develop-azure-functions-by-using-visual-studio-code"></a>Développer Azure Functions avec Visual Studio Code
 
@@ -33,7 +34,7 @@ L’extension peut être utilisée avec les langages suivants, qui sont pris en 
 
 Dans cet article, des exemples sont disponibles uniquement pour les fonctions de bibliothèque de classes JavaScript (Node.js) et C#.  
 
-Cet article fournit des informations sur le développement et la publication sur Azure de fonctions, à l’aide de l’extension Azure Functions. Avant de lire cet article, vous devez [créer votre première fonction en utilisant Visual Studio Code](functions-create-first-function-vs-code.md).
+Cet article fournit des informations sur le développement et la publication sur Azure de fonctions, à l’aide de l’extension Azure Functions. Avant de lire cet article, vous devez [créer votre première fonction en utilisant Visual Studio Code](./create-first-function-vs-code-csharp.md).
 
 > [!IMPORTANT]
 > Ne mélangez pas un développement local avec un développement de portail pour une même application de fonction. Quand vous publiez à partir d’un projet local dans une application de fonction, le processus de déploiement remplace toutes les fonctions que vous avez développées dans le portail.
@@ -96,11 +97,15 @@ Selon votre langage de programmation, ces autres fichiers sont créés :
 
 * Un [fichier bibliothèque de classes HttpExample.cs](functions-dotnet-class-library.md#functions-class-library-project), qui implémente la fonction.
 
+À ce stade, vous pouvez ajouter des liaisons d’entrée et de sortie à votre fonction en [ajoutant un paramètre à une fonction de bibliothèque de classes C#](#add-input-and-output-bindings).
+
 # <a name="javascript"></a>[JavaScript](#tab/nodejs)
 
 * Un fichier package.json dans le dossier racine.
 
 * Un dossier HttpExample, qui contient le [fichier de définition function.json](functions-reference-node.md#folder-structure) et le [fichier index.js](functions-reference-node.md#exporting-a-function), un fichier Node.js qui contient le code de fonction.
+
+À ce stade, vous pouvez ajouter des liaisons d’entrée et de sortie à votre fonction en [modifiant le fichier function.json](#add-input-and-output-bindings).
 
 <!-- # [PowerShell](#tab/powershell)
 
@@ -113,8 +118,6 @@ Selon votre langage de programmation, ces autres fichiers sont créés :
 * An HttpExample folder that contains the [function.json definition file](functions-reference-python.md#programming-model) and the \_\_init\_\_.py file, which contains the function code.
      -->
 ---
-
-À ce stade, vous pouvez ajouter des liaisons d’entrée et de sortie à votre fonction en [modifiant le fichier function.json](#add-a-function-to-your-project), ou en [ajoutant un paramètre à une fonction de bibliothèque de classes C#](#add-a-function-to-your-project).
 
 Vous pouvez également [ajouter une fonction à votre projet](#add-a-function-to-your-project).
 
@@ -230,7 +233,7 @@ En publiant à partir de Visual Studio code, vous bénéficiez de la technologie
 
 ### <a name="quick-function-app-create"></a>Création d’application de fonction rapide
 
-Quand vous choisissez **+ Créer une application de fonction dans Azure...** , l’extension génère automatiquement les valeurs des ressources Azure nécessaires à votre application de fonction. Ces valeurs sont basées sur le nom de l’application de fonction que vous choisissez. Vous obtenez un exemple d’utilisation des valeurs par défaut pour publier votre projet vers une nouvelle application de fonction dans Azure en consultant l’article sur le [démarrage rapide de Visual Studio Code](functions-create-first-function-vs-code.md#publish-the-project-to-azure).
+Quand vous choisissez **+ Créer une application de fonction dans Azure...** , l’extension génère automatiquement les valeurs des ressources Azure nécessaires à votre application de fonction. Ces valeurs sont basées sur le nom de l’application de fonction que vous choisissez. Vous obtenez un exemple d’utilisation des valeurs par défaut pour publier votre projet vers une nouvelle application de fonction dans Azure en consultant l’article sur le [démarrage rapide de Visual Studio Code](./create-first-function-vs-code-csharp.md#publish-the-project-to-azure).
 
 Si vous souhaitez fournir des noms explicites pour les ressources créées, vous devez opter pour le chemin de création avancé.
 
@@ -244,7 +247,7 @@ Les étapes suivantes permettent de publier votre projet dans une nouvelle appli
 
 1. Si vous n’êtes pas connecté, vous êtes invité à le faire avec **Se connecter à Azure**. Vous pouvez également **créer un compte Azure gratuit**. Une fois la connexion établie à partir du navigateur, revenez à Visual Studio Code.
 
-1. Si vous disposez de plusieurs abonnements, **Sélectionnez un abonnement** pour l’application de fonction, puis sélectionnez **+ Créer une application de fonction dans Azure... _Avancé_** . Cette option _Avancé_ vous donne plus de contrôle sur les ressources que vous créez dans Azure. 
+1. Si vous disposez de plusieurs abonnements, **Sélectionnez un abonnement** pour l’application de fonction, puis sélectionnez **+ Créer une application de fonction dans Azure... _Avancé_**. Cette option _Avancé_ vous donne plus de contrôle sur les ressources que vous créez dans Azure. 
 
 1. Suivez les invites et fournissez ces informations :
 
@@ -267,13 +270,7 @@ Lorsque vous configurez un [déploiement continu](functions-continuous-deploymen
 > [!IMPORTANT]
 > La publication sur une application de fonction existante remplace le contenu de cette application dans Azure.
 
-1. Dans Visual Studio Code, sélectionnez F1 pour ouvrir la palette de commandes. Dans la palette de commandes, recherchez et sélectionnez **Azure Functions: Deploy to function app**.
-
-1. Si vous n’êtes pas connecté, vous êtes invité à le faire avec **Se connecter à Azure**. Une fois la connexion établie à partir du navigateur, revenez à Visual Studio Code. Si vous avez plusieurs abonnements, **sélectionnez un abonnement** qui contient votre application de fonction.
-
-1. Sélectionnez votre application de fonction existante dans Azure. Dans la fenêtre d’avertissement sur le remplacement de tous les fichiers dans l’application de fonction, sélectionnez **Déployer** pour accepter l’avertissement et continuer.
-
-Le projet est régénéré, repackagé et chargé vers Azure. Le projet existant est remplacé par le nouveau package, et l’application de fonction redémarre.
+[!INCLUDE [functions-republish-vscode](../../includes/functions-republish-vscode.md)]
 
 ## <a name="get-the-url-of-the-deployed-function"></a>Obtenir l’URL de la fonction déployée
 
@@ -299,8 +296,8 @@ Pour exécuter votre projet Functions localement, vous devez vous conformer à c
 
     | Langage | Condition requise |
     | -------- | --------- |
-    | **C#** | [Extension C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)<br/>[Outils CLI .NET Core](https://docs.microsoft.com/dotnet/core/tools/?tabs=netcore2x)   |
-    | **Java** | [Extension de débogueur pour Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)<br/>[Java 8](https://aka.ms/azure-jdks)<br/>[Maven 3 ou version ultérieure](https://maven.apache.org/) |
+    | **C#** | [Extension C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)<br/>[Outils CLI .NET Core](/dotnet/core/tools/?tabs=netcore2x)   |
+    | **Java** | [Extension de débogueur pour Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)<br/>[Java 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)<br/>[Maven 3 ou version ultérieure](https://maven.apache.org/) |
     | **JavaScript** | [Node.js](https://nodejs.org/)<sup>*</sup> |  
     | **Python** | [Extension Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)<br/>[Python 3.6.8](https://www.python.org/downloads/) recommandé|
 
@@ -387,15 +384,13 @@ Pour en savoir plus, consultez la section [Journaux en continu](functions-monito
 [!INCLUDE [functions-enable-log-stream-vs-code](../../includes/functions-enable-log-stream-vs-code.md)]
 
 > [!NOTE]
-> Les journaux de diffusion en continu ne prennent en charge qu'une seule instance de l’hôte Functions. Lorsque votre fonction est mise à l’échelle sur plusieurs instances, les données des autres instances ne s’affichent pas dans le flux du journal. Dans Application Insights, le [Flux de métriques temps réel](../azure-monitor/app/live-stream.md) prend en charge plusieurs instances. Également en quasi temps réel, l’analytique de diffusion en continue repose sur des [données échantillonnées](functions-monitoring.md#configure-sampling).
+> Les journaux de diffusion en continu ne prennent en charge qu'une seule instance de l’hôte Functions. Lorsque votre fonction est mise à l’échelle sur plusieurs instances, les données des autres instances ne s’affichent pas dans le flux du journal. Dans Application Insights, le [Flux de métriques temps réel](../azure-monitor/app/live-stream.md) prend en charge plusieurs instances. Également en quasi temps réel, l’analytique de diffusion en continue repose sur des [données échantillonnées](configure-monitoring.md#configure-sampling).
 
 ### <a name="application-insights"></a>Application Insights
 
-Nous vous conseillons de superviser l’exécution de vos fonctions en intégrant votre application de fonction à Application Insights. Lorsque vous créez une application de fonction dans le portail Azure, cette intégration s’effectue par défaut. Lorsque vous créez votre application de fonction pendant la publication de Visual Studio, vous devez intégrer Application Insights vous-même.
+Nous vous conseillons de superviser l’exécution de vos fonctions en intégrant votre application de fonction à Application Insights. Lorsque vous créez une application de fonction dans le portail Azure, cette intégration s’effectue par défaut. Lorsque vous créez votre application de fonction pendant la publication de Visual Studio, vous devez intégrer Application Insights vous-même. Pour découvrir comment, consultez [Activer l’intégration à Application Insights](configure-monitoring.md#enable-application-insights-integration).
 
-[!INCLUDE [functions-connect-new-app-insights.md](../../includes/functions-connect-new-app-insights.md)]
-
-Pour en savoir plus, consultez [Surveiller l’exécution des fonctions Azure](functions-monitoring.md).
+Pour en savoir plus sur la surveillance à l’aide d’Application Insights, consultez [Surveiller l’exécution des fonctions Azure](functions-monitoring.md).
 
 ## <a name="c-script-projects"></a>Projets en C\# script
 

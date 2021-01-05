@@ -2,6 +2,6 @@
   tocHref: /azure/
   topicHref: /azure/index
   items:
-    - name: Ouvrir des jeux de données
-      tocHref: /azure/machine-learning/service
+    - name: Open Datasets
+      tocHref: /azure/machine-learning
       topicHref: /azure/open-datasets/index

@@ -3,22 +3,27 @@ title: Surveiller les performances des applications web Java sur Linux - Azure |
 description: Surveillance étendue des performances des applications de votre site web Java avec le plug-in collectd pour Application Insights.
 ms.topic: conceptual
 ms.date: 03/14/2019
-ms.openlocfilehash: 62a723dad7e9f6c2bfdabde159968d507d2d5d41
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+author: MS-jgol
+ms.custom: devx-track-java
+ms.author: jgol
+ms.openlocfilehash: 5ec928a0dc3cbcde3c6dd50b1795a05b5e092bde
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537523"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601269"
 ---
-# <a name="collectd-linux-performance-metrics-in-application-insights"></a>collectd : métriques de performances Linux dans Application Insights
+# <a name="collectd-linux-performance-metrics-in-application-insights-deprecated"></a>collectd : métriques de performances Linux dans Application Insights [Déconseillé]
 
+> [!IMPORTANT]
+> L’**approche recommandée** pour surveiller des applications Java consiste à utiliser l’instrumentation automatique sans modifier le code. Suivez les instructions pour l’ **[agent Application Insights agent Java 3.0](./java-in-process-agent.md)** .
 
-Pour explorer les métriques de performances d’un système Linux dans [Application Insights](../../azure-monitor/app/app-insights-overview.md), installez [collectd](https://collectd.org/) et son plug-in Application Insights. Cette solution open source rassemble diverses statistiques concernant le système et le réseau.
+Pour explorer les métriques de performances d’un système Linux dans [Application Insights](./app-insights-overview.md), installez [collectd](https://collectd.org/) et son plug-in Application Insights. Cette solution open source rassemble diverses statistiques concernant le système et le réseau.
 
 De manière générale, on utilise collectd après avoir [instrumenté le service web Java avec Application Insights][java]. Il vous donne davantage de données pour vous aider à améliorer les performances de votre application ou à diagnostiquer les problèmes. 
 
 ## <a name="get-your-instrumentation-key"></a>Récupérer votre clé d’instrumentation
-Dans le [Portail Microsoft Azure](https://portal.azure.com), ouvrez la ressource [Application Insights](../../azure-monitor/app/app-insights-overview.md) dans laquelle vous souhaitez afficher les données. (Ou [créez une ressource](../../azure-monitor/app/create-new-resource.md ).)
+Dans le [Portail Microsoft Azure](https://portal.azure.com), ouvrez la ressource [Application Insights](./app-insights-overview.md) dans laquelle vous souhaitez afficher les données. (Ou [créez une ressource](./create-new-resource.md).)
 
 Effectuez une copie de la clé d’instrumentation, qui identifie la ressource.
 
@@ -28,7 +33,7 @@ Effectuez une copie de la clé d’instrumentation, qui identifie la ressource.
 Sur vos ordinateurs serveurs Linux :
 
 1. Installez [collectd](https://collectd.org/) version 5.4.0 ou ultérieure.
-2. Téléchargez le [plug-in d'écriture collectd Application Insights](https://github.com/microsoft/ApplicationInsights-Java/tree/master/collectd/src/main/java/com/microsoft/applicationinsights/collectd/internal). Notez le numéro de version.
+2. Téléchargez le [plug-in d'écriture collectd Application Insights](https://github.com/microsoft/ApplicationInsights-Java/tree/master/core/src/main/java/com/microsoft/applicationinsights/internal). Notez le numéro de version.
 3. Copiez le fichier JAR du plug-in dans `/usr/share/collectd/java`.
 4. Modifiez `/etc/collectd/collectd.conf`:
    * Vérifiez que [le plug-in Java](https://collectd.org/wiki/index.php/Plugin:Java) est activé.
@@ -105,7 +110,7 @@ Séparez les directives par un saut de ligne.
 *Je ne vois pas les données dans le portail*
 
 * Ouvrez [Rechercher][diagnostic] pour voir si les événements bruts sont arrivés. Ils mettent parfois du temps à apparaître dans Metrics Explorer.
-* Vous devrez peut-être [définir des exceptions de pare-feu pour les données sortantes](../../azure-monitor/app/ip-addresses.md)
+* Vous devrez peut-être [définir des exceptions de pare-feu pour les données sortantes](./ip-addresses.md)
 * Activez le suivi dans le plug-in Application Insights. Ajoutez la ligne ci-après dans `<Plugin ApplicationInsightsWriter>`:
   * `SDKLogger true`
 * Ouvrez un terminal et démarrez collectd en mode détaillé pour vérifier si des problèmes ont été signalés :
@@ -121,13 +126,12 @@ Solution de contournement : exclure les données collectées par les plug-ins d
 
 <!--Link references-->
 
-[api]: ../../azure-monitor/app/api-custom-events-metrics.md
-[apiexceptions]: ../../azure-monitor/app/api-custom-events-metrics.md#track-exception
-[availability]: ../../azure-monitor/app/monitor-web-app-availability.md
-[diagnostic]: ../../azure-monitor/app/diagnostic-search.md
+[api]: ./api-custom-events-metrics.md
+[apiexceptions]: ./api-custom-events-metrics.md#track-exception
+[availability]: ./monitor-web-app-availability.md
+[diagnostic]: ./diagnostic-search.md
 [eclipse]: app-insights-java-eclipse.md
 [java]: java-get-started.md
 [javalogs]: java-trace-logs.md
-[metrics]: ../../azure-monitor/platform/metrics-charts.md
-
+[metrics]: ../platform/metrics-charts.md
 

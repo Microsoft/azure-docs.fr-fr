@@ -8,10 +8,10 @@ ms.date: 05/13/2019
 ms.author: byvinyal
 ms.custom: seodec18
 ms.openlocfilehash: f1ca4958fe2608d0c040ef5b93827a7e71a4151c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "74672346"
 ---
 # <a name="high-density-hosting-on-azure-app-service-using-per-app-scaling"></a>Hébergement haute densité sur Azure App Service à l’aide de la mise à l’échelle par application

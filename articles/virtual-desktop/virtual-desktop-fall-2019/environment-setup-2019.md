@@ -1,24 +1,22 @@
 ---
-title: Environnement Windows Virtual Desktop - Azure
-description: Éléments de base d’un environnement Windows Virtual Desktop.
-services: virtual-desktop
+title: Environnement Windows Virtual Desktop (classique) – Azure
+description: Éléments de base d’un environnement Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: d666f7e3e43b5429423a5356aa00e074ed020869
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 4fa281f6435013e9feb6808aab04ffa69c5f96c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614238"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008608"
 ---
-# <a name="windows-virtual-desktop-environment"></a>Environnement Windows Virtual Desktop
+# <a name="windows-virtual-desktop-classic-environment"></a>Environnement Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../environment-setup.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../environment-setup.md).
 
 Windows Virtual Desktop est un service qui offre aux utilisateurs un accès facile et sécurisé à leurs postes de travail virtualisés et à leurs applications distantes. Cette rubrique fournit des informations supplémentaires sur la structure générale de l’environnement Windows Virtual Desktop.
 
@@ -67,5 +65,5 @@ Pour apprendre à configurer votre locataire Windows Virtual Desktop, consultez 
 
 Pour savoir comment vous connecter à un Windows Virtual Desktop, voir les articles suivants :
 
-- [Se connecter à partir de Windows 10 ou Windows 7](../connect-windows-7-and-10.md)
+- [Se connecter à partir de Windows 10 ou Windows 7](connect-windows-7-10-2019.md)
 - [Se connecter à partir d’un navigateur web](connect-web-2019.md)

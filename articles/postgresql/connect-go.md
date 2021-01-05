@@ -1,21 +1,22 @@
 ---
-title: Se connecter avec Go – Azure Database pour PostgreSQL – Serveur unique
+title: 'Démarrage rapide : Se connecter avec Go – Azure Database pour PostgreSQL – Serveur unique'
 description: Ce démarrage rapide fournit un exemple de langage de programmation Go, que vous pouvez utiliser pour vous connecter et interroger des données à partir d’Azure Database pour PostgreSQL (serveur unique).
-author: rachel-msft
-ms.author: raagyema
+author: mksuni
+ms.author: sumuth
 ms.service: postgresql
 ms.custom: mvc
 ms.devlang: go
 ms.topic: quickstart
 ms.date: 5/6/2019
-ms.openlocfilehash: b44759ce4e65e55a3d143fd178764e8ae6e16e89
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: eb844790ac0ae97c281f6d2d7022bee559f545cd
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74767923"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93331928"
 ---
-# <a name="azure-database-for-postgresql---single-server-use-go-language-to-connect-and-query-data"></a>Azure Database pour PostgreSQL (serveur unique) : Utiliser la langage Go pour se connecter et interroger des données
+# <a name="quickstart-use-go-language-to-connect-and-query-data-in-azure-database-for-postgresql---single-server"></a>Démarrage rapide : Utiliser le langage Go afin de se connecter à Azure Database pour PostgreSQL et d'interroger les données - Serveur unique
+
 Ce guide de démarrage rapide vous explique comment vous connecter à une base de données Azure pour PostgreSQL en utilisant du code écrit dans le langage [Go](https://golang.org/) (golang). Il détaille l’utilisation d’instructions SQL pour interroger la base de données, la mettre à jour, y insérer des données ou en supprimer. Cet article suppose que vous connaissez les bases du développement à l’aide de Go, mais que vous ne connaissez pas la base de données Azure pour PostgreSQL.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -26,7 +27,7 @@ Ce guide de démarrage rapide s’appuie sur les ressources créées dans l’u
 ## <a name="install-go-and-pq-connector"></a>Installer le connecteur pour Go et pq
 Installez [Go](https://golang.org/doc/install) et le [pilote Pure Go Postgres (pq)](https://github.com/lib/pq) sur votre propre ordinateur. Suivez les étapes correspondant à votre plateforme :
 
-### <a name="windows"></a> Windows
+### <a name="windows"></a>Windows
 1. [Téléchargez](https://golang.org/doc/install) et installez Go pour Microsoft Windows en fonction des [instructions d’installation](https://golang.org/dl/).
 2. Lancez l’invite de commandes à partir du menu Démarrer.
 3. Créez un dossier pour votre projet, tel que `mkdir  %USERPROFILE%\go\src\postgresqlgo`.
@@ -79,10 +80,10 @@ Installez [Go](https://golang.org/doc/install) et le [pilote Pure Go Postgres (p
 Obtenez les informations de connexion requises pour vous connecter à la base de données Azure pour PostgreSQL. Vous devez disposer du nom de serveur complet et des informations d’identification.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
-2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources**, puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
+2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources** , puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
 3. Cliquez sur le nom du serveur.
 4. Dans le panneau **Vue d’ensemble** du serveur, notez le **nom du serveur** et le **nom de connexion de l’administrateur du serveur**. Si vous oubliez votre mot de passe, vous pouvez également le réinitialiser dans ce panneau.
- ![Nom du serveur Azure Database pour PostgreSQL](./media/connect-go/1-connection-string.png)
+ :::image type="content" source="./media/connect-go/1-connection-string.png" alt-text="Nom du serveur Azure Database pour PostgreSQL":::
 
 ## <a name="build-and-run-go-code"></a>Générer et exécuter du code Go 
 1. Pour écrire du code Golang, vous pouvez utiliser un éditeur de texte brut, tel que NotePad dans Microsoft Windows, [vi](https://manpages.ubuntu.com/manpages/xenial/man1/nvi.1.html#contenttoc5) ou [Nano](https://www.nano-editor.org/) dans Ubuntu, et TextEdit dans macOS. Si vous préférez travailler dans un environnement de développement intégré (IDE) plus complet, essayez [GoLand](https://www.jetbrains.com/go/) de JetBrains, [Visual Studio Code](https://code.visualstudio.com/) de Microsoft ou [Atom](https://atom.io/).
@@ -93,7 +94,7 @@ Obtenez les informations de connexion requises pour vous connecter à la base de
 6. Vous pouvez également générer le code dans une application native, `go build createtable.go`, puis lancer `createtable.exe` afin d’exécuter l’application.
 
 ## <a name="connect-and-create-a-table"></a>Se connecter et créer une table
-Utilisez le code suivant pour vous connecter et créer une table à l’aide de l’instruction **CREATE TABLE**, suivie des instructions SQL **INSERT INTO** pour ajouter des lignes à la table.
+Utilisez le code suivant pour vous connecter et créer une table à l’aide de l’instruction **CREATE TABLE** , suivie des instructions SQL **INSERT INTO** pour ajouter des lignes à la table.
 
 Le code importe trois packages : le [package sql](https://golang.org/pkg/database/sql/), le [package pq](https://godoc.org/github.com/lib/pq) qui sert de pilote pour communiquer avec le serveur PostgreSQL, et le [package fmt](https://golang.org/pkg/fmt/) pour les entrées et sorties imprimées sur la ligne de commande.
 
@@ -330,6 +331,16 @@ func main() {
     checkError(err)
     fmt.Println("Deleted 1 row of data")
 }
+```
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Pour nettoyer toutes les ressources utilisées dans le cadre de ce guide de démarrage rapide, supprimez le groupe de ressources à l’aide de la commande suivante :
+
+```azurecli
+az group delete \
+    --name $AZ_RESOURCE_GROUP \
+    --yes
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -6,12 +6,12 @@ ms.devlang: powershell
 ms.topic: sample
 ms.date: 10/27/2017
 ms.author: tomfitz
-ms.openlocfilehash: 695023f4700370cbe5e9b345f513e38d1cf1fc0c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 602aaeb67ca081ebac71ca1d6d24a2de3c020603
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75648956"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86055985"
 ---
 # <a name="get-resources-in-a-managed-resource-group-and-resize-vms-with-powershell"></a>Obtenir des ressources dans un groupe de ressources managé et redimensionner des machines virtuelles avec PowerShell
 
@@ -32,12 +32,12 @@ Ce script utilise les commandes suivantes pour déployer l’application managé
 
 | Commande | Notes |
 |---|---|
-| [Get-AzManagedApplication](https://docs.microsoft.com/powershell/module/az.resources/get-azmanagedapplication) | Répertorier les applications managées. Spécifiez un nom de groupe de ressources pour affiner les résultats. |
-| [Get-AzResource](https://docs.microsoft.com/powershell/module/az.resources/get-azresource) | Répertoriez les ressources. Spécifiez un groupe de ressources et un type de ressource pour affiner le résultat. |
-| [Update-AzVM](https://docs.microsoft.com/powershell/module/az.compute/update-azvm) | Mettre à jour la taille d’une machine virtuelle. |
+| [Get-AzManagedApplication](/powershell/module/az.resources/get-azmanagedapplication) | Répertorier les applications managées. Spécifiez un nom de groupe de ressources pour affiner les résultats. |
+| [Get-AzResource](/powershell/module/az.resources/get-azresource) | Répertoriez les ressources. Spécifiez un groupe de ressources et un type de ressource pour affiner le résultat. |
+| [Update-AzVM](/powershell/module/az.compute/update-azvm) | Mettre à jour la taille d’une machine virtuelle. |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

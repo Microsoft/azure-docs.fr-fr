@@ -8,24 +8,21 @@ ms.service: active-directory
 ms.subservice: azuread-dev
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 11/26/2019
+ms.date: 07/17/2020
 ms.author: ryanwi
 ms.reviewer: saeeda, hirsin, jmprieur, sureshja, jesakowi, lenalepa, kkrishna, negoe
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: 67a54a2cd4fa071fd47bcebb9aa53fd11fefd61e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8f6170de65ae5e1ca8ecb5f7cc8a78f4f194ac41
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154914"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92055288"
 ---
 # <a name="why-update-to-microsoft-identity-platform-v20"></a>Pourquoi mettre à jour à la plateforme d’identités Microsoft (v2.0) ?
 
 Lorsque vous développez une nouvelle application, il est important de connaître les différences entre les points de terminaison respectifs de la Plateforme d’identités Microsoft (v2.0) et d’Azure Active Directory (v1.0). Cet article décrit les principales différences entre ces points de terminaison et certains limitations existantes pour la Plateforme d’identités Microsoft.
-
-> [!NOTE]
-> Le point de terminaison de la plateforme d’identités Microsoft ne prend pas en charge l’intégralité des scénarios Azure AD et fonctionnalités. Pour déterminer si vous devez utiliser le point de terminaison de la plateforme d’identités Microsoft, consultez les [limitations de la plateforme d’identités Microsoft](#limitations).
 
 ## <a name="who-can-sign-in"></a>Qui peut se connecter
 
@@ -33,9 +30,9 @@ Lorsque vous développez une nouvelle application, il est important de connaîtr
 
 * Le point de terminaison v1.0 permet uniquement aux comptes professionnels et scolaires de se connecter à votre application (Azure AD).
 * Le point de terminaison de la Plateforme d’identités Microsoft permet aux comptes professionnels et scolaires d’Azure AD ainsi qu’aux comptes Microsoft personnels (MSA), tels que hotmail.com, outlook.com et msn.com, de se connecter.
-* Les deux points de terminaison acceptent également des connexions d’ *[utilisateurs invités](https://docs.microsoft.com/azure/active-directory/b2b/what-is-b2b)* issus d’un répertoire Azure AD pour les applications configurées comme étant *[à client unique](../develop/single-and-multi-tenant-apps.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json)* ou pour les applications *mutualisées* configurées de manière à pointer vers le point de terminaison spécifique du locataire (`https://login.microsoftonline.com/{TenantId_or_Name}`).
+* Les deux points de terminaison acceptent également des connexions d’ *[utilisateurs invités](../external-identities/what-is-b2b.md)* issus d’un répertoire Azure AD pour les applications configurées comme étant *[à client unique](../develop/single-and-multi-tenant-apps.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json)* ou pour les applications *mutualisées* configurées de manière à pointer vers le point de terminaison spécifique du locataire (`https://login.microsoftonline.com/{TenantId_or_Name}`).
 
-Le point de terminaison de la Plateforme d’identités Microsoft vous permet d’écrire des applications qui acceptent les connexions à partir de comptes Microsoft personnels, ainsi que de comptes professionnels ou scolaires. Ceci vous donne la possibilité d’écrire votre application de façon complètement indépendante des comptes. Par exemple, si votre application appelle [Microsoft Graph](https://graph.microsoft.io), certaines fonctionnalités et données supplémentaires seront disponibles pour les comptes professionnels, comme leurs sites SharePoint ou les données de leurs annuaires. Mais pour de nombreuses actions, comme la [lecture du courrier d’un utilisateur](https://docs.microsoft.com/graph/api/user-list-messages?view=graph-rest-1.0), vous pouvez utiliser le même code pour accéder à la messagerie, aussi bien pour les comptes professionnels que scolaires.
+Le point de terminaison de la Plateforme d’identités Microsoft vous permet d’écrire des applications qui acceptent les connexions à partir de comptes Microsoft personnels, ainsi que de comptes professionnels ou scolaires. Ceci vous donne la possibilité d’écrire votre application de façon complètement indépendante des comptes. Par exemple, si votre application appelle [Microsoft Graph](https://graph.microsoft.io), certaines fonctionnalités et données supplémentaires seront disponibles pour les comptes professionnels, comme leurs sites SharePoint ou les données de leurs annuaires. Mais pour de nombreuses actions, comme la [lecture du courrier d’un utilisateur](/graph/api/user-list-messages), vous pouvez utiliser le même code pour accéder à la messagerie, aussi bien pour les comptes professionnels que scolaires.
 
 Pour le point de terminaison de la Plateforme d’identités Microsoft, vous pouvez utiliser la bibliothèque MSAL (Microsoft Authentication Library) pour accéder aux différents mondes (utilisateurs privés, scolaires ou professionnels). Le point de terminaison Azure AD v1.0 accepte les connexions uniquement depuis des comptes professionnels et scolaires.
 
@@ -114,7 +111,7 @@ Ces étendues vous permettent de coder votre application en divulguant le moins 
 Le point de terminaison de la Plateforme d’identités Microsoft émet un ensemble plus restreint de revendications dans ses jetons par défaut, pour limiter la taille des charges utiles. Si vous avez des applications et des services qui dépendent d’une revendication particulière dans un jeton v1.0 qui n’est plus fourni par défaut dans un jeton de la Plateforme d’identités Microsoft, envisagez d’utiliser la fonctionnalité des [revendications facultatives](../develop/active-directory-optional-claims.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json) pour inclure cette revendication.
 
 > [!IMPORTANT]
-> Les jetons v1.0 et v2.0 peuvent être émis par les points de terminaison v1.0 et v2.0 ! id_tokens corresponde *toujours* au point de terminaison à partir duquel ils sont demandés, et les jetons d’accès correspondent *toujours* au format attendu par l’API Web que votre client appellera à l’aide de ce jeton.  Par conséquent, si l’application utilise le point de terminaison v2.0 pour obtenir un jeton permettant d’appeler Microsoft Graph, qui attend des jetons d’accès au format v1.0, elle reçoit un jeton au format v1.0.  
+> Les jetons v1.0 et v2.0 peuvent être émis par les points de terminaison v1.0 et v2.0 ! id_tokens corresponde *toujours* au point de terminaison à partir duquel ils sont demandés, et les jetons d’accès correspondent *toujours* au format attendu par l’API Web que votre client appellera à l’aide de ce jeton.  Par conséquent, si l’application utilise le point de terminaison v2.0 pour obtenir un jeton permettant d’appeler Microsoft Graph, qui attend des jetons d’accès au format v1.0, elle reçoit un jeton au format v1.0.
 
 ## <a name="limitations"></a>Limites
 
@@ -141,34 +138,7 @@ Les inscriptions d’applications qui prennent en charge les comptes professionn
 
 ### <a name="restrictions-on-redirect-urls"></a>Restrictions concernant les URL de redirection
 
-Les applications inscrites pour la Plateforme d’identités Microsoft sont limitées à un jeu restreint de valeurs d’URL de redirection. L’URL de redirection pour les services et applications web doit commencer par le schéma `https`, et toutes les valeurs d’URL de redirection doivent partager un seul domaine DNS.  Le système d’inscription compare le nom DNS complet de l’URL de redirection existante au nom DNS de l’URL de redirection que vous ajoutez. `http://localhost` est également pris en charge comme URL de redirection.  
-
-La demande d’ajout du nom DNS échoue si l’une des conditions suivantes est remplie :  
-
-* Le nom DNS complet de la nouvelle URL de redirection ne correspond pas au nom DNS de l’URL de redirection existante.
-* Le nom DNS complet de la nouvelle URL de redirection n’est pas un sous-domaine de l’URL de redirection existante.
-
-#### <a name="example-1"></a>Exemple 1
-
-Si l’application a une URL de redirection `https://login.contoso.com`, vous pouvez ajouter une URL de redirection où le nom DNS correspond exactement, comme dans l’exemple suivant :
-
-`https://login.contoso.com/new`
-
-Vous pouvez aussi faire référence à un sous-domaine DNS de login.contoso.com, comme dans l’exemple suivant :
-
-`https://new.login.contoso.com`
-
-#### <a name="example-2"></a>Exemple 2
-
-Si vous voulez que votre application utilise les URL de redirection `login-east.contoso.com` et `login-west.contoso.com`, vous devez ajouter ces URL de redirection dans l’ordre suivant :
-
-`https://contoso.com`  
-`https://login-east.contoso.com`  
-`https://login-west.contoso.com`  
-
-Vous pouvez ajouter les deux dernières, car ce sont des sous-domaines de la première URL de redirection, contoso.com.
-
-Vous ne pouvez avoir que seulement 20 URL de réponse pour une application donnée : cette limite s’applique à tous les types d’applications pris en charge par l’inscription (application monopage, client natif, application web et service).  
+Pour obtenir les informations les plus récentes concernant les restrictions sur les URL de redirection pour les applications inscrites pour Plateforme d’identités Microsoft, consultez [Limitations et restrictions des URI de redirection/URL de réponse](../develop/reply-url.md) dans la documentation de Plateforme d’identités Microsoft.
 
 Pour savoir comment inscrire une application en vue de son utilisation avec la Plateforme d’identités Microsoft, voir [Inscrire une application à l’aide de la nouvelle expérience Inscriptions application](../develop/quickstart-register-app.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).
 
@@ -180,18 +150,22 @@ Actuellement, la prise en charge de la bibliothèque pour le point de terminaiso
 * Si vous créez une application mobile ou pour poste de travail, vous pouvez utiliser une des bibliothèques d’authentification Microsoft (MSAL). Ces bibliothèques étant généralement disponibles ou en préversion prise en charge pour la production, leur utilisation dans des applications de production ne présente aucun risque. Pour plus d’informations sur les conditions d’utilisation de la préversion et sur les bibliothèques disponibles, consultez la [documentation de référence sur les bibliothèques d’authentification](../develop/reference-v2-libraries.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).
 * Vous pouvez intégrer les plateformes non couvertes par les bibliothèques Microsoft, dans le point de terminaison de la Plateforme d’identités Microsoft en envoyant et en recevant directement des messages de protocole dans le code de votre application. Les protocoles v2.0 OpenID Connect et OAuth [sont explicitement documentés](../develop/active-directory-v2-protocols.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json) pour vous aider à effectuer une telle intégration.
 * Enfin, vous pouvez utiliser les bibliothèques open source OpenID Connect et OAuth pour l’intégration avec le point de terminaison de la Plateforme d’identités Microsoft. Le point de terminaison de la Plateforme d’identités Microsoft doit normalement être compatible sans modifications avec de nombreuses bibliothèques de protocoles open source. La disponibilité de ces types de bibliothèques varie en fonction de la langue et de la plateforme. Les sites web [OpenID Connect](https://openid.net/connect/) et [OAuth 2.0](https://oauth.net/2/) contiennent une liste à jour des implémentations les plus courantes. Pour plus d’informations, voir [Plateforme d’identités Microsoft et bibliothèques d’authentification](../develop/reference-v2-libraries.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json), ainsi que la liste des bibliothèques clientes open source et des exemples qui ont été testés avec la Plateforme d’identités Microsoft.
-* Pour référence, le point de terminaison `.well-known` pour le point de terminaison commun de la Plateforme d’identités Microsoft est `https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration`. Remplacez `common` par votre ID de locataire pour obtenir des données spécifiques à votre locataire.  
+* Pour référence, le point de terminaison `.well-known` pour le point de terminaison commun de la Plateforme d’identités Microsoft est `https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration`. Remplacez `common` par votre ID de locataire pour obtenir des données spécifiques à votre locataire.
 
 ### <a name="protocol-changes"></a>Changements de protocole
 
-Le point de terminaison de la Plateforme d’identités Microsoft ne prend pas en charge SAML ou WS-Federation ; il prend en charge uniquement OpenID Connect et OAuth 2.0.  Les changements notables apportés aux protocoles OAuth 2.0 par rapport au point de terminaison v1.0 sont : 
+Le point de terminaison de la Plateforme d’identités Microsoft ne prend pas en charge SAML ou WS-Federation ; il prend en charge uniquement OpenID Connect et OAuth 2.0.  Les changements notables apportés aux protocoles OAuth 2.0 par rapport au point de terminaison v1.0 sont :
 
-* La revendication `email` est retournée si une revendication facultative est configurée **ou** si scope=email a été spécifié dans la demande. 
-* Le paramètre `scope` est désormais pris en charge à la place du paramètre `resource`.  
-* De nombreuses réponses ont été modifiées pour les rendre plus conforme à la spécification OAuth 2.0, par exemple retourner correctement `expires_in` sous la forme d’un entier au lieu d’une chaîne.  
+* La revendication `email` est retournée si une revendication facultative est configurée **ou** si scope=email a été spécifié dans la demande.
+* Le paramètre `scope` est désormais pris en charge à la place du paramètre `resource`.
+* De nombreuses réponses ont été modifiées pour les rendre plus conforme à la spécification OAuth 2.0, par exemple retourner correctement `expires_in` sous la forme d’un entier au lieu d’une chaîne.
 
 Pour mieux comprendre l’étendue des fonctionnalités de protocole prises en charge dans le point de terminaison de la Plateforme d’identités Microsoft, voir [Informations de référence sur les protocoles OpenID Connect et OAuth 2.0](../develop/active-directory-v2-protocols.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).
 
-#### <a name="saml-restrictions"></a>Restrictions SAML
+#### <a name="saml-usage"></a>Utilisation SAML
 
-Si vous avez utilisé la bibliothèque ADAL (Active Directory Authentication Library) dans des applications Windows, vous avez peut-être tiré parti de l’authentification intégrée Windows, qui utilise l’octroi d’assertions SAML (Security Assertion Markup Language). Avec cet octroi, les utilisateurs de locataires Azure AD fédérés peuvent s’authentifier en mode silencieux auprès de leur instance d’Active Directory locale sans entrer leurs informations d’identification. L’octroi d’assertion SAML n’est pas pris en charge sur le point de terminaison de la Plateforme d’identités Microsoft.
+Si vous avez utilisé la bibliothèque ADAL (Active Directory Authentication Library) dans des applications Windows, vous avez peut-être tiré parti de l’authentification intégrée Windows, qui utilise l’octroi d’assertions SAML (Security Assertion Markup Language). Avec cet octroi, les utilisateurs de locataires Azure AD fédérés peuvent s’authentifier en mode silencieux auprès de leur instance d’Active Directory locale sans entrer leurs informations d’identification. Bien que [SAML soit toujours un protocole pris en charge](../develop/active-directory-saml-protocol-reference.md) pour une utilisation avec des utilisateurs d’entreprise, le point de terminaison v2.0 est destiné uniquement aux applications OAuth 2.0.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Apprenez-en davantage dans la [documentation de la plateforme d’identités Microsoft](../develop/index.yml).

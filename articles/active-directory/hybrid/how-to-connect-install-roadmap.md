@@ -8,17 +8,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/18/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f9ed613972f166f1f9955fc34e9bb640d87da6b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ae575aa6544a174a70eb8ea4749566e8660280e2
+ms.sourcegitcommit: 642988f1ac17cfd7a72ad38ce38ed7a5c2926b6c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331438"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94873265"
 ---
 # <a name="azure-ad-connect-and-azure-ad-connect-health-installation-roadmap"></a>Feuille de route pour l’installation d’Azure AD Connect et d’Azure AD Connect Health
 
@@ -49,14 +49,14 @@ Vous pouvez trouver le téléchargement d’Azure AD Connect sur le [Centre de t
 |Après l’installation | [Vérification de l’installation et affectation des licences](how-to-connect-post-installation.md)|
 
 ### <a name="learn-more-about-install-azure-ad-connect"></a>En savoir plus sur l’installation d’Azure AD Connect
-Il peut également être judicieux de se préparer aux préoccupations [opérationnelles](how-to-connect-sync-operations.md) . Vous pouvez souhaiter disposer d’un serveur de secours afin de pouvoir facilement basculer en cas de [sinistre](how-to-connect-sync-staging-server.md#disaster-recovery). Si vous envisagez d’effectuer des modifications de configuration fréquentes, vous devriez planifier un serveur en [mode intermédiaire](how-to-connect-sync-staging-server.md) .
+Il peut également être judicieux de se préparer aux préoccupations [opérationnelles](./how-to-connect-sync-staging-server.md) . Vous pouvez souhaiter disposer d’un serveur de secours afin de pouvoir facilement basculer en cas de [sinistre](how-to-connect-sync-staging-server.md#disaster-recovery). Si vous envisagez d’effectuer des modifications de configuration fréquentes, vous devriez planifier un serveur en [mode intermédiaire](how-to-connect-sync-staging-server.md) .
 
 |Rubrique |Lien|  
 | --- | --- |
 |Topologies prises en charge | [Topologies pour Azure AD Connect](plan-connect-topologies.md)|
 |Principes de conception | [Principes de conception Azure AD Connect](plan-connect-design-concepts.md)|
 |Comptes utilisés pour l’installation | [Autorisations et informations d’identification Azure AD Connect](reference-connect-accounts-permissions.md)|
-|Planification opérationnelle | [Synchronisation Azure AD Connect : tâches opérationnelles et examen](how-to-connect-sync-operations.md)|
+|Planification opérationnelle | [Synchronisation Azure AD Connect : tâches opérationnelles et examen](./how-to-connect-sync-staging-server.md)|
 |Options de connexion utilisateur | [Options de connexion de l’utilisateur via Azure AD Connect](plan-connect-user-signin.md)|
 
 ## <a name="configure-sync-features"></a>Configuration des fonctionnalités de synchronisation
@@ -66,7 +66,7 @@ Azure AD Connect est doté de plusieurs fonctionnalités que vous pouvez activer
 
 La [synchronisation de hachage du mot de passe](how-to-connect-password-hash-synchronization.md) synchronise le hachage du mot de passe dans Active Directory sur Azure AD. Cela permet à l’utilisateur final d’utiliser le même mot de passe en local et dans le cloud, mais uniquement de le gérer dans un seul emplacement. Dans la mesure où cela utilise votre Active Directory local en tant qu’autorité, vous pourrez également utiliser votre propre stratégie de mot de passe.
 
-[écriture différée du mot de passe](../authentication/quickstart-sspr.md) permettra à vos utilisateurs de modifier et de réinitialiser leurs mots de passe dans le cloud et d’appliquer votre stratégie de mot de passe locale.
+[écriture différée du mot de passe](../authentication/tutorial-enable-sspr.md) permettra à vos utilisateurs de modifier et de réinitialiser leurs mots de passe dans le cloud et d’appliquer votre stratégie de mot de passe locale.
 
 La [réécriture d’appareil](how-to-connect-device-writeback.md) autorise un appareil inscrit dans Azure AD à bénéficier de la réécriture dans Active Directory en local afin de pouvoir être utilisé pour l’accès conditionnel.
 
@@ -80,7 +80,7 @@ La [mise à niveau automatique](how-to-connect-install-automatic-upgrade.md) est
 |Configurer le filtrage | [Synchronisation Azure AD Connect : Configurer le filtrage](how-to-connect-sync-configure-filtering.md)|
 |Synchronisation de hachage de mot de passe | [Synchronisation de hachage de mot de passe](how-to-connect-password-hash-synchronization.md)|
 |Authentification directe | [Authentification directe](how-to-connect-pta.md)
-|Réécriture du mot de passe | [Prise en main de la gestion de mot de passe](../authentication/quickstart-sspr.md)|
+|Réécriture du mot de passe | [Prise en main de la gestion de mot de passe](../authentication/tutorial-enable-sspr.md)|
 |Écriture différée des appareils | [Activation de l’écriture différée des appareils dans Azure AD Connect](how-to-connect-device-writeback.md)|
 |prévention des suppressions accidentelles | [Synchronisation Azure AD Connect : prévention des suppressions accidentelles](how-to-connect-sync-feature-prevent-accidental-deletes.md)|
 |Mise à jour automatique | [Azure AD Connect : mise à niveau automatique](how-to-connect-install-automatic-upgrade.md)|
@@ -124,7 +124,7 @@ Si votre serveur ADFS n’a pas été configuré pour mettre à jour automatique
 |Tous les articles AD FS | [Fédération avec Azure AD Connect](how-to-connect-fed-whatis.md)|
 |Configuration d’ADFS avec des sous-domaines | [Prise en charge de plusieurs domaines pour la fédération avec Azure AD](how-to-connect-install-multiple-domains.md)|
 |Gérer la batterie AD FS | [Gestion AD FS et personnalisation avec Azure AD Connect](how-to-connect-fed-management.md)|
-|Mise à jour manuelle des certificats de fédération | [Renouvellement des certificats de fédération pour Office 365 et Azure AD](how-to-connect-fed-o365-certs.md)|
+|Mise à jour manuelle des certificats de fédération | [Renouvellement des certificats de fédération pour Microsoft 365 et Azure AD](how-to-connect-fed-o365-certs.md)|
 
 
 ## <a name="get-started-with-azure-ad-connect-health"></a>Démarrer avec Azure AD Connect Health
@@ -143,12 +143,12 @@ Pour vous familiariser avec Azure AD Connect Health, procédez comme suit :
 * Vérifiez que vous [disposez de la configuration requise](how-to-connect-health-agent-install.md#requirements) pour Azure AD Connect Health.
 * Prise en main d’Azure AD Connect Health pour AD FS
     * [Téléchargez l’agent Azure AD Connect Health pour AD FS.](https://go.microsoft.com/fwlink/?LinkID=518973)
-    * [Consultez les instructions d’installation](how-to-connect-health-agent-install.md#installing-the-azure-ad-connect-health-agent-for-ad-fs).
+    * [Consultez les instructions d’installation](how-to-connect-health-agent-install.md#install-the-agent-for-ad-fs).
 * Prise en main d’Azure AD Connect Health pour la synchronisation
     * [Téléchargez et installez la dernière version d’Azure AD Connect](https://go.microsoft.com/fwlink/?linkid=615771). L’agent d’intégrité pour la synchronisation sera ajouté dans le cadre de l’installation d’Azure AD Connect (version 1.0.9125.0 ou ultérieure).
 * Prise en main d’Azure AD Connect Health pour AD DS
     * [Téléchargez l’agent Azure AD Connect Health pour AD DS](https://go.microsoft.com/fwlink/?LinkID=820540).
-    * [Consultez les instructions d’installation](how-to-connect-health-agent-install.md#installing-the-azure-ad-connect-health-agent-for-ad-ds).
+    * [Consultez les instructions d’installation](how-to-connect-health-agent-install.md#install-the-agent-for-azure-ad-ds).
 
 
 ## <a name="azure-ad-connect-health-portal"></a>Portail Azure AD Connect Health

@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 07/16/2019
+ms.date: 09/26/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 38e319efb100d326d55f6f821e7c903306a7c7d0
-ms.sourcegitcommit: a53fe6e9e4a4c153e9ac1a93e9335f8cf762c604
+ms.openlocfilehash: 4a888c3ad771e4a7edbd7110ba584050fe68e810
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80991005"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443787"
 ---
 # <a name="a-web-api-that-calls-web-apis-code-configuration"></a>Une API web qui appelle des API web : Configuration de code
 
@@ -27,120 +27,150 @@ Le code que vous utilisez pour configurer votre API web afin qu’elle appelle d
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-## <a name="code-subscribed-to-ontokenvalidated"></a>Code faisant l’objet d’un abonnement OnTokenValidated
+## <a name="microsoftidentityweb"></a>Microsoft.Identity.Web
 
-En plus de la configuration du code pour toutes les API web protégées, vous devez vous abonner à la validation du jeton du porteur que vous recevez lorsque votre API est appelée :
+Microsoft vous recommande d’utiliser le package NuGet [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web) lors du développement d’une API protégée ASP.NET Core appelant des API web en aval. Voir [API web protégée : Configuration du code | Microsoft.Identity.Web](scenario-protected-web-api-app-configuration.md#microsoftidentityweb) pour une présentation rapide de cette bibliothèque dans le contexte d’une API web.
 
-```csharp
-/// <summary>
-/// Protects the web API with the Microsoft identity platform, or Azure Active Directory (Azure AD) developer platform
-/// This supposes that the configuration files have a section named "AzureAD"
-/// </summary>
-/// <param name="services">The service collection to which to add authentication</param>
-/// <param name="configuration">Configuration</param>
-/// <returns></returns>
-public static IServiceCollection AddProtectedApiCallsWebApis(this IServiceCollection services,
-                                                             IConfiguration configuration,
-                                                             IEnumerable<string> scopes)
+## <a name="client-secrets-or-client-certificates"></a>Secrets clients ou certificats clients
+
+Dans la mesure où votre API web appelle désormais une API web en aval, vous devez fournir un secret client ou un certificat client dans le fichier *appsettings.json*. Vous pouvez également ajouter une section spécifiant ce qui suit :
+
+- URL de l’API web en aval ;
+- étendues requises pour appeler l’API.
+
+Dans l’exemple suivant, la section `GraphBeta` spécifie ces paramètres.
+
+```JSON
 {
-    services.AddTokenAcquisition();
-    services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, options =>
-    {
-        // When an access token for our own web API is validated, we add it
-        // to the MSAL.NET cache so that it can be used from the controllers.
-        options.Events = new JwtBearerEvents();
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "ClientId": "[Client_id-of-web-api-eg-2ec40e65-ba09-4853-bcde-bcb60029e596]",
+    "TenantId": "common"
 
-        options.Events.OnTokenValidated = async context =>
-        {
-            context.Success();
-
-            // Adds the token to the cache and handles the incremental consent
-            // and claim challenges
-            AddAccountToCacheFromJwt(context, scopes);
-            await Task.FromResult(0);
-        };
-    });
-    return services;
+   // To call an API
+   "ClientSecret": "[Copy the client secret added to the app from the Azure portal]",
+   "ClientCertificates": [
+  ]
+ },
+ "GraphBeta": {
+    "BaseUrl": "https://graph.microsoft.com/beta",
+    "Scopes": "user.read"
+    }
 }
 ```
 
-## <a name="on-behalf-of-flow"></a>Flux On-Behalf-Of
+À la place d’un secret client, vous pouvez fournir un certificat client. L’extrait de code suivant montre l’utilisation d’un certificat stocké dans Azure Key Vault.
 
-La méthode AddAccountToCacheFromJwt() doit :
-
-- Instancier une application cliente confidentielle Microsoft Authentification Library (MSAL).
-- Appelez la méthode `AcquireTokenOnBehalf` . Cet appel permet d’échanger le jeton du porteur qui a été acquis par le client pour l’API web contre un jeton du porteur pour le même utilisateur, mais il est nécessaire que l’API appelle une API en aval.
-
-### <a name="instantiate-a-confidential-client-application"></a>Instancier une application cliente confidentielle
-
-Ce flux est uniquement disponible dans le flux client confidentiel. Par conséquent, l’API web protégée fournit des informations d’identification de client (certificat ou clé secrète client) à la [classe ConfidentialClientApplicationBuilder](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.confidentialclientapplicationbuilder) via les méthodes `WithClientSecret` ou `WithCertificate`.
-
-![Liste des méthodes IConfidentialClientApplication](https://user-images.githubusercontent.com/13203188/55967244-3d8e1d00-5c7a-11e9-8285-a54b05597ec9.png)
-
-```csharp
-IConfidentialClientApplication app;
-
-#if !VariationWithCertificateCredentials
-app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
-           .WithClientSecret(config.ClientSecret)
-           .Build();
-#else
-// Building the client credentials from a certificate
-X509Certificate2 certificate = ReadCertificate(config.CertificateName);
-app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
-    .WithCertificate(certificate)
-    .Build();
-#endif
-```
-
-Enfin, au lieu de prouver leur identité à l’aide d’une clé secrète client ou d’un certificat, les applications clientes confidentielles peuvent prouver leur identité à l’aide d’assertions client.
-Pour plus d’informations sur ce scénario avancé, consultez la section [Assertions clientes confidentielles](msal-net-client-assertions.md).
-
-### <a name="how-to-call-on-behalf-of"></a>Comment appeler On-Behalf-Of ?
-
-Vous effectuez l’appel On-Behalf-Of (OBO) en appelant la [méthode AcquireTokenOnBehalf](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.acquiretokenonbehalfofparameterbuilder) sur l’interface `IConfidentialClientApplication`.
-
-La classe `UserAssertion` est générée à partir du jeton du porteur fourni à l’API web par ses propres clients. Elle compte [deux contrôleurs](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.clientcredential.-ctor?view=azure-dotnet) :
-* un qui accepte un jeton du porteur JSON Web Token (JWT)
-* un qui accepte tout type d’assertion de l’utilisateur, un autre type de jeton de sécurité, dont le type est ensuite spécifié dans un paramètre supplémentaire nommé `assertionType`
-
-![Propriétés et méthodes UserAssertion](https://user-images.githubusercontent.com/13203188/37082180-afc4b708-21e3-11e8-8af8-a6dcbd2dfba8.png)
-
-En pratique, le flux OBO est souvent utilisé pour acquérir un jeton pour une API en aval et le stocker dans le cache de jetons utilisateur MSAL.NET. Le but est que d’autres parties de l’API web puissent ensuite appeler les [remplacements](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.clientapplicationbase.acquiretokensilent?view=azure-dotnet) de ``AcquireTokenOnSilent`` pour appeler les API en aval. Cet appel a pour effet d’actualiser les jetons si nécessaire.
-
-```csharp
-private void AddAccountToCacheFromJwt(IEnumerable<string> scopes, JwtSecurityToken jwtToken, ClaimsPrincipal principal, HttpContext httpContext)
+```JSON
 {
-    try
-    {
-        UserAssertion userAssertion;
-        IEnumerable<string> requestedScopes;
-        if (jwtToken != null)
-        {
-            userAssertion = new UserAssertion(jwtToken.RawData, "urn:ietf:params:oauth:grant-type:jwt-bearer");
-            requestedScopes = scopes ?? jwtToken.Audiences.Select(a => $"{a}/.default");
-        }
-        else
-        {
-            throw new ArgumentOutOfRangeException("tokenValidationContext.SecurityToken should be a JWT Token");
-        }
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "ClientId": "[Client_id-of-web-api-eg-2ec40e65-ba09-4853-bcde-bcb60029e596]",
+    "TenantId": "common"
 
-        // Create the application
-        var application = BuildConfidentialClientApplication(httpContext, principal);
-
-        // .Result to make sure that the cache is filled in before the controller tries to get access tokens
-        var result = application.AcquireTokenOnBehalfOf(requestedScopes.Except(scopesRequestedByMsalNet),
-                                                        userAssertion)
-                                .ExecuteAsync()
-                                .GetAwaiter().GetResult();
-     }
-     catch (MsalException ex)
-     {
-         Debug.WriteLine(ex.Message);
-         throw;
-     }
+   // To call an API
+   "ClientCertificates": [
+      {
+        "SourceType": "KeyVault",
+        "KeyVaultUrl": "https://msidentitywebsamples.vault.azure.net",
+        "KeyVaultCertificateName": "MicrosoftIdentitySamplesCert"
+      }
+   ]
+  },
+  "GraphBeta": {
+    "BaseUrl": "https://graph.microsoft.com/beta",
+    "Scopes": "user.read"
+  }
 }
 ```
+
+Microsoft.Identity.Web propose plusieurs façons de décrire les certificats, que ce soit en définissant une configuration ou en écrivant du code. Pour plus d’informations, consultez [Microsoft.Identity.Web wiki - Using certificates](https://github.com/AzureAD/microsoft-identity-web/wiki/Using-certificates) sur GitHub.
+
+## <a name="startupcs"></a>Startup.cs
+
+Votre API web doit acquérir un jeton pour l’API en aval. Vous le spécifiez en ajoutant la ligne `.EnableTokenAcquisitionToCallDownstreamApi()` après `.AddMicrosoftIdentityWebApi(Configuration)`. Cette ligne expose le service `ITokenAcquisition` que vous pouvez utiliser dans vos actions de contrôleur et de pages. Toutefois, comme vous le verrez dans les deux points suivants, il y a encore plus simple. Vous devez également choisir une implémentation de cache de jeton, par exemple `.AddInMemoryTokenCaches()`, dans *Startup.cs* :
+
+```csharp
+using Microsoft.Identity.Web;
+
+public class Startup
+{
+  // ...
+  public void ConfigureServices(IServiceCollection services)
+  {
+  // ...
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+          .AddMicrosoftIdentityWebApi(Configuration, Configuration.GetSection("AzureAd"))
+            .EnableTokenAcquisitionToCallDownstreamApi()
+            .AddInMemoryTokenCaches();
+   // ...
+  }
+  // ...
+}
+```
+
+Si vous ne souhaitez pas acquérir le jeton vous-même, *Microsoft.Identity.Web* fournit deux mécanismes pour appeler une API web en aval à partir d’une autre API. L’option que vous choisissez varie selon que vous souhaitez appeler Microsoft Graph ou une autre API.
+
+### <a name="option-1-call-microsoft-graph"></a>Option 1 : Appeler Microsoft Graph
+
+Si vous souhaitez appeler Microsoft Graph, Microsoft.Identity.Web vous permet d’utiliser directement le `GraphServiceClient` (exposé par le Kit de développement logiciel (SDK) Microsoft Graph) dans vos actions d’API. Pour exposer Microsoft Graph :
+
+1. Ajoutez le package NuGet [Microsoft.Identity.Web. MicrosoftGraph](https://www.nuget.org/packages/Microsoft.Identity.Web.MicrosoftGraph) à votre projet.
+1. Ajoutez `.AddMicrosoftGraph()` après `.EnableTokenAcquisitionToCallDownstreamApi()` dans le fichier *Startup.cs*. `.AddMicrosoftGraph()` a plusieurs remplacements. En utilisant le remplacement qui prend une section de configuration en tant que paramètre, le code devient :
+
+```csharp
+using Microsoft.Identity.Web;
+
+public class Startup
+{
+  // ...
+  public void ConfigureServices(IServiceCollection services)
+  {
+  // ...
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+          .AddMicrosoftIdentityWebApi(Configuration, Configuration.GetSection("AzureAd"))
+            .EnableTokenAcquisitionToCallDownstreamApi()
+               .AddMicrosoftGraph(Configuration.GetSection("GraphBeta"))
+            .AddInMemoryTokenCaches();
+   // ...
+  }
+  // ...
+}
+```
+
+### <a name="option-2-call-a-downstream-web-api-other-than-microsoft-graph"></a>Option n°2 : Appeler une API web en aval autre que Microsoft Graph
+
+Pour appeler une API en aval autre que Microsoft Graph, *Microsoft.Identity.Web* fournit `.AddDownstreamWebApi()`, qui demande des jetons et appelle l’API web en aval.
+
+```csharp
+using Microsoft.Identity.Web;
+
+public class Startup
+{
+  // ...
+  public void ConfigureServices(IServiceCollection services)
+  {
+  // ...
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+          .AddMicrosoftIdentityWebApi(Configuration, "AzureAd")
+            .EnableTokenAcquisitionToCallDownstreamApi()
+               .AddDownstreamWebApi("MyApi", Configuration.GetSection("GraphBeta"))
+            .AddInMemoryTokenCaches();
+   // ...
+  }
+  // ...
+}
+```
+
+Comme pour les applications web, vous pouvez choisir diverses implémentations de cache de jetons. Pour plus d’informations, consultez [Microsoft identity web - Token cache serialization](https://aka.ms/ms-id-web/token-cache-serialization) sur GitHub.
+
+L’illustration suivante montre les différentes possibilités de *Microsoft.Identity.Web* et leur impact sur le fichier *Startup.cs* :
+
+:::image type="content" source="media/scenarios/microsoft-identity-web-startup-cs.svg" alt-text="Diagramme de bloc montrant des options de configuration de service dans le point de départ CS pour appeler une API web et spécifier une implémentation de cache de jeton":::
+
+> [!NOTE]
+> Pour bien comprendre les exemples de code présentés ici, vous devez maîtriser les [notions de base d'ASP.NET Core](/aspnet/core/fundamentals), en particulier l'[injection de dépendances](/aspnet/core/fundamentals/dependency-injection) et le modèle [options](/aspnet/core/fundamentals/configuration/options).
+
 # <a name="java"></a>[Java](#tab/java)
 
 Le flux On-behalf-of (OBO) permet d’obtenir un jeton pour appeler l’API web en aval. Dans ce flux, votre API web reçoit de l’application cliente un jeton du porteur avec des permissions déléguées par l’utilisateur, puis échange ce jeton contre un autre jeton d’accès pour appeler l’API web en aval.
@@ -218,13 +248,12 @@ Une API web Python doit utiliser un intergiciel pour valider le jeton du porteur
 
 ---
 
-Vous pouvez également voir un exemple d’implémentation de flux OBO dans [NodeJS et Azure Functions](https://github.com/Azure-Samples/ms-identity-nodejs-webapi-onbehalfof-azurefunctions/blob/master/MiddleTierAPI/MyHttpTrigger/index.js#L61).
+Vous pouvez également voir un exemple d’implémentation de flux OBO dans [NodeJS et Azure Functions](https://github.com/Azure-Samples/ms-identity-nodejs-webapi-onbehalfof-azurefunctions/blob/master/Function/MyHttpTrigger/index.js#L61).
 
 ## <a name="protocol"></a>Protocol
 
-Pour plus d’informations sur le protocole OBO, consultez la section [Plateforme d’identités Microsoft et flux On-Behalf-Of OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow).
+Pour plus d’informations sur le protocole OBO, consultez la section [Plateforme d’identités Microsoft et flux On-Behalf-Of OAuth 2.0](./v2-oauth2-on-behalf-of-flow.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Une API web qui appelle des API web : Acquérir un jeton pour l’application](scenario-web-api-call-api-acquire-token.md)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application](scenario-web-api-call-api-acquire-token.md).

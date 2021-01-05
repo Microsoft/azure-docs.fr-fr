@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
 ms.topic: troubleshooting
-ms.date: 12/13/2019
+ms.date: 10/07/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 140ad45d9c4f6b6f49a4ea4aefb9298e58a2cf10
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6eb63a4a0b7b7fdefd636d3460b182f8d907dd36
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75443572"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558927"
 ---
 # <a name="frequently-asked-questions-identity-protection-in-azure-active-directory"></a>Forum aux questions sur Identity Protection dans Azure Active Directory
 
@@ -24,27 +24,22 @@ ms.locfileid: "75443572"
 
 **Ignorer les risques utilisateur** dans la version classique d’Identity Protection définit l’acteur dans l’historique des risques utilisateur d’Identity Protection sur **Azure AD**.
 
-**Ignorer les risques utilisateur** dans Identity Protection définit l’acteur dans l’historique des risques utilisateur d’Identity Protection sur le **\<nom de l’administrateur avec un lien hypertexte pointant vers le panneau de l’utilisateur\>** .
+L’option **Ignorer le risque lié à l’utilisateur** dans Identity Protection définit l’acteur dans l’historique des risques de l’utilisateur dans Identity Protection sur **\<Admin’s name with a hyperlink pointing to user’s blade\>** .
 
 Un problème connu occasionne actuellement des latences dans le flux de rejet des risques utilisateur. Si vous disposez d'une « Stratégie de risque utilisateur », celle-ci cessera de s'appliquer aux utilisateurs ignorés quelques minutes après un clic sur « Ignorer le risque lié à l'utilisateur ». Cela dit, des retards d'actualisation de l'« état de risque » des utilisateurs ignorés ont été identifiés. Pour contourner ce problème, actualisez la page au niveau du navigateur afin d'afficher le dernier « État de risque » de l'utilisateur.
 
-## <a name="risky-users-report-known-issues"></a>Les utilisateurs à risque signalent les problèmes connus
-
-Les requêtes sur le champ **Nom d’utilisateur** respectent la casse, alors que les requêtes sur le champ **Nom** ne sont pas sensibles à la casse.
-
-Désactivez **Show dates as** (Afficher les dates en tant que) pour masquer la colonne **RISK LAST UPDATED** (Dernière mise à jour du risque). Pour lire la colonne, cliquez sur **Colonnes** en haut du panneau des utilisateurs à risque.
-
-**Ignorer tous les événements** dans la version classique d’Identity Protection définit l’état des détections de risque sur **Closed (resolved)** (Fermé (résolu)).
-
-## <a name="risky-sign-ins-report-known-issues"></a>Problèmes connus du rapport sur les connexions à risque
-
-**Résoudre** sur une détection de risque définit l’état sur **Users passed MFA driven by risk-based policy** (Les utilisateurs ont passé la MFA pilotée par une stratégie basée sur les risques).
 
 ## <a name="frequently-asked-questions"></a>Forum aux questions
 
 ### <a name="why-is-a-user-is-at-risk"></a>Pourquoi un utilisateur est-il à risque ?
 
 Si vous êtes un client Azure AD Identity Protection, accédez à la vue [Utilisateurs à risque](howto-identity-protection-investigate-risk.md#risky-users), puis cliquez sur un utilisateur à risque. Dans le tiroir en bas, l’onglet « Historique des risques » affiche tous les événements qui ont entraîné un changement de risque de l’utilisateur. Pour afficher toutes les connexions à risque pour l’utilisateur, cliquez sur « Connexions risquées de l’utilisateur ». Pour afficher toutes les détections de risque pour cet utilisateur, cliquez sur « Détection des risques de l’utilisateur ».
+
+## <a name="why-was-my-sign-in-blocked-but-identity-protection-didnt-generate-a-risk-detection"></a>Pourquoi ma connexion est-elle bloquée, mais Identity Protection n’a-t-il pas généré de détection des risques ?
+Les connexions peuvent être bloquées pour plusieurs raisons. Il est important de noter qu’Identity Protection ne génère des détections de risque que lorsque des informations d’identification correctes sont utilisées dans la demande d’authentification. Si un utilisateur entre des informations d’identification incorrectes, il n’est pas marqué par Identity Protection, car il n’y a aucun risque de compromission des informations d’identification, sauf si une personne inappropriée utilise les informations d’identification correctes. Il est possible qu’Identity Protection ne génère pas de détection pour un utilisateur dont la signature a été bloquée pour certaines raisons, notamment :
+* L’**adresse IP peut être bloquée** en raison d’une activité malveillante à partir de l’adresse IP. Le message bloqué par l’adresse IP n’est pas différent si les informations d’identification sont correctes ou non. Si l’adresse IP est bloquée et que des informations d’identification incorrectes sont utilisées, Identity Protection ne génère pas de détection
+* Le **[verrouillage intelligent](../authentication/howto-password-smart-lockout.md)** peut empêcher la connexion du compte après plusieurs tentatives ayant échoué
+* Une **stratégie d’accès conditionnel** peut être appliquée et peut utiliser d’autres conditions que le niveau de risque pour bloquer une demande d’authentification
 
 ### <a name="how-can-i-get-a-report-of-detections-of-a-specific-type"></a>Comment puis-je obtenir un rapport sur les détections d’un type spécifique ?
 
@@ -87,9 +82,11 @@ Toutes les détections de risques sont documentées dans l’article [Qu’est-c
 
 - Lors de la réception de ces commentaires, nous définissons le risque de connexion (et non de l’utilisateur) à l’état **Sécurité confirmée** et le niveau de risques sur **-** .
 
-- Nous fournissons également les informations à nos systèmes de Machine Learning dans le but d’améliorations futures de l’évaluation des risques.
+- Nous fournissons également les informations à nos systèmes de Machine Learning dans le but d’améliorations futures de l’évaluation des risques. 
 
     > [!NOTE]
+    >Aujourd’hui, le fait de confirmer qu’une sélection est sécurisée n’empêche pas en soi que les connexions futures avec les mêmes propriétés soient marquées comme étant risquées. La meilleure façon d’effectuer l’apprentissage du système pour qu’il apprenne les propriétés d’un utilisateur consiste à utiliser la stratégie de connexion risquée avec MFA. Lorsque la fonctionnalité MFA est demandée pour une connexion risquée et que l’utilisateur répond correctement à la demande, la connexion peut réussir et aider à former le système sur le comportement de l’utilisateur légitime.
+    >
     > Si vous pensez que l’utilisateur n’est pas compromis, utilisez **Ignorer le risque lié à l’utilisateur** au niveau de l’utilisateur plutôt que d’utiliser **Sécurité confirmée** au niveau de la connexion. **Ignorer le risque lié à l’utilisateur** au niveau de l’utilisateur ferme le risque de l’utilisateur, ainsi que toutes les connexions à risque et toutes les détections de risque antérieures.
 
 ### <a name="why-am-i-seeing-a-user-with-a-low-or-above-risk-score-even-if-no-risky-sign-ins-or-risk-detections-are-shown-in-identity-protection"></a>Pourquoi un utilisateur avec un faible indice de risque (ou supérieur) s’affiche-t-il même si aucune connexion à risque ni aucune détection de risque n’apparaît dans Identity Protection ?
@@ -98,4 +95,4 @@ Toutes les détections de risques sont documentées dans l’article [Qu’est-c
 
 ### <a name="why-does-a-sign-in-have-a-sign-in-risk-aggregate-score-of-high-when-the-detections-associated-with-it-are-of-low-or-medium-risk"></a>Pourquoi une connexion a-t-elle un indice de « risque de connexion (agrégat) » élevé lorsque les détections qui lui sont associées ont un risque faible ou moyen ?
 
-L’indice de risque d’agrégat élevé peut être basé sur d’autres fonctionnalités de la connexion, ou sur le fait que plusieurs détections ont été déclenchées pour cette connexion. À l’inverse, une connexion peut avoir un risque de connexion (agrégat) moyen même si les détections associées à la connexion sont de risque élevé. 
+L’indice de risque d’agrégat élevé peut être basé sur d’autres fonctionnalités de la connexion, ou sur le fait que plusieurs détections ont été déclenchées pour cette connexion. À l’inverse, une connexion peut avoir un risque de connexion (agrégat) moyen même si les détections associées à la connexion sont de risque élevé.

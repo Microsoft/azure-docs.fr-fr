@@ -14,21 +14,24 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/16/2019
 ms.author: willzhan
-ms.openlocfilehash: 001d408eaa7ce637bd7cc1f1183dd8748cddf539
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a26be590d5f7b467f57e8e18eac54ce57be24094
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189520"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266593"
 ---
-# <a name="offline-playready-streaming-for-windows-10"></a>Diffusion en continu de PlayReady en mode hors connexion pour Windows 10  
+# <a name="offline-playready-streaming-for-windows-10"></a>Diffusion en continu de PlayReady en mode hors connexion pour Windows 10
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 3](../latest/offline-plaready-streaming-for-windows-10.md)
 > * [Version 2](offline-playready-streaming-windows-10.md)
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Azure Media Services prend en charge le téléchargement/la lecture hors connexion avec la protection DRM. Cet article décrit la prise en charge hors connexion d’Azure Media Services pour les clients Windows 10/PlayReady. Pour en savoir plus sur la prise en charge du mode hors connexion pour les appareils iOS/FairPlay et Android/Widevine, consultez les articles suivants :
 
@@ -48,7 +51,7 @@ Le défi auquel nous sommes confrontés pour l’implémentation du mode hors co
 * Le format MP4 est pris en charge par la plupart des lecteurs et outils d’encodeur, mais il n’y a aucune liaison entre le conteneur MP4 et DRM.
 * À terme, il conviendra d’utiliser CFF avec CENC. Toutefois, à l’heure actuelle, l’écosystème de prise en charge des outils/lecteurs n’existe pas encore. Nous devons trouver une solution rapidement.
  
-L’idée est la suivante : le format de fichier de diffusion en continu lisse ([PIFF](https://docs.microsoft.com/iis/media/smooth-streaming/protected-interoperable-file-format)) avec H264/AAC possède une liaison avec PlayReady (AES-128 CTR). Un fichier .ismv de diffusion en continu lisse individuel (en admettant que l’audio soit multiplexé dans la vidéo) est en soi un fichier fMP4 et peut être utilisé pour la lecture. Si un contenu de diffusion en continu lisse subit un chiffrement PlayReady, chaque fichier .ismv devient un fichier MP4 fragmenté protégé PlayReady. Il est possible de choisir le fichier .ismv ayant la vitesse de transmission souhaitée et de le renommer en .mp4 pour le téléchargement.
+L’idée est la suivante : le format de fichier de diffusion en continu lisse ([PIFF](/iis/media/smooth-streaming/protected-interoperable-file-format)) avec H264/AAC possède une liaison avec PlayReady (AES-128 CTR). Un fichier .ismv de diffusion en continu lisse individuel (en admettant que l’audio soit multiplexé dans la vidéo) est en soi un fichier fMP4 et peut être utilisé pour la lecture. Si un contenu de diffusion en continu lisse subit un chiffrement PlayReady, chaque fichier .ismv devient un fichier MP4 fragmenté protégé PlayReady. Il est possible de choisir le fichier .ismv ayant la vitesse de transmission souhaitée et de le renommer en .mp4 pour le téléchargement.
 
 Deux options sont disponibles pour héberger le fichier MP4 protégé PlayReady pour le téléchargement progressif :
 

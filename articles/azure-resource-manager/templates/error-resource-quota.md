@@ -3,12 +3,12 @@ title: Erreurs de quota
 description: Décrit comment résoudre les erreurs liées aux quotas de ressources quand vous déployez des ressources avec Azure Resource Manager.
 ms.topic: troubleshooting
 ms.date: 03/09/2018
-ms.openlocfilehash: 410b086b39d63d03491d390364f4aec6300fc7c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 75e8abf31d035a1e3a106bc0c6561624762db5d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234025"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90530418"
 ---
 # <a name="resolve-errors-for-resource-quotas"></a>Résoudre les erreurs liées aux quotas de ressources
 
@@ -95,7 +95,7 @@ Pour demander une augmentation du quota, accédez au portail et soumettez une re
 
 1. Sélectionnez **Abonnements**.
 
-   ![Abonnements](./media/error-resource-quota/subscriptions.png)
+   ![La capture d’écran montre le menu du portail Azure avec des abonnements sélectionnés.](./media/error-resource-quota/subscriptions.png)
 
 2. Sélectionnez l’abonnement nécessitant une augmentation du quota.
 

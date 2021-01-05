@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/28/2018
 ms.author: allensu
-ms.openlocfilehash: 7124dd40d4510674014afe012a8f40dcb5bb6153
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ceed62d466627d6a23554229bd6f4b96c674c7e9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253762"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993667"
 ---
 # <a name="improve-performance-by-compressing-files-in-azure-cdn"></a>Compression des fichiers dans Azure CDN pour améliorer les performances
 La compression de fichiers est une méthode simple et efficace qui vise à améliorer la vitesse de transfert des fichiers et à accroître les performances de chargement des pages en réduisant la taille des fichiers avant leur envoi à partir du serveur. La compression de fichiers peut réduire les coûts de bande passante et offre à vos utilisateurs davantage de réactivité.
@@ -53,12 +53,12 @@ Les niveaux Standard et Premium de CDN fournissent les mêmes fonctionnalités, 
     La page du point de terminaison CDN s’ouvre.
 2. Sélectionnez **Compression**.
 
-    ![Sélection de fichiers CDN](./media/cdn-file-compression/cdn-compress-select-std.png)
+    ![Capture d’écran représentant un point de terminaison avec l’option Compression sélectionnée dans le menu du portail.](./media/cdn-file-compression/cdn-compress-select-std.png)
 
     La page de compression s’ouvre.
 3. Sélectionnez **Activer** pour activer la compression.
 
-    ![Options de compression de fichiers CDN](./media/cdn-file-compression/cdn-compress-standard.png)
+    ![Capture d’écran représentant l’activation de Compression.](./media/cdn-file-compression/cdn-compress-standard.png)
 4. Utilisez les types MIME par défaut ou modifiez la liste en supprimant ou en ajoutant des types MIME.
 
    > [!TIP]
@@ -112,6 +112,8 @@ Ces profils prennent en charge les encodages de compression suivants :
 Si la requête prend en charge plusieurs types de compression, la compression brotli est prioritaire.
 
 Lorsqu’une demande liée à un composant spécifie la compression gzip et que cette demande cause une absence dans le cache, le CDN Azure effectue une compression gzip du composant directement sur le serveur POP. Ensuite, le fichier compressé est servi à partir du cache.
+
+Si l’origine utilise l’encodage de transfert mémorisé en bloc (CTE) pour envoyer des données compressées au CDN POP, les réponses supérieures à 8 Mo ne sont pas prises en charge. 
 
 ### <a name="azure-cdn-from-verizon-profiles"></a>Profils CDN Azure fourni par Verizon
 

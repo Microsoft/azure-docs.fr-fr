@@ -4,15 +4,15 @@ description: Ce démarrage rapide aide à configurer un pare-feu pour un serveur
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: quickstart
-ms.date: 05/19/2020
+ms.date: 08/12/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 48618815519fad31bff5d6a8d2d2edc82535f437
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: e4953137cf939c35c6ac73fe51ca43eca6e99edc
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697901"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88192441"
 ---
 # <a name="quickstart-configure-server-firewall---portal"></a>Démarrage rapide : Configurer un pare-feu de serveur - Portail
 
@@ -22,8 +22,9 @@ Ce démarrage rapide vous aide à configurer un pare-feu pour votre serveur Azur
 
 - Un serveur Analysis Services dans votre abonnement. Pour en savoir plus, consultez [Démarrage rapide : Créer un serveur - Portail](analysis-services-create-server.md) ou [Démarrage rapide : Créer un serveur - PowerShell](analysis-services-create-powershell.md)
 - Une ou plusieurs plages d’adresses IP pour les ordinateurs clients (si nécessaire).
-- Certains scénarios dans lesquels Power BI Premium se connecte à Azure Analysis Services, y compris l’importation de données (actualisation) et les rapports paginés, ne sont actuellement pas pris en charge, même quand l’option Autoriser l’accès à partir de Power BI est activée. Le scénario le plus courant consistant à utiliser Live Connect à partir de Power BI Premium est pris en charge. Tous les scénarios Power BI Pro sont pris en charge.
 
+> [!NOTE]
+> L'importation de données (actualisation) et les connexions de rapports paginés à partir de Power BI Premium ne sont actuellement pas prises en charge dans Microsoft Cloud Germany lorsqu'un pare-feu est activé, même lorsque le paramètre Autoriser l'accès à partir de Power BI est activé.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure. 
 
@@ -32,9 +33,9 @@ Ce démarrage rapide vous aide à configurer un pare-feu pour votre serveur Azur
 ## <a name="configure-a-firewall"></a>Configurer un pare-feu
 
 1. Cliquez sur votre serveur pour ouvrir la page Vue d’ensemble. 
-2. Dans **Paramètres** > **Pare-feu** > **Activer le pare-feu**, cliquez sur **Activé**.
-3. Pour autoriser l’accès DirectQuery à partir du service Power BI, dans **Allow access from Power BI** (Autoriser l’accès à partir de Power BI), cliquez sur **Activé**.  
-4. (Facultatif) Spécifiez une ou plusieurs plages d’adresses IP. Entrez un nom et une adresse IP de début et de fin pour chaque plage. Le nom de la règle de pare-feu doit être limité à 128 caractères et peut uniquement contenir des caractères majuscules, des minuscules, des chiffres, le trait de soulignement et le trait d’union. Les espaces et caractères spéciaux ne sont pas autorisés.
+2. Dans **PARAMÈTRES** > **Pare-feu** > **Activer le pare-feu**, sélectionnez **Activé**.
+3. Pour activer les connexions à partir de Power BI et de Power BI Premium, sélectionnez **Activé** dans **Autoriser l'accès à partir de Power BI**.  
+4. (Facultatif) Spécifiez une ou plusieurs plages d’adresses IP. Entrez un nom et une adresse IP de début et de fin pour chaque plage. Le nom de la règle de pare-feu doit être limité à 128 caractères et peut uniquement contenir des caractères majuscules, des minuscules, des chiffres, le trait de soulignement et le trait d’union. Les espaces vides et autres caractères spéciaux ne sont pas autorisés.
 5. Cliquez sur **Enregistrer**.
 
      ![Paramètres du pare-feu](./media/analysis-services-qs-firewall/aas-qs-firewall.png)
@@ -47,4 +48,4 @@ Lorsque vous n’en avez plus besoin, supprimez les plages d’adresses IP ou d�
 Dans ce démarrage rapide, vous avez appris comment configurer un pare-feu pour votre serveur. Maintenant que vous disposez d’un serveur et que vous l’avez protégé avec un pare-feu, vous pouvez ajouter un exemple de modèle de données de base à celui-ci à partir du portail. Un exemple de modèle permet d’en savoir plus sur la configuration des rôles de base de données de modèle et le test des connexions client. Pour en savoir plus, passez au tutoriel sur l’ajout d’un exemple de modèle.
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Ajouter un exemple de modèle à votre serveur](analysis-services-create-sample-model.md)
+> [Tutoriel : ajouter un exemple de modèle à votre serveur](analysis-services-create-sample-model.md)

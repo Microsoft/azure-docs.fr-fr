@@ -1,26 +1,25 @@
 ---
 title: Langages pris en charge dans Azure Functions
-description: Découvrez les langages qui sont pris en charge (Disponibilité générale) et ceux qui sont en version expérimentale ou en préversion.
+description: Découvrez les langues prises en charge (GA) et celles qui sont en préversion, ainsi que les méthodes d’extension du développement des fonctions dans d’autres langages.
 ms.topic: conceptual
 ms.date: 11/27/2019
-ms.openlocfilehash: 029ea753439dca3093bf214a5adfb6d58a1fe567
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 91a6ea886c3828678771b24d69bb7987af1fb105
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74942254"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83994899"
 ---
 # <a name="supported-languages-in-azure-functions"></a>Langages pris en charge dans Azure Functions
 
-Cet article explique les niveaux de prise en charge offerts pour les langages que vous pouvez utiliser avec Azure Functions.
+Cet article explique les niveaux de prise en charge offerts pour les langages que vous pouvez utiliser avec Azure Functions. Il décrit également les stratégies de création de fonctions à l’aide de langages non pris en charge en mode natif.
 
 ## <a name="levels-of-support"></a>Niveaux de prise en charge
 
-Il existe trois niveaux de prise en charge :
+Il y a deux niveaux de prise en charge :
 
 * **Disposition générale (GA)** : entièrement pris en charge et approuvé pour la production.
 * **Préversion** : pas encore pris en charge, mais le statut de disponibilité générale est prévu à l’avenir.
-* **Expérimental** : pas pris en charge et peut être abandonné à l’avenir. Aucune garantie quant à une éventuelle préversion ou un passage à l’état de disponibilité générale.
 
 ## <a name="languages-by-runtime-version"></a>Langues par version du runtime 
 
@@ -28,15 +27,11 @@ Il existe trois niveaux de prise en charge :
 
 [!INCLUDE [functions-supported-languages](../../includes/functions-supported-languages.md)]
 
-### <a name="experimental-languages"></a>Langages expérimentaux
+## <a name="custom-handlers-preview"></a>Gestionnaires personnalisés (préversion) 
 
-Les langages expérimentaux dans la version 1.x ne sont pas très propices à la mise à l’échelle et ne prennent pas en charge toutes les liaisons.
+Les gestionnaires personnalisés sont des serveurs web légers qui reçoivent des événements de l’hôte Azure Functions. Tout langage qui prend en charge les primitives HTTP peut implémenter un gestionnaire personnalisé. Cela signifie que les gestionnaires personnalisés peuvent être utilisés pour créer des fonctions dans des langages qui ne sont pas officiellement prises en charge. Pour en savoir plus, consultez [Gestionnaires personnalisés Azure Functions (préversion)](functions-custom-handlers.md).
 
-N’utilisez pas les fonctionnalités expérimentales pour tout ce qui est important, car il n’existe aucune prise en charge officielle pour celles-ci. Évitez d’ouvrir des cas de support pour les problèmes liés aux langages expérimentaux. 
-
-Les versions ultérieures du runtime ne prennent pas en charge les langages expérimentaux. La prise en charge de nouveaux langages est ajoutée uniquement lorsque le langage peut être pris en charge dans les environnements de production. 
-
-### <a name="language-extensibility"></a>Extensibilité de langage
+## <a name="language-extensibility"></a>Extensibilité de langage
 
 À compter de la version 2.x, le runtime est conçu pour offrir une [extensibilité de langage](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Language-Extensibility). Les langages JavaScript et Java dans le runtime 2.x sont générés avec cette extensibilité.
 

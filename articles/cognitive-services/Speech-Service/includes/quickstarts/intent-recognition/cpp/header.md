@@ -5,11 +5,11 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 01/27/2020
 ms.author: trbye
-ms.openlocfilehash: a20d0eabde3affb838d0ca0314ce68bb62c8d679
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 5ba68b358feaaa21424844175148a770bcf6a3a7
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81421754"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "86545053"
 ---
-Si vous préférez vous y mettre tout de suite, affichez ou téléchargez tous les <a href="https://aka.ms/speech/github-cpp">Exemples C++ du Kit de développement logiciel (SDK) Speech</a> sur GitHub. Sinon, commençons.
+Vous pouvez consulter ou télécharger tous les <a href="https://aka.ms/speech/github-cpp">Exemples C++ du kit SDK Speech</a> sur GitHub. 

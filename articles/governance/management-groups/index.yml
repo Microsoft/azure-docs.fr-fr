@@ -9,13 +9,13 @@ metadata:
   ms.collection: collection
   author: DCtheGeek
   ms.author: dacoulte
-  ms.date: 09/26/2019
-  ms.openlocfilehash: 9d91baaec7f1bd0e365f86ea07174d6f9e32725c
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.date: 09/30/2020
+  ms.openlocfilehash: 120e020a30daf377844ad9933a067def3360a399
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "71341043"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91597777"
 landingContent:
 - title: À propos de Gouvernance Azure
   linkLists:
@@ -29,11 +29,43 @@ landingContent:
     links:
     - text: Groupes d’administration Azure
       url: ./overview.md
-- title: Organiser vos ressources
+- title: Bien démarrer
   linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Créer un groupe d’administration (portail)
+      url: ./create-management-group-portal.md
+    - text: Créer un groupe d’administration (Azure CLI)
+      url: ./create-management-group-azure-cli.md
+    - text: Créer un groupe d’administration (Azure PowerShell)
+      url: ./create-management-group-powershell.md
+    - text: Créer un groupe d’administration (.NET)
+      url: ./create-management-group-dotnet.md
+    - text: Créer un groupe d’administration (JavaScript)
+      url: ./create-management-group-javascript.md
+    - text: Créer un groupe d’administration (REST)
+      url: ./create-management-group-rest-api.md
+    - text: Déployer des ressources dans un groupe d’administration (modèles ARM)
+      url: ../../azure-resource-manager/templates/deploy-to-management-group.md
   - linkListType: how-to-guide
     links:
-    - text: Créer des groupes d’administration
-      url: ./create.md
-    - text: Gérer vos ressources
+    - text: Gérer la hiérarchie de vos ressources
       url: ./manage.md
+    - text: Protéger la hiérarchie de vos ressources
+      url: ./how-to/protect-resource-hierarchy.md
+- title: Informations de référence
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/account/management-group
+    - text: Azure PowerShell
+      url: /powershell/module/az.resources/#resources
+    - text: Kit SDK Azure pour .NET
+      url: /dotnet/api/overview/azure/managementgroups
+    - text: Kit SDK Azure pour JavaScript
+      url: /javascript/api/@azure/arm-managementgroups/managementgroups
+    - text: REST
+      url: /rest/api/resources/managementgroups
+    - text: Modèles Resource Manager
+      url: /azure/templates/microsoft.management/managementgroups

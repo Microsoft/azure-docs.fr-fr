@@ -1,18 +1,18 @@
 ---
 title: Concepts – Stockage
-description: Découvrez les principales fonctionnalités de stockage dans les clouds privés de la solution VMware Azure (AVS) en préversion.
+description: Découvrez les principales capacités de stockage dans les clouds privés d’Azure VMware Solution.
 ms.topic: conceptual
-ms.date: 05/04/2020
-ms.openlocfilehash: 7e58a829a40d590b7936a58ccdc866211a4f5cb4
-ms.sourcegitcommit: d9cd51c3a7ac46f256db575c1dfe1303b6460d04
+ms.date: 11/03/2020
+ms.openlocfilehash: 394b755f5dc8fdbcaa6092419e9451ae1691aa67
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82739781"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289256"
 ---
-# <a name="azure-vmware-solution-avs-preview-storage-concepts"></a>Concepts de stockage pour la solution Azure VMware (AVS) en préversion
+#  <a name="azure-vmware-solution-storage-concepts"></a>Concepts de stockage pour Azure VMware Solution
 
-Les clouds privés AVS fournissent un stockage natif à l’échelle du cluster avec VMware vSAN. Tout le stockage local de chaque hôte dans un cluster est utilisé dans un magasin de données vSAN, et un chiffrement des données au repos est disponible et activé par défaut. Vous pouvez utiliser les ressources de Stockage Azure pour étendre les capacités de stockage de vos clouds privés.
+Les clouds privés Azure VMware Solution fournissent un stockage natif à l’échelle du cluster avec VMware vSAN. Tout le stockage local de chaque hôte dans un cluster est utilisé dans un magasin de données vSAN, et un chiffrement des données au repos est disponible et activé par défaut. Vous pouvez utiliser les ressources de Stockage Azure pour étendre les capacités de stockage de vos clouds privés.
 
 ## <a name="vsan-clusters"></a>Clusters vSAN
 
@@ -28,7 +28,7 @@ Le stockage local dans les hôtes du cluster est utilisé dans un magasin de sto
 
 ## <a name="data-at-rest-encryption"></a>Chiffrement des données au repos
 
-Par défaut, les magasins de données vSAN utilisent le chiffrement des données au repos. La solution de chiffrement est basée sur un service de gestion de clés et prend en charge les opérations de vCenter pour la gestion des clés. Les clés sont stockées chiffrées, encapsulées par une clé principale Azure Key Vault basée sur HSM. Lors de la suppression d’un hôte d’un cluster pour une raison quelconque, les données sur disques SSD sont immédiatement invalidées.
+Par défaut, les magasins de données vSAN utilisent le chiffrement des données au repos. La solution de chiffrement est basée sur un service de gestion de clés et prend en charge les opérations de vCenter pour la gestion des clés. Les clés sont stockées chiffrées, encapsulées par une clé principale Azure Key Vault. Lors de la suppression d’un hôte d’un cluster pour une raison quelconque, les données sur disques SSD sont immédiatement invalidées.
 
 ## <a name="scaling"></a>Mise à l'échelle
 
@@ -45,5 +45,5 @@ L’étape suivante consiste à découvrir les [concepts de l’identité de clo
 <!-- LINKS - external-->
 
 <!-- LINKS - internal -->
-[tutorials-scale-private-cloud]: ./tutorials-scale-private-cloud.md
+[tutorial-scale-private-cloud]: ./tutorial-scale-private-cloud.md
 [concepts-identity]: ./concepts-identity.md

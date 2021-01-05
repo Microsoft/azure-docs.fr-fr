@@ -5,15 +5,16 @@ description: Détails sur les outils inclus dans Ubuntu Data Science Virtual Mac
 author: gvashishtha
 ms.service: machine-learning
 ms.subservice: data-science-vm
+ms.custom: devx-track-python
 ms.author: gopalv
 ms.date: 09/11/2019
 ms.topic: reference
-ms.openlocfilehash: 7cfb2001067b70c64274ee1dd3475c142b788c98
-ms.sourcegitcommit: fad3aaac5af8c1b3f2ec26f75a8f06e8692c94ed
+ms.openlocfilehash: 6fb7b7c2e9022b6b629a039a48bb559b36393f79
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82161279"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013851"
 ---
 # <a name="reference-ubuntu-linux-data-science-virtual-machine"></a>Référence : Ubuntu (Linux) Data Science Virtual Machine
 
@@ -142,7 +143,7 @@ Le serveur Jupyter Notebook a été préconfiguré avec Python 2, Python 3 et 
 > [!NOTE]
 > Si vous recevez des avertissements relatifs au certificat, vous pouvez les ignorer.
 
-Vous pouvez accéder au serveur Jupyter Notebook à partir de n’importe quel hôte. Entrez **https://\<nom DNS ou adresse IP de la machine virtuelle\>:8000/** .
+Vous pouvez accéder au serveur Jupyter Notebook à partir de n’importe quel hôte. Entrez **https://\<VM DNS name or IP address\>: 8000/** .
 
 > [!NOTE]
 > Le port 8000 est ouvert par défaut dans le pare-feu lorsque la machine virtuelle est configurée. 
@@ -207,11 +208,11 @@ Le package de pilotes ODBC pour SQL Server est également fourni avec deux outil
 
 - **bcp** : cet outil copie les données en bloc entre une instance de Microsoft SQL Server et un fichier de données dans un format spécifié par l’utilisateur. Vous pouvez utiliser l’utilitaire bcp pour importer un grand nombre de nouvelles lignes dans des tables SQL Server, ou pour exporter des données hors des tables sous forme de fichiers de données. Pour importer des données dans une table, vous devez utiliser un fichier de format créé pour cette table. Sinon, vous devez comprendre la structure de la table et les types de données qui sont valides pour ses colonnes.
 
-  Pour plus d’informations, consultez [Connexion avec bcp](https://msdn.microsoft.com/library/hh568446.aspx).
+  Pour plus d’informations, consultez [Connexion avec bcp](/sql/connect/odbc/linux-mac/connecting-with-bcp).
 
 - **sqlcmd** : Vous pouvez entrer des instructions Transact-SQL à l’aide de l’outil sqlcmd. Vous pouvez également entrer des procédures système et des fichiers de script à l’invite de commandes. Cet outil utilise ODBC pour exécuter des lots Transact-SQL.
 
-  Pour plus d’informations, consultez [Connexion avec sqlcmd](https://msdn.microsoft.com/library/hh568447.aspx).
+  Pour plus d’informations, consultez [Connexion avec sqlcmd](/sql/connect/odbc/linux-mac/connecting-with-sqlcmd).
 
   > [!NOTE]
   > L’outil présente de légères différences entre les plateformes Linux et Windows. Consultez la documentation pur plus d'informations.
@@ -227,11 +228,11 @@ Les bibliothèques permettant d’accéder aux bases de données sont disponible
 
 Les outils Azure suivants sont installés sur la machine virtuelle :
 
-* **Azure CLI** : vous pouvez utiliser l’interface de ligne de commande Azure pour créer et gérer des ressources Azure par le biais de commandes dans un interpréteur. Pour ouvrir les outils Azure, entrez **azure help**. Pour plus d’informations, consultez la [page de documentation relative à l’interface CLI Azure](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2).
+* **Azure CLI** : vous pouvez utiliser l’interface de ligne de commande Azure pour créer et gérer des ressources Azure par le biais de commandes dans un interpréteur. Pour ouvrir les outils Azure, entrez **azure help**. Pour plus d’informations, consultez la [page de documentation relative à l’interface CLI Azure](/cli/azure/get-started-with-az-cli2).
 * **Explorateur Stockage Azure** : il s’agit d’un outil graphique permettant de parcourir les objets stockés dans votre compte de stockage Azure, et de charger et télécharger des données dans des objets blob Azure. Vous pouvez accéder à l’Explorateur de stockage à partir de l’icône de raccourci sur le bureau. Vous pouvez également l’ouvrir à partir d’une invite de commandes en entrant **StorageExplorer**. Vous devez être connecté à partir d’un client X2Go ou avoir configuré le transfert X11.
 * **Bibliothèques Azure** : voici quelques-unes des bibliothèques préinstallées.
   
-  * **Python** : les bibliothèques Azure Python sont *azure*, *azureml*, *pydocumentdb* et *pyodbc*. Avec les trois premières bibliothèques, vous pouvez accéder aux services de stockage Azure, à Azure Machine Learning et à Azure Cosmos DB (base de données NoSQL sur Azure). La quatrième bibliothèque, pyodbc (avec le pilote Microsoft ODBC pour SQL Server), permet l’accès à SQL Server, Azure SQL Database et Azure SQL Data Warehouse à partir de Python à l’aide d’une interface ODBC. Entrez **pip list** pour voir la liste de toutes les bibliothèques. Veillez à exécuter cette commande dans les environnements Python 2.7 et 3.5.
+  * **Python** : les bibliothèques Azure Python sont *azure*, *azureml*, *pydocumentdb* et *pyodbc*. Avec les trois premières bibliothèques, vous pouvez accéder aux services de stockage Azure, à Azure Machine Learning et à Azure Cosmos DB (base de données NoSQL sur Azure). La quatrième bibliothèque, pyodbc (avec le pilote Microsoft ODBC pour SQL Server), permet l’accès à SQL Server, Azure SQL Database et Azure Synapse Analytics à partir de Python à l’aide d’une interface ODBC. Entrez **pip list** pour voir la liste de toutes les bibliothèques. Veillez à exécuter cette commande dans les environnements Python 2.7 et 3.5.
   * **R** : les bibliothèques Azure R sont AzureML et RODBC.
   * **Java** : la liste des bibliothèques Java Azure est disponible dans le répertoire /dsvm/sdk/AzureSDKJava de la machine virtuelle. Les bibliothèques principales sont les API de gestion et de stockage Azure, Azure Cosmos DB et les pilotes JDBC pour SQL Server.  
 
@@ -247,8 +248,6 @@ Exploitez les modèles de Machine Learning que vous avez générés en les encap
 
 Vous pouvez également générer vos modèles en R ou Python sur la machine virtuelle, puis les déployer en production sur Azure Machine Learning. Nous avons des bibliothèques installées dans R (**AzureML**) et Python (**azureml**) pour activer cette fonctionnalité.
 
-Pour plus d’informations sur le déploiement de modèles en R et en Python dans Azure Machine Learning, consultez [Dix choses que vous pouvez effectuer sur une machine DSVM (Data Science Virtual Machine)](vm-do-ten-things.md).
-
 > [!NOTE]
 > Ces instructions ont été écrites pour la version Windows de la machine virtuelle DSVM. Mais les informations fournies concernant le déploiement des modèles vers Azure Machine Learning s’appliquent à la machine virtuelle Linux.
 
@@ -262,8 +261,10 @@ La machine virtuelle est fournie avec des outils et des algorithmes de Machine L
 * **Python** : Anaconda Python est fourni avec des algorithmes de machine learning et des bibliothèques comme Scikit-learn. Vous pouvez installer d’autres bibliothèques à l’aide de la commande `pip install` .
 * **LightGBM** : infrastructure de boosting de gradient rapide, distribuée et à hautes performances, basée sur des algorithmes d’arbre de décision.
 * **R** : bibliothèque étendue de fonctions de Machine Learning disponibles pour le langage R. Parmi les bibliothèques préinstallées figurent lm, glm, randomForest et rpart. Vous pouvez installer d’autres bibliothèques à l’aide de cette commande :
-  
-        install.packages(<lib name>)
+
+    ```r
+    install.packages(<lib name>)
+    ```
 
 Voici quelques informations supplémentaires sur les trois premiers outils de Machine Learning de la liste.
 
@@ -309,13 +310,13 @@ cd xgboostdemo
 xgboost mushroom.conf
 ```
 
-Un fichier .model est écrit dans le répertoire spécifié. Vous trouverez des informations sur cet exemple de démonstration sur [GitHub](https://github.com/dmlc/xgboost/tree/master/demo/binary_classification).
+Un fichier .model est écrit dans le répertoire spécifié. Vous trouverez des informations sur cet exemple de démonstration sur [GitHub](https://github.com/dmlc/xgboost/tree/master/demo/CLI/binary_classification).
 
 Pour plus d’informations sur xgboost, consultez la [documentation xgboost](https://xgboost.readthedocs.org/en/latest/) et son [dépôt GitHub](https://github.com/dmlc/xgboost).
 
 ### <a name="rattle"></a>Rattle
 
-Rattle (**R** **A**nalytical **T**ool **T**o **L**earn **E**asily, « outil analytique pour apprendre facilement ») utilise l’exploration et la modélisation des données via une interface GUI. Cet outil présente des statistiques et une synthèse visuelle des données, transforme les données qui peuvent être facilement modélisées, génère des modèles supervisés ou non à partir des données, présente les performances des modèles graphiquement et note les nouveaux jeux de données. Il génère également du code R qui réplique les opérations dans l’interface utilisateur qui peut être exécuté directement dans R ou utilisé comme point de départ pour une analyse plus approfondie.
+Rattle (**R** **A** nalytical **T** ool **T** o **L** earn **E** asily, « outil analytique pour apprendre facilement ») utilise l’exploration et la modélisation des données via une interface GUI. Cet outil présente des statistiques et une synthèse visuelle des données, transforme les données qui peuvent être facilement modélisées, génère des modèles supervisés ou non à partir des données, présente les performances des modèles graphiquement et note les nouveaux jeux de données. Il génère également du code R qui réplique les opérations dans l’interface utilisateur qui peut être exécuté directement dans R ou utilisé comme point de départ pour une analyse plus approfondie.
 
 Pour exécuter Rattle, vous devez ouvrir une session de connexion à un bureau graphique. Dans le terminal, entrez **R** pour ouvrir l’environnement R. À l’invite R, entrez les commandes suivantes :
 

@@ -15,14 +15,14 @@ ms.topic: tutorial
 ms.date: 05/14/2018
 ms.author: allensu
 ms.custom: mvc
-ms.openlocfilehash: 18054e47a987a7e79e9083b6f7a2f20b059c7f28
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 3f1dacb57931913edfb181f023bdf98717777d50
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81254612"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97562240"
 ---
-# <a name="tutorial-add-azure-cdn-to-an-azure-app-service-web-app"></a>Didacticiel : Ajouter Azure CDN à une application web Azure App Service
+# <a name="tutorial-add-azure-cdn-to-an-azure-app-service-web-app"></a>Tutoriel : Ajouter Azure CDN à une application web Azure App Service
 
 Ce didacticiel montre comment ajouter [Azure Content Delivery Network (CDN)](cdn-overview.md) à une [application web dans Azure App Service](../app-service/overview.md). Web Apps est un service pour l’hébergement d’applications web, d’API REST et de backends mobiles. 
 
@@ -38,18 +38,18 @@ Ce que vous allez apprendre :
 > * Utiliser des chaînes de requête pour contrôler les versions mises en cache.
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce tutoriel :
 
 - [Installez Git](https://git-scm.com/)
-- [Installer l’interface de ligne de commande Microsoft Azure](https://docs.microsoft.com/cli/azure/install-azure-cli)
+- [Installer l’interface de ligne de commande Microsoft Azure](/cli/azure/install-azure-cli)
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="create-the-web-app"></a>Créer l’application web
 
-Pour créer l’application web que vous allez utiliser, suivez les instructions de l’article [Créer une application web HTML statique dans Azure](../app-service/app-service-web-get-started-html.md) jusqu’à la fin de l’étape **Accéder à l’application**.
+Pour créer l’application web que vous allez utiliser, suivez les instructions de l’article [Créer une application web HTML statique dans Azure](../app-service/quickstart-html.md) jusqu’à la fin de l’étape **Accéder à l’application**.
 
 ## <a name="log-in-to-the-azure-portal"></a>Se connecter au portail Azure.
 
@@ -60,7 +60,7 @@ Si vous souhaitez optimiser votre point de terminaison CDN pour l’accélérati
 
 ## <a name="create-a-cdn-profile-and-endpoint"></a>Création d’un profil CDN et d’un point de terminaison
 
-Dans le volet de navigation gauche, sélectionnez **App Services**, puis sélectionnez l’application que vous avez créée à la rubrique [Créer une application web HTML statique dans Azure en 5 minutes](../app-service/app-service-web-get-started-html.md).
+Dans le volet de navigation gauche, sélectionnez **App Services**, puis sélectionnez l’application que vous avez créée à la rubrique [Créer une application web HTML statique dans Azure en 5 minutes](../app-service/quickstart-html.md).
 
 ![Sélection de l’application App Service dans le portail](media/cdn-add-to-web-app/portal-select-app-services.png)
 
@@ -135,7 +135,7 @@ Validez votre modification et déployez-la dans l’application web.
 
 ```bash
 git commit -am "version 2"
-git push azure master
+git push azure main
 ```
 
 Une fois le déploiement terminé, accédez à l’URL de l’application web pour constater la modification.
@@ -230,7 +230,7 @@ Ouvrez *index.html*, changez *V2* en *V3*, puis déployez la modification.
 
 ```bash
 git commit -am "version 3"
-git push azure master
+git push azure main
 ```
 
 Dans un navigateur, accédez à l’URL du point de terminaison CDN avec une nouvelle chaîne de requête, par exemple `q=2`. Azure CDN obtient le fichier *index.html* actuel et affiche *V3*. Toutefois, si vous naviguez vers le point de terminaison CDN avec la chaîne de requête `q=1`, c’est la valeur *V2* qui s’affiche.
@@ -268,6 +268,4 @@ Vous avez appris à effectuer les opérations suivantes :
 Découvrez comment optimiser les performances du réseau CDN dans les articles suivants :
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Ajouter un domaine personnalisé à un point de terminaison Azure CDN](cdn-map-content-to-custom-domain.md)
-
-
+> [Tutoriel : Ajouter un domaine personnalisé à votre point de terminaison Azure CDN](cdn-map-content-to-custom-domain.md)

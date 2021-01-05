@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à OpenAthens | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et OpenAthens.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: dd4adfc7-e238-41d5-8b25-1811f08078b6
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/24/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 43fc2272a81672ea613bdcbe17c5381e99cafbff
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: fc2d1c5dca4265bc0f0c26dd0a6c62a7e1698a38
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73053215"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96621465"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-openathens"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à OpenAthens
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer OpenAthens à Azure Active D
 * Permettre à vos utilisateurs de se connecter automatiquement à OpenAthens avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -139,15 +134,15 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Sélectionnez **Connexions** dans la liste sous l’onglet **Gestion**.
 
-    ![Configurer l’authentification unique](./media/openathens-tutorial/tutorial_openathens_application1.png)
+    ![Capture d’écran montrant la page de site d’entreprise « OpenAthens » avec l’élément « Connections » sélectionné dans l’onglet « Management ».](./media/openathens-tutorial/tutorial_openathens_application1.png)
 
 1. Sélectionnez **SAML 1.1/2.0**, puis le bouton **Configurer**.
 
-    ![Configurer l’authentification unique](./media/openathens-tutorial/tutorial_openathens_application2.png)
+    ![Capture d’écran montrant la boîte de dialogue « Select local authentication system type. » avec l’option « SAML 1.1/2.0 » et le bouton « Configure » sélectionnés.](./media/openathens-tutorial/tutorial_openathens_application2.png)
 
 1. Pour ajouter la configuration, sélectionnez le bouton **Parcourir** pour charger le fichier .xml de métadonnées que vous avez téléchargé à partir du portail Azure, puis sélectionnez **Ajouter**.
 
-    ![Configurer l’authentification unique](./media/openathens-tutorial/tutorial_openathens_application3.png)
+    ![Capture d’écran montrant la boîte de dialogue « Add SAML authentication system. » avec l’action « Browse » et le bouton « Add » sélectionnés.](./media/openathens-tutorial/tutorial_openathens_application3.png)
 
 1. Effectuez les étapes suivantes sous l’onglet **Détails**.
 
@@ -155,7 +150,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     a. Dans **Display name mapping** (Mappage de nom d’affichage), sélectionnez **Use Attribute** (Utiliser l’attribut).
 
-    b. Dans la zone de texte **Display name attribute** (Attribut de nom d’affichage), entrez la valeur `http://schema.microsoft.com/identity/claims/displayname`.
+    b. Dans la zone de texte **Display name attribute** (Attribut de nom d’affichage), entrez la valeur `http://schemas.microsoft.com/identity/claims/displayname`.
 
     c. Dans **Unique user mapping** (Mappage d’utilisateur unique), sélectionnez **Use Attribute** (Utiliser l’attribut).
 
@@ -169,7 +164,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     h. Sous l’onglet **</> Relying Party** (Partie de confiance), copiez l’**URL des métadonnées** et ouvrez-la dans le navigateur pour télécharger le **fichier XML de métadonnées du fournisseur de services**. Chargez ce fichier de métadonnées du fournisseur de services dans la section **Configuration SAML de base** dans Azure AD.
 
-    ![Configurer l’authentification unique](./media/openathens-tutorial/tutorial_openathens_application5.png)
+    ![Capture d’écran montrant l’onglet « Relying party » sélectionné et l’option « Metadata URL » mise en évidence.](./media/openathens-tutorial/tutorial_openathens_application5.png)
 
 ### <a name="create-openathens-test-user"></a>Créer un utilisateur de test OpenAthens
 
@@ -179,14 +174,14 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans OpenAthe
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette OpenAthens dans le panneau d’accès doit vous connecter automatiquement à l’application OpenAthens pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette OpenAthens dans le panneau d’accès doit vous connecter automatiquement à l’application OpenAthens pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer OpenAthens avec Azure AD](https://aad.portal.azure.com/)

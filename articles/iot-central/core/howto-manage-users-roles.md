@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: corywink
-ms.openlocfilehash: c00f9d8baa55ef0d0cf6322ee71f22e739e6acdc
-ms.sourcegitcommit: 07d62796de0d1f9c0fa14bfcc425f852fdb08fb1
+ms.openlocfilehash: f6c45b8d9804f16c4e59d259f562cc03f187e6a0
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80365498"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92122975"
 ---
 # <a name="manage-users-and-roles-in-your-iot-central-application"></a>Gérer les utilisateurs et rôles dans votre application Azure IoT Central
 
@@ -25,7 +25,7 @@ Pour accéder à la section **Administration** et l’utiliser, vous devez avoir
 
 Chaque utilisateur doit avoir un compte d’utilisateur avant de pouvoir se connecter et accéder à une application Azure IoT Central. Les comptes Microsoft et les comptes Azure Active Directory sont pris en charge dans Azure IoT Central. Actuellement, les groupes Azure Active Directory ne sont pas pris en charge dans Azure IoT Central.
 
-Pour plus d’informations, consultez les sections [Aide sur le compte Microsoft](https://support.microsoft.com/products/microsoft-account?category=manage-account) et [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](https://docs.microsoft.com/azure/active-directory/add-users-azure-active-directory).
+Pour plus d’informations, consultez les sections [Aide sur le compte Microsoft](https://support.microsoft.com/products/microsoft-account?category=manage-account) et [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](../../active-directory/fundamentals/add-users-azure-active-directory.md).
 
 1. Pour ajouter un utilisateur à une application IoT Central, accédez à la page **Utilisateurs** dans la section **Administration**.
     

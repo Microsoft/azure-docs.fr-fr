@@ -2,13 +2,13 @@
 title: Authentification externe à partir d’une tâche ACR
 description: Configurez une tâche Azure Container Registry (tâche ACR) pour lire les informations d’identification Docker Hub stockées dans un coffre de clés Azure à l’aide d’une identité managée pour les ressources Azure.
 ms.topic: article
-ms.date: 01/14/2020
-ms.openlocfilehash: 47d3d643ee1287ef4f444095a2c6cfe6dcab294b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/06/2020
+ms.openlocfilehash: 0bc43f958a14016146160a06372af0b36a9fff75
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76842518"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86058127"
 ---
 # <a name="external-authentication-in-an-acr-task-using-an-azure-managed-identity"></a>Authentification externe dans une tâche ACR à l’aide d’une identité managée par Azure 
 
@@ -117,6 +117,20 @@ az acr task create \
 
 [!INCLUDE [container-registry-tasks-user-id-properties](../../includes/container-registry-tasks-user-id-properties.md)]
 
+
+### <a name="grant-identity-access-to-key-vault"></a>Autoriser l’identité à accéder à un coffre de clés
+
+Exécutez la commande [az keyvault set-policy][az-keyvault-set-policy] suivante pour définir une stratégie d’accès sur le coffre de clés. L’exemple suivant permet à l’identité de lire des secrets du coffre de clés. 
+
+```azurecli
+az keyvault set-policy --name mykeyvault \
+  --resource-group myResourceGroup \
+  --object-id $principalID \
+  --secret-permissions get
+```
+
+Poursuivez avec l’[exécution manuelle de la tâche](#manually-run-the-task).
+
 ## <a name="option-2-create-task-with-system-assigned-identity"></a>Option n°2 : Créer une tâche avec une identité affectée par le système
 
 Les étapes de cette section créent une tâche et activent une identité affectée par le système. Si vous souhaitez activer une identité affectée par l’utilisateur à la place, consultez l’[Option 1 : Créer une tâche avec une identité affectée par l’utilisateur](#option-1-create-task-with-user-assigned-identity). 
@@ -136,7 +150,7 @@ az acr task create \
 
 [!INCLUDE [container-registry-tasks-system-id-properties](../../includes/container-registry-tasks-system-id-properties.md)]
 
-## <a name="grant-identity-access-to-key-vault"></a>Autoriser l’identité à accéder à un coffre de clés
+### <a name="grant-identity-access-to-key-vault"></a>Autoriser l’identité à accéder à un coffre de clés
 
 Exécutez la commande [az keyvault set-policy][az-keyvault-set-policy] suivante pour définir une stratégie d’accès sur le coffre de clés. L’exemple suivant permet à l’identité de lire des secrets du coffre de clés. 
 

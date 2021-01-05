@@ -1,19 +1,19 @@
 ---
 title: Modélisation de relations dans la conception de stockage de table Azure | Microsoft Docs
-description: Découvrez le processus de modélisation quand vous concevez votre solution de stockage de table.
+description: Découvrez le processus de modélisation quand vous concevez votre solution de stockage Table Azure. En savoir plus sur les relations de type un à plusieurs, un à un et héritage.
 services: storage
-author: MarkMcGeeAtAquent
 ms.service: storage
+author: tamram
+ms.author: tamram
 ms.topic: article
 ms.date: 04/23/2018
-ms.author: sngun
 ms.subservice: tables
-ms.openlocfilehash: 25082c107fbc0feeb533aa2b4fc56cff960e778d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3023b478ef7a4aaf6d9239e997bdf63282b56210
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75457566"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88271190"
 ---
 # <a name="modeling-relationships"></a>Modélisation des relations
 Cet article décrit le processus de modélisation pour vous aider à concevoir vos solutions de Stockage Table Azure.
@@ -51,7 +51,7 @@ Le tableau suivant récapitule les avantages et les inconvénients de chacune de
 <td>
 <ul>
 <li>Vous pouvez mettre à jour une entité de service en une seule opération.</li>
-<li>Vous pouvez utiliser une EGT pour maintenir la cohérence si vous avez besoin de modifier une entité de service à chaque mise à jour/insertion/suppression d'une entité d'employé. Par exemple, si vous conservez un nombre d’employés de service pour chaque service.</li>
+<li>Vous pouvez utiliser une transaction de groupe d’entités (Entity Group Transaction*, EGT) pour maintenir la cohérence si vous avez besoin de modifier une entité de service à chaque mise à jour/insertion/suppression d’une entité d’employé. Par exemple, si vous conservez un nombre d’employés de service pour chaque service.</li>
 </ul>
 </td>
 <td>
@@ -92,6 +92,9 @@ Le tableau suivant récapitule les avantages et les inconvénients de chacune de
 </td>
 </tr>
 </table>
+
+*Pour plus d’informations, consultez [Transactions de groupe d’entités](table-storage-design.md#entity-group-transactions)  
+
 
 Votre choix entre ces options, ainsi que la détermination des avantages et des inconvénients les plus significatifs, tout cela dépend de votre scénario d'application. Par exemple, quelle sera la fréquence de modification des entités de service ; toutes les requêtes de vos employés ont-elles besoin d'informations de services supplémentaires ; êtes-vous proche des limites d'évolutivité de vos partitions ou de votre compte de stockage ?  
 

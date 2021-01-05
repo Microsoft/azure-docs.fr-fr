@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 02/24/2020
+ms.date: 12/11/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 86ec7a5745a58546faf6f0ff15d6dc5f452baa88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 78ce6466521c7903187798d902056948c659653c
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184041"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509850"
 ---
 # <a name="define-an-oauth2-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique OAuth2 dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -28,7 +28,7 @@ Azure Active Directory B2C (Azure AD B2C) prend en charge le fournisseur d’ide
 
 L’attribut **Name** de l’élément **Protocol** doit être défini sur `OAuth2`. Par exemple, le protocole pour profil technique **Facebook-OAUTH** est `OAuth2` :
 
-```XML
+```xml
 <TechnicalProfile Id="Facebook-OAUTH">
   <DisplayName>Facebook</DisplayName>
   <Protocol Name="OAuth2" />
@@ -39,7 +39,7 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `OAut
 
 Les éléments **InputClaims** et **InputClaimsTransformations** ne sont pas obligatoires. Vous pouvez cependant envoyer des paramètres supplémentaires à votre fournisseur d’identité. L’exemple suivant ajoute le paramètre de chaîne de requête **domain_hint** avec la valeur `contoso.com` à la demande d’autorisation.
 
-```XML
+```xml
 <InputClaims>
   <InputClaim ClaimTypeReferenceId="domain_hint" DefaultValue="contoso.com" />
 </InputClaims>
@@ -84,6 +84,7 @@ Le profil technique retourne également des revendications qui ne sont pas retou
 | authorization_endpoint | Oui | URL du point de terminaison d’autorisation conformément à la norme RFC 6749. |
 | AccessTokenEndpoint | Oui | URL du point de terminaison de jeton conformément à la norme RFC 6749. |
 | ClaimsEndpoint | Oui | URL du point de terminaison d’informations utilisateur conformément à la norme RFC 6749. |
+| end_session_endpoint | Oui | URL du point de terminaison de la session de fin, conformément à la norme RFC 6749. |
 | AccessTokenResponseFormat | Non | Format de l’appel de point de terminaison du jeton d’accès. Par exemple, Facebook nécessite une méthode HTTP GET, mais la réponse de jeton d’accès est au format JSON. |
 | AdditionalRequestQueryParameters | Non | Paramètres de requête de demande supplémentaire. Par exemple, vous pouvez envoyer des paramètres supplémentaires à votre fournisseur d’identité. Vous pouvez inclure plusieurs paramètres en utilisant un séparateur virgule. |
 | ClaimsEndpointAccessTokenName | Non | Nom du paramètre de chaîne de requête du jeton accès. Les points de terminaison de revendications de certains fournisseurs d’identité prennent en charge les requêtes HTTP GET. Dans ce cas, le jeton du porteur est envoyé à l’aide d’un paramètre de chaîne de requête au lieu de l’en-tête d’autorisation. |
@@ -96,8 +97,10 @@ Le profil technique retourne également des revendications qui ne sont pas retou
 | ResponseErrorCodeParamName | Non | Nom du paramètre contenant le message d’erreur retourné sur HTTP 200 (OK). |
 | ExtraParamsInAccessTokenEndpointResponse | Non | Contient les paramètres supplémentaires qui peuvent être retournés dans la réponse d’**AccessTokenEndpoint** par certains fournisseurs d’identité. Par exemple, la réponse d’**AccessTokenEndpoint** contient un paramètre supplémentaire tel que `openid`, qui est obligatoire, en plus du jeton d’accès dans une chaîne de requête de demande **ClaimsEndpoint**. S’il y a plusieurs noms de paramètre, ils doivent être échappés et séparés par le délimiteur virgule « , ». |
 | ExtraParamsInClaimsEndpointRequest | Non | Contient les paramètres supplémentaires qui peuvent être retournés dans la demande **ClaimsEndpoint** par certains fournisseurs d’identité. S’il y a plusieurs noms de paramètre, ils doivent être échappés et séparés par le délimiteur virgule « , ». |
-| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
-| ResolveJsonPathsInJsonTokens  | Non | Indique si le profil technique résout les chemins d’accès JSON. Valeurs possibles : `true` ou `false` (par défaut). Utilisez ces métadonnées pour lire des données issues d’un élément JSON imbriqué. Dans un élément [OutputClaim](technicalprofiles.md#outputclaims), définissez `PartnerClaimType` sur l’élément de chemin d’accès JSON que vous souhaitez générer. Par exemple : `firstName.localized` ou `data.0.to.0.email`.|
+| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+| ResolveJsonPathsInJsonTokens  | Non | Indique si le profil technique résout les chemins d’accès JSON. Valeurs possibles : `true` ou `false` (par défaut). Utilisez ces métadonnées pour lire des données issues d’un élément JSON imbriqué. Dans un élément [OutputClaim](technicalprofiles.md#output-claims), définissez `PartnerClaimType` sur l’élément de chemin d’accès JSON que vous souhaitez générer. Par exemple : `firstName.localized` ou `data.0.to.0.email`.|
+|token_endpoint_auth_method| Non| Indique comment Azure AD B2C envoie l’en-tête d’authentification au point de terminaison du jeton. Valeurs possibles : `client_secret_post` (par défaut) et `client_secret_basic` (préversion publique). Pour plus d’informations, consultez [Section d’authentification du client OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication). |
+|SingleLogoutEnabled| Non| Indique si, lors de la connexion, le profil technique tente de se déconnecter des fournisseurs d’identité fédérés. Pour plus d’informations, consultez [Déconnexion d’une session Azure AD B2C](session-behavior.md#sign-out).  Valeurs possibles : `true` (par défaut) ou `false`.|
 
 ## <a name="cryptographic-keys"></a>Clés de chiffrement
 
@@ -109,23 +112,8 @@ L’élément **CryptographicKeys** contient l’attribut suivant :
 
 ## <a name="redirect-uri"></a>URI de redirection
 
-Lorsque vous configurez l’URL de redirection de votre fournisseur d’identité, entrez `https://login.microsoftonline.com/te/tenant/policyId/oauth2/authresp`. Veillez à remplacer **{tenant}** par le nom de votre locataire (par exemple, contosob2c.onmicrosoft.com), et **{policyId}** par l’identificateur de votre stratégie (par exemple, b2c_1_policy). L’URI de redirection doit être en minuscules.
-
-Si vous utilisez le domaine **b2clogin.com** à la place de **login.microsoftonline.com**, veillez à utiliser b2clogin.com au lieu de login.microsoftonline.com.
+Lorsque vous configurez l’URI de redirection de votre fournisseur d’identité, entrez `https://{tenant-name}.b2clogin.com/{tenant-name}.onmicrosoft.com/oauth2/authresp`. Veillez à remplacer `{tenant-name}` par le nom de votre locataire (par exemple, contosob2c). L’URI de redirection doit être en minuscules.
 
 Exemples :
 
-- [Ajouter Google+ en tant que fournisseur d’identités OAuth2 en utilisant des stratégies personnalisées](identity-provider-google-custom.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [Ajouter Google+ en tant que fournisseur d’identités OAuth2 en utilisant des stratégies personnalisées](identity-provider-google.md)

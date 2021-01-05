@@ -3,21 +3,21 @@ title: Erreurs et avertissements liés à la conversion de dessin d’Azure Maps
 description: Découvrez les erreurs et avertissements liés à la conversion que vous pouvez rencontrer quand vous utilisez le service de conversion d’Azure Maps. Lisez les recommandations relatives à la résolution des erreurs et avertissements, avec quelques exemples.
 author: anastasia-ms
 ms.author: v-stharr
-ms.date: 05/18/2020
+ms.date: 12/07/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philMea
-ms.openlocfilehash: d79c42f3bdf84efcdf2187741ac270087be05272
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: cecc19f0984ce1801d50e5cbda73e98a01e2825b
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83682013"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96906214"
 ---
 # <a name="drawing-conversion-errors-and-warnings"></a>Erreurs et avertissements liés à la conversion de dessin
 
-Le [service de conversion d’Azure Maps](https://docs.microsoft.com/rest/api/maps/conversion) vous permet de convertir les packages de dessin chargés en données cartographiques. Les packages de dessin doivent respecter les [exigences du package de dessin](drawing-requirements.md). Si une ou plusieurs exigences ne sont pas satisfaites, le service de conversion renverra des erreurs ou avertissements. Cet article répertorie les codes d’erreur et d’avertissement liés à la conversion, ainsi que des recommandations sur la façon de les résoudre. Il fournit également des exemples de dessins qui peuvent provoquer le renvoi de ces codes par le service de conversion.
+Le [service de conversion d’Azure Maps](/rest/api/maps/conversion) vous permet de convertir les packages de dessin chargés en données cartographiques. Les packages de dessin doivent respecter les [exigences du package de dessin](drawing-requirements.md). Si une ou plusieurs exigences ne sont pas satisfaites, le service de conversion renverra des erreurs ou avertissements. Cet article répertorie les codes d’erreur et d’avertissement liés à la conversion, ainsi que des recommandations sur la façon de les résoudre. Il fournit également des exemples de dessins qui peuvent provoquer le renvoi de ces codes par le service de conversion.
 
 Le service de conversion fonctionnera s’il y a des avertissements de conversion. Toutefois, il est recommandé d’examiner et de résoudre tous les avertissements. Un avertissement signifie qu’une partie de la conversion a été ignorée ou corrigée automatiquement. L’échec de la résolution des avertissements pourrait entraîner des erreurs dans les derniers processus.
 
@@ -35,9 +35,9 @@ Le service de conversion ne peut pas créer une caractéristique de carte à par
 
 * Les deux images ci-dessous présentent des exemples de polygones avec auto-intersection.
 
-     ![Exemple de polygone avec auto-intersection](./media/drawing-conversion-error-codes/geometry-warning-1.png)
+     ![Exemple de polygone avec auto-intersection, exemple un.](./media/drawing-conversion-error-codes/geometry-warning-1.png)
 
-     ![Exemple de polygone avec auto-intersection](./media/drawing-conversion-error-codes/geometry-warning-2.png)
+     ![Exemple de polygone avec auto-intersection, exemple deux.](./media/drawing-conversion-error-codes/geometry-warning-2.png)
 
 * Vous trouverez ci-dessous une image illustrant une polyligne non fermée. Supposons que le calque ne prend en charge qu’une géométrie fermée.
 
@@ -330,7 +330,7 @@ Vous avez tenté de charger un package de dessin avec un paramètre `udid` incor
 Pour corriger une erreur **invalidUserData**, vérifiez les points suivants :
 
 * Vous avez fourni un `udid` correct pour le package chargé.
-* Le Créateur Azure Maps a été activé pour le compte Azure Maps que vous avez utilisé pour charger le package de dessin.
+* Azure Maps Creator (préversion) a été activé pour le compte Azure Maps que vous avez utilisé dans le but de charger le package de dessin.
 * La demande d’API adressée au service de conversion contient la clé d’abonnement au compte Azure Maps que vous avez utilisé pour charger le package de dessin.
 
 ### <a name="dwgerror"></a>**Erreur dwgError**
@@ -506,4 +506,4 @@ Pour corriger une erreur **verticalPenetrationError**, lisez l’article [Exigen
 > [Comment utiliser le visualiseur d’erreurs de dessin Azure Maps](drawing-error-visualizer.md)
 
 > [!div class="nextstepaction"]
-> [Créateur pour cartes d’intérieur](creator-indoor-maps.md)
+> [Creator (préversion) pour cartes d’intérieur](creator-indoor-maps.md)

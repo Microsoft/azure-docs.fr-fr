@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: b0b811a2b7ed432b7fc5015886b28337ca33424e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ffe1a4b9b32223cc57c6a6399fdc074a9d51d714
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76710314"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93322399"
 ---
 # <a name="how-to-identify-scenarios-and-plan-for-advanced-analytics-data-processing"></a>Comment identifier les scénarios et planifier le traitement des données d’analyse avancée
 
@@ -66,7 +66,7 @@ Où vos données doivent-elles se trouver pour le traitement ou la modélisation
 Pour les procédures et les ressources d’ingestion ou de chargement des données dans différents environnements de stockage et de traitement, consultez :
 
 * [Charger des données dans des environnements de stockage à des fins d’analyse](ingest-data.md)
-* [Importer vos données d’entraînement dans Azure Machine Learning Studio (classique) à partir de différentes sources de données](../studio/import-data.md)
+* [Importer vos données d’entraînement dans Azure Machine Learning Studio (classique) à partir de différentes sources de données](../classic/import-data.md)
 
 ### <a name="does-the-data-need-to-be-moved-on-a-regular-schedule-or-modified-during-migration"></a>Les données doivent-elles être déplacées à intervalles réguliers ou modifiées pendant la migration ?
 
@@ -75,7 +75,7 @@ Envisagez d’utiliser Azure Data Factory (ADF) lorsque les données doivent êt
 * scénario hybride impliquant à la fois des ressources locales et de cloud
 * scénario où les données sont traitées, modifiées ou changées par la logique métier au cours de la migration
 
-Pour plus d’informations, référez-vous à [Déplacement de données à partir d’un serveur SQL local vers SQL Azure avec Azure Data Factory](move-sql-azure-adf.md).
+Pour plus d’informations, référez-vous à [Déplacement de données à partir d’une base de données SQL Server vers SQL Azure avec Azure Data Factory](move-sql-azure-adf.md).
 
 ### <a name="how-much-of-the-data-is-to-be-moved-to-azure"></a>Quelle est la quantité de données à déplacer vers Azure ?
 
@@ -108,7 +108,7 @@ Ces questions sont essentielles pour la planification de vos environnements de s
 
 Prenons, par exemple, l’environnement Azure Machine Learning Studio (classique) :
 
-* Pour obtenir la liste des formats et des types de données pris en charge par Azure Machine Learning Studio, référez-vous à la section [Formats et types de données pris en charge](../studio/import-data.md#supported-data-formats-and-data-types) .
+* Pour obtenir la liste des formats et des types de données pris en charge par Azure Machine Learning Studio, référez-vous à la section [Formats et types de données pris en charge](../classic/import-data.md#supported-data-formats-and-data-types) .
 * Pour plus d’informations sur les limitations des autres services Azure utilisés dans le processus d’analyse, référez-vous à [Abonnement Azure et limites, quotas et contraintes du service](../../azure-resource-manager/management/azure-subscription-service-limits.md).
 
 ## <a name="data-quality-questions-exploration-and-pre-processing"></a>Questions sur la qualité des données : exploration et prétraitement
@@ -145,12 +145,12 @@ Il existe de nombreuses options pour les langages, les environnements de dévelo
 
 ### <a name="what-tools-should-you-use-for-data-analysis"></a>Quels outils devez-vous utiliser pour l’analyse des données ?
 
-* [Microsoft Azure Powershell](/powershell/azure/overview) : un langage de script utilisé pour administrer vos ressources Azure dans un langage de script
-* [Azure Machine Learning Studio](../studio/what-is-ml-studio.md)
+* [Microsoft Azure PowerShell](/powershell/azure/) : un langage de script utilisé pour administrer vos ressources Azure dans un langage de script
+* [Azure Machine Learning Studio](../overview-what-is-machine-learning-studio.md#ml-studio-classic-vs-azure-machine-learning-studio)
 * [Revolution Analytics](https://www.microsoft.com/sql-server/machinelearningserver)
 * [RStudio](https://www.rstudio.com)
-* [Python Tools for Visual Studio](https://aka.ms/ptvsdocs)
-* [Anaconda](https://www.continuum.io/why-anaconda)
+* [Python Tools for Visual Studio](/visualstudio/python/)
+* [Anaconda](https://www.anaconda.com/)
 * [Blocs-notes Jupyter](https://jupyter.org/)
 * [Microsoft Power BI](https://powerbi.microsoft.com)
 

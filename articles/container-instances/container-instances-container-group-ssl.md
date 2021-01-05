@@ -2,13 +2,13 @@
 title: Activer TLS avec un conteneur side-car
 description: Créer un point de terminaison SSL ou TLS pour un groupe de conteneurs exécuté sur Azure Container Instances en exécutant Nginx dans un conteneur side-car
 ms.topic: article
-ms.date: 02/14/2020
-ms.openlocfilehash: b9ea9367219db694b89d6bf4a1e52efb373c71c4
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.date: 07/02/2020
+ms.openlocfilehash: 6587a84e7cbe655c509f74e9e39e93010e7058be
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80984604"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558077"
 ---
 # <a name="enable-a-tls-endpoint-in-a-sidecar-container"></a>Activer un point de terminaison TLS dans un conteneur side-car
 
@@ -22,9 +22,9 @@ Dans cet exemple, le groupe de conteneurs expose uniquement le port 443 pour Ng
 
 Consultez la section [Étapes suivantes](#next-steps) pour découvrir d’autres approches d’activation du protocole TLS dans un groupe de conteneurs.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Pour suivre cet article, vous pouvez utiliser Azure Cloud Shell ou une installation locale d’Azure CLI. Si vous souhaitez l’utiliser en local, nous vous recommandons la version 2.0.55 ou une version ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.55 ou une version ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-self-signed-certificate"></a>Créer un certificat auto-signé
 
@@ -147,7 +147,7 @@ code deploy-aci.yaml
 Entrez le contenu des fichiers encodés au format Base64 à l’endroit indiqué sous `secret`. Par exemple, `cat` chacun des fichiers encodés au format Base64 pour voir son contenu. Au cours du déploiement, ces fichiers sont ajoutés à un [volume secret](container-instances-volume-secret.md) dans le groupe de conteneurs. Dans cet exemple, le volume secret est monté sur le conteneur Nginx.
 
 ```YAML
-api-version: 2018-10-01
+api-version: 2019-12-01
 location: westus
 name: app-with-ssl
 properties:

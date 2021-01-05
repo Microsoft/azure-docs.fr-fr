@@ -1,18 +1,18 @@
 ---
-title: Automatiser des tâches avec Visual Studio Code
-description: Créer ou modifier des définitions JSON sous-jacentes d’applications logiques avec Visual Studio Code (VS Code)
+title: Automatiser des tâches et des workflows avec Visual Studio Code
+description: Créer ou modifier des définitions de workflow d’applications logiques avec Visual Studio Code (VS Code)
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, deli, logicappspm
+ms.reviewer: jonfan, deli, logicappspm
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 10/25/2019
-ms.openlocfilehash: 3dccb596be2d97dd0f38d680537913a76ce09e93
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 10/28/2020
+ms.openlocfilehash: c4d4c659fd1c33c9ffc1b833b92d0727b5c17bf7
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82147059"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96922885"
 ---
 # <a name="quickstart-create-and-manage-logic-app-workflow-definitions-by-using-visual-studio-code"></a>Démarrage rapide : Créer et gérer des définitions de workflow d’applications logiques avec Visual Studio Code
 
@@ -20,7 +20,7 @@ Avec [Azure Logic Apps](../logic-apps/logic-apps-overview.md) et Visual Studio C
 
 Même si vous pouvez effectuer ces tâches dans le [portail Azure](https://portal.azure.com) et dans Visual Studio, vous démarrez plus rapidement dans Visual Studio Code lorsque vous êtes familier avec les définitions d’application logique et choisissez de travailler directement avec du code. Par exemple, vous pouvez désactiver, activer, supprimer et actualiser des applications logiques déjà créées. En outre, vous pouvez travailler sur des applications logiques et des comptes d’intégration à partir de n’importe quelle plateforme de développement où Visual Studio Code s’exécute, comme Linux, Windows et Mac.
 
-Pour les besoins de cet article, vous pouvez créer la même application logique à partir de ce [guide de démarrage rapide](../logic-apps/quickstart-create-first-logic-app-workflow.md), qui est axé sur les concepts de base. Dans Visual Studio Code, l’application logique ressemble à cet exemple :
+Pour les besoins de cet article, vous pouvez créer la même application logique à partir de ce [guide de démarrage rapide](../logic-apps/quickstart-create-first-logic-app-workflow.md), qui est axé sur les concepts de base. Vous pouvez aussi [apprendre à créer l’exemple d’application dans Visual Studio](quickstart-create-logic-apps-with-visual-studio.md) et [apprendre à créer et gérer des applications à l’aide de l’interface de ligne de commande Azure (Azure CLI)](quickstart-logic-apps-azure-cli.md). Dans Visual Studio Code, l’application logique ressemble à cet exemple :
 
 ![Exemple de définition de workflow d’application logique](./media/quickstart-create-logic-apps-visual-studio-code/visual-studio-code-overview.png)
 
@@ -50,9 +50,9 @@ Avant de commencer, vérifiez que vous disposez des éléments ci-après :
 
     Pour plus d’informations, consultez la [Place de marché des extensions](https://code.visualstudio.com/docs/editor/extension-gallery). Pour contribuer à la version open source de cette extension, accédez à l’[extension Azure Logic Apps pour Visual Studio Code sur GitHub](https://github.com/Microsoft/vscode-azurelogicapps).
 
-<a name="sign-in-azure"></a>
+<a name="access-azure"></a>
 
-## <a name="sign-in-to-azure"></a>Connexion à Azure
+## <a name="access-azure-from-visual-studio"></a>Accéder à Azure à partir de Visual Studio
 
 1. Ouvrez Visual Studio Code. Dans la barre d’outils de Visual Studio Code, sélectionnez l’icône Azure.
 
@@ -99,7 +99,7 @@ Avant de commencer, vérifiez que vous disposez des éléments ci-après :
 
 ## <a name="create-new-logic-app"></a>Créer une application logique
 
-1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#sign-in-azure).
+1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#access-azure).
 
 1. Dans Visual Studio Code, sous **Logic Apps**, ouvrez le menu contextuel de votre abonnement, puis sélectionnez **Créer une application logique**.
 
@@ -130,10 +130,10 @@ Avant de commencer, vérifiez que vous disposez des éléments ci-après :
    Par exemple, voici un exemple de définition du workflow d’une application logique, qui commence par un déclencheur RSS et une action Outlook Office 365. En règle générale, les éléments JSON sont affichés par ordre alphabétique dans chaque section. Toutefois, cet exemple montre ces éléments à peu près dans l’ordre dans lequel les étapes de l’application logique apparaissent dans le concepteur.
 
    > [!IMPORTANT]
-   > Si vous voulez réutiliser cet exemple de définition d’application logique, vous avez besoin d’un compte professionnel Office 365, par exemple @fabrikam.com. Veillez à remplacer l’adresse e-mail fictive par votre propre adresse e-mail. Pour utiliser un autre connecteur de messagerie, comme Outlook.com ou Gmail, remplacez l’action `Send_an_email_action` par une action similaire disponible dans [un connecteur de messagerie pris en charge par Azure Logic Apps](../connectors/apis-list.md).
+   > Si vous souhaitez réutiliser cet exemple de définition d’application logique, vous avez besoin d’un compte professionnel, par exemple @fabrikam.com. Veillez à remplacer l’adresse e-mail fictive par votre propre adresse e-mail. Pour utiliser un autre connecteur de messagerie, comme Outlook.com ou Gmail, remplacez l’action `Send_an_email_action` par une action similaire disponible dans [un connecteur de messagerie pris en charge par Azure Logic Apps](../connectors/apis-list.md).
    >
    > Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans les applications logiques. 
-   > Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur uniquement avec certains services approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification avec votre connecteur Gmail](https://docs.microsoft.com/connectors/gmail/#authentication-and-bring-your-own-application). 
+   > Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur uniquement avec certains services approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification avec votre connecteur Gmail](/connectors/gmail/#authentication-and-bring-your-own-application). 
    > Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
 
    ```json
@@ -226,7 +226,7 @@ Pour passer en revue votre application logique dans le portail Azure, effectuez 
 
 Dans Visual Studio Code, si vous modifiez une application logique publiée et que vous enregistrez vos modifications, vous *remplacez* votre application déjà déployée. Pour éviter de rendre non opérationnelle votre application logique en production et réduire les perturbations, désactivez d’abord votre application logique. Vous pouvez ensuite réactiver votre application logique une fois que vous avez vérifié que votre application logique fonctionne toujours.
 
-1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#sign-in-azure).
+1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#access-azure).
 
 1. Dans la fenêtre Azure, sous **Logic Apps**, développez votre abonnement Azure pour voir toutes les applications logiques de cet abonnement.
 
@@ -247,7 +247,7 @@ Dans Visual Studio Code, vous pouvez ouvrir et modifier la définition du workfl
 > [!IMPORTANT] 
 > Avant de modifier une application logique qui est activement exécutée en production, évitez le risque de rendre cette application logique non opérationnelle et limitez les interruptions possibles en [désactivant d’abord votre application logique](#disable-enable-logic-app).
 
-1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#sign-in-azure).
+1. Si vous n’êtes pas encore connecté à votre compte et à votre abonnement Azure depuis Visual Studio Code, suivez les [étapes précédentes pour vous y connecter maintenant](#access-azure).
 
 1. Dans la fenêtre Azure, sous **Logic Apps**, développez votre abonnement Azure et sélectionnez l’application logique que vous souhaitez.
 
@@ -307,4 +307,4 @@ Dans Visual Studio Code, vous pouvez ouvrir et passer en revue les versions ant�
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Créer des applications logiques avec Visual Studio](../logic-apps/quickstart-create-logic-apps-with-visual-studio.md)
+> [Créer des applications logiques avec et sans état dans Visual Studio Code (préversion)](../logic-apps/create-stateful-stateless-workflows-visual-studio-code.md)

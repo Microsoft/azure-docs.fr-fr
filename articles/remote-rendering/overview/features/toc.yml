@@ -2,11 +2,17 @@
   href: cut-planes.md
 - name: Déboguer le rendu
   href: debug-rendering.md
+- name: Effet Fresnel
+  href: fresnel-effect.md
 - name: Remplacement d’état hiérarchique
   href: override-hierarchical-state.md
+- name: Appareil photo
+  href: camera.md
+- name: Espace scénique
+  href: stage-space.md
 - name: Reprojection en phase tardive
   href: late-stage-reprojection.md
-- name: Lumières
+- name: Éclairage de la scène
   href: lights.md
 - name: Matériaux PBR
   href: pbr-materials.md
@@ -14,6 +20,8 @@
   href: color-materials.md
 - name: Rendu en mode contour
   href: outlines.md
+- name: Rendu de shells
+  href: shell-effect.md
 - name: Rendu unilatéral
   href: single-sided-rendering.md
 - name: Requêtes spatiales

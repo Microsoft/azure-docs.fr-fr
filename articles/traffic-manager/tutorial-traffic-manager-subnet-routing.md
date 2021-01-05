@@ -3,20 +3,20 @@ title: Tutoriel - Configurer le routage du trafic de sous-réseau avec Azure Tr
 description: Ce tutoriel explique comment configurer Traffic Manager pour router le trafic des sous-réseaux des utilisateurs vers des points de terminaison spécifiques.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/24/2018
-ms.author: rohink
-ms.openlocfilehash: 49e0bce6eea8fac32f49bb905c225e898e709af0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: duau
+ms.openlocfilehash: 348f1d779f8ea67860726b8f8b7739921e7ad54a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77136282"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003801"
 ---
 # <a name="tutorial-direct-traffic-to-specific-endpoints-based-on-user-subnet-using-traffic-manager"></a>Tutoriel : Diriger le trafic vers des points de terminaison spécifiques en fonction du sous-réseau de l’utilisateur via Traffic Manager
 
@@ -214,12 +214,13 @@ Dans cette section, vous pouvez voir Traffic Manager en action.
 
 7. Connectez-vous à la machine virtuelle *myVMWestEurope* située dans la région **Europe Ouest** en suivant les étapes 1 à 5, puis accédez au nom de domaine du profil Traffic Manager à partir de cette machine virtuelle. Dans la mesure où l’adresse IP de la machine virtuelle *myVMWestEurope* est associée au point de terminaison *myProductionWebsiteEndpoint*, le navigateur web lance le serveur de site web de test - *myIISVMWestEurope*.
 
-## <a name="delete-the-traffic-manager-profile"></a>Supprimer le profil Traffic Manager
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Lorsque vous n’en avez plus besoin, supprimez les groupes de ressources (**ResourceGroupTM1** et **ResourceGroupTM2**). Pour ce faire, sélectionnez le groupe de ressources (**ResourceGroupTM1** ou **ResourceGroupTM2**), puis **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [méthode de routage du trafic par pondération](traffic-manager-configure-weighted-routing-method.md).
-- En savoir plus sur la [méthode de routage prioritaire](traffic-manager-configure-priority-routing-method.md).
-- En savoir plus sur la [méthode de routage géographique](traffic-manager-configure-geographic-routing-method.md).
+Pour plus d’informations sur la méthode de routage de sous-réseau, consultez :
+
+> [!div class="nextstepaction"]
+> [Méthode de routage de sous-réseau](traffic-manager-routing-methods.md#subnet)

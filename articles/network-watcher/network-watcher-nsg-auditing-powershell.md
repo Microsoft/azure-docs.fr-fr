@@ -7,23 +7,23 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 59c1b6e6c281a736a79d110bd7d943344bcd5130
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 177215775c9e83286aa98872eed0ab211a8f36ff
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840976"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94948746"
 ---
 # <a name="automate-nsg-auditing-with-azure-network-watcher-security-group-view"></a>Automatiser l’audit NSG avec la vue de groupe de sécurité réseau Network Watcher
 
 Les clients sont souvent confrontés au défi de la vérification des mesures de sécurité de leur infrastructure. Ce défi n’est pas différent pour leurs machines virtuelles dans Azure. Il est important de disposer d’un profil de sécurité similaire en fonction des règles de groupe de sécurité réseau (NSG) appliquées. Grâce à la vue Groupe de sécurité, vous pouvez désormais obtenir la liste des règles appliquées à une machine virtuelle au sein d’un NSG. Vous pouvez définir un profil de sécurité NSG final, ouvrir la vue Groupe de sécurité selon une fréquence hebdomadaire, puis comparer la sortie au profil final et créer un rapport. Vous pouvez ainsi identifier facilement toutes les machines virtuelles qui ne sont pas conformes au profil de sécurité établi.
 
-Si vous n’êtes pas familiarisé avec les groupes de sécurité réseau, consultez la [vue d’ensemble de la sécurité réseau](../virtual-network/security-overview.md).
+Si vous n’êtes pas familiarisé avec les groupes de sécurité réseau, consultez la [vue d’ensemble de la sécurité réseau](../virtual-network/network-security-groups-overview.md).
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
@@ -189,16 +189,3 @@ SideIndicator            : <=
 ## <a name="next-steps"></a>Étapes suivantes
 
 Si les paramètres ont été modifiés, consultez la page [Gérer les groupes de sécurité réseau](../virtual-network/manage-network-security-group.md) afin d’effectuer le suivi du groupe de sécurité réseau et des règles de sécurité concernés.
-
-
-
-
-
-
-
-
-
-
-
-
-

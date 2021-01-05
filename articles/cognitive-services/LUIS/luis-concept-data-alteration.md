@@ -1,14 +1,17 @@
 ---
 title: Modification de données – LUIS
 description: Découvrez comment les données peuvent être modifiées avant les prédictions de LUIS (Language Understanding)
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 02/11/2020
-ms.openlocfilehash: b3b36351a64a4e1a0bd13d5785a4e0609a80901d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/06/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 621a41f743b751a8c24bf6f6ad8497fb5c79775c
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80292057"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026008"
 ---
 # <a name="alter-utterance-data-before-or-during-prediction"></a>Modifier des données d’énoncé avant ou pendant la prédiction
 LUIS fournit des méthodes pour manipuler l’énoncé avant ou pendant la prédiction. Celles-ci incluent la [correction de l’orthographe](luis-tutorial-bing-spellcheck.md) et la résolution des problèmes de fuseau horaire pour l’entité [datetimeV2](luis-reference-prebuilt-datetimev2.md) prédéfinie.
@@ -75,42 +78,27 @@ L’API Vérification orthographique Bing utilisée dans LUIS ne prend pas en ch
 ## <a name="change-time-zone-of-prebuilt-datetimev2-entity"></a>Changer le fuseau horaire de l’entité datetimeV2 prédéfinie
 Quans une application LUIS utilise l’entité [datetimeV2](luis-reference-prebuilt-datetimev2.md) prédéfinie, une valeur datetime peut être retournée dans la réponse de prédiction. Le fuseau horaire de la requête est utilisé pour déterminer la valeur datetime correcte à retourner. Si la requête provient d’un bot ou d’une autre application centralisée avant d’accéder à LUIS, corrigez le fuseau horaire que LUIS utilise.
 
-### <a name="endpoint-querystring-parameter"></a>Paramètre querystring de point de terminaison
-Le fuseau horaire est corrigé par l’ajout du fuseau horaire de l’utilisateur au [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356) à l’aide du paramètre `timezoneOffset`. La valeur de `timezoneOffset` doit être un nombre positif ou négatif, en minutes, pour modifier l’heure.
+### <a name="v3-prediction-api-to-alter-timezone"></a>API de prédiction V3 pour modifier le fuseau horaire
 
-|Paramètre|Valeur|
-|--|--|
-|`timezoneOffset`|nombre positif ou négatif, en minutes|
+Dans la v3, le paramètre `datetimeReference` détermine le décalage de fuseaux horaires. Découvrez-en plus sur les [prédictions V3](luis-migration-api-v3.md#v3-post-body).
 
-### <a name="daylight-savings-example"></a>Exemple d’économies de l’heure d’été
-Si vous voulez que l’entité datetimeV2 prédéfinie retournée soit ajustée à l’heure d’été, vous devez utiliser le paramètre querystring `timezoneOffset` avec une valeur +/- en minutes pour la requête du [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356).
+### <a name="v2-prediction-api-to-alter-timezone"></a>API de prédiction v2 pour modifier le fuseau horaire
+Le fuseau horaire est corrigé par l'ajout du fuseau horaire de l'utilisateur au point de terminaison à l'aide du paramètre `timezoneOffset` basé sur la version de l'API. La valeur du paramètre doit être un nombre positif ou négatif, en minutes, pour modifier l'heure.
 
-#### <a name="v2-prediction-endpoint-request"></a>[Demande de point de terminaison de prédiction V2](#tab/V2)
+#### <a name="v2-prediction-daylight-savings-example"></a>Exemple de prévision V2 à l'heure d'été
+Si vous souhaitez que l'entité datetimeV2 prédéfinie retournée soit ajustée à l'heure d'été, vous devez utiliser le paramètre querystring avec une valeur +/- en minutes pour la requête du [point de terminaison](https://go.microsoft.com/fwlink/?linkid=2092356).
 
 Ajouter 60 minutes :
 
-`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q=Turn the lights on?**timezoneOffset=60**&verbose={boolean}&spellCheck={boolean}&staging={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
+`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q=Turn the lights on?timezoneOffset=60&verbose={boolean}&spellCheck={boolean}&staging={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
 
 Supprimer 60 minutes :
 
-`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q=Turn the lights on?**timezoneOffset=-60**&verbose={boolean}&spellCheck={boolean}&staging={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
+`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q=Turn the lights on?timezoneOffset=-60&verbose={boolean}&spellCheck={boolean}&staging={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
 
-#### <a name="v3-prediction-endpoint-request"></a>[Demande de point de terminaison de prédiction V3](#tab/V3)
+#### <a name="v2-prediction-c-code-determines-correct-value-of-parameter"></a>Le code C# de la prédiction V2 détermine la valeur correcte du paramètre
 
-Ajouter 60 minutes :
-
-`https://{region}.api.cognitive.microsoft.com/luis/v3.0-preview/apps/{appId}/slots/production/predict?query=Turn the lights on?**timezoneOffset=60**&spellCheck={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
-
-Supprimer 60 minutes :
-
-`https://{region}.api.cognitive.microsoft.com/luis/v3.0-preview/apps/{appId}/slots/production/predict?query=Turn the lights on?**timezoneOffset=-60**&spellCheck={boolean}&bing-spell-check-subscription-key={string}&log={boolean}`
-
-Découvrez-en plus sur le [point de terminaison de prédiction V3](luis-migration-api-v3.md).
-
-* * *
-
-## <a name="c-code-determines-correct-value-of-timezoneoffset"></a>Le code C# détermine la valeur correcte de timezoneOffset
-Le code C# suivant utilise la méthode [FindSystemTimeZoneById](https://docs.microsoft.com/dotnet/api/system.timezoneinfo) de la classe [TimeZoneInfo](https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid#examples) pour déterminer la valeur `timezoneOffset` correcte en fonction de l’heure du système :
+Le code C# suivant utilise la méthode [FindSystemTimeZoneById](/dotnet/api/system.timezoneinfo.findsystemtimezonebyid#examples) de la classe [TimeZoneInfo](/dotnet/api/system.timezoneinfo) pour déterminer la valeur de décalage qui convient en fonction de l'heure du système :
 
 ```csharp
 // Get CST zone id
@@ -122,8 +110,8 @@ DateTime utcDatetime = DateTime.UtcNow;
 // Get Central Standard Time value of Now
 DateTime cstDatetime = TimeZoneInfo.ConvertTimeFromUtc(utcDatetime, targetZone);
 
-// Find timezoneOffset
-int timezoneOffset = (int)((cstDatetime - utcDatetime).TotalMinutes);
+// Find timezoneOffset/datetimeReference
+int offset = (int)((cstDatetime - utcDatetime).TotalMinutes);
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

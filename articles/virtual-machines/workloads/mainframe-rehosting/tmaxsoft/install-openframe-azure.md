@@ -1,6 +1,6 @@
 ---
 title: Installer TmaxSoft OpenFrame sur des machines virtuelles Azure
-description: Réhébergez vos charges de travail mainframe IBM z/OS en utilisant l’environnement TmaxSoft OpenFrame sur des machines virtuelles Azure.
+description: Découvrez comment configurer dans Azure un environnement OpenFrame adapté aux charges de travail de développement, de démonstration, de test ou de production.
 services: virtual-machines-linux
 documentationcenter: ''
 author: njray
@@ -8,12 +8,13 @@ ms.author: larryme
 ms.date: 04/02/2019
 ms.topic: article
 ms.service: virtual-machines-linux
-ms.openlocfilehash: 1ad6e52c421d9cfec4640d3a330b5507d6ed3e9b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.subservice: workloads
+ms.openlocfilehash: ad3dbd8cdc6fff7eca8c24bb6e5258022d52cb9b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72436052"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018492"
 ---
 # <a name="install-tmaxsoft-openframe-on-azure"></a>Installer TmaxSoft OpenFrame sur Azure
 
@@ -164,7 +165,7 @@ Lors de l’octroi de l’accès à la machine virtuelle à de nouveaux utilisat
 
 3.  Cliquez sur **Générer**.
 
-    ![Boîte de dialogue du générateur de clé PuTTY](media/puttygen-02.png)
+    ![Capture d’écran montrant la boîte de dialogue Générateur de clé PuTTY, avec le bouton Générer en évidence.](media/puttygen-02.png)
 
 4.  Après la génération, enregistrez la clé publique et la clé privée. Collez le contenu de la clé publique dans la section **Clé publique SSH** du volet **Créer une machine virtuelle \> De base** (illustré dans les étapes 6 et 7 de la section précédente).
 
@@ -191,7 +192,7 @@ Lors de l’octroi de l’accès à la machine virtuelle à de nouveaux utilisat
 
 7. Sous **Host Name** (Nom d’hôte), tapez votre nom d’utilisateur et l’adresse IP publique que vous avez copiée. Par exemple, **nomutilisateur\@adresseIPpublique**.
 
-    ![Boîte de dialogue de configuration de PuTTY](media/putty-01.png)
+    ![Capture d’écran montrant la boîte de dialogue Configuration PuTTy, avec le champ Nom d’hôte (ou Adresse IP) en surbrillance.](media/putty-01.png)
 
 8. Dans la zone **Category** (Catégorie), cliquez sur **Connection (Connexion) \> SSH \> Auth**. Indiquez le chemin d’accès à votre fichier de **clé privée**.
 
@@ -1476,6 +1477,6 @@ L’installation des composants d’OpenFrame est terminée.
 
 Si vous envisagez d’effectuer une migration de mainframe, notre écosystème de partenaires, qui continue de s’étendre, est là pour vous aider. Pour obtenir des conseils détaillés sur le choix d’une solution de partenaire, consultez [Platform Modernization Alliance](https://datamigration.microsoft.com/).
 
--   [Prise en main d’Azure](https://docs.microsoft.com/azure/)
--   [Documentation Host Integration Server (HIS)](https://docs.microsoft.com/host-integration-server/)
--   [Azure Virtual Datacenter: Lift and Shift Guide](https://blogs.msdn.microsoft.com/azurecat/2018/03/12/new-whitepaper-azure-virtual-datacenter-lift-and-shift-guide/) (Azure Virtual Datacenter : guide lift-and-shift)
+-   [Prise en main d’Azure](../../../../index.yml)
+-   [Documentation Host Integration Server (HIS)](/host-integration-server/)
+-   [Azure Virtual Datacenter: Lift and Shift Guide](/archive/blogs/azurecat/new-whitepaper-azure-virtual-datacenter-lift-and-shift-guide) (Azure Virtual Datacenter : guide lift-and-shift)

@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 07/08/2016
-ms.openlocfilehash: 500769a39ba7658b35c1abb80101f6234170c941
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 038c1d4c0f0b5ffd7b9aabea2de32e3a44e3b221
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74792381"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97654130"
 ---
 # <a name="create-maps-that-transform-xml-between-formats-in-azure-logic-apps-with-enterprise-integration-pack"></a>Créer des mappages qui convertissent des données XML entre les différents formats dans Azure Logic Apps à l’aide d’Enterprise Integration Pack
 
@@ -36,13 +36,13 @@ Après avoir chargé la transformation / le mappage dans votre compte d’intég
 
 Maintenant que vous avez exécuté la configuration requise, il est temps de créer votre application logique :  
 
-1. Créez une application logique et [liez-la à votre compte d’intégration](../logic-apps/logic-apps-enterprise-integration-accounts.md "Découvrez comment lier un compte d’intégration à une application logique") qui contient le mappage.
+1. Créez une application logique et [liez-la à votre compte d’intégration](./logic-apps-enterprise-integration-create-integration-account.md "Découvrez comment lier un compte d’intégration à une application logique") qui contient le mappage.
 2. Ajouter un déclenchement de **Requête** à votre application logique  
-   ![](./media/logic-apps-enterprise-integration-transforms/transform-1.png)    
+   ![Screenshot of the "Show Microsoft managed APIs" dropdown with the Request trigger selected. The dropdown is in a Logic app created using the Visual Studio Enterprise Integration SDK.](./media/logic-apps-enterprise-integration-transforms/transform-1.png)    
 3. Ajoutez l’action **Transformer XML** en sélectionnant d’abord **Ajouter une action**   
-   ![](./media/logic-apps-enterprise-integration-transforms/transform-2.png)   
+   ![Screenshot showing the "Add an action" button selected in the Request trigger screen.](./media/logic-apps-enterprise-integration-transforms/transform-2.png)   
 4. Entrez le mot *transform* dans la zone de recherche afin de filtrer toutes les actions et d’obtenir celle que vous souhaitez utiliser  
-   ![](./media/logic-apps-enterprise-integration-transforms/transform-3.png)  
+   ![Screenshot showing how to search for the Transform XML action in the "Show Microsoft managed APIs" dropdown so that it can be added to the Request trigger.](./media/logic-apps-enterprise-integration-transforms/transform-3.png)  
 5. Sélectionnez l’action **Transformer XML**   
 6. Ajoutez le **CONTENU** XML à transformer. Vous pouvez utiliser toute donnée XML que vous recevez dans la requête HTTP en tant que **CONTENU**. Dans cet exemple, sélectionnez le corps de la demande HTTP qui a déclenché l’application logique.
 
@@ -51,9 +51,9 @@ Maintenant que vous avez exécuté la configuration requise, il est temps de cr�
  
 
 7. Sélectionnez le nom du **MAPPAGE** que vous souhaitez utiliser pour effectuer la transformation. Le mappage doit déjà exister dans votre compte d’intégration. Lors d’une étape précédente, vous avez déjà attribué à votre application logique l’accès à votre compte d’intégration qui contient le mappage.      
-   ![](./media/logic-apps-enterprise-integration-transforms/transform-4.png) 
+   ![Screenshot showing the Content and Map fields in the Transform XML screen for the Request trigger.](./media/logic-apps-enterprise-integration-transforms/transform-4.png) 
 8. Enregistrez votre travail  
-    ![](./media/logic-apps-enterprise-integration-transforms/transform-5.png) 
+    ![Capture d’écran montrant le bouton Enregistrer dans le concepteur Logic Apps.](./media/logic-apps-enterprise-integration-transforms/transform-5.png) 
 
 À ce stade, vous avez terminé de configurer votre mappage. Dans une application réelle, vous souhaiterez peut-être stocker les données transformées dans une application métier, comme SalesForce. Vous pouvez facilement ajouter une action pour envoyer la sortie de la transformation à SalesForce. 
 
@@ -95,17 +95,17 @@ L’action de transformation prend également en charge les mappages et les tran
     <![CDATA[public double circumference(int radius){ XsltHelper helper = new XsltHelper(); return helper.circumference(radius); }]]>
   </msxsl:script>
   <xsl:template match="data">
-     <circles>
-        <xsl:for-each select="circle">
-            <circle>
-                <xsl:copy-of select="node()"/>
-                    <circumference>
-                        <xsl:value-of select="user:circumference(radius)"/>
-                    </circumference>
-            </circle>
-        </xsl:for-each>
-     </circles>
-    </xsl:template>
+   <circles>
+    <xsl:for-each select="circle">
+      <circle>
+        <xsl:copy-of select="node()"/>
+          <circumference>
+            <xsl:value-of select="user:circumference(radius)"/>
+          </circumference>
+      </circle>
+    </xsl:for-each>
+   </circles>
+  </xsl:template>
     </xsl:stylesheet>
   ```
 
@@ -136,4 +136,3 @@ Par défaut, la réponse de la transformation commence par la marque d’ordre d
 ## <a name="learn-more"></a>En savoir plus
 * [En savoir plus sur Enterprise Integration Pack](../logic-apps/logic-apps-enterprise-integration-overview.md "En savoir plus sur Enterprise Integration Pack")  
 * [En savoir plus sur les mappages](../logic-apps/logic-apps-enterprise-integration-maps.md "En savoir plus sur les mappages d’intégration d’entreprise")  
-

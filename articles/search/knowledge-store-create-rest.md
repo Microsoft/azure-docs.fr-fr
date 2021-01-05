@@ -1,24 +1,21 @@
 ---
-title: Créer une base de connaissances (préversion) avec REST
+title: Créer une base de connaissances avec REST
 titleSuffix: Azure Cognitive Search
-description: Utilisez l’API REST et Postman pour créer une base de connaissances Recherche cognitive Azure pour conserver les enrichissements d’un pipeline d’enrichissement par IA. Cette fonctionnalité est actuellement disponible en préversion publique.
+description: Utilisez l’API REST et Postman pour créer une base de connaissances Recherche cognitive Azure pour conserver les enrichissements d’un pipeline d’enrichissement par IA.
 author: HeidiSteen
 manager: nitinme
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: tutorial
-ms.date: 12/30/2019
-ms.openlocfilehash: 478a7e03b432006b429c96e03307fd8e494c88ff
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 11/18/2020
+ms.openlocfilehash: 6af9b8f97d622ae10cfdbcaa8ca50abb42ec7332
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77472313"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94889051"
 ---
 # <a name="create-a-knowledge-store-using-rest-and-postman"></a>Créer une base de connaissances à l’aide de REST et Postman
-
-> [!IMPORTANT] 
-> La base de connaissances est actuellement disponible en préversion publique. Les fonctionnalités en préversion sont fournies sans contrat de niveau de service et ne sont pas recommandées pour les charges de travail de production. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). L’[API REST version 2019-05-06-Preview](search-api-preview.md) fournit des fonctionnalités en préversion. La prise en charge du portail est actuellement limitée, et il n’existe pas de prise en charge du kit SDK .NET.
 
 Une base de connaissances contient la sortie d’un pipeline d’enrichissement Recherche cognitive Azure pour une analyse ultérieure ou tout autre traitement en aval. Un pipeline enrichi par IA accepte les fichiers image ou les fichiers texte non structurés, les index en utilisant Recherche cognitive Azure, applique des enrichissements par IA provenant de Cognitive Services (par exemple l’analyse d’images et le traitement en langage naturel), puis enregistre les résultats dans une base de connaissances dans Stockage Azure. Vous pouvez utiliser des outils comme Power BI ou l’Explorateur Stockage sur le portail Azure pour explorer la base de connaissances.
 
@@ -39,7 +36,7 @@ En raison de la taille réduite de la charge de travail, Cognitive Services est 
 
 1. [Téléchargez le fichier HotelReviews_Free.csv](https://knowledgestoredemo.blob.core.windows.net/hotel-reviews/HotelReviews_Free.csv?sp=r&st=2019-11-04T01:23:53Z&se=2025-11-04T16:00:00Z&spr=https&sv=2019-02-02&sr=b&sig=siQgWOnI%2FDamhwOgxmj11qwBqqtKMaztQKFNqWx00AY%3D). Ce fichier CSV contient des données d’avis d’hôtel (issues de Kaggle.com). Il rassemble 19 commentaires de clients relatifs à un seul hôtel. 
 
-1. [Créez un compte de stockage Azure](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal) ou [recherchez un compte existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/) dans votre abonnement actuel. Vous utilisez le stockage Azure pour le contenu brut à importer, mais aussi pour la base de connaissances qui est le résultat final.
+1. [Créez un compte de stockage Azure](../storage/common/storage-account-create.md?tabs=azure-portal) ou [recherchez un compte existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/) dans votre abonnement actuel. Vous utilisez le stockage Azure pour le contenu brut à importer, mais aussi pour la base de connaissances qui est le résultat final.
 
    Choisissez le type de compte **StorageV2 (usage général v2)** .
 
@@ -81,13 +78,13 @@ Pour obtenir la valeur de `admin-key`, accédez au service Recherche cognitive A
 | Variable    | Comment les obtenir |
 |-------------|-----------------|
 | `admin-key` | Dans la page **Clés** du service Recherche cognitive Azure.  |
-| `api-version` | Laisser **2019-05-06-Preview**. |
+| `api-version` | Laisser **2020-06-30**. |
 | `datasource-name` | Laisser **hotel-reviews-ds**. | 
 | `indexer-name` | Laisser **hotel-reviews-ixr**. | 
 | `index-name` | Laisser **hotel-reviews-ix**. | 
 | `search-service-name` | Nom du service Recherche cognitive Azure. L’URL est `https://{{search-service-name}}.search.windows.net`. | 
 | `skillset-name` | Laisser **hotel-reviews-ss**. | 
-| `storage-account-name` | nom du compte de stockage. | 
+| `storage-account-name` | Nom du compte de stockage Azure. | 
 | `storage-connection-string` | Dans le compte de stockage, sous l’onglet **Clés d’accès**, sélectionnez **key1** > **Chaîne de connexion**. | 
 | `storage-container-name` | Laisser **hotel-reviews**. | 
 

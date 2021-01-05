@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: c7511279e66ab598e4ae3c26f053915b7393b39d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7bdffa607a1cbe47b940590d19f6140238d31bf0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74978388"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266491"
 ---
-# <a name="widevine-license-template-overview"></a>Vue d’ensemble du modèle de licence Widevine 
+# <a name="widevine-license-template-overview"></a>Vue d’ensemble du modèle de licence Widevine
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 Vous pouvez utiliser Azure Media Services pour configurer et demander des licences Google Widevine. Quand le lecteur tente de lire votre contenu Widevine protégé, une demande est envoyée au service de remise de licence pour obtenir une licence. Si le service de licence approuve la demande, le service émet la licence. Elle est envoyée au client et utilisée pour déchiffrer et lire le contenu spécifié.
 
 Une demande de licence Widevine se présente sous forme de message JSON.  
@@ -29,34 +32,36 @@ Une demande de licence Widevine se présente sous forme de message JSON.
 >[!NOTE]
 > Vous pouvez créer un message vide sans valeur, simplement « {} ». Dans ce cas, un modèle de licence est créé avec les valeurs par défaut. Les valeurs par défaut fonctionnent pour la plupart des cas. Les scénarios de remise de licence Microsoft doivent toujours utiliser les valeurs par défaut. Si vous devez définir les valeurs « provider » et « content_id », un fournisseur doit correspondre aux informations d’identification Widevine.
 
-    {  
-       "payload": "<license challenge>",
-       "content_id": "<content id>" 
-       "provider": "<provider>"
-       "allowed_track_types": "<types>",
-       "content_key_specs": [  
-          {  
-             "track_type": "<track type 1>"
-          },
-          {  
-             "track_type": "<track type 2>"
-          },
-          …
-       ],
-       "policy_overrides": {  
-          "can_play": <can play>,
-          "can persist": <can persist>,
-          "can_renew": <can renew>,
-          "rental_duration_seconds": <rental duration>,
-          "playback_duration_seconds": <playback duration>,
-          "license_duration_seconds": <license duration>,
-          "renewal_recovery_duration_seconds": <renewal recovery duration>,
-          "renewal_server_url": "<renewal server url>",
-          "renewal_delay_seconds": <renewal delay>,
-          "renewal_retry_interval_seconds": <renewal retry interval>,
-          "renew_with_usage": <renew with usage>
-       }
-    }
+```json
+{  
+   "payload": "<license challenge>",
+   "content_id": "<content id>" 
+   "provider": "<provider>"
+   "allowed_track_types": "<types>",
+   "content_key_specs": [  
+      {  
+         "track_type": "<track type 1>"
+      },
+      {  
+         "track_type": "<track type 2>"
+      },
+      …
+   ],
+   "policy_overrides": {  
+      "can_play": <can play>,
+      "can persist": <can persist>,
+      "can_renew": <can renew>,
+      "rental_duration_seconds": <rental duration>,
+      "playback_duration_seconds": <playback duration>,
+      "license_duration_seconds": <license duration>,
+      "renewal_recovery_duration_seconds": <renewal recovery duration>,
+      "renewal_server_url": "<renewal server url>",
+      "renewal_delay_seconds": <renewal delay>,
+      "renewal_retry_interval_seconds": <renewal retry interval>,
+      "renew_with_usage": <renew with usage>
+   }
+}
+```
 
 ## <a name="json-message"></a>Message JSON
 | Nom | Valeur | Description |
@@ -113,81 +118,85 @@ Media Services propose des API .NET que vous pouvez utiliser pour configurer vos
 ### <a name="classes-as-defined-in-the-media-services-net-sdk"></a>Les classes sont définies dans le Kit de développement logiciel (SDK) .NET de Media Services
 Les classes suivantes sont les définitions de ces types :
 
-    public class WidevineMessage
-    {
-        public WidevineMessage();
+```dotnetcli
+public class WidevineMessage
+{
+    public WidevineMessage();
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public AllowedTrackTypes? allowed_track_types { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public ContentKeySpecs[] content_key_specs { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public object policy_overrides { get; set; }
-    }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public AllowedTrackTypes? allowed_track_types { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public ContentKeySpecs[] content_key_specs { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public object policy_overrides { get; set; }
+}
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum AllowedTrackTypes
-    {
-        SD_ONLY = 0,
-        SD_HD = 1
-    }
-    public class ContentKeySpecs
-    {
-        public ContentKeySpecs();
+[JsonConverter(typeof(StringEnumConverter))]
+public enum AllowedTrackTypes
+{
+    SD_ONLY = 0,
+    SD_HD = 1
+}
+public class ContentKeySpecs
+{
+    public ContentKeySpecs();
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string key_id { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public RequiredOutputProtection required_output_protection { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int? security_level { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string track_type { get; set; }
-    }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public string key_id { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public RequiredOutputProtection required_output_protection { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public int? security_level { get; set; }
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public string track_type { get; set; }
+}
 
-    public class RequiredOutputProtection
-    {
-        public RequiredOutputProtection();
+public class RequiredOutputProtection
+{
+    public RequiredOutputProtection();
 
-        public Hdcp hdcp { get; set; }
-    }
+    public Hdcp hdcp { get; set; }
+}
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum Hdcp
-    {
-        HDCP_NONE = 0,
-        HDCP_V1 = 1,
-        HDCP_V2 = 2
-    }
+[JsonConverter(typeof(StringEnumConverter))]
+public enum Hdcp
+{
+    HDCP_NONE = 0,
+    HDCP_V1 = 1,
+    HDCP_V2 = 2
+}
+```
 
 ### <a name="example"></a>Exemple
 L’exemple suivant montre comment utiliser les API .NET pour configurer une licence Widevine simple :
 
-    private static string ConfigureWidevineLicenseTemplate()
+```dotnetcli
+private static string ConfigureWidevineLicenseTemplate()
+{
+    var template = new WidevineMessage
     {
-        var template = new WidevineMessage
+        allowed_track_types = AllowedTrackTypes.SD_HD,
+        content_key_specs = new[]
         {
-            allowed_track_types = AllowedTrackTypes.SD_HD,
-            content_key_specs = new[]
+            new ContentKeySpecs
             {
-                new ContentKeySpecs
-                {
-                    required_output_protection = new RequiredOutputProtection { hdcp = Hdcp.HDCP_NONE},
-                    security_level = 1,
-                    track_type = "SD"
-                }
-            },
-            policy_overrides = new
-            {
-                can_play = true,
-                can_persist = true,
-                can_renew = false
+                required_output_protection = new RequiredOutputProtection { hdcp = Hdcp.HDCP_NONE},
+                security_level = 1,
+                track_type = "SD"
             }
-        };
+        },
+        policy_overrides = new
+        {
+            can_play = true,
+            can_persist = true,
+            can_renew = false
+        }
+    };
 
-        string configuration = JsonConvert.SerializeObject(template);
-        return configuration;
-    }
+    string configuration = JsonConvert.SerializeObject(template);
+    return configuration;
+}
+```
 
 ## <a name="additional-notes"></a>Remarques supplémentaires
 

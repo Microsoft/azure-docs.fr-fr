@@ -7,12 +7,12 @@ ms.topic: include
 ms.date: 09/14/2018
 ms.author: antchu
 ms.custom: include file
-ms.openlocfilehash: 0a228f6d8b4f72acd3783f27bf192fe6bd13f988
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: f738daab7ddcf0403f546e7c9ffeaeccb66bc6b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75392146"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91355639"
 ---
 ## <a name="create-an-azure-signalr-service-instance"></a>Créer une instance de service SignalR Azure
 
@@ -20,7 +20,7 @@ Votre application se connectera à l’instance de service SignalR dans Azure.
 
 1. Cliquez sur le bouton Nouveau dans le coin supérieur gauche du portail Azure. À l’écran Nouveau, tapez *Service SignalR* dans la zone de recherche et appuyez sur Entrée.
 
-    ![Rechercher Service SignalR](../media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-new.png)
+    ![La capture d’écran montre la recherche de SignalR Service dans le portail Azure.](../media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-new.png)
 
 1. Sélectionnez **Service SignalR** dans les résultats de la recherche, puis **Créer**.
 
@@ -36,7 +36,7 @@ Votre application se connectera à l’instance de service SignalR dans Azure.
     | **Nombre d’unité** |  Non applicable | Le nombre d’unité spécifie le nombre de connexion que votre instance de service SignalR peut accepter. Ceci n’est configurable que dans le niveau Standard. |
     | **Mode de service** |  Sans serveur | À utiliser avec Azure Functions ou l’API REST. |
 
-    ![Créer un service SignalR](../media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-create.png)
+    ![La capture d’écran présente l’onglet Concepts de base SignalR avec des valeurs.](../media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-create.png)
 
 1. Sélectionnez **Créer** pour commencer le déploiement de l’instance de service SignalR.
 

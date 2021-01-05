@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: quickstart
 ms.date: 10/01/2019
 ms.author: juliako
-ms.openlocfilehash: e9a4575ce2f353d61654263aea8d968c650a689e
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4023f8584e7b901a19906235d98982abbbfbaaf8
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79499746"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92364136"
 ---
 # <a name="quickstart-invite-users-to-video-indexer"></a>Démarrage rapide : Inviter des utilisateurs à Video Indexer
 
@@ -27,17 +27,16 @@ Pour collaborer avec vos collègues, vous pouvez les inviter à votre compte Vid
 ## <a name="invite-new-users"></a>Inviter de nouveaux utilisateurs
 
 1. Connectez-vous au site web [Video Indexer](https://www.videoindexer.ai/). Vérifiez que vous êtes connecté avec un compte d’administrateur.
-1. Cliquez sur le bouton **Inviter d’autres personnes** dans le menu supérieur :
+1. Si vous êtes l’administrateur, vous voyez le bouton **Partager le compte** en haut à droite. Cliquez sur le bouton et vous pouvez inviter des utilisateurs. 
 
-   ![Inviter de nouveaux utilisateurs](./media/invite-users/invite-users.png)
-
+   ![Inviter de nouveaux utilisateurs](./media/invite-users/share-account.png)
 1. Ajoutez les adresses e-mail des personnes que vous souhaitez ajouter à votre compte Video Indexer :
 
     ![Inviter des utilisateurs à ce compte](./media/invite-users/invite-to-account.png)
         
     >[!NOTE]
     > Tous les utilisateurs que vous invitez ont accès en lecture et en écriture à toutes les vidéos de votre compte.
-1. Les utilisateurs que vous avez invités reçoivent un e-mail contenant un lien et peuvent accéder au compte en cliquant sur le lien **Rejoindre Video Indexer** :
+1. Les utilisateurs que vous avez invités reçoivent un e-mail contenant un lien et peuvent accéder au compte en cliquant sur le lien **Rejoindre Video Indexer**  :
 
     ![Confirmation](./media/invite-users/invite-msg.png)
 

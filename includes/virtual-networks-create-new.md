@@ -9,11 +9,11 @@ ms.date: 03/01/2020
 ms.author: allensu
 ms.custom: include file
 ms.openlocfilehash: 81db46b52c9b4fe800f2fbfeadad966995d66e12
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78244968"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012070"
 ---
 ## <a name="create-the-virtual-network"></a>Créer un réseau virtuel
 
@@ -27,10 +27,10 @@ Dans cette section, vous allez créer un réseau virtuel et un sous-réseau.
     |------------------|-----------------------------------------------------------------|
     | **Détails du projet**  |                                                                 |
     | Abonnement     | Sélectionner votre abonnement Azure                                  |
-    | Groupe de ressources   | Sélectionnez **Créer**, entrez le **\<nom_groupe_ressources>** , puis sélectionnez OK, ou sélectionnez un **\<nom_groupe_ressources>** existant en fonction des paramètres. |
+    | Groupe de ressources   | Sélectionnez **Créer**, entrez **\<resource-group-name>** , puis sélectionnez OK, ou sélectionnez un **\<resource-group-name>** existant en fonction de paramètres. |
     | **Détails de l’instance** |                                                                 |
-    | Nom             | Entrez **\<nom_réseau_virtuel>**                                    |
-    | Région           | Sélectionnez **\<nom_région>** |
+    | Nom             | Entrez **\<virtual-network-name>**                                    |
+    | Région           | Sélectionnez **\<region-name>** |
 
 3. Sélectionnez l’onglet **Adresses IP**, ou sélectionnez le bouton **Suivant : Adresses IP** au bas de la page.
 
@@ -38,7 +38,7 @@ Dans cette section, vous allez créer un réseau virtuel et un sous-réseau.
 
     | Paramètre            | Valeur                      |
     |--------------------|----------------------------|
-    | Espace d’adressage IPv4 | Entrez **\<Espace_adresses_IPv4>** |
+    | Espace d’adressage IPv4 | Entrez **\<IPv4-address-space>** |
 
 5. Sous **Nom de sous-réseau**, sélectionnez le mot **par défaut**.
 
@@ -46,8 +46,8 @@ Dans cette section, vous allez créer un réseau virtuel et un sous-réseau.
 
     | Paramètre            | Valeur                      |
     |--------------------|----------------------------|
-    | Nom du sous-réseau | Entrez **\<nom_sous_réseau>** |
-    | Plage d’adresses de sous-réseau | Entrez **\<plage_adresses_sous_réseau>**
+    | Nom du sous-réseau | Entrez **\<subnet-name>** |
+    | Plage d’adresses de sous-réseau | Entrez **\<subnet-address-range>**
 
 7. Sélectionnez **Enregistrer**.
 

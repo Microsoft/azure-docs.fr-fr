@@ -4,18 +4,18 @@ ms.service: app-service-web
 ms.topic: include
 ms.date: 04/14/2020
 ms.author: cephalin
-ms.openlocfilehash: 88ebda7fcdd3fbdf148c9870ee3190b4824ff0ac
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 47f72bb49e9bbb27be18a08ec396789091afeab2
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83121410"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96182498"
 ---
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Au cours des étapes précédentes, vous avez créé des ressources Azure au sein d’un groupe de ressources. Si vous ne pensez pas avoir besoin de ces ressources à l’avenir, vous pouvez les supprimer en supprimant le groupe de ressources.
  
-Dans le menu du portail Azure ou dans la **page d’accueil**, sélectionnez **Groupes de ressources**, puis, dans la page **Groupes de ressources**, sélectionnez **myResourceGroup**.
+Dans le menu ou la **page d’accueil** du portail Azure, sélectionnez **Groupes de ressources**. Ensuite, dans la page **Groupes de ressources**, sélectionnez **myResourceGroup**.
 
 Dans la page **myResourceGroup**, assurez-vous que les ressources répertoriées sont bien celles que vous souhaitez supprimer.
 

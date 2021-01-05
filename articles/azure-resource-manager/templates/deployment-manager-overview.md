@@ -1,15 +1,15 @@
 ---
 title: Déploiement sécurisé entre les régions - Azure Deployment Manager
-description: Explique comment déployer un service sur plusieurs régions avec Azure Deployment Manager. Montre des pratiques de déploiement sécurisé consistant à vérifier la stabilité d’un déploiement avant sa propagation à toutes les régions.
+description: Découvrez comment déployer un service sur plusieurs régions avec Azure Deployment Manager et découvrez des pratiques de déploiement sécurisées.
 ms.topic: conceptual
 ms.date: 11/21/2019
 ms.custom: seodec18
-ms.openlocfilehash: 424cd79a6c63200e1f101cf178b1fd2c9083161e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b950fdc36fe3fbea1ce9436bdd7f7372c64c055
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76152525"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91333203"
 ---
 # <a name="enable-safe-deployment-practices-with-azure-deployment-manager-public-preview"></a>Permettre des pratiques sûres de déploiement avec Azure Deployment Manager (préversion publique)
 
@@ -30,14 +30,14 @@ Vous déployez le modèle de topologie avant de déployer le modèle de lancemen
 
 Ressources supplémentaires :
 
-- Les [informations de référence de l’API REST Azure Deployment Manager](https://docs.microsoft.com/rest/api/deploymentmanager/).
+- Les [informations de référence de l’API REST Azure Deployment Manager](/rest/api/deploymentmanager/).
 - [Tutoriel : Utiliser Azure Deployment Manager avec des modèles Resource Manager](./deployment-manager-tutorial.md).
 - [Tutoriel : Utiliser le contrôle d’intégrité dans Azure Deployment Manager](./deployment-manager-tutorial-health-check.md).
 - [Un exemple d’Azure Deployment Manager](https://github.com/Azure-Samples/adm-quickstart).
 
 ## <a name="identity-and-access"></a>Identité et accès
 
-Avec Deployment Manager, une [identité managée affectée à l’utilisateur](../../active-directory/managed-identities-azure-resources/overview.md) effectue les actions de déploiement. Vous créez cette identité avant de commencer votre déploiement. Elle doit avoir accès à l’abonnement Azure sur lequel vous déployez le service, et disposer des autorisations suffisantes pour procéder au déploiement complet. Pour plus d’informations sur les actions accordées par le biais des rôles, consultez [Rôles intégrés pour les ressources Azure](../../role-based-access-control/built-in-roles.md).
+Avec Deployment Manager, une [identité managée affectée à l’utilisateur](../../active-directory/managed-identities-azure-resources/overview.md) effectue les actions de déploiement. Vous créez cette identité avant de commencer votre déploiement. Elle doit avoir accès à l’abonnement Azure sur lequel vous déployez le service, et disposer des autorisations suffisantes pour procéder au déploiement complet. Pour plus d’informations sur les actions accordées par le biais des rôles, consultez [Rôles intégrés Azure](../../role-based-access-control/built-in-roles.md).
 
 L’identité doit résider dans le même emplacement que le déploiement.
 
@@ -300,7 +300,7 @@ Votre modèle et votre fichier de paramètre doivent connaître le chemin correc
 
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "deployPackageUri": {

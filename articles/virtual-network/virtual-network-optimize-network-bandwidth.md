@@ -1,6 +1,6 @@
 ---
 title: Optimiser le débit du réseau des machines virtuelles | Microsoft Docs
-description: Découvrez comment optimiser le débit du réseau des machines virtuelles Azure.
+description: Optimisez le débit du réseau pour les machines virtuelles Microsoft Azure Windows et Linux, notamment les distributions majeures telles que Ubuntu, CentOS et Red Hat.
 services: virtual-network
 documentationcenter: na
 author: steveesp
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 11/15/2017
+ms.date: 10/06/2020
 ms.author: steveesp
-ms.openlocfilehash: be5f38bdeaf51dbe23006ecf30b4deb66aa7402a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a9db2bcc0b44dfb6146517de8a139f34cd8584af
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75690883"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97654453"
 ---
 # <a name="optimize-network-throughput-for-azure-virtual-machines"></a>Optimiser le débit du réseau des machines virtuelles Azure
 
@@ -56,12 +56,12 @@ La mise à l’échelle côté réception (RSS) est toujours activée par défau
 
 ### <a name="ubuntu-for-new-deployments"></a>Ubuntu pour les nouveaux déploiements
 
-Le noyau Ubuntu Azure fournit les meilleures performances réseau sur Azure et est le noyau par défaut depuis le 21 septembre 2017. Pour utiliser ce noyau, installez d’abord la version la plus récente de 16.04-LTS, comme ci-dessous :
+Le noyau Ubuntu Azure est le plus optimisé pour les performances réseau sur Azure. Pour obtenir les dernières optimisations, installez d’abord la version la plus récente de 18.04-LTS, comme suit :
 
 ```json
 "Publisher": "Canonical",
 "Offer": "UbuntuServer",
-"Sku": "16.04-LTS",
+"Sku": "18.04-LTS",
 "Version": "latest"
 ```
 
@@ -89,7 +89,7 @@ apt-get -y dist-upgrade
 
 #### <a name="ubuntu-azure-kernel-upgrade-for-existing-vms"></a>Mise à niveau du noyau Ubuntu Azure pour les machines virtuelles existantes
 
-Des performances significatives en termes de débit peuvent être atteintes en mettant à jour vers le noyau Azure Linux proposé. Pour vérifier si vous avez ce noyau, vérifiez la version de votre noyau.
+Des performances significatives en termes de débit peuvent être atteintes en mettant à jour vers le noyau Azure Linux proposé. Pour vérifier si vous avez ce noyau, vérifiez la version de votre noyau. Elle doit être identique ou ultérieure à l’exemple.
 
 ```bash
 #Azure kernel name ends with "-azure"
@@ -117,7 +117,7 @@ Pour bénéficier des dernières optimisations, il est préférable de créer un
 ```json
 "Publisher": "OpenLogic",
 "Offer": "CentOS",
-"Sku": "7.4",
+"Sku": "7.7",
 "Version": "latest"
 ```
 
@@ -152,6 +152,7 @@ sudo ./install.sh #or upgrade.sh if prior LIS was previously installed
 Apprenez-en plus sur les Services d’intégration Linux version 4.2 pour Hyper-V en consultant la [page de téléchargement](https://www.microsoft.com/download/details.aspx?id=55106).
 
 ## <a name="next-steps"></a>Étapes suivantes
+* Déployez des machines virtuelles proches les unes des autres pour une faible latence avec un [groupe de placement de proximité](../virtual-machines/windows/co-location.md)
 * Découvrez le résultat optimisé avec le [Test de bande passante/débit de machine virtuelle Azure](virtual-network-bandwidth-testing.md) pour votre scénario.
 * Découvrez de quelle façon [la bande passante est allouée aux machines virtuelles](virtual-machine-network-throughput.md)
 * En savoir plus avec le [FAQ sur les réseaux virtuels Azure](virtual-networks-faq.md)

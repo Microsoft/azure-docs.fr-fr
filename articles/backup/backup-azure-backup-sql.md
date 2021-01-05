@@ -3,12 +3,12 @@ title: Sauvegarde de SQL Server sur Azure en tant que charge de travail DPM
 description: Présentation de la sauvegarde de bases de données SQL Server à l’aide du service Sauvegarde Azure
 ms.topic: conceptual
 ms.date: 01/30/2019
-ms.openlocfilehash: 01504fcfd81040d75e57ce62a9f77a5bb248d59b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 592a51051a0d02a6c1d491db0fe559e2e62babb2
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82183787"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96327047"
 ---
 # <a name="back-up-sql-server-to-azure-as-a-dpm-workload"></a>Sauvegarde de SQL Server sur Azure en tant que charge de travail DPM
 
@@ -21,6 +21,38 @@ Pour sauvegarder une base de données SQL Server sur Azure et la récupérer à 
 1. Créez une stratégie de sauvegarde pour protéger les bases de données SQL Server dans Azure.
 1. Créez des copies de sauvegarde à la demande dans Azure.
 1. Récupérer la base de données à partir d’Azure.
+
+>[!NOTE]
+>DPM 2019 UR2 prend en charge les instances de cluster de basculement (FCI) SQL Server à l’aide des volumes de cluster partagés (Cluster Shared Volumes).<br><br>
+>Cette fonctionnalité prend en charge les [instances de cluster de basculement SQL Server avec espaces de stockage direct sur Azure](../azure-sql/virtual-machines/windows/failover-cluster-instance-storage-spaces-direct-manually-configure.md) et les [instances de cluster de basculement SQL Server avec disques partagés Azure](../azure-sql/virtual-machines/windows/failover-cluster-instance-azure-shared-disks-manually-configure.md). Le serveur DPM doit être déployé sur la machine virtuelle Azure pour protéger l'instance FCI SQL déployée sur les machines virtuelles Azure. 
+
+## <a name="prerequisites-and-limitations"></a>Conditions préalables et limitations
+
+* Si vous disposez d’une base de données avec des fichiers sur un partage de fichiers distant, la protection échouera avec l’ID d’erreur 104. Data Protection Manager (DPM) ne prend pas en charge la protection des données SQL Server sur un partage de fichiers distant.
+* DPM ne peut pas protéger les bases de données stockées sur des partages SMB distants.
+* Assurez-vous que les [réplicas de groupe de disponibilité sont configurés en lecture seule](/sql/database-engine/availability-groups/windows/configure-read-only-access-on-an-availability-replica-sql-server).
+* Vous devez explicitement ajouter le compte système **NTAuthority\System** au groupe Sysadmin sur SQL Server.
+* Lorsque vous effectuez une récupération sur l'autre emplacement pour une base de données partiellement autonome, vous devez vous assurer que la fonctionnalité relative aux [bases de données autonomes](/sql/relational-databases/databases/migrate-to-a-partially-contained-database#enable) est activée sur l'instance SQL cible.
+* Lorsque vous effectuez une récupération sur l'autre emplacement pour une base de données de flux de fichiers, vous devez vous assurer que la fonctionnalité relative à la [base de données de flux de fichiers](/sql/relational-databases/blob/enable-and-configure-filestream) est activée sur l'instance SQL cible.
+* Protection pour SQL Server AlwaysOn :
+  * DPM détecte les groupes de disponibilité lorsqu’une demande de renseignements est exécutée lors de la création d’un groupe de protection.
+  * DPM détecte un basculement et poursuit la protection de la base de données.
+  * DPM prend en charge les configurations de cluster multisites d’une instance de SQL Server.
+* Lorsque vous protégez des bases de données qui utilisent la fonctionnalité AlwaysOn, DPM présente les limitations suivantes :
+  * DPM honorera la stratégie de sauvegarde des groupes de disponibilité définie dans SQL Server en fonction des préférences de sauvegarde, comme suit :
+    * Préférer le réplica secondaire : les sauvegardes doivent être effectuées sur un réplica secondaire, sauf lorsque le réplica principal est le seul réplica en ligne. Si plusieurs réplicas secondaires sont disponibles, le nœud ayant la plus haute priorité de sauvegarde sera sélectionné pour la sauvegarde. Si seul le réplica principal est disponible, la sauvegarde doit être effectuée sur le réplica principal.
+    * Secondaire uniquement : la sauvegarde ne doit pas être effectuée sur le réplica principal. Si le réplica principal est le seul réplica en ligne, la sauvegarde ne doit pas s'effectuer.
+    * Principal : les sauvegardes doivent toujours s'effectuer sur le réplica principal.
+    * Sur n'importe quel réplica : les sauvegardes peuvent s'effectuer sur n'importe quel réplica de disponibilité dans le groupe de disponibilité. Le nœud à sauvegarder dépendra des priorités de sauvegarde pour chacun des nœuds.
+  * Notez les points suivants :
+    * Les sauvegardes peuvent s'effectuer à partir de n'importe quel réplica lisible, c'est-à-dire principal, secondaire synchrone, secondaire asynchrone.
+    * Si un réplica est exclus de la sauvegarde, par exemple si **Exclure des réplicas** est activé ou marqué comme étant non lisible, alors ce réplica ne sera pas sélectionné pour la sauvegarde quelle que soit l'option.
+    * Si plusieurs réplicas sont disponibles et lisibles, alors le nœud ayant la plus haute priorité de sauvegarde sera sélectionné pour la sauvegarde.
+    * Si la sauvegarde échoue sur le nœud sélectionné, alors l'opération de sauvegarde échoue.
+    * La récupération à l'emplacement d'origine n'est pas prise en charge.
+* Problèmes de sauvegarde de SQL Server 2014 ou versions ultérieures :
+  * SQL Server 2014 a ajouté une nouvelle fonctionnalité afin de créer une [base de données pour un serveur SQL local dans Stockage Blob Azure pour Windows](/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure). DPM ne peut pas être utilisé pour protéger cette configuration.
+  * Il existe certains problèmes connus avec la préférence de sauvegarde « Préférer le réplica secondaire » pour l’option SQL AlwaysOn. DPM effectue toujours une sauvegarde de la base de données secondaire. Si aucune base de données secondaire n’est trouvée, la sauvegarde échoue.
 
 ## <a name="before-you-start"></a>Avant de commencer
 
@@ -43,7 +75,7 @@ Pour protéger des bases de données SQL Server dans Azure, commencez par créer
 1. Sélectionnez **Serveurs**.
 
     ![Sélectionner le type de groupe de protection Serveurs](./media/backup-azure-backup-sql/pg-servers.png)
-1. Développez l'ordinateur SQL Server sur lequel se trouvent les bases de données que vous souhaitez sauvegarder. Vous accédez aux sources de données qui peuvent être sauvegardées à partir de ce serveur. Développez **Tous les partages SQL**, puis sélectionnez les bases de données que vous souhaitez sauvegarder. Dans cet exemple, nous sélectionnons ReportServer$MSDPM2012 et ReportServer$MSDPM2012TempDB. Sélectionnez ensuite **Suivant**.
+1. Développez la machine virtuelle SQL Server sur laquelle se trouvent les bases de données que vous souhaitez sauvegarder. Vous accédez aux sources de données qui peuvent être sauvegardées à partir de ce serveur. Développez **Tous les partages SQL**, puis sélectionnez les bases de données que vous souhaitez sauvegarder. Dans cet exemple, nous sélectionnons ReportServer$MSDPM2012 et ReportServer$MSDPM2012TempDB. Sélectionnez ensuite **Suivant**.
 
     ![Sélectionner une base de données SQL Server](./media/backup-azure-backup-sql/pg-databases.png)
 1. Nommez le groupe de protection, puis sélectionnez **Je souhaite une protection en ligne**.
@@ -80,7 +112,7 @@ Pour protéger des bases de données SQL Server dans Azure, commencez par créer
 
     ![Choisir quand exécuter une vérification de cohérence](./media/backup-azure-backup-sql/pg-consistent.png)
 
-    DPM peut exécuter une vérification de cohérence sur l’intégrité du point de sauvegarde. Il calcule la somme de contrôle du fichier de sauvegarde sur le serveur de production (ordinateur SQL Server dans cet exemple) et les données sauvegardées pour ce fichier sur DPM. Si la vérification détecte un conflit, le fichier sauvegardé dans DPM est supposé endommagé. DPM corrige les données sauvegardées en envoyant les blocs correspondant à l’incohérence de somme contrôle. La vérification de cohérence étant une opération exigeante en matière de performances, les administrateurs peuvent la planifier ou l’exécuter automatiquement.
+    DPM peut exécuter une vérification de cohérence sur l’intégrité du point de sauvegarde. Il calcule la somme de contrôle du fichier de sauvegarde sur le serveur de production (ordinateur SQL Server dans cet exemple) et les données sauvegardées pour ce fichier dans DPM. Si la vérification détecte un conflit, le fichier sauvegardé dans DPM est supposé endommagé. DPM corrige les données sauvegardées en envoyant les blocs correspondant à l’incohérence de somme contrôle. La vérification de cohérence étant une opération exigeante en matière de performances, les administrateurs peuvent la planifier ou l’exécuter automatiquement.
 
 1. Sélectionnez les sources de données à protéger dans Azure. Sélectionnez ensuite **Suivant**.
 

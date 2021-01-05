@@ -8,17 +8,17 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.reviewer: maghan
 manager: anandsub
 robots: noindex
-ms.openlocfilehash: 81ae5c3c702108d854e4dfde93001d5c99875666
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bd18a26a1c199e1ecc32cfc371d2931b1dee0c3f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74931579"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96494968"
 ---
 # <a name="troubleshoot-data-factory-issues"></a>Résolution des problèmes liés à Data Factory
 > [!NOTE]
@@ -29,7 +29,7 @@ Cet article propose des conseils pour la résolution des problèmes d'utilisatio
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 ## <a name="troubleshooting-tips"></a>Conseils de dépannage
-### <a name="error-the-subscription-is-not-registered-to-use-namespace-microsoftdatafactory"></a>Erreur : The subscription is not registered to use namespace ’Microsoft.DataFactory’ (L'abonnement n'est pas enregistré pour utiliser l'espace de noms « Microsoft.DataFactory »)
+### <a name="error-the-subscription-is-not-registered-to-use-namespace-microsoftdatafactory"></a>Erreur : L’abonnement n’est pas inscrit pour utiliser l’espace de noms « Microsoft.DataFactory »
 Si vous recevez cette erreur, cela signifie que le fournisseur de ressources Azure Data Factory n'a pas été enregistré sur votre ordinateur. Effectuez les actions suivantes :
 
 1. Lancez Azure PowerShell.
@@ -44,14 +44,14 @@ Si vous recevez cette erreur, cela signifie que le fournisseur de ressources Azu
     Register-AzResourceProvider -ProviderNamespace Microsoft.DataFactory
     ```
 
-### <a name="problem-unauthorized-error-when-running-a-data-factory-cmdlet"></a>Problème : erreur non autorisée lors de l’exécution d’une applet de commande Data Factory
+### <a name="problem-unauthorized-error-when-running-a-data-factory-cmdlet"></a>Problème : Erreur non autorisée lors de l’exécution d’une applet de commande Data Factory
 Vous n’utilisez probablement pas le compte ou l’abonnement Azure correct pour Azure PowerShell. Utilisez les applets de commande suivantes pour sélectionner le compte et l’abonnement Azure corrects à utiliser avec Azure PowerShell.
 
 1. Connect-AzAccount : utilisez l’ID d’utilisateur et le mot de passe corrects
 2. Get-AzSubscription : affichez tous les abonnements du compte.
 3. Select-AzSubscription &lt;nom de l’abonnement&gt; - Sélectionnez l’abonnement correct. Utilisez le même que celui que vous utilisez pour créer une fabrique de données sur le portail Azure.
 
-### <a name="problem-fail-to-launch-data-management-gateway-express-setup-from-azure-portal"></a>Problème : échec du lancement de l’installation rapide de la passerelle de gestion des données à partir du portail Azure
+### <a name="problem-fail-to-launch-data-management-gateway-express-setup-from-azure-portal"></a>Problème : Échec du lancement de l’installation rapide de la passerelle de gestion des données à partir du portail Azure
 L’installation rapide de la passerelle de gestion des données nécessite Internet Explorer ou un navigateur web compatible avec Microsoft ClickOnce. Si le programme d'installation rapide ne démarre pas, effectuez l'une des opérations suivantes :
 
 * Utilisez Internet Explorer ou un navigateur web compatible Microsoft ClickOnce.
@@ -61,13 +61,13 @@ L’installation rapide de la passerelle de gestion des données nécessite Inte
     Faites de même pour Firefox (installez un complément). Cliquez sur le bouton du menu dans la barre d’outils (trois lignes horizontales en haut à droite), cliquez sur Modules complémentaires, effectuez une recherche avec le mot-clé « ClickOnce », choisissez l’une des extensions de ClickOnce et installez le programme.
 * Utilisez le lien **Configuration manuelle** qui s’affiche dans le même panneau sur le portail. Cette approche vous permet de télécharger le fichier d’installation et de l’exécuter manuellement. Une fois l'installation effectuée, vous verrez s’afficher la boîte de dialogue Configuration de la passerelle de gestion des données. Copiez la **clé** sur l’écran du portail et utilisez-la dans le gestionnaire de configuration pour enregistrer manuellement la passerelle auprès du service.  
 
-### <a name="problem-fail-to-connect-to-on-premises-sql-server"></a>Problème : échec de la connexion à un serveur SQL local
+### <a name="problem-fail-to-connect-to-sql-server"></a>Problème : Échec de la connexion à SQL Server
 Lancez le **Gestionnaire de configuration de la passerelle de gestion des données** sur l’ordinateur passerelle et utilisez l’onglet **Résolution des problèmes** pour tester la connexion à SQL Server à partir de l’ordinateur passerelle. Consultez [Résolution des problèmes de passerelle](data-factory-data-management-gateway.md#troubleshooting-gateway-issues) pour obtenir des conseils sur la résolution des problèmes de connexion/passerelle.   
 
-### <a name="problem-input-slices-are-in-waiting-state-for-ever"></a>Problème : l’état des tranches d’entrée est En attente depuis longtemps
+### <a name="problem-input-slices-are-in-waiting-state-forever"></a>Problème : L’état des tranches d’entrée est En attente depuis longtemps
 Les tranches peuvent avoir l’état **En attente** pour diverses raisons. Une des raisons courantes est que la propriété **external** n’est pas définie sur **true**. Tout jeu de données généré en dehors de l’étendue d’Azure Data Factory doit être marqué avec la propriété **external** . Cette propriété indique que les données sont externes et qu’elles ne sont prises en charge par aucun pipeline dans la fabrique de données. Les tranches de données sont marquées comme prêtes ( **Ready** ) une fois que les données sont disponibles dans le magasin respectif.
 
-Consultez l’exemple suivant pour l’utilisation de la propriété **external** . Vous pouvez éventuellement spécifier **externalData*** quand vous affectez à la propriété external la valeur true.
+Consultez l’exemple suivant pour l’utilisation de la propriété **external** . Vous pouvez éventuellement spécifier **externalData** _ quand vous affectez à la propriété external la valeur true.
 
 Consultez l’article [Jeux de données](data-factory-create-datasets.md) pour plus d’informations sur cette propriété.
 
@@ -97,12 +97,12 @@ Consultez l’article [Jeux de données](data-factory-create-datasets.md) pour p
 }
 ```
 
-Pour résoudre l’erreur, ajoutez la propriété **external** et la section **externalData** facultative à la définition JSON de la table d’entrée, puis recréez la table.
+Pour résoudre l’erreur, ajoutez la propriété *external* et la section **externalData** facultative à la définition JSON de la table d’entrée, puis recréez la table.
 
-### <a name="problem-hybrid-copy-operation-fails"></a>Problème : échec de l’opération de copie hybride
+### <a name="problem-hybrid-copy-operation-fails"></a>Problème : Échec de l’opération de copie hybride
 Consultez la page [Résolution des problèmes de passerelle](data-factory-data-management-gateway.md#troubleshooting-gateway-issues) pour savoir comment résoudre les problèmes de copie depuis/vers un magasin de données local avec la passerelle de gestion des données.
 
-### <a name="problem-on-demand-hdinsight-provisioning-fails"></a>Problème : échec de l’approvisionnement HDInsight à la demande
+### <a name="problem-on-demand-hdinsight-provisioning-fails"></a>Problème : Échec du provisionnement HDInsight à la demande
 Lorsque vous utilisez un service lié de type HDInsightOnDemand, vous devez spécifier un linkedServiceName qui pointe vers un stockage d’objets blob Azure. Le service Data Factory utilise ce stockage pour stocker les journaux d’activité et les fichiers d’accompagnement pour votre cluster HDInsight à la demande.  Parfois, l’approvisionnement d'un cluster HDInsight à la demande échoue avec l'erreur suivante :
 
 ```
@@ -113,7 +113,7 @@ Cette erreur indique généralement que l’emplacement du compte de stockage sp
 
 En outre, il existe une seconde propriété JSON additionalLinkedServiceNames avec laquelle les comptes de stockage supplémentaires peuvent être spécifiés dans HDInsight à la demande. Ces comptes de stockage supplémentaires liés doivent avoir le même emplacement que le cluster HDInsight, ou l’approvisionnement échoue avec la même erreur.
 
-### <a name="problem-custom-net-activity-fails"></a>Problème : échec de l’activité .NET personnalisée
+### <a name="problem-custom-net-activity-fails"></a>Problème : Échec de l’activité .NET personnalisée
 Consultez la page [Déboguer un pipeline avec une activité personnalisée](data-factory-use-custom-activities.md#troubleshoot-failures) pour obtenir des instructions détaillées.
 
 ## <a name="use-azure-portal-to-troubleshoot"></a>Utilisation du portail Azure pour résoudre les problèmes
@@ -130,9 +130,9 @@ Consultez la page [Surveiller les pipelines Data Factory à l’aide d’Azure P
 [adfgetstarted]: data-factory-copy-data-from-azure-blob-storage-to-sql-database.md
 [use-custom-activities]: data-factory-use-custom-activities.md
 [troubleshoot]: data-factory-troubleshoot.md
-[developer-reference]: https://go.microsoft.com/fwlink/?LinkId=516908
+[developer-reference]: /previous-versions/azure/dn834987(v=azure.100)
 [cmdlet-reference]: https://go.microsoft.com/fwlink/?LinkId=517456
-[json-scripting-reference]: https://go.microsoft.com/fwlink/?LinkId=516971
+[json-scripting-reference]: /previous-versions/azure/dn835050(v=azure.100)
 
 [azure-portal]: https://portal.azure.com/
 

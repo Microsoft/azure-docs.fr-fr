@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/29/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 7df283b12a0d04d2b785c13a2f12b03115581e79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa0b3a05fb26f6be951b697145d7b22e03b7792d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76841710"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171616"
 ---
 # <a name="delivery-and-retry"></a>Livraison et nouvelle tentative
 

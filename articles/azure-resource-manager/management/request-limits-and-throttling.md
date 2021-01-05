@@ -2,14 +2,14 @@
 title: Limites des demandes et limitation
 description: Décrit comment utiliser la limitation avec des requêtes Azure Resource Manager lorsque les limites d’abonnement ont été atteintes.
 ms.topic: conceptual
-ms.date: 03/24/2020
+ms.date: 12/15/2020
 ms.custom: seodec18
-ms.openlocfilehash: 4d387749261747eb9ea1ea26629ade4fe8729856
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 181ed1a3059d86f78e40a9949448af77a551efbc
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80239359"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97563124"
 ---
 # <a name="throttling-resource-manager-requests"></a>Limitation des requêtes de Resource Manager
 
@@ -66,6 +66,13 @@ Pour vérifier les instances de machine virtuelle dans un groupe de machines vir
 
 [Azure Resource Graph](../../governance/resource-graph/overview.md) limite le nombre de demandes à ses opérations. Les étapes décrites dans cet article pour déterminer les requêtes restantes et comment réagir si la limite est atteinte s’appliquent également à Resource Graph. Toutefois, Resource Graph définit ses propres limites et son propre taux de réinitialisation. Pour plus d’informations, voir [En-têtes de limitation de Resource Graph](../../governance/resource-graph/concepts/guidance-for-throttled-requests.md#understand-throttling-headers).
 
+### <a name="other-resource-providers"></a>Autres fournisseurs de ressources
+
+Pour plus d’informations sur la limitation dans d’autres fournisseurs de ressources, consultez :
+
+* [Aide sur la limitation de requêtes Azure Key Vault](../../key-vault/general/overview-throttling.md)
+* [Résolution des problèmes liés à AKS](../../aks/troubleshooting.md#im-receiving-429---too-many-requests-errors)
+
 ## <a name="error-code"></a>Code d'erreur
 
 Lorsque vous atteignez la limite, vous recevez le code d’état HTTP **429 Trop de requêtes**. La réponse inclut la valeur **Retry-After** qui spécifie le nombre de secondes pendant lesquelles votre application doit attendre (ou rester en veille) avant d’envoyer la requête suivante. Si vous envoyez une requête avant l’écoulement du temps d’attente avant une nouvelle tentative, votre requête n’est pas traitée et une autre valeur de nouvelle tentative est renvoyée.
@@ -97,7 +104,7 @@ Le fournisseur de ressources peut également retourner des en-têtes de réponse
 
 La récupération de ces valeurs d’en-tête dans votre code ou script est similaire à la récupération de n’importe quelle valeur d’en-tête. 
 
-Par exemple, en **C#** , vous récupérez la valeur d’en-tête d’un objet **HttpWebResponse** nommé **response** avec le code suivant :
+Par exemple, en **C#**, vous récupérez la valeur d’en-tête d’un objet **HttpWebResponse** nommé **response** avec le code suivant :
 
 ```cs
 response.Headers.GetValues("x-ms-ratelimit-remaining-subscription-reads").GetValue(0)

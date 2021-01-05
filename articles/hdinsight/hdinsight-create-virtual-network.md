@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 04/16/2020
-ms.openlocfilehash: 0c7791d43ffbbc13ab151362c5c3026ebbdb0d34
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4f604ba2edcc63a245a5e87d3dcb6fdd16a9d050
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81531014"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92741437"
 ---
 # <a name="create-virtual-networks-for-azure-hdinsight-clusters"></a>Créer des réseaux virtuels pour les clusters Azure HDInsight
 
@@ -27,8 +27,8 @@ Avant d’exécuter l’un des exemples de code de cet article, assurez-vous de 
 
 Les autres conditions préalables pour les exemples de cet article sont les suivantes :
 
-* Si vous utilisez PowerShell, vous avez besoin d’installer le [module AZ](https://docs.microsoft.com/powershell/azure/overview).
-* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+* Si vous utilisez PowerShell, vous avez besoin d’installer le [module AZ](/powershell/azure/).
+* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 > [!IMPORTANT]  
 > Si vous recherchez des instructions pas à pas pour connecter HDInsight à votre réseau local en utilisant un réseau virtuel Azure, consultez le document [Connecter HDInsight à votre réseau local](connect-on-premises-network.md).
@@ -50,7 +50,7 @@ Utilisez le script PowerShell suivant pour créer un réseau virtuel qui restrei
 > [!IMPORTANT]  
 > Modifiez les adresses IP utilisées pour `hdirule1` et `hdirule2` dans cet exemple afin de les faire correspondre à la région Azure que vous utilisez. Vous pouvez trouver ces informations dans les [adresses IP de gestion HDInsight](hdinsight-management-ip-addresses.md).
 
-```powershell
+```azurepowershell
 $vnetName = "Replace with your virtual network name"
 $resourceGroupName = "Replace with the resource group the virtual network is in"
 $subnetName = "Replace with the name of the subnet that you plan to use for HDInsight"
@@ -153,7 +153,7 @@ $vnet | Set-AzVirtualNetwork
 
 Cet exemple montre comment ajouter des règles pour autoriser le trafic entrant sur les adresses IP requises. Il ne contient pas de règle pour restreindre l’accès entrant à partir d’autres sources. Le code suivant montre comment activer l’accès SSH depuis Internet :
 
-```powershell
+```azurepowershell
 Get-AzNetworkSecurityGroup -Name hdisecure -ResourceGroupName RESOURCEGROUP |
 Add-AzNetworkSecurityRuleConfig -Name "SSH" -Description "SSH" -Protocol "*" -SourcePortRange "*" -DestinationPortRange "22" -SourceAddressPrefix "*" -DestinationAddressPrefix "VirtualNetwork" -Access Allow -Priority 306 -Direction Inbound
 ```
@@ -192,7 +192,9 @@ Suivez les étapes suivantes pour créer un réseau virtuel qui restreint le tra
 
     Cette commande retourne une valeur semblable au texte suivant :
 
-        "/subscriptions/SUBSCRIPTIONID/resourceGroups/RESOURCEGROUP/providers/Microsoft.Network/networkSecurityGroups/hdisecure"
+    ```output
+    "/subscriptions/SUBSCRIPTIONID/resourceGroups/RESOURCEGROUP/providers/Microsoft.Network/networkSecurityGroups/hdisecure"
+    ```
 
 4. Pour appliquer un groupe de sécurité réseau à un sous-réseau, utilisez la commande suivante. Remplacez les valeurs `GUID` et `RESOURCEGROUP` par celles renvoyées à l’étape précédente. Remplacez `VNETNAME` et `SUBNETNAME` par le nom de réseau virtuel et le nom de sous-réseau que vous souhaitez créer.
 
@@ -228,7 +230,7 @@ Sur le serveur DNS personnalisé dans le réseau virtuel :
 
     Remplacez `RESOURCEGROUP` par le nom du groupe de ressources qui contient le réseau virtuel, puis entrez la commande :
 
-    ```powershell
+    ```azurepowershell
     $NICs = Get-AzNetworkInterface -ResourceGroupName "RESOURCEGROUP"
     $NICs[0].DnsSettings.InternalDomainNameSuffix
     ```
@@ -310,7 +312,7 @@ Cet exemple repose sur les hypothèses suivantes :
 
     Remplacez `RESOURCEGROUP` par le nom du groupe de ressources qui contient le réseau virtuel, puis entrez la commande :
 
-    ```powershell
+    ```azurepowershell
     $NICs = Get-AzNetworkInterface -ResourceGroupName "RESOURCEGROUP"
     $NICs[0].DnsSettings.InternalDomainNameSuffix
     ```
@@ -329,7 +331,7 @@ Cet exemple repose sur les hypothèses suivantes :
     };
     ```
 
-    Remplacez la valeur `0owcbllr5hze3hxdja3mqlrhhe.ex.internal.cloudapp.net` par le suffixe DNS de l’__autre__ réseau virtuel. Cette entrée a pour effet de router les demandes du suffixe DNS du réseau distant vers le DNS personnalisé dans ce réseau.
+    Remplacez la valeur `0owcbllr5hze3hxdja3mqlrhhe.ex.internal.cloudapp.net` par le suffixe DNS de l’ __autre__ réseau virtuel. Cette entrée a pour effet de router les demandes du suffixe DNS du réseau distant vers le DNS personnalisé dans ce réseau.
 
 3. Sur les serveurs DNS personnalisés dans les deux réseaux virtuels, utilisez le texte suivant en tant que contenu du fichier `/etc/bind/named.conf.options`:
 
@@ -375,6 +377,6 @@ Après avoir suivi ces étapes, vous pouvez vous connecter aux ressources du ré
 * Pour configurer la géoréplication Apache HBase, consultez [Configurer la réplication de cluster Apache HBase dans les réseaux virtuels Azure](hbase/apache-hbase-replication.md).
 * Pour plus d’informations sur les réseaux virtuels Azure, voir [Vue d'ensemble de Réseau virtuel Azure](../virtual-network/virtual-networks-overview.md).
 
-* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/security-overview.md).
+* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).
 
 * Pour plus d’informations sur les routages par l’utilisateur, consultez [Routage définis par l’utilisateur et transfert IP](../virtual-network/virtual-networks-udr-overview.md).

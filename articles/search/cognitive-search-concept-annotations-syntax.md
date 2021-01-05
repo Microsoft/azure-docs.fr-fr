@@ -8,12 +8,12 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: e27f61239c0631fb248217777a311b13ee48a3f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 03431d861ca6d469b894e45c36fe2a3d7904c3a2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113871"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935532"
 ---
 # <a name="how-to-reference-annotations-in-an-azure-cognitive-search-skillset"></a>Comment référencer des annotations dans un jeu de compétences Recherche cognitive Azure
 
@@ -123,5 +123,5 @@ Notez que la cardinalité de `"/document/people/*/lastname"` est supérieure à 
 ## <a name="see-also"></a>Voir aussi
 + [Comment intégrer une compétence personnalisée dans un pipeline d’enrichissement](cognitive-search-custom-skill-interface.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un jeu de compétences (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
++ [Créer un jeu de compétences (REST)](/rest/api/searchservice/create-skillset)
 + [Guide pratique pour mapper des champs enrichis à un index](cognitive-search-output-field-mapping.md)

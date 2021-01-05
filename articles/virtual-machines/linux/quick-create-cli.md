@@ -13,12 +13,13 @@ ms.custom:
 - seo-javascript-september2019
 - seo-javascript-october2019
 - seo-python-october2019
-ms.openlocfilehash: 103d4d2aec701dd7754d2a8e0046edf7eeab9a4c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+- devx-track-azurecli
+ms.openlocfilehash: 78ecd052c071835ef488882979a3bc5306c35365
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81759271"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87488974"
 ---
 # <a name="quickstart-create-a-linux-virtual-machine-with-the-azure-cli"></a>Démarrage rapide : Créer une machine virtuelle Linux avec Azure CLI
 

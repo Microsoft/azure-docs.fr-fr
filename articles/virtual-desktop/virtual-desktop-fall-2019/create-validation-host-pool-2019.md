@@ -1,28 +1,26 @@
 ---
-title: Mises à jour du service de pool d'hôtes Windows Virtual Desktop - Azure
-description: Comment créer un pool d’hôtes de validation pour surveiller les mises à jour de service avant de déployer les mises à jour en production.
-services: virtual-desktop
+title: Mises à jour du service de pool d’hôtes Windows Virtual Desktop (classique) - Azure
+description: Apprenez à créer un pool d’hôtes de validation dans Windows Virtual Desktop (classique) pour superviser les mises à jour de service avant de déployer les mises à jour en production.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: tutorial
-ms.date: 03/30/2020
+ms.date: 05/27/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 21c3e3c7ae515f5a740384d202451f61291bc05b
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 291f1e8b8870257c233dc32894ff49b26c0a3501
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613845"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91323527"
 ---
-# <a name="tutorial-create-a-host-pool-to-validate-service-updates"></a>Tutoriel : Créer un pool d’hôtes pour valider les mises à jour de service
+# <a name="tutorial-create-a-host-pool-to-validate-service-updates-in-windows-virtual-desktop-classic"></a>Tutoriel : Créer un pool d’hôtes pour valider les mises à jour du service dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../create-validation-host-pool.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer les objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../create-validation-host-pool.md).
 
-Les pools d'hôtes sont des ensembles d'une ou de plusieurs machines virtuelles identiques dans des environnements de locataires Windows Virtual Desktop. Avant de déployer des pools d’hôtes dans votre environnement de production, nous vous recommandons vivement de créer un pool d’hôtes de validation. Les mises à jour sont d'abord appliquées aux pools d’hôtes de validation, ce qui vous permet de surveiller les mises à jour de service avant de les déployer dans votre environnement de production. Sans pool d’hôtes de validation, vous risquez de ne pas détecter les modifications qui introduisent des erreurs, ce qui peut entraîner des temps d’arrêt pour les utilisateurs de votre environnement de production.
+Les pools d'hôtes sont des ensembles d'une ou de plusieurs machines virtuelles identiques dans des environnements de locataires Windows Virtual Desktop. Nous vous recommandons de créer un pool d’hôtes de validation dans lequel les mises à jour de service seront appliquées en premier. Cela vous permet de superviser les mises à jour de service avant que le service ne les applique à votre environnement standard ou non validé. Sans pool d’hôtes de validation, vous risquez de ne pas détecter les modifications qui introduisent des erreurs, ce qui peut entraîner des temps d’arrêt pour les utilisateurs de votre environnement de production.
 
-Pour veiller à ce que vos applications fonctionnent avec les dernières mises à jour, le pool d’hôtes de validation doit également être aussi semblable que possible aux pools d’hôtes de votre environnement de production. Les utilisateurs sont invités à se connecter aussi fréquemment au pool d’hôtes de validation qu'au pool d’hôtes de production. Si vous disposez de tests automatisés sur votre pool d’hôtes, vous devez inclure ces tests au pool d’hôtes de validation.
+Pour veiller à ce que vos applications fonctionnent avec les dernières mises à jour, le pool d’hôtes de validation doit également être aussi semblable que possible aux pools d’hôtes de votre environnement non validé. Les utilisateurs sont invités à se connecter aussi fréquemment au pool d’hôtes de validation qu’au pool d’hôtes standard. Si vous disposez de tests automatisés sur votre pool d’hôtes, vous devez inclure ces tests au pool d’hôtes de validation.
 
 Vous pouvez déboguer les problèmes dans le pool d’hôtes de validation à l'aide de [la fonctionnalité de diagnostic](diagnostics-role-service-2019.md) ou des [articles de résolution des problèmes Windows Virtual Desktop](troubleshoot-set-up-overview-2019.md).
 
@@ -60,12 +58,12 @@ Get-RdsHostPool -TenantName $myTenantName -Name "contosoHostPool"
 Les résultats de la cmdlet doivent se présenter comme suit :
 
 ```
-    TenantName          : contoso 
+    TenantName          : contoso
     TenantGroupName     : Default Tenant Group
     HostPoolName        : contosoHostPool
     FriendlyName        :
     Description         :
-    Persistent          : False 
+    Persistent          : False
     CustomRdpProperty    : use multimon:i:0;
     MaxSessionLimit     : 10
     LoadBalancerType    : BreadthFirst
@@ -79,7 +77,7 @@ Les mises à jour de service sont mensuelles. S’il existe des problèmes majeu
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Un pool d’hôtes de validation étant créé, vous pouvez apprendre à utiliser Azure Service Health pour superviser votre déploiement de Windows Virtual Desktop. 
+Un pool d’hôtes de validation étant créé, vous pouvez apprendre à utiliser Azure Service Health pour superviser votre déploiement de Windows Virtual Desktop.
 
 > [!div class="nextstepaction"]
-> [Configurer des alertes de service](../set-up-service-alerts.md)
+> [Configurer des alertes de service](set-up-service-alerts-2019.md)

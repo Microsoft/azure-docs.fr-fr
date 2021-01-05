@@ -5,16 +5,17 @@ author: tonguyen
 ms.reviewer: mumami
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: common
 ms.topic: reference
 ms.date: 02/12/2020
 ms.author: banders
 ms.custom: seodec18
-ms.openlocfilehash: 7a9762d36d2c9ae6ede6718a31cae99afa230ef6
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b3ae2b8323c9f278dcec432dfaac05e9fcfb4b49
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79237630"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132106"
 ---
 # <a name="use-azure-billing-apis-to-programmatically-get-insight-into-your-azure-usage"></a>Utilisez les API de facturation Azure pour obtenir par programme des informations sur votre utilisation d’Azure
 Utilisez les API de facturation Azure pour extraire les données d’utilisation et de ressources dans vos outils d’analyse de données préférés. Les API d’utilisation des ressources Azure et RateCard peuvent vous aider à prévoir vos coûts avec précision et à les gérer. Les API sont implémentées en tant que fournisseur de ressources et font partie intégrante de la famille d’API exposées par Azure Resource Manager.  
@@ -22,7 +23,7 @@ Utilisez les API de facturation Azure pour extraire les données d’utilisation
 ## <a name="azure-invoice-download-api-preview"></a>API Azure Invoice Download (version préliminaire)
 Une fois l’[adhésion terminée](manage-billing-access.md#opt-in), téléchargez des factures à l’aide de la version préliminaire de l’[API Invoice](/rest/api/billing). Cette API offre les fonctionnalités suivantes :
 
-* **Contrôle d’accès en fonction du rôle Azure** : configurez les stratégies d’accès dans le [portail Azure](https://portal.azure.com) ou par le biais des [applets de commande Azure PowerShell](/powershell/azure/overview) pour spécifier les utilisateurs ou les applications qui peuvent accéder aux données d’utilisation de l’abonnement. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur de facture, Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure spécifique.
+* **Contrôle d’accès en fonction du rôle Azure (RBAC Azure)**  : configurez des stratégies d’accès sur le [portail Azure](https://portal.azure.com) ou via des [cmdlets Azure PowerShell](/powershell/azure/) pour spécifier les utilisateurs ou applications pouvant accéder aux données d’utilisation de l’abonnement. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur de facture, Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure spécifique.
 * **Filtrage par date** : utilisez le paramètre `$filter` pour obtenir toutes les factures par ordre chronologique inverse à partir de la date de fin de la période de facturation.
 
 > [!NOTE]
@@ -31,17 +32,17 @@ Une fois l’[adhésion terminée](manage-billing-access.md#opt-in), télécharg
 ## <a name="azure-resource-usage-api-preview"></a>API Azure Resource Usage (version préliminaire)
 Utiliser l’[API Azure Resource Usage](/previous-versions/azure/reference/mt219003(v=azure.100)) pour obtenir une estimation de vos données de consommation Azure. L’API comprend :
 
-* **Contrôle d’accès en fonction du rôle Azure** : configurez les stratégies d’accès dans le [portail Azure](https://portal.azure.com) ou par le biais des [applets de commande Azure PowerShell](/powershell/azure/overview) pour spécifier les utilisateurs ou les applications qui peuvent accéder aux données d’utilisation de l’abonnement. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur de facture, Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure spécifique.
+* **Contrôle d’accès en fonction du rôle Azure (RBAC Azure)**  : configurez des stratégies d’accès sur le [portail Azure](https://portal.azure.com) ou via des [cmdlets Azure PowerShell](/powershell/azure/) pour spécifier les utilisateurs ou applications pouvant accéder aux données d’utilisation de l’abonnement. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur de facture, Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure spécifique.
 * **Agrégations horaires ou quotidiennes** : les appelants peuvent indiquer s’ils souhaitent visualiser leurs données d’utilisation Azure par intervalles de temps horaires ou quotidiens. Par défaut, les données sont présentées par jour.
 * **Métadonnées d’instance (balises de ressource incluses)**  : obtenez des détails de niveau instance, comme l’URI de ressource complet (/subscriptions/{subscription-id}/..) et des informations de groupe de ressources et les balises de ressource. Les métadonnées vous aideront à allouer de façon déterministe et par programme l’utilisation par les balises, pour les cas d’utilisation comme la facturation interne.
 * **Métadonnées sur les ressources** : des détails sur les ressources, comme le nom du compteur, la catégorie du compteur, la sous-catégorie du compteur, l’unité et la région offrent à l’appelant une meilleure compréhension des ressources consommées. Nous nous efforçons également d’aligner la terminologie des métadonnées de ressource dans l’ensemble du portail Azure, des fichiers CSV sur l’utilisation d’Azure et sur la facturation Contrat Entreprise (EA), ainsi que dans toutes les autres expériences destinées au public, afin de vous permettre de mettre en corrélation les données des différentes expériences.
-* **Utilisation pour différents types d’offre** : les données d’utilisation sont accessibles pour tous les types d’offre, tels que Paiement à l’utilisation, MSDN, Engagement monétaire, Crédit monétaire et Contrat Entreprise (EA), excepté [CSP](https://docs.microsoft.com/partner-center).
+* **Utilisation pour différents types d’offre** : les données d’utilisation sont accessibles pour tous les types d’offre, tels que Paiement à l’utilisation, MSDN, Engagement monétaire, Crédit monétaire et Contrat Entreprise (EA), excepté [CSP](/partner-center).
 
 ## <a name="azure-resource-ratecard-api-preview"></a>API Azure Resource RateCard (version préliminaire)
 Utilisez l’[API Azure Resource RateCard](/previous-versions/azure/reference/mt219005(v=azure.100)) pour obtenir la liste des ressources Azure disponibles et une estimation des informations de prix pour chacune de ces ressources. L’API comprend :
 
-* **Contrôle d’accès en fonction du rôle Azure** : configurez vos stratégies d’accès dans le [portail Azure](https://portal.azure.com) ou par le biais des [applets de commande Azure PowerShell](/powershell/azure/overview) pour spécifier les utilisateurs ou les applications qui peuvent accéder aux données d’utilisation de RateCard. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure particulier.
-* **Prise en charge des offres Paiement à l’utilisation, MSDN, Engagement monétaire et Crédit monétaire (offre EA et [CSP](https://docs.microsoft.com/partner-center) non prises en charge)**  : cette API fournit des informations de tarif au niveau des offres Azure.  L’appelant de cette API doit transmettre les informations d’offre pour obtenir les détails et les tarifs des ressources. Nous sommes actuellement pas en mesure de fournir les tarifs EA, car les offres EA présentent des tarifs par inscription personnalisés.
+* **Contrôle d’accès en fonction du rôle Azure (RBAC Azure)**  : configurez vos stratégies d’accès sur le [portail Azure](https://portal.azure.com) ou via des [cmdlets Azure PowerShell](/powershell/azure/) pour spécifier les utilisateurs ou les applications qui peuvent accéder aux données de RateCard. Les appelants doivent utiliser les jetons Azure Active Directory standard pour l’authentification. Ajoutez l’appelant au rôle Lecteur, Propriétaire ou Collaborateur pour être en mesure d’accéder aux données d’utilisation relatives à un abonnement Azure particulier.
+* **Prise en charge des offres Paiement à l’utilisation, MSDN, Engagement monétaire et Crédit monétaire (offre EA et [CSP](/partner-center) non prises en charge)**  : cette API fournit des informations de tarif au niveau des offres Azure.  L’appelant de cette API doit transmettre les informations d’offre pour obtenir les détails et les tarifs des ressources. Nous sommes actuellement pas en mesure de fournir les tarifs EA, car les offres EA présentent des tarifs par inscription personnalisés.
 
 ## <a name="scenarios"></a>Scénarios
 Voici quelques-uns des scénarios autorisés par l’utilisation combinée des API Usage et RateCard :

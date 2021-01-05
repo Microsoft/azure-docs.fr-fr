@@ -2,21 +2,21 @@
 title: Planifier une application RH cloud pour l’approvisionnement d’utilisateurs Azure Active Directory
 description: Cet article décrit le processus de déploiement de l’intégration des systèmes RH cloud, tels que Workday et SucessFactors avec Azure Active Directory. L’intégration d’Azure AD à votre système RH cloud permet d’obtenir un système complet de gestion du cycle de vie des identités.
 services: active-directory
-author: martincoetzer
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 11/22/2019
-ms.author: martinco
+ms.author: kenwith
 ms.reviewer: arvindha, celested
-ms.openlocfilehash: 86b858b628dc2ed9eac730d4c3f090f4d7d6c7e2
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 64418a727ecb9a300912a4766a9ea2066328ad31
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593299"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96174898"
 ---
 # <a name="plan-cloud-hr-application-to-azure-active-directory-user-provisioning"></a>Planifier une application RH cloud pour l’approvisionnement d’utilisateurs Azure Active Directory
 
@@ -31,7 +31,7 @@ Azure AD utilise cette intégration pour activer les workflows suivants d’appl
 - **Mise à jour de l’application RH cloud** : mettez à jour les adresses e-mail et les attributs de nom d’utilisateur à partir d’Azure AD sur l’application RH cloud.
 
 > [!NOTE]
-> Ce plan de déploiement vous indique comment déployer vos workflows d’application RH cloud à l’aide de l’approvisionnement d’utilisateurs Azure AD. Pour plus d’informations sur la façon de déployer l’approvisionnement automatique d’utilisateurs vers des applications SaaS (Software-as-a-Service), consultez [Planifier un déploiement de l’approvisionnement automatique d’utilisateurs](https://aka.ms/deploymentplans/provisioning).
+> Ce plan de déploiement vous indique comment déployer vos workflows d’application RH cloud à l’aide de l’approvisionnement d’utilisateurs Azure AD. Pour plus d’informations sur la façon de déployer l’approvisionnement automatique d’utilisateurs vers des applications SaaS (Software-as-a-Service), consultez [Planifier un déploiement de l’approvisionnement automatique d’utilisateurs](./plan-auto-user-provisioning.md).
 
 ## <a name="enabled-hr-scenarios"></a>Scénarios RH activés
 
@@ -50,7 +50,7 @@ L’intégration de l’application RH cloud avec l’approvisionnement d’util
 - nécessitent un approvisionnement d’utilisateurs direct de l’application RH cloud vers Active Directory ou Azure AD ;
 - exigent que les utilisateurs soient approvisionnés à l’aide des données obtenues à partir de l’application RH cloud ;
 - ont besoin de joindre, de déplacer et de laisser les utilisateurs à synchroniser avec une ou plusieurs unités d’organisation, domaines et forêts Active Directory seulement sur la base d’informations de modifications détectées dans l’application RH cloud ;
-- utilisent Office 365 pour les e-mails.
+- Utilisez Microsoft 365 pour la messagerie électronique.
 
 ## <a name="learn"></a>Découvrir
 
@@ -61,14 +61,14 @@ L’approvisionnement des utilisateurs crée une base pour la gouvernance contin
 Cet article utilise les termes suivants :
 
 - **Système source** : référentiel d’utilisateurs à partir duquel Azure AD approvisionne. C’est le cas, par exemple, d’une application RH cloud telle que Workday ou SuccessFactors.
-- **Système cible** : référentiel d’utilisateurs vers lequel Azure AD approvisionne. Active Directory, Azure AD, Office 365 ou d’autres applications SaaS en sont des exemples.
+- **Système cible** : référentiel d’utilisateurs vers lequel Azure AD approvisionne. Active Directory, Azure AD, Microsoft 365 ou d’autres applications SaaS en sont des exemples.
 - **Processus entrants-changements de poste-sortants :** terme utilisé pour les nouvelles embauches, les transferts et les licenciements avec une application RH cloud comme système d’enregistrement. Le processus se termine lorsque le service approvisionne correctement les attributs nécessaires sur le système cible.
 
 ### <a name="key-benefits"></a>Principaux avantages
 
 Cette fonctionnalité d’approvisionnement informatique axé sur les ressources humaines offre les avantages significatifs suivants pour l’entreprise :
 
-- **Augmenter la productivité :** vous pouvez désormais automatiser l’attribution de comptes d’utilisateur et de licences Office 365 et fournir un accès aux groupes de clés. L’automatisation des attributions offre aux nouveaux employés un accès immédiat à leurs outils de travail et augmente la productivité.
+- **Augmenter la productivité :** vous pouvez désormais automatiser l’attribution de comptes d’utilisateur et de licences Microsoft 365 et fournir un accès aux groupes de clés. L’automatisation des attributions offre aux nouveaux employés un accès immédiat à leurs outils de travail et augmente la productivité.
 - **Gérer le risque :** vous pouvez augmenter la sécurité en automatisant les changements, en fonction du statut des employés ou des appartenances aux groupes grâce aux données transmises à partir de l’application RH cloud. L’automatisation des modifications permet de s’assurer que les identités des utilisateurs et l’accès aux applications clés sont automatiquement mis à jour lorsque les utilisateurs sont transférés ou quittent l’organisation.
 - **Conformité et gouvernance des adresses :** Azure AD prend en charge les journaux d’audit natifs pour les demandes d’approvisionnement d’utilisateurs effectuées par les applications des systèmes source et cible. Lors d’audit, vous pouvez effectuer le suivi des personnes qui ont accès aux applications à partir d’un seul écran.
 - **Gérer les coûts :** l’approvisionnement automatique réduit les coûts tout en évitant l’inefficacité et les erreurs humaines qui sont inhérents à l’approvisionnement manuel. Cela réduit le besoin de solutions d’approvisionnement d’utilisateurs personnalisées créées au fil du temps à l’aide de plateformes héritées et obsolètes.
@@ -81,17 +81,18 @@ Vous avez également besoin d’une licence valide à un abonnement Azure AD Pre
 
 ### <a name="prerequisites"></a>Prérequis
 
-- Accès administrateur général Azure AD pour configurer l’agent d’approvisionnement Azure AD Connect.
+- [Administrateur d’identités hybrides](../roles/permissions-reference.md#hybrid-identity-administrator) Azure AD pour configurer l’agent d’approvisionnement Azure AD Connect.
+- Rôle d’[administrateur d’application](../roles/permissions-reference.md#application-administrator) Azure AD pour configurer l’application d’approvisionnement dans le portail Azure.
 - Une instance de test et de production de l’application RH cloud.
 - Autorisations d’administrateur dans l’application RH cloud pour créer un utilisateur de l’intégration système et apporter des modifications afin de tester les informations de l’employé.
-- Pour l’approvisionnement d’utilisateurs vers Active Directory, un serveur exécutant Windows Server 2012 ou version ultérieure et doté d’un runtime .NET 4.7.1+ est nécessaire afin d’héberger l’[agent d’approvisionnement Azure AD Connect](https://go.microsoft.com/fwlink/?linkid=847801).
+- Pour l’approvisionnement d’utilisateurs vers Active Directory, un serveur exécutant Windows Server 2012 ou version ultérieure et doté d’un runtime .NET 4.7.1+ est nécessaire afin d’héberger l’agent d’approvisionnement Azure AD Connect.
 - [Azure AD Connect](../hybrid/whatis-azure-ad-connect.md) pour la synchronisation des utilisateurs entre Active Directory et Azure AD.
 
 ### <a name="training-resources"></a>Ressources de formation
 
 | **Ressources** | **Lien et description** |
 |:-|:-|
-| Videos | [Présentation de l’attribution d’utilisateurs dans Azure Active Directory](https://youtu.be/_ZjARPpI6NI) |
+| Vidéos | [Présentation de l’attribution d’utilisateurs dans Azure Active Directory](https://youtu.be/_ZjARPpI6NI) |
 | | [Comment déployer l’approvisionnement d’utilisateurs dans Azure Active Directory](https://youtu.be/pKzyts6kfrw) |
 | Tutoriels | [Liste de tutoriels sur l’intégration d’applications SaaS à Azure AD](../saas-apps/tutorial-list.md) |
 | | [Tutoriel : Configurer Workday pour le provisionnement automatique d’utilisateurs](../saas-apps/workday-inbound-tutorial.md#frequently-asked-questions-faq) |
@@ -109,7 +110,7 @@ L’exemple suivant décrit l’architecture de la solution d’approvisionnemen
 
 #### <a name="description-of-workflow"></a>Description du workflow
 
-Les étapes de clé suivantes sont indiquées dans le diagramme :  
+Les étapes de clé suivantes sont indiquées dans le diagramme :  
 
 1. **L’équipe RH** effectue les transactions dans le locataire de l’application RH cloud.
 2. **Le service d’approvisionnement Azure AD** exécute les cycles planifiés à partir du locataire de l’application RH cloud et identifie les modifications qui doivent être traitées pour la synchronisation avec Active Directory.
@@ -125,7 +126,7 @@ Tenez compte des besoins de votre organisation lorsque vous déterminez la strat
 
 ### <a name="engage-the-right-stakeholders"></a>Impliquer les parties prenantes appropriées
 
-Lorsque des projets technologiques échouent, cela est généralement dû à des attentes qui ne correspondent pas à l’impact, aux résultats et aux responsabilités réels. Pour éviter un tel cas de figure, [veillez à faire appel aux bonnes personnes](https://aka.ms/deploymentplans). Assurez-vous également que les rôles des parties prenantes dans le projet sont bien compris. Documentez les parties prenantes et leurs informations et responsabilités de projet.
+Lorsque des projets technologiques échouent, cela est généralement dû à des attentes qui ne correspondent pas à l’impact, aux résultats et aux responsabilités réels. Pour éviter un tel cas de figure, [veillez à faire appel aux bonnes personnes](../fundamentals/active-directory-deployment-plans.md). Assurez-vous également que les rôles des parties prenantes dans le projet sont bien compris. Documentez les parties prenantes et leurs informations et responsabilités de projet.
 
 Incluez un représentant de l’organisation RH qui peut fournir des informations sur les processus opérationnels RH existants et les exigences en matière de traitement des données relatives à l’identité du travailleur et à ses tâches.
 
@@ -166,7 +167,7 @@ L’intégration de l’approvisionnement entre l’application RH cloud et Acti
 - Agent d’approvisionnement Azure AD Connect
 - Domaine Active Directory
 
-La topologie de déploiement de l’agent d’approvisionnement Azure AD Connect dépend du nombre de locataires de l’application RH cloud et des sous-domaines Active Directory que vous prévoyez d’intégrer. Si vous avez plusieurs domaines Active Directory, cela dépend si les domaines Active Directory sont contigus ou [disjoint](https://docs.microsoft.com/windows-server/identity/ad-ds/plan/disjoint-namespace).
+La topologie de déploiement de l’agent d’approvisionnement Azure AD Connect dépend du nombre de locataires de l’application RH cloud et des sous-domaines Active Directory que vous prévoyez d’intégrer. Si vous avez plusieurs domaines Active Directory, cela dépend si les domaines Active Directory sont contigus ou [disjoint](/windows-server/identity/ad-ds/plan/disjoint-namespace).
 
 En fonction de votre décision, choisissez l’un des scénarios de déploiement suivants :
 
@@ -248,7 +249,7 @@ Par défaut, l’attribut de l’application RH cloud qui représente l’ID d�
 
 Vous pouvez définir plusieurs attributs de correspondance et attribuer la priorité de correspondance. Ils sont évalués sur la priorité de correspondance. Dès qu’une correspondance est trouvée, aucun autre attribut correspondant n’est évalué.
 
-Vous pouvez également [personnaliser les mappages d’attributs par défaut](../app-provisioning/customize-application-attributes.md#understanding-attribute-mapping-types), tels que la modification ou la suppression de mappages d’attributs existants. Vous pouvez aussi créer des mappages d’attributs en fonction des besoins de votre organisation. Pour plus d’informations, consultez le tutoriel sur l’application RH cloud (par exemple, [Workday](../saas-apps/workday-inbound-tutorial.md#planning-workday-to-active-directory-user-attribute-mapping-and-transformations)) pour obtenir la liste des attributs personnalisés à mapper.
+Vous pouvez également [personnaliser les mappages d’attributs par défaut](../app-provisioning/customize-application-attributes.md#understanding-attribute-mapping-types), tels que la modification ou la suppression de mappages d’attributs existants. Vous pouvez aussi créer des mappages d’attributs en fonction des besoins de votre organisation. Pour plus d’informations, consultez le tutoriel sur l’application RH cloud (par exemple, [Workday](../saas-apps/workday-inbound-tutorial.md#managing-your-configuration)) pour obtenir la liste des attributs personnalisés à mapper.
 
 ### <a name="determine-user-account-status"></a>Déterminer l’état du compte d’utilisateur
 
@@ -285,7 +286,7 @@ Lorsque vous lancez le processus Entrants-Changements de poste-Sortants, rassemb
 | | Quelles sont les dates d’effet prises en compte pour le traitement du licenciement des utilisateurs ? |
 | | Quel est l’impact des conversions des employés et des travailleurs occasionnels sur les comptes Active Directory existants ? |
 
-En fonction de vos besoins, vous pouvez modifier les mappages pour répondre à vos objectifs d’intégration. Pour plus d’informations, consultez le tutoriel spécifique sur l’application RH cloud (par exemple, [Workday](../saas-apps/workday-inbound-tutorial.md#planning-workday-to-active-directory-user-attribute-mapping-and-transformations)) pour obtenir la liste des attributs personnalisés à mapper.
+En fonction de vos besoins, vous pouvez modifier les mappages pour répondre à vos objectifs d’intégration. Pour plus d’informations, consultez le tutoriel spécifique sur l’application RH cloud (par exemple, [Workday](../saas-apps/workday-inbound-tutorial.md#part-4-configure-attribute-mappings)) pour obtenir la liste des attributs personnalisés à mapper.
 
 ### <a name="generate-a-unique-attribute-value"></a>Générer une valeur d’attribut unique
 
@@ -312,7 +313,7 @@ Avec cette expression, si la valeur Municipalité est Dallas, Austin, Seattle ou
 
 ## <a name="plan-for-password-delivery-of-new-user-accounts"></a>Planifier la remise de mot de passe pour de nouveaux comptes d’utilisateur
 
-Lorsque vous lancez le processus Entrants, vous devez définir et remettre un mot de passe temporaire pour les nouveaux comptes d’utilisateur. Grâce à l’approvisionnement d’utilisateurs de l’application RH cloud vers Azure AD, vous pouvez déployer la fonction de [réinitialisation de mot de passe en libre-service](../authentication/quickstart-sspr.md) (SSPR) Azure AD pour l’utilisateur dès le premier jour.
+Lorsque vous lancez le processus Entrants, vous devez définir et remettre un mot de passe temporaire pour les nouveaux comptes d’utilisateur. Grâce à l’approvisionnement d’utilisateurs de l’application RH cloud vers Azure AD, vous pouvez déployer la fonction de [réinitialisation de mot de passe en libre-service](../authentication/tutorial-enable-sspr.md) (SSPR) Azure AD pour l’utilisateur dès le premier jour.
 
 La SSPR est un moyen simple pour les administrateurs informatiques de permettre aux utilisateurs de réinitialiser ou de déverrouiller leurs comptes. Vous pouvez approvisionner l’attribut **Numéro de téléphone** de l’application RH cloud vers Active Directory, puis le synchroniser avec Azure AD. Une fois que l’attribut **Numéro de téléphone mobile** est dans Azure AD, vous pouvez activer SSPR pour le compte de l’utilisateur. Ensuite, le premier jour, le nouvel utilisateur peut utiliser le numéro de téléphone mobile enregistré et vérifié pour l’authentification.
 
@@ -365,7 +366,9 @@ L’implémentation de l’approvisionnement d’utilisateurs des RH dans le clo
 
 Choisissez l’application RH cloud qui correspond aux exigences de votre solution.
 
-**Workday** : Pour importer des profils de travail depuis Workday dans Active Directory et Azure AD, consultez [Didacticiel : Configurer Workday pour l’attribution automatique d’utilisateurs](../saas-apps/workday-inbound-tutorial.md#planning-your-deployment). Si vous le souhaitez, vous pouvez mettre à jour l’adresse de messagerie et le nom d’utilisateur dans Workday.
+**Workday** : Pour importer des profils de travail depuis Workday dans Active Directory et Azure AD, consultez [Didacticiel : Configurer Workday pour l’attribution automatique d’utilisateurs](../saas-apps/workday-inbound-tutorial.md#planning-your-deployment). Si vous le souhaitez, vous pouvez mettre à jour l’adresse e-mail, le nom d’utilisateur et le numéro de téléphone dans Workday.
+
+**SAP SuccessFactors** : Pour importer des profils de Worker depuis SuccessFactors dans Active Directory et Azure AD, consultez [Didacticiel : Configurer SAP SuccessFactors pour l’approvisionnement automatique d’utilisateurs](../saas-apps/sap-successfactors-inbound-provisioning-tutorial.md). Si vous le souhaitez, vous pouvez mettre à jour l’adresse e-mail et le nom d’utilisateur dans SuccessFactors.
 
 ## <a name="manage-your-configuration"></a>Gérer votre configuration
 
@@ -375,7 +378,7 @@ Azure AD peut fournir des insights supplémentaires sur l’exploitation de l�
 
 Après l’exécution d’un [cycle initial](../app-provisioning/how-provisioning-works.md#initial-cycle) réussi, le service d’approvisionnement Azure AD continue d’exécuter indéfiniment des mises à jour incrémentielles dos à dos, à des intervalles définis dans les tutoriels propres à chaque application, jusqu’à ce que l’un des événements suivants se produise :
 
-- Le service est arrêté manuellement. Un nouveau cycle initial est déclenché à l’aide du [portail Azure](https://portal.azure.com/) ou de la commande [API Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview) appropriée.
+- Le service est arrêté manuellement. Un nouveau cycle initial est déclenché à l’aide du [portail Azure](https://portal.azure.com/) ou de la commande [API Microsoft Graph](/graph/api/resources/synchronization-overview) appropriée.
 - Un nouveau cycle initial est déclenché en raison d’une modification dans les mappages d’attributs ou les filtres d’étendue.
 - Le processus d’approvisionnement passe en quarantaine en raison d’un taux d’erreur élevé. Il reste en quarantaine pendant plus de quatre semaines, au bout desquelles il est automatiquement désactivé.
 
@@ -401,10 +404,9 @@ Pour résoudre les problèmes susceptibles de survenir au cours de l’approvisi
 
 - [Problèmes lors de la configuration de l’approvisionnement des utilisateurs pour une application relevant de la galerie Azure AD](application-provisioning-config-problem.md)
 - [Synchroniser un attribut entre votre instance Active Directory local et Azure AD pour le provisionnement d’une application](user-provisioning-sync-attributes-for-mapping.md)
-- [L’attribution d’utilisateurs dans une application de la galerie Azure AD prend des heures](application-provisioning-when-will-provisioning-finish.md)
-- [Problème d’enregistrement des informations d’identification d’administrateur lors de la configuration de l’approvisionnement des utilisateurs pour une application de galerie Azure Active Directory](application-provisioning-config-problem-storage-limit.md)
+- [Problème d’enregistrement des informations d’identification d’administrateur lors de la configuration de l’approvisionnement des utilisateurs pour une application de galerie Azure Active Directory](./user-provisioning.md)
 - [Aucun utilisateur n’est attribué à une application de la galerie Azure AD](application-provisioning-config-problem-no-users-provisioned.md)
-- [Un mauvais ensemble d’utilisateurs est attribué à une application de la galerie Azure AD](application-provisioning-config-problem-wrong-users-provisioned.md)
+- [Un mauvais ensemble d’utilisateurs est attribué à une application de la galerie Azure AD](../manage-apps/add-application-portal-assign-users.md)
 - [Configuration de l'observateur d'événements Windows pour résoudre les problèmes liés à l'agent](../saas-apps/workday-inbound-tutorial.md#setting-up-windows-event-viewer-for-agent-troubleshooting)
 - [Configuration des journaux d’activité d’audit du portail Azure pour résoudre les problèmes de service](../saas-apps/workday-inbound-tutorial.md#setting-up-azure-portal-audit-logs-for-service-troubleshooting)
 - [Familiarisation avec les journaux d’activité pour les opérations de création de compte d’utilisateur AD](../saas-apps/workday-inbound-tutorial.md#understanding-logs-for-ad-user-account-create-operations)
@@ -414,6 +416,6 @@ Pour résoudre les problèmes susceptibles de survenir au cours de l’approvisi
 ### <a name="next-steps"></a>Étapes suivantes
 
 - [Écriture d’expressions pour les mappages d’attributs](functions-for-customizing-application-data.md)
-- [Azure AD synchronization API overview](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview) (Vue d’ensemble de l’API de synchronisation Azure AD)
+- [Azure AD synchronization API overview](/graph/api/resources/synchronization-overview) (Vue d’ensemble de l’API de synchronisation Azure AD)
 - [Ignorer la suppression des comptes d’utilisateurs qui sortent de l’étendue](skip-out-of-scope-deletions.md)
 - [Agent de provisionnement Azure AD Connect : Historique de publication des versions](provisioning-agent-release-version-history.md)

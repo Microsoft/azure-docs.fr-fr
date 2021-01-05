@@ -9,11 +9,11 @@ ms.date: 05/04/2020
 ms.author: cynthn
 ms.custom: include file
 ms.openlocfilehash: 433e909563602a2ef32b7986959b428c9afaf9f4
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82788987"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015986"
 ---
 | Ressource | Description|
 |----------|------------|

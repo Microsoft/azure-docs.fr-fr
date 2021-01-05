@@ -4,12 +4,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/29/2019
 ms.author: erhopf
-ms.openlocfilehash: dc5e251fee00ee22edb2261c1abd8404714834ba
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 410b73d3f9011f9384fafa18394d9318e3eafa67
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78668429"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97504489"
 ---
 ## <a name="authentication"></a>Authentication
 
@@ -82,7 +82,7 @@ $OAuthToken
 cURL est un outil en ligne de commande disponible dans Linux (ainsi que dans le sous-système Windows pour Linux). Cette commande cURL montre comment obtenir un jeton d’accès. Remplacez `YOUR_SUBSCRIPTION_KEY` par votre clé d’abonnement de service de reconnaissance vocale. Veillez à utiliser le point de terminaison correct pour la région correspondant à votre abonnement. Cet exemple est actuellement configuré pour l’USA Ouest.
 
 ```console
-curl -v -X POST
+curl -v -X POST \
  "https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken" \
  -H "Content-type: application/x-www-form-urlencoded" \
  -H "Content-Length: 0" \
@@ -151,7 +151,7 @@ def get_token(subscription_key):
 
 Le jeton d’accès doit être envoyé au service en tant qu’en-tête `Authorization: Bearer <TOKEN>`. Chaque jeton d’accès est valide pour une durée de 10 minutes. Vous pouvez à tout moment obtenir un nouveau jeton, mais pour réduire la latence et le trafic réseau, nous recommandons d’utiliser le même jeton durant neuf minutes.
 
-Voici un exemple de demande HTTP envoyée à l’API REST de synthèse vocale :
+Voici un exemple de requête HTTP adressée à l’API REST de reconnaissance vocale pour audio court :
 
 ```http
 POST /cognitiveservices/v1 HTTP/1.1

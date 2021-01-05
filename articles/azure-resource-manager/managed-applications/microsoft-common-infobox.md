@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/15/2018
 ms.author: tomfitz
-ms.openlocfilehash: 6d1e4a84904ef7022d9ce85803bf10285bf0b8ac
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7580ac0650706d6aee49bbf0e8235e8c5dab33f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649817"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87033346"
 ---
 # <a name="microsoftcommoninfobox-ui-element"></a>Élément d’interface utilisateur Microsoft.Common.InfoBox
 
@@ -18,7 +18,7 @@ Contrôle qui ajoute une zone d’information. La zone contient du texte importa
 
 ## <a name="ui-sample"></a>Exemple d’interface utilisateur
 
-![Microsoft.Common.InfoBox](./media/managed-application-elements/microsoft.common.infobox.png)
+![Microsoft.Common.InfoBox](./media/managed-application-elements/microsoft-common-infobox.png)
 
 
 ## <a name="schema"></a>schéma

@@ -2,26 +2,21 @@
 title: 'Didacticiel : intégration d’Azure Active Directory à la formation de sensibilisation à la sécurité KnowBe4 | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et la formation de sensibilisation à la sécurité KnowBe4.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: b80d2212-cc5f-4adb-836c-570640810c39
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
-ms.date: 01/02/2019
+ms.date: 10/22/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: f774357dc2fd1e37466c2c338e8e8616ae599d12
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 77d810fc8327e3777102f2a09f0ca32835aad4b3
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73159670"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96180759"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-knowbe4-security-awareness-training"></a>Didacticiel : intégration d’Azure Active Directory à la formation de sensibilisation à la sécurité KnowBe4
 
@@ -32,10 +27,7 @@ L’intégration de la formation de sensibilisation à la sécurité KnowBe4 à 
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à la formation de sensibilisation à la sécurité KnowBe4 (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
-
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour configurer l’intégration d’Azure AD à la formation de sensibilisation à la sécurité KnowBe4, vous avez besoin des éléments suivants :
 
@@ -50,73 +42,50 @@ Dans ce didacticiel, vous configurez et testez l’authentification unique Azure
 
 * La formation de sensibilisation à la sécurité KnowBe4 prend en charge l’attribution d’utilisateurs **Juste-à-temps**
 
-## <a name="adding-knowbe4-security-awareness-training-from-the-gallery"></a>Ajout de la formation de sensibilisation à la sécurité KnowBe4 à partir de la galerie
+> [!NOTE]
+> L’identificateur de cette application étant une valeur de chaîne fixe, une seule instance peut être configurée dans un locataire.
 
-Pour configurer l’intégration de la formation de sensibilisation à la sécurité KnowBe4 à Azure AD, vous devez ajouter la formation de sensibilisation à la sécurité KnowBe4 à partir de la galerie à votre liste d’applications SaaS gérées.
+## <a name="adding-knowbe4-from-the-gallery"></a>Ajout de KnowBe4 à partir de la galerie
 
-**Pour ajouter la formation de sensibilisation à la sécurité KnowBe4 à partir de la galerie, procédez comme suit :**
+Pour configurer l’intégration de KnowBe4 à Azure AD, vous devez ajouter KnowBe4 à partir de la galerie à votre liste d’applications SaaS gérées.
 
-1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
+1. Connectez-vous au portail Azure avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
+1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
+1. Dans la section **Ajouter à partir de la galerie**, tapez **KnowBe4** dans la zone de recherche.
+1. Sélectionnez **KnowBe4** dans le volet des résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
-    ![Bouton Azure Active Directory](common/select-azuread.png)
+## <a name="configure-and-test-azure-ad-sso"></a>Configurer et tester l’authentification unique Azure AD
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec KnowBe4 sur un utilisateur de test appelé **Britta Simon**.
+Pour que l’authentification unique fonctionne, une relation doit être établie entre l’utilisateur Azure AD et l’utilisateur associé dans KnowBe4.
 
-    ![Panneau Applications d’entreprise](common/enterprise-applications.png)
+Pour configurer et tester l’authentification unique Azure AD avec KnowBe4, effectuez les étapes suivantes :
 
-3. Pour ajouter l’application, cliquez sur le bouton **Nouvelle application** en haut de la boîte de dialogue.
+1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-sso)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
+    * **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique (SSO) Azure AD avec Britta Simon.
+    * **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique (SSO) Azure AD.
+2. **[Configurer l’authentification unique avec la formation de sensibilisation à la sécurité KnowBe4](#configure-knowbe4-security-awareness-training-sso)** pour configurer les paramètres d’authentification unique côté application.
+    * **[Créer un utilisateur de test de la formation de sensibilisation à la sécurité KnowBe4](#create-knowbe4-security-awareness-training-test-user)** pour avoir un équivalent de Britta Simon dans la formation de sensibilisation à la sécurité KnowBe4, lié à la représentation de l’utilisateur Azure AD.
+3. **[Tester l’authentification unique](#test-sso)** pour vérifier si la configuration fonctionne.
 
-    ![Bouton Nouvelle application](common/add-new-app.png)
+### <a name="configure-azure-ad-sso"></a>Configurer l’authentification unique Azure AD
 
-4. Dans la zone de recherche, tapez **formation de sensibilisation à la sécurité KnowBe4**, sélectionnez **Formation de sensibilisation à la sécurité KnowBe4** dans le volet de résultats, puis cliquez sur **Ajouter** pour ajouter l’application.
+Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-     ![Formation de sensibilisation à la sécurité KnowBe4 dans la liste des résultats](common/search-new-app.png)
+1. Dans le portail Azure, accédez à la page d’intégration de l’application **KnowBe4**, recherchez la section **Gérer**, puis sélectionnez **Authentification unique**.
+1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
+1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
+   ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD avec la formation de sensibilisation à la sécurité KnowBe4, sur un utilisateur de test appelé **Britta Simon**.
-Pour que l’authentification unique fonctionne, une relation entre un utilisateur Azure AD et l’utilisateur de la formation de sensibilisation à la sécurité KnowBe4 associé doit être établie.
+1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
 
-Pour configurer et tester l’authentification unique Azure AD avec la formation de sensibilisation à la sécurité KnowBe4, vous devez suivre les indications des sections suivantes :
-
-1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-single-sign-on)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
-2. **[Configurer l’authentification unique avec la formation de sensibilisation à la sécurité KnowBe4](#configure-knowbe4-security-awareness-training-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
-3. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec Britta Simon.
-4. **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique Azure AD.
-5. **[Créer un utilisateur de test de la formation de sensibilisation à la sécurité KnowBe4](#create-knowbe4-security-awareness-training-test-user)** pour avoir un équivalent de Britta Simon dans la formation de sensibilisation à la sécurité KnowBe4, lié à la représentation de l’utilisateur Azure AD.
-6. **[Tester l’authentification unique](#test-single-sign-on)** : pour vérifier si la configuration fonctionne.
-
-### <a name="configure-azure-ad-single-sign-on"></a>Configurer l’authentification unique Azure AD
-
-Dans cette section, vous activez l’authentification unique Azure AD dans le portail Azure.
-
-Pour configurer l’authentification unique Azure AD avec la formation de sensibilisation à la sécurité KnowBe4, effectuez les étapes suivantes :
-
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Formation de sensibilisation à la sécurité KnowBe4**, sélectionnez **Authentification unique**.
-
-    ![Lien Configurer l’authentification unique](common/select-sso.png)
-
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
-
-    ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
-
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
-
-    ![Modifier la configuration SAML de base](common/edit-urls.png)
-
-4. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
-
-    ![Informations d’authentification unique de Domaine et URL de la formation de sensibilisation à la sécurité KnowBe4](common/sp-identifier.png)
-
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<companyname>.KnowBe4.com/auth/saml/<instancename>`
+    Dans la zone de texte **URL de connexion**, entrez une URL au format suivant :  `https://<companyname>.KnowBe4.com/auth/saml/<instancename>`
 
     > [!NOTE]
     > La valeur d’URL de connexion n’est pas réelle. Mettez à jour cette valeur avec l’URL de connexion réelle. Contactez l’[équipe de support client de formation de sensibilisation à la sécurité KnowBe4](mailto:support@KnowBe4.com) pour obtenir cette valeur. Vous pouvez également consulter le modèle figurant à la section **Configuration SAML de base** dans le portail Azure.
-
-    b. Dans la zone de texte **Identificateur (ID d’entité)** , tapez la valeur de chaîne suivante : `KnowBe4`
-
-    > [!NOTE]
-    > Cette valeur respecte la casse.
 
 5. Dans la page **Configurer l’authentification unique avec SAML**, à la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Raw)** en fonction des options définies, puis enregistrez-le sur votre ordinateur.
 
@@ -126,86 +95,48 @@ Pour configurer l’authentification unique Azure AD avec la formation de sensi
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
-    a. URL de connexion
+### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
 
-    b. Identificateur Azure AD
+Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-    c. URL de déconnexion
-
-### <a name="configure-knowbe4-security-awareness-training-single-sign-on"></a>Configurer l’authentification unique pour la formation de sensibilisation à la sécurité KnowBe4
-
-Pour configurer l’authentification unique du côté de la **formation de sensibilisation à la sécurité KnowBe4**, vous devez envoyer le **Certificat (brut)** téléchargé et les URL appropriées copiées sur le portail Azure à l’[équipe du support technique de la formation de sensibilisation à la sécurité KnowBe4](mailto:support@KnowBe4.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
-
-### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
-
-L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
-
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
-
-    ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
-
-2. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-
-    ![Bouton Nouvel utilisateur](common/new-user.png)
-
-3. Dans les propriétés de l’utilisateur, effectuez les étapes suivantes.
-
-    ![Boîte de dialogue Utilisateur](common/user-properties.png)
-
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
-    b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
-    Par exemple : BrittaSimon@contoso.com
-
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
-
-    d. Cliquez sur **Créer**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
+1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
+   1. Dans le champ **Nom**, entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
+   1. Cliquez sur **Créer**.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
-Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à la formation de sensibilisation à la sécurité KnowBe4.
+Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en accordant l’accès à KnowBe4.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **formation de sensibilisation à la sécurité KnowBe4**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Dans la liste des applications, sélectionnez **KnowBe4**.
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez qu’un rôle soit attribué aux utilisateurs, vous pouvez le sélectionner dans la liste déroulante **Sélectionner un rôle** . Si aucun rôle n’a été configuré pour cette application, vous voyez le rôle « Accès par défaut » sélectionné.
+1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
 
-    ![Panneau Applications d’entreprise](common/enterprise-applications.png)
+## <a name="configure-knowbe4-security-awareness-training-sso"></a>Configurer l’authentification unique avec la formation de sensibilisation à la sécurité KnowBe4
 
-2. Dans la liste des applications, sélectionnez **Formation de sensibilisation à la sécurité KnowBe4**.
-
-    ![Lien Formation de sensibilisation à la sécurité KnowBe4 dans la liste des applications](common/all-applications.png)
-
-3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes**.
-
-    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
-
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
-
-    ![Volet Ajouter une attribution](common/add-assign-user.png)
-
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+Pour configurer l’authentification unique du côté de la **formation de sensibilisation à la sécurité KnowBe4**, vous devez envoyer le **Certificat (brut)** téléchargé et les URL appropriées copiées sur le portail Azure à l’[équipe du support technique de la formation de sensibilisation à la sécurité KnowBe4](mailto:support@KnowBe4.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-knowbe4-security-awareness-training-test-user"></a>Créer un utilisateur de test de la formation de sensibilisation à la sécurité KnowBe4
 
-L’objectif de cette section est de créer un utilisateur appelé Britta Simon dans la formation de sensibilisation à la sécurité KnowBe4. La formation de sensibilisation à la sécurité KnowBe4 prend en charge l’approvisionnement juste à temps, activé par défaut.
+Dans cette section, un utilisateur nommé Britta Simon est créé dans KnowBe4. KnowBe4 prend en charge l’attribution d’utilisateurs juste-à-temps, qui est activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. S’il n’existe pas encore d’utilisateur dans KnowBe4, il en est créé un après l’authentification.
 
-Vous n’avez aucune opération à effectuer dans cette section. Un nouvel utilisateur est créé lors d’une tentative d’accès à la formation de sensibilisation à la sécurité KnowBe4 s’il n’existe pas déjà.
+### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-> [!NOTE]
-> Si vous devez créer un utilisateur manuellement, contactez [l’équipe du support technique de formation de sensibilisation à la sécurité KnowBe4](mailto:support@KnowBe4.com).
+Dans cette section, vous allez tester votre configuration de l’authentification unique Azure AD avec les options suivantes. 
 
-### <a name="test-single-sign-on"></a>Tester l’authentification unique
+1. Cliquez sur **Tester cette application** dans le portail Azure. Cette opération redirige vers l’URL de connexion KnowBe4, où vous pouvez lancer le flux de connexion. 
 
-Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
+2. Accédez directement à l’URL de connexion KnowBe4 et lancez le flux de connexion à partir de là.
 
-Quand vous cliquez sur la vignette Formation de sensibilisation à la sécurité KnowBe4 dans le volet d’accès, vous devez être connecté automatiquement à l’application Formation de sensibilisation à la sécurité KnowBe4 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+3. Vous pouvez utiliser le volet d’accès Microsoft. Le fait de cliquer sur la vignette KnowBe4 dans le volet d’accès vous redirige vers l’URL de connexion KnowBe4. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="next-steps"></a>Étapes suivantes
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
-
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
-
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+Après avoir configuré KnowBe4, vous pouvez appliquer un contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).

@@ -7,12 +7,13 @@ ms.topic: tutorial
 ms.date: 02/20/2018
 ms.author: rogarana
 ms.subservice: blobs
-ms.openlocfilehash: b3fe9c7481e79b8eeda9f18e9a036fa8c72e658d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 466a61fd27fd9eeb32d004af1ab6bb43503e6233
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75372089"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89020726"
 ---
 # <a name="download-large-amounts-of-random-data-from-azure-storage"></a>Télécharger de grandes quantités de données aléatoires depuis le stockage Azure
 

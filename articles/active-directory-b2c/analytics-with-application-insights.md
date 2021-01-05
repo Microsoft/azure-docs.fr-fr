@@ -6,17 +6,17 @@ services: active-directory-b2c
 author: msmimart
 manager: celestedg
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 04/05/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 25e62e7c6865f91daa242a33a0f491f8015be41a
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: 67ea7324419d86fa5b5c23a2f0aa5f8c057495d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80672536"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85385975"
 ---
 # <a name="track-user-behavior-in-azure-active-directory-b2c-using-application-insights"></a>Suivre le comportement des utilisateurs dans Azure Active Directory B2C à l’aide d’Application Insights
 
@@ -171,7 +171,7 @@ Appelez `AppInsights-SignInRequest` en tant qu’étape d’orchestration 2 pour
 
 ```xml
 <!-- Track that we have received a sign in request -->
-<OrchestrationStep Order="1" Type="ClaimsExchange">
+<OrchestrationStep Order="2" Type="ClaimsExchange">
   <ClaimsExchanges>
     <ClaimsExchange Id="TrackSignInRequest" TechnicalProfileReferenceId="AppInsights-SignInRequest" />
   </ClaimsExchanges>
@@ -233,7 +233,7 @@ Ajoutez des types de revendication et des événements à votre parcours utilisa
 - **PartnerClaimType** est le nom de la propriété qui s’affiche dans Azure Insights. Utilisez la syntaxe `{property:NAME}`, où `NAME` est la propriété qui est ajoutée à l’événement.
 - **DefaultValue** est n’importe quelle valeur de chaîne ou le résolveur de revendication.
 
-```XML
+```xml
 <InputClaim ClaimTypeReferenceId="app_session" PartnerClaimType="{property:app_session}" DefaultValue="{OAUTH-KV:app_session}" />
 <InputClaim ClaimTypeReferenceId="loyalty_number" PartnerClaimType="{property:loyalty_number}" DefaultValue="{OAUTH-KV:loyalty_number}" />
 <InputClaim ClaimTypeReferenceId="language" PartnerClaimType="{property:language}" DefaultValue="{Culture:RFC5646}" />

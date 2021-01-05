@@ -1,24 +1,22 @@
 ---
-title: Emplacements de données pour Windows Virtual Desktop - Azure
-description: Brève vue d’ensemble des emplacements de stockage des données et métadonnées de Windows Virtual Desktop.
-services: virtual-desktop
+title: Emplacements de données pour Windows Virtual Desktop (classique) - Azure
+description: Brève vue d’ensemble des emplacements de stockage des données et métadonnées de Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: b8cbee74a8f9639fc2c3838f38dabf2a62cf339e
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 869defde657c9cb4c8bea6bbacebb9458e5a2b96
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613966"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008812"
 ---
-# <a name="data-locations-for-windows-virtual-desktop"></a>Emplacements de données pour Windows Virtual Desktop
+# <a name="data-locations-for-windows-virtual-desktop-classic"></a>Emplacements de données pour Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../data-locations.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../data-locations.md).
 
 Windows Virtual Desktop est disponible pour tous les emplacements géographiques. Initialement, les métadonnées de service peuvent uniquement être stockées dans la zone géographique États-Unis. Les administrateurs peuvent choisir l’emplacement de stockage des données utilisateur au moment de la création des machines virtuelles du pool d’hôtes et des services associés, par exemple les serveurs de fichiers. Découvrez plus en détail les zones géographiques Azure sur la [carte des centres de données Azure](https://azuredatacentermap.azurewebsites.net/).
 

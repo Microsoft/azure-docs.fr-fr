@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 01/17/2018
-ms.openlocfilehash: 0320be3a2cfbb96367799577a6e56bcf5da87dcb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b73fa9702a95897afbca53e2de70dcabc04a4665
+ms.sourcegitcommit: 419c8c8061c0ff6dc12c66ad6eda1b266d2f40bd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658504"
+ms.lasthandoff: 10/18/2020
+ms.locfileid: "92168504"
 ---
 # <a name="reference-guide-to-view-designer-tiles-in-azure-monitor"></a>Guide de référence des vignettes du Concepteur de vues dans Azure Monitor
 Grâce au Concepteur de vues d’Azure Monitor, vous pouvez créer plusieurs vues personnalisées dans le portail Azure qui peuvent vous aider à visualiser les données dans votre espace de travail Log Analytics. Cet article est un guide de référence pour les paramètres des vignettes disponibles dans vos vues personnalisées.
@@ -104,7 +104,7 @@ La vignette **Anneau** affiche un nombre unique qui résume une colonne de valeu
 ## <a name="line-chart-tile"></a>Vignette Graphique en courbes
 Cette vignette est un graphique en courbes qui affiche plusieurs séries à partir d’une requête de journal dans le temps. 
 
-![Vignette Graphique en courbes et légende](media/view-designer-tiles/tile-line-chart.png)
+![Capture d’écran d’une vignette de graphique en courbes dans le concepteur de vues Azure Monitor.](media/view-designer-tiles/tile-line-chart.png)
 
 | Paramètre | Description |
 |:--- |:--- |
@@ -125,7 +125,7 @@ Cette vignette est un graphique en courbes qui affiche plusieurs séries à part
 ## <a name="line-chart-and-callout-tile"></a>Vignette Graphique en courbes et légende
 Cette vignette contient à la fois un graphique en courbes avec plusieurs séries à partir d’une requête de journal dans le temps, et une légende avec une valeur de synthèse. 
 
-![Vignette Graphique en courbes et légende](media/view-designer-tiles/tile-line-chart-callout.png)
+![Capture d’écran d’un graphique en courbes et d’une vignette de légende dans le concepteur de vues Azure Monitor. La légende décrit le graphique en courbes en présentant une valeur de synthèse.](media/view-designer-tiles/tile-line-chart-callout.png)
 
 | Paramètre | Description |
 |:--- |:--- |

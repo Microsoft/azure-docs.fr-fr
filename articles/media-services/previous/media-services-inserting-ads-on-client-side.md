@@ -14,14 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 7e5f6b7fa505890dc6bc818d1bd2578e5d974ff0
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 70db1ff63e3c2a7e7806e5ef3c55b4e4af4a5259
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594863"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89263567"
 ---
 # <a name="inserting-ads-on-the-client-side"></a>Insertion de publicités du côté client
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 Cet article contient des informations sur l’insertion de différents types de publicité du côté client.
 
 Pour en savoir plus sur la prise en charge du sous-titrage codé et des publicités dans les vidéos en flux live, consultez la page [Normes de sous-titrage codé et d’insertion de publicités prises en charge](media-services-live-streaming-with-onprem-encoders.md#cc_and_ads).
@@ -160,7 +164,7 @@ Les publicités non linéaires sont également spécifiées dans un élément `<
     </Creative>
 ```
 
-L’élément **<NonLinearAds>** peut contenir un ou plusieurs éléments **<NonLinear>** , chacun d’eux pouvant décrire une publicité non linéaire. L’élément <**NonLinear**> spécifie la ressource de la publicité non linéaire. La ressource peut être une <**StaticResource**>, une <**IFrameResource**> ou une <**HTMLResource**>. \<**StaticResource**&gt; décrit une ressource non HTML et définit un attribut creativeType qui indique le mode d’affichage de la ressource :
+L’élément **<NonLinearAds>** peut contenir un ou plusieurs éléments **<NonLinear>** , chacun d’eux pouvant décrire une publicité non linéaire. L’élément <**NonLinear**> spécifie la ressource de la publicité non linéaire. La ressource peut être une <**StaticResource**>, une <**IFrameResource**> ou une <**HTMLResource**>. \<**StaticResource**> décrit une ressource non HTML et définit un attribut creativeType qui indique le mode d’affichage de la ressource :
 
 Image/gif, image/jpeg, image/png : la ressource est affichée dans une balise HTML <**img**>.
 

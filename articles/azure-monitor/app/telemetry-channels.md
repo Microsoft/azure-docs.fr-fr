@@ -3,21 +3,22 @@ title: Canaux de télémétrie dans Azure Application Insights | Microsoft Doc
 description: Découvrez comment personnaliser les canaux de télémétrie dans les SDK Azure Application Insights pour .NET et .NET Core.
 ms.topic: conceptual
 ms.date: 05/14/2019
+ms.custom: devx-track-csharp
 ms.reviewer: mbullwin
-ms.openlocfilehash: 9c292246f947e4d3a364f79b31fe7a1deebd33d9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fec7bfc16e2cc36d19c84b93b5b93c3c1365b166
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234613"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90564013"
 ---
 # <a name="telemetry-channels-in-application-insights"></a>Canaux de télémétrie dans Application Insights
 
-Les canaux de télémétrie font partie intégrante des [SDK Azure Application Insights](../../azure-monitor/app/app-insights-overview.md). Ils gèrent la mise en mémoire tampon des données de télémétrie et leur transmission au service Application Insights. Les versions .NET et .NET Core des SDK intègrent deux canaux de télémétrie : `InMemoryChannel` et `ServerTelemetryChannel`. Cet article décrit chaque canal en détail, notamment comment personnaliser leur comportement.
+Les canaux de télémétrie font partie intégrante des [SDK Azure Application Insights](./app-insights-overview.md). Ils gèrent la mise en mémoire tampon des données de télémétrie et leur transmission au service Application Insights. Les versions .NET et .NET Core des SDK intègrent deux canaux de télémétrie : `InMemoryChannel` et `ServerTelemetryChannel`. Cet article décrit chaque canal en détail, notamment comment personnaliser leur comportement.
 
 ## <a name="what-are-telemetry-channels"></a>Que sont les canaux de télémétrie ?
 
-Les canaux de télémétrie gèrent la mise en mémoire tampon des éléments de télémétrie et la transmission de ces éléments au service Application Insights, où ils sont stockés pour être interrogés et analysés. Un canal de télémétrie est une classe qui implémente l’interface [`Microsoft.ApplicationInsights.ITelemetryChannel`](https://docs.microsoft.com/dotnet/api/microsoft.applicationinsights.channel.itelemetrychannel?view=azure-dotnet).
+Les canaux de télémétrie gèrent la mise en mémoire tampon des éléments de télémétrie et la transmission de ces éléments au service Application Insights, où ils sont stockés pour être interrogés et analysés. Un canal de télémétrie est une classe qui implémente l’interface [`Microsoft.ApplicationInsights.ITelemetryChannel`](/dotnet/api/microsoft.applicationinsights.channel.itelemetrychannel?view=azure-dotnet).
 
 La méthode `Send(ITelemetry item)` d’un canal de télémétrie est appelée une fois que tous les initialiseurs et processeurs de télémétrie ont été appelés. Par conséquent, tous les éléments supprimés par un processeur de télémétrie n’atteignent pas le canal. En règle générale, `Send()` n’envoie pas instantanément les éléments au back-end. Il les place généralement en mémoire tampon et les envoie par lots pour optimiser leur transmission.
 
@@ -31,7 +32,7 @@ Les kits SDK .NET et .NET Core d’Application Insights intègrent deux canaux 
 
     Ce canal fait partie du package NuGet Microsoft.ApplicationInsights plus grand et constitue le canal par défaut utilisé par le SDK si aucune autre configuration n’a été spécifiée.
 
-* `ServerTelemetryChannel`: canal plus avancé qui offre des stratégies de nouvelles tentatives et la capacité de stocker des données sur un disque local. Ce canal retente d’envoyer les données de télémétrie si des erreurs temporaires se produisent. Il utilise également le stockage sur disque local pour conserver les éléments sur le disque durant les pannes réseau ou la génération de gros volumes de données de télémétrie. Grâce aux stratégies de nouvelles tentatives et au stockage sur disque local, ce canal est considéré comme plus fiable et est recommandé pour tous les scénarios de production. Ce canal est utilisé par défaut pour les applications [ASP.NET](https://docs.microsoft.com/azure/azure-monitor/app/asp-net) et [ASP.NET Core](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) qui sont configurées conformément à la documentation officielle. Il est optimisé pour les scénarios de serveur exécutant des processus de longue durée. La méthode [`Flush()`](#which-channel-should-i-use) implémentée par ce canal n’est pas synchrone.
+* `ServerTelemetryChannel`: canal plus avancé qui offre des stratégies de nouvelles tentatives et la capacité de stocker des données sur un disque local. Ce canal retente d’envoyer les données de télémétrie si des erreurs temporaires se produisent. Il utilise également le stockage sur disque local pour conserver les éléments sur le disque durant les pannes réseau ou la génération de gros volumes de données de télémétrie. Grâce aux stratégies de nouvelles tentatives et au stockage sur disque local, ce canal est considéré comme plus fiable et est recommandé pour tous les scénarios de production. Ce canal est utilisé par défaut pour les applications [ASP.NET](./asp-net.md) et [ASP.NET Core](./asp-net-core.md) qui sont configurées conformément à la documentation officielle. Il est optimisé pour les scénarios de serveur exécutant des processus de longue durée. La méthode [`Flush()`](#which-channel-should-i-use) implémentée par ce canal n’est pas synchrone.
 
     Ce canal est fourni dans le package NuGet Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel et est activé automatiquement quand vous utilisez le package NuGet Microsoft.ApplicationInsights.Web ou Microsoft.ApplicationInsights.AspNetCore.
 
@@ -39,7 +40,7 @@ Les kits SDK .NET et .NET Core d’Application Insights intègrent deux canaux 
 
 Vous configurez un canal de télémétrie en l’ajoutant à la configuration de télémétrie active. Pour les applications ASP.NET, la configuration implique de définir l’instance du canal de télémétrie sur `TelemetryConfiguration.Active`, ou de modifier `ApplicationInsights.config`. Pour les applications ASP.NET Core, la configuration implique d’ajouter le canal au conteneur d’injection de dépendance.
 
-Les sections suivantes présentent des exemples de configuration du paramètre `StorageFolder` pour le canal dans différents types d’applications. `StorageFolder` est juste l’un des paramètres configurables. Pour obtenir la liste complète des paramètres de configuration, consultez la [section des paramètres](telemetry-channels.md#configurable-settings-in-channels) plus loin dans cet article.
+Les sections suivantes présentent des exemples de configuration du paramètre `StorageFolder` pour le canal dans différents types d’applications. `StorageFolder` est juste l’un des paramètres configurables. Pour obtenir la liste complète des paramètres de configuration, consultez la [section des paramètres](#configurable-settings-in-channels) plus loin dans cet article.
 
 ### <a name="configuration-by-using-applicationinsightsconfig-for-aspnet-applications"></a>Configuration avec ApplicationInsights.config pour les applications ASP.NET
 
@@ -152,13 +153,25 @@ En bref, la réponse est qu’aucun des canaux intégrés n’offre une garantie
 
 Bien que le nom du package et de l’espace de noms de ce canal mentionne « WindowsServer », ce canal est pris en charge sur d’autres systèmes que Windows, avec l’exception suivante. Sur les autres systèmes, le canal ne crée pas de dossier de stockage local par défaut. Vous devez créer manuellement un dossier de stockage local et configurer le canal pour qu’il l’utilise. Une fois que le stockage local a été configuré, le canal fonctionne de la même façon sur tous les systèmes.
 
+> [!NOTE]
+> Grâce à la version 2.15.0-beta3 et celles ultérieures, un stockage local est désormais automatiquement créé pour Linux, Mac et Windows. Pour les systèmes non Windows, le Kit de développement logiciel (SDK) crée automatiquement un dossier de stockage local selon la logique suivante :
+> - `${TMPDIR}` : Si la variable d’environnement `${TMPDIR}` est définie, cet emplacement est utilisé.
+> - `/var/tmp` : Si l’emplacement précédent n’existe pas, nous essayons `/var/tmp`.
+> - `/tmp` : Si les deux emplacements précédents n’existent pas, nous essayons `tmp`. 
+> - Si aucun de ces emplacements n’existe, le stockage local n’est pas créé et la configuration manuelle est toujours requise. [En savoir plus sur l’implémentation](https://github.com/microsoft/ApplicationInsights-dotnet/pull/1860).
+
 ### <a name="does-the-sdk-create-temporary-local-storage-is-the-data-encrypted-at-storage"></a>Le kit de développement logiciel (SDK) crée-t-il un stockage local temporaire ? Les données sont-elles chiffrées dans le stockage ?
 
 Le SDK stocke les données de télémétrie dans le stockage local en cas de problèmes de réseau ou de limitation. Ces données ne sont pas chiffrées localement.
 
 Sur les systèmes Windows, le SDK crée automatiquement un dossier local temporaire dans le répertoire %TEMP% ou %LOCALAPPDATA%, auquel seuls les administrateurs et l’utilisateur actuel ont accès.
 
-Sur les systèmes autres que Windows, aucun stockage local n’est créé automatiquement par le SDK et, par conséquent, aucune donnée n’est stockée localement par défaut. Vous pouvez créer manuellement un répertoire de stockage et configurer le canal pour qu’il l’utilise. Dans ce cas, vous devez vous assurer que le répertoire est sécurisé.
+Sur les systèmes autres que Windows, aucun stockage local n’est créé automatiquement par le SDK et, par conséquent, aucune donnée n’est stockée localement par défaut.
+
+> [!NOTE]
+> Grâce à la version 2.15.0-beta3 et celles ultérieures, un stockage local est désormais automatiquement créé pour Linux, Mac et Windows. 
+
+ Vous pouvez créer manuellement un répertoire de stockage et configurer le canal pour qu’il l’utilise. Dans ce cas, vous devez vous assurer que le répertoire est sécurisé.
 Découvrez-en plus sur [la protection et la confidentialité des données](data-retention-privacy.md#does-the-sdk-create-temporary-local-storage).
 
 ## <a name="open-source-sdk"></a>Kit de développement logiciel (SDK) open source
@@ -166,5 +179,6 @@ Comme chaque SDK pour Application Insights, les canaux sont open source. Lisez e
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Échantillonnage](../../azure-monitor/app/sampling.md)
-* [Résolution des problèmes avec les SDK](../../azure-monitor/app/asp-net-troubleshoot-no-data.md)
+* [Échantillonnage](./sampling.md)
+* [Résolution des problèmes avec les SDK](./asp-net-troubleshoot-no-data.md)
+

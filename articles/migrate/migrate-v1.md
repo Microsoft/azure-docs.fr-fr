@@ -1,28 +1,28 @@
 ---
 title: Utiliser la version précédente d’Azure Migrate
 description: Décrit comment utiliser la version précédente d’Azure Migrate.
-author: rayne-wiselman
-ms.service: azure-migrate
-ms.topic: overview
+author: ms-psharma
+ms.author: panshar
+ms.manager: abhemraj
+ms.topic: conceptual
 ms.date: 11/19/2019
-ms.author: raynew
 ms.custom: mvc
-ms.openlocfilehash: 7b02560d1e7b7c34a4d87dbdc468a85362aca4f7
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.openlocfilehash: 4fda6c51121838bfa1f3624759b1230d8554d573
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82993807"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753941"
 ---
 # <a name="work-with-the-previous-version-of-azure-migrate"></a>Utiliser la version précédente d’Azure Migrate
 
-Cet article fournit des informations sur l’utilisation de la version précédente d’Azure Migrate.
+Cet article fournit des informations sur l’utilisation de la version précédente d’Azure Migrate. 
 
 
 Il existe deux versions du service Azure Migrate :
 
 - **Version actuelle** : utilisez cette version pour créer des projets Azure Migrate, découvrir des machines locales et orchestrer des évaluations et migrations. [Apprenez-en davantage](whats-new.md) sur les nouveautés de cette version.
-- **Version précédente** : Si vous utilisez la version précédente d’Azure Migrate (seule l’évaluation des machines virtuelles VMware locales était prise en charge), vous devez désormais utiliser la version actuelle. Si vous avez encore besoin d’utiliser des projets Azure Migrate créés dans la version précédente, voici ce que vous pouvez et ne pouvez pas faire :
+- **Version précédente** : Si vous utilisez la version précédente d’Azure Migrate (seule l’évaluation des machines virtuelles VMware locales était prise en charge), vous devez désormais utiliser la version actuelle. Les projets de la version précédente sont appelés projets classiques dans cet article. Si vous avez encore besoin d’utiliser des projets Azure Migrate créés dans la version précédente, voici ce que vous pouvez et ne pouvez pas faire :
     - Vous ne pouvez plus créer de projets de migration.
     - Nous vous recommandons de ne pas effectuer de nouvelles découvertes.
     - Vous pouvez toujours accéder aux projets existants.
@@ -31,7 +31,7 @@ Il existe deux versions du service Azure Migrate :
 
 ## <a name="upgrade-between-versions"></a>Mise à niveau entre versions
 
-Vous ne pouvez pas mettre à niveau des projets ou composants de la version précédente vers la nouvelle version. Au lieu de cela, vous devez [créer un projet Azure Migrate](how-to-add-tool-first-time.md) et y ajouter des outils d’évaluation et de migration.
+Vous ne pouvez pas mettre à niveau des projets ou composants de la version précédente vers la nouvelle version. Vous devez [créer un projet Azure Migrate](create-manage-projects.md) et y [ajouter des outils d’évaluation et de migration](./create-manage-projects.md). Consultez les tutoriels pour comprendre comment utiliser les outils d’évaluation et de migration disponibles. Si un espace de travail Log Analytics est attaché à un projet classique, vous pouvez l’attacher à un projet de la version actuelle après avoir supprimé le projet classique.
 
 ## <a name="find-projects-from-previous-version"></a>Rechercher des projets de la version précédente
 
@@ -39,7 +39,16 @@ Recherchez des projets de la version précédente comme suit :
 
 1. Dans le portail Azure, sélectionnez **Tous les services**, puis recherchez et sélectionnez **Azure Migrate**. 
 2. Le tableau de bord Azure Migrate affiche une notification et un lien permettant d’accéder aux anciens projets Azure Migrate.
-3. Cliquez sur le lien pour ouvrir des projets v1.
+3. Cliquez sur le lien pour ouvrir des projets classiques.
+
+## <a name="delete-projects-from-previous-version"></a>Supprimer des projets de la version précédente
+
+Pour rechercher et supprimer des projets de la version précédente, procédez comme suit :
+
+1. Dans le portail Azure, sélectionnez **Tous les services**, puis recherchez et sélectionnez **Azure Migrate**. 
+2. Le tableau de bord Azure Migrate affiche une notification et un lien permettant d’accéder aux anciens projets Azure Migrate.
+3. Cliquez sur le lien pour ouvrir des projets classiques.
+4. Sélectionnez le projet à supprimer et supprimez-le. 
 
 
 ## <a name="create-an-assessment"></a>Créer une évaluation
@@ -92,7 +101,7 @@ La préparation prend en compte un certain nombre de propriétés de machine vir
 --- | --- | ---
 **Type de démarrage** | BIOS pris en charge. UEFI non prise en charge. | Préparé sous condition si le type de démarrage est UEFI.
 **Cœurs** | Cœurs de la machine <= nombre maximal de cœurs (128) pris en charge pour une machine virtuelle Azure.<br/><br/> Si l’historique des performances est disponible, Azure Migrate prend en considération les cœurs utilisés.<br/>Si un facteur de confort est spécifié dans les paramètres de l’évaluation, le nombre de cœurs utilisés est multiplié par le facteur de confort.<br/><br/> En l’absence d’historique des performances, Azure Migrate utilise les cœurs alloués, sans appliquer le facteur de confort. | Prêt si inférieur ou égal aux limites.
-**Mémoire** | Taille de la mémoire de la machine <= mémoire maximale (3 892 Go sur la série Azure M Standard_M128m&nbsp;<sup>2</sup>) d’une machine virtuelle Azure. [Plus d’informations](https://docs.microsoft.com/azure/virtual-machines/windows/sizes)<br/><br/> Si l’historique des performances est disponible, Azure Migrate prend en considération la mémoire utilisée.<br/><br/>Si un facteur de confort est spécifié, la mémoire utilisée est multipliée par le facteur de confort.<br/><br/> En l’absence d’historique, la mémoire allouée est utilisée sans appliquer le facteur de confort.<br/><br/> | Prêt si dans les limites.
+**Mémoire** | Taille de la mémoire de la machine <= mémoire maximale (3 892 Go sur la série Azure M Standard_M128m&nbsp;<sup>2</sup>) d’une machine virtuelle Azure. [Plus d’informations](../virtual-machines/sizes.md)<br/><br/> Si l’historique des performances est disponible, Azure Migrate prend en considération la mémoire utilisée.<br/><br/>Si un facteur de confort est spécifié, la mémoire utilisée est multipliée par le facteur de confort.<br/><br/> En l’absence d’historique, la mémoire allouée est utilisée sans appliquer le facteur de confort.<br/><br/> | Prêt si dans les limites.
 **Disque de stockage** | La taille allouée d’un disque doit être inférieure ou égale à 4 To (4 096 Go).<br/><br/> Le nombre de disques attachés à la machine doit être inférieur ou égal à 65, disque du système d’exploitation compris. | Prêt si dans les limites.
 **Mise en réseau** | Au maximum 32 cartes réseau doivent être attachées à une machine. | Prêt si dans les limites.
 
@@ -112,13 +121,13 @@ Windows Server 2012 R2 et tous les Service Packs | Azure assure un support com
 Windows Server 2012 et tous les Service Packs | Azure assure un support complet. | Disponible pour Azure
 Windows Server 2008 R2 et tous les Service Packs | Azure assure un support complet.| Disponible pour Azure
 Windows Server 2008 (32 bits et 64 bits) | Azure assure un support complet. | Disponible pour Azure
-Windows Server 2003, 2003 R2 | Non pris en charge. La prise en charge dans Azure nécessite un contrat de support personnalisé ([Custom Support Agreement (CSA)](https://aka.ms/WSosstatement)). | Préparé pour Azure sous condition. Envisagez une mise à niveau du système d’exploitation avant de migrer vers Azure.
+Windows Server 2003, 2003 R2 | Non pris en charge. La prise en charge dans Azure nécessite un contrat de support personnalisé ([Custom Support Agreement (CSA)](/troubleshoot/azure/virtual-machines/server-software-support)). | Préparé pour Azure sous condition. Envisagez une mise à niveau du système d’exploitation avant de migrer vers Azure.
 Windows 2000, 98, 95, NT, 3.1, MS-DOS | Non pris en charge. La machine pourrait démarrer dans Azure, mais aucune prise en charge du système d’exploitation n’est fournie par Azure. | Préparé pour Azure sous condition. Nous vous recommandons d’effectuer une mise à niveau du système d’exploitation avant de migrer vers Azure.
-Clients Windows 7, 8 et 10 | Azure assure un support avec [abonnement Visual Studio uniquement](https://docs.microsoft.com/azure/virtual-machines/windows/client-images). | Préparé pour Azure sous condition
-Windows 10 Pro Desktop | Azure fournit la prise en charge avec les [droits d’hébergement multilocataire](https://docs.microsoft.com/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment). | Préparé pour Azure sous condition
+Clients Windows 7, 8 et 10 | Azure assure un support avec [abonnement Visual Studio uniquement](../virtual-machines/windows/client-images.md). | Préparé pour Azure sous condition
+Windows 10 Pro Desktop | Azure fournit la prise en charge avec les [droits d’hébergement multilocataire](../virtual-machines/windows/windows-desktop-multitenant-hosting-deployment.md). | Préparé pour Azure sous condition
 Windows Vista, XP Professionnel | Non pris en charge. La machine pourrait démarrer dans Azure, mais aucune prise en charge du système d’exploitation n’est fournie par Azure. | Préparé pour Azure sous condition. Nous vous recommandons d’effectuer une mise à niveau du système d’exploitation avant de migrer vers Azure.
 Linux | Azure approuve ces [systèmes d’exploitation Linux](../virtual-machines/linux/endorsed-distros.md). D’autres systèmes d’exploitation Linux pourraient démarrer dans Azure, mais nous recommandons d’effectuer une mise à niveau du système d’exploitation vers une version approuvée avant de migrer vers Azure. | Disponible pour Azure si la version est approuvée.<br/><br/>Préparé pour Azure sous condition si la version n’est pas approuvée.
-Autres systèmes d’exploitation<br/><br/> Par exemple, Oracle Solaris, Apple Mac OS, FreeBSD, etc. | Azure n’approuve pas ces systèmes d’exploitation. La machine peut démarrer dans Azure, mais aucune prise en charge du système d’exploitation n’est fournie par Azure. | Préparé pour Azure sous condition. Nous vous recommandons d’installer un système d’exploitation pris en charge avant de migrer vers Azure.  
+Autres systèmes d’exploitation<br/><br/> Par exemple, Oracle Solaris, Apple macOS, FreeBSD, etc. | Azure n’approuve pas ces systèmes d’exploitation. La machine peut démarrer dans Azure, mais aucune prise en charge du système d’exploitation n’est fournie par Azure. | Préparé pour Azure sous condition. Nous vous recommandons d’installer un système d’exploitation pris en charge avant de migrer vers Azure.  
 Système d’exploitation spécifié comme **Autre** dans vCenter Server | Azure Migrate ne peut pas identifier le système d’exploitation dans ce cas. | État de la préparation inconnu. Vérifiez que le système d’exploitation en cours d’exécution sur la machine virtuelle est pris en charge dans Azure.
 Systèmes d’exploitation 32 bits | La machine peut démarrer dans Azure, mais il est possible qu’Azure ne fournisse pas une prise en charge complète. | Préparé pour Azure sous condition. Envisagez de mettre à niveau le système d’exploitation 32 bits de la machine vers un système d’exploitation 64 bits avant de migrer vers Azure.
 
@@ -201,7 +210,7 @@ Pour utiliser la visualisation des dépendances, vous associez un espace de trav
 1. Pour attacher un espace de travail Log Analytics à un projet, dans **Vue d’ensemble**, accédez à **Essentials**, puis cliquez sur **Requiert une configuration**.
 2. Vous pouvez créer un espace de travail ou attacher un espace de travail existant :
   - Pour créer un espace de travail, spécifiez un nom. L’espace de travail est créé dans une région appartenant à la même [zone géographique Azure](https://azure.microsoft.com/global-infrastructure/geographies/) que le projet de migration.
-  - Quand vous attachez un espace de travail existant, vous pouvez choisir parmi tous les espaces de travail disponibles dans le même abonnement que le projet de migration. Seuls les espaces de travail créés dans une région [Service Map prise en charge](../azure-monitor/insights/vminsights-enable-overview.md#prerequisites) sont répertoriés. Pour attacher un espace de travail, assurez-vous d’avoir accès en lecture à l’espace de travail.
+  - Quand vous attachez un espace de travail existant, vous pouvez choisir parmi tous les espaces de travail disponibles dans le même abonnement que le projet de migration. Seuls les espaces de travail créés dans une région [Service Map prise en charge](../azure-monitor/insights/vminsights-configure-workspace.md#supported-regions) sont répertoriés. Pour attacher un espace de travail, assurez-vous d’avoir accès en lecture à l’espace de travail.
 
 > [!NOTE]
 > Vous ne pouvez pas changer l’espace de travail associé à un projet de migration.
@@ -229,7 +238,7 @@ Pour installer l’agent sur une machine Windows :
 4. Dans **Options d’installation de l’agent**, sélectionnez **Azure Log Analytics** > **Suivant**.
 5. Cliquez sur **Ajouter** pour ajouter un nouvel espace de travail Log Analytics. Collez l’ID et la clé de l’espace de travail que vous avez copiés sur le portail. Cliquez sur **Suivant**.
 
-Vous pouvez installer l’agent à partir de la ligne de commande ou en utilisant une méthode automatisée comme Configuration Manager. [En savoir plus](../azure-monitor/platform/log-analytics-agent.md#installation-and-configuration) sur l’utilisation de ces méthodes pour installer l’agent MMA.
+Vous pouvez installer l’agent à partir de la ligne de commande ou en utilisant une méthode automatisée comme Configuration Manager. [En savoir plus](../azure-monitor/platform/log-analytics-agent.md#installation-options) sur l’utilisation de ces méthodes pour installer l’agent MMA.
 
 #### <a name="install-the-mma-agent-on-a-linux-machine"></a>Installer l’agent MMA sur une machine Linux
 
@@ -240,11 +249,11 @@ Pour installer l’agent sur une machine Linux :
 
     ```sudo sh ./omsagent-<version>.universal.x64.sh --install -w <workspace id> -s <workspace key>```
 
-[Découvrez plus en détail](https://docs.microsoft.com/azure/log-analytics/log-analytics-concept-hybrid#supported-linux-operating-systems) la liste des systèmes d’exploitation Linux pris en charge par MMA.
+[Découvrez plus en détail](../azure-monitor/platform/agents-overview.md#supported-operating-systems) la liste des systèmes d’exploitation Linux pris en charge par MMA.
 
 ### <a name="install-the-mma-agent-on-a-machine-monitored-by-operations-manager"></a>Installer l’agent sur une machine surveillée par Operations Manager
 
-Pour les machines surveillées par System Center Operations Manager 2012 R2 ou version ultérieure, il n'est pas nécessaire d'installer l'agent MMA. Service Map s’intègre avec l’agent MMA Operations Manager pour recueillir les données de dépendance nécessaires. [Plus d’informations](https://docs.microsoft.com/azure/azure-monitor/insights/service-map-scom#prerequisites) L’agent de dépendances doit être installé.
+Pour les machines surveillées par System Center Operations Manager 2012 R2 ou version ultérieure, il n'est pas nécessaire d'installer l'agent MMA. Service Map s’intègre avec l’agent MMA Operations Manager pour recueillir les données de dépendance nécessaires. [Plus d’informations](../azure-monitor/insights/service-map-scom.md#prerequisites) L’agent de dépendances doit être installé.
 
 ### <a name="install-the-dependency-agent"></a>Installer l’agent de dépendances
 
@@ -254,7 +263,7 @@ Pour les machines surveillées par System Center Operations Manager 2012 R2 ou
     ```sh InstallDependencyAgent-Linux64.bin```
 
 - Apprenez-en davantage sur la [prise en charge de l’agent de dépendances](../azure-monitor/insights/vminsights-enable-overview.md#supported-operating-systems) pour les systèmes d’exploitation Windows et Linux.
-- [En savoir plus](../azure-monitor/insights/vminsights-enable-hybrid-cloud.md#installation-script-examples) sur la façon dont vous pouvez utiliser des scripts pour installer l’agent de dépendances.
+- [En savoir plus](../azure-monitor/insights/vminsights-enable-hybrid.md#dependency-agent) sur la façon dont vous pouvez utiliser des scripts pour installer l’agent de dépendances.
 
 >[!NOTE]
 > L’article sur Azure Monitor pour machines virtuelles mentionné qui fournit une vue d’ensemble des exigences système et des méthodes de déploiement de l’agent de dépendances est également applicable à la solution Service Map.
@@ -274,7 +283,7 @@ Pour les machines surveillées par System Center Operations Manager 2012 R2 ou
 4. Vous pouvez examiner les dépendances pour différentes durées en cliquant sur la durée dans l’étiquette de l’intervalle de temps. Par défaut, il est fixé à une heure. Vous pouvez le modifier ou spécifier une date de début, une date de fin et une durée.
 
    > [!NOTE]
-   >    L’intervalle de temps maximal pris en charge est de une heure. Utilisez les journaux Azure Monitor pour [interroger les données de dépendance](https://docs.microsoft.com/azure/migrate/how-to-create-group-machine-dependencies) sur une plus longue durée.
+   >    L’intervalle de temps maximal pris en charge est de une heure. Utilisez les journaux Azure Monitor pour [interroger les données de dépendance](./how-to-create-group-machine-dependencies.md) sur une plus longue durée.
 
 5. Quand vous avez identifié des machines dépendantes à grouper, utilisez la commande Ctrl+clic pour les sélectionner sur le mappage, puis cliquez sur **Grouper les machines**.
 6. Spécifiez un nom de groupe. Vérifiez que les machines dépendantes sont découvertes par Azure Migrate.
@@ -289,7 +298,7 @@ Une fois le groupe créé, nous vous recommandons d’installer les agents sur t
 
 ## <a name="query-dependency-data-from-azure-monitor-logs"></a>Interroger les données de dépendance à partir des journaux d'activité Azure Monitor
 
-Les données de dépendance capturées par Service Map peuvent être interrogées dans l'espace de travail Log Analytics associé à votre projet Azure Migrate. [Découvrez-en plus](https://docs.microsoft.com/azure/azure-monitor/insights/service-map#log-analytics-records) sur les tables de données Service Map à interroger dans les journaux d'activité Azure Monitor. 
+Les données de dépendance capturées par Service Map peuvent être interrogées dans l'espace de travail Log Analytics associé à votre projet Azure Migrate. [Découvrez-en plus](../azure-monitor/insights/service-map.md#log-analytics-records) sur les tables de données Service Map à interroger dans les journaux d'activité Azure Monitor. 
 
 Pour exécuter des requêtes Kusto :
 
@@ -299,15 +308,15 @@ Pour exécuter des requêtes Kusto :
 4. Rédigez votre requête pour recueillir des données de dépendance à l'aide des journaux d'activité Azure Monitor. Accédez à des exemples de requêtes dans la section suivante.
 5. Exécutez votre requête en cliquant sur Exécuter. 
 
-[Découvrez-en plus](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-portal) sur la rédaction de requêtes Kusto. 
+[Découvrez-en plus](../azure-monitor/log-query/log-analytics-tutorial.md) sur la rédaction de requêtes Kusto. 
 
 ### <a name="sample-azure-monitor-logs-queries"></a>Exemples d'interrogation des journaux d'activité Azure Monitor
 
-Voici des exemples de requêtes que vous pouvez utiliser pour extraire des données de dépendance. Vous pouvez modifier les requêtes pour extraire les points de données de votre choix. Une liste exhaustive des champs des enregistrements de données de dépendance est disponible [ici](https://docs.microsoft.com/azure/azure-monitor/insights/service-map#log-analytics-records). Accédez à d'autres exemples de requêtes [ici](https://docs.microsoft.com/azure/azure-monitor/insights/service-map#sample-log-searches).
+Voici des exemples de requêtes que vous pouvez utiliser pour extraire des données de dépendance. Vous pouvez modifier les requêtes pour extraire les points de données de votre choix. Une liste exhaustive des champs des enregistrements de données de dépendance est disponible [ici](../azure-monitor/insights/service-map.md#log-analytics-records). Accédez à d'autres exemples de requêtes [ici](../azure-monitor/insights/service-map.md#sample-log-searches).
 
 #### <a name="summarize-inbound-connections-on-a-set-of-machines"></a>Résumer les connexions entrantes sur un ensemble de machines
 
-Les enregistrements de la table des métriques de connexion, VMConnection, ne représentent pas des connexions réseau physiques individuelles. Différentes connexions réseau physiques sont regroupées au sein d'une connexion logique. [Découvrez-en plus](https://docs.microsoft.com/azure/azure-monitor/insights/service-map#connections) sur la manière dont les données de connexion réseau physique sont agrégées au sein d'un même enregistrement logique dans VMConnection. 
+Les enregistrements de la table des métriques de connexion, VMConnection, ne représentent pas des connexions réseau physiques individuelles. Différentes connexions réseau physiques sont regroupées au sein d'une connexion logique. [Découvrez-en plus](../azure-monitor/insights/service-map.md#connections) sur la manière dont les données de connexion réseau physique sont agrégées au sein d'un même enregistrement logique dans VMConnection. 
 
 ```
 // the machines of interest

@@ -1,22 +1,19 @@
 ---
 title: Infrastructure de mise à jour Red Hat | Microsoft Docs
 description: Découvrez l’infrastructure de mise à jour Red Hat pour les instances Red Hat Enterprise Linux à la demande dans Microsoft Azure
-services: virtual-machines-linux
-documentationcenter: ''
 author: asinn826
-manager: BorisB2015
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure-services
 ms.date: 02/10/2020
 ms.author: alsin
-ms.openlocfilehash: b46e8efb252224f83603000777b2e342f7e7ab9d
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.reviewer: cynthn
+ms.openlocfilehash: d4af869a3bf4ba7f454ae8e5c9c9f4eb81f5939f
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83684445"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957450"
 ---
 # <a name="red-hat-update-infrastructure-for-on-demand-red-hat-enterprise-linux-vms-in-azure"></a>Infrastructure de mise à jour Red Hat pour machines virtuelles Red Hat Enterprise Linux à la demande dans Azure
  [Infrastructure de mise à jour Red Hat](https://access.redhat.com/products/red-hat-update-infrastructure) (RHUI) permet aux fournisseurs de cloud, par exemple Azure, de mettre en miroir le contenu du référentiel hébergé par Red Hat, de créer des référentiels personnalisés avec du contenu spécifique à Azure et de rendre ces référentiels accessibles aux machines virtuelles des utilisateurs finaux.
@@ -49,7 +46,7 @@ Pour obtenir la liste complète des images, exécutez `az vm image list --publis
 
 ### <a name="images-connected-to-non-eus-repositories"></a>Images connectées à des dépôts non EUS
 
-Si vous provisionnez une machine virtuelle à partir d’une image RHEL qui est connectée à des dépôts non EUS, votre version est mise à niveau vers la dernière version mineure de RHEL quand vous exécutez `sudo yum update`. Par exemple, si vous provisionnez une machine virtuelle à partir d’une image PAYG RHEL 7.4 et que vous exécutez `sudo yum update`, vous obtenez une machine virtuelle RHEL 7.7 (version mineure la plus récente dans la famille RHEL7).
+Si vous provisionnez une machine virtuelle à partir d’une image RHEL qui est connectée à des dépôts non EUS, votre version est mise à niveau vers la dernière version mineure de RHEL quand vous exécutez `sudo yum update`. Par exemple, si vous approvisionnez une machine virtuelle à partir d'une image PAYG RHEL 7.4 et que vous exécutez `sudo yum update`, vous obtenez une machine virtuelle RHEL 7.8 (version mineure la plus récente de la famille RHEL7).
 
 Les images connectées à des dépôts non EUS ne comportent pas de numéro de version mineure dans la référence SKU. La référence SKU est le troisième élément de l’URN (nom complet de l’image). Par exemple, toutes les images suivantes sont fournies en étant déjà connectées à des dépôts non EUS :
 
@@ -83,17 +80,17 @@ Les référentiels EUS (Extended Update Support) sont proposés aux clients qui 
 >[!NOTE]
 > La technologie EUS n’est pas prise en charge par RHEL Extras. Cela signifie que vous ne pourrez pas, sur EUS, installer un package généralement disponible à partir du canal RHEL Extras. Le cycle de vie des produits Red Hat Extras est détaillé [ici](https://access.redhat.com/support/policy/updates/extras/).
 
-Au moment de la rédaction de ce document, la prise en charge d’EUS est terminée pour RHEL 7.4 et les versions antérieures. Pour en savoir plus, consultez la section de la [documentation Red Hat](https://access.redhat.com/support/policy/updates/errata/) qui indique que Red Hat Enterprise Linux ne prend plus en charge les modules complémentaires.
+Au moment de la rédaction de ce document, la prise en charge d’EUS est terminée pour RHEL 7.4 et les versions antérieures. Pour en savoir plus, consultez la section « Maintenance prolongée de Red Hat Enterprise Linux » de la [documentation Red Hat](https://access.redhat.com/support/policy/updates/errata/#Long_Support).
 * La prise en charge de RHEL 7.4 EUS se terminera le 31 août 2019.
 * La prise en charge de RHEL 7.5 EUS se terminera le 30 avril 2020.
-* La prise en charge de RHEL 7.6 EUS se terminera le 31 octobre 2020.
+* La prise en charge de RHEL 7.6 EUS se terminera le 31 mai 2021.
 * La prise en charge de RHEL 7.7 EUS se terminera le 30 août 2021.
 
-### <a name="switch-a-rhel-vm-to-eus-version-lock-to-a-specific-minor-version"></a>Faites basculer une machine virtuelle RHEL vers EUS (verrouillage sur une version mineure spécifique)
-Utilisez les instructions suivantes pour verrouiller une machine virtuelle RHEL sur une version mineure en particulier (en exécutant les opérations en tant que racine) :
+### <a name="switch-a-rhel-vm-7x-to-eus-version-lock-to-a-specific-minor-version"></a>Faire passer une machine virtuelle RHEL 7.x à EUS (verrouillage sur une version mineure spécifique)
+Utilisez les instructions suivantes pour verrouiller une machine virtuelle RHEL 7.x sur une version mineure spécifique (à exécuter comme utilisateur root) :
 
 >[!NOTE]
-> Ceci s’applique uniquement aux versions RHEL pour laquelle EUS est disponible. Au moment de la rédaction de cet article, cela inclut RHEL 7.2-7.7. Pour plus de détails, voir la page [Cycle de vie de Red Hat Enterprise Linux](https://access.redhat.com/support/policy/updates/errata).
+> Ceci s’applique uniquement aux versions RHEL 7.x pour laquelle EUS est disponible. Au moment de la rédaction de cet article, cela inclut RHEL 7.2-7.7. Pour plus de détails, voir la page [Cycle de vie de Red Hat Enterprise Linux](https://access.redhat.com/support/policy/updates/errata).
 
 1. Désactivez les dépôts non-EUS :
     ```bash
@@ -111,14 +108,52 @@ Utilisez les instructions suivantes pour verrouiller une machine virtuelle RHEL 
     ```
 
     >[!NOTE]
-    > L’instruction ci-dessus verrouille la version mineure de RHEL sur la version mineure actuelle. Entrez une version mineure spécifique si vous souhaitez mettre à niveau et verrouiller une version mineure ultérieure qui n’est pas la dernière version. Par exemple, `echo 7.5 > /etc/yum/vars/releasever` verrouille votre version RHEL sur RHEL 7.5
+    > L’instruction ci-dessus verrouille la version mineure de RHEL sur la version mineure actuelle. Entrez une version mineure spécifique si vous souhaitez mettre à niveau et verrouiller une version mineure ultérieure qui n’est pas la dernière version. Par exemple, `echo 7.5 > /etc/yum/vars/releasever` verrouille votre version de RHEL sur RHEL 7.5.
 
 1. Mettre à jour votre machine virtuelle RHEL
     ```bash
     sudo yum update
     ```
 
-### <a name="switch-a-rhel-vm-back-to-non-eus-remove-a-version-lock"></a>Faites basculer une machine virtuelle RHEL vers une infrastructure non EUS (en supprimant le verrouillage de version)
+### <a name="switch-a-rhel-vm-8x-to-eus-version-lock-to-a-specific-minor-version"></a>Faire passer une machine virtuelle RHEL 8.x à EUS (verrouillage sur une version mineure spécifique)
+Utilisez les instructions suivantes pour verrouiller une machine virtuelle RHEL 8.x sur une version mineure spécifique (à exécuter comme utilisateur root) :
+
+>[!NOTE]
+> Ceci s’applique uniquement aux versions RHEL 8.x pour laquelle EUS est disponible. Au moment de la rédaction de cet article, ceci inclut RHEL 8.1 - 8.2. Pour plus de détails, voir la page [Cycle de vie de Red Hat Enterprise Linux](https://access.redhat.com/support/policy/updates/errata).
+
+1. Désactivez les dépôts non-EUS :
+    ```bash
+    yum --disablerepo='*' remove 'rhui-azure-rhel8'
+    ```
+
+1. Procurez-vous le fichier de configuration de dépôt EUS :
+    ```bash
+    wget https://rhelimage.blob.core.windows.net/repositories/rhui-microsoft-azure-rhel8-eus.config
+    ```
+
+1. Ajoutez les dépôts EUS :
+    ```bash
+    yum --config=rhui-microsoft-azure-rhel8-eus.config install rhui-azure-rhel8-eus
+    ```
+
+1. Verrouillez la variable `releasever` (en exécutant les opérations en tant que racine) :
+    ```bash
+    echo $(. /etc/os-release && echo $VERSION_ID) > /etc/yum/vars/releasever
+    ```
+
+    >[!NOTE]
+    > L’instruction ci-dessus verrouille la version mineure de RHEL sur la version mineure actuelle. Entrez une version mineure spécifique si vous souhaitez mettre à niveau et verrouiller une version mineure ultérieure qui n’est pas la dernière version. Par exemple, `echo 8.1 > /etc/yum/vars/releasever` verrouille votre version RHEL sur RHEL 8.1.
+
+    >[!NOTE]
+    > S’il existe des problèmes d’autorisation pour accéder au releasever, vous pouvez éditer le fichier en utilisant « nano /etc/yum/vars/releaseve », ajouter les détails de la version de l’image et enregistrer (« Ctrl+O », puis appuyer sur Entrée, puis sur « Ctrl+X »).  
+
+1. Mettre à jour votre machine virtuelle RHEL
+    ```bash
+    sudo yum update
+    ```
+
+
+### <a name="switch-a-rhel-7x-vm-back-to-non-eus-remove-a-version-lock"></a>Rétablir une machine virtuelle RHEL 7.x à une version non-EUS (supprimer un verrouillage de version)
 Exécutez l’opération suivante, en tant que racine :
 1. Supprimez le fichier `releasever` :
     ```bash
@@ -135,6 +170,33 @@ Exécutez l’opération suivante, en tant que racine :
     yum --config='https://rhelimage.blob.core.windows.net/repositories/rhui-microsoft-azure-rhel7.config' install 'rhui-azure-rhel7'
     ```
 
+1. Mettre à jour votre machine virtuelle RHEL
+    ```bash
+    sudo yum update
+    ```
+
+### <a name="switch-a-rhel-8x-vm-back-to-non-eus-remove-a-version-lock"></a>Rétablir une machine virtuelle RHEL 8.x à une version non-EUS (supprimer un verrouillage de version)
+Exécutez l’opération suivante, en tant que racine :
+1. Supprimez le fichier `releasever` :
+    ```bash
+    rm /etc/yum/vars/releasever
+     ```
+
+1. Désactivez le référentiel EUS :
+    ```bash
+    yum --disablerepo='*' remove 'rhui-azure-rhel8-eus'
+   ```
+
+1. Procurez-vous le fichier de configuration de dépôt standard :
+    ```bash
+    wget https://rhelimage.blob.core.windows.net/repositories/rhui-microsoft-azure-rhel8.config
+    ```
+
+1. Ajoutez les dépôts EUS :
+    ```bash
+    yum --config=rhui-microsoft-azure-rhel8.config install rhui-azure-rhel8
+    ```
+    
 1. Mettre à jour votre machine virtuelle RHEL
     ```bash
     sudo yum update
@@ -164,6 +226,11 @@ Si vous utilisez une configuration du réseau pour restreindre davantage l’acc
 51.5.243.77
 51.4.228.145
 ```
+>[!NOTE]
+>Les nouvelles images Azure US Government, à compter de janvier 2020, utiliseront une adresse IP publique mentionnée dans l’en-tête Azure Global ci-dessus.
+
+>[!NOTE]
+>Notez également qu’Azure Allemagne est déconseillé en faveur des régions publiques d’Allemagne. Pour les clients Azure Allemagne, il est recommandé de commencer par pointer sur les RHUI publics à l’aide de [ces étapes](#manual-update-procedure-to-use-the-azure-rhui-servers).
 
 ## <a name="azure-rhui-infrastructure"></a>Infrastructure Azure RHUI
 
@@ -201,7 +268,7 @@ Si vous rencontrez des problèmes de connexion à RHUI Azure à partir de votre 
 
 En septembre 2016, nous avons déployé une mise à jour de RHUI Azure. En avril 2017, nous avons mis fin à l’ancien RHUI Azure. Si vous avez utilisé les images RHEL PAYG (ou leurs captures instantanées) à partir de septembre 2016, vous vous connectez automatiquement à la nouvelle RHUI Azure. Si toutefois vous avez des captures instantanées plus anciennes sur vos machines virtuelles, vous devez mettre à jour leur configuration manuellement pour accéder à la RHUI Azure, comme décrit dans la section suivante.
 
-Les nouveaux serveurs RHUI Azure sont déployés avec [Azure Traffic Manager](https://azure.microsoft.com/services/traffic-manager/). Dans Traffic Manager, un simple point de terminaison (rhui-1.micrsoft.com) peut être utilisé par n’importe quelle machine virtuelle, quelle que soit la région.
+Les nouveaux serveurs RHUI Azure sont déployés avec [Azure Traffic Manager](https://azure.microsoft.com/services/traffic-manager/). Dans Traffic Manager, un simple point de terminaison (rhui-1.microsoft.com) peut être utilisé par n’importe quelle machine virtuelle, quelle que soit la région.
 
 ### <a name="manual-update-procedure-to-use-the-azure-rhui-servers"></a>Procédure de mise à jour manuelle pour utiliser les serveurs RHUI Azure
 Cette procédure est fournie uniquement à titre de référence. Les images RHEL PAYG possèdent déjà la configuration correcte pour se connecter à la RHUI Azure. Pour mettre à jour manuellement la configuration afin d’utiliser les serveurs RHUI Azure, procédez comme suit :

@@ -11,20 +11,16 @@ ms.workload: identity
 ms.date: 01/31/2020
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: df06c4c55941f4424d6b90d2846af17bf055b2e4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e63a948260863c93a92e4241044be5e0baf8afca
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885461"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443260"
 ---
 # <a name="scenario-daemon-application-that-calls-web-apis"></a>Scénario : Application démon appelant des API web
 
 Découvrez tout ce dont vous avez besoin pour créer une application démon appelant des API web.
-
-## <a name="prerequisites"></a>Prérequis
-
-[!INCLUDE [Pre-requisites](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -38,7 +34,7 @@ Voici quelques exemples de cas d’utilisation d’applications démon :
 - Applications de bureau (comme des services Windows sur Windows ou des processus démon sur Linux) qui effectuent des traitements par lots, ou un service de système d’exploitation qui s’exécute en arrière-plan
 - API web que ont besoin de manipuler des annuaires, pas des utilisateurs spécifiques.
 
-Il existe un autre cas courant où des applications non-démon utilisent les informations d’identification du client. Même quand elles agissent pour le compte d’utilisateurs, pour des raisons techniques, elles ont besoin d’accéder à une API web ou à une ressource sous leur propre identité. L’accès aux secrets dans Azure Key Vault ou dans une base de données Azure SQL pour un cache en est un exemple.
+Il existe un autre cas courant où des applications non-démon utilisent les informations d’identification du client. Même quand elles agissent pour le compte d’utilisateurs, pour des raisons techniques, elles ont besoin d’accéder à une API web ou à une ressource sous leur propre identité. L’accès aux secrets dans Azure Key Vault ou Azure SQL Database pour un cache en est un exemple.
 
 Applications qui acquièrent un jeton pour leurs propres identités :
 
@@ -59,7 +55,10 @@ Pour les développeurs, l’expérience de bout en bout pour ce scénario prése
 - La [configuration de l’application](./scenario-daemon-app-configuration.md) doit fournir les informations d’identification du client qui ont été partagées avec Azure AD lors de l’inscription de l’application.
 - L’[étendue](scenario-daemon-acquire-token.md#scopes-to-request) utilisée pour acquérir un jeton avec le flux d’informations d’identification client doit être une étendue statique.
 
+## <a name="recommended-reading"></a>Lectures recommandées
+
+[!INCLUDE [recommended-topics](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Application démon – Inscription de l’application](./scenario-daemon-app-registration.md)
+Passez à l’article suivant de ce scénario, [Inscription d’application](./scenario-daemon-app-registration.md).

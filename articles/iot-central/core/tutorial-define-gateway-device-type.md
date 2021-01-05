@@ -1,5 +1,5 @@
 ---
-title: Définir un nouveau type d’appareil de passerelle dans Azure IoT Central | Microsoft Docs
+title: Tutoriel - Définir un nouveau type d’appareil de passerelle dans Azure IoT Central | Microsoft Docs
 description: Ce tutoriel vous indique comment, en tant que créateur, définir un nouveau type d’appareil de passerelle IoT dans votre application Azure IoT Central.
 author: rangv
 ms.author: rangv
@@ -9,14 +9,14 @@ ms.service: iot-central
 services: iot-central
 ms.custom: mvc
 manager: peterpr
-ms.openlocfilehash: 2411eab50cc921a09ba55780b3c6620744a78f3f
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: f95df6fb74071dc16814f11fb48521f984c89778
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81758133"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995520"
 ---
-# <a name="define-a-new-iot-gateway-device-type-in-your-azure-iot-central-application"></a>Définir un nouveau type d’appareil de passerelle IoT dans votre application Azure IoT Central
+# <a name="tutorial---define-a-new-iot-gateway-device-type-in-your-azure-iot-central-application"></a>Tutoriel - Définir un nouveau type d’appareil de passerelle IoT dans votre application Azure IoT Central
 
 *Cet article s’applique aux créateurs de solutions et aux développeurs d’appareils.*
 
@@ -31,6 +31,9 @@ En plus de permettre à des appareils en aval de communiquer avec votre applicat
 * Envoyer sa propre télémétrie, comme une température.
 * Répondre aux mises à jour de propriétés accessibles en écriture effectuées par un opérateur. Par exemple, un opérateur peut modifier l’intervalle d’envoi de la télémétrie.
 * Répondre à des commandes, comme le redémarrage de l’appareil.
+
+> [!div class="checklist"]
+> Créer des modèles d’appareil en aval Créer un modèle d’appareil de passerelle Publier le modèle d’appareil Créer les appareils simulés
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -48,11 +51,11 @@ Pour créer un modèle d’appareil pour un appareil **S1 Sensor** :
 
 1. Dans la page **Vérifier**, sélectionnez **Créer** pour ajouter le modèle d’appareil à votre application. 
 
-Pour créer un modèle d’appareil pour un appareil ***RS40 Occupancy Sensor** :
+Pour créer un modèle d’appareil pour un appareil **_RS40 Occupancy Sensor_*  :
 
 1. Dans le volet gauche, sélectionnez **Modèles d’appareil**. Sélectionnez ensuite **+** pour commencer à ajouter le modèle.
 
-1. Faites défiler jusqu’à faire apparaître la vignette pour l’appareil ***RS40 Occupancy Sensor**. Sélectionnez la vignette, puis sélectionnez **Suivant : Personnaliser**.
+1. Faites défiler jusqu’à faire apparaître la vignette pour l’appareil **_RS40 Occupancy Sensor_*. Sélectionnez la vignette, puis sélectionnez **Suivant : Personnaliser**.
 
 1. Dans la page **Vérifier**, sélectionnez **Créer** pour ajouter le modèle d’appareil à votre application. 
 
@@ -139,7 +142,7 @@ Pour publier le modèle d’appareil de passerelle :
 
 3. Dans la boîte de dialogue **Publier un modèle d’appareil**, choisissez **Publier**.
 
-Une fois qu’un modèle d’appareil a été publié, il est visible dans la page **Appareils** et par l’opérateur. Dans un modèle d’appareil publié, vous ne pouvez pas modifier un modèle de capacité d’appareil sans créer de nouvelle version. En revanche, vous pouvez effectuer des mises à jour des propriétés du cloud, des personnalisations et des vues dans un modèle d’appareil publié. Ces mises à jour n’entraînent pas la création d’une version. Après avoir apporté des modifications, sélectionnez **Publier** pour envoyer ces modifications à votre opérateur.
+Une fois qu’un modèle d’appareil a été publié, il est visible dans la page **Appareils** et par l’opérateur. Dans un modèle d’appareil publié, vous ne pouvez pas modifier un modèle d’appareil sans créer de version. En revanche, vous pouvez effectuer des mises à jour des propriétés du cloud, des personnalisations et des vues dans un modèle d’appareil publié. Ces mises à jour n’entraînent pas la création d’une version. Après avoir apporté des modifications, sélectionnez **Publier** pour envoyer ces modifications à votre opérateur.
 
 ## <a name="create-the-simulated-devices"></a>Créer les appareils simulés
 

@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à AppDynamics | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et AppDynamics.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 25fd1df0-411c-4f55-8be3-4273b543100f
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/26/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 43245a88ee48b016e1947047d12349423cca6047
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ac85fc0478f4e775b92de21cf931358d63aa95b4
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73152893"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672576"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-appdynamics"></a>Didacticiel : Intégration d’Azure Active Directory à AppDynamics
 
@@ -32,7 +27,7 @@ L’intégration d’AppDynamics à Azure AD vous offre les avantages suivants 
 * Vous pouvez permettre à vos utilisateurs de se connecter automatiquement à AppDynamics (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -70,7 +65,7 @@ Pour configurer l’intégration d’AppDynamics à Azure AD, vous devez ajoute
 
 4. Dans la zone de recherche, saisissez **AppDynamics**, sélectionnez **AppDynamics** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![AppDynamics dans la liste des résultats](common/search-new-app.png)
+    ![AppDynamics dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -143,7 +138,7 @@ Pour configurer l’authentification unique Azure AD avec AppDynamics, procédez
 
 1. Dans la section **Authentication Provider** , procédez comme suit :
 
-   ![Configuration SAML](./media/appdynamics-tutorial/ic790225.png "Configuration SAML")
+    ![Configuration SAML](./media/appdynamics-tutorial/ic790225.png "Configuration SAML")
 
    a. Dans **Fournisseur d’authentification**, sélectionnez **SAML**.
 
@@ -172,7 +167,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -211,19 +206,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 L’objectif de cette section est de créer un utilisateur appelé Britta Simon dans AppDynamics. AppDynamics prend en charge le provisionnement juste-à-temps, activé par défaut. Vous n’avez aucune opération à effectuer dans cette section. Un utilisateur est créé pendant la tentative d’accès à AppDynamics, s’il n’existe pas déjà.
 
 >[!Note]
->Si vous devez créer un utilisateur manuellement, contactez  [l’équipe de support technique AppDynamics](https://www.appdynamics.com/support/).
+>Si vous devez créer un utilisateur manuellement, contactez [l’équipe de support technique du client AppDynamics](https://www.appdynamics.com/support/).
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette AppDynamics dans le volet d’accès, vous devez être connecté automatiquement à l’application AppDynamics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette AppDynamics dans le volet d’accès, vous devez être connecté automatiquement à l’application AppDynamics pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

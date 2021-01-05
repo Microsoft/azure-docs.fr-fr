@@ -9,10 +9,10 @@ ms.date: 09/24/2019
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 5a734963ced9daefda2b7b6f4a52fd9ef437eddc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "71269279"
 ---
 La passerelle de réseau virtuel utilise un sous-réseau spécifique, appelé sous-réseau de passerelle. Le sous-réseau de passerelle fait partie de la plage d’adresses IP du réseau virtuel que vous spécifiez lors de la configuration de votre réseau virtuel. Il contient les adresses IP utilisées par les ressources et les services de passerelle de réseau virtuel. Le sous-réseau doit être nommé « GatewaySubnet » pour qu’Azure puisse déployer les ressources de passerelle. Vous ne pouvez pas spécifier un autre sous-réseau pour y déployer les ressources de passerelle. Si vous n’avez pas de sous-réseau nommé « GatewaySubnet », vous ne pourrez pas créer votre passerelle VPN.

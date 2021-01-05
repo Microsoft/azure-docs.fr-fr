@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 01/22/2019
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: 2303d36e93cecfca03894a8b0e55458c03b13d78
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c0627dd0833e3b20468eb5f50fbeb9fd9d9ae2b3
+ms.sourcegitcommit: b33c9ad17598d7e4d66fe11d511daa78b4b8b330
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73412964"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88864948"
 ---
 **Transferts de données sortants** : [transferts de données sortants](https://azure.microsoft.com/pricing/details/bandwidth/) (données sortant des centres de données Azure) sont facturés en fonction de la bande passante utilisée.
 
@@ -26,7 +26,7 @@ Pour plus d’informations sur la tarification d’Azure Disques managés (dont
 Les machines virtuelles Azure peuvent indiquer si elles sont compatibles avec les disques Ultra. Une machine virtuelle compatible avec les disques Ultra alloue une capacité de bande passante dédiée entre l'instance de machine virtuelle de calcul et l'unité d'échelle de stockage de blocs pour optimiser les performances et réduire la latence. L'ajout de cette fonctionnalité sur la machine virtuelle entraîne des frais de réservation qui ne sont imposés que si vous avez activé la fonctionnalité de disque Ultra sur la machine virtuelle sans y joindre de disque Ultra. Lorsqu'un disque Ultra est joint à la machine virtuelle compatible avec les disques Ultra, ces frais ne s'appliquent pas. Les frais sont calculés par processeur virtuel provisionné sur la machine virtuelle. 
 
 > [!Note]
-> Pour les [tailles de machine virtuelle avec des cœurs restreints](../articles/virtual-machines/linux/constrained-vcpu.md), les frais de réservation sont basés sur le nombre réel de processeurs virtuels et non sur les cœurs restreints. Pour Standard_E32-8s_v3, les frais de réservation sont basés sur 32 cœurs. 
+> Pour les [tailles de machine virtuelle avec des cœurs restreints](../articles/virtual-machines/constrained-vcpu.md), les frais de réservation sont basés sur le nombre réel de processeurs virtuels et non sur les cœurs restreints. Pour Standard_E32-8s_v3, les frais de réservation sont basés sur 32 cœurs. 
 
 Pour plus d’informations sur la tarification des disques Ultra, consultez la [page relative à la tarification des disques Azure](https://azure.microsoft.com/pricing/details/managed-disks/).
 

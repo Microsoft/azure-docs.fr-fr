@@ -1,15 +1,15 @@
 ---
-author: bucurb
-ms.author: bobuc
-ms.date: 09/18/2019
+author: msftradford
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.service: azure-spatial-anchors
 ms.topic: include
-ms.openlocfilehash: a3db5535e65e036ab10c35b7bc066a6286a9cad7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 00ae753b0be2631b13a148a4f34a16793000848d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76545203"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999737"
 ---
 ## <a name="configure-the-sensor-fingerprint-provider"></a>Configurer le fournisseur de lecteur d’empreintes digitales
 

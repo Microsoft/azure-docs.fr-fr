@@ -7,18 +7,19 @@ author: tgore03
 manager: carmonm
 ms.service: cloud-services
 ms.devlang: dotnet
+ms.custom: devx-track-csharp
 ms.topic: article
 ms.date: 05/22/2017
 ms.author: tagore
-ms.openlocfilehash: 1e49a0935a70a2470267e5458fa1f55e3059e965
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a015a8d56cf3991d04b212db73d5b752c13a793
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77469763"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92077539"
 ---
 # <a name="enabling-azure-diagnostics-in-azure-cloud-services"></a>Activation des diagnostics Azure dans Azure Cloud Services
-Consultez la page [Présentation des diagnostics Azure](../azure-diagnostics.md) pour obtenir des informations sur les diagnostics Azure.
+Consultez la page [Présentation des diagnostics Azure](../azure-monitor/platform/diagnostics-extension-overview.md) pour obtenir des informations sur les diagnostics Azure.
 
 ## <a name="how-to-enable-diagnostics-in-a-worker-role"></a>Activation de Diagnostics dans un rôle de travail
 Cette procédure pas à pas décrit comment mettre en oeuvre un rôle de travail Azure qui émet des données télémétriques à l'aide de la classe EventSource .NET. Diagnostics Azure est utilisé pour collecter des données télémétriques et les stocker dans un compte de stockage Azure. Lors de la création d'un rôle de travail, Visual Studio active automatiquement Diagnostics 1.0 dans le cadre de la solution dans les Kits de développement logiciel (SDK) pour .NET 2.4 et versions antérieures. Les instructions suivantes décrivent le processus de création d'un rôle de travail, de désactivation de Diagnostics 1.0 de la solution, et de déploiement de Diagnostics 1.2 ou 1.3 sur votre rôle de travail.
@@ -187,20 +188,17 @@ Dans l' **Explorateur de serveurs** de Visual Studio, naviguez jusqu'au compte d
 ![CloudServices_diag_tables](./media/cloud-services-dotnet-diagnostics/WadExampleTables.png)
 
 ## <a name="configuration-file-schema"></a>Schéma du fichier de configuration
-Le fichier de configuration des diagnostics définit les valeurs qui sont utilisées pour initialiser les paramètres de configuration de diagnostic lorsque l’agent de diagnostics démarre. Consultez la [dernière référence de schéma](/azure/azure-monitor/platform/diagnostics-extension-schema) pour obtenir les valeurs valides et des exemples.
+Le fichier de configuration des diagnostics définit les valeurs qui sont utilisées pour initialiser les paramètres de configuration de diagnostic lorsque l’agent de diagnostics démarre. Consultez la [dernière référence de schéma](../azure-monitor/platform/diagnostics-extension-versions.md) pour obtenir les valeurs valides et des exemples.
 
 ## <a name="troubleshooting"></a>Dépannage
-Si vous rencontrez des problèmes, consultez la page [Résolution de problèmes des diagnostics Azure](../azure-diagnostics-troubleshooting.md) pour obtenir de l’aide.
+Si vous rencontrez des problèmes, consultez la page [Résolution de problèmes des diagnostics Azure](../azure-monitor/platform/diagnostics-extension-troubleshooting.md) pour obtenir de l’aide.
 
 ## <a name="next-steps"></a>Étapes suivantes
 [Consultez la liste des articles connexes sur les diagnostics relatifs aux machines virtuelles Azure ](../azure-monitor/platform/diagnostics-extension-overview.md) pour modifier les données que vous collectez, résoudre des problèmes ou pour en savoir plus sur les diagnostics en général.
 
-[EventSource Class]: https://msdn.microsoft.com/library/system.diagnostics.tracing.eventsource(v=vs.110).aspx
+[EventSource Class]: /dotnet/api/system.diagnostics.tracing.eventsource
 
 [Debugging an Azure Application]: https://msdn.microsoft.com/library/windowsazure/ee405479.aspx   
-[Collect Logging Data by Using Azure Diagnostics]: https://msdn.microsoft.com/library/windowsazure/gg433048.aspx
+[Collect Logging Data by Using Azure Diagnostics]: /previous-versions/azure/gg433048(v=azure.100)
 [Free Trial]: https://azure.microsoft.com/pricing/free-trial/
-[Install and configure Azure PowerShell version 0.8.7 or later]: https://azure.microsoft.com/documentation/articles/install-configure-powershell/
-
-
-
+[Install and configure Azure PowerShell version 0.8.7 or later]: /powershell/azure/

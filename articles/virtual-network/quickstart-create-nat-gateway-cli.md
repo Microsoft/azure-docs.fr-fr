@@ -1,35 +1,36 @@
 ---
-title: 'Démarrage rapide : Créer une passerelle NAT - Azure CLI'
+title: Créer une passerelle NAT - Azure CLI
 titlesuffix: Azure Virtual Network NAT
 description: Ce guide de démarrage rapide montre comment créer une passerelle NAT à l’aide de l’interface Azure CLI
 services: virtual-network
 documentationcenter: na
 author: asudbring
-manager: KumundD
+manager: KumudD
 Customer intent: I want to create a NAT gateway for outbound connectivity for my virtual network.
 ms.service: virtual-network
+ms.subservice: nat
 ms.devlang: na
-ms.topic: tutorial
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 02/18/2020
 ms.author: allensu
-ms.openlocfilehash: 9402960927f56092e226ab81bd3e6ede0cf6a52d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: a4d034aefe59a661bfb0694feba36a669aa274ac
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79202193"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007271"
 ---
-# <a name="quickstart-create-a-nat-gateway-using-azure-cli"></a>Démarrage rapide : Créer une passerelle NAT avec Azure CLI
+# <a name="create-a-nat-gateway-using-azure-cli"></a>Créer une passerelle NAT avec Azure CLI
 
-Ce guide de démarrage rapide vous montre comment utiliser le service NAT de Réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
+Ce tutoriel vous montre comment utiliser le service NAT de réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
 
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Vous pouvez suivre ce tutoriel en utilisant Azure Cloud Shell ou exécuter les commandes respectives localement.  Si vous n’avez jamais utilisé Azure Cloud Shell, [connectez-vous maintenant](https://shell.azure.com) pour procéder à l’installation initiale.
-Si vous choisissez d’exécuter ces commandes localement, vous devez installer l’interface CLI.  Ce tutoriel nécessite l’exécution d’une instance d’Azure CLI version 2.0.71 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
-
+- Cet article nécessite l’interface Azure CLI version 2.0.71 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

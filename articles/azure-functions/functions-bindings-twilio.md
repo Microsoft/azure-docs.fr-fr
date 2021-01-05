@@ -5,13 +5,13 @@ author: craigshoemaker
 ms.topic: reference
 ms.date: 07/09/2018
 ms.author: cshoe
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 1426d6e770cca566c4b77ca4742e2f8a0fbb5465
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, H1Hack27Feb2017
+ms.openlocfilehash: 31d5c528112ccacab47282729b1b5f8a72f19af0
+ms.sourcegitcommit: 090ea6e8811663941827d1104b4593e29774fa19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76715065"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91999281"
 ---
 # <a name="twilio-binding-for-azure-functions"></a>Liaison Twilio pour Azure Functions
 
@@ -203,7 +203,7 @@ module.exports = function (context, myQueueItem) {
 
 # <a name="python"></a>[Python](#tab/python)
 
-L’exemple suivant indique comment envoyer un SMS à l’aide de la liaison de sortie telle que définie dans *function.js* ci-après.
+L’exemple suivant indique comment envoyer un SMS à l’aide de la liaison de sortie telle que définie dans le fichier *function.json* suivant.
 
 ```json
     {
@@ -241,7 +241,7 @@ def main(req: func.HttpRequest, twilioMessage: func.Out[str]) -> func.HttpRespon
 
 # <a name="java"></a>[Java](#tab/java)
 
-L’exemple suivant indique comment utiliser l’annotation [TwilioSmsOutput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.twiliosmsoutput) pour envoyer un SMS. Les valeurs de `to`, `from` et `body` sont requises dans la définition de l’attribut même si vous les remplacez par programmation.
+L’exemple suivant indique comment utiliser l’annotation [TwilioSmsOutput](/java/api/com.microsoft.azure.functions.annotation.twiliosmsoutput) pour envoyer un SMS. Les valeurs de `to`, `from` et `body` sont requises dans la définition de l’attribut même si vous les remplacez par programmation.
 
 ```java
 package com.function;
@@ -319,7 +319,7 @@ Les attributs ne sont pas pris en charge par Python.
 
 # <a name="java"></a>[Java](#tab/java)
 
-Placez l’annotation [TwilioSmsOutput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.twiliosmsoutput) sur un paramètre [`OutputBinding<T>`](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.outputbinding) où `T` peut être n’importe quel type Java natif comme `int`, `String`, `byte[]`ou un type POJO.
+Placez l’annotation [TwilioSmsOutput](/java/api/com.microsoft.azure.functions.annotation.twiliosmsoutput) sur un paramètre [`OutputBinding<T>`](/java/api/com.microsoft.azure.functions.outputbinding) où `T` peut être n’importe quel type Java natif comme `int`, `String`, `byte[]`ou un type POJO.
 
 ---
 

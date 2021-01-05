@@ -3,17 +3,19 @@ title: Clause ORDER BY dans Azure Cosmos DB
 description: Découvrez la clause SQL ORDER BY pour Azure Cosmos DB. Utilisez SQL comme langage de requête JSON Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 04/17/2020
+ms.date: 06/06/2020
 ms.author: tisande
-ms.openlocfilehash: 70702ee4a77e8b3c46de4354f3394bca4080d837
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 887dc13eb5e351688718d2a221e69499557b23e5
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81641392"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93338293"
 ---
 # <a name="order-by-clause-in-azure-cosmos-db"></a>Clause ORDER BY dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 La clause `ORDER BY` facultative spécifie l’ordre de tri des résultats retournés par la requête.
 
@@ -47,7 +49,7 @@ ORDER BY <sort_specification>
   
    Spécifie que les valeurs dans la colonne spécifiée doivent être triées par ordre croissant ou décroissant. `ASC` effectue le tri de la valeur la plus faible à la valeur la plus élevée. `DESC` effectue le tri de la valeur la plus élevée à la valeur la plus faible. `ASC` correspond à l’ordre de tri par défaut. Les valeurs NULL sont traitées comme les plus petites valeurs possibles.  
   
-## <a name="remarks"></a>Notes   
+## <a name="remarks"></a>Notes  
   
    La clause `ORDER BY` nécessite que la stratégie d’indexation comprenne un index pour les champs de tri. Le runtime de requête Azure Cosmos DB prend en charge le tri par rapport à un nom de propriété et non par rapport à des propriétés calculées. Azure Cosmos DB prend en charge plusieurs propriétés `ORDER BY`. Pour exécuter une requête avec plusieurs propriétés ORDER BY, vous devez définir un [index composite](index-policy.md#composite-indexes) sur les champs de tri.
 
@@ -79,7 +81,7 @@ Les résultats sont :
     ]
 ```
 
-La requête suivante récupère les `id` de famille dans l’ordre de la date de création de leur élément. L’élément `creationDate` est un nombre représentant l’*heure d’époque*, ou le temps écoulé depuis le 1er janvier 1970 en secondes.
+La requête suivante récupère les `id` de famille dans l’ordre de la date de création de leur élément. L’élément `creationDate` est un nombre représentant l’ *heure d’époque* , ou le temps écoulé depuis le 1er janvier 1970 en secondes.
 
 ```sql
     SELECT f.id, f.creationDate
@@ -215,6 +217,11 @@ Les résultats sont :
     }
 ]
 ```
+
+> [!Note]
+> Seul le kit SDK .NET version 3.4.0 ou ultérieure prend en charge ORDER BY avec des types mixtes. Par conséquent, si vous souhaitez faire un tri par combinaison de valeurs non définies et définies, vous devez utiliser cette version (ou une version ultérieure).
+
+Vous ne pouvez pas contrôler l’ordre dans lequel les différents types apparaissent dans les résultats. Dans l’exemple ci-dessus, nous avons montré comment les valeurs non définies ont été triées avant les valeurs de chaîne. Si, par exemple, vous souhaitez plus de contrôle sur l’ordre de tri des valeurs non définies, vous pouvez assigner à toutes les propriétés non définies une valeur de chaîne « aaaaaaaaa » ou « zzzzzzzz » pour vous assurer qu’elles étaient soit la première, soit la dernière.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

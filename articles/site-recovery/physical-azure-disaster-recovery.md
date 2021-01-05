@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: 2f92c2b800c6d30cc5f365e6d24925a70d3db55a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9b05d9952628e550beae5cedc49e051936a9d633
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229145"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87927281"
 ---
 # <a name="set-up-disaster-recovery-to-azure-for-on-premises-physical-servers"></a>Configurer la récupération d’urgence vers Azure pour des serveurs physiques locaux
 
@@ -59,7 +59,7 @@ Procurez-vous un [compte Microsoft Azure](https://azure.microsoft.com/).
 Assurez-vous que votre compte Azure dispose des autorisations nécessaires pour la réplication de machines virtuelles vers Azure.
 
 - Vérifiez les [autorisations](site-recovery-role-based-linked-access-control.md#permissions-required-to-enable-replication-for-new-virtual-machines) nécessaires pour répliquer des machines vers Azure.
-- Vérifiez et modifiez les autorisations [d’accès en fonction du rôle](../role-based-access-control/role-assignments-portal.md). 
+- Vérifiez et modifiez les autorisation de [contrôle d’accès en fonction du rôle (Azure RBAC)](../role-based-access-control/role-assignments-portal.md) . 
 
 
 
@@ -111,7 +111,7 @@ Configurez le serveur de configuration, inscrivez-le dans le coffre et découvre
 4. Téléchargez le fichier d’installation unifiée de Site Recovery.
 5. Téléchargez la clé d’inscription du coffre. Vous en aurez besoin lors de l’exécution du programme d’installation unifiée. Une fois générée, la clé reste valide pendant 5 jours.
 
-   ![Configurer la source](./media/physical-azure-disaster-recovery/source-environment.png)
+   ![Capture d’écran montrant les options de téléchargement du fichier d’installation et de la clé d’inscription.](./media/physical-azure-disaster-recovery/source-environment.png)
 
 
 ### <a name="register-the-configuration-server-in-the-vault"></a>inscrire le serveur de configuration dans le coffre
@@ -119,7 +119,7 @@ Configurez le serveur de configuration, inscrivez-le dans le coffre et découvre
 Avant de commencer, procédez comme suit : 
 
 #### <a name="verify-time-accuracy"></a>Vérifier la précision de l’heure
-Sur la machine du serveur de configuration, assurez-vous que l’horloge système est synchronisée avec un [Serveur de temps](https://technet.microsoft.com/windows-server-docs/identity/ad-ds/get-started/windows-time-service/windows-time-service). Elles doivent correspondre. S’il y a 15 minutes d’avance ou de retard, le programme d’installation peut échouer.
+Sur la machine du serveur de configuration, assurez-vous que l’horloge système est synchronisée avec un [Serveur de temps](/windows-server/networking/windows-time-service/windows-time-service-top). Elles doivent correspondre. S’il y a 15 minutes d’avance ou de retard, le programme d’installation peut échouer.
 
 #### <a name="verify-connectivity"></a>Vérifier la connectivité
 Vérifiez que la machine peut accéder à ces URL en fonction de votre environnement : 
@@ -136,7 +136,6 @@ Exécutez le programme d’installation unifiée en tant qu’administrateur loc
 
 [!INCLUDE [site-recovery-add-configuration-server](../../includes/site-recovery-add-configuration-server.md)]
 
-Une fois l’inscription terminée, le serveur de configuration s’affiche sur la page **Paramètres** > **Serveurs** du coffre.
 
 ## <a name="set-up-the-target-environment"></a>Configurer l’environnement cible
 
@@ -146,7 +145,7 @@ Sélectionnez et vérifiez les ressources cibles.
 2. Spécifiez le modèle de déploiement cible.
 3. Site Recovery vérifie que vous disposez d’un ou de plusieurs réseaux et comptes Azure Storage compatibles.
 
-   ![Cible](./media/physical-azure-disaster-recovery/network-storage.png)
+   ![Capture d’écran des options de configuration de l’environnement cible.](./media/physical-azure-disaster-recovery/network-storage.png)
 
 
 ## <a name="create-a-replication-policy"></a>Créer une stratégie de réplication
@@ -157,7 +156,7 @@ Sélectionnez et vérifiez les ressources cibles.
 4. Dans **Rétention des points de récupération**, spécifiez la durée de la fenêtre de rétention pour chaque point de récupération (en heures). Les machines virtuelles répliquées peuvent être récupérées à n’importe quel point dans une fenêtre. Les machines virtuelles répliquées vers Premium Storage peuvent prendre en charge jusqu’à 24 heures de rétention et 72 heures en cas de stockage standard.
 5. Dans **Fréquence des captures instantanées de cohérence d’application**, spécifiez la fréquence de création des points de récupération contenant des captures instantanées cohérentes avec les applications (en minutes). Cliquez sur **OK** pour créer la stratégie.
 
-    ![Stratégie de réplication](./media/physical-azure-disaster-recovery/replication-policy.png)
+    ![Capture d’écran des options de création d’une stratégie de réplication.](./media/physical-azure-disaster-recovery/replication-policy.png)
 
 
 La stratégie est automatiquement associée au serveur de configuration. Par défaut, une stratégie de correspondance est automatiquement créée pour la restauration automatique. Par exemple, si la stratégie de réplication est **rep-policy**, la stratégie de restauration automatique **rep-policy-failback** est créée. Cette stratégie n’est utilisée qu’à partir du moment où vous initiez une restauration automatique à partir d’Azure.

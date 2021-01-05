@@ -5,8 +5,6 @@ services: notification-hubs
 documentationcenter: ios
 author: sethmanheim
 manager: femila
-editor: jwargo
-ms.assetid: 4e3772cf-20db-4b9f-bb74-886adfaaa65d
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: ios
@@ -16,12 +14,12 @@ ms.date: 01/04/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 01/04/2019
-ms.openlocfilehash: 3fec04a1a45f8b154e27a1e5303e44111f4cb421
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0819f5196fffca25a840dc16d1df04cdd0a55029
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71211875"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86223310"
 ---
 # <a name="register-the-current-user-for-push-notifications-by-using-aspnet"></a>Inscription de l’utilisateur actif aux notifications Push à l’aide d’ASP.NET
 
@@ -46,11 +44,11 @@ Cette rubrique montre comment demander une inscription aux notifications Push av
 
      À ce stade, votre storyboard a normalement l’aspect suivant :
 
-     ![][0]
+     ![Capture d’écran de l’application MainStoryboard_iPhone.storyboard avec l’ajout des composants.][0]
 
 2. Dans l’éditeur de l’Assistant, créez des outlets pour tous les contrôles commutés et appelez-les, connectez les champs texte au View Controller (délegué), puis créez une **Action** pour le bouton **login**.
 
-    ![][1]
+    ![Capture d’écran de l’éditeur assistant dans l’application MainStoryboard_iPhone.storyboard][1]
 
     Le fichier BreakingNewsViewController.h doit désormais contenir le code suivant :
 
@@ -124,7 +122,7 @@ Cette rubrique montre comment demander une inscription aux notifications Push av
     Cela définit le jeton d’appareil de la requête.
 
    > [!NOTE]
-   > À ce stade, il ne doit pas y avoir d’autre code dans cette méthode. S’il existe déjà un appel à la méthode `registerNativeWithDeviceToken` que vous avez ajoutée quand vous avez suivi le tutoriel [Prise en main de Notification Hubs](notification-hubs-ios-apple-push-notification-apns-get-started.md), vous devez placer l’appel en commentaire ou le supprimer.
+   > À ce stade, il ne doit pas y avoir d’autre code dans cette méthode. S’il existe déjà un appel à la méthode `registerNativeWithDeviceToken` que vous avez ajoutée quand vous avez suivi le tutoriel [Envoyer des notifications Push aux applications iOS avec Azure Notification Hubs](ios-sdk-get-started.md), vous devez placer l’appel en commentaire ou le supprimer.
 
 8. Dans le fichier `PushToUserAppDelegate.m`, ajoutez la méthode de gestionnaire suivante :
 
@@ -258,4 +256,4 @@ Maintenant que l'application cliente est à jour, retournez au didacticiel [Noti
 
 <!-- URLs. -->
 [Notification des utilisateurs via Notification Hubs]: notification-hubs-aspnet-backend-ios-apple-apns-notification.md
-[Prise en main de Notification Hubs]: notification-hubs-ios-apple-push-notification-apns-get-started.md
+[Prise en main de Notification Hubs]: ios-sdk-get-started.md

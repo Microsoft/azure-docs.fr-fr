@@ -1,58 +1,67 @@
 ---
-title: 'Démarrage rapide : Créer un équilibreur de charge - Modèle Azure'
+title: 'Démarrage rapide : Créer un équilibreur de charge public - Modèle Azure'
 titleSuffix: Azure Load Balancer
 description: Ce guide de démarrage rapide vous montre comment créer un équilibreur de charge avec le modèle Azure Resource Manager.
 services: load-balancer
 documentationcenter: na
 author: asudbring
-manager: twooley
+manager: KumudD
 Customer intent: I want to create a load balancer by using an Azure Resource Manager template so that I can load balance internet traffic to VMs.
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/26/2020
+ms.date: 12/09/2020
 ms.author: allensu
 ms.custom: mvc,subject-armqs
-ms.openlocfilehash: 175c5a36c873d16d50d5192a489133a01018e335
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 378ab88f4dee0c725e89f77cc6b2ffe049ff877a
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80474605"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97008433"
 ---
-# <a name="quickstart-create-a-load-balancer-to-load-balance-vms-by-using-azure-resource-manager-template"></a>Démarrage rapide : Créer un équilibreur de charge pour équilibrer la charge des machines virtuelles avec un modèle Azure Resource Manager
+# <a name="quickstart-create-a-public-load-balancer-to-load-balance-vms-by-using-an-arm-template"></a>Démarrage rapide : Créer un équilibreur de charge public pour équilibrer la charge de machines virtuelles à l’aide d’un modèle Resource Manager
 
-L’équilibrage de charge offre un niveau plus élevé de disponibilité et d’évolutivité en répartissant les requêtes entrantes sur plusieurs machines virtuelles. Ce guide de démarrage rapide vous montre comment déployer un modèle Azure Resource Manager qui crée un équilibreur de charge standard pour équilibrer la charge des machines virtuelles. L’utilisation du modèle Resource Manager comprend moins d’étapes que les autres méthodes de déploiement.
+L’équilibrage de charge offre un niveau plus élevé de disponibilité et d’évolutivité en répartissant les requêtes entrantes sur plusieurs machines virtuelles. 
+
+Ce guide de démarrage rapide vous montre comment déployer un équilibreur de charge standard pour équilibrer la charge des machines virtuelles.
+
+L’utilisation du modèle Resource Manager comprend moins d’étapes que les autres méthodes de déploiement.
 
 [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
 
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
+
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-load-balancer-standard-create%2Fazuredeploy.json)
+
+## <a name="prerequisites"></a>Prérequis
+
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="create-a-load-balancer"></a>Créer un équilibreur de charge
+## <a name="review-the-template"></a>Vérifier le modèle
 
-Les références SKU d’équilibreur de charge et d’adresse IP publique doivent correspondre. Lorsque vous créez un équilibreur de charge standard, vous devez également créer une adresse IP publique standard configurée en tant que front-end pour cet équilibreur de charge standard. Si vous souhaitez créer un équilibreur de charge de base, utilisez [ce modèle](https://azure.microsoft.com/resources/templates/201-2-vms-loadbalancer-natrules/). Microsoft recommande d’utiliser la référence SKU Standard pour les charges de travail de production.
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/101-load-balancer-standard-create/).
 
-### <a name="review-the-template"></a>Vérifier le modèle
+Les références SKU de l’équilibreur de charge et de l’adresse IP publique doivent correspondre. Lorsque vous créez un équilibreur de charge standard, vous devez également créer une adresse IP publique standard configurée en tant que front-end pour cet équilibreur de charge standard. Si vous souhaitez créer un équilibreur de charge de base, utilisez [ce modèle](https://azure.microsoft.com/resources/templates/201-2-vms-loadbalancer-natrules/). Microsoft recommande d’utiliser la référence SKU standard pour les charges de travail de production.
 
-Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-load-balancer-standard-create/azuredeploy.json).
-
-:::code language="json" source="~/quickstart-templates/101-load-balancer-standard-create/azuredeploy.json" range="1-324" highlight="58-122":::
+:::code language="json" source="~/quickstart-templates/101-load-balancer-standard-create/azuredeploy.json":::
 
 Plusieurs ressources Azure ont été définies dans le modèle :
 
 - [**Microsoft.Network/loadBalancers**](/azure/templates/microsoft.network/loadbalancers)
-- [**Microsoft.Network/publicIPAddresses**](/azure/templates/microsoft.network/publicipaddresses) : pour l’équilibreur de charge et pour chacune des trois machines virtuelles.
+- [**Microsoft.Network/publicIPAddresses**](/azure/templates/microsoft.network/publicipaddresses) : pour l’équilibreur de charge, l’hôte bastion et pour chacune des trois machines virtuelles.
+- [**Microsoft.Network/bastionHosts**](/azure/templates/microsoft.network/bastionhosts)
 - [**Microsoft.Network/networkSecurityGroups**](/azure/templates/microsoft.network/networksecuritygroups)
 - [**Microsoft.Network/virtualNetworks**](/azure/templates/microsoft.network/virtualnetworks)
-- [**Microsoft.Compute/virutalMachines**](/azure/templates/microsoft.compute/virtualmachines) (3 d’entre elles)
-- [**Microsoft.Network/networkInterfaces**](/azure/templates/microsoft.network/networkinterfaces) (3 d’entre elles)
-- [**Microsoft.Compute/virtualMachine/extensions**](/azure/templates/microsoft.compute/virtualmachines/extensions) (3 d’entre elles) : à utiliser pour configurer the service IIS et les pages web
+- [**Microsoft.Compute/virtualMachines**](/azure/templates/microsoft.compute/virtualmachines) (3).
+- [**Microsoft.Network/networkInterfaces**](/azure/templates/microsoft.network/networkinterfaces) (3).
+- [**Microsoft.Compute/virtualMachine/extensions**](/azure/templates/microsoft.compute/virtualmachines/extensions) (3) : à utiliser pour configurer Internet Information Server (IIS) et les pages web.
 
 Pour rechercher d’autres modèles qui sont liés à l’équilibrage de charge Azure, consultez [Modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Network&pageNumber=1&sort=Popular).
 
-### <a name="deploy-the-template"></a>Déployer le modèle
+## <a name="deploy-the-template"></a>Déployer le modèle
 
 1. Sélectionnez **Essayer** à partir du bloc de code suivant pour ouvrir Azure Cloud Shell, puis suivez les instructions pour vous connecter à Azure.
 
@@ -87,9 +96,9 @@ Le déploiement du modèle prend environ 10 minutes. Une fois l’opération ter
 
 ![Sortie du déploiement PowerShell du modèle Resource Manager Azure Standard Load Balancer](./media/quickstart-load-balancer-standard-public-template/azure-standard-load-balancer-resource-manager-template-powershell-output.png)
 
-Azure PowerShell est utilisé pour déployer le modèle. Outre Azure PowerShell, vous pouvez également utiliser le portail Azure, l’interface Azure CLI et l’API REST. Pour découvrir d’autres méthodes de déploiement, consultez [Déployer des modèles](../azure-resource-manager/templates/deploy-portal.md).
+Azure PowerShell est utilisé pour déployer le modèle. Vous pouvez également utiliser le portail Azure, Azure CLI ou l’API REST. Pour découvrir d’autres méthodes de déploiement, consultez [Déployer des modèles](../azure-resource-manager/templates/deploy-portal.md).
 
-## <a name="test-the-load-balancer"></a>Tester l’équilibreur de charge
+## <a name="review-deployed-resources"></a>Vérifier les ressources déployées
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
@@ -111,13 +120,25 @@ Pour visualiser la distribution de trafic Load Balancer sur les trois machines 
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Vous pouvez supprimer le groupe de ressources, l’équilibreur de charge et toutes les ressources associées lorsque vous n’en avez plus besoin. Pour ce faire, sélectionnez le groupe de ressources qui contient l’équilibreur de charge dans le portail Azure, puis cliquez sur **Supprimer le groupe de ressources**.
+Quand vous n’avez plus besoin des ressources suivantes, supprimez-les : 
+
+* Resource group
+* Équilibrage de charge
+* Ressources associées
+
+Dans le portail Azure, sélectionnez le groupe de ressources qui contient l’équilibreur de charge, puis sélectionnez **Supprimer le groupe de ressources**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce démarrage rapide, vous avez créé un Standard Load Balancer, associé des machines virtuelles à celui-ci, configuré la règle de trafic d’équilibreur de charge, la sonde d’intégrité, puis testé Load Balancer.
+Dans ce guide de démarrage rapide, vous :
 
-Pour en savoir plus, passez aux didacticiels pour l’équilibreur de charge.
+* Avez créé un réseau virtuel pour l’équilibreur de charge et les machines virtuelles.
+* Avez créé un hôte Azure Bastion pour l’administration.
+* Avez créé un équilibreur de charge et lui avez attaché des machines virtuelles.
+* Avez configuré la règle de trafic de l’équilibreur de charge, et la sonde d’intégrité.
+* Vous avez testé l’équilibreur de charge.
+
+Pour en savoir plus, passez aux tutoriels concernant Azure Load Balancer.
 
 > [!div class="nextstepaction"]
 > [Didacticiels Azure Load Balancer](tutorial-load-balancer-standard-public-zone-redundant-portal.md)

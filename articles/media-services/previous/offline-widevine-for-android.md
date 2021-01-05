@@ -15,21 +15,23 @@ ms.topic: article
 ms.date: 04/16/2019
 ms.author: willzhan
 ms.reviewer: dwgeo
-ms.openlocfilehash: f3bd7bc78eeb62cc33a01ed31bb04d94078cae4b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4b3b2b8c39b5b2552b5ce9f508bacd1ea86b2638
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80294331"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006357"
 ---
-# <a name="offline-widevine-streaming-for-android"></a>Widevine hors connexion pour Android  
+# <a name="offline-widevine-streaming-for-android"></a>Widevine hors connexion pour Android
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 3](../latest/offline-widevine-for-android.md)
 > * [Version 2](offline-widevine-for-android.md)
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Outre la protection de contenu pour la diffusion en continu en ligne, les services d’abonnement et de location du contenu multimédia offrent un contenu téléchargeable qui fonctionne lorsque vous n’êtes pas connecté à internet. Vous devrez peut-être télécharger le contenu sur votre téléphone ou tablette pour une lecture en mode avion, lorsque vous êtes en vol et déconnecté du réseau. Scénarios supplémentaires, dans lesquels vous pouvez souhaiter télécharger du contenu :
 
@@ -47,13 +49,13 @@ Pour créer les applications du lecteur Android, nous soulignons trois options 
 
 L’article répond également à certaines questions fréquentes sur la diffusion en continu du contenu protégé de Widevine.
 
-## <a name="requirements"></a>Spécifications 
+## <a name="requirements"></a>Configuration requise 
 
 Avant de mettre en œuvre la DRM hors connexion pour Widevine sur des appareils Android, vous devez, tout d’abord :
 
 - Vous familiariser avec les concepts présentés pour la protection du contenu en ligne à l’aide de la DRM de Widevine. Vous trouverez toutes les informations nécessaires dans les documents/exemples suivants :
     - [Utiliser Azure Media Services pour fournir des licences DRM ou des clés AES](media-services-deliver-keys-and-licenses.md)
-    - [CENC avec multi-DRM et Access Control : conception et implémentation de référence sur Azure et Azure Media Services](media-services-cenc-with-multidrm-access-control.md)
+    - [CENC avec Multi-DRM et contrôle d’accès : une conception de référence et l’application sur Windows Azure et Azure Media Services](media-services-cenc-with-multidrm-access-control.md)
     - [Utilisation du chiffrement commun dynamique PlayReady et/ou Widevine avec .NET](https://azure.microsoft.com/resources/samples/media-services-dotnet-dynamic-encryption-with-drm/)
     - [Utiliser Azure Media Services pour fournir des licences PlayReady et/ou Widevine avec .NET](https://azure.microsoft.com/resources/samples/media-services-dotnet-deliver-playready-widevine-licenses/)
 - Vous familiariser avec le kit de développement logiciel (SDK) Google ExoPlayer pour Android, un kit de développement logiciel (SDK) de lecteur vidéo open source capable de prendre en charge la lecture de la DRM de Widevine hors connexion. 
@@ -129,7 +131,7 @@ Les développeurs doivent référencer le [Guide du développeur ExoPlayer](http
 
 ### <a name="working-with-older-android-devices"></a>Utilisation des anciens appareils Android
 
-En ce qui concerne certains anciens appareils Android, vous devez définir des valeurs pour les propriétés **policy_overrides** suivantes (définies dans le [modèle de licence Widevine ](media-services-widevine-license-template-overview.md) : **rental_duration_seconds**, **playback_duration_seconds** et **license_duration_seconds**. Ou bien, vous pouvez les définir à zéro, ce qui signifie une durée illimitée/infinie.  
+En ce qui concerne certains anciens appareils Android, vous devez définir des valeurs pour les propriétés **policy_overrides** suivantes (définies dans le [modèle de licence Widevine](media-services-widevine-license-template-overview.md) : **rental_duration_seconds**, **playback_duration_seconds** et **license_duration_seconds**. Ou bien, vous pouvez les définir à zéro, ce qui signifie une durée illimitée/infinie.  
 
 Les valeurs doivent être définies pour éviter un bogue de dépassement de capacité d’entier. Pour en savoir plus sur le problème, consultez https://github.com/google/ExoPlayer/issues/3150 et https://github.com/google/ExoPlayer/issues/3112. <br/>Si vous ne définissez pas explicitement les valeurs, des valeurs très élevées pour **PlaybackDurationRemaining** et **LicenseDurationRemaining** seront affectées, (par exemple, 9223372036854775807, qui est la valeur positive maximale pour un entier de 64 bits). Par conséquent, la licence Widevine s’affiche comme expirée, le déchiffrement n’a donc pas lieu. 
 
@@ -181,17 +183,17 @@ Cela signifie que le Service STS (Secure Token Service) doit avoir les informati
 
 ### <a name="question"></a>Question
 
-Pour les niveaux de sécurité Widevine, dans la [documentation Vue d’ensemble de l’architecture DRM Widevine](https://storage.googleapis.com/wvdocs/Widevine_DRM_Architecture_Overview.pdf) de Google, il définit trois niveaux différents de sécurité. Toutefois, dans [Documentation Azure Media Services sur le modèle de licence Widevine](https://docs.microsoft.com/azure/media-services/media-services-widevine-license-template-overview), cinq niveaux de sécurité différents sont soulignés. Quelle est la relation ou le mappage entre les deux différents ensembles de niveaux de sécurité ?
+Pour les niveaux de sécurité Widevine, dans la [documentation Vue d’ensemble de l’architecture DRM Widevine](https://storage.googleapis.com/wvdocs/Widevine_DRM_Architecture_Overview.pdf) de Google, il définit trois niveaux différents de sécurité. Toutefois, dans [Documentation Azure Media Services sur le modèle de licence Widevine](./media-services-widevine-license-template-overview.md), cinq niveaux de sécurité différents sont soulignés. Quelle est la relation ou le mappage entre les deux différents ensembles de niveaux de sécurité ?
 
 ### <a name="answer"></a>Réponse
 
 Dans [Vue d’ensemble de l’architecture DRM Widevine](https://storage.googleapis.com/wvdocs/Widevine_DRM_Architecture_Overview.pdf) de Google, il définit les trois niveaux de sécurité suivants :
 
 1.  Niveau de sécurité 1 : tous les traitements, chiffrements et contrôles du contenu sont effectués au sein de l’environnement TEE (Trusted Execution Environment). En ce qui concerne certains modèles de mise en œuvre, le traitement de la sécurité peut être effectué dans différentes puces.
-2.  Niveau de sécurité 2 : effectue le chiffrement (mais pas le traitement vidéo) dans l’environnement TEE : les mémoires tampons déchiffrées sont retournées au domaine d’application et traitées par le biais d’un matériel ou d’un logiciel vidéo distinct. Au niveau 2, toutefois, les informations de chiffrement sont toujours traitées uniquement dans l’environnement TEE.
+2.  Niveau de sécurité 2 : effectue le chiffrement (mais pas le traitement vidéo) dans l’environnement TEE : les mémoires tampons déchiffrées sont renvoyées au domaine d’application et traitées par le biais d’un matériel ou d’un logiciel vidéo distinct. Au niveau 2, toutefois, les informations de chiffrement sont toujours traitées uniquement dans l’environnement TEE.
 3.  Le niveau de sécurité 3 n’a pas d’environnement TEE sur l’appareil. Les mesures appropriées peuvent être prises pour protéger les informations de chiffrement et le contenu déchiffré sur le système d’exploitation hôte. Une mise en œuvre de niveau 3 peut également inclure un moteur de chiffrement matériel, mais qui améliore seulement la performance, pas la sécurité.
 
-Dans le même temps, dans [Documentation Azure Media Services sur le modèle de licence Widevine](https://docs.microsoft.com/azure/media-services/media-services-widevine-license-template-overview), la propriété security_level de content_key_specs peut avoir les cinq différentes valeurs suivantes (exigences de robustesse client pour la lecture) :
+Dans le même temps, dans [Documentation Azure Media Services sur le modèle de licence Widevine](./media-services-widevine-license-template-overview.md), la propriété security_level de content_key_specs peut avoir les cinq différentes valeurs suivantes (exigences de robustesse client pour la lecture) :
 
 1.  Le chiffrement whitebox basé sur le logiciel est requis.
 2.  Le chiffrement logiciel et un décodeur masqué sont requis.
@@ -203,9 +205,9 @@ Les deux niveaux de sécurité sont définis par Google Widevine. La différence
 
 | **Niveaux de sécurité définis dans l’architecture de Widevine** |**Niveaux de sécurité utilisés dans l’API de Widevine**|
 |---|---| 
-| **Niveau de sécurité 1** : tous les traitements, chiffrements et contrôles du contenu sont effectués au sein de l’environnement TEE (Trusted Execution Environment). En ce qui concerne certains modèles de mise en œuvre, le traitement de la sécurité peut être effectué dans différentes puces.|**security_level=5** : Le chiffrement, le décodage et le traitement du support (compressé et décompressé) doivent être gérés dans un environnement TEE soutenu par le matériel.<br/><br/>**security_level=4** : Le chiffrement et le décodage du contenu doivent être effectués dans un environnement TEE soutenu par le matériel.|
-**Niveau de sécurité 2** : effectue le chiffrement (mais pas le traitement vidéo) dans l’environnement TEE : les mémoires tampons déchiffrées sont retournées au domaine d’application et traitées par le biais d’un matériel ou d’un logiciel vidéo distinct. Au niveau 2, toutefois, les informations de chiffrement sont toujours traitées uniquement dans l’environnement TEE.| **security_level=3** : Les opérations de matériel clé et de chiffrement doivent être effectuées dans un environnement TEE soutenu par le matériel. |
-| **Niveau de sécurité 3** : l’environnement TEE ne se trouve pas sur l’appareil. Les mesures appropriées peuvent être prises pour protéger les informations de chiffrement et le contenu déchiffré sur le système d’exploitation hôte. Une mise en œuvre de niveau 3 peut également inclure un moteur de chiffrement matériel, mais qui améliore seulement la performance, pas la sécurité. | **security_level=2** : Le chiffrement logiciel et un décodeur masqué sont requis.<br/><br/>**security_level=1** : Le chiffrement whitebox basé sur le logiciel est requis.|
+| **Niveau de sécurité 1** : tous les traitements, chiffrements et contrôles du contenu sont effectués au sein de l’environnement TEE (Trusted Execution Environment). En ce qui concerne certains modèles de mise en œuvre, le traitement de la sécurité peut être effectué dans différentes puces.|**security_level=5** : le chiffrement, le décodage et le traitement du support (compressé et décompressé) doivent être gérés dans un environnement TEE soutenu par le matériel.<br/><br/>**security_level=4** : le chiffrement et le décodage du contenu doivent être effectués dans un environnement TEE soutenu par le matériel.|
+**Niveau de sécurité 2** : effectue le chiffrement (mais pas le traitement vidéo) dans l’environnement TEE : les mémoires tampons déchiffrées sont renvoyées au domaine d’application et traitées par le biais d’un matériel ou d’un logiciel vidéo distinct. Au niveau 2, toutefois, les informations de chiffrement sont toujours traitées uniquement dans l’environnement TEE.| **security_level=3** : les opérations de matériel clé et de chiffrement doivent être effectués dans un environnement TEE soutenu par le matériel. |
+| **Niveau de sécurité 3** : n’a pas d’environnement TEE sur l’appareil. Les mesures appropriées peuvent être prises pour protéger les informations de chiffrement et le contenu déchiffré sur le système d’exploitation hôte. Une mise en œuvre de niveau 3 peut également inclure un moteur de chiffrement matériel, mais qui améliore seulement la performance, pas la sécurité. | **security_level=2** : le chiffrement logiciel et un décodeur masqué sont requis.<br/><br/>**security_level=1** : Le chiffrement whitebox basé sur le logiciel est requis.|
 
 ### <a name="question"></a>Question
 

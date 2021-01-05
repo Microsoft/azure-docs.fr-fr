@@ -1,21 +1,21 @@
 ### YamlMime:Landing
 title: Documentations Azure Blueprints
-summary: Simplifiez les déploiements en regroupant les artefacts, comme les modèles Resource Manager, les contrôles d’accès en fonction des rôles et les stratégies, dans une même définition de blueprint.
+summary: Simplifiez les déploiements en regroupant les artefacts, comme les modèles Azure Resource Manager, le contrôle d’accès en fonction du rôle (Azure RBAC) et les stratégies, dans une même définition de blueprint.
 metadata:
   title: Documentations Azure Blueprints
-  description: Simplifiez les déploiements en regroupant les artefacts, comme les modèles Resource Manager, les contrôles d’accès en fonction des rôles et les stratégies, dans une même définition de blueprint.
+  description: Simplifiez les déploiements en regroupant les artefacts, comme les modèles Azure Resource Manager, le contrôle d’accès en fonction du rôle (Azure RBAC) et les stratégies, dans une même définition de blueprint.
   ms.service: blueprints
   ms.topic: landing-page
   ms.collection: collection
   author: DCtheGeek
   ms.author: dacoulte
-  ms.date: 09/01/2019
-  ms.openlocfilehash: d80b82b9e8e41e9bfdc7b9ac180ccc8916481acb
-  ms.sourcegitcommit: 6a9f01bbef4b442d474747773b2ae6ce7c428c1f
+  ms.date: 08/27/2020
+  ms.openlocfilehash: 1ec5453abd9d33b475b732a853294933cda02117
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/27/2020
-  ms.locfileid: "84116115"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89051370"
 landingContent:
 - title: À propos d’Azure Blueprints
   linkLists:
@@ -35,11 +35,13 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Créer un blueprint (portail)
+    - text: Créer un blueprint (Portail)
       url: ./create-blueprint-portal.md
-    - text: Créer un blueprint (PowerShell)
+    - text: Créer un blueprint (Azure CLI)
+      url: ./create-blueprint-azurecli.md
+    - text: Créer un blueprint (Azure PowerShell)
       url: ./create-blueprint-powershell.md
-    - text: Créer un blueprint (API REST)
+    - text: Créer un blueprint (REST)
       url: ./create-blueprint-rest-api.md
   - linkListType: tutorial
     links:
@@ -82,7 +84,7 @@ landingContent:
   - linkListType: get-started
     links:
     - text: Microsoft Q&A pour Azure Blueprints
-      url: /answers/topics/azure-blueprints.html.html
+      url: /answers/topics/azure-blueprints.html
     - text: Chaîne YouTube - Gouvernance Azure
       url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
     - text: Demander des fonctionnalités pour le produit
@@ -97,9 +99,11 @@ landingContent:
       url: ./reference/blueprint-functions.md
     - text: Module PowerShell (PSGallery)
       url: https://www.powershellgallery.com/packages/Az.Blueprint
+    - text: Azure CLI
+      url: /cli/azure/ext/blueprint/blueprint
     - text: Azure PowerShell
       url: /powershell/module/az.blueprint/#blueprint
-    - text: API REST
-      url: /rest/api/blueprints/
-    - text: .NET
+    - text: Kit SDK Azure pour .NET
       url: /dotnet/api/overview/azure/blueprints/management
+    - text: REST
+      url: /rest/api/blueprints/

@@ -2,17 +2,18 @@
 title: Configurer LVM et RAID sur des appareils chiffrés – Azure Disk Encryption
 description: Cet article fournit des instructions sur la configuration de LVM et RAID sur des appareils chiffrés pour des machines virtuelles Linux.
 author: jofrance
-ms.service: security
-ms.topic: article
+ms.service: virtual-machines
+ms.subservice: security
+ms.topic: how-to
 ms.author: jofrance
 ms.date: 03/17/2020
-ms.custom: seodec18
-ms.openlocfilehash: 4e342ff44af38b8e79dc8695c1270b1f5c68e0a8
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 46d2c039806e4e6a72e091458d44e7b21b3dfa70
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80657441"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843517"
 ---
 # <a name="configure-lvm-and-raid-on-encrypted-devices"></a>Configurer LVM et RAID sur des appareils chiffrés
 
@@ -45,11 +46,11 @@ De la même façon, l’appareil RAID est créé par-dessus la couche chiffrée 
 
 Nous vous recommandons d’utiliser LVM-on-crypt. RAID est un choix possible lorsque LVM ne peut pas être utilisé en raison de limitations spécifiques de l’application ou de l’environnement.
 
-Vous utiliserez l’option **EncryptFormatAll**. Pour plus d’informations sur cette option, consultez [Utiliser la fonctionnalité EncryptFormatAll pour les disques de données sur des machines virtuelles Linux](https://docs.microsoft.com/azure/virtual-machines/linux/disk-encryption-linux#use-encryptformatall-feature-for-data-disks-on-linux-vms).
+Vous utiliserez l’option **EncryptFormatAll**. Pour plus d’informations sur cette option, consultez [Utiliser la fonctionnalité EncryptFormatAll pour les disques de données sur des machines virtuelles Linux](./disk-encryption-linux.md#use-encryptformatall-feature-for-data-disks-on-linux-vms).
 
 Bien que vous puissiez utiliser cette méthode lorsque vous chiffrez également le système d’exploitation, nous chiffrons uniquement les lecteurs de données ici.
 
-Les procédures supposent que vous avez déjà examiné les conditions préalables indiquées dans [Scénarios Azure Disk Encryption sur les machines virtuelles Linux](https://docs.microsoft.com/azure/virtual-machines/linux/disk-encryption-linux) et dans [Démarrage rapide : Créer et chiffrer une machine virtuelle Linux avec Azure CLI](https://docs.microsoft.com/azure/virtual-machines/linux/disk-encryption-cli-quickstart).
+Les procédures supposent que vous avez déjà examiné les conditions préalables indiquées dans [Scénarios Azure Disk Encryption sur les machines virtuelles Linux](./disk-encryption-linux.md) et dans [Démarrage rapide : Créer et chiffrer une machine virtuelle Linux avec Azure CLI](./disk-encryption-cli-quickstart.md).
 
 La version Azure Disk Encryption à deux passages est sur le point d’être déconseillée et ne doit plus être utilisée sur les nouveaux chiffrements.
 
@@ -367,7 +368,7 @@ mount -a
 lsblk -fs
 df -h
 ```
-![Informations des systèmes de fichiers montés](./media/disk-encryption/lvm-raid-on-crypt/018-lvm-raid-lsblk-after-lvm.png)
+![Capture d’écran montrant une fenêtre de console avec des systèmes de fichiers montés en tant que data0 et data1.](./media/disk-encryption/lvm-raid-on-crypt/018-lvm-raid-lsblk-after-lvm.png)
 
 Sur cette variation de **lsblk**, nous répertorions les appareils qui affichent les dépendances dans l’ordre inverse. Cette option permet d’identifier les appareils regroupés par le volume logique à la place des noms d’appareil /dev/sd[disk] d’origine.
 
@@ -436,7 +437,7 @@ Vérifiez que le nouveau système de fichiers est monté :
 lsblk -fs
 df -h
 ```
-![Informations des systèmes de fichiers montés](./media/disk-encryption/lvm-raid-on-crypt/021-lvm-raid-lsblk-md-details.png)
+![Capture d’écran montrant une fenêtre de console avec un système de fichiers monté en tant que raiddata.](./media/disk-encryption/lvm-raid-on-crypt/021-lvm-raid-lsblk-md-details.png)
 
 Il est important de s’assurer que l’option **nofail** est ajoutée aux options de point de montage des volumes RAIS créés par-dessus un appareil chiffré par Azure Disk Encryption. Elle empêche que le système d’exploitation se bloque pendant le processus de démarrage (ou en mode de maintenance).
 
@@ -459,5 +460,5 @@ df -h
 ```
 ## <a name="next-steps"></a>Étapes suivantes
 
+- [Redimensionner des appareils de gestion de volumes logiques chiffrés avec Azure Disk Encryption](how-to-resize-encrypted-lvm.md)
 - [Résolution des problèmes liés à Azure Disk Encryption](disk-encryption-troubleshooting.md)
-

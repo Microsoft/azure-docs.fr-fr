@@ -3,17 +3,19 @@ title: Requêtes JOIN SQL pour Azure Cosmos DB
 description: Découvrez comment joindre (JOIN) plusieurs tables dans Azure Cosmos DB pour interroger les données
 author: markjbrown
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/17/2019
 ms.author: mjbrown
-ms.openlocfilehash: 38e80f1597a08b8db7cbfa852d1bcf38ac768b1f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c3fad0c7eed2b42a9ac340a091f17b90e22b000a
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74871140"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93333832"
 ---
 # <a name="joins-in-azure-cosmos-db"></a>Jointures dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Dans une base de données relationnelle, les jointures entre les tables sont la conséquence logique de la conception de schémas normalisés. À l’opposé, l’API SQL utilise le modèle de données dénormalisée des éléments sans schéma, ce qui est l’équivalent logique d’une *jointure réflexive*.
 

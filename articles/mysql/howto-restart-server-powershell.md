@@ -1,17 +1,18 @@
 ---
 title: Redémarrer un serveur – Azure PowerShell – Azure Database pour MySQL
 description: Cet article explique comment redémarrer un serveur Azure Database pour MySQL à l’aide de PowerShell.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 4/28/2020
-ms.openlocfilehash: 935459a398c07d3b4f61c76dec75b083a2354720
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 94b3586f13ad1f5bf5f042ef1dc824bd0a5da0d1
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82609015"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94542199"
 ---
 # <a name="restart-azure-database-for-mysql-server-using-powershell"></a>Redémarrer un serveur Azure Database pour MySQL à l’aide de PowerShell
 
@@ -29,8 +30,8 @@ Pour utiliser ce guide pratique, il vous faut :
 - Un [serveur Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-powershell.md)
 
 > [!IMPORTANT]
-> Tant que le module PowerShell Az.MySql est en préversion, vous devez l’installer séparément du module Az PowerShell à l’aide de la commande suivante : `Install-Module -Name Az.MySql -AllowPrerelease`.
-> Une fois le module PowerShell Az.MySql générale disponible, il devient partie intégrante des versions futures du module Az PowerShell et disponible en mode natif dans Azure Cloud Shell.
+> Tant que le module Az.MySql PowerShell est en préversion, vous devez l’installer séparément du module Az PowerShell à l’aide de la commande suivante : `Install-Module -Name Az.MySql -AllowPrerelease`.
+> Une fois que le module Az.MySql PowerShell est en disponibilité générale, il devient partie intégrante des versions futures du module Az PowerShell et disponible en mode natif dans Azure Cloud Shell.
 
 Si vous choisissez d’utiliser PowerShell en local, connectez-vous à votre compte Azure à l’aide de la cmdlet [Connect-AzAccount](/powershell/module/az.accounts/Connect-AzAccount).
 

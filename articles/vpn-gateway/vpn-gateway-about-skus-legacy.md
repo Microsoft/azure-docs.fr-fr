@@ -8,11 +8,11 @@ ms.topic: article
 ms.date: 08/15/2019
 ms.author: cherylmc
 ms.openlocfilehash: 9c5e6d5aca51bd560a46837ba47de86362665773
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235749"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84687784"
 ---
 # <a name="working-with-virtual-network-gateway-skus-legacy-skus"></a>Utilisation des références SKU de passerelle de réseau virtuel (anciennes références SKU)
 

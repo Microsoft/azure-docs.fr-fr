@@ -1,10 +1,10 @@
 ---
 title: 'Démarrage rapide : Créer une fabrique de données Azure à l’aide de Python'
-description: Créez une fabrique de données Azure pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
+description: Utilisez une fabrique de données pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
@@ -12,13 +12,13 @@ ms.workload: data-services
 ms.devlang: python
 ms.topic: quickstart
 ms.date: 01/22/2018
-ms.custom: seo-python-october2019
-ms.openlocfilehash: 85b61e03f1545b8a0e8263b799ac7a5b347be181
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: seo-python-october2019, devx-track-python
+ms.openlocfilehash: cc25ce4aa51535bbfd03d99ed413afa66a184fdb
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81419134"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508779"
 ---
 # <a name="quickstart-create-a-data-factory-and-pipeline-using-python"></a>Démarrage rapide : Créer une fabrique de données et un pipeline à l’aide de Python
 
@@ -32,7 +32,7 @@ Dans ce guide de démarrage rapide, vous créez une fabrique de données en util
 
 Azure Data Factory est un service d’intégration de données basé sur le cloud qui vous permet de créer des workflows orientés données pour orchestrer et automatiser le déplacement et la transformation des données. Il permet de créer et de planifier des workflows basés sur les données (nommés pipelines).
 
-Les pipelines peuvent ingérer des données provenant de différents magasins de données. Les pipelines traitent ou transforment des données à l’aide de services de calcul tels que Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics et Azure Machine Learning. Les pipelines publient des données de sortie vers des magasins de données tels que Azure SQL Data Warehouse pour des applications décisionnelles (BI).
+Les pipelines peuvent ingérer des données provenant de différents magasins de données. Les pipelines traitent ou transforment des données à l’aide de services de calcul tels que Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics et Azure Machine Learning. Les pipelines publient des données de sortie dans des magasins de données comme Azure Synapse Analytics pour des applications décisionnelles (BI).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +44,7 @@ Les pipelines peuvent ingérer des données provenant de différents magasins de
 
 * [Explorateur Stockage Azure](https://storageexplorer.com/) (facultatif).
 
-* [Une application dans Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application). Notez les valeurs suivantes à utiliser lors d’étapes ultérieures : **ID d’application**, **clé d’authentification** et **ID de locataire**. Affectez l’application au rôle **Contributeur** en suivant les instructions dans le même article.
+* [Une application dans Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Notez les valeurs suivantes à utiliser lors d’étapes ultérieures : **ID d’application**, **clé d’authentification** et **ID de locataire**. Affectez l’application au rôle **Contributeur** en suivant les instructions dans le même article.
 
 ## <a name="create-and-upload-an-input-file"></a>Créer et charger un fichier d’entrée
 
@@ -58,7 +58,7 @@ Les pipelines peuvent ingérer des données provenant de différents magasins de
 
 ## <a name="install-the-python-package"></a>Installer le package Python
 
-1. Ouvrez un terminal ou une invite de commandes avec des privilèges d’administrateur. 
+1. Ouvrez un terminal ou une invite de commandes avec des privilèges d’administrateur. 
 2. D’abord, installez le package Python pour les ressources de gestion Azure :
 
     ```python
@@ -257,7 +257,7 @@ Pour surveiller l’exécution du pipeline, ajoutez le code suivant à la métho
 
 ```
 
-Maintenant, ajoutez l’instruction suivante pour appeler la méthode**main** lorsque le programme est exécuté :
+Maintenant, ajoutez l’instruction suivante pour appeler la méthode **main** lorsque le programme est exécuté :
 
 ```python
 # Start the main method
@@ -421,7 +421,7 @@ La console affiche la progression de la création de la fabrique de données, du
 
 Voici l'exemple de sortie :
 
-```json
+```console
 Name: <data factory name>
 Id: /subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.DataFactory/factories/<data factory name>
 Location: eastus

@@ -11,13 +11,13 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 01/29/2018
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: 6251ab1484c7243bf0b22c7c4faf8b560ef0abb6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 81c936acc00801f8473c1ec74aa50dbf2abb4936
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81457805"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397017"
 ---
 # <a name="manage-web-traffic-using-the-azure-cli"></a>Gérer le trafic web avec Azure CLI
 
@@ -45,16 +45,16 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 
 | Commande | Notes |
 |---|---|
-| [az group create](https://docs.microsoft.com/cli/azure/group) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
-| [az network vnet create](https://docs.microsoft.com/cli/azure/network/vnet) | Créer un réseau virtuel. |
-| [az network vnet subnet create](https://docs.microsoft.com/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) | Crée un sous-réseau dans un réseau virtuel. |
-| [az network public-ip create](https://docs.microsoft.com/cli/azure/network/public-ip?view=azure-cli-latest) | Crée l’adresse IP publique pour la passerelle d’application. |
-| [az network application-gateway create](https://docs.microsoft.com/cli/azure/network/application-gateway?view=azure-cli-latest) | Créer une passerelle d’application |
-| [az vmss create](https://docs.microsoft.com/cli/azure/vmss) | Crée un groupe de machines virtuelles identiques. |
-| [az network public-ip show](https://docs.microsoft.com/cli/azure/network/public-ip) | Obtient l’adresse IP publique d’une passerelle d’application. |
+| [az group create](/cli/azure/group) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
+| [az network vnet create](/cli/azure/network/vnet) | Créer un réseau virtuel. |
+| [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) | Crée un sous-réseau dans un réseau virtuel. |
+| [az network public-ip create](/cli/azure/network/public-ip?view=azure-cli-latest) | Crée l’adresse IP publique pour la passerelle d’application. |
+| [az network application-gateway create](/cli/azure/network/application-gateway?view=azure-cli-latest) | Créer une passerelle d’application |
+| [az vmss create](/cli/azure/vmss) | Crée un groupe de machines virtuelles identiques. |
+| [az network public-ip show](/cli/azure/network/public-ip) | Obtient l’adresse IP publique d’une passerelle d’application. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure/overview).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure/overview).
 
 Vous trouverez des exemples supplémentaires de scripts CLI de passerelle d’application dans la [documentation relative aux machines virtuelles Windows Azure](../cli-samples.md).

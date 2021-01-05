@@ -14,13 +14,13 @@ ms.tgt_pltfrm: vm-linux
 ms.topic: tutorial
 ms.date: 01/17/2020
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: 300b497765dd1081fbad36292c01c56da5bb5e38
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 4b3817bd33c72ce6d1c3426aa8379101c84f5bc5
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "76277258"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91961508"
 ---
 # <a name="tutorial-create-and-deploy-highly-available-virtual-machines-with-the-azure-cli"></a>Tutoriel : Créer et déployer des machines virtuelles hautement disponibles avec Azure CLI
 
@@ -33,13 +33,13 @@ Dans ce tutoriel, vous allez apprendre à :
 > * Créer une machine virtuelle dans un groupe à haute disponibilité
 > * Vérifier les tailles de machines virtuelles disponibles
 
-Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
+Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](../../cloud-shell/overview.md), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce didacticiel nécessite que vous exécutiez Azure CLI version 2.0.30 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Un groupe à haute disponibilité est une fonctionnalité de regroupement logique que vous pouvez utiliser dans Azure pour vous assurer que les ressources de machine virtuelle que vous y incluez sont isolées les unes des autres lors de leur déploiement dans un centre de données Azure. Azure veille à ce que les machines virtuelles que vous placez dans un groupe à haute disponibilité s’exécutent sur plusieurs serveurs physiques, racks de calcul, unités de stockage et commutateurs réseau. En cas de défaillance matérielle ou logicielle dans Azure, seul un sous-ensemble de vos machines virtuelles est affecté et votre application globale reste opérationnelle et continue d’être disponible pour vos clients. Les groupes à haute disponibilité sont une fonctionnalité essentielle pour créer des solutions cloud fiables.
+Un groupe à haute disponibilité est une fonctionnalité de regroupement logique que vous pouvez utiliser dans Azure pour faire en sorte que les ressources de machine virtuelle que vous y incluez sont isolées les unes des autres lors de leur déploiement dans un centre de données Azure. Azure veille à ce que les machines virtuelles que vous placez dans un groupe à haute disponibilité s’exécutent sur plusieurs serveurs physiques, racks de calcul, unités de stockage et commutateurs réseau. En cas de défaillance matérielle ou logicielle dans Azure, seul un sous-ensemble de vos machines virtuelles est affecté et votre application globale reste opérationnelle et continue d’être disponible pour vos clients. Les groupes à haute disponibilité sont une fonctionnalité essentielle pour créer des solutions cloud fiables.
 
 Prenons l’exemple d’une solution basée sur une machine virtuelle classique dans laquelle vous disposez de quatre serveurs web frontaux et utilisez deux machines virtuelles principales hébergeant une base de données. Avec Azure, vous pouvez définir deux groupes à haute disponibilité avant de déployer vos machines virtuelles : l’un pour le niveau « web » et l’autre pour le niveau « base de données ». Lorsque vous créez une machine virtuelle, vous pouvez spécifier le groupe à haute disponibilité en tant que paramètre pour la commande az vm create, de sorte qu’Azure veille automatiquement à ce que les machines virtuelles que vous créez dans le groupe disponible soient isolées sur plusieurs ressources matérielles. Si le matériel sur lequel s’exécute l’une de vos machines virtuelles serveur web ou serveur de base de données rencontre un problème, vous savez que les autres instances de votre serveur web et de vos machines virtuelles de base de données continueront à s’exécuter parce qu’elles se trouvent sur d’autres éléments matériels.
 
@@ -116,5 +116,5 @@ Passez au didacticiel suivant pour en savoir plus sur les groupes de machines vi
 > [Créer un groupe de machines virtuelles identiques](tutorial-create-vmss.md)
 
 * Pour en savoir plus sur les zones de disponibilité, consultez la [documentation sur les zones de disponibilité](../../availability-zones/az-overview.md).
-* Vous trouverez de la documentation supplémentaire sur les groupes à haute disponibilité et les zones de disponibilité [ici](./manage-availability.md).
+* Vous trouverez de la documentation supplémentaire sur les groupes à haute disponibilité et les zones de disponibilité [ici](../manage-availability.md).
 * Pour tester les zones de disponibilité, consultez [Créer une machine virtuelle Linux dans une zone de disponibilité avec l’interface de ligne de commande Azure](./create-cli-availability-zone.md).

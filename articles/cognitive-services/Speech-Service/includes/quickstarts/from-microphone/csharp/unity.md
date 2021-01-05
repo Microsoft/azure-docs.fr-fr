@@ -6,15 +6,16 @@ author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
+ms.custom: devx-track-csharp
 ms.topic: include
 ms.date: 04/02/2020
 ms.author: erhopf
-ms.openlocfilehash: 951ae2c48bcdd92f640a37ddbb6430ca62a3b816
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: 974f147492877f481616b43d67146a03814ada16
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81275537"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91376777"
 ---
 > [!NOTE]
 > Le SDK Speech pour Unity prend en charge Windows Desktop (x86 et x64), ou la plateforme Windows universelle (x86, x64, ARM/ARM64), Android (x86, ARM32/64) et iOS (simulateur x64, ARM32 et ARM64).
@@ -24,7 +25,7 @@ ms.locfileid: "81275537"
 Avant de commencer :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](../../../../get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](../../../../quickstarts/setup-platform.md?tabs=unity&pivots=programming-language-csharp)
 > * Veiller à avoir accès à un microphone pour la capture audio
 
@@ -89,7 +90,7 @@ Pour ajouter l’exemple de code de script au projet Unity, procédez comme suit
 
 1. Recherchez et remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement au service Speech.
 
-1. Recherchez la chaîne `YourServiceRegion` et remplacez-la par l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) associée à votre abonnement. Par exemple, si vous utilisez la version d’évaluation gratuite, la région est `westus`.
+1. Recherchez la chaîne `YourServiceRegion` et remplacez-la par l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) associée à votre abonnement.
 
 1. Enregistrez les changements apportés au script.
 

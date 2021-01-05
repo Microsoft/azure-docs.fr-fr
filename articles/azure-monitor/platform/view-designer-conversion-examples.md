@@ -7,11 +7,11 @@ ms.subservice: ''
 ms.topic: conceptual
 ms.date: 02/07/2020
 ms.openlocfilehash: b50d8cfa4731c487997e2bf431a9c71eff08f5d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234141"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84702633"
 ---
 # <a name="view-designer-conversion-examples"></a>Concepteur de vues - Exemples de conversions en classeurs
 

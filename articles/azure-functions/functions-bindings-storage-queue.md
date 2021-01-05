@@ -6,12 +6,12 @@ ms.topic: reference
 ms.date: 02/18/2020
 ms.author: cshoe
 ms.custom: cc996988-fb4f-47
-ms.openlocfilehash: 71321fa631bafde5b1dbaac2d165cb68fd8116d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d8f3985bc9a726735ebc0af0a3d3422f4fca54a
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235109"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108862"
 ---
 # <a name="azure-queue-storage-trigger-and-bindings-for-azure-functions-overview"></a>Présentation du déclencheur et des liaisons de Stockage File d'attente Azure pour Azure Functions
 
@@ -37,7 +37,7 @@ Pour utiliser le déclencheur et les liaisons, vous devez référencer le packag
 [core tools]: ./functions-run-local.md
 [Bundle d’extensions]: ./functions-bindings-register.md#extension-bundles
 [Package NuGet]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage
-[Mettre à jour vos extensions]: ./install-update-binding-extensions-manual.md
+[Mettre à jour vos extensions]: ./functions-bindings-register.md
 [Azure Tools extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack
 
 ### <a name="functions-1x"></a>Functions 1.x

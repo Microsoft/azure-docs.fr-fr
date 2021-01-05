@@ -11,12 +11,12 @@ metadata:
   author: Heidilohr
   ms.author: helohr
   ms.date: 03/06/2020
-  ms.openlocfilehash: 2f00d7b0b1c0bdf78a4908e945dd0f8a890ded1b
-  ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+  ms.openlocfilehash: 26cba2d46a8d203bd16551702b4af6069b23008c
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/30/2020
-  ms.locfileid: "82611515"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87285116"
 landingContent:
 - title: À propos de Windows Virtual Desktop
   linkLists:
@@ -24,7 +24,7 @@ landingContent:
     links:
     - text: Qu’est-ce que Windows Virtual Desktop ?
       url: overview.md
-- title: Bien démarrer avec Windows Virtual Desktop, version Printemps 2020
+- title: Bien démarrer avec Windows Virtual Desktop
   linkLists:
   - linkListType: tutorial
     links:
@@ -36,7 +36,7 @@ landingContent:
       url: create-validation-host-pool.md
     - text: Configurer des alertes de service
       url: set-up-service-alerts.md
-- title: Bien démarrer avec Windows Virtual Desktop, version Automne 2019
+- title: Bien démarrer avec Windows Virtual Desktop (classique)
   linkLists:
   - linkListType: tutorial
     links:
@@ -53,7 +53,7 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Client Windows Desktop
-      url: connect-windows-7-and-10.md
+      url: connect-windows-7-10.md
     - text: Client web
       url: connect-web.md
     - text: Client Android

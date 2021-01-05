@@ -1,6 +1,6 @@
 ---
 title: Configurer une stratégie de pare-feu d’applications web avec filtrage géographique pour le service Azure Front Door
-description: Dans ce didacticiel, vous allez apprendre à créer une stratégie de filtrage géographique et à l’associer à votre hôte frontend Front Door existant
+description: Dans ce tutoriel, vous allez apprendre à créer une stratégie de géofiltrage et à l’associer à votre hôte front-end Front Door existant.
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 03/10/2020
 ms.author: victorh
 ms.reviewer: tyao
-ms.openlocfilehash: abcef61d478eccb4e979b60eb845ac8d398a49f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 479b1d8ed1f4238486bb78e33a6139463578dbba
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79135868"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94563305"
 ---
 # <a name="set-up-a-geo-filtering-waf-policy-for-your-front-door"></a>Configurer une stratégie WAF de filtrage géographique pour votre service Front Door
 
@@ -25,9 +25,9 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 Avant de définir une stratégie de filtrage géographique, configurez votre environnement PowerShell et créez un profil Front Door.
 ### <a name="set-up-your-powershell-environment"></a>Configurer votre environnement PowerShell
-Azure PowerShell fournit un ensemble d’applets de commande qui utilisent le modèle [Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) pour gérer vos ressources Azure. 
+Azure PowerShell fournit un ensemble d’applets de commande qui utilisent le modèle [Azure Resource Manager](../../azure-resource-manager/management/overview.md) pour gérer vos ressources Azure. 
 
-Vous pouvez installer [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) sur votre ordinateur local et l’utiliser sur n’importe quelle session PowerShell. Suivez les instructions sur la page pour vous connecter avec vos informations d’identification Azure, puis installez le module Az PowerShell.
+Vous pouvez installer [Azure PowerShell](/powershell/azure/) sur votre ordinateur local et l’utiliser sur n’importe quelle session PowerShell. Suivez les instructions sur la page pour vous connecter avec vos informations d’identification Azure, puis installez le module Az PowerShell.
 
 #### <a name="connect-to-azure-with-an-interactive-dialog-for-sign-in"></a>Se connecter à Azure avec une boîte de dialogue interactive
 
@@ -52,7 +52,7 @@ Créez un profil Front Door en suivant les instructions décrites dans [Démarra
 
 ## <a name="define-geo-filtering-match-condition"></a>Définir la condition de correspondance du filtrage géographique
 
-Créez un exemple de condition de correspondance qui sélectionne les demandes ne provenant pas de « US » en utilisant [New-AzFrontDoorWafMatchConditionObject](/powershell/module/az.frontdoor/new-azfrontdoorwafmatchconditionobject) sur les paramètres lors de la création d’une condition de correspondance. Les codes de pays à deux lettres pour le mappage de pays sont fournis dans [Qu’est-ce que le filtrage géographique sur un domaine pour Azure Front Door ?](waf-front-door-geo-filtering.md).
+Créez un exemple de condition de correspondance qui sélectionne les demandes ne provenant pas de « US » en utilisant [New-AzFrontDoorWafMatchConditionObject](/powershell/module/az.frontdoor/new-azfrontdoorwafmatchconditionobject) sur les paramètres lors de la création d’une condition de correspondance. Les codes de pays/région à deux lettres pour le mappage de pays/région sont fournis dans [Qu’est-ce que le filtrage géographique sur un domaine pour Azure Front Door ?](waf-front-door-geo-filtering.md)
 
 ```azurepowershell-interactive
 $nonUSGeoMatchCondition = New-AzFrontDoorWafMatchConditionObject `

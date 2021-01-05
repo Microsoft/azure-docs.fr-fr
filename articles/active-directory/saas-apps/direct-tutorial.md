@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à direct | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et direct.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 7c2cd1f0-d14c-42f0-94a8-9b800008b285
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/01/2019
 ms.author: jeedes
-ms.openlocfilehash: f1e201b5f86311aeaeca4d077140f4dc429a0357
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a3b9ae91118f714ce15f56cde0f79faa4fb4d640
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67104200"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97586582"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-direct"></a>Didacticiel : Intégration d’Azure Active Directory à direct
 
@@ -31,7 +27,7 @@ L’intégration de direct à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à direct (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -67,7 +63,7 @@ Pour configurer l’intégration de direct avec Azure AD, vous devez ajouter di
 
 4. Dans la zone de recherche, tapez **direct**, sélectionnez **direct** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![direct dans la liste des résultats](common/search-new-app.png)
+    ![direct dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -148,7 +144,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez brittasimon@yourcompanydomain.extension. Par exemple : BrittaSimon@contoso.com
 
     c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
@@ -183,7 +179,7 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-direct-test-user"></a>Créer un utilisateur de test direct
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans direct. Collaborez avec l’ [équipe du support direct](https://direct4b.com/ja/support.html#inquiry) pour ajouter les utilisateurs à la plateforme direct. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans direct. Collaborez avec l’[équipe du support technique de direct](https://direct4b.com/ja/support.html#inquiry) pour ajouter des utilisateurs dans la plate-forme direct. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
@@ -197,15 +193,14 @@ Dans cette section, vous allez tester la configuration de l’authentification u
 
     a. Cliquez sur la mosaïque **direct** dans le volet d’accès, et vous serez redirigé vers la page d’authentification de l’application.
 
-    b. Entrez votre `subdomain` dans la zone de texte affichée et appuyez sur « 次へ (Suivant) ». Vous devriez être automatiquement connecté à votre application **direct**.
+    b. Entrez votre `subdomain` dans la zone de texte affichée et sélectionnez **Suivant**. Vous devriez être automatiquement connecté à votre application **direct**.
 
-Le fait de cliquer sur la vignette direct dans le panneau d’accès doit vous connecter automatiquement à l’application direct pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette direct dans le panneau d’accès doit vous connecter automatiquement à l’application direct pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

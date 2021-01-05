@@ -1,24 +1,22 @@
 ---
-title: Développer un pool d’hôtes existant avec de nouveaux hôtes de session – Azure
-description: Comment développer d’un pool d’hôtes existant avec de nouveaux hôtes de session dans Windows Virtual Desktop.
-services: virtual-desktop
+title: Développer un pool d’hôtes Windows Virtual Desktop (classique) existant avec de nouveaux hôtes de session - Azure
+description: Comment développer d’un pool d’hôtes existant avec de nouveaux hôtes de session dans Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: f4313f36a0b250be9646c6658b98f15037374729
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 61cf28b0f1ebee6a0312ec3f23f22b01c6c4919e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614298"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88009169"
 ---
-# <a name="expand-an-existing-host-pool-with-new-session-hosts"></a>Développer un pool d’hôtes existant avec de nouveaux hôtes de session
+# <a name="expand-an-existing-host-pool-with-new-session-hosts-in-windows-virtual-desktop-classic"></a>Développer d’un pool d’hôtes existant avec de nouveaux hôtes de session dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../expand-existing-host-pool.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../expand-existing-host-pool.md).
 
 À mesure que vous intensifiez l’utilisation au sein de votre pool d’hôtes, il se peut que vous deviez développer votre pool d’hôtes existant avec de nouveaux hôtes de session pour gérer la nouvelle charge.
 
@@ -57,12 +55,12 @@ Voici comment redéployer le modèle Azure Resource Manager pour développer un 
      - Si vous avez créé le pool d’hôtes d’origine avec l’offre de la Place de marché Microsoft Azure, sélectionnez le déploiement commençant par **rds.wvd-provision-host-pool**.
      - Si vous avez créé le pool d’hôtes d’origine avec le modèle Azure Resource Manager du GitHub, sélectionnez le déploiement nommé **Microsoft.Template**.
 6. Sélectionnez **Redéployer**.
-     
+
      >[!NOTE]
      >Si le modèle ne se redéploie pas automatiquement lorsque vous sélectionnez **Redéployer**, sélectionnez **Modèle** dans le volet de gauche de votre navigateur, puis choisissez **Déployer**.
 
 7. Sélectionnez le groupe de ressources contenant les machines virtuelles hôtes de session actuelles dans le pool d’hôtes existant.
-     
+
      >[!NOTE]
      >Si vous voyez une erreur qui vous indique de sélectionner un autre groupe de ressources, même si celui que vous avez entré est correct, sélectionnez un autre groupe de ressources, puis le groupe de ressources d’origine.
 
@@ -96,7 +94,7 @@ Toutes les valeurs dans cette section doivent correspondre à celles que vous av
 Toutes les valeurs de paramètre dans cette section doivent correspondre à celles que vous avez fournies lors de la création initiale du pool d’hôtes et des machines virtuelles hôtes de session, à l’exception du nombre total de machines virtuelles. Le nombre de machines virtuelles que vous entrez est le nombre de machines virtuelles dans votre pool d’hôtes développé :
 
 1. Sélectionnez la taille de machine virtuelle correspondant aux machines virtuelles hôtes de session existantes.
-    
+
     >[!NOTE]
     >Si la taille de machine virtuelle que vous recherchez n’apparaît pas dans le sélecteur de taille de machine virtuelle, c’est parce que nous ne l’avons pas encore intégrée à l’outil Place de marché Azure. Pour demander une taille de machine virtuelle, créez une demande ou votez pour une demande existante dans le [forum UserVoice sur Windows Virtual Desktop](https://windowsvirtualdesktop.uservoice.com/forums/921118-general).
 
@@ -130,7 +128,7 @@ Suivez les instructions de la section [Exécuter le modèle Azure Resource Manag
 
 Maintenant que vous avez développé votre pool d’hôtes existant, vous pouvez vous connecter à un client Windows Virtual Desktop pour les tester dans le cadre d’une session utilisateur. Vous pouvez vous connecter à une session avec l’un des clients suivants :
 
-- [Se connecter avec le client Windows Desktop](../connect-windows-7-and-10.md)
+- [Se connecter avec le client Windows Desktop](connect-windows-7-10-2019.md)
 - [Se connecter avec le client web](connect-web-2019.md)
 - [Se connecter avec le client Android](connect-android-2019.md)
 - [Se connecter avec le client macOS](connect-macos-2019.md)

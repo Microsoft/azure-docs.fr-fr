@@ -8,10 +8,10 @@ ms.date: 11/14/2019
 ms.author: victorh
 ms.topic: article
 ms.openlocfilehash: 8e8aaa9458619bc937c5bb11c450f3197b92f451
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "74048529"
 ---
 # <a name="customize-web-application-firewall-rules-using-the-azure-cli"></a>Personnaliser les règles du pare-feu d’applications web à l’aide d’Azure CLI

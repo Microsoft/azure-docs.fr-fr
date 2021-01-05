@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: na
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ad76835b0c72b691e1ef8810f2c58dedb8f597d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cb889298a09c30a629c69442ebf31bc735af31d1
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672387"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96173122"
 ---
 # <a name="settings-and-data-roaming-faq"></a>FAQ sur l’itinérance des paramètres et des données
 
@@ -37,7 +37,7 @@ Les **Paramètres Windows** : les paramètres du PC intégrés au système d’e
 > [!NOTE]
 > Cet article s’applique au navigateur HTML hérité Microsoft Edge lancé avec Windows 10 en juillet 2015. L’article ne s’applique pas au nouveau navigateur Microsoft Edge basé sur Chromium publié le 15 janvier 2020. Pour plus d’informations sur le comportement de synchronisation pour le nouveau navigateur Microsoft Edge, consultez l’article [Synchronisation de Microsoft Edge](/deployedge/microsoft-edge-enterprise-sync).
 
-**Données d’application** : Les applications Windows universelles peuvent écrire des données de paramètres dans un dossier « roaming » (itinérance), et toutes les données écrites dans ce dossier sont automatiquement synchronisées. Il incombe aux développeurs d’applications de concevoir eux-mêmes une application pour tirer parti de cette fonctionnalité. Pour plus d’informations sur la façon de développer une application Windows universelle qui utilise l’itinérance, consultez [l’API de stockage des données d’application](https://msdn.microsoft.com/library/windows/apps/mt299098.aspx) et le [blog des développeurs d’applications itinérantes pour Windows 8](https://blogs.msdn.com/b/windowsappdev/archive/2012/07/17/roaming-your-app-data.aspx).
+**Données d’application** : Les applications Windows universelles peuvent écrire des données de paramètres dans un dossier « roaming » (itinérance), et toutes les données écrites dans ce dossier sont automatiquement synchronisées. Il incombe aux développeurs d’applications de concevoir eux-mêmes une application pour tirer parti de cette fonctionnalité. Pour plus d’informations sur la façon de développer une application Windows universelle qui utilise l’itinérance, consultez [l’API de stockage des données d’application](/windows/uwp/design/app-settings/store-and-retrieve-app-data) et le [blog des développeurs d’applications itinérantes pour Windows 8](https://blogs.windows.com/windowsdeveloper/2016/05/04/roaming-app-data-and-the-user-experience/).
 
 ## <a name="what-account-is-used-for-settings-sync"></a>Quel compte est utilisé pour la synchronisation des paramètres ?
 
@@ -85,10 +85,10 @@ Lorsque plusieurs comptes Azure AD regroupant différents locataires Azure AD se
 
 L’itinérance ne fonctionne qu’avec les applications Windows universelles. Deux options permettent d’activer l’itinérance sur une application de bureau Windows existante :
 
-* [Desktop Bridge](https://aka.ms/desktopbridge) vous permet de transférer vos applications de bureau Windows existantes vers la plateforme Windows universelle. À ce stade, seules quelques modifications de code mineures sont nécessaires pour pouvoir tirer parti de l’itinérance des données d’application d’Azure AD. Desktop Bridge fournit à vos applications l’identité d’application nécessaire pour activer l’itinérance des données d’application pour les applications de bureau existantes.
-* [User Experience Virtualization (UE-V)](https://technet.microsoft.com/library/dn458947.aspx) vous permet de créer un modèle de paramètres personnalisés pour les applications de bureau Windows existantes et d’activer le mode itinérant pour les applications Win32. Cette option n’oblige pas le développeur d’application à modifier le code de l’application. UE-V est limité à l’itinérance Active Directory en local pour les clients qui ont acheté Microsoft Desktop Optimization Pack.
+* [Desktop Bridge](/windows/msix/desktop/source-code-overview) vous permet de transférer vos applications de bureau Windows existantes vers la plateforme Windows universelle. À ce stade, seules quelques modifications de code mineures sont nécessaires pour pouvoir tirer parti de l’itinérance des données d’application d’Azure AD. Desktop Bridge fournit à vos applications l’identité d’application nécessaire pour activer l’itinérance des données d’application pour les applications de bureau existantes.
+* [User Experience Virtualization (UE-V)](/previous-versions//dn458947(v=vs.85)) vous permet de créer un modèle de paramètres personnalisés pour les applications de bureau Windows existantes et d’activer le mode itinérant pour les applications Win32. Cette option n’oblige pas le développeur d’application à modifier le code de l’application. UE-V est limité à l’itinérance Active Directory en local pour les clients qui ont acheté Microsoft Desktop Optimization Pack.
 
-Les administrateurs peuvent configurer UE-V pour déplacer simplement les données d’application de bureau Windows en modifiant l’itinérance des paramètres du système d’exploitation Windows et des données d’application universelle à l’aide des [stratégies de groupe UE-V](https://technet.microsoft.com/itpro/mdop/uev-v2/configuring-ue-v-2x-with-group-policy-objects-both-uevv2), notamment :
+Les administrateurs peuvent configurer UE-V pour déplacer simplement les données d’application de bureau Windows en modifiant l’itinérance des paramètres du système d’exploitation Windows et des données d’application universelle à l’aide des [stratégies de groupe UE-V](/microsoft-desktop-optimization-pack/uev-v2/configuring-ue-v-2x-with-group-policy-objects-both-uevv2), notamment :
 
 * La stratégie de groupe « Roam Windows settings » (Activer l’itinérance des paramètres Windows)
 * La stratégie de groupe « Do not synchronize Windows Apps » (Ne pas synchroniser les applications Windows)

@@ -1,19 +1,19 @@
 ---
 title: 'Connectez votre réseau local à un réseau virtuel Azure : VPN de site à site : PowerShell'
-description: Étapes de création d’une connexion IPsec entre votre réseau local et un réseau virtuel Azure via l’Internet public. Ces étapes vous aideront à créer une connexion de passerelle VPN de site à site à l’aide de PowerShell.
+description: Créez une connexion de passerelle VPN de site à site IPsec à partir de votre réseau local vers un réseau virtuel Azure via l’Internet public à l’aide de PowerShell.
 titleSuffix: Azure VPN Gateway
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 01/15/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: cherylmc
-ms.openlocfilehash: d1693a6165aa31b221b6901e2e1c8b2955a3dfb3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7de5f125789b0ed3782224024a9ee9c80d359e77
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76045707"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94659367"
 ---
 # <a name="create-a-vnet-with-a-site-to-site-vpn-connection-using-powershell"></a>Créer un réseau virtuel avec une connexion VPN de site à site à l’aide de PowerShell
 
@@ -52,19 +52,19 @@ Nous utilisons les valeurs suivantes dans les exemples de cet article. Vous pouv
 
 VnetName                = VNet1
 ResourceGroup           = TestRG1
-Location                = East US 
-AddressSpace            = 10.1.0.0/16 
-SubnetName              = Frontend 
-Subnet                  = 10.1.0.0/24 
+Location                = East US 
+AddressSpace            = 10.1.0.0/16 
+SubnetName              = Frontend 
+Subnet                  = 10.1.0.0/24 
 GatewaySubnet           = 10.1.255.0/27
 LocalNetworkGatewayName = Site1
-LNG Public IP           = <On-premises VPN device IP address> 
+LNG Public IP           = <On-premises VPN device IP address> 
 Local Address Prefixes  = 10.101.0.0/24, 10.101.1.0/24
 Gateway Name            = VNet1GW
 PublicIP                = VNet1GWPIP
-Gateway IP Config       = gwipconfig1 
-VPNType                 = RouteBased 
-GatewayType             = Vpn 
+Gateway IP Config       = gwipconfig1 
+VPNType                 = RouteBased 
+GatewayType             = Vpn 
 ConnectionName          = VNet1toSite1
 
 ```
@@ -237,7 +237,7 @@ Il existe différentes façons de vérifier votre connexion VPN.
 
 ## <a name="to-connect-to-a-virtual-machine"></a><a name="connectVM"></a>Se connecter à une machine virtuelle
 
-[!INCLUDE [Connect to a VM](../../includes/vpn-gateway-connect-vm-s2s-include.md)]
+[!INCLUDE [Connect to a VM](../../includes/vpn-gateway-connect-vm.md)]
 
 
 ## <a name="to-modify-ip-address-prefixes-for-a-local-network-gateway"></a><a name="modify"></a>Pour modifier des préfixes d’adresses IP d’une passerelle de réseau local
@@ -261,7 +261,7 @@ Remove-AzVirtualNetworkGatewayConnection -Name VNet1toSite1 `
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-*  Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez [Machines virtuelles](https://docs.microsoft.com/azure/).
+*  Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez [Machines virtuelles](../index.yml).
 * Pour plus d’informations sur le protocole BGP, consultez les articles [Vue d’ensemble du protocole BGP](vpn-gateway-bgp-overview.md) et [Comment configurer BGP](vpn-gateway-bgp-resource-manager-ps.md).
 * Pour en savoir plus sur la création d’une connexion VPN de site à site à l’aide du modèle Azure Resource Manager, consultez [Créer une connexion VPN de site à site](https://azure.microsoft.com/resources/templates/101-site-to-site-vpn-create/).
 * Pour en savoir plus sur la création d’une connexion VPN de réseau virtuel à réseau virtuel à l’aide du modèle Azure Resource Manager, consultez [Déployer une géo-réplication HBase](https://azure.microsoft.com/resources/templates/101-hdinsight-hbase-replication-geo/).

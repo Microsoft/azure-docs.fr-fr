@@ -1,6 +1,6 @@
 ---
 title: Réseaux locaux virtuels et sous-réseaux dans Azure VMware Solution by CloudSimple
-description: Apprenez-en davantage sur les réseaux locaux virtuels et les sous-réseaux dans un cloud privé CloudSimple.
+description: En savoir plus sur les réseaux locaux virtuels ainsi que les sous-réseaux dans le cloud privé CloudSimple et sur le réseau fourni par CloudSimple pour le déploiement de votre service CloudSimple.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 08/15/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 2451fbb69636624db354006df2a7925ef9e75459
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3235b394f739e8af846f30dfe51705d0926c843
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024889"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88140664"
 ---
 # <a name="vlans-and-subnets-overview"></a>Vue d’ensemble des réseaux locaux virtuels et des sous-réseaux
 

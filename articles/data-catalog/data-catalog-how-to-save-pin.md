@@ -4,14 +4,14 @@ description: Article de procédure abordant les fonctionnalités d’Azure Data 
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: a8545939fd027989519e0f7a161f750ec676749a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d0baed53441893ec294784f0f8092fe89a347c9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68976818"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86523704"
 ---
 # <a name="save-searches-and-pin-data-assets-in-azure-data-catalog"></a>Enregistrer des recherches et épingler des ressources de données dans Azure Data Catalog
 ## <a name="introduction"></a>Introduction

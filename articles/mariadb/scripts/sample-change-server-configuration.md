@@ -1,26 +1,28 @@
 ---
 title: Script CLI - Changer les paramètres d’un serveur - Azure Database for MariaDB
-description: Cet exemple de script CLI répertorie toutes les configurations de serveur disponibles et met à jour la valeur de innodb_lock_wait_timeout.
-author: ajlam
-ms.author: andrela
+description: Cet exemple de script CLI liste l’ensemble des configurations et des mises à jour de serveur disponibles pour une instance Azure Database for MariaDB.
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: sample
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 12/02/2019
-ms.openlocfilehash: 515eb7523c5a08d52ad5eb4f7bd261f3f4e03fc4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: c7a46f98f74648ccae9f9f9f94c218d42056decb
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74771805"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536804"
 ---
 # <a name="list-and-update-configurations-of-an-azure-database-for-mariadb-server-using-azure-cli"></a>Lister et mettre à jour les configurations d’un serveur Azure Database for MariaDB à l’aide d’Azure CLI
 Cet exemple de script CLI liste tous les paramètres de configuration disponibles ainsi que les valeurs autorisées pour un serveur Azure Database for MariaDB. En outre, il définit *innodb_lock_wait_timeout* sur une valeur autre que celle par défaut.
 
-[!INCLUDE [cloud-shell-try-it](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-Si vous choisissez d’exécuter l’interface CLI localement, Azure CLI 2.0 ou ultérieur est indispensable pour poursuivre la procédure décrite dans cet article. Pour vérifier la version, exécutez `az --version`. Consultez [Installer Azure CLI]( /cli/azure/install-azure-cli) pour installer ou mettre à niveau votre version d’Azure CLI. 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
+
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 Dans cet exemple de script, modifiez les lignes en surbrillance pour mettre à jour le nom d’utilisateur et le mot de passe d’administrateur et utiliser les vôtres.
@@ -44,5 +46,5 @@ Ce script utilise les commandes décrites dans le tableau suivant :
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur Azure CLI : [Documentation d’Azure CLI](/cli/azure)
-- Pour essayer d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)
+- Essayez d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)
 - Pour plus d’informations sur les paramètres de serveur, consultez [Guide pratique pour configurer les paramètres de serveur dans Azure Database for MariaDB](../howto-server-parameters.md).

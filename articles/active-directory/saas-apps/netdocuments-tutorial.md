@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à NetDocuments | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et NetDocuments.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 1a47dc42-1a17-48a2-965e-eca4cfb2f197
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 09/03/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 79038152dd40b213b92a379c4b50ddd840eb8e6c
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: b9a85c7093d0f42ac97c4a548ba6f0feebae8b89
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82732523"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350719"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-netdocuments"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à NetDocuments
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer NetDocuments à Azure Active
 * Permettre à vos utilisateurs de se connecter automatiquement à NetDocuments avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -89,7 +84,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
     c. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `http://netdocuments.com/VAULT`
 
     > [!NOTE]
-    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de réponse et l’URL de connexion réelles. L’ID de dépôt est une valeur commençant par **CA-** suivi du code à huit caractères associé à votre dépôt NetDocuments. Pour plus d’informations, consultez le [document sur la prise en charge des identités fédérées NetDocuments](https://support.netdocuments.com/hc/en-us/articles/205220410-Federated-Identity-Login). Vous pouvez également contacter l’[équipe de support technique de NetDocuments](https://support.netdocuments.com/hc/) pour obtenir ces valeurs si vous rencontrez des difficultés lorsque vous effectuez la configuration en utilisant les informations ci-dessus. Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de réponse et l’URL de connexion réelles. L’ID de dépôt est une valeur commençant par **CA-** suivi du code à huit caractères associé à votre dépôt NetDocuments. Pour plus d’informations, consultez le [document sur la prise en charge des identités fédérées NetDocuments](https://support.netdocuments.com/hc/en-us/articles/205220410-Federated-Identity-Login). Vous pouvez aussi contacter l’[équipe de support technique NetDocuments](https://support.netdocuments.com/hc/) pour obtenir ces valeurs si vous avez des difficultés à effectuer la configuration à partir des informations fournies ci-dessus. Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 1. L’application NetDocuments attend les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à la configuration des attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **nameidentifier** est mappé avec **user.userprincipalname**. L’application NetDocuments attend le mappage de **nameidentifier** avec **employeeid** ou toute autre revendication applicable à votre organisation en tant que **nameidentifier**. Vous devez donc modifier le mappage d’attributs en cliquant sur l’icône **Modifier** et en procédant aux changements.
 
@@ -141,7 +136,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 3. Sélectionnez **Centre de sécurité**.
    
-    ![Référentiel](./media/netdocuments-tutorial/security-center.png "Security Center")
+    ![Capture d’écran montrant l’élément Security Center sélectionné dans Legal Documents.](./media/netdocuments-tutorial/security-center.png "Security Center")
 
 4. Sélectionnez **Authentification avancée**.
     
@@ -171,7 +166,7 @@ Pour permettre aux utilisateurs Azure AD de se connecter à NetDocuments, vous d
 
 3. Sélectionnez **Utilisateurs et groupes**.
    
-    ![Référentiel](./media/netdocuments-tutorial/users-groups.png "Référentiel")
+    ![Capture d’écran montrant l’élément Users & Groups sélectionné dans Legal Documents.](./media/netdocuments-tutorial/users-groups.png "Référentiel")
 
 4. Dans la zone de texte **Email Address**, tapez l’adresse e-mail d’un compte Azure Active Directory valide à approvisionner, puis cliquez sur **Add User**.
    
@@ -184,14 +179,14 @@ Pour permettre aux utilisateurs Azure AD de se connecter à NetDocuments, vous d
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette NetDocuments dans le panneau d’accès doit vous connecter automatiquement à l’application NetDocuments pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette NetDocuments dans le panneau d’accès doit vous connecter automatiquement à l’application NetDocuments pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer NetDocuments avec Azure AD](https://aad.portal.azure.com/)

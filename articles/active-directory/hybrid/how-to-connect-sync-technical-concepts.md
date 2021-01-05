@@ -11,24 +11,24 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/15/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b8ec4a6100cfbb4419d7e30f4b97589113b88939
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 01e53b30a4c27296e30e031ffb771697afa8e1e9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60347570"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87019673"
 ---
 # <a name="azure-ad-connect-sync-technical-concepts"></a>Synchronisation d’Azure AD Connect : Concepts techniques
 Cet article est un résumé de la rubrique [Présentation de l’architecture](how-to-connect-sync-technical-concepts.md).
 
 Azure AD Connect Sync repose sur une plateforme de synchronisation de méta-annuaire solide.
 Les sections suivantes présentent les concepts liés à la synchronisation de méta-annuaire.
-S’appuyant sur MIIS, ILM et FIM, les services Azure Active Directory Sync fournissent la plateforme de nouvelle génération pour la connexion aux sources de données. Ils synchronisent les données entre des sources de données et assurent l’approvisionnement et le désapprovisionnement des identités.
+S’appuyant sur MIIS (Microsoft Identity Integration Server), ILM (Identity Lifecycle Manager) et FIM (Forefront Identity Manager), les services Azure Active Directory Sync fournissent la plateforme de nouvelle génération pour la connexion aux sources de données. Ils synchronisent les données entre des sources de données et assurent l’approvisionnement et le désapprovisionnement des identités.
 
 ![Concepts techniques](./media/how-to-connect-sync-technical-concepts/scenario.png)
 

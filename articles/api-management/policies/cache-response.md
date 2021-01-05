@@ -13,16 +13,16 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 10/13/2017
 ms.author: apimpm
-ms.openlocfilehash: e286f77009a17870332ed5caf1c66c18dd21d020
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 64db4e5451425002eeaac11695ac011a96047d9b
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75442482"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92076179"
 ---
 # <a name="add-capabilities-to-a-backend-service"></a>Ajouter des fonctionnalités à un service principal
 
-Cet article présente un exemple de la stratégie de Gestion des API Azure qui montre comment ajouter des fonctionnalités à un service principal. Par exemple, accepter un nom d’emplacement au lieu des latitude et longitude dans une API de prévisions météorologiques. Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-samples.md).
+Cet article présente un exemple de la stratégie de Gestion des API Azure qui montre comment ajouter des fonctionnalités à un service principal. Par exemple, accepter un nom d’emplacement au lieu des latitude et longitude dans une API de prévisions météorologiques. Pour définir ou modifier un code de stratégie, suivez les étapes décrites dans [Définir ou modifier une stratégie](../set-edit-policies.md). Pour voir d’autres exemples, consultez [Exemples de stratégie](../policy-reference.md).
 
 ## <a name="policy"></a>Stratégie
 
@@ -35,5 +35,4 @@ Collez le code dans le bloc **inbound**.
 En savoir plus sur les stratégies APIM :
 
 + [Stratégies de transformation](../api-management-transformation-policies.md)
-+ [Exemples de stratégie](../policy-samples.md)
-
++ [Exemples de stratégie](../policy-reference.md)

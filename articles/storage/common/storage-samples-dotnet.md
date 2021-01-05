@@ -3,16 +3,16 @@ title: Exemples de stockage Azure avec .NET| Microsoft Docs
 description: Affichez, téléchargez et exécutez des exemples de code et des applications pour Azure Storage. Découvrez la mise en route des exemples d’objets blob, de files d’attente, de tables et de fichiers qui utilisent des bibliothèques clientes de stockage .NET.
 author: mhopkins-msft
 ms.author: mhopkins
-ms.date: 02/13/2020
+ms.date: 10/01/2020
 ms.service: storage
 ms.subservice: common
 ms.topic: sample
-ms.openlocfilehash: f02c08e752575dd1f57ce91dfc3145b69e3a2fd2
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 760fedd94ef682b183eede1215186de973e9a216
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81010492"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92359779"
 ---
 # <a name="azure-storage-samples-using-v12-net-client-libraries"></a>Exemples de stockage Azure utilisant les bibliothèques clientes .NET v12
 
@@ -336,4 +336,5 @@ Pour plus d’informations sur les exemples pour d’autres langages :
 * Java : [Exemples relatifs au service Stockage Azure avec Java](storage-samples-java.md)
 * Python : [Exemples relatifs au service Stockage Azure avec Python](storage-samples-python.md)
 * JavaScript/Node.js : [Exemples relatifs au service Stockage Azure en JavaScript](storage-samples-javascript.md)
+* C++ : [Exemples relatifs au service Stockage Azure avec C++](storage-samples-c-plus-plus.md)
 * Tous les autres langages : [Exemples relatifs à Stockage Azure](storage-samples.md)

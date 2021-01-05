@@ -1,14 +1,14 @@
 ---
 title: Guide pratique pour gérer les affectations avec PowerShell
 description: Découvrez comment gérer les affectations de blueprints avec le module PowerShell Azure Blueprint, Az.Blueprint.
-ms.date: 05/06/2020
+ms.date: 08/27/2020
 ms.topic: how-to
-ms.openlocfilehash: fa0f89df79c4ae1c5b66998089f04575bd53ea37
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: 3bcb3731bd1270497945fa86406d08b2f9750c85
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82863975"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89051404"
 ---
 # <a name="how-to-manage-assignments-with-powershell"></a>Guide pratique pour gérer les affectations avec PowerShell
 

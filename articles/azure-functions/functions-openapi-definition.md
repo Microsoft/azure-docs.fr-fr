@@ -2,15 +2,15 @@
 title: Exposer vos fonctions avec OpenAPI à l’aide de Gestion des API Azure
 description: Créez une définition OpenAPI permettant aux autres applications et services d’appeler votre fonction dans Azure.
 ms.topic: tutorial
-ms.date: 05/08/2019
+ms.date: 04/21/2020
 ms.reviewer: sunayv
-ms.custom: mvc, cc996988-fb4f-47
-ms.openlocfilehash: 9465209467c83f7de075d16e724459c307d55bd3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp, mvc, cc996988-fb4f-47, references_regions
+ms.openlocfilehash: 9083ff7d8f65c68ce8d173973a4eda650ac355aa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77210206"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88212916"
 ---
 # <a name="create-an-openapi-definition-for-a-serverless-api-using-azure-api-management"></a>Créer une définition OpenAPI pour une API serverless à l’aide de Gestion des API Azure
 
@@ -41,18 +41,20 @@ Ce didacticiel utilise une fonction déclenchée via HTTP qui accepte deux param
 
 La fonction calcule ensuite le coût de la réparation et les revenus engendrés par 24 heures de fonctionnement de l’éolienne. Pour créer une fonction déclenchée via HTTP dans le [portail Azure](https://portal.azure.com) :
 
-1. Développez votre Function App, puis sélectionnez le bouton **+** en regard de **Fonctions**. Sélectionnez **Dans le portail** > **Continuer**.
+1. Dans votre application de fonction, sélectionnez **Fonctions** dans le menu de gauche, puis **Ajouter** dans le menu supérieur.
 
-1. Sélectionnez **Plus de modèles...** , puis **Terminer et afficher les modèles**.
+1. Dans la fenêtre **Nouvelle fonction**, sélectionnez **Déclencheur http**.
 
-1. Sélectionnez Déclencheur HTTP, tapez `TurbineRepair` comme **Nom** de fonction, choisissez `Function` comme **[Niveau d’authentification](functions-bindings-http-webhook-trigger.md#http-auth)** , puis sélectionnez **Créer**.  
+1. Pour **Nouvelle fonction**, entrez `TurbineRepair`. 
 
-    ![Créer une fonction HTTP pour OpenAPI](media/functions-openapi-definition/select-http-trigger-openapi.png)
+1. Choisissez **Fonction** dans la liste déroulante **[Niveau d’autorisation](functions-bindings-http-webhook-trigger.md#http-auth)** , puis sélectionnez **Créer une fonction**.
 
-1. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
+    :::image type="content" source="media/functions-openapi-definition/select-http-trigger-openapi.png" alt-text="Créer une fonction HTTP pour OpenAPI&quot;:::
+
+1. Sélectionnez **Code + test**, puis sélectionnez **run.csx** dans la liste déroulante. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
 
     ```csharp
-    #r "Newtonsoft.Json"
+    #r &quot;Newtonsoft.Json"
     
     using System.Net;
     using Microsoft.AspNetCore.Mvc;
@@ -102,9 +104,9 @@ La fonction calcule ensuite le coût de la réparation et les revenus engendrés
     }
     ```
 
-    Le code de cette fonction retourne un message `Yes` ou `No` indiquant si la réparation d’urgence est rentable, en comparant l’opportunité de revenus que représente la réparation de l’éolienne et le coût de la réparation.
+    Ce code de fonction retourne un message `Yes` ou `No` pour indiquer si une réparation d’urgence est rentable. Elle retourne également l’opportunité de revenu que représente la turbine et le coût de la réparation.
 
-1. Pour tester la fonction, cliquez sur **Test** tout à droite pour développer l’onglet de test. Entrez la valeur suivante pour le **corps de la requête**, puis cliquez sur **Exécuter**.
+1. Pour tester la fonction, sélectionnez **Test**, puis l’onglet **Entrée**, saisissez l’entrée suivante pour le **Corps**, puis sélectionnez **Exécuter** :
 
     ```json
     {
@@ -113,9 +115,14 @@ La fonction calcule ensuite le coût de la réparation et les revenus engendrés
     }
     ```
 
-    ![Testez la fonction dans le portail Azure](media/functions-openapi-definition/test-function.png)
+    :::image type="content" source="media/functions-openapi-definition/test-function.png" alt-text="Créer une fonction HTTP pour OpenAPI&quot;:::
 
-    La valeur suivante est retournée dans le corps de la réponse.
+1. Sélectionnez **Code + test**, puis sélectionnez **run.csx** dans la liste déroulante. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
+
+    ```csharp
+    #r &quot;Newtonsoft.Json":::
+
+    La sortie suivante est retournée dans l’onglet **Sortie** :
 
     ```json
     {"message":"Yes","revenueOpportunity":"$7200","costToFix":"$1600"}
@@ -125,15 +132,19 @@ Vous disposez maintenant d’une fonction qui détermine la rentabilité des ré
 
 ## <a name="generate-the-openapi-definition"></a>Générer la définition OpenAPI
 
-Vous êtes maintenant prêt à générer la définition OpenAPI.
+Pour générer la définition OpenAPI :
 
-1. Sélectionnez l’application de fonction, puis dans **Fonctionnalités de la plateforme**, choisissez **Gestion des API** et sélectionnez **Créer** sous **Gestion des API**.
+1. Sélectionnez l’application de fonction, choisissez **Gestion des API** dans le menu de gauche, puis sélectionnez **Créer nouveau** sous **Gestion des API**.
 
-    ![Choisissez Gestion des API dans les fonctionnalités de la plateforme](media/functions-openapi-definition/select-all-settings-openapi.png)
+    :::image type="content" source="media/functions-openapi-definition/select-all-settings-openapi.png" alt-text="Créer une fonction HTTP pour OpenAPI&quot;:::
 
-1. Utilisez les paramètres de Gestion des API de la manière spécifiée dans le tableau sous l’image.
+1. Sélectionnez **Code + test**, puis sélectionnez **run.csx** dans la liste déroulante. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
 
-    ![Créer un service de Gestion des API](media/functions-openapi-definition/new-apim-service-openapi.png)
+    ```csharp
+    #r &quot;Newtonsoft.Json":::
+
+
+1. Utilisez les paramètres de Gestion des API de la manière spécifiée dans le tableau suivant :
 
     | Paramètre      | Valeur suggérée  | Description                                        |
     | ------------ |  ------- | -------------------------------------------------- |
@@ -143,11 +154,13 @@ Vous êtes maintenant prêt à générer la définition OpenAPI.
     | **Lieu** | USA Ouest | Choisissez l’emplacement USA Ouest. |
     | **Nom de l’organisation** | Contoso | Nom de l’organisation utilisé dans le portail des développeurs et pour les notifications par e-mail. |
     | **E-mail de l’administrateur** | votre e-mail | E-mail ayant reçu les notifications système de la Gestion des API. |
-    | **Niveau tarifaire** | Consommation (préversion) | Le niveau Consommation est en préversion et n’est pas disponible dans toutes les régions. Pour des informations tarifaires complètes, voir la [page de tarification de la Gestion des API](https://azure.microsoft.com/pricing/details/api-management/). |
+    | **Niveau tarifaire** | Consommation | Le niveau Consommation n’est pas disponible dans toutes les régions. Pour des informations tarifaires complètes, voir la [page de tarification de la Gestion des API](https://azure.microsoft.com/pricing/details/api-management/). |
+
+    ![Créer un service de Gestion des API](media/functions-openapi-definition/new-apim-service-openapi.png)
 
 1. Choisissez **Créer** pour créer l’instance de Gestion des API, ce qui peut prendre plusieurs minutes.
 
-1. Sélectionnez **Activer Application Insights** pour envoyer des journaux au même emplacement que l’application de fonction, puis acceptez les valeurs par défaut restantes et sélectionnez **Lier l’API**.
+1. Une fois qu’Azure a créé l’instance, l’option **Activer Application Insights** est disponible sur la page. Sélectionnez-la pour envoyer les journaux au même emplacement que l’application de fonction, puis sélectionnez **API de liaison**.
 
 1. La fenêtre **Importer Azure Functions** s’ouvre avec la fonction **TurbineRepair** en surbrillance. Cliquez sur **Sélectionner** pour continuer.
 
@@ -155,17 +168,22 @@ Vous êtes maintenant prêt à générer la définition OpenAPI.
 
 1. Dans la page **Créer à partir de Function App**, acceptez les valeurs par défaut, puis sélectionnez **Créer**.
 
-    ![Créer à partir de Function App](media/functions-openapi-definition/create-function-openapi.png)
+    :::image type="content" source="media/functions-openapi-definition/create-function-openapi.png" alt-text="Créer une fonction HTTP pour OpenAPI&quot;:::
 
-L’API est maintenant créé pour la fonction.
+1. Sélectionnez **Code + test**, puis sélectionnez **run.csx** dans la liste déroulante. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
+
+    ```csharp
+    #r &quot;Newtonsoft.Json":::
+
+    Azure crée l’API pour la fonction.
 
 ## <a name="test-the-api"></a>Tester l’API
 
 Avant d’utiliser la définition OpenAPI, vous devez vérifier que l’API fonctionne.
 
-1. Sous l’onglet **Test** de votre fonction, sélectionnez l’opération **POST**.
+1. Sur la page de votre application de fonction, sélectionnez **Gestion des API**, sélectionnez l’onglet **Test**, puis **POST TurbineRepair**. 
 
-1. Entrez des valeurs pour les **heures** et la **capacité**.
+1. Entrez le code suivant dans le **Corps de la demande** :
 
     ```json
     {
@@ -174,9 +192,14 @@ Avant d’utiliser la définition OpenAPI, vous devez vérifier que l’API fonc
     }
     ```
 
-1. Cliquez sur **Envoyer**, puis affichez la réponse HTTP.
+1. Sélectionnez **Envoyer**, puis affichez la **réponse HTTP**.
 
-    ![Tester l’API de fonction](media/functions-openapi-definition/test-function-api-openapi.png)
+    :::image type="content" source="media/functions-openapi-definition/test-function-api-openapi.png" alt-text="Créer une fonction HTTP pour OpenAPI&quot;:::
+
+1. Sélectionnez **Code + test**, puis sélectionnez **run.csx** dans la liste déroulante. Remplacez le contenu du fichier de script C# run.csx par le code suivant, puis choisissez **Enregistrer** :
+
+    ```csharp
+    #r &quot;Newtonsoft.Json":::
 
 ## <a name="download-the-openapi-definition"></a>Télécharger la définition OpenAPI
 
@@ -186,7 +209,7 @@ Si votre API fonctionne comme prévu, vous pouvez télécharger la définition O
    
    ![Télécharger la définition OpenAPI](media/functions-openapi-definition/download-definition.png)
 
-2. Ouvrez le fichier JSON téléchargé et vérifiez la définition.
+2. Enregistrez le fichier JSON téléchargé, puis ouvrez-le. Vérifiez la définition.
 
 [!INCLUDE [clean-up-section-portal](../../includes/clean-up-section-portal.md)]
 

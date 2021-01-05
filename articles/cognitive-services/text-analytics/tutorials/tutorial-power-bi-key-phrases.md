@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: tutorial
-ms.date: 12/19/2019
+ms.date: 08/31/2020
 ms.author: aahi
-ms.openlocfilehash: 2398bfa2ce828e716831cc7ce438bd1c241ca5f8
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: d987797c2c25f685a3c9250afeb17cec3ad3cb2e
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75378532"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369543"
 ---
 # <a name="tutorial-integrate-power-bi-with-the-text-analytics-cognitive-service"></a>Tutoriel : Intégrer Power BI au service cognitif Analyse de texte
 
@@ -34,7 +34,7 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 <a name="Prerequisites"></a>
 
 - Microsoft Power BI Desktop. [Téléchargez-le sans frais](https://powerbi.microsoft.com/get-started/).
-- Un compte Microsoft Azure [Démarrez un essai gratuit](https://azure.microsoft.com/free/) ou [connectez-vous](https://portal.azure.com/).
+- Un compte Microsoft Azure [Créez un compte gratuit](https://azure.microsoft.com/free/cognitive-services/) ou [connectez-vous](https://portal.azure.com/).
 - Un compte d’API Cognitive Services avec l’API Analyse de texte. Si vous n’en avez pas, vous pouvez vous [inscrire](../../cognitive-services-apis-create-account.md) afin de bénéficier du niveau gratuit qui offre 5 000 transactions/mois (voir [Tarifs](https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics/)), ce qui suffit à suivre ce tutoriel.
 - La [clé d’accès Analyse de texte](../../cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) qui a été générée pendant le processus d’inscription.
 - Des commentaires de clients. Vous pouvez utiliser [nos exemples de données](https://aka.ms/cogsvc/ta) ou vos propres données. Ce tutoriel suppose que vous utilisez nos exemples de données.
@@ -47,7 +47,7 @@ Pour commencer, ouvrez Power BI Desktop et chargez le fichier CSV `FabrikamComme
 > [!NOTE]
 > Power BI peut utiliser les données issues d’une multitude de sources, telles que Facebook ou une base de données SQL. Pour plus d’informations, consultez les pages concernant [l’intégration de Facebook à Power BI](https://powerbi.microsoft.com/integrations/facebook/) et [l’intégration de SQL Server à Power BI](https://powerbi.microsoft.com/integrations/sql-server/).
 
-Dans la fenêtre principale de Power BI Desktop, sélectionnez le ruban **Accueil**. Dans le groupe **Données externes** du ruban, ouvrez le menu déroulant **Obtenir des données**, puis sélectionnez **Texte/CSV**.
+Dans la fenêtre principale de Power BI Desktop, sélectionnez le ruban **Accueil**. Dans le groupe **Données externes** du ruban, ouvrez le menu déroulant **Obtenir des données** , puis sélectionnez **Texte/CSV**.
 
 ![[Bouton Obtenir les données]](../media/tutorials/power-bi/get-data-button.png)
 
@@ -68,7 +68,7 @@ Vous pouvez avoir besoin de transformer vos données dans Power BI Desktop pour 
 
 Les exemples de données contiennent une colonne `subject` et une colonne `comment`. Avec la fonction Fusionner les colonnes de Power BI Desktop, vous pouvez extraire des phrases clés à partir des données de ces deux colonnes, plutôt que de la colonne `comment` uniquement.
 
-Dans Power BI Desktop, sélectionnez le ruban **Accueil**. Dans le groupe **Données externes**, cliquez sur **Modifier les requêtes**.
+Dans Power BI Desktop, sélectionnez le ruban **Accueil**. Dans le groupe **Données externes** , cliquez sur **Modifier les requêtes**.
 
 ![[Groupe Données externes du ruban Accueil]](../media/tutorials/power-bi/edit-queries.png)
 
@@ -91,7 +91,7 @@ Vous pouvez également envisager de filtrer les messages vides en utilisant le f
 
 [L’API d’extraction de phrases clés](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-V2-1/operations/56f30ceeeda5650db055a3c6) du service Analyse de texte peut traiter jusqu’à mille documents texte par requête HTTP. Power BI traite généralement les enregistrements un par un. Par conséquent, dans ce tutoriel, chacun de vos appels à l’API ne contient qu’un seul document. Pour chaque document à traiter, l’API d’extraction de phrases clés nécessite les champs ci-dessous.
 
-| | |
+| Champ | Description |
 | - | - |
 | `id`  | Identificateur unique de ce document dans la requête. La réponse contient également ce champ. De cette façon, si vous traitez plusieurs documents, vous pouvez facilement associer les phrases clés extraites au document dont elles sont issues. Dans ce tutoriel, étant donné que vous ne traitez qu’un seul document par requête, vous pouvez coder en dur la valeur de `id` afin que celle-ci soit la même pour chaque requête.|
 | `text`  | Texte à traiter. La valeur de ce champ provient de la colonne `Merged`que vous avez créée dans la [section précédente](#PreparingData), qui contient la combinaison de la ligne d’objet et du texte de commentaire. L’API d’extraction de phrases clés exige que ces données ne dépassent pas 5 120 caractères.|
@@ -103,15 +103,15 @@ Vous pouvez également envisager de filtrer les messages vides en utilisant le f
 Vous êtes désormais prêt à créer la fonction personnalisée qui doit intégrer Power BI et l’API Analyse de texte. La fonction reçoit le texte à traiter sous la forme d’un paramètre. Elle effectue des conversions de données vers et à partir du format JSON, et adresse la requête HTTP à l’API d’extraction des phrases clés. La fonction analyse alors la réponse de l’API et retourne une chaîne contenant une liste de phrases clés extraites, séparées par des virgules.
 
 > [!NOTE]
-> Les fonctions Power BI Desktop personnalisées sont écrites en [langage de formule M Power Query](https://docs.microsoft.com/powerquery-m/power-query-m-reference), abrégé sous l’appellation « M ». M est un langage de programmation fonctionnel basé sur [F#](https://docs.microsoft.com/dotnet/fsharp/). Toutefois, vous n’avez pas besoin d’être programmeur pour terminer ce didacticiel ; le code requis est inclus ci-après.
+> Les fonctions Power BI Desktop personnalisées sont écrites en [langage de formule M Power Query](/powerquery-m/power-query-m-reference), abrégé sous l’appellation « M ». M est un langage de programmation fonctionnel basé sur [F#](/dotnet/fsharp/). Toutefois, vous n’avez pas besoin d’être programmeur pour terminer ce didacticiel ; le code requis est inclus ci-après.
 
-Dans Power BI Desktop, vérifiez que vous vous trouvez toujours dans la fenêtre Éditeur de requête. Si ce n’est pas le cas, sélectionnez le ruban **Accueil**, puis, dans le groupe **Données externes**, cliquez sur **Modifier les requêtes**.
+Dans Power BI Desktop, vérifiez que vous vous trouvez toujours dans la fenêtre Éditeur de requête. Si ce n’est pas le cas, sélectionnez le ruban **Accueil** , puis, dans le groupe **Données externes** , cliquez sur **Modifier les requêtes**.
 
-Sur le ruban **Accueil**, dans le groupe **Nouvelle requête**, ouvrez le menu déroulant **Nouvelle source**, puis sélectionnez **Requête vide**. 
+Sur le ruban **Accueil** , dans le groupe **Nouvelle requête** , ouvrez le menu déroulant **Nouvelle source** , puis sélectionnez **Requête vide**. 
 
 Une nouvelle requête, initialement nommée `Query1`, apparaît dans la liste Requêtes. Double-cliquez sur cette entrée et renommez-la `KeyPhrases`.
 
-À présent, sur le ruban **Accueil**, dans le groupe **Requête**, cliquez sur **Éditeur avancé** pour ouvrir la fenêtre correspondante. Supprimez le code figurant déjà dans cette fenêtre, puis collez le code suivant. 
+À présent, sur le ruban **Accueil** , dans le groupe **Requête** , cliquez sur **Éditeur avancé** pour ouvrir la fenêtre correspondante. Supprimez le code figurant déjà dans cette fenêtre, puis collez le code suivant. 
 
 > [!NOTE]
 > Remplacez l’exemple de point de terminaison ci-dessous (contenant `<your-custom-subdomain>`) par le point de terminaison généré pour votre ressource Analyse de texte. Pour trouver ce point de terminaison, connectez-vous au [portail Azure](https://azure.microsoft.com/features/azure-portal/), sélectionnez votre abonnement Analyse de texte, puis sélectionnez `Quick start`.
@@ -121,7 +121,7 @@ Une nouvelle requête, initialement nommée `Query1`, apparaît dans la liste Re
 // Returns key phrases from the text in a comma-separated list
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics" & "/v2.1/keyPhrases",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics" & "/v3.0/keyPhrases",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -139,11 +139,11 @@ Remplacez `YOUR_API_KEY_HERE` par votre clé d’accès Analyse de texte. De mê
 
 À présent, vous pouvez utiliser la fonction personnalisée pour obtenir les phrases clés figurant dans chacun des commentaires clients et pour les stocker dans une nouvelle colonne de la table. 
 
-Dans Power BI Desktop, dans la fenêtre Éditeur de requête, revenez à la requête `FabrikamComments`. Sélectionnez le ruban **Ajouter une colonne**. Dans le groupe **Général**, cliquez sur **Appeler une fonction personnalisée**.
+Dans Power BI Desktop, dans la fenêtre Éditeur de requête, revenez à la requête `FabrikamComments`. Sélectionnez le ruban **Ajouter une colonne**. Dans le groupe **Général** , cliquez sur **Appeler une fonction personnalisée**.
 
 ![[Bouton Appeler une fonction personnalisée]](../media/tutorials/power-bi/invoke-custom-function-button.png)<br><br>
 
-La boîte de dialogue Appeler une fonction personnalisée s’affiche. Dans **Nouveau nom de colonne**, entrez `keyphrases`. Dans **Requête de fonction**, sélectionnez la fonction personnalisée que vous avez créée (`KeyPhrases`).
+La boîte de dialogue Appeler une fonction personnalisée s’affiche. Dans **Nouveau nom de colonne** , entrez `keyphrases`. Dans **Requête de fonction** , sélectionnez la fonction personnalisée que vous avez créée (`KeyPhrases`).
 
 Un nouveau champ s’affiche dans la boîte de dialogue : **Texte (facultatif)** . Dans ce champ, vous devez entrer la colonne que vous souhaitez utiliser dans le but de fournir des valeurs pour le paramètre `text` de l’API d’extraction de phrases clés. N’oubliez pas que vous avez déjà codé en dur les valeurs des paramètres `language` et `id`. Dans le menu déroulant, sélectionnez `Merged` (la colonne que vous avez créée [précédemment](#PreparingData) en fusionnant les champs d’objet et de message).
 
@@ -160,7 +160,7 @@ Une fois que vous avez fermé la boîte de dialogue Appeler une fonction personn
 
 ![[Bannière d’informations d’identification]](../media/tutorials/power-bi/credentials-banner.png)
 
-Cliquez sur **Modifier les informations d’identification**, vérifiez que `Anonymous` est sélectionné dans la boîte de dialogue, puis cliquez sur **Se connecter**. 
+Cliquez sur **Modifier les informations d’identification** , vérifiez que `Anonymous` est sélectionné dans la boîte de dialogue, puis cliquez sur **Se connecter**. 
 
 > [!NOTE]
 > Vous devez sélectionner `Anonymous`, car le service Analyse de texte vous authentifie à l’aide de votre clé d’accès. Par conséquent, Power BI n’a pas besoin de fournir d’informations d’identification pour la requête HTTP proprement dite.
@@ -174,7 +174,7 @@ Ensuite, une bannière peut vous inviter à fournir des informations sur la conf
 
 ![[Bannière de confidentialité]](../media/tutorials/power-bi/privacy-banner.png)
 
-Cliquez sur **Continuer**, puis choisissez `Public` pour chacune des sources de données de la boîte de dialogue. Ensuite, cliquez sur **Enregistrer**.
+Cliquez sur **Continuer** , puis choisissez `Public` pour chacune des sources de données de la boîte de dialogue. Ensuite, cliquez sur **Enregistrer**.
 
 ![[Définition de la confidentialité des sources de données]](../media/tutorials/power-bi/privacy-dialog.png)
 
@@ -225,14 +225,14 @@ La fonction Analyse des sentiments ci-après renvoie un score évaluant le carac
 // Returns the sentiment score of the text, from 0.0 (least favorable) to 1.0 (most favorable)
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/sentiment",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v3.0/sentiment",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
     headers     = [#"Ocp-Apim-Subscription-Key" = apikey],
     bytesresp   = Web.Contents(endpoint, [Headers=headers, Content=bytesbody]),
     jsonresp    = Json.Document(bytesresp),
-    sentiment   = jsonresp[documents]{0}[score]
+    sentiment   = jsonresp[documents]{0}[confidenceScores]
 in  sentiment
 ```
 
@@ -242,7 +242,7 @@ Voici deux versions d’une fonction Détection de langue. La première retourne
 // Returns the two-letter language code (for example, 'en' for English) of the text
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/languages",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v3.0/languages",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -256,7 +256,7 @@ in  language
 // Returns the name (for example, 'English') of the language in which the text is written
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/languages",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v3.0/languages",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -276,7 +276,7 @@ Pour finir, voici une variante de la fonction Expressions clés déjà présent�
 // Returns key phrases from the text as a list object
 (text) => let
     apikey      = "YOUR_API_KEY_HERE",
-    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v2.1/keyPhrases",
+    endpoint    = "https://<your-custom-subdomain>.cognitiveservices.azure.com" & "/text/analytics/v3.0/keyPhrases",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
     jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
     bytesbody   = Text.ToBinary(jsonbody),
@@ -293,10 +293,10 @@ in  keyphrases
 Apprenez-en davantage sur le service Analyse de texte, sur le langage de formule M Power Query ou sur Power BI.
 
 > [!div class="nextstepaction"]
-> [Informations de référence sur l’API Analyse de texte](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-V2-1/operations/56f30ceeeda5650db055a3c6)
+> [Informations de référence sur l’API Analyse de texte](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-0)
 
 > [!div class="nextstepaction"]
-> [Informations de référence sur le langage M Power Query](https://docs.microsoft.com/powerquery-m/power-query-m-reference)
+> [Informations de référence sur le langage M Power Query](/powerquery-m/power-query-m-reference)
 
 > [!div class="nextstepaction"]
 > [Documentation Power BI](https://powerbi.microsoft.com/documentation/powerbi-landing-page/)

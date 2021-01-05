@@ -6,15 +6,15 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/30/2019
-ms.openlocfilehash: 29d5213b8eecd94ed8c8ce565972c9f98872a362
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: a817c12a367d7c14f693389920e49b368a35cc06
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411427"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95522870"
 ---
 # <a name="optimize-log-queries-in-azure-monitor"></a>Optimiser les requêtes de journal dans Azure Monitor
-Journaux Azure Monitor utilise [Azure Data Explorer (ADX)](/azure/data-explorer/) pour stocker les données de journal et exécuter des requêtes afin d’analyser ces données. Elle crée et gère les clusters ADX, et les optimise pour votre charge de travail de l’analyse des journaux. Quand vous exécutez une requête, elle est optimisée et routée vers le cluster ADX approprié qui stocke les données de l’espace de travail. Journaux Azure Monitor et Azure Data Explorer utilisent de nombreux mécanismes d’optimisation automatique des requêtes. Bien que les optimisations automatiques apportent une amélioration significative, vous pouvez parfois dans certains cas améliorer considérablement les performances de vos requêtes. Cet article explique les considérations relatives aux performances et plusieurs techniques permettant de les corriger.
+Journaux Azure Monitor utilise [Azure Data Explorer (ADX)](/azure/data-explorer/) pour stocker les données de journal et exécuter des requêtes afin d’analyser ces données. Elle crée et gère les clusters ADX, et les optimise pour votre charge de travail de l’analyse des journaux. Quand vous exécutez une requête, elle est optimisée et routée vers le cluster ADX approprié qui stocke les données de l’espace de travail. Journaux Azure Monitor et Azure Data Explorer utilisent de nombreux mécanismes d’optimisation automatique des requêtes. Bien que les optimisations automatiques apportent une amélioration significative, dans certains cas, vous pouvez améliorer considérablement les performances de vos requêtes. Cet article explique les considérations relatives aux performances et plusieurs techniques permettant de les corriger.
 
 La plupart des techniques sont communes aux requêtes qui sont exécutées directement sur Azure Data Explorer et Journaux Azure Monitor, bien que plusieurs considérations sur Journaux Azure Monitor soient abordées ici. Pour plus d’informations sur les conseils d’optimisation propres à Azure Data Explorer, consultez [Bonnes pratiques pour les requêtes](/azure/kusto/query/best-practices).
 
@@ -53,6 +53,8 @@ Les indicateurs de performances de requête suivants sont disponibles pour chaqu
 ## <a name="total-cpu"></a>Total Unité centrale
 Processeur de calcul réel consacré au traitement de cette requête sur tous les nœuds de traitement des requêtes. Étant donné que la plupart des requêtes sont exécutées sur un grand nombre de nœuds, cette valeur est généralement beaucoup plus grande que la durée réelle de l’exécution de la requête. 
 
+Une requête qui utilise plus de 100 secondes d’UC est considérée comme une requête consommant une quantité excessive de ressources. Une requête qui utilise plus de 1 000 secondes d’UC est considérée comme une requête abusive et peut être limitée.
+
 Le temps de traitement des requêtes est consacré aux opérations suivantes :
 - Extraction de données : l’extraction d’anciennes données consomme plus de temps que l’extraction de données récentes.
 - Traitement des données : logique et évaluation des données. 
@@ -73,8 +75,8 @@ SecurityEvent
 | extend Details = parse_xml(EventData)
 | extend FilePath = tostring(Details.UserData.RuleAndFileData.FilePath)
 | extend FileHash = tostring(Details.UserData.RuleAndFileData.FileHash)
-| summarize count() by FileHash, FilePath
 | where FileHash != "" and FilePath !startswith "%SYSTEM32"  // Problem: irrelevant results are filtered after all processing and parsing is done
+| summarize count() by FileHash, FilePath
 ```
 ```Kusto
 //more efficient
@@ -84,6 +86,7 @@ SecurityEvent
 | extend Details = parse_xml(EventData)
 | extend FilePath = tostring(Details.UserData.RuleAndFileData.FilePath)
 | extend FileHash = tostring(Details.UserData.RuleAndFileData.FileHash)
+| where FileHash != "" and FilePath !startswith "%SYSTEM32"  // exact removal of results. Early filter is not accurate enough
 | summarize count() by FileHash, FilePath
 | where FileHash != "" // No need to filter out %SYSTEM32 here as it was removed before
 ```
@@ -95,20 +98,36 @@ Par exemple, les requêtes suivantes produisent exactement le même résultat, m
 
 ```Kusto
 //less efficient
-Heartbeat 
-| extend IPRegion = iif(RemoteIPLongitude  < -94,"WestCoast","EastCoast")
-| where IPRegion == "WestCoast"
-| summarize count() by Computer
+Syslog
+| extend Msg = strcat("Syslog: ",SyslogMessage)
+| where  Msg  has "Error"
+| count 
 ```
 ```Kusto
 //more efficient
-Heartbeat 
-| where RemoteIPLongitude  < -94
-| extend IPRegion = iif(RemoteIPLongitude  < -94,"WestCoast","EastCoast")
-| summarize count() by Computer
+Syslog
+| where  SyslogMessage  has "Error"
+| count 
 ```
 
-### <a name="use-effective-aggregation-commands-and-dimmentions-in-summarize-and-join"></a>Utilisez des commandes d’agrégation et des dimensions efficaces dans la synthèse et la jointure
+Dans certains cas, la colonne évaluée est créée implicitement par le moteur de traitement des requêtes puisque le filtrage ne se fait pas uniquement sur le champ :
+```Kusto
+//less efficient
+SecurityEvent
+| where tolower(Process) == "conhost.exe"
+| count 
+```
+```Kusto
+//more efficient
+SecurityEvent
+| where Process =~ "conhost.exe"
+| count 
+```
+
+
+
+
+### <a name="use-effective-aggregation-commands-and-dimensions-in-summarize-and-join"></a>Utilisez des commandes d’agrégation et des dimensions efficaces dans la synthèse et la jointure
 
 Bien que certaines commandes d’agrégation telles que [max()](/azure/kusto/query/max-aggfunction), [sum()](/azure/kusto/query/sum-aggfunction), [count()](/azure/kusto/query/count-aggfunction) et [avg()](/azure/kusto/query/avg-aggfunction) aient un faible impact sur le processeur en raison de leur logique, d’autres sont plus complexes et incluent des heuristiques et des estimations qui leur permettent d’être exécutées efficacement. Par exemple, [dcount()](/azure/kusto/query/dcount-aggfunction) utilise l’algorithme HyperLogLog pour fournir une estimation proche du nombre distinct de grands jeux de données sans compter réellement chaque valeur ; les fonctions centile réalisent des approximations similaires à l’aide de l’algorithme de rang centile le plus proche. Plusieurs commandes incluent des paramètres facultatifs pour réduire leur impact. Par exemple, la fonction [makeset()](/azure/kusto/query/makeset-aggfunction) a un paramètre facultatif pour définir la taille maximale du jeu, ce qui affecte de manière significative le processeur et la mémoire.
 
@@ -157,7 +176,7 @@ Heartbeat
 > Cet indicateur présente uniquement le processeur du cluster immédiat. Dans une requête multirégion, il ne représente qu’une seule des régions. Dans les requêtes à plusieurs espaces de travail, il n’inclut probablement pas tous les espaces de travail.
 
 ### <a name="avoid-full-xml-and-json-parsing-when-string-parsing-works"></a>Évitez l’analyse XML et JSON complète lorsque l’analyse de chaîne fonctionne
-L’analyse complète d’un objet XML ou JSON peut consommer des ressources de processeur et de mémoire élevées. Dans de nombreux cas, lorsqu’un seul ou deux paramètres sont nécessaires et que les objets XML ou JSON sont simples, il est plus facile de les analyser en tant que chaînes à l’aide de [l’opérateur parse](/azure/kusto/query/parseoperator) ou d’autres [techniques d’analyse de texte](/azure/azure-monitor/log-query/parse-text). L’amélioration des performances sera plus importante à mesure que le nombre d’enregistrements dans l’objet XML ou JSON augmente. Cela est essentiel lorsque le nombre d’enregistrements atteint des dizaines de millions.
+L’analyse complète d’un objet XML ou JSON peut consommer des ressources de processeur et de mémoire élevées. Dans de nombreux cas, lorsqu’un seul ou deux paramètres sont nécessaires et que les objets XML ou JSON sont simples, il est plus facile de les analyser en tant que chaînes à l’aide de [l’opérateur parse](/azure/kusto/query/parseoperator) ou d’autres [techniques d’analyse de texte](./parse-text.md). L’amélioration des performances sera plus importante à mesure que le nombre d’enregistrements dans l’objet XML ou JSON augmente. Cela est essentiel lorsque le nombre d’enregistrements atteint des dizaines de millions.
 
 Par exemple, la requête suivante renverra exactement les mêmes résultats que les requêtes ci-dessus sans effectuer d’analyse XML complète. Notez qu’elle fait des hypothèses sur la structure du fichier XML, par exemple le fait que l’élément FilePath vient après FileHash et qu’aucun d’entre eux n’a d’attributs. 
 
@@ -175,6 +194,8 @@ SecurityEvent
 ## <a name="data-used-for-processed-query"></a>Données utilisées pour la requête traitée
 
 Un facteur critique dans le traitement de la requête est le volume de données analysé et utilisé. Azure Data Explorer utilise des optimisations agressives qui réduisent considérablement le volume de données par rapport aux autres plateformes de données. Toutefois, il existe des facteurs critiques dans la requête qui peuvent impacter le volume de données utilisé.
+
+Une requête qui traite plus de 2 000 Ko de données est considérée comme une requête consommant une quantité excessive de ressources. Une requête qui traite plus de 20 000KB de données est considérée comme une requête abusive et peut être limitée.
 
 Dans Journaux Azure Monitor, la colonne **TimeGenerated** est utilisée comme mode d’indexation des données. Le fait de limiter les valeurs **TimeGenerated** à une plage aussi fine que possible améliore considérablement les performances des requêtes en limitant de manière significative la quantité de données à traiter.
 
@@ -220,6 +241,64 @@ SecurityEvent
 | summarize LoginSessions = dcount(LogonGuid) by Account
 ```
 
+### <a name="avoid-multiple-scans-of-same-source-data-using-conditional-aggregation-functions-and-materialize-function"></a>Évitez les analyses multiples des mêmes données sources à l’aide des fonctions d’agrégation conditionnelles et de la fonction materialize
+Lorsqu’une requête comporte plusieurs sous-requêtes fusionnées à l’aide d’opérateurs de jointure ou d’union, chaque sous-requête analyse l’intégralité de la source séparément, puis fusionne les résultats. Il s’agit du nombre de fois où les données sont analysées ; un facteur critique dans les jeux de données très volumineux.
+
+Pour éviter cela, vous pouvez utiliser les fonctions d’agrégation conditionnelles. La plupart des [fonctions d’agrégation](/azure/data-explorer/kusto/query/summarizeoperator#list-of-aggregation-functions) utilisées dans l’opérateur summary ont une version conditionnée qui vous permet d’utiliser un seul opérateur de synthèse avec plusieurs conditions. 
+
+Par exemple, les requêtes suivantes affichent le nombre d’événements de connexion et le nombre d’événements d’exécution de processus pour chaque compte. Elles retournent les mêmes résultats, mais la première analyse les données deux fois, la deuxième une seule fois :
+
+```Kusto
+//Scans the SecurityEvent table twice and perform expensive join
+SecurityEvent
+| where EventID == 4624 //Login event
+| summarize LoginCount = count() by Account
+| join 
+(
+    SecurityEvent
+    | where EventID == 4688 //Process execution event
+    | summarize ExecutionCount = count(), ExecutedProcesses = make_set(Process) by Account
+) on Account
+```
+
+```Kusto
+//Scan only once with no join
+SecurityEvent
+| where EventID == 4624 or EventID == 4688 //early filter
+| summarize LoginCount = countif(EventID == 4624), ExecutionCount = countif(EventID == 4688), ExecutedProcesses = make_set_if(Process,EventID == 4688)  by Account
+```
+
+Un autre cas où les sous-requêtes ne sont pas nécessaires est le préfiltrage pour [l’opérateur parse](/azure/data-explorer/kusto/query/parseoperator?pivots=azuremonitor) pour s’assurer qu’il traite uniquement les enregistrements qui correspondent à un modèle spécifique. Cela n’est pas nécessaire, car l’opérateur parse et d’autres opérateurs similaires retournent des résultats vides lorsque le modèle ne correspond pas. Voici deux requêtes qui retournent exactement les mêmes résultats, tandis que la deuxième requête analyse les données une seule fois. Dans la deuxième requête, chaque commande parse est pertinente uniquement pour ses événements. L’opérateur Extend montre ensuite comment faire référence à une situation de données vides.
+
+```Kusto
+//Scan SecurityEvent table twice
+union(
+SecurityEvent
+| where EventID == 8002 
+| parse EventData with * "<FilePath>" FilePath "</FilePath>" * "<FileHash>" FileHash "</FileHash>" *
+| distinct FilePath
+),(
+SecurityEvent
+| where EventID == 4799
+| parse EventData with * "CallerProcessName\">" CallerProcessName1 "</Data>" * 
+| distinct CallerProcessName1
+)
+```
+
+```Kusto
+//Single scan of the SecurityEvent table
+SecurityEvent
+| where EventID == 8002 or EventID == 4799
+| parse EventData with * "<FilePath>" FilePath "</FilePath>" * "<FileHash>" FileHash "</FileHash>" * //Relevant only for event 8002
+| parse EventData with * "CallerProcessName\">" CallerProcessName1 "</Data>" *  //Relevant only for event 4799
+| extend FilePath = iif(isempty(CallerProcessName1),FilePath,"")
+| distinct FilePath, CallerProcessName1
+```
+
+Lorsque l’option ci-dessus n’autorise pas l’utilisation de sous-requêtes, une autre technique consiste à indiquer au moteur de requête qu’une seule source de données est utilisée dans chacune d’elles à l’aide de la fonction [materialize()](/azure/data-explorer/kusto/query/materializefunction?pivots=azuremonitor). Cela est utile lorsque les données sources proviennent d’une fonction qui est utilisée plusieurs fois dans la requête. La fonction materialize est efficace lorsque la sortie de la sous-requête est bien plus petite que l’entrée. Le moteur de requête mettra en cache et réutilisera la sortie dans toutes les occurrences.
+
+
+
 ### <a name="reduce-the-number-of-columns-that-is-retrieved"></a>Réduisez le nombre de colonnes récupérées
 
 Étant donné qu’Azure Data Explorer est un magasin de données en colonnes, la récupération de chaque colonne est indépendante des autres. Le nombre de colonnes récupérées influence directement le volume de données global. Vous ne devez inclure dans la sortie que les colonnes nécessaires ; pour ce faire, [résumez](/azure/kusto/query/summarizeoperator) les résultats ou [projetez](/azure/kusto/query/projectoperator) les colonnes concernées. Azure Data Explorer dispose de plusieurs optimisations pour réduire le nombre de colonnes récupérées. S’il détermine qu’une colonne n’est pas nécessaire, par exemple si elle n’est pas référencée dans la commande [summarize](/azure/kusto/query/summarizeoperator), il ne la récupère pas.
@@ -240,6 +319,8 @@ SecurityEvent
 ## <a name="time-span-of-the-processed-query"></a>Intervalle de temps de la requête traitée
 
 Tous les journaux dans Journaux Azure Monitor sont partitionnés en fonction de la colonne **TimeGenerated**. Le nombre de partitions accessibles est directement lié à l’intervalle de temps. La réduction de l’intervalle de temps est la méthode la plus efficace pour garantir l’exécution d’une requête d’invite.
+
+Une requête sur une période de plus de 15 jours est considérée comme une requête consommant une quantité excessive de ressources. Une requête sur une période de plus de 90 jours est considérée comme une requête abusive et peut être limitée.
 
 L’intervalle de temps peut être défini à l’aide du sélecteur d’intervalle de temps dans l’écran Log Analytics, comme décrit dans [Étendue de requête de journal et intervalle de temps dans la fonctionnalité Log Analytics d’Azure Monitor](scope.md#time-range). Il s’agit de la méthode recommandée, car l’intervalle de temps sélectionné est transmis au back-end à l’aide des métadonnées de requête. 
 
@@ -330,6 +411,9 @@ Il existe plusieurs cas où le système ne peut pas fournir une mesure exacte de
 ## <a name="age-of-processed-data"></a>Âge des données traitées
 Azure Data Explorer utilise plusieurs niveaux de stockage : en mémoire, disques SSD locaux et objets blob Azure beaucoup plus lents. Plus les données sont récentes, plus il est probable qu’elles soient stockées dans un niveau plus performant avec une latence plus faible, ce qui réduit la durée de la requête et la consommation des ressources processeur. Outre pour les données elles-mêmes, le système dispose d’un cache pour les métadonnées. Plus les données sont anciennes, moins il est probable que leurs métadonnées se trouvent dans le cache.
 
+Une requête qui traite des données datant de plus de 14 jours est considérée comme une requête consommant une quantité excessive de ressources.
+
+
 Bien que certaines requêtes nécessitent l’utilisation d’anciennes données, il existe des cas où les anciennes données sont utilisées par erreur. Cela se produit quand les requêtes sont exécutées sans que soit fourni d’intervalle de temps dans leurs métadonnées et que toutes les références de table n’incluent pas le filtre sur la colonne **TimeGenerated**. Dans ces cas, le système analyse toutes les données stockées dans la table concernée. Quand la conservation des données est longue, elle peut couvrir des intervalles de temps longs et, donc, des données aussi anciennes que la période de conservation des données.
 
 Voici certains exemples :
@@ -349,6 +433,8 @@ Il existe plusieurs situations où une seule requête peut être exécutée dans
 L’exécution d’une requête inter-région nécessite que le système sérialise et transfère dans le back-end de grands segments de données intermédiaires qui sont généralement beaucoup plus volumineux que les résultats finaux de la requête. Elle limite également la capacité du système à effectuer des optimisations, des heuristiques et à utiliser des caches.
 S’il n’y a pas vraiment de raison d’analyser toutes ces régions, vous devez ajuster l’étendue afin qu’elle couvre moins de régions. Si l’étendue de ressource est réduite, mais que de nombreuses régions sont toujours utilisées, la raison peut en être une mauvaise configuration. Par exemple, les journaux d’audit et les paramètres de diagnostic sont envoyés à différents espaces de travail dans différentes régions ou il existe plusieurs configurations de paramètres de diagnostic. 
 
+Une requête qui s’étend à plus de 3 régions est considérée comme une requête consommant une quantité excessive de ressources. Une requête qui s’étend à plus de 6 régions est considérée comme une requête abusive et peut être limitée.
+
 > [!IMPORTANT]
 > Lorsqu’une requête est exécutée dans plusieurs régions à la fois, les mesures du processeur et des données ne sont pas exactes, car elles représentent uniquement les mesures de l’une des régions.
 
@@ -361,6 +447,8 @@ L’utilisation de plusieurs espaces de travail peut résulter :
 - De la récupération par une requête dont l’étendue est limitée à des ressources de données qui sont stockées dans plusieurs espaces de travail.
  
 L’exécution de requêtes inter-région et inter-cluster nécessite que le système sérialise et transfère dans le back-end de grands segments de données intermédiaires qui sont généralement beaucoup plus volumineux que les résultats finaux de la requête. Elle limite également la capacité du système à effectuer des optimisations, des heuristiques et à utiliser des caches.
+
+Une requête qui s’étend à plus de 5 espaces de travail est considérée comme une requête consommant une quantité excessive de ressources. Les requêtes ne peuvent pas s’étendre à plus de 100 espaces de travail.
 
 > [!IMPORTANT]
 > Dans certains scénarios à plusieurs espaces de travail, les mesures du processeur et des données ne sont pas précises et représentent la mesure uniquement de quelques-uns des espaces de travail.
@@ -375,7 +463,7 @@ Les comportements de requête qui peuvent réduire le parallélisme sont les sui
 - Utilisation de fonctions de sérialisation et de fenêtre, telles que les fonctions [next()](/azure/kusto/query/nextfunction), [prev()](/azure/kusto/query/prevfunction) et [row](/azure/kusto/query/rowcumsumfunction) ainsi que l’[opérateur serialize](/azure/kusto/query/serializeoperator). Les fonctions de série chronologique et d’analytique utilisateur peuvent être utilisées dans certains de ces cas. Une sérialisation inefficace peut également se produire si les opérateurs suivants ne sont pas utilisés à la fin de la requête : [range](/azure/kusto/query/rangeoperator), [sort](/azure/kusto/query/sortoperator), [order](/azure/kusto/query/orderoperator), [top](/azure/kusto/query/topoperator), [top-hitters](/azure/kusto/query/tophittersoperator), [getschema](/azure/kusto/query/getschemaoperator).
 -    L’utilisation de la fonction d’agrégation [dcount()](/azure/kusto/query/dcount-aggfunction) force le système à avoir une copie centrale des différentes valeurs. Quand l’échelle de données est élevée, envisagez d’utiliser les paramètres facultatifs de la fonction dcount pour réduire la précision.
 -    Dans de nombreux cas, l’opérateur [join](/azure/kusto/query/joinoperator?pivots=azuremonitor) diminue le parallélisme global. Envisagez une jointure aléatoire comme alternative quand les performances sont problématiques.
--    Dans les requêtes dont l’étendue est limitée à des ressources, les vérifications RBAC en préexécution peuvent traîner en longueur en présence d’un très grand nombre d’affectations RBAC. Cela peut entraîner des contrôles plus longs susceptibles de réduire le parallélisme. Par exemple, une requête est exécutée sur un abonnement qui comprend des milliers de ressources, et de nombreuses attributions de rôle sont définies au niveau de chaque ressource, et non sur l’abonnement ou sur le groupe de ressources.
+-    Dans les requêtes dont l’étendue est limitée à des ressources, les vérifications Kubernetes RBAC ou Azure RBAC en préexécution peuvent traîner en longueur en présence d’un très grand nombre d’attributions de rôle Azure. Cela peut entraîner des contrôles plus longs susceptibles de réduire le parallélisme. Par exemple, une requête est exécutée sur un abonnement qui comprend des milliers de ressources, et de nombreuses attributions de rôle sont définies au niveau de chaque ressource, et non sur l’abonnement ou sur le groupe de ressources.
 -    Si une requête traite de petits blocs de données, son parallélisme est faible, car le système ne la répartit pas sur de nombreux nœuds de calcul.
 
 

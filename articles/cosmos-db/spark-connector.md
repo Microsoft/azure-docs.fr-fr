@@ -3,17 +3,19 @@ title: Connecter Apache Spark à Azure Cosmos DB
 description: Découvrez le connecteur Spark Azure Cosmos DB qui vous permet de connecter Apache Spark à Azure Cosmos DB.
 author: tknandu
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 05/21/2019
 ms.author: ramkris
-ms.openlocfilehash: edfaf50b701f64b12f9cf5fcc9ab8d2c6d241d0a
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 06498a27b95a72148497efd2d1e600d802414359
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81482171"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97359555"
 ---
 # <a name="accelerate-big-data-analytics-by-using-the-apache-spark-to-azure-cosmos-db-connector"></a>Accélérer l’analytique en temps réel des Big Data au moyen du connecteur Apache Spark-Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Vous pouvez exécuter des tâches [Spark](https://spark.apache.org/) avec des données stockées dans Azure Cosmos DB à l’aide du connecteur Spark de Cosmos DB. Cosmos peut servir au traitement de lots et de flux, et en tant que couche de service pour un accès à faible latence.
 
@@ -29,12 +31,14 @@ Vous pouvez utiliser le connecteur avec [Azure Databricks](https://azure.microso
 > Ce connecteur prend en charge l’API de base (SQL) d’Azure Cosmos DB.
 > Pour l’API Cosmos DB pour MongoDB, utilisez le [connecteur MongoDB Spark](https://docs.mongodb.com/spark-connector/master/).
 > Pour l’API Cosmos DB pour Cassandra, utilisez le [connecteur Cassandra Spark](https://github.com/datastax/spark-cassandra-connector).
->
+
+> [!IMPORTANT]
+> Le connecteur Azure Cosmos DB Spark n’est actuellement pas pris en charge sur les comptes [serverless](serverless.md). Ce problème sera traité quand l’offre serverless sera en disponibilité générale.
 
 ## <a name="quickstart"></a>Démarrage rapide
 
-* Suivez les étapes de [Prise en main avec le kit de développement logiciel (SDK) Java](sql-api-async-java-get-started.md) pour configurer un compte Cosmos DB, et renseignez quelques données.
-* Suivez les étapes de [Prise en main avec Azure Databricks](/azure/azure-databricks/quickstart-create-databricks-workspace-portal) pour configurer un espace de travail et un cluster Azure Databricks.
+* Suivez les étapes de [Prise en main avec le kit de développement logiciel (SDK) Java](./create-sql-api-java.md) pour configurer un compte Cosmos DB, et renseignez quelques données.
+* Suivez les étapes de [Prise en main avec Azure Databricks](/azure/databricks/scenarios/quickstart-create-databricks-workspace-portal) pour configurer un espace de travail et un cluster Azure Databricks.
 * Vous pouvez désormais créer de nouveaux notebooks et importer la bibliothèque de connecteur Cosmos DB. Accédez à [Utiliser le connecteur Cosmos DB](#bk_working_with_connector) pour plus d’informations sur comment configurer votre espace de travail.
 * La section suivante offre des extraits de code sur la façon de lire et écrire avec le connecteur.
 
@@ -95,7 +99,7 @@ writeConfig = {
 }
 
 # Write to Cosmos DB from the flights DataFrame
-flights.write.format("com.microsoft.azure.cosmosdb.spark").options(
+flights.write.mode("overwrite").format("com.microsoft.azure.cosmosdb.spark").options(
     **writeConfig).save()
 ```
 
@@ -223,7 +227,7 @@ Vous pouvez créer le connecteur à partir de la source dans GitHub, ou téléch
 
 | Spark | Scala | Version la plus récente |
 |---|---|---|
-| 2.4.0 | 2.11 | [azure-cosmosdb-spark_2.4.0_2.11_1.4.0](https://search.maven.org/artifact/com.microsoft.azure/azure-cosmosdb-spark_2.4.0_2.11/1.4.0/jar)
+| 2.4.0 | 2.11 | [azure-cosmosdb-spark_lkg_version](https://aka.ms/CosmosDB_OLTP_Spark_2.4_LKG)
 | 2.3.0 | 2.11 | [azure-cosmosdb-spark_2.3.0_2.11_1.3.3](https://search.maven.org/artifact/com.microsoft.azure/azure-cosmosdb-spark_2.3.0_2.11/1.3.3/jar)
 | 2.2.0 | 2.11 | [azure-cosmosdb-spark_2.2.0_2.11_1.1.1](https://search.maven.org/#artifactdetails%7Ccom.microsoft.azure%7Cazure-cosmosdb-spark_2.2.0_2.11%7C1.1.1%7Cjar)
 | 2.1.0 | 2.11 | [azure-cosmosdb-spark_2.1.0_2.11_1.2.2](https://search.maven.org/artifact/com.microsoft.azure/azure-cosmosdb-spark_2.1.0_2.11/1.2.2/jar)
@@ -233,7 +237,7 @@ Vous pouvez créer le connecteur à partir de la source dans GitHub, ou téléch
 Créez une bibliothèque avec votre espace de travail Databricks en suivant les instructions du Guide Azure Databricks > [Utiliser le connecteur Spark Azure Cosmos DB](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/cosmosdb-connector.html)
 
 > [!NOTE]
-> Remarque : la page **Utiliser le connecteur Spark Azure Cosmos DB** n’est actuellement pas à jour. Au lieu de télécharger les six fichiers jars distincts en six bibliothèques différentes, vous pouvez télécharger le fichier uber jar depuis maven sur https://search.maven.org/artifact/com.microsoft.azure/azure-cosmosdb-spark_2.4.0_2.11/1.4.0/jar) et l’installer.
+> La page **Utiliser le connecteur Spark Azure Cosmos DB** n'est actuellement pas à jour. Au lieu de télécharger les six fichiers jars distincts dans six bibliothèques différentes, vous pouvez télécharger le fichier uber jar depuis Maven sur [azure-cosmosdb-spark_lkg_version](https://aka.ms/CosmosDB_OLTP_Spark_2.4_LKG) et installer ce fichier/cette bibliothèque.
 > 
 
 ### <a name="using-spark-cli"></a>Utilisation de spark-cli
@@ -245,9 +249,9 @@ spark-shell --master yarn --packages "com.microsoft.azure:azure-cosmosdb-spark_2
 
 ```
 
-### <a name="using-jupyter-notebooks"></a>Utilisation de blocs-notes Jupyter
+### <a name="using-jupyter-notebooks"></a>Utilisation de notebooks Jupyter
 
-Si vous utilisez des blocs-notes Jupyter au sein d’HDInsight, vous pouvez utiliser la cellule `%%configure` spark-magic pour spécifier les coordonnées maven du connecteur.
+Si vous utilisez des notebooks Jupyter au sein d’HDInsight, vous pouvez utiliser la cellule `%%configure` spark-magic pour spécifier les coordonnées maven du connecteur.
 
 ```python
 { "name":"Spark-to-Cosmos_DB_Connector",

@@ -1,6 +1,6 @@
 ---
 title: Supprimer des nœuds pour VMware Solution by CloudSimple - Azure
-description: Découvrez comment supprimer des nœuds de votre déploiement VMWare CloudSimple
+description: Découvrez comment supprimer des nœuds de votre déploiement VMWare CloudSimple. Vue d’ensemble des nœuds CloudSimple. Vous devez supprimer les nœuds qui ne sont pas utilisés dans le portail Azure.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 08/05/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 122e0636f54e066ae86ed2d19cefe5863b026293
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 569bc6350b1bfa01228d49d28a1d12e2ab62f6f0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024736"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88142262"
 ---
 # <a name="delete-nodes-from-azure-vmware-solution-by-cloudsimple"></a>Supprimer des nœuds dans Azure VMware Solution by CloudSimple
 

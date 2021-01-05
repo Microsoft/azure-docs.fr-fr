@@ -1,17 +1,17 @@
 ---
 title: Gérer des réplicas en lecture - Portail Azure – Azure Database for MariaDB
 description: Cet article décrit comment configurer et gérer des réplicas en lecture dans Azure Database for MariaDB à l’aide du portail.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
-ms.date: 4/21/2020
-ms.openlocfilehash: 20d8e46d6fa6b031c809d629a6af41e8e682bcef
-ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+ms.topic: how-to
+ms.date: 6/10/2020
+ms.openlocfilehash: 3ca6ef3c368a5f578cc90fae3923caa89f3b076a
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82025082"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94537745"
 ---
 # <a name="how-to-create-and-manage-read-replicas-in-azure-database-for-mariadb-using-the-azure-portal"></a>Guide pratique pour créer et gérer des réplicas en lecture dans Azure Database for MariaDB avec le portail Azure
 
@@ -19,12 +19,15 @@ Dans cet article, vous allez apprendre à créer et à gérer des réplicas en l
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Un [serveur Azure Database for MariaDB](quickstart-create-mariadb-server-database-using-azure-portal.md) qui sera utilisé comme serveur maître.
+- Un [serveur Azure Database for MariaDB](quickstart-create-mariadb-server-database-using-azure-portal.md) qui sera utilisé comme serveur source.
 
 > [!IMPORTANT]
-> La fonctionnalité de réplica en lecture est disponible uniquement pour les serveurs Azure Database for MariaDB dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur maître se trouve dans l’un de ces niveaux tarifaires.
+> La fonctionnalité de réplica en lecture est disponible uniquement pour les serveurs Azure Database for MariaDB dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur source se trouve dans l’un de ces niveaux tarifaires.
 
 ## <a name="create-a-read-replica"></a>Créer un réplica en lecture
+
+> [!IMPORTANT]
+> Lorsque vous créez un réplica pour un serveur source qui n’en a pas, ce dernier commence par redémarrer afin de se préparer à la réplication. Tenez-en compte et effectuez ces opérations en période creuse.
 
 Un serveur réplica en lecture peut être créé en effectuant les étapes suivantes :
 
@@ -42,14 +45,14 @@ Un serveur réplica en lecture peut être créé en effectuant les étapes suiva
 
     ![Azure Database for MariaDB - Nom du réplica](./media/howto-read-replica-portal/replica-name.png)
 
-6. Sélectionnez l’emplacement du serveur de réplica. L’emplacement par défaut est le même que celui du serveur maître.
+6. Sélectionnez l’emplacement du serveur de réplica. L'emplacement par défaut est le même que celui du serveur source.
 
     ![Azure Database for MariaDB - Nom du réplica](./media/howto-read-replica-portal/replica-location.png)
 
 7. Sélectionnez **OK** pour confirmer la création du réplica.
 
 > [!NOTE]
-> Les réplicas en lecture sont créés avec la même configuration de serveur que le serveur maître. La configuration du serveur réplica peut être modifiée après la création de ce dernier. Il est recommandé que la configuration du serveur réplica soit maintenue à des valeurs égales ou supérieures à celles du serveur maître pour garantir que le serveur réplica est à la hauteur du serveur maître.
+> Les réplicas en lecture sont créés avec la même configuration de serveur que le serveur maître. La configuration du serveur réplica peut être modifiée après la création de ce dernier. Il est recommandé de maintenir la configuration du serveur réplica à des valeurs égales ou supérieures à celles du serveur source pour garantir que le réplica sera à la hauteur du serveur maître.
 
 Une fois le serveur réplica créé, il est affiché dans le panneau **Réplication**.
 
@@ -58,11 +61,11 @@ Une fois le serveur réplica créé, il est affiché dans le panneau **Réplicat
 ## <a name="stop-replication-to-a-replica-server"></a>Arrêter la réplication vers un serveur réplica
 
 > [!IMPORTANT]
-> L’arrêt de la réplication vers un serveur est irréversible. Une fois la réplication entre un serveur maître et un serveur réplica arrêtée, elle ne peut pas être annulée. Le serveur réplica devient un serveur autonome et prend désormais en charge la lecture et les écritures. Ce serveur ne peut pas être à nouveau transformé en réplica.
+> L’arrêt de la réplication vers un serveur est irréversible. Une fois la réplication entre un serveur source et un serveur réplica arrêtée, il est impossible de revenir en arrière. Le serveur réplica devient un serveur autonome et prend désormais en charge la lecture et les écritures. Ce serveur ne peut pas être à nouveau transformé en réplica.
 
-Pour arrêter la réplication entre un serveur maître et un serveur réplica à partir du portail Azure, effectuez les étapes suivantes :
+Pour arrêter la réplication entre un serveur source et un serveur réplica à partir du portail Azure, effectuez les étapes suivantes :
 
-1. Dans le portail Azure, sélectionnez votre serveur maître Azure Database for MariaDB. 
+1. Dans le portail Azure, sélectionnez votre serveur Azure Database for MariaDB source. 
 
 2. Sélectionnez **Réplication** dans le menu, sous **PARAMÈTRES**.
 
@@ -82,7 +85,7 @@ Pour arrêter la réplication entre un serveur maître et un serveur réplica à
 
 Pour supprimer un serveur réplica en lecture du portail Azure, utilisez les étapes suivantes :
 
-1. Dans le portail Azure, sélectionnez votre serveur maître Azure Database for MariaDB.
+1. Dans le portail Azure, sélectionnez votre serveur Azure Database for MariaDB source.
 
 2. Sélectionnez **Réplication** dans le menu, sous **PARAMÈTRES**.
 
@@ -98,22 +101,22 @@ Pour supprimer un serveur réplica en lecture du portail Azure, utilisez les ét
 
    ![Azure Database for MariaDB - Confirmer la suppression du réplica](./media/howto-read-replica-portal/delete-replica-confirm.png)
 
-## <a name="delete-a-master-server"></a>Supprimer un serveur maître
+## <a name="delete-a-source-server"></a>Supprimer un serveur source
 
 > [!IMPORTANT]
-> La suppression d’un serveur maître arrête la réplication vers tous les serveurs réplicas et supprime le serveur maître lui-même. Les serveurs réplicas deviennent des serveurs autonomes qui prennent désormais en charge la lecture et les écritures.
+> La suppression d’un serveur source arrête la réplication vers tous les serveurs réplicas et supprime le serveur source proprement dit. Les serveurs réplicas deviennent des serveurs autonomes qui prennent désormais en charge la lecture et les écritures.
 
-Pour supprimer un serveur maître du portail Azure, utilisez les étapes suivantes :
+Pour supprimer un serveur source du portail Azure, procédez comme suit :
 
-1. Dans le portail Azure, sélectionnez votre serveur maître Azure Database for MariaDB.
+1. Dans le portail Azure, sélectionnez votre serveur Azure Database for MariaDB source.
 
 2. Dans la **Vue d’ensemble**, sélectionnez **Supprimer**.
 
    ![Azure Database for MariaDB - Supprimer le serveur maître](./media/howto-read-replica-portal/delete-master-overview.png)
 
-3. Tapez le nom du serveur maître, puis cliquez sur **Supprimer** pour confirmer la suppression de ce dernier.  
+3. Saisissez le nom du serveur source, puis cliquez sur **Supprimer** pour confirmer la suppression de ce dernier.  
 
-   ![Azure Database for MariaDB - Supprimer le serveur maître](./media/howto-read-replica-portal/delete-master-confirm.png)
+   ![Azure Database for MariaDB - Confirmer la suppression du serveur maître](./media/howto-read-replica-portal/delete-master-confirm.png)
 
 ## <a name="monitor-replication"></a>Superviser la réplication
 
@@ -131,7 +134,7 @@ Pour supprimer un serveur maître du portail Azure, utilisez les étapes suivant
 
 5. Affichez le décalage de la réplication pour l’intervalle de temps sélectionné. L’image ci-dessous affiche les 30 dernières minutes d’une charge de travail importante.
 
-   ![Sélectionner un intervalle de temps](./media/howto-read-replica-portal/monitor-replication-lag-time-range-thirty-mins.png)
+   ![Sélectionner un intervalle de temps de 30 minutes](./media/howto-read-replica-portal/monitor-replication-lag-time-range-thirty-mins.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,17 +1,17 @@
 ---
 title: Se connecter à Azure Kubernetes Service - Azure Database pour MySQL
 description: Découvrez comment connecter Azure Kubernetes Service à Azure Database pour MySQL
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: 9e020d34b6cfb8117ccff1114cc938c966126b77
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/14/2020
+ms.openlocfilehash: 5c4a5f5d792a60ed3fef07797fdbdfa0c9cfb8fe
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79537276"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94534328"
 ---
 # <a name="connecting-azure-kubernetes-service-and-azure-database-for-mysql"></a>Connexion entre Azure Kubernetes Service et Azure Database pour MySQL
 
@@ -41,13 +41,7 @@ La sortie correspond au groupe de ressources que crée AKS et contenant l'interf
 az network nic list --resource-group nodeResourceGroup -o table
 ```
 
-## <a name="open-service-broker-for-azure"></a>Open Service Broker pour Azure 
-[Open Service Broker pour Azure](https://github.com/Azure/open-service-broker-azure/blob/master/README.md) (OSBA) vous permet de provisionner des services Azure directement à partir de Kubernetes ou de Cloud Foundry. Il s’agit d’une implémentation de l’[API Open Service Broker](https://www.openservicebrokerapi.org/) pour Azure.
-
-Avec OSBA, vous pouvez créer un serveur Azure Database pour MySQL et le lier à votre cluster AKS au moyen du langage natif de Kubernetes. Apprenez-en davantage sur l’utilisation conjointe d’OSBA et d’Azure Database pour MySQL dans la [page OSBA de GitHub](https://github.com/Azure/open-service-broker-azure/blob/master/docs/modules/mysql.md). 
-
-
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Créer un cluster Azure Kubernetes Service](../aks/kubernetes-walkthrough.md)
-- Découvrir comment [Installer WordPress à partir du graphique Helm à l’aide de OSBA et d’Azure Database pour MySQL](../aks/integrate-azure.md)
+- Découvrir comment [Installer WordPress à partir du graphique Helm à l’aide de OSBA et d’Azure Database pour MySQL](../aks/index.yml)

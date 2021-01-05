@@ -43,16 +43,30 @@
         - name: Référentiel d’exemples Batch
           href: 'https://github.com/Azure/azure-batch-samples'
     - name: Azure CLI
-      href: cli-samples.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
+      items:
+        - name: Créer un compte Batch dans le mode de service Batch
+          href: ./scripts/batch-cli-sample-create-account.md
+        - name: Créer un compte Batch en mode abonnement utilisateur
+          href: ./scripts/batch-cli-sample-create-user-subscription-account.md
+        - name: Ajouter une application à un compte Azure Batch
+          href: ./scripts/batch-cli-sample-add-application.md
+        - name: Créer et gérer un pool Linux
+          href: ./scripts/batch-cli-sample-manage-linux-pool.md
+        - name: Créer et gérer un pool Windows
+          href: ./scripts/batch-cli-sample-manage-windows-pool.md
+        - name: Exécuter un travail et des tâches
+          href: ./scripts/batch-cli-sample-run-job.md
 - name: Concepts
   items:
     - name: Sécurité
       items:
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
         - name: Base de référence de la sécurité
           href: security-baseline.md
+        - name: Bonnes pratiques de sécurité
+          href: security-best-practices.md
     - name: Flux de travail et ressources du service Batch
       displayName: developer features
       href: batch-service-workflow-features.md
@@ -95,6 +109,10 @@
           href: batch-management-dotnet.md
         - name: Analyse des coûts et budgets
           href: budget.md
+        - name: Utiliser des points de terminaison privés avec des comptes Batch
+          href: private-connectivity.md
+        - name: Configurer les clés gérées par le client
+          href: batch-customer-managed-key.md
     - name: S’authentifier avec Azure AD
       items:
         - name: Azure AD avec service Batch
@@ -105,8 +123,6 @@
           href: credential-access-key-vault.md
         - name: Utilisation de certificats avec Batch
           href: batch-certificates.md
-    - name: Utilisation de packages d’application
-      href: batch-application-packages.md
     - name: Copier des fichiers et des applications dans les nœuds d’un pool
       items:
         - name: Copie d’applications et de données dans des nœuds de pool
@@ -127,8 +143,14 @@
           href: batch-sig-images.md
         - name: Créer un pool avec une ressource d’image managée
           href: batch-custom-images.md
+        - name: Créer un pool avec le chiffrement de disque activé
+          href: disk-encryption.md
         - name: Créer un pool dans un réseau virtuel
           href: batch-virtual-network.md
+        - name: Créer un pool avec des adresses IP publiques
+          href: create-pool-public-ip.md
+        - name: Créer un pool sans adresses IP publiques
+          href: batch-pool-no-public-ip-address.md
         - name: Monter un système de fichiers virtuel
           href: virtual-file-mount.md
         - name: Monter un partage de fichiers Azure
@@ -148,6 +170,7 @@
         - name: Tâches d’achèvement et de préparation des travaux
           href: batch-job-prep-release.md
         - name: Tâches de nœud simultanées
+          displayName: concurrent
           href: batch-parallel-node-tasks.md
         - name: Dépendances de la tâche
           href: batch-task-dependencies.md
@@ -249,12 +272,19 @@
           href: batch-pool-resize-start-event.md
         - name: Événement de fin de redimensionnement de pool
           href: batch-pool-resize-complete-event.md
+        - name: Événement de mise à l’échelle automatique de pool
+          href: batch-pool-autoscale-event.md
         - name: Événement de début de tâche
           href: batch-task-start-event.md
         - name: Événement de fin de tâche
           href: batch-task-complete-event.md
         - name: Événement d’échec de tâche
           href: batch-task-fail-event.md
+        - name: Événement d’échec de planification de tâches
+          href: batch-task-schedule-fail-event.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Mises à jour Azure
@@ -264,13 +294,13 @@
     - name: Commentaires sur Batch
       href: 'https://feedback.azure.com/forums/269742-batch'
     - name: Page de questions Microsoft Q&A sur Batch
-      href: 'https://docs.microsoft.com/answers/topics/azure-batch.html'
+      href: /answers/topics/azure-batch.html
     - name: Lot chantier
       href: 'https://github.com/Azure/batch-shipyard'
     - name: Blog
-      href: 'https://blogs.technet.microsoft.com/windowshpc/'
+      href: /archive/blogs/windowshpc/
     - name: HPC sur Azure
-      href: 'https://docs.microsoft.com/azure/architecture/topics/high-performance-computing/'
+      href: /azure/architecture/topics/high-performance-computing/
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/batch/'
     - name: Calculatrice de prix
@@ -281,5 +311,5 @@
       href: 'https://azure.microsoft.com/updates/?product=batch&updatetype=&platform='
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-batch'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=batch'

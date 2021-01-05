@@ -1,18 +1,18 @@
 ---
 title: Créer et utiliser un partage Azure Files sur des machines virtuelles Windows
-description: Dans ce guide de démarrage rapide, vous configurez un partage Azure Files dans le portail Azure, puis vous le connectez à une machine virtuelle Windows. Vous vous connectez au partage Files pour y charger un fichier. Ensuite, vous prenez un instantané du partage Files, modifiez le fichier dans le partage Files et restaurez le précédent instantané du partage Files.
+description: Créez et utilisez un partage Azure Files dans le portail Azure. Connectez-le à une machine virtuelle Windows, connectez-vous au partage de fichiers, et chargez un fichier dans le partage de fichiers.
 author: roygara
 ms.service: storage
 ms.topic: quickstart
 ms.date: 02/01/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 6bbab0ee2eefe6e86c150d5bddab4f8e91a7c92d
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4c5629f80c37c9f79dc9a39c4d8304acbee9679d
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75463913"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92489572"
 ---
 # <a name="quickstart-create-and-manage-azure-files-share-with-windows-virtual-machines"></a>Démarrage rapide : Créer et gérer le partage Azure Files avec des machines virtuelles Windows
 
@@ -50,7 +50,7 @@ Ensuite, créez un partage de fichiers.
 
     ![Sélectionner le bouton Ajouter un partage de fichiers](./media/storage-files-quick-create-use-windows/create-file-share.png)
 
-1. Nommez le nouveau partage de fichiers *qsfileshare*, entrez « 1 » pour le **Quota**, puis sélectionnez **Créer**. La valeur du quota peut être de 5 Tio au maximum, mais vous avez besoin uniquement de 1 Gio pour ce guide de démarrage rapide.
+1. Nommez le nouveau partage de fichiers *qsfileshare* , entrez « 1 » pour le **Quota** , puis sélectionnez **Créer**. La valeur du quota peut être de 5 Tio au maximum, mais vous avez besoin uniquement de 1 Gio pour ce guide de démarrage rapide.
 1. Créez un fichier txt nommé *qsTestFile* sur votre ordinateur local.
 1. Sélectionnez le nouveau partage de fichiers puis, à l’emplacement de celui-ci, cliquez sur **Charger**.
 
@@ -63,16 +63,16 @@ Jusqu’ici, vous avez créé un compte de stockage Azure et un partage de fichi
 ### <a name="deploy-a-vm"></a>Déployer une machine virtuelle
 
 1. Ensuite, développez le menu à gauche du portail Azure et choisissez **Créer une ressource** dans le coin supérieur gauche.
-1. Dans la zone de recherche au-dessus de la liste des ressources de la **Place de marché Azure**, recherchez et sélectionnez **Windows Server 2016 Datacenter**, puis choisissez **Créer**.
-1. Sous l’onglet **De base**, sous **Détails du projet**, sélectionnez le groupe de ressources que vous avez créé pour ce guide de démarrage rapide.
+1. Dans la zone de recherche au-dessus de la liste des ressources de la **Place de marché Azure** , recherchez et sélectionnez **Windows Server 2016 Datacenter** , puis choisissez **Créer**.
+1. Sous l’onglet **De base** , sous **Détails du projet** , sélectionnez le groupe de ressources que vous avez créé pour ce guide de démarrage rapide.
 
    ![Saisie des informations de base sur votre machine virtuelle dans le panneau du portail](./media/storage-files-quick-create-use-windows/vm-resource-group-and-subscription.png)
 
-1. Sous **Détails de l’instance**, nommez la machine virtuelle *qsVM*.
-1. Conservez les paramètres par défaut pour la **Région**, les **Options de disponibilité**, l’**Image**, et la **Taille**.
-1. Sous **Compte d’administrateur**, ajoutez *VMadmin* comme **Nom d’utilisateur** et entrez un **Mot de passe** pour la machine virtuelle.
-1. Sous **Règles des ports d’entrée**, choisissez **Autoriser les ports sélectionnés**, puis sélectionnez **RDP (3389)** et **HTTP** dans la liste déroulante.
-1. Sélectionnez **Revoir + créer**.
+1. Sous **Détails de l’instance** , nommez la machine virtuelle *qsVM*.
+1. Conservez les paramètres par défaut pour la **Région** , les **Options de disponibilité** , l’ **Image** , et la **Taille**.
+1. Sous **Compte d’administrateur** , ajoutez *VMadmin* comme **Nom d’utilisateur** et entrez un **Mot de passe** pour la machine virtuelle.
+1. Sous **Règles des ports d’entrée** , choisissez **Autoriser les ports sélectionnés** , puis sélectionnez **RDP (3389)** et **HTTP** dans la liste déroulante.
+1. Sélectionnez **Vérifier + créer**.
 1. Sélectionnez **Create** (Créer). La création d’une machine virtuelle prend plusieurs minutes.
 
 1. Une fois le déploiement de votre machine virtuelle terminé, sélectionnez **Accéder à la ressource**.
@@ -85,9 +85,9 @@ Jusqu’ici, vous avez créé un compte de stockage Azure et un partage de fichi
 
    ![Se connecter à une machine virtuelle Azure à partir du portail](./media/storage-files-quick-create-use-windows/connect-vm.png)
 
-1. Dans la page **Se connecter à la machine virtuelle**, conservez les options par défaut pour vous connecter par **adresse IP** sur le **numéro de port** *3389* et sélectionnez **Télécharger le fichier RDP**.
+1. Dans la page **Se connecter à la machine virtuelle** , conservez les options par défaut pour vous connecter par **adresse IP** sur le **numéro de port** *3389* et sélectionnez **Télécharger le fichier RDP**.
 1. Ouvrez le fichier RDP téléchargé et, à l’invite, sélectionnez **Connecter**.
-1. Dans la fenêtre **Sécurité Windows**, sélectionnez **Plus de choix**, puis **Utiliser un autre compte**. Tapez le nom d’utilisateur sous la forme *localhost\username*, où &lt;username&gt; est le nom d’utilisateur administrateur que vous avez créé pour la machine virtuelle. Entrez le mot de passe que vous avez créé pour la machine virtuelle, puis sélectionnez **OK**.
+1. Dans la fenêtre **Sécurité Windows** , sélectionnez **Plus de choix** , puis **Utiliser un autre compte**. Tapez le nom d’utilisateur sous la forme *localhost\username* , où &lt;username&gt; est le nom d’utilisateur administrateur que vous avez créé pour la machine virtuelle. Entrez le mot de passe que vous avez créé pour la machine virtuelle, puis sélectionnez **OK**.
 
    ![Plus de choix](./media/storage-files-quick-create-use-windows/local-host2.png)
 
@@ -98,9 +98,9 @@ Jusqu’ici, vous avez créé un compte de stockage Azure et un partage de fichi
 1. Dans le portail Azure, accédez au partage de fichiers *qsfileshare* et sélectionnez **Se connecter**.
 1. Copiez le contenu de la deuxième zone et collez-le dans le **Bloc-notes**.
 
-   ![Le chemin d’accès UNC du volet Azure Files Connect](./media/storage-files-quick-create-use-windows/portal_netuse_connect2.png)
+   ![Capture d’écran montrant le contenu de la deuxième zone que vous devez copier et coller dans le Bloc-notes.](./media/storage-files-quick-create-use-windows/portal_netuse_connect2.png)
 
-1. Dans la machine virtuelle, ouvrez l’**Explorateur de fichiers** et sélectionnez **Ce PC** dans la fenêtre. Cette sélection change les menus disponibles dans le ruban. Dans le menu **Ordinateur**, sélectionnez **Mapper un lecteur réseau**.
+1. Dans la machine virtuelle, ouvrez l’ **Explorateur de fichiers** et sélectionnez **Ce PC** dans la fenêtre. Cette sélection change les menus disponibles dans le ruban. Dans le menu **Ordinateur** , sélectionnez **Mapper un lecteur réseau**.
 1. Sélectionnez la lettre de lecteur et entrez le chemin d’accès UNC. Si vous avez suivi les suggestions de nommage dans ce guide de démarrage rapide, copiez *\\qsstorageacct.file.core.windows.net\qsfileshare* à partir du **Bloc-notes**.
 
    Vérifiez que les deux cases sont cochées.
@@ -108,7 +108,7 @@ Jusqu’ici, vous avez créé un compte de stockage Azure et un partage de fichi
    ![Une capture d’écran de la boîte de dialogue « Connecter un lecteur réseau »](./media/storage-files-quick-create-use-windows/mountonwindows10.png)
 
 1. Sélectionnez **Terminer**.
-1. Dans la boîte de dialogue **Sécurité Windows** :
+1. Dans la boîte de dialogue **Sécurité Windows**  :
 
    - À partir du Bloc-notes, copiez le nom du compte de stockage avec le préfixe AZURE\ et collez-le dans la boîte de dialogue **Sécurité Windows** comme nom d’utilisateur. Si vous avez suivi les suggestions de nommage dans ce guide de démarrage rapide, copiez *AZURE\qsstorageacct*.
    - À partir du Bloc-notes, copiez la clé du compte et collez-la dans la boîte de dialogue **Sécurité Windows** comme mot de passe.
@@ -123,13 +123,13 @@ Maintenant que vous avez mappé le lecteur, vous pouvez créer un instantané.
 
    ![Créer un instantané](./media/storage-files-quick-create-use-windows/create-snapshot.png)
 
-1. Dans la machine virtuelle, ouvrez *qstestfile.txt*, tapez « ce fichier a été modifié », puis enregistrez et fermez le fichier.
+1. Dans la machine virtuelle, ouvrez *qstestfile.txt* , tapez « ce fichier a été modifié », puis enregistrez et fermez le fichier.
 1. Créez un autre instantané.
 
 ## <a name="browse-a-share-snapshot"></a>Parcourir un instantané de partage
 
 1. Dans votre partage de fichiers, sélectionnez **Afficher les instantanés**.
-1. Dans le volet **Instantanés de partage de fichiers**, sélectionnez le premier instantané dans la liste.
+1. Dans le volet **Instantanés de partage de fichiers** , sélectionnez le premier instantané dans la liste.
 
    ![Instantané sélectionné dans la liste des horodatages](./media/storage-files-quick-create-use-windows/snapshot-list.png)
 
@@ -137,7 +137,7 @@ Maintenant que vous avez mappé le lecteur, vous pouvez créer un instantané.
 
 ## <a name="restore-from-a-snapshot"></a>Restaurer à partir d’un instantané
 
-1. Dans le panneau de la capture instantanée du partage de fichiers, cliquez avec le bouton droit sur *qsTestFile*, puis sélectionnez le bouton **Restaurer**.
+1. Dans le panneau de la capture instantanée du partage de fichiers, cliquez avec le bouton droit sur *qsTestFile* , puis sélectionnez le bouton **Restaurer**.
 1. Sélectionnez **Remplacer le fichier d’origine**.
 
    ![Boutons Télécharger et Restaurer](./media/storage-files-quick-create-use-windows/snapshot-download-restore-portal.png)
@@ -147,7 +147,7 @@ Maintenant que vous avez mappé le lecteur, vous pouvez créer un instantané.
 ## <a name="delete-a-share-snapshot"></a>Supprimer un instantané de partage
 
 1. Dans votre partage de fichiers, sélectionnez **Afficher les instantanés**.
-1. Dans le volet **Instantanés de partage de fichiers**, sélectionnez le dernier instantané dans la liste, puis cliquez sur **Supprimer**.
+1. Dans le volet **Instantanés de partage de fichiers** , sélectionnez le dernier instantané dans la liste, puis cliquez sur **Supprimer**.
 
    ![Bouton Supprimer](./media/storage-files-quick-create-use-windows/portal-snapshots-delete.png)
 
@@ -159,7 +159,7 @@ Comme pour les instantanés VSS locaux, vous pouvez afficher les instantanés à
 
    ![Partage monté dans l’Explorateur de fichiers](./media/storage-files-quick-create-use-windows/snapshot-windows-mount.png)
 
-1. Sélectionnez *qsTestFile.txt*, faites un clic droit, puis sélectionnez **Propriétés** dans le menu.
+1. Sélectionnez *qsTestFile.txt* , faites un clic droit, puis sélectionnez **Propriétés** dans le menu.
 
    ![Menu contextuel pour un répertoire sélectionné](./media/storage-files-quick-create-use-windows/snapshot-windows-previous-versions.png)
 

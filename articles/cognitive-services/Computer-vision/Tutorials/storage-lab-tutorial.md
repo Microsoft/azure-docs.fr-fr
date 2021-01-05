@@ -8,18 +8,19 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
 ms.topic: tutorial
-ms.date: 04/14/2020
+ms.date: 11/23/2020
 ms.author: pafarley
-ms.openlocfilehash: 43172cb08bb1e31c8cff891628ca6ef85cb8c864
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b51234ff121071de27ec8c91425f4a769c8d833e
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81404411"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96008784"
 ---
 # <a name="tutorial-use-computer-vision-to-generate-image-metadata-in-azure-storage"></a>Tutoriel : Utiliser le service Vision par ordinateur pour générer des métadonnées des images dans le stockage Azure
 
-Ce tutoriel vous montre comment intégrer le service Vision par ordinateur d’Azure dans une application web afin de générer ensuite des métadonnées pour les images chargées. Cela est utile pour les scénarios de [gestion des actifs numériques](../Home.md#computer-vision-for-digital-asset-management), par exemple si une entreprise souhaite générer rapidement des sous-titres descriptifs ou des mots clés de recherche pour toutes ses images.
+Ce tutoriel vous montre comment intégrer le service Vision par ordinateur d’Azure dans une application web afin de générer ensuite des métadonnées pour les images chargées. Cela est utile pour les scénarios de [gestion des actifs numériques](../overview.md#computer-vision-for-digital-asset-management), par exemple si une entreprise souhaite générer rapidement des sous-titres descriptifs ou des mots clés de recherche pour toutes ses images.
 
 Vous trouverez un guide complet de l’application dans le [lab Azure Storage and Cognitive Services](https://github.com/Microsoft/computerscience/blob/master/Labs/Azure%20Services/Azure%20Storage/Azure%20Storage%20and%20Cognitive%20Services%20(MVC).md) sur GitHub. Ce tutoriel couvre essentiellement l’exercice 5 du lab. Vous pouvez créer l’application complète en suivant chaque étape, mais si vous voulez seulement découvrir comment intégrer Vision par ordinateur à une application web existante, lisez le présent tutoriel.
 
@@ -31,7 +32,7 @@ Ce didacticiel vous explique les procédures suivantes :
 > * Attacher des métadonnées aux images du stockage Azure
 > * Vérifier les métadonnées des images à l’aide de l’Explorateur Stockage Azure
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer. 
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services) avant de commencer. 
 
 ## <a name="prerequisites"></a>Prérequis
 

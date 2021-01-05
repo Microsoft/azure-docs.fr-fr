@@ -3,25 +3,25 @@ title: Approuver ou refuser des demandes d'accès - Gestion des droits d'utilisa
 description: Découvrez comment utiliser le portail Mon Accès pour approuver ou refuser les demandes d’accès à un package d’accès dans la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: mamtakumar
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/27/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: mamkumar
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 20ec63efe16f1120ca6e7d07c8917d8ad2b3a0e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fddb3b171e5a26273cb2e0045f11e3a4dbb48c5f
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230313"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97655099"
 ---
 # <a name="approve-or-deny-access-requests-in-azure-ad-entitlement-management"></a>Approuver ou refuser des demandes d’accès dans la gestion des droits d’utilisation Azure AD
 
@@ -49,6 +49,22 @@ Si vous n’avez pas reçu l’e-mail, vous pouvez localiser les demandes d’ac
 
 1. Dans l’onglet **En attente**, recherchez la demande.
 
+## <a name="view-requestors-answers-to-questions-preview"></a>Afficher les réponses du demandeur aux questions (préversion)
+
+1. Accédez à l’onglet **Approbations** dans Mon accès.
+
+1. Accédez à la demande que vous souhaitez approuver, puis cliquez sur **Détails**. Vous pouvez également cliquer sur **Approuver** ou **Refuser** si vous êtes prêt à prendre une décision.
+
+1. Cliquez sur **Détails de la demande**.
+
+    ![Portail Mon Accès - Demande d’accès - Clic sur les détails de la demande](./media/entitlement-management-request-approve/requestor-information-request-details.png)
+
+1. Les informations fournies par le demandeur se trouvent au bas du panneau.
+
+    ![Capture d’écran montrant les détails pour la requête](./media/entitlement-management-request-approve/requestor-information-requestor-answers.png)
+
+1. En fonction des informations fournies par le demandeur, vous pouvez approuver ou refuser la demande. Consultez les étapes de la rubrique Approuver ou refuser une demande pour obtenir de l’aide.
+
 ## <a name="approve-or-deny-request"></a>Approuver ou refuser la demande
 
 Une fois que vous avez ouvert une demande d’accès en attente d’approbation, vous pouvez consulter les détails qui vous aideront à prendre la décision.
@@ -65,7 +81,7 @@ Une fois que vous avez ouvert une demande d’accès en attente d’approbation,
 
 1. Si nécessaire, indiquez un motif.
 
-    ![Portail Mon Accès - Demande d’accès](./media/entitlement-management-request-approve/my-access-approve-request.png)
+    ![Capture d’écran montrant la page dans laquelle vous acceptez ou refusez la demande.](./media/entitlement-management-request-approve/my-access-approve-request.png)
 
 1. Cliquez sur **Soumettre** pour soumettre votre décision.
 

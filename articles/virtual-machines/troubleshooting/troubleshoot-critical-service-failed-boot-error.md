@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/08/2018
 ms.author: genli
-ms.openlocfilehash: 54ba87b681a055bb46b81ca81d2bcdd103491f27
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c3e76f1a7edffefc8773dfa548773ec0932fae6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77921451"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86129857"
 ---
 # <a name="windows-shows-critical-service-failed-on-blue-screen-when-booting-an-azure-vm"></a>Windows affiche « CRITICAL SERVICE FAILED » sur écran bleu lors du démarrage d’une machine virtuelle Azure
 Cet article décrit l’erreur « CRITICAL SERVICE FAILED » que vous pouvez rencontrer lorsque vous démarrez une machine virtuelle Windows dans Microsoft Azure. Il fournit des étapes de dépannage pour vous aider à résoudre les problèmes. 
@@ -84,11 +84,15 @@ Pour activer les journaux d’activité de vidage et la console série, exécute
 
 1. Sur la machine virtuelle Site Recovery, exécutez la commande suivante à partir d’une invite de commandes avec élévation de privilèges. Cette commande définit le disque du système d’exploitation affecté pour démarrer en mode sans échec au prochain démarrage :
 
-        bcdedit /store <OS DISK you attached>:\boot\bcd /set {default} safeboot minimal
+    ```console
+    bcdedit /store <OS DISK you attached>:\boot\bcd /set {default} safeboot minimal
+    ```
 
     Par exemple, si le disque du système d’exploitation que vous avez attaché est le lecteur F, exécutez la commande suivante :
 
-        bcdedit /store F: boot\bcd /set {default} safeboot minimal
+    ```console
+    bcdedit /store F: boot\bcd /set {default} safeboot minimal
+    ```
 
 2. [Détachez le disque du système d’exploitation et rattachez-le à la machine virtuelle affectée](troubleshoot-recovery-disks-portal-windows.md). La machine virtuelle démarre en mode sans échec. Si l'erreur persiste, passez à l'étape facultative.
 3. Ouvrez la zone **Exécuter** et exécutez le **vérificateur** pour démarrer l’outil Driver Verifier Manager.
@@ -98,7 +102,10 @@ Pour activer les journaux d’activité de vidage et la console série, exécute
 
 7. Supprimez les paramètres de démarrage sans échec :
 
-        bcdedit /store <OS DISK LETTER>:\boot\bcd /deletevalue {default} safeboot
+    ```console
+    bcdedit /store <OS DISK LETTER>:\boot\bcd /deletevalue {default} safeboot
+    ```
+
 8.  Redémarrez la machine virtuelle. 
 
 ### <a name="optional-analyze-the-dump-logs-in-dump-crash-mode"></a>Facultatif : Analyser les journaux d’activité de vidage en mode Vidage sur incident

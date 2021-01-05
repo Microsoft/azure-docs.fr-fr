@@ -7,12 +7,12 @@ author: ozboms
 ms.topic: article
 ms.date: 4/25/2019
 ms.author: obboms
-ms.openlocfilehash: 7db3f806df88e5b23012e97ba5c2f14ca65b2508
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 4e817d572a98ffb8135adf58d13f50ccacbc8746
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80803464"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86251992"
 ---
 # <a name="manually-create-and-use-an-nfs-network-file-system-linux-server-volume-with-azure-kubernetes-service-aks"></a>Créer manuellement et utiliser un volume de serveur Linux NFS (Network File System) avec Azure Kubernetes Service (AKS)
 Le partage de données entre conteneurs représente souvent un élément nécessaire des applications et services basés sur des conteneurs. Généralement, différents pods ont besoin d’accéder aux mêmes informations sur un volume persistant externe.    
@@ -161,10 +161,10 @@ Pour connaître les meilleures pratiques associées, consultez [Meilleures prati
 
 <!-- LINKS - external -->
 [kubernetes-volumes]: https://kubernetes.io/docs/concepts/storage/volumes/
-[linux-create]: https://docs.microsoft.com/azure/virtual-machines/linux/tutorial-manage-vm
+[linux-create]: ../virtual-machines/linux/tutorial-manage-vm.md
 [nfs-tutorial]: https://help.ubuntu.com/community/SettingUpNFSHowTo#Pre-Installation_Setup
-[aks-virtual-network]: https://docs.microsoft.com/azure/aks/configure-kubenet#create-an-aks-cluster-in-the-virtual-network
-[peer-virtual-networks]: https://docs.microsoft.com/azure/virtual-network/tutorial-connect-virtual-networks-portal
+[aks-virtual-network]: ./configure-kubenet.md#create-an-aks-cluster-in-the-virtual-network
+[peer-virtual-networks]: ../virtual-network/tutorial-connect-virtual-networks-portal.md
 
 <!-- LINKS - internal -->
 [aks-quickstart-cli]: kubernetes-walkthrough.md

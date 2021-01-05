@@ -11,10 +11,10 @@ ms.topic: conceptual
 ms.date: 1/14/2020
 ms.author: cbasoglu
 ms.openlocfilehash: b41967033b00144ca5bd52ce23cf8aabcea6749e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78228086"
 ---
 # <a name="speech-services-with-sovereign-clouds"></a>Services Speech avec les clouds souverains

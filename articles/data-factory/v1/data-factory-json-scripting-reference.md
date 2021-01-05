@@ -3,20 +3,20 @@ title: Azure Data Factory - Référence de script JSON
 description: Fournit des schémas JSON pour les entités Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 3492f917be8116d0eed0c7ec03ed8aa9ff506520
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: 41ba08aef7aed761c3c6063f97768f22bffe3a36
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80346592"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508490"
 ---
 # <a name="azure-data-factory---json-scripting-reference"></a>Azure Data Factory - Référence de script JSON
 > [!NOTE]
@@ -90,7 +90,7 @@ Le tableau suivant décrit les propriétés dans la définition JSON du pipeline
 | type |Spécifie le type de l'activité. Consultez les sections [MAGASINS DE DONNÉS](#data-stores) et [ACTIVITÉS DE TRANSFORMATION DES DONNÉES](#data-transformation-activities) pour en savoir plus sur les différents types d’activités. |Oui |
 | inputs |Les tables d’entrée utilisées par l’activité<br/><br/>`// one input table`<br/>`"inputs":  [ { "name": "inputtable1"  } ],`<br/><br/>`// two input tables` <br/>`"inputs":  [ { "name": "inputtable1"  }, { "name": "inputtable2"  } ],` |Non pour les activités HDInsightStreaming et SqlServerStoredProcedure <br/> <br/> Oui pour toutes les autres |
 | outputs |Les tables de sortie utilisées par l’activité.<br/><br/>`// one output table`<br/>`"outputs":  [ { "name": “outputtable1” } ],`<br/><br/>`//two output tables`<br/>`"outputs":  [ { "name": “outputtable1” }, { "name": “outputtable2” }  ],` |Oui |
-| linkedServiceName |Nom du service lié utilisé par l’activité. <br/><br/>Une activité peut nécessiter que vous spécifiiez le service lié à l’environnement de calcul requis. |Oui pour les activités HDInsight, les activités de Azure Machine Learning et les activités de procédure stockée. <br/><br/>Non pour toutes les autres |
+| linkedServiceName |Nom du service lié utilisé par l’activité. <br/><br/>Une activité peut nécessiter que vous spécifiiez le service lié à l’environnement de calcul requis. |Oui pour les activités HDInsight, les activités d’Azure Machine Learning Studio (classique) et les activités de procédure stockée. <br/><br/>Non pour toutes les autres |
 | typeProperties |Les propriétés de la section typeProperties dépendent du type de l’activité. |Non |
 | policy |Stratégies affectant le comportement d’exécution de l’activité. Si aucune valeur n’est spécifiée, les stratégies par défaut sont utilisées. |Non |
 | scheduler |La propriété « scheduler » est utilisée pour définir la planification souhaitée pour l’activité. Ses sous-propriétés sont les mêmes que celles de la [propriété de disponibilité dans un jeu de données](data-factory-create-datasets.md#dataset-availability). |Non |
@@ -114,7 +114,7 @@ La section typeProperties est différente pour chaque activité. Les activités 
 L’**Activité de copie** a deux sous-sections dans la section typeProperties : **source** et **sink**. Consultez la section [Magasins de données](#data-stores) de cet article pour obtenir des exemples JSON montrant comment utiliser un magasin de données comme source et/ou récepteur.
 
 ### <a name="sample-copy-pipeline"></a>Exemple de pipeline de copie
-Dans l’exemple de pipeline suivant, il existe une activité de type **Copy** in the **d’activités** . Dans cet exemple, [l’activité de copie](data-factory-data-movement-activities.md) copie des données d’un stockage blob Azure vers une base de données Azure SQL.
+Dans l’exemple de pipeline suivant, il existe une activité de type **Copy** in the **d’activités** . Dans cet exemple, l’[activité de copie](data-factory-data-movement-activities.md) duplique des données d’un stockage Blob Azure vers une base de données Azure SQL.
 
 ```json
 {
@@ -337,7 +337,7 @@ La section **policy** de la définition du jeu de données définit les critère
 | Nom de la stratégie | Description | Appliqué(e) à | Obligatoire | Default |
 | --- | --- | --- | --- | --- |
 | minimumSizeMB |Valide le fait que les données dans un **objet blob Azure** répondent aux exigences de taille minimale (en mégaoctets). |Objets blob Azure |Non |N/D |
-| minimumRows |Valide le fait que les données dans une **base de données Azure SQL** ou une **table Azure** contiennent le nombre minimal de lignes. |<ul><li>Azure SQL Database</li><li>table Azure</li></ul> |Non |N/D |
+| minimumRows |Valide le fait que les données dans **Azure SQL Database** ou une **table Azure** contiennent le nombre minimal de lignes. |<ul><li>Azure SQL Database</li><li>table Azure</li></ul> |Non |N/D |
 
 **Exemple :**
 
@@ -377,7 +377,7 @@ Cliquez sur le lien du magasin qui vous intéresse pour afficher les schémas JS
 | &nbsp; |Azure Data Lake Store |
 | &nbsp; |[Azure Cosmos DB](#azure-cosmos-db) |
 | &nbsp; |[Azure SQL Database](#azure-sql-database) |
-| &nbsp; |[Azure SQL Data Warehouse](#azure-sql-data-warehouse) |
+| &nbsp; |[Azure Synapse Analytics](#azure-synapse-analytics) |
 | &nbsp; |[Recherche cognitive Azure](#azure-cognitive-search) |
 | &nbsp; |[Stockage Table Azure](#azure-table-storage) |
 | **Bases de données** |[Amazon Redshift](#amazon-redshift) |
@@ -586,7 +586,7 @@ Pour plus d’informations, consultez l’article [Azure Blob connector (connect
 ## <a name="azure-data-lake-store"></a>Azure Data Lake Store
 
 ### <a name="linked-service"></a>Service lié
-Pour définir un service lié Azure Data Lake Store, définissez le type du service lié sur **AzureDataLakeStore**et spécifiez les propriétés suivantes dans la section **typeProperties** :
+Pour définir un service lié Azure Data Lake Store, définissez le type du service lié sur **AzureDataLakeStore** et spécifiez les propriétés suivantes dans la section **typeProperties** :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
@@ -1100,14 +1100,14 @@ Si vous copiez des données dans Azure SQL Database, définissez le **type de r�
 
 Pour plus d’informations, consultez l’article [Azure SQL connector (connecteur Azure SQL)](data-factory-azure-sql-connector.md#copy-activity-properties).
 
-## <a name="azure-sql-data-warehouse"></a>Azure SQL Data Warehouse.
+## <a name="azure-synapse-analytics"></a>Azure Synapse Analytics
 
 ### <a name="linked-service"></a>Service lié
-Pour définir un service lié Azure SQL Data Warehouse, définissez le **type** du service lié sur **AzureSqlDW** et spécifiez les propriétés suivantes dans la section **typeProperties** :
+Pour définir un service lié Azure Synapse Analytics, définissez le **type** du service lié sur **AzureSqlDW** et spécifiez les propriétés suivantes dans la section **typeProperties** :
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
-| connectionString |Spécifier les informations requises pour la connexion à l’instance Azure SQL Data Warehouse pour la propriété connectionString. |Oui |
+| connectionString |Spécifiez les informations requises pour la connexion à l’instance Azure Synapse Analytics pour la propriété connectionString. |Oui |
 
 
 
@@ -1125,14 +1125,14 @@ Pour définir un service lié Azure SQL Data Warehouse, définissez le **type** 
 }
 ```
 
-Pour plus d’informations, consultez l’article [Azure SQL Data Warehouse connector (connecteur Azure SQL Data Warehouse)](data-factory-azure-sql-data-warehouse-connector.md#linked-service-properties).
+Pour plus d’informations, consultez l’article [Connecteur Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#linked-service-properties).
 
 ### <a name="dataset"></a>Dataset
-Pour définir un jeu de données Azure SQL Data Warehouse, définissez le **type** du jeu de données sur **AzureSqlDWTable** et spécifiez les propriétés suivantes dans la section **typeProperties** :
+Pour définir un jeu de données Azure Synapse Analytics, définissez le **type** du jeu de données sur **AzureSqlDWTable** et spécifiez les propriétés suivantes dans la section **typeProperties** :
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
-| tableName |Nom de la table ou de la vue dans la base de données Azure SQL Data Warehouse à laquelle le service lié fait référence. |Oui |
+| tableName |Nom de la table ou de la vue dans la base de données Azure Synapse Analytics à laquelle le service lié fait référence. |Oui |
 
 #### <a name="example"></a>Exemple
 
@@ -1161,10 +1161,10 @@ Pour définir un jeu de données Azure SQL Data Warehouse, définissez le **type
 }
 ```
 
-Pour plus d’informations, consultez l’article [Azure SQL Data Warehouse connector (connecteur Azure SQL Data Warehouse)](data-factory-azure-sql-data-warehouse-connector.md#dataset-properties).
+Pour plus d’informations, consultez l’article [Connecteur Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#dataset-properties).
 
-### <a name="sql-dw-source-in-copy-activity"></a>Source SQL DW dans l’activité de copie
-Si vous copiez des données à partir d’Azure SQL Data Warehouse, définissez le **type de source** de l’activité de copie sur **SqlDWSource** et spécifiez les propriétés suivantes dans la section **source** :
+### <a name="azure-synapse-analytics-source-in-copy-activity"></a>Source Azure Synapse Analytics dans l’activité de copie
+Si vous copiez des données à partir d’Azure Synapse Analytics, définissez le **type de source** de l’activité de copie sur **SqlDWSource** et spécifiez les propriétés suivantes dans la section **source** :
 
 
 | Propriété | Description | Valeurs autorisées | Obligatoire |
@@ -1216,20 +1216,20 @@ Si vous copiez des données à partir d’Azure SQL Data Warehouse, définissez 
 }
 ```
 
-Pour plus d’informations, consultez l’article [Azure SQL Data Warehouse connector (connecteur Azure SQL Data Warehouse)](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties).
+Pour plus d’informations, consultez l’article [Connecteur Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties).
 
-### <a name="sql-dw-sink-in-copy-activity"></a>Récepteur SQL DW dans l’activité de copie
-Si vous copiez des données dans Azure SQL Data Warehouse, définissez le **type de récepteur** de l’activité de copie sur **SqlDWSink** et spécifiez les propriétés suivantes dans la section **sink** :
+### <a name="azure-synapse-analytics-sink-in-copy-activity"></a>Récepteur Azure Synapse Analytics dans l’activité de copie
+Si vous copiez des données dans Azure Synapse Analytics, définissez le **type de récepteur** de l’activité de copie sur **SqlDWSink** et spécifiez les propriétés suivantes dans la section **sink** :
 
 | Propriété | Description | Valeurs autorisées | Obligatoire |
 | --- | --- | --- | --- |
 | sqlWriterCleanupScript |Spécifiez une requête pour exécuter l’activité de copie afin que les données d’un segment spécifique soient nettoyées. |Une instruction de requête. |Non |
-| allowPolyBase |Indique s’il faut utiliser PolyBase (le cas échéant) au lieu du mécanisme BULKINSERT. <br/><br/> **Utiliser PolyBase est la méthode recommandée pour charger des données dans SQL Data Warehouse.** |True <br/>False (valeur par défaut) |Non |
+| allowPolyBase |Indique s’il faut utiliser PolyBase (le cas échéant) au lieu du mécanisme BULKINSERT. <br/><br/> **Utiliser PolyBase est la méthode recommandée pour charger des données dans Azure Synapse Analytics.** |True <br/>False (valeur par défaut) |Non |
 | polyBaseSettings |Groupe de propriétés pouvant être spécifié lorsque la propriété **allowPolybase** est définie sur **true**. |&nbsp; |Non |
-| rejectValue |Spécifie le nombre ou le pourcentage de lignes pouvant être rejetées avant l’échec de la requête. <br/><br/>Pour en savoir plus sur les options de rejet de PolyBase dans la section **Arguments** de la rubrique [CREATE EXTERNAL TABLE (Transact-SQL)](https://msdn.microsoft.com/library/dn935021.aspx) (Créer une table externe (Transact-SQL)). |0 (par défaut), 1, 2, … |Non |
+| rejectValue |Spécifie le nombre ou le pourcentage de lignes pouvant être rejetées avant l’échec de la requête. <br/><br/>Pour en savoir plus sur les options de rejet de PolyBase dans la section **Arguments** de la rubrique [CREATE EXTERNAL TABLE (Transact-SQL)](/sql/t-sql/statements/create-external-table-transact-sql) (Créer une table externe (Transact-SQL)). |0 (par défaut), 1, 2, … |Non |
 | rejectType |Spécifie si l’option rejectValue est spécifiée comme une valeur littérale ou un pourcentage. |Value (par défaut), Percentage |Non |
 | rejectSampleValue |Détermine le nombre de lignes à extraire avant que PolyBase recalcule le pourcentage de lignes rejetées. |1, 2, … |Oui, si le **rejectType** est **percentage** |
-| useTypeDefault |Spécifie comment gérer les valeurs manquantes dans les fichiers texte délimité lorsque PolyBase récupère les données à partir du fichier texte.<br/><br/>Pour plus d’informations sur cette propriété, consultez la section Arguments dans [CREATE EXTERNAL FILE FORMAT (Transact-SQL)](https://msdn.microsoft.com/library/dn935026.aspx). |True, False (par défaut) |Non |
+| useTypeDefault |Spécifie comment gérer les valeurs manquantes dans les fichiers texte délimité lorsque PolyBase récupère les données à partir du fichier texte.<br/><br/>Pour plus d’informations sur cette propriété, consultez la section Arguments dans [CREATE EXTERNAL FILE FORMAT (Transact-SQL)](/sql/t-sql/statements/create-external-file-format-transact-sql). |True, False (par défaut) |Non |
 | writeBatchSize |Insère des données dans la table SQL lorsque la taille du tampon atteint writeBatchSize |Nombre entier (nombre de lignes) |Non (valeur par défaut : 10000) |
 | writeBatchTimeout |Temps d’attente pour que l’opération d’insertion de lot soit terminée avant d’expirer. |intervalle de temps<br/><br/> Exemple : “00:30:00” (30 minutes). |Non |
 
@@ -1277,7 +1277,7 @@ Si vous copiez des données dans Azure SQL Data Warehouse, définissez le **type
 }
 ```
 
-Pour plus d’informations, consultez l’article [Azure SQL Data Warehouse connector (connecteur Azure SQL Data Warehouse)](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties).
+Pour plus d’informations, consultez l’article [Connecteur Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#copy-activity-properties).
 
 ## <a name="azure-cognitive-search"></a>Recherche cognitive Azure
 
@@ -1536,7 +1536,7 @@ Si vous copiez des données dans un stockage de table Azure, définissez le **ty
 | azureTableDefaultPartitionKeyValue |Valeur de clé de partition par défaut qui peut être utilisée par le récepteur. |Valeur de chaîne. |Non |
 | azureTablePartitionKeyName |Spécifiez le nom de la colonne dont les valeurs sont utilisées comme clés de partition. Si aucune valeur n'est spécifiée, AzureTableDefaultPartitionKeyValue est utilisée comme clé de partition. |Nom de colonne. |Non |
 | azureTableRowKeyName |Spécifiez le nom de la colonne dont les valeurs sont utilisées comme clé de ligne. Si aucune valeur n'est spécifiée, un GUID est utilisé pour chaque ligne. |Nom de colonne. |Non |
-| azureTableInsertType |Le mode d’insertion des données dans une table Azure.<br/><br/>Cette propriété détermine le remplacement ou la fusion des valeurs des lignes existantes dans la table de sortie avec des clés de partition et de ligne correspondantes. <br/><br/>Consultez [Insertion ou fusion d’entité](https://msdn.microsoft.com/library/azure/hh452241.aspx) et [Insertion ou remplacement d’entité](https://msdn.microsoft.com/library/azure/hh452242.aspx) pour en savoir plus sur le fonctionnement de ces paramètres (fusion et remplacement). <br/><br> Ce paramètre s’applique au niveau de la ligne, non au niveau de la table, et aucune option ne supprime des lignes de la table de sortie qui n’existent pas dans l’entrée. |fusionner (par défaut)<br/>remplacer |Non |
+| azureTableInsertType |Le mode d’insertion des données dans une table Azure.<br/><br/>Cette propriété détermine le remplacement ou la fusion des valeurs des lignes existantes dans la table de sortie avec des clés de partition et de ligne correspondantes. <br/><br/>Consultez [Insertion ou fusion d’entité](/rest/api/storageservices/Insert-Or-Merge-Entity) et [Insertion ou remplacement d’entité](/rest/api/storageservices/Insert-Or-Replace-Entity) pour en savoir plus sur le fonctionnement de ces paramètres (fusion et remplacement). <br/><br> Ce paramètre s’applique au niveau de la ligne, non au niveau de la table, et aucune option ne supprime des lignes de la table de sortie qui n’existent pas dans l’entrée. |fusionner (par défaut)<br/>remplacer |Non |
 | writeBatchSize |Insère des données dans la table Azure lorsque la valeur de writeBatchSize ou writeBatchTimeout est atteinte. |Nombre entier (nombre de lignes) |Non (valeur par défaut : 10000) |
 | writeBatchTimeout |Insère des données dans la table Azure lorsque la valeur de writeBatchSize ou writeBatchTimeout est atteinte |intervalle de temps<br/><br/>Exemple : "00:20:00" (20 minutes) |Non (Valeur par défaut du délai d'attente du stockage client par défaut : 90 secondes) |
 
@@ -2446,15 +2446,15 @@ Pour plus d’informations, consultez l’article [SAP HANA connector (connecteu
 ## <a name="sql-server"></a>SQL Server
 
 ### <a name="linked-service"></a>Service lié
-Vous créez un service lié de type **OnPremisesSqlServer** pour lier une base de données SQL Server locale à une fabrique de données. Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server local.
+Vous créez un service lié de type **OnPremisesSqlServer** pour lier une base de données SQL Server à une fabrique de données. Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server.
 
 Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server.
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
 | type |La propriété de type doit être définie sur : **OnPremisesSqlServer**. |Oui |
-| connectionString |Spécifiez les informations connectionString nécessaires pour connecter la base de données SQL Server locale à l’aide de l’authentification SQL ou de l’authentification Windows. |Oui |
-| gatewayName |Nom de la passerelle que le service Data Factory doit utiliser pour se connecter à la base de données SQL Server locale. |Oui |
+| connectionString |Spécifiez les informations connectionString nécessaires pour établir une connexion à la base de données SQL Server à l’aide de l’authentification SQL ou de l’authentification Windows. |Oui |
+| gatewayName |Nom de la passerelle que le service Data Factory doit utiliser pour se connecter à la base de données SQL Server. |Oui |
 | username |Spécifiez le nom d’utilisateur si vous utilisez l’authentification Windows. Exemple : **domainname\\username**. |Non |
 | mot de passe |Spécifiez le mot de passe du compte d’utilisateur que vous avez spécifié pour le nom d’utilisateur. |Non |
 
@@ -2481,7 +2481,7 @@ Vous pouvez chiffrer les informations d’identification à l’aide de la cmdle
 ```
 #### <a name="example-json-for-using-windows-authentication"></a>Exemple : JSON pour utilisation de l’authentification Windows
 
-Si le nom d’utilisateur et le mot de passe sont spécifiés, la passerelle les utilise pour identifier le compte utilisateur spécifié pour connecter la base de données SQL Server locale. Dans le cas contraire, la passerelle se connecte directement à SQL Server avec le contexte de sécurité de la passerelle (son compte de démarrage).
+Si le nom d’utilisateur et le mot de passe sont spécifiés, la passerelle les utilise pour emprunter l’identité du compte utilisateur spécifié pour la connexion à la base de données SQL Server. Dans le cas contraire, la passerelle se connecte directement à SQL Server avec le contexte de sécurité de la passerelle (son compte de démarrage).
 
 ```json
 {
@@ -3734,7 +3734,7 @@ Pour définir un service lié HDFS, définissez le **type** du service lié sur 
 | userName |Nom d’utilisateur de l’authentification Windows |Oui (pour l’authentification Windows) |
 | mot de passe |Mot de passe de l’authentification Windows |Oui (pour l’authentification Windows) |
 | gatewayName |Nom de la passerelle que le service Data Factory doit utiliser pour se connecter au système HDFS. |Oui |
-| encryptedCredential |[New-AzDataFactoryEncryptValue](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) des informations d’accès. |Non |
+| encryptedCredential |[New-AzDataFactoryEncryptValue](/powershell/module/az.datafactory/new-azdatafactoryencryptvalue) des informations d’accès. |Non |
 
 #### <a name="example-using-anonymous-authentication"></a>Exemple : Utilisation de l’authentification anonyme
 
@@ -4112,7 +4112,7 @@ Pour utiliser l’authentification de base, définissez `authenticationType` sur
 
 Si vous utilisez `certThumbprint` pour l’authentification et le certificat est installé dans le magasin personnel de l’ordinateur local, vous devez accorder l’autorisation de lecture au service de passerelle :
 
-1. Lancez Microsoft Management Console (MMC). Ajouter le composant logiciel enfichable **Certificats**ciblant l’**ordinateur local**.
+1. Lancez Microsoft Management Console (MMC). Ajouter le composant logiciel enfichable **Certificats** ciblant l’**ordinateur local**.
 2. Développez **Certificats**, **Personnel**, puis cliquez sur **Certificats**.
 3. Cliquez avec le bouton droit sur le certificat du magasin personnel, puis sélectionnez **Toutes les tâches**->**Gérer les clés privées...**
 3. Dans l’onglet **Sécurité**, ajoutez le compte d’utilisateur sous lequel le service hôte de la passerelle de gestion des données s’exécute avec l’accès en lecture au certificat.
@@ -4464,7 +4464,7 @@ Pour définir un service lié ODBC, définissez le **type** du service lié sur 
 }
 ```
 #### <a name="example---using-basic-authentication-with-encrypted-credentials"></a>Exemple : utilisation de l’authentification de base avec des informations d’identification chiffrées
-Vous pouvez chiffrer les informations d'identification via la cmdlet [New-AzDataFactoryEncryptValue](https://docs.microsoft.com/powershell/module/az.datafactory/new-azdatafactoryencryptvalue).
+Vous pouvez chiffrer les informations d'identification via la cmdlet [New-AzDataFactoryEncryptValue](/powershell/module/az.datafactory/new-azdatafactoryencryptvalue).
 
 ```json
 {
@@ -4824,9 +4824,9 @@ Le tableau suivant liste les environnements de calcul pris en charge par Azure D
 | --- | --- |
 | [Cluster HDInsight à la demande](#on-demand-azure-hdinsight-cluster) ou [votre propre cluster HDInsight](#existing-azure-hdinsight-cluster) |[Activité personnalisée .NET](#net-custom-activity), [Activité Hive](#hdinsight-hive-activity), [Activité Pig](#hdinsight-pig-activity), [Activité MapReduce](#hdinsight-mapreduce-activity), Activité de streaming Hadoop, [Activité Spark](#hdinsight-spark-activity) |
 | [Azure Batch](#azure-batch) |[Activité personnalisée .NET](#net-custom-activity) |
-| [Azure Machine Learning](#azure-machine-learning) | [Activité d’exécution par lot Machine Learning](#machine-learning-batch-execution-activity), [Activité des ressources de mise à jour de Machine Learning](#machine-learning-update-resource-activity) |
+| [Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic) | [Activité d'exécution par lot Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-batch-execution-activity) et [Activité des ressources de mise à jour Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-update-resource-activity) |
 | [Service Analytique Azure Data Lake](#azure-data-lake-analytics) |[Langage U-SQL du service Analytique Data Lake](#data-lake-analytics-u-sql-activity) |
-| [Azure SQL Database](#azure-sql-database), [Azure SQL Data Warehouse](#azure-sql-data-warehouse), [SQL Server](#sql-server-stored-procedure) |[Procédure stockée](#stored-procedure-activity) |
+| [Azure SQL Database](#azure-sql-database), [Azure Synapse Analytics](#azure-synapse-analytics), [SQL Server](#sql-server-stored-procedure) |[Procédure stockée](#stored-procedure-activity) |
 
 ## <a name="on-demand-azure-hdinsight-cluster"></a>Cluster Azure HDInsight à la demande
 Le service Azure Data Factory peut automatiquement créer un cluster HDInsight à la demande sous Windows/Linux pour traiter les données. Le cluster est créé dans la même région que celle du compte de stockage (propriété linkedServiceName dans JSON) associé au cluster. Vous pouvez exécuter les activités de transformation suivantes sur ce service lié : [Activité personnalisée .NET](#net-custom-activity), [Activité Hive](#hdinsight-hive-activity), [Activité Pig](#hdinsight-pig-activity), [Activité MapReduce](#hdinsight-mapreduce-activity), Activité de streaming Hadoop, [Activité Spark](#hdinsight-spark-activity).
@@ -4843,7 +4843,7 @@ Le tableau suivant décrit les propriétés utilisées dans la définition JSON 
 | linkedServiceName |Le service lié Azure Storage utilisé par le cluster à la demande pour le stockage et le traitement des données. <p>Actuellement, vous ne pouvez pas créer un cluster HDInsight à la demande qui utilise un Azure Data Lake Store en guise de stockage. Si vous souhaitez stocker les données de résultat à partir du traitement HDInsight dans un Azure Data Lake Store, utilisez une activité de copie pour copier les données du stockage Blob Azure dans Azure Data Lake Store.</p>  | Oui |
 | additionalLinkedServiceNames |Spécifie les comptes de stockage supplémentaires pour le service lié HDInsight afin que le service Data Factory puisse les enregistrer en votre nom. |Non |
 | osType |Type de système d'exploitation. Les valeurs autorisées sont les suivantes : Windows (par défaut) et Linux |Non |
-| hcatalogLinkedServiceName |Le nom du service lié à SQL Azure pointant vers la base de données HCatalog. Le cluster HDInsight à la demande est créé en utilisant la base de données Azure SQL en tant que metastore. |Non |
+| hcatalogLinkedServiceName |Le nom du service lié à SQL Azure pointant vers la base de données HCatalog. Le cluster HDInsight à la demande est créé en utilisant Azure SQL Database en tant que metastore. |Non |
 
 ### <a name="json-example"></a>Exemple JSON
 Le JSON suivant définit un service lié HDInsight à la demande sous Linux. Le service Data Factory crée automatiquement un cluster HDInsight **sous Linux** lors du traitement d’une tranche de données.
@@ -4931,11 +4931,11 @@ Le tableau suivant décrit les propriétés utilisées dans la définition JSON 
 }
 ```
 
-## <a name="azure-machine-learning"></a>Azure Machine Learning
-Vous créez un service lié Azure Machine Learning pour inscrire un point de terminaison de notation par lot Machine Learning avec une fabrique de données. Deux activités de transformation des données pouvant être exécutées sur ce service lié : [Activité d’exécution par lot Machine Learning](#machine-learning-batch-execution-activity), [Activité des ressources de mise à jour de Machine Learning](#machine-learning-update-resource-activity).
+## <a name="azure-machine-learning-studio-classic"></a>Azure Machine Learning Studio (classique)
+Vous créez un service lié Azure Machine Learning Studio (classique) pour inscrire un point de terminaison de notation par lot Studio (classique) avec une fabrique de données. Deux activités de transformation des données pouvant être exécutées sur ce service lié : [Activité d'exécution par lot Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-batch-execution-activity) et [Activité des ressources de mise à jour Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-update-resource-activity).
 
 ### <a name="linked-service"></a>Service lié
-Le tableau suivant décrit les propriétés utilisées dans la définition JSON Azure d’un service lié Azure Machine Learning.
+Le tableau suivant décrit les propriétés utilisées dans la définition JSON Azure d’un service lié Studio (classique).
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
@@ -5001,15 +5001,15 @@ L’exemple suivant présente la définition JSON pour le service lié Analytiqu
 Créez un service lié à SQL Server et utilisez-le avec l’ [activité de procédure stockée](data-factory-stored-proc-activity.md) pour appeler une procédure stockée à partir d’un pipeline Data Factory.
 
 ### <a name="linked-service"></a>Service lié
-Vous créez un service lié de type **OnPremisesSqlServer** pour lier une base de données SQL Server locale à une fabrique de données. Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server local.
+Vous créez un service lié de type **OnPremisesSqlServer** pour lier une base de données SQL Server à une fabrique de données. Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server.
 
 Le tableau suivant fournit la description des éléments JSON spécifiques au service lié SQL Server.
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
 | type |La propriété de type doit être définie sur : **OnPremisesSqlServer**. |Oui |
-| connectionString |Spécifiez les informations connectionString nécessaires pour connecter la base de données SQL Server locale à l’aide de l’authentification SQL ou de l’authentification Windows. |Oui |
-| gatewayName |Nom de la passerelle que le service Data Factory doit utiliser pour se connecter à la base de données SQL Server locale. |Oui |
+| connectionString |Spécifiez les informations connectionString nécessaires pour établir une connexion à la base de données SQL Server à l’aide de l’authentification SQL ou de l’authentification Windows. |Oui |
+| gatewayName |Nom de la passerelle que le service Data Factory doit utiliser pour se connecter à la base de données SQL Server. |Oui |
 | username |Spécifiez le nom d’utilisateur si vous utilisez l’authentification Windows. Exemple : **domainname\\username**. |Non |
 | mot de passe |Spécifiez le mot de passe du compte d’utilisateur que vous avez spécifié pour le nom d’utilisateur. |Non |
 
@@ -5036,7 +5036,7 @@ Vous pouvez chiffrer les informations d’identification à l’aide de la cmdle
 ```
 #### <a name="example-json-for-using-windows-authentication"></a>Exemple : JSON pour utilisation de l’authentification Windows
 
-Si le nom d’utilisateur et le mot de passe sont spécifiés, la passerelle les utilise pour identifier le compte utilisateur spécifié pour connecter la base de données SQL Server locale. Dans le cas contraire, la passerelle se connecte directement à SQL Server avec le contexte de sécurité de la passerelle (son compte de démarrage).
+Si le nom d’utilisateur et le mot de passe sont spécifiés, la passerelle les utilise pour emprunter l’identité du compte utilisateur spécifié pour la connexion à la base de données SQL Server. Dans le cas contraire, la passerelle se connecte directement à SQL Server avec le contexte de sécurité de la passerelle (son compte de démarrage).
 
 ```json
 {
@@ -5064,9 +5064,9 @@ Activité | Description
 [Activité MapReduce HDInsight](#hdinsight-mapreduce-activity) | L’activité MapReduce de HDInsight dans un pipeline Data Factory exécute des programmes MapReduce sur votre cluster HDInsight propre ou à la demande sous Windows ou Linux.
 [Activité de diffusion en continu HDInsight](#hdinsight-streaming-activity) | L’activité de diffusion en continu HDInsight dans un pipeline Data Factory exécute des programmes de diffusion en continu Hadoop sur votre cluster HDInsight propre ou à la demande sous Windows ou Linux.
 [Activité HDInsight Spark](#hdinsight-spark-activity) | L’activité Spark HDInsight d’un pipeline Data Factory exécute des programmes Spark sur votre propre cluster HDInsight.
-[Activité d’exécution par lot Machine Learning](#machine-learning-batch-execution-activity) | Azure Data Factory vous permet de créer facilement des pipelines qui utilisent un service web Azure Machine Learning publié pour l’analyse prédictive. À l’aide de l’activité d’exécution par lots dans un pipeline Azure Data Factory, vous pouvez appeler un service web Machine Learning pour effectuer des prédictions sur les données par lots.
-[Activité des ressources de mise à jour de Machine Learning](#machine-learning-update-resource-activity) | Au fil du temps, les modèles prédictifs dans les expériences de notation Machine Learning doivent être reformés à l’aide de nouveaux jeux de données d’entrée. Une fois que vous avez fini la reformation, vous souhaitez mettre à jour le service web de notation avec le modèle Machine Learning reformé. Vous pouvez utiliser l’activité des ressources de mise à jour pour mettre à jour le service web avec le modèle qui vient d’être formé.
-[Activité de procédure stockée](#stored-procedure-activity) | Vous pouvez utiliser l’activité de procédure stockée dans un pipeline Data Factory pour appeler une procédure stockée dans l’un des magasins de données suivants : Azure SQL Database, Azure SQL Data Warehouse, SQL Server Database, dans votre entreprise ou une machine virtuelle Azure.
+[Activité d’exécution par lot Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-batch-execution-activity) | Azure Data Factory vous permet de créer facilement des pipelines qui utilisent un service Web Studio (classique) publié pour l’analyse prédictive. À l’aide de l’activité d’exécution par lot dans un pipeline Azure Data Factory, vous pouvez appeler un service Web Studio (classique) pour effectuer des prédictions sur les données par lot.
+[Activité de ressource de mise à jour Azure Machine Learning Studio (classique)](#azure-machine-learning-studio-classic-update-resource-activity) | Au fil du temps, les modèles prédictifs dans les expériences de scoring Azure Machine Learning Studio (classique) doivent être réentraînés à l’aide de nouveaux jeux de données d’entrée. Une fois que vous avez fini la reformation, vous souhaitez mettre à jour le service Web de notation avec le modèle Machine Learning reformé. Vous pouvez utiliser l’activité des ressources de mise à jour pour mettre à jour le service web avec le modèle qui vient d’être formé.
+[Activité de procédure stockée](#stored-procedure-activity) | Vous pouvez utiliser l’activité de procédure stockée dans un pipeline Data Factory pour appeler une procédure stockée dans l’un des magasins de données suivants : Azure SQL Database, Azure Synapse Analytics ou SQL Server Database dans votre entreprise ou une machine virtuelle Azure.
 [Activité U-SQL Data Lake Analytics](#data-lake-analytics-u-sql-activity) | L’activité U-SQL Data Lake Analytics exécute un script U-SQL sur un cluster Azure Data Lake Analytics.
 [Activité personnalisée .NET](#net-custom-activity) | Si vous devez transformer les données d’une manière qui n’est pas prise en charge par Data Factory, créez une activité personnalisée avec votre propre logique de traitement des données et utilisez cette activité dans le pipeline. Vous pouvez configurer l’activité .NET personnalisée pour l’exécuter en utilisant un service Azure Batch ou un cluster Azure HDInsight.
 
@@ -5346,14 +5346,14 @@ Notez les points suivants :
 
 Pour plus d’informations sur l’activité, consultez l’article [Spark Activity (activité Spark)](data-factory-spark.md).
 
-## <a name="machine-learning-batch-execution-activity"></a>Activité d’exécution par lot Machine Learning
-Vous pouvez spécifier les propriétés suivantes dans une définition JSON d’activité d’exécution par lots Azure Machine Learning Studio. La propriété de type de l’activité doit être : **AzureMLBatchExecution**. Vous devez d’abord créer un service lié Azure Machine Learning, puis spécifier le nom de celui-ci en tant que valeur de la propriété **linkedServiceName**. Les propriétés suivantes sont prises en charge dans la section **typeProperties** lorsque vous définissez le type d’activité sur AzureMLBatchExecution :
+## <a name="azure-machine-learning-studio-classic-batch-execution-activity"></a>Activité d’exécution par lot Azure Machine Learning Studio (classique)
+Vous pouvez spécifier les propriétés suivantes dans une définition JSON d’activité d’exécution par lot Azure Machine Learning Studio (classique). La propriété de type de l’activité doit être : **AzureMLBatchExecution**. Vous devez d’abord créer un service lié Studio (classique), puis spécifier le nom de celui-ci en tant que valeur de la propriété **linkedServiceName**. Les propriétés suivantes sont prises en charge dans la section **typeProperties** lorsque vous définissez le type d’activité sur AzureMLBatchExecution :
 
 Propriété | Description | Obligatoire
 -------- | ----------- | --------
-webServiceInput | Le jeu de données à transmettre en tant qu’entrée pour le service web Azure Machine Learning Studio. Ce jeu de données doit également être inclus dans les entrées de l’activité. |Utilisez webServiceInput ou webServiceInputs. |
-webServiceInputs | Spécifie les jeux de données à transmettre en tant qu’entrées pour le service web Azure Machine Learning Studio. Si le service web prend plusieurs entrées, utilisez la propriété webServiceInputs au lieu de la propriété webServiceInput. Les jeux de données référencés par **webServiceInputs** doivent également être inclus dans les **entrées** de l’activité. | Utilisez webServiceInput ou webServiceInputs. |
-webServiceOutputs | Les jeux de données qui sont attribués en tant que sorties pour le service web Azure Machine Learning Studio. Le service web renvoie des données de sortie dans ce jeu de données. | Oui |
+webServiceInput | Le jeu de données à transmettre en tant qu’entrée pour le service Web Studio (classique). Ce jeu de données doit également être inclus dans les entrées de l’activité. |Utilisez webServiceInput ou webServiceInputs. |
+webServiceInputs | Spécifie les jeux de données à transmettre en tant qu’entrées pour le service Web Studio (classique). Si le service web prend plusieurs entrées, utilisez la propriété webServiceInputs au lieu de la propriété webServiceInput. Les jeux de données référencés par **webServiceInputs** doivent également être inclus dans les **entrées** de l’activité. | Utilisez webServiceInput ou webServiceInputs. |
+webServiceOutputs | Les jeux de données qui sont attribués en tant que sorties pour le service Web Studio (classique). Le service web renvoie des données de sortie dans ce jeu de données. | Oui |
 globalParameters | Spécifie les valeurs pour les paramètres de service web dans cette section. | Non |
 
 ### <a name="json-example"></a>Exemple JSON
@@ -5397,13 +5397,13 @@ Dans cet exemple, l’activité a le jeu de données **MLSqlInput** en tant qu�
 }
 ```
 
-Dans l’exemple JSON, le service web Azure Machine Learning déployé utilise un module lecteur et un module enregistreur pour lire/écrire des données depuis/vers une base de données Azure SQL Database. Ce service web expose les quatre paramètres suivants :  Database server name, Database name, Server user account name et Server user account password.
+Dans l’exemple JSON, le service Web Studio (classique) déployé utilise un module lecteur et un module enregistreur pour lire/écrire des données depuis/vers une base de données Azure SQL Database. Ce service web expose les quatre paramètres suivants :  Database server name, Database name, Server user account name et Server user account password.
 
 > [!NOTE]
 > Seules les entrées et sorties de l’activité AzureMLBatchExecution peuvent être transmises en tant que paramètres au service web. Par exemple, dans l’extrait de code JSON ci-dessus, MLSqlInput est une entrée de l’activité AzureMLBatchExecution, qui est transmise comme entrée au service web via le paramètre webServiceInput.
 
-## <a name="machine-learning-update-resource-activity"></a>Activité des ressources de mise à jour de Machine Learning
-Vous pouvez spécifier les propriétés suivantes dans une définition JSON d’activité des ressources de mise à jour Azure Machine Learning Studio. La propriété de type de l’activité doit être : **AzureMLUpdateResource**. Vous devez d’abord créer un service lié Azure Machine Learning, puis spécifier le nom de celui-ci en tant que valeur de la propriété **linkedServiceName**. Les propriétés suivantes sont prises en charge dans la section **typeProperties** lorsque vous définissez le type d’activité sur AzureMLUpdateResource :
+## <a name="azure-machine-learning-studio-classic-update-resource-activity"></a>Activité de ressource de mise à jour Azure Machine Learning Studio (classique)
+Vous pouvez spécifier les propriétés suivantes dans une définition JSON d’activité des ressources de mise à jour Azure Machine Learning Studio (classique). La propriété de type de l’activité doit être : **AzureMLUpdateResource**. Vous devez d’abord créer un service lié Studio (classique), puis spécifier le nom de celui-ci en tant que valeur de la propriété **linkedServiceName**. Les propriétés suivantes sont prises en charge dans la section **typeProperties** lorsque vous définissez le type d’activité sur AzureMLUpdateResource :
 
 Propriété | Description | Obligatoire
 -------- | ----------- | --------
@@ -5411,7 +5411,7 @@ trainedModelName | Nom du modèle reformé. | Oui |
 trainedModelDatasetName | Jeu de données pointant vers le fichier iLearner renvoyé par l’opération de reformation. | Oui |
 
 ### <a name="json-example"></a>Exemple JSON
-Le pipeline a deux activités : **AzureMLBatchExecution** et **AzureMLUpdateResource**. L’activité d’exécution par lot Azure Machine Learning Studio prend les données d’entraînement comme entrée et génère un fichier .iLearner comme sortie. L’activité appelle le service web de formation (expérience de formation exposée comme un service web) avec les données de formation d’entrée et reçoit le fichier iLearner du service web. placeholderBlob est simplement un jeu de données de sortie factice requis par le service Azure Data Factory pour exécuter le pipeline.
+Le pipeline a deux activités : **AzureMLBatchExecution** et **AzureMLUpdateResource**. L’activité d’exécution par lot Studio (classique) prend les données d’apprentissage comme entrée et génère un fichier .iLearner comme sortie. L’activité appelle le service web de formation (expérience de formation exposée comme un service web) avec les données de formation d’entrée et reçoit le fichier iLearner du service web. placeholderBlob est simplement un jeu de données de sortie factice requis par le service Azure Data Factory pour exécuter le pipeline.
 
 
 ```json
@@ -5541,18 +5541,18 @@ Vous pouvez spécifier les propriétés suivantes dans une définition JSON d’
 
 - SQL Server
 - Azure SQL Database
-- Azure SQL Data Warehouse.
+- Azure Synapse Analytics
 
 Les propriétés suivantes sont prises en charge dans la section **typeProperties** lorsque vous définissez le type d’activité sur SqlServerStoredProcedure :
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
-| storedProcedureName |Spécifiez le nom de la procédure stockée dans la base de données Azure SQL ou l'entrepôt Azure SQL Data Warehouse qui est représenté(e) par le service lié utilisé par la table de sortie. |Oui |
+| storedProcedureName |Spécifiez le nom de la procédure stockée dans Azure SQL Database ou Azure Synapse Analytics qui est représentée par le service lié utilisé par la table de sortie. |Oui |
 | storedProcedureParameters |Spécifiez les valeurs des paramètres de procédure stockée. Si vous avez besoin de passer null pour un paramètre, utilisez la syntaxe : "param1": null (le tout en minuscules). Consultez l’exemple suivant pour en savoir plus sur l’utilisation de cette propriété. |Non |
 
 Si vous spécifiez un jeu de données d’entrée, il doit être disponible (à l’état Prêt) pour l’activité de procédure stockée à exécuter. Les jeux de données d’entrée ne peuvent pas être utilisés dans la procédure stockée en tant que paramètres. Cela sert uniquement à vérifier la dépendance avant de commencer l’activité de procédure stockée. Vous devez spécifier un jeu de données de sortie pour une activité de procédure stockée.
 
-Le jeu de données de sortie spécifie la **planification** pour l’activité de procédure stockée (horaire, hebdomadaire, mensuelle, etc.). Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL, à un Azure SQL Data Warehouse ou à une base de données SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice**, qui est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée.
+Le jeu de données de sortie spécifie la **planification** pour l’activité de procédure stockée (horaire, hebdomadaire, mensuelle, etc.). Le jeu de données de sortie doit utiliser un **service lié** qui fait référence à une base de données Azure SQL Database, Azure Synapse Analytics ou SQL Server dans laquelle vous souhaitez que la procédure stockée soit exécutée. Le jeu de données de sortie peut être un moyen de passer le résultat de la procédure stockée pour traitement ultérieur par une autre activité ([chaînage des activités](data-factory-scheduling-and-execution.md#multiple-activities-in-a-pipeline)) dans le pipeline. Toutefois, Data Factory n’écrit pas automatiquement la sortie d’une procédure stockée pour ce jeu de données. C’est la procédure stockée qui écrit dans une table SQL vers laquelle le jeu de données de sortie pointe. Dans certains cas, le jeu de données de sortie peut être un **jeu de données factice**, qui est utilisé uniquement pour spécifier le calendrier d’exécution de l’activité de procédure stockée.
 
 ### <a name="json-example"></a>Exemple JSON
 

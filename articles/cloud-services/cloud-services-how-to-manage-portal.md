@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/05/2017
 ms.author: tagore
-ms.openlocfilehash: 80481bc11933b0404079221f23b5054024f00acb
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 84e450a55f9482c3a713943adfcc4d7940ab873f
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811355"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92076706"
 ---
 # <a name="manage-cloud-services-in-the-azure-portal"></a>Gérer Azure Cloud Services dans le portail Azure
 Dans la zone **Services cloud** du portail Azure, vous pouvez :
@@ -77,13 +77,13 @@ Il existe deux conditions préalables principales pour qu’un échange de dépl
 
 - Si vous souhaitez utiliser une adresse IP statique pour votre emplacement de production, vous devez en réserver une pour votre emplacement intermédiaire également. Sinon, l’échange échoue.
 
-- Toutes les instances de vos rôles doivent être en cours d’exécution pour que vous puissiez effectuer l’échange. Vous pouvez vérifier l’état de vos instances sur le panneau **Aperçu** du portail Azure. Vous pouvez également utiliser la commande [Get-AzureRole](/powershell/module/servicemanagement/azure/get-azurerole?view=azuresmps-3.7.0) dans Windows PowerShell.
+- Toutes les instances de vos rôles doivent être en cours d’exécution pour que vous puissiez effectuer l’échange. Vous pouvez vérifier l’état de vos instances sur le panneau **Aperçu** du portail Azure. Vous pouvez également utiliser la commande [Get-AzureRole](/powershell/module/servicemanagement/azure.service/get-azurerole?view=azuresmps-3.7.0) dans Windows PowerShell.
 
 Notez que les mises à jour du système d’exploitation invité et les opérations de réparation de service peuvent également entraîner l’échec du déploiement. Pour plus d’informations, consultez [Résoudre les problèmes de déploiement de service cloud](cloud-services-troubleshoot-deployment-problems.md).
 
 **Un échange implique-t-il un temps d’arrêt pour mon application ? Comment dois-je le gérer ?**
 
-Comme décrit dans la section précédente, une permutation de déploiements est généralement rapide, car il s’agit simplement d’une modification de configuration dans Azure Load Balancer. Dans certains cas, elle peut prendre au moins 10 secondes et entraîner des échecs de connexion temporaires. Pour limiter l’impact sur vos clients, envisagez d’implémenter la [logique de nouvelle tentative client](../best-practices-retry-general.md).
+Comme décrit dans la section précédente, une permutation de déploiements est généralement rapide, car il s’agit simplement d’une modification de configuration dans Azure Load Balancer. Dans certains cas, elle peut prendre au moins 10 secondes et entraîner des échecs de connexion temporaires. Pour limiter l’impact sur vos clients, envisagez d’implémenter la [logique de nouvelle tentative client](/azure/architecture/best-practices/transient-faults).
 
 ## <a name="delete-deployments-and-a-cloud-service"></a>Supprimer des déploiements et un service cloud
 Avant de pouvoir supprimer un service cloud, vous devez supprimer tous les déploiements existants.
@@ -124,6 +124,3 @@ Le panneau **d’aperçu** possède une barre d’état en haut. Lorsque vous s�
 * Découvrez comment [déployer un service cloud](cloud-services-how-to-create-deploy-portal.md).
 * Configurez un [nom de domaine personnalisé](cloud-services-custom-domain-name-portal.md).
 * Configurez des [certificats TLS/SSL](cloud-services-configure-ssl-certificate-portal.md).
-
-
-

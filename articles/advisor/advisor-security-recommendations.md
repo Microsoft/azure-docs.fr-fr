@@ -3,12 +3,12 @@ title: Mieux sécuriser les ressources avec Azure Advisor
 description: Utilisez le conseiller Azure pour améliorer la sécurité de vos déploiements Azure.
 ms.topic: article
 ms.date: 01/29/2019
-ms.openlocfilehash: 5a4b7e9a9d9a7919155db361fd2c96ed98e6e5a4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f130135ed53dc2ba87f46cbf6f9faf0f07cc0654
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75443034"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87057653"
 ---
 # <a name="make-resources-more-secure-with-azure-advisor"></a>Mieux sécuriser les ressources avec Azure Advisor
 
@@ -16,7 +16,7 @@ Azure Advisor vous offre une vue cohérente et consolidée des recommandations p
 
 Le Centre de sécurité vous aide à prévenir, détecter et résoudre les menaces grâce à une visibilité et un contrôle accrus de la sécurité de vos ressources Azure. Il analyse l’état de sécurité de vos ressources Azure à intervalles réguliers. Lorsqu’il identifie des failles de sécurité potentielles, il crée des recommandations. Ces recommandations vous guident tout au long du processus de configuration des contrôles nécessaires. 
 
-Pour plus d’informations sur les recommandations de sécurité, consultez [Gestion des recommandations de sécurité dans Azure Security Center](https://azure.microsoft.com/documentation/articles/security-center-recommendations/).
+Pour plus d’informations sur les recommandations de sécurité, consultez [Gestion des recommandations de sécurité dans Azure Security Center](../security-center/security-center-recommendations.md).
 
 ## <a name="how-to-access-security-recommendations-in-azure-advisor"></a>Accès aux recommandations de sécurité dans Azure Advisor
 
@@ -29,9 +29,9 @@ Pour plus d’informations sur les recommandations de sécurité, consultez [Ges
 Pour en savoir plus sur les recommandations d’Advisor, consultez les ressources suivantes :
 * [Présentation du conseiller](advisor-overview.md)
 * [Prise en main d’Advisor](advisor-get-started.md)
-* [Recommandations du conseiller en matière de coûts](advisor-cost-recommendations.md)
-* [Recommandations du conseiller en matière de performances](advisor-performance-recommendations.md)
-* [Recommandations du conseiller en matière de haute disponibilité](advisor-high-availability-recommendations.md)
-* [Recommandations d’excellence opérationnelle Advisor](advisor-operational-excellence-recommendations.md)
-
+* [Recommandations d’Advisor en matière de coûts](advisor-cost-recommendations.md)
+* [Recommandations d’Advisor en matière de performances](advisor-performance-recommendations.md)
+* [Recommandations d’Advisor en matière de fiabilité](advisor-high-availability-recommendations.md)
+* [Recommandations d’Advisor en matière d’excellence opérationnelle](advisor-operational-excellence-recommendations.md)
+* [API REST Advisor](/rest/api/advisor/)
  

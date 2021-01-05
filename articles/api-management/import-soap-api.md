@@ -1,6 +1,6 @@
 ---
 title: Importer une API SOAP à l’aide du portail Azure | Microsoft Docs
-description: Découvrez comment importer l’API SOAP avec Gestion des API.
+description: Découvrez comment importer une représentation XML standard d’une API SOAP, puis tester l’API dans les portails des développeurs et Azure.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,15 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 04/22/2020
 ms.author: apimpm
-ms.openlocfilehash: 7b1fd34824bec9641edc94ce278fa21a1b57b2c0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 81ded79ee72fb7c2d89898595602cb3e6d7ae5e2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82202738"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011062"
 ---
 # <a name="import-soap-api"></a>Importer une API SOAP
 
@@ -45,7 +45,7 @@ Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion d
 3. Dans **Spécification WSDL**, entrez l’URL correspondant à votre API SOAP.
 4. La case d’option **Requête SOAP directe** est sélectionnée par défaut. Avec cette sélection, l’API va être exposée en tant que SOAP. Le consommateur doit utiliser des règles SOAP. Si vous souhaitez « convertir l’API pour REST », suivez les étapes de [Import a SOAP API and convert to REST](restify-soap-api.md) (Importer une API SOAP et la convertir pour REST).
 
-    ![Requête directe](./media/import-soap-api/pass-through.png)
+    ![Capture d’écran montrant la boîte de dialogue Créer à partir de WSDL dans laquelle vous pouvez entrer une spécification WSDL.](./media/import-soap-api/pass-through.png)
 5. Appuyez sur la touche de tabulation.
 
     Les champs suivants sont automatiquement remplis avec les informations de l’interface de programmation d’applications SOAP : Nom d’affichage, nom et description.
@@ -58,7 +58,7 @@ Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion d
 
     * **Starter**
     * **Illimité**   
-8. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+8. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 9. Sélectionnez **Create** (Créer).
 
 ### <a name="test-the-new-api-in-the-administrative-portal"></a>Tester la nouvelle API dans le portail d’administration

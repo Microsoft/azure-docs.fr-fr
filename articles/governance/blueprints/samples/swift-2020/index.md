@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble de l’exemple de blueprint SWIFT CSP-CSCF v2020
 description: Vue d’ensemble de l’exemple de blueprint SWIFT CSP-CSCF v2020. Cet exemple de blueprint aide les clients à évaluer des contrôles SWIFT CSP-CSCF v2020 spécifiques.
-ms.date: 05/13/2020
+ms.date: 08/18/2020
 ms.topic: sample
-ms.openlocfilehash: 04afbe2b0ef3b632d81b832e6a94bce2618fc851
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 8c6eb7a609f1103f0b20a83e45bef9e18ae4d5c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83657044"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88612688"
 ---
 # <a name="overview-of-the-swift-csp-cscf-v2020-blueprint-sample"></a>Vue d’ensemble de l’exemple de blueprint SWIFT CSP-CSCF v2020
 

@@ -3,12 +3,12 @@ title: Envoyer des alertes sur l’intégrité du service Azure avec OpsGenie à
 description: Obtenir des notifications personnalisées sur les événements d’intégrité du service sur votre instance OpsGenie.
 ms.topic: conceptual
 ms.date: 06/10/2019
-ms.openlocfilehash: def12d5e7b1b93b8370cd7be61538fca53531ae1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 112774cb1f9e16b08225471e8dbc1bb79b1bd37d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77654135"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86529095"
 ---
 # <a name="send-azure-service-health-alerts-with-opsgenie-using-webhooks"></a>Envoyer des alertes sur l’intégrité du service Azure avec OpsGenie à l’aide de webhooks
 
@@ -37,7 +37,7 @@ Cet article vous explique comment configurer les alertes sur l’intégrité du 
 
 ## <a name="create-an-alert-using-opsgenie-in-the-azure-portal"></a>Créer une alerte à l’aide d’OpsGenie dans le portail Azure
 ### <a name="for-a-new-action-group"></a>Pour un nouveau groupe d’action :
-1. Suivez les étapes 1 à 8 de [Créer une alerte sur une notification sur l’intégrité du service pour un nouveau groupe d’actions à l’aide du portail Azure](../azure-monitor/platform/alerts-activity-log-service-notifications.md).
+1. Suivez les étapes 1 à 8 de [Créer une alerte sur une notification sur l’intégrité du service pour un nouveau groupe d’actions à l’aide du portail Azure](./alerts-activity-log-service-notifications-portal.md).
 
 1. À définir dans la liste des **Actions** :
 
@@ -85,5 +85,5 @@ Cet article vous explique comment configurer les alertes sur l’intégrité du 
 ## <a name="next-steps"></a>Étapes suivantes
 - Découvrez comment [configurer des notifications de Webhook pour les systèmes de gestion de problème existants](service-health-alert-webhook-guide.md).
 - Consultez le [schéma webhook des alertes de journal d’activité](../azure-monitor/platform/activity-log-alerts-webhook.md). 
-- En savoir plus sur les [notifications sur l’intégrité du service](../azure-monitor/platform/service-notifications.md).
+- En savoir plus sur les [notifications sur l’intégrité du service](./service-notifications.md).
 - En savoir plus sur les [groupes d’actions](../azure-monitor/platform/action-groups.md).

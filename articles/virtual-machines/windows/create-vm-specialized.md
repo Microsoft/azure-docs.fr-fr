@@ -4,21 +4,19 @@ description: Créez une machine virtuelle Windows en attachant un disque managé
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 10/10/2019
 ms.author: cynthn
-ms.openlocfilehash: 2939726898abc2abc0e62d0e36feedbfe7ba3645
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: cddc7f4f453f22b0cb36b1d3a1e9c2fba2dcabaf
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82086400"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96455098"
 ---
 # <a name="create-a-windows-vm-from-a-specialized-disk-by-using-powershell"></a>Créer une machine virtuelle Windows à partir d’un disque spécialisé à l’aide de PowerShell
 
 Créez une machine virtuelle en attachant un disque managé spécialisé en tant que disque du système d’exploitation. Un disque spécialisé est une copie d’un disque dur virtuel d’une machine virtuelle existante qui contient les comptes d’utilisateurs, applications et autres données d’état de votre machine virtuelle d’origine. 
-
-Lorsque vous utilisez un disque dur virtuel spécialisé pour créer une machine virtuelle, la nouvelle machine conserve le nom d’ordinateur de la machine virtuelle d’origine. D’autres informations spécifiques à l’ordinateur sont également conservées. Dans certains cas, ces informations en double peuvent entraîner des problèmes. Quand vous copiez une machine virtuelle, vous devez connaître les types d’informations spécifiques à l’ordinateur dont vos applications dépendent.
 
 Vous disposez de plusieurs options :
 * [Utilisez un disque managé existant](#option-1-use-an-existing-disk). Cette option est utile si vous avez une machine virtuelle qui ne fonctionne pas correctement. Vous pouvez supprimer la machine virtuelle, puis réutiliser le disque managé pour créer une machine virtuelle. 
@@ -27,13 +25,18 @@ Vous disposez de plusieurs options :
 
 Vous pouvez également utiliser le portail Azure pour [créer une machine virtuelle à partir d’un disque dur virtuel spécialisé](create-vm-specialized-portal.md).
 
-Cet article montre comment utiliser des disques managés. Si vous avez un déploiement hérité qui nécessite l’utilisation d’un compte de stockage, consultez [Créer une machine virtuelle à partir d’un disque dur virtuel spécialisé dans un compte de stockage](sa-create-vm-specialized.md).
+Cet article montre comment utiliser des disques managés. Si vous avez un déploiement hérité qui nécessite l’utilisation d’un compte de stockage, consultez [Créer une machine virtuelle à partir d’un disque dur virtuel spécialisé dans un compte de stockage](/previous-versions/azure/virtual-machines/windows/sa-create-vm-specialized).
+
+> [!IMPORTANT]
+> 
+> Lorsque vous utilisez un disque spécialisé pour créer une machine virtuelle, la nouvelle machine conserve le nom d’ordinateur de la machine virtuelle d’origine. D’autres informations spécifiques à l’ordinateur (par exemple le CMID) sont également conservées. Dans certains cas, ces informations en doublon peuvent provoquer des problèmes. Quand vous copiez une machine virtuelle, vous devez connaître les types d’informations spécifiques à l’ordinateur dont vos applications dépendent.  
+> N’utilisez donc pas de disque spécialisé si vous souhaitez créer plusieurs machines virtuelles. Pour les déploiements plus importants, [créez une image](capture-image-resource.md), puis [utilisez-la pour créer plusieurs machines virtuelles](create-vm-generalized-managed.md).
 
 Nous vous recommandons de limiter le nombre de déploiements simultanés à 20 machines virtuelles provenant d’un seul disque dur virtuel ou d’une seule capture instantanée. 
 
 ## <a name="option-1-use-an-existing-disk"></a>Option 1 : Utiliser un disque existant
 
-Si vous avez supprimé une machine virtuelle et souhaitez réutiliser le disque du système d'exploitation pour créer une nouvelle machine virtuelle, utilisez [Get-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/get-azdisk).
+Si vous avez supprimé une machine virtuelle et souhaitez réutiliser le disque du système d'exploitation pour créer une nouvelle machine virtuelle, utilisez [Get-AzDisk](/powershell/module/az.compute/get-azdisk).
 
 ```powershell
 $resourceGroupName = 'myResourceGroup'
@@ -68,7 +71,7 @@ Si vous souhaitez copier une machine virtuelle existante dans une autre région,
 
 ### <a name="take-a-snapshot-of-the-os-disk"></a>Prendre une capture instantanée du disque de système d’exploitation
 
-Vous pouvez prendre une capture instantanée d’une machine virtuelle entière (y compris tous les disques) ou d’un seul disque. Les étapes suivantes vous montrent comment créer une capture instantanée du disque du système d'exploitation de votre machine virtuelle à l'aide de la cmdlet [New-AzSnapshot](https://docs.microsoft.com/powershell/module/az.compute/new-azsnapshot). 
+Vous pouvez prendre une capture instantanée d’une machine virtuelle entière (y compris tous les disques) ou d’un seul disque. Les étapes suivantes vous montrent comment créer une capture instantanée du disque du système d'exploitation de votre machine virtuelle à l'aide de la cmdlet [New-AzSnapshot](/powershell/module/az.compute/new-azsnapshot). 
 
 Commencez par définir des paramètres. 
 
@@ -116,7 +119,7 @@ Pour utiliser cette capture instantanée afin de créer une machine virtuelle ha
 
 ### <a name="create-a-new-disk-from-the-snapshot"></a>Créer un disque à partir de la capture instantanée
 
-Créez un disque managé à partir de la capture instantanée en utilisant la commande [New-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/new-azdisk). Cet exemple utilise *myOSDisk* comme nom du disque.
+Créez un disque managé à partir de la capture instantanée en utilisant la commande [New-AzDisk](/powershell/module/az.compute/new-azdisk). Cet exemple utilise *myOSDisk* comme nom du disque.
 
 Créez un groupe de ressources pour la nouvelle machine virtuelle.
 
@@ -193,7 +196,7 @@ $nsg = New-AzNetworkSecurityGroup `
 Pour plus d’informations sur les points de terminaison et les règles NSG, consultez [Ouverture de ports sur une machine virtuelle dans Azure avec PowerShell](nsg-quickstart-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 ### <a name="create-a-public-ip-address-and-nic"></a>Créer une adresse IP publique et une carte réseau
-Pour établir la communication avec la machine virtuelle dans le réseau virtuel, vous avez besoin d’une [adresse IP publique](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) et d’une interface réseau.
+Pour établir la communication avec la machine virtuelle dans le réseau virtuel, vous avez besoin d’une [adresse IP publique](../../virtual-network/public-ip-addresses.md) et d’une interface réseau.
 
 1. Créez l’adresse IP publique. Dans cet exemple, le nom d’adresse IP publique est défini sur *myIP*.
    
@@ -236,7 +239,7 @@ $vm = Add-AzVMNetworkInterface -VM $vmConfig -Id $nic.Id
 
 ### <a name="add-the-os-disk"></a>Ajouter le disque de système d’exploitation 
 
-Ajoutez le disque du système d'exploitation à la configuration en utilisant la commande [Set-AzVMOSDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azvmosdisk). Cet exemple définit la taille du disque sur *128 Go* et attache le disque géré en tant que disque de système d’exploitation *Windows*.
+Ajoutez le disque du système d'exploitation à la configuration en utilisant la commande [Set-AzVMOSDisk](/powershell/module/az.compute/set-azvmosdisk). Cet exemple définit la taille du disque sur *128 Go* et attache le disque géré en tant que disque de système d’exploitation *Windows*.
  
 ```powershell
 $vm = Set-AzVMOSDisk -VM $vm -ManagedDiskId $osDisk.Id -StorageAccountType Standard_LRS `
@@ -245,7 +248,7 @@ $vm = Set-AzVMOSDisk -VM $vm -ManagedDiskId $osDisk.Id -StorageAccountType Stand
 
 ### <a name="complete-the-vm"></a>Terminer la machine virtuelle 
 
-Créez la machine virtuelle en utilisant la commande [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) avec les configurations que nous venons de créer.
+Créez la machine virtuelle en utilisant la commande [New-AzVM](/powershell/module/az.compute/new-azvm) avec les configurations que nous venons de créer.
 
 ```powershell
 New-AzVM -ResourceGroupName $destinationResourceGroup -Location $location -VM $vm
@@ -270,4 +273,3 @@ $vmList.Name
 
 ## <a name="next-steps"></a>Étapes suivantes
 Connectez-vous à votre nouvelle machine virtuelle. Pour plus d’informations, consultez [Connexion à une machine virtuelle Azure exécutant Windows](connect-logon.md).
-

@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/12/2018
-ms.openlocfilehash: 7dc4164cac1998a02ae62d7682f9630aa4faa619
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7b670cafa4d643e37fae068a4c0033fc97a96ccd
+ms.sourcegitcommit: 419c8c8061c0ff6dc12c66ad6eda1b266d2f40bd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658555"
+ms.lasthandoff: 10/18/2020
+ms.locfileid: "92166588"
 ---
 # <a name="reference-guide-to-view-designer-visualization-parts-in-azure-monitor"></a>Guide de référence des composants de visualisation du Concepteur de vues dans Azure Monitor
 Grâce au Concepteur de vues d’Azure Monitor, vous pouvez créer plusieurs vues personnalisées dans le portail Azure qui peuvent vous aider à visualiser les données dans votre espace de travail Log Analytics. Cet article est un guide de référence pour les paramètres des composants de visualisation disponibles dans vos vues personnalisées.
@@ -44,7 +44,7 @@ Les sections suivantes décrivent les types de vignettes et leurs propriétés e
 ## <a name="list-of-queries-part"></a>Liste de parties de requêtes
 La liste des parties de requêtes affiche une liste de requêtes de journal. Vous pouvez sélectionner chaque requête pour afficher ses résultats. La vue inclut une requête par défaut, et vous pouvez sélectionner **+ Requête** pour ajouter des requêtes supplémentaires.
 
-![Liste de vues de requêtes](media/view-designer-parts/view-list-queries.png)
+![Capture d’écran du composant de visualisation Liste des requêtes dans le concepteur de vues Azure Monitor.](media/view-designer-parts/view-list-queries.png)
 
 | Paramètre | Description |
 |:--- |:--- |
@@ -60,7 +60,7 @@ La liste des parties de requêtes affiche une liste de requêtes de journal. Vou
 ## <a name="number-and-list-part"></a>Partie Nombre et liste
 L’en-tête affiche une valeur qui indique le nombre d’enregistrements obtenus à partir d’une requête de journal. La liste affiche les dix premiers résultats d’une requête, avec un graphique qui indique la valeur relative d’une colonne numérique ou ses changements avec le temps.
 
-![Liste de vues de requêtes](media/view-designer-parts/view-number-list.png)
+![Capture d’écran des composants de visualisation Nombre et Liste dans le concepteur de vues Azure Monitor.](media/view-designer-parts/view-number-list.png)
 
 | Paramètre | Description |
 |:--- |:--- |
@@ -74,7 +74,7 @@ L’en-tête affiche une valeur qui indique le nombre d’enregistrements obtenu
 | Requête |Requête à exécuter pour l’en-tête. Le nombre d’enregistrements retournés par la requête est affiché. |
 | Navigation par clic | Action effectuée lorsque vous cliquez sur l’en-tête.  Pour plus d’informations, consultez [Paramètres courants](#click-through-navigation). |
 | **Liste** | |
-| Requête |Requête à exécuter pour obtenir la liste. Les deux premières propriétés des dix premiers enregistrements dans les résultats sont affichées. La première propriété est une valeur de texte et la seconde une valeur numérique. Les barres sont créées automatiquement en fonction de la valeur relative de la colonne numérique.<br><br>Utilisez la commande `Sort` dans la requête pour trier les enregistrements de la liste. Pour exécuter la requête et retourner tous les enregistrements, vous pouvez sélectionner **Afficher tout**. |
+| Requête |Requête à exécuter pour obtenir la liste. Les deux premières propriétés des dix premiers enregistrements dans les résultats sont affichées. La première propriété est une valeur de texte et la seconde une valeur numérique. Les barres sont créées automatiquement en fonction de la valeur relative de la colonne numérique.<br><br>Utilisez la commande `Sort` dans la requête pour trier les enregistrements de la liste. Pour exécuter la requête et retourner tous les enregistrements, vous pouvez sélectionner **Afficher tout** . |
 | Masquer le graphique |Sélectionnez ce lien pour désactiver le graphique à droite de la colonne numérique. |
 | Activation des sparklines |Sélectionnez ce lien pour afficher un graphique Sparkline au lieu d’une barre horizontale. Pour plus d’informations, consultez [Paramètres courants](#sparklines). |
 | Couleur |Couleur des barres ou graphiques Sparkline. |
@@ -104,7 +104,7 @@ L’en-tête affiche deux valeurs indiquant le nombre d’enregistrements obtenu
 | Légende |Texte affiché en haut de l’en-tête. |
 | Requête |Requête à exécuter pour l’en-tête. Le nombre d’enregistrements retournés par la requête est affiché. |
 | **Liste** | |
-| Requête |Requête à exécuter pour obtenir la liste. Les deux premières propriétés des dix premiers enregistrements dans les résultats sont affichées. La première propriété est une valeur de texte et la seconde une valeur numérique. Les barres sont créées automatiquement en fonction de la valeur relative de la colonne numérique.<br><br>Utilisez la commande `Sort` dans la requête pour trier les enregistrements de la liste. Pour exécuter la requête et retourner tous les enregistrements, vous pouvez sélectionner **Afficher tout**. |
+| Requête |Requête à exécuter pour obtenir la liste. Les deux premières propriétés des dix premiers enregistrements dans les résultats sont affichées. La première propriété est une valeur de texte et la seconde une valeur numérique. Les barres sont créées automatiquement en fonction de la valeur relative de la colonne numérique.<br><br>Utilisez la commande `Sort` dans la requête pour trier les enregistrements de la liste. Pour exécuter la requête et retourner tous les enregistrements, vous pouvez sélectionner **Afficher tout** . |
 | Masquer le graphique |Sélectionnez ce lien pour désactiver le graphique à droite de la colonne numérique. |
 | Activation des sparklines |Sélectionnez ce lien pour afficher un graphique Sparkline au lieu d’une barre horizontale. Pour plus d’informations, consultez [Paramètres courants](#sparklines). |
 | Couleur |Couleur des barres ou graphiques Sparkline. |
@@ -227,7 +227,7 @@ L’en-tête affiche un graphique en courbes avec plusieurs séries à partir d�
 | Intitulé |Texte affiché en haut de l’en-tête. |
 | Sous-titre |Texte affiché sous le titre en haut de l’en-tête. |
 | **Graphique en courbes** | |
-| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval*, l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval*, l’axe des abscisses utilise des intervalles d’une heure. |
+| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval* , l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval* , l’axe des abscisses utilise des intervalles d’une heure. |
 | Navigation par clic | Action effectuée lorsque vous cliquez sur l’en-tête.  Pour plus d’informations, consultez [Paramètres courants](#click-through-navigation). |
 | **Graphique en courbes** |**&gt; Légende** |
 | Titre de la légende |Texte affiché au-dessus de la valeur de la légende. |
@@ -235,8 +235,8 @@ L’en-tête affiche un graphique en courbes avec plusieurs séries à partir d�
 | Opération |Opération à effectuer sur la valeur de propriété afin de la résumer en une valeur unique pour la légende.<ul><li>Average : moyenne des valeurs de tous les enregistrements.</li><li>Count : nombre d’enregistrements retournés par la requête.</li><li>Last Sample : valeur du dernier intervalle inclus dans le graphique.</li><li>Max : valeur maximale des intervalles inclus dans le graphique.</li><li>Min : valeur minimale des intervalles inclus dans le graphique.</li><li>Sum : somme des valeurs de tous les enregistrements.</li></ul> |
 | **Graphique en courbes** |**> Axe Y** |
 | Utiliser l’échelle logarithmique |Sélectionnez ce lien pour utiliser une échelle logarithmique pour l’axe des ordonnées (Y). |
-| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’*Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en*, les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en*. |
-| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’*Unité*. Si aucune étiquette n’est spécifiée, seul le type d’*Unité* est affiché. |
+| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’ *Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en* , les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en* . |
+| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’ *Unité* . Si aucune étiquette n’est spécifiée, seul le type d’ *Unité* est affiché. |
 | **Liste** | |
 | Requête |Requête à exécuter pour obtenir la liste. Le nombre d’enregistrements retournés par la requête est affiché. |
 | Masquer le graphique |Sélectionnez ce lien pour désactiver le graphique à droite de la colonne numérique. |
@@ -267,12 +267,12 @@ L’en-tête affiche un graphique en courbes avec plusieurs séries à partir d�
 | Intitulé |Texte affiché en haut de l’en-tête. |
 | Sous-titre |Texte affiché sous le titre en haut de l’en-tête. |
 | **Graphique en courbes** | |
-| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval*, l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval*, l’axe des abscisses utilise des intervalles d’une heure. |
+| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval* , l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval* , l’axe des abscisses utilise des intervalles d’une heure. |
 | Navigation par clic | Action effectuée lorsque vous cliquez sur l’en-tête.  Pour plus d’informations, consultez [Paramètres courants](#click-through-navigation). |
 | **Graphique en courbes** |**> Axe Y** |
 | Utiliser l’échelle logarithmique |Sélectionnez ce lien pour utiliser une échelle logarithmique pour l’axe des ordonnées (Y). |
-| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’*Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en*, les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en*. |
-| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’*Unité*. Si aucune étiquette n’est spécifiée, seul le type d’*Unité* est affiché. |
+| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’ *Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en* , les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en* . |
+| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’ *Unité* . Si aucune étiquette n’est spécifiée, seul le type d’ *Unité* est affiché. |
 | **Liste** | |
 | Requête |Requête à exécuter pour obtenir la liste. Le nombre d’enregistrements retournés par la requête est affiché. |
 | Masquer le graphique |Sélectionnez ce lien pour désactiver le graphique à droite de la colonne numérique. |
@@ -302,31 +302,31 @@ La pile de graphique en courbes affiche trois graphiques en courbes distincts av
 | Intitulé |Texte affiché en haut du graphique. |
 | Sous-titre |Texte affiché sous le titre en haut du graphique. |
 | **Graphique 1<br>Graphique 2<br>Graphique 3** |**Graphique en courbes** |
-| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval*, l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval*, l’axe des abscisses utilise des intervalles d’une heure. |
+| Requête |Requête à exécuter pour obtenir le graphique en courbes. La première propriété est une valeur de texte et la seconde une valeur numérique. Cette requête utilise habituellement le mot clé *measure* pour synthétiser les résultats. Si la requête utilise le mot clé *interval* , l’axe des abscisses (X) du graphique utilise cet intervalle de temps. Si la requête ne contient pas le mot clé *interval* , l’axe des abscisses utilise des intervalles d’une heure. |
 | Navigation par clic | Action effectuée lorsque vous cliquez sur l’en-tête.  Pour plus d’informations, consultez [Paramètres courants](#click-through-navigation). |
 | **Graphique** |**> Axe Y** |
 | Utiliser l’échelle logarithmique |Sélectionnez ce lien pour utiliser une échelle logarithmique pour l’axe des ordonnées (Y). |
-| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’*Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en*, les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en*. |
-| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’*Unité*. Si aucune étiquette n’est spécifiée, seul le type d’*Unité* est affiché. |
+| Units |Spécifiez les unités à utiliser pour exprimer les valeurs retournées par la requête. Ces informations sont utilisées pour afficher sur le graphique des étiquettes indiquant les types de valeurs et, le cas échéant, pour convertir les valeurs. Le type d’ *Unité* spécifie la catégorie de l’unité, et définit les valeurs de type *Unité actuelle* disponibles. Si vous sélectionnez une valeur pour l’option *Convertir en* , les valeurs numériques sont converties du type *Unité actuelle* au type *Convertir en* . |
+| Étiquette personnalisée |Texte affiché pour l’axe Y en regard de l’étiquette du type d’ *Unité* . Si aucune étiquette n’est spécifiée, seul le type d’ *Unité* est affiché. |
 
 ## <a name="common-settings"></a>Paramètres courants
 Les sections suivantes décrivent les paramètres communs à plusieurs parties de visualisation.
 
 ### <a name="name-and-value-separator"></a><a name="name-value-separator"></a>Séparateur de noms et de valeurs
-Le séparateur de noms et de valeurs est le délimiteur à caractère unique à utiliser pour analyser la propriété de texte d’une requête de liste en plusieurs valeurs. Si vous spécifiez un délimiteur, vous pouvez fournir des noms pour chaque champ, en les séparant par le même délimiteur que dans le champ **Nom**.
+Le séparateur de noms et de valeurs est le délimiteur à caractère unique à utiliser pour analyser la propriété de texte d’une requête de liste en plusieurs valeurs. Si vous spécifiez un délimiteur, vous pouvez fournir des noms pour chaque champ, en les séparant par le même délimiteur que dans le champ **Nom** .
 
-Par exemple, imaginez une propriété nommée *Location* incluant des valeurs telles que *Redmond-Building 41* et *Bellevue-Building 12*. Vous pouvez spécifier un tiret (-) comme séparateur de noms et de valeurs, et *City-Building* comme nom. Chaque valeur est alors analysée en deux propriétés respectivement nommées *City* et *Building*.
+Par exemple, imaginez une propriété nommée *Location* incluant des valeurs telles que *Redmond-Building 41* et *Bellevue-Building 12* . Vous pouvez spécifier un tiret (-) comme séparateur de noms et de valeurs, et *City-Building* comme nom. Chaque valeur est alors analysée en deux propriétés respectivement nommées *City* et *Building* .
 
 ### <a name="click-through-navigation"></a><a name="click-through-navigation"></a>Navigation par clic
-La navigation par clic définit l’action à effectuer quand vous cliquez sur un en-tête ou élément de liste dans une vue.  Soit une requête s’ouvre dans le [Log Analytics](../../azure-monitor/log-query/portals.md), soit une autre vue apparaît.
+La navigation par clic définit l’action à effectuer quand vous cliquez sur un en-tête ou élément de liste dans une vue.  Soit une requête s’ouvre dans le [Log Analytics](../log-query/log-query-overview.md), soit une autre vue apparaît.
 
 Le tableau suivant décrit les paramètres de la navigation par clic.
 
 | Paramètre           | Description |
 |:--|:--|
 | Recherche dans les journaux (automatique) | Requête de journal à exécuter quand vous sélectionnez un élément d’en-tête.  Il s’agit de la même requête de journal que celle sur laquelle se base l’élément.
-| Recherche dans les journaux        | Requête de journal à exécuter quand vous sélectionnez un élément dans une liste.  Tapez la requête dans la zone **Requête de navigation**.   Utilisez *{selected item}* pour inclure la syntaxe de l’élément sélectionné par l’utilisateur.  Par exemple, si la requête comprend une colonne nommée *Computer* et que la requête de navigation est *{selected item}* , une requête telle que *Computer="MyComputer"* est exécutée quand vous sélectionnez un ordinateur. Si la requête de navigation est *Type=Event {selected item}* , la requête *Type=Event Computer="MyComputer"* est exécutée. |
-| Affichage              | Vue à ouvrir lorsque vous sélectionnez un élément d’en-tête ou un élément dans une liste.  Sélectionnez le nom d’une vue dans votre espace de travail dans la zone **Nom de la vue**. |
+| Recherche dans les journaux        | Requête de journal à exécuter quand vous sélectionnez un élément dans une liste.  Tapez la requête dans la zone **Requête de navigation** .   Utilisez *{selected item}* pour inclure la syntaxe de l’élément sélectionné par l’utilisateur.  Par exemple, si la requête comprend une colonne nommée *Computer* et que la requête de navigation est *{selected item}* , une requête telle que *Computer="MyComputer"* est exécutée quand vous sélectionnez un ordinateur. Si la requête de navigation est *Type=Event {selected item}* , la requête *Type=Event Computer="MyComputer"* est exécutée. |
+| Affichage              | Vue à ouvrir lorsque vous sélectionnez un élément d’en-tête ou un élément dans une liste.  Sélectionnez le nom d’une vue dans votre espace de travail dans la zone **Nom de la vue** . |
 
 
 
@@ -345,7 +345,7 @@ Les seuils vous permettent d’afficher une icône de couleur en regard de chaqu
 
 Lorsque vous activez des seuils pour une partie, vous devez spécifier un ou plusieurs seuils. Si la valeur d’un élément est supérieure à une valeur de seuil et inférieure à la valeur de seuil suivante, la couleur de cette valeur est utilisée. Si l’élément est supérieur à la valeur de seuil la plus élevée, une autre couleur est utilisée. 
 
-Chaque ensemble de seuils a un seuil avec la valeur **par défaut**. Il s’agit de la couleur définie si aucune autre valeur n’est dépassée. Vous pouvez ajouter ou supprimer des seuils en sélectionnant le bouton **Ajouter** (+) ou **Supprimer** (x).
+Chaque ensemble de seuils a un seuil avec la valeur **par défaut** . Il s’agit de la couleur définie si aucune autre valeur n’est dépassée. Vous pouvez ajouter ou supprimer des seuils en sélectionnant le bouton **Ajouter** (+) ou **Supprimer** (x).
 
 Le tableau suivant décrit les paramètres pour les seuils :
 

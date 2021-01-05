@@ -3,20 +3,18 @@ title: Exporter et supprimer des données - LUIS
 titleSuffix: Azure Cognitive Services
 description: Vous avez le contrôle total sur l’affichage, l’exportation et la suppression de leurs données. Supprimer les données des clients pour garantir la confidentialité et la conformité.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 04/02/2019
-ms.author: diberry
-ms.openlocfilehash: 4e3e0d04b0086905b80e26fb4f838c36b5b5545e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/08/2020
+ms.openlocfilehash: cd9b353300b88c69efb0c458245a86963c579064
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273358"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97007736"
 ---
 # <a name="export-and-delete-your-customer-data-in-language-understanding-luis-in-cognitive-services"></a>Exporter et supprimer vos données client dans Language Understanding (LUIS) dans Cognitive Services
 
@@ -52,7 +50,7 @@ Les utilisateurs de LUIS contrôlent totalement l’affichage des données sur l
 
 ## <a name="location-of-active-learning"></a>Emplacement de l’apprentissage actif
 
-Pour activer l’[apprentissage actif](luis-how-to-review-endpoint-utterances.md#enable-active-learning), les énoncés enregistrés des utilisateurs, reçus au niveau des points de terminaison LUIS publiés, sont stockés dans les zones géographiques Azure suivantes :
+Pour activer l’[apprentissage actif](luis-how-to-review-endpoint-utterances.md#log-user-queries-to-enable-active-learning), les énoncés enregistrés des utilisateurs, reçus au niveau des points de terminaison LUIS publiés, sont stockés dans les zones géographiques Azure suivantes :
 
 * [Europe](#europe)
 * [Australie](#australia)

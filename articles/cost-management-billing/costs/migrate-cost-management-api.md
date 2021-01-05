@@ -3,16 +3,17 @@ title: Migrer un Contrat Entreprise vers des API Contrat client Microsoft – Az
 description: Cet article vous aide à comprendre les conséquences de la migration d’un Contrat Entreprise Microsoft vers un Contrat Client Microsoft.
 author: bandersmsft
 ms.author: banders
-ms.date: 02/12/2020
+ms.date: 07/24/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: micflan
-ms.openlocfilehash: 397e0a21b1ba11b3bdd74c2030ff358c1ce159d8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 811b2cb7fd9a4f664e7a643f5a8e192a51416888
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77201031"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88689097"
 ---
 # <a name="migrate-from-enterprise-agreement-to-microsoft-customer-agreement-apis"></a>Migrer depuis des API Enterprise Agreement vers des API Microsoft Customer Agreement
 

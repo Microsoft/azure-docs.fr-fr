@@ -1,27 +1,45 @@
 ---
 title: Authentification, requêtes et réponses
-description: Authentification auprès d’AD pour l’utilisation de Key Vault
+description: Découvrez comment Azure Key Vault utilise des requêtes et réponses au format JSON et l’authentification requise pour l’utilisation d’un coffre de clés.
 services: key-vault
-author: msmbaldwin
-manager: rkarlin
+author: amitbapat
+manager: msmbaldwin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
-ms.date: 01/07/2019
-ms.author: mbaldwin
-ms.openlocfilehash: 33e3bc13e67e268b82bf517033b4b1c7c51c361f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 09/15/2020
+ms.author: ambapat
+ms.openlocfilehash: 58616b647affd33e96357e556ab61f85d1c62129
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81427341"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96752275"
 ---
 # <a name="authentication-requests-and-responses"></a>Authentification, requêtes et réponses
 
+Azure Key Vault fournit deux types de conteneurs pour stocker et gérer les secrets de vos applications cloud :
+
+|Type de conteneur|Types d’objets pris en charge|Point de terminaison de plan de données|
+|--|--|--|
+| **Coffres**|<ul><li>Clés protégées par logiciel</li><li>Clés protégées par HSM (avec la référence (SKU) Premium)</li><li>Certificats</li><li>Clés de compte de stockage</li></ul> | https://{vault-name}.vault.azure.net
+|**HSM managé** |<ul><li>Clés protégées par HSM</li></ul> | https://{hsm-name}.managedhsm.azure.net
+
+Voici les suffixes d’URL utilisés pour accéder à chaque type d’objet
+
+|Type d'objet|URL suffix (Suffixe de l’URL)|
+|--|--|
+|Clés protégées par logiciel| /keys |
+|Clés protégées par HSM| /keys |
+|Secrets|/secrets|
+|Certificats| /certificates|
+|Clés de compte de stockage|/storageaccounts
+||
+
 Azure Key Vault prend en charge les requêtes et les réponses au format JSON. Les requêtes effectuées auprès d’Azure Key Vault sont dirigées vers une URL Azure Key Vault valide par le biais de la technologie HTTPS, avec des paramètres d’URL et des corps de requête et de réponse encodés au format JSON.
 
-Cette rubrique traite des caractéristiques du service Azure Key Vault. Pour obtenir des informations générales sur l’utilisation des interfaces REST Azure, y compris l’authentification/autorisation et l’acquisition de jetons d’accès, consultez les [informations de référence sur l’API REST Azure](https://docs.microsoft.com/rest/api/azure).
+Cette rubrique traite des caractéristiques du service Azure Key Vault. Pour obtenir des informations générales sur l’utilisation des interfaces REST Azure, y compris l’authentification/autorisation et l’acquisition de jetons d’accès, consultez les [informations de référence sur l’API REST Azure](/rest/api/azure).
 
 ## <a name="request-url"></a>URL de la demande  
  Les opérations de gestion des clés utilisent HTTP DELETE, GET, PATCH, PUT et HTTP POST, tandis que les opérations de chiffrement sur les objets clés existants utilisent HTTP POST. Les clients qui ne prennent pas en charge certains verbes HTTP peuvent également utiliser HTTP POST à l’aide de l’en-tête X-HTTP-REQUEST pour spécifier le verbe souhaité. Les requêtes ne nécessitant généralement pas de corps doivent inclure un corps vide lors de l’utilisation de HTTP POST, par exemple lors de l’utilisation de POST au lieu de DELETE.  
@@ -36,7 +54,9 @@ Cette rubrique traite des caractéristiques du service Azure Key Vault. Pour obt
 
 - Pour SIGNER un code de hachage utilisant une clé nommée TESTKEY dans Key Vault, utilisez : `POST /keys/TESTKEY/sign?api-version=<api_version> HTTP/1.1`  
 
-  L’autorité associée à la requête effectuée auprès de Key Vault se présente toujours comme suit : `https://{keyvault-name}.vault.azure.net/`  
+- L’autorité associée à la requête effectuée auprès de Key Vault se présente toujours comme suit : 
+  - Pour les coffres : `https://{keyvault-name}.vault.azure.net/`
+  - Pour les HSM managés : `https://{HSM-name}.managedhsm.azure.net/`
 
   Les clés sont toujours stockées sous le chemin d’accès/keys, tandis que les secrets sont toujours stockés sous le chemin d’accès /secrets.  
 
@@ -91,7 +111,7 @@ Cette rubrique traite des caractéristiques du service Azure Key Vault. Pour obt
 ## <a name="authentication"></a>Authentification  
  Toutes les requêtes auprès d’Azure Key Vault DOIVENT être authentifiées. Azure Key Vault prend en charge les jetons d’accès Azure Active Directory qui peuvent être obtenus à l’aide d’OAuth2 [[RFC6749](https://tools.ietf.org/html/rfc6749)]. 
  
- Pour plus d’informations sur l’enregistrement de votre application et l’authentification permettant d’utiliser Azure Key Vault, consultez [Register your client application with Azure AD (Inscrire votre application cliente avec Azure AD)](https://docs.microsoft.com/rest/api/azure/index#register-your-client-application-with-azure-ad).
+ Pour plus d’informations sur l’enregistrement de votre application et l’authentification permettant d’utiliser Azure Key Vault, consultez [Register your client application with Azure AD (Inscrire votre application cliente avec Azure AD)](/rest/api/azure/index#register-your-client-application-with-azure-ad).
  
  Les jetons d’accès doivent être envoyés au service avec l’en-tête d’autorisation HTTP :  
 
@@ -113,5 +133,7 @@ WWW-Authenticate: Bearer authorization="…", resource="…"
 
 -   authorization : adresse du service d’autorisation OAuth2 qui peut être utilisé afin d’obtenir un jeton d’accès pour la requête.  
 
--   resource : nom de la ressource (`https://vault.azure.net`) à utiliser dans la requête d'autorisation.  
+-   resource : nom de la ressource (`https://vault.azure.net`) à utiliser dans la requête d'autorisation.
 
+> [!NOTE]
+> Les clients du Kit de développement logiciel (SDK) Key Vault pour les secrets, les certificats et les clés dans le premier appel à Key Vault ne fournissent pas de jeton d’accès pour récupérer les informations du locataire. Cet appel est supposé recevoir une réponse HTTP 401 utilisant le client du SDK Key Vault où le coffre de clés montre à l’application l’en-tête WWW-Authenticate contenant la ressource et le locataire auquel il doit accéder et demander le jeton. Si tout est correctement configuré, le deuxième appel de l’application à Key Vault contiendra un jeton valide et réussira. 

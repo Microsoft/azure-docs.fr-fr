@@ -8,17 +8,17 @@ manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
 ms.author: kkrishna
 ms.reviewer: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 8bdc7e6e3795719128a8ecfb1e8bc97c1a9a08c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a9b0090fa13a6d2f7a837a4f5ffee37d70893318
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81759029"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88116901"
 ---
 # <a name="how-to-restrict-your-azure-ad-app-to-a-set-of-users-in-an-azure-ad-tenant"></a>Procédure : Limiter votre application Azure AD à un ensemble d’utilisateurs dans un locataire Azure AD
 
@@ -26,7 +26,7 @@ Les applications inscrites dans un locataire Azure Active Directory (Azure AD) s
 
 De même, avec une application [mutualisée](howto-convert-app-to-be-multi-tenant.md), tous les utilisateurs dans le locataire Azure AD où cette application est approvisionnée sont en mesure d’accéder à cette application après avoir réussi à s’authentifier auprès de leur locataire respectif.
 
-Les développeurs et les administrateurs de locataires ont souvent des exigences impliquant de limiter une application à un certain ensemble d’utilisateurs. Pour ce faire, les développeurs peuvent utiliser des modèles d’autorisation courants comme le contrôle d’accès en fonction du rôle, mais cette approche nécessite une quantité de travail importante.
+Les développeurs et les administrateurs de locataires ont souvent des exigences impliquant de limiter une application à un certain ensemble d’utilisateurs. Pour ce faire, les développeurs peuvent utiliser des modèles d’autorisation courants comme le contrôle d’accès en fonction du rôle Azure (Azure RBAC), mais cette approche nécessite une quantité de travail importante.
 
 Les développeurs et administrateurs de locataires peuvent également limiter une application à un ensemble spécifique d’utilisateurs ou de groupes de sécurité dans le locataire grâce à la fonctionnalité intégrée d’Azure AD.
 
@@ -39,7 +39,7 @@ La possibilité de limiter une application à un ensemble spécifique d’utilis
 - applications créées directement sur la plateforme d’application Azure AD qui utilisent l’authentification OAuth 2.0/OpenID Connect après qu’un utilisateur ou administrateur a donné son consentement à cette application.
 
      > [!NOTE]
-     > Cette fonctionnalité est disponible pour les applications professionnelles et API web/applications web uniquement. Les applications qui sont inscrites en tant qu’applications [natives](quickstart-v1-integrate-apps-with-azure-ad.md) ne peuvent pas être limitées à un ensemble d’utilisateurs ou de groupes de sécurité dans le locataire.
+     > Cette fonctionnalité est disponible pour les applications professionnelles et API web/applications web uniquement. Les applications qui sont inscrites en tant qu’applications [natives](./quickstart-register-app.md) ne peuvent pas être limitées à un ensemble d’utilisateurs ou de groupes de sécurité dans le locataire.
 
 ## <a name="update-the-app-to-enable-user-assignment"></a>Mettre à jour l’application pour permettre l’affectation d’utilisateurs
 
@@ -95,8 +95,8 @@ Une fois que vous avez configuré votre application pour activer l’affectation
 
 ## <a name="more-information"></a>Informations complémentaires
 
-- [Procédure : Ajouter des rôles d’application dans votre application](https://docs.microsoft.com/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps)
+- [Procédure : Ajouter des rôles d’application dans votre application](./howto-add-app-roles-in-azure-ad-apps.md)
 - [Ajouter une autorisation à une application web ASP.NET Core à l'aide de rôles d'application et de revendications de rôles](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/5-WebApp-AuthZ/5-1-Roles)
 - [Utilisation de groupes de sécurité et de rôles d’Application dans vos applications (vidéo)](https://www.youtube.com/watch?v=V8VUPixLSiM)
 - [Azure Active Directory, désormais avec les revendications de groupe et les rôles d’application](https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/Azure-Active-Directory-now-with-Group-Claims-and-Application/ba-p/243862)
-- [Manifeste d’application Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/reference-app-manifest)
+- [Manifeste d’application Azure Active Directory](./reference-app-manifest.md)

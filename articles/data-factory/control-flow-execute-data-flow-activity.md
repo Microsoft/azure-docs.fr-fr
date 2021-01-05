@@ -8,13 +8,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.author: makromer
-ms.date: 04/30/2020
-ms.openlocfilehash: a2e80b9320509144456663672ac5ae03f522459a
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.date: 11/24/2020
+ms.openlocfilehash: c436d75384c527ba7666cd2e6e780b9d8a93eae2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735383"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003942"
 ---
 # <a name="data-flow-activity-in-azure-data-factory"></a>Activité de flux de données dans Azure Data Factory
 
@@ -37,6 +37,7 @@ Utilisez l’activité de flux de données pour transformer et déplacer des don
          "coreCount": 8,
          "computeType": "General"
       },
+      "traceLevel": "Fine",
       "staging": {
           "linkedService": {
               "referenceName": "MyStagingLinkedService",
@@ -57,11 +58,12 @@ Utilisez l’activité de flux de données pour transformer et déplacer des don
 Propriété | Description | Valeurs autorisées | Obligatoire
 -------- | ----------- | -------------- | --------
 dataflow | Référence au flux de données en cours d’exécution | DataFlowReference | Oui
-integrationRuntime | L’environnement de calcul sur lequel le flux de données s’exécute. S’il n’est pas spécifié, le runtime d’intégration Azure à résolution automatique est utilisé. Seuls les runtimes d’intégration de la résolution automatique des régions sont pris en charge | IntegrationRuntimeReference | Non 
-compute.coreCount | Nombre de cœurs utilisés dans le cluster Spark. Ne peut être spécifié que si le runtime d’intégration Azure à résolution automatique est utilisé | 8, 16, 32, 48, 80, 144, 272 | Non 
-compute.computeType | Type de calcul utilisé dans le cluster Spark. Ne peut être spécifié que si le runtime d’intégration Azure à résolution automatique est utilisé | « General », « ComputeOptimized », « MemoryOptimized » | Non 
-staging.linkedService | Si vous utilisez une source ou un récepteur SQL DW, le compte de stockage utilisé pour la préproduction de PolyBase | LinkedServiceReference | Uniquement si le flux de données lit ou écrit dans un entrepôt de données SQL DW
-staging.folderPath | Si vous utilisez une source ou un récepteur SQL DW, chemin du dossier dans le compte de stockage blob utilisé pour la préproduction de PolyBase | String | Uniquement si le flux de données lit ou écrit dans un entrepôt de données SQL DW
+integrationRuntime | L’environnement de calcul sur lequel le flux de données s’exécute. S’il n’est pas spécifié, le runtime d’intégration Azure à résolution automatique est utilisé. | IntegrationRuntimeReference | Non
+compute.coreCount | Nombre de cœurs utilisés dans le cluster Spark. Ne peut être spécifié que si le runtime d’intégration Azure à résolution automatique est utilisé | 8, 16, 32, 48, 80, 144, 272 | Non
+compute.computeType | Type de calcul utilisé dans le cluster Spark. Ne peut être spécifié que si le runtime d’intégration Azure à résolution automatique est utilisé | « General », « ComputeOptimized », « MemoryOptimized » | Non
+staging.linkedService | Si vous utilisez une source ou un récepteur Azure Synapse Analytics, spécifiez le compte de stockage utilisé pour la préproduction PolyBase.<br/><br/>Si votre Stockage Azure est configuré avec un point de terminaison de service de type réseau virtuel, vous devez utiliser l’authentification par identité managée et activer « Autoriser le service Microsoft approuvé » sur le compte de stockage. Consultez [Impact du recours à des points de terminaison de service de type réseau virtuel avec le Stockage Azure](../azure-sql/database/vnet-service-endpoint-rule-overview.md#impact-of-using-vnet-service-endpoints-with-azure-storage). Découvrez également les configurations nécessaires pour le [Stockage Blob Azure](connector-azure-blob-storage.md#managed-identity) et [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md#managed-identity).<br/> | LinkedServiceReference | Uniquement si le flux de données lit ou écrit dans Azure Synapse Analytics
+staging.folderPath | Si vous utilisez une source ou un récepteur Azure Synapse Analytics, chemin du dossier dans le compte de stockage blob utilisé pour la préproduction PolyBase | String | Uniquement si le flux de données lit ou écrit dans Azure Synapse Analytics
+traceLevel | Définissez le niveau de journalisation de votre exécution d’activité de flux de données | Fine, grossière, aucune | Non
 
 ![Exécuter un flux de données](media/data-flow/activity-data-flow.png "Exécuter un flux de données")
 
@@ -75,7 +77,7 @@ Les propriétés Nombre de cœurs et Type de capacité de calcul peuvent être d
 
 ### <a name="data-flow-integration-runtime"></a>Runtime d’intégration de flux de données
 
-Choisissez le runtime d’intégration à utiliser pour l’exécution de votre activité de flux de données. Par défaut, Data Factory utilise le runtime d’intégration Azure à résolution automatique avec quatre cœurs worker et aucune durée de vie (TTL). Ce runtime d’intégration a un type de calcul à usage général et s’exécute dans la même région que votre fabrique. Vous pouvez créer votre propre runtime d’intégration Azure qui définit des régions spécifiques, un type de calcul, un nombre de cœurs et une durée de vie pour l’exécution de votre activité de flux de données. À ce stade, seuls les runtimes d’intégration de la résolution automatique des régions sont pris en charge dans l’activité de flux de données.
+Choisissez le runtime d’intégration à utiliser pour l’exécution de votre activité de flux de données. Par défaut, Data Factory utilise le runtime d’intégration Azure à résolution automatique avec quatre cœurs worker et aucune durée de vie (TTL). Ce runtime d’intégration a un type de calcul à usage général et s’exécute dans la même région que votre fabrique. Vous pouvez créer votre propre runtime d’intégration Azure qui définit des régions spécifiques, un type de calcul, un nombre de cœurs et une durée de vie pour l’exécution de votre activité de flux de données.
 
 Pour les exécutions de pipeline, le cluster est un cluster de travail, dont le démarrage prend quelques minutes avant que l’exécution commence. Si aucune durée de vie n’est spécifiée, ce temps de démarrage est nécessaire sur chaque exécution de pipeline. Si vous spécifiez une durée de vie, un pool de clusters à chaud reste actif pendant la durée spécifiée après la dernière exécution, ce qui donne lieu à des temps de démarrage plus courts. Par exemple, si vous avez une durée de vie de 60 minutes et que vous exécutez un flux de données une fois par heure, le pool de clusters reste actif. Pour plus d’informations, consultez [Runtime d’intégration Azure](concepts-integration-runtime.md).
 
@@ -86,7 +88,13 @@ Pour les exécutions de pipeline, le cluster est un cluster de travail, dont le 
 
 ### <a name="polybase"></a>PolyBase
 
-Si vous utilisez Azure SQL Data Warehouse comme récepteur ou source, vous devez choisir un emplacement de préproduction pour le chargement par lots PolyBase. PolyBase permet d’effectuer des chargements par lots en bloc au lieu de charger les données ligne par ligne. PolyBase réduit considérablement le temps de chargement dans l’instance SQL DW.
+Si vous utilisez Azure Synapse Analytics (anciennement SQL Data Warehouse) comme récepteur ou source, vous devez choisir un emplacement de préproduction pour le chargement par lots PolyBase. PolyBase permet d’effectuer des chargements par lots en bloc au lieu de charger les données ligne par ligne. PolyBase réduit considérablement le temps de chargement dans Azure Synapse Analytics.
+
+## <a name="logging-level"></a>Niveau de journalisation
+
+Si vous n’avez pas besoin que chaque exécution du pipeline de vos activités de flux de données journalise entièrement tous les journaux de télémétrie détaillés, vous pouvez définir le niveau de journalisation sur « De base » ou « Aucun ». Lors de l’exécution de vos flux de données en mode « Verbose » (par défaut), vous demandez à ADF d’enregistrer entièrement l’activité à chaque niveau de partition individuel au cours de la transformation des données. Cette opération peut s’avérer coûteuse et dès lors, n’activez l’option Verbose que lorsque la résolution des problèmes permet d’améliorer les performances globales du pipeline et du flux de données. Le mode « De base » ne consigne que les durées de transformation, tandis que le mode « Aucun » ne fournit qu’un résumé des durées.
+
+![Niveau de journalisation](media/data-flow/logging.png "Définir le niveau de journalisation")
 
 ## <a name="parameterizing-data-flows"></a>Paramétrage de flux de données
 

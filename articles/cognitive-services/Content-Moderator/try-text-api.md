@@ -10,12 +10,12 @@ ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 05/29/2019
-ms.openlocfilehash: ad365c2d4c171105d8dec89d818ef481361d1ff8
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 664c4289cbfa1f6ce2fce9f9f83b0240bd2d592c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81272591"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001998"
 ---
 # <a name="moderate-text-from-the-api-console"></a>Modérer du texte à partir de la console d’API
 
@@ -23,7 +23,7 @@ Utilisez l’[API Modération de texte](https://westus.dev.cognitive.microsoft.c
 
 ## <a name="get-your-api-key"></a>Obtenir votre clé API
 
-Avant de pouvoir tester l’API dans la console en ligne, vous avez besoin de votre clé d’abonnement. Elle se trouve sous l’onglet **Paramètres**, dans la zone **Ocp-Apim-Subscription-Key**. Pour plus d’informations, consultez la [vue d’ensemble ](overview.md) de Content Moderator.
+Avant de pouvoir tester l’API dans la console en ligne, vous avez besoin de votre clé d’abonnement. Elle se trouve sous l’onglet **Paramètres**, dans la zone **Ocp-Apim-Subscription-Key**. Pour plus d’informations, consultez [What is Content Moderator?](overview.md) (Présentation de Content Moderator).
 
 ## <a name="navigate-to-the-api-reference"></a>Accéder aux informations de référence sur l’API
 
@@ -137,4 +137,4 @@ Pour obtenir une explication détaillée de toutes les sections de la réponse J
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Utilisez l’API REST dans votre code ou suivez le [Démarrage rapide du kit SDK .NET](dotnet-sdk-quickstart.md) pour l’intégrer à votre application.
+Utilisez l’API REST dans votre code ou suivez le [Démarrage rapide du kit SDK .NET](./client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp) pour l’intégrer à votre application.

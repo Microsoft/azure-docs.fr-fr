@@ -10,11 +10,11 @@ ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
 ms.openlocfilehash: 09957461fd92114d1181a570550ee1a189edd8ea
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80876415"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009864"
 ---
 ## <a name="create-an-azure-container-instance-resource"></a>Créer une ressource d’instance de conteneur Azure
 
@@ -24,14 +24,14 @@ ms.locfileid: "80876415"
 
     |Paramètre|Valeur|
     |--|--|
-    |Subscription|Sélectionnez votre abonnement.|
+    |Abonnement|Sélectionnez votre abonnement.|
     |Resource group|Sélectionnez le groupe de ressources disponible ou créez-en un tel que `cognitive-services`.|
     |Nom du conteneur|Entrez un nom tel que `cognitive-container-instance`. Ce nom doit être en minuscules.|
-    |Location|Sélectionnez une région pour le déploiement.|
+    |Emplacement|Sélectionnez une région pour le déploiement.|
     |Type d’image|Si votre image de conteneur est stockée dans un registre de conteneurs qui ne nécessite pas d’informations d’identification, sélectionnez `Public`. Si l’accès à votre image conteneur nécessite des informations d’identification, choisissez `Private`. Reportez-vous [aux référentiels de conteneurs et aux images conteneur](../../cognitive-services-container-support.md#container-repositories-and-images) pour savoir si l’image conteneur est `Public` ou `Private` (« Préversion publique »). |
     |Nom de l’image|Entrez l’emplacement du conteneur Cognitive Services. L’emplacement est utilisé comme argument de la commande `docker pull`. Reportez-vous à [Référentiels et images de conteneur](../../cognitive-services-container-support.md#container-repositories-and-images) pour les noms d’image disponibles et leur référentiel correspondant.<br><br>Le nom d’image doit être complet, c’est-à-dire se composer de trois parties. Tout d’abord, le registre de conteneurs, puis le référentiel et enfin le nom de l’image : `<container-registry>/<repository>/<image-name>`.<br><br>Voici un exemple, `mcr.microsoft.com/azure-cognitive-services/keyphrase` représenterait l’image Extraction de phrases clés dans le registre de conteneurs Microsoft sous le référentiel Azure Cognitive Services. Un autre exemple est `containerpreview.azurecr.io/microsoft/cognitive-services-speech-to-text` qui représenterait l’image Reconnaissance vocale dans le référentiel Microsoft du registre des conteneurs en préversion. |
     |Type de système d’exploitation|`Linux`|
-    |Size|Appliquez les suggestions de taille pour votre conteneur Cognitive Services :<br>2 cœurs de processeur<br>4 Go
+    |Taille|Appliquez les suggestions de taille pour votre conteneur Cognitive Services :<br>2 cœurs de processeur<br>4 Go
 
 3. Sur l’onglet **Mise en réseau**, entrez les informations suivantes :
 

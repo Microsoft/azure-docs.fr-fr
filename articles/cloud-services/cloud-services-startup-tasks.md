@@ -7,12 +7,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/05/2017
 ms.author: tagore
-ms.openlocfilehash: fa48953e5e86ffa758fe556b7fb1072be9d74647
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2417389de98f9998c189e7cbbbcdae77fbb8840
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75360308"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020702"
 ---
 # <a name="how-to-configure-and-run-startup-tasks-for-a-cloud-service"></a>Comment configurer et exécuter des tâches de démarrage pour un service cloud
 Vous pouvez utiliser des tâches de démarrage pour exécuter des opérations avant le démarrage d’un rôle. Parmi les opérations que vous pouvez effectuer figurent l’installation d’un composant, l’enregistrement de composants COM, la définition des clés du Registre ou le démarrage d’un processus de longue durée.
@@ -31,7 +31,7 @@ Votre tâche de démarrage peut enregistrer des informations et des erreurs dans
 
 Les tâches de démarrage peuvent également être exécutées plusieurs fois entre des redémarrages. Par exemple, la tâche de démarrage est exécutée chaque fois que le rôle est recyclé, et les recyclages de rôle n’incluent pas toujours un redémarrage. Les tâches de démarrage doivent être écrites de façon à pouvoir s’exécuter de façon répétée sans problèmes.
 
-Les tâches de démarrage doivent s’arrêter avec un **errorlevel** (ou code de sortie) égal à zéro pour que le processus de démarrage soit terminé. Si une tâche de démarrage se termine par un **errorlevel**différent de zéro, le rôle ne démarre pas.
+Les tâches de démarrage doivent s’arrêter avec un **errorlevel** (ou code de sortie) égal à zéro pour que le processus de démarrage soit terminé. Si une tâche de démarrage se termine par un **errorlevel** différent de zéro, le rôle ne démarre pas.
 
 ## <a name="role-startup-order"></a>Ordre de démarrage des rôles
 Les informations suivantes indiquent la procédure de démarrage de rôle dans Azure :
@@ -154,13 +154,10 @@ Découvrez comment effectuer certaines [tâches de démarrage courantes](cloud-s
 [Créez un package](cloud-services-model-and-package.md) de votre service cloud.  
 
 [ServiceDefinition.csdef]: cloud-services-model-and-package.md#csdef
-[Tâche]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Task
-[Startup]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Startup
-[Runtime]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Runtime
-[Environment]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Environment
-[Variable]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Variable
-[RoleInstanceValue]: https://msdn.microsoft.com/library/azure/gg557552.aspx#RoleInstanceValue
-[RoleEnvironment]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.aspx
-
-
-
+[Tâche]: /previous-versions/azure/reference/gg557552(v=azure.100)#Task
+[Startup]: /previous-versions/azure/reference/gg557552(v=azure.100)#Startup
+[Runtime]: /previous-versions/azure/reference/gg557552(v=azure.100)#Runtime
+[Environment]: /previous-versions/azure/reference/gg557552(v=azure.100)#Environment
+[Variable]: /previous-versions/azure/reference/gg557552(v=azure.100)#Variable
+[RoleInstanceValue]: /previous-versions/azure/reference/gg557552(v=azure.100)#RoleInstanceValue
+[RoleEnvironment]: /previous-versions/azure/reference/ee773173(v=azure.100)

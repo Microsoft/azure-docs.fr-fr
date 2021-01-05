@@ -10,13 +10,13 @@ ms.topic: conceptual
 ms.workload: identity
 ms.date: 10/30/2019
 ms.author: jmprieur
-ms.custom: aaddev
-ms.openlocfilehash: d07add7950da531330fe9f64629299cef9fad1ac
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: 27c9f2ab8b02c96d016fea66acd2b3840d79d09d
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734584"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444121"
 ---
 # <a name="desktop-app-that-calls-web-apis-code-configuration"></a>Application de bureau qui appelle des API web : Configuration de code
 
@@ -107,8 +107,8 @@ app = PublicClientApplicationBuilder.Create(clientId)
 
 Pour en savoir plus sur la configuration d'une application de bureau MSAL.NET :
 
-- Pour obtenir la liste de tous les modificateurs disponibles sur `PublicClientApplicationBuilder`, consultez [PublicClientApplicationBuilder](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder#methods) dans la documentation de référence.
-- Pour obtenir la description de toutes les options exposées dans `PublicClientApplicationOptions`, consultez [PublicClientApplicationOptions](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationoptions) dans la documentation de référence.
+- Pour obtenir la liste de tous les modificateurs disponibles sur `PublicClientApplicationBuilder`, consultez [PublicClientApplicationBuilder](/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder#methods) dans la documentation de référence.
+- Pour obtenir la description de toutes les options exposées dans `PublicClientApplicationOptions`, consultez [PublicClientApplicationOptions](/dotnet/api/microsoft.identity.client.publicclientapplicationoptions) dans la documentation de référence.
 
 ### <a name="complete-example-with-configuration-options"></a>Exemple complet avec options de configuration
 
@@ -261,5 +261,4 @@ if let application = try? MSALPublicClientApplication(configuration: config) { /
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Acquérir un jeton pour une application de bureau](scenario-desktop-acquire-token.md)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application de bureau](scenario-desktop-acquire-token.md).

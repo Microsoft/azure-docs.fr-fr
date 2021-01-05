@@ -10,17 +10,18 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/12/2020
-ms.openlocfilehash: 61bb8fe950de8cd9be91bc76bd24aa0151f3fb79
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/31/2020
+ms.openlocfilehash: e788fc5ff95f8c3dac1e90956908cb2ef950dd4b
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81415413"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347351"
 ---
 # <a name="copy-data-to-or-from-azure-data-lake-storage-gen1-using-azure-data-factory"></a>Copier des données vers ou depuis Azure Data Lake Storage Gen1 à l’aide d’Azure Data Factory
 
 > [!div class="op_single_selector" title1="Sélectionnez la version Azure Data Factory que vous utilisez :"]
+>
 > * [Version 1](v1/data-factory-azure-datalake-connector.md)
 > * [Version actuelle](connector-azure-data-lake-store.md)
 
@@ -72,7 +73,7 @@ Les propriétés suivantes sont prises en charge pour le service lié Azure Data
 
 Pour l’authentification de principal de service, effectuez les étapes suivantes.
 
-1. Inscrivez une entité d’application dans Azure Active Directory et donnez-lui accès à Data Lake Store. Consultez la page [Authentification de service à service](../data-lake-store/data-lake-store-authenticate-using-active-directory.md) pour des instructions détaillées. Prenez note des valeurs suivantes, qui vous permettent de définir le service lié :
+1. Inscrivez une entité d’application dans Azure Active Directory et donnez-lui accès à Data Lake Store. Consultez la page [Authentification de service à service](../data-lake-store/data-lake-store-service-to-service-authenticate-using-active-directory.md) pour des instructions détaillées. Prenez note des valeurs suivantes, qui vous permettent de définir le service lié :
 
     - ID de l'application
     - Clé de l'application
@@ -81,7 +82,7 @@ Pour l’authentification de principal de service, effectuez les étapes suivant
 2. Accordez l’autorisation nécessaire au principal de service. Pour obtenir des exemples sur le fonctionnement des autorisations dans Data Lake Storage Gen1, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen1](../data-lake-store/data-lake-store-access-control.md#common-scenarios-related-to-permissions).
 
     - **En tant que source** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Lecture** pour les fichiers à copier. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**. Il n’existe aucune exigence sur le contrôle d’accès au niveau du compte (IAM).
-    - **En tant que récepteur** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Écriture** pour le dossier récepteur. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**. Si vous utilisez le runtime d’intégration Azure pour effectuer la copie (la source et le récepteur sont tous les deux dans le cloud), dans IAM, attribuez au moins le rôle **Lecteur** pour permettre à Data Factory de détecter la région pour Data Lake Store. Pour éviter ce rôle IAM, vous devez explicitement [créer un runtime d’intégration Azure](create-azure-integration-runtime.md#create-azure-ir) avec l’emplacement de Data Lake Store. Par exemple, si votre Data Lake Store se trouve dans la région Europe Ouest, créez un runtime d’intégration Azure dont l’emplacement est défini sur « Europe Ouest ». Associez-les dans le service lié Data Lake Store comme indiqué dans l’exemple suivant.
+    - **En tant que récepteur** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Écriture** pour le dossier récepteur. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**.
 
 Les propriétés prises en charge sont les suivantes :
 
@@ -90,6 +91,7 @@ Les propriétés prises en charge sont les suivantes :
 | servicePrincipalId | Spécifiez l’ID client de l’application. | Oui |
 | servicePrincipalKey | Spécifiez la clé de l’application. Marquez ce champ en tant que `SecureString` afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 | tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. Vous pouvez le récupérer en pointant la souris dans le coin supérieur droit du portail Azure. | Oui |
+| azureCloudType | Pour l’authentification du principal du service, spécifiez le type d’environnement cloud Azure auprès duquel votre application Azure Active Directory est inscrite. <br/> Les valeurs autorisées sont **AzurePublic**, **AzureChina**, **AzureUsGovernment** et **AzureGermany**. Par défaut, l’environnement cloud de la fabrique de données est utilisé. | Non |
 
 **Exemple :**
 
@@ -128,7 +130,7 @@ Pour utiliser les identités managées afin d’authentifier les ressources Azur
 2. Accordez à l’identité managée l’accès à Data Lake Store. Pour obtenir des exemples sur le fonctionnement des autorisations dans Data Lake Storage Gen1, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen1](../data-lake-store/data-lake-store-access-control.md#common-scenarios-related-to-permissions).
 
     - **En tant que source** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Lecture** pour les fichiers à copier. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**. Il n’existe aucune exigence sur le contrôle d’accès au niveau du compte (IAM).
-    - **En tant que récepteur** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Écriture** pour le dossier récepteur. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**. Si vous utilisez le runtime d’intégration Azure pour effectuer la copie (la source et le récepteur sont tous les deux dans le cloud), dans IAM, attribuez au moins le rôle **Lecteur** pour permettre à Data Factory de détecter la région pour Data Lake Store. Pour éviter ce rôle IAM, vous devez explicitement [créer un runtime d’intégration Azure](create-azure-integration-runtime.md#create-azure-ir) avec l’emplacement de Data Lake Store. Associez-les dans le service lié Data Lake Store comme indiqué dans l’exemple suivant.
+    - **En tant que récepteur** : Dans l’**Explorateur de données** > **Accès**, accordez au moins l’autorisation **Exécution** à l’ensemble des dossiers en amont (y compris le dossier racine) et l’autorisation **Écriture** pour le dossier récepteur. Vous pouvez choisir d’ajouter l’autorisation à **ce dossier et tous ses enfants** pour les récurrences et de l’ajouter en tant qu’**autorisation d’accès et entrée d’autorisation par défaut**.
 
 Dans Azure Data Factory, vous n’avez pas besoin de spécifier des propriétés en plus des informations générales Data Lake Store du service lié.
 
@@ -202,15 +204,24 @@ Pour obtenir la liste complète des sections et propriétés disponibles pour la
 
 Les propriétés suivantes sont prises en charge pour Azure Data Lake Store Gen1 dans les paramètres `storeSettings` de la source de copie basée sur le format :
 
-| Propriété                 | Description                                                  | Obligatoire                                      |
-| ------------------------ | ------------------------------------------------------------ | --------------------------------------------- |
-| type                     | La propriété de type sous `storeSettings` doit être définie sur **AzureDataLakeStoreReadSettings**. | Oui                                           |
-| recursive                | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. Les valeurs autorisées sont **true** (par défaut) et **false**. | Non                                            |
-| wildcardFolderPath       | Chemin d’accès du dossier avec des caractères génériques pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont les suivants : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère). Utilisez `^` comme caractère d’échappement si le nom réel de votre dossier contient un caractère générique ou ce caractère d’échappement. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
-| wildcardFileName         | Nom du fichier avec des caractères génériques situé dans le chemin d’accès folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont les suivants : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère). Utilisez `^` comme caractère d’échappement si le nom réel de votre dossier contient un caractère générique ou ce caractère d’échappement. Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui, si `fileName` n’est pas spécifié dans le jeu de données. |
-| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut Dernière modification. Les fichiers sont sélectionnés si leur heure de dernière modification se trouve dans l’intervalle de temps situé entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent être NULL, ce qui signifie qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données. Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés. Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés. | Non                                            |
-| modifiedDatetimeEnd      | Identique à ce qui précède.                                               | Non                                            |
-| maxConcurrentConnections | Nombre de connexions simultanées au magasin de stockage. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non                                            |
+| Propriété                 | Description                                                  | Obligatoire                                     |
+| ------------------------ | ------------------------------------------------------------ | -------------------------------------------- |
+| type                     | La propriété de type sous `storeSettings` doit être définie sur **AzureDataLakeStoreReadSettings**. | Oui                                          |
+| **_Rechercher les fichiers à copier :_* _ |  |  |
+| OPTION 1 : chemin d’accès statique<br> | Copiez à partir du chemin d’accès au dossier/fichier spécifié dans le jeu de données. Si vous souhaitez copier tous les fichiers d’un dossier, spécifiez en plus `wildcardFileName` comme `_`. |  |
+| OPTION 2 : plage de noms<br>- listAfter | Récupérez les dossiers/fichiers dont le nom se trouve après cette valeur par ordre alphabétique (exclusif). Elle utilise le filtre côté service pour ADLS Gen1, qui offre de meilleures performances qu’un filtre de caractères génériques. <br/>Data Factory applique ce filtre au chemin défini dans le jeu de données ; seul un niveau d’entité est pris en charge. Pour voir d’autres exemples, consultez [Exemples de filtres de plages de noms](#name-range-filter-examples). | Non |
+| OPTION 2 : plage de noms<br/>- listBefore | Récupérez les dossiers/fichiers dont le nom se trouve avant cette valeur par ordre alphabétique (inclusif). Elle utilise le filtre côté service pour ADLS Gen1, qui offre de meilleures performances qu’un filtre de caractères génériques.<br>Data Factory applique ce filtre au chemin défini dans le jeu de données ; seul un niveau d’entité est pris en charge. Pour voir d’autres exemples, consultez [Exemples de filtres de plages de noms](#name-range-filter-examples). | Non |
+| OPTION 3 : caractère générique<br>- wildcardFolderPath | Chemin d’accès du dossier avec des caractères génériques pour filtrer les dossiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de dossier contient effectivement ce caractère d’échappement ou générique. <br>Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Non                                            |
+| OPTION 3 : caractère générique<br>- wildcardFileName | Nom du fichier avec des caractères génériques situé dans le chemin d’accès folderPath/wildcardFolderPath donné pour filtrer les fichiers sources. <br>Les caractères génériques autorisés sont : `*` (correspond à zéro ou plusieurs caractères) et `?` (correspond à zéro ou un caractère) ; utilisez `^` en guise d’échappement si votre nom de fichier contient effectivement ce caractère d’échappement ou générique.  Consultez d’autres exemples dans les [exemples de filtre de dossier et de fichier](#folder-and-file-filter-examples). | Oui |
+| OPTION 4 : liste de fichiers<br>- fileListPath | Indique de copier un ensemble de fichiers donné. Pointez vers un fichier texte contenant la liste des fichiers que vous voulez copier, un fichier par ligne indiquant le chemin d’accès relatif configuré dans le jeu de données.<br/>Si vous utilisez cette option, ne spécifiez pas de nom de fichier dans le jeu de données. Pour plus d’exemples, consultez [Exemples de listes de fichiers](#file-list-examples). |Non |
+| ***Paramètres supplémentaires :** _ |  | |
+| recursive | Indique si les données sont lues de manière récursive à partir des sous-dossiers ou uniquement du dossier spécifié. Notez que lorsque l’option « recursive » est définie sur true et que le récepteur est un magasin basé sur un fichier, un dossier vide ou un sous-dossier n’est pas copié ou créé sur le récepteur. <br>Les valeurs autorisées sont _ *true** (par défaut) et **false**.<br>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. |Non |
+| deleteFilesAfterCompletion | Indique si les fichiers binaires seront supprimés du magasin source après leur déplacement vers le magasin de destination. La suppression se faisant par fichier, lorsque l’activité de copie échoue, vous pouvez constater que certains fichiers ont déjà été copiés vers la destination et supprimés de la source, tandis que d’autres restent dans le magasin source. <br/>Cette propriété est valide uniquement dans un scénario de copie de fichiers binaires. La valeur par défaut est false. |Non |
+| modifiedDatetimeStart    | Filtre de fichiers en fonction de l’attribut : Dernière modification. <br>Les fichiers seront sélectionnés si l’heure de leur dernière modification d’inscrit dans l’intervalle de temps compris entre `modifiedDatetimeStart` et `modifiedDatetimeEnd`. L’heure est appliquée au fuseau horaire UTC au format « 2018-12-01T05:00:00Z ». <br> Les propriétés peuvent avoir la valeur Null, ce qui a pour effet qu’aucun filtre d’attribut de fichier n’est appliqué au jeu de données.  Lorsque `modifiedDatetimeStart` a une valeur DateHeure, mais que `modifiedDatetimeEnd` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est supérieur ou égal à la valeur DateHeure sont sélectionnés.  Lorsque `modifiedDatetimeEnd` a une valeur DateHeure, mais que `modifiedDatetimeStart` est NULL, cela signifie que les fichiers dont l’attribut de dernière modification est inférieur à la valeur DateHeure sont sélectionnés.<br/>Cette propriété ne s’applique pas lorsque vous configurez `fileListPath`. | Non                                            |
+| modifiedDatetimeEnd      | Identique à ce qui précède.                                               | Non                                           |
+| enablePartitionDiscovery | Pour les fichiers partitionnés, spécifiez s’il faut analyser les partitions à partir du chemin d’accès au fichier et les ajouter en tant que colonnes sources supplémentaires.<br/>Les valeurs autorisées sont **false** (par défaut) et **true**. | Non                                            |
+| partitionRootPath | Lorsque la découverte de partition est activée, spécifiez le chemin d’accès racine absolu pour pouvoir lire les dossiers partitionnés en tant que colonnes de données.<br/><br/>S’il n’est pas spécifié, par défaut :<br/>– Quand vous utilisez le chemin d’accès du fichier dans le jeu de données ou la liste des fichiers sur la source, le chemin racine de la partition est le chemin d’accès configuré dans le jeu de données.<br/>– Quand vous utilisez le filtre de dossiers de caractères génériques, le chemin d’accès racine de la partition est le sous-chemin d’accès avant le premier caractère générique.<br/><br/>Par exemple, en supposant que vous configurez le chemin d’accès dans le jeu de données en tant que « root/folder/year=2020/month=08/day=27 » :<br/>– Si vous spécifiez le chemin d’accès racine de la partition en tant que « root/folder/year=2020 », l’activité de copie génère deux colonnes supplémentaires, `month` et `day`, ayant respectivement la valeur « 08 » et « 27 », en plus des colonnes contenues dans les fichiers.<br/>– Si le chemin d’accès racine de la partition n’est pas spécifié, aucune colonne supplémentaire n’est générée. | Non                                            |
+| maxConcurrentConnections | Nombre de connexions simultanées au magasin de stockage. Spécifiez-le uniquement lorsque vous souhaitez limiter les connexions simultanées au magasin de données. | Non                                           |
 
 **Exemple :**
 
@@ -255,7 +266,7 @@ Les propriétés suivantes sont prises en charge pour Azure Data Lake Store Gen1
 
 ### <a name="azure-data-lake-store-as-sink"></a>Azure Data Lake Store en tant que récepteur
 
-[!INCLUDE [data-factory-v2-file-formats](../../includes/data-factory-v2-file-formats.md)] 
+[!INCLUDE [data-factory-v2-file-sink-formats](../../includes/data-factory-v2-file-sink-formats.md)]
 
 Les propriétés suivantes sont prises en charge pour Azure Data Lake Store Gen1 dans les paramètres `storeSettings` du récepteur de copie basée sur le format :
 
@@ -300,6 +311,13 @@ Les propriétés suivantes sont prises en charge pour Azure Data Lake Store Gen1
     }
 ]
 ```
+### <a name="name-range-filter-examples"></a>Exemples de filtres de plages
+
+Cette section décrit le comportement résultant des filtres de plages de noms.
+
+| Exemple de structure source | Configuration ADF | Résultats |
+|:--- |:--- |:--- |
+|root<br/>&nbsp;&nbsp;&nbsp;&nbsp;a<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;ax<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file2.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;ax.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;b<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;bx.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;c<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file4.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;cx.csv| **Dans le jeu de données :**<br>- chemin d’accès du dossier : `root`<br><br>**Dans la source de l’activité de copie :**<br>- listAfter : `a`<br>- listBefore : `b`| Les fichiers suivants seront copiés :<br><br>root<br/>&nbsp;&nbsp;&nbsp;&nbsp;ax<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file2.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;ax.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;b<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file3.csv |
 
 ### <a name="folder-and-file-filter-examples"></a>Exemples de filtres de dossier et de fichier
 
@@ -311,6 +329,16 @@ Cette section décrit le comportement résultant de l’utilisation de filtres d
 | `Folder*` | (vide, utiliser la valeur par défaut) | true | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier2.json**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier4.json**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 | `Folder*` | `*.csv` | false | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier5.csv<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
 | `Folder*` | `*.csv` | true | DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>AutreDossierB<br/>&nbsp;&nbsp;&nbsp;&nbsp;Fichier6.csv |
+
+### <a name="file-list-examples"></a>Exemples de liste de fichiers
+
+Cette section décrit le comportement résultant de l’utilisation du chemin d’accès à la liste de fichiers dans la source de l’activité de copie.
+
+En supposant que vous disposez de la structure de dossiers source suivante et que vous souhaitez copier les fichiers en gras :
+
+| Exemple de structure source                                      | Contenu de FileListToCopy.txt                             | Configuration ADF                                            |
+| ------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------ |
+| root<br/>&nbsp;&nbsp;&nbsp;&nbsp;DossierA<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier1.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier2.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sousdossier1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier3.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fichier4.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Fichier5.csv**<br/>&nbsp;&nbsp;&nbsp;&nbsp;Métadonnées<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FileListToCopy.txt | File1.csv<br>Subfolder1/File3.csv<br>Subfolder1/File5.csv | **Dans le jeu de données :**<br>- chemin d’accès du dossier : `root/FolderA`<br><br>**Dans la source de l’activité de copie :**<br>- chemin d’accès à la liste de fichiers : `root/Metadata/FileListToCopy.txt` <br><br>Le chemin d’accès à la liste de fichiers pointe vers un fichier texte dans le même magasin de données qui contient la liste de fichiers que vous voulez copier, un fichier par ligne étant le chemin d’accès relatif au chemin d’accès configuré dans le jeu de données. |
 
 ### <a name="examples-of-behavior-of-the-copy-operation"></a>Exemples de comportement de l’opération de copie
 
@@ -334,7 +362,14 @@ Si vous souhaitez répliquer les listes de contrôle d’accès (ACL) ainsi que 
 
 ## <a name="mapping-data-flow-properties"></a>Propriétés du mappage de flux de données
 
-Lors de la transformation de données dans le flux de données de mappage, vous pouvez lire et écrire des fichiers depuis Azure Data Lake Storage Gen1 au format JSON, Avro, de texte délimité ou Parquet. Pour plus d’informations, consultez les sections consacrées à la [transformation de la source](data-flow-source.md) et à la [transformation du récepteur](data-flow-sink.md) dans la fonctionnalité de flux de données de mappage.
+Lorsque vous transformez des données en flux de données de mappage, vous pouvez lire et écrire des fichiers à partir d’Azure Data Lake Storage Gen1 aux formats suivants :
+* [Avro](format-avro.md#mapping-data-flow-properties)
+* [Texte délimité](format-delimited-text.md#mapping-data-flow-properties)
+* [Excel](format-excel.md#mapping-data-flow-properties)
+* [JSON](format-json.md#mapping-data-flow-properties)
+* [Parquet](format-parquet.md#mapping-data-flow-properties)
+
+Les paramètres spécifiques au format se trouvent dans la documentation de ce format. Pour plus d’informations, consultez [Transformation de source en flux de données de mappage](data-flow-source.md) et [Transformation de récepteur en flux de données de mappage](data-flow-sink.md).
 
 ### <a name="source-transformation"></a>Transformation de la source
 

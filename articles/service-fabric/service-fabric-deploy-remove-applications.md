@@ -3,12 +3,12 @@ title: Déploiement d’Azure Service Fabric à l’aide de PowerShell
 description: Découvrez comment supprimer et déployer des applications dans Azure Service Fabric et comment effectuer ces actions dans PowerShell.
 ms.topic: conceptual
 ms.date: 01/19/2018
-ms.openlocfilehash: e3fdd194f2949f1246e991968e02b3278f33f7db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8bc4557c5d0d59330c7e91a4b3fdce83cfbf334c
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236709"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91827426"
 ---
 # <a name="deploy-and-remove-applications-using-powershell"></a>Déployer et supprimer des applications avec PowerShell
 
@@ -64,7 +64,7 @@ Si vous souhaitez vérifier le package d’application en local, utilisez l’ap
 
 La commande [Copy-ServiceFabricApplicationPackage](/powershell/module/servicefabric/copy-servicefabricapplicationpackage?view=azureservicefabricps) charge le package d’application dans le magasin d’images du cluster.
 
-Supposons que vous génériez une application nommée *MyApplication* et que vous créiez un package pour cette application dans Visual Studio 2015. Par défaut, le nom du type application répertorié dans le fichier ApplicationManifest.xml est « MyApplicationType ».  Le package d’application, qui contient le manifeste de l’application, les manifestes de service et les packages de code / configuration / données requis, se trouve sous *C:\Users\<username\>\Documents\Visual Studio 2015\Projects\MyApplication\MyApplication\pkg\Debug*. 
+Supposons que vous génériez une application nommée *MyApplication* et que vous créiez un package pour cette application dans Visual Studio 2015. Par défaut, le nom du type application répertorié dans le fichier ApplicationManifest.xml est « MyApplicationType ».  Le package d’application, qui contient le manifeste de l’application, les manifestes de service et les packages de code/configuration/données requis, se trouve sous *C:\Users\<username\>\Documents\Visual Studio 2015\Projects\MyApplication\MyApplication\pkg\Debug*. 
 
 La commande suivante répertorie le contenu du package d’application :
 
@@ -100,7 +100,7 @@ C:\USERS\USER\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\MYAPPLICATION\MYAPPLICATION\
 ```
 
 Si le package d’application est volumineux ou contient de nombreux fichiers, vous pouvez le [compresser](service-fabric-package-apps.md#compress-a-package). La compression réduit la taille et le nombre de fichiers.
-Cela a pour effet secondaire d’accélérer l’inscription et la désinscription du type d’application. Actuellement, le chargement peut demander plus de temps, notamment si vous incluez le temps nécessaire à la compression du package. 
+Cela permet d’accélérer l’inscription et la désinscription du type d’application. Actuellement, le chargement peut demander plus de temps, notamment si vous incluez le temps nécessaire à la compression du package. 
 
 Pour compresser un package, utilisez la même commande [Copy-ServiceFabricApplicationPackage](/powershell/module/servicefabric/copy-servicefabricapplicationpackage?view=azureservicefabricps). La compression peut être effectuée indépendamment du chargement, en utilisant l’indicateur `SkipCopy`, ou conjointement avec l’opération de chargement. L’application d’une compression sur un package compressé n’a aucun effet.
 Pour décompresser un package compressé, utilisez la même commande [Copy-ServiceFabricApplicationPackage](/powershell/module/servicefabric/copy-servicefabricapplicationpackage?view=azureservicefabricps) avec le commutateur `UncompressPackage`.

@@ -1,33 +1,33 @@
 ---
-title: Profils techniques Azure MFA dans les stratégies personnalisées
+title: Profils techniques Azure AD MFA dans les stratégies personnalisées
 titleSuffix: Azure AD B2C
-description: Informations de référence sur les stratégies personnalisées pour les profils techniques Azure Multi-Factor Authentication (MFA) dans Azure AD B2C.
+description: Informations de référence sur les stratégies personnalisées pour les profils techniques Azure AD Multi-Factor Authentication (MFA) dans Azure AD B2C.
 services: active-directory-b2c
 author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 03/26/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c9ed0e329b498112feafaf21c34e85ea436cbb77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e81ac35555e6653cecb602e5af2f19aa3e2f05e9
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80332820"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94840591"
 ---
-# <a name="define-an-azure-mfa-technical-profile-in-an-azure-ad-b2c-custom-policy"></a>Définir un profil technique Azure MFA dans une stratégie personnalisée Azure AD B2C
+# <a name="define-an-azure-ad-mfa-technical-profile-in-an-azure-ad-b2c-custom-policy"></a>Définir un profil technique Azure AD MFA dans une stratégie personnalisée Azure AD B2C
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Azure Active Directory B2C (Azure AD B2C) gère la vérification d’un numéro de téléphone à l’aide d’Azure Multi-Factor Authentication (MFA). Utilisez ce profil technique pour générer et envoyer un code à un numéro de téléphone, puis vérifier le code. Le profil technique Azure MFA peut également retourner un message d’erreur.  Le profil technique de validation valide les données fournies par l’utilisateur avant la poursuite du parcours de celui-ci. Avec le profil technique de validation, un message d’erreur apparaît sur une page autodéclarée.
+Azure Active Directory B2C (Azure AD B2C) permet de vérifier un numéro de téléphone à l'aide d'Azure AD Multi-Factor Authentication (MFA). Utilisez ce profil technique pour générer et envoyer un code à un numéro de téléphone, puis vérifier le code. Le profil technique Azure AD MFA peut également renvoyer un message d'erreur.  Le profil technique de validation valide les données fournies par l’utilisateur avant la poursuite du parcours de celui-ci. Avec le profil technique de validation, un message d’erreur apparaît sur une page autodéclarée.
 
 Ce profil technique :
 
 - Ne fournit pas d’interface permettant d’interagir avec l’utilisateur. Au lieu de cela, l’interface utilisateur est appelée à partir d’un profil technique [autodéclaré](self-asserted-technical-profile.md) ou d’un [contrôle d’affichage](display-controls.md) en tant que [profil technique de validation](validation-technical-profile.md).
-- Utilise le service Azure MFA pour générer et envoyer un code à un numéro de téléphone, puis vérifie le code.  
+- Utilise le service Azure AD MFA pour générer et envoyer un code à un numéro de téléphone, puis vérifie le code.  
 - Valide un numéro de téléphone via des SMS.
 
 [!INCLUDE [b2c-public-preview-feature](../../includes/active-directory-b2c-public-preview.md)]
@@ -40,9 +40,9 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `Prop
 Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 ```
 
-L’exemple suivant montre un profil technique Azure MFA :
+L'exemple suivant présente un profil technique Azure AD MFA :
 
-```XML
+```xml
 <TechnicalProfile Id="AzureMfa-SendSms">
     <DisplayName>Send Sms</DisplayName>
     <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -55,7 +55,7 @@ Le premier mode de ce profil technique consiste à générer un code et à l’e
 
 ### <a name="input-claims"></a>Revendications d’entrée
 
-L’élément **InputClaims** contient la liste des revendications à envoyer à Azure MFA. Vous pouvez également faire correspondre le nom de votre revendication au nom défini dans le profil technique MFA.
+L'élément **InputClaims** contient la liste des revendications à envoyer à Azure AD MFA. Vous pouvez également faire correspondre le nom de votre revendication au nom défini dans le profil technique MFA.
 
 | ClaimReferenceId | Obligatoire | Description |
 | --------- | -------- | ----------- |
@@ -64,11 +64,11 @@ L’élément **InputClaims** contient la liste des revendications à envoyer à
 | companyName | Non |Nom de la société dans le SMS. S’il n’est pas indiqué, c’est le nom de votre application qui est utilisé. |
 | locale | Non | Paramètres régionaux du SMS. S’ils ne sont pas indiqués, ce sont les paramètres régionaux du navigateur de l’utilisateur qui sont utilisés. |
 
-L’élément **InputClaimsTransformations** peut contenir une collection d’éléments **InputClaimsTransformation** utilisés pour modifier les revendications d’entrée ou en générer de nouvelles avant l’envoi au service Azure MFA.
+L'élément **InputClaimsTransformations** peut contenir une collection d'éléments **InputClaimsTransformation** utilisés pour modifier les revendications d'entrée ou en générer de nouvelles avant l'envoi au service Azure AD MFA.
 
 ### <a name="output-claims"></a>Revendications de sortie
 
-Comme le fournisseur de protocole Azure MFA ne retourne pas de **OutputClaims**, il n’est pas nécessaire de spécifier des revendications de sortie. Vous pouvez toutefois inclure des revendications non retournées par le fournisseur d’identité Azure MFA, tant que vous définissez l’attribut `DefaultValue`.
+Comme le fournisseur de protocole Azure AD MFA ne renvoie pas d'élément **OutputClaims**, il n'est pas nécessaire de spécifier des revendications de sortie. Vous pouvez toutefois inclure des revendications qui ne sont pas renvoyées par le fournisseur d'identité Azure AD MFA, à condition de définir l'attribut `DefaultValue`.
 
 L’élément **OutputClaimsTransformations** peut contenir une collection d’éléments **OutputClaimsTransformation** qui sont utilisés pour modifier les revendications de sortie ou en générer de nouvelles.
 
@@ -80,7 +80,7 @@ L’élément **OutputClaimsTransformations** peut contenir une collection d’�
 
 #### <a name="ui-elements"></a>Éléments d’interface utilisateur
 
-Les métadonnées suivantes peuvent être utilisées pour configurer les messages d’erreur affichés en cas d’échec de l’envoi de SMS. Les métadonnées doivent être configurées dans le profil technique [autodéclaré](self-asserted-technical-profile.md). Les messages d’erreur peuvent être [localisés](localization-string-ids.md#azure-mfa-error-messages).
+Les métadonnées suivantes peuvent être utilisées pour configurer les messages d’erreur affichés en cas d’échec de l’envoi de SMS. Les métadonnées doivent être configurées dans le profil technique [autodéclaré](self-asserted-technical-profile.md). Les messages d’erreur peuvent être [localisés](localization-string-ids.md#azure-ad-mfa-error-messages).
 
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
@@ -91,9 +91,9 @@ Les métadonnées suivantes peuvent être utilisées pour configurer les message
 
 ### <a name="example-send-an-sms"></a>Exemple : envoyer un SMS
 
-L’exemple suivant montre l’utilisation d’un profil technique Azure MFA pour envoyer un code par SMS.
+L'exemple suivant présente un profil technique Azure AD MFA utilisé pour envoyer un code par SMS.
 
-```XML
+```xml
 <TechnicalProfile Id="AzureMfa-SendSms">
   <DisplayName>Send Sms</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -117,18 +117,18 @@ Le deuxième mode de ce profil technique consiste à vérifier un code. Les opti
 
 ### <a name="input-claims"></a>Revendications d’entrée
 
-L’élément **InputClaims** contient la liste des revendications à envoyer à Azure MFA. Vous pouvez également faire correspondre le nom de votre revendication au nom défini dans le profil technique MFA.
+L'élément **InputClaims** contient la liste des revendications à envoyer à Azure AD MFA. Vous pouvez également faire correspondre le nom de votre revendication au nom défini dans le profil technique MFA.
 
 | ClaimReferenceId | Obligatoire | Description |
 | --------- | -------- | ----------- | ----------- |
 | phoneNumber| Oui | Même numéro de téléphone qui a servi à envoyer un code. Il est également utilisé pour rechercher une session de vérification par téléphone. |
 | verificationCode  | Oui | Code de vérification fourni par l’utilisateur à vérifier. |
 
-L’élément **InputClaimsTransformations** peut contenir une collection d’éléments **InputClaimsTransformation** utilisés pour modifier les revendications d’entrée ou en générer de nouvelles avant l’appel du service Azure MFA.
+L'élément **InputClaimsTransformations** peut contenir une collection d'éléments **InputClaimsTransformation** utilisés pour modifier les revendications d'entrée ou en générer de nouvelles avant l'appel du service Azure AD MFA.
 
 ### <a name="output-claims"></a>Revendications de sortie
 
-Comme le fournisseur de protocole Azure MFA ne retourne pas de **OutputClaims**, il n’est pas nécessaire de spécifier des revendications de sortie. Vous pouvez toutefois inclure des revendications non retournées par le fournisseur d’identité Azure MFA, tant que vous définissez l’attribut `DefaultValue`.
+Comme le fournisseur de protocole Azure AD MFA ne renvoie pas d'élément **OutputClaims**, il n'est pas nécessaire de spécifier des revendications de sortie. Vous pouvez toutefois inclure des revendications qui ne sont pas renvoyées par le fournisseur d'identité Azure AD MFA, à condition de définir l'attribut `DefaultValue`.
 
 L’élément **OutputClaimsTransformations** peut contenir une collection d’éléments **OutputClaimsTransformation** qui sont utilisés pour modifier les revendications de sortie ou en générer de nouvelles.
 
@@ -140,7 +140,7 @@ L’élément **OutputClaimsTransformations** peut contenir une collection d’�
 
 #### <a name="ui-elements"></a>Éléments d’interface utilisateur
 
-Les métadonnées suivantes peuvent être utilisées pour configurer les messages d’erreur affichés en cas d’échec de la vérification du code. Les métadonnées doivent être configurées dans le profil technique [autodéclaré](self-asserted-technical-profile.md). Les messages d’erreur peuvent être [localisés](localization-string-ids.md#azure-mfa-error-messages).
+Les métadonnées suivantes peuvent être utilisées pour configurer les messages d’erreur affichés en cas d’échec de la vérification du code. Les métadonnées doivent être configurées dans le profil technique [autodéclaré](self-asserted-technical-profile.md). Les messages d’erreur peuvent être [localisés](localization-string-ids.md#azure-ad-mfa-error-messages).
 
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
@@ -151,9 +151,9 @@ Les métadonnées suivantes peuvent être utilisées pour configurer les message
 
 ### <a name="example-verify-a-code"></a>Exemple : vérifier un code
 
-L’exemple suivant montre l’utilisation d’un profil technique Azure MFA pour vérifier le code.
+L'exemple suivant présente un profil technique Azure AD MFA utilisé pour vérifier le code.
 
-```XML
+```xml
 <TechnicalProfile Id="AzureMfa-VerifySms">
     <DisplayName>Verify Sms</DisplayName>
     <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />

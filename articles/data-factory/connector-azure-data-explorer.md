@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 02/18/2020
-ms.openlocfilehash: ba8c35fc1802f7ef3ac54c693c8106bbc40cc185
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: fa8219db0e11694b6f70547d5f75bd892fbfa1f8
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82560167"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92633159"
 ---
 # <a name="copy-data-to-or-from-azure-data-explorer-by-using-azure-data-factory"></a>Copier des données depuis/vers Azure Data Explorer à l’aide d’Azure Data Factory
 
@@ -42,7 +42,7 @@ Vous pouvez copier des données à partir de tout magasin de données source pri
 
 Le connecteur Azure Data Explorer vous permet d’effectuer les opérations suivantes :
 
-* Copier des données en utilisant une authentification de jeton d’application Azure Active Directory (Azure AD) avec un **principal du service**.
+* Copier des données en utilisant une authentification de jeton d’application Azure Active Directory (Azure AD) avec un **principal du service** .
 * En tant que source, récupérer des données à l’aide d’une requête KQL (Kusto).
 * En tant que récepteur, ajouter des données à une table de destination.
 
@@ -67,8 +67,8 @@ Le connecteur d’Azure Data Explorer utilise l’authentification du principal 
 
 2. Accordez les autorisations qui conviennent au principal de service dans Azure Data Explorer. Consultez [Gérer les autorisations de base de données d’Azure Data Explorer](/azure/data-explorer/manage-database-permissions) pour obtenir des informations détaillées sur les rôles et les autorisations, ainsi que la gestion des autorisations. En règle générale, vous devez :
 
-    - **En tant que source**, accorder au moins le rôle **Observateur de base de données** à votre base de données
-    - **En tant que récepteur**, accorder au moins le rôle **Ingéreur de base de données** à votre base de données
+    - **En tant que source** , accorder au moins le rôle **Observateur de base de données** à votre base de données
+    - **En tant que récepteur** , accorder au moins le rôle **Ingéreur de base de données** à votre base de données
 
 >[!NOTE]
 >Lorsque vous utilisez l’interface utilisateur Data Factory pour créer, votre compte d’utilisateur de connexion est utilisé pour répertorier les clusters, bases de données et tables Azure Data Explorer. Entrez manuellement le nom si vous n’avez pas d’autorisation pour ces opérations.
@@ -77,12 +77,12 @@ Les propriétés suivantes sont prises en charge pour le service lié Azure Data
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** doit être définie sur **AzureDataExplorer**. | Oui |
+| type | La propriété **type** doit être définie sur **AzureDataExplorer** . | Oui |
 | endpoint | URL de point de terminaison du cluster Azure Data Explorer, avec le format `https://<clusterName>.<regionName>.kusto.windows.net`. | Oui |
 | database | Nom de base de données. | Oui |
-| tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. C’est ce que vous connaissez sous le nom « ID d’autorité » dans la [chaîne de connexion Kusto](https://docs.microsoft.com/azure/kusto/api/connection-strings/kusto#application-authentication-properties). Récupérez-les en pointant la souris dans le coin supérieur droit du Portail Azure. | Oui |
-| servicePrincipalId | Spécifiez l’ID client de l’application. C’est ce que vous connaissez sous le nom « ID d'application cliente AAD » dans la [chaîne de connexion Kusto](https://docs.microsoft.com/azure/kusto/api/connection-strings/kusto#application-authentication-properties). | Oui |
-| servicePrincipalKey | Spécifiez la clé de l’application. C’est ce que vous connaissez sous le nom « Clé d'application cliente AAD » dans la [chaîne de connexion Kusto](https://docs.microsoft.com/azure/kusto/api/connection-strings/kusto#application-authentication-properties). Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez les données sécurisées stockées dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. C’est ce que vous connaissez sous le nom « ID d’autorité » dans la [chaîne de connexion Kusto](/azure/kusto/api/connection-strings/kusto#application-authentication-properties). Récupérez-les en pointant la souris dans le coin supérieur droit du Portail Azure. | Oui |
+| servicePrincipalId | Spécifiez l’ID client de l’application. C’est ce que vous connaissez sous le nom « ID d'application cliente AAD » dans la [chaîne de connexion Kusto](/azure/kusto/api/connection-strings/kusto#application-authentication-properties). | Oui |
+| servicePrincipalKey | Spécifiez la clé de l’application. C’est ce que vous connaissez sous le nom « Clé d'application cliente AAD » dans la [chaîne de connexion Kusto](/azure/kusto/api/connection-strings/kusto#application-authentication-properties). Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez les données sécurisées stockées dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 
 **Exemple de propriétés du service lié :**
 
@@ -109,13 +109,13 @@ Les propriétés suivantes sont prises en charge pour le service lié Azure Data
 
 Pour obtenir la liste complète des sections et propriétés disponibles pour la définition de jeux de données, consultez [Jeux de données dans Azure Data Factory](concepts-datasets-linked-services.md). Cette section répertorie les propriétés prises en charge par le jeu de données Azure Data Explorer.
 
-Pour copier des données vers Azure Data Explorer, définissez la propriété type du jeu de données sur **AzureDataExplorerTable**.
+Pour copier des données vers Azure Data Explorer, définissez la propriété type du jeu de données sur **AzureDataExplorerTable** .
 
 Les propriétés prises en charge sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** doit être définie sur **AzureDataExplorerTable**. | Oui |
+| type | La propriété **type** doit être définie sur **AzureDataExplorerTable** . | Oui |
 | table | Nom de la table dans la base à laquelle le service lié fait référence. | Oui pour le récepteur, Non pour la source |
 
 **Exemple de propriétés du jeu de données :**
@@ -143,7 +143,7 @@ Pour obtenir la liste complète des sections et des propriétés disponibles pou
 
 ### <a name="azure-data-explorer-as-source"></a>Azure Data Explorer en tant que source
 
-Pour copier des données à partir d’Azure Data Explorer, définissez la propriété **type** dans la source d’activité de copie sur **AzureDataExplorerSource**. Les propriétés prises en charge dans la section **source** de l’activité de copie sont les suivantes :
+Pour copier des données à partir d’Azure Data Explorer, définissez la propriété **type** dans la source d’activité de copie sur **AzureDataExplorerSource** . Les propriétés prises en charge dans la section **source** de l’activité de copie sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
@@ -153,7 +153,7 @@ Pour copier des données à partir d’Azure Data Explorer, définissez la propr
 | noTruncation | Indique s’il faut tronquer le jeu de résultats retourné. Par défaut, le résultat est tronqué après 500 000 enregistrements ou au-delà de 64 mégaoctets (Mo). La troncation est vivement recommandée pour garantir le bon comportement de l’activité. |Non |
 
 >[!NOTE]
->Par défaut, la source d’Azure Data Explorer présente une taille limite de 500 000 enregistrements ou 64 Mo. Pour récupérer tous les enregistrements sans troncation, vous pouvez spécifier `set notruncation;` au début de votre requête. Pour plus d'informations, consultez [Limites de requête](https://docs.microsoft.com/azure/kusto/concepts/querylimits).
+>Par défaut, la source d’Azure Data Explorer présente une taille limite de 500 000 enregistrements ou 64 Mo. Pour récupérer tous les enregistrements sans troncation, vous pouvez spécifier `set notruncation;` au début de votre requête. Pour plus d'informations, consultez [Limites de requête](/azure/kusto/concepts/querylimits).
 
 **Exemple :**
 
@@ -190,13 +190,13 @@ Pour copier des données à partir d’Azure Data Explorer, définissez la propr
 
 ### <a name="azure-data-explorer-as-sink"></a>Azure Data Explorer en tant que récepteur
 
-Pour copier des données vers Azure Data Explorer, définissez la propriété type dans le récepteur d’activité de copie sur **AzureDataExplorerSink**. Les propriétés prises en charge dans la section **sink** (récepteur) de l’activité de copie sont les suivantes :
+Pour copier des données vers Azure Data Explorer, définissez la propriété type dans le récepteur d’activité de copie sur **AzureDataExplorerSink** . Les propriétés prises en charge dans la section **sink** (récepteur) de l’activité de copie sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** du récepteur d’activité de copie doit être définie sur : **AzureDataExplorerSink**. | Oui |
+| type | La propriété **type** du récepteur d’activité de copie doit être définie sur : **AzureDataExplorerSink** . | Oui |
 | ingestionMappingName | Nom d’un [mappage](/azure/kusto/management/mappings#csv-mapping) créé au préalable sur une table Kusto. Pour mapper les colonnes de la source et Azure Data Explorer, ce qui s’applique à [tous les magasins et formats de source pris en charge](copy-activity-overview.md#supported-data-stores-and-formats), notamment les formats CSV/JSON/Avro, vous pouvez utiliser l’activité de copie [mappage des colonnes](copy-activity-schema-and-type-mapping.md) (implicitement par nom ou explicitement configurée) et/ou les mappages d’Azure Data Explorer. | Non |
-| additionalProperties | Conteneur des propriétés qui peut être utilisé pour spécifier l’une des propriétés d’ingestion qui ne sont pas déjà définies par le récepteur Azure Data Explorer. Plus précisément, il peut être utile pour spécifier des balises d’ingestion. Pour en savoir plus, consultez le [document relatif à l’ingestion des données Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/ingestion-properties). | Non |
+| additionalProperties | Conteneur des propriétés qui peut être utilisé pour spécifier l’une des propriétés d’ingestion qui ne sont pas déjà définies par le récepteur Azure Data Explorer. Plus précisément, il peut être utile pour spécifier des balises d’ingestion. Pour en savoir plus, consultez le [document relatif à l’ingestion des données Azure Data Explorer](/azure/data-explorer/ingestion-properties). | Non |
 
 **Exemple :**
 

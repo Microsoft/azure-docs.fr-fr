@@ -11,18 +11,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/23/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0af1c42e7e2c163e7f9e7407d0236e35bfacf8e8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 396344ba90aa3850d7d23dc40d6df95f6d1f6c3f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76931005"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996574"
 ---
 # <a name="user-privacy-and-azure-active-directory-pass-through-authentication"></a>Confidentialité des utilisateurs et authentification directe Azure Active Directory
 
@@ -67,13 +67,13 @@ Pour en savoir plus sur les exigences RGPD relatives à Azure AD Connect, consul
 
 ### <a name="delete-authentication-agent-event-logs"></a>Supprimer les journaux des événements de l’Agent d’authentification
 
-Ce produit peut également créer des **Journaux des événements Windows**. Pour plus d’informations, consultez [cet article](https://msdn.microsoft.com/library/windows/desktop/aa385780(v=vs.85).aspx).
+Ce produit peut également créer des **Journaux des événements Windows**. Pour plus d’informations, consultez [cet article](/windows/win32/wes/windows-event-log).
 
 Pour afficher les journaux d’activité relatifs à l’agent d’authentification directe, ouvrez l’application **Observateur d’événements** sur le serveur et cherchez dans **Application and Service Logs\Microsoft\AzureAdConnect\AuthenticationAgent\Admin**.
 
 ### <a name="delete-authentication-agent-trace-log-files"></a>Supprimer les fichiers journaux des traces de l’Agent d’authentification
 
-Vous devez régulièrement vérifier le contenu de **%ProgramData%\Microsoft\Azure AD Connect Authentication Agent\Trace\** et supprimer le contenu de ce dossier toutes les 48 heures. 
+Vous devez régulièrement vérifier le contenu de **%ProgramData%\Microsoft\Azure AD Connect Authentication Agent\Trace** et supprimer le contenu de ce dossier toutes les 48 heures. 
 
 >[!IMPORTANT]
 >Si le service Agent d’authentification est en cours d’exécution, vous ne pourrez pas supprimer le fichier journal actuel dans le dossier. Arrêtez le service avant de réessayer. Pour éviter les échecs de connexion de l’utilisateur, vous devez déjà avoir configuré l’authentification directe pour une [haute disponibilité](how-to-connect-pta-quick-start.md#step-4-ensure-high-availability).
@@ -103,7 +103,7 @@ Pour planifier une exécution de ce script toutes les 48 heures, effectuez les 
  
 ### <a name="note-about-domain-controller-logs"></a>Remarque concernant les journaux d’activité des contrôleurs de domaine
 
-Si l’enregistrement d’audit est activé, ce produit peut générer des journaux d’activité de sécurité pour vos contrôleurs de domaine. Pour en savoir plus sur la configuration des stratégies d’audit, consultez cet [article](https://technet.microsoft.com/library/dd277403.aspx).
+Si l’enregistrement d’audit est activé, ce produit peut générer des journaux d’activité de sécurité pour vos contrôleurs de domaine. Pour en savoir plus sur la configuration des stratégies d’audit, consultez cet [article](/previous-versions/tn-archive/dd277403(v=technet.10)).
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Lire la politique de confidentialité Microsoft sur le Centre de confidentialité](https://www.microsoft.com/trustcenter)

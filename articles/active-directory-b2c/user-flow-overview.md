@@ -1,5 +1,6 @@
 ---
 title: Flux d’utilisateur dans Azure Active Directory B2C | Microsoft Docs
+titleSuffix: Azure AD B2C
 description: Découvrez plus d’informations sur le framework de stratégie extensible d’Azure Active Directory B2C et la création de différents flux d’utilisateur.
 services: active-directory-b2c
 author: msmimart
@@ -7,27 +8,24 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 11/30/2018
+ms.date: 07/30/2020
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c11bc48742c398d2048a236c7d00af044971f845
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 06253b571fd71623501c27fd5b0d9d4013727fc2
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78185606"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94840189"
 ---
 # <a name="user-flows-in-azure-active-directory-b2c"></a>Flux d’utilisateur dans Azure Active Directory B2C
 
-Le framework de stratégie extensible d’Azure Active Directory B2C (Azure AD B2C) est le pilier central du service. Les stratégies décrivent entièrement les expériences relatives à l’identité, comme l’inscription, la connexion ou la modification de profil. Pour vous aider à configurer les tâches d’identité les plus courantes, le portail Azure AD B2C inclut des stratégies configurables prédéfinies appelées **flux d’utilisateur**.
-
-## <a name="what-are-user-flows"></a>Qu’est-ce qu’un flux d’utilisateur ?
-
-Un flux d’utilisateur vous permet de contrôler les comportements dans vos applications en configurant les paramètres suivants :
+Pour vous aider à configurer les tâches d’identité les plus courantes pour vos applications, le portail Azure AD B2C inclut des stratégies configurables prédéfinies, appelées **flux d’utilisateur**. Un flux d’utilisateur vous permet de déterminer la façon dont les utilisateurs interagissent avec votre application quand ils effectuent différentes opérations : connexion, inscription, modification d’un profil, réinitialisation d’un mot de passe, etc. Avec les flux d’utilisateur, vous pouvez contrôler les éléments suivants :
 
 - Types de compte utilisés pour la connexion, comme les comptes de réseaux sociaux de type Facebook ou les comptes locaux
 - Attributs à collecter auprès du consommateur, comme le prénom, le code postal et la pointure
-- Azure Multi-Factor Authentication
+- Authentification multifacteur Azure AD
 - Personnalisation de l’interface utilisateur
 - Informations que l’application reçoit sous forme de revendications dans un jeton
 
@@ -61,13 +59,21 @@ client_id=2d4d11a2-f814-46a7-890a-274a72a7309e      // Your registered Applicati
 
 ## <a name="user-flow-versions"></a>Versions de flux utilisateur
 
-Dans le portail Azure, de nouvelles [versions de flux d’utilisateur](user-flow-versions.md) sont ajoutées en continu. Quand vous commencez à utiliser Azure AD B2C, des flux d’utilisateur testés vous sont recommandés. Quand vous créez un flux d’utilisateur, vous choisissez celui dont vous avez besoin sous l’onglet **Recommandé**.
+Azure AD B2C inclut plusieurs types de flux d’utilisateur.
 
-Les flux d’utilisateur suivants sont actuellement recommandés :
-
-- **Inscription et connexion** : Gère les expériences d’inscription et de connexion avec une seule configuration. Les utilisateurs sont dirigés vers le chemin approprié en fonction du contexte. Nous vous recommandons d’utiliser ce flux d’utilisateur plutôt qu’un flux d’utilisateur d’**inscription** ou un flux d’utilisateur de **connexion**.
+- **Inscription et connexion** : Gère les expériences d’inscription et de connexion avec une seule configuration. Les utilisateurs sont dirigés vers le chemin approprié en fonction du contexte. Des flux d’utilisateur d’**inscription** et de **connexion** distincts sont également inclus. Toutefois, nous recommandons généralement le flux d’utilisateur d’inscription et de connexion combiné.
 - **Modification de profil** : Permet aux utilisateurs de modifier leurs informations de profil.
 - **Réinitialisation de mot de passe** : Vous permet de configurer si et comment les utilisateurs peuvent réinitialiser leur mot de passe.
+
+Pour la plupart des types de flux d’utilisateur, une version **recommandée** et une version **standard** sont généralement disponibles. Pour plus d’informations, consultez [Versions de flux utilisateur](user-flow-versions.md).
+
+> [!IMPORTANT]
+> Si vous avez déjà travaillé avec des flux d’utilisateur dans Azure AD B2C, vous remarquerez que nous avons changé la manière dont nous référençons les versions de flux d’utilisateur. Avant, nous proposions des versions V1 (prêtes pour la production) et des versions V1.1 et V2 (préversions). Maintenant, nous avons regroupé les flux d’utilisateur en deux versions :
+>
+>- Les flux d’utilisateur **recommandés** sont les nouvelles préversions des flux d’utilisateur. Ils sont minutieusement testés et combinent toutes les fonctionnalités des versions **V2** et **V1.1** héritées. À l’avenir, les nouveaux flux d’utilisateur recommandés seront maintenus et mis à jour. Quand vous passez à ces nouveaux flux d’utilisateur recommandés, vous avez accès aux nouvelles fonctionnalités à mesure qu’elles sont publiées.
+>- Les flux d’utilisateur **standard**, anciennement **V1**, sont en disponibilité générale et sont prêts pour la production. Si vous utilisez des flux d’utilisateur stratégiques, qui dépendent de versions très stables, vous pouvez continuer à utiliser des flux d’utilisateur standard tout en gardant à l’esprit que ces versions ne seront pas mises à jour ni maintenues.
+>
+>Tous les flux d’utilisateur en préversion hérités (V1.1 et V2) seront dépréciés d’ici le **1er août 2021**. Dans la mesure du possible, nous vous recommandons vivement de [basculer vers les nouveaux flux d’utilisateur **recommandés**](user-flow-versions.md#how-to-switch-to-a-new-recommended-user-flow) dès que possible pour continuer à tirer parti des dernières fonctionnalités et mises à jour.
 
 ## <a name="linking-user-flows"></a>Liaison de flux d’utilisateur
 

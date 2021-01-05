@@ -1,19 +1,19 @@
 ---
 title: Approfondissement - Analytique avancée - Azure HDInsight
 description: Découvrez comment l’analytique avancée utilise des algorithmes pour traiter des données Big Data dans Azure HDInsight.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 01/01/2020
-ms.openlocfilehash: 6fc6ea9ca0ce3bf82f027b964db94df50f07f2bd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ffc8fcf734877f55210507310849a5746a280c3d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75646521"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89504347"
 ---
 # <a name="deep-dive---advanced-analytics"></a>Approfondissement - Analytique avancée
 

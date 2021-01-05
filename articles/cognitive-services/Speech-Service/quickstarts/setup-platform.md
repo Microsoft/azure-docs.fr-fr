@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Configurer la plateforme de développement'
+title: 'Démarrage rapide : Configurer l’environnement de développement'
 titleSuffix: Azure Cognitive Services
 description: Dans ce guide de démarrage rapide, vous apprenez à installer le kit SDK Speech pour la combinaison de plateforme et de langage de programmation de votre choix.
 services: cognitive-services
@@ -8,15 +8,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: quickstart
-ms.date: 04/04/2020
+ms.date: 10/15/2020
 ms.author: trbye
-zone_pivot_groups: programming-languages-set-three
-ms.openlocfilehash: 67ade64cdb3b2da6f78f77beb4d0cdc993715c9a
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python, devx-track-js, devx-track-csharp
+zone_pivot_groups: programming-languages-speech-services-one-nomore
+ms.openlocfilehash: 27bca1145e378d2b4a0d124849441ba9ad9be832
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81400861"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96906429"
 ---
 # <a name="quickstart-setup-development-environment"></a>Démarrage rapide : Configurer l’environnement de développement
 
@@ -85,4 +86,26 @@ ms.locfileid: "81400861"
 
 [!INCLUDE [python](../includes/quickstarts/platform/python.md)]
 
+::: zone-end
+
+::: zone pivot="programming-language-go"
+
+[!INCLUDE [go-linux](../includes/quickstarts/platform/go-linux.md)]
+
+* * *
+::: zone-end
+
+::: zone pivot="programming-language-javascript"
+
+**Choisir votre environnement cible**
+
+#### <a name="browser-based"></a>[Basé sur un navigateur](#tab/browser)
+
+[!INCLUDE [browser](../includes/quickstarts/platform/javascript-browser.md)]
+
+#### <a name="nodejs"></a>[NodeJS](#tab/nodejs)
+
+[!INCLUDE [node](../includes/quickstarts/platform/javascript-node.md)]
+
+* * *
 ::: zone-end

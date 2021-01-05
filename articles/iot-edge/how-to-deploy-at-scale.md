@@ -5,20 +5,20 @@ keywords: ''
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 4/21/2020
+ms.date: 10/13/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: e55d3f704c76d2783c3e442a90c829448129a4d0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9d03b6f4a512c22564480405ec0f0e0c0e62a958
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82134053"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92048421"
 ---
 # <a name="deploy-iot-edge-modules-at-scale-using-the-azure-portal"></a>Déployer des modules IoT Edge à grande échelle à l’aide du portail Azure
 
-Créez un **déploiement automatique IoT Edge** dans le portail Azure pour gérer les déploiements en cours sur plusieurs appareils à la fois. Les déploiements automatiques IoT Edge font partie de la fonctionnalité [Gestion automatique des appareils](/azure/iot-hub/iot-hub-automatic-device-management) d’IoT Hub. Les déploiements sont des processus dynamiques qui vous permettent de déployer plusieurs modules sur plusieurs appareils, de suivre l’état et l’intégrité des modules, et d’apporter des modifications si nécessaire.
+Créez un **déploiement automatique IoT Edge** dans le portail Azure pour gérer les déploiements en cours sur plusieurs appareils à la fois. Les déploiements automatiques IoT Edge font partie de la fonctionnalité [Gestion automatique des appareils](../iot-hub/iot-hub-automatic-device-management.md) d’IoT Hub. Les déploiements sont des processus dynamiques qui vous permettent de déployer plusieurs modules sur plusieurs appareils, de suivre l’état et l’intégrité des modules, et d’apporter des modifications si nécessaire.
 
 Pour plus d’informations, consultez [Comprendre les déploiements automatiques IoT Edge pour un seul ou de nombreux appareils](module-deployment-monitoring.md).
 
@@ -53,6 +53,11 @@ Les étapes nécessaires à la création d’un déploiement et d’un déploiem
 
 La création d’un déploiement nécessite cinq étapes. Les sections suivantes les décrivent en détail.
 
+>[!NOTE]
+>La procédure décrite dans cet article reflète la dernière version de schéma du hub et de l’agent IoT Edge. La version de schéma 1.1 a été publiée avec IoT Edge version 1.0.10 ; elle fournit les fonctionnalités d’ordre de démarrage des modules et de hiérarchisation des routes.
+>
+>Si vous déployez sur un appareil exécutant la version 1.0.9 ou une version antérieure, modifiez les **paramètres du runtime** à l’étape **Modules** de l’Assistant pour utiliser la version 1.0 du schéma.
+
 ### <a name="step-1-name-and-label"></a>Étape 1 : Nom et étiquette
 
 1. Donnez à votre déploiement un nom unique comportant au plus 128 lettres minuscules. Évitez les espaces et les caractères non valides suivants : `& ^ [ ] { } \ | " < > /`.
@@ -61,59 +66,23 @@ La création d’un déploiement nécessite cinq étapes. Les sections suivantes
 
 ### <a name="step-2-modules"></a>Étape 2 : Modules
 
-Vous pouvez ajouter jusqu’à 20 modules à un déploiement. Si vous créez un déploiement sans module, il supprime tous les modules actuels des appareils cibles.
+Vous pouvez ajouter jusqu’à 50 modules dans un déploiement. Si vous créez un déploiement sans module, il supprime tous les modules actuels des appareils cibles.
 
 Dans les déploiements, vous pouvez gérer les paramètres de l’agent IoT Edge et des modules du hub IoT Edge. Sélectionnez **Paramètres du runtime** pour configurer les deux modules de runtime. Dans un déploiement en couches, les modules de runtime ne sont pas inclus et ne peuvent donc pas être configurés.
 
-Vous pouvez ajouter trois types de module :
-
-* Module IoT Edge
-* Module Place de marché
-* Module Azure Stream Analytics
-
-#### <a name="add-an-iot-edge-module"></a>Ajouter un module IoT Edge
-
 Pour ajouter du code personnalisé en tant que module, ou pour ajouter manuellement un module de service Azure, effectuez les étapes suivantes :
 
-1. Dans la section **Informations d’identification du registre de conteneurs** de la page, fournissez les noms et les informations d'identification des registres de conteneurs privés qui contiennent les images de module pour ce déploiement. L’agent IoT Edge signale l’erreur 500 s’il ne peut pas trouver les informations d’identification du registre de conteneurs pour une image Docker.
-1. Dans la section **Modules IoT Edge** de la page, cliquez sur **Ajouter**.
-1. Sélectionnez **Module IoT Edge** dans le menu déroulant.
-1. Donnez à votre module un **nom de module IoT Edge**.
-1. Dans le champ **URI de l’image**, entrez l’image conteneur pour votre module.
-1. Utilisez le menu déroulant pour sélectionner une **Stratégie de redémarrage**. Choisissez parmi les options suivantes :
-   * **toujours** : le module redémarre toujours s’il s’arrête pour une raison quelconque.
-   * **jamais** : le module ne redémarre jamais s’il s’arrête pour une raison quelconque.
-   * **on-failure** (en cas d’échec) : le module redémarre s’il se bloque, mais pas s’il est fermé correctement.
-   * **on-unhealthy** (en cas d’état défectueux) : le module redémarre s’il se bloque ou s’il retourne un état défectueux. C’est à chaque module d’implémenter la fonction d’état d’intégrité.
-1. Utilisez le menu déroulant pour sélectionner **l’État souhaité** pour le module. Choisissez parmi les options suivantes :
-   * **en cours d’exécution** : il s’agit de l’option par défaut. Le module commence à s’exécuter immédiatement après son déploiement.
-   * **arrêté** : après son déploiement, le module reste inactif jusqu’à ce que vous-même ou un autre module demandiez son démarrage.
-1. Spécifiez les **options de création de conteneur** qui doivent être passées au conteneur. Pour plus d’informations, consultez [docker create](https://docs.docker.com/engine/reference/commandline/create/).
-1. Sélectionnez **Paramètres de jumeau de module** si vous souhaitez ajouter des balises ou d'autres propriétés au jumeau de module.
-1. Entrez les **variables d'environnement** correspondant à ce module. Les variables d’environnement fournissent des informations de configuration à un module.
-1. Sélectionnez **Ajouter** pour ajouter votre module au déploiement.
+1. Dans la section **Paramètres de Container Registry** de la page, fournissez les informations d’identification permettant d’accéder à n’importe quels registres de conteneurs privés qui contiennent des images de module.
+1. Dans la section **Modules IoT Edge** de la page, sélectionnez **Ajouter**.
+1. Choisissez l’un des trois types de modules dans le menu déroulant :
 
-#### <a name="add-a-module-from-the-marketplace"></a>Ajouter un module à partir de la Place de marché
+   * **Module IoT Edge** : vous fournissez le nom du module et l’URI de l’image conteneur. Par exemple, l’URI de l’image de l’exemple de module SimulatedTemperatureSensor est `mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0`. Si l’image de module est stockée dans un registre de conteneurs privé, ajoutez les informations d’identification sur cette page pour accéder à l’image.
+   * **Module Marketplace** : modules hébergés dans la Place de marché Azure. Certains modules de la Place de marché requièrent une configuration supplémentaire. passez donc en revue les détails du module dans la liste [Modules IoT Edge de la Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules).
+   * **Module Azure Stream Analytics** : les modules générés à partir d’une charge de travail Azure Stream Analytics.
 
-Pour ajouter un modèle à partir de la Place de marché Azure, suivez ces étapes :
+1. Si nécessaire, répétez les étapes 2 et 3 pour ajouter d’autres modules à votre déploiement.
 
-1. Dans la section **Modules IoT Edge** de la page, cliquez sur **Ajouter**.
-1. Sélectionnez **Module de la Place de marché** dans le menu déroulant.
-1. Choisissez un module dans la page **Place de marché de module IoT Edge**. Le module que vous sélectionnez est automatiquement configuré pour vos abonnement, groupe de ressources et appareil. Il apparaît ensuite dans votre liste de modules IoT Edge. Certains modules peuvent nécessiter une configuration supplémentaire. Pour plus d’informations, consultez [Déployer des modèles à partir de la Place de marché Azure](how-to-deploy-modules-portal.md#deploy-modules-from-azure-marketplace).
-
-#### <a name="add-a-stream-analytics-module"></a>Ajouter un module Stream Analytics
-
-Pour ajouter un module à partir d’Azure Stream Analytics, effectuez les étapes suivantes :
-
-1. Dans la section **Modules IoT Edge** de la page, cliquez sur **Ajouter**.
-1. Sélectionnez **Module Azure Stream Analytics** dans le menu déroulant.
-1. Dans le volet droit, choisissez votre **abonnement**.
-1. Choisissez votre **travail IoT Edge**.
-1. Sélectionnez **Enregistrer** pour ajouter votre module au déploiement.
-
-#### <a name="configure-module-settings"></a>Configurer les paramètres du module
-
-Après avoir ajouté un module à un déploiement, vous pouvez sélectionner son nom pour ouvrir la page **Mettre à jour le module IoT Edge**. Dans cette page, vous pouvez modifier les paramètres du module, les variables d’environnement, les options de création et le jumeau de module. Si vous avez ajouté un module à partir de la Place de marché, certains de ces paramètres sont peut-être déjà renseignés.
+Après avoir ajouté un module à un déploiement, vous pouvez sélectionner son nom pour ouvrir la page **Mettre à jour le module IoT Edge**. Dans cette page, vous pouvez modifier les paramètres du module, les variables d’environnement, les options de création, l’ordre de démarrage et le jumeau du module. Si vous avez ajouté un module à partir de la Place de marché, certains de ces paramètres sont peut-être déjà renseignés. Pour en savoir plus sur les paramètres de modules disponibles, consultez l’article [Configuration et gestion des modules](module-composition.md#module-configuration-and-management).
 
 Si vous créez un déploiement en couches, il se peut que vous configuriez un module qui existe dans d’autres déploiements ciblant les mêmes appareils. Pour mettre à jour le jumeau de module sans remplacer d’autres versions, ouvrez l’onglet **Paramètres de jumeau de module**. Créez une **Propriété de jumeau de module** avec un nom unique pour une sous-section des propriétés souhaitées du jumeau de module, par exemple `properties.desired.settings`. Si vous définissez des propriétés uniquement dans le champ `properties.desired`, les propriétés souhaitées pour le module défini dans des déploiements de moindre priorité seront remplacées.
 
@@ -125,9 +94,13 @@ Une fois que vous avez configuré tous les modules pour un déploiement, sélect
 
 ### <a name="step-3-routes"></a>Étape 3 : Itinéraires
 
-Les itinéraires définissent comment les modules communiquent les uns avec les autres dans un déploiement. Par défaut, l’Assistant vous donne une route appelée **upstream** qui est définie comme suit : **FROM /messages/\* INTO $upstream**. Cela signifie que les messages générés par les modules sont envoyés à votre hub IoT.  
+Sous l’onglet **Routes**, vous définissez la manière dont les messages sont transmis entre les modules et le hub IoT. Les messages sont construits à l’aide de paires nom/valeur.
 
-Ajoutez ou mettez à jour les itinéraires avec des informations issues de [Déclarer des itinéraires](module-composition.md#declare-routes), puis sélectionnez **Suivant** pour passer à la section de vérification.
+Par exemple, une route qui a le nom **route** et la valeur **FROM /messages/\* INTO $upstream** prendrait tous les messages générés par les modules et les enverrait à votre hub IoT.  
+
+Les paramètres **Priorité** et **Durée de vie** sont des paramètres facultatifs que vous pouvez inclure dans une définition de route. Le paramètre Priorité vous permet de choisir les routes dont les messages doivent être traités en premier ou au contraire, les routes à traiter en dernier. La priorité est déterminée en définissant un nombre entre 0 et 9, 0 étant la priorité la plus haute. Le paramètre Durée de vie vous permet de déclarer la durée de conservation des messages dans cette route avant qu’ils soient traités ou supprimés de la file d’attente.
+
+Pour plus d’informations sur la création de routes, consultez [Déclarer des routes](module-composition.md#declare-routes).
 
 Sélectionnez **Suivant : Métriques**.
 
@@ -159,7 +132,7 @@ Si plusieurs déploiements ciblent un même appareil, seul celui qui a la priori
 Pour s’appliquer, un déploiement en couches ciblant un appareil doit avoir une priorité plus élevée que celle du déploiement de base.
 
 1. Entrez un entier positif pour la **Priorité** du déploiement.
-1. Entrez une **Condition cible** pour déterminer quels sont les appareils ciblés par ce déploiement. La condition est basée sur les balises de jumeau d’appareil ou sur les propriétés signalées du jumeau d’appareil et doit correspondre au format de l’expression. Par exemple, `tags.environment='test'` ou `properties.reported.devicemodel='4000x'`.
+1. Entrez une **Condition cible** pour déterminer quels sont les appareils ciblés par ce déploiement.  La condition est basée sur les balises de jumeau d’appareil ou sur les propriétés signalées du jumeau d’appareil et doit correspondre au format de l’expression.  Par exemple, `tags.environment='test'` ou `properties.reported.devicemodel='4000x'`.
 
 Sélectionnez **Suivant : Vérifier + créer** pour passer à l’étape finale.
 
@@ -209,7 +182,7 @@ Quand vous supprimez un déploiement, les appareils déployés adoptent leur dé
 
 1. Utilisez la case à cocher pour sélectionner le déploiement à supprimer.
 1. Sélectionnez **Supprimer**.
-1. Un message vous informe que cette action va supprimer ce déploiement et restaurer tous les appareils à leur état précédent. Un déploiement avec une priorité inférieure sera utilisé. Si aucun autre déploiement n’est ciblé, aucun module n’est supprimé. Si vous souhaitez supprimer tous les modules de votre appareil, créez un déploiement sans aucun module et déployez-le sur l’appareil en question. Cliquez sur **Oui** pour continuer.
+1. Un message vous informe que cette action va supprimer ce déploiement et restaurer tous les appareils à leur état précédent.  Un déploiement avec une priorité inférieure sera utilisé.  Si aucun autre déploiement n’est ciblé, aucun module n’est supprimé. Si vous souhaitez supprimer tous les modules de votre appareil, créez un déploiement sans aucun module et déployez-le sur l’appareil en question.  Cliquez sur **Oui** pour continuer.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

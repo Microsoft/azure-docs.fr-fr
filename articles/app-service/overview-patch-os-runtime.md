@@ -3,19 +3,19 @@ title: Cadence des mises à jour correctives du système d’exploitation et des
 description: Découvrez comment Azure App Service met à jour le système d’exploitation et les runtimes, les runtimes et le niveau de correctif dont disposent vos applications, et comment obtenir les annonces de mise à jour.
 ms.topic: article
 ms.date: 02/02/2018
-ms.custom: seodec18
-ms.openlocfilehash: 597964914f4022899ab027b735ec6932105497b4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 8b52223aea0f0bdfecf58906ac192e893da3b47d
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273636"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558485"
 ---
 # <a name="os-and-runtime-patching-in-azure-app-service"></a>Système d’exploitation et mise à jour corrective du runtime dans Azure App Service
 
 Cet article vous explique comment obtenir certaines informations de version concernant le système d’exploitation ou les logiciels dans [App Service](overview.md). 
 
-App Service est une plateforme en tant que service (PaaS), ce qui signifie que le système d’exploitation et la pile d’applications sont gérés automatiquement par Azure ; vous ne gérez que votre application et ses données. Vous pouvez obtenir plus de contrôle sur le système d’exploitation et la pile d’applications dans [Machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/). Dans cette optique, il est néanmoins utile pour vous, en tant qu’utilisateur App Service, d’obtenir plus d’informations, telles que :
+App Service est une plateforme en tant que service (PaaS), ce qui signifie que le système d’exploitation et la pile d’applications sont gérés automatiquement par Azure ; vous ne gérez que votre application et ses données. Vous pouvez obtenir plus de contrôle sur le système d’exploitation et la pile d’applications dans [Machines virtuelles Azure](../virtual-machines/index.yml). Dans cette optique, il est néanmoins utile pour vous, en tant qu’utilisateur App Service, d’obtenir plus d’informations, telles que :
 
 -   Comment et quand sont appliquées les mises à jour du système d’exploitation ?
 -   Comment est appliqué un correctif à App Service pour le protéger contre les vulnérabilités importantes (notamment le risque zero-day) ?
@@ -25,7 +25,7 @@ Pour des raisons de sécurité, certains détails sur les informations de sécur
 
 ## <a name="how-and-when-are-os-updates-applied"></a>Comment et quand sont appliquées les mises à jour du système d’exploitation ?
 
-Azure gère l’application de correctifs au système d’exploitation à deux niveaux : les serveurs physiques et les machines virtuelles invitées qui exécutent les ressources App Service. Ces deux niveaux sont mis à jour tous les mois, conformément à la planification mensuelle [Patch Tuesday](https://technet.microsoft.com/security/bulletins.aspx). Ces mises à jour sont appliquées automatiquement, d’une façon qui garantit le contrat de niveau de service (SLA) Azure. 
+Azure gère l’application de correctifs au système d’exploitation à deux niveaux : les serveurs physiques et les machines virtuelles invitées qui exécutent les ressources App Service. Ces deux niveaux sont mis à jour tous les mois, conformément à la planification mensuelle [Patch Tuesday](/security-updates/). Ces mises à jour sont appliquées automatiquement, d’une façon qui garantit le contrat de niveau de service (SLA) Azure. 
 
 Pour plus d’informations sur la façon dont les mises à jour sont appliquées, consultez [*****Demystifying the magic behind App Service OS updates****](https://azure.github.io/AppService/2018/01/18/Demystifying-the-magic-behind-App-Service-OS-updates.html).
 
@@ -51,11 +51,11 @@ Les mises à jour et les désapprobations de runtime sont annoncées ici :
 
 ### <a name="new-patch-updates"></a>Nouvelles mises à jour correctives
 
-Les mises à jour correctives pour la version .NET, PHP, Java SDK ou Tomcat/Jetty sont appliquées automatiquement en remplaçant l’installation existante par la nouvelle version. Les mises à jour correctives Node.js sont installées côte à côte avec les versions existantes (comme pour les versions majeures et mineures à la section suivante). Les nouvelles versions du correctif Python peuvent être installées manuellement par le biais des [extensions de site](https://azure.microsoft.com/blog/azure-web-sites-extensions/), côte à côte avec les installations Python intégrées.
+Les mises à jour correctives de la version .NET, PHP, Java SDK ou Tomcat sont appliquées automatiquement en remplaçant l’installation existante par la dernière version. Les mises à jour correctives Node.js sont installées côte à côte avec les versions existantes (comme pour les versions majeures et mineures à la section suivante). Les nouvelles versions du correctif Python peuvent être installées manuellement par le biais des [extensions de site](https://azure.microsoft.com/blog/azure-web-sites-extensions/), côte à côte avec les installations Python intégrées.
 
 ### <a name="new-major-and-minor-versions"></a>Nouvelles versions majeures et mineures
 
-Lorsqu’une nouvelle version majeure ou mineure est ajoutée, elle est installée côte à côte avec les versions existantes. Vous pouvez manuellement mettre à niveau votre application avec la nouvelle version. Si vous avez configuré la version du runtime dans un fichier de configuration (tel que `web.config` et `package.json`), vous devez effectuer la mise à niveau avec la même méthode. Si vous avez utilisé un paramètre App Service pour configurer votre version du runtime, vous pouvez le modifier dans le [portail Azure](https://portal.azure.com) ou en exécutant une commande d[’interface CLI Azure](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) dans le [Cloud Shell](../cloud-shell/overview.md), comme indiqué dans les exemples suivants :
+Lorsqu’une nouvelle version majeure ou mineure est ajoutée, elle est installée côte à côte avec les versions existantes. Vous pouvez manuellement mettre à niveau votre application avec la nouvelle version. Si vous avez configuré la version du runtime dans un fichier de configuration (tel que `web.config` et `package.json`), vous devez effectuer la mise à niveau avec la même méthode. Si vous avez utilisé un paramètre App Service pour configurer votre version du runtime, vous pouvez le modifier dans le [portail Azure](https://portal.azure.com) ou en exécutant une commande d[’interface CLI Azure](/cli/azure/get-started-with-azure-cli) dans le [Cloud Shell](../cloud-shell/overview.md), comme indiqué dans les exemples suivants :
 
 ```azurecli-interactive
 az webapp config set --net-framework-version v4.7 --resource-group <groupname> --name <appname>
@@ -78,7 +78,7 @@ Le tableau suivant indique comment afficher les versions de Windows et du runtim
 | Information | Comment y accéder | 
 |-|-|
 | Version de Windows | Voir `https://<appname>.scm.azurewebsites.net/Env.cshtml` (sous Informations système) |
-| Version de .NET | Dans `https://<appname>.scm.azurewebsites.net/DebugConsole`, exécutez la commande suivante dans l’invite de commandes : <br>`powershell -command "gci 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Net Framework Setup\NDP\CDF'"` |
+| Version de .NET | Dans `https://<appname>.scm.azurewebsites.net/DebugConsole`, exécutez la commande suivante dans l’invite de commandes : <br>`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"` |
 | Version .NET Core | Dans `https://<appname>.scm.azurewebsites.net/DebugConsole`, exécutez la commande suivante dans l’invite de commandes : <br> `dotnet --version` |
 | Version PHP | Dans `https://<appname>.scm.azurewebsites.net/DebugConsole`, exécutez la commande suivante dans l’invite de commandes : <br> `php --version` |
 | Version Node.js par défaut | Dans le [Cloud Shell](../cloud-shell/overview.md), exécutez la commande suivante : <br> `az webapp config appsettings list --resource-group <groupname> --name <appname> --query "[?name=='WEBSITE_NODE_DEFAULT_VERSION']"` |
@@ -86,7 +86,7 @@ Le tableau suivant indique comment afficher les versions de Windows et du runtim
 | Version de Java | Dans `https://<appname>.scm.azurewebsites.net/DebugConsole`, exécutez la commande suivante dans l’invite de commandes : <br> `java -version` |  
 
 > [!NOTE]  
-> L’accès à l’emplacement de registre `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages`, où sont stockées les informations sur les [correctifs KB](https://docs.microsoft.com/security-updates/SecurityBulletins/securitybulletins), est verrouillé.
+> L’accès à l’emplacement de registre `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages`, où sont stockées les informations sur les [correctifs KB](/security-updates/SecurityBulletins/securitybulletins), est verrouillé.
 >
 >
 

@@ -1,0 +1,21 @@
+---
+author: DCtheGeek
+ms.service: azure-policy
+ms.topic: include
+ms.date: 11/20/2020
+ms.author: dacoulte
+ms.custom: generated
+ms.openlocfilehash: fb5f6dbb410a15bf88fccc1ed3f9c3ca0f830c70
+ms.sourcegitcommit: 9889a3983b88222c30275fd0cfe60807976fd65b
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "96296083"
+---
+|Nom<br /><sub>(Portail Azure)</sub> |Description |Effet(s) |Version<br /><sub>(GitHub)</sub> |
+|---|---|---|---|
+|[Les espaces de travail Azure Synapse doivent utiliser des clés gérées par le client pour chiffrer les données au repos](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Ff7d52b2d-e161-4dfa-a82b-55e564167385) |Utilisez des clés gérées par le client pour contrôler le chiffrement au repos des données stockées dans des espaces de travail Azure synapse. Les clés gérées par le client fournissent un double chiffrement en ajoutant une deuxième couche de chiffrement en plus du chiffrement par défaut avec les clés gérées par le service. |Audit, Refuser, Désactivé |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Synapse/SynapseWorkspaceCMK_Audit.json) |
+|[Les règles de pare-feu IP sur les espaces de travail Azure Synapse doivent être supprimées](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F56fd377d-098c-4f02-8406-81eb055902b8) |La suppression de toutes les règles de pare-feu IP renforce la sécurité en garantissant que votre espace de travail Azure Synapse est accessible uniquement à partir d’un point de terminaison privé. Cette configuration audite la création de règles de pare-feu qui autorisent l’accès au réseau public sur l’espace de travail. |Audit, Désactivé |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Synapse/SynapseWorkspaceFirewallRules_Audit.json) |
+|[Un réseau virtuel d’espace de travail managé sur les espaces de travail Azure Synapse doit être activé](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F2d9dbfa3-927b-4cf0-9d0f-08747f971650) |L’activation d’un réseau virtuel d’espace de travail managé garantit que le réseau de votre espace de travail est isolé de celui des autres espaces de travail. L’intégration de données et les ressources Spark déployées dans ce réseau virtuel fournissent également l’isolation de niveau utilisateur pour les activités Spark. |Audit, Refuser, Désactivé |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Synapse/SynapseWorkspaceManagedVnet_Audit.json) |
+|[Les connexions des points de terminaison privés sur les espaces de travail Azure Synapse doivent être activées](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F72d11df1-dd8a-41f7-8925-b05b960ebafc) |Les points de terminaison privés peuvent être configurés pour se connecter en privé à un espace de travail Azure Synapse. Cela permet d’appliquer un canal de communication sécurisé à l’espace de travail Azure Synapse. |Audit, Désactivé |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Synapse/SynapseWorkspaceUsePrivateLinks_Audit.json) |
+|[Les points de terminaison privés managés Synapse doivent uniquement se connecter aux ressources de locataires Azure Active Directory approuvés](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F3a003702-13d2-4679-941b-937e58c443f0) |Protégez votre espace de travail Synapse en autorisant uniquement les connexions aux ressources de locataires Azure Active Directory (Azure AD) approuvés. Les locataires Azure AD approuvés peuvent être définis lors de l’attribution de stratégie. |Audit, Désactivé, Refus |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Synapse/Workspace_DataExfiltrationPrevention_Deny.json) |

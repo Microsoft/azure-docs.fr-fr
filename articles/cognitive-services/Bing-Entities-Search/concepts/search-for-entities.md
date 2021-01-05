@@ -10,22 +10,27 @@ ms.subservice: bing-entity-search
 ms.topic: conceptual
 ms.date: 02/01/2019
 ms.author: aahi
-ms.openlocfilehash: 1805f6f7a61f7e0b0a6e4d5bd6931c0a7d1f1b6f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9dabceda17defb24f2a916cd641f625feb551c6a
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218919"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353287"
 ---
 # <a name="searching-for-entities-with-the-bing-entity-api"></a>Recherche d’entités avec l’API Recherche d’entités Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 ## <a name="suggest-search-terms-with-the-bing-autosuggest-api"></a>Suggérer des termes de recherche avec l’API Suggestion automatique Bing
 
 Si vous fournissez une zone de recherche dans laquelle l’utilisateur entre son terme de recherche, utilisez [l’API Suggestion automatique Bing](../../bing-autosuggest/get-suggested-search-terms.md) pour améliorer l’expérience. À mesure que l’utilisateur tape des termes de recherche, l’API suggère des chaînes de requête.
 
-Quand l’utilisateur a terminé d’entrer son terme de recherche, encodez-le par URL avant de définir le paramètre de requête [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query). Par exemple, si l’utilisateur saisit *Marcus Appel*, définissez `q` sur *Marcus+Appel* ou *Marcus%20Appel*.
+Quand l’utilisateur a terminé d’entrer son terme de recherche, encodez-le par URL avant de définir le paramètre de requête [q](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query). Par exemple, si l’utilisateur saisit *Marcus Appel*, définissez `q` sur *Marcus+Appel* ou *Marcus%20Appel*.
 
-Si le terme de recherche contient une faute d’orthographe, la réponse à la recherche inclut un objet [QueryContext](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#querycontext). L’objet affiche l’orthographe d’origine et l’orthographe corrigée utilisées par Bing pour la recherche.
+Si le terme de recherche contient une faute d’orthographe, la réponse à la recherche inclut un objet [QueryContext](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#querycontext). L’objet affiche l’orthographe d’origine et l’orthographe corrigée utilisées par Bing pour la recherche.
 
 ```json
 "queryContext": {
@@ -38,15 +43,15 @@ Si le terme de recherche contient une faute d’orthographe, la réponse à la r
 
 ## <a name="the-bing-entity-search-api-response"></a>Réponse de l’API Recherche d’entités Bing
 
-La réponse de l’API contient un objet [SearchResponse](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#searchresponse). Si Bing trouve une entité ou un lieu pertinent(e), l’objet inclut le champ `entities`, le champ `places`, ou les deux. Sinon, l’objet de réponse n’inclut aucun de ces champs.
+La réponse de l’API contient un objet [SearchResponse](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#searchresponse). Si Bing trouve une entité ou un lieu pertinent(e), l’objet inclut le champ `entities`, le champ `places`, ou les deux. Sinon, l’objet de réponse n’inclut aucun de ces champs.
 > [!NOTE]
 > Les réponses d’entité prennent en charge plusieurs marchés, mais la réponse Lieux prend en charge uniquement les adresses professionnelles aux États-Unis. 
 
-Le champ `entities` est un objet [EntityAnswer](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference) qui contient une liste d’objets [Entity](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity) (voir le champ `value`). La liste peut contenir une seule entité dominante, plusieurs entités de levée de l’ambiguïté ou les deux. 
+Le champ `entities` est un objet [EntityAnswer](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference) qui contient une liste d’objets [Entity](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity) (voir le champ `value`). La liste peut contenir une seule entité dominante, plusieurs entités de levée de l’ambiguïté ou les deux. 
 
 Une entité dominante est retournée quand Bing pense être qu’il s’agit de la seule entité satisfaisant à la requête (il n’existe aucune ambiguïté quant à l’entité qui satisfait la requête). Si plusieurs entités sont susceptibles de satisfaire la requête, la liste contient plusieurs entités de levée d’ambiguïté. Par exemple, si la requête utilise un titre générique de franchise cinématographique, la liste contiendra des entités de levée d’ambiguïté. Toutefois, si la requête spécifie un titre spécifique de la franchise, la liste contiendra une seule entité dominante.
 
-Les entités incluent des personnalités connues tels que des chanteurs, des acteurs, des athlètes, des mannequins, etc., des lieux et des repères comme le mont Rainier ou le Lincoln Memorial et des éléments comme une banane, un Goldendoodle, un livre ou un titre de film. Le champ [entityPresentationInfo](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entitypresentationinfo) contient des conseils qui identifient le type d’entité. Par exemple, s’il s’agit d’une personne, d’un film, d’un animal ou d’un site. Pour obtenir la liste des types possibles, consultez [Types d’entités](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types).
+Les entités incluent des personnalités connues tels que des chanteurs, des acteurs, des athlètes, des mannequins, etc., des lieux et des repères comme le mont Rainier ou le Lincoln Memorial et des éléments comme une banane, un Goldendoodle, un livre ou un titre de film. Le champ [entityPresentationInfo](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entitypresentationinfo) contient des conseils qui identifient le type d’entité. Par exemple, s’il s’agit d’une personne, d’un film, d’un animal ou d’un site. Pour obtenir la liste des types possibles, consultez [Types d’entités](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types).
 
 ```json
 "entityPresentationInfo": {
@@ -174,9 +179,9 @@ Lorsque vous affichez les informations de l’entité (nom, description et image
 
 ## <a name="find-places"></a>Recherche de lieux
 
-Le champ `places` est un objet [LocalEntityAnswer](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference) qui contient la liste des objets [Place](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#place) (consultez les [types d’entités](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types) pour plus d’informations). La liste contient une ou plusieurs entités locales qui satisfont à la requête.
+Le champ `places` est un objet [LocalEntityAnswer](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference) qui contient la liste des objets [Place](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#place) (consultez les [types d’entités](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types) pour plus d’informations). La liste contient une ou plusieurs entités locales qui satisfont à la requête.
 
-Les lieux incluent des restaurants, des hôtels ou des entreprises locales. Le champ [entityPresentationInfo](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entitypresentationinfo) contient des conseils qui identifient le type d’entité local. La liste contient une liste de conseils comme Place, LocalBusiness, Restaurant. Chaque conseil successif de ce tableau se rapproche du type d’entité. Pour obtenir la liste des types possibles, consultez [Types d’entités](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types).
+Les lieux incluent des restaurants, des hôtels ou des entreprises locales. Le champ [entityPresentationInfo](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entitypresentationinfo) contient des conseils qui identifient le type d’entité local. La liste contient une liste de conseils comme Place, LocalBusiness, Restaurant. Chaque conseil successif de ce tableau se rapproche du type d’entité. Pour obtenir la liste des types possibles, consultez [Types d’entités](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#entity-types).
 
 ```json
 "entityPresentationInfo": {
@@ -189,7 +194,7 @@ Les lieux incluent des restaurants, des hôtels ou des entreprises locales. Le c
 > [!NOTE]
 > Les réponses d’entité prennent en charge plusieurs marchés, mais la réponse Lieux prend en charge uniquement les adresses professionnelles aux États-Unis. 
 
-Les requêtes d’entités locales telles que *restaurant à proximité* ont besoin de l’emplacement de l’utilisateur pour fournir des résultats précis. Vos requêtes doivent toujours utiliser les en-têtes X-Search-Location et X-MSEdge-ClientIP pour spécifier l’emplacement de l’utilisateur. Si Bing pense que la requête a besoin de l’emplacement de l’utilisateur, il définit le champ `askUserForLocation` de [QueryContext](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#querycontext) sur **true**. 
+Les requêtes d’entités locales telles que *restaurant à proximité* ont besoin de l’emplacement de l’utilisateur pour fournir des résultats précis. Vos requêtes doivent toujours utiliser les en-têtes X-Search-Location et X-MSEdge-ClientIP pour spécifier l’emplacement de l’utilisateur. Si Bing pense que la requête a besoin de l’emplacement de l’utilisateur, il définit le champ `askUserForLocation` de [QueryContext](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#querycontext) sur **true**. 
 
 ```json
 {
@@ -290,7 +295,7 @@ Dans l’exemple suivant, la règle `LinkAttribution` inclut le champ `targetPro
 
 ### <a name="license-attribution"></a>Attribution de licence
 
-Si la liste des règles contractuelles inclut une règle [LicenseAttribution](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#licenseattribution), vous devez afficher les avis sur la ligne qui suit immédiatement le contenu auquel la licence s’applique. La règle `LicenseAttribution` utilise le champ `targetPropertyName` pour identifier la propriété à laquelle la licence s’applique.
+Si la liste des règles contractuelles inclut une règle [LicenseAttribution](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#licenseattribution), vous devez afficher les avis sur la ligne qui suit immédiatement le contenu auquel la licence s’applique. La règle `LicenseAttribution` utilise le champ `targetPropertyName` pour identifier la propriété à laquelle la licence s’applique.
 
 Vous trouverez ci-dessous un exemple qui inclut une règle `LicenseAttribution`.
 
@@ -300,7 +305,7 @@ L’avis de licence que vous affichez doit inclure un lien hypertexte vers le si
 
 ### <a name="link-and-text-attribution"></a>Attribution de texte et de lien
 
-Les règles [LinkAttribution](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#linkattribution) et [TextAttribution](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#textattribution) sont généralement utilisées pour identifier le fournisseur des données. Le champ `targetPropertyName` identifie le champ auquel la règle s’applique.
+Les règles [LinkAttribution](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#linkattribution) et [TextAttribution](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#textattribution) sont généralement utilisées pour identifier le fournisseur des données. Le champ `targetPropertyName` identifie le champ auquel la règle s’applique.
 
 Pour attribuer les fournisseurs, incluez une ligne immédiatement après le contenu auquel les attributions s’appliquent (par exemple, le champ ciblé). La ligne doit être clairement étiquetée pour indiquer que les fournisseurs constituent la source des données. Par exemple, « Données de : contoso.com ». Pour les règles `LinkAttribution`, vous devez créer un lien hypertexte vers le site web du fournisseur.
 
@@ -310,7 +315,7 @@ Vous trouverez ci-dessous un exemple qui inclut les règles `LinkAttribution` et
 
 ### <a name="media-attribution"></a>Attribution média
 
-Si l’entité contient une image et que vous l’affichez, vous devez fournir un lien cliquable vers le site web du fournisseur. Si l’entité inclut une règle [MediaAttribution](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#mediaattribution), utilisez l’URL de la règle pour créer le lien cliquable. Sinon, utilisez l’URL incluse dans le champ `provider` de l’image pour créer le lien cliquable.
+Si l’entité contient une image et que vous l’affichez, vous devez fournir un lien cliquable vers le site web du fournisseur. Si l’entité inclut une règle [MediaAttribution](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#mediaattribution), utilisez l’URL de la règle pour créer le lien cliquable. Sinon, utilisez l’URL incluse dans le champ `provider` de l’image pour créer le lien cliquable.
 
 Vous trouverez ci-dessous un exemple qui inclut le champ `provider` d’une image et les règles contractuelles. Étant donné que l’exemple inclut la règle contractuelle, vous ignorez le champ `provider` de l’image et appliquez la règle `MediaAttribution`.
 

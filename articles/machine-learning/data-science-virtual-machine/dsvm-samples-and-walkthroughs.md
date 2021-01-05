@@ -10,12 +10,12 @@ author: vijetajo
 ms.author: vijetaj
 ms.topic: conceptual
 ms.date: 09/24/2018
-ms.openlocfilehash: d064e940997d13e51be4fd38e9f678b778ce31f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 98a1cd883867aa2f785b15f4c7ae4f2266a421ae
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74900049"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87012567"
 ---
 # <a name="samples-on-azure-data-science-virtual-machines"></a>Exemples sur Data Science Virtual Machine
 
@@ -25,7 +25,7 @@ Les machines Azure Data Science Virtual Machine (DSVM) incluent un ensemble comp
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour exécuter ces exemples, vous devez avoir approvisionné une Data Science Virtual Machine. Voir les guides de démarrage rapide pour [Windows](./provision-vm.md) et [Ubuntu](./dsvm-ubuntu-intro.md).
+Pour exécuter ces exemples, vous devez avoir approvisionné une [Data Science Virtual Machine Ubuntu](./dsvm-ubuntu-intro.md).
 
 ## <a name="available-samples"></a>Exemples disponibles
 | Catégorie d’exemples | Description | Emplacements |

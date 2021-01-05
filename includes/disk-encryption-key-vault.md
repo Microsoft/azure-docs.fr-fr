@@ -1,5 +1,5 @@
 ---
-title: Fichier include
+title: Fichier Include
 description: Fichier include
 services: virtual-machines
 author: msmbaldwin
@@ -7,13 +7,13 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 10/06/2019
 ms.author: mbaldwin
-ms.custom: include file
-ms.openlocfilehash: 6f7f319d2ebb4cd39933addf04f249df02d7819f
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: 3fe622d2ff4f6f8aff546452db0f475cfd44eb1b
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81314123"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015370"
 ---
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -131,7 +131,7 @@ Si vous souhaitez utiliser une clé de chiffrement à clé pour renforcer la pro
 
 Vous pouvez générer une nouvelle clé de chiffrement principale (KEK, key encryption key) à l’aide de la commande Azure CLI [az keyvault key create](/cli/azure/keyvault/key?view=azure-cli-latest#az-keyvault-key-create), de la cmdlet Azure PowerShell [Add-AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey) ou du [portail Azure](https://portal.azure.com/). Vous devez générer un type de clé RSA. Azure Disk Encryption ne prend pas encore en charge l’utilisation de clés à courbe elliptique.
 
-Vous pouvez au lieu de cela importer une clé KEK à partir de votre HSM de gestion des clés locales. Pour plus d’informations, consultez la [documentation concernant Key Vault](/azure/key-vault/key-vault-hsm-protected-keys).
+Vous pouvez au lieu de cela importer une clé KEK à partir de votre HSM de gestion des clés locales. Pour plus d’informations, consultez la [documentation concernant Key Vault](../articles/key-vault/keys/hsm-protected-keys.md).
 
 Les URL des clés KEK de votre coffre de clés doivent être versionnées. Azure met en vigueur cette restriction de gestion de version. Voici des exemples d’URL de clé secrète et de clé de chiffrement à clé valides :
 
@@ -148,7 +148,7 @@ Azure Disk Encryption ne prend pas en charge l’intégration de numéros de por
 Utilisez la commande Azure CLI [az keyvault key create](/cli/azure/keyvault/key?view=azure-cli-latest#az-keyvault-key-create) pour générer une nouvelle clé KEK et la stocker dans votre coffre de clés.
 
 ```azurecli-interactive
-az keyvault key create --name "myKEK" --vault-name "<your-unique-keyvault-name>" --kty RSA-HSM
+az keyvault key create --name "myKEK" --vault-name "<your-unique-keyvault-name>" --kty RSA
 ```
 
 Au lieu de cela, vous pouvez importer une clé privée à l’aide de la commande Azure CLI [az keyvault key import](/cli/azure/keyvault/key?view=azure-cli-latest#az-keyvault-key-import) :

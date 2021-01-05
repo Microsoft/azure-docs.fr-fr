@@ -4,15 +4,15 @@ description: Cet article montre comment migrer la passerelle Azure Application G
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/31/2020
 ms.author: victorh
-ms.openlocfilehash: 2a6165cf2739482805d712ddffb5c6a9f5ebabf8
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 3dd46f4033a568a278d7006c0d5aab451496ff47
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312045"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397221"
 ---
 # <a name="migrate-azure-application-gateway-and-web-application-firewall-from-v1-to-v2"></a>Migrer la passerelle Azure Application Gateway et le pare-feu d’applications web de v1 à v2
 
@@ -36,6 +36,8 @@ Un script Azure PowerShell est disponible qui effectue les opérations suivantes
 
 * La nouvelle passerelle v2 a de nouvelles adresses IP publiques et privées. Il n’est pas possible de déplacer de façon transparente les adresses IP associées à la passerelle v1 existante vers la version 2. Toutefois, vous pouvez allouer une adresse IP publique ou privée existante (non allouée) à la nouvelle passerelle v2.
 * Vous devez fournir un espace d’adressage IP pour un autre sous-réseau au sein de votre réseau virtuel où se trouve votre passerelle v1. Le script ne peut pas créer la passerelle v2 dans les sous-réseaux existants qui ont déjà une passerelle v1. Toutefois, si le sous-réseau existant a déjà une passerelle v2, celle-ci peut encore fonctionner sous réserve d’un espace d’adressage IP suffisant.
+* Si vous avez un groupe de sécurité réseau ou des routes définies par l’utilisateur associés au sous-réseau de passerelle v2, assurez-vous qu’ils respectent les [exigences NSG](../application-gateway/configuration-infrastructure.md#network-security-groups) et les [exigences UDR](../application-gateway/configuration-infrastructure.md#supported-user-defined-routes) pour une migration réussie.
+* Les [stratégies de points de terminaison de service de réseau virtuel](../virtual-network/virtual-network-service-endpoint-policies-overview.md) ne sont actuellement pas prises en charge dans un sous-réseau Application Gateway.
 * Pour migrer une configuration TLS/SSL, vous devez spécifier tous les certificats TLS/SSL utilisés sur votre passerelle v1.
 * Si le mode FIPS est activé pour votre passerelle V1, il ne sera pas migré vers votre nouvelle passerelle v2. Le mode FIPS n’est pas pris en charge dans v2.
 * La version 2 ne prend pas en charge IPv6, si bien que les passerelles v1 compatibles IPv6 ne sont pas migrées. Si vous exécutez le script, il peut ne pas se terminer.
@@ -59,9 +61,9 @@ Pour déterminer si vous avez installé les modules Azure Az, exécutez `Get-In
 
 Pour pouvoir utiliser cette option, les modules Azure Az ne doivent pas être installés sur votre ordinateur. S’ils sont installés, la commande suivante affiche une erreur. Vous pouvez désinstaller les modules Azure Az ou utiliser l’autre option pour télécharger le script manuellement et l’exécuter.
   
-Exécutez le script avec la commande suivante :
+Exécutez le script avec la commande suivante pour récupérer la version la plus récente :
 
-`Install-Script -Name AzureAppGWMigration`
+`Install-Script -Name AzureAppGWMigration -Force`
 
 Cette commande installe également les modules Az requis.  
 
@@ -123,7 +125,7 @@ Pour exécuter le script :
       $trustedCert = New-AzApplicationGatewayTrustedRootCertificate -Name "trustedCert1" -CertificateFile $certFilePath
       ```
 
-      Pour créer une liste d’objets PSApplicationGatewayTrustedRootCertificate, consultez [New-AzApplicationGatewayTrustedRootCertificate](https://docs.microsoft.com/powershell/module/Az.Network/New-AzApplicationGatewayTrustedRootCertificate?view=azps-2.1.0&viewFallbackFrom=azps-2.0.0).
+      Pour créer une liste d’objets PSApplicationGatewayTrustedRootCertificate, consultez [New-AzApplicationGatewayTrustedRootCertificate](/powershell/module/Az.Network/New-AzApplicationGatewayTrustedRootCertificate?view=azps-2.1.0&viewFallbackFrom=azps-2.0.0).
    * **privateIpAddress : [chaîne] : Facultatif**. Adresse IP privée spécifique que vous souhaitez associer à votre nouvelle passerelle v2.  Elle doit provenir du même réseau virtuel que vous allouez pour votre nouvelle passerelle v2. Si elle n’est pas spécifiée, le script alloue une adresse IP privée pour votre passerelle v2.
    * **publicIpResourceId : [chaîne] : Facultatif**. L’ID de ressource de la ressource d’IP publique (référence SKU standard) existante dans votre abonnement que vous souhaitez allouer à la nouvelle passerelle v2. S’il n’est pas spécifié, le script alloue une nouvelle adresse IP publique dans le même groupe de ressources. Ce nom correspond au nom de la passerelle v2 avec *-IP* ajouté.
    * **validateMigration : [commutateur] : Facultatif**. Utilisez ce paramètre si vous souhaitez que le script effectue des validations de comparaison de configuration de base après la création de la passerelle v2 et la copie de la configuration. Par défaut, aucune validation n’est effectuée.
@@ -196,7 +198,7 @@ Non. Actuellement, le script ne prend pas en charge les certificats dans Key Vau
 
 ### <a name="i-ran-into-some-issues-with-using-this-script-how-can-i-get-help"></a>J’ai rencontré des problèmes en utilisant ce script. Comment obtenir de l’aide ?
   
-Vous pouvez envoyer un e-mail à appgwmigrationsup@microsoft.com, ouvrir un dossier de support auprès du support Azure ou les deux.
+Vous pouvez contacter le support Azure sous la rubrique « Configuration et installation/migration vers la référence SKU V2 ». En savoir plus sur le [support Azure ici](https://azure.microsoft.com/support/options/).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

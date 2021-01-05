@@ -2,23 +2,19 @@
 title: Meilleures pratiques pour Azure RBAC
 description: Meilleures pratiques d'utilisation du contrôle d’accès en fonction du rôle Azure (Azure RBAC).
 services: active-directory
-documentationcenter: ''
 author: rolyon
 manager: mtillman
 ms.service: role-based-access-control
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 04/17/2020
+ms.date: 09/30/2020
 ms.author: rolyon
-ms.reviewer: bagovind
-ms.openlocfilehash: 053e86f3493c7a11a3cbbaad0871e45345697878
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 4cb3e1fe0275c676e2ce54ff9201502fc3595937
+ms.sourcegitcommit: ffa7a269177ea3c9dcefd1dea18ccb6a87c03b70
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735332"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91595486"
 ---
 # <a name="best-practices-for-azure-rbac"></a>Meilleures pratiques pour Azure RBAC
 
@@ -28,7 +24,9 @@ Cet article décrit quelques-unes des meilleures pratiques d'utilisation du cont
 
 Avec Azure RBAC, vous pouvez séparer les tâches au sein de votre équipe et accorder aux utilisateurs uniquement les accès nécessaires pour accomplir leur travail. Plutôt que de donner à tous des autorisations illimitées au sein de votre abonnement ou de vos ressources Azure, vous pouvez autoriser uniquement certaines actions sur une étendue donnée.
 
-Lorsque vous planifiez votre stratégie de contrôle d’accès, vous pouvez accorder aux utilisateurs les privilèges minimaux pour effectuer leur travail. Le diagramme suivant illustre un modèle suggéré pour l’utilisation d’Azure RBAC.
+Lorsque vous planifiez votre stratégie de contrôle d’accès, vous pouvez accorder aux utilisateurs les privilèges minimaux pour effectuer leur travail. Évitez d’attribuer des rôles plus larges à des étendues plus importantes, même s’ils semblent plus pratiques dans un premier temps. En limitant les rôles et les étendues, vous limitez les ressources menacées si le principal de sécurité est compromis.
+
+Le diagramme suivant illustre un modèle suggéré pour l’utilisation d’Azure RBAC.
 
 ![Azure RBAC et privilège minimum](./media/best-practices/rbac-least-privilege.png)
 

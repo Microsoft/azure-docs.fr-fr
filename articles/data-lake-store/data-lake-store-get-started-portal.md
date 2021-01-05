@@ -3,15 +3,15 @@ title: Bien démarrer avec Azure Data Lake Storage Gen1 - Portail
 description: Utiliser le portail Azure pour créer un compte Data Lake Storage Gen1 et effectuer des opérations de base dans ce compte.
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/27/2018
 ms.author: twooley
-ms.openlocfilehash: 1bfb9362aa0e893a8bf1a758e5a0069e85ab227b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 428ed96c3223e644b0c78712723231a5fabbdc77
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231501"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91578578"
 ---
 # <a name="get-started-with-azure-data-lake-storage-gen1-using-the-azure-portal"></a>Bien démarrer avec Azure Data Lake Storage Gen1 à l’aide du Portail Azure
 
@@ -50,7 +50,7 @@ Avant de commencer ce didacticiel, vous devez disposer des éléments suivants 
      * **Utiliser les clés gérées par Data Storage Gen1**, si vous souhaitez que Data Lake Storage Gen1 gère vos clés de chiffrement.
      * **Utiliser les clés de votre propre coffre de clés**. Vous pouvez sélectionner un coffre Azure Key Vault existant ou en créer un. Pour utiliser les clés d’un coffre de clés, vous devez attribuer des autorisations permettant au compte Data Lake Storage Gen1 d’accéder à Azure Key Vault. Pour obtenir les instructions correspondantes, reportez-vous à la section [Attribuer des autorisations à Azure Key Vault](#assign-permissions-to-azure-key-vault).
 
-        ![Chiffrement Data Lake Storage Gen1](./media/data-lake-store-get-started-portal/adls-encryption-2.png "Chiffrement Data Lake Storage Gen1")
+        ![Capture d’écran du panneau Nouveau compte Data Lake Storage Gen1 et du panneau Paramètres de chiffrement.](./media/data-lake-store-get-started-portal/adls-encryption-2.png "Chiffrement Data Lake Storage Gen1")
 
         Cliquez sur **OK** dans le panneau **Paramètres de chiffrement**.
 
@@ -64,10 +64,10 @@ Si vous avez utilisé des clés d’un coffre de clés Azure pour configurer le 
 
 1. Si vous avez utilisé des clés du coffre de clés Azure, un avertissement s’affiche en haut du panneau du compte Data Lake Storage Gen1. Cliquez sur l’avertissement pour ouvrir la zone **Chiffrement**.
 
-    ![Chiffrement Data Lake Storage Gen1](./media/data-lake-store-get-started-portal/adls-encryption-3.png "Chiffrement Data Lake Storage Gen1")
+    ![Capture d’écran du panneau Compte Data Lake Storage Gen1 montrant l’avertissement indiquant « Vous devez configurer les autorisations du coffre de clés. Cliquez ici pour les configurer. »](./media/data-lake-store-get-started-portal/adls-encryption-3.png "Chiffrement Data Lake Storage Gen1")
 2. Le panneau affiche deux options possibles pour configurer l’accès.
 
-    ![Chiffrement Data Lake Storage Gen1](./media/data-lake-store-get-started-portal/adls-encryption-4.png "Chiffrement Data Lake Storage Gen1")
+    ![Capture d’écran du panneau Chiffrement.](./media/data-lake-store-get-started-portal/adls-encryption-4.png "Chiffrement Data Lake Storage Gen1")
 
    * Dans la première option, cliquez sur **Accorder des autorisations** pour configurer l’accès. La première option est activée uniquement quand l’utilisateur qui a créé le compte Data Lake Storage Gen1 est également administrateur du coffre Azure Key Vault.
    * L’autre option consiste à exécuter l’applet de commande PowerShell qui s’affiche dans le panneau. Vous devez être propriétaire de coffre Azure Key Vault ou avoir le droit d’accorder des autorisations sur le coffre Azure Key Vault. Après avoir exécuté l’applet de commande, revenez au panneau et cliquez sur **Activer** pour configurer l’accès.
@@ -87,10 +87,10 @@ Vous pouvez créer des dossiers dans votre compte Data Lake Storage Gen1 pour g�
 1. Ouvrez le compte Data Lake Storage Gen1 que vous avez créé. Dans le volet gauche, cliquez sur **Toutes les ressources**, puis dans le volet **Toutes les ressources**, cliquez sur le nom du compte sous lequel vous souhaitez créer des dossiers. Si vous avez épinglé le compte au tableau d'accueil, cliquez sur la vignette de ce compte.
 2. Dans le panneau de votre compte Data Lake Storage Gen1, cliquez sur **Explorateur de données**.
 
-    ![Créer des dossiers dans un compte Data Lake Storage Gen1](./media/data-lake-store-get-started-portal/ADL.Create.Folder.png "Créer des dossiers dans un compte Data Lake Storage Gen1")
+    ![Capture d’écran du panneau Compte Data Lake Storage Gen1 avec l’option Explorateur de données entourée.](./media/data-lake-store-get-started-portal/ADL.Create.Folder.png "Créer des dossiers dans un compte Data Lake Storage Gen1")
 3. Dans le panneau Explorateur de données, cliquez sur **Nouveau dossier**, saisissez un nom pour le nouveau dossier, puis cliquez sur **OK**.
 
-    ![Créer des dossiers dans un compte Data Lake Storage Gen1](./media/data-lake-store-get-started-portal/ADL.Folder.Name.png "Créer des dossiers dans un compte Data Lake Storage Gen1")
+    ![Capture d’écran du panneau Explorateur de données avec l’option Nouveau dossier et la zone de texte Créer un dossier entourées.](./media/data-lake-store-get-started-portal/ADL.Folder.Name.png "Créer des dossiers dans un compte Data Lake Storage Gen1")
 
     Le dossier que vous venez de créer apparaît dans le panneau **Explorateur de données**. Vous pouvez créer des dossiers imbriqués jusqu'au niveau de votre choix.
 

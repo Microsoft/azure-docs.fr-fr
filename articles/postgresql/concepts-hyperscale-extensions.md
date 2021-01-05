@@ -6,21 +6,21 @@ ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
-ms.date: 04/16/2020
-ms.openlocfilehash: ba8f4591782a4e34fbde26d9669ef01f24450486
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/09/2020
+ms.openlocfilehash: 000f8a1457298901dcfc94bc5e0923e94ba35dc7
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82146412"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96620900"
 ---
 # <a name="postgresql-extensions-in-azure-database-for-postgresql--hyperscale-citus"></a>Extensions PostgreSQL dans Azure Database pour PostgreSQL - Hyperscale (Citus)
 
-PostgreSQL offre la possibilité d’étendre les fonctionnalités d’une base de données à l’aide des extensions. Les extensions permettent de regrouper plusieurs objets SQL liés dans un package unique ; elles peuvent être chargées ou supprimées de votre base de données d’une seule commande. Une fois chargées dans la base de données, les extensions peuvent fonctionner comme des fonctionnalités intégrées. Pour plus d’informations sur les extensions PostgreSQL, consultez  [Empaqueter des objets liés dans une extension](https://www.postgresql.org/docs/current/static/extend-extensions.html).
+PostgreSQL offre la possibilité d’étendre les fonctionnalités d’une base de données à l’aide des extensions. Les extensions permettent de regrouper plusieurs objets SQL liés dans un package unique ; elles peuvent être chargées ou supprimées de votre base de données d’une seule commande. Une fois chargées dans la base de données, les extensions peuvent fonctionner comme des fonctionnalités intégrées. Pour plus d'informations sur les extensions PostgreSQL, consultez [Empaqueter des objets liés dans une extension](https://www.postgresql.org/docs/current/static/extend-extensions.html).
 
 ## <a name="use-postgresql-extensions"></a>Utiliser les extensions PostgreSQL
 
-Les extensions PostgreSQL doivent être installées dans votre base de données pour être utilisables. Pour installer une extension donnée, exécutez la commande  [CRÉER UNE EXTENSION](https://www.postgresql.org/docs/current/static/sql-createextension.html)  à partir de l’outil psql pour charger les objets empaquetés dans votre base de données.
+Les extensions PostgreSQL doivent être installées dans votre base de données pour être utilisables. Pour installer une extension donnée, exécutez la commande [CRÉER UNE EXTENSION](https://www.postgresql.org/docs/current/static/sql-createextension.html) dans l'outil psql afin de charger les objets empaquetés dans votre base de données.
 
 Azure Database pour PostgreSQL - Hyperscale (Citus) prend actuellement en charge un sous-ensemble d’extensions de clé, comme indiqué ici. Les extensions autres que celles répertoriées ne sont pas prises en charge. Vous ne pouvez pas créer votre propre extension avec Azure Database pour PostgreSQL.
 
@@ -35,12 +35,13 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 > |---|---|
 > | [citext](https://www.postgresql.org/docs/current/static/citext.html) | Fournit un type de chaîne de caractères avec respect de la casse. |
 > | [cube](https://www.postgresql.org/docs/current/static/cube.html) | Fournit un type de données pour les cubes multidimensionnels. |
-> | [hstore](https://www.postgresql.org/docs/current/static/hstore.html) | Fournit un type de données permettant de stocker des ensembles de paires clé-valeur. |
 > | [hll](https://github.com/citusdata/postgresql-hll) | Fournit une structure de données HyperLogLog. |
+> | [hstore](https://www.postgresql.org/docs/current/static/hstore.html) | Fournit un type de données permettant de stocker des ensembles de paires clé-valeur. |
 > | [isn](https://www.postgresql.org/docs/current/static/isn.html) | Fournit des types de données pour les standards internationaux de numérotation de produits. |
 > | [lo](https://www.postgresql.org/docs/current/lo.html) | Maintenance des objets volumineux (Large Object). |
 > | [ltree](https://www.postgresql.org/docs/current/static/ltree.html) | Fournit un type de données pour les structures hiérarchiques de type arborescence. |
 > | [seg](https://www.postgresql.org/docs/current/seg.html) | Type de données pour représenter des segments de ligne ou des intervalles à virgule flottante. |
+> | [tdigest](https://github.com/tvondra/tdigest) | Type de données pour l’accumulation en ligne de statistiques basées sur le classement, telles que les quantiles et les moyennes tronquées. |
 > | [topn](https://github.com/citusdata/postgresql-topn/) | Type pour les n premiers JSONB. |
 
 ### <a name="full-text-search-extensions"></a>Extensions de recherche en texte intégral
@@ -64,9 +65,9 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 > | [intagg](https://www.postgresql.org/docs/current/intagg.html) | Agrégateur et énumérateur d’entier (obsolète). |
 > | [intarray](https://www.postgresql.org/docs/current/static/intarray.html) | Fournit des fonctions et des opérateurs permettant de manipuler des tableaux d’entiers non Null. |
 > | [moddatetime](https://www.postgresql.org/docs/current/contrib-spi.html#id-1.11.7.45.9) | Fonctions permettent de suivre la dernière heure de modification. |
-> | [pgcrypto](https://www.postgresql.org/docs/current/static/pgcrypto.html) | Fournit des fonctions de chiffrement. |
 > | [pg\_partman](https://pgxn.org/dist/pg_partman/doc/pg_partman.html) | Gère les tables partitionnées par date ou par ID. |
 > | [pg\_trgm](https://www.postgresql.org/docs/current/static/pgtrgm.html) | Fournit des fonctions et des opérateurs permettant de déterminer la similarité entre des textes alphanumériques par rapprochement de trigrammes. |
+> | [pgcrypto](https://www.postgresql.org/docs/current/static/pgcrypto.html) | Fournit des fonctions de chiffrement. |
 > | [refint](https://www.postgresql.org/docs/current/contrib-spi.html#id-1.11.7.45.5) | Fonctions permettant d’implémenter l’intégrité référentielle (obsolète). |
 > | session\_analytics | Fonctions permettant d’interroger des tables hstore. |
 > | [tablefunc](https://www.postgresql.org/docs/current/static/tablefunc.html) | Fournit des fonctions qui manipulent des tables entières, y compris les tables croisées. |
@@ -74,13 +75,12 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 > | [timetravel](https://www.postgresql.org/docs/current/contrib-spi.html#id-1.11.7.45.6) | Fonctions permettant d’implémenter le voyage dans le temps. |
 > | [uuid-ossp](https://www.postgresql.org/docs/current/static/uuid-ossp.html) | Génère des identificateurs uniques universels (UUID). |
 
-### <a name="hyperscale-extensions"></a>Extensions Hyperscale
+### <a name="hyperscale-citus-extensions"></a>Extensions Hyperscale (Citus)
 
 > [!div class="mx-tableFixed"]
 > | **Extension** | **Description** |
 > |---|---|
 > | [citus](https://github.com/citusdata/citus) | Base de données distribuée Citus. |
-> | shard\_rebalancer | Rééquilibrez en toute sécurité les données d’un groupe de serveurs en cas d’ajout ou de suppression de nœud. |
 
 ### <a name="index-types-extensions"></a>Extensions de types d’index
 
@@ -105,6 +105,7 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 > |---|---|
 > | [adminpack](https://www.postgresql.org/docs/current/adminpack.html) | Fonctions d’administration pour PostgreSQL. |
 > | [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | Fonctions permettant de vérifier l’intégrité de la relation. |
+> | [dblink](https://www.postgresql.org/docs/current/dblink.html) | Module prenant en charge les connexions aux autres bases de données PostgreSQL à partir d’une session de base de données. Pour plus d'informations sur cette extension, consultez la section « dblink et postgres_fdw ». |
 > | [file\_fdw](https://www.postgresql.org/docs/current/file-fdw.html) | Wrapper de données externes pour l’accès de fichier plat. |
 > | [pageinspect](https://www.postgresql.org/docs/current/pageinspect.html) | Inspectez le contenu de pages de base de données de bas niveau. |
 > | [pg\_buffercache](https://www.postgresql.org/docs/current/static/pgbuffercache.html) | Fournit un moyen d’examiner ce qui se passe dans le cache partagé des tampons en temps réel. |
@@ -119,8 +120,6 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 > | [sslinfo](https://www.postgresql.org/docs/current/sslinfo.html) | Informations sur les certificats TLS/SSL. |
 > | [tsm\_system\_rows](https://www.postgresql.org/docs/current/tsm-system-rows.html) | Méthode TABLESAMPLE, qui accepte le nombre de lignes en tant que limite. |
 > | [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html) | Méthode TABLESAMPLE, qui accepte le temps en millisecondes en tant que limite. |
-> | [hypopg](https://hypopg.readthedocs.io/en/latest/) | Fournit un moyen de créer des index hypothétiques qui ne consomment pas de ressources processeur ou disque. |
-> | [dblink](https://www.postgresql.org/docs/current/dblink.html) | Module prenant en charge les connexions aux autres bases de données PostgreSQL à partir d’une session de base de données. Pour plus d'informations sur cette extension, consultez la section « dblink et postgres_fdw ». |
 > | [xml2](https://www.postgresql.org/docs/current/xml2.html) | Interrogation de XPath et XSLT. |
 
 
@@ -139,11 +138,11 @@ Les tables suivantes répertorient les extensions PostgreSQL standard actuelleme
 ## <a name="pg_stat_statements"></a>pg_stat_statements
 L’extension [pg\_stat\_statements](https://www.postgresql.org/docs/current/pgstatstatements.html) est préchargée sur chaque serveur Azure Database pour PostgreSQL afin de vous fournir un moyen de suivre les statistiques d’exécution des instructions SQL.
 
-Le paramètre `pg_stat_statements.track` contrôle les instructions comptées par l’extension. Sa valeur par défaut est `top`, ce qui signifie que toutes les instructions exécutées directement par les clients sont suivies. Les deux autres niveaux de suivi sont `none` et `all`. Ce paramètre peut être configuré comme paramètre de serveur via le [portail Azure](https://docs.microsoft.com/azure/postgresql/howto-configure-server-parameters-using-portal) ou [Azure CLI](https://docs.microsoft.com/azure/postgresql/howto-configure-server-parameters-using-cli).
+Le paramètre `pg_stat_statements.track` contrôle les instructions comptées par l’extension. Sa valeur par défaut est `top`, ce qui signifie que toutes les instructions exécutées directement par les clients sont suivies. Les deux autres niveaux de suivi sont `none` et `all`. Ce paramètre peut être configuré comme paramètre de serveur via le [portail Azure](./howto-configure-server-parameters-using-portal.md) ou [Azure CLI](./howto-configure-server-parameters-using-cli.md).
 
 Un compromis existe entre les informations d’exécution des requêtes fournies par pg_stat_statements et l'effet sur les performances du serveur en raison de la journalisation de chaque instruction SQL. Si vous n’utilisez pas l’extension pg_stat_statements de façon active, nous vous recommandons de définir `pg_stat_statements.track` sur `none`. Certains services de surveillance tiers peuvent s’appuyer sur pg_stat_statements pour fournir des insights sur les performances des requêtes et dès lors, vérifiez si cela vous concerne ou non.
 
 ## <a name="dblink-and-postgres_fdw"></a>dblink et postgres_fdw
-Vous pouvez utiliser dblink et postgres_fdw pour vous connecter à partir d’un serveur PostgreSQL à un autre ou à une autre base de données dans le même serveur. Le serveur de réception doit autoriser les connexions à partir du serveur d’envoi via son pare-feu. Pour utiliser ces extensions afin d'établir une connexion entre des serveurs Azure Database pour PostgreSQL, définissez **Autoriser l’accès aux services Azure** sur Activé. Vous devez également activer ce paramètre si vous souhaitez utiliser les extensions pour établir la connexion vers le même serveur. Le paramètre **Autoriser l’accès aux services Azure** se trouve dans la page du portail Azure dédiée au serveur Postgres, sous **Sécurité de la connexion**. L’activation du paramètre **Autoriser l’accès aux services Azure** place toutes les adresses IP Azure sur liste verte.
 
-Actuellement, les connexions sortantes d’Azure Database pour PostgreSQL ne sont pas prises en charge, à l’exception des connexions à d’autres serveurs Azure Database pour PostgreSQL.
+Vous pouvez utiliser dblink et postgres\_fdw pour vous connecter à un serveur PostgreSQL à partir d’un autre serveur PostgreSQL, ou à une autre base de données du même serveur.  Le serveur de réception doit autoriser les connexions à partir du serveur d’envoi via son pare-feu.  Pour utiliser ces extensions pour la connexion entre des serveurs Azure Database pour PostgreSQL ou des groupes de serveurs Hyperscale (Citus), définissez **Autoriser les services et ressources Azure à accéder à ce groupe de serveurs (ou à ce serveur)** sur ACTIVÉ.  Vous devez également activer ce paramètre si vous souhaitez utiliser les extensions pour établir la connexion vers le même serveur.
+Le paramètre **Autoriser les services et ressources Azure à accéder à ce groupe de serveurs** se trouve dans la page du portail Azure du groupe de serveurs Hyperscale (Citus) sous **Mise en réseau**.  Actuellement, les connexions sortantes d’un serveur unique Azure Database pour PostgreSQL et d’Hyperscale (Citus) ne sont pas prises en charge, à l’exception des connexions à d’autres serveurs Azure Database pour PostgreSQL et groupes de serveurs Hyperscale (Citus).

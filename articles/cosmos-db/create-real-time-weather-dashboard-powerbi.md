@@ -1,20 +1,22 @@
 ---
 title: Créer un tableau de bord en temps réel à l’aide d’Azure Cosmos DB, Azure Analysis Services et Power BI
 description: Découvrez comment créer un tableau de bord de météo en temps réel dans Power BI à l’aide d’Azure Cosmos DB et Azure Analysis Services.
-author: bharathsreenivas
+author: SnehaGunda
+ms.author: sngun
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 09/04/2019
-ms.author: bharathb
 ms.reviewer: sngun
-ms.openlocfilehash: d225a14edddcad58c08094dbc758d67df8f834e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b3ec3e96aa1ba4bce3893c1af2446bb509a867b6
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70376482"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93333594"
 ---
 # <a name="create-a-real-time-dashboard-using-azure-cosmos-db-and-power-bi"></a>Créer un tableau de bord en temps réel à l’aide d’Azure Cosmos DB et Power BI
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article décrit les étapes à suivre pour créer un tableau de bord de météo en temps réel dans Power BI à l’aide d’Azure Cosmos DB et Azure Analysis Services. Le tableau de bord Power BI affiche des graphiques pour présenter des informations sur la température et les précipitations dans une région en temps réel.
 
@@ -46,20 +48,20 @@ Azure Analysis Services offre une plateforme en tant que service complètement m
 
 ### <a name="ingest-weather-data-into-azure-cosmos-db"></a>Ingérer des données météo dans Azure Cosmos DB
 
-Configurez un pipeline d’ingestion pour charger les [données météo](https://catalog.data.gov/dataset/local-weather-archive) dans Azure Cosmos DB. Vous pouvez configurer un travail [Azure Data Factory (ADF)](../data-factory/connector-azure-cosmos-db.md) pour charger périodiquement les dernières données météo dans Azure Cosmos DB à l’aide de la source HTTP et du récepteur Cosmos DB.
+Configurez un pipeline d’ingestion pour charger les [données météo](https://catalog.data.gov/dataset/local-weather-archive/resource/c28974a2-fc83-4722-8977-9a701323f729) dans Azure Cosmos DB. Vous pouvez configurer un travail [Azure Data Factory (ADF)](../data-factory/connector-azure-cosmos-db.md) pour charger périodiquement les dernières données météo dans Azure Cosmos DB à l’aide de la source HTTP et du récepteur Cosmos DB.
 
 
 ### <a name="connect-power-bi-to-azure-cosmos-db"></a>Connecter Power BI à Azure Cosmos DB
 
-1. **Connectez le compte Azure Cosmos à Power BI** : ouvrez Power BI Desktop et utilisez le connecteur Azure Cosmos DB pour sélectionner la base de données et le conteneur appropriés.
+1. **Connectez le compte Azure Cosmos à Power BI**  : ouvrez Power BI Desktop et utilisez le connecteur Azure Cosmos DB pour sélectionner la base de données et le conteneur appropriés.
 
-   ![Connecteur Power BI Azure Cosmos DB](./media/create-real-time-weather-dashboard-powerbi/cosmosdb-powerbi-connector.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/cosmosdb-powerbi-connector.png" alt-text="Connecteur Power BI Azure Cosmos DB":::
 
-1. **Configurez l’actualisation incrémentielle** : suivez les étapes de l’article [Actualisation incrémentielle dans Power BI](/power-bi/service-premium-incremental-refresh) pour configurer l’actualisation incrémentielle du jeu de données. Ajoutez les paramètres **RangeStart** et **RangeEnd** comme indiqué dans la capture d’écran suivante :
+1. **Configurez l’actualisation incrémentielle**  : suivez les étapes de l’article [Actualisation incrémentielle dans Power BI](/power-bi/service-premium-incremental-refresh) pour configurer l’actualisation incrémentielle du jeu de données. Ajoutez les paramètres **RangeStart** et **RangeEnd** comme indiqué dans la capture d’écran suivante :
 
-   ![Configurer les paramètres de plage](./media/create-real-time-weather-dashboard-powerbi/configure-range-parameters.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/configure-range-parameters.png" alt-text="Configurer les paramètres de plage":::
 
-   Étant donné que le jeu de données a une colonne Date au format texte, les paramètres **RangeStart** et **RangeEnd** doivent être transformés de façon à utiliser le filtre suivant. Dans le volet **Éditeur avancé**, modifiez votre requête en ajoutant le texte suivant pour filtrer les lignes en fonction des paramètres RangeStart et RangeEnd :
+   Étant donné que le jeu de données a une colonne Date au format texte, les paramètres **RangeStart** et **RangeEnd** doivent être transformés de façon à utiliser le filtre suivant. Dans le volet **Éditeur avancé** , modifiez votre requête en ajoutant le texte suivant pour filtrer les lignes en fonction des paramètres RangeStart et RangeEnd :
 
    ```
    #"Filtered Rows" = Table.SelectRows(#"Expanded Document", each [Document.date] > DateTime.ToText(RangeStart,"yyyy-MM-dd") and [Document.date] < DateTime.ToText(RangeEnd,"yyyy-MM-dd"))
@@ -75,46 +77,46 @@ Configurez un pipeline d’ingestion pour charger les [données météo](https:/
    |Date (par exemple : - 2019-08-11 12:00:00)   |  String       |  [Document.date]> DateTime.ToText(RangeStart," yyyy-mm-dd HH:mm:ss") and [Document.date] < DateTime.ToText(RangeEnd,"yyyy-mm-dd HH:mm:ss")       |
 
 
-1. **Définissez la stratégie d’actualisation** : définissez la stratégie d’actualisation en accédant à l’onglet **Actualisation incrémentielle** par le biais du **menu contextuel** de la table. Définissez la stratégie d’actualisation pour actualiser les données **chaque jour** et stocker les données du mois dernier.
+1. **Définissez la stratégie d’actualisation**  : définissez la stratégie d’actualisation en accédant à l’onglet **Actualisation incrémentielle** par le biais du **menu contextuel** de la table. Définissez la stratégie d’actualisation pour actualiser les données **chaque jour** et stocker les données du mois dernier.
 
-   ![Définir la stratégie d’actualisation](./media/create-real-time-weather-dashboard-powerbi/define-refresh-policy.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/define-refresh-policy.png" alt-text="Définir la stratégie d’actualisation":::
 
    Ignorez l’avertissement indiquant qu’il est *impossible de vérifier si la requête M peut être pliée*. Le connecteur Azure Cosmos DB plie les requêtes de filtre.
 
-1. **Chargez les données et générez les rapports** : en utilisant les données que vous avez chargées précédemment, créez les graphiques indiquant les températures et les précipitations.
+1. **Chargez les données et générez les rapports**  : en utilisant les données que vous avez chargées précédemment, créez les graphiques indiquant les températures et les précipitations.
 
-   ![Charger les données et générer le rapport](./media/create-real-time-weather-dashboard-powerbi/load-data-generate-report.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/load-data-generate-report.png" alt-text="Charger les données et générer le rapport":::
 
-1. **Publiez le rapport sur Power BI Premium** : dans la mesure où l’actualisation incrémentielle est une fonctionnalité disponible uniquement avec le service Premium, la boîte de dialogue de publication permet uniquement de sélectionner un espace de travail de capacité Premium. L’importation des données d’historique peut être plus longue lors de la première actualisation. Les actualisations de données suivantes sont nettement plus rapides, car il s’agit d’actualisations incrémentielles.
+1. **Publiez le rapport sur Power BI Premium**  : dans la mesure où l’actualisation incrémentielle est une fonctionnalité disponible uniquement avec le service Premium, la boîte de dialogue de publication permet uniquement de sélectionner un espace de travail de capacité Premium. L’importation des données d’historique peut être plus longue lors de la première actualisation. Les actualisations de données suivantes sont nettement plus rapides, car il s’agit d’actualisations incrémentielles.
 
 
 ## <a name="power-bi-azure-analysis-connector--azure-analysis-services"></a>Connecteur Power BI Azure Analysis + Azure Analysis Services 
 
 ### <a name="ingest-weather-data-into-azure-cosmos-db"></a>Ingérer des données météo dans Azure Cosmos DB 
 
-Configurez un pipeline d’ingestion pour charger les [données météo](https://catalog.data.gov/dataset/local-weather-archive) dans Azure Cosmos DB. Vous pouvez configurer un travail Azure Data Factory (ADF) pour charger périodiquement les dernières données météo dans Azure Cosmos DB à l’aide de la source HTTP et du récepteur Cosmos DB.
+Configurez un pipeline d’ingestion pour charger les [données météo](https://catalog.data.gov/dataset/local-weather-archive/resource/c28974a2-fc83-4722-8977-9a701323f729) dans Azure Cosmos DB. Vous pouvez configurer un travail Azure Data Factory (ADF) pour charger périodiquement les dernières données météo dans Azure Cosmos DB à l’aide de la source HTTP et du récepteur Cosmos DB.
 
 ### <a name="connect-azure-analysis-services-to-azure-cosmos-account"></a>Connecter Azure Analysis Services à un compte Azure Cosmos
 
 1. **Créez un cluster Azure Analysis Services** - [Créez une instance Azure Analysis Services](../analysis-services/analysis-services-create-server.md) dans la même région que le compte Azure Cosmos et le cluster Databricks.
 
-1. **Créez un projet tabulaire Analysis Services dans Visual Studio** -  [Installez SQL Server Data Tools (SSDT)](/sql/ssdt/download-sql-server-data-tools-ssdt?view=sql-server-2017) et créez un projet tabulaire Analysis Services dans Visual Studio.
+1. **Créez un projet tabulaire Analysis Services dans Visual Studio** -  [Installez SQL Server Data Tools (SSDT)](/sql/ssdt/download-sql-server-data-tools-ssdt?view=sql-server-2017&preserve-view=true) et créez un projet tabulaire Analysis Services dans Visual Studio.
 
-   ![Créer un projet Azure Analysis Services](./media/create-real-time-weather-dashboard-powerbi/create-analysis-services-project.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/create-analysis-services-project.png" alt-text="Créer un projet Azure Analysis Services":::
 
    Choisissez l’instance **Espace de travail intégré** et définissez le niveau de compatibilité sur **SQL Server 2017 / Azure Analysis Services (1400)** .
 
-   ![Concepteur de modèle tabulaire Azure Analysis Services](./media/create-real-time-weather-dashboard-powerbi/tabular-model-designer.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/tabular-model-designer.png" alt-text="Concepteur de modèle tabulaire Azure Analysis Services":::
 
-1. **Ajoutez la source de données Azure Cosmos DB** : accédez à **Modèles**> **Sources de données** > **Nouvelle source de données** et ajoutez la source de données Azure Cosmos DB comme indiqué dans la capture d’écran suivante :
+1. **Ajoutez la source de données Azure Cosmos DB**  : accédez à **Modèles**> **Sources de données** > **Nouvelle source de données** et ajoutez la source de données Azure Cosmos DB comme indiqué dans la capture d’écran suivante :
 
-   ![Ajouter une source de données Cosmos DB](./media/create-real-time-weather-dashboard-powerbi/add-data-source.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/add-data-source.png" alt-text="Ajouter une source de données Cosmos DB":::
 
-   Connectez-vous à Azure Cosmos DB en indiquant l’**URI du compte**, le **nom de la base de données** et le **nom du conteneur**. Vous voyez à présent que les données du conteneur Azure Cosmos ont été importées dans Power BI.
+   Connectez-vous à Azure Cosmos DB en indiquant l’ **URI du compte** , le **nom de la base de données** et le **nom du conteneur**. Vous voyez à présent que les données du conteneur Azure Cosmos ont été importées dans Power BI.
 
-   ![Prévisualiser les données Azure Cosmos DB](./media/create-real-time-weather-dashboard-powerbi/preview-cosmosdb-data.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/preview-cosmosdb-data.png" alt-text="Prévisualiser les données Azure Cosmos DB":::
 
-1. **Construisez le modèle Analysis Services** : ouvrez l’éditeur de requête et effectuez les opérations nécessaires pour optimiser le jeu de données chargé :
+1. **Construisez le modèle Analysis Services**  : ouvrez l’éditeur de requête et effectuez les opérations nécessaires pour optimiser le jeu de données chargé :
 
    * Procédez à l’extraction des colonnes liées à la météo uniquement (température et précipitations).
 
@@ -140,31 +142,30 @@ Configurez un pipeline d’ingestion pour charger les [données météo](https:/
 
    À présent, modifiez le type de données des colonnes de températures en choisissant Décimal. Vous vous assurez ainsi que ces valeurs peuvent être représentées dans Power BI.
 
-1. **Créez des partitions Azure Analysis** : créez des partitions dans Azure Analysis Services pour diviser le jeu de données en partitions logiques qui peuvent être actualisées de manière indépendante, à des fréquences différentes. Dans cet exemple, vous créez deux partitions qui divisent le jeu de données : l’une pour les données du mois le plus récent et l’autre pour tout le reste.
+1. **Créez des partitions Azure Analysis**  : créez des partitions dans Azure Analysis Services pour diviser le jeu de données en partitions logiques qui peuvent être actualisées de manière indépendante, à des fréquences différentes. Dans cet exemple, vous créez deux partitions qui divisent le jeu de données : l’une pour les données du mois le plus récent et l’autre pour tout le reste.
 
-   ![Créer des partitions Analysis Services](./media/create-real-time-weather-dashboard-powerbi/create-analysis-services-partitions.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/create-analysis-services-partitions.png" alt-text="Créer des partitions Analysis Services":::
 
    Créez les deux partitions suivantes dans Azure Analysis Services :
 
    * **Dernier mois** - `#"Filtered Rows" = Table.SelectRows(#"Sorted Rows", each [Document.month] = "2019-07")`
    * **Historique** -  `#"Filtered Rows" = Table.SelectRows(#"Sorted Rows", each [Document.month] <> "2019-07")`
 
-1. **Déployez le modèle sur le serveur Azure Analysis** : cliquez avec le bouton droit sur le projet Azure Analysis Services et choisissez **Déployer**. Ajoutez le nom du serveur dans le volet **Propriétés du serveur de déploiement**.
+1. **Déployez le modèle sur le serveur Azure Analysis**  : cliquez avec le bouton droit sur le projet Azure Analysis Services et choisissez **Déployer**. Ajoutez le nom du serveur dans le volet **Propriétés du serveur de déploiement**.
 
-   ![Déployer le modèle Azure Analysis Services](./media/create-real-time-weather-dashboard-powerbi/analysis-services-deploy-model.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/analysis-services-deploy-model.png" alt-text="Déployer le modèle Azure Analysis Services":::
 
-1. **Configurez des actualisations et fusions de partitions** : Azure Analysis Services permet de traiter les partitions de façon indépendante. Nous voulons que la partition **Dernier mois** soit constamment mise à jour avec les données les plus récentes. Vous allez donc définir l’intervalle d’actualisation sur 5 minutes. Il n’est pas nécessaire d’actualiser les données de la partition Historique. En outre, vous devez écrire du code pour consolider la partition Dernier mois sur la partition Historique et créer une nouvelle partition Dernier mois.
-
+1. **Configurez des actualisations et fusions de partitions**  : Azure Analysis Services permet de traiter les partitions de façon indépendante. Nous voulons que la partition **Dernier mois** soit constamment mise à jour avec les données les plus récentes. Vous allez donc définir l’intervalle d’actualisation sur 5 minutes. Vous pouvez actualiser les données à l’aide de [l’API REST](../analysis-services/analysis-services-async-refresh.md), [d’Azure Automation](../analysis-services/analysis-services-refresh-azure-automation.md) ou d’une [application logique](../analysis-services/analysis-services-refresh-logic-app.md). Il n’est pas nécessaire d’actualiser les données de la partition Historique. En outre, vous devez écrire du code pour consolider la partition Dernier mois sur la partition Historique et créer une nouvelle partition Dernier mois.
 
 ## <a name="connect-power-bi-to-analysis-services"></a>Connecter Power BI à Analysis Services
 
-1. **Connectez-vous au serveur Azure Analysis à l’aide du connecteur de base de données Azure Analysis Services** : choisissez le **mode réel** et connectez-vous à l’instance Azure Analysis Services comme indiqué dans la capture d’écran suivante :
+1. **Connectez-vous au serveur Azure Analysis à l’aide du connecteur de base de données Azure Analysis Services**  : choisissez le **mode réel** et connectez-vous à l’instance Azure Analysis Services comme indiqué dans la capture d’écran suivante :
 
-   ![Obtenir les données d’Azure Analysis Services](./media/create-real-time-weather-dashboard-powerbi/analysis-services-get-data.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/analysis-services-get-data.png" alt-text="Obtenir les données d’Azure Analysis Services":::
 
-1. **Chargez les données et générez les rapports** : en utilisant les données que vous avez chargées précédemment, créez les graphiques indiquant les températures et les précipitations. Étant donné que vous créez une connexion active, les requêtes doivent être exécutées sur les données du modèle Azure Analysis Services que vous avez déployé à l’étape précédente. Les graphiques de température seront mis à jour dans les cinq minutes suivant le chargement des nouvelles données dans Azure Cosmos DB.
+1. **Chargez les données et générez les rapports**  : en utilisant les données que vous avez chargées précédemment, créez les graphiques indiquant les températures et les précipitations. Étant donné que vous créez une connexion active, les requêtes doivent être exécutées sur les données du modèle Azure Analysis Services que vous avez déployé à l’étape précédente. Les graphiques de température seront mis à jour dans les cinq minutes suivant le chargement des nouvelles données dans Azure Cosmos DB.
 
-   ![Charger les données et générer les rapports](./media/create-real-time-weather-dashboard-powerbi/load-data-generate-report.png)
+   :::image type="content" source="./media/create-real-time-weather-dashboard-powerbi/load-data-generate-report.png" alt-text="Charger les données et générer les rapports":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 

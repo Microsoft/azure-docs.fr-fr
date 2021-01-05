@@ -9,15 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 05/01/2020
 ms.author: apimpm
-ms.openlocfilehash: 9af20972a47e2d0ad20de62f1bb9d10e4d43563c
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 7c4d32dd63120a52fd7351977943574455e5cfad
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82702650"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93146652"
 ---
 # <a name="export-apis-from-azure-api-management-to-the-power-platform"></a>Exporter des API depuis Gestion des API Azure vers Power Platform 
 
@@ -29,7 +29,7 @@ Cet article décrit les étapes à suivre pour exporter des API depuis Gestion d
 
 + Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion des API Azure](get-started-create-service-instance.md)
 + Vérifiez qu’il existe une API dans votre instance de Gestion des API que vous souhaitez exporter vers Power Platform
-+ Veillez à disposer d’un [environnement](https://docs.microsoft.com/powerapps/powerapps-overview#power-apps-for-admins) Power Apps ou Power Automate 
++ Veillez à disposer d’un [environnement](/powerapps/powerapps-overview#power-apps-for-admins) Power Apps ou Power Automate 
 
 ## <a name="export-an-api"></a>Exporter une API
 
@@ -47,4 +47,4 @@ Une fois l’exportation terminée, accédez à votre environnement Power Apps o
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrir plus d’informations sur Power Platform](https://powerplatform.microsoft.com/)
-* [Découvrir les tâches courantes dans Gestion des API en suivant les tutoriels](https://docs.microsoft.com/azure/api-management/import-and-publish)
+* [Découvrir les tâches courantes dans Gestion des API en suivant les tutoriels](./import-and-publish.md)

@@ -2,13 +2,13 @@
 title: Événement d’échec de tâche Azure Batch
 description: Référence pour l’événement d’échec de tâche Batch. Cet événement est émis en plus d’un événement de fin de tâche, et peut être utilisé pour détecter si une tâche a échoué.
 ms.topic: reference
-ms.date: 08/15/2019
-ms.openlocfilehash: 54a6965fbefeaf502372c611c2b3152dc43b0efe
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.date: 10/08/2020
+ms.openlocfilehash: e13692b45ff5a049d0b724525ad6565d2b894a3d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726347"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91850810"
 ---
 # <a name="task-fail-event"></a>Événement d’échec de tâche
 
@@ -23,6 +23,7 @@ ms.locfileid: "83726347"
     "id": "myTask",
     "taskType": "User",
     "systemTaskVersion": 0,
+    "requiredSlots": 1,
     "nodeInfo": {
         "poolId": "pool-001",
         "nodeId": "tvm-257509324_1-20160908t162728z"
@@ -49,8 +50,9 @@ ms.locfileid: "83726347"
 |`id`|String|ID de la tâche.|
 |`taskType`|String|Type de la tâche. Ce peut être « JobManager », indiquant qu’il s’agit une tâche du gestionnaire, ou « User », indiquant qu’il ne s’agit pas d’une tâche du gestionnaire. Cet événement n’est pas émis pour des tâches de préparation du travail, des tâches de fin de travail ou des tâches de démarrage.|
 |`systemTaskVersion`|Int32|Compteur de tentatives internes d’exécution d’une tâche. En interne, le service Batch peut recommencer une tâche pour prendre en compte des problèmes temporaires. Ces problèmes peuvent être des erreurs de planification internes ou des tentatives de récupération à partir de nœuds de calcul en mauvais état.|
+|`requiredSlots`|Int32|Emplacements requis pour exécuter la tâche.|
 |[`nodeInfo`](#nodeInfo)|Type complexe|Contient des informations sur le nœud de calcul sur lequel la tâche a été exécutée.|
-|[`multiInstanceSettings`](#multiInstanceSettings)|Type complexe|Spécifie que la tâche est une tâche multi-instance nécessitant plusieurs nœuds de calcul.  Consultez [`multiInstanceSettings`](https://docs.microsoft.com/rest/api/batchservice/get-information-about-a-task) pour plus de détails.|
+|[`multiInstanceSettings`](#multiInstanceSettings)|Type complexe|Spécifie que la tâche est une tâche multi-instance nécessitant plusieurs nœuds de calcul.  Consultez [`multiInstanceSettings`](/rest/api/batchservice/get-information-about-a-task) pour plus de détails.|
 |[`constraints`](#constraints)|Type complexe|Contraintes d’exécution qui s’appliquent à cette tâche.|
 |[`executionInfo`](#executionInfo)|Type complexe|Contient des informations sur l’exécution de la tâche.|
 

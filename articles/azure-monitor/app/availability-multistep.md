@@ -2,14 +2,13 @@
 title: Surveiller à l’aide de tests web à plusieurs étapes – Azure Application Insights
 description: Configuration des tests web multiétape pour surveiller vos applications web avec Azure Application Insights
 ms.topic: conceptual
-ms.date: 10/23/2019
-ms.reviewer: sdash
-ms.openlocfilehash: 3b8baad127b16a1bd9d071d0c3d4df68da8c3304
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/26/2020
+ms.openlocfilehash: 2df8b7450423c901665090608da83f68b43b30e5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655938"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87024771"
 ---
 # <a name="multi-step-web-tests"></a>Tests web à plusieurs étapes
 
@@ -17,6 +16,9 @@ Vous pouvez surveiller une séquence enregistrée d’URL et d’interactions av
 
 > [!NOTE]
 > Les tests web à plusieurs étapes dépendent des fichiers de test web Visual Studio. Il a été [annoncé](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/) que Visual Studio 2019 est la dernière version avec la fonctionnalité de test web. Il est important de comprendre que même si aucune nouvelle fonctionnalité ne sera ajoutée, les fonctionnalités de test web dans Visual Studio 2019 sont toujours prises en charge et continueront d’être prises en charge pendant le cycle de vie du support du produit. L’équipe de produit Azure Monitor a répondu aux questions concernant l’avenir des tests de disponibilité à plusieurs étapes [ici](https://github.com/MicrosoftDocs/azure-docs/issues/26050#issuecomment-468814101).  
+> </br>
+> Les tests web comportant plusieurs étapes **ne sont pas pris en charge** dans le cloud [Azure Government](../../azure-government/index.yml).
+
 
 ## <a name="pre-requisites"></a>Conditions préalables
 
@@ -35,7 +37,7 @@ Pour localiser les outils requis. Lancez **Visual Studio Installer** > **Composa
 > [!WARNING]
 > Nous ne recommandons plus l’utilisation de l’enregistreur multiétape. L’enregistreur a été développé pour les pages HTML statiques avec des interactions de base et ne fournit pas d’expérience fonctionnelle pour les pages web modernes.
 
-Pour obtenir de l’aide sur la création de tests web Visual Studio, voir la [documentation officielle de Visual Studio 2019](https://docs.microsoft.com/visualstudio/test/how-to-create-a-web-service-test?view=vs-2019).
+Pour obtenir de l’aide sur la création de tests web Visual Studio, voir la [documentation officielle de Visual Studio 2019](/visualstudio/test/how-to-create-a-web-service-test?view=vs-2019).
 
 ## <a name="upload-the-web-test"></a>Charger le test web
 

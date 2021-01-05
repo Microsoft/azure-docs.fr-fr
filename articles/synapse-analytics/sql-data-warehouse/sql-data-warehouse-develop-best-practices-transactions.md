@@ -1,32 +1,32 @@
 ---
 title: Optimisation de transactions
-description: Découvrez comment optimiser les performances de votre code transactionnel dans Synapse SQL tout en minimisant les risques de restaurations de longue durée.
+description: Découvrez comment optimiser les performances de votre code transactionnel dans le pool SQL dédié tout en minimisant les risques de restaurations de longue durée.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/19/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 0139c581e6660622f1ab6db9f407725816377a6d
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 46a165ea7fa21c02e859c16027086695f1f378c3
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633565"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462796"
 ---
-# <a name="optimizing-transactions-in-synapse-sql"></a>Optimisation des transactions dans Synapse SQL
+# <a name="optimizing-transactions-in-dedicated-sql-pool-in-azure-synapse-analytics"></a>Optimisation des transactions dans un pool SQL dédié dans Azure Synapse Analytics
 
-Découvrez comment optimiser les performances de votre code transactionnel dans Synapse SQL tout en minimisant les risques de restaurations de longue durée.
+Découvrez comment optimiser les performances de votre code transactionnel dans le pool SQL dédié tout en minimisant les risques de restaurations de longue durée.
 
 ## <a name="transactions-and-logging"></a>Transactions et journalisation
 
-Les transactions sont une composante importante d’un moteur de base de données relationnelle. Les transactions sont utilisées lors de la modification des données. Ces transactions peuvent être explicites ou implicites. Les instructions uniques INSERT, UPDATE et DELETE sont toutes des exemples de transactions implicites. Les transactions explicites utilisent BEGIN TRAN, COMMIT TRAN ou ROLLBACK TRAN. Les transactions explicites sont généralement utilisées quand plusieurs instructions de modification doivent être liées dans une seule unité atomique.
+Les transactions sont une composante importante d’un moteur de pool SQL relationnel. Les transactions sont utilisées lors de la modification des données. Ces transactions peuvent être explicites ou implicites. Les instructions uniques INSERT, UPDATE et DELETE sont toutes des exemples de transactions implicites. Les transactions explicites utilisent BEGIN TRAN, COMMIT TRAN ou ROLLBACK TRAN. Les transactions explicites sont généralement utilisées quand plusieurs instructions de modification doivent être liées dans une seule unité atomique.
 
-Les modifications apportées à la base de données sont suivies à l’aide de journaux des transactions. Chaque distribution présente son propre fichier journal. Les écritures des fichiers journaux de transactions sont automatiques. Aucune configuration n’est requise. Notez toutefois que ce processus, qui garantit l’écriture, introduit par ailleurs une surcharge dans le système. Pour réduire des effets, vous pouvez écrire du code efficace sur le plan transactionnel. Ce type de code se classe principalement en deux catégories.
+Les modifications apportées au pool SQL sont suivies à l’aide de journaux des transactions. Chaque distribution présente son propre fichier journal. Les écritures des fichiers journaux de transactions sont automatiques. Aucune configuration n’est requise. Notez toutefois que ce processus, qui garantit l’écriture, introduit par ailleurs une surcharge dans le système. Pour réduire des effets, vous pouvez écrire du code efficace sur le plan transactionnel. Ce type de code se classe principalement en deux catégories.
 
 * Utilisez autant que possible des constructions de journalisation minimale.
 * Traitez les données en les regroupant par lots définis, afin d’éviter les transactions isolées de longue durée.
@@ -79,7 +79,7 @@ CTAS et INSERT...SELECT sont des opérations de chargement en bloc. Toutefois, c
 Il est important de noter que toute opération d’écriture effectuée dans le cadre d’une mise à jour d’index secondaires ou non cluster correspond à une journalisation complète.
 
 > [!IMPORTANT]
-> Une base de données de pool SQL Synapse contient 60 distributions. Par conséquent, en partant du principe que l’ensemble des lignes sont distribuées équitablement et placées dans une partition unique, votre lot devra comporter 6 144 000 lots ou plus pour faire l’objet d’une journalisation minimale lors d’une écriture vers un index columstore en cluster. Si la table est partitionnée et que les lignes insérées dépassent les limites de la partition, il vous faudra 6 144 000 lignes par limite de partition, pour une distribution uniforme des données. Dans chaque distribution, l’ensemble des partitions doivent isolément dépasser le seuil de 102 400 lignes pour que l’insertion fasse l’objet d’une journalisation minimale dans la distribution.
+> Un pool SQL dédié contient 60 distributions. Par conséquent, en partant du principe que l’ensemble des lignes sont distribuées équitablement et placées dans une partition unique, votre lot devra comporter 6 144 000 lots ou plus pour faire l’objet d’une journalisation minimale lors d’une écriture vers un index columstore en cluster. Si la table est partitionnée et que les lignes insérées dépassent les limites de la partition, il vous faudra 6 144 000 lignes par limite de partition, pour une distribution uniforme des données. Dans chaque distribution, l’ensemble des partitions doivent isolément dépasser le seuil de 102 400 lignes pour que l’insertion fasse l’objet d’une journalisation minimale dans la distribution.
 
 Le chargement de données dans une table non vide avec un index cluster comporte bien souvent une combinaison de lignes ayant fait l’objet d’une journalisation minimale et complète. Un index cluster est un arbre équilibré (arbre b) de pages. Si la page cible de l’écriture comporte déjà des lignes d’une autre transaction, ces opérations d’écriture feront l’objet d’une journalisation complète. Toutefois, si la page est vide, l’opération d’écriture fera l’objet d’une journalisation minimale.
 
@@ -178,7 +178,7 @@ DROP TABLE [dbo].[FactInternetSales_old]
 ```
 
 > [!NOTE]
-> Les fonctionnalités de gestion de la charge de travail d’un pool SQL Synapse peuvent faciliter la recréation des tables de grande taille. Pour plus d’informations, consultez l’article [Classes de ressources pour la gestion des charges de travail](resource-classes-for-workload-management.md).
+> Les fonctionnalités de gestion de la charge de travail du pool SQL dédié peuvent faciliter la recréation des tables de grande taille. Pour plus d’informations, consultez l’article [Classes de ressources pour la gestion des charges de travail](resource-classes-for-workload-management.md).
 
 ## <a name="optimizing-with-partition-switching"></a>Optimisation avec basculement de partitions
 
@@ -407,16 +407,16 @@ END
 
 ## <a name="pause-and-scaling-guidance"></a>Conseils sur la suspension et la mise à l’échelle
 
-Synapse SQL vous permet de [suspendre, reprendre et mettre à l’échelle](sql-data-warehouse-manage-compute-overview.md) votre pool SQL à la demande. Quand vous suspendez ou mettez à l’échelle votre pool SQL, il est important de comprendre que l’ensemble des transactions en cours sont immédiatement arrêtées, ce qui entraîne la restauration de toute transaction ouverte. Si votre charge de travail a émis une modification de données incomplète et de longue durée avant l’opération de suspension ou de mise à l’échelle, cette tâche devra être annulée. Cette annulation peut avoir une incidence sur le temps nécessaire à la suspension ou à la mise à l’échelle de votre pool SQL.
+Un pool SQL dédié vous permet de [suspendre, reprendre et mettre à l’échelle](sql-data-warehouse-manage-compute-overview.md) votre pool SQL dédié à la demande. Quand vous suspendez ou mettez à l’échelle votre pool SQL dédié, il est important de comprendre que l’ensemble des transactions en cours sont immédiatement arrêtées, ce qui entraîne la restauration de toute transaction ouverte. Si votre charge de travail a émis une modification de données incomplète et de longue durée avant l’opération de suspension ou de mise à l’échelle, cette tâche devra être annulée. Cette annulation peut avoir une incidence sur le temps nécessaire à la suspension ou à la mise à l’échelle de votre pool SQL dédié.
 
 > [!IMPORTANT]
 > `UPDATE` et `DELETE` correspondant toutes deux à des journalisations complètes, ces opérations d’annulation et de rétablissement peuvent nécessiter un délai considérablement plus important que des journalisations minimales de taille équivalente.
 
-La configuration idéale consiste à laisser les transactions de modification de données en cours se terminer avant la suspension ou la mise à l’échelle du pool SQL. Toutefois, ce scénario n’est pas toujours pratique. Pour pallier le risque d’une longue restauration, envisagez l’une des options suivantes :
+Le meilleur scénario consiste à laisser les transactions de modification de données en cours se terminer avant de suspendre ou de mettre à l’échelle un pool SQL dédié. Toutefois, ce scénario n’est pas toujours pratique. Pour pallier le risque d’une longue restauration, envisagez l’une des options suivantes :
 
 * Réécrire les opérations de longue durée à l’aide de [CTAS](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest)
 * Décomposer l’opération en segments, en traitant un sous-ensemble des lignes
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur les niveaux d’isolement et les limites transactionnelles, consultez [Transactions dans Synapse SQL](sql-data-warehouse-develop-transactions.md).  Pour une vue d’ensemble des autres bonnes pratiques, consultez [Bonnes pratiques relatives à SQL Data Warehouse](sql-data-warehouse-best-practices.md).
+Pour en savoir plus sur les niveaux d’isolation et les limites des transactions, consultez [Transactions dans un pool SQL dédié](sql-data-warehouse-develop-transactions.md).  Pour une vue d’ensemble des autres meilleures pratiques, consultez [Meilleures pratiques pour les pools SQL dédiés](sql-data-warehouse-best-practices.md).

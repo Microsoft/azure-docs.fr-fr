@@ -5,24 +5,29 @@ description: Découvrez comment créer et utiliser une adresse IP publique stati
 services: container-service
 ms.topic: article
 ms.date: 03/04/2019
-ms.openlocfilehash: 08a9682434605fffde73c835e7a9e9d6971d7ff0
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 81b99478358ec3d670e8d783fba27603483614ea
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80803380"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87563243"
 ---
-# <a name="use-a-static-public-ip-address-for-egress-traffic-in-azure-kubernetes-service-aks"></a>Utiliser une adresse IP publique statique pour le trafic de sortie dans Azure Kubernetes Service (AKS)
+# <a name="use-a-static-public-ip-address-for-egress-traffic-with-a-basic-sku-load-balancer-in-azure-kubernetes-service-aks"></a>Utiliser une IP publique statique pour le trafic de sortie avec un équilibreur de charge de niveau tarifaire *De base* dans Azure Kubernetes Service (AKS)
 
-Par défaut, l’adresse IP de sortie d’un cluster Azure Kubernetes Service (AKS) est affectée aléatoirement. Cette configuration n’est pas idéale quand vous avez besoin d’identifier une adresse IP par exemple pour accéder à des services externes. Au lieu de cela, il peut être nécessaire d’affecter une adresse IP statique qui peut être placée en liste verte pour l’accès au service.
+Par défaut, l’adresse IP de sortie d’un cluster Azure Kubernetes Service (AKS) est affectée aléatoirement. Cette configuration n’est pas idéale quand vous avez besoin d’identifier une adresse IP par exemple pour accéder à des services externes. Au lieu de cela, il peut être nécessaire d’attribuer une adresse IP statique à ajouter à une liste d’adresses autorisées pour l’accès au service.
 
 Cet article vous montre comment créer et utiliser une adresse IP publique statique pour le trafic de sortie dans un cluster AKS.
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
+Cet article suppose que vous utilisez l’équilibreur de charge Azure De base.  Nous vous recommandons d’utiliser l’[équilibreur de charge Azure Standard](../load-balancer/load-balancer-overview.md), et vous pouvez utiliser des fonctionnalités plus avancées pour [contrôler le trafic de sortie d’AKS](./limit-egress-traffic.md).
+
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
 Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+
+> [!IMPORTANT]
+> Cet article utilise l’équilibreur de charge des références SKU *De base* dans un seul pool de nœuds. Cette configuration n’est pas disponible pour les pools de nœuds multiples, car l’équilibreur de charge des références SKU *De base* n’est pas pris en charge dans de tels scénarios. Consultez [Utiliser un équilibreur de charge Standard public dans Azure Kubernetes Service (AKS)][slb] pour plus d’informations sur l’utilisation de l’équilibreur de charge des références SKU *Standard*.
 
 ## <a name="egress-traffic-overview"></a>Vue d’ensemble du trafic de sortie
 
@@ -93,7 +98,7 @@ Créez le service et le déploiement avec la commande `kubectl apply`.
 kubectl apply -f egress-service.yaml
 ```
 
-Ce service configure une nouvelle adresse IP frontend sur l’équilibreur de charge Azure. Si vous n’avez pas d’autres adresses IP configurées, **tout** le trafic sortant doit désormais utiliser cette adresse. Lorsque plusieurs adresses sont configurées sur l’équilibreur de charge Azure, la sortie utilise la première adresse IP de cet équilibreur de charge.
+Ce service configure une nouvelle adresse IP frontend sur l’équilibreur de charge Azure. Si vous n’avez pas d’autres adresses IP configurées, **tout** le trafic sortant doit désormais utiliser cette adresse. Si plusieurs adresses sont configurées sur Azure Load Balancer, toutes ces adresses sont candidates pour les flux sortants, mais une seule d’entre elles est sélectionnée au hasard.
 
 ## <a name="verify-egress-address"></a>Vérifier l’adresse de sortie
 
@@ -102,7 +107,7 @@ Pour vérifier que l’adresse IP publique statique est utilisée, vous pouvez u
 Démarrez et attachez à un pod *Debian* de base :
 
 ```console
-kubectl run -it --rm aks-ip --image=debian --generator=run-pod/v1
+kubectl run -it --rm aks-ip --image=debian
 ```
 
 Pour accéder à un site web à partir du conteneur, utilisez `apt-get` pour installer `curl` dans le conteneur.
@@ -134,3 +139,4 @@ Pour éviter de devoir gérer plusieurs adresses IP publiques sur l’équilibre
 [aks-quickstart-cli]: kubernetes-walkthrough.md
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli
+[slb]: load-balancer-standard.md

@@ -4,28 +4,28 @@ titleSuffix: Azure Storage
 description: Mapper un domaine personnalisé à un point de terminaison de Stockage Blob ou un point de terminaison web dans un compte de stockage Azure.
 author: normesta
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/23/2020
 ms.author: normesta
 ms.reviewer: dineshm
 ms.subservice: blobs
-ms.openlocfilehash: 9d05677ec47851557594ef47499da653accad141
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dcc6f3bca80cb5860679327226d3e034c3e9b14a
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79370472"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95996863"
 ---
 # <a name="map-a-custom-domain-to-an-azure-blob-storage-endpoint"></a>Mapper un domaine personnalisé à un point de terminaison de Stockage Blob Azure
 
 Vous pouvez mapper un domaine personnalisé à un point de terminaison de service blob ou de [site web statique](storage-blob-static-website.md). 
 
-[!INCLUDE [updated-for-az](../../../includes/storage-data-lake-gen2-support.md)]
+[!INCLUDE [storage-data-lake-gen2-support](../../../includes/storage-data-lake-gen2-support.md)]
 
 > [!NOTE] 
-> Ce mappage fonctionne uniquement pour des sous-domaines (par exemple, `www.contoso.com`). Si vous souhaitez que votre point de terminaison web soit disponible sur le domaine racine (par exemple, `contoso.com`), vous devez utiliser Azure CDN. Pour obtenir de l’aide, voir la section [Mapper un domaine personnalisé avec le protocole HTTPS activé](#enable-https) de cet article. Étant donné que vous accédez à cette section de cet article pour activer le domaine racine de votre domaine personnalisé, l’étape de cette section pour activer le protocole HTTPS est facultative. 
+> Ce mappage fonctionne uniquement pour des sous-domaines (par exemple, `www.contoso.com`). Si vous souhaitez que votre point de terminaison web soit disponible sur le domaine racine (par exemple, `contoso.com`), vous devez utiliser Azure CDN. Pour obtenir de l’aide, voir la section [Mapper un domaine personnalisé avec le protocole HTTPS activé](#enable-https) de cet article. Étant donné que vous accédez à cette section de l’article pour activer le domaine racine de votre domaine personnalisé, l’étape de cette section visant à activer le protocole HTTPS est facultative. 
 
-<a id="enable-http" />
+<a id="enable-http"></a>
 
 ## <a name="map-a-custom-domain-with-only-http-enabled"></a>Mapper un domaine personnalisé avec uniquement le protocole HTTP activé
 
@@ -33,7 +33,7 @@ Cette approche est plus simple mais active uniquement l’accès HTTP. Si le com
 
 Pour activer l’accès HTTPS, voir la section [Mapper un domaine personnalisé avec le protocole HTTPS activé](#enable-https) de cet article. 
 
-<a id="map-a-domain" />
+<a id="map-a-domain"></a>
 
 ### <a name="map-a-custom-domain"></a>Mapper un domaine personnalisé
 
@@ -50,7 +50,7 @@ Si vous ne vous souciez pas du fait que le domaine soit brièvement indisponible
 
 :heavy_check_mark: Étape 4 : Testez votre domaine personnalisé.
 
-<a id="endpoint" />
+<a id="endpoint"></a>
 
 #### <a name="step-1-get-the-host-name-of-your-storage-endpoint"></a>Étape 1 : Récupérez le nom d’hôte de votre point de terminaison de stockage. 
 
@@ -71,7 +71,7 @@ Le nom d’hôte est l’URL du point de terminaison de stockage sans l’identi
   
    Mettez cette valeur de côté pour plus tard.
 
-<a id="create-cname-record" />
+<a id="create-cname-record"></a>
 
 #### <a name="step-2-create-a-canonical-name-cname-record-with-your-domain-provider"></a>Étape 2 : Créez un enregistrement de nom canonique (CNAME) auprès de votre fournisseur de domaine.
 
@@ -91,7 +91,7 @@ Créez un enregistrement CNAME pointant vers votre nom d’hôte. Un enregistrem
       
    - Le nom d’hôte que vous avez obtenu dans le cadre de la section [Récupérez le nom d’hôte de votre point de terminaison de stockage](#endpoint) plus haut dans cet article. 
 
-<a id="register" />
+<a id="register"></a>
 
 #### <a name="step-3-register-your-custom-domain-with-azure"></a>Étape 3 : Inscrivez votre domaine personnalisé auprès d’Azure.
 
@@ -117,7 +117,7 @@ Pour confirmer que votre domaine personnalisé est mappé à votre point de term
 
 Pour accéder à un formulaire web dans le conteneur *myforms* dans le sous-domaine personnalisé *photos.contoso.com*, vous pouvez par exemple utiliser l’URI suivant : `http://photos.contoso.com/myforms/applicationform.htm`
 
-<a id="zero-down-time" />
+<a id="zero-down-time"></a>
 
 ### <a name="map-a-custom-domain-with-zero-downtime"></a>Mapper un domaine personnalisé sans temps d’arrêt
 
@@ -136,7 +136,7 @@ Si votre domaine prend actuellement en charge une application adossée à un con
 
 :heavy_check_mark: Étape 5 : Testez votre domaine personnalisé.
 
-<a id="endpoint-2" />
+<a id="endpoint-2"></a>
 
 #### <a name="step-1-get-the-host-name-of-your-storage-endpoint"></a>Étape 1 : Récupérez le nom d’hôte de votre point de terminaison de stockage. 
 
@@ -250,7 +250,7 @@ Une fois le domaine personnalisé supprimé, une notification du portail s’aff
 
 #### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Pour supprimer une inscription de domaine personnalisé, utilisez la commande d’interface de ligne de commande [az storage account update](https://docs.microsoft.com/cli/azure/storage/account) et spécifiez une chaîne vide (`""`) pour la valeur d’argument `--custom-domain`.
+Pour supprimer une inscription de domaine personnalisé, utilisez la commande d’interface de ligne de commande [az storage account update](/cli/azure/storage/account) et spécifiez une chaîne vide (`""`) pour la valeur d’argument `--custom-domain`.
 
 * Format de commande :
 
@@ -295,7 +295,7 @@ Pour supprimer une inscription de domaine personnalisé, utilisez l’applet de 
   ```
 ---
 
-<a id="enable-https" />
+<a id="enable-https"></a>
 
 ## <a name="map-a-custom-domain-with-https-enabled"></a>Mapper un domaine personnalisé avec le protocole HTTPS activé
 
@@ -320,11 +320,11 @@ Pour mapper un domaine personnalisé et activer l’accès HTTPS, procédez comm
 
 4. (Facultatif) Passez en revue les instructions suivantes :
 
-   * [Jetons de signature d’accès partagé (SAP) avec Azure CDN](https://docs.microsoft.com/azure/cdn/cdn-storage-custom-domain-https#shared-access-signatures).
+   * [Jetons de signature d’accès partagé (SAP) avec Azure CDN](../../cdn/cdn-storage-custom-domain-https.md#shared-access-signatures).
 
-   * [Redirection HTTP vers HTTPS avec Azure CDN](https://docs.microsoft.com/azure/cdn/cdn-storage-custom-domain-https#http-to-https-redirection).
+   * [Redirection HTTP vers HTTPS avec Azure CDN](../../cdn/cdn-storage-custom-domain-https.md#http-to-https-redirection).
 
-   * [Tarification et facturation lors de l’utilisation de Stockage Blob avec Azure CDN](https://docs.microsoft.com/azure/cdn/cdn-storage-custom-domain-https#http-to-https-redirection).
+   * [Tarification et facturation lors de l’utilisation de Stockage Blob avec Azure CDN](../../cdn/cdn-storage-custom-domain-https.md#http-to-https-redirection).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -6,16 +6,16 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 04/19/2019
 ms.subservice: hybrid
 ms.author: billmath
-ms.openlocfilehash: fac33a01afc2efc1ab06c4783c11f7a089bb6208
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4e6460015430850c11fbf70a005d7440ce1b92fe
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "62114152"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91306002"
 ---
 # <a name="troubleshooting-source-anchor-issues-during-installation"></a>Résolution des problèmes d’ancre source pendant l’installation
 Cet article explique les différents problèmes d’ancre source qui peuvent se produire pendant l’installation et des moyens de résoudre ces problèmes.
@@ -27,16 +27,16 @@ Cet article explique les différents problèmes d’ancre source qui peuvent se 
 Pendant l’installation personnalisée, Azure AD Connect lit la stratégie d’ancre source dans Azure Active Directory. Si la stratégie existe dans Azure Active Directory, Azure AD Connect applique la même stratégie, sauf si elle est remplacée par le client. L’Assistant vous indique quel attribut a été lu. En outre, l’Assistant vous avertit si vous essayez de remplacer la stratégie d’ancre source.
 
 Au cours de cette opération de lecture, il est possible que la stratégie d’ancre source dans Azure Active Directory soit inattendue. Dans ce cas, Azure AD Connect ne sait pas quel ancre source utiliser et un remplacement manuel est nécessaire.</br>
-![inattendu](media/tshoot-connect-source-anchor/source1.png)
+![Capture d’écran montrant où remplacer manuellement l’ancre source.](media/tshoot-connect-source-anchor/source1.png)
 
 Pour résoudre ce problème, vous pouvez remplacer manuellement l’ancre source en sélectionnant un attribut spécifique. N’utilisez cette option que si vous êtes certain de l’attribut à sélectionner. Si vous n’en êtes pas certain, contactez le [support Microsoft](https://support.microsoft.com/contactus/) pour obtenir des conseils. Si vous modifiez la stratégie d’ancre source, l’association entre vos utilisateurs locaux et leurs ressources Azure associées peut être rompue.</br>
-![inattendu](media/tshoot-connect-source-anchor/source2.png)
+![Capture d’écran montrant l’attribut spécifié qui remplace l’ancre source.](media/tshoot-connect-source-anchor/source2.png)
 
 ### <a name="express-installation"></a>Installation rapide
 Pendant l’installation express, Azure AD Connect lit la stratégie d’ancre source dans Azure Active Directory. Si la stratégie existe dans Azure Active Directory, Azure AD Connect applique la même stratégie. Il n’y a aucune option pour effectuer le remplacement manuel.
 
 Au cours de cette opération de lecture, il est possible que la stratégie d’ancre source dans Azure Active Directory soit inattendue. Dans ce cas, Azure AD Connect ne sait pas quelle est l’ancre source.</br>
-![inattendu](media/tshoot-connect-source-anchor/source3.png)
+![Capture d’écran montrant ce qui se passe quand l’ancre source dans Azure Active Directory est inattendue.](media/tshoot-connect-source-anchor/source3.png)
 
 Pour résoudre ce problème, vous devez effectuer une réinstallation en mode personnalisé et remplacer manuellement l’ancre source en sélectionnant un attribut spécifique. N’utilisez cette option que si vous êtes certain de l’attribut à sélectionner. Si vous n’en êtes pas certain, contactez le [support Microsoft](https://support.microsoft.com/contactus/) pour obtenir des conseils. Si vous modifiez la stratégie d’ancre source, l’association entre vos utilisateurs locaux et leurs ressources Azure associées peut être rompue.
 

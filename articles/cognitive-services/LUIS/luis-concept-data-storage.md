@@ -3,23 +3,26 @@ title: Stockage des données – LUIS
 titleSuffix: Azure Cognitive Services
 description: LUIS stocke les données chiffrées dans un magasin de données Azure correspondant à la région spécifiée par la clé.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 07/29/2019
-ms.author: diberry
-ms.openlocfilehash: e3028a9f046edb4013d8a2d6ec88d8c3cb2ca489
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/07/2020
+ms.openlocfilehash: a58bcff4e39c4a4a907cd8567b47b074ff299bd5
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218811"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97008450"
 ---
 # <a name="data-storage-and-removal-in-language-understanding-luis-cognitive-services"></a>Stockage et suppression des données dans Language Understanding (LUIS) Cognitive Services
-LUIS stocke les données chiffrées dans un magasin de données Azure correspondant à la région spécifiée par la clé. Ces données sont stockées pendant 30 jours. 
+
+LUIS stocke les données chiffrées dans un magasin de données Azure correspondant à [la région](luis-reference-regions.md) spécifiée par la clé. 
+
+* Les données utilisées pour l’apprentissage du modèle, telles que les entités, les intentions et les énoncés sont enregistrées dans LUIS pendant la durée de vie de l’application. Si un propriétaire ou un contributeur supprime l’application, ces données sont supprimées. Si une application n’a plus été utilisée depuis 90 jours, elle est supprimée. 
+
+* Les auteurs d’applications peuvent choisir d’[activer la journalisation](luis-how-to-review-endpoint-utterances.md#log-user-queries-to-enable-active-learning) sur les énoncés envoyés à une application publiée. Si cette fonctionnalité est activée, les énoncés sont conservés pendant 30 jours et peuvent être consulté par l’auteur de l’application. Si la journalisation n’est pas activée lors de la publication de l’application, ces données ne sont pas stockées.
 
 ## <a name="export-and-delete-app"></a>Exporter et supprimer l’application
 Les utilisateurs ont le contrôle total sur l’[exportation](luis-how-to-start-new-app.md#export-app) et la [suppression](luis-how-to-start-new-app.md#delete-app) de l’application. 
@@ -52,9 +55,14 @@ Si vous ne souhaitez pas avoir d’énoncés d’apprentissage actif, vous pouve
 <a name="accounts"></a>
 
 ## <a name="delete-an-account"></a>Supprimer un compte
-Si vous supprimez un compte, toutes les applications sont supprimées, ainsi que leurs exemples d’énoncés et journaux d’activité. Les données sont conservées pendant 60 jours avant que le compte et les données ne soient définitivement supprimés.
+Si vous n’avez pas migré, vous pouvez supprimer votre compte et toutes vos applications seront supprimées ainsi que leurs exemples d’énoncés et journaux. Les données sont conservées pendant 90 jours avant que le compte et les données ne soient définitivement supprimés.
 
 La suppression d’un compte est possible à partir de la page **Paramètres**. Sélectionnez le nom de votre compte en haut à droite dans la barre de navigation supérieure pour accéder à la page **Paramètres**.
+
+## <a name="delete-an-authoring-resource"></a>Supprimer une ressource de création
+Si vous avez [migré vers une ressource de création](./luis-migration-authoring.md), la suppression de la ressource elle-même dans le portail Azure supprimera toutes vos applications associées à cette ressource, ainsi que leurs exemples d’énoncés et journaux. Les données sont conservées pendant 90 jours avant leur suppression définitive.    
+
+Pour supprimer votre ressource, accédez au [portail Azure](https://ms.portal.azure.com/#home) et sélectionnez votre ressource de création LUIS. Accédez à l’onglet **Vue d’ensemble** et cliquez sur le bouton **Supprimer** en haut de la page. Confirmez ensuite que votre ressource a été supprimée. 
 
 ## <a name="data-inactivity-as-an-expired-subscription"></a>Inactivité de données considérée comme un abonnement arrivé à expiration
 Dans le cadre de la conservation et de la suppression des données, une application LUIS inactive peut, à la _discrétion de Microsoft_ être traitée comme un abonnement arrivé à expiration. Une application est considérée comme inactive si elle répond aux critères suivants pendant les 90 derniers jours : 

@@ -1,7 +1,7 @@
 ---
-title: 'PowerShell : Migrer SQL Server vers SQL Database'
+title: 'PowerShell : Migrer SQL Server vers SQL Database'
 titleSuffix: Azure Database Migration Service
-description: Apprenez à migrer une instance locale de SQL Server vers Azure SQL Database à l’aide d’Azure PowerShell avec le service Azure Database Migration Service.
+description: Apprenez à migrer une base de données de SQL Server vers Azure SQL Database à l’aide d’Azure PowerShell et Azure Database Migration Service.
 services: database-migration
 author: pochiraju
 ms.author: rajpo
@@ -9,19 +9,19 @@ manager: craigg
 ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
-ms.custom: seo-lt-2019
-ms.topic: article
+ms.custom: seo-lt-2019, devx-track-azurepowershell
+ms.topic: how-to
 ms.date: 02/20/2020
-ms.openlocfilehash: f63f79402b457017257f1762c6ddc7e04c0ee1af
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87505557653e70aab7f1392aeea8dbdf505327e0
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77650688"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962754"
 ---
-# <a name="migrate-sql-server-on-premises-to-azure-sql-database-using-azure-powershell"></a>Migrer SQL Server local vers Azure SQL Database à l’aide d’Azure PowerShell
+# <a name="migrate-a-sql-server-database-to-azure-sql-database-using-azure-powershell"></a>Migrer une base de données SQL Server vers Azure SQL Database à l’aide d’Azure PowerShell
 
-Dans cet article, vous allez migrer la base de données **Adventureworks2012** restaurée vers une instance locale de SQL Server 2016 ou ultérieur ou Azure SQL Database, à l’aide de Microsoft Azure PowerShell. Vous pouvez migrer des bases de données à partir d’une instance SQL Server locale vers Azure SQL Database, à l’aide du module `Az.DataMigration`, dans Microsoft Azure PowerShell.
+Dans cet article, vous allez migrer la base de données **Adventureworks2012** restaurée sur une instance locale de SQL Server 2016 ou ultérieure ou sur Azure SQL Database à l’aide de Microsoft Azure PowerShell. Vous pouvez migrer des bases de données d’une instance SQL Server vers Azure SQL Database à l’aide du module `Az.DataMigration` dans Microsoft Azure PowerShell.
 
 Dans cet article, vous apprendrez comment :
 > [!div class="checklist"]
@@ -36,26 +36,26 @@ Dans cet article, vous apprendrez comment :
 Pour effectuer cette procédure, vous avez besoin de :
 
 * [SQL Server 2016 ou version ultérieure](https://www.microsoft.com/sql-server/sql-server-downloads) (toute édition)
-* Activer le protocole TCP/IP, qui est désactivé par défaut avec l’installation de SQL Server Express. Activer le protocole TCP/IP en suivant l’article [Activer ou désactiver un protocole réseau de serveur](https://docs.microsoft.com/sql/database-engine/configure-windows/enable-or-disable-a-server-network-protocol#SSMSProcedure).
-* Pour configurer votre [pare-feu Windows pour accéder au moteur de base de données](https://docs.microsoft.com/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
-* Une instance Azure SQL Database. Vous pouvez créer une instance Azure SQL Database en suivant les indications de l’article [Création d’une base de données Azure SQL à l’aide du portail Azure](https://docs.microsoft.com/azure/sql-database/sql-database-get-started-portal).
+* Activer le protocole TCP/IP, qui est désactivé par défaut avec l’installation de SQL Server Express. Activer le protocole TCP/IP en suivant l’article [Activer ou désactiver un protocole réseau de serveur](/sql/database-engine/configure-windows/enable-or-disable-a-server-network-protocol#SSMSProcedure).
+* Pour configurer votre [pare-feu Windows pour accéder au moteur de base de données](/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access).
+* Une instance Azure SQL Database. Vous pouvez créer une instance Azure SQL Database en suivant les indications de l’article [Création d’une base de données dans Azure SQL Database à l’aide du portail Azure](../azure-sql/database/single-database-create-quickstart.md).
 * [Assistant Migration des données](https://www.microsoft.com/download/details.aspx?id=53595) version 3.3 ou ultérieure.
-* Un réseau virtuel Microsoft Azure créé à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité de site à site à vos serveurs sources locaux pour le service Azure Database Migration Service via [ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-introduction) ou une passerelle [VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways).
-* Avoir terminé l’évaluation de votre base de données locale et de la migration de schéma à l’aide de l’Assistant Migration de données, comme indiqué dans l’article [Évaluer votre migration vers SQL Server](https://docs.microsoft.com/sql/dma/dma-assesssqlonprem).
-* Télécharger et installer le module Az.DataMigration à partir de PowerShell Gallery en utilisant la [cmdlet PowerShell Install-Module](https://docs.microsoft.com/powershell/module/powershellget/Install-Module?view=powershell-5.1). Veillez à ouvrir la fenêtre de commande PowerShell avec l’option Exécuter en tant qu’administrateur.
-* Vous assurer que les informations d’identification utilisées pour se connecter à une instance SQL Server source disposent de l’autorisation [CONTROL SERVER](https://docs.microsoft.com/sql/t-sql/statements/grant-server-permissions-transact-sql).
+* Un réseau virtuel Microsoft Azure créé à l’aide du modèle de déploiement Azure Resource Manager, qui fournit une connectivité de site à site à vos serveurs sources locaux pour le service Azure Database Migration Service via [ExpressRoute](../expressroute/expressroute-introduction.md) ou une passerelle [VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md).
+* Avoir terminé l’évaluation de votre base de données locale et de la migration de schéma à l’aide de l’Assistant Migration de données, comme indiqué dans l’article [Évaluer votre migration vers SQL Server](/sql/dma/dma-assesssqlonprem).
+* Télécharger et installer le module Az.DataMigration à partir de PowerShell Gallery en utilisant la [cmdlet PowerShell Install-Module](/powershell/module/powershellget/Install-Module?view=powershell-5.1). Veillez à ouvrir la fenêtre de commande PowerShell avec l’option Exécuter en tant qu’administrateur.
+* Vous assurer que les informations d’identification utilisées pour se connecter à une instance SQL Server source disposent de l’autorisation [CONTROL SERVER](/sql/t-sql/statements/grant-server-permissions-transact-sql).
 * Vous assurer que les informations d’identification utilisées pour se connecter à une instance Azure SQL DB cible disposent de l’autorisation CONTROL DATABASE sur les bases de données Azure SQL Database cibles.
 * Un abonnement Azure. Si vous n’en avez pas, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="log-in-to-your-microsoft-azure-subscription"></a>Connexion à un abonnement Microsoft Azure
 
-Suivez les instructions de l’article [Se connecter avec Azure PowerShell](https://docs.microsoft.com/powershell/azure/authenticate-azureps) pour vous connecter à votre abonnement Azure à l’aide de PowerShell.
+Suivez les instructions de l’article [Se connecter avec Azure PowerShell](/powershell/azure/authenticate-azureps) pour vous connecter à votre abonnement Azure à l’aide de PowerShell.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
 Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. Créez un groupe de ressources pour pouvoir créer une machine virtuelle.
 
-Créez un groupe de ressources à l’aide de la commande [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup).
+Créez un groupe de ressources à l’aide de la commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup).
 
 L’exemple suivant permet de créer un groupe de ressources nommé *myResourceGroup* dans la région *Est des États-Unis*.
 
@@ -67,11 +67,11 @@ New-AzResourceGroup -ResourceGroupName myResourceGroup -Location EastUS
 
 Vous pouvez créer une instance Azure Database Migration Service à l’aide de l’applet de commande `New-AzDataMigrationService`. Cette cmdlet attend les paramètres requis suivants :
 
-* *Nom du groupe de ressources Azure*. Vous pouvez utiliser la commande [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup) pour créer le groupe de ressources Azure comme indiqué précédemment, et fournir son nom en tant que paramètre.
+* *Nom du groupe de ressources Azure*. Vous pouvez utiliser la commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) pour créer le groupe de ressources Azure comme indiqué précédemment, et fournir son nom en tant que paramètre.
 * *Nom du service*. Chaîne qui correspond au nom de service unique à donner à l’instance Azure Database Migration Service. 
 * *Emplacement*. Spécifie l’emplacement du service. Indiquez un emplacement de centre de données Azure, tel que USA Ouest ou Asie Sud-Est.
 * *Référence SKU*. Ce paramètre correspond au nom de référence SKU DMS. Le nom de référence SKU actuellement pris en charge est *GeneralPurpose_4vCores*.
-* *Identificateur de sous-réseau virtuel*. Vous pouvez utiliser la cmdlet [New-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) pour créez un sous-réseau. 
+* *Identificateur de sous-réseau virtuel*. Vous pouvez utiliser la cmdlet [New-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/new-azvirtualnetworksubnetconfig) pour créez un sous-réseau. 
 
 L’exemple suivant crée un service nommé *MyDMS* dans le groupe de ressources *MyDMSResourceGroup*, qui se trouve dans la région *USA Est* à l’aide d’un réseau virtuel appelé *MyVNET* et d’un sous-réseau appelé *MySubnet*.
 
@@ -96,7 +96,7 @@ Une fois l’instance Azure Database Migration Service créée, générez un pro
 Vous pouvez créer un objet d’informations de connexion de base de données à l’aide de la cmdlet `New-AzDmsConnInfo`. Cette cmdlet attend les paramètres suivants :
 
 * *ServerType*. Type de connexion de base de données demandé, par exemple, MySQL, Oracle ou MySQL. Utilisez SQL pour SQL Server et Azure SQL.
-* *DataSource*. Nom ou adresse IP d’une instance SQL Server ou d’une base de données Azure SQL.
+* *DataSource*. Nom ou adresse IP d’une instance SQL Server ou d’Azure SQL Database.
 * *AuthType*. Type d’authentification pour la connexion, qui peut être SqlAuthentication ou WindowsAuthentication.
 * Le paramètre *TrustServerCertificate* définit une valeur qui indique si le canal est chiffré tout en ignorant l’analyse de la chaîne de certificat pour valider l’approbation. La valeur doit être « true » ou « false ».
 
@@ -109,7 +109,7 @@ $sourceConnInfo = New-AzDmsConnInfo -ServerType SQL `
   -TrustServerCertificate:$true
 ```
 
-L’exemple suivant montre la création des informations de connexion du serveur Azure SQL Database appelé SQLAzureTarget, à l’aide de l’authentification SQL :
+L’exemple suivant montre la création des informations de connexion pour un serveur appelé SQLAzureTarget à l’aide de l’authentification SQL :
 
 ```powershell
 $targetConnInfo = New-AzDmsConnInfo -ServerType SQL `
@@ -151,7 +151,7 @@ Enfin, créez et démarrez une tâche Azure Database Migration. La tâche Azure 
 
 ### <a name="create-credential-parameters-for-source-and-target"></a>Créer des paramètres d’informations d’identification pour la source et la cible
 
-Vous pouvez créer des informations d’identification de sécurité de la connexion en tant qu’objet [PSCredential](https://docs.microsoft.com/dotnet/api/system.management.automation.pscredential?redirectedfrom=MSDN&view=powershellsdk-1.1.0).
+Vous pouvez créer des informations d’identification de sécurité de la connexion en tant qu’objet [PSCredential](/dotnet/api/system.management.automation.pscredential?view=powershellsdk-1.1.0).
 
 L’exemple suivant illustre la création d’objets *PSCredential* pour les connexions source et cible, en fournissant des mots de passe en tant que variables de chaîne *$sourcePassword* et *$targetPassword*.
 
@@ -195,8 +195,8 @@ Utilisez la cmdlet `New-AzDataMigrationTask` pour créer et démarrer une tâche
 * *TaskName*. Nom de la tâche à créer. 
 * *SourceConnection*. Objet AzDmsConnInfo représentant la connexion SQL Server source.
 * *TargetConnection*. Objet AzureRmDmsConnInfo représentant la connexion Azure SQL Database cible.
-* *SourceCred*. Objet [PSCredential](https://docs.microsoft.com/dotnet/api/system.management.automation.pscredential?redirectedfrom=MSDN&view=powershellsdk-1.1.0) pour la connexion au serveur source.
-* *TargetCred*. Objet [PSCredential](https://docs.microsoft.com/dotnet/api/system.management.automation.pscredential?redirectedfrom=MSDN&view=powershellsdk-1.1.0) pour la connexion au serveur cible.
+* *SourceCred*. Objet [PSCredential](/dotnet/api/system.management.automation.pscredential?view=powershellsdk-1.1.0) pour la connexion au serveur source.
+* *TargetCred*. Objet [PSCredential](/dotnet/api/system.management.automation.pscredential?view=powershellsdk-1.1.0) pour la connexion au serveur cible.
 * *SelectedDatabase*. Objet AzDataMigrationSelectedDB représentant le mappage entre les bases de données source et cible.
 * *SchemaValidation*. (facultatif, paramètre de commutateur) Effectue une comparaison des informations de schéma de la source et de la cible après la migration.
 * *DataIntegrityValidation*. (facultatif, paramètre de commutateur) Effectue une validation de l’intégrité des données basée sur une somme de contrôle entre la source et la cible après la migration.

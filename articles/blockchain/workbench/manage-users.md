@@ -1,15 +1,15 @@
 ---
 title: Gérer les utilisateurs dans Azure Blockchain Workbench
 description: Guide de gestion des utilisateurs dans Azure Blockchain Workbench
-ms.date: 05/09/2019
-ms.topic: article
-ms.reviewer: brendal
-ms.openlocfilehash: 573ec477a3e75beb91f90da0545fb7d4c0f9bf39
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/15/2020
+ms.topic: how-to
+ms.reviewer: ravastra
+ms.openlocfilehash: be078e7149ba008ab8b7ad44a016a0d1cf82df0e
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227377"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91263009"
 ---
 # <a name="manage-users-in-azure-blockchain-workbench"></a>Gérer les utilisateurs dans Azure Blockchain Workbench
 
@@ -25,14 +25,11 @@ Azure Blockchain Workbench utilise Azure Active Directory (Azure AD) pour l’au
 
 Les utilisateurs Blockchain Workbench doivent exister dans le client Azure AD avant que vous ne puissiez les attribuer à des applications et à des rôles. Pour ajouter des utilisateurs à Azure AD, exécutez la procédure suivante :
 
-1.  Connectez-vous au [portail Azure](https://portal.azure.com).
-2.  Sélectionnez votre compte en haut à droite, puis basculez vers le client Azure AD associé à Blockchain Workbench.
-3.  Sélectionnez **Azure Active Directory > Utilisateurs**. Une liste des utilisateurs de votre répertoire s’affiche.
-4.  Pour ajouter des utilisateurs au répertoire, sélectionnez **Nouvel utilisateur**. Pour les utilisateurs externes, sélectionnez **Nouvel utilisateur invité**.
-
-    ![Nouvel utilisateur](./media/manage-users/add-ad-user.png)
-
-5.  Renseignez les champs requis pour le nouvel utilisateur. Sélectionnez **Create** (Créer).
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Sélectionnez votre compte en haut à droite, puis basculez vers le client Azure AD associé à Blockchain Workbench.
+1. Sélectionnez **Azure Active Directory > Utilisateurs**. Une liste des utilisateurs de votre répertoire s’affiche.
+1. Pour ajouter des utilisateurs au répertoire, sélectionnez **Nouvel utilisateur**. Pour les utilisateurs externes, sélectionnez **Nouvel utilisateur invité**.
+1. Renseignez les champs requis pour le nouvel utilisateur. Sélectionnez **Create** (Créer).
 
 Consultez la documentation relative à [Azure AD](../../active-directory/fundamentals/add-users-azure-active-directory.md) pour en savoir plus sur la gestion des utilisateurs dans Azure AD.
 
@@ -42,20 +39,21 @@ Une fois que les utilisateurs ont été ajoutés au répertoire, il est temps de
 
 Pour ajouter des utilisateurs dans le groupe **Administrateur** du répertoire Azure AD :
 
-1.  Connectez-vous au [portail Azure](https://portal.azure.com).
-2.  Vérifiez que vous vous trouvez dans le client Azure AD associé à Blockchain Workbench en sélectionnant votre compte en haut à droite.
-3.  Select **Azure Active Directory > Applications d’entreprise**.
-4.  Sélectionner l’application cliente Azure AD pour Blockchain Workbench
-    
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Vérifiez que vous vous trouvez dans le client Azure AD associé à Blockchain Workbench en sélectionnant votre compte en haut à droite.
+1. Select **Azure Active Directory > Applications d’entreprise**.
+1. Modifiez le filtre déroulant **Type d’application** en **Toutes les applications**, puis sélectionnez **Appliquer**.
+1. Sélectionner l’application cliente Azure AD pour Azure Blockchain Workbench
+
     ![Ensemble des inscriptions à l’application d’entreprise](./media/manage-users/select-blockchain-client-app.png)
 
-5.  Sélectionnez **Utilisateurs et groupes > Ajouter un utilisateur**.
-6.  Sous **Ajouter une attribution**, sélectionnez **Utilisateurs**. Choisissez ou recherchez l’utilisateur que vous souhaitez ajouter comme administrateur. Cliquez sur **Sélectionner** à l’issue de la sélection.
+1. Sélectionnez **Utilisateurs et groupes > Ajouter un utilisateur**.
+1. Sous **Ajouter une attribution**, sélectionnez **Utilisateurs**. Choisissez ou recherchez l’utilisateur que vous souhaitez ajouter comme administrateur. Cliquez sur **Sélectionner** à l’issue de la sélection.
 
     ![Ajouter une attribution](./media/manage-users/add-user-assignment.png)
 
-9.  Vérifiez que le **Rôle** est défini sur **Administrateur**.
-10. Sélectionnez **Attribuer**. Les utilisateurs ajoutés sont affichés dans la liste, avec le rôle d’administrateur affecté.
+1. Vérifiez que le **Rôle** est défini sur **Administrateur**.
+1. Sélectionnez **Attribuer**. Les utilisateurs ajoutés sont affichés dans la liste, avec le rôle d’administrateur affecté.
 
     ![Utilisateurs de l’application cliente Blockchain](./media/manage-users/blockchain-admin-list.png)
 
@@ -69,7 +67,7 @@ Utilisez l’application Blockchain Workbench pour gérer les utilisateurs et le
 
     Les membres sont ajoutés à chaque application. Les membres peuvent posséder un ou plusieurs rôles d’application pour lancer les contrats ou prendre des mesures.
 
-2. Pour gérer les membres d’une application, sélectionnez une vignette d’applications dans le volet **Applications**.
+1. Pour gérer les membres d’une application, sélectionnez une vignette d’applications dans le volet **Applications**.
 
     Le nombre de membres associés à l’application sélectionnée est répercuté dans la vignette des membres.
 
@@ -79,31 +77,31 @@ Utilisez l’application Blockchain Workbench pour gérer les utilisateurs et le
 #### <a name="add-member-to-application"></a>Ajouter un membre à l’application
 
 1. Sélectionnez la vignette des membres afin d’afficher une liste des membres actuels.
-2. Sélectionnez **Ajouter des membres**.
+1. Sélectionnez **Ajouter des membres**.
 
-    ![Ajouter des membres](./media/manage-users/application-add-members.png)
+    ![La capture d’écran montre la fenêtre d’appartenance à l’application avec le bouton Ajouter un membre mis en évidence.](./media/manage-users/application-add-members.png)
 
-3. Recherchez le nom d’utilisateur.  Seuls les utilisateurs Azure AD existants dans le client Blockchain Workbench sont répertoriés. Si l’utilisateur est introuvable, vous devez [ajouter des utilisateurs Azure AD](#add-azure-ad-users).
+1. Recherchez le nom d’utilisateur.  Seuls les utilisateurs Azure AD existants dans le client Blockchain Workbench sont répertoriés. Si l’utilisateur est introuvable, vous devez [ajouter des utilisateurs Azure AD](#add-azure-ad-users).
 
     ![Ajouter des membres](./media/manage-users/find-user.png)
 
-4. Sélectionnez un **Rôle** dans la liste déroulante.
+1. Sélectionnez un **Rôle** dans la liste déroulante.
 
     ![Sélectionner des membres de rôle](./media/manage-users/application-select-role.png)
 
-5. Sélectionnez **Ajouter** pour ajouter le membre avec le rôle associé à l’application.
+1. Sélectionnez **Ajouter** pour ajouter le membre avec le rôle associé à l’application.
 
 #### <a name="remove-member-from-application"></a>Supprimer un membre de l’application
 
 1. Sélectionnez la vignette des membres afin d’afficher une liste des membres actuels.
-2. Pour l’utilisateur que vous souhaitez supprimer, sélectionnez **Supprimer**  dans la liste déroulante du rôle.
+1. Pour l’utilisateur que vous souhaitez supprimer, sélectionnez **Supprimer**  dans la liste déroulante du rôle.
 
     ![Supprimer un membre](./media/manage-users/application-remove-member.png)
 
 #### <a name="change-or-add-role"></a>Modifier ou ajouter un rôle
 
 1. Sélectionnez la vignette des membres afin d’afficher une liste des membres actuels.
-2. Pour l’utilisateur que vous souhaitez modifier, cliquez sur la liste déroulante et sélectionnez le nouveau rôle.
+1. Pour l’utilisateur que vous souhaitez modifier, cliquez sur la liste déroulante et sélectionnez le nouveau rôle.
 
     ![Modifier le rôle](./media/manage-users/application-change-role.png)
 

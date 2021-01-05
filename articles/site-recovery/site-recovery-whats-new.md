@@ -2,13 +2,13 @@
 title: Nouveautés d’Azure Site Recovery
 description: Fournit un résumé des nouvelles fonctionnalités et des dernières mises à jour du service Azure Site Recovery.
 ms.topic: conceptual
-ms.date: 03/03/2020
-ms.openlocfilehash: abb1592bcacf025e9a052d7a9222f6fb3d2b72d6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/22/2020
+ms.openlocfilehash: 3667f963eac0ebc719872db00ac069c7da70ec91
+ms.sourcegitcommit: b849ecdc8aa97337299b0f09970b7810c59cd044
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228993"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96310355"
 ---
 # <a name="whats-new-in-site-recovery"></a>Nouveautés de Site Recovery
 
@@ -22,16 +22,94 @@ Pour les composants Site Recovery, nous prenons en charge les versions N-4, où
 
 **Mettre à jour** |  **Installation unifiée** | **OVA du serveur de configuration** | **Agent du service Mobilité** | **Fournisseur Site Recovery** | **Agent Recovery Services**
 --- | --- | --- | --- | --- | ---
-[Cumul 45](https://support.microsoft.com/help/4550047/) | 9.32.5487.1 | 5.1.5400.0 | 9.32.5487.1 | 5.1.5400.0 | 2.0.9165.0
-[Cumul 43](https://support.microsoft.com/help/4537047/) | 9.31.5449.1 | 5.1.5300.0 | 9.31.5449.1 | 5.1.5300.0 | 2.0.9165.0
-[Cumul 42](https://support.microsoft.com/help/4531426/) | 9.30.5407.1 | 5.1.5200.0 | 9.30.5407.1 | 5.1.5200.0 | 2.0.9165.0
-[Cumul 41](https://support.microsoft.com/help/4528026/) | 9.29.5367.1 | 5.1.5000.0 | 9.29.5367.1 | 5.1.5000.0 | 2.0.9165.0
-[Rollup 40](https://support.microsoft.com/help/4521530/) | 9.28.5345.1 | 5.1.4800.0 | 9.28.5345.1 | 5.1.4800.0 | 2.0.9165.0
+[Cumul 52](https://support.microsoft.com/help/4597409/)  | 9.39.5796.1 | 5.1.6458.0 | 9.39.5796.1 | 5.1.6458.0  | 2.0.9196.0
+[Cumul 51](https://support.microsoft.com/help/4590304)  | 9.38.5761.1 | 5.1.6400.0 | 9.38.5761.1 | 5.1.6400.0  | 2.0.9193.0
+[Cumul 50](https://support.microsoft.com/help/4582666/) | 9.37.5724.1 | 5.1.6347.0 | 9.37.5724.1 | 5.1.6347.0  | 2.0.9192.0
+[Cumul 49](https://support.microsoft.com/help/4578241/) | 9.36.5696.1 | 5.1.6315.0 | 9.36.5696.1 | 5.1.6315.0 | 2.0.9188.0
+[Rollup 48](https://support.microsoft.com/help/4573888/) | 9.35.5659.1 | 5.1.6200.0 | 9.35.5659.1 | 5.1.6200.0 | 2.0.9186.0
 
 [En savoir plus](service-updates-how-to.md) sur l’installation et la prise en charge des mises à jour.
 
+
+## <a name="updates-november-2020"></a>Mises à jour (novembre 2020)
+
+### <a name="update-rollup-52"></a>Correctif cumulatif 52
+
+Le [correctif cumulatif 52](https://support.microsoft.com/help/4597409/update-rollup-52-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations comme détaillé dans le cumul, y compris la nouvelle prise en charge de Linux pour le service Mobility.
+**Récupération d’urgence de machine virtuelle Azure** | Prise en charge des machines virtuelles exécutant RHEL 8.3 et Oracle Linux 7.9
+**Récupération d’urgence des machines virtuelles VMware physiques sur Azure** | Prise en charge des machines virtuelles exécutant RHEL 8.3, Oracle Linux 7.9/8.3.
+
+## <a name="updates-october-2020"></a>Mises à jour (octobre 2020)
+
+### <a name="update-rollup-51"></a>Correctif cumulatif 51
+
+Le [correctif cumulatif 51](https://support.microsoft.com/help/4590304/update-rollup-51-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations comme détaillé dans le cumul, y compris la nouvelle prise en charge de Linux pour le service Mobility.
+
+## <a name="updates-september-2020"></a>Mises à jour (septembre 2020)
+
+### <a name="update-rollup-50"></a>Correctif cumulatif 50
+
+Le [correctif cumulatif 50](https://support.microsoft.com/help/4582666/update-rollup-50-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations, comme détaillé dans le correctif cumulatif.
+
+## <a name="updates-august-2020"></a>Mises à jour (août 2020)
+
+### <a name="update-rollup-49"></a>Correctif cumulatif 49
+
+Le [correctif cumulatif 49](https://support.microsoft.com/help/4578241/update-rollup-49-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations comme détaillé dans le cumul, y compris la nouvelle prise en charge de Linux pour le service Mobility.
+
+## <a name="updates-july-2020"></a>Mises à jour (juillet 2020)
+
+### <a name="update-rollup-48"></a>Correctif cumulatif 48
+
+Le [correctif cumulatif 48](https://support.microsoft.com/help/4573888/update-rollup-48-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations, comme détaillé dans le correctif cumulatif.
+
 > [!NOTE]
-> Le correctif cumulatif 44 n’est pas indiqué dans le tableau, car il n’inclut pas de mises à jour pour les fournisseurs et les agents Site Recovery.
+> Le correctif cumulatif 48 présente un problème connu avec l’activation de la réplication pour les machines Linux chiffrées avec ADE. [Plus d’informations](./azure-to-azure-troubleshoot-errors.md#enable-protection-failed-as-the-installer-is-unable-to-find-the-root-disk-error-code-151137)
+
+### <a name="update-rollup-47"></a>Correctif cumulatif 47
+
+Le [correctif cumulatif 47](https://support.microsoft.com/help/4570609/update-rollup-47-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations, comme détaillé dans le correctif cumulatif.
+
+## <a name="updates-june-2020"></a>Mises à jour (juin 2020)
+
+### <a name="update-rollup-46"></a>Correctif cumulatif 46
+
+Le [correctif cumulatif 46](https://support.microsoft.com/help/4564347/update-rollup-46-for-azure-site-recovery) fournit les mises à jour suivantes :
+
+**Mettre à jour** | **Détails**
+--- | ---
+**Fournisseurs et agents** | Mises à jour des agents et des fournisseurs Site Recovery comme décrit dans le correctif cumulatif.
+**Correctifs/améliorations** | Un certain nombre de correctifs et d’améliorations, comme détaillé dans le correctif cumulatif.
 
 ## <a name="updates-march-2020"></a>Mises à jour (mars 2020)
 
@@ -57,7 +135,7 @@ Le [correctif cumulatif 44](https://support.microsoft.com/help/4538187/update-ro
 
 ### <a name="azure-vmware-disaster-recovery"></a>Récupération d’urgence d’Azure VMware
 
-L’offre Machines virtuelles Microsoft Azure prend désormais en charge les machines virtuelles activées pour le chiffrement au repos avec des clés gérées par le client. [En savoir plus](azure-to-azure-how-to-enable-replication-cmk-disks.md).
+L’offre Machines virtuelles Microsoft Azure prend désormais en charge les machines virtuelles activées pour le chiffrement au repos avec des clés gérées par le client. [Plus d’informations](azure-to-azure-how-to-enable-replication-cmk-disks.md)
 
 
 ### <a name="update-rollup-43"></a>Correctif cumulatif 43
@@ -136,7 +214,7 @@ Les nouvelles fonctionnalités de la reprise d’activité des machines virtuell
 
 **Fonctionnalité** | **Détails**
 --- | ---
-**Paramètres de basculement de test** | Lors de la configuration d’un basculement de test, vous pouvez maintenant configurer les paramètres de la machine virtuelle et du réseau de basculement de test, y compris l’adresse IP, le groupe de sécurité réseau, l’équilibre de charge interne et l’adresse IP publique pour chaque carte réseau. Ces paramètres sont facultatifs et ne modifient pas le comportement actuel. Si vous ne configurez pas ces paramètres, vous pouvez choisir un réseau virtuel Azure au moment du test de basculement. [En savoir plus](https://azure.microsoft.com/blog/customize-networking-for-dr-drills-azure-site-recovery/).
+**Paramètres de basculement de test** | Lors de la configuration d’un basculement de test, vous pouvez maintenant configurer les paramètres de la machine virtuelle et du réseau de basculement de test, y compris l’adresse IP, le groupe de sécurité réseau, l’équilibre de charge interne et l’adresse IP publique pour chaque carte réseau. Ces paramètres sont facultatifs et ne modifient pas le comportement actuel. Si vous ne configurez pas ces paramètres, vous pouvez choisir un réseau virtuel Azure au moment du test de basculement. [Plus d’informations](https://azure.microsoft.com/blog/customize-networking-for-dr-drills-azure-site-recovery/)
 **Plans de récupération** | Les plans de récupération sont désormais limités à 100 machines virtuelles afin de garantir la fiabilité du basculement.
 
 ### <a name="vmware-to-azure-disaster-recovery"></a>Récupération d’urgence VMware vers Azure
@@ -177,7 +255,7 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 **Fonctionnalité** | **Détails**
 --- | ---
-Nouvelles alertes du serveur de processus | Nous avons ajouté de nouvelles alertes de serveur de processus. [En savoir plus](vmware-physical-azure-monitor-process-server.md).
+Nouvelles alertes du serveur de processus | Nous avons ajouté de nouvelles alertes de serveur de processus. [Plus d’informations](vmware-physical-azure-monitor-process-server.md)
 
 ### <a name="hyper-v-disaster-recovery"></a>Reprise d’activité Hyper-V
 
@@ -269,8 +347,8 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 **Fonctionnalité** | **Détails**
 --- | ---
-**Répliquer les disques ajoutés** | Permet la réplication pour les disques de données ajoutés à une machine virtuelle Azure déjà activée pour la récupération d’urgence. [En savoir plus](azure-to-azure-enable-replication-added-disk.md).
-**Mises à jour automatiques** | Lors de la configuration des mises à jour automatiques de l’extension du service de mobilité qui s’exécute sur des machines virtuelles Azure activées pour la récupération d’urgence, vous pouvez maintenant sélectionner un compte Automation existant au lieu d’utiliser le compte par défaut créé par Site Recovery. [En savoir plus](azure-to-azure-autoupdate.md).
+**Répliquer les disques ajoutés** | Permet la réplication pour les disques de données ajoutés à une machine virtuelle Azure déjà activée pour la récupération d’urgence. [Plus d’informations](azure-to-azure-enable-replication-added-disk.md)
+**Mises à jour automatiques** | Lors de la configuration des mises à jour automatiques de l’extension du service de mobilité qui s’exécute sur des machines virtuelles Azure activées pour la récupération d’urgence, vous pouvez maintenant sélectionner un compte Automation existant au lieu d’utiliser le compte par défaut créé par Site Recovery. [Plus d’informations](azure-to-azure-autoupdate.md)
 
 
 ### <a name="vmwarephysical-server-disaster-recovery"></a>VMware/récupération d’urgence de serveur physique
@@ -279,7 +357,7 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 **Fonctionnalité** | **Détails**
 --- | ---
-**Surveillance des serveurs de traitement** | Pour la récupération d’urgence des machines virtuelles VMware et des serveurs physiques locaux, surveillez et résolvez les problèmes liés aux serveurs de traitement grâce à des alertes et rapports améliorés sur l’intégrité des serveurs. [En savoir plus](vmware-physical-azure-monitor-process-server.md).
+**Surveillance des serveurs de traitement** | Pour la récupération d’urgence des machines virtuelles VMware et des serveurs physiques locaux, surveillez et résolvez les problèmes liés aux serveurs de traitement grâce à des alertes et rapports améliorés sur l’intégrité des serveurs. [Plus d’informations](vmware-physical-azure-monitor-process-server.md)
 
 
 
@@ -335,8 +413,8 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 **Fonctionnalité** | **Détails**
 --- | ---
 **Mappage réseau** | Pour la récupération d’urgence de machines virtuelles Azure, vous pouvez maintenant utiliser n’importe quel réseau cible disponible lorsque vous activez la réplication.
-**SSD Standard** | Vous pouvez désormais configurer la récupération d’urgence pour les machines virtuelles Azure utilisant des [disques SSD standard](https://docs.microsoft.com/azure/virtual-machines/windows/disks-standard-ssd).
-**Espaces de stockage direct** | Vous pouvez configurer la récupération d’urgence pour les applis s’exécutant sur les applications de machine virtuelle Azure à l’aide de [Storage Spaces Direct](https://docs.microsoft.com/windows-server/storage/storage-spaces/storage-spaces-direct-overview) pour une haute disponibilité.  L’utilisation de Storage Spaces Direct (S2D) avec Site Recovery offre une protection complète aux charges de travail de machine virtuelle Azure. S2D vous permet d’héberger un cluster invité dans Azure. Cela est particulièrement utile lorsqu’une machine virtuelle héberge une application critique, comme la couche SAP ASCS, SQL Server ou un serveur de fichiers avec montée en puissance parallèle.
+**SSD Standard** | Vous pouvez désormais configurer la récupération d’urgence pour les machines virtuelles Azure utilisant des [disques SSD standard](../virtual-machines/disks-types.md#standard-ssd).
+**Espaces de stockage direct** | Vous pouvez configurer la récupération d’urgence pour les applis s’exécutant sur les applications de machine virtuelle Azure à l’aide de [Storage Spaces Direct](/windows-server/storage/storage-spaces/storage-spaces-direct-overview) pour une haute disponibilité.  L’utilisation de Storage Spaces Direct (S2D) avec Site Recovery offre une protection complète aux charges de travail de machine virtuelle Azure. S2D vous permet d’héberger un cluster invité dans Azure. Cela est particulièrement utile lorsqu’une machine virtuelle héberge une application critique, comme la couche SAP ASCS, SQL Server ou un serveur de fichiers avec montée en puissance parallèle.
 
 
 ### <a name="vmwarephysical-server-disaster-recovery"></a>VMware/récupération d’urgence de serveur physique
@@ -354,9 +432,9 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 ### <a name="accelerated-networking-azure-vms"></a>Mise en réseau accélérée (machines virtuelles Azure)
 
-L’accélération réseau permet la virtualisation d’E/S de racine unique (SR-IOV) sur une machine virtuelle, améliorant ainsi les performances réseau. Quand vous activez la réplication pour une machine virtuelle Azure, Site Recovery détecte si l’accélération réseau est activée ou non. Si elle l’est, Site Recovery configure automatiquement l’accélération réseau sur la machine virtuelle Azure du réplica cible après le basculement, à la fois sur [Windows](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-powershell#enable-accelerated-networking-on-existing-vms) et sur [Linux](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli#enable-accelerated-networking-on-existing-vms).
+L’accélération réseau permet la virtualisation d’E/S de racine unique (SR-IOV) sur une machine virtuelle, améliorant ainsi les performances réseau. Quand vous activez la réplication pour une machine virtuelle Azure, Site Recovery détecte si l’accélération réseau est activée ou non. Si elle l’est, Site Recovery configure automatiquement l’accélération réseau sur la machine virtuelle Azure du réplica cible après le basculement, à la fois sur [Windows](../virtual-network/create-vm-accelerated-networking-powershell.md#enable-accelerated-networking-on-existing-vms) et sur [Linux](../virtual-network/create-vm-accelerated-networking-cli.md#enable-accelerated-networking-on-existing-vms).
 
-[En savoir plus](azure-vm-disaster-recovery-with-accelerated-networking.md).
+[Plus d’informations](azure-vm-disaster-recovery-with-accelerated-networking.md)
 
 ### <a name="update-rollup-32"></a>Correctif cumulatif 32
 
@@ -416,7 +494,7 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 **Prise en charge de Linux** | Nouvelle prise en charge d’Oracle Linux 6.8, Oracle Linux 6.9 et Oracle Linux 7.0 avec le noyau compatible Red Hat et pour le noyau Unbreakable Enterprise Kernel (UEK) Release 5.
 **Système de fichiers Linux BTRFS** | Pris en charge pour les machines virtuelles Azure.
 **Machines virtuelles Azure dans les zones de disponibilité** | Vous pouvez activer la réplication vers une autre région pour les machines virtuelles Azure déployées dans les zones de disponibilité. Vous pouvez désormais activer la réplication pour une machine virtuelle Azure et définir comme cible du basculement une instance de machine virtuelle unique, une machine virtuelle dans un groupe à haute disponibilité ou une machine virtuelle dans une zone de disponibilité. Le paramètre n’impacte pas la réplication. [Lisez](https://azure.microsoft.com/blog/disaster-recovery-of-zone-pinned-azure-virtual-machines-to-another-region/) l’annonce.
-**Stockage avec pare-feu (portail/PowerShell)** | Nouvelle prise en charge des [comptes de stockage avec pare-feu](https://docs.microsoft.com/azure/storage/common/storage-network-security).<br/><br/> Vous pouvez répliquer des machines virtuelles Azure avec des disques non managés sur des comptes de stockage avec pare-feu sur une autre région Azure pour les scénarios de récupération d’urgence.<br/><br/> Vous pouvez utiliser des comptes de stockage avec pare-feu en tant que comptes de stockage cibles pour des disques non managés.<br/><br/> Fonction prise en charge dans le portail et avec PowerShell.
+**Stockage avec pare-feu (portail/PowerShell)** | Nouvelle prise en charge des [comptes de stockage avec pare-feu](../storage/common/storage-network-security.md).<br/><br/> Vous pouvez répliquer des machines virtuelles Azure avec des disques non managés sur des comptes de stockage avec pare-feu sur une autre région Azure pour les scénarios de récupération d’urgence.<br/><br/> Vous pouvez utiliser des comptes de stockage avec pare-feu en tant que comptes de stockage cibles pour des disques non managés.<br/><br/> Fonction prise en charge dans le portail et avec PowerShell.
 
 ## <a name="updates-december-2018"></a>Mises à jour (décembre 2018)
 
@@ -424,7 +502,7 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 Site Recovery propose désormais une option pour mettre à jour automatiquement l’extension du service Mobilité. L’extension du service Mobilité est installée sur chaque machine virtuelle Azure répliquée par Site Recovery. Quand vous activez la réplication, vous pouvez autoriser Site Recovery à gérer les mises à jour de l’extension.
 
-Les mises à jour ne nécessitent pas le redémarrage de la machine virtuelle et n’affectent pas la réplication. [En savoir plus](azure-to-azure-autoupdate.md).
+Les mises à jour ne nécessitent pas le redémarrage de la machine virtuelle et n’affectent pas la réplication. [Plus d’informations](azure-to-azure-autoupdate.md)
 
 ### <a name="pricing-calculator-for-azure-vm-disaster-recovery"></a>Calculatrice de prix pour la reprise d’activité de machines virtuelles Azure
 
@@ -455,9 +533,9 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 **Fonctionnalité** | **Détails**
 --- | ---
 **Prise en charge des régions** | Site Recovery prend désormais en charge les régions Australie Centre 1 et Australie Centre 2.
-**Prise en charge du chiffrement de disque** | Prise en charge ajoutée pour la récupération d’urgence des machines virtuelles Azure chiffrées au moyen d’ADE (Azure Disk Encryption) avec l’application Azure AD. [En savoir plus](azure-to-azure-how-to-enable-replication-ade-vms.md).
+**Prise en charge du chiffrement de disque** | Prise en charge ajoutée pour la récupération d’urgence des machines virtuelles Azure chiffrées au moyen d’ADE (Azure Disk Encryption) avec l’application Azure AD. [Plus d’informations](azure-to-azure-how-to-enable-replication-ade-vms.md)
 **Exclusion de disque** | Les disques non initialisés sont maintenant automatiquement exclus lors de la réplication de machine virtuelle Azure.
-**Stockage avec pare-feu (PowerShell)** | Nouvelle prise en charge des [comptes de stockage avec pare-feu](https://docs.microsoft.com/azure/storage/common/storage-network-security).<br/><br/> Vous pouvez répliquer des machines virtuelles Azure avec des disques non managés sur des comptes de stockage avec pare-feu sur une autre région Azure pour les scénarios de récupération d’urgence.<br/><br/> Vous pouvez utiliser des comptes de stockage avec pare-feu en tant que comptes de stockage cibles pour des disques non managés.<br/><br/> Prise en charge avec PowerShell uniquement.
+**Stockage avec pare-feu (PowerShell)** | Nouvelle prise en charge des [comptes de stockage avec pare-feu](../storage/common/storage-network-security.md).<br/><br/> Vous pouvez répliquer des machines virtuelles Azure avec des disques non managés sur des comptes de stockage avec pare-feu sur une autre région Azure pour les scénarios de récupération d’urgence.<br/><br/> Vous pouvez utiliser des comptes de stockage avec pare-feu en tant que comptes de stockage cibles pour des disques non managés.<br/><br/> Prise en charge avec PowerShell uniquement.
 
 
 ### <a name="update-rollup-29"></a>Correctif cumulatif 29
@@ -488,14 +566,14 @@ Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 --- | ---
 **Prise en charge de Linux** | Nouvelle prise en charge de RedHat Enterprise Linux 6.10 ; CentOS 6.10.<br/><br/>
 **Prise en charge du cloud** | Prise en charge de la récupération d’urgence pour les machines virtuelles Azure dans le cloud allemand.
-**Récupération d’urgence entre abonnements** | Prise en charge de la réplication des machines virtuelles Azure d’une région vers une autre, dans un autre abonnement du même locataire Azure Active Directory. [En savoir plus](https://aka.ms/cross-sub-blog).
+**Récupération d’urgence entre abonnements** | Prise en charge de la réplication des machines virtuelles Azure d’une région vers une autre, dans un autre abonnement du même locataire Azure Active Directory. [Plus d’informations](https://aka.ms/cross-sub-blog)
 
 ### <a name="vmware-vmphysical-server-disaster-recovery"></a>Récupération d’urgence des machines virtuelles VMware/serveurs physiques
 Les fonctionnalités ajoutées ce mois-ci sont résumées dans le tableau.
 
 **Fonctionnalité** | **Détails**
 --- | ---
-**Prise en charge de Linux** | Nouvelle prise en charge de RedHat Enterprise Linux 6.10 ; CentOS 6.10.<br/><br/> Les machines virtuelles Linux utilisant le style de partition GPT (GUID Partition Table) en mode de compatibilité avec un BIOS hérité sont désormais prises en charge. Consultez le [FAQ sur les machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/linux/faq-for-disks) pour plus d’informations.
+**Prise en charge de Linux** | Nouvelle prise en charge de RedHat Enterprise Linux 6.10 ; CentOS 6.10.<br/><br/> Les machines virtuelles Linux utilisant le style de partition GPT (GUID Partition Table) en mode de compatibilité avec un BIOS hérité sont désormais prises en charge. Consultez le [FAQ sur les machines virtuelles Azure](../virtual-machines/faq-for-disks.md) pour plus d’informations.
 **Récupération d’urgence des machines virtuelles après la migration** | Prise en charge de la récupération d’urgence vers une région secondaire pour une machine virtuelle VMware locale migrée vers Azure, sans avoir à désinstaller le service de mobilité sur la machine virtuelle avant d’activer la réplication.
 **Windows Server 2008** | Prise en charge de la migration des machines exécutant Windows Server 2008 R2/2008 64 bits et 32 bits.<br/><br/> Migration uniquement (réplication et basculement). La restauration automatique n’est pas prise en charge.
 

@@ -6,12 +6,12 @@ ms.author: yegu
 ms.service: cache
 ms.topic: conceptual
 ms.date: 02/20/2020
-ms.openlocfilehash: aded023c9f4c045f612e33d32c1e3ac71afddf02
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9931dd9acb51e74c34a57b0475bca79fb9ba79cf
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77530206"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184176"
 ---
 # <a name="prepay-for-azure-cache-for-redis-compute-resources-with-reserved-capacity"></a>Prépayer les ressources de calcul Azure Cache pour Redis avec une capacité de réserve
 
@@ -25,17 +25,19 @@ Vous pouvez acheter une capacité de réserve Azure Cache pour Redis sur le [por
 * Pour les abonnements Entreprise, **Add Reserved Instances** (Ajouter des instances réservées) doit être activé dans le [portal EA](https://ea.azure.com/). Si ce paramètre est désactivé, vous devez être administrateur EA de l’abonnement.
 * Pour ce qui est du programme des fournisseurs de solutions cloud (CSP), seuls les agents d’administration ou les agents commerciaux peuvent acheter une capacité réservée Azure Cache pour Redis.
 
-Si vous souhaitez en savoir plus sur la facturation des achats de réservation pour les clients professionnels et les clients bénéficiant du paiement à l’utilisation, consultez les articles [Comprendre l’utilisation d’une réservation Azure pour votre inscription Entreprise](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage-ea) et [Comprendre l’utilisation d’une réservation Azure pour votre abonnement avec paiement à l’utilisation](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage).
+Si vous souhaitez en savoir plus sur la facturation des achats de réservation pour les clients professionnels et les clients bénéficiant du paiement à l’utilisation, consultez les articles [Comprendre l’utilisation d’une réservation Azure pour votre inscription Entreprise](../cost-management-billing/reservations/understand-reserved-instance-usage-ea.md) et [Comprendre l’utilisation d’une réservation Azure pour votre abonnement avec paiement à l’utilisation](../cost-management-billing/reservations/understand-reserved-instance-usage.md).
 
 
 ## <a name="determine-the-right-cache-size-before-purchase"></a>Déterminer la bonne taille de cache avant l’achat
 
-La taille de la réservation doit s’appuyer sur le nombre total de calculs utilisés par le cache existant ou à déployer prochainement dans une région spécifique et qui utilise le même niveau de performance.
+La taille de la réservation doit s’appuyer sur la quantité totale de mémoire utilisée par le cache existant ou à déployer prochainement dans une région spécifique et qui utilise le même niveau de service.
 
-Par exemple, supposons que vous exécutiez un cache 32 vCore Gen5 à usage général et deux caches 16 vCore Gen5 à mémoire optimisée. Admettons également que vous envisagez de déployer au cours du mois prochain un autre serveur de base de données Gen5 32 vCore à usage général et un serveur de base de données Gen5 16 vCore à mémoire optimisée. Imaginons que vous savez que ces ressources vous seront nécessaires pendant au moins 1 an. Dans ce cas, vous devez acheter une réservation de 64 (2x32) vCores pour une durée d’un an, pour un usage général de bases de données uniques - Gen5 et une réservation de 48 (2x16 + 16) vCores pour une durée d’un an pour une base de données unique à mémoire optimisée - Gen5
+Supposons, par exemple, que vous exécutiez deux caches, l’un à 13 Go et l’autre à 26 Go. Vous aurez besoin des deux pendant une période minimale d’un an. Par ailleurs, supposons que vous envisagiez d’étendre les caches de 13 Go existants à 26 Go pendant un mois pour répondre à votre demande saisonnière, puis de revenir à la situation initiale. Dans ce cas, vous pouvez acheter 1 cache P2 et 1 cache P3 ou 3 caches P2 sur une réservation d’un an pour maximiser vos économies. Vous bénéficiez d’une remise sur la quantité totale de mémoire cache que vous réservez, indépendamment de l’allocation de la quantité dans vos caches.
 
 
 ## <a name="buy-azure-cache-for-redis-reserved-capacity"></a>Acheter une capacité réservée Azure Cache pour Redis
+
+Vous pouvez acheter une instance de machine virtuelle réservée dans le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/). Payez la réservation [à l’avance ou par paiements mensuels](../cost-management-billing/reservations/prepare-buy-reservation.md).
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 2. Sélectionnez **Tous les services** > **Réservations**.
@@ -55,11 +57,11 @@ Le tableau suivant décrit les champs requis.
 | Région | La région Azure couverte par la réservation de capacité réservée Azure Cache pour Redis.
 | Niveau tarifaire | Le niveau de service des serveurs Azure Cache pour Redis.
 | Terme | Un an ou trois ans
-| Quantité | La quantité de ressources de calcul achetée au sein de la réservation de capacité réservée Azure Cache pour Redis. La quantité correspond au nombre de caches de la région Azure et du niveau de service sélectionnés qui est réservé et qui bénéficie de la remise de facturation. Par exemple, si vous exécutez ou envisagez d’exécuter des serveurs Azure Cache pour Redis avec une capacité de cache totale de 26 Go dans la région USA Est, vous devez spécifier une quantité de 26 pour optimiser le bénéfice de tous les caches.
+| Quantité | La quantité de ressources de calcul achetée au sein de la réservation de capacité réservée Azure Cache pour Redis. La quantité correspond au nombre de caches de la région Azure et du niveau de service sélectionnés qui est réservé et qui bénéficie de la remise de facturation. Par exemple, si vous exécutez ou envisagez d’exécuter des serveurs Azure Cache pour Redis avec une capacité de cache totale de 26 Go dans la région USA Est, vous devez spécifier une quantité qui vous donne l’équivalent de 26 Go pour optimiser le bénéfice de tous les caches. Il peut s’agir de 1 cache P3 ou de 2 caches P2.
 
 ## <a name="cancel-exchange-or-refund-reservations"></a>Annuler, échanger ou rembourser des réservations
 
-Vous pouvez annuler, échanger ou rembourser des réservations avec certaines limitations. Pour plus d’informations, consultez [Échanges et remboursements en libre-service pour les réservations Azure](https://docs.microsoft.com/azure/billing/billing-azure-reservations-self-service-exchange-and-refund).
+Vous pouvez annuler, échanger ou rembourser des réservations avec certaines limitations. Pour plus d’informations, consultez [Échanges et remboursements en libre-service pour les réservations Azure](../cost-management-billing/reservations/exchange-and-refund-azure-reservations.md).
 
 ## <a name="cache-size-flexibility"></a>Flexibilité de la taille du cache
 
@@ -77,10 +79,9 @@ La remise sur la réservation est appliquée automatiquement aux instances Azure
 
 * Pour plus d’informations sur les réservations Azure, consultez les articles suivants :
 
-    * [Qu’est-ce qu’une réservation Azure ?](https://docs.microsoft.com/azure/billing/billing-save-compute-costs-reservations)
-    * [Gérer les réservations Azure](https://docs.microsoft.com/azure/billing/billing-manage-reserved-vm-instance)
-    * [Comprendre la remise sur réservation Azure](https://docs.microsoft.com/azure/billing/billing-understand-reservation-charges)
-    * [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](https://docs.microsoft.com/azure/billing/billing-understand-reservation-charges-mysql)
-    * [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage-ea)
-    * [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](https://docs.microsoft.com/partner-center/azure-reservations)
-
+    * [Qu’est-ce qu’une réservation Azure ?](../cost-management-billing/reservations/save-compute-costs-reservations.md)
+    * [Gérer les réservations Azure](../cost-management-billing/reservations/manage-reserved-vm-instance.md)
+    * [Comprendre la remise sur réservation Azure](../cost-management-billing/reservations/understand-reservation-charges.md)
+    * [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](../cost-management-billing/reservations/understand-reservation-charges-mysql.md)
+    * [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](../cost-management-billing/reservations/understand-reserved-instance-usage-ea.md)
+    * [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](/partner-center/azure-reservations)

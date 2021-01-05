@@ -1,24 +1,24 @@
 ---
 title: Limites de mémoire et de concurrence
-description: Consultez les limites de mémoire et de concurrence allouées aux différents niveaux de performance et classes de ressources dans Azure Synapse Analytics.
+description: Consultez les limites de mémoire et de concurrence allouées aux différents niveaux de performance et classes de ressources pour le pool SQL dédié dans Azure Synapse Analytics.
 services: synapse-analytics
 author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 56ab49949b4ea2a92bc591042b2d43a7f7b2dc63
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fb0ad93fb4a1269b4cca02b114c0427f0c44a31b
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80632683"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96455345"
 ---
-# <a name="memory-and-concurrency-limits-for-azure-synapse-analytics"></a>Limites de mémoire et de concurrence pour Azure Synapse Analytics
+# <a name="memory-and-concurrency-limits-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Limites de mémoire et de concurrence du pool SQL dédié dans Azure Synapse Analytics
 
 Consultez les limites de mémoire et de concurrence allouées aux différents niveaux de performance et classes de ressources dans Azure Synapse Analytics.  
 
@@ -77,7 +77,7 @@ Avec l’introduction des [groupes de charges de travail](sql-data-warehouse-wor
 
 ## <a name="concurrency-maximums-for-resource-classes"></a>Valeurs maximales de concurrence pour les classes de ressources
 
-Pour vérifier que chaque requête dispose de suffisamment de ressources pour s’exécuter efficacement, SQL Analytics dans Azure Synapse suit l’utilisation des ressources en assignant des emplacements de concurrence à chaque requête. Le système place les requêtes dans une file d’attente en fonction de l’importance et des emplacements de concurrence. Les requêtes attendent dans la file d’attente jusqu’à ce que suffisamment d’emplacements de concurrence soient disponibles. L’[importance](sql-data-warehouse-workload-importance.md) et les emplacements de concurrence déterminent la hiérarchisation des priorités du processeur. Pour plus d’informations, voir [Analyser votre charge de travail](analyze-your-workload.md).
+Pour s’assurer que chaque requête dispose de suffisamment de ressources pour s’exécuter efficacement, Synapse SQL suit l’utilisation des ressources en attribuant des emplacements de concurrence à chaque requête. Le système place les requêtes dans une file d’attente en fonction de l’importance et des emplacements de concurrence. Les requêtes attendent dans la file d’attente jusqu’à ce que suffisamment d’emplacements de concurrence soient disponibles. L’[importance](sql-data-warehouse-workload-importance.md) et les emplacements de concurrence déterminent la hiérarchisation des priorités du processeur. Pour plus d’informations, voir [Analyser votre charge de travail](analyze-your-workload.md).
 
 **Classes de ressources statiques**
 
@@ -125,7 +125,7 @@ Le tableau suivant indique le nombre maximal de requêtes concurrentes et d’em
 | DW15000c      | 32                         |  600                        | 18                    | 60                     | 132                   | 420                    |
 | DW30000c      | 32                         | 1200                        | 36                    | 120                    | 264                   | 840                    |
 
-Quand il n’y a pas suffisamment d’emplacements de concurrence libres pour démarrer l’exécution des requêtes, celles-ci sont mises en file d’attente et exécutées en fonction de leur importance.  Si l’importance est équivalente, les requêtes sont exécutées sur la base du « premier entré, premier sorti ».  À mesure que les requêtes se terminent et que le nombre de requêtes et d’emplacements chute sous les limites, SQL Data Warehouse libère des requêtes en file d’attente.
+Quand il n’y a pas suffisamment d’emplacements de concurrence libres pour démarrer l’exécution des requêtes, celles-ci sont mises en file d’attente et exécutées en fonction de leur importance.  Si l’importance est équivalente, les requêtes sont exécutées sur la base du « premier entré, premier sorti ».  À mesure que les requêtes se terminent et que le nombre de requêtes et d’emplacements chute sous les limites, Azure Synapse Analytics libère des requêtes en file d’attente.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

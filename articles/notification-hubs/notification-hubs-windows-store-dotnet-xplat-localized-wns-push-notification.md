@@ -12,17 +12,17 @@ ms.workload: mobile
 ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 ms.date: 03/22/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 03/22/2019
-ms.openlocfilehash: 4ccf62dd8a249c9ba23bbb4510164b35a58db917
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d91320d8f78942ca916084cbf29a88818d95f531
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72387396"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92314623"
 ---
 # <a name="tutorial-send-localized-push-notifications-to-windows-apps-using-azure-notification-hubs"></a>Tutoriel : Envoyer des notifications Push localisées vers des applications Windows à l’aide d’Azure Notification Hubs
 
@@ -295,7 +295,7 @@ Dans ce didacticiel, vous avez appris à envoyer des notifications localisées �
 [Push notifications to app users]: /develop/mobile/tutorials/push-notifications-to-app-users-dotnet
 [Authorize users with scripts]: /develop/mobile/tutorials/authorize-users-in-scripts-dotnet
 [JavaScript and HTML]: /develop/mobile/tutorials/get-started-with-push-js
-[wns object]: https://go.microsoft.com/fwlink/p/?LinkId=260591
-[Notification Hubs Guidance]: https://msdn.microsoft.com/library/jj927170.aspx
-[Notification Hubs How-To for iOS]: https://msdn.microsoft.com/library/jj927168.aspx
-[Notification Hubs How-To for Windows Store]: https://msdn.microsoft.com/library/jj927172.aspx
+[wns object]: /previous-versions/azure/reference/jj860484(v=azure.100)
+[Notification Hubs Guidance]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[Notification Hubs How-To for iOS]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[Notification Hubs How-To for Windows Store]: /previous-versions/azure/azure-services/jj927170(v=azure.100)

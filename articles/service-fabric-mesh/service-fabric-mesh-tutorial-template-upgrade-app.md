@@ -1,17 +1,17 @@
 ---
 title: Tutoriel - Mettre à niveau une application s’exécutant dans Azure Service Fabric Mesh
 description: Dans ce tutoriel, vous allez apprendre à mettre à niveau une application Service Fabric s’exécutant dans Service Fabric Mesh.
-author: dkkapur
+author: georgewallace
 ms.topic: tutorial
 ms.date: 01/11/2019
-ms.author: dekapur
-ms.custom: mvc, devcenter
-ms.openlocfilehash: 42db17fa6474d3230bc523d0cf65b375cf01276e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: gwallace
+ms.custom: mvc, devcenter, devx-track-azurecli
+ms.openlocfilehash: 331830c50206d14f7894aa837b483656de4222f2
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75351727"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747855"
 ---
 # <a name="tutorial-upgrade-a-service-fabric-application-running-in-service-fabric-mesh"></a>Tutoriel : Mettre à niveau une application Service Fabric s’exécutant dans Service Fabric Mesh
 
@@ -50,7 +50,7 @@ Ce tutoriel utilise l’exemple de liste de tâches, qui a été [déployé au p
 az mesh service show --resource-group myResourceGroup --name WebFrontEnd --app-name todolistapp
 ```
 
-Dans le modèle de déploiement de la ressource d’application, chaque service a une propriété *cpu* qui permet de définir les ressources d’UC demandées. Une application peut comprendre plusieurs services (chacun disposant d’un seul paramètre *cpu*) déployés et gérés ensemble. Pour augmenter les ressources d’UC du service web front-end, modifiez la valeur *cpue* dans le fichier de modèle de déploiement ou le fichier de paramètres.  Mettez ensuite à niveau l’application.
+Dans le modèle de déploiement de la ressource d’application, chaque service a une propriété *cpu* qui permet de définir les ressources d’UC demandées. Une application peut comprendre plusieurs services (chacun disposant d’un seul paramètre *cpu* ) déployés et gérés ensemble. Pour augmenter les ressources d’UC du service web front-end, modifiez la valeur *cpue* dans le fichier de modèle de déploiement ou le fichier de paramètres.  Mettez ensuite à niveau l’application.
 
 ### <a name="modify-the-deployment-template-parameters"></a>Modifier les paramètres du modèle de déploiement
 
@@ -58,7 +58,7 @@ Si votre modèle contient des valeurs que vous prévoyez de changer une fois l�
 
 L’application a été déployée à l’aide des fichiers de [modèle de déploiement mesh_rp.windows.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.json) et de [paramètres mesh_rp.windows.parameter.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.parameters.json).
 
-Ouvrez le fichier de paramètres [mesh_rp.windows.parameter.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.parameters.json) localement, puis affectez la valeur 1 à *frontEndCpu* :
+Ouvrez le fichier de paramètres [mesh_rp.windows.parameter.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.parameters.json) localement, puis affectez la valeur 1 à *frontEndCpu*  :
 
 ```json
       "frontEndCpu":{
@@ -80,7 +80,7 @@ Le paramètre *frontEndCpu* est déclaré dans la section *parameters* du modèl
 }
 ```
 
-La propriété *codePackages->ressources->requêtes->uc* du service WebFrontEnd référence le paramètre *frontEndCpu* :
+La propriété *codePackages->ressources->requêtes->uc* du service WebFrontEnd référence le paramètre *frontEndCpu*  :
 
 ```json
     "services": [

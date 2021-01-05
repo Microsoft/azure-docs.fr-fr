@@ -5,15 +5,16 @@ author: normesta
 ms.service: storage
 ms.date: 03/20/2020
 ms.author: normesta
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: data-lake-storage-gen2
 ms.reviewer: prishet
-ms.openlocfilehash: 04d0d23bdbdaeda6a4823c900badb3133ba9eeae
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: a929fcbc87a1ce11b226e9def46354c24a151a0c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80061540"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913366"
 ---
 # <a name="use-javascript-to-manage-directories-files-and-acls-in-azure-data-lake-storage-gen2"></a>Utiliser JavaScript pour gérer les répertoires, les fichiers et les listes de contrôle d’accès dans Azure Data Lake Storage Gen2
 
@@ -25,7 +26,7 @@ Cet article explique comment utiliser JavaScript pour créer et gérer des répe
 
 > [!div class="checklist"]
 > * Un abonnement Azure. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
-> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](data-lake-storage-quickstart-create-account.md) instructions.
+> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](../common/storage-account-create.md) instructions.
 > * Si vous utilisez ce package dans une application Node.js, vous devez utiliser Node.js 8.0.0 ou version ultérieure.
 
 ## <a name="set-up-your-project"></a>Configuration de votre projet
@@ -90,11 +91,11 @@ function GetDataLakeServiceClientAD(accountName, clientID, clientSecret, tenantI
 > [!NOTE]
 > Pour obtenir plus d’exemples, consultez la documentation [Bibliothèque de client Azure Identity pour JS](https://www.npmjs.com/package/@azure/identity).
 
-## <a name="create-a-file-system"></a>Créer un système de fichiers
+## <a name="create-a-container"></a>Créez un conteneur.
 
-Un système de fichiers agit comme un conteneur pour vos fichiers. Pour en créer un, procurez-vous une instance de **FileSystemClient**, puis appelez la méthode **FileSystemClient.Create**.
+Un conteneur fait office de système de fichiers pour vos fichiers. Pour en créer un, procurez-vous une instance de **FileSystemClient**, puis appelez la méthode **FileSystemClient.Create**.
 
-Cet exemple crée un système de fichiers nommé `my-file-system`. 
+Cet exemple crée un conteneur nommé `my-file-system`. 
 
 ```javascript
 async function CreateFileSystem(datalakeServiceClient) {
@@ -112,7 +113,7 @@ async function CreateFileSystem(datalakeServiceClient) {
 
 Pour créer une référence de répertoire, procurez-vous une instance de **DirectoryClient**, puis appelez la méthode **DirectoryClient.create**.
 
-Cet exemple ajoute un répertoire nommé `my-directory` dans un système de fichiers. 
+Cet exemple ajoute un répertoire nommé `my-directory` à un conteneur. 
 
 ```javascript
 async function CreateDirectory(fileSystemClient) {
@@ -165,59 +166,7 @@ async function DeleteDirectory(fileSystemClient) {
 }
 ```
 
-## <a name="manage-a-directory-acl"></a>Gérer la liste ACL d’un répertoire
 
-Cet exemple obtient puis définit l’ACL d’un répertoire nommé `my-directory`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
-
-> [!NOTE]
-> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control).
-
-```javascript
-async function ManageDirectoryACLs(fileSystemClient) {
-
-    const directoryClient = fileSystemClient.getDirectoryClient("my-directory"); 
-    const permissions = await directoryClient.getAccessControl();
-
-    console.log(permissions.acl);
-
-    const acl = [
-    {
-      accessControlType: "user",
-      entityId: "",
-      defaultScope: false,
-      permissions: {
-        read: true,
-        write: true,
-        execute: true
-      }
-    },
-    {
-      accessControlType: "group",
-      entityId: "",
-      defaultScope: false,
-      permissions: {
-        read: true,
-        write: false,
-        execute: true
-      }
-    },
-    {
-      accessControlType: "other",
-      entityId: "",
-      defaultScope: false,
-      permissions: {
-        read: true,
-        write: true,
-        execute: false
-      }
-
-    }
-
-  ];
-
-  await directoryClient.setAccessControl(acl);
-}
-```
 
 ## <a name="upload-a-file-to-a-directory"></a>Charger un fichier dans un répertoire
 
@@ -244,60 +193,6 @@ async function UploadFile(fileSystemClient) {
   await fileClient.append(content, 0, content.length);
   await fileClient.flush(content.length);
 
-}
-```
-
-## <a name="manage-a-file-acl"></a>Gérer la liste ACL d’un fichier
-
-Cet exemple obtient puis définit l’ACL d’un fichier nommé `upload-file.txt`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
-
-> [!NOTE]
-> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control).
-
-```javascript
-async function ManageFileACLs(fileSystemClient) {
-
-  const fileClient = fileSystemClient.getFileClient("my-directory/uploaded-file.txt"); 
-  const permissions = await fileClient.getAccessControl();
-
-  console.log(permissions.acl);
-
-  const acl = [
-  {
-    accessControlType: "user",
-    entityId: "",
-    defaultScope: false,
-    permissions: {
-      read: true,
-      write: true,
-      execute: true
-    }
-  },
-  {
-    accessControlType: "group",
-    entityId: "",
-    defaultScope: false,
-    permissions: {
-      read: true,
-      write: false,
-      execute: true
-    }
-  },
-  {
-    accessControlType: "other",
-    entityId: "",
-    defaultScope: false,
-    permissions: {
-      read: true,
-      write: true,
-      execute: false
-    }
-
-  }
-
-];
-
-await fileClient.setAccessControl(acl);        
 }
 ```
 
@@ -355,6 +250,123 @@ async function ListFilesInDirectory(fileSystemClient) {
     console.log(`Path ${i++}: ${path.name}, is directory: ${path.isDirectory}`);
   }
 
+}
+```
+
+## <a name="manage-access-control-lists-acls"></a>Gérer les listes de contrôle d’accès (ACL)
+
+Vous pouvez obtenir, définir et mettre à jour les autorisations d’accès des répertoires et des fichiers.
+
+> [!NOTE]
+> Si vous utilisez Azure Active Directory (Azure AD) pour autoriser l’accès, assurez-vous que le [rôle Propriétaire des données blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) est attribué à votre principal de sécurité. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+### <a name="manage-a-directory-acl"></a>Gérer la liste ACL d’un répertoire
+
+Cet exemple obtient puis définit l’ACL d’un répertoire nommé `my-directory`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
+
+> [!NOTE]
+> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+```javascript
+async function ManageDirectoryACLs(fileSystemClient) {
+
+    const directoryClient = fileSystemClient.getDirectoryClient("my-directory"); 
+    const permissions = await directoryClient.getAccessControl();
+
+    console.log(permissions.acl);
+
+    const acl = [
+    {
+      accessControlType: "user",
+      entityId: "",
+      defaultScope: false,
+      permissions: {
+        read: true,
+        write: true,
+        execute: true
+      }
+    },
+    {
+      accessControlType: "group",
+      entityId: "",
+      defaultScope: false,
+      permissions: {
+        read: true,
+        write: false,
+        execute: true
+      }
+    },
+    {
+      accessControlType: "other",
+      entityId: "",
+      defaultScope: false,
+      permissions: {
+        read: true,
+        write: true,
+        execute: false
+      }
+
+    }
+
+  ];
+
+  await directoryClient.setAccessControl(acl);
+}
+```
+
+Vous pouvez également obtenir et définir la liste de contrôle d’accès du répertoire racine d’un conteneur. Pour obtenir le répertoire racine, transmettez une chaîne vide (`/`) dans la méthode **DataLakeFileSystemClient.getDirectoryClient**.
+
+### <a name="manage-a-file-acl"></a>Gérer la liste ACL d’un fichier
+
+Cet exemple obtient puis définit l’ACL d’un fichier nommé `upload-file.txt`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
+
+> [!NOTE]
+> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+```javascript
+async function ManageFileACLs(fileSystemClient) {
+
+  const fileClient = fileSystemClient.getFileClient("my-directory/uploaded-file.txt"); 
+  const permissions = await fileClient.getAccessControl();
+
+  console.log(permissions.acl);
+
+  const acl = [
+  {
+    accessControlType: "user",
+    entityId: "",
+    defaultScope: false,
+    permissions: {
+      read: true,
+      write: true,
+      execute: true
+    }
+  },
+  {
+    accessControlType: "group",
+    entityId: "",
+    defaultScope: false,
+    permissions: {
+      read: true,
+      write: false,
+      execute: true
+    }
+  },
+  {
+    accessControlType: "other",
+    entityId: "",
+    defaultScope: false,
+    permissions: {
+      read: true,
+      write: true,
+      execute: false
+    }
+
+  }
+
+];
+
+await fileClient.setAccessControl(acl);        
 }
 ```
 

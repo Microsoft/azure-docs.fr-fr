@@ -8,31 +8,28 @@ author: KumudD
 manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/14/2019
 ms.author: kumud
-ms.openlocfilehash: fdf726fd31e8b92a04a1c136eb5cd7110e0c6d5a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 759bd94aee98aa04dee56acf0e50ca90cd0541b8
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72333450"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "96000604"
 ---
 # <a name="deploy-an-ipv6-dual-stack-application-using-standard-internal-load-balancer-in-azure---powershell-preview"></a>Déployer une application double pile IPv6 avec un Standard Load Balancer interne dans Azure - PowerShell (préversion)
 
 Cet article montre comment déployer dans Azure une application double pile (IPv4 + IPv6) incluant un sous-réseau et un réseau virtuel double pile, un équilibreur de charge Standard Load Balancer interne avec des configurations front-end doubles (IPv4 + IPv6), des machines virtuelles dont les cartes réseau présentent une configuration double IP, des groupes de sécurité réseau et des adresses IP publiques.
-
-> [!Important]
-> La prise en charge du protocole IPv6 par le réseau virtuel Azure est actuellement en préversion publique. Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Consultez les [Conditions d’utilisation supplémentaires des préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 La procédure de création d’un équilibreur de charge interne compatible IPv6 est quasiment identique à la procédure de création d’un Load Balancer IPv6 exposé à Internet décrite [ici](virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell.md). Les seules différences pour créer un équilibreur de charge interne concernent la configuration front-end, comme illustré dans l’exemple PowerShell ci-dessous :
 
 ```azurepowershell
  $frontendIPv6 = New-AzLoadBalancerFrontendIpConfig `
  -Name "dsLbFrontEnd_v6" `
- -PrivateIpAddress "ace:cab:deca:deed::100" `
+ -PrivateIpAddress "fd00:db8:deca:deed::100" `
  -PrivateIpAddressVersion "IPv6" `
  -Subnet $DsSubnet
 ```
@@ -103,14 +100,14 @@ Créez un réseau virtuel à l’aide d’[New-AzVirtualNetwork](/powershell/mod
 # Create dual stack subnet config
 $DsSubnet = New-AzVirtualNetworkSubnetConfig `
   -Name "dsSubnet" `
-  -AddressPrefix "10.0.0.0/24","ace:cab:deca:deed::/64"
+  -AddressPrefix "10.0.0.0/24","fd00:db8:deca:deed::/64"
 
 # Create the virtual network
 $vnet = New-AzVirtualNetwork `
   -ResourceGroupName $rg.ResourceGroupName `
   -Location $rg.Location  `
   -Name "dsVnet" `
-  -AddressPrefix "10.0.0.0/16","ace:cab:deca::/48"  `
+  -AddressPrefix "10.0.0.0/16","fd00:db8:deca::/48"  `
   -Subnet $DsSubnet
 
 #Refresh the fully populated subnet for use in load balancer frontend configuration
@@ -133,7 +130,7 @@ $frontendIPv4 = New-AzLoadBalancerFrontendIpConfig `
 
 $frontendIPv6 = New-AzLoadBalancerFrontendIpConfig `
   -Name "dsLbFrontEnd_v6" `
-  -PrivateIpAddress "ace:cab:deca:deed::100"  `
+  -PrivateIpAddress "fd00:db8:deca:deed::100"  `
   -PrivateIpAddressVersion "IPv6"   `
   -Subnet $DsSubnet
 
@@ -263,18 +260,18 @@ Créez des cartes réseau virtuelles avec [New-AzNetworkInterface](/powershell/m
 ```azurepowershell
 
 # Create the IPv4 configuration for NIC 1
-$Ip4Config=New-AzNetworkInterfaceIpConfig `
-  -Name dsIp4Config `
+$Ip4Config=New-AzNetworkInterfaceIpConfig `
+  -Name dsIp4Config `
   -Subnet $vnet.subnets[0] `
-  -PrivateIpAddressVersion IPv4 `
+  -PrivateIpAddressVersion IPv4 `
   -LoadBalancerBackendAddressPool $backendPoolv4 `
   -PublicIpAddress  $RdpPublicIP_1
 
 # Create the IPv6 configuration
-$Ip6Config=New-AzNetworkInterfaceIpConfig `
-  -Name dsIp6Config `
+$Ip6Config=New-AzNetworkInterfaceIpConfig `
+  -Name dsIp6Config `
   -Subnet $vnet.subnets[0] `
-  -PrivateIpAddressVersion IPv6 `
+  -PrivateIpAddressVersion IPv6 `
   -LoadBalancerBackendAddressPool $backendPoolv6
 
 # Create NIC 1
@@ -286,10 +283,10 @@ $NIC_1 = New-AzNetworkInterface `
   -IpConfiguration $Ip4Config,$Ip6Config
 
 # Create the IPv4 configuration for NIC 2
-$Ip4Config=New-AzNetworkInterfaceIpConfig `
-  -Name dsIp4Config `
+$Ip4Config=New-AzNetworkInterfaceIpConfig `
+  -Name dsIp4Config `
   -Subnet $vnet.subnets[0] `
-  -PrivateIpAddressVersion IPv4 `
+  -PrivateIpAddressVersion IPv4 `
   -LoadBalancerBackendAddressPool $backendPoolv4 `
   -PublicIpAddress  $RdpPublicIP_2
 

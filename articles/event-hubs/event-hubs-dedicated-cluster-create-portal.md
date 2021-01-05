@@ -1,21 +1,14 @@
 ---
 title: Créer un cluster dédié Event Hubs à l’aide du portail Azure
 description: Dans ce guide de démarrage rapide, vous allez apprendre à créer un cluster Azure Event Hubs à l’aide du Portail Azure.
-services: event-hubs
-documentationcenter: ''
-author: femila
-manager: ''
-ms.service: event-hubs
 ms.topic: quickstart
-ms.custom: mvc
-ms.date: 12/20/2019
-ms.author: femila
-ms.openlocfilehash: 5b1574eaac8771043e09500225b65e4835c8e627
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.openlocfilehash: 2759d1e25519b69311c369f3f58239cc0889a9a7
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77157480"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88927763"
 ---
 # <a name="quickstart-create-a-dedicated-event-hubs-cluster-using-azure-portal"></a>Démarrage rapide : Créer un cluster dédié Event Hubs à l’aide du portail Azure 
 Les clusters Event Hubs offrent des déploiements à locataire unique pour les clients aux besoins de streaming les plus pointus. Cette offre a un SLA de 99,99 % garanti et n'est disponible sur que notre niveau de tarification dédié. Un [cluster Event Hubs](event-hubs-dedicated-overview.md) peut recevoir des millions d’événements par seconde avec une garantie de capacité et de latence inférieure à la seconde. Les espaces de noms et les Event Hubs créées au sein d’un cluster comprennent toutes les fonctionnalités de l’offre standard et bien davantage, mais sans aucune limite d’entrée. L’offre dédiée comprend également la fameuse fonctionnalité [Event Hubs Capture](event-hubs-capture-overview.md) sans supplément, ce qui permet de charger automatiquement par lots des flux de dans le [Stockage Blob Azure](../storage/blobs/storage-blobs-introduction.md) ou [Azure Data Lake Storage Gen 1](../data-lake-store/data-lake-store-overview.md).
@@ -107,9 +100,9 @@ Si vous souhaitez modifier la taille de votre cluster après la création ou si 
 Dans cet article, vous avez créé un cluster Event Hubs. Pour obtenir des instructions pas à pas sur l'envoi et la réception d'événements à partir d’un Event Hub et pour capturer des événements dans un stockage Azure ou un Azure Data Lake Store, consultez les didacticiels suivants :
 
 - Envoyer et recevoir des événements 
-    - [.NET Core](get-started-dotnet-standard-send-v2.md)
-    - [Java](get-started-java-send-v2.md)
-    - [Python](get-started-python-send-v2.md)
-    - [JavaScript](get-started-java-send-v2.md)
+    - [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
+    - [Java](event-hubs-java-get-started-send.md)
+    - [Python](event-hubs-python-get-started-send.md)
+    - [JavaScript](event-hubs-java-get-started-send.md)
 - [Utiliser le portail Azure pour activer Event Hubs Capture](event-hubs-capture-enable-through-portal.md)
 - [Utiliser Azure Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md)

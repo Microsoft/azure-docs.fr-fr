@@ -3,29 +3,30 @@ title: 'Démarrage rapide : Créer un index de recherche dans PowerShell à l�
 titleSuffix: Azure Cognitive Search
 description: Dans ce guide de démarrage rapide de l’API REST, découvrez comment créer un index, charger des données et exécuter des requêtes avec la méthode Invoke-RestMethod de PowerShell et l’API REST de Recherche cognitive Azure.
 manager: nitinme
-author: tchristiani
-ms.author: terrychr
+author: HeidiSteen
+ms.author: heidist
 ms.service: cognitive-search
 ms.topic: quickstart
 ms.devlang: rest-api
-ms.date: 02/10/2020
-ms.openlocfilehash: 612751c2405cd55ad0b3760aa8e093e434a22f57
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 11/17/2020
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9dd9de9dcb01e9be200e07e5925d8b856432b620
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77121609"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94742376"
 ---
 # <a name="quickstart-create-an-azure-cognitive-search-index-in-powershell-using-rest-apis"></a>Démarrage rapide : Créer un index Recherche cognitive Azure dans PowerShell à l’aide des API REST
 > [!div class="op_single_selector"]
-> * [PowerShell (REST)](search-create-index-rest-api.md)
-> * [C#](search-create-index-dotnet.md)
-> * [Postman (REST)](search-get-started-postman.md)
+> * [PowerShell (REST)]()
+> * [C#](./search-get-started-dotnet.md)
+> * [REST](search-get-started-rest.md)
 > * [Python](search-get-started-python.md)
-> * [Portail](search-create-index-portal.md)
+> * [Portail](search-get-started-portal.md)
 > 
 
-Cet article décrit le processus de création, de chargement et d’interrogation d’un index Recherche cognitive Azure à l’aide de PowerShell et des [API REST de la Recherche cognitive Azure](https://docs.microsoft.com/rest/api/searchservice/). Cet article explique comment exécuter des commandes PowerShell de manière interactive. Vous pouvez également [télécharger et exécuter un script PowerShell](https://github.com/Azure-Samples/azure-search-powershell-samples/tree/master/Quickstart) qui effectue les mêmes opérations.
+Cet article décrit le processus de création, de chargement et d’interrogation d’un index Recherche cognitive Azure à l’aide de PowerShell et des [API REST de la Recherche cognitive Azure](/rest/api/searchservice/). Cet article explique comment exécuter des commandes PowerShell de manière interactive. Vous pouvez également [télécharger et exécuter un script PowerShell](https://github.com/Azure-Samples/azure-search-powershell-samples/tree/master/Quickstart) qui effectue les mêmes opérations.
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -33,11 +34,11 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 Les services et outils suivants sont indispensables dans ce guide de démarrage rapide. 
 
-+ [PowerShell 5.1 ou version ultérieure](https://github.com/PowerShell/PowerShell) avec [Invoke-RestMethod](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Utility/Invoke-RestMethod) pour connaître les étapes séquentielles et interactives.
++ [PowerShell 5.1 ou version ultérieure](https://github.com/PowerShell/PowerShell) avec [Invoke-RestMethod](/powershell/module/Microsoft.PowerShell.Utility/Invoke-RestMethod) pour connaître les étapes séquentielles et interactives.
 
 + [Créez un service Recherche cognitive Azure](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide. 
 
-## <a name="get-a-key-and-url"></a>Obtenir une clé et une URL
+## <a name="copy-a-key-and-url"></a>Copier une clé et une URL
 
 Les appels REST requièrent l’URL du service et une clé d’accès et ce, sur chaque demande. Un service de recherche est créé avec les deux. Ainsi, si vous avez ajouté la Recherche cognitive Azure à votre abonnement, effectuez ce qui suit pour obtenir les informations nécessaires :
 
@@ -45,7 +46,7 @@ Les appels REST requièrent l’URL du service et une clé d’accès et ce, sur
 
 2. Dans **Paramètres** > **Clés**, obtenez une clé d’administration pour avoir des droits d’accès complets sur le service. Il existe deux clés d’administration interchangeables, fournies pour assurer la continuité de l’activité au cas où vous deviez en remplacer une. Vous pouvez utiliser la clé primaire ou secondaire sur les demandes d’ajout, de modification et de suppression d’objets.
 
-![Obtenir un point de terminaison et une clé d’accès HTTP](media/search-get-started-postman/get-url-key.png "Obtenir un point de terminaison et une clé d’accès HTTP")
+![Obtenir un point de terminaison et une clé d’accès HTTP](media/search-get-started-rest/get-url-key.png "Obtenir un point de terminaison et une clé d’accès HTTP")
 
 Toutes les demandes nécessitent une clé API sur chaque demande envoyée à votre service. L’utilisation d’une clé valide permet d’établir, en fonction de chaque demande, une relation de confiance entre l’application qui envoie la demande et le service qui en assure le traitement.
 
@@ -63,7 +64,7 @@ Toutes les demandes nécessitent une clé API sur chaque demande envoyée à vot
 2. Créez un objet **$url** qui spécifie la collection d'index du service. Remplacez le nom du service de recherche (YOUR-SEARCH-SERVICE-NAME) par un service de recherche valide.
 
     ```powershell
-    $url = "https://<YOUR-SEARCH-SERVICE-NAME>.search.windows.net/indexes?api-version=2019-05-06&$select=name"
+    $url = "https://<YOUR-SEARCH-SERVICE-NAME>.search.windows.net/indexes?api-version=2020-06-30&$select=name"
     ```
 
 3. Exécutez **Invoke-RestMethod** pour envoyer une requête GET au service et vérifier la connexion. Ajoutez **ConvertTo-Json** afin d'afficher les réponses renvoyées par le service.
@@ -85,11 +86,11 @@ Toutes les demandes nécessitent une clé API sur chaque demande envoyée à vot
 
 ## <a name="1---create-an-index"></a>1 – Créer un index
 
-Sauf si vous utilisez le portail, le service doit contenir un index pour vous permettre de charger des données. Cette étape définit l’index et l’envoie (push) au service. L’[API REST Create Index](https://docs.microsoft.com/rest/api/searchservice/create-index) est utilisée pour cette étape.
+Sauf si vous utilisez le portail, le service doit contenir un index pour vous permettre de charger des données. Cette étape définit l’index et l’envoie (push) au service. L’[API REST Create Index](/rest/api/searchservice/create-index) est utilisée pour cette étape.
 
 Un index doit contenir un nom et une collection de champs. La collection de champs définit la structure d'un *document*. Chaque champ a un nom, un type et des attributs qui déterminent la façon dont il est utilisé (par exemple, s’il permet d’effectuer une recherche en texte intégral, et s’il est filtrable ou récupérable dans les résultats de la recherche). Dans un index, l’un des champs de type `Edm.String` doit être désigné comme *clé* pour l’identité du document.
 
-Cet index est nommé « hotels-quickstart » et contient les définitions de champ que vous voyez ci-dessous. Il s’agit d’un sous-ensemble d’un [index Hotels](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/hotels/Hotels_IndexDefinition.JSON) plus grand utilisé dans d’autres procédures pas à pas. Nous l’avons volontairement tronqué dans ce démarrage rapide par souci de concision.
+Cet index est nommé « hotels-quickstart » et contient les définitions de champ que vous voyez ci-dessous. Il s’agit d’un sous-ensemble d’un [index Hotels](https://github.com/Azure-Samples/azure-search-sample-data/blob/master/hotels/Hotels_IndexDefinition.JSON) plus grand et utilisé dans d’autres articles pas à pas. Par souci de concision, les définitions de champs ont été découpées dans ce démarrage rapide.
 
 1. Collez cet exemple dans PowerShell pour créer un objet **$body** contenant le schéma d’index.
 
@@ -123,7 +124,7 @@ Cet index est nommé « hotels-quickstart » et contient les définitions de c
 2. Définissez l’URI vers la collection d’index de votre service et l'index *hotels-quickstart*.
 
     ```powershell
-    $url = "https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart?api-version=2019-05-06"
+    $url = "https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart?api-version=2020-06-30"
     ```
 
 3. Exécutez la commande avec **$url**, **$headers** et **$body** pour créer l’index sur le service. 
@@ -179,7 +180,7 @@ Cet index est nommé « hotels-quickstart » et contient les définitions de c
 
 ## <a name="2---load-documents"></a>2 – Charger des documents
 
-Pour envoyer (push) des documents, utilisez une requête HTTP POST au point de terminaison de l’URL de votre index. Pour cette tâche, l’API REST est destinée à l’[ajout, la mise à jour ou la suppression de documents](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents).
+Pour envoyer des documents, utilisez une requête HTTP POST au point de terminaison de l’URL de votre index. Pour cette tâche, l’API REST est destinée à l’[ajout, la mise à jour ou la suppression de documents](/rest/api/searchservice/addupdate-or-delete-documents).
 
 1. Collez cet exemple dans PowerShell pour créer un objet **$body** contenant les documents que vous souhaitez charger. 
 
@@ -273,7 +274,7 @@ Pour envoyer (push) des documents, utilisez une requête HTTP POST au point de t
 1. Définissez le point de terminaison sur la collection de documents *hotels-quickstart* et incluez l'opération d'indexation (indexes/hotels-quickstart/docs/index).
 
     ```powershell
-    $url = "https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs/index?api-version=2019-05-06"
+    $url = "https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs/index?api-version=2020-06-30"
     ```
 
 1. Exécutez la commande avec **$url**, **$headers** et **$body** pour charger des documents dans l’index hotels-quickstart.
@@ -281,7 +282,7 @@ Pour envoyer (push) des documents, utilisez une requête HTTP POST au point de t
     ```powershell
     Invoke-RestMethod -Uri $url -Headers $headers -Method Post -Body $body | ConvertTo-Json
     ```
-    Les résultats doivent ressembler à l’exemple suivant. Vous devez voir un [code d’état de 201](https://docs.microsoft.com/rest/api/searchservice/HTTP-status-codes).
+    Les résultats doivent ressembler à l’exemple suivant. Vous devez voir un [code d’état de 201](/rest/api/searchservice/HTTP-status-codes).
 
     ```
     {
@@ -317,16 +318,16 @@ Pour envoyer (push) des documents, utilisez une requête HTTP POST au point de t
 
 ## <a name="3---search-an-index"></a>3 – Rechercher dans un index
 
-Cette étape explique comment interroger un index à l’aide de [l’API Rechercher des documents](https://docs.microsoft.com/rest/api/searchservice/search-documents).
+Cette étape explique comment interroger un index à l’aide de [l’API Rechercher des documents](/rest/api/searchservice/search-documents).
 
-Utilisez des guillemets simples pour la recherche $urls. Les chaînes de requête contiennent des caractères **$** , et vous n'êtes pas tenu de les placer en échappement si l'intégralité de la chaîne est placée entre guillemets simples.
+Utilisez des guillemets simples pour la recherche $urls. Les chaînes de requêtes contiennent des caractères **$** et vous n’êtes pas tenu de les placer en échappement si l’intégralité de la chaîne est placée entre guillemets simples.
 
 1. Définissez le point de terminaison vers la collection de documents *hotels-quickstart* et ajoutez un paramètre **search** à transmettre dans une chaîne de requête. 
   
    Cette chaîne exécute une recherche vide (recherche=*), renvoyant une liste non classée (résultat de la recherche = 1.0) de documents arbitraires. Par défaut, la Recherche cognitive Azure retourne 50 correspondances à la fois. Telle qu’elle est structurée, cette requête renvoie la structure et les valeurs d’un document entier. Ajoutez **$count = true** pour obtenir le nombre de tous les documents dans les résultats.
 
     ```powershell
-    $url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2019-05-06&search=*&$count=true'
+    $url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2020-06-30&search=*&$count=true'
     ```
 
 1. Exécutez la commande pour envoyer **$url** au service.
@@ -375,21 +376,21 @@ Essayez quelques autres exemples de requête pour avoir un aperçu de la syntaxe
 # Query example 1
 # Search the entire index for the terms 'restaurant' and 'wifi'
 # Return only the HotelName, Description, and Tags fields
-$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2019-05-06&search=restaurant wifi&$count=true&$select=HotelName,Description,Tags'
+$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2020-06-30&search=restaurant wifi&$count=true&$select=HotelName,Description,Tags'
 
 # Query example 2 
-# Apply a filter to the index to find hotels rated 4 or highter
+# Apply a filter to the index to find hotels rated 4 or higher
 # Returns the HotelName and Rating. Two documents match.
-$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2019-05-06&search=*&$filter=Rating gt 4&$select=HotelName,Rating'
+$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2020-06-30&search=*&$filter=Rating gt 4&$select=HotelName,Rating'
 
 # Query example 3
 # Take the top two results, and show only HotelName and Category in the results
-$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2019-05-06&search=boutique&$top=2&$select=HotelName,Category'
+$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2020-06-30&search=boutique&$top=2&$select=HotelName,Category'
 
 # Query example 4
 # Sort by a specific field (Address/City) in ascending order
 
-$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2019-05-06&search=pool&$orderby=Address/City asc&$select=HotelName, Address/City, Tags, Rating'
+$url = 'https://<YOUR-SEARCH-SERVICE>.search.windows.net/indexes/hotels-quickstart/docs?api-version=2020-06-30&search=pool&$orderby=Address/City asc&$select=HotelName, Address/City, Tags, Rating'
 ```
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

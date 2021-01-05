@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2018
 ms.author: agummadi
-ms.openlocfilehash: 2912488286745bf8d2e567d09e445b0a44dc7c39
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 36e41db6e1a3cff13f31f0abf2e83e872dfd7c49
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67672177"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91742330"
 ---
 # <a name="network-monitoring-solutions"></a>Solutions d’analyse du réseau 
 
@@ -65,7 +65,7 @@ NPM pour ExpressRoute offre un monitoring ExpressRoute complet des connexions de
 * Détection de la topologie du réseau, des sites locaux aux applications cloud
 * Planification de la capacité, analyse de l’utilisation de la bande passante
 * Surveillance et alerte sur les chemins d’accès primaires et secondaires
-* Monitoring de la connectivité aux services Azure, comme Office 365, Dynamics 365, etc., sur ExpressRoute
+* Monitoring de la connectivité aux services Azure, comme Microsoft 365, Dynamics 365, etc., sur ExpressRoute
 * Détection des dégradations de la connectivité des réseaux virtuels
 
 ![Carte géographique montrant le trafic entre les régions](./media/network-monitoring-overview/expressroute-topology-map.png) 
@@ -84,7 +84,7 @@ Avec le Moniteur de connectivité de service, vous pouvez désormais tester l’
 * Tester l’accessibilité des applications à partir de plusieurs emplacements d’utilisateur dans le monde entier
 * Déterminer la latence et les pertes de paquets pour vos applications métier et SaaS
 * Déterminer les zones réactives sur le réseau susceptibles de provoquer une baisse des performances applicatives
-* Surveiller l’accessibilité aux applications Office 365, à l’aide de tests intégrés pour Microsoft Office 365, Dynamics 365, Skype Entreprise et autres services Microsoft
+* Surveiller l’accessibilité aux applications Microsoft 365, à l’aide de tests intégrés pour Microsoft 365, Dynamics 365, Skype Entreprise et autres services Microsoft
 
 Pour plus d’informations, consultez les articles suivants :
 
@@ -103,7 +103,7 @@ Traffic Analytics est une solution basée sur le cloud qui offre une visibilité
 
 Traffic Analytics vous dote d’informations actionnables qui vous permettent d’auditer l’activité réseau de votre organisation, de sécuriser les applications et les données, d’optimiser les performances de la charge de travail et de rester en conformité.
 
-![Carte géographique montrant le trafic entre les régions](../network-watcher/media/traffic-analytics/geo-map-view-showcasing-traffic-distribution-to-countries-and-continents.png) 
+![Carte géographique montrant le trafic entre les régions 2](../network-watcher/media/traffic-analytics/geo-map-view-showcasing-traffic-distribution-to-countries-and-continents.png) 
 
 Liens connexes :
 * [Billet de blog](https://aka.ms/trafficanalytics), [Documentation](https://aka.ms/trafficanalyticsdocs), [FAQ](https://docs.microsoft.com/azure/network-watcher/traffic-analytics-faq)

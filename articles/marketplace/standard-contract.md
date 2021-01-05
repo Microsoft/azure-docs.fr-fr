@@ -1,27 +1,27 @@
 ---
-title: Contrat Standard | Place de marché Azure
-description: Contrat Standard pour la Place de marché Azure et AppSource
-author: dsindona
+title: Contrat Standard pour le marketplace commercial de Microsoft
+description: Contrat Standard pour la Place de marché Azure et AppSource dans l’Espace partenaires
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
-ms.date: 04/14/2020
-ms.author: dsindona
-ms.openlocfilehash: facb500299f7196e0e1387c3a7267a917d13a3a6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+author: trkeya
+ms.author: trkeya
+ms.date: 05/20/2020
+ms.openlocfilehash: 20a257bde6022249fd7b2ab875b94f356234b490
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81681442"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94488874"
 ---
-# <a name="standard-contract-for-the-microsoft-commercial-marketplace"></a>Contrat standard pour la place de marché commerciale de Microsoft
+# <a name="standard-contract-for-microsoft-commercial-marketplace"></a>Contrat Standard pour le marketplace commercial de Microsoft
 
-Pour simplifier le processus d’approvisionnement pour les clients et réduire la complexité juridique pour les éditeurs de logiciels, Microsoft propose un contrat Standard pour la place de marché commerciale de Microsoft afin de faciliter les transactions sur la place de marché. Plutôt que d’élaborer des conditions générales personnalisées, les éditeurs de la place de marché commerciale peuvent choisir de proposer leur logiciel dans le cadre du contrat Standard, que les clients ne doivent accepter qu’une seule fois. Le contrat Standard est disponible ici : [https://go.microsoft.com/fwlink/?linkid=2041178](https://go.microsoft.com/fwlink/?linkid=2041178).
+Microsoft offre un contrat Standard pour le marketplace commercial de Microsoft. Cela permet de simplifier le processus d’approvisionnement aux clients, de réduire la complexité juridique à laquelle sont confrontés les fournisseurs de logiciels et de faciliter les transactions sur la place de marché. Plutôt que d’élaborer des conditions générales personnalisées, en tant qu’éditeur de la place de marché commerciale, vous pouvez choisir de proposer votre logiciel dans le cadre du [contrat Standard](https://go.microsoft.com/fwlink/?linkid=2041178), que les clients ne doivent accepter qu’une seule fois.
 
 Les conditions générales d’une offre sont définies lors de la création de l’offre dans l’Espace partenaires. Vous pouvez choisir d’utiliser le contrat Standard pour la place de marché commerciale de Microsoft au lieu de fournir vos propres conditions générales.
 
 >[!Note]
->Après avoir publié une offre à l’aide du contrat Standard pour la place de marché commerciale de Microsoft, vous ne pouvez pas utiliser vos propres conditions générales. Vous devez faire un choix entre les deux. Vous proposez votre solution avec le contrat Standard *ou* avec vos propres conditions générales. Si vous souhaitez modifier les conditions du contrat Standard, vous pouvez le faire par le biais des Modifications du contrat Standard.
+>Après avoir publié une offre à l’aide du contrat Standard pour la place de marché commerciale de Microsoft, vous ne pouvez pas utiliser vos propres conditions générales. Vous proposez votre solution avec le contrat Standard *ou* avec vos propres conditions générales. Les conditions générales personnalisées sont définies au niveau de l’offre et s’appliquent à tous les plans ; écrivez vos conditions générales dans la page **Propriétés** de votre offre dans l’Espace partenaires. Si vous souhaitez modifier les conditions du contrat Standard, vous pouvez le faire par le biais des Modifications du contrat Standard.
 
 ## <a name="standard-contract-amendments"></a>Contrat Standard | Modifications
 
@@ -34,9 +34,9 @@ Deux types de modifications sont proposées aux éditeurs de la place de marché
 * Modifications personnalisées : Il s’agit de modifications spéciales apportées au contrat Standard qui ciblent certains clients uniquement via les ID de locataires Azure. Les éditeurs peuvent choisir le locataire qu'ils souhaitent cibler. Seuls les clients du locataire recevront les conditions personnalisées dans le flux d’achat de l’offre.  Les clients doivent accepter les conditions du contrat Standard et la ou les modifications avant de pouvoir utiliser votre offre.
 
 >[!Note]
->Ces deux types de modifications s’ajoutent l’un à l’autre. Les clients ciblés par les modifications personnalisées reçoivent aussi la modification universelle apportée au contrat Standard lors de l’achat.
+>Ces deux types de modifications s’ajoutent l’un à l’autre. Les clients ciblés par les modifications personnalisées reçoivent aussi la modification universelle apportée au contrat Standard lors de l’achat. Les modifications sont limitées à 4 000 caractères, espaces comprises.
 
-Vous pouvez tirer parti du contrat Standard pour la place de marché commerciale de Microsoft pour les types d’offre suivants :  applications Azure (modèles de solution et applications managées), machines virtuelles, conteneurs, applications de conteneur, modules IoT Edge et SaaS.
+Vous pouvez tirer parti du contrat Standard pour la place de marché commerciale de Microsoft pour les types d’offre suivants :  Applications Azure (modèles de solution et applications managées), machines virtuelles et SaaS.
 
 ## <a name="customer-experience"></a>Expérience client
 

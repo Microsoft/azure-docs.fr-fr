@@ -11,18 +11,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 04/25/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
 ms.custom: has-adal-ref
-ms.openlocfilehash: f55f291575aea40cba8551a5fec535f63a90150c
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 56e9820c5e3a750a35b7271b86750df00eb4784e
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82610443"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92677068"
 ---
 # <a name="troubleshoot-azure-ad-connectivity"></a>Résoudre les problèmes de connectivité liés à Azure AD
 Cet article décrit le fonctionnement de la connectivité entre Azure AD Connect et Azure AD ainsi que la résolution des problèmes de connectivité. Ces problèmes sont susceptibles de se produire dans un environnement doté d’un serveur proxy.
@@ -32,8 +32,8 @@ Azure AD Connect utilise l’authentification moderne (à l’aide de la bibliot
 
 Dans cet article, nous montrons comment Fabrikam se connecte à Azure AD via son proxy. Le serveur proxy est nommé fabrikamproxy et utilise le port 8080.
 
-Nous devons d’abord nous assurer que le fichier [**machine.config**](how-to-connect-install-prerequisites.md#connectivity) est correctement configuré.
-![machineconfig](./media/tshoot-connect-connectivity/machineconfig.png)
+Tout d’abord, nous devons nous assurer que [**machine.config**](how-to-connect-install-prerequisites.md#connectivity) est correctement configuré et que le **service Microsoft Azure AD Sync** a été redémarré une fois que le fichier machine.config a été mis à jour.
+![Capture d’écran montrant la partie du fichier de configuration machine point.](./media/tshoot-connect-connectivity/machineconfig.png)
 
 > [!NOTE]
 > Dans certains blogs non-Microsoft, il est indiqué qu’il convient plutôt d’apporter des modifications à miiserver.exe.config. Cependant, ce fichier est remplacé à chaque mise à niveau. Ainsi, même s’il fonctionne lors de l’installation initiale, le système s’arrête de fonctionner à la première mise à niveau. C’est pourquoi il est recommandé de mettre à jour le fichier machine.config.
@@ -52,21 +52,29 @@ Parmi ces URL, le tableau suivant indique celles qui représentent le strict min
 | \*.windows.net |HTTPS/443 |Permet de se connecter à Azure AD. |
 | secure.aadcdn.microsoftonline-p.com |HTTPS/443 |Utilisé pour MFA. |
 | \*.microsoftonline.com |HTTPS/443 |Permet de configurer votre annuaire Azure AD et pour importer/exporter des données. |
+| \*.crl3.digicert.com |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.crl4.digicert.com |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.ocsp.digicert.com |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*. www.d-trust.net |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.root-c3-ca2-2009.ocsp.d-trust.net |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.crl.microsoft.com |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.oneocsp.microsoft.com |HTTP/80 |Utilisé pour vérifier les certificats. |
+| \*.ocsp.msocsp.com |HTTP/80 |Utilisé pour vérifier les certificats. |
 
 ## <a name="errors-in-the-wizard"></a>Erreurs dans l’Assistant
-L’Assistant Installation utilise deux contextes de sécurité différents. Dans la page **Connexion à Azure AD**, il utilise l’utilisateur actuellement connecté. Dans la page **Configurer**, il passe au [compte exécutant le service pour le moteur de synchronisation](reference-connect-accounts-permissions.md#adsync-service-account). S’il existe un problème, il apparaît probablement déjà au niveau de la page **Connexion à Azure AD** page de l’Assistant car la configuration du proxy est globale.
+L’Assistant Installation utilise deux contextes de sécurité différents. Dans la page **Connexion à Azure AD** , il utilise l’utilisateur actuellement connecté. Dans la page **Configurer** , il passe au [compte exécutant le service pour le moteur de synchronisation](reference-connect-accounts-permissions.md#adsync-service-account). S’il existe un problème, il apparaît probablement déjà au niveau de la page **Connexion à Azure AD** page de l’Assistant car la configuration du proxy est globale.
 
 Voici les erreurs les plus courantes de l’Assistant Installation.
 
 ### <a name="the-installation-wizard-has-not-been-correctly-configured"></a>L’Assistant Installation n’a pas été configuré correctement
 Cette erreur apparaît quand l’Assistant ne peut pas accéder au proxy.
-![nomachineconfig](./media/tshoot-connect-connectivity/nomachineconfig.png)
+![Capture d’écran montrant une erreur : Impossible de valider les informations d’identification.](./media/tshoot-connect-connectivity/nomachineconfig.png)
 
 * Si vous voyez cette erreur, vérifiez que le fichier [machine.config](how-to-connect-install-prerequisites.md#connectivity) a été configuré correctement.
 * Si la configuration semble correcte, suivez les étapes de la section [Vérifier la connectivité du proxy](#verify-proxy-connectivity) pour voir si le problème existe également en dehors de l’Assistant.
 
 ### <a name="a-microsoft-account-is-used"></a>Un compte Microsoft est utilisé
-Si vous utilisez un **compte Microsoft** au lieu d’un compte **scolaire ou d’organisation**, vous voyez une erreur générique.
+Si vous utilisez un **compte Microsoft** au lieu d’un compte **scolaire ou d’organisation** , vous voyez une erreur générique.
 ![Un compte Microsoft est utilisé](./media/tshoot-connect-connectivity/unknownerror.png)
 
 ### <a name="the-mfa-endpoint-cannot-be-reached"></a>Impossible d’atteindre le point de terminaison de l’authentification MFA
@@ -85,9 +93,9 @@ Pour vérifier si le serveur Azure AD Connect dispose d’une connectivité rée
 
 PowerShell utilise la configuration du fichier machine.config pour contacter le proxy. Les paramètres de winhttp/netsh ne doivent pas affecter ces applets de commande.
 
-Si le proxy est configuré correctement, vous devez obtenir un état de réussite : ![proxy200](./media/tshoot-connect-connectivity/invokewebrequest200.png)
+Si le proxy est configuré correctement, vous devez obtenir un état de réussite :  ![Capture d’écran montrant l’état de réussite lorsque le proxy est configuré correctement.](./media/tshoot-connect-connectivity/invokewebrequest200.png)
 
-Si vous recevez l’erreur **Impossible de se connecter au serveur distant**, cela signifie que PowerShell tente d’effectuer un appel direct sans utiliser le proxy ou que DNS n’est pas configuré correctement. Vérifiez que le fichier **machine.config** est configuré correctement.
+Si vous recevez l’erreur **Impossible de se connecter au serveur distant** , cela signifie que PowerShell tente d’effectuer un appel direct sans utiliser le proxy ou que DNS n’est pas configuré correctement. Vérifiez que le fichier **machine.config** est configuré correctement.
 ![unabletoconnect](./media/tshoot-connect-connectivity/invokewebrequestunable.png)
 
 Si le proxy n’est pas configuré correctement, une erreur apparaît : ![proxy200](./media/tshoot-connect-connectivity/invokewebrequest403.png)
@@ -109,7 +117,7 @@ Si vous avez suivi l’ensemble des étapes précédentes et que vous ne pouvez 
 * Les points de terminaison adminwebservice et provisioningapi sont des points de terminaison de découverte, et ils sont utilisés pour rechercher le point de terminaison réel à utiliser. Ces points de terminaison diffèrent selon votre région.
 
 ### <a name="reference-proxy-logs"></a>Journaux d’activité de proxy de référence
-Voici une image mémoire d’un journal de proxy réel et la page de l’Assistant Installation d’où elle a été prise (les entrées en double pour un même point de terminaison ont été supprimées). Cette section peut être utilisée comme référence pour vos propres journaux d’activité de proxy et de réseau. Les points de terminaison réels peuvent être différents dans votre environnement (en particulier les URL en *italique*).
+Voici une image mémoire d’un journal de proxy réel et la page de l’Assistant Installation d’où elle a été prise (les entrées en double pour un même point de terminaison ont été supprimées). Cette section peut être utilisée comme référence pour vos propres journaux d’activité de proxy et de réseau. Les points de terminaison réels peuvent être différents dans votre environnement (en particulier les URL en *italique* ).
 
 **Connexion à Azure AD**
 
@@ -117,26 +125,26 @@ Voici une image mémoire d’un journal de proxy réel et la page de l’Assista
 | --- | --- |
 | 11/01/2016 8:31 |connect://login.microsoftonline.com:443 |
 | 11/01/2016 8:31 |connect://adminwebservice.microsoftonline.com:443 |
-| 11/01/2016 8:32 |connect://*bba800-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:32 |connect:// *bba800-anchor*.microsoftonline.com:443 |
 | 11/01/2016 8:32 |connect://login.microsoftonline.com:443 |
 | 11/01/2016 8:33 |connect://provisioningapi.microsoftonline.com:443 |
-| 11/01/2016 8:33 |connect://*bwsc02-relay*.microsoftonline.com:443 |
+| 11/01/2016 8:33 |connect:// *bwsc02-relay*.microsoftonline.com:443 |
 
 **Configurer**
 
 | Temps | URL |
 | --- | --- |
 | 11/01/2016 8:43 |connect://login.microsoftonline.com:443 |
-| 11/01/2016 8:43 |connect://*bba800-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:43 |connect:// *bba800-anchor*.microsoftonline.com:443 |
 | 11/01/2016 8:43 |connect://login.microsoftonline.com:443 |
 | 11/01/2016 8:44 |connect://adminwebservice.microsoftonline.com:443 |
-| 11/01/2016 8:44 |connect://*bba900-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:44 |connect:// *bba900-anchor*.microsoftonline.com:443 |
 | 11/01/2016 8:44 |connect://login.microsoftonline.com:443 |
 | 11/01/2016 8:44 |connect://adminwebservice.microsoftonline.com:443 |
-| 11/01/2016 8:44 |connect://*bba800-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:44 |connect:// *bba800-anchor*.microsoftonline.com:443 |
 | 11/01/2016 8:44 |connect://login.microsoftonline.com:443 |
 | 11/01/2016 8:46 |connect://provisioningapi.microsoftonline.com:443 |
-| 11/01/2016 8:46 |connect://*bwsc02-relay*.microsoftonline.com:443 |
+| 11/01/2016 8:46 |connect:// *bwsc02-relay*.microsoftonline.com:443 |
 
 **Synchronisation initiale**
 
@@ -144,8 +152,8 @@ Voici une image mémoire d’un journal de proxy réel et la page de l’Assista
 | --- | --- |
 | 11/01/2016 8:48 |connect://login.windows.net:443 |
 | 11/01/2016 8:49 |connect://adminwebservice.microsoftonline.com:443 |
-| 11/01/2016 8:49 |connect://*bba900-anchor*.microsoftonline.com:443 |
-| 11/01/2016 8:49 |connect://*bba800-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:49 |connect:// *bba900-anchor*.microsoftonline.com:443 |
+| 11/01/2016 8:49 |connect:// *bba800-anchor*.microsoftonline.com:443 |
 
 ## <a name="authentication-errors"></a>Erreurs d’authentification
 Cette section décrit les erreurs qui peuvent être retournées par la bibliothèque ADAL (la bibliothèque d’authentification utilisée par Azure AD Connect) et PowerShell. L’erreur expliquée doit vous aider à comprendre les étapes suivantes.
@@ -186,7 +194,7 @@ L’authentification a réussi, mais Azure AD PowerShell a un problème d’auth
 </div>
 
 ### <a name="azure-ad-global-admin-role-needed"></a>(Azure AD Global Admin Role Needed) Rôle d’administrateur général Azure AD nécessaire
-L’utilisateur s’est authentifié correctement. Toutefois, le rôle d’administrateur général n’est pas attribué à l’utilisateur. Voici [comment vous pouvez attribuer le rôle d’administrateur général](../users-groups-roles/directory-assign-admin-roles.md) à l’utilisateur.
+L’utilisateur s’est authentifié correctement. Toutefois, le rôle d’administrateur général n’est pas attribué à l’utilisateur. Voici [comment vous pouvez attribuer le rôle d’administrateur général](../roles/permissions-reference.md) à l’utilisateur.
 
 <div id="privileged-identity-management">
 <!--
@@ -225,14 +233,14 @@ Apparaît comme une erreur inattendue dans l’Assistant Installation. Peut se p
 Dans les versions commençant par le numéro de build 1.1.105.0 (publiées en février 2016), l’Assistant de connexion a été mis hors service. Cette section et la configuration ne sont plus requises, mais sont conservées en tant que référence.
 
 Pour que l’Assistant de connexion unique fonctionne, winhttp doit être configuré. Cette configuration peut être effectuée avec [**netsh**](how-to-connect-install-prerequisites.md#connectivity).
-![netsh](./media/tshoot-connect-connectivity/netsh.png)
+![Capture d’écran montrant une fenêtre d’invite de commandes exécutant l’outil netsh pour définir un proxy.](./media/tshoot-connect-connectivity/netsh.png)
 
 ### <a name="the-sign-in-assistant-has-not-been-correctly-configured"></a>L’Assistant de connexion n’a pas été configuré correctement
 Cette erreur apparaît quand l’Assistant de connexion ne peut pas accéder au proxy ou quand le proxy n’autorise pas la demande.
-![nonetsh](./media/tshoot-connect-connectivity/nonetsh.png)
+![Capture d’écran montrant une erreur : Impossible de valider les informations d'identification. Vérifiez la connectivité au réseau et les paramètres du pare-feu ou du proxy.](./media/tshoot-connect-connectivity/nonetsh.png)
 
 * Si cette erreur apparaît, examinez la configuration du proxy dans [netsh](how-to-connect-install-prerequisites.md#connectivity) et vérifiez si elle est correcte.
-  ![netshshow](./media/tshoot-connect-connectivity/netshshow.png)
+  ![Capture d’écran montrant une fenêtre d’invite de commandes exécutant l’outil netsh pour afficher la configuration du proxy.](./media/tshoot-connect-connectivity/netshshow.png)
 * Si la configuration semble correcte, suivez les étapes de la section [Vérifier la connectivité du proxy](#verify-proxy-connectivity) pour voir si le problème existe également en dehors de l’Assistant.
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -1,26 +1,31 @@
 ---
-title: Se connecter à l’aide de MySQL Workbench – Azure Database pour MySQL
+title: 'Démarrage rapide : Se connecter à MySQL Workbench – Azure Database pour MySQL'
 description: Ce guide de démarrage rapide indique les étapes à suivre pour utiliser MySQL Workbench pour vous connecter et interroger des données de la base de données Azure pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.custom: mvc
 ms.topic: quickstart
-ms.date: 3/18/2020
-ms.openlocfilehash: 95a3c9e81bfc1d3b010027e628204666c472d1da
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.date: 5/26/2020
+ms.openlocfilehash: 5e27cfec0a3f0a58c1e94a822e0c831f4efa1b32
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "81731871"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94535535"
 ---
-# <a name="azure-database-for-mysql-use-mysql-workbench-to-connect-and-query-data"></a>Azure Database pour MySQL : Utiliser MySQL Workbench pour se connecter et interroger des données
-Ce guide de démarrage rapide vous explique comment vous connecter à une base de données Azure pour MySQL en utilisant une application MySQL Workbench. 
+# <a name="quickstart-use-mysql-workbench-to-connect-and-query-data-in-azure-database-for-mysql"></a>Démarrage rapide : Utilisation de MySQL Workbench pour vous connecter et interroger des données dans Azure Database pour MySQL
+
+Ce guide de démarrage rapide vous explique comment vous connecter à une base de données Azure pour MySQL en utilisant une application MySQL Workbench.
 
 ## <a name="prerequisites"></a>Prérequis
+
 Ce guide de démarrage rapide s’appuie sur les ressources créées dans l’un de ces guides :
 - [Créer un serveur de base de données Azure pour MySQL à l’aide du Portail Azure](./quickstart-create-mysql-server-database-using-azure-portal.md)
 - [Création d’un serveur de base de données Azure pour MySQL à l’aide d’Azure CLI](./quickstart-create-mysql-server-database-using-azure-cli.md)
+
+> [!IMPORTANT] 
+> Vérifiez que l’adresse IP à partir de laquelle vous vous connectez a été ajoutée aux règles de pare-feu du serveur à l’aide du [portail Azure](./howto-manage-firewall-using-portal.md) ou [d’Azure CLI](./howto-manage-firewall-using-cli.md)
 
 ## <a name="install-mysql-workbench"></a>Installer MySQL Workbench
 Téléchargez et installez MySQL Workbench sur votre ordinateur depuis le [site web MySQL](https://dev.mysql.com/downloads/workbench/).
@@ -35,7 +40,7 @@ Obtenez les informations requises pour vous connecter à la base de données Azu
 3. Cliquez sur le nom du serveur.
 
 4. Dans le panneau **Vue d’ensemble** du serveur, notez le **nom du serveur** et le **nom de connexion de l’administrateur du serveur**. Si vous oubliez votre mot de passe, vous pouvez également le réinitialiser dans ce panneau.
- ![Nom du serveur de base de données Azure pour MySQL](./media/connect-php/1_server-overview-name-login.png)
+ :::image type="content" source="./media/connect-php/1_server-overview-name-login.png" alt-text="Nom du serveur de base de données Azure pour MySQL":::
 
 ## <a name="connect-to-the-server-by-using-mysql-workbench"></a>Se connecter au serveur à l’aide de MySQL Workbench 
 Pour vous connecter au serveur Azure MySQL à l’aide de l’outil d’interface graphique MySQL Workbench :
@@ -44,16 +49,16 @@ Pour vous connecter au serveur Azure MySQL à l’aide de l’outil d’interfac
 
 2.    Dans la boîte de dialogue **Configurer une nouvelle connexion**, entrez les informations suivantes dans l’onglet **Paramètres** :
 
-    ![configurer une nouvelle connexion](./media/connect-workbench/2-setup-new-connection.png)
-    
-   | **Paramètre** | **Valeur suggérée** | **Description du champ** |
-   |---|---|---|
-   |    Nom de connexion | Connexion démo | Spécifiez une étiquette pour cette connexion. |
-   | Méthode de connexion | Standard (TCP/IP) | Standard (TCP/IP) est suffisant. |
-   | HostName | *nom du serveur* | Spécifiez la valeur de nom de serveur utilisée lorsque vous avez créé la base de données Azure pour MySQL. Notre exemple de serveur affiché est mydemoserver.mysql.database.azure.com. Utilisez le nom de domaine complet (\*.mysql.database.azure.com), comme indiqué dans l’exemple. Si vous ne vous souvenez pas du nom de votre serveur, suivez les instructions de la section précédente pour obtenir les informations de connexion.  |
-   | Port | 3306 | Utilisez toujours le port 3306 lorsque vous vous connectez au service Base de données Azure pour MySQL. |
-   | Nom d’utilisateur |  *nom de connexion d’administrateur du serveur* | Tapez le nom d’utilisateur de connexion d’administrateur du serveur fourni lorsque vous avez créé la base de données Azure pour MySQL. Le nom d’utilisateur dans notre exemple est myadmin@mydemoserver. Si vous ne vous souvenez pas du nom d’utilisateur, suivez les instructions de la section précédente pour obtenir les informations de connexion. Le format est *nom_utilisateur\@nom_serveur*.
-   | Mot de passe | votre mot de passe | Cliquez sur le bouton **Stocker dans le coffre-fort…** pour enregistrer le mot de passe. |
+:::image type="content" source="./media/connect-workbench/2-setup-new-connection.png" alt-text="configurer une nouvelle connexion":::
+
+| **Paramètre** | **Valeur suggérée** | **Description du champ** |
+|---|---|---|
+|    Nom de connexion | Connexion démo | Spécifiez une étiquette pour cette connexion. |
+| Méthode de connexion | Standard (TCP/IP) | Standard (TCP/IP) est suffisant. |
+| HostName | *nom du serveur* | Spécifiez la valeur de nom de serveur utilisée lorsque vous avez créé la base de données Azure pour MySQL. Notre exemple de serveur affiché est mydemoserver.mysql.database.azure.com. Utilisez le nom de domaine complet (\*.mysql.database.azure.com), comme indiqué dans l’exemple. Si vous ne vous souvenez pas du nom de votre serveur, suivez les instructions de la section précédente pour obtenir les informations de connexion.  |
+| Port | 3306 | Utilisez toujours le port 3306 lorsque vous vous connectez au service Base de données Azure pour MySQL. |
+| Nom d’utilisateur |  *nom de connexion d’administrateur du serveur* | Tapez le nom d’utilisateur de connexion d’administrateur du serveur fourni lorsque vous avez créé la base de données Azure pour MySQL. Le nom d’utilisateur dans notre exemple est myadmin@mydemoserver. Si vous ne vous souvenez pas du nom d’utilisateur, suivez les instructions de la section précédente pour obtenir les informations de connexion. Le format est *nom_utilisateur\@nom_serveur*.
+| Mot de passe | votre mot de passe | Cliquez sur le bouton **Stocker dans le coffre-fort…** pour enregistrer le mot de passe. |
 
 3.   Cliquez sur **Tester la connexion** pour tester si tous les paramètres sont correctement configurés. 
 
@@ -98,13 +103,23 @@ Pour vous connecter au serveur Azure MySQL à l’aide de l’outil d’interfac
 
     La capture d’écran montre un exemple de code SQL dans SQL Workbench et la sortie obtenue après son exécution.
     
-    ![Onglet Workbench MySQL de SQL pour exécuter l’exemple de code SQL](media/connect-workbench/3-workbench-sql-tab.png)
+    :::image type="content" source="media/connect-workbench/3-workbench-sql-tab.png" alt-text="Onglet Workbench MySQL de SQL pour exécuter l’exemple de code SQL":::
 
-2. Pour exécuter l’exemple de Code SQL, cliquez sur l’icône d’éclair dans la barre d’outils de l’onglet**Fichier SQL**.
+2. Pour exécuter l’exemple de Code SQL, cliquez sur l’icône d’éclair dans la barre d’outils de l’onglet **Fichier SQL**.
 3. Vous observerez trois onglets de résultats dans la section **Grille de résultats** au milieu de la page. 
 4. La liste **Sortie** apparaît en bas de la page. L’état de chaque commande s’affiche. 
 
 Vous êtes à présent connecté à la base de données Azure pour MySQL à l’aide de MySQL Workbench et avez interrogé des données à l’aide du langage SQL.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Pour nettoyer toutes les ressources utilisées dans le cadre de ce guide de démarrage rapide, supprimez le groupe de ressources à l’aide de la commande suivante :
+
+```azurecli
+az group delete \
+    --name $AZ_RESOURCE_GROUP \
+    --yes
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 > [!div class="nextstepaction"]

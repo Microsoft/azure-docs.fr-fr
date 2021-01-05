@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/27/2018
 ms.author: tomfitz
-ms.openlocfilehash: 418056cb149f4441bac49db839a0dba40c2bb42d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba2c4d410891910c29ee1fda1065f8230ab171bf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649737"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87063862"
 ---
 # <a name="microsoftcommontextblock-ui-element"></a>Élément d’interface utilisateur Microsoft.Common.TextBlock
 
@@ -18,7 +18,7 @@ Contrôle qui peut être utilisé pour ajouter du texte à l’interface du port
 
 ## <a name="ui-sample"></a>Exemple d’interface utilisateur
 
-![Microsoft.Common.TextBox](./media/managed-application-elements/microsoft.common.textblock.png)
+![Microsoft.Common.TextBox](./media/managed-application-elements/microsoft-common-textblock.png)
 
 ## <a name="schema"></a>schéma
 

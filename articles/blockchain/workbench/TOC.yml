@@ -52,7 +52,7 @@
     - name: API de messagerie
       href: messages-overview.md
     - name: API REST
-      href: 'https://docs.microsoft.com/rest/api/azure-blockchain-workbench'
+      href: /rest/api/azure-blockchain-workbench
 - name: Ressources
   items:
     - name: Exemples de code
@@ -60,7 +60,7 @@
     - name: Blog
       href: 'https://azure.microsoft.com/blog/topics/blockchain/'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-blockchain-workbench.html'
+      href: /answers/topics/azure-blockchain-workbench.html
     - name: Support de la communauté pour les objets blob
       href: 'https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain'
     - name: Support de Stack Overflow

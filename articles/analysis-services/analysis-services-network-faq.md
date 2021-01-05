@@ -8,10 +8,10 @@ ms.date: 05/05/2020
 ms.author: owend
 ms.reviewer: minewiskan
 ms.openlocfilehash: b60cf34e8efed2ed63b6e35cfaf7445edb701610
-ms.sourcegitcommit: 11572a869ef8dbec8e7c721bc7744e2859b79962
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82838499"
 ---
 # <a name="frequently-asked-questions-about-analysis-services-network-connectivity"></a>Forum aux questions sur la connectivité réseau Analysis Services

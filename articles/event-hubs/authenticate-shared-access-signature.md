@@ -1,19 +1,15 @@
 ---
 title: Authentifier l’accès à Azure Event Hubs à l’aide de signatures d’accès partagé
 description: Cet article explique comment authentifier l’accès aux ressources Event Hubs à l’aide de signatures d’accès partagé.
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
 ms.topic: conceptual
-ms.date: 11/26/2019
-ms.author: spelluru
-ms.openlocfilehash: cde5992355d274410bb43b1e3e60fbba1afe4e44
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.date: 06/23/2020
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: 26c921213168e1028f311eabaa417efdb76f5c97
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676352"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97510088"
 ---
 # <a name="authenticate-access-to-event-hubs-resources-using-shared-access-signatures-sas"></a>Authentifier l’accès aux ressources Event Hubs avec des signatures d’accès partagé
 La signature d’accès partagé (SAS, shared access signature) vous offre un contrôle granulaire sur le type d’accès que vous octroyez aux clients qui la possèdent. Voici quelques-uns des contrôles que vous pouvez définir dans une signature d’accès partagé : 
@@ -216,7 +212,7 @@ Par exemple, pour définir des règles d’autorisation limitées à l’envoi e
 >
 > Quand le client envoie des données à un hub d’événements, il balise sa requête avec le jeton. Pour empêcher un intrus de procéder à des écoutes clandestines et de voler le jeton, la communication entre le client et le hub d’événements doit avoir lieu sur un canal chiffré.
 > 
-> Si un jeton est volé par un intrus, celui-ci peut emprunter l’identité du client à qui le jeton a été volé. L’inscription d’un éditeur sur liste rouge rend le client inutilisable, jusqu’à ce qu’il reçoive un nouveau jeton qui utilise un éditeur différent.
+> Si un jeton est volé par un intrus, celui-ci peut emprunter l’identité du client à qui le jeton a été volé. L’inscription d’un serveur de publication dans une liste de refus rend le client inutilisable, jusqu’à ce qu’il reçoive un nouveau jeton qui utilise un serveur de publication différent.
 
 
 ## <a name="authenticating-event-hubs-consumers-with-sas"></a>Authentification des consommateurs Event Hubs avec une signature d’accès partagé 
@@ -226,7 +222,7 @@ Pour authentifier les applications back-end qui consomment des données génér�
 Voir les articles suivants :
 
 - [Autorisation avec des signatures d’accès partagé](authenticate-shared-access-signature.md)
-- [Autorisation avec le contrôle d’accès en fonction du rôle (RBAC)](authenticate-shared-access-signature.md)
+- [Autorisation avec le contrôle d’accès en fonction du rôle Azure (Azure RBAC)](authenticate-shared-access-signature.md)
 - [En savoir plus sur Event Hubs](event-hubs-about.md)
 
 Consultez les articles associés suivants :

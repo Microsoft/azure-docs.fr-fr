@@ -1,20 +1,20 @@
 ---
 title: Exemple de script Azure PowerShell - Création d’une passerelle VPN | Microsoft Docs
-description: Créez une passerelle VPN à l’aide de PowerShell.
+description: Découvrez comment utiliser un script PowerShell pour créer un réseau virtuel, un sous-réseau réseau et une passerelle VPN basée sur un itinéraire.
 services: vpn-gateway
 documentationcenter: vpn-gateway
-author: anzaman
+author: kumudD
 ms.service: vpn-gateway
 ms.devlang: powershell
 ms.topic: sample
 ms.date: 01/09/2020
 ms.author: alzam
-ms.openlocfilehash: 52a5a70bc8c9f56ff4c5a2e971775d582c8db94d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a17cd1dcf9bca52936a8b10fa45045ff88df1b01
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75862388"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660744"
 ---
 # <a name="create-a-vpn-gateway-with-powershell"></a>Créer une passerelle VPN avec PowerShell
 
@@ -76,10 +76,10 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [New-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/new-azvirtualnetworksubnetconfig) | Crée une configuration de sous-réseau. Cette configuration est utilisée avec le processus de création du réseau virtuel. |
 | [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork) | Créer un réseau virtuel. |
 | [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) | Crée une adresse IP publique. |
-|[New-AzVirtualNetworkGateway](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworkgateway) | Crée une passerelle VPN. |
+|[New-AzVirtualNetworkGateway](/powershell/module/az.network/new-azvirtualnetworkgateway) | Crée une passerelle VPN. |
 |[Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 | [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork) | Définit la configuration de sous-réseau du réseau virtuel. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

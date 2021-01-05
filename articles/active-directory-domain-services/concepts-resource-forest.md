@@ -2,41 +2,38 @@
 title: Concepts de forêt de ressources pour Azure AD Domain Services | Microsoft Docs
 description: Découvrez ce que sont les forêts de ressources dans Azure Active Directory Domain Services et la manière dont elles bénéficient à votre organisation dans un environnement hybride avec des options d’authentification utilisateur limitées ou des problèmes de sécurité.
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 03/30/2020
-ms.author: iainfou
-ms.openlocfilehash: e0e5dde246dbcd5e5cb2e4ae923872a59a539d87
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: 79cf408bcb9060c247b97e6a81204c5a5517d384
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80476406"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96619999"
 ---
 # <a name="resource-forest-concepts-and-features-for-azure-active-directory-domain-services"></a>Concepts et fonctionnalités de la forêt de ressources pour Azure Active Directory Domain Services
 
-Azure Active Directory Domain Services (AD DS) fournit une expérience de connexion pour les applications métier héritées locales. Les utilisateurs, groupes et hachages de mot de passe des utilisateurs locaux et du cloud sont synchronisés avec le domaine géré Azure AD DS. Ces hachages de mot de passe synchronisés fournissent aux utilisateurs un ensemble unique d’informations d’identification qu’ils peuvent utiliser localement pour AD DS, Office 365 et Azure Active Directory.
+Azure Active Directory Domain Services (AD DS) fournit une expérience de connexion pour les applications métier héritées locales. Les utilisateurs, groupes et hachages de mot de passe des utilisateurs locaux et du cloud sont synchronisés avec le domaine géré Azure AD DS. Ces hachages de mot de passe synchronisés fournissent aux utilisateurs un ensemble unique d’informations d’identification qu’ils peuvent utiliser localement pour AD DS, Microsoft 365 et Azure Active Directory.
 
 Bien qu’ils soient sécurisés et offrent des avantages supplémentaires en matière de sécurité, certaines organisations ne peuvent pas synchroniser les hachages des mots de passe utilisateur pour Azure AD ou Azure AD DS. Les utilisateurs d’une organisation peuvent ne pas connaître leur mot de passe, car ils utilisent uniquement l’authentification par carte à puce. Ces limitations empêchent certaines organisations d’utiliser Azure AD DS pour déplacer des applications classiques locales vers Azure.
 
-Pour répondre à ces besoins et restrictions, vous pouvez créer un domaine Azure AD DS géré qui utilise une forêt de ressources. Cet article conceptuel explique ce que sont les forêts et comment elles font confiance à d’autres ressources pour fournir une méthode d’authentification sécurisée. Les forêts de ressources Azure AD DS sont actuellement en préversion.
-
-> [!IMPORTANT]
-> Les forêts de ressources Azure AD DS ne prennent actuellement pas en charge Azure HDInsight et Azure Files. Les forêts d’utilisateurs Azure AD DS prennent en charge ces deux services supplémentaires par défaut.
+Pour répondre à ces besoins et restrictions, vous pouvez créer un domaine managé qui utilise une forêt de ressources. Cet article conceptuel explique ce que sont les forêts et comment elles font confiance à d’autres ressources pour fournir une méthode d’authentification sécurisée.
 
 ## <a name="what-are-forests"></a>Que sont les forêts ?
 
 Une *forêt* est une construction logique utilisée par Active Directory Domain Services (AD DS) pour regrouper un ou plusieurs *domaines*. Les domaines stockent alors les objets pour un utilisateur ou des groupes et fournissent des services d’authentification.
 
-Dans Azure AD DS, la forêt ne contient qu’un seul domaine. Les forêts AD DS locales contiennent souvent de nombreux domaines. Dans les grandes organisations, en particulier après des fusions et acquisitions, vous pouvez vous retrouver avec plusieurs forêts locales qui contiennent chacune plusieurs domaines.
+Dans le domaine managé Azure AD DS, la forêt ne contient qu’un seul domaine. Les forêts AD DS locales contiennent souvent de nombreux domaines. Dans les grandes organisations, en particulier après des fusions et acquisitions, vous pouvez vous retrouver avec plusieurs forêts locales qui contiennent chacune plusieurs domaines.
 
-Par défaut, un domaine managé Azure AD DS est créé en tant que forêt *d’utilisateurs*. Ce type de forêt synchronise tous les objets d’Azure AD, notamment les comptes d’utilisateur créés dans un environnement AD DS local. Les comptes d’utilisateur peuvent directement s’authentifier auprès du domaine managé Azure AD DS, par exemple pour se connecter à une machine virtuelle jointe à un domaine. Une forêt d’utilisateurs fonctionne lorsque les hachages de mot de passe peuvent être synchronisés et que les utilisateurs n’utilisent pas de méthode de connexion exclusive, comme l’authentification par carte à puce.
+Par défaut, un domaine managé est créé en tant que forêt d’*utilisateurs*. Ce type de forêt synchronise tous les objets d’Azure AD, notamment les comptes d’utilisateur créés dans un environnement AD DS local. Les comptes d’utilisateur peuvent directement s’authentifier auprès du domaine managé, par exemple pour se connecter à une machine virtuelle jointe à un domaine. Une forêt d’utilisateurs fonctionne lorsque les hachages de mot de passe peuvent être synchronisés et que les utilisateurs n’utilisent pas de méthode de connexion exclusive, comme l’authentification par carte à puce.
 
-Dans une forêt Azure AD DS de *ressources*, les utilisateurs s’authentifient sur une forêt à *approbation* unique à partir de leur AD DS local. Avec cette approche, les objets utilisateur et les hachages de mot de passe ne sont pas synchronisés avec Azure AD DS. Les objets utilisateur et les informations d’identification existent uniquement dans l’instance AD DS locale. Cette approche permet aux entreprises d’héberger des ressources et des plateformes d’application dans Azure qui dépendent de l’authentification classique, par exemple LDAPS, Kerberos ou NTLM, en éliminant les problèmes et craintes en matière d’authentification. Les forêts de ressources Azure AD DS sont actuellement en préversion.
+Dans une forêt de *ressources* de domaine managé, les utilisateurs s’authentifient sur une forêt à *approbation* unique à partir de leur AD DS local. Avec cette approche, les objets utilisateur et les hachages de mot de passe ne sont pas synchronisés avec le domaine managé. Les objets utilisateur et les informations d’identification existent uniquement dans l’instance AD DS locale. Cette approche permet aux entreprises d’héberger des ressources et des plateformes d’application dans Azure qui dépendent de l’authentification classique, par exemple LDAPS, Kerberos ou NTLM, en éliminant les problèmes et craintes en matière d’authentification.
 
 Les forêts de ressources offrent également la possibilité de déplacer vos applications un composant à la fois. De nombreuses applications locales héritées sont multicouches, utilisent souvent un serveur web ou un serveur frontal et de nombreux composants liés aux bases de données. Ces couches compliquent le déplacement de l’ensemble de l’application dans le cloud en une seule étape. Avec les forêts de ressources, vous pouvez déplacer votre application dans le cloud par phases, ce qui simplifie le déplacement de votre application vers Azure.
 
@@ -69,7 +66,7 @@ La transitivité des approbations de forêt est limitée aux deux partenaires de
 
 ![Diagramme d'approbation de forêt entre Azure AD DS et les instances AD DS locales](./media/concepts-resource-forest/resource-forest-trust-relationship.png)
 
-Vous pouvez créer différentes configurations d’approbation de domaine et de forêt en fonction de la structure Active Directory de l’organisation. Azure AD DS prend en charge uniquement une approbation de forêt unidirectionnelle. Dans cette configuration, les ressources Azure AD DS peuvent approuver tous les domaines d’une forêt locale.
+Vous pouvez créer différentes configurations d’approbation de domaine et de forêt en fonction de la structure Active Directory de l’organisation. Azure AD DS prend en charge uniquement une approbation de forêt unidirectionnelle. Dans cette configuration, les ressources du domaine managé peuvent approuver tous les domaines d’une forêt locale.
 
 ## <a name="supporting-technology-for-trusts"></a>Technologies de soutien pour les approbations
 
@@ -88,11 +85,11 @@ DNS est également utilisé pour prendre en charge l’emplacement des contrôle
 
 ### <a name="applications-and-net-logon"></a>Applications et ouverture de session réseau
 
-Les applications et le service d’ouverture de session réseau sont des composants du modèle de canal de sécurité distribuée Windows. Les applications intégrées à Windows Server et à Active Directory utilisent des protocoles d’authentification pour communiquer avec le service d’ouverture de session réseau afin qu’un chemin sécurisé sur lequel l’authentification peut se produire puisse être établi.
+Les applications et le service d’ouverture de session réseau sont des composants du modèle de canal de sécurité distribuée Windows. Les applications intégrées à Windows Server et à Active Directory utilisent des protocoles d’authentification pour communiquer avec le service d’ouverture de session réseau afin d’établir un chemin sécurisé sur lequel l’authentification peut se produire.
 
 ### <a name="authentication-protocols"></a>Protocoles d’authentification
 
-Les contrôleurs Active Directory authentifient les utilisateurs et les applications à l’aide d’un des protocoles suivants :
+Les contrôleurs Active Directory authentifient les utilisateurs et les applications à l’aide d’un des protocoles suivants :
 
 * **Protocole d’authentification Kerberos version 5**
     * Le protocole Kerberos version 5 est le protocole d’authentification par défaut utilisé par les ordinateurs locaux exécutant Windows et prenant en charge les systèmes d’exploitation tiers. Ce protocole est spécifié dans le RFC 1510 et est entièrement intégré à Active Directory, au protocole SMB (Server Message Block), au protocole HTTP et à l’appel de procédure distante (RPC), ainsi qu’aux applications client et serveur qui utilisent ces protocoles.
@@ -116,7 +113,7 @@ Les approbations fournissent ce mécanisme pour valider les demandes d’authent
 
 Pour en savoir plus sur les approbations, consultez [Comment fonctionnent les approbations de forêt dans Azure AD DS ?][concepts-trust]
 
-Pour commencer la création d’un domaine managé Azure AD DS avec une forêt de ressources, consultez [Créer et configurer un domaine managé Azure AD][tutorial-create-advanced]. Vous pouvez ensuite [Créer une approbation de forêt sortante vers un domaine local (préversion)][create-forest-trust].
+Pour commencer la création d’un domaine managé Azure AD DS avec une forêt de ressources, consultez [Créer et configurer un domaine managé Azure AD][tutorial-create-advanced]. Vous pouvez ensuite [créer une approbation de forêt sortante vers un domaine local][create-forest-trust].
 
 <!-- LINKS - INTERNAL -->
 [concepts-trust]: concepts-forest-trust.md

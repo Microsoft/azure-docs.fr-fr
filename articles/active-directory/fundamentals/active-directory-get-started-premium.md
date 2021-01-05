@@ -2,23 +2,23 @@
 title: S’inscrire aux éditions Premium - Azure Active Directory| Microsoft Docs
 description: Instructions permettant de s’inscrire aux éditions Azure Active Directory Premium.
 services: active-directory
-author: msaburnley
+author: ajburnle
 manager: daveba
 ms.service: active-directory
 ms.subservice: fundamentals
 ms.workload: identity
-ms.topic: quickstart
+ms.topic: how-to
 ms.date: 09/07/2017
 ms.author: ajburnle
 ms.reviewer: piotrci
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1a1f4addf9bb1fff34d99867fb3730a9197c9c05
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 425809339cf4c468293801460fdeb79d9e467968
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73721223"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89565597"
 ---
 # <a name="sign-up-for-azure-active-directory-premium-editions"></a>S’inscrire aux éditions Azure Active Directory Premium
 Vous pouvez acheter des éditions Azure Active Directory (Azure AD) Premium et les associer à votre abonnement Azure. Si vous devez créer un nouvel abonnement Azure, vous devez aussi activer votre offre de licences et l’accès au service Azure AD.
@@ -28,7 +28,7 @@ Vous pouvez acheter des éditions Azure Active Directory (Azure AD) Premium et l
 
 Avant de vous inscrire à Active Directory Premium 1 ou Premium 2, vous devez tout d’abord déterminer quel abonnement ou plan existant vous souhaitez utiliser :
 
-- Votre abonnement Azure ou Office 365 existant
+- Votre abonnement Azure ou Microsoft 365 existant
 
 - Votre offre de licences Enterprise Mobility + Security
 
@@ -36,8 +36,8 @@ Avant de vous inscrire à Active Directory Premium 1 ou Premium 2, vous devez 
 
 L’inscription par le biais de votre abonnement Azure, qui fait état des licences Azure AD déjà achetées et activées, active automatiquement les licences du même annuaire. Si ce n’est pas le cas, vous devez vous-même activer votre offre de licences et votre accès à Azure AD. Pour plus d’informations sur l’activation de votre offre de licences, consultez [Activer votre nouvelle offre de licences](#activate-your-new-license-plan). Pour plus d’informations sur l’activation de votre accès à Azure AD, consultez [Activer votre accès à Azure AD](#activate-your-azure-ad-access). 
 
-## <a name="sign-up-using-your-existing-azure-or-office-365-subscription"></a>S’inscrire par le biais de votre abonnement Azure ou Office 365 existant
-En tant qu’abonné Azure ou Office 365, vous pouvez vous procurer les éditions Azure Active Directory Premium en ligne. Pour obtenir des instructions détaillées, voir [Guide pratique pour acheter Azure Active Directory Premium – Nouveaux clients](https://channel9.msdn.com/Series/Azure-Active-Directory-Videos-Demos/How-to-Purchase-Azure-Active-Directory-Premium-New-Customers).
+## <a name="sign-up-using-your-existing-azure-or-microsoft-365-subscription"></a>S’inscrire par le biais de votre abonnement Azure ou Microsoft 365 existant
+En tant qu’abonné Azure ou Microsoft 365, vous pouvez vous procurer les éditions Azure Active Directory Premium en ligne. Pour obtenir des instructions détaillées, voir [Guide pratique pour acheter Azure Active Directory Premium – Nouveaux clients](https://channel9.msdn.com/Series/Azure-Active-Directory-Videos-Demos/How-to-Purchase-Azure-Active-Directory-Premium-New-Customers).
 
 ## <a name="sign-up-using-your-enterprise-mobility--security-licensing-plan"></a>S’inscrire par le biais de votre offre de licences Enterprise Mobility + Security
 Enterprise Mobility + Security est une suite composée d’Azure AD Premium, Azure Information Protection et Microsoft Intune. Si vous avez déjà une licence EMS, vous pouvez commencer par Azure AD, en utilisant l’une des options de licence suivantes :

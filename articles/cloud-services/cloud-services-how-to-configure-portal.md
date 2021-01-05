@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 12/07/2016
 ms.author: tagore
-ms.openlocfilehash: e862818a4fe2471af574d153d43f0096af7847b8
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 4f2b5716e253f2810ff953a10c879574c6a6c342
+ms.sourcegitcommit: a422b86148cba668c7332e15480c5995ad72fa76
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811401"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91576657"
 ---
 # <a name="how-to-configure-cloud-services"></a>Configuration des services cloud
 
@@ -48,7 +48,7 @@ Si vous devez cibler une version précise d’un système d’exploitation, vous
 
 Vous pouvez ajouter des alertes à votre service cloud. Cliquez sur **Paramètres** > **Règles d’alerte** > **Ajouter une alerte**.
 
-![](./media/cloud-services-how-to-configure-portal/cs-alerts.png)
+![Capture d’écran du volet des paramètres avec l’option Règles d’alerte et l’option Ajouter une alerte mises en évidence et encadrées en rouge.](./media/cloud-services-how-to-configure-portal/cs-alerts.png)
 
 Vous pouvez alors configurer une alerte. Dans la liste déroulante **Métrique**, vous pouvez définir une alerte pour les types de données suivants.
 
@@ -58,7 +58,7 @@ Vous pouvez alors configurer une alerte. Dans la liste déroulante **Métrique**
 * Sortie réseau
 * Pourcentage UC
 
-![](./media/cloud-services-how-to-configure-portal/cs-alert-item.png)
+![Capture d’écran du volet Ajouter une règle d’alerte avec toutes les options de configuration définies.](./media/cloud-services-how-to-configure-portal/cs-alert-item.png)
 
 ### <a name="configure-monitoring-from-a-metric-tile"></a>Configuration de la surveillance à partir d’une vignette de métrique
 

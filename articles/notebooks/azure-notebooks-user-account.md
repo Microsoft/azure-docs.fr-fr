@@ -3,22 +3,22 @@ title: Connexion à Azure Notebooks (préversion)
 description: Configurez votre compte d’utilisateur pour Azure Notebooks à l’aide d’un compte Microsoft ou d’un compte professionnel ou scolaire.
 ms.topic: conceptual
 ms.date: 04/15/2019
-ms.openlocfilehash: 9401a9e483f3f8db5af827f53937cb0f01b27a28
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 929a21785b5b48c81c2d2016874feed61021d3c0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75646294"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85832183"
 ---
 # <a name="your-user-account-for-azure-notebooks-preview"></a>Votre compte d’utilisateur pour Azure Notebooks (préversion)
+
+[!INCLUDE [notebooks-status](../../includes/notebooks-status.md)]
 
 Vous pouvez utiliser Azure Notebooks en vous connectant à un compte d'utilisateur ou non :
 
 - Si vous ne souhaitez pas vous connecter, vous pouvez créer et exécuter des blocs-notes, mais vous ne pouvez pas conserver de blocs-notes ni de fichiers de données dans le cadre de projets. Par exemple, les utilisateurs qui reçoivent un lien vers un bloc-notes Azure peuvent s’en servir sans avoir à se connecter.
 - Lorsque vous vous connectez, Azure Notebooks conserve tous vos projets au sein de votre compte. Les utilisateurs connectés bénéficient également d’un identifiant utilisateur qui leur permet de partager leurs projets et blocs-notes avec d’autres utilisateurs.
 - Si le compte que vous utilisez avec Azure Notebooks est également associé à un abonnement Azure, vous bénéficiez d’avantages supplémentaires. Par exemple, vous pouvez exécuter des blocs-notes sur des serveurs plus puissants, créer des blocs-notes privés et accorder des privilèges d’accès aux blocs-notes à des utilisateurs individuels.
-
-[!INCLUDE [notebooks-status](../../includes/notebooks-status.md)]
 
 Vous devez disposez d’un compte Microsoft ou d’un compte professionnel ou scolaire pour vous connecter à Azure Notebooks. Lorsque vous sélectionnez la commande **Se connecter** dans l’angle supérieur droit de la page Azure Notebooks, vous êtes invité à entrer votre compte :
 
@@ -53,7 +53,7 @@ Pour activer l’accès, le parent doit suivre les instructions suivantes :
 
 ## <a name="work-or-school-accounts"></a>Comptes professionnels ou scolaires
 
-Un compte professionnel ou scolaire est créé par l’administrateur d’une organisation afin de permettre à un membre d’accéder aux services de cloud computing Microsoft (comme Office 365). Ce compte permet également de se connecter à Windows sur un ordinateur joint au domaine. Un compte professionnel ou scolaire utilise généralement une adresse e-mail associée à l’organisation, comme any-user@contoso.com.
+Un compte professionnel ou scolaire est créé par l’administrateur d’une organisation afin de permettre à un membre d’accéder aux services de cloud computing Microsoft (par exemple, Microsoft 365) et de se connecter à Windows sur un ordinateur joint à un domaine. Un compte professionnel ou scolaire utilise généralement une adresse e-mail associée à l’organisation, comme any-user@contoso.com.
 
 Il se peut que le consentement de l’administrateur soit nécessaire pour se connecter à Azure Notebooks avec un compte professionnel ou scolaire, car Azure Notebooks collecte ou utilise des informations (sans les divulguer) telles que de l’adresse e-mail du compte et les informations de navigation de l’utilisateur. (Les données du navigateur sont utilisées pour optimiser certaines fonctionnalités en fonction de l’usage courant.)
 

@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 07/05/2019
 ms.author: glenga
 ms.openlocfilehash: 5e1a2622df0038141dd5cb05237f93d5e33e0bfb
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78190911"
 ---
 Dans un projet de bibliothèque de classes C#, les liaisons sont définies comme attributs de liaison sur la méthode de fonction. Le fichier *function.json* nécessaire à Functions est ensuite généré automatiquement en fonction de ces attributs.

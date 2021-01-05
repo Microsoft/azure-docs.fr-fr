@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 8989acc6d21a3c53be9d97c74ed7fbf03ba54819
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ddad462658465c07624f078e20c224750c5180c9
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76773679"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92019475"
 ---
-# <a name="get-started-with-delivering-content-on-demand-using-rest"></a>Prendre en main la diffusion de contenus à la demande avec REST  
+# <a name="get-started-with-delivering-content-on-demand-using-rest"></a>Prendre en main la diffusion de contenus à la demande avec REST
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)] 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Ce document de démarrage rapide vous guide à travers les étapes d’implémentation d’une application de diffusion de contenu vidéo à la demande (VoD) avec les API REST Azure Media Services (AMS).
 
@@ -34,7 +36,7 @@ L’image suivante illustre certains des objets couramment utilisés lors du dé
 
 Cliquez sur l’image pour l’afficher en plein écran.  
 
-<a href="./media/media-services-rest-get-started/media-services-overview-object-model.png" target="_blank"><img src="./media/media-services-rest-get-started/media-services-overview-object-model-small.png"></a> 
+[![Diagramme montrant certains des objets les plus couramment utilisés dans le modèle de données d’objet Azure Media Services pour le développement d’applications de vidéo à la demande.](./media/media-services-rest-get-started/media-services-overview-object-model-small.png)](./media/media-services-rest-get-started/media-services-overview-object-model.png#lightbox)
 
 ## <a name="prerequisites"></a>Prérequis
 Les conditions préalables suivantes sont requises pour commencer à développer avec les API REST et Media Services.
@@ -56,7 +58,7 @@ Ce document de démarrage rapide présente les tâches suivantes.
 >[!NOTE]
 >Un nombre limite de 1 000 000 a été défini pour les différentes stratégies AMS (par exemple, pour la stratégie de localisateur ou pour ContentKeyAuthorizationPolicy). Utilisez le même ID de stratégie si vous utilisez toujours les mêmes jours/autorisations d’accès, par exemple, les stratégies pour les localisateurs destinés à demeurer en place pendant une longue période (stratégies sans chargement). Pour plus d’informations, consultez [cet](media-services-dotnet-manage-entities.md#limit-access-policies) article.
 
-Pour plus d’informations sur les entités REST AMS utilisées dans cet article, consultez [Informations de référence sur l’API REST d’azure Media Services](https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference). Consultez également [Concepts Azure Media Services](media-services-concepts.md).
+Pour plus d’informations sur les entités REST AMS utilisées dans cet article, consultez [Informations de référence sur l’API REST d’azure Media Services](/rest/api/media/operations/azure-media-services-rest-api-reference). Consultez également [Concepts Azure Media Services](media-services-concepts.md).
 
 >[!NOTE]
 >Lors de l’accès aux entités dans Media Services, vous devez définir les valeurs et les champs d’en-tête spécifiques dans vos requêtes HTTP. Pour plus d'informations, consultez [Installation pour le développement REST API de Media Services](media-services-rest-how-to-use.md).
@@ -102,231 +104,243 @@ L’exemple suivant montre comment créer une ressource.
 
 **Demande HTTP**
 
-    POST https://wamsbayclus001rest-hs.cloudapp.net/api/Assets HTTP/1.1
-    Content-Type: application/json
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
-    Host: wamsbayclus001rest-hs.cloudapp.net
-    Content-Length: 45
+```console
+POST https://wamsbayclus001rest-hs.cloudapp.net/api/Assets HTTP/1.1
+Content-Type: application/json
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
+Host: wamsbayclus001rest-hs.cloudapp.net
+Content-Length: 45
 
-    {"Name":"BigBuckBunny.mp4", "Options":"0"}
-
+{"Name":"BigBuckBunny.mp4", "Options":"0"}
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, l’élément suivant est retourné :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 452
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Assets('nb%3Acid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')
-    Server: Microsoft-IIS/8.5
-    x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
-    request-id: e98be122-ae09-473a-8072-0ccd234a0657
-    x-ms-request-id: e98be122-ae09-473a-8072-0ccd234a0657
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Sun, 18 Jan 2015 22:06:40 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 452
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Assets('nb%3Acid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')
+Server: Microsoft-IIS/8.5
+x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
+request-id: e98be122-ae09-473a-8072-0ccd234a0657
+x-ms-request-id: e98be122-ae09-473a-8072-0ccd234a0657
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Sun, 18 Jan 2015 22:06:40 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets/@Element",
-       "Id":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
-       "State":0,
-       "Created":"2015-01-18T22:06:40.6010903Z",
-       "LastModified":"2015-01-18T22:06:40.6010903Z",
-       "AlternateId":null,
-       "Name":"BigBuckBunny2.mp4",
-       "Options":0,
-       "Uri":"https://storagetestaccount001.blob.core.windows.net/asset-9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
-       "StorageAccountName":"storagetestaccount001"
-    }
+{  
+    odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets/@Element",
+   "Id":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
+   "State":0,
+   "Created":"2015-01-18T22:06:40.6010903Z",
+   "LastModified":"2015-01-18T22:06:40.6010903Z",
+   "AlternateId":null,
+   "Name":"BigBuckBunny2.mp4",
+   "Options":0,
+   "Uri":"https://storagetestaccount001.blob.core.windows.net/asset-9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
+   "StorageAccountName":"storagetestaccount001"
+}
+```
 
 ### <a name="create-an-assetfile"></a>Création d’un AssetFile
-L’entité [AssetFile](https://docs.microsoft.com/rest/api/media/operations/assetfile) représente un fichier audio ou vidéo stocké dans un conteneur d’objets blob. Un fichier de ressources est toujours associé à une ressource et une ressource peut contenir un ou plusieurs AssetFiles. La tâche de Media Services Encoder échoue si un objet de fichier de ressources n’est pas associé à un fichier numérique dans un conteneur d’objets blob.
+L’entité [AssetFile](/rest/api/media/operations/assetfile) représente un fichier audio ou vidéo stocké dans un conteneur d’objets blob. Un fichier de ressources est toujours associé à une ressource et une ressource peut contenir un ou plusieurs AssetFiles. La tâche de Media Services Encoder échoue si un objet de fichier de ressources n’est pas associé à un fichier numérique dans un conteneur d’objets blob.
 
 Après avoir téléchargé le fichier de ressource numérique dans un conteneur d’objets blob, vous utilisez la requête HTTP **MERGE** pour mettre à jour AssetFile avec des informations sur votre fichier multimédia (comme indiqué ultérieurement dans cette rubrique).
 
 **Demande HTTP**
 
-    POST https://wamsbayclus001rest-hs.cloudapp.net/api/Files HTTP/1.1
-    Content-Type: application/json
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-    Content-Length: 164
+```console
+POST https://wamsbayclus001rest-hs.cloudapp.net/api/Files HTTP/1.1
+Content-Type: application/json
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+Content-Length: 164
 
-    {  
-       "IsEncrypted":"false",
-       "IsPrimary":"false",
-       "MimeType":"video/mp4",
-       "Name":"BigBuckBunny.mp4",
-       "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
-    }
-
+{  
+   "IsEncrypted":"false",
+   "IsPrimary":"false",
+   "MimeType":"video/mp4",
+   "Name":"BigBuckBunny.mp4",
+   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
+}
+```
 
 **Réponse HTTP**
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 535
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5')
-    Server: Microsoft-IIS/8.5
-    request-id: 98a30e2d-f379-4495-988e-0b79edc9b80e
-    x-ms-request-id: 98a30e2d-f379-4495-988e-0b79edc9b80e
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Mon, 19 Jan 2015 00:34:07 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 535
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5')
+Server: Microsoft-IIS/8.5
+request-id: 98a30e2d-f379-4495-988e-0b79edc9b80e
+x-ms-request-id: 98a30e2d-f379-4495-988e-0b79edc9b80e
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Mon, 19 Jan 2015 00:34:07 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Files/@Element",
-       "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
-       "Name":"BigBuckBunny.mp4",
-       "ContentFileSize":"0",
-       "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
-       "EncryptionVersion":null,
-       "EncryptionScheme":null,
-       "IsEncrypted":false,
-       "EncryptionKeyId":null,
-       "InitializationVector":null,
-       "IsPrimary":false,
-       "LastModified":"2015-01-19T00:34:08.1934137Z",
-       "Created":"2015-01-19T00:34:08.1934137Z",
-       "MimeType":"video/mp4",
-       "ContentChecksum":null
-    }
-
+{  
+   "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Files/@Element",
+   "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
+   "Name":"BigBuckBunny.mp4",
+   "ContentFileSize":"0",
+   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
+   "EncryptionVersion":null,
+   "EncryptionScheme":null,
+   "IsEncrypted":false,
+   "EncryptionKeyId":null,
+   "InitializationVector":null,
+   "IsPrimary":false,
+   "LastModified":"2015-01-19T00:34:08.1934137Z",
+   "Created":"2015-01-19T00:34:08.1934137Z",
+   "MimeType":"video/mp4",
+   "ContentChecksum":null
+}
+```
 
 ### <a name="creating-the-accesspolicy-with-write-permission"></a>Création d’AccessPolicy avec autorisation d’écriture
-Avant de télécharger des fichiers dans le stockage blob, définissez les droits de la stratégie d’accès pour l’écriture sur une ressource. Pour ce faire, utilisez POST avec une demande HTTP sur le jeu d’entités AccessPolicies. N’oubliez pas de définir une valeur DurationInMinutes après la création ou vous recevrez en réponse un message d’erreur interne de serveur 500. Pour plus d’informations sur AccessPolicies, consultez [AccessPolicy](https://docs.microsoft.com/rest/api/media/operations/accesspolicy).
+Avant de télécharger des fichiers dans le stockage blob, définissez les droits de la stratégie d’accès pour l’écriture sur une ressource. Pour ce faire, utilisez POST avec une demande HTTP sur le jeu d’entités AccessPolicies. N’oubliez pas de définir une valeur DurationInMinutes après la création ou vous recevrez en réponse un message d’erreur interne de serveur 500. Pour plus d’informations sur AccessPolicies, consultez [AccessPolicy](/rest/api/media/operations/accesspolicy).
 
 L’exemple suivant montre comment créer une stratégie AccessPolicy :
 
 **Demande HTTP**
 
-    POST https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies HTTP/1.1
-    Content-Type: application/json
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-    Content-Length: 74
+```console
+POST https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies HTTP/1.1
+Content-Type: application/json
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+Content-Length: 74
 
-    {"Name":"NewUploadPolicy", "DurationInMinutes":"440", "Permissions":"2"}
+{"Name":"NewUploadPolicy", "DurationInMinutes":"440", "Permissions":"2"}
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 312
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies('nb%3Apid%3AUUID%3Abe0ac48d-af7d-4877-9d60-1805d68bffae')
-    Server: Microsoft-IIS/8.5
-    request-id: 74c74545-7e0a-4cd6-a440-c1c48074a970
-    x-ms-request-id: 74c74545-7e0a-4cd6-a440-c1c48074a970
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Sun, 18 Jan 2015 22:18:06 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 312
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Location: https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies('nb%3Apid%3AUUID%3Abe0ac48d-af7d-4877-9d60-1805d68bffae')
+Server: Microsoft-IIS/8.5
+request-id: 74c74545-7e0a-4cd6-a440-c1c48074a970
+x-ms-request-id: 74c74545-7e0a-4cd6-a440-c1c48074a970
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Sun, 18 Jan 2015 22:18:06 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#AccessPolicies/@Element",
-       "Id":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
-       "Created":"2015-01-18T22:18:06.6370575Z",
-       "LastModified":"2015-01-18T22:18:06.6370575Z",
-       "Name":"NewUploadPolicy",
-       "DurationInMinutes":440.0,
-       "Permissions":2
-    }
+{  
+   "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#AccessPolicies/@Element",
+   "Id":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
+   "Created":"2015-01-18T22:18:06.6370575Z",
+   "LastModified":"2015-01-18T22:18:06.6370575Z",
+   "Name":"NewUploadPolicy",
+   "DurationInMinutes":440.0,
+   "Permissions":2
+}
+```
 
 ### <a name="get-the-upload-url"></a>Obtention de l’URL de téléchargement
 
-Pour recevoir l’URL de téléchargement réelle, créez un localisateur SAS. Les localisateurs définissent l’heure de début et le type de point de terminaison de connexion pour les clients qui souhaitent accéder aux fichiers d’une ressource. Vous pouvez créer plusieurs entités de localisateurs pour une paire AccessPolicy et Asset donnée, afin de gérer les différentes demandes et besoins des clients. Chacun de ces localisateurs utilise la valeur StartTime et la valeur DurationInMinutes d’AccessPolicy pour déterminer la durée pendant laquelle une URL peut être utilisée. Pour plus d’informations, consultez la rubrique [Localisateur](https://docs.microsoft.com/rest/api/media/operations/locator).
+Pour recevoir l’URL de téléchargement réelle, créez un localisateur SAS. Les localisateurs définissent l’heure de début et le type de point de terminaison de connexion pour les clients qui souhaitent accéder aux fichiers d’une ressource. Vous pouvez créer plusieurs entités de localisateurs pour une paire AccessPolicy et Asset donnée, afin de gérer les différentes demandes et besoins des clients. Chacun de ces localisateurs utilise la valeur StartTime et la valeur DurationInMinutes d’AccessPolicy pour déterminer la durée pendant laquelle une URL peut être utilisée. Pour plus d’informations, consultez la rubrique [Localisateur](/rest/api/media/operations/locator).
 
 Une URL SAS a le format suivant :
 
-    {https://myaccount.blob.core.windows.net}/{asset name}/{video file name}?{SAS signature}
+`{https://myaccount.blob.core.windows.net}/{asset name}/{video file name}?{SAS signature}`
 
 Certaines considérations s’appliquent :
 
 * Vous ne pouvez avoir plus de cinq localisateurs uniques associés à une ressource donnée. 
 * Si vous avez besoin de télécharger vos fichiers immédiatement, vous devez définir la valeur StartTime sur cinq minutes avant l’heure actuelle. Cela vient du fait qu’il peut exister un décalage horaire entre votre ordinateur client et Media Services. Votre valeur StartTime doit être au format DateHeure suivant : AAAA-MM-JJTHH:mm:ssZ (par exemple, « 2014-05-23T17:53:50Z »).    
-* Il peut y avoir un délai de 30 à 40 secondes après la création d’un localisateur avant qu’il soit disponible. Ce problème s’applique aux localisateurs [d’URL SAS](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1) et d’origine.
+* Il peut y avoir un délai de 30 à 40 secondes après la création d’un localisateur avant qu’il soit disponible. Ce problème s’applique aux localisateurs [d’URL SAS](../../storage/common/storage-sas-overview.md) et d’origine.
 
 L’exemple suivant montre comment créer un localisateur d’URL SAS, tel que défini par la propriété Type dans le corps de la demande (« 1 » pour un localisateur SAS et « 2 » pour un localisateur d’origine à la demande). La propriété **Path** retournée contient l’URL que vous devez utiliser pour télécharger votre fichier.
 
 **Demande HTTP**
 
-    POST https://wamsbayclus001rest-hs.cloudapp.net/api/Locators HTTP/1.1
-    Content-Type: application/json
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-    Content-Length: 178
+```console
+POST https://wamsbayclus001rest-hs.cloudapp.net/api/Locators HTTP/1.1
+Content-Type: application/json
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+Content-Length: 178
 
-    {  
-       "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
-       "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
-       "StartTime":"2015-02-18T16:45:53",
-       "Type":1
-    }
-
+{  
+   "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
+   "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
+   "StartTime":"2015-02-18T16:45:53",
+   "Type":1
+}
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 949
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54')
-    Server: Microsoft-IIS/8.5
-    request-id: 2adeb1f8-89c5-4cc8-aa4f-08cdfef33ae0
-    x-ms-request-id: 2adeb1f8-89c5-4cc8-aa4f-08cdfef33ae0
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Mon, 19 Jan 2015 03:01:29 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 949
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54')
+Server: Microsoft-IIS/8.5
+request-id: 2adeb1f8-89c5-4cc8-aa4f-08cdfef33ae0
+x-ms-request-id: 2adeb1f8-89c5-4cc8-aa4f-08cdfef33ae0
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Mon, 19 Jan 2015 03:01:29 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Locators/@Element",
-       "Id":"nb:lid:UUID:af57bdd8-6751-4e84-b403-f3c140444b54",
-       "ExpirationDateTime":"2015-02-19T00:05:53",
-       "Type":1,
-       "Path":"https://storagetestaccount001.blob.core.windows.net/asset-f438649c-313c-46e2-8d68-7d2550288247?sv=2012-02-12&sr=c&si=af57bdd8-6751-4e84-b403-f3c140444b54&sig=fE4btwEfZtVQFeC0Wh3Kwks2OFPQfzl5qTMW5YytiuY%3D&st=2015-02-18T16%3A45%3A53Z&se=2015-02-19T00%3A05%3A53Z",
-       "BaseUri":"https://storagetestaccount001.blob.core.windows.net/asset-f438649c-313c-46e2-8d68-7d2550288247",
-       "ContentAccessComponent":"?sv=2012-02-12&sr=c&si=af57bdd8-6751-4e84-b403-f3c140444b54&sig=fE4btwEfZtVQFeC0Wh3Kwks2OFPQfzl5qTMW5YytiuY%3D&st=2015-02-18T16%3A45%3A53Z&se=2015-02-19T00%3A05%3A53Z",
-       "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
-       "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
-       "StartTime":"2015-02-18T16:45:53",
-       "Name":null
-    }
+{  
+   "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Locators/@Element",
+   "Id":"nb:lid:UUID:af57bdd8-6751-4e84-b403-f3c140444b54",
+   "ExpirationDateTime":"2015-02-19T00:05:53",
+   "Type":1,
+   "Path":"https://storagetestaccount001.blob.core.windows.net/asset-f438649c-313c-46e2-8d68-7d2550288247?sv=2012-02-12&sr=c&si=af57bdd8-6751-4e84-b403-f3c140444b54&sig=fE4btwEfZtVQFeC0Wh3Kwks2OFPQfzl5qTMW5YytiuY%3D&st=2015-02-18T16%3A45%3A53Z&se=2015-02-19T00%3A05%3A53Z",
+   "BaseUri":"https://storagetestaccount001.blob.core.windows.net/asset-f438649c-313c-46e2-8d68-7d2550288247",
+   "ContentAccessComponent":"?sv=2012-02-12&sr=c&si=af57bdd8-6751-4e84-b403-f3c140444b54&sig=fE4btwEfZtVQFeC0Wh3Kwks2OFPQfzl5qTMW5YytiuY%3D&st=2015-02-18T16%3A45%3A53Z&se=2015-02-19T00%3A05%3A53Z",
+   "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
+   "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
+   "StartTime":"2015-02-18T16:45:53",
+   "Name":null
+}
+```
 
 ### <a name="upload-a-file-into-a-blob-storage-container"></a>Téléchargement d’un fichier dans un conteneur de stockage d’objets blob
 Après avoir défini AccessPolicy et Locator, le fichier réel est téléchargé vers un conteneur de stockage d’objets blob Microsoft Azure à l’aide des API REST Azure Storage. Vous devez télécharger les fichiers en tant qu’objets blob de blocs. Les objets blob de pages ne sont pas pris en charge par Azure Media Services.  
@@ -336,78 +350,88 @@ Après avoir défini AccessPolicy et Locator, le fichier réel est téléchargé
 >
 >
 
-Pour plus d’informations sur l’utilisation d’objets blob de stockage Microsoft Azure, consultez [API REST du service BLOB](https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API).
+Pour plus d’informations sur l’utilisation d’objets blob de stockage Microsoft Azure, consultez [API REST du service BLOB](/rest/api/storageservices/blob-service-rest-api).
 
 ### <a name="update-the-assetfile"></a>Mise à jour d’AssetFile
 Maintenant que vous avez téléchargé votre fichier, mettez à jour les informations de taille FileAsset (et autres). Par exemple :
 
-    MERGE https://wamsbayclus001rest-hs.cloudapp.net/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5') HTTP/1.1
-    Content-Type: application/json
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
+```console
+MERGE https://wamsbayclus001rest-hs.cloudapp.net/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5') HTTP/1.1
+Content-Type: application/json
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
 
-    {  
-       "ContentFileSize":"1186540",
-       "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
-       "MimeType":"video/mp4",
-       "Name":"BigBuckBunny.mp4",
-       "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
-    }
-
+{  
+   "ContentFileSize":"1186540",
+   "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
+   "MimeType":"video/mp4",
+   "Name":"BigBuckBunny.mp4",
+   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
+}
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, l’élément suivant est retourné :
 
-    HTTP/1.1 204 No Content
-    ...
+```console
+HTTP/1.1 204 No Content
+...
+```
 
 ## <a name="delete-the-locator-and-accesspolicy"></a>Suppression du localisateur et d’AcessPolicy
 **Demande HTTP**
 
-    DELETE https://wamsbayclus001rest-hs.cloudapp.net/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54') HTTP/1.1
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-
+```console
+DELETE https://wamsbayclus001rest-hs.cloudapp.net/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54') HTTP/1.1
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, l’élément suivant est retourné :
 
-    HTTP/1.1 204 No Content
-    ...
+```console
+HTTP/1.1 204 No Content
+...
+```
 
 **Demande HTTP**
 
-    DELETE https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies('nb%3Apid%3AUUID%3Abe0ac48d-af7d-4877-9d60-1805d68bffae') HTTP/1.1
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
+```console
+DELETE https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies('nb%3Apid%3AUUID%3Abe0ac48d-af7d-4877-9d60-1805d68bffae') HTTP/1.1
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, l’élément suivant est retourné :
 
-    HTTP/1.1 204 No Content
-    ...
+```console
+HTTP/1.1 204 No Content
+...
+```
 
 ## <a name="encode-the-source-file-into-a-set-of-adaptive-bitrate-mp4-files"></a><a id="encode"></a>Encoder le fichier source en un ensemble de fichiers MP4 à débit adaptatif
 
-Après avoir reçu des éléments multimédias dans Media Services, vous pouvez encoder un média, modifier le format de ce dernier, lui appliquer un filigrane, etc. avant de le livrer à des clients. Afin de garantir des performances et une disponibilité optimales, ces activités sont planifiées et exécutées dans de nombreuses instances de rôle en arrière-plan. Ces activités s’appellent des travaux et chaque Travail se compose de tâches atomiques qui effectuent le travail à proprement parler sur le fichier de ressource (pour plus d’informations, consultez les descriptions de [Travail](https://docs.microsoft.com/rest/api/media/operations/job) et [Tâche](https://docs.microsoft.com/rest/api/media/operations/task)).
+Après avoir reçu des éléments multimédias dans Media Services, vous pouvez encoder un média, modifier le format de ce dernier, lui appliquer un filigrane, etc. avant de le livrer à des clients. Afin de garantir des performances et une disponibilité optimales, ces activités sont planifiées et exécutées dans de nombreuses instances de rôle en arrière-plan. Ces activités s’appellent des travaux et chaque Travail se compose de tâches atomiques qui effectuent le travail à proprement parler sur le fichier de ressource (pour plus d’informations, consultez les descriptions de [Travail](/rest/api/media/operations/job) et [Tâche](/rest/api/media/operations/task)).
 
 Comme mentionné précédemment, lorsque vous travaillez avec Azure Media Services, un des scénarios les plus courants est la diffusion de contenu à débit adaptatif à vos clients. Media Services peut empaqueter dynamiquement un ensemble de fichiers MP4 à débit adaptatif dans un des formats suivants : HTTP Live Streaming (HLS), Smooth Streaming, MPEG DASH.
 
@@ -420,6 +444,7 @@ Le code suivant demande l’ID de l’encodeur.
 
 **Demande HTTP**
 
+```console
     GET https://wamsbayclus001rest-hs.cloudapp.net/api/MediaProcessors()?$filter=Name%20eq%20'Media%20Encoder%20Standard' HTTP/1.1
     DataServiceVersion: 1.0;NetFx
     MaxDataServiceVersion: 3.0;NetFx
@@ -428,135 +453,140 @@ Le code suivant demande l’ID de l’encodeur.
     Authorization: Bearer <ENCODED JWT TOKEN>
     x-ms-version: 2.19
     Host: wamsbayclus001rest-hs.cloudapp.net
-
+```
 
 **Réponse HTTP**
 
-    HTTP/1.1 200 OK
-    Cache-Control: no-cache
-    Content-Length: 273
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Server: Microsoft-IIS/8.5
-    request-id: 6beb04b4-55a7-480d-8aa8-e5c5d59ffa1f
-    x-ms-request-id: 6beb04b4-55a7-480d-8aa8-e5c5d59ffa1f
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Mon, 19 Jan 2015 07:54:09 GMT
+```console
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Content-Length: 273
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Server: Microsoft-IIS/8.5
+request-id: 6beb04b4-55a7-480d-8aa8-e5c5d59ffa1f
+x-ms-request-id: 6beb04b4-55a7-480d-8aa8-e5c5d59ffa1f
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Mon, 19 Jan 2015 07:54:09 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#MediaProcessors",
-       "value":[  
-          {  
-             "Id":"nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56",
-             "Description":"Media Encoder Standard",
-             "Name":"Media Encoder Standard",
-             "Sku":"",
-             "Vendor":"Microsoft",
-             "Version":"1.1"
-          }
-       ]
-    }
+{  
+   "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#MediaProcessors",
+   "value":[  
+      {  
+         "Id":"nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56",
+         "Description":"Media Encoder Standard",
+         "Name":"Media Encoder Standard",
+         "Sku":"",
+         "Vendor":"Microsoft",
+         "Version":"1.1"
+      }
+   ]
+}
+```
 
 ### <a name="create-a-job"></a>Créer un travail
 Chaque travail peut comporter une ou plusieurs tâches, en fonction du type de traitement que vous souhaitez accomplir. Via l’API REST, vous pouvez créer des travaux et les tâches associées de deux manières : Des tâches peuvent être définies inline via la propriété de navigation de tâches sur les entités de travail, ou via le traitement par lots OData. Le Kit de développement logiciel (SDK) Media Services utilise le traitement par lots. Toutefois, pour une meilleure lisibilité des exemples de code dans cet article, les tâches sont définies inline. Pour plus d’informations sur le traitement par lots, consultez [Traitement par lots d’Open Data Protocol (OData)](https://www.odata.org/documentation/odata-version-3-0/batch-processing/).
 
-L’exemple suivant montre comment créer et publier un projet avec une tâche visant à encoder une vidéo en une résolution et une qualité spécifiques. La section suivante de la documentation contient la liste de toutes les [présélections de tâches](https://msdn.microsoft.com/library/mt269960) prises en charge par Media Encoder Standard.  
+L’exemple suivant montre comment créer et publier un projet avec une tâche visant à encoder une vidéo en une résolution et une qualité spécifiques. La section suivante de la documentation contient la liste de toutes les [présélections de tâches](./media-services-mes-presets-overview.md) prises en charge par Media Encoder Standard.  
 
 **Demande HTTP**
 
-    POST https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs HTTP/1.1
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    Accept-Charset: UTF-8
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-    Content-Length: 482
+```console
+POST https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs HTTP/1.1
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+Accept-Charset: UTF-8
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+Content-Length: 482
 
-    {  
-       "Name":"NewTestJob",
-       "InputMediaAssets":[  
-          {  
-             "__metadata":{  
-                "uri":"https://wamsbayclus001rest-hs.net/api/Assets('nb%3Acid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')"
-             }
-          }
-       ],
-       "Tasks":[  
-          {  
-             "Configuration":"Adaptive Streaming",
-             "MediaProcessorId":"nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56",
-             "TaskBody":"<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset>
-                <outputAsset>JobOutputAsset(0)</outputAsset></taskBody>"
-          }
-       ]
-    }
+{  
+   "Name":"NewTestJob",
+   "InputMediaAssets":[  
+      {  
+         "__metadata":{  
+            "uri":"https://wamsbayclus001rest-hs.net/api/Assets('nb%3Acid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')"
+         }
+      }
+   ],
+   "Tasks":[  
+      {  
+         "Configuration":"Adaptive Streaming",
+         "MediaProcessorId":"nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56",
+         "TaskBody":"<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset>
+            <outputAsset>JobOutputAsset(0)</outputAsset></taskBody>"
+      }
+   ]
+}
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 1215
-    Content-Type: application/json;odata=verbose;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')
-    Server: Microsoft-IIS/8.5
-    request-id: 532ac1ec-a475-4dce-b2d5-7c8ce94ac87c
-    x-ms-request-id: 532ac1ec-a475-4dce-b2d5-7c8ce94ac87c
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Mon, 19 Jan 2015 08:04:35 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 1215
+Content-Type: application/json;odata=verbose;charset=utf-8
+Location: https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')
+Server: Microsoft-IIS/8.5
+request-id: 532ac1ec-a475-4dce-b2d5-7c8ce94ac87c
+x-ms-request-id: 532ac1ec-a475-4dce-b2d5-7c8ce94ac87c
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Mon, 19 Jan 2015 08:04:35 GMT
 
-    {  
-       "d":{  
-          "__metadata":{  
-             "id":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')",
-             "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')",
-             "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Job"
-          },
-          "Tasks":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/Tasks"
-             }
-          },
-          "OutputMediaAssets":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/OutputMediaAssets"
-             }
-          },
-          "InputMediaAssets":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')/InputMediaAssets"
-             }
-          },
-          "Id":"nb:jid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
-          "Name":"NewTestJob",
-          "Created":"2015-01-19T08:04:34.3287057Z",
-          "LastModified":"2015-01-19T08:04:34.3287057Z",
-          "EndTime":null,
-          "Priority":0,
-          "RunningDuration":0,
-          "StartTime":null,
-          "State":0,
-          "TemplateId":null,
-          "JobNotificationSubscriptions":{  
-             "__metadata":{  
-                "type":"Collection(Microsoft.Cloud.Media.Vod.Rest.Data.Models.JobNotificationSubscription)"
-             },
-             "results":[  
+{  
+   "d":{  
+      "__metadata":{  
+         "id":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')",
+         "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')",
+         "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Job"
+      },
+      "Tasks":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/Tasks"
+         }
+      },
+      "OutputMediaAssets":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/OutputMediaAssets"
+         }
+      },
+      "InputMediaAssets":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1')/InputMediaAssets"
+         }
+      },
+      "Id":"nb:jid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
+      "Name":"NewTestJob",
+      "Created":"2015-01-19T08:04:34.3287057Z",
+      "LastModified":"2015-01-19T08:04:34.3287057Z",
+      "EndTime":null,
+      "Priority":0,
+      "RunningDuration":0,
+      "StartTime":null,
+      "State":0,
+      "TemplateId":null,
+      "JobNotificationSubscriptions":{  
+         "__metadata":{  
+            "type":"Collection(Microsoft.Cloud.Media.Vod.Rest.Data.Models.JobNotificationSubscription)"
+         },
+         "results":[  
 
-             ]
-          }
-       }
-    }
-
+         ]
+      }
+   }
+}
+```
 
 Il convient de noter quelques points importants concernant les demandes de travail :
 
@@ -577,7 +607,9 @@ Il convient de noter quelques points importants concernant les demandes de trava
 
     L’exemple suivant montre comment définir l’attribut assetName :
 
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetName=\"CustomOutputAssetName\">JobOutputAsset(0)</outputAsset></taskBody>"
+    ```console
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetName=\"CustomOutputAssetName\">JobOutputAsset(0)</outputAsset></taskBody>"
+    ```
 * Pour activer le chaînage des tâches :
 
   * un travail doit comporter au moins deux tâches
@@ -590,35 +622,37 @@ Vous pouvez récupérer l’état du travail à l’aide de la propriété State
 
 **Demande HTTP**
 
-    GET https://wamsbayclus001rest-hs.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/State HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: wamsbayclus001rest-hs.net
-    Content-Length: 0
-
+```console
+GET https://wamsbayclus001rest-hs.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/State HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: wamsbayclus001rest-hs.net
+Content-Length: 0
+```
 
 **Réponse HTTP**
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 200 OK
-    Cache-Control: no-cache
-    Content-Length: 17
-    Content-Type: application/json;odata=verbose;charset=utf-8
-    Server: Microsoft-IIS/7.5
-    x-ms-request-id: 01324d81-18e2-4493-a3e5-c6186209f0c8
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 1.0;
-    X-AspNet-Version: 4.0.30319
-    X-Powered-By: ASP.NET
-    Date: Sun, 13 May 2012 05:16:53 GMT
+```console
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Content-Length: 17
+Content-Type: application/json;odata=verbose;charset=utf-8
+Server: Microsoft-IIS/7.5
+x-ms-request-id: 01324d81-18e2-4493-a3e5-c6186209f0c8
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Sun, 13 May 2012 05:16:53 GMT
 
-    {"d":{"State":2}}
-
+{"d":{"State":2}}
+```
 
 ### <a name="cancel-a-job"></a>Annulation d’une tâche
 Media Services vous permet d’annuler les travaux en cours d’exécution via la fonction CancelJob. Cet appel renvoie un code d’erreur 400 si vous essayez d’annuler un Travail dont l’état est annulé, en cours d’annulation, erreur ou terminé.
@@ -627,15 +661,16 @@ L’exemple suivant montre comment appeler CancelJob.
 
 **Demande HTTP**
 
-    GET https://wamsbayclus001rest-hs.net/API/CancelJob?jobid='nb%3ajid%3aUUID%3a71d2dd33-efdf-ec43-8ea1-136a110bd42c' HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: wamsbayclus001rest-hs.net
-
+```console
+GET https://wamsbayclus001rest-hs.net/API/CancelJob?jobid='nb%3ajid%3aUUID%3a71d2dd33-efdf-ec43-8ea1-136a110bd42c' HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: wamsbayclus001rest-hs.net
+```
 
 Si l’opération réussit, un code de réponse 204 est retourné, sans corps de message.
 
@@ -649,48 +684,51 @@ Le code suivant montre comment demander l’ID de la ressource de sortie
 
 **Demande HTTP**
 
-    GET https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/OutputMediaAssets() HTTP/1.1
-    DataServiceVersion: 1.0;NetFx
-    MaxDataServiceVersion: 3.0;NetFx
-    Accept: application/json
-    Accept-Charset: UTF-8
-    User-Agent: Microsoft ADO.NET Data Services
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    x-ms-version: 2.19
-    Host: wamsbayclus001rest-hs.cloudapp.net
-
+```console
+GET https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs('nb%3Ajid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/OutputMediaAssets() HTTP/1.1
+DataServiceVersion: 1.0;NetFx
+MaxDataServiceVersion: 3.0;NetFx
+Accept: application/json
+Accept-Charset: UTF-8
+User-Agent: Microsoft ADO.NET Data Services
+Authorization: Bearer <ENCODED JWT TOKEN>
+x-ms-version: 2.19
+Host: wamsbayclus001rest-hs.cloudapp.net
+```
 
 **Réponse HTTP**
 
-    HTTP/1.1 200 OK
-    Cache-Control: no-cache
-    Content-Length: 445
-    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-    Server: Microsoft-IIS/8.5
-    request-id: 73cd605d-066a-46f1-8358-f4bd25a9220a
-    x-ms-request-id: 73cd605d-066a-46f1-8358-f4bd25a9220a
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 3.0;
-    X-Powered-By: ASP.NET
-    Strict-Transport-Security: max-age=31536000; includeSubDomains
-    Date: Mon, 19 Jan 2015 08:28:13 GMT
+```console
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Content-Length: 445
+Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+Server: Microsoft-IIS/8.5
+request-id: 73cd605d-066a-46f1-8358-f4bd25a9220a
+x-ms-request-id: 73cd605d-066a-46f1-8358-f4bd25a9220a
+X-Content-Type-Options: nosniff
+DataServiceVersion: 3.0;
+X-Powered-By: ASP.NET
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Date: Mon, 19 Jan 2015 08:28:13 GMT
 
-    {  
-       "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets",
-       "value":[  
-          {  
-             "Id":"nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
-             "State":0,
-             "Created":"2015-01-19T07:52:15.603",
-             "LastModified":"2015-01-19T07:52:15.603",
-             "AlternateId":null,
-             "Name":"Multibitrate MP4s",
-             "Options":0,
-             "Uri":"https://storagetestaccount001.blob.core.windows.net/asset-71d2dd33-efdf-ec43-8ea1-136a110bd42c",
-             "StorageAccountName":"storagetestaccount001"
-          }
-       ]
-    }
+{  
+   "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets",
+   "value":[  
+      {  
+         "Id":"nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
+         "State":0,
+         "Created":"2015-01-19T07:52:15.603",
+         "LastModified":"2015-01-19T07:52:15.603",
+         "AlternateId":null,
+         "Name":"Multibitrate MP4s",
+         "Options":0,
+         "Uri":"https://storagetestaccount001.blob.core.windows.net/asset-71d2dd33-efdf-ec43-8ea1-136a110bd42c",
+         "StorageAccountName":"storagetestaccount001"
+      }
+   ]
+}
+```
 
 ## <a name="publish-the-asset-and-get-streaming-and-progressive-download-urls-with-rest-api"></a><a id="publish_get_urls"></a>Publication des éléments et obtention des URL de diffusion et de téléchargement progressif avec l’API REST
 
@@ -703,19 +741,27 @@ Une fois que vous avez créé les localisateurs, vous pouvez générer les URL u
 
 Les URL de diffusion en continu pour Smooth Streaming ont le format suivant :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest
+```console
+{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest
+```
 
 Les URL de diffusion en continu pour HLS ont le format suivant :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```console
+{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+```
 
 Les URL de diffusion en continu pour MPEG DASH ont le format suivant :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```console
+{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+```
 
 Les URL SAS permettant de télécharger les fichiers ont le format suivant :
 
-    {blob container name}/{asset name}/{file name}/{SAS signature}
+```console
+{blob container name}/{asset name}/{file name}/{SAS signature}
+```
 
 Cette section montre comment effectuer les tâches suivantes, nécessaires pour « publier » vos ressources.  
 
@@ -724,22 +770,24 @@ Cette section montre comment effectuer les tâches suivantes, nécessaires pour 
 * Création d’une URL d’origine pour la diffusion en continu de contenu
 
 ### <a name="creating-the-accesspolicy-with-read-permission"></a>Création d’AccessPolicy avec autorisation de lecture
-Avant de télécharger ou de diffuser en continu du contenu multimédia, il convient tout d’abord de définir une AccessPolicy avec des autorisations de lecture et de créer l’entité de localisateur appropriée, qui spécifie le type de mécanisme de remise que vous souhaitez activer pour vos clients. Pour plus d’informations sur les propriétés disponibles, consultez [Propriétés de l’entité AccessPolicy](https://docs.microsoft.com/rest/api/media/operations/accesspolicy#accesspolicy_properties).
+Avant de télécharger ou de diffuser en continu du contenu multimédia, il convient tout d’abord de définir une AccessPolicy avec des autorisations de lecture et de créer l’entité de localisateur appropriée, qui spécifie le type de mécanisme de remise que vous souhaitez activer pour vos clients. Pour plus d’informations sur les propriétés disponibles, consultez [Propriétés de l’entité AccessPolicy](/rest/api/media/operations/accesspolicy#accesspolicy_properties).
 
 L’exemple suivant montre comment spécifier AccessPolicy pour les autorisations de lecture d’une ressource donnée.
 
-    POST https://wamsbayclus001rest-hs.net/API/AccessPolicies HTTP/1.1
-    Content-Type: application/json
-    Accept: application/json
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: wamsbayclus001rest-hs.net
-    Content-Length: 74
-    Expect: 100-continue
+```console
+POST https://wamsbayclus001rest-hs.net/API/AccessPolicies HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: wamsbayclus001rest-hs.net
+Content-Length: 74
+Expect: 100-continue
 
-    {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
+{"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
+```
 
 Si l’opération réussit, un code de succès 201 est renvoyé et décrit l’entité AccessPolicy que vous avez créée. Vous utilisez ensuite l’ID de l’AccessPolicy et l’ID de la ressource contenant le fichier que vous souhaitez remettre (par exemple, une ressource de sortie) pour créer l’entité de localisateur.
 
@@ -751,60 +799,64 @@ Si l’opération réussit, un code de succès 201 est renvoyé et décrit l’
 ### <a name="creating-a-sas-url-for-downloading-content"></a>Création d’une URL SAS pour le téléchargement de contenu
 Le code suivant montre comment obtenir une URL qui peut être utilisée pour télécharger une ressource créée et téléchargée précédemment. AccessPolicy dispose d’autorisations en lecture et le chemin d’accès du localisateur fait référence à une URL de téléchargement SAS.
 
-    POST https://wamsbayclus001rest-hs.net/API/Locators HTTP/1.1
-    Content-Type: application/json
-    Accept: application/json
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: wamsbayclus001rest-hs.net
-    Content-Length: 182
-    Expect: 100-continue
+```console
+POST https://wamsbayclus001rest-hs.net/API/Locators HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: wamsbayclus001rest-hs.net
+Content-Length: 182
+Expect: 100-continue
 
-    {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c", "StartTime" : "2014-05-17T16:45:53", "Type":1}
+{"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c", "StartTime" : "2014-05-17T16:45:53", "Type":1}
+```
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 1150
-    Content-Type: application/json;odata=verbose;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')
-    Server: Microsoft-IIS/7.5
-    x-ms-request-id: 8cfd8556-3064-416a-97f2-67d9e35f0911
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 1.0;
-    X-AspNet-Version: 4.0.30319
-    X-Powered-By: ASP.NET
-    Date: Mon, 14 May 2012 21:41:32 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 1150
+Content-Type: application/json;odata=verbose;charset=utf-8
+Location: https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')
+Server: Microsoft-IIS/7.5
+x-ms-request-id: 8cfd8556-3064-416a-97f2-67d9e35f0911
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 14 May 2012 21:41:32 GMT
 
-    {  
-       "d":{  
-          "__metadata":{  
-             "id":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')",
-             "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')",
-             "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Locator"
-          },
-          "AccessPolicy":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')/AccessPolicy"
-             }
-          },
-          "Asset":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/Asset"
-             }
-          },
-          "Id":"nb:lid:UUID:8e5a821d-2194-4d00-8884-adf979856874",
-          "ExpirationDateTime":"\/Date(1337049393000)\/",
-          "Type":1,
-          "Path":"https://storagetestaccount001.blob.core.windows.net/asset-71d2dd33-efdf-ec43-8ea1-136a110bd42c?st=2012-05-14T21%3A36%3A33Z&se=2012-05-15T02%3A36%3A33Z&sr=c&si=8e5a821d-2194-4d00-8884-adf979856874&sig=y75dViDpC5V8WutrXM%2B%2FGpR3uOtqmlISiNlHU1YUBOg%3D",
-          "AccessPolicyId":"nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8",
-          "AssetId":"nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
-          "StartTime":"\/Date(1337031393000)\/"
-       }
-    }
+{  
+   "d":{  
+      "__metadata":{  
+         "id":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')",
+         "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')",
+         "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Locator"
+      },
+      "AccessPolicy":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A8e5a821d-2194-4d00-8884-adf979856874')/AccessPolicy"
+         }
+      },
+      "Asset":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A71d2dd33-efdf-ec43-8ea1-136a110bd42c')/Asset"
+         }
+      },
+      "Id":"nb:lid:UUID:8e5a821d-2194-4d00-8884-adf979856874",
+      "ExpirationDateTime":"\/Date(1337049393000)\/",
+      "Type":1,
+      "Path":"https://storagetestaccount001.blob.core.windows.net/asset-71d2dd33-efdf-ec43-8ea1-136a110bd42c?st=2012-05-14T21%3A36%3A33Z&se=2012-05-15T02%3A36%3A33Z&sr=c&si=8e5a821d-2194-4d00-8884-adf979856874&sig=y75dViDpC5V8WutrXM%2B%2FGpR3uOtqmlISiNlHU1YUBOg%3D",
+      "AccessPolicyId":"nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8",
+      "AssetId":"nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c",
+      "StartTime":"\/Date(1337031393000)\/"
+   }
+}
+```
 
 La propriété **Path** retournée contient l’URL SAS.
 
@@ -817,97 +869,101 @@ La propriété **Path** retournée contient l’URL SAS.
 Après avoir défini AccessPolicy et le localisateur, vous pouvez télécharger des fichiers à l’aide des API REST Azure Storage.  
 
 > [!NOTE]
-> Vous devez ajouter le nom de fichier du fichier à télécharger à la valeur **Path** du Localisateur, obtenue dans la section précédente. Par exemple : https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
+> Vous devez ajouter le nom de fichier du fichier à télécharger à la valeur **Path** du Localisateur, obtenue dans la section précédente. Par exemple, `https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4` ? . . .
 
-Pour plus d’informations sur l’utilisation d’objets blob de stockage Microsoft Azure, consultez [API REST du service BLOB](https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API).
+Pour plus d’informations sur l’utilisation d’objets blob de stockage Microsoft Azure, consultez [API REST du service BLOB](/rest/api/storageservices/blob-service-rest-api).
 
 Suite à la tâche de codage que vous avez exécutée antérieurement (encodage vers un jeu de MP4 adaptatifs), vous disposez de plusieurs fichiers MP4 que vous pouvez télécharger progressivement. Par exemple :    
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
-    https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
+* `https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z`
 
 ### <a name="creating-a-streaming-url-for-streaming-content"></a>Création d’une URL pour la diffusion en continu de contenu
 Le code suivant montre comment créer un localisateur d’URL de diffusion en continu  :
 
-    POST https://wamsbayclus001rest-hs/API/Locators HTTP/1.1
-    Content-Type: application/json
-    Accept: application/json
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: wamsbayclus001rest-hs
-    Content-Length: 182
-    Expect: 100-continue
+```console
+POST https://wamsbayclus001rest-hs/API/Locators HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: wamsbayclus001rest-hs
+Content-Length: 182
+Expect: 100-continue
 
-    {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3", "StartTime" : "2014-05-17T16:45:53",, "Type":2}
+{"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3", "StartTime" : "2014-05-17T16:45:53",, "Type":2}
+```
 
 Si l’opération réussit, la réponse suivante est retournée :
 
-    HTTP/1.1 201 Created
-    Cache-Control: no-cache
-    Content-Length: 981
-    Content-Type: application/json;odata=verbose;charset=utf-8
-    Location: https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')
-    Server: Microsoft-IIS/7.5
-    x-ms-request-id: 2eac4158-fc78-4fa2-81ee-c9f582dc385f
-    X-Content-Type-Options: nosniff
-    DataServiceVersion: 1.0;
-    X-AspNet-Version: 4.0.30319
-    X-Powered-By: ASP.NET
-    Date: Mon, 14 May 2012 21:41:39 GMT
+```console
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Length: 981
+Content-Type: application/json;odata=verbose;charset=utf-8
+Location: https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')
+Server: Microsoft-IIS/7.5
+x-ms-request-id: 2eac4158-fc78-4fa2-81ee-c9f582dc385f
+X-Content-Type-Options: nosniff
+DataServiceVersion: 1.0;
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 14 May 2012 21:41:39 GMT
 
-    {  
-       "d":{  
-          "__metadata":{  
-             "id":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')",
-             "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')",
-             "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Locator"
-          },
-          "AccessPolicy":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')/AccessPolicy"
-             }
-          },
-          "Asset":{  
-             "__deferred":{  
-                "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')/Asset"
-             }
-          },
-          "Id":"nb:lid:UUID:52034bf6-dfae-4d83-aad3-3bd87dcb1a5d",
-          "ExpirationDateTime":"\/Date(1337049395000)\/",
-          "Type":2,
-          "Path":"http://wamsbayclus001rest-hs.net/52034bf6-dfae-4d83-aad3-3bd87dcb1a5d/",
-          "AccessPolicyId":"nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8",
-          "AssetId":"nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3",
-          "StartTime":"\/Date(1337031395000)\/"
-       }
-    }
+{  
+   "d":{  
+      "__metadata":{  
+         "id":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')",
+         "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')",
+         "type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.Locator"
+      },
+      "AccessPolicy":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')/AccessPolicy"
+         }
+      },
+      "Asset":{  
+         "__deferred":{  
+            "uri":"https://wamsbayclus001rest-hs.net/api/Locators('nb%3Alid%3AUUID%3A52034bf6-dfae-4d83-aad3-3bd87dcb1a5d')/Asset"
+         }
+      },
+      "Id":"nb:lid:UUID:52034bf6-dfae-4d83-aad3-3bd87dcb1a5d",
+      "ExpirationDateTime":"\/Date(1337049395000)\/",
+      "Type":2,
+      "Path":"http://wamsbayclus001rest-hs.net/52034bf6-dfae-4d83-aad3-3bd87dcb1a5d/",
+      "AccessPolicyId":"nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8",
+      "AssetId":"nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3",
+      "StartTime":"\/Date(1337031395000)\/"
+   }
+}
+```
 
 Pour diffuser une URL d’origine de diffusion en continu lisse dans un lecteur multimédia de diffusion en continu, vous devez ajouter la propriété de chemin d’accès avec le nom du fichier manifeste de diffusion en continu lisse, suivie de « /manifest ».
 
-    http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest
+`http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest`
 
 Pour la diffusion en continu HLS, ajoutez (format=m3u8-aapl) après « /manifest ».
 
-    http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=m3u8-aapl)
+`http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=m3u8-aapl)`
 
 Pour la diffusion en continu MPEG DASH, ajoutez (format=mpd-time-csf) après « /manifest ».
 
-    http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=mpd-time-csf)
+`http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=mpd-time-csf)`
 
 
 ## <a name="play-your-content"></a><a id="play"></a>Lecture de votre contenu

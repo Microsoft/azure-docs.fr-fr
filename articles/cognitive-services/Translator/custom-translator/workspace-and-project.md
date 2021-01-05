@@ -7,15 +7,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: a67e199af1ee6e68f00dbde9a0a43d02e4c7d638
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 28bc07cadf9ffea56059755e243cb3e828077588
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588664"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368965"
 ---
 # <a name="what-is-a-custom-translator-workspace"></a>Qu’est-ce qu’un espace de travail Custom Translator ?
 
@@ -25,7 +25,7 @@ L’espace de travail est privé et vous est réservé, ainsi qu’aux personnes
 
 ## <a name="what-is-a-custom-translator-project"></a>Qu’est-ce qu’un projet Custom Translator ?
 
-Un projet est un wrapper avec un modèle, des documents et des tests. Chaque projet inclut automatiquement tous les documents téléchargés dans cet espace de travail dotés de la paire de langues qui convient. Par exemple, si vous avez un projet anglais vers espagnol et un projet espagnol vers anglais, les mêmes documents figurent dans les deux projets. Chaque projet a un CategoryID associé qui est utilisé lors de l’interrogation de [l’API V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl) pour obtenir des traductions. CategoryID est un paramètre utilisé pour obtenir des traductions d’un système personnalisé créé avec Custom Translator.
+Un projet est un wrapper avec un modèle, des documents et des tests. Chaque projet inclut automatiquement tous les documents téléchargés dans cet espace de travail dotés de la paire de langues qui convient. Par exemple, si vous avez un projet anglais vers espagnol et un projet espagnol vers anglais, les mêmes documents figurent dans les deux projets. Chaque projet a un CategoryID associé qui est utilisé lors de l’interrogation de [l’API V3](../reference/v3-0-translate.md?tabs=curl) pour obtenir des traductions. CategoryID est un paramètre utilisé pour obtenir des traductions d’un système personnalisé créé avec Custom Translator.
 
 ## <a name="project-categories"></a>Catégories de projet
 
@@ -39,7 +39,7 @@ Dans le même espace de travail, vous pouvez créer des projets pour la même pa
 
 Custom Translator vous permet d’attribuer une étiquette de projet à votre projet. L’étiquette de projet permet de différencier plusieurs projets présentant la même paire de langues et la même catégorie. La meilleure pratique consiste à éviter d’utiliser des étiquettes de projet, sauf si nécessaire.
 
-L’étiquette de projet est utilisée dans le cadre de CategoryID. Si l’étiquette de projet n’est pas définie ou si elle est définie de manière identique entre plusieurs projets, alors les projets avec la même catégorie et des paires de langues *différentes* partagent le même CategoryID. Cette approche est avantageuse, car elle vous permet à vous ou à votre client de changer de langue lors de l’utilisation du service Translator sans vous soucier du CategoryID qui est unique pour chaque projet.
+L’étiquette de projet est utilisée dans le cadre de CategoryID. Si l’étiquette de projet n’est pas définie ou si elle est définie de manière identique entre plusieurs projets, alors les projets avec la même catégorie et des paires de langues *différentes* partagent le même CategoryID. Cette approche est avantageuse, car elle vous permet ou permet à votre client de basculer entre les langues lors de l’utilisation de l’API de traduction de texte sans vous soucier du CategoryID qui est unique pour chaque projet.
 
 Par exemple, si je veux activer les traductions dans le domaine Technologie de l’anglais vers le français et du français vers l’anglais, je dois créer deux projets : un pour anglais -\> français, et l’autre pour français -\> anglais. Je spécifie la même catégorie (Technologie) pour les deux et laisse l’étiquette de projet non renseignée. Le CategoryID pour les deux projets correspond, donc je peux interroger l’API pour les traductions en anglais et en français sans avoir à modifier mon CategoryID.
 

@@ -12,12 +12,12 @@ metadata:
   author: IEvangelist
   ms.author: dapine
   ms.date: 01/23/2020
-  ms.openlocfilehash: 2ba262c7adf778099e47e636a9106f74314c2254
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: c19e6c7e05a3478007505ee4f02f12a7eade5eb6
+  ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "77108691"
+  ms.lasthandoff: 10/30/2020
+  ms.locfileid: "93130236"
 landingContent:
 - title: À propos du lecteur immersif
   linkLists:
@@ -33,14 +33,22 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
-    - text: ASP.NET Core
-      url: quickstart.md
-    - text: Node.js
-      url: quickstart-nodejs.md
-    - text: Swift (iOS)
-      url: ios-quickstart.md
+    - text: Utiliser C# (ASP.NET Core)
+      url: ./quickstarts/client-libraries.md?pivots=programming-language-csharp
+    - text: Utiliser Node.js
+      url: ./quickstarts/client-libraries.md?pivots=programming-language-nodejs
+    - text: Utiliser Java (Android)
+      url: ./quickstarts/client-libraries.md?pivots=programming-language-java-android
+    - text: Utiliser Kotlin (Android)
+      url: ./quickstarts/client-libraries.md?pivots=programming-language-kotlin
+    - text: Utiliser Swift (iOS)
+      url: ./quickstarts/client-libraries.md?pivots=programming-language-swift
   - linkListType: tutorial
     links:
+    - text: Android
+      url: tutorial-android.md
+    - text: iOS
+      url: tutorial-ios.md
     - text: Python
       url: tutorial-python.md
     - text: Utiliser plusieurs ressources du Lecteur immersif
@@ -61,7 +69,21 @@ landingContent:
       url: how-to-customize-launch-button.md
     - text: Mettre en cache le jeton d’authentification
       url: how-to-cache-token.md
+    - text: Configurer la lecture à haute voix
+      url: how-to-configure-read-aloud.md
+    - text: Configurer la traduction
+      url: how-to-configure-translation.md
+    - text: Stocker les préférences utilisateur
+      url: how-to-store-user-preferences.md
   - linkListType: reference
     links:
     - text: Kit de développement logiciel (SDK) JavaScript
       url: reference.md
+    - text: Notes de publication
+      url: release-notes.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/immersive-reader/context/context

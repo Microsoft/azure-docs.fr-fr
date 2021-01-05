@@ -5,25 +5,25 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: overview
-ms.date: 01/17/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 07/13/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: sahenry, michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c2a6b5c22e2988ed33e6dc15a4729e7bfe938c5f
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: f85b78480e7258780f8dd396431edeb968189e4c
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82786915"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741250"
 ---
 # <a name="what-is-azure-active-directory-authentication"></a>Qu’est-ce que l’authentification Azure Active Directory ?
 
 L’une des principales fonctionnalités d’une plateforme d’identités consiste à vérifier, ou *authentifier*, les informations d’identification quand l’utilisateur se connecte à un appareil, à une application ou à un service. Dans Azure Active Directory (Azure AD), l’authentification implique plus que la simple vérification d’un nom d’utilisateur et d’un mot de passe. Pour améliorer la sécurité et réduire le recours à l’assistance du support technique, l’authentification Azure AD comprend les composants suivants :
 
 * Réinitialisation de mot de passe libre-service
-* Azure Multi-Factor Authentication
+* Authentification multifacteur Azure AD
 * Intégration hybride pour écrire les changements de mot de passe dans l’environnement local
 * Intégration hybride afin d’appliquer des stratégies de protection par mot de passe pour un environnement local
 * Authentification sans mot de passe
@@ -32,7 +32,7 @@ L’une des principales fonctionnalités d’une plateforme d’identités consi
 
 Azure AD aide à protéger l’identité de l’utilisateur et à simplifier son expérience de la connexion. Les fonctionnalités telles que la réinitialisation de mot de passe en libre-service permettent aux utilisateurs de mettre à jour ou de changer leurs mots de passe à l’aide d’un navigateur web à partir de l’appareil de leur choix. Cette fonctionnalité est particulièrement utile quand l’utilisateur a oublié son mot de passe ou que son compte est verrouillé. L’utilisateur peut se débloquer et continuer à travailler sans attendre qu’un agent du support technique ou un administrateur lui fournisse une assistance.
 
-Azure Multi-Factor Authentication permet aux utilisateurs de choisir une forme d’authentification supplémentaire lors de la connexion, par exemple un appel téléphonique ou une notification d’application mobile. L’utilisateur n’a plus besoin d’avoir une seule forme fixe d’authentification secondaire, telle qu’un jeton matériel. Si l’utilisateur n’a pas de forme d’authentification supplémentaire, il peut choisir une autre méthode et continuer à travailler.
+L’authentification multifacteur Azure AD permet aux utilisateurs de choisir une forme d’authentification supplémentaire lors de la connexion, par exemple un appel téléphonique ou une notification d’application mobile. L’utilisateur n’a plus besoin d’avoir une seule forme fixe d’authentification secondaire, telle qu’un jeton matériel. Si l’utilisateur n’a pas de forme d’authentification supplémentaire, il peut choisir une autre méthode et continuer à travailler.
 
 ![Méthodes d’authentification en cours d’utilisation sur l’écran de connexion](media/concept-authentication-methods/overview-login.png)
 
@@ -50,7 +50,7 @@ La réinitialisation de mot de passe en libre-service fonctionne dans les scéna
 
 Quand l’utilisateur met à jour ou réinitialise son mot de passe à l’aide de la réinitialisation de mot de passe en libre-service, ce mot de passe peut également être réécrit dans un environnement Active Directory local. Avec la réécriture du mot de passe, l’utilisateur peut immédiatement utiliser ses informations d’identification mises à jour avec les applications et les appareils locaux.
 
-## <a name="azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication
+## <a name="azure-ad-multi-factor-authentication"></a>Authentification multifacteur Azure AD
 
 L’authentification multifacteur est un processus dans lequel l’utilisateur est invité pendant le processus de connexion à suivre une forme d’identification supplémentaire, consistant par exemple à entrer un code sur son téléphone portable ou à scanner son empreinte digitale.
 
@@ -58,13 +58,13 @@ L’utilisation d’un mot de passe uniquement ne protège pas complètement des
 
 ![Image conceptuelle des différentes formes d’authentification multifacteur](./media/concept-mfa-howitworks/methods.png)
 
-Azure Multi-Factor Authentication impose au minimum deux des méthodes d’authentification suivantes :
+L’authentification multifacteur Azure AD impose au minimum deux des méthodes d’authentification suivantes :
 
 * Un élément que vous connaissez, généralement un mot de passe.
 * Un élément que vous possédez, tel qu’un appareil de confiance qui n’est pas facilement dupliqué, comme un téléphone ou une clé matérielle.
 * Un élément biométrique identifiant votre personne, tel qu’une empreinte digitale ou un scan du visage.
 
-Les utilisateurs peuvent s’inscrire à la réinitialisation de mot de passe en libre-service et à Azure Multi-Factor Authentication en une seule étape pour simplifier l’expérience d’intégration. Les administrateurs peuvent définir les formes d’authentification secondaire qui peuvent être utilisées. Azure Multi-Factor Authentication peut également être nécessaire quand les utilisateurs effectuent une réinitialisation de mot de passe en libre-service pour sécuriser davantage ce processus.
+Les utilisateurs peuvent s’inscrire à la réinitialisation de mot de passe en libre-service et à l’authentification multifacteur Azure AD en une seule étape pour simplifier l’expérience d’intégration. Les administrateurs peuvent définir les formes d’authentification secondaire qui peuvent être utilisées. L’authentification multifacteur Azure AD peut également être nécessaire quand les utilisateurs effectuent une réinitialisation de mot de passe en libre-service pour sécuriser davantage ce processus.
 
 ## <a name="password-protection"></a>Protection par mot de passe
 
@@ -76,7 +76,7 @@ Pour la sécurité hybride, vous pouvez intégrer la protection par mot de passe
 
 ## <a name="passwordless-authentication"></a>Authentification sans mot de passe
 
-L’objectif final de nombreux environnements est de supprimer l’utilisation de mots de passe dans le cadre des événements de connexion. Les fonctionnalités telles que la protection par mot de passe Azure ou Azure Multi-Factor Authentication permettent d’améliorer la sécurité, mais un nom d’utilisateur et un mot de passe restent une forme d’authentification faible qui peut être exposée ou faire l’objet d’une attaque par force brute.
+L’objectif final de nombreux environnements est de supprimer l’utilisation de mots de passe dans le cadre des événements de connexion. Les fonctionnalités telles que la protection par mot de passe Azure ou l’authentification multifacteur Azure AD permettent d’améliorer la sécurité, mais un nom d’utilisateur et un mot de passe restent une forme d’authentification faible qui peut être exposée ou faire l’objet d’une attaque par force brute.
 
 ![Sécurité versus côté pratique avec le processus d’authentification sans mot de passe](./media/concept-authentication-passwordless/passwordless-convenience-security.png)
 
@@ -86,11 +86,11 @@ Azure AD permet d’effectuer une authentification en mode natif à l’aide de 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour commencer, consultez le [tutoriel sur la réinitialisation du mot de passe en libre-service][tutorial-sspr] et [Azure Multi-Factor Authentication][tutorial-azure-mfa].
+Pour commencer, consultez le [tutoriel sur la réinitialisation du mot de passe en libre-service][tutorial-sspr] et l’[authentification multifacteur Azure AD][tutorial-azure-mfa].
 
 Pour en savoir plus sur les concepts de réinitialisation de mot de passe en libre-service, consultez [Fonctionnement de la réinitialisation de mot de passe en libre-service dans Azure AD][concept-sspr].
 
-Pour en savoir plus sur les concepts de l’authentification multifacteur, consultez [Fonctionnement d’Azure Multi-Factor Authentication][concept-mfa].
+Pour en savoir plus sur les concepts de l’authentification multifacteur, consultez [Comment fonctionne l’authentification multifacteur Azure AD][concept-mfa].
 
 <!-- INTERNAL LINKS -->
 [tutorial-sspr]: tutorial-enable-sspr.md

@@ -1,16 +1,16 @@
 ---
 title: Configurer un environnement de développement Windows pour Service Fabric Mesh
 description: Configurez votre environnement de développement Windows afin de pouvoir créer une application de maillage Service Fabric et la déployer dans Azure Service Fabric Mesh.
-author: dkkapur
-ms.author: dekapur
+author: georgewallace
+ms.author: gwallace
 ms.date: 12/12/2018
 ms.topic: conceptual
-ms.openlocfilehash: a674047722d4deca02d8f4d38a0826e479065037
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 479e975abd40be80e17fc187f1d13500d11cb983
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229537"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842748"
 ---
 # <a name="set-up-your-windows-development-environment-to-build-service-fabric-mesh-apps"></a>Configurer votre environnement de développement Windows pour créer des applications Service Fabric Mesh
 
@@ -115,7 +115,7 @@ Consultez le didacticiel [Créer une application Azure Service Fabric](service-f
 
 Trouvez les réponses [aux questions fréquentes et aux problèmes connus](service-fabric-mesh-faq.md).
 
-[azure-cli-install]: https://docs.microsoft.com/cli/azure/install-azure-cli
+[azure-cli-install]: /cli/azure/install-azure-cli
 [download-docker]: https://store.docker.com/editions/community/docker-ce-desktop-windows
 [download-docker-server]: https://docs.docker.com/install/windows/docker-ee/
 [download-runtime]: https://aka.ms/sfruntime

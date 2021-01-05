@@ -1,24 +1,22 @@
 ---
-title: Accès délégué dans Windows Virtual Desktop - Azure
-description: Découvrez comment déléguer des fonctionnalités d’administration lors d'un déploiement de Windows Virtual Desktop, avec exemples.
-services: virtual-desktop
+title: Accès délégué dans Windows Virtual Desktop (classique) – Azure
+description: Découvrez comment déléguer des capacités d’administration lors d’un déploiement de Windows Virtual Desktop (classique), avec exemples.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 899e42e3b592ce1bc92d7d47578e10355b1c6de7
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 0152dc5102fd3f77418448234cab1234d25b97c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613962"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008149"
 ---
-# <a name="delegated-access-in-windows-virtual-desktop"></a>Accès délégué dans Windows Virtual Desktop
+# <a name="delegated-access-in-windows-virtual-desktop-classic"></a>Accès délégué dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../delegated-access-virtual-desktop.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../delegated-access-virtual-desktop.md).
 
 Windows Virtual Desktop dispose d’un modèle d’accès délégué qui vous permet de définir les droits d’accès d’un utilisateur particulier en lui attribuant un rôle. Une attribution de rôle se compose de trois éléments : un principal de sécurité, une définition de rôle et une étendue. Le modèle d’accès délégué de Windows Virtual Desktop est basé sur le modèle RBAC d’Azure. Pour en savoir plus sur les attributions de rôle spécifique et leurs composants, consultez [la vue d’ensemble du contrôle d'accès en fonction du rôle Azure](../../role-based-access-control/built-in-roles.md).
 

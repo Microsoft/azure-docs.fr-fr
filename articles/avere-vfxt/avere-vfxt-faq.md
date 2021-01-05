@@ -1,17 +1,18 @@
 ---
 title: Questions fréquentes (FAQ) - Avere vFXT pour Azure
-description: Questions fréquentes (FAQ) sur Avere vFXT pour Azure
+description: Reportez-vous à ces questions fréquemment posées pour décider si les Avere vFXT pour Azure correspond à vos besoins. Découvrez de quelle manière Avere vFXT pour Azure fonctionne avec d’autres composants Azure.
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 12/19/2019
 ms.author: rohogue
-ms.openlocfilehash: 186b2c048a9de42318e4af287393d731a4eb16f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: references_regions
+ms.openlocfilehash: 647a9792384a21dfc191371ef444cbdc098bc819
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76153460"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342363"
 ---
 # <a name="avere-vfxt-for-azure-faq"></a>Questions fréquentes (FAQ) sur Avere vFXT pour Azure
 
@@ -159,9 +160,9 @@ Le détachement et le rattachement de disques SSD ne sont pas pris en charge. Le
 
 ### <a name="does-the-system-encrypt-the-cache"></a>Le système chiffre-t-il le cache ?
 
-Les données sont réparties entre les disques, mais elles ne sont pas chiffrées. Toutefois, les disques proprement dit peuvent être chiffrés. Pour plus d'informations, consultez [Sécuriser et utiliser des stratégies sur des machines virtuelles dans Azure](https://docs.microsoft.com/azure/virtual-machines/linux/security-policy#encryption).
+Les données sont réparties entre les disques, mais elles ne sont pas chiffrées. Toutefois, les disques proprement dit peuvent être chiffrés. Pour plus d'informations, consultez [Sécuriser et utiliser des stratégies sur des machines virtuelles dans Azure](../virtual-machines/security-policy.md#encryption).
 
-## <a name="technical-networking"></a>Technique : Mise en réseau
+## <a name="technical-networking"></a>Technique : Réseau
 
 ### <a name="what-network-is-recommended"></a>Quel réseau est recommandé ?
 
@@ -258,7 +259,7 @@ Non. Le contrat de niveau de service (SLA) du stockage d'archive n'est pas compa
 
 Le stockage d’objets blob de niveau de stockage froid n’est généralement pas recommandé pour un serveur de fichiers Avere vFXT pour Azure. Le niveau de stockage froid offre des coûts de stockage plus bas mais des coûts d'exploitation plus élevés. (Pour plus d’informations, consultez la [tarification des objets blob de blocs](<https://azure.microsoft.com/pricing/details/storage/blobs/>).) Si les données sont accessibles, modifiées ou supprimées fréquemment, envisagez d’utiliser le niveau de stockage chaud.
 
-Les [niveaux d’accès](https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) fournissent plus d’informations sur le moment où il peut être judicieux d’utiliser le stockage de niveau froid comme un système de stockage back-end vFXT.
+Les [niveaux d’accès](../storage/blobs/storage-blob-storage-tiers.md#cool-access-tier) fournissent plus d’informations sur le moment où il peut être judicieux d’utiliser le stockage de niveau froid comme un système de stockage back-end vFXT.
 
 ### <a name="how-do-i-encrypt-the-blob-container"></a>Comment chiffrer le conteneur d'objets blob ?
 

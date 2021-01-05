@@ -4,18 +4,18 @@ description: Découvrez plus en détail les différences de validation de certai
 author: SureshJa
 ms.author: sureshja
 manager: CelesteDG
-ms.date: 10/12/2019
+ms.date: 07/21/2020
 ms.topic: conceptual
 ms.subservice: develop
 ms.custom: aaddev
 ms.service: active-directory
 ms.reviewer: lenalepa, manrath
-ms.openlocfilehash: 2a1507b008903085886f9392f3f4e5461997b6e2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e794e277f6731c7b6e57a4710eea437f65be0340
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128856"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87336342"
 ---
 # <a name="validation-differences-by-supported-account-types-signinaudience"></a>Différences de validation par types de comptes pris en charge (signInAudience)
 
@@ -39,9 +39,9 @@ Consultez le tableau suivant pour connaître les différences de validation de c
 | Certificats (`keyCredentials`) | Clé de signature symétrique | Clé de signature symétrique | Chiffrement et clé de signature asymétrique | 
 | Secrets client (`passwordCredentials`) | Aucune limite* | Aucune limite* | Si liveSDK est activé : 2 secrets client maximum | 
 | URI de redirection (`replyURLs`) | Consultez [Limitations et restrictions des URL de réponse/URI de redirection](reply-url.md) pour plus d’informations. | | | 
-| Autorisations des API (`requiredResourceAccess`) | Aucune limite* | Aucune limite* | Maximum de 30 autorisations par ressource autorisée (par exemple, Microsoft Graph) | 
+| Autorisations des API (`requiredResourceAccess`) | Aucune limite* | Aucune limite* | Maximum de 50 ressources par application et de 30 autorisations par ressource (par exemple, Microsoft Graph). Limite totale de 200 par application (ressources × autorisations). | 
 | Étendues définies par cette API (`oauth2Permissions`) | Longueur maximale du nom de l’étendue de 120 caractères <br><br> Aucune limite* sur le nombre de niveaux définis | Longueur maximale du nom de l’étendue de 120 caractères <br><br> Aucune limite* sur le nombre de niveaux définis |  Longueur maximale du nom de l’étendue de 40 caractères <br><br> Maximum de 100 étendues définies | 
-| Applications clientes autorisées (`preautorizedApplications`) | Aucune limite* | Aucune limite* | Nombre total maximal de 500 <br><br> Maximum de 100 applications clientes définies <br><br> Maximum de 30 étendues définies par client | 
+| Applications clientes autorisées (`preAuthorizedApplications`) | Aucune limite* | Aucune limite* | Nombre total maximal de 500 <br><br> Maximum de 100 applications clientes définies <br><br> Maximum de 30 étendues définies par client | 
 | appRoles | Prise en charge <br> Aucune limite* | Prise en charge <br> Aucune limite* | Non pris en charge | 
 | URL de déconnexion | http://localhost est autorisé <br><br> Longueur maximale de 255 caractères | http://localhost est autorisé <br><br> Longueur maximale de 255 caractères | <br><br> https://localhost est autorisé, http://localhost échoue pour MSA <br><br> Longueur maximale de 255 caractères <br><br> Le schéma HTTP n’est pas autorisé <br><br> Les caractères génériques ne sont pas pris en charge | 
 

@@ -9,12 +9,12 @@ ms.topic: sample
 ms.date: 12/11/2017
 ms.author: msangapu
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 911282e71491c86fefa86d342e916cdff4fa8c9b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: fa971bbb8526f1b0bc081e61ed5e7a7f2cf76d1f
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80058666"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97006359"
 ---
 # <a name="connect-an-app-service-app-to-cosmos-db-using-cli"></a>Connecter une application App Service à Cosmos DB à l’aide de l’interface CLI
 
@@ -38,15 +38,15 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 | Commande | Notes |
 |---|---|
-| [`az group create`](/cli/azure/group?view=azure-cli-latest#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
-| [`az appservice plan create`](/cli/azure/appservice/plan?view=azure-cli-latest#az-appservice-plan-create) | Crée un plan App Service. |
-| [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) | Crée une application App Service. |
-| [`az cosmosdb create`](/cli/azure/cosmosdb?view=azure-cli-latest#az-cosmosdb-create) | Crée un compte Cosmos DB. |
-| [`az cosmosdb list-connection-strings`](/cli/azure/cosmosdb?view=azure-cli-latest#az-cosmosdb-list-connection-strings) | Liste les chaînes de connexion du compte Cosmos DB spécifié. |
-| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings?view=azure-cli-latest#az-webapp-config-appsettings-set) | Crée ou met à jour un paramètre d’application pour une application App Service. Les paramètres d’application sont exposés en tant que variables d’environnement pour votre application. |
+| [`az group create`](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | Crée un plan App Service. |
+| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | Crée une application App Service. |
+| [`az cosmosdb create`](/cli/azure/cosmosdb#az-cosmosdb-create) | Crée un compte Cosmos DB. |
+| [`az cosmosdb list-connection-strings`](/cli/azure/cosmosdb#az-cosmosdb-list-connection-strings) | Liste les chaînes de connexion du compte Cosmos DB spécifié. |
+| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) | Crée ou met à jour un paramètre d’application pour une application App Service. Les paramètres d’application sont exposés en tant que variables d’environnement pour votre application. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
 Vous trouverez des exemples supplémentaires de scripts CLI App Service dans la [documentation relative à Azure App Service](../samples-cli.md).

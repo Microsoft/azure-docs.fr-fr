@@ -3,13 +3,13 @@ title: Créer une application de fonction avec Azure Cosmos DB - Azure CLI
 description: Exemple de script Azure CLI - Créer une fonction Azure qui se connecte à une base de données Azure Cosmos DB
 ms.topic: sample
 ms.date: 07/03/2018
-ms.custom: mvc
-ms.openlocfilehash: 5ee80283ed39789eabb702a48aa97f678a6409f9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 760017439ddc65ee929db1612b34b093d8bed8a0
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75922714"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565396"
 ---
 # <a name="create-an-azure-function-that-connects-to-an-azure-cosmos-db"></a>Créer une fonction Azure Functions qui se connecte à une base de données Azure Cosmos DB
 
@@ -17,9 +17,9 @@ Cet exemple de script Azure Functions crée une application de fonction et conne
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous utilisez l’interface de ligne de commande en local, veillez à exécuter Azure CLI 2.0 ou une version plus récente. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -31,7 +31,7 @@ Cet exemple crée une Function App Azure et ajoute un point de terminaison et un
 
 ## <a name="script-explanation"></a>Explication du script
 
-Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
+Ce script utilise les commandes suivantes : Chaque commande du tableau renvoie à une documentation spécifique.
 
 | Commande | Notes |
 |---|---|

@@ -5,23 +5,23 @@ description: Configurez une chaîne de connexion pour un compte de stockage Azur
 services: storage
 author: tamram
 ms.service: storage
-ms.topic: article
-ms.date: 04/24/2020
+ms.topic: how-to
+ms.date: 10/14/2020
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 681723ee9370f889ef86e6eae0878b148c17606b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d7ca1707c89f03683960822591065143d3f8aa4f
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176360"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92783876"
 ---
 # <a name="configure-azure-storage-connection-strings"></a>Configuration des chaînes de connexion Stockage Azure
 
 Une chaîne de connexion inclut les informations d’authentification nécessaires pour que l’application accède aux données dans un compte de stockage Azure, à l’aide de l’autorisation Clé partagée pendant l’exécution. Vous pouvez configurer les chaînes de connexion pour effectuer les opérations suivantes :
 
-* Connexion à l’émulateur de stockage Azure
+* Connectez-vous à l’émulateur de stockage Azure.
 * Accès à un compte de stockage dans Azure
 * Accès aux ressources spécifiées dans Azure via une signature d’accès partagé (SAS).
 
@@ -34,18 +34,18 @@ Pour savoir comment afficher les clés d’accès de votre compte et copier une 
 Votre application doit accéder à la chaîne de connexion pendant l’exécution pour autoriser les requêtes transmises au stockage Azure. Plusieurs options vous permettant de stocker votre chaîne de connexion s’offrent à vous :
 
 * Vous pouvez stocker votre chaîne de connexion dans une variable d’environnement.
-* Une application s’exécutant sur le bureau ou sur un appareil peut stocker la chaîne de connexion dans un fichier **app.config** ou **web.config**. Ajoutez la chaîne de connexion dans la section **AppSettings** de ces fichiers.
-* Une application s’exécutant dans un service cloud Azure peut stocker la chaîne de connexion dans le [schéma de configuration du service Azure (fichier .cscfg)](https://msdn.microsoft.com/library/ee758710.aspx). Ajoutez la chaîne de connexion à la section **ConfigurationSettings** du fichier de configuration du service.
+* Une application s’exécutant sur le bureau ou sur un appareil peut stocker la chaîne de connexion dans un fichier **app.config** ou **web.config** . Ajoutez la chaîne de connexion dans la section **AppSettings** de ces fichiers.
+* Une application s’exécutant dans un service cloud Azure peut stocker la chaîne de connexion dans le [schéma de configuration du service Azure (fichier .cscfg)](/previous-versions/azure/reference/ee758710(v=azure.100)). Ajoutez la chaîne de connexion à la section **ConfigurationSettings** du fichier de configuration du service.
 
-Le stockage de votre chaîne de connexion dans un fichier de configuration facilite la mise à jour de la chaîne de connexion qui vous permet de basculer entre l’émulateur de stockage et un compte de stockage Azure dans le cloud. Il vous suffit de modifier la chaîne de connexion pour la faire pointer vers votre environnement cible.
+Le stockage de votre chaîne de connexion dans un fichier config facilite la mise à jour de la chaîne de connexion qui vous permet de basculer entre l’[émulateur de stockage Azure](../common/storage-use-azurite.md) et un compte de stockage Azure dans le cloud. Il vous suffit de modifier la chaîne de connexion pour la faire pointer vers votre environnement cible.
 
 Vous pouvez utiliser [Microsoft Azure Configuration Manager](https://www.nuget.org/packages/Microsoft.Azure.ConfigurationManager/) pour accéder à votre chaîne de connexion lors de l’exécution, quel que soit l’environnement d’exécution de votre application.
 
-## <a name="configure-a-connection-string-for-the-storage-emulator"></a>Configurer une chaîne de connexion pour l’émulateur de stockage
+## <a name="configure-a-connection-string-for-azurite"></a>Configurer une chaîne de connexion pour Azurite
 
 [!INCLUDE [storage-emulator-connection-string-include](../../../includes/storage-emulator-connection-string-include.md)]
 
-Pour plus d’informations sur l’émulateur de stockage, consultez [Utilisation de l'émulateur de stockage Azure pour le développement et le test](storage-use-emulator.md).
+Pour plus d’informations sur Azurite, consultez [Utiliser l’émulateur Azurite à des fins de développement local pour Stockage Azure](../common/storage-use-azurite.md).
 
 ## <a name="configure-a-connection-string-for-an-azure-storage-account"></a>Configurer une chaîne de connexion pour un compte de stockage Azure
 
@@ -57,7 +57,7 @@ Par exemple, votre chaîne de connexion peut ressembler à ceci :
 
 `DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<account-key>`
 
-Même si le stockage Azure prend en charge HTTP et HTTPS au sein d’une chaîne de connexion, nous vous *conseillons vivement d’utiliser HTTPS*.
+Même si le stockage Azure prend en charge HTTP et HTTPS au sein d’une chaîne de connexion, nous vous *conseillons vivement d’utiliser HTTPS* .
 
 > [!TIP]
 > Vous trouverez les chaînes de connexion de votre compte de stockage dans le [portail Azure](https://portal.azure.com). Accédez à **PARAMÈTRES** > **Clés d’accès** dans le panneau de menu de votre compte de stockage pour afficher les chaînes de connexion pour les clés d’accès primaire et secondaire.
@@ -110,9 +110,10 @@ Les valeurs des points de terminaison dans une chaîne de connexion sont utilis�
 
 Si vous avez mappé un point de terminaison de stockage à un domaine personnalisé et omettez ce point de terminaison d’une chaîne de connexion, vous ne pourrez pas accéder aux données de ce service avec votre code à l’aide de cette chaîne de connexion.
 
+Pour plus d’informations sur la configuration d’un domaine personnalisé pour Azure Storage, consultez [Mapper un domaine personnalisé à un point de terminaison de stockage Blob Azure](../blobs/storage-custom-domain-name.md).
+
 > [!IMPORTANT]
-> Les valeurs des points de terminaison de service dans vos chaînes de connexion doivent être des URI correctement formés, notamment `https://` (recommandé) ou `http://`. Étant donné que le stockage Azure ne prend pas encore en charge HTTPS pour les domaines personnalisés, vous *devez* spécifier `http://` pour n’importe quel URI de point de terminaison qui pointe vers un domaine personnalisé.
->
+> Les valeurs des points de terminaison de service dans vos chaînes de connexion doivent être des URI correctement formés, notamment `https://` (recommandé) ou `http://`.
 
 ### <a name="create-a-connection-string-with-an-endpoint-suffix"></a>Création d’une chaîne de connexion avec un suffixe de point de terminaison
 
@@ -140,6 +141,6 @@ EndpointSuffix=core.chinacloudapi.cn;
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Utilisation de l’émulateur de stockage Azure pour le développement et le test](storage-use-emulator.md)
+* [Utiliser l’émulateur Azurite à des fins de développement local pour Stockage Azure](../common/storage-use-azurite.md)
 * [Explorateurs du stockage Azure](storage-explorers.md)
 * [Utilisation des signatures d’accès partagé (SAP)](storage-sas-overview.md)

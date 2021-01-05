@@ -16,12 +16,12 @@ ms.topic: reference
 ms.date: 07/18/2017
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f0c6484f46731e0ff2d16d00cb0038202511d193
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6140f5fd431a0b089b45892130e075bde02a2eb2
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331073"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91299763"
 ---
 # <a name="azure-ad-connect-health-frequently-asked-questions"></a>Forum Aux Questions (FAQ) Azure AD Connect Health
 Cet article répond aux questions fréquemment posées sur Azure Active Directory (Azure AD) Connect Health. Ces FAQ abordent l’utilisation du service, notamment le modèle de facturation, les fonctionnalités, les limitations et le support.
@@ -37,9 +37,11 @@ Le tableau suivant répertorie les rôles et les versions de système d’exploi
 
 |Role| Système d’exploitation/version|
 |--|--|
-|Active Directory Federation Services (AD FS)| <ul> <li> Windows Server 2008 R2 </li><li> Windows Server 2012  </li> <li>Windows Server 2012 R2 </li> <li> Windows Server 2016  </li> </ul>|
+|Active Directory Federation Services (AD FS)| <ul><li> Windows Server 2012  </li> <li>Windows Server 2012 R2 </li> <li> Windows Server 2016  </li> <li> Windows Server 2019  </li> </ul>|
 |Azure AD Connect | Version 1.0.9125 ou supérieure|
-|Active Directory Domain Services (AD DS)| <ul> <li> Windows Server 2008 R2 </li><li> Windows Server 2012  </li> <li>Windows Server 2012 R2 </li> <li> Windows Server 2016  </li> </ul>|
+|Active Directory Domain Services (AD DS)| <ul><li> Windows Server 2012  </li> <li>Windows Server 2012 R2 </li> <li> Windows Server 2016  </li> <li> Windows Server 2019  </li> </ul>|
+
+Les installations Windows Server Core ne sont pas prises en charge.
 
 Notez que les fonctionnalités proposées par le service peuvent varier selon le rôle et le système d’exploitation. En d’autres termes, toutes les fonctionnalités peuvent ne pas être disponibles pour toutes les versions de système d’exploitation. Consultez les descriptions des fonctionnalités pour plus d’informations.
 
@@ -127,6 +129,10 @@ Rien ne vous empêche ensuite de réinitialiser un serveur ou de créer un nouve
 
 Dans ce cas, supprimez manuellement celle qui appartient à l’ancien serveur. Les données associées à ce serveur sont normalement obsolètes.
 
+**Q : Puis-je installer l’agent d’intégrité Azure AD Connect sur Windows Server Core ?**
+
+Non.  L’installation sur Server Core n’est pas prise en charge.
+
 ## <a name="health-agent-registration-and-data-freshness"></a>Inscription de l’agent Health et actualisation des données
 
 **Q : Quelles sont les raisons courantes expliquant les échecs d’inscription de l’agent Health et comment résoudre les problèmes constatés ?**
@@ -135,7 +141,7 @@ L’inscription de l’agent Health peut échouer pour les raisons suivantes :
 
 * L’agent ne peut pas communiquer avec les points de terminaison requis, car un pare-feu bloque le trafic. Cela est particulièrement courant sur les serveurs proxy d’application web. Assurez-vous que vous avez autorisé les communications sortantes vers les ports et les points de terminaison requis. Pour plus d’informations, voir la [section sur les composants requis](how-to-connect-health-agent-install.md#requirements).
 * Les communications sortantes sont soumises à une inspection TLS par la couche réseau. Cela entraîne le remplacement du certificat que l’agent utilise par l’entité/le serveur d’inspection, et il est alors impossible d’effectuer les étapes requises pour terminer l’inscription de l’agent.
-* L’utilisateur n’a pas les droits d’accès nécessaires pour procéder à l’inscription de l’agent. Par défaut, les administrateurs globaux possèdent les droits d’accès. Vous pouvez utiliser le [contrôle d’accès en fonction du rôle](how-to-connect-health-operations.md#manage-access-with-role-based-access-control) pour déléguer l’accès à d’autres utilisateurs.
+* L’utilisateur n’a pas les droits d’accès nécessaires pour procéder à l’inscription de l’agent. Par défaut, les administrateurs globaux possèdent les droits d’accès. Vous pouvez utiliser le [contrôle d’accès en fonction du rôle (RBAC Azure)](how-to-connect-health-operations.md#manage-access-with-azure-rbac) pour déléguer l’accès à d’autres utilisateurs.
 
 **Q : Je reçois le message d’alerte suivant : « Les données du service de contrôle d’intégrité ne sont pas à jour ». Comment puis-je résoudre ce problème ?**
 
@@ -188,18 +194,19 @@ CheckForMS17-010
 
 **Q : Pourquoi l’applet de commande PowerShell <i>Get-MsolDirSyncProvisioningError</i> affiche-t-elle moins d’erreurs de synchronisation dans le résultat ?**
 
-<i>Get-MsolDirSyncProvisioningError</i> renvoie uniquement les erreurs d’approvisionnement DirSync. En outre, le portail Connect Health affiche également d’autres types d’erreurs de synchronisation telles que des erreurs d’exportation. Cela est cohérent avec le résultat delta Azure AD Connect. En savoir plus sur les [erreurs de synchronisation Azure AD Connect](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-troubleshoot-sync-errors).
+<i>Get-MsolDirSyncProvisioningError</i> renvoie uniquement les erreurs d’approvisionnement DirSync. En outre, le portail Connect Health affiche également d’autres types d’erreurs de synchronisation telles que des erreurs d’exportation. Cela est cohérent avec le résultat delta Azure AD Connect. En savoir plus sur les [erreurs de synchronisation Azure AD Connect](./tshoot-connect-sync-errors.md).
 
 **Q : Pourquoi mes audits ADFS ne sont-ils pas générés ?**
 
-Utilisez l’applet de commande PowerShell <i>Get-AdfsProperties - AuditLevel</i> pour vérifier que les journaux d’audit ne sont pas désactivés. En savoir plus sur les [journaux d’audit ADFS](https://docs.microsoft.com/windows-server/identity/ad-fs/technical-reference/auditing-enhancements-to-ad-fs-in-windows-server#auditing-levels-in-ad-fs-for-windows-server-2016). Notez que si des paramètres d’audit avancés sont transmis au serveur ADFS, les modifications apportés à auditpol.exe seront écrasées (même si l’application générée n’est pas configurée). Dans ce cas, définissez la stratégie de sécurité locale pour enregistrer les succès et échecs de l’application générée.
+Utilisez l’applet de commande PowerShell <i>Get-AdfsProperties - AuditLevel</i> pour vérifier que les journaux d’audit ne sont pas désactivés. En savoir plus sur les [journaux d’audit ADFS](/windows-server/identity/ad-fs/technical-reference/auditing-enhancements-to-ad-fs-in-windows-server#auditing-levels-in-ad-fs-for-windows-server-2016). Notez que si des paramètres d’audit avancés sont transmis au serveur ADFS, les modifications apportés à auditpol.exe seront écrasées (même si l’application générée n’est pas configurée). Dans ce cas, définissez la stratégie de sécurité locale pour enregistrer les succès et échecs de l’application générée.
 
 **Q : Quand le certificat d’agent est-il renouvelé automatiquement avant expiration ?**
 La certification d’agent est renouvelée automatiquement **6 mois** avant sa date d’expiration. Si elle n’est pas renouvelée, vérifiez que la connexion réseau de l’agent est stable. Le redémarrage des services de l’agent ou une mise à jour vers la version la plus récente peut également résoudre le problème.
 
 
+
 ## <a name="related-links"></a>Liens connexes
-* [Azure AD Connect Health](whatis-hybrid-identity-health.md)
+* [Azure AD Connect Health](./whatis-azure-ad-connect.md)
 * [Installation de l’agent Azure AD Connect Health](how-to-connect-health-agent-install.md)
 * [Opérations Azure AD Connect Health](how-to-connect-health-operations.md)
 * [Utilisation d’Azure AD Connect Health avec AD FS](how-to-connect-health-adfs.md)

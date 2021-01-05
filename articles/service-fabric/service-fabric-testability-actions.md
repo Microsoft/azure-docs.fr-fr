@@ -5,12 +5,13 @@ author: motanv
 ms.topic: conceptual
 ms.date: 06/07/2017
 ms.author: motanv
-ms.openlocfilehash: 4bdb00eec38addc0c9f88eba8b73185ec5721277
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8b1d4ae42fa033c03bd82ae5cee5794d98c23c65
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236565"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89022171"
 ---
 # <a name="testability-actions"></a>Actions de testabilité
 Pour simuler une infrastructure non fiable, Azure Service Fabric procure aux développeurs, autrement dit à vous, des moyens d’intégrer des défaillances et des transitions d’état réalistes. Elles sont exposées en tant qu’actions de testabilité. Les actions sont les API de bas niveau provoquant l’injection des erreurs, la transition entre les états ou la validation. En combinant ces actions, vous êtes en mesure d’écrire des scénarios de test complets pour vos services.
@@ -79,7 +80,7 @@ Restart-ServiceFabricNode -NodeName $nodeName -CompletionMode DoNotVerify
 
 La capture suivante représente la commande de testabilité **Restart-ServiceFabricNode** en action.
 
-![](media/service-fabric-testability-actions/Restart-ServiceFabricNode.png)
+![Capture d’écran de l’exécution de la commande Restart-ServiceFabricNode dans PowerShell.](media/service-fabric-testability-actions/Restart-ServiceFabricNode.png)
 
 La sortie de la première commande **Get-ServiceFabricNode** (du module Service Fabric PowerShell) indique que le cluster local comporte cinq nœuds : de Node.1 à Node.5. Après avoir exécuté l’action de testabilité (applet de commande) **Restart-ServiceFabricNode** sur le nœud appelé Node.4, nous constatons que le temps d’activité du nœud a été redéfini.
 

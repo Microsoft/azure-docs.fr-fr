@@ -2,16 +2,20 @@
 title: Surveillance d’un site SharePoint avec Application Insights
 description: Démarrage de la surveillance d'une nouvelle application avec une nouvelle clé d'instrumentation
 ms.topic: conceptual
-ms.date: 07/11/2018
-ms.openlocfilehash: 395e8d667985318f4a084428c6fd4c395ee8b956
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/08/2020
+ms.openlocfilehash: f07c317a61c91daf7a469c1f9eaf1fb80d4ecc49
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671441"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91825283"
 ---
 # <a name="monitor-a-sharepoint-site-with-application-insights"></a>Surveillance d’un site SharePoint avec Application Insights
+
 Azure Application Insights surveille la disponibilité, les performances et l’utilisation de vos applications. Vous allez maintenant apprendre à le configurer pour un site SharePoint.
+
+> [!NOTE]
+> Pour des raisons de sécurité, vous ne pouvez pas ajouter directement le script décrit dans cet article à vos pages web dans le cadre de l’expérience utilisateur moderne de SharePoint. Vous pouvez également vous servir de [ SharePoint Framework (SPFx)](/sharepoint/dev/spfx/extensions/overview-extensions) pour créer une extension personnalisée pouvant être utilisée pour installer Application Insights sur vos sites SharePoint.
 
 ## <a name="create-an-application-insights-resource"></a>Création d’une ressource Application Insights dans Azure
 Dans le [portail Azure](https://portal.azure.com), créez une ressource Application Insights. Choisissez le type d'application ASP.NET.
@@ -49,18 +53,18 @@ Si vous pouvez modifier la page maître de votre site, vous pourrez surveiller c
 
 Vérifiez la page maître et modifiez-la à l'aide de SharePoint Designer ou de n’importe quel autre éditeur.
 
-![](./media/sharepoint/03-master.png)
+![Capture d'écran montrant comment modifier la page maître à l'aide de SharePoint Designer ou d'un autre éditeur.](./media/sharepoint/03-master.png)
 
-Ajoutez le code juste avant la balise </head> . 
+Ajoutez le code juste avant la </head> balise. 
 
-![](./media/sharepoint/04-code.png)
+![Capture d'écran montrant où ajouter le code sur la page de votre site.](./media/sharepoint/04-code.png)
 
 #### <a name="or-on-individual-pages"></a>Ou sur des pages individuelles
 Pour surveiller un ensemble limité de pages, ajoutez le script à chaque page, séparément. 
 
 Insérez un composant Web et incorporez l'extrait de code qu'il contient.
 
-![](./media/sharepoint/05-page.png)
+![Capture d'écran montrant comment ajouter le script pour surveiller un ensemble limité de pages.](./media/sharepoint/05-page.png)
 
 ## <a name="view-data-about-your-app"></a>Affichage des données relatives à votre application
 Redéployez votre application.
@@ -69,7 +73,7 @@ Revenez au panneau de votre application dans le [portail Azure](https://portal.a
 
 Les premiers événements s’affichent dans Search. 
 
-![](./media/sharepoint/09-search.png)
+![Capture d'écran montrant les nouvelles données que vous pouvez visualiser dans l'application.](./media/sharepoint/09-search.png)
 
 Après quelques secondes, cliquez sur Actualiser pour obtenir des données supplémentaires.
 
@@ -78,7 +82,7 @@ L’extrait de code d’une page Web standard ne capture pas l’ID d’utilisat
 
 1. Copiez la clé d’instrumentation de votre application de la liste déroulante Bases dans Application Insights. 
 
-    ![](./media/sharepoint/02-props.png)
+    ![Capture d'écran montrant comment copier l'instrumentation de l'application à partir de la liste déroulante Essentials d'Application Insights.](./media/sharepoint/02-props.png)
 
 1. Insérez la clé d’instrumentation à l’emplacement « XXXX » dans l’extrait de code ci-dessous. 
 2. Incorporez dans votre application SharePoint au lieu de l’extrait de code que vous obtenez à partir du portail.
@@ -133,9 +137,7 @@ function onRequestFail(sender, args) {
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Tests Web](../../azure-monitor/app/monitor-web-app-availability.md) pour surveiller la disponibilité de votre site.
-* [Application Insights](../../azure-monitor/app/app-insights-overview.md) pour les autres types d'applications.
+* [Tests Web](./monitor-web-app-availability.md) pour surveiller la disponibilité de votre site.
+* [Application Insights](./app-insights-overview.md) pour les autres types d'applications.
 
 <!--Link references-->
-
-

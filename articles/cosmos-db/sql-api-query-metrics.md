@@ -4,19 +4,21 @@ description: Découvrez comment instrumenter et déboguer les performances de re
 author: SnehaGunda
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/23/2019
 ms.author: sngun
-ms.openlocfilehash: ae1773ec1d470b9cff2efb00c200427b7b4c2fb4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: fedcdd55a465f5c09c331a0fa917811c349b15b1
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69614821"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93097224"
 ---
 # <a name="tuning-query-performance-with-azure-cosmos-db"></a>Réglage des performances de requête avec Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Azure Cosmos DB fournit une [API SQL pour interroger des données](how-to-sql-query.md), sans nécessiter de schéma ou d’index secondaires. Cet article fournit les informations suivantes à l’attention des développeurs :
+Azure Cosmos DB fournit une [API SQL pour interroger des données](./sql-query-getting-started.md), sans nécessiter de schéma ou d’index secondaires. Cet article fournit les informations suivantes à l’attention des développeurs :
 
 * Détails techniques sur le fonctionnement de l’exécution de requêtes SQL dans Azure Cosmos DB
 * Développements sur les en-têtes de demande et réponse des requêtes, et sur les options du kit SDK client
@@ -25,7 +27,7 @@ Azure Cosmos DB fournit une [API SQL pour interroger des données](how-to-sql-qu
 
 ## <a name="about-sql-query-execution"></a>À propos de l’exécution de requêtes SQL
 
-Dans Azure Cosmos DB, vous stockez les données dans des conteneurs pouvant se remplir à n’importe quel [débit de requête ou taille de stockage](partition-data.md). Azure Cosmos DB adapte de façon continue les données entre les partitions physiques situées en arrière-plan, pour gérer la croissance des données ou l’augmentation de débit approvisionné. Vous pouvez émettre des requêtes SQL sur n’importe quel conteneur à l’aide de l’API REST ou de l’un des [kits SDK SQL](sql-api-sdk-dotnet.md) pris en charge.
+Dans Azure Cosmos DB, vous stockez les données dans des conteneurs pouvant se remplir à n’importe quel [débit de requête ou taille de stockage](partitioning-overview.md). Azure Cosmos DB adapte de façon continue les données entre les partitions physiques situées en arrière-plan, pour gérer la croissance des données ou l’augmentation de débit approvisionné. Vous pouvez émettre des requêtes SQL sur n’importe quel conteneur à l’aide de l’API REST ou de l’un des [kits SDK SQL](sql-api-sdk-dotnet.md) pris en charge.
 
 Pour résumer brièvement le partitionnement : vous définissez une clé de partition, par exemple "city", qui détermine la façon dont les données sont fractionnées entre plusieurs partitions physiques. Les données appartenant à une clé de partition unique (par exemple, "city" == "Seattle") sont stockées dans une partition physique, bien qu’en général une seule partition physique ait plusieurs clés de partition. Lorsqu’une partition a atteint sa taille de stockage, le service divise de façon homogène la partition en deux nouvelles partitions, et répartit la clé de partition uniformément entre ces partitions. Étant donné que les partitions sont temporaires, les API utilisent une abstraction de « plage de clé de partition » représentant les plages des hachages de clé de partition. 
 
@@ -131,7 +133,7 @@ Les en-têtes de réponse de la clé retournés par la requête comprennent les 
 | `x-ms-documentdb-query-metrics` | Les statistiques de la requête pour l’exécution. Il s’agit d’une chaîne délimitée qui contient des statistiques de temps passé dans les différentes phases d’exécution de la requête. Retournées si `x-ms-documentdb-populatequerymetrics` a la valeur `True`. | 
 | `x-ms-request-charge` | Le nombre d’[unités de requête](request-units.md) consommées par la requête. | 
 
-Pour plus d’informations sur les options et les en-têtes de demande d’API REST, consultez [Interrogation des ressources à l’aide de l’API REST](https://docs.microsoft.com/rest/api/cosmos-db/querying-cosmosdb-resources-using-the-rest-api).
+Pour plus d’informations sur les options et les en-têtes de demande d’API REST, consultez [Interrogation des ressources à l’aide de l’API REST](/rest/api/cosmos-db/querying-cosmosdb-resources-using-the-rest-api).
 
 ## <a name="best-practices-for-query-performance"></a>Meilleures pratiques pour les performances de requêtes
 Les éléments suivants sont les facteurs les plus courants qui affectent les performances de requêtes Azure Cosmos DB. Nous approfondissons chacune de ces rubriques dans cet article.
@@ -162,7 +164,7 @@ Avec Azure Cosmos DB, les requêtes s’effectuent généralement dans l’ordre
 
 Les requêtes qui doivent consulter toutes les partitions nécessitent une latence plus élevée et peuvent consommer des RU plus élevées. Étant donné que chaque partition dispose de l’indexation automatique sur toutes les propriétés, la requête peut être servie efficacement à partir de l’index dans ce cas. Vous pouvez effectuer des requêtes qui englobent les partitions plus rapidement en utilisant les options de parallélisme.
 
-Pour en savoir plus sur le partitionnement et les clés de partition, consultez [Partitionnement dans Azure Cosmos DB](partition-data.md).
+Pour en savoir plus sur le partitionnement et les clés de partition, consultez [Partitionnement dans Azure Cosmos DB](partitioning-overview.md).
 
 ### <a name="sdk-and-query-options"></a>Options de requête et de kit SDK
 Consultez [Conseils sur les performances](performance-tips.md) et [Tests de performances](performance-testing.md) pour savoir comment obtenir les meilleures performances côté client à partir d’Azure Cosmos DB. Cela implique d’utiliser les kits SDK les plus récents, de procéder à des configurations spécifiques aux plateformes, comme la fréquence de garbage collection ou le nombre de connexions par défaut, et d’utiliser des options de connectivité légère, comme Direct/TCP. 
@@ -274,6 +276,4 @@ Voici quelques exemples de requête, et la façon d’interpréter certains mesu
 ## <a name="next-steps"></a>Étapes suivantes
 * Pour en savoir plus sur les opérateurs et les mots clés de requête SQL pris en charge, consultez [Requête SQL](sql-query-getting-started.md). 
 * Pour obtenir plus d’informations sur les unités de requête, consultez [Unités de requête](request-units.md).
-* Pour en savoir plus sur la stratégie d’indexation, consultez [Stratégie d’indexation](index-policy.md) 
-
-
+* Pour en savoir plus sur la stratégie d’indexation, consultez [Stratégie d’indexation](index-policy.md)

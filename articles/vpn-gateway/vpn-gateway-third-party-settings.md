@@ -8,12 +8,12 @@ ms.service: vpn-gateway
 ms.topic: troubleshooting
 ms.date: 06/15/2018
 ms.author: delhan
-ms.openlocfilehash: b87340fbb3f94eee106fc5d0d72117d30e331035
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e9544fb73c8599b219ef7a566032adfe5e33d08
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75862711"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658500"
 ---
 # <a name="community-suggested-third-party-vpn-or-firewall-device-settings-for-azure-vpn-gateway"></a>Paramètres de pare-feu ou VPN tiers suggérés par la communauté pour la passerelle VPN Azure
 
@@ -41,7 +41,6 @@ Le tableau suivant répertorie plusieurs périphériques courants et l’aide as
 
 ## <a name="next-step"></a>Étape suivante
 
-[Paramètres de passerelle Azure](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices)
+[Paramètres de passerelle Azure](./vpn-gateway-about-vpn-devices.md)
 
-[Appareils compatibles](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices)
-
+[Appareils compatibles](./vpn-gateway-about-vpn-devices.md)

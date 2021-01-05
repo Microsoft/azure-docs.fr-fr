@@ -30,11 +30,11 @@
       href: azuread-join-sso.md
     - name: Jetons d’actualisation principaux
       href: concept-primary-refresh-token.md
-    - name: Stations de travail gérées par Azure
-      href: concept-azure-managed-workstation.md
 - name: Guides pratiques
   expanded: false
   items:
+    - Name: Planifier votre déploiement d’appareil Azure AD
+      href: plan-device-deployment.md
     - name: Planifier votre implémentation de la jointure d’Azure AD
       href: azureadjoin-plan.md
     - name: Assigner des administrateurs locaux aux appareils joints Azure AD
@@ -53,8 +53,6 @@
       href: howto-vm-sign-in-azure-ad-windows.md
     - name: Infrastructure de bureau virtuel
       href: howto-device-identity-virtual-desktop-infrastructure.md
-    - name: Déployer des stations de travail gérées par Azure
-      href: howto-azure-managed-workstation.md
     - name: Résoudre les problèmes d’identités d’appareil
       items:
         - name: Résoudre les problèmes de jointure d’Azure AD hybride pour les appareils Windows actuels
@@ -73,21 +71,27 @@
           href: enterprise-state-roaming-faqs.md
 - name: Informations de référence
   items:
+    - name: "Appliquer le protocole TLS\_1.2"
+      href: reference-device-registration-tls-1-2.md
     - name: Paramètres GPO Enterprise State Roaming
       href: enterprise-state-roaming-group-policy-settings.md
     - name: Paramètres Windows Enterprise State Roaming
       href: enterprise-state-roaming-windows-settings-reference.md
+    - name: API Graph
+      items:
+        - name: API Identité d’appareil
+          href: /graph/api/resources/device?view=graph-rest-1.0
 - name: Ressources
   items:
     - name: Forum de commentaires Azure
       href: 'https://feedback.azure.com/forums/169401-azure-active-directory'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-active-directory.html'
+      href: /answers/topics/azure-active-directory.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/active-directory/'
     - name: Mises à jour de service
       href: ../fundamentals/whats-new.md
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-active-directory'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=active-directory'

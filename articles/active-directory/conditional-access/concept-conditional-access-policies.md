@@ -5,26 +5,45 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: conceptual
-ms.date: 03/25/2020
+ms.date: 10/16/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 907ad8705742e4b2e38b13c3c675ebd333bd27d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 28d58c476a805b672a6ec8b4d8ec465eba17e559
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295324"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169679"
 ---
 # <a name="building-a-conditional-access-policy"></a>Créer une stratégie d’accès conditionnel
 
 Comme expliqué dans l’article [Qu’est-ce que l’accès conditionnel ?](overview.md), une stratégie d'accès conditionnel est une instruction if-then d'**affectations** et de **contrôles d'accès**. Une stratégie d’accès conditionnel regroupe des signaux pour prendre des décisions et appliquer des stratégies organisationnelles.
 
-Comment une organisation crée-t-elle ces stratégies ? Qu’est-ce qui est requis ?
+Comment une organisation crée-t-elle ces stratégies ? Qu’est-ce qui est requis ? Comment sont-elles appliquées ?
 
 ![Accès conditionnel (signaux + décisions + application = stratégies)](./media/concept-conditional-access-policies/conditional-access-signal-decision-enforcement.png)
+
+Plusieurs stratégies d’accès conditionnel peuvent s’appliquer à un utilisateur individuel à tout moment. Dans ce cas, toutes les stratégies qui s’appliquent doivent être satisfaites. Par exemple, si une première stratégie demande une authentification multifacteur (MFA) et qu’une autre demande un appareil conforme, vous devez procéder à la MFA et utiliser un appareil compatible. Toutes les attributions sont reliées par l’opérateur logique **AND**. Si vous configurez plusieurs affectations, ces dernières doivent toutes être satisfaites pour qu’une stratégie soit déclenchée.
+
+Toutes les stratégies sont appliquées en deux phases :
+
+- Phase 1 : Collecter les détails de la session 
+   - Collectez les détails de la session, tels que l’emplacement réseau et l’identité de l’appareil, qui seront nécessaires à l’évaluation de la stratégie. 
+   - La phase 1 de l’évaluation de la stratégie se produit pour les stratégies activées et les stratégies en [mode rapport seul](concept-conditional-access-report-only.md).
+- Phase 2 : Application 
+   - Utilisez les détails de la session collectés lors de la phase 1 pour identifier les exigences qui n’ont pas été respectées. 
+   - Si une stratégie est configurée pour bloquer l’accès, grâce au contrôle d’octroi et de blocage, l’application s’arrête ici et l’utilisateur est bloqué. 
+   - L’utilisateur est invité à remplir les exigences supplémentaires de contrôle d’octroi qui n’ont pas été satisfaites durant la phase 1 dans l’ordre suivant, jusqu’à ce que la stratégie soit satisfaite :  
+      - Authentification multifacteur 
+      - Application cliente approuvée/stratégie de protection d’application 
+      - Appareil géré (jonction d’Azure AD conforme ou hybride) 
+      - Conditions d’utilisation 
+      - Contrôles personnalisés  
+   - Une fois que tous les contrôles d’octroi ont été satisfaits, appliquez les contrôles de session (appliqués par l’application, Microsoft Cloud App Security et durée de vie du jeton) 
+   - La phase 2 de l’évaluation de la stratégie se produit pour toutes les stratégies activées. 
 
 ## <a name="assignments"></a>Attributions
 
@@ -44,7 +63,7 @@ Une stratégie peut comporter plusieurs [conditions](concept-conditional-access-
 
 #### <a name="sign-in-risk"></a>Risque à la connexion
 
-Pour les organisations dotées d'[Azure AD Identity Protection](../identity-protection/overview.md), les détections de risques générées peuvent influencer vos stratégies d’accès conditionnel.
+Pour les organisations dotées d'[Azure AD Identity Protection](../identity-protection/overview-identity-protection.md), les détections de risques générées peuvent influencer vos stratégies d’accès conditionnel.
 
 #### <a name="device-platforms"></a>Plateformes d’appareils
 
@@ -82,7 +101,7 @@ Le blocage permet de bloquer l'accès d'affectations spécifiées. Le contrôle 
 
 Le contrôle d'octroi peut déclencher l’application d’un ou de plusieurs contrôles. 
 
-- Exiger une authentification multifacteur (Microsoft Azure Multi-Factor Authentication)
+- Exiger une authentification multifacteur (Azure AD Multi-Factor Authentication)
 - Exiger que l'appareil soit marqué comme conforme (Intune)
 - Exiger un appareil joint Azure AD Hybride
 - Demander une application cliente approuvée
@@ -115,7 +134,7 @@ Les [contrôles de session](concept-conditional-access-session.md) peuvent limit
 Une stratégie d’accès conditionnel doit contenir au moins les éléments suivants à appliquer :
 
 - **Nom** de la stratégie.
-- **Affectations**
+- **Attributions**
    - **Utilisateurs et/ou groupes** auxquels appliquer la stratégie.
    - **Applications ou actions cloud** auxquelles appliquer la stratégie.
 - **Contrôles d’accès**
@@ -127,9 +146,11 @@ Dans l’article [Stratégies d’accès conditionnel courantes](concept-conditi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+[Créer une stratégie d’accès conditionnel](../authentication/tutorial-enable-azure-mfa.md?bc=%2fazure%2factive-directory%2fconditional-access%2fbreadcrumb%2ftoc.json&toc=%2fazure%2factive-directory%2fconditional-access%2ftoc.json#create-a-conditional-access-policy)
+
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)
 
-[Planification d’un déploiement Azure Multi-Factor Authentication basé sur le cloud](../authentication/howto-mfa-getstarted.md)
+[Planifier un déploiement d'Azure AD Multi-Factor Authentication basé sur le cloud](../authentication/howto-mfa-getstarted.md)
 
 [Gestion de la conformité des appareils avec Intune](/intune/device-compliance-get-started)
 

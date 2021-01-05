@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 03/12/2019
 ms.author: apimpm
-ms.openlocfilehash: f948d813ddb4d493b455a4922818e38ac3fd6eaa
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 18cc42c3447de733447c27db52a9a6d664539464
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259168"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89400351"
 ---
 # <a name="how-to-save-and-configure-your-api-management-service-configuration-using-git"></a>Comment enregistrer et configurer votre configuration du service Gestion des API à l’aide de Git
 
@@ -47,7 +47,7 @@ Cet article décrit comment activer et utiliser Git pour gérer votre configurat
 
 ## <a name="access-git-configuration-in-your-service"></a>Accéder à la configuration de Git dans votre service
 
-Pour afficher et configurer vos paramètres de configuration Git, cliquez sur le menu **Sécurité** et accédez à l’onglet **Dépôt de configuration**.
+Pour afficher et configurer vos paramètres de configuration Git, vous pouvez cliquer sur le menu **Déploiement et infrastructure** et accéder à l’onglet **Dépôt**.
 
 ![Activer GIT][api-management-enable-git]
 
@@ -62,7 +62,7 @@ Pour plus d’informations sur l’activation ou la désactivation de l’accès
 
 La première étape avant le clonage du dépôt consiste à enregistrer l’état actuel de la configuration du service dans le dépôt. Cliquez sur **Enregistrer dans le dépôt**.
 
-Apportez les modifications souhaitées dans l’écran de confirmation, puis cliquez sur **OK** pour les enregistrer.
+Apportez les modifications souhaitées dans l’écran de confirmation, puis cliquez sur **Enregistrer** pour les enregistrer.
 
 Après quelques instants, la configuration est enregistrée, et l’état de configuration du dépôt est affiché, y compris la date et l’heure de la dernière modification de la configuration et de la dernière synchronisation entre la configuration du service et le dépôt.
 
@@ -82,7 +82,7 @@ Pour générer un mot de passe, vérifiez d’abord que le champ **Expiration** 
 
 Les exemples suivants utilisent l’outil Git Bash de [Git pour Windows](https://www.git-scm.com/downloads) , mais vous pouvez utiliser n’importe quel outil Git auquel vous êtes habitué.
 
-Ouvrez votre outil Git dans le dossier de votre choix et exécutez la commande suivante pour cloner le dépôt git sur votre ordinateur local, à l’aide de la commande fournie par le portail Azure.
+Ouvrez votre outil Git dans le dossier de votre choix et exécutez la commande suivante pour cloner le référentiel Git sur votre ordinateur local, à l'aide de la commande fournie par le portail Azure.
 
 ```
 git clone https://{name}.scm.azure-api.net/
@@ -112,7 +112,7 @@ Une fois le référentiel cloné, vous pouvez l’afficher et l’utiliser dans 
 
 ## <a name="to-update-your-local-repository-with-the-most-current-service-instance-configuration"></a>Pour mettre à jour votre dépôt local avec la dernière configuration de l’instance du service
 
-Si vous apportez des changements à votre instance de service Gestion des API dans le portail Azure ou à l’aide de l’API REST, vous devez enregistrer ces changements dans le dépôt pour pouvoir mettre à jour votre dépôt local avec les derniers changements. Pour ce faire, cliquez sur **Enregistrer la configuration dans le dépôt** sous l’onglet **Dépôt de configuration** dans le portail Azure, puis exécutez la commande suivante dans votre dépôt local.
+Si vous apportez des changements à votre instance de service Gestion des API dans le portail Azure ou à l’aide de l’API REST, vous devez enregistrer ces changements dans le dépôt pour pouvoir mettre à jour votre dépôt local avec les derniers changements. Pour ce faire, cliquez sur **Enregistrer dans le dépôt** sous l’onglet **Dépôt** dans le portail Azure, puis exécutez la commande suivante dans votre dépôt local.
 
 ```
 git pull
@@ -142,11 +142,11 @@ git push
 
 Une fois vos modifications locales validées et transférées vers le dépôt du serveur, vous pouvez les déployer sur votre instance du service Gestion des API.
 
-Pour plus d’informations sur l’exécution de cette opération en utilisant l’API REST, consultez [Déployer les modifications Git dans votre base de données de configuration à l’aide de l’API REST](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/tenantconfiguration).
+Pour plus d’informations sur l’exécution de cette opération en utilisant l’API REST, consultez [Déployer les modifications Git dans votre base de données de configuration à l’aide de l’API REST](/rest/api/apimanagement/2019-12-01/tenantconfiguration).
 
 ## <a name="file-and-folder-structure-reference-of-local-git-repository"></a>Référence de la structure des fichiers et des dossiers du dépôt Git local
 
-Les fichiers et dossiers dans le dépôt git local contiennent les informations de configuration sur l’instance de service.
+Les fichiers et dossiers figurant dans le référentiel Git local contiennent les informations de configuration relatives à l'instance de service.
 
 | Élément | Description |
 | --- | --- |
@@ -172,9 +172,9 @@ Ces fichiers peuvent être créés, supprimés, modifiés et gérés dans votre 
 > [!NOTE]
 > Les entités suivantes ne se trouvent pas dans le dépôt Git et ne peuvent pas être configurées à l’aide de Git.
 >
-> * [Utilisateurs](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/user)
-> * [Abonnements](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/subscription)
-> * [Valeurs nommées](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/property)
+> * [Utilisateurs](/rest/api/apimanagement/2019-12-01/user)
+> * [Abonnements](/rest/api/apimanagement/2019-12-01/subscription)
+> * Valeurs nommées
 > * Entités du portail des développeur autres que les styles
 >
 
@@ -198,7 +198,7 @@ Le dossier `api-management` racine contient un fichier `configuration.json` qui 
 }
 ```
 
-Les quatre premiers paramètres (`RegistrationEnabled`, `UserRegistrationTerms`, `UserRegistrationTermsEnabled` et `UserRegistrationTermsConsentRequired`) correspondent aux paramètres suivants, disponibles dans l’onglet **Identités** de la section **Sécurité**.
+Les quatre premiers paramètres (`RegistrationEnabled`, `UserRegistrationTerms`, `UserRegistrationTermsEnabled` et `UserRegistrationTermsConsentRequired`) correspondent aux paramètres suivants, disponibles dans l’onglet **Identités** de la section **Portail des développeurs**.
 
 | Paramètre d’identité | Correspond à |
 | --- | --- |
@@ -208,7 +208,7 @@ Les quatre premiers paramètres (`RegistrationEnabled`, `UserRegistrationTerms`,
 | UserRegistrationTermsConsentRequired |**Exiger le consentement** |
 | RequireUserSigninEnabled |**Rediriger les utilisateurs anonymes vers la page de connexion** |
 
-Les quatre paramètres qui suivent (`DelegationEnabled`, `DelegationUrl`, `DelegatedSubscriptionEnabled` et `DelegationValidationKey`) correspondent aux paramètres suivants, disponibles dans l’onglet **Délégation** de la section **Sécurité**.
+Les quatre paramètres qui suivent (`DelegationEnabled`, `DelegationUrl`, `DelegatedSubscriptionEnabled` et `DelegationValidationKey`) correspondent aux paramètres suivants, disponibles dans l’onglet **Délégation** de la section **Portail des développeurs**.
 
 | Paramètre de délégation | Correspond à |
 | --- | --- |
@@ -222,15 +222,15 @@ Le dernier paramètre, `$ref-policy`, correspond au fichier d’instructions de 
 ### <a name="apis-folder"></a>Dossier apis
 Le dossier `apis` contient un dossier pour chaque API dans l’instance de service, qui renferme les éléments suivants.
 
-* `apis\<api name>\configuration.json` : cet élément représente la configuration de l’API et contient des informations sur l’URL du service principal et sur les opérations. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir une API spécifique](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/apis/get) avec `export=true` au format `application/json`.
-* `apis\<api name>\api.description.html` : cet élément décrit l’API et correspond à la propriété `description` de [l’entité API](https://docs.microsoft.com/java/api/com.microsoft.azure.storage.table.entityproperty).
-* `apis\<api name>\operations\` : ce dossier contient des fichiers `<operation name>.description.html` correspondant aux opérations dans l’API. Chaque fichier contient la description d’une opération unique dans l’API, qui correspond à la propriété `description` de [l’entité Operation](https://docs.microsoft.com/rest/api/visualstudio/operations/list#operationproperties) dans l’API REST.
+* `apis\<api name>\configuration.json` : cet élément représente la configuration de l’API et contient des informations sur l’URL du service principal et sur les opérations. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir une API spécifique](/rest/api/apimanagement/2019-12-01/apis/get) avec `export=true` au format `application/json`.
+* `apis\<api name>\api.description.html` : cet élément décrit l’API et correspond à la propriété `description` de [l’entité API](/java/api/com.microsoft.azure.storage.table.entityproperty).
+* `apis\<api name>\operations\` : ce dossier contient des fichiers `<operation name>.description.html` correspondant aux opérations dans l’API. Chaque fichier contient la description d’une opération unique dans l’API, qui correspond à la propriété `description` de [l’entité Operation](/rest/api/visualstudio/operations/list#operationproperties) dans l’API REST.
 
 ### <a name="groups-folder"></a>Dossier groups
 Le dossier `groups` contient un dossier pour chaque groupe défini dans l’instance de service.
 
-* `groups\<group name>\configuration.json` : cet élément correspond à la configuration du groupe. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir un groupe spécifique](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/group/get) .
-* `groups\<group name>\description.html` : cet élément décrit le groupe et correspond à la propriété `description` de [l’entité groupe](https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-group-entity).
+* `groups\<group name>\configuration.json` : cet élément correspond à la configuration du groupe. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir un groupe spécifique](/rest/api/apimanagement/2019-12-01/group/get) .
+* `groups\<group name>\description.html` : cet élément décrit le groupe et correspond à la propriété `description` de [l’entité groupe](/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-group-entity).
 
 ### <a name="policies-folder"></a>Dossier policies
 Le dossier `policies` contient les instructions de stratégie pour votre instance de service.
@@ -249,8 +249,8 @@ Le dossier `portalStyles` contient la configuration et les feuilles de style pou
 ### <a name="products-folder"></a>Dossier products
 Le dossier `products` contient un dossier pour chaque produit défini dans l’instance de service.
 
-* `products\<product name>\configuration.json` : cet élément correspond à la configuration du produit. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir un produit spécifique](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/product/get) .
-* `products\<product name>\product.description.html` : cet élément décrit le produit et correspond à la propriété `description` de [l’entité produit](https://docs.microsoft.com/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-product-entity) dans l’API REST.
+* `products\<product name>\configuration.json` : cet élément correspond à la configuration du produit. Vous pouvez obtenir les mêmes informations en appelant l’opération [Obtenir un produit spécifique](/rest/api/apimanagement/2019-12-01/product/get) .
+* `products\<product name>\product.description.html` : cet élément décrit le produit et correspond à la propriété `description` de [l’entité produit](/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-product-entity) dans l’API REST.
 
 ### <a name="templates"></a>modèles
 Le dossier `templates` contient la configuration des [modèles d’e-mail](api-management-howto-configure-notifications.md) dans l’instance de service.
@@ -262,8 +262,8 @@ Le dossier `templates` contient la configuration des [modèles d’e-mail](api-m
 Pour plus d’informations sur d’autres méthodes pour gérer votre instance de service, consultez les sources suivantes :
 
 * Gérer votre instance de service à l’aide des applets de commande PowerShell suivante :
-  * [Référence sur les applets de commande PowerShell de déploiement des services](https://docs.microsoft.com/powershell/module/wds)
-  * [Référence sur les applets de commande PowerShell de gestion des services](https://docs.microsoft.com/powershell/azure/servicemanagement/overview)
+  * [Référence sur les applets de commande PowerShell de déploiement des services](/powershell/module/wds)
+  * [Référence sur les applets de commande PowerShell de gestion des services](/powershell/azure/servicemanagement/overview)
 * Gérer votre instance de service à l’aide de l’API REST
   * [Référence de l’API REST Gestion des API](/rest/api/apimanagement/)
 
@@ -281,7 +281,3 @@ Pour plus d’informations sur d’autres méthodes pour gérer votre instance d
 [api-management-identity-settings]: ./media/api-management-configuration-repository-git/api-management-identity-settings.png
 [api-management-delegation-settings]: ./media/api-management-configuration-repository-git/api-management-delegation-settings.png
 [api-management-git-icon-enable]: ./media/api-management-configuration-repository-git/api-management-git-icon-enable.png
-
-
-
-

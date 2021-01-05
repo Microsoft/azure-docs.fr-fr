@@ -6,27 +6,27 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/06/2018
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
-ms.openlocfilehash: e245b58449ab773914fc60be056082b82f05035a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d9bdf7258296b82e65e03f6b8af8021b9a7be0f0
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184483"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952469"
 ---
 # <a name="manage-user-data-in-azure-active-directory-b2c"></a>Gérer les données utilisateur dans Azure Active Directory B2C
 
- Cet article explique comment gérer les données utilisateur dans Azure Active Directory B2C (Azure AD B2C) en utilisant les opérations fournies par l’[API Microsoft Graph](https://docs.microsoft.com/graph/use-the-api). La gestion des données utilisateur inclut la suppression ou l’exportation de données à partir des journaux d’audit.
+ Cet article explique comment gérer les données utilisateur dans Azure Active Directory B2C (Azure AD B2C) en utilisant les opérations fournies par l’[API Microsoft Graph](/graph/use-the-api). La gestion des données utilisateur inclut la suppression ou l’exportation de données à partir des journaux d’audit.
 
 [!INCLUDE [gdpr-intro-sentence.md](../../includes/gdpr-intro-sentence.md)]
 
 ## <a name="delete-user-data"></a>Supprimer des données utilisateur
 
-Les données utilisateur sont stockées dans l’annuaire Azure AD B2C et dans les journaux d’audit. Toutes les données d’audit utilisateur sont conservées pendant 7 jours dans Azure AD B2C. Si vous souhaitez supprimer des données utilisateur avant l’expiration de ces 7 jours, vous pouvez utiliser l’opération [Supprimer un utilisateur](https://docs.microsoft.com/graph/api/user-delete). Une opération DELETE est requise pour chacun des clients Azure AD B2C susceptibles de contenir des données.
+Les données utilisateur sont stockées dans l’annuaire Azure AD B2C et dans les journaux d’audit. Toutes les données d’audit utilisateur sont conservées pendant 7 jours dans Azure AD B2C. Si vous souhaitez supprimer des données utilisateur avant l’expiration de ces 7 jours, vous pouvez utiliser l’opération [Supprimer un utilisateur](/graph/api/user-delete). Une opération DELETE est requise pour chacun des clients Azure AD B2C susceptibles de contenir des données.
 
 Un ID objet est attribué à chaque utilisateur dans Azure AD B2C. L’ID objet constitue un identificateur non ambigu que vous pouvez utiliser pour supprimer des données utilisateur dans Azure AD B2C. En fonction de votre architecture, l’ID objet peut être un identificateur de corrélation utile pour d’autres services, tels que des bases de données de gestion des finances, du marketing et de la relation client.
 
@@ -52,7 +52,7 @@ Les données d’utilisateur d’Azure AD B2C sont limitées à ce qui suit :
 
 Dans l’exemple suivant de flux de données d’exportation, les étapes décrites comme étant effectuées par l’application peuvent également être réalisées par un processus principal ou par un utilisateur avec un rôle d’administrateur dans l’annuaire :
 
-1. L’utilisateur se connecte à l’application. Azure AD B2C applique une authentification multifacteur Azure si nécessaire.
+1. L’utilisateur se connecte à l’application. Azure AD B2C applique l’authentification avec Azure AD Multi-Factor Authentication si nécessaire.
 2. L’application utilise les informations d’identification de l’utilisateur pour appeler une opération de l’API Microsoft Graph afin de récupérer les attributs utilisateur. L’API Microsoft Graph fournit les données d’attribut au format JSON. Selon le schéma,vous pouvez définir le contenu du jeton d’ID pour inclure toutes les données personnelles d’un utilisateur.
 3. L’application récupère l’activité d’audit de l’utilisateur. L’API Microsoft Graph fournit les données d’événement à l’application.
 4. L’application agrège les données et les met à la disposition de l’utilisateur.

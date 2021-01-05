@@ -9,10 +9,10 @@ ms.date: 03/04/2020
 ms.author: glenga
 ms.custom: include file
 ms.openlocfilehash: 439b312050f657566026a36c145e7b6dd5cc9bad
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83116327"
 ---
 1. Dans le menu du portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
@@ -41,7 +41,7 @@ ms.locfileid: "83116327"
     |**Système d’exploitation**| Système d’exploitation préféré | Un système d’exploitation est présélectionné pour vous en fonction de la sélection de votre pile d’exécution, mais vous pouvez modifier le paramètre si nécessaire. |
     | **[Plan](../articles/azure-functions/functions-scale.md)** | **Consommation (serverless)** | Plan d’hébergement qui définit la façon dont les ressources sont allouées à votre Function App. Dans le plan de **Consommation** par défaut, les ressources sont ajoutées dynamiquement en fonction des besoins de vos fonctions. Avec cet hébergement [serverless](https://azure.microsoft.com/overview/serverless-computing/), vous payez uniquement pour la durée d’exécution de vos fonctions. Si vous exécutez dans un plan App Service, vous devez gérer la [mise à l’échelle de votre application de fonction](../articles/azure-functions/functions-scale.md).  |
 
-    ![Hébergement](./media/functions-create-function-app-portal/function-app-create-hosting.png)
+    ![Hosting](./media/functions-create-function-app-portal/function-app-create-hosting.png)
 
 1. Sélectionnez **Suivant : Supervision**. Dans la page **Supervision**, entrez les paramètres suivants.
 

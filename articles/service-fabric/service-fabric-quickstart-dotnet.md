@@ -1,17 +1,15 @@
 ---
 title: Créer rapidement une application .NET sur Service Fabric dans Azure
 description: Dans le cadre de ce démarrage rapide, vous créez une application .NET pour Azure à l’aide d’un exemple d’application de services fiables Service Fabric.
-author: mikkelhegn
 ms.topic: quickstart
 ms.date: 06/26/2019
-ms.author: mikhegn
 ms.custom: mvc, devcenter, vs-azure
-ms.openlocfilehash: e3d984fee75dcdb8d4e14e7b454e74a3f7c629f2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 15e2180e44acaa5ebefb403b2da3755396a45ba4
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75730137"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575888"
 ---
 # <a name="quickstart-deploy-a-net-reliable-services-application-to-service-fabric"></a>Démarrage rapide : Déployer une application de services fiables .NET sur Service Fabric
 
@@ -52,7 +50,7 @@ Après avoir installé le runtime, les SDK, Visual Studio Tools et Docker, et un
 > Bien qu’il ne soit pas nécessaire pour ce guide de démarrage rapide de créer le cluster en exécutant Docker, cette instruction est fournie au titre de bonne pratique.
 > Vérifiez que Docker est en cours d’exécution en ouvrant une fenêtre de terminal et en exécutant `docker ps` pour voir si une erreur se produit. Si la réponse n’indique aucune erreur, Docker est en cours d’exécution et vous êtes prêt à générer un cluster.
 >
-> [Configurer Windows 10 ou Windows Server pour des conteneurs](https://docs.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-10-Client)
+> [Configurer Windows 10 ou Windows Server pour des conteneurs](/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-10-Client)
 
 1. Ouvrez une nouvelle fenêtre PowerShell avec élévation de privilèges en tant qu’administrateur.
 2. Exécutez la commande PowerShell suivante pour créer un cluster de développement :

@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: e01f3ddde96903716cf1fcff0426791ff3a90e07
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 3043ec0600f802a409387f0114aae5f56151da16
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83587661"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88510973"
 ---
 # <a name="create-a-project"></a>Création d’un projet
 
@@ -52,7 +52,7 @@ La page d’accueil Custom Translator affiche les 10 premiers projets de votre 
 
 Après avoir sélectionné un projet, la page de projet affiche ce qui suit :
 
-- CategoryID : Un CategoryID est créé en concaténant l'ID d'espace de travail, l'étiquette de projet et le code de catégorie. Vous utilisez le CategoryID avec Translator pour obtenir des traductions personnalisées.
+- CategoryID : Un CategoryID est créé en concaténant l'ID d'espace de travail, l'étiquette de projet et le code de catégorie. Vous utilisez le CategoryID avec l’API Text Translator pour obtenir des traductions personnalisées. Pour copier, cliquez sur l’icône de copie.
 
 - Bouton Effectuer l'apprentissage : Utilisez ce bouton pour démarrer l'[apprentissage d’un modèle](how-to-train-model.md).
 

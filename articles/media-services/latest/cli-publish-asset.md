@@ -3,31 +3,34 @@ title: Exemple de script Azure CLI - Publication d’un élément multimédia | 
 description: Cet article explique comment utiliser le script d’interface de ligne de commande Azure pour publier une ressource.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.assetid: ''
 ms.service: media-services
 ms.devlang: azurecli
-ms.topic: sample
+ms.topic: how-to
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 01/25/2019
-ms.author: juliako
-ms.openlocfilehash: 44cf234fd8419164f7dd7f8320952a5c6c0842e0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 3b3c358a84dd74595c476f029a1c8f28bc3c901f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74896122"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295867"
 ---
 # <a name="cli-example-publish-an-asset"></a>Exemple CLI : Publier un élément multimédia
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Le script Azure CLI de cet article montre comment créer un localisateur de diffusion en continu et récupérer les URL de diffusion en continu. 
 
 ## <a name="prerequisites"></a>Conditions préalables requises 
 
-[Créer un compte Media Services](create-account-cli-how-to.md).
+[Créer un compte Media Services](./create-account-howto.md).
 
 [!INCLUDE [media-services-cli-instructions.md](../../../includes/media-services-cli-instructions.md)]
 

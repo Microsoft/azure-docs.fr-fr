@@ -6,17 +6,17 @@ author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/26/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.custom: seoapril2019, azure-synapse
-ms.openlocfilehash: 8e1b75dfc6a979956ff4a2868027bb769bf7c4ed
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 3d9a842af5e1d3fac73515d96644bef250d7d0c4
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633545"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93334567"
 ---
 # <a name="create-table-as-select-ctas"></a>CREATE TABLE AS SELECT (CTAS)
 
@@ -206,62 +206,29 @@ AND     CTAS_acs.[CalendarYear]  = AnnualCategorySales.[CalendarYear] ;
 DROP TABLE CTAS_acs;
 ```
 
-## <a name="ansi-join-replacement-for-delete-statements"></a>Remplacement de jointures ANSI pour les instructions de suppression
+## <a name="ansi-join-replacement-for-merge"></a>Remplacement ANSI JOIN pour MERGE 
 
-Parfois, la meilleure approche pour la suppression des données consiste à utiliser CTAS, en particulier pour les instructions `DELETE` qui utilisent les syntaxes de jointure ANSI. En effet, SQL Synapse ne prend pas en charge les jointures ANSI dans la clause `FROM` d’une instruction `DELETE`. Plutôt que de supprimer les données, vous pouvez sélectionner les données à conserver.
-
-Vous trouverez ci-dessous un exemple d’instruction `DELETE` convertie :
+Dans Azure Synapse Analytics, [MERGE](https://docs.microsoft.com/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15) (préversion) avec NOT MATCHED BY TARGET impose que la cible soit une table distribuée HASH.  Les utilisateurs ont la possibilité d’avoir recours à ANSI JOIN avec [UPDATE](https://docs.microsoft.com/sql/t-sql/queries/update-transact-sql?view=sql-server-ver15) ou [DELETE](https://docs.microsoft.com/sql/t-sql/statements/delete-transact-sql?view=sql-server-ver15). Cette solution de contournement permet de modifier les données de la table cible en fonction du résultat de la jointure avec une autre table.  Voici un exemple.
 
 ```sql
-CREATE TABLE dbo.DimProduct_upsert
-WITH
-(   Distribution=HASH(ProductKey)
-,   CLUSTERED INDEX (ProductKey)
-)
-AS -- Select Data you want to keep
-SELECT p.ProductKey
-, p.EnglishProductName
-,  p.Color
-FROM  dbo.DimProduct p
-RIGHT JOIN dbo.stg_DimProduct s
-ON p.ProductKey = s.ProductKey;
+CREATE TABLE dbo.Table1   
+    (ColA INT NOT NULL, ColB DECIMAL(10,3) NOT NULL);  
+GO  
+CREATE TABLE dbo.Table2   
+    (ColA INT NOT NULL, ColB DECIMAL(10,3) NOT NULL);  
+GO  
+INSERT INTO dbo.Table1 VALUES(1, 10.0);  
+INSERT INTO dbo.Table2 VALUES(1, 0.0);  
+GO  
+UPDATE dbo.Table2   
+SET dbo.Table2.ColB = dbo.Table2.ColB + dbo.Table1.ColB  
+FROM dbo.Table2   
+    INNER JOIN dbo.Table1   
+    ON (dbo.Table2.ColA = dbo.Table1.ColA);  
+GO  
+SELECT ColA, ColB   
+FROM dbo.Table2;
 
-RENAME OBJECT dbo.DimProduct TO DimProduct_old;
-RENAME OBJECT dbo.DimProduct_upsert TO DimProduct;
-```
-
-## <a name="replace-merge-statements"></a>Remplacement d’instructions MERGE
-
-Vous pouvez remplacer les instructions MERGE, du moins partiellement, à l’aide de CTAS. Vous pouvez combiner les instructions `INSERT` et `UPDATE` dans une seule et même instruction. Tous les enregistrements supprimés doivent être limités à partir de l’instruction `SELECT` à omettre dans les résultats.
-
-L’exemple suivant concerne `UPSERT` :
-
-```sql
-CREATE TABLE dbo.[DimProduct_upsert]
-WITH
-(   DISTRIBUTION = HASH([ProductKey])
-,   CLUSTERED INDEX ([ProductKey])
-)
-AS
--- New rows and new versions of rows
-SELECT s.[ProductKey]
-, s.[EnglishProductName]
-, s.[Color]
-FROM      dbo.[stg_DimProduct] AS s
-UNION ALL  
--- Keep rows that are not being touched
-SELECT      p.[ProductKey]
-, p.[EnglishProductName]
-, p.[Color]
-FROM      dbo.[DimProduct] AS p
-WHERE NOT EXISTS
-(   SELECT  *
-    FROM    [dbo].[stg_DimProduct] s
-    WHERE   s.[ProductKey] = p.[ProductKey]
-);
-
-RENAME OBJECT dbo.[DimProduct]          TO [DimProduct_old];
-RENAME OBJECT dbo.[DimProduct_upsert]  TO [DimProduct];
 ```
 
 ## <a name="explicitly-state-data-type-and-nullability-of-output"></a>déclarer explicitement le type de données et la possibilité de valeur NULL de la sortie

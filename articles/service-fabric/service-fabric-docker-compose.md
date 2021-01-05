@@ -4,11 +4,11 @@ description: Azure Service Fabric accepte le format Docker Compose pour vous 
 ms.topic: conceptual
 ms.date: 2/23/2018
 ms.openlocfilehash: f84dd0ecb7a4002182c8455bfd86354d794a6f7c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236693"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84691286"
 ---
 # <a name="docker-compose-deployment-support-in-azure-service-fabric-preview"></a>Prise en charge du déploiement Docker Compose dans Azure Service Fabric (préversion)
 

@@ -3,20 +3,20 @@ title: Créer votre première fabrique de données (portail Azure)
 description: Dans ce didacticiel, vous allez créer un exemple de pipeline Azure Data Factory à l’aide de Data Factory Editor dans le portail Azure.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.date: 01/22/2018
-ms.openlocfilehash: 340017a121d12c95c7c04bbfe67b336638209e9c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 360fbc3e1bfe7890f1f3b05899eb95ce7a3a72c2
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75439009"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496617"
 ---
 # <a name="tutorial-build-your-first-data-factory-by-using-the-azure-portal"></a>Tutoriel : Créer votre première fabrique de données à l’aide du portail Azure
 > [!div class="op_single_selector"]
@@ -31,7 +31,7 @@ ms.locfileid: "75439009"
 > Cet article s’applique à la version 1 d’Azure Data Factory, qui est mise à la disposition générale. Si vous utilisez la version actuelle du service Data Factory, consultez [Démarrage rapide : créer une fabrique de données à l’aide de Data Factory](../quickstart-create-data-factory-dot-net.md).
 
 > [!WARNING]
-> L’éditeur JSON dans le portail Azure pour la création et le déploiement de pipelines ADF v1 va être désactivé le 31 juillet 2019. Après le 31 juillet 2019, vous pourrez continuer à utiliser les [applets de commande PowerShell ADF v1](https://docs.microsoft.com/powershell/module/az.datafactory/?view=azps-2.4.0&viewFallbackFrom=azps-2.3.2), le [kit SDK .Net ADF v1](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.datafactories.models?view=azure-dotnet) et les [API REST ADF v1](https://docs.microsoft.com/rest/api/datafactory/) pour créer et déployer vos pipelines ADF v1.
+> L’éditeur JSON dans le portail Azure pour la création et le déploiement de pipelines ADF v1 va être désactivé le 31 juillet 2019. Après le 31 juillet 2019, vous pourrez continuer à utiliser les [applets de commande PowerShell ADF v1](/powershell/module/az.datafactory/?view=azps-2.4.0&viewFallbackFrom=azps-2.3.2), le [kit SDK .Net ADF v1](/dotnet/api/microsoft.azure.management.datafactories.models?view=azure-dotnet) et les [API REST ADF v1](/rest/api/datafactory/) pour créer et déployer vos pipelines ADF v1.
 
 Dans cet article, vous allez utiliser le [portail Azure](https://portal.azure.com/) pour créer votre première fabrique de données. Pour suivre le didacticiel avec d’autres outils/kits de développement logiciel (SDK), sélectionnez une des options dans la liste déroulante. 
 
@@ -161,7 +161,7 @@ Dans cette étape, vous liez un cluster HDInsight à la demande à votre fabriqu
 
      c. Le cluster HDInsight crée un conteneur par défaut dans le stockage d’objets blob que vous avez spécifié dans la propriété JSON (**linkedServiceName**). HDInsight ne supprime pas ce conteneur lorsque le cluster est supprimé. Ce comportement est normal. Avec le service lié HDInsight à la demande, un cluster HDInsight est créé dès qu’une tranche est traitée, à moins qu’il n’existe un cluster actif (**timeToLive**). Ce cluster est automatiquement supprimé une fois le traitement terminé.
 
-     À mesure que le nombre de tranches traitées augmente, les conteneurs se multiplient dans votre stockage d’objets blob. Si vous n’en avez pas besoin pour dépanner les travaux, vous pouvez les supprimer afin de réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « adf**nomdevotrefabriquededonnées**-**nomduservicelié**-horodatage ». Utilisez des outils tels que [l’Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob.
+     À mesure que le nombre de tranches traitées augmente, les conteneurs se multiplient dans votre stockage d’objets blob. Si vous n’en avez pas besoin pour dépanner les travaux, vous pouvez les supprimer afin de réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « adf **nomdevotrefabriquededonnées**-**nomduservicelié**-horodatage ». Utilisez des outils tels que [l’Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob.
 
      Pour plus d’informations, voir [Service lié HDInsight à la demande](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service).
 
@@ -171,7 +171,7 @@ Dans cette étape, vous liez un cluster HDInsight à la demande à votre fabriqu
 
 1. Confirmez que vous voyez s’afficher à la fois **AzureStorageLinkedService** et **HDInsightOnDemandLinkedService** dans l’arborescence à gauche de l’écran.
 
-    ![Arborescence avec les services liés](./media/data-factory-build-your-first-pipeline-using-editor/tree-view-linked-services.png)
+    ![Capture d’écran montrant qu’AzureStorageLinkedService et HDInsightOnDemandLinkedService sont liés entre eux.](./media/data-factory-build-your-first-pipeline-using-editor/tree-view-linked-services.png)
 
 ## <a name="create-datasets"></a>Créez les jeux de données
 Dans cette étape, vous créez des jeux de données afin de représenter les données d’entrée et de sortie pour le traitement Hive. Ces jeux de données font référence au service AzureStorageLinkedService que vous avez créé précédemment dans ce didacticiel. Le service lié mène à un compte de stockage. Les jeux de données spécifient le conteneur, le dossier et le nom du fichier dans le stockage qui contient les données d’entrée et de sortie.   
@@ -228,7 +228,7 @@ Vous allez maintenant créer le jeu de données de sortie pour représenter les 
 
 1. Dans Data Factory Editor, sélectionnez **Plus** > **Nouveau jeu de données** > **Stockage Blob Azure**.
 
-1. Copiez et collez l’extrait ci-dessous dans la fenêtre Draft-1. Dans l’extrait de code JSON, vous créez un jeu de données appelé **AzureBlobOutput**et spécifiez la structure des données produites par le script Hive. Vous indiquez aussi que les résultats sont stockés dans le conteneur d’objets blob appelé **adfgetstarted** et dans le dossier appelé **partitioneddata**. La section **availability** indique que le jeu de données de sortie est produit tous les mois.
+1. Copiez et collez l’extrait ci-dessous dans la fenêtre Draft-1. Dans l’extrait de code JSON, vous créez un jeu de données appelé **AzureBlobOutput** et spécifiez la structure des données produites par le script Hive. Vous indiquez aussi que les résultats sont stockés dans le conteneur d’objets blob appelé **adfgetstarted** et dans le dossier appelé **partitioneddata**. La section **availability** indique que le jeu de données de sortie est produit tous les mois.
 
     ```JSON
     {
@@ -432,7 +432,7 @@ Dans ce didacticiel, vous avez créé une fabrique de données pour traiter des 
 * Création d’un pipeline avec une activité HDInsight Hive.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans cet article, vous avez créé un pipeline avec une activité de transformation (Activité HDInsight) qui exécute un script Hive sur un cluster HDInsight à la demande. Pour voir comment utiliser une activité de copie pour copier des données du Stockage Blob vers une base de données SQL, consultez [Tutoriel : Copier des données de Stockage Blob vers SQL Database](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
+Dans cet article, vous avez créé un pipeline avec une activité de transformation (Activité HDInsight) qui exécute un script Hive sur un cluster HDInsight à la demande. Pour voir comment utiliser une activité de copie pour copier des données du Stockage Blob vers Azure SQL Database, consultez [Tutoriel : Copier des données de Stockage Blob vers SQL Database](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 ## <a name="see-also"></a>Voir aussi
 | Rubrique | Description |

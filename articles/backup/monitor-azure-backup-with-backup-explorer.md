@@ -4,12 +4,12 @@ description: Cet article explique comment utiliser l'Explorateur de sauvegarde p
 ms.reviewer: dcurwin
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 87780124d531212a141520df65ff7408cc120e55
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: a50b9ee05be48113221f2a12f968540bd3a00b3b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82160987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88824410"
 ---
 # <a name="monitor-your-backups-with-backup-explorer"></a>Superviser vos sauvegardes avec l’Explorateur de sauvegarde
 
@@ -28,8 +28,9 @@ Ces fonctionnalités sont fournies prêtes à l'emploi par une intégration nati
 > * Pour le moment, l'Explorateur de sauvegarde est uniquement disponible pour les données des machines virtuelles Azure.
 > * L'Explorateur de sauvegarde a été conçu comme un tableau de bord opérationnel qui permet de visualiser les informations relatives à vos sauvegardes des 7 derniers jours (maximum).
 > * L’Explorateur de sauvegarde n’est actuellement pas pris en charge sur les clouds nationaux.
-> * Il est actuellement impossible de personnaliser le modèle de l'Explorateur de sauvegarde.
+> * Il est actuellement impossible de personnaliser le modèle de l’Explorateur de sauvegarde.
 > * Nous vous déconseillons de créer des automatisations personnalisées sur les données Azure Resource Graph.
+> * Actuellement, l’Explorateur de sauvegarde vous permet de surveiller les sauvegardes sur un maximum de 1 000 abonnements (sur tous les locataires).
 
 ## <a name="get-started"></a>Bien démarrer
 
@@ -77,7 +78,7 @@ Sélectionnez l'onglet **Stratégies** pour consulter des informations sur toute
 
 ### <a name="the-backup-not-enabled-tab"></a>L'onglet Sauvegarde non activée
 
-La sauvegarde doit être activée pour toutes les machines qui nécessitent une protection. Grâce à l'Explorateur de sauvegarde, les administrateurs de sauvegarde peuvent rapidement identifier les machines d'une organisation qui ne sont pas encore protégés par une sauvegarde. Pour afficher ces informations, sélectionnez l'onglet **Sauvegarde non activée**.
+La sauvegarde doit être activée pour toutes les machines qui nécessitent une protection. Grâce à l’Explorateur de sauvegarde, les administrateurs de sauvegarde peuvent rapidement identifier les machines d’une organisation qui ne sont pas encore protégés par une sauvegarde. Pour afficher ces informations, sélectionnez l'onglet **Sauvegarde non activée**.
 
 Le volet **Sauvegarde non activée** affiche la liste de machines non protégées sous forme de tableau. Votre organisation peut attribuer différentes étiquettes aux machines de production et aux machines de test, ou aux machines qui remplissent diverses fonctions. Dans la mesure où chaque classe de machines requiert une stratégie de sauvegarde distincte, le filtrage par étiquette vous permet d'afficher les informations spécifiques à chacune. La sélection du nom d'une machine vous redirige vers le volet **Configurer la sauvegarde** de cette machine, où vous pouvez choisir d'appliquer une stratégie de sauvegarde appropriée.
 
@@ -93,8 +94,8 @@ Sélectionnez l'icône « Épingler » disponible en haut de chaque tableau ou
 
 ## <a name="cross-tenant-views"></a>Vues multilocataires
 
-Si vous êtes un utilisateur d'Azure Lighthouse et que vous disposez d'un accès délégué aux abonnements de plusieurs environnements de locataires, vous pouvez utiliser le filtre d'abonnement par défaut. Pour afficher les abonnements dont vous souhaitez consulter les données, sélectionnez l'icône « Filtre » en haut à droite du portail Azure. Lorsque vous utilisez cette fonctionnalité, l'Explorateur de sauvegarde regroupe les informations de tous les coffres répartis sur les différents abonnements que vous avez sélectionnés. Pour en savoir plus, consultez [Présentation d'Azure Lighthouse](https://docs.microsoft.com/azure/lighthouse/overview).
+Si vous êtes un utilisateur d'Azure Lighthouse et que vous disposez d'un accès délégué aux abonnements de plusieurs environnements de locataires, vous pouvez utiliser le filtre d'abonnement par défaut. Pour afficher les abonnements dont vous souhaitez consulter les données, sélectionnez l'icône « Filtre » en haut à droite du portail Azure. Lorsque vous utilisez cette fonctionnalité, l'Explorateur de sauvegarde regroupe les informations de tous les coffres répartis sur les différents abonnements que vous avez sélectionnés. Pour en savoir plus, consultez [Présentation d'Azure Lighthouse](../lighthouse/overview.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Découvrir comment utiliser Azure Monitor pour obtenir des insights sur vos données de sauvegarde](https://docs.microsoft.com/azure/backup/backup-azure-monitoring-use-azuremonitor)
+[Découvrir comment utiliser Azure Monitor pour obtenir des insights sur vos données de sauvegarde](./backup-azure-monitoring-use-azuremonitor.md)

@@ -1,24 +1,22 @@
 ---
-title: Détecter un problème sur un hôte de la session Windows Virtual Desktop – Azure
-description: Guide pratique pour résoudre les problèmes pendant la configuration de machines virtuelles hôte de session Windows Virtual Desktop.
-services: virtual-desktop
+title: Détecter un problème sur un hôte de session Windows Virtual Desktop (classique) – Azure
+description: Guide pratique pour résoudre les problèmes pendant la configuration de machines virtuelles hôte de session Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
-ms.date: 03/30/2020
+ms.date: 05/11/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 7f3eaa54ecb39922a155e2ea65e15d38f2b138e4
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 90b4c574a03d8dee50beff60304fb5c1f3b52945
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614230"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008625"
 ---
-# <a name="session-host-virtual-machine-configuration"></a>Configuration d’une machine virtuelle hôte de session
+# <a name="windows-virtual-desktop-classic-session-host-virtual-machine-configuration"></a>Configuration de machines virtuelles hôte de session Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../troubleshoot-vm-configuration.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../troubleshoot-vm-configuration.md).
 
 Utilisez cet article pour résoudre les problèmes rencontrés lors de la configuration des machines virtuelles hôtes de session Windows Virtual Desktop.
 
@@ -118,7 +116,8 @@ Lorsque l’agent Windows Virtual Desktop est installé pour la première fois s
 
 ### <a name="error-the-status-filed-in-get-rdssessionhost-cmdlet-shows-status-as-unavailable"></a>Erreur : L’état consigné dans la cmdlet Get-RdsSessionHost indique Non disponible.
 
-![La cmdlet Get-RdsSessionHost indique un état Non disponible.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![La cmdlet Get-RdsSessionHost indique un état Non disponible.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 **Cause :** L’agent n’est pas en mesure de se mettre à jour vers une nouvelle version.
 
@@ -191,7 +190,8 @@ Si vous rencontrez des problèmes avec la pile côte à côte Windows Virtual De
 
 La sortie de **qwinsta** indique **rdp-sxs** si la pile côte à côte est installée et activée.
 
-![Pile côte à côte installée ou activée avec qwinsta indiquée par rdp-sxs dans la sortie.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![Pile côte à côte installée ou activée avec qwinsta indiquée par rdp-sxs dans la sortie.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 Examinez les entrées de registre répertoriées ci-dessous et vérifiez que leurs valeurs correspondent. En cas de clés de registre manquantes ou de valeurs incompatibles, suivez les instructions contenues dans [Créer un pool d’hôtes avec PowerShell](create-host-pools-powershell-2019.md) pour savoir comment réinstaller la pile côte à côte.
 
@@ -205,7 +205,8 @@ Examinez les entrées de registre répertoriées ci-dessous et vérifiez que leu
 
 ### <a name="error-o_reverse_connect_stack_failure"></a>Erreur : O_REVERSE_CONNECT_STACK_FAILURE
 
-![Code d'erreur O_REVERSE_CONNECT_STACK_FAILURE.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![Code d’erreur O_REVERSE_CONNECT_STACK_FAILURE.](../media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 **Cause :** La pile côte à côte n'est pas installée sur la machine virtuelle hôte de session.
 
@@ -247,19 +248,21 @@ Suivez ces instructions pour exécuter la correction à partir des mêmes sous-r
             psexec.exe \\<VMname> cmd
     ```
 
-    >[!Note]
+    >[!NOTE]
     >VMname correspond au nom de la machine virtuelle présentant un dysfonctionnement de pile côte à côte.
 
 7. Acceptez le Contrat de licence PsExec en cliquant sur Accepter.
 
-    ![Capture d'écran du Contrat de licence logiciel.](../media/SoftwareLicenseTerms.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran du Contrat de licence logiciel.](../media/SoftwareLicenseTerms.png)
 
-    >[!Note]
+    >[!NOTE]
     >Cette boîte de dialogue s’affiche uniquement lors de la première exécution de PsExec.
 
 8. Une fois la session d'invite de commandes ouverte sur la machine virtuelle présentant un dysfonctionnement de pile côte à côte, exécutez qwinsta et vérifiez qu'une entrée nommée rdp-sxs est disponible. Si ce n’est pas le cas, cela signifie qu'une pile côte à côte n’est pas présente et que le problème n'est pas lié à cette dernière.
 
-    ![Invite de commandes Administrateur](../media/AdministratorCommandPrompt.png)
+    > [!div class="mx-imgBorder"]
+    > ![Invite de commandes Administrateur](../media/AdministratorCommandPrompt.png)
 
 9. Exécutez la commande suivante afin de répertorier les composants Microsoft installés sur la machine virtuelle présentant un dysfonctionnement de pile côte à côte.
 
@@ -306,7 +309,7 @@ Si vous vous connectez à Windows 10 Entreprise multisession à l’aide d’un
 
 Si le délai limite expire, le message d’erreur « La session distante a été déconnectée, car aucune licence d’accès client Bureau à distance n’est disponible pour cet ordinateur » s’affiche.
 
-Si vous voyez l’un de ces messages, cela signifie que les dernières mises à jour Windows ne sont pas installées sur l’image ou que vous définissez le mode de licence Bureau à distance via la stratégie de groupe. Suivez les étapes décrites dans les sections suivantes pour vérifier le paramètre de stratégie de groupe, identifier la version de Windows 10 Entreprise multi-session et installer la mise à jour correspondante.  
+Si vous voyez l’un de ces messages, cela signifie que les dernières mises à jour Windows ne sont pas installées sur l’image ou que vous définissez le mode de licence Bureau à distance via la stratégie de groupe. Suivez les étapes décrites dans les sections suivantes pour vérifier le paramètre de stratégie de groupe, identifier la version de Windows 10 Entreprise multi-session et installer la mise à jour correspondante.
 
 >[!NOTE]
 >Windows Virtual Desktop nécessite une licence d’accès client (CAL) aux services Bureau à distance uniquement si votre pool d’hôtes contient des hôtes de session Windows Server. Pour savoir comment configurer une licence d’accès client aux services Bureau à distance, consultez [Gérer les licences de votre déploiement Services Bureau à distance avec des licences d’accès client (CAL)](/windows-server/remote/remote-desktop-services/rds-client-access-license/).
@@ -327,7 +330,8 @@ Pour identifier le numéro de votre version de Windows 10 Entreprise multisessi
 3. Sélectionnez **À propos de votre PC**.
 4. Regardez quel nombre figure à côté de « Version ». Le nombre doit être « 1809 » ou « 1903 », comme dans l’image suivante.
 
-    ![Capture d’écran de la fenêtre Spécifications Windows. Le numéro de version est mis en surbrillance en bleu.](../media/windows-specifications.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la fenêtre Spécifications Windows. Le numéro de version est mis en surbrillance en bleu.](../media/windows-specifications.png)
 
 Maintenant que vous connaissez le numéro de votre version, passez directement à la section correspondante.
 
@@ -338,6 +342,12 @@ Si votre numéro de version indique « 1809 », installez [la mise à jour KB4
 ### <a name="version-1903"></a>Version 1903
 
 Redéployez le système d’exploitation hôte avec la dernière version de l’image Windows 10 version 1903 à partir de la galerie Azure.
+
+## <a name="we-couldnt-connect-to-the-remote-pc-because-of-a-security-error"></a>Nous n’avons pas pu nous connecter à l’ordinateur distant en raison d’une erreur de sécurité
+
+Si vos utilisateurs reçoivent une erreur indiquant « Nous n’avons pas pu nous connecter à l’ordinateur distant en raison d’une erreur de sécurité. Si ce problème persiste, demandez de l’aide à votre administrateur ou support technique. », validez les éventuelles stratégies existantes qui modifient les autorisations RDP par défaut. L’une des stratégies pouvant provoquer l’apparition de cette erreur est « Autoriser l’ouverture de session par le biais d’une stratégie de sécurité des Services Bureau à distance ».
+
+Pour en savoir plus sur cette stratégie, consultez [Autoriser l’ouverture de session via les Services Bureau à distance](/windows/security/threat-protection/security-policy-settings/allow-log-on-through-remote-desktop-services).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

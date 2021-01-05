@@ -7,17 +7,17 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/20/2020
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 5b21fcd2d3ec5560b01352b112e9ed1bb2404766
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: a079cfe155119a6afe8575767dd3e7c09a564f9a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81678065"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96445632"
 ---
 # <a name="set-up-sign-in-for-a-specific-azure-active-directory-organization-in-azure-active-directory-b2c"></a>Configurer la connexion pour une organisation Azure Active Directory spécifique dans Azure Active Directory B2C
 
@@ -38,6 +38,7 @@ Pour utiliser Azure Active Directory (Azure AD) en tant que [fournisseur d’ide
     ```
 
     Par exemple : `https://login.microsoftonline.com/contoso.onmicrosoft.com/v2.0/.well-known/openid-configuration`.
+    Par exemple : `https://login.microsoftonline.com/contoso.com/v2.0/.well-known/openid-configuration`.
 
 1. Dans **ID client**, entrez l’ID d’application que vous avez enregistré précédemment.
 1. Dans **Clé secrète client**, entrez la clé secrète client que vous avez enregistrée précédemment.
@@ -50,6 +51,6 @@ Pour utiliser Azure Active Directory (Azure AD) en tant que [fournisseur d’ide
     * **Nom d’affichage** : *name*
     * **Prénom** : *given_name*
     * **Nom** : *family_name*
-    * **E-mail** : *unique_name*
+    * **Adresse e-mail** : *preferred_username*
 
 1. Sélectionnez **Enregistrer**.

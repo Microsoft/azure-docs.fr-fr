@@ -2,18 +2,18 @@
 title: Développer et déboguer des modules dans Visual Studio – Azure IoT Edge
 description: Utilisez Visual Studio avec les outils Azure IoT pour développer un module IoT Edge C ou C# et l’envoyer de votre IoT Hub à un appareil IoT, comme configuré par un manifeste de déploiement.
 services: iot-edge
-author: shizn
+author: kgremban
 manager: philmea
-ms.author: xshi
+ms.author: kgremban
 ms.date: 3/27/2020
 ms.topic: conceptual
 ms.service: iot-edge
-ms.openlocfilehash: 9722c7dec3a066d8f776424cb599be0d463416d9
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.openlocfilehash: 2ae6d46198d979f91de5bf31d389f75961b4ab88
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80384855"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96437165"
 ---
 # <a name="use-visual-studio-2019-to-develop-and-debug-modules-for-azure-iot-edge"></a>Utiliser Visual Studio 2019 pour développer et déboguer des modules pour Azure IoT Edge
 
@@ -32,7 +32,7 @@ Cet article vous explique comment utiliser Azure IoT Edge Tools pour Visual Stud
 
 Cet article part du principe que vous utilisez un ordinateur ou une machine virtuelle Windows comme machine de développement. Sur les ordinateurs Windows, vous pouvez développer des modules Windows ou Linux. Pour développer des modules Windows, utilisez un ordinateur Windows exécutant la version 1809/build 17763 ou une version plus récente. Pour développer des modules Linux, utilisez un ordinateur Windows qui est conforme à la [configuration requise pour Docker Desktop](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install).
 
-Comme cet article utilise Visual Studio 2019 comme outil de développement principal, installez Visual Studio. Veillez à inclure les charges de travail **Développement Azure** et de **Développement Desktop en C++** lorsque vous installez Visual Studio 2019. Vous pouvez [modifier Visual Studio 2019](https://docs.microsoft.com/visualstudio/install/modify-visual-studio?view=vs-2019) pour ajouter les charges de travail requises.
+Comme cet article utilise Visual Studio 2019 comme outil de développement principal, installez Visual Studio. Veillez à inclure les charges de travail **Développement Azure** et de **Développement Desktop en C++** lorsque vous installez Visual Studio 2019. Vous pouvez [modifier Visual Studio 2019](/visualstudio/install/modify-visual-studio?view=vs-2019&preserve-view=true) pour ajouter les charges de travail requises.
 
 Une fois votre Visual Studio 2019 prêt, vous avez également besoin des outils et composants suivants :
 
@@ -62,7 +62,7 @@ Une fois votre Visual Studio 2019 prêt, vous avez également besoin des outils 
   vcpkg.exe --triplet x64-windows integrate install
   ```
 
-- [Azure Container Registry](https://docs.microsoft.com/azure/container-registry/) ou [Hub Docker](https://docs.docker.com/docker-hub/repos/#viewing-repository-tags).
+- [Azure Container Registry](../container-registry/index.yml) ou [Hub Docker](https://docs.docker.com/docker-hub/repos/#viewing-repository-tags).
 
   > [!TIP]
   > Vous pouvez utiliser un registre Docker local pour le prototype et à des fins de test, au lieu d’un registre cloud.
@@ -98,7 +98,7 @@ Le modèle de projet Azure IoT Edge dans Visual Studio crée un projet qui peut 
 
    ![Créer un projet](./media/how-to-visual-studio-develop-csharp-module/create-new.png)
 
-1. Dans la fenêtre **Add IoT Edge Application and Module** (Ajouter une application et un module IoT Edge), sélectionnez **Module C#** ou **Module C**, puis spécifiez le nom et le référentiel d’image de votre module. Par défaut, Visual Studio nomme le module **localhost:5000/<nom de votre module\>** . Remplacez-le par vos propres informations de registre. Si vous utilisez un registre Docker local à des fins de test, **localhost** convient. Si vous utilisez Azure Container Registry, utilisez le serveur de connexion à partir des paramètres de votre registre. Le serveur de connexion se présente comme suit : **_\<nom du registre\>_ .azurecr.io**. Remplacez uniquement la partie **localhost:5000** de la chaîne afin d’obtenir le résultat final suivant : **\<*nom du registre*\>.azurecr.io/ _\<nom de votre module\>_** . Le nom par défaut du module est **IotEdgeModule1**
+1. Dans la fenêtre **Add IoT Edge Application and Module** (Ajouter une application et un module IoT Edge), sélectionnez **Module C#** ou **Module C**, puis spécifiez le nom et le référentiel d’image de votre module. Par défaut, Visual Studio nomme le module **localhost:5000/<nom de votre module\>** . Remplacez-le par vos propres informations de registre. Si vous utilisez un registre Docker local à des fins de test, **localhost** convient. Si vous utilisez Azure Container Registry, utilisez le serveur de connexion à partir des paramètres de votre registre. Le serveur de connexion se présente sous la forme **_\<registry name\>_ .azurecr.io**. Remplacez uniquement la partie **localhost : 5000** de la chaîne de sorte que le résultat se présente sous la forme **\<*registry name*\>. azurecr.io/ _\<your module name\>_**. Le nom par défaut du module est **IotEdgeModule1**
 
    ![Ajouter un application et un module](./media/how-to-visual-studio-develop-csharp-module/add-application-and-module.png)
 

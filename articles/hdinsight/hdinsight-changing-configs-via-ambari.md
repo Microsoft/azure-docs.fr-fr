@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 05/04/2020
-ms.openlocfilehash: a819c3a57efdc0ae87cf969fd7471818c51895f6
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 52eb1b6c89ff02cb44fe731c2463ab02c284f26c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793157"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86086447"
 ---
 # <a name="optimize-clusters-with-apache-ambari-in-azure-hdinsight"></a>Optimiser les clusters à l’aide d’Apache Ambari dans Azure HDInsight
 

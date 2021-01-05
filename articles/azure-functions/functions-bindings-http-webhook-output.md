@@ -6,11 +6,11 @@ ms.topic: reference
 ms.date: 02/21/2020
 ms.author: cshoe
 ms.openlocfilehash: a25658677e436edf4d001599bb4981f527016596
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235205"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84697440"
 ---
 # <a name="azure-functions-http-output-bindings"></a>Liaisons de sortie HTTP Azure Functions
 

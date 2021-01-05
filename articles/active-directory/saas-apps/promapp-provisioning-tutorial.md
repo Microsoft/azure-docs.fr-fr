@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Promapp pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Promapp.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 41190ba0-9032-4725-9d2c-b3dd9c7786e6
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 11/11/2019
 ms.author: Zhchia
-ms.openlocfilehash: 1a4a27846196e7eb134b834647b2a2d65672f385
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5ba9adbc8553e92eb76a4d3327681f798db19218
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77061003"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94359100"
 ---
 # <a name="tutorial-configure-promapp-for-automatic-user-provisioning"></a>Tutoriel : Configurer Promapp pour l’approvisionnement automatique d’utilisateurs
 
@@ -58,7 +54,7 @@ Avant de configurer et d’activer l’approvisionnement automatique d’utilisa
 
     ![Promapp – Console d’administration](media/promapp-provisioning-tutorial/admin.png)
 
-2.  Sous **Jetons d’accès**, cliquez sur le bouton **Créer un jeton**.
+2.  Sous **Jetons d’accès** , cliquez sur le bouton **Créer un jeton**.
 
     ![Promapp – Ajouter SCIM](media/promapp-provisioning-tutorial/addtoken.png)
 
@@ -80,7 +76,7 @@ Avant de configurer Promapp pour l’approvisionnement automatique d’utilisate
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -88,7 +84,7 @@ Avant de configurer Promapp pour l’approvisionnement automatique d’utilisate
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **Promapp**, sélectionnez **Promapp** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, entrez **Promapp** , sélectionnez **Promapp** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
     ![Promapp dans la liste des résultats](common/search-new-app.png)
 
@@ -97,11 +93,11 @@ Avant de configurer Promapp pour l’approvisionnement automatique d’utilisate
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Promapp en fonction des assignations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Promapp en suivant les instructions fournies dans le [tutoriel sur l’authentification unique Promapp](https://docs.microsoft.com/azure/active-directory/saas-apps/promapp-tutorial). La configuration de l’authentification unique est indépendante de celle de l’approvisionnement automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
+> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Promapp en suivant les instructions fournies dans le [tutoriel sur l’authentification unique Promapp](./promapp-tutorial.md). La configuration de l’authentification unique est indépendante de celle de l’approvisionnement automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-promapp-in-azure-ad"></a>Pour configurer l’approvisionnement automatique d’utilisateurs pour Promapp dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -111,27 +107,27 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://api.promapp.com/api/scim` dans **URL de locataire**. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Promapp. Si la connexion échoue, vérifiez que votre compte Promapp dispose des autorisations Administrateur et réessayez.
+5. Dans la section **Informations d’identification de l’administrateur** , entrez `https://api.promapp.com/api/scim` dans **URL de locataire**. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Promapp. Si la connexion échoue, vérifiez que votre compte Promapp dispose des autorisations Administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-6. Dans le champ **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+6. Dans le champ **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 7. Cliquez sur **Enregistrer**.
 
-8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur Promapp**.
+8. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur Promapp**.
 
     ![Promapp – Mappages d’utilisateurs](media/promapp-provisioning-tutorial/usermappings.png)
 
-9. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Promapp. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Promapp pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+9. Dans la section **Mappages des attributs** , passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Promapp. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Promapp pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Promapp – Attributs utilisateur](media/promapp-provisioning-tutorial/userattributes.png)
 
@@ -161,4 +157,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

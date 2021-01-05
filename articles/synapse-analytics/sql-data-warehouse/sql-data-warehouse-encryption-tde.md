@@ -1,24 +1,24 @@
 ---
-title: Transparent Data Encryption (Portail)
-description: Transparent Data Encryption (TDE) dans Azure Synapse Analytics
+title: Transparent Data Encryption (portail) pour pool SQL dédié (anciennement SQL DW)
+description: Transparent Data Encryption (TDE) pour pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics
 services: synapse-analytics
 author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/30/2019
 ms.author: jrasnick
 ms.reviewer: rortloff
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 247691326e3aa2c8027dd0318b23a2cbfcba1efe
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 45c7b53d3bbe0c57e96fc5435650c4e86b0cb032
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80745231"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96455268"
 ---
-# <a name="get-started-with-transparent-data-encryption-tde"></a>Prise en main du chiffrement transparent des données (TDE)
+# <a name="get-started-with-transparent-data-encryption-tde-for-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics"></a>Bien démarrer avec Transparent Data Encryption (TDE) pour pool SQL dédié (anciennement SQL DW) dans Azure Synapse Analytics
 
 > [!div class="op_single_selector"]
 >

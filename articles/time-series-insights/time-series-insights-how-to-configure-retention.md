@@ -5,19 +5,22 @@ ms.service: time-series-insights
 services: time-series-insights
 author: deepakpalled
 ms.author: dpalled
-manager: cshankar
+manager: diviso
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 04/16/2020
+ms.date: 09/29/2020
 ms.custom: seodec18
-ms.openlocfilehash: 524e47e5be142b720687ad48ee9407da23284bd4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 468b4f7ca7b0af4abc32df5d9ef64a74154d3de1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605049"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91569402"
 ---
-# <a name="configuring-retention-in-time-series-insights"></a>Configuration de la conservation des données dans Time Series Insights
+# <a name="configuring-retention-in-azure-time-series-insights-gen1"></a>Configuration de la conservation des données dans Azure Time Series Insights Gen1
+
+> [!CAUTION]
+> Il s’agit d’un article Gen1.
 
 Cet article explique comment configurer la **durée de conservation des données** et le **comportement de limite de stockage dépassée** dans Azure Time Series Insights.
 
@@ -30,13 +33,13 @@ Chaque environnement Time Series Insights dispose d’un paramètre supplémenta
 - **Vidage des données anciennes** (par défaut)
 - **Suspendre l’entrée**
 
-Pour plus d’informations sur ces paramètres, voir [Présentation de la conservation des données dans Time Series Insights](time-series-insights-concepts-retention.md).  
+Pour plus d’informations sur ces paramètres, afin de mieux les comprendre voir [Présentation de la conservation des données dans Time Series Insights](time-series-insights-concepts-retention.md).  
 
 ## <a name="configure-data-retention"></a>Configurer la rétention de données
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Recherchez votre environnement Time Series Insights existant. Sélectionnez **Toutes les ressources** dans le menu de gauche du portail Azure. Sélectionnez votre environnement Time Series Insights.
+1. Recherchez votre environnement Azure Time Series Insights existant. Sélectionnez **Toutes les ressources** dans le menu de gauche du portail Azure. Sélectionnez votre environnement Azure Time Series Insights.
 
 1. Sous le titre **paramètres**, sélectionnez **Configuration du stockage**.
 
@@ -54,8 +57,8 @@ Pour plus d’informations sur ces paramètres, voir [Présentation de la conser
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour plus d’informations, voir [Présentation de la conservation des données dans Time Series Insights](time-series-insights-concepts-retention.md).
+- Pour plus d’informations, voir [Présentation de la conservation des données dans Azure Time Series Insights](time-series-insights-concepts-retention.md).
 
-- Apprenez [comment mettre à l’échelle votre environnement Time Series Insights](time-series-insights-how-to-scale-your-environment.md).
+- Apprenez [comment mettre à l’échelle votre environnement Azure Time Series Insights](time-series-insights-how-to-scale-your-environment.md).
 
 - Découvrez la [planification de votre environnement](time-series-insights-environment-planning.md).

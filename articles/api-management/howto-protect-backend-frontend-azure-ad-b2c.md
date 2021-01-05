@@ -13,13 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/20/2020
 ms.author: wieastbu
-ms.custom: fasttrack-new
-ms.openlocfilehash: 3c5c13b3aae33b098de79a3429a299cc33f1c4f6
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.custom: fasttrack-new, devx-track-js
+ms.openlocfilehash: b157200b03bdc89e00bfa5c8264d78baf24875c1
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82202874"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97609120"
 ---
 # <a name="protect-spa-backend-with-oauth-20-azure-active-directory-b2c-and-azure-api-management"></a>Protéger le back-end d’une application monopage avec OAuth 2.0 à l’aide d’Azure Active Directory B2C et de Gestion des API Azure
 
@@ -396,7 +396,8 @@ Vous devez ajouter des blocs d’adresses au format CIDR au panneau de restricti
                     // Make the api call here
                 $.ajax({
                     type: "get",
-                    headers: {'Authorization': 'Bearer ' + token, 'Ocp-Apim-Subscription-Key': applicationConfig.subKey},                   url: applicationConfig.webApi
+                    headers: {'Authorization': 'Bearer ' + token, 'Ocp-Apim-Subscription-Key': applicationConfig.subKey},
+                    url: applicationConfig.webApi
                 }
                 ).done(function (body) {
                     document.getElementById("message").innerHTML = "The API Said " + body;
@@ -458,7 +459,7 @@ Vous devez ajouter des blocs d’adresses au format CIDR au panneau de restricti
 Les étapes ci-dessus peuvent être adaptées et modifiées pour autoriser de nombreuses utilisations différentes d’Azure AD B2C avec Gestion des API.
 
 ## <a name="next-steps"></a>Étapes suivantes
-* En savoir plus sur [Azure Active Directory et OAuth2.0](../active-directory/develop/authentication-scenarios.md).
+* En savoir plus sur [Azure Active Directory et OAuth2.0](../active-directory/develop/authentication-vs-authorization.md).
 * Découvrez plus de [vidéos](https://azure.microsoft.com/documentation/videos/index/?services=api-management) sur Gestion des API.
 * Pour les autres méthodes permettant de sécuriser votre service principal, consultez [Authentification mutuelle des certificats](api-management-howto-mutual-certificates.md).
 * [Création d’une instance du service Gestion des API](get-started-create-service-instance.md).

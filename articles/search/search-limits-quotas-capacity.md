@@ -7,34 +7,25 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 12/17/2019
-ms.openlocfilehash: b54905e201ee7a6dbf4c6837960a6e0b63057ea9
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.date: 10/14/2020
+ms.openlocfilehash: f3763857af1df8f34f38b36835a667c6610e1909
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80549052"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92107825"
 ---
 # <a name="service-limits-in-azure-cognitive-search"></a>Limites de service de la Recherche cognitive Azure
 
-Les limites maximales du stockage, des charges de travail et des quantités d’index et autres objets varient selon que vous [approvisionnez le service Recherche cognitive Azure](search-create-service-portal.md) avec les niveaux tarifaires **Gratuit**, **De base**, **Standard** ou **Stockage optimisé**.
+Les limites maximales du stockage, des charges de travail et des quantités d’index et autres objets varient selon que vous [approvisionnez le service Recherche cognitive Azure](search-create-service-portal.md) avec les niveaux tarifaires **Gratuit** , **De base** , **Standard** ou **Stockage optimisé** .
 
-+ **Gratuit** est un service partagé multi-locataire qui est fourni avec votre abonnement Azure. Les requêtes d’indexation et d’interrogation s’exécutent sur les réplicas et les partitions utilisés par d’autres locataires.
++ **Gratuit** est un service partagé multi-locataire qui est fourni avec votre abonnement Azure. 
 
-+ **De base** : fournit des ressources de calcul dédiées pour des charges de travail de production à plus petite échelle, mais partage une infrastructure réseau avec d’autres locataires.
++ **De base**  : fournit des ressources de calcul dédiées pour des charges de travail de production à plus petite échelle, mais partage une infrastructure réseau avec d’autres locataires.
 
-+ Le niveau **Standard** est exécuté sur des ordinateurs dédiés, avec une capacité de stockage et de traitement beaucoup plus grande, et ce, à chaque niveau. Le niveau Standard se décompose en quatre catégories : S1, S2, S3 et S3 HD.
++ Le niveau **Standard** est exécuté sur des ordinateurs dédiés, avec une capacité de stockage et de traitement beaucoup plus grande, et ce, à chaque niveau. Le niveau Standard se décompose en quatre catégories : S1, S2, S3 et S3 HD. La catégorie S3 HD (S3 High Density) est conçue pour des [utilisateurs multiples](search-modeling-multitenant-saas-applications.md) et de grandes quantités de petits index (trois mille index par service). S3 HD ne fournit pas la [fonctionnalité d’indexeur](search-indexer-overview.md) et l’ingestion des données doit tirer parti des API qui envoient (push) les données de la source vers l’index. 
 
-+ **Stockage optimisé** s’exécute sur des ordinateurs dédiés avec plus de stockage total, de bande passante de stockage et de mémoire que **Standard**. Stockage optimisé est disponible en deux niveaux : L1 et L2
-
-> [!NOTE]
-> À compter du 1er juillet, tous les niveaux seront à la disposition générale, y compris le niveau À stockage optimisé. Tous les tarifs sont disponibles sur la page [Détails de la tarification](https://azure.microsoft.com/pricing/details/search/).
-
-  La catégorie S3 HD (S3 High Density) est conçue pour des charges de travail spécifiques : [une architecture multilocataire](search-modeling-multitenant-saas-applications.md) et de grandes quantités de petits index (trois mille index par service). Elle ne fournit pas la [fonctionnalité d’indexeur](search-indexer-overview.md). Dans S3 HD, l’ingestion des données doit tirer parti de l’approche push en appelant des API pour envoyer (push) les données de la source vers l’index. 
-
-> [!NOTE]
-> Un service est approvisionné à un niveau spécifique. Si vous avez besoin de passer au niveau supérieur pour obtenir plus de capacité, vous devez provisionner un nouveau service (la mise à niveau sur place n’est pas disponible). Pour en savoir plus, consultez [Choisir une référence (SKU) ou un niveau tarifaire](search-sku-tier.md). Pour en savoir plus sur le réglage de capacité dans un service que vous avez déjà approvisionné, consultez [Mettre à l’échelle des niveaux de ressources pour interroger et indexer les charges de travail](search-capacity-planning.md).
->
++ **Stockage optimisé** s’exécute sur des ordinateurs dédiés avec plus de stockage total, de bande passante de stockage et de mémoire que **Standard** . Ce niveau cible les index volumineux et à variation lente. Stockage optimisé est disponible en deux niveaux : L1 et L2.
 
 ## <a name="subscription-limits"></a>Limites d’abonnement
 [!INCLUDE [azure-search-limits-per-subscription](../../includes/azure-search-limits-per-subscription.md)]
@@ -53,16 +44,13 @@ Les limites maximales du stockage, des charges de travail et des quantités d’
 | Nombre maximal de champs de collection complexe par index |40 |40 |40 |40 |40 |40 |40 |40 |
 | Nombre maximal d’éléments dans toutes les collections complexes par document&nbsp;<sup>2</sup> |3000 |3000 |3000 |3000 |3000 |3000 |3000 |3000 |
 | Profondeur maximale des champs complexes |10 |10 |10 |10 |10 |10 |10 |10 |
-| Nombre maximal de [générateurs de suggestions](https://docs.microsoft.com/rest/api/searchservice/suggesters) par index |1 |1 |1 |1 |1 |1 |1 |1 |
-| Nombre maximal de [profils de score](https://docs.microsoft.com/rest/api/searchservice/add-scoring-profiles-to-a-search-index) par index |100 |100 |100 |100 |100 |100 |100 |100 |
+| Nombre maximal de [générateurs de suggestions](/rest/api/searchservice/suggesters) par index |1 |1 |1 |1 |1 |1 |1 |1 |
+| Nombre maximal de [profils de score](/rest/api/searchservice/add-scoring-profiles-to-a-search-index) par index |100 |100 |100 |100 |100 |100 |100 |100 |
 | Nombre maximal de fonctions par profil |8 |8 |8 |8 |8 |8 |8 |8 |
 
 <sup>1</sup> Les services de base créés avant décembre 2017 présentent des limites inférieures (5 au lieu de 15) sur les index. Le niveau De base est la seule référence soumise à une limite inférieure de 100 champs par index.
 
-<sup>2</sup> Le fait d’avoir un très grand nombre d’éléments dans des collections complexes par document entraîne actuellement une utilisation élevée du stockage. Il s'agit d'un problème connu. En attendant, une limite de 3 000 est une limite supérieure sûre pour tous les niveaux de service. Cette limite est appliquée seulement aux opérations d’indexation qui utilisent la version de l’API en disponibilité générale la plus ancienne qui prend en charge les champs de type complexe (`2019-05-06`). Pour que les clients qui utilisent des versions antérieures de l’API en préversion (qui prennent en charge les champs de type complexe) continuent de fonctionner, nous n’appliquons pas cette limite pour les opérations d’indexation qui utilisent ces versions de l’API en préversion. Notez que les versions de l’API en préversion ne sont pas destinées à être utilisées pour des scénarios de production et que nous recommandons vivement aux clients de passer à la dernière version de l’API en disponibilité générale.
-
-> [!NOTE]
-> Alors que la capacité maximale d’un seul index est généralement limitée par le stockage disponible, il existe des limites supérieures maximales sur le nombre total de documents qui peuvent être stockés dans un seul index. Cette limite est d’environ 24 milliards de documents par index pour les services de recherche De base, S1, S2 et S3, et de 2 milliards de documents par index pour les services de recherche S3 HD. Chaque élément d’une collection complexe compte en tant que document distinct pour les besoins de ces limites.
+<sup>2</sup> Il existe une limite supérieure pour les éléments, car un grand nombre d’entre eux augmente considérablement la capacité de stockage nécessaire à votre index. Un élément d’une collection complexe est défini en tant que membre de cette collection. Supposons, par exemple, qu’un [document Hôtel avec une collection complexe de Chambres](search-howto-complex-data-types.md#indexing-complex-types), chaque espace de la collection Chambres est considéré comme un élément. Pendant l’indexation, le moteur d’indexation peut traiter en toute sécurité un maximum de 3 000 éléments dans l’ensemble du document. [Cette limite](search-api-migration.md#upgrade-to-2019-05-06) a été introduite dans `api-version=2019-05-06` et s’applique uniquement aux collections complexes, et non aux collections de chaînes ou aux champs complexes.
 
 <a name="document-limits"></a>
 
@@ -70,7 +58,10 @@ Les limites maximales du stockage, des charges de travail et des quantités d’
 
 À compter d’octobre 2018, il n’y a plus de limites du nombre de documents pour tout nouveau service créé, quel que soit le niveau facturable (De base, S1, S2, S3, S3 HD) et la région. Les services plus anciens créés avant octobre 2018 peuvent toujours être soumis à des limites de nombre de documents.
 
-Pour déterminer si des limites du document sont définies pour votre service, utilisez l’[API REST GET Service Statistics](https://docs.microsoft.com/rest/api/searchservice/get-service-statistics). Les limites du document figurent dans la réponse, `null` indiquant aucune limite.
+Pour déterminer si des limites du document sont définies pour votre service, utilisez l’[API REST GET Service Statistics](/rest/api/searchservice/get-service-statistics). Les limites du document figurent dans la réponse, `null` indiquant aucune limite.
+
+> [!NOTE]
+> Bien qu’il n’y ait aucune limite de document imposée par le service, il existe une limite de partition d’environ 24 milliards de documents par index sur les services de recherche de base, S1, S2 et S3. Pour S3 HD, la limite de partition est de 2 milliards de documents par index. Chaque élément d’une collection complexe compte comme un document distinct en termes de limites de partition.
 
 ### <a name="document-size-limits-per-api-call"></a>Limites de taille de document par appel d’API
 
@@ -78,7 +69,7 @@ La taille maximale d’un document lors de l’appel d’une API d’index est d
 
 La taille du document est en fait une limite de taille du corps de requête de l’API d’index. Étant donné que vous pouvez transmettre en une seule fois un lot de plusieurs documents à l’API d’index, la limite de taille dépend en réalité du nombre de documents présents dans le lot. Pour un lot comprenant un seul document, la taille maximale du document est de 16 Mo de JSON.
 
-Pour réduire la taille du document, pensez à exclure de la requête les données non requêtables. Les images et autres données binaires ne sont pas directement requêtables et ne doivent pas être stockées dans l’index. Pour intégrer les données non requêtables dans les résultats de la recherche, définissez un champ sans possibilité de recherche qui stocke une référence URL à la ressource.
+Lorsque vous estimez la taille du document, n’oubliez pas de prendre en compte uniquement les champs qui peuvent être utilisés par un service de recherche. Toutes les données binaires ou d’image des documents sources doivent être omises de vos calculs.  
 
 ## <a name="indexer-limits"></a>Limites de l’indexeur
 
@@ -92,8 +83,8 @@ Les durées d’exécution maximales existent pour fournir équilibre et stabili
 | Compétences maximales <sup>4</sup> |3 |5 ou 15 |50 |200 |200 |N/A |10 |10 |
 | Charge d’indexation maximale par appel |10 000 documents |Limité uniquement par le nombre maximal de documents |Limité uniquement par le nombre maximal de documents |Limité uniquement par le nombre maximal de documents |Limité uniquement par le nombre maximal de documents |N/A |Aucune limite |Aucune limite |
 | Planification minimale | 5 minutes |5 minutes |5 minutes |5 minutes |5 minutes |5 minutes |5 minutes | 5 minutes |
-| Durée maximale d’exécution <sup>5</sup> | 1-3 minutes |24 heures |24 heures |24 heures |24 heures |N/A  |24 heures |24 heures |
-| Valeur maximale pour l’exécution de recherches cognitives ou de l’indexation d’objets blob avec analyse d’images <sup>5</sup> | 3-10 minutes |2 heures |2 heures |2 heures |2 heures |N/A  |2 heures |2 heures |
+| Durée maximale d’exécution| 1-3 minutes |24 heures |24 heures |24 heures |24 heures |N/A  |24 heures |24 heures |
+| Durée d’exécution maximale pour les indexeurs avec un ensemble de compétences <sup>5</sup> | 3-10 minutes |2 heures |2 heures |2 heures |2 heures |N/A  |2 heures |2 heures |
 | Indexeur d’objets blob : taille maximale des objets blob, en Mo |16 |16 |128 |256 |256 |N/A  |256 |256 |
 | Indexeur d’objets blob : nombre maximal de caractères du contenu extrait d’un objet blob |32 000 |64 000 |4&nbsp;millions |8&nbsp;millions |16&nbsp;millions |N/A |4&nbsp;millions |4&nbsp;millions |
 
@@ -105,14 +96,29 @@ Les durées d’exécution maximales existent pour fournir équilibre et stabili
 
 <sup>4</sup> Nombre maximal de 30 compétences par group de compétences.
 
-<sup>5</sup> Les charges de travail de recherche cognitive et d’analyse d’images dans l’indexation d’objets blob Azure ont des durées d’exécution plus courtes que l’indexation de texte standard. L’analyse d’images et le traitement en langage naturel sont gourmands en ressources et consomment une quantité disproportionnée de la puissance de traitement disponible. Leur durée d’exécution a été réduite pour donner aux autres travaux de la file d’attente la possibilité de s’exécuter.  
+<sup>5</sup> L’enrichissement par IA et l’analyse d’images sont gourmands en ressources et consomment une quantité disproportionnée de la puissance de traitement disponible. Le temps d’exécution de ces charges de travail a été réduit pour permettre l’exécution d’autres tâches dans la file d’attente.
 
 > [!NOTE]
 > Comme indiqué dans les [limites des index](#index-limits), les indexeurs appliquent également la limite supérieure de 3 000 éléments à toutes les collections complexes par document, en commençant par la dernière version de l’API en disponibilité générale qui prend en charge les types complexes (`2019-05-06`). Cela signifie que si vous avez créé votre indexeur avec une version antérieure de l’API, vous ne serez pas soumis à cette limite. Pour préserver une compatibilité maximale, un indexeur qui a été créé avec une version antérieure de l’API, puis mis à jour avec une version de l’API `2019-05-06` ou ultérieure, sera toujours **exclu** des limites. Les clients doivent être conscients de l’impact négatif dans le cas de collections complexes très grandes (comme indiqué précédemment) et nous recommandons vivement de créer les indexeurs avec la dernière version de l’API en disponibilité générale.
 
+## <a name="shared-private-link-resource-limits"></a>Limites de ressource de liaison privée partagée
+
+Les indexeurs peuvent accéder aux autres ressources Azure [via des points de terminaison privés](search-indexer-howto-access-private.md) gérés via [l’API de ressource de liaison privée partagée](/rest/api/searchmanagement/sharedprivatelinkresources). Cette section décrit les limites associées à cette fonctionnalité.
+
+| Ressource | Gratuit | De base | S1 | S2 | S3 | S3 HD | L1 | L2
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Prise en charge de l’indexeur de point de terminaison privé | Non | Oui | Oui | Oui | Oui | Non | Oui | Oui |
+| Prise en charge du point de terminaison privé pour les indexeurs avec un ensemble de compétences<sup>1</sup> | Non | Non | Non | Oui | Oui | Non | Oui | Oui |
+| Nombre maximal de points de terminaison privés | N/A | 10 ou 30 | 100 | 400 | 400 | N/A | 20 | 20 |
+| Nombre maximal de types de ressources distincts<sup>2</sup> | N/A | 4 | 7 | 15 | 15 | N/A | 4 | 4 |
+
+<sup>1</sup> L’enrichissement par IA et l’analyse d’images sont gourmands en ressources et consomment une quantité disproportionnée de la puissance de traitement disponible. Pour cette raison, les connexions privées sont désactivées sur les niveaux inférieurs afin d’éviter un impact négatif sur les performances et la stabilité du service de recherche lui-même.
+
+<sup>2</sup> Le nombre de types de ressources distincts est calculé comme le nombre de valeurs de `groupId` uniques utilisées dans toutes les ressources de liaison privée partagée pour un service de recherche donné, quel que soit l’état de la ressource.
+
 ## <a name="synonym-limits"></a>Limites des synonymes
 
-Le nombre maximal de mappages de synonymes autorisé varie en fonction du niveau de tarification. Chaque règle peut avoir jusqu’à 20 expansions, où une expansion est un terme equivalvent. Par exemple, pour le mot « chat », l’association avec « minou », « félin » et « felis » (le genre des chats) est comptée comme 3 expansions.
+Le nombre maximal de cartes de synonymes varie en fonction du niveau. Chaque règle peut avoir jusqu’à 20 expansions, où une expansion est un terme equivalvent. Par exemple, pour le mot « chat », l’association avec « minou », « félin » et « felis » (le genre des chats) est comptée comme 3 expansions.
 
 | Ressource | Gratuit | De base | S1 | S2 | S3 | S3-HD |L1 | L2 |
 | -------- | -----|------ |----|----|----|-------|---|----|
@@ -125,11 +131,11 @@ Les estimations du nombre de requêtes par seconde doivent être développées i
 
 Les estimations sont plus prévisibles si elles sont calculées sur des services qui s’exécutent sur des ressources dédiées (niveaux De base et Standard). Vous pouvez mieux estimer les requêtes par seconde, car vous contrôlez davantage de paramètres. Pour obtenir de l’aide sur la manière d’aborder les estimations, consultez [Performances et optimisation de Recherche cognitive Azure](search-performance-optimization.md).
 
-Pour les niveaux Stockage optimisé, attendez-vous à un plus faible débit des requêtes et à une latence plus élevée que les niveaux Standard.  La méthodologie pour estimer les performances des requêtes est la même que pour les niveaux Standard.
+Pour les niveaux à stockage optimisé (L1 et L2), attendez-vous à un plus faible débit des requêtes et à une latence plus élevée que les niveaux Standard.
 
 ## <a name="data-limits-ai-enrichment"></a>Limites de données (enrichissement de l’IA)
 
-Un [pipeline d’enrichissement par IA](cognitive-search-concept-intro.md) faisant appel à une ressource Analyse de texte pour la [reconnaissance d’entités](cognitive-search-skill-entity-recognition.md), l’[extraction de phrases clés](cognitive-search-skill-keyphrases.md), l’[analyse des sentiments](cognitive-search-skill-sentiment.md), la [détection de langue](cognitive-search-skill-language-detection.md) et la [détection PII](cognitive-search-skill-pii-detection.md) est sujet à des limites de données. La taille maximale d’un enregistrement doit être de 50 000 caractères telle que mesurée par [`String.Length`](https://docs.microsoft.com/dotnet/api/system.string.length). Si vous avez besoin de découper vos données avant de les envoyer à l’Analyseur des sentiments, utilisez la [compétence Fractionnement du texte](cognitive-search-skill-textsplit.md).
+Un [pipeline d’enrichissement par IA](cognitive-search-concept-intro.md) faisant appel à une ressource Analyse de texte pour la [reconnaissance d’entités](cognitive-search-skill-entity-recognition.md), l’[extraction de phrases clés](cognitive-search-skill-keyphrases.md), l’[analyse des sentiments](cognitive-search-skill-sentiment.md), la [détection de la langue](cognitive-search-skill-language-detection.md) et la [détection d’informations personnelles](cognitive-search-skill-pii-detection.md) est soumis à des limites de données. La taille maximale d’un enregistrement doit être de 50 000 caractères telle que mesurée par [`String.Length`](/dotnet/api/system.string.length). Si vous avez besoin de découper vos données avant de les envoyer à l’Analyseur des sentiments, utilisez la [compétence Fractionnement du texte](cognitive-search-skill-textsplit.md).
 
 ## <a name="throttling-limits"></a>Limites de la limitation
 
@@ -150,7 +156,7 @@ Limites de taux de requêtes statiques pour les opérations liées à un index 
 * 32 champs maximum dans la clause $orderby
 * La taille maximale des termes de recherche du texte encodé en UTF-8 est de 32 766 octets (32 Ko moins 2 octets)
 
-<sup>1</sup> Dans la Recherche cognitive Azure, le corps d’une requête est soumis à une limite supérieure de 16 Mo. Cela signifie qu’une limite pratique est imposée au contenu des champs individuels ou des collections qui ne font pas l’objet de limites théoriques (pour plus d’informations sur la composition et les restrictions des champs, consultez [Types de données pris en charge](https://docs.microsoft.com/rest/api/searchservice/supported-data-types)).
+<sup>1</sup> Dans la Recherche cognitive Azure, le corps d’une requête est soumis à une limite supérieure de 16 Mo. Cela signifie qu’une limite pratique est imposée au contenu des champs individuels ou des collections qui ne font pas l’objet de limites théoriques (pour plus d’informations sur la composition et les restrictions des champs, consultez [Types de données pris en charge](/rest/api/searchservice/supported-data-types)).
 
 ## <a name="api-response-limits"></a>Limites de réponse d’API
 * 1 000 documents maximum retournés par page de résultats de recherche

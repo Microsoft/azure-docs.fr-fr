@@ -1,162 +1,205 @@
 ---
-title: Pool d’hôtes Windows Virtual Desktop Place de marché Azure - Azure
-description: Guide pratique pour créer un pool d’hôtes Windows Virtual Desktop à l’aide de la Place de marché Azure.
-services: virtual-desktop
+title: Pool d’hôtes Windows Virtual Desktop Portail Azure - Azure
+description: Guide pratique pour créer un pool d’hôtes Windows Virtual Desktop à l’aide du portail Azure.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: tutorial
-ms.date: 03/09/2020
+ms.date: 09/14/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: d5165b160ffc196416052a56aaa0d93c05db56bc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 2830d8b82f5b53300d0af3f48e55b573d78ad295
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222286"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91287387"
 ---
-# <a name="tutorial-create-a-host-pool-by-using-the-azure-marketplace"></a>Tutoriel : Créer un pool d’hôtes en utilisant la Place de marché Azure
+# <a name="tutorial-create-a-host-pool-with-the-azure-portal"></a>Tutoriel : Créer un pool d’hôtes avec le portail Azure
 
-Dans ce tutoriel, vous allez apprendre à créer un pool d’hôtes avec un locataire Windows Virtual Desktop à l’aide d’une offre de la Place de marché Microsoft Azure.
+>[!IMPORTANT]
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/create-host-pools-azure-marketplace-2019.md). Les objets que vous créez avec Windows Virtual Desktop (classique) ne peuvent pas être gérés avec le portail Azure.
 
-Les pools d'hôtes sont des ensembles d'une ou de plusieurs machines virtuelles identiques dans des environnements de locataires Windows Virtual Desktop. Chaque pool d’hôtes peut contenir un groupe d’applications avec lequel les utilisateurs peuvent interagir comme ils le feraient sur un ordinateur de bureau physique.
+Les pools d’hôtes sont des ensembles d’une ou plusieurs machines virtuelles identiques dans des environnements Windows Virtual Desktop. Chaque pool d’hôtes peut contenir un groupe d’applications avec lequel les utilisateurs peuvent interagir comme ils le feraient sur un ordinateur de bureau physique.
 
-Les tâches de ce tutoriel sont les suivantes :
-
-> [!div class="checklist"]
->
-> * Créez un pool d’hôtes dans Windows Virtual Desktop.
-> * Créez un groupe de ressources avec des machines virtuelles dans un abonnement Azure.
-> * Joignez les machines virtuelles au domaine Active Directory.
-> * Inscrivez les machines virtuelles avec Windows Virtual Desktop.
+Cet article vous guide tout au long du processus de création d’un pool d’hôtes pour un environnement Windows Virtual Desktop par le biais du portail Azure. Cette méthode offre une interface basée sur un navigateur pour créer un pool d’hôtes dans Windows Virtual Desktop, créer un groupe de ressources avec des machines virtuelles dans un abonnement Azure, joindre ces machines virtuelles au domaine Azure Active Directory (AD) et inscrire les machines virtuelles auprès de Windows Virtual Desktop.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un locataire dans Virtual Desktop. Un précédent [tutoriel](tenant-setup-azure-active-directory.md) crée un locataire.
-* [Module PowerShell Windows Virtual Desktop](/powershell/windows-virtual-desktop/overview/).
+Vous devez entrer les paramètres suivants pour créer un pool d’hôtes :
 
-Une fois que vous disposez de ce module, exécutez l’applet de commande suivante pour vous connecter à votre compte :
+- Nom de l’image de machine virtuelle
+- Configuration des machines virtuelles
+- Propriétés du domaine et du réseau
+- Propriétés du pool d’hôtes Windows Virtual Desktop
 
-```powershell
-Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
-```
+Vous devez également connaître les éléments suivants :
 
-## <a name="sign-in-to-azure"></a>Connexion à Azure
+- Emplacement de la source de l’image que vous voulez utiliser. Provient-elle de la galerie Azure ou s’agit-il d’une image personnalisée ?
+- Informations d’identification de jonction de domaine.
 
-Connectez-vous au [portail Azure](https://portal.azure.com).
+En outre, assurez-vous d’avoir inscrit le fournisseur de ressources Microsoft.DesktopVirtualization. Si vous ne l’avez pas encore fait, accédez à **Abonnements**, sélectionnez le nom de votre abonnement, puis **Fournisseurs de ressources**. Recherchez DesktopVirtualization, sélectionnez Microsoft.DesktopVirtualization, puis Inscrire.
 
-## <a name="run-the-azure-marketplace-offering-to-provision-a-new-host-pool"></a>Exécuter l’offre de la Place de marché Azure pour provisionner un nouveau pool d’hôtes
+Lorsque vous créez un pool d’hôtes Windows Virtual Desktop avec le modèle Azure Resource Manager, vous pouvez créer une machine virtuelle à partir de la galerie Azure, d’une image managée ou d’une image non managée. Pour en savoir plus sur la création d’images de machines virtuelles, voir [Préparer un disque dur virtuel Windows à charger sur Azure](../virtual-machines/windows/prepare-for-upload-vhd-image.md) et [Créer une image managée d’une machine virtuelle généralisée dans Azure](../virtual-machines/windows/capture-image-resource.md).
 
-Pour exécuter l’offre de la Place de marché Azure pour provisionner un nouveau pool d’hôtes :
+Si vous n’avez pas encore d’abonnement Azure, veillez à [créer un compte](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer à suivre ces instructions.
 
-1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
-1. Entrez **Windows Virtual Desktop** dans la fenêtre de recherche de la Place de marché.
-1. Sélectionnez **Windows Virtual Desktop - Provisionner un pool d’hôtes**, puis **Créer**.
+## <a name="begin-the-host-pool-setup-process"></a>Démarrer le processus de création du pool d’hôtes
 
-Ensuite, suivez les instructions indiquées dans la section suivante pour entrer les informations relatives aux onglets appropriés.
+Pour commencer à créer votre nouveau pool d’hôtes
 
-### <a name="basics"></a>Concepts de base
+1. Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.azure.com/).
+   
+   >[!NOTE]
+   > Si vous vous connectez au portail US Gov, accédez à [https://portal.azure.us/](https://portal.azure.us/) à la place.
 
-Voici la procédure à suivre pour l’onglet **Informations de base** :
+2. Entrez **Windows Virtual Desktop** dans la barre de recherche, puis recherchez et sélectionnez **Windows Virtual Desktop** sous Services.
 
-1. Sélectionnez un **Abonnement**.
-1. Pour **Groupe de ressources**, sélectionnez **Création** et indiquez un nom pour le nouveau groupe de ressources.
-1. Sélectionnez une **Région**.
-1. Entrez un nom pour le pool d’hôtes. Il doit être unique dans le locataire Windows Virtual Desktop.
-1. Sélectionnez **Type de bureau**. Si vous sélectionnez **Personnel**, chaque utilisateur qui se connecte à ce pool d’hôtes est affecté de façon permanente à une machine virtuelle.
-1. Entrez les utilisateurs qui peuvent se connecter aux clients Windows Virtual Desktop et accéder à un bureau. Utilisez une liste séparée par des virgules. Par exemple, si vous voulez accorder l’accès à `user1@contoso.com` et `user2@contoso.com`, entrez *`user1@contoso.com,user2@contoso.com`* .
-1. Pour **Emplacement des métadonnées de service**, sélectionnez le même emplacement que le réseau virtuel qui dispose d’une connectivité au serveur Active Directory.
+3. Dans la page de vue d’ensemble de **Windows Virtual Desktop**, sélectionnez **Créer un pool d’hôtes**.
 
-   >[!IMPORTANT]
-   >Si vous utilisez une solution Azure Active Directory Domain Services (Azure AD DS) et Azure Active Directory (Azure AD) pure, veillez à déployer votre pool d’hôtes dans la même région que votre instance Azure AD DS pour éviter les erreurs de jonction de domaine et d’informations d’identification.
+4. Sous l’onglet **De base**, sélectionnez l’abonnement approprié sous Détails du projet.
 
-1. Sélectionnez **Suivant : Configurer des machines virtuelles**.
+5. Sélectionnez un groupe de ressources existant dans le menu déroulant ou sélectionnez **Créer** pour créer un groupe de ressources.
 
-### <a name="configure-virtual-machines"></a>Configurer des machines virtuelles
+6. Entrez un nom unique pour votre pool d’hôtes.
 
-Pour l’onglet **Configurer des machines virtuelles** :
+7. Dans le champ Emplacement, sélectionnez dans le menu déroulant la région dans laquelle vous souhaitez créer le pool d’hôtes.
 
-1. Acceptez les valeurs par défaut ou personnalisez le nombre et la taille des machines virtuelles.
+   La zone géographique Azure associée aux régions sélectionnées est l’emplacement où seront stockées les métadonnées de ce pool d’hôtes et ses objets connexes. Veillez à choisir les régions à l’intérieur de la zone géographique dans laquelle vous souhaitez stocker les métadonnées de service.
+
+     > [!div class="mx-imgBorder"]
+     > ![Capture d’écran du portail Azure montrant le champ Emplacement avec l’emplacement USA Est sélectionné. En regard du champ figure le texte « Les métadonnées seront stockées dans USA Est ».](media/portal-location-field.png)
+
+8. Sous Type de pool d’hôtes, indiquez si votre pool d’hôtes sera **Personnel** ou **Groupé**.
+
+    - Si vous choisissez **Personnel**, sélectionnez **Automatique** ou **Direct** dans le champ Type d’affectation.
+
+      > [!div class="mx-imgBorder"]
+      > ![Capture d’écran du menu déroulant du champ Type d’affectation. L’utilisateur a sélectionné Automatique.](media/assignment-type-field.png)
+
+9.  Si vous choisissez **Groupé**, entrez les informations suivantes :
+
+     - Pour **Limite de session maximale**, entrez le nombre maximal d’utilisateurs dont vous souhaitez équilibrer la charge sur un seul hôte de session.
+     - Pour **Algorithme d’équilibrage de charge**, choisissez l’équilibrage de charge en profondeur d’abord ou en largeur d’abord, en fonction de votre modèle d’utilisation.
+
+       > [!div class="mx-imgBorder"]
+       > ![Capture d’écran du champ Type d’affectation avec l’option « Groupé » sélectionnée. L’utilisateur pointe son curseur sur Largeur d’abord dans le menu déroulant de l’équilibrage de charge.](media/pooled-assignment-type.png)
+
+10. Sélectionnez **Suivant : Machines virtuelles >** .
+
+11. Si vous avez déjà créé des machines virtuelles et que vous souhaitez les utiliser avec le nouveau pool d’hôtes, sélectionnez **Non**, **Suivant : Espace de travail >** , puis accédez à la section [Informations sur l’espace de travail](#workspace-information). Si vous souhaitez créer des machines virtuelles et les inscrire auprès du nouveau pool d’hôtes, sélectionnez **Oui**.
+
+Maintenant que vous avez terminé la première partie, passons à la partie suivante du processus, où nous allons créer la machine virtuelle.
+
+## <a name="virtual-machine-details"></a>Détails de machine virtuelle
+
+La première partie étant terminée, vous allez devoir configurer votre machine virtuelle.
+
+Pour configurer votre machine virtuelle durant le processus de création du pool d’hôtes
+
+1. Sous **Groupe de ressources**, choisissez le groupe de ressources dans lequel vous souhaitez créer les machines virtuelles. Il peut s’agir d’un groupe de ressources différent de celui que vous avez utilisé pour le pool d’hôtes.
+
+2. Choisissez l’**emplacement de machine virtuelle** où vous souhaitez créer les machines virtuelles. Elle peut être identique ou différente de la région que vous avez sélectionnée pour le pool d’hôtes.
+
+3. Ensuite, choisissez la **taille de machine virtuelle** que vous souhaitez utiliser. Vous pouvez soit conserver la taille par défaut, soit sélectionner **Modifier la taille** pour changer de taille. Si vous sélectionnez **Modifier la taille**, dans la fenêtre qui s’affiche, choisissez la taille de la machine virtuelle adaptée à votre charge de travail.
+
+4. Sous **Nombre de machines virtuelles**, indiquez le nombre de machines virtuelles que vous souhaitez créer pour votre pool d’hôtes.
 
     >[!NOTE]
-    >Si la taille de machine virtuelle que vous recherchez n’apparaît pas dans le sélecteur de taille de machine virtuelle, cela signifie que nous ne l’avons pas encore intégrée à l’outil Place de marché Azure. Pour demander une taille, créez une demande ou votez pour une demande existante dans le [forum UserVoice sur Windows Virtual Desktop](https://windowsvirtualdesktop.uservoice.com/forums/921118-general).
+    >Le processus de création peut créer jusqu’à 400 machines virtuelles lors de la configuration de votre pool d’hôtes, et chaque processus de création de machine virtuelle crée quatre objets dans votre groupe de ressources. Étant donné que le processus de création ne vérifie pas le quota de votre abonnement, vérifiez que le nombre de machines virtuelles que vous entrez se trouve dans les limites d’API et de machines virtuelles Azure pour votre groupe de ressources et votre abonnement. Vous pourrez ajouter d’autres machines virtuelles une fois que vous autre terminé la création de votre pool d’hôtes.
 
-1. Entrez un préfixe pour le nom des machines virtuelles. Par exemple, si vous entrez le nom *préfixe*, les machines virtuelles s’appelleront **préfixe-0**, **préfixe-1**, etc.
-1. Sélectionnez **Suivant : Paramètres de la machine virtuelle**.
+5. Après cela, spécifiez un **Préfixe de nom** pour nommer les machines virtuelles créées par le processus de création. Le suffixe sera `-` avec des nombres commençant à 0.
 
-### <a name="virtual-machine-settings"></a>Paramètres de la machine virtuelle
+6. Ensuite, choisissez l’image qui doit être utilisée pour créer la machine virtuelle. Vous pouvez choisir **Galerie** ou **Objet blob de stockage**.
 
-Pour l’onglet **Paramètres de la machine virtuelle** :
+    - Si vous choisissez **Galerie**, sélectionnez l’une des images recommandées dans le menu déroulant :
 
-1. Pour **Source de l’image**, sélectionnez la source, puis entrez les informations appropriées concernant la façon de la rechercher et de la stocker. Vos options diffèrent pour le stockage d’objets Blob, les images managées et la galerie.
+      - Windows 10 Entreprise multisession, version 1909
+      - Windows 10 Entreprise multisession, version 1909 + Microsoft 365 Apps
+      - Windows Server 2019 Datacenter
+      - Windows 10 Entreprise multisession, version 2004
+      - Windows 10 Entreprise multisession, version 2004 + Microsoft 365 Apps
 
-   Si vous choisissez de ne pas utiliser de disques managés, sélectionnez le compte de stockage qui contient le fichier  *.vhd*.
-1. Entrez le nom d’utilisateur principal et le mot de passe. Ce compte doit être le compte de domaine destiné à joindre les machines virtuelles au domaine Active Directory. Ces mêmes nom d’utilisateur et mot de passe sont créés sur les machines virtuelles sous la forme d’un compte local. Vous pouvez réinitialiser ces comptes locaux ultérieurement.
+     Si vous ne voyez pas l’image souhaitée, sélectionnez **Parcourir toutes les images et tous les disques** afin de pouvoir sélectionner une autre image dans votre galerie ou une image fournie par Microsoft ou d’autres éditeurs.
 
-   >[!NOTE]
-   > Si vous joignez vos machines virtuelles à un environnement Azure AD DS, vérifiez que votre utilisateur de jonction de domaine est membre du [groupe Administrateurs AAD DC](../active-directory-domain-services/tutorial-create-instance-advanced.md#configure-an-administrative-group).
-   >
-   > Le compte doit également faire partie du domaine géré par Azure AD DS ou du locataire Azure AD. Les comptes de répertoires externes associés à votre Client Azure AD ne peuvent pas s’authentifier correctement au cours du processus de jonction de domaine.
+     > [!div class="mx-imgBorder"]
+     > ![Capture d’écran de la Place de marché avec une liste d’images Microsoft.](media/marketplace-images.png)
 
-1. Sélectionnez le **Réseau virtuel** qui dispose d’une connectivité au serveur Active Directory, puis choisissez un sous-réseau pour héberger les machines virtuelles.
-1. Sélectionnez **Suivant : Informations sur Windows Virtual Desktop**.
+     Vous pouvez également accéder à **Mes éléments** et choisir une image personnalisée que vous avez déjà chargée.
 
-### <a name="windows-virtual-desktop-tenant-information"></a>Informations sur le locataire Windows Virtual Desktop
+     > [!div class="mx-imgBorder"]
+     > ![Capture d’écran de l’onglet Mes éléments.](media/my-items.png)
 
-Pour l’onglet **Informations sur le locataire Windows Virtual Desktop** :
+    - Si vous choisissez **Objet blob de stockage**, vous pouvez tirer parti de votre propre build d’image via Hyper-V ou sur une machine virtuelle Azure. Il vous suffit d’entrer l’emplacement de l’image dans l’objet blob de stockage sous la forme d’un URI.
 
-1. Dans **Nom du groupe de locataires Windows Virtual Desktop**, entrez le nom du groupe de locataires qui contient votre locataire. Conservez la valeur par défaut, sauf si un nom de groupe de locataires spécifique vous a été fourni.
-1. Dans **Nom du locataire Windows Virtual Desktop**, entrez le nom du locataire que vous allez créer dans ce pool d’hôtes.
-1. Spécifiez le type d’informations d’identification que vous voulez utiliser pour vous authentifier comme propriétaire des services Bureau à distance (RDS) du locataire Windows Virtual Desktop. Entrez l’UPN ou le principal de service et un mot de passe.
+7. Choisissez le type de disques de système d’exploitation que vous souhaitez que vos machines virtuelles utilisent : SSD Standard, SSD Premium ou HDD Standard.
 
-   Si vous avez suivi le tutoriel [Créer des principaux de service et des attributions de rôles avec PowerShell](./create-service-principal-role-powershell.md), sélectionnez **Principal de service**.
+8. Sous Réseau et sécurité, sélectionnez le **réseau virtuel** et le **sous-réseau** où vous souhaitez placer les machines virtuelles que vous créez. Vérifiez que le réseau virtuel peut se connecter au contrôleur de domaine, car vous devrez joindre les machines virtuelles qui se trouvent sur le réseau virtuel au domaine. Les serveurs DNS du réseau virtuel que vous avez sélectionné doivent être configurés pour utiliser l’adresse IP du contrôleur de domaine.
 
-1. Pour **Principal de service**, pour **ID de locataire Azure AD**, entrez le compte d’administrateur de locataire correspondant à l’instance d’Azure AD qui contient le principal de service. Seuls les principaux de service avec des informations d’identification de mot de passe sont pris en charge.
-1. Sélectionnez **Suivant : Vérifier + créer**.
+9. Ensuite, indiquez si vous souhaitez utiliser une adresse IP publique pour les machines virtuelles. Nous vous recommandons de sélectionner **Non**, car une adresse IP privée est plus sécurisée.
 
-## <a name="complete-setup-and-create-the-virtual-machine"></a>Terminer la configuration et la création de la machine virtuelle
+10. Sélectionnez le type de groupe de sécurité souhaité : **De base**, **Avancé** ou **Aucun**.
 
-Dans **Vérifier et créer**, passez en revue les informations de configuration. Si vous avez besoin de changer quelque chose, revenez en arrière et apportez les modifications. Quand vous êtes prêt, sélectionnez **Créer** pour déployer votre pool d’hôtes.
+    Si vous sélectionnez **De base**, vous devez choisir si vous souhaitez que des ports entrants soient ouverts. Si vous sélectionnez **Oui**, choisissez dans la liste les ports standard sur lesquels autoriser les connexions entrantes.
 
-En fonction du nombre de machines virtuelles que vous créez, ce processus peut prendre 30 minutes, voire plus.
+    >[!NOTE]
+    >Pour une sécurité accrue, nous vous recommandons de ne pas ouvrir de ports entrants publics.
 
->[!IMPORTANT]
-> Pour contribuer à sécuriser votre environnement Windows Virtual Desktop dans Azure, nous vous recommandons de ne pas ouvrir le port entrant 3389 sur vos machines virtuelles. Windows Virtual Desktop ne nécessite pas l’ouverture du port entrant 3389 pour permettre aux utilisateurs d’accéder aux machines virtuelles du pool d’hôtes.
->
-> Si vous devez ouvrir le port 3389 pour résoudre des problèmes, nous vous recommandons d’utiliser un accès à la machine virtuelle juste-à-temps. Pour plus d’informations, consultez [Sécuriser vos ports de gestion avec un accès juste-à-temps](../security-center/security-center-just-in-time.md).
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la page du groupe de sécurité qui montre la liste des ports disponibles dans un menu déroulant.](media/available-ports.png)
 
-## <a name="optional-assign-additional-users-to-the-desktop-application-group"></a>(Facultatif) Affecter des utilisateurs supplémentaires au groupe d’applications de bureau
+    Si vous choisissez **Avancé**, sélectionnez un groupe de sécurité réseau existant que vous avez déjà configuré.
 
-Une fois que la Place de marché Azure a terminé la création du pool, vous pouvez affecter davantage d’utilisateurs au groupe d’applications de bureau. Si vous ne souhaitez pas en ajouter, ignorez cette section.
+11. Après cela, indiquez si vous souhaitez que les machines virtuelles soient jointes à un domaine et une unité d’organisation spécifiques. Si vous choisissez **Oui**, spécifiez le domaine à joindre. Vous pouvez éventuellement ajouter une unité d’organisation spécifique à laquelle doivent appartenir les machines virtuelles. Si vous choisissez **Non**, les machines virtuelles sont jointes au domaine correspondant au suffixe de l’**UPN de jonction de domaine AD**.
 
-Pour affecter des utilisateurs au groupe d’applications de bureau :
+  - Lorsque vous spécifiez une unité d’organisation, veillez à utiliser le chemin complet (nom unique) sans guillemets.
 
-1. Ouvrez une fenêtre PowerShell.
+12. Sous Compte d’administrateur, entrez les informations d’identification de l’administrateur de domaine Active Directory du réseau virtuel que vous avez sélectionné. L’authentification multifacteur (MFA) ne peut pas être activée sur ce compte. Lors de la jointure à un domaine Azure Active Directory Domain Services (Azure AD DS), le compte doit faire partie du groupe d’administrateurs Azure AD DC et le mot de passe du compte doit fonctionner dans Azure AD DS.
 
-1. Exécutez la commande suivante pour vous connecter à l’environnement Windows Virtual Desktop :
+13. Sélectionnez **Suivant : Espace de travail >** .
 
-   ```powershell
-   Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
-   ```
+Nous sommes maintenant prêts à commencer la phase suivante de la configuration de votre pool d’hôtes : l’inscription de votre groupe d’applications auprès d’un espace de travail.
 
-1. Ajoutez des utilisateurs au groupe d’applications de bureau en exécutant cette commande :
+## <a name="workspace-information"></a>Informations sur l’espace de travail
 
-   ```powershell
-   Add-RdsAppGroupUser <tenantname> <hostpoolname> "Desktop Application Group" -UserPrincipalName <userupn>
-   ```
+Le processus de création du pool d’hôtes crée un groupe d’applications de bureau par défaut. Pour que le pool d’hôtes fonctionne comme prévu, vous devez publier ce groupe d’applications sur des utilisateurs ou des groupes d’utilisateurs, et vous devez inscrire le groupe d’applications auprès d’un espace de travail.
 
-   L’UPN (nom d’utilisateur principal) de l’utilisateur doit correspondre à l’identité de l’utilisateur dans Azure AD, par exemple, *user1@contoso.com* . Si vous voulez ajouter plusieurs utilisateurs, exécutez la commande pour chacun d’eux.
+Pour inscrire le groupe d’applications de bureau auprès d’un espace de travail
 
-Les utilisateurs que vous ajoutez au groupe d’applications de bureau peuvent se connecter à Windows Virtual Desktop avec les clients Bureau à distance pris en charge et voir une ressource pour le bureau d’une session.
+1. Sélectionnez **Oui**.
 
-Voici les clients actuellement pris en charge :
+   Si vous sélectionnez **Non**, vous pourrez inscrire le groupe d’applications ultérieurement, mais nous vous recommandons d’effectuer l’inscription auprès de l’espace de travail dès que vous le pouvez afin que votre pool d’hôtes fonctionne correctement.
 
-* [Client Bureau à distance pour Windows 7 et Windows 10](connect-windows-7-and-10.md)
-* [Client web Windows Virtual Desktop](connect-web.md)
+2. Ensuite, choisissez si vous souhaitez créer un espace de travail ou en sélectionner un parmi les espaces de travail existants. Vous ne pourrez inscrire le groupe d’applications qu’auprès d’un espace de travail créé au même emplacement que le pool d’hôtes.
+
+3. Vous pouvez éventuellement sélectionner **Suivant : Étiquettes >** .
+
+    Ici, vous pouvez ajouter des étiquettes pour pouvoir regrouper les objets avec des métadonnées afin de faciliter la tâche des administrateurs.
+
+4. Quand vous avez terminé, sélectionnez **Vérifier + créer**.
+
+     >[!NOTE]
+     >Le processus de validation Vérifier + créer ne vérifie pas si votre mot de passe répond aux normes de sécurité ou si votre architecture est correcte. Vous devez donc vérifier ces éléments vous-même.
+
+5. Passez en revue les informations relatives à votre déploiement pour vérifier que tout semble correct. Sélectionnez **Créer** lorsque vous avez terminé. Cela démarre le processus de déploiement, qui crée les objets suivants :
+
+     - Votre nouveau pool d’hôtes
+     - Un groupe d’applications de bureau
+     - Un espace de travail, si vous avez choisi d’en créer un
+     - Si vous avez choisi d’inscrire le groupe d’applications de bureau, l’inscription aboutit.
+     - Des machines virtuelles, si vous avez choisi d’en créer, qui sont jointes au domaine et inscrites auprès du nouveau pool d’hôtes
+     - Un lien de téléchargement pour un modèle Azure Resource Management basé sur votre configuration
+
+Après cela, vous avez terminé !
+
+## <a name="run-the-azure-resource-manager-template-to-provision-a-new-host-pool"></a>Exécuter le modèle Azure Resource Manager pour provisionner le nouveau pool d’hôtes
+
+Si vous préférez utiliser un processus automatisé, [téléchargez notre modèle Azure Resource Manager](https://github.com/Azure/RDS-Templates/tree/master/ARM-wvd-templates) pour provisionner votre nouveau pool d’hôtes.
+
+>[!NOTE]
+>Si vous utilisez un processus automatisé pour créer votre environnement, vous aurez besoin de la dernière version du fichier JSON de configuration. Le fichier JSON est disponible [ici](https://wvdportalstorageblob.blob.core.windows.net/galleryartifacts?restype=container&comp=list).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous avez créé un pool d’hôtes et affecté des utilisateurs pour qu’ils puissent accéder à son bureau. Vous pouvez remplir votre pool d’hôtes avec des programmes RemoteApp. Pour en savoir plus sur la façon de gérer des applications dans Windows Virtual Desktop, consultez ce tutoriel :
+Maintenant que vous avez créé votre pool d’hôtes, vous pouvez le remplir avec des programmes RemoteApps. Pour en savoir plus sur la façon de gérer des applications dans Windows Virtual Desktop, consultez le tutoriel suivant :
 
 > [!div class="nextstepaction"]
 > [Gérer les groupes d’applications](./manage-app-groups.md)

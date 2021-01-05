@@ -6,12 +6,12 @@ ms.service: storsimple
 ms.topic: conceptual
 ms.date: 08/13/2019
 ms.author: alkohli
-ms.openlocfilehash: d9a75cde58062061149fa4304eace587b1480dd1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 55cc3049e437cc18eac6dc537de3ee1c0d894c23
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76277034"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87070341"
 ---
 # <a name="storsimple-solution-support"></a>Support de la solution StorSimple
 
@@ -28,8 +28,8 @@ Microsoft offre des options de support flexibles aux clients des solutions de st
 
 ## <a name="storsimple-support-plans"></a>Plans de support StorSimple
 
-|                                                                                                                                                     | **STANDARD** <sup>1                                                 |  **PREMIUM** <sup>1                                                                         |
-|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| Prise en charge | STANDARD <sup>1 | PREMIUM <sup>1 |
+| --------------- | --------------- | -------------- |
 | Gestion de la facturation et des abonnements                                                                     | ✓                                                                               | ✓                                                                              |
 | Envoi de ticket sur le portail Azure                                                                          | ✓                                                                               | ✓                                                                              |
 | Accès au portail de support en ligne                                                                            | ✓                                                                               | ✓                                                                              |

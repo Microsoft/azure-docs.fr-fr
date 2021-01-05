@@ -5,12 +5,12 @@ author: aagup
 ms.topic: conceptual
 ms.date: 10/30/2018
 ms.author: aagup
-ms.openlocfilehash: d5eada62bec49fe771373671e9438d2786d6b165
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 04d8bb4a9f8157a229751d073e8d351f5448fa68
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75458420"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86247895"
 ---
 # <a name="on-demand-backup-in-azure-service-fabric"></a>Sauvegarde à la demande dans Azure Service Fabric
 
@@ -56,7 +56,7 @@ Backup-SFPartition -PartitionId '974bd92a-b395-4631-8a7f-53bd4ae9cf22'
 
 #### <a name="rest-call-using-powershell"></a>Appel REST avec PowerShell
 
-Utilisez l’API [BackupPartition](https://docs.microsoft.com/rest/api/servicefabric/sfclient-api-backuppartition) pour configurer le déclenchement de la sauvegarde à la demande pour l’ID de partition `974bd92a-b395-4631-8a7f-53bd4ae9cf22`.
+Utilisez l’API [BackupPartition](/rest/api/servicefabric/sfclient-api-backuppartition) pour configurer le déclenchement de la sauvegarde à la demande pour l’ID de partition `974bd92a-b395-4631-8a7f-53bd4ae9cf22`.
 
 ```powershell
 $url = "https://mysfcluster.southcentralus.cloudapp.azure.com:19080/Partitions/974bd92a-b395-4631-8a7f-53bd4ae9cf22/$/Backup?api-version=6.4"
@@ -64,7 +64,7 @@ $url = "https://mysfcluster.southcentralus.cloudapp.azure.com:19080/Partitions/9
 Invoke-WebRequest -Uri $url -Method Post -ContentType 'application/json' -CertificateThumbprint '1b7ebe2174649c45474a4819dafae956712c31d3'
 ```
 
-Utilisez l’API [GetBackupProgress](https://docs.microsoft.com/rest/api/servicefabric/sfclient-api-getpartitionbackupprogress) pour activer le suivi de la [progression de la sauvegarde à la demande](service-fabric-backup-restore-service-ondemand-backup.md#tracking-on-demand-backup-progress).
+Utilisez l’API [GetBackupProgress](/rest/api/servicefabric/sfclient-api-getpartitionbackupprogress) pour activer le suivi de la [progression de la sauvegarde à la demande](service-fabric-backup-restore-service-ondemand-backup.md#tracking-on-demand-backup-progress).
 
 ### <a name="on-demand-backup-to-specified-storage"></a>Sauvegarde à la demande dans le stockage spécifié
 
@@ -81,7 +81,7 @@ Backup-SFPartition -PartitionId '974bd92a-b395-4631-8a7f-53bd4ae9cf22' -AzureBlo
 
 #### <a name="rest-call-using-powershell"></a>Appel REST avec PowerShell
 
-Utilisez l’API [BackupPartition](https://docs.microsoft.com/rest/api/servicefabric/sfclient-api-backuppartition) pour configurer le déclenchement de la sauvegarde à la demande pour l’ID de partition `974bd92a-b395-4631-8a7f-53bd4ae9cf22`. Incluez les informations de stockage Azure suivantes :
+Utilisez l’API [BackupPartition](/rest/api/servicefabric/sfclient-api-backuppartition) pour configurer le déclenchement de la sauvegarde à la demande pour l’ID de partition `974bd92a-b395-4631-8a7f-53bd4ae9cf22`. Incluez les informations de stockage Azure suivantes :
 
 ```powershell
 $StorageInfo = @{
@@ -100,7 +100,7 @@ $url = "https://mysfcluster.southcentralus.cloudapp.azure.com:19080/Partitions/9
 Invoke-WebRequest -Uri $url -Method Post -Body $body -ContentType 'application/json' -CertificateThumbprint '1b7ebe2174649c45474a4819dafae956712c31d3'
 ```
 
-Vous pouvez utiliser l’API [GetBackupProgress](https://docs.microsoft.com/rest/api/servicefabric/sfclient-api-getpartitionbackupprogress) pour configurer le suivi de la [progression de la sauvegarde à la demande](service-fabric-backup-restore-service-ondemand-backup.md#tracking-on-demand-backup-progress).
+Vous pouvez utiliser l’API [GetBackupProgress](/rest/api/servicefabric/sfclient-api-getpartitionbackupprogress) pour configurer le suivi de la [progression de la sauvegarde à la demande](service-fabric-backup-restore-service-ondemand-backup.md#tracking-on-demand-backup-progress).
 
 ### <a name="using-service-fabric-explorer"></a>Utiliser Service Fabric Explorer
 Vérifiez que le mode avancé est activé dans les paramètres Service Fabric Explorer.
@@ -170,7 +170,7 @@ Les demandes de sauvegarde à la demande peuvent avoir les états suivants :
     LsnOfLastBackupRecord   : 0
     FailureError            : @{Code=FABRIC_E_BACKUPCOPIER_UNEXPECTED_ERROR; Message=An error occurred during this operation.  Please check the trace logs for more details.}
     ```
-  - **Timeout** (Expiration du délai) : l’état de sauvegarde_Timeout_ indique que la sauvegarde d’état de partition n’a pas pu être créée dans un laps de temps donné. Le délai d’expiration par défaut est de 10 minutes. Dans ce scénario, effectuez une nouvelle demande de sauvegarde à la demande avec une valeur de [BackupTimeout](https://docs.microsoft.com/rest/api/servicefabric/sfclient-api-backuppartition#backuptimeout) supérieure.
+  - **Timeout** (Expiration du délai) : l’état de sauvegarde_Timeout_ indique que la sauvegarde d’état de partition n’a pas pu être créée dans un laps de temps donné. Le délai d’expiration par défaut est de 10 minutes. Dans ce scénario, effectuez une nouvelle demande de sauvegarde à la demande avec une valeur de [BackupTimeout](/rest/api/servicefabric/sfclient-api-backuppartition#backuptimeout) supérieure.
     ```
     BackupState             : Timeout
     TimeStampUtc            : 0001-01-01T00:00:00Z
@@ -184,7 +184,7 @@ Les demandes de sauvegarde à la demande peuvent avoir les états suivants :
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Comprendre la configuration de la sauvegarde périodique](./service-fabric-backuprestoreservice-configure-periodic-backup.md)
-- [Référence sur l’API REST BackupRestore](https://docs.microsoft.com/rest/api/servicefabric/sfclient-index-backuprestore)
+- [Référence sur l’API REST BackupRestore](/rest/api/servicefabric/sfclient-index-backuprestore)
 
 [0]: ./media/service-fabric-backuprestoreservice/trigger-partition-backup.png
 [1]: ./media/service-fabric-backuprestoreservice/trigger-backup-fileshare.png

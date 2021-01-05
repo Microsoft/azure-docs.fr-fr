@@ -5,18 +5,18 @@ services: data-factory
 documentationcenter: ''
 ms.service: data-factory
 ms.workload: data-services
-author: djpmsft
-ms.author: daperlov
+author: chez-charlie
+ms.author: chez
 manager: jroth
 ms.reviewer: maghan
 ms.topic: conceptual
-ms.date: 01/09/2019
-ms.openlocfilehash: 5e44bda8648fbf26487b04cf36a8fd0ec085c411
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/30/2020
+ms.openlocfilehash: 304c39f4b6f7852068d4e72adfad2d41eeefc26c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414104"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85552963"
 ---
 # <a name="copy-or-clone-a-data-factory-in-azure-data-factory"></a>Copier ou cloner une fabrique de données dans Azure Data Factory
 
@@ -28,25 +28,28 @@ Cet article montre comment copier ou cloner une fabrique de données dans Azure 
 
 Voici quelques-uns des cas dans lesquels il peut être utile de copier ou cloner une fabrique de données :
 
--   **Renommer des ressources**. Azure ne permet pas de renommer des ressources. Si vous souhaitez renommer une fabrique de données, vous pouvez cloner la fabrique de données avec un nom différent et ensuite supprimer la fabrique de données existantes.
+- **Déplacement de Data Factory** vers une nouvelle région. Si vous souhaitez déplacer votre Data Factory vers une autre région, le meilleur moyen consiste à créer une copie dans la région ciblée et à supprimer celle qui existe déjà.
 
--   **Débogage des modifications** lorsque les fonctionnalités de débogage ne sont pas suffisantes. Parfois, pour tester vos modifications, vous voudrez peut-être le faire dans une autre fabrique avant de les appliquer à votre fabrique principale. Dans la plupart des scénarios, vous pouvez utiliser le débogage. Toutefois, les modifications apportées aux déclencheurs, telles que le comportement de vos modifications lorsqu’un déclencheur est invoqué automatiquement ou sur une fenêtre temporelle, peuvent ne pas être facilement testables sans vérification. Dans ces cas, le clonage de la fabrique et l’application de vos modifications sont des opérations utiles. Comme Azure Data Factory facture principalement en fonction du nombre d’exécutions, la deuxième fabrique n’entraîne pas de frais supplémentaires.
+- **Attribution d’un nouveau nom à Data Factory**. Azure ne permet pas de renommer des ressources. Si vous souhaitez renommer une fabrique de données, vous pouvez cloner la fabrique de données avec un nom différent et supprimer la fabrique de données existante.
+
+- **Débogage des modifications** lorsque les fonctionnalités de débogage ne sont pas suffisantes. Dans la plupart des scénarios, vous pouvez utiliser le [débogage](iterative-development-debugging.md). En d’autres termes, le test des modifications dans un environnement de bac à sable cloné est plus judicieux. Par exemple, le comportement de vos pipelines ETL paramétrés à l’activation d’un déclencheur lors de l’arrivée d’un fichier par rapport à la fenêtre de temps bascule, peut s’avérer difficile à tester via le débogage seul. Dans ce cas, vous souhaiterez peut-être cloner un environnement de bac à sable (sandbox) pour l’expérimentation. Comme Azure Data Factory facture principalement en fonction du nombre d’exécutions, une deuxième fabrique n’entraîne pas de frais supplémentaires.
 
 ## <a name="how-to-clone-a-data-factory"></a>Guide pratique de clonage d’une entité Data Factory
 
-1. L’interface utilisateur de Data Factory dans le portail Azure vous permet d’exporter toute la charge utile de votre fabrique de données dans un modèle de Resource Manager, ainsi qu’un fichier de paramètres qui vous permet de modifier les valeurs souhaitées lorsque vous clonez votre fabrique.
+1. Comme condition préalable, vous devez commencer par créer votre fabrique de données cible à partir du portail Azure.
 
-1. Comme condition préalable, vous devez créer votre fabrique de données cible à partir du portail Azure.
+1. Si vous êtes en mode GIT :
+    1. Chaque fois que vous publiez à partir du portail, le modèle Resource Manager de la fabrique est enregistré dans GIT, dans la branche adf\_publish.
+    1. Connectez la nouvelle fabrique au _même_ dépôt et générez-la à partir de la branche adf\_publish. Les ressources, telles que les pipelines, les jeux de données et les déclencheurs, s’exécutent
 
-1. Si vous avez un runtime d’intégration auto-hébergé dans votre fabrique source, vous devez le précréer avec le même nom dans la fabrique cible. Si vous souhaitez que différentes fabriques partagent le runtime d’intégration auto-hébergé, vous pouvez utiliser le modèle publié [ici](source-control.md#best-practices-for-git-integration).
+1. Si vous êtes en mode réel :
+    1. L’interface utilisateur Data Factory vous permet d’exporter la charge utile entière de votre fabrique de données dans un fichier de modèle Resource Manager et un fichier de paramètres. Ils sont accessibles à partir du bouton **Modèle ARM \ Exporter le modèle Resource Manager** dans le portail.
+    1. Vous pouvez apporter les modifications appropriées au fichier de paramètres et échanger les nouvelles valeurs de la nouvelle fabrique.
+    1. Ensuite, vous pouvez le déployer via les méthodes de déploiement de modèle Resource Manager standard.
 
-1. Si vous êtes en mode GIT, chaque fois que vous publiez à partir du portail, le modèle Resource Manager de la fabrique est enregistré dans la branche adf_publish du référentiel GIT.
+1. Si vous avez un runtime d’intégration auto-hébergé dans votre fabrique source, vous devez le précréer avec le même nom dans la fabrique cible. Si vous souhaitez partager le runtime d’intégration auto-hébergé entre différentes fabriques, vous pouvez utiliser le modèle publié [ici](create-shared-self-hosted-integration-runtime-powershell.md) lors du partage du runtime d’intégration auto-hébergé.
 
-1. Pour d’autres scénarios, le modèle Resource Manager peut être téléchargé d’un clic sur le bouton **Exporter un modèle Resource Manager** dans le portail.
-
-1. Après avoir téléchargé le modèle Resource Manager, vous pouvez le déployer via les méthodes de déploiement de modèle Resource Manager standards.
-
-1. Pour des raisons de sécurité, le modèle Resource Manager généré ne contient aucune information secrète, comme les mots de passe des services liés. Par conséquent, vous devez fournir ces mots de passe comme paramètres de déploiement. Si la fourniture de paramètres n’est pas souhaitable, vous devez obtenir les chaînes de connexion et les mots de passe des services liés auprès d’Azure Key Vault.
+1. Pour des raisons de sécurité, le modèle Resource Manager généré ne contient aucune information secrète, telle que les mots de passe des services liés. Par conséquent, vous devez fournir les informations d’identification en tant que paramètres de déploiement. Si l’entrée manuelle des informations d’identification n’est pas souhaitable pour vos paramètres, envisagez de récupérer les chaînes de connexion et les mots de passe à partir d’Azure Key Vault à la place. [En savoir plus](store-credentials-in-key-vault.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

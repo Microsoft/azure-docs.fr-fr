@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 02/26/2020
 ms.author: normesta
 ms.reviewer: stewu
-ms.openlocfilehash: 422b814f1d9738ca4f03d08dfecc6761b764f997
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 30c33f6ec497fd5766dc541b50f341cb30946051
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78196023"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912567"
 ---
 # <a name="open-source-platforms-that-support-azure-data-lake-storage-gen2"></a>Plateformes open source prenant en charge Azure Data Lake Storage Gen2
 
@@ -28,7 +28,7 @@ Ce tableau répertorie les plateformes open source prenant en charge Azure Data 
 
 | Plateforme |  Version(s) prise(s) en charge | Informations complémentaires |
 | --- | --- | --- |
-| [HDInsight](https://azure.microsoft.com/services/hdinsight/) | 3.6+ | [Quels sont les composants et versions Apache Hadoop disponibles avec HDInsight ?](https://docs.microsoft.com/azure/hdinsight/hdinsight-component-versioning?toc=%2Fazure%2Fhdinsight%2Fstorm%2FTOC.json&bc=%2F2Fazure%2Fbread%2Ftoc.json)
+| [HDInsight](https://azure.microsoft.com/services/hdinsight/) | 3.6+ | [Quels sont les composants et versions Apache Hadoop disponibles avec HDInsight ?](../../hdinsight/hdinsight-component-versioning.md?bc=%2f2Fazure%2fbread%2ftoc.json&toc=%2fazure%2fhdinsight%2fstorm%2fTOC.json)
 | [Hadoop](https://hadoop.apache.org/) | 3.2+ | [Archive de publication Apache Hadoop](https://hadoop.apache.org/release.html) |
 | [Cloudera](https://www.cloudera.com/) | 6.1+ | [Notes de publication de Cloudera Enterprise 6.x](https://www.cloudera.com/documentation/enterprise/6/release-notes/topics/rg_cdh_6_release_notes.html) |
 | [Azure Databricks](https://azure.microsoft.com/services/databricks/) | 5.1+ | [Versions de Databricks Runtime](https://docs.databricks.com/release-notes/runtime/databricks-runtime-ver.html) |

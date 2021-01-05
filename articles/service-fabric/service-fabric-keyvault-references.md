@@ -3,16 +3,22 @@ title: Azure Service Fabric – Utilisation des références KeyVault de l'appli
 description: Cet article explique comment utiliser la prise en charge de Service Fabric KeyVaultReference pour des secrets d’application.
 ms.topic: article
 ms.date: 09/20/2019
-ms.openlocfilehash: f7d8a083ea5ec4b66c29d392ee98927915465875
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2221bb3e8e3ee3181b2cff70107dccc203954cf
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76545481"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92313790"
 ---
-#  <a name="keyvaultreference-support-for-service-fabric-applications-preview"></a>Prise en charge de KeyVaultReference pour les applications Service Fabric (préversion)
+# <a name="keyvaultreference-support-for-service-fabric-applications-preview"></a>Prise en charge de KeyVaultReference pour les applications Service Fabric (préversion)
 
 Un défi courant lors de la création d’applications Cloud est de savoir comment stocker en toute sécurité les secrets requis par votre application. Par exemple, vous souhaiterez peut-être stocker les informations d’identification du référentiel de conteneurs dans le coffre de clés et les référencer dans le manifeste de l’application. Service Fabric KeyVaultReference utilise les identités managées Service Fabric et facilite la référence aux secrets du coffre de clés. Le reste de cet article explique comment utiliser Service Fabric KeyVaultReference et inclut un cas d’utilisation classique.
+
+> [!IMPORTANT]
+> L’utilisation de cette fonctionnalité en préversion n’est pas recommandée dans des environnements de production.
+
+> [!NOTE]
+> La fonctionnalité en préversion de référence KeyVault ne prend en charge que les secrets dont la [version est gérée](../key-vault/general/about-keys-secrets-certificates.md#objects-identifiers-and-versioning). Les secrets sans version ne sont pas pris en charge.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -158,4 +164,4 @@ KeyVaultReference est un type pris en charge pour le conteneur RepositoryCredent
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Documentation sur le coffre de clés Azure](https://docs.microsoft.com/azure/key-vault/)
+* [Documentation sur le coffre de clés Azure](../key-vault/index.yml)

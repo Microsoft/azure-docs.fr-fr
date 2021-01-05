@@ -4,28 +4,30 @@ titleSuffix: Azure Media Services
 description: Découvrez comment utiliser le chiffrement dynamique DRM et le service de remise de licences pour remettre des flux chiffrés avec des licences Microsoft PlayReady, Google Widevine ou Apple FairPlay.
 services: media-services
 documentationcenter: ''
-author: juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 05/25/2019
-ms.author: juliako
+ms.topic: tutorial
+ms.date: 08/31/2020
+ms.author: inhenkel
 ms.custom: seodec18
-ms.openlocfilehash: 14ba5f270138db22a76fd697b264046e22577427
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: abaa82d6f5f33a3dc29db50ae6d029dacd3f7c13
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79086735"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289355"
 ---
 # <a name="tutorial-use-drm-dynamic-encryption-and-license-delivery-service"></a>Tutoriel : Utilisation du chiffrement dynamique DRM et du service de remise des licences
 
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
 > [!NOTE]
-> Ce tutoriel utilise les exemples du [SDK .NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.liveevent?view=azure-dotnet), mais les étapes générales sont les mêmes pour l’[API REST](https://docs.microsoft.com/rest/api/media/liveevents), l’[interface CLI](https://docs.microsoft.com/cli/azure/ams/live-event?view=azure-cli-latest) et d’autres [SDK](media-services-apis-overview.md#sdks) pris en charge.
+> Ce tutoriel utilise les exemples du [SDK .NET](/dotnet/api/microsoft.azure.management.media.models.liveevent?view=azure-dotnet), mais les étapes générales sont les mêmes pour l’[API REST](/rest/api/media/liveevents), l’[interface CLI](/cli/azure/ams/live-event?view=azure-cli-latest) et d’autres [SDK](media-services-apis-overview.md#sdks) pris en charge.
 
 Vous pouvez utiliser Azure Media Services pour diffuser vos flux chiffrés avec des licences Microsoft PlayReady, Google Widevine ou Apple FairPlay. Pour une explication détaillée, consultez [Protection du contenu avec chiffrement dynamique](content-protection-overview.md).
 
@@ -55,8 +57,8 @@ Les éléments suivants sont requis pour suivre le didacticiel :
 * Consultez l’article [Présentation de la protection du contenu](content-protection-overview.md).
 * Lisez la section intitulée [Concevoir un système de protection de contenu multi-DRM avec contrôle d’accès](design-multi-drm-system-with-access-control.md).
 * Installez Visual Studio Code ou Visual Studio.
-* Créez un nouveau compte Azure Media Services, comme décrit dans [ce démarrage rapide](create-account-cli-quickstart.md).
-* Obtenir les informations d’identification nécessaires pour utiliser les API Media Services en respectant l’[accès aux API](access-api-cli-how-to.md)
+* Créez un nouveau compte Azure Media Services, comme décrit dans [ce démarrage rapide](./create-account-howto.md).
+* Obtenir les informations d’identification nécessaires pour utiliser les API Media Services en respectant l’[accès aux API](./access-api-howto.md)
 * Définissez les valeurs appropriées dans le fichier de configuration d’application (appsettings.json).
 
 ## <a name="download-code"></a>Télécharger le code
@@ -144,7 +146,7 @@ Lors de la création d’un élément **Streaming Locator**, vous devez spécifi
 
 ## <a name="get-a-test-token"></a>Obtenir un test de jeton
 
-Dans ce didacticiel, nous spécifions que la stratégie de clé de contenu a une restriction au niveau du jeton. La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [JWT](https://msdn.microsoft.com/library/gg185950.aspx#BKMK_3), et c’est ce qui est configuré dans cet exemple.
+Dans ce didacticiel, nous spécifions que la stratégie de clé de contenu a une restriction au niveau du jeton. La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [JWT](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_3), et c’est ce qui est configuré dans cet exemple.
 
 L’élément ContentKeyIdentifierClaim est utilisé dans ContentKeyPolicy, ce qui signifie que le jeton présenté au service de remise de clé doit contenir l’identificateur de la ContentKey. Dans l’exemple, nous ne spécifions pas de clé de contenu lors de la création de l’élément Streaming Locator. Le système en crée une de manière aléatoire pour nous. Pour générer le jeton de test, nous devons obtenir l’élément ContentKeyId à placer dans la revendication ContentKeyIdentifierClaim.
 
@@ -152,7 +154,7 @@ L’élément ContentKeyIdentifierClaim est utilisé dans ContentKeyPolicy, ce q
 
 ## <a name="build-a-streaming-url"></a>Créer une URL de diffusion en continu
 
-Maintenant que l’élément [StreamingLocator](https://docs.microsoft.com/rest/api/media/streaminglocators) a été créé, vous pouvez obtenir les URL de diffusion en continu. Pour générer une URL, vous devez concaténer le nom d’hôte [StreamingEndpoint](https://docs.microsoft.com/rest/api/media/streamingendpoints) et le chemin d’accès du **localisateur de streaming**. Dans cet exemple, le **point de terminaison de streaming** *par défaut* est utilisé. Quand vous créez pour la première fois un compte Media Services, ce **point de terminaison de streaming** *par défaut* est dans l’état Arrêté. Vous devez donc appeler **Start**.
+Maintenant que l’élément [StreamingLocator](/rest/api/media/streaminglocators) a été créé, vous pouvez obtenir les URL de diffusion en continu. Pour générer une URL, vous devez concaténer le nom d’hôte [StreamingEndpoint](/rest/api/media/streamingendpoints) et le chemin d’accès du **localisateur de streaming**. Dans cet exemple, le **point de terminaison de streaming** *par défaut* est utilisé. Quand vous créez pour la première fois un compte Media Services, ce **point de terminaison de streaming** *par défaut* est dans l’état Arrêté. Vous devez donc appeler **Start**.
 
 [!code-csharp[Main](../../../media-services-v3-dotnet-tutorials/AMSV3Tutorials/EncryptWithDRM/Program.cs#GetMPEGStreamingUrl)]
 
@@ -164,7 +166,7 @@ Vous pouvez ouvrir un navigateur et coller l’URL obtenue pour lancer la page d
 
 ## <a name="clean-up-resources-in-your-media-services-account"></a>Supprimer les ressources de votre compte Media Services
 
-En règle générale, vous devez supprimer tous les éléments à l’exception des objets que vous envisagez de réutiliser (habituellement, vous réutilisez les transformations, les localisateurs de streaming, etc.). Si vous voulez que votre compte soit propre après les expériences, supprimez les ressources dont vous n’avez plus besoin. Par exemple, le code suivant supprime les travaux :
+En règle générale, vous devez supprimer tous les éléments à l’exception des objets que vous envisagez de réutiliser (habituellement, vous réutilisez les transformations, les localisateurs de streaming, etc.). Si vous voulez que votre compte soit propre après les expériences, supprimez les ressources dont vous n’avez plus besoin. Par exemple, le code suivant supprime le travail, les ressources créées et la stratégie de clé de contenu :
 
 [!code-csharp[Main](../../../media-services-v3-dotnet-tutorials/AMSV3Tutorials/EncryptWithDRM/Program.cs#CleanUp)]
 

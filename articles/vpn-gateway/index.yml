@@ -10,12 +10,12 @@ metadata:
   author: cherylmc
   ms.author: cherylmc
   ms.date: 08/28/2019
-  ms.openlocfilehash: 5a75e2ef81c2ea584e7819d278f63e5ae53b9ce9
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 8619e0948cc08d06d27a09864bbff13ad6ad3791
+  ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "70885608"
+  ms.lasthandoff: 12/07/2020
+  ms.locfileid: "96780329"
 landingContent:
 - title: À propos de la passerelle VPN
   linkLists:
@@ -29,26 +29,22 @@ landingContent:
       url: point-to-site-about.md
     - text: BGP
       url: vpn-gateway-bgp-overview.md
-    - text: Passerelles redondantes interzone
+    - text: Passerelles redondantes interzones
       url: about-zone-redundant-vnet-gateways.md
     - text: FAQ sur la passerelle VPN
       url: vpn-gateway-vpn-faq.md
 - title: Bien démarrer
   linkLists:
-  - linkListType: how-to-guide
-    links:
-    - text: Créer une passerelle VPN
-      url: create-routebased-vpn-gateway-portal.md
-    - text: Créer une connexion de site à site
-      url: vpn-gateway-howto-site-to-site-resource-manager-portal.md
-    - text: Créer une connexion de point à site
-      url: vpn-gateway-howto-point-to-site-resource-manager-portal.md
   - linkListType: tutorial
     links:
     - text: Créer et gérer une passerelle VPN
-      url: vpn-gateway-tutorial-create-gateway-powershell.md
-    - text: Créer et gérer une connexion de site à site
-      url: vpn-gateway-tutorial-vpnconnection-powershell.md
+      url: tutorial-create-gateway-portal.md
+    - text: Créer une connexion VPN site à site
+      url: tutorial-site-to-site-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Créer une connexion VPN point à site
+      url: vpn-gateway-howto-point-to-site-resource-manager-portal.md
 - title: Appareils VPN
   linkLists:
   - linkListType: concept
@@ -67,10 +63,10 @@ landingContent:
     links:
     - text: Paramètres de configuration de passerelle
       url: vpn-gateway-about-vpn-gateway-settings.md
+    - text: Références SKU de passerelle
+      url: vpn-gateway-about-vpn-gateway-settings.md#gwsku
     - text: Routage de point à site
       url: vpn-gateway-about-point-to-site-routing.md
-    - text: SKU de passerelle
-      url: vpn-gateway-about-vpn-gateway-settings.md#gwsku
   - linkListType: how-to-guide
     links:
     - text: Vérifier une passerelle VPN
@@ -84,7 +80,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Contrôles de sécurité
-      url: vpn-gateway-security-controls.md
+      url: ./security-baseline.md
   - linkListType: how-to-guide
     links:
     - text: Supervision et alertes

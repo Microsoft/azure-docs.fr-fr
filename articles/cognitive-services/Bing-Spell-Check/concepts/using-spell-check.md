@@ -1,7 +1,7 @@
 ---
 title: Utilisation de l’API Vérification orthographique Bing
 titleSuffix: Azure Cognitive Services
-description: Découvrez les modes de vérification orthographique Bing, les paramètres et d’autres informations relatives à l’API.
+description: Découvrez les modes, paramètres et autres informations Vérification orthographique Bing relatives à l’API.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,14 +10,19 @@ ms.subservice: bing-spell-check
 ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: aahi
-ms.openlocfilehash: c5c9ad8be8bd4cd834b01a0c67e0bbc81b8cdd4a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2031c31c6ea083452bbdbb95be74adf29be1f858
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68881890"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349314"
 ---
 # <a name="using-the-bing-spell-check-api"></a>Utilisation de l’API Vérification orthographique Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Consultez cet article pour savoir comment utiliser l’API Vérification orthographique Bing pour effectuer une vérification grammaticale et orthographique contextuelle. Bien que la plupart des vérificateurs d’orthographe s’appuient sur des ensembles de règles basées sur un dictionnaire, le vérificateur d’orthographe Bing exploite l’apprentissage automatique et la traduction automatique statistique pour fournir des corrections précises et contextuelles. 
 
@@ -44,14 +49,14 @@ La fonction `Spell` est plus agressive et renvoie de meilleurs résultats de rec
 
 ## <a name="market-setting"></a>Paramètre de segment
 
-Un [code de marché](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#market-codes) doit être spécifié avec le paramètre de requête `mkt` dans votre demande. L’API utilise sinon un marché par défaut en fonction de l’adresse IP de la demande.
+Un [code de marché](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#market-codes) doit être spécifié avec le paramètre de requête `mkt` dans votre demande. L’API utilise sinon un marché par défaut en fonction de l’adresse IP de la demande.
 
 
 ## <a name="http-post-and-get-support"></a>Prise en charge HTTP POST et GET
 
 L’API prend en charge les requêtes HTTP POST et HTTP GET. Le type de requête utilisé dépend de la longueur du texte que vous souhaitez vérifier. Si les chaînes sont toujours inférieures à 1 500 caractères, vous utiliserez des requêtes GET. Par contre, pour prendre en charge des chaînes contenant jusqu’à 10 000 caractères, vous utilisez des requêtes POST. La chaîne de texte peut inclure n’importe quel caractère UTF-8 valide.
 
-L’exemple suivant montre une requête POST pour vérifier l’orthographe et la grammaire d’une chaîne de texte. L’exemple inclut le paramètre de requête [mode](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#mode) par souci d’exhaustivité (il est possible qu’il ne soit pas défini car `mode` est défini par défaut sur Vérifier). Le paramètre de requête [texte](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#text) contient la chaîne à vérifier.
+L’exemple suivant montre une requête POST pour vérifier l’orthographe et la grammaire d’une chaîne de texte. L’exemple inclut le paramètre de requête [mode](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#mode) par souci d’exhaustivité (il est possible qu’il ne soit pas défini car `mode` est défini par défaut sur Vérifier). Le paramètre de requête [texte](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#text) contient la chaîne à vérifier.
   
 ```  
 POST https://api.cognitive.microsoft.com/bing/v7.0/spellcheck?mode=proof&mkt=en-us HTTP/1.1  
@@ -68,7 +73,7 @@ text=when+its+your+turn+turn,+john,+come+runing
 
 Si vous utilisez HTTP GET, vous devez inclure le paramètre de requête `text` dans la chaîne de requête de l’URL.
   
-Voici la réponse à la requête précédente. La réponse contient un objet [SpellCheck](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#spellcheck). 
+Voici la réponse à la requête précédente. La réponse contient un objet [SpellCheck](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#spellcheck). 
   
 ```json
 {  
@@ -112,7 +117,7 @@ Voici la réponse à la requête précédente. La réponse contient un objet [Sp
 }  
 ```  
   
-Le champ [flaggedTokens](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#flaggedtokens) répertorie les erreurs d’orthographe et de grammaire détectées par l’API dans la chaîne [texte](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#text). Le champ `token` contient le mot à remplacer. Vous devez utiliser le décalage de base zéro dans le champ `offset` pour trouver le jeton dans la chaîne `text`. Vous remplacez ensuite le mot à cet emplacement avec le mot indiqué dans le champ `suggestion`. 
+Le champ [flaggedTokens](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#flaggedtokens) répertorie les erreurs d’orthographe et de grammaire détectées par l’API dans la chaîne [texte](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference#text). Le champ `token` contient le mot à remplacer. Vous devez utiliser le décalage de base zéro dans le champ `offset` pour trouver le jeton dans la chaîne `text`. Vous remplacez ensuite le mot à cet emplacement avec le mot indiqué dans le champ `suggestion`. 
 
 Si le champ `type` indique RepeatedToken, vous remplacerez toujours le jeton par `suggestion`, mais vous devrez probablement aussi supprimer l’espace de fin.
 
@@ -123,4 +128,4 @@ Si le champ `type` indique RepeatedToken, vous remplacerez toujours le jeton par
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Qu’est-ce que l’API Vérification orthographique Bing ?](../overview.md)
-- [Informations de référence sur l’API Vérification orthographique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)
+- [Informations de référence sur l’API Vérification orthographique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)

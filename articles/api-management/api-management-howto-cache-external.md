@@ -1,6 +1,6 @@
 ---
 title: Utiliser un cache externe dans Gestion des API Azure | Microsoft Docs
-description: Découvrez comment configurer et utiliser un cache externe dans Gestion des API Azure.
+description: Découvrez comment configurer et utiliser un cache externe dans Gestion des API Azure. L’utilisation d’un cache externe vous permet de pallier quelques limites du cache intégré.
 services: api-management
 documentationcenter: ''
 author: mikebudzynski
@@ -11,18 +11,18 @@ ms.service: api-management
 ms.topic: conceptual
 ms.date: 04/26/2020
 ms.author: apimpm
-ms.openlocfilehash: f8ca0caedd438c4ce707a044bc7fa7dd035e8983
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: 6288a10e111e42629abf5e09b84a6a7791dcfe95
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203231"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018220"
 ---
 # <a name="use-an-external-redis-compatible-cache-in-azure-api-management"></a>Utiliser un cache externe compatible Redis dans Gestion des API Azure
 
 En plus de l’utilisation du cache intégré, Gestion des API Azure permet la mise en cache externe compatible Redis, par ex. dans un Cache Azure pour Redis.
 
-L’utilisation d’un cache externe permet de pallier quelques limites du cache intégré :
+L’utilisation d’un cache externe vous permet de pallier quelques limites du cache intégré :
 
 * Éviter que votre cache soit régulièrement effacé lors des mises à jour de Gestion des API
 * Obtenir un plus grand contrôle sur la configuration de votre cache
@@ -60,7 +60,7 @@ Pour la mise en cache, les passerelles auto-hébergées s’appuient exclusiveme
 
 Suivez les étapes ci-dessous pour ajouter un Cache Azure pour Redis externe dans Gestion des API Azure.
 
-![Apport de votre propre cache à APIM](media/api-management-howto-cache-external/add-external-cache.png)
+![Capture d’écran montrant comment ajouter une compte Azure Cache pour Redis externe dans Gestion des API Azure.](media/api-management-howto-cache-external/add-external-cache.png)
 
 > [!NOTE]
 > Le paramètre **Utiliser à partir de** spécifie une région Azure ou un emplacement de passerelle auto-hébergée qui utilisera le cache configuré. Les caches configurés **par défaut** sont remplacés par des caches avec une valeur de région ou d’emplacement correspondante spécifique.
@@ -105,5 +105,5 @@ Une fois le cache externe configuré dans Gestion des API Azure, il peut être u
 * Pour plus d’informations sur les stratégies de mise en cache, voir la section [Stratégies de mise en cache][Caching policies] dans [Référence de stratégie de Gestion des API][API Management policy reference].
 * Pour plus d’informations sur la mise en cache des éléments par clé à l’aide d’expressions de stratégie, consultez [Mise en cache personnalisée dans la gestion des API Azure](api-management-sample-cache-by-key.md).
 
-[API Management policy reference]: https://msdn.microsoft.com/library/azure/dn894081.aspx
-[Caching policies]: https://msdn.microsoft.com/library/azure/dn894086.aspx
+[API Management policy reference]: ./api-management-policies.md
+[Caching policies]: ./api-management-caching-policies.md

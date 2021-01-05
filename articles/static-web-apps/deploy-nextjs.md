@@ -1,5 +1,5 @@
 ---
-title: 'Tutoriel : Déployer des sites web Next.js rendus côté serveur sur Azure Static Web Apps'
+title: 'Tutoriel : Déployer des sites web Next.js au rendu statique sur Azure Static Web Apps'
 description: Générez et déployez des sites dynamiques Next.js avec Azure Static Web Apps.
 services: static-web-apps
 author: christiannwamba
@@ -7,14 +7,15 @@ ms.service: static-web-apps
 ms.topic: tutorial
 ms.date: 05/08/2020
 ms.author: chnwamba
-ms.openlocfilehash: fe139921cb73ee0e224c995e2dd5eb5fc50f3979
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-js
+ms.openlocfilehash: a22d06137c3ec17851280605ac85c94ef8b342cd
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83593806"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97563073"
 ---
-# <a name="deploy-server-rendered-nextjs-websites-on-azure-static-web-apps-preview"></a>Déployer des sites Web Next.js rendus côté serveur sur Azure Static Web Apps Preview
+# <a name="deploy-static-rendered-nextjs-websites-on-azure-static-web-apps-preview"></a>Déployer des sites web Next.js au rendu statique sur Azure Static Web Apps (préversion)
 
 Ce tutoriel permet d’apprendre à déployer un site web statique généré [Next.js](https://nextjs.org) sur [Azure Static Web Apps](overview.md). Pour commencer, vous apprendrez à créer, configurer et déployer une application Next.js. Au cours de ce processus, vous apprendrez aussi à gérer les problèmes courants rencontrés lors de la génération de pages statiques avec Next.js
 
@@ -28,9 +29,9 @@ Ce tutoriel permet d’apprendre à déployer un site web statique généré [Ne
 
 Au lieu d’utiliser l’interface CLI Next.js pour créer une application, vous pouvez utiliser un référentiel de démarrage qui comprend une application Next.js existante. Ce référentiel contient une application Next.js avec des routages dynamiques, qui met en évidence un problème de déploiement courant. Les routages dynamiques ont besoin d’une configuration de déploiement supplémentaire. Nous verrons cela plus tard.
 
-Pour commencer, créez un référentiel sous votre compte GitHub à partir d’un référentiel de modèles. 
+Pour commencer, créez un référentiel sous votre compte GitHub à partir d’un référentiel de modèles.
 
-1. Accédez à <http://github.com/staticwebdev/nextjs-starter/generate>.
+1. Accédez à [https://github.com/staticwebdev/nextjs-starter/generate](https://github.com/login?return_to=/staticwebdev/nextjs-starter/generate)
 1. Nommez le référentiel **nextjs-starter**
 1. Ensuite, clonez le nouveau référentiel sur votre ordinateur. Remplacez `<YOUR_GITHUB_ACCOUNT_NAME>` par le nom de votre compte.
 
@@ -56,7 +57,7 @@ Pour commencer, créez un référentiel sous votre compte GitHub à partir d’u
     npm run dev
     ```
 
-Accédez à <http://localhost:3000> pour ouvrir l’application, où le site web suivant devrait s’ouvrir dans votre navigateur favori :
+Accédez à `http://localhost:3000` pour ouvrir l’application, où le site web suivant devrait s’ouvrir dans votre navigateur favori :
 
 :::image type="content" source="media/deploy-nextjs/start-nextjs-app.png" alt-text="Démarrer l’application Next.js":::
 
@@ -72,7 +73,7 @@ Quand vous générez un site Next.js en utilisant `npm run build`, l’applicati
 
     ```javascript
     module.exports = {
-      exportTrailingSlash: true,
+      trailingSlash: true,
       exportPathMap: function() {
         return {
           '/': { page: '/' }
@@ -124,7 +125,7 @@ Azure Static Web Apps déploie votre application à partir d’un référentiel 
 1. Pour transmettre vos modifications à GitHub :
 
     ```bash
-    git push origin master
+    git push origin main
     ```
 
 ## <a name="deploy-your-static-website"></a>Déployer votre site web statique
@@ -154,7 +155,7 @@ Le nouveau compte Static Web Apps doit pouvoir accéder au référentiel avec vo
 1. Cliquez sur le bouton **Sign in with GitHub** (Se connecter avec GitHub).
 1. Sélectionnez l’**organisation** sous laquelle vous avez créé le référentiel pour votre projet Next.js. Il peut s’agir de votre nom d’utilisateur GitHub.
 1. Recherchez et sélectionnez le nom du référentiel que vous avez créé précédemment.
-1. Dans la liste déroulante **Branch** (Branche), choisissez *master* (principale).
+1. Choisissez **main** (principale) comme branche dans la liste déroulante *Branch* (Branche).
 
    :::image type="content" source="media/deploy-nextjs/connect-github.png" alt-text="Connexion à GitHub":::
 
@@ -188,7 +189,7 @@ https://github.com/<YOUR_GITHUB_USERNAME>/nextjs-starter/actions
 
 Une fois l’application créée, Azure Static Web Apps a créé un fichier de workflow GitHub Actions dans votre référentiel. Vous devez placer ce fichier dans votre référentiel local pour synchroniser votre historique git.
 
-Revenez au terminal et exécutez la commande suivante : `git pull origin master`.
+Revenez au terminal et exécutez la commande suivante : `git pull origin main`.
 
 ## <a name="configure-dynamic-routes"></a>Configurer des routages dynamiques
 
@@ -206,7 +207,7 @@ Cette erreur se produit, car la configuration de l’application fait que Next.j
    const data = require('./utils/projectsData');
 
    module.exports = {
-     exportTrailingSlash: true,
+     trailingSlash: true,
      exportPathMap: async function () {
        const { projects } = data;
        const paths = {

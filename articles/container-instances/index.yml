@@ -11,12 +11,12 @@ metadata:
   author: dlepow
   ms.author: danlep
   ms.date: 09/25/2019
-  ms.openlocfilehash: 1503cad9c85f60b930f520cf24e0d772d7ffe1e7
-  ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+  ms.openlocfilehash: 8dd403d9c1b2996c70c8d387e5305d2c8749bce8
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/01/2020
-  ms.locfileid: "82628927"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "90705195"
 landingContent:
 - title: À propos d’Azure Container Instances
   linkLists:
@@ -38,6 +38,8 @@ landingContent:
       url: container-instances-quickstart-portal.md
     - text: Déployer une instance de conteneur - Modèle ARM
       url: container-instances-quickstart-template.md
+    - text: Déployer une instance de conteneur - Docker CLI
+      url: quickstart-docker-cli.md
   - linkListType: learn
     links:
     - text: Exécuter les conteneurs Docker avec Azure Container Instances
@@ -50,6 +52,8 @@ landingContent:
       url: container-instances-multi-container-yaml.md
     - text: Déployer un groupe de conteneurs - Modèle ARM
       url: container-instances-multi-container-group.md
+    - text: Déployer un groupe de conteneurs - Docker Compose
+      url: tutorial-docker-compose.md
 - title: Scénarios de déploiement
   linkLists:
   - linkListType: how-to-guide

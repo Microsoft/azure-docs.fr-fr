@@ -3,17 +3,19 @@ title: Mots clés SQL pour Azure Cosmos DB
 description: Découvrez les mots clés SQL pour Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 04/10/2020
+ms.date: 07/29/2020
 ms.author: tisande
-ms.openlocfilehash: 069548b9b69ef6f7f6bde85ede830d97f3d312db
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 35232f95bc18432db05775807d95f23ceab66aea
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81261565"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93333781"
 ---
 # <a name="keywords-in-azure-cosmos-db"></a>Mots clés dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article détaille les mots clés qui peuvent être utilisés dans les requêtes SQL Azure Cosmos DB.
 
@@ -35,9 +37,6 @@ Vous pouvez également utiliser le mot clé `BETWEEN` dans la clause `SELECT`, c
 ```
 
 Dans l’API SQL, contrairement à SQL ANSI, vous pouvez exprimer des requêtes de plage sur des propriétés de types mixtes. Par exemple, `grade` peut être un nombre comme `5` dans certains éléments et une chaîne comme `grade4` dans d’autres. Dans ces cas-là, comme dans JavaScript, la comparaison entre deux types différents a pour résultat `Undefined` ; l’élément est donc ignoré.
-
-> [!TIP]
-> Pour accélérer le temps d’exécution des requêtes, créez une stratégie d’indexation qui utilise un type d’index de plage sur tous les chemins ou propriétés numériques que la clause `BETWEEN` filtre.
 
 ## <a name="distinct"></a>DISTINCT
 
@@ -76,7 +75,7 @@ Les résultats sont :
 ]
 ```
 
-DISTINCT peut également être utilisé dans la projection au sein d’une sous-requête :
+`DISTINCT` peut également être utilisé dans la projection au sein d’une sous-requête :
 
 ```sql
 SELECT f.id, ARRAY(SELECT DISTINCT VALUE c.givenName FROM c IN f.children) as ChildNames

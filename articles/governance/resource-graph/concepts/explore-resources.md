@@ -1,18 +1,18 @@
 ---
 title: Explorer vos ressources Azure
 description: Apprenez à utiliser le langage de requête Resource Graph pour explorer vos ressources et découvrir comment elles sont connectées.
-ms.date: 05/20/2020
+ms.date: 10/14/2020
 ms.topic: conceptual
-ms.openlocfilehash: 33bf457a57f7e62b9c99471bcb7676f62046f61d
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 2b0ef3935d865618a9d4dda2825f7d4383baf772
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83654484"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92056240"
 ---
 # <a name="explore-your-azure-resources-with-resource-graph"></a>Explorer vos ressources Azure avec Resource Graph
 
-Azure Resource Graph vous permet d’explorer et de détecter vos ressources Azure rapidement et à l’échelle. Conçu pour fournir des réponses rapides, il s’avère très efficace pour en apprendre davantage sur votre environnement, mais aussi sur les propriétés qui composent vos ressources Azure.
+Azure Resource Graph vous permet d’explorer et de détecter vos ressources Azure rapidement et à l’échelle. Conçu pour fournir des réponses rapides, il s’avère très efficace pour en apprendre davantage sur votre environnement, mais aussi sur les propriétés présentes sur vos ressources Azure.
 
 ## <a name="explore-virtual-machines"></a>Explorer des machines virtuelles
 
@@ -104,7 +104,7 @@ Les résultats JSON sont structurés de façon similaire à l’exemple suivant�
 ]
 ```
 
-Les propriétés nous en disent plus sur la ressource de machine virtuelle elle-même, que ce soit la référence (SKU), le système d’exploitation, les disques, les étiquettes ou le groupe de ressources et l’abonnement dont elle fait partie.
+Les propriétés donnent des informations supplémentaires sur la ressource de la machine virtuelle proprement dite : système d’exploitation, disques, balises, groupe de ressources et abonnement dont elle est membre, etc.
 
 ### <a name="virtual-machines-by-location"></a>Machines virtuelles par emplacement
 
@@ -165,7 +165,7 @@ Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachi
 
 ### <a name="virtual-machines-connected-to-premium-managed-disks"></a>Machines virtuelles connectées à des disques managés Premium
 
-Si nous voulons obtenir les détails des disques managés Premium qui sont attachés à ces machines virtuelles **Standard_B2s**, nous pouvons étendre la requête de façon à obtenir l’ID de ressource de ces disques managés.
+Pour obtenir les détails des disques managés Premium attachés à ces machines virtuelles **Standard_B2s**, nous étendons la requête de façon à retourner l’ID de la ressource de ces disques managés.
 
 ```kusto
 Resources
@@ -176,7 +176,7 @@ Resources
 ```
 
 > [!NOTE]
-> Une autre façon d’obtenir la référence (SKU) consiste à utiliser la propriété **aliases** **Microsoft.Compute/virtualMachines/sku.name**. Voir les exemples [Afficher des alias](../samples/starter.md#show-aliases) et [Afficher des valeurs distinctes pour un alias](../samples/starter.md#distinct-alias-values).
+> Une autre façon d’obtenir la référence (SKU) consiste à utiliser la propriété **aliases****Microsoft.Compute/virtualMachines/sku.name**. Voir les exemples [Afficher des alias](../samples/starter.md#show-aliases) et [Afficher des valeurs distinctes pour un alias](../samples/starter.md#distinct-alias-values).
 
 ```azurecli-interactive
 az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | extend disk = properties.storageProfile.osDisk.managedDisk | where disk.storageAccountType == 'Premium_LRS' | project disk.id"
@@ -207,8 +207,8 @@ Resources
 | where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'
 ```
 
-Avant d’exécuter la requête, comment aurions-nous pu savoir que le **type** allait maintenant être **Microsoft.Compute/disks** ?
-Si vous examinez l’ID complet, vous constaterez que **/providers/Microsoft.Compute/disks/** fait partie intégrante de la chaîne. Ce fragment de chaîne vous donne une indication du type à rechercher. Une autre méthode consiste à retirer la limite par type et à effectuer à la place une recherche sur le champ ID uniquement. Comme l’ID est unique, un seul enregistrement est retourné et la propriété **type** de ce dernier fournit ce détail.
+Avant d’exécuter la requête, comment aurions-nous pu savoir que le **type** allait maintenant être **Microsoft.Compute/disks** ? Si vous examinez l’ID complet, vous constaterez que **/providers/Microsoft.Compute/disks/** fait partie intégrante de la chaîne.
+Ce fragment de chaîne vous donne une indication du type à rechercher. Une autre méthode consiste à retirer la limite par type et à effectuer à la place une recherche sur le champ ID uniquement. Comme l’ID est unique, un seul enregistrement est retourné et la propriété **type** de ce dernier fournit ce détail.
 
 > [!NOTE]
 > Pour que cet exemple fonctionne, vous devez remplacer la valeur du champ ID par un résultat tiré de votre propre environnement.

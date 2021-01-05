@@ -16,12 +16,12 @@ ms.date: 07/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 543c1a6706f794b81c4f93fc6fff3a61ed3fb9e3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 59dc94e37dfa1ef8b0b079bf5d78d0504e0cb8c7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60246329"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91313618"
 ---
 # <a name="azure-ad-connect-sync-understanding-declarative-provisioning"></a>Azure AD Connect Sync : présentation de l’approvisionnement déclaratif
 Cette rubrique présente le modèle de configuration dans Azure AD Connect. Ce modèle est appelé « approvisionnement déclaratif » et vous permet de modifier la configuration en toute simplicité. De nombreux éléments décrits dans cette rubrique sont des éléments avancés, non indispensables pour la plupart des scénarios clients.
@@ -29,11 +29,11 @@ Cette rubrique présente le modèle de configuration dans Azure AD Connect. Ce m
 ## <a name="overview"></a>Vue d’ensemble
 L’approvisionnement déclaratif correspond au traitement des objets provenant d’un répertoire source connecté. Il détermine comment l’objet et les attributs doivent être transformés à partir d’une source vers une cible. Les objets sont traités dans un pipeline de synchronisation identique pour les règles de trafic entrant et sortant. Les règles de trafic entrant vont d’un espace de connecteur au métaverse et les règles de trafic sortant vont du métaverse vers un espace de connecteur.
 
-![Pipeline de synchronisation](./media/concept-azure-ad-connect-sync-declarative-provisioning/sync1.png)  
+![Diagramme représentant un exemple de pipeline de synchronisation.](./media/concept-azure-ad-connect-sync-declarative-provisioning/sync1.png)  
 
 Le pipeline a plusieurs modules. Chacun d’eux est responsable d’un concept de synchronisation des objets.
 
-![Pipeline de synchronisation](./media/concept-azure-ad-connect-sync-declarative-provisioning/pipeline.png)  
+![Diagramme représentant les modules du pipeline.](./media/concept-azure-ad-connect-sync-declarative-provisioning/pipeline.png)  
 
 * Source, l’objet source
 * [Scope](#scope), recherche toutes les règles de synchronisation dans la portée
@@ -44,7 +44,7 @@ Le pipeline a plusieurs modules. Chacun d’eux est responsable d’un concept d
 
 ## <a name="scope"></a>Étendue
 Le module Scope évalue un objet et détermine les règles qui sont dans la portée et doivent être incluses lors du traitement. En fonction des valeurs d’attributs de l’objet, différentes règles de synchronisation sont évaluées pour être dans la portée. Par exemple, un utilisateur désactivé sans boîte aux lettres Exchange possède des règles différentes d’un utilisateur activé avec une boîte aux lettres.  
-![Étendue](./media/concept-azure-ad-connect-sync-declarative-provisioning/scope1.png)  
+![Diagramme représentant le module d'étendue d'un objet.](./media/concept-azure-ad-connect-sync-declarative-provisioning/scope1.png)  
 
 La portée est définie selon des groupes et des clauses. Les clauses sont à l’intérieur des groupes. Un opérateur logique AND est utilisé entre toutes les clauses d’un groupe. Par exemple, (department = IT AND country = Denmark). Un opérateur logique OR est utilisé entre les groupes.
 
@@ -78,7 +78,7 @@ Les jointures sont définies comme un ou plusieurs groupes. À l’intérieur d�
 Les jointures dans cette image sont traitées de haut en bas. Le pipeline de synchronisation détecte d’abord si une correspondance sur employeeID existe. Si ce n’est pas le cas, la deuxième règle détecte si le nom du compte peut être utilisé pour joindre les objets. Si aucune correspondance n’est trouvée, la troisième et dernière règle utilise le nom d’utilisateur pour trouver une correspondance moins stricte.
 
 Si toutes les règles de jointure ont été évaluées et qu’il n’existe aucune correspondance exacte, le **type de lien** indiqué dans la page de **description** est utilisé. Si cette option a la valeur **Provision**, un nouvel objet est créé dans la cible.  
-![Approvisionnement ou jointure](./media/concept-azure-ad-connect-sync-declarative-provisioning/join3.png)  
+![Capture d'écran représentant le menu déroulant « Type de lien » ouvert.](./media/concept-azure-ad-connect-sync-declarative-provisioning/join3.png)  
 
 Un objet doit avoir une seule règle de synchronisation avec des règles de jointure dans la portée. S’il existe plusieurs règles de synchronisation dans lesquelles la jointure est définie, une erreur se produit. La précédence n’est pas utilisée pour résoudre les conflits de jointure. Un objet doit avoir une règle de jointure dans la portée des attributs pour que la circulation se fasse dans le même sens en entrée et en sortie. Si vous avez besoin de faire circuler les attributs en entrée et en sortie sur le même objet, vous devez disposer à la fois d’une règle de synchronisation de trafic entrant et de trafic sortant avec une jointure.
 
@@ -101,7 +101,7 @@ La case **Appliquer une fois** indique si l’attribut doit être défini unique
 ### <a name="merging-attribute-values"></a>Fusion de valeurs d’attribut
 Dans les flux d’attributs, il existe un paramètre permettant de déterminer si les attributs à valeurs multiples doivent être fusionnés à partir de plusieurs connecteurs différents. La valeur par défaut est **Mettre à jour**, ce qui indique que la règle de synchronisation avec la priorité la plus élevée prévaut.
 
-![Types de fusion](./media/concept-azure-ad-connect-sync-declarative-provisioning/mergetype.png)  
+![Capture d'écran représentant la section « Ajouter des transformations » dans laquelle le menu déroulant « Types de fusion » est ouvert.](./media/concept-azure-ad-connect-sync-declarative-provisioning/mergetype.png)  
 
 Il existe également une option **Fusionner** et **MergeCaseInsensitive** (Fusion non sensible à la casse). Ces options permettent de fusionner des valeurs issues de différentes sources. Par exemple, elles peuvent être utilisées pour fusionner le membre ou l’attribut proxyAddresses de plusieurs forêts différentes. Lorsque vous utilisez cette option, toutes les règles de synchronisation dans l’étendue d’un objet doivent utiliser le même type de fusion. Vous ne pouvez pas définir **Mettre à jour** à partir d’un connecteur et **Fusionner** à partir d’un autre connecteur. Si vous essayez, vous recevrez une erreur.
 
@@ -146,7 +146,7 @@ La précédence peut être définie entre les connecteurs. Cela permet aux conne
 
 ### <a name="multiple-objects-from-the-same-connector-space"></a>Plusieurs objets du même espace de connecteur
 Si vous avez plusieurs objets dans le même espace de connecteur joints au même objet de métaverse, vous devez ajuster la précédence. Si plusieurs objets sont dans la portée de la même règle de synchronisation, le moteur de synchronisation n’est pas en mesure de déterminer la précédence. Il demeure une incertitude quant à l’objet source qui doit transmettre la valeur au métaverse. Cette configuration est signalée comme ambiguë même si les attributs de la source ont la même valeur.  
-![Plusieurs objets joints au même objet mv](./media/concept-azure-ad-connect-sync-declarative-provisioning/multiple1.png)  
+![Diagramme représentant plusieurs objets joints au même objet mv avec une superposition de X rouge transparent. ](./media/concept-azure-ad-connect-sync-declarative-provisioning/multiple1.png)  
 
 Pour ce scénario, vous devez modifier la portée des règles de synchronisation, de façon à ce que les objets sources aient des règles de synchronisation différentes dans la portée. Cela vous permet de définir une précédence différente.  
 ![Plusieurs objets joints au même objet mv](./media/concept-azure-ad-connect-sync-declarative-provisioning/multiple2.png)  

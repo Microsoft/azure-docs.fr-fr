@@ -1,18 +1,19 @@
 ---
-title: Déclencheur Azure Cosmos DB pour Functions 2.x
+title: Déclencheur Azure Cosmos DB pour Azure Functions 2.x et supérieur
 description: Apprenez à utiliser le déclencheur Azure Cosmos DB dans Azure Functions.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/24/2020
 ms.author: cshoe
-ms.openlocfilehash: de8ad39ef731af3dc272d700eeee346acda64b53
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: e845efa2c1df47c80fcc10e7fb758f05af9fbecc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235189"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002134"
 ---
-# <a name="azure-cosmos-db-trigger-for-azure-functions-2x"></a>Déclencheur Azure Cosmos DB pour Azure Functions 2.x
+# <a name="azure-cosmos-db-trigger-for-azure-functions-2x-and-higher"></a>Déclencheur Azure Cosmos DB pour Azure Functions 2.x et supérieur
 
 Le déclencheur Azure Cosmos DB utilise le [flux de modification Azure Cosmos DB](../cosmos-db/change-feed.md) pour écouter les insertions et mises à jour sur plusieurs partitions. Le flux de modification publie les insertions et mises à jour, pas les suppressions.
 
@@ -183,9 +184,8 @@ Le constructeur de l’attribut accepte le nom de la base de données et le nom 
 
 ```csharp
     [FunctionName("DocumentUpdates")]
-    public static void Run(
-        [CosmosDBTrigger("database", "collection", ConnectionStringSetting = "myCosmosDB")]
-    IReadOnlyList<Document> documents,
+    public static void Run([CosmosDBTrigger("database", "collection", ConnectionStringSetting = "myCosmosDB")]
+        IReadOnlyList<Document> documents,
         ILogger log)
     {
         ...
@@ -208,7 +208,7 @@ Les attributs ne sont pas pris en charge par Python.
 
 # <a name="java"></a>[Java](#tab/java)
 
-À partir de la [bibliothèque du runtime des fonctions Java](https://docs.microsoft.com/java/api/overview/azure/functions/runtime), utilisez l’annotation `@CosmosDBInput` sur les paramètres qui lisent des données de Cosmos DB.
+À partir de la [bibliothèque du runtime des fonctions Java](/java/api/overview/azure/functions/runtime), utilisez l’annotation `@CosmosDBInput` sur les paramètres qui lisent des données de Cosmos DB.
 
 ---
 

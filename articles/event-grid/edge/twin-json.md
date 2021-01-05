@@ -5,18 +5,16 @@ author: HiteshMadan
 manager: rajarv
 ms.author: himad
 ms.reviewer: spelluru
-ms.date: 10/06/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 5c23b9ef280a4a4e3458d279ecf060d2e3d50295
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f39d22fe58d4375b3b68bacd237c1b200328c4b1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72991726"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171327"
 ---
-# <a name="module-twin-json-schema"></a>Schéma JSON de jumeau de module
+# <a name="module-twin-json-schema-azure-event-grid"></a>Schéma JSON de jumeau de module (Azure Event Grid)
 
 Event Grid sur IoT Edge s’intègre avec l’écosystème IoT Edge et prend en charge la création de rubriques et d’abonnements via le jumeau de module. Il indique également l’état actuel de l’ensemble des rubriques et abonnements aux événements des propriétés signalées sur le jumeau de module.
 

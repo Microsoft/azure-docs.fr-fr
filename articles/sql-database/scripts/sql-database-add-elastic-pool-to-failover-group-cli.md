@@ -9,14 +9,14 @@ ms.devlang: azurecli
 ms.topic: sample
 author: MashaMSFT
 ms.author: mathoma
-ms.reviewer: carlrab
+ms.reviewer: sstein
 ms.date: 07/16/2019
-ms.openlocfilehash: 2d6f18e373327b758e766dffba341c080622301f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a5814bfe3bd6ec2d97a068ea8ce71fa7ffea8ec0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80061938"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91323581"
 ---
 # <a name="use-cli-to-add-an-azure-sql-database-elastic-pool-to-a-failover-group"></a>Utiliser CLI pour ajouter un pool élastique Azure SQL Database à un groupe de basculement
 
@@ -52,7 +52,7 @@ az group delete --name $resource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az sql elastic-pool](/cli/azure/sql/elastic-pool) | Commandes de pool élastique. |
 | [az sql failover-group ](/cli/azure/sql/failover-group) | Commandes de groupe de basculement. |
@@ -61,4 +61,4 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure/overview).
 
-Vous trouverez des exemples supplémentaires de scripts Azure CLI SQL Database dans la page [Scripts Azure CLI Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts Azure CLI SQL Database dans la page [Scripts Azure CLI Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

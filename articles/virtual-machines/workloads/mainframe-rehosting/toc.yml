@@ -18,6 +18,8 @@
           href: microfocus/get-started.md
         - name: Installer Enterprise Server
           href: microfocus/set-up-micro-focus-azure.md
+        - name: Déployer Enterprise Server sur AKS
+          href: microfocus/deploy-micro-focus-enterprise-server.md
         - name: Exécuter CICS BankDemo
           href: microfocus/demo.md
         - name: Enterprise Server dans des conteneurs
@@ -37,9 +39,9 @@
         - name: Configurer ADCD dans zD&T
           href: ibm/demo.md
         - name: IBM DB2 pureScale
-          href: /azure/virtual-machines/linux/ibm-db2-purescale-azure?toc=/azure/virtual-machines/workloads/mainframe-rehosting/toc.json
+          href: ../../linux/ibm-db2-purescale-azure.md?toc=/azure/virtual-machines/workloads/mainframe-rehosting/toc.json
         - name: Déployer IBM DB2 pureScale
-          href: /azure/virtual-machines/linux/deploy-ibm-db2-purescale-azure?toc=/azure/virtual-machines/workloads/mainframe-rehosting/toc.json
+          href: ../../linux/deploy-ibm-db2-purescale-azure.md?toc=/azure/virtual-machines/workloads/mainframe-rehosting/toc.json
     - name: Ressources
       items:
         - name: Livres blancs

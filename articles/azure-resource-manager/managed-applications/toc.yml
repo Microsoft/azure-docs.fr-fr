@@ -13,8 +13,6 @@
       href: deploy-service-catalog-quickstart.md
 - name: Tutoriels
   items:
-    - name: Publier l’application marketplace
-      href: publish-marketplace-app.md
     - name: Créer une application managée avec un fournisseur personnalisé
       href: tutorial-create-managed-app-with-custom-provider.md
 - name: Exemples
@@ -25,9 +23,6 @@
       href: powershell-samples.md
     - name: Solutions d’applications managées
       href: sample-projects.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
     - name: Afficher un artefact de définition
@@ -36,6 +31,10 @@
       href: concepts-built-in-policy.md
     - name: Artefact de définition de rôle
       href: concepts-custom-role-definition.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
     - name: Serveurs de publication
@@ -44,8 +43,12 @@
           href: create-uidefinition-overview.md
         - name: Tester l’interface du portail
           href: test-createuidefinition.md
+        - name: Créer une offre d’application Azure
+          href: ../../marketplace/create-new-azure-apps-offer.md?toc=/azure/azure-resource-manager/managed-applications/toc.json
         - name: Demander l’accès juste-à-temps
           href: request-just-in-time-access.md
+        - name: Utiliser un réseau virtuel existant
+          href: existing-vnet-integration.md
         - name: Mettre à jour les ressources managées
           href: update-managed-resources.md
         - name: Utiliser le portail pour publier la définition d’application
@@ -79,24 +82,48 @@
     - name: REST
       href: /rest/api/resources/
     - name: Fonctions de l’interface utilisateur
-      href: create-uidefinition-functions.md
+      items:
+        - name: Toutes les fonctions
+          href: create-uidefinition-functions.md
+        - name: Fonctions de collection
+          href: create-ui-definition-collection-functions.md
+        - name: Fonctions de conversion
+          href: create-ui-definition-conversion-functions.md
+        - name: Fonctions de date
+          href: create-ui-definition-date-functions.md
+        - name: Fonctions logiques
+          href: create-ui-definition-logical-functions.md
+        - name: Fonctions mathématiques
+          href: create-ui-definition-math-functions.md
+        - name: Fonctions de référencement
+          href: create-ui-definition-referencing-functions.md
+        - name: Fonctions de chaîne
+          href: create-ui-definition-string-functions.md
     - name: Options de l’interface utilisateur
       href: create-uidefinition-elements.md
       items:
         - name: Courant
           items:
+            - name: CheckBox
+              href: microsoft-common-checkbox.md
             - name: Liste déroulante
               href: microsoft-common-dropdown.md
+            - name: EditableGrid
+              href: microsoft-common-editablegrid.md
             - name: Chargement de fichier
               href: microsoft-common-fileupload.md
             - name: InfoBox
               href: microsoft-common-infobox.md
-            - name: Groupe d’options
+            - name: OptionsGroup (case d’option)
               href: microsoft-common-optionsgroup.md
             - name: Zone de mot de passe
               href: microsoft-common-passwordbox.md
             - name: Section
               href: microsoft-common-section.md
+            - name: ServicePrincipalSelector
+              href: microsoft-common-serviceprincipalselector.md
+            - name: Curseur
+              href: microsoft-common-slider.md
             - name: TagsByResource
               href: microsoft-common-tagsbyresource.md
             - name: TextBlock
@@ -111,6 +138,10 @@
               href: microsoft-compute-sizeselector.md
             - name: Zone de texte Nom d’utilisateur
               href: microsoft-compute-usernametextbox.md
+        - name: Key Vault
+          items:
+            - name: KeyVaultCertificateSelector
+              href: microsoft-keyvault-keyvaultcertificateselector.md
         - name: Identité managée
           items:
             - name: IdentitySelector
@@ -121,12 +152,23 @@
               href: microsoft-network-publicipaddresscombo.md
             - name: Zone de liste modifiable Réseau virtuel
               href: microsoft-network-virtualnetworkcombo.md
+        - name: Solutions
+          items:
+            - name: ArmApiControl
+              href: microsoft-solutions-armapicontrol.md
+            - name: ResourceSelector
+              href: microsoft-solutions-resourceselector.md
         - name: Stockage
           items:
             - name: Zone de liste modifiable Compte de stockage multiple
               href: microsoft-storage-multistorageaccountcombo.md
             - name: Sélecteur compte de stockage
               href: microsoft-storage-storageaccountselector.md
+            - name: StorageBlobSelector
+              href: microsoft-storage-storageblobselector.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Feuille de route Azure
@@ -137,5 +179,7 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Bonnes pratiques pour les modèles Resource Manager
       href: 'https://github.com/Azure/azure-quickstart-templates/blob/master/1-CONTRIBUTION-GUIDE/best-practices.md'
+    - name: Microsoft Q&A
+      href: 'https://docs.microsoft.com/en-us/answers/topics/azure-managed-applications.html'
     - name: Stack Overflow
-      href: 'http://stackoverflow.com/questions/tagged/azure-managedapps'
+      href: 'https://stackoverflow.com/questions/tagged/azure-managed-app'

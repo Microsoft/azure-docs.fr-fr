@@ -2,22 +2,22 @@
 title: Configurer le flux de travail de consentement de l’administrateur-Azure Active Directory | Microsoft Docs
 description: Découvrez comment configurer un moyen pour les utilisateurs finaux de demander l’accès aux applications qui requièrent le consentement de l’administrateur.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/29/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: luleon
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 83b3f0d97daf0b4ac17f74981119b380d1776d97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7fc688ca0981024e5e08c9fb20ecb6704efbd7f2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75430213"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997492"
 ---
 # <a name="configure-the-admin-consent-workflow-preview"></a>Configurer le workflow du consentement administrateur (préversion)
 
@@ -62,11 +62,11 @@ Une fois le workflow de consentement de l’administrateur activé, les utilisat
 
 2. Le message **Approbation requise** s’affiche. L’utilisateur indique pourquoi il a besoin d’accéder à l’application, puis sélectionne la **requête d’approbation**.
 
-   ![Demande et justification de l’utilisateur du consentement de l’administrateur](media/configure-admin-consent-workflow/end-user-justification.png)
+   ![Capture d’écran affichant une boîte de dialogue Approbation requise dans laquelle vous pouvez demander une approbation.](media/configure-admin-consent-workflow/end-user-justification.png)
 
 3. Un message **Demande envoyée** confirme que la demande a été envoyée à l’administrateur. Si l’utilisateur envoie plusieurs requêtes, seule la première est envoyée à l’administrateur.
 
-   ![Demande et justification de l’utilisateur du consentement de l’administrateur](media/configure-admin-consent-workflow/end-user-sent-request.png)
+   ![Capture d’écran affichant la confirmation Demande envoyée.](media/configure-admin-consent-workflow/end-user-sent-request.png)
 
  4. L’utilisateur reçoit une notification par courrier électronique lorsque sa requête est approuvée, refusée ou bloquée. 
 
@@ -147,7 +147,7 @@ Non, pour l’instant, les demandeurs peuvent uniquement obtenir des notificatio
 
 **En tant que réviseur, est-il possible d’approuver l’application, mais pas pour tout le monde ?**
  
-Si vous souhaitez accorder le consentement de l’administrateur et permettre à tous les utilisateurs du locataire d’utiliser l’application, nous vous recommandons de refuser la demande. Octroyez ensuite manuellement le consentement de l’administrateur en restreignant l’accès à l’application en demandant l’attribution de l’utilisateur et en affectant des utilisateurs ou des groupes à l’application. Pour plus d'informations, voir [Méthodes d'affectation d'utilisateurs et de groupes](methods-for-assigning-users-and-groups.md).
+Si vous souhaitez accorder le consentement de l’administrateur et permettre à tous les utilisateurs du locataire d’utiliser l’application, nous vous recommandons de refuser la demande. Octroyez ensuite manuellement le consentement de l’administrateur en restreignant l’accès à l’application en demandant l’attribution de l’utilisateur et en affectant des utilisateurs ou des groupes à l’application. Pour plus d'informations, voir [Méthodes d'affectation d'utilisateurs et de groupes](./assign-user-or-group-access-portal.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -157,6 +157,6 @@ Pour plus d’informations sur le consentement des applications, consultez [Infr
 
 [Accorder le consentement de l’administrateur au niveau locataire à une application](grant-admin-consent.md)
 
-[Autorisations et consentement dans la plateforme d’identités Microsoft](../develop/active-directory-v2-scopes.md)
+[Autorisations et consentement dans la plateforme d’identités Microsoft](../develop/v2-permissions-and-consent.md)
 
 [Azure AD sur StackOverflow](https://stackoverflow.com/questions/tagged/azure-active-directory)

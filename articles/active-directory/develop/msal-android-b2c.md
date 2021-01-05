@@ -13,16 +13,16 @@ ms.date: 9/18/2019
 ms.author: brianmel
 ms.reviewer: rapong
 ms.custom: aaddev
-ms.openlocfilehash: 0998bb04b0dfc69db4696f2e390cfe259eba6718
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1c4f47fd771cfb92b3896963c96b39d9eb7d97b8
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76696519"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96344876"
 ---
 # <a name="use-msal-for-android-with-b2c"></a>Utiliser MSAL pour Android avec B2C
 
-Microsoft Authentication Library (MSAL) permet aux développeurs d’applications d’authentifier les utilisateurs avec des identités sociales et locales à l’aide d’[Azure Active Directory B2C (Azure AD) B2C](https://docs.microsoft.com/azure/active-directory-b2c/). Azure AD B2C est un service de gestion des identités. Utilisez-le pour personnaliser et contrôler la façon dont les clients s’inscrivent, se connectent et gèrent leurs profils lorsqu’ils utilisent vos applications.
+Microsoft Authentication Library (MSAL) permet aux développeurs d’applications d’authentifier les utilisateurs avec des identités sociales et locales à l’aide d’[Azure Active Directory B2C (Azure AD) B2C](../../active-directory-b2c/index.yml). Azure AD B2C est un service de gestion des identités. Utilisez-le pour personnaliser et contrôler la façon dont les clients s’inscrivent, se connectent et gèrent leurs profils lorsqu’ils utilisent vos applications.
 
 ## <a name="configure-known-authorities-and-redirect-uri"></a>Configurer les autorités connues et l’URI de redirection
 
@@ -54,7 +54,7 @@ Le fichier de configuration de l’application va déclarer deux `authorities`. 
 }
 ```
 
-`redirect_uri` doit être inscrit dans la configuration de l’application, ainsi que dans `AndroidManifest.xml` pour prendre en charge la redirection pendant le [flux de l’octroi du code d’autorisation](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-reference-oauth-code).
+`redirect_uri` doit être inscrit dans la configuration de l’application, ainsi que dans `AndroidManifest.xml` pour prendre en charge la redirection pendant le [flux de l’octroi du code d’autorisation](../../active-directory-b2c/authorization-code-flow.md).
 
 ## <a name="initialize-ipublicclientapplication"></a>Initialiser IPublicClientApplication
 
@@ -129,7 +129,7 @@ AcquireTokenSilentParameters parameters = new AcquireTokenSilentParameters.Build
 
         @Override
         public void onError(MsalException exception) {
-            // Token request was unsuccesful, inspect the exception
+            // Token request was unsuccessful, inspect the exception
         }
     })
     .build();
@@ -227,7 +227,7 @@ String tenantId = account.getTenantId();
 
 ### <a name="idtoken-claims"></a>Revendications IdToken
 
-Les revendications retournées dans IdToken sont renseignées par le service d’émission de jeton de sécurité (STS), et non par MSAL. Selon le fournisseur d’identité (IdP) utilisé, certaines revendications peuvent être absentes. Actuellement, certains IdP ne fournissent pas la revendication `preferred_username`. Étant donné que cette revendication est utilisée par MSAL pour la mise en cache, une valeur d’espace réservé, `MISSING FROM THE TOKEN RESPONSE`, est utilisée à la place. Pour plus d’informations sur les revendications IdToken B2C, consultez [Vue d’ensemble des jetons dans Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-reference-tokens#claims).
+Les revendications retournées dans IdToken sont renseignées par le service d’émission de jeton de sécurité (STS), et non par MSAL. Selon le fournisseur d’identité (IdP) utilisé, certaines revendications peuvent être absentes. Actuellement, certains IdP ne fournissent pas la revendication `preferred_username`. Étant donné que cette revendication est utilisée par MSAL pour la mise en cache, une valeur d’espace réservé, `MISSING FROM THE TOKEN RESPONSE`, est utilisée à la place. Pour plus d’informations sur les revendications IdToken B2C, consultez [Vue d’ensemble des jetons dans Azure Active Directory B2C](../../active-directory-b2c/tokens-overview.md#claims).
 
 ## <a name="managing-accounts-and-policies"></a>Gestion des comptes et des stratégies
 
@@ -239,4 +239,4 @@ Quand vous renouvelez des jetons pour une stratégie avec `acquireTokenSilent`, 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez-en plus sur Azure Active Directory B2C (Azure AD B2C) dans [Qu’est-ce qu’Azure Active Directory B2C ?](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-overview)
+Découvrez-en plus sur Azure Active Directory B2C (Azure AD B2C) dans [Qu’est-ce qu’Azure Active Directory B2C ?](../../active-directory-b2c/overview.md)

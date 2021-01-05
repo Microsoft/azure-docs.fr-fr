@@ -7,18 +7,19 @@ ms.topic: conceptual
 ms.date: 04/15/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: c5f6cec8b7fd1169a4f04649fcaf7bb7ada33833
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: references_regions
+ms.openlocfilehash: e9fd20fd42e9fe1eb0e98766798e5c759c974c97
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81406289"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92013897"
 ---
 # <a name="asynchronous-refresh-with-the-rest-api"></a>Actualisation asynchrone avec l’API REST
 
 En utilisant n’importe quel langage de programmation qui prend en charge les appels REST, vous pouvez effectuer des opérations d’actualisation des données asynchrones sur vos modèles tabulaires Azure Analysis Services. Cela inclut la synchronisation des réplicas en lecture seule pour la montée en puissance des requêtes. 
 
-Les opérations d’actualisation des données peuvent prendre un certain temps en fonction de plusieurs facteurs, notamment le volume de données, le niveau d’optimisation à l’aide de partitions, etc. Ces opérations sont généralement appelées avec des méthodes existantes, telles que [TOM](https://docs.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (modèle d’objet tabulaire),les cmdlets [PowerShell](https://docs.microsoft.com/analysis-services/powershell/analysis-services-powershell-reference) ou [TMSL](https://docs.microsoft.com/analysis-services/tmsl/tabular-model-scripting-language-tmsl-reference) (langage de script de modèle tabulaire). Toutefois, ces méthodes requièrent souvent des connexions HTTP non fiables à longue durée d’exécution.
+Les opérations d’actualisation des données peuvent prendre un certain temps en fonction de plusieurs facteurs, notamment le volume de données, le niveau d’optimisation à l’aide de partitions, etc. Ces opérations sont généralement appelées avec des méthodes existantes, telles que [TOM](/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo) (modèle d’objet tabulaire),les cmdlets [PowerShell](/analysis-services/powershell/analysis-services-powershell-reference) ou [TMSL](/analysis-services/tmsl/tabular-model-scripting-language-tmsl-reference) (langage de script de modèle tabulaire). Toutefois, ces méthodes requièrent souvent des connexions HTTP non fiables à longue durée d’exécution.
 
 L’API REST pour Azure Analysis Services permet de réaliser de manière asynchrone des opérations d’actualisation de données. À l’aide de l’API REST, les connexions HTTP à longue durée d’exécution des applications clientes ne sont pas nécessaires. Il existe également d’autres fonctionnalités intégrées à des fins de fiabilité, telles que les tentatives automatiques et les validations par lot.
 
@@ -99,9 +100,9 @@ La spécification des paramètres n’est pas nécessaire. La valeur par défaut
 
 | Nom             | Type  | Description  |Default  |
 |------------------|-------|--------------|---------|
-| `Type`           | Enum  | Type de traitement à effectuer. Les types sont alignés sur les types de [commande d’actualisation](https://docs.microsoft.com/analysis-services/tmsl/refresh-command-tmsl) TMSL : full, clearValues, calculate, dataOnly, automatic et defragment. Le type add n’est pas pris en charge.      |   automatique      |
+| `Type`           | Enum  | Type de traitement à effectuer. Les types sont alignés sur les types de [commande d’actualisation](/analysis-services/tmsl/refresh-command-tmsl) TMSL : full, clearValues, calculate, dataOnly, automatic et defragment. Le type add n’est pas pris en charge.      |   automatique      |
 | `CommitMode`     | Enum  | Détermine si les objets doivent être validés par lot ou uniquement à la fin. Modes inclus : default, transactional, partialBatch.  |  transactional       |
-| `MaxParallelism` | Int   | Cette valeur détermine le nombre maximal de threads sur lesquels exécuter des commandes de traitement en parallèle. Elle s’aligne sur la propriété MaxParallelism qui peut être définie dans la [commande de séquence](https://docs.microsoft.com/analysis-services/tmsl/sequence-command-tmsl) TMSL ou par d’autres méthodes.       | 10        |
+| `MaxParallelism` | Int   | Cette valeur détermine le nombre maximal de threads sur lesquels exécuter des commandes de traitement en parallèle. Elle s’aligne sur la propriété MaxParallelism qui peut être définie dans la [commande de séquence](/analysis-services/tmsl/sequence-command-tmsl) TMSL ou par d’autres méthodes.       | 10        |
 | `RetryCount`     | Int   | Indique le nombre de tentatives de l’opération avant échec.      |     0    |
 | `Objects`        | Array | Tableau d’objets à traiter. Chaque objet inclut « table » lors du traitement de la table entière, ou « table » et « partition » lors du traitement d’une partition. Si aucun objet n’est spécifié, l’ensemble du modèle est actualisé. |   Traitement de l’ensemble du modèle      |
 
@@ -158,14 +159,14 @@ Pour obtenir la liste des opérations d’actualisation historiques pour un mod�
 [
     {
         "refreshId": "1344a272-7893-4afa-a4b3-3fb87222fdac",
-        "startTime": "2017-12-09T01:58:04.76",
-        "endTime": "2017-12-09T01:58:12.607",
+        "startTime": "2017-12-07T02:06:57.1838734Z",
+        "endTime": "2017-12-07T02:07:00.4929675Z",
         "status": "succeeded"
     },
     {
         "refreshId": "474fc5a0-3d69-4c5d-adb4-8a846fa5580b",
-        "startTime": "2017-12-07T02:05:48.32",
-        "endTime": "2017-12-07T02:05:54.913",
+        "startTime": "2017-12-07T01:05:54.157324Z",
+        "endTime": "2017-12-07T01:05:57.353371Z",
         "status": "succeeded"
     }
 ]
@@ -218,13 +219,11 @@ L’exemple de code utilise l’authentification d’un [principal de service](#
 Consultez [Créer un principal du service – Portail Azure](../active-directory/develop/howto-create-service-principal-portal.md) et [Ajouter un principal du service au rôle d’administrateur du serveur](analysis-services-addservprinc-admins.md) pour plus d’informations sur la configuration du principal du service et l’attribution des autorisations nécessaires dans Azure AS. Après cette procédure, suivez les étapes complémentaires suivantes :
 
 1.    Dans l’exemple de code, recherchez **string authority = …** , puis remplacez **common** par l’ID de locataire de votre organisation.
-2.    Ajoutez ou enlevez des marques de commentaire pour que la classe ClientCredential soit utilisée pour instancier l’objet d’informations d’identification. Vérifiez que les valeurs \<ID de l’application> et \<clé de l’application> valeurs sont accessibles de manière sécurisée, ou utilisez l’authentification par certificat pour les principaux de service.
+2.    Ajoutez ou enlevez des marques de commentaire pour que la classe ClientCredential soit utilisée pour instancier l’objet d’informations d’identification. Vérifiez que les valeurs \<App ID> et \<App Key> sont accessibles de manière sécurisée, ou utilisez l’authentification par certificat pour les principaux de service.
 3.    Exécutez l’exemple.
 
 
 ## <a name="see-also"></a>Voir aussi
 
 [Exemples](analysis-services-samples.md)   
-[REST API](https://docs.microsoft.com/rest/api/analysisservices/servers)   
-
-
+[REST API](/rest/api/analysisservices/servers)

@@ -10,20 +10,20 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/19/2019
 ms.author: allensu
-ms.openlocfilehash: 874ec75fb9173b6cee50bf8880510464fa13e9d2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a5f4f6a6e72b57638688069111071a6e0a035c49
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81254238"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018662"
 ---
 # <a name="control-azure-cdn-caching-behavior-with-caching-rules"></a>Contrôler le comportement de mise en cache d’Azure CDN avec des règles de mise en cache
 
 > [!NOTE] 
-> Les règles de mise en cache sont disponibles uniquement pour les profils **CDN Azure Standard fourni par Verizon** et **CDN Azure Standard fourni par Akamai**. Pour des profils **Azure CDN de Microsoft**, vous devez utiliser le [moteur de règles standard](cdn-standard-rules-engine-reference.md) Pour les profils **Azure CDN Premium de Verizon**, vous devez utiliser le [moteur de règles Premium Verizon](cdn-rules-engine.md) dans le portail **Gérer** pour une fonctionnalité similaire.
+> Les règles de mise en cache sont disponibles uniquement pour les profils **CDN Azure Standard fourni par Verizon** et **CDN Azure Standard fourni par Akamai**. Pour des profils **Azure CDN de Microsoft**, vous devez utiliser le [moteur de règles standard](cdn-standard-rules-engine-reference.md) Pour les profils **Azure CDN Premium de Verizon**, vous devez utiliser le [moteur de règles Premium Verizon](./cdn-verizon-premium-rules-engine.md) dans le portail **Gérer** pour une fonctionnalité similaire.
  
 Azure Content Delivery Network (CDN) offre deux moyens de contrôler la façon dont les fichiers sont mis en cache : 
 

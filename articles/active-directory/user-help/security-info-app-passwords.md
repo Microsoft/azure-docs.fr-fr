@@ -11,12 +11,12 @@ ms.subservice: user-help
 ms.topic: end-user-help
 ms.date: 02/13/2018
 ms.author: curtand
-ms.openlocfilehash: e5ad882f172007e2563f832ec8eb61145cd0b36a
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 84588130788e9be8d3be52a8ea0f3988dce7b952
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83744511"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91537002"
 ---
 # <a name="create-app-passwords-from-the-security-info-preview-page"></a>Créer des mots de passe d’application à partir de la page Informations de sécurité (préversion)
 
@@ -59,7 +59,7 @@ Si vous utilisez la vérification en deux étapes avec votre compte professionne
 
 4. Tapez le nom de l’application qui requiert le mot de passe, puis sélectionnez **Suivant**.
 
-    ![Page Mot de passe d’application, avec le nom de l’application](media/security-info/securityinfo-myprofile-password-appname.png)
+    ![Capture d’écran montrant la page « Mot de passe d’application » avec le nom de l’application entré.](media/security-info/securityinfo-myprofile-password-appname.png)
 
 5. Copiez le texte à partir de la zone **Mot de passe**, collez le mot de passe dans la zone de mot de passe de l’application (dans cet exemple, Outlook 2010), puis sélectionnez **Terminé**.
 
@@ -84,4 +84,4 @@ Si vous n’avez plus besoin d’utiliser une application qui requiert un mot de
 
 ## <a name="for-more-information"></a>Informations supplémentaires
 
-- Pour plus d’informations sur la page **Informations de sécurité** et sur sa configuration, consultez [Vue d’ensemble des informations de sécurité](user-help-security-info-overview.md)
+- Pour plus d’informations sur la page **Informations de sécurité** et sur sa configuration, consultez [Vue d’ensemble des informations de sécurité](./security-info-setup-signin.md)

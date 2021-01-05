@@ -8,19 +8,21 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 04/22/2020
-ms.openlocfilehash: cb7f11f184ba8e19eb8786817da58edf8ddee44e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/24/2020
+ms.openlocfilehash: 664943fc5535883b3df77b2795383e5c0586a71c
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137091"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94375327"
 ---
 # <a name="boosted-decision-tree-regression-module"></a>Module de régression d’arbre de décision boosté
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour créer un ensemble d’arbres de régression à l’aide du boosting. Le terme *boosting* signifie que chaque arbre dépend des arbres précédents. L’algorithme apprend en ajustant les valeurs résiduelles des arbres précédents. Par conséquent, le boosting d’un arbre de décision a tendance à améliorer la précision avec un léger risque de diminution de la couverture.  
+
+Ce module est basé sur l’algorithme LightGBM.
   
 Cette méthode de régression est une méthode d’apprentissage supervisé et nécessite donc un *jeu de données étiqueté*. La colonne de libellés doit contenir des valeurs numériques.  
 
@@ -63,7 +65,7 @@ La méthode de boosting de gradient peut également servir pour les problèmes d
 
     En augmentant cette valeur, vous augmentez potentiellement la taille de l’arbre et vous bénéficiez d’un surcroît de précision, au risque d’un surajustement et d’un temps d’apprentissage plus long.  
 
-4.  **Minimum number of samples per leaf node** (Nombre minimal d’échantillons par nœud terminal) : indiquez le nombre minimal de cas requis pour créer un nœud terminal (feuille) dans un arbre.
+4. **Minimum number of samples per leaf node** (Nombre minimal d’échantillons par nœud terminal) : indiquez le nombre minimal de cas requis pour créer un nœud terminal (feuille) dans un arbre.
 
     Plus cette valeur est grande, plus le seuil de création de règles augmente. Par exemple, la valeur par défaut de 1, un seul cas suffit à entraîner la création d’une règle. Si vous définissez la valeur sur 5, les données d’apprentissage doivent contenir au moins 5 cas respectant les mêmes conditions.
 
@@ -71,7 +73,7 @@ La méthode de boosting de gradient peut également servir pour les problèmes d
 
 6. **Number of trees constructed** (Nombre d’arbres construits) : indiquez le nombre total d’arbres de décision à créer dans l’ensemble. Plus il y en a, meilleure peut être la couverture, mais plus le temps d’apprentissage augmente.
 
-    Cette valeur contrôle également le nombre d’arbres qui s’affichent dans la visualisation du modèle entraîné. Si vous souhaitez afficher ou imprimer un arbre unique, vous pouvez définir la valeur sur 1. Toutefois, un seul arbre est produit (celui avec le jeu de paramètres initial) et aucune itération n’est effectuée.
+    Toutefois, si vous définissez la valeur sur 1, un seul arbre est généré (l’arbre avec le jeu de paramètres initial), et aucune autre itération n’est effectuée.
 
 7. **Random number seed** (Valeur de départ aléatoire) : saisissez un entier non négatif facultatif à utiliser comme la valeur de départ aléatoire. La spécification d’une valeur de départ garantit la reproductibilité entre les exécutions qui présentent les mêmes données et paramètres.
 
@@ -90,7 +92,7 @@ La méthode de boosting de gradient peut également servir pour les problèmes d
     > 
     > Si vous transmettez un ensemble unique de valeurs de paramètre au module [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md), quand il attend une plage de paramètres pour chaque paramètre, il ignore les valeurs et utilise les valeurs par défaut pour l’apprenant.  
     > 
-    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent dans une plage de valeurs.
+    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent sur une plage de valeurs.
     
 
 10. Envoyez le pipeline.  
@@ -99,7 +101,7 @@ La méthode de boosting de gradient peut également servir pour les problèmes d
 
 Une fois l’apprentissage terminé :
 
-+ Pour utiliser le modèle afin de calculer les scores, connectez-le au [modèle de score](./score-model.md), pour prédire des valeurs des nouveaux exemples d’entrée.
++ Si vous souhaitez utiliser le modèle à des fins de scoring, connectez le module [Train Model](train-model.md) (Entraîner un modèle) au module [Score Model](./score-model.md) (Effectuer le scoring d’un modèle) pour prédire les valeurs des nouveaux exemples d’entrée.
 
 + Pour enregistrer un instantané du modèle entraîné, sélectionnez l’onglet **Sorties** dans le panneau droit du **modèle entraîné** et cliquez sur l’icône **Inscrire le jeu de données**. La copie du modèle entraîné est enregistrée en tant que module dans l’arborescence du module et ne sera pas mise à jour lors des exécutions successives du pipeline.
 

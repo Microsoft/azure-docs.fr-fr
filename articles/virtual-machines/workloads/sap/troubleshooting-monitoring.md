@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/10/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 50a6b4f15a7de02533e3bb51e5659f7b4c078b40
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1a8d6fc6acb33af0c36978aa79dc90aeac3cf596
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617294"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966749"
 ---
 # <a name="how-to-monitor-sap-hana-large-instances-on-azure"></a>Comment surveiller SAP HANA (grandes instances) sur Azure
 
@@ -50,4 +51,4 @@ tar  -czvf health_check_logs.tar.gz /var/log/health_check
 
 **Étapes suivantes**
 
-- Voir [Comment surveiller SAP HANA (grandes instances) sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-monitor-troubleshoot).
+- Voir [Comment surveiller SAP HANA (grandes instances) sur Azure](./hana-monitor-troubleshoot.md).

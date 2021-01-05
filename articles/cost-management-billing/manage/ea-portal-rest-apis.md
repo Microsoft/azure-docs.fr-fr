@@ -3,16 +3,17 @@ title: API REST Entreprise Azure
 description: Cet article décrit les API REST qui sont disponibles avec votre inscription Entreprise Azure.
 author: bandersmsft
 ms.author: banders
-ms.date: 05/01/2020
+ms.date: 09/03/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: enterprise
 ms.reviewer: boalcsva
-ms.openlocfilehash: b35937a5f4638e73dd1603dee7ad97e838efac8b
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: c4c99142c64278514066efa8925ed8e3f6617235
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692668"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132582"
 ---
 # <a name="azure-enterprise-rest-apis"></a>API REST Entreprise Azure
 
@@ -24,15 +25,15 @@ Les clients d’Entreprise Microsoft Azure peuvent obtenir des données sur l’
 
 ### <a name="available-apis"></a>API disponibles
 
-**Solde et résumé** : utilisez l’[API Solde et résumé](../../billing/billing-enterprise-api-balance-summary.md) pour obtenir un résumé mensuel des informations sur les soldes, les nouveaux achats, les frais du service Place de marché Azure, les ajustements et les frais de dépassement. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Solde et résumé](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary).
+**Solde et résumé** : utilisez l’[API Solde et résumé](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) pour obtenir un résumé mensuel des informations sur les soldes, les nouveaux achats, les frais du service Place de marché Azure, les ajustements et les frais de dépassement. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Solde et résumé](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary).
 
-**Détails de l’utilisation** : l’[API Détails de l’utilisation](../../billing/billing-enterprise-api-usage-detail.md) fournit une analyse quotidienne des quantités consommées et des frais estimés par inscription. Le résultat inclut également des informations sur les instances, les compteurs et les services. Vous pouvez interroger l’API par période de facturation, ou pour une plage donnée en spécifiant les dates de début et de fin. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Détails de l’utilisation](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail).
+**Détails de l’utilisation** : l’[API Détails de l’utilisation](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail) fournit une analyse quotidienne des quantités consommées et des frais estimés par inscription. Le résultat inclut également des informations sur les instances, les compteurs et les services. Vous pouvez interroger l’API par période de facturation, ou pour une plage donnée en spécifiant les dates de début et de fin. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Détails de l’utilisation](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail).
 
-**Frais du magasin de la Place de marché** : l’[API Frais du magasin de la Place de marché](../../billing/billing-enterprise-api-marketplace-storecharge.md) présente l’analyse détaillée des frais de la Place de marché basés sur l’utilisation par jour pour la période de facturation ou la plage entre les dates de début et de fin indiquées. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise :Frais du magasin de la Place de marché](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge).
+**Frais du magasin de la Place de marché** : l’[API Frais du magasin de la Place de marché](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge) présente l’analyse détaillée des frais de la Place de marché basés sur l’utilisation par jour pour la période de facturation ou la plage entre les dates de début et de fin indiquées. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise :Frais du magasin de la Place de marché](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge).
 
 **Grille tarifaire** : l’[API Grille tarifaire](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) indique les tarifs applicables pour chaque compteur selon l’inscription et la période de facturation. Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Grille tarifaire](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet).
 
-**Périodes de facturation** : l’[API Périodes de facturation](../../billing/billing-enterprise-api-billing-periods.md) affiche, par ordre chronologique inverse, une liste des périodes de facturation comportant les données de consommation pour une inscription. Chaque période contient une propriété qui pointe vers la route de l’API pour les quatre ensembles de données : BalanceSummary (Solde et résumé), UsageDetails (Détails de l’utilisation), Marketplace Charges (Frais de la Place de marché) et PriceSheet (Grille tarifaire). Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Périodes de facturation](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods).
+**Périodes de facturation** : l’[API Périodes de facturation](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) affiche, par ordre chronologique inverse, une liste des périodes de facturation comportant les données de consommation pour une inscription. Chaque période contient une propriété qui pointe vers la route de l’API pour les quatre ensembles de données : BalanceSummary (Solde et résumé), UsageDetails (Détails de l’utilisation), Marketplace Charges (Frais de la Place de marché) et PriceSheet (Grille tarifaire). Pour plus d’informations, consultez [API de création de rapports pour les clients d’Entreprise : Périodes de facturation](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods).
 
 ### <a name="enable-api-data-access"></a>Activer l’accès aux données d’API
 

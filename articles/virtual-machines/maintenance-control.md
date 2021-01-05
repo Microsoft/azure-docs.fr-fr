@@ -3,16 +3,16 @@ title: Vue d’ensemble du contrôle de maintenance des machines virtuelles Azur
 description: Apprenez à contrôler le moment où la maintenance est appliquée à vos machines virtuelles Azure à l'aide du contrôle de maintenance.
 author: cynthn
 ms.service: virtual-machines
-ms.topic: article
+ms.topic: conceptual
 ms.workload: infrastructure-services
-ms.date: 04/22/2020
+ms.date: 11/19/2020
 ms.author: cynthn
-ms.openlocfilehash: 4c5e30d0607db2d529ae41ebab6dc82e925ff2a8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4b9dec0fe684e002fadbac2db375c354db2b6d01
+ms.sourcegitcommit: f311f112c9ca711d88a096bed43040fcdad24433
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82138880"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981168"
 ---
 # <a name="managing-platform-updates-with-maintenance-control"></a>Gestion des mises à jour de plateformes avec le contrôle de maintenance 
 
@@ -23,12 +23,13 @@ Le contrôle de maintenance vous permet de décider du moment où appliquer les 
 Avec le contrôle de maintenance, vous pouvez :
 - Regrouper des mises à jour dans un package de mise à jour.
 - Attendre jusqu’à 35 jours avant d’appliquer les mises à jour. 
-- Automatiser les mises à jour de plateforme pour votre fenêtre de maintenance avec Azure Functions.
+- Automatiser les mises à jour de la plateforme en configurant un calendrier de maintenance ou en utilisant [Azure Functions](https://github.com/Azure/azure-docs-powershell-samples/tree/master/maintenance-auto-scheduler).
 - Les configurations de maintenance fonctionnent entre les abonnements et les groupes de ressources. 
 
 ## <a name="limitations"></a>Limites
 
-- Les machines virtuelles doivent se trouver sur un [hôte dédié](./linux/dedicated-hosts.md) ou être créées à l’aide d’une [taille de machine virtuelle isolée](./linux/isolation.md).
+- Les machines virtuelles doivent se trouver sur un [hôte dédié](./dedicated-hosts.md) ou être créées à l’aide d’une [taille de machine virtuelle isolée](isolation.md).
+- Si une planification de maintenance est déclarée, sa durée minimale doit être de 2 heures.
 - Après 35 jours, une mise à jour est automatiquement appliquée.
 - L’utilisateur doit disposer d’un accès **Contributeur de ressource**.
 
@@ -39,6 +40,8 @@ Vous pouvez créer et gérer des configurations de maintenance à l’aide de l�
 - [Azure CLI](maintenance-control-cli.md)
 - [Azure PowerShell](maintenance-control-powershell.md)
 - [Azure portal](maintenance-control-portal.md)
+
+Pour un exemple Azure Functions, consultez [Planification des mises à jour de maintenance avec Contrôle de maintenance et Azure Functions](https://github.com/Azure/azure-docs-powershell-samples/tree/master/maintenance-auto-scheduler).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

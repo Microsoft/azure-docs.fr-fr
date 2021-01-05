@@ -1,6 +1,6 @@
 ---
 title: Configurer la diffusion en continu PlayReady hors connexion avec Azure Media Services v3
-description: Cet article vous montre comment configurer votre compte Azure Media Services pour la diffusion en continu hors connexion de PlayReady pour Windows 10.
+description: Cet article vous montre comment configurer votre compte Azure Media Services v3 pour la diffusion en continu hors connexion de PlayReady pour Windows 10.
 services: media-services
 keywords: DASH, DRM, Widevine hors connexion, ExoPlayer, Android
 documentationcenter: ''
@@ -12,16 +12,19 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/01/2019
+ms.date: 08/31/2020
 ms.author: willzhan
-ms.openlocfilehash: 63b835d5d6c442f19f6d1fbe1710547ab96e1b40
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 19c930915de20d7f3a8938570e074458b32a8efb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82160237"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90975676"
 ---
 # <a name="offline-playready-streaming-for-windows-10-with-media-services-v3"></a>Diffusion en continu PlayReady hors connexion pour Windows 10 avec Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Azure Media Services prend en charge le téléchargement/la lecture hors connexion avec la protection DRM. Cet article décrit la prise en charge hors connexion d’Azure Media Services pour les clients Windows 10/PlayReady. Pour en savoir plus sur la prise en charge du mode hors connexion pour les appareils iOS/FairPlay et Android/Widevine, consultez les articles suivants :
 
@@ -44,7 +47,7 @@ Le défi auquel nous sommes confrontés pour l’implémentation du mode hors co
 * Le format MP4 est pris en charge par la plupart des lecteurs et outils d’encodeur, mais il n’y a aucune liaison entre le conteneur MP4 et DRM.
 * À terme, il conviendra d’utiliser CFF avec CENC. Toutefois, à l’heure actuelle, l’écosystème de prise en charge des outils/lecteurs n’existe pas encore. Nous devons trouver une solution rapidement.
  
-L’idée est la suivante : le format de fichier de diffusion en continu lisse ([PIFF](https://docs.microsoft.com/iis/media/smooth-streaming/protected-interoperable-file-format)) avec H264/AAC possède une liaison avec PlayReady (AES-128 CTR). Un fichier .ismv de diffusion en continu lisse individuel (en admettant que l’audio soit multiplexé dans la vidéo) est en soi un fichier fMP4 et peut être utilisé pour la lecture. Si un contenu de diffusion en continu lisse subit un chiffrement PlayReady, chaque fichier .ismv devient un fichier MP4 fragmenté protégé PlayReady. Il est possible de choisir le fichier .ismv ayant la vitesse de transmission souhaitée et de le renommer en .mp4 pour le téléchargement.
+L’idée est la suivante : le format de fichier de diffusion en continu lisse ([PIFF](/iis/media/smooth-streaming/protected-interoperable-file-format)) avec H264/AAC possède une liaison avec PlayReady (AES-128 CTR). Un fichier .ismv de diffusion en continu lisse individuel (en admettant que l’audio soit multiplexé dans la vidéo) est en soi un fichier fMP4 et peut être utilisé pour la lecture. Si un contenu de diffusion en continu lisse subit un chiffrement PlayReady, chaque fichier .ismv devient un fichier MP4 fragmenté protégé PlayReady. Il est possible de choisir le fichier .ismv ayant la vitesse de transmission souhaitée et de le renommer en .mp4 pour le téléchargement.
 
 Deux options sont disponibles pour héberger le fichier MP4 protégé PlayReady pour le téléchargement progressif :
 

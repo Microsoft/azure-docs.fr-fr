@@ -2,19 +2,17 @@
 title: Créer et exécuter des tests de disponibilité personnalisés avec Azure Functions
 description: Cette documentation explique comment créer une fonction Azure avec TrackAvailability() pour qu’elle s’exécute régulièrement selon la configuration spécifiée dans la fonction TimerTrigger. Les résultats de ce test sont envoyés à votre ressource Application Insights, où vous pouvez rechercher et signaler des données sur les résultats de disponibilité. Les tests personnalisés vous permettent d’écrire des tests de disponibilité plus complexes qu’avec l’IU du portail, de superviser une application dans votre réseau virtuel Azure, de changer l’adresse du point de terminaison ou de créer un test de disponibilité, si ce dernier n’est pas disponible dans votre région.
 ms.topic: conceptual
-author: mrbullwinkle
-ms.author: mbullwin
 ms.date: 05/04/2020
-ms.openlocfilehash: 81040adf6cfbb8820ec7f306c7d614830e3a2613
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 3553b212d1b63d4bd239893ba90aa3465d98df60
+ms.sourcegitcommit: ba7fafe5b3f84b053ecbeeddfb0d3ff07e509e40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791105"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91945649"
 ---
 # <a name="create-and-run-custom-availability-tests-using-azure-functions"></a>Créer et exécuter des tests de disponibilité personnalisés avec Azure Functions
 
-Cet article explique comment créer une fonction Azure avec TrackAvailability() pour qu’elle s’exécute régulièrement selon la configuration spécifiée dans la fonction TimerTrigger avec votre propre logique métier. Les résultats de ce test sont envoyés à votre ressource Application Insights, où vous pouvez rechercher et signaler des données sur les résultats de disponibilité. Cela vous permet de créer des tests personnalisés similaires à ceux que vous pouvez effectuer via la [supervision de la disponibilité](../../azure-monitor/app/monitor-web-app-availability.md) dans le portail. Les tests personnalisés vous permettent d’écrire des tests de disponibilité plus complexes qu’avec l’IU du portail, de superviser une application dans votre réseau virtuel Azure, de changer l’adresse du point de terminaison ou de créer un test de disponibilité même si cette fonctionnalité n’est pas disponible dans votre région.
+Cet article explique comment créer une fonction Azure avec TrackAvailability() pour qu’elle s’exécute régulièrement selon la configuration spécifiée dans la fonction TimerTrigger avec votre propre logique métier. Les résultats de ce test sont envoyés à votre ressource Application Insights, où vous pouvez rechercher et signaler des données sur les résultats de disponibilité. Cela vous permet de créer des tests personnalisés similaires à ceux que vous pouvez effectuer via la [supervision de la disponibilité](./monitor-web-app-availability.md) dans le portail. Les tests personnalisés vous permettent d’écrire des tests de disponibilité plus complexes qu’avec l’IU du portail, de superviser une application dans votre réseau virtuel Azure, de changer l’adresse du point de terminaison ou de créer un test de disponibilité même si cette fonctionnalité n’est pas disponible dans votre région.
 
 > [!NOTE]
 > Cet exemple est conçu uniquement pour vous montrer comment fonctionne l’appel d’API TrackAvailability() au sein d’une fonction Azure. Notez comment écrire le code de test HTTP sous-jacent/la logique métier nécessaires pour convertir ce code en test de disponibilité entièrement fonctionnel. Par défaut, si vous passez en revue cet exemple, vous allez créer un test de disponibilité qui génère toujours un échec.
@@ -23,7 +21,7 @@ Cet article explique comment créer une fonction Azure avec TrackAvailability() 
 
 - Si vous avez une ressource Application Insights :
     - Par défaut, Azure Functions crée une ressource Application Insights, mais si vous souhaitez utiliser l’une de vos ressources déjà créées, vous devez le spécifier durant la création.
-    - Suivez les instructions permettant de [créer une ressource Azure Functions et une fonction déclenchée par un minuteur](https://docs.microsoft.com/azure/azure-functions/functions-create-scheduled-function) (arrêter avant le nettoyage) avec les choix suivants.
+    - Suivez les instructions permettant de [créer une ressource Azure Functions et une fonction déclenchée par un minuteur](../../azure-functions/functions-create-scheduled-function.md) (arrêter avant le nettoyage) avec les choix suivants.
         -  Sélectionnez l’onglet **Supervision** en haut.
 
             ![ Créer une application Azure Functions avec votre propre ressource App Insights](media/availability-azure-functions/create-function-app.png)
@@ -35,7 +33,7 @@ Cet article explique comment créer une fonction Azure avec TrackAvailability() 
         - Sélectionner **Vérifier + créer**
 - Si vous n’avez pas encore créé de ressource Application Insights pour votre fonction déclenchée par un minuteur :
     - Par défaut, quand vous créez votre application Azure Functions, une ressource Application Insights est créée automatiquement.
-    - Suivez les instructions permettant de [créer une ressource Azure Functions et une fonction déclenchée par un minuteur](https://docs.microsoft.com/azure/azure-functions/functions-create-scheduled-function) (arrêter avant le nettoyage).
+    - Suivez les instructions permettant de [créer une ressource Azure Functions et une fonction déclenchée par un minuteur](../../azure-functions/functions-create-scheduled-function.md) (arrêter avant le nettoyage).
 
 ## <a name="sample-code"></a>Exemple de code
 
@@ -45,7 +43,7 @@ Copiez le code ci-dessous dans le fichier run.csx (cette opération remplace le 
 >![Fichier run.csx de la fonction Azure dans le portail Azure](media/availability-azure-functions/runcsx.png)
 
 > [!NOTE]
-> Pour l’adresse du point de terminaison, utilisez `EndpointAddress= https://dc.services.visualstudio.com/v2/track`. Si votre ressource se trouve dans une région comme Azure Government ou Azure Chine, consultez cet article sur le [remplacement des points de terminaison par défaut](https://docs.microsoft.com/azure/azure-monitor/app/custom-endpoints#regions-that-require-endpoint-modification), puis sélectionnez le point de terminaison de canal de télémétrie approprié pour votre région.
+> Pour l’adresse du point de terminaison, utilisez `EndpointAddress= https://dc.services.visualstudio.com/v2/track`. Si votre ressource se trouve dans une région comme Azure Government ou Azure Chine, consultez cet article sur le [remplacement des points de terminaison par défaut](./custom-endpoints.md#regions-that-require-endpoint-modification), puis sélectionnez le point de terminaison de canal de télémétrie approprié pour votre région.
 
 ```C#
 #load "runAvailabilityTest.csx"
@@ -135,7 +133,7 @@ public async static Task Run(TimerInfo myTimer, ILogger log)
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" /> <!-- Ensure you’re using the latest version -->
+        <PackageReference Include="Microsoft.ApplicationInsights" Version="2.15.0" /> <!-- Ensure you’re using the latest version -->
     </ItemGroup>
 </Project>
 
@@ -177,15 +175,16 @@ Si vous avez tout exécuté tel quel (sans ajouter de logique métier), vous all
 
 ## <a name="query-in-logs-analytics"></a>Interroger les journaux (Analytics)
 
-Vous pouvez utiliser les journaux (Analytics) pour voir les résultats de la disponibilité, les dépendances, etc. Pour en savoir plus sur les journaux, consultez [Vue d’ensemble des requêtes de journal](../../azure-monitor/log-query/log-query-overview.md).
+Vous pouvez utiliser les journaux (Analytics) pour voir les résultats de la disponibilité, les dépendances, etc. Pour en savoir plus sur les journaux, consultez [Vue d’ensemble des requêtes de journal](../log-query/log-query-overview.md).
 
 >[!div class="mx-imgBorder"]
 >![Résultats de disponibilité](media/availability-azure-functions/availabilityresults.png)
 
 >[!div class="mx-imgBorder"]
->![Dépendances](media/availability-azure-functions/dependencies.png)
+>![Screenshot shows New Query tab with dependencies limited to 50.](media/availability-azure-functions/dependencies.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Plan de l’application](../../azure-monitor/app/app-map.md)
-- [Diagnostics de transaction](../../azure-monitor/app/transaction-diagnostics.md)
+- [Plan de l’application](./app-map.md)
+- [Diagnostics de transaction](./transaction-diagnostics.md)
+

@@ -1,23 +1,23 @@
 ---
-title: Personnalisation des mappages d’attributs Azure AD | Microsoft Docs
+title: Tutoriel - Personnaliser les mappages d’attributs Azure Active Directory
 description: Découvrez ce que sont les mappages d’attributs pour les applications SaaS dans Azure Active Directory et comment les modifier pour répondre aux besoins de votre entreprise.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/03/2019
-ms.author: mimart
-ms.openlocfilehash: 9697bc2abd147a501466ba134f96512fe15173c0
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.topic: tutorial
+ms.date: 11/10/2020
+ms.author: kenwith
+ms.openlocfilehash: 012038399796a0f2dc87acfb350043542268379a
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83639050"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96936979"
 ---
-# <a name="customizing-user-provisioning-attribute-mappings-for-saas-applications-in-azure-active-directory"></a>Personnalisation des mappages d’attributs d’attribution d’utilisateurs pour les applications SaaS dans Azure Active Directory
+# <a name="tutorial---customize-user-provisioning-attribute-mappings-for-saas-applications-in-azure-active-directory"></a>Tutoriel - Personnaliser les mappages d’attributs d’attribution d’utilisateurs pour les applications SaaS dans Azure Active Directory
 
 Microsoft Azure AD prend en charge l’approvisionnement d’utilisateurs pour des applications SaaS tierces telles que Salesforce, G Suite et autres. Si vous activez l’approvisionnement d’utilisateurs pour une application SaaS tierce, le portail Azure contrôle ses valeurs d’attributs via des mappages d’attributs.
 
@@ -107,12 +107,15 @@ Les applications et les systèmes qui prennent en charge la personnalisation de 
 
 - Salesforce
 - ServiceNow
-- Workday
-- Azure Active Directory (les [attributs par défaut de l’API Azure AD Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#user-entity) et les extensions d’annuaire personnalisées sont pris en charge)
-- Les applications qui prennent en charge [SCIM 2.0](https://tools.ietf.org/html/rfc7643), où les attributs définis dans le [schéma principal](https://tools.ietf.org/html/rfc7643) doivent être ajoutés
+- Workday to Active Directory / Workday to Azure Active Directory
+- SuccessFactors to Active Directory / SuccessFactors to Azure Active Directory
+- Azure Active Directory (les [attributs par défaut de l’API Azure AD Graph](/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#user-entity) et les extensions d’annuaire personnalisées sont pris en charge)
+- Applications prenant en charge [SCIM 2.0](https://tools.ietf.org/html/rfc7643)
+- Pour l’écriture différée Azure Active Directory dans Workday ou SuccessFactors, il est possible de mettre à jour les métadonnées pertinentes des attributs pris en charge (XPath et JSONPath), mais non d’ajouter des attributs Workday ou SuccessFactors au-delà de ceux du schéma par défaut.
+
 
 > [!NOTE]
-> La modification de la liste des attributs pris en charge n’est recommandée que pour les administrateurs qui ont personnalisé le schéma de leurs applications et systèmes et ont connaissance de première main de la façon dont leurs attributs personnalisés ont été définis. Ceci nécessite parfois de connaître les API et les outils de développement fournis par une application ou un système.
+> La modification de la liste des attributs pris en charge n’est recommandée que pour les administrateurs qui ont personnalisé le schéma de leurs applications et systèmes et ont connaissance de première main de la façon dont leurs attributs personnalisés ont été définis. Ceci nécessite parfois de connaître les API et les outils de développement fournis par une application ou un système. La possibilité de modifier la liste des attributs pris en charge est verrouillée par défaut, mais les clients peuvent activer cette fonctionnalité en accédant à l’URL suivante : https://portal.azure.com/?Microsoft_AAD_IAM_forceSchemaEditorEnabled=true. Vous pouvez ensuite accéder à votre application pour voir la liste des attributs comme décrit [ci-dessus](https://docs.microsoft.com/azure/active-directory/app-provisioning/customize-application-attributes#editing-the-list-of-supported-attributes). 
 
 Lorsque vous modifiez la liste des attributs pris en charge, les propriétés suivantes sont fournies :
 
@@ -129,7 +132,7 @@ Lorsque vous modifiez la liste des attributs pris en charge, les propriétés su
 - **Multi-value?** - L’attribut prend en charge ou pas plusieurs valeurs.
 - **Exact case?** - Les valeurs d’attribut sont ou non évaluées en tenant compte de la casse.
 - **API Expression** : ne pas utiliser, sauf si vous êtes invité à le faire dans la documentation relative à un connecteur d’approvisionnement spécifique (tel que Workday).
-- **Referenced Object Attribute** : s’il s’agit d’un attribut de type référence, ce menu vous permet de sélectionner la table et l’attribut dans l’application cible qui contient la valeur associée à l’attribut. Par exemple, si vous avez un attribut nommé « Department » dont la valeur stockée fait référence à un objet dans une table « Departments » distincte, sélectionnez « Departments.Name ». Les tables de référence et les champs d’ID principaux pris en charge pour une application donnée sont préconfigurés et ne peuvent actuellement pas être modifiés via le portail Azure, mais ils peuvent être modifiés via l’[API Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-configure-with-custom-target-attributes).
+- **Referenced Object Attribute** : s’il s’agit d’un attribut de type référence, ce menu vous permet de sélectionner la table et l’attribut dans l’application cible qui contient la valeur associée à l’attribut. Par exemple, si vous avez un attribut nommé « Department » dont la valeur stockée fait référence à un objet dans une table « Departments » distincte, sélectionnez « Departments.Name ». Les tables de référence et les champs d’ID principaux pris en charge pour une application donnée sont préconfigurés et ne peuvent actuellement pas être modifiés via le portail Azure, mais ils peuvent être modifiés via l’[API Microsoft Graph](/graph/api/resources/synchronization-configure-with-custom-target-attributes).
 
 #### <a name="provisioning-a-custom-extension-attribute-to-a-scim-compliant-application"></a>Provisionnement d’un attribut d’extension personnalisé sur une application conforme à SCIM
 La RFC SCIM définit un schéma d’utilisateur et de groupe principal, tout en permettant également aux extensions du schéma de répondre aux besoins de votre application. Pour ajouter un attribut personnalisé à une application SCIM :
@@ -139,14 +142,11 @@ La RFC SCIM définit un schéma d’utilisateur et de groupe principal, tout en 
    4. Sélectionnez **Modifier la liste d’attributs pour AppName**.
    5. En bas de la liste d’attributs, entrez les informations relatives à l’attribut personnalisé dans les champs fournis. Sélectionnez ensuite **Ajouter un attribut**.
 
-Pour les applications SCIM, le nom de l’attribut doit suivre le modèle indiqué dans l’exemple ci-dessous. « CustomExtensionName » et « CustomAttribute » peuvent être personnalisés selon les besoins de l’application, par exemple :  
- * urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User:CustomAttribute 
- * urn:ietf:params:scim:schemas:extension:2.0:CustomExtensionName:CustomAttribute  
- * urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User.CustomAttributeName:value
+Pour les applications SCIM, le nom de l’attribut doit suivre le modèle indiqué dans l’exemple ci-dessous. Les paramètres « CustomExtensionName » et « CustomAttribute » peuvent être personnalisés selon les exigences de votre application ; par exemple : urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User:CustomAttribute 
 
 Ces instructions s’appliquent uniquement aux applications prenant en charge SCIM. Les applications telles que ServiceNow et Salesforce ne sont pas intégrées à Azure AD à l’aide de SCIM, et n’ont donc pas besoin de cet espace de noms spécifique lors de l’ajout d’un attribut personnalisé.
 
-Les attributs personnalisés ne peuvent pas être des attributs référentiels ou des attributs multivaleurs. Les attributs d’extension multivaleurs personnalisés sont actuellement pris en charge uniquement pour les applications de la galerie.  
+Les attributs personnalisés ne peuvent pas être des attributs référentiels, des attributs multivaleurs ou des attributs de type complexe. Les attributs d’extension multivaleurs personnalisés et de type complexe sont actuellement pris en charge uniquement pour les applications de la galerie.  
  
 **Exemple de représentation d’un utilisateur avec un attribut d’extension :**
 
@@ -174,7 +174,7 @@ Les attributs personnalisés ne peuvent pas être des attributs référentiels o
        "displayName": "John Smith"
      }
    },
-     "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:CustomAttribute:User": {
+     "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User": {
      "CustomAttribute": "701984",
    },
    "meta": {
@@ -202,7 +202,7 @@ Utilisez les étapes ci-dessous pour approvisionner des rôles pour un utilisate
   - **Points importants à prendre en compte**
     - Assurez-vous que plusieurs rôles ne sont pas attribués à un utilisateur. Nous ne pouvons pas garantir le rôle qui sera approvisionné.
     
-  - **Exemple de sortie** 
+  - **Exemple de requête (POST)** 
 
    ```json
     {
@@ -226,6 +226,21 @@ Utilisez les étapes ci-dessous pour approvisionner des rôles pour un utilisate
    }
    ```
   
+  - **Exemple de sortie (PATCH)** 
+    
+   ```
+   "Operations": [
+   {
+   "op": "Add",
+   "path": "roles",
+   "value": [
+   {
+   "value": "{\"id\":\"06b07648-ecfe-589f-9d2f-6325724a46ee\",\"value\":\"25\",\"displayName\":\"Role1234\"}"
+   }
+   ]
+   ```  
+Le format diffère entre les requêtes PATCH et POST. Pour vous assurer que les requêtes POST et PATCH sont envoyées au même format, vous pouvez utiliser l’indicateur de fonctionnalité décrit [ici](./application-provisioning-config-problem-scim-compatibility.md#flags-to-alter-the-scim-behavior). 
+
 - **AppRoleAssignmentsComplex** 
   - **Quand l’utiliser** : Utilisez l’expression AppRoleAssignmentsComplex pour approvisionner plusieurs rôles pour un utilisateur. 
   - **Comment configurer :** Modifiez la liste des attributs pris en charge comme décrit ci-dessus pour inclure un nouvel attribut pour les rôles : 
@@ -316,11 +331,12 @@ Cette option entraîne une resynchronisation forcée de tous les utilisateurs pe
 - Le service d’approvisionnement Azure AD ne prend pas en charge l’approvisionnement de valeurs Null.
 - Leur clé primaire, en général « ID », ne doit pas être incluse en tant qu’attribut cible dans vos mappages d’attributs. 
 - L’attribut role doit généralement être mappé à l’aide d’une expression, au lieu d’un mappage direct. Pour plus d’informations sur le mappage de rôle, consultez la section ci-dessus. 
+- Vous pouvez désactiver des groupes de vos mappages, mais la désactivation des utilisateurs n’est pas prise en charge. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Automatiser l’approvisionnement/le déprovisionnement des utilisateurs pour les applications SaaS](user-provisioning.md)
-- [Écriture d’expressions pour les mappages d’attributs](../app-provisioning/functions-for-customizing-application-data.md)
-- [Filtres d’étendue pour l’approvisionnement des utilisateurs](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md)
+- [Écriture d’expressions pour les mappages d’attributs](functions-for-customizing-application-data.md)
+- [Filtres d’étendue pour l’approvisionnement des utilisateurs](define-conditional-rules-for-provisioning-user-accounts.md)
 - [Utilisation de SCIM pour activer la configuration automatique des utilisateurs et des groupes d’Azure Active Directory sur des applications](use-scim-to-provision-users-and-groups.md)
 - [Liste des didacticiels sur l’intégration des applications SaaS](../saas-apps/tutorial-list.md)

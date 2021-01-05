@@ -3,24 +3,26 @@ title: Définition de filtres dans Azure Media Services
 description: Cette rubrique décrit comment créer des filtres pour que votre client puisse les utiliser pour diffuser des sections spécifiques d'un flux. Media Services crée des manifestes dynamiques pour obtenir cette diffusion sélective.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
-ms.topic: article
-ms.date: 05/23/2019
-ms.author: juliako
-ms.openlocfilehash: fdf29924da31db0347938df89e698cb258c2336b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: bb5561ced93c3f5a899c6e48fdab0f14e52914bb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227157"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89291548"
 ---
 # <a name="filters"></a>Filtres
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Lorsque vous transmettez du contenu à des clients (événements en streaming en direct ou vidéos à la demande), le fichier manifeste de l'élément multimédia par défaut ne permet pas toujours au client d'interagir avec le contenu comme il le voudrait. Azure Media Services propose des [manifestes dynamiques](filters-dynamic-manifest-overview.md) basés sur des filtres prédéfinis. 
 
@@ -38,8 +40,8 @@ Avec Media Services, vous pouvez créer des **filtres de compte** et des **filtr
 
 Il existe deux types de filtres : 
 
-* [Filtres de compte](https://docs.microsoft.com/rest/api/media/accountfilters) (globaux) : applicables à n'importe quel élément multimédia dans le compte Azure Media Services et dont la durée de vie correspond à celle du compte.
-* [Filtres d’élément multimédia](https://docs.microsoft.com/rest/api/media/assetfilters) (locaux) : applicables uniquement à un élément multimédia avec lequel le filtre a été associé au moment de la création et dont la durée de vie correspond à celle de l'élément multimédia. 
+* [Filtres de compte](/rest/api/media/accountfilters) (globaux) : applicables à n'importe quel élément multimédia dans le compte Azure Media Services et dont la durée de vie correspond à celle du compte.
+* [Filtres d’élément multimédia](/rest/api/media/assetfilters) (locaux) : applicables uniquement à un élément multimédia avec lequel le filtre a été associé au moment de la création et dont la durée de vie correspond à celle de l'élément multimédia. 
 
 Les types **Filtres de compte** et **Filtres d’élément multimédia** utilisent exactement les mêmes propriétés pour définir/décrire le filtre. Sauf lorsque vous créez le **filtre d’élément multimédia**, vous devez spécifier le nom de la ressource à laquelle vous souhaitez associer le filtre.
 
@@ -139,7 +141,7 @@ L’exemple suivant définit un filtre de streaming en direct :
 
 ## <a name="associating-filters-with-streaming-locator"></a>Associer des filtres à un localisateur de streaming
 
-Vous pouvez spécifier une liste de [filtres de compte ou d'élément multimédia](filters-concept.md) sur votre [localisateur de streaming](https://docs.microsoft.com/rest/api/media/streaminglocators/create#request-body). Le [packager dynamique](dynamic-packaging-overview.md) applique cette liste de filtres avec ceux spécifiés par votre client dans l’URL. Cette combinaison génère un [manifeste dynamique](filters-dynamic-manifest-overview.md) qui est basé sur les filtres spécifiés dans l’URL ainsi que sur ceux que vous spécifiez dans le localisateur de streaming. 
+Vous pouvez spécifier une liste de [filtres de compte ou d'élément multimédia](filters-concept.md) sur votre [localisateur de streaming](/rest/api/media/streaminglocators/create#request-body). Le [packager dynamique](dynamic-packaging-overview.md) applique cette liste de filtres avec ceux spécifiés par votre client dans l’URL. Cette combinaison génère un [manifeste dynamique](filters-dynamic-manifest-overview.md) qui est basé sur les filtres spécifiés dans l’URL ainsi que sur ceux que vous spécifiez dans le localisateur de streaming. 
 
 Regardez les exemples suivants :
 
@@ -161,4 +163,3 @@ Les articles suivants vous montrent comment créer des filtres par programmation
 - [Créer des filtres avec les API REST](filters-dynamic-manifest-rest-howto.md)
 - [Créer des filtres avec .NET](filters-dynamic-manifest-dotnet-howto.md)
 - [Créer des filtres avec l’interface CLI](filters-dynamic-manifest-cli-howto.md)
-

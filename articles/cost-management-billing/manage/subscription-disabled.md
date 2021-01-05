@@ -6,15 +6,16 @@ author: bandersmsft
 ms.reviewer: amberb
 tags: billing
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/13/2020
+ms.subservice: billing
+ms.topic: how-to
+ms.date: 11/17/2020
 ms.author: banders
-ms.openlocfilehash: deab6db6b817bc429d3bec9c13674f8141cb2d68
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cad3082981bcfc699bc230badf44e2ffc2e1bed3
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199532"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94744423"
 ---
 # <a name="reactivate-a-disabled-azure-subscription"></a>Réactivation d’un abonnement Azure désactivé
 
@@ -31,7 +32,7 @@ Les abonnements Azure avec un crédit tel que Essai gratuit et Visual Studio Ent
 > [!NOTE]
 > Si vous utilisez un abonnement d’essai gratuit et que vous supprimez la limite de dépense, ce dernier est converti en abonnement individuel, avec des taux de paiement à l’utilisation, au terme de l’essai gratuit. Vous conservez votre crédit restant pendant les 30 jours complets suivant la création de l’abonnement. Vous avez également accès aux services gratuits pendant 12 mois.
 
-Pour superviser et gérer l’activité de facturation pour Azure, consultez [Éviter les coûts inattendus avec la gestion de la facturation et des coûts dans Azure](getting-started.md).
+Pour surveiller et gérer les activités de facturation pour Azure, consultez [Planifier la gestion des coûts Azure](../understand/plan-manage-costs.md).
 
 
 ## <a name="your-bill-is-past-due"></a>Votre facture est en retard
@@ -54,9 +55,13 @@ Si vous êtes administrateur de compte et que vous avez accidentellement annulé
 
 Pour les autres types d’abonnement, [contactez le support technique](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) pour réactiver votre abonnement.
 
+## <a name="after-reactivation"></a>Après réactivation
+
+Une fois votre abonnement réactivé, il peut y avoir un retard dans la création ou la gestion des ressources. Si le délai dépasse 30 minutes, contactez le [support de facturation Azure](https://go.microsoft.com/fwlink/?linkid=2083458) pour obtenir de l’aide. La plupart des ressources Azure reprennent automatiquement et ne nécessitent aucune action. Toutefois, nous vous recommandons de vérifier vos ressources de service Azure et de redémarrer celles qui ne reprennent pas automatiquement.
+
 ## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Contactez-nous.
 
 Si vous avez des questions ou besoin d’aide, [créez une demande de support](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Découvrez comment [surveiller et gérer les activités de facturation pour Azure](getting-started.md).
+- Découvrez comment [planifier la gestion des coûts Azure](../understand/plan-manage-costs.md).

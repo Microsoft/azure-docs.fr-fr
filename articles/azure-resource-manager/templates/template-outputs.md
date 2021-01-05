@@ -1,18 +1,20 @@
 ---
 title: Sorties dans des modèles
-description: Explique comment définir des valeurs de sortie dans un modèle Azure Resource Manager.
+description: Explique comment définir des valeurs de sortie dans un modèle Azure Resource Manager (ARM).
 ms.topic: conceptual
-ms.date: 02/25/2020
-ms.openlocfilehash: 203bfc66e9515ef14a5fe1315ef5b9ee07075041
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/24/2020
+ms.openlocfilehash: 6a375dfbc767bcbbfd8ec6b7f8cb9e942e275582
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79460022"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353525"
 ---
-# <a name="outputs-in-azure-resource-manager-template"></a>Sorties dans un modèle Azure Resource Manager
+# <a name="outputs-in-arm-templates"></a>Sorties dans les modèles ARM
 
-Cet article explique comment définir des valeurs de sortie dans votre modèle Azure Resource Manager. Vous utilisez des sorties quand vous devez retourner des valeurs à partir des ressources déployées.
+Cet article explique comment définir des valeurs de sortie dans un modèle Azure Resource Manager (ARM). Vous utilisez des sorties quand vous devez retourner des valeurs à partir des ressources déployées.
+
+Le format de chaque valeur de sortie doit correspondre à l’un des [types de données](template-syntax.md#data-types).
 
 ## <a name="define-output-values"></a>Définir des valeurs de sortie
 
@@ -118,4 +120,4 @@ Les exemples suivants illustrent des scénarios d’utilisation de sorties.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus sur les propriétés disponibles pour les sorties, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
+* Pour plus d’informations sur les propriétés disponibles pour les sorties, consultez [Présentation de la structure et de la syntaxe des modèles ARM](template-syntax.md).

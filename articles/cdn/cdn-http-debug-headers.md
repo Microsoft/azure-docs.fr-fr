@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/12/2018
 ms.author: allensu
-ms.openlocfilehash: 52aae3bdd2fe82eea6cbd500723192c88c293a1e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4154c6a1e739f935022271e7a101f39d3ee5c500
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260494"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84343018"
 ---
 # <a name="x-ec-debug-http-headers-for-azure-cdn-rules-engine"></a>En-têtes HTTP X-EC-Debug pour le moteur de règles Azure CDN
 L’en-tête de requête de cache de débogage `X-EC-Debug` fournit des informations supplémentaires sur la stratégie de cache qui est appliquée à la ressource demandée. Ces en-têtes sont spécifiques aux produits **Azure CDN Premium de Verizon**.
@@ -27,7 +27,7 @@ L’en-tête de requête de cache de débogage `X-EC-Debug` fournit des informat
 ## <a name="usage"></a>Usage
 La réponse envoyée à partir des serveurs POP à un utilisateur comprend l’en-tête `X-EC-Debug` uniquement lorsque les conditions suivantes sont remplies :
 
-- La [fonctionnalité En-têtes de réponse de cache de débogage](cdn-verizon-premium-rules-engine-reference-features.md#debug-cache-response-headers) a été activée sur le moteur de règles pour la requête spécifiée.
+- La [fonctionnalité En-têtes de réponse de cache de débogage](https://docs.vdms.com/cdn/Content/HRE/F/Debug-Cache-Response-Headers.htm) a été activée sur le moteur de règles pour la requête spécifiée.
 - La requête spécifiée définit l’ensemble des en-têtes de réponse de cache de débogage qui seront inclus dans la réponse.
 
 ## <a name="requesting-debug-cache-information"></a>Demander des informations sur le cache de débogage

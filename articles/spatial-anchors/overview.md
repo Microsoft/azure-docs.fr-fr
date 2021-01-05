@@ -1,19 +1,19 @@
 ---
 title: Vue d’ensemble d’Azure Spatial Anchors
 description: Découvrez en quoi Azure Spatial Anchors vous aide à développer des expériences de réalité mixte multiplateformes.
-author: craigktreasure
-manager: aliemami
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: overview
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 5ebd29b5fb6fdedcdfbc434209b350512c4cd5dc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: a422371bacddf049365562fce9af7e61f35089a1
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "77657305"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95487382"
 ---
 # <a name="azure-spatial-anchors-overview"></a>Vue d’ensemble d’Azure Spatial Anchors
 
@@ -26,7 +26,7 @@ Ces points d’intérêt précis sont appelés ancres spatiales.
 
 Voici quelques exemples de cas d’usage rendus possibles par Spatial Anchors :
 
-- [Expériences multi-utilisateurs](tutorials/tutorial-share-anchors-across-devices.md). Spatial Anchors permet à des personnes situées dans un même lieu d’utiliser facilement des applications de réalité mixte multi-utilisateurs. Par exemple, deux personnes peuvent démarrer un jeu d’échecs de réalité mixte en plaçant un échiquier virtuel sur une table. Ensuite, en pointant leur appareil vers la table, ils peuvent voir l’échiquier virtuel et interagir avec celui-ci.
+- [Expériences multi-utilisateurs](tutorials/tutorial-share-anchors-across-devices.md). Azure Spatial Anchors permet à des personnes situées dans un même lieu d’utiliser facilement des applications de réalité mixte multi-utilisateurs. Par exemple, deux personnes peuvent démarrer un jeu d’échecs de réalité mixte en plaçant un échiquier virtuel sur une table. Ensuite, en pointant leur appareil vers la table, ils peuvent voir l’échiquier virtuel et interagir avec celui-ci.
 
 - [Guidage](concepts/anchor-relationships-way-finding.md). Les développeurs peuvent aussi connecter plusieurs ancres spatiales et créer des relations entre elles. Par exemple, une application peut présenter une expérience constituée de plusieurs points d’intérêt avec lesquels un utilisateur doit interagir pour effectuer une tâche. Ces points d’intérêt peuvent être créés de manière connectée. Par la suite, quand l’utilisateur termine la tâche multi-étape, l’application peut demander les ancres situées à proximité de l’ancre active pour diriger l’utilisateur vers la prochaine étape de la tâche.
 
@@ -36,7 +36,7 @@ Azure Spatial Anchors se compose d’un service managé et de kits SDK clients p
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Créez votre première application avec Spatial Anchors.
+Créez votre première application avec Azure Spatial Anchors.
 
 > [!div class="nextstepaction"]
 > [Unity (HoloLens)](quickstarts/get-started-unity-hololens.md)

@@ -4,15 +4,15 @@ description: Le moteur de règles vous permet de personnaliser la manière dont 
 services: cdn
 author: asudbring
 ms.service: azure-cdn
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/31/2019
 ms.author: allensu
-ms.openlocfilehash: 2e5e4265f30631f8e68d8f9e7156ea578ae85e7a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a49912bc2275e478d657f06587c4ddc830210d3a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253473"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87040206"
 ---
 # <a name="override-http-behavior-using-the-azure-cdn-from-verizon-premium-rules-engine"></a>Modifier le comportement HTTP à l’aide du moteur de règles Azure CDN de Verizon Premium
 
@@ -55,7 +55,7 @@ Pour accéder au moteur de règles, vous devez d’abord sélectionner **Gérer*
     ![Options de nouvelle règle CDN](./media/cdn-rules-engine/cdn-new-rule.png)
    
    > [!IMPORTANT]
-   > L'ordre dans lequel plusieurs règles sont répertoriées affecte la façon dont elles sont gérées. Une règle ultérieure peut remplacer les actions spécifiées par une règle antérieure.
+   > L'ordre dans lequel plusieurs règles sont répertoriées affecte la façon dont elles sont gérées. Une règle ultérieure peut remplacer les actions spécifiées par une règle antérieure. Par exemple, si vous avez une règle qui autorise l’accès à une ressource selon une propriété de requête et une autre règle qui refuse l’accès à toutes les requêtes, la deuxième règle l’emporte sur la première. Les règles remplacent les règles antérieures uniquement si elles interagissent avec les mêmes propriétés.
    >
 
 3. Entrez un nom dans la zone de texte **Nom / Description** .
@@ -100,4 +100,4 @@ Pour accéder au moteur de règles, vous devez d’abord sélectionner **Gérer*
 - [Conditions de correspondance du moteur de règles](cdn-verizon-premium-rules-engine-reference-match-conditions.md)
 - [Expressions conditionnelles du moteur de règles](cdn-verizon-premium-rules-engine-reference-conditional-expressions.md)
 - [Fonctionnalités du moteur de règles](cdn-verizon-premium-rules-engine-reference-features.md)
-- [Azure Friday : les nouvelles fonctionnalités Premium puissantes du CDN Azure](https://azure.microsoft.com/documentation/videos/azure-cdns-powerful-new-premium-features/) (vidéo)
+- [Azure Fridays : les nouvelles fonctionnalités Premium puissantes du CDN Azure](https://azure.microsoft.com/documentation/videos/azure-cdns-powerful-new-premium-features/) (vidéo)

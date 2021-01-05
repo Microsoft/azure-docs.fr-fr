@@ -6,13 +6,13 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: troubleshooting
-ms.date: 11/08/2019
-ms.openlocfilehash: 26eec9cdd327ceb51e72deb1d6f40d585ce368fb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/24/2020
+ms.openlocfilehash: 9f10597023314aed8640ee5a7499a77f952c3694
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75896134"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93284440"
 ---
 # <a name="authentication-issues-in-azure-hdinsight"></a>Problèmes d’authentification dans Azure HDInsight
 
@@ -82,7 +82,7 @@ Patientez 30 minutes, arrêtez toutes les applications susceptibles de tenter de
 
 ---
 
-## <a name="invalid_grant-or-unauthorized_client-50053"></a>invalid_grant ou unauthorized_client, 50053
+## <a name="invalid_grant-or-unauthorized_client-50053-2"></a>invalid_grant ou unauthorized_client, 50053 (#2)
 
 ### <a name="issue"></a>Problème
 
@@ -154,7 +154,7 @@ Moyens de rechercher `sAMAccountName` :
 
 * Si vous pouvez vous connecter à Ambari à l’aide de l’administrateur Ambari local, examinez la liste des utilisateurs.
 
-* Si vous disposez d'un [ordinateur Windows joint à un domaine](../../active-directory-domain-services/manage-domain.md), vous pouvez utiliser les outils Windows AD standard pour parcourir. Cela nécessite un compte opérationnel dans le domaine.
+* Si vous disposez d'un [ordinateur Windows joint à un domaine](../../active-directory-domain-services/tutorial-create-management-vm.md), vous pouvez utiliser les outils Windows AD standard pour parcourir. Cela nécessite un compte opérationnel dans le domaine.
 
 * À partir du nœud principal, vous pouvez utiliser des commandes SAMBA pour effectuer une recherche. Cela nécessite une session Kerberos valide (kinit réussi). net ads search "(userPrincipalName=bob*)"
 
@@ -208,16 +208,10 @@ Cette erreur se produit par intermittence lorsque les utilisateurs essaient d’
 
 * Pour Azure Data Lake Storage Gen1, nettoyez le cache du navigateur et reconnectez-vous à Ambari.
 
-* Par Azure Data Lake Storage Gen2, exécutez `/usr/lib/hdinsight-common/scripts/RegisterKerbWithOauth.sh <upn>` pour l’utilisateur auquel l’utilisateur tente de se connecter.
+* Par Azure Data Lake Storage Gen2, exécutez `/usr/lib/hdinsight-common/scripts/RegisterKerbTicketAndOAuth.sh <upn>` pour l’utilisateur auquel l’utilisateur tente de se connecter.
 
 ---
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../../includes/hdinsight-troubleshooting-next-steps.md)]

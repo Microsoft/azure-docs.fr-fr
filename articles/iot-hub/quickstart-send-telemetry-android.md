@@ -10,14 +10,16 @@ ms.topic: quickstart
 ms.custom:
 - mvc
 - mqtt
+- devx-track-java
+- devx-track-azurecli
 ms.date: 03/15/2019
 ms.author: wesmc
-ms.openlocfilehash: 67d56429f092343193fe5c1e3449aff033673320
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: ef5f81090f4d06f15f1a7263699961cd360e12e5
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83727146"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94842190"
 ---
 # <a name="quickstart-send-iot-telemetry-from-an-android-device"></a>Démarrage rapide : Envoyer des données de télémétrie IoT à partir d’un appareil Android
 
@@ -35,15 +37,7 @@ Dans ce guide de démarrage rapide, vous envoyez la télémétrie à un hub Azur
 
 * Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-### <a name="add-azure-iot-extension"></a>Ajouter une extension Azure IoT
-
-Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et IoT Device Provisioning Service (DPS) à Azure CLI.
-
-```azurecli-interactive
-az extension add --name azure-iot
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
@@ -81,9 +75,7 @@ Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dan
 
 ## <a name="send-simulated-telemetry"></a>Envoyer des données de télémétrie simulée
 
-1. Ouvrez l’exemple de projet Android GitHub dans Android Studio. Ce projet se trouve dans le répertoire suivant de votre copie clonée ou téléchargée du dépôt [azure-iot-sample-java](https://github.com/Azure-Samples/azure-iot-samples-java).
-
-        \azure-iot-samples-java\iot-hub\Samples\device\AndroidSample
+1. Ouvrez l’exemple de projet Android GitHub dans Android Studio. Le projet se trouve dans le répertoire suivant de votre copie clonée ou téléchargée du dépôt [azure-iot-sample-java](https://github.com/Azure-Samples/azure-iot-samples-java) : *\azure-iot-samples-java\iot-hub\Samples\device\AndroidSample*.
 
 2. Dans Android Studio, ouvrez *gradle.properties* pour l’exemple de projet et remplacez l’espace réservé **Device_Connection_String** par la chaîne de connexion d’appareil que vous avez notée précédemment.
 
@@ -108,7 +100,7 @@ Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dan
 
 ## <a name="read-the-telemetry-from-your-hub"></a>Lire les données de télémétrie envoyées par votre hub
 
-Dans cette section, vous allez utiliser Azure Cloud Shell avec l’[extension IoT](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour surveiller les messages d’appareil envoyés par l’appareil Android.
+Dans cette section, vous allez utiliser Azure Cloud Shell avec l’[extension IoT](/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour surveiller les messages d’appareil envoyés par l’appareil Android.
 
 1. À l’aide d’Azure Cloud Shell, exécutez la commande suivante pour vous connecter et lire les messages à partir de votre hub IoT :
 

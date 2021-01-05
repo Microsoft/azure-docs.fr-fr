@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 04/13/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 10/05/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: rateller
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 845948d9aec28ee79a11fb11aaef4cfbf1b263fa
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.openlocfilehash: 10bac65fa8b1ed192e2ece1682f22e7feb528431
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81770547"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743341"
 ---
 # <a name="configure-and-enable-users-for-sms-based-authentication-using-azure-active-directory-preview"></a>Configurer l’authentification utilisateur par SMS via Azure Active Directory (préversion)
 
@@ -24,10 +24,8 @@ Pour réduire la complexité et les risques de sécurité auxquels sont confront
 
 Cet article vous montre comment activer l’authentification par SMS pour certains utilisateurs ou groupes dans Azure AD.
 
-|     |
-| --- |
-| L’authentification par SMS des utilisateurs est une fonctionnalité en préversion publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).|
-|     |
+> [!NOTE]
+> L’authentification par SMS des utilisateurs est une fonctionnalité en préversion publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
@@ -38,7 +36,7 @@ Pour faire ce qui est décrit dans cet article, vous avez besoin des ressources 
 * Un locataire Azure Active Directory associé à votre abonnement.
     * Si nécessaire, [créez un locataire Azure Active Directory][create-azure-ad-tenant] ou [associez un abonnement Azure à votre compte][associate-azure-ad-tenant].
 * Vous devez disposer de privilèges d’*administrateur général* dans votre locataire Azure AD pour activer l’authentification par SMS.
-* Chaque utilisateur activé dans la stratégie de méthode d’authentification par SMS doit disposer d’une licence, même s’il ne l’utilise pas. Chaque utilisateur activé doit avoir l’une des licences Azure AD ou Microsoft 365 suivantes :
+* Chaque utilisateur activé dans la stratégie de méthode d’authentification par SMS doit disposer d’une licence, même s’il ne l’utilise pas. Chaque utilisateur activé doit avoir l’une des licences Azure AD, EMS ou Microsoft 365 suivantes :
     * [Azure AD Premium P1 ou P2][azuread-licensing]
     * [Microsoft 365 (M365) F1 ou F3][m365-firstline-workers-licensing]
     * [Enterprise Mobility + Security (EMS) E3 ou E5][ems-licensing] ou [Microsoft 365 (M365) E3 ou E5][m365-licensing]
@@ -47,7 +45,7 @@ Pour faire ce qui est décrit dans cet article, vous avez besoin des ressources 
 
 Pendant la phase de préversion publique de l’authentification par SMS, les limitations suivantes s’appliquent :
 
-* L’authentification par SMS n’est pas compatible avec Azure Multi-Factor Authentication.
+* L'authentification par SMS n'est pas compatible avec Azure AD Multi-Factor Authentication.
 * À l’exception de Teams, l’authentification par SMS n’est pas compatible avec les applications Office natives.
 * L’authentification par SMS n’est pas recommandée pour les comptes B2B.
 * Les utilisateurs fédérés ne s’authentifient pas dans le locataire de base. Ils s’authentifient uniquement dans le cloud.
@@ -67,7 +65,7 @@ Tout d’abord, activons l’authentification par SMS pour votre locataire Azure
 1. Recherchez et sélectionnez **Azure Active Directory**.
 1. Dans le menu de navigation sur le côté gauche de la fenêtre Azure Active Directory, sélectionnez **Sécurité > Méthodes d’authentification > Stratégie de méthode d’authentification (préversion)** .
 
-    [![](media/howto-authentication-sms-signin/authentication-method-policy-cropped.png "Browse to and select the Authentication method policy (preview) window in the Azure portal")](media/howto-authentication-sms-signin/authentication-method-policy.png#lightbox)
+    [![Browse to and select the Authentication method policy (preview) window in the Azure portal.](media/howto-authentication-sms-signin/authentication-method-policy-cropped.png)](media/howto-authentication-sms-signin/authentication-method-policy.png#lightbox)
 
 1. Dans la liste des méthodes d’authentification disponibles, sélectionnez **SMS**.
 1. Affectez à **Activer** la valeur *Oui*.
@@ -83,7 +81,7 @@ Une fois l’authentification par SMS activée dans votre locataire Azure AD, s
 1. Dans la fenêtre de stratégie d’authentification par SMS, affectez à **Cible** la valeur *Sélectionner les utilisateurs*.
 1. Choisissez d’**ajouter des utilisateurs ou des groupes**, puis sélectionnez un utilisateur ou un groupe de test, par exemple *Contoso User* (Utilisateur Contoso) ou *Contoso SMS Users* (Utilisateurs Contoso - SMS).
 
-    [![](media/howto-authentication-sms-signin/add-users-or-groups-cropped.png "Choose users or groups to enable for SMS-based authentication in the Azure portal")](media/howto-authentication-sms-signin/add-users-or-groups.png#lightbox)
+    [![Choose users or groups to enable for SMS-based authentication in the Azure portal.](media/howto-authentication-sms-signin/add-users-or-groups-cropped.png)](media/howto-authentication-sms-signin/add-users-or-groups.png#lightbox)
 
 1. Une fois que vous avez sélectionné vos utilisateurs ou vos groupes, vous devez choisir **Sélectionner**, puis **Enregistrer** la stratégie de méthode d’authentification mise à jour.
 
@@ -93,18 +91,22 @@ Chaque utilisateur activé dans la stratégie de méthode d’authentification p
 
 Désormais, l’authentification par SMS est activée pour les utilisateurs. Toutefois, vous devez associer leur numéro de téléphone au profil utilisateur dans Azure AD pour leur permettre de se connecter. Vous pouvez soit laisser l’utilisateur [définir lui-même ce numéro de téléphone](../user-help/sms-sign-in-explainer.md) dans *Mon profil*, soit affecter le numéro de téléphone via le portail Azure. Les numéros de téléphone peuvent être définis par les *administrateurs généraux*, les *administrateurs d’authentification* ou les *administrateurs d’authentification privilégiés*.
 
-Quand un numéro de téléphone est défini pour l’authentification par SMS, il peut également être utilisé avec [Azure Multi-Factor Authentication][tutorial-azure-mfa] et la [réinitialisation de mot de passe en libre-service][tutorial-sspr].
+Lorsqu'un numéro de téléphone est défini pour l'authentification par SMS, il peut également être utilisé avec [Azure AD Multi-Factor Authentication][tutorial-azure-mfa] et la [réinitialisation de mot de passe en libre-service][tutorial-sspr].
 
 1. Recherchez et sélectionnez **Azure Active Directory**.
 1. Dans le menu de navigation sur le côté gauche de la fenêtre Azure Active Directory, sélectionnez **Utilisateurs**.
 1. Sélectionnez l’utilisateur pour lequel vous avez activé l’authentification par SMS dans la section précédente, par exemple *Contoso User*, puis sélectionnez **Méthodes d’authentification**.
-1. Entrez le numéro de téléphone de l’utilisateur, notamment l’indicatif téléphonique international, par exemple *+1 xxxxxxxxx*. Le portail Azure vérifie que le numéro de téléphone est au format approprié.
+1. Sélectionnez **+ Ajouter une méthode d’authentification**, puis, dans le menu déroulant *Choisir une méthode*, sélectionnez **Numéro de téléphone**.
 
-    ![Définir le numéro de téléphone d’un utilisateur dans le portail Azure pour l’utiliser avec l’authentification par SMS](./media/howto-authentication-sms-signin/set-user-phone-number.png)
+    Entrez le numéro de téléphone de l’utilisateur, notamment l’indicatif téléphonique international, par exemple *+1 xxxxxxxxx*. Le portail Azure vérifie que le numéro de téléphone est au format approprié.
+
+    Ensuite, dans le menu déroulant *Type de téléphone*, sélectionnez *Mobile*, *Autre mobile* ou *Autre* selon les besoins.
+
+    :::image type="content" source="media/howto-authentication-sms-signin/set-user-phone-number.png" alt-text="Définir le numéro de téléphone d’un utilisateur dans le portail Azure pour l’utiliser avec l’authentification par SMS":::
 
     Le numéro de téléphone doit être unique dans votre locataire. Si vous essayez d’utiliser le même numéro de téléphone pour plusieurs utilisateurs, un message d’erreur s’affiche.
 
-1. Pour appliquer le numéro de téléphone au compte d’un utilisateur, sélectionnez **Enregistrer**.
+1. Pour appliquer le numéro de téléphone au compte d’un utilisateur, sélectionnez **Ajouter**.
 
 Une fois le provisionnement réussi, une coche apparaît pour *Connexion par SMS activée*.
 
@@ -130,9 +132,9 @@ Vous pouvez utiliser les scénarios et étapes de résolution des problèmes sui
 
 ### <a name="phone-number-already-set-for-a-user-account"></a>Numéro de téléphone déjà défini pour un compte d’utilisateur
 
-Si un utilisateur s’est déjà inscrit à Azure Multi-Factor Authentication et/ou à SSPR (réinitialisation de mot de passe en libre-service), il dispose déjà d’un numéro de téléphone associé à son compte. Ce numéro de téléphone n’est pas automatiquement disponible pour une connexion par SMS.
+Si un utilisateur s'est déjà inscrit à Azure AD Multi-Factor Authentication et/ou à la réinitialisation de mot de passe en libre-service (SSPR), un numéro de téléphone est déjà associé à son compte. Ce numéro de téléphone n’est pas automatiquement disponible pour une connexion par SMS.
 
-Un utilisateur dont le numéro de téléphone est déjà défini pour son compte voit s’afficher un bouton permettant d’*activer la connexion par SMS* dans la page **Mon profil**. Sélectionnez ce bouton afin d’activer la connexion par SMS ainsi que l’inscription à Azure Multi-Factor Authentication ou SSPR pour le compte.
+Un utilisateur dont le numéro de téléphone est déjà défini pour son compte voit s’afficher un bouton permettant d’*activer la connexion par SMS* dans la page **Mon profil**. Sélectionnez ce bouton afin d'activer la connexion par SMS ainsi que l'inscription à Azure AD Multi-Factor Authentication ou SSPR pour le compte.
 
 Pour plus d’informations du point de vue de l’utilisateur final, consultez l’article sur l’[expérience utilisateur de connexion par SMS à l’aide d’un numéro de téléphone (préversion)](../user-help/sms-sign-in-explainer.md).
 
@@ -150,12 +152,16 @@ Si vous recevez une erreur quand vous essayez de définir un numéro de téléph
 
 Pour connaître d’autres façons de se connecter à Azure AD sans mot de passe, par exemple à l’aide de l’application Microsoft Authenticator ou des clés de sécurité FIDO2, consultez [Options d’authentification sans mot de passe pour Azure AD][concepts-passwordless].
 
+Vous pouvez également utiliser la version bêta de l’API REST Microsoft Graph pour [activer][rest-enable] ou [désactiver][rest-disable] la connexion par SMS.
+
 <!-- INTERNAL LINKS -->
 [create-azure-ad-tenant]: ../fundamentals/sign-up-organization.md
 [associate-azure-ad-tenant]: ../fundamentals/active-directory-how-subscriptions-associated-directory.md
 [concepts-passwordless]: concept-authentication-passwordless.md
 [tutorial-azure-mfa]: tutorial-enable-azure-mfa.md
 [tutorial-sspr]: tutorial-enable-sspr.md
+[rest-enable]: /graph/api/phoneauthenticationmethod-enablesmssignin?view=graph-rest-beta&tabs=http
+[rest-disable]: /graph/api/phoneauthenticationmethod-disablesmssignin?view=graph-rest-beta&tabs=http
 
 <!-- EXTERNAL LINKS -->
 [azure-portal]: https://portal.azure.com
@@ -164,3 +170,5 @@ Pour connaître d’autres façons de se connecter à Azure AD sans mot de pass
 [azuread-licensing]: https://azure.microsoft.com/pricing/details/active-directory/
 [ems-licensing]: https://www.microsoft.com/microsoft-365/enterprise-mobility-security/compare-plans-and-pricing
 [m365-licensing]: https://www.microsoft.com/microsoft-365/compare-microsoft-365-enterprise-plans
+[o365-f1]: https://www.microsoft.com/microsoft-365/business/office-365-f1?market=af
+[o365-f3]: https://www.microsoft.com/microsoft-365/business/office-365-f3?activetab=pivot%3aoverviewtab

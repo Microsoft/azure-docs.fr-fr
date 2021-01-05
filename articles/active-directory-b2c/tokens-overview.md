@@ -7,15 +7,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/21/2020
+ms.date: 08/31/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c31053f62f768cc534e07a8ac8d692176cf52b1e
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.openlocfilehash: b4e268d35a2e31db0ce92ff61e66fd23bce68e38
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83757617"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97516364"
 ---
 # <a name="overview-of-tokens-in-azure-active-directory-b2c"></a>Vue d’ensemble des jetons dans Azure Active Directory B2C
 
@@ -31,7 +31,7 @@ Les jetons suivants sont utilisés dans les communications avec Azure AD B2C :
 
 - *ID jeton* - Jeton JWT contenant des revendications que vous pouvez utiliser pour identifier l’utilisateur dans votre application. Le jeton est ainsi envoyé en toute sécurité dans des requêtes HTTP pour permettre la communication entre deux composants de la même application ou du même service. Vous pouvez utiliser les revendications dans un jeton d’ID comme vous le souhaitez. Ils sont souvent utilisés pour afficher les informations de compte ou pour prendre des décisions de contrôle d’accès dans une application. Les jetons d’ID sont signés, mais ils ne sont pas chiffrés. Lorsque votre application ou votre API reçoit un jeton d’ID, elle doit valider la signature pour prouver que le jeton est authentique. Votre application ou votre API doit également valider certaines revendications du jeton pour prouver qu’il est valide. Les revendications validées par une application varient selon les spécifications du scénario, mais il existe certaines validations de revendication communes auxquelles votre application doit procéder dans chaque scénario.
 - *Jeton d’accès* - Jeton JWT contenant des revendications que vous pouvez utiliser pour identifier les autorisations octroyées à vos API. Les jetons d’accès sont signés, mais ils ne sont pas chiffrés. Les jetons d’accès permettent de fournir l’accès aux API et serveurs de ressources.  Lorsque votre API reçoit un jeton d’accès, elle doit valider la signature pour prouver que le jeton est authentique. Votre API doit également valider certaines revendications du jeton pour prouver qu’il est valide. Les revendications validées par une application varient selon les spécifications du scénario, mais il existe certaines validations de revendication communes auxquelles votre application doit procéder dans chaque scénario.
-- *Jeton d’actualisation* - Les jetons d’actualisation permettent d’acquérir de nouveaux jetons d’ID et d’accès dans un flux OAuth 2.0. Ils permettent à votre application d’obtenir un accès à long terme à des ressources au nom d’un utilisateur, et ce sans nécessiter l’intervention de l’utilisateur. Les jetons d’actualisation sont opaques pour votre application. Ils sont émis par Azure AD B2C et ne peuvent être inspectés et interprétés que par Azure AD B2C. Les jetons d’actualisation sont de longue durée. Toutefois, quand vous écrivez votre application, faites en sorte qu’elle n’attende pas un jeton d’actualisation d’une durée particulière. Les jetons d’actualisation peuvent être rendus non valides à tout moment, et ce pour diverses raisons. Pour savoir si un jeton d’actualisation est valide, votre application doit tenter de l’échanger en faisant une demande de jeton auprès d’Azure AD B2C. C’est la seule façon de faire. Quand vous échangez un jeton d’actualisation contre un nouveau jeton, vous recevez un nouveau jeton d’actualisation dans la réponse du jeton. Enregistrez le nouveau jeton d’actualisation. Il remplace le jeton d’actualisation utilisé précédemment dans la requête. Cette action garantit que vos jetons d’actualisation resteront valides le plus longtemps possible.
+- *Jeton d’actualisation* - Les jetons d’actualisation permettent d’acquérir de nouveaux jetons d’ID et d’accès dans un flux OAuth 2.0. Ils permettent à votre application d’obtenir un accès à long terme à des ressources au nom d’un utilisateur, et ce sans nécessiter l’intervention de l’utilisateur. Les jetons d’actualisation sont opaques pour votre application. Ils sont émis par Azure AD B2C et ne peuvent être inspectés et interprétés que par Azure AD B2C. Les jetons d’actualisation sont de longue durée. Toutefois, quand vous écrivez votre application, faites en sorte qu’elle n’attende pas un jeton d’actualisation d’une durée particulière. Les jetons d’actualisation peuvent être rendus non valides à tout moment, et ce pour diverses raisons. Pour savoir si un jeton d’actualisation est valide, votre application doit tenter de l’échanger en faisant une demande de jeton auprès d’Azure AD B2C. C’est la seule façon de faire. Quand vous échangez un jeton d’actualisation contre un nouveau jeton, vous recevez un nouveau jeton d’actualisation dans la réponse du jeton. Enregistrez le nouveau jeton d’actualisation. Il remplace le jeton d’actualisation utilisé précédemment dans la requête. Cette action garantit que vos jetons d’actualisation resteront valides le plus longtemps possible. Notez que les applications à page unique utilisant le flux de code d’autorisation avec PKCE ont toujours une durée de vie de jeton d’actualisation de 24 heures. [En savoir plus sur les implications pour la sécurité des jetons d’actualisation dans le navigateur](../active-directory/develop/reference-third-party-cookies-spas.md#security-implications-of-refresh-tokens-in-the-browser).
 
 ## <a name="endpoints"></a>Points de terminaison
 
@@ -97,7 +97,7 @@ Les propriétés suivantes sont utilisées pour [gérer la compatibilité des je
 
 ## <a name="pass-through"></a>Requête directe
 
-Au début de l’expérience utilisateur, Azure AD B2C reçoit un jeton d’accès d’un fournisseur d’identité. Azure AD B2C utilise ce jeton pour récupérer des informations sur l’utilisateur. Vous [activez une revendication dans votre flux utilisateur](idp-pass-through-user-flow.md) ou [définissez une revendication dans votre stratégie personnalisée](idp-pass-through-custom.md) pour passer le jeton aux applications que vous inscrivez dans Azure AD B2C. Votre application doit utiliser un [flux utilisateur v2](user-flow-versions.md) pour tirer parti de la transmission du jeton en tant que revendication.
+Au début de l’expérience utilisateur, Azure AD B2C reçoit un jeton d’accès d’un fournisseur d’identité. Azure AD B2C utilise ce jeton pour récupérer des informations sur l’utilisateur. Vous activez une revendication dans votre flux d’utilisateur pour [transmettre le jeton](idp-pass-through-user-flow.md) aux applications que vous inscrivez dans Azure AD B2C. Votre application doit utiliser un [flux utilisateur recommandé](user-flow-versions.md) pour tirer parti de la transmission du jeton en tant que revendication.
 
 Pour l’instant, Azure AD B2C permet uniquement de passer le jeton d’accès de fournisseurs d’identité OAuth 2.0 (dont font partie Facebook et Google). Pour tous les autres fournisseurs d’identité, la revendication est retournée vide.
 
@@ -119,7 +119,7 @@ L’en-tête du jeton contient des informations sur la clé et la méthode de ch
 }
 ```
 
-La valeur de la revendication **alg** correspond à l’algorithme utilisé pour signer le jeton. La valeur de la revendication **kid** est la clé publique utilisée pour signer le jeton. À tout moment, Azure AD B2C peut signer un jeton à l’aide de l’un des ensembles de paires de clés publique-privée. Azure AD B2C alterne le jeu de clés possible de façon périodique. Votre application doit être écrite de manière à gérer automatiquement ces changements de clés. Pour vérifier les mises à jour apportées aux clés publiques utilisées par Azure AD B2C, spécifiez une fréquence raisonnable d’environ 24 heures.
+La valeur de la revendication **alg** correspond à l’algorithme utilisé pour signer le jeton. La valeur de la revendication **kid** est la clé publique utilisée pour signer le jeton. À tout moment, Azure AD B2C peut signer un jeton à l’aide de l’un des ensembles de paires de clés publique-privée. Azure AD B2C alterne le jeu de clés possible de façon périodique. Votre application doit être écrite de manière à gérer automatiquement ces changements de clés. Pour vérifier les mises à jour apportées aux clés publiques utilisées par Azure AD B2C, spécifiez une fréquence raisonnable d’environ 24 heures. Pour gérer les modifications de clé inattendues, votre application doit être écrite de façon à récupérer à nouveau les clés publiques si elle reçoit une valeur **kid** inattendue.
 
 Azure AD B2C a un point de terminaison des métadonnées OpenID Connect. À l’aide de ce point de terminaison, les applications peuvent demander des informations sur Azure AD B2C lors de l’exécution. Ces informations incluent les points de terminaison, le contenu des jetons et les clés de signature de jetons. Votre locataire Azure AD B2C contient un document de métadonnées JSON pour chaque stratégie. Le document de métadonnées est un objet JSON qui contient plusieurs informations utiles. Les métadonnées contiennent **jwks_uri** qui indique l’emplacement de l’ensemble des clés publiques utilisées pour signer les jetons. Cet emplacement est fourni ici, mais il est préférable d’extraire cet emplacement de manière dynamique à l’aide du document de métadonnées et d’analyser **jwks_uri** :
 
@@ -134,7 +134,7 @@ Le document de métadonnées pour la stratégie `B2C_1_signupsignin1` dans le lo
 https://contoso.b2clogin.com/contoso.onmicrosoft.com/b2c_1_signupsignin1/v2.0/.well-known/openid-configuration
 ```
 
-Afin de déterminer la stratégie utilisée pour signer un jeton (et l’emplacement à partir duquel demander les métadonnées), deux options sont possibles. Tout d’abord, le nom de la stratégie est inclus dans la revendication `acr` du jeton. Vous pouvez analyser les revendications contenues dans le corps du jeton JWT par le biais d’un décodage base-64 du corps et la désérialisation de la chaîne JSON résultante. La revendication `acr` est le nom de la stratégie qui a été utilisée pour émettre le jeton. L’autre option consiste à coder la stratégie dans la valeur du paramètre `state` lors de l’émission de la requête, puis à la décoder pour déterminer la stratégie qui a été utilisée. Les 2 méthodes sont valides.
+Afin de déterminer la stratégie utilisée pour signer un jeton (et l’emplacement à partir duquel demander les métadonnées), deux options sont possibles. Tout d’abord, le nom de la stratégie est inclus dans la revendication `tfp` (par défaut) ou `acr` (configurée) dans le jeton. Vous pouvez analyser les revendications contenues dans le corps du jeton JWT par le biais d’un décodage base-64 du corps et la désérialisation de la chaîne JSON résultante. La revendication `tfp` ou `acr` est le nom de la stratégie qui a été utilisée pour émettre le jeton. L’autre option consiste à coder la stratégie dans la valeur du paramètre `state` lors de l’émission de la requête, puis à la décoder pour déterminer la stratégie qui a été utilisée. Les 2 méthodes sont valides.
 
 Ce document ne contient pas la description de la procédure de validation de la signature. De nombreuses bibliothèques open source sont disponibles pour vous aider à valider un jeton.
 

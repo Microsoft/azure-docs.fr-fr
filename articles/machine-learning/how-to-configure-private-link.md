@@ -1,1167 +1,167 @@
 ---
-title: Configurer Azure Private Link
+title: Configurer un point de terminaison privé
 titleSuffix: Azure Machine Learning
 description: Utilisez Azure Private Link pour accéder en toute sécurité à votre espace de travail Azure Machine Learning à partir d’un réseau virtuel.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
+ms.custom: how-to, devx-track-azurecli
 ms.author: aashishb
 author: aashishb
 ms.reviewer: larryfr
-ms.date: 03/13/2020
-ms.openlocfilehash: 5428f24ea5ab780c4b51e0af37908077ddc32232
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.date: 09/30/2020
+ms.openlocfilehash: 2953f85a5c21cdd670d6e133d09ffacf06f178ef
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82891368"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94842700"
 ---
-# <a name="configure-azure-private-link-for-an-azure-machine-learning-workspace-preview"></a>Configurer Azure Private Link pour un espace de travail Azure Machine Learning (préversion)
+# <a name="configure-azure-private-link-for-an-azure-machine-learning-workspace"></a>Configurer Azure Private Link pour un espace de travail Azure Machine Learning
 
-Dans ce document, vous allez apprendre à utiliser Azure Private Link avec votre espace de travail Azure Machine Learning. Cette capacité est actuellement disponible en version préliminaire dans les régions USA Est, USA Ouest 2 et USA Centre Sud. 
+Dans ce document, vous allez apprendre à utiliser Azure Private Link avec votre espace de travail Azure Machine Learning. Pour plus d’informations sur la création d’un réseau virtuel pour Azure Machine Learning, consultez [Vue d’ensemble de l’isolement et la confidentialité des réseaux virtuels](how-to-network-security-overview.md)
 
-Azure Private Link vous permet de vous connecter à votre espace de travail à l’aide d’un point de terminaison privé. Le point de terminaison privé est un ensemble d’adresses IP privées au sein de votre réseau virtuel. Vous pouvez alors limiter l’accès à votre espace de travail pour qu’il ne se fasse que sur les adresses IP privées. Azure Private Link permet de réduire le risque d’exfiltration des données. Pour plus d’informations sur les points de terminaison privés, consultez l’article [Azure Private Link](/azure/private-link/private-link-overview).
+Azure Private Link vous permet de vous connecter à votre espace de travail à l’aide d’un point de terminaison privé. Le point de terminaison privé est un ensemble d’adresses IP privées au sein de votre réseau virtuel. Vous pouvez alors limiter l’accès à votre espace de travail pour qu’il ne se fasse que sur les adresses IP privées. Azure Private Link permet de réduire le risque d’exfiltration des données. Pour plus d’informations sur les points de terminaison privés, consultez l’article [Azure Private Link](../private-link/private-link-overview.md).
 
 > [!IMPORTANT]
-> Azure Private Link n’a pas d’effet sur le plan de contrôle Azure (opérations de gestion), comme la suppression de l’espace de travail ou la gestion des ressources de calcul. Par exemple, la création, la mise à jour ou la suppression d’une cible de calcul. Ces opérations sont effectuées sur l’Internet public comme d’habitude.
+> Azure Private Link n’a pas d’effet sur le plan de contrôle Azure (opérations de gestion), comme la suppression de l’espace de travail ou la gestion des ressources de calcul. Par exemple, la création, la mise à jour ou la suppression d’une cible de calcul. Ces opérations sont effectuées sur l’Internet public comme d’habitude. Les opérations de plan de données telles que l’utilisation du studio Azure Machine Learning, des API (y compris les pipelines publiés) ou du SDK utilisent le point de terminaison privé.
 >
-> La préversion des instances de calcul Azure Machine Learning n’est pas prise en charge dans un espace de travail où le service Liaison privée est activé.
+> Il se peut que vous rencontriez des problèmes en tentant d’accéder au point de terminaison privé de votre espace de travail si vous utilisez Mozilla Firefox. Un de ces problème peut être lié à DNS sur HTTPS dans Mozilla. Nous vous recommandons d’utiliser Microsoft Edge ou Google Chrome comme solution de contournement.
+
+## <a name="prerequisites"></a>Prérequis
+
+Si vous prévoyez d’utiliser un espace de travail avec un lien privé activé avec une clé gérée par le client, vous devez demander cette fonctionnalité à l’aide d’un ticket de support. Pour plus d’informations, consultez [Gérer et augmenter les quotas](how-to-manage-quotas.md#private-endpoint-and-private-dns-quota-increases).
+
+## <a name="limitations"></a>Limites
+
+L’utilisation d’un espace de travail Azure Machine Learning avec un lien privé n’est pas disponible dans les régions Azure Government ou Azure China 21Vianet.
 
 ## <a name="create-a-workspace-that-uses-a-private-endpoint"></a>Créer un espace de travail qui utilise un point de terminaison privé
 
-Actuellement, nous prenons uniquement en charge l’activation d’un point de terminaison privé lors de la création d’un espace de travail Azure Machine Learning. Les modèles suivants sont fournis pour plusieurs configurations courantes :
+Utilisez l’une des méthodes suivantes pour créer un espace de travail avec un point de terminaison privé. Chacune de ces méthodes __nécessite un réseau virtuel existant__ :
 
 > [!TIP]
-> L’approbation automatique permet de contrôler l’accès automatisé à la ressource compatible avec Azure Private Link. Pour plus d’informations, consultez [Qu’est-ce que le service Azure Private Link ?](../private-link/private-link-service-overview.md)
+> Si vous souhaitez créer un espace de travail, un point de terminaison privé et un réseau virtuel en même temps, consultez [Utiliser un modèle Azure Resource Manager pour créer un espace de travail pour Azure Machine Learning](how-to-create-workspace-template.md).
 
-* [Espace de travail avec clés gérées par le client et approbation automatique pour Azure Private Link](#cmkaapl)
-* [Espace de travail avec clés gérées par le client et approbation manuelle pour Azure Private Link](#cmkmapl)
-* [Espace de travail avec clés gérées par Microsoft et approbation automatique pour Azure Private Link](#mmkaapl)
-* [Espace de travail avec clés gérées par Microsoft et approbation manuelle pour Azure Private Link](#mmkmapl)
+# <a name="python"></a>[Python](#tab/python)
 
-Lors du déploiement d’un modèle, vous devez fournir les informations suivantes :
+Fournie par le SDK Python Azure Machine Learning, la classe [PrivateEndpointConfig](/python/api/azureml-core/azureml.core.privateendpointconfig?view=azure-ml-py) peut être utilisée avec [Workspace.create()](/python/api/azureml-core/azureml.core.workspace.workspace?view=azure-ml-py#create-name--auth-none--subscription-id-none--resource-group-none--location-none--create-resource-group-true--sku--basic---tags-none--friendly-name-none--storage-account-none--key-vault-none--app-insights-none--container-registry-none--adb-workspace-none--cmk-keyvault-none--resource-cmk-uri-none--hbi-workspace-false--default-cpu-compute-target-none--default-gpu-compute-target-none--private-endpoint-config-none--private-endpoint-auto-approval-true--exist-ok-false--show-output-true-) pour créer un espace de travail avec un point de terminaison privé. Cette classe nécessite un réseau virtuel existant.
 
-* Nom de l’espace de travail
-* Région Azure dans laquelle créer les ressources
-* Édition de l’espace de travail (De base ou Entreprise)
-* Si les paramètres de confidentialité élevée de l’espace de travail doivent être activés
-* Si le chiffrement de l’espace de travail avec une clé gérée par le client doit être activé, et les valeurs associées pour la clé
-* Nom du réseau virtuel et du sous-réseau créés par le modèle
+```python
+from azureml.core import Workspace
+from azureml.core import PrivateEndPointConfig
 
-Une fois qu’un modèle a été soumis et que l’approvisionnement est terminé, le groupe de ressources qui contient votre espace de travail contient trois nouveaux types d’artefacts associés à Azure Private Link :
-
-* Point de terminaison privé
-* interface réseau
-* Zone DNS privée
-
-L’espace de travail contient également une instance Réseau virtuel Microsoft Azure qui peut communiquer avec l’espace de travail sur le point de terminaison privé.
-
-### <a name="deploy-the-template-using-the-azure-portal"></a>Déployer le modèle à l’aide du Portail Azure
-
-1. Suivez la procédure indiquée dans [Déployer des ressources à partir d’un modèle personnalisé](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy-portal#deploy-resources-from-custom-template). Lorsque vous arrivez à l’écran __Modifier le modèle__, collez l’un des modèles figurant à la fin de ce document.
-1. Sélectionnez __Enregistrer__ pour utiliser le modèle. Fournissez les informations suivantes et acceptez les conditions répertoriées :
-
-   * Abonnement : Sélectionnez l’abonnement Azure à utiliser pour ces ressources.
-   * Groupe de ressources : Sélectionnez ou créez un groupe de ressources pour contenir les services.
-   * Nom de l’espace de travail : Nom à utiliser pour l’espace de travail Azure Machine Learning qui va être créé. Le nom de l'espace de travail doit contenir entre 3 et 33 caractères. Il ne peut contenir que des caractères alphanumériques et « - ».
-   * Localisation : Sélectionnez l’emplacement de création des ressources.
-
-Pour plus d’informations, consultez [Déployer des ressources à partir d’un modèle personnalisé](../azure-resource-manager/templates/deploy-portal.md#deploy-resources-from-custom-template).
-
-### <a name="deploy-the-template-using-azure-powershell"></a>Déployer le modèle à l’aide d’Azure PowerShell
-
-Cet exemple suppose que vous avez enregistré l’un des modèles figurant à la fin de ce document dans un fichier nommé `azuredeploy.json` dans le répertoire actuel :
-
-```powershell
-New-AzResourceGroup -Name examplegroup -Location "East US"
-new-azresourcegroupdeployment -name exampledeployment `
-  -resourcegroupname examplegroup -location "East US" `
-  -templatefile .\azuredeploy.json -workspaceName "exampleworkspace" -sku "basic"
+pe = PrivateEndPointConfig(name='myprivateendpoint', vnet_name='myvnet', vnet_subnet_name='default')
+ws = Workspace.create(name='myworkspace',
+    subscription_id='<my-subscription-id>',
+    resource_group='myresourcegroup',
+    location='eastus2',
+    private_endpoint_config=pe,
+    private_endpoint_auto_approval=True,
+    show_output=True)
 ```
 
-Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure PowerShell](../azure-resource-manager/templates/secure-template-with-sas-token.md).
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-### <a name="deploy-the-template-using-the-azure-cli"></a>Déployer le modèle à l’aide d’Azure CLI
+L’[extension Azure CLI pour Machine Learning](reference-azure-machine-learning-cli.md) fournit la commande [az ml workspace create](/cli/azure/ext/azure-cli-ml/ml/workspace?view=azure-cli-latest#ext_azure_cli_ml_az_ml_workspace_create). Les paramètres suivants de cette commande permettent de créer un espace de travail avec un réseau privé mais requièrent un réseau virtuel existant :
 
-Cet exemple suppose que vous avez enregistré l’un des modèles figurant à la fin de ce document dans un fichier nommé `azuredeploy.json` dans le répertoire actuel :
+* `--pe-name`: Nom du point de terminaison privé qui est créé.
+* `--pe-auto-approval`: Si les connexions de point de terminaison privé à l’espace de travail doivent être approuvées automatiquement.
+* `--pe-resource-group`: Groupe de ressources dans lequel créer le point de terminaison privé. Doit être le même groupe qui contient le réseau virtuel.
+* `--pe-vnet-name`: Réseau virtuel existant dans lequel créer le point de terminaison privé.
+* `--pe-subnet-name`: Nom du sous-réseau dans lequel créer le point de terminaison privé. La valeur par défaut est `default`.
 
-```azurecli-interactive
-az group create --name examplegroup --location "East US"
-az group deployment create \
-  --name exampledeployment \
-  --resource-group examplegroup \
-  --template-file azuredeploy.json \
-  --parameters workspaceName=exampleworkspace location=eastus sku=basic
+# <a name="portal"></a>[Portail](#tab/azure-portal)
+
+L’onglet __Mise en réseau__ d’Azure Machine Learning Studio vous permet de configurer un point de terminaison privé. Toutefois, il nécessite un réseau virtuel existant. Pour plus d’informations, consultez [Créer des espaces de travail dans le portail](how-to-manage-workspace.md).
+
+---
+
+## <a name="add-a-private-endpoint-to-a-workspace"></a>Ajouter un point de terminaison privé à un espace de travail
+
+Utilisez l’une des méthodes suivantes pour ajouter un point de terminaison privé à un espace de travail existant :
+
+> [!IMPORTANT]
+>
+> Vous devez disposer d’un réseau virtuel existant dans lequel créer le point de terminaison privé. Vous devez également [désactiver les stratégies réseau pour les points de terminaison privés](../private-link/disable-private-endpoint-network-policy.md) avant d’ajouter le point de terminaison privé.
+
+> [!WARNING]
+>
+> Si des cibles de calcul existantes sont associées à cet espace de travail et qu’elles ne se trouvent pas derrière le même réseau virtuel dans lequel le point de terminaison privé est créé, elles ne fonctionneront pas.
+
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+from azureml.core import Workspace
+from azureml.core import PrivateEndPointConfig
+
+pe = PrivateEndPointConfig(name='myprivateendpoint', vnet_name='myvnet', vnet_subnet_name='default')
+ws = Workspace.from_config()
+ws.add_private_endpoint(private_endpoint_config=pe, private_endpoint_auto_approval=True, show_output=True)
 ```
 
-Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../azure-resource-manager/templates/deploy-cli.md) et [Déployer un modèle Resource Manager privé avec un jeton SAP et Azure CLI](../azure-resource-manager/templates/secure-template-with-sas-token.md).
+Pour plus d’informations sur les classes et les méthodes utilisées dans cet exemple, consultez [PrivateEndpointConfig](/python/api/azureml-core/azureml.core.privateendpointconfig?view=azure-ml-py) et [Workspace.add_private_endpoint](/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py#add-private-endpoint-private-endpoint-config--private-endpoint-auto-approval-true--location-none--show-output-true--tags-none-).
+
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+L’[extension Azure CLI pour Machine Learning](reference-azure-machine-learning-cli.md) fournit la commande [az ml workspace private-endpoint add](/cli/azure/ext/azure-cli-ml/ml/workspace/private-endpoint?view=azure-cli-latest#ext_azure_cli_ml_az_ml_workspace_private_endpoint_add).
+
+```azurecli
+az ml workspace private-endpoint add -w myworkspace  --pe-name myprivateendpoint --pe-auto-approval true --pe-vnet-name myvnet
+```
+
+# <a name="portal"></a>[Portail](#tab/azure-portal)
+
+Dans l’espace de travail Azure Machine Learning dans le portail, sélectionnez __Connexions de point de terminaison privé__ puis __+ Point de terminaison privé__. Utilisez les champs pour créer un point de terminaison privé.
+
+* Lorsque vous sélectionnez la __Région__, sélectionnez la même région que celle de votre réseau virtuel. 
+* Lorsque vous sélectionnez le __Type de ressource__, utilisez __Microsoft.MachineLearningServices/workspaces__. 
+* Définissez la __Ressource__ sur le nom de votre espace de travail.
+
+Pour finir, sélectionnez __Créer__ pour créer le point de terminaison privé.
+
+---
+
+## <a name="remove-a-private-endpoint"></a>Supprimer un point de terminaison privé
+
+Utilisez l’une des méthodes suivantes pour supprimer un point de terminaison privé d’un espace de travail :
+
+# <a name="python"></a>[Python](#tab/python)
+
+Utilisez [Workspace.delete_private_endpoint_connection](/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py#delete-private-endpoint-connection-private-endpoint-connection-name-) pour supprimer un point de terminaison privé.
+
+```python
+from azureml.core import Workspace
+
+ws = Workspace.from_config()
+# get the connection name
+_, _, connection_name = ws.get_details()['privateEndpointConnections'][0]['id'].rpartition('/')
+ws.delete_private_endpoint_connection(private_endpoint_connection_name=connection_name)
+```
+
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+L’[extension Azure CLI pour Machine Learning](reference-azure-machine-learning-cli.md) fournit la commande [az ml workspace private-endpoint delete](/cli/azure/ext/azure-cli-ml/ml/workspace/private-endpoint?view=azure-cli-latest#ext_azure_cli_ml_az_ml_workspace_private_endpoint_delete).
+
+# <a name="portal"></a>[Portail](#tab/azure-portal)
+
+Dans l’espace de travail Azure Machine Learning dans le portail, sélectionnez __Connexions de point de terminaison privé__, puis sélectionnez le point de terminaison que vous voulez supprimer. Pour finir, sélectionnez __Supprimer__.
+
+---
 
 ## <a name="using-a-workspace-over-a-private-endpoint"></a>Utilisation d’un espace de travail sur un point de terminaison privé
 
-Étant donné que les communications avec l’espace de travail sont autorisées uniquement à partir du réseau virtuel, tous les environnements de développement qui utilisent l’espace de travail doivent être faire partie du réseau virtuel. Par exemple, une machine virtuelle du réseau virtuel ou un ordinateur connecté au réseau virtuel à l’aide d’une passerelle VPN.
+Étant donné que les communications avec l’espace de travail sont autorisées uniquement à partir du réseau virtuel, tous les environnements de développement qui utilisent l’espace de travail doivent être faire partie du réseau virtuel. Par exemple, une machine virtuelle sur le réseau virtuel.
 
 > [!IMPORTANT]
 > Pour éviter toute interruption temporaire de la connectivité, Microsoft recommande de vider le cache DNS sur les ordinateurs qui se connectent à l’espace de travail après avoir activé Azure Private Link. 
 
-Pour plus d’informations sur Machines virtuelles Microsoft Azure, consultez la [documentation relative à Machines Virtuelles](/azure/virtual-machines/).
+Pour plus d’informations sur Machines virtuelles Microsoft Azure, consultez la [documentation relative à Machines Virtuelles](../virtual-machines/index.yml).
 
-Pour plus d’informations sur les passerelles VPN, consultez [Qu’est-ce qu’une passerelle VPN ?](/azure/vpn-gateway/vpn-gateway-about-vpngateways)
-
-## <a name="using-azure-storage"></a>Utilisation de Stockage Azure
-
-Pour sécuriser le compte Stockage Azure utilisé par votre espace de travail, placez-le dans le réseau virtuel.
-
-Pour plus d’informations sur la façon de placer le compte de stockage dans le réseau virtuel, consultez [Utiliser un compte de stockage pour votre espace de travail](how-to-enable-virtual-network.md#use-a-storage-account-for-your-workspace).
-
-## <a name="using-azure-key-vault"></a>Utilisation d’Azure Key Vault
-
-Pour sécuriser l’instance Azure Key Vault utilisée par votre espace de travail, vous pouvez la placer dans le réseau virtuel ou activer Azure Private Link pour elle.
-
-Pour plus d’informations sur la façon de placer le coffre de clés dans le réseau virtuel, consultez [Utiliser un coffre de clés pour votre espace de travail](how-to-enable-virtual-network.md#key-vault-instance).
-
-Pour plus d’informations sur l’activation d’Azure Private Link pour le coffre de clés, consultez [Intégrer Key Vault avec Azure Private Link](/azure/key-vault/private-link-service).
-
-## <a name="using-azure-kubernetes-services"></a>Utilisation d’Azure Kubernetes Services
-
-Pour sécuriser les services Azure Kubernetes utilisés par votre espace de travail, placez-le dans un réseau virtuel. Pour plus d’informations, consultez [Utiliser Azure Kubernetes Services avec votre espace de travail](how-to-enable-virtual-network.md#aksvnet).
-
-> [!WARNING]
-> Azure Machine Learning ne prend pas en charge l'utilisation d'une instance d'Azure Kubernetes Service pour laquelle une liaison privée est activée.
-
-## <a name="azure-container-registry"></a>Azure Container Registry
-
-Pour plus d’informations sur la sécurisation d’Azure Container Registry dans le réseau virtuel, consultez [Utilisation d’Azure Container Registry](how-to-enable-virtual-network.md#azure-container-registry).
-
-> [!IMPORTANT]
-> Si vous utilisez le service Liaison privée pour votre espace de travail Azure Machine Learning et que vous placez l'instance Azure Container Registry de votre espace de travail dans un réseau virtuel, vous devez également appliquer le modèle Azure Resource Manager suivant. Ce modèle permet à votre espace de travail de communiquer avec ACR via le service Liaison privée.
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-      "keyVaultArmId": {
-      "type": "string"
-      },
-      "workspaceName": {
-      "type": "string"
-      },
-      "containerRegistryArmId": {
-      "type": "string"
-      },
-      "applicationInsightsArmId": {
-      "type": "string"
-      },
-      "storageAccountArmId": {
-      "type": "string"
-      },
-      "location": {
-      "type": "string"
-      }
-  },
-  "resources": [
-      {
-      "type": "Microsoft.MachineLearningServices/workspaces",
-      "apiVersion": "2019-11-01",
-      "name": "[parameters('workspaceName')]",
-      "location": "[parameters('location')]",
-      "identity": {
-          "type": "SystemAssigned"
-      },
-      "sku": {
-          "tier": "enterprise",
-          "name": "enterprise"
-      },
-      "properties": {
-          "sharedPrivateLinkResources":
-  [{"Name":"Acr","Properties":{"PrivateLinkResourceId":"[concat(parameters('containerRegistryArmId'), '/privateLinkResources/registry')]","GroupId":"registry","RequestMessage":"Approve","Status":"Pending"}}],
-          "keyVault": "[parameters('keyVaultArmId')]",
-          "containerRegistry": "[parameters('containerRegistryArmId')]",
-          "applicationInsights": "[parameters('applicationInsightsArmId')]",
-          "storageAccount": "[parameters('storageAccountArmId')]"
-      }
-      }
-  ]
-}
-```
-
-## <a name="azure-resource-manager-templates"></a>Modèles Microsoft Azure Resource Manager
-
-<a id="cmkaapl"></a>
-### <a name="workspace-with-customer-managed-keys-and-auto-approval-for-private-link"></a>Espace de travail avec clés gérées par le client et approbation automatique pour Azure Private Link
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "workspaceName": {
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the name of the Azure Machine Learning workspace."
-      }
-    },
-    "location": {
-      "type": "string",
-      "allowedValues": [
-        "eastus",
-        "southcentralus",
-        "westus2"
-      ],
-      "metadata": {
-        "description": "Specifies the location for all resources."
-      }
-    },
-    "sku":{
-      "type": "string",
-      "defaultValue": "basic",
-      "allowedValues": [
-        "basic",
-        "enterprise"
-      ],
-      "metadata": {
-        "description": "Specifies the sku, also referred as 'edition' of the Azure Machine Learning workspace."
-      }
-    },
-    "hbi_workspace":{
-      "type": "string",
-      "defaultValue": "false",
-      "allowedValues": [
-        "false",
-        "true"
-      ],
-      "metadata": {
-        "description": "Specifies that the Azure Machine Learning workspace holds highly confidential data."
-      }
-    },
-    "encryption_status":{
-      "type": "string",
-      "defaultValue": "Disabled",
-      "allowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
-      "metadata": {
-        "description": "Specifies if the Azure Machine Learning workspace should be encrypted with customer managed key."
-      }
-    },
-    "cmk_keyvault":{
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the customer managed keyVault id."
-      }
-    },
-    "resource_cmk_uri":{
-      "type": "string",
-      "metadata": {
-        "description": "Specifies if the customer managed keyvault key uri."
-      }
-    },
-    "subnetName": {
-        "type": "string"
-      },
-      "vnetName": {
-        "type": "string"
-      }
-  },
-  "variables": {
-    "storageAccountName": "[concat('sa',uniqueString(resourceGroup().id))]",
-    "storageAccountType": "Standard_LRS",
-    "keyVaultName": "[concat('kv',uniqueString(resourceGroup().id))]",
-    "tenantId": "[subscription().tenantId]",
-    "applicationInsightsName": "[concat('ai',uniqueString(resourceGroup().id))]",
-    "privateDnsGuid": "[guid(resourceGroup().id, deployment().name)]"    
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-04-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[variables('storageAccountType')]"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            },
-            "file": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        },
-        "supportsHttpsTrafficOnly": true
-      }
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2018-02-14",
-      "name": "[variables('keyVaultName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "tenantId": "[variables('tenantId')]",
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "accessPolicies": []
-      }
-    },
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2018-05-01-preview",
-      "name": "[variables('applicationInsightsName')]",
-      "location": "[if(or(equals(parameters('location'),'eastus2'),equals(parameters('location'),'westcentralus')),'southcentralus',parameters('location'))]",
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web"
-      }
-    },
-    {
-      "type": "Microsoft.MachineLearningServices/workspaces",
-      "apiVersion": "2020-01-01",
-      "name": "[parameters('workspaceName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-      ],
-      "identity": {
-        "type": "systemAssigned"
-      },
-      "sku": {
-            "tier": "[parameters('sku')]",
-            "name": "[parameters('sku')]"
-      },
-      "properties": {
-        "friendlyName": "[parameters('workspaceName')]",
-        "keyVault": "[resourceId('Microsoft.KeyVault/vaults',variables('keyVaultName'))]",
-        "applicationInsights": "[resourceId('Microsoft.Insights/components',variables('applicationInsightsName'))]",
-        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts/',variables('storageAccountName'))]",
-         "encryption": {
-                "status": "[parameters('encryption_status')]",
-                "keyVaultProperties": {
-                    "keyVaultArmId": "[parameters('cmk_keyvault')]",
-                    "keyIdentifier": "[parameters('resource_cmk_uri')]"
-                  }
-            },
-        "hbi_workspace": "[parameters('hbi_workspace')]"
-      }
-    },
-    {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2019-09-01",
-        "name": "[parameters('vnetName')]",
-        "location": "[parameters('location')]",
-        "properties": {
-            "addressSpace": {
-                "addressPrefixes": [
-                    "10.0.0.0/27"
-                ]
-            },
-            "virtualNetworkPeerings": [],
-            "enableDdosProtection": false,
-            "enableVmProtection": false
-        }
-      },
-    {
-        "type": "Microsoft.Network/virtualNetworks/subnets",
-        "apiVersion": "2019-09-01",
-        "name": "[concat(parameters('vnetName'), '/', parameters('subnetName'))]",
-        "dependsOn": [
-            "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-        ],
-        "properties": {
-            "addressPrefix": "10.0.0.0/27",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
-        }
-    },
-    {
-      "apiVersion": "2019-04-01",
-      "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-      "type": "Microsoft.Network/privateEndpoints",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-      ],
-      "properties": {
-        "privateLinkServiceConnections": [
-          {
-            "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-            "properties": {
-              "privateLinkServiceId": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-              "groupIds": [
-                "amlworkspace"
-              ]
-            }
-          }
-        ],
-        "manualPrivateLinkServiceConnections": [],
-        "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2017-05-10",
-      "name": "[concat('PrivateDns-', variables('privateDnsGuid'))]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/privateEndpoints', concat(parameters('workspaceName'), '-PrivateEndpoint'))]"
-      ],
-      "properties": {
-          "mode": "Incremental",
-          "template": {
-              "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-              "contentVersion": "1.0.0.0",
-              "resources": [
-                  {
-                      "type": "Microsoft.Network/privateDnsZones",
-                      "apiVersion": "2018-09-01",
-                      "name": "privatelink.api.azureml.ms",
-                      "location": "global",
-                      "tags": {},
-                      "properties": {}
-                  },
-                  {
-                      "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
-                      "apiVersion": "2018-09-01",
-                      "name": "[concat('privatelink.api.azureml.ms', '/', uniqueString(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))))]",
-                      "location": "global",
-                      "dependsOn": [
-                          "privatelink.api.azureml.ms"
-                      ],
-                      "properties": {
-                          "virtualNetwork": {
-                              "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-                          },
-                          "registrationEnabled": false
-                      }
-                  },
-                  {
-                      "apiVersion": "2017-05-10",
-                      "name": "[concat('EndpointDnsRecords-', variables('privateDnsGuid'))]",
-                      "type": "Microsoft.Resources/deployments",
-                      "dependsOn": [
-                          "privatelink.api.azureml.ms"
-                      ],
-                      "properties": {
-                          "mode": "Incremental",
-                          "templatelink": {
-                              "contentVersion": "1.0.0.0",
-                              "uri": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpoint.json"
-                          },
-                          "parameters": {
-                              "privateDnsName": {
-                                  "value": "privatelink.api.azureml.ms"
-                              },
-                              "privateEndpointNicResourceId": {
-                                  "value": "[reference(resourceId('Microsoft.Network/privateEndpoints',concat(parameters('workspaceName'), '-PrivateEndpoint'))).networkInterfaces[0].id]"
-                              },
-                              "nicRecordsTemplateUri": {
-                                  "value": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpointNic.json"
-                              },
-                              "ipConfigRecordsTemplateUri": {
-                                  "value": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpointIpConfig.json"
-                              },
-                              "uniqueId": {
-                                  "value": "[variables('privateDnsGuid')]"
-                              },
-                              "existingRecords": {
-                                  "value": {}
-                              }
-                          }
-                      }
-                  }
-              ]
-          }
-      },
-      "resourceGroup": "[resourceGroup().name]"
-  }
-  ]
-}
-```
-
-<a id="cmkmapl"></a>
-### <a name="workspace-with-customer-managed-keys-and-manual-approval-for-private-link"></a>Espace de travail avec clés gérées par le client et approbation manuelle pour Azure Private Link
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "workspaceName": {
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the name of the Azure Machine Learning workspace."
-      }
-    },
-    "location": {
-      "type": "string",
-      "allowedValues": [
-        "eastus",
-        "southcentralus",
-        "westus2"
-      ],
-      "metadata": {
-        "description": "Specifies the location for all resources."
-      }
-    },
-    "sku":{
-      "type": "string",
-      "defaultValue": "basic",
-      "allowedValues": [
-        "basic",
-        "enterprise"
-      ],
-      "metadata": {
-        "description": "Specifies the sku, also referred as 'edition' of the Azure Machine Learning workspace."
-      }
-    },
-    "hbi_workspace":{
-      "type": "string",
-      "defaultValue": "false",
-      "allowedValues": [
-        "false",
-        "true"
-      ],
-      "metadata": {
-        "description": "Specifies that the Azure Machine Learning workspace holds highly confidential data."
-      }
-    },
-    "encryption_status":{
-      "type": "string",
-      "defaultValue": "Disabled",
-      "allowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
-      "metadata": {
-        "description": "Specifies if the Azure Machine Learning workspace should be encrypted with customer managed key."
-      }
-    },
-    "cmk_keyvault":{
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the customer managed keyVault id."
-      }
-    },
-    "resource_cmk_uri":{
-      "type": "string",
-      "metadata": {
-        "description": "Specifies if the customer managed keyvault key uri."
-      }
-    },
-    "subnetName": {
-        "type": "string"
-      },
-      "vnetName": {
-        "type": "string"
-      }
-  },
-  "variables": {
-    "storageAccountName": "[concat('sa',uniqueString(resourceGroup().id))]",
-    "storageAccountType": "Standard_LRS",
-    "keyVaultName": "[concat('kv',uniqueString(resourceGroup().id))]",
-    "tenantId": "[subscription().tenantId]",
-    "applicationInsightsName": "[concat('ai',uniqueString(resourceGroup().id))]"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-04-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[variables('storageAccountType')]"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            },
-            "file": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        },
-        "supportsHttpsTrafficOnly": true
-      }
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2018-02-14",
-      "name": "[variables('keyVaultName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "tenantId": "[variables('tenantId')]",
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "accessPolicies": []
-      }
-    },
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2018-05-01-preview",
-      "name": "[variables('applicationInsightsName')]",
-      "location": "[if(or(equals(parameters('location'),'eastus2'),equals(parameters('location'),'westcentralus')),'southcentralus',parameters('location'))]",
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web"
-      }
-    },
-    {
-      "type": "Microsoft.MachineLearningServices/workspaces",
-      "apiVersion": "2020-01-01",
-      "name": "[parameters('workspaceName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-      ],
-      "identity": {
-        "type": "systemAssigned"
-      },
-      "sku": {
-            "tier": "[parameters('sku')]",
-            "name": "[parameters('sku')]"
-      },
-      "properties": {
-        "friendlyName": "[parameters('workspaceName')]",
-        "keyVault": "[resourceId('Microsoft.KeyVault/vaults',variables('keyVaultName'))]",
-        "applicationInsights": "[resourceId('Microsoft.Insights/components',variables('applicationInsightsName'))]",
-        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts/',variables('storageAccountName'))]",
-         "encryption": {
-                "status": "[parameters('encryption_status')]",
-                "keyVaultProperties": {
-                    "keyVaultArmId": "[parameters('cmk_keyvault')]",
-                    "keyIdentifier": "[parameters('resource_cmk_uri')]"
-                  }
-            },
-        "hbi_workspace": "[parameters('hbi_workspace')]"
-      }
-    },
-    {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2019-09-01",
-        "name": "[parameters('vnetName')]",
-        "location": "[parameters('location')]",
-        "properties": {
-            "addressSpace": {
-                "addressPrefixes": [
-                    "10.0.0.0/27"
-                ]
-            },
-            "virtualNetworkPeerings": [],
-            "enableDdosProtection": false,
-            "enableVmProtection": false
-        }
-      },
-    {
-        "type": "Microsoft.Network/virtualNetworks/subnets",
-        "apiVersion": "2019-09-01",
-        "name": "[concat(parameters('vnetName'), '/', parameters('subnetName'))]",
-        "dependsOn": [
-            "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-        ],
-        "properties": {
-            "addressPrefix": "10.0.0.0/27",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
-        }
-    },
-    {
-      "apiVersion": "2019-04-01",
-      "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-      "type": "Microsoft.Network/privateEndpoints",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-      ],
-      "properties": {
-        "privateLinkServiceConnections": [],
-        "manualPrivateLinkServiceConnections": [
-          {
-            "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-            "properties": {
-              "privateLinkServiceId": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-              "groupIds": [
-                "amlworkspace"
-              ]
-            }
-          }
-        ],
-        "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-        }
-      }
-    }
-  ]
-}
-```
-
-<a id="mmkaapl"></a>
-### <a name="workspace-with-microsoft-managed-keys-and-auto-approval-for-private-link"></a>Espace de travail avec clés gérées par Microsoft et approbation automatique pour Azure Private Link
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "workspaceName": {
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the name of the Azure Machine Learning workspace."
-      }
-    },
-    "location": {
-      "type": "string",
-      "allowedValues": [
-        "eastus",
-        "southcentralus",
-        "westus2"
-      ],
-      "metadata": {
-        "description": "Specifies the location for all resources."
-      }
-    },
-    "sku": {
-      "type": "string",
-      "defaultValue": "basic",
-      "allowedValues": [
-        "basic",
-        "enterprise"
-      ],
-      "metadata": {
-        "description": "Specifies the sku, also referred as 'edition' of the Azure Machine Learning workspace."
-      }
-    },
-    "subnetName": {
-      "type": "string"
-    },
-    "vnetName": {
-      "type": "string"
-    }
-  },
-  "variables": {
-    "storageAccountName": "[concat('sa',uniqueString(resourceGroup().id))]",
-    "storageAccountType": "Standard_LRS",
-    "keyVaultName": "[concat('kv',uniqueString(resourceGroup().id))]",
-    "tenantId": "[subscription().tenantId]",
-    "applicationInsightsName": "[concat('ai',uniqueString(resourceGroup().id))]",
-    "privateDnsGuid": "[guid(resourceGroup().id, deployment().name)]"
-    
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-04-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[variables('storageAccountType')]"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            },
-            "file": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        },
-        "supportsHttpsTrafficOnly": true
-      }
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2018-02-14",
-      "name": "[variables('keyVaultName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "tenantId": "[variables('tenantId')]",
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "accessPolicies": []
-      }
-    },
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2018-05-01-preview",
-      "name": "[variables('applicationInsightsName')]",
-      "location": "[if(or(equals(parameters('location'),'eastus2'),equals(parameters('location'),'westcentralus')),'southcentralus',parameters('location'))]",
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web"
-      }
-    },
-    {
-      "type": "Microsoft.MachineLearningServices/workspaces",
-      "apiVersion": "2019-11-01",
-      "name": "[parameters('workspaceName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-      ],
-      "identity": {
-        "type": "systemAssigned"
-      },
-      "sku": {
-        "tier": "[parameters('sku')]",
-        "name": "[parameters('sku')]"
-      },
-      "properties": {
-        "friendlyName": "[parameters('workspaceName')]",
-        "keyVault": "[resourceId('Microsoft.KeyVault/vaults',variables('keyVaultName'))]",
-        "applicationInsights": "[resourceId('Microsoft.Insights/components',variables('applicationInsightsName'))]",
-        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts/',variables('storageAccountName'))]"
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2019-09-01",
-      "name": "[parameters('vnetName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/27"
-          ]
-        },
-        "virtualNetworkPeerings": [],
-        "enableDdosProtection": false,
-        "enableVmProtection": false
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2019-09-01",
-      "name": "[concat(parameters('vnetName'), '/', parameters('subnetName'))]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-      ],
-      "properties": {
-        "addressPrefix": "10.0.0.0/27",
-        "delegations": [],
-        "privateEndpointNetworkPolicies": "Disabled",
-        "privateLinkServiceNetworkPolicies": "Enabled"
-      }
-    },
-    {
-      "apiVersion": "2019-04-01",
-      "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-      "type": "Microsoft.Network/privateEndpoints",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-      ],
-      "properties": {
-        "privateLinkServiceConnections": [
-          {
-            "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-            "properties": {
-              "privateLinkServiceId": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-              "groupIds": [
-                "amlworkspace"
-              ]
-            }
-          }
-        ],
-        "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2017-05-10",
-      "name": "[concat('PrivateDns-', variables('privateDnsGuid'))]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/privateEndpoints', concat(parameters('workspaceName'), '-PrivateEndpoint'))]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "resources": [
-            {
-              "type": "Microsoft.Network/privateDnsZones",
-              "apiVersion": "2018-09-01",
-              "name": "privatelink.api.azureml.ms",
-              "location": "global",
-              "tags": {},
-              "properties": {}
-            },
-            {
-              "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
-              "apiVersion": "2018-09-01",
-              "name": "[concat('privatelink.api.azureml.ms', '/', uniqueString(resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))))]",
-              "location": "global",
-              "dependsOn": [
-                "privatelink.api.azureml.ms"
-              ],
-              "properties": {
-                "virtualNetwork": {
-                  "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-                },
-                "registrationEnabled": false
-              }
-            },
-            {
-              "apiVersion": "2017-05-10",
-              "name": "[concat('EndpointDnsRecords-', variables('privateDnsGuid'))]",
-              "type": "Microsoft.Resources/deployments",
-              "dependsOn": [
-                "privatelink.api.azureml.ms"
-              ],
-              "properties": {
-                "mode": "Incremental",
-                "templatelink": {
-                  "contentVersion": "1.0.0.0",
-                  "uri": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpoint.json"
-                },
-                "parameters": {
-                  "privateDnsName": {
-                    "value": "privatelink.api.azureml.ms"
-                  },
-                  "privateEndpointNicResourceId": {
-                    "value": "[reference(resourceId('Microsoft.Network/privateEndpoints',concat(parameters('workspaceName'), '-PrivateEndpoint'))).networkInterfaces[0].id]"
-                  },
-                  "nicRecordsTemplateUri": {
-                    "value": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpointNic.json"
-                  },
-                  "ipConfigRecordsTemplateUri": {
-                    "value": "https://network.hosting.portal.azure.net/network/Content/4.13.392.925/DeploymentTemplates/PrivateDnsForPrivateEndpointIpConfig.json"
-                  },
-                  "uniqueId": {
-                    "value": "[variables('privateDnsGuid')]"
-                  },
-                  "existingRecords": {
-                    "value": {}
-                  }
-                }
-              }
-            }
-          ]
-        }
-      },
-      "resourceGroup": "[resourceGroup().name]"
-    }
-  ]
-}
-```
-
-<a id="mmkmapl"></a>
-### <a name="workspace-with-microsoft-managed-keys-and-manual-approval-for-private-link"></a>Espace de travail avec clés gérées par Microsoft et approbation manuelle pour Azure Private Link
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "workspaceName": {
-      "type": "string",
-      "metadata": {
-        "description": "Specifies the name of the Azure Machine Learning workspace."
-      }
-    },
-    "location": {
-      "type": "string",
-      "allowedValues": [
-        "eastus",
-        "southcentralus",
-        "westus2"
-      ],
-      "metadata": {
-        "description": "Specifies the location for all resources."
-      }
-    },
-    "sku": {
-      "type": "string",
-      "defaultValue": "basic",
-      "allowedValues": [
-        "basic",
-        "enterprise"
-      ],
-      "metadata": {
-        "description": "Specifies the sku, also referred as 'edition' of the Azure Machine Learning workspace."
-      }
-    },
-    "subnetName": {
-      "type": "string"
-    },
-    "vnetName": {
-      "type": "string"
-    }
-  },
-  "variables": {
-    "storageAccountName": "[concat('sa',uniqueString(resourceGroup().id))]",
-    "storageAccountType": "Standard_LRS",
-    "keyVaultName": "[concat('kv',uniqueString(resourceGroup().id))]",
-    "tenantId": "[subscription().tenantId]",
-    "applicationInsightsName": "[concat('ai',uniqueString(resourceGroup().id))]"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-04-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[variables('storageAccountType')]"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            },
-            "file": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        },
-        "supportsHttpsTrafficOnly": true
-      }
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2018-02-14",
-      "name": "[variables('keyVaultName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "tenantId": "[variables('tenantId')]",
-        "sku": {
-          "name": "standard",
-          "family": "A"
-        },
-        "accessPolicies": []
-      }
-    },
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2018-05-01-preview",
-      "name": "[variables('applicationInsightsName')]",
-      "location": "[if(or(equals(parameters('location'),'eastus2'),equals(parameters('location'),'westcentralus')),'southcentralus',parameters('location'))]",
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web"
-      }
-    },
-    {
-      "type": "Microsoft.MachineLearningServices/workspaces",
-      "apiVersion": "2019-11-01",
-      "name": "[parameters('workspaceName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-      ],
-      "identity": {
-        "type": "systemAssigned"
-      },
-      "sku": {
-        "tier": "[parameters('sku')]",
-        "name": "[parameters('sku')]"
-      },
-      "properties": {
-        "friendlyName": "[parameters('workspaceName')]",
-        "keyVault": "[resourceId('Microsoft.KeyVault/vaults',variables('keyVaultName'))]",
-        "applicationInsights": "[resourceId('Microsoft.Insights/components',variables('applicationInsightsName'))]",
-        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts/',variables('storageAccountName'))]"
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2019-09-01",
-      "name": "[parameters('vnetName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/27"
-          ]
-        },
-        "virtualNetworkPeerings": [],
-        "enableDdosProtection": false,
-        "enableVmProtection": false
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2019-09-01",
-      "name": "[concat(parameters('vnetName'), '/', parameters('subnetName'))]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
-      ],
-      "properties": {
-        "addressPrefix": "10.0.0.0/27",
-        "delegations": [],
-        "privateEndpointNetworkPolicies": "Disabled",
-        "privateLinkServiceNetworkPolicies": "Enabled"
-      }
-    },
-    {
-      "apiVersion": "2019-04-01",
-      "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-      "type": "Microsoft.Network/privateEndpoints",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-      ],
-      "properties": {
-        "privateLinkServiceConnections": [],
-        "manualPrivateLinkServiceConnections": [
-          {
-            "name": "[concat(parameters('workspaceName'), '-PrivateEndpoint')]",
-            "properties": {
-              "privateLinkServiceId": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('workspaceName'))]",
-              "groupIds": [
-                "amlworkspace"
-              ]
-            }
-          }
-        ],
-        "subnet": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName') )]"
-        }
-      }
-    }
-  ]
-}
-```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur la sécurisation de votre espace de travail Azure Machine Learning, consultez l’article [Sécurité des entreprises](concept-enterprise-security.md).
+* Pour plus d’informations sur la sécurisation de votre espace de travail Azure Machine Learning, consultez l’article [Vue d’ensemble de l’isolement et de la confidentialité des réseaux virtuels](how-to-network-security-overview.md).
+
+* Si vous envisagez d’utiliser une solution DNS personnalisée dans votre réseau virtuel, consultez [Comment utiliser un espace de travail avec un serveur DNS personnalisé](how-to-custom-dns.md).

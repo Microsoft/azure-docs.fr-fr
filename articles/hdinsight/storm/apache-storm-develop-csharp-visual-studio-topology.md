@@ -6,14 +6,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/31/2019
-ms.openlocfilehash: 1903c2faab865152d1f3666f3c9dadd745058b56
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 271f62625433a6651ba0e3230a62be51e5147f3e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75612289"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89000190"
 ---
 # <a name="develop-c-topologies-for-apache-storm-by-using-the-data-lake-tools-for-visual-studio"></a>Développer des topologies C# pour Apache Storm à l’aide de Data Lake Tools pour Visual Studio
 
@@ -128,7 +129,7 @@ Pour créer un projet de topologie C# dans Visual Studio :
 
 1. Dans la fenêtre **Créer un nouveau projet**, faites défiler la liste jusqu’à **Application Storm**, puis sélectionnez **Suivant**.
 
-1. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **nom de projet***WordCount*, accédez au répertoire **Emplacement** ou créez-le pour le projet, puis sélectionnez **Créer**.
+1. Dans la fenêtre **Configurer votre nouveau projet**, entrez le **nom de projet** *WordCount*, accédez au répertoire **Emplacement** ou créez-le pour le projet, puis sélectionnez **Créer**.
 
     ![Application Storm, boîte de dialogue Configurer votre nouveau projet, Visual Studio](./media/apache-storm-develop-csharp-visual-studio-topology/apache-storm-new-project.png)
 

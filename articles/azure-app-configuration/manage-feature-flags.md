@@ -4,8 +4,7 @@ titleSuffix: Azure App Configuration
 description: Dans ce tutoriel, vous allez découvrir comment gérer les indicateurs de fonctionnalités séparément de votre application à l’aide d’Azure App Configuration.
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.assetid: ''
 ms.service: azure-app-configuration
@@ -13,14 +12,14 @@ ms.workload: tbd
 ms.devlang: csharp
 ms.topic: tutorial
 ms.date: 04/19/2019
-ms.author: lcozzens
-ms.custom: mvc
-ms.openlocfilehash: ccab8014000f9f684249bf2c1f800f74c92e7369
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: alkemper
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 0410a1cde12b9ef762d348a286d78b35f7b14bfd
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76899364"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932300"
 ---
 # <a name="tutorial-manage-feature-flags-in-azure-app-configuration"></a>Tutoriel : Gérer les indicateurs de fonctionnalités dans Azure App Configuration
 
@@ -56,6 +55,7 @@ Pour ajouter un nouvel indicateur de fonctionnalité :
     |---|---|
     | Microsoft.Percentage | {"Value": 0-100 percent} |
     | Microsoft.TimeWindow | {"Start": UTC time, "End": UTC time} |
+    | Microsoft.Targeting | { "Audience": objet blob JSON définissant les utilisateurs, les groupes et les pourcentages de lancement. Consultez un exemple sous l’élément `EnabledFor` de [ce fichier de paramètres](https://github.com/microsoft/FeatureManagement-Dotnet/blob/master/examples/FeatureFlagDemo/appsettings.json) }
 
     ![Filtre d’indicateur de fonctionnalité](./media/azure-app-configuration-feature-flag-filter.png)
 
@@ -65,7 +65,7 @@ Pour changer la valeur d’état d’un indicateur de fonctionnalité :
 
 1. Sélectionnez **Gestionnaire de fonctionnalités**.
 
-1. À droite d’un indicateur de fonctionnalité que vous souhaitez modifier, sélectionnez les points de suspension ( **...** ), puis sélectionnez **Modifier**.
+1. À droite d’un indicateur de fonctionnalité que vous souhaitez modifier, sélectionnez les points de suspension (**...**), puis sélectionnez **Modifier**.
 
 1. Définissez le nouvel état de l’indicateur de fonctionnalité.
 

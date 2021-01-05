@@ -5,12 +5,12 @@ description: Découvrir comment créer manuellement un volume avec Azure Files p
 services: container-service
 ms.topic: article
 ms.date: 03/01/2019
-ms.openlocfilehash: 144d93cbb3b66f260dbd9d92863ca5fb13ed00a5
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 89976211763f5d4729718c4e4c6503650f27f7cc
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207664"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93126271"
 ---
 # <a name="manually-create-and-use-a-volume-with-azure-files-share-in-azure-kubernetes-service-aks"></a>Créer manuellement et utiliser un volume avec un partage Azure Files dans Azure Kubernetes Service (AKS)
 
@@ -22,11 +22,11 @@ Pour plus d’informations sur les volumes Kubernetes, consultez [Options de sto
 
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
-Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 ## <a name="create-an-azure-file-share"></a>Crée un partage de fichiers Azure
 
-Avant d’utiliser Azure Files en tant que volume Kubernetes, vous devez créer un compte de stockage Azure et le partage de fichiers. Les commandes suivantes créent un groupe de ressources nommé *myAKSShare*, un compte de stockage et un partage de fichiers nommé *aksshare* :
+Avant d’utiliser Azure Files en tant que volume Kubernetes, vous devez créer un compte de stockage Azure et le partage de fichiers. Les commandes suivantes créent un groupe de ressources nommé *myAKSShare* , un compte de stockage et un partage de fichiers nommé *aksshare* :
 
 ```azurecli-interactive
 # Change these four parameters as needed for your own environment
@@ -78,7 +78,7 @@ metadata:
   name: mypod
 spec:
   containers:
-  - image: nginx:1.15.5
+  - image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     name: mypod
     resources:
       requests:
@@ -110,7 +110,7 @@ Vous disposez maintenant d’un pod en cours d’exécution sur lequel est mont�
 Containers:
   mypod:
     Container ID:   docker://86d244cfc7c4822401e88f55fd75217d213aa9c3c6a3df169e76e8e25ed28166
-    Image:          nginx:1.15.5
+    Image:          mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     Image ID:       docker-pullable://nginx@sha256:9ad0746d8f2ea6df3a17ba89eca40b48c47066dfab55a75e08e2b70fc80d929e
     State:          Running
       Started:      Sat, 02 Mar 2019 00:05:47 +0000
@@ -234,6 +234,8 @@ Mettez à jour les spécifications de votre conteneur pour référencer votre *P
 Pour connaître les meilleures pratiques associées, consultez [Meilleures pratiques relatives au stockage et aux sauvegardes dans Azure Kubernetes Service (AKS)][operator-best-practices-storage].
 
 Pour plus d’informations sur l’interaction des clusters AKS avec Azure Files, consultez le [Plug-in Kubernetes pour Azure Files][kubernetes-files].
+
+Pour les paramètres de classe de stockage, consultez [Approvisionnement statique (apportez votre propre partage de fichiers)](https://github.com/kubernetes-sigs/azurefile-csi-driver/blob/master/docs/driver-parameters.md#static-provisionbring-your-own-file-share).
 
 <!-- LINKS - external -->
 [kubectl-create]: https://kubernetes.io/docs/user-guide/kubectl/v1.8/#create

@@ -7,15 +7,15 @@ ms.assetid: b8783c10-3a4a-4dd6-af8c-856baafbdde5
 ms.topic: article
 ms.date: 08/03/2016
 ms.custom: seodec18
-ms.openlocfilehash: 98c11a72b5aea0fac15d943977402289dc33a970
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cf8b0e1fda03a74d30ec77c911d705bf12cf0126
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74688313"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96763806"
 ---
 # <a name="troubleshoot-slow-app-performance-issues-in-azure-app-service"></a>Résoudre les problèmes de baisse de performances d’une application dans Azure App Service
-Cet article vous aide à résoudre les problèmes de baisse de performances d’une application dans [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714).
+Cet article vous aide à résoudre les problèmes de baisse de performances d’une application dans [Azure App Service](./overview.md).
 
 Si vous avez besoin d'aide supplémentaire concernant n'importe quel point de cet article, contactez les experts Azure sur les [forums MSDN Azure et Stack Overflow](https://azure.microsoft.com/support/forums/). Vous pouvez également signaler un incident au support Azure. Accédez au [site de support Azure](https://azure.microsoft.com/support/options/) , puis cliquez sur **Obtenir un support**.
 
@@ -39,11 +39,11 @@ Le dépannage peut être divisé en trois tâches distinctes, dans un ordre séq
 
 À chaque étape, [App Service](overview.md) vous offre différentes options.
 
-<a name="observe" />
+<a name="observe"></a>
 
 ### <a name="1-observe-and-monitor-application-behavior"></a>1. Observer et contrôler le comportement de l'application
 #### <a name="track-service-health"></a>Suivi de l’état du service
-Microsoft Azure publie chaque interruption du service et chaque dégradation des performances. Vous pouvez assurer le suivi de l’état du service sur le [portail Azure](https://portal.azure.com/). Pour plus d’informations, consultez la rubrique [Suivi de l’état du service](../monitoring-and-diagnostics/insights-service-health.md).
+Microsoft Azure publie chaque interruption du service et chaque dégradation des performances. Vous pouvez assurer le suivi de l’état du service sur le [portail Azure](https://portal.azure.com/). Pour plus d’informations, consultez la rubrique [Suivi de l’état du service](../service-health/service-notifications.md).
 
 #### <a name="monitor-your-app"></a>Surveiller votre application
 Cette option vous permet de savoir si votre application rencontre des problèmes. Dans le panneau de votre application, cliquez sur la vignette **Demandes et erreurs**. Le panneau **Mesure** affiche toutes les mesures que vous pouvez ajouter.
@@ -61,7 +61,7 @@ Voici quelques-unes des mesures disponibles pour surveiller votre application :
 Pour plus d'informations, consultez les pages suivantes :
 
 * [Surveiller les applications dans Azure App Service](web-sites-monitor.md)
-* [Réception de notifications d’alerte](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
+* [Réception de notifications d’alerte](../azure-monitor/platform/alerts-overview.md)
 
 #### <a name="monitor-web-endpoint-status"></a>Surveillance de l'état d'un point de terminaison Web
 Si vous exécutez votre application sur le niveau de tarification **Standard**, App Service vous permet de surveiller les deux points de terminaison à partir de trois régions géographiques.
@@ -82,9 +82,9 @@ Chaque application d’App Service fournit un point de terminaison de gestion ex
 - Éditeurs de code source tels que [Azure DevOps](https://www.visualstudio.com/products/what-is-visual-studio-online-vs.aspx). 
 - Des outils de gestion pour les ressources connectées, comme une base de données MySQL connectée à une application.
 
-[Azure Application Insights](https://azure.microsoft.com/services/application-insights/) est une extension de site d’analyse des performances qui est également disponible. Pour utiliser Application Insights, vous régénérez votre code avec un Kit de développement logiciel (SDK). Vous pouvez également installer une extension qui fournit l’accès à des données supplémentaires. Le Kit de développement logiciel (SDK) vous permet d'écrire un code pour surveiller plus en détail l'utilisation et les performances de votre application. Pour plus d’informations, consultez l’article [Analyse des performances dans les applications web](../azure-monitor/app/web-monitor-performance.md).
+[Azure Application Insights](https://azure.microsoft.com/services/application-insights/) est une extension de site d’analyse des performances qui est également disponible. Pour utiliser Application Insights, vous régénérez votre code avec un Kit de développement logiciel (SDK). Vous pouvez également installer une extension qui fournit l’accès à des données supplémentaires. Le Kit de développement logiciel (SDK) vous permet d'écrire un code pour surveiller plus en détail l'utilisation et les performances de votre application. Pour plus d’informations, consultez l’article [Analyse des performances dans les applications web](../azure-monitor/app/app-insights-overview.md).
 
-<a name="collect" />
+<a name="collect"></a>
 
 ### <a name="2-collect-data"></a>2. Collecter les données
 App Service fournit des fonctionnalités de diagnostic pour les informations de journalisation provenant du serveur Web et de l’application web. Ces informations sont réparties en diagnostics de serveur web et diagnostics d’application.
@@ -133,13 +133,13 @@ Kudu fournit, entre autres, les éléments suivants :
 * paramètres d’environnement pour votre application ;
 * flux de journal ;
 * vidage de diagnostic ;
-* console de débogage dans laquelle vous pouvez exécuter les applets de commande Powershell et les commandes DOS de base.
+* console de débogage dans laquelle vous pouvez exécuter les cmdlets PowerShell et les commandes DOS de base.
 
 Autre fonctionnalité utile de Kudu, dans le cas où votre application lève des exceptions de première chance, vous pouvez utiliser Kudu et l’outil Procdump de SysInternals pour créer des vidages de mémoire. Ces vidages de mémoire sont des instantanés du processus et peuvent souvent vous aider à résoudre les problèmes plus complexes rencontrés par votre application.
 
 Pour plus d'informations sur les fonctionnalités disponibles dans Kudu, voir [Outils Azure DevOps que vous devez connaître](https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/).
 
-<a name="mitigate" />
+<a name="mitigate"></a>
 
 ### <a name="3-mitigate-the-issue"></a>3. Résoudre le problème
 #### <a name="scale-the-app"></a>Mettre l’application à l’échelle
@@ -161,4 +161,4 @@ Il s’agit souvent du moyen le plus simple de résoudre des problèmes ponctuel
 
  ![redémarrer une application pour résoudre les problèmes de performances](./media/app-service-web-troubleshoot-performance-degradation/2-restart.png)
 
-Vous pouvez également gérer votre application à l’aide d’Azure PowerShell. Pour plus d'informations, consultez [Utilisation d'Azure PowerShell avec le Gestionnaire de ressources Azure](../powershell-azure-resource-manager.md).
+Vous pouvez également gérer votre application à l’aide d’Azure PowerShell. Pour plus d'informations, consultez [Utilisation d'Azure PowerShell avec le Gestionnaire de ressources Azure](../azure-resource-manager/management/manage-resources-powershell.md).

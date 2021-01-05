@@ -4,10 +4,10 @@ description: Découvrez les concepts et pratiques de test unitaire des services 
 ms.topic: conceptual
 ms.date: 09/04/2018
 ms.openlocfilehash: 12e8a47d9685dee12594f4e2afaa848d9688d185
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75433907"
 ---
 # <a name="unit-testing-stateful-services-in-service-fabric"></a>Test unitaire des services avec état dans Service Fabric

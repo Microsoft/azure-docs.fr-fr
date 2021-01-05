@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.openlocfilehash: 4b2068c3944f9e7616b0666c7bafcafc68ee0cd9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "79471283"
 ---
 # <a name="how-to-install-iot-edge-on-kubernetes-preview"></a>Guide pratique pour installer IoT Edge sur Kubernetes (préversion)

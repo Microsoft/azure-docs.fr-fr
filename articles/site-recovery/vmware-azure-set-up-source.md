@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 04/14/2019
 ms.author: ramamill
-ms.openlocfilehash: ff01aed92669acb193ff149ea9298550134f42a3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: afd3979690b8952c915a49099ee04b3d416031fd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228877"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88189733"
 ---
 # <a name="set-up-the-source-environment-for-vmware-to-azure-replication"></a>Configurer l’environnement source pour la réplication VMware vers Azure
 
@@ -37,7 +37,7 @@ Cet article suppose que vous avez déjà effectué les opérations suivantes :
 
 ## <a name="set-up-the-configuration-server"></a>Configurer le serveur de configuration
 
-Vous pouvez configurer le serveur de configuration comme une machine virtuelle VMware locale par le biais d’un modèle OVA (Open Virtualization Application). [En savoir plus](concepts-vmware-to-azure-architecture.md) sur les composants qui vont être installés sur la machine virtuelle VMware.
+Vous pouvez configurer le serveur de configuration comme une machine virtuelle VMware locale par le biais d’un modèle OVA (Open Virtualization Application). [En savoir plus](./vmware-azure-architecture.md) sur les composants qui vont être installés sur la machine virtuelle VMware.
 
 1. Prenez connaissance des [conditions préalables](vmware-azure-deploy-configuration-server.md#prerequisites) pour le déploiement du serveur de configuration.
 2. [Vérifiez les chiffres de capacité](vmware-azure-deploy-configuration-server.md#sizing-and-capacity-requirements) pour le déploiement.
@@ -82,6 +82,18 @@ Excluez les dossiers suivants du logiciel antivirus
 5. C:\ProgramData\LogUploadServiceLogs
 6. C:\ProgramData\Microsoft Azure Site Recovery
 7. Répertoire d’installation du serveur de processus à charge équilibrée Azure Site Recovery, par exemple : C:\Program Files (x86)\Microsoft Azure Site Recovery
+
+### <a name="if-antivirus-software-is-active-on-the-linux-master-target"></a>Si un logiciel antivirus est actif sur le serveur cible maître Linux
+
+Excluez les dossiers suivants du logiciel antivirus
+
+1.  /usr/local/ASR
+2.  /usr/local/InMage
+3.  /var/log/vxlogs
+4.  /var/log
+5.  /var/log/ApplicationPolicyLogs
+6.  /var/log/ASRsetuptelemetry
+7.  /var/log/ASRsetuptelemetry_uploaded
 
 
 ## <a name="next-steps"></a>Étapes suivantes

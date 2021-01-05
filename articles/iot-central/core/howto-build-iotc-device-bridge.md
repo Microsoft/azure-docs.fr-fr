@@ -8,18 +8,19 @@ ms.author: viviali
 ms.date: 07/09/2019
 ms.topic: how-to
 manager: peterpr
-ms.openlocfilehash: 6499c9c29d10a2056b0af5499b68b5edd67d82cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: device-developer
+ms.openlocfilehash: fc8ea41e804344735cfa2400d5d763622d8811c8
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158416"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026248"
 ---
 # <a name="build-the-iot-central-device-bridge-to-connect-other-iot-clouds-to-iot-central"></a>Générer le pont d’appareil IoT Central pour connecter d’autres clouds IoT à IoT Central
 
 *Cette rubrique s’applique aux administrateurs.*
 
-Le pont d’appareil IoT Central est une solution open source qui connecte votre cloud Sigfox, Particle, The Things Network, ou autre, à votre application IoT Central. Que vous utilisiez des appareils de suivi des ressources connectés au réseau LPWAN de Sigfox, ou que vous utilisiez des appareils de surveillance de la qualité de l’air sur Particle Device Cloud ou des appareils de surveillance de l’humidité du sol sur TTN, vous pouvez directement tirer parti de la puissance de l’IoT Central à l’aide du pont d’appareil IoT Central. Le pont d’appareil connecte d’autres clouds IoT à IoT Central en transférant les données envoyées par vos appareils à d’autres clouds via votre application IoT Central. Dans votre application IoT Central, vous pouvez créer des règles et exécuter l’analytique de ces données, créer des flux de travail dans Microsoft Flow et Azure Logic Apps, exporter les données et bien plus encore. Obtenir le [pont d’appareil IoT Central](https://aka.ms/iotcentralgithubdevicebridge) sur GitHub
+Le pont d’appareil IoT Central est une solution open source qui connecte votre cloud Sigfox, Particle, The Things Network, ou autre, à votre application IoT Central. Que vous utilisiez des appareils de suivi des ressources connectés au réseau LPWAN de Sigfox, ou que vous utilisiez des appareils de surveillance de la qualité de l’air sur Particle Device Cloud ou des appareils de surveillance de l’humidité du sol sur TTN, vous pouvez directement tirer parti de la puissance de l’IoT Central à l’aide du pont d’appareil IoT Central. Le pont d’appareil connecte d’autres clouds IoT à IoT Central en transférant les données envoyées par vos appareils à d’autres clouds via votre application IoT Central. Dans votre application IoT Central, vous pouvez créer des règles et exécuter l’analytique de ces données, créer des flux de travail dans Power Automate et Azure Logic Apps, exporter les données et bien plus encore. Obtenir le [pont d’appareil IoT Central](https://aka.ms/iotcentralgithubdevicebridge) sur GitHub
 
 ## <a name="what-is-it-and-how-does-it-work"></a>Description et fonctionnement
 Le pont d’appareil IoT Central est une solution open source dans GitHub. Elle est prête à l’emploi grâce à un bouton « Déployer sur Azure » qui déploie un modèle Azure Resource Manager personnalisé avec plusieurs ressources Azure dans votre abonnement Azure. Les ressources incluent :

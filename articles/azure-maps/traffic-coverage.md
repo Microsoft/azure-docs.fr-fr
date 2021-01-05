@@ -1,23 +1,23 @@
 ---
 title: Couverture du trafic | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir la couverture du trafic dans Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
+description: En savoir plus sur la couverture de trafic dans Azure Maps. Vérifiez si les informations sur le flux et les incidents de trafic sont disponibles dans différentes régions dans le monde.
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 09/22/2018
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.openlocfilehash: 836a924bb371aaf2879e951501c6febbe51e182e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 11aa0eb07ed9cb3a1a785b3155b832f8b447708f
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80333957"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896869"
 ---
 # <a name="azure-maps-traffic-coverage"></a>Couverture du trafic Azure Maps
 
-Azure Maps fournit de riches données sur le trafic, sous la forme de **flux** de trafic et d’**incidents**. Ces données peuvent être visualisées sur les cartes ou utilisées pour générer des itinéraires plus pertinents qui prennent en compte les réelles conditions de conduite.
+Azure Maps fournit de riches données sur le trafic, sous la forme de **flux** de trafic et d’ **incidents** . Ces données peuvent être visualisées sur les cartes ou utilisées pour générer des itinéraires plus pertinents qui prennent en compte les réelles conditions de conduite.
 
 Toutefois, Maps n’a pas le même niveau d’information et d’exactitude pour tous les pays ou toutes les régions. Le tableau suivant fournit des informations sur les types de données de trafic que vous pouvez solliciter pour chaque pays ou région : 
 
@@ -89,7 +89,7 @@ Toutefois, Maps n’a pas le même niveau d’information et d’exactitude pour
 |Luxembourg     |✓         |✓         |
 |Malte     |✓         |✓         |
 |Monaco   |✓         |✓         |
-|Pays-bas     |✓         |✓         |
+|Pays-Bas     |✓         |✓         |
 |Norvège     |✓         |✓         |
 |Pologne     |✓         |✓         |
 |Portugal     |✓         |✓         |
@@ -108,7 +108,7 @@ Toutefois, Maps n’a pas le même niveau d’information et d’exactitude pour
 |Suisse     |✓         |✓        |
 |Turquie     |✓         |✓         |
 |Ukraine     |✓         |✓         |
-|United Kingdom     |✓         |✓         |
+|Royaume-Uni     |✓         |✓         |
 |+Gibraltar     |✓         |✓         |
 |+Guernsey & Jersey     |✓         |✓         |
 |+Île de Man     |✓         |✓         |
@@ -135,4 +135,4 @@ Toutefois, Maps n’a pas le même niveau d’information et d’exactitude pour
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur les données de trafic Azure Maps, consultez les pages de référence sur le [trafic](https://docs.microsoft.com/rest/api/maps/traffic).
+Pour plus d’informations sur les données de trafic Azure Maps, consultez les pages de référence sur le [trafic](/rest/api/maps/traffic).

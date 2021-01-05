@@ -8,12 +8,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/08/2017
 ms.author: robinsh
-ms.openlocfilehash: c8fc0393e0961b46fbb8031d735f27e9ad785031
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e2b106e64aed08b0586575d4d77602329454a673
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60318439"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92536009"
 ---
 # <a name="configure-iot-hub-file-uploads-using-powershell"></a>Configurer les chargements de fichiers IoT Hub à l’aide de Powershell
 
@@ -27,17 +27,17 @@ Pour réaliser ce didacticiel, vous avez besoin des éléments suivants :
 
 * Un compte Azure actif. Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes.
 
-* [Cmdlets Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+* [Cmdlets Azure PowerShell](/powershell/azure/install-Az-ps).
 
-* Un IoT Hub Azure. Si vous n’avez pas de IoT Hub, vous pouvez utiliser [la cmdlet New-AzIoTHub](https://docs.microsoft.com/powershell/module/az.iothub/new-aziothub) afin d’en créer un ou utiliser le portail pour [créer un IoT Hub](iot-hub-create-through-portal.md).
+* Un IoT Hub Azure. Si vous n’avez pas de IoT Hub, vous pouvez utiliser [la cmdlet New-AzIoTHub](/powershell/module/az.iothub/new-aziothub) afin d’en créer un ou utiliser le portail pour [créer un IoT Hub](iot-hub-create-through-portal.md).
 
-* Un compte de stockage Azure. Si vous n’avez pas de compte de stockage Azure, vous pouvez utiliser [les cmdlets PowerShell de stockage Azure](https://docs.microsoft.com/powershell/module/az.storage/) afin d’en créer un ou utiliser le portail pour [créer un compte de stockage](../storage/common/storage-create-storage-account.md).
+* Un compte de stockage Azure. Si vous n’avez pas de compte de stockage Azure, vous pouvez utiliser [les cmdlets PowerShell de stockage Azure](/powershell/module/az.storage/) afin d’en créer un ou utiliser le portail pour [créer un compte de stockage](../storage/common/storage-account-create.md).
 
 ## <a name="sign-in-and-set-your-azure-account"></a>Se connecter à votre compte Azure et le définir
 
 Vous connecter à votre compte Azure et sélectionner votre abonnement.
 
-1. À l’invite PowerShell, exécutez la cmdlet **Connect-AzAccount** :
+1. À l’invite PowerShell, exécutez la cmdlet **Connect-AzAccount**  :
 
     ```powershell
     Connect-AzAccount
@@ -99,15 +99,15 @@ Vous pouvez désormais configurer votre IoT Hub pour [charger des fichiers vers 
 
 La configuration requiert les valeurs suivantes :
 
-* **Conteneur de stockage** : conteneur d’objets blob dans un compte de stockage Azure de votre abonnement Azure actuel à associer à votre hub IoT. Vous avez extrait les informations de compte de stockage nécessaires dans la section précédente. IoT Hub génère automatiquement des URI SAS avec des autorisations d’écriture pour ce conteneur d’objets blob pour les appareils à utiliser lorsqu’ils chargent des fichiers.
+* **Conteneur de stockage**  : conteneur d’objets blob dans un compte de stockage Azure de votre abonnement Azure actuel à associer à votre hub IoT. Vous avez extrait les informations de compte de stockage nécessaires dans la section précédente. IoT Hub génère automatiquement des URI SAS avec des autorisations d’écriture pour ce conteneur d’objets blob pour les appareils à utiliser lorsqu’ils chargent des fichiers.
 
-* **Recevoir des notifications pour les fichiers chargés** : activez ou désactivez les notifications de chargement de fichiers.
+* **Recevoir des notifications pour les fichiers chargés**  : activez ou désactivez les notifications de chargement de fichiers.
 
-* **Durée de vie de SAS** : ce paramètre est la durée de vie des URI de signature d’accès partagé retournés à l’appareil par IoT Hub. Défini sur 1 heure par défaut.
+* **Durée de vie de SAS**  : ce paramètre est la durée de vie des URI de signature d’accès partagé retournés à l’appareil par IoT Hub. Défini sur 1 heure par défaut.
 
-* **Durée de vie par défaut des paramètres de notification de fichiers** : durée de vie d’une notification de chargement de fichier avant son expiration. Défini sur 1 jour par défaut.
+* **Durée de vie par défaut des paramètres de notification de fichiers**  : durée de vie d’une notification de chargement de fichier avant son expiration. Défini sur 1 jour par défaut.
 
-* **Nombre maximal de remises de notifications de fichier** : nombre de tentatives de remise d’une notification de chargement de fichier par le hub IoT. Défini sur 10 par défaut.
+* **Nombre maximal de remises de notifications de fichier**  : nombre de tentatives de remise d’une notification de chargement de fichier par le hub IoT. Défini sur 10 par défaut.
 
 Utilisez l’applet de commande PowerShell suivant pour configurer les paramètres de chargement sur votre IoT Hub :
 
@@ -130,11 +130,10 @@ Pour plus d’informations sur les fonctionnalités de chargement des fichiers d
 Suivez ces liens pour en savoir plus sur la gestion de Azure IoT Hub :
 
 * [Gestion en bloc des appareils IoT](iot-hub-bulk-identity-mgmt.md)
-* [Métriques d’IoT Hub](iot-hub-metrics.md)
-* [Surveillance des opérations](iot-hub-operations-monitoring.md)
+* [Surveiller IoT Hub](monitor-iot-hub.md)
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
 * [Guide du développeur d’IoT Hub](iot-hub-devguide.md)
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)
 * [Sécuriser votre solution IoT de bout en bout](../iot-fundamentals/iot-security-ground-up.md)

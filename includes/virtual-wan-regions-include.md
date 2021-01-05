@@ -9,10 +9,10 @@ ms.date: 03/19/2020
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: e978a5e7e76c8ddc9b7e6b80ec7170c45baa2cae
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82784110"
 ---
 ### <a name="azure-regions-within-a-geopolitical-region"></a>Régions Azure au sein d’une région géopolitique

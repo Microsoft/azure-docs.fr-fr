@@ -1,24 +1,24 @@
 ---
 title: Exemples Azure CLI - Azure Database for MariaDB
 description: Cet article liste les exemples de code de commande Azure CLI disponibles pour l’interaction avec Azure Database for MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: sample
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 3/18/2020
-ms.openlocfilehash: d10d5b4885e826da9b6efd95dfc02940e1a9644a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: aa9efba1c49063d40b4df0444fb3bc63b124a0a0
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79529966"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536770"
 ---
 # <a name="azure-cli-samples-for-azure-database-for-mariadb"></a>Exemples Azure CLI pour Azure Database for MariaDB 
 Le tableau suivant comprend des liens vers des exemples de scripts Azure CLI pour Azure Database for MariaDB.
 
-| |  |
+| Exemple de lien | Description  |
 |---|---|
 |**Créer un serveur**||
 | [Créer un serveur et une règle de pare-feu](./scripts/sample-create-server-and-firewall-rule.md?toc=%2fcli%2fazure%2ftoc.json) | Script Azure CLI qui crée un serveur Azure Database for MariaDB et configure une règle de pare-feu au niveau du serveur. |

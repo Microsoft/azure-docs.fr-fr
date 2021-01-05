@@ -1,14 +1,16 @@
 ---
 title: Configurer le comportement d'apprentissage
 description: Le mode Apprenti vous permet de vous appuyer sur le service Personalizer et ses fonctionnalités d'apprentissage automatique. Il fournit également des mesures indiquant que le service reçoit des informations dont il peut tirer parti dans le cadre de son apprentissage - sans mettre en péril le trafic en ligne.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: how-to
 ms.date: 05/01/2020
-ms.openlocfilehash: af38500fc439964f9928cdd08aae2380ee0d0a8a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 57a03b107678f83200b11f408784f6455cbceffd
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599333"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94579289"
 ---
 # <a name="configure-the-personalizer-learning-behavior"></a>Configurer le comportement d'apprentissage de Personalizer
 
@@ -54,10 +56,6 @@ Le mode Apprenti fournit les **mesures d'évaluation** suivantes :
 * **Référence - récompense moyenne** :  Récompenses moyennes de l'action par défaut (référence) de l'application.
 * **Personalizer - récompense moyenne** : Moyenne des récompenses totales que Personalizer aurait pu atteindre.
 * **Taux de récompense sur les 1 000 événements les plus récents** : Rapport récompense de référence/récompense Personalizer - normalisé sur les 1 000 événements les plus récents.
-
-## <a name="evaluate-apprentice-mode-features"></a>Évaluer les caractéristiques du mode Apprenti
-
-Évaluez les caractéristiques par le biais d'une [évaluation hors connexion](how-to-offline-evaluation.md).
 
 ## <a name="switch-behavior-to-online-mode"></a>Passer en mode En ligne
 

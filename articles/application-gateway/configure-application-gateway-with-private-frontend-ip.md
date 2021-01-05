@@ -5,15 +5,15 @@ description: Cet article fournit des informations sur la configuration d’Appli
 services: application-gateway
 author: abshamsft
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 04/16/2020
 ms.author: victorh
-ms.openlocfilehash: df21a2c40dd532ac1ff321638099ceee8a2b3e53
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 64dfe284772faf2a345b7959f1a1bd6f474cd1bf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535585"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90562483"
 ---
 # <a name="configure-an-application-gateway-with-an-internal-load-balancer-ilb-endpoint"></a>Configurer une passerelle Application Gateway avec un point de terminaison d’équilibreur de charge interne (ILB)
 
@@ -110,7 +110,7 @@ Pour ce faire, procédez comme suit :
 ### <a name="install-iis"></a>Installer IIS
 
 1. Ouvrez le service Cloud Shell et assurez-vous qu’il est défini sur **PowerShell**.
-    ![private-frontendip-3](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-3.png)
+    ![Capture d’écran montrant une fenêtre de console ouverte Azure Cloud Shell qui utilise PowerShell.](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-3.png)
 2. Exécutez la commande suivante pour installer IIS sur la machine virtuelle :
 
    ```azurepowershell
@@ -144,13 +144,13 @@ Pour ce faire, procédez comme suit :
 2. Sélectionnez **Pools principaux**. Sélectionnez **appGatewayBackendPool**.
 3. Sous **Type de cible**, sélectionnez **Machine virtuelle**, puis, sous **Cible**, sélectionnez la carte réseau virtuelle associée à myVM.
 4. Répétez l’opération pour ajouter MyVM2.
-   ![private-frontendip-4](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-4.png)
+   ![Capture d’écran montrant le volet Modifier le pool principal avec les Types de cible et les Cibles mis en surbrillance.](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-4.png)
 5. sélectionnez **Enregistrer**.
 
 ## <a name="test-the-application-gateway"></a>Tester la passerelle d’application
 
 1. Vérifiez votre adresse IP frontale affectée en cliquant sur la page **Configurations d’adresses IP frontales** dans le portail.
-    ![private-frontendip-5](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-5.png)
+    ![Capture d’écran montrant le volet Configurations d’adresses IP frontales avec le type Privé mis en surbrillance.](./media/configure-application-gateway-with-private-frontend-ip/private-frontendip-5.png)
 2. Copiez l’adresse IP privée, collez-la dans la barre d’adresse du navigateur d’une machine virtuelle se trouvant dans le même réseau virtuel ou locale, disposant d’une connectivité à ce réseau virtuel, puis essayez d’accéder à l’Application Gateway.
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/12/2020
-ms.openlocfilehash: a418841d91ab6b8fe5457f3fd64d91306fe08dfe
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: b222e4ff519fbe2fbb4fa58b39555ac9fead0917
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383127"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352913"
 ---
 # <a name="understand-how-the-reservation-discount-is-applied-to-azure-data-explorer"></a>Comprendre comment la remise de réservation est appliquée à Azure Data Explorer
 
@@ -29,7 +29,7 @@ Lorsque vous arrêtez une ressource, la remise de réservation s'applique automa
 Une remise de réservation est appliquée à la consommation de majoration d’Azure Data Explorer sur une base horaire. Dans le cas des ressources Azure Data Explorer qui ne s’exécutent pas pendant une heure entière, la remise de réservation est automatiquement appliquée aux autres ressources Azure Data Explorer qui correspondent aux attributs de la réservation. La remise peut être appliquée à des ressources Azure Data Explorer qui s’exécutent simultanément. Si aucune ressource Azure Data Explorer ne s’exécute pendant une heure entière et ne correspond aux attributs de la réservation, vous ne bénéficiez pas pleinement de la remise de réservation pour cette heure.
 
 > [!NOTE]
-> * Il est **vivement recommandé** d’acheter une [capacité de réservation](../../virtual-machines/windows/prepay-reserved-vm-instances.md) pour les machines virtuelles utilisées pour le cluster Azure Data Explorer afin d’optimiser les économies de capacité réservée.
+> * Il est **vivement recommandé** d’acheter une [capacité de réservation](../../virtual-machines/prepay-reserved-vm-instances.md) pour les machines virtuelles utilisées pour le cluster Azure Data Explorer afin d’optimiser les économies de capacité réservée.
 > * L’achat de réservation appliquera les remises à toutes les régions.
 
 ## <a name="examples"></a>Exemples
@@ -70,4 +70,4 @@ Pour plus d’informations sur les réservations Azure, consultez les articles s
 * [Gérer les réservations Azure](manage-reserved-vm-instance.md)  
 * [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](understand-reserved-instance-usage.md)
 * [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](understand-reserved-instance-usage-ea.md)
-* [Comprendre l’utilisation d’une réservations pour les abonnements CSP](https://docs.microsoft.com/partner-center/azure-reservations)
+* [Comprendre l’utilisation d’une réservations pour les abonnements CSP](/partner-center/azure-reservations)

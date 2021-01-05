@@ -1,6 +1,6 @@
 ---
 title: Résoudre les problèmes liés à StorSimple Virtual Array | Microsoft Docs
-description: Décrit la fonctionnalité de diagnostic de StorSimple Device Manager et explique comment l’utiliser pour résoudre les problèmes de votre instance StorSimple Virtual Array.
+description: En savoir plus sur la capacité de résolution des problèmes en libre-service fournie avec le service StorSimple Device Manager.
 services: storsimple
 documentationcenter: ''
 author: manuaery
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 53f57d17-07af-457f-a0e8-741e52fbbc2a
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-ms.openlocfilehash: 9d222097f9fb99a24f6213584a3419ed777f4a22
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6cb78a7042ca3acbb27f510207783b97f733cfb0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61408414"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005841"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-troubleshoot-the-storsimple-virtual-array"></a>Utiliser le service StorSimple Device Manager pour corriger les problèmes de votre instance StorSimple Virtual Array
 ## <a name="overview"></a>Vue d’ensemble

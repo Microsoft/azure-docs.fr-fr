@@ -11,12 +11,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 07/22/2017
 ms.author: ningk
-ms.openlocfilehash: bf6691310ec964a1d6293f3a60c151e3d6f8e641
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fde0afcd37cd464b0b87e5ccd257d4a7a684eeb0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76277355"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021586"
 ---
 # <a name="deploy-azure-log-analytics-nozzle-for-cloud-foundry-system-monitoring"></a>Deploy Azure Log Analytics for Cloud Foundry Monitoring (Déployer l’infrastructure Nozzle d’Azure Log Analytics pour surveiller le système Cloud Foundry)
 
@@ -67,7 +67,7 @@ Vous pouvez créer l’espace de travail Log Analytics manuellement ou à l’ai
    * **Emplacement** : indiquez l’emplacement.
    * **Niveau tarifaire** : sélectionnez **OK** pour terminer.
 
-Pour plus d’informations, consultez [Prise en main des journaux Azure Monitor](https://docs.microsoft.com/azure/log-analytics/log-analytics-get-started).
+Pour plus d’informations, consultez [Prise en main des journaux Azure Monitor](../azure-monitor/overview.md).
 
 #### <a name="to-create-the-log-analytics-workspace-through-the-monitoring-template-from-azure-market-place"></a>Pour créer l’espace de travail Log Analytics par le biais du modèle de supervision de la Place de Marché Azure :
 
@@ -183,7 +183,7 @@ Si vous avez créé l’espace de travail Log Analytics manuellement, suivez les
 
 ### <a name="1-import-the-oms-view"></a>1. Importer la vue OMS
 
-À partir du portail OMS, accédez à la zone **Concepteur de vues** > **Importer** > **Parcourir**, puis sélectionnez l’un des fichiers omsview. Par exemple, sélectionnez *Cloud Foundry.omsview*et enregistrez la vue. Une mosaïque s’affiche alors sur la page **Vue d’ensemble**. Sélectionnez-la pour afficher les mesures visualisées.
+À partir du portail OMS, accédez à la zone **Concepteur de vues** > **Importer** > **Parcourir**, puis sélectionnez l’un des fichiers omsview. Par exemple, sélectionnez *Cloud Foundry.omsview* et enregistrez la vue. Une mosaïque s’affiche alors sur la page **Vue d’ensemble**. Sélectionnez-la pour afficher les mesures visualisées.
 
 Les opérateurs peuvent personnaliser ces vues ou en créer, grâce au **Concepteur de vues**.
 
@@ -191,7 +191,7 @@ Le fichier *« Cloud Foundry.omsview »* est une préversion du modèle de vue O
 
 ### <a name="2-create-alert-rules"></a>2. Créer des règles d'alerte
 
-Vous pouvez [créer des alertes](https://docs.microsoft.com/azure/log-analytics/log-analytics-alerts) et personnaliser les requêtes et les valeurs de seuil, si nécessaire. Voici les alertes recommandées :
+Vous pouvez [créer des alertes](../azure-monitor/platform/alerts-overview.md) et personnaliser les requêtes et les valeurs de seuil, si nécessaire. Voici les alertes recommandées :
 
 | Requête de recherche                                                                  | Générer l’alerte selon | Description                                                                       |
 | ----------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------- |

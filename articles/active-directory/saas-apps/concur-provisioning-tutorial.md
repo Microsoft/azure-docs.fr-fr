@@ -2,25 +2,20 @@
 title: 'Tutoriel : Configurer Concur pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Concur.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.assetid: df47f55f-a894-4e01-a82e-0dbf55fc8af1
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 01/26/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 441aa9805f2a453e22f207238315125d2a281838
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: edb21287b30f8ba77d6312ec6b456e20aa260598
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60280488"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94358209"
 ---
 # <a name="tutorial-configure-concur-for-automatic-user-provisioning"></a>Tutoriel : Configurer Concur pour l’approvisionnement automatique d’utilisateurs
 
@@ -40,7 +35,7 @@ Azure Active Directory utilise un concept appelé « affectations » pour dét
 
 Avant de configurer et d’activer le service d’approvisionnement, vous devez déterminer quels utilisateurs et/ou groupes dans Azure AD représentent les utilisateurs qui ont besoin d’accéder à votre application Concur. Une fois que vous avez choisi, vous pouvez affecter ces utilisateurs à votre application Concur en suivant les instructions fournies ici :
 
-[Affecter un utilisateur ou un groupe à une application d’entreprise](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
+[Affecter un utilisateur ou un groupe à une application d’entreprise](../manage-apps/assign-user-or-group-access-portal.md)
 
 ### <a name="important-tips-for-assigning-users-to-concur"></a>Conseils importants pour l’affectation d’utilisateurs à Concur
 
@@ -63,7 +58,7 @@ Pour activer des applications dans le service Dépenses, vous devez vous assurer
 
 Concur Consultants ou l’administrateur des clients doit créer un profil d’administrateur des services web distinct, et l’administrateur des clients doit utiliser ce profil pour les fonctions d’administrateur des services web (par exemple pour l’activation d’applications). Ces profils doivent être séparés du profil d’administrateur T&E utilisé quotidiennement par l’administrateur des clients (le profil d’administrateur T&E ne doit pas se voir affecter le rôle WS Admin).
 
-Quand vous créez le profil à utiliser pour l’activation de l’application, entrez le nom de l’administrateur des clients dans les champs du profil utilisateur. Cela permet d’affecter la propriété au profil. Une fois qu’un ou plusieurs profils ont été créés, le client doit se connecter avec ce profil pour pouvoir cliquer sur le bouton « *Activer* » d’une application partenaire dans le menu Services Web.
+Quand vous créez le profil à utiliser pour l’activation de l’application, entrez le nom de l’administrateur des clients dans les champs du profil utilisateur. Cela permet d’affecter la propriété au profil. Une fois qu’un ou plusieurs profils ont été créés, le client doit se connecter avec ce profil pour pouvoir cliquer sur le bouton «  *Activer*  » d’une application partenaire dans le menu Services Web.
 
 Cette action ne doit pas être exécutée avec le profil utilisé pour l’administration T&E normale, et ce pour les raisons suivantes.
 
@@ -77,15 +72,15 @@ Cette action ne doit pas être exécutée avec le profil utilisé pour l’admin
 
 1. Connectez-vous à votre locataire **Concur**.
 
-2. Dans le menu **Administration**, sélectionnez **Web Services**.
+2. Dans le menu **Administration** , sélectionnez **Web Services**.
    
     ![Locataire Concur](./media/concur-provisioning-tutorial/IC721729.png "Client Concur")
 
-3. Sur le côté gauche, dans le volet **Web Services**, sélectionnez **Enable Partner Application**.
+3. Sur le côté gauche, dans le volet **Web Services** , sélectionnez **Enable Partner Application**.
    
     ![Enable Partner Application](./media/concur-provisioning-tutorial/ic721730.png "Enable Partner Application")
 
-4. Dans la liste **Enable Application**, sélectionnez **Azure Active Directory**, puis cliquez sur **Enable**.
+4. Dans la liste **Enable Application** , sélectionnez **Azure Active Directory** , puis cliquez sur **Enable**.
    
     ![Microsoft Azure Active Directory](./media/concur-provisioning-tutorial/ic721731.png "Microsoft Azure Active Directory")
 
@@ -101,19 +96,19 @@ Cette action ne doit pas être exécutée avec le profil utilisé pour l’admin
 
 9. Définissez le **Mode d’approvisionnement** sur **Automatique**. 
  
-    ![approvisionnement](./media/concur-provisioning-tutorial/provisioning.png)
+    ![Capture d’écran de l’onglet Provisionnement pour Concur dans le portail Azure. Le mode de provisionnement est défini sur Automatique et le bouton Tester la connexion est en évidence.](./media/concur-provisioning-tutorial/provisioning.png)
 
-10. Dans la section **Informations d’identification administrateur**, entrez le **nom d’utilisateur** et le **mot de passe** de l’administrateur Concur.
+10. Dans la section **Informations d’identification administrateur** , entrez le **nom d’utilisateur** et le **mot de passe** de l’administrateur Concur.
 
 11. Dans le portail Azure, cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à votre application Concur. Si la connexion échoue, vérifiez que votre compte Concur dispose des autorisations d’administrateur d’équipe.
 
-12. Entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification**, puis cochez la case.
+12. Entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification** , puis cochez la case.
 
 13. Cliquez sur **Enregistrer.**
 
 14. Dans la section Mappages, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Concur**.
 
-15. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés d’Azure AD vers Concur. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Concur pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
+15. Dans la section **Mappages des attributs** , passez en revue les attributs utilisateur qui sont synchronisés d’Azure AD vers Concur. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Concur pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
 
 16. Pour activer le service d’approvisionnement Azure AD pour Concur, affectez la valeur **Activé** au paramètre **Statut d’approvisionnement** dans la section **Paramètres**.
 
@@ -126,4 +121,3 @@ Vous pouvez à présent créer un compte de test. Patientez jusqu’à 20 minut
 * [Gestion de l’approvisionnement de comptes d’utilisateur pour les applications d’entreprise](tutorial-list.md)
 * [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 * [Configurer l’authentification unique](concur-tutorial.md)
-

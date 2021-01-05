@@ -1,6 +1,6 @@
 ---
 title: Importer une spécification OpenAPI à l’aide du portail Azure | Microsoft Docs
-description: Découvrez comment importer une spécification OpenAPI avec Gestion des API.
+description: Découvrez comment importer une spécification OpenAPI avec le service Gestion des API, puis tester l’API dans les portails des développeurs et Azure.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,15 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 04/20/2020
 ms.author: apimpm
-ms.openlocfilehash: 2e4dee74eb0c50e8e12d3f9ff0dccdd83271ea65
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 05295efec3d7651c3a77dd5ad6e2c72b57a6c5a3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82202908"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994688"
 ---
 # <a name="import-an-openapi-specification"></a>Importer une spécification OpenAPI
 
@@ -42,7 +42,7 @@ Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion d
 2. Sélectionnez **Spécification OpenAPI** dans la liste **Ajouter une nouvelle API**.
 
     ![Spécification OpenAPI](./media/import-api-from-oas/oas-api.png)
-3. Entrez les paramètres de l’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+3. Entrez les paramètres de l’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 4. Sélectionnez **Create** (Créer).
 
 > [!NOTE]

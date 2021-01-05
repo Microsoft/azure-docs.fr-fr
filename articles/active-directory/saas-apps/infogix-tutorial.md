@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory avec Infogix Data3Sixty Govern | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Infogix Data3Sixty Govern.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: aa3109b8-bdbe-45ae-933a-2eb4dc03855c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/14/2019
 ms.author: jeedes
-ms.openlocfilehash: a0b8dbb3992808bdcb94291d876192431c72f6c2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7ca566c554c02d20d21bd7eba87dfbcbf1f746da
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67100339"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97606485"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-infogix-data3sixty-govern"></a>Tutoriel : Intégration d’Azure Active Directory avec Infogix Data3Sixty Govern
 
@@ -31,7 +27,7 @@ L’intégration d’Infogix Data3Sixty Govern à Azure AD vous offre les avanta
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à Infogix Data3Sixty Govern (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +64,7 @@ Pour configurer l’intégration d’Infogix Data3Sixty Govern à Azure AD, vou
 
 4. Dans la zone de recherche, tapez **Infogix Data3Sixty Govern**, sélectionnez **Infogix Data3Sixty Govern** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Infogix Data3Sixty Govern dans la liste des résultats](common/search-new-app.png)
+    ![Infogix Data3Sixty Govern dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -104,7 +100,7 @@ Pour configurer l’authentification unique Azure AD avec Infogix Data3Sixty Go
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL Infogix Data3Sixty Govern](common/idp-intiated.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL : `https://data3sixty.com/ui`
 
@@ -112,7 +108,7 @@ Pour configurer l’authentification unique Azure AD avec Infogix Data3Sixty Go
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL Infogix Data3Sixty Govern](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<subdomain>.data3sixty.com`
 
@@ -121,21 +117,21 @@ Pour configurer l’authentification unique Azure AD avec Infogix Data3Sixty Go
 
 6. L’application Infogix Data3Sixty Govern attend les assertions SAML dans un format spécifique. Configurez les revendications suivantes pour cette application. Vous pouvez gérer les valeurs de ces attributs à partir de la section **Attributs utilisateur** sur la page d’intégration des applications. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Attributs utilisateur**.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant Attributs utilisateur avec l’icône Modifier sélectionnée.](common/edit-attribute.png)
 
 7. Dans la section **Revendications des utilisateurs** de la boîte de dialogue **Attributs utilisateur**, modifiez les revendications en utilisant l’icône **Modifier** ou ajoutez des revendications en utilisant l’option **Ajouter une nouvelle revendication** pour configurer l’attribut de jeton SAML comme sur l’image ci-dessus et procédez comme suit :
 
     | Name | Attribut source|
     | -----------| -------------- |
     | firstname  | user.givenname |
-    | lastname   | user.surname |
-    | username   | user.mail    |
+    | lastname | user.surname |
+    | username | user.mail |
 
     a. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](common/new-save-attribute.png)
+    ![Capture d’écran montrant User claims avec l’option permettant d’ajouter une nouvelle revendication.](common/new-save-attribute.png)
 
-    ![image](common/new-attribute-details.png)
+    ![Capture d’écran montrant la boîte de dialogue Manage user claims où vous pouvez entrer les valeurs décrites.](common/new-attribute-details.png)
 
     b. Dans la zone de texte **Attribut**, indiquez le nom d’attribut pour cette ligne.
 
@@ -184,7 +180,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon@yourcompanydomain.extension**  
     Par exemple : BrittaSimon@contoso.com
 
@@ -223,19 +219,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 Dans cette section, un utilisateur appelé Britta Simon est créé dans Infogix Data3Sixty Govern. Infogix Data3Sixty Govern prend en charge l’attribution d’utilisateurs juste-à-temps, qui est activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. S’il n’existe pas encore d’utilisateur dans Infogix Data3Sixty Govern, il en est créé un après l’authentification.
 
 > [!Note]
-> Si vous devez créer un utilisateur manuellement, contactez l' [équipe du support d'Infogix Data3Sixty Govern](mailto:data3sixtysupport@infogix.com).
+> Si vous devez créer un utilisateur manuellement, contactez l’[équipe de support Infogix Data3Sixty Govern](mailto:data3sixtysupport@infogix.com).
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Infogix Data3Sixty Govern dans le volet d’accès, vous devez être connecté automatiquement à l’application Infogix Data3Sixty Govern pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Infogix Data3Sixty Govern dans le volet d’accès, vous devez être connecté automatiquement à l’application Infogix Data3Sixty Govern pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

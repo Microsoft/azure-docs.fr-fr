@@ -2,18 +2,18 @@
 title: Fichier include
 description: Fichier include
 services: frontdoor
-author: sharad4u
+author: duongau
 ms.service: frontdoor
 ms.topic: include
 ms.date: 05/09/2019
 ms.author: sharadag
 ms.custom: include file
-ms.openlocfilehash: 148ec3eccce71ab7a4a6c1391c0fa4753c248bd8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 361fb18574e90fc46e45bff8914c51ee1afa2f96
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334663"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89411739"
 ---
 | Ressource | Limite |
 | --- | --- |

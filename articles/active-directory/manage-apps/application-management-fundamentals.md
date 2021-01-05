@@ -3,44 +3,45 @@ title: 'Gestion des applications : Bonnes pratiques et recommandations | Micros
 description: Apprenez les bonnes pratiques et les recommandations associées à la gestion des applications dans Azure Active Directory. Découvrez l’utilisation du provisionnement automatique et la publication d’applications locales avec Proxy d’application.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 editor: ''
 ms.assetid: ''
 ms.service: active-directory
 ms.devlang: na
-ms.topic: reference
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 11/13/2019
 ms.subservice: app-mgmt
-ms.author: mimart
+ms.author: kenwith
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6534efb6fcd07ee3b9f3979cabf2feb77496a8b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2f5aaf4bbff4c093872228d647d3850667fb9777
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74085189"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94656405"
 ---
 # <a name="application-management-best-practices"></a>Bonnes pratiques relatives à la gestion des applications
+
 Cet article contient des recommandations et des bonnes pratiques pour la gestion des applications dans Azure Active Directory (Azure AD), lors de l’utilisation du provisionnement automatique et de la publication d’applications locales avec Proxy d’application.
 
 ## <a name="cloud-app-and-single-sign-on-recommendations"></a>Recommandations relatives à l’authentification unique et aux applications cloud
 | Recommandation | Commentaires |
 | --- | --- |
-| Vérifier la galerie d’applications Azure AD à la recherche d’applications  | Azure AD comprend une galerie contenant des milliers d’applications pré-intégrées pour lesquelles Enterprise Single Sign-On (SSO de l’entreprise) est activé. Pour obtenir des instructions de configuration propres à une application, consultez la [Liste des tutoriels sur les applications SaaS](https://azure.microsoft.com/documentation/articles/active-directory-saas-tutorial-list/).  | 
+| Vérifier la galerie d’applications Azure AD à la recherche d’applications  | Azure AD comprend une galerie contenant des milliers d’applications pré-intégrées pour lesquelles Enterprise Single Sign-On (SSO de l’entreprise) est activé. Pour obtenir des instructions de configuration propres à une application, consultez la [Liste des tutoriels sur les applications SaaS](../saas-apps/tutorial-list.md).  | 
 | Utiliser l’authentification unique SAML fédérée  | Lorsqu’elle est prise en charge par l’application, utilisez l’authentification unique SAML fédérée avec Azure AD plutôt que l’authentification unique basée sur les mots de passe et ADFS.  | 
 | Utiliser SHA-256 pour la signature de certificat  | Azure AD utilise l’algorithme SHA-256 par défaut pour signer la réponse SAML. Utilisez SHA-256, sauf si l’application exige SHA-1 (voir [Options de signature de certificat](certificate-signing-options.md) et [Problème de connexion à l’application](application-sign-in-problem-application-error.md).)  | 
-| Exiger l’affectation des utilisateurs  | Par défaut, les utilisateurs peuvent accéder aux applications de votre entreprise sans affectation. Toutefois, si l’application expose des rôles, ou que vous souhaitez qu’elle s’affiche sur le panneau d’accès d’un utilisateur, demandez l’affectation d’utilisateurs. (Consultez le [Guide du développeur pour l’intégration de l’application](developer-guidance-for-integrating-applications.md).)  | 
-| Déployer le panneau d’accès Mes applications vers vos utilisateurs | Le [panneau d’accès](end-user-experiences.md) sur `https://myapps.microsoft.com` est un portail web qui fournit aux utilisateurs un point unique d’entrée pour leurs applications cloud affectées. À mesure que des fonctionnalités supplémentaires, telles que la gestion des groupes et la réinitialisation du mot de passe en libre-service, sont ajoutées, les utilisateurs sont à même de les trouver dans le panneau d’accès. Consultez [Planifier le déploiement d’un panneau d’accès](access-panel-deployment-plan.md).
+| Exiger l’affectation des utilisateurs  | Par défaut, les utilisateurs peuvent accéder aux applications de votre entreprise sans affectation. Toutefois, si l’application expose des rôles, ou si vous souhaitez qu’elle s’affiche sur le panneau Mes applications d’un utilisateur, demandez l’affectation d’utilisateurs. (Consultez le [Guide du développeur pour l’intégration de l’application](developer-guidance-for-integrating-applications.md).)  | 
+| Déployer Mes applications pour vos utilisateurs | [Mes applications](end-user-experiences.md) sur `https://myapps.microsoft.com` est un portail web qui fournit aux utilisateurs un point unique d’entrée pour leurs applications cloud affectées. À mesure que des fonctionnalités supplémentaires, telles que la gestion des groupes et la réinitialisation du mot de passe en libre-service, sont ajoutées, les utilisateurs peuvent les trouver dans Mes applications. Consultez [Planifier le déploiement de Mes applications](access-panel-deployment-plan.md).
 | Utiliser l’affectation de groupe  | Si cette possibilité est incluse dans votre abonnement, affectez des groupes à une application afin de pouvoir déléguer la gestion des accès en cours au propriétaire du groupe. (Consultez le [Guide du développeur pour l’intégration de l’application](developer-guidance-for-integrating-applications.md).)   | 
 | Établir un processus de gestion des certificats | La durée de vie maximale d’un certificat de signature est de trois ans. Pour éviter ou réduire au minimum l’interruption due à l’expiration d’un certificat, utilisez des rôles et des listes de distribution d’e-mails pour vous assurer que les notifications de modifications liées aux certificats sont étroitement supervisées. |
 
 ## <a name="provisioning-recommendations"></a>Recommandations relatives au provisionnement
 | Recommandation | Commentaires |
 | --- | --- |
-| Utiliser des tutoriels pour configurer le provisionnement avec les applications cloud | Consultez la [Liste des tutoriels sur les applications SaaS](https://azure.microsoft.com/documentation/articles/active-directory-saas-tutorial-list/) pour obtenir des instructions pas à pas sur la configuration du provisionnement de l’application de galerie que vous souhaitez ajouter. |
+| Utiliser des tutoriels pour configurer le provisionnement avec les applications cloud | Consultez la [Liste des tutoriels sur les applications SaaS](../saas-apps/tutorial-list.md) pour obtenir des instructions pas à pas sur la configuration du provisionnement de l’application de galerie que vous souhaitez ajouter. |
 | Utiliser les journaux de provisionnement (préversion) pour superviser l’état | Les [journaux de provisionnement](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) fournissent des détails sur toutes les actions effectuées par le service de provisionnement, y compris l’état des utilisateurs individuels. |
 | Affecter un groupe de distribution à l’e-mail de notification de provisionnement | Pour augmenter la visibilité des alertes critiques envoyées par le service de provisionnement, attribuez un groupe de distribution au paramètre E-mails de notification. |
 

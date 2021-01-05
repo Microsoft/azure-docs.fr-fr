@@ -1,26 +1,31 @@
 ---
 title: 'Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et Java'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing.
+description: Découvrez comment démarrer rapidement en suggérant des termes de recherche en temps réel avec l’API Suggestion automatique Bing et Java.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 05/06/2020
+ms.custom: devx-track-java
 ms.author: aahi
-ms.openlocfilehash: b3f279ea50e9923e63f7d6090f4dbaca939eb16c
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: e2468fb6b3285739787d14a06f3d128e822c782f
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80238963"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352743"
 ---
 # <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-java"></a>Démarrage rapide : Suggérer des requêtes de recherche avec l’API REST Suggestion automatique Bing et Java
 
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
-Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API Suggestion automatique Bing et à obtenir la réponse JSON. Cette application Java simple envoie une requête de recherche partielle à l’API et retourne des suggestions pour les recherches. Alors que cette application est écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingAutosuggestv7.java)
+Suivez ce démarrage rapide pour apprendre à effectuer des appels à l’API Suggestion automatique Bing et à lire la réponse JSON. Cette application Java simple envoie une requête de recherche partielle à l’API et retourne des suggestions pour les recherches. Alors que cette application est écrite en Java, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingAutosuggestv7.java)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +49,7 @@ Utilisez ce démarrage rapide pour commencer à effectuer des appels à l’API 
     import com.google.gson.JsonParser;
     ```
 
-2. Créez des variables pour votre clé d’abonnement, l’hôte et le chemin de l’API, le [code de votre marché](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et une requête de recherche. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Créez des variables pour votre clé d’abonnement, l’hôte et le chemin de l’API, le [code de votre marché](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes) et une requête de recherche. Utilisez le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
     
     ```java
     static String subscriptionKey = "enter key here";
@@ -84,7 +89,7 @@ public static String prettify(String json_text) {
       }
       ```
     
-   2. Créez une URL pour la demande avec l’hôte, le chemin et les paramètres d’API créés ci-dessus. 
+   2. Créez une URL pour la demande avec l’hôte, le chemin et les paramètres que vous avez créés à l’étape précédente. 
     
        ```java
        //...
@@ -103,7 +108,7 @@ public static String prettify(String json_text) {
        //...
       ```
 
-   4. Lisez la réponse de l’API dans un `StringBuilder`. Une fois que la réponse a été capturée, fermez le flux `InputStreamReader` et retournez la réponse.
+   4. Stockez la réponse de l’API dans `StringBuilder`. Une fois que la réponse a été capturée, fermez le flux `InputStreamReader` et retournez la réponse.
 
        ```java
        //...
@@ -207,4 +212,4 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 > [Créer une application web monopage](../tutorials/autosuggest.md)
 
 - [Qu’est-ce que la Suggestion automatique Bing ?](../get-suggested-search-terms.md)
-- [Informations de référence sur l’API Suggestion automatique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)
+- [Informations de référence sur l’API Suggestion automatique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference)

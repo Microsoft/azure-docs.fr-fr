@@ -3,20 +3,20 @@ title: Exécution et déclencheurs du pipeline dans Azure Data Factory
 description: Cet article fournit des informations sur l’exécution d’un pipeline dans Azure Data Factory, soit à la demande, soit en créant un déclencheur.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 07/05/2018
-ms.openlocfilehash: a31f800ad157e22f3d35abae3d3b714fa29178ef
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: c72538de8aba60ce7ed880561b55773c22737f97
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82562200"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498623"
 ---
 # <a name="pipeline-execution-and-triggers-in-azure-data-factory"></a>Exécution et déclencheurs du pipeline dans Azure Data Factory
 
@@ -179,7 +179,7 @@ Les pipelines et les déclencheurs ont une relation plusieurs à plusieurs (à l
 ## <a name="schedule-trigger"></a>Déclencheur de planification
 Un déclencheur de planification exécute les pipelines selon un planning horaire. Ce déclencheur prend en charge les options de calendrier périodiques et avancées. Par exemple, le déclencheur prend en charge les intervalles comme « toutes les semaines » ou « lundi à 17h00 et jeudi à 21h00.» Le déclencheur de planification est flexible, car le modèle de jeu de données n’est pas spécifié et le déclencheur ne distingue pas les données de série chronologique des données de série non chronologique.
 
-Pour plus d'informations sur les déclencheurs de planification et pour obtenir des exemples, consultez [Créer un déclencheur de planification](how-to-create-schedule-trigger.md).
+Pour plus d’informations sur les déclencheurs de planification et pour obtenir des exemples, consultez [Créer un déclencheur qui exécute un pipeline selon une planification](how-to-create-schedule-trigger.md).
 
 ## <a name="schedule-trigger-definition"></a>Définition du déclencheur de planification
 Quand vous créez un déclencheur de planification, vous spécifiez la planification et la périodicité à l’aide d’une définition JSON.
@@ -236,14 +236,14 @@ Pour que votre déclencheur de planification lance une exécution de pipeline, 
 Le tableau suivant présente une vue d’ensemble globale des principaux éléments du schéma liés à la périodicité et à la planification d’un déclencheur :
 
 | Propriété JSON | Description |
-|:--- |:--- |
+| --- | --- |
 | **startTime** | Valeur de date-heure. Pour les planifications de base, la valeur de la propriété **startTime** s’applique à la première occurrence. Pour les planifications complexes, le déclencheur ne démarre pas avant la valeur **startTime** spécifiée. |
 | **endTime** | La date et l’heure de fin du déclencheur. Le déclencheur ne s’exécute pas après la date et l’heure de fin spécifiées. La valeur de la propriété ne peut pas être dans le passé. <!-- This property is optional. --> |
-| **timeZone** | Fuseau horaire. Actuellement, seul le fuseau horaire UTC est pris en charge. |
+| **timeZone** | Fuseau horaire. Pour obtenir la liste des fuseaux horaires pris en charge, consultez [Créer un déclencheur qui exécute un pipeline selon une planification](how-to-create-schedule-trigger.md#time-zone-option). |
 | **recurrence** | Un objet de périodicité qui spécifie les règles de périodicité pour le déclencheur. L’objet de périodicité prend en charge les éléments suivants : **frequency**, **interval**, **endTime**, **count** et **schedule**. Lorsqu’un objet de périodicité est défini, l’élément **frequency** est requis. Les autres éléments de l’objet de périodicité sont facultatifs. |
 | **frequency** | L’unité de fréquence à laquelle le déclencheur se répète. Les valeurs prises en charge incluent « minute », « heure », « jour », « semaine » et « mois ». |
 | **interval** | Un entier positif qui indique l’intervalle de la valeur **frequency**. La valeur **frequency** détermine la fréquence à laquelle le déclencheur s’exécute. Par exemple, si **l’intervalle** est défini sur 3 et la **fréquence** définie sur « semaine », le déclencheur se répète toutes les trois semaines. |
-| **schedule** | La planification périodique du déclencheur. Un déclencheur dont la valeur **frequency** spécifiée modifie sa périodicité selon une planification périodique. Une propriété **schedule** contient des modifications pour la périodicité basées sur des minutes, heures, jours de la semaine, jours du mois et numéro de semaine.
+| **schedule** | La planification périodique du déclencheur. Un déclencheur dont la valeur **frequency** spécifiée modifie sa périodicité selon une planification périodique. Une propriété **schedule** contient des modifications pour la périodicité basées sur des minutes, heures, jours de la semaine, jours du mois et numéro de semaine. |
 
 ### <a name="schedule-trigger-example"></a>Exemple de déclencheur de planification
 
@@ -281,19 +281,19 @@ Le tableau suivant présente une vue d’ensemble globale des principaux éléme
 
 ### <a name="schema-defaults-limits-and-examples"></a>Valeurs par défaut, limites et exemples du schéma
 
-| Propriété JSON | Type | Obligatoire | Valeur par défaut | Valeurs valides |  Exemple |
-|:--- |:--- |:--- |:--- |:--- |:--- |
+| Propriété JSON | Type | Obligatoire | Valeur par défaut | Valeurs valides | Exemple |
+| --- | --- | --- | --- | --- | --- |
 | **startTime** | string | Oui | None | Dates-Heures ISO 8601 | `"startTime" : "2013-01-09T09:30:00-08:00"` |
 | **recurrence** | object | Oui | None | Un objet de périodicité | `"recurrence" : { "frequency" : "monthly", "interval" : 1 }` |
-| **interval** | nombre | Non  | 1 | 1 à 1000 | `"interval":10` |
+| **interval** | nombre | Non | 1 | 1 à 1000 | `"interval":10` |
 | **endTime** | string | Oui | None | Une valeur date-heure représentant une heure dans le futur | `"endTime" : "2013-02-09T09:30:00-08:00"` |
-| **schedule** | object | Non  | None | Un objet de planification | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
+| **schedule** | object | Non | None | Un objet de planification | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
 
 ### <a name="starttime-property"></a>propriété startTime
 Le tableau suivant vous montre comment la propriété **startTime** contrôle une exécution du déclencheur :
 
 | Valeur startTime | Périodicité sans planification | Périodicité avec planification |
-|:--- |:--- |:--- |
+| --- | --- | --- |
 | **L’heure de début se situe dans le passé** | Calcule la prochaine exécution initiale après l’heure de début, puis l’exécute à l’heure indiquée.<br /><br />Lance les exécutions suivantes calculées à partir de la dernière exécution.<br /><br />Consultez l’exemple qui suit ce tableau. | Le déclencheur _ne démarre pas avant_ l’heure de début spécifiée. La première occurrence dépend de la planification, calculée à partir de l’heure de début.<br /><br />Lance les exécutions suivantes à partir de la planification de périodicité. |
 | **L’heure de début se situe dans le futur ou à l’heure actuelle** | S’exécute une fois à l’heure de début spécifiée.<br /><br />Lance les exécutions suivantes calculées à partir de la dernière exécution. | Le déclencheur _ne démarre pas avant_ l’heure de début spécifiée. La première occurrence dépend de la planification, calculée à partir de l’heure de début.<br /><br />Lance les exécutions suivantes à partir de la planification de périodicité. |
 
@@ -315,20 +315,17 @@ Si plusieurs éléments **schedule** sont spécifiés, l'ordre d'évaluation va 
 Le tableau suivant décrit les éléments **schedule** en détail :
 
 | Élément JSON | Description | Valeurs valides |
-|:--- |:--- |:--- |
-| **minutes** | Minutes d’exécution du déclencheur dans l’heure. |- Entier<br />- Tableau d’entiers|
-| **hours** | Heures d’exécution du déclencheur dans la journée. |- Entier<br />- Tableau d’entiers|
-| **weekDays** | Jours d’exécution du déclencheur dans la semaine. La valeur ne peut être spécifiée qu’avec une fréquence hebdomadaire.|<br />- Lundi<br />- Mardi<br />- Mercredi<br />- Jeudi<br />- Vendredi<br />- Samedi<br />- Dimanche<br />- Tableau des valeurs de jour (la taille maximale du tableau est de 7)<br /><br />Les valeurs de jour ne respectent pas la casse|
-| **monthlyOccurrences** | Jours d’exécution du déclencheur dans le mois. La valeur ne peut être spécifiée qu’avec une fréquence mensuelle uniquement. |- Tableau d’objets **monthlyOccurrence** : `{ "day": day, "occurrence": occurrence }`<br />- L’attribut **day** est le jour de la semaine durant lequel le déclencheur s’exécute. Par exemple, une propriété **monthlyOccurrences** avec une valeur **day** de `{Sunday}` signifie tous les dimanches du mois. L’attribut **day** est requis.<br />- L’attribut **occurrence** est l’occurrence du **jour** spécifié au cours du mois. Par exemple, une propriété **monthlyOccurrences** avec les valeurs **day** et **occurrence** de `{Sunday, -1}` signifie le dernier dimanche du mois. L’attribut **occurrence** est facultatif.|
-| **monthDays** | Jours d’exécution du déclencheur dans le mois. La valeur ne peut être spécifiée qu’avec une fréquence mensuelle uniquement. |- Toute valeur <= -1 et >= -31<br />- Toute valeur >= 1 et <= 31<br />- Tableau de valeurs|
+| --- | --- | --- |
+| **minutes** | Minutes d’exécution du déclencheur dans l’heure. |- Entier<br />- Tableau d’entiers |
+| **hours** | Heures d’exécution du déclencheur dans la journée. |- Entier<br />- Tableau d’entiers |
+| **weekDays** | Jours d’exécution du déclencheur dans la semaine. La valeur ne peut être spécifiée qu’avec une fréquence hebdomadaire.|<br />- Lundi<br />- Mardi<br />- Mercredi<br />- Jeudi<br />- Vendredi<br />- Samedi<br />- Dimanche<br />- Tableau des valeurs de jour (la taille maximale du tableau est de 7)<br /><br />Les valeurs de jour ne respectent pas la casse |
+| **monthlyOccurrences** | Jours d’exécution du déclencheur dans le mois. La valeur ne peut être spécifiée qu’avec une fréquence mensuelle uniquement. |- Tableau d’objets **monthlyOccurrence** : `{ "day": day, "occurrence": occurrence }`<br />- L’attribut **day** est le jour de la semaine durant lequel le déclencheur s’exécute. Par exemple, une propriété **monthlyOccurrences** avec une valeur **day** de `{Sunday}` signifie tous les dimanches du mois. L’attribut **day** est requis.<br />- L’attribut **occurrence** est l’occurrence du **jour** spécifié au cours du mois. Par exemple, une propriété **monthlyOccurrences** avec les valeurs **day** et **occurrence** de `{Sunday, -1}` signifie le dernier dimanche du mois. L’attribut **occurrence** est facultatif. |
+| **monthDays** | Jours d’exécution du déclencheur dans le mois. La valeur ne peut être spécifiée qu’avec une fréquence mensuelle uniquement. |- Toute valeur <= -1 et >= -31<br />- Toute valeur >= 1 et <= 31<br />- Tableau de valeurs |
 
 ## <a name="tumbling-window-trigger"></a>Déclencheur de fenêtre bascule
 Les déclencheurs de fenêtre bascule sont un type de déclencheur qui s’active à un intervalle de temps périodique à partir d’une heure de début spécifiée, tout en conservant son état. Les fenêtres bascule sont une série d’intervalles de temps contigus fixes, qui ne se chevauchent pas.
 
 Pour plus d'informations sur les déclencheurs de fenêtre bascule et pour obtenir des exemples, consultez [Créer un déclencheur de fenêtre bascule](how-to-create-tumbling-window-trigger.md).
-
-> [!NOTE]
-> L’exécution du déclencheur de fenêtre bascule *attend la fin de l’exécution du pipeline déclenché*. Son état d’exécution reflète l’état de l’exécution du pipeline déclenché. Par exemple, si une exécution de pipeline déclenchée est annulée, l’exécution du déclencheur de fenêtre bascule correspondante est marquée comme annulée. Cela diffère du comportement « déclencher et oublier » du déclencheur de planification, qui est marqué comme réussi tant qu’une exécution de pipeline a démarré.
 
 ## <a name="event-based-trigger"></a>Déclencheur basé sur des événements
 
@@ -341,8 +338,8 @@ Cette section fournit des exemples de planifications de périodicité. Elle se c
 
 Les exemples supposent que la valeur **interval** est 1 et que la valeur **frequency** est correcte selon la définition de planification. Par exemple, vous ne pouvez pas avoir une valeur **frequency** définie sur « jour » et une modification **monthDays** dans l’objet **schedule**. Ces types de restrictions sont décrits dans le tableau dans la section précédente.
 
-|  Exemple | Description |
-|:--- |:--- |
+| Exemple | Description |
+| --- | --- |
 | `{"hours":[5]}` | Exécution à 5h00 tous les jours. |
 | `{"minutes":[15], "hours":[5]}` | Exécution à 5h15 tous les jours. |
 | `{"minutes":[15], "hours":[5,17]}` | Exécution à 5h15 et 17h15 tous les jours. |
@@ -373,15 +370,18 @@ Les exemples supposent que la valeur **interval** est 1 et que la valeur **frequ
 ## <a name="trigger-type-comparison"></a>Comparaison du type de déclencheur
 Le déclencheur de fenêtre bascule et le déclencheur de planification fonctionnent tous les deux sur des pulsations de temps. En quoi sont-ils différents ?
 
+> [!NOTE]
+> L’exécution du déclencheur de fenêtre bascule *attend la fin de l’exécution du pipeline déclenché*. Son état d’exécution reflète l’état de l’exécution du pipeline déclenché. Par exemple, si une exécution de pipeline déclenchée est annulée, l’exécution du déclencheur de fenêtre bascule correspondante est marquée comme annulée. Cela diffère du comportement « déclencher et oublier » du déclencheur de planification, qui est marqué comme réussi tant qu’une exécution de pipeline a démarré.
+
 Le tableau suivant présente une comparaison du déclencheur de fenêtre bascule et du déclencheur de planification :
 
-|  | Déclencheur de fenêtre bascule | Déclencheur de planification |
-|:--- |:--- |:--- |
+| Élément | Déclencheur de fenêtre bascule | Déclencheur de planification |
+| --- | --- | --- |
 | **Scénarios de renvoi** | Pris en charge. Les exécutions de pipeline peuvent être planifiées pour des fenêtres dans le passé. | Non pris en charge. Les exécutions de pipeline peuvent être exécutées uniquement sur des périodes de temps à partir de l’heure actuelle et dans le futur. |
 | **Fiabilité** | Fiabilité de 100 %. Les exécutions de pipeline peuvent être planifiées pour toutes les fenêtres à partir d’une date de début spécifiée sans espaces. | Moins fiable. |
 | **Fonctionnalité de nouvelle tentative** | Pris en charge. Les exécutions de pipeline ayant échoué ont une stratégie de nouvelle tentative par défaut d’une valeur de 0, ou une stratégie spécifiée par l’utilisateur dans le cadre de la définition du déclencheur. Effectue automatiquement une nouvelle tentative lorsque les exécutions du pipeline échouent en raison de limites de simultanéité, de serveur ou autres (autrement dit, en cas de codes d'état 400 : Erreur de l’utilisateur, 429 : Trop de demandes et 500 : Erreur interne du serveur). | Non pris en charge. |
 | **Concurrency** | Pris en charge. Les utilisateurs peuvent définir explicitement les limites de concurrence pour le déclencheur. Permet entre 1 et 50 exécutions du pipeline déclenchées en simultané. | Non pris en charge. |
-| **Variables système** | Prend en charge l’utilisation des variables système **WindowStart** et **WindowEnd**. Les utilisateurs peuvent accéder à `triggerOutputs().windowStartTime` et `triggerOutputs().windowEndTime` comme variables système de déclencheur dans la définition du déclencheur. Les valeurs sont utilisées en tant qu’heure de début de fenêtre et heure de fin de fenêtre, respectivement. Par exemple, pour un déclencheur de fenêtre bascule qui s’exécute toutes les heures, pour la fenêtre de 1h00 à 2h00, la définition est `triggerOutputs().WindowStartTime = 2017-09-01T01:00:00Z` et `triggerOutputs().WindowEndTime = 2017-09-01T02:00:00Z`. | Non pris en charge. |
+| **Variables système** | En plus de @trigger().scheduledTime et @trigger().startTime, l’utilisation des variables système **WindowStart** et **WindowEnd** est également prise en charge. Les utilisateurs peuvent accéder à `triggerOutputs().windowStartTime` et `triggerOutputs().windowEndTime` comme variables système de déclencheur dans la définition du déclencheur. Les valeurs sont utilisées en tant qu’heure de début de fenêtre et heure de fin de fenêtre, respectivement. Par exemple, pour un déclencheur de fenêtre bascule qui s’exécute toutes les heures, pour la fenêtre de 1h00 à 2h00, la définition est `triggerOutputs().WindowStartTime = 2017-09-01T01:00:00Z` et `triggerOutputs().WindowEndTime = 2017-09-01T02:00:00Z`. | Prend uniquement en charge les variables par défaut @trigger().scheduledTime et @trigger().startTime. |
 | **Relation du pipeline et du déclencheur** | Prend en charge une relation un à un. Un seul pipeline peut être déclenché. | Prend en charge les relations plusieurs à plusieurs. Plusieurs déclencheurs peuvent exécuter le même pipeline. Un seul déclencheur peut déclencher plusieurs pipelines. |
 
 ## <a name="next-steps"></a>Étapes suivantes

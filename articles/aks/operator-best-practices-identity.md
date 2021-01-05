@@ -4,13 +4,15 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrir les bonnes pratiques de l’opérateur relatives à l’authentification et à l’autorisation des clusters dans Azure Kubernetes Service (AKS)
 services: container-service
 ms.topic: conceptual
-ms.date: 04/24/2019
-ms.openlocfilehash: 0e3569be769fcf70a65cbfee62a3b80a5abdc3b5
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.date: 07/07/2020
+ms.author: jpalma
+author: palma21
+ms.openlocfilehash: a63a756448f9c7202c79c3b4625fc99d4a90dc52
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80668313"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014055"
 ---
 # <a name="best-practices-for-authentication-and-authorization-in-azure-kubernetes-service-aks"></a>Bonnes pratiques relatives à l’authentification et à l’autorisation dans Azure Kubernetes Service (AKS)
 
@@ -19,9 +21,11 @@ ms.locfileid: "80668313"
 Cet article traite des bonnes pratiques relatives à la gestion des accès et des identités pour les opérateurs de clusters AKS. Dans cet article, vous apprendrez comment :
 
 > [!div class="checklist"]
+>
 > * Authentifier les utilisateurs de clusters AKS auprès d’Azure Active Directory
-> * Contrôler l’accès aux ressources avec des contrôles d’accès en fonction du rôle (RBAC)
-> * Utiliser une identité managée pour l’authentification auprès d’autres services
+> * Contrôler l’accès aux ressources à l’aide du contrôle d’accès en fonction du rôle (RBAC Kubernetes) Kubernetes
+> * Utilisez Azure RBAC pour contrôler de manière précise l’accès à la ressource AKS et l’API Kubernetes à l’échelle, ainsi qu’à kubeconfig.
+> * Utiliser une identité managée pour l’authentification des pods auprès d’autres services
 
 ## <a name="use-azure-active-directory"></a>Utiliser Azure Active Directory
 
@@ -29,7 +33,7 @@ Cet article traite des bonnes pratiques relatives à la gestion des accès et de
 
 Les développeurs et propriétaires d’applications de votre cluster Kubernetes doivent pouvoir accéder à différentes ressources. Kubernetes ne propose pas de solution de gestion des identités pour contrôler les utilisateurs pouvant interagir avec certaines ressources. Au lieu de cela, vous intégrez généralement votre cluster à une solution d’identité existante. Azure Active Directory (AD) fournit une solution de gestion des identités d’entreprise qui s’intègre aux clusters AKS.
 
-Avec les clusters intégrant Azure AD dans AKS, vous créez des *Roles* ou des *ClusterRoles* qui définissent les autorisations d’accès aux ressources. Vous *liez* ensuite les rôles aux utilisateurs ou aux groupes à partir d’Azure AD. Ces contrôles d’accès en fonction du rôle (RBAC) Kubernetes sont décrits dans la section suivante. L’intégration d’Azure AD et la façon dont vous contrôlez l’accès aux ressources sont représentées dans le diagramme suivant :
+Avec les clusters intégrant Azure AD dans AKS, vous créez des *Roles* ou des *ClusterRoles* qui définissent les autorisations d’accès aux ressources. Vous *liez* ensuite les rôles aux utilisateurs ou aux groupes à partir d’Azure AD. Ce contrôle d’accès en fonction du rôle (RBAC Kubernetes) Kubernetes est traité dans la section suivante. L’intégration d’Azure AD et la façon dont vous contrôlez l’accès aux ressources sont représentées dans le diagramme suivant :
 
 ![Authentification au niveau du cluster pour l’intégration d’Azure Active Directory à AKS](media/operator-best-practices-identity/cluster-level-authentication-flow.png)
 
@@ -37,16 +41,16 @@ Avec les clusters intégrant Azure AD dans AKS, vous créez des *Roles* ou des 
 1. Le point de terminaison d’émission de jeton Azure AD émet le jeton d’accès.
 1. Le développeur effectue une action à l’aide du jeton Azure AD, par exemple `kubectl create pod`
 1. Kubernetes valide le jeton auprès d’Azure Active Directory et récupère (fetch) les appartenances aux groupes du développeur.
-1. Les stratégies relatives au cluster et au contrôle d’accès en fonction du rôle (RBAC) Kubernetes sont appliquées.
+1. Les stratégies relatives au cluster et au contrôle d’accès en fonction du rôle (RBAC Kubernetes) Kubernetes sont appliquées.
 1. La demande du développeur réussit ou non selon la validation précédente de l’appartenance au groupe Azure AD et les stratégies relatives au cluster et au RBAC Kubernetes.
 
 Pour créer un cluster AKS qui utilise Azure AD, consultez [Intégrer Azure Active Directory à AKS][aks-aad].
 
-## <a name="use-role-based-access-controls-rbac"></a>Contrôles d’accès en fonction du rôle (RBAC)
+## <a name="use-kubernetes-role-based-access-control-kubernetes-rbac"></a>Utiliser le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes)
 
 **Guide de bonne pratique** : utilisez le RBAC Kubernetes pour définir les autorisations dont disposent les utilisateurs ou les groupes sur les ressources du cluster. Créez des rôles et des liaisons qui affectent le plut petit nombre d’autorisations nécessaires. Effectuez l’intégration à Azure AD pour refléter automatiquement tout changement apporté à l’état de l’utilisateur ou à l’appartenance au groupe, et pour tenir à jour l’accès aux ressources de cluster.
 
-Dans Kubernetes, vous pouvez fournir un contrôle granulaire de l’accès aux ressources dans le cluster. Les autorisations peuvent être définies au niveau du cluster ou d’espaces de noms spécifiques. Vous pouvez définir les ressources qui peuvent être gérées et les autorisations associées. Ces rôles sont ensuite appliqués aux utilisateurs ou aux groupes avec une liaison. Pour plus d’informations sur *Roles*, *ClusterRoles* et *Bindings*, consultez [Options d’accès et d’identité pour Azure Kubernetes Service (AKS)][aks-concepts-identity].
+Dans Kubernetes, vous pouvez fournir un contrôle granulaire de l’accès aux ressources dans le cluster. Les autorisations sont définies au niveau du cluster ou d’espaces de noms spécifiques. Vous pouvez définir les ressources qui peuvent être gérées et les autorisations associées. Ces rôles sont ensuite appliqués aux utilisateurs ou aux groupes avec une liaison. Pour plus d’informations sur *Roles*, *ClusterRoles* et *Bindings*, consultez [Options d’accès et d’identité pour Azure Kubernetes Service (AKS)][aks-concepts-identity].
 
 Par exemple, vous pouvez créer un Role qui accorde un accès complet aux ressources dans l’espace de noms nommé *finance-app*, comme illustré dans l’exemple de manifeste YAML suivant :
 
@@ -82,7 +86,17 @@ roleRef:
 
 Quand *developer1\@contoso.com* est authentifié auprès du cluster AKS, il dispose d’autorisations complètes aux ressources dans l’espace de noms *finance-app*. De cette façon, vous séparez et contrôlez logiquement l’accès aux ressources. Kubernetes RBAC doit être utilisé conjointement avec l’intégration à Azure AD, comme indiqué dans la section précédente.
 
-Pour en savoir plus sur l’utilisation des groupes Azure AD pour contrôler l’accès aux ressources Kubernetes à l’aide de RBAC, consultez [Contrôler l’accès aux ressources de cluster à l’aide des contrôles d’accès en fonction du rôle et d’identités Azure Active Directory dans AKS][azure-ad-rbac].
+Pour en savoir plus sur l’utilisation des groupes Azure AD pour contrôler l’accès aux ressources Kubernetes à l’aide de RBAC Kubernetes, consultez [Contrôler l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle et d’identités Azure Active Directory dans AKS][azure-ad-rbac].
+
+## <a name="use-azure-rbac"></a>Utiliser Azure RBAC 
+**Guide des meilleures pratiques** : utilisez Azure RBAC pour définir les autorisations minimales requises dont disposent les utilisateurs ou les groupes pour les ressources AKS dans un ou plusieurs abonnements.
+
+Il existe deux niveaux d’accès nécessaires pour pleinement utiliser un cluster AKS : 
+1. Accéder à la ressource AKS sur votre abonnement Azure. Ce niveau d’accès vous permet de contrôler les opérations de mise à l’échelle ou de mise à niveau de votre cluster à l’aide des API AKS, ainsi que d’extraire votre kubeconfig.
+Pour savoir comment contrôler l’accès aux ressources AKS et à kubeconfig, consultez [Limiter l’accès au fichier de configuration du cluster](control-kubeconfig-access.md).
+
+2. Accéder à l’API Kubernetes. Ce niveau d’accès est contrôlé par [Kubernetes RBAC](#use-kubernetes-role-based-access-control-kubernetes-rbac) (traditionnellement) ou par l’intégration d’Azure RBAC avec AKS pour l’autorisation Kubernetes.
+Pour savoir comment accorder de manière granulaire des autorisations à l’API Kubernetes à l’aide d’Azure RBAC, consultez [Utiliser Azure RBAC pour l’autorisation Kubernetes](manage-azure-rbac.md).
 
 ## <a name="use-pod-identities"></a>Utiliser des identités de pod
 
@@ -97,14 +111,14 @@ Les identités managées pour les ressources Azure (actuellement implémentées 
 
 Quand des pods demandent l’accès à un service Azure, les règles de réseau redirigent le trafic vers le serveur NMI. Le serveur NMI identifie les pods qui demandent l’accès à des services Azure en fonction de leur adresse distante, puis interroge le contrôleur MIC. Ce dernier recherche des mappages d’identité Azure dans le cluster AKS, puis le serveur NMI demande un jeton d’accès à Azure Active Directory (AD) en fonction du mappage d’identité du pod. Azure AD fournit un jeton d’accès au serveur NMI, qui est retourné au pod. Ce jeton d’accès peut alors être utilisé par le pod pour demander l’accès à des services dans Azure.
 
-Dans l’exemple suivant, un développeur crée un pod qui utilise une identité managée pour demander l’accès à une instance Azure SQL Server :
+Dans l’exemple suivant, un développeur crée un pod qui utilise une identité managée pour demander l’accès à Azure SQL Database :
 
 ![Identités de pod permettant à un pod de demander automatiquement l’accès à d’autres services](media/operator-best-practices-identity/pod-identities.png)
 
 1. L’opérateur de cluster crée d’abord un compte de service qui peut être utilisé pour mapper des identités quand des pods demandent l’accès à des services.
 1. Le serveur NMI et le contrôleur MIC sont déployés pour relayer à Azure AD les demandes de jetons d’accès des pods.
 1. Un développeur déploie un pod avec une identité managée qui demande un jeton d’accès par le biais du serveur NMI.
-1. Le jeton est retourné au pod et utilisé pour accéder à une instance Azure SQL Server.
+1. Le jeton est retourné au pod et utilisé pour accéder à Azure SQL Database
 
 > [!NOTE]
 > Les identités de pod managées constituent un projet open source qui n’est pas pris charge par le support technique Azure.

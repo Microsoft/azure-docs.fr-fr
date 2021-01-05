@@ -68,7 +68,11 @@
       href: my-account-portal-privacy-page.md
     - name: Afficher votre activité de connexion récente
       href: my-account-portal-sign-ins-page.md
-- name: Aide relative aux informations de sécurité (préversion)
+    - name: Changer les paramètres de votre portail
+      href: my-account-portal-settings.md
+    - name: Changer d’organisations
+      href: cross-tenant-switcher.md
+- name: Aide sur les informations de sécurité
   items:
     - name: Ajouter des informations de sécurité pendant la connexion
       href: security-info-setup-signin.md
@@ -104,12 +108,12 @@
   items:
     - name: "Se connecter au portail Mes\_applications et l’utiliser"
       href: my-apps-portal-end-user-access.md
-    - name: Mettre à jour vos informations de profil et de compte
-      href: my-apps-portal-end-user-update-profile.md
     - name: Mettre à jour les informations de vos groupes
       href: my-apps-portal-end-user-groups.md
     - name: Organiser des applications à l’aide de regroupements
       href: my-applications-portal-workspaces.md
+    - name: Aperçu des regroupements dans Mes applications
+      href: my-apps-portal-user-collections.md
     - name: Modifier ou révoquer des autorisations d’application
       href: my-applications-portal-permissions-saved-accounts.md
     - name: Effectuer vos propres révisions d’accès

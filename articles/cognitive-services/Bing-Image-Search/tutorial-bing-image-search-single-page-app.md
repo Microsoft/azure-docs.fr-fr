@@ -1,5 +1,5 @@
 ---
-title: 'Tutoriel : Créer une application web monopage - API Recherche d’images Bing'
+title: 'Tutoriel : Créer une application web monopage - API Recherche d’images Bing'
 titleSuffix: Azure cognitive services
 description: L’API Recherche d’images Bing vous permet de rechercher sur le web des images pertinentes de qualité. Utilisez ce tutoriel pour créer une application web monopage qui peut envoyer des requêtes de recherche à l’API et afficher les résultats dans la page web.
 services: cognitive-services
@@ -10,14 +10,20 @@ ms.subservice: bing-image-search
 ms.topic: tutorial
 ms.date: 03/05/2020
 ms.author: aahi
-ms.openlocfilehash: 9227417d28eb09a322dd4757033ee62fee97d91c
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: bcb82ffcf4c4ad861c6523f507c816c666a71772
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78943904"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351382"
 ---
 # <a name="tutorial-create-a-single-page-app-using-the-bing-image-search-api"></a>Tutoriel : Créer une application monopage avec l’API Recherche d’images Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’images Bing vous permet de rechercher sur le web des images pertinentes de qualité. Utilisez ce tutoriel pour créer une application web monopage qui peut envoyer des requêtes de recherche à l’API et afficher les résultats dans la page web. Ce tutoriel est similaire au [tutoriel correspondant](../Bing-Web-Search/tutorial-bing-web-search-single-page-app.md) pour l’API Recherche Web Bing.
 
@@ -31,7 +37,7 @@ L’application du didacticiel illustre les actions suivantes :
 
 L’intégralité du code source pour ce tutoriel est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/tree/master/Tutorials/Bing-Image-Search).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * La dernière version de [Node.js](https://nodejs.org/).
 * Le framework [Express.js](https://expressjs.com/) pour Node.js. Les instructions d’installation du code source sont disponibles dans le fichier Lisez-moi de l’exemple GitHub.
@@ -116,9 +122,9 @@ Par défaut, le gestionnaire `onsubmit` retourne `false`, ce qui empêche l’en
 
 ![[Formulaire de Recherche d’images Bing]](media/cognitive-services-bing-images-api/image-search-spa-form.png)
 
-L’API Recherche d’images Bing offre plusieurs [paramètres de requête de filtre](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#filter-query-parameters) pour affiner et filtrer les résultats de la recherche. Le formulaire HTML de cette application utilise et affiche les options de paramètre suivantes :
+L’API Recherche d’images Bing offre plusieurs [paramètres de requête de filtre](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference#filter-query-parameters) pour affiner et filtrer les résultats de la recherche. Le formulaire HTML de cette application utilise et affiche les options de paramètre suivantes :
 
-|              |                                                                                                                                                                                    |
+| Option | Description |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `where`      | Menu déroulant pour sélectionner le marché (lieu et langue) utilisé pour la recherche.                                                                                             |
 | `query`      | Champ de texte dans lequel saisir les termes de recherche.                                                                                                                                 |
@@ -390,15 +396,18 @@ Les stratégies de sécurité de navigateur (CORS) peuvent rendre l’en-tête `
 
 Il est facile d’installer un proxy CORS pour autoriser l’application du didacticiel à accéder à l’en-tête d’ID client. Tout d’abord, [installez Node.js](https://nodejs.org/en/download/) si ce n’est pas déjà fait. Exécutez alors la commande suivante dans une fenêtre de commande :
 
-    npm install -g cors-proxy-server
+```console
+npm install -g cors-proxy-server
+```
 
-Ensuite, remplacez le point de terminaison Recherche Web Bing dans le fichier HTML par :
-
-    http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search
+Ensuite, remplacez le point de terminaison Recherche Web Bing dans le fichier HTML par : \
+`http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search`
 
 Enfin, lancez le proxy CORS avec la commande suivante :
 
-    cors-proxy-server
+```console
+cors-proxy-server
+```
 
 Laissez la fenêtre de commande ouverte pendant que vous utilisez l’application du tutoriel ; si vous fermez la fenêtre, le proxy s’arrête. Dans la section des en-têtes HTTP (qui peut être développée) sous les résultats de la recherche, vous pouvez maintenant voir l’en-tête `X-MSEdge-ClientID` (entre autres) et vérifier qu’il est identique pour toutes les requêtes.
 

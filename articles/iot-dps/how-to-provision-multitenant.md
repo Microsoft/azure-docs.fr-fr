@@ -7,16 +7,16 @@ ms.date: 04/10/2019
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: e0dec0a67ed33186797ccec8066aaad89ceb8dcb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d0c132d1aa7a37dc8e7620352bb7b9a078d79a09
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75434752"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96571604"
 ---
 # <a name="how-to-provision-for-multitenancy"></a>Comment provisionner des appareils multilocataires 
 
-Les stratégies d’allocation définies par le service Device Provisioning permettent de gérer divers scénarios d’allocation. Voici deux scénarios courants :
+Cet article explique comment approvisionner de façon sécurisée plusieurs appareils avec des clés symétriques sur un groupe de hubs IoT à l’aide d’une [stratégie d’allocation](concepts-service.md#allocation-policy). Les stratégies d’allocation définies par le service Device Provisioning permettent de gérer divers scénarios d’allocation. Voici deux scénarios courants :
 
 * **Géolocalisation et géolatence** : quand un appareil change souvent d’emplacement, il doit être provisionné dans le hub IoT le plus proche de son emplacement pour améliorer la latence du réseau. Dans ce scénario, un groupe de hubs IoT couvrant plusieurs régions sont sélectionnés pour les inscriptions. La stratégie d’allocation **Latence la plus faible** est sélectionnée pour ces inscriptions. Avec cette stratégie, le service Device Provisioning évalue la latence des appareils et détermine quel hub IoT dans le groupe de hubs IoT est le plus proche. 
 
@@ -36,13 +36,10 @@ Cet article utilise un exemple d’appareil simulé du [SDK Azure IoT pour C](ht
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* Avoir effectué les étapes décrites dans le guide de démarrage rapide [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
-
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
+- Avoir effectué les étapes décrites dans le guide de démarrage rapide [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="create-two-regional-iot-hubs"></a>Créer deux hubs IoT régionaux
 
@@ -83,7 +80,7 @@ Dans cette section, vous allez utiliser Azure Cloud Shell pour créer deux hubs 
 
 Dans cette section, vous allez créer un groupe d’inscription pour les appareils locataires.  
 
-Par souci de simplicité, cet article utilise [l’attestation de clé symétrique](concepts-symmetric-key-attestation.md) avec l’inscription. Pour sécuriser votre solution, utilisez plutôt [l’attestation de certificat X.509](concepts-security.md#x509-certificates) avec une chaîne d’approbation.
+Par souci de simplicité, cet article utilise [l’attestation de clé symétrique](concepts-symmetric-key-attestation.md) avec l’inscription. Pour sécuriser votre solution, utilisez plutôt [l’attestation de certificat X.509](concepts-x509-attestation.md) avec une chaîne d’approbation.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) et ouvrez votre instance du service Device Provisioning.
 
@@ -191,14 +188,14 @@ Pour faciliter la suppression des ressources à la fin de l’article, nous ajou
 
 Dans cette section, vous allez cloner le SDK Azure IoT pour C sur chaque machine virtuelle. Le SDK contient un exemple qui simule le provisionnement d’appareils locataires dans chaque région.
 
-1. Sur chaque machine virtuelle, installez **CMake**, **g++** , **gcc** et [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) à l’aide des commandes suivantes :
+1. Sur chaque machine virtuelle, installez **CMake**, **g++**, **gcc** et [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) à l’aide des commandes suivantes :
 
     ```bash
     sudo apt-get update
     sudo apt-get install cmake build-essential libssl-dev libcurl4-openssl-dev uuid-dev git-all
     ```
 
-1. Recherchez le nom d’étiquette de la [version la plus récente](https://github.com/Azure/azure-iot-sdk-c/releases/latest) du kit de développement logiciel (SDK).
+1. Recherchez le nom de balise de la [version la plus récente](https://github.com/Azure/azure-iot-sdk-c/releases/latest) du kit de développement logiciel (SDK).
 
 1. Clonez le [SDK Azure IoT pour C](https://github.com/Azure/azure-iot-sdk-c) sur les deux machines virtuelles.  Utilisez l’étiquette obtenue à l’étape précédente comme valeur pour le paramètre `-b` :
 
@@ -300,7 +297,7 @@ Dans cette section, vous allez mettre à jour un exemple de provisionnement du S
 
 L’exemple de code simule une séquence de démarrage d’un appareil qui envoie la demande de provisionnement à votre instance du service Device Provisioning. La séquence de démarrage entraîne la reconnaissance de l’appareil et son assignation au hub IoT le plus proche en fonction de la latence.
 
-1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et notez les valeurs de **_Étendue de l’ID_** .
+1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et notez les valeurs de **_Étendue de l’ID_**.
 
     ![Extraction des informations de point de terminaison du service Device Provisioning à partir du panneau du Portail](./media/quick-create-simulated-device-x509/extract-dps-endpoints.png) 
 
@@ -412,9 +409,9 @@ Pour supprimer le groupe de ressources par nom :
 
 1. Connectez-vous au [Portail Azure](https://portal.azure.com) et cliquez sur **Groupes de ressources**.
 
-2. Dans la zone de texte **Filtrer par nom...** , tapez le nom du groupe de ressources contenant vos ressources (ici, **contoso-us-resource-group**). 
+2. Dans la zone de texte **Filtrer par nom...**, tapez le nom du groupe de ressources contenant vos ressources (ici, **contoso-us-resource-group**). 
 
-3. À droite de votre groupe de ressources dans la liste des résultats, cliquez sur **...** , puis sur **Supprimer le groupe de ressources**.
+3. À droite de votre groupe de ressources dans la liste des résultats, cliquez sur **...**, puis sur **Supprimer le groupe de ressources**.
 
 4. Il vous sera demandé de confirmer la suppression du groupe de ressources. Saisissez de nouveau le nom de votre groupe de ressources pour confirmer, puis cliquez sur **Supprimer**. Après quelques instants, le groupe de ressources et toutes les ressources qu’il contient sont supprimés.
 

@@ -1,14 +1,14 @@
 ---
 title: Chiffrer la source de votre application au repos
-description: Chiffrez les données de votre application dans le Stockage Azure et déployez-la en tant que fichier de package.
+description: Découvrez comment chiffrez les données de votre application dans le service Stockage Azure, et déployez celle-ci en tant que fichier de package.
 ms.topic: article
 ms.date: 03/06/2020
-ms.openlocfilehash: 7e5e809fe8b670ae6ec5bfd15e54f9a8019e76d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5524b749b1e15342dd0133920d7190e33ced18ad
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79408741"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92146051"
 ---
 # <a name="encryption-at-rest-using-customer-managed-keys"></a>Chiffrement au repos à l’aide de clés gérées par le client
 
@@ -22,7 +22,7 @@ Le chiffrement des données de votre application web au repos nécessite un comp
 
 ### <a name="create-an-azure-storage-account"></a>Création d'un compte Azure Storage
 
-Tout d’abord, [créez un compte de stockage Azure](../storage/common/storage-account-create.md) et [chiffrez-le avec des clés gérées par le client](../storage/common/encryption-customer-managed-keys.md). Une fois le compte de stockage créé, utilisez l’[Explorateur Stockage Azure](../vs-azure-tools-storage-manage-with-storage-explorer.md) pour charger les fichiers de package.
+Tout d’abord, [créez un compte de stockage Azure](../storage/common/storage-account-create.md) et [chiffrez-le avec des clés gérées par le client](../storage/common/customer-managed-keys-overview.md). Une fois le compte de stockage créé, utilisez l’[Explorateur Stockage Azure](../vs-azure-tools-storage-manage-with-storage-explorer.md) pour charger les fichiers de package.
 
 Ensuite, utilisez l’Explorateur Stockage pour [générer une URL SAS](../vs-azure-tools-storage-manage-with-storage-explorer.md?tabs=windows#generate-a-sas-in-storage-explorer). 
 

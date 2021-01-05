@@ -1,25 +1,23 @@
 ---
-title: Type d’entité issue du Machine Learning - LUIS
+title: Type d’entité machine-learning - LUIS
 titleSuffix: Azure Cognitive Services
-description: L’entité apprise par l’ordinateur est l’entité préférée pour la création d’applications LUIS.
+description: L’entité de machine-learning est l’entité préférée pour la création d’applications LUIS.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 04/30/2020
-ms.author: diberry
-ms.openlocfilehash: 5f663379939f24d16fb63e8e5b002fe088a2d9f8
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: f16f3ec445af777c3bde1cb2ab0735df4b6614f8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585587"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91542238"
 ---
-# <a name="machine-learned-entity"></a>Entité apprise par la machine
+# <a name="machine-learning-entity"></a>Entité de machine learning
 
-L’entité apprise par l’ordinateur est l’entité préférée pour la création d’applications LUIS.
+L’entité de machine-learning est l’entité préférée pour la création d’applications LUIS.
 
 
 ## <a name="example-json"></a>Exemple JSON
@@ -38,7 +36,7 @@ Les exemples d’énoncés sont les suivants :
 
 #### <a name="v3-prediction-endpoint-response"></a>[Réponse de point de terminaison de prédiction V3](#tab/V3)
 
-Il ne s’agit là que d’un exemple, car une entité issue du Machine Learning peut disposer de nombreuses sous-entités avec des fonctionnalités requises. Il doit être considéré comme un guide pour le résultat produit par votre entité.
+Il ne s’agit là que d’un exemple, car une entité de machine-learning peut disposer de nombreuses sous-entités avec des fonctionnalités requises. Il doit être considéré comme un guide pour le résultat produit par votre entité.
 
 Considérez la requête :
 
@@ -348,6 +346,6 @@ Cette entité n’est pas disponible dans le runtime de prédiction v2.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Apprenez-en davantage sur l’entité apprise sur l’ordinateur, notamment un [didacticiel](tutorial-machine-learned-entity.md), des [concepts](luis-concept-entity-types.md#design-entities-for-decomposition) et un [guide pratique](luis-how-to-add-entities.md#create-a-machine-learned-entity).
+Apprenez-en davantage sur l’entité de machine-learning, notamment avec un [tutoriel](tutorial-machine-learned-entity.md), des [concepts](luis-concept-entity-types.md#design-entities-for-decomposition) et un [guide pratique](luis-how-to-add-entities.md#create-a-machine-learned-entity).
 
 Découvrez les entités de [liste](reference-entity-list.md) et d’[expression régulière](reference-entity-regular-expression.md).

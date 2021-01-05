@@ -1,14 +1,14 @@
 ---
 title: Comprendre l’ordre de la séquence de déploiement
 description: Découvrez l’ordre par défaut dans lequel les artefacts de blueprint sont déployés lors d’une affectation de blueprint, et comment personnaliser l’ordre de déploiement.
-ms.date: 05/06/2020
+ms.date: 08/27/2020
 ms.topic: conceptual
-ms.openlocfilehash: 91e11f8127ba2532ad48362de1689f4be2b6f935
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: 8305e5d44caef0f35e5b4beb4b70be9736272fa7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82864519"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996047"
 ---
 # <a name="understand-the-deployment-sequence-in-azure-blueprints"></a>Comprendre la séquence de déploiement dans les blueprints Azure
 
@@ -28,21 +28,21 @@ Si la définition de blueprint ne contient aucune directive pour l’ordre de d�
 
 - Artefacts d’**attribution de rôle** au niveau de l’abonnement triés par nom d’artefact
 - Artefacts d’**attribution de stratégie** au niveau de l’abonnement triés par nom d’artefact
-- Artefacts de **modèle Azure Resource Manager** au niveau de l’abonnement triés par nom d’artefact
+- Artefacts de **modèle Azure Resource Manager** (modèles ARM) au niveau de l’abonnement, triés par nom d’artefact
 - Artefacts de **groupe de ressources** (englobant les artefacts enfants) triés par nom d’espace réservé
 
 Dans chaque artefact de **groupe de ressources**, l’ordre de séquence suivant est utilisé pour les artefacts devant être créés dans le groupe de ressources en question :
 
 - Artefacts d’**attribution de rôle** enfant de groupe de ressources triés par nom d’artefact
 - Artefacts d’**attribution de stratégie** enfant de groupe de ressources triés par nom d’artefact
-- Artefacts de **modèle Azure Resource Manager** enfant de groupe de ressources triés par nom d’artefact
+- Artefacts de **modèle Azure Resource Manager** (modèles ARM) enfant de groupe de ressources, triés par nom d’artefact
 
 > [!NOTE]
 > L’utilisation de [artifacts()](../reference/blueprint-functions.md#artifacts) crée une dépendance implicite sur l’artefact référencé.
 
 ## <a name="customizing-the-sequencing-order"></a>Personnalisation de l’ordre de séquencement
 
-Au moment de composer des définitions de blueprints de grande taille, il peut être nécessaire de créer des ressources dans un ordre spécifique. Ce cas de figure se présente plus particulièrement quand une définition de blueprint inclut plusieurs modèles Azure Resource Manager. Azure Blueprints gère ce modèle en permettant de définir l’ordre de séquencement.
+Au moment de composer des définitions de blueprints de grande taille, il peut être nécessaire de créer des ressources dans un ordre spécifique. Ce cas de figure se présente plus particulièrement quand une définition de blueprint inclut plusieurs modèles ARM. Azure Blueprints gère ce modèle en permettant de définir l’ordre de séquencement.
 
 Le classement est effectué en définissant une propriété `dependsOn` dans le JSON. La définition de blueprint, pour les groupes de ressources, et les objets artefact prennent en charge cette propriété. `dependsOn` est un tableau de chaînes de noms d’artefacts que l’artefact en question doit créer au préalable.
 
@@ -81,7 +81,7 @@ Cet exemple de définition de blueprint présente un groupe de ressources pour l
 
 ### <a name="example---artifact-with-custom-order"></a>Exemple d’artefact avec un ordre personnalisé
 
-Cet exemple est un artefact de stratégie qui dépend d’un modèle Azure Resource Manager. Selon l’ordre par défaut, un artefact de stratégie serait créé avant le modèle Azure Resource Manager. Ce classement permet à l’artefact de stratégie d’attendre que le modèle Azure Resource Manager soit créé.
+Cet exemple est un artefact de stratégie qui dépend d’un modèle ARM. Selon l’ordre par défaut, un artefact de stratégie serait créé avant le modèle ARM. Ce classement permet à l’artefact de stratégie d’attendre que le modèle ARM soit créé.
 
 ```json
 {
@@ -100,7 +100,7 @@ Cet exemple est un artefact de stratégie qui dépend d’un modèle Azure Resou
 
 ### <a name="example---subscription-level-template-artifact-depending-on-a-resource-group"></a>Exemple - Artefact de modèle de niveau d’abonnement dépendant d’un groupe de ressources
 
-Cet exemple concerne un modèle Resource Manager déployé au niveau de l’abonnement pour dépendre d’un groupe de ressources. Dans le classement par défaut, les artefacts de niveau d’abonnement seront créés avant les groupes de ressources et les artefacts enfants dans ces groupes de ressources. Le groupe de ressources est défini dans la définition de blueprint comme suit :
+Cet exemple concerne un modèle ARM déployé au niveau de l’abonnement pour dépendre d’un groupe de ressources. Dans le classement par défaut, les artefacts de niveau d’abonnement seront créés avant les groupes de ressources et les artefacts enfants dans ces groupes de ressources. Le groupe de ressources est défini dans la définition de blueprint comme suit :
 
 ```json
 "resourceGroups": {
@@ -141,8 +141,8 @@ Tel est le cas par exemple d’un groupe de ressources qui dépend d’une strat
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur le [cycle de vie des blueprints](lifecycle.md)
-- Comprendre comment utiliser les [paramètres statiques et dynamiques](parameters.md).
-- Découvrir comment utiliser le [verrouillage de ressources de blueprint](resource-locking.md).
+- En savoir plus sur le [cycle de vie des blueprints](./lifecycle.md)
+- Comprendre comment utiliser les [paramètres statiques et dynamiques](./parameters.md).
+- Découvrir comment utiliser le [verrouillage de ressources de blueprint](./resource-locking.md).
 - Découvrir comment [mettre à jour des affectations existantes](../how-to/update-existing-assignments.md).
 - Résoudre les problèmes durant l’affectation d’un blueprint en suivant les étapes de [dépannage général](../troubleshoot/general.md).

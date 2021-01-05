@@ -1,25 +1,19 @@
 ---
 title: Configurer Oracle ASM sur une machine virtuelle Linux Azure | Microsoft Docs
 description: Rendez Oracle ASM opérationnel rapidement dans votre environnement Azure.
-services: virtual-machines-linux
-documentationcenter: virtual-machines
-author: BorisB2015
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: ''
+author: dbakevlar
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 08/02/2018
-ms.author: borisb
-ms.openlocfilehash: aa65b789d02c60ef6042aa62e1c138c0e1bd7224
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.author: kegorman
+ms.reviewer: cynthn
+ms.openlocfilehash: 6f0b58374ae3eb972993b544117d8cbb98371ce5
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676896"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96602612"
 ---
 # <a name="set-up-oracle-asm-on-an-azure-linux-virtual-machine"></a>Configurer Oracle ASM sur une machine virtuelle Linux Azure  
 
@@ -142,7 +136,7 @@ Pour plus d’informations sur l’installation d’Oracle ASM, consultez [Oracl
     uid=3000(grid) gid=54321(oinstall) groups=54321(oinstall),54322(dba),54345(asmadmin),54346(asmdba),54347(asmoper)
     ```
  
-6. Créez un dossier pour l’utilisateur*grid* et changez son propriétaire :
+6. Créez un dossier pour l’utilisateur *grid* et changez son propriétaire :
 
    ```bash
    mkdir /u01/app/grid 
@@ -351,7 +345,7 @@ Pour ce didacticiel, l’utilisateur par défaut est *grid* et le groupe par dé
 
 Pour télécharger et préparer Oracle Grid Infrastructure, procédez comme suit :
 
-1. Téléchargez Oracle Grid Infrastructure à partir de la [page de téléchargement d’Oracle ASM](https://www.oracle.com/technetwork/database/enterprise-edition/downloads/database12c-linux-download-2240591.html). 
+1. Téléchargez Oracle Grid Infrastructure à partir de la [page de téléchargement d’Oracle ASM](https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html). 
 
    Sous le téléchargement intitulé **Oracle Database 12c Release 1 Grid Infrastructure (12.1.0.2.0) for Linux x86-64**, téléchargez les deux fichiers .zip.
 
@@ -534,7 +528,7 @@ Pour configurer votre installation Oracle ASM, procédez comme suit :
    - Cliquez sur `ok` pour créer le groupe de disques.
    - Cliquez sur `ok` pour fermer la fenêtre de confirmation.
 
-   ![Capture d’écran de la boîte de dialogue Create Disk Group (Créer un groupe de disques)](./media/oracle-asm/asm04.png)
+   ![Capture d’écran de la boîte de dialogue Create Disk Group (Créer un groupe de disques), avec l’option Externe (non) (Externe (aucune)) en évidence.](./media/oracle-asm/asm04.png)
 
 6. Sélectionnez **Exit** (Quitter) pour fermer l’Assistant de configuration d’ASM.
 

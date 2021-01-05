@@ -6,12 +6,13 @@ ms.assetid: daedacf0-6546-4355-a65c-50873e74f66b
 ms.topic: reference
 ms.date: 02/19/2020
 ms.author: cshoe
-ms.openlocfilehash: 44e4114b328701d5de363e91f5562f1daad351c6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: fasttrack-edit
+ms.openlocfilehash: b32f16d170df9963960862bc82aef1a4baf13896
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235141"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92104442"
 ---
 # <a name="azure-service-bus-bindings-for-azure-functions"></a>Liaisons Azure Service Bus pour Azure Functions
 
@@ -23,6 +24,9 @@ Azure Functions s’intègre avec [Azure Service Bus](https://azure.microsoft.co
 | Envoyer des messages Azure Service Bus |[Liaison de sortie](./functions-bindings-service-bus-output.md) |
 
 ## <a name="add-to-your-functions-app"></a>Ajouter à votre application de fonction
+
+> [!NOTE]
+> Actuellement, la liaison Service Bus ne prend pas en charge l’authentification à l’aide d’une identité managée. Utilisez plutôt une [signature d’accès partagé Service Bus](../service-bus-messaging/service-bus-authentication-and-authorization.md#shared-access-signature).
 
 ### <a name="functions-2x-and-higher"></a>Functions 2.x et versions ultérieures
 
@@ -37,12 +41,12 @@ Pour utiliser le déclencheur et les liaisons, vous devez référencer le packag
 [Package NuGet]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.ServiceBus/
 [core tools]: ./functions-run-local.md
 [Bundle d’extensions]: ./functions-bindings-register.md#extension-bundles
-[Mettre à jour vos extensions]: ./install-update-binding-extensions-manual.md
+[Mettre à jour vos extensions]: ./functions-bindings-register.md
 [Extension Azure Tools]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack
 
 ### <a name="functions-1x"></a>Functions 1.x
 
-Les applications Functions 1.x ont automatiquement une référence au package NuGet [Microsoft.Azure.WebJobs](https://www.nuget.org/packages/Microsoft.Azure.WebJobs), version 2.x.
+Les applications Functions 1.x ont automatiquement une référence au package NuGet [Microsoft.Azure.WebJobs](https://www.nuget.org/packages/Microsoft.Azure.WebJobs), version 2.x.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

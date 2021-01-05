@@ -5,20 +5,21 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
 ms.topic: overview
-ms.date: 03/17/2020
+ms.date: 08/24/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
+ms.custom: contperf-fy21q1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d2b1d9748b243dcc2104ce7b8e0e8735a7b7276f
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 242e0e4614994c30d0a14b8fe3d7a5c2b217bb5a
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79497680"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97033338"
 ---
-# <a name="what-is-azure-active-directory-identity-protection"></a>Présentation d’Azure Active Directory Identity Protection
+# <a name="what-is-identity-protection"></a>Qu’est-ce qu’Identity Protection ?
 
 Identity Protection est un outil qui permet aux organisations d'accomplir trois tâches principales :
 
@@ -48,16 +49,17 @@ Identity Protection identifie les risques selon les classifications suivantes :
 
 | Type de détection des risques | Description |
 | --- | --- |
-| Voyage inhabituel | Connexion à partir d’un emplacement inhabituel par rapport aux dernières connexions de l’utilisateur |
+| Voyage inhabituel | Connexion à partir d’un emplacement inhabituel par rapport aux dernières connexions de l’utilisateur. |
 | Adresse IP anonyme | Connexion à partir d'une adresse IP anonyme (par exemple : navigateur Tor, VPN anonymes). |
-| Propriétés de connexion inhabituelles | Connexion avec des propriétés inhabituelles pour l’utilisateur concerné |
-| Adresse IP liée à un programme malveillant | Connexion à partir d'une adresse IP liée à un programme malveillant |
-| Informations d'identification divulguées | Cette détection des risques indique que les informations d’identification valides de l’utilisateur ont fait l’objet d’une fuite |
-| Azure AD Threat Intelligence | Les sources de renseignements sur les menaces internes et externes de Microsoft ont identifié un modèle d’attaque connu |
+| Propriétés de connexion inhabituelles | Connexion avec des propriétés inhabituelles pour l’utilisateur concerné. |
+| Adresse IP liée à un programme malveillant | Connexion à partir d’une adresse IP liée à un programme malveillant. |
+| Informations d'identification divulguées | Indique que les informations d’identification valides de l’utilisateur ont été divulguées. |
+| Pulvérisation de mots de passe | Indique que plusieurs noms d’utilisateurs font l’objet d’une attaque par force brute unifiée avec des mots de passe courants. |
+| Azure AD Threat Intelligence | Les sources de renseignements sur les menaces internes et externes de Microsoft ont identifié un modèle d’attaque connu. |
 
 Pour plus de détails sur ces risques et sur la façon dont ils sont calculés, consultez l'article [Qu'est-ce qu'un risque ?](concept-identity-protection-risks.md).
 
-Les signaux de risque peuvent déclencher des mesures correctives (par exemple en obligeant les utilisateurs à utiliser Azure Multi-Factor Authentication ou à réinitialiser leur mot de passe à l'aide de la réinitialisation de mot de passe en libre-service) ou bloquer les utilisateurs jusqu'à ce qu'un administrateur intervienne.
+Les signaux de risque peuvent déclencher des mesures correctives (par exemple en obligeant les utilisateurs à utiliser Azure AD Multi-Factor Authentication ou à réinitialiser leur mot de passe à l’aide de la réinitialisation de mot de passe en libre-service) ou bloquer les utilisateurs jusqu’à ce qu’un administrateur intervienne.
 
 ## <a name="risk-investigation"></a>Examen des risques
 
@@ -69,9 +71,15 @@ Les administrateurs peuvent examiner les détections et prendre des mesures manu
 
 Vous trouverez des informations supplémentaires dans l'article [Procédure : Examiner les risques](howto-identity-protection-investigate-risk.md).
 
+### <a name="risk-levels"></a>Niveaux de risque
+
+La protection d’identité catégorise les risques en trois niveaux : faible, moyen, sévère. 
+
+Bien que Microsoft ne communique pas en détail sur l'évaluation du risque, nous pouvons affirmer que chaque niveau souligne avec un peu plus de certitude que l'utilisateur ou la connexion est compromis(e). Par exemple, une instance de propriétés de connexion non connues pour un utilisateur pourrait être moins dangereuse que la divulgation d’informations d’identification pour un autre utilisateur.
+
 ## <a name="exporting-risk-data"></a>Exportation des données liées aux risques
 
-Les données d'Identity Protection peuvent être exportées vers d'autres outils à des fins d'archivage, d'examen et de mise en corrélation. Les API basées sur Microsoft Graph permettent aux organisations de collecter ces données pour un traitement ultérieur dans un outil tel que SIEM. Pour plus d'informations sur l'accès à l'API Identity Protection, consultez l'article [Prise en main d'Azure Active Directory Identity Protection et de Microsoft Graph](howto-identity-protection-graph-api.md).
+Les données d’Identity Protection peuvent être exportées vers d’autres outils à des fins d’archivage, d’examen et de mise en corrélation. Les API basées sur Microsoft Graph permettent aux organisations de collecter ces données pour un traitement ultérieur dans un outil tel que SIEM. Pour plus d'informations sur l'accès à l'API Identity Protection, consultez l'article [Prise en main d'Azure Active Directory Identity Protection et de Microsoft Graph](howto-identity-protection-graph-api.md).
 
 Pour en savoir plus sur l'intégration des informations d'Identity Protection dans Azure Sentinel, consultez l'article [Connecter des données depuis Azure AD Identity Protection](../../sentinel/connect-azure-ad-identity-protection.md).
 
@@ -86,23 +94,27 @@ Identity Protection exige que les utilisateurs disposent d'une des autorisations
 | Opérateur de sécurité | Afficher tous les rapports Identity Protection et le panneau Vue d’ensemble <br><br> Ignorer le risque lié à l’utilisateur, confirmer que la connexion est sécurisée, confirmer la compromission | Configurer ou modifier des stratégies <br><br> Réinitialiser un mot de passe pour un utilisateur <br><br> Configurer des alertes |
 | Lecteur de sécurité | Afficher tous les rapports Identity Protection et le panneau Vue d’ensemble | Configurer ou modifier des stratégies <br><br> Réinitialiser un mot de passe pour un utilisateur <br><br> Configurer des alertes <br><br> Envoyer des commentaires sur les détections |
 
+Actuellement, le rôle d’opérateur de sécurité ne permet pas d’accéder au rapport sur les connexions risquées.
+
 Les administrateurs d’accès conditionnel peuvent également créer des stratégies qui prennent en compte le risque lié à la connexion en tant que condition. Pour plus d’informations, consultez l’article [Accès conditionnel : Conditions](../conditional-access/concept-conditional-access-conditions.md#sign-in-risk).
 
 ## <a name="license-requirements"></a>Conditions de licence :
 
 [!INCLUDE [Active Directory P2 license](../../../includes/active-directory-p2-license.md)]
 
-| Fonctionnalité | Détails | Azure AD Premium P2 | Azure AD Premium P1 | Azure AD Basic/Free |
+| Fonctionnalité | Détails  | Applications Azure AD Free / Microsoft 365 | Azure AD Premium P1|Azure AD Premium P2 |
 | --- | --- | --- | --- | --- |
-| Stratégies de risque | Stratégie de risque utilisateur (via Identity Protection) | Oui | Non | Non |
-| Stratégies de risque | Stratégie de risque de connexion (via Identity Protection ou l’accès conditionnel) | Oui | Non | Non |
-| Rapports de sécurité | Vue d’ensemble | Oui | Non | Non |
-| Rapports de sécurité | Utilisateurs à risque | Accès total | Informations limitées | Informations limitées |
-| Rapports de sécurité | Connexions risquées | Accès total | Informations limitées | Informations limitées |
-| Rapports de sécurité | Détections de risques | Accès total | Informations limitées | Non |
-| Notifications | Alertes Utilisateurs à risque détectés | Oui | Non | Non |
-| Notifications | Synthèse hebdomadaire | Oui | Non | Non |
-| | Stratégie d'inscription MFA | Oui | Non | Non |
+| Stratégies de risque | Stratégie de risque utilisateur (via Identity Protection)  | Non | Non |Oui | 
+| Stratégies de risque | Stratégie de risque de connexion (via Identity Protection ou l’accès conditionnel)  | Non |  Non |Oui |
+| Rapports de sécurité | Vue d’ensemble |  Non | Non |Oui |
+| Rapports de sécurité | Utilisateurs à risque  | Informations limitées. Seuls les utilisateurs présentant un risque moyen ou élevé sont affichés. Aucun tiroir de détails ou historique des risques. | Informations limitées. Seuls les utilisateurs présentant un risque moyen ou élevé sont affichés. Aucun tiroir de détails ou historique des risques. | Accès total|
+| Rapports de sécurité | Connexions risquées  | Informations limitées. Aucun détail sur les risques ou niveau de risque n’est affiché. | Informations limitées. Aucun détail sur les risques ou niveau de risque n’est affiché. | Accès total|
+| Rapports de sécurité | Détections de risques   | Non | Informations limitées. Aucun tiroir de détails.| Accès total|
+| Notifications | Alertes Utilisateurs à risque détectés  | Non | Non |Oui |
+| Notifications | Synthèse hebdomadaire| Non | Non | Oui | 
+| | Stratégie d'inscription MFA | Non | Non | Oui |
+
+Vous trouverez des informations supplémentaires sur ces rapports détaillés dans l’article [Procédure : Examiner les risques](howto-identity-protection-investigate-risk.md#navigating-the-reports).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

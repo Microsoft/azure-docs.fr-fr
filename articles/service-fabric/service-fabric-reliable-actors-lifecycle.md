@@ -1,16 +1,15 @@
 ---
 title: Vue d’ensemble du cycle de vie des acteurs Azure Service Fabric
 description: Explique le cycle de vie Service Fabric Reliable Actor, le Garbage Collection et la suppression manuelle des acteurs et de leur état
-author: amanbha
 ms.topic: conceptual
 ms.date: 10/06/2017
-ms.author: amanbha
-ms.openlocfilehash: b05da78091260297d94062c06cba100d01ce7e2e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 88db4bb2376cbc418d6954e274a18a6c18a280d1
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229265"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576041"
 ---
 # <a name="actor-lifecycle-automatic-garbage-collection-and-manual-delete"></a>Cycle de vie des acteurs, Garbage Collection automatique et suppression manuelle
 Un acteur est activé la première fois qu’un appel est effectué à l’une de ses méthodes. Un acteur est désactivé (fait l’objet d’un Garbage Collection par le runtime Actors) s’il n’est pas utilisé pendant une durée configurable. Un acteur et son état peuvent également être supprimés manuellement, à tout moment.
@@ -112,7 +111,7 @@ Le Garbage Collection des acteurs désactivés nettoie uniquement l’objet acte
 * [Événements d’acteurs](service-fabric-reliable-actors-events.md)
 * [Réentrance des acteurs](service-fabric-reliable-actors-reentrancy.md)
 * [Diagnostics et surveillance des performances d’acteur](service-fabric-reliable-actors-diagnostics.md)
-* [Documentation de référence de l’API d’acteur](https://msdn.microsoft.com/library/azure/dn971626.aspx)
+* [Documentation de référence de l’API d’acteur](/previous-versions/azure/dn971626(v=azure.100))
 * [Exemple de code C#](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started)
 * [Exemple de code Java](https://github.com/Azure-Samples/service-fabric-java-getting-started)
 

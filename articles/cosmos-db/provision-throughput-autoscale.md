@@ -1,101 +1,90 @@
 ---
-title: Créer des conteneurs et des bases de données Azure Cosmos avec débit approvisionné de mise à l’échelle automatique.
-description: Découvrez les avantages et les cas d’usage et apprenez à approvisionner des bases de données et des conteneurs Azure Cosmos en débit approvisionné de mise à l’échelle automatique.
+title: Créer des conteneurs et des bases de données Azure Cosmos en mode de mise à l’échelle automatique
+description: Découvrez les avantages et les cas d’usage, et apprenez à approvisionner des bases de données et des conteneurs Azure Cosmos en mode de mise à l’échelle automatique.
 author: kirillg
 ms.author: kirillg
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 04/28/2020
-ms.openlocfilehash: 81a13dcb7955a7d46f485416bf9b7e4e7be4d9ac
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.date: 12/11/2020
+ms.custom: seo-nov-2020
+ms.openlocfilehash: ba0dd347c4ee2cb41b34c2fc34f1848a7295dc3a
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791712"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97368662"
 ---
-# <a name="create-azure-cosmos-containers-and-databases-with-autoscale-provisioned-throughput"></a>Créer des conteneurs et des bases de données Azure Cosmos en débit approvisionné de mise à l’échelle automatique
+# <a name="create-azure-cosmos-containers-and-databases-with-autoscale-throughput"></a>Créer des conteneurs et des bases de données Azure Cosmos en débit de mise à l’échelle automatique
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
-Azure Cosmos DB vous permet de configurer vos conteneurs avec un débit approvisionné standard (manuel) ou un débit approvisionné par mise à l’échelle automatique. Cet article décrit les avantages et les cas d’usage du mode de mise à l’échelle automatique.
+Dans Azure Cosmos DB, vous pouvez configurer un débit approvisionné standard (manuel) ou approvisionné en mode de mise à l’échelle automatique sur vos bases de données et conteneurs. Le débit approvisionné en mode de mise à l’échelle automatique dans Azure Cosmos DB vous permet de **mettre à l’échelle le débit (RU/s) de votre base de données ou conteneur automatiquement et instantanément**. Le débit est mis à l’échelle en fonction de l’utilisation, sans impact sur la disponibilité, la latence, le débit ou les performances de la charge de travail.
 
-> [!NOTE]
-> Vous pouvez [activer la mise à l’échelle automatique pour les nouveaux conteneurs et les nouvelles bases de données](#create-db-container-autoscale) uniquement. Il n’est pas disponible pour les conteneurs et bases de données existants.
+Le débit approvisionné en mode de mise à l’échelle automatique est adapté aux charges de travail stratégiques qui ont des modèles de trafic variables ou imprévisibles et qui nécessitent des contrats SLA sur des performances et une mise à l’échelle élevées. Cet article décrit les avantages et les cas d’usage du débit approvisionné en mode de mise à l’échelle automatique.
 
-En plus de l’approvisionnement standard du débit, vous pouvez désormais configurer des conteneurs Azure Cosmos en débit approvisionné de mise à l’échelle automatique. Les conteneurs et les bases de données configurés en débit approvisionné de mise à l’échelle automatique **effectueront automatiquement et immédiatement la mise à l’échelle du débit approvisionné en fonction des besoins de votre application, sans incidence sur la disponibilité, la latence, le débit ou les performances de la charge de travail de manière globale.**
+## <a name="benefits-of-autoscale"></a>Avantages de la mise à l’échelle automatique
 
-Lors de la configuration de conteneurs et de bases de données avec mise à l’échelle automatique, vous devez spécifier le débit maximal `Tmax` à ne pas dépasser. Les conteneurs peuvent ensuite mettre à l’échelle leur débit afin que `0.1*Tmax < T < Tmax`. En d’autres termes, les conteneurs et les bases de données évoluent instantanément en fonction des besoins de la charge de travail, passant de 10 % de la valeur de débit maximal que vous avez configurée à la valeur de débit maximal configurée. Après la configuration de la mise à l’échelle automatique, vous pouvez modifier le paramètre de débit maximal (`Tmax`) sur une base de données ou un conteneur à tout moment. Avec l’option de mise à l’échelle automatique, le débit minimal de 400 RU/s par conteneur ou base de données n’est plus applicable.
+Les bases de données et conteneurs Azure Cosmos configurés avec un débit approvisionné en mode de mise à l’échelle automatique présentent les avantages suivants :
 
-Le débit maximal spécifié sur le conteneur ou la base de données permet au système d’être utilisé dans la limite de stockage calculée. Si la limite de stockage est dépassée, le débit maximal est automatiquement ajusté à une valeur supérieure. Lorsque vous utilisez le débit du niveau de la base de données avec mise à l’échelle automatique, le nombre de conteneurs autorisés dans une base de données est calculé comme suit : `0.001*TMax`. Par exemple, si vous approvisionnez 20 000 RU/s en mise à l’échelle automatique, la base de données peut comporter 20 conteneurs.
+* **Simple :** La mise à l’échelle automatique élimine la complexité liée à la gestion de l’unité de requête/s avec des scripts personnalisés ou une capacité de mise à l’échelle manuelle. 
 
-## <a name="benefits-of-autoscale-provisioned-throughput"></a><a id="autoscale-benefits"></a> Avantages du débit approvisionné avec mise à l’échelle automatique
+* **Évolutifs :** Les bases de données et les conteneurs mettent automatiquement à l’échelle le débit approvisionné le cas échéant. Les connexions client et les applications ne sont pas interrompues et il n'y a aucun impact sur les contrats de niveau de service Azure Cosmos DB.
 
-Les conteneurs Azure Cosmos configurés avec mise à l’échelle automatique présentent les avantages suivants :
+* **Économiques :** la mise à l’échelle automatique permet d’optimiser l’utilisation et le coût de l’utilisation de l’unité de requête/s en mettant à l’échelle la taille des unités quand elles ne sont pas utilisées. Vous payez uniquement les ressources dont vos charges de travail ont besoin sur une base horaire. Sur l’ensemble des heures du mois, si vous définissez le nombre maximal de RU/s(Tmax) avec mise à l’échelle automatique et que vous utilisez la totalité de Tmax pour 66 % des heures ou moins, la mise à l’échelle automatique vous permettra de faire des économies. Pour en savoir plus, consultez l’article qui explique [comment choisir entre le débit provisionné standard (manuel) et avec mise à l’échelle automatique](how-to-choose-offer.md).
 
-* **Simple :** avec mise à l’échelle automatique, la complexité liée à la gestion manuelle du débit approvisionné (en unités de requête) et de la capacité des différents conteneurs disparaît.
+* **Hautement disponibles :** les bases de données et les conteneurs qui utilisent la mise à l’échelle automatique utilisent le même backend Azure Cosmos DB distribué à l'échelle mondiale, à tolérance de panne et à haute disponibilité pour garantir la durabilité des données et la haute disponibilité.
 
-* **Évolutifs :** avec mise à l’échelle automatique, les conteneurs font l’objet d’une mise à l’échelle transparente de la capacité de débit approvisionné en fonction des besoins. Les connexions client et les applications ne sont pas interrompues, et il n'y a aucun impact sur les contrats de niveau de service existants.
+## <a name="use-cases-of-autoscale"></a>Cas d’usage de la mise à l’échelle automatique
 
-* **Économiques :** lorsque vous utilisez des conteneurs configurés avec mise à l’échelle automatique, vous payez uniquement pour les ressources dont vos charges de travail ont besoin sur une base horaire.
+Les cas d’usage de la mise à l’échelle automatique incluent :
 
-* **Hautement disponibles :** avec mise à l’échelle automatique, les conteneurs utilisent le même backend distribué à l’échelle mondiale, à tolérance de pannes et à haute disponibilité afin de garantir la durabilité et la haute disponibilité des données.
+* **Charges de travail imprévisibles ou variables :** Lorsque vos charges de travail ont des pics variables ou imprévisibles dans le cadre de l’utilisation, la mise à l’échelle automatique vous aide à mettre à l’échelle automatiquement vers le bas ou vers le haut en fonction de l’utilisation. Les exemples incluent des sites web de vente au détail qui ont des modèles de trafic différents en fonction du caractère saisonnier ; des charges de travail IOT qui ont des pics à différents moments de la journée ; des applications métier qui voient l’utilisation maximale plusieurs fois par mois ou par an et bien plus encore. Avec la mise à l’échelle automatique, vous n’avez plus besoin de configurer manuellement la capacité au moment des pics ou moyenne. 
 
-## <a name="use-cases-of-autoscale-provisioned-throughput"></a><a id="autoscale-usecases"></a> Cas d’usage du débit approvisionné avec mise à l’échelle automatique
+* **Nouvelles applications :** Si vous développez une nouvelle application et que vous n’êtes pas sûr du débit (RU/s) dont vous avez besoin, la mise à l’échelle automatique facilite la prise en main. Vous pouvez commencer par le point d’entrée de la mise à l’échelle automatique de 400 à 4 000 RU/s, analyser votre utilisation et déterminer l’unité de requête/s appropriée au fil du temps.
 
-Les cas d’usage des conteneurs Azure Cosmos configurés en mode de mise à l’échelle automatique peuvent être les suivants :
+* **Applications peu utilisées :** Si vous avez une application qui est utilisée uniquement pendant quelques heures plusieurs fois par jour, semaine ou mois, par exemple un site d’application/web/blog à faible volume, la mise à l’échelle automatique ajuste la capacité pour gérer l’utilisation des pics et s’adapte à la mise à l’échelle. 
 
-* **Charges de travail variables :** Lorsque vous exécutez une application peu utilisée avec un pic d’utilisation d’une heure à plusieurs heures chaque jour ou plusieurs fois par an. Cela concerne par exemple les applications de ressources humaines, de budgétisation et de création de rapports opérationnels. Dans de tels scénarios, il est possible d’utiliser les conteneurs configurés avec mise à l’échelle automatique et vous n’avez plus besoin de configurer manuellement la capacité maximale ou moyenne.
+* **Charges de travail de développement et de test :** Si votre équipe ou vous-même utilisez des bases de données et des conteneurs Azure Cosmos pendant les heures de travail, mais que vous n’en avez pas besoin la nuit ou pendant le week-end, la mise à l’échelle automatique vous permet de réduire les coûts en réduisant au minimum en cas de non utilisation. 
 
-* **Charges de travail imprévisibles :** lorsque vous exécutez des charges de travail pour lesquelles la base de données est utilisée tout au long de la journée, mais avec également des pics d'activité difficiles à prévoir. Cela peut par exemple concerner un site dédié aux conditions de circulation dont l'activité augmente brusquement lorsque les prévisions météorologiques changent. Les conteneurs configurés avec mise à l’échelle automatique augmentent leur capacité pour répondre aux besoins du pic de charge de l’application et la réduisent lorsque le pic d’activité est passé.
+* **Charges de travail/requêtes de production planifiées :** Si vous avez une série de demandes, d’opérations ou de requêtes planifiées que vous souhaitez exécuter pendant les périodes d’inactivité, vous pouvez le faire facilement avec la mise à l’échelle automatique. Lorsque vous devez exécuter la charge de travail, le débit est automatiquement mis à l’échelle jusqu’à ce qui est nécessaire et diminue après. 
 
-* **Nouvelles applications :** lorsque vous déployez une nouvelle application sans connaître le nombre d'unités de requête (débit approvisionné) dont vous avez besoin. Les conteneurs configurés avec mise à l’échelle automatique permettent une mise à l’échelle automatique en fonction des besoins en capacité et des exigences de votre application.
+La création d’une solution personnalisée pour ces problèmes nécessite non seulement un temps considérable, mais également une complexité dans la configuration ou le code de votre application. La mise à l’échelle automatique met en œuvre les scénarios prêts à l’emploi ci-dessus et élimine la nécessité d’une mise à l’échelle personnalisée ou manuelle de la capacité. 
 
-* **Applications peu utilisées :** lorsque vous disposez d'une application qui n'est utilisée que quelques heures plusieurs fois par jour, par semaine ou par mois, comme une application à faible volume, un site web ou un blog.
+## <a name="how-autoscale-provisioned-throughput-works"></a>Comment fonctionne le débit approvisionné en mode de mise à l’échelle automatique
 
-* **Bases de données de développement et de test :** Si certains de vos développeurs utilisent des conteneurs pendant les heures de travail, mais n’en ont pas besoin à la nuit ou pendant les week-ends. La configuration des conteneurs avec mise à l’échelle automatique permet de réduire leur capacité au minimum lorsqu’ils ne sont pas utilisés.
+Lors de la configuration de conteneurs et de bases de données avec mise à l’échelle automatique, vous devez spécifier le débit maximal `Tmax` requis. Azure Cosmos DB met à l’échelle le débit `T` tel que `0.1*Tmax <= T <= Tmax`. Par exemple, si vous définissez le débit maximal sur 20 000 RU/s, le débit sera mis à l’échelle entre 2 000 et 20 000 RU/s. Étant donné que la mise à l’échelle est automatique et instantanée, à tout moment, vous pouvez consommer jusqu’à `Tmax` approvisionné sans retard. 
 
-* **Charges de travail/requêtes de production planifiées :** si vous disposez d'une série de demandes/opérations/requêtes planifiées sur un même conteneur et que vous souhaitez réduire le débit au strict minimum pendant les périodes d'inactivité, vous pouvez désormais facilement le faire. Lorsqu’une requête/demande planifiée est transmise à un conteneur configuré avec mise à l’échelle automatique, elle effectue automatiquement un scale-up en fonction des besoins pour exécuter l’opération.
+Vous êtes facturé toutes les heures pour le débit le plus élevé `T` sur lequel le système est mis à l’échelle dans l’heure.
 
-Les solutions aux problèmes précédents requièrent non seulement un temps considérable en termes d'implémentation, mais elles compliquent également la configuration ou votre code, et une intervention manuelle est souvent nécessaire pour remédier à ces problèmes. La mise à l’échelle automatique active les scénarios ci-dessus prêts à l’emploi, afin que vous n’ayez plus à vous soucier de ces problèmes.
+Le point d’entrée pour le débit maximal de mise à l’échelle automatique `Tmax` démarre à 4 000 RU/s, qui est mis à l’échelle entre 400 et 4 000 RU/s. Vous pouvez définir `Tmax` par incréments de 1 000 RU/s et modifier la valeur à tout moment.  
 
-## <a name="comparison--standard-manual-vs-autoscale-provisioned-throughput"></a>Comparaison : débit approvisionné standard (manuel) contre débit avec mise à l’échelle automatique
+## <a name="enable-autoscale-on-existing-resources"></a>Activer la mise à l’échelle automatique sur les ressources existantes
 
-|  | Conteneurs configurés avec débit approvisionné standard  | Conteneurs configurés avec débit approvisionné avec mise à l’échelle automatique |
-|---------|---------|---------|
-| **Débit approvisionné** | Approvisionné manuellement. | Mise à l’échelle automatique et instantanée en fonction des modèles d’utilisation de la charge de travail. |
-| **Limitation du nombre de demandes/opérations (429)**  | Peut intervenir si la consommation dépasse la capacité approvisionnée. | Ne se produira pas si le débit consommé est compris dans le débit maximal que vous choisissez avec la mise à l’échelle automatique.   |
-| **Planification de la capacité** |  Vous devez procéder à une planification initiale de la capacité et approvisionner le débit dont vous avez besoin. |    Vous n'avez pas à vous soucier de la planification de la capacité. Le système prend automatiquement en charge la planification et la gestion de la capacité. |
-| **Tarification** | Approvisionnement manuel en unités de requête (RU) par heure. | Pour les comptes à une seule région d’écriture, le débit utilisé est facturé sur une base horaire, en utilisant le taux de RU/s par heure du mode de mise à l’échelle automatique. <br/><br/>Pour les comptes à plusieurs régions d’écriture, aucuns frais supplémentaires ne s’appliquent au mode de mise à l’échelle automatique. Vous payez le débit utilisé sur une base horaire en utilisant le même taux de RU multimaîtres par heure. |
-| **Idéal pour les types de charges de travail** |  Charges de travail prévisibles et stables|   Charges de travail imprévisibles et variables  |
-
-## <a name="create-a-database-or-a-container-with-autoscale"></a><a id="create-db-container-autoscale"></a> Créer une base de données ou un conteneur avec mise à l’échelle automatique
-
-Vous pouvez configurer la mise à l’échelle automatique pour les nouvelles bases de données ou les nouveaux conteneurs lors de leur création via le Portail Azure. Procédez comme suit pour créer une base de données ou un conteneur, activer la mise à l’échelle automatique et spécifier le débit maximal (RU/s).
-
-1. Connectez-vous au [Portail Azure](https://portal.azure.com) ou à l’ [explorateur Azure Cosmos DB.](https://cosmos.azure.com/)
-
-1. Accédez à votre compte Azure Cosmos DB et ouvrez l’onglet **Explorateur de données**.
-
-1. Sélectionnez **Nouveau conteneur**. Entrez un nom pour votre base de données, conteneur, ainsi qu'une clé de partition. Sous **Débit**, sélectionnez l’option **Mise à l’échelle automatique** et choisissez le débit maximal (RU/s) que la base de données ou le conteneur ne peut pas dépasser lors de l’utilisation de l’option de mise à l’échelle automatique.
-
-   ![Création d’un conteneur et configuration du débit de mise à l’échelle automatique](./media/provision-throughput-autoscale/create-container-autoscale-mode.png)
-
-1. Sélectionnez **OK**.
-
-Pour créer une base de données à débit partagé avec la mise à l’échelle automatique en sélectionnant l’option **Approvisionner le débit d’une base de données**.
+Utilisez le [portail Azure](how-to-provision-autoscale-throughput.md#enable-autoscale-on-existing-database-or-container), le [modèle Azure Resource Manager](how-to-provision-autoscale-throughput.md#azure-resource-manager), [CLI](how-to-provision-autoscale-throughput.md#azure-cli) ou [PowerShell](how-to-provision-autoscale-throughput.md#azure-powershell) pour activer la mise à l’échelle automatique sur une base de données ou un conteneur existant. Vous pouvez basculer entre la mise à l’échelle automatique et le débit approvisionné standard (manuel) à tout moment. Pour plus d’informations, consultez [cette documentation](autoscale-faq.md#how-does-the-migration-between-autoscale-and-standard-manual-provisioned-throughput-work).
 
 ## <a name="throughput-and-storage-limits-for-autoscale"></a><a id="autoscale-limits"></a> Limites de débit et de stockage pour la mise à l’échelle automatique
 
-Le tableau suivant indique les limites maximales de débit et de stockage pour les différentes options avec mise à l’échelle automatique :
+Pour toute valeur de `Tmax`, la base de données ou le conteneur peut stocker un total de `0.01 * Tmax GB`. Une fois ce volume de stockage atteint, l’unité de requête/s maximale est automatiquement augmenté en fonction de la nouvelle valeur de stockage, sans aucun impact sur votre application. 
 
-|Limite de débit maximale  |Limite de stockage maximale  |
-|---------|---------|
-|4 000 RU/s  |   50 Go    |
-|20 000 RU/s  |  200 Go  |
-|100 000 RU/s    |  1 To   |
-|500 000 RU/s    |  5 To  |
+Par exemple, si vous démarrez avec une unité de requête/s maximale de 50 000 RU/s (avec une mise à l’échelle de 5 000 à 50 000 RU/s), vous pouvez stocker jusqu’à 500 Go de données. Si vous dépassez 500 Go, par exemple, si le stockage est à présent de 600 Go, la nouvelle unité de requête/s maximale sera de 60 000 RU/s (les mises à l’échelle entre 6 000 et 60 000 RU/s).
+
+Lorsque vous utilisez le débit au niveau de la base de données avec la mise à l’échelle automatique, vous pouvez faire en sorte que les 25 premiers conteneurs partagent une unité de requête/s maximale de 4 000 (échelle entre 400 et 4 000 RU/s), à condition que vous ne dépassiez pas 40 Go de stockage. Pour plus d’informations, consultez [cette documentation](autoscale-faq.md#can-i-change-the-max-rus-on-the-database-or-container).
+
+## <a name="comparison--containers-configured-with-manual-vs-autoscale-throughput"></a>Comparaison : conteneurs configurés en mode manuel contre débit de mise à l’échelle automatique
+Pour plus d’informations, consultez cette [documentation](how-to-choose-offer.md) sur la façon de choisir entre le débit standard (manuel) et le débit de mise à l’échelle automatique.  
+
+|| Conteneurs avec débit standard (manuel)  | Conteneurs avec débit de mise à l’échelle automatique |
+|---------|---------|---------|
+| **Débit approvisionné (RU/s)** | Approvisionné manuellement. | Mise à l’échelle automatique et instantanée en fonction des modèles d’utilisation de la charge de travail. |
+| **Limitation du nombre de demandes/opérations (429)**  | Peut intervenir si la consommation dépasse la capacité approvisionnée. | Cela ne se produira pas si vous consommez des unités de requête/s dans la plage de débit de mise à l’échelle automatique que vous avez définie.    |
+| **Planification de la capacité** |  Vous devez procéder à une planification de la capacité et approvisionner le débit exact dont vous avez besoin. |    Le système prend automatiquement en charge la planification et la gestion de la capacité. |
+| **Tarification** | Vous payez pour l’unité de requête/s approvisionnée manuellement par heure, à l’aide de [l’unité de requête/s standard (manuelle) par taux horaire](https://azure.microsoft.com/pricing/details/cosmos-db/). | Vous payez par heure pour l’unité de requête/s la plus élevée pour laquelle le système effectue un scale-up dans l’heure. <br/><br/> Pour les comptes à une seule région d’écriture, vous payez pour l’unité de requête/s utilisée sur une base horaire, en utilisant [l’unité de requête/s de mise à l’échelle automatique par taux horaire](https://azure.microsoft.com/pricing/details/cosmos-db/). <br/><br/>Pour les comptes à plusieurs régions d’écriture, aucuns frais supplémentaires ne s’appliquent au mode de mise à l’échelle automatique. Vous payez le débit utilisé sur une base horaire en utilisant le même [taux horaire de RU/s pour les écritures multirégions](https://azure.microsoft.com/pricing/details/cosmos-db/). |
+| **Idéal pour les types de charges de travail** |  Charges de travail prévisibles et stables|   Charges de travail imprévisibles et variables  |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Examinez le [FAQ sur la mise à l’échelle automatique](autoscale-faq.md).
-* En savoir plus sur les [partitions logiques](partition-data.md).
-* Découvrez comment [approvisionner le débit sur un conteneur Azure Cosmos](how-to-provision-container-throughput.md).
-* Découvrez comment [approvisionner le débit sur une base de données Azure Cosmos](how-to-provision-database-throughput.md).
+* Découvrez comment [choisir entre le débit manuel et de mise à l’échelle automatique](how-to-choose-offer.md).
+* Découvrez comment [approvisionner le débit de mise à l’échelle automatique sur une base de données ou un conteneur Azure Cosmos](how-to-provision-autoscale-throughput.md).
+* En savoir plus sur le [partitionnement](partitioning-overview.md) dans Azure Cosmos DB.
+
+

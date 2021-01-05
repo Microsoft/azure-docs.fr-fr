@@ -7,13 +7,13 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 09/06/2019
-ms.openlocfilehash: 4a763a3bb4d46ba03808423d4d1283381c1174a3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 12/04/2020
+ms.openlocfilehash: 87465ff381c62343a11c54130378b48580ca40e2
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605390"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96621640"
 ---
 # <a name="mapping-data-flow-debug-mode"></a>Mode de débogage du mappage de flux de données
 
@@ -25,13 +25,18 @@ Le mode de débogage du flux de données de mappage d’Azure Data Factory perme
 
 ![Curseur de débogage](media/data-flow/debugbutton.png "Curseur de débogage")
 
-Quand vous activez le curseur, vous êtes invité à sélectionner la configuration de runtime d’intégration à utiliser. Si vous choisissez AutoResolveIntegrationRuntime, un cluster comprenant huit cœurs de calcul général avec une durée de vie de 60 minutes est lancé. Pour plus d’informations sur les runtimes d’intégration de flux de données, consultez [Performances de flux de données](concepts-data-flow-performance.md#increasing-compute-size-in-azure-integration-runtime).
+Quand vous activez le curseur, vous êtes invité à sélectionner la configuration de runtime d’intégration à utiliser. Si vous choisissez AutoResolveIntegrationRuntime, un cluster comprenant 8 cœurs de calcul général avec une durée de vie par défaut de 60 minutes est lancé. Si vous souhaitez autoriser un plus grand nombre d’équipes inactives avant l’expiration de votre session, vous pouvez choisir un paramètre TTL plus élevé. Pour plus d’informations sur les runtimes d’intégration de flux de données, consultez [Performances de flux de données](concepts-data-flow-performance.md#ir).
 
-![Déboguer la sélection IR](media/data-flow/debugbutton2.png "Déboguer la sélection IR")
+![Déboguer la sélection IR](media/data-flow/debug-new-1.png "Déboguer la sélection IR")
 
 Lorsque le mode débogage est activé, vous allez générer de manière interactive votre flux de données avec un cluster Spark actif. La session se ferme dès que vous désactivez le débogage dans Azure Data Factory. Prenez connaissance des frais horaires engendrés par Azure Databricks pendant la durée d’activation de la session de débogage.
 
 Dans la plupart des cas, nous vous recommandons de créer vos flux de données en mode débogage pour que vous puissiez valider votre logique métier et afficher vos transformations de données avant de publier votre travail dans Azure Data Factory. Utilisez le bouton « Débogage » sur le panneau du pipeline pour tester votre flux de données dans un pipeline.
+
+![Afficher les sessions de débogage du flux de données](media/iterative-development-debugging/view-dataflow-debug-sessions.png)
+
+> [!NOTE]
+> Chaque session de débogage qu’un utilisateur démarre à partir de l’interface utilisateur de son navigateur ADF est une nouvelle session avec son propre cluster Spark. Vous pouvez utiliser la vue de supervision pour les sessions de débogage ci-dessus pour afficher et gérer les sessions de débogage par fabrique. Vous êtes facturé pour chaque heure d’exécution de chaque session de débogage, y compris la durée de vie.
 
 ## <a name="cluster-status"></a>État du cluster
 
@@ -41,13 +46,15 @@ Une fois le débogage terminé, désactivez-le à l’aide du commutateur pour q
 
 ## <a name="debug-settings"></a>Paramètres de débogage
 
-Les paramètres de débogage peuvent être modifiés en cliquant sur « Paramètres de débogage » sur la barre d’outils du canevas Flux de données. Vous pouvez sélectionner la limite de ligne ou la source de fichier à utiliser pour chacune de vos transformations Source ici. Les limites de lignes de ce paramètre s’appliquent uniquement à la session de débogage actuelle. Vous pouvez aussi sélectionner le service lié intermédiaire à utiliser pour une source SQL Data Warehouse. 
+Une fois que vous activez le mode débogage, vous pouvez modifier la façon dont un flux de données affiche un aperçu des données. Les paramètres de débogage peuvent être modifiés en cliquant sur « Paramètres de débogage » sur la barre d’outils du canevas Flux de données. Vous pouvez sélectionner la limite de ligne ou la source de fichier à utiliser pour chacune de vos transformations Source ici. Les limites de lignes de ce paramètre s’appliquent uniquement à la session de débogage actuelle. Vous pouvez aussi sélectionner le service lié intermédiaire à utiliser pour une source Azure Synapse Analytics. 
 
 ![Paramètres de débogage](media/data-flow/debug-settings.png "Paramètres de débogage")
 
 Si vous avez des paramètres dans votre flux de données ou dans l’un de ses jeux de données référencés, vous pouvez spécifier les valeurs à utiliser pendant le débogage en sélectionnant l'onglet **Paramètres**.
 
 ![Configuration des paramètres de débogage](media/data-flow/debug-settings2.png "Configuration des paramètres de débogage")
+
+Le runtime d’intégration par défaut utilisé pour le mode débogage dans les flux de données ADF est un petit nœud Worker à 4 cœurs avec un nœud de pilote unique à 4 cœurs. Ceci fonctionne correctement avec des échantillons de données réduits quand vous testez la logique de votre flux de données. Si vous étendez les limites du nombre de lignes dans vos paramètres de débogage pour l’aperçu des données ou que vous définissez un nombre plus élevé de lignes échantillonnées dans votre source pour le débogage du pipeline, vous pouvez envisager de définir un environnement de calcul plus grand dans un nouvel Azure Integration Runtime. Vous pouvez ensuite redémarrer votre session de débogage et utiliser l’environnement de calcul agrandi.
 
 ## <a name="data-preview"></a>Aperçu des données
 
@@ -60,6 +67,8 @@ Quand le débogage est activé, l’onglet d’aperçu des données s’allume d
 
 Quand vous exécutez le mode débogage dans Data Flow, vos données ne sont pas écrites dans la transformation Sink. Le but d’une session de débogage est de servir d’atelier de test pour vos transformations. Les récepteurs ne sont pas obligatoires durant le débogage et sont ignorés dans votre flux de données. Si vous souhaitez tester l’écriture des données dans votre récepteur, exécutez le flux de données à partir d’un pipeline Azure Data Factory et utilisez l’exécution Débogage à partir d’un pipeline.
 
+L’aperçu des données est un instantané de vos données transformées qui utilise les limites du nombre de lignes et l’échantillonnage des données provenant des trames de données dans la mémoire Spark. Par conséquent, les pilotes du récepteur ne sont pas utilisés ou testés dans ce scénario.
+
 ### <a name="testing-join-conditions"></a>Test des conditions de jointure
 
 Lors du test unitaire des transformations de jointure, de recherche ou Exists, veillez à utiliser un petit ensemble de données connues pour votre test. Vous pouvez utiliser l’option Paramètres de débogage évoquée plus haut pour définir un fichier temporaire à utiliser pour votre test. Cette opération est nécessaire, car lors de la limitation ou de l’échantillonnage de lignes à partir d’un jeu de données volumineux, vous ne pouvez pas prédire quelles lignes et quelles clés seront lues dans le flux dans le cadre du test. Le résultat n’est pas déterministe, ce qui signifie que vos conditions de jointure peuvent échouer.
@@ -68,15 +77,15 @@ Lors du test unitaire des transformations de jointure, de recherche ou Exists, v
 
 Une fois que vous voyez l’aperçu des données, vous pouvez générer une transformation rapide pour convertir en typecast, supprimer ou modifier une colonne. Cliquez sur l’en-tête de colonne, puis sélectionnez l’une des options dans la barre d’outils d’aperçu des données.
 
-![Actions rapides](media/data-flow/quick-actions1.png "Actions rapides")
+![Capture d’écran montrant la barre d’outils d’aperçu des données avec les options : Typecast, Modifier, Statistiques et Supprimer.](media/data-flow/quick-actions1.png "Actions rapides")
 
 Une fois que vous avez sélectionné une modification, l’aperçu des données est immédiatement actualisé. Cliquez sur **Confirmer** dans le coin supérieur droit pour générer une nouvelle transformation.
 
-![Actions rapides](media/data-flow/quick-actions2.png "Actions rapides")
+![Capture d’écran montrant le bouton Confirmer.](media/data-flow/quick-actions2.png "Actions rapides")
 
 **Typecast** et **Modifier** permettent de générer une transformation de colonne dérivée et **Supprimer** de générer une transformation de sélection (Select).
 
-![Actions rapides](media/data-flow/quick-actions3.png "Actions rapides")
+![Capture d’écran montrant les paramètres de la colonne dérivée.](media/data-flow/quick-actions3.png "Actions rapides")
 
 > [!NOTE]
 > Si vous modifiez votre flux de données, vous devez extraire à nouveau l’aperçu des données avant d’ajouter une transformation rapide.

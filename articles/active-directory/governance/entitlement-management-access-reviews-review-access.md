@@ -3,25 +3,25 @@ title: Révision de l’accès d’un package d’accès dans la gestion des dro
 description: Découvrez comment effectuer une révision d’accès pour les packages d’accès de gestion des droits d’utilisation dans les révisions d’accès Azure Active Directory (préversion).
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 11/01/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 99de022b7259b33baab3aa825673a8f85e932bff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d1115c08214db19227b4b8d7be671ce4da1cf2b1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78968742"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87798595"
 ---
 # <a name="review-access-of-an-access-package-in-azure-ad-entitlement-management"></a>Révision de l’accès d’un package d’accès dans la gestion des droits d’utilisation Azure AD
 

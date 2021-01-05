@@ -11,18 +11,18 @@ Customer intent: I want only resources in a virtual network subnet to access an 
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure-services
 ms.date: 03/14/2018
 ms.author: kumud
-ms.custom: ''
-ms.openlocfilehash: f2dcc714bc9052dd51f114e24f0b9bd74b87480c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 1a1eab081a7c1e83a57ef4735c6eb5248d92defc
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74186403"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94734104"
 ---
 # <a name="restrict-network-access-to-paas-resources-with-virtual-network-service-endpoints-using-the-azure-cli"></a>Restreindre l’accès réseau aux ressources PaaS avec des points de terminaison de service de réseau virtuel en utilisant Azure CLI
 
@@ -35,11 +35,11 @@ Les points de terminaison de service de réseau virtuel permettent de restreindr
 * Vérifier l’accès à une ressource à partir d’un sous-réseau
 * Vérifier que l’accès à une ressource est refusé à partir d’un sous-réseau et d’Internet
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite que vous exécutiez la version 2.0.28 d’Azure CLI, ou une version ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+- Cet article nécessite la version 2.0.28 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-virtual-network"></a>Créez un réseau virtuel
 
@@ -272,7 +272,7 @@ La création de la machine virtuelle ne nécessite que quelques minutes. Une foi
 
 ## <a name="confirm-access-to-storage-account"></a>Vérifier l’accès au compte de stockage
 
-Ouvrez une session SSH avec la machine virtuelle *myVmPrivate*. Remplacez *\<publicIpAddress>* par l’adresse IP publique de votre machine virtuelle *myVmPrivate*.
+Ouvrez une session SSH avec la machine virtuelle *myVmPrivate*. Remplacez *\<publicIpAddress>* par l’adresse IP publique de votre machine virtuelle *myVmPrivate*.
 
 ```bash 
 ssh <publicIpAddress>

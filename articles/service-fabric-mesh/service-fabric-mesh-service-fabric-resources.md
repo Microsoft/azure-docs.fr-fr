@@ -6,12 +6,12 @@ ms.topic: conceptual
 ms.date: 10/23/2018
 ms.author: vturecek
 ms.custom: mvc, devcenter
-ms.openlocfilehash: 0ae2ed163560aee4c0c3525ab31910e37afaa5b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a7f25d4156c3d2671e1a15a1253ed7ba22265af0
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229517"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91354868"
 ---
 # <a name="introduction-to-service-fabric-resource-model"></a>Présentation du modèle de ressource Azure Service Fabric
 
@@ -66,7 +66,7 @@ Les ressources Secrets peuvent être déployées, indépendantes de toute ressou
 
 Les conteneurs mettent souvent des disques temporaires à disposition. Toutefois, les disques temporaires sont éphémères. Quand un conteneur plante, vous obtenez un nouveau disque temporaire et perdez vos informations. Il est également difficile de partager des informations sur les disques temporaires avec d’autres conteneurs. Les volumes sont des répertoires montés à l’intérieur de vos instances de conteneur, que vous pouvez utiliser pour conserver l’état. Les volumes vous offrent un stockage de fichiers universel et vous permettent de lire/écrire des fichiers à l’aide d’API de fichier d’E/S de disque normal. La ressource Volume est un moyen déclaratif de décrire la façon dont un répertoire est monté et le stockage de sauvegarde qui y est associé (Azure Files Volume ou Service Fabric Reliable Volume).  Pour plus d’informations, consultez [Stockage d’état](service-fabric-mesh-storing-state.md#volumes).
 
-![Volumes][Image3]
+![Le diagramme montre un flux qui passe d’un service à un volume de disque, et qui passe ensuite à Service Fabric Reliable Volume (puis à un disque local répliqué) et à Azure Files Volume (puis au stockage réseau).][Image3]
 
 ## <a name="programming-models"></a>Modèles de programmation
 Une ressource de service ne requiert qu’une image conteneur pour s’exécuter, qui est référencée dans les packages de code associés à la ressource. Vous pouvez exécuter n’importe quel code, écrit dans n’importe quel langage, à l’aide de n’importe quelle infrastructure au sein du conteneur sans avoir besoin de connaître ou d’utiliser des API spécifiques de Service Fabric mesh. 

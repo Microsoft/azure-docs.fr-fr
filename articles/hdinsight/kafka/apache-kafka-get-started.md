@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: quickstart
 ms.custom: mvc
 ms.date: 04/29/2020
-ms.openlocfilehash: 0f6e1a7b8ac4dce0504fca5f03090588a75ae1ef
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 3f0b3da7d225e4b2adca3f2d4b08cff9b56e2520
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82732439"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92534598"
 ---
 # <a name="quickstart-create-apache-kafka-cluster-in-azure-hdinsight-using-azure-portal"></a>Démarrage rapide : Créer un cluster Apache Kafka dans Azure HDInsight à l’aide du portail Azure
 
@@ -37,13 +37,13 @@ Pour créer un cluster Apache Kafka sur HDInsight, effectuez les étapes suivant
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Dans le menu du haut, sélectionnez **+ Créer une ressource**.
+1. Dans le menu du haut, sélectionnez **+ Créer une ressource** .
 
     ![Portail Azure > Créer une ressource > HDInsight](./media/apache-kafka-get-started/azure-portal-create-resource.png)
 
-1. Sélectionnez **Analyse** > **Azure HDInsight** pour accéder à la page **Créer un cluster HDInsight**.
+1. Sélectionnez **Analyse** > **Azure HDInsight** pour accéder à la page **Créer un cluster HDInsight** .
 
-1. Sous l’onglet **De base**, fournissez les informations suivantes :
+1. Sous l’onglet **De base** , fournissez les informations suivantes :
 
     |Propriété  |Description  |
     |---------|---------|
@@ -53,46 +53,46 @@ Pour créer un cluster Apache Kafka sur HDInsight, effectuez les étapes suivant
     |Région    | Dans la liste déroulante, sélectionnez une région dans laquelle le cluster est créé.  Choisissez une région proche de votre emplacement pour obtenir de meilleures performances. |
     |Type de cluster| Choisissez **Sélectionner un type de cluster** pour ouvrir une liste. Dans la liste, sélectionnez **Kafka** comme type de cluster.|
     |Version|La version par défaut du type de cluster sera spécifiée. Sélectionnez une version dans la liste déroulante si vous souhaitez en spécifier une différente.|
-    |Nom d’utilisateur et mot de passe du cluster    | Le nom de connexion par défaut est **admin**. Le mot de passe doit comporter au moins 10 caractères et inclure au moins un chiffre, une lettre majuscule, une lettre minuscule et un caractère non alphanumérique (à l’exception de ’ " ` \). Veillez à **ne pas indiquer** des mots de passe courants comme « Pass@word1 ».|
-    |Nom d’utilisateur SSH (Secure Shell) | Le nom d’utilisateur par défaut est **sshuser**.  Vous pouvez fournir un autre nom pour le nom d’utilisateur SSH. |
+    |Nom d’utilisateur et mot de passe du cluster    | Le nom de connexion par défaut est **admin** . Le mot de passe doit comporter au moins 10 caractères et inclure au moins un chiffre, une lettre majuscule, une lettre minuscule et un caractère non alphanumérique (à l’exception de ’ " ` \). Veillez à **ne pas indiquer** des mots de passe courants comme « Pass@word1 ».|
+    |Nom d’utilisateur SSH (Secure Shell) | Le nom d’utilisateur par défaut est **sshuser** .  Vous pouvez fournir un autre nom pour le nom d’utilisateur SSH. |
     |Utiliser le mot de passe de connexion au cluster pour SSH| Cochez cette case pour utiliser le même mot de passe utilisateur SSH que celui fourni pour l’utilisateur de connexion au cluster.|
 
    ![Portail Azure >Créer un cluster > Informations de base](./media/apache-kafka-get-started/azure-portal-cluster-basics.png)
 
-    Chaque région Azure (emplacement) fournit des _domaines d’erreur_. Un domaine d’erreur est un regroupement logique de matériel sous-jacent dans un datacenter Azure. Chaque domaine d’erreur partage une source d’alimentation et un commutateur réseau communs. Les machines virtuelles et les disques managés mettant en œuvre les nœuds au sein d’un cluster HDInsight sont répartis dans ces domaines d’erreur. Cette architecture limite l’impact potentiel des défaillances de matériel physique.
+    Chaque région Azure (emplacement) fournit des _domaines d’erreur_ . Un domaine d’erreur est un regroupement logique de matériel sous-jacent dans un datacenter Azure. Chaque domaine d’erreur partage une source d’alimentation et un commutateur réseau communs. Les machines virtuelles et les disques managés mettant en œuvre les nœuds au sein d’un cluster HDInsight sont répartis dans ces domaines d’erreur. Cette architecture limite l’impact potentiel des défaillances de matériel physique.
 
-    Pour garantir la haute disponibilité des données, sélectionnez une région (emplacement) comportant __trois domaines d’erreur__. Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/windows/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
+    Pour garantir la haute disponibilité des données, sélectionnez une région (emplacement) comportant __trois domaines d’erreur__ . Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
 
     Sélectionnez le bouton **Suivant : Stockage >>** pour passer aux paramètres de stockage.
 
-1. À partir de l’onglet **Stockage**, indiquez les valeurs suivantes :
+1. À partir de l’onglet **Stockage** , indiquez les valeurs suivantes :
 
     |Propriété  |Description  |
     |---------|---------|
-    |Type de stockage principal|Utilisez la valeur par défaut : **Stockage Azure**.|
-    |Méthode de sélection|Utilisez la valeur par défaut : **Sélectionner dans la liste**.|
-    |Compte de stockage principal|Utilisez la liste déroulante pour sélectionner un compte de stockage existant, ou sélectionnez **Créer nouveau**. Si vous créez un compte, son nom doit contenir entre 3 et 24 caractères alphanumériques minuscules.|
+    |Type de stockage principal|Utilisez la valeur par défaut : **Stockage Azure** .|
+    |Méthode de sélection|Utilisez la valeur par défaut : **Sélectionner dans la liste** .|
+    |Compte de stockage principal|Utilisez la liste déroulante pour sélectionner un compte de stockage existant, ou sélectionnez **Créer nouveau** . Si vous créez un compte, son nom doit contenir entre 3 et 24 caractères alphanumériques minuscules.|
     |Conteneur|Utilisez la valeur renseignée automatiquement.|
 
     ![Prise en main de HDInsight Linux en fournissant les valeurs de stockage du cluster](./media/apache-kafka-get-started/azure-portal-cluster-storage.png "Fournir des valeurs de stockage pour la création d’un cluster HDInsight")
 
-    Sélectionnez l’onglet **Sécurité + réseau**.
+    Sélectionnez l’onglet **Sécurité + réseau** .
 
 1. Pour ce guide de démarrage rapide, laissez la valeur par défaut des paramètres de sécurité. Pour en savoir plus sur le pack Sécurité Entreprise, visitez [Configurer un cluster HDInsight avec le pack Sécurité Entreprise en utilisant Azure Active Directory Domain Services](../domain-joined/apache-domain-joined-configure-using-azure-adds.md). Pour savoir comment utiliser votre propre clé pour le chiffrement de disque Apache Kafka, consultez [Chiffrement de disque avec les clés gérées par le client](../disk-encryption.md).
 
-   Si vous souhaitez connecter votre cluster à un réseau virtuel, sélectionnez un réseau virtuel à partir de la liste déroulante du **Réseau virtuel**.
+   Si vous souhaitez connecter votre cluster à un réseau virtuel, sélectionnez un réseau virtuel à partir de la liste déroulante du **Réseau virtuel** .
 
    ![Ajouter un cluster à un réseau virtuel](./media/apache-kafka-get-started/azure-portal-cluster-security-networking-kafka-vnet.png)
 
-    Sélectionnez l’onglet **Configuration + Tarifs**.
+    Sélectionnez l’onglet **Configuration + Tarifs** .
 
 1. Pour garantir la disponibilité d’Apache Kafka sur HDInsight, le __nombre de nœuds__ de l’entrée **Nœud Worker** doit être supérieur ou égal à 3. La valeur par défaut est 4.
 
-    L’entrée relative aux **disques standards par nœud worker** configure la scalabilité d’Apache Kafka sur HDInsight. Apache Kafka sur HDInsight utilise le disque local des machines virtuelles du cluster pour stocker les données. En raison de son utilisation intensive des E/S, Apache Kafka utilise [Azure Disques managés](../../virtual-machines/windows/managed-disks-overview.md) pour obtenir un débit élevé et davantage de stockage à chaque nœud. Le type de disque managé peut être soit __Standard__ (HDD), soit __Premium__ (SSD). Le type de disque dépend de la taille de la machine virtuelle utilisée par les nœuds de travail (brokers Apache Kafka). Les disques Premium sont utilisés automatiquement avec les machines virtuelles des séries DS et GS. Tous les autres types de machines virtuelles utilisent des disques Standard.
+    L’entrée relative aux **disques standards par nœud worker** configure la scalabilité d’Apache Kafka sur HDInsight. Apache Kafka sur HDInsight utilise le disque local des machines virtuelles du cluster pour stocker les données. En raison de son utilisation intensive des E/S, Apache Kafka utilise [Azure Disques managés](../../virtual-machines/managed-disks-overview.md) pour obtenir un débit élevé et davantage de stockage à chaque nœud. Le type de disque managé peut être soit __Standard__ (HDD), soit __Premium__ (SSD). Le type de disque dépend de la taille de la machine virtuelle utilisée par les nœuds de travail (brokers Apache Kafka). Les disques Premium sont utilisés automatiquement avec les machines virtuelles des séries DS et GS. Tous les autres types de machines virtuelles utilisent des disques Standard.
 
    ![Définir la taille du cluster Apache Kafka](./media/apache-kafka-get-started/azure-portal-cluster-configuration-pricing-kafka.png)
 
-    Sélectionnez l’onglet **Vérifier + créer**.
+    Sélectionnez l’onglet **Vérifier + créer** .
 
 1. Passez en revue la configuration du cluster. Changez les éventuels paramètres incorrects. Enfin, sélectionnez **Créer** pour créer le cluster.
 
@@ -134,7 +134,7 @@ Pour créer un cluster Apache Kafka sur HDInsight, effectuez les étapes suivant
 
 ## <a name="get-the-apache-zookeeper-and-broker-host-information"></a><a id="getkafkainfo"></a>Obtenir des informations sur les hôtes Apache Zookeeper et Broker
 
-Si vous utilisez Kafka, vous devez connaître les hôtes *Apache ZooKeeper* et *Broker*. Ces hôtes sont utilisés avec l’API Apache Kafka et la plupart des utilitaires fournis avec Kafka.
+Si vous utilisez Kafka, vous devez connaître les hôtes *Apache ZooKeeper* et *Broker* . Ces hôtes sont utilisés avec l’API Apache Kafka et la plupart des utilitaires fournis avec Kafka.
 
 Dans cette section, vous allez obtenir les informations sur l’hôte grâce à l’API REST Apache Ambari sur le cluster.
 
@@ -200,15 +200,15 @@ Dans cette section, vous allez obtenir les informations sur l’hôte grâce à 
 
 ## <a name="manage-apache-kafka-topics"></a>Gérer les rubriques Apache Kafka
 
-Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l’utilitaire `kafka-topics.sh` pour gérer les rubriques.
+Kafka stocke les flux de données dans des *rubriques* . Vous pouvez utiliser l’utilitaire `kafka-topics.sh` pour gérer les rubriques.
 
-* **Pour créer une rubrique**, utilisez la commande suivante dans la connexion SSH :
+* **Pour créer une rubrique** , utilisez la commande suivante dans la connexion SSH :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 3 --partitions 8 --topic test --zookeeper $KAFKAZKHOSTS
     ```
 
-    Cette commande se connecte à Zookeeper par le biais des informations d’hôte stockées dans `$KAFKAZKHOSTS`. Elle crée ensuite une rubrique Apache Kafka nommée **test**.
+    Cette commande se connecte à Zookeeper par le biais des informations d’hôte stockées dans `$KAFKAZKHOSTS`. Elle crée ensuite une rubrique Apache Kafka nommée **test** .
 
     * Les données stockées dans cette rubrique sont partitionnées sur huit partitions.
 
@@ -218,7 +218,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
         
         * Dans les régions comportant trois domaines d’erreur, un facteur de réplication de trois permet de répartir les réplicas entre les domaines d’erreur. Dans celles qui comptent deux domaines d’erreur, un facteur de réplication de quatre répartit uniformément les réplicas entre les domaines.
         
-        * Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/windows/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
+        * Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
 
         * Apache Kafka n’est pas informé des domaines d’erreur Azure. Lors de la création de réplicas de partitions pour les rubriques, il ne peut pas distribuer les réplicas correctement pour la haute disponibilité.
 
@@ -230,7 +230,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
 
             * Vous mettez à l’échelle un cluster
 
-* **Pour lister les rubriques**, utilisez la commande suivante :
+* **Pour lister les rubriques** , utilisez la commande suivante :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper $KAFKAZKHOSTS
@@ -238,7 +238,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
 
     Cette commande liste les rubriques disponibles sur le cluster Apache Kafka.
 
-* **Pour supprimer une rubrique**, utilisez la commande suivante :
+* **Pour supprimer une rubrique** , utilisez la commande suivante :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --delete --topic topicname --zookeeper $KAFKAZKHOSTS
@@ -257,7 +257,7 @@ Pour plus d’informations sur les commandes disponibles avec l’utilitaire `ka
 
 ## <a name="produce-and-consume-records"></a>Produire et consommer des enregistrements
 
-Kafka stocke les *enregistrements* dans des rubriques. Les enregistrements sont produits par des *producteurs* et utilisés par des *consommateurs*. Les producteurs et les consommateurs communiquent avec le service *broker Kafka*. Chacun des nœuds de travail de votre cluster HDInsight est un hôte broker Apache Kafka.
+Kafka stocke les *enregistrements* dans des rubriques. Les enregistrements sont produits par des *producteurs* et utilisés par des *consommateurs* . Les producteurs et les consommateurs communiquent avec le service *broker Kafka* . Chacun des nœuds de travail de votre cluster HDInsight est un hôte broker Apache Kafka.
 
 Pour stocker les enregistrements dans la rubrique test créée précédemment, puis les lire à l’aide d’un consommateur, procédez comme suit :
 

@@ -8,13 +8,13 @@ services: iot-hub
 ms.topic: tutorial
 ms.date: 03/25/2018
 ms.author: robinsh
-ms.custom: mvc
-ms.openlocfilehash: bfee4e64070e5f37eaa3d63280409f00c0ed8672
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-csharp
+ms.openlocfilehash: 14f6fc685e99060474a17503cb13ba09a61a5a9a
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73890390"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92149215"
 ---
 # <a name="tutorial-part-2---view-the-routed-messages"></a>Tutoriel : Partie 2 : Visualiser les messages routés
 
@@ -82,7 +82,7 @@ La file d’attente Service Bus doit être utilisée pour recevoir des messages 
 
    ![Options d’Office 365](./media/tutorial-routing-view-message-routing-results/logic-app-select-outlook.png)
 
-8. Connectez-vous à votre compte Office 365 pour configurer la connexion. En cas de dépassement du délai d’expiration, réessayez. Spécifiez les adresses e-mail des destinataires. Indiquez également l’objet et tapez le message que vous souhaitez que le destinataire voit dans le corps de l’e-mail. Pour tester si tout fonctionne bien, indiquez votre propre adresse e-mail dans le champ des destinataires.
+8. Connectez-vous à votre compte professionnel ou scolaire pour configurer la connexion. En cas de dépassement du délai d’expiration, réessayez. Spécifiez les adresses e-mail des destinataires. Indiquez également l’objet et tapez le message que vous souhaitez que le destinataire voit dans le corps de l’e-mail. Pour tester si tout fonctionne bien, indiquez votre propre adresse e-mail dans le champ des destinataires.
 
    Sélectionnez **Ajouter du contenu dynamique** pour afficher le contenu du message que vous pouvez inclure. Sélectionnez **Contenu** pour que le message soit inclus dans l’e-mail.
 
@@ -280,7 +280,7 @@ Connectez-vous à votre compte [Power BI](https://powerbi.microsoft.com/). Accé
 
 ### <a name="use-the-azure-cli-to-clean-up-resources"></a>Utiliser Azure CLI pour nettoyer des ressources
 
-Pour supprimer le groupe de ressources, utilisez la commande [az group delete](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-delete). `$resourceGroup` a été défini sur **ContosoResources** au début de ce tutoriel.
+Pour supprimer le groupe de ressources, utilisez la commande [az group delete](/cli/azure/group?view=azure-cli-latest#az-group-delete). `$resourceGroup` a été défini sur **ContosoResources** au début de ce tutoriel.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup
@@ -288,7 +288,7 @@ az group delete --name $resourceGroup
 
 ### <a name="use-powershell-to-clean-up-resources"></a>Utiliser PowerShell pour nettoyer les ressources
 
-Pour supprimer le groupe de ressources, utilisez la commande [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup). `$resourceGroup` a été défini sur **ContosoResources** au début de ce tutoriel.
+Pour supprimer le groupe de ressources, utilisez la commande [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup). `$resourceGroup` a été défini sur **ContosoResources** au début de ce tutoriel.
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name $resourceGroup

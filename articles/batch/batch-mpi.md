@@ -2,14 +2,14 @@
 title: Exécuter des applications MPI avec des tâches multi-instances
 description: Découvrez comment exécuter des applications MPI (Message Passing Interface) en utilisant des tâches de type multi-instances dans Azure Batch.
 ms.topic: how-to
-ms.date: 03/13/2019
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 43902e774f4c291e8d6a9c659b575d7e75ca032e
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.date: 10/08/2020
+ms.custom: H1Hack27Feb2017, devx-track-csharp
+ms.openlocfilehash: 6aa6a910dd57a255d9ec9292119bc692edf4946f
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83724225"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351518"
 ---
 # <a name="use-multi-instance-tasks-to-run-message-passing-interface-mpi-applications-in-batch"></a>Utiliser les tâches multi-instances pour exécuter des applications MPI (Message Passing Interface) dans Batch
 
@@ -39,7 +39,7 @@ Lorsque vous envoyez à un travail une tâche dotée de paramètres multi-instan
 >
 
 ## <a name="requirements-for-multi-instance-tasks"></a>Configuration requise pour les tâches multi-instances
-Les tâches multi-instances nécessitent un pool avec **communication entre les nœuds activée** et **exécution de tâches simultanées désactivée**. Pour désactiver l’exécution des tâches simultanées, définissez la propriété [CloudPool.MaxTasksPerComputeNode](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool) sur 1.
+Les tâches multi-instances nécessitent un pool avec **communication entre les nœuds activée** et **exécution de tâches simultanées désactivée**. Pour désactiver l’exécution des tâches simultanées, définissez la propriété [CloudPool.TaskSlotsPerNode](/dotnet/api/microsoft.azure.batch.cloudpool) sur 1.
 
 > [!NOTE]
 > Batch [limite](batch-quota-limit.md#pool-size-limits) la taille d’un pool pour lequel la communication entre nœuds est activée.
@@ -58,11 +58,11 @@ CloudPool myCloudPool =
 // Multi-instance tasks require inter-node communication, and those nodes
 // must run only one task at a time.
 myCloudPool.InterComputeNodeCommunicationEnabled = true;
-myCloudPool.MaxTasksPerComputeNode = 1;
+myCloudPool.TaskSlotsPerNode = 1;
 ```
 
 > [!NOTE]
-> Si vous essayez d’exécuter une tâche multi-instances dans un pool dont la communication entre les nœuds a été désactivée ou avec une valeur *maxTasksPerNode* supérieure à 1, la tâche ne sera jamais planifiée et restera indéfiniment à l’état « actif ». 
+> Si vous essayez d’exécuter une tâche multi-instances dans un pool dont la communication entre les nœuds a été désactivée ou avec une valeur *taskSlotsPerNode* supérieure à 1, la tâche ne sera jamais planifiée et restera indéfiniment à l’état « actif ».
 
 
 ### <a name="use-a-starttask-to-install-mpi"></a>Utiliser une tâche de début pour installer MPI
@@ -86,7 +86,7 @@ await myCloudPool.CommitAsync();
 ```
 
 ### <a name="remote-direct-memory-access-rdma"></a>Accès direct à la mémoire à distance (RDMA)
-Lorsque vous utilisez une [Taille compatible RDMA](../virtual-machines/windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) comme A9 pour les nœuds de calcul dans votre pool Batch, votre application MPI peut tirer parti du réseau d’accès direct à la mémoire à distance (RDMA) haute performance d’Azure.
+Lorsque vous utilisez une [Taille compatible RDMA](../virtual-machines/sizes-hpc.md?toc=/azure/virtual-machines/windows/toc.json) comme A9 pour les nœuds de calcul dans votre pool Batch, votre application MPI peut tirer parti du réseau d’accès direct à la mémoire à distance (RDMA) haute performance d’Azure.
 
 Recherchez les tailles spécifiées comme « compatibles RDMA » dans les articles suivants :
 
@@ -95,11 +95,11 @@ Recherchez les tailles spécifiées comme « compatibles RDMA » dans les arti
   * [Tailles de services cloud](../cloud-services/cloud-services-sizes-specs.md) (Windows uniquement)
 * Pools **VirtualMachineConfiguration**
 
-  * [Tailles des machines virtuelles dans Azure](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (Linux)
-  * [Tailles des machines virtuelles dans Azure](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) (Windows)
+  * [Tailles des machines virtuelles dans Azure](../virtual-machines/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (Linux)
+  * [Tailles des machines virtuelles dans Azure](../virtual-machines/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) (Windows)
 
 > [!NOTE]
-> Pour tirer parti de RDMA sur des [nœuds de calcul Linux](batch-linux-nodes.md), vous devez utiliser **Intel MPI** sur ces derniers. 
+> Pour tirer parti de RDMA sur des [nœuds de calcul Linux](batch-linux-nodes.md), vous devez utiliser **Intel MPI** sur ces derniers.
 >
 
 ## <a name="create-a-multi-instance-task-with-batch-net"></a>Créer une tâche multi-instances avec Batch.NET
@@ -322,44 +322,44 @@ Sample complete, hit ENTER to exit...
 
 [helloworld_proj]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/MultiInstanceTasks/MPIHelloWorld
 
-[api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[api_rest]: https://msdn.microsoft.com/library/azure/dn820158.aspx
+[api_net]: /dotnet/api/microsoft.azure.batch
+[api_rest]: /rest/api/batchservice/
 [batch_labs]: https://azure.github.io/BatchExplorer/
-[blog_mpi_linux]: https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/
-[cmd_start]: https://technet.microsoft.com/library/cc770297.aspx
+[blog_mpi_linux]: /archive/blogs/windowshpc/introducing-mpi-support-for-linux-on-azure-batch
+[cmd_start]: /previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc770297(v=ws.11)
 [coord_cmd_example]: https://github.com/Azure/azure-batch-samples/blob/master/Python/Batch/article_samples/mpi/data/coordination-cmd
 [github_mpi]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/MultiInstanceTasks
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [github_samples_zip]: https://github.com/Azure/azure-batch-samples/archive/master.zip
-[msdn_env_var]: https://msdn.microsoft.com/library/azure/mt743623.aspx
-[msmpi_msdn]: https://msdn.microsoft.com/library/bb524831.aspx
+[msdn_env_var]: ./batch-compute-node-environment-variables.md
+[msmpi_msdn]: /message-passing-interface/microsoft-mpi
 [msmpi_sdk]: https://go.microsoft.com/FWLink/p/?LinkID=389556
-[msmpi_howto]: https://blogs.technet.com/b/windowshpc/archive/2015/02/02/how-to-compile-and-run-a-simple-ms-mpi-program.aspx
+[msmpi_howto]: /archive/blogs/windowshpc/how-to-compile-and-run-a-simple-ms-mpi-program
 [openfoam]: http://www.openfoam.com/
 [visual_studio]: https://www.visualstudio.com/vs/community/
 
-[net_jobprep]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobpreparationtask.aspx
-[net_multiinstance_class]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.multiinstancesettings.aspx
-[net_multiinstance_prop]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.multiinstancesettings.aspx
-[net_multiinsance_commonresfiles]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.multiinstancesettings.commonresourcefiles.aspx
-[net_multiinstance_coordcmdline]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.multiinstancesettings.coordinationcommandline.aspx
-[net_multiinstance_numinstances]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.multiinstancesettings.numberofinstances.aspx
-[net_pool]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.aspx
-[net_pool_create]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.createpool.aspx
-[net_pool_starttask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.starttask.aspx
-[net_resourcefile]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.resourcefile.aspx
-[net_starttask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.starttask.aspx
-[net_starttask_cmdline]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.starttask.commandline.aspx
-[net_task]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.aspx
-[net_taskconstraints]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.taskconstraints.aspx
-[net_taskconstraint_maxretry]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.taskconstraints.maxtaskretrycount.aspx
-[net_taskconstraint_maxwallclock]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.taskconstraints.maxwallclocktime.aspx
-[net_taskconstraint_retention]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.taskconstraints.retentiontime.aspx
-[net_task_listsubtasks]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.listsubtasks.aspx
-[net_task_listnodefiles]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.listnodefiles.aspx
-[poolops_getnodefile]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.getnodefile.aspx
+[net_jobprep]: /dotnet/api/microsoft.azure.batch.jobpreparationtask
+[net_multiinstance_class]: /dotnet/api/microsoft.azure.batch.multiinstancesettings
+[net_multiinstance_prop]: /dotnet/api/microsoft.azure.batch.cloudtask
+[net_multiinsance_commonresfiles]: /dotnet/api/microsoft.azure.batch.multiinstancesettings
+[net_multiinstance_coordcmdline]: /dotnet/api/microsoft.azure.batch.multiinstancesettings
+[net_multiinstance_numinstances]: /dotnet/api/microsoft.azure.batch.multiinstancesettings
+[net_pool]: /dotnet/api/microsoft.azure.batch.cloudpool
+[net_pool_create]: /dotnet/api/microsoft.azure.batch.pooloperations
+[net_pool_starttask]: /dotnet/api/microsoft.azure.batch.cloudpool
+[net_resourcefile]: /dotnet/api/microsoft.azure.batch.resourcefile
+[net_starttask]: /dotnet/api/microsoft.azure.batch.starttask
+[net_starttask_cmdline]: /dotnet/api/microsoft.azure.batch.starttask
+[net_task]: /dotnet/api/microsoft.azure.batch.cloudtask
+[net_taskconstraints]: /dotnet/api/microsoft.azure.batch.taskconstraints
+[net_taskconstraint_maxretry]: /dotnet/api/microsoft.azure.batch.taskconstraints
+[net_taskconstraint_maxwallclock]: /dotnet/api/microsoft.azure.batch.taskconstraints
+[net_taskconstraint_retention]: /dotnet/api/microsoft.azure.batch.taskconstraints
+[net_task_listsubtasks]: /dotnet/api/microsoft.azure.batch.cloudtask
+[net_task_listnodefiles]: /dotnet/api/microsoft.azure.batch.cloudtask
+[poolops_getnodefile]: /dotnet/api/microsoft.azure.batch.pooloperations
 
 [portal]: https://portal.azure.com
-[rest_multiinstance]: https://msdn.microsoft.com/library/azure/mt637905.aspx
+[rest_multiinstance]: /previous-versions/azure/mt637905(v=azure.100)
 
 [1]: ./media/batch-mpi/batch_mpi_01.png "Présentation multi-instances"

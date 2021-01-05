@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 04/27/2020
-ms.openlocfilehash: 18831832f82cdbc8cec69e368f006f7acd4836c1
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: edbe5274de8576fccb29e1e69d260a6531d4ab05
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204878"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93287393"
 ---
 # <a name="troubleshoot-apache-oozie-in-azure-hdinsight"></a>Résoudre les problèmes liés à Apache Oozie dans Azure HDInsight
 
@@ -32,7 +32,9 @@ Voici des erreurs spécifiques que vous pouvez rencontrer avec une description d
 
 l’état de la tâche passe à **SUSPENDED** (Suspendu). Les détails du travail montrent que l’état de `RunHiveScript` est défini sur **START_MANUAL**. Lorsque vous sélectionnez l’action, le message d’erreur suivant apparaît :
 
-    JA009: Cannot initialize Cluster. Please check your configuration for map
+```output
+JA009: Cannot initialize Cluster. Please check your configuration for map
+```
 
 ### <a name="cause"></a>Cause
 
@@ -50,7 +52,9 @@ changez les adresses de Stockage Blob utilisées par la tâche.
 
 l’état de la tâche passe à **SUSPENDED** (Suspendu). Les détails du travail montrent que l’état de `RunHiveScript` est défini sur **START_MANUAL**. Lorsque vous sélectionnez l’action, le message d’erreur suivant s’affiche :
 
-    JA002: User: oozie is not allowed to impersonate <USER>
+```output
+JA002: User: oozie is not allowed to impersonate <USER>
+```
 
 ### <a name="cause"></a>Cause
 
@@ -60,7 +64,9 @@ les paramètres d’autorisation actuels ne permettent pas à Oozie d’emprunte
 
 Oozie peut emprunter l’identité des utilisateurs du groupe **`users`** . Utilisez le `groups USERNAME` pour voir les groupes dont le compte d’utilisateur est membre. Si l’utilisateur n’est pas membre du groupe **`users`** , utilisez la commande suivante pour l’ajouter au groupe :
 
-    sudo adduser USERNAME users
+```bash
+sudo adduser USERNAME users
+```
 
 > [!NOTE]  
 > Il peut se passer plusieurs minutes avant que HDInsight reconnaisse que l’utilisateur a été ajouté au groupe.
@@ -73,7 +79,9 @@ Oozie peut emprunter l’identité des utilisateurs du groupe **`users`** . Util
 
 l’état de la tâche passe à **KILLED** (Supprimé). Les détails du travail montrent que l’état de `RunSqoopExport` est défini sur **ERROR**. Lorsque vous sélectionnez l’action, le message d’erreur suivant s’affiche :
 
-    Launcher ERROR, reason: Main class [org.apache.oozie.action.hadoop.SqoopMain], exit code [1]
+```output
+Launcher ERROR, reason: Main class [org.apache.oozie.action.hadoop.SqoopMain], exit code [1]
+```
 
 ### <a name="cause"></a>Cause
 
@@ -99,10 +107,4 @@ Ainsi, pour l’exemple de travail dans [Utiliser des workflows Hadoop Oozie](hd
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

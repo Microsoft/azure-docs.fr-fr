@@ -5,22 +5,22 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: devices
 ms.topic: conceptual
-ms.date: 05/29/2019
+ms.date: 07/20/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: ravenn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9a237ad35d9d5d8abee784926563d972d0ee95f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3f2b059bb6ae63d7f427ce970b2538da922e2dec
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672650"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94837261"
 ---
 # <a name="what-is-a-primary-refresh-token"></a>Qu’est-ce qu’un jeton d’actualisation principal ?
 
-Un jeton d’actualisation principal (PRT) est un artefact clé d’authentification Azure AD sur Windows 10, iOS et les appareils Android. Il s’agit d’un jeton JSON Web Token (JWT) émis spécialement pour les brokers à jetons Microsoft internes, qui permet d’activer l’authentification unique (SSO) sur les applications utilisées sur ces appareils. Cet article explique en détail comment un PRT est émis, utilisé et protégé sur les appareils Windows 10.
+Un jeton d’actualisation principal (PRT) est un artefact clé d’authentification Azure AD sur les appareils Windows 10, Windows Server 2016 et versions ultérieures, iOS et Android. Il s’agit d’un jeton JSON Web Token (JWT) émis spécialement pour les brokers à jetons Microsoft internes, qui permet d’activer l’authentification unique (SSO) sur les applications utilisées sur ces appareils. Cet article explique en détail comment un PRT est émis, utilisé et protégé sur les appareils Windows 10.
 
 Cet article suppose que vous connaissez déjà les différents états des appareils disponibles dans Azure AD ainsi que le fonctionnement de l’authentification unique sous Windows 10. Pour plus d’informations sur les appareils dans Azure AD, consultez l’article [Présentation de la gestion des appareils dans Azure Active Directory](overview.md).
 
@@ -65,7 +65,7 @@ Le PRT est émis lors de l’authentification de l’utilisateur sur un appareil
 Dans les scénarios avec appareils inscrits dans Azure AD, le plug-in Azure AD WAM est l’autorité principale pour le PRT puisque l’ouverture de session Windows n’utilise pas ce compte Azure AD.
 
 > [!NOTE]
-> Les fournisseurs d’identités tiers doivent prendre en charge le protocole WS-Trust pour autoriser l’émission d’un PRT sur les appareils Windows 10. Sans WS-Trust, le PRT ne peut pas être émis pour les utilisateurs sur des appareils joints à Azure AD ou Azure AD hybride
+> Les fournisseurs d’identités tiers doivent prendre en charge le protocole WS-Trust pour autoriser l’émission d’un PRT sur les appareils Windows 10. Sans WS-Trust, le PRT ne peut pas être émis pour les utilisateurs sur les appareils faisant l’objet d’une jonction hybride Azure AD ou sur les appareils joints à Azure AD. Sur ADFS, seuls les points de terminaison usernamemixed sont nécessaires. adfs/services/trust/2005/windowstransport et adfs/services/trust/13/windowstransport doivent tous les deux être activés en tant que points de terminaison uniquement accessibles sur intranet. Ils **NE doivent PAS être exposés** en tant que points de terminaison accessibles sur extranet via le proxy d’application web
 
 ## <a name="what-is-the-lifetime-of-a-prt"></a>Quelle est la durée de validité d’un PRT ?
 
@@ -76,7 +76,7 @@ Une fois émis, un PRT est valide pendant 14 jours et il est renouvelé en conti
 Un PRT est utilisé par deux composants clés dans Windows :
 
 * **Plug-in Azure AD CloudAP** : Pendant la connexion à Windows, le plug-in Azure AD CloudAP fait une demande de PRT depuis Azure AD en utilisant les informations d’identification fournies par l’utilisateur. Il met également en cache le PRT pour permettre la connexion avec des informations mises en cache lorsque l’utilisateur n’a pas accès à une connexion internet.
-* **Plug-in Azure AD WAM** : Lorsque les utilisateurs tentent d’accéder aux applications, le plug-in Azure AD WAM utilise le PRT pour activer l’authentification unique sur Windows 10. Le plug-in Azure AD WAM utilise le PRT pour demander des jetons d’actualisation et d’accès pour les applications qui s’appuient sur WAM pour les demandes de jeton. Il active également l’authentification unique sur les navigateurs en injectant le PRT dans les demandes de navigateur. L’authentification unique de navigateur dans Windows 10 est prise en charge sur Microsoft Edge (en natif) et Chrome (via l’extension Windows 10 Accounts ou Office Online).
+* **Plug-in Azure AD WAM** : Lorsque les utilisateurs tentent d’accéder aux applications, le plug-in Azure AD WAM utilise le PRT pour activer l’authentification unique sur Windows 10. Le plug-in Azure AD WAM utilise le PRT pour demander des jetons d’actualisation et d’accès pour les applications qui s’appuient sur WAM pour les demandes de jeton. Il active également l’authentification unique sur les navigateurs en injectant le PRT dans les demandes de navigateur. L’authentification unique de navigateur dans Windows 10 est prise en charge sur Microsoft Edge (en natif) et Chrome (via les extensions [Windows 10 Accounts](https://chrome.google.com/webstore/detail/windows-10-accounts/ppnbnpeolgkicgegkbkbjmhlideopiji?hl=en) ou [Office Online](https://chrome.google.com/webstore/detail/office/ndjpnladcallmjemlbaebfadecfhkepb?hl=en)).
 
 ## <a name="how-is-a-prt-renewed"></a>Comment un PRT est-il renouvelé ?
 
@@ -85,7 +85,11 @@ Un PRT est renouvelé selon deux méthodes différentes :
 * **Plug-in Azure AD CloudAP toutes les 4 heures** : Le plug-in CloudAP renouvelle le PRT toutes les 4 heures pendant la connexion Windows. Si l’utilisateur n’a pas de connexion Internet pendant ce temps, le plug-in CloudAP renouvellera le PRT une fois que l’appareil se sera connecté à Internet.
 * **Plug-in Azure AD WAM pendant les demandes de jeton d’application** : Le plug-in WAM permet l’authentification unique sur les appareils Windows 10 en activant les demandes de jeton silencieuses pour les applications. Le plug-in WAM peut renouveler le PRT pendant ces demandes de jeton de deux manières différentes :
    * Une application demande au plug-in WAM un jeton d’accès silencieusement, mais aucun jeton d’actualisation n’est disponible pour cette application. Dans ce cas, WAM utilise le PRT pour demander un jeton pour l’application et récupère un nouveau PRT dans la réponse.
-   * Une application demande un jeton d’accès au plug-in WAM, mais le PRT n’est pas valide ou Azure AD requiert une autorisation supplémentaire (par exemple une authentification multifacteur Azure). Dans ce scénario, WAM lance une ouverture de session interactive qui oblige l’utilisateur à s’authentifier de nouveau ou à effectuer une vérification supplémentaire, et un nouveau PRT est émis en cas d’authentification réussie.
+   * Une application demande un jeton d’accès au plug-in WAM, mais le PRT n’est pas valide ou Azure AD requiert une autorisation supplémentaire (par exemple Azure AD Multi-Factor Authentication). Dans ce scénario, WAM lance une ouverture de session interactive qui oblige l’utilisateur à s’authentifier de nouveau ou à effectuer une vérification supplémentaire, et un nouveau PRT est émis en cas d’authentification réussie.
+
+Dans un environnement ADFS, une ligne de vue directe sur le contrôleur de domaine n’est pas nécessaire pour renouveler le PRT. Le renouvellement du PRT requiert uniquement des points de terminaison /adfs/services/trust/2005/usernamemixed and /adfs/services/trust/13/usernamemixed activés sur le proxy à l’aide du protocole WS-Trust.
+
+Des points de terminaison de transport Windows sont requis pour l’authentification par mot de passe uniquement si un mot de passe est modifié, pas pour le renouvellement de PRT.
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 
@@ -168,6 +172,9 @@ Les diagrammes suivants illustrent les détails sous-jacents de l’émission, d
 | F | Azure AD valide la signature de la clé de session en comparant cette dernière à la clé de session incorporée dans le PRT, il valide la valeur à usage unique, vérifie que l’appareil est valide dans le locataire et émet un nouveau PRT. Comme indiqué précédemment, le PRT est à nouveau accompagné par une clé de session chiffrée avec la clé de transport (tkpub). |
 | G | Le plug-in CloudAP transmet le PRT et la clé de session chiffrés au fournisseur d’authentification cloud. Ce dernier demande au TPM de déchiffrer la clé de session avec la clé de transport (tkpriv) et de la chiffrer de nouveau avec sa propre clé. Le CloudAP stocke la clé de session chiffrée dans son cache, ainsi que le PRT. |
 
+> [!NOTE]
+> Un PRT peut être renouvelé de manière externe sans nécessiter une connexion VPN quand les points de terminaison usernamemixed sont activés de manière externe.
+
 ### <a name="prt-usage-during-app-token-requests"></a>Utilisation du PRT lors de demandes de jeton d’application
 
 ![Utilisation du PRT lors de demandes de jeton d’application](./media/concept-primary-refresh-token/prt-usage-app-token-requests.png)
@@ -192,6 +199,9 @@ Les diagrammes suivants illustrent les détails sous-jacents de l’émission, d
 | D | Le plug-in CloudAP crée le cookie de PRT, se connecte avec la clé de session liée au TPM et le renvoie à l’hôte de client natif. Comme le cookie est signé par la clé de session, il ne peut pas être altéré. |
 | E | L’hôte de client natif renvoie ce cookie de PRT au navigateur, qui l’inclut dans l’en-tête de demande x-ms-RefreshTokenCredential et demande les jetons à Azure AD. |
 | F | Azure AD valide la signature de clé de session sur le cookie de PRT, vérifie la valeur à usage unique, s’assure que l’appareil est valide dans le locataire et émet un jeton d’ID pour la page web et un cookie de session chiffré pour le navigateur. |
+
+> [!NOTE]
+> Le flux d’authentification unique du navigateur décrit aux étapes ci-dessus ne s’applique pas aux sessions dans les modes privés tels que InPrivate dans Microsoft Edge ou Incognito dans Google Chrome (lors de l’utilisation de l’extension Comptes Microsoft).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

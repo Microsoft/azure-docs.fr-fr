@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: e94ffb3d34082745c3d7ca86cfda2b93c0ed08da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4694b6ac829c42f20c6783810c248ee18d220433
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77919411"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91965758"
 ---
 # <a name="understand-a-system-reboot-for-azure-vm"></a>Comprendre un redémarrage du système pour Azure
 
@@ -30,11 +30,11 @@ La meilleure façon de protéger une application en cours d’exécution sur Azu
 
 Pour assurer ce niveau de redondance de votre application, nous vous recommandons de regrouper au moins deux machines virtuelles dans un groupe à haute disponibilité. Cette configuration assure la disponibilité d’au moins une des machines virtuelles pendant un événement de maintenance planifié ou non, avec le niveau de 99,95 % stipulé dans le [contrat de niveau de service (SLA) Azure](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_5/).
 
-Pour plus d’informations sur les groupes à haute disponibilité, consultez [Gérer la disponibilité des machines virtuelles](../windows/manage-availability.md).
+Pour plus d’informations sur les groupes à haute disponibilité, consultez [Gérer la disponibilité des machines virtuelles](../manage-availability.md).
 
 ## <a name="resource-health-information"></a>Informations sur Resource Health
 
-Azure Resource Health est un service qui expose l’intégrité des ressources Azure individuelles et fournit des conseils applicables permettant de résoudre les problèmes. Dans un environnement cloud où il est impossible d’accéder directement aux serveurs ou aux éléments d’infrastructure, Resource Health vise à réduire le temps passé à résoudre des problèmes. L’objectif est notamment de réduire le temps passé à déterminer si la cause du problème est liée à l’application ou à un événement interne à la plateforme Azure. Pour plus d’informations, consultez la section [Understand and use Resource Health](../../resource-health/resource-health-overview.md) (Comprendre et utiliser Resource Health).
+Azure Resource Health est un service qui expose l’intégrité des ressources Azure individuelles et fournit des conseils applicables permettant de résoudre les problèmes. Dans un environnement cloud où il est impossible d’accéder directement aux serveurs ou aux éléments d’infrastructure, Resource Health vise à réduire le temps passé à résoudre des problèmes. L’objectif est notamment de réduire le temps passé à déterminer si la cause du problème est liée à l’application ou à un événement interne à la plateforme Azure. Pour plus d’informations, consultez la section [Understand and use Resource Health](../../service-health/resource-health-overview.md) (Comprendre et utiliser Resource Health).
 
 ## <a name="actions-and-events-that-can-cause-the-vm-to-reboot"></a>Actions et événements pouvant entraîner le redémarrage de la machine virtuelle
 
@@ -46,8 +46,8 @@ Toutefois, certaines mises à jour nécessitent un redémarrage. Dans ce cas, le
 
 Découvrez en quoi consiste la maintenance planifiée Azure et son incidence possible sur la disponibilité de vos machines virtuelles Linux en consultant les articles ci-dessous. Ces articles fournissent des informations sur le processus de maintenance planifiée Azure et sa planification afin de réduire davantage l’impact.
 
-- [Maintenance planifiée des machines virtuelles dans Azure](../windows/planned-maintenance.md)
-- [Planification d’une maintenance planifiée sur des machines virtuelles Azure](../windows/classic/planned-maintenance-schedule.md)
+- [Maintenance planifiée des machines virtuelles dans Azure](../maintenance-and-updates.md?bc=/azure/virtual-machines/windows/breadcrumb/toc.json&toc=/azure/virtual-machines/windows/toc.json)
+- [Planification d’une maintenance planifiée sur des machines virtuelles Azure](../maintenance-and-updates.md?bc=/azure/virtual-machines/windows/breadcrumb/toc.json&toc=/azure/virtual-machines/windows/toc.json)
 
 ### <a name="memory-preserving-updates"></a>Mises à jour de préservation de la mémoire
 
@@ -72,7 +72,7 @@ Plusieurs actions de modification de la configuration peuvent également entraî
 
 ### <a name="azure-security-center-and-windows-update"></a>Azure Security Center et Windows Update
 
-Azure Security Center recherche quotidiennement les mises à jour manquantes du système d’exploitation sur les machines virtuelles Windows et Linux. Security Center récupère une liste des mises à jour de sécurité et critiques disponibles dans Windows Update ou WSUS (Windows Server Update Services), selon le service configuré sur les machines virtuelles Windows. Security Center recherche également les dernières mises à jour pour les systèmes Linux. S’il manque une mise à jour système sur votre machine virtuelle, Security Center vous recommande de l’appliquer. L’application de ces mises à jour du système est contrôlée par Security Center sur le portail Azure. L’application de certaines mises à jour peut nécessiter un redémarrage des machines virtuelles. Pour en savoir plus, consultez [Appliquer les mises à jour système dans Azure Security Center](../../security-center/security-center-apply-system-updates.md).
+Azure Security Center recherche quotidiennement les mises à jour manquantes du système d’exploitation sur les machines virtuelles Windows et Linux. Security Center récupère une liste des mises à jour de sécurité et critiques disponibles dans Windows Update ou WSUS (Windows Server Update Services), selon le service configuré sur les machines virtuelles Windows. Security Center recherche également les dernières mises à jour pour les systèmes Linux. S’il manque une mise à jour système sur votre machine virtuelle, Security Center vous recommande de l’appliquer. L’application de ces mises à jour du système est contrôlée par Security Center sur le portail Azure. L’application de certaines mises à jour peut nécessiter un redémarrage des machines virtuelles. Pour en savoir plus, consultez [Appliquer les mises à jour système dans Azure Security Center](../../security-center/asset-inventory.md).
 
 Comme pour les serveurs locaux, Azure n’envoie pas les mises à jour de Windows Update à des machines virtuelles Windows, car ces machines doivent être gérées par l’utilisateur. Cependant, vous êtes invité à maintenir la configuration automatique de Windows Update activée. L’installation automatique des mises à jour de Windows Update peut également entraîner des redémarrages une fois les mises à jour appliquées. Pour plus d’informations, consultez [Windows Update : Forum Aux Questions](https://support.microsoft.com/help/12373/windows-update-faq).
 
@@ -115,7 +115,7 @@ La durée de l’arrêt peut être de cinq minutes ou beaucoup plus longue. Voic
 
 **Dépassement des limites d’E/S**
 
-Il se peut que les machines virtuelles soient temporairement arrêtées lorsque les demandes d’E/S sont constamment limitées en raison d’un volume d’opérations d’E/S par seconde dépassant les limites d’E/S du disque. (Stockage de disque standard limité à 500 E/S par seconde.) Pour atténuer ce problème, utilisez l’entrelacement de disques ou configurez l’espace de stockage au sein de la machine virtuelle invitée en fonction de la charge de travail. Pour en savoir plus, consultez [Configuration de machines virtuelles Azure pour des performances de stockage optimales](https://blogs.msdn.com/b/mast/archive/2014/10/14/configuring-azure-virtual-machines-for-optimal-storage-performance.aspx).
+Il se peut que les machines virtuelles soient temporairement arrêtées lorsque les demandes d’E/S sont constamment limitées en raison d’un volume d’opérations d’E/S par seconde dépassant les limites d’E/S du disque. (Stockage de disque standard limité à 500 E/S par seconde.) Pour atténuer ce problème, utilisez l’entrelacement de disques ou configurez l’espace de stockage au sein de la machine virtuelle invitée en fonction de la charge de travail. 
 
 ### <a name="other-incidents"></a>Autres incidents
 

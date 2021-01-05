@@ -10,17 +10,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 04/29/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6e10d00ed90248319801974c7c1e7fadf835024b
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 73d4239dd34f2a64aa7b3edbf88bad4348e01291
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81407014"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85356200"
 ---
 # <a name="troubleshoot-object-synchronization-with-azure-ad-connect-sync"></a>Résoudre les problèmes de synchronisation d’objets avec la synchronisation Azure AD Connect
 Cet article explique les étapes de résolution des problèmes de synchronisation d’objets à l’aide de la tâche de résolution des problèmes. Pour voir le fonctionnement de la résolution des problèmes dans Azure Active Directory (Azure AD) Connect, regardez [cette courte vidéo](https://aka.ms/AADCTSVideo).

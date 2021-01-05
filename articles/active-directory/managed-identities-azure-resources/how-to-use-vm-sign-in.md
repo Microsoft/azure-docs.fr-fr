@@ -1,28 +1,29 @@
 ---
 title: Utiliser des identités managées sur une machine virtuelle Azure pour se connecter – Azure AD
-description: Instructions et exemples détaillés concernant l’utilisation d’un principal du service d’identités managées pour ressources Azure pour la connexion client par script et l’accès aux ressources.
+description: Instructions et exemples détaillés sur l’utilisation d’un principal du service d’identités managées pour ressources Azure pour la connexion cliente par script et l’accès aux ressources.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 12/01/2017
-ms.author: markvi
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 34f4dc749c0254b5aa4e9ff018d2a869832de3f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 08fe856fd43baad4189d81f7743396a71cd5de48
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74547387"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266321"
 ---
-# <a name="how-to-use-managed-identities-for-azure-resources-on-an-azure-vm-for-sign-in"></a>Guide pratique de l’utilisation d’identités managées pour ressources Azure sur une machine virtuelle Azure pour se connecter 
+# <a name="how-to-use-managed-identities-for-azure-resources-on-an-azure-vm-for-sign-in"></a>Comment utiliser des identités managées pour ressources Azure sur une machine virtuelle Azure pour se connecter 
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]  
 Cet article fournit des exemples de script PowerShell et CLI pour la connexion à l’aide du principal du service d’identités managées pour ressources Azure, et des conseils sur des sujets importants tels que la gestion des erreurs.
@@ -33,7 +34,7 @@ Cet article fournit des exemples de script PowerShell et CLI pour la connexion �
 
 [!INCLUDE [msi-qs-configure-prereqs](../../../includes/active-directory-msi-qs-configure-prereqs.md)]
 
-Si vous envisagez d’utiliser les exemples de Azure PowerShell ou Azure CLI dans cet article, veillez à installer la dernière version de [Azure PowerShell](/powershell/azure/install-az-ps) ou bien [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli). 
+Si vous envisagez d’utiliser les exemples de Azure PowerShell ou Azure CLI dans cet article, veillez à installer la dernière version de [Azure PowerShell](/powershell/azure/install-az-ps) ou bien [Azure CLI](/cli/azure/install-azure-cli). 
 
 > [!IMPORTANT]
 > - L’exemple de script présenté dans cet article part du principe que le client de ligne de commande s’exécute sur une machine virtuelle avec des identités managées pour ressources Azure activées. Utilisez la fonctionnalité « Se connecter » de machine virtuelle dans le portail Azure, pour vous connecter à distance à votre machine virtuelle. Pour plus d’informations sur l’activation d’identités managées pour ressources Azure sur une machine virtuelle, voir [Configurer des identités managées pour ressources Azure sur une machine virtuelle en utilisant le portail Azure](qs-configure-portal-windows-vm.md), ou l’une des variantes de cet article (en utilisant PowerShell, CLI, un modèle ou un Kit de développement logiciel (SDK) Azure). 
@@ -41,7 +42,7 @@ Si vous envisagez d’utiliser les exemples de Azure PowerShell ou Azure CLI dan
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Les identités managées pour ressources Azure fournissent un [objet principal du service](../develop/developer-glossary.md#service-principal-object)[créé lors de l’activation d’identités managées pour ressources Azure](overview.md#how-does-the-managed-identities-for-azure-resources-work) sur la machine virtuelle. Le principal du service peut accorder l’accès aux ressources Azure et être utilisé comme identité par des clients de script/ligne de commande pour la connexion et l’accès aux ressources. En règle générale, pour accéder à des ressources sécurisées sous sa propre identité, un client de script doit :  
+Les identités managées pour ressources Azure fournissent un [objet principal du service](../develop/developer-glossary.md#service-principal-object), qui est [créé lors de l’activation d’identités managées pour ressources Azure](overview.md) sur la machine virtuelle. L’accès à des ressources Azure peut être donné au principal du service, et celui-ci peut être utilisé comme identité par des clients de script/ligne de commande pour la connexion et l’accès aux ressources. En règle générale, pour accéder à des ressources sécurisées sous sa propre identité, un client de script doit :  
 
    - être inscrit et consenti avec Azure AD comme une application cliente web/confidentielle
    - connectez-vous sous son principal du service, à l’aide des informations d’identification de l’application (normalement incorporées dans le script)
@@ -99,9 +100,3 @@ Si l’un des paramétrages est incorrect, il se peut que vous deviez redéploye
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour activer des identités managées pour ressources Azure sur une machine virtuelle Azure, voir [Configurer des identités managées pour ressources Azure sur une machine virtuelle Azure en utilisant PowerShell](qs-configure-powershell-windows-vm.md) ou [Configurer des identités managées pour ressources Azure sur une machine virtuelle Azure en utilisant Azure CLI](qs-configure-cli-windows-vm.md)
-
-
-
-
-
-

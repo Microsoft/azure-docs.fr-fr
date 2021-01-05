@@ -7,16 +7,17 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 03/16/2020
+ms.topic: how-to
+ms.date: 08/03/2020
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 42596ba5470c6062efba4fd1050c1c9745b76e80
-ms.sourcegitcommit: 0450ed87a7e01bbe38b3a3aea2a21881f34f34dd
+ms.openlocfilehash: 6abc3316e18fc70a2969bc220fd75e10e10f0e6e
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80637328"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507776"
 ---
 # <a name="manage-azure-ad-b2c-user-accounts-with-microsoft-graph"></a>Gérer les comptes d’utilisateur Azure AD B2C avec Microsoft Graph
 
@@ -34,13 +35,13 @@ Suivez les étapes de cet article de procédure pour créer une inscription d’
 
 ## <a name="user-management-microsoft-graph-operations"></a>Opérations Microsoft Graph pour la gestion des utilisateurs
 
-Les opérations suivantes de gestion des utilisateurs sont disponibles dans l’[API Microsoft Graph](https://docs.microsoft.com/graph/api/resources/user) :
+Les opérations suivantes de gestion des utilisateurs sont disponibles dans l’[API Microsoft Graph](/graph/api/resources/user) :
 
-- [Obtenir une liste d’utilisateurs](https://docs.microsoft.com/graph/api/user-list)
-- [Créer un utilisateur](https://docs.microsoft.com/graph/api/user-post-users)
-- [Obtenir un utilisateur](https://docs.microsoft.com/graph/api/user-get)
-- [Mettre à jour un utilisateur](https://docs.microsoft.com/graph/api/user-update)
-- [Suppression d’un utilisateur](https://docs.microsoft.com/graph/api/user-delete)
+- [Obtenir une liste d’utilisateurs](/graph/api/user-list)
+- [Créer un utilisateur](/graph/api/user-post-users)
+- [Obtenir un utilisateur](/graph/api/user-get)
+- [Mettre à jour un utilisateur](/graph/api/user-update)
+- [Suppression d’un utilisateur](/graph/api/user-delete)
 
 ## <a name="user-properties"></a>Propriétés de l’utilisateur
 
@@ -67,7 +68,7 @@ Dans l’API Microsoft Graph, les identités locales et fédérées sont stocké
 
 Propriété **Identities** avec une identité de compte local comprenant un nom de connexion, une adresse e-mail comme identifiant de connexion et une identité sociale. 
 
- ```JSON
+ ```json
  "identities": [
      {
        "signInType": "userName",
@@ -95,7 +96,7 @@ Pour une identité locale, la propriété **passwordProfile** est obligatoire et
 
 Pour une identité (de réseaux sociaux) fédérée, la propriété **passwordProfile** n’est pas nécessaire.
 
-```JSON
+```json
 "passwordProfile" : {
     "password": "password-value",
     "forceChangePasswordNextSignIn": false
@@ -108,23 +109,23 @@ La stratégie de mot de passe Azure AD B2C (pour les comptes locaux) est basée 
 
 Dans les scénarios de migration d’utilisateurs, si les comptes que vous voulez migrer ont un mot de passe moins fort que les [règles de mot de passe fort](../active-directory/authentication/concept-sspr-policy.md) d’Azure AD B2C, vous pouvez désactiver l’exigence d’un mot de passe fort. Pour modifier la stratégie de mot de passe par défaut, définissez la propriété `passwordPolicies` sur `DisableStrongPassword`. Par exemple, vous pouvez modifier la demande de création d’utilisateur comme suit :
 
-```JSON
+```json
 "passwordPolicies": "DisablePasswordExpiration, DisableStrongPassword"
 ```
 
 ### <a name="extension-properties"></a>Propriétés d’extension
 
-Toutes les applications orientées client ont des exigences uniques concernant les informations à recueillir. Votre locataire Azure AD B2C est fourni avec un ensemble intégré d’informations stockées dans des propriétés, comme le prénom, le nom, la localité et le code postal. Avec Azure AD B2C, vous pouvez étendre l’ensemble de propriétés stockées dans chaque compte client. Pour plus d’informations sur la définition d’attributs personnalisés, consultez [Attributs personnalisés (flux utilisateur)](user-flow-custom-attributes.md) et [Attributs personnalisés (stratégies personnalisées)](custom-policy-custom-attributes.md).
+Toutes les applications orientées client ont des exigences uniques concernant les informations à recueillir. Votre locataire Azure AD B2C est fourni avec un ensemble intégré d’informations stockées dans des propriétés, comme le prénom, le nom, la localité et le code postal. Avec Azure AD B2C, vous pouvez étendre l’ensemble de propriétés stockées dans chaque compte client. Pour plus d'informations sur la définition d'attributs personnalisés, consultez [Attributs personnalisés](user-flow-custom-attributes.md).
 
-L’API Microsoft Graph prend en charge la création et la mise à jour d’un utilisateur avec des attributs d’extension. Dans l’API Graph, les attributs d’extension sont nommés à l’aide de la convention `extension_ApplicationObjectID_attributename`. Par exemple :
+L’API Microsoft Graph prend en charge la création et la mise à jour d’un utilisateur avec des attributs d’extension. Les attributs d’extension dans l’API Graph sont nommés d’après la convention `extension_ApplicationClientID_attributename`, où `ApplicationClientID` est l’**ID d’application (client)** de l’application `b2c-extensions-app` (accessible dans **Inscriptions d’applications** > **Toutes les applications** dans le portail Azure). Notez que l’**ID d’application (client)** tel qu’il est représenté dans le nom de l’attribut d’extension ne comprend aucun trait d’union. Par exemple :
 
-```JSON
+```json
 "extension_831374b3bd5041bfaa54263ec9e050fc_loyaltyNumber": "212342"
 ```
 
-## <a name="code-sample"></a>Exemple de code
+## <a name="code-sample-how-to-programmatically-manage-user-accounts"></a>Exemple de code : Comment gérer les comptes d’utilisateurs par programmation
 
-Cet exemple de code est une application console .NET Core qui utilise le [SDK Microsoft Graph](https://docs.microsoft.com/graph/sdks/sdks-overview) pour interagir avec l’API Microsoft Graph. Son code illustre comment appeler l’API pour gérer par programmation les utilisateurs dans un locataire Azure AD B2C.
+Cet exemple de code est une application console .NET Core qui utilise le [SDK Microsoft Graph](/graph/sdks/sdks-overview) pour interagir avec l’API Microsoft Graph. Son code illustre comment appeler l’API pour gérer par programmation les utilisateurs dans un locataire Azure AD B2C.
 Vous pouvez [télécharger l’archive de l’exemple](https://github.com/Azure-Samples/ms-identity-dotnetcore-b2c-account-management/archive/master.zip) (*.zip), [parcourir le dépôt](https://github.com/Azure-Samples/ms-identity-dotnetcore-b2c-account-management) sur GitHub ou cloner le dépôt :
 
 ```cmd
@@ -144,14 +145,14 @@ Une fois que vous avez obtenu l’exemple de code, configurez-le pour votre envi
 1. Exécutez l’application avec la commande `dotnet` :
 
     ```console
-    dotnet bin/Debug/netcoreapp3.0/b2c-ms-graph.dll
+    dotnet bin/Debug/netcoreapp3.1/b2c-ms-graph.dll
     ```
 
 L’application affiche une liste de commandes que vous pouvez exécuter. Par exemple, obtenir tous les utilisateurs, obtenir un seul utilisateur, supprimer un utilisateur, mettre à jour le mot de passe d’un utilisateur et importer en bloc.
 
 ### <a name="code-discussion"></a>Considérations sur le code
 
-L’exemple de code utilise le kit [SDK Microsoft Graph](https://docs.microsoft.com/graph/sdks/sdks-overview), qui est conçu pour simplifier la création d’applications qualitatives, efficaces et résilientes qui accèdent à Microsoft Graph.
+L’exemple de code utilise le kit [SDK Microsoft Graph](/graph/sdks/sdks-overview), qui est conçu pour simplifier la création d’applications qualitatives, efficaces et résilientes qui accèdent à Microsoft Graph.
 
 Toute requête envoyée à l’API Microsoft Graph nécessite un jeton d’accès pour l’authentification. La solution utilise le package NuGet [Microsoft.Graph.Auth](https://www.nuget.org/packages/Microsoft.Graph.Auth/) qui fournit un wrapper basé sur un scénario d’authentification de la bibliothèque d’authentification Microsoft (MSAL) à utiliser avec le SDK Microsoft Graph.
 
@@ -202,7 +203,7 @@ public static async Task ListUsers(GraphServiceClient graphClient)
 }
 ```
 
-[Faire des appels d’API en utilisant le SDK Microsoft Graph](https://docs.microsoft.com/graph/sdks/create-requests) contient des informations sur la façon de lire et d’écrire des informations à partir de Microsoft Graph, d’utiliser `$select` pour contrôler les propriétés retournées, de fournir des paramètres de requête personnalisés, et d’utiliser les paramètres de requête `$filter` et `$orderBy`.
+[Faire des appels d’API en utilisant le SDK Microsoft Graph](/graph/sdks/create-requests) contient des informations sur la façon de lire et d’écrire des informations à partir de Microsoft Graph, d’utiliser `$select` pour contrôler les propriétés retournées, de fournir des paramètres de requête personnalisés, et d’utiliser les paramètres de requête `$filter` et `$orderBy`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -210,5 +211,5 @@ Pour obtenir un index complet des opérations de l’API Microsoft Graph prises 
 
 <!-- LINK -->
 
-[graph-objectIdentity]: https://docs.microsoft.com/graph/api/resources/objectidentity
+[graph-objectIdentity]: /graph/api/resources/objectidentity
 [graph-user]: (https://docs.microsoft.com/graph/api/resources/user)

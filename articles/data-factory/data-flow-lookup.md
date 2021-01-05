@@ -7,13 +7,13 @@ ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/23/2020
-ms.openlocfilehash: 672fecc7487a73909efa5b4247f4889bb47b7b7e
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.date: 10/30/2020
+ms.openlocfilehash: 7ed1d9db09357b0702188c01a802600ff6350aff
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594319"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93147264"
 ---
 # <a name="lookup-transformation-in-mapping-data-flow"></a>Transformation de recherche dans le flux de données de mappage
 
@@ -21,11 +21,13 @@ ms.locfileid: "82594319"
 
 Utilisez la transformation de recherche pour référencer des données provenant d’une autre source dans un flux de données. La transformation de recherche ajoute des colonnes de données mises en correspondance à vos données sources.
 
-Une transformation de recherche est similaire à une jointure externe gauche. Toutes les lignes du flux principal existent dans le flux de sortie avec des colonnes supplémentaires venant du flux de recherche. 
+Une transformation de recherche est similaire à une jointure externe gauche. Toutes les lignes du flux principal existent dans le flux de sortie avec des colonnes supplémentaires venant du flux de recherche.
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4xsVT]
 
 ## <a name="configuration"></a>Configuration
 
-![Transformation de recherche](media/data-flow/lookup1.png "Recherche")
+![Capture d’écran affichant l’onglet Paramètres de recherche avec les étiquettes décrites dans le texte suivant.](media/data-flow/lookup1.png "Recherche")
 
 **Flux principal :** Le flux de données entrant. Ce flux est équivalent au côté gauche d’une jointure.
 
@@ -40,6 +42,12 @@ Une transformation de recherche est similaire à une jointure externe gauche. To
 La transformation de recherche prend uniquement en charge les correspondances d’égalité. Pour personnaliser l’expression de recherche afin d’inclure d’autres opérateurs tels que supérieur à, il est recommandé d’utiliser une [jointure croisée dans la transformation de jointure](data-flow-join.md#custom-cross-join). Avec une jointure croisée, vous éviterez ainsi les erreurs de produit cartésien lors de l’exécution.
 
 Toutes les colonnes des deux flux sont incluses dans les données de sortie. Pour supprimer les colonnes en double ou indésirables, ajoutez une [transformation de sélection](data-flow-select.md) après votre transformation de recherche. Les colonnes peuvent également être supprimées ou renommées dans une transformation de récepteur.
+
+### <a name="non-equi-joins"></a>Jointures différentes
+
+Pour utiliser un opérateur conditionnel tel que « différent de » (!=) ou « supérieur à » (>) dans vos conditions de recherche, modifiez la liste déroulante des opérateurs entre les deux colonnes. Des jointures différentes nécessitent qu’au moins l’un des deux flux soit diffusés en utilisant la diffusion **fixe** dans l’onglet **Optimiser**.
+
+![Non-equi lookup](media/data-flow/non-equi-lookup.png "Recherche de différence")
 
 ## <a name="analyzing-matched-rows"></a>Analyse des lignes correspondantes
 
@@ -61,6 +69,10 @@ Dans les transformations de jointure, de recherche et d’existence, si l’un d
 
 Il n’est pas recommandé de désactiver la diffusion à l’aide de l’option **Désactivé** à moins que vos jointures ne rencontrent des erreurs de délai d’attente.
 
+## <a name="cached-lookup"></a>Recherche mise en cache
+
+Si vous effectuez plusieurs petites recherches sur la même source, un récepteur et une recherche en cache sont peut-être préférables à la transformation de recherche. La recherche d’une valeur maximale dans un magasin de données et la mise en correspondance des codes d’erreur avec une base de données de messages d’erreur sont des situations courantes dans lesquelles un récepteur de cache peut être préférable. Pour plus d’informations, apprenez-en plus sur les [récepteurs de cache](data-flow-sink.md#cache-sink) et les [recherches mises en cache](concepts-data-flow-expression-builder.md#cached-lookup).
+
 ## <a name="data-flow-script"></a>Script de flux de données
 
 ### <a name="syntax"></a>Syntaxe
@@ -75,9 +87,9 @@ Il n’est pas recommandé de désactiver la diffusion à l’aide de l’option
         broadcast: { 'auto' | 'left' | 'right' | 'both' | 'off' }
     ) ~> <lookupTransformationName>
 ```
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
-![Transformation de recherche](media/data-flow/lookup-dsl-example.png "Recherche")
+![Capture d’écran représentant l’onglet Paramètres de recherche pour le code suivant.](media/data-flow/lookup-dsl-example.png "Recherche")
 
 Le script de transmission de données pour la configuration de recherche ci-dessus se trouve dans l’extrait de code suivant.
 

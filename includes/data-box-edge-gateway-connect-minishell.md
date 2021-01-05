@@ -4,12 +4,12 @@ ms.service: databox
 ms.topic: include
 ms.date: 03/06/2019
 ms.author: alkohli
-ms.openlocfilehash: 348f7bdd333da4f4a6cb41a438b7aee08d6a6bbb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e603442bdecf9a627172e24390b06cef573f475
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177525"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96027683"
 ---
 Selon le système d’exploitation du client, les procédures permettant de se connecter à distance à l’appareil sont différentes.
 
@@ -58,11 +58,11 @@ Suivez cette procédure pour effectuer une connexion distante depuis un client W
 
 Sur le client Linux que vous utiliserez pour vous connecter :
 
-- [Installez la plus récente de PowerShell Core pour Linux](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6), à partir de GitHub, afin d’obtenir la fonctionnalité d’accès distant SSH. 
+- [Installez la plus récente de PowerShell Core pour Linux](/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6), à partir de GitHub, afin d’obtenir la fonctionnalité d’accès distant SSH. 
 - [Installez uniquement le package `gss-ntlmssp` à partir du module NTLM](https://github.com/Microsoft/omi/blob/master/Unix/doc/setup-ntlm-omi.md). Pour les clients Ubuntu, exécutez la commande ci-dessous :
     - `sudo apt-get install gss-ntlmssp`
 
-Pour plus d’informations, voir [Accès distant à PowerShell via SSH](https://docs.microsoft.com/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core?view=powershell-6).
+Pour plus d’informations, voir [Accès distant à PowerShell via SSH](/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core?view=powershell-6).
 
 Suivez cette procédure pour effectuer une connexion distante depuis un client NFS.
 

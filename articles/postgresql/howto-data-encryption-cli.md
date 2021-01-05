@@ -1,17 +1,18 @@
 ---
 title: Chiffrement – Interface de ligne de commande Azure – pour Azure Database pour PostgreSQL – Serveur unique
 description: Découvrez comment configurer et gérer le chiffrement des données pour votre serveur unique Azure Database pour PostgreSQL à l’aide de l’interface de ligne de commande Azure.
-author: kummanish
-ms.author: manishku
+author: mksuni
+ms.author: sumuth
 ms.service: postgresql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
-ms.openlocfilehash: 77c464f51bd17921052b3ae1e9fefb49e777d6c2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 757782e8842fbcaca9c8d95ec8086dd5791a817b
+ms.sourcegitcommit: 80034a1819072f45c1772940953fef06d92fefc8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181903"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93240611"
 ---
 # <a name="data-encryption-for-azure-database-for-postgresql-single-server-by-using-the-azure-cli"></a>Chiffrement des données pour le serveur unique Azure Database pour PostgreSQL avec l’interface de ligne de commande Azure
 
@@ -22,51 +23,51 @@ Découvrez comment utiliser l’interface de ligne de commande Azure pour config
 * Vous devez avoir un abonnement Azure et être un administrateur de cet abonnement.
 * Créez un coffre de clés et une clé à utiliser pour une clé gérée par le client. Activez également la protection de purge et la suppression réversible sur le coffre de clés.
 
-    ```azurecli-interactive
-    az keyvault create -g <resource_group> -n <vault_name> --enable-soft-delete true --enable-purge-protection true
-    ```
+   ```azurecli-interactive
+   az keyvault create -g <resource_group> -n <vault_name> --enable-soft-delete true --enable-purge-protection true
+   ```
 
 * Dans le coffre de clés Azure créé, créez la clé qui sera utilisée pour le chiffrement des données du serveur Azure Database pour le serveur unique PostgreSQL.
 
-    ```azurecli-interactive
-    az keyvault key create --name <key_name> -p software --vault-name <vault_name>
-    ```
+   ```azurecli-interactive
+   az keyvault key create --name <key_name> -p software --vault-name <vault_name>
+   ```
 
-* Pour que vous puissiez utiliser un coffre de clés existant, celui-ci doit avoir les propriétés suivantes à utiliser comme clé gérée par le client :
-  * [Suppression réversible](../key-vault/general/overview-soft-delete.md)
+* Pour que vous puissiez utiliser un coffre de clés existant, celui-ci doit avoir les propriétés suivantes à utiliser en tant que clé gérée par le client :
+  * [Suppression réversible](../key-vault/general/soft-delete-overview.md)
 
-    ```azurecli-interactive
-    az resource update --id $(az keyvault show --name \ <key_vault_name> -o tsv | awk '{print $1}') --set \ properties.enableSoftDelete=true
-    ```
+      ```azurecli-interactive
+      az resource update --id $(az keyvault show --name \ <key_vault_name> -o tsv | awk '{print $1}') --set \ properties.enableSoftDelete=true
+      ```
 
-  * [Protégé contre le vidage](../key-vault/general/overview-soft-delete.md#purge-protection)
+  * [Protégé contre le vidage](../key-vault/general/soft-delete-overview.md#purge-protection)
 
-    ```azurecli-interactive
-    az keyvault update --name <key_vault_name> --resource-group <resource_group_name>  --enable-purge-protection true
-    ```
+      ```azurecli-interactive
+      az keyvault update --name <key_vault_name> --resource-group <resource_group_name>  --enable-purge-protection true
+      ```
 
 * La clé doit avoir les attributs suivants à utiliser en tant que clé gérée par le client :
   * Aucune date d’expiration
   * Non activée
-  * Effectuer les opérations **get**, **wrap** et **unwrap**
+  * Effectuer les opérations **get** , **wrap** et **unwrap**
 
 ## <a name="set-the-right-permissions-for-key-operations"></a>Définir les permissions appropriées pour les opérations sur les clés
 
 1. Il existe deux façons d’obtenir l’identité managée pour votre serveur unique Azure Database pour PostgreSQL.
 
-    ### <a name="create-an-new-azure-database-for-mysql-server-with-a-managed-identity"></a>Créez un serveur Azure Database pour MySQL avec une identité managée.
+    ### <a name="create-an-new-azure-database-for-postgresql-server-with-a-managed-identity"></a>Créez un serveur Azure Database pour PostgreSQL avec une identité managée.
 
     ```azurecli-interactive
-    az postgres server create --name -g <resource_group> --location <locations> --storage-size <size>  -u <user>-p <pwd> --backup-retention <7> --sku-name <sku name> --geo-redundant-backup <Enabled/Disabled>  --assign-identity
+    az postgres server create --name <server_name> -g <resource_group> --location <location> --storage-size <size>  -u <user> -p <pwd> --backup-retention <7> --sku-name <sku name> --geo-redundant-backup <Enabled/Disabled> --assign-identity
     ```
 
-    ### <a name="update-an-existing-the-azure-database-for-mysql-server-to-get-a-managed-identity"></a>Mettez à jour un serveur Azure Database pour MySQL existant pour obtenir une identité managée.
+    ### <a name="update-an-existing-the-azure-database-for-postgresql-server-to-get-a-managed-identity"></a>Mettez à jour un serveur Azure Database pour PostgreSQL existant pour obtenir une identité managée.
 
     ```azurecli-interactive
-    az postgres server update –name <server name>  -g <resoure_group> --assign-identity
+    az postgres server update --resource-group <resource_group> --name <server_name> --assign-identity
     ```
 
-2. Définissez les **Autorisations de clé** (**Get**, **Wrap**, **Unwrap**) pour le **Principal**, qui représente le nom du serveur unique PostgreSQL.
+2. Définissez les **Autorisations de clé** ( **Get** , **Wrap** , **Unwrap** ) pour le **Principal** , qui représente le nom du serveur unique PostgreSQL.
 
     ```azurecli-interactive
     az keyvault set-policy --name -g <resource_group> --key-permissions get unwrapKey wrapKey --object-id <principal id of the server>
@@ -77,7 +78,7 @@ Découvrez comment utiliser l’interface de ligne de commande Azure pour config
 1. Activez le chiffrement des données pour le serveur unique Azure Database pour PostgreSQL à l’aide de la clé créée dans le coffre de clés Azure.
 
     ```azurecli-interactive
-    az postgres server key create –name  <server name>  -g <resource_group> --kid <key url>
+    az postgres server key create --name <server_name> -g <resource_group> --kid <key_url>
     ```
 
     URL de la clé :  `https://YourVaultName.vault.azure.net/keys/YourKeyName/01234567890123456789012345678901>`
@@ -88,36 +89,56 @@ Une fois Azure Database pour PostgreSQL Serveur unique chiffré à l'aide d'une 
 
 ### <a name="creating-a-restoredreplica-server"></a>Création d’un serveur de restauration/réplica
 
-  *  [Créer un serveur de restauration](howto-restore-server-cli.md) 
-  *  [Créer un serveur réplica en lecture](howto-read-replicas-cli.md) 
+* [Créer un serveur de restauration](howto-restore-server-cli.md)
+* [Créer un serveur réplica en lecture](howto-read-replicas-cli.md)
 
-### <a name="once-the-server-is-restored-revalidate-data-encryption-the-restored-server"></a>Quand le serveur est restauré, revalidez le chiffrement des données sur ce dernier.
+### <a name="once-the-server-is-restored-revalidate-data-encryption-the-restored-server"></a>Une fois le serveur restauré, revalidez le chiffrement des données sur le serveur restauré
 
-    ```azurecli-interactive
-    az postgres server key create –name  <server name> -g <resource_group> --kid <key url>
-    ```
+*   Attribuer une identité pour le serveur réplica
+```azurecli-interactive
+az postgres server update --name  <server name>  -g <resoure_group> --assign-identity
+```
+
+*   Obtenir la clé existante à utiliser pour le serveur de restauration/réplica
+
+```azurecli-interactive
+az postgres server key list --name  '<server_name>'  -g '<resource_group_name>'
+```
+
+*   Définir la stratégie pour la nouvelle identité du serveur de restauration/réplica
+
+```azurecli-interactive
+az keyvault set-policy --name <keyvault> -g <resoure_group> --key-permissions get unwrapKey wrapKey --object-id <principl id of the server returned by the step 1>
+```
+
+* Revalider le serveur de restauration/réplica avec la clé de chiffrement
+
+```azurecli-interactive
+az postgres server key create –name  <server name> -g <resource_group> --kid <key url>
+```
 
 ## <a name="additional-capability-for-the-key-being-used-for-the-azure-database-for-postgresql-single-server"></a>Capacité supplémentaire pour la clé utilisée pour le serveur unique Azure Database pour PostgreSQL
 
 ### <a name="get-the-key-used"></a>Obtenir la clé utilisée
 
-    ```azurecli-interactive
-    az mysql server key show --name  <server name>  -g <resource_group> --kid <key url>
-    ```
+```azurecli-interactive
+az postgres server key show --name <server name>  -g <resource_group> --kid <key url>
+```
 
-    Key url:  `https://YourVaultName.vault.azure.net/keys/YourKeyName/01234567890123456789012345678901>`
+URL de la clé : `https://YourVaultName.vault.azure.net/keys/YourKeyName/01234567890123456789012345678901>`
 
 ### <a name="list-the-key-used"></a>Répertorier la clé utilisée
 
-    ```azurecli-interactive
-    az postgres server key list --name  <server name>  -g <resource_group>
-    ```
+```azurecli-interactive
+az postgres server key list --name  <server name>  -g <resource_group>
+```
 
 ### <a name="drop-the-key-being-used"></a>Supprimer la clé utilisée
 
-    ```azurecli-interactive
-    az postgres server key delete -g <resource_group> --kid <key url> 
-    ```
+```azurecli-interactive
+az postgres server key delete -g <resource_group> --kid <key url> 
+```
+
 ## <a name="using-an-azure-resource-manager-template-to-enable-data-encryption"></a>Utilisation d’un modèle Azure Resource Manager pour activer le chiffrement des données
 
 Outre le portail Azure, vous pouvez également activer le chiffrement des données sur votre serveur unique Azure Database pour PostgreSQL à l’aide de modèles Azure Resource Manager pour les serveurs nouveaux et existants.

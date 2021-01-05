@@ -1,23 +1,23 @@
 ---
-title: Accès, puissance et mode de connectivité des appareils Azure Stack Edge | Microsoft Docs
-description: Explique comment gérer l’accès, la puissance et le mode de connectivité de l’appareil Azure Stack Edge qui permet de transférer des données sur Azure
+title: Accès, puissance et mode de connectivité des appareils Azure Stack Edge Pro | Microsoft Docs
+description: Explique comment gérer l’accès, la puissance et le mode de connectivité de l’appareil Azure Stack Edge Pro qui permet de transférer des données sur Azure
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/24/2019
 ms.author: alkohli
-ms.openlocfilehash: 939296b1cf606401a801dd72eccbad23da766018
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 6455e4c9fa9460e47e3be7c860f89be540a514b0
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82568698"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96453079"
 ---
-# <a name="manage-access-power-and-connectivity-mode-for-your-azure-stack-edge"></a>Gérer l’accès, la puissance et le mode de connectivité d’Azure Stack Edge
+# <a name="manage-access-power-and-connectivity-mode-for-your-azure-stack-edge-pro"></a>Gérer l’accès, la puissance et le mode de connectivité d’Azure Stack Edge Pro
 
-Cet article explique comment gérer l’accès, la puissance et le mode de connectivité d’Azure Stack Edge. Ces opérations sont effectuées sur l’interface utilisateur web locale ou le Portail Azure.
+Cet article explique comment gérer l’accès, la puissance et le mode de connectivité d’Azure Stack Edge Pro. Ces opérations sont effectuées sur l’interface utilisateur web locale ou le Portail Azure.
 
 Dans cet article, vous apprendrez comment :
 
@@ -29,7 +29,7 @@ Dans cet article, vous apprendrez comment :
 
 ## <a name="manage-device-access"></a>Gérer l’accès aux appareils
 
-L’accès à votre appareil Azure Stack Edge est contrôlé par l’utilisation d’un mot de passe d’appareil. Vous pouvez changer ce mot de passe à l’aide de l’interface utilisateur web locale. Vous pouvez également le réinitialiser sur le portail Azure.
+L’accès à votre appareil Azure Stack Edge Pro est contrôlé par l’utilisation d’un mot de passe d’appareil. Vous pouvez changer ce mot de passe à l’aide de l’interface utilisateur web locale. Vous pouvez également le réinitialiser sur le portail Azure.
 
 ### <a name="change-device-password"></a>Modifier le mot de passe d’un appareil
 
@@ -53,7 +53,7 @@ Le workflow de réinitialisation n’implique pas de se rappeler l’ancien mot 
 
 2. Entrez le nouveau mot de passe, puis confirmez-le. Le mot de passe indiqué doit comporter entre 8 et 16 caractères, d’au moins trois types : majuscule, minuscule, chiffre et caractère spécial. Sélectionnez **Réinitialiser**.
 
-    ![Réinitialiser le mot de passe](media/azure-stack-edge-manage-access-power-connectivity-mode/reset-password-2.png)
+    ![Réinitialiser le mot de passe 2](media/azure-stack-edge-manage-access-power-connectivity-mode/reset-password-2.png)
 
 ## <a name="manage-resource-access"></a>Gérer l’accès aux ressources
 
@@ -61,14 +61,14 @@ Pour créer votre ressource Azure Stack Edge/Data Box Gateway, IoT Hub et Stocka
 
 ### <a name="manage-microsoft-graph-api-permissions"></a>Gérer les autorisations pour l’API Microsoft Graph
 
-Quand vous générez la clé d’activation pour l’appareil Azure Stack Edge ou que vous effectuez des opérations qui nécessitent des informations d’identification, vous devez disposer d’autorisations sur l’API Graph d’Azure Active Directory. Les opérations nécessitant des informations d’identification peuvent être les suivantes :
+Quand vous générez la clé d’activation pour l’appareil Azure Stack Edge Pro ou vous effectuez des opérations qui nécessitent des informations d’identification, vous devez disposer d’autorisations sur l’API Graph d’Azure Active Directory. Les opérations nécessitant des informations d’identification peuvent être les suivantes :
 
 -  Création d’un partage avec un compte de stockage associé.
 -  Création d’un utilisateur qui peut accéder aux partages se trouvant sur l’appareil.
 
-Vous devez avoir un accès `User` sur le locataire Active Directory car vous devez être en mesure de `Read all directory objects`. Vous ne pouvez pas être un utilisateur Invité car ce type d’utilisateur ne dispose pas d’autorisations pour `Read all directory objects`. Si vous êtes un invité, les opérations telles que la génération d’une clé d’activation, la création d’un partage sur votre appareil Azure Stack Edge, la création d’un utilisateur, la configuration d’un rôle de calcul Edge et la réinitialisation du mot de passe de l’appareil sont toutes vouées à l’échec.
+Vous devez avoir un accès `User` sur le locataire Active Directory car vous devez être en mesure de `Read all directory objects`. Vous ne pouvez pas être un utilisateur Invité car ce type d’utilisateur ne dispose pas d’autorisations pour `Read all directory objects`. Si vous êtes un invité, les opérations telles que la génération d’une clé d’activation, la création d’un partage sur votre appareil Azure Stack Edge Pro, la création d’un utilisateur, la configuration d’un rôle de calcul Edge et la réinitialisation du mot de passe de l’appareil sont toutes vouées à l’échec.
 
-Pour plus d’informations sur la façon de fournir aux utilisateurs un accès à l’API Microsoft Graph, consultez [Informations de référence sur les autorisations Microsoft Graph](https://docs.microsoft.com/graph/permissions-reference).
+Pour plus d’informations sur la façon de fournir aux utilisateurs un accès à l’API Microsoft Graph, consultez [Informations de référence sur les autorisations Microsoft Graph](/graph/permissions-reference).
 
 ### <a name="register-resource-providers"></a>Inscrire des fournisseurs de ressources
 
@@ -89,13 +89,13 @@ Pour obtenir une liste des fournisseurs de ressources inscrits dans l’abonneme
 Get-AzResourceProvider -ListAvailable |where {$_.Registrationstate -eq "Registered"}
 ```
 
-Pour un appareil Azure Stack Edge, `Microsoft.DataBoxEdge` doit être inscrit. Pour inscrire `Microsoft.DataBoxEdge`, l’administrateur de l’abonnement doit exécuter la commande suivante :
+Pour un appareil Azure Stack Edge Pro, `Microsoft.DataBoxEdge` doit être inscrit. Pour inscrire `Microsoft.DataBoxEdge`, l’administrateur de l’abonnement doit exécuter la commande suivante :
 
 ```PowerShell
 Register-AzResourceProvider -ProviderNamespace Microsoft.DataBoxEdge
 ```
 
-Pour plus d’informations sur la façon d’inscrire un fournisseur de ressources, consultez [Résoudre les erreurs d’inscription de fournisseurs de ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-register-provider-errors).
+Pour plus d’informations sur la façon d’inscrire un fournisseur de ressources, consultez [Résoudre les erreurs d’inscription de fournisseurs de ressources](../azure-resource-manager/templates/error-register-resource-provider.md).
 
 ## <a name="manage-connectivity-mode"></a>Gérer le mode de connectivité
 

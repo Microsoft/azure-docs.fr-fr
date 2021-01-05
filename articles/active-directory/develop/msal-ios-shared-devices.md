@@ -13,19 +13,17 @@ ms.date: 03/31/2020
 ms.author: brandwe
 ms.reviewer: brandwe
 ms.custom: aaddev
-ms.openlocfilehash: 7cecbc48eb362c2c0f1741352e6f7f5f6ad40c9e
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: a97e14bcb68629f5f175a4913146187949af08be
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80576716"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94561061"
 ---
 # <a name="shared-device-mode-for-ios-devices"></a>Mode d’appareil partagé pour les appareils iOS
 
-> [!NOTE]
-> Cette fonctionnalité est en version préliminaire publique.
-> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge.
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>[!IMPORTANT]
+> Cette fonctionnalité [!INCLUDE [PREVIEW BOILERPLATE](../../../includes/active-directory-develop-preview.md)]
 
 Les employés de terrain, comme les représentants, les membres d’équipage et les techniciens d’intervention, utilisent souvent un appareil mobile partagé pour effectuer leur travail. Ces appareils partagés peuvent présenter des risques de sécurité si vos utilisateurs partagent leur mot de passe ou leurs codes secrets, intentionnellement ou non, pour accéder aux données client et métier sur l’appareil partagé.
 
@@ -43,7 +41,7 @@ Pour créer une application en mode d’appareil partagé, les développeurs et 
 
 1. Les **Administrateurs d’appareils** préparent l’appareil pour qu’il soit partagé à l’aide d’un fournisseur de gestion des périphériques mobiles (GPM) tel que Microsoft Intune pour gérer les appareils de leur organisation. Le GPM envoie (push) l’application Microsoft Authenticator sur les appareils et active le « mode partagé » pour chaque appareil via une mise à jour de profil sur l’appareil. Ce paramètre Mode partagé est ce qui modifie le comportement des applications prises en charge sur l’appareil. Cette configuration à partir du fournisseur GPM définit le mode Appareil partagé pour l’appareil et active le [plug-in Microsoft Enterprise Single Sign-On pour les appareils Apple](apple-sso-plugin.md), qui est requis pour le mode Appareil partagé.
 
-1. [**Requis en Préversion publique uniquement**] Un utilisateur doté du rôle [Administrateur d’appareil cloud](../users-groups-roles/directory-assign-admin-roles.md#cloud-device-administrator) doit alors lancer l’[application Microsoft Authenticator](../user-help/user-help-auth-app-overview.md) et joindre son appareil à l’organisation.
+1. [**Requis en Préversion publique uniquement**] Un utilisateur doté du rôle [Administrateur d’appareil cloud](../roles/permissions-reference.md#cloud-device-administrator) doit alors lancer l’[application Microsoft Authenticator](../user-help/user-help-auth-app-overview.md) et joindre son appareil à l’organisation.
 
     Pour configurer l’appartenance de vos rôles organisationnels dans le Portail Azure : **Azure Active Directory** > **Rôles et administrateurs** > **Administrateur d’appareil cloud**
 
@@ -60,14 +58,23 @@ Votre appareil doit être configuré pour prendre en charge le mode Appareil par
 
     - **Type** : Rediriger
     - **ID d’extension** : com.microsoft.azureauthenticator.ssoextension
-    - **ID de l’équipe** : SGGM6D27TK
-    - **URL** : https://login.microsoftonline.com
-    - Données supplémentaires à configurer :
+    - **ID d'équipe** : (ce champ n'est pas nécessaire pour iOS)
+    - **URL** :   
+        - `https://login.microsoftonline.com`
+        - `https://login.microsoft.com`
+        - `https://sts.windows.net`
+        - `https://login.partner.microsoftonline.cn`
+        - `https://login.chinacloudapi.cn`
+        - `https://login.microsoftonline.de`
+        - `https://login.microsoftonline.us`
+        - `https://login.usgovcloudapi.net`
+        - `https://login-us.microsoftonline.com`
+    - **Données supplémentaires à configurer** :
       - Clé : sharedDeviceMode
       - Tapez : Boolean
-      - Valeur : True
+      - Valeur : true
 
-    Pour plus d’informations sur la configuration avec Intune, consultez la [documentation sur la configuration d’Intune](https://docs.microsoft.com/intune/configuration/ios-device-features-settings).
+    Pour plus d’informations sur la configuration avec Intune, consultez la [documentation sur la configuration d’Intune](/intune/configuration/ios-device-features-settings).
 
 1. Ensuite, configurez votre GPM pour envoyer (push) l’application Microsoft Authenticator à votre appareil via un profil GPM.
 
@@ -76,7 +83,7 @@ Votre appareil doit être configuré pour prendre en charge le mode Appareil par
     - Configuration 1 :
       - Clé : sharedDeviceMode
       - Tapez : Boolean
-      - Valeur : True
+      - Valeur : true
 
 ## <a name="modify-your-ios-application-to-support-shared-device-mode"></a>Modifier votre application iOS pour prendre en charge le mode Appareil partagé
 

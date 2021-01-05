@@ -1,21 +1,22 @@
 ---
 title: 'Tutoriel : Déployer un modèle Azure Resource Manager local'
-description: Découvrez comment déployer un modèle Azure Resource Manager à partir de votre ordinateur local
+description: Découvrez comment déployer un modèle ARM (Azure Resource Manager) à partir de votre ordinateur local
 ms.date: 05/20/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 01f04d18ae54c3c512010dd005e9d820b914e536
-ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
+ms.custom: ''
+ms.openlocfilehash: 640d314711e34119dac5e1c5bf9fa245685b6f38
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83714064"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97368134"
 ---
-# <a name="tutorial-deploy-a-local-azure-resource-manager-template"></a>Tutoriel : Déployer un modèle Azure Resource Manager local
+# <a name="tutorial-deploy-a-local-arm-template"></a>Tutoriel : Déployer un modèle ARM local
 
-Découvrez comment déployer un modèle Azure Resource Manager à partir de votre ordinateur local. Il faut compter environ **8 minutes** pour effectuer ce tutoriel.
+Découvrez comment déployer un modèle ARM (Azure Resource Manager) à partir de votre ordinateur local Il faut compter environ **8 minutes** pour effectuer ce tutoriel.
 
-Ce tutoriel est le premier d’une série. Au fur et à mesure que vous progressez dans la série, vous modularisez le modèle en créant un modèle lié, stockez le modèle lié dans un compte de stockage et le sécurisez à l’aide du jeton SAS, et apprenez à créer un pipeline DevOp pour déployer des modèles. Cette série porte sur le déploiement de modèles.  Si vous souhaitez apprendre le développement de modèles, consultez les [tutoriels pour les débutants](./template-tutorial-create-first-template.md).
+Ce tutoriel est le premier d’une série. Au fur et à mesure que vous progressez dans la série, vous modularisez le modèle en créant un modèle lié, stockez le modèle lié dans un compte de stockage et le sécurisez à l’aide du jeton SAS, et apprenez à créer un pipeline DevOps pour déployer des modèles. Cette série porte sur le déploiement de modèles. Si vous souhaitez apprendre le développement de modèles, consultez les [tutoriels pour les débutants](./template-tutorial-create-first-template.md).
 
 ## <a name="get-tools"></a>Obtenir les outils
 
@@ -28,12 +29,13 @@ Vous avez besoin d’Azure PowerShell ou d’Azure CLI pour déployer le modèle
 - [Installation d'Azure PowerShell](/powershell/azure/install-az-ps)
 - [Installer Azure CLI sur Windows](/cli/azure/install-azure-cli-windows)
 - [Installer Azure CLI sur Linux](/cli/azure/install-azure-cli-linux)
+- [Installer Azure CLI sur macOS](/cli/azure/install-azure-cli-macos)
 
 Après avoir installé Azure PowerShell ou Azure CLI, prenez soin de vous connecter une première fois. Pour obtenir de l’aide, consultez [Se connecter - PowerShell](/powershell/azure/install-az-ps#sign-in) ou [Se connecter - Azure CLI](/cli/azure/get-started-with-azure-cli#sign-in).
 
 ### <a name="editor-optional"></a>Éditeur (facultatif)
 
-Les modèles sont des fichiers JSON. Pour examiner/modifier des modèles, vous avez besoin d’un bon éditeur JSON. Nous conseillons Visual Studio Code avec l’extension Outils Resource Manager. Si vous devez installer ces outils, consultez [Utiliser Visual Studio Code pour créer des modèles Azure Resource Manager](use-vs-code-to-create-template.md).
+Les modèles sont des fichiers JSON. Pour examiner/modifier des modèles, vous avez besoin d’un bon éditeur JSON. Nous conseillons Visual Studio Code avec l’extension Outils Resource Manager. Si vous devez installer ces outils, consultez [Démarrage rapide : Créer des modèles ARM avec Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
 
 ## <a name="review-template"></a>Vérifier le modèle
 
@@ -42,9 +44,9 @@ Le modèle déploie un compte de stockage, un plan App Service et une applicatio
 :::code language="json" source="~/resourcemanager-templates/get-started-deployment/local-template/azuredeploy.json":::
 
 > [!IMPORTANT]
-> Ce nom doit comprendre entre 3 et 24 caractères, uniquement des lettres en minuscules et des nombres. Le nom doit être unique. Dans le modèle, le nom du compte de stockage est le nom du projet auquel « store » est ajouté, et le nom du projet doit comprendre entre 3 et 11 caractères. Le nom du projet doit donc respecter les exigences du nom du compte de stockage et comporter moins de 11 caractères.
+> Ce nom doit comprendre entre 3 et 24 caractères, uniquement des lettres en minuscules et des nombres. Le nom doit être unique. Dans le modèle, le nom du compte de stockage est le nom du projet auquel **store** est ajouté, et le nom du projet doit comprendre entre 3 et 11 caractères. Le nom du projet doit donc respecter les exigences du nom du compte de stockage et comporter moins de 11 caractères.
 
-Enregistrez une copie du modèle sur votre ordinateur local avec l’extension .json, par exemple azuredeploy.json. Vous allez déployer ce modèle ultérieurement dans le tutoriel.
+Enregistrez une copie du modèle sur votre ordinateur local avec l’extension _.json_, par exemple _azuredeploy.json_. Vous allez déployer ce modèle ultérieurement dans le tutoriel.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -64,7 +66,7 @@ az login
 
 ---
 
-Si vous avez plusieurs abonnements Azure, sélectionnez celui que vous souhaitez utiliser :
+Si vous avez plusieurs abonnements Azure, sélectionnez celui que vous souhaitez utiliser. Remplacez `[SubscriptionID/SubscriptionName]` et les crochets `[]` par vos informations d’abonnement :
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -128,7 +130,7 @@ New-AzResourceGroupDeployment `
   -verbose
 ```
 
-Pour en savoir plus sur le déploiement de modèles avec Azure PowerShell, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](./deploy-powershell.md).
+Pour en savoir plus sur le déploiement de modèles avec Azure PowerShell, consultez [Déployer des ressources à l’aide de modèles ARM et d’Azure PowerShell](./deploy-powershell.md).
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
@@ -147,7 +149,7 @@ az deployment group create \
   --verbose
 ```
 
-Pour en savoir plus sur le déploiement de modèles avec Azure CLI, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](./deploy-cli.md).
+Pour en savoir plus sur le déploiement de modèles avec Azure CLI, consultez [Déployer des ressources à l’aide de modèles ARM et d’Azure CLI](./deploy-cli.md).
 
 ---
 

@@ -1,20 +1,18 @@
 ---
-title: 'Script PowerShell : Ajouter un jeu de données blob à Azure Data Share | Microsoft Docs'
+title: 'Script PowerShell : Ajouter un jeu de données blob à Azure Data Share'
 description: Ce script PowerShell ajoute un jeu de données blob à un partage existant.
 services: data-share
 author: joannapea
+ms.author: joanpo
 ms.service: data-share
-ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 07/07/2019
-ms.author: joanpo
-ms.openlocfilehash: 95a10b112c9f6448c437f20ee95f808632a31d2d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f2a2dded0b9c817e0700f4f93782d3b5c11ac3f
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70307300"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221381"
 ---
 # <a name="use-powershell-to-create-a-data-share-in-azure"></a>Utiliser PowerShell pour créer un partage de données dans Azure
 
@@ -44,11 +42,11 @@ Ce script utilise les commandes suivantes :
 
 | Commande | Notes |
 |---|---|
-| [New-AzDataShareDataSet](/powershell/module/az.datashare/new-azdatasharedataset?view=azps-2.6.0) | Ajoute un jeu de données à un partage de données. |
+| [New-AzDataShareDataSet](/powershell/module/az.datashare/new-azdatasharedataset) | Ajoute un jeu de données à un partage de données. |
 |||
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).
 
 Des exemples supplémentaires de scripts PowerShell pour Azure Data Share sont à votre disposition dans [Exemples PowerShell pour Azure Data Share](../../samples-powershell.md).

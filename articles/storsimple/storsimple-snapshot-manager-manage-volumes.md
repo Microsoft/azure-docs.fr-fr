@@ -3,23 +3,23 @@ title: Gestionnaire d’instantanés StorSimple et volumes | Microsoft Docs
 description: Décrit comment utiliser le composant logiciel enfichable MMC du Gestionnaire d’instantanés StorSimple pour afficher et gérer des volumes, ainsi que pour configurer des sauvegardes.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: carmonm
 editor: ''
 ms.assetid: 78896323-e57c-431e-bbe2-0cbde1cf43a2
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 04/18/2016
-ms.author: twooley
-ms.openlocfilehash: f09d4dd46a50f1794e51342a939b8919c5c523ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 309fa85d0a4d877522a89dd8f1e6e71fb2074744
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228137"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022936"
 ---
 # <a name="use-storsimple-snapshot-manager-to-view-and-manage-volumes"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour afficher et gérer les volumes
 ## <a name="overview"></a>Vue d’ensemble
@@ -45,7 +45,7 @@ Ce didacticiel vous explique comment monter, initialiser et formater les volumes
 > 
 
 ## <a name="mount-volumes"></a>Monter les volumes
-Appliquez la procédure suivante pour monter, initialiser et formater des volumes StorSimple. Cette procédure utilise Gestion des disques, un utilitaire système dédié à la gestion des disques durs et des volumes et partitions correspondants. Pour plus d’informations sur le composant Gestion des disques, accédez à la section [Gestion des disques](https://technet.microsoft.com/library/cc770943.aspx) du site web Microsoft TechNet.
+Appliquez la procédure suivante pour monter, initialiser et formater des volumes StorSimple. Cette procédure utilise Gestion des disques, un utilitaire système dédié à la gestion des disques durs et des volumes et partitions correspondants. Pour plus d’informations sur le composant Gestion des disques, accédez à la section [Gestion des disques](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc770943(v=ws.11)) du site web Microsoft TechNet.
 
 #### <a name="to-mount-volumes"></a>Pour monter des volumes
 1. Sur votre ordinateur hôte, démarrez l’initiateur Microsoft iSCSI.
@@ -80,7 +80,7 @@ Appliquez la procédure suivante pour monter, initialiser et formater des volume
       * Sélectionnez le système de fichiers NTFS.
       * Spécifiez une taille d’unité d’allocation 64 Ko.
       * Effectuez un formatage rapide.
-7. Formatez des volumes à plusieurs partitions. Pour obtenir des instructions, accédez à la section « Partitions et volumes » de la page [Implémentation de la gestion des disques](https://msdn.microsoft.com/library/dd163556.aspx).
+7. Formatez des volumes à plusieurs partitions. Pour obtenir des instructions, accédez à la section « Partitions et volumes » de la page [Implémentation de la gestion des disques](/previous-versions/tn-archive/dd163556(v=technet.10)).
 
 ## <a name="view-information-about-your-volumes"></a>Afficher les informations sur les volumes
 Appliquez la procédure suivante pour afficher des informations sur les volumes locaux et Azure StorSimple.
@@ -133,7 +133,7 @@ Appliquez la procédure suivante pour configurer la sauvegarde d’un volume de 
 ### <a name="prerequisites"></a>Prérequis
 Avant de commencer :
 
-* Assurez-vous que l’appareil StorSimple et l’ordinateur hôte sont correctement configurés. Pour plus d’informations, accédez à la page [Déployer votre appareil local StorSimple](storsimple-deployment-walkthrough-u2.md).
+* Assurez-vous que l’appareil StorSimple et l’ordinateur hôte sont correctement configurés. Pour plus d’informations, accédez à la page [Déployer votre appareil local StorSimple](./storsimple-8000-deployment-walkthrough-u2.md).
 * Installez et configurez le Gestionnaire d’instantanés StorSimple. Pour plus d’informations, accédez à la section [Déployer le Gestionnaire d’instantanés StorSimple](storsimple-snapshot-manager-deployment.md).
 
 #### <a name="to-configure-backup-of-a-basic-volume"></a>Pour configurer la sauvegarde d’un volume de base
@@ -166,7 +166,7 @@ Avant de commencer :
 * Configurez deux volumes sur l’appareil StorSimple. (Dans les exemples, les volumes disponibles sont **Disque 1** et **Disque 2**.) 
 
 ### <a name="step-1-use-disk-management-to-create-a-dynamic-mirrored-volume"></a>Étape 1 : Utiliser la gestion des disques pour créer un volume dynamique en miroir
-Gestion des disques est un utilitaire système dédié à la gestion des disques durs et des volumes et partitions qu’ils contiennent. Pour plus d’informations sur le composant Gestion des disques, accédez à la section [Gestion des disques](https://technet.microsoft.com/library/cc770943.aspx) du site web Microsoft TechNet.
+Gestion des disques est un utilitaire système dédié à la gestion des disques durs et des volumes et partitions qu’ils contiennent. Pour plus d’informations sur le composant Gestion des disques, accédez à la section [Gestion des disques](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc770943(v=ws.11)) du site web Microsoft TechNet.
 
 #### <a name="to-create-a-dynamic-mirrored-volume"></a>Pour créer un volume dynamique en miroir
 1. Pour démarrer le composant Gestion des disques, utilisez l’une des options suivantes : 
@@ -210,4 +210,4 @@ Appliquez la procédure suivante pour configurer un volume dynamique mis en miro
 * Découvrez comment [utiliser le Gestionnaire d’instantanés StorSimple pour créer et gérer des groupes de volumes](storsimple-snapshot-manager-manage-volume-groups.md).
 
 <!--Reference links-->
-[1]: https://msdn.microsoft.com/library/ee338480(v=ws.10).aspx
+[1]: /previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee338480(v=ws.10)

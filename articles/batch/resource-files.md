@@ -3,12 +3,12 @@ title: Création et utilisation de fichiers de ressources
 description: Découvrez comment créer des fichiers de ressources Batch à partir de diverses sources d’entrée. Cet article décrit quelques méthodes courantes pour les créer et les placer sur une machine virtuelle.
 ms.date: 03/18/2020
 ms.topic: how-to
-ms.openlocfilehash: ea349c3a190b78297d9ad4555258d0cfd8828ed4
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 84a5e9780b4fa0abfec5b736e04d385f14716873
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83723457"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92109287"
 ---
 # <a name="creating-and-using-resource-files"></a>Création et utilisation de fichiers de ressources
 
@@ -50,7 +50,7 @@ SharedAccessBlobPolicy sasConstraints = new SharedAccessBlobPolicy
 > [!NOTE]
 > Pour l’accès au conteneur, vous devez disposer des autorisations `Read` et `List`, tandis que pour l’accès aux objets blob, vous n’avez besoin que de l’autorisation `Read`.
 
-Une fois que les autorisations sont configurées, créez le jeton SAS et mettez en forme l’URL SAS pour l’accès au conteneur de stockage. À l’aide de l’URL SAS mise en forme pour le conteneur de stockage, générez un fichier de ressources avec [`FromStorageContainerUrl`](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.resourcefile.fromstoragecontainerurl?view=azure-dotnet).
+Une fois que les autorisations sont configurées, créez le jeton SAS et mettez en forme l’URL SAS pour l’accès au conteneur de stockage. À l’aide de l’URL SAS mise en forme pour le conteneur de stockage, générez un fichier de ressources avec [`FromStorageContainerUrl`](/dotnet/api/microsoft.azure.batch.resourcefile.fromstoragecontainerurl).
 
 ```csharp
 CloudBlobContainer container = blobClient.GetContainerReference(containerName);
@@ -61,7 +61,7 @@ string containerSasUrl = String.Format("{0}{1}", container.Uri, sasToken);
 ResourceFile inputFile = ResourceFile.FromStorageContainerUrl(containerSasUrl);
 ```
 
-Une alternative à la génération d’une URL SAS consiste à activer l’accès en lecture anonyme public pour un conteneur et ses objets blob dans Stockage Blob Azure. En procédant ainsi, vous pouvez accorder un accès en lecture seule à ces ressources sans partager votre clé de compte et sans exiger de signature d’accès partagé. L’accès en lecture public est généralement utilisé dans les situations où vous voulez conférer à certains objets blob un accès en lecture anonyme permanent. Si ce scénario convient à votre solution, consultez l’article [Accès anonyme aux objets Blob](../storage/blobs/storage-manage-access-to-resources.md) article pour en savoir plus sur la gestion de l’accès à vos données d’objet blob.
+Une alternative à la génération d’une URL SAS consiste à activer l’accès en lecture anonyme public pour un conteneur et ses objets blob dans Stockage Blob Azure. En procédant ainsi, vous pouvez accorder un accès en lecture seule à ces ressources sans partager votre clé de compte et sans exiger de signature d’accès partagé. L’accès en lecture public est généralement utilisé dans les situations où vous voulez conférer à certains objets blob un accès en lecture anonyme permanent. Si ce scénario convient à votre solution, consultez l’article [Accès anonyme aux objets Blob](../storage/blobs/anonymous-read-access-configure.md) article pour en savoir plus sur la gestion de l’accès à vos données d’objet blob.
 
 ### <a name="storage-container-name"></a>Nom de conteneur de stockage
 
@@ -99,7 +99,7 @@ Si chaque tâche comporte de nombreux fichiers uniques à celle-ci, les fichiers
 
 Si plusieurs centaines de fichiers de ressources sont spécifiés sur une tâche, Batch peut rejeter la tâche car trop importante. Des petites tâches sont préférables, en réduisant le nombre de fichiers de ressources sur la tâche elle-même.
 
-S’il est impossible de réduire le nombre de fichiers nécessaires à votre tâche, vous pouvez optimiser la tâche en créant un fichier de ressources unique qui fait référence à un conteneur de stockage de fichiers de ressources. Pour cela, placez vos fichiers de ressources dans un conteneur de Stockage Azure et utilisez les différents [modes](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.resourcefile?view=azure-dotnet#methods) de « Conteneur » de fichiers de ressources. Utilisez les options de préfixe d’objet blob pour spécifier des collections de fichiers à télécharger pour vos tâches.
+S’il est impossible de réduire le nombre de fichiers nécessaires à votre tâche, vous pouvez optimiser la tâche en créant un fichier de ressources unique qui fait référence à un conteneur de stockage de fichiers de ressources. Pour cela, placez vos fichiers de ressources dans un conteneur de Stockage Azure et utilisez les différents [modes](/dotnet/api/microsoft.azure.batch.resourcefile#methods) de « Conteneur » de fichiers de ressources. Utilisez les options de préfixe d’objet blob pour spécifier des collections de fichiers à télécharger pour vos tâches.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -9,12 +9,12 @@ metadata:
   author: dcurwin
   ms.author: dacurwin
   ms.date: 12/01/2019
-  ms.openlocfilehash: 0060cc16378ca006e975f4f55da5099179778753
-  ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+  ms.openlocfilehash: 4716d537a6a3e402a4f399be8d64c9fd51edc292
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/25/2020
-  ms.locfileid: "83835674"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91620118"
 landingContent:
 - title: En savoir plus sur Sauvegarde Azure
   linkLists:
@@ -56,12 +56,20 @@ landingContent:
   linkLists:
   - linkListType: whats-new
     links:
+    - text: Centre de sauvegarde
+      url: backup-center-overview.md
+    - text: Sauvegarder Azure Database pour PostgreSQL
+      url: backup-azure-database-postgresql.md
+    - text: Sauvegarde et restauration sélectives de disques pour les machines virtuelles Azure
+      url: selective-disk-backup-restore.md
+    - text: Restauration inter-région pour les bases de données SQL Server sur des machines virtuelles Azure
+      url: restore-sql-database-azure-vm.md#cross-region-restore
+    - text: Prise en charge de la sauvegarde d’une machine virtuelle avec jusqu’à 32 disques
+      url: backup-support-matrix-iaas.md#vm-storage-support
     - text: Suppression réversible pour la Sauvegarde Azure
       url: backup-azure-security-feature-cloud.md
     - text: Restauration sous forme de fichiers de SQL Server sur des machines virtuelles Azure
       url: restore-sql-database-azure-vm.md#restore-as-files
-    - text: Sauvegarde de base de données SAP HANA sur des machines virtuelles Azure
-      url: backup-azure-sap-hana-database.md
 - title: Sauvegarder des machines virtuelles Azure
   linkLists:
   - linkListType: concept
@@ -134,6 +142,8 @@ landingContent:
   linkLists:
   - linkListType: how-to-guide
     links:
+    - text: Gérer à grande échelle avec le Centre de sauvegarde
+      url: backup-center-monitor-operate.md
     - text: Gouverner à grande échelle avec Azure Policy
       url: backup-azure-auto-enable-backup.md
     - text: Superviser et opérer à grande échelle avec l’Explorateur de sauvegarde
@@ -144,9 +154,9 @@ landingContent:
   linkLists:
   - linkListType: concept
     links:
-    - text: Calculatrice de prix de la sauvegarde Azure
-      url: https://azure.microsoft.com/pricing/details/backup/
+    - text: Tarifs Sauvegarde Azure
+      url: azure-backup-pricing.md
     - text: Mises à jour du service de sauvegarde Azure
       url: https://azure.microsoft.com/updates/?product=backup
     - text: Page de questions Microsoft Q&A sur Sauvegarde Azure
-      url: https://docs.microsoft.com/answers/topics/azure-backup.html
+      url: /answers/topics/azure-backup.html

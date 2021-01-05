@@ -1,39 +1,27 @@
 ---
 title: Recevoir des événements à l’aide de l’hôte de processeur d’événements - Azure Event Hubs | Microsoft Docs
 description: Cet article décrit l’hôte de processeur d’événements d’Azure Event Hubs, qui simplifie la gestion des points de contrôle, de la location et des lecteurs d’événements parallèles.
-services: event-hubs
-documentationcenter: .net
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.custom: seodec18
-ms.date: 01/10/2020
-ms.author: shvija
-ms.openlocfilehash: 485f51e45e342ca28d54d609fd975bef5b204f7e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a05f2172b266301919d0a800fb863b8f0dbe5884
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80372227"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89319500"
 ---
 # <a name="event-processor-host"></a>Hôte du processeur d’événements
 > [!NOTE]
-> Cet article s’applique à l’ancienne version du kit de développement logiciel (SDK) Azure Event Hubs. Pour savoir comment migrer votre code vers la version la plus récente du kit de développement logiciel (SDK), consultez ces guides de migration. 
+> Cet article s’applique à l’ancienne version du kit de développement logiciel (SDK) Azure Event Hubs. Pour une version actuelle du Kit de développement logiciel (SDK), consultez [Équilibrer la charge de partition sur plusieurs instances de votre application](event-processor-balance-partition-load.md). Pour savoir comment migrer votre code vers la version la plus récente du kit de développement logiciel (SDK), consultez ces guides de migration. 
 > - [.NET](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md)
 > - [Java](https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/eventhubs/azure-messaging-eventhubs/migration-guide.md)
 > - [Python](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/eventhub/azure-eventhub/migration_guide.md)
 > - [Script Java](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/event-hubs/migrationguide.md)
->
-> Consultez également [Équilibrer la charge de partition sur plusieurs instances de votre application](event-processor-balance-partition-load.md).
 
 Azure Event Hubs est un puissant service d’ingestion de télémétrie qui permet de diffuser des millions d’événements à moindre coût. Cet article décrit comment consommer les événements ingérés à l’aide de l’*hôte de processeur d’événements* (EPH) ; un agent consommateur intelligent qui simplifie la gestion des points de contrôle, de la location et des lecteurs d’événements parallèles.  
 
-La clé de la mise à l’échelle des instances Event Hubs réside dans la notion de consommateurs partitionnés. Contrairement au modèle de [consommateurs concurrents](https://msdn.microsoft.com/library/dn568101.aspx), le modèle de consommateurs partitionnés permet de travailler à grande échelle en supprimant le goulot d’étranglement de contention et en facilitant le parallélisme de bout en bout.
+La clé de la mise à l’échelle des instances Event Hubs réside dans la notion de consommateurs partitionnés. Contrairement au modèle de [consommateurs concurrents](/previous-versions/msp-n-p/dn568101(v=pandp.10)), le modèle de consommateurs partitionnés permet de travailler à grande échelle en supprimant le goulot d’étranglement de contention et en facilitant le parallélisme de bout en bout.
 
 ## <a name="home-security-scenario"></a>Scénario de sécurité pour domicile
 
@@ -99,6 +87,8 @@ Ensuite, créez une instance [EventProcessorHost](/dotnet/api/microsoft.azure.ev
 
 Enfin, les consommateurs inscrivent l’instance [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost) auprès du service Event Hubs. L’inscription d’une classe de processeur d’événements avec une instance EventProcessorHost entraîne le démarrage du traitement des événements. L’inscription ordonne au service Event Hubs d’attendre que l’application consommateur consomme les événements provenant de certaines de ses partitions, puis d’appeler le code d’implémentation [IEventProcessor](/dotnet/api/microsoft.azure.eventhubs.processor.ieventprocessor) chaque fois qu’il envoie (push) des événements à consommer. 
 
+> [!NOTE]
+> La valeur de ConsumerGroupName respecte la casse.  Les modifications apportées à ConsumerGroupName peuvent entraîner la lecture de toutes les partitions à partir du début du flux.
 
 ### <a name="example"></a>Exemple
 
@@ -162,18 +152,18 @@ Comme expliqué précédemment, le tableau de suivi simplifie considérablement 
 
 En outre, une surcharge de [RegisterEventProcessorAsync](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost.registereventprocessorasync?view=azure-dotnet#Microsoft_Azure_EventHubs_Processor_EventProcessorHost_RegisterEventProcessorAsync__1_Microsoft_Azure_EventHubs_Processor_EventProcessorOptions_) prend un objet [EventProcessorOptions](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost.registereventprocessorasync?view=azure-dotnet#Microsoft_Azure_EventHubs_Processor_EventProcessorHost_RegisterEventProcessorAsync__1_Microsoft_Azure_EventHubs_Processor_EventProcessorOptions_) comme paramètre. Utilisez ce paramètre pour contrôler le comportement de [EventProcessorHost.UnregisterEventProcessorAsync](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost.unregistereventprocessorasync) lui-même. [EventProcessorOptions](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions) définit quatre propriétés et un événement :
 
-- [MaxBatchSize](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.maxbatchsize) : taille maximale de la collection que vous souhaitez recevoir dans un appel de [ProcessEventsAsync](/dotnet/api/microsoft.azure.eventhubs.processor.ieventprocessor.processeventsasync). Cette taille n’est pas la valeur minimale, mais seulement la taille maximale. Si moins de messages sont reçus, **ProcessEventsAsync** s’exécute avec tous les messages disponibles.
-- [PrefetchCount](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.prefetchcount) : valeur utilisée par le canal AMQP sous-jacent pour déterminer la limite supérieure du nombre de messages que le client doit recevoir. Cette valeur doit être supérieure ou égale à [MaxBatchSize](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.maxbatchsize).
+- [MaxBatchSize](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.maxbatchsize) : taille maximale de la collection que vous souhaitez recevoir dans un appel de [ProcessEventsAsync](/dotnet/api/microsoft.azure.eventhubs.processor.ieventprocessor.processeventsasync). Cette taille n’est pas la valeur minimale, mais seulement la taille maximale. Si moins de messages sont reçus, **ProcessEventsAsync** s’exécute avec tous les messages disponibles.
+- [PrefetchCount](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.prefetchcount) : valeur utilisée par le canal AMQP sous-jacent pour déterminer la limite supérieure du nombre de messages que le client doit recevoir. Cette valeur doit être supérieure ou égale à [MaxBatchSize](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.maxbatchsize).
 - [InvokeProcessorAfterReceiveTimeout](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.invokeprocessorafterreceivetimeout) : si ce paramètre a la valeur **true**, [ProcessEventsAsync](/dotnet/api/microsoft.azure.eventhubs.processor.ieventprocessor.processeventsasync) est appelé lorsque l’appel sous-jacent servant à recevoir des événements sur une partition arrive à expiration. Cette méthode est utile pour réaliser les actions liées au temps pendant les périodes d’inactivité sur la partition.
-- [InitialOffsetProvider](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.initialoffsetprovider) : permet de définir un pointeur de fonction ou une expression lambda, qui est appelé pour fournir le décalage initial lorsqu’un lecteur commence à lire une partition. Sans spécifier ce décalage, le lecteur commence par l’événement le plus ancien, sauf si un fichier JSON avec un décalage a déjà été enregistré dans le compte de stockage fourni au constructeur [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost). Cette méthode est utile lorsque vous souhaitez modifier le comportement du démarrage du lecteur. Lorsque cette méthode est appelée, le paramètre d’objet contient l’ID de partition pour lequel le lecteur est démarré.
-- [ExceptionReceivedEventArgs](/dotnet/api/microsoft.azure.eventhubs.processor.exceptionreceivedeventargs) : permet de recevoir une notification pour les exceptions sous-jacentes qui se produisent dans [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost). Si les choses ne fonctionnent pas comme prévu, cet événement est un bon point pour commencer la recherche.
+- [InitialOffsetProvider](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessoroptions.initialoffsetprovider) : permet de définir un pointeur de fonction ou une expression lambda, qui est appelé pour fournir le décalage initial lorsqu’un lecteur commence à lire une partition. Sans spécifier ce décalage, le lecteur commence par l’événement le plus ancien, sauf si un fichier JSON avec un décalage a déjà été enregistré dans le compte de stockage fourni au constructeur [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost). Cette méthode est utile lorsque vous souhaitez modifier le comportement du démarrage du lecteur. Lorsque cette méthode est appelée, le paramètre d’objet contient l’ID de partition pour lequel le lecteur est démarré.
+- [ExceptionReceivedEventArgs](/dotnet/api/microsoft.azure.eventhubs.processor.exceptionreceivedeventargs) : permet de recevoir une notification pour les exceptions sous-jacentes qui se produisent dans [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost). Si les choses ne fonctionnent pas comme prévu, cet événement est un bon point pour commencer la recherche.
 
 ## <a name="epoch"></a>Époque
 
 Voici le fonctionnement de la réception d’époque :
 
 ### <a name="with-epoch"></a>Avec époque
-L’époque est un identificateur unique (valeur d’époque) utilisé par le service pour appliquer la propriété de partition/bail. Vous créez un récepteur basé sur une époque à l’aide de la méthode [CreateEpochReceiver](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.eventhubclient.createepochreceiver?view=azure-dotnet). Cette méthode crée un récepteur basé sur une époque. Le récepteur est créé pour une partition de hub d’événements spécifique dans le groupe de consommateurs spécifié.
+L’époque est un identificateur unique (valeur d’époque) utilisé par le service pour appliquer la propriété de partition/bail. Vous créez un récepteur basé sur une époque à l’aide de la méthode [CreateEpochReceiver](/dotnet/api/microsoft.azure.eventhubs.eventhubclient.createepochreceiver?view=azure-dotnet). Cette méthode crée un récepteur basé sur une époque. Le récepteur est créé pour une partition de hub d’événements spécifique dans le groupe de consommateurs spécifié.
 
 La fonctionnalité d’époque permet aux utilisateurs de s’assurer qu’il n’existe qu’un seul récepteur sur un groupe de consommateurs à tout moment dans le temps, avec les règles suivantes :
 
@@ -182,7 +172,7 @@ La fonctionnalité d’époque permet aux utilisateurs de s’assurer qu’il n�
 - S’il existe un récepteur avec une valeur d’époque e1 et qu’un récepteur est créé avec une valeur d’époque e2, où e1 > e2, la création d’e2 échoue avec une erreur signalant qu’il existe déjà un récepteur avec l’époque e1.
 
 ### <a name="no-epoch"></a>Sans époque
-Vous créez un récepteur non basé sur une époque à l’aide de la méthode [CreateReceiver](https://docs.microsoft.com/dotnet/api/microsoft.azure.eventhubs.eventhubclient.createreceiver?view=azure-dotnet). 
+Vous créez un récepteur non basé sur une époque à l’aide de la méthode [CreateReceiver](/dotnet/api/microsoft.azure.eventhubs.eventhubclient.createreceiver?view=azure-dotnet). 
 
 Il existe certains scénarios de flux de traitement où les utilisateurs souhaitent créer plusieurs récepteurs sur un même groupe de consommateurs. Pour prendre en charge ces scénarios, nous pouvons créer un récepteur sans époque ; dans ce cas, nous autorisons jusqu’à cinq récepteurs simultanés sur le groupe de consommateurs.
 
@@ -203,10 +193,10 @@ Nous déconseillons les cas d’usage où vous créez un récepteur avec époque
 Maintenant que vous vous êtes familiarisé avec l’hôte du processeur d’événements, consultez les articles suivants pour en savoir plus sur Event Hubs :
 
 - Prise en main des hubs d’événements
-    - [.NET Core](get-started-dotnet-standard-send-v2.md)
-    - [Java](get-started-java-send-v2.md)
-    - [Python](get-started-python-send-v2.md)
-    - [JavaScript](get-started-java-send-v2.md)
+    - [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
+    - [Java](event-hubs-java-get-started-send.md)
+    - [Python](event-hubs-python-get-started-send.md)
+    - [JavaScript](event-hubs-node-get-started-send.md)
 * [Guide de programmation Event Hubs](event-hubs-programming-guide.md)
 * [Disponibilité et cohérence dans Event Hubs](event-hubs-availability-and-consistency.md)
 * [FAQ sur les hubs d’événements](event-hubs-faq.md)

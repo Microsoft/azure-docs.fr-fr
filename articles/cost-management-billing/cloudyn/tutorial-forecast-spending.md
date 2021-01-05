@@ -6,15 +6,16 @@ ms.author: banders
 ms.date: 03/12/2020
 ms.topic: tutorial
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.custom: seodec18
 ms.reviewer: benshy
 ROBOTS: NOINDEX
-ms.openlocfilehash: 455f611b57cf11e29d35e617df4fd9c09aff2906
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 70a5a4bf6981aa115c923559112d3533eebf3086
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79463779"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132174"
 ---
 # <a name="tutorial-forecast-future-spending"></a>Tutoriel : Prévoir les dépenses futures
 
@@ -69,4 +70,4 @@ Dans ce didacticiel, vous avez appris à :
 Passez au didacticiel suivant pour découvrir comment gérer les coûts avec les rapports de facturation et d’allocation des coûts.
 
 > [!div class="nextstepaction"]
-> [Gérer les coûts grâce à des rapports de facturation et d’allocation des coûts](../../cost-management/tutorial-manage-costs.md)
+> [Gérer les coûts grâce à des rapports de facturation et d’allocation des coûts](./tutorial-manage-costs.md)

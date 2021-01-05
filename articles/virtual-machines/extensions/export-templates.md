@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 7f4e2ca6-f1c7-4f59-a2cc-8f63132de279
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 12/05/2016
 ms.author: akjosh
-ms.openlocfilehash: 79991dad96742109817d579b951082d1a30e3951
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 40b8ff01a5c8d00d3234af31877ea58c471026e8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227909"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94955750"
 ---
 # <a name="exporting-resource-groups-that-contain-vm-extensions"></a>Exportation de groupes de ressources contenant des extensions de machine virtuelle
 
@@ -33,18 +34,7 @@ De nombreuses extensions de machine virtuelle sont disponibles. Toutes les exten
 
 Les extensions suivantes peuvent être exportées à l’aide de la fonctionnalité de script Automation.
 
-| Extension ||||
-|---|---|---|---|
-| Sauvegarde Acronis | Agent Datadog Windows | Application de correctifs au système d’exploitation pour Linux | Instantané de machine virtuelle Linux
-| Sauvegarde Acronis Linux | Extension Docker | Agent Puppet |
-| Infos Bg | Extension DSC | Aperçu Apm 24 x 7 de site |
-| Agent BMC CTM Linux | Dynatrace Linux | Serveur Linux 24 x 7 de site |
-| Agent BMC CTM Windows | Dynatrace Windows | Windows Server 24 x 7 de site |
-| Client Chef | Application de sécurité HPE Defender | Trend Micro DSA |
-| Script personnalisé | Logiciel anti-programme malveillant IaaS | Trend Micro DSA Linux |
-| Extension de script personnalisé | Diagnostics IaaS | Accès aux machines virtuelles pour Linux |
-| Script personnalisé pour Linux | Client Chef Linux | Accès aux machines virtuelles pour Linux |
-| Agent Datadog Linux | Diagnostic Linux | Instantané de machine virtuelle |
+> Sauvegarde Acronis, Sauvegarde Acronis Linux, Infos Bg, Agent BMC CTM Linux, Agent BMC CTM Windows, Client Chef, Script personnalisé, Extension de script personnalisé, Script personnalisé pour Linux, Agent Datadog Linux, Agent Datadog Windows, Extension Docker, Extension DSC, Dynatrace Linux, Dynatrace Windows, Application de sécurité HPE Defender, Logiciel anti-programme malveillant IaaS, Diagnostics IaaS, Client Chef Linux, Diagnostic Linux, Application de correctifs au système d’exploitation pour Linux, Agent Puppet, Aperçu Apm 24 x 7 de site, Serveur Linux 24 x 7 de site, Windows Server 24 x 7 de site, Trend Micro DSA, Trend Micro DSA Linux, Accès aux machines virtuelles pour Linux, Instantané de machine virtuelle, Instantané de machine virtuelle Linux
 
 ## <a name="export-the-resource-group"></a>Exporter le groupe de ressources
 
@@ -148,7 +138,7 @@ La ressource d’extension finale est semblable à l’exemple JSON suivant :
 }
 ```
 
-Si vous utilisez des paramètres de modèle pour fournir des valeurs de propriété, ceux-ci doivent être créés. Lorsque vous créez des paramètres de modèle pour des valeurs de paramètres protégés, veillez à utiliser le type de paramètre `SecureString` afin que les valeurs sensibles soient sécurisées. Pour en savoir plus sur l’utilisation des paramètres, consultez [Création de modèles Azure Resource Manager](../../resource-group-authoring-templates.md).
+Si vous utilisez des paramètres de modèle pour fournir des valeurs de propriété, ceux-ci doivent être créés. Lorsque vous créez des paramètres de modèle pour des valeurs de paramètres protégés, veillez à utiliser le type de paramètre `SecureString` afin que les valeurs sensibles soient sécurisées. Pour en savoir plus sur l’utilisation des paramètres, consultez [Création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md).
 
 Dans l’exemple de l’extension `IaasDiagnostic`, les paramètres suivants doivent être créés dans la section des paramètres du modèle Resource Manager.
 

@@ -5,14 +5,14 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/21/2019
-ms.openlocfilehash: 51b9c827d453eef2e2e75e1aa5222204eaa38d0e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c57a3920dac3e18e248109fafdf61fdfa871c54d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77525530"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023395"
 ---
 # <a name="anomaly-detection-in-azure-stream-analytics"></a>Détection d’anomalies dans Azure Stream Analytics
 
@@ -42,7 +42,7 @@ Un générateur d’anomalies disponible [ici](https://aka.ms/asaanomalygenerato
 
 ## <a name="spike-and-dip"></a>Pics et baisses
 
-Les anomalies temporaires d’un flux d’événements d’une série chronologique sont appelées « pics et baisses ». Les pics et baisses peuvent être surveillés à l’aide de l’opérateur basé sur Machine Learning [AnomalyDetection_SpikeAndDip](https://docs.microsoft.com/stream-analytics-query/anomalydetection-spikeanddip-azure-stream-analytics
+Les anomalies temporaires d’un flux d’événements d’une série chronologique sont appelées « pics et baisses ». Les pics et baisses peuvent être surveillés à l’aide de l’opérateur basé sur Machine Learning [AnomalyDetection_SpikeAndDip](/stream-analytics-query/anomalydetection-spikeanddip-azure-stream-analytics
 ).
 
 ![Exemple d’anomalie de pic et de baisse](./media/stream-analytics-machine-learning-anomaly-detection/anomaly-detection-spike-dip.png)
@@ -74,7 +74,7 @@ FROM AnomalyDetectionStep
 
 ## <a name="change-point"></a>Point de changement
 
-Les anomalies persistantes d’un flux d’événements d’une série chronologique sont des modifications de la distribution des valeurs du flux d’événements, telles que des modifications du niveau et des tendances. Dans Stream Analytics, ces anomalies sont détectées à l’aide de l’opérateur basé sur Machine Learning [AnomalyDetection_ChangePoint](https://docs.microsoft.com/stream-analytics-query/anomalydetection-changepoint-azure-stream-analytics).
+Les anomalies persistantes d’un flux d’événements d’une série chronologique sont des modifications de la distribution des valeurs du flux d’événements, telles que des modifications du niveau et des tendances. Dans Stream Analytics, ces anomalies sont détectées à l’aide de l’opérateur basé sur Machine Learning [AnomalyDetection_ChangePoint](/stream-analytics-query/anomalydetection-changepoint-azure-stream-analytics).
 
 Les modifications persistantes durent beaucoup plus longtemps que les pics et les baisses, et peuvent indiquer un ou des événements catastrophiques. Les modifications persistantes ne sont généralement pas visibles à l’œil nu, mais peuvent être détectées avec l’opérateur **AnomalyDetection_ChangePoint**.
 
@@ -159,6 +159,5 @@ Utilisez le volet Métriques de votre travail Azure Stream Analytics pour identi
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

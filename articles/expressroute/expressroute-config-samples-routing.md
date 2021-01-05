@@ -1,18 +1,18 @@
 ---
 title: 'Azure ExpressRoute : Exemples de configuration de routeur'
-description: Cette page fournit des exemples de configuration pour les routeurs Cisco et Juniper.
+description: Utilisez cette interface et des exemples de configuration de routage pour les routeurs des gammes Cisco IOS-XE et Juniper MX compatibles avec Azure ExpressRoute.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
 ms.topic: article
 ms.date: 03/26/2020
-ms.author: osamaz
-ms.openlocfilehash: 3603bc45b920dc62eb8bf6f2eb8557f98e21638e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.openlocfilehash: 3bc850f02884ae0547c2ecf56a46a57a4e66a752
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82024810"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89397404"
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-routing"></a>Exemples de configuration de routeur pour configurer et gérer le routage
 Cette page fournit une interface et des exemples de configuration de routage pour les routeurs des gammes Cisco IOS-XE et Juniper MX quand vous utilisez Azure ExpressRoute.
@@ -40,78 +40,90 @@ Vous aurez besoin d’une sous-interface par Peering dans chaque routeur que vou
 
 Cet exemple fournit la définition d’une sous-interface avec un ID VLAN unique. L’ID de réseau local virtuel est unique pour chaque peering. Le dernier octet de votre adresse IPv4 est toujours un nombre impair.
 
-    interface GigabitEthernet<Interface_Number>.<Number>
-     encapsulation dot1Q <VLAN_ID>
-     ip address <IPv4_Address><Subnet_Mask>
+```console
+interface GigabitEthernet<Interface_Number>.<Number>
+ encapsulation dot1Q <VLAN_ID>
+ ip address <IPv4_Address><Subnet_Mask>
+```
 
 **Définition de l’interface QinQ**
 
 Cet exemple fournit la définition d’une sous-interface avec deux ID VLAN. L’ID VLAN externe (s-tag), s’il est utilisé, reste le même pour tous les Peerings. L’ID de réseau local virtuel interne (c-tag) est unique pour chaque peering. Le dernier octet de votre adresse IPv4 est toujours un nombre impair.
 
-    interface GigabitEthernet<Interface_Number>.<Number>
-     encapsulation dot1Q <s-tag> seconddot1Q <c-tag>
-     ip address <IPv4_Address><Subnet_Mask>
+```console
+interface GigabitEthernet<Interface_Number>.<Number>
+ encapsulation dot1Q <s-tag> seconddot1Q <c-tag>
+ ip address <IPv4_Address><Subnet_Mask>
+```
 
 ### <a name="set-up-ebgp-sessions"></a>Configurer des sessions eBGP
 Vous devez configurer une session BGP avec Microsoft pour chaque Peering. Configurez une session BGP à l’aide de l’exemple suivant. Si l’adresse IPv4 utilisée pour votre sous-interface est a.b.c.d, l’adresse IP du voisin BGP (Microsoft) sera a.b.c.d+1. Le dernier octet de l’adresse IPv4 du voisin BGP est toujours un nombre pair.
 
-    router bgp <Customer_ASN>
-     bgp log-neighbor-changes
-     neighbor <IP#2_used_by_Azure> remote-as 12076
-     !        
-     address-family ipv4
-     neighbor <IP#2_used_by_Azure> activate
-     exit-address-family
-    !
+```console
+router bgp <Customer_ASN>
+ bgp log-neighbor-changes
+ neighbor <IP#2_used_by_Azure> remote-as 12076
+ !
+ address-family ipv4
+ neighbor <IP#2_used_by_Azure> activate
+ exit-address-family
+!
+```
 
 ### <a name="set-up-prefixes-to-be-advertised-over-the-bgp-session"></a>Configurer des préfixes à publier sur la session BGP
 Configurez votre routeur pour qu’il publie certains préfixes sur Microsoft à l’aide de l’exemple suivant.
 
-    router bgp <Customer_ASN>
-     bgp log-neighbor-changes
-     neighbor <IP#2_used_by_Azure> remote-as 12076
-     !        
-     address-family ipv4
-      network <Prefix_to_be_advertised> mask <Subnet_mask>
-      neighbor <IP#2_used_by_Azure> activate
-     exit-address-family
-    !
+```console
+router bgp <Customer_ASN>
+ bgp log-neighbor-changes
+ neighbor <IP#2_used_by_Azure> remote-as 12076
+ !
+ address-family ipv4
+  network <Prefix_to_be_advertised> mask <Subnet_mask>
+  neighbor <IP#2_used_by_Azure> activate
+ exit-address-family
+!
+```
 
 ### <a name="route-maps"></a>Cartes d’itinéraire
 Utilisez des cartes d’itinéraire et des listes de préfixes pour filtrer les préfixes propagés sur votre réseau. Consultez l’exemple suivant et vérifiez que les listes de préfixe appropriées sont configurées.
 
-    router bgp <Customer_ASN>
-     bgp log-neighbor-changes
-     neighbor <IP#2_used_by_Azure> remote-as 12076
-     !        
-     address-family ipv4
-      network <Prefix_to_be_advertised> mask <Subnet_mask>
-      neighbor <IP#2_used_by_Azure> activate
-      neighbor <IP#2_used_by_Azure> route-map <MS_Prefixes_Inbound> in
-     exit-address-family
-    !
-    route-map <MS_Prefixes_Inbound> permit 10
-     match ip address prefix-list <MS_Prefixes>
-    !
+```console
+router bgp <Customer_ASN>
+ bgp log-neighbor-changes
+ neighbor <IP#2_used_by_Azure> remote-as 12076
+ !
+ address-family ipv4
+  network <Prefix_to_be_advertised> mask <Subnet_mask>
+  neighbor <IP#2_used_by_Azure> activate
+  neighbor <IP#2_used_by_Azure> route-map <MS_Prefixes_Inbound> in
+ exit-address-family
+!
+route-map <MS_Prefixes_Inbound> permit 10
+ match ip address prefix-list <MS_Prefixes>
+!
+```
 
 ### <a name="configure-bfd"></a>Configurer BFD
 
 Vous allez configurer BFD à deux emplacements : l’un au niveau de l’interface et l’autre au niveau du protocole BGP. Cet exemple concerne l’interface QinQ. 
 
-    interface GigabitEthernet<Interface_Number>.<Number>
-     bfd interval 300 min_rx 300 multiplier 3
-     encapsulation dot1Q <s-tag> seconddot1Q <c-tag>
-     ip address <IPv4_Address><Subnet_Mask>
-    
-    router bgp <Customer_ASN>
-     bgp log-neighbor-changes
-     neighbor <IP#2_used_by_Azure> remote-as 12076
-     !        
-     address-family ipv4
-      neighbor <IP#2_used_by_Azure> activate
-      neighbor <IP#2_used_by_Azure> fall-over bfd
-     exit-address-family
-    !
+```console
+interface GigabitEthernet<Interface_Number>.<Number>
+ bfd interval 300 min_rx 300 multiplier 3
+ encapsulation dot1Q <s-tag> seconddot1Q <c-tag>
+ ip address <IPv4_Address><Subnet_Mask>
+
+router bgp <Customer_ASN>
+ bgp log-neighbor-changes
+ neighbor <IP#2_used_by_Azure> remote-as 12076
+ !
+ address-family ipv4
+  neighbor <IP#2_used_by_Azure> activate
+  neighbor <IP#2_used_by_Azure> fall-over bfd
+ exit-address-family
+!
+```
 
 
 ## <a name="juniper-mx-series-routers"></a>Routeurs de la série Juniper MX
@@ -123,6 +135,7 @@ Les exemples de cette section s’appliquent à tous les routeurs de la gamme Ju
 
 Cet exemple fournit la définition d’une sous-interface avec un ID VLAN unique. L’ID de réseau local virtuel est unique pour chaque peering. Le dernier octet de votre adresse IPv4 est toujours un nombre impair.
 
+```console
     interfaces {
         vlan-tagging;
         <Interface_Number> {
@@ -134,12 +147,14 @@ Cet exemple fournit la définition d’une sous-interface avec un ID VLAN unique
             }
         }
     }
+```
 
 
 **Définition de l’interface QinQ**
 
 Cet exemple fournit la définition d’une sous-interface avec deux ID VLAN. L’ID VLAN externe (s-tag), s’il est utilisé, reste le même pour tous les Peerings. L’ID de réseau local virtuel interne (c-tag) est unique pour chaque peering. Le dernier octet de votre adresse IPv4 est toujours un nombre impair.
 
+```console
     interfaces {
         <Interface_Number> {
             flexible-vlan-tagging;
@@ -151,10 +166,12 @@ Cet exemple fournit la définition d’une sous-interface avec deux ID VLAN. L�
             }                               
         }                                   
     }                           
+```
 
 ### <a name="set-up-ebgp-sessions"></a>Configurer des sessions eBGP
 Vous devez configurer une session BGP avec Microsoft pour chaque Peering. Configurez une session BGP à l’aide de l’exemple suivant. Si l’adresse IPv4 utilisée pour votre sous-interface est a.b.c.d, l’adresse IP du voisin BGP (Microsoft) sera a.b.c.d+1. Le dernier octet de l’adresse IPv4 du voisin BGP est toujours un nombre pair.
 
+```console
     routing-options {
         autonomous-system <Customer_ASN>;
     }
@@ -167,16 +184,18 @@ Vous devez configurer une session BGP avec Microsoft pour chaque Peering. Config
             }                               
         }                                   
     }
+```
 
 ### <a name="set-up-prefixes-to-be-advertised-over-the-bgp-session"></a>Configurer des préfixes à publier sur la session BGP
 Configurez votre routeur pour qu’il publie certains préfixes sur Microsoft à l’aide de l’exemple suivant.
 
+```console
     policy-options {
         policy-statement <Policy_Name> {
             term 1 {
                 from protocol OSPF;
-        route-filter 
-    <Prefix_to_be_advertised/Subnet_Mask> exact;
+                route-filter; 
+                <Prefix_to_be_advertised/Subnet_Mask> exact;
                 then {
                     accept;
                 }
@@ -186,17 +205,18 @@ Configurez votre routeur pour qu’il publie certains préfixes sur Microsoft à
     protocols {
         bgp { 
             group <Group_Name> { 
-                export <Policy_Name>
+                export <Policy_Name>;
                 peer-as 12076;              
                 neighbor <IP#2_used_by_Azure>;
             }                               
         }                                   
     }
-
+```
 
 ### <a name="route-policies"></a>Stratégies de routage
 Vous pouvez utiliser des cartes d’itinéraire et des listes de préfixes pour filtrer les préfixes propagés sur votre réseau. Consultez l’exemple suivant et vérifiez que les listes de préfixe appropriées sont configurées.
 
+```console
     policy-options {
         prefix-list MS_Prefixes {
             <IP_Prefix_1/Subnet_Mask>;
@@ -205,7 +225,7 @@ Vous pouvez utiliser des cartes d’itinéraire et des listes de préfixes pour 
         policy-statement <MS_Prefixes_Inbound> {
             term 1 {
                 from {
-                prefix-list MS_Prefixes;
+                    prefix-list MS_Prefixes;
                 }
                 then {
                     accept;
@@ -216,17 +236,19 @@ Vous pouvez utiliser des cartes d’itinéraire et des listes de préfixes pour 
     protocols {
         bgp { 
             group <Group_Name> { 
-                export <Policy_Name>
-                import <MS_Prefixes_Inbound>
+                export <Policy_Name>;
+                import <MS_Prefixes_Inbound>;
                 peer-as 12076;              
                 neighbor <IP#2_used_by_Azure>;
             }                               
         }                                   
     }
+```
 
 ### <a name="configure-bfd"></a>Configurer BFD
 Configurez BFD sous la section Protocole BGP uniquement.
 
+```console
     protocols {
         bgp { 
             group <Group_Name> { 
@@ -239,7 +261,30 @@ Configurez BFD sous la section Protocole BGP uniquement.
             }                               
         }                                   
     }
+```
 
+### <a name="configure-macsec"></a>Configurer MACsec
+Pour la configuration de MACSec, la clé d’association de connectivité (CAK) et le nom de clé d’association de connectivité (CKN) doivent correspondre aux valeurs configurées via les commandes PowerShell.
+
+```console
+    security {
+        macsec {
+            connectivity-association <Connectivity_Association_Name> {
+                cipher-suite gcm-aes-xpn-128;
+                security-mode static-cak;
+                pre-shared-key {
+                    ckn <Connectivity_Association_Key_Name>;
+                    cak <Connectivity_Association_Key>; ## SECRET-DATA
+                }
+            }
+            interfaces {
+                <Interface_Number> {
+                    connectivity-association <Connectivity_Association_Name>;
+                }
+            }
+        }
+    }
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations, consultez le [Forum Aux Questions sur ExpressRoute](expressroute-faqs.md) .

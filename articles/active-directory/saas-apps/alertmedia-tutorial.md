@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à AlertMedia | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et AlertMedia.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 5c77f6fc-807c-47e8-8e49-eece5ebd7f09
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/17/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: b6aaaa24535c95e0a0d3f2b67709374c083ab738
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: e876c819ea797eb75ca8b2365fba83d416ff6168
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81725213"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92318888"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-alertmedia"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à AlertMedia
 
@@ -30,7 +26,7 @@ Ce tutoriel explique comment intégrer AlertMedia à Azure Active Directory (Azu
 * Permettre aux utilisateurs de se connecter automatiquement à AlertMedia avec leur compte Azure AD
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -45,7 +41,7 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 * AlertMedia prend en charge l’authentification unique initiée par le **fournisseur d’identité**.
 * AlertMedia prend en charge le provisionnement d’utilisateurs **juste-à-temps**.
-* Après avoir configuré AlertMedia, vous pouvez appliquer le contrôle de session qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré AlertMedia, vous pouvez appliquer le contrôle de session qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="adding-alertmedia-from-the-gallery"></a>Ajout d’AlertMedia à partir de la galerie
 
@@ -96,12 +92,12 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
     ![image](common/default-attributes.png)
 
 1. En plus de ce qui précède, l’application AlertMedia s’attend à ce que quelques attributs supplémentaires, indiqués ci-après, soient repassés dans la réponse SAML. Ces attributs sont également préremplis, mais vous pouvez les examiner pour voir s’ils répondent à vos besoins.
-    
-    | Nom |   |  Attribut source|
-    | ---------------| --------------- | --------- |
-    | email |  | user.userprincipalname |
-    | firstname |  | user.givenname |
-    | lastname |  | user.surname |
+
+| Nom | Attribut source|
+| ---- | --------------- |
+| email | user.userprincipalname |
+| firstname | user.givenname |
+| lastname | user.surname |
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur le bouton Copier pour copier l’**URL des métadonnées de fédération d’application**, puis enregistrez-la sur votre ordinateur.
 
@@ -159,19 +155,18 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans AlertMed
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette AlertMedia dans le volet d’accès, vous devez être automatiquement connecté à l’application AlertMedia pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette AlertMedia dans le volet d’accès, vous devez être automatiquement connecté à l’application AlertMedia pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer AlertMedia avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)
 
-- [Guide pratique pour protéger AlertMedia avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
-
+- [Guide pratique pour protéger AlertMedia avec une visibilité et des contrôles avancés](/cloud-app-security/proxy-intro-aad)

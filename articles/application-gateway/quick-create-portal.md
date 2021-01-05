@@ -1,20 +1,20 @@
 ---
 title: 'Démarrage rapide : Diriger le trafic web à l’aide du portail'
 titleSuffix: Azure Application Gateway
-description: Découvrez comment utiliser le portail Azure pour créer une passerelle d’application Azure qui dirige le trafic web vers les machines virtuelles d’un pool de back-ends.
+description: Dans ce guide de démarrage rapide, découvrez comment utiliser le portail Azure pour créer une passerelle d’application Azure qui dirige le trafic web vers les machines virtuelles d’un pool de back-ends.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: quickstart
-ms.date: 05/21/2020
+ms.date: 12/08/2020
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: a6415657d68e10b63e357f3c1353bb66fc9c8262
-ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+ms.openlocfilehash: 42701fbcee9833fd31fff3ace55d48079015dbcd
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83779426"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96906401"
 ---
 # <a name="quickstart-direct-web-traffic-with-azure-application-gateway---azure-portal"></a>Démarrage rapide : Diriger le trafic web avec Azure Application Gateway - Portail Azure
 
@@ -25,8 +25,6 @@ La passerelle d’application dirige le trafic web des applications vers des res
 Vous pouvez également suivre ce guide de démarrage rapide en utilisant [Azure PowerShell](quick-create-powershell.md) ou [Azure CLI](quick-create-cli.md).
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
-
-
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -54,6 +52,9 @@ Vous allez créer la passerelle d’application à l’aide des onglets de la pa
      ![Créer une passerelle d’application : Concepts de base](./media/application-gateway-create-gateway-portal/application-gateway-create-basics.png)
 
 2. Azure a besoin d’un réseau virtuel pour communiquer avec les différentes ressources que vous créez. Vous pouvez créer un réseau virtuel ou en utiliser un. Dans cet exemple, vous allez créer un réseau virtuel en même temps que la passerelle d’application. Les instances Application Gateway sont créées dans des sous-réseaux séparés. Vous créez deux sous-réseaux dans cet exemple : un pour la passerelle d’application et un autre pour les serveurs back-end.
+
+    > [!NOTE]
+    > Les [stratégies de points de terminaison de service de réseau virtuel](../virtual-network/virtual-network-service-endpoint-policies-overview.md) ne sont pas prises en charge dans un sous-réseau Application Gateway.
 
     Sous **Configurer le réseau virtuel**, créez un réseau virtuel en sélectionnant **Créer nouveau**. Dans la fenêtre **Créer un réseau virtuel** qui s’ouvre, entrez les valeurs suivantes pour créer le réseau virtuel et deux sous-réseaux :
 
@@ -152,12 +153,13 @@ Pour ce faire, vous allez effectuer les opérations suivantes :
     - **Groupe de ressources** : sélectionnez **myResourceGroupAG** comme nom de groupe de ressources.
     - **Nom de la machine virtuelle** : entrez *myVM* comme nom de machine virtuelle.
     - **Région** : sélectionnez la région dans laquelle vous avez créé la passerelle d’application.
-    - **Nom d’utilisateur** : tapez *azureuser* comme nom d’utilisateur administrateur.
+    - **Nom d’utilisateur** : Tapez un nom d’utilisateur administrateur.
     - **Mot de passe** : Tapez un mot de passe.
+    - **Ports d’entrée publics** : Aucun.
 4. Acceptez les autres valeurs par défaut, puis sélectionnez **Suivant : Disques**.  
 5. Acceptez les valeurs par défaut sous l’onglet **Disques**, puis sélectionnez **Suivant : Mise en réseau**.
 6. Sous l’onglet **Mise en réseau**, vérifiez que **myVNet** est sélectionné comme **Réseau virtuel** et que **Sous-réseau** est défini sur  **myBackendSubnet**. Acceptez les autres valeurs par défaut, puis sélectionnez **Suivant : Gestion**.<br>Application Gateway peut communiquer avec des instances en dehors du réseau virtuel dans lequel il réside, mais vous devez vérifier qu’il existe une connectivité IP.
-7. Sous l’onglet **Gestion**, définissez **Diagnostics de démarrage** sur **Désactivé**. Acceptez les autres valeurs par défaut, puis sélectionnez **Vérifier + créer**.
+7. Sous l’onglet **Gestion**, définissez **Diagnostics de démarrage** sur **Désactiver**. Acceptez les autres valeurs par défaut, puis sélectionnez **Vérifier + créer**.
 8. Sous l’onglet **Vérifier + créer**, passez en revue les paramètres, corrigez les éventuelles erreurs de validation et sélectionnez **Créer**.
 9. Attendez la fin de la création de la machine virtuelle avant de continuer.
 
@@ -171,7 +173,7 @@ Dans cet exemple, vous allez installer IIS sur les machines virtuelles uniquemen
 
 2. Exécutez la commande suivante pour installer IIS sur la machine virtuelle. Modifiez le paramètre *Emplacement* si nécessaire : 
 
-    ```azurepowershell-interactive
+    ```azurepowershell
     Set-AzVMExtension `
       -ResourceGroupName myResourceGroupAG `
       -ExtensionName IIS `
@@ -196,7 +198,6 @@ Dans cet exemple, vous allez installer IIS sur les machines virtuelles uniquemen
 4. Sous **Cibles de back-end**, **Type de cible**, sélectionnez **Machine virtuelle** dans la liste déroulante.
 
 5. Sous **Cible**, sélectionnez les machines virtuelles **myVM** et **myVM2** ainsi que leurs interfaces réseau associées dans les listes déroulantes.
-
 
    > [!div class="mx-imgBorder"]
    > ![Ajouter des serveurs back-end](./media/application-gateway-create-gateway-portal/application-gateway-backend.png)

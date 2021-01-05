@@ -1,26 +1,21 @@
 ---
 title: Guide de programmation .NET - Azure Event Hubs (hérité) | Microsoft Docs
 description: Cet article explique comment rédiger du code pour Azure Event Hubs à l’aide du SDK Azure .NET.
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-ms.service: event-hubs
-ms.custom: seodec18
 ms.topic: article
-ms.date: 01/15/2020
-ms.author: shvija
-ms.openlocfilehash: d958c2d32c16874676f46bb216067fe2d7bbe784
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 17bec931f79a6dbb3d98270ab0ff6e2d1d4c6541
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236237"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89013909"
 ---
 # <a name="net-programming-guide-for-azure-event-hubs-legacy-microsoftazureeventhubs-package"></a>Guide de programmation .NET pour Azure Event Hubs (package Microsoft.Azure.EventHubs hérité)
-Cet article décrit quelques scénarios courants de l’écriture de code à l’aide du service Azure Event Hubs. Il suppose une connaissance préalable des concentrateurs d’événements. Pour une vue d’ensemble conceptuelle des concentrateurs d’événements, consultez [Vue d'ensemble des concentrateurs d’événements](event-hubs-what-is-event-hubs.md).
+Cet article décrit quelques scénarios courants de l’écriture de code à l’aide du service Azure Event Hubs. Il suppose une connaissance préalable des concentrateurs d’événements. Pour une vue d’ensemble conceptuelle des concentrateurs d’événements, consultez [Vue d'ensemble des concentrateurs d’événements](./event-hubs-about.md).
 
 > [!WARNING]
-> Ce guide concerne l'ancien package **Microsoft.Azure.EventHubs**. Nous vous recommandons de [migrer](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md) votre code pour utiliser le dernier package [Azure.Messaging.EventHubs](get-started-dotnet-standard-send-v2.md).  
+> Ce guide concerne l'ancien package **Microsoft.Azure.EventHubs**. Nous vous recommandons de [migrer](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md) votre code pour utiliser le dernier package [Azure.Messaging.EventHubs](event-hubs-dotnet-standard-getstarted-send.md).  
 
 
 ## <a name="event-publishers"></a>Éditeurs d'événements
@@ -102,7 +97,7 @@ Un lot ne doit pas dépasser la limite de 1 Mo d’un événement. En outre, ch
 
 ## <a name="send-asynchronously-and-send-at-scale"></a>Envoi de manière asynchrone et envoi à l'échelle
 
-Vous envoyez des événements à un Event Hub de manière asynchrone. L’envoi en mode asynchrone augmente la vitesse à laquelle un client peut envoyer des événements. La méthode [SendAsync](/dotnet/api/microsoft.azure.eventhubs.eventhubclient.sendasync) renvoie un objet [Task](https://msdn.microsoft.com/library/system.threading.tasks.task.aspx). Vous pouvez utiliser la classe [RetryPolicy](/dotnet/api/microsoft.servicebus.retrypolicy) sur le client pour contrôler les options de nouvelle tentative du client.
+Vous envoyez des événements à un Event Hub de manière asynchrone. L’envoi en mode asynchrone augmente la vitesse à laquelle un client peut envoyer des événements. La méthode [SendAsync](/dotnet/api/microsoft.azure.eventhubs.eventhubclient.sendasync) renvoie un objet [Task](/dotnet/api/system.threading.tasks.task?view=netcore-3.1). Vous pouvez utiliser la classe [RetryPolicy](/dotnet/api/microsoft.servicebus.retrypolicy) sur le client pour contrôler les options de nouvelle tentative du client.
 
 ## <a name="event-consumers"></a>Consommateurs d'événements
 La classe [EventProcessorHost][] traite les données à partir des concentrateurs d’événements. Vous devez utiliser cette implémentation lors de la création de lecteurs d'événement sur la plateforme .NET. [EventProcessorHost][] fournit un environnement d'exécution sécurisé, multiprocessus, thread-safe pour des implémentations d’événements qui fournissent également une gestion de contrôle et de location de partition.
@@ -155,8 +150,8 @@ Pour plus d’informations sur la révocation de l’éditeur et l’envoi vers 
 
 Pour en savoir plus sur les scénarios des concentrateurs d’événements, consultez ces liens :
 
-* [Vue d’ensemble de l'API Event Hubs](event-hubs-api-overview.md)
-* [Qu’est-ce qu’Event Hubs](event-hubs-what-is-event-hubs.md)
+* [Vue d’ensemble de l'API Event Hubs](./event-hubs-samples.md)
+* [Qu’est-ce qu’Event Hubs](./event-hubs-about.md)
 * [Disponibilité et cohérence dans Event Hubs](event-hubs-availability-and-consistency.md)
 * [Informations de référence des API hôtes du processeur d’événements](/dotnet/api/microsoft.servicebus.messaging.eventprocessorhost)
 

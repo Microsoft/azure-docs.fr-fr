@@ -5,19 +5,19 @@ author: cynthn
 ms.service: virtual-machines-windows
 ms.subservice: sizes
 ms.workload: infrastructure
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/13/2020
 ms.author: cynthn
-ms.openlocfilehash: f456af143ac6ec21bcb9b0c3ec75635c51f748ef
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4860422fefb5a95fe41912b4898f02867f7b3aeb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82099884"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87832244"
 ---
 # <a name="resize-a-windows-vm"></a>Redimensionner une machine virtuelle Windows
 
-Cet article vous explique comment modifier la [taille d’une machine virtuelle](sizes.md).
+Cet article vous explique comment modifier la [taille d’une machine virtuelle](../sizes.md).
 
 Une fois que vous avez créé une machine virtuelle, vous pouvez la mettre à l’échelle en modifiant sa taille. Dans certains cas, vous devez commencer par libérer la machine virtuelle. Cela peut se produire si la nouvelle taille n’est pas disponible sur le cluster matériel qui héberge actuellement la machine virtuelle.
 
@@ -99,32 +99,24 @@ Si la taille voulue n’est pas répertoriée, passez aux étapes suivantes pour
 Arrêtez toutes les machines virtuelles du groupe à haute disponibilité.
    
 ```powershell
-$as = Get-AzAvailabilitySet -ResourceGroupName $resourceGroup
-$vmIds = $as.VirtualMachinesReferences
-foreach ($vmId in $vmIDs){
-    $string = $vmID.Id.Split("/")
-    $vmName = $string[8]
-    Stop-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Force
-    } 
+$availabilitySetName = "<availabilitySetName>"
+$as = Get-AzAvailabilitySet -ResourceGroupName $resourceGroup -Name $availabilitySetName
+$virtualMachines = $as.VirtualMachinesReferences |  Get-AzResource | Get-AzVM
+$virtualMachines |  Stop-AzVM -Force -NoWait  
 ```
 
 Redimensionnez et redémarrez toutes les machines virtuelles du groupe à haute disponibilité.
    
 ```powershell
+$availabilitySetName = "<availabilitySetName>"
 $newSize = "<newVmSize>"
-$as = Get-AzAvailabilitySet -ResourceGroupName $resourceGroup
-$vmIds = $as.VirtualMachinesReferences
-  foreach ($vmId in $vmIDs){
-    $string = $vmID.Id.Split("/")
-    $vmName = $string[8]
-    $vm = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName
-    $vm.HardwareProfile.VmSize = $newSize
-    Update-AzVM -ResourceGroupName $resourceGroup -VM $vm
-    Start-AzVM -ResourceGroupName $resourceGroup -Name $vmName
-    }
+$as = Get-AzAvailabilitySet -ResourceGroupName $resourceGroup -Name $availabilitySetName
+$virtualMachines = $as.VirtualMachinesReferences |  Get-AzResource | Get-AzVM
+$virtualMachines | Foreach-Object { $_.HardwareProfile.VmSize = $newSize }
+$virtualMachines | Update-AzVM
+$virtualMachines | Start-AzVM
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour une évolutivité supplémentaire, exécutez plusieurs instances de machine virtuelle et effectuez un scale-out. Pour plus d’informations, consultez [Mise à l’échelle automatique des machines Windows dans un groupe de machines virtuelles identiques](../../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md).
-
+Pour une évolutivité supplémentaire, exécutez plusieurs instances de machine virtuelle et effectuez un scale-out. Pour plus d’informations, consultez [Mise à l’échelle automatique des machines Windows dans un groupe de machines virtuelles identiques](../../virtual-machine-scale-sets/tutorial-autoscale-powershell.md).

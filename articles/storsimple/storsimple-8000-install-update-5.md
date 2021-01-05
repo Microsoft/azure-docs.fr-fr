@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 11/13/2017
 ms.author: alkohli
-ms.openlocfilehash: d86e77ef0148c0fac3dfa31153364de153b094ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bbac6eade634ffcfdc47ae3d22b32e0bd429b7c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232209"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85513180"
 ---
 # <a name="install-update-5-on-your-storsimple-device"></a>Installer Update 5 sur votre appareil StorSimple
 

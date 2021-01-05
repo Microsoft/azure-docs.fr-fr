@@ -1,19 +1,19 @@
 ---
 title: FAQ sur le WAN virtuel Azure | Microsoft Docs
-description: FAQ sur le WAN virtuel
+description: Consultez les réponses aux questions fréquemment posées sur les réseaux Virtual WAN Azure, les clients, les passerelles, les appareils, les partenaires et les connexions.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
-ms.topic: conceptual
-ms.date: 10/17/2019
+ms.topic: troubleshooting
+ms.date: 09/28/2020
 ms.author: cherylmc
 Customer intent: As someone with a networking background, I want to read more details about Virtual WAN in a FAQ format.
-ms.openlocfilehash: 452cb5c7af0bfd7e028f482079b05d3b4d8c6571
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1f192773eec87e37a2f6831a4835013223b2e63
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73491632"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187395"
 ---
 # <a name="virtual-wan-faq"></a>FAQ sur Virtual WAN
 

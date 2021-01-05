@@ -1,14 +1,16 @@
 ---
 title: Suggestions d’apprentissage actif – QnA Maker
 description: Les suggestions d’apprentissage actif vous permettent d’améliorer la qualité de votre base de connaissances en suggérant d’autres questions à vos paires de question-réponse en fonction des soumissions d’utilisateurs.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
-ms.date: 03/19/2020
-ms.openlocfilehash: edbe06b12fbb97473b28ccca968fd3e7d8366152
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.date: 11/09/2020
+ms.openlocfilehash: e1a8043912c984be46f85bd384a7049da27028b3
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804211"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353236"
 ---
 # <a name="active-learning-suggestions"></a>Suggestions d’apprentissage actif
 
@@ -35,10 +37,18 @@ Une fois les questions suggérées dans le portail QnA Maker, vous pouvez examin
 
 ## <a name="turn-on-active-learning"></a>Activation de l’apprentissage actif
 
+# <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
+
 Par défaut, l’apprentissage actif est **désactivé**.
 Pour utiliser l’apprentissage actif :
 * Vous devez [activer l’apprentissage actif](../How-To/use-active-learning.md#turn-on-active-learning-for-alternate-questions) afin que QnA Maker collecte des d’autres questions pour votre base de connaissances.
 * Pour voir les autres questions suggérées, [utilisez les options Affichage](../How-To/improve-knowledge-base.md#view-suggested-questions) sur la page Modifier.
+
+# <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+
+Par défaut, l’apprentissage actif est **activé** dans QnA Maker managé (préversion). Pour voir les autres questions suggérées, [utilisez les options Affichage](../How-To/improve-knowledge-base.md#view-suggested-questions) sur la page Modifier.
+
+---
 
 ## <a name="how-qna-makers-implicit-feedback-works"></a>Fonctionnement des commentaires implicites de QnA Maker
 
@@ -127,7 +137,7 @@ QnA Maker a besoin de commentaires explicites pour savoir quelles réponses sont
 * La logique métier, par exemple déterminer une plage de score acceptable.
 * Une combinaison des commentaires des utilisateurs et de la logique métier.
 
-Utilisez l’[API Train](https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime/train) pour envoyer la réponse correcte à QnA Maker une fois que l’utilisateur l’a sélectionnée.
+Utilisez l’[API Train](/rest/api/cognitiveservices/qnamaker4.0/runtime/train) pour envoyer la réponse correcte à QnA Maker une fois que l’utilisateur l’a sélectionnée.
 
 ## <a name="next-step"></a>Étape suivante
 

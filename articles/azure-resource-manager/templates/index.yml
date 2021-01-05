@@ -11,13 +11,13 @@ metadata:
   ms.collection: na
   author: mumian
   ms.author: jgao
-  ms.date: 03/09/2020
-  ms.openlocfilehash: f05b14039f5b83b4f214d7fa479a3ab809e859c6
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.date: 11/06/2020
+  ms.openlocfilehash: 72129eb10de042252c33784d7d98081f0f22a8b9
+  ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78943227"
+  ms.lasthandoff: 12/11/2020
+  ms.locfileid: "97346620"
 landingContent:
 - title: À propos des modèles ARM
   linkLists:
@@ -29,40 +29,46 @@ landingContent:
     links:
     - text: Meilleures pratiques
       url: template-best-practices.md
+    - text: Forum aux questions
+      url: frequently-asked-questions.md
+    - text: Spécifications de modèle
+      url: template-specs.md
     - text: Modes de déploiement
       url: deployment-modes.md
     - text: Modèles liés
       url: linked-templates.md
   - linkListType: video
     links:
-    - text: Nouveautés
-      url: https://youtu.be/3D-JIKShrws
+    - text: Présentation de Build 2020
+      url: https://mybuild.microsoft.com/sessions/82984db4-37a4-4ed3-bf8b-13298841ed18?source=sessions
 - title: Bien démarrer
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Créer des modèles - portail
+    - text: Créer des modèles – Portail
       url: quickstart-create-templates-use-the-portal.md
-    - text: Créer des modèles - VS Code
+    - text: Créer des modèles – VS Code
       url: quickstart-create-templates-use-visual-studio-code.md
-    - text: Créer des modèles - Visual Studio
-      url: create-visual-studio-deployment-project.md
+    - text: Créer et déployer des spécifications de modèle
+      url: quickstart-create-template-specs.md
   - linkListType: tutorial
     links:
     - text: Tutoriels pour les débutants
       url: template-tutorial-create-first-template.md
-    - text: Déployer plusieurs instances
-      url: template-tutorial-create-multiple-instances.md
-    - text: Définir l’ordre de déploiement
-      url: template-tutorial-create-templates-with-dependent-resources.md
-    - text: Intégrer un coffre de clés
-      url: template-tutorial-use-key-vault.md
+  - linkListType: learn
+    links:
+    - text: Déployer avec des modèles ARM
+      url: /learn/paths/deploy-manage-resource-manager-templates/
 - title: Développer des modèles
   linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Modèles avancés
+      url: template-tutorial-use-template-reference.md
+    - text: Spécifications de modèle
+      url: template-specs-create-linked.md
   - linkListType: how-to-guide
     links:
-    - text: Utiliser VS Code
-      url: use-vs-code-to-create-template.md
     - text: Utiliser les fonctions
       url: template-functions.md
     - text: Définir les paramètres
@@ -81,6 +87,10 @@ landingContent:
       url: https://azure.microsoft.com/resources/templates/
 - title: Déployer des modèles
   linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Déploiement
+      url: deployment-tutorial-local-template.md
   - linkListType: how-to-guide
     links:
     - text: PowerShell
@@ -91,23 +101,33 @@ landingContent:
       url: deploy-portal.md
     - text: API REST
       url: deploy-rest.md
+    - text: Bouton Déployer dans Azure
+      url: deploy-to-azure-button.md
+    - text: Cloud Shell
+      url: deploy-cloud-shell.md
     - text: Déploiement What-if
       url: template-deploy-what-if.md
 - title: Déploiements délimités
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Subscription
+    - text: Resource group
+      url: deploy-to-resource-group.md
+    - text: Abonnement
       url: deploy-to-subscription.md
     - text: Groupe d’administration
       url: deploy-to-management-group.md
     - text: Locataire
       url: deploy-to-tenant.md
+    - text: Définition d’une étendue de ressource d’extension
+      url: scope-extension-resources.md
+    - text: Fonctions de modèle dans les étendues
+      url: scope-functions.md
 - title: Explorer le contenu de référence
   linkLists:
   - linkListType: reference
     links:
-    - text: Référence de modèle
+    - text: Informations de référence sur les modèles
       url: /azure/templates/
     - text: API REST
       url: /rest/api/resources/
@@ -125,9 +145,11 @@ landingContent:
   linkLists:
   - linkListType: how-to-guide
     links:
+    - text: Kit de ressources de test
+      url: test-toolkit.md
     - text: Exporter des modèles
       url: export-template-portal.md
-    - text: Intégration/déploiement continues
+    - text: CI/CD
       url: add-template-to-azure-pipelines.md
     - text: Voir l’historique des déploiements
       url: deployment-history.md

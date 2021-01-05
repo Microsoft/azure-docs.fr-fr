@@ -3,12 +3,12 @@ title: Stratégies pour l’étiquetage des ressources
 description: Décrit les stratégies Azure que vous pouvez attribuer pour garantir la conformité des étiquettes.
 ms.topic: conceptual
 ms.date: 03/20/2020
-ms.openlocfilehash: e3eeb28ea23b18c3492f68d2fac294fc014420c5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c6867bc01306ac3c08a9797ece0567a45e060af2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82147869"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89293731"
 ---
 # <a name="assign-policies-for-tag-compliance"></a>Attribuer des stratégies pour la conformité des étiquettes
 
@@ -16,7 +16,7 @@ Vous pouvez utiliser [Azure Policy](../../governance/policy/overview.md) pour ap
 
 ## <a name="policies"></a>Stratégies
 
-[!INCLUDE [Tag policies](../../../includes/policy/samples/bycat/policies-tags.md)]
+[!INCLUDE [Tag policies](../../../includes/policy/reference/bycat/policies-tags.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 

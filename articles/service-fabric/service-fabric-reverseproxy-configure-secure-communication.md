@@ -1,28 +1,26 @@
 ---
 title: Communication sécurisée avec le proxy inverse Azure Service Fabric
 description: Configurez le proxy inverse pour permettre la communication de bout en bout sécurisée dans une application Azure Service Fabric.
-author: kavyako
 ms.topic: conceptual
 ms.date: 08/10/2017
-ms.author: kavyako
-ms.openlocfilehash: 61a8d1e766ea576f7d2984add239b0da7e2e8183
-ms.sourcegitcommit: bc738d2986f9d9601921baf9dded778853489b16
+ms.openlocfilehash: b01ce559b3c790164992d6618149afa9df069466
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80617110"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86256133"
 ---
 # <a name="connect-to-a-secure-service-with-the-reverse-proxy"></a>Se connecter à un service sécurisé avec le proxy inverse
 
 Cet article explique comment établir une connexion sécurisée entre le proxy inverse et les services, permettant ainsi un canal sécurisé de bout en bout. Pour plus d’informations sur le proxy inverse, consultez [Proxy inverse dans Azure Service Fabric](service-fabric-reverseproxy.md)
 
-La connexion à des services sécurisés est prise en charge uniquement quand le proxy inverse est configuré pour écouter sur le protocole HTTPS. Cet article suppose que c’est le cas.
-Pour configurer le proxy inverse dans Service Fabric, reportez-vous à [Configurer le proxy inverse dans Azure Service Fabric](service-fabric-reverseproxy-setup.md).
+> [!IMPORTANT]
+> La connexion à des services sécurisés est prise en charge uniquement quand le proxy inverse est configuré pour écouter sur le protocole HTTPS. Cet article suppose que c’est le cas. Pour configurer le proxy inverse dans Service Fabric, reportez-vous à [Configurer le proxy inverse dans Azure Service Fabric](service-fabric-reverseproxy-setup.md).
 
 ## <a name="secure-connection-establishment-between-the-reverse-proxy-and-services"></a>Établissement d’une connexion sécurisée entre le proxy inverse et les services 
 
 ### <a name="reverse-proxy-authenticating-to-services"></a>Authentification du proxy inverse auprès des services :
-Le proxy inverse s’identifie lui-même auprès des services avec son certificat. Pour les clusters Azure, le certificat est spécifié avec la propriété ***reverseProxyCertificate*** dans la section [Type de ressource](../azure-resource-manager/templates/template-syntax.md) de [**Microsoft.ServiceFabric/clusters**](https://docs.microsoft.com/azure/templates/microsoft.servicefabric/clusters) du Modèle Resource Manager. Pour les clusters autonomes, le certificat est spécifié avec la propriété ***ReverseProxyCertificate*** ou ***ReverseProxyCertificateCommonNames*** dans la section **Security** du fichier ClusterConfig.json. Pour plus d’informations, consultez [Activer le proxy inverse sur des clusters autonomes](service-fabric-reverseproxy-setup.md#enable-reverse-proxy-on-standalone-clusters). 
+Le proxy inverse s’identifie lui-même auprès des services avec son certificat. Pour les clusters Azure, le certificat est spécifié avec la propriété ***reverseProxyCertificate*** dans la section [Type de ressource](../azure-resource-manager/templates/template-syntax.md) de [**Microsoft.ServiceFabric/clusters**](/azure/templates/microsoft.servicefabric/clusters) du Modèle Resource Manager. Pour les clusters autonomes, le certificat est spécifié avec la propriété ***ReverseProxyCertificate*** ou ***ReverseProxyCertificateCommonNames*** dans la section **Security** du fichier ClusterConfig.json. Pour plus d’informations, consultez [Activer le proxy inverse sur des clusters autonomes](service-fabric-reverseproxy-setup.md#enable-reverse-proxy-on-standalone-clusters). 
 
 Les services peuvent implémenter la logique qui vérifie le certificat présenté par le serveur proxy inverse. Les services peuvent spécifier les détails du certificat client accepté en tant que paramètres de configuration dans le package de configuration. Celui-ci peut être lu au moment de l’exécution et utilisé pour valider le certificat présenté par le proxy inverse. Reportez-vous à [Gestion des paramètres d’application](service-fabric-manage-multiple-environment-app-configuration.md) pour ajouter les paramètres de configuration. 
 
@@ -183,7 +181,7 @@ Ensuite, il envoie les données du certificat client dans un en-tête HTTP perso
 Si le client ne présente pas un certificat, le proxy inverse transfère un en-tête vide et laisse le service gérer le cas.
 
 > [!NOTE]
-> Le proxy inverse est un simple redirecteur. Il n’effectue aucune validation du certificat du client.
+> Le proxy inverse agit uniquement comme un service de transfert. Il n’effectue aucune validation du certificat du client.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -191,5 +189,5 @@ Si le client ne présente pas un certificat, le proxy inverse transfère un en-t
 * Voir [Configurer le proxy inverse pour se connecter à des services sécurisés](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Reverse-Proxy-Sample#configure-reverse-proxy-to-connect-to-secure-services).
 * Pour obtenir un exemple de communication HTTP entre services, consultez cet [exemple de projet sur GitHub](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started).
 * [Appels de procédure distante avec Reliable Services à distance](service-fabric-reliable-services-communication-remoting.md)
-* [API Web qui utilise OWIN dans Reliable Services](service-fabric-reliable-services-communication-webapi.md)
+* [API Web qui utilise OWIN dans Reliable Services](./service-fabric-reliable-services-communication-aspnetcore.md)
 * [Gérer les certificats de cluster](service-fabric-cluster-security-update-certs-azure.md)

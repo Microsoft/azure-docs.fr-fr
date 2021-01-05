@@ -8,12 +8,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 07/03/2017
 ms.author: robinsh
-ms.openlocfilehash: bd7cc37b8fc81fc9d4109826743f2243913d0604
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: da28bfa31c74ff33a200967267500033dd6a9b1b
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60735016"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92535873"
 ---
 # <a name="configure-iot-hub-file-uploads-using-the-azure-portal"></a>Configurer les chargements de fichiers IoT Hub à l’aide du portail Azure
 
@@ -25,17 +25,17 @@ Pour utiliser la [fonctionnalité de chargement de fichiers dans IoT Hub](iot-hu
 
 ![Afficher les paramètres de chargement de fichier IoT Hub dans le portail](./media/iot-hub-configure-file-upload/file-upload-settings.png)
 
-* **Conteneur de stockage** : Utilisez le portail Azure pour sélectionner un conteneur d’objets blob dans un compte Azure Storage de votre abonnement Azure actuel à associer à votre IoT Hub. Si nécessaire, vous pouvez créer un compte Azure Storage dans le panneau **Comptes de stockage** et un conteneur d’objets blob dans le panneau **Conteneurs**. IoT Hub génère automatiquement des URI SAS avec des autorisations d’écriture pour ce conteneur d’objets blob pour les appareils à utiliser lorsqu’ils chargent des fichiers.
+* **Conteneur de stockage**  : Utilisez le portail Azure pour sélectionner un conteneur d’objets blob dans un compte Azure Storage de votre abonnement Azure actuel à associer à votre IoT Hub. Si nécessaire, vous pouvez créer un compte Azure Storage dans le panneau **Comptes de stockage** et un conteneur d’objets blob dans le panneau **Conteneurs**. IoT Hub génère automatiquement des URI SAS avec des autorisations d’écriture pour ce conteneur d’objets blob pour les appareils à utiliser lorsqu’ils chargent des fichiers.
 
    ![Afficher les conteneurs de stockage pour le chargement de fichiers dans le portail](./media/iot-hub-configure-file-upload/file-upload-container-selection.png)
 
-* **Recevoir des notifications pour les fichiers chargés** : Activez ou désactivez les notifications de chargement de fichiers via le bouton bascule.
+* **Recevoir des notifications pour les fichiers chargés**  : Activez ou désactivez les notifications de chargement de fichiers via le bouton bascule.
 
-* **Durée de vie de SAS** : ce paramètre est la durée de vie des URI de signature d’accès partagé retournés à l’appareil par IoT Hub. Il est défini par défaut sur une heure, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
+* **Durée de vie de SAS**  : ce paramètre est la durée de vie des URI de signature d’accès partagé retournés à l’appareil par IoT Hub. Il est défini par défaut sur une heure, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
 
-* **Durée de vie par défaut des paramètres de notification de fichiers** : durée de vie d’une notification de chargement de fichier avant son expiration. Il est défini par défaut sur un jour, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
+* **Durée de vie par défaut des paramètres de notification de fichiers**  : durée de vie d’une notification de chargement de fichier avant son expiration. Il est défini par défaut sur un jour, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
 
-* **Nombre maximal de remises de notifications de fichier** : nombre de tentatives de remise d’une notification de chargement de fichier par le hub IoT. Il est défini par défaut sur 10, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
+* **Nombre maximal de remises de notifications de fichier**  : nombre de tentatives de remise d’une notification de chargement de fichier par le hub IoT. Il est défini par défaut sur 10, mais il peut être personnalisé avec d’autres valeurs à l’aide du curseur.
 
    ![Configurer le chargement de fichier IoT Hub dans le portail](./media/iot-hub-configure-file-upload/file-upload-selected-container.png)
 
@@ -46,11 +46,10 @@ Pour plus d’informations sur les fonctionnalités de chargement de fichiers d�
 Suivez ces liens pour en savoir plus sur la gestion de Azure IoT Hub :
 
 * [Gestion en bloc des appareils IoT](iot-hub-bulk-identity-mgmt.md)
-* [Métriques d’IoT Hub](iot-hub-metrics.md)
-* [Surveillance des opérations](iot-hub-operations-monitoring.md)
+* [Surveiller IoT Hub](monitor-iot-hub.md)
 
 Pour explorer davantage les capacités de IoT Hub, consultez :
 
 * [Guide du développeur d’IoT Hub](iot-hub-devguide.md)
-* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md)
 * [Sécuriser votre solution IoT de bout en bout](../iot-fundamentals/iot-security-ground-up.md)

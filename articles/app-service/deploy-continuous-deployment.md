@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 03/20/2020
 ms.reviewer: dariac
 ms.custom: seodec18
-ms.openlocfilehash: 847de2c2c8916558d542473d9b7c80fd5552dbf7
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: b7730558e2a660b0cf00a5b6962d1e2275dd472c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437236"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004339"
 ---
 # <a name="continuous-deployment-to-azure-app-service"></a>Déploiement continu vers Azure App Service
 
@@ -23,7 +23,7 @@ Pour plus d'informations sur les services de contrôle de code source, consultez
 
 ## <a name="authorize-azure-app-service"></a>Autoriser Azure App Service 
 
-Pour utiliser Azure Repos, assurez-vous que votre organisation Azure DevOps est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](https://docs.microsoft.com/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops).
+Pour utiliser Azure Repos, assurez-vous que votre organisation Azure DevOps est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops&preserve-view=true).
 
 Pour Bitbucket ou GitHub, autorisez Azure App Service à se connecter à votre référentiel. Un service de contrôle de source ne nécessite qu'une seule autorisation. 
 
@@ -58,7 +58,7 @@ Vous pouvez utiliser le serveur de builds Kudu App Service intégré pour procé
 1. Sélectionnez votre fournisseur de contrôle de code source autorisé sur la page **Centre de déploiement**, puis choisissez **Continuer**. Pour GitHub ou Bitbucket, vous pouvez également sélectionner **Modifier le compte** pour changer de compte autorisé. 
    
    > [!NOTE]
-   > Pour utiliser Azure Repos, assurez-vous que votre organisation Azure DevOps Services est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](https://docs.microsoft.com/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops).
+   > Pour utiliser Azure Repos, assurez-vous que votre organisation Azure DevOps Services est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops&preserve-view=true).
    
 1. Pour GitHub ou Azure Repos, sur la page **Fournisseur de builds**, sélectionnez **Service de builds App Service**, puis **Continuer**. Bitbucket utilise toujours le service de builds App Service.
    
@@ -76,7 +76,7 @@ Vous pouvez utiliser le serveur de builds Kudu App Service intégré pour procé
    - Pour Azure Repos, sélectionnez l'**Organisation Azure DevOps**, le **Projet**, le **Référentiel** et la **Branche** que vous souhaitez déployer en continu.
      
      > [!NOTE]
-     > Si votre organisation Azure DevOps n'est pas répertoriée, assurez-vous qu'elle est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](https://docs.microsoft.com/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops).
+     > Si votre organisation Azure DevOps n'est pas répertoriée, assurez-vous qu'elle est liée à votre abonnement Azure. Pour plus d'informations, consultez [Configurer un compte Azure DevOps Services afin de le déployer sur une application web](/azure/devops/pipelines/apps/cd/deploy-webdeploy-webapps?view=azure-devops&preserve-view=true).
      
 1. Sélectionnez **Continuer**.
    
@@ -110,11 +110,11 @@ Pour permettre à Azure App Service de créer une livraison continue via Azure P
 
 1. Sélectionnez **GitHub** comme fournisseur de contrôle de code source dans la page **Centre de déploiement**, puis choisissez **Continuer**. Pour **GitHub**, vous pouvez sélectionner **Changer de compte** pour changer le compte autorisé.
 
-    ![contrôle de code source](media/app-service-continuous-deployment/deployment-center-src-control.png)
+    :::image type="content" source="media/app-service-continuous-deployment/deployment-center-src-control.png" alt-text="Capture d'écran de la page Centre de déploiement App Service.":::
    
 1. Dans la page **Fournisseur de générations**, sélectionnez **Azure Pipelines (Préversion)** , puis **Continuer**.
 
-    ![fournisseur de générations](media/app-service-continuous-deployment/select-build-provider.png)
+    :::image type="content" source="media/app-service-continuous-deployment/select-build-provider.png" alt-text="Capture d'écran de la page Centre de déploiement, sur laquelle Azure Pipelines (préversion) est sélectionné.":::
    
 1. Dans la page **Configurer**, dans la section **Code**, sélectionnez l’**organisation**, le **dépôt** et la **branche** que vous souhaitez déployer en continu, puis choisissez **Continuer**.
      
@@ -123,11 +123,11 @@ Pour permettre à Azure App Service de créer une livraison continue via Azure P
        
     Dans la section **Build**, spécifiez l’organisation Azure DevOps, le projet, le framework de langage que doit utiliser Azure Pipelines pour exécuter les tâches de build, puis sélectionnez **Continuer**.
 
-   ![fournisseur de générations](media/app-service-continuous-deployment/build-configure.png)
+   :::image type="content" source="media/app-service-continuous-deployment/build-configure.png" alt-text="Capture d'écran de la section Build, avec un exemple de texte dans les champs.":::
 
 1. Une fois le fournisseur de builds configuré, vérifiez les paramètres sur la page **Résumé**, puis sélectionnez **Terminer**.
 
-   ![fournisseur de générations](media/app-service-continuous-deployment/summary.png)
+   :::image type="content" source="media/app-service-continuous-deployment/summary.png" alt-text="Capture d'écran de la page Centre de déploiement présentant les validations et les déploiements et sur laquelle le bouton Actualiser est en surbrillance.":::
    
 1. Les nouvelles validations dans le dépôt et la branche sélectionnés sont maintenant déployées en continu dans votre service App Service. Vous pouvez suivre les validations et les déploiements sur la page **Centre de déploiement**.
    
@@ -141,11 +141,11 @@ Pour permettre à Azure App Service de créer une livraison continue via Azure P
 
 1. Sélectionnez **Azure Repos** comme fournisseur de contrôle de code source dans la page **Centre de déploiement**, puis choisissez **Continuer**.
 
-    ![contrôle de code source](media/app-service-continuous-deployment/deployment-center-src-control.png)
+    :::image type="content" source="media/app-service-continuous-deployment/deployment-center-src-control.png" alt-text="Capture d'écran de la page Centre de déploiement présentant les sélections de Déploiements continus (CI/CD).":::
 
 1. Dans la page **Fournisseur de générations**, sélectionnez **Azure Pipelines (Préversion)** , puis **Continuer**.
 
-    ![contrôle de code source](media/app-service-continuous-deployment/azure-pipelines.png)
+    :::image type="content" source="media/app-service-continuous-deployment/azure-pipelines.png" alt-text="Capture d'écran du Centre de déploiement présentant Azure Pipelines (préversion).":::
 
 1. Dans la page **Configurer**, dans la section **Code**, sélectionnez l’**organisation**, le **dépôt** et la **branche** que vous souhaitez déployer en continu, puis choisissez **Continuer**.
 
@@ -154,11 +154,11 @@ Pour permettre à Azure App Service de créer une livraison continue via Azure P
 
    Dans la section **Build**, spécifiez l’organisation Azure DevOps, le projet, le framework de langage que doit utiliser Azure Pipelines pour exécuter les tâches de build, puis sélectionnez **Continuer**.
 
-   ![fournisseur de générations](media/app-service-continuous-deployment/build-configure.png)
+   :::image type="content" source="media/app-service-continuous-deployment/build-configure.png" alt-text="Capture d'écran de la section Build présentant les champs Organisation et Projet d'Azure DevOps avec des exemples.":::
 
 1. Une fois le fournisseur de builds configuré, vérifiez les paramètres sur la page **Résumé**, puis sélectionnez **Terminer**.  
      
-   ![fournisseur de générations](media/app-service-continuous-deployment/summary-azure-pipelines.png)
+   :::image type="content" source="media/app-service-continuous-deployment/summary-azure-pipelines.png" alt-text="Capture d'écran des paramètres sélectionnés sur la page Résumé.":::
 
 1. Les nouvelles validations dans le dépôt et la branche sélectionnés sont maintenant déployées en continu dans votre service App Service. Vous pouvez suivre les validations et les déploiements sur la page **Centre de déploiement**.
 
@@ -177,7 +177,7 @@ Pour les applications Windows, vous pouvez configurer manuellement le déploieme
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Examiner les problèmes courants liés au déploiement continu](https://github.com/projectkudu/kudu/wiki/Investigating-continuous-deployment)
-* [Utilisation d'Azure PowerShell](/powershell/azureps-cmdlets-docs)
+* [Utilisation d'Azure PowerShell](/powershell/azure/)
 * [Documentation de Git](https://git-scm.com/documentation)
 * [Project Kudu](https://github.com/projectkudu/kudu/wiki)
 

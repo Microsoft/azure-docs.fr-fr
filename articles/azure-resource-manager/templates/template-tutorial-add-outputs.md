@@ -1,20 +1,21 @@
 ---
 title: Tutoriel - Ajouter des sorties au modèle
-description: Ajoutez des sorties à votre modèle Azure Resource Manager pour simplifier la syntaxe.
+description: Ajoutez des sorties à votre modèle Azure Resource Manager (modèle ARM) pour simplifier la syntaxe.
 author: mumian
 ms.date: 03/27/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 2ee1a2c7037bde68b7858b57a03c78bd2016ff1c
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.custom: ''
+ms.openlocfilehash: 7acfb168462354017168ee333ea0b1ecaea434c1
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80743551"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107122"
 ---
 # <a name="tutorial-add-outputs-to-your-arm-template"></a>Tutoriel : Ajouter des sorties à votre modèle ARM
 
-Dans ce tutoriel, vous allez apprendre à retourner une valeur à partir de votre modèle Azure Resource Manager (ARM). Vous utilisez des sorties lorsque vous avez besoin d’une valeur provenant d’une ressource déployée. Ce tutoriel dure environ **7 minutes**.
+Dans ce tutoriel, vous allez apprendre à retourner une valeur à partir de votre modèle Azure Resource Manager (modèle ARM). Vous utilisez des sorties lorsque vous avez besoin d’une valeur provenant d’une ressource déployée. Ce tutoriel dure environ **7 minutes**.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -40,17 +41,17 @@ L’exemple suivant met en évidence la modification apportée à votre modèle 
 
 Il y a quelques éléments importants à noter concernant la valeur de sortie que vous avez ajoutée.
 
-Le type de valeur retournée est défini sur **object**, ce qui signifie qu’il retourne un objet JSON.
+Le type de valeur retournée est défini sur `object`, ce qui signifie qu’il retourne un objet JSON.
 
 Il utilise la fonction [reference](template-functions-resource.md#reference) pour récupérer l’état d’exécution du compte de stockage. Pour obtenir l’état d’exécution d’une ressource, vous transmettez le nom ou l’ID d’une ressource. Dans ce cas, vous utilisez la même variable que celle que vous avez utilisée pour créer le nom du compte de stockage.
 
-Finalement, il retourne la propriété **primaryEndpoints** à partir du compte de stockage.
+Finalement, il retourne la propriété `primaryEndpoints` à partir du compte de stockage.
 
 ## <a name="deploy-template"></a>Déployer un modèle
 
 Vous êtes prêt à déployer le modèle et à examiner la valeur retournée.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -91,7 +92,7 @@ Dans la sortie de la commande de déploiement, un objet semblable à l’exemple
 ```
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="review-your-work"></a>Passer en revue votre travail
 

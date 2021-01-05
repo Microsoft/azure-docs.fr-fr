@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à ScreenSteps | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ScreenSteps.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4563fe94-a88f-4895-a07f-79df44889cf9
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
-ms.openlocfilehash: 864a9243a9f737506fd4d8cbc3940d7a86711f20
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3816239798290318404980ded388b726d8134395
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67091664"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999788"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-screensteps"></a>Tutoriel : Intégration d’Azure AD à ScreenSteps
 
@@ -31,7 +27,7 @@ L’intégration de ScreenSteps à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à ScreenSteps (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -134,7 +130,7 @@ Pour configurer l’authentification unique Azure AD avec ScreenSteps, effectuez
 
 1. Cliquez sur **Single Sign-on**.
 
-    ![Authentification à distance](./media/screensteps-tutorial/ic778524.png "Remote Authentication")
+    ![Capture d’écran montrant l’option « Single Sign-on » sélectionnée.](./media/screensteps-tutorial/ic778524.png "Remote Authentication")
 
 1. Cliquez sur **Créer un point de terminaison d’authentification unique**.
 
@@ -227,18 +223,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-screensteps-test-user"></a>Créer un utilisateur de test ScreenSteps
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans ScreenSteps. Pour ajouter des utilisateurs à la plateforme ScreenSteps, contactez  [l’équipe du support ScreenSteps](https://www.screensteps.com/contact) . Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans ScreenSteps. Pour ajouter des utilisateurs à la plateforme ScreenSteps, contactez [l’équipe du support ScreenSteps](https://www.screensteps.com/contact). Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette ScreenSteps dans le panneau d’accès doit vous connecter automatiquement à l’application ScreenSteps pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette ScreenSteps dans le panneau d’accès doit vous connecter automatiquement à l’application ScreenSteps pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

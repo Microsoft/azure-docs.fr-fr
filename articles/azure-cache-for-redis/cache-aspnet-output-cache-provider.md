@@ -4,18 +4,19 @@ description: Découvrez comment mettre en cache une sortie de pages ASP.NET à l
 author: yegu-ms
 ms.author: yegu
 ms.service: cache
+ms.custom: devx-track-csharp
 ms.topic: conceptual
 ms.date: 04/22/2018
-ms.openlocfilehash: f1d8189068278b46e3ec3ea66875d79bb91e5e16
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.openlocfilehash: 6d711b07a10e04dcdf31259f3e53c9687af28e28
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81010203"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993393"
 ---
 # <a name="aspnet-output-cache-provider-for-azure-cache-for-redis"></a>Fournisseur de caches de sortie ASP.NET pour le Cache Azure pour Redis
 
-Le fournisseur de caches de sortie Redis est un mécanisme de stockage hors processus pour les données de cache de sortie. Ces données concernent spécialement les réponses HTTP complètes (mise en cache de la sortie de pages). Le fournisseur se connecte au nouveau point d'extension du fournisseur de caches de sortie introduit dans ASP.NET 4.
+Le fournisseur de caches de sortie Redis est un mécanisme de stockage hors processus pour les données de cache de sortie. Ces données concernent spécialement les réponses HTTP complètes (mise en cache de la sortie de pages). Le fournisseur se connecte au nouveau point d'extension du fournisseur de caches de sortie introduit dans ASP.NET 4. Pour des informations sur les applications ASP.NET Core, consultez [Mise en cache des réponses dans ASP.NET Core](/aspnet/core/performance/caching/response). 
 
 Pour utiliser le fournisseur de caches de sortie Redis, configurez d’abord votre cache, puis configurez votre application ASP.NET en utilisant le package NuGet du fournisseur de caches de sortie Redis. Cette rubrique fournit des conseils sur la configuration de votre application pour utiliser le fournisseur de caches de sortie Redis. Pour plus d’informations sur la création et la configuration d’une instance de Cache Azure pour Redis, voir [Créer un cache](cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache).
 
@@ -56,11 +57,11 @@ Configurez les attributs avec les valeurs du panneau de votre cache sur le porta
 | *host* | string | "localhost" | Le nom hôte ou l’adresse IP du serveur Redis |
 | *port* | entier positif | 6379 (non TLS/SSL)<br/>6380 (TLS/SSL) | Port du serveur Redis |
 | *accessKey* | string | "" | Mot de passe Redis lorsque l’autorisation Redis est activée. La valeur est une chaîne vide par défaut, ce qui signifie que le fournisseur d’état de session ne peut pas utiliser n’importe quel mot de passe pour la connexion au serveur Redis. **Si votre serveur Redis se trouve sur un réseau accessible publiquement comme le Cache Redis Azure, activez l’autorisation Redis pour améliorer la sécurité et fournir un mot de passe sécurisé.** |
-| *ssl* | boolean | **false** | Indique s’il faut ou non se connecter au serveur Redis via TLS. La valeur est **false** par défaut, car Redis ne prend pas en charge TLS sans configuration préalable. **Si vous utilisez le Cache Redis Azure avec SSL sans configuration préalable, sélectionnez la valeur true pour améliorer la sécurité.**<br/><br/>Le port non TLS est désactivé par défaut pour les nouveaux caches. Spécifiez **true** pour utiliser le port TLS pour ce paramètre. Pour plus d’informations sur l’activation du port non TLS, consultez la section relative aux [ports d’accès](cache-configure.md#access-ports) dans la rubrique [Configuration d’un cache](cache-configure.md). |
+| *ssl* | boolean | **false** | Indique s’il faut ou non se connecter au serveur Redis via TLS. La valeur est **false** par défaut, car Redis ne prend pas en charge TLS sans configuration préalable. **Si vous utilisez le Cache Redis Azure avec SSL sans configuration préalable, sélectionnez la valeur true pour améliorer la sécurité.**<br/><br/>Le port non TLS est désactivé par défaut pour les nouveaux caches. Spécifiez **true** pour ce paramètre afin d’utiliser le port non TLS. Pour plus d’informations sur l’activation du port non TLS, consultez la section relative aux [ports d’accès](cache-configure.md#access-ports) dans la rubrique [Configuration d’un cache](cache-configure.md). |
 | *databaseIdNumber* | entier positif | 0 | *Cet attribut peut uniquement être spécifié par le biais de web.config ou AppSettings.*<br/><br/>Spécifie la base de données Redis à utiliser. |
 | *connectionTimeoutInMilliseconds* | entier positif | Fourni par StackExchange.Redis | Permet de définir *ConnectTimeout* lors de la création de StackExchange.Redis.ConnectionMultiplexer. |
 | *operationTimeoutInMilliseconds* | entier positif | Fourni par StackExchange.Redis | Permet de définir *SyncTimeout* lors de la création de StackExchange.Redis.ConnectionMultiplexer. |
-| *connectionString* (chaîne de connexion StackExchange.Redis valide) | string | *n/a* | Référence de paramètre à AppSettings ou web.config, ou une chaîne de connexion StackExchange.Redis valide. Cet attribut peut fournir des valeurs pour l’*hôte*, la *port*, *accessKey*, *ssl*et d’autres attributs de StackExchange.Redis. Pour plus de détail sur *connectionString*, consultez [Paramétrage de connectionString](#setting-connectionstring) dans la section [Remarques sur les attributs](#attribute-notes). |
+| *connectionString* (chaîne de connexion StackExchange.Redis valide) | string | *n/a* | Référence de paramètre à AppSettings ou web.config, ou une chaîne de connexion StackExchange.Redis valide. Cet attribut peut fournir des valeurs pour l’*hôte*, la *port*, *accessKey*, *ssl* et d’autres attributs de StackExchange.Redis. Pour plus de détail sur *connectionString*, consultez [Paramétrage de connectionString](#setting-connectionstring) dans la section [Remarques sur les attributs](#attribute-notes). |
 | *settingsClassName*<br/>*settingsMethodName* | string<br/>string | *n/a* | *Ces attributs peuvent uniquement être spécifiés par le biais de web.config ou AppSettings.*<br/><br/>Utilisez ces attributs pour fournir une chaîne de connexion. *settingsClassName* doit être un nom de classe d’assembly qualifié qui contient la méthode spécifiée par *settingsMethodName*.<br/><br/>La méthode spécifiée par *settingsMethodName* doit être publique, statique et vide (sans aucun paramètre), avec un type de retour **chaîne**. Cette méthode retourne la chaîne de connexion réelle. |
 | *loggingClassName*<br/>*loggingMethodName* | string<br/>string | *n/a* | *Ces attributs peuvent uniquement être spécifiés par le biais de web.config ou AppSettings.*<br/><br/>Utilisez ces attributs pour déboguer votre application en fournissant des journaux à partir du Cache de l’état de session/sortie, ainsi que des journaux à partir de StackExchange.Redis. *loggingClassName* doit être un nom de classe d’assembly qualifié qui contient la méthode spécifiée par *loggingMethodName*.<br/><br/>La méthode spécifiée par *loggingMethodName* doit être publique, statique et vide (sans aucun paramètre), avec un type de retour **System.IO.TextWriter**. |
 | *applicationName* | string | Le nom du module du processus en cours ou « / » | *SessionStateProvider uniquement*<br/>*Cet attribut peut uniquement être spécifié par le biais de web.config ou AppSettings.*<br/><br/>Le préfixe de nom d’application à utiliser dans le cache Redis. Le client peut utiliser le même cache Redis à des fins différentes. Pour s’assurer que les clés de session ne sont pas en conflit, il est possible de les préfixer avec le nom de l’application. |
@@ -193,7 +194,7 @@ Ajoutez une directive OutputCache à chaque page pour laquelle vous voulez mettr
 <%@ OutputCache Duration="60" VaryByParam="*" %>
 ```
 
-Dans l’exemple précédent, les données de page mises en cache resteront dans le cache pendant 60 secondes et une version différente de la page est mise en cache pour chaque combinaison de paramètres. Pour plus d’informations sur la directive OutputCache, consultez [@OutputCache](https://go.microsoft.com/fwlink/?linkid=320837).
+Dans l’exemple précédent, les données de page mises en cache resteront dans le cache pendant 60 secondes et une version différente de la page est mise en cache pour chaque combinaison de paramètres. Pour plus d’informations sur la directive OutputCache, consultez [@OutputCache](/previous-versions/dotnet/netframework-4.0/hdxfb6cy(v=vs.100)).
 
 Une fois ces étapes effectuées, votre application est configurée pour utiliser le fournisseur de caches de sortie Redis.
 

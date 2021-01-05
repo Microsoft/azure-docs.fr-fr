@@ -9,12 +9,12 @@ ms.author: deli
 ms.reviewer: klam, estfan
 ms.topic: article
 ms.date: 02/29/2020
-ms.openlocfilehash: 90c3cc2e096b9b58465987bc53f718c5d06c6203
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0e9ca2c7b5d15fcc6be451bbe215c8b85d5309eb
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78899054"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368262"
 ---
 # <a name="migrate-azure-scheduler-jobs-to-azure-logic-apps"></a>Migrer des travaux Azure Scheduler vers Azure Logic Apps
 
@@ -27,7 +27,7 @@ Cet article vous montre comment planifier des travaux ponctuels et des travaux r
 
 * Générez votre travail à l’aide d’un concepteur visuel et de [connecteurs prêts à l’emploi](../connectors/apis-list.md) parmi des centaines de services, tels que Stockage d’objets blob Azure, Azure Service Bus, Office 365 Outlook et SAP.
 
-* Gérez chaque workflow planifié comme une ressource Azure de première classe. Vous n’avez pas à vous soucier du concept de *collection de tâches*, car chaque application logique est une ressource Azure distincte.
+* Gérez chaque workflow planifié comme une ressource Azure de première classe. Vous n’avez pas à vous soucier du concept de *collection de tâches* , car chaque application logique est une ressource Azure distincte.
 
 * Exécutez plusieurs travaux ponctuels à l’aide d’une seule application logique.
 
@@ -59,15 +59,15 @@ Vous pouvez exécuter plusieurs travaux ponctuels en créant simplement une appl
 
 1. Pour le déclencheur Requête, vous pouvez éventuellement fournir un schéma JSON qui permet au concepteur d’application logique de comprendre la structure des entrées incluses dans l’appel entrant du déclencheur Requête, et facilite la sélection ultérieure des sorties dans votre workflow.
 
-   Dans la zone **Schéma JSON du corps de la demande**, entrez le schéma, par exemple :
+   Dans la zone **Schéma JSON du corps de la demande** , entrez le schéma, par exemple :
 
    ![Schéma de requête](./media/migrate-from-scheduler-to-logic-apps/request-schema.png)
 
    Si vous n’avez pas de schéma, mais un exemple de charge utile au format JSON, vous pouvez générer un schéma à partir de cette charge utile.
 
-   1. Dans le déclencheur de requête, sélectionnez **Utiliser l’exemple de charge utile pour générer le schéma**.
+   1. Dans le déclencheur de requête, sélectionnez **Utiliser l’exemple de charge utile pour générer le schéma** .
 
-   1. Sous **Entrer ou coller un exemple de charge utile JSON**, fournissez votre exemple de charge utile, puis sélectionnez **Terminé**. Par exemple :
+   1. Sous **Entrer ou coller un exemple de charge utile JSON** , fournissez votre exemple de charge utile, puis sélectionnez **Terminé** . Par exemple :
 
       ![Exemple de charge utile](./media/migrate-from-scheduler-to-logic-apps/sample-payload.png)
 
@@ -78,7 +78,7 @@ Vous pouvez exécuter plusieurs travaux ponctuels en créant simplement une appl
       }
       ```
 
-1. Sous le déclencheur, sélectionnez **Étape suivante**.
+1. Sous le déclencheur, sélectionnez **Étape suivante** .
 
 1. Dans la zone de recherche, entrez `delay until` en guise de filtre. Dans la liste des actions, sélectionnez cette action : **Retarder jusqu’à**
 
@@ -88,7 +88,7 @@ Vous pouvez exécuter plusieurs travaux ponctuels en créant simplement une appl
 
 1. Entrez l’horodatage pour définir le moment où démarrer le workflow de l’application logique.
 
-   Quand vous cliquez dans la zone **Horodatage**, une liste de contenu dynamique s’affiche, dans laquelle vous pouvez éventuellement sélectionner une sortie du déclencheur.
+   Quand vous cliquez dans la zone **Horodatage** , une liste de contenu dynamique s’affiche, dans laquelle vous pouvez éventuellement sélectionner une sortie du déclencheur.
 
    ![Entrer les détails « Différer jusqu’à »](./media/migrate-from-scheduler-to-logic-apps/delay-until-details.png)
 
@@ -96,13 +96,13 @@ Vous pouvez exécuter plusieurs travaux ponctuels en créant simplement une appl
 
    Par exemple, vous pouvez ajouter une action HTTP qui envoie une requête à une URL, ou des actions qui interagissent avec les files d’attente de stockage, les files d’attente Service Bus ou les rubriques Service Bus :
 
-   ![Action HTTP](./media/migrate-from-scheduler-to-logic-apps/request-http-action.png)
+   ![Capture d’écran représentant un délai jusqu’à l’action suivie d’une action HTTP avec une méthode POST.](./media/migrate-from-scheduler-to-logic-apps/request-http-action.png)
 
 1. Lorsque vous avez terminé, enregistrez votre application logique.
 
    ![Enregistrer votre application logique](./media/migrate-from-scheduler-to-logic-apps/save-logic-app.png)
 
-   Quand vous enregistrez votre application logique pour la première fois, l’URL de point de terminaison associée au déclencheur Requête de votre application logique s’affiche dans la zone **URL HTTP POST**. Si vous souhaitez appeler votre application logique et lui envoyer les entrées à traiter, utilisez cette URL comme destination de l’appel.
+   Quand vous enregistrez votre application logique pour la première fois, l’URL de point de terminaison associée au déclencheur Requête de votre application logique s’affiche dans la zone **URL HTTP POST** . Si vous souhaitez appeler votre application logique et lui envoyer les entrées à traiter, utilisez cette URL comme destination de l’appel.
 
    ![Enregistrer l’URL de point de terminaison du déclencheur Requête](./media/migrate-from-scheduler-to-logic-apps/request-endpoint-url.png)
 
@@ -116,12 +116,12 @@ Par exemple, dans l’application Postman, vous pouvez créer une requête POST 
 
 | Méthode de requête | URL | body | headers |
 |----------------|-----|------|---------|
-| **POST** | <*endpoint-URL*> | **raw** <p>**JSON(application/json)** <p>Dans la zone **raw**, entrez la charge utile à envoyer dans la demande. <p>**Remarque** : Ce paramètre configure automatiquement les valeurs d’en-tête sous **Headers**. | **Clé** : Content-Type <br>**Valeur** : application/json |
+| **POST** | <*endpoint-URL*> | **raw** <p>**JSON(application/json)** <p>Dans la zone **raw** , entrez la charge utile à envoyer dans la demande. <p>**Remarque**  : Ce paramètre configure automatiquement les valeurs d’en-tête sous **Headers** . | **Clé**  : Content-Type <br>**Valeur** : application/json |
 |||||
 
 ![Envoyer la requête pour déclencher manuellement votre application logique](./media/migrate-from-scheduler-to-logic-apps/postman-send-post-request.png)
 
-Après l’envoi de l’appel, la réponse de votre application logique s’affiche dans la zone **raw** sous l’onglet **Body**. 
+Après l’envoi de l’appel, la réponse de votre application logique s’affiche dans la zone **raw** sous l’onglet **Body** . 
 
 <a name="workflow-run-id"></a>
 
@@ -133,7 +133,7 @@ Après l’envoi de l’appel, la réponse de votre application logique s’affi
 
 ## <a name="cancel-a-one-time-job"></a>Annuler un travail ponctuel
 
-Dans Logic Apps, chaque travail ponctuel s’exécute comme une seule instance d’exécution dans l’application logique. Pour annuler un travail ponctuel, vous pouvez utiliser l’opération [Annuler les exécutions de workflow](https://docs.microsoft.com/rest/api/logic/workflowruns/cancel) dans l’API REST Logic Apps. Quand vous envoyez un appel au déclencheur, entrez [l’ID d’exécution de workflow](#workflow-run-id).
+Dans Logic Apps, chaque travail ponctuel s’exécute comme une seule instance d’exécution dans l’application logique. Pour annuler un travail ponctuel, vous pouvez utiliser l’opération [Annuler les exécutions de workflow](/rest/api/logic/workflowruns/cancel) dans l’API REST Logic Apps. Quand vous envoyez un appel au déclencheur, entrez [l’ID d’exécution de workflow](#workflow-run-id).
 
 ## <a name="schedule-recurring-jobs"></a>Planifier des travaux récurrents
 
@@ -151,11 +151,11 @@ Dans Logic Apps, chaque travail ponctuel s’exécute comme une seule instance d
 
    Pour plus d’informations sur les options de planification avancée, consultez [Créer et exécuter des travaux et des workflows récurrents avec Azure Logic Apps](../connectors/connectors-native-recurrence.md).
 
-1. Ajoutez les autres actions que vous souhaitez exécuter parmi des [centaines prêtes à l’utilisation](../connectors/apis-list.md). Sous le déclencheur, sélectionnez **Étape suivante**. Recherchez et sélectionnez les actions souhaitées.
+1. Ajoutez les autres actions que vous souhaitez exécuter parmi des [centaines prêtes à l’utilisation](../connectors/apis-list.md). Sous le déclencheur, sélectionnez **Étape suivante** . Recherchez et sélectionnez les actions souhaitées.
 
    Par exemple, vous pouvez ajouter une action HTTP qui envoie une requête à une URL, ou des actions qui interagissent avec les files d’attente de stockage, les files d’attente Service Bus ou les rubriques Service Bus :
 
-   ![Action HTTP](./media/migrate-from-scheduler-to-logic-apps/recurrence-http-action.png)
+   ![Capture d’écran représentant une action HTTP avec une méthode POST.](./media/migrate-from-scheduler-to-logic-apps/recurrence-http-action.png)
 
 1. Lorsque vous avez terminé, enregistrez votre application logique.
 
@@ -169,7 +169,7 @@ Voici d’autres façons de personnaliser vos travaux.
 
 Pour déterminer la façon dont une action réessaie de s’exécuter dans votre application logique après des défaillances intermittentes, vous pouvez définir une [stratégie de nouvelles tentatives](../logic-apps/logic-apps-exception-handling.md#retry-policies) dans les paramètres de chaque action. Par exemple :
 
-1. Ouvrez le menu **...** de l’action, puis sélectionnez **Paramètres**.
+1. Ouvrez le menu **...** de l’action, puis sélectionnez **Paramètres** .
 
    ![Ouvrir les paramètres de l’action](./media/migrate-from-scheduler-to-logic-apps/action-settings.png)
 
@@ -181,7 +181,7 @@ Pour déterminer la façon dont une action réessaie de s’exécuter dans votre
 
 Dans Azure Scheduler, si l’action par défaut échoue à s’exécuter, vous pouvez exécuter une autre action qui gère la condition d’erreur. C’est également possible dans Azure Logic Apps.
 
-1. Dans le concepteur d’application logique, au-dessus de l’action à gérer, déplacez votre pointeur sur la flèche entre les étapes, puis sélectionnez **Ajouter une branche parallèle**.
+1. Dans le concepteur d’application logique, au-dessus de l’action à gérer, déplacez votre pointeur sur la flèche entre les étapes, puis sélectionnez **Ajouter une branche parallèle** .
 
    ![Ajouter une branche parallèle](./media/migrate-from-scheduler-to-logic-apps/add-parallel-branch.png)
 
@@ -197,7 +197,7 @@ Dans Azure Scheduler, si l’action par défaut échoue à s’exécuter, vous p
 
    ![Configurer les propriétés « exécuter après »](./media/migrate-from-scheduler-to-logic-apps/select-run-after-properties.png)
 
-1. Quand vous avez terminé, cliquez sur **Terminé**.
+1. Quand vous avez terminé, cliquez sur **Terminé** .
 
 Pour en savoir plus sur la gestion des exceptions, consultez [Gérer les erreurs et exceptions - Propriété RunAfter](../logic-apps/logic-apps-exception-handling.md#control-run-after-behavior).
 
@@ -205,41 +205,41 @@ Pour en savoir plus sur la gestion des exceptions, consultez [Gérer les erreurs
 
 <a name="retire-date"></a>
 
-**Q** : Quand Azure Scheduler sera-t-il mis hors service ? <br>
-**R** : La mise hors service d’Azure Scheduler est prévue pour le 31 décembre 2019. Pour connaître les mesures importantes à prendre avant cette date et accéder à une chronologie détaillée, voir [Date de suppression du Scheduler repoussée au 31 décembre 2019](https://azure.microsoft.com/updates/extending-retirement-date-of-scheduler/). Pour des mises à jour générales, voir [Mises à jour Azure – Planificateur](https://azure.microsoft.com/updates/?product=scheduler).
+**Q**  : Quand Azure Scheduler sera-t-il mis hors service ? <br>
+**R**  : La mise hors service d’Azure Scheduler est prévue pour le 31 décembre 2019. Pour connaître les mesures importantes à prendre avant cette date et accéder à une chronologie détaillée, voir [Date de suppression du Scheduler repoussée au 31 décembre 2019](https://azure.microsoft.com/updates/extending-retirement-date-of-scheduler/). Pour des mises à jour générales, voir [Mises à jour Azure – Planificateur](https://azure.microsoft.com/updates/?product=scheduler).
 
-**Q** : Que deviendront mes travaux et collections de travaux après la mise hors service ? <br>
-**R** : L’ensemble des travaux et des collections de travaux Scheduler seront arrêtés et supprimés du système.
+**Q**  : Que deviendront mes travaux et collections de travaux après la mise hors service ? <br>
+**R**  : L’ensemble des travaux et des collections de travaux Scheduler seront arrêtés et supprimés du système.
 
-**Q** : Dois-je sauvegarder mon travail ou effectuer d’autres tâches avant de migrer mes travaux Scheduler vers Logic Apps ? <br>
-**R** : La bonne pratique est de toujours sauvegarder votre travail. Vérifiez que vos nouvelles applications logiques s’exécutent comme prévu avant de supprimer ou désactiver vos travaux Scheduler.
+**Q**  : Dois-je sauvegarder mon travail ou effectuer d’autres tâches avant de migrer mes travaux Scheduler vers Logic Apps ? <br>
+**R**  : La bonne pratique est de toujours sauvegarder votre travail. Vérifiez que vos nouvelles applications logiques s’exécutent comme prévu avant de supprimer ou désactiver vos travaux Scheduler.
 
-**Q** : Existe-t-il un outil qui peut m’aider à migrer mes travaux de Scheduler vers Logic Apps ? <br>
-**R** : Il n’existe pas d’outil universel, car chaque travail Scheduler est unique. Toutefois, en fonction de vos besoins, vous pouvez [modifier ce script pour migrer des tâches du Planificateur Azure vers Azure Logic Apps](https://github.com/Azure/logicapps/tree/master/scripts/scheduler-migration).
+**Q**  : Existe-t-il un outil qui peut m’aider à migrer mes travaux de Scheduler vers Logic Apps ? <br>
+**R**  : Il n’existe pas d’outil universel, car chaque travail Scheduler est unique. Toutefois, en fonction de vos besoins, vous pouvez [modifier ce script pour migrer des tâches du Planificateur Azure vers Azure Logic Apps](https://github.com/Azure/logicapps/tree/master/scripts/scheduler-migration).
 
-**Q** : Où puis-je obtenir de l’aide pour migrer mes travaux Scheduler ? <br>
-**R** : Voici quelques moyens d’obtenir de l’aide :
+**Q**  : Où puis-je obtenir de l’aide pour migrer mes travaux Scheduler ? <br>
+**R**  : Voici quelques moyens d’obtenir de l’aide :
 
 **Azure portal**
 
 Si votre abonnement Azure s’accompagne d’un plan de support payant, vous pouvez créer une demande de support technique dans le portail Azure. Sinon, choisissez une autre option de support.
 
-1. Dans le menu principal du [portail Azure](https://portal.azure.com), sélectionnez **Aide + support**.
+1. Dans le menu principal du [portail Azure](https://portal.azure.com), sélectionnez **Aide + support** .
 
-1. Dans le menu **Support**, sélectionnez **Nouvelle demande de support**. Fournissez les informations suivantes sur votre demande :
+1. Dans le menu **Support** , sélectionnez **Nouvelle demande de support** . Fournissez les informations suivantes sur votre demande :
 
    | Propriété | Valeur |
    |---------|-------|
    | **Type de problème** | **Technique** |
    | **Abonnement** | <*votre-abonnement-Azure*> |
-   | **Service** | Sous **Supervision et gestion**, sélectionnez **Scheduler**. Si vous ne trouvez pas **Scheduler**, commencez par sélectionner **Tous les services**. |
+   | **Service** | Sous **Supervision et gestion** , sélectionnez **Scheduler** . Si vous ne trouvez pas **Scheduler** , commencez par sélectionner **Tous les services** . |
    ||| 
 
-1. Sélectionnez l’option de support souhaitée. Si vous avez un plan de support payant, sélectionnez **Suivant**.
+1. Sélectionnez l’option de support souhaitée. Si vous avez un plan de support payant, sélectionnez **Suivant** .
 
 **Communauté**
 
-* [Forum Azure Logic Apps](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps)
+* [Page de questions Microsoft Q&R sur Azure Logic Apps](/answers/topics/azure-logic-apps.html)
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-scheduler)
 
 ## <a name="next-steps"></a>Étapes suivantes

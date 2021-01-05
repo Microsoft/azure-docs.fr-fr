@@ -1,16 +1,17 @@
 ---
 title: Liaison de sortie Stockage Blob Azure pour Azure Functions
-description: Découvrez comment fournir des données Stockage Blob Azure à une fonction Azure.
+description: Découvrez comment fournir des données de liaison de sortie de Stockage Blob Azure à une fonction Azure.
 author: craigshoemaker
 ms.topic: reference
 ms.date: 02/13/2020
 ms.author: cshoe
-ms.openlocfilehash: c6e15c9a99a78f0f3637f718b35462fe49fd5ee6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: 56d8078347b5de775b30c8db2c9412598070046c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235089"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998876"
 ---
 # <a name="azure-blob-storage-output-binding-for-azure-functions"></a>Liaison de sortie Stockage Blob Azure pour Azure Functions
 
@@ -393,9 +394,9 @@ L'attribut `@BlobOutput` vous permet d’accéder à l’objet blob qui a décle
 
 | Liaison |  Informations de référence |
 |---|---|
-| Objet blob | [Codes d’erreur du service BLOB](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-error-codes) |
-| Objet blob, Table, File d’attente |  [Codes d’erreur de stockage](https://docs.microsoft.com/rest/api/storageservices/fileservices/common-rest-api-error-codes) |
-| Objet blob, Table, File d’attente |  [Dépannage](https://docs.microsoft.com/rest/api/storageservices/fileservices/troubleshooting-api-operations) |
+| Objet blob | [Codes d’erreur du service BLOB](/rest/api/storageservices/fileservices/blob-service-error-codes) |
+| Objet blob, Table, File d’attente |  [Codes d’erreur de stockage](/rest/api/storageservices/fileservices/common-rest-api-error-codes) |
+| Objet blob, Table, File d’attente |  [Dépannage](/rest/api/storageservices/fileservices/troubleshooting-api-operations) |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

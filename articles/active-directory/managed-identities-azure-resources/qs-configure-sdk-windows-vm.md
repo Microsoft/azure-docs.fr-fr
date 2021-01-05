@@ -3,24 +3,24 @@ title: Utiliser un kit de développement logiciel (SDK) pour configurer des iden
 description: Instructions détaillées pour configurer et utiliser des identités managées pour ressources Azure sur une machine virtuelle Azure en utilisant un SDK Azure.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 09/28/2017
-ms.author: markvi
+ms.date: 11/03/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d11cd51984f82bc20c02669e796d9ba21b9ed5d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41d1be35d2add24cbbc171c3da3bd4d06bce4337
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74183477"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93359661"
 ---
 # <a name="configure-a-vm-with-managed-identities-for-azure-resources-using-an-azure-sdk"></a>Configurer une machine virtuelle avec des identités managées pour ressources Azure en utilisant un SDK Azure
 

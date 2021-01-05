@@ -1,24 +1,22 @@
 ---
-title: Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop - Azure
-description: Comment personnaliser le flux pour les utilisateurs de Windows Virtual Desktop avec des applets de commande PowerShell
-services: virtual-desktop
+title: Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop (classique) – Azure
+description: Comment personnaliser le flux pour les utilisateurs de Windows Virtual Desktop (classique) avec des cmdlets PowerShell.
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: a93aa35353940cfdbded1634448d4f6d2865c365
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: cd7496690ec88fbe4297386c32d1b8a2c3234577
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614086"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91540759"
 ---
-# <a name="customize-feed-for-windows-virtual-desktop-users"></a>Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop
+# <a name="customize-feed-for-windows-virtual-desktop-classic-users"></a>Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../customize-feed-for-virtual-desktop-users.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../customize-feed-for-virtual-desktop-users.md).
 
 Vous pouvez personnaliser le flux pour que les ressources d’application distante et de Bureau à distance apparaissent de façon reconnaissable pour vos utilisateurs.
 
@@ -37,14 +35,18 @@ Pour récupérer une liste des applications distantes publiées pour un groupe d
 ```powershell
 Get-RdsRemoteApp -TenantName <tenantname> -HostPoolName <hostpoolname> -AppGroupName <appgroupname>
 ```
-![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nom convivial en évidence.](../media/get-rdsremoteapp.png)
+
+> [!div class="mx-imgBorder"]
+> ![Capture d'écran de la cmdlet PowerShell Get-RDSRemoteApp, dans laquelle les noms Name et FriendlyName sont mis en surbrillance pour personnaliser le nom d'affichage.](../media/get-rdsremoteapp.png)
 
 Pour affecter un nom convivial à une application distante, exécutez l’applet de commande PowerShell suivante :
 
 ```powershell
 Set-RdsRemoteApp -TenantName <tenantname> -HostPoolName <hostpoolname> -AppGroupName <appgroupname> -Name <existingappname> -FriendlyName <newfriendlyname>
 ```
-![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nouveau nom convivial en évidence.](../media/set-rdsremoteapp.png)
+
+> [!div class="mx-imgBorder"]
+> ![Capture d'écran de la cmdlet PowerShell Set-RDSRemoteApp, dans laquelle les noms Name et New FriendlyName sont mis en surbrillance pour personnaliser le nom d'affichage.](../media/set-rdsremoteapp.png)
 
 ## <a name="customize-the-display-name-for-a-remote-desktop"></a>Personnaliser le nom d’affichage pour un Bureau à distance
 
@@ -55,18 +57,22 @@ Pour récupérer la ressource Bureau à distance, exécutez l’applet de comman
 ```powershell
 Get-RdsRemoteDesktop -TenantName <tenantname> -HostPoolName <hostpoolname> -AppGroupName <appgroupname>
 ```
-![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nom convivial en évidence.](../media/get-rdsremotedesktop.png)
+
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nom convivial en évidence.](../media/get-rdsremotedesktop.png)
 
 Pour affecter un nom convivial à la ressource Bureau à distance, exécutez l’applet de commande PowerShell suivante :
 
 ```powershell
 Set-RdsRemoteDesktop -TenantName <tenantname> -HostPoolName <hostpoolname> -AppGroupName <appgroupname> -FriendlyName <newfriendlyname>
 ```
-![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nouveau nom convivial en évidence.](../media/set-rdsremotedesktop.png)
+
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran de l’applet de commande PowerShell Get-RDSRemoteApp avec le nom et le nouveau nom convivial en évidence.](../media/set-rdsremotedesktop.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Maintenant que vous avez personnalisé le flux pour les utilisateurs, connectez-vous à un client Windows Virtual Desktop pour faire des tests. Pour cela, passez aux rubriques de procédures Se connecter à Windows Virtual Desktop :
-    
- * [Se connecter à partir de Windows 10 ou Windows 7](../connect-windows-7-and-10.md)
- * [Se connecter à partir d’un navigateur web](connect-web-2019.md) 
+
+ * [Se connecter à partir de Windows 10 ou Windows 7](connect-windows-7-10-2019.md)
+ * [Se connecter à partir d’un navigateur web](connect-web-2019.md)

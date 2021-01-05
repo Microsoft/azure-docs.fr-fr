@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: da29785547d1b6eb4b38d07f020ba885dc5137ea
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9104be9975568c52f6a96994a0afb782a406fe4e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75767584"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86076264"
 ---
 # <a name="run-apache-sqoop-jobs-in-hdinsight-with-curl"></a>Exécuter des tâches Apache Sqoop dans HDInsight avec Curl
 
@@ -26,7 +26,7 @@ Curl est utilisé pour illustrer comment interagir avec HDInsight en utilisant d
 
 * Avoir effectué [Configurer un environnement de test](./hdinsight-use-sqoop.md#create-cluster-and-sql-database) dans [Utiliser Apache Sqoop avec Hadoop dans HDInsight](./hdinsight-use-sqoop.md).
 
-* Un client pour interroger Azure SQL Database. Envisagez d’utiliser [SQL Server Management Studio](../../sql-database/sql-database-connect-query-ssms.md) ou [Visual Studio Code](../../sql-database/sql-database-connect-query-vscode.md).
+* Un client pour interroger Azure SQL Database. Envisagez d’utiliser [SQL Server Management Studio](../../azure-sql/database/connect-query-ssms.md) ou [Visual Studio Code](../../azure-sql/database/connect-query-vscode.md).
 
 * [Curl](https://curl.haxx.se/). Curl est un outil pour transférer des données depuis ou vers un cluster HDInsight.
 

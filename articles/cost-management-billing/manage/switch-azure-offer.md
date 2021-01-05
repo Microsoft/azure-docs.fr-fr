@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: amberb
 tags: billing,top-support-issue
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 02/13/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 4aa02dae521844f2654a50f77be9b2ee3c46a74f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e62ea7052420e2d0c20b99935659a5443540a942
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199515"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88686817"
 ---
 # <a name="change-your-azure-subscription-to-a-different-offer"></a>Changer votre abonnement Azure pour une autre offre
 
@@ -25,7 +26,7 @@ En tant que client disposant d’un [abonnement individuel avec tarifs de paieme
 
 Vous pouvez basculer votre abonnement individuel avec tarifs de paiement à l’utilisation vers les offres suivantes :
 
-- [Pay-As-You-Go Dev/Test](https://azure.microsoft.com/offers/ms-azr-0023p/)
+- [Dev/Test – Paiement à l’utilisation](https://azure.microsoft.com/offers/ms-azr-0023p/)
 - [Visual Studio Professional](https://azure.microsoft.com/offers/ms-azr-0059p/)
 - [Visual Studio Test Professional](https://azure.microsoft.com/offers/ms-azr-0060p/)
 - [Plateformes MSDN](https://azure.microsoft.com/offers/ms-azr-0062p/)
@@ -45,16 +46,16 @@ Vous pouvez basculer votre abonnement individuel avec tarifs de paiement à l’
 
 1. Connectez-vous au [Centre des comptes Azure](https://account.windowsazure.com/Subscriptions).
 1. Sélectionnez votre abonnement individuel avec tarifs de paiement à l’utilisation.
-1. Cliquez sur **Changer d’offre**. L’option est uniquement disponible si vous avez un abonnement individuel avec tarifs de paiement à l’utilisation et si vous avez terminé votre première période de facturation.
+1. Cliquez sur **Changer d’offre**. L’option n’est disponible que si vous disposez d’un abonnement individuel avec tarifs de paiement à l’utilisation et que vous avez terminé votre première période de facturation.
 
    ![Notez le bouton de changement d’offre sur le côté droit de la page](./media/switch-azure-offer/switchbutton.png)
 1. **Sélectionnez l’offre souhaitée** dans la liste des offres vers lesquelles il est possible de basculer votre abonnement. La liste varie en fonction des adhésions auxquelles est associé votre compte. Si rien n’est disponible, examinez la [liste des offres disponibles vers lesquelles il est possible de basculer](#whats-supported) et vérifiez que vous disposez des adhésions appropriées.
 
    ![Sélectionnez une offre à laquelle vous souhaitez passer](./media/switch-azure-offer/selectoffer.png)
-1. Selon l’offre que vous envisagez d’adopter, une note peut apparaître sur l’impact du changement. Parcourez cette liste soigneusement et suivez les instructions avant de continuer.
+1. Selon l’offre que vous envisagez d’adopter, une note peut apparaître sur l’impact du changement. Lisez attentivement la liste et suivez les instructions avant de continuer.
 
    ![Passez en revue les notes](./media/switch-azure-offer/thingstonote.png)
-1. Vous pouvez renommer votre abonnement. Par défaut, il est défini sur le nom de la nouvelle offre. Cliquez sur **Changer d’offre** pour terminer le processus.
+1. Vous pouvez renommer votre abonnement. Par défaut, il n’est pas défini sur le nom de la nouvelle offre. Cliquez sur **Changer d’offre** pour terminer le processus.
 
    ![Cliquez sur le bouton vert](./media/switch-azure-offer/confirmpage.png)
 1. Opération réussie. Votre abonnement est désormais associé à la nouvelle offre.
@@ -100,7 +101,7 @@ Le jour où vous changez d’offre, une facture est générée pour l’ensemble
 
 ### <a name="can-i-migrate-from-a-subscription-with-pay-as-you-go-rates-to-cloud-solution-provider-csp-or-enterprise-agreement-ea"></a>Puis-je effectuer la migration d’un abonnement avec paiement à l’utilisation vers un fournisseur de solutions cloud (CSP) ou un Contrat Entreprise (EA) ?
 
-* Pour migrer vers un CSP consultez la section [Migration d’un abonnement Paiement à l’utilisation Azure vers CSP](https://docs.microsoft.com/azure/cloud-solution-provider/migration/migration-from-payg-to-csp).
+* Pour migrer vers un CSP, consultez [Transfert d’abonnements Azure entre des abonnés et des CSP](transfer-subscriptions-subscribers-csp.md).
 * Pour migrer vers contrat Entreprise, demandez à votre administrateur d’inscription d’ajouter votre compte au contrat Entreprise. Suivez les instructions figurant dans l’e-mail d’invitation pour que vos abonnements soient déplacés vers l’inscription au contrat Entreprise. Pour plus d’informations, consultez [Associer un compte existant](https://ea.azure.com/helpdocs/associateExistingAccount) dans le portail EA.
 
 ### <a name="can-i-migrate-data-and-services-to-a-new-subscription"></a>Puis-je migrer des données et des services vers un nouvel abonnement ?

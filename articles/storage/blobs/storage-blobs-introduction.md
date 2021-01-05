@@ -1,20 +1,20 @@
 ---
 title: Introduction au Stockage (d’objets) Blob
 titleSuffix: Azure Storage
-description: Le stockage Blob Azure stocke de grandes quantités de données d’objet non structurées, telles que des données texte ou binaires. Le stockage Blob Azure est hautement évolutif et disponible. Les clients peuvent accéder aux objets de données dans le stockage Blob avec PowerShell ou Azure CLI, par programmation via des bibliothèques clientes de stockage Azure, ou par REST.
+description: Le Stockage Blob Azure permet de stocker de grandes quantités de données d’objet non structurées, telles que des données texte ou binaires. Le stockage Blob Azure est hautement évolutif et disponible.
 services: storage
 author: tamram
 ms.service: storage
 ms.topic: overview
-ms.date: 03/18/2020
+ms.date: 06/24/2020
 ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: f28b660a2afc97cf9faf0f601e247a97e99098cd
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: 8e3f0435d9856d2b602a4f2b6f604aee05e040ba
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82853368"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97505203"
 ---
 # <a name="introduction-to-azure-blob-storage"></a>Présentation du Stockage Blob Azure
 
@@ -55,9 +55,9 @@ Un conteneur regroupe un ensemble d’objets blob, à la manière d’un répert
 
 Le service Stockage Azure prend en charge trois types d’objets blob :
 
-- Les **objets blob de blocs** stockent du texte et des données binaires, jusqu’à environ 4,7 To. Ils sont composés de blocs de données qui peuvent être gérés individuellement.
+- Les **objets blob de blocs** stockent du texte et des données binaires. Ils sont composés de blocs de données qui peuvent être gérés individuellement. Les objets blob de blocs stockent jusqu’à environ 4,75 Tio de données. Des objets blob de blocs plus volumineux sont disponibles en préversion, jusqu’à environ 190,7 Tio.
 - Les **objets blob d’ajout** se composent de blocs, comme les objets blob de blocs, mais sont optimisés pour les opérations d’ajout. Les objets blob d’ajout sont parfaits pour les scénarios tels que la consignation des données issues des machines virtuelles.
-- Les **objets blob de pages** stockent des fichiers à accès aléatoire d’une taille maximale de 8 To. Les objets blob de pages stockent les fichiers de disque dur virtuel et servent de disques pour les machines virtuelles Azure. Pour plus d’informations sur les objets blob de pages, consultez [Vue d’ensemble des objets blob de pages Azure](storage-blob-pageblob-overview.md)
+- Les **objets blob de pages** stockent des fichiers à accès aléatoire d’une taille maximale de 8 Tio. Les objets blob de pages stockent les fichiers de disque dur virtuel et servent de disques pour les machines virtuelles Azure. Pour plus d’informations sur les objets blob de pages, consultez [Vue d’ensemble des objets blob de pages Azure](storage-blob-pageblob-overview.md)
 
 Pour plus d’informations sur les différents types d’objets blob, consultez [Présentation des objets blob de blocs, des objets blob d’ajout et des objets blob de pages](/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs).
 
@@ -74,5 +74,5 @@ Plusieurs solutions existent pour migrer des données existantes vers le stockag
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Créez un compte de stockage](../common/storage-create-storage-account.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+- [Créez un compte de stockage](../common/storage-account-create.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
 - [Objectifs de performance et d’extensibilité du Stockage Blob](scalability-targets.md)

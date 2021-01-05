@@ -1,21 +1,14 @@
 ---
 title: Obtenir une chaîne de connexion - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des instructions pour obtenir une chaîne de connexion utilisable par les clients pour se connecter à Azure Event Hubs.
-services: event-hubs
-documentationcenter: na
-author: spelluru
-manager: timlt
-ms.service: event-hubs
 ms.topic: article
-ms.custom: seodec18
-ms.date: 02/19/2019
-ms.author: spelluru
-ms.openlocfilehash: 77a768f907ad989a457ee498f26ad0f6e004f786
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: 5ae6c66ddbbf4b9946e7037e1a7723043bf60507
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231301"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86537171"
 ---
 # <a name="get-an-event-hubs-connection-string"></a>Obtenir une chaîne de connexion Event Hubs
 
@@ -80,5 +73,5 @@ Pour plus d’informations sur les commandes Azure CLI pour Event Hubs, consulte
 
 Vous pouvez en apprendre plus sur Event Hubs en consultant les liens suivants :
 
-* [Vue d’ensemble d’Event Hubs](event-hubs-what-is-event-hubs.md)
+* [Vue d’ensemble d’Event Hubs](./event-hubs-about.md)
 * [Créer un hub d’événements](event-hubs-create.md)

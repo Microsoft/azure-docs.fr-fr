@@ -2,17 +2,17 @@
 title: Annotations de version pour Application Insights | Microsoft Docs
 description: Ajouter des marqueurs déploiement ou de build aux graphiques Metrics Explorer dans Application Insights.
 ms.topic: conceptual
-ms.date: 07/01/2019
-ms.openlocfilehash: 0ad773ca6a7102ac718d43dfbbf6a4f834e681a0
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.date: 08/14/2020
+ms.openlocfilehash: 58f6603687838713fafbf4cd5cc3f100e22b7401
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81010711"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993718"
 ---
 # <a name="annotations-on-metric-charts-in-application-insights"></a>Annotations sur les graphiques de métriques dans Application Insights
 
-Des annotations indiquent où vous avez déployé une nouvelle build, ou d’autres événements importants. Elles vous permettent de mieux voir l’effet de vos modifications sur les performances de votre application. Elles peuvent être créées automatiquement par le système de génération [Azure DevOps Services.Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines/tasks/). Vous pouvez également créer des annotations pour tout événement en les créant à partir de PowerShell.
+Des annotations indiquent où vous avez déployé une nouvelle build, ou d’autres événements importants. Elles vous permettent de mieux voir l’effet de vos modifications sur les performances de votre application. Elles peuvent être créées automatiquement par le système de génération [Azure DevOps Services.Azure Pipelines](/azure/devops/pipelines/tasks/). Vous pouvez également créer des annotations pour tout événement en les créant à partir de PowerShell.
 
 ## <a name="release-annotations-with-azure-pipelines-build"></a>Annotations de mise en production avec la build Azure Pipelines
 
@@ -34,7 +34,7 @@ Vous ne devez installer l’extension qu’une seule fois pour votre organisatio
 
 Créez une clé API distincte pour chacun de vos modèles de mise en production Azure Pipelines.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com) et ouvrez la ressource Application Insights qui surveille votre application. Si vous n’en avez pas, [créez une ressource Application Insights](../../azure-monitor/app/app-insights-overview.md).
+1. Connectez-vous au [portail Azure](https://portal.azure.com) et ouvrez la ressource Application Insights qui surveille votre application. Si vous n’en avez pas, [créez une ressource Application Insights](./app-insights-overview.md).
    
 1. Ouvrez l’onglet **Accès à l’API** et copiez l’**ID d’Application Insights**.
    
@@ -69,6 +69,10 @@ Créez une clé API distincte pour chacun de vos modèles de mise en production 
    
 1. Sélectionnez **Enregistrer** dans la fenêtre principale du modèle de mise en production pour enregistrer le modèle.
 
+
+   > [!NOTE]
+   > Les limites pour les clés API sont décrites dans la [documentation relative aux limites de taux de l’API REST](https://dev.applicationinsights.io/documentation/Authorization/Rate-limits).
+
 ## <a name="view-annotations"></a>Afficher les annotations
 
 
@@ -92,9 +96,9 @@ Pour activer les annotations dans votre classeur, accédez à **Paramètres avan
 Sélectionnez un marqueur d’annotation pour ouvrir les détails sur la version, notamment le demandeur, la branche de contrôle de code source, le pipeline de mise en production et l’environnement.
 
 ## <a name="create-custom-annotations-from-powershell"></a>Créer des annotations personnalisées à partir de PowerShell
-Vous pouvez utiliser le script PowerShell [CreateReleaseAnnotation](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/API/CreateReleaseAnnotation.ps1) de GitHub pour créer des annotations à partir de tout processus de votre choix, sans utiliser Azure DevOps. 
+Vous pouvez utiliser le script PowerShell [CreateReleaseAnnotation](https://github.com/MohanGsk/ApplicationInsights-Home/blob/master/API/CreateReleaseAnnotation.ps1) de GitHub pour créer des annotations à partir de tout processus de votre choix, sans utiliser Azure DevOps. 
 
-1. Effectuez une copie locale du fichier [CreateReleaseAnnotation.ps1](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/API/CreateReleaseAnnotation.ps1).
+1. Effectuez une copie locale du fichier [CreateReleaseAnnotation.ps1](https://github.com/MohanGsk/ApplicationInsights-Home/blob/master/API/CreateReleaseAnnotation.ps1).
    
 1. Suivez les étapes de la procédure précédente pour obtenir votre ID Application Insights et créer une clé API à partir de l’onglet **Accès d’API** d’Application Insights.
    
@@ -115,5 +119,6 @@ Vous pouvez modifier le script, par exemple, pour créer des annotations pour le
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Créer des éléments de travail](../../azure-monitor/app/diagnostic-search.md#create-work-item)
-* [Automation avec PowerShell](../../azure-monitor/app/powershell.md)
+* [Créer des éléments de travail](./diagnostic-search.md#create-work-item)
+* [Automation avec PowerShell](./powershell.md)
+

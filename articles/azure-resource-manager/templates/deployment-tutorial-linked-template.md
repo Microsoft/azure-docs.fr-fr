@@ -4,12 +4,13 @@ description: Découvrez comment déployer un modèle lié
 ms.date: 03/13/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 177a994450b6ffe5489a8c95c3b484521fd9b77b
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.custom: ''
+ms.openlocfilehash: 81a8b6cd5044b31ee80f50448d6610ba6a57281e
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80672918"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97585647"
 ---
 # <a name="tutorial-deploy-a-linked-template"></a>Tutoriel : Déployer un modèle lié
 
@@ -31,11 +32,11 @@ Vous pouvez séparer la ressource de compte de stockage en un modèle lié :
 
 :::code language="json" source="~/resourcemanager-templates/get-started-deployment/linked-template/linkedStorageAccount.json":::
 
-Le modèle suivant est le modèle principal.  L’objet **Microsoft.Resources/deployments** mis en surbrillance montre comment appeler un modèle lié. Le modèle lié ne peut pas être stocké en tant que fichier local ni fichier qui est uniquement disponible sur votre réseau local. Vous pouvez seulement fournir une valeur URI qui inclut soit *http* soit *https*. Resource Manager doit être en mesure d’accéder au modèle. Une possibilité consiste à placer votre modèle lié dans un compte de stockage et à utiliser l’URI de cet élément. L’URI est passé au modèle à l’aide d’un paramètre. Consultez la définition de paramètre en surbrillance.
+Le modèle suivant est le modèle principal. L’objet `Microsoft.Resources/deployments` mis en surbrillance montre comment appeler un modèle lié. Le modèle lié ne peut pas être stocké en tant que fichier local ni fichier qui est uniquement disponible sur votre réseau local. Vous pouvez seulement fournir une valeur d’URI qui inclut HTTP ou HTTPS. Resource Manager doit être en mesure d’accéder au modèle. Une possibilité consiste à placer votre modèle lié dans un compte de stockage et à utiliser l’URI de cet élément. L’URI est passé au modèle à l’aide d’un paramètre. Consultez la définition de paramètre en surbrillance.
 
 :::code language="json" source="~/resourcemanager-templates/get-started-deployment/linked-template/azuredeploy.json" highlight="27-32,40-58":::
 
-Enregistrez une copie du modèle principal sur votre ordinateur local avec l’extension .json, par exemple azuredeploy.json. Vous n’avez pas besoin d’enregistrer une copie du modèle lié.  Le modèle lié est copié à partir d’un dépôt GitHub vers un compte de stockage.
+Enregistrez une copie du modèle principal sur votre ordinateur local avec l’extension _.json_, par exemple _azuredeploy.json_. Vous n’avez pas besoin d’enregistrer une copie du modèle lié. Le modèle lié est copié à partir d’un dépôt GitHub vers un compte de stockage.
 
 ## <a name="store-the-linked-template"></a>Stocker le modèle lié
 
@@ -44,7 +45,7 @@ Le script PowerShell suivant crée un compte de stockage, crée un conteneur et 
 Sélectionnez **Essayer** pour ouvrir Cloud Shell et **Copier** pour copier le script PowerShell, puis cliquez avec le bouton droit sur le volet de l’interpréteur de commandes pour coller le script :
 
 > [!IMPORTANT]
-> Ce nom doit comprendre entre 3 et 24 caractères, uniquement des lettres en minuscules et des nombres. Le nom doit être unique. Dans le modèle, le nom du compte de stockage est le nom du projet auquel « store » est ajouté, et le nom du projet doit comprendre entre 3 et 11 caractères. Le nom du projet doit donc respecter les exigences du nom du compte de stockage et comporter moins de 11 caractères.
+> Ce nom doit comprendre entre 3 et 24 caractères, uniquement des lettres en minuscules et des nombres. Le nom doit être unique. Dans le modèle, le nom du compte de stockage est le nom du projet auquel **store** est ajouté, et le nom du projet doit comprendre entre 3 et 11 caractères. Le nom du projet doit donc respecter les exigences du nom du compte de stockage et comporter moins de 11 caractères.
 
 ```azurepowershell-interactive
 $projectName = Read-Host -Prompt "Enter a project name:"   # This name is used to generate names for Azure resources, such as storage account name.
@@ -92,7 +93,7 @@ Pour déployer un modèle dans un compte de stockage privé, générez un jeton 
 Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](./deployment-tutorial-local-template.md#create-resource-group).
 
 > [!NOTE]
-> Dans le code Azure CLI ci-dessous, le paramètre de date -d ne serait pas un argument valide sur macOS. Sur macOS, les utilisateurs doivent utiliser « -v+2H » à la place pour ajouter deux heures à l’heure actuelle dans le terminal macOS.
+> Dans le code Azure CLI ci-dessous, le paramètre `date` `-d` n’est pas un argument valide sur macOS. Si vous utilisez macOS, indiquez `-v+2H` pour ajouter 2 heures à l’heure actuelle dans le terminal sur macOS.
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -175,7 +176,7 @@ Nettoyez les ressources que vous avez déployées en supprimant le groupe de res
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous avez appris à déployer un modèle lié. Dans le tutoriel suivant, vous allez apprendre à créer un pipeline DevOp pour déployer un modèle.
+Vous avez appris à déployer un modèle lié. Dans le tutoriel suivant, vous allez apprendre à créer un pipeline DevOps pour déployer un modèle.
 
 > [!div class="nextstepaction"]
 > [Créer un pipeline](./deployment-tutorial-pipeline.md)

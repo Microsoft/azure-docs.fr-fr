@@ -6,6 +6,8 @@
       href: overview-reports.md
     - name: "Qu’est-ce que la surveillance Azure AD\_?"
       href: overview-monitoring.md
+    - name: "Qu’est-ce que le diagnostic de connexion\_?"
+      href: overview-sign-in-diagnostics.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -23,22 +25,26 @@
       href: tutorial-access-api-with-certificates.md
     - name: Transmettre en continu des journaux d’activité vers un Event Hub
       href: tutorial-azure-monitor-stream-logs-to-event-hub.md
+    - name: Assistant Log Analytics
+      href: tutorial-log-analytics-wizard.md
 - name: Concepts
   items:
     - name: Planifier un déploiement de rapport et de supervision
       href: plan-monitoring-and-reporting.md
     - name: Journaux d’audit
       href: concept-audit-logs.md
+    - name: Nouveaux journaux de connexion - préversion
+      href: concept-all-sign-ins.md
     - name: Journaux d’activité de connexion
       href: concept-sign-ins.md
     - name: Rapport d’utilisation et d’insights
       href: concept-usage-insights-report.md
     - name: Connexions risquées
-      href: concept-risky-sign-ins.md
+      href: ../identity-protection/overview-identity-protection.md
     - name: Détections de risques
-      href: concept-risk-events.md
+      href: ../identity-protection/overview-identity-protection.md
     - name: Les utilisateurs à risque
-      href: concept-user-at-risk.md
+      href: ../identity-protection/overview-identity-protection.md
     - name: Journaux d’approvisionnement
       href: concept-provisioning-logs.md
     - name: API de création de rapports
@@ -84,15 +90,17 @@
           href: troubleshoot-missing-data-download.md
         - name: Ne peut pas accéder aux API Graph pour la création de rapports
           href: troubleshoot-graph-api.md
+        - name: Auditer les données après un changement de domaine vérifié
+          href: troubleshoot-audit-data-verified-domain.md
 - name: Informations de référence
   expanded: true
   items:
     - name: Applets de commande Azure AD PowerShell pour la création de rapports
       href: reference-powershell-reporting.md
     - name: Informations de référence sur l’API des journaux d’audit
-      href: 'https://developer.microsoft.com/graph/docs/api-reference/beta/resources/directoryaudit'
+      href: /graph/api/resources/directoryaudit?view=graph-rest-1.0
     - name: Informations de référence sur l’API des journaux d’activité de connexion
-      href: 'https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signin'
+      href: /graph/api/resources/signin?view=graph-rest-1.0
     - name: Activités d’audit
       href: reference-audit-activities.md
     - name: Stratégies de conservation des données

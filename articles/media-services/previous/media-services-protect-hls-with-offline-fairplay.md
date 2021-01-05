@@ -12,24 +12,27 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/16/2019
+ms.date: 05/07/2020
 ms.author: willzhan
 ms.reviewer: dwgeo
-ms.openlocfilehash: 1644c00aea8eefa78550c8d0238dbedab0378492
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5e003e17490c2e35ef3f8adfdef6de0377cda7d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74968696"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89259708"
 ---
-# <a name="offline-fairplay-streaming-for-ios"></a>FairPlay Streaming hors connexion pour iOS 
+# <a name="offline-fairplay-streaming-for-ios"></a>FairPlay Streaming hors connexion pour iOS
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 3](../latest/offline-fairplay-for-ios.md)
 > * [Version 2](media-services-protect-hls-with-offline-fairplay.md)
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Azure Media Services fournit un ensemble bien conçu de [services de protection de contenu](https://azure.microsoft.com/services/media-services/content-protection/), couvrant :
 
@@ -54,7 +57,7 @@ Avant de mettre en œuvre DRM hors connexion pour FairPlay sur un appareil iOS 1
 * Vous familiariser avec la protection du contenu en ligne pour Fairplay. Pour plus d’informations, consultez les articles et exemples suivants :
 
     - [Apple FairPlay Streaming pour Azure Media Services est généralement disponible](https://azure.microsoft.com/blog/apple-FairPlay-streaming-for-azure-media-services-generally-available/)
-    - [Protéger votre contenu HLS avec Apple FairPlay ou Microsoft PlayReady](https://docs.microsoft.com/azure/media-services/media-services-protect-hls-with-FairPlay)
+    - [Protéger votre contenu HLS avec Apple FairPlay ou Microsoft PlayReady](./media-services-protect-hls-with-fairplay.md)
     - [Un exemple pour une diffusion en contenu FPS en ligne](https://azure.microsoft.com/resources/samples/media-services-dotnet-dynamic-encryption-with-FairPlay/)
 
 * Obtenez le Kit SDK FPS d’Apple Developer Network. Le Kit SDK FPS contient deux composants :
@@ -211,7 +214,7 @@ Les questions fréquemment posées suivantes vous aideront à résoudre vos prob
 - **À quoi correspond le dernier paramètre dans l’API suivante pour le mode hors connexion FPS ?** 
 `Microsoft.WindowsAzure.MediaServices.Client.FairPlay.FairPlayConfiguration.CreateSerializedFairPlayOptionConfiguration(objX509Certificate2, pfxPassword, pfxPasswordId, askId, iv, RentalAndLeaseKeyType.PersistentUnlimited, 0x9999);`
 
-    Pour obtenir la documentation sur cette API, consultez [Méthode FairPlayConfiguration.CreateSerializedFairPlayOptionConfiguration](https://docs.microsoft.com/dotnet/api/microsoft.windowsazure.mediaservices.client.FairPlay.FairPlayconfiguration.createserializedFairPlayoptionconfiguration?view=azure-dotnet). Le paramètre représente la durée de location hors connexion avec l’heure pour unité.
+    Pour obtenir la documentation sur cette API, consultez [Méthode FairPlayConfiguration.CreateSerializedFairPlayOptionConfiguration](/dotnet/api/microsoft.windowsazure.mediaservices.client.fairplay.fairplayconfiguration.createserializedfairplayoptionconfiguration?view=azure-dotnet). Le paramètre représente la durée de location hors connexion avec la seconde pour unité.
 - **Quelle est la structure du fichier téléchargé/hors connexion sur les appareils iOS ?** La structure du fichier téléchargé sur un appareil iOS ressemble à la capture d’écran suivante. Le dossier `_keys` stocke les licences FPS téléchargées, avec un fichier de magasin pour chaque hôte de service de licence. Le dossier `.movpkg` stocke le contenu audio et vidéo. Le premier dossier dont le nom se termine par un tiret suivi par un numérique contient un contenu vidéo. La valeur numérique est la PeakBandwidth des rendus de vidéo. Le deuxième dossier dont le nom se termine par un tiret suivi de 0 contient un contenu audio. Le troisième dossier nommé « Données » contient la liste de lectures principale du contenu FPS. Enfin, boot.xml fournit une description complète du contenu du dossier `.movpkg`. 
 
 ![Structure de fichier d’application exemple iOS FairPlay hors connexion](media/media-services-protect-hls-with-offline-FairPlay/media-services-offline-FairPlay-file-structure.png)

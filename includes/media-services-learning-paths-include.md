@@ -4,25 +4,25 @@ ms.service: media-services
 ms.topic: include
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 135232e3e9894bcef1ef657e41f5ad3a5e307289
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bc297be14b1a32cc836686dd25e98a78d3e95d31
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "69014663"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184351"
 ---
 ### <a name="media-services-v3-latest"></a>Media Services v3 (version la plus récente)
 
 Découvrez la dernière version de Microsoft Azure Media Services ! 
 
-* [Vue d'ensemble](https://docs.microsoft.com/azure/media-services/latest/media-services-overview)
-* [Concepts](https://docs.microsoft.com/azure/media-services/latest/concepts-overview)
-* [Commencer à développer](https://docs.microsoft.com/azure/media-services/latest/developers-guide)
-* [Conseils de migration de v2 vers v3](https://docs.microsoft.com/azure/media-services/latest/migrate-from-v2-to-v3)
+* [Vue d'ensemble](../articles/media-services/latest/media-services-overview.md)
+* [Concepts](../articles/media-services/latest/concepts-overview.md)
+* [Commencer à développer](../articles/media-services/latest/media-services-apis-overview.md)
+* [Conseils de migration de v2 vers v3](../articles/media-services/latest/migrate-from-v2-to-v3.md)
 
 ### <a name="media-services-v2-legacy"></a>Media Services v2 (hérité)
 
-* [Vue d'ensemble](https://docs.microsoft.com/azure/media-services/previous/media-services-overview)
-* [Créer un compte](https://docs.microsoft.com/azure/media-services/previous/media-services-portal-create-account)
-* [Remise à la demande](https://docs.microsoft.com/azure/media-services/previous/media-services-portal-vod-get-started)
-* [Remise en direct](https://docs.microsoft.com/azure/media-services/previous/media-services-portal-live-passthrough-get-started)
+* [Vue d'ensemble](../articles/media-services/previous/media-services-overview.md)
+* [Créer un compte](../articles/media-services/previous/media-services-portal-create-account.md)
+* [Remise à la demande](../articles/media-services/previous/media-services-portal-vod-get-started.md)
+* [Remise en direct](../articles/media-services/previous/media-services-portal-live-passthrough-get-started.md)

@@ -5,12 +5,12 @@ ms.assetid: d20743e3-aab6-442c-a836-9bcea09bfd32
 ms.topic: conceptual
 ms.date: 04/03/2019
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 7155a3fa9481ef5f2da62d85d4a932ad5e8e8ab1
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: 2403e3a4bfe7824659a9c34c407e55e6c56e6046
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81382522"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994653"
 ---
 # <a name="automate-resource-deployment-for-your-function-app-in-azure-functions"></a>Automatiser le déploiement de ressources pour votre application de fonction dans Azure Functions
 
@@ -26,12 +26,12 @@ Pour des exemples de modèles, consultez :
 
 Un déploiement d’Azure Functions comprend généralement les ressources suivantes :
 
-| Ressource                                                                           | Condition requise | Référence sur la syntaxe et les propriétés                                                         |   |
-|------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------|---|
-| Une application de fonction                                                                     | Obligatoire    | [Microsoft.Web/sites](/azure/templates/microsoft.web/sites)                             |   |
-| Un compte de [stockage Azure](../storage/index.yml)                                   | Obligatoire    | [Microsoft.Storage/storageAccounts](/azure/templates/microsoft.storage/storageaccounts) |   |
-| Un composant [Application Insights](../azure-monitor/app/app-insights-overview.md) | Facultatif    | [Microsoft.Insights/components](/azure/templates/microsoft.insights/components)         |   |
-| Un [plan d’hébergement](./functions-scale.md)                                             | Facultatif<sup>1</sup>    | [Microsoft.Web/serverfarms](/azure/templates/microsoft.web/serverfarms)                 |   |
+| Ressource                                                                           | Condition requise | Référence sur la syntaxe et les propriétés                                                         |
+|------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------|
+| Une application de fonction                                                                     | Obligatoire    | [Microsoft.Web/sites](/azure/templates/microsoft.web/sites)                             |
+| Un compte de [stockage Azure](../storage/index.yml)                                   | Obligatoire    | [Microsoft.Storage/storageAccounts](/azure/templates/microsoft.storage/storageaccounts) |
+| Un composant [Application Insights](../azure-monitor/app/app-insights-overview.md) | Facultatif    | [Microsoft.Insights/components](/azure/templates/microsoft.insights/components)         |
+| Un [plan d’hébergement](./functions-scale.md)                                             | Facultatif<sup>1</sup>    | [Microsoft.Web/serverfarms](/azure/templates/microsoft.web/serverfarms)                 |
 
 <sup>1</sup>Un plan d’hébergement n’est requis que si vous choisissez d’exécuter votre application de fonction sur un [plan Premium](./functions-premium-plan.md) ou sur un [plan App Service](../app-service/overview-hosting-plans.md).
 
@@ -47,7 +47,7 @@ Un compte de stockage Azure est nécessaire pour une application de fonction. Vo
 {
     "type": "Microsoft.Storage/storageAccounts",
     "name": "[variables('storageAccountName')]",
-    "apiVersion": "2019-04-01",
+    "apiVersion": "2019-06-01",
     "location": "[resourceGroup().location]",
     "kind": "StorageV2",
     "sku": {
@@ -66,11 +66,11 @@ Ces propriétés sont spécifiées dans la collection `appSettings` de l’objet
 "appSettings": [
     {
         "name": "AzureWebJobsStorage",
-        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
     },
     {
         "name": "AzureWebJobsDashboard",
-        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
     }
 ]
 ```
@@ -152,7 +152,7 @@ Ces propriétés sont spécifiées dans la collection `appSettings` de la propri
         "appSettings": [
             {
                 "name": "AzureWebJobsStorage",
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
             },
             {
                 "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -231,11 +231,11 @@ Sous Windows, un plan Consommation nécessite deux paramètres supplémentaires 
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "WEBSITE_CONTENTSHARE",
@@ -278,7 +278,7 @@ Sous Linux, l’application de fonction doit avoir son paramètre `kind` défini
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountName'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountName'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -309,7 +309,7 @@ Le plan Premium offre la même mise à l’échelle que le plan Consommation, ma
 
 ### <a name="create-a-premium-plan"></a>Créer un plan Premium
 
-Un plan Premium est un type spécial de ressource « serverfarm ». Vous pouvez le spécifier à l’aide de `EP1`, `EP2` ou `EP3` pour la valeur de propriété `Name` dans l’[objet de description](https://docs.microsoft.com/azure/templates/microsoft.web/2018-02-01/serverfarms#skudescription-object) `sku`.
+Un plan Premium est un type spécial de ressource « serverfarm ». Vous pouvez le spécifier à l’aide de `EP1`, `EP2` ou `EP3` pour la valeur de propriété `Name` dans l’[objet de description](/azure/templates/microsoft.web/2018-02-01/serverfarms#skudescription-object) `sku`.
 
 ```json
 {
@@ -353,11 +353,11 @@ Une application de fonction sur un plan Premium doit avoir la propriété `serve
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "WEBSITE_CONTENTSHARE",
@@ -450,7 +450,7 @@ Une application de fonction sur un plan App Service doit avoir la propriété `s
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -495,7 +495,7 @@ Les applications Linux doivent également inclure une propriété `linuxFxVersio
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -516,7 +516,7 @@ Les applications Linux doivent également inclure une propriété `linuxFxVersio
 }
 ```
 
-Si vous [déployez une image de conteneur personnalisé](./functions-create-function-linux-custom-image.md), vous devez la spécifier avec `linuxFxVersion` et inclure une configuration permettant l’extraction de votre image, comme dans [Web App pour conteneurs](/azure/app-service/containers). Par ailleurs, définissez `WEBSITES_ENABLE_APP_SERVICE_STORAGE` sur `false`, car le contenu de votre application est fourni dans le conteneur lui-même :
+Si vous [déployez une image de conteneur personnalisé](./functions-create-function-linux-custom-image.md), vous devez la spécifier avec `linuxFxVersion` et inclure une configuration permettant l’extraction de votre image, comme dans [Web App pour conteneurs](../app-service/index.yml). Par ailleurs, définissez `WEBSITES_ENABLE_APP_SERVICE_STORAGE` sur `false`, car le contenu de votre application est fourni dans le conteneur lui-même :
 
 ```json
 {
@@ -535,7 +535,7 @@ Si vous [déployez une image de conteneur personnalisé](./functions-create-func
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                    "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]"
                 },
                 {
                     "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -617,8 +617,8 @@ Une application de fonction dispose de nombreuses ressources enfant que vous pou
           "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
         ],
         "properties": {
-          "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
-          "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]",
+          "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]",
+          "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2019-06-01').keys[0].value)]",
           "FUNCTIONS_EXTENSION_VERSION": "~2",
           "FUNCTIONS_WORKER_RUNTIME": "dotnet",
           "Project": "src"

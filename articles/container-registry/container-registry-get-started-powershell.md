@@ -1,15 +1,15 @@
 ---
-title: Guide de démarrage rapide - Créer un registre - PowerShell
+title: Démarrage rapide – Création d’un registre – PowerShell
 description: Apprenez rapidement à créer un registre de conteneurs Docker privé dans Azure Container Registry avec PowerShell.
 ms.topic: quickstart
 ms.date: 01/22/2019
-ms.custom: seodec18, mvc
-ms.openlocfilehash: 872b2a29444e5278db34ce44741e2ca90d885702
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: seodec18, mvc, devx-track-azurepowershell
+ms.openlocfilehash: 91d4209ccf558bf7c8038d8a753ec038428bc484
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74456375"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020000"
 ---
 # <a name="quickstart-create-a-private-container-registry-using-azure-powershell"></a>Démarrage rapide : Créer un registre de conteneurs privé avec Azure PowerShell
 
@@ -51,7 +51,7 @@ Le nom du registre doit être unique dans Azure et contenir entre 5 et 50 caract
 $registry = New-AzContainerRegistry -ResourceGroupName "myResourceGroup" -Name "myContainerRegistry007" -EnableAdminUser -Sku Basic
 ```
 
-Dans ce guide de démarrage rapide, vous allez créer un registre*De base*. Il s’agit d’une option à coût optimisé pour les développeurs qui apprennent à se servir d’Azure Container Registry. Pour plus d’informations sur les niveaux de service disponibles, consultez [Références SKU des registres de conteneurs][container-registry-skus].
+Dans ce guide de démarrage rapide, vous allez créer un registre *De base*. Il s’agit d’une option à coût optimisé pour les développeurs qui apprennent à se servir d’Azure Container Registry. Pour plus d’informations sur les niveaux de service disponibles, consultez [Niveaux de service des registres de conteneurs][container-registry-skus].
 
 ## <a name="log-in-to-registry"></a>Se connecter au registre
 
@@ -86,7 +86,10 @@ Remove-AzResourceGroup -Name myResourceGroup
 Dans ce guide de démarrage rapide, vous avez créé un registre de conteneurs Azure avec Azure PowerShell, envoyé (push) une image conteneur, puis tiré (pull) et exécuté l’image à partir du registre. Passez à présent au tutoriel sur Azure Container Registry (ACR) pour approfondir vos connaissances.
 
 > [!div class="nextstepaction"]
-> [Tutoriels sur Azure Container Registry][container-registry-tutorial-quick-task]
+> [Tutoriels sur Azure Container Registry][container-registry-tutorial-prepare-registry]
+
+> [!div class="nextstepaction"]
+> [Tutoriels Azure Container Registry Tasks][container-registry-tutorial-quick-task]
 
 <!-- LINKS - external -->
 [docker-linux]: https://docs.docker.com/engine/installation/#supported-platforms
@@ -105,3 +108,4 @@ Dans ce guide de démarrage rapide, vous avez créé un registre de conteneurs A
 [Remove-AzResourceGroup]: /powershell/module/az.resources/remove-azresourcegroup
 [container-registry-tutorial-quick-task]: container-registry-tutorial-quick-task.md
 [container-registry-skus]: container-registry-skus.md
+[container-registry-tutorial-prepare-registry]: container-registry-tutorial-prepare-registry.md

@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 02/06/2019
-ms.openlocfilehash: e186b9713c8464f8f37e1e0bf112c4118621925c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 62c3d4533dd04dbb5a2ce0c73afa52b81d433913
+ms.sourcegitcommit: f796e1b7b46eb9a9b5c104348a673ad41422ea97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75979406"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91570791"
 ---
 # <a name="transform-xml-with-maps-in-azure-logic-apps-with-enterprise-integration-pack"></a>Transformer des données XML à l’aide de mappages dans Azure Logic Apps avec Enterprise Integration Pack
 
@@ -43,7 +43,7 @@ Pour connaître les limites associées aux comptes d’intégration et aux artef
     | [Azure Storage Explorer](../vs-azure-tools-storage-manage-with-storage-explorer.md) | Cet outil facilite la gestion des comptes de stockage et des conteneurs d’objets blob. Pour utiliser l’Explorateur Stockage, [téléchargez et installez l’Explorateur Stockage Azure](https://www.storageexplorer.com/). Ensuite, connectez l’Explorateur Stockage à votre compte de stockage en suivant les étapes décrites dans [Prise en main de l’Explorateur Stockage](../vs-azure-tools-storage-manage-with-storage-explorer.md). Pour en savoir plus, consultez [Démarrage rapide : Créer un objet blob dans le stockage d’objets avec l’Explorateur Stockage Azure](../storage/blobs/storage-quickstart-blobs-storage-explorer.md). <p>Sinon, dans le portail Azure, vous pouvez aussi sélectionner votre compte de stockage. Dans le menu de votre compte de stockage, sélectionnez **Explorateur Stockage**. |
     |||
 
-  * Pour ajouter des mappages plus grands, vous pouvez utiliser l’[API REST Azure Logic Apps - Maps](https://docs.microsoft.com/rest/api/logic/maps/createorupdate).
+  * Pour ajouter des mappages plus grands, vous pouvez utiliser l’[API REST Azure Logic Apps - Maps](/rest/api/logic/maps/createorupdate).
 
 Vous n’avez pas besoin d’une application logique pour créer et ajouter des mappages. Toutefois, pour utiliser un mappage, votre application logique doit être associée au compte d’intégration dans lequel vous stockez ce mappage. Découvrez comment [lier des applications logiques à des comptes d’intégration](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md#link-account). Si vous n’avez pas encore d’application logique, découvrez [comment créer des applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
@@ -69,7 +69,7 @@ Vous n’avez pas besoin d’une application logique pour créer et ajouter des 
 
 1. Une fois la page **Assemblys** ouverte, choisissez **Ajouter**.
 
-   ![Choisir « Ajouter »](./media/logic-apps-enterprise-integration-maps/add-assembly.png)
+   ![Capture d’écran qui met en surbrillance le bouton Ajouter sur la page Assemblys.](./media/logic-apps-enterprise-integration-maps/add-assembly.png)
 
 En fonction de la taille de votre assembly, suivez les étapes de chargement pour les assemblys de taille [inférieure ou égale à 2 Mo](#smaller-assembly) ou pour les assemblys dont la taille est comprise entre [2 Mo et 8 Mo](#larger-assembly).
 Pour connaître le nombre limite d’assemblys que peut comprendre un compte d’intégration, consultez [Limites et configuration pour Azure Logic Apps](../logic-apps/logic-apps-limits-and-config.md#artifact-number-limits).
@@ -220,7 +220,7 @@ Une fois que vous avez chargé les assemblys que votre mappage référence, vous
 
 ### <a name="add-maps-more-than-2-mb"></a>Ajouter des mappages de taille inférieure ou égale à 2 Mo
 
-Pour ajouter des mappages plus volumineux, utilisez l’[API REST Azure Logic Apps - Maps](https://docs.microsoft.com/rest/api/logic/maps/createorupdate).
+Pour ajouter des mappages plus volumineux, utilisez l’[API REST Azure Logic Apps - Maps](/rest/api/logic/maps/createorupdate).
 
 <!--
 

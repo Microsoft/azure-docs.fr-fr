@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/04/2017
 ms.author: alkohli
-ms.openlocfilehash: 3c880cd18e7227a728d7e276e72a5ea8c1e421de
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 3adbd292d42fd6fd2a0e149e103c17968a6f084b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80396636"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94950752"
 ---
 # <a name="safely-install-and-operate-your-storsimple-device"></a>Installer et utiliser en toute sécurité votre appareil StorSimple
 ![Icône Avertissement](./media/storsimple-safety/IC740879.png)
@@ -32,7 +32,7 @@ Voici les icônes utilisées dans les précautions de sécurité à observer lor
 
 | Icône | Description |
 |:--- |:--- |
-| ![Icône Danger](./media/storsimple-safety/IC740879.png) **DANGER !** |Signale une situation dangereuse qui, si elle n’est pas évitée, entraînera la mort ou des blessures graves. Ce terme d’avertissement est réservé aux situations extrêmement dangereuses. |
+| ![Icône danger](./media/storsimple-safety/IC740879.png) **DANGER !** |Signale une situation dangereuse qui, si elle n’est pas évitée, entraînera la mort ou des blessures graves. Ce terme d’avertissement est réservé aux situations extrêmement dangereuses. |
 | ![Icône Avertissement](./media/storsimple-safety/IC740879.png) **AVERTISSEMENT !** |Signale une situation dangereuse qui, si elle n’est pas évitée, risque d’entraîner la mort ou des blessures graves. |
 | ![Icône Avertissement](./media/storsimple-safety/IC740879.png) **ATTENTION !** |Signale une situation dangereuse qui, si elle n’est pas évitée, risque d’entraîner des blessures légères ou moyennement graves. |
 | ![Icône Avis](./media/storsimple-safety/IC740881.png) **AVIS :** |Signale des informations considérées comme importantes, mais non associées à un danger. |
@@ -103,17 +103,18 @@ Pour réduire le risque de blessure, d’électrocution ou de mort :
 
 Pour garantir le refroidissement correct du système de rack :
 
-* Assurez-vous que la conception du rack prend en compte la température ambiante de fonctionnement maximale des boîtiers, à savoir 35 degrés Celsius.
+* Assurez-vous que la conception du rack prend en compte la température ambiante de fonctionnement maximale des boîtiers, à savoir 35 degrés Celsius. Gardez au frais la pièce dans laquelle le système de rack se trouve et vérifiez que le flux d’air provenant de la climatisation est suffisant.
 * Le système fonctionne avec une installation basse pression à échappement vers l’arrière (la contre-pression créée par les portes de rack et les obstacles ne doit pas dépasser 5 pascals [0,5 mm de colonne d’eau]).
 
 ## <a name="power-cooling-module-pcm-precautions"></a>Précautions relatives aux modules d’alimentation et de refroidissement (PCM)
+
 L’appareil est conçu pour fonctionner avec deux PCM. Chacun de ces PCM est équipé d’un bloc d’alimentation et d’un ventilateur à deux axes. En cas de situation critique, le système est capable de continuer à fonctionner normalement si l’un des blocs d’alimentation tombe en panne. Deux PCM (et donc deux blocs d’alimentation) doivent être installés en permanence. Un PCM unique ne fournit pas d’alimentation redondante. Par conséquent, la défaillance d’un PCM unique est susceptible d’entraîner des temps d’arrêt ou des pertes de données.
 
 ![Icône Avertissement](./media/storsimple-safety/IC740879.png) ![Icône Risque d’électrocution](./media/storsimple-safety/IC740882.png) **AVERTISSEMENT !**
 
 Pour réduire le risque de blessure, d’électrocution ou de mort :
 
-* Ne retirez pas les couvercles du PCM. Vous risqueriez de vous électrocuter en touchant l’intérieur. Pour retourner le PCM et obtenir son remplacement, [contactez le support technique Microsoft](storsimple-contact-microsoft-support.md).
+* Ne retirez pas les couvercles du PCM. Vous risqueriez de vous électrocuter en touchant l’intérieur. Pour retourner le PCM et obtenir son remplacement, [contactez le support technique Microsoft](./storsimple-8000-contact-microsoft-support.md).
 
 ![Icône Avis](./media/storsimple-safety/IC740881.png) **AVIS :**
 
@@ -123,6 +124,7 @@ Pour garantir le bon fonctionnement du matériel et éviter tout endommagement d
 * Ne retirez pas de PCM à moins de pouvoir installer immédiatement un PCM de rechange. Le boîtier ne doit pas être utilisé si tous les modules ne sont pas en place.
 
 ## <a name="electrostatic-discharge-esd-precautions"></a>Précautions relatives aux décharges électrostatiques
+
 ![Icône Avis](./media/storsimple-safety/IC740881.png) **AVIS :**
 
 Respectez les précautions relatives aux décharges électrostatiques ci-après.
@@ -133,6 +135,7 @@ Respectez les précautions relatives aux décharges électrostatiques ci-après.
 * Les dommages causés par des décharges électrostatiques ne sont pas couverts par la garantie.
 
 ## <a name="battery-disposal-precautions"></a>Précautions relatives à la mise au rebut de la batterie
+
 Le bloc d’alimentation utilise une batterie spéciale conçue pour protéger le contenu de la mémoire pendant les pannes électriques temporaires à court terme. Cette batterie est située dans le PCM. Gardez à l’esprit les informations suivantes concernant la batterie.
 
 ![Icône Avertissement](./media/storsimple-safety/IC740879.png) **AVERTISSEMENT !**
@@ -150,6 +153,6 @@ Pour l’expédition des batteries ou leur transport par voie aérienne, suivez 
 Une fois que vous avez lu attentivement ces consignes de sécurité, les étapes suivantes consistent à déballer, à monter en rack et à brancher votre appareil.
 
 ## <a name="next-steps"></a>Étapes suivantes
+
 * Pour un appareil 8100, consultez la rubrique [Installation de votre appareil StorSimple 8100](storsimple-8100-hardware-installation.md).
 * Pour un appareil 8600, consultez la rubrique [Installation de votre appareil StorSimple 8600](storsimple-8600-hardware-installation.md).
-

@@ -1,21 +1,21 @@
 ---
-author: ramonarguelles
+author: msftradford
 ms.service: azure-spatial-anchors
 ms.topic: include
-ms.date: 1/29/2019
-ms.author: rgarcia
-ms.openlocfilehash: c3bc542ffaabdb307ebcecdb02ce29a5d8acfbdc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 11/20/2020
+ms.author: parkerra
+ms.openlocfilehash: 6e7b14db50b5ea068935effdf9e1d760ec6da9f1
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68562450"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185394"
 ---
 Ouvrez **Build Settings** (Paramètres de build) en sélectionnant **File** (Fichier) > **Build Settings** (Paramètres de build).
 
-Dans la section **Platform**, sélectionnez **Android**. Sélectionnez **Switch Platform** (Changer de plateforme) pour passer à la plateforme **Android**. Unity peut vous demander d’installer des composants de prise en charge Android s’ils sont manquants.
+Dans la section **Plateforme**, sélectionnez **Android**, puis sélectionnez **Changer de plateforme** pour définir la plateforme **Android**. Unity peut vous demander d’installer des composants de prise en charge Android s’ils sont manquants.  
 
-![Fenêtre des paramètres de build dans Unity](./media/spatial-anchors-unity/unity-android-build-settings.png)
+   ![Capture d’écran du volet Paramètres de build Unity - Android](./media/spatial-anchors-unity/unity-android-build-settings.png)  
 
 Fermez la fenêtre **Build Settings**.
 

@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 09/17/2018
 ms.author: cynthn
-ms.openlocfilehash: cd9a196e5f957782de91cff69c01fbfa5716369a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 830bdd45be4b0365ac45bc3ea366b99a34882a4c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100496"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010620"
 ---
 # <a name="time-sync-for-windows-vms-in-azure"></a>Synchronisation de l’heure pour les machines virtuelles Windows dans Azure
 
@@ -24,7 +24,7 @@ Azure est soutenu par une infrastructure exécutant Windows Server 2016. Windows
 >[!NOTE]
 >Pour une présentation rapide du service d’heure de Windows, regardez cette [vidéo de présentation globale](https://aka.ms/WS2016TimeVideo).
 >
-> Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time). 
+> Pour plus d’informations, consultez la rubrique [Précision de l’heure sur Windows Server 2016](/windows-server/networking/windows-time-service/accurate-time). 
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -60,7 +60,7 @@ Par défaut, les images de machine virtuelle du système d’exploitation Window
 - Le fournisseur NtpClient, qui obtient des informations à partir de time.windows.com.
 - Le service VMICTimeSync, utilisé pour communiquer l’heure de l’hôte aux machines virtuelles et apporter des corrections une fois que la machine virtuelle est interrompue pour maintenance. Les hôtes Azure utilisent des appareils de couche 1 appartenant à Microsoft pour maintenir une heure précise.
 
-W32Time privilégie l’ordre de priorité suivant en ce qui concerne le fournisseur de l’heure : niveau de couche, délai de la racine, dispersion de la racine, décalage horaire. Dans la plupart des cas, w32time préfère time.windows.com pour l’hôte, car time.windows.com signale les couches inférieures. 
+W32Time privilégie l’ordre de priorité suivant en ce qui concerne le fournisseur de l’heure : niveau de couche, délai de la racine, dispersion de la racine, décalage horaire. Dans la plupart des cas, w32time sur une machine virtuelle Azure préfère l’heure de l’hôte en raison de l’évaluation à effectuer pour comparer les deux sources de temps. 
 
 Pour les ordinateurs joints à un domaine, le domaine lui-même établit la hiérarchie de synchronisation de l’heure, mais la racine de la forêt doit toujours obtenir l’heure depuis un emplacement et les considérations suivantes seraient toujours vraies.
 
@@ -115,8 +115,8 @@ w32tm /query /source
 
 Voici la sortie que vous pouvez voir et ce que cela signifie :
     
-- **time.windows.com** : dans la configuration par défaut, w32time doit obtenir l’heure par time.windows.com. La qualité de la synchronisation de l’heure dépend de sa connectivité Internet et est affectée par les retards de paquets. Voici la sortie habituelle de la configuration par défaut.
-- **Fournisseur de synchronisation de l’heure IC de machine virtuelle** : la machine virtuelle synchronise l’heure à partir de l’hôte. Il s’agit du résultat généralement obtenu si vous choisissez de la synchronisation de l’heure host-only ou si le serveur NtpServer n’est pas disponible pour le moment. 
+- **time.windows.com** : dans la configuration par défaut, w32time doit obtenir l’heure par time.windows.com. La qualité de la synchronisation de l’heure dépend de sa connectivité Internet et est affectée par les retards de paquets. Il s’agit de la sortie habituelle que vous obtenez sur une machine physique.
+- **Fournisseur de synchronisation de l’heure IC de machine virtuelle** : la machine virtuelle synchronise l’heure à partir de l’hôte. Il s’agit de la sortie habituelle que vous obtenez sur une machine virtuelle s’exécutant sur Azure. 
 - *Votre serveur de domaine* : la machine actuelle est dans un domaine, et le domaine définit la hiérarchie de synchronisation de l’heure.
 - *Un autre serveur* : w32time est explicitement configuré pour obtenir l’heure à partir de l’autre serveur. La qualité de synchronisation de l’heure dépend de la qualité de ce serveur de temps.
 - **Horloge CMOS locale** : l’horloge n’est pas synchronisée. Vous pouvez obtenir cette sortie si w32time n’a pas eu suffisamment de temps pour démarrer après un redémarrage, ou lorsqu’aucune source temporelle configurée n’est disponible.
@@ -160,7 +160,7 @@ reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\w32time\Config /v U
 w32tm /config /update
 ```
 
-Pour que w32time soit en mesure d’utiliser les nouveaux intervalles d’interrogation, indiquez que le serveur NtpServers les utilise. Si les serveurs sont annotés avec le masque d’indicateur de bits 0x1, le mécanisme devrait être remplacé, et w32time utiliserait SpecialPollInterval à la place. Assurez-vous que les serveurs NTP spécifiés utilisent l’indicateur 0x8 ou aucun indicateur :
+Pour que w32time soit en mesure d’utiliser les nouveaux intervalles d’interrogation, les NtpServers doivent être marqués comme les utilisant. Si les serveurs sont annotés avec le masque d’indicateur de bits 0x1, le mécanisme devrait être remplacé, et w32time utiliserait SpecialPollInterval à la place. Assurez-vous que les serveurs NTP spécifiés utilisent l’indicateur 0x8 ou aucun indicateur :
 
 Vérifiez quels indicateurs sont utilisés pour les serveurs NTP utilisés.
 
@@ -172,9 +172,7 @@ w32tm /dumpreg /subkey:Parameters | findstr /i "ntpserver"
 
 Voici des liens pour plus d’informations sur la synchronisation de l’heure :
 
-- [Paramètres et outils du service de temps Windows](https://docs.microsoft.com/windows-server/networking/windows-time-service/Windows-Time-Service-Tools-and-Settings)
-- [Améliorations de Windows Server 2016](https://docs.microsoft.com/windows-server/networking/windows-time-service/windows-server-2016-improvements)
-- [Heure précise de Windows Server 2016](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time)
-- [Limites de prise en charge pour configurer le service de temps Windows pour les environnements de haute-précision](https://docs.microsoft.com/windows-server/networking/windows-time-service/support-boundary)
-
-
+- [Paramètres et outils du service de temps Windows](/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings)
+- [Améliorations de Windows Server 2016](/windows-server/networking/windows-time-service/windows-server-2016-improvements)
+- [Heure précise de Windows Server 2016](/windows-server/networking/windows-time-service/accurate-time)
+- [Limites de prise en charge pour configurer le service de temps Windows pour les environnements de haute-précision](/windows-server/networking/windows-time-service/support-boundary)

@@ -9,11 +9,11 @@ ms.date: 01/15/2019
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: 6c2b619a5eeef0bc65c90aa5451d78401f3bf7a2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "68669643"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "82516002"
 ---
 > [!div class="op_single_selector"]
 > * [.NET](../articles/iot-hub/quickstart-device-streams-echo-csharp.md)

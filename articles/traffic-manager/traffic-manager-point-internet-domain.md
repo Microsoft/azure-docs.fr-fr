@@ -2,20 +2,20 @@
 title: Pointer un domaine Internet vers Traffic Manager - Azure Traffic Manager
 description: Cet article vous aide à rediriger votre nom de domaine d’entreprise vers un nom de domaine Traffic Manager.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/11/2016
-ms.author: rohink
-ms.openlocfilehash: 6c5c5c185063caf8ca258ad70a70903c9b583e07
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 93a8076f12b8f006d600cbd32ce39169f4b47c67
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80294838"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014327"
 ---
 # <a name="point-a-company-internet-domain-to-an-azure-traffic-manager-domain"></a>Redirection d’un domaine Internet d’entreprise vers un domaine Azure Traffic Manager
 
@@ -23,12 +23,12 @@ Lorsque vous créez un profil Traffic Manager, Azure attribue automatiquement u
 
 Par exemple, pour pointer le nom `www.contoso.com` vers le nom DNS de Traffic Manager `contoso.trafficmanager.net`, vous créez l’enregistrement de ressource DNS suivant :
 
-    `www.contoso.com IN CNAME contoso.trafficmanager.net`
+`www.contoso.com IN CNAME contoso.trafficmanager.net.`
 
 L’intégralité des requêtes de trafic pour *www\.contoso.com* est redirigée vers *contoso.trafficmanager.net*.
 
 > [!IMPORTANT]
-> Vous ne pouvez pas rediriger un domaine de second niveau tel que *contoso.com*vers le domaine Traffic Manager. Les normes de protocole DNS n’autorisent pas les enregistrements CNAME pour les noms de domaine de second niveau.
+> Vous ne pouvez pas rediriger un domaine de second niveau tel que *contoso.com* vers le domaine Traffic Manager. Les normes de protocole DNS n’autorisent pas les enregistrements CNAME pour les noms de domaine de second niveau.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

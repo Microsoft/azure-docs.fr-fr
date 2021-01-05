@@ -5,16 +5,16 @@ author: uhabiba04
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: v-umha
-ms.openlocfilehash: b82d415d5e0cf18250123f3483e196aa040285dd
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: dd0ed78c56e4d656a2ecee6395d831ed093e85b5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83656816"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001607"
 ---
-# <a name="troubleshoot"></a>Dépanner
+# <a name="troubleshoot-azure-farmbeats"></a>Résoudre les problèmes liés à Azure FarmBeats
 
-Cet article fournit des solutions aux problèmes courants liés à Azure FarmBeats. Pour obtenir de l’aide supplémentaire, contactez notre [Forum de support](https://social.msdn.microsoft.com/Forums/home?forum=ProjectFarmBeats) ou envoyez-nous un e-mail à l’adresse farmbeatssupport@microsoft.com.
+Cet article fournit des solutions aux problèmes courants liés à Azure FarmBeats. Pour obtenir de l’aide supplémentaire, contactez notre [Forum de support questions et réponses](/answers/topics/azure-farmbeats.html) ou envoyez-nous un e-mail à l’adresse farmbeatssupport@microsoft.com.
 
 > [!NOTE]
   > Si vous avez installé FarmBeats au mois d’avril et que vos travaux échouent avec un message d’erreur vide, il se peut que votre installation n’ait pas reçu de quota Batch pour hiérarchiser le support apporté à des organisations critiques en matière de sécurité et de santé. Pour plus d’informations, consultez [cet article](https://azure.microsoft.com/blog/update-2-on-microsoft-cloud-services-continuity/) . Vous devez demander l’allocation de machines virtuelles au compte Batch pour exécuter les tâches.
@@ -58,8 +58,8 @@ Contactez-nous en vous munissant des informations suivantes :
 
 **Action corrective** :
 
-1. Accédez à votre groupe de ressources FarmBeats Datahub.
-2. Sélectionnez le **hub d’événements** (DatafeedEventHubNamespace), puis vérifiez le nombre de messages entrants.
+1. Accédez à votre groupe de ressources FarmBeats.
+2. Sélectionnez l’espace de noms **Event Hub** (« sensor-partner-eh-namespace-xxxx »), cliquez sur « Event Hubs », puis recherchez le nombre de messages entrants dans l’Event Hub attribué au partenaire.
 3. Effectuez l'une des opérations suivantes :
 
    - S’il n’y a *aucun message entrant*, contactez votre partenaire d’appareil.  
@@ -110,7 +110,7 @@ Pour comprendre comment télécharger les journaux, consultez la section [« Co
 > [!NOTE]
 > Notez l’ID partenaire du partenaire de capteur qui vous intéresse.
 
-3. Revenez dans l’API Partner et sélectionnez **Get/\<ID>** .
+3. Revenez dans l’API partenaire et sélectionnez **Get/\<ID>** .
 4. Spécifiez l’ID partenaire obtenue à l’étape 3, puis sélectionnez **Exécuter**.
 
    La réponse de l’API contient normalement la chaîne de connexion Event Hubs.
@@ -174,7 +174,7 @@ Quand vous supprimez un appareil, vous pouvez être confronté à l’un des sc�
 
 Si l’accès vous a déjà été accordé et que vous êtes confronté à cette erreur, réessayez en actualisant la page. Si l’erreur persiste, contactez-nous en joignant le message d’erreur ou les journaux.
 
-![Projet FarmBeats](./media/troubleshoot-azure-farmbeats/accelerator-troubleshooting-1.png)
+![Capture d’écran montrant l’erreur d’autorisation.](./media/troubleshoot-azure-farmbeats/accelerator-troubleshooting-1.png)
 
 ### <a name="accelerator-issues"></a>Problèmes liés à Accelerator  
 
@@ -250,7 +250,7 @@ Ce problème peut se produire si des activités de maintenance sont effectuées 
 
 ### <a name="sentinel-maximum-number-of-connections-reached"></a>Sentinel : Nombre maximal de connexions Sentinel atteint
 
-**Message d’échec du travail** : « Nombre maximal de deux flux simultanés atteints par l’utilisateur ’\<nomutilisateur>’. »
+**Message d’échec du travail** : « Nombre maximal de deux flux simultanés atteints par l’utilisateur ’\<username>’. »
 
 **Signification** : Si un travail échoue parce que le nombre maximal de connexions a été atteint, le même compte Sentinel est utilisé pour plusieurs travaux.
 
@@ -289,11 +289,11 @@ Ce problème peut se produire si des activités de maintenance sont effectuées 
 2. Dans la zone **Rechercher**, recherchez le groupe de ressources FarmBeats Datahub.
 3. Dans le tableau de bord **Groupe de ressources**, recherchez le compte de stockage *datahublogs\** . Par exemple, *datahublogsmvxmq*  
 4. Dans la colonne **Nom**, sélectionnez le compte de stockage pour afficher le tableau de bord **Compte de stockage**.
-5. Dans le volet **datahubblogs\*** , sélectionnez **Ouvrir dans l’Explorateur** pour afficher l’application **Explorateur Stockage Azure**.
+5. Dans le volet **datahubblogs\* *_, sélectionnez _* Ouvrir dans l’Explorateur** pour afficher l’application **Explorateur Stockage Azure**.
 6. Dans le volet gauche, sélectionnez **Conteneurs d’objets blob**, puis **job-logs** pour les journaux d’Azure Data Factory ou **appinsights-logs** pour les journaux d’App Service.
 7. Sélectionnez **Télécharger**, puis téléchargez les journaux dans un dossier local sur votre ordinateur.
 
-    ![Projet FarmBeats](./media/troubleshoot-azure-farmbeats/collecting-logs-manually-1.png)
+    ![Capture d’écran montrant les fichiers journaux téléchargés.](./media/troubleshoot-azure-farmbeats/collecting-logs-manually-1.png)
 
 ### <a name="collect-azure-data-factory-job-logs-or-app-service-logs-for-accelerator"></a>Collecter les journaux de travaux d’Azure Data Factory les journaux d’App Service pour Accelerator
 
@@ -301,7 +301,7 @@ Ce problème peut se produire si des activités de maintenance sont effectuées 
 2. Dans la zone **Rechercher**, recherchez le groupe de ressources FarmBeats Accelerator.
 3. Dans le tableau de bord **Groupe de ressources**, recherchez le compte de stockage *storage\** . Par exemple, *storagedop4k\** .
 4. Sélectionnez le compte de stockage dans la colonne **Nom** pour afficher le tableau de bord **Compte de stockage**.
-5. Dans le volet **storage\*** , sélectionnez **Ouvrir dans l’Explorateur** pour ouvrir l’application Explorateur Stockage Azure.
+5. Dans le volet **storage\* *_, sélectionnez _* Ouvrir dans l’Explorateur** pour ouvrir l’application Explorateur Stockage Azure.
 6. Dans le volet gauche, sélectionnez **Conteneurs d’objets blob**, puis **job-logs** pour les journaux d’Azure Data Factory ou **appinsights-logs** pour les journaux d’App Service.
 7. Sélectionnez **Télécharger**, puis téléchargez les journaux dans un dossier local sur votre ordinateur.
 
@@ -314,3 +314,39 @@ Ce problème peut se produire si des activités de maintenance sont effectuées 
 1. Accédez à votre groupe de ressources FarmBeats Datahub.
 2. Sélectionnez **App Service**.  
 3. Accédez à la [page des prix App Service](https://azure.microsoft.com/pricing/details/app-service/windows/) Scale Up, puis sélectionnez un niveau tarifaire approprié.
+
+## <a name="weather-data-job-failures"></a>Échecs de travaux de données météorologiques
+
+**Erreur** : Vous exécutez des travaux pour obtenir des données météorologiques, mais le travail échoue
+
+### <a name="collect-logs-to-troubleshoot-weather-data-job-failures"></a>Collecter les journaux pour résoudre les échecs des travaux de données météorologiques
+
+1. Accédez au groupe de ressources FarmBeats sur le portail Azure.
+2. Cliquez sur le service Data Factory qui fait partie de ce groupe de ressources. Le service a une étiquette « Référence SKU : Datahub »
+
+> [!NOTE]
+> Pour voir les étiquettes des services dans le groupe de ressources, cliquez sur « Modifier les colonnes » et ajoutez des « étiquettes » dans la vue du groupe de ressources.
+
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-1.png" alt-text="Capture d’écran mettant en évidence l’étiquette sku:Datahub.":::
+
+3. Dans la page de présentation de la fabrique de données, cliquez sur **Créer et surveiller**. Un nouvel onglet s’ouvre dans votre navigateur. Cliquez sur **Surveiller**.
+
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-2.png" alt-text="Capture d’écran qui met en évidence l’option de menu Redémarrer.":::
+
+4. Vous voyez la liste des exécutions de pipeline qui font partie de l’exécution du travail météorologique. Cliquez sur le travail pour lequel vous souhaitez collecter les journaux.
+ 
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-3.png" alt-text="Capture d’écran mettant en évidence l’option de menu Exécutions de pipeline et la tâche sélectionnée.":::
+
+5. Dans la page de présentation du pipeline, vous voyez la liste des exécutions d’activités. Prenez note des ID d’exécution des activités pour lesquelles vous souhaitez collecter les journaux.
+ 
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-4.png" alt-text="Capture d’écran montrant la liste des exécutions d’activités.":::
+
+6. Revenez à votre groupe de ressources FarmBeats sur le portail Azure, puis cliquez sur le compte de stockage portant le nom **datahublogs-XXXX**.
+ 
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-5.png" alt-text="Capture d’écran mettant en évidence le compte de stockage nommé datahublogs-XXXX.":::
+
+7. Cliquez sur **Conteneurs** -> **adfjobs**. Dans la zone de recherche, entrez l’ID d’exécution du travail que vous avez noté à l’étape 5 ci-dessus.
+ 
+:::image type="content" source="./media/troubleshoot-Azure-farmbeats/weather-log-6.png" alt-text="Projet FarmBeats":::
+
+8. Le résultat de la recherche inclut le dossier contenant les journaux relatifs au travail. Téléchargez les journaux et envoyez-les à farmbeatssupport@microsoft.com pour obtenir de l’aide afin de résoudre le problème.

@@ -1,16 +1,15 @@
 ---
 title: Créer votre premier service fiable dans Java
-description: Introduction à la création d'une application Microsoft Azure Service Fabric avec des services avec et sans état.
-author: suhuruli
+description: Introduction à la création d'une application Microsoft Azure Service Fabric avec des services avec et sans état en Java.
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: suhuruli
-ms.openlocfilehash: 7855b92c90a9ccd208a25080c260437e6808d1b7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-javai
+ms.openlocfilehash: f67957d711958febdb01dfad0b3c44a92cb0bcfa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82184144"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535234"
 ---
 # <a name="get-started-with-reliable-services-in-java"></a>Prise en main de Reliable Services dans Java
 > [!div class="op_single_selector"]
@@ -190,7 +189,7 @@ protected CompletableFuture<?> runAsync(CancellationToken cancellationToken) {
 ReliableHashMap<String,Long> map = this.stateManager.<String, Long>getOrAddReliableHashMapAsync("myHashMap")
 ```
 
-[ReliableHashMap](https://docs.microsoft.com/java/api/microsoft.servicefabric.data.collections.reliablehashmap) est une implémentation de dictionnaire qui peut servir à stocker de façon fiable l’état dans le service. Avec Service Fabric et les Reliable Hashmaps (tables de hachage fiables), vous pouvez stocker des données directement dans votre service sans avoir besoin d’un magasin persistant externe. Les tables de hachage fiables rendent vos données hautement disponibles. Pour ce faire, Service Fabric crée et gère plusieurs *réplicas* de votre service pour vous. Il fournit également une API qui élimine la complexité de la gestion de ces réplicas et leurs transitions d’état.
+[ReliableHashMap](/java/api/microsoft.servicefabric.data.collections.reliablehashmap) est une implémentation de dictionnaire qui peut servir à stocker de façon fiable l’état dans le service. Avec Service Fabric et les Reliable Hashmaps (tables de hachage fiables), vous pouvez stocker des données directement dans votre service sans avoir besoin d’un magasin persistant externe. Les tables de hachage fiables rendent vos données hautement disponibles. Pour ce faire, Service Fabric crée et gère plusieurs *réplicas* de votre service pour vous. Il fournit également une API qui élimine la complexité de la gestion de ces réplicas et leurs transitions d’état.
 
 Les collections fiables peuvent stocker n’importe quel type Java, dont vos types personnalisés, avec quelques inconvénients :
 

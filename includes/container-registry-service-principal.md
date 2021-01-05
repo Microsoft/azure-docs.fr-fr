@@ -9,10 +9,10 @@ ms.date: 12/14/2018
 ms.author: danlep
 ms.custom: include file
 ms.openlocfilehash: 9e4f2e355240ba8682cbe9f86f2be94e7dd0d92d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "70032360"
 ---
 ## <a name="create-a-service-principal"></a>Créer un principal du service

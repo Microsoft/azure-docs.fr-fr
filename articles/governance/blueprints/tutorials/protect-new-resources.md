@@ -1,18 +1,18 @@
 ---
 title: 'Tutoriel : Protéger des nouvelles ressources avec des verrous'
 description: Dans ce tutoriel, vous utilisez les options de verrous de ressources Azure Blueprints « Lecture seule » et « Ne pas supprimer » pour protéger les ressources nouvellement déployées.
-ms.date: 05/06/2020
+ms.date: 08/27/2020
 ms.topic: tutorial
-ms.openlocfilehash: 90ffb0f5b8c1b6d3919b05abf778c5082bfee0dc
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: 3ed75a1dee925f2a55ac46705a171bec5fc1d30e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82864162"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89048568"
 ---
 # <a name="tutorial-protect-new-resources-with-azure-blueprints-resource-locks"></a>Tutoriel : Protéger les nouvelles ressources avec des verrous de ressource Azure Blueprints
 
-Les [verrous de ressources](../concepts/resource-locking.md) Azure Blueprints permettent de protéger les ressources nouvellement déployées contre toute manipulation, même par un compte disposant du rôle _Propriétaire_. Vous pouvez ajouter cette protection dans les définitions de blueprint des ressources qui ont été créées par un artefact de modèle Resource Manager.
+Les [verrous de ressources](../concepts/resource-locking.md) Azure Blueprints permettent de protéger les ressources nouvellement déployées contre toute manipulation, même par un compte disposant du rôle _Propriétaire_. Vous pouvez ajouter cette protection dans les définitions de blueprint des ressources qui ont été créées par un artefact de modèle Azure Resource Manager (modèle ARM).
 
 Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
@@ -55,8 +55,7 @@ Tout d’abord, créez la définition de blueprint.
 1. Ajoutez un modèle sous le groupe de ressources :
    1. Sélectionnez la ligne **Ajouter un artefact** sous l’entrée **RGtoLock**.
    1. Sélectionnez **Modèle Azure Resource Manager** sous **Type d’artefact**, définissez **Nom complet de l’artefact** sur la valeur **StorageAccount**, et laissez le champ **Description** vide.
-   1. Sous l’onglet **Modèle**, collez le modèle Resource Manager suivant dans la zone de l’éditeur.
-      Après avoir collé le modèle, sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
+   1. Sous l’onglet **Modèle**, collez le modèle ARM suivant dans la zone de l’éditeur. Après avoir collé le modèle, sélectionnez **Ajouter** pour ajouter cet artefact au blueprint.
 
    ```json
    {
@@ -166,7 +165,7 @@ Dès que la notification **Définition de blueprint affectée** s’affiche dans
 
 ## <a name="inspect-resources-deployed-by-the-assignment"></a>Examiner les ressources déployées par l’affectation
 
-L’affectation crée le groupe de ressources _TestingBPLocks_ et le compte de stockage déployé par l’artefact du modèle Resource Manager. Le nouveau groupe de ressources et l’état de verrouillage sélectionné sont affichés dans la page de détails de l’affectation.
+L’affectation crée le groupe de ressources _TestingBPLocks_ et le compte de stockage déployé par l’artefact du modèle ARM. Le nouveau groupe de ressources et l’état de verrouillage sélectionné sont affichés dans la page de détails de l’affectation.
 
 1. Sélectionnez **Tous les services** dans le volet gauche. Recherchez et sélectionnez **Blueprints**.
 

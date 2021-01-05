@@ -8,19 +8,19 @@ ms.technology: devops-cicd
 ms.topic: tutorial
 ms.date: 03/24/2020
 author: mlearned
-ms.openlocfilehash: 93b150d47f1703662ebda5b017e1824cf74b7ab0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6a1af644bbd88af5c513ed9a43ce154f285c06df
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233701"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91856005"
 ---
 # <a name="tutorial-deploy-your-aspnet-app-and-azure-sql-database-code-by-using-azure-devops-starter"></a>Tutoriel : Déployer votre application ASP.NET et votre code Azure SQL Database en utilisant Azure DevOps Starter
 
 Azure DevOps Starter offre une expérience simplifiée dans laquelle vous pouvez apporter vos code et dépôt Git existants ou choisir un exemple d’application pour créer un pipeline d’intégration continue (CI) et de livraison continue (CD) dans Azure. 
 
 De plus, DevOps Starter :
-* Crée automatiquement des ressources Azure, telles qu’une base de données Azure SQL.
+* Crée automatiquement des ressources Azure, comme une base de données dans Azure SQL Database.
 * Crée et configure un pipeline de mise en production dans Azure Pipelines qui inclut un pipeline de build pour CI
 * Configurer un pipeline de mise en production pour CD 
 * Crée une ressource Azure Application Insights pour la supervision
@@ -33,16 +33,16 @@ Ce didacticiel présente les procédures suivantes :
 > * Examiner le pipeline CI
 > * Examiner le pipeline CD
 > * Valider les modifications apportées à Azure Repos et les déployer automatiquement dans Azure
-> * Se connecter à la base de données Azure SQL 
+> * Connexion à Azure SQL Database 
 > * Nettoyer les ressources
 
 ## <a name="prerequisites"></a>Prérequis
 
 * Un abonnement Azure. Vous pouvez en obtenir un gratuit via [Visual Studio Dev Essentials](https://visualstudio.microsoft.com/dev-essentials/).
 
-## <a name="create-a-project-in-devops-projects-for-an-aspnet-app-and-an-azure-sql-database"></a>Créer un projet dans DevOps Projects pour une application ASP.NET et une base de données Azure SQL
+## <a name="create-a-project-in-devops-projects-for-an-aspnet-app-and-azure-sql-database"></a>Créer un projet dans DevOps Projects pour une application ASP.NET et Azure SQL Database
 
-DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer une organisation Azure DevOps ou utiliser une organisation existante. DevOps Starter crée également des ressources Azure, telles qu’une base de données Azure SQL, dans l’abonnement Azure de votre choix.
+DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer une organisation Azure DevOps ou utiliser une organisation existante. DevOps Starter crée également des ressources Azure, comme Azure SQL Database, dans l’abonnement Azure de votre choix.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
@@ -140,11 +140,11 @@ Vous êtes maintenant prêt à collaborer avec une équipe sur votre application
 
 1. Une fois la mise en production terminée, actualisez votre application pour vérifier vos modifications.
 
-## <a name="connect-to-the-azure-sql-database"></a>Se connecter à la base de données Azure SQL
+## <a name="connect-to-azure-sql-database"></a>Connexion à Azure SQL Database
 
-Vous devez disposer des autorisations appropriées pour vous connecter à la base de données Azure SQL.
+Vous devez disposer des autorisations appropriées pour vous connecter à Azure SQL Database.
 
-1. Dans le tableau de bord DevOps Starter, sélectionnez **SQL Database** pour accéder à la page de gestion de la base de données SQL.
+1. Dans le tableau de bord DevOps Starter, sélectionnez **SQL Database** pour accéder à la page de gestion de SQL Database.
    
 1. Sélectionnez **Définir le pare-feu du serveur**, puis **Ajouter une adresse IP de client**. 
 
@@ -156,7 +156,7 @@ Vous devez disposer des autorisations appropriées pour vous connecter à la bas
 
 1. Sélectionnez **Réinitialiser le mot de passe**, entrez un mot de passe pour la connexion d’administrateur SQL Server, puis sélectionnez **Enregistrer**. Veillez à conserver ce mot de passe pour l’utiliser ultérieurement dans ce tutoriel.
 
-    Si vous le souhaitez, vous pouvez désormais utiliser les outils clients, tels que SQL Server Management Studio ou Visual Studio, pour vous connecter à SQL Server et à la base de données Azure SQL. Utilisez la propriété **Nom du serveur** pour vous connecter.
+    Si vous le souhaitez, vous pouvez désormais utiliser les outils clients, comme SQL Server Management Studio ou Visual Studio, pour vous connecter à SQL Server et à Azure SQL Database. Utilisez la propriété **Nom du serveur** pour vous connecter.
 
     Si vous n’avez pas modifié le nom d’utilisateur de la base de données lors de la configuration initiale du projet dans DevOps Projects, votre nom d’utilisateur correspond à la partie locale de votre adresse e-mail. Par exemple, si votre adresse e-mail est *johndoe\@microsoft.com*, votre nom d’utilisateur est *johndoe*.
 
@@ -165,12 +165,12 @@ Vous devez disposer des autorisations appropriées pour vous connecter à la bas
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Si vous êtes en phase de test, vous pouvez éviter une hausse des frais de facturation en nettoyant vos ressources. Quand elles ne sont plus nécessaires, vous pouvez supprimer la base de données Azure SQL et les ressources associées que vous avez créées dans ce tutoriel. Pour ce faire, utilisez la fonctionnalité **Supprimer** du tableau de bord DevOps Starter.
+Si vous êtes en phase de test, vous pouvez éviter une hausse des frais de facturation en nettoyant vos ressources. Quand elles ne sont plus nécessaires, vous pouvez supprimer Azure SQL Database et les ressources associées que vous avez créées dans ce tutoriel. Pour ce faire, utilisez la fonctionnalité **Supprimer** du tableau de bord DevOps Starter.
 
 > [!IMPORTANT]
 > La procédure suivante supprime définitivement les ressources. La fonctionnalité *Supprimer* détruit les données qui sont créées par le projet dans DevOps Starter, à la fois dans Azure et dans Azure DevOps, et vous ne pourrez plus les récupérer. Utilisez cette procédure uniquement après avoir lu attentivement les invites.
 
-1. Dans le portail Azure, accédez au tableau de bord DevOps Starter.
+1. Dans le Portail Azure, accédez au tableau de bord DevOps Starter.
 2. En haut à droite, sélectionnez **Supprimer**. 
 3. À l’invite, sélectionnez **Oui** pour *supprimer définitivement* les ressources.
 
@@ -184,14 +184,14 @@ Si vous le souhaitez, vous pouvez modifier ces pipelines de build et de mise en 
 > * Examiner le pipeline CI
 > * Examiner le pipeline CD
 > * Valider les modifications apportées à Azure Repos et les déployer automatiquement dans Azure
-> * Se connecter à la base de données Azure SQL 
+> * Connexion à Azure SQL Database 
 > * Nettoyer les ressources
 
 Pour en savoir plus sur le pipeline CI/CD, consultez :
 
 > [!div class="nextstepaction"]
-> [Définir votre pipeline de déploiement continu (CD) multiétape](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Définir votre pipeline de déploiement continu (CD) multiétape](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
 
-## <a name="videos"></a>Videos
+## <a name="videos"></a>Vidéos
 
 > [!VIDEO https://channel9.msdn.com/Events/Build/2018/BRK3308/player]

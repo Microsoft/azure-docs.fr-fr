@@ -5,12 +5,12 @@ description: Découvrir les bonnes pratiques de l’opérateur relatives à l’
 services: container-service
 ms.topic: conceptual
 ms.date: 11/26/2018
-ms.openlocfilehash: d0d13a699d2559c6b4360c807721e0b748959382
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1a8138b4b2fdab2cdef8d2cb4c27de8d12ef38cd
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81617522"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107344"
 ---
 # <a name="best-practices-for-advanced-scheduler-features-in-azure-kubernetes-service-aks"></a>Bonnes pratiques relatives aux fonctionnalités avancées du planificateur dans Azure Kubernetes Service (AKS)
 
@@ -52,7 +52,7 @@ metadata:
 spec:
   containers:
   - name: tf-mnist
-    image: microsoft/samples-tf-mnist-demo:gpu
+    image: mcr.microsoft.com/azuredocs/samples-tf-mnist-demo:gpu
     resources:
       requests:
         cpu: 0.5
@@ -71,8 +71,6 @@ Quand ce pod est déployé, par exemple en utilisant `kubectl apply -f gpu-toler
 
 Quand vous appliquez des teintes, collaborez avec les développeurs et propriétaires d’applications pour leur permettre de définir les tolérances requises dans leurs déploiements.
 
-Pour plus d’informations sur les teintes et les tolérances, consultez [Application de teintes et de tolérances][k8s-taints-tolerations].
-
 Pour en savoir plus sur l’utilisation de plusieurs pools de nœuds dans AKS, voir [Créer et gérer plusieurs pools de nœuds pour un cluster dans AKS][use-multiple-node-pools].
 
 ### <a name="behavior-of-taints-and-tolerations-in-aks"></a>Comportement des teintes et des tolérances dans AKS
@@ -80,6 +78,7 @@ Pour en savoir plus sur l’utilisation de plusieurs pools de nœuds dans AKS, v
 Lorsque vous mettez à niveau un pool de nœuds dans AKS, les teintes et les tolérances suivent un modèle défini lorsqu’elles sont appliquées à de nouveaux nœuds :
 
 - **Clusters par défaut qui utilisent des groupes de machines virtuelles identiques**
+  - Vous pouvez [appliquer une teinte à un pool de nœuds][taint-node-pool] à partir de l’API AKS afin que les nœuds qui viennent d’être mis à l’échelle reçoivent des teintes de nœud spécifiés par l’API.
   - Partons du principe que nous disposons d’un cluster à deux nœuds : *node1* et *node2*. Vous mettez à niveau le pool de nœuds.
   - Deux nœuds supplémentaires sont créés, *node3* et *node4*, et les teintes y sont envoyées.
   - Les *node1* et *node2* originaux sont supprimés.
@@ -101,7 +100,7 @@ Les teintes et tolérances servent à isoler logiquement les ressources avec une
 Examinons un exemple de nœuds avec une grande quantité de mémoire. Ces nœuds peuvent privilégier les pods qui demandent une grande quantité de mémoire. Pour que les ressources ne restent pas inactives, d’autres pods sont également autorisés à s’exécuter.
 
 ```console
-kubectl label node aks-nodepool1 hardware:highmem
+kubectl label node aks-nodepool1 hardware=highmem
 ```
 
 Une spécification de pod ajoute ensuite la propriété `nodeSelector` pour définir un sélecteur de nœud qui correspond à l’étiquette définie sur un nœud :
@@ -114,7 +113,7 @@ metadata:
 spec:
   containers:
   - name: tf-mnist
-    image: microsoft/samples-tf-mnist-demo:gpu
+    image: mcr.microsoft.com/azuredocs/samples-tf-mnist-demo:gpu
     resources:
       requests:
         cpu: 0.5
@@ -122,7 +121,7 @@ spec:
       limits:
         cpu: 4.0
         memory: 16Gi
-    nodeSelector:
+  nodeSelector:
       hardware: highmem
 ```
 
@@ -144,7 +143,7 @@ metadata:
 spec:
   containers:
   - name: tf-mnist
-    image: microsoft/samples-tf-mnist-demo:gpu
+    image: mcr.microsoft.com/azuredocs/samples-tf-mnist-demo:gpu
     resources:
       requests:
         cpu: 0.5
@@ -198,3 +197,4 @@ Dans cet article, nous avons traité des fonctionnalités avancées du planifica
 [aks-best-practices-cluster-isolation]: operator-best-practices-cluster-isolation.md
 [aks-best-practices-identity]: operator-best-practices-identity.md
 [use-multiple-node-pools]: use-multiple-node-pools.md
+[taint-node-pool]: use-multiple-node-pools.md#specify-a-taint-label-or-tag-for-a-node-pool

@@ -7,13 +7,13 @@ ms.assetid: ebcadb49-755d-4202-a5eb-f211827a9168
 ms.topic: sample
 ms.date: 10/30/2017
 ms.author: msangapu
-ms.custom: mvc, seodec18
-ms.openlocfilehash: 93b53bedef291b9aa740f5bbe9c492185f035f89
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, seodec18, devx-track-azurepowershell
+ms.openlocfilehash: 29eda8fcb24dce6c54fb56c94d242513b319caad
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80044832"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89073962"
 ---
 # <a name="delete-a-backup-for-a-web-using-azure-powershell"></a>Supprimer une sauvegarde pour un site web à l’aide d’Azure PowerShell
 
@@ -46,6 +46,6 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure App Service Web Apps sur la page [Azure PowerShell Samples](../samples-powershell.md) (Exemples Azure PowerShell).

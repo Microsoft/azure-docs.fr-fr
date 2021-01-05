@@ -5,22 +5,24 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 03/19/2020
+ms.date: 10/29/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: e85dc8c079205484db9b7b7c43a0086f69feb3be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 946ff043828034340ae3273fc0629e32de755540
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80059919"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96028274"
 ---
 ## <a name="create-a-self-signed-root-certificate"></a><a name="rootcert"></a>Créer un certificat racine auto-signé
 
-Utilisez la cmdlet New-SelfSignedCertificate pour créer un certificat racine auto-signé. Pour obtenir des informations sur des paramètres supplémentaires, consultez [New-SelfSignedCertificate](https://technet.microsoft.com/itpro/powershell/windows/pkiclient/new-selfsignedcertificate).
+Utilisez la cmdlet New-SelfSignedCertificate pour créer un certificat racine auto-signé. Pour obtenir des informations sur des paramètres supplémentaires, consultez [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate).
 
 1. Sur un ordinateur sous Windows 10 ou Windows Server 2016, ouvrez une console Windows PowerShell avec élévation de privilèges. Ces exemples ne fonctionnent pas avec « Essayez-le » Azure Cloud Shell. Vous devez les exécuter localement.
-2. Utilisez l’exemple suivant pour créer le certificat racine auto-signé. L’exemple suivant crée un certificat racine auto-signé nommé « P2SRootCert », automatiquement installé dans « Certificates-Current User\Personal\Certificates ». Vous pouvez afficher le certificat en ouvrant *certmgr.msc* ou *Gérer les certificats utilisateur*.
+1. Utilisez l’exemple suivant pour créer le certificat racine auto-signé. L’exemple suivant crée un certificat racine auto-signé nommé « P2SRootCert », automatiquement installé dans « Certificates-Current User\Personal\Certificates ». Vous pouvez afficher le certificat en ouvrant *certmgr.msc* ou *Gérer les certificats utilisateur*.
+
+   Connectez-vous avec la cmdlet `Connect-AzAccount`. Ensuite, exécutez l’exemple suivant avec toutes les modifications nécessaires.
 
    ```powershell
    $cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature `
@@ -28,7 +30,8 @@ Utilisez la cmdlet New-SelfSignedCertificate pour créer un certificat racine au
    -HashAlgorithm sha256 -KeyLength 2048 `
    -CertStoreLocation "Cert:\CurrentUser\My" -KeyUsageProperty Sign -KeyUsage CertSign
    ```
- 3. Laissez la console PowerShell ouverte si vous souhaitez créer un certificat client juste après avoir créé ce certificat racine.
+
+1. Laissez la console PowerShell ouverte et passez aux étapes suivantes pour générer un certificat client.
 
 ## <a name="generate-a-client-certificate"></a><a name="clientcert"></a>Générer un certificat client
 
@@ -36,7 +39,7 @@ Chaque ordinateur client qui se connecte à un réseau virtuel avec une connexio
 
 Les étapes suivantes vous guident dans la génération d’un certificat client à partir d’un certificat racine auto-signé. Vous pouvez générer plusieurs certificats clients à partir d’un même certificat racine. Lorsque vous générez des certificats clients suivant les étapes ci-dessous, le certificat client est automatiquement installé sur l’ordinateur que vous avez utilisé pour générer le certificat. Si vous souhaitez installer un certificat client sur un autre ordinateur client, vous pouvez exporter le certificat.
 
-Les exemples utilisent la cmdlet New-SelfSignedCertificate pour générer un certificat client qui expire au bout d’un an. Pour obtenir des informations sur des paramètres supplémentaires, telles que la définition d’une valeur d’expiration différente pour le certificat client, consultez [New-SelfSignedCertificate](https://technet.microsoft.com/itpro/powershell/windows/pkiclient/new-selfsignedcertificate).
+Les exemples utilisent la cmdlet New-SelfSignedCertificate pour générer un certificat client qui expire au bout d’un an. Pour obtenir des informations sur des paramètres supplémentaires, telles que la définition d’une valeur d’expiration différente pour le certificat client, consultez [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate).
 
 ### <a name="example-1---powershell-console-session-still-open"></a>Exemple 1 : session de la console PowerShell toujours ouverte
 
@@ -61,7 +64,8 @@ Si vous créez des certificats clients supplémentaires ou que vous n’utilisez
    ```powershell
    Get-ChildItem -Path "Cert:\CurrentUser\My"
    ```
-2. Recherchez le nom du sujet dans la liste renvoyée, puis copiez l’empreinte qui se trouve à côté dans un fichier texte. Dans l’exemple suivant, il y a deux certificats. Le nom CN est le nom du certificat racine auto-signé à partir duquel vous souhaitez générer un certificat enfant. Dans ce cas, « P2SRootCert ».
+
+1. Recherchez le nom du sujet dans la liste renvoyée, puis copiez l’empreinte qui se trouve à côté dans un fichier texte. Dans l’exemple suivant, il y a deux certificats. Le nom CN est le nom du certificat racine auto-signé à partir duquel vous souhaitez générer un certificat enfant. Dans ce cas, « P2SRootCert ».
 
    ```
    Thumbprint                                Subject
@@ -69,7 +73,8 @@ Si vous créez des certificats clients supplémentaires ou que vous n’utilisez
    AED812AD883826FF76B4D1D5A77B3C08EFA79F3F  CN=P2SChildCert4
    7181AA8C1B4D34EEDB2F3D3BEC5839F3FE52D655  CN=P2SRootCert
    ```
-3. Déclarez une variable pour le certificat racine avec l’empreinte de l’étape précédente. Remplacez THUMBPRINT par l’empreinte du certificat racine à partir duquel vous souhaitez générer un certificat enfant.
+
+1. Déclarez une variable pour le certificat racine avec l’empreinte de l’étape précédente. Remplacez THUMBPRINT par l’empreinte du certificat racine à partir duquel vous souhaitez générer un certificat enfant.
 
    ```powershell
    $cert = Get-ChildItem -Path "Cert:\CurrentUser\My\THUMBPRINT"
@@ -80,7 +85,8 @@ Si vous créez des certificats clients supplémentaires ou que vous n’utilisez
    ```powershell
    $cert = Get-ChildItem -Path "Cert:\CurrentUser\My\7181AA8C1B4D34EEDB2F3D3BEC5839F3FE52D655"
    ```
-4. Modifiez et exécutez l’exemple pour générer un certificat client. Si vous exécutez l’exemple suivant sans le modifier, le résultat est un certificat client nommé « P2SChildCert ». Si vous souhaitez donner un autre nom au certificat enfant, modifiez la valeur CN. Ne modifiez pas la valeur TextExtension lors de l’exécution de cet exemple. Le certificat client que vous générez est automatiquement installé dans « Certificates - Current User\Personal\Certificates » sur votre ordinateur.
+
+1. Modifiez et exécutez l’exemple pour générer un certificat client. Si vous exécutez l’exemple suivant sans le modifier, le résultat est un certificat client nommé « P2SChildCert ». Si vous souhaitez donner un autre nom au certificat enfant, modifiez la valeur CN. Ne modifiez pas la valeur TextExtension lors de l’exécution de cet exemple. Le certificat client que vous générez est automatiquement installé dans « Certificates - Current User\Personal\Certificates » sur votre ordinateur.
 
    ```powershell
    New-SelfSignedCertificate -Type Custom -DnsName P2SChildCert -KeySpec Signature `

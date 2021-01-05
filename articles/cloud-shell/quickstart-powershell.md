@@ -9,12 +9,12 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.topic: article
 ms.date: 10/18/2018
-ms.openlocfilehash: 72261989b7cee9d2251eb18b36431ec807b0e874
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4a7f1453ec686cfa16d260101ba81f429ce1da0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233785"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89469454"
 ---
 # <a name="quickstart-for-powershell-in-azure-cloud-shell"></a>Démarrage rapide de PowerShell dans Azure Cloud Shell
 
@@ -27,11 +27,11 @@ Ce document explique comment utiliser PowerShell dans Cloud Shell dans le [porta
 
 1. Cliquez sur le bouton **Cloud Shell** dans la barre de navigation supérieure du portail Azure
 
-   ![](media/quickstart-powershell/shell-icon.png)
+   ![Capture d’écran montrant comment démarrer Azure Cloud Shell à partir du portail Azure.](media/quickstart-powershell/shell-icon.png)
 
 2. Sélectionnez l’environnement PowerShell à partir de la liste déroulante pour basculer vers le lecteur Azure`(Azure:)`
 
-   ![](media/quickstart-powershell/environment-ps.png)
+   ![Capture d’écran montrant comment sélectionner l’environnement PowerShell pour Azure Cloud Shell.](media/quickstart-powershell/environment-ps.png)
 
 ## <a name="run-powershell-commands"></a>Exécuter des commandes PowerShell
 
@@ -261,7 +261,7 @@ Pour vous authentifier auprès des serveurs ou machines virtuelles à l’aide d
 
 ### <a name="using-ssh"></a>Utilisation de SSH
 
-Suivez les instructions fournies [ici](https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-powershell) pour créer une configuration de machine virtuelle à l'aide de cmdlets Azure PowerShell.
+Suivez les instructions fournies [ici](../virtual-machines/linux/quick-create-powershell.md) pour créer une configuration de machine virtuelle à l'aide de cmdlets Azure PowerShell.
 Avant d’appeler `New-AzVM` pour lancer le déploiement, ajoutez la clé publique SSH à la configuration de machine virtuelle.
 La machine virtuelle créée contient la clé publique à l’emplacement `~\.ssh\authorized_keys` ; vous pouvez ainsi ouvrir une session SSH sur la machine virtuelle sans recourir à des informations d’identification.
 
@@ -345,6 +345,6 @@ Entrez `exit` pour mettre fin à la session.
 [bashqs]:quickstart.md
 [gallery]:https://www.powershellgallery.com/
 [customex]:https://docs.microsoft.com/azure/virtual-machines/windows/extensions-customscript
-[profile]: https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.core/about/about_profiles
-[azmount]: https://docs.microsoft.com/azure/storage/files/storage-how-to-use-files-windows
+[profile]: /powershell/module/microsoft.powershell.core/about/about_profiles
+[azmount]: ../storage/files/storage-how-to-use-files-windows.md
 [githubtoken]: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/

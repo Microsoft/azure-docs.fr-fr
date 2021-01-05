@@ -1,0 +1,50 @@
+- name: Documentation Azure Resource Mover
+  href: index.yml
+- name: Vue d’ensemble
+  items:
+    - name: À propos d’Azure Resource Mover
+      href: overview.md
+    - name: Sélectionner un outil pour déplacer des ressources
+      href: select-move-tool.md
+    - name: Questions courantes
+      href: common-questions.md
+- name: Tutoriels
+  items:
+    - name: Déplacer des machines virtuelles Azure vers une autre région
+      href: tutorial-move-region-virtual-machines.md
+    - name: Déplacer des ressources SQL vers une autre région
+      href: tutorial-move-region-sql.md
+- name: Concepts
+  items:
+    - name: Vue d’ensemble du déplacement
+      href: about-move-process.md
+    - name: Support - Déplacer des machines virtuelles Azure d’une région à une autre
+      href: support-matrix-move-region-azure-vm.md
+    - name: Support - Déplacer Azure SQL d’une région à une autre
+      href: support-matrix-move-region-sql.md
+- name: Guides pratiques
+  items:
+    - name: Passer d’une région à l’autre
+      items:
+        - name: Passer d’une région à l’autre avec PowerShell
+          href: move-region-powershell.md
+        - name: Déplacer des machines virtuelles Azure vers des zones de disponibilité
+          href: move-region-availability-zone.md
+        - name: Passer d’une région à l’autre (à partir d’un groupe de ressources)
+          href: move-region-within-resource-group.md
+    - name: Gérer les déplacements de régions
+      items:
+        - name: Modifier les paramètres de destination
+          href: modify-target-settings.md
+        - name: Supprimer des ressources d’une collection de déplacements
+          href: remove-move-resources.md
+        - name: Gérer les ressources créées pendant le déplacement
+          href: manage-resources-created-move-process.md
+- name: Ressources
+  items:
+    - name: Migration dans le Framework d’adoption du cloud
+      href: /azure/cloud-adoption-framework/migrate/
+    - name: Modèle Resource Manager
+      href: /azure/templates/microsoft.migrate/allversions
+    - name: Feuille de route Azure
+      href: 'https://azure.microsoft.com/roadmap/'

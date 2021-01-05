@@ -1,22 +1,19 @@
 ---
-title: 'Script PowerShell : Créer une invitation Azure Data Share | Microsoft Docs'
+title: 'Script PowerShell : Créer une invitation Azure Data Share'
 description: Ce script PowerShell envoie une invitation de partage de données.
-services: data-share
 author: joannapea
 ms.service: data-share
-ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 07/07/2019
 ms.author: joanpo
-ms.openlocfilehash: 9fd8d6428e94007002d524d9ade99f6b368b8201
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f65d081e724206c1c64ad08189d1b620bbb4f2c
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70307233"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221330"
 ---
-# <a name="use-powershell-to-monitor-the-usage-of-a-sent-data-share"></a>Utiliser PowerShell pour surveiller l’utilisation d’un partage de données envoyé
+# <a name="use-a-powershell-script-to-monitor-the-usage-of-a-sent-data-share"></a>Utiliser un script PowerShell pour surveiller l’utilisation d’un partage de données envoyé
 
 Ce script PowerShell crée une invitation de partage de données.
 
@@ -42,11 +39,11 @@ Ce script utilise les commandes suivantes :
 
 | Commande | Notes |
 |---|---|
-| [New-AzDataShareInvitation](/powershell/module/az.datashare/new-azdatashareinvitation?view=azps-2.6.0) | Créez une invitation Data Share. |
+| [New-AzDataShareInvitation](/powershell/module/az.datashare/new-azdatashareinvitation) | Créez une invitation Data Share. |
 |||
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).
 
 Des exemples supplémentaires de scripts PowerShell pour Azure Data Share sont à votre disposition dans [Exemples PowerShell pour Azure Data Share](../../samples-powershell.md).

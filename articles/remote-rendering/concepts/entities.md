@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/03/2020
 ms.topic: conceptual
-ms.openlocfilehash: 7981a28db23ab8c0aed05013dd260ffd97a11c07
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: bfcfa4c5ed57489c56ebf845d238198944150a96
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758722"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202886"
 ---
 # <a name="entities"></a>Entités
 
@@ -20,11 +21,38 @@ Une *entité* représente un objet déplaçable dans l’espace et constitue le 
 
 Les entités ont une transformation définie par une position, une rotation et une échelle. En soi, les entités n’ont pas de fonctionnalité observable. Au lieu de cela, leur comportement est ajouté au travers de composants attachés à des entités. Par exemple, l’attachement du composant [CutPlaneComponent](../overview/features/cut-planes.md) crée un plan de coupe à la position de l’entité.
 
-L’aspect le plus important de l’entité elle-même est la hiérarchie et la transformation hiérarchique qui en résulte. Par exemple, quand plusieurs entités sont jointes en tant qu’enfants à une entité parente partagée, toutes ces entités peuvent être déplacées, pivotées et mises à l’échelle en modifiant la transformation de l’entité parente.
+L’aspect le plus important de l’entité elle-même est la hiérarchie et la transformation hiérarchique qui en résulte. Par exemple, quand plusieurs entités sont jointes en tant qu’enfants à une entité parente partagée, toutes ces entités peuvent être déplacées, pivotées et mises à l’échelle en modifiant la transformation de l’entité parente. De même, l’état `enabled` de l’entité peut être utilisé pour désactiver la visibilité et les réponses aux ray casts pour un sous-graphique complet de la hiérarchie.
 
 Une entité est la propriété exclusive de son entité parente. Cela signifie que, quand celle-ci est détruite à l’aide de la commande `Entity.Destroy()`, ses entités enfants et tous les composants [connectés](components.md) le sont également. Ainsi, la suppression d’un modèle de la scène s’effectue en appelant `Destroy` sur le nœud racine d’un modèle retourné par la commande `AzureSession.Actions.LoadModelAsync()` ou sa variante SAP `AzureSession.Actions.LoadModelFromSASAsync()`.
 
 Des entités sont créées quand le serveur charge du contenu ou quand l’utilisateur souhaite ajouter un objet à la scène. Par exemple, si un utilisateur souhaite ajouter un plan de coupe pour visualiser l’intérieur d’un maillage, l’utilisateur peut créer une entité dans laquelle le plan doit exister, puis y ajouter le composant plan de coupe.
+
+## <a name="create-an-entity"></a>Créer une entité
+
+Pour ajouter une nouvelle entité à la scène, par exemple, afin de la transmettre en tant qu’objet racine pour le chargement de modèles ou d’y joindre des composants, utilisez le code suivant :
+
+```cs
+Entity CreateNewEntity(AzureSession session)
+{
+    Entity entity = session.Actions.CreateEntity();
+    entity.Position = new LocalPosition(1, 2, 3);
+    return entity;
+}
+```
+
+```cpp
+ApiHandle<Entity> CreateNewEntity(ApiHandle<AzureSession> session)
+{
+    ApiHandle<Entity> entity(nullptr);
+    if (auto entityRes = session->Actions()->CreateEntity())
+    {
+        entity = entityRes.value();
+        entity->SetPosition(Double3{ 1, 2, 3 });
+        return entity;
+    }
+    return entity;
+}
+```
 
 ## <a name="query-functions"></a>Fonctions de requête
 
@@ -45,7 +73,7 @@ CutPlaneComponent cutplane = entity.FindComponentOfType<CutPlaneComponent>();
 ApiHandle<CutPlaneComponent> cutplane = entity->FindComponentOfType(ObjectType::CutPlaneComponent)->as<CutPlaneComponent>();
 
 // or alternatively:
-ApiHandle<CutPlaneComponent> cutplane = *entity->FindComponentOfType<CutPlaneComponent>();
+ApiHandle<CutPlaneComponent> cutplane = entity->FindComponentOfType<CutPlaneComponent>();
 ```
 
 ### <a name="querying-transforms"></a>Interrogation de transformations
@@ -63,10 +91,9 @@ Quaternion rotation = entity.Rotation;
 
 ```cpp
 // local space transform of the entity
-Double3 translation = *entity->Position();
-Quaternion rotation = *entity->Rotation();
+Double3 translation = entity->GetPosition();
+Quaternion rotation = entity->GetRotation();
 ```
-
 
 ### <a name="querying-spatial-bounds"></a>Interrogation des limites spatiales
 
@@ -97,11 +124,11 @@ metaDataQuery.Completed += (MetadataQueryAsync query) =>
 ApiHandle<MetadataQueryAsync> metaDataQuery = *entity->QueryMetaDataAsync();
 metaDataQuery->Completed([](const ApiHandle<MetadataQueryAsync>& query)
     {
-        if (query->IsRanToCompletion())
+        if (query->GetIsRanToCompletion())
         {
-            ApiHandle<ObjectMetaData> metaData = *query->Result();
+            ApiHandle<ObjectMetaData> metaData = query->GetResult();
             ApiHandle<ObjectMetaDataEntry> entry = *metaData->GetMetadataByName("MyInt64Value");
-            int64_t intValue = *entry->AsInt64();
+            int64_t intValue = *entry->GetAsInt64();
 
             // ...
         }
@@ -109,6 +136,13 @@ metaDataQuery->Completed([](const ApiHandle<MetadataQueryAsync>& query)
 ```
 
 La requête fonctionne même si l’objet ne contient pas de métadonnées.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [Entity, classe C#](/dotnet/api/microsoft.azure.remoterendering.entity)
+* [RemoteManager.CreateEntity(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.createentity)
+* [Entity, classe C++](/cpp/api/remote-rendering/entity)
+* [RemoteManager::CreateEntity(), C++](/cpp/api/remote-rendering/remotemanager#createentity)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

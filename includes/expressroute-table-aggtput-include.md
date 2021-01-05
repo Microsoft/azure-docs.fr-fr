@@ -9,10 +9,10 @@ ms.date: 12/05/2019
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 5a01bbdcae66e7cd0acf9a1bd120916955fd8560
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "74894393"
 ---
 |  | **Mégabits par seconde** | **Paquets par seconde.** | **Connexions par seconde** | **Passerelle VPN et ExpressRoute coexistants** | **FastPath** |

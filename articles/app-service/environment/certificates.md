@@ -7,16 +7,16 @@ ms.topic: article
 ms.date: 08/29/2018
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: dffa9571706c067834e47a656ec1d47cb884fb48
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 306445e26e5b236b49273b9ab8888ecc610bc075
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82128706"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88962041"
 ---
 # <a name="certificates-and-the-app-service-environment"></a>Certificats et l’environnement App Service 
 
-L’environnement ASE (App Service Environment) est un déploiement du service Azure App Service qui s’exécute dans votre réseau virtuel Azure (VNet). Il peut être déployé avec un point de terminaison d’application accessible par Internet ou un point de terminaison d’application qui se trouve dans votre réseau virtuel. Si vous déployez l’environnement ASE avec un point de terminaison accessible par Internet, ce déploiement est appelé ASE externe. Si vous déployez l’environnement ASE avec un point de terminaison de votre réseau virtuel, ce déploiement est appelé ASE ILB. Vous pouvez en savoir plus sur l’environnement ASE ILB dans le document [Créer et utiliser un équilibreur de charge interne avec un environnement App Service](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase).
+L’environnement ASE (App Service Environment) est un déploiement du service Azure App Service qui s’exécute dans votre réseau virtuel Azure (VNet). Il peut être déployé avec un point de terminaison d’application accessible par Internet ou un point de terminaison d’application qui se trouve dans votre réseau virtuel. Si vous déployez l’environnement ASE avec un point de terminaison accessible par Internet, ce déploiement est appelé ASE externe. Si vous déployez l’environnement ASE avec un point de terminaison de votre réseau virtuel, ce déploiement est appelé ASE ILB. Vous pouvez en savoir plus sur l’environnement ASE ILB dans le document [Créer et utiliser un équilibreur de charge interne avec un environnement App Service](./create-ilb-ase.md).
 
 L’environnement ASE est un système monolocataire. De ce fait, il y a des fonctionnalités qui sont disponibles uniquement avec un environnement ASE et qui ne le sont pas dans le service App Service multilocataire. 
 
@@ -41,13 +41,16 @@ Vous ne pouvez pas créer l’environnement ASE et charger le certificat en une 
 
 Si vous souhaitez créer rapidement un certificat auto-signé pour le test, vous pouvez utiliser le code suivant de PowerShell :
 
-    $certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com"
+```azurepowershell-interactive
+$certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com"
 
-    $certThumbprint = "cert:\localMachine\my\" + $certificate.Thumbprint
-    $password = ConvertTo-SecureString -String "CHANGETHISPASSWORD" -Force -AsPlainText
+$certThumbprint = "cert:\localMachine\my\" + $certificate.Thumbprint
+$password = ConvertTo-SecureString -String "CHANGETHISPASSWORD" -Force -AsPlainText
 
-    $fileName = "exportedcert.pfx"
-    Export-PfxCertificate -cert $certThumbprint -FilePath $fileName -Password $password     
+$fileName = "exportedcert.pfx"
+Export-PfxCertificate -cert $certThumbprint -FilePath $fileName -Password $password
+```
+
 Lors de la création d’un certificat auto-signé, vous devrez vous assurer que le format du nom de l’objet est le suivant : CN = {ASE_NAME_HERE} _InternalLoadBalancingASE.
 
 ## <a name="application-certificates"></a>Certificats d’application 
@@ -80,15 +83,18 @@ Pour charger le certificat sur votre application dans votre environnement ASE :
 
 Le certificat est accessible par toutes les applications du même plan App Service que l’application qui a configuré ce paramètre. Si vous avez besoin qu’il soit disponible pour les applications d’un autre plan App Service, vous devez répéter l’opération Paramètres de l’application dans une application du plan App Service concerné. Pour vérifier que le certificat est défini, accédez à la console Kudu et émettez la commande suivante dans la console de débogage de PowerShell :
 
-    dir cert:\localmachine\root
+```azurepowershell-interactive
+dir cert:\localmachine\root
+```
 
 Pour effectuer le test, vous pouvez créer un certificat auto-signé et générer un fichier *.cer* avec le code PowerShell suivant : 
 
-    $certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com"
+```azurepowershell-interactive
+$certificate = New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "*.internal-contoso.com","*.scm.internal-contoso.com"
 
-    $certThumbprint = "cert:\localMachine\my\" + $certificate.Thumbprint
-    $password = ConvertTo-SecureString -String "CHANGETHISPASSWORD" -Force -AsPlainText
+$certThumbprint = "cert:\localMachine\my\" + $certificate.Thumbprint
+$password = ConvertTo-SecureString -String "CHANGETHISPASSWORD" -Force -AsPlainText
 
-    $fileName = "exportedcert.cer"
-    export-certificate -Cert $certThumbprint -FilePath $fileName -Type CERT
-
+$fileName = "exportedcert.cer"
+export-certificate -Cert $certThumbprint -FilePath $fileName -Type CERT
+```

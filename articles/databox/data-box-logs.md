@@ -1,29 +1,29 @@
 ---
-title: Suivi et journalisation des événements Azure Data Box, Azure Data Box Heavy | Microsoft Docs
-description: Décrit comment suivre et journaliser les événements à divers stades de votre commande Azure Data Box et Azure Data Box Heavy.
+title: Suivi et journalisation des événements Azure Data Box, Azure Data Box Heavy pour les ordres d’importation | Microsoft Docs
+description: Décrit comment suivre et journaliser les événements à divers stades de votre ordre d’importation Azure Data Box et Azure Data Box Heavy.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: article
-ms.date: 08/08/2019
+ms.date: 07/10/2020
 ms.author: alkohli
-ms.openlocfilehash: 74d38af4a64a184b26bd6ba1105db0d2530d8ba6
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: a9304936f746b82b59550d62e8b60a9e0035d188
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676406"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147928"
 ---
-# <a name="tracking-and-event-logging-for-your-azure-data-box-and-azure-data-box-heavy"></a>Suivi et journalisation des événements de votre Azure Data Box et Azure Data Box Heavy
+# <a name="tracking-and-event-logging-for-your-azure-data-box-and-azure-data-box-heavy-import-order"></a>Suivi et journalisation des événements de vos ordres d’importation Azure Data Box et Azure Data Box Heavy
 
-Une commande Data Box ou Data Box Heavy passe par les étapes suivantes : commande, configuration, copie des données, retour, chargement sur Azure et vérification, puis effacement des données. Lors de chaque étape de la commande, vous pouvez effectuer plusieurs actions pour contrôler l’accès à la commande, auditer les événements, suivre la commande et interpréter les différents journaux générés.
+Un ordre d’importation Data Box ou Data Box Heavy passe par les étapes suivantes : ordre, configuration, copie des données, retour, chargement sur Azure et vérification, puis effacement des données. Lors de chaque étape de la commande, vous pouvez effectuer plusieurs actions pour contrôler l’accès à la commande, auditer les événements, suivre la commande et interpréter les différents journaux générés.
 
-Le tableau suivant récapitule les étapes de la commande Data Box ou Data Box Heavy ainsi que les outils disponibles pour effectuer le suivi et l’audit de la commande à chaque étape.
+Le tableau suivant récapitule les étapes de l’ordre d’importation Data Box ou Data Box Heavy ainsi que les outils disponibles pour effectuer le suivi et l’audit de l’ordre à chaque étape.
 
-| Étape de la commande Data Box       | Outil de suivi et d’audit                                                                        |
+| Étape de l’ordre d’importation Data Box       | Outil de suivi et d’audit                                                                        |
 |----------------------------|------------------------------------------------------------------------------------------------|
-| Créer la commande               | [Configurer le contrôle d’accès sur la commande via RBAC](#set-up-access-control-on-the-order)                                                    |
+| Créer la commande               | [Configurer le contrôle d’accès sur la commande via Azure RBAC](#set-up-access-control-on-the-order)                                                    |
 | Commande traitée            | [Suivre la commande](#track-the-order) via <ul><li> Portail Azure </li><li> Site web du transporteur </li><li>Notifications par e-mail</ul> |
 | Configurer l’appareil              | Accès aux informations d’identification de l’appareil dans les [journaux d’activité](#query-activity-logs-during-setup)                                              |
 | Copie des données vers l’appareil        | [Consulter les fichiers *error.xml*](#view-error-log-during-data-copy) pour la copie des données                                                             |
@@ -31,23 +31,23 @@ Le tableau suivant récapitule les étapes de la commande Data Box ou Data Box H
 | Chargement des données dans Azure       | [Passer en revue les journaux de copie](#review-copy-log-during-upload-to-azure) à la recherche des erreurs survenues pendant le chargement de données dans le centre de données Azure                         |
 | Effacement des données de l’appareil   | [Afficher les journaux d’activité de chaîne de responsabilité](#get-chain-of-custody-logs-after-data-erasure) qui incluent les journaux d’audit et l’historique des commandes                |
 
-Cet article décrit en détail les différents mécanismes ou outils disponibles pour effectuer le suivi et l’audit d’une commande Data Box ou Data Box Heavy. Les informations de cet article s’appliquent à Data Box et à Data Box Heavy. Dans les sections suivantes, toutes les références à Data Box s’appliquent également à Data Box Heavy.
+Cet article décrit en détail les différents mécanismes ou outils disponibles pour effectuer le suivi et l’audit d’un ordre d’importation Data Box ou Data Box Heavy. Les informations de cet article s’appliquent aux ordres d’importation à la fois de Data Box et de Data Box Heavy. Dans les sections suivantes, toutes les références à Data Box s’appliquent également à Data Box Heavy.
 
 ## <a name="set-up-access-control-on-the-order"></a>Configurer le contrôle d’accès sur la commande
 
-Vous pouvez contrôler qui peut accéder à votre commande lors de sa création. Configurez des rôles RBAC (contrôle d’accès en fonction du rôle) de diverses étendues pour contrôler l’accès à la commande Data Box. Un rôle RBAC détermine le type d’accès accordé : lecture-écriture, lecture seule, lecture-écriture sur sous-ensemble d’opérations.
+Vous pouvez contrôler qui peut accéder à votre commande lors de sa création. Configurez des rôles Azure d’étendues différentes pour contrôler l’accès à la commande Data Box. Un rôle Azure détermine le type d’accès accordé : lecture-écriture, lecture seule, lecture-écriture sur une partie des opérations.
 
 Les deux rôles qui peuvent être définis pour le service Azure Data Box sont les suivants :
 
 - **Lecteur Data Box** : bénéficie d’un accès en lecture seule aux commandes, tel que défini par l’étendue. Il peut uniquement afficher les détails d’une commande. Il ne peut pas accéder aux autres informations associées aux comptes de stockage ni modifier les détails de la commande comme l’adresse, etc.
-- **Contributeur Data Box** : peut uniquement créer une commande pour transférer des données vers un compte de stockage donné *s’il dispose déjà d’un accès en écriture à un compte de stockage*. S’il n’a pas accès à un compte de stockage, il ne peut même pas créer de commande Data Box pour copier des données sur ce compte. Ce rôle ne définit aucune autorisation liée aux comptes de stockage et n’octroie pas d’accès à ces derniers.  
+- **Contributeur Data Box** : peut uniquement créer une commande pour transférer des données vers un compte de stockage donné *s’il dispose déjà d’un accès en écriture à un compte de stockage* . S’il n’a pas accès à un compte de stockage, il ne peut même pas créer de commande Data Box pour copier des données sur ce compte. Ce rôle ne définit aucune autorisation liée aux comptes de stockage et n’octroie pas d’accès à ces derniers.  
 
 Pour restreindre l’accès à une commande, vous pouvez :
 
 - Affecter un rôle au niveau d’une commande. L’utilisateur dispose uniquement des autorisations définies par son rôle pour interagir avec cette commande Data Box spécifique, et rien d’autre.
 - Affectez un rôle au niveau du groupe de ressources. L’utilisateur a accès à toutes les commandes Data Box au sein d’un groupe de ressources.
 
-Pour plus d’informations sur l’utilisation suggérée des rôles RBAC, consultez [Meilleures pratiques pour Azure RBAC](../role-based-access-control/best-practices.md).
+Pour plus d’informations sur l’utilisation suggérée d’Azure RBAC, consultez [Meilleures pratiques pour Azure RBAC](../role-based-access-control/best-practices.md).
 
 ## <a name="track-the-order"></a>Suivre la commande
 
@@ -64,7 +64,7 @@ Vous pouvez suivre votre commande via le Portail Azure et via le site web du tra
 
 - Votre Data Box arrive dans vos locaux dans un état verrouillé. Vous pouvez utiliser les informations d’identification de l’appareil disponibles dans la section du Portail Azure concernant votre commande.  
 
-    Lors de la configuration de Data Box, vous aurez peut-être besoin de savoir qui a eu accès aux informations d’identification de l’appareil. Pour déterminer qui a accédé au panneau **Informations d’identification de l’appareil**, vous pouvez interroger les journaux d’activité.  Toute action qui implique l’accès au panneau **Détails sur l’appareil > Informations d’identification** est enregistrée dans les journaux d’activité en tant qu’action `ListCredentials`.
+    Lors de la configuration de Data Box, vous aurez peut-être besoin de savoir qui a eu accès aux informations d’identification de l’appareil. Pour déterminer qui a accédé au panneau **Informations d’identification de l’appareil** , vous pouvez interroger les journaux d’activité.  Toute action qui implique l’accès au panneau **Détails sur l’appareil > Informations d’identification** est enregistrée dans les journaux d’activité en tant qu’action `ListCredentials`.
 
     ![Interroger les journaux d’activité](media/data-box-logs/query-activity-log-1.png)
 
@@ -76,7 +76,7 @@ Lors de la copie des données dans Data Box ou Data Box Heavy, un fichier d’er
 
 ### <a name="errorxml-file"></a>Fichier Error.xml
 
-Assurez-vous que les travaux de copie ont été accomplis sans erreurs. Si des erreurs se sont produites durant le processus de copie, téléchargez les journaux à partir de la page **Connexion et copie**.
+Assurez-vous que les travaux de copie ont été accomplis sans erreurs. Si des erreurs se sont produites durant le processus de copie, téléchargez les journaux à partir de la page **Connexion et copie** .
 
 - Si vous avez copié un fichier qui n’est pas de 512 octets alignés dans un dossier de disque managé sur votre Data Box, celui-ci n’est pas chargé en tant qu’objet blob de pages sur votre compte de stockage intermédiaire. Vous verrez une erreur dans les journaux. Supprimez le fichier et copiez un fichier de 512 octets alignés.
 - Si vous avez copié un fichier de disque dur virtuel (VHDX), VHD dynamique ou VHD de différenciation (ces fichiers ne sont pas pris en charge), vous verrez une erreur dans les journaux.
@@ -354,13 +354,13 @@ The authentication information fields provide detailed information about this sp
 
 ## <a name="download-order-history"></a>Télécharger l’historique des commandes
 
-L’historique des commandes est disponible dans le Portail Azure. Si la commande est terminée et que le nettoyage de l’appareil (l’effacement des données des disques) est terminé lui aussi, accédez à votre commande d’appareil, puis à **Détails de la commande**. L’option **Download order history** (Télécharger l’historique des commandes) est disponible. Pour plus d’informations, consultez [Télécharger l’historique des commandes](data-box-portal-admin.md#download-order-history).
+L’historique des commandes est disponible dans le Portail Azure. Si la commande est terminée et que le nettoyage de l’appareil (l’effacement des données des disques) est terminé lui aussi, accédez à votre commande d’appareil, puis à **Détails de la commande** . L’option **Download order history** (Télécharger l’historique des commandes) est disponible. Pour plus d’informations, consultez [Télécharger l’historique des commandes](data-box-portal-admin.md#download-order-history).
 
 En faisant défiler l’historique des commandes, vous verrez les éléments suivants :
 
 - Informations de suivi du transporteur pour votre appareil.
-- Événements avec activité *SecureErase*. Ces événements correspondent à l’effacement des données sur le disque.
-- Liens vers les journaux Data Box. Les chemins des *journaux d’audit*, des *journaux de copie* et des fichiers de *nomenclature* sont présentés.
+- Événements avec activité *SecureErase* . Ces événements correspondent à l’effacement des données sur le disque.
+- Liens vers les journaux Data Box. Les chemins des *journaux d’audit* , des *journaux de copie* et des fichiers de *nomenclature* sont présentés.
 
 Voici un exemple du journal d’historique des commandes disponible depuis le Portail Azure :
 

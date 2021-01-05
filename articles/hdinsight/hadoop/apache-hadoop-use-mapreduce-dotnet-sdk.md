@@ -5,21 +5,21 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 01/15/2020
-ms.openlocfilehash: e50510f2420d69be37af584a2648a794e1561ee3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ddb14c321962c65d09be420d8da15f1e547aa282
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76157047"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92489538"
 ---
 # <a name="run-mapreduce-jobs-using-hdinsight-net-sdk"></a>Exécuter des travaux MapReduce avec le Kit de développement logiciel (SDK) .NET HDInsight
 
 [!INCLUDE [mapreduce-selector](../../../includes/hdinsight-selector-use-mapreduce.md)]
 
-Apprenez à envoyer des travaux MapReduce à l’aide du Kit de développement logiciel (SDK) .NET HDInsight. Les clusters HDInsight comportent un fichier jar qui contient des exemples MapReduce. Le fichier jar est `/example/jars/hadoop-mapreduce-examples.jar`.  Un des exemples est **wordcount**. Vous développez une application de console C# pour envoyer une tâche wordcount.  Le travail lit le fichier `/example/data/gutenberg/davinci.txt` et renvoie les résultats vers `/example/data/davinciwordcount`.  Si vous souhaitez réexécuter l’application, vous devez nettoyer le dossier de sortie.
+Apprenez à envoyer des travaux MapReduce à l’aide du Kit de développement logiciel (SDK) .NET HDInsight. Les clusters HDInsight comportent un fichier jar qui contient des exemples MapReduce. Le fichier jar est `/example/jars/hadoop-mapreduce-examples.jar`.  Un des exemples est **wordcount** . Vous développez une application de console C# pour envoyer une tâche wordcount.  Le travail lit le fichier `/example/data/gutenberg/davinci.txt` et renvoie les résultats vers `/example/data/davinciwordcount`.  Si vous souhaitez réexécuter l’application, vous devez nettoyer le dossier de sortie.
 
 > [!NOTE]  
 > Les étapes décrites dans cet article doivent être effectuées à partir d'un client Windows. Pour plus d’informations sur l’utilisation d’un client Linux, OS X ou Unix pour utiliser Hive, utilisez le sélecteur d’onglet en haut de l’article.
@@ -36,13 +36,13 @@ Le kit SDK HDInsight .NET fournit des bibliothèques de client .NET, ce qui faci
 
 1. Démarrez Visual Studio et créez une application console C#.
 
-1. Accédez à **Outils** > **Gestionnaire de package NuGet** > **Console du gestionnaire de package**, puis entrez la commande suivante :
+1. Accédez à **Outils** > **Gestionnaire de package NuGet** > **Console du gestionnaire de package** , puis entrez la commande suivante :
 
     ```   
     Install-Package Microsoft.Azure.Management.HDInsight.Job
     ```
 
-1. Copiez le code ci-dessous dans **Program.cs**. Modifiez ensuite le code en définissant les valeurs pour `existingClusterName`, `existingClusterPassword`, `defaultStorageAccountName`, `defaultStorageAccountKey` et `defaultStorageContainerName`.
+1. Copiez le code ci-dessous dans **Program.cs** . Modifiez ensuite le code en définissant les valeurs pour `existingClusterName`, `existingClusterPassword`, `defaultStorageAccountName`, `defaultStorageAccountKey` et `defaultStorageContainerName`.
 
     ```csharp
     using System.Collections.Generic;
@@ -174,5 +174,5 @@ Cet article vous a présenté différentes méthodes pour créer un cluster HDIn
 * Pour envoyer un travail Hive, consultez [Exécuter des requêtes Apache Hive avec SDK .NET HDInsight](apache-hadoop-use-hive-dotnet-sdk.md).
 * Pour créer des clusters HDInsight, consultez [Créer des clusters Apache Hadoop Linux dans HDInsight](../hdinsight-hadoop-provision-linux-clusters.md).
 * Pour gérer des clusters HDInsight, consultez [Gérer des clusters Apache Hadoop Linux dans HDInsight](../hdinsight-administer-use-portal-linux.md).
-* Pour découvrir le Kit de développement logiciel (SDK) .NET HDInsight, consultez [Référence du Kit de développement logiciel (SDK) .NET de HDInsight](https://docs.microsoft.com/dotnet/api/overview/azure/hdinsight).
+* Pour découvrir le Kit de développement logiciel (SDK) .NET HDInsight, consultez [Référence du Kit de développement logiciel (SDK) .NET de HDInsight](/dotnet/api/overview/azure/hdinsight).
 * Pour l’authentification non interactive sur Azure, consultez [Créer des applications HDInsight .NET d’authentification non interactive](../hdinsight-create-non-interactive-authentication-dotnet-applications.md).

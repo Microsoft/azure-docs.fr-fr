@@ -1,28 +1,29 @@
 ---
-title: Mappages d’espaces de travail Azure Automation et Log Analytics
-description: Cet article décrit les mappages autorisés entre un compte Automation et un espace de travail Log Analytics pour la prise en charge d’une solution
+title: Régions prises en charge pour l’espace de travail Log Analytics lié
+description: Cet article décrit les mappages des régions prises en charge entre un compte Automation et un espace de travail Log Analytics en relation avec certaines fonctionnalités d’Azure Automation.
+ms.date: 12/15/2020
 services: automation
-ms.service: automation
-ms.subservice: process-automation
-author: mgoedtel
-ms.author: magoedte
-ms.date: 04/23/2020
 ms.topic: conceptual
-manager: carmonm
-ms.openlocfilehash: 607cebca3e6e8ddd95900ecdbd7041e5f7bb50cc
-ms.sourcegitcommit: fad3aaac5af8c1b3f2ec26f75a8f06e8692c94ed
+ms.custom: references_regions
+ms.openlocfilehash: 95537bd54ecb476055608c89ac68a46d410288b6
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82165771"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590883"
 ---
-# <a name="workspace-mappings"></a>Mappages d’espaces de travail
+# <a name="supported-regions-for-linked-log-analytics-workspace"></a>Régions prises en charge pour l’espace de travail Log Analytics lié
 
-Lorsque vous activez les solutions Update Management, Change Tracking et Inventory, ou encore Start/Stop VMs during off-hours, seules certaines régions sont prises en charge pour la liaison entre un espace de travail Log Analytics et un compte Automation dans votre abonnement. Ce mappage s’applique uniquement au compte Automation et à l’espace de travail Log Analytics. L’espace de travail Log Analytics et le compte Automation doivent se trouver dans le même abonnement, mais ils peuvent se trouver dans des groupes de ressources différents déployés dans la même région.
+Dans Azure Automation, vous pouvez activer les fonctionnalités Update Management, Change Tracking and Inventory et Start/Stop VMs during off-hours pour vos serveurs et machines virtuelles. Ces fonctionnalités dépendent d’un espace de travail Log Analytics et nécessitent donc de lier l’espace de travail à un compte Automation. Toutefois, seules certaines régions sont prises en charge pour les lier ensemble. En général, le mappage n’est *pas* applicable si vous envisagez de lier un compte Automation à un espace de travail pour lequel ces fonctionnalités ne sont pas activées.
+
+Cet article fournit les mappages pris en charge afin d’activer et d’utiliser correctement ces fonctionnalités dans votre compte Automation.
 
 Pour plus d’informations, consultez [Espace de travail Log Analytics et compte Automation](../../azure-monitor/insights/solutions.md#log-analytics-workspace-and-automation-account).
 
 ## <a name="supported-mappings"></a>Mappages pris en charge
+
+> [!NOTE]
+> Comme indiqué dans le tableau suivant, un seul mappage peut exister entre Log Analytics et Azure Automation.
 
 Le tableau suivant renseigne sur les mappages pris en charge :
 
@@ -30,46 +31,57 @@ Le tableau suivant renseigne sur les mappages pris en charge :
 |---|---|
 |**États-Unis**||
 |EastUS<sup>1</sup>|USAEst2|
+|USAEst2<sup>2</sup>|USAEst|
 |WestUS2|WestUS2|
-|WestCentralUS<sup>2</sup>|WestCentralUS<sup>2</sup>|
+|SouthCentralUS|SouthCentralUS|
+|USACentreOuest|USACentreOuest|
 |**Canada**||
 |CanadaCentral|CanadaCentral|
 |**Asie-Pacifique**||
 |AustralieSudEst|AustralieSudEst|
 |AsieSudEst|AsieSudEst|
 |CentralIndia|CentralIndia|
+|ChineEst2<sup>3</sup>|ChinaEast2|
 |JaponEst|JaponEst|
 |**Europe**||
+|NorthEurope|NorthEurope|
+|FranceCentral|FranceCentral|
 |RoyaumeUniSud|RoyaumeUniSud|
 |WestEurope|WestEurope|
+|SwitzerlandNorth|SwitzerlandNorth|
 |**Gouvernement des États-Unis**||
 |USGovVirginie|USGovVirginie|
+|USGovArizona<sup>3</sup>|USGovArizona|
+
+
 
 <sup>1</sup> Le mappage EastUS entre des espaces de travail Log Analytics et des comptes Automation n’est pas un mappage exact de région à région, mais c’est le mappage correct.
 
-<sup>2</sup> En raison de restrictions de capacité, la région n’est pas disponible lors de la création de ressources. Cela inclut les espaces de travail Log Analytics et les comptes Automation. Toutefois, les ressources liées préexistantes dans la région doivent continuer à fonctionner.
+<sup>2</sup> Le mappage USAEst2 entre des espaces de travail Log Analytics et des comptes Automation n'est pas un mappage exact de région à région, mais il s'agit du mappage qui convient.
 
-## <a name="unlink-workspace"></a>Supprimer le lien de votre espace de travail
+<sup>3</sup> Dans cette région, seul Update Management est pris en charge ; d'autres fonctionnalités comme Suivi des modifications et inventaire ne sont pas disponibles pour l'instant.
 
-Si vous ne souhaitez plus intégrer votre compte Automation à un espace de travail Log Analytics, vous pouvez dissocier votre compte directement dans le Portail Azure. Avant de continuer, vous devez supprimer les solutions Update Management, Change Tracking et Inventory ainsi que Start/Stop VMs during off-hours, si vous les utilisez. Si vous ne les supprimez pas, vous ne pouvez pas terminer l’opération de dissociation. Examinez l’article pour chaque solution que vous activez afin de comprendre les étapes nécessaires à sa suppression.
+## <a name="unlink-a-workspace"></a>Supprimer la liaison d’un espace de travail
 
-Après avoir supprimé ces solutions, vous pouvez suivre les étapes suivantes pour supprimer le lien de votre compte Automation.
+Si vous ne souhaitez plus intégrer votre compte Automation à un espace de travail Log Analytics, vous pouvez dissocier votre compte directement dans le Portail Azure. Avant de continuer, vous devez [supprimer](move-account.md#remove-features) les fonctionnalités Update Management, Change Tracking and Inventory ainsi que Start/Stop VMs during off-hours, si vous les utilisez. Si vous ne les supprimez pas, vous ne pouvez pas terminer l’opération de dissociation.
+
+Une fois les fonctionnalités supprimées, vous pouvez suivre les étapes ci-dessous pour supprimer la liaison de votre compte Automation.
 
 > [!NOTE]
-> Certaines solutions, dont les versions antérieures de la solution de supervision SQL Azure, ont peut-être créé des ressources Automation et doivent également être supprimées avant de dissocier l’espace de travail.
+> Certaines fonctionnalités, dont les versions antérieures d’Azure SQL Monitoring, ont peut-être créé des ressources Automation qui doivent également être supprimées avant de dissocier l’espace de travail.
 
 1. À partir du Portail Azure, ouvrez votre compte Automation. Sur la page de votre compte Automation, sélectionnez **Espace de travail lié** sous **Ressources connexes**.
 
-2. Dans la page Dissocier l’espace de travail, cliquez sur **Dissocier l’espace de travail**. Vous recevez une invite de confirmation de la poursuite de l’opération.
+2. Dans la page Dissocier l’espace de travail, sélectionnez **Dissocier l’espace de travail**. Vous recevez une invite de confirmation de la poursuite de l’opération.
 
-3. Pour suivre la progression de la suppression du lien de votre espace de travail Log Analytics dans Azure Automation, sélectionnez **Notifications** dans le menu.
+3. Pour suivre la progression de la suppression de la liaison du compte depuis votre espace de travail Log Analytics par Azure Automation, sélectionnez **Notifications** dans le menu.
 
-4. Si vous avez utilisé la solution Update Management, vous pouvez (si vous le souhaitez) supprimer les éléments suivants qui ne sont plus nécessaires après sa suppression.
+4. Si vous avez utilisé Update Management, vous pouvez le cas échéant supprimer les éléments suivants qui ne sont plus nécessaires :
 
     * Planifications des mises à jour : chacune a un nom qui correspond à un déploiement de mise à jour que vous avez créé.
-    * Groupes Workers hybrides créés pour la solution : chacun d’eux sera nommé sur le modèle `machine1.contoso.com_9ceb8108-26c9-4051-b6b3-227600d715c8`.
+    * Groupes de Workers hybrides créés pour la fonctionnalité : chacun porte un nom similaire à `machine1.contoso.com_9ceb8108-26c9-4051-b6b3-227600d715c8`.
 
-5. Si vous avez utilisé la solution Start/Stop VMs during off-hours, vous pouvez (si vous le souhaitez) supprimer les éléments suivants qui ne sont plus nécessaires après sa suppression.
+5. Si vous avez utilisé Start/Stop VMs during off-hours, vous pouvez le cas échéant supprimer les éléments suivants qui ne sont plus nécessaires :
 
     * Start and stop VM runbook schedules (Démarrer et arrêter les planifications de Runbook de machine virtuelle)
     * Start and stop VM runbooks (Démarrer et arrêter les Runbooks de machine virtuelle)
@@ -77,18 +89,11 @@ Après avoir supprimé ces solutions, vous pouvez suivre les étapes suivantes p
 
 Vous pouvez également dissocier votre espace de travail de votre compte Automation dans l’espace de travail.
 
-1. Dans l’espace de travail, sélectionnez **Compte Automation** sous **Ressources connexes**. 
+1. Dans l’espace de travail, sélectionnez **Compte Automation** sous **Ressources connexes**.
 2. Sur la page du compte Automation, sélectionnez **Dissocier le compte**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez comment intégrer les solutions Update Management, Change Tracking et Inventory :
-
-    * Depuis une [machine virtuelle](../automation-onboard-solutions-from-vm.md)
-    * Depuis votre [compte Automation](../automation-onboard-solutions-from-automation-account.md)
-    * Lorsque vous [parcourez plusieurs machines](../automation-onboard-solutions-from-browse.md)
-    * Depuis un [runbook](../automation-onboard-solutions.md)
-
-* Découvrez comment intégrer la solution Start/Stop VMs during off-hours :
-
-    * [Vue d’ensemble de la Solution Start/stop VMs during off-hours](../automation-solution-vm-management.md)
+* Découvrez Update Management dans [Vue d’ensemble de Update Management](../update-management/overview.md).
+* Découvrez Change Tracking and Inventory dans [Vue d’ensemble de Change Tracking and Inventory](../change-tracking/overview.md).
+* Découvrez Start/Stop VMs during off-hours dans [Vue d’ensemble de Start/Stop VMs during off-hours](../automation-solution-vm-management.md).

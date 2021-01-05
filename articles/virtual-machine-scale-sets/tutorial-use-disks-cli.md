@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: disks
 ms.date: 03/27/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: e50f025ebd22cbe231dcd01e277a76b0f8e9b56d
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: adaa7d1c2cf4a78a680ef4fbbec06975ceda812b
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198252"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96433494"
 ---
 # <a name="tutorial-create-and-use-disks-with-virtual-machine-scale-set-with-the-azure-cli"></a>Tutoriel : Créer et utiliser des disques avec un groupe de machines virtuelles identiques avec Azure CLI
 Les groupes de machines virtuelles identiques utilisent des disques pour stocker le système d’exploitation, les applications et les données de l’instance de machine virtuelle. Lorsque vous créez et gérez un groupe identique, il est important de choisir une taille de disque et une configuration appropriées à la charge de travail prévue. Ce didacticiel explique comment créer et gérer des disques de machine virtuelle. Ce didacticiel vous montre comment effectuer les opérations suivantes :
@@ -28,10 +28,9 @@ Les groupes de machines virtuelles identiques utilisent des disques pour stocker
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.29 ou une version ultérieure pour poursuivre la procédure décrite dans ce didacticiel. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
-
+- Cet article nécessite la version 2.0.29 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="default-azure-disks"></a>Disques Azure par défaut
 Lorsqu’un groupe identique est créé ou mis à l’échelle, deux disques sont automatiquement attachés à chaque instance de machine virtuelle.
@@ -43,12 +42,12 @@ Lorsqu’un groupe identique est créé ou mis à l’échelle, deux disques son
 ### <a name="temporary-disk-sizes"></a>Tailles du disque temporaire
 | Type | Tailles courantes | Taille maximale du disque temporaire (Gio) |
 |----|----|----|
-| [Usage général](../virtual-machines/linux/sizes-general.md) | Séries A, B et D | 1 600 |
-| [Optimisé pour le calcul](../virtual-machines/linux/sizes-compute.md) | Série F | 576 |
-| [Mémoire optimisée](../virtual-machines/linux/sizes-memory.md) | Séries D, E, G et M | 6144 |
-| [Optimisé pour le stockage](../virtual-machines/linux/sizes-storage.md) | Série L | 5630 |
-| [GPU](../virtual-machines/linux/sizes-gpu.md) | Série N | 1440 |
-| [Hautes performances](../virtual-machines/linux/sizes-hpc.md) | Séries A et H | 2000 |
+| [Usage général](../virtual-machines/sizes-general.md) | Séries A, B et D | 1 600 |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md) | Série F | 576 |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md) | Séries D, E, G et M | 6144 |
+| [Optimisé pour le stockage](../virtual-machines/sizes-storage.md) | Série L | 5630 |
+| [GPU](../virtual-machines/sizes-gpu.md) | Série N | 1440 |
+| [Hautes performances](../virtual-machines/sizes-hpc.md) | Séries A et H | 2000 |
 
 
 ## <a name="azure-data-disks"></a>Disques de données Azure
@@ -70,11 +69,13 @@ Les disques Premium reposent sur un disque SSD à faible latence et hautes perfo
 | Nb max. d'E/S par seconde par disque | 120 | 240 | 500 | 2 300 | 5 000 | 7 500 | 7 500 |
 Débit par disque | 25 Mo/s | 50 Mo/s | 100 Mo/s | 150 Mo/s | 200 Mo/s | 250 Mo/s | 250 Mo/s |
 
-Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, une machine virtuelle Standard_GS5 peut atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre max. d’E/S par seconde par machine virtuelle, consultez [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/linux/sizes.md).
+Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, une machine virtuelle Standard_GS5 peut atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre max. d’E/S par seconde par machine virtuelle, consultez [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/sizes.md).
 
 
 ## <a name="create-and-attach-disks"></a>Créer et attacher des disques
 Vous pouvez créer et attacher des disques lorsque vous créez un groupe identique, ou avec un groupe identique existant.
+
+À compter de la version `2019-07-01` de l’API, vous pouvez définir la taille du disque du système d’exploitation dans un groupe de machines virtuelles identiques avec la propriété [storageProfile.osDisk.diskSizeGb](/rest/api/compute/virtualmachinescalesets/createorupdate#virtualmachinescalesetosdisk). Après le provisionnement, il peut être nécessaire d’étendre ou de repartitionner le disque pour utiliser tout l’espace. Découvrez plus en détail [l’extension du disque ici](../virtual-machines/windows/expand-os-disk.md#expand-the-volume-within-the-os).
 
 ### <a name="attach-disks-at-scale-set-creation"></a>Attacher des disques lors de la création d’un groupe identique
 Tout d’abord, créez un groupe de ressources avec la commande [az group create](/cli/azure/group). Dans cet exemple, un groupe de ressources nommé *myResourceGroupVM* est créé dans la région *eastus*.
@@ -112,7 +113,7 @@ az vmss disk attach \
 ## <a name="prepare-the-data-disks"></a>Préparer les disques de données
 Les disques créés et attachés aux instances de machine virtuelle de votre groupe identique sont des disques bruts. Avant que vous ne puissiez les utiliser avec vos données et vos applications, les disques doivent être préparés. Pour préparer les disques, vous devez créer une partition, créer un système de fichiers, et les monter.
 
-Pour automatiser le processus sur plusieurs instances de machine virtuelle dans un groupe identique, vous pouvez utiliser l’extension de script personnalisé Azure. Cette extension peut exécuter des scripts localement sur chaque instance de machine virtuelle, par exemple pour préparer les disques de données attachés. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/linux/extensions-customscript.md).
+Pour automatiser le processus sur plusieurs instances de machine virtuelle dans un groupe identique, vous pouvez utiliser l’extension de script personnalisé Azure. Cette extension peut exécuter des scripts localement sur chaque instance de machine virtuelle, par exemple pour préparer les disques de données attachés. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/extensions/custom-script-linux.md).
 
 L’exemple suivant montre l’exécution d’un script à partir d’un exemple de référentiel GitHub sur chaque instance de machine virtuelle avec la commande [az vmss extension set](/cli/azure/vmss/extension) qui prépare tous les disques de données attachés bruts :
 

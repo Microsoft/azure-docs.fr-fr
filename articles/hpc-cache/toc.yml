@@ -8,16 +8,22 @@
   items:
     - name: Planifier l’espace de noms agrégé
       href: hpc-cache-namespace.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
     - name: Prérequis
-      href: hpc-cache-prereqs.md
+      href: hpc-cache-prerequisites.md
     - name: Créer le cache
       href: hpc-cache-create.md
     - name: Ajouter du stockage
       items:
         - name: Ajouter des cibles de stockage
           href: hpc-cache-add-storage.md
+        - name: Ajouter des chemins d’espace de noms
+          href: add-namespace-paths.md
         - name: Déplacer des données vers des cibles de stockage (si nécessaire)
           items:
             - name: Précharger un nouveau stockage d’objets blob
@@ -38,10 +44,18 @@
       href: hpc-cache-manage.md
     - name: Configurer les paramètres facultatifs
       href: configuration.md
+- name: Informations de référence
+  items:
+    - name: Azure CLI
+      href: /cli/azure/ext/hpc-cache/hpc-cache
+    - name: Azure PowerShell
+      href: /powershell/module/Az.HPCCache
 - name: Ressources
   items:
     - name: Ouverture d’un ticket de support
       href: hpc-cache-support-ticket.md
+    - name: Configurer Azure CLI pour Azure HPC Cache
+      href: az-cli-prerequisites.md
     - name: Contourner les paramètres de pare-feu de compte de stockage Blob
       href: hpc-cache-blob-firewall-fix.md
     - name: Résoudre les problèmes de création de cibles de stockage NFS
@@ -52,3 +66,5 @@
       href: customer-keys.md
     - name: Utiliser Azure NetApp Files avec Azure HPC Cache
       href: hpc-cache-netapp.md
+    - name: Vidéos
+      href: 'https://azure.microsoft.com/resources/videos/index/?service=hpc-cache'

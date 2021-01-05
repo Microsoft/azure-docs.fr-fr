@@ -1,22 +1,8 @@
 - name: Documentation sur le développement sécurisé
   href: index.yml
-- name: Exemples d’application
-  expanded: true
-  items:
-    - name: Nouveau pour sécuriser le développement
-      items:
-        - name: Application web dans un conteneur Linux
-          href: secure-web-app.md
-        - name: Application web avec Azure Active Directory
-          href: secure-aad-app.md
-    - name: Solutions conformes du secteur
-      items:
-        - name: Payment card industry
-          href: secure-pci-web-app.md
 - name: Concepts
-  expanded: true
   items:
-    - name: Bonnes pratiques
+    - name: Meilleures pratiques
       items:
         - name: Vue d’ensemble
           href: secure-dev-overview.md
@@ -26,8 +12,8 @@
           href: secure-develop.md
         - name: Déployer des applications sécurisées
           href: secure-deploy.md
-- name: Ressources
   expanded: true
+- name: Ressources
   items:
     - name: Analyse du code de sécurité Microsoft
       items:
@@ -72,6 +58,10 @@
               href: threat-modeling-tool-releases-73002061.md
             - name: "Version de mise à jour de Threat Modeling Tool\_7.3.00316.1\_- 22\_mars\_2020"
               href: threat-modeling-tool-releases-73003161.md
+            - name: "Version mise à jour de Threat Modeling Tool\_7.3.00714.2 - 14\_juillet\_2020"
+              href: threat-modeling-tool-releases-73007142.md
+            - name: "Version mise à jour de Threat Modeling Tool\_7.3.00729.1\_- 29\_juillet\_2020"
+              href: threat-modeling-tool-releases-73007291.md
         - name: Corrections
           href: threat-modeling-tool-mitigations.md
           items:
@@ -95,3 +85,4 @@
               href: threat-modeling-tool-sensitive-data.md
             - name: Gestion des sessions
               href: threat-modeling-tool-session-management.md
+  expanded: true

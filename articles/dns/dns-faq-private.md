@@ -7,12 +7,12 @@ ms.service: dns
 ms.topic: article
 ms.date: 10/05/2019
 ms.author: rohink
-ms.openlocfilehash: 4de585a965cfefa6399b0c0929a8f732d0712617
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 24f2ca238288854b99160a25c3d4dcedf8ce3368
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76939418"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952384"
 ---
 # <a name="azure-private-dns-faq"></a>FAQ sur Azure Private DNS
 
@@ -34,15 +34,23 @@ Non. Les zones privées fonctionnent avec les réseaux virtuels. Vous les utilis
 
 ## <a name="can-the-same-private-zone-be-used-for-several-virtual-networks-for-resolution"></a>La même zone privée peut-elle être utilisée pour plusieurs réseaux virtuels pour la résolution ?
 
-Oui. Vous pouvez lier une zone DNS privée à des milliers de réseaux virtuels. Pour plus d’informations, consultez [Limites d’Azure DNS](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-dns-limits).
+Oui. Vous pouvez lier une zone DNS privée à des milliers de réseaux virtuels. Pour plus d’informations, consultez [Limites d’Azure DNS](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-dns-limits).
 
 ## <a name="can-a-virtual-network-that-belongs-to-a-different-subscription-be-linked-to-a-private-zone"></a>Un réseau virtuel qui appartient à un autre abonnement peut-il être lié à une zone privée ?
 
-Oui. Vous devez disposer d'une autorisation d'écriture sur les réseaux virtuels ainsi que sur la zone DNS privée. L’autorisation d’accès en écriture peut être accordée à plusieurs rôles RBAC. Par exemple, le rôle RBAC Contributeur dans un réseau Classic dispose d’autorisations en écriture sur les réseaux virtuels, et le rôle Contributeur dans des zones DNS privées a les autorisations en écriture sur les zones DNS privées. Pour plus d’informations sur les rôles RBAC, consultez [Contrôle d’accès en fonction du rôle](../role-based-access-control/overview.md).
+Oui. Vous devez disposer d'une autorisation d'écriture sur les réseaux virtuels ainsi que sur la zone DNS privée. L’autorisation d’accès en écriture peut être accordée à plusieurs rôles Azure. Par exemple, le rôle Azure Contributeur dans un réseau Classic dispose d’autorisations en écriture sur les réseaux virtuels, et le rôle Contributeur dans des zones DNS privées a les autorisations en écriture sur les zones DNS privées. Pour plus d’informations sur les rôles Azure, consultez [Contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/overview.md).
 
 ## <a name="will-the-automatically-registered-virtual-machine-dns-records-in-a-private-zone-be-automatically-deleted-when-you-delete-the-virtual-machine"></a>Les enregistrements DNS de machines virtuelles inscrits automatiquement dans une zone privée sont-ils supprimés automatiquement quand vous supprimez la machine virtuelle ?
 
 Oui. Si vous supprimez une machine virtuelle dans un réseau virtuel lié alors que l’inscription automatique est activé, les enregistrements inscrits sont automatiquement supprimés.
+
+## <a name="ive-reconfigured-the-os-in-my-virtual-machine-to-have-a-new-host-name-or-static-ip-address-why-dont-i-see-that-change-reflected-in-the-private-zone"></a>J’ai reconfiguré le système d’exploitation sur ma machine virtuelle de façon à lui attribuer un nouveau nom d’hôte ou une nouvelle adresse IP statique. Pourquoi cette modification ne se reflète-t-elle pas dans la zone privée ?
+
+Les enregistrements de la zone privée sont remplis par le service Azure DHCP ; les messages d’inscription du client sont ignorés. Si vous avez désactivé la prise en charge des clients DHCP sur la machine virtuelle en configurant une adresse IP statique, les modifications apportées au nom d’hôte ou à l’adresse IP statique de la machine virtuelle ne se reflètent pas dans la zone.
+
+## <a name="i-have-configured-a-preferred-dns-suffix-in-my-windows-virtual-machine-why-are-my-records-still-registered-in-the-zone-linked-to-the-virtual-network"></a>J’ai configuré un suffixe DNS par défaut sur ma machine virtuelle Windows. Pourquoi mes enregistrements sont-ils toujours inscrits dans la zone liée au réseau virtuel ?
+
+Le service Azure DHCP ignore tous les suffixes DNS lorsqu’il inscrit la zone DNS privée. Par exemple, si votre machine virtuelle est configurée pour `contoso.com` comme suffixe DNS principal, mais que le réseau virtuel est lié à la zone DNS privée `fabrikam.com`, l’inscription de la machine virtuelle apparaît dans la zone DNS privée `fabrikam.com`.
 
 ## <a name="can-an-automatically-registered-virtual-machine-record-in-a-private-zone-from-a-linked-virtual-network-be-deleted-manually"></a>Un enregistrement de machine virtuelle inscrit automatiquement dans une zone privée à partir d’un réseau virtuel lié peut-il être supprimé manuellement ?
 
@@ -67,11 +75,11 @@ Oui. Les zones privées ne remplacent pas la zone internal.cloudapp.net fournie 
 ## <a name="will-the-dns-suffix-on-virtual-machines-within-a-linked-virtual-network-be-changed-to-that-of-the-private-zone"></a>Le suffixe DNS sur les machines virtuelles au sein d’un réseau virtuel lié est-il remplacé par celui de la zone privée ?
 
 Non. Le suffixe DNS sur les machines virtuelles de votre réseau virtuel lié reste le suffixe par défaut fourni par Azure (« *.internal.cloudapp.net »). Vous pouvez changer manuellement ce suffixe DNS sur vos machines virtuelles en le remplaçant par celui de la zone privée.
-Pour obtenir des conseils sur la façon de modifier ce suffixe, consultez [Utiliser un DNS dynamique pour inscrire les noms d’hôte sur votre propre serveur DNS](https://docs.microsoft.com/azure/virtual-network/virtual-networks-name-resolution-ddns#windows-clients).
+Pour obtenir des conseils sur la façon de modifier ce suffixe, consultez [Utiliser un DNS dynamique pour inscrire les noms d’hôte sur votre propre serveur DNS](../virtual-network/virtual-networks-name-resolution-ddns.md#windows-clients).
 
 ## <a name="what-are-the-usage-limits-for-azure-dns-private-zones"></a>Quelles sont les limites d’utilisation d’Azure DNS Private Zones ?
 
-Pour plus d’informations sur les limites d’utilisation d’Azure DNS Private Zones, consultez [Limites d’Azure DNS](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-dns-limits).
+Pour plus d’informations sur les limites d’utilisation d’Azure DNS Private Zones, consultez [Limites d’Azure DNS](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-dns-limits).
 
 ## <a name="why-dont-my-existing-private-dns-zones-show-up-in-new-portal-experience"></a>Pourquoi mes zones DNS privées existantes n’apparaissent-elles pas dans le nouveau portail ?
 

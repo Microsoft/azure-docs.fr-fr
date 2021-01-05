@@ -1,25 +1,31 @@
 ---
 title: 'Démarrage rapide : Obtenir des insights sur des images avec l’API REST et C# - Recherche visuelle Bing'
 titleSuffix: Azure Cognitive Services
-description: Découvrez comment charger une image dans l’API Recherche visuelle Bing pour récupérer des insights sur celle-ci.
+description: Découvrez comment charger une image à l’aide de l’API Recherche visuelle Bing et C#, puis récupérez des insights sur l’image.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-visual-search
 ms.topic: quickstart
-ms.date: 12/17/2019
+ms.date: 05/22/2020
 ms.author: scottwhi
-ms.openlocfilehash: 07ecac46ab13058d308c17c5747701ee5ed577fc
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 83e4e2b1c1eb10f7a4cd0f2fb4f87b280801eed0
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75446685"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96487114"
 ---
 # <a name="quickstart-get-image-insights-using-the-bing-visual-search-rest-api-and-c"></a>Démarrage rapide : Obtenir des insights sur les images à l’aide de l’API REST Recherche visuelle Bing et de C#
 
-Ce guide de démarrage rapide montre comment charger une image dans l’API Recherche visuelle Bing et comment visualiser les insights qu’elle retourne.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Ce guide de démarrage rapide montre comment charger une image dans l’API Recherche visuelle Bing et visualiser les insights qu’elle retourne.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -41,7 +47,7 @@ Ce guide de démarrage rapide montre comment charger une image dans l’API Rech
     using System.Collections.Generic;
     ```
 
-2. Ajoutez les variables pour votre clé d’abonnement, le point de terminaison et le chemin de l’image que vous voulez charger. `uriBase` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource :
+2. Ajoutez les variables pour votre clé d’abonnement, le point de terminaison et le chemin de l’image que vous voulez charger. Pour la valeur `uriBase`, vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```csharp
         const string accessKey = "<my_subscription_key>";
@@ -49,7 +55,7 @@ Ce guide de démarrage rapide montre comment charger une image dans l’API Rech
         static string imagePath = @"<path_to_image>";
     ```
 
-3. Créez une méthode nommée `GetImageFileName()` pour obtenir le chemin de votre image :
+3. Créez une méthode nommée `GetImageFileName()` pour obtenir le chemin de votre image.
     
     ```csharp
     static string GetImageFileName(string path)
@@ -58,7 +64,7 @@ Ce guide de démarrage rapide montre comment charger une image dans l’API Rech
             }
     ```
 
-4. Créez une méthode pour obtenir les données binaires de l’image :
+4. Créez une méthode pour obtenir les données binaires de l’image.
 
     ```csharp
     static byte[] GetImageBinary(string path)
@@ -69,18 +75,18 @@ Ce guide de démarrage rapide montre comment charger une image dans l’API Rech
 
 ## <a name="build-the-form-data"></a>Générer les données de formulaire
 
-Pour charger une image locale, vous commencez par créer les données de formulaire à envoyer à l’API. Les données du formulaire doivent inclure l’en-tête `Content-Disposition`, son paramètre `name` doit être défini sur « image », et le paramètre `filename` peut être défini sur n’importe quelle chaîne. Le contenu du formulaire contient les données binaires de l’image. La taille maximale de l’image que vous chargez est de 1 Mo.
+1. Pour charger une image locale, commencez par créer les données de formulaire à envoyer à l’API. Les données de formulaire incluent l’en-tête `Content-Disposition`, le paramètre `name` défini sur « image » et le paramètre `filename` défini sur le nom de fichier de l’image. Le contenu du formulaire contient les données binaires de l’image. La taille maximale de l’image que vous chargez est de 1 Mo.
 
     ```
     --boundary_1234-abcd
     Content-Disposition: form-data; name="image"; filename="myimagefile.jpg"
     
-    ÿØÿà JFIF ÖÆ68g-¤CWŸþ29ÌÄøÖ‘º«™æ±èuZiÀ)"óÓß°Î= ØJ9á+*G¦...
+    ÿØÿà JFIF ÖÆ68g-¤CWŸþ29ÌÄøÖ‘º«™æ±èuZiÀ)"óÓß°Î= ØJ9á+*G¦...
     
     --boundary_1234-abcd--
     ```
 
-1. Ajoutez des chaînes de limites pour mettre en forme les données du formulaire POST. Les chaînes de limites déterminent les caractères de début, de fin et de saut de ligne pour les données :
+2. Ajoutez des chaînes de limites pour mettre en forme les données du formulaire POST. Les chaînes de limites déterminent les caractères de début, de fin et de saut de ligne pour les données.
 
     ```csharp
     // Boundary strings for form data in body of POST.
@@ -90,14 +96,14 @@ Pour charger une image locale, vous commencez par créer les données de formula
     static string EndBoundaryTemplate = "--{0}--";
     ```
 
-2. Utilisez les variables suivantes pour ajouter des paramètres aux données du formulaire :
+3. Utilisez les variables suivantes pour ajouter des paramètres aux données du formulaire :
 
     ```csharp
     const string CONTENT_TYPE_HEADER_PARAMS = "multipart/form-data; boundary={0}";
     const string POST_BODY_DISPOSITION_HEADER = "Content-Disposition: form-data; name=\"image\"; filename=\"{0}\"" + CRLF +CRLF;
     ```
 
-3. Créez une fonction nommée `BuildFormDataStart()` pour créer le début des données du formulaire en utilisant les chaînes de limites et le chemin de l’image :
+4. Créez une fonction nommée `BuildFormDataStart()` pour créer le début des données du formulaire en utilisant les chaînes de limites et le chemin de l’image.
     
     ```csharp
         static string BuildFormDataStart(string boundary, string filename)
@@ -111,7 +117,7 @@ Pour charger une image locale, vous commencez par créer les données de formula
         }
     ```
 
-4. Créez une fonction nommée `BuildFormDataEnd()` pour créer la fin des données du formulaire en utilisant les chaînes de limites :
+5. Créez une fonction nommée `BuildFormDataEnd()` pour créer la fin des données du formulaire en utilisant les chaînes de limites.
     
     ```csharp
         static string BuildFormDataEnd(string boundary)
@@ -126,7 +132,7 @@ Pour charger une image locale, vous commencez par créer les données de formula
 
 2. Utilisez un `WebRequest` pour stocker votre URI, la valeur contentType et les en-têtes.  
 
-3. Utilisez `request.GetRequestStream()` pour écrire les données de votre formulaire et de l’image, puis pour obtenir la réponse. Votre fonction doit être similaire à celle-ci :
+3. Utilisez `request.GetRequestStream()` pour écrire les données de votre formulaire et de l’image, puis pour obtenir la réponse. Votre fonction doit être similaire au code suivant :
         
     ```csharp
         static string BingImageSearch(string startFormData, string endFormData, byte[] image, string contentTypeValue)
@@ -158,14 +164,14 @@ Pour charger une image locale, vous commencez par créer les données de formula
 
 ## <a name="create-the-main-method"></a>Créer la méthode Main
 
-1. Dans la méthode `Main` de votre application, obtenez le nom de fichier et les données binaires de votre image :
+1. Dans la méthode `Main()` de votre application, obtenez le nom de fichier et les données binaires de votre image.
 
     ```csharp
     var filename = GetImageFileName(imagePath);
     var imageBinary = GetImageBinary(imagePath);
     ```
 
-2. Configurez le corps POST en mettant en forme ses limites. Appelez ensuite `startFormData()` et `endFormData` pour créer les données du formulaire :
+2. Configurez le corps POST en mettant en forme sa limite. Appelez ensuite `BuildFormDataStart()` et `BuildFormDataEnd()` pour créer les données du formulaire.
 
     ```csharp
     // Set up POST body.
@@ -174,13 +180,13 @@ Pour charger une image locale, vous commencez par créer les données de formula
     var endFormData = BuildFormDataEnd(boundary);
     ```
 
-3. Créez la valeur `ContentType` en mettant en forme `CONTENT_TYPE_HEADER_PARAMS` et la limite des données du formulaire :
+3. Créez la valeur `ContentType` en mettant en forme `CONTENT_TYPE_HEADER_PARAMS` et la limite des données du formulaire.
 
     ```csharp
     var contentTypeHdrValue = string.Format(CONTENT_TYPE_HEADER_PARAMS, boundary);
     ```
 
-4. Obtenez la réponse de l’API en appelant `BingImageSearch()` et affichez la réponse :
+4. Obtenez la réponse de l’API en appelant `BingImageSearch()`, puis affichez la réponse.
 
     ```csharp
     var json = BingImageSearch(startFormData, endFormData, imageBinary, contentTypeHdrValue);
@@ -191,81 +197,81 @@ Pour charger une image locale, vous commencez par créer les données de formula
 
 ## <a name="using-httpclient"></a>Utilisation de HttpClient
 
-Si vous utilisez `HttpClient`, vous pouvez utiliser la classe `MultipartFormDataContent` pour créer les données du formulaire. Utilisez simplement les sections de code suivantes pour remplacer les méthodes correspondantes dans l’exemple précédent.
+Si vous utilisez `HttpClient`, vous pouvez utiliser la classe `MultipartFormDataContent` pour créer les données du formulaire. Utilisez les sections de code suivantes pour remplacer les méthodes correspondantes dans l’exemple précédent :
 
-Remplacez la méthode `Main` par ce code :
+1. Remplacez la méthode `Main()` par le code suivant :
 
-```csharp
-        static void Main()
-        {
-            try
-            {
-                Console.OutputEncoding = System.Text.Encoding.UTF8;
+   ```csharp
+           static void Main()
+           {
+               try
+               {
+                   Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-                if (accessKey.Length == 32)
-                {
-                    if (IsImagePathSet(imagePath))
-                    {
-                        var filename = GetImageFileName(imagePath);
-                        Console.WriteLine("Getting image insights for image: " + filename);
-                        var imageBinary = GetImageBinary(imagePath);
+                   if (accessKey.Length == 32)
+                   {
+                       if (IsImagePathSet(imagePath))
+                       {
+                           var filename = GetImageFileName(imagePath);
+                           Console.WriteLine("Getting image insights for image: " + filename);
+                           var imageBinary = GetImageBinary(imagePath);
 
-                        var boundary = string.Format(BoundaryTemplate, Guid.NewGuid());
-                        var json = BingImageSearch(imageBinary, boundary, uriBase, accessKey);
+                           var boundary = string.Format(BoundaryTemplate, Guid.NewGuid());
+                           var json = BingImageSearch(imageBinary, boundary, uriBase, accessKey);
 
-                        Console.WriteLine("\nJSON Response:\n");
-                        Console.WriteLine(JsonPrettyPrint(json));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Bing Visual Search API subscription key!");
-                    Console.WriteLine("Please paste yours into the source code.");
-                }
+                           Console.WriteLine("\nJSON Response:\n");
+                           Console.WriteLine(JsonPrettyPrint(json));
+                       }
+                   }
+                   else
+                   {
+                       Console.WriteLine("Invalid Bing Visual Search API subscription key!");
+                       Console.WriteLine("Please paste yours into the source code.");
+                   }
 
-                Console.Write("\nPress Enter to exit ");
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-```
+                   Console.Write("\nPress Enter to exit ");
+                   Console.ReadLine();
+               }
+               catch (Exception e)
+               {
+                   Console.WriteLine(e.Message);
+               }
+           }
+   ```
 
-Remplacez la méthode `BingImageSearch` par ce code :
+2. Remplacez la méthode `BingImageSearch()` par le code suivant :
 
-```csharp
-        /// <summary>
-        /// Calls the Bing visual search endpoint and returns the JSON response.
-        /// </summary>
-        static string BingImageSearch(byte[] image, string boundary, string uri, string subscriptionKey)
-        {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri);
-            requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", accessKey);
+   ```csharp
+           /// <summary>
+           /// Calls the Bing visual search endpoint and returns the JSON response.
+           /// </summary>
+           static string BingImageSearch(byte[] image, string boundary, string uri, string subscriptionKey)
+           {
+               var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri);
+               requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", accessKey);
 
-            var content = new MultipartFormDataContent(boundary);
-            content.Add(new ByteArrayContent(image), "image", "myimage");
-            requestMessage.Content = content;
+               var content = new MultipartFormDataContent(boundary);
+               content.Add(new ByteArrayContent(image), "image", "myimage");
+               requestMessage.Content = content;
 
-            var httpClient = new HttpClient();
+               var httpClient = new HttpClient();
 
-            Task<HttpResponseMessage> httpRequest = httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, CancellationToken.None);
-            HttpResponseMessage httpResponse = httpRequest.Result;
-            HttpStatusCode statusCode = httpResponse.StatusCode;
-            HttpContent responseContent = httpResponse.Content;
+               Task<HttpResponseMessage> httpRequest = httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, CancellationToken.None);
+               HttpResponseMessage httpResponse = httpRequest.Result;
+               HttpStatusCode statusCode = httpResponse.StatusCode;
+               HttpContent responseContent = httpResponse.Content;
 
-            string json = null;
+               string json = null;
 
-            if (responseContent != null)
-            {
-                Task<String> stringContentsTask = responseContent.ReadAsStringAsync();
-                json = stringContentsTask.Result;
-            }
+               if (responseContent != null)
+               {
+                   Task<String> stringContentsTask = responseContent.ReadAsStringAsync();
+                   json = stringContentsTask.Result;
+               }
 
-            return json;
-        }
-```
+               return json;
+           }
+   ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 

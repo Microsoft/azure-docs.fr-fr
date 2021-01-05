@@ -4,12 +4,12 @@ description: Vue d’ensemble des modèles d’intégration de contrat intellige
 ms.date: 11/20/2019
 ms.topic: conceptual
 ms.reviewer: mmercuri
-ms.openlocfilehash: f9626edd5bd655e3de5d0f9648041faf832e3b84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dae63e16356e825d3be31380df1648749e59d8bd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74325966"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015500"
 ---
 # <a name="smart-contract-integration-patterns"></a>Modèles d’intégration de contrat intelligent
 
@@ -31,7 +31,7 @@ Les fonctionnalités de l’application web générée par Azure Blockchain Work
 
 L’API REST est principalement utilisée pour les clients interactifs tels que les applications web, mobiles et bot.
 
-Cette section présente les modèles axés sur les API REST qui envoient des transactions à un registre distribué, et les modèles qui interrogent des données sur les transactions dans la base de données SQL *off chain* d’Azure Blockchain Workbench.
+Cette section présente les modèles axés sur les API REST qui envoient des transactions à un registre distribué, et les modèles qui interrogent des données sur les transactions dans la base de données *off chain* d’Azure Blockchain Workbench.
 
 ### <a name="sending-transactions-to-a-distributed-ledger-from-an-external-system"></a>Envoi de transactions à un registre distribué à partir d’un système externe
 
@@ -134,7 +134,7 @@ Ce modèle est généralement implémenté selon l’approche suivante :
 -   Le changement d’état est présenté au consommateur en aval sous la forme d’un événement.
 -   Le consommateur en aval reçoit l’événement et déclenche l’exécution de code externe.
 
-![Transition de contrôle vers le processus externe](./media/integration-patterns/transition-external-process.png)
+![Le diagramme montre un changement d’état dans le contrat qui provoque l’accès d’un événement au registre distribué. Blockchain Workbench sélectionne ensuite l’événement et le publie.](./media/integration-patterns/transition-external-process.png)
 
 #### <a name="return-of-control-from-the-smart-contract"></a>Retour de contrôle du contrat intelligent
 
@@ -142,7 +142,7 @@ En fonction des possibilités de personnalisation du système externe, il peut o
 
 ##### <a name="direct-delivery-of-an-azure-blockchain-workbench-in-the-expected-format"></a>Remise directe d’un Azure Blockchain Workbench dans le format attendu
 
-![](./media/integration-patterns/direct-delivery.png)
+![Le diagramme montre un message d’API du système externe récupéré par Blockchain Workbench via le Service Bus. Blockchain Workbench envoie ensuite un message en tant que transaction au registre distribué pour le compte de l’agent. Il est transmis au contrat, où elle provoque un changement d’état.](./media/integration-patterns/direct-delivery.png)
 
 Dans ce modèle, la communication avec le contrat et le changement d’état qui s’en suit se déroulent suivant le processus précédent, où :
 
@@ -204,7 +204,7 @@ L’intégration de données est bien connue :
 
 -   Selon son comportement normal, Azure Blockchain Workbench stocke des métadonnées sur des applications, flux de travail, contrats et transactions.
 -   Les systèmes ou outils externes présentent une ou plusieurs boîtes de dialogue pour faciliter la collecte d’informations sur la base de données, comme le nom du serveur de base de données, le nom de la base de données, le type d’authentification, les informations d’identification de connexion et les vues de base de données à utiliser.
--   Les requêtes sont écrites sur des vues de base de données SQL afin de faciliter la consommation en aval par les systèmes externes, services, rapports, outils de développement et outils de productivité d’entreprise.
+-   Les requêtes sont écrites sur des vues de base de données afin de faciliter la consommation en aval par les systèmes externes, services, rapports, outils de développement et outils de productivité d’entreprise.
 
 ## <a name="storage-integration"></a>Intégration d’un stockage
 

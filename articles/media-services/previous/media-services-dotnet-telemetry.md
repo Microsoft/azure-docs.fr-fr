@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 1ffaefc51121aeb7421d6e49a3c0e58c76d4391e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 263bf1cd2a7e2a37a1c4fae172ce4f66b1e59b5f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61464944"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89265979"
 ---
-# <a name="configuring-azure-media-services-telemetry-with-net"></a>Configuration de la télémétrie Azure Media Services avec .NET 
+# <a name="configuring-azure-media-services-telemetry-with-net"></a>Configuration de la télémétrie Azure Media Services avec .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article décrit les étapes générales que vous pouvez suivre lors de la configuration de la télémétrie d’Azure Media Services (AMS) à l’aide du kit SDK .NET. 
 
@@ -30,7 +33,7 @@ Cet article décrit les étapes générales que vous pouvez suivre lors de la co
 
 Vous pouvez utiliser les données de télémétrie ainsi :
 
-- Lire les données directement à partir de Stockage Table Azure (par exemple en utilisant le kit SDK Stockage). Pour obtenir la description des tables de stockage de télémétrie, consultez les **Informations sur l’utilisation de la télémétrie** dans [cet](https://msdn.microsoft.com/library/mt742089.aspx) article.
+- Lire les données directement à partir de Stockage Table Azure (par exemple en utilisant le kit SDK Stockage). Pour obtenir la description des tables de stockage de télémétrie, consultez les **Informations sur l’utilisation de la télémétrie** dans [cet](/previous-versions/azure/mt742089(v=azure.100)) article.
 
 ou
 

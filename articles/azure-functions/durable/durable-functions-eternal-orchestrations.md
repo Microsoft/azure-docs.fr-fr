@@ -3,14 +3,14 @@ title: Orchestrations externes dans Fonctions durables - Azure
 description: Découvrez comment implémenter des orchestrations externes à l’aide de l’extension Fonctions durables pour Azure Functions.
 author: cgillum
 ms.topic: conceptual
-ms.date: 11/02/2019
+ms.date: 07/14/2020
 ms.author: azfuncdf
-ms.openlocfilehash: d55e08fecbd1338284607ac59fe354c6fa8cb1ea
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 34c70f4305ebb2c45757d982ab558aea6450003f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80478824"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86506364"
 ---
 # <a name="eternal-orchestrations-in-durable-functions-azure-functions"></a>Orchestrations externes dans Fonctions durables (Azure Functions)
 
@@ -22,7 +22,7 @@ Comme expliqué dans la rubrique [Historique d’orchestration](durable-function
 
 ## <a name="resetting-and-restarting"></a>Réinitialisation et redémarrage
 
-Au lieu d’utiliser des boucles infinies, les fonctions d’orchestrateur réinitialisent leur état en appelant la méthode `ContinueAsNew` (.NET) ou `continueAsNew` (JavaScript) de la [liaison du déclencheur d’orchestration](durable-functions-bindings.md#orchestration-trigger). Cette méthode n’utilise qu’un seul paramètre JSON sérialisable, qui devient la nouvelle entrée de la prochaine génération de la fonction d’orchestrateur.
+Au lieu d’utiliser des boucles infinies, les fonctions d’orchestrateur réinitialisent leur état en appelant la méthode `ContinueAsNew` (.NET), `continueAsNew` (JavaScript) ou `continue_as_new` (Python) de la [liaison du déclencheur d’orchestration](durable-functions-bindings.md#orchestration-trigger). Cette méthode n’utilise qu’un seul paramètre JSON sérialisable, qui devient la nouvelle entrée de la prochaine génération de la fonction d’orchestrateur.
 
 Lorsque la méthode `ContinueAsNew` est appelée, l’instance garde un message dans sa propre file d’attente avant de se fermer. Le message redémarre l’instance avec la nouvelle valeur d’entrée. Le même ID d’instance est conservé, mais l’historique de la fonction d’orchestrateur est tronqué.
 
@@ -70,13 +70,32 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+from datetime import datetime, timedelta
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    yield context.call_activity("DoCleanup")
+
+    # sleep for one hour between cleanups
+    next_cleanup = context.current_utc_datetime + timedelta(hours = 1)
+    yield context.create_timer(next_cleanup)
+
+    context.continue_as_new(None)
+
+main = df.Orchestrator.create(orchestrator_function)
+```
+
 ---
 
 La différence entre cet exemple et une fonction déclenchée par un minuteur est que les heures de déclenchement du nettoyage ne sont pas ici basées sur une planification. Par exemple, une planification CRON qui exécute une fonction toutes les heures se produira à 1 h 00, 2 h 00, 3 h 00 etc., et risque d’entraîner des problèmes de chevauchement. Mais dans cet exemple, si le nettoyage prend 30 minutes, il sera alors planifié à 1 h 00, 2 h 30, 4 h 00, etc., et il n’existe aucun risque de chevauchement.
 
 ## <a name="starting-an-eternal-orchestration"></a>Démarrage d’une orchestration externe
 
-Utilisez la méthode `StartNewAsync` (.NET) ou `startNew` (JavaScript) pour démarrer une orchestration externe, comme vous le feriez pour toute autre fonction d’orchestration.  
+Utilisez la méthode `StartNewAsync` (.NET), `startNew` (JavaScript) ou `start_new` (Python) pour démarrer une orchestration externe, comme vous le feriez pour toute autre fonction d’orchestration.  
 
 > [!NOTE]
 > Si vous devez vous assurer qu’une orchestration externe singleton est en cours d’exécution, il est important de conserver le même `id` d’instance lors du démarrage de l’orchestration. Pour plus d’informations, consultez [Gestion d’instance](durable-functions-instance-management.md).
@@ -115,6 +134,19 @@ module.exports = async function (context, req) {
     return client.createCheckStatusResponse(context.bindingData.req, instanceId);
 };
 ```
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
+    client = df.DurableOrchestrationClient(starter)
+    instance_id = 'StaticId'
+
+    await client.start_new('Periodic_Cleanup_Loop', instance_id, None)
+
+    logging.info(f"Started orchestration with ID = '{instance_id}'.")
+    return client.create_check_status_response(req, instance_id)
+
+```
 
 ---
 
@@ -122,7 +154,7 @@ module.exports = async function (context, req) {
 
 Si une fonction d’orchestrateur doit se terminer, il vous suffit de ne *pas* appeler `ContinueAsNew` et de laisser la fonction se terminer.
 
-Si une fonction d’orchestrateur est dans une boucle infinie et doit être arrêtée, utilisez la méthode `TerminateAsync` (.NET) ou `terminate` (JavaScript) de la [liaison du client d’orchestration](durable-functions-bindings.md#orchestration-client) pour l’arrêter. Pour plus d’informations, consultez [Gestion d’instance](durable-functions-instance-management.md).
+Si une fonction d’orchestrateur est dans une boucle infinie et doit être arrêtée, utilisez la méthode `TerminateAsync` (.NET), `terminate` (JavaScript) ou `terminate` (Python) de la [liaison du client d’orchestration](durable-functions-bindings.md#orchestration-client) pour l’arrêter. Pour plus d’informations, consultez [Gestion d’instance](durable-functions-instance-management.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-hub
 author: dominicbetts
 ms.service: iot-hub
@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/20/2019
 ms.author: dobett
 ms.custom: include file
-ms.openlocfilehash: 3778ec2fac13aee29ce361402a535ca70fd56c33
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f3cab4909937bbf5ccb0f72b194b08810c0487c2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75750710"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84792016"
 ---
 ### <a name="enable-logging-with-diagnostics-settings"></a>Activer la journalisation avec les paramètres de diagnostic
 

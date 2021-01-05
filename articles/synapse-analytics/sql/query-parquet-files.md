@@ -1,55 +1,93 @@
 ---
-title: Interroger des fichiers Parquet à l’aide de SQL à la demande (préversion)
-description: Cet article vous explique comment interroger des fichiers Parquet à l’aide de SQL à la demande (préversion).
+title: Interroger des fichiers Parquet à l’aide d’un pool SQL serverless
+description: Cet article explique comment interroger des fichiers Parquet à l’aide du pool SQL serverless.
 services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: how-to
-ms.subservice: ''
-ms.date: 04/15/2020
-ms.author: v-stazar
-ms.reviewer: jrasnick, carlrab
-ms.openlocfilehash: 0b272a8c8ce81fc40585014e5930f5d7b1b5f2c0
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.subservice: sql
+ms.date: 05/20/2020
+ms.author: stefanazaric
+ms.reviewer: jrasnick
+ms.openlocfilehash: cce4c6aff986c2e8c3d879d962714e13f6b2e7ae
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427589"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97694677"
 ---
-# <a name="query-parquet-files-using-sql-on-demand-preview-in-azure-synapse-analytics"></a>Interroger des fichiers Parquet à l’aide de SQL à la demande (préversion) dans Azure Synapse Analytics
+# <a name="query-parquet-files-using-serverless-sql-pool-in-azure-synapse-analytics"></a>Interroger des fichiers Parquet à l’aide d’un pool SQL serverless dans Azure Synapse Analytics
 
-Cet article vous explique comment écrire une requête à l’aide de SQL à la demande (préversion) pour lire des fichiers Parquet.
+Cet article explique comment écrire une requête à l’aide d’un pool SQL serverless pour lire des fichiers Parquet.
+
+## <a name="quickstart-example"></a>Exemple de démarrage rapide
+
+La fonction `OPENROWSET` vous permet de lire le contenu d’un fichier Parquet en fournissant l’URL de votre fichier.
+
+### <a name="read-parquet-file"></a>Lire un fichier Parquet
+
+Le moyen le plus simple d’afficher le contenu de votre fichier `PARQUET` consiste à fournir l’URL du fichier à la fonction `OPENROWSET` et à spécifier le `FORMAT` Parquet. Si le fichier est disponible publiquement ou si votre identité Azure AD peut y accéder, vous devriez pouvoir voir le contenu du fichier à l’aide d’une requête comme celle montrée dans l’exemple suivant :
+
+```sql
+select top 10 *
+from openrowset(
+    bulk 'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/ecdc_cases/latest/ecdc_cases.parquet',
+    format = 'parquet') as rows
+```
+
+Assurez-vous que vous pouvez accéder à ce fichier. Si votre fichier est protégé par une clé SAP ou une identité Azure personnalisée, vous devez configurer les [informations d’identification au niveau du serveur pour la connexion SQL](develop-storage-files-storage-access-control.md?tabs=shared-access-signature#server-scoped-credential).
+
+> [!IMPORTANT]
+> Assurez-vous que vous utilisez un classement de base de données UTF-8 (par exemple `Latin1_General_100_BIN2_UTF8`), car les valeurs de chaîne dans les fichiers PARQUET sont encodées à l’aide d’un encodage UTF-8.
+> Une incompatibilité entre l’encodage de texte dans le fichier PARQUET et le classement peut entraîner des erreurs de conversion inattendues.
+> Vous pouvez facilement modifier le classement par défaut de la base de données actuelle à l’aide de l’instruction T-SQL suivante : `alter database current collate Latin1_General_100_BIN2_UTF8`
+
+### <a name="data-source-usage"></a>Utilisation d’une source de données
+
+L’exemple précédent utilise le chemin complet du fichier. Vous pouvez également créer une source de données externe avec l’emplacement qui pointe vers le dossier racine du stockage et utiliser cette source de données et le chemin relatif du fichier dans la fonction `OPENROWSET` :
+
+```sql
+create external data source covid
+with ( location = 'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/ecdc_cases' );
+go
+select top 10 *
+from openrowset(
+        bulk 'latest/ecdc_cases.parquet',
+        data_source = 'covid',
+        format = 'parquet'
+    ) as rows
+```
+
+Si une source de données est protégée par une clé SAP ou une identité personnalisée, vous pouvez configurer la [source de données avec des informations d’identification dans l’étendue de la base de données](develop-storage-files-storage-access-control.md?tabs=shared-access-signature#database-scoped-credential).
+
+### <a name="explicitly-specify-schema"></a>Spécifier explicitement le schéma
+
+`OPENROWSET` vous permet de spécifier explicitement les colonnes que vous souhaitez lire à partir du fichier à l’aide de la clause `WITH` :
+
+```sql
+select top 10 *
+from openrowset(
+        bulk 'latest/ecdc_cases.parquet',
+        data_source = 'covid',
+        format = 'parquet'
+    ) with ( date_rep date, cases int, geo_id varchar(6) ) as rows
+```
+
+> [!IMPORTANT]
+> Veillez à spécifier explicitement un classement UTF-8 (par exemple `Latin1_General_100_BIN2_UTF8`) pour toutes les colonnes de chaîne dans la clause `WITH`, ou définissez un classement UTF-8 au niveau de la base de données.
+> Une incompatibilité entre l’encodage de texte dans le fichier et le classement de colonne de chaîne peut entraîner des erreurs de conversion inattendues.
+> Vous pouvez facilement modifier le classement par défaut de la base de données actuelle à l’aide de l’instruction T-SQL suivante : `alter database current collate Latin1_General_100_BIN2_UTF8`
+> Vous pouvez facilement définir le classement sur les types de colonne à l’aide de la définition suivante : `geo_id varchar(6) collate Latin1_General_100_BIN2_UTF8`
+
+Dans les sections suivantes, vous pouvez voir comment interroger différents types de fichiers Parquet.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Avant de lire le reste de cet article, consultez les articles suivants :
-
-- [Première configuration](query-data-storage.md#first-time-setup)
-- [Composants requis](query-data-storage.md#prerequisites)
+La première étape consiste à **créer une base de données** avec une source de données qui fait référence au compte de stockage [NYC Yellow Taxi](https://azure.microsoft.com/services/open-datasets/catalog/nyc-taxi-limousine-commission-yellow-taxi-trip-records/). Ensuite, initialisez les objets en exécutant le [script d’installation](https://github.com/Azure-Samples/Synapse/blob/master/SQL/Samples/LdwSample/SampleDB.sql) sur cette base de données. Ce script d’installation crée les sources de données, les informations d’identification délimitées à la base de données et les formats de fichiers externes utilisés dans ces exemples.
 
 ## <a name="dataset"></a>Dataset
 
-Vous pouvez interroger les fichiers Parquet de la même façon que vous lisez des fichiers CSV. La seule différence réside dans le fait que le paramètre FILEFORMAT doit être défini sur PARQUET. Les exemples de cet article montrent les spécificités de lecture des fichiers Parquet.
-
-> [!NOTE]
-> Vous n’avez pas besoin de spécifier de colonnes dans la clause OPENROWSET WITH lors de la lecture de fichiers Parquet. SQL à la demande utilise les métadonnées dans le fichier Parquet et lie les colonnes par nom.
-
-Vous allez utiliser le dossier *parquet/taxi* pour les exemples de requêtes. Il contient les données d’enregistrements de courses des taxis jaunes de New York couvrant la période de juillet 2016 à juin 2018.
-
-Les données sont partitionnées par année et par mois, et la structure des dossiers se présente comme suit :
-
-- year=2016
-  - month=6
-  - ...
-  - month=12
-- year=2017
-  - month=1
-  - ...
-  - month=12
-- year=2018
-  - month=1
-  - ...
-  - month=6
+Le jeu de données [NYC Yellow Taxi](https://azure.microsoft.com/services/open-datasets/catalog/nyc-taxi-limousine-commission-yellow-taxi-trip-records/) est utilisé dans cet exemple. Vous pouvez interroger les fichiers Parquet de la même façon que vous [lisez des fichiers CSV](query-parquet-files.md). La seule différence réside dans le fait que le paramètre `FILEFORMAT` doit être défini sur `PARQUET`. Les exemples de cet article montrent les spécificités de lecture des fichiers Parquet.
 
 ## <a name="query-set-of-parquet-files"></a>Ensemble de requêtes de fichiers Parquet
 
@@ -57,23 +95,24 @@ Vous pouvez spécifier uniquement les colonnes intéressantes lorsque vous inter
 
 ```sql
 SELECT
-        YEAR(pickup_datetime),
-        passenger_count,
+        YEAR(tpepPickupDateTime),
+        passengerCount,
         COUNT(*) AS cnt
 FROM  
     OPENROWSET(
-        BULK 'https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/*/*/*',
+        BULK 'puYear=2018/puMonth=*/*.snappy.parquet',
+        DATA_SOURCE = 'YellowTaxi',
         FORMAT='PARQUET'
     ) WITH (
-        pickup_datetime DATETIME2,
-        passenger_count INT
+        tpepPickupDateTime DATETIME2,
+        passengerCount INT
     ) AS nyc
 GROUP BY
-    passenger_count,
-    YEAR(pickup_datetime)
+    passengerCount,
+    YEAR(tpepPickupDateTime)
 ORDER BY
-    YEAR(pickup_datetime),
-    passenger_count;
+    YEAR(tpepPickupDateTime),
+    passengerCount;
 ```
 
 ## <a name="automatic-schema-inference"></a>Inférence de schéma automatique
@@ -83,16 +122,16 @@ Vous n’avez pas besoin d'utiliser la clause OPENROWSET WITH lors de la lecture
 L’exemple ci-dessous montre les fonctionnalités d’inférence automatique du schéma des fichiers Parquet. Il renvoie le nombre de lignes en septembre 2017 sans spécifier de schéma.
 
 > [!NOTE]
-> Vous n’avez pas besoin de spécifier de colonnes dans la clause OPENROWSET WITH lors de la lecture de fichiers Parquet. Dans ce cas, le service de requête SQL à la demande utilise les métadonnées dans le fichier Parquet et lie les colonnes par nom.
+> Vous n’avez pas besoin de spécifier de colonnes dans la clause OPENROWSET WITH lors de la lecture de fichiers Parquet. Dans ce cas, le service de requête du pool SQL serverless utilise les métadonnées dans le fichier Parquet et lie les colonnes par nom.
 
 ```sql
-SELECT
-    COUNT_BIG(*)
-FROM
+SELECT TOP 10 *
+FROM  
     OPENROWSET(
-        BULK 'https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/year=2017/month=9/*.parquet',
+        BULK 'puYear=2018/puMonth=*/*.snappy.parquet',
+        DATA_SOURCE = 'YellowTaxi',
         FORMAT='PARQUET'
-    ) AS nyc;
+    ) AS nyc
 ```
 
 ### <a name="query-partitioned-data"></a>Interroger des données partitionnées
@@ -100,72 +139,34 @@ FROM
 Le jeu de données fourni dans cet exemple est divisé (partitionné) en sous-dossiers distincts. Utilisez la fonction filepath pour cibler des partitions spécifiques. Cet exemple montre les montants par année, par mois et par type de paiement pour les trois premiers mois de 2017.
 
 > [!NOTE]
-> La requête SQL à la demande est compatible avec le schéma de partitionnement Hive/Hadoop.
+> La requête du pool SQL serverless est compatible avec le schéma de partitionnement Hive/Hadoop.
 
 ```sql
 SELECT
-    nyc.filepath(1) AS [year],
-    nyc.filepath(2) AS [month],
-    payment_type,
-    SUM(fare_amount) AS fare_total
-FROM
+        YEAR(tpepPickupDateTime),
+        passengerCount,
+        COUNT(*) AS cnt
+FROM  
     OPENROWSET(
-        BULK 'https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/year=*/month=*/*.parquet',
+        BULK 'puYear=*/puMonth=*/*.snappy.parquet',
+        DATA_SOURCE = 'YellowTaxi',
         FORMAT='PARQUET'
-    ) AS nyc
+    ) nyc
 WHERE
     nyc.filepath(1) = 2017
     AND nyc.filepath(2) IN (1, 2, 3)
-    AND pickup_datetime BETWEEN CAST('1/1/2017' AS datetime) AND CAST('3/31/2017' AS datetime)
+    AND tpepPickupDateTime BETWEEN CAST('1/1/2017' AS datetime) AND CAST('3/31/2017' AS datetime)
 GROUP BY
-    nyc.filepath(1),
-    nyc.filepath(2),
-    payment_type
+    passengerCount,
+    YEAR(tpepPickupDateTime)
 ORDER BY
-    nyc.filepath(1),
-    nyc.filepath(2),
-    payment_type;
+    YEAR(tpepPickupDateTime),
+    passengerCount;
 ```
 
 ## <a name="type-mapping"></a>Mappage des types
 
-Les fichiers Parquet contiennent des descriptions de type pour chaque colonne. Le tableau suivant explique comment les types Parquet sont mappés aux types SQL natifs.
-
-| Type Parquet | Type logique Parquet (annotation) | Type de données SQL |
-| --- | --- | --- |
-| BOOLEAN | | bit |
-| BINARY / BYTE_ARRAY | | varbinary |
-| DOUBLE | | float |
-| FLOAT | | real |
-| INT32 | | int |
-| INT64 | | bigint |
-| INT96 | |datetime2 |
-| FIXED_LEN_BYTE_ARRAY | |binary |
-| BINARY |UTF8 |varchar \*(classement UTF8) |
-| BINARY |STRING |varchar \*(classement UTF8) |
-| BINARY |ENUM|varchar \*(classement UTF8) |
-| BINARY |UUID |UNIQUEIDENTIFIER |
-| BINARY |DECIMAL |Décimal |
-| BINARY |JSON |varchar (max) \*(classement UTF8) |
-| BINARY |BSON |varbinary(max) |
-| FIXED_LEN_BYTE_ARRAY |DECIMAL |Décimal |
-| BYTE_ARRAY |INTERVAL |varchar (max), sérialisé au format standardisé |
-| INT32 |INT(8, true) |SMALLINT |
-| INT32 |INT(16, true) |SMALLINT |
-| INT32 |INT(32, true) |int |
-| INT32 |INT(8, false) |TINYINT |
-| INT32 |INT(16, false) |int |
-| INT32 |INT(32, false) |bigint |
-| INT32 |DATE |Date |
-| INT32 |DECIMAL |Décimal |
-| INT32 |TIME (MILLIS )|time |
-| INT64 |INT(64, true) |bigint |
-| INT64 |INT(64, false ) |decimal(20,0) |
-| INT64 |DECIMAL |Décimal |
-| INT64 |TIME (MICROS / NANOS) |time |
-|INT64 |TIMESTAMP (MILLIS / MICROS / NANOS) |datetime2 |
-|[Type complexe](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#lists) |Liste |varchar(max), sérialisé en JSON |
-|[Type complexe](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#maps)|MAP|varchar(max), sérialisé en JSON |
+Pour le mappage de type Parquet en type SQL natif, sélectionnez [Mappage de type pour Parquet](develop-openrowset.md#type-mapping-for-parquet).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

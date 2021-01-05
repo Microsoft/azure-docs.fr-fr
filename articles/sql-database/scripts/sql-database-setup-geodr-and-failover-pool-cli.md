@@ -1,22 +1,22 @@
 ---
-title: Exemple CLI - Géoréplication active - Base de données Azure SQL mise en pool
+title: 'Az CLI : Configurer la géoréplication active pour un pool élastique'
 description: Exemple de script Azure CLI permettant de configurer la géoréplication active pour une base de données mise en pool dans Azure SQL Database et de la basculer.
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
-ms.custom: ''
+ms.custom: sqldbrb=1, devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: sample
 author: mashamsft
 ms.author: mathoma
 ms.reviewer: carlrab
 ms.date: 03/12/2019
-ms.openlocfilehash: 2646ed98f4a73c69d339df0134e8a565c958c514
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7933273d02d3c1332d0d012ab6c22a59ed880640
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067355"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92742651"
 ---
 # <a name="use-cli-to-configure-active-geo-replication-for-a-pooled-database-in-azure-sql-database"></a>Utiliser CLI afin de configurer la géoréplication active pour avoir une base de données mise en pool dans Azure SQL Database
 
@@ -53,7 +53,7 @@ az group delete --name $secondaryResource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az sql elastic-pool](/cli/azure/sql/elastic-pool) | Commandes de pool élastique |
 | [az sql db replica](/cli/azure/sql/db/replica) | Commandes de réplication de base de données. |
@@ -62,4 +62,4 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
-Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

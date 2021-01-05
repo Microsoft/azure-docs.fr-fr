@@ -3,12 +3,12 @@ title: Questions courantes sur la récupération d’urgence pour Hyper-V avec A
 description: Cet article récapitule les questions courantes sur la configuration de la reprise d’activité de machines virtuelles Hyper-V locales sur Azure à l’aide du site Azure Site Recovery.
 ms.date: 11/12/2019
 ms.topic: conceptual
-ms.openlocfilehash: 7c5f55fbea67567ddf7a2afa6a61f6c76568d829
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e4f5ee71fc56cad247b57f94bf08a68bed8775f9
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75498193"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754349"
 ---
 # <a name="common-questions---hyper-v-to-azure-disaster-recovery"></a>Questions courantes sur la reprise d’activité d’Hyper-V sur Azure
 
@@ -32,17 +32,17 @@ Vous verrez généralement une augmentation du coût des transactions effectuée
 
 Ce dont vous avez besoin pour le serveur hôte Hyper-V dépend du scénario de déploiement. Découvrez les prérequis dans :
 
-* [Réplication de machines virtuelles Hyper-V (sans VMM) sur Azure](site-recovery-hyper-v-site-to-azure.md)
-* [Réplication de machines virtuelles Hyper-V (avec VMM) sur Azure](site-recovery-vmm-to-azure.md)
-* [Réplication de machines virtuelles Hyper-V sur un centre de données secondaire](site-recovery-vmm-to-vmm.md)
-* Si vous répliquez sur un centre de données secondaire, consultez l’article [Systèmes d’exploitation invités pris en charge pour les ordinateurs virtuels Hyper-V](https://technet.microsoft.com/library/mt126277.aspx).
-* Si vous effectuez une réplication vers Azure, Site Recovery prend en charge tous les systèmes d’exploitation invités [pris en charge par Azure](https://technet.microsoft.com/library/cc794868%28v=ws.10%29.aspx).
+* [Réplication de machines virtuelles Hyper-V (sans VMM) sur Azure](./hyper-v-azure-tutorial.md)
+* [Réplication de machines virtuelles Hyper-V (avec VMM) sur Azure](./hyper-v-vmm-disaster-recovery.md)
+* [Réplication de machines virtuelles Hyper-V sur un centre de données secondaire](./hyper-v-vmm-disaster-recovery.md)
+* Si vous répliquez sur un centre de données secondaire, consultez l’article [Systèmes d’exploitation invités pris en charge pour les ordinateurs virtuels Hyper-V](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/mt126277(v=ws.11)).
+* Si vous effectuez une réplication vers Azure, Site Recovery prend en charge tous les systèmes d’exploitation invités [pris en charge par Azure](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc794868(v=ws.10)).
 
 ### <a name="can-i-protect-vms-when-hyper-v-is-running-on-a-client-operating-system"></a>Puis-je protéger des machines virtuelles lorsque Hyper-V est en cours d’exécution sur un système d’exploitation client ?
-Non, les machines virtuelles doivent se trouver sur un serveur hôte Hyper-V s’exécutant sur une machine serveur Windows prise en charge. Si vous devez protéger un ordinateur client, vous pouvez le répliquer en tant que machine physique [vers Azure](site-recovery-vmware-to-azure.md) ou vers un [centre de données secondaire](site-recovery-vmware-to-vmware.md).
+Non, les machines virtuelles doivent se trouver sur un serveur hôte Hyper-V s’exécutant sur une machine serveur Windows prise en charge. Si vous devez protéger un ordinateur client, vous pouvez le répliquer en tant que machine physique [vers Azure](./vmware-azure-tutorial.md) ou vers un [centre de données secondaire](./vmware-physical-secondary-disaster-recovery.md).
 
 ### <a name="do-hyper-v-hosts-need-to-be-in-vmm-clouds"></a>Les hôtes Hyper-V doivent-ils résider dans des clouds VMM ?
-Si vous souhaitez effectuer une réplication vers un centre de données secondaire, les machines virtuelles Hyper-V doivent résider sur des serveurs hôtes Hyper-V situés dans un cloud VMM. Si vous souhaitez procéder à une réplication vers Azure, vous pouvez répliquer des machines virtuelles avec ou sans clouds VMM. [En savoir plus](tutorial-hyper-v-to-azure.md) sur la réplication Hyper-V dans Azure.
+Si vous souhaitez effectuer une réplication vers un centre de données secondaire, les machines virtuelles Hyper-V doivent résider sur des serveurs hôtes Hyper-V situés dans un cloud VMM. Si vous souhaitez procéder à une réplication vers Azure, vous pouvez répliquer des machines virtuelles avec ou sans clouds VMM. [En savoir plus](./hyper-v-azure-tutorial.md) sur la réplication Hyper-V dans Azure.
 
 
 ### <a name="can-i-replicate-hyper-v-generation-2-virtual-machines-to-azure"></a>Puis-je répliquer des machines virtuelles de génération 2 Hyper-V vers Azure ?
@@ -71,7 +71,7 @@ Le logiciel Site Recovery est certifié conforme aux normes ISO 27001:2013, 2701
 Oui. Quand vous créez un coffre dans une région, nous garantissons que toutes les métadonnées utilisées par Site Recovery restent dans les limites géographiques de cette région.
 
 ### <a name="does-site-recovery-encrypt-replication"></a>Site Recovery chiffre-t-il la réplication ?
-Oui, le chiffrement en transit et le [chiffrement dans Azure](https://docs.microsoft.com/azure/storage/storage-service-encryption) sont tous deux pris en charge.
+Oui, le chiffrement en transit et le [chiffrement dans Azure](../storage/common/storage-service-encryption.md) sont tous deux pris en charge.
 
 
 ## <a name="deployment"></a>Déploiement
@@ -157,9 +157,17 @@ Lorsque vous répliquez vers Azure, le trafic de réplication atteint les points
 
 Pour la réplication, une machine virtuelle Hyper-V doit exécuter un système d’exploitation pris en charge. En outre, la machine virtuelle doit respecter la configuration requise pour les machines virtuelles Azure. [Découvrez-en plus](hyper-v-azure-support-matrix.md#replicated-vms) dans la matrice de prise en charge.
 
+### <a name="why-is-an-additional-standard-storage-account-required-if-i-replicate-my-virtual-machine-disks-to-premium-storage"></a>Pourquoi un compte de stockage standard supplémentaire est-il requis si je réplique les disques de ma machine virtuelle vers un stockage Premium ?
+
+Lorsque vous répliquez vos machines virtuelles/serveurs physiques locaux vers un stockage Premium, toutes les données résidant sur les disques de l’ordinateur protégé sont répliqués sur le compte de stockage Premium. Un compte de stockage standard supplémentaire est requis pour le stockage de journaux de réplication. Une fois la phase initiale de réplication des données du disque terminée, toutes les modifications apportées aux données du disque local sont suivies en continu et stockées sous forme de journaux de réplication dans ce compte de stockage standard supplémentaire.
+
 ### <a name="how-often-can-i-replicate-to-azure"></a>À quelle fréquence puis-je répliquer vers Azure ?
 
-Les machines virtuelles Hyper-V peuvent être répliquées toutes les 30 secondes (sauf pour le stockage premium), toutes les 5 minutes ou toutes les 15 minutes.
+Les machines virtuelles Hyper-V peuvent être répliquées toutes les 30 secondes (sauf pour le stockage premium) ou toutes les 5 minutes.
+
+### <a name="can-azure-site-recovery-and-hyper-v-replica-be-configured-together-on-a-hyper-v-machine"></a>Azure Site Recovery et le réplica Hyper-V peuvent-ils être configurés ensemble sur un ordinateur Hyper-V ?
+
+Oui, Azure Site Recovery et le réplica Hyper-V peuvent être configurés ensemble pour un ordinateur. Toutefois, l’ordinateur doit être protégé comme une machine physique et sera répliqué sur Azure à l’aide d’un serveur de configuration/traitement. En savoir plus sur la protection des machines physiques [ici](https://docs.microsoft.com/azure/site-recovery/physical-azure-architecture).
 
 ### <a name="can-i-extend-replication"></a>Puis-je étendre la réplication ?
 La réplication étendue ou chaînée n’est pas prise en charge. Demandez cette fonctionnalité dans le [forum de commentaires](https://feedback.azure.com/forums/256299-site-recovery/suggestions/6097959).

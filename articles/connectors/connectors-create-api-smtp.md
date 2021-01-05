@@ -7,12 +7,12 @@ ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 08/25/2018
 tags: connectors
-ms.openlocfilehash: 1cfc53dcd730262101c0e879e0419ba3f2db4d38
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: 9989d0ebd95bfe5ee49be2ba76b73e07630b519a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80656996"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87283943"
 ---
 # <a name="send-email-from-your-smtp-account-with-azure-logic-apps"></a>Envoyer un e-mail à partir de votre compte SMTP avec Azure Logic Apps
 
@@ -65,7 +65,7 @@ Avec Azure Logic Apps et le connecteur SMTP (Simple Mail Transfer Protocol), vou
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](https://docs.microsoft.com/connectors/smtpconnector/).
+Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](/connectors/smtpconnector/).
 
 > [!NOTE]
 > Pour les applications logiques utilisées dans un [environnement de service d’intégration (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md), la version de ce connecteur avec l’étiquette ISE applique les [limites de messages de l’ISE](../logic-apps/logic-apps-limits-and-config.md#message-size-limits) à la place.

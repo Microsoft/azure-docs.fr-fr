@@ -1,23 +1,26 @@
 ---
 title: 'Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et C#'
 titleSuffix: Azure Cognitive Services
-description: Ce guide de démarrage rapide montre comment utiliser l’API Ink Recognizer pour commencer la reconnaissance des traits d’encre numérique.
+description: Ce guide de démarrage rapide montre comment utiliser l’API Ink Recognizer et C# pour commencer la reconnaissance des traits d’encre numérique.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
 ms.topic: quickstart
-ms.date: 12/17/2019
+ms.date: 08/24/2020
 ms.author: aahi
-ms.openlocfilehash: c24d055f1904453d2f512a278f00e23c6fea1d9b
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 13a2d887b17ff319fb3a0f2bb0d5d0ff04629088
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80371373"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369101"
 ---
 # <a name="quickstart-recognize-digital-ink-with-the-ink-recognizer-rest-api-and-c"></a>Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et C#
+
+[!INCLUDE [ink-recognizer-deprecation](../includes/deprecation-note.md)]
 
 Utilisez ce guide de démarrage rapide pour commencer à envoyer des traits d’encre numérique à l’API Ink Recognizer. Cette application C# envoie une requête d’API contenant des données de trait d’encre au format JSON, puis obtient la réponse.
 
@@ -96,7 +99,7 @@ Exécutez l'application. Une réponse correcte est retournée au format JSON. Vo
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Référence d’API REST](https://go.microsoft.com/fwlink/?linkid=2089907)
+> [Référence d’API REST](/rest/api/cognitiveservices/inkrecognizer/inkrecognizer)
 
 
 Pour observer le fonctionnement de l’API Ink Recognizer dans une application d’écriture manuscrite numérique, examinez les exemples d’applications suivants sur GitHub :

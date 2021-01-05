@@ -3,19 +3,17 @@ title: Type d’entité Pattern.any - LUIS
 titleSuffix: Azure Cognitive Services
 description: Pattern.any est un espace réservé à longueur variable utilisé uniquement dans le gabarit d’énoncé d’un modèle pour marquer où l’entité commence et se termine.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 09/29/2019
-ms.author: diberry
-ms.openlocfilehash: 5164bf55ef8233cf34a470524da3bc852678d79a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec23be3709cebc534c059a21c52452abff683b18
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75979175"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91542204"
 ---
 # <a name="patternany-entity"></a>Entité Pattern.any
 

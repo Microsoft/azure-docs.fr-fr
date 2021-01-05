@@ -1,25 +1,25 @@
 ---
 title: Utilisation de schémas définis par l’utilisateur
-description: Conseils pour l’utilisation de schémas T-SQL définis par l’utilisateur pour développer des solutions dans un pool SQL Synapse.
+description: Conseils d’utilisation des schémas T-SQL définis par l’utilisateur pour développer des solutions dans des pools SQL dédiés dans Azure Synapse Analytics.
 services: synapse-analytics
-author: XiaoyuMSFT
+author: MSTehrani
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
-ms.author: xiaoyul
+ms.author: emtehran
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: 7144fa75d156ca7aed9d8215592f89c167cfb221
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.custom: seo-lt-2019, azure-synapse
+ms.openlocfilehash: 3204c77dd076d9aac6eb5a60b489280caefcbf4b
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633469"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96460450"
 ---
-# <a name="user-defined-schemas-in-synapse-sql-pool"></a>Schémas définis par l’utilisateur dans le pool SQL Synapse
-Cet article fournit plusieurs conseils relatifs à l’utilisation de schémas T-SQL définis par l’utilisateur pour développer des solutions dans un pool SQL Synapse.
+# <a name="user-defined-schemas-for-dedicated-sql-pools-in-azure-synapse-analytics"></a>Schémas définis par l’utilisateur pour les pools SQL dédiés dans Azure Synapse Analytics
+Cet article fournit plusieurs conseils d’utilisation des schémas T-SQL définis par l’utilisateur pour développer des solutions dans un pool SQL dédié.
 
 ## <a name="schemas-for-application-boundaries"></a>Schémas pour les limites d’application
 
@@ -27,7 +27,7 @@ Les entrepôts de données traditionnels utilisent souvent des bases de données
 
 Par exemple, un entrepôt de données SQL Server classique peut inclure une base de données de la zone de transit, une base de données de l’entrepôt de données et quelques bases de données de mini-Data Warehouse. Dans cette topologie, chaque base de données joue le rôle de limite de sécurité et de charge de travail dans l’architecture.
 
-À l’inverse, le pool SQL exécute l’intégralité de la charge de travail des entrepôts de données au sein d’une seule et même base de données. Les jointures entre plusieurs bases de données ne sont pas autorisées. Le pool SQL s’attend à ce que l’ensemble des tables utilisées par l’entrepôt soient stockées au sein d’une seule et même base de données.
+À l’inverse, un pool SQL dédié exécute l’intégralité de la charge de travail des entrepôts de données au sein d’une seule et même base de données. Les jointures entre plusieurs bases de données ne sont pas autorisées. Un pool SQL dédié s’attend à ce que l’ensemble des tables utilisées par l’entrepôt soient stockées dans une seule et même base de données.
 
 > [!NOTE]
 > Le pool SQL ne prend pas en charge les requêtes de base de données croisées, de quelque nature que ce soit. Par conséquent, les implémentations d’entrepôt de données tirant parti de ce modèle devront être modifiées.
@@ -37,11 +37,11 @@ Par exemple, un entrepôt de données SQL Server classique peut inclure une bas
 ## <a name="recommendations"></a>Recommandations
 Vous trouverez ci-dessous des recommandations pour la consolidation des charges de travail, de la sécurité, du domaine et des limites fonctionnelles à l’aide de schémas définis par l’utilisateur :
 
-- Utilisez une base de données de pool SQL pour exécuter l’intégralité de la charge de travail des entrepôts de données.
-- Consolidez l’environnement d’entrepôt de données existant de manière à utiliser une seule base de données de pool SQL.
+- Utilisez une base de données dans un pool SQL dédié pour exécuter l’intégralité de la charge de travail de l’entrepôt de données.
+- Consolidez votre environnement d’entrepôt de données existant de manière à utiliser une seule base de données de pool SQL dédié.
 - Tirez parti de **schémas définis par l’utilisateur** pour fournir la limite précédemment implémentée via des bases de données.
 
-Si aucun schéma défini par l’utilisateur n’a été utilisé précédemment, vous partez de zéro. Utilisez l’ancien nom de base de données comme base pour vos schémas définis par l’utilisateur dans la base de données du pool SQL.
+Si aucun schéma défini par l’utilisateur n’a été utilisé précédemment, vous partez de zéro. Utilisez l’ancien nom de base de données comme base pour vos schémas définis par l’utilisateur dans la base de données du pool SQL dédié.
 
 Si des schémas ont déjà été utilisés, vous avez le choix entre plusieurs options :
 
@@ -50,7 +50,7 @@ Si des schémas ont déjà été utilisés, vous avez le choix entre plusieurs o
 - Vous pouvez conserver le nom de schéma hérité, en implémentant les vues sur la table au sein d’un schéma supplémentaire pour recréer l’ancienne structure du schéma.
 
 > [!NOTE]
-> À première vue, la troisième option semble la plus tentante. Toutefois, si on l’étudie plus en détail, elle ne semble pas à la hauteur de ses promesses. Les affichages sont en lecture seule dans le pool SQL. Toute modification portant sur les données ou la table doit être effectuée sur la table de base. Par ailleurs, cette troisième option présente une couche de vues au sein de votre système. Peut-être devriez-vous étudier la question plus attentivement si vous utilisez déjà des vues dans votre architecture.
+> À première vue, la troisième option semble la plus tentante. Toutefois, si on l’étudie plus en détail, elle ne semble pas à la hauteur de ses promesses. Les vues sont en lecture seule dans un pool SQL dédié. Toute modification portant sur les données ou la table doit être effectuée sur la table de base. Par ailleurs, cette troisième option présente une couche de vues au sein de votre système. Peut-être devriez-vous étudier la question plus attentivement si vous utilisez déjà des vues dans votre architecture.
 > 
 > 
 

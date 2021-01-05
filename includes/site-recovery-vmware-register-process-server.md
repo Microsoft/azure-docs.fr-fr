@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 04/28/2019
 ms.author: raynew
 ms.openlocfilehash: 088cd5447b1f96dbf172b5918c29e4f3293289a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67534624"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008471"
 ---
 1. Établissez une connexion Bureau à distance à la machine exécutant le serveur de traitement. 
 2. Exécutez cspsconfigtool.exe pour démarrer l’outil de configuration du serveur de traitement Azure Site Recovery.

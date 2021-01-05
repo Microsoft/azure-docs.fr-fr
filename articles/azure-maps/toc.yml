@@ -1,4 +1,4 @@
-- name: Documentation sur Azure Maps
+- name: Documentation Azure Maps
   href: index.yml
 - name: Vue d’ensemble
   items:
@@ -33,6 +33,14 @@
           href: tutorial-ev-routing.md
         - name: Analyser des données météorologiques avec Azure Notebooks (Python)
           href: weather-service-tutorial.md
+    - name: Migrer depuis Bing Cartes
+      items:
+        - name: Migrer depuis Bing Cartes
+          href: migrate-from-bing-maps.md
+        - name: Migrer une application web
+          href: migrate-from-bing-maps-web-app.md
+        - name: Migrer un service web
+          href: migrate-from-bing-maps-web-services.md
     - name: Migrer à partir de Google Maps
       items:
         - name: Migrer à partir de Google Maps
@@ -59,6 +67,8 @@
           href: drawing-conversion-error-codes.md
     - name: Couverture
       items:
+        - name: Couverture
+          href: geographic-coverage.md
         - name: Couverture du géocodage
           href: geocoding-coverage.md
         - name: Couverture du trafic
@@ -77,18 +87,33 @@
       href: supported-map-styles.md
     - name: Niveaux de zoom et grille mosaïque
       href: zoom-levels-and-tile-grid.md
-    - name: Structure des données Mobility Service
+    - name: Services de mobilité
       href: mobility-service-data-structure.md
-    - name: Concepts du service météo
+    - name: Concepts des services Météo
       href: weather-services-concepts.md
+    - name: Questions fréquentes (FAQ) sur le services Météo
+      href: weather-services-faq.md
 - name: Guides pratiques
   items:
     - name: Gérer les comptes Maps
       items:
+        - name: Créer un compte avec un modèle ARM
+          href: how-to-create-template.md
         - name: Gérer les comptes
           href: how-to-manage-account-keys.md
         - name: Gérer l’authentification
           href: how-to-manage-authentication.md
+          items:
+            - name: Guide pratique pour sécuriser une application démon
+              href: how-to-secure-daemon-app.md
+            - name: Guide pratique pour sécuriser une application monopage de connexion interactive
+              href: how-to-secure-spa-users.md
+            - name: Guide pratique pour sécuriser une application web
+              href: how-to-secure-webapp-users.md
+            - name: Guide pratique pour sécuriser une application monopage de connexion non interactive
+              href: how-to-secure-spa-app.md
+            - name: Guide pratique pour sécuriser une application limitée en entrées
+              href: how-to-secure-device-code.md
         - name: Gérer le niveau tarifaire
           href: how-to-manage-pricing-tier.md
         - name: Gérer Creator
@@ -109,6 +134,10 @@
           href: how-to-request-transit-data.md
         - name: Demander des données de transit public en temps réel
           href: how-to-request-real-time-data.md
+        - name: Demander des données météorologiques en temps réel et prévues
+          href: how-to-request-weather-data.md
+        - name: Demander des données d’élévation
+          href: how-to-request-elevation-data.md
     - name: Développer avec le kit SDK web
       items:
         - name: Commandes de la carte
@@ -177,6 +206,14 @@
               href: map-get-information-from-coordinate.md
             - name: Afficher des directions de A à B
               href: map-route.md
+        - name: Module Cartes d’intérieur
+          items:
+            - name: Module Cartes d’intérieur
+              href: how-to-use-indoor-module.md
+            - name: Styles dynamiques pour les plans intérieurs
+              href: indoor-map-dynamic-styling.md
+            - name: Visualiseur d’erreurs de dessin
+              href: drawing-error-visualizer.md
         - name: Module d’E/S spatiales
           items:
             - name: Utiliser le module d’E/S spatiales
@@ -211,25 +248,37 @@
           href: how-to-add-tile-layer-android-map.md
         - name: Afficher les données du trafic
           href: how-to-show-traffic-android.md
-    - name: Développer avec des plans intérieurs Creator
+    - name: Utiliser Azure Maps dans Power BI
       items:
-        - name: Module de plans intérieurs
-          href: how-to-use-indoor-module.md
-        - name: Styles dynamiques pour les plans intérieurs
-          href: indoor-map-dynamic-styling.md
-        - name: Visualiseur d’erreurs de dessin
-          href: drawing-error-visualizer.md
+        - name: Prise en main
+          href: power-bi-visual-getting-started.md
+        - name: Compréhension des couches
+          href: power-bi-visual-understanding-layers.md
+        - name: Ajouter un calque de bulles
+          href: power-bi-visual-add-bubble-layer.md
+        - name: Ajouter une couche de graphique à barres
+          href: power-bi-visual-add-bar-chart-layer.md
+        - name: Ajouter une couche de référence
+          href: power-bi-visual-add-reference-layer.md
+        - name: Ajouter un calque de vignettes
+          href: power-bi-visual-add-tile-layer.md
+        - name: Afficher le trafic en temps réel
+          href: power-bi-visual-show-real-time-traffic.md
+        - name: Gérer l’accès
+          href: power-bi-visual-manage-access.md
     - name: Fournir des commentaires sur les données
       href: how-to-use-feedback-tool.md
 - name: Informations de référence
   items:
     - name: Extensions d’API et de paramètre
       items:
-        - name: Exigences de package de dessin
+        - name: Exigences du package de dessin
           href: drawing-requirements.md
+        - name: Cartes dynamiques StylesObject
+          href: schema-stateset-stylesobject.md
         - name: Modèle de consommation du véhicule
           href: consumption-model.md
-        - name: Étendre le format geoJSON
+        - name: Format geoJSON étendu
           href: extend-geojson.md
         - name: Format geoJSON de limite géographique
           href: geofence-geojson.md
@@ -238,95 +287,93 @@
     - name: REST
       items:
         - name: Service de données
-          href: 'https://docs.microsoft.com/rest/api/maps/data'
+          href: /rest/api/maps/data
         - name: Service de géolocalisation
-          href: 'https://docs.microsoft.com/rest/api/maps/geolocation'
-        - name: Service Mobilité
-          href: 'https://docs.microsoft.com/rest/api/maps/mobility'
+          href: /rest/api/maps/geolocation
+        - name: Services de mobilité
+          href: /rest/api/maps/mobility
         - name: Render Service
-          href: 'https://docs.microsoft.com/rest/api/maps/render'
+          href: /rest/api/maps/render
         - name: "Render service\_V2"
-          href: 'https://docs.microsoft.com/rest/api/maps/renderv2'
+          href: /rest/api/maps/renderv2
         - name: Service d’itinéraire
-          href: 'https://docs.microsoft.com/rest/api/maps/route'
+          href: /rest/api/maps/route
         - name: Service de recherche
-          href: 'https://docs.microsoft.com/rest/api/maps/search'
+          href: /rest/api/maps/search
         - name: Service spatial
-          href: 'https://docs.microsoft.com/rest/api/maps/spatial'
+          href: /rest/api/maps/spatial
         - name: Service de fuseau horaire
-          href: 'https://docs.microsoft.com/rest/api/maps/timezone'
+          href: /rest/api/maps/timezone
         - name: Traffic Service
-          href: 'https://docs.microsoft.com/rest/api/maps/traffic'
-        - name: Service météo
-          href: 'https://docs.microsoft.com/rest/api/maps/weather'
+          href: /rest/api/maps/traffic
+        - name: Services Météo
+          href: /rest/api/maps/weather
         - name: Service de création de cartes
           items:
             - name: Service d’alias
-              href: 'https://docs.microsoft.com/rest/api/maps/alias'
+              href: /rest/api/maps/alias
             - name: Service de conversion
-              href: 'https://docs.microsoft.com/rest/api/maps/conversion'
+              href: /rest/api/maps/conversion
             - name: Service de jeu de données
-              href: 'https://docs.microsoft.com/rest/api/maps/dataset'
+              href: /rest/api/maps/dataset
             - name: Service d’état de la fonctionnalité
-              href: 'https://docs.microsoft.com/rest/api/maps/featurestate'
+              href: /rest/api/maps/featurestate
             - name: Service d’ensemble de vignettes
-              href: 'https://docs.microsoft.com/rest/api/maps/tileset'
+              href: /rest/api/maps/tileset
             - name: Service WFS
-              href: 'https://docs.microsoft.com/rest/api/maps/wfs'
+              href: /rest/api/maps/wfs
         - name: Gestion de compte Maps
-          href: 'https://docs.microsoft.com/rest/api/maps-management'
+          href: /rest/api/maps-management
     - name: JavaScript
       items:
         - name: Commandes de la carte
-          href: 'https://docs.microsoft.com/javascript/api/azure-maps-javascript/'
+          href: /javascript/api/azure-maps-javascript/
         - name: Outils de dessin
-          href: 'https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/'
+          href: /javascript/api/azure-maps-drawing-tools/
         - name: Module de service
-          href: 'https://docs.microsoft.com/javascript/api/azure-maps-rest/'
+          href: /javascript/api/azure-maps-rest/
         - name: Module d’E/S spatiales
-          href: 'https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/'
+          href: /javascript/api/azure-maps-spatial-io/
         - name: Module intérieur
-          href: 'https://aka.ms/am-indoor-module-websdk/'
+          href: /javascript/api/azure-maps-indoor/
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.maps/accounts
+    - name: Azure CLI
+      href: /cli/azure/maps
 - name: Ressources
   items:
     - name: Options d’aide et de support
-      href: /azure/iot-fundamentals/iot-support-help
+      href: ../iot-fundamentals/iot-support-help.md
     - name: Services Azure IoT
       items:
         - name: IoT Hub
-          href: /azure/iot-hub
+          href: ../iot-hub/index.yml
         - name: Service IoT Hub Device Provisioning
-          href: /azure/iot-dps
+          href: ../iot-dps/index.yml
         - name: IoT Central
-          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+          href: /microsoft-iot-central/
         - name: IoT Edge
-          href: /azure/iot-edge
+          href: ../iot-edge/index.yml
         - name: Accélérateurs de solution IoT
-          href: /azure/iot-accelerators
+          href: ../iot-accelerators/index.yml
         - name: IoT Plug-and-Play
-          href: /azure/iot-pnp
+          href: ../iot-pnp/index.yml
         - name: Azure Maps
-          href: /azure/azure-maps
+          href: ./index.yml
         - name: Time Series Insights
-          href: /azure/time-series-insights
+          href: ../time-series-insights/index.yml
     - name: Kits de développement logiciel (SDK) Azure IoT
       items:
         - name: Kits de développement logiciel (SDK) IoT Service
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+          href: ../iot-hub/iot-hub-devguide-sdks.md#azure-iot-hub-service-sdks
         - name: Kits de développement logiciel (SDK) IoT Device
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+          href: ../iot-hub/iot-hub-devguide-sdks.md#azure-iot-hub-device-sdks
     - name: Conditions d’utilisation d’Azure Maps
       href: 'https://azure.microsoft.com/support/legal/'
     - name: Prix Azure Maps
       href: 'https://azure.microsoft.com/pricing/details/azure-maps'
     - name: Calculatrice de prix
       href: 'https://azure.microsoft.com/pricing/calculator/'
-    - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/azure-maps'
-    - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-maps.html'
     - name: Vidéos Azure Maps
       href: 'https://aka.ms/AzureMapsVideos'
     - name: Projets Open source

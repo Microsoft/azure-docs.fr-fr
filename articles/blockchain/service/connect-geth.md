@@ -1,19 +1,19 @@
 ---
 title: Utiliser Geth pour une jonction à Azure Blockchain Service
 description: Effectuer une jonction à une instance Geth sur un nœud de transaction Azure Blockchain Service
-ms.date: 11/20/2019
+ms.date: 05/26/2020
 ms.topic: quickstart
-ms.reviewer: janders
-ms.openlocfilehash: 9da78eac1dc429bcc0ad52bb9cb2f1fb743a90d4
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.reviewer: maheshna
+ms.openlocfilehash: 2c5b6a56d96ac132949052e9879c8f61d41ffb06
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74455832"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "83994763"
 ---
 # <a name="quickstart-use-geth-to-attach-to-an-azure-blockchain-service-transaction-node"></a>Démarrage rapide : Utiliser Geth pour effectuer une jonction à un nœud de transaction Azure Blockchain Service
 
-Dans ce guide de démarrage rapide, vous allez utiliser le client Geth pour effectuer une jonction à l’instance Geth sur un nœud de transaction Azure Blockchain Service. Une fois la jonction effectuée, vous devez utiliser la console JavaScript Geth pour appeler une API JavaScript Dapp Web3.
+Dans ce guide de démarrage rapide, vous allez utiliser le client Geth pour effectuer une jonction à l’instance Geth sur un nœud de transaction Azure Blockchain Service. Une fois la jonction effectuée, vous utiliserez la console Geth pour appeler une API JavaScript Ethereum.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
@@ -45,7 +45,7 @@ Vous pouvez obtenir la chaîne de connexion Geth pour un nœud de transaction Az
     geth attach <connection string>
     ```
 
-1. Une fois connecté à la console Ethereum du nœud de transaction, vous pouvez appeler l’API web3 JavaScript Dapp ou l’API d’administration.
+1. Une fois connecté à la console Ethereum du nœud de transaction, vous pouvez utiliser l’API JavaScript Ethereum.
 
     Par exemple, vous pouvez utiliser l’API suivante pour connaître le chainId.
 

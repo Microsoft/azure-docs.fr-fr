@@ -1,19 +1,19 @@
 ---
 title: Afficher des données de trafic sur une carte Android | Microsoft Azure Maps
 description: Dans cet article, vous allez apprendre à afficher des données de trafic sur une carte en utilisant le kit SDK Android Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 02/27/2020
-ms.topic: conceptual
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 11/25/2020
+ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: e5611eeb08ac370e12cf452d57a87e449fbd80da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f7e67d159c2b7dea3ebac7fd4d0856f508cb298
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335375"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532752"
 ---
 # <a name="show-traffic-data-on-the-map-using-azure-maps-android-sdk"></a>Afficher des données de trafic sur la carte à l’aide du kit SDK Android Azure Maps
 
@@ -21,9 +21,11 @@ Les données de flux et d’incidents sont deux types de données de trafic qui 
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-Avant de pouvoir afficher le trafic sur la carte, vous devez [créer un compte Azure](quick-demo-map-app.md#create-an-account-with-azure-maps)et [obtenir une clé d’abonnement](quick-demo-map-app.md#get-the-primary-key-for-your-account). Vous devez ensuite installer le kit [SDK Android Azure Maps](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) et charger une carte.
+1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account)
+2. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement.
+3. Télécharger et installer le [SDK Azure Maps Android](./how-to-use-android-map-control-library.md).
 
-## <a name="incidents-traffic-data"></a>Données d’incidents de trafic 
+## <a name="incidents-traffic-data"></a>Données d’incidents de trafic
 
 Vous devez importer les bibliothèques suivantes pour appeler `setTraffic` et `incidents` :
 
@@ -53,7 +55,7 @@ import static com.microsoft.azure.maps.mapcontrol.options.TrafficOptions.flow;
 
 Utilisez l’extrait de code suivant pour définir les données de flux de trafic. Comme pour le code de la section précédente, la valeur de retour de la méthode `flow` est transmise à la méthode `setTraffic`. Les valeurs qui peuvent être transmises à `flow` sont au nombre de quatre, et chacune d’elles déclenche `flow` pour retourner sa propre valeur. La valeur de retour de `flow` est ensuite transmise sous forme d’argument à `setTraffic`. Ces quatre valeurs sont décrites dans le tableau ci-dessous :
 
-| | |
+|Valeur de flux | Description|
 | :-- | :-- |
 | TrafficFlow.NONE | N’affiche pas de données de trafic sur la carte |
 | TrafficFlow.RELATIVE | Affiche des données de trafic relatives à la vitesse dans des conditions de circulation routière fluide |
@@ -73,7 +75,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 Pour obtenir les données d’incidents pour une fonctionnalité déterminée, vous pouvez utiliser le code ci-dessous. Quand l’utilisateur clique sur une fonctionnalité, la logique du code effectue une recherche sur les incidents et génère un message sur l’incident. Un message s’affiche au bas de l’écran avec les détails.
 
-1. Tout d’abord, vous devez modifier **res > layout > activity_main.xml** à la manière de l’exemple ci-dessous. Vous pouvez remplacer `mapcontrol_centerLat`, `mapcontrol_centerLng` et `mapcontrol_zoom` par les valeurs souhaitées. Pour rappel, le niveau de zoom est une valeur comprise entre 0 et 22. Au niveau de zoom 0, le monde entier tient dans une seule mosaïque.
+1. Tout d’abord, vous devez modifier `res > layout > activity_main.xml` à la manière de l’exemple ci-dessous. Vous pouvez remplacer `mapcontrol_centerLat`, `mapcontrol_centerLng` et `mapcontrol_zoom` par les valeurs souhaitées. Pour rappel, le niveau de zoom est une valeur comprise entre 0 et 22. Au niveau de zoom 0, le monde entier tient dans une seule mosaïque.
 
    ```XML
    <?xml version="1.0" encoding="utf-8"?>
@@ -223,11 +225,9 @@ Pour obtenir les données d’incidents pour une fonctionnalité déterminée, v
 
 3. Une fois que vous avez incorporé le code ci-dessus dans votre application, vous pouvez cliquer sur une fonctionnalité pour voir les détails des incidents de trafic. Selon les valeurs de latitude, de longitude et de niveau de zoom que vous avez utilisées dans votre fichier **activity_main.xml**, vous obtenez des résultats similaires à l’image suivante :
 
-   <center>
 
-   ![Incidents-trafic-sur-la-carte](./media/how-to-show-traffic-android/android-traffic.png)
+    ![Incidents-trafic-sur-la-carte](./media/how-to-show-traffic-android/android-traffic.png)
 
-   </center>
 
 ## <a name="next-steps"></a>Étapes suivantes
 

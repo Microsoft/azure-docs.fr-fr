@@ -4,12 +4,12 @@ description: Découvrez les meilleures pratiques qui s’appliquent pour l’op�
 services: container-service
 ms.topic: conceptual
 ms.date: 12/06/2018
-ms.openlocfilehash: efe72157f598c336248e407c57bce92fe87da23a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4d90ac5b8ab44925b73be2f22cd7a79458da9f5a
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77594741"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92073549"
 ---
 # <a name="best-practices-for-container-image-management-and-security-in-azure-kubernetes-service-aks"></a>Meilleures pratiques relatives à la gestion et à la sécurisation des images de conteneur dans Azure Kubernetes Services (AKS)
 
@@ -60,5 +60,5 @@ Cet article était dédié à la sécurisation de vos conteneurs. Pour implémen
 [best-practices-cluster-security]: operator-best-practices-cluster-security.md
 [best-practices-pod-security]: developer-best-practices-pod-security.md
 [acr-base-image-update]: ../container-registry/container-registry-tutorial-base-image-update.md
-[security-center-containers]: /azure/security-center/container-security
-[security-center-acr]: /azure/security-center/azure-container-registry-integration
+[security-center-containers]: ../security-center/container-security.md
+[security-center-acr]: ../security-center/defender-for-container-registries-introduction.md

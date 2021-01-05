@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : StringToNumber'
 description: Découvrez la fonction système SQL StringToNumber dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 5ca8d0c4a6d244823dda6f0f79a3cf5c743a12a9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2622958a2315458ccd01da4aea7c6b75941e755
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78296420"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339561"
 ---
 # <a name="stringtonumber-azure-cosmos-db"></a>StringToNumber (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une expression convertie en nombre. Si l’expression ne peut pas être convertie, le résultat est indéfini.  
   
 ## <a name="syntax"></a>Syntaxe

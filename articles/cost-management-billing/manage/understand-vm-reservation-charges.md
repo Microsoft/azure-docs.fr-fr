@@ -3,15 +3,16 @@ title: Comprendre la remise sur Azure Reserved VM Instances
 description: Découvrez comment la remise d’instance de machine virtuelle réservée Azure est appliquée aux machines virtuelles en cours d’exécution.
 author: yashesvi
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
-ms.date: 02/13/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: ca54d5a0d196cbc39256668f21e19bdf9162dfbf
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bda93712dd9a7501fbfddf0e75b8ae3c0088ed55
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79202788"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96341238"
 ---
 # <a name="how-the-azure-reservation-discount-is-applied-to-virtual-machines"></a>Comment la remise de réservation Azure est-elle appliquée aux machines virtuelles ?
 
@@ -56,11 +57,15 @@ Quand vous exécutez des instances de machine virtuelle Windows, la réservation
 
 ## <a name="discount-can-apply-to-different-sizes"></a>La remise peut s'appliquer à différentes tailles
 
-Quand vous achetez une instance de machine virtuelle réservée, si vous sélectionnez **Optimisé pour** : **Flexibilité de taille d’instance**, l’étendue de la remise dépend de la taille de machine virtuelle que vous sélectionnez. La réservation peut s’appliquer aux tailles des machines virtuelles dans le même groupe de gammes de tailles. Pour plus d’informations, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/windows/reserved-vm-instance-size-flexibility.md).
+Lorsque vous achetez une instance de machine virtuelle réservée et sélectionnez **Optimisé pour la flexibilité de la taille d'instance**, la remise s'applique à la taille de machine virtuelle que vous sélectionnez. Elle peut également s'appliquer à d'autres tailles de machines virtuelles appartenant au même groupe de flexibilité de taille d'instance de série. Pour plus d’informations, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/reserved-vm-instance-size-flexibility.md).
 
-## <a name="discount-applies-to-matching-servicetype-only"></a>La remise s’applique au type de service correspondant uniquement
+## <a name="premium-storage-vms-dont-get-non-premium-discounts"></a>Les machines virtuelles de stockage Premium ne bénéficient pas des remises non Premium.
 
-Une remise de réservation s’applique uniquement à l’utilisation de la machine virtuelle où la valeur `ServiceType` dans `AdditionalInfo` correspond à la réservation achetée. L'application de la remise de réservation ne tient pas compte du compteur utilisé pour les machines virtuelles et évalue uniquement `ServiceType`. Déterminez le type de service pour lequel vous avez acheté la machine virtuelle. Vous pouvez échanger une réservation de machine virtuelle de stockage non Premium contre une réservation de stockage Premium, et inversement.
+Voici un exemple. Supposons que vous ayez acheté une réservation pour cinq machines virtuelles Standard_D1. La remise de réservation s'applique uniquement aux machines virtuelles Standard_D1 ou à d'autres machines virtuelles de la même famille d'instances. La remise ne s'applique pas aux machines virtuelles Standard_DS1 ou à d'autres tailles du groupe de flexibilité de taille d'instance DS1.
+
+L'application de la remise de réservation ne tient pas compte du compteur utilisé pour les machines virtuelles et évalue uniquement ServiceType. Examinez la valeur `ServiceType` de `AdditionalInfo` pour déterminer les informations de série/groupe de flexibilité d'instance pour vos machines virtuelles. Les valeurs sont disponibles dans votre fichier CSV d'utilisation.
+
+Vous ne pouvez pas modifier directement le groupe ou la série de flexibilité d'instance de la réservation après l'achat. Cependant, vous pouvez *échanger* une réservation de machine virtuelle entre un groupe ou une série de flexibilité d'instance et un(e) autre.
 
 ## <a name="services-that-get-vm-reservation-discounts"></a>Services qui obtiennent des remises de réservation de machines virtuelles
 
@@ -89,7 +94,7 @@ Lorsque le paramètre est activé, les remises de réservation s’appliquent au
 
 Vérifiez la valeur *ConsumedService* dans vos données d’utilisation pour déterminer si l’utilisation est éligible pour les remises de réservation.
 
-Pour plus d’informations à propos de la flexibilité de la taille d’instance, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/windows/reserved-vm-instance-size-flexibility.md).
+Pour plus d’informations à propos de la flexibilité de la taille d’instance, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/reserved-vm-instance-size-flexibility.md).
 
 
 ## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Nous contacter
@@ -101,8 +106,8 @@ Si vous avez des questions ou besoin d’aide, [créez une demande de support](h
 Pour plus d’informations sur les réservations Azure, consultez les articles suivants :
 
 - [Qu’est-ce qu’une réservation Azure ?](../reservations/save-compute-costs-reservations.md)
-- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
-- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../sql-database/sql-database-reserved-capacity.md)
+- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/prepay-reserved-vm-instances.md)
+- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../azure-sql/database/reserved-capacity-overview.md)
 - [Gérer les réservations pour Azure](../reservations/manage-reserved-vm-instance.md)
 - [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](../reservations/understand-reserved-instance-usage.md)
 - [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](../reservations/understand-reserved-instance-usage-ea.md)

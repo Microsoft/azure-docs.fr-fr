@@ -7,13 +7,13 @@ ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 04/08/2020
-ms.openlocfilehash: ade2fd6011bbcdaed4ce31ce70bfb4235429bb0d
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.date: 10/30/2020
+ms.openlocfilehash: d1f8993b1adc297b1bfadba114df76a66e59afa2
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81606295"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93147172"
 ---
 # <a name="surrogate-key-transformation-in-mapping-data-flow"></a>Transformation de clé de substitution dans le flux de données de mappage 
 
@@ -31,9 +31,9 @@ Utilisez la transformation de clé de substitution pour ajouter une valeur de cl
 
 ## <a name="increment-keys-from-existing-sources"></a>Incrémenter les clés de sources existantes
 
-Pour commencer votre séquence à partir d’une valeur existante dans une source, utilisez une transformation de colonne dérivée à la suite de votre transformation de clé de substitution pour additionner les deux valeurs :
+Pour démarrer votre séquence à partir d’une valeur qui existe dans une source, nous vous recommandons d’utiliser un récepteur de cache pour enregistrer cette valeur et d’utiliser une transformation de colonne dérivée pour ajouter les deux valeurs ensemble. Utilisez une recherche mise en cache pour obtenir la sortie et l’ajouter à la clé générée. Pour plus d’informations, apprenez-en plus sur les [récepteurs de cache](data-flow-sink.md#cache-sink) et les [recherches mises en cache](concepts-data-flow-expression-builder.md#cached-lookup).
 
-![Ajouter max SK](media/data-flow/sk006.png "Ajout maximum de transformation de clé de substitution")
+![Recherche de clé de substitution](media/data-flow/cached-lookup-example.png "Recherche de clé de substitution")
 
 ### <a name="increment-from-existing-maximum-value"></a>Incrémentation à partir d’une valeur maximale existante
 
@@ -41,19 +41,18 @@ La technique à appliquer pour amorcer la valeur de clé avec la valeur maximale
 
 #### <a name="database-sources"></a>Sources de base de données
 
-Utilisez une option de requête SQL pour sélectionner MAX() à partir de votre source. Par exemple, `Select MAX(<surrogateKeyName>) as maxval from <sourceTable>`/.
+Utilisez une option de requête SQL pour sélectionner MAX() à partir de votre source. Par exemple, `Select MAX(<surrogateKeyName>) as maxval from <sourceTable>`.
 
-![Requête de clé de substitution](media/data-flow/sk002.png "Requête de transformation de clé de substitution")
+![Requête de clé de substitution](media/data-flow/surrogate-key-max-database.png "Requête de transformation de clé de substitution")
 
 #### <a name="file-sources"></a>Sources de fichiers
 
 Si votre valeur maximale précédente se trouve dans un fichier, utilisez la fonction `max()` dans la transformation d’agrégation pour la récupérer :
 
-![Fichier de clé de substitution](media/data-flow/sk008.png "Fichier de clé de substitution")
+![Fichier de clé de substitution](media/data-flow/surrogate-key-max-file.png "Fichier de clé de substitution")
 
-Dans les deux cas, vous devez joindre vos nouvelles données entrantes avec votre source contenant la valeur maximale précédente.
+Dans les deux cas, vous devrez écrire dans un récepteur de cache et rechercher la valeur. 
 
-![Jointure de clé de substitution](media/data-flow/sk004.png "Jointure de clé de substitution")
 
 ## <a name="data-flow-script"></a>Script de flux de données
 

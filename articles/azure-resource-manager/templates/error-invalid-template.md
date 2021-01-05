@@ -2,13 +2,13 @@
 title: Erreurs de modèle non valide
 description: Décrit comment résoudre les erreurs de modèle non valide quand vous déployez des modèles Azure Resource Manager.
 ms.topic: troubleshooting
-ms.date: 03/08/2018
-ms.openlocfilehash: 65cd69d67933d117b51f37b587b276aec2bd635a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/22/2020
+ms.openlocfilehash: ba19d3c4e72a765e2aaff7393915b77a80daf2ba
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76154055"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185791"
 ---
 # <a name="resolve-errors-for-invalid-template"></a>Résoudre les erreurs de modèle non valide
 
@@ -25,11 +25,11 @@ Message=<varies>
 
 Le message d’erreur varie selon le type d’erreur.
 
-## <a name="cause"></a>Cause :
+## <a name="cause"></a>Cause
 
 Cette erreur peut résulter de différents types d’erreurs. Elles impliquent généralement une erreur de syntaxe ou de structure dans le modèle.
 
-<a id="syntax-error" />
+<a id="syntax-error"></a>
 
 ## <a name="solution-1---syntax-error"></a>Solution 1 - erreur de syntaxe
 
@@ -48,9 +48,9 @@ Cette erreur est facile à commettre car les expressions de modèle peuvent êtr
 
 Si vous ne fournissez pas la syntaxe correspondante, le modèle produit une valeur très différente de celle souhaitée.
 
-Lorsque vous recevez ce type d’erreur, examinez attentivement la syntaxe d’expression. Vous pouvez utiliser un éditeur JSON comme [Visual Studio](create-visual-studio-deployment-project.md) ou [Visual Studio Code](use-vs-code-to-create-template.md), qui vous signale des erreurs de syntaxe.
+Lorsque vous recevez ce type d’erreur, examinez attentivement la syntaxe d’expression. Vous pouvez utiliser un éditeur JSON comme [Visual Studio](create-visual-studio-deployment-project.md) ou [Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md), qui vous signale des erreurs de syntaxe.
 
-<a id="incorrect-segment-lengths" />
+<a id="incorrect-segment-lengths"></a>
 
 ## <a name="solution-2---incorrect-segment-lengths"></a>Solution 2 - longueurs de segments incorrectes
 
@@ -111,11 +111,11 @@ Obtenir des segments valides peut être difficile si des types Resource Manager 
 }
 ```
 
-<a id="parameter-not-valid" />
+<a id="parameter-not-valid"></a>
 
 ## <a name="solution-3---parameter-is-not-valid"></a>Solution 3 - le paramètre n’est pas valide
 
-Si vous fournissez une valeur de paramètre qui ne fait pas partie des valeurs autorisées, vous recevez un message similaire à celui de l’erreur suivante :
+Si vous fournissez une valeur de paramètre qui ne fait pas partie des valeurs autorisées, vous recevrez un message similaire à celui de l’erreur suivante :
 
 ```
 Code=InvalidTemplate;
@@ -126,13 +126,13 @@ part of the allowed values
 
 Vérifiez les valeurs autorisées dans le modèle et fournissez-en une pendant le déploiement. Pour plus d’informations sur les valeurs de paramètres autorisées, consultez [Section Parameters des modèles Azure Resource Manager](template-syntax.md#parameters).
 
-<a id="too-many-resource-groups" />
+<a id="too-many-resource-groups"></a>
 
 ## <a name="solution-4---too-many-target-resource-groups"></a>Solution 4 : trop de groupes de ressources cibles
 
-Si vous spécifiez plus de cinq groupes de ressources cibles dans un déploiement unique, vous recevez cette erreur. Songez à consolider le nombre de groupes de ressources dans votre déploiement, ou à déployer certains modèles en tant que déploiements distincts. Pour plus d’informations, voir [Déployer des ressources Azure sur plusieurs groupes de ressources et des abonnements](cross-resource-group-deployment.md).
+Vous pouvez voir cette erreur dans les déploiements antérieurs, car vous étiez limité à cinq groupes de ressources cibles dans un déploiement unique. En mai 2020, cette limite a été augmentée à 800 groupes de ressources. Pour plus d’informations, voir [Déployer des ressources Azure sur plusieurs groupes de ressources et des abonnements](./deploy-to-resource-group.md).
 
-<a id="circular-dependency" />
+<a id="circular-dependency"></a>
 
 ## <a name="solution-5---circular-dependency-detected"></a>Solution 5 : dépendance circulaire détectée
 

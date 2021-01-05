@@ -3,13 +3,13 @@ title: Utiliser la bibliothèque Batch Management .NET. pour gérer des ressourc
 description: Créez, supprimez et modifiez des ressources de compte Azure Batch avec la bibliothèque Batch Management .NET.
 ms.topic: how-to
 ms.date: 04/24/2017
-ms.custom: seodec18, has-adal-ref
-ms.openlocfilehash: 05bc0c8a377517c4ab883e08a5a4848eb0042dcb
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.custom: seodec18, has-adal-ref, devx-track-csharp
+ms.openlocfilehash: 0672a7dc1a5c26eff88806ca37b28d70b49f2288
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726534"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88926522"
 ---
 # <a name="manage-batch-accounts-and-quotas-with-the-batch-management-client-library-for-net"></a>Gérer les quotas et comptes Batch avec la bibliothèque cliente Batch Management pour .NET
 
@@ -165,28 +165,28 @@ Pour exécuter l’exemple d’application, vous devez tout d’abord l’inscri
 
 
 [aad_about]:../active-directory/fundamentals/active-directory-whatis.md "Qu’est-ce qu’Azure Active Directory ?"
-[aad_adal]: ../active-directory/active-directory-authentication-libraries.md
+[aad_adal]: ../active-directory/azuread-dev/active-directory-authentication-libraries.md
 [aad_auth_scenarios]:../active-directory/develop/authentication-scenarios.md "Scénarios d’authentification pour Azure AD"
 [aad_integrate]:../active-directory/develop/quickstart-v1-integrate-apps-with-azure-ad.md "Intégration d’applications dans Azure Active Directory"
 [acct_mgmt_sample]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/AccountManagement
-[api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[api_mgmt_net]: https://msdn.microsoft.com/library/azure/mt463120.aspx
+[api_net]: /dotnet/api/microsoft.azure.batch
+[api_mgmt_net]: /dotnet/api/overview/azure/batch
 [azure_portal]: https://portal.azure.com
 [azure_storage]: https://azure.microsoft.com/services/storage/
-[azure_tokencreds]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.tokencloudcredentials.aspx
+[azure_tokencreds]: /previous-versions/azure/reference/mt167728(v=azure.100)
 [batch_explorer_project]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/BatchExplorer
-[net_batch_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient.aspx
-[net_list_keys]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.listkeysasync.aspx
-[net_create]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.createasync.aspx
-[net_delete]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.deleteasync.aspx
-[net_regenerate_keys]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.regeneratekeyasync.aspx
-[net_sharedkeycred]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.auth.batchsharedkeycredentials.aspx
-[net_mgmt_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.batchmanagementclient.aspx
-[net_mgmt_subscriptions]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.batchmanagementclient.subscriptions.aspx
-[net_mgmt_listaccounts]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.iaccountoperations.listasync.aspx
-[resman_api]: https://msdn.microsoft.com/library/azure/mt418626.aspx
-[resman_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.resources.resourcemanagementclient.aspx
-[resman_subclient]: https://msdn.microsoft.com/library/azure/microsoft.azure.subscriptions.subscriptionclient.aspx
+[net_batch_client]: /dotnet/api/microsoft.azure.batch.batchclient
+[net_list_keys]: /previous-versions/azure/mt463199(v=azure.100)
+[net_create]: /previous-versions/azure/mt463210(v=azure.100)
+[net_delete]: /previous-versions/azure/mt463128(v=azure.100)
+[net_regenerate_keys]: /previous-versions/azure/mt463213(v=azure.100)
+[net_sharedkeycred]: /dotnet/api/microsoft.azure.batch.auth.batchsharedkeycredentials
+[net_mgmt_client]: /dotnet/api/microsoft.azure.management.batch.batchmanagementclient
+[net_mgmt_subscriptions]: /previous-versions/azure/mt592937(v=azure.100)
+[net_mgmt_listaccounts]: /previous-versions/azure/mt463134(v=azure.100)
+[resman_api]: /previous-versions/azure/mt463134(v=azure.100)
+[resman_client]: /dotnet/api/microsoft.azure.management.resourcemanager
+[resman_subclient]: /dotnet/api/microsoft.azure.management.resourcemanager
 [resman_overview]: ../azure-resource-manager/management/overview.md
 
 [1]: ./media/batch-management-dotnet/portal-01.png

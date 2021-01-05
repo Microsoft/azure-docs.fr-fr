@@ -3,14 +3,14 @@ title: Prise en main de l’interface de ligne de commande Azure Service Fabric
 description: Découvrez comment utiliser l’interface de ligne de commande Azure Service Fabric. Découvrez comment se connecter à un cluster et gérer des applications.
 author: jeffj6123
 ms.topic: conceptual
-ms.date: 1/16/2020
+ms.date: 5/19/2020
 ms.author: jejarry
-ms.openlocfilehash: 46c5e1ed0a1d0db100c3415c40f59d46f62b21f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b3714f8401def9bed68e4b0845d025734a480cb3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229457"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83681803"
 ---
 # <a name="azure-service-fabric-cli"></a>Interface de ligne de commande Azure Service Fabric
 
@@ -18,7 +18,7 @@ L’interface de ligne de commande Azure Service Fabric est un utilitaire de lig
 
 [!INCLUDE [links to azure cli and service fabric cli](../../includes/service-fabric-sfctl.md)]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant l’installation, vérifiez que Python et pip sont installés dans votre environnement. Pour plus d’informations, consultez la [documentation de démarrage rapide de pip](https://pip.pypa.io/en/latest/quickstart/) et la [documentation d’installation officielle de Python](https://wiki.python.org/moin/BeginnersGuide/Download).
 
@@ -30,7 +30,8 @@ L’interface CLI Service Fabric a pour objectif de prendre en charge la derni
 
 | Version de la CLI   | Version du runtime prise en charge |
 |---------------|---------------------------|
-| Plus récente (~= 9)  | Plus récente (~=7)              |
+| Plus récente (~=10) | Plus récente (~=7,1)            |
+| 9.0.0         | 7.1                       |
 | 8.0.0         | 6.5                       |
 | 7.1.0         | 6.4                       |
 | 6.0.0         | 6.3                       |

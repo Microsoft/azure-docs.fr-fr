@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer BitaBIZ pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et dé-approvisionner automatiquement des comptes d’utilisateur dans BitaBIZ.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: d0d38abe-c041-482a-9d3f-ca340678c226
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: ad9176614c4a5235e5138444d4197286204a747f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8eccc3be7da201ee1e2af046c6b515871ef05adc
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77059196"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350770"
 ---
 # <a name="tutorial-configure-bitabiz-for-automatic-user-provisioning"></a>Tutoriel : Configurer BitaBIZ pour l’approvisionnement automatique d’utilisateurs
 
@@ -58,11 +54,11 @@ Avant de configurer BitaBIZ pour l’approvisionnement automatique d’utilisate
 
 1. Connectez-vous à la [Console d’administration BitaBIZ](https://www.bitabiz.com/login?lang=en). Cliquez sur **CONFIGURATION ADMINISTRATEUR**.
 
-    ![Console d’administration BitaBIZ](media/bitabiz-provisioning-tutorial/setup-admin.png)
+    :::image type="content" source="media/bitabiz-provisioning-tutorial/setup-admin.png" alt-text="Capture d’écran de la console d’administration BitaBIZ, avec l’administrateur d’installation mis en surbrillance." border="false":::
 
 2.  Accédez à **INTEGRATION**.
 
-    ![Console d’administration BitaBIZ](media/bitabiz-provisioning-tutorial/integration.png)
+    :::image type="content" source="media/bitabiz-provisioning-tutorial/integration.png" alt-text="Capture d’écran de la console d’administration BitaBIZ, avec Integration mis en surbrillance." border="false":::
 
 2.  Accédez à **Approvisionnement Microsoft Azure AD**.  Sélectionnez **Activé** dans l’approvisionnement automatique d’utilisateurs. Copiez les valeurs de l’**URL du point de terminaison d’approvisionnement SCIM** et du **Jeton du porteur**. Ces valeurs doivent être entrées dans les champs URL de locataire et Jeton secret dans l’onglet Approvisionnement de votre application BitaBIZ dans le Portail Microsoft Azure.
 
@@ -96,7 +92,7 @@ Pour configurer BitaBIZ pour l’approvisionnement automatique d’utilisateurs 
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans BitaBIZ en fonction des assignations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour BitaBIZ en suivant les instructions fournies dans le [tutoriel sur l’authentification unique BitaBIZ](BitaBIZ-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour BitaBIZ en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour BitaBIZ](BitaBIZ-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
 
 ### <a name="to-configure-automatic-user-provisioning-for-bitabiz-in-azure-ad"></a>Si vous souhaitez configurer l’attribution automatique d’utilisateurs pour BitaBIZ dans Azure AD :
 
@@ -110,11 +106,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section Informations d’identification de l’administrateur, entrez les valeurs d’**URL de point de terminaison d’approvisionnement SCIM** et de **Jeton du porteur** récupérées précédemment dans URL de locataire et Jeton secret, respectivement. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à BitaBIZ. Si la connexion échoue, vérifiez que votre compte BitaBIZ dispose des autorisations d’administrateur, puis réessayez.
 

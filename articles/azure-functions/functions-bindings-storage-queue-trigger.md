@@ -5,13 +5,13 @@ author: craigshoemaker
 ms.topic: reference
 ms.date: 02/18/2020
 ms.author: cshoe
-ms.custom: cc996988-fb4f-47
-ms.openlocfilehash: 74ca984232bef979062221a451d0ee10a6965bc6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, cc996988-fb4f-47, devx-track-python
+ms.openlocfilehash: 95560801d4132735435e4d45e8a588476636ec38
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235129"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96001233"
 ---
 # <a name="azure-queue-storage-trigger-for-azure-functions"></a>Déclencheur Stockage File d’attente Azure pour Azure Functions
 
@@ -97,6 +97,22 @@ public static void Run(CloudQueueMessage myQueueItem,
 
 La section [utilisation](#usage) explique `myQueueItem`, qui est nommé par la propriété `name` dans function.json.  La [section sur les métadonnées de message](#message-metadata) détaille toutes les autres variables indiquées.
 
+# <a name="java"></a>[Java](#tab/java)
+
+L’exemple Java suivant montre une fonction de déclencheur de file d’attente de stockage, qui consigne le message déclenché placé dans la file d’attente `myqueuename`.
+
+ ```java
+ @FunctionName("queueprocessor")
+ public void run(
+    @QueueTrigger(name = "msg",
+                   queueName = "myqueuename",
+                   connection = "myconnvarname") String message,
+     final ExecutionContext context
+ ) {
+     context.getLogger().info(message);
+ }
+ ```
+
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 L’exemple suivant montre une liaison de déclencheur de file d’attente dans un fichier *function.json* et une [fonction JavaScript](functions-reference-node.md) qui utilise la liaison. La fonction interroge la file d’attente `myqueue-items` et écrit un journal chaque fois qu’un élément de la file d’attente est traité.
@@ -142,6 +158,42 @@ module.exports = async function (context, message) {
 
 La section [utilisation](#usage) explique `myQueueItem`, qui est nommé par la propriété `name` dans function.json.  La [section sur les métadonnées de message](#message-metadata) détaille toutes les autres variables indiquées.
 
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+L’exemple suivant montre comment lire un message de file d’attente passé à une fonction via un déclencheur.
+
+Un déclencheur de file d’attente de stockage est défini dans le fichier *function.json*, où `type` est défini sur `queueTrigger`.
+
+```json
+{
+  "bindings": [
+    {
+      "name": "QueueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "messages",
+      "connection": "MyStorageConnectionAppSetting"
+    }
+  ]
+}
+```
+
+Le code du fichier dans *Run.ps1* déclare un paramètre `$QueueItem`, ce qui vous permet de lire le message de la file d’attente dans votre fonction.
+
+```powershell
+# Input bindings are passed in via param block.
+param([string] $QueueItem, $TriggerMetadata)
+
+# Write out the queue message and metadata to the information log.
+Write-Host "PowerShell queue trigger function processed work item: $QueueItem"
+Write-Host "Queue item expiration time: $($TriggerMetadata.ExpirationTime)"
+Write-Host "Queue item insertion time: $($TriggerMetadata.InsertionTime)"
+Write-Host "Queue item next visible time: $($TriggerMetadata.NextVisibleTime)"
+Write-Host "ID: $($TriggerMetadata.Id)"
+Write-Host "Pop receipt: $($TriggerMetadata.PopReceipt)"
+Write-Host "Dequeue count: $($TriggerMetadata.DequeueCount)"
+```
+
 # <a name="python"></a>[Python](#tab/python)
 
 L’exemple suivant montre comment lire un message de file d’attente passé à une fonction via un déclencheur.
@@ -163,7 +215,7 @@ Un déclencheur de file d’attente de stockage est défini dans *function.json*
 }
 ```
 
-Le code dans *_\_init_\_.py* déclare un paramètre `func.ServiceBusMessage` qui vous permet de lire le message de la file d’attente dans votre fonction.
+Le code dans *_\_init_\_.py* déclare un paramètre `func.QueueMessage` qui vous permet de lire le message de la file d’attente dans votre fonction.
 
 ```python
 import logging
@@ -189,22 +241,6 @@ def main(msg: func.QueueMessage):
 
     logging.info(result)
 ```
-
-# <a name="java"></a>[Java](#tab/java)
-
-L’exemple Java suivant montre une fonction de déclencheur de file d’attente de stockage, qui consigne le message déclenché placé dans la file d’attente `myqueuename`.
-
- ```java
- @FunctionName("queueprocessor")
- public void run(
-    @QueueTrigger(name = "msg",
-                   queueName = "myqueuename",
-                   connection = "myconnvarname") String message,
-     final ExecutionContext context
- ) {
-     context.getLogger().info(message);
- }
- ```
 
  ---
 
@@ -270,14 +306,6 @@ Le compte de stockage à utiliser est déterminé dans l’ordre suivant :
 
 Les attributs ne sont pas pris en charge par le script C#.
 
-# <a name="javascript"></a>[JavaScript](#tab/javascript)
-
-Les attributs ne sont pas pris en charge par JavaScript.
-
-# <a name="python"></a>[Python](#tab/python)
-
-Les attributs ne sont pas pris en charge par Python.
-
 # <a name="java"></a>[Java](#tab/java)
 
 L’annotation `QueueTrigger` vous donne accès à la file d’attente qui déclenche la fonction. L’exemple suivant rend le message de file d’attente disponible pour la fonction via le paramètre `message`.
@@ -305,6 +333,18 @@ public class QueueTriggerDemo {
 |`queueName`  | Déclare le nom de la file d’attente dans le compte de stockage. |
 |`connection` | Pointe vers la chaîne de connexion du compte de stockage. |
 
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+Les attributs ne sont pas pris en charge par JavaScript.
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Les attributs ne sont pas pris en charge par PowerShell.
+
+# <a name="python"></a>[Python](#tab/python)
+
+Les attributs ne sont pas pris en charge par Python.
+
 ---
 
 ## <a name="configuration"></a>Configuration
@@ -327,7 +367,7 @@ Le tableau suivant décrit les propriétés de configuration de liaison que vous
 
 Accédez aux données du message en utilisant un paramètre de méthode comme `string paramName`. Vous pouvez lier aux types suivants :
 
-* Objet : le runtime Functions désérialise une charge utile JSON dans une instance d’une classe arbitraire définie dans votre code. 
+* Objet : le runtime Functions désérialise une charge utile JSON dans une instance d’une classe arbitraire définie dans votre code.
 * `string`
 * `byte[]`
 * [CloudQueueMessage]
@@ -345,23 +385,27 @@ Accédez aux données du message en utilisant un paramètre de méthode comme `s
 
 Si vous essayez de lier à `CloudQueueMessage` et obtenez un message d’erreur, vérifiez que vous avez une référence à [la bonne version du SDK Stockage](functions-bindings-storage-queue.md#azure-storage-sdk-version-in-functions-1x).
 
+# <a name="java"></a>[Java](#tab/java)
+
+L’annotation [QueueTrigger](/java/api/com.microsoft.azure.functions.annotation.queuetrigger?view=azure-java-stable&preserve-view=true) vous donne accès au message de la file d’attente qui a déclenché la fonction.
+
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 La charge utile de l’élément de la file d’attente est disponible via `context.bindings.<NAME>`, où `<NAME>` correspond au nom défini dans *function.json*. Si la charge utile est JSON, la valeur est désérialisée en objet.
 
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Accédez au message de la file d’attente via un paramètre de chaîne correspondant au nom désigné par le paramètre `name` de liaison du fichier *function.json*.
+
 # <a name="python"></a>[Python](#tab/python)
 
-Accédez au message de la file d’attente via le paramètre typé en [QueueMessage](https://docs.microsoft.com/python/api/azure-functions/azure.functions.queuemessage?view=azure-python).
-
-# <a name="java"></a>[Java](#tab/java)
-
-L’annotation [QueueTrigger](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.queuetrigger?view=azure-java-stable) vous donne accès au message de la file d’attente qui a déclenché la fonction.
+Accédez au message de la file d’attente via le paramètre typé en [QueueMessage](/python/api/azure-functions/azure.functions.queuemessage?view=azure-python&preserve-view=true).
 
 ---
 
 ## <a name="message-metadata"></a>Métadonnées de message
 
-Le déclencheur de file d’attente fournit plusieurs [propriétés de métadonnées](./functions-bindings-expressions-patterns.md#trigger-metadata). Ces propriétés peuvent être utilisées dans les expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Les propriétés sont membres de la classe [CloudQueueMessage](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueuemessage).
+Le déclencheur de file d’attente fournit plusieurs [propriétés de métadonnées](./functions-bindings-expressions-patterns.md#trigger-metadata). Ces propriétés peuvent être utilisées dans les expressions de liaison dans d’autres liaisons ou en tant que paramètres dans votre code. Les propriétés sont membres de la classe [CloudQueueMessage](/dotnet/api/microsoft.azure.storage.queue.cloudqueuemessage).
 
 |Propriété|Type|Description|
 |--------|----|-----------|
@@ -388,7 +432,7 @@ L’algorithme utilise la logique suivante :
 - Lorsqu’un message est trouvé, le runtime attend deux secondes, puis vérifie s’il existe un autre message.
 - Lorsqu’aucun message n’est trouvé, il attend environ quatre secondes avant de réessayer.
 - Après plusieurs échecs de tentatives d’obtention d’un message de file d’attente, le temps d’attente continue à augmenter jusqu’à ce qu’il atteigne le délai d’attente maximal par défaut (une minute).
-- La durée d’attente maximale est configurable via la propriété `maxPollingInterval` dans le [fichier host.json](functions-host-json.md#queues).
+- La durée d’attente maximale est configurable via la propriété `maxPollingInterval` dans le [fichier host.json](functions-host-json-v1.md#queues).
 
 Pour le développement local, l’intervalle d’interrogation maximal par défaut est de deux secondes.
 
@@ -400,7 +444,7 @@ Lorsque plusieurs messages de file d’attente attendent, le déclencheur de fil
 
 La taille du lot et le seuil d’obtention d’un nouveau lot sont configurables dans le [fichier host.json](functions-host-json.md#queues). Si vous souhaitez minimiser l’exécution en parallèle des fonctions déclenchées par une file d’attente dans une application de fonction, vous pouvez définir la taille du lot sur 1. Ce paramètre évite les opérations simultanées uniquement pendant l’exécution de votre application de fonction sur une machine virtuelle unique. 
 
-Le déclencheur de la file d’attente empêche automatiquement une fonction de traiter un message de file d’attente plusieurs fois ; les fonctions ne doivent pas nécessairement être écrites pour être idempotent.
+Le déclencheur de la file d’attente empêche automatiquement une fonction de traiter un message de file d’attente plusieurs fois de manière simultanée.
 
 ## <a name="hostjson-properties"></a>Propriétés host.json
 
@@ -408,7 +452,7 @@ Le fichier [host.json](functions-host-json.md#queues) contient les paramètres q
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Écrire des messages de stockage de file d’attente (liaison de sortie)](./functions-bindings-storage-blob-output.md)
+- [Écrire des messages de stockage de file d’attente (liaison de sortie)](./functions-bindings-storage-queue-output.md)
 
 <!-- LINKS -->
 

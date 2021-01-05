@@ -4,14 +4,14 @@ description: Article de procédure relatif à l’annotation de ressources de do
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: c1e022591ce1aee073330055744fbd78d97c0b1d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61a91ca8a51886c28beee77853d1ae67911e00e7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68950256"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87081234"
 ---
 # <a name="how-to-annotate-data-sources-in-azure-data-catalog"></a>Guide pratique pour annoter les sources de données dans Azure Data Catalog
 

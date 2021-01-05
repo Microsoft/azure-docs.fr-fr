@@ -4,20 +4,27 @@ description: Cet article décrit Azure HPC Cache, un accélérateur d’accès a
 author: ekpgh
 ms.service: hpc-cache
 ms.topic: overview
-ms.date: 04/15/2020
+ms.date: 11/23/2020
 ms.author: v-erkel
-ms.openlocfilehash: 02013abe7050f7f193b6aeb1a441e70f46a5df48
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: references_regions
+ms.openlocfilehash: 0568d9b7fea2e4e048c0c1d1b2d6f81d64a9b114
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82106455"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95519334"
 ---
 # <a name="what-is-azure-hpc-cache"></a>Qu’est-ce qu’Azure HPC Cache ?
 
 Azure HPC Cache accélère l’accès à vos données pour les tâches de calcul haute performance. En mettant les fichiers en cache dans Azure, Azure HPC Cache apporte la scalabilité du cloud computing à votre workflow existant. Ce service peut être utilisé même pour les workflows impliquant un stockage de données sur des liaisons WAN, par exemple dans l’environnement NAS (Network Attached Storage) de votre centre de données local.
 
 Azure HPC Cache peut être lancé et supervisé facilement à partir du portail Azure. Le stockage NFS existant ou les nouveaux conteneurs d’objets blob peuvent être intégrés à son espace de noms agrégé, ce qui simplifie l’accès client même si vous modifiez la cible de stockage back-end.
+
+## <a name="overview-video"></a>Vidéo de présentation
+
+[![Miniature de vidéo : Présentation d’Azure HPC Cache - Cliquer pour visiter la page de la vidéo](media/video-1-overview.png)](https://azure.microsoft.com/resources/videos/hpc-cache-overview/)
+
+Cliquez sur l’image ci-dessus pour regarder un [bref aperçu d’Azure HPC Cache](https://azure.microsoft.com/resources/videos/hpc-cache-overview/).
 
 ## <a name="use-cases"></a>Cas d'utilisation
 
@@ -47,31 +54,21 @@ Un déploiement Azure HPC Cache permet d’accélérer les calculs d’analyse q
 
 ## <a name="region-availability"></a>Disponibilité des régions
 
-Azure HPC Cache est disponible dans les régions Azure suivantes :
+Visitez la page des [produits de l’infrastructure mondiale Azure par région](https://azure.microsoft.com/global-infrastructure/services/?products=hpc-cache) pour savoir où Azure HPC Cache est disponible.
 
-| Amérique du Nord      | Europe         | Asia            | Australie      |
-|--------------------|----------------|-----------------|----------------|
-| USA Est            | Europe Nord   | Centre de la Corée   | Australie Est |
-| USA Est 2          | Europe Ouest    | Asie Sud-Est  |               |
-| États-Unis - partie centrale méridionale | | | |
-| USA Ouest 2        | | | |
-
-La [fonctionnalité de clés gérées par le client](customer-keys.md) est prise en charge uniquement dans les régions suivantes :
+La [fonctionnalité de clés gérées par le client](customer-keys.md) est prise en charge uniquement dans les régions Azure suivantes :
 
 * USA Est
 * États-Unis - partie centrale méridionale
 * USA Ouest 2
+* Europe Ouest
+* Gouvernement des États-Unis – Arizona
+* Gouvernement américain - Virginie
 
-Consultez la [page produit Azure HPC Cache](https://azure.microsoft.com/services/hpc-cache) pour obtenir les informations de disponibilité les plus récentes.
-
-## <a name="service-availability"></a>Disponibilité du service
-
-Vous devez demander un accès pour chaque abonnement utilisé avec Azure HPC cache. Cette restriction permet de garantir la qualité du service.
-
-Demandez l’accès en remplissant [ce formulaire](https://aka.ms/onboard-hpc-cache). Une fois votre abonnement ajouté à la liste d’accès, vous pouvez créer des caches.
+Azure HPC Cache réside dans une seule région. Il peut accéder aux données stockées dans d’autres régions si vous le connectez à des conteneurs d’objets blob situés à cet emplacement. Le cache ne stocke pas les données client de façon permanente.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Consultez la [page produit Azure HPC Cache](https://azure.microsoft.com/services/hpc-cache) pour en savoir plus sur les fonctionnalités de la solution.
-* Apprenez-en plus sur les [prérequis](hpc-cache-prereqs.md) liés au produit.
+* Apprenez-en plus sur les [prérequis](hpc-cache-prerequisites.md) liés au produit.
 * [Créez un cache Azure HPC Cache](hpc-cache-create.md) à partir du portail Azure.

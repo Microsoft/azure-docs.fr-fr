@@ -16,10 +16,10 @@ ms.workload: infrastructure-services
 ms.date: 06/08/2018
 ms.author: kumud
 ms.openlocfilehash: 6eab1803bf5adab42be87b5f8567682c6d75947e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "74483525"
 ---
 # <a name="disaster-recovery-using-azure-dns-and-traffic-manager"></a>Récupération d’urgence à l’aide d’Azure DNS et Traffic Manager

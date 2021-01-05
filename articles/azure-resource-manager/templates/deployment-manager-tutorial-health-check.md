@@ -5,12 +5,12 @@ author: mumian
 ms.date: 10/09/2019
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 765c73a3ab8d5fa8939abe597d0141b24b59ac52
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3c7b74d31bc3c4e2276cd52c8e6450630dc99bcd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76152475"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86058025"
 ---
 # <a name="tutorial-use-health-check-in-azure-deployment-manager-public-preview"></a>Tutoriel : Utiliser le contrôle d’intégrité dans Azure Deployment Manager (préversion publique)
 
@@ -35,7 +35,7 @@ Ce tutoriel décrit les tâches suivantes :
 
 Ressources supplémentaires :
 
-* Les [informations de référence de l’API REST Azure Deployment Manager](https://docs.microsoft.com/rest/api/deploymentmanager/).
+* Les [informations de référence de l’API REST Azure Deployment Manager](/rest/api/deploymentmanager/).
 * [Un exemple d’Azure Deployment Manager](https://github.com/Azure-Samples/adm-quickstart).
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
@@ -58,7 +58,7 @@ Ouvrez CreateADMRollout.Parameters.json et mettez à jour les valeurs de **proje
 
 ## <a name="create-a-health-check-service-simulator"></a>Créer un simulateur de service de contrôle d’intégrité
 
-En production, vous utilisez généralement un ou plusieurs fournisseurs de supervision. Pour faciliter l’intégration de l’intégrité, Microsoft collabore avec certaines des principales sociétés de supervision de l’intégrité de service pour vous fournir une solution copier/coller simple vous permettant d’intégrer des contrôles d’intégrité à vos déploiements. Pour obtenir la liste de ces sociétés, consultez [Fournisseurs de contrôle d’intégrité](./deployment-manager-health-check.md#health-monitoring-providers). Pour les besoins de ce tutoriel, vous créez une [fonction Azure](/azure/azure-functions/) afin de simuler un service de supervision de l’intégrité. Cette fonction prend un code d’état et retourne le même code. Votre modèle Azure Deployment Manager utilise le code d’état pour déterminer comment effectuer le déploiement.
+En production, vous utilisez généralement un ou plusieurs fournisseurs de supervision. Pour faciliter l’intégration de l’intégrité, Microsoft collabore avec certaines des principales sociétés de supervision de l’intégrité de service pour vous fournir une solution copier/coller simple vous permettant d’intégrer des contrôles d’intégrité à vos déploiements. Pour obtenir la liste de ces sociétés, consultez [Fournisseurs de contrôle d’intégrité](./deployment-manager-health-check.md#health-monitoring-providers). Pour les besoins de ce tutoriel, vous créez une [fonction Azure](../../azure-functions/index.yml) afin de simuler un service de supervision de l’intégrité. Cette fonction prend un code d’état et retourne le même code. Votre modèle Azure Deployment Manager utilise le code d’état pour déterminer comment effectuer le déploiement.
 
 Les deux fichiers suivants sont utilisés pour le déploiement de la fonction Azure. Vous n’avez pas besoin de télécharger ces fichiers pour suivre le tutoriel.
 
@@ -369,4 +369,4 @@ Lorsque vous n’en avez plus besoin, nettoyez les ressources Azure que vous ave
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez appris à utiliser la fonctionnalité de contrôle d’intégrité d’Azure Deployment Manager. Pour en savoir plus, consultez la [Documentation Azure Resource Manager](/azure/azure-resource-manager/).
+Dans ce tutoriel, vous avez appris à utiliser la fonctionnalité de contrôle d’intégrité d’Azure Deployment Manager. Pour en savoir plus, consultez la [Documentation Azure Resource Manager](../index.yml).

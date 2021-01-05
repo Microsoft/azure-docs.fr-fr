@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/31/2020
 ms.author: kumud
-ms.openlocfilehash: 096dbcb6b6a732bd21622658f6f30c5158a821c5
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: ff33bf771065e7af209934a5c54b6f8f2e34835e
+ms.sourcegitcommit: 67e8e1caa8427c1d78f6426c70bf8339a8b4e01d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80420520"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91666781"
 ---
 # <a name="reserved-public-ipv6-address-prefix"></a>Préfixe d’adresses IPv6 publiques réservées
 
@@ -28,7 +28,7 @@ Toutes les adresses IP publiques que vous réservez sont associées à une régi
 > [!WARNING]
 > Faites attention à ne pas supprimer accidentellement vos adresses IP publiques. La suppression d’une adresse IP publique entraîne sa suppression de votre abonnement, et vous ne pourrez pas la récupérer (même avec l’aide du support Azure).
 
-En plus de réserver des adresses IPv6 individuelles, vous pouvez réserver des plages contiguës d’adresses IPv6 Azure (appelées préfixes IP) pour votre utilisation.  À l’instar des adresses IP individuelles, les préfixes réservés sont associés à une région Azure de votre choix et à votre abonnement Azure. La réservation d’une plage d’adresses contiguë et prévisible a de nombreuses utilisations. Par exemple, vous pouvez grandement simplifier la *mise en liste verte*, par votre entreprise et vos clients, des adresses IP de vos applications hébergées par Azure, car vos plages d’adresses IP statiques peuvent être facilement programmées dans des pare-feu locaux.  Vous pouvez créer des adresses IP publiques à partir de votre préfixe IP en fonction des besoins et, quand vous supprimez ces adresses IP publiques, elles sont *retournées* à votre plage réservée afin que vous puissiez les réutiliser ultérieurement. Toutes les adresses IP de votre préfixe IP sont réservées à votre usage exclusif jusqu’à ce que vous supprimiez votre préfixe.
+En plus de réserver des adresses IPv6 individuelles, vous pouvez réserver des plages contiguës d’adresses IPv6 Azure (appelées préfixes IP) pour votre utilisation.  À l’instar des adresses IP individuelles, les préfixes réservés sont associés à une région Azure de votre choix et à votre abonnement Azure. La réservation d’une plage d’adresses contiguë et prévisible a de nombreuses utilisations. Par exemple, vous pouvez grandement simplifier le *filtrage*, par votre entreprise et vos clients, des adresses IP de vos applications hébergées par Azure, car vos plages d’adresses IP statiques peuvent être facilement programmées dans des pare-feu locaux.  Vous pouvez créer des adresses IP publiques à partir de votre préfixe IP en fonction des besoins et, quand vous supprimez ces adresses IP publiques, elles sont *retournées* à votre plage réservée afin que vous puissiez les réutiliser ultérieurement. Toutes les adresses IP de votre préfixe IP sont réservées à votre usage exclusif jusqu’à ce que vous supprimiez votre préfixe.
 
 
 

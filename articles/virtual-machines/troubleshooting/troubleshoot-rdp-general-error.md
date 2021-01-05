@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: 7fc0fbf3362d18284ad6a80afa6396b6be1270a9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2a1a5f3eaf79a345b0d33f43d260fe6aa15236b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71057997"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87439257"
 ---
 # <a name="troubleshoot-an-rdp-general-error-in-azure-vm"></a>Résoudre une erreur générale RDP sur une machine virtuelle Azure
 
@@ -60,7 +60,7 @@ L’écouteur RDP est mal configuré.
 
 ## <a name="solution"></a>Solution
 
-Pour résoudre ce problème, [sauvegardez le disque du système d’exploitation](../windows/snapshot-copy-managed-disk.md), [attachez le disque du système d’exploitation à une machine virtuelle de secours](troubleshoot-recovery-disks-portal-windows.md), puis suivez les étapes.
+Avant de suivre cette procédure, faites en sauvegarde en prenant un instantané du disque du système d’exploitation de la machine virtuelle affectée. Pour résoudre ce problème, utilisez le contrôle série ou réparez la machine virtuelle en mode hors connexion.
 
 ### <a name="serial-console"></a>Console série
 
@@ -78,29 +78,37 @@ Pour résoudre ce problème, [sauvegardez le disque du système d’exploitation
 
 #### <a name="step-2-check-the-values-of-rdp-registry-keys"></a>Étape 2 : vérifier les valeurs des clés de Registre RDP :
 
-1. Vérifiez si le protocole RDP est désactivé par des stratégies.
+1. Vérifiez si le protocole RDP est désactivé par des stratégies de groupe.
 
-      ```
-      REM Get the local policy 
-      reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server " /v fDenyTSConnections
+    ```
+    REM Get the group policy setting
+    reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDenyTSConnections
+    ```
+    Si la stratégie de groupe stipule que RDP est désactivé (la valeur fDenyTSConnections est 0x1), exécutez la commande suivante pour activer le service TermService. Si la clé de Registre est introuvable, aucune stratégie de groupe n’est configurée pour désactiver RDP. Vous pouvez passer à l’étape suivante.
 
-      REM Get the domain policy if any
-      reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDenyTSConnections
-      ```
+    ```
+    REM update the fDenyTSConnections value to enable TermService service
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+    ```
+    > [!NOTE]
+    > Cette étape active temporairement le service TermService. Ce changement sera réinitialisé au moment de l’actualisation des paramètres de stratégie de groupe. Pour résoudre le problème, vous devez vérifier si le service TermService est désactivé par la stratégie de groupe locale ou la stratégie de groupe de domaine, puis mettre à jour les paramètres de stratégie en conséquence.
+    
+2. Vérifiez la configuration de la connexion à distance actuelle.
+    ```
+    REM Get the local remote connection setting
+    reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+    ```
+    Si la commande retourne 0x1, la machine virtuelle n’autorise pas la connexion à distance. Ensuite, autorisez la connexion à distance à l’aide de la commande suivante :
+     ```
+     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+     ```
+    
+1. Vérifiez la configuration actuelle du serveur Bureau à distance.
 
-      - Si la stratégie de domaine existe, la configuration de la stratégie locale est remplacée.
-      - Si la stratégie de domaine indique que RDP est désactivé (1), mettez à jour la stratégie AD à partir du contrôleur de domaine.
-      - Si la stratégie de domaine indique que RDP est activé (0), aucune mise à jour n’est nécessaire.
-      - Si la stratégie de domaine n’existe pas et que la stratégie locale indique que RDP est désactivé (1), activez RDP à l’aide de la commande suivante : 
-      
-            reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
-                  
-
-2. Vérifiez la configuration actuelle du serveur Bureau à distance.
-
-      ```
-      reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v TSEnabled
-      ```
+    ```
+    REM Get the local remote connection setting
+    reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v TSEnabled
+    ```
 
       Si la commande retourne 0, le serveur Bureau à distance est désactivé. Activez alors le serveur Bureau à distance comme suit :
 
@@ -175,7 +183,7 @@ Pour plus d'informations, consultez [Le Bureau à distance se déconnecte régul
 
 #### <a name="step-1-turn-on-remote-desktop"></a>Étape 1 : activer le Bureau à distance
 
-1. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](../windows/troubleshoot-recovery-disks-portal.md).
+1. [Attachez le disque du système d’exploitation à une machine virtuelle de récupération](./troubleshoot-recovery-disks-portal-windows.md).
 2. Établissez une connexion Bureau à distance avec la machine virtuelle de récupération.
 3. Vérifiez que le disque est marqué comme étant **En ligne** dans la console Gestion des disques. Notez la lettre de lecteur qui est affectée au disque du système d’exploitation attaché.
 4. Établissez une connexion Bureau à distance avec la machine virtuelle de récupération.

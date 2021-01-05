@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 11/21/2019
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: annaba
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d9760624afec111a271ae5aa0ebbe5533d6ba8d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1001d5524fe99783cda4d5b77bdaceacc6791848
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81680206"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96861371"
 ---
 # <a name="azure-active-directory-certificate-based-authentication-on-android"></a>Authentification par certificat Azure Active Directory sur Android
 
@@ -64,10 +64,10 @@ Une bonne pratique consiste à ajouter les informations suivantes aux pages d’
 * La configuration requise pour l’installation de Microsoft Authenticator sur Android
 * Instructions sur l’obtention d’un certificat utilisateur.
 
-Pour plus d’informations, consultez [Personnalisation des pages de connexion AD FS](https://technet.microsoft.com/library/dn280950.aspx).
+Pour plus d’informations, consultez [Personnalisation des pages de connexion AD FS](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn280950(v=ws.11)).
 
 Certaines applications Office (pour lesquelles l'authentification moderne est activée) envoient « *prompt=login* » à Azure AD dans leur requête. Par défaut, Azure AD traduit l'instruction « *prompt=login* » de la requête adressée aux services ADFS par « *wauth=usernamepassworduri* » (demande aux services ADFS d'effectuer l'authentification U/P) et « *wfresh=0* » (demande aux services ADFS d'ignorer l'état d'authentification unique et d'effectuer une nouvelle authentification). Si vous souhaitez activer l’authentification par certificat pour ces applications, vous devez modifier le comportement par défaut d’Azure AD. Dans les paramètres du domaine fédéré, définissez « *PromptLoginBehavior* » sur « *Désactivé* ».
-Vous pouvez utiliser l’applet de commande [MSOLDomainFederationSettings](/powershell/module/msonline/set-msoldomainfederationsettings?view=azureadps-1.0) pour effectuer cette tâche :
+Vous pouvez utiliser l’applet de commande [MSOLDomainFederationSettings](/powershell/module/msonline/set-msoldomainfederationsettings) pour effectuer cette tâche :
 
 `Set-MSOLDomainFederationSettings -domainname <domain> -PromptLoginBehavior Disabled`
 

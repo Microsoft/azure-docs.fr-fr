@@ -10,17 +10,17 @@ ms.service: role-based-access-control
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 05/01/2020
+ms.topic: troubleshooting
+ms.date: 11/10/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.custom: seohack1
-ms.openlocfilehash: 9eabd6d2a8f3179c5553bc6ca6d59407388c4d42
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.custom: seohack1, devx-track-azurecli
+ms.openlocfilehash: e30af9522d7c8fa81c4d93e11d252aefc4426586
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735559"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184261"
 ---
 # <a name="troubleshoot-azure-rbac"></a>Résoudre les problèmes liés à Azure RBAC
 
@@ -28,7 +28,7 @@ Cet article répond à certaines questions fréquentes sur le contrôle d’acc�
 
 ## <a name="azure-role-assignments-limit"></a>Limite des attributions de rôle Azure
 
-Azure prend en charge jusqu’à **2 000** attributions de rôle par abonnement. Si vous obtenez le message d’erreur « Plus aucune attribution de rôle ne peut être créée (code : RoleAssignmentLimitExceeded) » lorsque vous tentez d’attribuer un rôle, essayez de réduire le nombre d’attributions de rôle dans l’abonnement.
+Azure prend en charge jusqu’à **2 000** attributions de rôle par abonnement. Cette limite comprend les attributions de rôles au niveau de l’abonnement, du groupe de ressources et des étendues de ressources. Si vous obtenez le message d’erreur « Plus aucune attribution de rôle ne peut être créée (code : RoleAssignmentLimitExceeded) » lorsque vous tentez d’attribuer un rôle, essayez de réduire le nombre d’attributions de rôle dans l’abonnement.
 
 > [!NOTE]
 > Cette limite d’attribution de rôle de **2 000** par abonnement est fixe et ne peut pas être augmentée.
@@ -52,6 +52,23 @@ $ras.Count
 ## <a name="problems-with-azure-role-assignments"></a>Problèmes liés aux attributions de rôle Azure
 
 - Si vous ne pouvez pas ajouter d’attribution de rôle dans le portail Azure sur **Contrôle d’accès (IAM)** car l’option **Ajouter** > **Ajouter une attribution de rôle** est désactivée, ou parce que vous obtenez l’erreur d’autorisations « Le client avec l’ID d’objet n’est pas autorisé à effectuer l’action », vérifiez que vous êtes actuellement connecté avec un utilisateur disposant d’un rôle qui a l’autorisation `Microsoft.Authorization/roleAssignments/write`, comme [Propriétaire](built-in-roles.md#owner) ou [Administrateur de l’accès utilisateur](built-in-roles.md#user-access-administrator) dans l’étendue sur laquelle vous essayez d’attribuer le rôle.
+- Si vous utilisez un principal de service pour attribuer des rôles, il se peut que le message d’erreur « Privilèges insuffisants pour effectuer l’opération » s’affiche. Supposons, par exemple, que vous avez un principal de service auquel le rôle Propriétaire a été attribué et que vous tentez de créer l’attribution de rôle suivante en tant que principal de service à l’aide d’Azure CLI :
+
+    ```azurecli
+    az login --service-principal --username "SPNid" --password "password" --tenant "tenantid"
+    az role assignment create --assignee "userupn" --role "Contributor"  --scope "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}"
+    ```
+
+    Si le message d’erreur « Privilèges insuffisants pour terminer l’opération » s’affiche, cela est probablement dû au fait qu’Azure CLI tente de rechercher l’identité de la personne responsable dans Azure AD, et que le principal du service ne peut pas lire Azure AD par défaut.
+
+    Il existe deux façons de résoudre cette erreur. La première consiste à attribuer au principal de service le rôle [Lecteurs de répertoire](../active-directory/roles/permissions-reference.md#directory-readers) afin qu’il puisse lire les données dans l’annuaire.
+
+    La deuxième consiste à créer l’attribution de rôle à l’aide du paramètre `--assignee-object-id` au lieu de `--assignee`. En utilisant `--assignee-object-id`, Azure CLI ignorera la recherche Azure AD. Vous devez obtenir l’ID d’objet de l’utilisateur, du groupe ou de l’application auquel vous souhaitez attribuer le rôle. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure CLI](role-assignments-cli.md#add-role-assignment-for-a-new-service-principal-at-a-resource-group-scope).
+
+    ```azurecli
+    az role assignment create --assignee-object-id 11111111-1111-1111-1111-111111111111  --role "Contributor" --scope "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}"
+    ```
+- Si vous tentez de supprimer la dernière attribution de rôle Propriétaire pour un abonnement, l’erreur « Impossible de supprimer le dernier RBAC admin assignment » risque de s’afficher. La suppression de la dernière attribution de rôle Propriétaire pour un abonnement n’est pas prise en charge afin d’éviter que l’abonnement ne devienne orphelin. Si vous voulez annuler votre abonnement, consultez [Annulation de votre abonnement Azure](../cost-management-billing/manage/cancel-azure-subscription.md).
 
 ## <a name="problems-with-custom-roles"></a>Problèmes liés aux rôles personnalisés
 
@@ -66,11 +83,11 @@ $ras.Count
 - Vous ne pouvez définir qu’un seul groupe d’administration dans `AssignableScopes` d’un rôle personnalisé. L’ajout d’un groupe d’administration à `AssignableScopes` est actuellement en préversion.
 - Les rôles personnalisés avec `DataActions` ne peuvent pas être attribués dans l’étendue du groupe d’administration.
 - Azure Resource Manager ne valide pas le groupe d’administration existant dans l’étendue attribuable de la définition de rôle.
-- Pour plus d’informations sur les rôles personnalisés et les groupes d’administration, consultez [Organiser vos ressources avec des groupes d’administration Azure](../governance/management-groups/overview.md#custom-rbac-role-definition-and-assignment).
+- Pour plus d’informations sur les rôles personnalisés et les groupes d’administration, consultez [Organiser vos ressources avec des groupes d’administration Azure](../governance/management-groups/overview.md#azure-custom-role-definition-and-assignment).
 
 ## <a name="transferring-a-subscription-to-a-different-directory"></a>Transfert d’un abonnement vers un autre répertoire
 
-- Si vous avez besoin de connaître les étapes permettant de transférer un abonnement à un répertoire Azure AD différent, consultez [Transférer la propriété d’un abonnement Azure à un autre compte](../cost-management-billing/manage/billing-subscription-transfer.md).
+- Pour connaître la procédure à suivre pour transférer un abonnement vers une autre instance Azure AD, consultez [Transférer un abonnement Azure vers une autre instance Azure AD Directory](transfer-subscription.md).
 - Si vous transférez un abonnement vers un autre répertoire Azure AD, toutes les attributions de rôle définies sont **définitivement** supprimées du répertoire Azure AD source et ne sont pas migrées sur le répertoire Azure AD cible. Vous devez recréer vos attributions de rôle dans le répertoire cible. Vous devez également recréer manuellement les identités managées pour les ressources Azure. Pour plus d’informations, consultez [Questions fréquentes et problèmes connus en lien avec les identités managées](../active-directory/managed-identities-azure-resources/known-issues.md).
 - Si vous êtes administrateur général Azure AD et que vous n’avez pas accès à un abonnement après son transfert entre des répertoires, utilisez l’option **Gestion de l’accès pour les ressources Azure** afin d’[élever votre accès](elevate-access-global-admin.md) temporairement et ainsi accéder à l’abonnement.
 
@@ -83,11 +100,17 @@ $ras.Count
 - Si vous obtenez l’erreur d’autorisations « Le client avec l’ID d’objet n’est pas autorisé à effectuer l’action sur l’étendue (code : AuthorizationFailed) » lorsque vous tentez de créer une ressource, vérifiez que vous êtes actuellement connecté avec un utilisateur disposant d’un rôle qui a l’autorisation d’écriture sur la ressource au niveau de l’étendue sélectionnée. Par exemple, pour gérer les machines virtuelles dans un groupe de ressources, vous devez disposer du rôle [Contributeur de machines virtuelles](built-in-roles.md#virtual-machine-contributor) sur le groupe de ressources (ou l’étendue parente). Afin d’obtenir la liste des autorisations pour chaque rôle intégré, consultez [Rôles intégrés Azure](built-in-roles.md).
 - Si vous obtenez l’erreur d’autorisations « Vous n’êtes pas autorisé à créer une demande de support » quand vous tentez de créer ou de mettre à jour un ticket de support, vérifiez que vous êtes actuellement connecté avec un utilisateur disposant d’un rôle qui a l’autorisation `Microsoft.Support/supportTickets/write`, comme [Collaborateur de la demande de support](built-in-roles.md#support-request-contributor).
 
+## <a name="move-resources-with-role-assignments"></a>Déplacer des ressources avec des attributions de rôles
+
+Si vous déplacez une ressource à laquelle un rôle Azure est affecté directement (ou est affecté à une ressource enfant de cette ressource), l’attribution de rôle n’est pas déplacée et devient orpheline. Après le déplacement, vous devez recréer l’attribution de rôle. Finalement, l’attribution de rôle orpheline sera automatiquement supprimée, mais il est recommandé de supprimer l’attribution de rôle avant de déplacer la ressource.
+
+Pour plus d'informations sur le déplacement des ressources, consultez [Déplacer des ressources vers un nouveau groupe de ressources ou un nouvel abonnement](../azure-resource-manager/management/move-resource-group-and-subscription.md).
+
 ## <a name="role-assignments-with-identity-not-found"></a>Attributions de rôle avec identité introuvable
 
 Dans la liste des attributions de rôles pour le Portail Azure, vous pouvez remarquer que le principal de sécurité (utilisateur, groupe, principal de service ou identité gérée) est répertorié comme **Identité introuvable** avec un type **Inconnu**.
 
-![Groupe de ressources d'application web](./media/troubleshooting/unknown-security-principal.png)
+![Identité introuvable répertoriée dans les attributions de rôle Azure](./media/troubleshooting/unknown-security-principal.png)
 
 L’identité n’a peut-être pas été trouvée pour deux raisons :
 

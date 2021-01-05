@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 05/07/2019
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 88a0177755fbd913bdaaf0ecf3e12c62dee294c1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ee9d879849a94ac255a0967ad4fbc762417f8cd4
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885070"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442648"
 ---
 # <a name="scenario-a-web-api-that-calls-web-apis"></a>Scénario : Une API web qui appelle des API web
 
@@ -24,7 +24,7 @@ Découvrez tout ce que vous devez savoir pour générer une API web qui appelle 
 
 ## <a name="prerequisites"></a>Prérequis
 
-Ce scénario, dans lequel une API web protégée appelle des API web, repose sur le scénario « Protéger une API web ». Pour en savoir plus sur ce scénario de base, consultez la section [Scénario : API web protégée](scenario-protected-web-api-overview.md).
+Ce scénario, dans lequel une API web protégée appelle d’autres API web, repose sur le [scénario : API web protégée](scenario-protected-web-api-overview.md).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -40,5 +40,4 @@ La partie de l’inscription d’application liée aux autorisations de l’API 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](scenario-web-api-call-api-app-registration.md)
+Passez à l’article suivant de ce scénario, [Inscription d’application](scenario-web-api-call-api-app-registration.md).

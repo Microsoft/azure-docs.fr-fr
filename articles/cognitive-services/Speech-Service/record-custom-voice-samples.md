@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 04/13/2020
 ms.author: erhopf
-ms.openlocfilehash: 2897fe2e0cc8aeb929b0a33f5cdaba9c60f2a244
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: dae7b8e0485c1a2456b85e0910f60b2164d4e41c
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81261582"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026316"
 ---
 # <a name="record-voice-samples-to-create-a-custom-voice"></a>Enregistrer des échantillons vocaux pour créer une voix personnalisée
 
@@ -211,7 +211,7 @@ Laissez seulement environ 0,2 seconde de silence au début et à la fin de chaq
 
 Convertissez chaque fichier au format 16 bits et à un taux d’échantillonnage de 16 kHz avant l’enregistrement et, si vous avez enregistré les conversations du studio, supprimez le second canal. Enregistrez chaque fichier au format WAV, puis nommez les fichiers à l’aide des numéros d’énoncé de votre script.
 
-Pour finir, créez la *transcription* qui associe chaque fichier WAV à une version texte de l’énoncé correspondant. La [création des polices de la voix personnalisée](how-to-customize-voice-font.md) fournit des informations sur le format requis. Vous pouvez copier le texte directement à partir de votre script. Créez ensuite un fichier Zip contenant les fichiers WAV et la transcription du texte.
+Pour finir, créez la *transcription* qui associe chaque fichier WAV à une version texte de l’énoncé correspondant. La [création des polices de la voix personnalisée](./how-to-custom-voice-create-voice.md) fournit des informations sur le format requis. Vous pouvez copier le texte directement à partir de votre script. Créez ensuite un fichier Zip contenant les fichiers WAV et la transcription du texte.
 
 Archivez les enregistrements originaux dans un endroit sûr afin de pouvoir les réutiliser ultérieurement si nécessaire. Conservez également votre script et vos notes.
 
@@ -220,4 +220,4 @@ Archivez les enregistrements originaux dans un endroit sûr afin de pouvoir les 
 Vous êtes prêt à charger vos enregistrements et à créer votre voix personnalisée.
 
 > [!div class="nextstepaction"]
-> [Créer des polices de la voix personnalisées](how-to-customize-voice-font.md)
+> [Créer des polices de la voix personnalisées](./how-to-custom-voice-create-voice.md)

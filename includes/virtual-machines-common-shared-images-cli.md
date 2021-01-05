@@ -7,13 +7,13 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 03/24/2020
 ms.author: cynthn
-ms.custom: include file
-ms.openlocfilehash: de1a22ed6e9707767c0d097a9250f0bdd31414d5
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: 9556b20ba0ceac2d4c1ad92897e6f9d46293387f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82788958"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96027944"
 ---
 ## <a name="create-an-image-gallery"></a>Créer une galerie d’images 
 
@@ -50,4 +50,4 @@ az role assignment create \
    --scope <gallery ID>
 ```
 
-Pour plus d’informations sur le partage de ressources à l’aide de RBAC, consultez [Gérer l’accès à l’aide de RBAC et Azure CLI](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-cli).
+Pour plus d’informations sur le partage de ressources à l’aide de RBAC, consultez [Gérer l’accès à l’aide de RBAC et Azure CLI](../articles/role-based-access-control/role-assignments-cli.md).

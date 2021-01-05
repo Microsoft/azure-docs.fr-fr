@@ -1,17 +1,17 @@
 ---
 title: Tutoriel - Déployer une application sur Azure Service Fabric Mesh
 description: Dans ce tutoriel, vous allez apprendre à déployer une application sur Service Fabric Mesh à l’aide d’un modèle.
-author: dkkapur
+author: georgewallace
 ms.topic: tutorial
 ms.date: 01/11/2019
-ms.author: dekapur
-ms.custom: mvc, devcenter
-ms.openlocfilehash: 1ff1407400843fdb0f0ff997e2e0a3c1b7e67c7d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.author: gwallace
+ms.custom: mvc, devcenter, devx-track-azurecli
+ms.openlocfilehash: 54ac7b27ada62a969dd40428fd9a753bb5a99530
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75494942"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499830"
 ---
 # <a name="tutorial-deploy-an-application-to-service-fabric-mesh-using-a-template"></a>Tutoriel : Déployer une application sur Service Fabric Mesh à l’aide d’un modèle.
 
@@ -104,6 +104,11 @@ Ce tutoriel utilise l’exemple d’application de liste de tâches.  Les images
 
 Pour envoyer une image vers une instance ACR, vous devez tout d’abord disposer d’une image conteneur. Si vous n’avez pas encore d’images conteneur locales, utilisez la commande [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) pour tirer les images [WebFrontEnd](https://hub.docker.com/r/seabreeze/azure-mesh-todo-webfrontend/) et [ToDoService](https://hub.docker.com/r/seabreeze/azure-mesh-todo-service/) de Docker Hub.
 
+>[!NOTE]
+> Depuis le 2 novembre 2020, des [limites de taux de téléchargement s’appliquent](https://docs.docker.com/docker-hub/download-rate-limit/) aux requêtes anonymes et authentifiées qui sont envoyées à Docker Hub à partir de comptes de plan Docker Gratuit. Ces limites sont appliquées par adresse IP. 
+> 
+> Ces commandes utilisent des images publiques issues de Docker Hub. Notez que votre taux de téléchargement peut être limité. Pour plus d’informations, consultez [S’authentifier auprès de Docker Hub](../container-registry/buffer-gate-public-content.md#authenticate-with-docker-hub).
+
 Tirer les images Windows :
 
 ```bash
@@ -171,7 +176,7 @@ La sortie précédente confirme la présence de `azure-mesh-todo-service:1.0-nan
 ## <a name="retrieve-credentials-for-the-registry"></a>Récupérer les informations d’identification pour le registre
 
 > [!IMPORTANT]
-> L’activation de l’utilisateur administrateur sur une instance ACR n’est pas recommandée pour les scénarios de production. Elle est effectuée ici pour des raisons pratiques. Pour les scénarios de production, utilisez un [principal de service](https://docs.microsoft.com/azure/container-registry/container-registry-auth-service-principal) pour l’authentification utilisateur et système.
+> L’activation de l’utilisateur administrateur sur une instance ACR n’est pas recommandée pour les scénarios de production. Elle est effectuée ici pour des raisons pratiques. Pour les scénarios de production, utilisez un [principal de service](../container-registry/container-registry-auth-service-principal.md) pour l’authentification utilisateur et système.
 
 Pour déployer une instance de conteneur à partir du registre créé à l’aide d’un modèle, vous devez fournir les informations d’identification du registre pendant le déploiement. Tout d’abord, activez l’utilisateur administrateur sur votre registre avec la commande suivante :
 
@@ -191,7 +196,7 @@ Les valeurs retournées pour le nom de serveur de connexion ACR, le nom d’util
 
 ## <a name="download-and-explore-the-template-and-parameters-files"></a>Télécharger et explorer les fichiers de modèle et de paramètres
 
-Une application Service Fabric Mesh est une ressource Azure que vous pouvez déployer et gérer à l’aide de modèles Azure Resource Manager (RM). Si vous n’avez pas une bonne connaissance des concepts de déploiement et de gestion des solutions Azure, consultez [Vue d’ensemble d’Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) et [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](/azure/azure-resource-manager/resource-group-authoring-templates).
+Une application Service Fabric Mesh est une ressource Azure que vous pouvez déployer et gérer à l’aide de modèles Azure Resource Manager (RM). Si vous n’avez pas une bonne connaissance des concepts de déploiement et de gestion des solutions Azure, consultez [Vue d’ensemble d’Azure Resource Manager](../azure-resource-manager/management/overview.md) et [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md).
 
 Ce tutoriel utilise l’exemple de liste de tâches.  Au lieu de créer des fichiers de modèle et de paramètres, téléchargez les fichiers de [modèle de déploiement mesh_rp.windows.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.json) et de [paramètres mesh_rp.windows.parameter.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/todolist/mesh_rp.windows.parameters.json).
 
@@ -408,4 +413,4 @@ Dans cette partie du tutoriel, vous avez appris à :
 
 Passez au tutoriel suivant :
 > [!div class="nextstepaction"]
-> [Mettre à l’échelle une application s’exécutant dans Service Fabric Mesh](service-fabric-mesh-tutorial-template-scale-services.md)
+> [Mettre à l’échelle une application en cours d’exécution dans Service Fabric Mesh](service-fabric-mesh-tutorial-template-scale-services.md)

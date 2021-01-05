@@ -5,23 +5,24 @@ services: virtual-machines-linux
 author: axayjo
 manager: gwallace
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.tgt_pltfrm: vm-linux
 ms.topic: article
 ms.date: 12/13/2018
 ms.author: akjosh
-ms.openlocfilehash: 7a7c1af1193ba391550438229a22c4a8c116e6be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ffbafb76fd2c6dd06a88bfd79746557889039cd6
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80289173"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94956022"
 ---
 # <a name="use-linux-diagnostic-extension-to-monitor-metrics-and-logs"></a>Utilisez l’extension de diagnostic Linux pour surveiller les métriques et les journaux d’activité
 
 Ce document décrit la version 3.0 et les versions ultérieures de l’extension de diagnostic Linux.
 
 > [!IMPORTANT]
-> Pour plus d’informations sur la version 2.3 et les versions antérieures, consultez [ce document](../linux/classic/diagnostic-extension-v2.md).
+> Pour plus d’informations sur la version 2.3 et les versions antérieures, consultez [ce document](/previous-versions/azure/virtual-machines/linux/classic/diagnostic-extension-v2).
 
 ## <a name="introduction"></a>Introduction
 
@@ -40,6 +41,9 @@ Cette extension fonctionne avec les deux modèles de déploiement d’Azure.
 
 Vous pouvez activer cette extension à l’aide des applets de commande Azure PowerShell, de scripts Azure CLI, de modèles ARM ou du portail Azure. Pour plus d’informations, consultez [Fonctionnalités des extensions](features-linux.md).
 
+>[!NOTE]
+>Certains composants de l’extension de machine virtuelle de diagnostic sont également fournis avec l’[extension de machine virtuelle Log Analytics](./oms-linux.md). En raison de cette architecture, des conflits peuvent survenir si les deux extensions sont instanciées dans le même modèle Resource Manager. Pour éviter ces conflits au moment de l’installation, utilisez la [directive `dependsOn`](../../azure-resource-manager/templates/define-resource-dependency.md#dependson) pour vous assurer que les extensions sont installées de manière séquentielle. Les extensions peuvent être installées dans n’importe quel ordre.
+
 Ces instructions d’installation et un [exemple de configuration téléchargeable](https://raw.githubusercontent.com/Azure/azure-linux-extensions/master/Diagnostic/tests/lad_2_3_compatible_portal_pub_settings.json) configurent l’extension de diagnostic Linux 3.0 pour :
 
 * Capturer et stocker les mêmes mesures que celles fournies par l’extension de diagnostic Linux 2.3
@@ -49,17 +53,60 @@ Ces instructions d’installation et un [exemple de configuration téléchargeab
 
 La configuration téléchargeable est seulement un exemple. Modifiez-la selon vos besoins.
 
+### <a name="supported-linux-distributions"></a>Distributions de Linux prises en charge
+
+L’extension de diagnostic Linux prend en charge les distributions et versions suivantes. La liste des distributions et versions s’applique uniquement aux images du fournisseur Linux approuvées par Azure. Les images BYOL et BYOS tierces, telles que les appliances, ne sont généralement pas prises en charge pour l’extension de diagnostic Linux.
+
+Une distribution répertoriant uniquement les versions principales, telles que Debian 7, est également prise en charge pour toutes les versions mineures. Si une version mineure spécifique est spécifiée, seule cette version spécifique est prise en charge. Si « + » est ajouté, les versions mineures égales ou supérieures à la version spécifiée sont prises en charge.
+
+Distributions et versions prises en charge :
+
+- Ubuntu 18.04, 16.04, 14.04
+- CentOS 7, 6.5+
+- Oracle Linux 7, 6.4
+- OpenSUSE 13.1+
+- SUSE Linux Enterprise Server 12
+- Debian 9, 8, 7
+- RHEL 7, 6.7+
+
 ### <a name="prerequisites"></a>Prérequis
 
-* **Agent Azure Linux version 2.2.0 ou ultérieure**. La plupart des images de la galerie Linux de machines virtuelles Azure incluent la version 2.2.7 ou ultérieure. Exécutez `/usr/sbin/waagent -version` pour vérifier la version installée sur la machine virtuelle. Si la machine virtuelle exécute une version antérieure de l’agent invité, suivez [ces instructions](https://docs.microsoft.com/azure/virtual-machines/linux/update-agent) pour le mettre à jour.
-* **Azure CLI**. [Configurez l’environnement Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) sur votre machine.
+* **Agent Azure Linux version 2.2.0 ou ultérieure**. La plupart des images de la galerie Linux de machines virtuelles Azure incluent la version 2.2.7 ou ultérieure. Exécutez `/usr/sbin/waagent -version` pour vérifier la version installée sur la machine virtuelle. Si la machine virtuelle exécute une version antérieure de l’agent invité, suivez [ces instructions](./update-linux-agent.md) pour le mettre à jour.
+* **Azure CLI**. [Configurez l’environnement Azure CLI](/cli/azure/install-azure-cli) sur votre machine.
 * La commande wget, si vous ne l’avez pas encore : Exécutez `sudo apt-get install wget`.
-* Un abonnement Azure et un compte de stockage existants sont utilisés pour stocker les données.
-* La liste des distributions Linux prises en charge est disponible sur le site https://github.com/Azure/azure-linux-extensions/tree/master/Diagnostic#supported-linux-distributions.
+* Un abonnement Azure et un compte de stockage universel existants sont utilisés pour stocker les données.  Les comptes de stockage universels prennent en charge le stockage Table requis.  Il n’est pas possible d’utiliser un compte de stockage d’objets blob.
+* Python 2
+
+### <a name="python-requirement"></a>Exigence relative à Python
+
+L’extension de diagnostic Linux nécessite Python 2. Si votre machine virtuelle utilise une distribution qui n’inclut pas Python 2 par défaut, vous devez l’installer. Les exemples de commandes suivants installent Python 2 sur différentes distributions.    
+
+ - Red Hat, CentOS, Oracle : `yum install -y python2`
+ - Ubuntu, Debian : `apt-get install -y python2`
+ - SUSE : `zypper install -y python2`
+
+L’exécutable python2 doit avoir un alias pour *python*. Voici une méthode que vous pouvez utiliser pour définir cet alias :
+
+1. Exécutez la commande suivante pour supprimer tous les alias existants.
+ 
+    ```
+    sudo update-alternatives --remove-all python
+    ```
+
+2. Pour créer l’alias, exécutez la commande suivante.
+
+    ```
+    sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+    ```
 
 ### <a name="sample-installation"></a>Exemple d’installation
 
-Avant l’exécution, remplissez les valeurs correctes pour les variables dans la première section :
+> [!NOTE]
+> Pour un des exemples, avant l’exécution, remplissez les valeurs correctes pour les variables dans la première section. 
+
+L’exemple de configuration téléchargé dans ces exemples collecte un ensemble de données standard et les envoie au Stockage Table. L’URL de l’exemple de configuration et son contenu sont susceptibles d’être modifiés. Dans la plupart des cas, vous devez télécharger une copie du fichier JSON des paramètres du portail et la personnaliser selon vos besoins, puis utiliser des modèles ou une automatisation de votre propre version du fichier de configuration plutôt que de télécharger cette URL à chaque fois.
+
+#### <a name="azure-cli-sample"></a>Exemple Azure CLI
 
 ```azurecli
 # Set your Azure VM diagnostic variables correctly below
@@ -88,8 +135,35 @@ my_lad_protected_settings="{'storageAccountName': '$my_diagnostic_storage_accoun
 # Finallly tell Azure to install and enable the extension
 az vm extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 3.0 --resource-group $my_resource_group --vm-name $my_linux_vm --protected-settings "${my_lad_protected_settings}" --settings portal_public_settings.json
 ```
+#### <a name="azure-cli-sample-for-installing-lad-30-extension-on-the-vmss-instance"></a>Exemple Azure CLI pour l’installation de l’extension de diagnostic Linux 3.0 sur l’instance VMSS
 
-L’exemple de configuration téléchargé dans ces exemples collecte un ensemble de données standard et les envoie au Stockage Table. L’URL de l’exemple de configuration et son contenu sont susceptibles d’être modifiés. Dans la plupart des cas, vous devez télécharger une copie du fichier JSON des paramètres du portail et la personnaliser selon vos besoins, puis utiliser des modèles ou une automatisation de votre propre version du fichier de configuration plutôt que de télécharger cette URL à chaque fois.
+```azurecli
+#Set your Azure VMSS diagnostic variables correctly below
+$my_resource_group=<your_azure_resource_group_name_containing_your_azure_linux_vm>
+$my_linux_vmss=<your_azure_linux_vmss_name>
+$my_diagnostic_storage_account=<your_azure_storage_account_for_storing_vm_diagnostic_data>
+
+# Should login to Azure first before anything else
+az login
+
+# Select the subscription containing the storage account
+az account set --subscription <your_azure_subscription_id>
+
+# Download the sample Public settings. (You could also use curl or any web browser)
+wget https://raw.githubusercontent.com/Azure/azure-linux-extensions/master/Diagnostic/tests/lad_2_3_compatible_portal_pub_settings.json -O portal_public_settings.json
+
+# Build the VMSS resource ID. Replace storage account name and resource ID in the public settings.
+$my_vmss_resource_id=$(az vmss show -g $my_resource_group -n $my_linux_vmss --query "id" -o tsv)
+sed -i "s#__DIAGNOSTIC_STORAGE_ACCOUNT__#$my_diagnostic_storage_account#g" portal_public_settings.json
+sed -i "s#__VM_RESOURCE_ID__#$my_vmss_resource_id#g" portal_public_settings.json
+
+# Build the protected settings (storage account SAS token)
+$my_diagnostic_storage_account_sastoken=$(az storage account generate-sas --account-name $my_diagnostic_storage_account --expiry 2037-12-31T23:59:00Z --permissions wlacu --resource-types co --services bt -o tsv)
+$my_lad_protected_settings="{'storageAccountName': '$my_diagnostic_storage_account', 'storageAccountSasToken': '$my_diagnostic_storage_account_sastoken'}"
+
+# Finally tell Azure to install and enable the extension
+az vmss extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 3.0 --resource-group $my_resource_group --vmss-name $my_linux_vmss --protected-settings "${my_lad_protected_settings}" --settings portal_public_settings.json
+```
 
 #### <a name="powershell-sample"></a>Exemple de code PowerShell
 
@@ -110,7 +184,7 @@ $publicSettings = $publicSettings.Replace('__VM_RESOURCE_ID__', $vm.Id)
 # If you have your own customized public settings, you can inline those rather than using the template above: $publicSettings = '{"ladCfg":  { ... },}'
 
 # Generate a SAS token for the agent to use to authenticate with the storage account
-$sasToken = New-AzStorageAccountSASToken -Service Blob,Table -ResourceType Service,Container,Object -Permission "racwdlup" -Context (Get-AzStorageAccount -ResourceGroupName $storageAccountResourceGroup -AccountName $storageAccountName).Context
+$sasToken = New-AzStorageAccountSASToken -Service Blob,Table -ResourceType Service,Container,Object -Permission "racwdlup" -Context (Get-AzStorageAccount -ResourceGroupName $storageAccountResourceGroup -AccountName $storageAccountName).Context -ExpiryTime $([System.DateTime]::Now.AddYears(10))
 
 # Build the protected settings (storage account SAS token)
 $protectedSettings="{'storageAccountName': '$storageAccountName', 'storageAccountSasToken': '$sasToken'}"
@@ -172,7 +246,7 @@ Vous pouvez facilement construire le jeton SAS nécessaire via le portail Azure.
 1. Rendez les sections appropriées comme décrit précédemment
 1. Cliquez sur le bouton « Générer une signature d’accès partagé ».
 
-![image](./media/diagnostics-linux/make_sas.png)
+![Capture d’écran montrant la page Signature d’accès partagé avec le bouton Générer une signature d’accès partagé.](./media/diagnostics-linux/make_sas.png)
 
 Copiez la signature SAS générée dans le champ storageAccountSasToken et supprimez le premier d’interrogation (« ? ») du début.
 
@@ -225,7 +299,7 @@ Si vous avez créé une signature SAS valable jusqu’au 1er janvier 2018 à min
 https://contosohub.servicebus.windows.net/syslogmsgs?sr=contosohub.servicebus.windows.net%2fsyslogmsgs&sig=xxxxxxxxxxxxxxxxxxxxxxxxx&se=1514764800&skn=writer
 ```
 
-Pour plus d’informations sur la génération et l’extraction d’informations de jetons SAS pour les Event Hubs, consultez [cette page web](https://docs.microsoft.com/rest/api/eventhub/generate-sas-token#powershell).
+Pour plus d’informations sur la génération et l’extraction d’informations de jetons SAS pour les Event Hubs, consultez [cette page web](/rest/api/eventhub/generate-sas-token#powershell).
 
 #### <a name="the-jsonblob-sink"></a>Récepteur JsonBlob
 
@@ -424,6 +498,9 @@ Vous devez spécifier « table » ou « sinks », ou les deux.
 
 Contrôle la capture des fichiers journaux. L’extension de diagnostic Linux capture les nouvelles lignes de texte au fil de leur écriture dans le fichier et les écrit dans des lignes de la table et/ou dans les récepteurs spécifiés (JsonBlob ou EventHub).
 
+> [!NOTE]
+> Les fileLogs sont capturés par un sous-composant de LAD appelé `omsagent`. Pour pouvoir collecter des fileLogs, vous devez vous assurer que l’utilisateur `omsagent` dispose des autorisations de lecture sur les fichiers que vous spécifiez, ainsi que des autorisations d’exécution sur tous les répertoires du chemin d’accès à ce fichier. Vous pouvez vérifier cela en exécutant `sudo su omsagent -c 'cat /path/to/file'` après l’installation de LAD.
+
 ```json
 "fileLogs": [
     {
@@ -436,7 +513,7 @@ Contrôle la capture des fichiers journaux. L’extension de diagnostic Linux ca
 
 Élément | Valeur
 ------- | -----
-fichier | Nom du chemin complet du fichier journal à surveiller et à capturer. Le nom du chemin doit désigner un seul fichier. Il ne peut pas nommer un répertoire ni contenir des caractères génériques.
+fichier | Nom du chemin complet du fichier journal à surveiller et à capturer. Le nom du chemin doit désigner un seul fichier. Il ne peut pas nommer un répertoire ni contenir des caractères génériques. Le compte d’utilisateur « omsagent » doit avoir un accès en lecture au chemin d’accès au fichier.
 table | (facultatif) La table Stockage Azure, dans le compte de stockage désigné (tel que spécifié dans la configuration protégée), dans laquelle les nouvelles lignes de la « fin » du fichier sont écrites.
 sinks | (facultatif) Une liste séparée par des virgules des noms des récepteurs supplémentaires auxquels les lignes des journaux sont envoyées.
 
@@ -549,23 +626,36 @@ BytesPerSecond | Nombre d’octets lus ou écrits par seconde
 
 Les valeurs agrégées pour tous les disques peuvent être obtenues en définissant `"condition": "IsAggregate=True"`. Pour obtenir des informations pour un périphérique spécifique (par exemple /dev/sdf1), définissez `"condition": "Name=\\"/dev/sdf1\\""`.
 
-## <a name="installing-and-configuring-lad-30-via-cli"></a>Installation et configuration de l’extension de diagnostic Linux 3.0 via CLI
+## <a name="installing-and-configuring-lad-30"></a>Installation et configuration de LAD 3.0
 
-En supposant que vos paramètres protégés sont dans le fichier PrivateConfig.json et que vos informations de configuration publique sont PublicConfig.json, exécutez la commande suivante :
+### <a name="azure-cli"></a>Azure CLI
+
+En supposant que vos paramètres protégés sont dans le fichier ProtectedSettings.json et que vos informations de configuration publique sont PublicSettings.json, exécutez la commande suivante :
 
 ```azurecli
-az vm extension set *resource_group_name* *vm_name* LinuxDiagnostic Microsoft.Azure.Diagnostics '3.*' --private-config-path PrivateConfig.json --public-config-path PublicConfig.json
+az vm extension set --publisher Microsoft.Azure.Diagnostics --name LinuxDiagnostic --version 3.0 --resource-group <resource_group_name> --vm-name <vm_name> --protected-settings ProtectedSettings.json --settings PublicSettings.json
 ```
 
-La commande suppose que vous utilisez le mode Azure Resource Manager (arm) d’Azure CLI. Pour configurer l’extension de diagnostic Linux pour des machines virtuelles du modèle de déploiement classique (ASM), passez au mode « asm » (`azure config mode asm`) et omettez le nom du groupe de ressources dans la commande. Pour plus d’informations, consultez la [documentation relative à l’interface de ligne de commande multiplateforme](https://docs.microsoft.com/azure/xplat-cli-connect).
+La commande suppose que vous utilisez le mode Azure Resource Manager d’Azure CLI. Pour configurer l’extension de diagnostic Linux pour des machines virtuelles du modèle de déploiement classique (ASM), passez au mode « asm » (`azure config mode asm`) et omettez le nom du groupe de ressources dans la commande. Pour plus d’informations, consultez la [documentation relative à l’interface de ligne de commande multiplateforme](/cli/azure/authenticate-azure-cli?view=azure-cli-latest).
+
+### <a name="powershell"></a>PowerShell
+
+En supposant que vos paramètres protégés sont dans la variable `$protectedSettings` et que vos informations de configuration publique sont dans la variable `$publicSettings`, exécutez la commande suivante :
+
+```powershell
+Set-AzVMExtension -ResourceGroupName <resource_group_name> -VMName <vm_name> -Location <vm_location> -ExtensionType LinuxDiagnostic -Publisher Microsoft.Azure.Diagnostics -Name LinuxDiagnostic -SettingString $publicSettings -ProtectedSettingString $protectedSettings -TypeHandlerVersion 3.0
+```
 
 ## <a name="an-example-lad-30-configuration"></a>Exemple de configuration de l’extension de diagnostic Linux 3.0
 
 Voici un exemple de configuration de l’extension de diagnostic Linux 3.0 basé sur les définitions précédentes, avec quelques explications. Pour appliquer cet exemple à votre cas, vous devez utiliser le nom de votre compte de stockage, votre jeton SAS de compte SAP et vos jetons SAS EventHubs.
 
-### <a name="privateconfigjson"></a>PrivateConfig.json
+> [!NOTE]
+> Selon que vous utilisiez Azure CLI ou PowerShell pour installer LAD, la méthode pour fournir des paramètres publics et protégés diffère. Si vous utilisez Azure CLI, enregistrez les paramètres suivants dans ProtectedSettings.json et PublicSettings.json à utiliser avec l’exemple de commande ci-dessus. Si vous utilisez PowerShell, enregistrez les paramètres dans `$protectedSettings` et `$publicSettings` en exécutant `$protectedSettings = '{ ... }'`.
 
-Ces paramètres privés configurent :
+### <a name="protected-settings"></a>Paramètres protégés
+
+Ces paramètres protégés configurent les éléments suivants :
 
 * un compte de stockage
 * un jeton SAS de compte correspondant
@@ -613,7 +703,7 @@ Ces paramètres privés configurent :
 }
 ```
 
-### <a name="publicconfigjson"></a>PublicConfig.json
+### <a name="public-settings"></a>Paramètres publics
 
 Ces paramètres publics font que l’extension de diagnostic Linux :
 
@@ -714,7 +804,7 @@ Le `resourceId` dans la configuration doit correspondre à celui de la machine v
 
 Utilisez le portail Azure pour afficher les données de performances ou pour définir des alertes :
 
-![image](./media/diagnostics-linux/graph_metrics.png)
+![Capture d’écran montrant le portail Azure avec l’espace disque utilisé sur la métrique sélectionnée et le graphique en résultant.](./media/diagnostics-linux/graph_metrics.png)
 
 Les données `performanceCounters` sont toujours stockées dans une table de Stockage Azure. Les API Stockage Azure sont disponibles pour de nombreux langages et de nombreuses plateformes.
 
@@ -723,16 +813,16 @@ Les données envoyées aux récepteurs JsonBlob sont stockées dans des objets b
 Vous pouvez aussi utiliser ces outils d’interface utilisateur pour accéder aux données de Stockage Azure :
 
 * Explorateur de serveurs Visual Studio.
-* [Explorateur Stockage Microsoft Azure](https://azurestorageexplorer.codeplex.com/ "Explorateur de stockage Azure").
+* [Capture d’écran montrant les conteneurs et les tables dans Explorateur Stockage Azure.](https://azurestorageexplorer.codeplex.com/ "Explorateur de stockage Azure").
 
 Cette capture instantanée d’une session de l’Explorateur de stockage Microsoft Azure montre les tables et les conteneurs Stockage Azure générés à partir d’une extension de diagnostic Linux 3.0 correctement configurée sur une machine virtuelle de test. L’image ne correspond pas exactement à [l’exemple de configuration de l’extension de diagnostic Linux 3.0](#an-example-lad-30-configuration).
 
 ![image](./media/diagnostics-linux/stg_explorer.png)
 
-Consultez la [documentation EventHubs](../../event-hubs/event-hubs-what-is-event-hubs.md) appropriée pour savoir comment consommer des messages publiés sur un point de terminaison EventHubs.
+Consultez la [documentation EventHubs](../../event-hubs/event-hubs-about.md) appropriée pour savoir comment consommer des messages publiés sur un point de terminaison EventHubs.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Créez des alertes de métrique dans [Azure Monitor](../../monitoring-and-diagnostics/insights-alerts-portal.md) pour les métriques que vous collectez.
-* Créez [des graphiques de surveillance](../../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md) pour vos métriques.
+* Créez des alertes de métrique dans [Azure Monitor](../../azure-monitor/platform/alerts-classic-portal.md) pour les métriques que vous collectez.
+* Créez [des graphiques de surveillance](../../azure-monitor/platform/data-platform.md) pour vos métriques.
 * Découvrez comment [créer un groupe de machines virtuelles identiques](../linux/tutorial-create-vmss.md) en utilisant vos métriques pour contrôler la mise à l’échelle automatique.

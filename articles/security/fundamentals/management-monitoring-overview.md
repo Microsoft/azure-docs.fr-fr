@@ -15,24 +15,24 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/28/2019
 ms.author: terrylan
-ms.openlocfilehash: 7ad7a29a92d25556190b4cf44f4e48158a6f0952
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 038f30ee186a5b3a9d87d64054726324051c37b4
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73162749"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94842751"
 ---
 # <a name="azure-security-management-and-monitoring-overview"></a>Présentation de la surveillance et de la gestion de la sécurité Azure
 Cet article présente les fonctionnalités et services de sécurité Azure qui facilitent la gestion et la surveillance des services cloud et des machines virtuelles Azure.
 
-## <a name="role-based-access-control"></a>Contrôle d’accès en fonction du rôle
+## <a name="azure-role-based-access-control"></a>Contrôle d'accès en fonction du rôle Azure
 
-Le contrôle d’accès en fonction du rôle (RBAC) permet de gérer en détail les fournit accès aux ressources Azure. Avec RBAC, vous n’accordez aux utilisateurs que les droits d’accès dont ils ont besoin pour effectuer leur travail. Ce contrôle vise également à vous assurer que les utilisateurs perdent l’accès aux ressources dans le cloud lorsqu’ils quittent l’entreprise.
+Le contrôle d’accès en fonction du rôle Azure (Azure RBAC) permet de gérer en détail les accès aux ressources Azure. Grâce à Azure RBAC, vous n’accordez aux utilisateurs que les droits d’accès dont ils ont besoin pour effectuer leur travail. Azure RBAC vise également à vous assurer que les utilisateurs perdent l’accès aux ressources dans le cloud lorsqu’ils quittent l’entreprise.
 
 En savoir plus :
 
-* [Blog de l’équipe Active Directory sur le RBAC](https://cloudblogs.microsoft.com/enterprisemobility/?product=azure-active-directory)
-* [Contrôle d’accès en fonction du rôle Azure](../../role-based-access-control/role-assignments-portal.md)
+* [Blog de l’équipe Active Directory sur Azure RBAC](https://cloudblogs.microsoft.com/enterprisemobility/?product=azure-active-directory)
+* [Contrôle d’accès en fonction du rôle Azure (RBAC Azure)](../../role-based-access-control/role-assignments-portal.md)
 
 ## <a name="antimalware"></a>Logiciel anti-programme malveillant
 
@@ -48,25 +48,25 @@ En savoir plus :
 
 * [Déploiement de solutions anti-programmes malveillants sur des machines virtuelles Azure (en anglais)](https://azure.microsoft.com/blog/deploying-antimalware-solutions-on-azure-virtual-machines/)
 * [Microsoft Antimalware pour Azure Cloud Services et les machines virtuelles](antimalware.md)
-* [Installation et configuration de Trend Micro Deep Security comme service sur une machine virtuelle Windows](/azure/virtual-machines/windows/classic/install-trend)
-* [Installation et configuration de Symantec Endpoint Protection sur une machine virtuelle Windows](/azure/virtual-machines/windows/classic/install-symantec)
+* [Installation et configuration de Trend Micro Deep Security comme service sur une machine virtuelle Windows](../../virtual-machines/extensions/trend.md)
+* [Installation et configuration de Symantec Endpoint Protection sur une machine virtuelle Windows](../../virtual-machines/extensions/symantec.md)
 * [Nouvelles options anti-programmes malveillants pour protéger les machines virtuelles Azure](https://azure.microsoft.com/blog/new-antimalware-options-for-protecting-azure-virtual-machines/)
 
 ## <a name="multi-factor-authentication"></a>Azure Multi-Factor Authentication
 
-La méthode d’authentification Azure Multi-Factor Authentication nécessite l’utilisation de plusieurs méthodes de vérification. Ce service fournit une deuxième couche de sécurité aux connexions et transactions des utilisateurs.
+La méthode d'authentification Azure AD Multi-Factor Authentication requiert l'utilisation de plusieurs méthodes de vérification. Ce service fournit une deuxième couche de sécurité aux connexions et transactions des utilisateurs.
 
 Azure Multi-Factor Authentication contribue à sécuriser l’accès aux données et aux applications, tout en proposant un processus d’authentification simple et conforme à la demande des utilisateurs. Il assure une authentification forte grâce aux diverses options de vérification (appel téléphonique, SMS, notification par application mobile ou code de vérification) et à des jetons OATH tiers.
 
 En savoir plus :
 
 * [Azure Multi-Factor Authentication](https://azure.microsoft.com/documentation/services/multi-factor-authentication/)
-* [Présentation d'Azure Multi-Factor Authentication](/azure/active-directory/authentication/multi-factor-authentication)
-* [Azure Multi-Factor Authentication : fonctionnement](../../active-directory/authentication/concept-mfa-howitworks.md)
+* [Présentation d'Azure AD Multi-Factor Authentication](../../active-directory/authentication/concept-mfa-howitworks.md)
+* [Comment fonctionne l’authentification multifacteur Azure AD](../../active-directory/authentication/concept-mfa-howitworks.md)
 
 ## <a name="expressroute"></a>ExpressRoute
 
-Vous pouvez utiliser Microsoft Azure ExpressRoute pour étendre vos réseaux locaux dans Microsoft Cloud via une connexion privée et dédiée, mise en place par un fournisseur de connectivité. Grâce à ExpressRoute, vous pouvez établir des connexions aux services de cloud computing Microsoft, comme Microsoft Azure, Office 365 et CRM Online. La connectivité peut provenir de :
+Vous pouvez utiliser Microsoft Azure ExpressRoute pour étendre vos réseaux locaux dans Microsoft Cloud via une connexion privée et dédiée, mise en place par un fournisseur de connectivité. Avec ExpressRoute, vous pouvez établir des connexions à des services de cloud computing Microsoft comme Azure, Microsoft 365 et CRM Online. La connectivité peut provenir de :
 
 * Un réseau (VPN IP) universel.
 * Un réseau Ethernet point à point.
@@ -112,7 +112,7 @@ En fournissant des notifications et des mises à jour recommandées, Identity Pr
 
 En savoir plus :
 
-* [Azure Active Directory Identity Protection](/azure/active-directory/active-directory-identityprotection)
+* [Azure Active Directory Identity Protection](../../active-directory/identity-protection/overview-identity-protection.md)
 * [Channel 9: Azure AD and Identity Show: Identity Protection Preview](https://channel9.msdn.com/Series/Azure-AD-Identity/Azure-AD-and-Identity-Show-Identity-Protection-Preview)
 
 ## <a name="security-center"></a>Security Center
@@ -129,8 +129,8 @@ Security Center vous permet d’optimiser et de surveiller la sécurité de vos 
 
 En savoir plus :
 
-* [Présentation d’Azure Security Center](../../security-center/security-center-intro.md)
-* [Améliorer le degré de sécurisation dans Azure Security Center](../../security-center/security-center-secure-score.md)
+* [Présentation d’Azure Security Center](../../security-center/security-center-introduction.md)
+* [Améliorer le degré de sécurisation dans Azure Security Center](../../security-center/secure-score-security-controls.md)
 
 ## <a name="intelligent-security-graph"></a>Intelligent Security Graph
 

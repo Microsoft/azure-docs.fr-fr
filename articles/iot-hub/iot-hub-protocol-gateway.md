@@ -11,12 +11,14 @@ ms.date: 07/11/2017
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: bfd000e2b69f052e25f0ea6cd286b0ca3aef7519
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+ms.openlocfilehash: 315d76715973b79a971f3ca15bcc5186d20135a2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759709"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87325030"
 ---
 # <a name="support-additional-protocols-for-iot-hub"></a>Prise en charge de protocoles supplémentaires pour IoT Hub
 

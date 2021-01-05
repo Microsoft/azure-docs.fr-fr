@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Onit | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Onit.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: bc479a28-8fcd-493f-ac53-681975a5149c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/28/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: e908cb76a57f027494230edc648b69da0730ac27
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 40ed33021a892e140dfff47417137046557c0aef
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70164238"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92522357"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-onit"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Onit
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Onit à Azure Active D
 * Permettre à vos utilisateurs de se connecter automatiquement à Onit avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -51,15 +46,15 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 Pour configurer l’intégration d’Onit avec Azure AD, vous devez ajouter Onit, disponible dans la galerie, à votre liste d’applications SaaS gérées.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
-1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
-1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
-1. Dans la section **Ajouter à partir de la galerie**, tapez **Onit** dans la zone de recherche.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory** .
+1. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications** .
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application** .
+1. Dans la section **Ajouter à partir de la galerie** , tapez **Onit** dans la zone de recherche.
 1. Sélectionnez **Onit** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-onit"></a>Configurer et tester l’authentification unique Azure AD pour Onit
 
-Configurez et testez l’authentification unique Azure AD avec Onit à l’aide d’un utilisateur de test appelé **B.Simon**. Pour que l’authentification unique fonctionne, vous devez établir une relation entre un utilisateur Azure AD et l’utilisateur Onit associé.
+Configurez et testez l’authentification unique Azure AD avec Onit à l’aide d’un utilisateur de test appelé **B.Simon** . Pour que l’authentification unique fonctionne, vous devez établir une relation entre un utilisateur Azure AD et l’utilisateur Onit associé.
 
 Pour configurer et tester l’authentification unique Azure AD avec Onit, suivez les indications des sections ci-après :
 
@@ -74,30 +69,30 @@ Pour configurer et tester l’authentification unique Azure AD avec Onit, suivez
 
 Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-1. Dans la page d’intégration de l’application **Onit** du [portail Azure](https://portal.azure.com/), recherchez la section **Gérer**, puis sélectionnez **Authentification unique**.
-1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
-1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
+1. Dans la page d’intégration de l’application **Onit** du [portail Azure](https://portal.azure.com/), recherchez la section **Gérer** , puis sélectionnez **Authentification unique** .
+1. Dans la page **Sélectionner une méthode d’authentification unique** , sélectionnez **SAML** .
+1. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
+1. Dans la section **Configuration SAML de base** , entrez les valeurs pour les champs suivants :
 
-    a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://<sub-domain>.onit.com`
+    a. Dans la zone de texte **URL de connexion** , saisissez une URL au format suivant : `https://<sub-domain>.onit.com`
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://<sub-domain>.onit.com`
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez l’[équipe de support technique Onit](https://www.onit.com/support). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-1. Dans la section **Certificat de signature SAML**, cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Certificat de signature SAML**.
+1. Dans la section **Certificat de signature SAML** , cliquez sur le bouton **Modifier** pour ouvrir la boîte de dialogue **Certificat de signature SAML** .
 
     ![Modifier le certificat de signature SAML](common/edit-certificate.png)
 
-1. Dans la section **Certificat de signature SAML**, copiez la **valeur de l’empreinte** et enregistrez-la sur votre ordinateur.
+1. Dans la section **Certificat de signature SAML** , copiez la **valeur de l’empreinte** et enregistrez-la sur votre ordinateur.
 
     ![Copier la valeur de l’empreinte](common/copy-thumbprint.png)
 
-1. Dans la section **Configurer Onit**, copiez la ou les URL appropriées en fonction de vos besoins.
+1. Dans la section **Configurer Onit** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -105,41 +100,41 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
 
-1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory** , **Utilisateurs** , puis **Tous les utilisateurs** .
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
-1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
-   1. Dans le champ **Nom**, entrez `B.Simon`.  
-   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
-   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
-   1. Cliquez sur **Créer**.
+1. Dans les propriétés **Utilisateur** , effectuez les étapes suivantes :
+   1. Dans le champ **Nom** , entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur** , entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ **Mot de passe** .
+   1. Cliquez sur **Créer** .
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
 Dans cette section, vous allez autoriser B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Onit.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
-1. Dans la liste des applications, sélectionnez **Onit**.
-1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , puis **Toutes les applications** .
+1. Dans la liste des applications, sélectionnez **Onit** .
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes** .
 
    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Sélectionnez **Ajouter un utilisateur** , puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution** .
 
     ![Lien Ajouter un utilisateur](common/add-assign-user.png)
 
-1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
-1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+1. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer** .
 
 ## <a name="configure-onit-sso"></a>Configurer l’authentification unique Onit
 
 1. Dans une autre fenêtre de navigateur web, connectez-vous au site de votre entreprise Onit en tant qu’administrateur.
 
-2. Dans le menu situé dans la partie supérieure, cliquez sur **Administration**.
+2. Dans le menu situé dans la partie supérieure, cliquez sur **Administration** .
    
-    ![Administration](./media/onit-tutorial/IC791174.png "Administration")
+    ![Capture d’écran montrant le menu en haut de la page « MS SSO Test » avec l’action « Administration » sélectionnée.](./media/onit-tutorial/IC791174.png "Administration")
 
-3. Cliquez sur **Edit Corporation**.
+3. Cliquez sur **Edit Corporation** .
    
     ![Edit Corporation](./media/onit-tutorial/IC791175.png "Edit Corporation")
    
@@ -151,11 +146,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     ![Authentification unique](./media/onit-tutorial/IC791177.png "Single Sign on")
 
-    a. Comme **Authentication Strategy**, sélectionnez **Single Sign On and Password**.
+    a. Comme **Authentication Strategy** , sélectionnez **Single Sign On and Password** .
     
-    b. Dans la zone de texte **Idp Target URL** (URL cible Idp), collez la valeur **URL de connexion**, que vous avez copiée dans le portail Azure.
+    b. Dans la zone de texte **Idp Target URL** (URL cible Idp), collez la valeur **URL de connexion** , que vous avez copiée dans le portail Azure.
 
-    c. Dans la zone de texte **Idp logout URL** (URL de déconnexion Idp), collez la valeur de l’**URL de déconnexion** que vous avez copiée à partir du portail Azure.
+    c. Dans la zone de texte **Idp logout URL** (URL de déconnexion Idp), collez la valeur de l’ **URL de déconnexion** que vous avez copiée à partir du portail Azure.
 
     d. Dans la zone de texte **Empreinte du certificat de fournisseur d’identité (SHA1)** , collez la valeur du certificat **Empreinte** que vous avez copiée à partir du portail Azure.
 
@@ -167,7 +162,7 @@ Pour se connecter à Onit, les utilisateurs d’Azure AD doivent être approvisi
 
 1. Connectez-vous au site d’entreprise **Onit** en tant qu’administrateur.
 
-2. Cliquez sur **Add User**.
+2. Cliquez sur **Add User** .
 
     ![Administration](./media/onit-tutorial/IC791180.png "Administration")
 
@@ -175,9 +170,9 @@ Pour se connecter à Onit, les utilisateurs d’Azure AD doivent être approvisi
 
     ![Ajouter un utilisateur](./media/onit-tutorial/IC791181.png "Ajouter un utilisateur")
 
-    a. Tapez le **nom** et l’**adresse électronique** d’un compte Azure AD valide que vous souhaitez approvisionner dans les zones de texte correspondantes.
+    a. Tapez le **nom** et l’ **adresse électronique** d’un compte Azure AD valide que vous souhaitez approvisionner dans les zones de texte correspondantes.
 
-    b. Cliquez sur **Créer**.
+    b. Cliquez sur **Créer** .
 
     > [!NOTE]
     > Le titulaire du compte Azure Active Directory reçoit un e-mail contenant un lien à suivre pour confirmer son compte et l’activer.
@@ -186,14 +181,14 @@ Pour se connecter à Onit, les utilisateurs d’Azure AD doivent être approvisi
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Onit dans le volet d’accès, vous devez être connecté automatiquement à l’application Onit pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Onit dans le volet d’accès, vous devez être connecté automatiquement à l’application Onit pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayez Onit avec Azure AD](https://aad.portal.azure.com/)

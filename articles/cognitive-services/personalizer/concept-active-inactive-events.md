@@ -1,14 +1,16 @@
 ---
 title: Événements actifs et inactifs - Personalizer
 description: Cet article traite de l’utilisation des événements actifs et inactifs au sein du service Personalizer.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 02/20/2020
-ms.openlocfilehash: a8f27542208965e2b820b9fc45cfcc5353a7f193
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d1044d02ceba1f3d0996b1fe1c8a9a44b31049b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77624191"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91253647"
 ---
 # <a name="active-and-inactive-events"></a>Événements actifs et inactifs
 

@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Central Desktop | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Central Desktop.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: b805d485-93db-49b4-807a-18d446c7090e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/12/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: fda8e928b530001faeae34c364dfed91d7620f0a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 36ba61c86082e191831c2c890de4466181f1a4db
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73157511"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97674183"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-central-desktop"></a>Didacticiel : Intégration d’Azure Active Directory à Central Desktop
 
@@ -32,7 +27,7 @@ L’intégration de Central Desktop à Azure AD vous offre les avantages suivant
 * Vous pouvez autoriser vos utilisateurs à se connecter automatiquement à Central Desktop (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Central Desktop à Azure AD, vous devez ajou
 
 4. Dans la zone de recherche, tapez **Central Desktop**, sélectionnez **Central Desktop** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Central Desktop dans la liste des résultats](common/search-new-app.png)
+    ![Central Desktop dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -109,12 +104,11 @@ Pour configurer l’authentification unique Azure AD avec Central Desktop, effec
     a. Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<companyname>.centraldesktop.com`.
 
     b. Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
-    
-    | |
-    |--|
-    | `https://<companyname>.centraldesktop.com/saml2-metadata.php`|
-    | `https://<companyname>.imeetcentral.com/saml2-metadata.php`|
-    | |
+
+    ```http
+    https://<companyname>.centraldesktop.com/saml2-metadata.php
+    https://<companyname>.imeetcentral.com/saml2-metadata.php
+    ```
 
     c. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://<companyname>.centraldesktop.com/saml2-assertion.php`
 
@@ -158,7 +152,7 @@ Pour configurer l’authentification unique Azure AD avec Central Desktop, effec
 4. Dans la section **Message Signature Verification Method**, effectuez les étapes suivantes :
 
     ![Méthode de vérification de la signature du message](./media/central-desktop-tutorial/ic769565.png "Message Signature Verification Method")
-    
+
     a. Sélectionnez **Certificate**.
 
     b. Dans la liste **SSO Certificate**, sélectionnez **RSH SHA256**.
@@ -186,7 +180,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -242,7 +236,7 @@ Pour que les utilisateurs Azure AD puissent se connecter, ils doivent être prov
 4. Sélectionnez **Add Internal member(s)** .
 
     ![Ajouter un membre interne](./media/central-desktop-tutorial/ic781053.png "Ajouter un membre interne")
-  
+
    > [!NOTE]
    > Les utilisateurs que vous ajoutez reçoivent un e-mail contenant un lien de confirmation pour l’activation de leur compte.
 
@@ -250,12 +244,12 @@ Pour que les utilisateurs Azure AD puissent se connecter, ils doivent être prov
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Central Desktop dans le volet d’accès doit vous connecter automatiquement à l’application Central Desktop pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Central Desktop dans le volet d’accès doit vous connecter automatiquement à l’application Central Desktop pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

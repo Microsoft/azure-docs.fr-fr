@@ -4,15 +4,15 @@ description: Découvrez comment créer des principaux de service pour automatise
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 02/18/2020
+ms.date: 07/07/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: dc163de9a7fb46d62f4bc2983e040e68bbf9231c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b04b9ababfe0e4c2a60d14044b9d3ee120837dc5
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231673"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96491041"
 ---
 # <a name="automation-with-service-principals"></a>Automatisation à l’aide de principaux de service
 
@@ -20,7 +20,7 @@ Les principaux de service sont des ressources d’application Azure Active Direc
 
 Dans Analysis Services, les principaux de service sont utilisés avec Azure Automation, avec le mode sans assistance de PowerShell, avec des applications clientes personnalisées et avec des applications web, dans le but d’automatiser les tâches courantes. Par exemple, le provisionnement des serveurs, le déploiement des modèles, l’actualisation des données, la mise à l’échelle et les opérations de suspension/reprise peuvent être automatisés à l’aide de principaux de service. Les autorisations sont attribuées aux principaux de service via l’appartenance au rôle, comme les comptes UPN standard d’Azure AD.
 
-Analysis Services prend également en charge les opérations effectuées par des identités gérées à l’aide de principaux du service. Pour en savoir plus, consultez [Identités managées pour ressources Azure](../active-directory/managed-identities-azure-resources/overview.md) et [Services Azure prenant en charge l’authentification Azure AD](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-analysis-services).  
+Analysis Services prend également en charge les opérations effectuées par des identités gérées à l’aide de principaux du service. Pour en savoir plus, consultez [Identités managées pour ressources Azure](../active-directory/managed-identities-azure-resources/overview.md) et [Services Azure prenant en charge l’authentification Azure AD](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-analysis-services).    
 
 ## <a name="create-service-principals"></a>Créer des principaux de service
  
@@ -33,12 +33,12 @@ Vous pouvez créer des principaux de service dans le portail Azure ou avec Power
 
 Les informations d’identification et les certificats des principaux de service peuvent être stockés de manière sécurisée dans Azure Automation pour les opérations de runbook. Pour plus d'informations, consultez les rubriques suivantes :
 
-[Ressources d’informations d’identification dans Azure Automation](../automation/automation-credentials.md)   
-[Ressources de certificats dans Azure Automation](../automation/automation-certificates.md)
+[Ressources d’informations d’identification dans Azure Automation](../automation/shared-resources/credentials.md)   
+[Ressources de certificats dans Azure Automation](../automation/shared-resources/certificates.md)
 
 ## <a name="add-service-principals-to-server-admin-role"></a>Ajouter des principaux de service au rôle d’administrateur de serveur
 
-Avant de pouvoir utiliser un principal de service pour les opérations de gestion d’un serveur Analysis Services, vous devez l’ajouter au rôle Administrateurs de serveur. Pour plus d’informations, consultez [Ajouter un principal de service au rôle d’administrateur du serveur](analysis-services-addservprinc-admins.md)
+Avant de pouvoir utiliser un principal de service pour les opérations de gestion d’un serveur Analysis Services, vous devez l’ajouter au rôle Administrateurs de serveur. Les principaux de service doivent être ajoutés directement au rôle d’administrateur de serveur. L’ajout d’un principal de service à un groupe de sécurité, puis l’ajout de ce groupe de sécurité au rôle d’administrateur de serveur n’est pas pris en charge. Pour plus d’informations, consultez [Ajouter un principal de service au rôle d’administrateur du serveur](analysis-services-addservprinc-admins.md)
 
 ## <a name="service-principals-in-connection-strings"></a>Principaux de service dans les chaînes de connexion
 
@@ -48,7 +48,7 @@ Vous pouvez utiliser l’ID d’application et le mot de passe ou le certificat 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-#### <a name="using-azanalysisservices-module"></a><a name="azmodule" />Via le module Az.AnalysisServices
+#### <a name="using-azanalysisservices-module"></a><a name="azmodule"></a>Via le module Az.AnalysisServices
 
 Si vous utilisez un principal de service pour les opérations de gestion des ressources avec le module [Az.AnalysisServices](/powershell/module/az.analysisservices), utilisez la cmdlet `Connect-AzAccount`. 
 
@@ -92,7 +92,7 @@ Invoke-ProcessTable -Server "asazure://westcentralus.asazure.windows.net/myserve
 
 ### <a name="amo-and-adomd"></a>AMO et ADOMD 
 
-Lorsque vous vous connectez à une application cliente ou à une application web, les packages installables des [bibliothèques clientes AMO et ADOMD](analysis-services-data-providers.md) version 15.0.2 (et ultérieures) issus de NuGet prennent en charge l’utilisation des principaux de service dans les chaînes de connexion à l’aide de la syntaxe suivante : `app:AppID`, puis le mot de passe ou `cert:thumbprint`. 
+Lorsque vous vous connectez à une application cliente ou à une application web, les packages installables des [bibliothèques clientes AMO et ADOMD](/analysis-services/client-libraries?view=azure-analysis-services-current&preserve-view=true) version 15.0.2 (et ultérieures) issus de NuGet prennent en charge l’utilisation des principaux de service dans les chaînes de connexion à l’aide de la syntaxe suivante : `app:AppID`, puis le mot de passe ou `cert:thumbprint`. 
 
 Dans l’exemple suivant, `appID` et `password` sont utilisés pour effectuer une opération d’actualisation d’une base de données model :
 
@@ -109,5 +109,8 @@ db.Model.SaveChanges();
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Se connecter avec Azure PowerShell](https://docs.microsoft.com/powershell/azure/authenticate-azureps)   
-[Ajouter un principal de service au rôle d’administrateur du serveur](analysis-services-addservprinc-admins.md)   
+[Se connecter avec Azure PowerShell](/powershell/azure/authenticate-azureps)   
+[Actualiser avec Logic Apps](analysis-services-refresh-logic-app.md)  
+[Actualiser avec Azure Automation](analysis-services-refresh-azure-automation.md)  
+[Ajouter un principal de service au rôle d’administrateur du serveur](analysis-services-addservprinc-admins.md)  
+[Automatiser des tâches d’espace de travail et de jeu de données Power BI Premium avec des principaux de service](/power-bi/admin/service-premium-service-principal)

@@ -11,6 +11,8 @@
       href: virtual-machines-availability-set-supportability.md
 - name: Conseils sur le déploiement de machines virtuelles
   items:
+    - name: "Mettre à niveau vers SLES\_15 SP1"
+      href: linux-upgrade-suse-15sp1.md
     - name: Nouveaux déploiements de machines virtuelles
       items:
         - name: Linux
@@ -37,6 +39,8 @@
       href: restart-resize-error-troubleshooting.md
     - name: 'Redémarrage, fermeture ou arrêt des services'
       href: boot-error-troubleshoot-windows.md
+    - name: Problèmes avec un disque de système d’exploitation plein sur une machine virtuelle Linux
+      href: os-disk-full-linux.md
 - name: Redémarrage inattendu
   items:
     - name: Redémarrages inattendus de machines virtuelles avec des VHD joints
@@ -54,7 +58,7 @@
     - name: Blocage du démarrage de la machine virtuelle
       href: troubleshoot-vm-boot-configure-update.md
     - name: Cycle de vie et états des machines virtuelles
-      href: ../windows/states-lifecycle.md
+      href: ../states-lifecycle.md
 - name: La machine virtuelle ne démarre pas
   items:
     - name: Linux
@@ -67,6 +71,8 @@
       items:
         - name: Diagnostics de démarrage
           href: boot-diagnostics.md
+        - name: Erreur de démarrage - Une erreur de lecture de disque s’est produite
+          href: boot-error-disk-read-error-occurred.md
         - name: Erreurs de BitLocker
           href: troubleshoot-bitlocker-boot-error.md
         - name: Erreurs liées à un écran bleu
@@ -79,6 +85,8 @@
           href: troubleshoot-critical-service-failed-boot-error.md
         - name: Résoudre l’erreur de démarrage - État introuvable
           href: boot-error-status-not-found.md
+        - name: Résoudre le problème de Windows qui n’a pas pu terminer la configuration du système
+          href: windows-could-not-configure-system.md
         - name: Résoudre les problèmes de capacité d’installation Windows Update
           href: windows-update-installation-capacity.md
         - name: Disque non amorçable
@@ -87,14 +95,36 @@
           href: troubleshoot-reboot-loop.md
         - name: Bloqué dans Windows Update
           href: troubleshoot-stuck-updating-boot-error.md
+        - name: Redémarrage ou erreur inattendu(e)
+          href: troubleshoot-unexpected-restart-error-during-vm-boot.md
         - name: Blocage du démarrage de la machine virtuelle
           href: troubleshoot-vm-boot-configure-update.md
         - name: Impossible de démarrer la machine virtuelle en raison du gestionnaire de démarrage Windows
           href: troubleshoot-guide-windows-boot-manager-menu.md
         - name: La machine virtuelle ne répond pas en raison d’une mise à jour
           href: unresponsive-vm-apply-windows-update.md
+        - name: La machine virtuelle ne répond pas lors de l’application de la stratégie de configuration d’audit
+          href: vm-unresponsive-applying-audit-configuration-policy.md
+        - name: La machine virtuelle ne répond pas lors de l’application de la stratégie des contrôleurs de domaine par défaut
+          href: vm-unresponsive-domain-controllers-policy.md
         - name: La machine virtuelle ne répond pas lors de l’application d’une stratégie de groupe
           href: unresponsive-vm-apply-group-policy.md
+        - name: La machine virtuelle ne répond pas lors de l’application d’une stratégie de sécurité
+          href: unresponsive-vm-apply-security-policy.md
+        - name: La machine virtuelle ne répond pas pendant l’attente du gestionnaire de session locale
+          href: vm-unresponsive-wait-local-session-manager.md
+        - name: Erreur du gestionnaire de démarrage Windows - État non valide du hachage d’image
+          href: windows-boot-error-invalid-image-hash.md
+        - name: Erreur d’arrêt de Windows - Informations de configuration système incorrectes
+          href: windows-stop-error-bad-system-config-info.md
+        - name: Erreur Windows Stop - Dysfonctionnement matériel
+          href: windows-stop-error-hardware-malfunction.md
+        - name: Erreur d’arrêt Windows - État Pas de mémoire
+          href: troubleshoot-windows-stop-error.md
+        - name: Erreur d’arrêt Windows - Processus système terminé
+          href: windows-stop-error-system-process-terminated.md
+        - name: Erreur d’arrêt Windows - Exception de thread système non gérée
+          href: windows-stop-error-system-thread-exception-not-handled.md
 - name: Impossible de se connecter à ma machine virtuelle
   items:
     - name: RDP
@@ -183,13 +213,15 @@
 - name: Problèmes de gestion des disques virtuels
   items:
     - name: Vue d’ensemble
-      href: ../windows/managed-disks-overview.md
+      href: ../managed-disks-overview.md
     - name: Questions fréquentes (FAQ)
-      href: ../windows/faq-for-disks.md
+      href: ../faq-for-disks.md
     - name: Erreurs lors de la suppression des ressources de stockage
       href: storage-resource-deletion-errors.md
     - name: Erreurs lors de la suppression des ressources de stockage classiques
       href: storage-classic-cannot-delete-storage-account-container-vhd.md
+    - name: Le disque dur virtuel n’est pas pris en charge lorsque vous créez une machine virtuelle dans Azure
+      href: vhd-not-supported-vm-azure.md
     - name: Utiliser la virtualisation imbriquée
       href: troubleshoot-vm-by-use-nested-virtualization.md
 - name: Problèmes de performances des machines virtuelles
@@ -200,6 +232,8 @@
           href: troubleshoot-performance-virtual-machine-linux-windows.md
         - name: Diagnostics des performances
           href: performance-diagnostics.md
+        - name: Résoudre les problèmes de processeur élevé d’une machine virtuelle Windows Azure
+          href: troubleshoot-high-cpu-issues-azure-windows-vm.md
     - name: PerfInsights
       items:
         - name: Windows
@@ -212,6 +246,12 @@
           items:
             - name: Utilisation de PerfInsights
               href: how-to-use-perfinsights-linux.md
+- name: Résoudre les problèmes de galeries d’images partagées
+  items:
+    - name: Résoudre les problèmes de Shared Image Gallery – Windows
+      href: ../troubleshooting-shared-images.md
+    - name: Résoudre les problèmes de Shared Image Gallery – Linux
+      href: ../troubleshooting-shared-images.md
 - name: Problèmes des extensions de machine virtuelle
   items:
     - name: Vue d’ensemble des extensions de machine virtuelle
@@ -220,6 +260,10 @@
       href: ../extensions/troubleshoot.md
     - name: Installer l’agent de machine virtuelle Windows en mode hors connexion
       href: install-vm-agent-offline.md
+    - name: Résoudre les problèmes de l’agent de machines virtuelles Windows
+      href: windows-azure-guest-agent.md
+    - name: Résoudre les problèmes de l’agent de machine virtuelle Linux
+      href: linux-azure-guest-agent.md
 - name: Sauvegarde et restauration
   items:
     - name: Résoudre les échecs de la sauvegarde sur une machine virtuelle Azure
@@ -300,7 +344,7 @@
 - name: Problèmes de migration et de déplacement
   items:
     - name: Questions fréquentes (FAQ) sur la migration d’Azure Resource Manager (ASM vers ARM)
-      href: ../windows/migration-classic-resource-manager-overview.md
+      href: ../migration-classic-resource-manager-overview.md
 - name: Maintenance planifiée
   items:
     - name: Vue d’ensemble

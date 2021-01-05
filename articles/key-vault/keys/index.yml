@@ -11,12 +11,12 @@ metadata:
   author: msmbaldwin
   ms.author: mbaldwin
   ms.date: 04/07/2020
-  ms.openlocfilehash: d5394200164d4f254ceca7a18035df95cc401747
-  ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+  ms.openlocfilehash: 320895ac02293f46f1e6c03718b50800cc405be8
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81423358"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88262889"
 landingContent:
 - title: Keys
   linkLists:
@@ -24,6 +24,8 @@ landingContent:
     links:
     - text: Présentation des clés Key Vault
       url: about-keys.md
+    - text: Informations importantes sur la suppression réversible
+      url: ../general/soft-delete-change.md
 - title: Bien démarrer
   linkLists:
   - linkListType: quickstart
@@ -40,10 +42,20 @@ landingContent:
   linkLists:
   - linkListType: tutorial
     links:
-    - text: Importer des clés protégées par HSM dans un coffre de clés
+    - text: Importer des clés protégées par HSM (vue d’ensemble)
       url: hsm-protected-keys.md
-    - text: Importer des clés protégées par HSM indépendantes du fournisseur
-      url: hsm-protected-keys-vendor-agnostic-byok.md
+- title: Bibliothèque de client pour les clés Key Vault
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Bibliothèque de client .NET
+      url: /dotnet/api/azure.security.keyvault.keys?view=azure-dotnet
+    - text: Bibliothèque de client Python
+      url: /python/api/overview/azure/keyvault-keys-readme?view=azure-python
+    - text: Bibliothèque de client Java
+      url: https://azuresdkdocs.blob.core.windows.net/$web/java/azure-security-keyvault-keys/4.2.0/index.html
+    - text: Bibliothèque de client Node.js
+      url: /javascript/api/@azure/keyvault-keys/?view=azure-node-latest
 - title: En savoir plus sur Key Vault
   linkLists:
   - linkListType: overview
@@ -53,7 +65,7 @@ landingContent:
     - text: Concepts de base
       url: ../general/basic-concepts.md
     - text: Vue d’ensemble de la suppression réversible
-      url: ../general/overview-soft-delete.md
+      url: ../general/soft-delete-overview.md
     - text: Présentation de la sécurité
       url: ../general/overview-security.md
 - title: Microsoft Learn

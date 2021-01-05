@@ -8,13 +8,13 @@ ms.author: ladolan
 ms.reviewer: estfan, jonfan, logicappspm
 ms.topic: article
 ms.custom: mvc
-ms.date: 04/29/2020
-ms.openlocfilehash: d80972cd200b8f85e14d316c4c06a38f88ac81b5
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.date: 07/20/2020
+ms.openlocfilehash: d50f577a7170982be004cc8957114f79675fbc6e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82598162"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006096"
 ---
 # <a name="manage-logic-apps-in-the-azure-portal"></a>Gérer les applications logiques dans le portail Azure
 
@@ -36,7 +36,7 @@ Pour rechercher et ouvrir votre application logique, procédez comme suit :
 
 1. Dans la barre de recherche Azure, entrez `logic apps`, puis sélectionnez **Logic Apps**.
 
-   ![Rechercher et sélectionner « Logic Apps »](./media/manage-logic-apps-with-azure-portal/find-select-logic-apps.png)
+   ![Capture d’écran du menu du portail Azure, avec l’expression Logic Apps recherchée et sélectionnée dans la barre de recherche.](./media/manage-logic-apps-with-azure-portal/find-select-logic-apps.png)
 
 1. Dans la page **Logic Apps**, recherchez et sélectionnez l’application logique à gérer.
 
@@ -100,19 +100,19 @@ La désactivation de votre application logique affecte vos instances et exécuti
 
    * Dans la barre d’outils, sélectionnez **Désactiver**.
 
-     ![Désactiver une application logique spécifique dans le portail Azure](./media/manage-logic-apps-with-azure-portal/disable-single-logic-app.png)
+     ![Capture d’écran de la barre d’outils de l’application logique, avec le bouton Désactiver sélectionné.](./media/manage-logic-apps-with-azure-portal/disable-single-logic-app.png)
 
      Si votre application logique est déjà désactivée, vous ne voyez que l’option **Activer**.
 
    * Dans la barre d’outils, sélectionnez **Activer**.
 
-     ![Activer une application logique spécifique dans le portail Azure](./media/manage-logic-apps-with-azure-portal/enable-single-logic-app.png)
+     ![Capture d’écran de la barre d’outils de l’application logique, avec le bouton Activer sélectionné.](./media/manage-logic-apps-with-azure-portal/enable-single-logic-app.png)
 
      Si votre application logique est déjà activée, vous ne voyez que l’option **Désactiver**. 
 
    Le portail Azure affiche une notification dans la barre d’outils Azure principale qui confirme si votre opération a réussi ou échoué.
 
-   ![Notification pour confirmer l’état de l’opération](./media/manage-logic-apps-with-azure-portal/operation-confirmation-notification.png)
+   ![Capture d’écran du portail Azure, montrant la notification pour confirmer l’état de l’opération](./media/manage-logic-apps-with-azure-portal/operation-confirmation-notification.png)
 
 <a name="disable-or-enable-multiple-logic-apps"></a>
 
@@ -122,15 +122,15 @@ La désactivation de votre application logique affecte vos instances et exécuti
 
 1. Pour vérifier si une application logique est activée ou désactivée, dans la page **Logic Apps**, consultez la colonne **État** propre à cette application logique. 
 
-   ![Colonne d’état dans Logic Apps](./media/manage-logic-apps-with-azure-portal/view-logic-app-status.png)
+   ![Capture d’écran de la page Logic Apps dans le portail Azure, avec la liste des applications logiques triées selon la colonne État.](./media/manage-logic-apps-with-azure-portal/view-logic-app-status.png)
 
    Si la colonne **État** n’est pas visible, dans la barre d’outils **Logic Apps**, sélectionnez **Essayer la préversion**.
 
-   ![Activer la préversion](./media/manage-logic-apps-with-azure-portal/select-try-preview.png)
+   ![Capture d’écran de la page Logic Apps dans le portail Azure, avec le bouton Essayer la préversion sélectionné.](./media/manage-logic-apps-with-azure-portal/select-try-preview.png)
 
 1. Dans la colonne des cases à cocher, sélectionnez les applications logiques que vous souhaitez activer ou désactiver. Dans la barre d’outils, sélectionnez **Désactiver** ou **Activer**.
 
-   ![Activer ou désactiver plusieurs applications logiques dans le portail Azure](./media/manage-logic-apps-with-azure-portal/enable-disable-multiple-logic-apps.png)
+   ![Capture d’écran de la page Logic Apps dans le portail Azure, montrant les boutons Activer et Désactiver pour plusieurs applications logiques.](./media/manage-logic-apps-with-azure-portal/enable-disable-multiple-logic-apps.png)
 
 1. Quand la boîte de confirmation s’affiche, sélectionnez **Oui** pour continuer.
 
@@ -158,11 +158,11 @@ La suppression de votre application logique affecte vos instances de workflow de
 
 1. Dans le menu de votre application logique, sélectionnez **Vue d’ensemble**. Dans la barre d’outils de votre application logique, sélectionnez **Supprimer**.
 
-   ![Dans la barre d’outils de l’application logique, sélectionner « Supprimer »](./media/manage-logic-apps-with-azure-portal/delete-single-logic-app.png)
+   ![Capture d’écran de la barre d’outils de l’application logique, avec le bouton Supprimer sélectionné.](./media/manage-logic-apps-with-azure-portal/delete-single-logic-app.png)
 
 1. Quand la boîte de confirmation s’affiche, entrez le nom de votre application logique, puis sélectionnez **Supprimer**.
 
-   ![Confirmer la suppression de votre application logique](./media/manage-logic-apps-with-azure-portal/delete-confirmation-single-logic-app.png)
+   ![Capture d’écran de l’invite Logic Apps pour confirmer la suppression d’une application logique unique.](./media/manage-logic-apps-with-azure-portal/delete-confirmation-single-logic-app.png)
 
    Le portail Azure affiche une notification dans la barre d’outils Azure principale qui confirme si votre opération a réussi ou échoué.
 
@@ -174,11 +174,11 @@ La suppression de votre application logique affecte vos instances de workflow de
 
 1. Dans la colonne des cases à cocher, sélectionnez les applications logiques que vous souhaitez supprimer. Dans la barre d’outils, sélectionnez **Supprimer**.
 
-   ![Supprimer plusieurs applications logiques](./media/manage-logic-apps-with-azure-portal/delete-multiple-logic-apps.png)
+   ![Capture d’écran de la page Logic Apps, montrant plusieurs applications logiques sélectionnées pour suppression dans une liste.](./media/manage-logic-apps-with-azure-portal/delete-multiple-logic-apps.png)
 
 1. Quand la boîte de confirmation s’affiche, entrez `yes`, puis sélectionnez **Supprimer**.
 
-   ![Confirmer la suppression de vos applications logiques](./media/manage-logic-apps-with-azure-portal/delete-confirmation-multiple-logic-apps.png)
+   ![Capture d’écran de l’invite Logic Apps pour confirmer la suppression de plusieurs applications logiques.](./media/manage-logic-apps-with-azure-portal/delete-confirmation-multiple-logic-apps.png)
 
    Le portail Azure affiche une notification dans la barre d’outils Azure principale qui confirme si votre opération a réussi ou échoué.
 
@@ -196,13 +196,13 @@ Il est possible d’utiliser le Portail Azure pour la gestion de version des app
 
 1. Dans le menu de l’application logique, sélectionnez **Versions** sous **Outils de développement**.
 
-   ![Sélection de « Versions » sous « Outils de développement » dans le menu de l’application logique](./media/manage-logic-apps-with-azure-portal/logic-apps-menu-versions.png)
+   ![Capture d’écran de l’application logique dans le portail Azure, montrant une sélection de la page Versions située sous Outils de développement.](./media/manage-logic-apps-with-azure-portal/logic-apps-menu-versions.png)
 
 1. Sélectionnez la **Version** de votre application logique à gérer dans la liste. Vous pouvez entrer l’identificateur de **Version** dans la barre de recherche pour filtrer la liste.
 
 1. Sur la page **Version de l’historique** apparaissent les détails de la version précédente en mode lecture seule. Vous pouvez choisir entre les modes **Concepteur** et **Code** de Logic Apps.
 
-   ![Page Version de l’historique de l’application logique avec les modes Code et Concepteur d’applications logiques](./media/manage-logic-apps-with-azure-portal/history-version.png)
+   ![Capture d’écran de la page Version de l’historique de Logic Apps, montrant les options de mode Code et de mode Création.](./media/manage-logic-apps-with-azure-portal/history-version.png)
 
 <a name="promote-previous-versions"></a>
 
@@ -212,11 +212,11 @@ Il est possible d’utiliser le Portail Azure pour la gestion de version des app
 
 1. Sur la page **Version de l’historique**, sélectionnez **Promouvoir**.
 
-   ![Bouton Promouvoir dans l’historique des versions de l’application logique](./media/manage-logic-apps-with-azure-portal/promote-button.png)
+   ![Capture d’écran de la version de l’historique de l’application logique, avec le bouton pour promouvoir une version précédente.](./media/manage-logic-apps-with-azure-portal/promote-button.png)
 
 1. Sur la page **Concepteur d’applications logiques** qui s’ouvre, modifiez la version que vous promouvez en fonction des besoins. Vous pouvez basculer entre les modes **Concepteur** et **Code**. Il est également possible de mettre à jour **Paramètres**, **Modèles** et **Connecteurs**.
 
-   ![Page Concepteur d’applications logiques pour la promotion d’une version précédente](./media/manage-logic-apps-with-azure-portal/promote-page.png)
+   ![Capture d’écran du Concepteur Logic Apps, avec le bouton pour promouvoir une version précédente d’une application logique.](./media/manage-logic-apps-with-azure-portal/promote-page.png)
 
 1. Pour enregistrer les mises à jour et terminer la promotion de la version précédente, sélectionnez **Enregistrer**. (Pour annuler vos modifications, sélectionnez **Ignorer**.) 
 

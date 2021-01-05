@@ -11,18 +11,18 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-dt-2019
 ms.date: 01/22/2018
-ms.openlocfilehash: f4de4c25cea251ea0db72bcb435ceb63eb308ff0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 65a2d06acc3461d881ad6f100f3720b217ef7634
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81409225"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97510207"
 ---
-# <a name="incrementally-load-data-from-an-azure-sql-database-to-azure-blob-storage-using-powershell"></a>Charger de façon incrémentielle les données d’une base de données Azure SQL dans un stockage Blob Azure à l’aide de PowerShell
+# <a name="incrementally-load-data-from-azure-sql-database-to-azure-blob-storage-using-powershell"></a>Charger de façon incrémentielle les données depuis Azure SQL Database dans un stockage Blob Azure à l’aide de PowerShell
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce tutoriel, vous allez créer une fabrique de données Azure avec un pipeline qui charge les données delta d’une table d’une base de données Azure SQL vers un stockage Blob Azure.
+Dans ce tutoriel, vous allez créer une fabrique de données Azure avec un pipeline qui charge les données delta d’une table dans Azure SQL Database vers un stockage Blob Azure.
 
 Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
@@ -63,7 +63,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données source. Si vous ne disposez pas d’une base de données SQL, consultez [Créer une base de données Azure SQL Database](../sql-database/sql-database-get-started-portal.md) pour connaître la procédure à suivre pour en créer une.
+* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données source. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md) pour savoir comme en créer une.
 * **Stockage Azure**. Vous utilisez le stockage d’objets blob comme magasin de données récepteur. Si vous ne possédez pas de compte de stockage, consultez l’article [Créer un compte de stockage](../storage/common/storage-account-create.md) pour découvrir comment en créer un. Créez un conteneur sous le nom adftutorial. 
 * **Azure PowerShell**. Suivez les instructions de la page [Installation et configuration d’Azure PowerShell](/powershell/azure/install-Az-ps).
 
@@ -141,8 +141,8 @@ AS
 
 BEGIN
 
-    UPDATE watermarktable
-    SET [WatermarkValue] = @LastModifiedtime
+UPDATE watermarktable
+SET [WatermarkValue] = @LastModifiedtime
 WHERE [TableName] = @TableName
 
 END
@@ -192,11 +192,11 @@ Notez les points suivants :
     ```
 
 * Pour créer des instances Data Factory, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit être membre des rôles Contributeur ou Propriétaire, ou administrateur de l’abonnement Azure.
-* Pour obtenir la liste des régions Azure dans lesquelles Data Factory est actuellement disponible, sélectionnez les régions qui vous intéressent dans la page suivante, puis développez **Analytique** pour localiser **Data Factory** : [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/). Les magasins de données (Stockage, SQL Database, etc.) et les services de calcul (Azure HDInsight, etc.) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
+* Pour obtenir la liste des régions Azure dans lesquelles Data Factory est actuellement disponible, sélectionnez les régions qui vous intéressent dans la page suivante, puis développez **Analytique** pour localiser **Data Factory** : [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/). Les magasins de données (Stockage, SQL Database, Azure SQL Managed Instance, etc.) et les services de calcul (Azure HDInsight, etc.) utilisés par la fabrique de données peuvent se trouver dans d’autres régions.
 
 
 ## <a name="create-linked-services"></a>Créez des services liés
-Vous allez créer des services liés dans une fabrique de données pour lier vos magasins de données et vos services de calcul à la fabrique de données. Dans cette section, vous créez des services liés à votre compte de stockage et à la base de données SQL.
+Vous allez créer des services liés dans une fabrique de données pour lier vos magasins de données et vos services de calcul à la fabrique de données. Dans cette section, vous créez des services liés à votre compte de stockage et à SQL Database.
 
 ### <a name="create-a-storage-linked-service"></a>Créer un service lié pour le stockage
 1. Créez un fichier JSON sous le nom AzureStorageLinkedService.json dans le dossier C:\ADF avec le contenu suivant. (Créez le dossier ADF s’il n’existe pas déjà.) Remplacez `<accountName>` et `<accountKey>` par le nom et la clé de votre compte de stockage avant d’enregistrer le fichier.
@@ -222,7 +222,7 @@ Vous allez créer des services liés dans une fabrique de données pour lier vos
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     LinkedServiceName : AzureStorageLinkedService
     ResourceGroupName : <resourceGroupName>
     DataFactoryName   : <dataFactoryName>
@@ -253,7 +253,7 @@ Vous allez créer des services liés dans une fabrique de données pour lier vos
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     LinkedServiceName : AzureSQLDatabaseLinkedService
     ResourceGroupName : ADF
     DataFactoryName   : incrementalloadingADF
@@ -327,7 +327,7 @@ Dans cette étape, vous allez créer des jeux de données pour représenter les 
     ```
 
     > [!IMPORTANT]
-    > Cet extrait de code suppose que vous disposez d’un conteneur d’objets blob nommé adftutorial dans le stockage d’objets blob. Créez le conteneur s’il n’existe pas ou attribuez-lui le nom d’un conteneur existant. Le dossier de sortie `incrementalcopy` est automatiquement créé s’il n’existe pas dans le conteneur. Dans ce didacticiel, le nom de fichier est généré dynamiquement à l’aide de l’expression `@CONCAT('Incremental-', pipeline().RunId, '.txt')`.
+    > Cet extrait suppose que vous disposez d’un conteneur d’objets blob nommé `adftutorial` dans votre stockage d’objets blob. Créez le conteneur s’il n’existe pas ou attribuez-lui le nom d’un conteneur existant. Le dossier de sortie `incrementalcopy` est automatiquement créé s’il n’existe pas dans le conteneur. Dans ce didacticiel, le nom de fichier est généré dynamiquement à l’aide de l’expression `@CONCAT('Incremental-', pipeline().RunId, '.txt')`.
 
 2. Exécutez la cmdlet **Set-AzDataFactoryV2Dataset** pour créer le jeu de données SourceDataset.
 
@@ -505,7 +505,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
    Voici l'exemple de sortie :
 
-   ```json
+   ```console
     PipelineName      : IncrementalCopyPipeline
     ResourceGroupName : ADF
     DataFactoryName   : incrementalloadingADF
@@ -528,7 +528,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     ResourceGroupName : ADF
     DataFactoryName   : incrementalloadingADF
     ActivityName      : LookupNewWaterMarkActivity
@@ -608,7 +608,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
     TableName | WatermarkValue
     --------- | --------------
-    data_source_table | 2017-09-05  8:06:00.000
+    data_source_table | 2017-09-05 8:06:00.000
 
 ### <a name="insert-data-into-the-data-source-store-to-verify-delta-data-loading"></a>Insérer des données dans le magasin de source de données pour vérifier le chargement des données delta
 
@@ -648,7 +648,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
     Voici l'exemple de sortie :
 
-    ```json
+    ```console
     ResourceGroupName : ADF
     DataFactoryName   : incrementalloadingADF
     ActivityName      : LookupNewWaterMarkActivity
@@ -732,7 +732,7 @@ Dans ce tutoriel, vous avez effectué les étapes suivantes :
 > * Exécuter le pipeline.
 > * Surveiller l’exécution du pipeline.
 
-Dans ce didacticiel, le pipeline a copié les données d’une table unique d’une base de données SQL vers un stockage d’objets blob. Passez au didacticiel suivant pour découvrir comment copier les données de plusieurs tables d’une base de données SQL Server locale vers une base de données SQL.
+Dans ce tutoriel, le pipeline a copié les données d’une table unique située dans Azure SQL Database vers un stockage Blob. Passez au tutoriel suivant pour découvrir comment copier les données de plusieurs tables d’une base de données SQL Server vers SQL Database.
 
 > [!div class="nextstepaction"]
 >[Charger de façon incrémentielle des données provenant de plusieurs tables dans SQL Server vers Azure SQL Database](tutorial-incremental-copy-multiple-tables-powershell.md)

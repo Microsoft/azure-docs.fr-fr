@@ -1,6 +1,6 @@
 ---
 title: Audit et journalisation - Outil Microsoft de modélisation des menaces - Azure | Microsoft Docs
-description: Mesures de correction des menaces exposées dans l’outil de modélisation des menaces
+description: En savoir plus sur l’audit et l’atténuation de la journalisation dans le Threat Modeling Tool. Voir les informations sur l’atténuation et les exemples de code.
 services: security
 documentationcenter: na
 author: jegeib
@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/07/2017
 ms.author: jegeib
-ms.openlocfilehash: c9d20b3259cf4ea7af263d5e31145ad372db0c77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9d3f3ca7b5d4516c2ad5dc9cb19a2eaed0a8a4a8
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68728415"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94518275"
 ---
 # <a name="security-frame-auditing-and-logging--mitigations"></a>Infrastructure de sécurité : Audit et journalisation | Atténuation des risques 
 
@@ -131,7 +131,7 @@ ms.locfileid: "68728415"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Configurer l’audit de connexion](https://msdn.microsoft.com/library/ms175850.aspx) |
+| **Informations de référence**              | [Configurer l’audit de connexion](/sql/ssms/configure-login-auditing-sql-server-management-studio) |
 | **Étapes** | <p>L’audit de connexion du serveur de bases de données doit être activé pour détecter/confirmer les attaques visant à deviner les mots de passe. Il est important de capturer les échecs de tentatives de connexion. La capture des échecs et réussites de tentatives de connexion offre des avantages supplémentaires pendant les investigations</p>|
 
 ## <a name="enable-threat-detection-on-azure-sql"></a><a id="threat-detection"></a>Activer la détection des menaces sur SQL Azure
@@ -142,7 +142,7 @@ ms.locfileid: "68728415"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | SQL Azure |
 | **Attributs**              | Version SQL - V12 |
-| **Informations de référence**              | [Prise en main de Threat Detection pour la base de données SQL](https://azure.microsoft.com/documentation/articles/sql-database-threat-detection-get-started/)|
+| **Informations de référence**              | [Prise en main de Threat Detection pour la base de données SQL](../../azure-sql/database/threat-detection-configure.md)|
 | **Étapes** |<p>Threat Detection permet de détecter les activités base de données anormales indiquant la présence potentielle de menaces de sécurité pour la base de données. Elle fournit une nouvelle couche de sécurité qui permet aux clients de détecter les menaces potentielles et d’y répondre à mesure qu’elles se présentent en générant des alertes de sécurité sur les activités anormales.</p><p>Les utilisateurs peuvent explorer les événements suspects à l’aide de l’audit Azure SQL Database pour déterminer s’ils sont le résultat d’une tentative d’accès, d’une violation ou d’une exploitation des données dans la base de données.</p><p>Threat Detection vous permet de réagir facilement aux menaces potentielles à la base de données sans avoir à acquérir une expertise de la sécurité ou à gérer des systèmes de surveillance de la sécurité avancés</p>|
 
 ## <a name="use-azure-storage-analytics-to-audit-access-of-azure-storage"></a><a id="analytics"></a>Utiliser Azure Storage Analytics pour auditer l’accès d’Azure Storage
@@ -153,7 +153,7 @@ ms.locfileid: "68728415"
 | **Phase SDL**               | Déploiement |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A |
-| **Informations de référence**              | [Utilisation de Storage Analytics pour surveiller le type d’autorisation](https://azure.microsoft.com/documentation/articles/storage-security-guide/#storage-analytics) |
+| **Informations de référence**              | [Utilisation de Storage Analytics pour surveiller le type d’autorisation](../../storage/blobs/security-recommendations.md#loggingmonitoring) |
 | **Étapes** | <p>Pour chaque compte de stockage, l’utilisateur peut activer Azure Storage Analytics pour effectuer la journalisation et stocker les données de métriques. Les journaux d’activité d’analyse du stockage fournissent des informations importantes comme la méthode d’authentification utilisée par un utilisateur lors de l’accès au stockage.</p><p>Cela peut être très utile si vous surveillez étroitement l’accès au stockage. Par exemple, dans Blob Storage, vous pouvez définir tous les conteneurs comme privés et implémenter l’utilisation d’un service SAP dans toutes vos applications. Vous pouvez alors vérifier régulièrement les journaux d’activité pour voir si vos objets blob font l’objet d’un accès à l’aide de clés de compte de stockage, ce qui peut indiquer une violation de la sécurité, ou si les objets blob sont publics alors qu’ils ne devraient pas l’être.</p>|
 
 ## <a name="implement-sufficient-logging"></a><a id="sufficient-logging"></a>Implémenter une journalisation suffisante
@@ -164,7 +164,7 @@ ms.locfileid: "68728415"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | .NET Framework |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [MSDN](https://msdn.microsoft.com/library/ff648500.aspx), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_insufficient_logging) |
+| **Informations de référence**              | [MSDN](/previous-versions/msp-n-p/ff648500(v=pandp.10)), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_insufficient_logging) |
 | **Étapes** | <p>L’absence d’une piste d’audit correcte après un incident de sécurité peut entraver les efforts d’investigation. Windows Communication Foundation (WCF) offre la possibilité d’enregistrer les tentatives d’authentification ayant réussi et/ou échoué.</p><p>La journalisation des tentatives d’authentification ayant échoué peut avertir les administrateurs de potentielles attaques en force brute. De même, la journalisation des événements d’authentification ayant réussi peut fournir à une piste d’audit utile lorsqu’un compte légitime est compromis. Activer la fonctionnalité d’audit de la sécurité de service de WCF |
 
 ### <a name="example"></a>Exemple
@@ -193,7 +193,7 @@ Voici un exemple de configuration dans lequel l’audit est activé
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | .NET Framework |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [MSDN](https://msdn.microsoft.com/library/ff648500.aspx), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_insufficient_audit_failure_handling) |
+| **Informations de référence**              | [MSDN](/previous-versions/msp-n-p/ff648500(v=pandp.10)), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_insufficient_audit_failure_handling) |
 | **Étapes** | <p>La solution développée est configurée pour ne pas générer d’exception lorsqu’elle ne parvient pas à écrire dans un journal d’audit. Si WCF est configuré pour ne pas lever une exception lorsqu’il ne parvient pas à écrire dans un journal d’audit, le programme n’est pas informé de l’échec et l’audit des événements de sécurité critiques ne peut pas être réalisé.</p>|
 
 ### <a name="example"></a>Exemple
@@ -242,5 +242,5 @@ Configurez WCF pour informer le programme chaque fois qu’il ne parvient pas à
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Introduction à la surveillance des opérations IoT Hub](https://azure.microsoft.com/documentation/articles/iot-hub-operations-monitoring/) |
+| **Informations de référence**              | [Introduction à la surveillance des opérations IoT Hub](../../iot-hub/iot-hub-operations-monitoring.md) |
 | **Étapes** | <p>Concevez la collecte et le stockage des données d’audit collectées via la surveillance des opérations IoT Hub. Activez les catégories de surveillance suivantes :</p><ul><li>Opérations d’identité des appareils</li><li>Communications appareil-à-cloud</li><li>Communications cloud-à-appareil</li><li>Connexions</li><li>Chargements de fichiers</li></ul>|

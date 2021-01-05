@@ -7,14 +7,14 @@ author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 04/01/2020
+ms.date: 11/11/2020
 ms.author: aahi
-ms.openlocfilehash: fd2a6cdad01302501e30ec60a4d3ccf6efd9c266
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: bb9b0da609169288521d21ee6d5e412a786c7549
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80876818"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94573864"
 ---
 ## <a name="azure-cognitive-services-container-security"></a>Sécurité des conteneurs Azure Cognitive Services
 
@@ -27,13 +27,13 @@ Le diagramme ci-dessous illustre l’approche **non sécurisée** par défaut :
 
 ![Sécurité du conteneur](../media/container-security.svg)
 
-Une autre approche *sécurisée* pour les consommateurs de conteneurs Cognitive Services consiste à ajouter un composant frontal à un conteneur afin de maintenir le point de terminaison de conteneur privé. Prenons l’exemple d’un scénario dans lequel nous utilisons [Istio][istio] comme passerelle d’entrée. Istio prend en charge HTTPS/TLS et l’authentification par certificat client. Dans ce scénario, le composant frontal Istio expose l’accès au conteneur et présente le certificat client qui est préalablement inclus sur liste verte avec Istio.
+Une autre approche *sécurisée* pour les consommateurs de conteneurs Cognitive Services consiste à ajouter un composant frontal à un conteneur afin de maintenir le point de terminaison de conteneur privé. Prenons l’exemple d’un scénario dans lequel nous utilisons [Istio][istio] comme passerelle d’entrée. Istio prend en charge HTTPS/TLS et l’authentification par certificat client. Dans ce scénario, le composant frontal Istio expose l’accès au conteneur et présente le certificat client qui est préalablement approuvé avec Istio.
 
 [Nginx][nginx] est un autre choix populaire dans la même catégorie. Istio et Nginx jouent le rôle de maillage de service et offrent des fonctionnalités supplémentaires, notamment l’équilibrage de charge, le routage et le contrôle du débit.
 
 ### <a name="container-networking"></a>Mise en réseau de conteneurs
 
-Les conteneurs Cognitive Services sont requis pour envoyer des informations relatives aux compteurs à des fins de facturation. Les *conteneurs hors connexion*  constituent la seule exception, car ils suivent une autre méthodologie de facturation. Si vous n’ajoutez pas à la liste verte les différents canaux réseau sur lesquels s’appuient les conteneurs Cognitive Services, le conteneur ne fonctionnera pas.
+Les conteneurs Cognitive Services sont requis pour envoyer des informations relatives aux compteurs à des fins de facturation. Si vous n’ajoutez pas à la liste verte les différents canaux réseau sur lesquels s’appuient les conteneurs Cognitive Services, le conteneur ne fonctionnera pas.
 
 #### <a name="allow-list-cognitive-services-domains-and-ports"></a>Ajouter à la liste verte les domaines et ports Cognitive Services
 

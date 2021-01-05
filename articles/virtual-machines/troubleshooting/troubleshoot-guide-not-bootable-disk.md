@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: troubleshooting
 ms.date: 03/25/2020
 ms.author: v-mibufo
-ms.openlocfilehash: 9f0c6350b89dcfecefcadcc166f7af35abc4b128
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 16f6919577955bda5b04db26deb9fe78a467e364
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80299189"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86509033"
 ---
 # <a name="boot-error--this-is-not-a-bootable-disk"></a>Erreur de démarrage – Disque non amorçable
 
@@ -27,7 +27,7 @@ Cet article décrit les étapes à suivre pour résoudre les problèmes liés à
 
 ## <a name="symptoms"></a>Symptômes
 
-Quand vous utilisez [Diagnostics de démarrage](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics) pour visualiser la capture d’écran de la machine virtuelle, vous constatez que cette capture affiche une invite avec le message « Disque non amorçable. Veuillez insérer une disquette de démarrage et appuyer sur une touche pour réessayer... ».
+Quand vous utilisez [Diagnostics de démarrage](./boot-diagnostics.md) pour visualiser la capture d’écran de la machine virtuelle, vous constatez que cette capture affiche une invite avec le message « Disque non amorçable. Veuillez insérer une disquette de démarrage et appuyer sur une touche pour réessayer... ».
 
    La figure 1
 
@@ -52,7 +52,7 @@ Ce message d’erreur signifie que le processus de démarrage du système d’ex
 
 ### <a name="create-and-access-a-repair-vm"></a>Créer une machine virtuelle de réparation et y accéder
 
-1. Effectuez les étapes 1 à 3 des [commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands) pour préparer une machine virtuelle de réparation.
+1. Effectuez les étapes 1 à 3 des [commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md) pour préparer une machine virtuelle de réparation.
 2. Connectez-vous à la machine virtuelle de réparation à l’aide de la connexion Bureau à distance.
 
 ### <a name="set-partition-status-to-active"></a>Définir l’état de la partition sur Actif
@@ -148,4 +148,4 @@ Pour activer la collecte de l’image mémoire et la console série, exécutez l
 
 ### <a name="rebuild-the-original-vm"></a>Régénérer la machine virtuelle d’origine
 
-Utilisez l’[étape 5 des commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands#repair-process-example) pour réassembler la machine virtuelle.
+Utilisez l’[étape 5 des commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md#repair-process-example) pour réassembler la machine virtuelle.

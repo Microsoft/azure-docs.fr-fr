@@ -5,18 +5,18 @@ services: data-factory
 documentationcenter: ''
 ms.service: data-factory
 ms.workload: data-services
-author: djpmsft
-ms.author: daperlov
+author: chez-charlie
+ms.author: chez
 manager: jroth
 ms.reviewer: maghan
 ms.topic: conceptual
 ms.date: 10/18/2018
-ms.openlocfilehash: 56d80571253d95d28c839ed81b6e1ce6dda9dc46
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: de416277de34e1c3717d581697f05c98c48d1959
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83652406"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93146005"
 ---
 # <a name="create-a-trigger-that-runs-a-pipeline-in-response-to-an-event"></a>Créer un déclencheur qui exécute un pipeline en réponse à un événement
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -31,7 +31,7 @@ Pour afficher une présentation de dix minutes et la démonstration de cette fon
 
 
 > [!NOTE]
-> L’intégration décrite dans cet article dépend [d’Azure Event Grid](https://azure.microsoft.com/services/event-grid/). Vérifiez que votre abonnement est inscrit auprès du fournisseur de ressources Event Grid. Pour plus d’informations, consultez [Types et fournisseurs de ressources](../azure-resource-manager/management/resource-providers-and-types.md#azure-portal).
+> L’intégration décrite dans cet article dépend [d’Azure Event Grid](https://azure.microsoft.com/services/event-grid/). Vérifiez que votre abonnement est inscrit auprès du fournisseur de ressources Event Grid. Pour plus d’informations, consultez [Types et fournisseurs de ressources](../azure-resource-manager/management/resource-providers-and-types.md#azure-portal). Vous devez pouvoir effectuer l’action *Microsoft.EventGrid/eventSubscriptions/* *. Cette action fait partie du rôle intégré Contributeur EventGrid EventSubscription.
 
 ## <a name="data-factory-ui"></a>IU de la fabrique de données
 
@@ -50,14 +50,14 @@ Cette section vous montre comment créer un déclencheur d’événements dans l
 1. Sélectionnez votre compte de stockage dans la liste déroulante abonnement Azure ou manuellement à l’aide de son ID de ressource de compte de stockage. Choisissez le conteneur sur lequel vous souhaitez que les événements se produisent. La sélection du conteneur est facultative, mais gardez à l’esprit que la sélection de tous les conteneurs peut entraîner un grand nombre d’événements.
 
    > [!NOTE]
-   > Le déclencheur d’événements prend actuellement en charge uniquement Azure Data Lake Storage Gen2 et des comptes de stockages de version 2 (usage général). En raison d’une limitation de Azure Event Grid, Azure Data Factory ne prend en charge qu’un maximum de 500 déclencheurs d’événements par compte de stockage.
+   > Le déclencheur d’événements prend actuellement en charge uniquement Azure Data Lake Storage Gen2 et des comptes de stockages de version 2 (usage général). Vous devez disposer au minimum de l’accès *Propriétaire* au compte de stockage.  En raison d’une limitation de Azure Event Grid, Azure Data Factory ne prend en charge qu’un maximum de 500 déclencheurs d’événements par compte de stockage.
 
 1. Avec les propriétés **Blob path begins with** (Chemin d’accès de l’objet blob commence par) et **Blob path ends with** (Chemin d’accès de l’objet blob se termine par), vous pouvez spécifier les conteneurs, les dossiers et les noms d’objets blob pour lesquels vous souhaitez recevoir des événements. Votre déclencheur d’événement requiert la définition d’au moins une de ces propriétés. Vous pouvez utiliser divers modèles pour les deux propriétés **Blob path begins with** (Chemin d’accès de l’objet blob commence par) et **Blob path ends with** (Chemin d’accès de l’objet blob se termine par), comme indiqué dans les exemples plus loin dans cet article.
 
     * **Blob path begins with:** (Chemin d’accès de l’objet blob commence par) Le chemin d’accès de l’objet blob doit commencer par un chemin d’accès au dossier. Les valeurs autorisées comprennent `2018/` et `2018/april/shoes.csv`. Ce champ ne peut pas être sélectionné si aucun conteneur n’est sélectionné.
     * **Blob path ends with:** (Chemin d’accès de l’objet blob se termine par) Le chemin d’accès de l’objet blob doit se terminer par un nom de fichier ou une extension. Les valeurs autorisées comprennent `shoes.csv` et `.csv`. Le nom du conteneur et du dossier sont facultatifs mais, s’ils sont spécifiés, ils doivent être séparés par un segment `/blobs/`. Par exemple, un conteneur nommé « Orders » peut avoir la valeur `/orders/blobs/2018/april/shoes.csv`. Pour spécifier un dossier dans n’importe quel conteneur, omettez le caractère « / » de début. Par exemple, `april/shoes.csv` déclenche un événement sur tout fichier nommé `shoes.csv` dans le dossier appelé « avril » dans n’importe quel conteneur. 
 
-1. Indiquez si votre déclencheur répondra à un événement **créé par un objet Blob**, **supprimé par un objet Blob** ou les deux. Dans l’emplacement de stockage spécifié, chaque événement déclenchera les pipelines Data Factory associés au déclencheur.
+1. Indiquez si votre déclencheur répondra à un événement **créé par un objet Blob** , **supprimé par un objet Blob** ou les deux. Dans l’emplacement de stockage spécifié, chaque événement déclenchera les pipelines Data Factory associés au déclencheur.
 
     ![Configurer le déclencheur d’événement](media/how-to-create-event-trigger/event-based-trigger-image2.png)
 
@@ -67,13 +67,13 @@ Cette section vous montre comment créer un déclencheur d’événements dans l
 
     ![Aperçu des données du déclencheur d’événements](media/how-to-create-event-trigger/event-based-trigger-image3.png)
 
-1. Pour attacher un pipeline à ce déclencheur, accédez à la zone de dessin du pipeline , cliquez sur **Ajouter un déclencheur**, puis sélectionnez **Nouveau/Modifier**. Lorsque la navigation latérale s’affiche, cliquez sur le menu déroulant **Choisir le déclencheur...** et sélectionnez le déclencheur que vous avez créé. Cliquez sur **Suivant : Aperçu des données** pour confirmer que la configuration est correcte, puis cliquez sur **Suivant** pour valider que l’aperçu des données est correct.
+1. Pour attacher un pipeline à ce déclencheur, accédez à la zone de dessin du pipeline , cliquez sur **Ajouter un déclencheur** , puis sélectionnez **Nouveau/Modifier**. Lorsque la navigation latérale s’affiche, cliquez sur le menu déroulant **Choisir le déclencheur...** et sélectionnez le déclencheur que vous avez créé. Cliquez sur **Suivant : Aperçu des données** pour confirmer que la configuration est correcte, puis cliquez sur **Suivant** pour valider que l’aperçu des données est correct.
 
-1. Si votre pipeline possède des paramètres, vous pouvez les spécifier dans la barre de navigation latérale du paramètre d’exécution du déclencheur. Le déclencheur d’événement capture le chemin de dossier et le nom de fichier de l’objet blob dans les propriétés `@trigger().outputs.body.folderPath` et `@trigger().outputs.body.fileName`. Pour utiliser les valeurs de ces propriétés dans un pipeline, vous devez mapper les propriétés aux paramètres de pipeline. Après le mappage des propriétés aux paramètres, vous pouvez accéder aux valeurs capturées par le déclencheur à l’aide de l’expression `@pipeline().parameters.parameterName` tout au long du pipeline. Une fois que vous avez terminé, cliquez sur **Terminer**.
+1. Si votre pipeline possède des paramètres, vous pouvez les spécifier dans la barre de navigation latérale du paramètre d’exécution du déclencheur. Le déclencheur d’événement capture le chemin de dossier et le nom de fichier de l’objet blob dans les propriétés `@triggerBody().folderPath` et `@triggerBody().fileName`. Pour utiliser les valeurs de ces propriétés dans un pipeline, vous devez mapper les propriétés aux paramètres de pipeline. Après le mappage des propriétés aux paramètres, vous pouvez accéder aux valeurs capturées par le déclencheur à l’aide de l’expression `@pipeline().parameters.parameterName` tout au long du pipeline. Une fois que vous avez terminé, cliquez sur **Terminer**.
 
     ![Mappage des propriétés aux paramètres de pipeline](media/how-to-create-event-trigger/event-based-trigger-image4.png)
 
-Dans l’exemple précédent, le déclencheur est configuré pour se déclencher lorsqu’un chemin d’accès à un objet Blob se terminant par .csv est créé dans le dossier event-testing du conteneur sample-data. Les propriétés **folderPath** et **filename** capturent l’emplacement du nouvel objet Blob. Par exemple, lorsque MoviesDB.csv est ajouté au chemin d’accès sample-data/event-testing, `@trigger().outputs.body.folderPath` a la valeur de `sample-data/event-testing` et `@trigger().outputs.body.fileName` a la valeur de `moviesDB.csv`. Ces valeurs sont mappées dans l’exemple aux paramètres de pipeline `sourceFolder` et `sourceFile` peuvent être utilisés dans l’ensemble du pipeline en tant que `@pipeline().parameters.sourceFolder` et `@pipeline().parameters.sourceFile` respectivement.
+Dans l’exemple précédent, le déclencheur est configuré pour se déclencher lorsqu’un chemin d’accès à un objet Blob se terminant par .csv est créé dans le dossier event-testing du conteneur sample-data. Les propriétés **folderPath** et **filename** capturent l’emplacement du nouvel objet Blob. Par exemple, lorsque MoviesDB.csv est ajouté au chemin d’accès sample-data/event-testing, `@triggerBody().folderPath` a la valeur de `sample-data/event-testing` et `@triggerBody().fileName` a la valeur de `moviesDB.csv`. Ces valeurs sont mappées dans l’exemple aux paramètres de pipeline `sourceFolder` et `sourceFile` peuvent être utilisés dans l’ensemble du pipeline en tant que `@pipeline().parameters.sourceFolder` et `@pipeline().parameters.sourceFile` respectivement.
 
 ## <a name="json-schema"></a>Schéma JSON
 
@@ -92,7 +92,7 @@ Le tableau suivant fournit une vue d’ensemble des éléments de schéma associ
 Cette section fournit des exemples de paramètres de déclencheur basé sur un événement.
 
 > [!IMPORTANT]
-> Vous devez inclure le segment `/blobs/` du chemin, comme indiqué dans les exemples suivants, chaque fois que vous spécifiez conteneur et dossier, conteneur et fichier, ou conteneur, dossier et fichier. Pour **blobPathBeginsWith**, l’interface utilisateur de Data Factory ajoute automatiquement `/blobs/` entre le nom du dossier et du conteneur dans le JSON du déclencheur.
+> Vous devez inclure le segment `/blobs/` du chemin, comme indiqué dans les exemples suivants, chaque fois que vous spécifiez conteneur et dossier, conteneur et fichier, ou conteneur, dossier et fichier. Pour **blobPathBeginsWith** , l’interface utilisateur de Data Factory ajoute automatiquement `/blobs/` entre le nom du dossier et du conteneur dans le JSON du déclencheur.
 
 | Propriété | Exemple | Description |
 |---|---|---|

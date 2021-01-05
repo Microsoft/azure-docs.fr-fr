@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 04/21/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: cac7e6feb632456b63b97ead057f9ecaf49322ea
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1ad9cc3d6d07c8d744ec667e2fffb035848121b4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81729714"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85203246"
 ---
 # <a name="stringcollection-claims-transformations"></a>Transformations de revendications StringCollection
 
@@ -38,7 +38,7 @@ Utilisez cette transformation de revendication pour ajouter une chaîne à un ob
 
 La transformation de revendication suivante ajoute le ClaimType **e-mail** au ClaimType **otherMails**.
 
-```XML
+```xml
 <ClaimsTransformation Id="CreateOtherMailsFromEmail" TransformationMethod="AddItemToStringCollection">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="item" />
@@ -70,7 +70,7 @@ Ajoute un paramètre de chaîne à une nouvelle revendication stringCollection �
 
 Utilisez cette transformation de revendication pour ajouter une valeur de chaîne à un objet stringCollection nouveau ou existant. L’exemple suivant ajoute une adresse e-mail constante (admin@contoso.com) à la revendication **otherMails**.
 
-```XML
+```xml
 <ClaimsTransformation Id="SetCompanyEmail" TransformationMethod="AddParameterToStringCollection">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="otherMails" TransformationClaimType="collection" />
@@ -104,7 +104,7 @@ Obtient le premier élément de la collection de chaînes fournie.
 
 L’exemple suivant lit la revendication **otherMails** et retourne le premier élément dans la revendication **e-mail**.
 
-```XML
+```xml
 <ClaimsTransformation Id="CreateEmailFromOtherMails" TransformationMethod="GetSingleItemFromStringCollection">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="otherMails" TransformationClaimType="collection" />
@@ -136,7 +136,7 @@ Vérifie si un type de revendication StringCollection contient un élément
 
 L’exemple suivant vérifie si le type de revendication stringCollection `roles` contient la valeur **admin**.
 
-```XML
+```xml
 <ClaimsTransformation Id="IsAdmin" TransformationMethod="StringCollectionContains">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="roles" TransformationClaimType="inputClaim"/>
@@ -172,7 +172,7 @@ Vérifie si un type de revendication StringCollection contient une valeur de rev
 
 L’exemple suivant vérifie si le type de revendication stringCollection `roles` contient la valeur du type de revendication `role`.
 
-```XML
+```xml
 <ClaimsTransformation Id="HasRequiredRole" TransformationMethod="StringCollectionContainsClaim">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="roles" TransformationClaimType="collection" />

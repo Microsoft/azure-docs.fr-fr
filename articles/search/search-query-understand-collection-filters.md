@@ -19,12 +19,12 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: f6e8ed5baef9b8594bb1fe03942e831fd8264a56
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6af0f2b5221a737687578e939c14cecf3be14509
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113075"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88932914"
 ---
 # <a name="understanding-odata-collection-filters-in-azure-cognitive-search"></a>Présentation des filtres de collection OData dans Recherche cognitive Azure
 
@@ -50,13 +50,17 @@ La première raison est simplement une conséquence de la façon dont le langage
 
 Quand vous appliquez plusieurs critères de filtre sur une collection d’objets complexes, les critères sont **corrélés** car ils s’appliquent à *chaque objet de la collection*. Par exemple, le filtre suivant retourne les hôtels ayant au moins une chambre de luxe (deluxe) dont le tarif est inférieur à 100 :
 
+```odata-filter-expr
     Rooms/any(room: room/Type eq 'Deluxe Room' and room/BaseRate lt 100)
+```
 
 Si le filtrage a été *sans corrélation*, le filtre ci-dessus peut retourner les hôtels où une chambre est de luxe (deluxe) et une autre chambre dispose d’un tarif de base inférieur à 100. Cela n’aurait pas de sens, car les deux clauses de l’expression lambda s’appliquent à la même variable de portée, à savoir `room`. C’est pourquoi ces filtres sont mis en corrélation.
 
 Toutefois, pour la recherche en texte intégral, il n’existe aucun moyen de faire référence à une variable de portée spécifique. Si vous utilisez une recherche par champ pour émettre une [requête complète Lucene](query-lucene-syntax.md) comme celle-ci :
 
+```odata-filter-expr
     Rooms/Type:deluxe AND Rooms/Description:"city view"
+```
 
 vous pouvez obtenir les hôtels où une chambre est de luxe (deluxe) et où une autre chambre mentionne « city view » (vue sur la ville) dans la description. Par exemple, le document ci-dessous avec comme `Id` la valeur `1` correspondrait à la requête :
 
@@ -149,19 +153,27 @@ Cette structure de données est conçue pour répondre très rapidement à une q
 
 En partant de l’égalité, nous allons ensuite voir comment il est possible de combiner plusieurs contrôles d’égalité sur la même variable de plage avec `or`. Cela fonctionne grâce à l’algèbre et à [la propriété distributive des quantificateurs](https://en.wikipedia.org/wiki/Existential_quantification#Negation). Cette expression :
 
+```odata-filter-expr
     seasons/any(s: s eq 'winter' or s eq 'fall')
+```
 
 équivaut à :
 
+```odata-filter-expr
     seasons/any(s: s eq 'winter') or seasons/any(s: s eq 'fall')
+```
 
 et chacune des deux sous-expressions `any` peut être exécutée efficacement à l’aide de l’index inversé. De plus, grâce à [la loi de la négation des quantificateurs](https://en.wikipedia.org/wiki/Existential_quantification#Negation), cette expression :
 
+```odata-filter-expr
     seasons/all(s: s ne 'winter' and s ne 'fall')
+```
 
 équivaut à :
 
+```odata-filter-expr
     not seasons/any(s: s eq 'winter' or s eq 'fall')
+```
 
 C’est pourquoi il est possible d’utiliser `all` avec `ne` et `and`.
 
@@ -192,4 +204,4 @@ Pour obtenir des exemples spécifiques des types de filtres qui sont autorisés 
 - [Filtres dans la Recherche cognitive Azure](search-filters.md)
 - [Vue d’ensemble du langage d’expression OData pour Recherche cognitive Azure](query-odata-filter-orderby-syntax.md)
 - [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md)
-- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents)

@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 05/07/2020
+ms.date: 10/12/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: fbadfb63b9f575053feca87bda2c3ad2e64e91eb
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: b3ad9c5d19d5d24154a8a63bfc412d6bbfdc1d8b
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82926032"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91949222"
 ---
 # <a name="define-a-technical-profile-for-a-jwt-token-issuer-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique pour un émetteur de jeton JSON Web Token dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -26,14 +26,14 @@ Azure Active Directory B2C (Azure AD B2C) émet plusieurs types de jetons de s�
 
 ## <a name="protocol"></a>Protocol
 
-L’attribut **Name** de l’élément **Protocol** doit être défini sur `None`. Définissez l’élément **OutputTokenFormat** sur `JWT`.
+L’attribut **Name** de l’élément **Protocol** doit être défini sur `OpenIdConnect`. Définissez l’élément **OutputTokenFormat** sur `JWT`.
 
 L’exemple suivant montre un profil technique pour `JwtIssuer` :
 
-```XML
+```xml
 <TechnicalProfile Id="JwtIssuer">
   <DisplayName>JWT Issuer</DisplayName>
-  <Protocol Name="OpenIdConnect" />
+  <Protocol Name="None" />
   <OutputTokenFormat>JWT</OutputTokenFormat>
   <Metadata>
     <Item Key="client_id">{service:te}</Item>

@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/11/2019
 ms.author: terrylan
-ms.openlocfilehash: 3925e39824d1702ff43a6b981ac997ddab658b96
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7c317a0b4fea0c981b227bace00c1b8924fd582c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80548653"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89536380"
 ---
 # <a name="security-recommendations-for-azure-marketplace-images"></a>Recommandations de sécurité pour les images Place de marché Microsoft Azure
 
@@ -27,9 +27,8 @@ Exécutez toujours une détection de vulnérabilité de sécurité sur votre ima
 
 ## <a name="open-source-based-images"></a>Images open source
 
-|||
-|--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Catégorie**                                                 | **Vérification**                                                                                                                                                                                                                                                                              |
+| Category | Vérification |
+| -------- | ----- |
 | Sécurité                                                     | Installez tous les derniers correctifs de sécurité pour la distribution de Linux.                                                                                                                                                                                                              |
 | Sécurité                                                     | Suivez les bonnes pratiques du secteur pour sécuriser l’image de machine virtuelle pour votre distribution de Linux spécifique.                                                                                                                                                                                     |
 | Sécurité                                                     | Limitez la surface d’attaque en conservant un encombrement minimal avec seulement les rôles Windows Server, fonctionnalités, services et ports réseau strictement nécessaires.                                                                                                                                               |
@@ -50,9 +49,8 @@ Exécutez toujours une détection de vulnérabilité de sécurité sur votre ima
 
 ## <a name="windows-server-based-images"></a>Images Windows Server
 
-|||
-|-------------| -------------------------|
-| **Catégorie**                                                     | **Vérification**                                                                                                                                                                |
+| Category | Vérification |
+|--------- | ----- |
 | Sécurité                                                         | Utilisez une image de base de système d’exploitation sécurisée. Le disque dur virtuel utilisé pour la source de n’importe quelle image basée sur Windows Server doit venir d’images de système d’exploitation Windows Server obtenues via Microsoft Azure. |
 | Sécurité                                                         | Installez toutes les dernières mises à jour de sécurité.                                                                                                                                     |
 | Sécurité                                                         | Les applications ne doivent pas dépendre de noms d’utilisateur restreints tels que « administrator », « root » et « admin ».                                                                |
@@ -67,11 +65,3 @@ Exécutez toujours une détection de vulnérabilité de sécurité sur votre ima
 
 Même si votre organisation ne dispose pas d’images dans la Place de marché Azure, pensez à vérifier les configurations de vos images Windows et Linux par rapport à ces recommandations.
 
-## <a name="contacting-customers"></a>Contacter des clients
-
-Pour identifier les clients et leurs e-mails de contact :
-
-1.  Dans Portail Cloud Partner, sur le rail de gauche, sélectionnez **Insights**.
-2.  Sous l’onglet **Ordres et utilisation**, utilisez les champs **Date de début** et **Date de fin** pour interroger l’utilisation dans la plage de dates requise. Cela indique quels abonnements Azure ont été utilisés quotidiennement pour l’offre. Exportez ces données. 
-3.  De même, dans l’onglet **Client**, interrogez et exportez votre base clientèle.
-4.  Faites correspondre l’ID d’abonnement de l’étape 2 à celui de l’étape 3 pour rechercher les informations client nécessaires.

@@ -3,13 +3,13 @@ title: 'Tutoriel : Sauvegarder plusieurs machines virtuelles Azure avec PowerSh
 description: Ce tutoriel décrit en détail la sauvegarde de plusieurs machines virtuelles Azure dans un coffre Recovery Services à l’aide d’Azure PowerShell.
 ms.topic: tutorial
 ms.date: 03/05/2019
-ms.custom: mvc
-ms.openlocfilehash: 154238eae78ce44b9fc91058e58d9a11e254c0f9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 53a5df430a3ea57201ecb19bac68ef9f073beb14
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74171780"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90980966"
 ---
 # <a name="back-up-azure-vms-with-powershell"></a>Sauvegarder des machines virtuelles Azure avec PowerShell
 
@@ -48,7 +48,7 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 Un [coffre Recovery Services](backup-azure-recovery-services-vault-overview.md) est un conteneur logique qui stocke des données de sauvegarde pour des ressources protégées, telles que des machines virtuelles Azure. Quand un travail de sauvegarde s’exécute, il crée un point de récupération à l’intérieur du coffre Recovery Services. Vous pouvez ensuite utiliser un de ces points de récupération pour restaurer des données à un moment donné dans le temps.
 
 * Dans ce tutoriel, vous créez le coffre dans le même groupe de ressources et au même emplacement que la machine virtuelle que vous voulez sauvegarder.
-* La Sauvegarde Azure gère automatiquement le stockage des données sauvegardées. Par défaut, le coffre utilise [le stockage géoredondant (GRS)](../storage/common/storage-redundancy-grs.md). La géoredondance garantit que les données sauvegardées sont répliquées dans une région Azure secondaire, à des centaines de kilomètres de la région primaire.
+* La Sauvegarde Azure gère automatiquement le stockage des données sauvegardées. Par défaut, le coffre utilise [le stockage géoredondant (GRS)](../storage/common/storage-redundancy.md#geo-redundant-storage). La géoredondance garantit que les données sauvegardées sont répliquées dans une région Azure secondaire, à des centaines de kilomètres de la région primaire.
 
 Créez le coffre comme suit :
 

@@ -1,24 +1,25 @@
 ---
-title: Partager des images de la bibliothèque entre tenants dans Azure
-description: Découvrez comment partager des images de machine virtuelle entre des locataires Azure à l’aide des galeries d’images partagées.
-author: cynthn
+title: Partager des images des galeries entre locataires
+description: En utilisant Azure CLI, découvrez comment utiliser les galeries d’images partagées pour partager des images de machine virtuelle entre des locataires Azure.
+author: axayjo
 ms.service: virtual-machines
 ms.subservice: imaging
 ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 05/04/2019
-ms.author: cynthn
-ms.reviewer: akjosh
-ms.openlocfilehash: 62f136eb1c2684bfd307a05ccbb4836739da6f3a
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.author: akjosh
+ms.reviewer: cynthn
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: f0192a6eb60c72c9f7ac605db492f4e5f97b76ed
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82789451"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96779258"
 ---
-# <a name="share-gallery-vm-images-across-azure-tenants"></a>Partager des images de machine virtuelle de la galerie entre des locataires Azure
+# <a name="share-gallery-vm-images-across-azure-tenants-using-the-azure-cli"></a>Partager des images de machine virtuelle des galeries entre des locataires Azure à l’aide d’Azure CLI
 
-Les galeries Shared Image Gallery vous permettent de partager des images à l’aise du contrôle d’accès en fonction du rôle (RBAC). Vous pouvez utiliser le contrôle d’accès en fonction du rôle (RBAC) pour partager des images au sein de votre locataire, voire avec d’autres personnes en dehors. Pour plus d’informations sur cette option de partage simple, voir [Partager la galerie](/azure/virtual-machines/linux/shared-images-portal#share-the-gallery).
+Les galeries Shared Image Gallery vous permettent de partager des images à l’aide du contrôle d’accès en fonction du rôle (Azure RBAC). Vous pouvez utiliser Azure RBAC pour partager des images au sein de votre locataire, voire avec d’autres personnes en dehors. Pour plus d’informations sur cette option de partage simple, voir [Partager la galerie](./shared-images-portal.md#share-the-gallery).
 
 [!INCLUDE [virtual-machines-share-images-across-tenants](../../../includes/virtual-machines-share-images-across-tenants.md)]
 
@@ -55,4 +56,4 @@ az vm create \
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](troubleshooting-shared-images.md).
+Si vous rencontrez des problèmes, consultez [Résoudre les problèmes des galeries d’images partagées](../troubleshooting-shared-images.md).

@@ -3,17 +3,17 @@ title: Modifier les paramètres d’application Azure IoT Central | Microsoft Do
 description: Découvrez comment gérer en tant qu’administrateur votre application Azure IoT Central en changeant son nom et son URL et en chargeant une image, puis supprimer l’application.
 author: viv-liu
 ms.author: viviali
-ms.date: 11/27/2019
+ms.date: 12/19/2020
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: peterpr
-ms.openlocfilehash: 7b77ea9e0e1f322cb5ef0bc63885c3ccce1b76f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ece77c2091e7c7c2aa09516bd4d3022bb6fcdfcc
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158677"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97796956"
 ---
 # <a name="change-iot-central-application-settings"></a>Modifier les paramètres d’application IoT Central
 
@@ -39,13 +39,13 @@ Si votre administrateur crée un thème personnalisé pour votre application, ce
 Utilisez le bouton **Supprimer** pour supprimer définitivement votre application IoT Central. Cette action supprime définitivement toutes les données qui lui sont associées.
 
 > [!Note]
-> Pour pouvoir supprimer une application, vous devez aussi disposer des autorisations permettant de supprimer des ressources de l’abonnement Azure que vous avez choisi lors de la création de l’application. Pour en savoir plus, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources de votre abonnement Azure](https://docs.microsoft.com/azure/active-directory/role-based-access-control-configure).
+> Pour pouvoir supprimer une application, vous devez aussi disposer des autorisations permettant de supprimer des ressources de l’abonnement Azure que vous avez choisi lors de la création de l’application. Pour en savoir plus, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources de votre abonnement Azure](../../role-based-access-control/role-assignments-portal.md).
 
 ## <a name="manage-programmatically"></a>Gérer par programme
 
 Des packages de kit de développement logiciel (SDK) Azure Resource Manager d’IoT Central sont disponibles pour Node, Python, C#, Ruby, Java et Go. Vous pouvez utiliser ces packages pour créer, lister, mettre à jour ou supprimer des applications IoT Central. Les packages incluent des ressources d’assistance pour gérer l’authentification et les erreurs.
 
-Vous trouverez des exemples montrant comment utiliser les kits de développement logiciel (SDK) Azure Resource Manager à l’adresse [https://github.com/emgarten/iotcentral-arm-sdk-examples](https://github.com/emgarten/iotcentral-arm-sdk-examples).
+Vous trouverez des exemples montrant comment utiliser les kits de développement logiciel (SDK) Azure Resource Manager à l’adresse [https://github.com/Azure-Samples/azure-iot-central-arm-sdk-samples](https://github.com/Azure-Samples/azure-iot-central-arm-sdk-samples).
 
 Pour plus d’informations, consultez les packages et dépôts GitHub suivants :
 

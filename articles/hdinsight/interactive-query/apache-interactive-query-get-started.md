@@ -9,10 +9,10 @@ ms.topic: overview
 ms.custom: hdinsightactive
 ms.date: 03/03/2020
 ms.openlocfilehash: e133e08e333cb478269a93cce963566e195d6949
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "78271952"
 ---
 # <a name="what-is-interactive-query-in-azure-hdinsight"></a>Qu'est-ce qu'Interactive Query dans Azure HDInsight

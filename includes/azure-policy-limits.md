@@ -1,28 +1,30 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 04/23/2020
+ms.date: 09/30/2020
 ms.author: dacoulte
-ms.openlocfilehash: 04e607296478520298a2febab61a7edac911a59c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: f3f706789e14cb20214bf17fd91f6ec1e503848f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82131560"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91606080"
 ---
-Il existe un nombre maximal pour chaque type d'objet concernant Azure Policy. Une entrée _Scope_ (Étendue) fait référence soit à l’abonnement, soit au [groupe d’administration](../articles/governance/management-groups/overview.md).
+Il existe un nombre maximal pour chaque type d'objet concernant Azure Policy. Pour les définitions, une entrée d’_étendue_ désigne le [groupe d’administration](../articles/governance/management-groups/overview.md) ou l’abonnement.
+Pour les affectations et les exemptions, une entrée d’_étendue_ signifie le [groupe d’administration](../articles/governance/management-groups/overview.md), l’abonnement, le groupe de ressources ou la ressource individuelle.
 
 | Where | Quoi | Nombre maximal |
 |---|---|---|
 | Étendue | Définitions de stratégies | 500 |
-| Étendue | Définitions d’initiative | 100 |
-| Locataire | Définitions d’initiative | 1 000 |
-| Étendue | Affectations de stratégies et d'initiatives | 100 |
+| Étendue | Définitions d’initiative | 200 |
+| Locataire | Définitions d’initiative | 2 500 |
+| Étendue | Affectations de stratégies et d'initiatives | 200 |
+| Étendue | Exemptions | 1 000 |
 | Définition de stratégie | Paramètres | 20 |
-| Définition d’initiative | Stratégies | 100 |
+| Définition d’initiative | Stratégies | 1 000 |
 | Définition d’initiative | Paramètres | 100 |
 | Affectations de stratégies et d'initiatives | Exclusion (notScopes) | 400 |
 | Règle de stratégie | Éléments conditionnels imbriqués | 512 |

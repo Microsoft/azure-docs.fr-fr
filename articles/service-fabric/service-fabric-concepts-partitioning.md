@@ -3,12 +3,13 @@ title: Partitionnement des services Service Fabric
 description: Explique comment partitionner les services Service Fabric avec état. Les partitions permettent le stockage des données sur les ordinateurs locaux pour que les données et le calcul puissent être mis à l’échelle ensemble.
 ms.topic: conceptual
 ms.date: 06/30/2017
-ms.openlocfilehash: 4edfaa74fe109c688cad733d16031e87fff1e46f
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d33e7b5ee293cf9dfb49e509bec2e1950033a956
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81115160"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89005426"
 ---
 # <a name="partition-service-fabric-reliable-services"></a>Partitionnement des services fiables Service Fabric
 Cet article présente les concepts de base pour le partitionnement des services fiables d’Azure Service Fabric. Le code source utilisé dans cet article est également disponible sur [GitHub](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/classic/Services/AlphabetPartitions).

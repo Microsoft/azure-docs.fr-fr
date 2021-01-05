@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/16/2020
   ms.author: trbye
-  ms.openlocfilehash: 1766174d053b480674da26ef3e915bcf3fdf280a
-  ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+  ms.openlocfilehash: 9cb8c769074dea9ed75a9282c41c24437d17d5ab
+  ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "81401479"
+  ms.lasthandoff: 10/23/2020
+  ms.locfileid: "92756863"
 landingContent:
 - title: À propos de la transcription de conversation (scénario de réunion)
   linkLists:
@@ -24,10 +24,12 @@ landingContent:
     links:
     - text: Qu’est-ce que la transcription de conversation dans les réunions ?
       url: conversation-transcription.md
+  - linkListType: quickstart
+    links:
+    - text: Démarrage rapide sur la transcription de conversation en temps réel
+      url: how-to-use-conversation-transcription.md
   - linkListType: how-to-guide
     links:
-    - text: Transcription de conversation en temps réel
-      url: how-to-use-conversation-transcription.md
     - text: Transcription de conversation asynchrone
       url: how-to-async-conversation-transcription.md
 - title: À propos des conversations multi-appareils (scénario de réunion)
@@ -56,3 +58,9 @@ landingContent:
       url: multi-device-conversation.md#language-support
     - text: Tarification de la transcription vocale
       url: https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

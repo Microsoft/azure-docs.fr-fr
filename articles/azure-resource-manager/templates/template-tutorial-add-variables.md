@@ -1,20 +1,21 @@
 ---
 title: Tutoriel - Ajouter une variable au modèle
-description: Ajoutez des variables à votre modèle Azure Resource Manager pour simplifier la syntaxe.
+description: Ajoutez des variables à votre modèle Azure Resource Manager (modèle ARM) pour simplifier la syntaxe.
 author: mumian
 ms.date: 03/27/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: b1df86e5b593edec784de21e21a4399274d820bb
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: ''
+ms.openlocfilehash: 46ed1fc55a108bf80089d249abc58bc5d1a6479a
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80411686"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106952"
 ---
 # <a name="tutorial-add-variables-to-your-arm-template"></a>Tutoriel : Ajouter des variables à votre modèle ARM
 
-Dans ce tutoriel, vous allez apprendre à ajouter une variable à votre modèle Azure Resource Manager (ARM). Les variables simplifient vos modèles en vous permettant d’écrire une expression une fois et de la réutiliser dans tout le modèle. Ce tutoriel dure environ **7 minutes**.
+Dans ce tutoriel, vous allez apprendre à ajouter une variable à votre modèle Azure Resource Manager (modèle ARM). Les variables simplifient vos modèles en vous permettant d’écrire une expression une fois et de la réutiliser dans tout le modèle. Ce tutoriel dure environ **7 minutes**.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -36,17 +37,17 @@ L’exemple suivant met en évidence les modifications à apporter pour ajouter 
 
 :::code language="json" source="~/resourcemanager-templates/get-started-with-templates/add-variable/azuredeploy.json" range="1-47" highlight="5-9,29-31,36":::
 
-Notez qu’elle comprend une variable nommée **uniqueStorageName**. Cette variable utilise quatre fonctions pour composer une valeur de chaîne.
+Notez qu’elle comprend une variable nommée `uniqueStorageName`. Cette variable utilise quatre fonctions pour composer une valeur de chaîne.
 
 Vous êtes déjà familiarisé avec la fonction [parameters](template-functions-deployment.md#parameters), nous ne l’examinerons donc pas.
 
-Vous êtes également familiarisé avec la fonction [resourceGroup](template-functions-resource.md#resourcegroup). Dans ce cas, vous obtenez la propriété **id** au lieu de la propriété **location**, comme illustré dans le tutoriel précédent. La propriété **id** retourne l’identificateur complet du groupe de ressources, notamment l’ID d’abonnement et le nom du groupe de ressources.
+Vous êtes également familiarisé avec la fonction [resourceGroup](template-functions-resource.md#resourcegroup). Dans ce cas, vous obtenez la propriété `id` au lieu de la propriété `location`, comme illustré dans le tutoriel précédent. La propriété `id` retourne l’identificateur complet du groupe de ressources, notamment l’ID d’abonnement et le nom du groupe de ressources.
 
 La fonction [uniqueString](template-functions-string.md#uniquestring) crée une valeur de hachage de 13 caractères. La valeur retournée est déterminée par les paramètres que vous transmettez. Pour ce tutoriel, vous utilisez l’ID de groupe de ressources en tant qu’entrée pour la valeur de hachage. Cela signifie que vous pouvez déployer ce modèle dans différents groupes de ressources et obtenir une valeur de chaîne unique différente. Par contre, vous recevez la même valeur si vous déployez sur le même groupe de ressources.
 
-La fonction [concat](template-functions-string.md#concat) prend des valeurs et les combine ensemble. Pour cette variable, elle prend la chaîne à partir du paramètre et la chaîne à partir de la fonction uniqueString, puis les combine en une seule chaîne.
+La fonction [concat](template-functions-string.md#concat) prend des valeurs et les combine ensemble. Pour cette variable, elle prend la chaîne à partir du paramètre et la chaîne à partir de la fonction `uniqueString`, puis les combine en une seule chaîne.
 
-Le paramètre **storagePrefix** vous permet de transmettre un préfixe qui vous aide à identifier les comptes de stockage. Vous pouvez créer votre propre convention de nommage ; dans un longue liste de ressources, celle-ci facilite l’identification des comptes de stockage après le déploiement.
+Le paramètre `storagePrefix` vous permet de transmettre un préfixe qui vous aide à identifier les comptes de stockage. Vous pouvez créer votre propre convention de nommage ; dans un longue liste de ressources, celle-ci facilite l’identification des comptes de stockage après le déploiement.
 
 Enfin, remarquez que le nom de stockage est maintenant défini sur la variable, et non sur un paramètre.
 
@@ -54,7 +55,7 @@ Enfin, remarquez que le nom de stockage est maintenant défini sur la variable, 
 
 Déployons le modèle. Le déploiement de ce modèle est plus facile que les modèles précédents, car vous fournissez uniquement le préfixe pour le nom de stockage.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -82,7 +83,7 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="verify-deployment"></a>Vérifier le déploiement
 

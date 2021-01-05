@@ -1,7 +1,7 @@
 ---
 title: Exemple de script Azure CLI – Configurer un front-end IPv6 – Standard Load Balancer
 titlesuffix: Azure Virtual Network
-description: Activer les points de terminaison IPv6 à l’aide d’Azure CLI dans un réseau virtuel Azure
+description: Découvrez comment configurer des points de terminaison IPv6 dans un réseau virtuel avec Standard Load Balancer.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -12,12 +12,13 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 07/15/2019
 ms.author: kumud
-ms.openlocfilehash: 5f5856a89a04b58b138ee23a5f289ceff0915acf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 3e35d50abcb99b8bb67b611f0e03b3bdbc0c1c60
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80235050"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "96000230"
 ---
 # <a name="configure-ipv6-endpoints-in-virtual-network-script-sample-using-standard-load-balancerpreview"></a>Exemple de script de configuration de points de terminaison IPv6 dans un réseau virtuel avec Standard Load Balancer (préversion)
 
@@ -205,7 +206,7 @@ az network vnet create \
 --name dsVNET \
 --resource-group DsResourceGroup01 \
 --location eastus  \
---address-prefixes "10.0.0.0/16" "ace:cab:deca::/48"
+--address-prefixes "10.0.0.0/16" "fd00:db8:deca::/48"
 
 # Create a single dual stack subnet
 
@@ -213,7 +214,7 @@ az network vnet subnet create \
 --name dsSubNET \
 --resource-group DsResourceGroup01 \
 --vnet-name dsVNET \
---address-prefixes "10.0.0.0/24" "ace:cab:deca:deed::/64" \
+--address-prefixes "10.0.0.0/24" "fd00:db8:deca:deed::/64" \
 --network-security-group dsNSG1
 
 # Create NICs

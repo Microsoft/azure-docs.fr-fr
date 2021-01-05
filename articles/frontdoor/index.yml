@@ -7,15 +7,15 @@ metadata:
   services: frontdoor
   ms.service: frontdoor
   ms.topic: landing-page
-  author: vhorne
-  ms.author: victorh
-  ms.date: 03/03/2020
-  ms.openlocfilehash: 4bdb7c1765bdbd170d06eaef44b7578d1ddebedc
-  ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+  author: duongau
+  ms.author: duau
+  ms.date: 09/09/2020
+  ms.openlocfilehash: 844a2e070f5918352044c878657dc2dcee1902d4
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "82509633"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89657255"
 landingContent:
 - title: Découvrir Azure Front Door
   linkLists:
@@ -23,8 +23,6 @@ landingContent:
     links:
     - text: Qu’est-ce qu’Azure Front Door ?
       url: front-door-overview.md
-    - text: Nouveautés
-      url: front-door-whats-new.md
 - title: Créer une Front Door
   linkLists:
   - linkListType: quickstart
@@ -85,3 +83,5 @@ landingContent:
     links:
     - text: Définir la configuration d’un moteur de règles
       url: front-door-tutorial-rules-engine.md
+    - text: Ajouter des en-têtes de sécurité avec le moteur de règles
+      url: front-door-security-headers.md

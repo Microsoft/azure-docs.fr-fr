@@ -4,37 +4,35 @@ description: Cet article fournit des informations sur la façon de créer une pa
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/19/2019
 ms.author: absha
-ms.openlocfilehash: 2663c049245a7025b5948a64fc5008bb9e7dee90
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4a1a122eb7b5b0abcc47cd321c74267a1a4aecda
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74173717"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93396853"
 ---
 # <a name="create-an-application-gateway-and-rewrite-http-headers"></a>Créer une passerelle d’application et réécrire des en-têtes HTTP
 
-Vous pouvez utiliser Azure PowerShell pour configurer des [règles de réécriture d’en-têtes de requête et de réponse HTTP](rewrite-http-headers.md) lorsque vous créez une [référence SKU de passerelle d’application se mettant à l’échelle automatiquement et redondante dans la zone](https://docs.microsoft.com/azure/application-gateway/application-gateway-autoscaling-zone-redundant)
+Vous pouvez utiliser Azure PowerShell pour configurer des [règles de réécriture d’en-têtes de requête et de réponse HTTP](rewrite-http-headers.md) lorsque vous créez une [référence SKU de passerelle d’application se mettant à l’échelle automatiquement et redondante dans la zone](./application-gateway-autoscaling-zone-redundant.md)
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
->
-> * Créer un réseau virtuel avec mise à l'échelle automatique
-> * Créer une adresse IP publique réservée
-> * Configurer l'infrastructure de votre passerelle d'application
-> * Spécifier la configuration de règle de réécriture de votre en-tête HTTP
-> * Spécifier la mise à l’échelle automatique
-> * Créer la passerelle Application Gateway
-> * Tester la passerelle d’application
+* Créer un réseau virtuel avec mise à l'échelle automatique
+* Créer une adresse IP publique réservée
+* Configurer l'infrastructure de votre passerelle d'application
+* Spécifier la configuration de règle de réécriture de votre en-tête HTTP
+* Spécifier la mise à l’échelle automatique
+* Créer la passerelle Application Gateway
+* Tester la passerelle d’application
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-Pour cet article, vous devez exécuter Azure PowerShell localement. Vous devez avoir installé la version du module Az 1.0.0 ou version ultérieure. Exécutez `Import-Module Az`, puis`Get-Module Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps). Après avoir vérifié la version PowerShell, exécutez `Login-AzAccount` pour créer une connexion avec Azure.
+Pour cet article, vous devez exécuter Azure PowerShell localement. Vous devez avoir installé la version du module Az 1.0.0 ou version ultérieure. Exécutez `Import-Module Az`, puis`Get-Module Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-az-ps). Après avoir vérifié la version PowerShell, exécutez `Login-AzAccount` pour créer une connexion avec Azure.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -109,11 +107,11 @@ $setting = New-AzApplicationGatewayBackendHttpSettings -Name "BackendHttpSetting
 
 Configurez les nouveaux objets requis pour réécrire les en-têtes HTTP :
 
-- **RequestHeaderConfiguration** : cet objet est utilisé pour spécifier les champs d’en-tête de requête que vous souhaitez réécrire et la nouvelle valeur de réécriture des en-têtes d’origine.
-- **ResponseHeaderConfiguration** : cet objet est utilisé pour spécifier les champs d’en-tête de réponse que vous souhaitez réécrire et la nouvelle valeur de réécriture des en-têtes d’origine.
-- **ActionSet** : cet objet contient les configurations des en-têtes de requête et de réponse spécifiés ci-dessus. 
-- **RewriteRule** : cet objet contient tous les *actionSets* spécifiés ci-dessus. 
-- **RewriteRuleSet** : cet objet contient toutes les *rewriteRules* et devra être attaché à une règle d’acheminement des requêtes, qu’elles soient basiques ou basées sur un chemin d’accès.
+- **RequestHeaderConfiguration**  : cet objet est utilisé pour spécifier les champs d’en-tête de requête que vous souhaitez réécrire et la nouvelle valeur de réécriture des en-têtes d’origine.
+- **ResponseHeaderConfiguration**  : cet objet est utilisé pour spécifier les champs d’en-tête de réponse que vous souhaitez réécrire et la nouvelle valeur de réécriture des en-têtes d’origine.
+- **ActionSet**  : cet objet contient les configurations des en-têtes de requête et de réponse spécifiés ci-dessus. 
+- **RewriteRule**  : cet objet contient tous les *actionSets* spécifiés ci-dessus. 
+- **RewriteRuleSet**  : cet objet contient toutes les *rewriteRules* et devra être attaché à une règle d’acheminement des requêtes, qu’elles soient basiques ou basées sur un chemin d’accès.
 
    ```azurepowershell
    $requestHeaderConfiguration = New-AzApplicationGatewayRewriteRuleHeaderConfiguration -HeaderName "X-isThroughProxy" -HeaderValue "True"

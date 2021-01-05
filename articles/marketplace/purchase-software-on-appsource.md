@@ -1,18 +1,18 @@
 ---
-title: Comment acheter des logiciels sur AppSource | Place de marché Azure
+title: Comment acheter des logiciels sur Microsoft AppSource
 description: Étapes pour acheter des logiciels sur AppSource | Place de marché Azure
-author: dsindona
-ms.author: dsindona
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
+author: keferna
+ms.author: keferna
 ms.date: 03/20/2020
-ms.openlocfilehash: bc19246354bebd1ba2a827e7718cbad95b896e14
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bfdae8de4c1a460844b09f82048e1e1d6abdb2ad
+ms.sourcegitcommit: 19dce034650c654b656f44aab44de0c7a8bd7efe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80284974"
+ms.lasthandoff: 10/04/2020
+ms.locfileid: "91708031"
 ---
 # <a name="how-to-purchase-software-on-microsoft-appsource"></a>Comment acheter des logiciels sur Microsoft AppSource
 
@@ -29,7 +29,7 @@ Pour acheter des offres SaaS, vous devez avoir :
 - Une carte de crédit valide dans le pays ou la région où vous achetez l’offre.
 
     > [!Note]
-    > Le pays de facturation de la carte de crédit peut être verrouillé sur l’emplacement de votre instance Azure Active Directory.
+    > Le pays/la région de facturation de la carte de crédit peut être verrouillé sur l’emplacement de votre instance Azure Active Directory.
 
 ## <a name="steps-for-making-purchases-on-appsource"></a>Étapes nécessaires pour effectuer des achats sur AppSource
 
@@ -61,8 +61,8 @@ Une fois que votre commande est reçue, la confirmation prendre plusieurs second
 
 Vous pouvez [soumettre un ticket de support](https://admin.microsoft.com/Adminportal/Home?source=applauncher#/homepage) par le biais du Centre d’administration Microsoft 365.
 
-Pour les produits d’entreprise, [contactez le service Aide ici](https://docs.microsoft.com/office365/admin/contact-support-for-business-products?view=o365-worldwide&tabs=phone).
+Pour les produits d’entreprise, [contactez le service Aide ici](/office365/admin/contact-support-for-business-products?tabs=phone).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez la [documentation relative à la Place de marché commerciale](https://docs.microsoft.com/azure/marketplace/partner-center-portal/commercial-marketplace-overview) pour plus d’informations.
+- [Documentation sur les clients de la Place de marché Microsoft](/marketplace/)

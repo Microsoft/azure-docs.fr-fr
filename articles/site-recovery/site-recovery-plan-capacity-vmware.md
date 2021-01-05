@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.date: 4/9/2019
 ms.topic: conceptual
 ms.author: ramamill
-ms.openlocfilehash: 467c70a722b8a243be6ac2826188a4ba3459aa06
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4b86d0c189bcf0687a703f2338188df2090feaf0
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229049"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368024"
 ---
 # <a name="plan-capacity-and-scaling-for-vmware-disaster-recovery-to-azure"></a>Planifier la capacité et la mise à l’échelle pour la récupération d’urgence VMware vers Azure
 
@@ -20,7 +20,7 @@ Cet article explique comment planifier la capacité et la mise à l’échelle l
 
 ## <a name="how-do-i-start-capacity-planning"></a>Comment dois-je commencer la planification de la capacité ?
 
-Pour découvrir les exigences de l’infrastructure Azure Site Recovery, collectez des informations sur votre environnement de réplication en exécutant le [Planificateur de déploiement Azure Site Recovery](https://aka.ms/asr-deployment-planner-doc) pour la réplication VMware. Pour plus d’informations, voir [À propos du planificateur de déploiement Azure Site Recovery pour VMware sur Azure](site-recovery-deployment-planner.md). 
+Pour découvrir les exigences de l’infrastructure Azure Site Recovery, collectez des informations sur votre environnement de réplication en exécutant le [Planificateur de déploiement Azure Site Recovery](./site-recovery-deployment-planner.md) pour la réplication VMware. Pour plus d’informations, voir [À propos du planificateur de déploiement Azure Site Recovery pour VMware sur Azure](site-recovery-deployment-planner.md). 
 
 Le Planificateur de déploiement Azure Site Recovery fournit un rapport contenant des informations complètes sur les machines virtuelles compatibles et incompatibles, le nombre de disques par machine virtuelle et l’activité des données par disque. L’outil récapitule également les besoins en bande passante réseau pour satisfaire à l’objectif de point de récupération cible, et l’infrastructure Azure requise pour la réussite de la réplication et du test de basculement.
 
@@ -85,27 +85,29 @@ Après avoir exécuté le [Planificateur de déploiement Azure Site Recovery](si
 ### <a name="throttle-bandwidth"></a>Limiter la bande passante
 
 1. Ouvrez le composant logiciel enfichable MMC Sauvegarde Azure sur la machine qui fait office de serveur de processus. Par défaut, un raccourci vers Sauvegarde est disponible sur le bureau ou dans le dossier suivant : C:\Program Files\Microsoft Azure Recovery Services Agent\bin.
-2. Dans le composant logiciel enfichable, sélectionnez **Modifier les propriétés**.
+2. Dans le composant logiciel enfichable, sélectionnez **Modifier les propriétés** .
 
     ![Capture d’écran de l’option de composant logiciel enfichable MMC Sauvegarde Azure pour modifier les propriétés](./media/site-recovery-vmware-to-azure/throttle1.png)
-3. Sous l’onglet **Limitation**, sélectionnez la case **Activer la limitation de la bande passante sur Internet pour les opérations de sauvegarde**. Définissez les limites pour les heures ouvrées et non ouvrées. Les plages valides vont de 512 Kbits/s à 1 023 Mbits/s.
+3. Sous l’onglet **Limitation** , sélectionnez la case **Activer la limitation de la bande passante sur Internet pour les opérations de sauvegarde** . Définissez les limites pour les heures ouvrées et non ouvrées. Les plages valides vont de 512 Kbits/s à 1 023 Mbits/s.
 
     ![Capture d’écran de la boîte de dialogue Propriétés de Sauvegarde Azure](./media/site-recovery-vmware-to-azure/throttle2.png)
 
-Vous pouvez également utiliser l’applet de commande [Set-OBMachineSetting](https://technet.microsoft.com/library/hh770409.aspx) pour définir la limitation. Voici un exemple :
+Vous pouvez également utiliser l’applet de commande [Set-OBMachineSetting](/previous-versions/windows/powershell-scripting/hh770409(v=wps.640)) pour définir la limitation. Voici un exemple :
 
-    $mon = [System.DayOfWeek]::Monday
-    $tue = [System.DayOfWeek]::Tuesday
-    Set-OBMachineSetting -WorkDay $mon, $tue -StartWorkHour "9:00:00" -EndWorkHour "18:00:00" -WorkHourBandwidth  (512*1024) -NonWorkHourBandwidth (2048*1024)
+```azurepowershell-interactive
+$mon = [System.DayOfWeek]::Monday
+$tue = [System.DayOfWeek]::Tuesday
+Set-OBMachineSetting -WorkDay $mon, $tue -StartWorkHour "9:00:00" -EndWorkHour "18:00:00" -WorkHourBandwidth  (512*1024) -NonWorkHourBandwidth (2048*1024)
+```
 
 **Set-OBMachineSetting -NoThrottle** indique qu’aucune limitation n’est requise.
 
 ### <a name="alter-the-network-bandwidth-for-a-vm"></a>Modifier la bande passante réseau d’une machine virtuelle
 
-1. Dans le Registre de la machine virtuelle, accédez à **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Azure Backup\Replication**.
-   * Pour modifier le trafic de la bande passante sur un disque de réplication, modifiez la valeur de **UploadThreadsPerVM**. Créez la clé si elle n’existe pas.
-   * Pour modifier la bande passante utilisée pour le trafic lié à la restauration automatique à partir d’Azure, modifiez la valeur de **DownloadThreadsPerVM**.
-2. La valeur par défaut pour chaque clé est **4**. Dans un réseau « surutilisé », ces clés de Registre doivent être modifiées par rapport aux valeurs par défaut. La valeur maximale que vous pouvez utiliser est **32**. Surveillez le trafic pour optimiser la valeur.
+1. Dans le Registre de la machine virtuelle, accédez à **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Azure Backup\Replication** .
+   * Pour modifier le trafic de la bande passante sur un disque de réplication, modifiez la valeur de **UploadThreadsPerVM** . Créez la clé si elle n’existe pas.
+   * Pour modifier la bande passante utilisée pour le trafic lié à la restauration automatique à partir d’Azure, modifiez la valeur de **DownloadThreadsPerVM** .
+2. La valeur par défaut pour chaque clé est **4** . Dans un réseau « surutilisé », ces clés de Registre doivent être modifiées par rapport aux valeurs par défaut. La valeur maximale que vous pouvez utiliser est **32** . Surveillez le trafic pour optimiser la valeur.
 
 ## <a name="set-up-the-site-recovery-infrastructure-to-protect-more-than-500-vms"></a>Configurer l’infrastructure Site Recovery pour protéger plus de 500 machines virtuelles
 
@@ -124,13 +126,13 @@ Si vous effectuez un scale-out de votre déploiement au-delà de 200 machines s
 
 ### <a name="migrate-machines-to-use-the-new-process-server"></a>Migrez les machines pour utiliser le nouveau serveur de traitement
 
-1. Sélectionnez **Paramètres** > **Serveurs Site Recovery**. Sélectionnez le serveur de configuration, puis développez **Serveurs de processus**.
+1. Sélectionnez **Paramètres** > **Serveurs Site Recovery** . Sélectionnez le serveur de configuration, puis développez **Serveurs de processus** .
 
     ![Capture d’écran de la boîte de dialogue Serveur de processus](./media/site-recovery-vmware-to-azure/migrate-ps2.png)
-2. Cliquez avec le bouton droit sur le serveur de processus en cours d’utilisation, puis sélectionnez **Basculer**.
+2. Cliquez avec le bouton droit sur le serveur de processus en cours d’utilisation, puis sélectionnez **Basculer** .
 
     ![Capture d’écran de la boîte de dialogue Serveur de configuration](./media/site-recovery-vmware-to-azure/migrate-ps3.png)
-3. Dans **Sélectionner un serveur de processus cible**, sélectionnez le nouveau serveur de processus à utiliser. Sélectionnez ensuite les machines virtuelles que le serveur va gérer. Pour obtenir des informations sur le serveur, sélectionnez l’icône Informations. Pour vous aider à prendre des décisions quant à la charge, l’espace moyen requis pour la réplication de chaque machine virtuelle sélectionnée vers le nouveau serveur de processus s’affiche. Cochez la case pour commencer la réplication vers le nouveau serveur de processus.
+3. Dans **Sélectionner un serveur de processus cible** , sélectionnez le nouveau serveur de processus à utiliser. Sélectionnez ensuite les machines virtuelles que le serveur va gérer. Pour obtenir des informations sur le serveur, sélectionnez l’icône Informations. Pour vous aider à prendre des décisions quant à la charge, l’espace moyen requis pour la réplication de chaque machine virtuelle sélectionnée vers le nouveau serveur de processus s’affiche. Cochez la case pour commencer la réplication vers le nouveau serveur de processus.
 
 ## <a name="deploy-additional-master-target-servers"></a>Déployer des serveurs maîtres cibles supplémentaires
 
@@ -144,26 +146,26 @@ Pour savoir comment ajouter un serveur cible maître pour une machine virtuelle 
 
 Pour ajouter un serveur cible maître pour une machine virtuelle Windows :
 
-1. Accédez à **coffre Recovery Services** > **Infrastructure Site Recovery** > **Serveurs de Configuration**.
-2. Sélectionnez le serveur de configuration requis, puis l’option **Serveur cible maître**.
+1. Accédez à **coffre Recovery Services** > **Infrastructure Site Recovery** > **Serveurs de Configuration** .
+2. Sélectionnez le serveur de configuration requis, puis l’option **Serveur cible maître** .
 
     ![Capture d’écran montrant le bouton Ajouter un serveur cible maître](media/site-recovery-plan-capacity-vmware/add-master-target-server.png)
 3. Téléchargez le fichier de configuration unifiée, puis exécutez-le sur la machine virtuelle pour configurer le serveur cible maître.
-4. Sélectionnez **Installer le serveur maître cible** > **Suivant**.
+4. Sélectionnez **Installer le serveur maître cible** > **Suivant** .
 
     ![Capture d’écran montrant la sélection de l’option Installer le serveur cible maître](media/site-recovery-plan-capacity-vmware/choose-MT.PNG)
-5. Sélectionnez l’emplacement d’installation par défaut, puis **Installer**.
+5. Sélectionnez l’emplacement d’installation par défaut, puis **Installer** .
 
      ![Capture d’écran montrant l’emplacement d’installation par défaut](media/site-recovery-plan-capacity-vmware/MT-installation.PNG)
-6. Pour inscrire le serveur cible maître auprès du serveur de configuration, sélectionnez **Poursuivre la configuration**.
+6. Pour inscrire le serveur cible maître auprès du serveur de configuration, sélectionnez **Poursuivre la configuration** .
 
     ![Capture d’écran montrant le bouton Poursuivre la configuration](media/site-recovery-plan-capacity-vmware/MT-proceed-configuration.PNG)
 7. Entrez l’adresse IP du serveur de configuration, puis la phrase secrète. Pour savoir comment générer une phrase secrète, voir [Générer la phrase secrète du serveur de configuration](vmware-azure-manage-configuration-server.md#generate-configuration-server-passphrase). 
 
     ![Capture d’écran montrant où entrer l’adresse IP et la phrase secrète pour le serveur de configuration](media/site-recovery-plan-capacity-vmware/cs-ip-passphrase.PNG)
-8. Sélectionnez **Inscription**. Une fois l’inscription terminée, sélectionnez **Terminer**.
+8. Sélectionnez **Inscription** . Une fois l’inscription terminée, sélectionnez **Terminer** .
 
-Une fois l’inscription effectuée, le serveur est répertorié sur le portail Azure sous **Coffre Recovery Services** > **Infrastructure Site Recovery** > **Serveurs de configuration**, parmi les serveurs cibles maîtres du serveur de configuration.
+Une fois l’inscription effectuée, le serveur est répertorié sur le portail Azure sous **Coffre Recovery Services** > **Infrastructure Site Recovery** > **Serveurs de configuration** , parmi les serveurs cibles maîtres du serveur de configuration.
 
  > [!NOTE]
  > Téléchargez la dernière version du [fichier de configuration unifiée du serveur cible maître pour Windows](https://aka.ms/latestmobsvc).

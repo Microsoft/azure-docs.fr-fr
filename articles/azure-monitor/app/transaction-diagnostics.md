@@ -4,12 +4,12 @@ description: Diagnostics de transaction de bout en bout Application Insights
 ms.topic: conceptual
 ms.date: 01/19/2018
 ms.reviewer: sdash
-ms.openlocfilehash: 39c4c51a1bc84e06efac3674b1ee5b487f9e6729
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7623b7131e6344a67c468d0436884ebfef9b0058
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671135"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96746095"
 ---
 # <a name="unified-cross-component-transaction-diagnostics"></a>Diagnostics de transaction entre composants unifiés
 
@@ -64,7 +64,7 @@ Ce volet réductible affiche les autres résultats qui correspondent aux critèr
 
 ## <a name="profiler-and-snapshot-debugger"></a>Profileur et débogueur de capture instantanée
 
-Le [profileur Application Insights](../../azure-monitor/app/profiler.md) ou le [débogueur de la capture instantanée](snapshot-debugger.md) apporte une aide avec des diagnostics au niveau du code des problèmes de performances et d’échec. Grâce à cette expérience, vous pouvez afficher les traces du profileur ou les instantanés d’un composant d’un simple clic.
+Le [profileur Application Insights](./profiler.md) ou le [débogueur de la capture instantanée](snapshot-debugger.md) apporte une aide avec des diagnostics au niveau du code des problèmes de performances et d’échec. Grâce à cette expérience, vous pouvez afficher les traces du profileur ou les instantanés d’un composant d’un simple clic.
 
 Si Profiler ne fonctionne pas, contactez **serviceprofilerhelp\@microsoft.com**
 
@@ -80,9 +80,7 @@ Raisons possibles :
 
 * Les autres composants sont-ils instrumentés avec Application Insights ?
 * Utilisent-ils le dernier Kit de développement logiciel (SDK) d’Application Insights stable ?
-* Si ces composants sont des ressources Application Insights distinctes, disposez-vous de l’accès requis à leur télémétrie ?
-
-Si vous n’avez pas accès et si les composants sont instrumentés avec le dernier Kit de développement logiciel (SDK) Application Insights, prévenez-nous via le canal de commentaires en haut à droite.
+* Si ces composants sont des ressources Application Insights distinctes, avez-vous l’[accès](resources-roles-access-control.md) requis ? Si vous avez accès et que les composants sont instrumentés avec les derniers Kits de développement logiciel (SDK) Application Insights, faites-le nous savoir via le canal de commentaires en haut à droite.
 
 *Je vois des lignes en double pour les dépendances. Est-ce normal ?*
 
@@ -95,3 +93,4 @@ Les chronologies sont ajustées pour les variations d’horloges dans le graphiq
 *Pourquoi la plupart des requêtes d’éléments associés est manquante dans la nouvelle expérience ?*
 
 C'est la procédure normale. Tous les éléments associés, sur tous les composants, sont déjà disponibles sur le côté gauche (sections supérieure et inférieure). La nouvelle expérience comporte deux éléments associés non couverts par le côté gauche : l’ensemble de la télémétrie cinq minutes avant et après cet événement et la chronologie utilisateur.
+

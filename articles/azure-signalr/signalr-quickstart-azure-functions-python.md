@@ -1,18 +1,19 @@
 ---
 title: Démarrage rapide du service Azure SignalR serverless - Python
-description: Un démarrage rapide pour utiliser le service Azure SignalR et Azure Functions afin de créer une salle de conversation.
+description: Démarrage rapide pour utiliser le service Azure SignalR et Azure Functions afin de créer une salle de conversation à l’aide de Python.
 author: anthonychu
 ms.service: signalr
 ms.devlang: python
 ms.topic: quickstart
 ms.date: 12/14/2019
 ms.author: antchu
-ms.openlocfilehash: 0cf8705cf2567a60129681c2db41b0868f8fe182
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-python
+ms.openlocfilehash: aaaf9011d38e7ec02e83db63757c434329b835e0
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75392149"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94960289"
 ---
 # <a name="quickstart-create-a-chat-room-with-azure-functions-and-signalr-service-using-python"></a>Démarrage rapide : Créer une salle de conversation avec Azure Functions et SignalR Service en utilisant Python
 
@@ -30,13 +31,21 @@ Azure Functions nécessite [Python 3.6 ou 3.7](https://www.python.org/downloads/
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
+
 ## <a name="log-in-to-azure"></a>Connexion à Azure
 
 Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compte Azure.
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
+
 [!INCLUDE [Create instance](includes/signalr-quickstart-create-instance.md)]
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
+
 [!INCLUDE [Clone application](includes/signalr-quickstart-clone-application.md)]
+
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
 
 ## <a name="configure-and-run-the-azure-function-app"></a>Configurer et exécuter l’application de fonction Azure
 
@@ -48,7 +57,7 @@ Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compt
 
 1. Sélectionnez et copiez la chaîne de connexion principale.
 
-    ![Créer un service SignalR](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-keys.png)
+    ![Sélectionnez et copiez la chaîne de connexion principale.](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-keys.png)
 
 1. Dans votre éditeur de code, ouvrez le dossier *src/chat/python* dans le référentiel cloné.
 
@@ -90,14 +99,21 @@ Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compt
     ```
 
     ![Exécuter Function App](media/signalr-quickstart-azure-functions-python/signalr-quickstart-run-application.png)
+    
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
 
 [!INCLUDE [Run web application](includes/signalr-quickstart-run-web-application.md)]
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
+
 [!INCLUDE [Cleanup](includes/signalr-quickstart-cleanup.md)]
+
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qspython).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans ce démarrage rapide, vous avez généré et exécuté une application serverless en temps réel dans VS Code. Apprenez-en plus sur le déploiement d’Azure Functions à partir de VS Code.
 
 > [!div class="nextstepaction"]
-> [Déployer Azure Functions avec VS Code](/azure/javascript/tutorial-vscode-serverless-node-01)
+> [Déployer Azure Functions avec VS Code](/azure/developer/javascript/tutorial-vscode-serverless-node-01)
+

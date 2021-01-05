@@ -11,12 +11,17 @@ ms.date: 07/18/2018
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: f1f6f4a6a1d48a0f409d5e5aba644a26653aa7df
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- 'Role: Operations'
+- devx-track-js
+- devx-track-csharp
+ms.openlocfilehash: 3ddc8c78bac47ed85266037341328585e3c7cb1c
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726058"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825126"
 ---
 # <a name="control-access-to-iot-hub"></a>Contrôler l’accès à IoT Hub
 
@@ -38,7 +43,7 @@ Pour accéder à tout point de terminaison IoT Hub, vous devez disposer des auto
 
 Vous pouvez accorder des [autorisations](#iot-hub-permissions) de différentes manières :
 
-* **Stratégies d’accès partagé au niveau d’IoT Hub**. Les stratégies d’accès partagé peuvent accorder n’importe quelle combinaison d’[autorisations](#iot-hub-permissions). Vous pouvez définir des stratégies dans le [portail Azure](https://portal.azure.com), par programmation à l’aide des [API REST de ressources IoT Hub](/rest/api/iothub/iothubresource) ou en utilisant l’interface CLI [az iot hub policy](/cli/azure/iot/hub/policy?view=azure-cli-latest). Un hub IoT qui vient d’être créé a les stratégies par défaut suivantes :
+* **Stratégies d’accès partagé au niveau d’IoT Hub**. Les stratégies d’accès partagé peuvent accorder n’importe quelle combinaison d’[autorisations](#iot-hub-permissions). Vous pouvez définir des stratégies dans le [portail Azure](https://portal.azure.com), par programmation à l’aide des [API REST de ressources IoT Hub](/rest/api/iothub/iothubresource) ou en utilisant l’interface CLI [az iot hub policy](/cli/azure/iot/hub/policy). Un hub IoT qui vient d’être créé a les stratégies par défaut suivantes :
   
   | Stratégie d’accès partagé | Autorisations |
   | -------------------- | ----------- |
@@ -94,7 +99,7 @@ Le protocole HTTPS implémente l’authentification en incluant un jeton valide 
 
 Nom d’utilisateur (DeviceId respecte la casse) : `iothubname.azure-devices.net/DeviceId`
 
-Mot de passe (vous pouvez générer un jeton SAS à l'aide de la commande d'extension CLI [az iot hub generate-sas-token](/cli/azure/ext/azure-iot/iot/hub?view=azure-cli-latest#ext-azure-iot-az-iot-hub-generate-sas-token) ou d'[Azure IoT Tools pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)) :
+Mot de passe (vous pouvez générer un jeton SAS à l'aide de la commande d'extension CLI [az iot hub generate-sas-token](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-generate-sas-token) ou d'[Azure IoT Tools pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)) :
 
 `SharedAccessSignature sr=iothubname.azure-devices.net%2fdevices%2fDeviceId&sig=kPszxZZZZZZZZZZZZZZZZZAhLT%2bV7o%3d&se=1487709501`
 
@@ -183,7 +188,7 @@ from hmac import HMAC
 def generate_sas_token(uri, key, policy_name, expiry=3600):
     ttl = time() + expiry
     sign_key = "%s\n%d" % ((parse.quote_plus(uri)), int(ttl))
-    print sign_key
+    print(sign_key)
     signature = b64encode(HMAC(b64decode(key), sign_key.encode('utf-8'), sha256).digest())
 
     rawtoken = {
@@ -197,11 +202,6 @@ def generate_sas_token(uri, key, policy_name, expiry=3600):
 
     return 'SharedAccessSignature ' + parse.urlencode(rawtoken)
 ```
-
-Voici les instructions d’installation des prérequis.
-
-[!INCLUDE [Iot-hub-include-python-installation-notes](../../includes/iot-hub-include-python-installation-notes.md)]
-
 
 La fonctionnalité en C# pour générer un jeton de sécurité est la suivante :
 
@@ -232,7 +232,30 @@ public static string generateSasToken(string resourceUri, string key, string pol
 
     return token;
 }
+```
 
+Pour Java :
+```java
+    public static String generateSasToken(String resourceUri, String key) throws Exception {
+        // Token will expire in one hour
+        var expiry = Instant.now().getEpochSecond() + 3600;
+
+        String stringToSign = URLEncoder.encode(resourceUri, StandardCharsets.UTF_8) + "\n" + expiry;
+        byte[] decodedKey = Base64.getDecoder().decode(key);
+
+        Mac sha256HMAC = Mac.getInstance("HmacSHA256");
+        SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "HmacSHA256");
+        sha256HMAC.init(secretKey);
+        Base64.Encoder encoder = Base64.getEncoder();
+
+        String signature = new String(encoder.encode(
+            sha256HMAC.doFinal(stringToSign.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+
+        String token = "SharedAccessSignature sr=" + URLEncoder.encode(resourceUri, StandardCharsets.UTF_8)
+                + "&sig=" + URLEncoder.encode(signature, StandardCharsets.UTF_8.name()) + "&se=" + expiry;
+            
+        return token;
+    }
 ```
 
 
@@ -280,7 +303,7 @@ Le résultat, qui accorde l’accès à toutes les fonctionnalités de device1, 
 `SharedAccessSignature sr=myhub.azure-devices.net%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697`
 
 > [!NOTE]
-> Il est possible de générer un jeton SAS à l'aide de la commande d'extension CLI [az iot hub generate-sas-token](/cli/azure/ext/azure-iot/iot/hub?view=azure-cli-latest#ext-azure-iot-az-iot-hub-generate-sas-token) ou d'[Azure IoT Tools pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools).
+> Il est possible de générer un jeton SAS à l'aide de la commande d'extension CLI [az iot hub generate-sas-token](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-generate-sas-token) ou d'[Azure IoT Tools pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools).
 
 ### <a name="use-a-shared-access-policy"></a>Utilisation d’une stratégie d’accès partagé
 
@@ -358,17 +381,22 @@ Les certificats pris en charge incluent :
 
 * **un certificat X.509 signé par une autorité de certification**. Pour identifier un appareil et l’authentifier auprès de IoT Hub, vous pouvez utiliser un certificat X.509 généré et signé par une autorité de certification. Fonctionne avec l’authentification à l’aide de l’empreinte ou de l’autorité de certification.
 
-* **un certificat X-509 généré et signé automatiquement**. Un fabricant d’appareils ou un technicien de déploiement en interne peut générer ces certificats et stocker la clé privée correspondante (ainsi que le certificat) sur l’appareil. Vous pouvez utiliser des outils tels que [OpenSSL](https://www.openssl.org/) ou l’utilitaire [Windows SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate) à cette fin. Fonctionne uniquement avec l’authentification à l’aide de l’empreinte. 
+* **un certificat X-509 généré et signé automatiquement**. Un fabricant d’appareils ou un technicien de déploiement en interne peut générer ces certificats et stocker la clé privée correspondante (ainsi que le certificat) sur l’appareil. Vous pouvez utiliser des outils tels que [OpenSSL](https://www.openssl.org/) ou l’utilitaire [Windows SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate) à cette fin. Fonctionne uniquement avec l’authentification à l’aide de l’empreinte.
 
-Un appareil peut utiliser un certificat X.509 ou un jeton de sécurité pour l’authentification, mais pas les deux.
+Un appareil peut utiliser un certificat X.509 ou un jeton de sécurité pour l’authentification, mais pas les deux. Avec l’authentification par certificat X.509, veillez à mettre en place une stratégie pour gérer la substitution de certificat à l’expiration d’un certificat existant.
 
-Pour plus d’informations sur l’authentification à l’aide de l’autorité de certification, consultez [Authentification des appareils à l’aide de certificats d’autorité de certification X.509](iot-hub-x509ca-overview.md).
+Les fonctionnalités suivantes ne sont pas prises en charge pour les appareils qui utilisent l’authentification de l’autorité de certification X.509 :
+
+* protocoles HTTPS, MQTT sur WebSockets, et AMQP sur WebSockets.
+* Chargements de fichiers (tous les protocoles).
+
+Pour plus d’informations sur l’authentification à l’aide de l’autorité de certification, consultez [Authentification des appareils à l’aide de certificats d’autorité de certification X.509](iot-hub-x509ca-overview.md). Pour plus d’informations sur le chargement et la vérification d’une autorité de certification avec votre IoT Hub, consultez [Configurer la sécurité X.509 dans votre Azure IoT Hub](iot-hub-security-x509-get-started.md).
 
 ### <a name="register-an-x509-certificate-for-a-device"></a>Inscrire un certificat X.509 pour un appareil
 
 [Azure IoT service SDK pour C#](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/iothub/service) (version 1.0.8+) prend en charge l’inscription d’un appareil qui utilise un certificat X.509 pour s’authentifier. D’autres API telles que l’importation/exportation d’appareils prennent également en charge les certificats X.509.
 
-Vous pouvez également utiliser la commande d’extension CLI [az iot hub device-identity](/cli/azure/ext/azure-iot/iot/hub/device-identity?view=azure-cli-latest) pour configurer des certificats X.509 pour les appareils.
+Vous pouvez également utiliser la commande d’extension CLI [az iot hub device-identity](/cli/azure/ext/azure-iot/iot/hub/device-identity) pour configurer des certificats X.509 pour les appareils.
 
 ### <a name="c-support"></a>Prise en charge de C\#
 
@@ -426,7 +454,7 @@ Voici les principales étapes du schéma de service de jeton :
 4. L’appareil/le module utilise le jeton directement avec le hub IoT.
 
 > [!NOTE]
-> Vous pouvez utiliser la classe .NET [SharedAccessSignatureBuilder](https://msdn.microsoft.com/library/microsoft.azure.devices.common.security.sharedaccesssignaturebuilder.aspx) ou la classe Java [IotHubServiceSasToken](/java/api/com.microsoft.azure.sdk.iot.service.auth.iothubservicesastoken) pour créer un jeton dans votre service de jeton.
+> Vous pouvez utiliser la classe .NET [SharedAccessSignatureBuilder](/dotnet/api/microsoft.azure.devices.common.security.sharedaccesssignaturebuilder) ou la classe Java [IotHubServiceSasToken](/java/api/com.microsoft.azure.sdk.iot.service.auth.iothubservicesastoken) pour créer un jeton dans votre service de jeton.
 
 Le service de jetons peut définir l’expiration du jeton comme vous le souhaitez. Quand le jeton expire, le hub IoT interrompt la connexion. L’appareil/le /module doit ensuite demander un nouveau jeton au service de jeton. Un délai d’expiration court accroît la charge de l’appareil/du module et du service de jeton.
 

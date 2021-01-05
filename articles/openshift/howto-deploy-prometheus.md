@@ -7,14 +7,20 @@ ms.service: container-service
 ms.topic: conceptual
 ms.date: 06/17/2019
 keywords: prometheus, aro, openshift, métriques, red hat
-ms.openlocfilehash: 7f22df587f51af735e0ea663e53f6eef14d60692
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: 42ed8c90b35eba57fdc3db1f0ed93d44cf9a5e41
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80886886"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996846"
 ---
 # <a name="deploy-a-standalone-prometheus-instance-in-an-azure-red-hat-openshift-cluster"></a>Déployer une instance Prometheus autonome dans un cluster Azure Red Hat OpenShift
+
+> [!IMPORTANT]
+> Azure Red Hat OpenShift 3.11 sera mis hors service le 30 juin 2022. La prise en charge de la création de nouveaux clusters Azure Red Hat OpenShift 3.11 se poursuit jusqu’au 30 novembre 2020. Après la mise hors service, les clusters Azure Red Hat OpenShift 3.11 restants seront arrêtés pour éviter des failles de sécurité.
+> 
+> Suivez ce guide pour [créer un cluster Azure Red Hat OpenShift 4](tutorial-create-cluster.md).
+> Si vous avez des questions spécifiques, n’hésitez pas à [nous contacter](mailto:arofeedback@microsoft.com).
 
 Cet article décrit comment configurer une instance Prometheus autonome avec la découverte des services dans un cluster Azure Red Hat OpenShift.
 
@@ -190,7 +196,7 @@ oc get route prom -n prometheus-project
 > [!IMPORTANT]
 > N’oubliez pas d’ajouter le préfixe https:// au début du nom d’hôte.
 
-La page**Status > Service Discovery** (États > Découverte des services) affiche 0/0 cible active.
+La page **Status > Service Discovery** (États > Découverte des services) affiche 0/0 cible active.
 
 Pour déployer un exemple d’application qui expose des métriques de base Python sous le point de terminaison /metrics, exécutez les commandes suivantes :
 ```

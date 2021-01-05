@@ -2,19 +2,19 @@
 title: 'Activer MFA pour les utilisateurs du VPN : Authentification Azure AD'
 description: Activer l’authentification multifacteur pour les utilisateurs du VPN
 services: vpn-gateway
-author: anzaman
+author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 02/14/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: alzam
-ms.openlocfilehash: 34ef1b73b06870fd4eaabe88147cd98b281c1f11
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ab595d3eb81cc7d1bdd65d1e4c3f4273a2460ea
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77472347"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "96019104"
 ---
-# <a name="enable-azure-multi-factor-authentication-mfa-for-vpn-users"></a>Activer Azure MFA pour les utilisateurs du VPN
+# <a name="enable-azure-ad-multi-factor-authentication-mfa-for-vpn-users"></a>Activer Azure AD Multi-Factor Authentication (MFA) pour les utilisateurs du VPN
 
 [!INCLUDE [overview](../../includes/vpn-gateway-vwan-openvpn-enable-mfa-overview.md)]
 

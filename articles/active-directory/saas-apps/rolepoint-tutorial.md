@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec RolePoint | Microsoft Docs'
 description: Dans ce tutoriel, vous allez découvrir comment configurer l’authentification unique entre Azure Active Directory et RolePoint.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 68d37f40-15da-45f5-a9e1-d53f78e786d1
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/15/2019
 ms.author: jeedes
-ms.openlocfilehash: 0b6fd17d2f8577532778733866260f43e9ac7685
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3225aa9eaff5c3cd0acca99261935feb9774810f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67092730"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010263"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-rolepoint"></a>Didacticiel : Intégration d’Azure Active Directory avec RolePoint
 
@@ -31,7 +27,7 @@ Cette intégration offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à RolePoint (authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure.
 
-Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](../manage-apps/what-is-single-sign-on.md).
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
@@ -152,7 +148,7 @@ Dans cette section, vous allez créer un utilisateur de test appelé Britta Simo
 
     1. Dans la zone **Nom**, entrez **BrittaSimon**.
   
-    1. Dans la zone **Nom d’utilisateur**, entrez **BrittaSimon@\<votre_domaine_d'entreprise>.\<extension>** . (Par exemple, BrittaSimon@contoso.com.)
+    1. Dans la zone **Nom d’utilisateur**, entrez **BrittaSimon@\<yourcompanydomain>.\<extension>** . (Par exemple, BrittaSimon@contoso.com.)
 
     1. Sélectionnez **Afficher le mot de passe**, puis notez la valeur affichée dans la zone **Mot de passe**.
 
@@ -186,18 +182,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-a-rolepoint-test-user"></a>Créer un utilisateur de test RolePoint
 
-Ensuite, vous devez créer un utilisateur nommé Britta Simon dans RolePoint. Collaborez avec l’ [équipe de support de RolePoint](mailto:info@rolepoint.com) pour ajouter des utilisateurs à RolePoint. Les utilisateurs doivent d’abord être créés et activés pour que vous puissiez utiliser l’authentification unique.
+Ensuite, vous devez créer un utilisateur nommé Britta Simon dans RolePoint. Rapprochez-vous de l’[équipe de support RolePoint](mailto:info@rolepoint.com) pour ajouter des utilisateurs à RolePoint. Les utilisateurs doivent d’abord être créés et activés pour que vous puissiez utiliser l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Vous devez maintenant tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous sélectionnez la vignette RolePoint dans le volet d’accès, vous devez être automatiquement connecté à l’instance de RolePoint pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le volet d’accès, consultez [Accéder aux applications du portail Mes applications et les utiliser](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette RolePoint dans le volet d’accès, vous devez être automatiquement connecté à l’instance de RolePoint pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le volet d’accès, consultez [Accéder aux applications du portail Mes applications et les utiliser](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

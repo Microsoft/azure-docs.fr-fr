@@ -1,14 +1,14 @@
 ---
 title: 'Tutoriel : Exemple de blueprint dans un nouvel environnement'
 description: Dans ce tutoriel, vous utilisez un exemple de blueprint pour créer une définition de blueprint qui définit jusqu’à deux groupes de ressources et configure une attribution de rôle pour chacun.
-ms.date: 03/25/2020
+ms.date: 08/27/2020
 ms.topic: tutorial
-ms.openlocfilehash: 79928822b41dfe0583afbeaf2f5f1a4a87dd3202
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 891240dcafe0cbfbfab4ff1fd415cba4abf682a5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80677091"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89048730"
 ---
 # <a name="tutorial-create-an-environment-from-a-blueprint-sample"></a>Tutoriel : Créer un nouvel environnement à partir d’un exemple de blueprint
 
@@ -122,7 +122,7 @@ L’affectation du blueprint crée et suit les artefacts définis dans la défin
 
 1. Sélectionnez la page **Blueprints affectés** à gauche. Utilisez les filtres pour trouver l’affectation du blueprint _Assignment-two-rgs-with-role-assignments_, puis sélectionnez celle-ci.
 
-   Cette page répertorie l’affectation réussie, les ressources créées ainsi que l’état de verrouillage de blueprint qui leur est associé. Si l’affectation est mise à jour, le menu déroulant **Opération d’affectation** affiche des détails sur le déploiement de chaque version de définition. Chaque ressource répertoriée qui a été créée peut être actionnée d’un clic de souris, ce qui ouvre la page de propriétés associée.
+   Cette page répertorie l’affectation réussie, les ressources créées ainsi que l’état de verrouillage de blueprint qui leur est associé. Si l’affectation est mise à jour, le menu déroulant **Opération d’affectation** affiche des détails sur le déploiement de chaque version de définition. Chaque ressource répertoriée qui a été créée peut être sélectionnée, ce qui ouvre la page de propriétés associée.
 
 1. Sélectionnez le groupe de ressources **ProductionRG**.
 

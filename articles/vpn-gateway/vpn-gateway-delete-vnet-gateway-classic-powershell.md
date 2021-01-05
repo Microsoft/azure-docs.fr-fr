@@ -5,15 +5,15 @@ titleSuffix: Azure VPN Gateway
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 01/09/2020
+ms.topic: how-to
+ms.date: 10/08/2020
 ms.author: cherylmc
-ms.openlocfilehash: e7283f5e28edc6f7beaad3a2743aa155f6ea6e14
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 39585a68c5cddc50cd04e82caca71209270f7b68
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77198647"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91874116"
 ---
 # <a name="delete-a-virtual-network-gateway-using-powershell-classic"></a>Supprimer une passerelle de réseau virtuel avec PowerShell (classique)
 
@@ -35,18 +35,14 @@ Cet article vous aide à supprimer une passerelle VPN dans le modèle de déploi
 
 Ouvrez la console PowerShell avec des droits élevés et connectez-vous à votre compte. Utilisez l’exemple suivant pour faciliter votre connexion :
 
-1. Ouvrez la console PowerShell avec des droits élevés. Pour passer au management des services, utilisez cette commande :
-
-   ```powershell
-   azure config mode asm
-   ```
+1. Ouvrez la console PowerShell avec des droits élevés.
 2. Se connecter à votre compte. Utilisez l’exemple suivant pour faciliter votre connexion :
 
    ```powershell
    Add-AzureAccount
    ```
 
-## <a name="step-2-export-and-view-the-network-configuration-file"></a><a name="export"></a>Étape 2 : Exporter et afficher le fichier de configuration réseau
+## <a name="step-2-export-and-view-the-network-configuration-file"></a><a name="export"></a>Étape 2 : Exportez et affichez le fichier de configuration réseau
 
 Créez un répertoire sur votre ordinateur, puis exportez le fichier de configuration réseau dans ce répertoire. Vous utilisez ce fichier aussi bien pour afficher les informations de configuration actuelles que pour modifier la configuration réseau.
 
@@ -56,9 +52,9 @@ Dans cet exemple, le fichier de configuration réseau est exporté vers C:\Azure
 Get-AzureVNetConfig -ExportToFile C:\AzureNet\NetworkConfig.xml
 ```
 
-Dans un éditeur de texte, ouvrez le fichier, puis affichez le nom de votre réseau virtuel classique. Quand vous créez un réseau virtuel dans le portail Azure, le nom complet utilisé par Azure n’est pas visible dans le portail. Par exemple, un réseau virtuel qui figure sous le nom « ClassicVNet1 » dans le portail Azure peut avoir un nom beaucoup plus long dans le fichier de configuration réseau. Le nom pourrait être semblable au suivant : « Group ClassicRG1 ClassicVNet1 ». Les noms des réseaux virtuels sont répertoriés sous la forme **'VirtualNetworkSite name ='** . Utilisez les noms indiqués dans le fichier de configuration réseau lors de l’exécution de vos applets de commande PowerShell.
+Dans un éditeur de texte, ouvrez le fichier, puis affichez le nom de votre réseau virtuel classique. Quand vous créez un réseau virtuel dans le portail Azure, le nom complet utilisé par Azure n’est pas visible dans le portail. Par exemple, un réseau virtuel qui figure sous le nom « ClassicVNet1 » dans le portail Azure peut avoir un nom beaucoup plus long dans le fichier de configuration réseau. Le nom peut ressembler à ceci : « Group ClassicRG1 ClassicVNet1 ». Les noms des réseaux virtuels sont répertoriés sous la forme **'VirtualNetworkSite name ='** . Utilisez les noms indiqués dans le fichier de configuration réseau lors de l’exécution de vos applets de commande PowerShell.
 
-## <a name="step-3-delete-the-virtual-network-gateway"></a><a name="delete"></a>Étape 3 : Supprimer la passerelle de réseau virtuel
+## <a name="step-3-delete-the-virtual-network-gateway"></a><a name="delete"></a>Étape 3 : Supprimez la passerelle de réseau virtuel
 
 Lorsque vous supprimez une passerelle de réseau virtuel, toutes les connexions au réseau virtuel via la passerelle sont déconnectées. Si vous disposez de clients P2S connectés au réseau virtuel, ils sont déconnectés sans avertissement.
 
@@ -74,7 +70,7 @@ Si l’opération réussit, la valeur de retour s’affiche :
 Status : Successful
 ```
 
-## <a name="step-4-modify-the-network-configuration-file"></a><a name="modify"></a>Étape 4 : Modifier le fichier de configuration réseau
+## <a name="step-4-modify-the-network-configuration-file"></a><a name="modify"></a>Étape 4 : Modifiez le fichier de configuration réseau
 
 Lorsque vous supprimez une passerelle de réseau virtuel, l’applet de commande ne modifie pas le fichier de configuration réseau. Vous devez le modifier pour supprimer les éléments qui ne sont plus utilisés. Les sections suivantes vous aident à modifier le fichier de configuration réseau que vous avez téléchargé.
 
@@ -181,7 +177,7 @@ Exemple :
  </Subnets>
 ```
 
-## <a name="step-5-upload-the-network-configuration-file"></a><a name="upload"></a>Étape 5 : Charger le fichier de configuration réseau
+## <a name="step-5-upload-the-network-configuration-file"></a><a name="upload"></a>Étape 5 : Chargez le fichier de configuration réseau
 
 Enregistrez vos modifications et chargez le fichier de configuration réseau dans Azure. Assurez-vous que vous modifiez le chemin d'accès selon les besoins de votre environnement.
 

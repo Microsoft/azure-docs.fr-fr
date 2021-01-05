@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 11/01/2018
 ms.author: cynthn
 ms.custom: include file
-ms.openlocfilehash: 4559a49a64688545e519f6172798997c2d695672
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a665c3c27cca03a084896895ae51c56732ceb7b6
+ms.sourcegitcommit: 877491bd46921c11dd478bd25fc718ceee2dcc08
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461863"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "84237669"
 ---
 Lorsque vous créez une machine virtuelle Azure, vous devez créer un [réseau virtuel](../articles/virtual-network/virtual-networks-overview.md) ou en utiliser un existant. Vous devez également décider de la façon dont vos machines virtuelles doivent accéder au réseau virtuel. Il est essentiel de [planifier les choses avant de créer des ressources](../articles/virtual-network/virtual-network-vnet-plan-design-arm.md) et de s’assurer que vous connaissez les [limites des ressources réseau](../articles/azure-resource-manager/management/azure-subscription-service-limits.md#networking-limits).
 
@@ -51,7 +51,7 @@ Ce tableau répertorie les méthodes que vous pouvez utiliser pour créer une in
 
 ## <a name="ip-addresses"></a>Adresses IP 
 
-Vous pouvez attribuer ces types [d’adresses IP](../articles/virtual-network/virtual-network-ip-addresses-overview-arm.md) à une carte d’interface réseau dans Azure :
+Vous pouvez attribuer ces types [d’adresses IP](../articles/virtual-network/public-ip-addresses.md) à une carte d’interface réseau dans Azure :
 
 - **Adresses IP publiques** : utilisées pour la communication entrante et sortante (sans traduction d’adresses réseau) avec Internet et d’autres ressources Azure non connectées à un réseau virtuel. L’attribution d’une adresse IP publique à une carte d’interface réseau est facultative. Les adresses IP publiques ont un coût nominal et il existe une limite maximum d’adresses IP publiques pouvant être utilisées par abonnement.
 - **Adresses IP privées** : utilisées pour la communication au sein d’un réseau virtuel, avec votre réseau local et Internet (sans traduction d’adresses réseau). Vous devez attribuer au moins une adresse IP privée à une machine virtuelle. Pour en savoir plus sur la traduction d’adresses réseau dans Azure, consultez [Understanding outbound connections in Azure](../articles/load-balancer/load-balancer-outbound-connections.md) (Comprendre les connexions sortantes dans Azure).

@@ -5,25 +5,25 @@ author: su-jie
 ms.author: sujie
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/15/2019
-ms.openlocfilehash: 11e68aaa7c70d4f888c0009bc28d9bb90f431f3b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c05db2d9ba184da89665a236994c851355cc2644
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75354456"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019852"
 ---
 # <a name="use-the-azure-stream-analytics-cicd-nuget-package-for-integration-and-development"></a>Utiliser le package NuGet CI/CD Azure Stream Analytics pour l’intégration et le développement 
 Cet article explique comment utiliser le package NuGet CI/CD Azure Stream Analytics pour configurer un processus de déploiement et d’intégration continus.
 
-Utilisez la version 2.3.0000.0 ou une version ultérieure des [outils Stream Analytics pour Visual Studio](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-tools-for-visual-studio) pour que MSBuild soit pris en charge.
+Utilisez la version 2.3.0000.0 ou une version ultérieure des [outils Stream Analytics pour Visual Studio](./stream-analytics-quick-create-vs.md) pour que MSBuild soit pris en charge.
 
 Un package NuGet est disponible : [Microsoft.Azure.Stream Analytics.CICD](https://www.nuget.org/packages/Microsoft.Azure.StreamAnalytics.CICD/). Il fournit MSBuild, une série locale et des outils de déploiement qui prennent en charge le processus de déploiement et d’intégration continus des [projets Visual Studio Stream Analytics](stream-analytics-vs-tools.md). 
 > [!NOTE]
 > Le package NuGet peut uniquement être utilisé avec la version 2.3.0000.0 ou une version ultérieure des outils Stream Analytics pour Visual Studio. Si vous avez des projets créés dans les versions précédentes des outils Visual Studio, ouvrez-les simplement avec la version 2.3.0000.0 ou une version ultérieure, et enregistrez-les. Ensuite, les nouvelles fonctionnalités sont activées. 
 
-Pour plus d’informations, consultez la page [Outils Stream Analytics pour Visual Studio](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-tools-for-visual-studio).
+Pour plus d’informations, consultez la page [Outils Stream Analytics pour Visual Studio](./stream-analytics-quick-create-vs.md).
 
 ## <a name="msbuild"></a>MSBuild
 Comme l’expérience standard Visual Studio MSBuild, vous avez deux options pour générer un projet. Vous pouvez cliquer sur le projet avec le bouton droit, puis choisir **Générer**. Vous pouvez également utiliser **MSBuild** dans le package NuGet à partir de la ligne de commande.
@@ -34,13 +34,13 @@ Comme l’expérience standard Visual Studio MSBuild, vous avez deux options pou
 
 Quand un projet Visual Studio Stream Analytics est correctement généré, il crée les deux fichiers de modèles Azure Resource Manager suivants sous le dossier **bin/[Debug/Retail]/Deploy** : 
 
-*  Fichier de modèle Resource Manager
+* Fichier de modèle Resource Manager
 
-       [ProjectName].JobTemplate.json 
+   `[ProjectName].JobTemplate.json`
 
-*  Fichier de paramètres Resource Manager
-
-       [ProjectName].JobTemplate.parameters.json   
+* Fichier de paramètres Resource Manager
+   
+   `[ProjectName].JobTemplate.parameters.json`
 
 Les paramètres par défaut dans le fichier parameters.json proviennent des paramètres de votre projet Visual Studio. Si vous voulez effectuer un déploiement dans un autre environnement, remplacez les paramètres en conséquence.
 
@@ -52,7 +52,7 @@ Les paramètres par défaut dans le fichier parameters.json proviennent des para
       "value": null
     },
 ```
-Découvrez comment [effectuer un déploiement avec un fichier de modèle Resource Manager et Azure PowerShell](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy). Découvrez comment [utiliser un objet en tant que paramètre dans un modèle Resource Manager](https://docs.microsoft.com/azure/architecture/building-blocks/extending-templates/objects-as-parameters).
+Découvrez comment [effectuer un déploiement avec un fichier de modèle Resource Manager et Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md). Découvrez comment [utiliser un objet en tant que paramètre dans un modèle Resource Manager](/azure/architecture/building-blocks/extending-templates/objects-as-parameters).
 
 Pour utiliser une identité managée pour Azure Data Lake Store Gen1 comme récepteur de sortie, vous devez fournir l’accès au principal de service à l’aide de PowerShell avant de déployer sur Azure. Découvrez plus d’informations sur le [déploiement d’ADLS Gen1 avec une identité managée et le modèle Resource Manager](stream-analytics-managed-identities-adls.md#resource-manager-template-deployment).
 

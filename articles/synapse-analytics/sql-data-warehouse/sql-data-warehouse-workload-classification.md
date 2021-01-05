@@ -1,26 +1,26 @@
 ---
-title: Classification de charges de travail
-description: Conseils d’utilisation d’une classification pour gérer la concurrence, l’importance et les ressources de calcul en lien avec les requêtes dans Azure Synapse Analytics.
+title: Classification des charges de travail pour le pool SQL dédié
+description: Conseils d'utilisation de la classification pour gérer la concurrence des requêtes, leur importance et les ressources de calcul en lien avec le pool SQL dédié dans Azure Synapse Analytics.
 services: synapse-analytics
 author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: e7aa0c402878c994aabe4e12d811a99e300d7e67
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.openlocfilehash: bf19e2d1674d0a0c2102280b28b5549505c1dfab
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80743656"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96447762"
 ---
-# <a name="azure-synapse-analytics-workload-classification"></a>Classification des charges de travail Azure Synapse Analytics
+# <a name="workload-classification-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Classification des charges de travail pour le pool SQL dédié dans Azure Synapse Analytics
 
-Cet article explique le processus de classification des charges de travail pour l'attribution d'un groupe de charges de travail et l'importance des requêtes entrantes avec les pools SQL Synapse d'Azure Synapse.
+Cet article explique le processus de classification des charges de travail pour l’attribution d’un groupe de charges de travail et d’une importance aux demandes entrantes avec les pools SQL dédiés dans Azure Synapse.
 
 ## <a name="classification"></a>classification ;
 
@@ -36,7 +36,7 @@ Toutes les instructions ne sont pas classées car elles n’exigent pas de resso
 
 ## <a name="classification-process"></a>Processus de classification
 
-La classification du pool SQL Synapse d'Azure Synapse s'effectue aujourd'hui en attribuant aux utilisateurs un rôle auquel une classe de ressource correspondante est allouée à l'aide de [sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest). La possibilité de caractériser des demandes au-delà d’une connexion à une classe de ressource est limitée avec cette fonctionnalité. Une méthode plus riche pour la classification est désormais disponible avec la syntaxe [CRÉER UN CLASSIFIEUR DE CHARGE DE TRAVAIL](/sql/t-sql/statements/create-workload-classifier-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).  Avec cette syntaxe, les utilisateurs du pool SQL Synapse peuvent affecter une importance ainsi que la quantité de ressources système attribuées à une requête via le paramètre `workload_group`.
+La classification relative au pool SQL dédié s'effectue aujourd'hui en attribuant aux utilisateurs un rôle auquel une classe de ressource correspondante est allouée à l'aide de [sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest). La possibilité de caractériser des demandes au-delà d’une connexion à une classe de ressource est limitée avec cette fonctionnalité. Une méthode plus riche pour la classification est désormais disponible avec la syntaxe [CRÉER UN CLASSIFIEUR DE CHARGE DE TRAVAIL](/sql/t-sql/statements/create-workload-classifier-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).  Avec cette syntaxe, les utilisateurs du pool SQL dédié peuvent affecter une importance ainsi que la quantité de ressources système à une demande via le paramètre `workload_group`.
 
 > [!NOTE]
 > La classification est évaluée à chaque requête. Plusieurs demandes dans une seule session peuvent être classées différemment.

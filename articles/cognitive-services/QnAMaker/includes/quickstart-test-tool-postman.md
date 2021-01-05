@@ -2,20 +2,18 @@
 title: Fichier include
 description: Fichier Include
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
-ms.subservice: luis
+ms.subservice: qna-maker
 ms.topic: include
 ms.custom: include file
-ms.date: 04/27/2020
-ms.author: diberry
-ms.openlocfilehash: 97dfe175a609ab336206098948b4e3fcc401d8bc
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 11/09/2020
+ms.openlocfilehash: fa497b69b067d5556f11effdb52505895ecc3bdd
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203957"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94386482"
 ---
 Ce guide de démarrage rapide basé sur Postman vous aide à obtenir une réponse de votre base de connaissances.
 
@@ -30,6 +28,8 @@ Ce guide de démarrage rapide basé sur Postman vous aide à obtenir une répons
 > Quand vous êtes prêt à générer une réponse à une question issue de votre base de connaissances, vous devez [entraîner](../Quickstarts/create-publish-knowledge-base.md#save-and-train) et [publier](../Quickstarts/create-publish-knowledge-base.md#publish-the-knowledge-base) votre base de connaissances. Une fois votre base de connaissances publiée, la page **Publier** affiche les paramètres de requête HTTP pour générer une réponse. L’onglet **Postman** présente les paramètres nécessaires pour générer une réponse.
 
 ## <a name="set-up-postman-for-requests"></a>Configurer Postman pour les requêtes
+
+# <a name="qna-maker-ga-stable-release"></a>[QnA Maker GA (version stable)](#tab/v1)
 
 Ce guide de démarrage rapide utilise les mêmes paramètres pour la requête **POST** Postman, puis configure le JSON du corps POST envoyé au service en fonction de ce que vous essayez d’interroger.
 
@@ -46,6 +46,25 @@ Utilisez cette procédure pour configurer Postman, puis lisez chaque section sui
     ||`{"question":"<Your question>"}`|Corps de la requête POST sous forme d’objet JSON. Cette valeur est modifiée dans chaque section suivante en fonction de ce que la requête est censée faire.|
 
 1. Ouvrez Postman et créez un requête **POST** de base avec les paramètres de votre base de connaissances publiée. Dans les sections suivantes, modifiez le JSON du corps POST pour changer la requête adressée à votre base de connaissances.
+
+# <a name="qna-maker-managed-preview-release"></a>[QnA Maker managé (préversion)](#tab/v2)
+
+Ce guide de démarrage rapide utilise les mêmes paramètres pour la requête **POST** Postman, puis configure le JSON du corps POST envoyé au service en fonction de ce que vous essayez d’interroger.
+
+Utilisez cette procédure pour configurer Postman, puis lisez chaque section suivante pour configurer le JSON du corps POST.
+
+1. À partir de la page **Paramètres** de la base de connaissances, sélectionnez l’onglet **Postman** pour voir la configuration utilisée pour générer une réponse de la base de connaissances. Copiez les informations suivantes à utiliser dans Postman.
+
+    |Nom|Paramètre|Objectif et valeur|
+    |--|--|--|
+    |`POST`| `/knowledgebases/replace-with-your-knowledge-base-id/generateAnswer`|Il s’agit de la méthode HTTP et de la route de l’URL.|
+    |`Host`|`https://YOUR-RESOURCE_NAME.cognitiveservices.azure.com/qnamaker`|Il s’agit de l’hôte de l’URL. Concaténez les valeurs Host et Post pour obtenir l’URL generateAnswer complète.|
+    |`Ocp-Apim-Subscription-Key`|`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`|Valeur d’en-tête nécessaire pour autoriser votre requête. |
+    |`Content-type`|`application/json`|Valeur d’en-tête de votre contenu.|
+    ||`{"question":"<Your question>"}`|Corps de la requête POST sous forme d’objet JSON. Cette valeur est modifiée dans chaque section suivante en fonction de ce que la requête est censée faire.|
+
+1. Ouvrez Postman et créez un requête **POST** de base avec les paramètres de votre base de connaissances publiée. Dans les sections suivantes, modifiez le JSON du corps POST pour changer la requête adressée à votre base de connaissances.
+---
 
 ## <a name="use-metadata-to-filter-answer"></a>Utiliser des métadonnées pour filtrer la réponse
 
@@ -64,7 +83,7 @@ Dans un démarrage rapide précédent, des métadonnées ont été ajoutées à 
     }
     ```
 
-    La question est un simple mot, `size`, qui peut retourner l’une ou l’autre des deux jeux de questions et réponses. Le paramètre `strictFilters` indique à la réponse de se réduire uniquement aux réponses de `qna_maker`.
+    La question est un seul mot, `size`, qui peut retourner l’une ou l’autre des deux paires question/réponse. Le paramètre `strictFilters` indique à la réponse de se réduire uniquement aux réponses de `qna_maker`.
 
 1. La réponse inclut uniquement la réponse qui répond aux critères de filtre.
 
@@ -103,9 +122,12 @@ Dans un démarrage rapide précédent, des métadonnées ont été ajoutées à 
     }
     ```
 
-    S’il existe une série de questions et réponses qui ne correspond pas au terme recherché, mais qui est conforme au filtre, il n’est pas retourné. À la place, la réponse générale `No good match found in KB.` est retournée.
+    S’il y a une paire question/réponse qui ne correspond pas au terme recherché, mais qui est conforme au filtre, elle n’est pas retournée. À la place, la réponse générale `No good match found in KB.` est retournée.
 
 ## <a name="use-debug-query-property"></a>Utiliser la propriété de requête de débogage
+
+> [!NOTE]
+>Nous vous déconseillons d’utiliser la propriété Debug pour les dépendances. Cette propriété a été ajoutée pour aider l’équipe produit à résoudre les problèmes.
 
 Les informations de débogage vous aident à comprendre comment la réponse retournée a été déterminée. Bien qu’elles s’avèrent utiles, elles ne sont pas indispensables. Pour générer une réponse avec les informations de débogage, ajoutez la propriété `debug` :
 

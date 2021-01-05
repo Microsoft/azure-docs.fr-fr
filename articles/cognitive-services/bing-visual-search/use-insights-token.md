@@ -10,16 +10,30 @@ ms.subservice: bing-visual-search
 ms.topic: conceptual
 ms.date: 4/26/2019
 ms.author: scottwhi
-ms.openlocfilehash: 251197c456ece4fe2dbbe264219d52f3502b7492
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python, devx-track-js, devx-track-csharp
+ms.openlocfilehash: 8f3dd1dcd388ca9b2999c5305bae5456355f8bbd
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67341720"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96486823"
 ---
 # <a name="use-an-insights-token-to-get-insights-for-an-image"></a>Utiliser un jeton insights pour obtenir des informations sur une image
 
-L’API Recherche visuelle Bing renvoie des informations sur une image que vous fournissez. Cette image est accessible via son URL, un jeton insights ou par chargement. Pour plus d’informations sur ces options, consultez la section [Qu’est-ce que l’API Recherche visuelle Bing ?](overview.md). Cet article utilise un jeton insights pour la démonstration. Pour obtenir des exemples qui illustrent le chargement d’une image pour obtenir des informations, consultez les démarrages rapides ([C#](quickstarts/csharp.md) | [Java](quickstarts/java.md) | [Node.js](quickstarts/nodejs.md) | [Python](quickstarts/python.md)).
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+L’API Recherche visuelle Bing renvoie des informations sur une image que vous fournissez. Cette image est accessible via son URL, un jeton insights ou par chargement. Pour plus d’informations sur ces options, consultez la section [Qu’est-ce que l’API Recherche visuelle Bing ?](overview.md). Cet article utilise un jeton insights pour la démonstration. Pour obtenir des exemples qui illustrent le chargement d’une image permettant d’obtenir des informations, consultez les démarrages rapides :
+
+* [C#](quickstarts/csharp.md)
+
+* [Java](quickstarts/java.md)
+
+* [Node.JS](quickstarts/nodejs.md)
+
+* [Python](quickstarts/python.md)
 
 Si vous envoyez un jeton d’image ou une URL à la recherche visuelle Bing, voici les données de formulaire que vous devez inclure dans le corps de la requête POST. Les données de formulaire doivent inclure l’en-tête `Content-Disposition` et vous devez définir son paramètre `name` sur « knowledgeRequest ». Pour plus d’informations sur l’objet `imageInfo`, reportez-vous à la requête :
 
@@ -58,14 +72,23 @@ Content-Disposition: form-data; name="knowledgeRequest"
 --boundary_1234-abcd--
 ```
 
-Pour obtenir des exemples qui utilisent le jeton insights, consultez [C#](#use-with-c) | [Java](#use-with-java) | [Node.js](#use-with-nodejs) | [Python](#use-with-python).
+Pour obtenir des exemples qui utilisent le jeton Insights, consultez :
+
+* [C#](#use-with-c)
+
+* [Java](#use-with-java)
+
+* [Node.JS](#use-with-nodejs)
+
+* [Python](#use-with-python)
 
 ## <a name="use-with-c"></a>Utiliser avec C#
 
 ### <a name="c-prerequisites"></a>Configuration C# requise
 
-- N’importe quelle version de [Visual Studio 2019](https://www.visualstudio.com/downloads/) pour que ce code s’exécute sous Windows.
-- Un abonnement Azure. Pour ce démarrage rapide, vous pouvez utiliser une clé d’abonnement en [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) ou en version payante.
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+* N’importe quelle version de [Visual Studio 2019](https://www.visualstudio.com/downloads/) pour que ce code s’exécute sous Windows.
 
 ## <a name="run-the-application"></a>Exécution de l'application
 
@@ -237,8 +260,10 @@ namespace VisualSearchInsightsToken
 
 ### <a name="java-prerequisites"></a>Configuration Java requise
 
-- Pour compiler et exécuter ce code, vous devez utiliser le [JDK 7 ou 8](https://aka.ms/azure-jdks). Vous pouvez utiliser un IDE Java si vous le souhaitez, mais un éditeur de texte est suffisant.
-- Pour ce démarrage rapide, vous pouvez utiliser une clé d’abonnement en [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) ou en version payante.
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+* [JDK 7 ou 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) pour compiler et exécuter ce code. Vous pouvez utiliser un IDE Java si vous le souhaitez, mais un éditeur de texte est suffisant.
+
 
 ## <a name="run-the-java-application"></a>Exécuter l’application Java
 
@@ -351,8 +376,9 @@ public class InsightsToken {
 
 ### <a name="nodejs-prerequisites"></a>Conditions préalables de Node.js
 
-- Pour exécuter ce code, vous avez besoin de [Node.js 6](https://nodejs.org/en/download/).
-- Pour ce démarrage rapide, vous pouvez utiliser une clé d’abonnement en [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) ou en version payante.
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+* Pour exécuter ce code, vous avez besoin de [Node.js 6](https://nodejs.org/en/download/).
 
 ## <a name="run-the-javascript-application"></a>Exécuter l’application JavaScript
 
@@ -415,8 +441,9 @@ function requestCallback(err, res, body) {
 
 ### <a name="python-prerequisites"></a>Configuration Python requise
 
-- Vous devez disposer de [Python 3](https://www.python.org/) pour exécuter ce code.
-- Pour ce démarrage rapide, vous pouvez utiliser une clé d’abonnement en [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) ou en version payante.
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+* Vous devez disposer de [Python 3](https://www.python.org/) pour exécuter ce code.
 
 ## <a name="run-the-python-application"></a>Exécuter l’application Python
 
@@ -431,8 +458,23 @@ Pour exécuter cette application, suivez les étapes ci-dessous :
 """Bing Visual Search example"""
 
 # Download and install Python at https://www.python.org/
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 # Run the following in a command console window
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 # pip3 install requests
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 import requests
 import json
@@ -444,7 +486,17 @@ SUBSCRIPTION_KEY = '<yoursubscriptionkeygoeshere>'
 HEADERS = {'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY}
 
 # To get an insights, call the /images/search endpoint. Get the token from
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 # the imageInsightsToken field in the Image object.
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 insightsToken = 'ccid_tmaGQ2eU*mid_D12339146CFEDF3D409CC7A66D2C98D0D71904D4*simid_608022145667564759*thid_OIP.tmaGQ2eUI1yq3yll!_jn9kwHaFZ'
 
 formData = '{"imageInfo":{"imageInsightsToken":"' + insightsToken + '"}}'
@@ -470,6 +522,11 @@ def print_json(obj):
 
 
 # Main execution
+
+> [!WARNING]
+> Bing Search APIs are moving from Cognitive Services to Bing Search Services. Starting **October 30, 2020**, any new instances of Bing Search need to be provisioned following the process documented [here](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Bing Search APIs provisioned using Cognitive Services will be supported for the next three years or until the end of your Enterprise Agreement, whichever happens first.
+> For migration instructions, see [Bing Search Services](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 if __name__ == '__main__':
     main()
 ```
@@ -479,5 +536,4 @@ if __name__ == '__main__':
 [Créer une application web monopage de recherche visuelle](tutorial-bing-visual-search-single-page-app.md)  
 [Qu’est-ce que l’API Recherche visuelle Bing ?](overview.md)  
 [Essayer Cognitive Services](https://aka.ms/bingvisualsearchtryforfree)  
-[Obtenir une clé d’accès d’essai gratuit](https://azure.microsoft.com/try/cognitive-services/?api=bing-visual-search-api)  
-[Images - Recherche visuelle](https://aka.ms/bingvisualsearchreferencedoc)
+[Images - Recherche visuelle](/rest/api/cognitiveservices/bingvisualsearch/images/visualsearch)

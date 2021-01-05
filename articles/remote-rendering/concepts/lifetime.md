@@ -6,10 +6,10 @@ ms.author: jakras
 ms.date: 02/06/2020
 ms.topic: conceptual
 ms.openlocfilehash: d031ff4a6ee86da2843f0f18ac428c50f7cfc121
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80679407"
 ---
 # <a name="object-and-resource-lifetime"></a>Durée de vie des objets et ressources

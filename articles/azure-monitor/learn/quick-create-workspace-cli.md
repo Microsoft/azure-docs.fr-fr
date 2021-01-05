@@ -5,13 +5,13 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/12/2019
-ms.openlocfilehash: 0e91bc9c994a48b335c3ccb7373a9f4f5dc6d1e8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 05/26/2020
+ms.openlocfilehash: 54d1d8a29c87f8d129c0ea5b29973c4fef0e6f7a
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605085"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94888995"
 ---
 # <a name="create-a-log-analytics-workspace-with-azure-cli-20"></a>Créer un espace de travail Log Analytics avec Azure CLI 2.0
 
@@ -24,18 +24,18 @@ Vous utilisez Azure CLI 2.0 pour créer et gérer des ressources Azure à partir
 
 Pour les autres sources, telles que les machines virtuelles Azure et les machines virtuelles Windows ou Linux dans votre environnement, consultez les rubriques suivantes :
 
-* [Collect data from Azure virtual machines](../learn/quick-collect-azurevm.md) (Collecter des données à partir de machines virtuelles Azure)
-* [Collect data from hybrid Linux computer](../learn/quick-collect-linux-computer.md) (Collecter des données à partir d’un ordinateur Linux hybride)
+* [Collect data from Azure virtual machines](./quick-collect-azurevm.md) (Collecter des données à partir de machines virtuelles Azure)
+* [Collect data from hybrid Linux computer](./quick-collect-linux-computer.md) (Collecter des données à partir d’un ordinateur Linux hybride)
 * [Collect data from hybrid Windows computer](quick-collect-windows-computer.md) (Collecter des données à partir d’un ordinateur Windows hybride)
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite que vous exécutiez la version 2.0.30 d’Azure CLI, ou une version ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez [Installation d’Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+- Cet article nécessite la version 2.0.30 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-workspace"></a>Créer un espace de travail
-Créez un espace de travail avec [az group deployment create](https://docs.microsoft.com/cli/azure/group/deployment?view=azure-cli-latest#az-group-deployment-create). L’exemple suivant crée un espace de travail à l’emplacement *eastus* à l’aide d’un modèle Resource Manager à partir de votre ordinateur local. Le modèle JSON est configuré pour vous demander uniquement le nom de l’espace de travail et spécifie une valeur par défaut pour les autres paramètres susceptibles d’être utilisés comme configuration standard dans votre environnement. Vous pouvez aussi stocker le modèle dans un compte de stockage Azure pour mettre en place un accès partagé dans votre organisation. Pour plus d’informations sur le fonctionnement des modèles, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../../azure-resource-manager/templates/deploy-cli.md).
+Créez un espace de travail avec [az group deployment create](/cli/azure/group/deployment?view=azure-cli-latest#az-group-deployment-create). L’exemple suivant crée un espace de travail à l’emplacement *eastus* à l’aide d’un modèle Resource Manager à partir de votre ordinateur local. Le modèle JSON est configuré pour vous demander uniquement le nom de l’espace de travail et spécifie une valeur par défaut pour les autres paramètres susceptibles d’être utilisés comme configuration standard dans votre environnement. Vous pouvez aussi stocker le modèle dans un compte de stockage Azure pour mettre en place un accès partagé dans votre organisation. Pour plus d’informations sur le fonctionnement des modèles, consultez [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure CLI](../../azure-resource-manager/templates/deploy-cli.md).
 
 Pour plus d’informations sur les régions prises en charge, consultez les [régions dans lesquelles Log Analytics est disponible](https://azure.microsoft.com/regions/services/) et recherchez Azure Monitor à partir du champ **Rechercher un produit**.
 
@@ -106,7 +106,7 @@ Les paramètres suivants sont définis comme une valeur par défaut :
     }
     ```
 
-2. Modifiez le modèle en fonction de vos besoins. Consultez la référence [Microsoft.OperationalInsights/workspaces modèle](https://docs.microsoft.com/azure/templates/microsoft.operationalinsights/2015-11-01-preview/workspaces) pour découvrir les propriétés et les valeurs prises en charge.
+2. Modifiez le modèle en fonction de vos besoins. Consultez la référence [Microsoft.OperationalInsights/workspaces modèle](/azure/templates/microsoft.operationalinsights/2015-11-01-preview/workspaces) pour découvrir les propriétés et les valeurs prises en charge.
 3. Enregistrez ce fichier au format **deploylaworkspacetemplate.json** dans un dossier local.   
 4. Vous êtes prêt à déployer ce modèle. Utilisez les commandes suivantes à partir du dossier qui contient le modèle. Lorsque vous êtes invité à entrer un nom d’espace de travail, fournissez un nom globalement unique dans tous les abonnements Azure.
 
@@ -118,10 +118,19 @@ Le déploiement peut prendre plusieurs minutes. Lorsqu’il est terminé, vous v
 
 ![Exemple de résultat lorsque le déploiement est achevé](media/quick-create-workspace-cli/template-output-01.png)
 
+## <a name="troubleshooting"></a>Dépannage
+Lorsque vous créez un espace de travail qui a été supprimé au cours des 14 derniers jours et qui se trouve dans l’[état de suppression réversible](../platform/delete-workspace.md#soft-delete-behavior), l’opération peut avoir des résultats différents en fonction de la configuration de votre espace de travail :
+1. Si vous fournissez les mêmes nom d’espace de travail, groupe de ressources, abonnement et région que dans l’espace de travail supprimé, votre espace de travail est récupéré avec ses données, sa configuration et ses agents connectés.
+2. Si vous utilisez le même nom d’espace de travail, mais un groupe de ressources, un abonnement ou une région différents, vous recevez un message erreur indiquant que *le nom de l’espace de travail « nom-espace-de-travail » n’est pas unique* ou qu’il y a un *conflit*. Pour annuler la suppression réversible afin de supprimer définitivement votre espace de travail et d’en créer un nouveau sous le même nom, procédez comme suit pour récupérer l’espace de travail avant d’effectuer la suppression définitive :
+   * [Récupérer](../platform/delete-workspace.md#recover-workspace) votre espace de travail
+   * [Supprimer définitivement](../platform/delete-workspace.md#permanent-workspace-delete) votre espace de travail
+   * Créer un espace de travail en reprenant le même nom d’espace de travail
+
 ## <a name="next-steps"></a>Étapes suivantes
 Disposant à présent d’un espace de travail, vous pouvez configurer la collecte des données de télémétrie de surveillance, exécuter des recherches dans les journaux pour analyser ces données et ajouter une solution de gestion pour fournir des données et insights analytiques supplémentaires.  
 
-* Pour activer la collecte de données à partir de ressources Azure avec Diagnostics Azure ou le stockage Azure, consultez [Collecte des journaux et des métriques des services Azure à utiliser dans Log Analytics](../platform/collect-azure-metrics-logs.md).  
+* Pour activer la collecte de données à partir de ressources Azure avec Diagnostics Azure ou le stockage Azure, consultez [Collecte des journaux et des métriques des services Azure à utiliser dans Log Analytics](../platform/resource-logs.md#send-to-log-analytics-workspace).  
 * Ajoutez [System Center Operations Manager comme source de données](../platform/om-agents.md) pour collecter des données à partir des agents rattachés à votre groupe d’administration Operations Manager et les stocker dans votre espace de travail Log Analytics.  
 * Connectez [Configuration Manager](../platform/collect-sccm.md) pour importer des ordinateurs qui sont membres de collections dans la hiérarchie.  
 * Examinez les [solutions de surveillance](../insights/solutions.md) disponibles et la façon d’ajouter ou de supprimer une solution dans votre espace de travail.
+

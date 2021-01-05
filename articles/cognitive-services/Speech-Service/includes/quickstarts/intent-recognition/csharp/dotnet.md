@@ -5,13 +5,14 @@ ms.subservice: speech-service
 ms.date: 04/04/2020
 ms.topic: include
 ms.author: trbye
+ms.custom: devx-track-csharp
 zone_pivot_groups: programming-languages-set-two
-ms.openlocfilehash: 54b5e3f0ed2fd10fa04305fdefbec725143f62c5
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: c242bbb803e359664eb2fb63262f0c540723f9c6
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81421948"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94424937"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
@@ -45,14 +46,14 @@ Pour pouvoir initialiser un objet `IntentRecognizer`, vous devez au préalable c
 Insérez ce code dans la méthode `RecognizeIntentAsync()`. Veillez à mettre à jour ces valeurs :
 
 * Remplacez `"YourLanguageUnderstandingSubscriptionKey"` par votre clé de prédiction LUIS.
-* Remplacez `"YourLanguageUnderstandingServiceRegion"` par votre localisation LUIS. Utilisez l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion).
+* Remplacez `"YourLanguageUnderstandingServiceRegion"` par votre localisation LUIS. Utilisez l’ **identificateur Région** de la [région](../../../../regions.md).
 
 >[!TIP]
 > Si vous avez besoin d’aide pour trouver ces valeurs, consultez [Créer une application LUIS pour la reconnaissance de l’intention](#create-a-luis-app-for-intent-recognition).
 
 [!code-csharp[](~/samples-cognitive-services-speech-sdk/quickstart/csharp/dotnet/intent-recognition/helloworld/Program.cs?range=26)]
 
-Cet exemple utilise la méthode `FromSubscription()` pour générer la `SpeechConfig`. Pour obtenir la liste complète des méthodes disponibles, consultez la rubrique [Classe SpeechConfig](https://docs.microsoft.com/dotnet/api/microsoft.cognitiveservices.speech.speechconfig?view=azure-dotnet).
+Cet exemple utilise la méthode `FromSubscription()` pour générer la `SpeechConfig`. Pour obtenir la liste complète des méthodes disponibles, consultez la rubrique [Classe SpeechConfig](/dotnet/api/microsoft.cognitiveservices.speech.speechconfig?preserve-view=true&view=azure-dotnet).
 
 Le SDK Speech reconnaît par défaut l’utilisation de la langue en-US. Consultez [Spécifier la langue source pour la reconnaissance vocale](../../../../how-to-specify-source-language.md) pour plus d’informations sur le choix de la langue source.
 
@@ -70,6 +71,8 @@ Vous devez associer un `LanguageUnderstandingModel` au module de reconnaissance 
 > Si vous avez besoin d’aide pour trouver cette valeur, consultez [Créer une application LUIS pour la reconnaissance de l’intention](#create-a-luis-app-for-intent-recognition).
 
 [!code-csharp[](~/samples-cognitive-services-speech-sdk/quickstart/csharp/dotnet/intent-recognition/helloworld/Program.cs?range=33-35)]
+
+Cet exemple utilise la fonction `AddIntent()` pour ajouter des intentions individuellement. Si vous souhaitez ajouter toutes les intentions d’un modèle, utilisez `AddAllIntents(model)` et transmettez le modèle. 
 
 ## <a name="recognize-an-intent"></a>Reconnaître une intention
 
@@ -101,8 +104,8 @@ Lorsque le résultat de la reconnaissance est retourné par le service de reconn
 Vous êtes maintenant prêt à créer votre application et à tester la reconnaissance vocale à l’aide du service de reconnaissance vocale.
 
 1. **Compiler le code** : à partir de la barre de menus de Visual Studio, choisissez **Générer** > **Générer la solution**.
-2. **Démarrer votre application** : dans la barre de menus, choisissez **Déboguer** > **Démarrer le débogage**, ou appuyez sur <kbd>F5</kbd>.
-3. **Démarrer la reconnaissance** : vous êtes invité à prononcer une phrase. Celle-ci est envoyée au service de reconnaissance vocale, transcrite sous forme de texte, puis affichée sur la console.
+2. **Démarrer votre application**  : dans la barre de menus, choisissez **Déboguer** > **Démarrer le débogage** , ou appuyez sur <kbd>F5</kbd>.
+3. **Démarrer la reconnaissance**  : vous êtes invité à prononcer une phrase. Celle-ci est envoyée au service de reconnaissance vocale, transcrite sous forme de texte, puis affichée sur la console.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

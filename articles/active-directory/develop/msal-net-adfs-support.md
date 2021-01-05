@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 07/16/2019
 ms.author: marsma
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 15af18177cea217612a4d5276d130abe02d339f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 4107b0785ef4635e0e5e745a35b605d2634a220d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77160758"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88166226"
 ---
 # <a name="active-directory-federation-services-support-in-msalnet"></a>Prendre en charge les services de fédération Active Directory (AD FS) dans MSAL.NET
 Les services de fédération Active Directory (AD FS) de Windows Server vous permettent d'ajouter l'authentification et l'autorisation OpenID Connect et OAuth 2.0 aux applications que vous développez. Ces applications peuvent ensuite authentifier les utilisateurs directement auprès d'AD FS. Pour plus d’informations, consultez [Scénarios AD FS pour développeurs](/windows-server/identity/ad-fs/overview/ad-fs-openid-connect-oauth-flows-scenarios).
@@ -58,4 +58,4 @@ Pour le moment, il n'est pas prévu de prendre en charge une connexion directe �
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour l'authentification fédérée, consultez [Configurer le comportement de la connexion Azure Active Directory pour une application à l'aide d'une stratégie de découverte du domaine d'accueil](https://docs.microsoft.com/azure/active-directory/manage-apps/configure-authentication-for-federated-users-portal).
+Pour l'authentification fédérée, consultez [Configurer le comportement de la connexion Azure Active Directory pour une application à l'aide d'une stratégie de découverte du domaine d'accueil](../manage-apps/configure-authentication-for-federated-users-portal.md).

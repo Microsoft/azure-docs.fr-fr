@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/11/2020
 ms.topic: article
-ms.openlocfilehash: 4f3889a0ba121cb9a3167c1f6ac95f0bed280539
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 55151ab965b13a944fee5517a2ca8b4f9eb64bb0
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83759011"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92207238"
 ---
 # <a name="outline-rendering"></a>Rendu en mode contour
 
@@ -28,7 +29,7 @@ La classe `OutlineSettings` contient les paramètres relatifs aux propriétés d
 | `PulseRateHz`    | float   | Vitesse d'oscillation du contour par seconde|
 | `PulseIntensity` | float   | Intensité de l’effet de pulsation du contour. Doit être compris entre 0,0 pour aucune pulsation et 1,0 pour une pulsation totale. L’intensité définit implicitement l’opacité minimale du contour comme `MinOpacity = 1.0 - PulseIntensity`. |
 
-![Contours](./media/outlines.png) Effet de modification du paramètre `color` de jaune (gauche) à magenta (centre) et `pulseIntensity` de 0 à 0,8 (droite).
+![An object rendered three times with different outline parameters](./media/outlines.png) Effet de modification du paramètre `color` de jaune (gauche) à magenta (centre) et `pulseIntensity` de 0 à 0,8 (droite).
 
 ## <a name="example"></a>Exemple
 
@@ -47,18 +48,23 @@ void SetOutlineParameters(AzureSession session)
 ```cpp
 void SetOutlineParameters(ApiHandle<AzureSession> session)
 {
-    ApiHandle<OutlineSettings> outlineSettings = *session->Actions()->OutlineSettings();
+    ApiHandle<OutlineSettings> outlineSettings = session->Actions()->GetOutlineSettings();
     Color4Ub outlineColor;
     outlineColor.channels = { 255, 255, 0, 255 };
-    outlineSettings->Color(outlineColor);
-    outlineSettings->PulseRateHz(2.0f);
-    outlineSettings->PulseIntensity(0.5f);
+    outlineSettings->SetColor(outlineColor);
+    outlineSettings->SetPulseRateHz(2.0f);
+    outlineSettings->SetPulseIntensity(0.5f);
 }
 ```
 
 ## <a name="performance"></a>Performances
 
 Le rendu en mode contour peut avoir un impact significatif sur les performances de rendu. Cet impact varie en fonction de la relation spatiale écran-espace entre les objets sélectionnés et non sélectionnés pour un cadre donné.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [RemoteManager.OutlineSettings, propriété C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.outlinesettings)
+* [RemoteManager::OutlineSettings(), C++](/cpp/api/remote-rendering/remotemanager#outlinesettings)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

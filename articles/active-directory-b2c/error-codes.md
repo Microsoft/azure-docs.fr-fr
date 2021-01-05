@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: troubleshooting
-ms.date: 01/10/2020
+ms.topic: reference
+ms.date: 10/02/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 5b09b3c19ab1c5b23e56e25afc1d9631cd1caa68
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6ae806b7666d83652e6b82bac16d89f2f9ce7aa
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188662"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92215431"
 ---
 # <a name="error-codes-azure-active-directory-b2c"></a>Codes d’erreur : Azure Active Directory B2C
 
@@ -61,6 +61,7 @@ Les erreurs suivantes peuvent être retournées par le service Azure Active Dire
 | `AADB2C90055` | L’étendue « {0} » fournie dans la demande doit spécifier une ressource, comme « https://example.com/calendar.read  ». |
 | `AADB2C90057` | L’application fournie n’est pas configurée pour autoriser le flux OAuth implicite. |
 | `AADB2C90058` | L’application fournie n’est pas configurée pour autoriser les clients publics. |
+| `AADB2C99059` | La demande fournie doit présenter un code_challenge. Obligatoire pour les applications monopages utilisant le flux de code d’autorisation.| 
 | `AADB2C90067` | L’URI de redirection post-déconnexion « {0} » a un format non valide. Spécifiez une URL HTTPS telle que « https://example.com/return  » ou, pour des clients natifs, utilisez l’URI de client natif IETF « urn:ietf:wg:oauth:2.0:oob ». |
 | `AADB2C90068` | L’application fournie, dont l’ID est « {0} », n’est pas valide pour ce service. Utilisez une application créée via le portail B2C, puis réessayez. |
 | `AADB2C90075` | L’échange de revendications « {0} » spécifié à l’étape « {1} » a renvoyé une réponse d’erreur HTTP avec le code « {2} » et le motif « {3} ». |
@@ -74,6 +75,7 @@ Les erreurs suivantes peuvent être retournées par le service Azure Active Dire
 | `AADB2C90086` | Le type d’octroi (grant_type) fourni [{0}] n’est pas pris en charge. |
 | `AADB2C90087` | L’octroi fourni n’a pas été émis pour cette version du point de terminaison de protocole. |
 | `AADB2C90088` | L’octroi fourni n’a pas été émis pour ce point de terminaison. Valeur réelle : {0} et Valeur attendue : {1} |
+| `AADB2C90091` | Annulation par l’utilisateur. |
 | `AADB2C90092` | L’application fournie, dont l’ID est « {0} », est désactivée pour le locataire « {1} ». Activez l’application, puis réessayez. |
 | `AADB2C90107` | L’application avec l’ID « {0} » ne peut pas obtenir un jeton d’ID parce que l’étendue openid n’a pas été fournie dans la requête ou que l’application n’est pas autorisée. |
 | `AADB2C90108` | L’étape d’orchestration « {0} » ne spécifie pas la valeur attendue de CpimIssuerTechnicalProfileReferenceId. |

@@ -6,15 +6,15 @@ services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: disk
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 06/17/2019
 ms.author: alkohli
-ms.openlocfilehash: 7c14988706ef193ef5da868c55f6c4f55e7d98f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4b53cf607bdf60c785c7324d9ede526a0983b7e6
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229825"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97605273"
 ---
 # <a name="understand-logs-to-troubleshoot-data-upload-issues-in-azure-data-box-disk"></a>Comprendre les journaux pour résoudre les problèmes liés au chargement des données dans Azure Data Box Disk
 
@@ -117,39 +117,39 @@ Dans ce cas, le fichier d’erreur contient une section `Summary` et une autre s
 Le `Summary` contient les `ValidationErrors` et les `CopyErrors`. Dans ce cas, 8 fichiers ou dossiers ont été chargés dans Azure et aucune erreur de validation n'a été enregistrée. Lorsque les données ont été copiées dans le compte de stockage Azure, 5 fichiers ou dossiers ont été correctement chargés. Les 3 fichiers ou dossiers restants ont été renommés conformément aux conventions d’affectation de noms des conteneurs Azure, puis correctement chargés dans Azure.
 
 L'état au niveau des fichiers indique `BlobStatus`, ce qui décrit les mesures prises pour charger les objets blob. Dans ce cas, trois conteneurs ont été renommés, car les dossiers dans lesquels les données ont été copiées n'étaient pas conformes aux conventions d’affectation de noms des conteneurs Azure. Pour les objets blob téléchargés dans ces conteneurs, le nouveau nom de conteneur, le chemin d’accès de l’objet blob dans Azure, le chemin d’accès au fichier d'origine non valide et la taille de l’objet blob sont inclus.
-    
+  
 ```xml
  <?xml version="1.0" encoding="utf-8"?>
-    <DriveLog Version="2018-10-01">
-      <DriveId>18041C582D7E</DriveId>
-      <Summary>
+  <DriveLog Version="2018-10-01">
+    <DriveId>18041C582D7E</DriveId>
+    <Summary>
      <!--Summary for validation and data copy to Azure -->
-        <ValidationErrors>
-          <None Count="8" />
-        </ValidationErrors>
-        <CopyErrors>
-          <Completed Count="5" Description="No errors encountered" />
-          <ContainerRenamed Count="3" Description="Renamed the container as the original container name does not follow Azure conventions." />
-        </CopyErrors>
-      </Summary>
+      <ValidationErrors>
+        <None Count="8" />
+      </ValidationErrors>
+      <CopyErrors>
+        <Completed Count="5" Description="No errors encountered" />
+        <ContainerRenamed Count="3" Description="Renamed the container as the original container name does not follow Azure conventions." />
+      </CopyErrors>
+    </Summary>
     <!--List of renamed containers with the new names, new file path in Azure, original invalid file path, and size -->
-      <Blob Status="ContainerRenamed">
-        <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/private.vhd</BlobPath>
-        <OriginalFilePath>\PageBlob\pageblob test\private.vhd</OriginalFilePath>
-        <SizeInBytes>10490880</SizeInBytes>
-      </Blob>
-      <Blob Status="ContainerRenamed">
-        <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/resource.vhd</BlobPath>
-        <OriginalFilePath>\PageBlob\pageblob test\resource.vhd</OriginalFilePath>
-        <SizeInBytes>71528448</SizeInBytes>
-      </Blob>
-      <Blob Status="ContainerRenamed">
-        <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/role.vhd</BlobPath>
-        <OriginalFilePath>\PageBlob\pageblob test\role.vhd</OriginalFilePath>
-        <SizeInBytes>10490880</SizeInBytes>
-      </Blob>
-      <Status>CompletedWithErrors</Status>
-    </DriveLog>
+    <Blob Status="ContainerRenamed">
+      <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/private.vhd</BlobPath>
+      <OriginalFilePath>\PageBlob\pageblob test\private.vhd</OriginalFilePath>
+      <SizeInBytes>10490880</SizeInBytes>
+    </Blob>
+    <Blob Status="ContainerRenamed">
+      <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/resource.vhd</BlobPath>
+      <OriginalFilePath>\PageBlob\pageblob test\resource.vhd</OriginalFilePath>
+      <SizeInBytes>71528448</SizeInBytes>
+    </Blob>
+    <Blob Status="ContainerRenamed">
+      <BlobPath>databox-c2073fd1cc379d83e03d6b7acce23a6cf29d1eef/role.vhd</BlobPath>
+      <OriginalFilePath>\PageBlob\pageblob test\role.vhd</OriginalFilePath>
+      <SizeInBytes>10490880</SizeInBytes>
+    </Blob>
+    <Status>CompletedWithErrors</Status>
+  </DriveLog>
 ```
 
 ## <a name="data-upload-errors"></a>Erreurs de chargement des données

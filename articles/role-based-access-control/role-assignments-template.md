@@ -7,18 +7,18 @@ author: rolyon
 manager: mtillman
 ms.service: role-based-access-control
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 11/25/2019
+ms.date: 11/13/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: 777d11a129f02d1a2f5c796dea0af438ca81ba8c
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 9bdd70baa906d9dc03a37eecb0388eee5638f153
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735621"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184278"
 ---
 # <a name="add-azure-role-assignments-using-azure-resource-manager-templates"></a>Ajouter des attributions de rôle Azure à l’aide de modèles Azure Resource Manager
 
@@ -52,6 +52,18 @@ $objectid = (Get-AzADGroup -DisplayName "{name}").id
 objectid=$(az ad group show --group "{name}" --query objectId --output tsv)
 ```
 
+### <a name="managed-identities"></a>Identités managées
+
+Pour obtenir l’ID d’une identité managée, vous pouvez utiliser les commandes [Get-AzAdServiceprincipal](/powershell/module/az.resources/get-azadserviceprincipal) ou [az ad sp](/cli/azure/ad/sp).
+
+```azurepowershell
+$objectid = (Get-AzADServicePrincipal -DisplayName <Azure resource name>).id
+```
+
+```azurecli
+objectid=$(az ad sp list --display-name <Azure resource name> --query [].objectId --output tsv)
+```
+
 ### <a name="application"></a>Application
 
 Pour récupérer l’ID d’un principal de service (identité utilisée par une application), vous pouvez utiliser les commandes [Get-AzADServicePrincipal](/powershell/module/az.resources/get-azadserviceprincipal) ou [az ad sp list](/cli/azure/ad/sp#az-ad-sp-list). Pour un principal de service, utilisez l’ID d’objet et **non** l’ID d’application.
@@ -68,7 +80,7 @@ objectid=$(az ad sp list --display-name "{name}" --query [].objectId --output ts
 
 Dans Azure RBAC, vous ajoutez une attribution de rôle pour accorder l’accès.
 
-### <a name="resource-group-without-parameters"></a>Groupe de ressources (sans paramètres)
+### <a name="resource-group-scope-without-parameters"></a>Étendue du groupe de ressources (sans paramètres)
 
 Le modèle suivant montre comment ajouter de façon très simple une attribution de rôle. Certaines valeurs sont spécifiées dans le modèle. Le modèle suivant montre comment :
 
@@ -77,7 +89,7 @@ Le modèle suivant montre comment ajouter de façon très simple une attribution
 Pour utiliser le modèle, vous devez effectuer les opérations suivantes :
 
 - Créez un fichier JSON et copiez le modèle.
-- Remplacez `<your-principal-id>` par l’ID d’un utilisateur, d’un groupe ou d’une application auxquels attribuer le rôle.
+- Remplacez `<your-principal-id>` par l’ID d’un utilisateur, d’un groupe, d’une identité managée ou d’une application auxquels attribuer le rôle
 
 ```json
 {
@@ -111,7 +123,7 @@ L’exemple suivant illustre l’attribution du rôle lecteur à un utilisateur 
 
 ![Attribution de rôle dans une étendue de groupe de ressources](./media/role-assignments-template/role-assignment-template.png)
 
-### <a name="resource-group-or-subscription"></a>Groupe de ressources ou abonnement
+### <a name="resource-group-or-subscription-scope"></a>Étendue du groupe de ressources ou de l’abonnement
 
 Le modèle précédent n’est pas très flexible. Le modèle suivant utilise des paramètres et peut s’appliquer à différentes étendues. Le modèle suivant montre comment :
 
@@ -120,7 +132,7 @@ Le modèle précédent n’est pas très flexible. Le modèle suivant utilise de
 
 Pour utiliser le modèle, vous devez spécifier les entrées suivantes :
 
-- L’ID d’un utilisateur, d’un groupe ou d’une application auxquels attribuer le rôle
+- L’ID d’un utilisateur, d’un groupe, d’une identité managée ou d’une application auxquels attribuer le rôle
 - Un identificateur unique qui sera utilisé pour l’attribution de rôle, ou vous pouvez utiliser l’ID par défaut
 
 ```json
@@ -195,16 +207,9 @@ New-AzDeployment -Location centralus -TemplateFile rbac-test.json -principalId $
 az deployment create --location centralus --template-file rbac-test.json --parameters principalId=$objectid builtInRoleType=Reader
 ```
 
-### <a name="resource"></a>Ressource
+### <a name="resource-scope"></a>Étendue des ressources
 
-Si vous avez besoin d’ajouter une attribution de rôle au niveau d’une ressource, le format de l’attribution de rôle est différent. Vous fournissez l’espace de noms du fournisseur de ressources et le type de ressource de la ressource à laquelle attribuer le rôle. Vous devez également inclure le nom de la ressource dans le nom de l’attribution de rôle.
-
-Pour le type et le nom de l’attribution de rôle, utilisez le format suivant :
-
-```json
-"type": "{resource-provider-namespace}/{resource-type}/providers/roleAssignments",
-"name": "{resource-name}/Microsoft.Authorization/{role-assign-GUID}"
-```
+Si vous avez besoin d’ajouter une attribution de rôle au niveau d’une ressource, définissez la propriété `scope` de l’attribution de rôle à l’aide du nom de la ressource.
 
 Le modèle suivant montre comment :
 
@@ -214,11 +219,11 @@ Le modèle suivant montre comment :
 
 Pour utiliser le modèle, vous devez spécifier les entrées suivantes :
 
-- L’ID d’un utilisateur, d’un groupe ou d’une application auxquels attribuer le rôle
+- L’ID d’un utilisateur, d’un groupe, d’une identité managée ou d’une application auxquels attribuer le rôle
 
 ```json
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "principalId": {
@@ -236,6 +241,13 @@ Pour utiliser le modèle, vous devez spécifier les entrées suivantes :
             ],
             "metadata": {
                 "description": "Built-in role to assign"
+            }
+        },
+        "roleNameGuid": {
+            "type": "string",
+            "defaultValue": "[newGuid()]",
+            "metadata": {
+                "description": "A new GUID used to identify the role assignment"
             }
         },
         "location": {
@@ -262,9 +274,10 @@ Pour utiliser le modèle, vous devez spécifier les entrées suivantes :
             "properties": {}
         },
         {
-            "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
-            "apiVersion": "2018-09-01-preview",
-            "name": "[concat(variables('storageName'), '/Microsoft.Authorization/', guid(uniqueString(variables('storageName'))))]",
+            "type": "Microsoft.Authorization/roleAssignments",
+            "apiVersion": "2020-04-01-preview",
+            "name": "[parameters('roleNameGuid')]",
+            "scope": "[concat('Microsoft.Storage/storageAccounts', '/', variables('storageName'))]",
             "dependsOn": [
                 "[variables('storageName')]"
             ],
@@ -293,7 +306,9 @@ L’exemple suivant illustre l’attribution du rôle contributeur à un utilisa
 
 ### <a name="new-service-principal"></a>Nouveau principal de service
 
-Dans certains cas, si vous créez un principal de service et que vous tentez immédiatement de lui attribuer un rôle, cette attribution peut échouer. Par exemple, si vous créez une identité managée et que vous tentez d’attribuer un rôle à ce principal de service dans le même modèle Azure Resource Manager, l’attribution de rôle peut échouer. Cet échec est souvent lié au délai de réplication. Le principal du service est créé dans une région. Toutefois, l’attribution de rôle peut s’effectuer dans une autre région, qui n’a pas encore répliqué le principal de service. Dans le cadre de ce scénario, vous devez définir la propriété `principalType` sur `ServicePrincipal` lors de la création de l’attribution de rôle.
+Dans certains cas, si vous créez un principal de service et que vous tentez immédiatement de lui attribuer un rôle, cette attribution peut échouer. Par exemple, si vous créez une identité managée et que vous tentez d’attribuer un rôle à ce principal de service dans le même modèle Azure Resource Manager, l’attribution de rôle peut échouer. Cet échec est souvent lié au délai de réplication. Le principal du service est créé dans une région. Toutefois, l’attribution de rôle peut s’effectuer dans une autre région, qui n’a pas encore répliqué le principal de service.
+
+Dans le cadre de ce scénario, vous devez définir la propriété `principalType` sur `ServicePrincipal` lors de la création de l’attribution de rôle. Vous devez également définir `apiVersion` de l’attribution de rôle sur `2018-09-01-preview` ou une version ultérieure.
 
 Le modèle suivant montre comment :
 
@@ -358,6 +373,15 @@ az group deployment create --resource-group ExampleGroup2 --template-file rbac-t
 L’exemple suivant illustre l’attribution du rôle contributeur à un nouveau principal de service d’identité managée après le déploiement du modèle.
 
 ![Attribution de rôle pour un nouveau principal de service d’identité managée](./media/role-assignments-template/role-assignment-template-msi.png)
+
+## <a name="remove-a-role-assignment"></a>Supprimer une attribution de rôle
+
+Dans Azure RBAC, vous devez supprimer l’attribution de rôle pour supprimer l’accès à une ressource Azure. Il n’existe aucun moyen de supprimer une attribution de rôle à l’aide d’un modèle. Pour supprimer une attribution de rôle, vous devez utiliser d’autres outils tels que :
+
+- [Azure portal](role-assignments-portal.md#remove-a-role-assignment)
+- [Azure PowerShell](role-assignments-powershell.md#remove-a-role-assignment)
+- [Azure CLI](role-assignments-cli.md#remove-a-role-assignment)
+- [REST API](role-assignments-rest.md#remove-a-role-assignment)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

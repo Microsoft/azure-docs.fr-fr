@@ -1,7 +1,7 @@
 ---
 title: 'Démarrage rapide : Diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle - Azure PowerShell'
 titleSuffix: Azure Network Watcher
-description: Dans ce guide de démarrage rapide, vous allez apprendre à diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle à l’aide de la fonctionnalité de vérification de flux IP d’Azure Network Watcher.
+description: Découvrez comment utiliser Azure PowerShell pour diagnostiquer un problème de filtre de trafic réseau sur une machine virtuelle à l’aide de la fonctionnalité de vérification de flux IP d’Azure Network Watcher.
 services: network-watcher
 documentationcenter: network-watcher
 author: damendo
@@ -16,13 +16,13 @@ ms.tgt_pltfrm: network-watcher
 ms.workload: infrastructure
 ms.date: 04/20/2018
 ms.author: damendo
-ms.custom: mvc
-ms.openlocfilehash: 5438cc07670393cab69344544ea1b68c46c42bd6
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 8483c0d3b112408091e10bd9b57451cf2378c859
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76844022"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96494475"
 ---
 # <a name="quickstart-diagnose-a-virtual-machine-network-traffic-filter-problem---azure-powershell"></a>Démarrage rapide : Diagnostiquer un problème de filtre de trafic réseau d’une machine virtuelle - Azure PowerShell
 
@@ -247,6 +247,6 @@ Remove-AzResourceGroup -Name myResourceGroup -Force
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez créé une machine virtuelle et diagnostiqué des filtres de trafic réseau entrant et sortant. Vous avez appris que les règles de groupe de sécurité réseau autorisent ou refusent le trafic à destination et en provenance d’une machine virtuelle. En savoir plus sur les [règles de sécurité](../virtual-network/security-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) et la [création des règles de sécurité](../virtual-network/manage-network-security-group.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#create-a-security-rule).
+Dans ce guide de démarrage rapide, vous avez créé une machine virtuelle et diagnostiqué des filtres de trafic réseau entrant et sortant. Vous avez appris que les règles de groupe de sécurité réseau autorisent ou refusent le trafic à destination et en provenance d’une machine virtuelle. En savoir plus sur les [règles de sécurité](../virtual-network/network-security-groups-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) et la [création des règles de sécurité](../virtual-network/manage-network-security-group.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#create-a-security-rule).
 
 Même avec des filtres de trafic réseau adaptés, les communications vers une machine virtuelle peuvent échouer en raison d’une configuration de routage. Pour savoir comment diagnostiquer les problèmes de routage réseau d’une machine virtuelle, consultez [Diagnostiquer des problèmes de routage sur une machine virtuelle](diagnose-vm-network-routing-problem-powershell.md) ou, pour diagnostiquer les problèmes liés au routage sortant, à la latence et au filtrage de trafic, avec un outil, consultez [Résoudre les problèmes de connexion](network-watcher-connectivity-powershell.md).

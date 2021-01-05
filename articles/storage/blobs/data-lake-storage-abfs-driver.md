@@ -1,6 +1,6 @@
 ---
 title: Pilote Azure Blob File System pour Azure Data Lake Storage Gen2
-description: Pilote ABFS pour Hadoop FileSystem
+description: 'En savoir plus sur le pilote ABFS (Azure Blob File System) : un pilote de stockage Azure dédié pour Hadoop. Accédez aux données dans Azure Data Lake Storage Gen2 à l’aide de ce pilote.'
 author: normesta
 ms.topic: conceptual
 ms.author: normesta
@@ -8,12 +8,12 @@ ms.reviewer: jamesbak
 ms.date: 12/06/2018
 ms.service: storage
 ms.subservice: data-lake-storage-gen2
-ms.openlocfilehash: 3db039d39ef532ea51143dc9cbdb6bd5f29d6225
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 13228ec762db195d0c460e84871b75323f6b98e5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75970273"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913706"
 ---
 # <a name="the-azure-blob-filesystem-driver-abfs-a-dedicated-azure-storage-driver-for-hadoop"></a>Pilote ABFS (Azure Blob File System) : pilote de stockage Azure dédié pour Hadoop
 
@@ -25,7 +25,7 @@ Au départ, c’est le [pilote WASB](https://hadoop.apache.org/docs/current/hado
 
 ## <a name="the-azure-blob-file-system-driver"></a>Pilote Azure Blob File System
 
-[L’interface REST Azure Data Lake Storage](https://docs.microsoft.com/rest/api/storageservices/data-lake-storage-gen2) est conçue pour prendre en charge la sémantique du système de fichiers sur Stockage Blob Azure. Étant donné que Hadoop FileSystem est conçu pour prendre en charge la même sémantique, aucun mappage complexe ne doit avoir lieu dans le pilote. Le pilote Azure Blob File System (ou ABFS) est donc un simple shim client pour l’API REST.
+[L’interface REST Azure Data Lake Storage](/rest/api/storageservices/data-lake-storage-gen2) est conçue pour prendre en charge la sémantique du système de fichiers sur Stockage Blob Azure. Étant donné que Hadoop FileSystem est conçu pour prendre en charge la même sémantique, aucun mappage complexe ne doit avoir lieu dans le pilote. Le pilote Azure Blob File System (ou ABFS) est donc un simple shim client pour l’API REST.
 
 Le pilote doit toutefois effectuer certaines opérations :
 
@@ -42,7 +42,7 @@ hdfs dfs -put flight_delays.csv abfs://fileanalysis@myanalytics.dfs.core.windows
 
 En interne, le pilote ABFS traduit la ou les ressources spécifiées dans l’URI en fichiers et répertoires, puis effectue des appels à l’API REST Azure Data Lake Storage avec ces références.
 
-### <a name="authentication"></a>Authentication
+### <a name="authentication"></a>Authentification
 
 Le pilote ABFS prend en charge deux types d’authentification. L’application Hadoop peut donc accéder de manière sécurisée aux ressources contenues dans un compte compatible avec Azure Data Lake Storage Gen2. Vous trouverez des informations complètes sur les schémas d’authentification disponibles dans le [guide de sécurité de Stockage Azure](security-recommendations.md). Il s'agit de :
 

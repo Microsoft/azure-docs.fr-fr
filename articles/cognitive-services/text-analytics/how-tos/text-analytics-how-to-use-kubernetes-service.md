@@ -10,24 +10,24 @@ ms.subservice: text-analytics
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: 155f32ee76f69fe0f16e7698123381fdc12efd0e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 744be742d9f638df14f9d6720c9dad9678685af0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80877818"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017851"
 ---
 # <a name="deploy-a-text-analytics-container-to-azure-kubernetes-service"></a>Déployer un conteneur Analyse de texte dans Azure Kubernetes Service
 
-Découvrez comment déployer l'image de conteneur [Analyse de texte](https://docs.microsoft.com/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-install-containers) Cognitive Services Azure sur Azure Kubernetes Service (AKS). Cette procédure illustre la création d’une ressource Analyse de texte, la création d’une image Analyse des sentiments associée et l’orchestration des deux depuis un navigateur. L’utilisation de conteneurs peut détourner l’attention des développeurs de la gestion de l’infrastructure, pour les faire se concentrer sur le développement d’applications.
+Découvrez comment déployer l'image de conteneur [Analyse de texte](./text-analytics-how-to-install-containers.md) Cognitive Services Azure sur Azure Kubernetes Service (AKS). Cette procédure illustre la création d’une ressource Analyse de texte, la création d’une image Analyse des sentiments associée et l’orchestration des deux depuis un navigateur. L’utilisation de conteneurs peut détourner l’attention des développeurs de la gestion de l’infrastructure, pour les faire se concentrer sur le développement d’applications.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Cette procédure nécessite plusieurs outils qui doivent être installés et exécutés localement. N’utilisez pas Azure Cloud Shell. Vous avez besoin des éléments suivants :
 
-* Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
+* Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services) avant de commencer.
 * Un éditeur de code, par exemple [Visual Studio Code](https://code.visualstudio.com/download).
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) installé.
+* [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) installé.
 * The [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installé.
 * Une ressource Azure avec le niveau de tarification approprié. Certains niveaux tarifaires ne fonctionnent pas avec ce conteneur :
     * La ressource **Analyse de texte Azure** uniquement avec les niveaux tarifaires F0 ou Standard.
@@ -55,9 +55,9 @@ Cette procédure nécessite plusieurs outils qui doivent être installés et ex�
 
 [!INCLUDE [Verify the Sentiment Analysis container instance](../includes/verify-sentiment-analysis-container.md)]
 
-***
+**_
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Utiliser davantage de [conteneurs Cognitive Services](../../cognitive-services-container-support.md)
-* Utiliser le [service connecté Analytique de texte](../vs-text-connected-service.md)
+_ Utiliser plus de [conteneurs Cognitive Services](../../cognitive-services-container-support.md)
+* Utiliser le [service connecté Analytique de texte](../index.yml)

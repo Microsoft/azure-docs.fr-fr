@@ -1,18 +1,18 @@
 ---
 title: Notes de publication de StorSimple 8000 Series Update 5.1
 description: Décrit les nouvelles fonctionnalités, les problèmes et les solutions de contournement de StorSimple 8000 Series Update 5.1.
-author: priestlg
+author: alkohli
 ms.assetid: ''
 ms.service: storsimple
 ms.topic: conceptual
 ms.date: 03/05/2020
-ms.author: v-grpr
-ms.openlocfilehash: 27778ea232353dcaa6a38fa19abbd64b11c809e2
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.author: alkohli
+ms.openlocfilehash: a6a359888e782751892f2a034a8d92a014fd3a81
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80657865"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90055841"
 ---
 # <a name="storsimple-8000-series-update-51-release-notes"></a>Notes de publication de StorSimple 8000 Series Update 5.1
 

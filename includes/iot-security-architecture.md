@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-fundamentals
 author: robinsh
 ms.service: iot-fundamentals
@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 08/07/2018
 ms.author: robinsh
 ms.custom: include file
-ms.openlocfilehash: a2eafd6bb34b897f3492ddcffd6841f0fabc4ca7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 28609ad27330ae4ea5ea7c0d02d5a61181fbe0df
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "73034544"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95561470"
 ---
 Lorsque vous concevez un système, il est important de comprendre les menaces potentielles qui pèsent sur ce dernier et d’ajouter les défenses appropriées en conséquence, à mesure de sa conception et de la création de son architecture. Il est particulièrement important de concevoir le produit dès le début dans une optique de sécurité : comprendre comment une personne malveillante peut compromettre un système contribue à s’assurer que les préventions adéquates sont en place dès le début.
 
@@ -72,7 +72,7 @@ Les quatre éléments principaux d’un modèle de menace sont les suivants :
 
 * Entités externes (tout ce qui interagit avec le système sans être sous le contrôle de l’application, par exemple des flux d’utilisateur et des programmes transmis par satellite)
 
-Tous les éléments du diagramme architectural sont exposés à différentes menaces ; nous allons utiliser le mnémonique STRIDE dans cet article. Lisez le blog [Threat Modeling Again, STRIDE](https://blogs.msdn.microsoft.com/larryosterman/2007/09/04/threat-modeling-again-stride/) (Modélisation des menaces, STRIDE) pour en savoir plus sur les éléments STRIDE.
+Tous les éléments du diagramme architectural sont exposés à différentes menaces ; nous allons utiliser le mnémonique STRIDE dans cet article. Lisez le blog [Threat Modeling Again, STRIDE](/archive/blogs/larryosterman/threat-modeling-again-stride) (Modélisation des menaces, STRIDE) pour en savoir plus sur les éléments STRIDE.
 
 Divers éléments du diagramme d’application sont exposés à certaines menaces STRIDE :
 
@@ -167,15 +167,15 @@ Cette section explore l’architecture présentée précédemment à travers l�
 
 Dans chacune des catégories présentées dans l’architecture Azure IoT, cet exemple essaye de prévenir un certain nombre de menaces dans les différentes étapes impliquant des données/informations : processus, communication et stockage. Voici une vue d’ensemble des menaces les plus courantes existant pour la catégorie « processus », suivie d’une vue d’ensemble des meilleures préventions contre ces menaces :
 
-**Usurpation d’identité (S)** : une personne malveillante peut extraire la clé de chiffrement d’un appareil au niveau logiciel ou matériel, puis accéder au système avec un autre appareil physique ou virtuel sous l’identité de l’appareil dont elle s’est approprié la clé. Les télécommandes qui peuvent allumer toutes les TV et qui sont des outils de plaisanterie populaires en sont une bonne illustration.
+**Usurpation (S)**  : Un attaquant peut extraire une clé de chiffrement d’un appareil, au niveau logiciel ou matériel, puis accéder au système avec un autre appareil physique ou virtuel sous l’identité de l’appareil à partir duquel la clé a été extraite. Les télécommandes qui peuvent allumer toutes les TV et qui sont des outils de plaisanterie populaires en sont une bonne illustration.
 
-**Déni de service (D)** : un appareil peut être dans l’incapacité de fonctionner ou de communiquer en raison d’interférences avec des fréquences radio ou d’une rupture de câbles. Par exemple, une caméra de surveillance dont l’alimentation ou la connexion réseau ont été intentionnellement interrompues ne communiquera pas de données du tout.
+**Déni de service (D)**  : Un appareil peut être dans l’incapacité de fonctionner ou de communiquer en raison d’interférences avec des fréquences radio ou d’une coupure de câbles. Par exemple, une caméra de surveillance dont l’alimentation ou la connexion réseau ont été intentionnellement interrompues ne communiquera pas de données du tout.
 
-**Falsification (T)** : une personne malveillante peut remplacer partiellement ou totalement un logiciel s’exécutant sur l’appareil, permettant ainsi potentiellement à ce logiciel d’endosser l’identité véritable de l’appareil si les éléments de clé ou les fonctions de chiffrement contenant la clé ont été mis à la disposition des programmes illicites. Par exemple, une personne malveillante peut tirer parti des éléments de clé extraits pour intercepter et supprimer des données de l’appareil sur le chemin de communication, et les remplacer par des données erronées authentifiées avec les éléments de clé volés.
+**Falsification (T)**  : Un attaquant peut remplacer partiellement ou totalement le logiciel exécuté sur l’appareil, ce qui permet éventuellement au logiciel remplacé d’endosser l’identité réelle de l’appareil si les éléments de clé ou les fonctionnalités de chiffrement contenant les éléments de clé ont été mis à disposition du programme illicite. Par exemple, une personne malveillante peut tirer parti des éléments de clé extraits pour intercepter et supprimer des données de l’appareil sur le chemin de communication, et les remplacer par des données erronées authentifiées avec les éléments de clé volés.
 
-**Divulgation d’informations (I)** : si l’appareil exécute des logiciels manipulés, ces derniers peuvent potentiellement créer une fuite des données vers des tiers non autorisés. Par exemple, une personne malveillante peut tirer parti des éléments de clé extraits pour les injecter dans le chemin de communication entre le périphérique et un contrôleur, une passerelle de champ ou une passerelle cloud afin de détourner les informations.
+**Divulgation d’informations (I)**  : Si l’appareil exécute un logiciel manipulé, celui-ci peut créer une fuite de données vers des tiers non autorisés. Par exemple, une personne malveillante peut tirer parti des éléments de clé extraits pour les injecter dans le chemin de communication entre le périphérique et un contrôleur, une passerelle de champ ou une passerelle cloud afin de détourner les informations.
 
-**Élévation de privilège (E)** : un appareil qui exécute une fonction spécifique peut être contraint d’en exécuter une autre. Par exemple, une vanne programmée pour s’ouvrir à mi-chemin peut à tort s’ouvrir tout le temps.
+**Élévation de privilège (E)**  : Un appareil qui exécute une fonction spécifique peut être contraint d’en exécuter une autre. Par exemple, une vanne programmée pour s’ouvrir à mi-chemin peut à tort s’ouvrir tout le temps.
 
 | **Composant** | **Menace** | **Atténuation** | **Risque** | **Implémentation** |
 | --- | --- | --- | --- | --- |
@@ -188,33 +188,33 @@ Dans chacune des catégories présentées dans l’architecture Azure IoT, cet e
 
 Voici quelques exemples de menaces existant dans cette catégorie :
 
-**Usurpation d’identité** : une personne malveillante peut extraire les éléments de clé de chiffrement d’un appareil, au niveau logiciel ou matériel, et par la suite, accéder au système avec un autre appareil physique ou virtuel sous l’identité de l’appareil dont elle a pris les éléments de clé.
+**Usurpation** : Un attaquant peut extraire une clé de chiffrement d’un appareil, au niveau logiciel ou matériel, puis accéder au système avec un autre appareil physique ou virtuel sous l’identité de l’appareil à partir duquel la clé a été extraite.
 
-**Déni de service**  : un appareil peut être dans l’incapacité de fonctionner ou de communiquer en raison d’interférences avec des fréquences radio ou d’une rupture de câbles. Par exemple, une caméra de surveillance dont l’alimentation ou la connexion réseau ont été intentionnellement interrompues ne communiquera pas de données du tout.
+**Déni de service** : Un appareil peut être dans l’incapacité de fonctionner ou de communiquer en raison d’interférences avec des fréquences radio ou d’une coupure de câbles. Par exemple, une caméra de surveillance dont l’alimentation ou la connexion réseau ont été intentionnellement interrompues ne communiquera pas de données du tout.
 
-**Falsification** : une personne malveillante peut remplacer partiellement ou totalement un logiciel s’exécutant sur l’appareil, permettant ainsi potentiellement à ce logiciel d’endosser l’identité véritable de l’appareil si les éléments de clé ou les fonctions de chiffrement contenant les éléments de clé ont été mis à la disposition des programmes illicites.
+**Falsification** : Un attaquant peut remplacer partiellement ou totalement le logiciel exécuté sur l’appareil, ce qui permet éventuellement au logiciel remplacé d’endosser l’identité réelle de l’appareil si les éléments de clé ou les fonctionnalités de chiffrement contenant les éléments de clé ont été mis à disposition du programme illicite.
 
-**Falsification** : une caméra de surveillance qui affiche une image (en spectre visible) d’un couloir vide peut être forcée à afficher une photo de ce couloir. Un capteur de détection de fumée ou d’incendie peut signaler la présence d’une personne utilisant un briquet. Dans les deux cas, l’appareil peut s’avérer techniquement tout à fait fiable pour le système, alors qu’il rapporte des informations manipulées.
+**Falsification** : Une caméra de surveillance montrant une image (en spectre visible) d’un couloir vide peut être forcée d’afficher une photo de ce couloir. Un capteur de détection de fumée ou d’incendie peut signaler la présence d’une personne utilisant un briquet. Dans les deux cas, l’appareil peut s’avérer techniquement tout à fait fiable pour le système, alors qu’il rapporte des informations manipulées.
 
-**Falsification** : une personne malveillante peut tirer parti des éléments de clé extraits pour intercepter et supprimer des données de l’appareil sur le chemin de communication et les remplacer par des données erronées authentifiées avec les éléments de clé volés.
+**Falsification** : Un attaquant peut tirer parti des éléments de clé extraits pour intercepter et supprimer des données de l’appareil sur le chemin de communication et les remplacer par des données erronées authentifiées avec les éléments de clé volés.
 
-**Falsification**  : une personne malveillante peut remplacer partiellement ou totalement un logiciel s’exécutant sur l’appareil, permettant ainsi potentiellement à ce logiciel d’endosser l’identité véritable de l’appareil si les éléments de clé ou les fonctions de chiffrement contenant les éléments de clé ont été mis à la disposition des programmes illicites.
+**Falsification** : Un attaquant peut remplacer partiellement ou complètement le logiciel exécuté sur l’appareil, ce qui permet éventuellement au logiciel remplacé d’endosser l’identité réelle de l’appareil si les éléments de clé ou les fonctionnalités de chiffrement contenant les éléments de clé ont été mis à disposition du programme illicite.
 
-**Divulgation d’informations**  : si l’appareil exécute des logiciels manipulés, ceux-ci peuvent potentiellement créer une fuite des données vers des tiers non autorisés.
+**Divulgation d’informations** : Si l’appareil exécute un logiciel manipulé, celui-ci peut créer une fuite de données vers des tiers non autorisés.
 
-**Divulgation d’informations**: une personne malveillante peut tirer parti des éléments de clé extraits pour les injecter dans le chemin de communication entre l’appareil et un contrôleur, une passerelle de champ ou une passerelle cloud afin de détourner des informations.
+**Divulgation d’informations** : Un attaquant peut tirer parti des éléments de clé extraits pour s’introduire dans le chemin de communication entre l’appareil et un contrôleur, une passerelle locale ou une passerelle cloud, afin de détourner des informations.
 
-**Déni de service** : l’appareil peut être désactivé ou activé dans un mode interdisant la communication (opération intentionnelle sur de nombreuses machines industrielles).
+**Déni de service** : L’appareil peut être désactivé ou activé dans un mode interdisant les communications (ce qui est intentionnel dans de nombreuses machines industrielles).
 
-**Falsification** : l’appareil peut être reconfiguré de manière à fonctionner dans un état inconnu du système de contrôle (hors des paramètres d’étalonnage connus), et donc fournir des données qui peuvent être mal interprétées
+**Falsification** : L’appareil peut être reconfiguré pour fonctionner dans un état inconnu du système de contrôle (hors des paramètres d’étalonnage connus) et fournir ainsi des données pouvant être mal interprétées
 
-**Élévation de privilège** : un appareil qui exécute une fonction spécifique peut être contraint d’en exécuter une autre. Par exemple, une vanne programmée pour s’ouvrir à mi-chemin peut à tort s’ouvrir tout le temps.
+**Élévation de privilège** : Un appareil qui exécute une fonction spécifique peut être contraint d’en exécuter une autre. Par exemple, une vanne programmée pour s’ouvrir à mi-chemin peut à tort s’ouvrir tout le temps.
 
-**Déni de service** : l’appareil peut être activé dans un état interdisant la communication.
+**Déni de service** : L’appareil peut être mis dans un état interdisant les communications.
 
-**Falsification** : l’appareil peut être reconfiguré de manière à fonctionner dans un état inconnu du système de contrôle (hors des paramètres d’étalonnage connus), et donc fournir des données qui peuvent être mal interprétées.
+**Falsification** : L’appareil peut être reconfiguré pour fonctionner dans un état inconnu du système de contrôle (hors des paramètres d’étalonnage connus) et fournir ainsi des données pouvant être mal interprétées.
 
-**Usurpation d’identité/Falsification/Répudiation** : si l’appareil n’est pas sécurisé (ce qui est souvent le cas avec les télécommandes grand public), une personne malveillante peut manipuler l’état d’un appareil de façon anonyme. Les télécommandes qui peuvent allumer toutes les TV et qui sont des outils de plaisanterie populaires en sont une bonne illustration.
+**Usurpation/Falsification/Répudiation** : Si l’appareil n’est pas sécurisé (ce qui est souvent le cas avec les télécommandes grand public), un attaquant peut manipuler de façon anonyme l’état d’un appareil. Les télécommandes qui peuvent allumer toutes les TV et qui sont des outils de plaisanterie populaires en sont une bonne illustration.
 
 #### <a name="communication"></a>Communication
 
@@ -230,9 +230,9 @@ Menaces pesant sur le chemin de communication entre des appareils, des passerell
 
 Voici quelques exemples de menaces existant dans cette catégorie :
 
-**Déni de service** : les appareils limités sont généralement vulnérables à un déni de service s’ils écoutent activement les connexions entrantes ou les datagrammes non sollicités sur un réseau, car une personne malveillante peut établir plusieurs connexions en parallèle et ne pas les traiter ou les traiter lentement. Autre cas de figure : l’appareil peut être saturé par un trafic non sollicité. Dans les deux cas, le périphérique peut être effectivement rendu inutilisable sur le réseau.
+**Déni de service** : Les appareils soumis à des contraintes sont généralement vulnérables à un déni de service s’ils écoutent activement les connexions entrantes ou les datagrammes non sollicités sur un réseau, car un attaquant peut ouvrir plusieurs connexions en parallèle et ne pas les traiter, ou les traiter lentement. Autre cas de figure : l’appareil peut être saturé par un trafic non sollicité. Dans les deux cas, le périphérique peut être effectivement rendu inutilisable sur le réseau.
 
-**Usurpation d’identité, divulgation d’informations** : les appareils limités et à usage spécifique possèdent souvent des fonctionnalités de sécurité de type un pour tous comme la protection par mot de passe ou par PIN, ou bien ils reposent entièrement sur l’approbation du réseau, ce qui signifie qu’ils accordent l’accès aux informations si un appareil se trouve sur le même réseau, lequel n’est souvent protégé que par une clé partagée. En d’autres termes, si le secret partagé pour le périphérique ou le réseau est divulgué, il est possible de contrôler le périphérique ou d’observer les données émises par celui-ci.  
+**Usurpation, divulgation d’informations** : Les appareils soumis à des contraintes et ayant un usage spécifique ont souvent des fonctionnalités de sécurité uniques, par exemple la protection par mot de passe ou par code PIN. Parfois, ils reposent entièrement sur l’approbation du réseau, ce qui signifie qu’ils accordent l’accès aux informations quand un appareil se trouve sur le même réseau, lequel est souvent uniquement protégé par une clé partagée. En d’autres termes, si le secret partagé pour le périphérique ou le réseau est divulgué, il est possible de contrôler le périphérique ou d’observer les données émises par celui-ci.  
 
 **Usurpation d’identité** : une personne malveillante peut intercepter ou remplacer partiellement la diffusion et usurper l’identité du donneur d’ordre (intercepteur)
 

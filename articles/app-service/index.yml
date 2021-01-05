@@ -6,13 +6,13 @@ metadata:
   description: Hébergez des sites web, des applications web, des API RESTful et des back-ends mobiles dans Azure App Service. Explorez des guides de démarrage rapide, des tutoriels et des exemples pour bien utiliser App Service.
   ms.topic: landing-page
   ms.service: app-service
-  ms.date: 02/26/2020
-  ms.openlocfilehash: eea156253163f1ffe9751cfc0e7824628cb1c773
-  ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+  ms.date: 08/06/2020
+  ms.openlocfilehash: 3fc31095ec0d8e1ecdbe44c0751c55164d20e088
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/20/2020
-  ms.locfileid: "83697827"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88080026"
 landingContent:
 - title: À propos d’App Service
   linkLists:
@@ -20,8 +20,6 @@ landingContent:
     links:
     - text: Présentation d’App Service
       url: overview.md
-    - text: App Service sur Linux
-      url: /azure/app-service/containers/
     - text: Environnements App Service
       url: environment/intro.md
     - text: Comparer les options d’hébergement
@@ -35,15 +33,19 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Première application ASP.NET Core
-      url: app-service-web-get-started-dotnet.md
-    - text: Première application ASP.NET
-      url: app-service-web-get-started-dotnet-framework.md
+      url: quickstart-dotnetcore.md
+    - text: Première application ASP.NET (Windows uniquement)
+      url: quickstart-dotnet-framework.md
     - text: Première application Node.js
-      url: app-service-web-get-started-nodejs.md
+      url: quickstart-nodejs.md
     - text: Première application PHP
-      url: app-service-web-get-started-php.md
+      url: quickstart-php.md
     - text: Première application Java
-      url: app-service-web-get-started-java.md
+      url: quickstart-java.md
+    - text: Première application Python Flask (Linux uniquement)
+      url: quickstart-python.md
+    - text: Première application Ruby (Linux uniquement)
+      url: quickstart-ruby.md
 - title: Tâches courantes
   linkLists:
   - linkListType: tutorial
@@ -58,6 +60,8 @@ landingContent:
     links:
     - text: Activer les journaux de diagnostic
       url: troubleshoot-diagnostic-logs.md
+    - text: Se connecter à un conteneur Linux via SSH
+      url: configure-linux-open-ssh-session.md
     - text: Migrer un domaine actif vers App Service
       url: manage-custom-dns-migrate-domain.md
 - title: Application CRUD avec base de données
@@ -67,11 +71,17 @@ landingContent:
     - text: Application ASP.NET avec SQL Database
       url: app-service-web-tutorial-dotnet-sqldatabase.md
     - text: Application ASP.NET Core avec SQL Database
-      url: app-service-web-tutorial-dotnetcore-sqldb.md
+      url: tutorial-dotnetcore-sqldb-app.md
     - text: Application PHP (Laravel) avec Azure MySQL
-      url: app-service-web-tutorial-php-mysql.md
+      url: tutorial-php-mysql-app.md
     - text: Application Node.js (MEAN.js) avec MongoDB
-      url: app-service-web-tutorial-nodejs-mongodb-app.md
+      url: tutorial-nodejs-mongodb-app.md
+    - text: Application Java (Spring Boot) avec Cosmos DB
+      url: tutorial-java-spring-cosmosdb.md
+    - text: Application Python (Django) avec PostgreSQL
+      url: tutorial-python-postgresql-app.md
+    - text: Application Ruby (Rails) avec PostgreSQL
+      url: tutorial-ruby-postgres-app.md
 - title: Charger votre code ou votre contenu
   linkLists:
   - linkListType: deploy
@@ -86,20 +96,28 @@ landingContent:
       url: deploy-content-sync.md
     - text: CI/CD avec GitHub, BitBucket, etc.
       url: deploy-continuous-deployment.md
-- title: Exécuter des applications Windows conteneurisées
+    - text: Exécuter à partir du package
+      url: deploy-run-package.md
+- title: Exécuter des conteneurs personnalisés
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Exécuter un conteneur Windows personnalisé
-      url: app-service-web-get-started-windows-container.md
+    - text: Exécuter un conteneur personnalisé
+      url: quickstart-custom-container.md
   - linkListType: tutorial
     links:
-    - text: Migrer une application héritée vers Azure dans un conteneur Windows
-      url: app-service-web-tutorial-windows-containers-custom-fonts.md
+    - text: Exécuter une application Docker Compose (Linux uniquement)
+      url: tutorial-multi-container-app.md
+    - text: Migrer des logiciels personnalisés vers Azure dans un conteneur
+      url: tutorial-custom-container.md
   - linkListType: how-to-guide
     links:
+    - text: CI/CD vers un conteneur personnalisé
+      url: deploy-ci-cd-custom-container.md
     - text: Connecter un conteneur à des fichiers de stockage
       url: configure-connect-to-azure-storage.md
+    - text: Déployer avec GitHub Actions
+      url: deploy-container-github-action.md
 - title: Gérer et intégrer
   linkLists:
   - linkListType: concept
@@ -111,7 +129,7 @@ landingContent:
     - text: Sécuriser l’accès aux ressources avec des identités managées
       url: app-service-web-tutorial-connect-msi.md
     - text: Authentification des utilisateurs
-      url: app-service-web-tutorial-auth-aad.md
+      url: tutorial-auth-aad.md
     - text: Héberger des API RESTful avec CORS
       url: app-service-web-tutorial-rest-api.md
     - text: Ajouter un CDN à votre application

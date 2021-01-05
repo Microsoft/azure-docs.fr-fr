@@ -8,25 +8,32 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-video-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
-ms.openlocfilehash: 6ae8afefae9a539812748c0ae5380ddaf1fb084c
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-js
+ms.openlocfilehash: e2e423bd149c0d213872d00b10800dec5a8e96e9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75382665"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353865"
 ---
 # <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-nodejs"></a>Démarrage rapide : Rechercher des vidéos à l’aide de l’API REST Recherche de vidéos Bing et Node.js
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche de vidéos Bing et consulter un résultat de recherche dans la réponse JSON. Cette application JavaScript simple envoie une requête de recherche de vidéos HTTP à l’API, puis affiche la réponse. Alors que cette application est écrite en JavaScript et utilise Node.js, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingVideoSearchv7.js) avec une gestion des erreurs supplémentaire et des annotations de code.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche de vidéos Bing. Cette application JavaScript simple envoie une requête de recherche de vidéos HTTP à l’API, puis affiche la réponse JSON. Bien que cette application soit écrite en JavaScript et utilise Node.js, l’API est un service web RESTful compatible avec la plupart des langages de programmation. 
+
+Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingVideoSearchv7.js) avec une gestion des erreurs supplémentaire et des annotations de code.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Node.JS](https://nodejs.org/en/download/)
+* [Node.js](https://nodejs.org/en/download/).
 
-* Module Request pour JavaScript
-    * Vous pouvez installer ce module à l’aide de la commande `npm install request`.
+* Le module Request pour JavaScript. Installez ce module en utilisant `npm install request`.
 
 [!INCLUDE [cognitive-services-bing-video-search-signup-requirements](../../../../includes/cognitive-services-bing-video-search-signup-requirements.md)]
 
@@ -39,7 +46,7 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
     let https = require('https');
     ```
 
-2. Créez des variables pour votre point de terminaison d’API, votre clé d’abonnement et votre terme de recherche. `host` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+2. Créez des variables pour votre point de terminaison d’API, votre clé d’abonnement et le terme de recherche. Pour la valeur `host`, vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```javascript
     let subscriptionKey = 'enter key here';
@@ -50,7 +57,7 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
 
 ## <a name="create-a-response-handler"></a>Créer un gestionnaire de réponse
 
-1. Créez une fonction nommée `response_handler` pour prendre une réponse JSON de l’API. Créez une variable pour le corps de la réponse. Ajoutez la réponse quand un indicateur `data` est reçu, à l’aide de `response.on()`.
+1. Créez une fonction nommée `response_handler` pour prendre une réponse JSON de l’API. Créez une variable pour le corps de la réponse. Ajoutez la réponse quand un indicateur `data` est reçu, en utilisant `response.on()`.
 
     ```javascript
     let response_handler = function (response) {
@@ -61,39 +68,40 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
     };
     ```
     
-   1. Quand `end` est signalé, utilisez `response.on()` pour stocker les en-têtes liés à Bing (qui commencent par `bingapis` ou `x-msedge-`). Ensuite, analysez la réponse JSON en utilisant `JSON.parse()`, convertissez-la en chaîne avec `JSON.stringify()` et affichez-la.
+1. Dans cette fonction, utilisez `response.on()` quand `end` est signalé pour stocker les en-têtes associés à Bing (commençant par `bingapis` ou `x-msedge-`). Analysez la réponse JSON en utilisant `JSON.parse()`, convertissez-la en chaîne avec `JSON.stringify()` et affichez-la.
 
-       ```javascript
-       response.on('end', function () {
-           for (var header in response.headers)
-               // header keys are lower-cased by Node.js
-               if (header.startsWith("bingapis-") || header.startsWith("x-msedge-"))
-                    console.log(header + ": " + response.headers[header]);
-           body = JSON.stringify(JSON.parse(body), null, '  ');
-           //JSON Response body
-           console.log(body);
-       });
-       ```
+    ```javascript
+    response.on('end', function () {
+        for (var header in response.headers)
+            // header keys are lower-cased by Node.js
+            if (header.startsWith("bingapis-") || header.startsWith("x-msedge-"))
+                 console.log(header + ": " + response.headers[header]);
+        body = JSON.stringify(JSON.parse(body), null, '  ');
+        //JSON Response body
+        console.log(body);
+    });
+    ```
 
 ## <a name="create-and-send-the-search-request"></a>Créer et envoyer la requête de recherche
 
-1. Créez une fonction nommée `bing_video_search()`. Ajoutez les paramètres de votre requête, notamment votre nom d’hôte et les en-têtes. Encodez votre terme de recherche et ajoutez-le à votre paramètre de chemin avec le paramètre `?q=`. Ensuite, envoyez la requête avec `req.end()`.
+Créez une fonction nommée `bing_video_search()`. Ajoutez les paramètres de votre requête, notamment votre nom d’hôte et les en-têtes. Encodez votre terme de recherche et ajoutez-le à votre paramètre de chemin avec le paramètre `?q=`. Ensuite, envoyez la requête avec `req.end()`.
 
-    ```javascript
-    let bing_video_search = function (search_term) {
-      console.log('Searching videos for: ' + term);
-      let request_params = {
-            method : 'GET',
-            hostname : host,
-            path : path + '?q=' + encodeURIComponent(search_term),
-            headers : {
-                'Ocp-Apim-Subscription-Key' : subscriptionKey,
-            }
-        };
-        let req = https.request(request_params, response_handler);
-        req.end();
-    }
-    ```
+```javascript
+let bing_video_search = function (search_term) {
+  console.log('Searching videos for: ' + term);
+let request_params = {
+    method : 'GET',
+    hostname : host,
+    path : path + '?q=' + encodeURIComponent(search_term),
+    headers : {
+        'Ocp-Apim-Subscription-Key' : subscriptionKey,
+        }
+    };
+    let req = https.request(request_params,
+      response_handler);
+    req.end();
+}
+```
 
 ## <a name="json-response"></a>Réponse JSON
 

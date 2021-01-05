@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 05/18/2018
 ms.author: alkohli
-ms.openlocfilehash: 4598f71f9b611e68f8eb00676138784833c39f32
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 72bf252488878c8b6fabb2ea2d61658a2cd87e14
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75891514"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966205"
 ---
 # <a name="storsimple-security-and-data-protection"></a>Sécurité et protection des données StorSimple
 
@@ -269,7 +269,7 @@ Voici quelques questions et réponses relatives à la sécurité et à Microsoft
 
 **R :** Vous pouvez télécharger le nouveau certificat à partir du service StorSimple Device Manager, puis l’installer dans le magasin de certificats de vos clients d’accès à distance. Pour obtenir des instructions, consultez :
 
-* [Applet de commande Import-Certificate](https://docs.microsoft.com/powershell/module/pkiclient/import-certificate)
+* [Applet de commande Import-Certificate](/powershell/module/pkiclient/import-certificate)
 
 **Q :** Mes données sont-elles protégées si le service StorSimple Device Manager est compromis ?
 
@@ -288,4 +288,3 @@ Voici quelques questions et réponses relatives à la sécurité et à Microsoft
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Déploiement de votre appareil StorSimple](storsimple-8000-deployment-walkthrough-u2.md).
-

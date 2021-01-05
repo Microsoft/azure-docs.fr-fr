@@ -4,16 +4,18 @@ description: Vue d’ensemble des modèles de conception des flux de modificatio
 author: timsander1
 ms.author: tisande
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 04/08/2020
-ms.openlocfilehash: 012d27b44ecfbdd460adf241742df397880f78c6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 443d00e61e593daacca04a4451b90bb78cc7d854
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81450349"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93334581"
 ---
 # <a name="change-feed-design-patterns-in-azure-cosmos-db"></a>Modèles de conception des flux de modification dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Le flux de modification Azure Cosmos DB permet de traiter efficacement les grands jeux de données avec un volume important d’écritures. Le flux de modification offre également une alternative à l’interrogation d’un jeu de données complet dans le but d’y identifier les changements. Ce document est axé sur les modèles de conception de flux de modification courants, les compromis de conception et les limitations des flux de modification.
 
@@ -25,11 +27,11 @@ Azure Cosmos DB est particulièrement bien adapté aux applications d’IoT, de 
 
 Le flux de modification Azure Cosmos DB vous permet de créer des solutions efficaces et scalables pour chacun de ces modèles, comme illustré dans l’image suivante :
 
-![Utilisation du flux de modification d’Azure Cosmos DB pour alimenter les analyses en temps réel et les scénarios de calcul pilotés par les événements](./media/change-feed/changefeedoverview.png)
+:::image type="content" source="./media/change-feed/changefeedoverview.png" alt-text="Utilisation du flux de modification d’Azure Cosmos DB pour bénéficier de l’analytique en temps réel et de calculs pilotés par les événements" border="false":::
 
 ## <a name="event-computing-and-notifications"></a>Calcul d’événements et notifications
 
-Le flux de modification Azure Cosmos DB peut simplifier les scénarios qui doivent déclencher une notification ou un appel à une API en fonction d’un certain événement. Vous pouvez utiliser la [bibliothèque de processeur de flux de modification](change-feed-processor.md) pour interroger automatiquement votre conteneur afin de connaître les modifications apportées, et appeler une API externe lors de chaque opération d’écriture ou de mise à jour.
+Le flux de modification Azure Cosmos DB peut simplifier les scénarios qui doivent déclencher l’envoi d’une notification ou un appel à une API en fonction d’un certain événement. Vous pouvez utiliser la [bibliothèque de processeur de flux de modification](change-feed-processor.md) pour interroger automatiquement votre conteneur afin de connaître les modifications apportées, et appeler une API externe lors de chaque opération d’écriture ou de mise à jour.
 
 Vous pouvez également déclencher de manière sélective une notification ou envoyer un appel à une API en fonction de critères spécifiques. Par exemple, si vous lisez à partir du flux de modification à l’aide d’[Azure Functions](change-feed-functions.md), vous pouvez placer une logique dans la fonction afin d’envoyer une notification uniquement si un critère spécifique a été satisfait. Le code Azure Functions s’exécutera pendant chaque écriture et mise à jour, mais la notification sera envoyée uniquement si des critères spécifiques ont été satisfaits.
 
@@ -38,7 +40,7 @@ Vous pouvez également déclencher de manière sélective une notification ou en
 Le flux de modification Azure Cosmos DB peut être utilisé pour le traitement de flux en temps réel en vue du traitement de l’analytique en temps réel ou IoT sur des données opérationnelles.
 Par exemple, vous pouvez recevoir et stocker des données d’événement à partir d’appareils, de capteurs, d’infrastructures et d’applications, et traiter ces événements en temps réel à l’aide de [Spark](../hdinsight/spark/apache-spark-overview.md). L’illustration suivante montre comment implémenter une architecture lambda à l’aide d’Azure Cosmos DB via le flux de modification :
 
-![Pipeline lambda Azure Cosmos DB pour l’ingestion et l’interrogation](./media/change-feed/lambda.png)
+:::image type="content" source="./media/change-feed/lambda.png" alt-text="Pipeline lambda Azure Cosmos DB pour l’ingestion et l’interrogation" border="false":::
 
 Dans de nombreux cas, les implémentations de traitement de flux reçoivent d’abord un volume élevé de données entrantes dans une file d’attente de messages temporaire comme Azure Event Hub ou Apache Kafka. Le flux de modification est une alternative intéressante en raison de la capacité d’Azure Cosmos DB à prendre en charge un taux élevé et soutenu d’ingestion de données avec une latence de lecture et d’écriture faible et garantie. Les avantages du flux de modification Azure Cosmos DB par rapport à une file d’attente de messages sont les suivants :
 
@@ -52,7 +54,7 @@ En plus de lire à partir du flux de modification d’un conteneur Cosmos, vous 
 
 ### <a name="high-availability"></a>Haute disponibilité
 
-Azure Cosmos DB offre jusqu’à 99,999 % de disponibilité en lecture et en écriture. Contrairement à de nombreuses files d’attente de messages, il est facile de configurer et de distribuer les données Azure Cosmos DB mondialement avec un [objectif de temps de récupération (RTO)](consistency-levels-tradeoffs.md#rto) de zéro.
+Azure Cosmos DB offre jusqu’à 99,999 % de disponibilité en lecture et en écriture. Contrairement à de nombreuses files d’attente de messages, il est facile de configurer et de distribuer les données Azure Cosmos DB mondialement avec un [objectif de temps de récupération (RTO)](./consistency-levels.md#rto) de zéro.
 
 Après avoir traité des éléments dans le flux de modification, vous pouvez créer une vue matérialisée et conserver les valeurs agrégées dans Azure Cosmos DB. Si vous utilisez Azure Cosmos DB pour créer un jeu, vous pouvez, par exemple, utiliser le flux de modification pour implémenter des classements en temps réel basés sur des scores de jeux terminés.
 
@@ -73,7 +75,7 @@ Quand vous devez [dénormaliser des données dans des partitions et des conteneu
 
 ## <a name="event-sourcing"></a>Provisionnement en événements
 
-Le [modèle de provisionnement en événements](https://docs.microsoft.com/azure/architecture/patterns/event-sourcing) implique l’utilisation d’un magasin avec ajout uniquement pour enregistrer la série complète d’actions sur ces données. Le flux de modification d’Azure Cosmos DB est un bon choix de magasin de données central dans les architectures de provisionnement en événements où toute l’ingestion des données est modélisée en tant qu’écritures (aucune mise à jour ou suppression). Dans ce cas, chaque écriture dans Azure Cosmos DB est un « événement », et vous aurez un enregistrement complet des événements passés dans le flux de modification. Les utilisations les plus courantes des événements publiés par le magasin d’événements central concernent la gestion des vues matérialisées ou l’intégration à des systèmes externes. Étant donné qu’il n’existe pas de limite de temps pour la conservation dans le flux de modification, vous pouvez relire tous les événements passés en lisant à partir du début du flux de modification de votre conteneur Cosmos.
+Le [modèle de provisionnement en événements](/azure/architecture/patterns/event-sourcing) implique l’utilisation d’un magasin avec ajout uniquement pour enregistrer la série complète d’actions sur ces données. Le flux de modification d’Azure Cosmos DB est un bon choix de magasin de données central dans les architectures de provisionnement en événements où toute l’ingestion des données est modélisée en tant qu’écritures (aucune mise à jour ou suppression). Dans ce cas, chaque écriture dans Azure Cosmos DB est un « événement », et vous aurez un enregistrement complet des événements passés dans le flux de modification. Les utilisations les plus courantes des événements publiés par le magasin d’événements central concernent la gestion des vues matérialisées ou l’intégration à des systèmes externes. Étant donné qu’il n’existe pas de limite de temps pour la conservation dans le flux de modification, vous pouvez relire tous les événements passés en lisant à partir du début du flux de modification de votre conteneur Cosmos.
 
 Vous pouvez faire en sorte que [plusieurs consommateurs de flux de modification s’abonnent au flux de modification du même conteneur](how-to-create-multiple-cosmos-db-triggers.md#optimizing-containers-for-multiple-triggers). Hormis le débit provisionné du [conteneur de baux](change-feed-processor.md#components-of-the-change-feed-processor), il n’y a aucun coût d’utilisation associé au flux de modification. Le flux de modification est disponible dans chaque conteneur, qu’il soit utilisé ou non.
 

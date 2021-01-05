@@ -7,23 +7,23 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/19/2017
 ms.author: damendo
-ms.openlocfilehash: 199b4fc762919c2e3988f477c14d09fc23b0136b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f27cb217b60c23f3cf89f48effb933837269000e
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840687"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94960323"
 ---
 # <a name="introduction-to-resource-troubleshooting-in-azure-network-watcher"></a>Introduction à la résolution des problèmes des ressources dans Azure Network Watcher
 
 Les passerelles de réseau virtuel assurent une connectivité entre les ressources locales et d’autres réseaux virtuels dans Azure. L’analyse des passerelles et de leurs connexions est essentielle pour assurer la non-interruption de la communication. Network Watcher permet de résoudre les problèmes des connexions et des passerelles. Il est possible de l’appeler par le biais du portail, de PowerShell, de l’interface de ligne de commande Azure ou de l’API REST. Lorsque cette fonctionnalité est appelée, Network Watcher diagnostique l’intégrité de la passerelle ou de la connexion et retourne les résultats appropriés. La demande est une transaction en cours d’exécution longue. Les résultats sont retournés lorsque le diagnostic est terminé.
 
-![portail][2]
+![Capture d’écran montrant les diagnostics VPN Network Watcher.][2]
 
 ## <a name="results"></a>Résultats
 
@@ -73,7 +73,7 @@ Les tableaux suivants présentent les différents types d’erreur (« id » dan
 | ConnectionIsMarkedDisconnected | La connexion est identifiée comme étant « déconnectée » |Non|
 | ConnectionNotConfiguredOnGateway | Le service sous-jacent n’a pas la connexion configurée. | Oui |
 | ConnectionMarkedStandby | Le service sous-jacent est identifié comme étant en veille.| Oui|
-| Authentication | Incompatibilité des clés prépartagées | Oui|
+| Authentification | Incompatibilité des clés prépartagées | Oui|
 | PeerReachability | La passerelle homologue n’est pas accessible. | Oui|
 | IkePolicyMismatch | Les stratégies IKE de la passerelle homologue ne sont pas prises en charge par Azure. | Oui|
 | WfpParse Error | Une erreur s’est produite lors de l’analyse du journal de protection des fichiers Windows. |Oui|
@@ -82,7 +82,7 @@ Les tableaux suivants présentent les différents types d’erreur (« id » dan
 
 La table suivante répertorie quelles passerelles et quelles connexions sont prises en charge avec la résolution des problèmes de Network Watcher :
 
-|  |  |
+| Passerelle ou connexion | Prise en charge  |
 |---------|---------|
 |**Types de passerelles**   |         |
 |VPN      | Prise en charge        |
@@ -105,7 +105,7 @@ Les fichiers journaux de dépannage des ressources sont stockés dans un compte 
 > [!NOTE]
 > Dans certains cas, seul un sous-ensemble des fichiers journaux d’activité est écrit dans l’espace de stockage.
 
-Pour obtenir des instructions de téléchargement des fichiers à partir des comptes de stockage Azure, consultez [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-dotnet-how-to-use-blobs.md). L’explorateur de stockage peut aussi être utilisé. Pour en savoir plus sur l’explorateur de stockage, cliquez sur le lien suivant : [Explorateur de stockage](https://storageexplorer.com/)
+Pour obtenir des instructions de téléchargement des fichiers à partir des comptes de stockage Azure, consultez [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-quickstart-blobs-dotnet.md). L’explorateur de stockage peut aussi être utilisé. Pour en savoir plus sur l’Explorateur Stockage, cliquez sur le lien suivant : [Explorateur Stockage](https://storageexplorer.com/)
 
 ### <a name="connectionstatstxt"></a>ConnectionStats.txt
 

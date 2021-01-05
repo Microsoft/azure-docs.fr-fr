@@ -7,18 +7,18 @@ author: rwike77
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.custom: aaddev
-ms.topic: conceptual
+ms.custom: aaddev , devx-track-azurepowershell
+ms.topic: how-to
 ms.tgt_pltfrm: multiple
-ms.date: 10/10/2019
+ms.date: 06/26/2020
 ms.author: ryanwi
 ms.reviewer: tomfitz
-ms.openlocfilehash: 7bd8c3b25c23ba8586e38ec8eb7d1baefaa21633
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 096b8ed60bf9880b6904ab952d4558939ca13574
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80884185"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652073"
 ---
 # <a name="how-to-use-azure-powershell-to-create-a-service-principal-with-a-certificate"></a>Procédure : Utiliser Azure PowerShell pour créer un principal du service avec un certificat
 
@@ -40,16 +40,16 @@ Pour cet article, vous devez disposer de la [version la plus récente](/powershe
 
 Pour réaliser les étapes décrites dans cet article, vous devez disposer des autorisations suffisantes dans Azure AD et votre abonnement Azure. Plus précisément, vous devez être en mesure de créer une application dans l’annuaire Azure AD et d’affecter un rôle au principal du service.
 
-Le moyen le plus simple pour vérifier que votre compte dispose des autorisations adéquates est d’utiliser le portail. Consultez [Vérifier l’autorisation requise](howto-create-service-principal-portal.md#required-permissions).
+Le moyen le plus simple pour vérifier que votre compte dispose des autorisations adéquates est d’utiliser le portail. Consultez [Vérifier l’autorisation requise](howto-create-service-principal-portal.md#permissions-required-for-registering-an-app).
 
 ## <a name="assign-the-application-to-a-role"></a>Affecter l’application à un rôle
-Pour accéder aux ressources de votre abonnement, vous devez affecter un rôle à l’application. Déterminez quel rôle fournit les autorisations appropriées pour l’application. Pour en savoir plus sur les rôles disponibles, consultez [RBAC : rôles intégrés](/azure/role-based-access-control/built-in-roles).
+Pour accéder aux ressources de votre abonnement, vous devez affecter un rôle à l’application. Déterminez quel rôle fournit les autorisations appropriées pour l’application. Pour en savoir plus sur les rôles disponibles, consultez [Rôles intégrés Azure](../../role-based-access-control/built-in-roles.md).
 
 Vous pouvez définir l’étendue au niveau de l’abonnement, du groupe de ressources ou de la ressource. Les autorisations sont héritées des niveaux inférieurs de l’étendue (par exemple, l’ajout d’une application au rôle *Lecteur* pour un groupe de ressources signifie qu’elle peut lire le groupe de ressources et toutes les ressources qu’il contient). Pour autoriser l’application à exécuter des actions telles que le redémarrage, le démarrage et l’arrêt d’instances, sélectionnez le rôle *Contributeur*.
 
 ## <a name="create-service-principal-with-self-signed-certificate"></a>Créer un principal du service avec un certificat auto-signé
 
-L'exemple suivant aborde un scénario simple. Il utilise [New-AzADServicePrincipal](/powershell/module/az.resources/new-azadserviceprincipal) pour créer un principal du service avec un certificat auto-signé, et utilise [New-AzRoleAssignment](/powershell/module/az.resources/new-azroleassignment) pour assigner le rôle de [Lecteur](/azure/role-based-access-control/built-in-roles#reader) au principal du service. L’attribution de rôle est étendue à votre abonnement Azure actuellement sélectionné. Pour sélectionner un autre abonnement, utilisez [Set-AzContext](/powershell/module/Az.Accounts/Set-AzContext).
+L'exemple suivant aborde un scénario simple. Il utilise [New-AzADServicePrincipal](/powershell/module/az.resources/new-azadserviceprincipal) pour créer un principal du service avec un certificat auto-signé, et utilise [New-AzRoleAssignment](/powershell/module/az.resources/new-azroleassignment) pour assigner le rôle de [Lecteur](../../role-based-access-control/built-in-roles.md#reader) au principal du service. L’attribution de rôle est étendue à votre abonnement Azure actuellement sélectionné. Pour sélectionner un autre abonnement, utilisez [Set-AzContext](/powershell/module/Az.Accounts/Set-AzContext).
 
 > [!NOTE]
 > Actuellement, l’applet de commande New-SelfSignedCertificate et le module PKI ne sont pas pris en charge dans PowerShell Core. 
@@ -97,8 +97,8 @@ Chaque fois que vous vous connectez en tant que principal de service, vous devez
 $TenantId = (Get-AzSubscription -SubscriptionName "Contoso Default").TenantId
 $ApplicationId = (Get-AzADApplication -DisplayNameStartWith exampleapp).ApplicationId
 
- $Thumbprint = (Get-ChildItem cert:\CurrentUser\My\ | Where-Object {$_.Subject -eq "CN=exampleappScriptCert" }).Thumbprint
- Connect-AzAccount -ServicePrincipal `
+$Thumbprint = (Get-ChildItem cert:\CurrentUser\My\ | Where-Object {$_.Subject -eq "CN=exampleappScriptCert" }).Thumbprint
+Connect-AzAccount -ServicePrincipal `
   -CertificateThumbprint $Thumbprint `
   -ApplicationId $ApplicationId `
   -TenantId $TenantId
@@ -126,7 +126,7 @@ Param (
  Connect-AzAccount
  Import-Module Az.Resources
  Set-AzContext -Subscription $SubscriptionId
- 
+
  $CertPassword = ConvertTo-SecureString $CertPlainPassword -AsPlainText -Force
 
  $PFXCert = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList @($CertPath, $CertPassword)
@@ -146,7 +146,7 @@ Param (
     $NewRole = Get-AzRoleAssignment -ObjectId $ServicePrincipal.Id -ErrorAction SilentlyContinue
     $Retries++;
  }
- 
+
  $NewRole
 ```
 
@@ -155,13 +155,13 @@ Chaque fois que vous vous connectez en tant que principal de service, vous devez
 
 ```powershell
 Param (
- 
+
  [Parameter(Mandatory=$true)]
  [String] $CertPath,
 
  [Parameter(Mandatory=$true)]
  [String] $CertPlainPassword,
- 
+
  [Parameter(Mandatory=$true)]
  [String] $ApplicationId,
 
@@ -224,4 +224,5 @@ Lors de la création d’un principal du service, vous pouvez rencontrer les err
 
 * Pour configurer un principal du service avec un mot de passe, consultez [Créer un principal du service Azure avec Azure PowerShell](/powershell/azure/create-azure-service-principal-azureps).
 * Pour obtenir une explication plus détaillée des applications et des principaux du service, consultez la rubrique [Objets principal du service et application](app-objects-and-service-principals.md).
-* Pour plus d’informations sur l’authentification Azure AD, consultez la rubrique [Scénarios d’authentification pour Azure AD](authentication-scenarios.md).
+* Pour plus d’informations sur l’authentification Azure AD, consultez la rubrique [Scénarios d’authentification pour Azure AD](./authentication-vs-authorization.md).
+* Pour plus d’informations sur l’utilisation des inscriptions d’applications à l’aide de **Microsoft Graph**, consultez les informations de référence sur l’API [Applications](/graph/api/resources/application).

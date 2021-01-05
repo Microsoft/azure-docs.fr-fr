@@ -11,6 +11,8 @@
       href: whats-new.md
     - name: "Nouveautés de Microsoft\_365 Government"
       href: whats-new-microsoft-365-government.md
+    - name: "Archives pour les nouveautés d’Azure\_AD"
+      href: whats-new-archive.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -33,8 +35,6 @@
           href: identity-secure-score.md
         - name: Travailleurs à distance sécurisés
           href: concept-secure-remote-workers.md
-        - name: Évaluation de l’accès continu
-          href: concept-fundamentals-continuous-access-evaluation.md
     - name: Groupes et utilisateurs
       items:
         - name: Gestion des groupes et des accès
@@ -47,10 +47,86 @@
       items:
         - name: Architecture Azure AD
           href: active-directory-architecture.md
+        - name: "Intégration de toutes vos applications à Azure\_AD"
+          href: five-steps-to-full-application-integration-with-azure-ad.md
+        - name: Protocoles d’authentification et de provisionnement
+          items:
+            - name: Vue d’ensemble
+              href: auth-sync-overview.md
+            - name: Authentification basée sur l’en-tête
+              href: auth-header-based.md
+            - name: Authentification LDAP
+              href: auth-ldap.md
+            - name: "Authentification OAuth\_2.0"
+              href: auth-oauth2.md
+            - name: Authentification Open ID Connect
+              href: auth-oidc.md
+            - name: L’authentification basée sur un mot de passe
+              href: auth-password-based-sso.md
+            - name: Authentification RADIUS
+              href: auth-radius.md
+            - name: Authentification de passerelle Bureau à distance
+              href: auth-remote-desktop-gateway.md
+            - name: Authentication SAML
+              href: auth-saml.md
+            - name: Authentification SSH
+              href: auth-ssh.md
+            - name: Authentification Windows - KCD
+              href: auth-kcd.md
+            - name: Synchronisation de répertoires
+              href: sync-directory.md
+            - name: Synchronisation LDAP
+              href: sync-ldap.md
+            - name: Synchronisation SCIM
+              href: sync-scim.md
+        - name: Créer pour la résilience
+          items:
+            - name: Vue d’ensemble
+              href: resilience-overview.md
+            - name: Conseils sur l’infrastructure
+              items:
+                - name: Vue d’ensemble de l’infrastructure
+                  href: resilience-in-infrastructure.md
+                - name: Gestion des informations d’identification
+                  href: resilience-in-credentials.md
+                - name: États des appareils
+                  href: resilience-with-device-states.md
+                - name: Évaluation de l’accès continu
+                  href: resilience-with-continuous-access-evaluation.md
+                - name: Authentification utilisateur externe
+                  href: resilience-b2b-authentication.md
+                - name: Authentification hybride
+                  href: resilience-in-hybrid.md
+                - name: Application Proxy (Proxy d’application)
+                  href: resilience-on-premises-access.md
+            - name: "Conseils sur Azure\_AD\_B2C"
+              items:
+                - name: "Présentation de la résilience Azure\_AD B2C"
+                  href: resilience-b2c.md
+                - name: Expérience de l’utilisateur final
+                  href: resilient-end-user-experience.md
+                - name: Interfaces avec processus externes
+                  href: resilient-external-processes.md
+                - name: "Bonnes pratiques de développement Azure\_AD\_B2C"
+                  href: resilience-b2c-developer-best-practices.md
+                - name: Supervision et analytique
+                  href: resilience-with-monitoring-alerting.md
+            - name: Conseils sur le développement d’applications
+              items:
+                - name: Vue d’ensemble du développement
+                  href: resilience-app-development-overview.md
+                - name: Applications clientes
+                  href: resilience-client-app.md
+                - name: Applications de démon
+                  href: resilience-daemon-app.md
+        - name: Autorités de certification utilisées dans Azure
+          href: certificate-authorities.md
     - name: Guide de déploiement
       items:
         - name: 'Déploiement 30, 90 et plus'
           href: active-directory-deployment-checklist-p2.md
+        - name: Plans de déploiement Azure Active Directory
+          href: active-directory-deployment-plans.md
     - name: Stockage des données
       items:
         - name: Stockage des données d’identité pour l’Europe
@@ -82,6 +158,10 @@
           href: add-custom-domain.md
         - name: Ajouter la marque de la société
           href: customize-branding.md
+        - name: "Configurer «\_Restez connecté\_?\_»"
+          href: keep-me-signed-in.md
+        - name: Guide pratique pour rechercher un ID de locataire
+          href: active-directory-how-to-find-tenant.md
         - name: Associer un abonnement Azure
           href: active-directory-how-subscriptions-associated-directory.md
         - name: Ajouter des informations de confidentialité
@@ -100,6 +180,8 @@
           href: active-directory-groups-settings-azure-portal.md
         - name: Ajouter ou supprimer des propriétaires de groupe
           href: active-directory-accessmanagement-managing-group-owners.md
+        - name: Gérer l’accès aux ressources avec des groupes
+          href: active-directory-manage-groups.md
     - name: Utilisateurs
       items:
         - name: Ajouter ou supprimer un nouvel utilisateur
@@ -114,14 +196,10 @@
           href: license-users-groups.md
         - name: Restaurer un utilisateur supprimé.
           href: active-directory-users-restore.md
-- name: Ressources
+- name: Dépannage
   expanded: true
   items:
     - name: "Obtenir une assistance pour Azure\_Active\_Directory"
       href: active-directory-troubleshooting-support-howto.md
     - name: Forum Aux Questions sur Azure Active Directory
       href: active-directory-faq.md
-    - name: Plans de déploiement Azure Active Directory
-      href: active-directory-deployment-plans.md
-    - name: "Archives pour les nouveautés d’Azure\_AD"
-      href: whats-new-archive.md

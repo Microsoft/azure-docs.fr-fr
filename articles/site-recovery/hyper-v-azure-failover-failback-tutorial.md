@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 12/16/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 03826abf6da94859c510f4c127dfce035aa79370
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b46a2ea12a697afde8223cc3595365c1286512c7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75498162"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86132456"
 ---
 # <a name="fail-over-hyper-v-vms-to-azure"></a>Effectuer le basculement de machines virtuelles Hyper-V vers Azure
 
@@ -27,8 +27,8 @@ Ce tutoriel explique comment effectuer le basculement des machines virtuelles Hy
 Ce didacticiel est le cinquième d’une série. Il suppose que vous avez déjà effectué les tâches des didacticiels précédents.    
 
 1. [Préparer Azure](tutorial-prepare-azure.md)
-2. [Préparer un serveur Hyper-V local](tutorial-prepare-on-premises-hyper-v.md)
-3. Configurer la récupération d’urgence pour les [machines virtuelles Hyper-V](tutorial-hyper-v-to-azure.md) ou pour les [machines virtuelles Hyper-V gérées par les clouds System Center VMM](tutorial-hyper-v-vmm-to-azure.md)
+2. [Préparer un serveur Hyper-V local](./hyper-v-prepare-on-premises-tutorial.md)
+3. Configurer la récupération d’urgence pour les [machines virtuelles Hyper-V](./hyper-v-azure-tutorial.md) ou pour les [machines virtuelles Hyper-V gérées par les clouds System Center VMM](./hyper-v-vmm-azure-tutorial.md)
 4. [Effectuer un test de récupération d’urgence](tutorial-dr-drill-azure.md)
 
 [Découvrez](failover-failback-overview.md#types-of-failover) les différents types de basculements. Si vous souhaitez effectuer le basculement de plusieurs machines virtuelles dans le cadre d’un plan de récupération, consultez [cet article](site-recovery-failover.md).

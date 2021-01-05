@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
 ms.topic: conceptual
-ms.date: 10/18/2019
+ms.date: 07/02/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a9550684ad154f28a02ee347fd0a79c1ec286beb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 95c589289d77597be2550673944c8fa21902e0fb
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74382197"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93098465"
 ---
 # <a name="azure-active-directory-identity-protection---security-overview"></a>Vue d’ensemble de la sécurité Azure Active Directory Identity Protection
 
@@ -27,7 +27,7 @@ La « vue d’ensemble de la sécurité » est divisée en deux sections :
 - Les tendances, indiquées à gauche, fournissent une chronologie des risques dans votre organisation.
 - Les vignettes, figurant à droite, mettent en évidence les principaux problèmes en cours dans votre organisation et indiquent comment prendre rapidement des mesures.
 
-![Présentation de la sécurité](./media/concept-identity-protection-security-overview/01.png)
+:::image type="content" source="./media/concept-identity-protection-security-overview/01.png" alt-text="Capture d’écran de la Vue d’ensemble de la sécurité dans le portail Azure. Les graphiques à barres montrent le nombre de risques dans le temps. Les vignettes synthétisent les informations sur les utilisateurs et les connexions." border="false":::
   
 ## <a name="trends"></a>Trends
 
@@ -45,7 +45,7 @@ Ce graphique affiche le nombre de connexions à risque qui ont été détectées
 
 La vignette « Utilisateurs à risque élevé » affiche le tout dernier nombre d’utilisateurs présentant une probabilité élevée de compromission d’identité. Leur examen doit être une priorité absolue. Cliquez sur la vignette « Utilisateurs à risque élevé » pour accéder à un affichage filtré du rapport « Utilisateurs à risque » présentant uniquement les utilisateurs dont le niveau de risque est élevé. En vous appuyant sur ce rapport, vous pouvez en savoir plus sur ces utilisateurs et les corriger en réinitialisant leur mot de passe.
 
-![Présentation de la sécurité](./media/concept-identity-protection-security-overview/02.png)
+:::image type="content" source="./media/concept-identity-protection-security-overview/02.png" alt-text="Capture d’écran de la vue d’ensemble de la sécurité dans le portail Azure, avec des vignettes visibles pour les utilisateurs à haut risque et à risque moyen, ainsi que d’autres facteurs de risque." border="false":::
 
 ### <a name="medium-risk-users"></a>Utilisateurs à risque moyen
 La vignette « Utilisateurs à risque moyen » affiche le tout dernier nombre d’utilisateurs présentant une probabilité moyenne de compromission d’identité. Cliquez sur la vignette « Utilisateurs à risque moyen » pour accéder à un affichage filtré du rapport « Utilisateurs à risque » présentant uniquement les utilisateurs dont le niveau de risque est moyen. À l’aide de ce rapport, vous pouvez procéder à un examen plus profond et corriger ces utilisateurs.
@@ -56,7 +56,7 @@ La vignette « Connexions à risque non protégées » présente le nombre de 
 
 ### <a name="legacy-authentication"></a>Authentification héritée
 
-La vignette « Authentification héritée » présente le nombre d’authentifications héritées de la dernière semaine dans votre organisation. Les protocoles d’authentification hérités ne gèrent pas les méthodes de sécurité modernes telles qu’une authentification multifacteur. Pour empêcher l’authentification héritée, vous pouvez appliquer une stratégie d’accès conditionnel. Cliquez sur la vignette « Authentification héritée » pour accéder à « Identité Secure Score ».
+La mosaïque« Authentification héritée » indique le nombre d'authentifications héritées de la semaine écoulée avec le risque présent dans votre organisation. Les protocoles d’authentification hérités ne gèrent pas les méthodes de sécurité modernes telles qu’une authentification multifacteur. Pour empêcher l’authentification héritée, vous pouvez appliquer une stratégie d’accès conditionnel. Cliquez sur la vignette « Authentification héritée » pour accéder à « Identité Secure Score ».
 
 ### <a name="identity-secure-score"></a>Identity Secure Score
 

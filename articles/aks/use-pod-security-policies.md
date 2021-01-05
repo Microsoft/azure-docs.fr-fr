@@ -3,29 +3,32 @@ title: Utiliser des stratégies de sécurité des pods dans Azure Kubernetes Ser
 description: Apprendre à contrôler les admissions pod à l’aide de PodSecurityPolicy dans Azure Kubernetes Service (AKS)
 services: container-service
 ms.topic: article
-ms.date: 04/08/2020
-ms.openlocfilehash: 9e3a17e4775150247ef7924dffec68cc86a0bcac
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.date: 07/21/2020
+ms.openlocfilehash: 77c618429503caf9aa7bb6abda109504bbf68d71
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80998361"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94695994"
 ---
 # <a name="preview---secure-your-cluster-using-pod-security-policies-in-azure-kubernetes-service-aks"></a>Aperçu - Sécuriser votre cluster à l’aide de stratégies de sécurité des pods dans Azure Kubernetes Service (AKS)
 
+> [!WARNING]
+> **La fonctionnalité décrite dans ce document, Stratégie de sécurité des pods (préversion), sera bientôt dépréciée et ne sera plus disponible après le 31 mai 2021** ; elle sera remplacée par [Azure Policy pour AKS](use-pod-security-on-azure-policy.md). La date de dépréciation a été repoussée (il s’agit initialement du 15 octobre 2020).
+>
+> Une fois que la stratégie de sécurité des pods (préversion) sera déconseillée, vous devrez désactiver la fonctionnalité sur tous les clusters existants à l’aide de la fonctionnalité déconseillée pour effectuer les futures mises à niveau de cluster et continuer à bénéficier du support Azure.
+>
+> Il est vivement recommandé de commencer à tester des scénarios avec Azure Policy pour AKS, qui propose des stratégies intégrées permettant de sécuriser les pods et des initiatives intégrées qui correspondent aux stratégies de sécurité des pods. Cliquez ici pour en savoir plus sur la [migration vers Azure Policy à partir de la stratégie de sécurité des pods (préversion)](use-pod-security-on-azure-policy.md#migrate-from-kubernetes-pod-security-policy-to-azure-policy).
+
 Pour améliorer la sécurité de votre cluster AKS, vous pouvez limiter les pods pouvant être planifiés. Les pods qui demandent des ressources non autorisées ne sont pas exécutés dans le cluster AKS. Vous définissez cet accès à l’aide de stratégies de sécurité des pods. Cet article explique comment utiliser des stratégies de sécurité des pods pour limiter le déploiement de pods dans AKS.
 
-> [!IMPORTANT]
-> Les fonctionnalités d’évaluation AKS sont en libre-service et font l’objet d’un abonnement. Les versions préliminaires sont fournies « en l’état », « avec toutes les erreurs » et « en fonction des disponibilités », et sont exclues des contrats de niveau de service (sla) et de la garantie limitée. Les versions préliminaires AKS sont partiellement couvertes par le service clientèle sur la base du meilleur effort. En tant que tel, ces fonctionnalités ne sont pas destinées à une utilisation en production. Pour obtenir des informations supplémentaires, veuillez lire les articles de support suivants :
->
-> * [Stratégies de support AKS][aks-support-policies]
-> * [FAQ du support Azure][aks-faq]
+[!INCLUDE [preview features callout](./includes/preview/preview-callout.md)]
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
-L’interface de ligne de commande Azure (Azure CLI) version 2.0.61 ou une version ultérieure doit avoir été installée et configurée. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+L’interface de ligne de commande Azure (Azure CLI) version 2.0.61 ou une version ultérieure doit avoir été installée et configurée. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 ### <a name="install-aks-preview-cli-extension"></a>Installer l’extension CLI de préversion d’aks
 
@@ -41,10 +44,9 @@ az extension update --name aks-preview
 
 ### <a name="register-pod-security-policy-feature-provider"></a>Inscrire le fournisseur de fonctionnalités de stratégie de sécurité des pods
 
-Pour créer ou mettre à jour un cluster AKS afin d’utiliser des stratégies de sécurité des pods, commencez par activer un indicateur de fonctionnalité sur votre abonnement. Pour enregistrer l’indicateur de fonctionnalité *PodSecurityPolicyPreview*, utilisez la commande [az feature register][az-feature-register], comme indiqué dans l’exemple suivant :
+**Ce document et cette fonctionnalité seront déconseillés à partir du 15 octobre 2020.**
 
-> [!CAUTION]
-> Lorsque vous inscrivez une fonctionnalité sur un abonnement, vous ne pouvez actuellement pas désinscrire cette fonctionnalité. Après avoir activé des fonctionnalités en préversion, des valeurs par défaut peuvent être utilisées pour tous les clusters AKS créés ultérieurement dans l’abonnement. N’activez pas les fonctionnalités d’évaluation sur les abonnements de production. Utilisez un abonnement distinct pour tester les fonctionnalités d’évaluation et recueillir des commentaires.
+Pour créer ou mettre à jour un cluster AKS afin d’utiliser des stratégies de sécurité des pods, commencez par activer un indicateur de fonctionnalité sur votre abonnement. Pour enregistrer l’indicateur de fonctionnalité *PodSecurityPolicyPreview*, utilisez la commande [az feature register][az-feature-register], comme indiqué dans l’exemple suivant :
 
 ```azurecli-interactive
 az feature register --name PodSecurityPolicyPreview --namespace Microsoft.ContainerService
@@ -109,7 +111,7 @@ La stratégie de sécurité des pods *privileged* est appliquée à tout utilisa
 kubectl get rolebindings default:privileged -n kube-system -o yaml
 ```
 
-Comme indiqué dans la sortie condensée suivante, le ClusterRole *psp:restricted* est attribué à tous les utilisateurs *system:authenticated*. Cette capacité offre un niveau de base pour les restrictions sans avoir à définir vos propres stratégies.
+Comme indiqué dans la sortie condensée suivante, le ClusterRole *psp:privileged* est attribué à tous les utilisateurs *system:authenticated*. Cette capacité offre un niveau de base pour les privilèges sans avoir à définir vos propres stratégies.
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
@@ -167,7 +169,7 @@ alias kubectl-nonadminuser='kubectl --as=system:serviceaccount:psp-aks:nonadmin-
 
 ## <a name="test-the-creation-of-a-privileged-pod"></a>Tester la création d’un pod privilégié
 
-Nous allons commencer par tester ce qui se passe lorsque vous planifiez un pod avec le contexte de sécurité `privileged: true`. Ce contexte de sécurité fait remonter les privilèges du pod. Dans la section précédente qui montrait les stratégies de sécurité des pods par défaut d’AKS, la stratégie *restricted* devait refuser cette requête.
+Nous allons commencer par tester ce qui se passe lorsque vous planifiez un pod avec le contexte de sécurité `privileged: true`. Ce contexte de sécurité fait remonter les privilèges du pod. Dans la section précédente qui montrait les stratégies de sécurité des pods par défaut d’AKS, la stratégie *privilege* devait refuser cette requête.
 
 Créez un fichier nommé `nginx-privileged.yaml` et collez le manifeste YAML suivant :
 
@@ -179,7 +181,7 @@ metadata:
 spec:
   containers:
     - name: nginx-privileged
-      image: nginx:1.14.2
+      image: mcr.microsoft.com/oss/nginx/nginx:1.14.2-alpine
       securityContext:
         privileged: true
 ```
@@ -202,7 +204,7 @@ Le pod n'atteint pas la phase de planification ; il n'existe aucune ressource �
 
 ## <a name="test-creation-of-an-unprivileged-pod"></a>Tester la création d’un pod non privilégié
 
-Dans l’exemple précédent, la spécification de pod a demandé une élévation des privilèges. Cette requête est refusée par la stratégie de sécurité des pods *restricted* par défaut. Il est donc impossible de planifier le pod. Essayons maintenant d’exécuter ce même pod NGINX sans la requête d’élévation des privilèges.
+Dans l’exemple précédent, la spécification de pod a demandé une élévation des privilèges. Cette requête est refusée par la stratégie de sécurité des pods *privilege* par défaut. Il est donc impossible de planifier le pod. Essayons maintenant d’exécuter ce même pod NGINX sans la requête d’élévation des privilèges.
 
 Créez un fichier nommé `nginx-unprivileged.yaml` et collez le manifeste YAML suivant :
 
@@ -214,7 +216,7 @@ metadata:
 spec:
   containers:
     - name: nginx-unprivileged
-      image: nginx:1.14.2
+      image: mcr.microsoft.com/oss/nginx/nginx:1.14.2-alpine
 ```
 
 Créez le pod à l’aide de la commande [kubectl apply][kubectl-apply] et spécifiez le nom de votre manifeste YAML :
@@ -235,7 +237,7 @@ Le pod n'atteint pas la phase de planification ; il n'existe aucune ressource �
 
 ## <a name="test-creation-of-a-pod-with-a-specific-user-context"></a>Tester la création d’un pod avec un contexte utilisateur spécifique
 
-Dans l’exemple précédent, l’image de conteneur tentait automatiquement d’utiliser la racine pour lier NGINX au port 80. Cette requête était refusée par la stratégie de sécurité des pods *restricted* par défaut. Il était donc impossible de planifier le pod. Nous allons essayer maintenant d’exécuter ce même pod NGINX avec un contexte utilisateur spécifique, tel que `runAsUser: 2000`.
+Dans l’exemple précédent, l’image de conteneur tentait automatiquement d’utiliser la racine pour lier NGINX au port 80. Cette requête était refusée par la stratégie de sécurité des pods *privilege* par défaut. Il était donc impossible de planifier le pod. Nous allons essayer maintenant d’exécuter ce même pod NGINX avec un contexte utilisateur spécifique, tel que `runAsUser: 2000`.
 
 Créez un fichier nommé `nginx-unprivileged-nonroot.yaml` et collez le manifeste YAML suivant :
 
@@ -247,7 +249,7 @@ metadata:
 spec:
   containers:
     - name: nginx-unprivileged
-      image: nginx:1.14.2
+      image: mcr.microsoft.com/oss/nginx/nginx:1.14.2-alpine
       securityContext:
         runAsUser: 2000
 ```
@@ -301,7 +303,7 @@ Créez la stratégie à l’aide de la commande [kubectl apply][kubectl-apply] e
 kubectl apply -f psp-deny-privileged.yaml
 ```
 
-Pour afficher les stratégies disponibles, utilisez la commande [kubectl get psp][kubectl-get], comme indiqué dans l’exemple suivant. Comparez la stratégie *psp-deny-privileged* à la stratégie *restricted* par défaut appliquée dans les exemples précédents de création de pod. Seule l’utilisation de l’escalade *PRIV* est refusée par votre stratégie. Il n’existe aucune restriction sur l’utilisateur ou le groupe pour la stratégie *psp-deny-privileged*.
+Pour afficher les stratégies disponibles, utilisez la commande [kubectl get psp][kubectl-get], comme indiqué dans l’exemple suivant. Comparez la stratégie *psp-deny-privileged* à la stratégie *privilege* par défaut appliquée dans les exemples précédents de création de pod. Seule l’utilisation de l’escalade *PRIV* est refusée par votre stratégie. Il n’existe aucune restriction sur l’utilisateur ou le groupe pour la stratégie *psp-deny-privileged*.
 
 ```console
 $ kubectl get psp
@@ -342,7 +344,7 @@ kubectl apply -f psp-deny-privileged-clusterrole.yaml
 Créez maintenant un ClusterRoleBinding pour utiliser le ClusterRole créé à l’étape précédente. Créez un fichier nommé `psp-deny-privileged-clusterrolebinding.yaml` et collez le manifeste YAML suivant :
 
 ```yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: psp-deny-privileged-clusterrolebinding

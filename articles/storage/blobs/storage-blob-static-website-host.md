@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 1/22/2020
 ms.author: normesta
 ms.reviewer: dineshm
-ms.openlocfilehash: 03850315a05f569d2c6ba9405b6ec38bb6b1305d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 36cdaa813e0eccb23563301052aee268ab61533a
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78330393"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94888502"
 ---
 <!---Customer intent: I want to host files for a static website in Blob storage and access the website from an Azure endpoint.--->
 
@@ -77,14 +77,24 @@ Maintenant, créez une page web Hello World avec Visual Studio Code et déployez
 1. Ouvrez *index.html* dans l’éditeur, collez le texte suivant dans le fichier et enregistrez-le :
 
     ```
-    <h1>Hello World!</h1>
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>Hello World!</h1>
+      </body>
+    </html>
     ```
 
 1. Créez le fichier d’erreur par défaut et nommez-le *404.html*.
 1. Ouvrez *404.html* dans l’éditeur, collez le texte suivant dans le fichier et enregistrez-le :
 
     ```
-    <h1>404</h1>
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>404</h1>
+      </body>
+    </html>
     ```
 
 1. Cliquez avec le bouton droit sous le dossier *mywebsite* dans le volet **Explorer** et sélectionnez **Déployer sur le site web statique** pour déployer votre site web. Vous serez invité à vous connecter à Azure pour récupérer une liste d’abonnements.

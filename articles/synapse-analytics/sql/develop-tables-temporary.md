@@ -1,35 +1,35 @@
 ---
-title: Utiliser des tables temporaires avec SQL Synapse
+title: Utiliser des tables temporaires dans Synapse SQL
 description: Conseils de base pour l'utilisation de tables temporaires dans SQL Synapse.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.openlocfilehash: 090f453771dba6f537ad60605c6e9b96f3ca9957
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 06faa1da71331c299245a93af96166880e7732de
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426685"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451775"
 ---
 # <a name="temporary-tables-in-synapse-sql"></a>Tables temporaires dans SQL Synapse
 
 Cet article contient des conseils de base pour l’utilisation des tables temporaires et met en évidence les principes des tables temporaires au niveau de la session dans SQL Synapse. 
 
-Le pool SQL et les ressources SQL à la demande (préversion) peuvent utiliser des tables temporaires. Les limitations liées à SQL à la demande sont présentées à la fin de cet article. 
+Tant les ressources du pool SQL dédié que celles du pool SQL serverless peuvent utiliser des tables temporaires. Les limitations liées au pool SQL serverless sont présentées à la fin de cet article. 
 
-## <a name="what-are-temporary-tables"></a>Qu’est-ce que les tables temporaires ?
+## <a name="temporary-tables"></a>tables temporaires ;
 
 Les tables temporaires sont utiles lors du traitement des données, notamment lors d’une transformation lorsque les résultats intermédiaires sont temporaires. Dans SQL Synapse, les tables temporaires existent au niveau de la session.  Elles ne sont visibles que dans la session dans laquelle elles ont été créées. Ainsi, elles sont automatiquement supprimées à la fermeture de cette session. 
 
-## <a name="temporary-tables-in-sql-pool"></a>Tables temporaires dans le pool SQL
+## <a name="temporary-tables-in-dedicated-sql-pool"></a>Tables temporaires dans le pool SQL dédié
 
-Dans la ressource de pool SQL, les tables temporaires offrent un gain de performances, car leurs résultats sont écrits en local et non dans un stockage distant.
+Dans la ressource de pool SQL dédié, les tables temporaires offrent un gain de performances, car leurs résultats sont écrits en local et non dans un stockage distant.
 
 ### <a name="create-a-temporary-table"></a>Créer une table temporaire
 
@@ -98,7 +98,8 @@ GROUP BY
 > 
 > 
 
-### <a name="dropping-temporary-tables"></a>Suppression de tables temporaires
+### <a name="drop-temporary-tables"></a>Déposer des tables temporaires
+
 Lorsqu’une nouvelle session est créée, aucune table temporaire ne doit exister.  Cela étant, si vous appelez la même procédure stockée qui crée une table temporaire avec le même nom, pour vous assurer de la réussite de vos instructions `CREATE TABLE`, utilisez une simple vérification d’existence préalable avec `DROP` : 
 
 ```sql
@@ -116,7 +117,8 @@ Dans le développement de procédure stockée, il est courant de voir les comman
 DROP TABLE #stats_ddl
 ```
 
-### <a name="modularizing-code"></a>Modularisation du code
+### <a name="modularize-code"></a>Modulariser le code
+
 Les tables temporaires peuvent être utilisées partout dans une session utilisateur. Cette fonctionnalité vous permet ensuite de modulariser votre code d’application.  À titre d'exemple, la procédure stockée suivante génère le langage DDL pour mettre à jour toutes les statistiques dans la base de données par nom de statistique.
 
 ```sql
@@ -195,7 +197,7 @@ GO
 
 En l'absence de `DROP TABLE` à la fin de la procédure stockée, lorsque la procédure stockée se termine, la table créée demeure afin de pouvoir être lue en dehors de la procédure stockée.  
 
-Contrairement aux autres bases de données SQL Server, SQL Synapse vous permet d’utiliser la table temporaire en dehors de la procédure qui l’a créée.  Les tables temporaires créées via le pool SQL peuvent être utilisées **partout** dans la session. Dès lors, vous disposerez de plus de code modulaire et gérable, comme illustré dans l’exemple ci-dessous :
+Contrairement aux autres bases de données SQL Server, SQL Synapse vous permet d’utiliser la table temporaire en dehors de la procédure qui l’a créée.  Les tables temporaires créées via le pool SQL dédié peuvent être utilisées **partout** dans la session. Dès lors, vous disposerez de plus de code modulaire et gérable, comme illustré dans l’exemple ci-dessous :
 
 ```sql
 EXEC [dbo].[prc_sqldw_update_stats] @update_type = 1, @sample_pct = NULL;
@@ -218,15 +220,15 @@ DROP TABLE #stats_ddl;
 
 ### <a name="temporary-table-limitations"></a>Limitations relatives aux tables temporaires
 
-Le pool SQL présente plusieurs limitations d’implémentation pour les tables temporaires :
+Le pool SQL dédié présente plusieurs limitations d’implémentation pour les tables temporaires :
 
 - Seules les tables temporaires de la session sont prises en charge.  Les tables temporaires globales ne sont pas prises en charge.
 - Il n’est pas possible de créer des vues sur des tables temporaires.
 - Les tables temporaires peuvent être créées uniquement avec une distribution par hachage ou par tourniquet (round robin).  La distribution de tables temporaires répliquées n’est pas prise en charge. 
 
-## <a name="temporary-tables-in-sql-on-demand-preview"></a>Tables temporaires dans SQL à la demande (préversion)
+## <a name="temporary-tables-in-serverless-sql-pool"></a>Tables temporaires dans un pool SQL serverless
 
-Dans SQL à la demande, les tables temporaires sont prises en charge, mais leur utilisation est limitée. Elles ne peuvent pas être utilisées dans le cadre de requêtes ciblant des fichiers. 
+Dans un pool SQL serverless, les tables temporaires sont prises en charge, mais leur utilisation est limitée. Elles ne peuvent pas être utilisées dans le cadre de requêtes ciblant des fichiers. 
 
 Par exemple, vous ne pouvez pas joindre une table temporaire avec des données de fichiers dans le stockage. Le nombre de tables temporaires est limité à 100 et leur taille totale à 100 Mo.
 

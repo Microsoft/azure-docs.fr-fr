@@ -1,6 +1,6 @@
 ---
 title: Ressources et kit SDK de l’API .NET Table Azure Cosmos DB
-description: Découvrez l’API Table Azure Cosmos DB, notamment les dates de publication, les dates de retrait et les modifications apportées à chaque version.
+description: Découvrez l’API Table Azure Cosmos DB pour .NET, notamment les dates de version, les dates de mise hors service et les modifications apportées à chaque version.
 author: sakash279
 ms.author: akshanka
 ms.service: cosmos-db
@@ -8,14 +8,16 @@ ms.subservice: cosmosdb-table
 ms.devlang: dotnet
 ms.topic: reference
 ms.date: 08/17/2018
-ms.openlocfilehash: 9356ab0aec375a046a8f200838df296b2cf74bce
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-dotnet
+ms.openlocfilehash: ea5f3fca18e6a5781bf46112134ae4efc7159106
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80984978"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93101202"
 ---
 # <a name="azure-cosmos-db-table-net-api-download-and-release-notes"></a>API .NET Table Azure Cosmos DB : Téléchargement et notes de publication
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](table-sdk-dotnet.md)
@@ -39,40 +41,40 @@ ms.locfileid: "80984978"
 
 ## <a name="release-notes"></a>Notes de publication
 
-### <a name="212"></a><a name="2.1.2"/>2.1.2
+### <a name="212"></a><a name="2.1.2"></a>2.1.2
 
 * Résolution des bogues
 
-### <a name="210"></a><a name="2.1.0"/>2.1.0
+### <a name="210"></a><a name="2.1.0"></a>2.1.0
 
 * Résolution des bogues
 
-### <a name="200"></a><a name="2.0.0"/>2.0.0
+### <a name="200"></a><a name="2.0.0"></a>2.0.0
 
 * Ajout de la prise en charge des écritures multirégions
 * Dépendances de package NuGet corrigées sur Microsoft.Azure.DocumentDB, Microsoft.OData.Core, Microsoft.OData.Edm et Microsoft.Spatial
 
-### <a name="113"></a><a name="1.1.3"/>1.1.3
+### <a name="113"></a><a name="1.1.3"></a>1.1.3
 
 * Dépendances de package NuGet corrigées sur Microsoft.Azure.Storage.Common et Microsoft.Azure.DocumentDB.
 * Résolution des bogues dans la sérialisation de table lorsque JsonConvert.DefaultSettings est configuré.
 
-### <a name="111"></a><a name="1.1.1"/>1.1.1
+### <a name="111"></a><a name="1.1.1"></a>1.1.1
 
 * Validation supplémentaire pour les ETAGs incorrectement formés en mode direct.
 * Bogue de requête LINQ corrigé en mode de passerelle.
 * API synchrones désormais exécutées sur le pool de threads avec SynchronizationContext.
 
-### <a name="110"></a><a name="1.1.0"/>1.1.0
+### <a name="110"></a><a name="1.1.0"></a>1.1.0
 
 * Ajouter TableQueryMaxItemCount, TableQueryEnableScan, TableQueryMaxDegreeOfParallelism et TableQueryContinuationTokenLimitInKb à TableRequestOptions
 * Correctifs de bogues
 
-### <a name="100"></a><a name="1.0.0"/>1.0.0
+### <a name="100"></a><a name="1.0.0"></a>1.0.0
 
 * Version en disponibilité générale
 
-### <a name="090-preview"></a><a name="0.1.0-preview"/>0.9.0 - préversion
+### <a name="090-preview"></a><a name="0.1.0-preview"></a>0.9.0 - préversion
 
 * Version préliminaire initiale
 
@@ -82,10 +84,7 @@ Microsoft envoie une notification au moins **12 mois** avant le retrait d’un 
 
 La bibliothèque `Microsoft.Azure.CosmosDB.Table` n’est actuellement disponible que pour .NET Framework. Elle est en mode de maintenance et sera bientôt déconseillée. Les nouvelles fonctionnalités et optimisations sont uniquement ajoutées à la bibliothèque .NET Standard [Microsoft.Azure.Cosmos.Table](https://www.nuget.org/packages/Microsoft.Azure.Cosmos.Table). Il est donc recommandé de mettre à niveau vers [Microsoft.Azure.Cosmos.Table](https://www.nuget.org/packages/Microsoft.Azure.Cosmos.Table).
 
-Le package de préversion [WindowsAzure.Storage-PremiumTable](https://www.nuget.org/packages/WindowsAzure.Storage-PremiumTable/0.1.0-preview) a été déconseillé. Le kit de développement logiciel (SDK) WindowsAzure.Storage-PremiumTable sera retiré le 15 novembre 15, 2018 ; à compter de cette date, les requêtes envoyées au kit de développement logiciel (SDK) ne seront plus autorisées. 
-
-Toute requête envoyée à Azure Cosmos DB à l’aide d’un Kit de développement logiciel (SDK) supprimé est rejetée par le service.
-<br/>
+Le package de préversion [WindowsAzure.Storage-PremiumTable](https://www.nuget.org/packages/WindowsAzure.Storage-PremiumTable/0.1.0-preview) a été déconseillé. Le kit de développement logiciel (SDK) WindowsAzure.Storage-PremiumTable sera retiré le 15 novembre 15, 2018 ; à compter de cette date, les requêtes envoyées au kit de développement logiciel (SDK) ne seront plus autorisées.
 
 | Version | Date de sortie | Date de suppression |
 | --- | --- | --- |

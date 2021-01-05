@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 04/24/2020
+ms.date: 06/30/2020
 ms.author: victorh
-ms.openlocfilehash: f4fcadb6d930f7863c733dad105432a64127b59b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: c0bd2f6a021baae80dafcc3d544e1062d8e022e8
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232647"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94653332"
 ---
 # <a name="fqdn-tags-overview"></a>Présentation des balises FQDN
 
@@ -30,13 +30,14 @@ Le tableau suivant présente les balises FQDN que vous pouvez actuellement utili
 
 |Balise FQDN  |Description  |
 |---------|---------|
-|Windows Update     |Autoriser un accès sortant à Microsoft Update, comme décrit dans [Comment configurer un pare-feu pour les mises à jour logicielles](https://technet.microsoft.com/library/bb693717.aspx).|
-|Diagnostics Windows|Autoriser l’accès sortant à tous les [points de terminaison Windows Diagnostics](https://docs.microsoft.com/windows/privacy/configure-windows-diagnostic-data-in-your-organization#endpoints).|
+|Windows Update     |Autoriser un accès sortant à Microsoft Update, comme décrit dans [Comment configurer un pare-feu pour les mises à jour logicielles](/mem/configmgr/sum/get-started/install-a-software-update-point).|
+|Diagnostics Windows|Autoriser l’accès sortant à tous les [points de terminaison Windows Diagnostics](/windows/privacy/configure-windows-diagnostic-data-in-your-organization#endpoints).|
 |Microsoft Active Protection Service (MAPS)|Autoriser l’accès sortant à [MAPS](https://cloudblogs.microsoft.com/enterprisemobility/2016/05/31/important-changes-to-microsoft-active-protection-service-maps-endpoint/).|
 |App Service Environment (ASE)|Autoriser l’accès sortant au trafic de plateforme ASE. Cette balise ne concerne pas les points de terminaison SQL et de stockage propres au client créés par ASE. Ceux-ci doivent être activés via les [points de terminaison de service](../virtual-network/tutorial-restrict-network-access-to-resources.md) ou ajoutés manuellement.<br><br>Pour plus d’informations sur l’intégration du Pare-feu Azure avec l’ASE, consultez [Verrouillage d’un App Service Environment](../app-service/environment/firewall-integration.md#configuring-azure-firewall-with-your-ase).|
 |Sauvegarde Azure|Autoriser l’accès sortant aux services de sauvegarde Azure.|
 |Azure HDInsight|Autoriser l’accès sortant au trafic de plateforme HDInsight. Cette balise ne concerne pas le trafic SQL et de stockage propre au client provenant de HDInsight. Activer à l’aide de [points de terminaison de service](../virtual-network/tutorial-restrict-network-access-to-resources.md) ou ajouter manuellement.|
-|WindowsVirtualDesktop (WVD)|Autorise le trafic sortant de la plateforme Windows Virtual Desktop. Cette étiquette ne concerne pas les points de terminaison Service Bus et de stockage propres au déploiement créés par WVD. En outre, des règles de réseau DNS et KMS sont requises. Pour plus d’informations sur l’intégration du Pare-feu Azure à WVD, consultez [Utiliser le Pare-feu Azure pour protéger les déploiements de Windows Virtual Desktop](protect-windows-virtual-desktop.md). 
+|WindowsVirtualDesktop (WVD)|Autorise le trafic sortant de la plateforme Windows Virtual Desktop. Cette étiquette ne concerne pas les points de terminaison Service Bus et de stockage propres au déploiement créés par WVD. En outre, des règles de réseau DNS et KMS sont requises. Pour plus d’informations sur l’intégration du Pare-feu Azure à WVD, consultez [Utiliser le Pare-feu Azure pour protéger les déploiements de Windows Virtual Desktop](protect-windows-virtual-desktop.md).|
+|Azure Kubernetes Service (AKS)|Autorise l’accès sortant à AKS. Pour plus d’informations, consultez [Utiliser le Pare-feu Azure pour protéger des déploiements d’Azure Kubernetes Service (AKS)](protect-azure-kubernetes-service.md).|
 
 > [!NOTE]
 > Lorsque vous sélectionnez une balise FQDN dans une règle d’application, le champ protocol:port doit être défini sur **https**.

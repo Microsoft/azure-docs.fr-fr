@@ -3,7 +3,7 @@ title: Qu’est-ce qu’un réseau de distribution de contenu (CDN) ? - Azure | 
 description: Découvrez le réseau de distribution de contenu (CDN) Azure et comment l'utiliser pour diffuser du contenu haut débit.
 services: cdn
 documentationcenter: ''
-author: asudbring
+author: duongau
 manager: danielgi
 editor: ''
 ms.assetid: 866e0c30-1f33-43a5-91f0-d22f033b16c6
@@ -13,17 +13,17 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: overview
 ms.date: 05/09/2018
-ms.author: allensu
+ms.author: duau
 ms.custom: mvc
-ms.openlocfilehash: 262e5b7bbcbf6c463ef97d5acc72248d37195124
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: b0c8170947b59b3d40a388642dac3df772238197
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81260436"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92778338"
 ---
 # <a name="what-is-a-content-delivery-network-on-azure"></a>Qu’est-ce qu’un réseau de distribution de contenu sur Azure ?
-Un réseau de diffusion de contenu (CDN) est un réseau distribué de serveurs capables de fournir efficacement du contenu web aux utilisateurs. Il stocke le contenu en cache sur des serveurs Edge dans un point de présente (POP) proches des utilisateurs finaux afin de réduire la latence. 
+Un réseau de diffusion de contenu (CDN) est un réseau distribué de serveurs capables de fournir efficacement du contenu web aux utilisateurs. Les CDN stockent le contenu en cache sur des serveurs Edge situés à des emplacements de point de présence (POP) proches des utilisateurs finaux afin de réduire la latence. 
 
 Le réseau de diffusion de contenu (CDN) Azure offre aux développeurs une solution globale pour la distribution rapide de contenu haut débit aux utilisateurs en mettant en cache leur contenu sur des nœuds physiques disposés stratégiquement dans le monde entier. Azure CDN peut aussi accélérer le contenu dynamique, qui ne peut être mis en cache, en exploitant diverses optimisations réseau à l’aide de points de présence du CDN. L’optimisation d’itinéraire pour contourner le protocole de passerelle frontière (BGP) en est un exemple.
 
@@ -59,7 +59,7 @@ Chaque abonnement Azure comprend des limites par défaut pour les ressources sui
  - Le nombre de points de terminaison qui peuvent être créés dans un profil CDN. 
  - Le nombre de domaines personnalisés qui peuvent être mappés à un point de terminaison.
 
-Pour plus d’informations sur les limites d’abonnement CDN, consultez [Limites de CDN](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
+Pour plus d’informations sur les limites d’abonnement CDN, consultez [Limites de CDN](../azure-resource-manager/management/azure-subscription-service-limits.md).
     
 ## <a name="azure-cdn-features"></a>Fonctionnalités d’Azure CDN
 Azure CDN offre les fonctionnalités suivantes :

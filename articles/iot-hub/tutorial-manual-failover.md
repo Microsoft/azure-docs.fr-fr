@@ -11,16 +11,16 @@ ms.author: robinsh
 ms.custom:
 - mvc
 - mqtt
-ms.openlocfilehash: 86b39beb2958194f7c86409c5d78992616234b05
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 69a0795b9c299b5113c39ce2c4556573f730e4b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81769909"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89013943"
 ---
 # <a name="tutorial-perform-manual-failover-for-an-iot-hub"></a>Tutoriel : Effectuer un basculement manuel pour un hub IoT
 
-Basculement manuel est une fonctionnalité du service IoT Hub qui permet aux clients le[basculement](https://en.wikipedia.org/wiki/Failover) des opérations de leur hub à partir d’une région primaire vers la région Azure associée géographiquement correspondante. Basculement manuel est possible en cas de sinistre régional ou une panne de service étendue. Vous pouvez également effectuer un basculement planifié pour tester vos capacités de récupération d’urgence, mais nous vous recommandons d’utiliser un IoT hub de test plutôt que celui en cours d’exécution en production. La fonctionnalité de basculement manuel est proposée aux clients sans coût supplémentaire.
+Basculement manuel est une fonctionnalité du service IoT Hub qui permet aux clients le[basculement](https://en.wikipedia.org/wiki/Failover) des opérations de leur hub à partir d’une région primaire vers la région Azure associée géographiquement correspondante. Basculement manuel est possible en cas de sinistre régional ou une panne de service étendue. Vous pouvez également effectuer un basculement planifié pour tester vos capacités de récupération d’urgence, mais nous vous recommandons d’utiliser un IoT hub de test plutôt que celui en cours d’exécution en production. La fonctionnalité de basculement manuel est proposée aux clients sans coût supplémentaire pour les hubs IoT créés après le 18 mai 2017.
 
 Dans ce didacticiel, vous allez effectuer les tâches suivantes :
 
@@ -30,6 +30,8 @@ Dans ce didacticiel, vous allez effectuer les tâches suivantes :
 > * Consultez le hub en cours d’exécution dans l’emplacement secondaire.
 > * Effectuer une restauration automatique pour ramener les opérations d’IoT hub à l’emplacement principal. 
 > * Confirmer que le hub s’exécute correctement dans l’emplacement approprié.
+
+Pour plus d’informations sur le basculement manuel et le basculement initié par Microsoft avec IoT Hub, consultez [de récupération d’urgence inter-région](iot-hub-ha-dr.md#cross-region-dr).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -83,7 +85,7 @@ Notez qu’il existe une limite de deux basculements et deux restaurations par j
 
    La quantité de temps nécessaire pour effectuer le basculement manuel est proportionnelle au nombre d’appareils qui sont inscrits pour votre hub. Par exemple, si vous avez 100 000 appareils,cela peut prendre 15 minutes, mais si vous avez cinq millions d’appareils, cela peut prendre une heure ou plus.
 
-   ![Capture d’écran montrant le volet de basculement manuel](./media/tutorial-manual-failover/trigger-failover-03-confirm.png)
+   ![Capture d’écran montrant le volet de confirmation](./media/tutorial-manual-failover/trigger-failover-03-confirm.png)
 
    Pendant l’exécution du processus de basculement manuel, une bannière s’affiche pour vous indiquer qu’un basculement manuel est en cours. 
 

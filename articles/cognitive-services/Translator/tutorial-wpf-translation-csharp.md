@@ -8,18 +8,19 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: tutorial
-ms.date: 02/10/2020
+ms.date: 05/26/2020
 ms.author: swmachan
-ms.openlocfilehash: 0d500a7c24538adb139a42924134f784973f496b
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d239b89aaf0bc140916d38583f4263f7bf660f1a
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588535"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95023614"
 ---
 # <a name="tutorial-create-a-translation-app-with-wpf"></a>Tutoriel : Créer une application de traduction avec WPF
 
-Dans ce tutoriel, vous créez une application [Windows Presentation Foundation (WPF)](https://docs.microsoft.com/visualstudio/designers/getting-started-with-wpf?view=vs-2019) qui utilise les API Cognitive Services pour la traduction de texte, la détection de langue et la correction orthographique avec une seule clé d’abonnement. Plus précisément, votre application appelle Translator et [Vérification orthographique Bing](https://azure.microsoft.com/services/cognitive-services/spell-check/).
+Dans ce tutoriel, vous créez une application [Windows Presentation Foundation (WPF)](/visualstudio/designers/getting-started-with-wpf?view=vs-2019) qui utilise les API Cognitive Services pour la traduction de texte, la détection de langue et la correction orthographique avec une seule clé d’abonnement. Plus précisément, votre application appelle Translator et [Vérification orthographique Bing](https://azure.microsoft.com/services/cognitive-services/spell-check/).
 
 Qu’est-ce que WPF ? Il s’agit d’un framework d’interface utilisateur qui crée des applications de bureau clientes. La plateforme de développement WPF prend en charge un large éventail de fonctionnalités de développement d’application, notamment : modèle d’application, ressources, contrôles, graphismes, disposition, liaison de données, documents et sécurité. C’est un sous-ensemble du .NET Framework, par conséquent, si vous avez déjà créé des applications avec le .NET Framework à l’aide d’ASP.NET ou de Windows Forms, l’expérience de programmation doit être familière. WPF utilise le langage XAML (Extensible Application Markup Language) dans son modèle déclaratif pour la programmation d’application, que nous allons aborder dans les sections suivantes.
 
@@ -39,16 +40,16 @@ Cette liste inclut les services Cognitive Services utilisés dans ce tutoriel. S
 
 | Service | Fonctionnalité | Description |
 |---------|---------|-------------|
-| Convertisseur | [Obtenir les langues](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-languages) | Récupérez la liste complète des langues prises en charge pour la traduction de texte. |
-| Convertisseur | [Translate](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate) | Traduisez du texte dans plus de 60 langues. |
-| Convertisseur | [Detect](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-detect) | Détectez la langue du texte d’entrée. Inclut le score de confiance pour la détection. |
-| Vérification orthographique Bing | [Vérification orthographique](https://docs.microsoft.com/rest/api/cognitiveservices/bing-spell-check-api-v7-reference) | Corrigez les fautes d’orthographe pour améliorer l’exactitude de la traduction. |
+| Convertisseur | [Obtenir les langues](./reference/v3-0-languages.md) | Récupérez la liste complète des langues prises en charge pour la traduction de texte. |
+| Convertisseur | [Translate](./reference/v3-0-translate.md) | Traduisez du texte dans plus de 70 langues. |
+| Convertisseur | [Detect](./reference/v3-0-detect.md) | Détectez la langue du texte d’entrée. Inclut le score de confiance pour la détection. |
+| Vérification orthographique Bing | [Vérification orthographique](/rest/api/cognitiveservices/bing-spell-check-api-v7-reference) | Corrigez les fautes d’orthographe pour améliorer l’exactitude de la traduction. |
 
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de continuer, vous avez besoin des éléments suivants :
 
-* Un abonnement Azure Cognitive Services. [Obtenez une clé Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account#create-a-new-azure-cognitive-services-resource).
+* Un abonnement Azure Cognitive Services. [Obtenez une clé Cognitive Services](../cognitive-services-apis-create-account.md#create-a-new-azure-cognitive-services-resource).
 * Une machine Windows
 * [Visual Studio 2019](https://www.visualstudio.com/downloads/) - Community ou Enterprise
 
@@ -82,14 +83,14 @@ Nous ajoutons des assemblys à notre projet pour sérialiser et désérialiser d
 1. L’onglet des **assemblys** liste tous les assemblys .NET Framework que vous pouvez référencer. Utilisez la barre de recherche dans le coin supérieur droit pour rechercher des références.
    ![Ajouter des références d’assembly](media/add-assemblies-2019.png)
 1. Sélectionnez les références suivantes pour votre projet :
-   * [System.Runtime.Serialization](https://docs.microsoft.com/dotnet/api/system.runtime.serialization)
-   * [System.Web](https://docs.microsoft.com/dotnet/api/system.web)
+   * [System.Runtime.Serialization](/dotnet/api/system.runtime.serialization)
+   * [System.Web](/dotnet/api/system.web)
    * System.Web.Extensions
-   * [System.Windows](https://docs.microsoft.com/dotnet/api/system.windows)
+   * [System.Windows](/dotnet/api/system.windows)
 1. Une fois que vous avez ajouté ces références à votre projet, vous pouvez cliquer sur **OK** pour fermer le **Gestionnaire de références**.
 
 > [!NOTE]
-> Pour en savoir plus sur les références d’assembly, consultez [Guide pratique pour ajouter ou supprimer une référence à l’aide du Gestionnaire de références](https://docs.microsoft.com/visualstudio/ide/how-to-add-or-remove-references-by-using-the-reference-manager?view=vs-2019).
+> Pour en savoir plus sur les références d’assembly, consultez [Guide pratique pour ajouter ou supprimer une référence à l’aide du Gestionnaire de références](/visualstudio/ide/how-to-add-or-remove-references-by-using-the-reference-manager?view=vs-2019).
 
 ### <a name="install-newtonsoftjson"></a>Installer Newtonsoft.Json
 
@@ -263,12 +264,12 @@ Enfin, nous avons ajouté du code pour appeler des méthodes afin de récupérer
 
 ## <a name="get-supported-languages"></a>Obtenir les langues prises en charge
 
-Translator prend actuellement en charge plus de 60 langues. Comme de nouvelles langues seront prises en charge au fil du temps, nous vous recommandons d’appeler la ressource Languages exposée par Translator au lieu de coder en dur la liste des langues dans votre application.
+Translator prend actuellement en charge plus de 70 langues. Comme de nouvelles langues seront prises en charge au fil du temps, nous vous recommandons d’appeler la ressource Languages exposée par Translator au lieu de coder en dur la liste des langues dans votre application.
 
 Dans cette section, nous envoyons une demande `GET` à la ressource Languages, en spécifiant que nous voulons la liste des langues disponibles pour la traduction.
 
 > [!NOTE]
-> La ressource Languages vous permet de filtrer la prise en charge linguistique avec les paramètres de requête suivants : transliteration, dictionary et translation. Pour plus d’informations, consultez les [informations de référence sur l’API](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-languages).
+> La ressource Languages vous permet de filtrer la prise en charge linguistique avec les paramètres de requête suivants : transliteration, dictionary et translation. Pour plus d’informations, consultez les [informations de référence sur l’API](./reference/v3-0-languages.md).
 
 Avant d’aller plus loin, examinons l’exemple de sortie d’un appel à la ressource Languages :
 
@@ -580,4 +581,4 @@ Le code source de ce projet est disponible sur GitHub.
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Informations de référence Microsoft Translator](https://docs.microsoft.com/azure/cognitive-services/Translator/reference/v3-0-reference)
+> [Informations de référence Microsoft Translator](./reference/v3-0-reference.md)

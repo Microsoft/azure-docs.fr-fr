@@ -5,15 +5,15 @@ services: lighthouse
 author: JnHs
 ms.service: lighthouse
 ms.topic: include
-ms.date: 03/30/2020
+ms.date: 12/11/2020
 ms.author: jenhayes
 ms.custom: include file
-ms.openlocfilehash: be8aae6308e712449402b002576974743bc125ef
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: 0056e18b6cb3aad2a4504bbe20b3b3421793489e
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80986614"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97356263"
 ---
 Ces exemples montrent comment utiliser Azure Monitor pour créer des alertes avec des abonnements qui ont été intégrés pour la gestion des ressources déléguées Azure.
 
@@ -23,3 +23,4 @@ Ces exemples montrent comment utiliser Azure Monitor pour créer des alertes ave
 | [alert-using-actiongroup](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/alert-using-actiongroup) | Ce modèle crée une alerte Azure et se connecte à un groupe d’actions existant.|
 | [multiple-loganalytics-alerts](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/multiple-loganalytics-alerts) | Crée plusieurs alertes de journal basées sur des requêtes Kusto.|
 | [delegation-alert-for-customer](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/delegation-alert-for-customer) | Déploie une alerte dans un locataire lorsqu’un utilisateur délègue un abonnement à un locataire gérant.|
+| [workbook-activitylogs-by-domain](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/workbook-activitylogs-by-domain) | Affiche les journaux d’activité Azure dans les abonnements avec une option pour les filtrer par nom de domaine. |

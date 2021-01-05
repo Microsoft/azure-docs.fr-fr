@@ -11,17 +11,17 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 11/28/2017
+ms.date: 07/14/2020
 ms.author: apimpm
-ms.openlocfilehash: b72abf4e208c57987375a105865046f194460058
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77d9d20f3321aa5bb6c5ea47a3949a82bdd1ad75
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231625"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92131239"
 ---
 # <a name="api-management-cross-domain-policies"></a>Gestion des API dans les stratégies de domaine
-Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](https://go.microsoft.com/fwlink/?LinkID=398186).
+Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](./api-management-policies.md).
 
 ## <a name="cross-domain-policies"></a><a name="CrossDomainPolicies"></a> Stratégies inter-domaines
 
@@ -45,9 +45,7 @@ La stratégie `cross-domain` rend l’API accessible depuis les navigateurs clie
 
 ```xml
 <cross-domain>
-    <cross-domain>
         <allow-http-request-headers-from domain='*' headers='*' />
-    </cross-domain>
 </cross-domain>
 ```
 
@@ -58,7 +56,7 @@ La stratégie `cross-domain` rend l’API accessible depuis les navigateurs clie
 |inter-domaines|Élément racine. Les éléments enfants doivent être conformes à la [spécification de fichier de stratégie inter-domaines Adobe](https://www.adobe.com/devnet/articles/crossdomain_policy_file_spec.html).|Oui|
 
 ### <a name="usage"></a>Usage
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 - **Sections de la stratégie :** inbound
 - **Étendues de la stratégie :** toutes les étendues
@@ -67,6 +65,8 @@ Cette stratégie peut être utilisée dans les [sections](https://azure.microsof
 La stratégie `cors` ajoute la prise en charge du partage des ressources cross-origin (CORS) à une opération ou une API afin de permettre les appels inter-domaines à partir des navigateurs clients.
 
 CORS permet à un navigateur et à un serveur d'interagir et de déterminer si les demandes cross-origin doivent être autorisées ou non, par exemple dans le cas d'appels XMLHttpRequests passés via JavaScript sur une page web vers d'autres domaines). Cette stratégie offre plus de flexibilité que de simplement autoriser les demandes de même origine, mais elle est plus sûre que d'autoriser toutes les demandes cross-origin.
+
+Vous devez appliquer la stratégie CORS pour activer la console interactive dans le portail des développeurs. Pour plus d’informations, reportez-vous à la [documentation du portail des développeurs](./api-management-howto-developer-portal.md#cors).
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -141,7 +141,7 @@ Cet exemple montre comment prendre en charge les demandes en amont, telles que c
 |preflight-result-max-age|L’en-tête `Access-Control-Max-Age` de la réponse en amont est défini sur la valeur de cet attribut et influe sur la capacité de l’agent utilisateur à mettre en cache la réponse en amont.|Non|0|
 
 ### <a name="usage"></a>Usage
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 - **Sections de la stratégie :** inbound
 - **Étendues de la stratégie :** toutes les étendues
@@ -178,7 +178,7 @@ Si vous ajoutez le paramètre de rappel `?cb=XXX`, il renvoie un résultat JSONP
 |callback-parameter-name|Appel de fonction JavaScript interdomaines avec comme préfixe le nom de domaine complet de l'emplacement de la fonction.|Oui|N/A|
 
 ### <a name="usage"></a>Usage
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 - **Sections de la stratégie :** outbound (sortant)
 - **Étendues de la stratégie :** toutes les étendues
@@ -189,5 +189,5 @@ Pour plus d’informations sur l’utilisation de stratégies, consultez les pag
 
 + [Stratégies dans Gestion des API](api-management-howto-policies.md)
 + [Transform and protect your API](transform-api.md) (Transformer et protéger votre API)
-+ [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
-+ [Exemples de stratégie](policy-samples.md)
++ [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
++ [Exemples de stratégie](./policy-reference.md)

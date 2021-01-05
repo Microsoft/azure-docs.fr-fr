@@ -3,14 +3,15 @@ title: Expressions et modèles de liaisons Azure Functions
 description: Découvrez comment créer différentes expressions de liaison Azure Functions d’après des modèles courants.
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 02/18/2019
 ms.author: cshoe
-ms.openlocfilehash: 2d0cf18de09932c5d66e269a85919f4d85383c5b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 161e3e7fbc5b343ee73142f0e968367c3cbfaa6b
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235213"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92927411"
 ---
 # <a name="azure-functions-binding-expression-patterns"></a>Modèles d’expressions de liaison Azure Functions
 
@@ -37,9 +38,10 @@ Les expressions de liaison de paramètres d’application ne sont pas identifié
 
 Lorsqu’une fonction s’exécute localement, les valeurs des paramètres de l’application proviennent du fichier *local.settings.json*.
 
-Veuillez noter que la propriété `connection` des déclencheurs et liaisons est un cas spécial et résout automatiquement les valeurs en tant que paramètres de l’application, sans les signes de pourcentage. 
+> [!NOTE]
+> La propriété `connection` des déclencheurs et des liaisons est un cas spécial et résout automatiquement les valeurs en tant que paramètres de l’application, sans les signes de pourcentage. 
 
-L’exemple suivant est un déclencheur de stockage de file d’attente Azure qui utilise un paramètre d’application `%input-queue-name%` pour définir la file d’attente sur laquelle effectuer le déclenchement.
+L’exemple suivant est un déclencheur de stockage de file d’attente Azure qui utilise un paramètre d’application `%input_queue_name%` pour définir la file d’attente sur laquelle effectuer le déclenchement.
 
 ```json
 {
@@ -48,7 +50,7 @@ L’exemple suivant est un déclencheur de stockage de file d’attente Azure qu
       "name": "order",
       "type": "queueTrigger",
       "direction": "in",
-      "queueName": "%input-queue-name%",
+      "queueName": "%input_queue_name%",
       "connection": "MY_STORAGE_ACCT_APP_SETTING"
     }
   ]
@@ -60,7 +62,7 @@ Vous pouvez utiliser la même approche dans les bibliothèques de classes :
 ```csharp
 [FunctionName("QueueTrigger")]
 public static void Run(
-    [QueueTrigger("%input-queue-name%")]string myQueueItem, 
+    [QueueTrigger("%input_queue_name%")]string myQueueItem, 
     ILogger log)
 {
     log.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
@@ -159,7 +161,7 @@ Par exemple, un déclencheur Stockage File d’attente Azure prend en charge les
 * NextVisibleTime
 * PopReceipt
 
-Ces valeurs de métadonnées sont accessibles dans les propriétés de fichier *function.json*. Par exemple, supposons que vous utilisez un déclencheur de file d’attente et que le message de la file d’attente contient le nom d’un objet blob que vous souhaitez lire. Dans le fichier *function.json*, vous pouvez utiliser la propriété de métadonnées `queueTrigger` dans la propriété de l’objet blob `path`, comme indiqué dans l’exemple suivant :
+Ces valeurs de métadonnées sont accessibles dans les propriétés de fichier *function.json*. Par exemple, supposons que vous utilisez un déclencheur de file d’attente et que le message de la file d’attente contient le nom d’un objet blob que vous souhaitez lire. Dans le fichier *function.json* , vous pouvez utiliser la propriété de métadonnées `queueTrigger` dans la propriété de l’objet blob `path`, comme indiqué dans l’exemple suivant :
 
 ```json
   "bindings": [
@@ -315,7 +317,7 @@ L’expression de liaison `DateTime` se résout en `DateTime.UtcNow`. Le chemin 
 ```
 ## <a name="binding-at-runtime"></a>Liaison au runtime
 
-Avec C# et d’autres langages .NET, vous pouvez utiliser un schéma de liaison impératif, par opposition aux liaisons déclaratives dans *function.json*, et des attributs. La liaison impérative est utile lorsque les paramètres de liaison doivent être calculés au moment du runtime plutôt que lors de la conception. Pour plus d’informations, consultez les [informations de référence pour les développeurs C#](functions-dotnet-class-library.md#binding-at-runtime) ou les [informations de référence pour les développeurs de scripts C#](functions-reference-csharp.md#binding-at-runtime).
+Avec C# et d’autres langages .NET, vous pouvez utiliser un schéma de liaison impératif, par opposition aux liaisons déclaratives dans *function.json* , et des attributs. La liaison impérative est utile lorsque les paramètres de liaison doivent être calculés au moment du runtime plutôt que lors de la conception. Pour plus d’informations, consultez les [informations de référence pour les développeurs C#](functions-dotnet-class-library.md#binding-at-runtime) ou les [informations de référence pour les développeurs de scripts C#](functions-reference-csharp.md#binding-at-runtime).
 
 ## <a name="next-steps"></a>Étapes suivantes
 > [!div class="nextstepaction"]

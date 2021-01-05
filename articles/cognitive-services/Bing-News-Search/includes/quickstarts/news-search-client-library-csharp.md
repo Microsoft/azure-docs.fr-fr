@@ -8,12 +8,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/12/2020
 ms.author: aahi
-ms.openlocfilehash: fd43fcb1b5fb70862ed1c1fa5111f0893495b437
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: fbc7d7b35b46e96e9cd007a3794a8ccc561f91e4
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "79503516"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "84878963"
 ---
 Utilisez ce guide de démarrage rapide pour démarrer une recherche d’actualités avec la bibliothèque de client Recherche d’actualités Bing pour C#. Si l’outil Recherche d’actualités Bing dispose d’une API REST compatible avec la plupart des langages de programmation, la bibliothèque de client offre quant à elle un moyen facile d’intégrer le service à vos applications. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/BingSearchv7/BingNewsSearch).
 
@@ -23,7 +23,7 @@ Utilisez ce guide de démarrage rapide pour démarrer une recherche d’actualit
 * Le framework [Json.NET](https://www.newtonsoft.com/json), disponible sous forme de package NuGet.
 * Si vous utilisez Linux/MacOS, cette application peut être exécutée à l’aide de [Mono](https://www.mono-project.com/).
 
-* Le [package NuGet du SDK Recherche d’actualités Bing](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.NewsSearch/1.2.0). L’installation de ce package installe également les éléments suivants :
+* Le [package NuGet du SDK Recherche d’actualités Bing](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.NewsSearch/2.0.0). L’installation de ce package installe également les éléments suivants :
     * Microsoft.Rest.ClientRuntime
     * Microsoft.Rest.ClientRuntime.Azure
     * Newtonsoft.Json

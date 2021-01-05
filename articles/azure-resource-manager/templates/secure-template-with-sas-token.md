@@ -2,17 +2,20 @@
 title: Déployer un modèle avec un jeton SAS en toute sécurité
 description: Déployez des ressources sur Azure avec un modèle Azure Resource Manager protégé par un jeton SAP. Affiche Azure PowerShell et Azure CLI.
 ms.topic: conceptual
-ms.date: 08/14/2019
-ms.openlocfilehash: 42eaae316d4fd0575102323933f849a3058228a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/25/2020
+ms.openlocfilehash: 8b35e82da8ebca98ec9fe1fb7441612bf61fb142
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80156393"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88855654"
 ---
 # <a name="deploy-private-arm-template-with-sas-token"></a>Déployer un modèle privé ARM avec un jeton SAS
 
-Lorsque votre modèle Azure Resource Manager (ARM) se trouve dans un compte de stockage, vous pouvez restreindre l’accès au modèle pour éviter de l’exposer publiquement. Vous accédez à un modèle sécurisé en créant un jeton de signature d’accès partagé (SAS) pour le modèle et en fournissant ce jeton pendant le déploiement. Cet article explique comment utiliser Azure PowerShell ou Azure CLI pour déployer un modèle avec un jeton SAP.
+Lorsque votre modèle Azure Resource Manager (modèle ARM) se trouve dans un compte de stockage, vous pouvez restreindre l’accès au modèle pour éviter de l’exposer publiquement. Vous accédez à un modèle sécurisé en créant un jeton de signature d’accès partagé (SAS) pour le modèle et en fournissant ce jeton pendant le déploiement. Cet article explique comment utiliser Azure PowerShell ou Azure CLI pour déployer un modèle avec un jeton SAP.
+
+> [!IMPORTANT]
+> Plutôt que de sécuriser votre modèle avec un jeton SAS, envisagez d’utiliser les [spécifications de modèle](template-specs.md). Les spécifications de modèle vous permettent de partager vos modèles avec d’autres utilisateurs de votre organisation et de gérer l’accès aux modèles par le biais d’Azure RBAC.
 
 ## <a name="create-storage-account-with-secured-container"></a>Créer un compte de stockage avec un conteneur sécurisé
 
@@ -110,6 +113,8 @@ New-AzResourceGroupDeployment `
 ```
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+L’exemple suivant fonctionne avec l’environnement Bash dans Cloud Shell. D’autres environnements peuvent nécessiter une syntaxe différente pour créer l’heure d’expiration du jeton SAS.
 
 ```azurecli-interactive
 expiretime=$(date -u -d '30 minutes' +%Y-%m-%dT%H:%MZ)

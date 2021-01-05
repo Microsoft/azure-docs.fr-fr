@@ -7,12 +7,12 @@ author: hedidin
 ms.reviewer: klam, estfan, logicappspm
 ms.topic: article
 ms.date: 07/29/2016
-ms.openlocfilehash: 1bb6e28c9dcae01f3233178706d2a24156fa509a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fdf5f25ae6f89ccc06c95ee1be021691dab0047a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76902707"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000349"
 ---
 # <a name="scenario-exception-handling-and-error-logging-for-logic-apps"></a>Scénario : gestion des exceptions et journalisation des erreurs pour les applications logiques
 
@@ -37,7 +37,7 @@ Le projet comportait deux exigences principales :
 
 ## <a name="how-we-solved-the-problem"></a>Comment nous avons résolu le problème
 
-Nous avons choisi [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/ "Azure Cosmos DB") comme référentiel pour les enregistrements de journal et d’erreur (Cosmos DB fait référence aux enregistrements en tant que documents). Comme Azure Logic Apps dispose d’un modèle standard pour toutes les réponses, nous n’avons pas à créer un schéma personnalisé. Nous pouvons créer une application API pour **insérer** et**interroger** les enregistrements d’erreur et de journal. Nous pouvons également définir un schéma pour chaque enregistrement au sein de l’application API.  
+Nous avons choisi [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/ "Azure Cosmos DB") comme référentiel pour les enregistrements de journal et d’erreur (Cosmos DB fait référence aux enregistrements en tant que documents). Comme Azure Logic Apps dispose d’un modèle standard pour toutes les réponses, nous n’avons pas à créer un schéma personnalisé. Nous pouvons créer une application API pour **insérer** et **interroger** les enregistrements d’erreur et de journal. Nous pouvons également définir un schéma pour chaque enregistrement au sein de l’application API.  
 
 Une autre exigence consistait à vider les enregistrements au-delà d’une certaine date. Cosmos DB possède une propriété [Durée de vie](https://azure.microsoft.com/blog/documentdb-now-supports-time-to-live-ttl/ "Durée de vie") (TTL, Time To Live), qui nous a permis de définir une valeur **Durée de vie** pour chaque enregistrement ou pour toute une collection. Ainsi, nous n’avons plus à supprimer manuellement les enregistrements dans Cosmos DB.
 
@@ -103,15 +103,15 @@ Nous devons journaliser la source (requête) du dossier du patient à partir du 
 
    **Insérer une entrée de journal**
 
-   ![Insérer une entrée de journal](media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
+   ![Capture d’écran du Concepteur d’application logique montrant les paramètres de configuration pour l’opération InsertLogEntry.](media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
 
    **Insérer une entrée d’erreur**
 
-   ![Insérer une entrée de journal](media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
+   ![Capture d’écran du Concepteur d’application logique montrant les paramètres de configuration pour l’opération CreateErrorRecord.](media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
 
    **Rechercher un échec de création d’enregistrement**
 
-   ![Condition](media/logic-apps-scenario-error-and-exception-handling/condition.png)
+   ![Capture d’écran de l’écran CreateErrorRecord dans le Concepteur d’application logique montrant les champs pour la création d’une entrée d’erreur.](media/logic-apps-scenario-error-and-exception-handling/condition.png)
 
 ## <a name="logic-app-source-code"></a>Code source d’application logique
 

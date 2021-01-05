@@ -8,11 +8,11 @@ ms.topic: include
 ms.date: 08/29/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 12fc9da11469cd617154827232d430dc5cd4a94b
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: ff9e83b9d03cfe80ae96e05201763d89956f0e39
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "67176801"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91401016"
 ---
-Office 365 a été créé pour être accessible de manière fiable et sécurisée via Internet. Par conséquent, nous ne recommandons l’utilisation d’ExpressRoute que dans des scénarios bien spécifiques. Pour plus d’informations sur l’utilisation d’ExpressRoute pour accéder à Office 365, consultez la page [Azure ExpressRoute pour Office 365](https://aka.ms/ExpressRouteOffice365).
+Microsoft 365 a été créé pour être accessible de manière fiable et sécurisée via Internet. Par conséquent, nous ne recommandons l’utilisation d’ExpressRoute que dans des scénarios bien spécifiques. Pour plus d’informations sur l’utilisation d’ExpressRoute pour accéder à Microsoft 365, consultez [Azure ExpressRoute pour Microsoft 365](/microsoft-365/enterprise/azure-expressroute).

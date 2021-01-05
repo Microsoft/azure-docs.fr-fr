@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 04/28/2020
+ms.date: 05/18/2020
 ms.author: ryanwi
 ms.reviewer: jmprieur, saeeda, sureshja, hirsin
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: 7b326e17611b5f4b9520d8218a28a67afe9a851a
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: af5b27dc85a276c731a61135ab59ab81f5aaf3c2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584177"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83772197"
 ---
 # <a name="app-sign-in-flow-with-microsoft-identity-platform"></a>Flux de connexion des applications avec la Plateforme d’identités Microsoft
 
@@ -29,7 +29,7 @@ Cette rubrique décrit le processus de connexion de base pour les applications w
 Quand un utilisateur accède par l’intermédiaire du navigateur à une application web, voici ce qui se produit :
 
 * L’application web détermine si l’utilisateur est authentifié.
-* Si l’utilisateur ne l’est pas, l’application web délègue à Azure AD la connexion de l’utilisateur. Cette connexion doit être conforme à la stratégie de l’organisation, ce qui peut signifier demander à l’utilisateur d’entrer ses informations d’identification, utiliser l’authentification multifacteur, ou n’utiliser aucun mot de passe (en se servant de Windows Hello, par exemple).
+* Si l’utilisateur ne l’est pas, l’application web délègue à Azure AD la connexion de l’utilisateur. Cette connexion doit être conforme à la stratégie de l’organisation, ce qui peut impliquer de demander à l’utilisateur d’entrer ses informations d’identification, en utilisant une [authentification multifacteur](../authentication/concept-mfa-howitworks.md) (parfois appelée authentification à deux facteurs ou 2FA), ou de n’utiliser aucun mot de passe (par exemple, en se recourant à Windows Hello).
 * L’utilisateur est invité à donner son consentement pour l’accès dont l’application cliente a besoin. C’est la raison pour laquelle les applications clientes doivent être inscrites auprès d’Azure AD, afin que la Plateforme d’identités Microsoft puisse remettre des jetons représentant l’accès auquel l’utilisateur a consenti.
 
 Lorsque l’utilisateur est bien authentifié :

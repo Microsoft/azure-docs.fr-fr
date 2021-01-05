@@ -2,26 +2,21 @@
 title: 'Didacticiel : Configurer Cornerstone OnDemand pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur Cornerstone OnDemand.
 services: active-directory
-documentationcenter: ''
 author: zhchia
 writer: zhchia
-manager: beatrizd
-ms.assetid: d4ca2365-6729-48f7-bb7f-c0f5ffe740a3
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6212e74ecbf8327d3939138de2e92868f29b0f1a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 59c599167089d222324ed880c18e68d763f5e468
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058421"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94358454"
 ---
 # <a name="tutorial-configure-cornerstone-ondemand-for-automatic-user-provisioning"></a>Didacticiel : Configurer Cornerstone OnDemand pour l’approvisionnement automatique d’utilisateurs
 
@@ -39,7 +34,7 @@ Le scénario décrit dans ce didacticiel part du principe que vous disposez des 
 * Un compte d’utilisateur dans Cornerstone OnDemand avec des autorisations d’administrateur.
 
 > [!NOTE]
-> L’intégration du provisionnement Azure AD repose sur le [service web Cornerstone OnDemand](https://help.csod.com/help/csod_0/Content/Resources/Documents/WebServices/CSOD_-_Summary_of_Web_Services_v20151106.pdf). Ce service est disponible pour les équipes Cornerstone OnDemand.
+> L’intégration du provisionnement Azure AD repose sur le [service web Cornerstone OnDemand](https://www.cornerstoneondemand.com/). Ce service est disponible pour les équipes Cornerstone OnDemand.
 
 ## <a name="add-cornerstone-ondemand-from-the-azure-marketplace"></a>Ajouter Cornerstone OnDemand à partir de la Place de marché Azure
 
@@ -51,7 +46,7 @@ Pour ajouter Cornerstone OnDemand à partir de la Place de marché, procédez co
 
     ![Icône Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -97,25 +92,25 @@ Pour configurer le provisionnement automatique d’utilisateurs pour Cornerstone
 
     ![Mode de provisionnement Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/ProvisioningCredentials.png)
 
-5. Sous la section **Informations d’identification de l’administrateur**, entrez le nom d’utilisateur de l’administrateur, le mot de passe d’administrateur et le domaine de votre compte Cornerstone OnDemand :
+5. Sous la section **Informations d’identification de l’administrateur** , entrez le nom d’utilisateur de l’administrateur, le mot de passe d’administrateur et le domaine de votre compte Cornerstone OnDemand :
 
-    * Dans la zone **Nom d’utilisateur administrateur**, indiquez le domaine ou le nom d’utilisateur du compte Administrateur sur votre locataire Cornerstone OnDemand. Exemple : contoso\admin.
+    * Dans la zone **Nom d’utilisateur administrateur** , indiquez le domaine ou le nom d’utilisateur du compte Administrateur sur votre locataire Cornerstone OnDemand. Exemple : contoso\admin.
 
-    * Dans la zone **Mot de passe d’administrateur**, indiquez le mot de passe correspondant au nom d’utilisateur de l’administrateur.
+    * Dans la zone **Mot de passe d’administrateur** , indiquez le mot de passe correspondant au nom d’utilisateur de l’administrateur.
 
-    * Dans la zone **Domaine**, indiquez l’URL du service web du locataire Cornerstone OnDemand. Par exemple, le service se trouve à l’adresse `https://ws-[corpname].csod.com/feed30/clientdataservice.asmx`. Pour Contoso, le domaine est `https://ws-contoso.csod.com/feed30/clientdataservice.asmx`. Pour plus d’informations sur la façon de récupérer l’URL du service web, consultez [ce fichier pdf](https://help.csod.com/help/csod_0/Content/Resources/Documents/WebServices/CSOD_Web_Services_-_User-OU_Technical_Specification_v20160222.pdf).
+    * Dans la zone **Domaine** , indiquez l’URL du service web du locataire Cornerstone OnDemand. Par exemple, le service se trouve à l’adresse `https://ws-[corpname].csod.com/feed30/clientdataservice.asmx`. Pour Contoso, le domaine est `https://ws-contoso.csod.com/feed30/clientdataservice.asmx`. Pour plus d’informations sur la façon de récupérer l’URL du service web, consultez [ce fichier pdf](https://help.csod.com/help/csod_0/Content/Resources/Documents/WebServices/CSOD_Web_Services_-_User-OU_Technical_Specification_v20160222.pdf).
 
 6. Une fois que vous avez renseigné les zones affichées à l’étape 5, sélectionnez **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Cornerstone OnDemand. Si la connexion échoue, vérifiez que votre compte Cornerstone OnDemand dispose des autorisations d’administrateur et réessayez.
 
     ![Tester la connexion de Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/TestConnection.png)
 
-7. Dans la zone **E-mail de notification**, entrez l’adresse e-mail de la personne ou du groupe devant recevoir les notifications d’erreur d’approvisionnement. Cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+7. Dans la zone **E-mail de notification** , entrez l’adresse e-mail de la personne ou du groupe devant recevoir les notifications d’erreur d’approvisionnement. Cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/EmailNotification.png)
 
 8. Sélectionnez **Enregistrer**.
 
-9. Dans la section **Mappages**, sélectionnez **Synchronize Azure Active Directory Users to Cornerstone OnDemand** (Synchroniser des utilisateurs Azure Active Directory avec Cornerstone OnDemand).
+9. Dans la section **Mappages** , sélectionnez **Synchronize Azure Active Directory Users to Cornerstone OnDemand** (Synchroniser des utilisateurs Azure Active Directory avec Cornerstone OnDemand).
 
     ![Synchronisation Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/UserMapping.png)
 
@@ -129,7 +124,7 @@ Pour configurer le provisionnement automatique d’utilisateurs pour Cornerstone
 
     ![État du provisionnement Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/ProvisioningStatus.png)
 
-13. Définissez les utilisateurs ou groupes que vous voulez provisionner sur Cornerstone OnDemand. Dans la section **Paramètres**, sélectionnez les valeurs souhaitées sous **Étendue**.
+13. Définissez les utilisateurs ou groupes que vous voulez provisionner sur Cornerstone OnDemand. Dans la section **Paramètres** , sélectionnez les valeurs souhaitées sous **Étendue**.
 
     ![Étendue Cornerstone OnDemand](./media/cornerstone-ondemand-provisioning-tutorial/SyncScope.png)
 

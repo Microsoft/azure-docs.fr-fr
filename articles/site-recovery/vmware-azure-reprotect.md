@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 12/17/2019
 ms.author: mayg
-ms.openlocfilehash: 976888f57269cc9fe6107a38e30d78c73eb5c124
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a11e3d0cb41383b44b76975ecbd1c2ae2825015
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228913"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89441491"
 ---
 # <a name="reprotect-from-azure-to-on-premises"></a>Reprotection d’Azure vers votre site local
 
@@ -33,7 +33,7 @@ Après un [basculement](site-recovery-failover.md) de machines virtuelles VMware
     - Si vous utilisez les éditions gratuites d’ESXi 5.5 ou de vSphere Hypervisor 6. Effectuez une mise à niveau vers une autre version.
     - Si vous avez un serveur physique Windows Server 2008 R2 SP1.
     - Les machines virtuelles VMware ne peuvent pas effectuer de restauration automatique vers Hyper-V.
-    - Machines virtuelles qui ont [été migrées](migrate-overview.md#what-do-we-mean-by-migration).
+    - Machines virtuelles qui ont été migrées.
     - Une machine virtuelle qui a été déplacée vers un autre groupe de ressources.
     - Une machine virtuelle Azure de réplication qui a été supprimée.
     - Une machine virtuelle Azure de réplication qui n’est pas protégée (réplication sur le site local).
@@ -46,6 +46,9 @@ Activez la réplication. Vous pouvez reprotéger des machines virtuelles spécif
 
 - Si vous reprotégez un plan de récupération, vous devez fournir les valeurs pour chaque machine protégée.
 - Si les machines virtuelles appartiennent à un groupe de réplication pour assurer la cohérence de plusieurs machines virtuelles, elles peuvent uniquement être reprotégées à l’aide d’un plan de récupération. Les machines virtuelles d’un groupe de réplication doivent utiliser le même serveur cible maître
+
+>[!NOTE]
+>La quantité de données envoyées à partir d’Azure à la source ancienne lors de la reprotection peut être comprise entre 0 et la somme des tailles de disque de toutes les machines protégées. Elle ne peut pas être calculée.
 
 ### <a name="before-you-start"></a>Avant de commencer
 

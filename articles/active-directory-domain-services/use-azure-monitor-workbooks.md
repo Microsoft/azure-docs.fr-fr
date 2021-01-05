@@ -1,22 +1,22 @@
 ---
 title: Utiliser les classeurs Azure Monitor avec Azure AD Domain Services | Microsoft Docs
 description: Découvrez comment utiliser Azure Monitor classeurs pour examiner les audits de sécurité et comprendre les problèmes d’un domaine managé Azure Active Directory Domain Services.
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/18/2020
-ms.author: iainfou
-ms.openlocfilehash: bdfc7d37d99dc5511f47e33d1848c3f142a9693e
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.date: 07/09/2020
+ms.author: justinha
+ms.openlocfilehash: 3067388265fb69b916fe0e179cb896401b7c2dc4
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80654473"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96618159"
 ---
-# <a name="review-security-audit-events-in-azure-ad-domain-services-using-azure-monitor-workbooks"></a>Examiner les événements d’audit de sécurité dans Azure AD Domain Services à l’aide des classeurs Azure Monitor
+# <a name="review-security-audit-events-in-azure-active-directory-domain-services-using-azure-monitor-workbooks"></a>Examiner les événements d’audit de sécurité dans Azure Active Directory Domain Services à l’aide d’Azure Monitor Workbooks
 
 Pour mieux comprendre l’état de votre domaine managé Azure Active Directory Domain Services (Azure AD DS), vous pouvez activer des événements d’audit de sécurité. Il est alors possible d’examiner ces événements d’audit de sécurité à l’aide des classeurs Azure Monitor qui combinent du texte, des requêtes analytiques et des paramètres dans des rapports interactifs enrichis. Azure AD DS comprend des modèles de classeurs pour avoir une vue d’ensemble de la sécurité et l’activité des comptes et vous permettre ainsi d’explorer les événements d’audit et de gérer votre environnement.
 
@@ -31,9 +31,9 @@ Pour faire ce qui est décrit dans cet article, vous avez besoin des ressources 
 * Un locataire Azure Active Directory associé à votre abonnement, synchronisé avec un annuaire local ou un annuaire cloud uniquement.
     * Si nécessaire, [créez un locataire Azure Active Directory][create-azure-ad-tenant] ou [associez un abonnement Azure à votre compte][associate-azure-ad-tenant].
 * Un domaine managé Azure Active Directory Domain Services activé et configuré dans votre locataire Azure AD.
-    * Si nécessaire, suivez le tutoriel pour [créer et configurer une instance Azure Active Directory Domain Services][create-azure-ad-ds-instance].
-* Événements d’audit de sécurité activés pour votre domaine managé Azure Active Directory Domain Services qui diffusent en continu des données vers un espace de travail Log Analytics.
-    * Si nécessaire, [activez les audits de sécurité pour Azure Active Directory Domain Services][enable-security-audits].
+    * Si nécessaire, suivez le tutoriel pour [créer et configurer un domaine managé Azure Active Directory Domain Services][create-azure-ad-ds-instance].
+* Événements d’audit de sécurité activés pour votre domaine managé qui diffusent en continu des données vers un espace de travail Log Analytics.
+    * Si nécessaire, [activer les audits de sécurité pour Azure AD DS][enable-security-audits].
 
 ## <a name="azure-monitor-workbooks-overview"></a>Vue d’ensemble des classeurs Azure Monitor
 
@@ -58,10 +58,12 @@ Pour accéder au modèle de classeur pour le rapport de vue d’ensemble de la s
 1. Sélectionnez votre domaine managé, par exemple *aaddscontoso.com*.
 1. Dans le menu de gauche, choisissez **Supervision > Classeurs**
 
-    ![Sélectionnez l’option de menu Classeurs dans le Portail Microsoft Azure.](./media/use-azure-monitor-workbooks/select-workbooks-in-azure-portal.png)
+    ![Capture d’écran qui indique où sélectionner le rapport de vue d’ensemble de la sécurité et le rapport d’activité de compte.](./media/use-azure-monitor-workbooks/select-workbooks-in-azure-portal.png)
 
 1. Choisissez le **Rapport Vue d’ensemble de la sécurité**.
-1. Dans les menus déroulants en haut du classeur, sélectionnez votre abonnement Azure, puis l’espace de travail Azure Monitor. Choisissez une **Période**, par exemple *Les 7 derniers jours*.
+1. Dans les menus déroulants en haut du classeur, sélectionnez votre abonnement Azure, puis un espace de travail Azure Monitor.
+
+    Choisissez un **intervalle de temps**, par exemple *7 derniers jours*, comme indiqué dans la capture d’écran suivante :
 
     ![Sélectionnez l’option de menu Classeurs dans le Portail Microsoft Azure.](./media/use-azure-monitor-workbooks/select-query-filters.png)
 
@@ -73,7 +75,7 @@ Pour accéder au modèle de classeur pour le rapport de vue d’ensemble de la s
 
 1. La partie inférieure du rapport Vue d’ensemble de la sécurité figure sous le graphique décompose ensuite le type d’activité sélectionné. Sur le côté droit, vous pouvez filtrer par nom d’utilisateur impliqué, comme indiqué dans l’exemple de rapport suivant :
 
-    [![](./media/use-azure-monitor-workbooks/account-lockout-details-cropped.png "Details of account lockouts in Azure Monitor Workbooks")](./media/use-azure-monitor-workbooks/account-lockout-details.png#lightbox)
+    [![Détails des verrouillages de compte dans les classeurs Azure Monitor.](./media/use-azure-monitor-workbooks/account-lockout-details-cropped.png)](./media/use-azure-monitor-workbooks/account-lockout-details.png#lightbox)
 
 ## <a name="use-the-account-activity-report-workbook"></a>Utiliser le classeur du rapport d’activité de compte
 
@@ -85,9 +87,13 @@ Pour accéder au modèle de classeur pour le rapport d’activité du compte, pr
 1. Sélectionnez votre domaine managé, par exemple *aaddscontoso.com*.
 1. Dans le menu de gauche, choisissez **Supervision > Classeurs**
 1. Choisissez le **rapport d’activité de compte**.
-1. Dans les menus déroulants en haut du classeur, sélectionnez votre abonnement Azure, puis l’espace de travail Azure Monitor. Choisissez une **Période**, par exemple *Les 30 derniers jours*, puis la manière dont vous souhaitez que l’affichage **Mosaïque** représente les données. Vous pouvez filtrer par **Nom d’utilisateur du compte**, par exemple *felix*, comme indiqué dans l’exemple de rapport suivant :
+1. Dans les menus déroulants en haut du classeur, sélectionnez votre abonnement Azure, puis un espace de travail Azure Monitor.
 
-    [![](./media/use-azure-monitor-workbooks/account-activity-report-cropped.png "Account activity report in Azure Monitor Workbooks")](./media/use-azure-monitor-workbooks/account-activity-report.png#lightbox)
+    Choisissez une **Période**, par exemple *Les 30 derniers jours*, puis la manière dont vous souhaitez que l’affichage **Mosaïque** représente les données.
+
+    Vous pouvez filtrer par **Nom d’utilisateur du compte**, par exemple *felix*, comme indiqué dans l’exemple de rapport suivant :
+
+    [![Rapport d’activité de compte dans les classeurs Azure Monitor.](./media/use-azure-monitor-workbooks/account-activity-report-cropped.png)](./media/use-azure-monitor-workbooks/account-activity-report.png#lightbox)
 
     La zone située sous le graphique affiche les événements de connexion individuels, ainsi que des informations telles que le résultat de l’activité et la station de travail source. Ces informations peuvent aider à identifier les sources répétées d’événements de connexion qui peuvent provoquer le verrouillage de compte ou indiquer une attaque potentielle.
 
@@ -116,5 +122,5 @@ Pour les problèmes liés aux utilisateurs, découvrez résoudre les [problèmes
 [password-policy]: password-policy.md
 [troubleshoot-sign-in]: troubleshoot-sign-in.md
 [troubleshoot-account-lockout]: troubleshoot-account-lockout.md
-[azure-monitor-queries]: ../azure-monitor/log-query/query-language.md
-[kusto-queries]: https://docs.microsoft.com/azure/kusto/query/tutorial?pivots=azuredataexplorer
+[azure-monitor-queries]: /azure/data-explorer/kusto/query/
+[kusto-queries]: /azure/kusto/query/tutorial?pivots=azuredataexplorer

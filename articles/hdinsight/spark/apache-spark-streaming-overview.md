@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/23/2020
-ms.openlocfilehash: 0ccb87017f962650f099d506e1d200ab408316d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a88d4893daa12ff2c35ee7cf8f4e5b7569f854f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195143"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86086192"
 ---
 # <a name="overview-of-apache-spark-streaming"></a>Vue d’ensemble d’Apache Spark Streaming
 

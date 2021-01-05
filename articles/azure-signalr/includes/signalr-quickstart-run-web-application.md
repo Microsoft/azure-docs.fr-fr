@@ -1,25 +1,34 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 author: anthonychu
 ms.service: signalr
 ms.topic: include
 ms.date: 03/04/2019
 ms.author: antchu
 ms.custom: include file
-ms.openlocfilehash: 73d4d4e1a5f148dce6099b2d747ee1c290bcf7c1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 2af9c1dfd13d3aeafa7cf1ac76537117ecc15aff
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "67177434"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "84317684"
 ---
 ## <a name="run-the-web-application"></a>Exécuter l’application web
 
-1. Voici à votre disposition un exemple d’application web à page unique hébergée dans GitHub. Ouvrez votre navigateur et rendez-vous sur [https://azure-samples.github.io/signalr-service-quickstart-serverless-chat/demo/chat-v2/](https://azure-samples.github.io/signalr-service-quickstart-serverless-chat/demo/chat-v2/).
+1. Pour simplifier le test de vos clients, ouvrez votre navigateur sur notre exemple d’application web monopage [https://azure-samples.github.io/signalr-service-quickstart-serverless-chat/demo/chat-v2/](https://azure-samples.github.io/signalr-service-quickstart-serverless-chat/demo/chat-v2/). 
 
     > [!NOTE]
-    > La source du fichier HTML est située dans [/docs/demo/chat-v2/index.html](https://github.com/Azure-Samples/signalr-service-quickstart-serverless-chat/blob/master/docs/demo/chat-v2/index.html).
+    > La source du fichier HTML est située dans [/docs/demo/chat-v2/index.html](https://github.com/Azure-Samples/signalr-service-quickstart-serverless-chat/blob/master/docs/demo/chat-v2/index.html). Par ailleurs, si vous voulez héberger le HTML vous-même, démarrez un serveur HTTP local de type [http-server](https://www.npmjs.com/package/http-server) dans le répertoire */docs/demo/chat-v2*. Vérifiez que l’origine est ajoutée au paramètre `CORS` dans *local.settings.json* comme dans l’exemple.
+    > 
+    > ```javascript
+    > "Host": {
+    >  "LocalHttpPort": 7071,
+    >  "CORS": "http://localhost:8080,https://azure-samples.github.io",
+    >  "CORSCredentials": true
+    > }
+    >
+    > ```
 
 1. Lorsque vous êtes invité à renseigner l’URL de base de l’application de fonction, indiquez `http://localhost:7071`.
 
@@ -32,6 +41,3 @@ ms.locfileid: "67177434"
     ![Exécution de l'application](../media/signalr-quickstart-azure-functions-csharp/signalr-quickstart-run-application.png)
 
 1. Ouvrez une autre instance de l’application web dans une fenêtre de navigation différente. Vous verrez que tous les messages envoyés s’affichent dans toutes les instances de l’application.
-
-> [!IMPORTANT]
-> Étant donné que la page HTML est prise en charge à l’aide de HTTPS, mais que le runtime Azure Functions local utilise HTTP par défaut, votre navigateur (tel que Firefox) peut appliquer une stratégie de contenu mixte qui bloque les requêtes à partir de la page web vers vos fonctions. Pour résoudre ce problème, utilisez un navigateur qui ne connaît pas cette restriction, ou démarrez un serveur HTTP local, tel que [http-server](https://www.npmjs.com/package/http-server) dans le répertoire */docs/demo/chat-v2*. Vérifiez que l’origine est ajoutée au paramètre `CORS` dans *local.settings.json*.

@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : COS'
 description: Découvrez comment la fonction système SQL Cosine (COS) dans Azure Cosmos DB retourne le cosinus trigonométrique de l’angle spécifié, en radians, dans l’expression spécifiée
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 40d277ff38691e2cb74bd4d5d78a666c304acfcd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f11307d4f24bab06973e33b4640e26b1c445336
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78304019"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339023"
 ---
 # <a name="cos-azure-cosmos-db"></a>COS (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le cosinus trigonométrique de l’angle spécifié, en radians, dans l’expression spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe

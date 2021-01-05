@@ -10,21 +10,21 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: travisw
-ms.openlocfilehash: 8a1dd07fd567f41c2b406aabccd0421b5a6983af
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: bc27c73fbf9e827ce9a95c8aaaddc82ffb0aec53
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80671714"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187573"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, assurez-vous de :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](~/articles/cognitive-services/speech-service/get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](~/articles/cognitive-services/speech-service/quickstarts/setup-platform.md?tabs=android&pivots=programming-language-java)
-> * Créer un bot connecté au [canal Direct Line Speech](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-directlinespeech)
+> * Créer un bot connecté au [canal Direct Line Speech](/azure/bot-service/bot-service-channel-connect-directlinespeech)
 > * Veiller à avoir accès à un microphone pour la capture audio
 
   > [!NOTE]
@@ -95,7 +95,7 @@ Ce fichier XML définit une interface utilisateur simple pour interagir avec vot
 
 Le texte et la représentation graphique de votre interface utilisateur doivent maintenant ressembler à ce qui suit :
 
-![](~/articles/cognitive-services/speech-service/media/sdk/qs-java-android-assistant-designer-ui.png)
+![Capture d’écran de l’aspect que doit avoir votre communication avec l’interface utilisateur de votre bot.](~/articles/cognitive-services/speech-service/media/sdk/qs-java-android-assistant-designer-ui.png)
 
 ## <a name="add-sample-code"></a>Ajouter un exemple de code
 
@@ -272,4 +272,3 @@ Une fois que l’application et son activité ont été lancées, cliquez sur le
 ## <a name="next-steps"></a>Étapes suivantes
 
 [!INCLUDE [footer](./footer.md)]
-

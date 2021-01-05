@@ -10,14 +10,19 @@ ms.subservice: bing-entity-search
 ms.topic: conceptual
 ms.date: 06/27/2019
 ms.author: aahi
-ms.openlocfilehash: f68429a75ddb141c9e42babde3faa9f93fe949cc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ad6d89fec9f2c94129e19c09ee3e1e76d5bb6e44
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74072680"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353270"
 ---
 # <a name="sending-search-requests-to-the-bing-entity-search-api"></a>Envoi de requêtes de recherche à l’API Recherche d’entités Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’entités Bing envoie une requête de recherche à Bing et obtient des résultats comprenant des entités et des lieux. Les résultats de lieux incluent les restaurants, les hôtels et d’autres commerces locaux. Pour les lieux, la requête peut spécifier le nom du commerce local ou elle peut demander une liste (par exemple, les restaurants dans ma zone). Les résultats d’entités incluent des personnes, des lieux ou d’autres éléments. Dans ce contexte, les lieux correspondent à des sites touristiques, des États, des pays/régions, etc.
 
@@ -35,18 +40,18 @@ Nous vous recommandons de générer toutes les requêtes à partir d’un serveu
 
 ## <a name="specifying-query-parameters-and-headers"></a>Indiquer les paramètres de requête et les en-têtes
 
-La requête doit indiquer le paramètre [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête doit également indiquer le paramètre [mkt](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#mkt) qui vous permet de choisir le marché dont proviennent les résultats. Pour obtenir la liste complète des paramètres de requête facultatifs, consultez la page [Paramètres de requête](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query-parameters). L’URL encode tous les paramètres de requête.  
+La requête doit indiquer le paramètre [q](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête doit également indiquer le paramètre [mkt](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#mkt) qui vous permet de choisir le marché dont proviennent les résultats. Pour obtenir la liste complète des paramètres de requête facultatifs, consultez la page [Paramètres de requête](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#query-parameters). L’URL encode tous les paramètres de requête.  
   
-La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :  
+La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :  
   
--   [User-Agent](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#useragent)  
--   [X-MSEdge-ClientID](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#clientid)  
--   [X-MSEdge-ClientIP](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#clientip)  
--   [X-Search-Location](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#location)  
+-   [User-Agent](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#useragent)  
+-   [X-MSEdge-ClientID](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#clientid)  
+-   [X-MSEdge-ClientIP](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#clientip)  
+-   [X-Search-Location](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#location)  
 
 Les en-têtes d’emplacement et d’adresse IP client sont importants, car ils permettent de renvoyer du contenu géolocalisé.  
 
-Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#headers).
+Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#headers).
 
 ## <a name="the-request"></a>Requête.
 
@@ -66,7 +71,7 @@ Si vous appelez l’une des API Bing pour la première fois, n’incluez pas l�
 
 ## <a name="the-response"></a>La réponse
 
-Voici la réponse à la requête précédente. L’exemple montre également les en-têtes de réponse propres à Bing. Pour plus d’informations sur l’objet de réponse, consultez la page [SearchResponse](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#searchresponse).
+Voici la réponse à la requête précédente. L’exemple montre également les en-têtes de réponse propres à Bing. Pour plus d’informations sur l’objet de réponse, consultez la page [SearchResponse](/rest/api/cognitiveservices-bingsearch/bing-entities-api-v7-reference#searchresponse).
 
 [!INCLUDE [cognitive-services-bing-url-note](../../../../includes/cognitive-services-bing-url-note.md)]
 
@@ -135,4 +140,4 @@ BingAPIs-Market: en-US
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Recherche d’entités avec l’API Recherche d’entités Bing](search-for-entities.md)
-* [Conditions d’utilisation et d’affichage des API Bing](../use-display-requirements.md)
+* [Conditions d’utilisation et d’affichage des API Bing](../../bing-web-search/use-display-requirements.md)

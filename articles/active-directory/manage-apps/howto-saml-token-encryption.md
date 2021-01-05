@@ -3,9 +3,8 @@ title: Chiffrement des jetons SAML dans Azure Active Directory
 description: Découvrez comment configurer le chiffrement des jetons SAML Azure Active Directory.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
-editor: ''
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -13,15 +12,15 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/13/2020
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: paulgarn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0082d841faf22745e609d38444f4a97553b3c867
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 820e2cb0d422597f0e649e6934fd8bb11c1521db
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79365864"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997475"
 ---
 # <a name="how-to-configure-azure-ad-saml-token-encryption"></a>Procédure : Configurer le chiffrement de jeton SAML Azure AD
 
@@ -125,7 +124,7 @@ Quand vous configurez une valeur keyCredential à l’aide de Graph, de PowerShe
 
 1. Utilisez le dernier module Azure AD PowerShell pour vous connecter à votre locataire.
 
-1. Définissez les paramètres de chiffrement de jeton à l’aide de la commande **[Set-AzureApplication](https://docs.microsoft.com/powershell/module/azuread/set-azureadapplication?view=azureadps-2.0-preview)** .
+1. Définissez les paramètres de chiffrement de jeton à l’aide de la commande **[Set-AzureApplication](/powershell/module/azuread/set-azureadapplication?view=azureadps-2.0-preview)** .
 
     ```
     Set-AzureADApplication -ObjectId <ApplicationObjectId> -KeyCredentials "<KeyCredentialsObject>"  -TokenEncryptionKeyId <keyID>

@@ -1,27 +1,27 @@
 ---
 title: Niveaux tarifaires - Azure Database for MariaDB
 description: Découvrez les différents niveaux tarifaires d’Azure Database for MariaDB, notamment les générations de calcul, les types de stockage, la taille de stockage, les vCores, la mémoire et les périodes de conservation des sauvegardes.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: f00d93a639bacd1d0862fed7b6b003302bb2920e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/14/2020
+ms.openlocfilehash: b5b5a506b2f932d20a617634ace7ebf02093fbfa
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82097657"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536283"
 ---
 # <a name="azure-database-for-mariadb-pricing-tiers"></a>Niveaux tarifaires pour Azure Database for MariaDB
 
 Vous pouvez créer un serveur Azure Database for MariaDB dans un des trois différents niveaux tarifaires : De base, Usage général et À mémoire optimisée. Les niveaux tarifaires diffèrent par la quantité de calcul dans vCores qui peut être configurée, la mémoire par vCore et la technologie de stockage utilisée pour stocker les données. Toutes les ressources sont provisionnées au niveau du serveur MariaDB. Un serveur peut avoir une ou plusieurs bases de données.
 
-|    | **De base** | **Usage général** | **Mémoire optimisée** |
+| Ressource | **De base** | **Usage général** | **Mémoire optimisée** |
 |:---|:----------|:--------------------|:---------------------|
 | Génération de calcul | Gen 5 |Gen 5 | Gen 5 |
 | vCores | 1, 2 | 2, 4, 8, 16, 32, 64 |2, 4, 8, 16, 32 |
-| Mémoire par vCore | 2 Go | 5 Go | 10 Go |
+| Mémoire par vCore | 2 Go | 5 Go | 10 Go |
 | Taille de stockage | 5 Go à 1 To | 5 Go à 4 To | 5 Go à 4 To |
 | Période de rétention de sauvegarde de bases de données | 7 à 35 jours | 7 à 35 jours | 7 à 35 jours |
 
@@ -43,7 +43,7 @@ Les ressources de calcul sont fournies en tant que vCores, représentant le proc
 
 Le stockage que vous provisionnez est la quantité de stockage disponible pour votre serveur Azure Database for MariaDB. Le stockage est utilisé pour les fichiers de base de données, les fichiers temporaires, les journaux d’activité des transactions et les journaux d’activité des serveurs MariaDB. La quantité totale de stockage que vous approvisionnez définit également la capacité d’E/S disponible sur votre serveur.
 
-|    | **De base** | **Usage général** | **Mémoire optimisée** |
+| Attributs de stockage   | De base | Usage général | Mémoire optimisée |
 |:---|:----------|:--------------------|:---------------------|
 | Type de stockage | Stockage de base | Stockage à usage général | Stockage à usage général |
 | Taille de stockage | 5 Go à 1 To | 5 Go à 4 To | 5 Go à 4 To |
@@ -58,6 +58,23 @@ Vous pouvez ajouter de la capacité de stockage supplémentaire pendant et aprè
 Le niveau De base n’offre pas de garantie d’E/S par seconde. Dans les niveaux tarifaires Usage général et À mémoire optimisée, les IOPS augmentent avec la taille de stockage approvisionnée selon un ratio de 3:1.
 
 Vous pouvez surveiller votre consommation d’E/S dans le Portail Azure ou à l’aide des commandes Azure CLI. Les métriques pertinentes à surveiller sont [la limite de stockage, le pourcentage de stockage, le stockage utilisé et le pourcentage d’E/S](concepts-monitoring.md).
+
+### <a name="large-storage-preview"></a>Stockage volumineux (préversion)
+
+Nous avons augmenté les limites de stockage dans nos niveaux de service Usage général et Mémoire optimisée. Les serveurs nouvellement créés qui ont opté pour la préversion peuvent configurer jusqu’à 16 To de stockage. Les IOPS évoluent à un taux de 3:1 jusqu’à 20 000. Comme pour le stockage à disponibilité générale actuel, vous pouvez ajouter de la capacité de stockage supplémentaire après la création du serveur et autoriser le système à faire évoluer le stockage automatiquement en fonction de la consommation de votre charge de travail.
+
+| Attributs de stockage | Usage général | Mémoire optimisée |
+|:-------------|:--------------------|:---------------------|
+| Type de stockage | Stockage Premium Azure | Stockage Premium Azure |
+| Taille de stockage | 32 Go à 16 To| 32 à 16 To |
+| Taille d’incrément de stockage | 1 Go | 1 Go |
+| E/S par seconde | 3 E/S par seconde/Go<br/>Min 100 E/S par seconde<br/>Max 20 000 IOPS| 3 E/S par seconde/Go<br/>Min 100 E/S par seconde<br/>Max 20 000 IOPS |
+
+> [!IMPORTANT]
+> Le stockage volumineux est actuellement en préversion publique dans les régions suivantes : USA Est, USA Est 2, Brésil Sud, USA Centre, USA Ouest, USA Centre Nord, USA Centre Sud, Europe Nord, Europe Ouest, Royaume-Uni Sud, Royaume-Uni Ouest, Asie Sud-Est, Asie Est, Japon Est, Japon Ouest, Corée Centre, Corée Sud, Australie Est, Australie Sud-Est, USA Ouest 2, USA Centre-Ouest, Canada Est et Canada Centre.
+>
+> Toutes les autres régions prennent en charge une capacité de stockage maximale de 4 TO et jusqu’à 6 000 IOPS.
+>
 
 ### <a name="reaching-the-storage-limit"></a>Atteindre la limite de stockage
 
@@ -77,15 +94,13 @@ Par exemple, si vous avez approvisionné 1000 Go de stockage et que l’utilisa
 
 N’oubliez pas que le stockage peut seulement monter en puissance.
 
-## <a name="backup"></a>Backup
+## <a name="backup"></a>Sauvegarde
 
-Le service effectue automatiquement des sauvegardes de votre serveur. Vous pouvez sélectionner une période de conservation comprise entre 7 et 35 jours. Les serveurs à usage général et à mémoire optimisée peuvent disposer d’un stockage géoredondant pour les sauvegardes. En savoir plus sur les sauvegardes dans l’[article sur les concepts](concepts-backup.md).
+Azure Database for MariaDB fournit jusqu’à 100 % du stockage de votre serveur provisionné en stockage de sauvegarde sans coût supplémentaire. Le stockage de sauvegarde que vous utilisez au-delà de cette quantité est facturé en Go par mois. Par exemple, si vous configurez un serveur avec 250 Go de stockage, vous disposez de 250 Go de stockage supplémentaire pour les sauvegardes de serveur sans frais. Le stockage pour les sauvegardes dépassant 250 Go est facturé conformément au [modèle de tarification](https://azure.microsoft.com/pricing/details/mariadb/). Pour comprendre les facteurs influençant l’utilisation du stockage de sauvegarde, la surveillance et le contrôle du coût de stockage de sauvegarde, vous pouvez consulter la [documentation relative à la sauvegarde](concepts-backup.md).
 
 ## <a name="scale-resources"></a>Mettre les ressources à l’échelle
 
 Après avoir créé votre serveur, vous pouvez modifier de manière indépendante les vCores, le niveau tarifaire (excepté vers et à partir du niveau De base), la quantité de stockage et la période de rétention des sauvegardes. Vous ne pouvez pas modifier le type de stockage de sauvegarde après la création d’un serveur. Le nombre de vCores peut être augmenté ou diminué. La période de rétention de sauvegarde peut être augmentée ou diminuée et va de 7 à 35 jours. La taille de stockage ne peut être qu’augmentée. La mise à l’échelle des ressources peut être effectuée par le biais du portail ou d’Azure CLI. 
-
-<!--For an example of scaling by using Azure CLI, see [Monitor and scale an Azure Database for MariaDB server by using Azure CLI](scripts/sample-scale-server.md).-->
 
 Quand vous changez le nombre de vCores ou le niveau tarifaire, une copie du serveur d’origine est créée avec la nouvelle allocation du calcul. Une fois que le nouveau serveur est opérationnel, les connexions sont basculées vers le nouveau serveur. Pendant le moment durant lequel le système bascule vers le nouveau serveur, aucune nouvelle connexion ne peut être établie, et toutes les transactions non validées sont restaurées. Cette fenêtre varie, mais dans la plupart des cas elle dure moins d’une minute.
 
@@ -98,6 +113,3 @@ Pour obtenir les dernières informations sur la tarification, veuillez consulter
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur les [Limitations de service](concepts-limits.md).
 - Découvrez comment [créer un serveur MariaDB dans le portail Azure](quickstart-create-mariadb-server-database-using-azure-portal.md).
-
-<!--
-- Learn how to [monitor and scale an Azure Database for MariaDB server by using Azure CLI](scripts/sample-scale-server.md).-->

@@ -3,17 +3,20 @@ title: Écrire des procédures stockées et des déclencheurs à l’aide de l�
 description: Découvrez comment écrire des procédures stockées et des déclencheurs à l’aide de l’API de requête JavaScript dans Azure Cosmos DB
 author: timsander1
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 05/07/2020
 ms.author: tisande
-ms.openlocfilehash: bc92a1276232506d291e367f74a9dcf8d58d7e07
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.custom: devx-track-js
+ms.openlocfilehash: 449af63ef3409b8c8173edef7a5d77074cca02b9
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82982324"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93335838"
 ---
 # <a name="how-to-write-stored-procedures-and-triggers-in-azure-cosmos-db-by-using-the-javascript-query-api"></a>Comment écrire des procédures stockées et des déclencheurs dans Azure Cosmos DB à l’aide de l’API de requête JavaScript
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Azure Cosmos DB vous permet d’envoyer des requêtes optimisées à l’aide d’une interface JavaScript fluide, sans avoir besoin de connaissances particulières en matière de langage SQL. Vous pouvez utiliser cette interface pour écrire des procédures stockées ou des déclencheurs. Pour en savoir plus sur la prise en charge de l’API de requête JavaScript dans Azure Cosmos DB, consultez l’article [Working with JavaScript language-integrated query API with Azure Cosmos DB](javascript-query-api.md) (Utilisation de l’API de requête avec langage intégré JavaScript avec Azure Cosmos DB).
 

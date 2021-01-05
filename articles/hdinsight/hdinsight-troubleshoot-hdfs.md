@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 04/27/2020
 ms.custom: seodec18
-ms.openlocfilehash: 6de9e31c3e79f6d704ef8b4749d41329dcc0bddb
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: add8bc14c1810d4b0d5894a840f2b815230f31cc
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82190676"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289001"
 ---
 # <a name="troubleshoot-apache-hadoop-hdfs-by-using-azure-hdinsight"></a>Résoudre les problèmes d’Apache Hadoop HDFS avec Azure HDInsight
 
@@ -115,7 +115,7 @@ hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file
 Vous pouvez également augmenter la valeur de `fs.azure.write.request.size` globalement à l’aide d’Apache Ambari. Vous pouvez utiliser les étapes suivantes pour modifier la valeur dans l’interface utilisateur Web d’Ambari :
 
 1. Dans votre navigateur, accédez à l’interface utilisateur Web d’Ambari pour votre cluster. L’URL est `https://CLUSTERNAME.azurehdinsight.net`, où `CLUSTERNAME` est le nom de votre cluster. Lorsque vous y êtes invité, entrez le nom et le mot de passe administrateur correspondant au cluster HDInsight.
-2. Sur le côté gauche de l’écran, sélectionnez **HDFS**, puis l’onglet **Configurations**.
+2. Sur le côté gauche de l’écran, sélectionnez **HDFS** , puis l’onglet **Configurations**.
 3. Dans le champ **Filtrer...** , entrez `fs.azure.write.request.size`.
 4. Modifiez la valeur 262144 (256 Ko) sur la nouvelle valeur. Par exemple, 4194304 (4 Mo).
 
@@ -149,10 +149,4 @@ hdfs dfs -rm hdfs://mycluster/tmp/testfile
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

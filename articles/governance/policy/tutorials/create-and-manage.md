@@ -1,14 +1,14 @@
 ---
 title: 'Tutoriel : Générer des stratégies pour appliquer la conformité'
 description: Dans ce tutoriel, vous utilisez des stratégies pour appliquer des normes, maîtriser les coûts, garantir la sécurité et imposer des principes de conception à l’échelle de l’entreprise.
-ms.date: 03/24/2020
+ms.date: 10/05/2020
 ms.topic: tutorial
-ms.openlocfilehash: dcebbbfcc2f86ace7ea4400a2fdb6f1392f4efe6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: bf3da82abcdcada1fc38df29efc988a1805c3020
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82190824"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005433"
 ---
 # <a name="tutorial-create-and-manage-policies-to-enforce-compliance"></a>Tutoriel : Créer et gérer des stratégies pour appliquer la conformité
 
@@ -32,15 +32,15 @@ La première étape de l’application de la conformité avec une stratégie Azu
 
 1. Accédez au portail Azure pour attribuer des stratégies. Recherchez et sélectionnez **Stratégie**.
 
-   :::image type="content" source="../media/create-and-manage/search-policy.png" alt-text="Rechercher Stratégie dans la barre de recherche" border="false":::
+   :::image type="content" source="../media/create-and-manage/search-policy.png" alt-text="Capture d’écran de la recherche de stratégie dans la barre de recherche." border="false":::
 
 1. Sélectionnez **Affectations** du côté gauche de la page Azure Policy. Une affectation est une stratégie qui a été affectée pour être appliquée dans une étendue spécifique.
 
-   :::image type="content" source="../media/create-and-manage/select-assignments.png" alt-text="Sélectionner des affectations à partir de la page de vue d’ensemble de la stratégie" border="false":::
+   :::image type="content" source="../media/create-and-manage/select-assignments.png" alt-text="Capture d’écran de la sélection du nœud Affectations dans la page Vue d’ensemble de la stratégie." border="false":::
 
-1. Sélectionnez **Assigner une stratégie** en haut de la page**Stratégie - Affectations**.
+1. Sélectionnez **Assigner une stratégie** en haut de la page **Stratégie - Affectations**.
 
-   :::image type="content" source="../media/create-and-manage/select-assign-policy.png" alt-text="Affecter une définition de stratégie à partir de la page Affectations" border="false":::
+   :::image type="content" source="../media/create-and-manage/select-assign-policy.png" alt-text="Capture d’écran de la sélection du bouton « Assigner une stratégie » dans la page Affectations." border="false":::
 
 1. Dans la page **Assigner une stratégie**, sous l’onglet **De base**, sélectionnez l’**étendue** en sélectionnant les points de suspension, puis en sélectionnant un groupe d’administration ou un abonnement. Sélectionnez éventuellement un groupe de ressources. Une étendue détermine les ressources ou le regroupement de ressources sur lequel la stratégie est appliquée.
    Cliquez ensuite sur **Sélectionner** au bas de la page **Étendue**.
@@ -54,7 +54,7 @@ La première étape de l’application de la conformité avec une stratégie Azu
 1. Sélectionnez **Hériter d’une étiquette du groupe de ressources si elle est manquante**. Si vous ne trouvez pas l’option immédiatement, tapez **hériter d’une étiquette** dans la zone de recherche, puis appuyez sur Entrée ou cliquez en dehors de la zone de recherche.
    Cliquez sur **Sélectionner** au bas de la page **Définitions disponibles** une fois que vous avez trouvé et sélectionné la définition de stratégie.
 
-   :::image type="content" source="../media/create-and-manage/select-available-definition.png" alt-text="Utiliser le filtre de recherche pour localiser une stratégie":::
+   :::image type="content" source="../media/create-and-manage/select-available-definition.png" alt-text="Capture d’écran du filtre de recherche lors de la sélection d’une définition de stratégie.":::
 
 1. Le **Nom de l’attribution** est automatiquement rempli avec le nom de stratégie que vous avez sélectionné, mais vous pouvez le modifier. Pour cet exemple, laissez _Hériter d’une étiquette du groupe de ressources si elle est manquante_. Vous pouvez également ajouter une **Description** (facultatif). La description fournit des détails sur cette affectation de stratégie.
 
@@ -78,11 +78,11 @@ La première étape de l’application de la conformité avec une stratégie Azu
 
 ## <a name="implement-a-new-custom-policy"></a>Implémenter une nouvelle stratégie personnalisée
 
-Maintenant que vous avez affecté une définition de stratégie intégrée, vous pouvez continuer avec Azure Policy. Créez une stratégie personnalisée pour réduire les coûts en veillant à ce que les machines virtuelles créées dans votre environnement ne puissent pas être dans la série G. De cette manière, à chaque fois qu’un utilisateur de votre organisation tente de créer une machine virtuelle dans la série G, la requête est refusée.
+Maintenant que vous avez affecté une définition de stratégie intégrée, vous pouvez continuer avec Azure Policy. Créez une stratégie personnalisée pour réduire les coûts en veillant à ce que les machines virtuelles créées dans votre environnement ne puissent pas être dans la série G. Ainsi, à chaque fois qu’un utilisateur de votre organisation tente de créer une machine virtuelle dans la série G, la requête est refusée.
 
 1. Sélectionnez **Définitions** sous **Création** dans la partie gauche de la page Azure Policy.
 
-   :::image type="content" source="../media/create-and-manage/definition-under-authoring.png" alt-text="Page Définition sous Création de groupe" border="false":::
+   :::image type="content" source="../media/create-and-manage/definition-under-authoring.png" alt-text="Capture d’écran de la page Définitions sous le groupe Création." border="false":::
 
 1. Sélectionnez **+ Définition de stratégie** en haut de la page. Ce bouton ouvre la page **Définition de stratégie**.
 
@@ -93,8 +93,8 @@ Maintenant que vous avez affecté une définition de stratégie intégrée, vous
      > [!NOTE]
      > Si vous envisagez d’appliquer cette définition de stratégie à plusieurs abonnements, l’emplacement doit correspondre à un groupe d’administration qui contient les abonnements auxquels vous affectez la stratégie. Il en va de même pour une définition d’initiative.
 
-   - Le nom de la définition de stratégie : _*_nécessite des références (SKU) de machines virtuelles inférieures à la série G_
-   - La description de l’objectif de la définition de stratégie : _cette définition de stratégie impose que toutes les machines virtuelles créées dans cette étendue possèdent des références SKU inférieures à la série G afin de réduire le coût._
+   - Le nom de la définition de stratégie : _nécessite des références (SKU) de machines virtuelles qui n’appartiennent pas à la série G_
+   - La description de l’objectif de la définition de stratégie : _cette définition de stratégie impose que toutes les machines virtuelles créées dans cette étendue aient des références SKU autres que la série G afin de réduire le coût._
    - Faites votre choix parmi les options existantes (par exemple _Calculer_), ou créez une catégorie pour cette définition de stratégie.
    - Copiez le code JSON suivant, puis mettez-le à jour selon vos besoins avec :
       - Les paramètres de la stratégie.
@@ -342,13 +342,13 @@ Avec une définition d’initiative, vous pouvez regrouper plusieurs définition
 
 1. Sélectionnez **Définitions** sous **Création** dans la partie gauche de la page Azure Policy.
 
-   :::image type="content" source="../media/create-and-manage/definition-under-authoring.png" alt-text="Sélectionner une définition dans la page Définitions" border="false":::
+   :::image type="content" source="../media/create-and-manage/definition-under-authoring.png" alt-text="Capture d’écran de la page Définitions sous le groupe Création.":::
 
-1. Sélectionnez **+ Définition d’initiative** en haut de la page pour ouvrir la page **Définition d’initiative**.
+1. Sélectionnez **+ Définition d’initiative** en haut de la page pour ouvrir l’Assistant **Définition d’initiative**.
 
-   :::image type="content" source="../media/create-and-manage/initiative-definition.png" alt-text="Passer en revue la page Définition d’initiative" border="false":::
+   :::image type="content" source="../media/create-and-manage/initiative-definition.png" alt-text="Capture d’écran de la page Définition d’initiative et des propriétés à définir.":::
 
-1. Utilisez le bouton de sélection **Emplacement de définition** pour sélectionner un groupe d'administration ou un abonnement afin de stocker la définition. Si la page précédente se limite à un seul groupe d’administration ou à un seul abonnement, **Emplacement de la définition** est automatiquement renseigné. Après sélection, l’option **Définitions disponibles** est renseignée.
+1. Utilisez le bouton de sélection **Emplacement de l’initiative** pour sélectionner un groupe d’administration ou un abonnement où stocker la définition. Si la page précédente se limite à un seul groupe d’administration ou à un seul abonnement, **Emplacement de l’initiative** est automatiquement renseigné.
 
 1. Entrez le **nom** et la **description** de l’initiative.
 
@@ -356,28 +356,53 @@ Avec une définition d’initiative, vous pouvez regrouper plusieurs définition
 
 1. Pour **Catégorie**, choisissez une des options existantes ou créez une catégorie.
 
-1. Parcourez la liste des **définitions disponibles** (partie droite de la page **Définition d’initiative**) et sélectionnez les définitions de stratégie à ajouter à cette initiative. Pour l’initiative **Garantir la sécurité**, ajoutez les définitions de stratégie prédéfinies suivantes en sélectionnant **+** en regard des informations correspondantes ou en sélectionnant une ligne de définition de stratégie, puis l’option **+ Ajouter** dans la page de détails :
+1. Définissez la **Version** de l’initiative, par exemple _1.0_.
+
+   > [!NOTE]
+   > La valeur de version est strictement des métadonnées et n’est pas utilisée par le service Azure Policy pour les mises à jour ou autres processus.
+
+1. Sélectionnez **Suivant** en bas de la page ou l’onglet **Stratégies** en haut de l’Assistant.
+
+1. Sélectionnez le bouton **Ajouter une ou plusieurs définitions de stratégie** et parcourez la liste. Sélectionnez chaque définition de stratégie que vous souhaitez ajouter à cette initiative. Pour l’initiative **Garantir la sécurité**, ajoutez les définitions de stratégie intégrées suivantes en cochant la case en regard de la définition de stratégie :
 
    - Emplacements autorisés
    - Superviser les agents Endpoint Protection manquants dans Azure Security Center
-   - Les règles de groupe de sécurité réseau pour les machines virtuelles accessibles sur Internet doivent être renforcées
+   - Les machines virtuelles non connectées à Internet doivent être protégées avec des groupes de sécurité réseau
    - La sauvegarde Azure doit être activée pour les machines virtuelles
    - Le chiffrement de disque doit être appliqué sur les machines virtuelles
+   - Ajouter ou remplacer une étiquette dans les ressources (ajouter cette définition de stratégie à deux reprises)
 
-   Une fois que la définition de stratégie est sélectionnée dans la liste, elle est ajoutée sous **Catégorie**.
+   Après avoir sélectionné chaque définition de stratégie dans la liste, sélectionnez **Ajouter** au bas de la liste.
+   Étant donné qu’elle est ajoutée deux fois, chaque définition de stratégie _Ajouter ou remplacer une étiquette dans les ressources_ reçoit un _ID de référence_ différent.
 
-   :::image type="content" source="../media/create-and-manage/initiative-definition-2.png" alt-text="Passer en revue les paramètres de la définition d’initiative" border="false":::
+   :::image type="content" source="../media/create-and-manage/initiative-definition-2.png" alt-text="Capture d’écran des définitions de stratégie sélectionnées avec leur ID de référence et leur groupe dans la page de définition d’initiative.":::
 
-1. Si une définition de stratégie ajoutée à l’initiative comporte des paramètres, ils apparaissent sous le nom de la stratégie dans la zone située sous la zone **Catégorie**. La _valeur_ peut être définie sur « Définir une valeur » (codée en dur pour toutes les affectations de cette initiative) ou « Utiliser le paramètre d'initiative » (définie au cours de chaque affectation d’initiative). Si « Définir une valeur » est sélectionné, la liste déroulante à droite de _Valeurs_ permet d’entrer ou de sélectionner les valeurs. Si l’option Utiliser le paramètre d’initiative est sélectionnée, une nouvelle section **Paramètres d’initiative** s’affiche, ce qui vous permet de définir le paramètre défini durant l’affectation d’initiative. Les valeurs autorisées sur ce paramètre d’initiative peuvent restreindre davantage ce qui peut être défini au cours de l’affectation d’initiative.
+   > [!NOTE]
+   > Les définitions de stratégie sélectionnées peuvent être ajoutées à des groupes en sélectionnant une ou plusieurs définitions ajoutées et en sélectionnant **Ajouter les stratégies sélectionnées à un groupe**. Le groupe doit déjà exister et il peut être créé sous l’onglet **Groupes** de l’Assistant.
 
-   :::image type="content" source="../media/create-and-manage/initiative-definition-3.png" alt-text="Modifier les paramètres de la définition d’initiative à partir des valeurs autorisées" border="false":::
+1. Sélectionnez **Suivant** en bas de la page ou l’onglet **Groupes** en haut de l’Assistant. Vous pouvez ajouter de nouveaux groupes à partir de cet onglet. Pour ce tutoriel, nous n’ajoutons aucun groupe.
+
+1. Sélectionnez **Suivant** en bas de la page ou l’onglet **Paramètres d’initiative** en haut de l’Assistant. Si nous voulions qu’un paramètre pour l’initiative soit passé à une ou plusieurs définitions de stratégie incluses, le paramètre devrait être défini ici et utilisé dans l’onglet **Paramètres de stratégie**. Pour ce tutoriel, nous n’ajoutons aucun paramètre d’initiative.
+
+   > [!NOTE]
+   > Une fois qu’ils sont enregistrés dans une définition d’initiative, les paramètres d’initiative ne peuvent pas être supprimés de l’initiative. Si un paramètre d’initiative n’est plus utile, supprimez son utilisation par les paramètres de définition de stratégie.
+
+1. Sélectionnez **Suivant** en bas de la page ou l’onglet **Paramètres de stratégie** en haut de l’Assistant.
+
+1. Définition de stratégie ajoutée à l’initiative dont les paramètres sont affichés dans une grille. Le _type de valeur_ peut être « Default value » (Valeur par défaut), « Set value » (Définir la valeur) ou « Use Initiative Parameter » (Utiliser un paramètre d’initiative). Si « Set value » est sélectionné, la valeur associée est entrée sous _Value(s)_ [Valeurs]. Si le paramètre de la définition de stratégie a une liste de valeurs autorisées, la zone d’entrée est un sélecteur de liste déroulante. Si l’option « Use Initiative Parameter » est sélectionnée, une liste déroulante est fournie avec les noms des paramètres d’initiative créés sous l’onglet **Initiative parameters** (Paramètres d’initiative).
+
+   :::image type="content" source="../media/create-and-manage/initiative-definition-3.png" alt-text="Capture d’écran des options pour les valeurs acceptées du paramètre de définition des emplacements autorisés sous l’onglet des paramètres de stratégie de la page de définition d’initiative.":::
 
    > [!NOTE]
    > Dans le cas de certains paramètres `strongType`, la liste de valeurs ne peut pas être déterminée automatiquement. Dans ce cas, un bouton de sélection s’affiche à droite de la ligne de paramètre. En le sélectionnant, vous ouvrez la page Étendue du paramètre (&lt;nom du paramètre&gt;). Sur cette page, sélectionnez l’abonnement à utiliser pour fournir les options de valeur. L’étendue de ce paramètre est utilisée uniquement lors de la création de la définition d’initiative et n’a aucun impact sur l’évaluation de la stratégie ou l’étendue de l’initiative lors de l’affectation.
 
-   Définissez le paramètre « Emplacements autorisés » sur « USA Est 2 » et laissez les autres paramètres définis sur la valeur par défaut « AuditifNotExists ».
+   Définissez le _type de valeur_ « Allowed locations » (Emplacements autorisés) sur « Set value » (Définir la valeur), puis sélectionnez « East US 2 » (USA Est 2) dans la liste déroulante. Pour les deux instances des définitions de stratégie _Ajouter ou remplacer une étiquette dans les ressources_, définissez les paramètres **Tag Name** (Nom d’étiquette) sur « Env » et « CostCenter », et les paramètres **Tag Value** (Valeur d’étiquette) sur « Test » et « Lab », comme ci-dessous. Laissez les autres valeurs sur « Default value » (Valeur par défaut). En utilisant la même définition deux fois dans l’initiative mais avec des paramètres différents, cette configuration ajoute ou remplace une étiquette « Env » par la valeur « Test », et une étiquette « CostCenter » par la valeur « Lab », sur les ressources comprises dans l’étendue de l’affectation.
 
-1. Sélectionnez **Enregistrer**.
+   :::image type="content" source="../media/create-and-manage/initiative-definition-4.png" alt-text="Capture d’écran des options entrées pour les valeurs acceptées du paramètre de définition des emplacements autorisés et les valeurs des paramètres des deux étiquettes définis sous l’onglet des paramètres de stratégie de la page de définition d’initiative.":::
+
+1. Sélectionnez **Vérifier + créer** en bas de la page ou en haut de l’Assistant.
+
+1. Passez en revue les paramètres, puis sélectionnez **Créer**.
 
 #### <a name="create-a-policy-initiative-definition-with-azure-cli"></a>Créer une définition d’initiative de stratégie avec Azure CLI
 
@@ -426,11 +451,11 @@ New-AzPolicySetDefinition -Name 'VMPolicySetDefinition' -Metadata '{"category":"
 
 1. Recherchez la définition d’initiative **Garantir la sécurité** que vous avez précédemment créée et sélectionnez-la. Sélectionnez **Affecter** en haut de la page pour ouvrir la page **Garantir la sécurité : affecter l’initiative**.
 
-   :::image type="content" source="../media/create-and-manage/assign-definition.png" alt-text="Affecter une définition à partir de la page Définition d’initiative" border="false":::
+   :::image type="content" source="../media/create-and-manage/assign-definition.png" alt-text="Capture d’écran du bouton « Affecter » dans la page Définition d’initiative." border="false":::
 
    Vous pouvez également cliquer avec le bouton droit sur la ligne sélectionnée ou sélectionner les points de suspension situé en fin de ligne pour faire apparaître un menu contextuel. Sélectionnez ensuite **Affecter**.
 
-   :::image type="content" source="../media/create-and-manage/select-right-click.png" alt-text="Autres options pour une initiative" border="false":::
+   :::image type="content" source="../media/create-and-manage/select-right-click.png" alt-text="Capture d’écran du menu contextuel d’une initiative pour sélectionner la fonctionnalité Affecter." border="false":::
 
 1. Renseignez la page **Garantir la sécurité : affecter l’initiative** en entrant les exemples d’informations suivants. Vous pouvez utiliser vos propres informations.
 
@@ -455,27 +480,30 @@ New-AzPolicySetDefinition -Name 'VMPolicySetDefinition' -Metadata '{"category":"
 1. Sélectionnez **Conformité** dans la partie gauche de la page Azure Policy.
 
 1. Localisez l’initiative **Garantir la sécurité**. Elle est probablement toujours à l’_État de conformité_**Non démarrée**.
-   Sélectionnez l’initiative pour obtenir tous les détails sur la progression de l’affectation.
+   Sélectionnez l’initiative pour obtenir tous les détails de l’affectation.
 
-   :::image type="content" source="../media/create-and-manage/compliance-status-not-started.png" alt-text="Page de conformité de l’initiative - évaluations non démarrées" border="false":::
+   :::image type="content" source="../media/create-and-manage/compliance-status-not-started.png" alt-text="Capture d’écran de la page Conformité de l’initiative montrant des évaluations d’affectation avec l’état Non démarré." border="false":::
 
 1. Une fois l’affectation de l’initiative effectuée, la page de conformité est mise à jour avec l’_État de conformité_**Conforme**.
 
-   :::image type="content" source="../media/create-and-manage/compliance-status-compliant.png" alt-text="Page de conformité de l’initiative - ressources conformes" border="false":::
+   :::image type="content" source="../media/create-and-manage/compliance-status-compliant.png" alt-text="Capture d’écran de la page Conformité de l’initiative montrant des évaluations d’affectation terminées avec l’état Conforme." border="false":::
 
 1. Pour ouvrir la page de détails sur la conformité de la stratégie, sélectionnez une stratégie dans la page de conformité de l’initiative. Cette page fournit des détails au niveau des ressources pour la conformité.
 
-## <a name="exempt-a-non-compliant-or-denied-resource-using-exclusion"></a>Exempter une ressource non conforme ou refusée en utilisant l’exclusion
+## <a name="remove-a-non-compliant-or-denied-resource-from-the-scope-with-an-exclusion"></a>Supprimer une ressource non conforme ou refusée de l’étendue à l’aide d’une exclusion
 
 Après avoir attribué une initiative de stratégie pour exiger un emplacement spécifique, toutes les ressources créées dans un emplacement différent sont refusées. Dans cette section, vous allez résoudre pas à pas une situation dans laquelle la demande de création d’une ressource a été refusée en créant une exclusion sur un seul groupe de ressources. L’exclusion empêche l’application de la stratégie (ou de l’initiative) à ce groupe de ressources. Dans l’exemple suivant, tous les emplacements sont autorisés dans le groupe de ressources exclu. Une exclusion peut s’appliquer à un abonnement, à un groupe de ressources ou à des ressources individuelles.
 
+> [!NOTE]
+> Une [exemption de stratégie](../concepts/exemption-structure.md) peut également être utilisée pour ignorer l’évaluation d’une ressource. Pour plus d’informations, consultez [Étendue dans Azure Policy](../concepts/scope.md).
+
 Les déploiements empêchés par une stratégie ou une initiative affectée peuvent être vus dans le groupe de ressources ciblé par le déploiement : Sélectionnez **Déploiements** dans la partie gauche de la page, puis sélectionnez le **nom du déploiement** qui a échoué. La ressource refusée est listée avec l’état _Interdit_. Pour déterminer la stratégie ou l’initiative et l’affectation qui a refusé la ressource, sélectionnez **Échec. Cliquez ici pour plus d’informations ->** dans la page Vue d’ensemble du déploiement. Une fenêtre s’ouvre dans la partie droite de la page pour présenter les informations d’erreur. Sous **Détails de l’erreur** figurent les GUID des objets de stratégie associés.
 
-:::image type="content" source="../media/create-and-manage/rg-deployment-denied.png" alt-text="Déploiement refusé par l’affectation de stratégie" border="false":::
+:::image type="content" source="../media/create-and-manage/rg-deployment-denied.png" alt-text="Capture d’écran de l’échec d’un déploiement ayant été refusé par une affectation de stratégie." border="false":::
 
 Dans la page Azure Policy : Sélectionnez **Conformité** du côté gauche de la page et sélectionnez l’initiative de stratégie **Garantir la sécurité**. Dans cette page figure une augmentation du nombre de **refus** de ressources bloquées. Sous l’onglet **Événements** se trouvent des détails sur les personnes qui ont essayé de créer ou de déployer la ressource refusée par la définition de stratégie.
 
-:::image type="content" source="../media/create-and-manage/compliance-overview.png" alt-text="Vue d’ensemble de la conformité d’une stratégie affectée" border="false":::
+:::image type="content" source="../media/create-and-manage/compliance-overview.png" alt-text="Capture d’écran de l’onglet Événements et des détails des événements de stratégie dans la page Conformité de l’initiative." border="false":::
 
 Dans cet exemple, Trent Baker, l’un des spécialistes de la virtualisation chez Contoso, effectuait des tâches requises. Nous avons besoin d’accorder à Trent un espace pour une exception. Créez un groupe de ressources, **LocationsExcluded**, puis octroyez-lui une exception à cette affectation de stratégie.
 
@@ -487,7 +515,7 @@ Dans cet exemple, Trent Baker, l’un des spécialistes de la virtualisation che
 
 1. Définissez l’**exclusion** en sélectionnant les points de suspension, puis en sélectionnant le groupe de ressources à exclure, _LocationsExcluded_ dans cet exemple. Sélectionnez **Ajouter à l’étendue sélectionnée**, puis **Enregistrer**.
 
-   :::image type="content" source="../media/create-and-manage/request-exclusion.png" alt-text="Ajouter un groupe de ressources exclues à l’affectation de stratégie" border="false":::
+   :::image type="content" source="../media/create-and-manage/request-exclusion.png" alt-text="Capture d’écran de l’option Exclusions dans la page Affectation d’initiative pour ajouter un groupe de ressources exclu à l’attribution de stratégie." border="false":::
 
    > [!NOTE]
    > En fonction de la définition de stratégie et de son effet, l’exclusion peut également être octroyée à des ressources spécifiques au sein du groupe de ressources dans l’étendue de l’affectation. Comme un effet **Refuser** a été utilisé dans ce tutoriel, il ne serait pas judicieux de définir l’exclusion sur une ressource spécifique qui existe déjà.

@@ -1,17 +1,17 @@
 ---
 title: Révoquer un abonnement de partage dans Azure Data Share
 description: Découvrez comment révoquer un abonnement de partage d’un destinataire à l’aide d’Azure Data Share.
-author: joannapea
-ms.author: joanpo
+author: jifems
+ms.author: jife
 ms.service: data-share
-ms.topic: conceptual
-ms.date: 07/10/2019
-ms.openlocfilehash: 97f672b266c2df6956282aea6dec8d5207944943
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 07/30/2020
+ms.openlocfilehash: 102a0099c95073793ba6a1a85f518c7539327bf3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73476373"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87511851"
 ---
 # <a name="how-to-revoke-a-consumers-share-subscription-in-azure-data-share"></a>Comment révoquer l’abonnement de partage d’un consommateur dans Azure Data Share
 

@@ -1,20 +1,15 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements personnalisés à une file d’attente de stockage - Event Grid, Azure CLI'
 description: 'Démarrage rapide : Utilisez Azure Event Grid et Azure CLI pour publier une rubrique et pour vous abonner à cet événement. Une file d’attente de stockage est utilisée pour le point de terminaison.'
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: spelluru
-ms.date: 11/05/2019
+ms.date: 07/07/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: 44ffa570cfda39c186966866ee5755ab090083a5
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 4de7aa1c111b5b21a27b155474ae10f78feba083
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73721455"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566314"
 ---
 # <a name="quickstart-route-custom-events-to-azure-queue-storage-with-azure-cli-and-event-grid"></a>Démarrage rapide : Acheminer des événements personnalisés vers le Stockage File d’attente Azure avec Azure CLI et Event Grid
 
@@ -22,12 +17,11 @@ Azure Event Grid est un service de gestion d’événements pour le cloud. Le St
 
 [!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous utilisez Azure CLI ou Azure PowerShell sur votre machine locale au lieu d’utiliser Cloud Shell dans le portail Azure, assurez-vous de disposer des versions suivantes d’Azure CLI et d’Azure PowerShell. 
+- Cet article nécessite la version 2.0.56 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
-- Azure CLI version 2.0.56 ou supérieure. Pour des instructions sur l’installation de la version d’Azure CLI la plus récente, consultez [Installer l’interface Azure CLI](/cli/azure/install-azure-cli). 
-- Azure PowerShell version 1.1.0 ou supérieure. Téléchargez la dernière version d’Azure PowerShell sur votre machine Windows à partir de [Téléchargements Azure - Outils de ligne de commande](https://azure.microsoft.com/downloads/). 
+- Si vous utilisez Azure PowerShell sur votre machine locale au lieu d’utiliser Cloud Shell dans le portail Azure, assurez-vous d’avoir Azure PowerShell version 1.1.0 ou ultérieure. Téléchargez la dernière version d’Azure PowerShell sur votre machine Windows à partir de [Téléchargements Azure - Outils de ligne de commande](https://azure.microsoft.com/downloads/). 
 
 Cet article vous donne les commandes permettant d’utiliser Azure CLI. 
 

@@ -1,20 +1,20 @@
 ### YamlMime:Landing
 title: Documentation sur Azure Functions
-summary: Azure Functions est un service de calcul serverless qui vous permet d’exécuter du code déclenché par des événements sans provisionner ni gérer explicitement l’infrastructure.
+summary: Azure Functions est un service de calcul serverless qui vous permet d’exécuter du code déclenché par des événements sans provisionner ni gérer explicitement l’infrastructure. Ses fonctionnalités de « calcul à la demande » offrent une intégration légère et une capacité de prise en charge unique. Vous pouvez également l’utiliser pour fournir des API web, répondre à des modifications de base de données, traiter des flux de données IoT et gérer des files d’attente de messages.
 metadata:
   title: Documentation sur Azure Functions
-  description: Azure Functions est un service de calcul serverless qui vous permet d’exécuter du code déclenché par des événements sans provisionner ni gérer explicitement l’infrastructure.
+  description: Azure Functions est un service de calcul serverless qui vous permet d’exécuter du code déclenché par des événements sans provisionner ni gérer explicitement l’infrastructure. Ses fonctionnalités de « calcul à la demande » offrent une intégration légère et une capacité de prise en charge unique. Vous pouvez également l’utiliser pour fournir des API web, répondre à des modifications de base de données, traiter des flux de données IoT et gérer des files d’attente de messages.
   ms.service: azure-functions
   ms.topic: landing-page
   author: ggailey777
   ms.author: azfundocs
   ms.date: 09/17/2019
-  ms.openlocfilehash: a08908b699d50a7e1e740f162a0b3f53fa96e434
-  ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+  ms.openlocfilehash: e6c3cb1a9d536ed898c48c45f57434dc4bf66970
+  ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/08/2020
-  ms.locfileid: "80886566"
+  ms.lasthandoff: 12/15/2020
+  ms.locfileid: "97505288"
 landingContent:
 - title: À propos d’Azure Functions
   linkLists:
@@ -41,15 +41,21 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Créer votre première fonction (C#)
-      url: functions-create-your-first-function-visual-studio.md
+      url: create-first-function-vs-code-csharp.md
+    - text: Créer votre première fonction (Go)
+      url: create-first-function-vs-code-other.md?tabs=go
     - text: Créer votre première fonction (Java)
-      url: functions-create-first-azure-function-azure-cli.md?pivots=programming-language-java
+      url: create-first-function-vs-code-java.md
     - text: Créer votre première fonction (JavaScript)
-      url: functions-create-first-function-vs-code.md?pivots=programming-language-javascript
+      url: create-first-function-vs-code-node.md
     - text: Créer votre première fonction (PowerShell)
-      url: functions-create-first-function-vs-code.md?pivots=programming-language-powershell
+      url: create-first-function-vs-code-powershell.md
     - text: Créer votre première fonction (Python)
-      url: functions-create-first-function-vs-code.md?pivots=programming-language-python
+      url: create-first-function-vs-code-python.md
+    - text: Créer votre première fonction (Rust)
+      url: create-first-function-vs-code-other.md?tabs=rust
+    - text: Créer votre première fonction (TypeScript)
+      url: create-first-function-vs-code-typescript.md
   - linkListType: learn
     links:
     - text: Créer une logique serverless
@@ -121,7 +127,7 @@ landingContent:
     - text: Générer et déployer avec Azure Pipelines
       url: functions-how-to-azure-devops.md
     - text: Déployer avec le plug-in Jenkins
-      url: /azure/jenkins/jenkins-azure-functions-deploy
+      url: /azure/developer/jenkins/deploy-to-azure-functions
 - title: Performances et surveillance
   linkLists:
   - linkListType: concept

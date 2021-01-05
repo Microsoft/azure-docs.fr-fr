@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: tilarso
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0f75dea2cffbe710bf2778ceab5eacc91ffcca9c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c319489fe4c884cd5de48ac2d3e47e7beb3026f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77523104"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90705484"
 ---
 # <a name="what-is-the-identity-secure-score-in-azure-active-directory"></a>Qu’est-ce que le degré de sécurisation Identity Secure Score dans Azure Active Directory ?
 
@@ -102,9 +102,9 @@ Vous obtenez des points lorsque vous configurez des fonctionnalités de sécurit
 
 Pour consulter votre historique de score, rendez-vous dans le [Centre de sécurité Microsoft 365](https://security.microsoft.com/) et passez en revue votre score sécurisé Microsoft global. Vous pouvez examiner les modifications apportées à votre score sécurisé global en cliquant sur Afficher l’historique. Choisissez une date spécifique pour déterminer les contrôles qui ont été activés ce jour et les points que vous avez gagnés pour chacun d’eux.
 
-### <a name="how-does-the-identity-secure-score-relate-to-the-office-365-secure-score"></a>Quel est le lien entre les degrés de sécurisation Identity Secure Score et Office 365 Secure Score ?
+### <a name="how-does-the-identity-secure-score-relate-to-the-microsoft-365-secure-score"></a>Quel est le lien entre les degrés de sécurisation Identity Secure Score et Microsoft 365 Secure Score ?
 
-Le [score sécurisé Microsoft](https://docs.microsoft.com/office365/securitycompliance/microsoft-secure-score) comporte cinq catégories distinctes de contrôle et de score :
+Le [score sécurisé Microsoft](/office365/securitycompliance/microsoft-secure-score) comporte cinq catégories distinctes de contrôle et de score :
 
 - Identité
 - Données
@@ -116,4 +116,4 @@ Le degré de sécurisation Identity Secure Score représente la partie identité
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[En savoir plus sur le score sécurisé Microsoft](https://docs.microsoft.com/office365/securitycompliance/microsoft-secure-score)
+[En savoir plus sur le score sécurisé Microsoft](/office365/securitycompliance/microsoft-secure-score)

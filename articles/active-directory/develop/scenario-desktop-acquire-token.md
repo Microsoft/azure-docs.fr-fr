@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 10/30/2019
+ms.date: 11/04/2020
 ms.author: jmprieur
-ms.custom: aaddev
-ms.openlocfilehash: 24567461ee8a87fc9dbd1c5fb4eba5e34d458f7b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: fd341a4f6e2402ce934bdffd4f024e0ef569eec1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82097759"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96340915"
 ---
 # <a name="desktop-app-that-calls-web-apis-acquire-a-token"></a>Application de bureau qui appelle des API web : Acquérir un jeton
 
@@ -38,7 +38,7 @@ L’API web est définie par ses valeurs de `scopes`. Quelle que soit l’expér
 AuthenticationResult result;
 var accounts = await app.GetAccountsAsync();
 IAccount account = ChooseAccount(accounts); // for instance accounts.FirstOrDefault
-                                            // if the app manages is at most one account  
+                                            // if the app manages is at most one account
 try
 {
  result = await app.AcquireTokenSilent(scopes, account)
@@ -105,7 +105,7 @@ if not result:
     result = app.acquire_token_by_xxx(scopes=config["scope"])
 ```
 
-# <a name="macos"></a>[MacOS](#tab/macOS)
+# <a name="macos"></a>[macOS](#tab/macOS)
 
 ### <a name="in-msal-for-ios-and-macos"></a>Dans MSAL pour iOS et macOS
 
@@ -175,7 +175,7 @@ catch(MsalUiRequiredException)
 
 ### <a name="mandatory-parameters"></a>Paramètres obligatoires
 
-`AcquireTokenInteractive` n’a qu’un seul paramètre obligatoire, ``scopes``, qui contient une énumération de chaînes définissant les étendues pour lesquelles un jeton est nécessaire. Si le jeton est destiné à Microsoft Graph, vous trouvez les étendues nécessaires dans les informations de référence d’API de chaque API Microsoft Graph, à la section intitulée « Autorisations ». Par exemple, pour [lister les contacts de l’utilisateur](https://docs.microsoft.com/graph/api/user-list-contacts), vous devez utiliser les étendues « User.Read », « Contacts.Read ». Pour plus d’informations, consultez la [documentation de référence sur les autorisations Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/permissions_reference).
+`AcquireTokenInteractive` n’a qu’un seul paramètre obligatoire, ``scopes``, qui contient une énumération de chaînes définissant les étendues pour lesquelles un jeton est nécessaire. Si le jeton est destiné à Microsoft Graph, vous trouvez les étendues nécessaires dans les informations de référence d’API de chaque API Microsoft Graph, à la section intitulée « Autorisations ». Par exemple, pour [lister les contacts de l’utilisateur](/graph/api/user-list-contacts), vous devez utiliser les étendues « User.Read », « Contacts.Read ». Pour plus d’informations, consultez la [documentation de référence sur les autorisations Microsoft Graph](/graph/permissions-reference).
 
 Sur Android, vous devez également spécifier l’activité parente au moyen de `.WithParentActivityOrWindow`, comme indiqué, afin que le jeton retourne à cette activité parente après l’interaction. Si vous ne le précisez pas, une exception est levée lors de l’appel de `.ExecuteAsync()`.
 
@@ -183,7 +183,7 @@ Sur Android, vous devez également spécifier l’activité parente au moyen de 
 
 #### <a name="withparentactivityorwindow"></a>WithParentActivityOrWindow
 
-L’interface utilisateur est importante, car elle est interactive. `AcquireTokenInteractive` présente un paramètre facultatif spécifique pouvant préciser, pour les plateformes qui le prennent en charge, l’interface utilisateur parente. Lorsqu’il est utilisé dans une application de bureau, `.WithParentActivityOrWindow` présente un type différent qui dépend la plateforme.
+L’interface utilisateur est importante, car elle est interactive. `AcquireTokenInteractive` présente un paramètre facultatif spécifique pouvant préciser, pour les plateformes qui le prennent en charge, l’interface utilisateur parente. Lorsqu’il est utilisé dans une application de bureau, `.WithParentActivityOrWindow` présente un type différent qui dépend la plateforme. Vous pouvez également omettre le paramètre facultatif de fenêtre parente pour créer une fenêtre, si vous ne souhaitez pas contrôler l’emplacement où la boîte de dialogue de connexion s’affiche à l’écran. Cela s’applique aux applications basées sur une ligne de commande, utilisées pour passer des appels à tout autre service principal et qui n’ont pas besoin de fenêtres pour l’interaction avec l’utilisateur.
 
 ```csharp
 // net45
@@ -213,7 +213,7 @@ Remarques :
 
 `WithPrompt()` permet de contrôler l’interactivité avec l’utilisateur en spécifiant une invite.
 
-<img src="https://user-images.githubusercontent.com/13203188/53438042-3fb85700-39ff-11e9-9a9e-1ff9874197b3.png" width="25%" />
+![Image montrant les champs de la structure de l’invite. Ces valeurs de constantes contrôlent l’interactivité avec l’utilisateur en définissant le type d’invite affiché par la méthode WithPrompt().](https://user-images.githubusercontent.com/13203188/53438042-3fb85700-39ff-11e9-9a9e-1ff9874197b3.png)
 
 La classe définit les constantes suivantes :
 
@@ -278,7 +278,7 @@ L’équipe de MSAL.NET a réécrit les tests d’interface utilisateur pour uti
 
 ##### <a name="provide-a-great-experience-with-systemwebviewoptions"></a>Fournir une bonne expérience avec SystemWebViewOptions
 
-À partir de MSAL.NET 4.1 [`SystemWebViewOptions`](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.systemwebviewoptions?view=azure-dotnet), vous pouvez spécifier :
+À partir de MSAL.NET 4.1 [`SystemWebViewOptions`](/dotnet/api/microsoft.identity.client.systemwebviewoptions), vous pouvez spécifier :
 
 - L’URI vers laquelle naviguer (`BrowserRedirectError`) ou le fragment HTML à afficher (`HtmlMessageError`) en cas d’erreurs de connexion ou de consentement dans le navigateur web système.
 - L’URI vers laquelle naviguer (`BrowserRedirectSuccess`) ou le fragment HTML à afficher (`HtmlMessageSuccess`) en cas de réussite de la connexion ou du consentement.
@@ -304,7 +304,7 @@ var result = app.AcquireTokenInteractive(scopes)
 
 #### <a name="other-optional-parameters"></a>Autres paramètres facultatifs
 
-Pour en savoir plus sur tous les autres paramètres facultatifs de `AcquireTokenInteractive`, consultez [AcquireTokenInteractiveParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokeninteractiveparameterbuilder?view=azure-dotnet-preview#methods).
+Pour en savoir plus sur tous les autres paramètres facultatifs de `AcquireTokenInteractive`, consultez [AcquireTokenInteractiveParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokeninteractiveparameterbuilder#methods).
 
 # <a name="java"></a>[Java](#tab/java)
 
@@ -370,11 +370,11 @@ if accounts:
 if not result:
     result = app.acquire_token_by_authorization_code(
          request.args['code'],
-         scopes=config["scope"])    
+         scopes=config["scope"])
 
 ```
 
-# <a name="macos"></a>[MacOS](#tab/macOS)
+# <a name="macos"></a>[macOS](#tab/macOS)
 
 ### <a name="in-msal-for-ios-and-macos"></a>Dans MSAL pour iOS et macOS
 
@@ -419,9 +419,9 @@ Pour connecter un utilisateur de domaine sur une machine jointe à Azure AD ou �
 
 - L’authentification Windows intégrée n’est utilisable que pour les utilisateurs *fédérés+* , c’est-à-dire les utilisateurs créés dans Active Directory et reposant sur Azure AD. Les utilisateurs créés directement dans Azure AD sans appui Active Directory, appelés utilisateurs *managés*, ne peuvent pas utiliser ce flux d’authentification. Cette restriction ne concerne pas le flux de nom d’utilisateur et de mot de passe.
 - L’authentification Windows intégrée est destinée aux applications écrites pour les plateformes .NET Framework, .NET Core et UWP, la plateforme Windows universelle.
-- IWA ne permet pas de contourner l’authentification multifacteur (MFA). Si l’authentification MFA est configurée, IWA peut échouer en cas de demande MFA exigée, car MFA a besoin d’une interaction utilisateur.
+- L’authentification Windows n’ignore pas l’[authentification multifacteur (MFA)](../authentication/concept-mfa-howitworks.md). Si l’authentification MFA est configurée, IWA peut échouer en cas de demande MFA exigée, car MFA a besoin d’une interaction utilisateur.
   > [!NOTE]
-  > Voilà qui est délicat. L’authentification IWA est non interactive, mais MFA nécessite l’interactivité avec l’utilisateur. Vous n’avez pas le contrôle lorsque le fournisseur d’identité demande l’exécution de MFA, l’administrateur de locataire, si. D’après ce que nous avons pu observer, l’authentification MFA est demandée lorsque vous vous connectez depuis un autre pays alors que vous n’êtes pas connecté à un réseau d’entreprise via un VPN, et parfois même lorsque vous êtes connecté via un VPN. Ne vous attendez pas à un ensemble déterministe de règles. Azure AD utilise l’intelligence artificielle pour apprendre en continu à déterminer si l’authentification MFA est exigée. Ayez recours à une invite utilisateur de secours, comme une authentification interactive ou un flux de code d’appareil, si l’IWA échoue.
+  > Voilà qui est délicat. L’authentification IWA est non interactive, mais MFA nécessite l’interactivité avec l’utilisateur. Vous n’avez pas le contrôle lorsque le fournisseur d’identité demande l’exécution de MFA, l’administrateur de locataire, si. D’après ce que nous avons pu observer, l’authentification MFA est demandée lorsque vous vous connectez depuis un autre pays/région alors que vous n’êtes pas connecté à un réseau d’entreprise via un VPN, et parfois même lorsque vous êtes connecté via un VPN. Ne vous attendez pas à un ensemble déterministe de règles. Azure AD utilise l’intelligence artificielle pour apprendre en continu à déterminer si l’authentification MFA est exigée. Ayez recours à une invite utilisateur de secours, comme une authentification interactive ou un flux de code d’appareil, si l’IWA échoue.
 
 - L’autorité transmise dans `PublicClientApplicationBuilder` doit être :
   - Avec locataire sous le format `https://login.microsoftonline.com/{tenant}/`, dans lequel `tenant` est le GUID qui représente l’ID de locataire ou un domaine associé au locataire.
@@ -433,13 +433,13 @@ Pour connecter un utilisateur de domaine sur une machine jointe à Azure AD ou �
   - Ou bien, l’administrateur de locataires doit avoir préalablement consenti à ce que tous les utilisateurs dans le locataire utilisent l’application.
   - En d’autres termes :
     - En tant que développeur, vous avez sélectionné le bouton **Accorder** pour vous-même, dans le portail Azure.
-    - Ou bien, un administrateur de locataire a sélectionné le bouton **Accorder/révoquer le consentement administrateur pour {domaine du locataire}** dans l’onglet **Autorisations de l’API** lors de l’inscription de l’application. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder aux API web](https://docs.microsoft.com/azure/active-directory/develop/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis).
-    - Ou bien, vous avez fourni un moyen aux utilisateurs de donner leur consentement pour l’utilisation de l’application. Pour plus d’informations, consultez [Demande de consentement d’utilisateur individuel](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#requesting-individual-user-consent).
-    - Ou bien, vous avez fourni un moyen à l’administrateur de locataire de donner son consentement pour l’utilisation de l’application. Pour plus d’informations, consultez [Consentement administrateur](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#requesting-consent-for-an-entire-tenant).
+    - Ou bien, un administrateur de locataire a sélectionné le bouton **Accorder/révoquer le consentement administrateur pour {domaine du locataire}** dans l’onglet **Autorisations de l’API** lors de l’inscription de l’application. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder à votre API web](quickstart-configure-app-access-web-apis.md#add-permissions-to-access-your-web-api).
+    - Ou bien, vous avez fourni un moyen aux utilisateurs de donner leur consentement pour l’utilisation de l’application. Pour plus d’informations, consultez [Demande de consentement d’utilisateur individuel](./v2-permissions-and-consent.md#requesting-individual-user-consent).
+    - Ou bien, vous avez fourni un moyen à l’administrateur de locataire de donner son consentement pour l’utilisation de l’application. Pour plus d’informations, consultez [Consentement administrateur](./v2-permissions-and-consent.md#requesting-consent-for-an-entire-tenant).
 
 - Ce flux est activé pour les applications .NET Desktop, .NET Core et UWP.
 
-Pour plus d’informations sur le consentement, consultez [Autorisations et consentement de la plateforme d’identités Microsoft](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent).
+Pour plus d’informations sur le consentement, consultez [Autorisations et consentement de la plateforme d’identités Microsoft](./v2-permissions-and-consent.md).
 
 ### <a name="learn-how-to-use-it"></a>Découvrez son utilisation
 
@@ -532,7 +532,7 @@ static async Task GetATokenForGraph()
 }
 ```
 
-Pour la liste des modificateurs possibles sur AcquireTokenByIntegratedWindowsAuthentication, voir [AcquireTokenByIntegratedWindowsAuthParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokenbyintegratedwindowsauthparameterbuilder?view=azure-dotnet-preview#methods).
+Pour la liste des modificateurs possibles sur AcquireTokenByIntegratedWindowsAuthentication, voir [AcquireTokenByIntegratedWindowsAuthParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokenbyintegratedwindowsauthparameterbuilder#methods).
 
 # <a name="java"></a>[Java](#tab/java)
 
@@ -590,9 +590,9 @@ private static IAuthenticationResult acquireTokenIwa() throws Exception {
 
 Ce flux n’est pas encore pris en charge dans MSAL Python.
 
-# <a name="macos"></a>[MacOS](#tab/macOS)
+# <a name="macos"></a>[macOS](#tab/macOS)
 
-Ce flux ne s’applique pas à MacOS.
+Ce flux ne s’applique pas à macOS.
 
 ---
 
@@ -615,7 +615,7 @@ Ce flux est *déconseillé*, car le fait que votre application demande à un uti
 
 Les contraintes suivantes s’appliquent également :
 
-- Le flux de nom d’utilisateur et de mot de passe n’est pas compatible avec l’accès conditionnel et l’authentification multifacteur. Par conséquent, si votre application s’exécute dans un locataire Azure AD pour lequel l’administrateur de locataire exige une authentification multifacteur, vous ne pouvez pas utiliser ce flux. De nombreuses organisations font cela.
+- Le flux de nom d’utilisateur et de mot de passe n’est pas compatible avec l’accès conditionnel et l’authentification multifacteur. Par conséquent, si votre application s’exécute dans un locataire Azure AD pour lequel l’administrateur de locataires exige une authentification multifacteur, vous ne pouvez pas utiliser ce flux. De nombreuses organisations font cela.
 - Ce moyen fonctionne uniquement pour les comptes professionnels et scolaires (pas les comptes MSA).
 - Ce flux est disponible sur .NET Desktop et .NET Core, mais pas sur UWP.
 
@@ -687,7 +687,7 @@ static async Task GetATokenForGraph()
  if (accounts.Any())
  {
   result = await app.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
-                    .ExecuteAync();
+                    .ExecuteAsync();
  }
  else
  {
@@ -832,7 +832,7 @@ static async Task GetATokenForGraph()
 }
 ```
 
-Pour plus d’informations sur tous les modificateurs qui peuvent être appliqués à `AcquireTokenByUsernamePassword`, consultez [AcquireTokenByUsernamePasswordParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokenbyusernamepasswordparameterbuilder?view=azure-dotnet-preview#methods).
+Pour plus d’informations sur tous les modificateurs qui peuvent être appliqués à `AcquireTokenByUsernamePassword`, consultez [AcquireTokenByUsernamePasswordParameterBuilder](/dotnet/api/microsoft.identity.client.acquiretokenbyusernamepasswordparameterbuilder#methods).
 
 # <a name="java"></a>[Java](#tab/java)
 
@@ -913,7 +913,7 @@ if not result:
         config["username"], config["password"], scopes=config["scope"])
 ```
 
-# <a name="macos"></a>[MacOS](#tab/macOS)
+# <a name="macos"></a>[macOS](#tab/macOS)
 
 Ce flux n’est pas pris en charge sur MSAL pour macOS.
 
@@ -925,7 +925,7 @@ Ce flux n’est pas pris en charge sur MSAL pour macOS.
 
 Si vous écrivez un outil en ligne de commande qui n’a pas de contrôles web, et que vous ne pouvez pas ou ne souhaitez pas utiliser les flux précédents, vous devez utiliser le flux de code d’appareil.
 
-L’authentification interactive avec Azure AD nécessite un navigateur web. Pour plus d’informations, consultez [Utilisation de navigateurs Web](https://aka.ms/msal-net-uses-web-browser). Pour authentifier des utilisateurs sur des appareils ou des systèmes d’exploitation qui ne fournissent pas de navigateur web, le flux de code d’appareil permet à l’utilisateur de se servir d’un autre appareil, tel qu’un ordinateur ou un téléphone mobile, pour se connecter de manière interactive. En utilisant le flux de code d’appareil, l’application obtient des jetons par le biais d’un processus en deux étapes, qui est conçu pour ces appareils ou systèmes d’exploitation. De telles applications se retrouvent par exemple à s’exécuter sur IoT ou des outils en ligne de commande (CLI). L’idée est la suivante :
+L’authentification interactive avec Azure AD nécessite un navigateur web. Pour plus d’informations, consultez [Utilisation de navigateurs Web](https://aka.ms/msal-net-uses-web-browser). Pour authentifier des utilisateurs sur des appareils ou des systèmes d’exploitation qui ne fournissent pas de navigateur web, le flux de code d’appareil permet à l’utilisateur de se servir d’un autre appareil, tel qu’un ordinateur ou un téléphone mobile, pour se connecter de manière interactive. En utilisant le flux de code d’appareil, l’application obtient les jetons via un processus en deux étapes, conçu pour ces appareils ou systèmes d’exploitation. De telles applications se retrouvent par exemple à s’exécuter sur IoT ou des outils en ligne de commande (CLI). L’idée est la suivante :
 
 1. Chaque fois que l’authentification utilisateur est exigée, l’application fournit un code pour l’utilisateur. L’utilisateur est invité à utiliser un autre appareil, tel qu’un smartphone connecté à Internet, pour accéder à une URL, par exemple, `https://microsoft.com/devicelogin`. Ensuite, l’utilisateur est invité à entrer le code. Le code entré, la page web guide l’utilisateur dans un processus d’authentification normale, qui comporte des invites de consentement et une authentification multifacteur, si nécessaire.
 
@@ -954,7 +954,7 @@ L’exemple de code suivant met en évidence le cas le plus courant, avec des ex
 ```csharp
 private const string ClientId = "<client_guid>";
 private const string Authority = "https://login.microsoftonline.com/contoso.com";
-private readonly string[] Scopes = new string[] { "user.read" };
+private readonly string[] scopes = new string[] { "user.read" };
 
 static async Task<AuthenticationResult> GetATokenForGraph()
 {
@@ -969,7 +969,7 @@ static async Task<AuthenticationResult> GetATokenForGraph()
     // All AcquireToken* methods store the tokens in the cache, so check the cache first
     try
     {
-        return await pca.AcquireTokenSilent(Scopes, accounts.FirstOrDefault())
+        return await pca.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
             .ExecuteAsync();
     }
     catch (MsalUiRequiredException ex)
@@ -978,7 +978,7 @@ static async Task<AuthenticationResult> GetATokenForGraph()
         // If you want to provide a more complex user experience, check out ex.Classification
 
         return await AcquireByDeviceCodeAsync(pca);
-    }         
+    }
 }
 
 private async Task<AuthenticationResult> AcquireByDeviceCodeAsync(IPublicClientApplication pca)
@@ -1144,9 +1144,9 @@ if not result:
         # and then keep calling acquire_token_by_device_flow(flow) in your own customized loop
 ```
 
-# <a name="macos"></a>[MacOS](#tab/macOS)
+# <a name="macos"></a>[macOS](#tab/macOS)
 
-Ce flux ne s’applique pas à MacOS.
+Ce flux ne s’applique pas à macOS.
 
 ---
 
@@ -1388,7 +1388,10 @@ namespace CommonCacheMsalV3
 }
 ```
 
+## <a name="advanced-accessing-the-users-cached-tokens-in-background-apps-and-services"></a>(Avancé) Accès aux jetons mis en cache de l’utilisateur dans les applications et services en arrière-plan
+
+[!INCLUDE [advanced-token-caching](../../../includes/advanced-token-cache.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Appeler une API web à partir de l’application de bureau](scenario-desktop-call-api.md)
+Passez à l’article suivant de ce scénario, [Appeler une API web à partir de l’appareil de bureau](scenario-desktop-call-api.md).

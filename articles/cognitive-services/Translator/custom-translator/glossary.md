@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: reference
-ms.openlocfilehash: caf4a4b038cab81333ca78cd355bb2033891da00
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 67af6ab9ae5c60ee8291f38ea58b3b3d9744dbc9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "73888136"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88506649"
 ---
 # <a name="custom-translator-glossary"></a>Glossaire Custom Translator
 

@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Créer une première instance de Recherche personnalisée Bing'
+title: 'Démarrage rapide : Créer votre première instance Recherche personnalisée Bing'
 titleSuffix: Azure Cognitive Services
 description: Utilisez ce guide de démarrage rapide pour créer une instance Bing personnalisée qui peut effectuer des recherches dans les domaines et pages web que vous définissez.
 services: cognitive-services
@@ -10,14 +10,19 @@ ms.subservice: bing-custom-search
 ms.topic: quickstart
 ms.date: 03/24/2020
 ms.author: aahi
-ms.openlocfilehash: b8287250df4e278d4904e31121ed7d2df208e1c9
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 726a60d611abc392bc1a4629c5088ca4c6b703d9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80238851"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96338331"
 ---
-# <a name="quickstart-create-your-first-bing-custom-search-instance"></a>Démarrage rapide : Créer votre première instance de Recherche personnalisée Bing
+# <a name="quickstart-create-your-first-bing-custom-search-instance"></a>Démarrage rapide : Créer votre première instance Recherche personnalisée Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Pour utiliser la Recherche personnalisée Bing, vous devez créer une instance de recherche personnalisée qui définit votre vue, ou section du web. Cette instance contient les domaines, sites web et pages web publics dans lesquels vous voulez effectuer des recherches et procéder aux ajustements de classement que vous souhaitez. 
 

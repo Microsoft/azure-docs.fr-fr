@@ -3,16 +3,16 @@ title: Configurer un VPN point à site (P2S) sous Linux pour une utilisation ave
 description: Configuration d'un VPN point à site (P2S) sous Linux pour une utilisation avec Azure Files
 author: roygara
 ms.service: storage
-ms.topic: overview
+ms.topic: how-to
 ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: cfff05ed52258ee448d83a521b99dca7d356a0f9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 74422318718e318a00d7bd7ebaf8e4093ef75aa6
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80061044"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94629272"
 ---
 # <a name="configure-a-point-to-site-p2s-vpn-on-linux-for-use-with-azure-files"></a>Configurer un VPN point à site (P2S) sous Linux pour une utilisation avec Azure Files
 Vous pouvez utiliser une connexion VPN point à site (P2S) pour monter vos partages de fichiers Azure sur SMB en dehors d’Azure, sans ouvrir le port 445. Une connexion VPN point à site est une connexion VPN entre Azure et un client individuel. Pour utiliser une connexion VPN P2S avec Azure Files, une connexion VPN P2S doit être configurée pour chaque client qui souhaite se connecter. Si de nombreux clients doivent se connecter à vos partages de fichiers Azure depuis votre réseau local, vous pouvez utiliser une connexion VPN site à site (S2S) au lieu d’une connexion point à site pour chaque client. Pour plus d’informations, consultez [Configurer un VPN site à site pour une utilisation avec Azure Files](storage-files-configure-s2s-vpn.md).
@@ -22,7 +22,7 @@ Avant de poursuivre cet article, nous vous recommandons vivement de lire l’art
 L'article décrit en détail la procédure à suivre pour configurer un VPN point à site sous Linux afin de monter des partages de fichiers Azure localement. Si vous souhaitez router le trafic Azure File Sync via un VPN, consultez [Configuration les paramètres de proxy et de pare-feu d’Azure File Sync](storage-sync-files-firewall-and-proxy.md).
 
 ## <a name="prerequisites"></a>Prérequis
-- Version la plus récente de l'interface Azure CLI. Pour plus d'informations sur l'installation d'Azure CLI, consultez [Installer l'interface CLI Azure PowerShell](https://docs.microsoft.com/cli/azure/install-azure-cli) et sélectionnez votre système d'exploitation. Si vous préférez utiliser le module Azure PowerShell sous Linux, rien ne vous en empêche. Sachez toutefois que les instructions ci-dessous s'appliquent à Azure CLI.
+- Version la plus récente de l'interface Azure CLI. Pour plus d'informations sur l'installation d'Azure CLI, consultez [Installer l'interface CLI Azure PowerShell](/cli/azure/install-azure-cli) et sélectionnez votre système d'exploitation. Si vous préférez utiliser le module Azure PowerShell sous Linux, rien ne vous en empêche. Sachez toutefois que les instructions ci-dessous s'appliquent à Azure CLI.
 
 - Un partage de fichiers Azure que vous voulez monter localement. Les partages de fichiers Azure sont déployés sur des comptes de stockage. Ces comptes sont des constructions de gestion représentant un pool de stockage partagé dans lequel vous pouvez déployer plusieurs partages de fichiers, ainsi que d’autres ressources de stockage, telles que des conteneurs d’objets blob ou des files d’attente. Pour plus d’informations sur le déploiement des partages de fichiers et des comptes de stockage Azure, consultez [Créer un partage de fichiers Azure](storage-how-to-create-file-share.md).
 
@@ -117,7 +117,9 @@ La passerelle de réseau virtuel Azure correspond au service auquel vos ordinate
 N’oubliez pas de remplacer `<desired-vpn-name-here>` par le nom que vous souhaitez donner à ces ressources.
 
 > [!Note]  
-> Le déploiement de la passerelle de réseau virtuel Azure peut prendre jusqu’à 45 minutes. Pendant le déploiement de cette ressource, ce script bash sera bloqué pour permettre l'exécution du déploiement. Ceci est normal.
+> Le déploiement de la passerelle de réseau virtuel Azure peut prendre jusqu’à 45 minutes. Pendant le déploiement de cette ressource, ce script bash sera bloqué pour permettre l'exécution du déploiement.
+>
+> Les connexions P2S IKEv2/OpenVPN ne sont pas prises en charge avec la référence SKU **De base**. Ce script utilise donc la référence SKU **VpnGw1** pour la passerelle de réseau virtuel.
 
 ```bash
 vpnName="<desired-vpn-name-here>"

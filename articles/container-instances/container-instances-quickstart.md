@@ -7,12 +7,14 @@ ms.custom:
 - seo-python-october2019
 - seodec18
 - mvc
-ms.openlocfilehash: e5cad7d9141963e5062423545f7e5b94f0575152
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+- devx-track-js
+- devx-track-azurecli
+ms.openlocfilehash: 1c327fc7fc067948b5022f989e6c86f99573bd1a
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78252185"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93100182"
 ---
 # <a name="quickstart-deploy-a-container-instance-in-azure-using-the-azure-cli"></a>Démarrage rapide : Déployer un instance de conteneur dans Azure à l’aide d’Azure CLI
 
@@ -22,11 +24,11 @@ Dans cette procédure de démarrage rapide, vous utilisez Azure CLI pour déploy
 
 ![Afficher une application déployée sur Azure Container Instances dans le navigateur][aci-app-browser]
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit][azure-account] avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Vous pouvez utiliser le service Azure Cloud Shell ou une installation locale de l’interface Azure CLI pour procéder à ce démarrage rapide. Si vous souhaitez l’utiliser en local, nous vous recommandons la version 2.0.55 ou une version ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][azure-cli-install].
+- Pour ce guide de démarrage rapide, vous devez avoir la version 2.0.55 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -38,7 +40,7 @@ Commencez par créer un groupe de ressources nommé *myResourceGroup* à l’emp
 az group create --name myResourceGroup --location eastus
 ```
 
-## <a name="create-a-container"></a>Créez un conteneur.
+## <a name="create-a-container"></a>Créer un conteneur
 
 Maintenant que vous avez un groupe de ressources, vous pouvez exécuter un conteneur dans Azure. Pour créer une instance de conteneur avec Azure CLI, fournissez un nom de groupe de ressources, un nom d’instance de conteneur et l’image conteneur Docker à la commande [az container create][az-container-create]. Dans ce démarrage rapide, vous utilisez l’image `mcr.microsoft.com/azuredocs/aci-helloworld` publique. Cette image contient une petite application web écrite en Node.js qui sert une page HTML statique.
 
@@ -64,7 +66,7 @@ FQDN                               ProvisioningState
 aci-demo.eastus.azurecontainer.io  Succeeded
 ```
 
-Si l’élément `ProvisioningState` du conteneur est défini sur **Réussite**, accédez à son nom de domaine complet dans votre navigateur. Si vous voyez une page web similaire à l’image suivante, félicitations ! Cela signifie que vous avez réussi à déployer une application s’exécutant dans un conteneur Docker sur Azure.
+Si l’élément `ProvisioningState` du conteneur est défini sur **Réussite** , accédez à son nom de domaine complet dans votre navigateur. Si vous voyez une page web similaire à l’image suivante, félicitations ! Cela signifie que vous avez réussi à déployer une application s’exécutant dans un conteneur Docker sur Azure.
 
 ![Afficher une application déployée sur Azure Container Instances dans le navigateur][aci-app-browser]
 

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Zoho One | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Zoho One.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: bbc3038c-0d8b-45dd-9645-368bd3d01a0f
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/16/2019
 ms.author: jeedes
-ms.openlocfilehash: 0a37789e7c7efeb71770ff0e8061d57e6603b6c4
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 98c9012969051e4370239a0f4098e0ea1d7a55a0
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67086234"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348311"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zoho-one"></a>Tutoriel : Intégration d’Azure Active Directory à Zoho One
 
@@ -31,7 +27,7 @@ L’intégration de Zoho One dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Zoho One (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -103,14 +99,14 @@ Pour configurer l’authentification unique Azure AD avec Zoho One, effectuez l
 
 4. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL Zoho One](common/idp-relay.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-relay.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL : `one.zoho.com`
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://accounts.zoho.com/samlresponse/<saml-identifier>`
 
     > [!NOTE]
-    > La valeur **URL de réponse** ci-dessus n’est pas une valeur réelle. Vous obtenez la valeur `<saml-identifier>` de l’étape 4 de la section **Configurer l’authentification unique Zoho One**. La procédure est expliquée plus loin dans le tutoriel.
+    > La valeur **URL de réponse** ci-dessus n’est pas une valeur réelle. Vous obtenez la valeur `<saml-identifier>` de l’étape 4 de la section **Configurer l’authentification unique pour Zoho One**, dont la procédure est expliquée plus loin dans le tutoriel.
 
     c. Cliquez sur **Définir des URL supplémentaires**.
 
@@ -118,8 +114,7 @@ Pour configurer l’authentification unique Azure AD avec Zoho One, effectuez l
 
 5. Si vous souhaitez configurer l’application en mode initié par le **fournisseur de service**, procédez comme suit :
 
-
-    ![Informations d’authentification unique dans Domaine et URL Zoho One](common/both-signonurl.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/both-signonurl.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://accounts.zoho.com/samlauthrequest/<domain_name>?serviceurl=https://one.zoho.com` 
 
@@ -258,13 +253,12 @@ Pour que les utilisateurs Azure AD puissent se connecter à Zoho One, ils doiv
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Zoho One dans le panneau d’accès doit vous connecter automatiquement à l’application Zoho One pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Zoho One dans le panneau d’accès doit vous connecter automatiquement à l’application Zoho One pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

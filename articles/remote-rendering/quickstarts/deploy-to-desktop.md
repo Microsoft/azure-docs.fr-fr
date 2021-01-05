@@ -5,12 +5,12 @@ author: christophermanthei
 ms.author: chmant
 ms.date: 03/20/2020
 ms.topic: quickstart
-ms.openlocfilehash: 95993a54d321c9581d35f12b56d60e4ea052e505
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 26531e80292a53400671ac3507b47371c1fbbcad
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415722"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88796814"
 ---
 # <a name="quickstart-deploy-unity-sample-to-desktop"></a>Démarrage rapide : Déployer l’exemple Unity sur un Bureau
 
@@ -38,7 +38,7 @@ Seules les applications de bureau plates sont actuellement prises en charge sur 
 1. Sélectionnez **Player** sur la gauche.
 1. Sélectionnez l’onglet **Universal Windows Platform settings**.
 1. Développez **XR Settings**.
-1. Désactiver l’option **Virtual Reality Supported**.
+1. Désactiver l’option **Virtual Reality Supported**.\
     ![Paramètres du lecteur](./media/unity-disable-xr.png)
 1. Au-dessus de *XR Settings*, développez **Publishing Settings**.
 1. Sous **Supported Device Families**, assurez-vous que l’option **Desktop** est activée.
@@ -46,21 +46,18 @@ Seules les applications de bureau plates sont actuellement prises en charge sur 
 ## <a name="build-the-sample-project"></a>Générer l’exemple de projet
 
 1. Sélectionnez *File > Build Settings*.
-1. Sélectionnez **Universal Windows Platform** sous *Platform*.
+1. Remplacez *Plateforme* par **Plateforme Windows universelle** (**PC indépendant** est également pris en charge, mais non utilisé ici. Consultez les [limitations de plateforme](../reference/limits.md#platform-limitations)).
 1. Définissez *Target Device* sur **PC**.
 1. Définissez *Architecture* sur **x86**.
-1. Définissez *Build Type* sur **D3D Project**.
+1. Définissez *Build Type* sur **D3D Project**.\
   ![Paramètres de génération](./media/unity-build-settings-pc.png)
 1. Sélectionnez **Switch to Platform**.
 1. Quand vous sélectionnez **Build** (ou « Build And Run »), vous êtes invité à sélectionner le dossier dans lequel la solution doit être stockée.
 1. Ouvrez le fichier **Quickstart.sln** généré dans Visual Studio.
 1. Modifiez la configuration en la définissant sur **Version** et **x86**.
-1. Basculez le mode du débogueur sur **Ordinateur local**.
+1. Basculez le mode du débogueur sur **Ordinateur local**.\
   ![Configuration de la solution](./media/unity-deploy-config-pc.png)
-1. Générez la solution (F7).
-
-> [!WARNING]
-> Veillez à sélectionner **x86**. L’extension **x64** n’est pas prise en charge pour le moment ; consultez les [limitations de plateforme](../reference/limits.md#platform-limitations).
+1. Générez la solution.
 
 ## <a name="launch-the-sample-project"></a>Lancer l’exemple de projet
 

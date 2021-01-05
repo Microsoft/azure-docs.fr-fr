@@ -7,18 +7,19 @@ author: saghorpa
 manager: juergent
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 11/26/2019
 ms.author: saghorpa
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 019f462d4264d19bcc4806d91223029a95f9d819
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f33ef81282dd8e60eba64cc77cbd95ab8dbc557
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617180"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967565"
 ---
 # <a name="supported-scenarios-for-hana-large-instances"></a>Scénario pris en charge pour des grandes instances HANA
 Cet article décrit les scénarios pris en charge et les détails de l’architecture des grandes instances HANA (HLI).
@@ -195,7 +196,7 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 
 ## <a name="single-node-with-dr-using-storage-replication"></a>Nœud unique avec reprise d’activité à l’aide de la réplication de stockage
  
@@ -232,9 +233,9 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « Required for HANA installation » (nécessaires pour l’installation de HANA), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
-- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery).
+- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](./hana-overview-high-availability-disaster-recovery.md).
 - Le volume de démarrage pour la *classe de type I des références SKU* est répliqué sur le nœud de récupération d’urgence.
 
 
@@ -281,9 +282,9 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « Required for HANA installation » (nécessaires pour l’installation de HANA), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
-- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery). 
+- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](./hana-overview-high-availability-disaster-recovery.md). 
 - Sur le site de récupération d’urgence : Les volumes partagés, de données, de journaux et de sauvegardes de fichiers journaux pour l’assurance qualité, marqués comme « QA Instance installation » (Installation de l’instance AQ), sont configurés pour l’installation de l’instance AQ.
 - Le volume de démarrage pour la *classe de type I des références SKU* est répliqué sur le nœud de récupération d’urgence.
 
@@ -333,7 +334,7 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - STONITH : Un SBD est configuré pour l’installation STONITH. L’utilisation de STONITH est néanmoins facultative.
 
 
@@ -387,11 +388,11 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - STONITH : Un SBD est configuré pour l’installation STONITH. L’utilisation de STONITH est néanmoins facultative.
 - Sur le site de récupération d’urgence : *Deux jeux de volumes de stockage sont nécessaires* pour la réplication du nœud principal et du nœud secondaire.
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « Required for HANA installation » (nécessaires pour l’installation de HANA), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
-- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery). 
+- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](./hana-overview-high-availability-disaster-recovery.md). 
 - Sur le site de récupération d’urgence : Les volumes partagés, de données, de journaux et de sauvegardes de fichiers journaux pour l’assurance qualité, marqués comme « QA Instance installation » (Installation de l’instance AQ), sont configurés pour l’installation de l’instance AQ.
 - Le volume de démarrage pour la *classe de type I des références SKU* est répliqué sur le nœud de récupération d’urgence.
 
@@ -555,7 +556,7 @@ Les points de montage suivants sont préconfigurés :
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
 -  Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « Required for HANA installation » (nécessaires pour l’installation de HANA), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
-- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery). 
+- Sur le site de récupération d’urgence : Les volumes partagés, de sauvegarde de fichiers journaux et de données, marqués comme « Storage Replication » (Réplication de stockage), sont répliqués par le biais de la capture instantanée depuis le site de production. Ces volumes sont montés pendant le basculement uniquement. Pour plus d’informations, consultez [Procédure de basculement en cas de récupération d’urgence](./hana-overview-high-availability-disaster-recovery.md). 
 - Le volume de démarrage pour la *classe de type I des références SKU* est répliqué sur le nœud de récupération d’urgence.
 
 
@@ -594,9 +595,9 @@ Les points de montage suivants sont préconfigurés sur les deux unités HLI (pr
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - Le nœud principal est synchronisé avec le nœud de récupération d’urgence à l’aide de la réplication du système HANA. 
-- [Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
+- [Global Reach](../../../expressroute/expressroute-global-reach.md) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
 
 
 
@@ -644,11 +645,11 @@ Les points de montage suivants sont préconfigurés :
 
 ### <a name="key-considerations"></a>Considérations relatives aux clés
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
-- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+- Pour MCOS : La répartition de la taille des volumes est basée sur la taille de la base de données en mémoire. Pour découvrir quelles tailles de base de données en mémoire sont prises en charge dans un environnement multi-SID, consultez la section [Vue d’ensemble et architecture](./hana-overview-architecture.md).
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « PROD Instance at DR site » (Instance PROD sur le site de récupération d’urgence), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
 - Sur le site de récupération d’urgence : Les volumes partagés, de données, de journaux et de sauvegardes de fichiers journaux pour l’assurance qualité, marqués comme « QA Instance installation » (Installation de l’instance AQ), sont configurés pour l’installation de l’instance AQ.
 - Le nœud principal se synchronise avec le nœud de récupération d’urgence à l’aide de la réplication du système HANA. 
-- [Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
+- [Global Reach](../../../expressroute/expressroute-global-reach.md) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
 
 ## <a name="high-availability-and-disaster-recovery-with-hsr"></a>Haute disponibilité et reprise d’activité avec HSR 
  
@@ -693,7 +694,7 @@ Les points de montage suivants sont préconfigurés :
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « PROD DR Instance » (Instance de récupération d’urgence PROD), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
 - Le nœud du site principal se synchronise avec le nœud de récupération d’urgence à l’aide de la réplication du système HANA. 
-- [Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
+- [Global Reach](../../../expressroute/expressroute-global-reach.md) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
 
 ## <a name="high-availability-and-disaster-recovery-with-hsr-cost-optimized"></a>Haute disponibilité et reprise d’activité avec HSR (optimisation des coûts)
  
@@ -742,7 +743,7 @@ Les points de montage suivants sont préconfigurés :
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés, marqués comme « PROD DR Instance » (Instance de récupération d’urgence PROD), en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
 - Sur le site de récupération d’urgence : Les volumes partagés, de données, de journaux et de sauvegardes de fichiers journaux pour l’assurance qualité, marqués comme « QA Instance installation » (Installation de l’instance AQ), sont configurés pour l’installation de l’instance AQ.
 - Le nœud du site principal se synchronise avec le nœud de récupération d’urgence à l’aide de la réplication du système HANA. 
-- [Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
+- [Global Reach](../../../expressroute/expressroute-global-reach.md) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
 
 ## <a name="scale-out-with-dr-using-hsr"></a>Scale-out avec reprise d’activité à l’aide de HSR
  
@@ -789,9 +790,9 @@ Les points de montage suivants sont préconfigurés :
 - /usr/sap/SID est un lien symbolique vers /hana/shared/SID.
 - Sur le site de récupération d’urgence : Les volumes et les points de montage sont configurés en vue de l’installation de l’instance HANA de production sur l’unité HLI de récupération d’urgence. 
 - Le nœud du site principal se synchronise avec le nœud de récupération d’urgence à l’aide de la réplication du système HANA. 
-- [Global Reach](https://docs.microsoft.com/azure/expressroute/expressroute-global-reach) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
+- [Global Reach](../../../expressroute/expressroute-global-reach.md) permet d’associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux régionaux.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-- [Infrastructure et connectivité](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-infrastructure-connectivity) pour les grandes instances HANA
-- [Haute disponibilité et récupération d’urgence](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery) pour les grandes instances HANA
+- [Infrastructure et connectivité](./hana-overview-infrastructure-connectivity.md) pour les grandes instances HANA
+- [Haute disponibilité et récupération d’urgence](./hana-overview-high-availability-disaster-recovery.md) pour les grandes instances HANA

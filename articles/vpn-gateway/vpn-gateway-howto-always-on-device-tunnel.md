@@ -1,19 +1,19 @@
 ---
 title: Configurer un tunnel VPN Always On
 titleSuffix: Azure VPN Gateway
-description: Étapes de configuration d’un tunnel VPN Always On pour la passerelle VPN
+description: Découvrez comment utiliser des passerelles avec Windows 10 Always On pour établir et configurer des tunnels d’appareils permanents vers Azure.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 03/12/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: cherylmc
-ms.openlocfilehash: 9036992a354b41cd75735e5ccd895d7287a00e91
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7688e42175b2b4e35b63979f5df25702f3bb869d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371729"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90986585"
 ---
 # <a name="configure-an-always-on-vpn-device-tunnel"></a>Configurer un tunnel de périphérique VPN Always On
 
@@ -31,7 +31,7 @@ Configurez la passerelle VPN pour utiliser IKEv2 et l'authentification basée su
 
 Pour supprimer le profil, exécutez la commande suivante :
 
-![Nettoyage](./media/vpn-gateway-howto-always-on-device-tunnel/cleanup.png)
+![La capture d’écran affiche une fenêtre PowerShell exécutant la commande Remove-VpnConnection -Name MachineCertTest.](./media/vpn-gateway-howto-always-on-device-tunnel/cleanup.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

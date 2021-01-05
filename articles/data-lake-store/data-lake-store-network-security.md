@@ -8,17 +8,17 @@ manager: mtillman
 editor: cgronlun
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 10/09/2018
 ms.author: elsung
-ms.openlocfilehash: 7d6c826df2a509ffb378809e3682073bd5ab1301
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 716e3766fdd7c1999efa12456346862a9902d7a0
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60612703"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108709"
 ---
 # <a name="virtual-network-integration-for-azure-data-lake-storage-gen1"></a>Intégration de réseau virtuel dans Azure Data Lake Storage Gen1
 
@@ -33,7 +33,7 @@ L’intégration au réseau virtuel dans Data Lake Storage Gen1 fait appel à la
 
 ## <a name="scenarios-for-virtual-network-integration-for-data-lake-storage-gen1"></a>Scénarios d’intégration de réseau virtuel dans Data Lake Storage Gen1
 
-Avec l’intégration de réseau virtuel Data Lake Storage Gen1, vous pouvez restreindre l’accès à votre compte Data Lake Storage Gen1 à des sous-réseaux et réseaux virtuels spécifiques. Une fois que votre compte est verrouillé sur le sous-réseau de réseau virtuel spécifié, les autres réseaux virtuels/machines virtuelles d’Azure ne sont pas autorisés à y accéder. Sur le plan fonctionnel, l’intégration au réseau virtuel dans Data Lake Storage Gen1 permet le même scénario que les [points de terminaison de service de réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-overview). Quelques différences importantes sont détaillées dans les sections ci-dessous. 
+Avec l’intégration de réseau virtuel Data Lake Storage Gen1, vous pouvez restreindre l’accès à votre compte Data Lake Storage Gen1 à des sous-réseaux et réseaux virtuels spécifiques. Une fois que votre compte est verrouillé sur le sous-réseau de réseau virtuel spécifié, les autres réseaux virtuels/machines virtuelles d’Azure ne sont pas autorisés à y accéder. Sur le plan fonctionnel, l’intégration au réseau virtuel dans Data Lake Storage Gen1 permet le même scénario que les [points de terminaison de service de réseau virtuel](../virtual-network/virtual-network-service-endpoints-overview.md). Quelques différences importantes sont détaillées dans les sections ci-dessous. 
 
 ![Diagramme des scénarios d’intégration de réseau virtuel dans Data Lake Storage Gen1](media/data-lake-store-network-security/scenario-diagram.png)
 
@@ -42,21 +42,21 @@ Avec l’intégration de réseau virtuel Data Lake Storage Gen1, vous pouvez res
 
 ## <a name="optimal-routing-with-data-lake-storage-gen1-virtual-network-integration"></a>Routage optimal grâce à l’intégration au réseau virtuel dans Data Lake Storage Gen1
 
-L’[optimisation des itinéraires ](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-overview#key-benefits) depuis votre réseau virtuel constitue l’un des principaux avantages des points de terminaison de service de réseau virtuel. Vous pouvez effectuer la même optimisation des itinéraires pour les comptes Data Lake Storage Gen1. Utilisez les [itinéraires définis par l’utilisateur](https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview#user-defined) suivants entre votre réseau virtuel et votre compte Data Lake Storage Gen1.
+L’[optimisation des itinéraires ](../virtual-network/virtual-network-service-endpoints-overview.md#key-benefits) depuis votre réseau virtuel constitue l’un des principaux avantages des points de terminaison de service de réseau virtuel. Vous pouvez effectuer la même optimisation des itinéraires pour les comptes Data Lake Storage Gen1. Utilisez les [itinéraires définis par l’utilisateur](../virtual-network/virtual-networks-udr-overview.md#user-defined) suivants entre votre réseau virtuel et votre compte Data Lake Storage Gen1.
 
-**Adresse IP publique Data Lake Storage** : utilisez l’adresse IP publique de vos comptes Data Lake Storage Gen1 cibles. Pour identifier les adresses IP de vos comptes Data Lake Storage Gen1, [résolvez les noms DNS](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-connectivity-from-vnets#enabling-connectivity-to-azure-data-lake-storage-gen1-from-vms-with-restricted-connectivity) de vos comptes. Créez une entrée différente pour chaque adresse.
+**Adresse IP publique Data Lake Storage** : utilisez l’adresse IP publique de vos comptes Data Lake Storage Gen1 cibles. Pour identifier les adresses IP de vos comptes Data Lake Storage Gen1, [résolvez les noms DNS](./data-lake-store-connectivity-from-vnets.md#enabling-connectivity-to-azure-data-lake-storage-gen1-from-vms-with-restricted-connectivity) de vos comptes. Créez une entrée différente pour chaque adresse.
 
-    ```azurecli
-    # Create a route table for your resource group.
-    az network route-table create --resource-group $RgName --name $RouteTableName
-    
-    # Create route table rules for Data Lake Storage public IP addresses.
-    # There's one rule per Data Lake Storage public IP address. 
-    az network route-table route create --name toADLSregion1 --resource-group $RgName --route-table-name $RouteTableName --address-prefix <ADLS Public IP Address> --next-hop-type Internet
-    
-    # Update the virtual network, and apply the newly created route table to it.
-    az network vnet subnet update --vnet-name $VnetName --name $SubnetName --resource-group $RgName --route-table $RouteTableName
-    ```
+```azurecli
+# Create a route table for your resource group.
+az network route-table create --resource-group $RgName --name $RouteTableName
+
+# Create route table rules for Data Lake Storage public IP addresses.
+# There's one rule per Data Lake Storage public IP address. 
+az network route-table route create --name toADLSregion1 --resource-group $RgName --route-table-name $RouteTableName --address-prefix <ADLS Public IP Address> --next-hop-type Internet
+
+# Update the virtual network, and apply the newly created route table to it.
+az network vnet subnet update --vnet-name $VnetName --name $SubnetName --resource-group $RgName --route-table $RouteTableName
+```
 
 ## <a name="data-exfiltration-from-the-customer-virtual-network"></a>Exfiltration des données du réseau virtuel du client
 
@@ -65,7 +65,7 @@ En plus de sécuriser les comptes Data Lake Storage concernant l’accès à par
 Utilisez une solution de pare-feu dans votre réseau virtuel pour filtrer le trafic sortant en fonction de l’URL de compte de destination. Autorisez uniquement l’accès aux comptes Data Lake Storage Gen1 approuvés.
 
 Voici quelques options disponibles :
-- [Pare-feu Azure](https://docs.microsoft.com/azure/firewall/overview) : [déployez et configurez un pare-feu Azure](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal) pour votre réseau virtuel. Sécurisez le trafic Data Lake Storage sortant et verrouillez-le sur l’URL d’un compte connu et approuvé.
+- [Pare-feu Azure](../firewall/overview.md) : [déployez et configurez un pare-feu Azure](../firewall/tutorial-firewall-deploy-portal.md) pour votre réseau virtuel. Sécurisez le trafic Data Lake Storage sortant et verrouillez-le sur l’URL d’un compte connu et approuvé.
 - [Appliance virtuelle réseau](https://azure.microsoft.com/solutions/network-appliances/) - pare-feu : votre administrateur peut limiter le recours à certains fournisseurs de pare-feu commerciaux uniquement. Utilisez une solution de pare-feu d’appliance virtuelle réseau disponible dans la Place de marché Azure aux mêmes fins.
 
 > [!NOTE]
@@ -77,7 +77,7 @@ Voici quelques options disponibles :
  
 - Lorsque vous créez un nouveau cluster HDInsight et que vous sélectionnez un compte Data Lake Storage Gen1 avec l’intégration de réseau virtuel activée, le processus échoue. Commencez par désactiver la règle de réseau virtuel. Sinon, dans le panneau **Pare-feu et réseaux virtuels** du compte Data Lake Storage, sélectionnez **Autoriser l’accès à tous les réseaux et services**. Créez ensuite le cluster HDInsight avant de réactiver la règle de réseau virtuel ou de désélectionner **Autoriser l’accès à tous les réseaux et services**. Pour en savoir plus, consultez la section [Exceptions](#exceptions).
 
-- L’intégration au réseau virtuel dans Data Lake Storage Gen1 ne fonctionne pas avec les [identités managées pour les ressources Azure](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
+- L’intégration au réseau virtuel dans Data Lake Storage Gen1 ne fonctionne pas avec les [identités managées pour les ressources Azure](../active-directory/managed-identities-azure-resources/overview.md).
   
 - Les données de fichier et de dossier de votre compte Data Lake Storage Gen 1 avec réseau virtuel activé ne sont pas accessibles à partir du portail. Cette restriction inclut notamment l’accès à partir d’une machine virtuelle située sur le réseau virtuel et d’activités comme l’utilisation de l’Explorateur de données. Les activités de gestion du compte continuent de fonctionner. Les données de fichier et de dossier de votre compte Data Lake Storage avec réseau virtuel activé sont accessibles à partir de toutes les ressources hors portail. Ces ressources incluent l’accès au SDK, les scripts PowerShell et les autres services Azure lorsqu’ils ne proviennent pas du portail. 
 
@@ -87,7 +87,7 @@ Voici quelques options disponibles :
 
 1.  Accédez au portail Azure et connectez-vous à votre compte.
  
-2.  [Créez un réseau virtuel](https://docs.microsoft.com/azure/virtual-network/quick-create-portal) dans votre abonnement. Vous pouvez également accéder à un réseau virtuel existant. Le réseau virtuel doit se trouver dans la même région que le compte Data Lake Storage Gen1.
+2.  [Créez un réseau virtuel](../virtual-network/quick-create-portal.md) dans votre abonnement. Vous pouvez également accéder à un réseau virtuel existant. Le réseau virtuel doit se trouver dans la même région que le compte Data Lake Storage Gen1.
  
 3.  Dans le panneau **Réseau virtuel**, sélectionnez **Points de terminaison fournisseurs**.
  

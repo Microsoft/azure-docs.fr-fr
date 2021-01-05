@@ -13,17 +13,17 @@ ms.workload: mobile
 ms.tgt_pltfrm: mobile-windows-phone
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 ms.date: 01/04/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 01/04/2019
-ms.openlocfilehash: db2e583515d948f455e1d2129684f97347a07403
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: e91d250b8cc9b80f2c97910c7fa972af32fa9104
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594931"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88998337"
 ---
 # <a name="tutorial-send-push-notifications-to-windows-phone-apps-using-notification-hubs"></a>Tutoriel : Envoyer des notifications Push à des applications Windows Phone avec Notification Hubs
 
@@ -65,7 +65,7 @@ Vous devez suivre ce didacticiel avant de pouvoir suivre tous les autres didacti
     Le concentrateur est maintenant créé et configuré pour envoyer une notification non authentifiée pour Windows Phone.
 
     > [!NOTE]
-    > Ce didacticiel utilise MPNS en mode non authentifié. Le mode MPNS non authentifié est assorti de restrictions sur les notifications que vous pouvez envoyer à chaque canal. Notification Hubs prend en charge le [mode authentifié MPNS](https://msdn.microsoft.com/library/windowsphone/develop/ff941099.aspx) en vous permettant de télécharger votre certificat.
+    > Ce didacticiel utilise MPNS en mode non authentifié. Le mode MPNS non authentifié est assorti de restrictions sur les notifications que vous pouvez envoyer à chaque canal. Notification Hubs prend en charge le [mode authentifié MPNS](/previous-versions/windows/apps/ff941099(v=vs.105)) en vous permettant de télécharger votre certificat.
 
 ## <a name="create-a-windows-phone-application"></a>Créer une application Windows Phone
 
@@ -84,8 +84,11 @@ Dans cette section, vous créez une application Windows Phone qui s’inscrit el
     ![Visual Studio - Gestionnaire de packages NuGet][20]
 4. Ouvrez le fichier App.xaml.cs et ajoutez les instructions `using` suivantes :
 
-        using Microsoft.Phone.Notification;
-        using Microsoft.WindowsAzure.Messaging;
+    ```csharp
+    using Microsoft.Phone.Notification;
+    using Microsoft.WindowsAzure.Messaging;
+    ```
+
 5. Ajoutez le code suivant au début de la méthode `Application_Launching` dans `App.xaml.cs` :
 
     ```csharp
@@ -114,7 +117,7 @@ Dans cette section, vous créez une application Windows Phone qui s’inscrit el
     ```
 
    > [!NOTE]
-   > La valeur `MyPushChannel` est un index utilisé pour rechercher un canal existant dans la collection [HttpNotificationChannel](https://msdn.microsoft.com/library/windows/apps/microsoft.phone.notification.httpnotificationchannel.aspx). S’il n’y en a aucun, créez une entrée portant ce nom.
+   > La valeur `MyPushChannel` est un index utilisé pour rechercher un canal existant dans la collection [HttpNotificationChannel](/previous-versions/ff402781(v=vs.110)). S’il n’y en a aucun, créez une entrée portant ce nom.
 
     Insérez le nom de votre hub et la chaîne de connexion appelée `DefaultListenSharedAccessSignature` que vous avez notée dans la section précédente.
     Ce code récupère l’URI de canal correspondant à l’application dans MPNS, puis inscrit ce dernier avec votre notification Hub. Il garantit également l’inscription de l’URI de canal dans votre hub de notification à chaque fois que l’application est lancée.
@@ -171,10 +174,10 @@ Dans cet exemple simple, vous avez diffusé des notifications Push à tous vos a
 [213]: ./media/notification-hubs-windows-phone-get-started/notification-hub-create-console-app.png
 
 <!-- URLs. -->
-[Notification Hubs Guidance]: https://msdn.microsoft.com/library/jj927170.aspx
-[MPNS authenticated mode]: https://msdn.microsoft.com/library/windowsphone/develop/ff941099(v=vs.105).aspx
+[Notification Hubs Guidance]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[MPNS authenticated mode]: /previous-versions/windows/apps/ff941099(v=vs.105)
 [Use Notification Hubs to push notifications to users]: notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
 [Use Notification Hubs to send breaking news]: notification-hubs-windows-phone-push-xplat-segmented-mpns-notification.md
-[toast catalog]: https://msdn.microsoft.com/library/windowsphone/develop/jj662938(v=vs.105).aspx
-[tile catalog]: https://msdn.microsoft.com/library/windowsphone/develop/hh202948(v=vs.105).aspx
+[toast catalog]: /previous-versions/windows/apps/jj662938(v=vs.105)
+[tile catalog]: /previous-versions/windows/apps/hh202948(v=vs.105)
 [didacticiel Notification Hubs - Windows Phone Silverlight]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/PushToSafari

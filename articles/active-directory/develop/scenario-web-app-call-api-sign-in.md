@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 09/30/2019
+ms.date: 07/14/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: e138b3513b42dda47b0a114d866d657e18e3e393
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b7f59f235f4baa270b36b01cc4532227ab23fbc8
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181645"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442529"
 ---
 # <a name="a-web-app-that-calls-web-apis-remove-accounts-from-the-token-cache-on-global-sign-out"></a>Application web appelant des API web : Supprimer les comptes du cache de jeton lors de la déconnexion globale
 
@@ -30,7 +30,7 @@ Pour effacer l’entrée du cache de jeton associée au compte déconnecté, vot
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-Microsoft.Identity.Web prend en charge l’implémentation de la déconnexion.
+Microsoft.Identity.Web prend en charge l’implémentation de la déconnexion. Pour plus d’informations, consultez [Code source de Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web/blob/c29f1a7950b940208440bebf0bcb524a7d6bee22/src/Microsoft.Identity.Web/WebAppExtensions/WebAppCallsWebApiAuthenticationBuilderExtensions.cs#L168-L176)
 
 # <a name="aspnet"></a>[ASP.NET](#tab/aspnet)
 
@@ -50,22 +50,18 @@ L’exemple Python ne supprime pas les comptes du cache lors de la déconnexion 
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-> [!div class="nextstepaction"]
-> [Acquérir un jeton pour l’application web](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-call-api-acquire-token?tabs=aspnetcore)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application web](./scenario-web-app-call-api-acquire-token.md?tabs=aspnetcore).
 
 # <a name="aspnet"></a>[ASP.NET](#tab/aspnet)
 
-> [!div class="nextstepaction"]
-> [Acquérir un jeton pour l’application web](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-call-api-acquire-token?tabs=aspnet)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application web](./scenario-web-app-call-api-acquire-token.md?tabs=aspnet).
 
 # <a name="java"></a>[Java](#tab/java)
 
-> [!div class="nextstepaction"]
-> [Acquérir un jeton pour l’application web](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-call-api-acquire-token?tabs=java)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application web](./scenario-web-app-call-api-acquire-token.md?tabs=java).
 
 # <a name="python"></a>[Python](#tab/python)
 
-> [!div class="nextstepaction"]
-> [Acquérir un jeton pour l’application web](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-call-api-acquire-token?tabs=python)
+Passez à l’article suivant de ce scénario, [Acquérir un jeton pour l’application web](./scenario-web-app-call-api-acquire-token.md?tabs=python).
 
 ---

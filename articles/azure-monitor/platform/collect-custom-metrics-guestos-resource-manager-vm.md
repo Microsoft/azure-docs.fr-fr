@@ -4,33 +4,30 @@ description: Envoyer des métriques de système d’exploitation invité vers le
 author: anirudhcavale
 services: azure-monitor
 ms.topic: conceptual
-ms.date: 09/24/2018
-ms.author: ancav
+ms.date: 05/04/2020
+ms.author: bwren
 ms.subservice: metrics
-ms.openlocfilehash: e747ca89912c36538bfb9d02986629fe57c5adcb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 208515b7541948ca6913e6fda092c6a424de85f9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77657365"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86515782"
 ---
-# <a name="send-guest-os-metrics-to-the-azure-monitor-metric-store-using-a-resource-manager-template-for-a-windows-virtual-machine"></a>Envoyer des métriques de système d’exploitation invité vers le magasin de métriques d’Azure Monitor à l’aide d’un modèle Resource Manager pour une machine virtuelle Windows
+# <a name="send-guest-os-metrics-to-the-azure-monitor-metric-store-by-using-an-azure-resource-manager-template-for-a-windows-virtual-machine"></a>Envoyer des métriques de système d’exploitation invité vers le magasin de métriques d’Azure Monitor à l’aide d’un modèle Azure Resource Manager pour une machine virtuelle Windows
+Les données de performance du système d’exploitation invité des machines virtuelles Azure ne sont pas collectées automatiquement comme d’autres [métriques de la plateforme](../insights/monitor-azure-resource.md#monitoring-data). Installez l’[extension Diagnostics](diagnostics-extension-overview.md) d’Azure Monitor pour collecter les métriques du système d’exploitation invité dans la base de données de mesures, afin qu’elles soient utilisables avec toutes les fonctionnalités des Métriques Azure Monitor, dont les alertes en quasi temps réel, les graphiques, le routage et l’accès à partir d’une API REST. Cet article décrit le processus permettant d’envoyer les mesures de performances du système d’exploitation invité d’une machine virtuelle Windows à la base de données des métriques à l’aide d’un modèle Resource Manager. 
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+> [!NOTE]
+> Pour plus d’informations sur la configuration de l’extension Diagnostics pour collecter les métriques du système d’exploitation invité à l’aide du portail Azure, consultez [Installer et configurer l’extension Diagnostics Azure pour Windows (WAD)](diagnostics-extension-windows-install.md).
 
-À l’aide de l’[extension Diagnostics](diagnostics-extension-overview.md) d’Azure Monitor, vous pouvez collecter des métriques et des journaux d’activité à partir du système d’exploitation invité (SE invité) qui est exécuté dans le cadre d’une machine virtuelle, d’un service cloud ou d’un cluster Service Fabric. L’extension peut envoyer des données de télémétrie à de [nombreux emplacements différents](https://docs.microsoft.com/azure/monitoring/monitoring-data-collection?toc=/azure/azure-monitor/toc.json).
-
-Cet article décrit le processus pour envoyer les métriques de performance du SE invité d’une machine virtuelle Windows vers le magasin de données d’Azure Monitor. À partir de la version 1.11 de l’extension Diagnostics, vous pouvez écrire des métriques directement dans le magasin de métriques Azure Monitor, où les métriques standard de la plateforme sont déjà collectées.
-
-En les stockant dans cet emplacement, vous avez accès aux mêmes actions que celles disponibles pour les métriques de la plateforme. Ces actions incluent notamment la génération d’alertes en temps quasi réel, la création de graphiques, le routage, l’accès à partir d’une API REST, etc. Avant, l’extension Diagnostics écrivait les données dans le stockage Azure, et non dans le magasin de données d’Azure Monitor.
 
 Si vous découvrez les modèles Resource Manager, obtenez plus d’informations sur les [déploiements de modèle](../../azure-resource-manager/management/overview.md), leur structure et leur syntaxe.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services).
+- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](../../azure-resource-manager/management/resource-providers-and-types.md).
 
-- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview).
+- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](../../cloud-shell/overview.md).
 
 - Votre ressource de machine virtuelle doit se trouver dans une région [ prenant en charge les métriques personnalisées](metrics-custom-overview.md#supported-regions). 
 
@@ -289,4 +286,3 @@ Pour déployer le modèle Resource Manager, vous allez utiliser Azure PowerShell
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur les [métriques personnalisées](metrics-custom-overview.md).
-

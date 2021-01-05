@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 09/15/2018
 ms.author: alkohli
 ms.custom: include file
-ms.openlocfilehash: 4ba5c8b69776b39d8a6640744b0c24600f3a0d5b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1be6a654962b513cfcf755d45e562b86067e7b25
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177250"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995004"
 ---
 #### <a name="to-create-a-new-service"></a>Création d’un service
 
@@ -29,13 +29,13 @@ ms.locfileid: "67177250"
 
     2.  Choisissez un **abonnement** dans la liste déroulante. L’abonnement est lié à votre compte de facturation. Ce champ n’est pas présent si vous n’avez qu’un seul abonnement.
 
-    3.  Pour le **Groupe de ressources**, sélectionnez un groupe existant ou créez-en un. Pour plus d’informations, consultez la page [Groupes de ressources dans Azure](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-infrastructure-resource-groups-guidelines/).
+    3.  Pour le **Groupe de ressources**, sélectionnez un groupe existant ou créez-en un. Pour plus d’informations, consultez la page [Groupes de ressources dans Azure](../articles/azure-resource-manager/management/manage-resource-groups-portal.md).
 
     4.  Indiquez un **emplacement** pour votre service. Pour plus d’informations sur les services disponibles dans chaque région, consultez la page [Régions Azure](https://azure.microsoft.com/regions/#services). De manière générale, choisissez un **Emplacement** plus proche de la région géographique dans laquelle vous souhaitez déployer votre appareil. Vous pouvez également prendre en compte les éléments suivants :
 
         -   Si vous avez d’autres charges de travail dans Azure que vous souhaitez déployer avec votre appareil StorSimple, nous vous invitons à utiliser ce centre de données.
 
-        -   Le gestionnaire d’appareil StorSimple et le stockage Azure peuvent se trouver en deux emplacements différents. Dans ce cas, vous devez créer séparément le gestionnaire d’appareil StorSimple et le compte de stockage Azure. Pour créer un compte de stockage Azure, accédez au service Stockage Azure dans le portail Azure, puis suivez les étapes décrites dans [Créer un compte de stockage](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account). Une fois que vous avez créé ce compte, ajoutez-le au service StorSimple Device Manager en suivant les étapes indiquées dans [Configurer un nouveau compte de stockage pour le service](https://azure.microsoft.com/documentation/articles/storsimple-deployment-walkthrough/#configure-a-new-storage-account-for-the-service).
+        -   Le gestionnaire d’appareil StorSimple et le stockage Azure peuvent se trouver en deux emplacements différents. Dans ce cas, vous devez créer séparément le gestionnaire d’appareil StorSimple et le compte de stockage Azure. Pour créer un compte de stockage Azure, accédez au service Stockage Azure dans le portail Azure, puis suivez les étapes décrites dans [Créer un compte de stockage](../articles/storage/common/storage-account-create.md). Une fois que vous avez créé ce compte, ajoutez-le au service StorSimple Device Manager en suivant les étapes indiquées dans [Configurer un nouveau compte de stockage pour le service](../articles/storsimple/storsimple-virtual-array-manage-storage-accounts.md#add-a-storage-account-credential).
 
         -   Si vous déployez l’appareil virtuel dans le portail Government, le service StorSimple Device Manager est disponible dans l’Iowa et en Virginie.
 
@@ -45,8 +45,6 @@ ms.locfileid: "67177250"
 
     7.  Pour créer le service StorSimple Device Manager, cliquez sur **Créer**.
 
-        ![Créer un nouveau service](./media/storsimple-virtual-array-create-new-service/createnewservice4.png)  
+        ![Créer un nouveau service 2](./media/storsimple-virtual-array-create-new-service/createnewservice4.png)  
 
 Vous êtes dirigés vers la page d’accueil **Service**. La création de service dure quelques minutes. Une fois le service créé, vous recevez la notification correspondante et l’état du service devient **Actif**.
-
-

@@ -11,18 +11,22 @@ ms.date: 06/28/2019
 ms.custom:
 - mvc
 - mqtt
-ms.openlocfilehash: 2eec96eee943d6fe291d054e1d73876e38f61d6d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- devx-track-js
+- devx-track-azurecli
+ms.openlocfilehash: b4de685accf665c7555a454ef247ddf589c6ba5f
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81769955"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96572335"
 ---
-# <a name="tutorial-implement-a-device-firmware-update-process"></a>Tutoriel : Implémenter un processus de mise à jour de microprogramme d’appareil
+# <a name="tutorial-implement-a-device-firmware-update-process"></a>Tutoriel : Implémenter un processus de mise à jour de microprogramme d’appareil
 
 Vous devrez peut-être mettre à jour le microprogramme sur les appareils connectés à votre hub IoT. Par exemple, il peut être nécessaire d’ajouter de nouvelles fonctionnalités au microprogramme ou d’appliquer des correctifs de sécurité. Dans de nombreux scénarios IoT, il est difficile d’intervenir physiquement puis d’appliquer manuellement les mises à jour du microprogramme à vos appareils. Ce tutoriel montre comment démarrer et surveiller le processus de mise à jour du microprogramme à distance via une application back-end connectée à votre hub.
 
-Pour créer et surveiller le processus de mise à jour du microprogramme, l’application back-end de ce tutoriel crée une _configuration_ dans votre hub IoT. La [gestion automatique des appareils](iot-hub-auto-device-config.md) IoT Hub utilise cette configuration pour mettre à jour un ensemble de _propriétés souhaitées du jumeau d’appareil_ sur tous vos appareils de refroidissement. Les propriétés souhaitées spécifient les détails de la mise à jour du microprogramme requise. Pendant que les appareils de refroidissement exécutent le processus de mise à jour du microprogramme, ils signalent leur état à l’application back-end à l’aide des _propriétés signalées du jumeau d’appareil_. L’application back-end peut utiliser la configuration pour surveiller les propriétés signalées envoyées depuis l’appareil et suivre le processus de mise à jour du microprogramme jusqu'à la fin :
+Pour créer et surveiller le processus de mise à jour du microprogramme, l’application back-end de ce tutoriel crée une _configuration_ dans votre hub IoT. La [gestion automatique des appareils](./iot-hub-automatic-device-management.md) IoT Hub utilise cette configuration pour mettre à jour un ensemble de _propriétés souhaitées du jumeau d’appareil_ sur tous vos appareils de refroidissement. Les propriétés souhaitées spécifient les détails de la mise à jour du microprogramme requise. Pendant que les appareils de refroidissement exécutent le processus de mise à jour du microprogramme, ils signalent leur état à l’application back-end à l’aide des _propriétés signalées du jumeau d’appareil_. L’application back-end peut utiliser la configuration pour surveiller les propriétés signalées envoyées depuis l’appareil et suivre le processus de mise à jour du microprogramme jusqu'à la fin :
 
 ![Processus de mise à jour du microprogramme](media/tutorial-firmware-update/Process.png)
 
@@ -34,11 +38,9 @@ Dans ce tutoriel, vous allez effectuer les tâches suivantes :
 > * Simuler le processus de mise à jour du microprogramme sur un appareil.
 > * Recevoir des mises à jour de l’état de l’appareil tandis que la mise à jour du microprogramme progresse.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 Les deux exemples d’applications que vous exécutez dans ce guide de démarrage rapide sont écrits à l’aide de Node.js. Votre ordinateur de développement doit disposer de Node.js v10.x.x ou ultérieur.
 
@@ -52,7 +54,7 @@ node --version
 
 Téléchargez l’exemple de projet Node.js à partir de https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip et extrayez l’archive ZIP.
 
-Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L'exemple d’appareil de ce tutoriel utilise le protocole MQTT qui communique sur le port 8883. Dans certains environnements réseau professionnels et scolaires, ce port peut être bloqué. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="set-up-azure-resources"></a>Configurer les ressources Azure
 
@@ -181,7 +183,7 @@ La capture d’écran suivante montre le résultat de l’application d’appare
 
 La capture d’écran suivante montre le résultat de l’application back-end et comment celle-ci crée la configuration pour mettre à jour les propriétés souhaitées du microprogramme :
 
-![Application back-end](./media/tutorial-firmware-update/BackEnd1.png)
+![Capture d’écran montrant la sortie de l’application back-end.](./media/tutorial-firmware-update/BackEnd1.png)
 
 La capture d’écran suivante montre le résultat de l’application back-end et comment celle-ci surveille les métriques de mises à jour du microprogramme à partir de l’appareil simulé :
 

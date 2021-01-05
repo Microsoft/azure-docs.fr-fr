@@ -8,19 +8,19 @@ manager: daveba
 editor: ''
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 12/02/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f09b2fc685881aa8a7bd87b6a855c657af9ef43d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4d0f7093f44a284ec26907d7c4bcfb2bdfd04763
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78190311"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85360909"
 ---
 # <a name="azure-ad-connect-cloud-provisioning-agent-automatic-upgrade"></a>Agent de provisionnement cloud Azure AD Connect : Mise à jour automatique
 

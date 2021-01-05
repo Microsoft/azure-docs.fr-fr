@@ -10,10 +10,10 @@ ms.date: 04/26/2019
 ms.reviewer: mimckitt
 ms.custom: mimckitt
 ms.openlocfilehash: fab6e6742fa43e1e38ee661b67896ae4aa11b3ed
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83124820"
 ---
 # <a name="add-reference-to-an-existing-virtual-network-in-an-azure-scale-set-template"></a>Ajouter une référence à un réseau virtuel existant dans un modèle de groupe identique Azure

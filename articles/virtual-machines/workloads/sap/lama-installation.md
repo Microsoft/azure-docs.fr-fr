@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 07/29/2019
 ms.author: sedusch
-ms.openlocfilehash: fda62ff0af29c7cf681d9438b02420d299535701
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3f541e28f47bb6456b441811d23baa9e020fde7
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80293946"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94959150"
 ---
 # <a name="sap-lama-connector-for-azure"></a>Connecteur SAP LaMa pour Azure
 
@@ -153,7 +154,7 @@ Nous vous recommandons de recourir à un sous-réseau distinct pour toutes les m
 > [!NOTE]
 > Dans la mesure du possible, supprimez toutes les extensions de machine virtuelle, car elles sont susceptibles d’entraîner de longues durées d’exécution pour le détachement des disques d’une machine virtuelle.
 
-Assurez-vous que l’utilisateur \<hanasid>adm, \<sapsid>adm et le groupe sapsys existent sur la machine cible avec le même ID et identificateur de groupe (GID) ou utilisent LDAP. Activez et démarrez le serveur NFS sur les machines virtuelles qui doivent être utilisées pour l’exécution de SAP NetWeaver (A)SCS.
+Assurez-vous que l’utilisateur \<hanasid>adm, \<sapsid>adm et le groupe sapsys existent sur la machine cible avec les mêmes ID et GID, ou utilisent le protocole LDAP. Activez et démarrez le serveur NFS sur les machines virtuelles qui doivent être utilisées pour l’exécution de SAP NetWeaver (A)SCS.
 
 ### <a name="manual-deployment"></a>Déploiement manuel
 
@@ -181,7 +182,7 @@ Créez une machine virtuelle avec l’un des systèmes d’exploitation pris en 
 
 La base de données Oracle doit disposer de disques pour /oracle, /home/oraod1 et /home/oracle.
 
-![Base de données Oracle sur Linux](media/lama/sap-lama-db-ora-lnx.png)
+![Diagramme montrant une base de données Oracle sur Linux et les disques dont elle a besoin.](media/lama/sap-lama-db-ora-lnx.png)
 
 #### <a name="manual-deployment-for-microsoft-sql-server"></a>Déploiement manuel pour Microsoft SQL Server
 
@@ -212,7 +213,7 @@ Ces composants sont requis pour le déploiement du modèle. Le moyen le plus sim
 
 Les modèles présentent les paramètres suivants :
 
-* sapSystemId : ID du système SAP. Cet ID est utilisé pour la création de la disposition du disque (par exemple, /usr/sap/\<sapsid>).
+* sapSystemId : ID du système SAP. Utilisé pour la création de la disposition du disque (par exemple, /usr/sap/\<sapsid>).
 
 * computerName : nom d’ordinateur de la nouvelle machine virtuelle. Ce paramètre est également utilisé par SAP LaMa. Lorsque vous utilisez ce modèle pour approvisionner une nouvelle machine virtuelle dans le cadre de la copie d’un système, SAP LaMa attend que l’hôte portant ce nom d’ordinateur soit accessible.
 
@@ -260,14 +261,14 @@ Dans les exemples ci-après, nous supposons que vous installez SAP HANA présent
 
 Avant de démarrer SAP Software Provisioning Manager (SWPM), vous devez monter l’adresse IP du nom d’hôte virtuel de l’instance ASCS. La méthode recommandée consiste à utiliser sapacext. Si vous montez l’adresse IP à l’aide de sapacext, veillez à remonter l’adresse IP après un redémarrage.
 
-![Linux][Logo_Linux] Linux
+![Logo Linux][Logo_Linux] Linux
 
 ```bash
 # /usr/sap/hostctrl/exe/sapacext -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
 /usr/sap/hostctrl/exe/sapacext -a ifup -i eth0 -h ah1-ascs -n 255.255.255.128
 ```
 
-![Windows][Logo_Windows] Windows
+![Logo Windows][Logo_Windows] Windows
 
 ```bash
 # C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
@@ -276,7 +277,7 @@ C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h ah1-as
 
 Exécutez SWPM et utilisez *ah1-ascs* pour le champ *ASCS Instance Host Name* (Nom d’hôte d’instance ASCS).
 
-![Linux][Logo_Linux] Linux  
+![Logo Linux][Logo_Linux] Linux  
 Ajoutez le paramètre de profil ci-après au profil d’agent hôte SAP, situé à l’emplacement /usr/sap/hostctrl/exe/host_profile. Pour plus d’informations, consultez la note SAP [2628497].
 ```
 acosprep/nfs_paths=/home/ah1adm,/usr/sap/trans,/sapmnt/AH1,/usr/sap/AH1
@@ -387,14 +388,14 @@ Exécutez l’installation de l’instance de base de données de SWPM sur la ma
 
 Avant de démarrer SAP Software Provisioning Manager (SWPM), vous devez monter l’adresse IP du nom d’hôte virtuel du serveur d’applications. La méthode recommandée consiste à utiliser sapacext. Si vous montez l’adresse IP à l’aide de sapacext, veillez à remonter l’adresse IP après un redémarrage.
 
-![Linux][Logo_Linux] Linux
+![Logo Linux][Logo_Linux] Linux
 
 ```bash
 # /usr/sap/hostctrl/exe/sapacext -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
 /usr/sap/hostctrl/exe/sapacext -a ifup -i eth0 -h ah1-di-0 -n 255.255.255.128
 ```
 
-![Windows][Logo_Windows] Windows
+![Logo Windows][Logo_Windows] Windows
 
 ```bash
 # C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
@@ -545,12 +546,12 @@ Dans la boîte de dialogue *Primary Application Server Instance* (Instance du se
     Pour contourner ce problème, définissez le paramètre de profil OS_UNICODE=uc dans le profil par défaut de votre système SAP.
 
 * Erreur lors de l’exécution de l’étape SAPinst : dCheckGivenServer
-  * Error executing SAPinst step: dCheckGivenServer" version="1.0" ERROR: (Last error reported by the step: \<p> Installation was canceled by user. \</p> »
+  * Error executing SAPinst step: dCheckGivenServer" version="1.0" ERROR: (Last error reported by the step: \<p> L’utilisateur a annulé l’installation. \</p>
   * Solution  
     Assurez-vous que SWPM s’exécute avec un utilisateur ayant accès au profil. Cet utilisateur peut être configuré dans l’Assistant d’installation du serveur d’applications.
 
 * Erreur lors de l’exécution de l’étape SAPinst : checkClient
-  * Error executing SAPinst step: checkClient" version="1.0" ERROR: (Last error reported by the step: \<p> Installation was canceled by user. \</p>) »
+  * Error executing SAPinst step: checkClient" version="1.0" ERROR: (Last error reported by the step: \<p> L’utilisateur a annulé l’installation. \</p>)
   * Solution  
     Assurez que Microsoft ODBC Driver for SQL Server est installé sur la machine virtuelle sur laquelle vous souhaitez installer le serveur d’applications.
 

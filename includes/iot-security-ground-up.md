@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-fundamentals
 author: robinsh
 ms.service: iot-fundamentals
@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 04/24/2018
 ms.author: robinsh
 ms.custom: include file
-ms.openlocfilehash: 128a2e8b200f1323b88aad635f27c1b686ecbed2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 234407e6973657ba3ad0d78189e7cb1d363c15e2
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72789710"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95564141"
 ---
 L’Internet des objets (IoT, Internet of Things) confronte les entreprises du monde entier à des défis uniques en termes de sécurité, de confidentialité et de conformité. Contrairement à la technologie informatique traditionnelle où ces problèmes sont axés sur les logiciels et leur mode d’implémentation, l’IoT porte sur les effets de la convergence entre le monde informatique et le monde physique. La protection des solutions IoT implique un approvisionnement sécurisé des appareils, une connexion sécurisée entre ces appareils et le cloud et une protection efficace des données dans le cloud, dans le cadre du traitement et du stockage. Cependant, les appareils avec contraintes de ressources, la répartition géographique des déploiements et le grand nombre d’appareils inclus au sein d’une solution vont à l’encontre de ces fonctionnalités.
 
@@ -39,11 +39,11 @@ Le concept [Security Development Lifecycle (SDL)](https://www.microsoft.com/sdl/
 
 Microsoft Azure offre une solution cloud complète, qui associe un ensemble de services cloud intégrés en constante évolution (analyse, Machine Learning, stockage, sécurité, mise en réseau et web) et un engagement envers la protection et la confidentialité de vos données, qui fait référence dans le secteur. La stratégie [Assume Breach](https://azure.microsoft.com/blog/red-teaming-using-cutting-edge-threat-simulation-to-harden-the-microsoft-enterprise-cloud/) de Microsoft repose sur une *équipe dédiée*, composée d’experts en sécurité logicielle, qui simule des attaques pour tester la capacité d’Azure à détecter les menaces émergentes, à les contrer et à rétablir un fonctionnement correct après-coup. L’équipe de [réponse globale aux incidents](https://www.microsoft.com/en-us/TrustCenter/Security/DesignOpSecurity) de Microsoft travaille en permanence pour atténuer les conséquences des attaques et activités malveillantes. Elle applique des procédures établies pour la gestion des incidents, la communication et la récupération et utilise des interfaces détectables et prévisibles avec les partenaires internes et externes.
 
-Les systèmes de Microsoft assurent une détection des intrusions et une prévention continues, une prévention contre les attaques de service et des tests d’intrusion réguliers. Ils offrent également des outils d’investigation qui permettent d’identifier et d’atténuer les menaces. [L’authentification multifacteur](../articles/active-directory/authentication/multi-factor-authentication.md) fournit une couche de sécurité supplémentaire pour l’accès au réseau par les utilisateurs finaux. Pour l’application et le fournisseur de l’hôte, Microsoft offre le contrôle d’accès, la surveillance, les logiciels anti-programme malveillant, l’analyse de vulnérabilité, les correctifs et la gestion de la configuration.
+Les systèmes de Microsoft assurent une détection des intrusions et une prévention continues, une prévention contre les attaques de service et des tests d’intrusion réguliers. Ils offrent également des outils d’investigation qui permettent d’identifier et d’atténuer les menaces. [L’authentification multifacteur](../articles/active-directory/authentication/concept-mfa-howitworks.md) fournit une couche de sécurité supplémentaire pour l’accès au réseau par les utilisateurs finaux. Pour l’application et le fournisseur de l’hôte, Microsoft offre le contrôle d’accès, la surveillance, les logiciels anti-programme malveillant, l’analyse de vulnérabilité, les correctifs et la gestion de la configuration.
 
 Les accélérateurs de solution tirent parti de la sécurité et de la confidentialité intégrées à la plateforme Azure, mais aussi des processus SDL et OSA pour le développement et l’utilisation sécurisés de tous les logiciels Microsoft. Ces procédures fournissent des fonctionnalités de protection de l’infrastructure, de protection du réseau et d’identité et gestion fondamentales pour la sécurité de n’importe quelle solution.
 
-[Azure IoT Hub](../articles/iot-hub/about-iot-hub.md), qui fait partie des [accélérateurs de solution IoT](../articles/iot-fundamentals/iot-introduction.md), offre un service intégralement géré qui garantit une communication bidirectionnelle fiable et sécurisée entre les appareils IoT et les services Azure, par exemple [Azure Machine Learning](../articles/machine-learning/studio/what-is-machine-learning.md) et [Azure Stream Analytics](../articles/stream-analytics/stream-analytics-introduction.md). Il utilise pour cela des informations d’identification de sécurité et un contrôle d’accès pour chaque appareil.
+[Azure IoT Hub](../articles/iot-hub/about-iot-hub.md), qui fait partie des [accélérateurs de solution IoT](../articles/iot-fundamentals/iot-introduction.md), offre un service intégralement géré qui garantit une communication bidirectionnelle fiable et sécurisée entre les appareils IoT et les services Azure, par exemple [Azure Machine Learning](../articles/machine-learning/classic/index.yml) et [Azure Stream Analytics](../articles/stream-analytics/stream-analytics-introduction.md). Il utilise pour cela des informations d’identification de sécurité et un contrôle d’accès pour chaque appareil.
 
 Pour présenter clairement les fonctionnalités de sécurité et de confidentialité intégrées aux accélérateurs de solution Azure IoT, cet article fractionne cette suite selon les trois principaux domaines de sécurité.
 
@@ -89,7 +89,7 @@ En utilisant Azure Active Directory (AAD) pour l’authentification et l’autor
 
 Une fois les données dans le cloud, elles peuvent être traitées et stockées dans n’importe quel flux de travail défini par l’utilisateur. L’accès à chaque partie des données est contrôlé avec Azure Active Directory, en fonction du service de stockage utilisé.
 
-Toutes les clés utilisées par l’infrastructure IoT sont stockées dans le cloud de manière sécurisée. Les clés peuvent être substituées si un réapprovisionnement est nécessaire. Les données peuvent être stockées dans [Cosmos DB](../articles/cosmos-db/introduction.md) ou dans des [bases de données SQL](../articles/sql-database/sql-database-faq.md), ce qui permet de définir le niveau de sécurité souhaité. En outre, Azure fournit un moyen de surveiller et d’auditer tous les accès à vos données pour vous informer de toute intrusion ou de tout accès non autorisé.
+Toutes les clés utilisées par l’infrastructure IoT sont stockées dans le cloud de manière sécurisée. Les clés peuvent être substituées si un réapprovisionnement est nécessaire. Les données peuvent être stockées dans [Azure Cosmos DB](../articles/cosmos-db/introduction.md) ou dans [SQL Database](../articles/azure-sql/database/sql-database-paas-overview.md), ce qui permet de définir le niveau de sécurité souhaité. En outre, Azure fournit un moyen de surveiller et d’auditer tous les accès à vos données pour vous informer de toute intrusion ou de tout accès non autorisé.
 
 ## <a name="conclusion"></a>Conclusion
 
@@ -103,12 +103,12 @@ Chaque accélérateur de solution crée des instances de services Azure, telles 
 
 * [**Azure IoT Hub**](https://azure.microsoft.com/services/iot-hub/) : votre passerelle connectant le cloud aux appareils. Vous pouvez évoluer vers des millions de connexions par hub et traiter des volumes de données de grande envergure en bénéficiant de la prise en charge de l’authentification par appareil, qui vous aide à sécuriser votre solution.
 
-* [**Azure Cosmos DB**](https://azure.microsoft.com/services/cosmos-db/) : service de base de données évolutif et entièrement indexé pour données semi-structurées, qui gère les métadonnées (attributs, configuration, propriétés de sécurité, etc.) des appareils que vous approvisionnez. Azure Cosmos DB assure un traitement hautes performances et à débit élevé, ainsi qu’une indexation des données indépendante du schéma. Ce service offre également une interface de requête SQL enrichie.
+* [**Azure Cosmos DB**](https://azure.microsoft.com/services/cosmos-db/) : service de base de données évolutif et entièrement indexé pour données semi-structurées, qui gère les métadonnées (attributs, configuration, propriétés de sécurité, etc.) des appareils que vous provisionnez. Azure Cosmos DB assure un traitement hautes performances et à débit élevé, ainsi qu’une indexation des données indépendante du schéma. Ce service offre également une interface de requête SQL enrichie.
 
 * [**Azure Stream Analytics**](https://azure.microsoft.com/services/stream-analytics/) : traitement des flux en temps réel dans le cloud, permettant de développer et de déployer rapidement une solution d’analyse à faible coût pour obtenir des informations en temps réel de la part des appareils, capteurs, infrastructures et applications. Les données de ce service entièrement géré peuvent être mises à l’échelle selon n’importe quel volume. Vous continuez à bénéficier d’un débit élevé, d’une faible latence et de la résilience.
 
-* [**Azure App Services**](https://azure.microsoft.com/services/app-service/) : plateforme cloud permettant de créer de puissantes applications web et mobiles qui se connectent aux données n’importe où, que ce soit localement ou dans le cloud. Créez des applications mobiles attrayantes pour iOS, Android et Windows. Assurez l’intégration avec vos applications SaaS (Software as a Service) et d’entreprise grâce à une connectivité prête à l’emploi à des dizaines d’applications et services basés sur le cloud. Encodez dans votre environnement de développement intégré et votre langage favoris (.NET, Node.js, PHP, Python ou Java) pour créer rapidement des applications web et des API.
+* [**Azure App Services**](https://azure.microsoft.com/services/app-service/) : plateforme cloud qui permet de créer des applications web et mobiles puissantes qui se connectent aux données n’importe où, que ce soit localement ou dans le cloud. Créez des applications mobiles attrayantes pour iOS, Android et Windows. Assurez l’intégration avec vos applications SaaS (Software as a Service) et d’entreprise grâce à une connectivité prête à l’emploi à des dizaines d’applications et services basés sur le cloud. Encodez dans votre environnement de développement intégré et votre langage favoris (.NET, Node.js, PHP, Python ou Java) pour créer rapidement des applications web et des API.
 
-* [**Logic Apps**](https://azure.microsoft.com/services/app-service/logic/) : fonctionnalité Azure App Service qui vous aide à intégrer votre solution IoT dans vos systèmes métier existants et à automatiser les processus de flux de travail. Logic Apps permet aux développeurs de concevoir des flux de travail qui démarrent à partir d’un déclencheur et exécutent une série d’étapes — des règles et actions utilisant des connecteurs puissants pour l’intégration à vos processus d’entreprise. Logic Apps offre une connectivité prête à l’emploi vers un vaste écosystème d’applications SaaS, basées sur le cloud et locales.
+* [**Logic Apps**](https://azure.microsoft.com/services/app-service/logic/) : fonctionnalité Azure App Service qui vous aide à intégrer votre solution IoT dans vos systèmes métier existants et à automatiser les processus de flux de travail. Logic Apps permet aux développeurs de concevoir des flux de travail qui démarrent à partir d’un déclencheur et exécutent une série d’étapes — des règles et actions utilisant des connecteurs puissants pour l’intégration à vos processus d’entreprise. Logic Apps offre une connectivité prête à l’emploi vers un vaste écosystème d’applications SaaS, basées sur le cloud et locales.
 
-* [**Stockage Blob Azure**](https://azure.microsoft.com/services/storage/) : stockage cloud fiable et économique pour les données que vos appareils envoient au cloud.
+* [**Stockage Blob Azure**](https://azure.microsoft.com/services/storage/) : stockage cloud fiable et économique pour les données que vos appareils envoient au cloud.

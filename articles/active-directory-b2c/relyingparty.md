@@ -7,15 +7,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 04/20/2020
+ms.date: 12/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 733a33881fe3acc962aeda4b05a1b01be4e148ca
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 9c50bd71f4e2e5bbe12518f5a5d1cd486af9723a
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81680358"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509749"
 ---
 # <a name="relyingparty"></a>RelyingParty
 
@@ -25,7 +25,7 @@ L’élément **RelyingParty** spécifie le parcours utilisateur à appliquer po
 
 L’exemple suivant montre un élément **RelyingParty** dans le fichier de stratégie *B2C_1A_signup_signin* :
 
-```XML
+```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TrustFrameworkPolicy
   xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
@@ -77,8 +77,35 @@ L’élément facultatif **RelyingParty** contient les éléments suivants :
 | Élément | Occurrences | Description |
 | ------- | ----------- | ----------- |
 | DefaultUserJourney | 1:1 | Parcours utilisateur par défaut pour l’application par partie de confiance. |
+| Points de terminaison | 0:1 | Liste de points de terminaison. Pour plus d’informations, consultez [Point de terminaison UserInfo](userinfo-endpoint.md). |
 | UserJourneyBehaviors | 0:1 | Étendue des comportements de parcours utilisateur. |
 | TechnicalProfile | 1:1 | Profil technique pris en charge par l’application par partie de confiance. Le profil technique fournit un contrat conformément auquel l’application par partie de confiance contacte Azure AD B2C. |
+
+## <a name="endpoints"></a>Points de terminaison
+
+L’élément **Points de terminaison** contient l’élément suivant :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| Point de terminaison | 1:1 | Référence à un point de terminaison.|
+
+L’élément **Point de terminaison** contient les attributs suivants :
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| Id | Oui | Identificateur unique du point de terminaison.|
+| UserJourneyReferenceId | Oui | Identificateur du parcours utilisateur dans la stratégie. Pour plus d’informations, consultez [Parcours utilisateur](userjourneys.md)  | 
+
+L’exemple suivant montre une partie de confiance avec un [point de terminaison UserInfo](userinfo-endpoint.md) :
+
+```xml
+<RelyingParty>
+  <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+  <Endpoints>
+    <Endpoint Id="UserInfo" UserJourneyReferenceId="UserInfoJourney" />
+  </Endpoints>
+  ...
+```
 
 ## <a name="defaultuserjourney"></a>DefaultUserJourney
 
@@ -86,7 +113,7 @@ L’élément `DefaultUserJourney` spécifie une référence à l’identificate
 
 Stratégie *B2C_1A_signup_signin* :
 
-```XML
+```xml
 <RelyingParty>
   <DefaultUserJourney ReferenceId="SignUpOrSignIn">
   ...
@@ -94,7 +121,7 @@ Stratégie *B2C_1A_signup_signin* :
 
 *B2C_1A_TrustFrameWorkBase* ou *B2C_1A_TrustFrameworkExtensionPolicy* :
 
-```XML
+```xml
 <UserJourneys>
   <UserJourney Id="SignUpOrSignIn">
   ...
@@ -117,7 +144,7 @@ L’élément **UserJourneyBehaviors** contient les éléments suivants :
 | SessionExpiryInSeconds | 0:1 | Durée de vie du cookie de la session d’Azure AD B2C spécifiée en tant que valeur entière et stockée dans le navigateur de l’utilisateur après une authentification réussie. |
 | JourneyInsights | 0:1 | Clé d’instrumentation Azure Application Insights à utiliser. |
 | ContentDefinitionParameters | 0:1 | Liste des paires clé/valeur à ajouter à l’URI de charge de définition de contenu. |
-|ScriptExecution| 0:1| Modes d’exécution [JavaScript](javascript-samples.md) pris en charge. Valeurs possibles : `Allow` ou `Disallow` (par défaut).
+|ScriptExecution| 0:1| Modes d’exécution [JavaScript](javascript-and-page-layout.md) pris en charge. Valeurs possibles : `Allow` ou `Disallow` (par défaut).
 
 ### <a name="singlesignon"></a>SingleSignOn
 
@@ -126,7 +153,7 @@ L’élément **SingleSignOn** contient l’attribut suivant :
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
 | Étendue | Oui | Étendue du comportement d’authentification unique. Valeurs possibles : `Suppressed`, `Tenant`, `Application` ou `Policy`. La valeur `Suppressed` indique que le comportement est supprimé et que l’utilisateur est toujours invité à sélectionner un fournisseur d’identité.  La valeur `Tenant` indique que le comportement est appliqué à toutes les stratégies dans le locataire. Par exemple, un utilisateur suivant deux parcours de stratégie pour un locataire n’est pas invité à sélectionner un fournisseur d’identité. La valeur `Application` indique que le comportement est appliqué à toutes les stratégies pour l’application qui effectue la requête. Par exemple, un utilisateur suivant deux parcours de stratégie pour une application n’est pas invité à sélectionner un fournisseur d’identité. La valeur `Policy` indique que le comportement s’applique uniquement à une stratégie. Par exemple, un utilisateur suivant deux parcours de stratégie pour une infrastructure de confiance est invité à sélectionner un fournisseur d’identité en cas de basculement d’une stratégie à une autre. |
-| KeepAliveInDays | Oui | Contrôle la durée pendant laquelle l’utilisateur reste connecté. Affecter la valeur 0 désactive la fonctionnalité KMSI. Pour plus d’informations, consultez [Maintenir la connexion](custom-policy-keep-me-signed-in.md). |
+| KeepAliveInDays | Oui | Contrôle la durée pendant laquelle l’utilisateur reste connecté. Affecter la valeur 0 désactive la fonctionnalité KMSI. Pour plus d’informations, consultez [Maintenir la connexion](session-behavior.md?pivots=b2c-custom-policy#enable-keep-me-signed-in-kmsi). |
 |EnforceIdTokenHintOnLogout| Non|  Force la transmission d’un jeton d’ID émis précédemment au point de terminaison de déconnexion en tant qu’indicateur de la session authentifiée active de l’utilisateur final avec le client. Valeurs possibles : `false` (par défaut) ou `true`. Pour plus d’informations, consultez [Connexion web avec OpenID Connect](openid-connect.md).  |
 
 
@@ -138,7 +165,7 @@ L’élément **JourneyInsights** contient les attributs suivants :
 | --------- | -------- | ----------- |
 | TelemetryEngine | Oui | La valeur doit être `ApplicationInsights`. |
 | InstrumentationKey | Oui | Chaîne qui contient la clé d’instrumentation pour l’élément application insights. |
-| DeveloperMode | Oui | Valeurs possibles : `true` ou `false`. Si `true`, Application Insights envoie la télémétrie par le biais du pipeline de traitement. Ce paramètre convient pour le développement, mais il est limité à des volumes élevés. Les journaux d’activité détaillés sont conçues pour aider au développement de stratégies personnalisées. N’utilisez pas le mode de développement en production. Les journaux d’activité recueillent toutes les revendications envoyées par et aux fournisseurs d’identité au cours du développement. En cas d’utilisation en production, le développeur assume la responsabilité des informations d’identification personnelle (PII) recueillies dans le journal Application Insights dont il est propriétaire. Ces journaux d’activité détaillés sont recueillis uniquement quand cette valeur est `true`.|
+| DeveloperMode | Oui | Valeurs possibles : `true` ou `false`. Si `true`, Application Insights envoie la télémétrie par le biais du pipeline de traitement. Ce paramètre est adapté au développement, mais restreint à des volumes élevés. Les journaux d’activité détaillés sont conçus uniquement pour faciliter le développement de stratégies personnalisées. N’utilisez pas le mode de développement en production. Les journaux d’activité recueillent toutes les revendications envoyées par et aux fournisseurs d’identité au cours du développement. En cas d’utilisation en production, le développeur assume la responsabilité des informations d’identification personnelle (PII) recueillies dans le journal Application Insights dont il est propriétaire. Ces journaux d’activité détaillés sont recueillis uniquement quand cette valeur est `true`.|
 | ClientEnabled | Oui | Valeurs possibles : `true` ou `false`. Si `true`, envoie le script côté client Application Insights pour le suivi des affichages de page et des erreurs côté client. |
 | ServerEnabled | Oui | Valeurs possibles : `true` ou `false`. Si `true`, envoie le JSON UserJourneyRecorder existant en tant qu’événement personnalisé à Application Insights. |
 | TelemetryVersion | Oui | La valeur doit être `1.0.0`. |
@@ -165,7 +192,7 @@ L’élément **ContentDefinitionParameter** contient l’attribut suivant :
 | --------- | -------- | ----------- |
 | Nom | Oui | Nom de la paire clé/valeur. |
 
-Pour plus d’informations, consultez [Configurer l’interface utilisateur avec du contenu dynamique à l’aide de stratégies personnalisées](custom-policy-ui-customization.md#configure-dynamic-custom-page-content-uri).
+Pour plus d’informations, consultez [Configurer l’interface utilisateur avec du contenu dynamique à l’aide de stratégies personnalisées](customize-ui-with-html.md#configure-dynamic-custom-page-content-uri).
 
 ## <a name="technicalprofile"></a>TechnicalProfile
 
@@ -192,7 +219,20 @@ L’élément **Protocol** contient l’attribut suivant :
 | --------- | -------- | ----------- |
 | Nom | Oui | Nom d’un protocole valide pris en charge par Azure AD B2C et utilisé dans le cadre du profil technique. Valeurs possibles : `OpenIdConnect` ou `SAML2`. La valeur `OpenIdConnect` représente la norme de protocole OpenID Connect 1.0 conformément à la spécification OpenID Foundation. `SAML2` représente la norme de protocole SAML 2.0 conformément à la spécification OASIS. |
 
-## <a name="outputclaims"></a>OutputClaims
+### <a name="metadata"></a>Métadonnées
+
+Quand le protocole est `SAML`, un élément metadata contient les éléments suivants.
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| IdpInitiatedProfileEnabled | Non | Indique si le flux initié par IDP est pris en charge. Valeurs possibles : `true` ou `false` (par défaut). | 
+| XmlSignatureAlgorithm | Non | Méthode utilisée par Azure AD B2C pour signer la réponse SAML. Valeurs possibles : `Sha256`, `Sha384`, `Sha512` ou `Sha1`. Veillez à configurer l’algorithme de signature des deux côtés avec la même valeur. Utilisez uniquement l’algorithme pris en charge par votre certificat. Pour configurer l’assertion SAML, consultez les [métadonnées du profil technique de l’émetteur SAML](saml-issuer-technical-profile.md#metadata). |
+| DataEncryptionMethod | Non | Indique la méthode utilisée par Azure AD B2C pour chiffrer les données, à l’aide de l’algorithme Advanced Encryption Standard (AES). Les métadonnées contrôlent la valeur de l’élément `<EncryptedData>` dans la réponse SAML. Valeurs possibles : `Aes256` (par défaut), `Aes192`, `Sha512`, ou ` Aes128`. |
+| KeyEncryptionMethod| Non | Indique la méthode utilisée par Azure AD B2C pour chiffrer la copie de la clé qui a été utilisée pour chiffrer les données. Les métadonnées contrôlent la valeur de l’élément `<EncryptedKey>` dans la réponse SAML. Valeurs possibles : ` Rsa15` (par défaut), algorithme PKCS (Public Key Cryptography standard) RSA version 1.5 ; ` RsaOaep`, algorithme de chiffrement OAEP (Optimal Asymmetric Encryption Padding) RSA. |
+| UseDetachedKeys | Non |  Valeurs possibles : `true` ou `false` (par défaut). Lorsque la valeur est définie sur `true`, Azure AD B2C modifie le format des assertions chiffrées. L’utilisation de clés détachées ajoute l’assertion chiffrée comme enfant d’EncrytedAssertion, par opposition à EncryptedData. |
+| WantsSignedResponses| Non | Indique si Azure AD B2C signe la section `Response` de la réponse SAML. Valeurs possibles : `true` (par défaut) ou `false`.  |
+
+### <a name="outputclaims"></a>OutputClaims
 
 L’élément **OutputClaims** contient l’élément suivant :
 
@@ -212,17 +252,18 @@ L’élément **OutputClaim** contient les attributs suivants :
 
 Avec l’élément **SubjectNameingInfo**, vous contrôlez la valeur du sujet du jeton :
 - **Jeton JWT** : la revendication `sub`. Il s’agit d’un principal sur lequel portent les assertions d’informations du jeton, comme l’utilisateur d’une application. Cette valeur est immuable et ne peut pas être réattribuée ou réutilisée. Vous pouvez l’utiliser pour effectuer des vérifications d’autorisation en toute sécurité, par exemple quand le jeton est utilisé pour accéder à une ressource. Par défaut, la revendication de l’objet est remplie avec l’ID d’objet de l’utilisateur dans le répertoire. Pour plus d’informations, consultez [Configuration du jeton, de la session et de l’authentification unique](session-behavior.md).
-- **Jeton SAML** : élément `<Subject><NameID>` qui identifie l’élément de sujet.
+- **Jeton SAML** : élément `<Subject><NameID>` qui identifie l’élément de sujet. Le format NameId peut être modifié.
 
 L’élément **SubjectNamingInfo** contient l’attribut suivant :
 
 | Attribut | Obligatoire | Description |
 | --------- | -------- | ----------- |
 | ClaimType | Oui | Référence au **PartnerClaimType** d’une revendication de sortie. Les revendications de sortie doivent être définies dans la collection **OutputClaims** de la stratégie de partie de confiance. |
+| Format | Non | Utilisé pour les parties de confiance SAML, afin de définir le format **NameId** retourné dans l’assertion SAML. |
 
 L’exemple suivant montre comment définir une partie de confiance OpenID Connect. Les informations de nom de sujet sont configurées en tant qu’`objectId` :
 
-```XML
+```xml
 <RelyingParty>
   <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
   <TechnicalProfile Id="PolicyProfile">
@@ -242,10 +283,31 @@ L’exemple suivant montre comment définir une partie de confiance OpenID Conne
 ```
 Le jeton JWT inclut la revendication `sub` avec l’objectId d’utilisateur :
 
-```JSON
+```json
 {
   ...
   "sub": "6fbbd70d-262b-4b50-804c-257ae1706ef2",
   ...
 }
+```
+
+L’exemple suivant montre comment définir une partie de confiance SAML. Les informations relatives au nom du sujet sont configurées en tant que `objectId`, et le `format` NameId a été fourni :
+
+```xml
+<RelyingParty>
+  <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+  <TechnicalProfile Id="PolicyProfile">
+    <DisplayName>PolicyProfile</DisplayName>
+    <Protocol Name="SAML2" />
+    <OutputClaims>
+      <OutputClaim ClaimTypeReferenceId="displayName" />
+      <OutputClaim ClaimTypeReferenceId="givenName" />
+      <OutputClaim ClaimTypeReferenceId="surname" />
+      <OutputClaim ClaimTypeReferenceId="email" />
+      <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+      <OutputClaim ClaimTypeReferenceId="identityProvider" />
+    </OutputClaims>
+    <SubjectNamingInfo ClaimType="sub" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"/>
+  </TechnicalProfile>
+</RelyingParty>
 ```

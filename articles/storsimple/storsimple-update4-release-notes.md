@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 01/23/2018
 ms.author: alkohli
-ms.openlocfilehash: ef95ca7b9f94690b607e37fbf5d9378c2f2bcfda
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 060a52b61dcd43fe0d05b2a8ef594c0ab9f2cc9e
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228117"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954050"
 ---
 # <a name="storsimple-8000-series-update-4-release-notes"></a>Notes de publication de StorSimple série 8000 Update 4
 
@@ -47,7 +47,7 @@ Update 4 comporte les principaux correctifs de bogues et améliorations suivant
 
     Update 4 implémente une nouvelle fonctionnalité qui suit les données fréquemment consultées pour créer une carte thermique de l’appareil en cours d’utilisation avant la récupération d’urgence (la chaleur est élevée pour les segments de données les plus utilisés et basse pour les segments les moins utilisés). Après une récupération d’urgence, StorSimple utilise la carte thermique pour restaurer et rafraîchir automatiquement les données à partir du cloud. 
 
-    Toutes les restaurations sont désormais basées sur une carte thermique. Pour plus d’informations sur la façon d’interroger et d’annuler les travaux de restauration et de rafraîchissement basés sur une carte thermique, consultez la [référence à l’applet de commande Windows PowerShell pour StorSimple](https://technet.microsoft.com/library/dn688168.aspx).
+    Toutes les restaurations sont désormais basées sur une carte thermique. Pour plus d’informations sur la façon d’interroger et d’annuler les travaux de restauration et de rafraîchissement basés sur une carte thermique, consultez la [référence à l’applet de commande Windows PowerShell pour StorSimple](/powershell/module/hcs/?viewFallbackFrom=winserverr2-ps).
 
 * **Outil de diagnostic StorSimple** : l’outil de diagnostic StorSimple désormais disponible dans Update 4 permet de diagnostiquer et de résoudre facilement les problèmes liés à l’intégrité du système, du réseau, des performances et des composants matériels. Cet outil est exécuté via Windows PowerShell pour StorSimple. Pour plus d’informations, consultez [Dépannage à l’aide de l’outil Diagnostics de StorSimple](storsimple-8000-diagnostics.md).
 
@@ -59,7 +59,7 @@ Update 4 comporte les principaux correctifs de bogues et améliorations suivant
 
 * **Alerte de défaillance de disque** : une nouvelle alerte avertissant l’utilisateur des défaillances imminentes de disques a été ajoutée dans cette version. Si vous rencontrez cette alerte, demandez au support technique de Microsoft de vous livrer un disque de remplacement. Pour plus d’informations, consultez [Alertes matérielles sur votre appareil StorSimple](storsimple-8000-manage-alerts.md#hardware-alerts).
 
-* **Modifications relatives au remplacement du contrôleur** : une applet de commande permettant à l’utilisateur d’interroger l’état du processus de remplacement du contrôleur a été ajoutée dans cette version. Pour plus d’informations, consultez [l’applet de commande pour interroger l’état du remplacement du contrôleur](https://technet.microsoft.com/library/dn688168.aspx).
+* **Modifications relatives au remplacement du contrôleur** : une applet de commande permettant à l’utilisateur d’interroger l’état du processus de remplacement du contrôleur a été ajoutée dans cette version. Pour plus d’informations, consultez [l’applet de commande pour interroger l’état du remplacement du contrôleur](/powershell/module/hcs/?viewFallbackFrom=winserverr2-ps).
 
 
 ## <a name="issues-fixed-in-update-4"></a>Problèmes résolus dans Update 4
@@ -82,7 +82,7 @@ Il n’existe aucun nouveau problème connu dans Update 4. Pour une liste des p
 
 ## <a name="serial-attached-scsi-sas-controller-and-firmware-updates-in-update-4"></a>Mises à jour du microprogramme et du contrôleur Serial-Attached SCSI (SAS) dans Update 4
 
-Cette version contient des mises à jour du microprogramme et du pilote LSI et du contrôleur SAS. Pour plus d’informations sur la procédure d’installation de ces mises à jour, consultez [Installer Update 4](storsimple-install-update-4.md) sur votre appareil StorSimple.
+Cette version contient des mises à jour du microprogramme et du pilote LSI et du contrôleur SAS. Pour plus d’informations sur la procédure d’installation de ces mises à jour, consultez [Installer Update 4](./storsimple-8000-install-update-4.md) sur votre appareil StorSimple.
 
 ## <a name="virtual-device-updates-in-update-4"></a>Mises à jour des appareils virtuels dans Update 4
 
@@ -90,5 +90,4 @@ Cette mise à jour ne peut pas s’appliquer à l’équipement cloud StorSimple
 
 ## <a name="next-step"></a>Étape suivante
 
-Découvrez comment [installer Update 4](storsimple-install-update-4.md) sur votre appareil StorSimple.
-
+Découvrez comment [installer Update 4](./storsimple-8000-install-update-4.md) sur votre appareil StorSimple.

@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 11/21/2018
 ms.author: srrengar
-ms.openlocfilehash: 0819ca02d088aeb9ada5de1269467f70242bbcca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c2114f5392da788bb440589e69e704a148731e02
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75609908"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86258612"
 ---
 # <a name="performance-monitoring-with-the-windows-azure-diagnostics-extension"></a>Analyse des performances avec l’extension Diagnostics Azure pour Windows
 
@@ -193,5 +193,5 @@ Voici un exemple de configuration avec le compteur pour le *Temps total du proce
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Collectez d’autres compteurs de performances pour votre cluster. Consultez [Mesures de performances](service-fabric-diagnostics-event-generation-perf.md) pour obtenir la liste des compteurs à collecter.
-* [Utilisez les fonctionnalités de surveillance et de diagnostics avec une machine virtuelle Windows et des modèles Azure Resource Manager](../virtual-machines/windows/extensions-diagnostics-template.md) pour apporter des modifications à votre `WadCfg` (y compris pour la configuration de comptes de stockage supplémentaires vers lesquels envoyer des données de diagnostics).
+* [Utilisez les fonctionnalités de surveillance et de diagnostics avec une machine virtuelle Windows et des modèles Azure Resource Manager](../virtual-machines/extensions/diagnostics-template.md) pour apporter des modifications à votre `WadCfg` (y compris pour la configuration de comptes de stockage supplémentaires vers lesquels envoyer des données de diagnostics).
 * Visitez le [générateur WadCfg](https://azure.github.io/azure-diagnostics-tools/config-builder/) pour créer un modèle à partir de zéro et assurez-vous que la syntaxe est correcte. Visitez https://azure.github.io/azure-diagnostics-tools/config-builder/) pour créer un modèle à partir de zéro et assurez-vous que la syntaxe est correcte.

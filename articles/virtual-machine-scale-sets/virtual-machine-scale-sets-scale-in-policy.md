@@ -9,13 +9,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
 ms.date: 02/26/2020
 ms.reviewer: avverma
-ms.custom: avverma
-ms.openlocfilehash: 479bbfaf8468329cd515799e5822497df2bb4c1d
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: avverma, devx-track-azurecli
+ms.openlocfilehash: 9ca6310705d54d563aae746ab2dbfe6cb412e6a9
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125160"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92747799"
 ---
 # <a name="use-custom-scale-in-policies-with-azure-virtual-machine-scale-sets"></a>Utiliser des stratégies de scale-in personnalisées avec des groupes de machines virtuelles identiques Azure
 
@@ -29,7 +29,7 @@ La fonctionnalité de stratégie de scale-in offre aux utilisateurs un moyen de 
 
 ### <a name="default-scale-in-policy"></a>Stratégie de scale-in par défaut
 
-Par défaut, le groupe de machines virtuelles identiques applique cette stratégie pour déterminer la ou les instances qui feront l’objet du scale-in. Avec la stratégie *Default*, les machines virtuelles sont sélectionnées pour le scale-in dans l’ordre suivant :
+Par défaut, le groupe de machines virtuelles identiques applique cette stratégie pour déterminer la ou les instances qui feront l’objet du scale-in. Avec la stratégie *Default* , les machines virtuelles sont sélectionnées pour le scale-in dans l’ordre suivant :
 
 1. Équilibrer les machines virtuelles parmi les zones de disponibilité (si le groupe identique est déployé dans une configuration zonale)
 2. Équilibrer les machines virtuelles parmi les domaines d’erreur (meilleur effort)
@@ -57,12 +57,12 @@ Une stratégie de scale-in peut être définie sur le modèle de groupe de machi
  
 Les étapes suivantes définissent la stratégie de scale-in lors de la création d’un groupe identique. 
  
-1. Accédez à **Groupes identiques de machines virtuelles**.
+1. Accédez à **Groupes identiques de machines virtuelles** .
 1. Sélectionnez **+ Ajouter** pour créer un groupe identique.
-1. Accédez à l’onglet **Mise à l’échelle**. 
-1. Recherchez la section **Stratégie de scale-in**.
+1. Accédez à l’onglet **Mise à l’échelle** . 
+1. Recherchez la section **Stratégie de scale-in** .
 1. Sélectionnez une stratégie de scale-in dans la liste déroulante.
-1. Lorsque vous avez fini de créer le groupe identique, sélectionnez le bouton **Vérifier + créer**.
+1. Lorsque vous avez fini de créer le groupe identique, sélectionnez le bouton **Vérifier + créer** .
 
 ### <a name="using-api"></a>Utilisation de l’API
 
@@ -83,7 +83,7 @@ https://management.azure.com/subscriptions/<sub-id>/resourceGroups/<myRG>/provid
 ```
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-Créez un groupe de ressources, puis un groupe identique avec une stratégie de scale-in définie comme *OldestVM*.
+Créez un groupe de ressources, puis un groupe identique avec une stratégie de scale-in définie comme *OldestVM* .
 
 ```azurepowershell-interactive
 New-AzResourceGroup -ResourceGroupName "myResourceGroup" -Location "<VMSS location>"
@@ -96,7 +96,7 @@ New-AzVmss `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-L’exemple suivant ajoute une stratégie de scale-in lors de la création d’un groupe identique. Commencez par créer un groupe de ressources, puis créez un groupe identique avec une stratégie de scale-in *OldestVM*. 
+L’exemple suivant ajoute une stratégie de scale-in lors de la création d’un groupe identique. Commencez par créer un groupe de ressources, puis créez un groupe identique avec une stratégie de scale-in *OldestVM* . 
 
 ```azurecli-interactive
 az group create --name <myResourceGroup> --location <VMSSLocation>
@@ -135,10 +135,10 @@ La modification de la stratégie de scale-in suit le même processus que l’app
 
 Vous pouvez modifier la stratégie de scale-in d’un groupe identique via le portail Azure. 
  
-1. Dans un groupe de machines virtuelles identiques existant, dans le menu de gauche, sélectionnez **Mise à l’échelle**.
-1. Sélectionnez l’onglet **Stratégie de scale-in**.
+1. Dans un groupe de machines virtuelles identiques existant, dans le menu de gauche, sélectionnez **Mise à l’échelle** .
+1. Sélectionnez l’onglet **Stratégie de scale-in** .
 1. Sélectionnez une stratégie de scale-in dans la liste déroulante.
-1. Lorsque vous avez terminé, sélectionnez **Enregistrer**. 
+1. Lorsque vous avez terminé, sélectionnez **Enregistrer** . 
 
 ### <a name="using-api"></a>Utilisation de l’API
 
@@ -211,12 +211,12 @@ Les exemples ci-dessous illustrent comment un groupe de machines virtuelles iden
 | Événement                 | ID d’instances dans Zone1  | ID d’instances dans Zone2  | ID d’instances dans Zone3  | Sélection de scale-in                                                                                                               |
 |-----------------------|------------------------|------------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | Initial               | 3, 4, 5, 10            | 2, 6, 9, 11            | 1, 7, 8                |                                                                                                                                  |
-| Scale-in              | 3, 4, 5, 10            | ***2***, 6, 9, 11      | 1, 7, 8                | Choisir entre Zone 1 et 2, bien que Zone 3 ait la machine virtuelle la plus ancienne. Supprimer VM2 de Zone 2, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.   |
-| Scale-in              | ***3***, 4, 5, 10      | 6, 9, 11               | 1, 7, 8                | Choisir Zone 1 bien que Zone 3 ait la machine virtuelle la plus ancienne. Supprimer VM3 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.                  |
-| Scale-in              | 4, 5, 10               | 6, 9, 11               | ***1***, 7, 8          | Les zones sont équilibrées. Supprimer VM1 de Zone 3, car il s’agit de la machine virtuelle la plus ancienne dans le groupe identique.                                               |
-| Scale-in              | ***4***, 5, 10         | 6, 9, 11               | 7, 8                   | Choisir entre Zone 1 et Zone 2. Supprimer VM4 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne parmi les deux zones.                              |
-| Scale-in              | 5, 10                  | ***6***, 9, 11         | 7, 8                   | Choisir Zone 2 bien que Zone 1 ait la machine virtuelle la plus ancienne. Supprimer VM6 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.                    |
-| Scale-in              | ***5***, 10            | 9, 11                  | 7, 8                   | Les zones sont équilibrées. Supprimer VM5 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans le groupe identique.                                                |
+| Scale-in              | 3, 4, 5, 10            | **_2_* _, 6, 9, 11      | 1, 7, 8                | Choisir entre Zone 1 et 2, bien que Zone 3 ait la machine virtuelle la plus ancienne. Supprimer VM2 de Zone 2, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.   |
+| Scale-in              | _*_3_*_ , 4, 5, 10      | 6, 9, 11               | 1, 7, 8                | Choisir Zone 1 bien que Zone 3 ait la machine virtuelle la plus ancienne. Supprimer VM3 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.                  |
+| Scale-in              | 4, 5, 10               | 6, 9, 11               | _*_1_*_ , 7, 8          | Les zones sont équilibrées. Supprimer VM1 de Zone 3, car il s’agit de la machine virtuelle la plus ancienne dans le groupe identique.                                               |
+| Scale-in              | _*_4_*_ , 5, 10         | 6, 9, 11               | 7, 8                   | Choisir entre Zone 1 et Zone 2. Supprimer VM4 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne parmi les deux zones.                              |
+| Scale-in              | 5, 10                  | _*_6_*_ , 9, 11         | 7, 8                   | Choisir Zone 2 bien que Zone 1 ait la machine virtuelle la plus ancienne. Supprimer VM6 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans cette zone.                    |
+| Scale-in              | _*_5_*_ , 10            | 9, 11                  | 7, 8                   | Les zones sont équilibrées. Supprimer VM5 de Zone 1, car il s’agit de la machine virtuelle la plus ancienne dans le groupe identique.                                                |
 
 Pour un groupe de machines virtuelles identiques non zonal, la stratégie choisira de supprimer la machine virtuelle la plus ancienne dans le groupe identique. Toute machine virtuelle protégée est ignorée pour la suppression.
 
@@ -225,12 +225,12 @@ Pour un groupe de machines virtuelles identiques non zonal, la stratégie choisi
 | Événement                 | ID d’instances dans Zone1  | ID d’instances dans Zone2  | ID d’instances dans Zone3  | Sélection de scale-in                                                                                                               |
 |-----------------------|------------------------|------------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | Initial               | 3, 4, 5, 10            | 2, 6, 9, 11            | 1, 7, 8                |                                                                                                                                  |
-| Scale-in              | 3, 4, 5, 10            | 2, 6, 9, ***11***      | 1, 7, 8                | Choisir entre Zone 1 et Zone 2. Supprimer VM11 de Zone 2, car il s’agit de la machine virtuelle la plus récente parmi les deux zones.                                |
-| Scale-in              | 3, 4, 5, ***10***      | 2, 6, 9                | 1, 7, 8                | Choisir Zone 1, car elle contient plus de machines virtuelles que les deux autres zones. Supprimer VM10 de Zone 1, car il s’agit de la machine virtuelle la plus récente dans cette zone.          |
-| Scale-in              | 3, 4, 5                | 2, 6, ***9***          | 1, 7, 8                | Les zones sont équilibrées. Supprimer VM9 de Zone 2, car il s’agit de la machine virtuelle la plus récente dans le groupe identique.                                                |
-| Scale-in              | 3, 4, 5                | 2, 6                   | 1, 7, ***8***          | Choisir entre Zone 1 et Zone 3. Supprimer VM8 de Zone 3, car il s’agit de la machine virtuelle la plus récente dans cette zone.                                      |
-| Scale-in              | 3, 4, ***5***          | 2, 6                   | 1, 7                   | Choisir Zone 1 bien que Zone 3 ait la machine virtuelle la plus récente. Supprimer VM5 de Zone 1, car il s’agit de la machine virtuelle la plus récente dans cette zone.                    |
-| Scale-in              | 3, 4                   | 2, 6                   | 1, ***7***             | Les zones sont équilibrées. Supprimer VM7 de Zone 3, car il s’agit de la machine virtuelle la plus récente dans le groupe identique.                                                |
+| Scale-in              | 3, 4, 5, 10            | 2, 6, 9, _*_11_*_      | 1, 7, 8                | Choisir entre Zone 1 et Zone 2. Supprimer VM11 de Zone 2, car il s’agit de la machine virtuelle la plus récente parmi les deux zones.                                |
+| Scale-in              | 3, 4, 5, _*_10_*_      | 2, 6, 9                | 1, 7, 8                | Choisir Zone 1, car elle contient plus de machines virtuelles que les deux autres zones. Supprimer VM10 de Zone 1, car il s’agit de la machine virtuelle la plus récente dans cette zone.          |
+| Scale-in              | 3, 4, 5                | 2, 6, _*_9_*_          | 1, 7, 8                | Les zones sont équilibrées. Supprimer VM9 de Zone 2, car il s’agit de la machine virtuelle la plus récente dans le groupe identique.                                                |
+| Scale-in              | 3, 4, 5                | 2, 6                   | 1, 7, _*_8_*_          | Choisir entre Zone 1 et Zone 3. Supprimer VM8 de Zone 3, car il s’agit de la machine virtuelle la plus récente dans cette zone.                                      |
+| Scale-in              | 3, 4, _*_5_*_          | 2, 6                   | 1, 7                   | Choisir Zone 1 bien que Zone 3 ait la machine virtuelle la plus récente. Supprimer VM5 de Zone 1, car il s’agit de la machine virtuelle la plus récente dans cette zone.                    |
+| Scale-in              | 3, 4                   | 2, 6                   | 1, _ *_7_**             | Les zones sont équilibrées. Supprimer VM7 de Zone 3, car il s’agit de la machine virtuelle la plus récente dans le groupe identique.                                                |
 
 Pour un groupe de machines virtuelles identiques non zonal, la stratégie choisira de supprimer la machine virtuelle la plus récente dans le groupe identique. Toute machine virtuelle protégée est ignorée pour la suppression. 
 

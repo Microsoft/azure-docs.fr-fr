@@ -1,74 +1,69 @@
 ---
-title: Assistant de sécurité des rôles Azure AD dans PIM - Azure Active Directory | Microsoft Docs
-description: Décrit l’Assistant de sécurité que vous pouvez utiliser pour définir des attributions de rôles Azure AD privilégiés permanents comme éligibles à l’aide d’Azure AD Privileged Identity Management (PIM).
+title: Rôles Azure AD - Détection et insights (préversion) (anciennement Assistant Sécurité) dans Privileged Identity Management - Azure Active Directory
+description: La fonctionnalité Détection et insights (anciennement Assistant Sécurité) vous aide à convertir des attributions de rôles Azure AD permanentes en attributions juste-à-temps avec Privileged Identity Management.
 services: active-directory
 documentationcenter: ''
 author: curtand
 manager: daveba
 editor: ''
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.subservice: pim
-ms.date: 04/21/2020
+ms.date: 09/01/2020
 ms.author: curtand
 ms.custom: pim ; H1Hack27Feb2017
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a9f12b2b31da4c7fe67eef9674d96b517d4e2bfa
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4662e9fb537a93cb87c554e319256e2eca40d2e7
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81867749"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92372427"
 ---
-# <a name="azure-ad-roles-security-wizard-in-privileged-identity-management"></a>Assistant de sécurité des rôles Azure AD dans Privileged Identity Management
+# <a name="discovery-and-insights-preview-for-azure-ad-roles-formerly-security-wizard"></a>Détection et insights (préversion) pour les rôles Azure AD (anciennement Assistant Sécurité)
 
-Si vous êtes la première personne à utiliser Privileged Identity Management (PIM) dans votre organisation Azure Active Directory (Azure AD), un Assistant vous est proposé pour la prise en main. Celui-ci vous aide à comprendre les risques liés à la sécurité des identités privilégiées et la façon d’utiliser Privileged Identity Management pour les limiter. Vous n’avez pas besoin d’apporter des modifications aux affectations de rôle existantes dans l’Assistant. Vous pouvez le faire ultérieurement si vous préférez.
+Si vous commencez à utiliser Privileged Identity Management (PIM) dans votre organisation Azure Active Directory (Azure AD), vous pouvez utiliser la page **Détection et insights (préversion)** pour vous lancer. Cette fonctionnalité vous indique qui est affecté aux rôles privilégiés dans votre organisation et comment utiliser PIM pour modifier rapidement les attributions de rôles permanentes en attributions juste-à-temps. Vous pouvez afficher ou modifier vos attributions de rôles privilégiés permanentes dans **Détection et insights (préversion)** . Il s’agit d’un outil d’analyse et d’un outil d’action.
 
-> [!Important]
-> L’assistant de sécurité est momentanément indisponible. Nous vous remercions de votre patience.
+## <a name="discovery-and-insights-preview"></a>Détection et insights (préversion)
 
-## <a name="wizard-overview"></a>Présentation de l’Assistant
+Avant que votre organisation commence à utiliser Privileged Identity Management, toutes les attributions de rôles sont permanentes. Les utilisateurs se trouvent toujours dans les rôles qui leur sont attribués, même s’ils n’ont pas besoin des privilèges associés. Détection et insights (préversion), qui remplace l’ancien Assistant Sécurité, affiche une liste des rôles privilégiés et le nombre d’utilisateurs actuellement dans ces rôles. Vous pouvez répertorier les attributions d’un rôle pour en savoir plus sur les utilisateurs affectés si un ou plusieurs d’entre eux ne vous sont pas familiers.
 
-Avant que votre organisation ne commence à utiliser Privileged Identity Management, toutes les attributions de rôles sont permanentes : les utilisateurs ont toujours ces rôles, même s’ils n’ont pas actuellement besoin de leurs privilèges. La première étape de l’Assistant vous montre une liste des rôles à privilèges élevés et le nombre d’utilisateurs ayant actuellement ces rôles. Vous pouvez explorer en détail un rôle particulier pour en savoir plus sur les utilisateurs si certains vous sont inconnus.
+:heavy_check_mark: **Microsoft recommande** de conserver deux comptes de secours qui sont attribués de façon permanente au rôle d’administrateur général. Assurez-vous que ces comptes ne nécessitent pas le même mécanisme d’authentification multifacteur que vos comptes d’administration normaux pour se connecter, comme décrit dans la section [ Gérer les comptes d’accès d’urgence dans Azure AD](../roles/security-emergency-access.md).
 
-La deuxième étape de l’Assistant vous donne la possibilité de modifier les attributions du rôle d’administrateur.  
+En outre, conservez les attributions de rôles permanentes si un utilisateur possède un compte Microsoft (en d’autres termes, un compte pour se connecter aux services Microsoft tels que Skype ou Outlook.com). Si vous avez besoin de l’authentification multifacteur pour un utilisateur disposant d’un compte Microsoft afin d’activer une attribution de rôle, l’utilisateur est verrouillé.
 
-> [!WARNING]
-> Il est important de disposer d’au moins un Administrateur général et de plusieurs Administrateurs de rôle privilégié avec un compte professionnel ou scolaire (et non un compte Microsoft). S’il n’existe qu’un seul Administrateur de rôle privilégié, l’organisation ne peut pas gérer Privileged Identity Management si ce compte est supprimé.
-> En outre, conservez les attributions de rôle permanentes si un utilisateur possède un compte Microsoft (en d’autres termes, un compte pour se connecter aux services Microsoft tels que Skype et Outlook.com). Si vous envisagez de demander une authentification multifacteur pour l’activation de ce rôle, cet utilisateur sera verrouillé.
-
-## <a name="run-the-wizard"></a>Exécuter l'assistant
+## <a name="open-discovery-and-insights-preview"></a>Ouvrir Détection et insights (préversion)
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 
-1. Ouvrez **Azure AD Privileged Identity Management**.
+1. Ouvrez **Azure AD Privileged Identity Management** .
 
-1. Sélectionnez **Rôles Azure AD**, puis **Assistant**.
+1. Sélectionnez **Rôles Azure AD** , puis sélectionnez **Détection et insights (préversion)** . L’ouverture de la page lance le processus de détection pour rechercher les attributions de rôles pertinentes.
 
-    ![Rôles Azure AD - Page de l’Assistant montrant les 3 étapes pour exécuter l’Assistant](./media/pim-security-wizard/wizard-start.png)
+    ![Rôles Azure AD - Page Détection et insights présentant les 3 options](./media/pim-security-wizard/new-preview-link.png)
 
-1. Sélectionnez **1 Découvrir les rôles privilégiés**.
+1. Sélectionnez **Réduire les administrateurs généraux** .
 
-1. Passez en revue la liste des rôles privilégiés pour voir quels utilisateurs sont permanents ou éligibles.
+    ![Capture d’écran représentant « Détection et insights (préversion) » avec l’action « Réduire les administrateurs généraux » sélectionnée.](./media/pim-security-wizard/new-preview-page.png)
 
-    ![Découvrir les rôles privilégiés : volet des rôles affichant les membres éligibles et permanents](./media/pim-security-wizard/discover-privileged-roles-users.png)
+1. Passez en revue la liste des attributions du rôle Administrateur général.
 
-1. Sélectionnez **Suivant** pour sélectionner les utilisateurs ou groupes que vous voulez rendre aptes.
+    ![Réduire les administrateurs généraux - Volet Rôle présentant tous les Administrateurs généraux](./media/pim-security-wizard/new-global-administrator-list.png)
 
-    ![Convertir les membres dans la page éligible avec les options permettant de sélectionner les membres que vous souhaitez rendre éligibles pour les rôles](./media/pim-security-wizard/convert-members-eligible.png)
+1. Sélectionnez **Suivant** pour sélectionner les utilisateurs ou les groupes que vous souhaitez rendre éligibles, puis sélectionnez **Rendre éligible** ou **Supprimer l’attribution** .
 
-1. Une fois que vous avez sélectionné les utilisateurs ou les groupes, sélectionnez **Suivant**.
+    ![Convertir les membres dans la page éligible avec les options permettant de sélectionner les membres que vous souhaitez rendre éligibles pour les rôles](./media/pim-security-wizard/new-global-administrator-buttons.png)
 
-    ![Passez en revue la page de modifications montrant les membres avec des affectations de rôle permanentes qui seront converties](./media/pim-security-wizard/review-changes.png)
+1. Vous pouvez également demander à tous les administrateurs généraux de réviser leur propre accès.
 
-1. Sélectionnez **OK** pour définir les attributions permanentes comme aptes.
+    ![Page Administrateurs généraux, section Révisions d’accès](./media/pim-security-wizard/new-global-administrator-access-review.png)
 
-    Une fois la conversion terminée, vous verrez une notification.
+1. Après avoir sélectionné l’une de ces modifications, vous verrez une notification Azure.
 
-    ![Notification indiquant l’état d’une conversion](./media/pim-security-wizard/notification-completion.png)
+1. Vous pouvez ensuite sélectionner **Éliminer l’accès permanent** ou **Vérifier les principaux de service** pour répéter les étapes ci-dessus sur d’autres rôles privilégiés et sur les attributions de rôles de principal de service. Pour les attributions de rôles de principal de service, vous ne pouvez supprimer que les attributions de rôles.
 
-Si vous avez besoin de définir d’autres attributions de rôles privilégiés comme éligibles, vous pouvez réexécuter l’Assistant. Si vous souhaitez utiliser l’interface Privileged Identity Management au lieu de l’Assistant, consultez [Attribuer des rôles Azure AD dans Privileged Identity Management](pim-how-to-add-role-to-user.md).
+    ![Options Insights supplémentaires pour éliminer l’accès permanent et vérifier les principaux de service ](./media/pim-security-wizard/new-preview-page-service-principals.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

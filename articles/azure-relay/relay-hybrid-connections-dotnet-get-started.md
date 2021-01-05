@@ -1,25 +1,15 @@
 ---
 title: Connexions hybrides Azure Relay - WebSockets dans .NET
 description: Écrivez une application console C# pour les WebSockets de connexions hybrides Azure Relay.
-services: service-bus-relay
-documentationcenter: .net
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: d1386900-b942-4abf-acfc-38d2ef826253
-ms.service: service-bus-relay
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: dotnet
-ms.workload: na
-ms.date: 11/01/2018
-ms.author: spelluru
-ms.openlocfilehash: 13612f8ffa343e483165a8dbdd54d1b2b1f5e2cf
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: devx-track-dotnet
+ms.date: 06/23/2020
+ms.openlocfilehash: bf22b8b11dc386644803b43ee4e3a51d04b70419
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204616"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90527426"
 ---
 # <a name="get-started-with-relay-hybrid-connections-websockets-in-net"></a>Bien démarrer avec les WebSockets de connexions hybrides Relay dans .NET
 [!INCLUDE [relay-selector-hybrid-connections](../../includes/relay-selector-hybrid-connections.md)]
@@ -62,7 +52,7 @@ Dans Visual Studio, écrivez une application console C# pour envoyer des message
 2. Exécutez l’application cliente et entrez du texte.
 3. Vérifiez que la console d’application de serveur affiche le texte entré dans l’application cliente.
 
-    ![running-applications](./media/relay-hybrid-connections-dotnet-get-started/running-applications.png)
+    ![Fenêtres de console testant les applications serveur et clientes.](./media/relay-hybrid-connections-dotnet-get-started/running-applications.png)
 
 Félicitations, vous avez créé une application de connexions hybrides complète !
 

@@ -4,15 +4,15 @@ description: Vous pouvez intégrer un pare-feu Azure à un réseau virtuel avec 
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.topic: article
-ms.date: 02/28/2020
+ms.topic: how-to
+ms.date: 09/25/2020
 ms.author: victorh
-ms.openlocfilehash: ab9a500d9535b55702b8baff15f8cc47e6ac2c86
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3b8fbc47b46f8be6e4ad7636a1d7552445501f0f
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78196701"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94653162"
 ---
 # <a name="integrate-azure-firewall-with-azure-standard-load-balancer"></a>Intégrer un pare-feu Azure avec Azure Standard Load Balancer
 
@@ -65,6 +65,10 @@ Il n’y a aucun problème de routage asymétrique avec ce scénario. Les paquet
 
 Ainsi, vous pouvez déployer ce scénario de la même manière que le scénario d’équilibreur de charge public, mais sans avoir besoin de la route hôte de l’adresse IP publique du pare-feu.
 
+>[!NOTE]
+>Avec cette configuration, les machines virtuelles du pool principal ne disposent pas d’une connectivité Internet sortante. </br> Pour plus d’informations sur la façon de fournir une connectivité sortante, consultez : </br> **[Connexions sortantes dans Azure](../load-balancer/load-balancer-outbound-connections.md)**</br> Options pour fournir la connectivité : </br> **[Configuration de l’équilibreur de charge en sortie uniquement](../load-balancer/egress-only.md)** </br> [**Qu’est-ce que le service NAT de Réseau virtuel ?**](../virtual-network/nat-overview.md)
+
+
 ## <a name="additional-security"></a>Sécurité supplémentaire
 
 Pour améliorer la sécurité de votre scénario d’équilibreur de charge, vous pouvez utiliser des groupes de sécurité réseau (NSG).
@@ -73,7 +77,7 @@ Vous pouvez par exemple créer un groupe de sécurité réseau sur le sous-rése
 
 ![Groupe de sécurité réseau](media/integrate-lb/nsg-01.png)
 
-Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité](../virtual-network/security-overview.md).
+Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité](../virtual-network/network-security-groups-overview.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

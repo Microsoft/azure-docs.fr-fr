@@ -8,12 +8,13 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 2994c55b39d30ff16a0ca135e93a116784feb201
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5755e14e53d359fd8b322939bf1325d21536d593
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113819"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89020182"
 ---
 # <a name="example-create-a-custom-skill-using-the-bing-entity-search-api"></a>Exemple : Créer une qualification personnalisée à l’aide de l’API Recherche d’entités Bing
 
@@ -481,5 +482,5 @@ Félicitations ! Vous avez créé votre première qualification personnalisée. 
 + [Super compétences : référentiel de compétences personnalisées](https://github.com/Azure-Samples/azure-search-power-skills)
 + [Ajouter une qualification personnalisée à un pipeline d’enrichissement par IA](cognitive-search-custom-skill-interface.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un jeu de compétences (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
++ [Créer un jeu de compétences (REST)](/rest/api/searchservice/create-skillset)
 + [Guide pratique pour mapper des champs enrichis](cognitive-search-output-field-mapping.md)

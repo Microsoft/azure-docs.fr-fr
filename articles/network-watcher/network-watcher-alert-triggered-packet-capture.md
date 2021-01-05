@@ -8,17 +8,17 @@ author: damendo
 ms.assetid: 75e6e7c4-b3ba-4173-8815-b00d7d824e11
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: ea506e137d71fc3124a4f93f1e97750a08dd4284
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3b6cb195f44bf6c868402481480d9b10802c4d59
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76842935"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965667"
 ---
 # <a name="use-packet-capture-for-proactive-network-monitoring-with-alerts-and-azure-functions"></a>Utiliser une capture de paquets pour effectuer une surveillance proactive du réseau avec des alertes et Azure Functions
 
@@ -30,7 +30,7 @@ Les ressources qui sont déployées dans Azure s’exécutent 24 heures sur 24,
 
 En utilisant Network Watcher, les alertes et les fonctions dans l’écosystème Azure, vous pouvez répondre de façon proactive aux problèmes de votre réseau avec les données et les outils.
 
-![Scénario][scenario]
+![Le diagramme montre une extension Network Watcher sur une machine virtuelle qui est acheminée vers une erreur de type Segments TCP envoyés > 100, qui est transmise à Azure Functions, puis à Network Watcher et qui revient à l’extension Network Watcher.][scenario]
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
@@ -39,7 +39,7 @@ En utilisant Network Watcher, les alertes et les fonctions dans l’écosystème
 
 * La version la plus récente [d’Azure PowerShell](/powershell/azure/install-Az-ps).
 * Une instance existante de Network Watcher. Si vous n’en avez pas, [créez une instance de Network Watcher](network-watcher-create.md).
-* Une machine virtuelle existante dans la même région que Network Watcher, avec [l’extension Windows](../virtual-machines/windows/extensions-nwa.md) ou [l’extension de machine virtuelle Linux](../virtual-machines/linux/extensions-nwa.md).
+* Une machine virtuelle existante dans la même région que Network Watcher, avec [l’extension Windows](../virtual-machines/extensions/network-watcher-windows.md) ou [l’extension de machine virtuelle Linux](../virtual-machines/extensions/network-watcher-linux.md).
 
 ## <a name="scenario"></a>Scénario
 
@@ -340,7 +340,7 @@ Des alertes peuvent être configurées pour informer qu’une mesure spécifique
 
 ### <a name="create-the-alert-rule"></a>Créer la règle d’alerte
 
-Accédez à une machine virtuelle existante, puis ajoutez une règle d’alerte. Pour accéder à une documentation plus détaillée sur la configuration des alertes, consultez l’article [Créer des alertes dans Azure Monitor pour les services Azure - Portail Azure](../monitoring-and-diagnostics/insights-alerts-portal.md). Entrez les valeurs suivantes dans le panneau **Règle d’alerte**, puis sélectionnez **OK**.
+Accédez à une machine virtuelle existante, puis ajoutez une règle d’alerte. Pour accéder à une documentation plus détaillée sur la configuration des alertes, consultez l’article [Créer des alertes dans Azure Monitor pour les services Azure - Portail Azure](../azure-monitor/platform/alerts-classic-portal.md). Entrez les valeurs suivantes dans le panneau **Règle d’alerte**, puis sélectionnez **OK**.
 
   |**Paramètre** | **Valeur** | **Détails** |
   |---|---|---|
@@ -353,7 +353,7 @@ Accédez à une machine virtuelle existante, puis ajoutez une règle d’alerte.
   |**Webhook**|[URL du webhook de l’application de fonction]| L’URL du webhook de l’application de fonction créée dans les étapes précédentes.|
 
 > [!NOTE]
-> Par défaut, la métrique des segments TCP n’est pas activée. Pour en savoir plus sur l’activation de métriques supplémentaires, consultez [Prise en main d’Azure Monitor](../monitoring-and-diagnostics/insights-how-to-use-diagnostics.md).
+> Par défaut, la métrique des segments TCP n’est pas activée. Pour en savoir plus sur l’activation de métriques supplémentaires, consultez [Prise en main d’Azure Monitor](../azure-monitor/overview.md).
 
 ## <a name="review-the-results"></a>Passer en revue les résultats.
 
@@ -363,11 +363,11 @@ Une fois les critères d’alerte remplis, une capture de paquets est créée. A
 
 Si le fichier de capture est stocké en local, vous pouvez le récupérer en vous connectant à la machine virtuelle.
 
-Pour obtenir des instructions sur le téléchargement de fichiers à partir de comptes de stockage Azure, consultez [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-dotnet-how-to-use-blobs.md). Vous pouvez aussi utiliser [l’Explorateur de stockage](https://storageexplorer.com/).
+Pour obtenir des instructions sur le téléchargement de fichiers à partir de comptes de stockage Azure, consultez [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-quickstart-blobs-dotnet.md). Vous pouvez aussi utiliser [l’Explorateur de stockage](https://storageexplorer.com/).
 
 Une fois la capture téléchargée, vous pouvez l’afficher à l’aide de n’importe quel outil en mesure de lire un fichier **.cap**. Les liens de deux de ces outils sont indiqués ci-après :
 
-- [Microsoft Message Analyzer](https://technet.microsoft.com/library/jj649776.aspx)
+- [Microsoft Message Analyzer](/message-analyzer/microsoft-message-analyzer-operating-guide)
 - [WireShark](https://www.wireshark.org/)
 
 ## <a name="next-steps"></a>Étapes suivantes

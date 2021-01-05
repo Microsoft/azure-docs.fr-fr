@@ -1,26 +1,26 @@
 ---
-title: Configurer des identités managées sur Azure VMSS à l’aide de REST – Azure AD
-description: Instructions pas à pas pour la configuration d’identités affectées par le système et l’utilisateur sur un groupe de machines virtuelles identiques Azure, en utilisant CURL pour effectuer des appels d’API REST.
+title: Configurer des identités managées sur le groupe de machines virtuelles identiques Azure à l’aide de REST – Azure AD
+description: Instructions pas à pas pour configurer des identités managées affectées par le système et l’utilisateur sur un groupe de machines virtuelles identiques Azure en utilisant CURL pour effectuer les appels d’API REST.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 06/25/2018
-ms.author: markvi
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dce9894b26d03c351a2209792cc076de91feba54
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c79942aad2ce450bc22aa0a0cfc32e67a667bd48
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227733"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006232"
 ---
 # <a name="configure-managed-identities-for-azure-resources-on-a-virtual-machine-scale-set-using-rest-api-calls"></a>Configurer des identités managées sur un groupe de machines virtuelles identiques en utilisant des appels d’API REST
 
@@ -33,24 +33,24 @@ Dans cet article, en utilisant CURL pour effectuer des appels au point de termin
 - Activer et désactiver l’identité managée affectée par le système sur un groupe de machines virtuelles identiques Azure
 - Ajouter et supprimer une identité managée affectée par l’utilisateur sur un groupe de machines virtuelles identiques Azure
 
-## <a name="prerequisites"></a>Conditions préalables requises
+Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
 
-- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#how-does-the-managed-identities-for-azure-resources-work)** .
-- Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
-- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer de ces affectations de contrôle d'accès basé sur les rôles Azure :
+## <a name="prerequisites"></a>Prérequis
 
-    > [!NOTE]
-    > Aucune attribution de rôle d'annuaire Azure AD supplémentaire n’est requise.
+- Si vous n’êtes pas familiarisé avec les identités managées pour les ressources Azure, consultez [Que sont les identités managées pour les ressources Azure ?](overview.md) Pour en savoir plus sur les types d’identités managées affectées par le système et par l’utilisateur, consultez [Types d’identités managées](overview.md#managed-identity-types).
 
-    - [Contributeur de machines virtuelles](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) pour créer un groupe de machines virtuelles identiques, puis activer et supprimer l’identité managée affectée par le système ou l’utilisateur d’un groupe de machines virtuelles identiques.
-    - [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-contributor) pour créer une identité managée affectée par l’utilisateur.
-    - [Opérateur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-operator) pour attribuer une identité affectée par l’utilisateur à un groupe de machines virtuelles identiques ou la supprimer.
-- Si vous utilisez Windows, installez le [sous-système Windows pour Linux](https://msdn.microsoft.com/commandline/wsl/about) ou utilisez [Azure Cloud Shell](../../cloud-shell/overview.md) dans le portail Azure.
-- [Installez la console locale Azure CLI](/cli/azure/install-azure-cli), si vous utilisez le [sous-système Windows pour Linux](https://msdn.microsoft.com/commandline/wsl/about) ou un [système d’exploitation de distribution Linux](/cli/azure/install-azure-cli-apt?view=azure-cli-latest).
-- Si vous utilisez la console locale Azure CLI, connectez-vous à Azure en utilisant la commande `az login` avec un compte associé à l’abonnement Azure dont vous souhaitez gérer les identités managées affectées par le système ou l’utilisateur.
+- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer des attributions des rôles Azure suivants :
 
+  - [Contributeur de machines virtuelles](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) pour créer un groupe de machines virtuelles identiques, puis activer et supprimer l’identité managée affectée par le système ou l’utilisateur d’un groupe de machines virtuelles identiques.
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+  - [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-contributor) pour créer une identité managée affectée par l’utilisateur.
+
+  - [Opérateur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-operator) pour attribuer une identité affectée par l’utilisateur à un groupe de machines virtuelles identiques ou la supprimer.
+
+  > [!NOTE]
+  > Aucune attribution de rôle d'annuaire Azure AD supplémentaire n’est requise.
+
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="system-assigned-managed-identity"></a>Identité managée affectée par le système
 
@@ -66,7 +66,7 @@ Pour créer un groupe de machines virtuelles identiques dans lequel une identit�
    az group create --name myResourceGroup --location westus
    ```
 
-2. Créez une [interface réseau](/cli/azure/network/nic?view=azure-cli-latest#az-network-nic-create) pour votre groupe de machines virtuelles identiques :
+2. Créez une [interface réseau](/cli/azure/network/nic#az-network-nic-create) pour votre groupe de machines virtuelles identiques :
 
    ```azurecli-interactive
     az network nic create -g myResourceGroup --vnet-name myVnet --subnet mySubnet -n myNic
@@ -78,7 +78,7 @@ Pour créer un groupe de machines virtuelles identiques dans lequel une identit�
    az account get-access-token
    ``` 
 
-4. Créez un groupe de machines virtuelles identiques à l’aide de CURL pour appeler le point de terminaison REST Azure Resource Manager. L’exemple suivant crée un groupe de machines virtuelles identiques nommé *myVMSS* dans *myResourceGroup* avec une identité managée affectée par le système, telle qu’identifiée dans le corps de la demande par la valeur `"identity":{"type":"SystemAssigned"}`. Remplacez `<ACCESS TOKEN>` par la valeur que vous avez reçue à l’étape précédente lorsque vous avez demandé un jeton d’accès du porteur et la valeur `<SUBSCRIPTION ID>` adaptée à votre environnement.
+4. À l’aide d’Azure Cloud Shell, créez un groupe de machines virtuelles identiques avec CURL pour appeler le point de terminaison REST Azure Resource Manager. L’exemple suivant crée un groupe de machines virtuelles identiques nommé *myVMSS* dans *myResourceGroup* avec une identité managée affectée par le système, telle qu’identifiée dans le corps de la demande par la valeur `"identity":{"type":"SystemAssigned"}`. Remplacez `<ACCESS TOKEN>` par la valeur que vous avez reçue à l’étape précédente lorsque vous avez demandé un jeton d’accès du porteur et la valeur `<SUBSCRIPTION ID>` adaptée à votre environnement.
 
    ```bash   
    curl 'https://management.azure.com/subscriptions/<SUBSCRIPTION ID>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS?api-version=2018-06-01' -X PUT -d '{"sku":{"tier":"Standard","capacity":3,"name":"Standard_D1_v2"},"location":"eastus","identity":{"type":"SystemAssigned"},"properties":{"overprovision":true,"virtualMachineProfile":{"storageProfile":{"imageReference":{"sku":"2016-Datacenter","publisher":"MicrosoftWindowsServer","version":"latest","offer":"WindowsServer"},"osDisk":{"caching":"ReadWrite","managedDisk":{"storageAccountType":"Standard_LRS"},"createOption":"FromImage"}},"osProfile":{"computerNamePrefix":"myVMSS","adminUsername":"azureuser","adminPassword":"myPassword12"},"networkProfile":{"networkInterfaceConfigurations":[{"name":"myVMSS","properties":{"primary":true,"enableIPForwarding":true,"ipConfigurations":[{"name":"myVMSS","properties":{"subnet":{"id":"/subscriptions/<SUBSCRIPTION ID>/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"}}}]}}]}},"upgradePolicy":{"mode":"Manual"}}}' -H "Content-Type: application/json" -H "Authorization: Bearer <ACCESS TOKEN>"
@@ -325,7 +325,7 @@ Dans cette section, découvrez comment ajouter et supprimer une identité manag�
    az account get-access-token
    ```
 
-2. Créez une [interface réseau](/cli/azure/network/nic?view=azure-cli-latest#az-network-nic-create) pour votre groupe de machines virtuelles identiques :
+2. Créez une [interface réseau](/cli/azure/network/nic#az-network-nic-create) pour votre groupe de machines virtuelles identiques :
 
    ```azurecli-interactive
     az network nic create -g myResourceGroup --vnet-name myVnet --subnet mySubnet -n myNic
@@ -337,7 +337,7 @@ Dans cette section, découvrez comment ajouter et supprimer une identité manag�
    az account get-access-token
    ``` 
 
-4. Créez une identité managée affectée par l’utilisateur à l’aide des instructions disponibles ici : [Créer une identité managée affectée par l’utilisateur](how-to-manage-ua-identity-rest.md#create-a-user-assigned-managed-identity).
+4. Créez une identité managée attribuée par l’utilisateur en vous aidant des instructions disponibles ici : [Créer une identité managée attribuée par l’utilisateur](how-to-manage-ua-identity-rest.md#create-a-user-assigned-managed-identity).
 
 5. Créez un groupe de machines virtuelles identiques à l’aide de CURL pour appeler le point de terminaison REST Azure Resource Manager. L’exemple suivant crée un groupe de machines virtuelles identiques nommé *myVMSS* dans le groupe de ressources *myResourceGroup* avec une identité managée affectée par l’utilisateur `ID1`, telle qu’identifiée dans le corps de la demande par la valeur `"identity":{"type":"UserAssigned"}`. Remplacez `<ACCESS TOKEN>` par la valeur que vous avez reçue à l’étape précédente lorsque vous avez demandé un jeton d’accès du porteur et la valeur `<SUBSCRIPTION ID>` adaptée à votre environnement.
  

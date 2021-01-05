@@ -6,10 +6,10 @@ ms.topic: article
 ms.date: 02/25/2016
 ms.custom: seodec18
 ms.openlocfilehash: 040f84288c66f4506919e775b9ea41324b617cfa
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80437894"
 ---
 # <a name="controlling-azure-app-service-traffic-with-azure-traffic-manager"></a>Contrôle du trafic Azure App Service avec Azure Traffic Manager

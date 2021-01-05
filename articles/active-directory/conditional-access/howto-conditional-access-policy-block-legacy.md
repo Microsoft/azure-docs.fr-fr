@@ -4,19 +4,19 @@ description: Créer une stratégie d’accès conditionnel personnalisée pour b
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 03/25/2020
+ms.topic: how-to
+ms.date: 09/22/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6a868c8199ac34a498a280e2522d6b1e4c7ec370
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2499a89907eb63f01adbc80a6d206911c09c1259
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295214"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91265950"
 ---
 # <a name="conditional-access-block-legacy-authentication"></a>Accès conditionnel : Bloquer l’authentification héritée
 
@@ -24,7 +24,7 @@ En raison des risques accrus associés aux protocoles d’authentification héri
 
 ## <a name="create-a-conditional-access-policy"></a>Créer une stratégie d’accès conditionnel
 
-Les étapes suivantes vous aideront à créer une stratégie d’accès conditionnel pour bloquer les requêtes d’authentification héritées. Ces stratégies sont mises en [mode rapport seul](howto-conditional-access-report-only.md) pour commencer afin que les administrateurs puissent déterminer l’impact qu’elles auront sur les utilisateurs existants. Lorsque les administrateurs sont sûrs que la stratégie s’applique comme prévu, ils peuvent l’**activer** ou échelonner le déploiement en ajoutant certains groupes et en en excluant d’autres.
+Les étapes suivantes vous aideront à créer une stratégie d’accès conditionnel pour bloquer les requêtes d’authentification héritées. Ces stratégies sont mises en [mode rapport seul](howto-conditional-access-insights-reporting.md) pour commencer afin que les administrateurs puissent déterminer l’impact qu’elles auront sur les utilisateurs existants. Lorsque les administrateurs sont sûrs que la stratégie s’applique comme prévu, ils peuvent l’**activer** ou échelonner le déploiement en ajoutant certains groupes et en en excluant d’autres.
 
 1. Connectez-vous au **portail Microsoft Azure** en tant qu’administrateur général, administrateur de sécurité ou administrateur de l’accès conditionnel.
 1. Accédez à **Azure Active Directory** > **Sécurité** > **Accès conditionnel.**
@@ -36,8 +36,8 @@ Les étapes suivantes vous aideront à créer une stratégie d’accès conditio
    1. Sélectionnez **Terminé**.
 1. Sous **Applications ou actions cloud**, sélectionnez **Toutes les applications cloud**.
    1. Sélectionnez **Terminé**.
-1. Sous **Conditions** > **Applications clientes (préversion)** , réglez **Configurer** sur **Oui**.
-   1. Cochez uniquement les cases **Applications mobiles et clients de bureau** > **Autres clients**.
+1. Sous **Conditions** > **Applications clientes**, définissez **Configurer** sur **Oui**.
+   1. Cochez uniquement les cases **Clients Exchange ActiveSync** et **Autres clients**.
    1. Sélectionnez **Terminé**.
 1. Sous **Contrôles d'accès** > **Accorder**, sélectionnez **Bloquer l’accès**.
    1. Sélectionnez **Sélectionner**.
@@ -48,6 +48,8 @@ Les étapes suivantes vous aideront à créer une stratégie d’accès conditio
 
 [Stratégies d’accès conditionnel courantes](concept-conditional-access-policy-common.md)
 
-[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-report-only.md)
+[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-insights-reporting.md)
 
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)
+
+[Comment configurer une application ou un appareil multifonction pour envoyer un e-mail à l’aide de Microsoft 365](/exchange/mail-flow-best-practices/how-to-set-up-a-multifunction-device-or-application-to-send-email-using-office-3)

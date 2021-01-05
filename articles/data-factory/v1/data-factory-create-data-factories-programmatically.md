@@ -3,20 +3,21 @@ title: Créer des pipelines de données à l’aide du Kit de développement log
 description: Découvrez comment créer, analyser et gérer par programmation des fabriques de données Azure à l'aide du Kit de développement logiciel (SDK) Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/22/2018
-ms.openlocfilehash: 9cd3cd60f5d62a0c416b0e05ea408c20483bff13
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: dd1c7c20441d12600e2101f738904caf6260509e
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74931335"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496004"
 ---
 # <a name="create-monitor-and-manage-azure-data-factories-using-azure-data-factory-net-sdk"></a>Créer, surveiller et gérer des fabriques de données Azure à l’aide du Kit de développement logiciel (SDK) Azure Data Factory .NET
 > [!NOTE]
@@ -28,13 +29,13 @@ Vous pouvez créer, surveiller et gérer des fabriques de données Azure par pro
 > [!NOTE]
 > Cet article ne couvre pas toutes les API .NET Data Factory. Consultez [Informations de référence sur l’API .NET Data Factory](/dotnet/api/index?view=azuremgmtdatafactories-4.12.1) pour la documentation complète sur l’API .NET pour Data Factory. 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 * Visual Studio 2012, 2013 ou 2015
 * Téléchargez et installez le [Kit SDK Azure .NET](https://azure.microsoft.com/downloads/).
-* Azure PowerShell. Suivez les instructions de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/overview) pour installer Azure PowerShell sur votre ordinateur. Vous utilisez Azure PowerShell pour créer une application Azure Active Directory.
+* Azure PowerShell. Suivez les instructions de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/) pour installer Azure PowerShell sur votre ordinateur. Vous utilisez Azure PowerShell pour créer une application Azure Active Directory.
 
 ### <a name="create-an-application-in-azure-active-directory"></a>Créer une application dans Azure Active Directory
 Créez une application Azure Active Directory, créez un principal de service pour l’application et attribuez-lui le rôle **Contributeurs de Data Factory** .
@@ -445,7 +446,7 @@ L’activité de copie effectue le déplacement des données dans Azure Data Fac
     }
     ```
 
-15. Dans l’Explorateur de solutions, développez le projet **DataFactoryAPITestApp**, cliquez avec le bouton droit sur **Références**, puis cliquez sur **Ajouter une référence**. Cochez la case pour l’assembly `System.Configuration` et cliquez sur **OK**.
+15. Dans l’Explorateur de solutions, développez le projet : **DataFactoryAPITestApp**, cliquez avec le bouton droit sur **Références**, puis cliquez sur **Ajouter une référence**. Cochez la case pour l’assembly `System.Configuration` et cliquez sur **OK**.
 15. Générez l'application console. Dans le menu, cliquez sur **Générer**, puis sur **Générer la solution**.
 16. Vérifiez qu'il existe au moins un fichier dans le conteneur adftutorial de votre stockage d'objets blob Azure. Si ce n'est pas le cas, créez le fichier Emp.txt dans le bloc-notes avec le contenu suivant, puis chargez-le sur le conteneur adftutorial.
 
@@ -500,6 +501,6 @@ while (response != null);
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-Consultez l’exemple suivant pour créer un pipeline à l’aide du Kit de développement logiciel .NET qui copie les données d’un stockage d’objets blob Azure dans une base de données Azure SQL : 
+Consultez l’exemple suivant pour créer un pipeline à l’aide du Kit de développement logiciel .NET qui copie les données d’un stockage d’objets blob Azure dans Azure SQL Database : 
 
 - [Créer un pipeline pour copier des données de stockage d’objets Blob dans SQL Database](data-factory-copy-activity-tutorial-using-dotnet-api.md)

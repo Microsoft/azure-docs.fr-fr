@@ -1,6 +1,6 @@
 ---
 title: Copier des données dans Stockage Blob en utilisant Azure Data Factory
-description: Créez une fabrique de données Azure pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
+description: Créez une fabrique de données Azure avec PowerShell pour copier les données d’un emplacement du Stockage Blob Azure vers un autre emplacement.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,14 +13,14 @@ ms.devlang: powershell
 ms.topic: quickstart
 ms.date: 04/10/2020
 ms.author: jingwang
-ms.openlocfilehash: ad757e3d65d3094ca6883d747404906a871ed850
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: a7fcb4be47e0e1e62c190a9b089243a178df8e7a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81419338"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013351"
 ---
-# <a name="quickstart-create-an-azure-data-factory-using-powershell"></a>Démarrage rapide : Créer une fabrique de données Azure à l’aide de PowerShell
+# <a name="quickstart-create-an-azure-data-factory-using-powershell"></a>Démarrage rapide : Créer une fabrique de données Azure avec PowerShell
 
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)
@@ -115,8 +115,8 @@ Notez les points suivants :
 Créez des services liés dans une fabrique de données pour lier vos magasins de données et vos services de calcul à la fabrique de données. Dans ce guide de démarrage rapide, vous allez créer un service lié Stockage Azure qui sera utilisé à la fois comme banque de données source et réceptrice. Le service lié comporte les informations de connexion utilisées par le service Data Factory lors de l’exécution pour s’y connecter.
 
 >[!TIP]
->Dans ce guide de démarrage rapide, vous utilisez une *clé de compte* comme type d’authentification pour votre magasin de données, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *URI SAS*, un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](https://docs.microsoft.com/azure/data-factory/connector-azure-blob-storage#linked-service-properties).
->Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](https://docs.microsoft.com/azure/data-factory/store-credentials-in-key-vault).
+>Dans ce guide de démarrage rapide, vous utilisez une *clé de compte* comme type d’authentification pour votre magasin de données, mais vous pouvez choisir d’autres méthodes d’authentification prises en charge : un *URI SAS*, un *principal de service* et une *identité managée*, si nécessaire. Pour plus d’informations, reportez-vous aux sections correspondantes de [cet article](./connector-azure-blob-storage.md#linked-service-properties).
+>Pour stocker de manière sécurisée des secrets de magasins de données, il est également recommandé d’utiliser un coffre de clés Azure. Pour obtenir des illustrations détaillées, reportez-vous à [cet article](./store-credentials-in-key-vault.md).
 
 1. Créez un fichier JSON nommé **AzureStorageLinkedService.json** dans le dossier **C:\ADFv2QuickStartPSH** avec le contenu suivant : (S’il n’existe pas déjà, créez le dossier ADFv2QuickStartPSH.)
 

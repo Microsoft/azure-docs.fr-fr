@@ -4,12 +4,12 @@ description: Guide pratique pour appeler des orchestrations à partir d’orches
 ms.topic: conceptual
 ms.date: 11/03/2019
 ms.author: azfuncdf
-ms.openlocfilehash: d4d599063f727510cbf504ea3d121bdabfe001c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5625bc2ddfa4b6f527ca16f19f33d257a1834d4b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76261515"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85340811"
 ---
 # <a name="sub-orchestrations-in-durable-functions-azure-functions"></a>Orchestrations secondaires dans Fonctions durables (Azure Functions)
 
@@ -18,6 +18,10 @@ En plus d’appeler des fonctions d’activité, les fonctions d’orchestrateur
 Une fonction d’orchestrateur peut en appeler une autre avec les méthodes `CallSubOrchestratorAsync` ou `CallSubOrchestratorWithRetryAsync` en .NET, ou les méthodes `callSubOrchestrator` ou `callSubOrchestratorWithRetry` en JavaScript. L’article [Gestion des erreurs et compensation](durable-functions-error-handling.md#automatic-retry-on-failure) fournit des informations supplémentaires sur la nouvelle tentative automatique.
 
 Les fonctions d’orchestrateur secondaires se comportent comme des fonctions d’activité du point de vue de l’appelant. Elles peuvent retourner une valeur, lever une exception et être attendues par la fonction d’orchestrateur parente. 
+
+> [!NOTE]
+> Les sous-orchestrations sont actuellement prises en charge dans .NET et JavaScript.
+
 ## <a name="example"></a>Exemple
 
 L’exemple suivant montre un scénario IoT (« Internet of Things ») dans lequel plusieurs appareils doivent être configurés. La fonction suivante représente le workflow de configuration qui doit être exécuté pour chaque appareil :

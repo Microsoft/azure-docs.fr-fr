@@ -2,20 +2,18 @@
 title: Azure Application Insights - Collecte automatique de dépendance | Microsoft Docs
 description: Application Insights collecte et visualise automatiquement les dépendances
 ms.topic: reference
-author: nikmd23
-ms.author: nimolnar
-ms.date: 04/29/2019
-ms.reviewer: mbullwin
-ms.openlocfilehash: eaafe19f5112b433d50a34aa551aa84d196726a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-dotnet
+ms.date: 05/06/2020
+ms.openlocfilehash: 8a4d79e52465e93fb4db2625217cb37a06917218
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77665814"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91930864"
 ---
 # <a name="dependency-auto-collection"></a>Collecte automatique de dépendance
 
-Voici la liste des appels de dépendance actuellement pris en charge qui sont automatiquement détectés comme des dépendances sans devoir apporter des modifications supplémentaires au code de votre application. Ces dépendances sont visualisées dans les vues [Cartographie d’application](https://docs.microsoft.com/azure/application-insights/app-insights-app-map) et [Diagnostics des transactions](https://docs.microsoft.com/azure/application-insights/app-insights-transaction-diagnostics) d’Application Insights. Si votre dépendance ne figure pas dans la liste ci-dessous, vous pouvez toujours la suivre manuellement avec un [appel de suivi des dépendances](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackdependency).
+Voici la liste des appels de dépendance actuellement pris en charge qui sont automatiquement détectés comme des dépendances sans devoir apporter des modifications supplémentaires au code de votre application. Ces dépendances sont visualisées dans les vues [Cartographie d’application](./app-map.md) et [Diagnostics des transactions](./transaction-diagnostics.md) d’Application Insights. Si votre dépendance ne figure pas dans la liste ci-dessous, vous pouvez toujours la suivre manuellement avec un [appel de suivi des dépendances](./api-custom-events-metrics.md#trackdependency).
 
 ## <a name="net"></a>.NET
 
@@ -28,10 +26,15 @@ Voici la liste des appels de dépendance actuellement pris en charge qui sont au
 | <b> Bibliothèques de communication</b> |
 | [HttpClient](https://www.microsoft.com/net/) | 4.5+, .NET Core 1.1+ |
 | [SqlClient](https://www.nuget.org/packages/System.Data.SqlClient) | .NET Core 1.0+, NuGet 4.3.0 |
+| [Microsoft.Data.SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/1.1.2)| 1.1.0 - dernière version stable. (Voir la remarque ci-dessous.)
 | [Kit de développement logiciel (SDK) client EventHubs](https://www.nuget.org/packages/Microsoft.Azure.EventHubs) | 1.1.0 |
 | [Kit de développement logiciel (SDK) client ServiceBus](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus) | 3.0.0 |
 | <b>Clients de stockage</b>|  |
 | ADO.NET | 4.5+ |
+
+> [!NOTE]
+> Il existe un [problème connu](https://github.com/microsoft/ApplicationInsights-dotnet/issues/1347) avec les versions antérieures de Microsoft.Data.SqlClient. Nous vous recommandons d’utiliser la version 1.1.0 ou ultérieure pour atténuer ce problème. Entity Framework Core n’est pas nécessairement fourni avec la dernière version stable de Microsoft.Data.SqlClient. Nous vous recommandons donc de confirmer que vous disposez d’au moins la version 1.1.0 pour éviter ce problème.   
+
 
 ## <a name="java"></a>Java
 | Serveurs d’applications | Versions |
@@ -58,7 +61,7 @@ Voici la liste des appels de dépendance actuellement pris en charge qui sont au
 
 > [!NOTE]
 > \* Sauf prise en charge de programmation réactive.
-> <br>† Installation de [Agent JVM](https://docs.microsoft.com/azure/application-insights/app-insights-java-agent#install-the-application-insights-agent-for-java) requise.
+> <br>† Installation de [Agent JVM](./java-agent.md#install-the-application-insights-agent-for-java) requise.
 
 ## <a name="nodejs"></a>Node.js
 
@@ -84,9 +87,10 @@ Voici la liste des appels de dépendance actuellement pris en charge qui sont au
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Configurez le suivi des dépendances personnalisé pour [.NET](../../azure-monitor/app/asp-net-dependencies.md).
-- Configurez le suivi des dépendances personnalisé pour [Java](../../azure-monitor/app/java-agent.md).
-- Configurez le suivi personnalisé des dépendances pour [OpenCensus Python](../../azure-monitor/app/opencensus-python-dependency.md).
-- [Écrire des données de télémétrie des dépendances personnalisées](../../azure-monitor/app/api-custom-events-metrics.md#trackdependency)
-- Pour connaître les types et les modèles de données Application Insights, consultez [Modèle de données](../../azure-monitor/app/data-model.md).
-- Découvrez quelles [plateformes](../../azure-monitor/app/platforms.md) sont prises en charge par Application Insights.
+- Configurez le suivi des dépendances personnalisé pour [.NET](./asp-net-dependencies.md).
+- Configurez le suivi des dépendances personnalisé pour [Java](./java-agent.md).
+- Configurez le suivi personnalisé des dépendances pour [OpenCensus Python](./opencensus-python-dependency.md).
+- [Écrire des données de télémétrie des dépendances personnalisées](./api-custom-events-metrics.md#trackdependency)
+- Pour connaître les types et les modèles de données Application Insights, consultez [Modèle de données](./data-model.md).
+- Découvrez quelles [plateformes](./platforms.md) sont prises en charge par Application Insights.
+

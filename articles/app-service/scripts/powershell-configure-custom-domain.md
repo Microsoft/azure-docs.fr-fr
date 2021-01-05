@@ -7,19 +7,19 @@ ms.assetid: 356f5af9-f62e-411c-8b24-deba05214103
 ms.topic: sample
 ms.date: 03/20/2017
 ms.author: msangapu
-ms.custom: mvc, seodec18
-ms.openlocfilehash: 4629157142c17122c0aa6c74c1918c1d01d796c0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, seodec18, devx-track-azurepowershell
+ms.openlocfilehash: 749250f4ee5e1a0a39c9dc36795fa07e9da743a0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80044739"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89072228"
 ---
 # <a name="assign-a-custom-domain-to-a-web-app-using-powershell"></a>Affecter un domaine personnalisé à une application web à l'aide de PowerShell
 
 Cet exemple de script crée une application web dans App Service avec ses ressources associées, puis la mappe à `www.<yourdomain>`. 
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure. Vous devez également avoir accès à la page de configuration DNS du bureau d’enregistrement de votre domaine.
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure. Vous devez également avoir accès à la page de configuration DNS du bureau d’enregistrement de votre domaine.
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -49,6 +49,6 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure App Service Web Apps sur la page [Azure PowerShell Samples](../samples-powershell.md) (Exemples Azure PowerShell).

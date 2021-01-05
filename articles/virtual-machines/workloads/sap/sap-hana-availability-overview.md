@@ -9,18 +9,19 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 03/05/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: bccaf45cf617bd31a584b6c73f3dd08877bc8587
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ac74bb4b37535d0c0b095ea300afc15aa0978ed8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71266073"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94950123"
 ---
 # <a name="sap-hana-high-availability-for-azure-virtual-machines"></a>Haute disponibilité de SAP HANA pour les machines virtuelles Azure
 
@@ -37,9 +38,9 @@ Cet article suppose également que vous êtes familiarisé avec l’installation
 
 Ces articles fournissent une bonne vue d’ensemble de l’utilisation de SAP HANA dans Azure :
 
-- [Installation manuelle d’un système SAP HANA à instance unique sur des machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-get-started)
+- [Installation manuelle d’un système SAP HANA à instance unique sur des machines virtuelles Azure](./hana-get-started.md)
 - [Installer la réplication de système SAP HANA sur des machines virtuelles Azure](sap-hana-high-availability.md)
-- [Sauvegarder SAP HANA sur des machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-backup-guide)
+- [Sauvegarder SAP HANA sur des machines virtuelles Azure](./sap-hana-backup-guide.md)
 
 Il est également judicieux de se familiariser avec ces articles sur SAP HANA :
 
@@ -52,7 +53,7 @@ Il est également judicieux de se familiariser avec ces articles sur SAP HANA :
 - [Redémarrage automatique du service SAP HANA](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.01/en-US/cf10efba8bea4e81b1dc1907ecc652d3.html)
 - [Configurer la réplication de système SAP HANA](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.01/en-US/676844172c2442f0bf6c8b080db05ae7.html)
 
-En plus de vous familiariser avec le déploiement de machines virtuelles dans Azure, nous vous recommandons également de lire l’article [Gestion de la disponibilité des machines virtuelles Windows dans Azure](https://docs.microsoft.com/azure/virtual-machines/windows/manage-availability) avant de poursuivre la définition de votre architecture de disponibilité dans Azure.
+En plus de vous familiariser avec le déploiement de machines virtuelles dans Azure, nous vous recommandons également de lire l’article [Gestion de la disponibilité des machines virtuelles Windows dans Azure](../../manage-availability.md) avant de poursuivre la définition de votre architecture de disponibilité dans Azure.
 
 ## <a name="service-level-agreements-for-azure-components"></a>Contrats de niveau de service pour des composants Azure
 
@@ -60,16 +61,16 @@ Azure propose différents contrats SLA de disponibilité pour différents compos
 
 [Contrat SLA pour les machines virtuelles](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/) décrit trois contrats de niveau de service, pour trois configurations différentes :
 
-- Une seule machine virtuelle qui utilise des [disques SSD Premium Azure](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview) pour le disque du système d'exploitation et tous les disques de données. Cette option fournit une durée de fonctionnement mensuelle de 99,9 %.
-- Plusieurs machines virtuelles (au moins deux) qui sont organisées dans un [groupe à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets). Cette option fournit une durée de fonctionnement mensuelle de 99,95 %.
-- Plusieurs machines virtuelles (au moins deux) qui sont organisées dans une [zone de disponibilité](https://docs.microsoft.com/azure/availability-zones/az-overview). Cette option fournit une durée de fonctionnement mensuelle de 99,99 %.
+- Une seule machine virtuelle qui utilise des [disques SSD Premium Azure](../../managed-disks-overview.md) pour le disque du système d'exploitation et tous les disques de données. Cette option fournit une durée de fonctionnement mensuelle de 99,9 %.
+- Plusieurs machines virtuelles (au moins deux) qui sont organisées dans un [groupe à haute disponibilité Azure](../../windows/tutorial-availability-sets.md). Cette option fournit une durée de fonctionnement mensuelle de 99,95 %.
+- Plusieurs machines virtuelles (au moins deux) qui sont organisées dans une [zone de disponibilité](../../../availability-zones/az-overview.md). Cette option fournit une durée de fonctionnement mensuelle de 99,99 %.
 
 Mesurez vos exigences de disponibilité par rapport aux contrats SLA que les composants Azure peuvent fournir. Ensuite, choisissez vos scénarios pour SAP HANA pour atteindre le niveau de disponibilité requis.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur [Disponibilité de SAP HANA au sein d’une région Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-availability-one-region).
-- En savoir plus sur [Disponibilité de SAP HANA dans l’ensemble des régions Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-availability-across-regions). 
+- En savoir plus sur [Disponibilité de SAP HANA au sein d’une région Azure](./sap-hana-availability-one-region.md).
+- En savoir plus sur [Disponibilité de SAP HANA dans l’ensemble des régions Azure](./sap-hana-availability-across-regions.md). 
 
 
 
@@ -83,8 +84,5 @@ Mesurez vos exigences de disponibilité par rapport aux contrats SLA que les com
 
 
 
-
-
-  
 
 

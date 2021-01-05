@@ -3,15 +3,15 @@ title: Authentification des utilisateurs finaux - REST avec Data Lake Stor
 description: Découvrez comment authentifier les utilisateurs finaux auprès de Data Lake Storage Gen1 à l’aide d’Azure Active Directory et de l’API REST
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: ac06c9ef355eeba489d2006c435a48b7efcfd7f0
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 462cd06c9da3b1f0a57c293d52c59181372b709b
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82688077"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92103745"
 ---
 # <a name="end-user-authentication-with-azure-data-lake-storage-gen1-using-rest-api"></a>Authentification des utilisateurs finaux auprès d’Azure Data Lake Storage Gen1 avec l’API REST
 > [!div class="op_single_selector"]
@@ -41,46 +41,51 @@ Dans ce scénario, l’application invite l’utilisateur à se connecter. Toute
 
 1. Dans votre application, redirigez l’utilisateur vers l’URL suivante :
 
-        https://login.microsoftonline.com/<TENANT-ID>/oauth2/authorize?client_id=<APPLICATION-ID>&response_type=code&redirect_uri=<REDIRECT-URI>
+    `https://login.microsoftonline.com/<TENANT-ID>/oauth2/authorize?client_id=<APPLICATION-ID>&response_type=code&redirect_uri=<REDIRECT-URI>`
 
    > [!NOTE]
-   > L’URI \<REDIRECT-URI> doit être codée pour être utilisée dans une URL. Donc, pour https://localhost , utilisez `https%3A%2F%2Flocalhost` )
+   > \<REDIRECT-URI> doit être encodé pour être utilisé dans une URL. Donc, pour https://localhost , utilisez `https%3A%2F%2Flocalhost` )
 
     Pour les besoins de ce didacticiel, vous pouvez remplacer les valeurs d’espace réservé de l’URL ci-dessus et la coller dans la barre d’adresse d’un navigateur web. Vous serez redirigé pour vous authentifier à l’aide de vos informations de connexion Azure. Lorsque vous êtes connecté, la réponse s’affiche dans la barre d’adresse du navigateur. La réponse présente le format suivant :
 
-        http://localhost/?code=<AUTHORIZATION-CODE>&session_state=<GUID>
+    `http://localhost/?code=<AUTHORIZATION-CODE>&session_state=<GUID>`
 
 2. Capturez le code d’autorisation de la réponse. Pour ce didacticiel, vous pouvez copier le code d’autorisation de la barre d’adresse du navigateur web et le transmettre dans la demande POST au point de terminaison de jeton, comme indiqué dans l’extrait de code suivant :
 
-        curl -X POST https://login.microsoftonline.com/<TENANT-ID>/oauth2/token \
-        -F redirect_uri=<REDIRECT-URI> \
-        -F grant_type=authorization_code \
-        -F resource=https://management.core.windows.net/ \
-        -F client_id=<APPLICATION-ID> \
-        -F code=<AUTHORIZATION-CODE>
+    ```console
+    curl -X POST https://login.microsoftonline.com/<TENANT-ID>/oauth2/token \
+    -F redirect_uri=<REDIRECT-URI> \
+    -F grant_type=authorization_code \
+    -F resource=https://management.core.windows.net/ \
+    -F client_id=<APPLICATION-ID> \
+    -F code=<AUTHORIZATION-CODE>
+    ```
 
    > [!NOTE]
-   > Dans ce cas, il n’est pas nécessaire de coder l’URI \<REDIRECT-URI>.
+   > Dans ce cas, il n’est pas nécessaire d’encoder \<REDIRECT-URI>.
    > 
    > 
 
 3. La réponse est un objet JSON contenant un jeton d’accès (par exemple, `"access_token": "<ACCESS_TOKEN>"`) et un jeton d’actualisation (par exemple, `"refresh_token": "<REFRESH_TOKEN>"`). Votre application utilise le jeton d’accès pour accéder à Azure Data Lake Storage Gen1 et le jeton d’actualisation pour obtenir un autre jeton d’accès lorsque l’un d’eux expire.
 
-        {"token_type":"Bearer","scope":"user_impersonation","expires_in":"3599","expires_on":"1461865782","not_before":    "1461861882","resource":"https://management.core.windows.net/","access_token":"<REDACTED>","refresh_token":"<REDACTED>","id_token":"<REDACTED>"}
+    ```json
+    {"token_type":"Bearer","scope":"user_impersonation","expires_in":"3599","expires_on":"1461865782","not_before":    "1461861882","resource":"https://management.core.windows.net/","access_token":"<REDACTED>","refresh_token":"<REDACTED>","id_token":"<REDACTED>"}
+    ```
 
 4. Quand le jeton d’accès arrive à expiration, vous pouvez en demander un nouveau à l’aide du jeton d’actualisation, comme indiqué dans l’extrait de code suivant :
 
-        curl -X POST https://login.microsoftonline.com/<TENANT-ID>/oauth2/token  \
-             -F grant_type=refresh_token \
-             -F resource=https://management.core.windows.net/ \
-             -F client_id=<APPLICATION-ID> \
-             -F refresh_token=<REFRESH-TOKEN>
+    ```console
+    curl -X POST https://login.microsoftonline.com/<TENANT-ID>/oauth2/token  \
+         -F grant_type=refresh_token \
+         -F resource=https://management.core.windows.net/ \
+         -F client_id=<APPLICATION-ID> \
+         -F refresh_token=<REFRESH-TOKEN>
+    ```
 
-Pour plus d’informations sur l’authentification utilisateur interactive, consultez [Flux d’octroi d’un code d’autorisation](https://msdn.microsoft.com/library/azure/dn645542.aspx).
+Pour plus d’informations sur l’authentification utilisateur interactive, consultez [Flux d’octroi d’un code d’autorisation](/previous-versions/azure/dn645542(v=azure.100)).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Dans cet article, vous avez appris à utiliser l’authentification de service à service auprès d’Azure Data Lake Storage Gen1 avec l’API REST. Vous pouvez à présent consulter les articles ci-après, qui expliquent comment utiliser l’API REST pour travailler avec Azure Data Lake Storage Gen1.
 
 * [Opérations de gestion des comptes sur Data Lake Storage Gen1 à l’aide de l’API REST](data-lake-store-get-started-rest-api.md)
 * [Opérations sur les données dans Data Lake Storage Gen1 à l’aide de l’API REST](data-lake-store-data-operations-rest-api.md)
-

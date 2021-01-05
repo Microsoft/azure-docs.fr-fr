@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/05/2016
 ms.author: matd
-ms.openlocfilehash: 4dcda65384190050e11f1bf9b15c706b0e38c6b3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 66a1e22282864d0425173504735d6beb42b76ad7
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75561641"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967259"
 ---
 # <a name="storsimple-as-a-backup-target-with-backup-exec"></a>StorSimple comme cible de sauvegarde avec Backup Exec
 
@@ -79,7 +79,7 @@ StorSimple offre les avantages suivants :
 
 Bien que StorSimple présente deux principaux scénarios de déploiement (cible de sauvegarde principale et secondaire), il s’agit essentiellement d’un dispositif de stockage de bloc. StorSimple exécute la totalité des tâches de compression et de déduplication. Il envoie et récupère de façon transparente les données entre le cloud, l’application et le système de fichiers.
 
-Pour plus d’informations sur StorSimple, consultez l’article [StorSimple série 8000 : une solution de stockage de cloud hybride](storsimple-overview.md). En outre, vous pouvez consulter les [caractéristiques techniques de StorSimple série 8000](storsimple-technical-specifications-and-compliance.md).
+Pour plus d’informations sur StorSimple, consultez l’article [StorSimple série 8000 : une solution de stockage de cloud hybride](storsimple-overview.md). En outre, vous pouvez consulter les [caractéristiques techniques de StorSimple série 8000](./storsimple-8000-technical-specifications-and-compliance.md).
 
 > [!IMPORTANT]
 > L’utilisation d’un appareil StorSimple comme cible de sauvegarde n’est prise en charge que pour StorSimple 8000 Update 3 et les versions ultérieures.
@@ -170,7 +170,7 @@ Pour que la solution fonctionne de manière optimale, nous vous recommandons d�
 
 ### <a name="deploy-storsimple"></a>Déployer StorSimple
 
-Pour découvrir un guide de déploiement de StorSimple pas à pas, consultez l’article [Déploiement de votre appareil StorSimple local](storsimple-deployment-walkthrough-u2.md).
+Pour découvrir un guide de déploiement de StorSimple pas à pas, consultez l’article [Déploiement de votre appareil StorSimple local](./storsimple-8000-deployment-walkthrough-u2.md).
 
 ### <a name="deploy-backup-exec"></a>Déployer Backup Exec
 
@@ -185,7 +185,7 @@ Dans cette section, nous fournissons quelques exemples de configuration. Les exe
 | Tâches de déploiement StorSimple  | Commentaires supplémentaires |
 |---|---|
 | Déploiement de votre appareil StorSimple local | Versions prises en charge : Update 3 et versions ultérieures. |
-| Activez la cible de sauvegarde. | Utilisez ces commandes pour activer ou désactiver le mode de cible de sauvegarde et pour obtenir l’état. Pour plus d’informations, consultez l’article [Connexion à distance à un appareil StorSimple](storsimple-remote-connect.md).</br> Pour activer le mode de sauvegarde : `Set-HCSBackupApplianceMode -enable`. </br> Pour désactiver le mode de sauvegarde : `Set-HCSBackupApplianceMode -disable`. </br> Pour obtenir l’état actuel des paramètres de mode de sauvegarde : `Get-HCSBackupApplianceMode`. |
+| Activez la cible de sauvegarde. | Utilisez ces commandes pour activer ou désactiver le mode de cible de sauvegarde et pour obtenir l’état. Pour plus d’informations, consultez l’article [Connexion à distance à un appareil StorSimple](./storsimple-8000-remote-connect.md).</br> Pour activer le mode de sauvegarde : `Set-HCSBackupApplianceMode -enable`. </br> Pour désactiver le mode de sauvegarde : `Set-HCSBackupApplianceMode -disable`. </br> Pour obtenir l’état actuel des paramètres de mode de sauvegarde : `Get-HCSBackupApplianceMode`. |
 | Création d’un conteneur de volumes commun pour votre volume qui stocke les données de sauvegarde. Toutes les données d’un conteneur de volumes sont dédupliquées. | Les conteneurs de volumes StorSimple définissent les domaines de déduplication.  |
 | Créez les volumes StorSimple. | Créez des volumes en les dimensionnant le plus conformément possible à l’usage que vous prévoyez d’en faire, car la taille du volume a une incidence sur la durée des captures instantanées cloud. Pour plus d’informations sur la taille d’un volume, consultez les [stratégies de rétention](#retention-policies).</br> </br> Utilisez les volumes hiérarchisés StorSimple et cochez la case **Utiliser ce volume pour les données d’archivage auxquelles vous accédez moins souvent**. </br> L’utilisation de volumes épinglés localement uniquement n’est pas prise en charge. |
 | Création d’une stratégie de sauvegarde StorSimple unique pour tous les volumes cibles de sauvegarde. | Une stratégie de sauvegarde StorSimple définit le groupe de cohérence de volume. |
@@ -211,16 +211,16 @@ Configurez votre solution en respectant les instructions dans les sections suiva
 - Désactivez la défragmentation Windows Server sur les volumes StorSimple.
 - Désactivez l’indexation Windows Server sur les volumes StorSimple.
 - Exécutez une analyse antivirus au niveau de l’hôte source (et non par rapport aux volumes StorSimple).
-- Désactivez l’activité [Maintenance Windows Server](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) par défaut dans le Gestionnaire des tâches. Pour ce faire, procédez de l’une des manières suivantes :
+- Désactivez l’activité [Maintenance Windows Server](/windows/win32/w8cookbook/automatic-maintenance) par défaut dans le Gestionnaire des tâches. Pour ce faire, procédez de l’une des manières suivantes :
   - Désactivez le programme de configuration de l’activité de maintenance dans le Planificateur de tâches Windows.
-  - Téléchargez [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) à partir de Windows Sysinternals. Après avoir téléchargé PsExec, exécutez Azure PowerShell en tant qu’administrateur, puis tapez :
+  - Téléchargez [PsExec](/sysinternals/downloads/psexec) à partir de Windows Sysinternals. Après avoir téléchargé PsExec, exécutez Azure PowerShell en tant qu’administrateur, puis tapez :
     ```powershell
     psexec \\%computername% -s schtasks /change /tn “MicrosoftWindowsTaskSchedulerMaintenance Configurator" /disable
     ```
 
 ### <a name="storsimple-best-practices"></a>Meilleures pratiques concernant StorSimple
 
-  -   Assurez-vous que l’appareil StorSimple est mis à jour avec la version [Update 3 ou une version ultérieure](storsimple-install-update-3.md).
+  -   Assurez-vous que l’appareil StorSimple est mis à jour avec la version [Update 3 ou une version ultérieure](./index.yml).
   -   Isolez le trafic iSCSI et cloud. Utilisez des connexions iSCSI dédiées pour le trafic entre StorSimple et le serveur de sauvegarde.
   -   Assurez-vous que l’appareil StorSimple est une cible de sauvegarde dédiée. Les charges de travail mixtes ne sont pas prises en charge, car elles affectent le RTO et le RPO.
 
@@ -409,15 +409,15 @@ Le tableau suivant montre comment configurer des sauvegardes à exécuter sur le
 
 4.  Dans la liste déroulante **Storage (Stockage)** , sélectionnez le volume StorSimple sur lequel vous voulez que le travail d’archivage stocke les données.
 
-    ![Console d’administration de Backup Exec, propriétés de définition de sauvegarde et options de duplication](./media/storsimple-configure-backup-target-using-backup-exec/image22.png)
+    ![Capture d’écran montrant la liste dans laquelle vous devez sélectionner le stockage.](./media/storsimple-configure-backup-target-using-backup-exec/image22.png)
 
 5.  Sélectionnez **Verify (Vérifier)** , puis cochez la case **Do not verify data for this job (Ne pas vérifier les données de ce travail)** .
 
-    ![Console d’administration de Backup Exec, propriétés de définition de sauvegarde et options de duplication](./media/storsimple-configure-backup-target-using-backup-exec/image23.png)
+    ![Capture d’écran montrant où vous sélectionnez l’option Do not verify data for this job.](./media/storsimple-configure-backup-target-using-backup-exec/image23.png)
 
 6.  Sélectionnez **OK**.
 
-    ![Console d’administration de Backup Exec, propriétés de définition de sauvegarde et options de duplication](./media/storsimple-configure-backup-target-using-backup-exec/image24.png)
+    ![Capture d’écran montrant les propriétés de définition de sauvegarde.](./media/storsimple-configure-backup-target-using-backup-exec/image24.png)
 
 7.  Dans la colonne **Backup (Sauvegarde)** , ajoutez une nouvelle étape. Pour la source, utilisez l’option **incrémentielle**. Pour la cible, choisissez un volume StorSimple sur lequel le travail de sauvegarde incrémentielle est archivé. Répétez les étapes 1 à 6.
 
@@ -448,7 +448,7 @@ La section ci-après décrit comment créer un bref script pour déclencher et s
 
 ### <a name="to-start-or-delete-a-cloud-snapshot"></a>Pour démarrer ou supprimer une capture instantanée cloud
 
-1. [Installez Azure PowerShell](/powershell/azure/overview).
+1. [Installez Azure PowerShell](/powershell/azure/).
 2. Téléchargez et installez le script PowerShell [Manage-CloudSnapshots.ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1).
 3. Sur le serveur qui exécute le script, exécutez PowerShell en tant qu’administrateur. Vérifiez que vous exécutez le script avec `-WhatIf $true` pour voir les modifications qu’il apporte. Une fois la validation terminée, passez `-WhatIf $false`. Exécutez la commande ci-dessous :
    ```powershell
@@ -474,7 +474,7 @@ Un sinistre peut être dû à plusieurs facteurs. Le tableau ci-après répertor
 
 | Scénario | Impact | Procédure de récupération | Notes |
 |---|---|---|---|
-| Défaillance d’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Remplacez l’appareil défaillant et effectuez [un basculement et une récupération d’urgence StorSimple](storsimple-device-failover-disaster-recovery.md). | Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. Le processus de nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local, ce qui peut prendre un certain temps. |
+| Défaillance d’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Remplacez l’appareil défaillant et effectuez [un basculement et une récupération d’urgence StorSimple](./storsimple-8000-device-failover-disaster-recovery.md). | Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. Le processus de nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local, ce qui peut prendre un certain temps. |
 | Défaillance du serveur Backup Exec | Les opérations de sauvegarde et de restauration sont interrompues. | Régénérez le serveur de sauvegarde et effectuez la restauration de base de données en suivant les instructions de l’article [How to do a manual Backup and Restore of Backup Exec (BEDB) database (Procédure de sauvegarde et de restauration manuelle d’une base de données Backup Exec (BEDB))](http://www.veritas.com/docs/000041083). | Vous devez reconstruire ou restaurer le serveur Backup Exec sur le site de récupération d’urgence. Restaurez la base de données à partir du point de défaillance le plus récent. Si la base de données Backup Exec restaurée n’est pas synchronisée avec vos derniers travaux de sauvegarde, vous devez procéder à une indexation et à un catalogage. Cette nouvelle analyse des index et catalogues peut entraîner l’analyse et l’extraction de tous les jeux de données de sauvegarde du niveau cloud vers un niveau d’appareil local. Ce processus peut donc prendre un certain temps. |
 | Défaillance du site entraînant la perte du serveur de sauvegarde et de l’appareil StorSimple | Les opérations de sauvegarde et de restauration sont interrompues. | Commencez par restaurer StorSimple, puis restaurez Backup Exec. | Commencez par restaurer StorSimple, puis restaurez Backup Exec. Si vous devez procéder à une restauration après la récupération de l’appareil, les jeux de données de travail complets sont récupérés sur le nouvel appareil à partir du cloud. Toutes les opérations sont exécutées à la vitesse du cloud. |
 
@@ -482,12 +482,12 @@ Un sinistre peut être dû à plusieurs facteurs. Le tableau ci-après répertor
 
 Les documents référencés dans cet article sont les suivants :
 
-- [StorSimple multipath I/O setup (Configuration de StorSimple MPIO)](storsimple-configure-mpio-windows-server.md)
-- [Storage scenarios: Thin provisioning (Scénarios de stockage : allocation dynamique)](https://msdn.microsoft.com/library/windows/hardware/dn265487.aspx)
-- [Using GPT drives (Utilisation de disques de table de partition GUID)](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
-- [Set up shadow copies for shared folders (Configurer des clichés instantanés de dossiers partagés)](https://technet.microsoft.com/library/cc771893.aspx)
+- [StorSimple multipath I/O setup (Configuration de StorSimple MPIO)](./storsimple-8000-configure-mpio-windows-server.md)
+- [Storage scenarios: Thin provisioning (Scénarios de stockage : allocation dynamique)](/windows-hardware/drivers/storage/thin-provisioning)
+- [Using GPT drives (Utilisation de disques de table de partition GUID)](/previous-versions/windows/hardware/design/dn653580(v=vs.85)#EHD)
+- [Set up shadow copies for shared folders (Configurer des clichés instantanés de dossiers partagés)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771893(v=ws.11))
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [restauration à partir d’un jeu de sauvegarde](storsimple-restore-from-backup-set-u2.md).
-- En savoir plus sur l’exécution [d’un basculement et d’une récupération d’urgence pour un appareil](storsimple-device-failover-disaster-recovery.md).
+- En savoir plus sur la [restauration à partir d’un jeu de sauvegarde](./storsimple-8000-restore-from-backup-set-u2.md).
+- En savoir plus sur l’exécution [d’un basculement et d’une récupération d’urgence pour un appareil](./storsimple-8000-device-failover-disaster-recovery.md).

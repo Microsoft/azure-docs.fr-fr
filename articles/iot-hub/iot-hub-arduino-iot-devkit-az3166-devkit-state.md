@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 04/04/2018
 ms.author: liydu
-ms.openlocfilehash: deb1ea8c7b41ad48bddebfbed1b15c667ee0071a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c43c8a0b9fdf30b5ce5ae6ecbf123b563099ff6
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73483942"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148787"
 ---
 # <a name="mxchip-iot-devkit"></a>DevKit IoT MXChip
 
@@ -28,7 +28,7 @@ Vous pouvez utiliser cet exemple pour surveiller les informations relatives au W
 
 ## <a name="what-you-need"></a>Ce dont vous avez besoin
 
-- Configurez votre environnement de développement en suivant le [Guide de prise en main](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started).
+- Configurez votre environnement de développement en suivant le [Guide de prise en main](./iot-hub-arduino-iot-devkit-az3166-get-started.md).
 
 - À partir de votre fenêtre de terminal GitBash (ou d’une autre interface de ligne de commande Git), tapez les commandes suivantes :
 
@@ -106,7 +106,7 @@ Avec l’appareil DevKit IoT MXChip connecté à votre ordinateur :
 ![Exemple de procédure de test](media/iot-hub-arduino-iot-devkit-az3166-devkit-state/devkit-state.gif)
 
 > [!NOTE]
-> Vous pouvez voir les données brutes du jumeau d’appareil dans le portail Azure : IoT Hub -\> Appareils IoT -\> *\<votre appareil\>*  -\> Jumeau d’appareil.
+> Vous pouvez voir les données brutes du jumeau d’appareil dans le portail Azure : IoT Hub -\> Appareils IoT -\> *\<your device\>*  -\> Jumeau d’appareil.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -114,7 +114,4 @@ Vous avez appris à effectuer les actions suivantes :
 - Connecter un appareil DevKit IoT MXChip à votre accélérateur de solution de supervision à distance Azure IoT.
 - Utilisation la fonction de jumeaux d’appareil Azure IoT pour détecter et contrôler la couleur du voyant RVB du Kit de développement.
 
-Voici les prochaines étapes suggérées :
-
-* [Vue d’ensemble des accélérateurs de solution de supervision à distance Azure IoT](https://docs.microsoft.com/azure/iot-suite/)
-* [Connecter un appareil DevKit IoT MXChip à votre application Azure IoT Central](/azure/iot-central/core/howto-connect-devkit)
+Voici la prochaine étape suggérée : [Vue d’ensemble des accélérateurs de solution de supervision à distance Azure IoT](/azure/iot-suite/)

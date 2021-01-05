@@ -9,12 +9,12 @@ ms.service: iot-central
 ms.subservice: iot-central-retail
 services: iot-central
 manager: eliotgra
-ms.openlocfilehash: b0d030240ebe22886826b7a25bd5ca7b8f54e358
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: 9a0d91677770e89f3e249fc699057332cccaa323
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81001108"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347470"
 ---
 # <a name="micro-fulfillment-center-architecture"></a>Architecture du centre de microtraitement
 
@@ -22,11 +22,11 @@ Les solutions du type Centre de microtraitement vous permettent de vous connecte
 
 ![Analytique en magasin Azure IoT Central](./media/architecture/micro-fulfillment-center-architecture-frame.png)
 
-- Ensemble de capteurs IoT envoyant des données de télémétrie à un appareil de passerelle
-- Les appareils de passerelle envoient des données de télémétrie et des insights agrégés à IoT Central
-- Exportation continue des données à destination du service Azure souhaité à des fins de manipulation
-- Les données peuvent être structurées dans le format souhaité et envoyées à un service de stockage
-- Les applications métier peuvent interroger des données et générer des insights pour les opérations de vente au détail
+1. Ensemble de capteurs IoT envoyant des données de télémétrie à un appareil de passerelle
+2. Les appareils de passerelle envoient des données de télémétrie et des insights agrégés à IoT Central
+3. Exportation continue des données à destination du service Azure souhaité à des fins de manipulation
+4. Les données peuvent être structurées dans le format souhaité et envoyées à un service de stockage
+5. Les applications métier peuvent interroger des données et générer des insights pour les opérations de vente au détail
  
 Intéressons-nous aux composants clés qui ont généralement un rôle à jouer dans une solution de type Centre de microtraitement.
 

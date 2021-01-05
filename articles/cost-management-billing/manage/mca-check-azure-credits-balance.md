@@ -5,21 +5,25 @@ author: bandersmsft
 ms.reviewer: amberb
 tags: billing
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/13/2019
+ms.subservice: billing
+ms.topic: how-to
+ms.date: 08/20/2019
 ms.author: banders
-ms.openlocfilehash: e65637f20d14b93c212b1af2f20695ff5dfeb350
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cf5772e9cf08eaa7f34acd59a9c96da6f20cd03d
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199685"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92131409"
 ---
 # <a name="track-microsoft-customer-agreement-azure-credit-balance"></a>Suivre le solde de crédit Azure d’un Contrat client Microsoft
 
 Vous pouvez vérifier le solde de crédit Azure pour votre compte de facturation d’un Contrat client Microsoft dans le portail Azure ou via des API REST.
 
 Dans le compte de facturation associé à un Contrat Client Microsoft, les crédits sont attribués à un profil de facturation. Chaque profil de facturation a ses propres crédits qui sont automatiquement appliqués aux frais sur sa facture. Vous devez avoir un rôle de propriétaire, contributeur, lecteur ou gestionnaire de factures sur le profil de facturation ou bien un rôle de propriétaire, contributeur ou lecteur sur le compte de facturation pour voir le solde de crédits Azure d’un profil de facturation. Pour en savoir plus sur les rôles, consultez [Présentation des rôles d’administrateur Azure dans le cadre des Contrats client Microsoft](understand-mca-roles.md).
+
+> [!NOTE]
+> Le nouveau crédit apparaît dans le portail Azure avec un délai pouvant atteindre 24 heures. Si vous obtenez un nouveau crédit et que vous ne le voyez pas dans le portail, patientez 24 heures.
 
 Cet article s'applique à un compte de facturation associé à un contrat client Microsoft. [Vérifiez que vous avez accès à un contrat client Microsoft](#check-access-to-a-microsoft-customer-agreement).
 
@@ -31,11 +35,11 @@ Cet article s'applique à un compte de facturation associé à un contrat client
 
 2. Recherchez **Gestion des coûts + facturation**.
 
-    ![Capture d’écran montrant la recherche dans le portail pour gestion des coûts + facturation](./media/mca-check-azure-credits-balance/billing-search-cost-management-billing.png)
+    ![Capture d’écran montrant la recherche de « gestion des coûts + facturation » dans le portail.](./media/mca-check-azure-credits-balance/billing-search-cost-management-billing.png)
 
 3. Dans la page des étendues de facturation, sélectionnez le compte de facturation pour lequel vous souhaitez suivre le solde de crédit. Le compte de facturation doit être de type **Contrat client Microsoft**.
 
-    ![Capture d’écran montrant la recherche dans le portail pour gestion des coûts + facturation](./media/mca-check-azure-credits-balance/list-of-scopes.png)
+    ![Capture d’écran montrant les étendues de facturation.](./media/mca-check-azure-credits-balance/list-of-scopes.png)
 
     > [!NOTE]
     >
@@ -43,7 +47,7 @@ Cet article s'applique à un compte de facturation associé à un contrat client
 
 3. Sélectionnez **Modes de paiement** sur le côté gauche, puis **Crédits Azure**.
 
-   ![Capture d’écran du solde de crédit d’un profil de facturation](./media/mca-check-azure-credits-balance/mca-payment-methods.png)
+   ![Capture d’écran des soldes estimé et actuel.](./media/mca-check-azure-credits-balance/mca-payment-methods.png)
 
 4. La page Crédits Azure contient les sections suivantes :
 
@@ -98,7 +102,7 @@ Cet article s'applique à un compte de facturation associé à un contrat client
 
 ### <a name="rest-api"></a>[REST API](#tab/rest)
 
-Vous pouvez utiliser les API [Consommation](https://docs.microsoft.com/rest/api/billing/) et [Facturation Azure](https://docs.microsoft.com/rest/api/consumption/) pour obtenir programmatiquement le solde de crédits de votre compte de facturation.
+Vous pouvez utiliser les API [Consommation](/rest/api/billing/) et [Facturation Azure](/rest/api/consumption/) pour obtenir programmatiquement le solde de crédits de votre compte de facturation.
 
 Les exemples ci-dessous utilisent les API REST. Actuellement, PowerShell et Azure CLI ne sont pas pris en charge.
 

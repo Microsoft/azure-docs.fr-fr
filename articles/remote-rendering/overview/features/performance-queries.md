@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/10/2020
 ms.topic: article
-ms.openlocfilehash: 9a28dee2d1e6d1355b729a56e8eeb8447e4ed8c8
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 95993b35174b80dae8c878c22554ee60afeb8a14
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679455"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206218"
 ---
 # <a name="server-side-performance-queries"></a>Requêtes de performances côté serveur
 
@@ -18,7 +19,7 @@ De bonnes performances de rendu sur le serveur sont capitales pour obtenir des f
 
 La plus grande incidence observée sur les performances de rendu vient des données d’entrée des modèles. Vous pouvez ajuster les données d’entrée, comme indiqué dans [Configurer la conversion de modèle](../../how-tos/conversion/configure-model-conversion.md).
 
-Les performances de l’application côté client peuvent également constituer un goulot d’étranglement. Pour une analyse approfondie des performances côté client, il est recommandé d’effectuer une [trace des performances](../../how-tos/performance-tracing.md).
+Les performances de l’application côté client peuvent également constituer un goulot d’étranglement. Pour une analyse approfondie des performances côté client, il est recommandé d’effectuer une [:::no-loc text="performance trace":::](../../how-tos/performance-tracing.md).
 
 ## <a name="clientserver-timeline"></a>Chronologie client/serveur
 
@@ -37,7 +38,7 @@ L’illustration montre comment :
 
 Les statistiques d’images offrent quelques informations générales pour la dernière image, telles que la latence. Les données fournies dans la structure `FrameStatistics` sont mesurées côté client, l’API est donc un appel synchrone :
 
-````c#
+```cs
 void QueryFrameData(AzureSession session)
 {
     FrameStatistics frameStatistics;
@@ -46,7 +47,18 @@ void QueryFrameData(AzureSession session)
         // do something with the result
     }
 }
-````
+```
+
+```cpp
+void QueryFrameData(ApiHandle<AzureSession> session)
+{
+    FrameStatistics frameStatistics;
+    if (*session->GetGraphicsBinding()->GetLastFrameStatistics(&frameStatistics) == Result::Success)
+    {
+        // do something with the result
+    }
+}
+```
 
 L’objet `FrameStatistics` récupéré contient les membres suivants :
 
@@ -75,7 +87,7 @@ Aucune des valeurs ci-dessus ne donne une indication claire de la latence pure d
 
 *Les requêtes d’évaluation des performances* fournissent des informations plus approfondies sur la charge de travail du processeur et du GPU sur le serveur. Du fait que les données sont demandées à partir du serveur, l’interrogation d’un instantané de performances suit le modèle asynchrone habituel :
 
-``` cs
+```cs
 PerformanceAssessmentAsync _assessmentQuery = null;
 
 void QueryPerformanceAssessment(AzureSession session)
@@ -89,6 +101,21 @@ void QueryPerformanceAssessment(AzureSession session)
 
         _assessmentQuery = null;
     };
+}
+```
+
+```cpp
+void QueryPerformanceAssessment(ApiHandle<AzureSession> session)
+{
+    ApiHandle<PerformanceAssessmentAsync> assessmentQuery = *session->Actions()->QueryServerPerformanceAssessmentAsync();
+    assessmentQuery->Completed([] (ApiHandle<PerformanceAssessmentAsync> res)
+    {
+        // do something with the result:
+        PerformanceAssessment result = res->GetResult();
+
+        // ...
+
+    });
 }
 ```
 
@@ -110,9 +137,9 @@ Cette mesure d’évaluation fournit une indication approximative de l’état d
 
 ## <a name="statistics-debug-output"></a>Sortie de débogage des statistiques
 
-La classe `ARRServiceStats` wrappe les statistiques des images et les requêtes d’évaluation des performances ; elle fournit des fonctionnalités pratiques pour retourner des statistiques sous forme de valeurs agrégées, ou comme chaîne prédéfinie. Le code suivant est le moyen le plus simple pour afficher des statistiques côté serveur dans votre application cliente.
+La classe `ARRServiceStats` est une classe C# qui inclut dans un wrapper les statistiques des images et les requêtes d’évaluation des performances ; elle fournit des fonctionnalités pratiques pour retourner des statistiques sous forme de valeurs agrégées ou comme chaîne prédéfinie. Le code suivant est le moyen le plus simple pour afficher des statistiques côté serveur dans votre application cliente.
 
-``` cs
+```cs
 ARRServiceStats _stats = null;
 
 void OnConnect()
@@ -145,6 +172,11 @@ Le code ci-dessus remplit l’étiquette de texte avec le texte suivant :
 L’API `GetStatsString` forme une chaîne de toutes les valeurs, mais chaque valeur en soi peut également être interrogée par programme à partir de l’instance `ARRServiceStats`.
 
 Il existe également des variantes des membres, qui agrègent les valeurs au fil du temps. Consultez les membres avec le suffixe `*Avg`, `*Max` ou `*Total`. Le membre `FramesUsedForAverage` indique le nombre d’images qui a été utilisé pour cette agrégation.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [C# RemoteManager.QueryServerPerformanceAssessmentAsync()](/dotnet/api/microsoft.azure.remoterendering.remotemanager.queryserverperformanceassessmentasync)
+* [C++ RemoteManager::QueryServerPerformanceAssessmentAsync()](/cpp/api/remote-rendering/remotemanager#queryserverperformanceassessmentasync)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

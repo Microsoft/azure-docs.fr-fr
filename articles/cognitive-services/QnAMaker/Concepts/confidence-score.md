@@ -1,22 +1,20 @@
 ---
 title: Score de confiance - QnA Maker
 titleSuffix: Azure Cognitive Services
-description: Une base de connaissances doit être publiée. Une fois publiée, la base de connaissances est interrogée au point de terminaison de prédiction du runtime à l’aide de l’API generateAnswer.
+description: Quand une requête d’utilisateur trouve une correspondance dans une base de connaissances, QnA Maker renvoie des réponses pertinentes, ainsi qu’un score de confiance.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 01/27/2020
-ms.author: diberry
 ms.custom: seodec18
-ms.openlocfilehash: d901a803311805825c22503af6098e805a67e8f6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 489592fcbc779685728b120f18e5e923ee34d655
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76843450"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96346373"
 ---
 # <a name="the-confidence-score-of-an-answer"></a>Score de confiance d'une réponse
 Quand une requête d’utilisateur trouve une correspondance dans une base de connaissances, QnA Maker renvoie des réponses pertinentes, ainsi qu’un score de confiance. Ce score indique la probabilité que la réponse corresponde à la requête de l’utilisateur.
@@ -64,7 +62,7 @@ Définissez le score de seuil en tant que propriété du [corps JSON de l’API 
 À partir de Bot Framework, définissez le score au niveau de l’objet options avec [C# ](../how-to/metadata-generateanswer-usage.md?#use-qna-maker-with-a-bot-in-c) ou [Node.js](../how-to/metadata-generateanswer-usage.md?#use-qna-maker-with-a-bot-in-nodejs).
 
 ## <a name="improve-confidence-scores"></a>Améliorer les scores de confiance
-Pour améliorer le score de confiance d’une réponse spécifique à une question de l’utilisateur, vous pouvez ajouter la question de l’utilisateur à la base de connaissances en tant que question alternative liée à cette réponse. Vous pouvez également utiliser des [altérations d’un mot](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/alterations/replace) (ignorant la casse) pour ajouter des synonymes aux mots clés dans votre base de connaissances.
+Pour améliorer le score de confiance d’une réponse spécifique à une question de l’utilisateur, vous pouvez ajouter la question de l’utilisateur à la base de connaissances en tant que question alternative liée à cette réponse. Vous pouvez également utiliser des [altérations d’un mot](/rest/api/cognitiveservices/qnamaker/alterations/replace) (ignorant la casse) pour ajouter des synonymes aux mots clés dans votre base de connaissances.
 
 
 ## <a name="similar-confidence-scores"></a>Scores de confiance similaires
@@ -91,4 +89,3 @@ Si aucune bonne correspondance n’est trouvée par la fonction de classement, l
 ## <a name="next-steps"></a>Étapes suivantes
 > [!div class="nextstepaction"]
 > [Bonnes pratiques](./best-practices.md)
-

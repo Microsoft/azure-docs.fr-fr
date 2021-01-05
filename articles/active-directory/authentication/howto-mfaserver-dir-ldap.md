@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 07/11/2018
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2df89a764bc9b92a830b13e4216412694bb95523
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: 8961cccbd57294e477f0d33202fe91cd292b7814
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80653017"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96742219"
 ---
 # <a name="ldap-authentication-and-azure-multi-factor-authentication-server"></a>Authentification LDAP et serveur Azure Multi-Factor Authentication
 
@@ -25,7 +25,11 @@ Par défaut, le serveur Azure Multi-Factor Authentication est configuré pour im
 Pour utiliser Azure Multi-Factor Authentication comme proxy LDAP, insérez le serveur Azure Multi-Factor Authentication entre le client LDAP (par exemple, un équipement VPN ou une application) et le serveur d’annuaire LDAP. Le serveur Azure Multi-Factor Authentication doit être configuré pour communiquer avec les serveurs des clients et l’annuaire LDAP. Dans cette configuration, le serveur Azure Multi-Factor Authentication accepte les requêtes LDAP provenant des serveurs clients et des applications, puis les transmet au serveur de répertoire LDAP cible pour valider les informations d'identification principales. Si l’annuaire LDAP valide les informations d’identification principales, Azure Multi-Factor Authentication effectue une seconde vérification d’identité et renvoie une réponse au client LDAP. L’authentification n’est complète que si l’authentification du serveur LDAP et la vérification en deux étapes aboutissent.
 
 > [!IMPORTANT]
-> À compter du 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui veulent demander à leurs utilisateurs de procéder à une authentification multifacteur doivent utiliser la fonction Azure Multi-Factor Authentication basée sur le cloud. Les clients existants qui ont activé MFA Server avant le 1er juillet peuvent télécharger la dernière version et les futures mises à jour, et générer des informations d’identification d’activation comme d’habitude.
+> Depuis le 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui souhaitent imposer une authentification multifacteur lors des événements de connexion doivent utiliser la fonctionnalité d’authentification multifacteur Azure AD basée sur le cloud.
+>
+> Pour commencer à utiliser l’authentification multifacteur basée sur le cloud, consultez [Tutoriel : Événements de connexion utilisateur sécurisés avec l’authentification multifacteur Azure AD](tutorial-enable-azure-mfa.md).
+>
+> Les clients existants qui ont activé le serveur MFA avant le 1er juillet 2019 peuvent télécharger la dernière version, les futures mises à jour et générer des informations d’identification d’activation comme d’habitude.
 
 ## <a name="configure-ldap-authentication"></a>Configurer l’authentification LDAP
 

@@ -3,25 +3,27 @@ title: Présélection pour l’encodage sensible au contenu – Azure Media Serv
 description: Cet article décrit l’encodage sensible au contenu dans Microsoft Azure Media Services v3.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 01/24/2020
-ms.author: juliako
-ms.custom: ''
-ms.openlocfilehash: 3ea6c4226a59ba020a477cc5811033ff3dc3c2e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5d08e09905841f6068f2bac45680a8e5a011c158
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76772093"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89297363"
 ---
 # <a name="use-the-content-aware-encoding-preset-to-find-the-optimal-bitrate-value-for-a-given-resolution"></a>Utiliser la présélection de l’encodage sensible au contenu pour rechercher la valeur optimale de vitesse de transmission pour une résolution donnée
 
-Afin de préparer le contenu pour une diffusion en [streaming à débit adaptatif](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming), la vidéo doit être encodée à plusieurs débits (du plus élevé au plus faible). Cela garantit une dégradation appropriée de la qualité, la vitesse de transmission et la résolution de la vidéo sont réduites en parallèle. Un tel codage à vitesses de transmission multiples utilise ce qu’on appelle une échelle d’encodage, c’est-à-dire un tableau de résolutions et de vitesses de transmission. Consultez les [présélections d’encodage intégrées](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#encodernamedpreset) de Media Services.
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+Afin de préparer le contenu pour une diffusion en [streaming à débit adaptatif](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming), la vidéo doit être encodée à plusieurs débits (du plus élevé au plus faible). Cela garantit une dégradation appropriée de la qualité, la vitesse de transmission et la résolution de la vidéo sont réduites en parallèle. Un tel codage à vitesses de transmission multiples utilise ce qu’on appelle une échelle d’encodage, c’est-à-dire un tableau de résolutions et de vitesses de transmission. Consultez les [présélections d’encodage intégrées](/rest/api/media/transforms/createorupdate#encodernamedpreset) de Media Services.
 
 Vous devez être conscient du contenu que vous traitez et personnaliser ou ajuster l’échelle d’encodage à la complexité de la vidéo. À chaque résolution, il existe un débit au-delà duquel toute augmentation de la qualité n’est pas perceptive : l’encodeur fonctionne à la valeur de débit optimale. Le niveau suivant d’optimisation consiste à sélectionner les résolutions en fonction du contenu, par exemple, une vidéo de présentation PowerPoint ne bénéficie d’aucune amélioration en passant sous 720p. Pour aller plus loin, l’encodeur peut être chargé afin d’optimiser les paramètres pour chaque scène de la vidéo. 
 
@@ -55,9 +57,10 @@ Voici les résultats pour une autre catégorie de contenu source, où l’encode
 
 Vous pouvez créer des transformations qui utilisent cette présélection comme suit. 
 
-> [!TIP]
-> Consultez la section [Étapes suivantes](#next-steps) pour accéder à des didacticiels qui utilisent la transformation des sorties. La ressource de sortie peut être fournie à partir de points de terminaison de streaming Media Services dans des protocoles tels que MPEG-DASH et HLS (comme indiqué dans les didacticiels).
+Consultez la section [Étapes suivantes](#next-steps) pour accéder à des didacticiels qui utilisent la transformation des sorties. La ressource de sortie peut être fournie à partir de points de terminaison de streaming Media Services dans des protocoles tels que MPEG-DASH et HLS (comme indiqué dans les didacticiels).
 
+> [!NOTE]
+> Veillez à utiliser la présélection **ContentAwareEncoding**, et non ContentAwareEncodingExperimental.
 
 ```csharp
 TransformOutput[] output = new TransformOutput[]
@@ -77,7 +80,7 @@ TransformOutput[] output = new TransformOutput[]
 
 > [!NOTE]
 > Les travaux d’encodage à l’aide de la présélection `ContentAwareEncoding` sont facturés en fonction des minutes de sortie. 
-
+  
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Tutoriel : Télécharger, encoder et diffuser des vidéos avec Media Services v3](stream-files-tutorial-with-api.md)

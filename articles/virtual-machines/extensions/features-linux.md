@@ -1,6 +1,6 @@
 ---
 title: Extensions et fonctionnalités des machines virtuelles Azure pour Linux
-description: Découvrez les extensions disponibles pour les machines virtuelles, regroupées par ce qu’ils fournissent ou améliorent.
+description: Découvrez les extensions disponibles pour les machines virtuelles sous Linux, regroupées par ce qu’elles fournissent ou améliorent.
 services: virtual-machines-linux
 documentationcenter: ''
 author: axayjo
@@ -9,17 +9,18 @@ editor: ''
 tags: azure-service-management,azure-resource-manager
 ms.assetid: 52f5d0ec-8f75-49e7-9e15-88d46b420e63
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 03/30/2018
 ms.author: akjosh
-ms.openlocfilehash: 67df46742be52b03bd91af19654fbfac5df29646
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 129897d3288a900803efbfba8abf86c276077fa8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226865"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966069"
 ---
 # <a name="virtual-machine-extensions-and-features-for-linux"></a>Extensions et fonctionnalités de machine virtuelle pour Linux
 
@@ -32,12 +33,12 @@ Cet article offre une vue d’ensemble des extensions de machine virtuelle et de
 Plusieurs extensions de machine virtuelle Azure sont disponibles, chacune impliquant un cas d’utilisation spécifique. Voici quelques exemples :
 
 - Appliquer des configurations DSC (Desired State Configuration) PowerShell à une machine virtuelle avec l’extension DSC pour Linux. Pour plus d’informations sur l’extension DSC Azure, consultez [cette page](https://github.com/Azure/azure-linux-extensions/tree/master/DSC) (en anglais).
-- Configurer l’analyse d’une machine virtuelle avec l’extension de machine virtuelle Microsoft Monitoring Agent. Pour plus d’informations, voir [How to monitor a Linux VM](../linux/tutorial-monitoring.md) (Surveillance d’une machine virtuelle Linux).
+- Configurer l’analyse d’une machine virtuelle avec l’extension de machine virtuelle Microsoft Monitoring Agent. Pour plus d’informations, voir [How to monitor a Linux VM](../linux/tutorial-monitor.md) (Surveillance d’une machine virtuelle Linux).
 - Configurer l’analyse de votre infrastructure Azure à l’aide de l’extension Chef ou Datadog. Pour plus d’informations, consultez les [documents Chef](https://docs.chef.io/azure_portal.html) ou le [blog Datadog](https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment/).
 
 En plus des extensions propres à des processus, une extension de script personnalisé est disponible pour les machines virtuelles Windows et Linux. L’extension de script personnalisé pour Linux permet d’exécuter n’importe quel script Bash sur une machine virtuelle. Les scripts personnalisés s’avèrent utile pour concevoir des déploiements Azure qui nécessitent une configuration plus avancée que celle fournie par les outils Azure natifs. Pour plus d’informations sur l’extension de script personnalisé pour les machines virtuelles Linux, consultez [cet article](custom-script-linux.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 La gestion de l’extension sur la machine virtuelle nécessite l’installation préalable de l’agent Linux Azure. Certaines extensions spécifiques présentent des prérequis, tels que l’accès à des ressources ou dépendances.
 
@@ -65,7 +66,7 @@ Les paquets d’extensions sont téléchargés à partir du dépôt d’extensio
 > [!IMPORTANT]
 > Si vous avez bloqué l’accès à l’adresse *168.63.129.16* à l’aide du pare-feu invité, les extensions échouent, que vous utilisiez, ou non, une version prise en charge.
 
-Les agents peuvent être utilisés uniquement pour télécharger les paquets d’extensions et signaler l’état. Par exemple, si une installation d’extension doit télécharger un script à partir de GitHub (script personnalisé) ou accéder au service Stockage Azure (sauvegarde Azure), vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau (NSG) supplémentaires. Les exigences varient selon les extensions, car ces dernières sont des applications à part entière. Dans le cas des extensions qui exigent un accès au service Stockage Azure, vous pouvez autoriser cet accès à l’aide de balises de service NSG Azure pour le [Stockage](https://docs.microsoft.com/azure/virtual-network/security-overview#service-tags).
+Les agents peuvent être utilisés uniquement pour télécharger les paquets d’extensions et signaler l’état. Par exemple, si une installation d’extension doit télécharger un script à partir de GitHub (script personnalisé) ou accéder au service Stockage Azure (sauvegarde Azure), vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau (NSG) supplémentaires. Les exigences varient selon les extensions, car ces dernières sont des applications à part entière. Dans le cas des extensions qui exigent un accès au service Stockage Azure, vous pouvez autoriser cet accès à l’aide de balises de service NSG Azure pour le [Stockage](../../virtual-network/network-security-groups-overview.md#service-tags).
 
 Pour rediriger les requêtes de trafic d’agent, l’agent Linux prend en charge les serveurs proxy. Toutefois, cette prise en charge des serveurs proxy ne s’applique pas aux extensions. Vous devez configurer chaque extension individuelle pour qu’elle fonctionne avec un proxy.
 
@@ -115,7 +116,7 @@ L’image suivante illustre l’installation de l’extension de script personna
 
 ### <a name="azure-resource-manager-templates"></a>Modèles Microsoft Azure Resource Manager
 
-Les extensions de machine virtuelle peuvent être ajoutées à un modèle Azure Resource Manager et exécutées avec le déploiement du modèle. Lorsque vous déployez une extension avec un modèle, vous pouvez créer des déploiements Azure entièrement configurés. Par exemple, le code JSON suivant est tiré d’un modèle Resource Manager qui déploie un ensemble de machines virtuelles à charge équilibrée et une base de données Azure SQL, puis installe une application .NET Core sur chaque machine virtuelle. L’extension de machine virtuelle se charge de l’installation du logiciel.
+Les extensions de machine virtuelle peuvent être ajoutées à un modèle Azure Resource Manager et exécutées avec le déploiement du modèle. Lorsque vous déployez une extension avec un modèle, vous pouvez créer des déploiements Azure entièrement configurés. Par exemple, le code JSON suivant est tiré d’un modèle Resource Manager qui déploie un ensemble de machines virtuelles à charge équilibrée et Azure SQL Database, puis installe une application .NET Core sur chaque machine virtuelle. L’extension de machine virtuelle se charge de l’installation du logiciel.
 
 Pour plus d’informations, consultez le [modèle Resource Manager complet](https://github.com/Microsoft/dotnet-core-sample-templates/tree/master/dotnet-core-music-linux).
 
@@ -259,7 +260,7 @@ Dans la sortie de l’exemple précédent, le parent ou la version de package d�
 
 La valeur « Goal state agent » est la version de la mise à jour automatique.
 
-Nous vous recommandons vivement que la mise à jour automatique soit toujours activée pour l’agent, [AutoUpdate.Enabled=y](https://docs.microsoft.com/azure/virtual-machines/linux/update-agent). Dans le cas contraire, vous devez conserver manuellement la mise à jour de l’agent, et ne pas obtenir les correctifs de sécurité et les corrections de bogues.
+Nous vous recommandons vivement que la mise à jour automatique soit toujours activée pour l’agent, [AutoUpdate.Enabled=y](./update-linux-agent.md). Dans le cas contraire, vous devez conserver manuellement la mise à jour de l’agent, et ne pas obtenir les correctifs de sécurité et les corrections de bogues.
 
 #### <a name="extension-updates"></a>Mises à jour des extensions
 
@@ -336,7 +337,7 @@ La procédure de résolution des problèmes ci-après s’applique à toutes les
 
 1. Pour consulter le journal de l’agent Linux, examinez l’activité au moment où votre extension a été provisionnée dans */var/log/waagent.log*
 
-2. Pour plus de détails, vérifiez les journaux d’activité d’extension proprement dits, à l’emplacement */var/log/azure/\<nom_extension>*
+2. Pour plus de détails, vérifiez les journaux d’activité d’extension proprement dits, à l’emplacement */var/log/azure/\<extensionName>*
 
 3. Consultez les sections de résolution des problèmes dans la documentation de l’extension concernée pour vous renseigner sur les codes d’erreur, les problèmes connus, etc.
 

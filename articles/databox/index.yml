@@ -3,7 +3,7 @@ title: Documentation Azure Data Box - Transfert hors connexion
 summary: Utilisez des appareils Azure Data Box pour le transfert de données hors connexion si vous êtes limité en temps, en réseau ou en coût. Selon la taille de vos données, choisissez entre Data Box Disk, Data Box ou Data Box Heavy.
 metadata:
   title: Documentation Azure Data Box - Transfert hors connexion
-  description: Utilisez des appareils Data Box pour le transfert de données hors connexion sur Azure si vous êtes limité en temps, réseau ou coût.
+  description: Explorez Azure Data Box, dispositif de stockage pour la migration de données hors connexion vers le cloud. Découvrez plus en détail les services de transfert de données utilisant un dispositif de stockage propriétaire sécurisé.
   services: databox
   ms.service: databox
   ms.subservice: pod
@@ -12,12 +12,14 @@ metadata:
   author: alkohli
   ms.author: alkohli
   ms.date: 08/16/2019
-  ms.openlocfilehash: 2c42ee93804eb1e0e24b0b67925a092cc8517ceb
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.custom: seo-azure-migrate
+  keywords: cloud data transfer, data migration to cloud, azure data box, data transfer service, data transfer services, azure data transfer
+  ms.openlocfilehash: 6b3ef7ace8bfb481b294ca4d823ccc1c6c2f7367
+  ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "69650375"
+  ms.lasthandoff: 10/16/2020
+  ms.locfileid: "92125232"
 landingContent:
 - title: À propos de la famille Data Box
   linkLists:
@@ -32,7 +34,7 @@ landingContent:
   - linkListType: architecture
     links:
     - text: Choisir des options de transfert de données Azure
-      url: /azure/storage/common/storage-choose-data-transfer-solution
+      url: ../storage/common/storage-choose-data-transfer-solution.md
 - title: Bien démarrer
   linkLists:
   - linkListType: quickstart
@@ -46,7 +48,7 @@ landingContent:
   - linkListType: learn
     links:
     - text: Importer des données hors connexion avec Data Box
-      url: https://docs.microsoft.com/learn/modules/move-data-with-azure-data-box/
+      url: /learn/modules/move-data-with-azure-data-box/
 - title: Voir la configuration requise
   linkLists:
   - linkListType: concept

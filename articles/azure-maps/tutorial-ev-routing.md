@@ -1,33 +1,33 @@
 ---
-title: 'Tutoriel : Router les véhicules électriques avec Azure Notebooks (Python) | Microsoft Azure Maps'
-description: Routez les véhicules électriques avec les API de routage Microsoft Azure Maps et Azure Notebooks.
-author: philmea
-ms.author: philmea
-ms.date: 11/12/2019
+title: 'Tutoriel : Router les véhicules électriques à l’aide d’Azure Notebooks (Python) avec Microsoft Azure Maps'
+description: Tutoriel sur la façon de router les véhicules électriques avec les API de routage Microsoft Azure Maps et Azure Notebooks
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 12/07/2020
 ms.topic: tutorial
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.custom: mvc
-ms.openlocfilehash: 3118ca39ec0efd42c9f7b622c91f857034ef4b03
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-python
+ms.openlocfilehash: f30b99a1d9c8303d5b2ed4b02819d0ca837946d2
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80333834"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905738"
 ---
 # <a name="tutorial-route-electric-vehicles-by-using-azure-notebooks-python"></a>Tutoriel : Router les véhicules électriques avec Azure Notebooks (Python)
 
 Azure Maps est un portefeuille d’API de services géospatiaux intégrées en mode natif dans Azure. Ces API permettent aux développeurs, entreprises et éditeurs de logiciels indépendants de créer des applications utilisant la géolocalisation ainsi que des solutions d’IoT, de mobilité, de logistique et de suivi des ressources. 
 
-Les API REST Azure Maps peuvent être appelées dans des langages tels que Python et R, pour activer l’analyse de données géospatiales et les scénarios de Machine Learning. Azure Maps propose un solide ensemble d’[API de routage](https://docs.microsoft.com/rest/api/maps/route) qui permettent aux utilisateurs de calculer des itinéraires entre différents points de données. Les calculs sont basés sur différentes conditions, comme le type de véhicule ou la zone accessible. 
+Les API REST Azure Maps peuvent être appelées dans des langages tels que Python et R, pour activer l’analyse de données géospatiales et les scénarios de Machine Learning. Azure Maps propose un solide ensemble d’[API de routage](/rest/api/maps/route) qui permettent aux utilisateurs de calculer des itinéraires entre différents points de données. Les calculs sont basés sur différentes conditions, comme le type de véhicule ou la zone accessible. 
 
 Dans ce tutoriel, vous allez aider un conducteur de véhicule électrique dont la batterie est presque vide. Le conducteur doit trouver la borne de recharge la plus proche possible de son véhicule.
 
 Ce didacticiel présente les procédures suivantes :
 
 > [!div class="checklist"]
-> * Créer et exécuter un notebook Jupyter sur [Azure Notebooks](https://docs.microsoft.com/azure/notebooks) dans le cloud.
+> * Créer et exécuter un fichier Jupyter Notebook sur [Azure Notebooks](../notebooks/index.yml) dans le cloud.
 > * Appeler les API REST Azure Maps en Python.
 > * Rechercher une zone accessible en fonction du modèle de consommation du véhicule électrique
 > * Rechercher des bornes de recharge de véhicule électrique dans la zone accessible, ou isochrone.
@@ -39,17 +39,17 @@ Ce didacticiel présente les procédures suivantes :
 
 Pour suivre ce tutoriel, vous devez d’abord créer un compte Azure Maps et obtenir votre clé primaire (clé d’abonnement). 
 
-Pour créer un abonnement de compte Azure Maps, suivez les instructions fournies dans [Créer un compte](quick-demo-map-app.md#create-an-account-with-azure-maps). Vous avez besoin d’un abonnement de compte Azure Maps avec le niveau de prix S1. 
+Pour créer un abonnement de compte Azure Maps, suivez les instructions fournies dans [Créer un compte](quick-demo-map-app.md#create-an-azure-maps-account). Vous avez besoin d’un abonnement de compte Azure Maps avec le niveau de prix S1. 
 
 Pour obtenir la clé primaire d’abonnement destinée à votre compte, suivez les instructions fournies dans [Obtenir la clé primaire](quick-demo-map-app.md#get-the-primary-key-for-your-account).
 
 Pour plus d’informations sur l’authentification dans Azure Maps, voir [Gérer l’authentification dans Azure Maps](./how-to-manage-authentication.md).
 
-## <a name="create-an-azure-notebook"></a>Créer un notebook Azure
+## <a name="create-an-azure-notebooks-project"></a>Créer un projet Azure Notebooks
 
-Pour suivre ce tutoriel, vous devez créer un projet de notebook Azure, puis télécharger et exécuter le fichier de notebook Jupyter. Le fichier de notebook contient du code Python qui implémente le scénario de ce tutoriel. Pour créer un projet de notebook Azure et y charger le document de notebook Jupyter, effectuez les étapes suivantes :
+Pour suivre ce tutoriel, vous devez créer un projet Azure Notebooks, puis télécharger et exécuter le fichier Jupyter Notebook. Le fichier Jupyter Notebook contient du code Python qui implémente le scénario de ce tutoriel. Pour créer un projet Azure Notebooks et y charger le document Jupyter Notebook, effectuez les étapes suivantes :
 
-1. Accédez à [Azure Notebooks](https://notebooks.azure.com) et connectez-vous. Pour plus d’informations, consultez [Démarrage rapide : Se connecter et définir un identifiant utilisateur](https://docs.microsoft.com/azure/notebooks/quickstart-sign-in-azure-notebooks).
+1. Accédez à [Azure Notebooks](https://notebooks.azure.com) et connectez-vous. Pour plus d’informations, consultez [Démarrage rapide : Se connecter et définir un identifiant utilisateur](../notebooks/quickstart-sign-in-azure-notebooks.md).
 1. En haut de votre page de profil public, sélectionnez **Mes projets**.
 
     ![Bouton Mes projets](./media/tutorial-ev-routing/myproject.png)
@@ -64,25 +64,25 @@ Pour suivre ce tutoriel, vous devez créer un projet de notebook Azure, puis té
 
 1. Sélectionnez **Create** (Créer).
 
-1. Quand votre projet est créé, téléchargez ce [fichier document de notebook Jupyter](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook/blob/master/AzureMapsJupyterSamples/Tutorials/EV%20Routing%20and%20Reachable%20Range/EVrouting.ipynb) à partir du [dépôt de notebooks Jupyter Azure Maps](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook).
+1. Une fois que votre projet a été créé, téléchargez ce [fichier de document Jupyter Notebook](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook/blob/master/AzureMapsJupyterSamples/Tutorials/EV%20Routing%20and%20Reachable%20Range/EVrouting.ipynb) à partir du [dépôt Azure Maps Jupyter Notebook](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook).
 
-1. Dans la liste des projets de la page **Mes projets**, sélectionnez votre projet, puis sélectionnez **Charger** pour charger le fichier document du notebook Jupyter. 
+1. Dans la liste des projets de la page **Mes projets**, sélectionnez votre projet, puis sélectionnez **Charger** pour télécharger le fichier de document Jupyter Notebook. 
 
-    ![Charger le notebook](./media/tutorial-ev-routing/upload-notebook.png)
+    ![chargement de Jupyter Notebook](./media/tutorial-ev-routing/upload-notebook.png)
 
 1. Chargez le fichier à partir de votre ordinateur, puis sélectionnez **Terminé**.
 
-1. Une fois le téléchargement effectué, le fichier s’affiche dans votre page de projets. Double-cliquez sur le fichier pour l’ouvrir en tant que notebook Jupyter.
+1. Une fois le téléchargement effectué, le fichier s’affiche dans votre page de projets. Double-cliquez sur ce fichier pour l’ouvrir en tant que notebook Jupyter.
 
-Essayez de comprendre la fonctionnalité implémentée dans le fichier du notebook. Exécutez le code dans le fichier du notebook, une cellule à la fois. Vous pouvez exécuter le code dans chaque cellule en sélectionnant le bouton **Exécuter** situé en haut de l’application de notebook.
+Essayez de comprendre les fonctionnalités implémentées dans le fichier Jupyter Notebook. Exécutez le code figurant dans le fichier Jupyter Notebook, une cellule à la fois. Vous pouvez exécuter le code dans chaque cellule en sélectionnant le bouton **Exécuter** situé en haut de l’application Jupyter Notebook.
 
   ![Bouton Exécuter](./media/tutorial-ev-routing/run.png)
 
 ## <a name="install-project-level-packages"></a>Installer des packages au niveau du projet
 
-Pour exécuter le code dans le notebook, installez les packages au niveau du projet en effectuant les étapes suivantes :
+Pour exécuter le code dans Jupyter Notebook, installez les packages au niveau du projet en effectuant les étapes suivantes :
 
-1. Téléchargez le fichier [*requirements.txt*](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook/blob/master/AzureMapsJupyterSamples/Tutorials/EV%20Routing%20and%20Reachable%20Range/requirements.txt) à partir du [dépôt de notebooks Jupyter Azure Maps](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook), puis chargez-le dans votre projet.
+1. Téléchargez le fichier [*requirements.txt*](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook/blob/master/AzureMapsJupyterSamples/Tutorials/EV%20Routing%20and%20Reachable%20Range/requirements.txt) à partir du [dépôt Azure Maps Jupyter Notebook](https://github.com/Azure-Samples/Azure-Maps-Jupyter-Notebook), puis chargez-le dans votre projet.
 1. Dans le tableau de bord du projet, sélectionnez **Paramètres du projet**. 
 1. Dans le panneau **Paramètres du projet**, sélectionnez l’onglet **Environnement**, puis **Ajouter**.
 1. Sous **Étapes de configuration de l’environnement**, effectuez les étapes suivantes :   
@@ -108,7 +108,7 @@ from IPython.display import Image, display
 
 Une société de livraison de colis compte quelques véhicules électriques dans sa flotte. Pendant la journée, les véhicules électriques doivent être rechargés sans avoir à revenir à l’entrepôt. Chaque fois que la charge restante passe sous la barre d’une heure, vous recherchez un ensemble de bornes de recharge dans une zone accessible. En bref, vous recherchez une borne de recharge quand la charge de la batterie est faible. Vous obtenez également des informations sur les limites de cette zone de bornes de recharge. 
 
-Étant donné que la société préfère utiliser les itinéraires offrant un compromis économie-vitesse, le routeType demandé est *eco*. Le script suivant appelle l’[API d’obtention de zone d’itinéraire](https://docs.microsoft.com/rest/api/maps/route/getrouterange) du service de routage Azure Maps. Il utilise des paramètres pour le modèle de consommation du véhicule. Le script analyse ensuite la réponse pour créer un objet polygone au format geojson, qui représente la zone maximale accessible du véhicule.
+Étant donné que la société préfère utiliser les itinéraires offrant un compromis économie-vitesse, le routeType demandé est *eco*. Le script suivant appelle l’[API d’obtention de zone d’itinéraire](/rest/api/maps/route/getrouterange) du service de routage Azure Maps. Il utilise des paramètres pour le modèle de consommation du véhicule. Le script analyse ensuite la réponse pour créer un objet polygone au format geojson, qui représente la zone maximale accessible du véhicule.
 
 Pour déterminer les limites de la zone accessible du véhicule électrique, exécutez le script de la cellule suivante :
 
@@ -156,7 +156,7 @@ boundsData = {
 
 Après avoir déterminé la zone accessible (isochrone) pour le véhicule électrique, vous pouvez rechercher les bornes de recharge dans cette zone. 
 
-Le script suivant appelle l’[API de recherche dans une géométrie](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) Azure Maps. Il recherche les stations de chargement de véhicules électriques, dans les limites de la plage d’accessibilité maximale de la voiture. Ensuite, le script analyse la réponse dans un tableau de lieux accessibles.
+Le script suivant appelle l’[API de recherche dans une géométrie](/rest/api/maps/search/postsearchinsidegeometry) Azure Maps. Il recherche les stations de chargement de véhicules électriques, dans les limites de la plage d’accessibilité maximale de la voiture. Ensuite, le script analyse la réponse dans un tableau de lieux accessibles.
 
 Pour rechercher les bornes de recharge de véhicule électrique dans une zone accessible, exécutez le script suivant :
 
@@ -171,11 +171,11 @@ for loc in range(len(searchPolyResponse["results"])):
                 reachableLocations.append(location)
 ```
 
-## <a name="upload-the-reachable-range-and-charging-points-to-azure-maps-data-service"></a>Charger la zone accessible et les points de recharge dans Azure Maps Data Service
+## <a name="upload-the-reachable-range-and-charging-points-to-azure-maps-data-service-preview"></a>Charger la zone accessible et les points de recharge sur le service Data d’Azure Maps (préversion)
 
-Vous souhaitez visualiser sur une carte les bornes de recharge et les limites de la zone accessible pour le véhicule électrique. Pour ce faire, chargez les données des limites et des bornes de recharge en tant qu’objets geojson sur Azure Maps Data Service. Utilisez l’[API de chargement des données](https://docs.microsoft.com/rest/api/maps/data/uploadpreview). 
+Vous souhaitez visualiser sur une carte les bornes de recharge et les limites de la zone accessible pour le véhicule électrique. Pour ce faire, chargez les données des limites et des bornes de recharge en tant qu’objets geojson sur le service Data d’Azure Maps (préversion). Utilisez l’[API de chargement des données](/rest/api/maps/data/uploadpreview). 
 
-Pour charger les données des limites et des points de recharge dans Azure Maps Data Service, exécutez les deux cellules suivantes :
+Pour charger les données des limites et des points de recharge sur le service Data d’Azure Maps, exécutez les deux cellules suivantes :
 
 ```python
 rangeData = {
@@ -194,7 +194,7 @@ rangeData = {
   ]
 }
 
-# Upload the range data to Azure Maps Data Service.
+# Upload the range data to Azure Maps Data service (Preview).
 uploadRangeResponse = await session.post("https://atlas.microsoft.com/mapData/upload?subscription-key={}&api-version=1.0&dataFormat=geojson".format(subscriptionKey), json = rangeData)
 
 rangeUdidRequest = uploadRangeResponse.headers["Location"]+"&subscription-key={}".format(subscriptionKey)
@@ -223,7 +223,7 @@ poiData = {
   ]
 }
 
-# Upload the electric vehicle charging station data to Azure Maps Data Service.
+# Upload the electric vehicle charging station data to Azure Maps Data service (Preview).
 uploadPOIsResponse = await session.post("https://atlas.microsoft.com/mapData/upload?subscription-key={}&api-version=1.0&dataFormat=geojson".format(subscriptionKey), json = poiData)
 
 poiUdidRequest = uploadPOIsResponse.headers["Location"]+"&subscription-key={}".format(subscriptionKey)
@@ -239,7 +239,7 @@ poiUdid = getPoiUdid["udid"]
 
 ## <a name="render-the-charging-stations-and-reachable-range-on-a-map"></a>Afficher les bornes de recharge et la zone accessible sur une carte
 
-Une fois les données chargées dans le service de données, appelez le [service Get Map Image](https://docs.microsoft.com/rest/api/maps/render/getmapimage) d’Azure Maps. Ce service permet d’afficher les points de recharge et les limites de la zone accessible sur l’image de carte statique. Pour cela, exécutez le script suivant :
+Une fois les données chargées dans le service de données, appelez le [service Get Map Image](/rest/api/maps/render/getmapimage) d’Azure Maps. Ce service permet d’afficher les points de recharge et les limites de la zone accessible sur l’image de carte statique. Pour cela, exécutez le script suivant :
 
 ```python
 # Get boundaries for the bounding box.
@@ -283,7 +283,7 @@ display(Image(poiRangeMap))
 
 Tout d’abord, vous souhaitez trouver toutes les bornes de recharge potentielles dans la zone accessible. Ensuite, vous souhaitez savoir celles que vous pouvez atteindre en un minimum de temps. 
 
-Le script suivant appelle l’[API de routage par matrice](https://docs.microsoft.com/rest/api/maps/route/postroutematrix) d’Azure Maps. Elle retourne l’emplacement du véhicule spécifié, le temps de trajet et la distance jusqu’à chaque borne de recharge. Le script de la cellule suivante analyse la réponse pour localiser la borne de recharge accessible la plus proche en temps.
+Le script suivant appelle l’[API de routage par matrice](/rest/api/maps/route/postroutematrix) d’Azure Maps. Elle retourne l’emplacement du véhicule spécifié, le temps de trajet et la distance jusqu’à chaque borne de recharge. Le script de la cellule suivante analyse la réponse pour localiser la borne de recharge accessible la plus proche en temps.
 
 Pour trouver la borne de recharge la plus proche, qui peut être atteinte en moins de temps possible, exécutez le script de la cellule suivante :
 
@@ -314,7 +314,7 @@ closestChargeLoc = ",".join(str(i) for i in minDistLoc)
 
 ## <a name="calculate-the-route-to-the-closest-charging-station"></a>Calculer l’itinéraire jusqu’à la borne de recharge la plus proche
 
-Maintenant que vous avez trouvé la borne de recharge la plus proche, vous pouvez appeler l’[API d’obtention d’itinéraire](https://docs.microsoft.com/rest/api/maps/route/getroutedirections) pour demander l’itinéraire détaillé, depuis l’endroit où se trouve le véhicule électrique jusqu’à la borne de recharge.
+Maintenant que vous avez trouvé la borne de recharge la plus proche, vous pouvez appeler l’[API d’obtention d’itinéraire](/rest/api/maps/route/getroutedirections) pour demander l’itinéraire détaillé, depuis l’endroit où se trouve le véhicule électrique jusqu’à la borne de recharge.
 
 Pour obtenir l’itinéraire vers la borne de recharge et analyser la réponse qui permet de créer un objet geojson représentant cet itinéraire, exécutez le script de la cellule suivante :
 
@@ -336,12 +336,12 @@ routeData = {
 
 ## <a name="visualize-the-route"></a>Visualiser l’itinéraire
 
-Pour mieux visualiser l’itinéraire, chargez tout d’abord les données d’itinéraire en tant qu’objet geojson dans Azure Maps Data Service. Pour cela, utilisez l’[API de chargement de données](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) d’Azure Maps. Ensuite, appelez le service de rendu, l’[API d’obtention d’image de carte](https://docs.microsoft.com/rest/api/maps/render/getmapimage), pour afficher l’itinéraire sur la carte et le visualiser.
+Pour mieux visualiser l’itinéraire, chargez tout d’abord les données d’itinéraire en tant qu’objet geojson sur le service Data d’Azure Maps (préversion). Pour cela, utilisez l’[API de chargement de données](/rest/api/maps/data/uploadpreview) d’Azure Maps. Ensuite, appelez le service de rendu, l’[API d’obtention d’image de carte](/rest/api/maps/render/getmapimage), pour afficher l’itinéraire sur la carte et le visualiser.
 
 Pour obtenir une image de l’itinéraire sur la carte, exécutez le script suivant :
 
 ```python
-# Upload the route data to Azure Maps Data Service.
+# Upload the route data to Azure Maps Data service (Preview).
 routeUploadRequest = await session.post("https://atlas.microsoft.com/mapData/upload?subscription-key={}&api-version=1.0&dataFormat=geojson".format(subscriptionKey), json = routeData)
 
 udidRequestURI = routeUploadRequest.headers["Location"]+"&subscription-key={}".format(subscriptionKey)
@@ -387,19 +387,21 @@ display(Image(staticMapImage))
 
 ![Carte indiquant l’itinéraire](./media/tutorial-ev-routing/route.png)
 
-## <a name="next-steps"></a>Étapes suivantes
-
 Dans ce tutoriel, vous avez découvert comment appeler les API REST Azure Maps directement et comment visualiser les données Azure Maps avec Python.
 
 Pour explorer les API Azure Maps qui sont utilisées dans ce tutoriel, consultez :
 
-* [Obtenir une zone d’itinéraire](https://docs.microsoft.com/rest/api/maps/route/getrouterange)
-* [Envoyer une recherche dans une géométrie](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry)
-* [Chargement de données](https://docs.microsoft.com/rest/api/maps/data/uploadpreview)
-* [Rendu - Obtenir une image de carte](https://docs.microsoft.com/rest/api/maps/render/getmapimage)
-* [Envoyer une matrice d’itinéraire](https://docs.microsoft.com/rest/api/maps/route/postroutematrix)
-* [Obtenir un itinéraire](https://docs.microsoft.com/rest/api/maps/route/getroutedirections)
+* [Obtenir une zone d’itinéraire](/rest/api/maps/route/getrouterange)
+* [Envoyer une recherche dans une géométrie](/rest/api/maps/search/postsearchinsidegeometry)
+* [Chargement de données](/rest/api/maps/data/uploadpreview)
+* [Rendu - Obtenir une image de carte](/rest/api/maps/render/getmapimage)
+* [Envoyer une matrice d’itinéraire](/rest/api/maps/route/postroutematrix)
+* [Obtenir un itinéraire](/rest/api/maps/route/getroutedirections)
+* [API REST Azure Maps](./consumption-model.md)
 
-Pour obtenir la liste complète des API REST Azure Maps, consultez [API REST Azure Maps](https://docs.microsoft.com/azure/azure-maps/consumption-model).
+## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur Azure Notebooks, consultez [Azure Notebooks](https://docs.microsoft.com/azure/notebooks).
+Pour en savoir plus sur Azure Notebooks, consultez
+
+> [!div class="nextstepaction"]
+> [Azure Notebooks](../notebooks/index.yml)

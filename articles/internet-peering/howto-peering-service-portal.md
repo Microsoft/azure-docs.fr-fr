@@ -5,15 +5,15 @@ description: Activer Azure Peering Service sur un peering direct en utilisant le
 services: internet-peering
 author: derekolo
 ms.service: internet-peering
-ms.topic: article
+ms.topic: how-to
 ms.date: 3/18/2020
 ms.author: derekol
-ms.openlocfilehash: 625a17e5acff00f78c5a19725653eec629936f87
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a52e6038b622c004dc0d133394cd4f53600b2935
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81687045"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84700040"
 ---
 # <a name="enable-azure-peering-service-on-a-direct-peering-by-using-the-azure-portal"></a>Activer Azure Peering Service sur un peering direct en utilisant le portail Azure
 

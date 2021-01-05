@@ -1,7 +1,7 @@
 ---
 title: Composants VMware de cloud privé
 titleSuffix: Azure VMware Solution by CloudSimple
-description: Explique comment les composants VMware sont installés sur le cloud privé.
+description: Découvrez comment le service CloudSimple vous permet de déployer VMware en mode natif dans des emplacements Azure. Les clouds privés sont intégrés au reste d’Azure Cloud.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 08/15/2019
@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 9c9b80cd4d8a7a7ac5597d10bbb87095564bd461
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff9aec1904be754990958869666e9d67038e4fb3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235785"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88142500"
 ---
 # <a name="private-cloud-vmware-components"></a>Composants VMware de cloud privé
 
@@ -38,7 +38,7 @@ Une pile VMware de cloud privé se déploie avec la version logicielle suivante.
 
 ## <a name="esxi"></a>ESXi
 
-VMware ESXi est installé sur les nœuds CloudSimple approvisionnés lors de la création d’un cloud privé.  ESXi fournit l’hyperviseur permettant de déployer des machines virtuelles de charge de travail.  Les nœuds offrent une infrastructure hyperconvergée (calcul et stockage) sur le cloud privé.  Ils font partie du cluster vSphere sur le cloud privé.  Chaque nœud possède quatre interfaces de réseaux physiques connectées au réseau sous-jacent.  Deux sont utilisées pour créer un **commutateur réparti vSphere (VDS)** sur vCenter et deux pour créer un **commutateur réparti virtuel géré par NSX (N-VDS)** .  Les interfaces réseau sont configurées en mode actif-actif pour la haute disponibilité.
+VMware ESXi est installé sur les nœuds CloudSimple approvisionnés lors de la création d’un cloud privé.  ESXi fournit l’hyperviseur permettant de déployer des machines virtuelles de charge de travail.  Les nœuds offrent une infrastructure hyperconvergée (calcul et stockage) sur le cloud privé.  Ils font partie du cluster vSphere sur le cloud privé.  Chaque nœud possède quatre interfaces de réseaux physiques connectées au réseau sous-jacent.  Deux sont utilisées pour créer un **commutateur réparti vSphere (VDS)** sur vCenter et deux pour créer un **commutateur réparti virtuel géré par NSX (N-VDS)**.  Les interfaces réseau sont configurées en mode actif-actif pour la haute disponibilité.
 
 En savoir plus sur VMware ESXi
 

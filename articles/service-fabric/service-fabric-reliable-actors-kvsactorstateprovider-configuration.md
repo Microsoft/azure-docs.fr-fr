@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 10/2/2017
 ms.author: sumukhs
 ms.openlocfilehash: cdb115bd57cf3d5af4388f4efa03c2522feef9ca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75609772"
 ---
 # <a name="configuring-reliable-actors--kvsactorstateprovider"></a>Configuration de Reliable Actors - KVSActorStateProvider

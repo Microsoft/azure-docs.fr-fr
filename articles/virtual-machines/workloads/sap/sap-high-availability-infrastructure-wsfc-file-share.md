@@ -10,18 +10,19 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: 2ce38add-1078-4bb9-a1da-6f407a9bc910
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 05/05/2017
+ms.date: 08/12/2020
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 4abae94ded92aca075fcb41a7cd42491e92d41d6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 62803bd450db351290bbc12d650d23a4148a4536
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77591538"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022341"
 ---
 # <a name="prepare-azure-infrastructure-for-sap-high-availability-by-using-a-windows-failover-cluster-and-file-share-for-sap-ascsscs-instances"></a>Préparation d’infrastructure Azure pour la haute disponibilité SAP à l’aide de cluster de basculement Windows et de partage de fichiers pour une instance SAP ASCS/SCS
 
@@ -57,11 +58,7 @@ ms.locfileid: "77591538"
 [sap-ascs-high-availability-multi-sid-wsfc]:sap-ascs-high-availability-multi-sid-wsfc.md
 
 [sap-high-availability-infrastructure-wsfc-shared-disk]:sap-high-availability-infrastructure-wsfc-shared-disk.md
-[sap-high-availability-infrastructure-wsfc-shared-disk-azure-network]:sap-high-availability-infrastructure-wsfc-shared-disk.md#47d5300a-a830-41d4-83dd-1a0d1ffdbe6a
-[sap-high-availability-infrastructure-wsfc-shared-disk-dns-ip]:sap-high-availability-infrastructure-wsfc-shared-disk.md#b22d7b3b-4343-40ff-a319-097e13f62f9e
-[sap-ascs-high-availability-multi-sid-wsfc-set-static-ip]:sap-high-availability-infrastructure-wsfc-shared-disk.md#84c019fe-8c58-4dac-9e54-173efd4b2c30
-[sap-high-availability-infrastructure-wsfc-shared-disk-set-static-ip-ilb]:sap-high-availability-infrastructure-wsfc-shared-disk.md#7a8f3e9b-0624-4051-9e41-b73fff816a9e
-[sap-high-availability-infrastructure-wsfc-shared-disk-default-ascs-ilb-rules]:sap-high-availability-infrastructure-wsfc-shared-disk.md#f19bd997-154d-4583-a46e-7f5a69d0153c
+[sap-high-availability-infrastructure-wsfc-shared-disk-default-ascs-ilb-rules]:sap-high-availability-infrastructure-wsfc-shared-disk.md#fe0bd8b5-2b43-45e3-8295-80bee5415716
 [sap-high-availability-infrastructure-wsfc-shared-disk-change-ascs-ilb-rules]:sap-high-availability-infrastructure-wsfc-shared-disk.md#fe0bd8b5-2b43-45e3-8295-80bee5415716
 [sap-high-availability-infrastructure-wsfc-shared-disk-add-win-domain]:sap-high-availability-infrastructure-wsfc-shared-disk.md#e69e9a34-4601-47a3-a41c-d2e11c626c0c
 [sap-high-availability-installation-wsfc-file-share]:sap-high-availability-installation-wsfc-file-share.md
@@ -228,7 +225,7 @@ Avant de commencer l’installation, consultez l’article suivant :
 
 **Tableau 1** : Cluster ASCS/SCS
 
-| SID \<SAP> | Numéro de l’instance SAP ASCS/SCS |
+| SAP \<SID> | Numéro de l’instance SAP ASCS/SCS |
 | --- | --- |
 | PR1 | 00 |
 
@@ -250,19 +247,11 @@ Avant de commencer l’installation, consultez l’article suivant :
 
 Pour préparer l’infrastructure Azure, procédez comme suit :
 
-* [Préparez l’infrastructure du modèle d’architecture n°1, 2 et 3][sap-high-availability-infrastructure-wsfc-shared-disk].
+* [Déployez les machines virtuelles][sap-high-availability-infrastructure-wsfc-shared-disk].
 
-* [Créez un réseau virtuel Azure][sap-high-availability-infrastructure-wsfc-shared-disk-azure-network].
+* [Créez et configurez un équilibreur de charge Azure pour SAP ASCS][sap-high-availability-infrastructure-wsfc-shared-disk-default-ascs-ilb-rules].
 
-* [Définissez l’adresse IP DNS requise][sap-high-availability-infrastructure-wsfc-shared-disk-dns-ip].
-
-* [Définissez des adresses IP statiques pour les machines virtuelles SAP][sap-ascs-high-availability-multi-sid-wsfc-set-static-ip].
-
-* [Définissez une adresse IP statique pour l’équilibrage de charge interne Azure][sap-high-availability-infrastructure-wsfc-shared-disk-set-static-ip-ilb].
-
-* [Définissez des règles d’équilibrage de charge ASCS/SCS par défaut pour l’équilibrage de charge interne Azure][sap-high-availability-infrastructure-wsfc-shared-disk-default-ascs-ilb-rules].
-
-* [Changer les règles d’équilibrage de charge ASCS/SCS par défaut pour l’équilibreur de charge interne Azure][sap-high-availability-infrastructure-wsfc-shared-disk-change-ascs-ilb-rules].
+* [Si vous utilisez ERS2 (Enqueue Replication Server 2), effectuez la configuration Azure Load Balancer pour ERS2 ][sap-high-availability-infrastructure-wsfc-shared-disk-default-ascs-ilb-rules]. 
 
 * [Ajoutez des machines virtuelles Windows au domaine][sap-high-availability-infrastructure-wsfc-shared-disk-add-win-domain].
 
@@ -271,9 +260,9 @@ Pour préparer l’infrastructure Azure, procédez comme suit :
 * Lorsque vous utilisez Windows Server 2016, nous vous recommandons de configurer un [témoin Azure Cloud][deploy-cloud-witness].
 
 
-## <a name="deploy-the-scale-out-file-server-cluster-manually"></a>Déployer manuellement le cluster de serveur de fichiers avec montée en puissance parallèle 
+## <a name="deploy-the-scale-out-file-server-cluster-manually"></a>Déployer manuellement le cluster de serveur de fichiers avec montée en puissance parallèle 
 
-Vous pouvez déployer manuellement le cluster de serveur de fichiers avec montée en puissance parallèle Microsoft, comme décrit dans le blog [Espaces de stockage direct dans Azure][ms-blog-s2d-in-azure], en exécutant le code suivant :  
+Vous pouvez déployer manuellement le cluster de serveur de fichiers avec montée en puissance parallèle Microsoft, comme décrit dans le blog [Espaces de stockage direct dans Azure][ms-blog-s2d-in-azure], en exécutant le code suivant :  
 
 
 ```powershell
@@ -348,7 +337,7 @@ Après avoir installé le cluster de serveurs de fichiers avec montée en puissa
 
 - SameSubNetDelay = 2000
 - SameSubNetThreshold = 15
-- RoutingHistoryLength = 30
+- RouteHistoryLength = 30
 
 Ces paramètres ont été testés auprès de clients et offrent un bon compromis. Ils sont suffisamment résilients, mais assurent également un basculement assez rapide dans des conditions d’erreur réelles ou en cas de problème sur une machine virtuelle.
 

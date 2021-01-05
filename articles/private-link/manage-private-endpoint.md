@@ -4,15 +4,15 @@ description: Découvrez comment gérer une connexion de point de terminaison pri
 services: private-link
 author: malopMSFT
 ms.service: private-link
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/16/2019
 ms.author: allensu
-ms.openlocfilehash: 62b24b3e2f5c1b89fa7db581ac34cf58381db2a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2987cd1ff8c678f7079e13e8b9bc657817c066f1
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75452960"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95531370"
 ---
 # <a name="manage-a-private-endpoint-connection"></a>Gérer une connexion de point de terminaison privé
 Azure Private Link fonctionne sur un modèle de flux d’appel d’approbation, dans lequel l’utilisateur du service Private Link peut demander une connexion au fournisseur de services pour utiliser le service. Le fournisseur de services peut alors décider s’il faut autoriser l’utilisateur à se connecter. Azure Private Link permet aux fournisseurs de services de gérer la connexion des points de terminaison privés dans leurs ressources. Cet article fournit des instructions sur la gestion des connexions de points de terminaison privés.
@@ -20,8 +20,8 @@ Azure Private Link fonctionne sur un modèle de flux d’appel d’approbation, 
 ![Gérer les points de terminaison privés](media/manage-private-endpoint/manage-private-endpoint.png)
 
 L’utilisateur du service Private Link peut choisir entre deux méthodes d’approbation des connexions :
-- **Automatique** : Si l’utilisateur du service a des autorisations RBAC sur la ressource du fournisseur de services, il peut choisir la méthode d’approbation automatique. Dans ce cas, lorsque la demande atteint la ressource du fournisseur de services, celui-ci n’a rien à faire, car la connexion est automatiquement approuvée. 
-- **Manuelle** : À l’inverse, si l’utilisateur du service ne dispose pas d’autorisations RBAC sur la ressource du fournisseur de services, il peut choisir la méthode d’approbation manuelle. Dans ce cas, la demande de connexion apparaît comme étant **En attente** dans les ressources du service. Le fournisseur de services doit approuver manuellement la demande avant de pouvoir établir des connexions. En cas d’approbation manuelle, l’utilisateur peut également ajouter un message à sa demande pour fournir davantage de contexte au fournisseur de services. Le fournisseur de services peut choisir parmi les options suivantes pour toutes les connexions de point de terminaison privés : **Approuver**, **Rejeter**, **Supprimer**.
+- **Automatique** : Si l’utilisateur du service a des autorisations Azure RBAC sur la ressource du fournisseur de services, il peut choisir la méthode d’approbation automatique. Dans ce cas, lorsque la demande atteint la ressource du fournisseur de services, celui-ci n’a rien à faire, car la connexion est automatiquement approuvée. 
+- **Manuelle** : À l’inverse, si l’utilisateur du service ne dispose pas d’autorisations Azure RBAC sur la ressource du fournisseur de services, il peut choisir la méthode d’approbation manuelle. Dans ce cas, la demande de connexion apparaît comme étant **En attente** dans les ressources du service. Le fournisseur de services doit approuver manuellement la demande avant de pouvoir établir des connexions. En cas d’approbation manuelle, l’utilisateur peut également ajouter un message à sa demande pour fournir davantage de contexte au fournisseur de services. Le fournisseur de services peut choisir parmi les options suivantes pour toutes les connexions de point de terminaison privés : **Approuver**, **Rejeter**, **Supprimer**.
 
 Le tableau ci-dessous présente les différentes actions que peut effectuer le fournisseur de services, ainsi que les états de connexion résultants pour les points de terminaison privés.  Le fournisseur de services pourra également modifier l’état de la connexion de point de terminaison privé plus tard, sans intervention de l’utilisateur. Chaque action met à jour l’état du point de terminaison côté client. 
 

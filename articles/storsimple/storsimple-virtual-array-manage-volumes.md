@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: caa6a26b-b7ba-4a05-b092-1a79450225cf
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-ms.openlocfilehash: 2dbbe6bcd4957a108cc3eae4d41816b130cf8f07
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 79e3ce8c1605e5d68ff44901f53854d2f5f10abc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633861"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014378"
 ---
 # <a name="use-storsimple-device-manager-service-to-manage-volumes-on-the-storsimple-virtual-array"></a>Utiliser le service StorSimple Device Manager pour gérer les volumes sur l’instance StorSimple Virtual Array
 
@@ -73,7 +73,7 @@ Suivez les instructions de ce didacticiel pour effectuer les tâches suivantes 
 
 1. À partir du panneau de synthèse du service StorSimple, cliquez sur **+ Ajouter un volume** dans la barre de commandes. Le panneau **Ajouter un volume** s’ouvre.
    
-    ![Ajouter un volume](./media/storsimple-virtual-array-manage-volumes/add-volume.png)
+    ![Capture d’écran montrant le bouton Ajouter un volume et le volet Ajouter un volume.](./media/storsimple-virtual-array-manage-volumes/add-volume.png)
 2. Dans le panneau **Ajouter un volume**, procédez comme suit :
    
    * Dans le champ **Nom du volume**, saisissez un nom unique pour votre volume. Le nom doit être une chaîne contenant entre 3 et 127 caractères.
@@ -82,7 +82,7 @@ Suivez les instructions de ce didacticiel pour effectuer les tâches suivantes 
    * * Cliquez sur **Hôtes connectés**, sélectionnez un enregistrement de contrôle d’accès correspondant à l’initiateur iSCSI que vous souhaitez connecter à ce volume, puis cliquez sur **Sélectionner**.
 3. Pour ajouter un hôte connecté, cliquez sur **Ajouter nouveau**, saisissez un nom pour l’hôte et son nom complet iSCSI, puis cliquez sur **Ajouter**.
    
-    ![Ajouter un volume](./media/storsimple-virtual-array-manage-volumes/volume-add-acr.png)
+    ![Capture d’écran montrant le volet Hôtes connectés dans lequel vous pouvez ajouter de nouveaux hôtes.](./media/storsimple-virtual-array-manage-volumes/volume-add-acr.png)
 4. Lorsque vous avez terminé de configurer votre volume, cliquez sur **Créer**. Un volume est créé avec les paramètres spécifiés ; une notification s’affiche en cas de création similaire. Par défaut, la sauvegarde est activée pour le volume.
 5. Pour vérifier que le volume a été créé, accédez au panneau **Volumes**. Le volume devrait y apparaître.
    

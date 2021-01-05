@@ -2,13 +2,13 @@
 title: Activer l’identité managée dans le groupe de conteneurs
 description: Découvrez comment utiliser une identité managée pour s’authentifier auprès d’autres services Azure dans Azure Container Instances
 ms.topic: article
-ms.date: 04/15/2020
-ms.openlocfilehash: 31dc198bfb2023684f3a9022bec5a5f50f0d9a72
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/02/2020
+ms.openlocfilehash: 67ef17b77a9db92e539dd860a3083760fe1160db
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82115718"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558944"
 ---
 # <a name="how-to-use-managed-identities-with-azure-container-instances"></a>Comment utiliser une identité managée avec Azure Container Instances
 
@@ -45,9 +45,9 @@ Pour utiliser une identité managée, l’identité doit être autorisée à acc
 * Actuellement, vous ne pouvez pas utiliser d’identité managée dans un groupe de conteneurs déployé sur un réseau virtuel.
 * Vous ne pouvez pas utiliser d’identité managée pour extraire une image d’Azure Container Registry lors de la création d’un groupe de conteneurs. L’identité est disponible uniquement dans un conteneur en cours d’exécution.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, cet article vous demande d’exécuter Azure CLI version 2.0.49 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article demande la version 2.0.49 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-an-azure-key-vault"></a>Créer un coffre de clés Azure
 
@@ -392,6 +392,6 @@ Dans cet article, vous en avez appris davantage sur les identités managées dan
 > * Autoriser l’identité à accéder à un coffre de clés Azure
 > * Utiliser l’identité managée pour accéder à un coffre de clés à partir d’un conteneur en cours d’exécution
 
-* En savoir plus sur les [identités managées pour les ressources Azure](/azure/active-directory/managed-identities-azure-resources/).
+* En savoir plus sur les [identités managées pour les ressources Azure](../active-directory/managed-identities-azure-resources/index.yml).
 
 * Consultez un [exemple de Kit de développement logiciel (SDK) Azure Go](https://medium.com/@samkreter/c98911206328) dans lequel une identité managée est utilisée pour accéder à un coffre de clés Key Vault à partir d’Azure Container Instances.

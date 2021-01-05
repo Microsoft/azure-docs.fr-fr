@@ -4,17 +4,22 @@ description: En savoir plus sur les API de création de rapports qui permettent 
 author: mumami
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: enterprise
 ms.topic: reference
-ms.date: 04/14/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: aeca9aede4c1b2d8c27de749c7e07c0153000825
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.openlocfilehash: b78b046e2991fa4ebfb575e4f6a1cc900df0d298
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383162"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88686902"
 ---
 # <a name="overview-of-reporting-apis-for-enterprise-customers"></a>Vue d’ensemble des API de création de rapports pour les clients Enterprise
+
+> [!Note]
+> Microsoft ne met plus à jour les API Création de rapports – Facturation Azure. Utilisez à la place les API [Consommation Azure](/rest/api/consumption).
+
 Les API de création de rapports permettent aux clients Azure Enterprise d’extraire leurs données de consommation et de facturation par programme pour les transférer vers les outils d’analyse de données de leur choix. Les clients Entreprise ont signé un [contrat Entreprise](https://azure.microsoft.com/pricing/enterprise-agreement/) avec Azure pour fixer des prix négociés et bénéficier de tarifs personnalisés pour les ressources Azure.
 
 Tous les paramètres de date et d’heure nécessaires aux API doivent être représentés sous forme de valeurs UTC (temps universel coordonné) combinées. Les valeurs retournées par les API s’affichent au format UTC.
@@ -27,7 +32,7 @@ Tous les paramètres de date et d’heure nécessaires aux API doivent être rep
 |-|-|
 |Autorisation| Indiquez la valeur dans ce format : **porteur {API_CLÉ}** <br/> Exemple : porteur eyr... 09|
 
-## <a name="consumption-apis"></a>API de consommation
+## <a name="consumption-based-apis"></a>API basées sur la consommation
 Un point de terminaison Swagger est disponible [ici](https://consumption.azure.com/swagger/ui/index) pour les API décrites ci-dessous. Il doit faciliter l’introspection de l’API et la capacité à générer des Kits de développement logiciel (SDK) clients en utilisant [AutoRest](https://github.com/Azure/AutoRest) ou [CodeGen Swagger](https://swagger.io/swagger-codegen/). À compter du 1er mai 2014, ces données sont disponibles via cette API.
 
 * **Balance and Summary** (Solde et résumé) : l’[API Balance and Summary](/rest/api/billing/enterprise/billing-enterprise-api-balance-summary) permet un résumé mensuel des informations sur les soldes, nouveaux achats, frais de service de la Place de marché Azure, ajustements et dépassement des frais.

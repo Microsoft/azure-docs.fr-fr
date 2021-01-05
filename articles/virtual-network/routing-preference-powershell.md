@@ -8,17 +8,17 @@ author: KumudD
 manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/18/2020
+ms.date: 12/02/2020
 ms.author: mnayak
-ms.openlocfilehash: 2a0a876b885d2fe59262cad660a3ebc5b5210fbb
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 92c8c4504384c3130df0d9b72ef7df21353bb3d5
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83595988"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96530559"
 ---
 # <a name="configure-routing-preference-for-a-public-ip-address-using-azure-powershell"></a>Configurer une préférence de routage pour une adresse IP publique à l’aide d’Azure PowerShell
 
@@ -41,12 +41,6 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 Si vous choisissez d’installer et d’utiliser PowerShell en local, vous devez exécuter le module Azure PowerShell version 6.9.0 ou ultérieure pour les besoins de cet article. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Si vous exécutez PowerShell en local, vous devez également lancer `Connect-AzAccount` pour créer une connexion avec Azure.
-
-## <a name="register-the-feature-for-your-subscription"></a>Inscrire la fonctionnalité pour votre abonnement
-La fonctionnalité de préférence de routage est actuellement en préversion. Inscrivez la fonctionnalité pour votre abonnement comme suit :
-```azurepowershell
-Register-AzProviderFeature -FeatureName AllowRoutingPreferenceFeature -ProviderNamespace Microsoft.Network
-```
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

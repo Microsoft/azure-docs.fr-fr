@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: tutorial
 ms.date: 06/25/2019
-ms.openlocfilehash: eac9bee6992520492b846e3b579d8a05c327e749
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6c600c4cfe96b849786664aa878ec1f84407da5b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73494360"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85963527"
 ---
 # <a name="tutorial-use-apache-storm-with-apache-kafka-on-hdinsight"></a>Tutoriel : Utiliser Apache Storm avec Apache Kafka sur HDInsight
 
@@ -500,7 +500,9 @@ Pour créer un réseau virtuel Azure puis les clusters Kafka et Storm qu’il co
 
     Les informations renvoyées sont similaire au texte suivant :
 
-        zk0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181,zk2-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181
+    ```output
+    zk0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181,zk2-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181
+    ```
 
     > [!IMPORTANT]  
     > Puisqu’il existe plus de deux nœuds Zookeeper, il n’est pas nécessaire de fournir une liste complète des hôtes aux clients. Un ou deux sont suffisants.
@@ -509,9 +511,11 @@ Pour créer un réseau virtuel Azure puis les clusters Kafka et Storm qu’il co
 
 3. Modifiez le fichier `dev.properties` à la racine du projet. Ajoutez les informations des hôtes du répartiteur et de Zookeeper pour le cluster __Kafka__ aux lignes correspondantes dans ce fichier. L’exemple suivant est configuré à l’aide des exemples de valeurs de l’étape précédente :
 
-        kafka.zookeeper.hosts: zk0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181,zk2-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181
-        kafka.broker.hosts: wn0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:9092,wn1-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:9092
-        kafka.topic: stormtopic
+    ```bash
+    kafka.zookeeper.hosts: zk0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181,zk2-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:2181
+    kafka.broker.hosts: wn0-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:9092,wn1-kafka.53qqkiavjsoeloiq3y1naf4hzc.ex.internal.cloudapp.net:9092
+    kafka.topic: stormtopic
+    ```
 
     > [!IMPORTANT]  
     > L’entrée `hdfs.url` est configurée pour un cluster qui utilise un compte de stockage Azure. Pour utiliser cette topologie avec un cluster Storm recourant à Data Lake Storage, remplacez la valeur `wasb` par `adl`.
@@ -590,11 +594,13 @@ Kafka stocke les données dans une _rubrique_. Vous devez créer la rubrique ava
 
     Le résultat ressemble au texte suivant :
 
-        Found 173 items
-        -rw-r--r--   1 storm supergroup       5137 2018-04-09 19:00 /stormdata/hdfs-bolt-4-0-1523300453088.txt
-        -rw-r--r--   1 storm supergroup       5128 2018-04-09 19:00 /stormdata/hdfs-bolt-4-1-1523300453624.txt
-        -rw-r--r--   1 storm supergroup       5131 2018-04-09 19:00 /stormdata/hdfs-bolt-4-10-1523300455170.txt
-        ...
+    ```output
+    Found 173 items
+      -rw-r--r--   1 storm supergroup       5137 2018-04-09 19:00 /stormdata/hdfs-bolt-4-0-1523300453088.txt
+      -rw-r--r--   1 storm supergroup       5128 2018-04-09 19:00 /stormdata/hdfs-bolt-4-1-1523300453624.txt
+      -rw-r--r--   1 storm supergroup       5131 2018-04-09 19:00 /stormdata/hdfs-bolt-4-10-1523300455170.txt
+      ...
+    ```
 
 3. Pour afficher le contenu du fichier, utilisez la commande suivante. Remplacez `filename.txt` par le nom d’un fichier :
 
@@ -604,13 +610,19 @@ Kafka stocke les données dans une _rubrique_. Vous devez créer la rubrique ava
 
     Le texte suivant constitue un exemple de contenu de fichier :
 
-        four score and seven years ago
-        snow white and the seven dwarfs
-        i am at two with nature
-        snow white and the seven dwarfs
-        i am at two with nature
-        four score and seven years ago
-        an apple a day keeps the doctor away
+    > score de quatre et sept ans auparavant
+    >
+    > blanche neige et les sept nains
+    >
+    > je suis à deux avec la nature
+    >
+    > blanche neige et les sept nains
+    >
+    > je suis à deux avec la nature
+    >
+    > score de quatre et sept ans auparavant
+    >
+    > une pomme chaque matin éloigne le docteur
 
 ## <a name="stop-the-topologies"></a>Arrêt des topologies
 

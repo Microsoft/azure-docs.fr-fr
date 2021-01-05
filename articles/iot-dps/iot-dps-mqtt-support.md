@@ -10,12 +10,12 @@ ms.author: ravokkar
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 213fc3412a2dfad77946e52a355a30774d6860c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0a7ec2f4f8fdf631a6bc5096296275291ec41751
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81680688"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967123"
 ---
 # <a name="communicate-with-your-dps-using-the-mqtt-protocol"></a>Communiquer avec votre DPS à l’aide du protocole MQTT
 
@@ -29,13 +29,13 @@ DPS n’est pas un répartiteur MQTT complet et ne prend pas en charge tous les 
 Toutes les communications des appareils avec DPS doivent être sécurisées à l’aide de TLS/SSL. Par conséquent, DPS ne prend pas en charge les connexions non sécurisées sur le port 1883.
 
  > [!NOTE] 
- > Actuellement, DPS ne prend pas en charge les appareils utilisant le [mécanisme d'attestation](https://docs.microsoft.com/azure/iot-dps/concepts-device#attestation-mechanism) TPM via le protocole MQTT.
+ > Actuellement, DPS ne prend pas en charge les appareils utilisant le [mécanisme d'attestation](./concepts-service.md#attestation-mechanism) TPM via le protocole MQTT.
 
 ## <a name="connecting-to-dps"></a>Connexion à DPS
 
 Un appareil peut utiliser le protocole MQTT pour se connecter à un DPS en utilisant une des options suivantes.
 
-* Bibliothèques des [SDK d’approvisionnement Azure IoT](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-sdks#microsoft-azure-provisioning-sdks).
+* Bibliothèques des [SDK d’approvisionnement Azure IoT](../iot-hub/iot-hub-devguide-sdks.md#microsoft-azure-provisioning-sdks).
 * Protocole MQTT directement.
 
 ## <a name="using-the-mqtt-protocol-directly-as-a-device"></a>Utilisation directe du protocole MQTT (en tant qu’appareil)
@@ -44,7 +44,7 @@ Si un appareil ne peut pas utiliser les Kits device SDK, il peut toujours se con
 
 * Dans le champ **ClientId**, utilisez **registrationId**.
 
-* Dans le champ **Username**, utilisez `{idScope}/registrations/{registration_id}/api-version=2019-03-31`, où `{idScope}` est la valeur [idScope](https://docs.microsoft.com/azure/iot-dps/concepts-device#id-scope) du DPS.
+* Dans le champ **Username**, utilisez `{idScope}/registrations/{registration_id}/api-version=2019-03-31`, où `{idScope}` est la valeur [idScope](./concepts-service.md#id-scope) du DPS.
 
 * Dans le champ **Password**, utilisez un jeton SAP. Le format du jeton SAP est identique pour les protocoles HTTPS et AMQP :
 
@@ -70,8 +70,8 @@ Pour utiliser le protocole MQTT directement, votre client *doit* se connecter vi
 
 Pour inscrire un appareil via DPS, l’appareil doit s’abonner en utilisant un `$dps/registrations/res/#` en tant que **Filtre de rubrique**. Le caractère générique à plusieurs niveaux `#` dans le Filtre de rubrique est utilisé uniquement pour autoriser l’appareil à recevoir des propriétés supplémentaires dans le nom de la rubrique. DPS n’autorise pas l’utilisation des caractères génériques `#` ou `?` pour filtrer les sous-rubriques. DPS n’étant pas un broker de messagerie pub-sub à usage général, il prend uniquement en charge les noms de rubriques et les filtres de rubriques documentés.
 
-L'appareil doit publier un message de registre sur DPS en utilisant `$dps/registrations/PUT/iotdps-register/?$rid={request_id}` comme **Topic Name**. La charge utile doit contenir l'objet [Device Registration](https://docs.microsoft.com/rest/api/iot-dps/runtimeregistration/registerdevice#deviceregistration) au format JSON.
-Dans un scénario réussi, l’appareil recevra une réponse sur le nom de rubrique `$dps/registrations/res/202/?$rid={request_id}&retry-after=x`, où x est la valeur retry-after en secondes. La charge utile de la réponse contiendra l'objet [RegistrationOperationStatus](https://docs.microsoft.com/rest/api/iot-dps/runtimeregistration/registerdevice#registrationoperationstatus) au format JSON.
+L'appareil doit publier un message de registre sur DPS en utilisant `$dps/registrations/PUT/iotdps-register/?$rid={request_id}` comme **Topic Name**. La charge utile doit contenir l'objet [Device Registration](/rest/api/iot-dps/runtimeregistration/registerdevice#deviceregistration) au format JSON.
+Dans un scénario réussi, l’appareil recevra une réponse sur le nom de rubrique `$dps/registrations/res/202/?$rid={request_id}&retry-after=x`, où x est la valeur retry-after en secondes. La charge utile de la réponse contiendra l'objet [RegistrationOperationStatus](/rest/api/iot-dps/runtimeregistration/registerdevice#registrationoperationstatus) au format JSON.
 
 ## <a name="polling-for-registration-operation-status"></a>Interrogation de l'état de l'opération d'inscription
 
@@ -82,7 +82,7 @@ Lors d'une connexion via WebSocket, spécifiez le sous-protocole comme `mqtt`. S
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le protocole MQTT, consultez la [documentation de MQTT](https://mqtt.org/documentation).
+Pour plus d’informations sur le protocole MQTT, consultez la [documentation de MQTT](https://mqtt.org/).
 
 Pour explorer davantage les capacités de DPS, consultez :
 

@@ -12,12 +12,12 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 11/20/2018
 ms.author: genli
-ms.openlocfilehash: 6c877690cf27edd73f1d828b8a1dda6f4f34e780
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 878e2c233f2171c3c9a6fbd2a8d629d3f3987c3a
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77918170"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91976723"
 ---
 #  <a name="cannot-connect-remotely-to-a-vm-because-rdp-port-is-not-enabled-in-nsg"></a>Impossible de se connecter à distance à une machine virtuelle car le port RDP n’est pas activé dans le NSG
 
@@ -48,7 +48,7 @@ Pour activer le port RDP dans un NSG, procédez comme suit :
 
 Si vous spécifiez l’adresse IP source, ce paramètre autorise uniquement le trafic provenant d’une adresse IP ou plage d’adresses IP spécifique pour se connecter à la machine virtuelle. Vérifiez que l’ordinateur que vous utilisez pour démarrer la session RDP est dans la plage.
 
-Pour plus d’informations sur les NSG, consultez [Groupe de sécurité réseau](../../virtual-network/security-overview.md).
+Pour plus d’informations sur les NSG, consultez [Groupe de sécurité réseau](../../virtual-network/network-security-groups-overview.md).
 
 > [!NOTE]
 > Le port RDP 3389 est exposé à Internet. Par conséquent, nous vous recommandons d’utiliser ce port uniquement pour le test. Pour les environnements de production, nous vous recommandons d’utiliser une connexion VPN ou privée.
@@ -56,6 +56,3 @@ Pour plus d’informations sur les NSG, consultez [Groupe de sécurité réseau]
 ## <a name="next-steps"></a>Étapes suivantes
 
 Si le port RDP est déjà activé dans le NSG, consultez [Résoudre une erreur générale RDP sur une machine virtuelle Azure](./troubleshoot-rdp-general-error.md).
-
-
-

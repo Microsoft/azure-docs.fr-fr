@@ -1,18 +1,18 @@
 ---
 title: Série NV – Machines virtuelles Microsoft Azure
 description: Spécifications pour les machines virtuelles de la série NV.
-services: virtual-machines
-author: vikancha
+author: vikancha-MSFT
 ms.service: virtual-machines
-ms.topic: article
+ms.subservice: sizes
+ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: lahugh
-ms.openlocfilehash: 7fd9fff87564b790915acf01373c078c2012371e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: jushiman
+ms.openlocfilehash: 62f27a07c868cc9cc7f37a7b26ab38127946e3c2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273868"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91652871"
 ---
 # <a name="nv-series"></a>Série NV
 
@@ -20,13 +20,12 @@ Les machines virtuelles de la série NV sont optimisées par des GPU [NVIDIA Tes
 
 Chaque GPU dans les instances NV est fourni avec une licence GRID. Cette licence vous donne la possibilité d’utiliser une instance NV comme station de travail virtuelle pour un seul utilisateur. 25 utilisateurs simultanés peuvent aussi se connecter à la machine virtuelle pour un scénario d’application virtuelle.
 
-Premium Storage :  Non pris en charge
-
-Mise en cache du Stockage Premium :  Non pris en charge
-
-Migration dynamique : Non pris en charge
-
-Mises à jour avec préservation de la mémoire : Non pris en charge
+[Stockage Premium](premium-storage-performance.md) : Non pris en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Non pris en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Génération 1<br>
+<br>
 
 | Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Nombre max de cartes réseau | Stations de travail virtuelles | Applications virtuelles |
 |---|---|---|---|---|---|---|---|---|---|

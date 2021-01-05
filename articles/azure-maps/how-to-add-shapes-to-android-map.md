@@ -1,19 +1,19 @@
 ---
-title: Ajouter des formes aux cartes Android | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à afficher différentes formes sur une carte à l’aide de l’Android SDK Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 04/26/2019
-ms.topic: conceptual
+title: Ajouter une forme à une carte à l’aide d'Android SDK Azure Maps
+description: Découvrez comment ajouter des formes aux cartes. Consultez les exemples de code qui utilisent le SDK Microsoft Azure Maps Android pour ajouter une ligne et un polygone à une carte.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 11/18/2020
+ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 7a793ff35675c876dc429976ebee96887b12735a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ef6e1910803cc18f03347e08abc4f0d836b3c0a
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335605"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532769"
 ---
 # <a name="add-a-shape-to-a-map-using-azure-maps-android-sdk"></a>Ajouter une forme à une carte à l’aide d'Android SDK Azure Maps
 
@@ -21,24 +21,24 @@ Cet article vous explique comment afficher des formes sur une carte à l'aide d'
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-Pour suivre la procédure décrite dans cet article, vous devez installer [Android SDK Azure Maps](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) afin de charger une carte.
-
+1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account)
+2. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement.
+3. Télécharger et installer le [SDK Azure Maps Android](./how-to-use-android-map-control-library.md).
 
 ## <a name="add-a-line-to-the-map"></a>Ajouter une ligne à la carte
 
-Vous pouvez ajouter une ligne à la carte en utilisant une **couche de lignes**. Pour ce faire, suivez la procédure ci-dessous.
+Suivez les étapes ci-dessous pour utiliser l’option **Couche de lignes** afin d’ajouter une ligne sur le mappage.
 
-1. Modifiez l'élément **res > layout > activity_main.xml** de sorte qu'il se présente comme suit :
+1. Modifiez le fichier `res > layout > activity_main.xml` pour qu’il ressemble au code ci-dessous :
 
     ```XML
-    <?xml version="1.0" encoding="utf-8"?>
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    
+
         <com.microsoft.azure.maps.mapcontrol.MapControl
             android:id="@+id/mapcontrol"
             android:layout_width="match_parent"
@@ -47,11 +47,13 @@ Vous pouvez ajouter une ligne à la carte en utilisant une **couche de lignes**.
             app:mapcontrol_centerLng="-74.004420"
             app:mapcontrol_zoom="12"
             />
-    
     </FrameLayout>
     ```
 
-2. Copiez l’extrait de code suivant dans la méthode **onCreate()** de votre classe `MainActivity.java`.
+2. Copiez l’extrait de code ci-dessous dans la méthode **onCreate()** de votre classe `MainActivity.java`.
+
+    >[!WARNING]
+    >Android Studio n’a peut-être pas importé les classes requises.  Par conséquent, le code aura des références insolubles. Pour importer les classes requises, pointez simplement sur chaque référence non résolue et appuyez sur`Alt + Enter` (Option + Retour sur un Mac).
 
     ```Java
     mapControl.onReady(map -> {
@@ -59,7 +61,7 @@ Vous pouvez ajouter une ligne à la carte en utilisant une **couche de lignes**.
         //Create a data source and add it to the map.
         DataSource dataSource = new DataSource();
         map.sources.add(dataSource);
-    
+
         //Create a list of points.
         List<Point> points = Arrays.asList(
             Point.fromLngLat(-73.972340, 40.743270),
@@ -75,11 +77,10 @@ Vous pouvez ajouter une ligne à la carte en utilisant une **couche de lignes**.
     });
 
     ```
+    L’extrait de code ci-dessus commence par obtenir une instance de contrôle de carte Azure Maps dans la méthode de rappel **onReady()** . Il crée ensuite un objet source de données à l’aide de la classe **DataSource**, puis l’ajoute à la carte. Ensuite, il crée une liste d'objets **Point**. Une **chaîne de lignes** est créée à partir de la liste des points et ajoutée à la source de données. Une **couche de lignes** restitue les objets ligne encapsulés dans une source de données sur la carte. Une couche de lignes est ensuite créée et la source de données lui est ajoutée.
     
-    L’extrait de code ci-dessus commence par obtenir une instance de contrôle de carte Azure Maps en utilisant la méthode de rappel **onReady()** . Il crée ensuite un objet source de données à l’aide de la classe **DataSource**, puis l’ajoute à la carte. Ensuite, il crée une liste d'objets **Point**. Une **chaîne de lignes** est créée à partir de la liste des points et ajoutée à la source de données. Une **couche de lignes** restitue les objets ligne encapsulés dans une source de données sur la carte. Une couche de lignes est ensuite créée et la source de données lui est ajoutée.
-
     Après avoir ajouté l’extrait de code ci-dessus, votre `MainActivity.java` devrait ressembler à celui ci-dessous :
-    
+
     ```Java
     package com.example.myapplication;
 
@@ -174,11 +175,9 @@ Vous pouvez ajouter une ligne à la carte en utilisant une **couche de lignes**.
     }
     ```
 
-À ce stade, si vous exécutez votre application, une ligne s'affiche sur la carte comme illustré ci-dessous :
+Lorsque vous exécutez l’application, une ligne s'affiche sur la carte comme illustré ci-dessous :
 
-<center>
-
-![Une ligne affichée sur une carte Android](./media/how-to-add-shapes-to-android-map/android-map-line.png)</center>
+![Une ligne affichée sur une carte Android](./media/how-to-add-shapes-to-android-map/android-map-line.png)</
 
 
 ## <a name="add-a-polygon-to-the-map"></a>Ajouter un polygone à la carte
@@ -237,9 +236,7 @@ Le **couche de polygones** vous permet d'afficher la surface du polygone sur la 
             strokeWidth(2f)));
     });
     ```
-
-    L’extrait de code ci-dessus commence par obtenir une instance de contrôle de carte Azure Maps en utilisant la méthode de rappel **onReady()** . Il crée ensuite un objet source de données à l’aide de la classe **DataSource**, puis l’ajoute à la carte. Un objet **Polygone** est ensuite créé à partir d’une liste d'objets **Point** et ajouté à la source de données. Une **couche de polygones** affiche les données encapsulées dans la source de données sur la carte. Ensuite, il crée une couche de polygones pour afficher la zone de polygone et y ajoute la source de données. Une **couche de lignes** affiche les objets ligne encapsulés dans une source de données. La dernière partie de l’extrait de code crée une couche de lignes permettant d'afficher le contour du polygone et d'y ajouter la source de données.
-
+    
     Après avoir ajouté l’extrait de code ci-dessus, votre `MainActivity.java` devrait ressembler à celui ci-dessous :
 
     ```Java
@@ -346,12 +343,9 @@ Le **couche de polygones** vous permet d'afficher la surface du polygone sur la 
     }
     ```
 
-À ce stade, si vous exécutez votre application, un polygone s'affiche sur la carte comme illustré ci-dessous :
+Lorsque vous exécutez l’application, un polygone s'affiche sur la carte comme illustré ci-dessous :
 
-<center>
-
-![Un polygone affiché sur une carte Android](./media/how-to-add-shapes-to-android-map/android-map-polygon.png)</center>
-
+![Un polygone affiché sur une carte Android](./media/how-to-add-shapes-to-android-map/android-map-polygon.png)</
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -5,19 +5,19 @@ author: uhabiba04
 ms.topic: overview
 ms.date: 11/04/2019
 ms.author: v-umha
-ms.openlocfilehash: 6f0a782309edc33a8a5ce661652922494ead2ec0
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: b08013e9d015d3c987c0032761bebccd4b57ec72
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80667301"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678023"
 ---
 # <a name="overview-of-azure-farmbeats-preview"></a>Vue d’ensemble d’Azure FarmBeats (préversion)
 
 Azure FarmBeats est une offre interentreprise disponible sur la Place de marché Azure. Cette solution permet d’agréger des jeux de données agricoles provenant de différents fournisseurs. Avec Azure FarmBeats, vous pouvez créer des modèles d’intelligence artificielle (IA) ou des modèles Machine Learning (ML) basés sur les jeux de données fusionnés. En utilisant Azure FarmBeats, les entreprises du secteur agricole peuvent se concentrer sur leur valeur ajoutée principale plutôt que passer du temps sur des tâches indifférenciées d’ingénierie des données.
 
 > [!NOTE]
-> Azure FarmBeats est actuellement disponible en préversion publique. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). Azure FarmBeats est fourni sans contrat de niveau de service. Utilisez le [Forum Azure FarmBeats](https://aka.ms/FarmBeatsMSDN ) pour obtenir du support technique.
+> Azure FarmBeats est actuellement disponible en préversion publique. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). Azure FarmBeats est fourni sans contrat de niveau de service. Utilisez le [Forum de support Azure FarmBeats](/answers/topics/azure-farmbeats.html) pour obtenir du support.
 
 ![Projet FarmBeats](./media/architecture-for-farmbeats/farmbeats-architecture-1.png)
 
@@ -43,7 +43,7 @@ Datahub est conçu comme une plateforme d’API extensible. Nous cherchons à in
 
 Azure FarmBeats Accelerator est un exemple d’application web qui repose sur DataHub. Cette solution accélère le développement de votre interface utilisateur et de votre modèle. Elle s’appuie sur les API d’Azure FarmBeats. Elle représente les données de capteurs ingérées sous forme de graphiques et illustre les sorties du modèle sur des cartes. Par exemple, vous pouvez utiliser l’accélérateur pour créer rapidement une exploitation agricole et obtenir facilement une carte de l’indice de végétation ou de l’implantation des capteurs de cette exploitation.
 
-## <a name="role-based-access-control-rbac"></a>Contrôle d’accès en fonction du rôle (RBAC)
+## <a name="azure-role-based-access-control-azure-rbac"></a>Contrôle d’accès en fonction du rôle Azure (Azure RBAC)
 
 Un administrateur peut définir des règles d’accès pour Azure FarmBeats en utilisant l’un des rôles prédéfinis. Les rôles déterminent les zones de l’application auxquelles un utilisateur a accès ainsi que les actions qu’il peut effectuer. Il existe deux types de rôles dans Azure FarmBeats : pour les utilisateurs et pour les partenaires.
 
@@ -66,7 +66,7 @@ Un administrateur peut ajouter plusieurs partenaires comme fournisseurs de donn�
 Azure FarmBeats est fourni sans frais supplémentaires. Vous payez uniquement les ressources Azure que vous consommez. Pour en savoir plus sur l’offre, vous pouvez :
 
 - Lire les toutes dernières informations relatives à Azure FarmBeats en visitant notre [blog Azure FarmBeats](https://aka.ms/farmbeatsblog).
-- Demander de l’aide en postant une question sur notre [forum de support Azure FarmBeats](https://aka.ms/farmbeatssupport).
+- Demander de l’aide en postant une question sur notre [forum de support Azure FarmBeats](/answers/topics/azure-farmbeats.html).
 - Envoyer vos commentaires en postant une idée de fonctionnalité ou en votant pour une idée existante sur notre [forum de commentaires Azure FarmBeats](https://aka.ms/farmbeatsfeedback).
 
 ## <a name="next-steps"></a>Étapes suivantes

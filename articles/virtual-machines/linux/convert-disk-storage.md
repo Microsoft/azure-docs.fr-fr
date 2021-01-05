@@ -3,20 +3,20 @@ title: Convertir le stockage de disques managés entre les disques SSD standard 
 description: Comment convertir un stockage sur disques managés Azure de standard en premium, et vice versa à l’aide d’Azure CLI.
 author: roygara
 ms.service: virtual-machines-linux
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/12/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: cd9bb92b3ed86c3a57b5fc70411a4593335acedb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 10674d15a7515b01b0df6cf37bce89f153cb9b0b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75431502"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88870683"
 ---
 # <a name="convert-azure-managed-disks-storage-from-standard-to-premium-or-premium-to-standard"></a>Convertir un stockage sur disques managés Azure de Standard en Premium, et vice versa
 
-Il existe quatre types de disques managés Azure : SSD Ultra (préversion), SSD Premium, SSD Standard et HDD Standard Azure. Vous pouvez basculer entre les trois types de disques en disponibilité générale (SSD Premium, SSD Standard et HDD Standard) selon vos besoins en performances. Il n’est pas encore possible de passer d’un disque SSD Ultra à un autre type de disque ou l’inverse : vous devez en déployer un nouveau.
+Il existe quatre types de disques managés Azure : Disques Ultra, SSD Premium, SSD Standard et HDD Standard Azure. Vous pouvez basculer entre les trois types de disques en disponibilité générale (SSD Premium, SSD Standard et HDD Standard) selon vos besoins en performances. Il n'est pas encore possible de passer d'un disque Ultra à un autre type de disque ou l'inverse : vous devez en déployer un nouveau.
 
 Cette fonctionnalité n’est pas prise en charge pour les disques non managés. En revanche, vous pouvez facilement [convertir un disque non managé en disque managé](convert-unmanaged-to-managed-disks.md) pour pouvoir basculer entre les différents types de disques.
 
@@ -30,7 +30,7 @@ Cet article explique comment convertir des disques managés Azure de Standard en
 
 ## <a name="switch-all-managed-disks-of-a-vm-between-premium-and-standard"></a>Basculer l’ensemble des disques managés d’une machine virtuelle entre les stockages Standard et Premium
 
-Cet exemple montre comment convertir tous les disques d’une machine virtuelle d’un stockage Standard en stockage Premium ou l’inverse. Pour utiliser des disques managés Premium, votre machine virtuelle doit utiliser une [taille de machine virtuelle](sizes.md) qui prend en charge le stockage Premium. Cet exemple bascule également vers une taille prenant en charge le stockage Premium.
+Cet exemple montre comment convertir tous les disques d’une machine virtuelle d’un stockage Standard en stockage Premium ou l’inverse. Pour utiliser des disques managés Premium, votre machine virtuelle doit utiliser une [taille de machine virtuelle](../sizes.md) qui prend en charge le stockage Premium. Cet exemple bascule également vers une taille prenant en charge le stockage Premium.
 
  ```azurecli
 
@@ -67,7 +67,7 @@ az vm start --name $vmName --resource-group $rgName
 ```
 ## <a name="switch-individual-managed-disks-between-standard-and-premium"></a>Basculer des disques managés individuels entre les stockages Standard et Premium
 
-Pour votre charge de travail de développement/test, vous pouvez mélanger des disques Standard et Premium afin de réduire les coûts. Vous pouvez choisir de mettre à niveau seulement les disques nécessitant de meilleures performances. Cet exemple montre comment convertir un disque de machine virtuelle du stockage Standard en stockage Premium ou l’inverse. Pour utiliser des disques managés Premium, votre machine virtuelle doit utiliser une [taille de machine virtuelle](sizes.md) qui prend en charge le stockage Premium. Cet exemple bascule également vers une taille prenant en charge le stockage Premium.
+Pour votre charge de travail de développement/test, vous pouvez mélanger des disques Standard et Premium afin de réduire les coûts. Vous pouvez choisir de mettre à niveau seulement les disques nécessitant de meilleures performances. Cet exemple montre comment convertir un disque de machine virtuelle du stockage Standard en stockage Premium ou l’inverse. Pour utiliser des disques managés Premium, votre machine virtuelle doit utiliser une [taille de machine virtuelle](../sizes.md) qui prend en charge le stockage Premium. Cet exemple bascule également vers une taille prenant en charge le stockage Premium.
 
  ```azurecli
 

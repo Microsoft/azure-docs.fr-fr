@@ -1,15 +1,14 @@
 ---
 title: Sauvegardes cohérentes par rapport à l’application des machines virtuelles Linux
 description: Créez des sauvegardes cohérentes des applications de vos machines virtuelles Linux sur Azure. Cet article explique la configuration de l’infrastructure de script pour sauvegarder les machines virtuelles Linux déployées par Azure. Il contient également des informations de dépannage.
-ms.reviewer: anuragm
 ms.topic: conceptual
 ms.date: 01/12/2018
-ms.openlocfilehash: 36eeb9f63c67a01bf37412101e23be035596de94
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 22053004026a2dd8976027359f11d50a5663b334
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74173006"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88999238"
 ---
 # <a name="application-consistent-backup-of-azure-linux-vms"></a>Sauvegarde cohérente des applications des machines virtuelles Linux Azure
 
@@ -53,19 +52,19 @@ Les pré-scripts appellent les API natives de l’application, qui suspendent le
 
     - **postScriptParams** : fournissez les paramètres facultatifs qui doivent être transmis au post-script. Tous les paramètres doivent être entre guillemets. Si vous utilisez plusieurs paramètres, séparez-les par une virgule.
 
-    - **preScriptNoOfRetries** : définissez le nombre de fois où le pré-script doit être traité à nouveau en cas d’erreur avant de terminer. Zéro signifie qu’une seule tentative a lieu et qu’aucune nouvelle tentative n’a lieu en cas d’échec.
+    - **preScriptNoOfRetries** : définissez le nombre de fois que l’exécution du pré-script doit être réessayée en cas d’erreur avant qu’elle se termine. Zéro signifie une seule tentative et aucune nouvelle tentative en cas d’échec.
 
-    - **postScriptNoOfRetries** :  définissez le nombre de fois où le post-script doit être traité à nouveau en cas d’erreur avant de terminer. Zéro signifie qu’une seule tentative a lieu et qu’aucune nouvelle tentative n’a lieu en cas d’échec.
+    - **postScriptNoOfRetries** :  définissez le nombre de fois que l’exécution du post-script doit être réessayée en cas d’erreur avant qu’elle se termine. Zéro signifie une seule tentative et aucune nouvelle tentative en cas d’échec.
 
     - **timeoutInSeconds** : spécifiez des délais d’attente individuels pour le pré-script et le post-script (la valeur maximale s’élève à 1 800).
 
-    - **continueBackupOnFailure** : définissez cette valeur sur **true** si vous voulez que Sauvegarde Azure effectue une restauration vers une sauvegarde cohérente en cas d’incident/cohérente dans le système de fichiers en cas d’échec du pré-script ou du post-script. Définir cette valeur sur **false** fait échouer la sauvegarde en cas d’échec du script (sauf en cas de machine virtuelle à un seul disque où la restauration est effectuée vers une sauvegarde cohérente en cas d’incident, indépendamment de ce paramètre).
+    - **continueBackupOnFailure** : définissez cette valeur sur **true** si vous voulez que Sauvegarde Azure effectue une restauration vers une sauvegarde cohérente en cas d’incident/cohérente dans le système de fichiers en cas d’échec du pré-script ou du post-script. Si cette valeur est définie sur **false**, la sauvegarde échoue en cas d’échec du script (sauf si vous avez une machine virtuelle à un seul disque qui restaure vers une sauvegarde cohérente en cas d’incident, indépendamment de ce paramètre). Lorsque la valeur de **continueBackupOnFailure** est définie sur false, si la sauvegarde échoue, l’opération de sauvegarde est tentée à nouveau en fonction d’une logique de nouvelle tentative en service (pour le nombre spécifié de tentatives).
 
     - **fsFreezeEnabled** : spécifiez si fsfreeze Linux doit être appelé pendant la prise d’instantané de la machine virtuelle pour garantir la cohérence du système de fichiers. Nous vous recommandons de laisser cette valeur définie sur **true**, sauf si votre application comporte des dépendances sur la désactivation de fsfreeze.
 
     - **ScriptsExecutionPollTimeSeconds** : définissez le temps de veille de l’extension entre chaque sondage d’exécution du script. Par exemple, si la valeur est 2, l’extension vérifie si l’exécution du pré-script/post-script s’est effectuée toutes les 2 secondes. La valeur minimale est 1 et la valeur maximale 5. La valeur peut être un entier uniquement.
 
-6. L’infrastructure de script est désormais configurée. Si la sauvegarde de la machine virtuelle est déjà configurée, la sauvegarde suivante appelle les scripts et déclenche la sauvegarde cohérente avec les applications. Si la sauvegarde de machine virtuelle n’est pas configurée, faites-le à l’aide de [Sauvegarde de machines virtuelles Azure dans des coffres Recovery Services.](https://docs.microsoft.com/azure/backup/backup-azure-vms-first-look-arm)
+6. L’infrastructure de script est désormais configurée. Si la sauvegarde de la machine virtuelle est déjà configurée, la sauvegarde suivante appelle les scripts et déclenche la sauvegarde cohérente avec les applications. Si la sauvegarde de machine virtuelle n’est pas configurée, configurez-la en procédant de la manière décrite dans [Sauvegarde de machines virtuelles Azure dans des coffres Recovery Services](./backup-azure-vms-first-look-arm.md).
 
 ## <a name="troubleshooting"></a>Dépannage
 
@@ -86,4 +85,4 @@ Veillez à ajouter un enregistrement approprié lors de l’écriture de votre p
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Sauvegarder des machines virtuelles Azure dans un coffre Recovery Services](https://docs.microsoft.com/azure/backup/backup-azure-arm-vms)
+[Sauvegarder des machines virtuelles Azure dans un coffre Recovery Services](./backup-azure-vms-first-look-arm.md)

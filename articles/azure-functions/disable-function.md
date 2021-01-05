@@ -2,19 +2,20 @@
 title: Guide pratique pour désactiver des fonctions dans Azure Functions
 description: Découvrez comment désactiver et activer des fonctions dans Azure Functions.
 ms.topic: conceptual
-ms.date: 12/05/2019
-ms.openlocfilehash: 11585e92e7d239731b02d06c5093f979cd65cfba
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 04/08/2020
+ms.custom: devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: 4d93f728103aabdd1bd5557033a8bd36ffac2d42
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81686884"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91661021"
 ---
 # <a name="how-to-disable-functions-in-azure-functions"></a>Guide pratique pour désactiver des fonctions dans Azure Functions
 
 Cet article explique comment désactiver une fonction dans Azure Functions. Quand vous *désactivez* une fonction, le runtime ignore le déclencheur automatique défini pour la fonction. Ceci vous permet d’empêcher une fonction spécifique de s’exécuter sans arrêter toute l’application de fonction.
 
-La façon recommandée de désactiver une fonction est d’utiliser un paramètre d’application au format `AzureWebJobs.<FUNCTION_NAME>.Disabled`. Vous pouvez créer et modifier ce paramètre d'application de plusieurs façons, notamment à l'aide de l'interface [Azure CLI](/cli/azure/) et à partir de l'onglet **Gérer** de votre fonction sur le [portail Azure](https://portal.azure.com). 
+La façon recommandée de désactiver une fonction est d’utiliser un paramètre d’application au format `AzureWebJobs.<FUNCTION_NAME>.Disabled` défini sur `true`. Vous pouvez créer et modifier ce paramètre d'application de plusieurs façons, notamment à l'aide de l'interface [Azure CLI](/cli/azure/) et à partir de l'onglet **Gérer** de votre fonction sur le [portail Azure](https://portal.azure.com). 
 
 > [!NOTE]  
 > Lorsque vous désactivez une fonction déclenchée par HTTP à l’aide des méthodes décrites dans cet article, le point de terminaison peut toujours être accessible en cas d’exécution sur votre ordinateur local.  
@@ -39,12 +40,27 @@ az functionapp config appsettings set --name <myFunctionApp> \
 
 ## <a name="use-the-portal"></a>Utiliser le portail
 
-Vous pouvez également utiliser le commutateur **État de la fonction** sous l’onglet **Gérer** de la fonction. Le commutateur crée et supprime le paramètre d’application `AzureWebJobs.<FUNCTION_NAME>.Disabled`.
+Vous pouvez également utiliser les boutons **Activer** et **Désactiver** sur la page **Vue d’ensemble** de la fonction. Ces boutons fonctionnent en modifiant la valeur du paramètre d’application `AzureWebJobs.<FUNCTION_NAME>.Disabled`. Ce paramètre propre à la fonction est créé la première fois qu’il est désactivé.
 
 ![Commutateur d’état de la fonction](media/disable-function/function-state-switch.png)
 
 > [!NOTE]  
 > La fonctionnalité de test intégré au portail ignore le paramètre `Disabled`. Cela signifie qu’une fonction désactivée continue à s’exécuter quand elle est démarrée à partir de la fenêtre **Test** dans le portail. 
+
+## <a name="localsettingsjson"></a>local.settings.json
+
+Les fonctions peuvent être désactivées de la même façon lors de l’exécution locale. Pour désactiver une fonction nommée `HttpExample`, ajoutez une entrée à la collection Values dans le fichier local.settings.json, comme suit :
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true", 
+    "AzureWebJobs.HttpExample.Disabled": "true"
+  }
+}
+``` 
 
 ## <a name="other-methods"></a>Autres méthodes
 
@@ -122,9 +138,9 @@ or
 
 Dans le deuxième exemple, la fonction est désactivée quand un paramètre d’application nommé IS_DISABLED existe et a la valeur `true` ou 1.
 
-Vous pouvez modifier le fichier dans le portail Azure ou utiliser le commutateur **État de la fonction** sous l’onglet **Gérer** de la fonction. Le commutateur du portail change le fichier *function.json*.
+>[!IMPORTANT]  
+>Le portail utilise désormais les paramètres d’application pour désactiver les fonctions v1.x. Lorsqu’un paramètre d’application est en conflit avec le fichier function.json, une erreur peut se produire. Vous devez supprimer la propriété `disabled` du fichier function.json pour éviter les erreurs. 
 
-![Commutateur d’état de la fonction](media/disable-function/function-state-switch.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

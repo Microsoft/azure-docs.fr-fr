@@ -8,12 +8,12 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 02/18/2020
-ms.openlocfilehash: da7a47bf61453c30f5c735b1282ae93d2442598c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a5589a46a63437fb395db280222f8a9e84775df3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82127692"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935073"
 ---
 # <a name="monitor-query-requests-in-azure-cognitive-search"></a>Surveiller les demandes de requête dans Recherche cognitive Azure
 
@@ -100,7 +100,7 @@ Dans la capture d'écran suivante, la première valeur correspond au nombre de m
 
 Pour un aperçu rapide des valeurs actuelles, l'onglet **Surveillance** de la page de présentation du service affiche trois mesures (**Latence de recherche**, **Requêtes de recherche par seconde (par unité de recherche)** , **Pourcentage de requêtes de recherche limitées**) sur des intervalles fixes mesurés en heures, jours et semaines, avec la possibilité de modifier le type d'agrégation.
 
-Pour une exploration plus approfondie, ouvrez Metrics Explorer à partir du menu **Surveillance**. Vous pourrez ainsi ajouter des données, effectuer un zoom sur celles-ci et les visualiser afin d'explorer les tendances ou les anomalies. Pour en savoir plus sur Metrics Explorer, suivez ce [tutoriel consacré à la création d'un graphique de métriques](https://docs.microsoft.com/azure/azure-monitor/learn/tutorial-metrics-explorer).
+Pour une exploration plus approfondie, ouvrez Metrics Explorer à partir du menu **Surveillance**. Vous pourrez ainsi ajouter des données, effectuer un zoom sur celles-ci et les visualiser afin d'explorer les tendances ou les anomalies. Pour en savoir plus sur Metrics Explorer, suivez ce [tutoriel consacré à la création d'un graphique de métriques](../azure-monitor/learn/tutorial-metrics-explorer.md).
 
 1. Dans la section Surveillance, sélectionnez **Métriques** pour ouvrir Metrics Explorer en veillant à ce que l'étendue soit définie en fonction de votre service de recherche.
 
@@ -128,11 +128,11 @@ Quand vous activez la journalisation des ressources, le système capture les dem
    AzureDiagnostics
    | project OperationName, Query_s, IndexName_s, Documents_d
    | where OperationName == "Query.Search"
-   | where Query_s != "?api-version=2019-05-06&search=*"
+   | where Query_s != "?api-version=2020-06-30&search=*"
    | where IndexName_s != "realestate-us-sample-index"
    ```
 
-1. Vous pouvez également définir un filtre de colonne sur *Query_s* pour effectuer une recherche sur une syntaxe ou une chaîne spécifique. Par exemple, vous pouvez appliquer le filtre suivant : *est égal à* `?api-version=2019-05-06&search=*&%24filter=HotelName`).
+1. Vous pouvez également définir un filtre de colonne sur *Query_s* pour effectuer une recherche sur une syntaxe ou une chaîne spécifique. Par exemple, vous pouvez appliquer le filtre suivant : *est égal à* `?api-version=2020-06-30&search=*&%24filter=HotelName`).
 
    ![Chaînes de requêtes consignées](./media/search-monitor-usage/log-query-strings.png "Chaînes de requêtes consignées")
 

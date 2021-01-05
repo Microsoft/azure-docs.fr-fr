@@ -1,24 +1,22 @@
 ---
-title: Créer un locataire dans Windows Virtual Desktop - Azure
-description: Explique comment configurer des locataires Windows Virtual Desktop dans Azure Active Directory.
-services: virtual-desktop
+title: Créer un locataire dans Windows Virtual Desktop (classique) – Azure
+description: Explique comment configurer des locataires Windows Virtual Desktop (classique) dans Azure Active Directory.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: tutorial
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 94128c69f227ceff51968354048ec6610e3d7c4c
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: f41584194f8f5e8afde630405116b8b169cb5656
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613925"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91542034"
 ---
-# <a name="tutorial-create-a-tenant-in-windows-virtual-desktop"></a>Tutoriel : Créer un locataire dans Windows Virtual Desktop
+# <a name="tutorial-create-a-tenant-in-windows-virtual-desktop-classic"></a>Tutoriel : Créer un locataire dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop.
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager.
 
 La création d’un locataire dans Windows Virtual Desktop constitue la première étape de la création de votre solution de virtualisation de bureau. Un locataire est un groupe d’un ou de plusieurs pools d’hôtes. Chaque pool d’hôtes se compose de plusieurs hôtes de session s’exécutant en tant que machines virtuelles dans Azure et inscrits auprès du service Windows Virtual Desktop. Chaque pool d’hôtes comprend également un ou plusieurs groupes d’applications qui sont utilisés pour publier des ressources du Bureau à distance et d’application à distance pour les utilisateurs. Avec un locataire, vous pouvez générer des pools d’hôtes, créer des groupes d’applications, affecter des utilisateurs et établir des connexions par l’intermédiaire du service.
 
@@ -78,25 +76,34 @@ Pour attribuer le rôle d’application TenantCreator :
 
 1. Accédez au [portail Azure](https://portal.azure.com) pour gérer le rôle d’application TenantCreator. Recherchez et sélectionnez **Applications d’entreprise**. Dans le cas où il existe plusieurs locataires Azure Active Directory, il est recommandé d’ouvrir une session de navigation privée, puis de copier-coller les URL dans la barre d’adresse.
 
-   ![Capture d’écran de la recherche d’applications d’entreprise dans le Portail Azure](../media/azure-portal-enterprise-applications.png)
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran de la recherche d’applications d’entreprise dans le portail Azure](../media/azure-portal-enterprise-applications.png)
+
 2. Dans **Applications d’entreprise**, recherchez **Windows Virtual Desktop**. Les deux applications pour lesquelles vous avez donné votre consentement dans la section précédente s’affichent. Entre ces deux applications, sélectionnez **Windows Virtual Desktop**.
-   
-   ![Capture d’écran des résultats de la recherche « Windows Virtual Desktop » dans « Applications d’entreprise ». Application nommée « Windows Virtual Desktop » en surbrillance.](../media/tenant-enterprise-app.png)
+
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des résultats de la recherche « Windows Virtual Desktop » dans « Applications d’entreprise ». application nommée « Windows Virtual Desktop » en surbrillance](../media/tenant-enterprise-app.png)
+
 3. Sélectionnez **Utilisateurs et groupes**. Comme vous pouvez le constater, l’administrateur qui a donné son consentement à l’application apparaît déjà avec le rôle **Accès par défaut**. Ce n’est pas suffisant pour créer un locataire Windows Virtual Desktop. Continuez à suivre ces instructions pour ajouter le rôle **TenantCreator** à un utilisateur.
-   
-   ![Capture d’écran des utilisateurs et des groupes affectés à la gestion de l’application d’entreprise « Windows Virtual Desktop ». La capture d’écran ne montre qu’une attribution pour « Accès par défaut ».](../media/tenant-default-access.png)
+
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des utilisateurs et des groupes affectés à la gestion de l’application d’entreprise « Windows Virtual Desktop » : une seule attribution, pour « Accès par défaut ».](../media/tenant-default-access.png)
+
 4. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** sous l’onglet **Ajouter une attribution**.
 5. Recherchez un compte d’utilisateur qui va créer votre locataire Windows Virtual Desktop. Pou rester simple, ce peut être le compte d’administrateur général.
    - Si vous utilisez un fournisseur d’identité Microsoft comme contosoadmin@live.com ou contosoadmin@outlook.com, vous ne pourrez peut-être pas vous connecter à Windows Virtual Desktop. Nous vous recommandons plutôt d’utiliser un compte propre au domaine comme admin@contoso.com ou admin@contoso.onmicrosoft.com.
 
-   ![Capture d’écran de la sélection d’un utilisateur à ajouter comme « TenantCreator ».](../media/tenant-assign-user.png)
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran de la sélection d’un utilisateur à ajouter comme « TenantCreator ».](../media/tenant-assign-user.png)
+
    > [!NOTE]
    > L’utilisateur (ou le groupe contenant un utilisateur) sélectionné doit provenir de cette instance Azure Active Directory. Vous ne pouvez pas choisir un utilisateur invité (B2B) ou un principal de service.
 
 6. Sélectionnez le compte d’utilisateur, choisissez le bouton **Sélectionner**, puis sélectionnez **Attribuer**.
 7. Sur la page **Windows Virtual Desktop – Utilisateurs et groupes**, vérifiez qu’il existe une nouvelle entrée pour le rôle **TenantCreator** attribué à l’utilisateur qui devra créer le locataire Windows Virtual Desktop.
 
-   ![Capture d’écran des utilisateurs et des groupes affectés à la gestion de l’application d’entreprise « Windows Virtual Desktop ». Capture d’écran comportant une deuxième entrée, qui correspond à un utilisateur affecté au rôle « TenantCreator ».](../media/tenant-tenant-creator-added.png)
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des utilisateurs et des groupes affectés à la gestion de l’application d’entreprise « Windows Virtual Desktop » : Capture d’écran comportant une deuxième entrée, qui correspond à un utilisateur affecté au rôle « TenantCreator ».](../media/tenant-tenant-creator-added.png)
 
 Pour pouvoir créer votre locataire Windows Virtual Desktop, il vous faut deux informations :
 
@@ -106,20 +113,26 @@ Pour pouvoir créer votre locataire Windows Virtual Desktop, il vous faut deux i
 Pour trouver votre ID de locataire Azure Active Directory (ou **ID répertoire**) :
 1. Dans la même session du [Portail Azure](https://portal.azure.com), recherchez et sélectionnez **Azure Active Directory**.
 
-   ![Capture d’écran des résultats de la recherche « Azure Active Directory » sur le Portail Azure. Résultat de la recherche sous « Services » mis en surbrillance.](../media/tenant-search-azure-active-directory.png)
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des résultats de la recherche « Azure Active Directory » sur le Portail Azure : résultat de la recherche sous « Services » mis en surbrillance](../media/tenant-search-azure-active-directory.png)
+
 2. Faites défiler la page, puis sélectionnez **Propriétés**.
 3. Recherchez **ID répertoire**, puis sélectionnez l’icône de Presse-papiers. Collez l’ID dans un emplacement pratique pour pouvoir l’utiliser plus tard comme valeur de **AadTenantId**.
 
-   ![Capture d’écran des propriétés d’Azure Active Directory. Souris qui pointe sur l’icône du Presse-papiers « ID répertoire » à copier-coller.](../media/tenant-directory-id.png)
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des propriétés d’Azure Active Directory : souris qui pointe sur l’icône du Presse-papiers « ID répertoire » à copier-coller.](../media/tenant-directory-id.png)
 
 Pour trouver votre ID d’abonnement Azure :
 1. Dans la même session du [Portail Azure](https://portal.azure.com), recherchez et sélectionnez **Abonnements**.
-   
-   ![Capture d’écran des résultats de la recherche « Azure Active Directory » sur le Portail Azure. Résultat de la recherche sous « Services » mis en surbrillance.](../media/tenant-search-subscription.png)
+
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des résultats de la recherche « Azure Active Directory » sur le Portail Azure : Le résultat de la recherche sur « Services » est mis en surbrillance.](../media/tenant-search-subscription.png)
+
 2. Sélectionnez l’abonnement Azure que vous souhaitez utiliser pour recevoir les notifications de service Windows Virtual Desktop.
 3. Recherchez **ID d’abonnement**, puis pointez sur la valeur jusqu’à ce qu’une icône de Presse-papiers s’affiche. Sélectionnez l’icône de Presse-papiers et collez l’ID dans un emplacement pratique pour pouvoir l’utiliser plus tard comme valeur de **AzureSubscriptionId**.
-   
-   ![Capture d’écran des propriétés de l’abonnement Azure. Souris qui pointe sur l’icône du Presse-papiers « ID d’abonnement » à copier-coller.](../media/tenant-subscription-id.png)
+
+   > [!div class="mx-imgBorder"]
+   > ![Capture d’écran des propriétés de l’abonnement Azure : souris qui pointe sur l’icône du Presse-papiers « ID d’abonnement » à copier-coller.](../media/tenant-subscription-id.png)
 
 ## <a name="create-a-windows-virtual-desktop-tenant"></a>Créer un locataire Windows Virtual Desktop
 
@@ -152,7 +165,6 @@ New-RdsRoleAssignment -TenantName <TenantName> -SignInName <Upn> -RoleDefinition
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-
 Après avoir créé votre locataire, il vous faudra créer un principal de service dans Azure Active Directory et lui attribuer un rôle dans Windows Virtual Desktop. Le principal de service vous permettra de déployer l’offre Place de marché Azure Windows Virtual Desktop pour créer un pool d’hôtes. Pour en savoir plus sur les pools d’hôtes, passez au tutoriel concernant la création d’un pool d’hôtes dans Windows Virtual Desktop.
 
 > [!div class="nextstepaction"]

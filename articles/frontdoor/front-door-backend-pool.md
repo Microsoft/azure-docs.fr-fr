@@ -3,28 +3,28 @@ title: Back-ends et pools de back-ends dans Azure Front Door | Microsoft Docs
 description: Cet article décrit les serveurs principaux et pools principaux dans la configuration de Front Door.
 services: front-door
 documentationcenter: ''
-author: sharad4u
+author: duongau
 ms.service: frontdoor
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 09/10/2018
-ms.author: sharadag
-ms.openlocfilehash: 18b165d83bfa154348842542bd8323a40330aa2a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/28/2020
+ms.author: duau
+ms.openlocfilehash: 4beba141fec7a819df52e4c3a669312a4ad76998
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80293471"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91449287"
 ---
 # <a name="backends-and-backend-pools-in-azure-front-door"></a>Back-ends et pools de back-ends dans Azure Front Door
-Cet article décrit des concepts sur la façon de mapper votre déploiement d’application en utilisant Azure Front Door. Il explique également les différents termes utilisés pour la configuration de Front Door relatifs aux back-ends d’application.
+Cet article décrit des concepts sur la façon de mapper votre déploiement d’application web avec Azure Front Door. Il explique également les différentes terminologies utilisées dans la configuration de Front Door autour des serveurs principaux d’applications.
 
 ## <a name="backends"></a>Back-ends
-Un back-end correspond à l’instance de déploiement d’une application dans une région. Front Door prend en charge les back-ends Azure et non-Azure, donc la région n’est donc pas limitée aux régions Azure. De plus, elle peut être votre centre de données local ou une instance d’application dans un autre cloud.
+Un serveur principal fait référence à un déploiement d’application web dans une région. Front Door prend en charge les ressources Azure et non Azure dans le pool principal. L’application peut se trouver dans votre centre de données local ou dans un autre fournisseur de cloud.
 
-Les back-ends de Front Door font référence au nom d’hôte ou à l’adresse IP publique de votre application, qui peut traiter les demandes des clients. Attention, il ne faut pas confondre les back-ends avec votre niveau de base de données, de stockage, etc. Les back-ends doivent être considérés comme le point de terminaison public du back-end de votre application. Lorsque vous ajoutez un back-end dans un pool de back-ends Front Door, vous devez également ajouter les éléments suivants :
+Les serveurs principaux de Front Door font référence au nom d’hôte ou à l’adresse IP publique de votre application qui sert les demandes de vos clients. Attention, il ne faut pas confondre les back-ends avec votre niveau de base de données, de stockage, etc. Les serveurs principaux doivent être considérés comme le point de terminaison public de votre serveur principal d’application. Lorsque vous ajoutez un serveur principal à un pool principal Front Door, vous devez également ajouter les éléments suivants :
 
 - **Type d’hôte du back-end**. Le type de ressource que vous souhaitez ajouter. Front Door prend en charge la découverte automatique de vos back-ends d’application d’un service d’application, d’un service cloud ou d’un stockage. Si vous voulez une autre ressource Azure ou même un back-end non-Azure, sélectionnez **Hôte personnalisé**.
 
@@ -41,13 +41,13 @@ Les back-ends de Front Door font référence au nom d’hôte ou à l’adresse 
 
 ### <a name="backend-host-header"></a><a name = "hostheader"></a>En-tête de l’hôte du backend
 
-Les demandes transférées par Front Door à un back-end incluent un champ En-tête de l’hôte dont se sert le back-end pour récupérer la ressource cible. La valeur de ce champ provient généralement de l’URI du back-end et indique l’hôte et le port.
+Les demandes transférées par Front Door à un back-end incluent un champ En-tête de l’hôte dont se sert le back-end pour récupérer la ressource cible. La valeur de ce champ provient généralement de l’URI du serveur principal qui contient l’en-tête et le port de l’hôte.
 
 Par exemple, une demande formulée pour `www.contoso.com` aura l’en-tête d’hôte www.contoso.com. Si vous utilisez le portail Microsoft Azure pour configurer votre back-end, la valeur par défaut pour ce champ sera le nom d’hôte du back-end. Si votre back-end est contoso-westus.azurewebsites.net, dans le portail Microsoft Azure, la valeur remplie automatiquement pour l’en-tête d’hôte du back-end sera contoso-westus.azurewebsites.net. Toutefois, si vous utilisez des modèles Azure Resource Manager ou une autre méthode sans définir explicitement ce champ, Front Door transmet le nom d’hôte entrant comme valeur pour l’en-tête d’hôte. Si la requête a été faite pour www\.contoso.com et que votre back-end est contoso-westus.azurewebsites.net, dont le champ d’en-tête est vide, Front Door définit l’en-tête de l’hôte en tant que www\.contoso.com.
 
 La plupart des back-endq d’application (comme Azure Web Apps, Stockage Blob et Cloud Services) exigent une correspondance entre l’en-tête de l’hôte et le domaine du back-end. Cependant, l’hôte front-end qui route vers votre back-end aura un nom d’hôte différent, comme www.contoso.net.
 
-Si votre back-end demande une correspondance entre l’en-tête de l’hôte et le nom de l’hôte du back-end, veuillez vous assurer que l’en-tête de l’hôte du back-end inclut le back-end du nom de l’hôte.
+Si votre serveur principal requiert une correspondance entre l’en-tête de l’hôte et le nom d’hôte du serveur principal, veuillez vous assurer que l’en-tête de l’hôte principal inclut le nom de l’hôte du serveur principal.
 
 #### <a name="configuring-the-backend-host-header-for-the-backend"></a>Configuration du champ En-tête de l’hôte backend pour le backend
 

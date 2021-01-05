@@ -1,23 +1,24 @@
 ---
 title: Partager des images de la bibliothèque entre tenants dans Azure
-description: Découvrez comment partager des images de machine virtuelle entre des locataires Azure à l’aide des galeries d’images partagées.
-author: cynthn
-ms.service: virtual-machines-windows
+description: Découvrez comment partager des images de machine virtuelle entre des locataires Azure à l’aide des galeries d’images partagées et de PowerShell.
+author: axayjo
+ms.service: virtual-machines
 ms.subservice: imaging
 ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 07/15/2019
-ms.author: cynthn
-ms.openlocfilehash: 7c35799147d276bf4b6f07893b7cd975c5c5823c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: akjosh
+ms.reviewer: cynthn
+ms.openlocfilehash: 84998182081c6a681668fbd9bc05446357beb959
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82101193"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96781043"
 ---
-# <a name="share-gallery-vm-images-across-azure-tenants"></a>Partager des images de machine virtuelle de la galerie entre des locataires Azure
+# <a name="share-gallery-vm-images-across-azure-tenants-using-powershell"></a>Partager des images de machine virtuelle des galeries entre des locataires Azure à l’aide de PowerShell
 
-Les galeries Shared Image Gallery vous permettent de partager des images à l’aise du contrôle d’accès en fonction du rôle (RBAC). Vous pouvez utiliser le contrôle d’accès en fonction du rôle (RBAC) pour partager des images au sein de votre locataire, voire avec d’autres personnes en dehors. Pour plus d’informations sur cette option de partage simple, voir [Partager la galerie](/azure/virtual-machines/windows/shared-images-portal#share-the-gallery).
+Les galeries Shared Image Gallery vous permettent de partager des images à l’aide du contrôle d’accès en fonction du rôle (Azure RBAC). Vous pouvez utiliser Azure RBAC pour partager des images au sein de votre locataire, voire avec d’autres personnes en dehors. Pour plus d’informations sur cette option de partage simple, voir [Partager la galerie](./shared-images-portal.md#share-the-gallery).
 
 [!INCLUDE [virtual-machines-share-images-across-tenants](../../../includes/virtual-machines-share-images-across-tenants.md)]
 

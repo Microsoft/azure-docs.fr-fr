@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec Skillport | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Skillport.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4df349b2-a73f-4b88-a077-ec0fbfc26527
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: jeedes
-ms.openlocfilehash: 09ccb9f095e58d8fa22ec3d119853c729f0c7026
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 8b49e3594754e8eed38e3b1ef44648bc065558b8
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67090568"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608356"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-skillport"></a>Didacticiel : Intégration d’Azure AD avec Skillport
 
@@ -31,7 +27,7 @@ L’intégration de Skillport dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Skillport (par le biais de l’authentification unique) avec leur compte Azure Active Directory.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -105,23 +101,23 @@ Pour configurer l’authentification unique Azure Active Directory avec Skillpor
 
     ![Informations d’authentification unique dans le domaine et les URL Skillport](common/sp-identifier-reply.png)
 
-    a. Dans la zone de texte **URL de connexion**, tapez l’URL :
+    1. Dans la zone de texte **URL de connexion**, tapez l’URL : 
 
-    Centre de données Europe : `https://adfs.skillport.eu`
+        Centre de données Europe : `https://adfs.skillport.eu`
 
-    Centre de données États-Unis : `https://sso.skillport.com`
+        Centre de données États-Unis : `https://sso.skillport.com`
 
-    b. Dans la zone **Identificateur**, tapez l’URL :
+    1. Dans la zone **Identificateur**, tapez l’URL : 
 
-    Centre de données Europe : `http://adfs.skillport.eu/adfs/services/trust`
+        Centre de données Europe : `http://adfs.skillport.eu/adfs/services/trust`
 
-    Centre de données États-Unis : `https://sso.skillport.com`
+        Centre de données États-Unis : `https://sso.skillport.com`
 
-    c. Dans la zone de texte **URL de réponse**, tapez l’URL :
+    1. Dans la zone **URL de réponse**, tapez l’URL : 
 
-    Centre de données Europe : `https://adfs.skillport.eu/adfs/ls/`
+        Centre de données Europe : `https://adfs.skillport.eu/adfs/ls/`
 
-      Centre de données États-Unis : `https://sso.skillport.com/sp/ACS.saml2`
+        Centre de données États-Unis : `https://sso.skillport.com/sp/ACS.saml2`
 
 5. Sur la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le fichier **XML de métadonnées de fédération** en fonction des options définies selon vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -139,7 +135,7 @@ Pour configurer l’authentification unique Azure Active Directory avec Skillpor
 
 ### <a name="configure-skillport-single-sign-on"></a>Configurer l’authentification unique de Skillport
 
-Pour configurer l’authentification unique côté **Skillport**, vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL associées copiées dans le portail Azure à l’[équipe du support technique Skillport](https://www.skillsoft.com/contact.asp). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Skillport**, vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL associées copiées dans le portail Azure à l’[équipe du support technique Skillport](https://www.skillsoft.com/about/contact-us). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
@@ -194,19 +190,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-skillport-test-user"></a>Créer un utilisateur de test Skillport
 
-Pour créer un utilisateur de test Skillport, vous devez contacter [l’équipe de support Skillport](https://www.skillsoft.com/contact.asp), qui dispose de plusieurs scénarios d’entreprise en fonction des exigences de l’utilisateur final. Ils configureront les éléments après avoir discuté avec les utilisateurs.
+Pour créer un utilisateur de test Skillport, vous devez contacter [l’équipe de support Skillport](https://www.skillsoft.com/about/contact-us), qui dispose de plusieurs scénarios d’entreprise en fonction des exigences de l’utilisateur final. Ils configureront les éléments après avoir discuté avec les utilisateurs.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette Skillport dans le volet d’accès, vous devez être connecté automatiquement à l’application Skillport pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette Skillport dans le volet d’accès, vous devez être connecté automatiquement à l’application Skillport pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -5,20 +5,20 @@ author: peterpogorski
 ms.topic: conceptual
 ms.date: 01/23/2019
 ms.author: pepogors
-ms.openlocfilehash: fa8bb41684271c7d4ebe90e31ce8019994fc1f41
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 90ffd1c01411982f56aed3332c499aa0c10b8a94
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478742"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86257605"
 ---
 # <a name="azure-service-fabric-security"></a>Sécurité de Microsoft Azure Service Fabric 
 
-Pour plus d’informations sur les [bonnes pratiques relatives à la sécurité d’Azure](https://docs.microsoft.com/azure/security/), passez en revue [Bonnes pratiques pour la sécurité Azure Service Fabric](https://docs.microsoft.com/azure/security/fundamentals/service-fabric-best-practices)
+Pour plus d’informations sur les [bonnes pratiques relatives à la sécurité d’Azure](../security/index.yml), passez en revue [Bonnes pratiques pour la sécurité Azure Service Fabric](../security/fundamentals/service-fabric-best-practices.md)
 
 ## <a name="key-vault"></a>Key Vault
 
-[Azure Key Vault](https://docs.microsoft.com/azure/key-vault/) est le service de gestion des secrets recommandé pour les applications et les clusters Azure Service Fabric.
+[Azure Key Vault](../key-vault/index.yml) est le service de gestion des secrets recommandé pour les applications et les clusters Azure Service Fabric.
 > [!NOTE]
 > Si les certificats/secrets d’un coffre de clés sont déployés sur un groupe de machines virtuelles identiques en tant que secret d’un groupe de machines virtuelles identiques, le coffre de clés et le groupe de machines virtuelles identiques doivent être colocalisés.
 
@@ -29,11 +29,11 @@ Un certificat Azure Key Vault peut être créé ou importé dans un coffre de cl
 - Créez un certificat auto-signé pour créer une paire de clés publique-privée et l’associer à un certificat. Le certificat est signé par sa propre clé. 
 - Créez un certificat manuellement pour créer une paire de clés publique-privée et générer une demande de signature de certificat X.509. La demande de signature peut être signée par votre autorité de certification ou autorité d’inscription. Le certificat X509 signé peut être fusionné avec la paire de clés en attente afin de terminer la création du certificat KV dans Key Vault. Bien que cette méthode nécessite davantage d’étapes, elle offre une plus grande sécurité, car la clé privée est créée dans Key Vault et restreinte à ce dernier. Ceci est expliqué dans le diagramme ci-dessous. 
 
-Pour plus d’informations, consultez [Méthodes de création de certificats Azure Key Vault ](https://docs.microsoft.com/azure/key-vault/create-certificate).
+Pour plus d’informations, consultez [Méthodes de création de certificats Azure Key Vault ](../key-vault/certificates/create-certificate.md).
 
 ## <a name="deploy-key-vault-certificates-to-service-fabric-cluster-virtual-machine-scale-sets"></a>Déployer des certificats Key Vault sur les groupes de machines virtuelles identiques d’un cluster Service Fabric
 
-Pour déployer des certificats d’un coffre de clés colocalisé sur un groupe de machines virtuelles identiques, utilisez le paramètre [osProfile](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/createorupdate#virtualmachinescalesetosprofile) du groupe de machines virtuelles identiques. Les propriétés du modèle Resource Manager sont les suivantes :
+Pour déployer des certificats d’un coffre de clés colocalisé sur un groupe de machines virtuelles identiques, utilisez le paramètre [osProfile](/rest/api/compute/virtualmachinescalesets/createorupdate#virtualmachinescalesetosprofile) du groupe de machines virtuelles identiques. Les propriétés du modèle Resource Manager sont les suivantes :
 
 ```json
 "secrets": [
@@ -56,7 +56,7 @@ Pour déployer des certificats d’un coffre de clés colocalisé sur un groupe 
 
 ## <a name="apply-an-access-control-list-acl-to-your-certificate-for-your-service-fabric-cluster"></a>Appliquer une liste de contrôle d’accès (ACL) à votre certificat pour votre cluster Service Fabric
 
-Le serveur de publication des [extensions de groupe de machines virtuelles identiques](https://docs.microsoft.com/cli/azure/vmss/extension?view=azure-cli-latest) Microsoft.Azure.ServiceFabric est utilisé pour configurer la sécurité de vos nœuds.
+Le serveur de publication des [extensions de groupe de machines virtuelles identiques](/cli/azure/vmss/extension?view=azure-cli-latest) Microsoft.Azure.ServiceFabric est utilisé pour configurer la sécurité de vos nœuds.
 Pour appliquer une ACL à vos certificats pour les processus de votre cluster Service Fabric, utilisez les propriétés du modèle Resource Manager suivantes :
 
 ```json
@@ -70,7 +70,7 @@ Pour appliquer une ACL à vos certificats pour les processus de votre cluster Se
 
 ## <a name="secure-a-service-fabric-cluster-certificate-by-common-name"></a>Sécuriser un certificat de cluster Service Fabric par nom commun
 
-Pour sécuriser votre cluster Service Fabric par `Common Name` de certificat, utilisez la propriété de modèle Resource Manager [certificateCommonNames](https://docs.microsoft.com/rest/api/servicefabric/sfrp-model-clusterproperties#certificatecommonnames) comme ceci :
+Pour sécuriser votre cluster Service Fabric par `Common Name` de certificat, utilisez la propriété de modèle Resource Manager [certificateCommonNames](/rest/api/servicefabric/sfrp-model-clusterproperties#certificatecommonnames) comme ceci :
 
 ```json
 "certificateCommonNames": {
@@ -87,9 +87,9 @@ Pour sécuriser votre cluster Service Fabric par `Common Name` de certificat, ut
 > [!NOTE]
 > Les clusters Service Fabric utilisent le premier certificat valide trouvé dans le magasin de certificats de votre hôte. Sur Windows, il s’agit du certificat dont la date d’expiration la plus récente correspond à votre nom commun et à votre empreinte d’émetteur.
 
-Les domaines Azure, tels que *\<VOTRE SOUS-DOMAINE\>.cloudapp.azure.com ou \<VOTRE SOUS-DOMAINE\>.trafficmanager.net, sont la propriété de Microsoft. Les autorités de certification n’émettent pas de certificats pour les domaines à des utilisateurs non autorisés. Pour qu’une autorité de certification émette un certificat portant ce nom commun, la plupart des utilisateurs doivent acheter un domaine auprès d’un bureau d’enregistrement ou disposer d’une autorisation d’administrateur de domaine.
+Les domaines Azure, tels que *\<YOUR SUBDOMAIN\>.cloudapp.azure.com ou \<YOUR SUBDOMAIN\>.trafficmanager.net, appartiennent à Microsoft. Les autorités de certification n’émettent pas de certificats pour les domaines à des utilisateurs non autorisés. Pour qu’une autorité de certification émette un certificat portant ce nom commun, la plupart des utilisateurs doivent acheter un domaine auprès d’un bureau d’enregistrement ou disposer d’une autorisation d’administrateur de domaine.
 
-Pour plus d’informations sur la façon de configurer le service DNS afin de résoudre votre domaine en adresse IP Microsoft, examinez comment configurer [Azure DNS pour héberger votre domaine](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns).
+Pour plus d’informations sur la façon de configurer le service DNS afin de résoudre votre domaine en adresse IP Microsoft, examinez comment configurer [Azure DNS pour héberger votre domaine](../dns/dns-delegate-domain-azure-dns.md).
 
 > [!NOTE]
 > Après avoir délégué vos serveurs de noms de domaine à vos serveurs de noms de zone Azure DNS, ajoutez les deux enregistrements suivants à votre zone DNS :
@@ -106,7 +106,7 @@ Pour mettre à jour votre portail afin d’afficher un nom DNS personnalisé pou
 
 Les valeurs courantes chiffrées dans les packages Service Fabric sont, entre autres, les informations d’identification d’Azure Container Registry (ACR), les variables d’environnement, les paramètres et les clés de compte de stockage du plug-in Volume d’Azure.
 
-Pour [configurer un certificat de chiffrement et chiffrer des secrets sur des clusters Windows](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-secret-management-windows) :
+Pour [configurer un certificat de chiffrement et chiffrer des secrets sur des clusters Windows](./service-fabric-application-secret-management-windows.md) :
 
 Générez un certificat auto-signé pour chiffrer votre secret :
 
@@ -122,7 +122,7 @@ Chiffrez votre secret à l’aide de la commande PowerShell suivante, puis mette
 Invoke-ServiceFabricEncryptText -CertStore -CertThumbprint "<thumbprint>" -Text "mysecret" -StoreLocation CurrentUser -StoreName My
 ```
 
-Pour [configurer un certificat de chiffrement et chiffrer des secrets sur des clusters Linux.](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-secret-management-linux) :
+Pour [configurer un certificat de chiffrement et chiffrer des secrets sur des clusters Linux.](./service-fabric-application-secret-management-linux.md) :
 
 Générez un certificat auto-signé pour chiffrer vos secrets :
 
@@ -141,7 +141,7 @@ user@linux:$ iconv -f ASCII -t UTF-16LE plaintext.txt -o plaintext_UTF-16.txt
 user@linux:$ openssl smime -encrypt -in plaintext_UTF-16.txt -binary -outform der TestCert.pem | base64 > encrypted.txt
 ```
 
-Après avoir chiffré vos valeurs protégées, [spécifiez les secrets chiffrés dans l’application Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-secret-management#specify-encrypted-secrets-in-an-application), et [déchiffrez les secrets chiffrés à partir du code de service](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-secret-management#decrypt-encrypted-secrets-from-service-code).
+Après avoir chiffré vos valeurs protégées, [spécifiez les secrets chiffrés dans l’application Service Fabric](./service-fabric-application-secret-management.md#specify-encrypted-secrets-in-an-application), et [déchiffrez les secrets chiffrés à partir du code de service](./service-fabric-application-secret-management.md#decrypt-encrypted-secrets-from-service-code).
 
 ## <a name="include-certificate-in-service-fabric-applications"></a>Inclure un certificat dans les applications Service Fabric
 
@@ -157,9 +157,9 @@ Pour permettre à votre application d’accéder aux secrets, incluez le certifi
 ```
 ## <a name="authenticate-service-fabric-applications-to-azure-resources-using-managed-service-identity-msi"></a>Authentifier les applications Service Fabric auprès de ressources Azure à l’aide de MSI (Managed Service Identity)
 
-Pour en savoir plus sur les identités managées pour les ressources Azure, consultez [Que sont les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/overview.md#how-does-the-managed-identities-for-azure-resources-work)
-Les clusters Azure Service Fabric sont hébergés sur des groupes de machines virtuelles identiques qui prennent en charge [Managed Service Identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/services-support-msi#azure-services-that-support-managed-identities-for-azure-resources).
-Pour obtenir la liste des services avec lesquels vous pouvez utiliser MSI pour l’authentification, consultez [Services Azure prenant en charge l’authentification Azure Active Directory](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/services-support-msi#azure-services-that-support-azure-ad-authentication).
+Pour en savoir plus sur les identités managées pour les ressources Azure, consultez [Que sont les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/overview.md)
+Les clusters Azure Service Fabric sont hébergés sur des groupes de machines virtuelles identiques qui prennent en charge [Managed Service Identity](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-managed-identities-for-azure-resources).
+Pour obtenir la liste des services avec lesquels vous pouvez utiliser MSI pour l’authentification, consultez [Services Azure prenant en charge l’authentification Azure Active Directory](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-azure-ad-authentication).
 
 
 Pour activer une identité managée affectée par le système pendant la création d’un groupe de machines virtuelles identiques ou dans un groupe de machines virtuelles identiques existant, déclarez la propriété `"Microsoft.Compute/virtualMachinesScaleSets"` suivante :
@@ -169,9 +169,9 @@ Pour activer une identité managée affectée par le système pendant la créati
     "type": "SystemAssigned"
 }
 ```
-Pour plus d’informations, consultez [Que sont les identités managées pour les ressources Azure ?](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-template-windows-vmss#system-assigned-managed-identity)
+Pour plus d’informations, consultez [Que sont les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/qs-configure-template-windows-vmss.md#system-assigned-managed-identity)
 
-Si vous avez créé une [identité managée affectée par l’utilisateur](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-arm#create-a-user-assigned-managed-identity), déclarez la ressource suivante dans votre modèle pour l’affecter à votre groupe de machines virtuelles identiques. Remplacez `\<USERASSIGNEDIDENTITYNAME\>` par le nom de l’identité managée affectée par l’utilisateur que vous avez créée :
+Si vous avez créé une [identité managée affectée par l’utilisateur](../active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-arm.md#create-a-user-assigned-managed-identity), déclarez la ressource suivante dans votre modèle pour l’affecter à votre groupe de machines virtuelles identiques. Remplacez `\<USERASSIGNEDIDENTITYNAME\>` par le nom de l’identité managée affectée par l’utilisateur que vous avez créée :
 
 ```json
 "identity": {
@@ -191,7 +191,7 @@ principalid=$(az resource show --id /subscriptions/<YOUR SUBSCRIPTON>/resourceGr
 az role assignment create --assignee $principalid --role 'Contributor' --scope "/subscriptions/<YOUR SUBSCRIPTION>/resourceGroups/<YOUR RG>/providers/<PROVIDER NAME>/<RESOURCE TYPE>/<RESOURCE NAME>"
 ```
 
-Dans le code de votre application Service Fabric, [obtenez un jeton d’accès](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token#get-a-token-using-http) pour Azure Resource Manager à l’aide d’une REST similaire à la suivante :
+Dans le code de votre application Service Fabric, [obtenez un jeton d’accès](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md#get-a-token-using-http) pour Azure Resource Manager à l’aide d’une REST similaire à la suivante :
 
 ```bash
 access_token=$(curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -H Metadata:true | python -c "import sys, json; print json.load(sys.stdin)['access_token']")
@@ -205,10 +205,10 @@ L’exemple suivant montre comment faire pour une ressource Cosmos DB :
 cosmos_db_password=$(curl 'https://management.azure.com/subscriptions/<YOUR SUBSCRIPTION>/resourceGroups/<YOUR RG>/providers/Microsoft.DocumentDB/databaseAccounts/<YOUR ACCOUNT>/listKeys?api-version=2016-03-31' -X POST -d "" -H "Authorization: Bearer $access_token" | python -c "import sys, json; print(json.load(sys.stdin)['primaryMasterKey'])")
 ```
 ## <a name="windows-security-baselines"></a>Lignes de base de la sécurité Windows
-[Nous vous recommandons d’implémenter une configuration répondant aux normes du secteur largement connue et bien testée, telle que des lignes de base de sécurité Microsoft, plutôt que de créer une ligne de base vous-même](https://docs.microsoft.com/windows/security/threat-protection/windows-security-baselines) ; une option pour l’approvisionnement sur vos groupes de machines virtuelles identiques consiste à utiliser le gestionnaire d’extension DSC (Desired State Configuration) pour configurer les machines virtuelles comme elles sont fournies en ligne, afin qu’elles exécutent le logiciel en production.
+[Nous vous recommandons d’implémenter une configuration répondant aux normes du secteur largement connue et bien testée, telle que des lignes de base de sécurité Microsoft, plutôt que de créer une ligne de base vous-même](/windows/security/threat-protection/windows-security-baselines) ; une option pour l’approvisionnement sur vos groupes de machines virtuelles identiques consiste à utiliser le gestionnaire d’extension DSC (Desired State Configuration) pour configurer les machines virtuelles comme elles sont fournies en ligne, afin qu’elles exécutent le logiciel en production.
 
 ## <a name="azure-firewall"></a>Pare-feu Azure
-[Pare-feu Azure est un service de sécurité réseau informatique managé qui protège vos ressources Réseau virtuel Azure. Il s’agit d’un service de pare-feu entièrement avec état, pourvu d’une haute disponibilité intégrée et de l’extensibilité du cloud sans limites.](https://docs.microsoft.com/azure/firewall/overview) ; cela permet de limiter le trafic HTTP/S sortant à une liste spécifiée des noms de domaine complet (FQDN), y compris les caractères génériques. Cette fonctionnalité ne nécessite pas d'arrêt TLS/SSL. Nous vous recommandons d’exploiter les [balises FQDN Pare-feu Azure](https://docs.microsoft.com/azure/firewall/fqdn-tags) pour Windows Update et pour activer le trafic réseau pour que les points de terminaison Microsoft Windows Update puissent transiter par votre pare-feu. [Déployer Pare-feu Azure à l’aide d’un modèle](https://docs.microsoft.com/azure/firewall/deploy-template) propose un exemple de définition de modèle de ressource Microsoft.Network/azureFirewalls. Les règles de pare-feu communes aux applications Service Fabric autorisent notamment les éléments suivants pour votre réseau virtuel de clusters :
+[Pare-feu Azure est un service de sécurité réseau informatique managé qui protège vos ressources Réseau virtuel Azure. Il s’agit d’un service de pare-feu entièrement avec état, pourvu d’une haute disponibilité intégrée et de l’extensibilité du cloud sans limites.](../firewall/overview.md) ; cela permet de limiter le trafic HTTP/S sortant à une liste spécifiée des noms de domaine complet (FQDN), y compris les caractères génériques. Cette fonctionnalité ne nécessite pas d'arrêt TLS/SSL. Nous vous recommandons d’exploiter les [balises FQDN Pare-feu Azure](../firewall/fqdn-tags.md) pour Windows Update et pour activer le trafic réseau pour que les points de terminaison Microsoft Windows Update puissent transiter par votre pare-feu. [Déployer Pare-feu Azure à l’aide d’un modèle](../firewall/deploy-template.md) propose un exemple de définition de modèle de ressource Microsoft.Network/azureFirewalls. Les règles de pare-feu communes aux applications Service Fabric autorisent notamment les éléments suivants pour votre réseau virtuel de clusters :
 
 - *download.microsoft.com
 - *servicefabric.azure.com
@@ -217,11 +217,16 @@ cosmos_db_password=$(curl 'https://management.azure.com/subscriptions/<YOUR SUBS
 Ces règles de pare-feu complètent vos groupes de sécurité réseau sortant autorisés, comprenant Service Fabric et Stockage, en tant que destinations autorisées depuis votre réseau virtuel.
 
 ## <a name="tls-12"></a>TLS 1.2
-[TSG](https://github.com/Azure/Service-Fabric-Troubleshooting-Guides/blob/master/Security/TLS%20Configuration.md)
+
+Microsoft [Azure recommande](https://azure.microsoft.com/updates/azuretls12/) à tous les clients d’effectuer une migration complète vers des solutions qui prennent en charge le protocole TLS (Transport Layer Security) 1.2 et de s’assurer que TLS 1.2 est utilisé par défaut.
+
+Les services Azure, y compris [Service Fabric](https://techcommunity.microsoft.com/t5/azure-service-fabric/microsoft-azure-service-fabric-6-3-refresh-release-cu1-notes/ba-p/791493), ont terminé le travail d’ingénierie visant à supprimer les dépendances envers les protocoles TLS 1.0/1.1, et offrent une prise en charge complète aux clients qui souhaitent que leurs charges de travail soient configurées pour accepter et établir uniquement des connexions TLS 1.2.
+
+Les clients doivent configurer leurs charges de travail hébergées sur Azure et leurs applications locales qui interagissent avec les services Azure de sorte qu’elles utilisent TLS 1.2 par défaut. Voici comment [configurer des nœuds de cluster et des applications Service Fabric](https://github.com/Azure/Service-Fabric-Troubleshooting-Guides/blob/master/Security/TLS%20Configuration.md) pour utiliser une version TLS spécifique.
 
 ## <a name="windows-defender"></a>Windows Defender 
 
-Par défaut, l’antivirus Windows Defender est installé sur Windows Server 2016. Pour plus d’informations, consultez [Antivirus Windows Defender sur Windows Server 2016](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016). L’interface utilisateur est installée par défaut sur certaines références SKU, mais elle n’est pas obligatoire. Pour réduire l’impact sur les performances et la consommation de ressources de Windows Defender, et si vos stratégies de sécurité vous permettent d’exclure des processus et des chemins pour les logiciels open-source, déclarez les propriétés suivantes du modèle Resource Manager de l’extension de groupe de machines virtuelles identiques pour exclure votre cluster Service Fabric des analyses :
+Par défaut, l’antivirus Windows Defender est installé sur Windows Server 2016. Pour plus d’informations, consultez [Antivirus Windows Defender sur Windows Server 2016](/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-on-windows-server-2016). L’interface utilisateur est installée par défaut sur certaines références SKU, mais elle n’est pas obligatoire. Pour réduire l’impact sur les performances et la consommation de ressources de Windows Defender, et si vos stratégies de sécurité vous permettent d’exclure des processus et des chemins pour les logiciels open-source, déclarez les propriétés suivantes du modèle Resource Manager de l’extension de groupe de machines virtuelles identiques pour exclure votre cluster Service Fabric des analyses :
 
 
 ```json

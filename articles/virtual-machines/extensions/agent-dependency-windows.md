@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 03/29/2019
 ms.author: magoedte
-ms.openlocfilehash: 27d43af2d5860d287d8b5914379747ae528db34b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82edc70befb7fce95869b238d26c9154ec999c7b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226913"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966834"
 ---
 # <a name="azure-monitor-dependency-virtual-machine-extension-for-windows"></a>Extension de machine virtuelle Azure Monitor Dependency pour Windows
 

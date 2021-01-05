@@ -5,20 +5,20 @@
   items:
     - name: Déployer une machine virtuelle Ubuntu avec Docker
       href: 'https://azure.microsoft.com/resources/templates/docker-simple-on-ubuntu/'
-- name: Tutoriels
+- name: Didacticiels
   items:
     - name: Application web Python avec Docker et PostgreSQL
-      href: ../app-service/containers/tutorial-python-postgresql-app.md?toc=%2fazure%2fpostgresql%2ftoc.json
+      href: ../app-service/tutorial-python-postgresql-app.md?toc=%2fazure%2fpostgresql%2ftoc.json
     - name: 'CI/CD avec Docker, Jenkins et Linux'
-      href: /azure/jenkins/tutorial-jenkins-github-docker-cicd
+      href: /azure/developer/jenkins/pipeline-with-github-and-docker
 - name: Guides pratiques
   items:
     - name: Extension de machine virtuelle Docker
-      href: /azure/virtual-machines/linux/dockerextension
+      href: 'https://github.com/Azure/azure-docker-extension/blob/master/README.md'
     - name: Machine Docker
-      href: /azure/virtual-machines/linux/docker-machine
+      href: ../virtual-machines/linux/docker-machine.md
     - name: Registre de conteneurs Docker
-      href: /azure/container-registry/container-registry-get-started-portal
+      href: ../container-registry/container-registry-get-started-portal.md
 - name: Ressources
   items:
     - name: Feuille de route Azure

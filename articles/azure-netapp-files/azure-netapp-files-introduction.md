@@ -1,6 +1,6 @@
 ---
 title: Qu’est-ce qu’Azure NetApp Files | Microsoft Docs
-description: Fournit une vue d’ensemble d’Azure NetApp Files et de ses principales tâches.
+description: Apprenez-en davantage sur Azure NetApp Files, un service de stockage de fichiers professionnel limité, hautes performances et hautement disponible, qui prend en charge n’importe quel type de charge de travail.
 services: azure-netapp-files
 documentationcenter: ''
 author: b-juche
@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: overview
 ms.date: 03/28/2018
 ms.author: b-juche
-ms.openlocfilehash: 33a90f876f5ce35b52bb2d5625fa9d91a0a33dee
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4ad556a6c720cb4eaac9a0c9cdf5c4346e2aa857
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "65522991"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87512939"
 ---
 # <a name="what-is-azure-netapp-files"></a>Présentation d’Azure NetApp Files
 

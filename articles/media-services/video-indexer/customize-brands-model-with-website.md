@@ -9,13 +9,13 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
-ms.author: anzaman
-ms.openlocfilehash: 81df3897dff13823e4b97e10bc91d3a22b0e1b0f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kumud
+ms.openlocfilehash: 5bd88493324867dc957922a732506f5cfb8bbc20
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128040"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91361232"
 ---
 # <a name="customize-a-brands-model-with-the-video-indexer-website"></a>Personnaliser un modèle de marques avec le site web Video Indexer
 
@@ -24,7 +24,7 @@ Video Indexer prend en charge la détection de marques dans les messages vocaux 
 Un modèle de marques personnalisé vous permet d’effectuer les opérations suivantes :
 
 - Sélectionnez cette option si vous souhaitez que Video Indexer détecte des marques dans la base de données des marques Bing.
-- Sélectionnez cette option si vous souhaitez que Video Indexer empêche certaines marques d’être détectées (en créant essentiellement une liste noire de marques).
+- Sélectionnez cette option si vous souhaitez que Video Indexer empêche certaines marques d’être détectées (en créant essentiellement une liste rouge de marques).
 - Sélectionnez cette option si vous souhaitez que Video Indexer inclue les marques qui doivent faire partie de votre modèle qui ne se trouvent pas nécessairement dans la base de données des marques de Bing (en créant essentiellement une liste verte de marques).
 
 Pour un aperçu détaillé, consultez cette [Vue d’ensemble](customize-brands-model-overview.md).
@@ -42,7 +42,7 @@ Vous pouvez déterminer si vous souhaitez ou non que les marques de la base de d
 
 3. Pour modifier des marques, sélectionnez l'onglet **Marques**.
 
-    ![Personnaliser un modèle de marques dans Video Indexer](./media/customize-brand-model/customize-brand-model.png)
+    ![Capture d’écran représentant l’onglet Marques de la boîte de dialogue Personnalisation du modèle de contenu.](./media/customize-brand-model/customize-brand-model.png)
 
 4. Activez la case à cocher **Afficher les marques suggérées par Bing** si vous souhaitez que Video Indexer détecte les marques suggérées par Bing : laissez l’option désactivée dans le cas contraire.
 
@@ -54,7 +54,7 @@ La section **Inclure des marques** représente les marques personnalisées que v
 
 1. Sélectionnez **+ Ajouter une marque**.
 
-    ![Personnaliser un modèle de marques dans Video Indexer](./media/customize-brand-model/add-brand.png)
+    ![Capture d’écran représentant la boîte de dialogue Include brands (Inclure des marques), dans laquelle vous pouvez ajouter des marques.](./media/customize-brand-model/add-brand.png)
 
     Indiquez un nom (obligatoire), une catégorie (facultatif), une description (facultatif) et une URL de référence (facultatif).
     Le champ Catégorie a pour but de vous aider à étiqueter vos marques. Ce champ apparaît sous la forme d'*étiquettes* de la marque lors de l'utilisation des API Video Indexer. Par exemple, la marque « Azure » peut être étiquetée ou classée dans la catégorie « Cloud ».

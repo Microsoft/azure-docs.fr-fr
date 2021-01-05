@@ -4,12 +4,12 @@ description: Dans cet article, vous apprendrez à créer et gérer des stratégi
 ms.topic: conceptual
 ms.date: 08/21/2018
 ms.assetid: 5ffc4115-0ae5-4b85-a18c-8a942f6d4870
-ms.openlocfilehash: 0718ebc3612f53f1c2cc279096dd92de69bb5ef6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e4e6f5b5cf28c3830a91a494ea60680eee1546f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76963850"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89179604"
 ---
 # <a name="create-azure-recovery-services-backup-policies-using-rest-api"></a>Créer des stratégies de sauvegarde Azure Recovery Services à l’aide de l’API REST
 
@@ -133,7 +133,7 @@ La stratégie indique ce qui suit :
 
 ## <a name="responses"></a>Réponses
 
-La création/mise à jour de la stratégie de sauvegarde est une [opération asynchrone](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
+La création/mise à jour de la stratégie de sauvegarde est une [opération asynchrone](../azure-resource-manager/management/async-operations.md). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
 
 Elle retourne deux réponses : 202 (Accepté) lors de la création d’une autre opération, puis 200 (OK) quand cette opération est terminée.
 

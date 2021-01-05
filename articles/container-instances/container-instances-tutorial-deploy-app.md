@@ -3,13 +3,13 @@ title: Tutoriel - Déployer une application de conteneur sur une instance de co
 description: Tutoriel Azure Container Instances (partie 3 sur 3) - Déployer une application conteneur sur Azure Container Instances
 ms.topic: tutorial
 ms.date: 03/21/2018
-ms.custom: seodec18, mvc
-ms.openlocfilehash: 757b41bd69d69deb901e3b5b9a633dce3b9e133a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: seodec18, mvc, devx-track-azurecli
+ms.openlocfilehash: 2ea3d285f00d38df84587d9a7c15242fff38453b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78249971"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87500570"
 ---
 # <a name="tutorial-deploy-a-container-application-to-azure-container-instances"></a>Tutoriel : Déployer une application conteneur sur Azure Container Instances
 

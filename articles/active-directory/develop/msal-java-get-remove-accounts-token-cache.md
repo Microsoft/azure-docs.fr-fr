@@ -7,18 +7,18 @@ author: sangonzal
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 11/07/2019
 ms.author: sagonzal
 ms.reviewer: navyasri.canumalla
-ms.custom: aaddev
-ms.openlocfilehash: 2b138678b186cc41b76254658ad604c2da2d76c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: aaddev, devx-track-java
+ms.openlocfilehash: fc039e06c8c9d75608b60c2f48e86bc5503e5aec
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76696195"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96344859"
 ---
 # <a name="get-and-remove-accounts-from-the-token-cache-using-msal-for-java"></a>Obtenir et supprimer des comptes du cache de jeton à l’aide de MSAL pour Java
 
@@ -39,7 +39,7 @@ Set<IAccount> accounts = pca.getAccounts().join();
 
 ## <a name="remove-accounts-from-the-cache"></a>Supprimer des comptes du cache
 
-Pour supprimer un compte du cache, recherchez le compte qui doit être supprimé, puis appelez `PublicClientApplicatoin.removeAccount()`, comme indiqué dans l’exemple suivant :
+Pour supprimer un compte du cache, recherchez le compte qui doit être supprimé, puis appelez `PublicClientApplication.removeAccount()`, comme indiqué dans l’exemple suivant :
 
 ```java
 Set<IAccount> accounts = pca.getAccounts().join();

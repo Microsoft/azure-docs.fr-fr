@@ -1,21 +1,18 @@
 ---
 title: Utilisez le portail Azure pour créer des rubriques et des abonnements Service Bus
 description: 'Démarrage rapide : Dans ce guide de démarrage rapide, vous allez apprendre à créer une rubrique Service Bus et des abonnements à cette rubrique à l’aide du portail Azure.'
-services: service-bus-messaging
 author: spelluru
-manager: timlt
-ms.service: service-bus-messaging
 ms.topic: quickstart
-ms.date: 01/16/2020
+ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: a1e330a62a58daaa3fb2a2e8758d14791a3208c1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 749ba3d2947dfd7defdf2549305f2a61c16ba713
+ms.sourcegitcommit: 6a770fc07237f02bea8cc463f3d8cc5c246d7c65
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76260818"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95803284"
 ---
-# <a name="quickstart-use-the-azure-portal-to-create-a-service-bus-topic-and-subscriptions-to-the-topic"></a>Démarrage rapide : utiliser le portail Azure pour créer une rubrique Service Bus et des abonnements à cette rubrique
+# <a name="use-the-azure-portal-to-create-a-service-bus-topic-and-subscriptions-to-the-topic"></a>utiliser le portail Azure pour créer une rubrique Service Bus et des abonnements à cette rubrique
 Dans ce guide de démarrage rapide, vous utilisez le portail Azure pour créer une rubrique Service Bus, puis des abonnements à cette rubrique. 
 
 ## <a name="what-are-service-bus-topics-and-subscriptions"></a>Présentation des rubriques et des abonnements Service Bus
@@ -35,7 +32,11 @@ Les rubriques et les abonnements Service Bus vous permettent de mettre votre inf
 > Vous pouvez gérer les ressources Service Bus à l'aide de [Service Bus Explorer](https://github.com/paolosalvatori/ServiceBusExplorer/). Service Bus Explorer permet aux utilisateurs de se connecter à un espace de noms Service Bus et de gérer les entités de messagerie en toute simplicité. L’outil fournit des fonctionnalités avancées telles que la fonction d’importation/exportation ou la possibilité de tester une rubrique, des files d’attente, des abonnements, des services de relais, des hubs de notification et des hubs d’événements. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour savoir comment envoyer des messages à une rubrique et recevoir ces messages par le biais d’un abonnement, consultez l’article correspondant au langage de programmation de votre choix dans la table des matières. 
+Dans cet article, vous avez créé un espace de noms Service Bus, une rubrique dans l’espace de noms et trois abonnements à la rubrique. Pour savoir comment publier des messages dans la rubrique et s’abonner aux messages provenant d’un abonnement, consultez un des guides de démarrage rapide suivants dans la section **Publier et s’abonner à des messages**. 
 
-> [!div class="nextstepaction"]
-> [Publier et s’abonner à des messages](service-bus-dotnet-how-to-use-topics-subscriptions.md)
+- [.NET](service-bus-dotnet-how-to-use-topics-subscriptions.md)
+- [Java](service-bus-java-how-to-use-topics-subscriptions.md)
+- [JavaScript](service-bus-nodejs-how-to-use-topics-subscriptions.md)
+- [Python](service-bus-python-how-to-use-topics-subscriptions.md)
+- [PHP](service-bus-php-how-to-use-topics-subscriptions.md)
+- [Ruby](service-bus-ruby-how-to-use-topics-subscriptions.md)

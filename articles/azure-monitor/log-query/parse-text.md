@@ -6,15 +6,15 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 12/04/2018
-ms.openlocfilehash: d7a37d51c411488231205fd036f9a287f5206ce5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c76cf939959d198d2c28181295a695a65ae46af9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77672444"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86505701"
 ---
 # <a name="parse-text-data-in-azure-monitor-logs"></a>Analyser des données de texte dans les journaux d’activité Azure Monitor
-Certaines données de journal collectées par Azure Monitor incluront plusieurs informations au sein d'une même propriété. L’analyse de ces données dans plusieurs propriétés simplifie leur utilisation dans des requêtes. Un exemple courant est le [journal personnalisé](../../log-analytics/log-analytics-data-sources-custom-logs.md) qui collecte une entrée de journal entière avec plusieurs valeurs dans une seule propriété. En créant des propriétés distinctes pour les différentes valeurs, vous pouvez faire des recherches et des agrégations sur chacune d’elles.
+Certaines données de journal collectées par Azure Monitor incluront plusieurs informations au sein d'une même propriété. L’analyse de ces données dans plusieurs propriétés simplifie leur utilisation dans des requêtes. Un exemple courant est le [journal personnalisé](../platform/data-sources-custom-logs.md) qui collecte une entrée de journal entière avec plusieurs valeurs dans une seule propriété. En créant des propriétés distinctes pour les différentes valeurs, vous pouvez faire des recherches et des agrégations sur chacune d’elles.
 
 Cet article décrit différentes options pour l'analyse des données de journal dans Azure Monitor lorsque les données sont ingérées et lorsqu'elles sont extraites par une requête, en comparant les avantages de chacune.
 
@@ -23,7 +23,7 @@ Cet article décrit différentes options pour l'analyse des données de journal 
 Vous pouvez analyser les données au moment de l’ingestion (lorsqu’elles sont collectées) ou bien lors de la requête (lorsqu’elles sont analysées avec une requête). Chaque stratégie présente ses propres avantages, comme décrit ci-dessous.
 
 ### <a name="parse-data-at-collection-time"></a>Analyser les données au moment de la collection
-Lorsque vous analysez des données au moment de la collection, vous configurez des [champs personnalisés](../../log-analytics/log-analytics-custom-fields.md) qui créent de nouvelles propriétés au sein de la table. Les requêtes n’ont pas nécessairement besoin d’inclure une logique d’analyse et elles utilisent simplement ces propriétés comme n’importe quel autre champ de la table.
+Lorsque vous analysez des données au moment de la collection, vous configurez des [champs personnalisés](../platform/custom-fields.md) qui créent de nouvelles propriétés au sein de la table. Les requêtes n’ont pas nécessairement besoin d’inclure une logique d’analyse et elles utilisent simplement ces propriétés comme n’importe quel autre champ de la table.
 
 Les avantages de cette méthode sont les suivants :
 

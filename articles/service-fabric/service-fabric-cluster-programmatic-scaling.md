@@ -5,12 +5,13 @@ author: mjrousos
 ms.topic: conceptual
 ms.date: 01/23/2018
 ms.author: mikerou
-ms.openlocfilehash: bd7c57f3089115e4da861fc8fd20331ab92bc33e
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9f39bd874c1f5a1be42ca1c88e6ea2fe8df22f87
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82787105"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94648206"
 ---
 # <a name="scale-a-service-fabric-cluster-programmatically"></a>Mettre à l’échelle un cluster Service Fabric par programmation 
 
@@ -20,7 +21,7 @@ Les clusters Service Fabric s’exécutant dans Azure s’appuient sur les group
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="manage-credentials"></a>Gérer les informations d’identification
-Un service chargé de gérer la mise à l’échelle doit pouvoir accéder aux ressources d’un groupe de machines virtuelles identiques, sans ouverture de session interactive. L’accès au cluster Service Fabric est simple si le service de mise à l’échelle modifie sa propre application Service Fabric, mais des informations d’identification sont nécessaires pour accéder au groupe identique. Pour vous connecter, vous pouvez utiliser un [principal de service](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) créé avec [Azure CLI](https://github.com/azure/azure-cli).
+Un service chargé de gérer la mise à l’échelle doit pouvoir accéder aux ressources d’un groupe de machines virtuelles identiques, sans ouverture de session interactive. L’accès au cluster Service Fabric est simple si le service de mise à l’échelle modifie sa propre application Service Fabric, mais des informations d’identification sont nécessaires pour accéder au groupe identique. Pour vous connecter, vous pouvez utiliser un [principal de service](/cli/azure/create-an-azure-service-principal-azure-cli) créé avec [Azure CLI](https://github.com/azure/azure-cli).
 
 Pour créer un principal de service, procédez comme suit :
 
@@ -59,7 +60,7 @@ var newCapacity = (int)Math.Min(MaximumNodeCount, scaleSet.Capacity + 1);
 scaleSet.Update().WithCapacity(newCapacity).Apply(); 
 ``` 
 
-Il est également possible de gérer la taille des groupes de machines virtuelles identiques avec des applets de commande PowerShell. [`Get-AzVmss`](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss) peut récupérer l’objet groupe de machines virtuelles identiques. La capacité actuelle peut être connue par le biais de la propriété `.sku.capacity`. Une fois la capacité fixée à la valeur souhaitée, il est possible de mettre à jour le groupe de machines virtuelles identiques dans Azure avec la commande [`Update-AzVmss`](https://docs.microsoft.com/powershell/module/az.compute/update-azvmss).
+Il est également possible de gérer la taille des groupes de machines virtuelles identiques avec des applets de commande PowerShell. [`Get-AzVmss`](/powershell/module/az.compute/get-azvmss) peut récupérer l’objet groupe de machines virtuelles identiques. La capacité actuelle peut être connue par le biais de la propriété `.sku.capacity`. Une fois la capacité fixée à la valeur souhaitée, il est possible de mettre à jour le groupe de machines virtuelles identiques dans Azure avec la commande [`Update-AzVmss`](/powershell/module/az.compute/update-azvmss).
 
 Lorsque vous ajoutez manuellement un nœud, l’ajout d’une instance de groupe identique doit suffire pour démarrer un nouveau nœud Service Fabric, car le modèle de groupe identique contient des extensions pour ajouter automatiquement des instances au cluster Service Fabric. 
 
@@ -120,5 +121,5 @@ await client.ClusterManager.RemoveNodeStateAsync(mostRecentLiveNode.NodeName);
 Pour commencer à implémenter votre propre logique de mise à l’échelle automatique, vous devez vous familiariser avec les API utiles et les concepts suivants :
 
 - [Augmenter ou diminuer la taille des instances d’un cluster Service Fabric à l’aide de règles de mise à l’échelle automatique](./service-fabric-cluster-scale-in-out.md)
-- [Bibliothèques Azure Management fluides pour .NET](https://github.com/Azure/azure-sdk-for-net/tree/Fluent) (utiles pour interagir avec les groupes de machines virtuelles identiques sous-jacents d’un cluster Service Fabric)
-- [System.Fabric.FabricClient](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient) (utile pour interagir avec un cluster Service Fabric et ses nœuds)
+- [Bibliothèques Azure Management pour .NET](https://github.com/Azure/azure-libraries-for-net) (utiles pour interagir avec les groupes de machines virtuelles identiques sous-jacents d’un cluster Service Fabric)
+- [System.Fabric.FabricClient](/dotnet/api/system.fabric.fabricclient) (utile pour interagir avec un cluster Service Fabric et ses nœuds)

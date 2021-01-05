@@ -1,19 +1,19 @@
 ---
 title: 'Tutoriel : Concevoir un serveur - Azure PowerShell - Azure Database pour MySQL'
 description: Ce tutoriel explique comment créer et gérer un serveur et une base de données Azure Database pour MySQL à l’aide de PowerShell.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.devlang: azurepowershell
 ms.topic: tutorial
 ms.date: 04/29/2020
-ms.custom: mvc
-ms.openlocfilehash: 6bb3c25d4d4d24e626ad210c78c6ac64c560e43e
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: fd8294d60ed0af4e8d1eeb8a3cd07c737b69aadd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613905"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011453"
 ---
 # <a name="tutorial-design-an-azure-database-for-mysql-using-powershell"></a>Tutoriel : Concevoir une base de données Azure Database pour MySQL à l’aide de PowerShell
 
@@ -54,7 +54,7 @@ Set-AzContext -SubscriptionId 00000000-0000-0000-0000-000000000000
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un [groupe de ressources Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) avec l’applet de commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
+Créez un [groupe de ressources Azure](../azure-resource-manager/management/overview.md) avec l’applet de commande [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
 
 L’exemple suivant crée un groupe de ressources nommé **myresourcegroup** dans la région **USA Ouest**.
 
@@ -207,6 +207,24 @@ Les valeurs d’emplacement et de niveau tarifaire du serveur restauré restent 
 Une fois la restauration terminée, recherchez le nouveau serveur et vérifiez que les données ont été restaurées correctement. Le nouveau serveur a les mêmes nom de connexion et mot de passe d’administrateur de serveur que ceux valides pour le serveur existant au moment du démarrage de la restauration. Le mot de passe peut être modifié sur la page **Vue d’ensemble** du nouveau serveur.
 
 Le nouveau serveur créé lors d’une restauration ne dispose pas des points de terminaison de service de réseau virtuel qui se trouvaient sur le serveur d’origine. Ces règles doivent être configurées séparément pour le nouveau serveur. Les règles de pare-feu du serveur d’origine sont restaurées.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous n’avez pas besoin des ressources que vous avez créées dans ce tutoriel pour un autre guide de démarrage rapide ou tutoriel, vous pouvez les supprimer en exécutant l’exemple suivant.
+
+> [!CAUTION]
+> L’exemple suivant supprime le groupe de ressources spécifié et toutes les ressources qu’il contient.
+> Si des ressources en dehors du cadre de ce tutoriel existent dans le groupe de ressources spécifié, elles seront également supprimées.
+
+```azurepowershell-interactive
+Remove-AzResourceGroup -Name myresourcegroup
+```
+
+Pour supprimer uniquement le serveur créé dans ce tutoriel sans supprimer le groupe de ressources, utilisez l’applet de commande `Remove-AzMySqlServer`.
+
+```azurepowershell-interactive
+Remove-AzMySqlServer -Name mydemoserver -ResourceGroupName myresourcegroup
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 

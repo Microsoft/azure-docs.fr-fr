@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 27e46af7-2150-45e8-b084-ba33de8c5e3f
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 02/14/2017
 ms.author: mimckitt
-ms.openlocfilehash: f226e240a59b33c2913919495410b1a4923b4902
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 813fc7db2a028590797bef1c54fff20b231c3d7d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81261667"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965899"
 ---
 # <a name="network-watcher-agent-virtual-machine-extension-for-windows"></a>Extension de machine virtuelle Agent Network Watcher pour Windows
 
@@ -34,7 +35,7 @@ Ce document présente les plateformes et options de déploiement prises en charg
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-L’extension Agent Network Watcher pour Windows peut être exécutée sur Windows Server 2008 R2, 2012, 2012 R2 et 2016. Nano Server n’est pas pris en charge pour le moment.
+L’extension Agent Network Watcher pour Windows peut être exécutée sur Windows Server 2008 R2, 2012, 2012 R2, 2016 et 2019. Nano Server n’est pas pris en charge pour le moment.
 
 ### <a name="internet-connectivity"></a>Connectivité Internet
 

@@ -1,18 +1,19 @@
 ---
 title: Gérer les règles de pare-feu - Azure CLI - Azure Database for MariaDB
 description: Cet article explique comment créer et gérer des règles de pare-feu Azure Database for MariaDB à l’aide de l'interface de ligne de commande Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/18/2020
-ms.openlocfilehash: 898b65f07140bca04bd97ff7314b01920b783914
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: ef04e2b4c820c14ea7df6c35ecb0189ef31ef7dc
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79530629"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94540897"
 ---
 # <a name="create-and-manage-azure-database-for-mariadb-firewall-rules-by-using-the-azure-cli"></a>Créer et gérer des règles de pare-feu Azure Database for MariaDB à l’aide de l'interface de ligne de commande Azure
 Les règles de pare-feu au niveau du serveur sont utiles pour gérer l’accès à un serveur Azure Database for MariaDB à partir d’une adresse IP spécifique ou d’une plage d’adresses IP. À l’aide de commandes d’interface de ligne de commande Azure pratiques, vous pouvez créer, mettre à jour, supprimer, répertorier et afficher les règles de pare-feu pour gérer votre serveur. Pour avoir une vue d’ensemble des pare-feu Azure Database for MariaDB, consultez [Règles de pare-feu Azure Database for MariaDB](./concepts-firewall-rules.md).
@@ -20,7 +21,7 @@ Les règles de pare-feu au niveau du serveur sont utiles pour gérer l’accès 
 Des règles de réseau virtuel (VNet) peuvent également être utilisées pour sécuriser l'accès à votre serveur. Découvrez-en plus sur [la création et la gestion des règles et des points de terminaison de service de réseau virtuel à l'aide d'Azure CLI](howto-manage-vnet-cli.md).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
-* [Installez l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli).
+* [Installez l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 * Un [serveur Azure Database for MariaDB et une base de données](quickstart-create-mariadb-server-database-using-azure-cli.md).
 
 ## <a name="firewall-rule-commands"></a>Commandes de règle de pare-feu :

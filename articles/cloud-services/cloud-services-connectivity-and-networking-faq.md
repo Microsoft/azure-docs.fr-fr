@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 08/23/2018
 ms.author: genli
-ms.openlocfilehash: 7caeba0e88f63106eae80f7142b5d65463f8d7a7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d8f57cc16cad4c0b081478932f820c983e4bbdc7
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77019398"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92070025"
 ---
 # <a name="connectivity-and-networking-issues-for-azure-cloud-services-frequently-asked-questions-faqs"></a>Problèmes de connectivité et de mise en réseau pour Azure Cloud Services : questions fréquentes (FAQ)
 
@@ -40,7 +40,7 @@ Non, pas en utilisant le test « ping » normal/protocole ICMP. Le protocole I
 
 Pour tester la connectivité, nous vous recommandons d’effectuer un test ping au niveau du port. Si Ping.exe utilise le protocole ICMP (Internet Control Message Protocol), d’autres outils tels que PSPing, Nmap et telnet permettent de tester la connectivité à un port TCP spécifique.
 
-Pour plus d’informations, consultez [Use port pings instead of ICMP to test Azure VM connectivity](https://blogs.msdn.microsoft.com/mast/2014/06/22/use-port-pings-instead-of-icmp-to-test-azure-vm-connectivity/) (Tester la connectivité des machines virtuelles Azure à l’aide de tests ping au niveau du port à la place d’ICMP).
+Pour plus d’informations, consultez [Use port pings instead of ICMP to test Azure VM connectivity](/archive/blogs/mast/use-port-pings-instead-of-icmp-to-test-azure-vm-connectivity) (Tester la connectivité des machines virtuelles Azure à l’aide de tests ping au niveau du port à la place d’ICMP).
 
 ## <a name="how-do-i-prevent-receiving-thousands-of-hits-from-unknown-ip-addresses-that-might-indicate-a-malicious-attack-to-the-cloud-service"></a>Comment éviter de recevoir des milliers d’accès en provenance d’adresses IP inconnues qui portent à croire que le service cloud est la cible d’une attaque malveillante ?
 Azure met en œuvre une sécurité réseau multicouche pour protéger ses services de plateforme contre les attaques par déni de service distribué (DDoS). Le système de défense Azure DDoS fait partie intégrante du processus de surveillance continu d’Azure, qui est constamment amélioré à l’aide de tests de pénétration. Ce système de défense DDoS est conçu non seulement pour résister aux attaques extérieures, mais aussi à celles perpétrées par d’autres locataires Azure. Pour plus d’informations, voir [Sécurité du réseau Azure](https://download.microsoft.com/download/C/A/3/CA3FC5C0-ECE0-4F87-BF4B-D74064A00846/AzureNetworkSecurity_v3_Feb2015.pdf).
@@ -67,7 +67,7 @@ L’algorithme de distribution utilisé est un hachage 5-tuple (adresse IP sourc
 
 Le module de réécriture d’URL d’IIS permet de rediriger le trafic arrivant sur l’URL par défaut du service cloud (par exemple, \*. cloudapp.net) vers un nom ou une URL personnalisés. Étant donné que le module de réécriture d’URL est activé par défaut sur les rôles web et que ses règles sont configurées dans le fichier web.config de l’application, il est toujours disponible sur la machine virtuelle, quel que soit le nombre de redémarrages ou de réinitialisations. Pour plus d’informations, voir :
 
-- [Créer des règles de réécriture pour le module de réécriture d’URL](https://docs.microsoft.com/iis/extensions/url-rewrite-module/creating-rewrite-rules-for-the-url-rewrite-module)
+- [Créer des règles de réécriture pour le module de réécriture d’URL](/iis/extensions/url-rewrite-module/creating-rewrite-rules-for-the-url-rewrite-module)
 - [Supprimer un lien par défaut](https://stackoverflow.com/questions/32286487/azure-website-how-to-remove-default-link?answertab=votes#tab-top)
 
 ## <a name="how-can-i-blockdisable-incoming-traffic-to-the-default-url-of-my-cloud-service"></a>Comment bloquer/désactiver le trafic entrant sur l’URL par défaut de mon service cloud ?
@@ -99,7 +99,7 @@ Vous pouvez bloquer le trafic entrant via l’URL/le nom par défaut de votre se
 
 ## <a name="how-can-i-make-sure-the-public-facing-ip-address-of-a-cloud-service-never-changes"></a>Comment m’assurer que l’adresse IP publique d’un service cloud ne change jamais ?
 
-Pour vous assurer que l’adresse IP publique de votre service cloud (également appelée adresse IP virtuelle) ne change jamais afin qu’elle puisse être mise en liste verte de façon ordinaire par quelques clients spécifiques, nous vous recommandons d’y associer une adresse IP réservée. Autrement, l’adresse IP virtuelle fournie par Azure est désallouée de votre abonnement si vous supprimez le déploiement. Pour que l’opération d’échange d’adresses IP virtuelles réussisse, vous devez disposer d’adresses IP réservées pour les emplacement de production et préproduction. À défaut, l’opération d’échange échoue. Pour réserver une adresse IP et l’associer à votre service cloud, suivez les instructions des articles suivants  :
+Pour vous assurer que l’adresse IP publique de votre service cloud (également appelée adresse IP virtuelle) ne change jamais afin qu’elle puisse être approuvée de façon ordinaire par quelques clients spécifiques, nous vous recommandons d’y associer une adresse IP réservée. Autrement, l’adresse IP virtuelle fournie par Azure est désallouée de votre abonnement si vous supprimez le déploiement. Pour que l’opération d’échange d’adresses IP virtuelles réussisse, vous devez disposer d’adresses IP réservées pour les emplacement de production et préproduction. À défaut, l’opération d’échange échoue. Pour réserver une adresse IP et l’associer à votre service cloud, suivez les instructions des articles suivants  :
 
 - [Réserver l’adresse IP d’un service cloud existant](/previous-versions/azure/virtual-network/virtual-networks-reserved-public-ip#reserve-the-ip-address-of-an-existing-cloud-service)
 - [Associer une adresse IP réservée à un service cloud à l’aide d’un fichier de configuration de service](/previous-versions/azure/virtual-network/virtual-networks-reserved-public-ip#associate-a-reserved-ip-to-a-cloud-service-by-using-a-service-configuration-file)

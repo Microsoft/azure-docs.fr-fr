@@ -9,18 +9,18 @@ ms.subservice: azuread-dev
 ms.workload: identity
 ms.tgt_pltfrm: android
 ms.devlang: java
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
 ms.author: ryanwi
 ms.reviewer: brandwe, jmprieur
-ms.custom: aaddev
+ms.custom: aaddev, devx-track-java
 ROBOTS: NOINDEX
-ms.openlocfilehash: 0b87a9cd0ae29281faad4209f4449d547921835d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9d1faf7aed5cf4c4975925c7a56d169dc99a7bd5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154812"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87313589"
 ---
 # <a name="how-to-enable-cross-app-sso-on-android-using-adal"></a>Procédure : activer l’authentification unique entre applications sur Android à l’aide de la bibliothèque ADAL
 

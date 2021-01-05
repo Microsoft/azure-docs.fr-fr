@@ -5,20 +5,20 @@ description: Apprenez à affecter des adresses IP à une machine virtuelle à l�
 services: virtual-network
 documentationcenter: na
 author: asudbring
-ms.custom: seodec18
+ms.custom: seodec18, devx-track-azurecli
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/25/2018
 ms.author: allensu
-ms.openlocfilehash: 69d324647af014a5122c404929c104a9077d5f13
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 06dfa65236bf1aa5cfde626c5574ffdf487eb045
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74225302"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94698357"
 ---
 # <a name="load-balancing-on-multiple-ip-configurations-using-azure-cli"></a>Équilibrage de charge sur plusieurs configurations IP avec Azure CLI
 
@@ -30,7 +30,7 @@ Cet article décrit comment utiliser Azure Load Balancer avec plusieurs adresses
 
 Pour accomplir le scénario décrit dans cet article, suivez les étapes ci-dessous :
 
-1. [Installez et configurez l’interface Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) en suivant les étapes de l’article lié, puis connectez-vous au compte Azure.
+1. [Installez et configurez l’interface Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) en suivant les étapes de l’article lié, puis connectez-vous au compte Azure.
 2. [Créez un groupe de ressources](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-resource-group) appelé *contosofabrikam*, comme suit :
 
     ```azurecli

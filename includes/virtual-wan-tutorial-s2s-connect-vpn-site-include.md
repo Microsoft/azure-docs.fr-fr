@@ -5,30 +5,30 @@ services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: include
-ms.date: 11/04/2019
+ms.date: 10/08/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 8b338f25e9771f5947fd494cfb00d0f6cb9ef67a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 2f5f653fdaf9df5d1bb2cf87d06047510ad46d7b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75450825"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91856713"
 ---
 1. Sélectionnez **Connecter des sites VPN** pour ouvrir la page **Connecter des sites**.
 
-    ![connect](./media/virtual-wan-tutorial-connect-vpn-site-include/connect.png "se connecter")
+    ![Capture d’écran montrant le volet Sites connectés pour le hub virtuel, prêt pour une clé prépartagée et les paramètres associés.](./media/virtual-wan-tutorial-connect-vpn-site-include/connect.png "se connecter")
 
    Renseignez les champs suivants :
 
    * Entrez une clé prépartagée. Si vous n’entrez pas de clé, Azure en génère automatiquement une pour vous.
-   * Sélectionnez les paramètres Protocole et IPsec. Pour plus d’informations, consultez « Stratégies IPsec par défaut » (https://docs.microsoft.com/azure/virtual-wan/virtual-wan-ipsec)
+   * Sélectionnez les paramètres Protocole et IPsec. Pour plus d’informations, consultez [IPsec par défaut/personnalisé](../articles/virtual-wan/virtual-wan-ipsec.md).
    * Sélectionnez l’option appropriée pour **Propager l’itinéraire par défaut**. L’option **Activer** permet au hub virtuel de propager un itinéraire par défaut appris à cette connexion. Cet indicateur active la propagation de l’itinéraire par défaut à une connexion uniquement si l’itinéraire par défaut est déjà appris par le hub Virtual WAN suite au déploiement d’un pare-feu dans le hub, ou si le tunneling forcé est activé sur un autre site connecté. L’itinéraire par défaut ne provient pas du hub Virtual WAN.
 
 2. Sélectionnez **Connecter**.
 3. En quelques minutes, le site affiche la connexion et l’état de la connectivité.
 
-   ![statut](./media/virtual-wan-tutorial-connect-vpn-site-include/status.png "status")
+   ![Capture d’écran montrant une connexion de site à site VPN et un état de connectivité.](./media/virtual-wan-tutorial-connect-vpn-site-include/status.png "status")
 
    **État de la connexion :** Il s’agit de l’état de la ressource Azure pour la connexion qui connecte le site VPN à la passerelle VPN du hub Azure. Une fois cette opération de plan de contrôle réussie, la passerelle VPN Azure et le périphérique VPN local continuent d’établir la connectivité.
 

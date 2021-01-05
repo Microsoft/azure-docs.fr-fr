@@ -1,24 +1,22 @@
 ---
-title: Windows Virtual Desktop PowerShell – Azure
-description: Comment résoudre des problèmes avec PowerShell quand vous configurez un environnement de locataire Windows Virtual Desktop.
-services: virtual-desktop
+title: Windows Virtual Desktop (classique) PowerShell – Azure
+description: Comment résoudre des problèmes avec PowerShell quand vous configurez un environnement de locataire Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: de3933b1686b433a720e78d89bd3e50c0ce5e5dd
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 23d1e4b06c9c0278742da0cec8ac565b5f80a362
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614290"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88004913"
 ---
-# <a name="windows-virtual-desktop-powershell"></a>Windows Virtual Desktop PowerShell
+# <a name="windows-virtual-desktop-classic-powershell"></a>Windows Virtual Desktop (classique) PowerShell
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../troubleshoot-powershell.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../troubleshoot-powershell.md).
 
 Cet article vous aide à résoudre des problèmes et erreurs rencontrés lors de l’utilisation de PowerShell avec Windows Virtual Desktop. Pour plus d’informations sur les Services Bureau à distance PowerShell, voir [Windows Virtual Desktop Powershell](/powershell/module/windowsvirtualdesktop/).
 
@@ -62,7 +60,7 @@ Get-RdsDiagnosticActivities -ActivityId <ActivityId>
 
 **Cause :** paramètre -TenantName
 
-**Correctif :** Émettez Get-RdsDiagnosticActivities avec -TenantName \<TenantName>.
+**Correctif :** &mettez Get-RdsDiagnosticActivities avec -TenantName \<TenantName>.
 
 ### <a name="error-get-rdsdiagnosticactivities----the-user-isnt-authorized-to-query-the-management-service"></a>Erreur : Get-RdsDiagnosticActivities : l’utilisateur n’est pas autorisé à interroger le service de gestion
 

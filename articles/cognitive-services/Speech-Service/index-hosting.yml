@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/23/2020
   ms.author: trbye
-  ms.openlocfilehash: 640c1b8e9c51059bc4c296ef93a4e6dd54ea7a42
-  ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+  ms.openlocfilehash: 028116979a700ebe04a6e008be38656204b2ce2f
+  ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "81401510"
+  ms.lasthandoff: 11/21/2020
+  ms.locfileid: "95015431"
 landingContent:
 - title: À propos de l’hébergement
   linkLists:
@@ -33,7 +33,7 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Créer une ressource Azure Speech
-      url: get-started.md#new-resource
+      url: ./overview.md#try-the-speech-service-for-free
     - text: Configurer des conteneurs Speech
       url: speech-container-configuration.md
 - title: Informations de référence
@@ -46,3 +46,9 @@ landingContent:
       url: sovereign-clouds.md
     - text: Questions fréquentes (FAQ) sur les conteneurs
       url: speech-container-faq.md
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

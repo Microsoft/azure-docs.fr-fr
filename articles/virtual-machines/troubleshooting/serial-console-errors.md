@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm
 ms.workload: infrastructure-services
 ms.date: 8/20/2019
 ms.author: alsin
-ms.openlocfilehash: 61ae0ef92fe522a2a038a6076a5e0c0a10ee47b6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cad12a55332a6c7898f9709776c58d7dba8dd81a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80060691"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022834"
 ---
 # <a name="common-errors-within-the-azure-serial-console"></a>Erreurs courantes au sein de la console série Azure
 Il existe un ensemble d’erreurs connues au sein de la console série Azure. Voici une liste de ces erreurs et des étapes d’atténuation pour celles-ci.
@@ -40,7 +40,7 @@ Unable to determine the resource group for the boot diagnostics storage account 
 L’approvisionnement pour cette machine virtuelle n’a pas encore réussi. Vérifiez que la machine virtuelle est entièrement déployée et recommencez la connexion à la console série. | Il se peut que votre machine virtuelle ou votre groupe de machines virtuelles identiques soit toujours en cours d’approvisionnement. Patientez quelques instants, puis réessayez.
 WebSocket est fermé ou n’a pas pu être ouvert. | Vous devrez peut-être ajouter l’accès du pare-feu à `*.console.azure.com`. Une approche plus détaillée mais plus longue consiste à autoriser l’accès du pare-feu aux [plages d’adresses IP du centre de Microsoft Azure](https://www.microsoft.com/download/details.aspx?id=41653), qui changent assez régulièrement.
 La console série ne fonctionne pas avec un compte de stockage utilisant Azure Data Lake Storage Gen2 avec des espaces de noms hiérarchiques. | Il s’agit d’un problème connu avec les espaces de noms hiérarchiques. Pour atténuer ce problème, vérifiez que le compte de stockage des diagnostics de démarrage de la machine virtuelle n’est pas créé avec Azure Data Lake Storage Gen2. Cette option peut être définie seulement lors de la création du compte de stockage. Vous devrez peut-être créer un compte de stockage des diagnostics de démarrage distinct sans Azure Data Lake Storage Gen2 pour atténuer ce problème.
-Une erreur s’est produite lors de la connexion de la console série à la machine virtuelle : 'Forbidden'(SubscriptionNotEnabled) - Subscription name undefined, id \<subscription id> is in non-Enabled state undefined | Ce problème peut se produire si l’abonnement dans lequel un utilisateur a créé son compte de stockage Cloud Shell a été désactivé. Pour atténuer le problème, lancez Cloud Shell et [effectuez les étapes nécessaires](https://docs.microsoft.com/azure/cloud-shell/persisting-shell-storage#unmount-clouddrive-1) afin de réapprovisionner un compte de stockage de sauvegarde pour Cloud Shell dans l’abonnement actuel.
+Une erreur s’est produite lors de la connexion de la console série à la machine virtuelle : ’Forbidden’(SubscriptionNotEnabled) - Nom d’abonnement non défini, l’id \<subscription id> est dans un état non activé non défini | Ce problème peut se produire si l’abonnement dans lequel un utilisateur a créé son compte de stockage Cloud Shell a été désactivé. Pour atténuer le problème, lancez Cloud Shell et [effectuez les étapes nécessaires](../../cloud-shell/persisting-shell-storage.md#unmount-clouddrive-1) afin de réapprovisionner un compte de stockage de sauvegarde pour Cloud Shell dans l’abonnement actuel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur la [console série Azure pour les machines virtuelles Linux](./serial-console-linux.md)

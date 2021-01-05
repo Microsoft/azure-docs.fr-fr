@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer TheOrgWiki pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et désapprovisionner automatiquement des comptes d’utilisateur dans TheOrgWiki.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 5eb2096e-f7b6-4a56-a814-0f3d0e788063
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: 2b0b11ae89e1f0d150b84f49b04a8badcb44e82c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8238b9902aafcabc079c551a0eabc7170042209a
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77063140"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94357621"
 ---
 # <a name="tutorial-configure-theorgwiki-for-automatic-user-provisioning"></a>Tutoriel : Configurer TheOrgWiki pour l’approvisionnement automatique d’utilisateurs
 
@@ -59,23 +55,23 @@ Avant de configurer TheOrgWiki pour l’approvisionnement automatique d’utilis
 
 1. Connectez-vous à votre [console d’administration TheOrgWiki](https://www.theorgwiki.com/login/). Cliquez sur **Console d’administration**.
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/login.png)
+    ![Capture d’écran du site d’OrgWiki avec l’avatar de l’utilisateur et la console d’administration en évidence.](media/theorgwiki-provisioning-tutorial/login.png)
 
 2. Dans la console d’administration, cliquez sur **l’onglet Paramètres**. 
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/settings.png)
+    ![Capture d’écran de la console d’administration d’OrgWiki avec l’onglet Paramètres en évidence.](media/theorgwiki-provisioning-tutorial/settings.png)
     
 3. Accédez à **Comptes de service**.
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/serviceaccount.png)
+    ![Capture d’écran de la page Comptes de service dans la console d’administration d’OrgWiki.](media/theorgwiki-provisioning-tutorial/serviceaccount.png)
 
-4. Cliquez sur **+ Compte de service**. Sous **Type de compte de service**, sélectionnez **Basé sur un jeton**. Cliquez sur **Enregistrer**.
+4. Cliquez sur **+ Compte de service**. Sous **Type de compte de service** , sélectionnez **Basé sur un jeton**. Cliquez sur **Enregistrer**.
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/auth.png)
+    ![Capture d’écran de la boîte de dialogue Nouveau compte de service avec les options Type de compte de service, Basé sur un jeton et Enregistrer en évidence.](media/theorgwiki-provisioning-tutorial/auth.png)
 
 5.  Copiez les **Jetons actifs**. Vous devrez entrer cette valeur dans le champ Jeton secret dans l’onglet Approvisionnement de votre application TheOrgWiki dans le portail Microsoft Azure.
      
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/token.png)
+    ![Capture d’écran de la boîte de dialogue Gérer les jetons pour l’approvisionnement SCIM.](media/theorgwiki-provisioning-tutorial/token.png)
 
 ## <a name="add-theorgwiki-from-the-gallery"></a>Ajouter TheOrgWiki à partir de la galerie
 
@@ -85,7 +81,7 @@ Avant de configurer TheOrgWiki pour l’approvisionnement automatique d’utilis
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -93,21 +89,21 @@ Avant de configurer TheOrgWiki pour l’approvisionnement automatique d’utilis
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **TheOrgWiki**, puis sélectionnez **TheOrgWiki** dans le volet de résultats. 
+4. Dans la zone de recherche, entrez **TheOrgWiki** , puis sélectionnez **TheOrgWiki** dans le volet de résultats. 
 
     ![TheOrgWiki dans la liste des résultats](common/search-new-app.png)
 
 5. Sélectionnez le bouton **S’inscrire à TheOrgWiki** qui vous redirigera vers la page de connexion de TheOrgWiki. 
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/image00.png)
+    ![Capture d’écran de la page de connexion d’OrgWiki avec l’URL en évidence.](media/theorgwiki-provisioning-tutorial/image00.png)
 
 6.  Dans le coin supérieur droit, sélectionnez **Connexion**.
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/image02.png)
+    ![Capture d’écran de l’angle supérieur droit de la page de connexion avec l’option Connexion en évidence.](media/theorgwiki-provisioning-tutorial/image02.png)
 
 7. Comme TheOrgWiki est une application OpenIDConnect, choisissez de vous connecter à OrgWiki à l’aide de votre compte professionnel Microsoft.
 
-    ![Ajouter SCIM TheOrgWiki](media/theorgwiki-provisioning-tutorial/image03.png)
+    ![Capture d’écran de la page de connexion d’OrgWiki avec l’option Se connecter avec Microsoft en évidence.](media/theorgwiki-provisioning-tutorial/image03.png)
     
 8. Après une authentification réussie, l’application est automatiquement ajoutée à votre locataire et vous êtes redirigé vers votre compte TheOrgWiki.
 
@@ -120,7 +116,7 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 ### <a name="to-configure-automatic-user-provisioning-for-theorgwiki-in-azure-ad"></a>Pour configurer l’attribution automatique d’utilisateurs pour TheOrgWiki dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -130,34 +126,34 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<TheOrgWiki Subdomain        value>.theorgwiki.com/api/v2/scim/v2/` dans **URL de locataire**. 
+5. Dans la section **Informations d’identification de l’administrateur** , entrez `https://<TheOrgWiki Subdomain        value>.theorgwiki.com/api/v2/scim/v2/` dans **URL de locataire**. 
 
     Exemple : `https://test1.theorgwiki.com/api/v2/scim/v2/`
 
 > [!NOTE]
 > La **Valeur de sous-domaine** ne peut être définie qu’au cours du processus d’inscription initial à TheOrgWiki.
  
-6. Entrez la valeur de jeton dans le champ **Jeton secret**, récupérée précédemment sur TheOrgWiki. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à TheOrgWiki. Si la connexion échoue, vérifiez que votre compte TheOrgWiki dispose des autorisations d’administrateur, puis réessayez.
+6. Entrez la valeur de jeton dans le champ **Jeton secret** , récupérée précédemment sur TheOrgWiki. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à TheOrgWiki. Si la connexion échoue, vérifiez que votre compte TheOrgWiki dispose des autorisations d’administrateur, puis réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-7. Dans le champ **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+7. Dans le champ **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 8. Cliquez sur **Enregistrer**.
 
-9. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur TheOrgWiki**.
+9. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur TheOrgWiki**.
 
     ![Mappages utilisateur TheOrgWiki](media/theorgwiki-provisioning-tutorial/usermapping.png)
 
-10. Dans la section **Mappage d’attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et TheOrgWiki. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans TheOrgWiki pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+10. Dans la section **Mappage d’attributs** , passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et TheOrgWiki. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans TheOrgWiki pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Attributs utilisateur TheOrgWiki](media/theorgwiki-provisioning-tutorial/userattribute.png).
 

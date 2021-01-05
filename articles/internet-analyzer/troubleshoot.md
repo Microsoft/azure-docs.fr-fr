@@ -4,15 +4,15 @@ description: Informations de référence sur la résolution des problèmes pour 
 services: internet-analyzer
 author: diego-perez-botero
 ms.service: internet-analyzer
-ms.topic: guide
+ms.topic: troubleshooting
 ms.date: 12/04/2019
 ms.author: dibotero
-ms.openlocfilehash: a265278652c16b4682707470d183a02a55b9a0ec
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fe173ec4d4f28444d43739ea2ed51e43021916b1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77069215"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84744355"
 ---
 # <a name="azure-internet-analyzer-troubleshooting"></a>Résolution des problèmes liés à Azure Internet Analyzer
 
@@ -25,7 +25,7 @@ Cet article présente les étapes à suivre pour résoudre les problèmes couran
 ## <a name="azure-portal"></a>Portail Azure
 **« Aucune carte de performance n’a été générée pour la combinaison de filtres sélectionnée » dans la section Cartes de performance**
 - Les cartes de performance sont générées tous les jours (à la fin de chaque jour, heure UTC).
-- Les cartes de performance sont générées seulement si plus de 100 mesures sont collectées pour la combinaison de filtres sélectionnée (test, période, pays, etc.).
+- Les cartes de performance sont générées seulement si plus de 100 mesures sont collectées pour la combinaison de filtres sélectionnée (test, période, pays/région, etc.).
 
 **Le « Nombre total de mesures » est égal à zéro pour l’un ou les deux points de terminaison d’un test**
 - Les séries chronologiques et les nombres de mesures étant générés une fois par heure, vous devez patienter au moins ce délai pour que les nouvelles données de mesure s’affichent.

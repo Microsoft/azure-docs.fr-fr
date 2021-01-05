@@ -2,20 +2,18 @@
 title: Fichier include
 description: Fichier include
 services: cognitive-services
-author: diberry
 manager: nitinme
-ms.custom: include file
+ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.date: 02/14/2020
 ms.topic: include
-ms.author: diberry
-ms.openlocfilehash: 8aef4a5eeeec27bfb2ca3edf9ff6823b88431319
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 5eb2517b4b71b61dd70406f345c005d007d9e3ef
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83591831"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535953"
 ---
 L’entité pattern.any vous permet de rechercher des données en forme libre où le libellé de l’entité ne permet pas de distinguer la fin de l’entité du reste de l’énoncé.
 

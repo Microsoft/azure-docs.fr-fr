@@ -9,10 +9,10 @@ ms.topic: article
 ms.date: 01/14/2020
 ms.author: danlep
 ms.openlocfilehash: f3294698f6973437a23fab798e8daf5642cc9b49
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77111770"
 ---
 # <a name="use-an-azure-managed-identity-in-acr-tasks"></a>Utiliser une identité managée Azure dans ACR Tasks 

@@ -13,18 +13,18 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/19/2019
 ms.author: allensu
-ms.openlocfilehash: d3bd1156de4aed7d1ea5c530605697f2dc80d63c
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 6f089af71e4d32023e9cebd6613872f7db0eed7a
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80476983"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94694957"
 ---
 # <a name="high-availability-ports-overview"></a>Vue d’ensemble des ports haute disponibilité
 
-Azure Standard Load Balancer vous permet d’équilibrer la charge des flux TCP et UDP sur tous les ports simultanément quand vous utilisez un équilibreur de charge interne. 
+Azure Standard Load Balancer vous permet d’équilibrer la charge de **tous** les flux sur **tous** les ports simultanément quand vous utilisez un équilibreur de charge interne via des ports HA.
 
-Une règle d’équilibrage de charge des ports haute disponibilité (HA) est une variante de règle d’équilibrage de charge configurée sur un équilibreur Standard Load Balancer interne. Vous pouvez simplifier l’utilisation d’un équilibreur de charge en fournissant une seule règle pour équilibrer la charge de tous les flux TCP et UDP qui arrivent sur tous les ports d’un équilibreur de charge standard interne. La décision d’équilibrage de charge est prise par flux. Cette action est basée sur la connexion à 5 tuples suivante : adresse IP source, port source, adresse IP de destination, port de destination et protocole
+Les ports à haute disponibilité (HA) sont un type de règle d’équilibrage de charge qui offre un moyen simple d’équilibrer la charge de **tous** les flux qui arrivent sur **tous** les ports d’un Standard Load Balancer interne. La décision d’équilibrage de charge est prise par flux. Cette action est basée sur la connexion à 5 tuples suivante : adresse IP source, port source, adresse IP de destination, port de destination et protocole
 
 Les règles d’équilibrage de charge des ports haute disponibilité sont utiles dans les scénarios critiques, comme pour la haute disponibilité et la mise à l’échelle d’appliances virtuelles réseau dans des réseaux virtuels. La fonctionnalité peut également servir quand un grand nombre de ports doit avoir une charge équilibrée. 
 
@@ -54,7 +54,7 @@ Le diagramme suivant présente un déploiement de réseau virtuel hub-and-spoke.
 
 ### <a name="load-balancing-large-numbers-of-ports"></a>Équilibrage de charge d’un grand nombre de ports
 
-Vous pouvez aussi utiliser des ports haute disponibilité pour les applications qui nécessitent l’équilibrage de charge d’un grand nombre de ports. Vous pouvez simplifier ces scénarios à l’aide d’un [équilibreur de charge standard](load-balancer-standard-overview.md) interne avec des ports haute disponibilité. Une seule règle d’équilibrage de charge remplace plusieurs règles individuelles d’équilibrage de charge, une pour chaque port.
+Vous pouvez aussi utiliser des ports haute disponibilité pour les applications qui nécessitent l’équilibrage de charge d’un grand nombre de ports. Vous pouvez simplifier ces scénarios à l’aide d’un [équilibreur de charge standard](./load-balancer-overview.md) interne avec des ports haute disponibilité. Une seule règle d’équilibrage de charge remplace plusieurs règles individuelles d’équilibrage de charge, une pour chaque port.
 
 ## <a name="region-availability"></a>Disponibilité des régions
 
@@ -87,20 +87,16 @@ Si votre scénario nécessite la configuration de plusieurs frontends de ports h
 
 ### <a name="an-internal-load-balancer-with-ha-ports-and-a-public-load-balancer-on-the-same-back-end-instance"></a>Équilibreur de charge interne avec ports haute disponibilité et équilibreur de charge public sur la même instance backend
 
-Vous pouvez configurer *une* ressource d’équilibreur de charge standard public pour les ressources backend ainsi qu’un seul équilibreur de charge standard interne avec des ports haute disponibilité.
-
->[!NOTE]
->Cette fonctionnalité est actuellement disponible via les modèles Azure Resource Manager, mais pas via le portail Azure.
+Vous pouvez configurer *une* ressource Standard Load Balancer publique pour les ressources de serveur principal, ainsi qu’un seul équilibreur de charge standard interne avec des ports haute disponibilité.
 
 ## <a name="limitations"></a>Limites
 
 - Les règles d’équilibrage de charge des ports haute disponibilité sont utilisables uniquement avec l’équilibreur Standard Load Balancer interne.
-- La combinaison d’une règle d’équilibrage de charge de ports haute disponibilité et d’une règle d’équilibrage de charge de ports sans haute disponibilité pointant vers les mêmes configurations IP back-end n’est pas prise en charge.
+- La combinaison d’une règle d’équilibrage de charge de ports haute disponibilité et d’une règle d’équilibrage de charge de ports sans haute disponibilité pointant vers les mêmes configurations IP back-end n’est **pas** prise en charge dans une seule configuration Adresse IP du front-end sauf si l’adresse IP flottante est activée pour les deux.
 - Les fragments IP existants sont transférés par les règles d’équilibrage de charge des ports haute disponibilité vers la même destination que le premier paquet.  La fragmentation IP d’un paquet UDP ou TCP n’est pas prise en charge.
 - La symétrie des flux (principalement pour les scénarios d'appliance virtuelle réseau) est prise en charge avec l'instance du serveur back-end et une seule carte réseau (ainsi qu'une seule configuration IP) uniquement en cas d'utilisation tel qu'indiqué dans le diagramme ci-dessus et avec les règles d'équilibrage de charge des ports haute disponibilité. Elle n’est pas fournie dans les autres scénarios. Autrement dit, plusieurs ressources Load Balancer et leurs règles respectives prennent des décisions indépendantes et ne sont jamais coordonnées. Consultez la description et le diagramme des [appliances virtuelles réseau](#nva). Lorsque vous utilisez plusieurs cartes réseau ou insérez l’appliance virtuelle réseau entre un équilibreur de charge public et l’équilibreur de charge Load Balancer interne, la symétrie des flux n’est pas disponible.  Vous serez peut-être en mesure de contourner ce problème en approvisionnant la traduction d’adresses réseau du flux d’entrée vers l’adresse IP de l’appliance pour autoriser la réception de réponses sur la même appliance virtuelle réseau.  Toutefois, nous vous recommandons vivement d'utiliser une seule carte réseau et l'architecture de référence présentée dans le diagramme ci-dessus.
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Configurer des ports haute disponibilité sur un équilibreur de charge standard interne](load-balancer-configure-ha-ports.md)
-- [Présentation de la référence Standard d’Azure Load Balancer (préversion)](load-balancer-standard-overview.md)
+- [Présentation de la référence Standard d’Azure Load Balancer (préversion)](load-balancer-overview.md)

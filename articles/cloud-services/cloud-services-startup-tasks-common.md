@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: tagore
-ms.openlocfilehash: 4fe1ee3ccf2849943959889838ba0f22fb64bb9a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77cea7ebd333b958675438aaeb5e0e2a326a5866
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233801"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92075176"
 ---
 # <a name="common-cloud-service-startup-tasks"></a>Tâches courantes de démarrage dans le service cloud
 Cet article fournit des exemples courants de tâches de démarrage que vous pouvez effectuer dans votre service cloud. Vous pouvez utiliser des tâches de démarrage pour exécuter des opérations avant le démarrage d’un rôle. Parmi les opérations que vous pouvez effectuer figurent l’installation d’un composant, l’enregistrement de composants COM, la définition des clés du Registre ou le démarrage d’un processus de longue durée. 
@@ -52,7 +52,7 @@ Les variables peuvent également utiliser une [valeur Azure XPath valide](cloud-
 
 
 ## <a name="configure-iis-startup-with-appcmdexe"></a>Configurer le démarrage d’IIS avec AppCmd.exe
-L’outil de ligne de commande [AppCmd.exe](https://technet.microsoft.com/library/jj635852.aspx) peut être utilisé pour gérer les paramètres IIS au démarrage sur Azure. *AppCmd.exe* fournit un accès en ligne de commande pratique aux paramètres de configuration à utiliser dans les tâches de démarrage sur Azure. *AppCmd.exe*permet d’ajouter, de modifier ou de supprimer des paramètres de site web pour les applications et les sites.
+L’outil de ligne de commande [AppCmd.exe](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj635852(v=ws.11)) peut être utilisé pour gérer les paramètres IIS au démarrage sur Azure. *AppCmd.exe* fournit un accès en ligne de commande pratique aux paramètres de configuration à utiliser dans les tâches de démarrage sur Azure. *AppCmd.exe*permet d’ajouter, de modifier ou de supprimer des paramètres de site web pour les applications et les sites.
 
 Toutefois, tenez compte des points suivants quand vous utilisez *AppCmd.exe* en tant que tâche de démarrage :
 
@@ -377,9 +377,7 @@ EXIT /B 0
 Voici quelques meilleures pratiques à suivre quand vous configurez la tâche pour votre rôle web ou de travail.
 
 ### <a name="always-log-startup-activities"></a>Toujours consigner les activités de démarrage
-Comme Visual Studio ne fournit pas de débogueur pour parcourir les fichiers de commandes, il est préférable de récupérer autant de données que possible sur le fonctionnement des fichiers de commandes. La consignation de la sortie des fichiers de commandes, **stdout** et **stderr**, peut fournir des informations importantes au moment du débogage et de la correction des fichiers de commandes. Pour consigner **stdout** et **stderr** dans le fichier StartupLog.txt dans le répertoire indiqué par la variable d’environnement **%TEMP%** , ajoutez le texte `>>  "%TEMP%\\StartupLog.txt" 2>&1` à la fin des lignes que vous souhaitez enregistrer. Par exemple, pour exécuter setup.exe dans le répertoire **% PathToApp1Install** :
-
-    "%PathToApp1Install%\setup.exe" >> "%TEMP%\StartupLog.txt" 2>&1
+Comme Visual Studio ne fournit pas de débogueur pour parcourir les fichiers de commandes, il est préférable de récupérer autant de données que possible sur le fonctionnement des fichiers de commandes. La consignation de la sortie des fichiers de commandes, **stdout** et **stderr**, peut fournir des informations importantes au moment du débogage et de la correction des fichiers de commandes. Pour consigner **stdout** et **stderr** dans le fichier StartupLog.txt dans le répertoire indiqué par la variable d’environnement **%TEMP%** , ajoutez le texte `>>  "%TEMP%\\StartupLog.txt" 2>&1` à la fin des lignes que vous souhaitez enregistrer. Par exemple, pour exécuter setup.exe dans le répertoire **%PathToApp1Install%** : `"%PathToApp1Install%\setup.exe" >> "%TEMP%\StartupLog.txt" 2>&1`
 
 Pour simplifier votre code xml, vous pouvez créer un fichier *cmd* wrapper qui appelle toutes vos tâches de démarrage avec la journalisation et garantit que chaque tâche enfant partage les mêmes variables d’environnement.
 
@@ -483,7 +481,7 @@ Le rôle ne démarre que si le code **errorlevel** de chacune de vos tâches de 
 L’absence d’un `EXIT /B 0` à la fin d’un fichier de commandes de démarrage est une cause courante du non-démarrage des rôles.
 
 > [!NOTE]
-> J’ai remarqué que les fichiers batch imbriqués bloquent parfois lors de l’utilisation du paramètre `/B`. Vous souhaitez peut-être vous assurer que le problème de blocage ne se produit pas si un autre fichier batch appelle votre fichier batch actuel, comme lors de l’utilisation du [wrapper de journal](#always-log-startup-activities). Vous pouvez omettre le paramètre `/B` dans ce cas.
+> J’ai remarqué que les fichiers batch imbriqués cessent parfois de répondre lors de l’utilisation du paramètre `/B`. Vous souhaitez peut-être vous assurer que ce problème ne se produit pas si un autre fichier batch appelle votre fichier batch actuel, comme lors de l’utilisation du [wrapper de journal](#always-log-startup-activities). Vous pouvez omettre le paramètre `/B` dans ce cas.
 > 
 > 
 
@@ -501,17 +499,14 @@ En savoir plus sur le fonctionnement des [tâches](cloud-services-startup-tasks.
 [Créez et déployez](cloud-services-how-to-create-deploy-portal.md) votre package de service cloud.
 
 [ServiceDefinition.csdef]: cloud-services-model-and-package.md#csdef
-[Tâche]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Task
-[Startup]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Startup
-[Runtime]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Runtime
-[Environment]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Environment
-[Variable]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Variable
-[RoleInstanceValue]: https://msdn.microsoft.com/library/azure/gg557552.aspx#RoleInstanceValue
-[RoleEnvironment]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.aspx
-[Points de terminaison]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Endpoints
-[LocalStorage]: https://msdn.microsoft.com/library/azure/gg557552.aspx#LocalStorage
-[LocalResources]: https://msdn.microsoft.com/library/azure/gg557552.aspx#LocalResources
-[RoleInstanceValue]: https://msdn.microsoft.com/library/azure/gg557552.aspx#RoleInstanceValue
-
-
-
+[Tâche]: /previous-versions/azure/reference/gg557552(v=azure.100)#Task
+[Startup]: /previous-versions/azure/reference/gg557552(v=azure.100)#Startup
+[Runtime]: /previous-versions/azure/reference/gg557552(v=azure.100)#Runtime
+[Environment]: /previous-versions/azure/reference/gg557552(v=azure.100)#Environment
+[Variable]: /previous-versions/azure/reference/gg557552(v=azure.100)#Variable
+[RoleInstanceValue]: /previous-versions/azure/reference/gg557552(v=azure.100)#RoleInstanceValue
+[RoleEnvironment]: /previous-versions/azure/reference/ee773173(v=azure.100)
+[Points de terminaison]: /previous-versions/azure/reference/gg557552(v=azure.100)#Endpoints
+[LocalStorage]: /previous-versions/azure/reference/gg557552(v=azure.100)#LocalStorage
+[LocalResources]: /previous-versions/azure/reference/gg557552(v=azure.100)#LocalResources
+[RoleInstanceValue]: /previous-versions/azure/reference/gg557552(v=azure.100)#RoleInstanceValue

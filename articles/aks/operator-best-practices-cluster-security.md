@@ -4,13 +4,13 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrir les meilleures pratiques de l’opérateur relatives à la gestion des mises à jour et de la sécurité du cluster dans Azure Kubernetes Service (AKS)
 services: container-service
 ms.topic: conceptual
-ms.date: 12/06/2018
-ms.openlocfilehash: 305d4c15aaf72a47549497902e3027064fbfd608
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 11/12/2020
+ms.openlocfilehash: ad1f14fc92433e8d9cb31de165645e4a5731f01a
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208089"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019464"
 ---
 # <a name="best-practices-for-cluster-security-and-upgrades-in-azure-kubernetes-service-aks"></a>Meilleures pratiques relatives aux mises à jour et à la sécurité du cluster dans Azure Kubernetes Service (AKS)
 
@@ -19,7 +19,7 @@ Quand vous gérez des clusters dans Azure Kubernetes Service (AKS), la sécurit�
 Cet article est dédié à la sécurisation de votre cluster AKS. Vous allez apprendre à effectuer les actions suivantes :
 
 > [!div class="checklist"]
-> * Utiliser Azure Active Directory et les contrôles d’accès en fonction du rôle pour sécuriser l’accès au serveur d’API
+> * Utiliser Azure Active Directory et le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) pour sécuriser l’accès au serveur d’API
 > * Sécuriser l’accès du conteneur aux ressources de nœud
 > * Mettre à niveau un cluster AKS avec la dernière version de Kubernetes
 > * Maintenir les nœuds à jour et appliquer automatiquement des correctifs de sécurité
@@ -30,7 +30,7 @@ Vous pouvez également utiliser [Intégration des services Azure Kubernetes avec
 
 ## <a name="secure-access-to-the-api-server-and-cluster-nodes"></a>Sécuriser l’accès aux nœuds de cluster et au serveur d’API
 
-**Meilleures pratiques** - La sécurisation de l’accès au serveur d’API Kubernetes est l’une des choses les plus importantes à faire pour protéger votre cluster. Intégrez le contrôle d’accès en fonction du rôle Kubernetes à Azure Active Directory pour contrôler l’accès au serveur d’API. Ces contrôles vous permettent de sécuriser AKS de la même façon que vous sécurisez l’accès à vos abonnements Azure.
+**Meilleures pratiques** - La sécurisation de l’accès au serveur d’API Kubernetes est l’une des choses les plus importantes à faire pour protéger votre cluster. Intégrez le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) à Azure Active Directory pour contrôler l’accès au serveur d’API. Ces contrôles vous permettent de sécuriser AKS de la même façon que vous sécurisez l’accès à vos abonnements Azure.
 
 Le serveur d’API Kubernetes propose un point de connexion unique pour que les requêtes exécutent des actions dans un cluster. Pour sécuriser et auditer l’accès au serveur d’API, limitez l’accès et proposez les autorisations d’accès avec le moins de privilèges requises. Cette approche n’est pas unique à Kubernetes, mais est particulièrement importante lorsque le cluster AKS est isolé de façon logique pour une utilisation avec plusieurs locataires.
 
@@ -38,11 +38,11 @@ Azure Active Directory (AD) fournit une solution de gestion des identités d’e
 
 ![Intégration Azure Active Directory aux clusters AKS](media/operator-best-practices-cluster-security/aad-integration.png)
 
-Utilisez l’intégration Azure AD Kubernetes et le contrôle d’accès en fonction du rôle pour sécuriser le serveur d’API et fournir le nombre minimal d’autorisations requises pour un ensemble donné de ressources, comme un espace de noms unique. Différents utilisateurs ou groupes dans Azure AD peuvent se voir accorder différents rôles de contrôle d’accès en fonction du rôle. Ces autorisations granulaires vous permettent de restreindre l’accès au serveur d’API et fournissent une piste d’audit claire des actions effectuées.
+Utilisez l’intégration Azure AD Kubernetes et le contrôle d’accès en fonction du rôle pour sécuriser le serveur d’API et fournir le nombre minimal d’autorisations requises pour un ensemble donné de ressources, comme un espace de noms unique. Différents utilisateurs ou groupes dans Azure AD peuvent se voir accorder différents rôles Kubernetes. Ces autorisations granulaires vous permettent de restreindre l’accès au serveur d’API et fournissent une piste d’audit claire des actions effectuées.
 
-La meilleure pratique recommandée consiste à utiliser des groupes pour fournir un accès aux fichiers et dossiers plutôt que des identités individuelles ; utilisez l’appartenance au *groupe* Azure AD pour lier les utilisateurs aux rôles de contrôle d’accès en fonction du rôle plutôt que des *utilisateurs* individuels. Étant donné que l’appartenance au groupe d’un utilisateur change, ses autorisations d’accès sur le cluster AKS changent en conséquence. Si vous liez l’utilisateur directement à un rôle, sa fonction peut changer. Les appartenances au groupe Azure AD peuvent être mises à jour, mais les autorisations sur le cluster AKS ne le refléteraient pas. Dans ce scénario, l’utilisateur finit par se voir accorder davantage d’autorisations que nécessaire.
+La meilleure pratique recommandée consiste à utiliser des groupes pour fournir un accès aux fichiers et dossiers plutôt que des identités individuelles ; utilisez l’appartenance au *groupe* Azure AD pour lier les utilisateurs aux rôles de contrôle d’accès en fonction des rôles Kubernetes plutôt que des *utilisateurs* individuels. Étant donné que l’appartenance au groupe d’un utilisateur change, ses autorisations d’accès sur le cluster AKS changent en conséquence. Si vous liez l’utilisateur directement à un rôle, sa fonction peut changer. Les appartenances au groupe Azure AD peuvent être mises à jour, mais les autorisations sur le cluster AKS ne le refléteraient pas. Dans ce scénario, l’utilisateur finit par se voir accorder davantage d’autorisations que nécessaire.
 
-Pour plus d’informations sur l’intégration Azure AD et RBAC, consultez les [Meilleures pratiques relatives à l’authentification et à l’autorisation dans AKS][aks-best-practices-identity].
+Pour plus d’informations sur l’intégration Azure AD, RBAC Kubernetes et RBAC Azure, consultez les [Meilleures pratiques relatives à l’authentification et à l’autorisation dans AKS][aks-best-practices-identity].
 
 ## <a name="secure-container-access-to-resources"></a>Sécuriser l’accès du conteneur aux ressources
 
@@ -53,7 +53,7 @@ De la même façon que vous devez accorder aux utilisateurs ou groupes le nombre
 Pour un contrôle plus précis des actions de conteneur, vous pouvez également utiliser les fonctionnalités de sécurité Linux intégrées telles que *AppArmor* et *seccomp*. Ces fonctionnalités sont définies au niveau du nœud, puis implémentées via un manifeste de pod. Les fonctionnalités de sécurité Linux intégrées sont disponibles sur les nœuds et les pods Linux uniquement.
 
 > [!NOTE]
-> Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas totalement sûrs pour une utilisation multi-locataire hostile. Des fonctionnalités de sécurité supplémentaires, comme *AppArmor*, *seccomp* ou des *stratégies de sécurité Pod*, ainsi que des contrôles d'accès en fonction du rôle (RBAC) plus détaillés pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés.
+> Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas totalement sûrs pour une utilisation multi-locataire hostile. Des fonctionnalités de sécurité supplémentaires, comme *AppArmor*, *seccomp* ou des *stratégies de sécurité Pod*, ainsi qu’un contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) plus détaillé pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés.
 
 ### <a name="app-armor"></a>AppArmor
 
@@ -117,7 +117,7 @@ Pour plus d’informations sur AppArmor, consultez les [Profils AppArmor dans Ku
 
 ### <a name="secure-computing"></a>Sécuriser le calcul
 
-Tandis qu’AppArmor fonctionne pour toutes les applications Linux, [seccomp (*sec*ure *comp*uting)][seccomp] agit au niveau du processus. Seccomp est également un module de sécurité du noyau Linux, pris en charge de façon native par le runtime Docker utilisé par les nœuds AKS. Avec seccomp, les appels de processus que les conteneurs peuvent effectuer sont limités. Vous créez des filtres qui définissent les actions à autoriser ou refuser, puis utilisez des annotations au sein d’un manifeste YAML de pod à associer au filtre seccomp. Cela coïncide avec la meilleure pratique consistant à accorder au conteneur uniquement les autorisations minimales devant être exécutées.
+Tandis qu’AppArmor fonctionne pour toutes les applications Linux, [seccomp (*sec* ure *comp* uting)][seccomp] agit au niveau du processus. Seccomp est également un module de sécurité du noyau Linux, pris en charge de façon native par le runtime Docker utilisé par les nœuds AKS. Avec seccomp, les appels de processus que les conteneurs peuvent effectuer sont limités. Vous créez des filtres qui définissent les actions à autoriser ou refuser, puis utilisez des annotations au sein d’un manifeste YAML de pod à associer au filtre seccomp. Cela coïncide avec la meilleure pratique consistant à accorder au conteneur uniquement les autorisations minimales devant être exécutées.
 
 Pour voir seccomp en action, créez un filtre qui empêche la modification des autorisations sur un fichier. Établissez une connexion [SSH][aks-ssh] vers un nœud AKS, puis créez un filtre seccomp nommé */var/lib/kubelet/seccomp/prevent-chmod* et collez le contenu suivant :
 
@@ -173,11 +173,11 @@ Pour plus d’informations sur les filtres disponibles, consultez les [Profils d
 
 ## <a name="regularly-update-to-the-latest-version-of-kubernetes"></a>Effectuer des mises à jour régulières vers la dernière version de Kubernetes
 
-**Meilleures pratiques** - Pour rester informé des nouvelles fonctionnalités et correctifs de bogues, effectuez des mises à jour régulières vers la version Kubernetes dans votre cluster AKS.
+**Bonnes pratiques** - Pour rester informé des nouvelles fonctionnalités et correctifs de bogues, effectuez des mises à jour régulières vers la version Kubernetes dans votre cluster AKS.
 
 Kubernetes sort de nouvelles fonctionnalités à un rythme plus effréné que les plateformes d’infrastructure plus traditionnelles. Les mises à jour Kubernetes incluent de nouvelles fonctionnalités et des correctifs de sécurité ou de bogues. En général, les nouvelles fonctionnalités passent d’un état *alpha*, puis *bêta* avant d’atteindre un état *stable* et d’être disponibles et recommandées pour une utilisation en production. Ce cycle devrait vous permettre de mettre à jour Kubernetes sans rencontrer de changements cassants ou ajuster vos déploiements et modèles.
 
-AKS prend en charge quatre versions mineures de Kubernetes. Cela signifie que, quand une nouvelle version de correctif mineure est introduite, la version mineure et les publications des correctifs les plus anciennes prises en charge sont mises hors service. Les mises à jour mineures de Kubernetes se produisent sur une base périodique. Vérifiez que vous disposez d’un processus de gouvernance pour consulter et effectuer les mises à niveau nécessaires, afin de ne pas vous retrouver sans support. Pour plus d’informations, consultez la section [Versions de Kubernetes prises en charge dans AKS][aks-supported-versions]
+AKS prend en charge trois versions mineures de Kubernetes. Cela signifie que, quand une nouvelle version de correctif mineure est introduite, la version mineure et les publications des correctifs les plus anciennes prises en charge sont mises hors service. Les mises à jour mineures de Kubernetes se produisent sur une base périodique. Vérifiez que vous disposez d’un processus de gouvernance pour consulter et effectuer les mises à niveau nécessaires, afin de ne pas vous retrouver sans support. Pour plus d’informations, consultez la section [Versions de Kubernetes prises en charge dans AKS][aks-supported-versions].
 
 Pour consulter les versions disponibles pour votre cluster, utilisez la commande [az aks get-upgrades][az-aks-get-upgrades] comme indiqué dans l’exemple suivant :
 
@@ -186,6 +186,8 @@ az aks get-upgrades --resource-group myResourceGroup --name myAKSCluster
 ```
 
 Vous pouvez ensuite mettre à niveau votre cluster AKS à l’aide de la commande [az aks upgrade][az-aks-upgrade]. Le processus de mise à niveau ferme et vide en toute sécurité un nœud à la fois, planifie les pods sur les nœuds restants, puis déploie un nouveau nœud exécutant les dernières versions de Kubernetes et du système d’exploitation.
+
+Il est vivement recommandé de tester les nouvelles versions mineures dans un environnement de développement-test, de sorte que vous puissiez vérifier que votre charge de travail continue de fonctionner normalement avec la nouvelle version de Kubernetes. Il est possible que certaines API soient déconseillées par Kubernetes, comme dans la version 1.16, sur laquelle vos charges de travail pouvaient se baser. Lors de la mise en production de nouvelles versions, envisagez d’utiliser [plusieurs pools de nœuds sur des versions distinctes](use-multiple-node-pools.md) et de mettre à niveau les pools individuels un par un pour déployer progressivement la mise à jour sur l’ensemble du cluster. Si vous exécutez plusieurs clusters, mettez-les à niveau l’un après l’autre de manière à surveiller progressivement l’impact ou les modifications.
 
 ```azurecli-interactive
 az aks upgrade --resource-group myResourceGroup --name myAKSCluster --kubernetes-version KUBERNETES_VERSION
@@ -230,9 +232,9 @@ Cet article était dédié à la sécurisation de votre cluster AKS. Pour implé
 [aks-upgrade]: upgrade-cluster.md
 [aks-best-practices-identity]: concepts-identity.md
 [aks-kured]: node-updates-kured.md
-[aks-aad]: azure-ad-integration.md
+[aks-aad]: ./azure-ad-integration-cli.md
 [best-practices-container-image-management]: operator-best-practices-container-image-management.md
 [best-practices-pod-security]: developer-best-practices-pod-security.md
 [pod-security-contexts]: developer-best-practices-pod-security.md#secure-pod-access-to-resources
 [aks-ssh]: ssh.md
-[security-center-aks]: /azure/security-center/azure-kubernetes-service-integration
+[security-center-aks]: ../security-center/defender-for-kubernetes-introduction.md

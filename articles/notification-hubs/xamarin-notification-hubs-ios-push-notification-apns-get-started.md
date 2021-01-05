@@ -6,24 +6,22 @@ keywords: notifications push iOS, messages push, notifications push, envoi de me
 documentationcenter: xamarin
 author: sethmanheim
 manager: femila
-editor: jwargo
-ms.assetid: 4d4dfd42-c5a5-4360-9d70-7812f96924d2
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-xamarin-ios
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.custom: mvc
-ms.date: 12/05/2019
+ms.custom: mvc, devx-track-csharp
+ms.date: 07/07/2020
 ms.author: sethm
-ms.reviewer: jowargo
+ms.reviewer: thsomasu
 ms.lastreviewed: 05/23/2019
-ms.openlocfilehash: 07417427385806e61db0d7d83624d923e92eb693
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7b53767aea9df2da8dbf89e26fff03c792918016
+ms.sourcegitcommit: b437bd3b9c9802ec6430d9f078c372c2a411f11f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80127006"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91893677"
 ---
 # <a name="tutorial-send-push-notifications-to-xamarinios-apps-using-azure-notification-hubs"></a>Tutoriel : Envoyer des notifications Push vers des applications Xamarin.iOS à l’aide d’Azure Notification Hubs
 
@@ -108,21 +106,21 @@ Vous devez suivre ce didacticiel avant de pouvoir suivre tous les autres didacti
         if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
         {
             UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound,
-                                                                    (granted, error) =>
-            {
-                if (granted)
-                    InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
-            });
-        } else if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
-            var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
+                                                                    (granted, error) => InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications));
+        }
+        else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+        {
+            var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
                     UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                    new NSSet ());
+                    new NSSet());
 
-            UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
-            UIApplication.SharedApplication.RegisterForRemoteNotifications ();
-        } else {
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+            UIApplication.SharedApplication.RegisterForRemoteNotifications();
+        }
+        else
+        {
             UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-            UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
+            UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
         }
 
         return true;
@@ -144,9 +142,9 @@ Vous devez suivre ce didacticiel avant de pouvoir suivre tous les autres didacti
             }
 
             NSSet tags = null; // create tags if you want
-            Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) => {
+            Hub.RegisterNative(deviceToken, tags, (errorCallback) => {
                 if (errorCallback != null)
-                    System.Diagnostics.Debug.WriteLine("RegisterNativeAsync error: " + errorCallback.ToString());
+                    System.Diagnostics.Debug.WriteLine("RegisterNative error: " + errorCallback.ToString());
             });
         });
     }
@@ -191,8 +189,9 @@ Vous devez suivre ce didacticiel avant de pouvoir suivre tous les autres didacti
                 //Manually show an alert
                 if (!string.IsNullOrEmpty(alert))
                 {
-                    UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
-                    avAlert.Show();
+                    var myAlert = UIAlertController.Create("Notification", alert, UIAlertControllerStyle.Alert);
+                    myAlert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(myAlert, true, null);
                 }
             }
         }

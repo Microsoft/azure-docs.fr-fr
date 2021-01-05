@@ -5,16 +5,16 @@ author: craigshoemaker
 ms.topic: reference
 ms.date: 02/13/2020
 ms.author: cshoe
-ms.openlocfilehash: 6950f1dd81ef2c70f2c45fb4c547ed7676067790
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e56d1add36d4296526348d12d7c0b6eb03108f27
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235085"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92104357"
 ---
 # <a name="azure-blob-storage-bindings-for-azure-functions-overview"></a>Vue d’ensemble des liaisons de Stockage Blob Azure pour Azure Functions
 
-Azure Functions s’intègre à [Stockage Azure](https://docs.microsoft.com/azure/storage/) via [des déclencheurs et des liaisons](./functions-triggers-bindings.md). L’intégration à Stockage Blob vous permet de créer des fonctions qui réagissent aux modifications de données d’objets Blob ainsi qu’à la lecture et à l’écriture de valeurs.
+Azure Functions s’intègre à [Stockage Azure](../storage/index.yml) via [des déclencheurs et des liaisons](./functions-triggers-bindings.md). L’intégration à Stockage Blob vous permet de créer des fonctions qui réagissent aux modifications de données d’objets Blob ainsi qu’à la lecture et à l’écriture de valeurs.
 
 | Action | Type |
 |---------|---------|
@@ -37,7 +37,7 @@ Pour utiliser le déclencheur et les liaisons, vous devez référencer le packag
 [core tools]: ./functions-run-local.md
 [Bundle d’extensions]: ./functions-bindings-register.md#extension-bundles
 [Package NuGet]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage
-[Mettre à jour vos extensions]: ./install-update-binding-extensions-manual.md
+[Mettre à jour vos extensions]: ./functions-bindings-register.md
 [Azure Tools extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack
 
 ### <a name="functions-1x"></a>Functions 1.x

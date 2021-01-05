@@ -5,35 +5,32 @@ services: vpn-gateway
 titleSuffix: Azure VPN Gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 02/12/2020
+ms.topic: how-to
+ms.date: 10/15/2020
 ms.author: cherylmc
-ms.openlocfilehash: 63c6329ad62289cd127902c1438073b28fc8683e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0d81e0474d898ffee7f128c0bcea61f077c3d758
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77201847"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92103218"
 ---
 # <a name="configure-a-vnet-to-vnet-connection-classic"></a>Configurer une connexion de réseau virtuel à réseau virtuel (classique)
 
+Cet article vous aide à créer une connexion de passerelle VPN entre des réseaux virtuels. Les réseaux virtuels peuvent être situés dans des régions identiques ou différentes et appartenir à des abonnements identiques ou différents.
+
+:::image type="content" source="./media/vpn-gateway-howto-vnet-vnet-portal-classic/v2vclassic.png" alt-text="Diagramme représentant une architecture de réseau virtuel à réseau virtuel classique":::
+
 [!INCLUDE [deployment models](../../includes/vpn-gateway-classic-deployment-model-include.md)]
 
-Cet article vous aide à créer une connexion de passerelle VPN entre des réseaux virtuels. Les réseaux virtuels peuvent être situés dans des régions identiques ou différentes et appartenir à des abonnements identiques ou différents. Les étapes mentionnées dans cet article s’appliquent au modèle de déploiement classique et au portail Azure. Vous pouvez également créer cette configuration à l’aide d’un autre outil ou modèle de déploiement en sélectionnant une option différente dans la liste suivante :
+Les étapes mentionnées dans cet article s’appliquent au modèle de déploiement classique et au portail Azure. Vous pouvez également créer cette configuration à l’aide d’un autre outil ou modèle de déploiement en sélectionnant une option différente dans la liste suivante :
 
 > [!div class="op_single_selector"]
-> * [Azure portal](vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)
-> * [PowerShell](vpn-gateway-vnet-vnet-rm-ps.md)
-> * [Azure CLI](vpn-gateway-howto-vnet-vnet-cli.md)
-> * [Portail Azure (classique)](vpn-gateway-howto-vnet-vnet-portal-classic.md)
-> * [Connexions entre différents modèles de déploiement - Portail Azure](vpn-gateway-connect-different-deployment-models-portal.md)
-> * [Connexions entre différents modèles de déploiement - PowerShell](vpn-gateway-connect-different-deployment-models-powershell.md)
+> * [Classique](vpn-gateway-howto-vnet-vnet-portal-classic.md)
+> * [Resource Manager](vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)
+> * [Connecter des réseaux virtuels selon différents modèles de déploiement](vpn-gateway-connect-different-deployment-models-portal.md)
 >
 >
-
-![Schéma de connectivité de réseau virtuel à réseau virtuel](./media/vpn-gateway-howto-vnet-vnet-portal-classic/v2vclassic.png)
-
-
 
 ## <a name="about-vnet-to-vnet-connections"></a>À propos des connexions de réseau virtuel à réseau virtuel
 
@@ -41,7 +38,7 @@ Dans le modèle de déploiement classique qui utilise une passerelle VPN, la con
 
 Les réseaux virtuels que vous connectez peuvent être situés dans différents abonnements et différentes régions. Vous pouvez combiner une communication de réseau virtuel à réseau virtuel avec des configurations multisites. Vous établissez ainsi des topologies réseau qui combinent une connectivité entre différents locaux et une connectivité entre différents réseaux virtuels.
 
-![Connexions de réseau virtuel à réseau virtuel](./media/vpn-gateway-howto-vnet-vnet-portal-classic/aboutconnections.png)
+:::image type="content" source="./media/vpn-gateway-howto-vnet-vnet-portal-classic/aboutconnections.png" alt-text="Diagramme représentant une architecture de réseau virtuel à réseau virtuel classique":::
 
 ### <a name="why-connect-virtual-networks"></a><a name="why"></a>Pourquoi connecter des réseaux virtuels ?
 
@@ -61,115 +58,122 @@ Vous pouvez décider de connecter des réseaux virtuels pour les raisons suivant
 
 Pour plus d’informations sur les connexions de réseau virtuel à réseau virtuel, consultez la partie [Interconnexion de réseaux virtuels](#faq) à la fin de cet article.
 
-### <a name="working-with-azure-powershell"></a><a name="powershell"></a>Utilisation d’Azure PowerShell
+## <a name="prerequisites"></a>Prérequis
 
-Nous utilisons le portail pour la plupart des étapes, mais vous devez utiliser PowerShell pour créer les connexions entre les réseaux virtuels. Vous ne pouvez pas créer des connexions à l’aide du portail Azure. [!INCLUDE [vpn-gateway-classic-powershell](../../includes/vpn-gateway-powershell-classic-locally.md)]
+Nous utilisons le portail pour la plupart des étapes, mais vous devez utiliser PowerShell pour créer les connexions entre les réseaux virtuels. Les connexions ne peuvent pas être créées à l'aide du portail Azure car rien ne permet d'y spécifier la clé partagée. [!INCLUDE [vpn-gateway-classic-powershell](../../includes/vpn-gateway-powershell-classic-locally.md)]
 
-## <a name="step-1---plan-your-ip-address-ranges"></a><a name="plan"></a>Étape 1 : planifier vos plages d’adresses IP
+## <a name="planning"></a><a name="planning"></a>Planification
 
 Il est important de choisir les plages que vous utiliserez pour configurer vos réseaux virtuels. Pour cette configuration, vous devez vous assurer que vos plages de réseau virtuel ne se chevauchent pas entre elles ou avec un réseau local auquel elles se connectent.
 
-Le tableau suivant présente un exemple de la définition de vos réseaux virtuels. Utilisez les plages comme indication uniquement. Consignez les plages pour vos réseaux virtuels. Vous aurez besoin de ces informations pour les étapes ultérieures.
+### <a name="vnets"></a><a name="vnet"></a>Réseaux virtuels
 
-**Exemple**
-
-| Réseau virtuel | Espace d'adressage | Région | Se connecte au site de réseau local |
-|:--- |:--- |:--- |:--- |
-| TestVNet1 |TestVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |USA Est |VNet4Local<br>(10.41.0.0/16)<br>(10.42.0.0/16) |
-| TestVNet4 |TestVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |USA Ouest |VNet1Local<br>(10.11.0.0/16)<br>(10.12.0.0/16) |
-
-## <a name="step-2---create-the-virtual-networks"></a><a name="vnetvalues"></a>Étape 2 : créer les réseaux virtuels
-
-Créez deux réseaux virtuels dans le [portail Azure](https://portal.azure.com). Pour découvrir comment créer des réseaux virtuels classiques, consultez [Créer un réseau virtuel (classique)](../virtual-network/virtual-networks-create-vnet-classic-pportal.md). 
-
-Quand vous utilisez le portail pour créer un réseau virtuel classique, vous devez accéder à la page Réseau virtuel à l’aide de la procédure suivante, sinon l’option de création d’un réseau virtuel classique n’apparaît pas :
-
-1. Cliquez sur « + » pour ouvrir la page « Nouveau ».
-2. Dans le champ « Rechercher dans le marketplace », saisissez « réseau virtuel ». Si vous sélectionnez Mise en réseau -> Réseau virtuel à la place, l’option de création d’un réseau virtuel classique ne s’affiche pas.
-3. Localisez « Réseau virtuel » dans la liste renvoyée et cliquez dessus pour ouvrir la page correspondante. 
-4. Dans la page Réseau virtuel, sélectionnez « Classique » pour créer un réseau virtuel classique. 
-
-Si vous utilisez cet article dans le cadre d’un exercice, vous pouvez vous servir des valeurs d’exemple suivantes :
+Dans le cadre de cet exercice, nous utilisons les exemples de valeurs suivants :
 
 **Valeurs pour TestVNet1**
 
-Nom : TestVNet1<br>
+Nom : TestVNet1<br>
 Espace d’adressage : 10.11.0.0/16, 10.12.0.0/16 (facultatif)<br>
 Nom du sous-réseau : par défaut<br>
-Plage d’adresses du sous-réseau : 10.11.0.1/24<br>
+Plage d’adresses de sous-réseau : 10.11.0.0/24<br>
 Groupe de ressources : ClassicRG<br>
-Localisation : USA Est<br>
-GatewaySubnet : 10.11.1.0/27
+Emplacement : USA Est<br>
+Sous-réseau de passerelle : 10.11.1.0/27
 
 **Valeurs pour TestVNet4**
 
-Nom : TestVNet4<br>
+Nom : TestVNet4<br>
 Espace d’adressage : 10.41.0.0/16, 10.42.0.0/16 (facultatif)<br>
 Nom du sous-réseau : par défaut<br>
-Plage d’adresses du sous-réseau : 10.41.0.1/24<br>
+Plage d’adresses de sous-réseau : 10.41.0.0/24<br>
 Groupe de ressources : ClassicRG<br>
-Localisation : USA Ouest<br>
-GatewaySubnet : 10.41.1.0/27
+Emplacement : USA Ouest<br>
+Sous-réseau de passerelle : 10.41.1.0/27
+
+### <a name="connections"></a><a name="plan"></a>Connexions
+
+Le tableau suivant contient un exemple de connexion aux réseaux virtuels. Utilisez les plages comme indication uniquement. Consignez les plages pour vos réseaux virtuels. Vous aurez besoin de ces informations pour les étapes ultérieures.
+
+Dans cet exemple, TestVNet1 se connecte à un site réseau local que vous créez, « VNet4Local ». Les paramètres de VNet4Local contiennent les préfixes d’adresse pour TestVNet4.
+Le site local de chaque réseau virtuel correspond à l’autre réseau virtuel. Notre configuration utilise les valeurs d’exemple suivantes :
+
+**Exemple**
+
+| Réseau virtuel | Espace d’adressage | Location | Se connecte au site de réseau local |
+|:--- |:--- |:--- |:--- |
+| TestVNet1 |TestVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |USA Est |SiteVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |
+| TestVNet4 |TestVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |USA Ouest |SiteVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |
+
+## <a name="create-virtual-networks"></a><a name="vnetvalues"></a>Créer des réseaux virtuels
+
+Au cours de cette étape, vous allez créer deux réseaux virtuels classiques, TestVNet1 et TestVNet4. Si vous utilisez cet article en guise d'exercice, utilisez les [valeurs d'exemple](#vnet).
 
 **Lorsque vous créez vos réseaux virtuels, tenez compte des paramètres suivants :**
 
-* **Espaces d’adresses du réseau virtuel** : sur la page Espaces d’adresses du réseau virtuel, indiquez la plage d’adresses que vous voulez utiliser pour votre réseau virtuel. Il s’agit des adresses IP dynamiques qui seront affectées aux machines virtuelles et aux autres instances de rôle que vous déployez dans ce réseau virtuel.<br>Les espaces d’adressage que vous sélectionnez ne peuvent pas chevaucher les espaces d’adressage des autres réseaux virtuels ou les emplacements locaux auxquels ce réseau virtuel se connectera.
+* **Espaces d’adresses du réseau virtuel**  : sur la page Espaces d’adresses du réseau virtuel, indiquez la plage d’adresses que vous voulez utiliser pour votre réseau virtuel. Il s’agit des adresses IP dynamiques qui seront affectées aux machines virtuelles et aux autres instances de rôle que vous déployez dans ce réseau virtuel.<br>Les espaces d’adressage que vous sélectionnez ne peuvent pas chevaucher les espaces d’adressage des autres réseaux virtuels ou les emplacements locaux auxquels ce réseau virtuel se connectera.
 
-* **Emplacement** : lorsque vous créez un réseau virtuel, vous l’associez à un emplacement Azure (région). Par exemple, si vous souhaitez que vos machines virtuelles déployées sur votre réseau virtuel soient physiquement situées dans la région USA Ouest, sélectionnez cet emplacement. Vous ne pouvez pas modifier l’emplacement associé à votre réseau virtuel après sa création.
+* **Emplacement**  : lors de la création d'un réseau virtuel, associez-le à une région (emplacement) Azure. Par exemple, si vous souhaitez que vos machines virtuelles déployées sur votre réseau virtuel soient physiquement situées dans la région USA Ouest, sélectionnez cet emplacement. Vous ne pouvez pas modifier l’emplacement associé à votre réseau virtuel après sa création.
 
 **Une fois vos réseaux virtuels créés, vous pouvez ajouter les paramètres suivants :**
 
-* **Espace d’adressage** : aucun espace d’adressage supplémentaire n’est nécessaire pour cette configuration, mais vous pouvez ajouter un espace d’adressage supplémentaire après avoir créé votre réseau virtuel.
+* **Espace d’adressage**  : aucun espace d’adressage supplémentaire n’est nécessaire pour cette configuration, mais vous pouvez ajouter un espace d’adressage supplémentaire après avoir créé votre réseau virtuel.
 
-* **Sous-réseaux** : les sous-réseaux supplémentaires ne sont pas requis pour cette configuration, mais vous souhaiterez peut-être placer vos machines virtuelles dans un sous-réseau distinct de vos autres instances de rôle.
+* **Sous-réseaux**  : les sous-réseaux supplémentaires ne sont pas requis pour cette configuration, mais vous souhaiterez peut-être placer vos machines virtuelles dans un sous-réseau distinct de vos autres instances de rôle.
 
-* **Serveurs DNS** : entrez le nom du serveur DNS et son adresse IP. Ce paramètre n’entraîne pas la création de serveur DNS. Il vous permet de spécifier le serveur DNS que vous souhaitez utiliser pour la résolution de noms pour ce réseau virtuel.
+* **Serveurs DNS**  : entrez le nom du serveur DNS et son adresse IP. Ce paramètre n’entraîne pas la création de serveur DNS. Il vous permet de spécifier le serveur DNS que vous souhaitez utiliser pour la résolution de noms pour ce réseau virtuel.
 
-Dans cette section, vous allez configurer le type de connexion et le site local, puis créer la passerelle.
+### <a name="to-create-a-classic-virtual-network"></a>Pour créer un réseau virtuel classique
 
-## <a name="step-3---configure-the-local-site"></a><a name="localsite"></a>Étape 3 : configurer le site local
+[!INCLUDE [basic classic vnet](../../includes/vpn-gateway-vnet-classic.md)]
+
+[!INCLUDE [basic classic DNS](../../includes/vpn-gateway-dns-classic.md)]
+
+## <a name="configure-sites-and-gateways"></a><a name="localsite"></a>Configurer des sites et des passerelles
 
 Azure utilise les paramètres spécifiés dans chaque site de réseau local pour déterminer comment router le trafic entre les réseaux virtuels. Chaque réseau virtuel doit pointer vers le réseau local vers lequel vous souhaitez acheminer le trafic. Vous déterminez le nom à utiliser pour faire référence à chaque site de réseau local. Il est préférable d’utiliser un nom descriptif.
 
 Par exemple, TestVNet1 se connecte à un site de réseau local que vous créez, nommé « VNet4Local ». Les paramètres de VNet4Local contiennent les préfixes d’adresse pour TestVNet4.
 
-Le site local de chaque réseau virtuel correspond à l’autre réseau virtuel. Notre configuration utilise les valeurs d’exemple suivantes :
+Gardez à l'esprit que le site local de chaque réseau virtuel est l'autre réseau virtuel.
 
-| Réseau virtuel | Espace d'adressage | Région | Se connecte au site de réseau local |
+| Réseau virtuel | Espace d’adressage | Location | Se connecte au site de réseau local |
 |:--- |:--- |:--- |:--- |
-| TestVNet1 |TestVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |USA Est |VNet4Local<br>(10.41.0.0/16)<br>(10.42.0.0/16) |
-| TestVNet4 |TestVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |USA Ouest |VNet1Local<br>(10.11.0.0/16)<br>(10.12.0.0/16) |
+| TestVNet1 |TestVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |USA Est |SiteVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |
+| TestVNet4 |TestVNet4<br>(10.41.0.0/16)<br>(10.42.0.0/16) |USA Ouest |SiteVNet1<br>(10.11.0.0/16)<br>(10.12.0.0/16) |
 
-1. Recherchez TestVNet1 dans le portail Azure. Dans la section **Connexions VPN** de la page, cliquez sur **Passerelle**.
+### <a name="to-configure-a-site"></a><a name="site"></a>Pour configurer un site
 
-    ![Aucune passerelle](./media/vpn-gateway-howto-vnet-vnet-portal-classic/nogateway.png)
-2. Sur la page **Nouvelle connexion VPN**, sélectionnez **De site à site**.
-3. Cliquez sur **Site local** pour ouvrir la page Site local et configurer les paramètres.
-4. Sur la page **Site local**, nommez votre site local. Dans notre exemple, nous allons nommer le site local « VNet4Local ».
-5. Comme **Adresse IP de la passerelle VPN**, vous pouvez utiliser l’adresse IP de votre choix, pourvu qu’elle soit dans un format valide. En général, vous utilisez la véritable adresse IP externe d’un périphérique VPN. Pour une configuration de réseau virtuel à réseau virtuel classique, cependant, vous allez utiliser l’adresse IP publique affectée à la passerelle de votre réseau virtuel. Étant donné que vous n’avez pas encore créé la passerelle du réseau virtuel, vous devez spécifier une adresse IP publique valide en tant qu’espace réservé.<br>Ne laissez pas ce champ vide. Il n’est pas facultatif pour cette configuration. Lors d’une étape ultérieure, vous reviendrez à ces paramètres et les configurerez avec les adresses IP de passerelle de réseau virtuel correspondantes une fois celles-ci générées par Azure.
-6. Comme **Espace d’adressage du client**, utilisez l’espace d’adressage de l’autre réseau virtuel. Reportez-vous à votre exemple de planification. Cliquez sur **OK** pour enregistrer vos paramètres et revenir à la page **Nouvelle connexion VPN**.
+Le site local fait généralement référence à votre emplacement local. Il contient l’adresse IP du périphérique VPN avec lequel vous allez créer une connexion et les plages d’adresses IP qui seront acheminées via la passerelle VPN vers le périphérique VPN.
 
-    ![site local](./media/vpn-gateway-howto-vnet-vnet-portal-classic/localsite.png)
+1. Sur la page de votre réseau virtuel, sous **Paramètres** , sélectionnez **Connexions de site à site** .
+1. Dans la page Connexions de site à site, sélectionnez **+ Ajouter** .
+1. Dans la page **Configurer une connexion VPN et une passerelle** , pour **Type de connexion** , gardez l’option **Site à site** sélectionnée.
 
-## <a name="step-4---create-the-virtual-network-gateway"></a><a name="gw"></a>Étape 4 : créer la passerelle de réseau virtuel
+   * **Adresse IP de la passerelle VPN :** Adresse IP publique du périphérique VPN pour votre réseau local. Dans le cadre de cet exercice, vous pouvez saisir une adresse fictive car vous ne disposez pas encore de l'adresse IP de la passerelle VPN de l'autre site. Par exemple, 5.4.3.2. Plus tard, lorsque vous aurez configuré la passerelle pour l'autre réseau virtuel, vous pourrez ajuster cette valeur.
 
-Chaque réseau virtuel doit disposer d’une passerelle de réseau virtuel. La passerelle de réseau virtuel achemine et chiffre le trafic.
+   * **Espace d’adressage du client :** Répertoriez les plages d'adresses IP que vous souhaitez acheminer vers l'autre réseau virtuel par le biais de cette passerelle. Vous pouvez ajouter plusieurs plages d’espaces d’adressage. Assurez-vous que les plages que vous spécifiez ici ne se chevauchent pas avec des plages d’adresses d’autres réseaux auxquels votre réseau virtuel se connecte, ou avec les propres plages d’adresses du réseau virtuel.
+1. En bas de la page, NE sélectionnez PAS passer Vérifier + créer. Au lieu de cela, sélectionnez **Suivant : Passerelle >** .
 
-1. Sur la page **Nouvelle connexion VPN**, cochez la case **Créer une passerelle immédiatement**.
-2. Cliquez sur **Sous-réseau, taille et type de routage**. Sur la page **Configuration de la passerelle**, cliquez sur **Sous-réseau**.
-3. Le nom du sous-réseau de passerelle est automatiquement renseigné avec le nom requis « GatewaySubnet ». La **Plage d’adresses** contient les adresses IP qui sont allouées aux services de passerelle VPN. Certaines configurations autorisent un sous-réseau de passerelle de /29, mais il est préférable d’utiliser un sous-réseau /28 ou /27 pour prendre en charge les configurations futures qui pourront nécessiter davantage d’adresses IP pour les services de passerelle. Dans les paramètres de notre exemple, nous utilisons 10.11.1.0/27. Ajustez l’espace d’adressage, puis cliquez sur **OK**.
-4. Configurez la **Taille de la passerelle**. Ce paramètre fait référence à la [SKU de passerelle](vpn-gateway-about-vpn-gateway-settings.md#gwsku).
-5. Configurez le **Type de routage**. Le type de routage pour cette configuration doit être **dynamique**. Vous ne pourrez pas modifier le type de routage par la suite, sauf si vous désactivez la passerelle et si vous en créez une nouvelle.
-6. Cliquez sur **OK**.
-7. Sur la page **Nouvelle connexion VPN**, cliquez sur **OK** pour commencer à créer votre passerelle de réseau virtuel. La création d’une passerelle nécessite généralement au moins 45 minutes, selon la référence SKU de passerelle sélectionnée.
+### <a name="to-configure-a-virtual-network-gateway"></a><a name="sku"></a>Pour configurer une passerelle de réseau virtuel
 
-## <a name="step-5---configure-testvnet4-settings"></a><a name="vnet4settings"></a>Étape 5 : configurer les paramètres de TestVNet4
+1. Sur la page **Passerelle** , sélectionnez les valeurs suivantes :
 
-Répétez les étapes jusqu’à la [Création d’un site local](#localsite) et la [Création de la passerelle de réseau virtuel](#gw) pour configurer TestVNet4, en remplaçant les valeurs si cela est nécessaire. Si vous effectuez cette opération en guise d’exercice, utilisez les [valeurs d’exemple](#vnetvalues).
+   * **Taille :** Il s’agit de la référence de passerelle que vous utilisez pour créer votre passerelle de réseau virtuel. Les passerelles VPN classiques utilisent les anciennes références SKU de passerelles. Pour en savoir plus sur les anciennes références SKU de passerelle, consultez la section [Utilisation des références SKU de passerelle de réseau virtuel (anciennes références SKU)](vpn-gateway-about-skus-legacy.md). Vous pouvez sélectionner **Standard** pour cet exercice.
 
-## <a name="step-6---update-the-local-sites"></a><a name="updatelocal"></a>Étape 6 : mettre à jour les sites locaux
+   * **Type de routage :** Sélectionnez le type de routage pour votre passerelle. Cela correspond également au type de VPN. Il est important de sélectionner le type approprié, car vous ne pouvez pas convertir la passerelle d’un type à un autre. Votre périphérique VPN doit être compatible avec le type de routage que vous sélectionnez. Pour plus d’informations sur le type de routage, consultez [À propos des paramètres de la passerelle VPN](vpn-gateway-about-vpn-gateway-settings.md#vpntype). Certains articles font référence aux types de VPN « RouteBased » et « PolicyBased ». « RouteBased » correspond à un routage dynamique, et « PolicyBased » à un routage statique. Pour cette configuration, sélectionnez **Dynamique** .
 
-Une fois vos passerelles de réseau virtuel créées pour les deux réseaux virtuels, vous devez ajuster les valeurs **d’adresse IP de passerelle VPN** des sites locaux.
+   * **Sous-réseau de passerelle**  : La taille du sous-réseau de passerelle que vous spécifiez dépend de la configuration de la passerelle VPN que vous souhaitez créer. Bien qu’il soit possible de créer un sous-réseau de passerelle aussi petit que /29, nous vous recommandons d’utiliser un sous-réseau /27 ou /28. Cette opération crée un sous-réseau plus grand qui inclut plusieurs adresses. En choisissant un sous-réseau de passerelle plus vaste, vous disposez de suffisamment d’adresses IP pour prendre en charge d’éventuelles configurations futures.
+
+1. Au bas de la page, sélectionnez **Vérifier + créer** pour confirmer vos paramètres. Sélectionnez **Créer** pour effectuer le déploiement. Selon la référence SKU que vous sélectionnez, cela peut prendre jusqu’à 45 minutes pour créer une passerelle de réseau virtuel.
+1. Pendant la création de cette passerelle, vous pouvez commencer à passer à l'étape suivante.
+
+### <a name="configure-testvnet4-settings"></a>Configurer les paramètres de TestVNet4
+
+Répétez les étapes de [Création d'un site et d'une passerelle ](#localsite) pour configurer TestVNet4, en remplaçant les valeurs si cela s'avère nécessaire. Si vous effectuez cette opération en guise d'exercice, utilisez les [valeurs d'exemple](#planning).
+
+## <a name="update-local-sites"></a><a name="updatelocal"></a>Mettre à jour les sites locaux
+
+Une fois vos passerelles de réseau virtuel créées pour les deux réseaux virtuels, vous devez ajuster les propriétés d' **adresse IP de passerelle VPN** des sites locaux.
 
 |Nom du réseau virtuel|Site connecté|Adresse IP de la passerelle|
 |:--- |:--- |:--- |
@@ -178,83 +182,42 @@ Une fois vos passerelles de réseau virtuel créées pour les deux réseaux virt
 
 ### <a name="part-1---get-the-virtual-network-gateway-public-ip-address"></a>Partie 1 : obtenir l’adresse IP publique de passerelle de réseau virtuel
 
-1. Recherchez votre réseau virtuel dans le portail Azure.
-2. Cliquez pour ouvrir la page **Présentation** du réseau virtuel. Sur la page, sous **Connexions VPN**, vous pouvez afficher l’adresse IP de votre passerelle de réseau virtuel.
+1. Accédez à votre réseau virtuel en accédant au **Groupe de ressources** et en sélectionnant le réseau virtuel.
+1. Sur la page de votre réseau virtuel, dans le volet **Essentials** , à droite, recherchez l' **Adresse IP de la passerelle** et copiez-la dans le presse-papiers.
 
-   ![Adresse IP publique](./media/vpn-gateway-howto-vnet-vnet-portal-classic/publicIP.png)
-3. Copiez l’adresse IP. Vous en aurez besoin dans la prochaine section.
-4. Répétez ces étapes pour TestVNet4
+### <a name="part-2---modify-the-local-site-properties"></a>Partie 2 : modifier les propriétés des sites locaux
 
-### <a name="part-2---modify-the-local-sites"></a>Partie 2 : modifier les sites locaux
+1. Sous Connexions de site à site, sélectionnez la connexion. Par exemple, SiteVNet4.
+1. Sur la page **Propriétés** de la connexion de site à site, sélectionnez **Modifier le site local** .
+1. Dans le champ **Adresse IP de la passerelle VPN** , collez l'adresse IP de la passerelle VPN que vous avez copiée à la section précédente.
+1. Sélectionnez **OK** .
+1. Le champ est mis à jour dans le système. Vous pouvez également utiliser cette méthode pour ajouter une adresse IP supplémentaire à acheminer vers ce site.
 
-1. Recherchez votre réseau virtuel dans le portail Azure.
-2. Sur la page **Présentation** du réseau virtuel, cliquez sur le site local.
+### <a name="part-3---repeat-steps-for-the-other-vnet"></a>Partie 3 : répéter les étapes pour l'autre réseau virtuel
 
-   ![Site local créé](./media/vpn-gateway-howto-vnet-vnet-portal-classic/local.png)
-3. Sur la pageDans le panneau **Connexions VPN de site à site**, cliquez sur le nom du site local que vous souhaitez modifier.
+Répétez les étapes pour TestVNet4.
 
-   ![Ouvrir le site local](./media/vpn-gateway-howto-vnet-vnet-portal-classic/openlocal.png)
-4. Cliquez sur le **site local** que vous souhaitez modifier.
+## <a name="retrieve-configuration-values"></a><a name="getvalues"></a>Récupérer les valeurs de configuration
 
-   ![modifier le site](./media/vpn-gateway-howto-vnet-vnet-portal-classic/connections.png)
-5. Mettez à jour **l’adresse IP de passerelle VPN** et cliquez sur **OK** pour enregistrer les paramètres.
+[!INCLUDE [retrieve values](../../includes/vpn-gateway-values-classic.md)]
 
-   ![IP de la passerelle](./media/vpn-gateway-howto-vnet-vnet-portal-classic/gwupdate.png)
-6. Fermez les autres pages.
-7. Répétez ces étapes pour TestVNet4.
+## <a name="create-connections"></a><a name="createconnections"></a>Créer des connexions
 
-## <a name="step-7---retrieve-values-from-the-network-configuration-file"></a><a name="getvalues"></a>Étape 7 : récupérer des valeurs à partir du fichier de configuration réseau
-
-Lorsque vous créez des réseaux virtuels classiques dans le portail Azure, le nom que vous voyez ne correspond pas au nom complet que vous utilisez pour PowerShell. Par exemple, un réseau virtuel qui semble être nommé **TestVNet1** dans le portail Azure peut avoir un nom beaucoup plus long dans le fichier de configuration réseau. Le nom pourrait être semblable au suivant : **Groupe ClassicRG TestVNet1**. Lorsque vous créez vos connexions, il est important d’utiliser les valeurs que vous voyez dans le fichier de configuration réseau.
-
-Dans les étapes suivantes, vous allez vous connecter à votre compte Azure et télécharger et afficher le fichier de configuration réseau pour obtenir les valeurs nécessaire pour établir les connexions.
-
-1. Téléchargez et installez la dernière version des applets de commande PowerShell Azure Service Management (SM). Pour plus d’informations, consultez [Utilisation d’Azure PowerShell](#powershell).
-
-2. Ouvrez la console PowerShell avec des droits élevés. Utilisez les exemples suivants pour faciliter votre connexion. Vous devez exécuter ces commandes localement à l’aide du module PowerShell Service Management. Pour passer au management des services, utilisez cette commande :
-
-   ```powershell
-   azure config mode asm
-   ```
-3. Se connecter à votre compte. Utilisez l’exemple suivant pour faciliter votre connexion :
-
-   ```powershell
-   Add-AzureAccount
-   ```
-4. Vérifiez les abonnements associés au compte.
-
-   ```powershell
-   Get-AzureSubscription
-   ```
-5. Si vous avez plusieurs abonnements, sélectionnez celui que vous souhaitez utiliser.
-
-   ```powershell
-   Select-AzureSubscription -SubscriptionId "Replace_with_your_subscription_ID"
-   ```
-6. Exportez et affichez le fichier de configuration réseau. Créez un répertoire sur votre ordinateur, puis exportez le fichier de configuration réseau dans ce répertoire. Dans cet exemple, le fichier de configuration réseau est exporté vers **C:\AzureNet**.
-
-   ```powershell
-   Get-AzureVNetConfig -ExportToFile C:\AzureNet\NetworkConfig.xml
-   ```
-7. Dans un éditeur de texte, ouvrez le fichier, puis affichez les noms de vos réseaux virtuels et de vos sites. Ces noms sont ceux que vous utiliserez lorsque vous allez créer vos connexions.<br>Les noms des réseaux virtuels sont répertoriés comme suit : **VirtualNetworkSite name =**<br>Les noms des sites sont répertoriés comme suit : **LocalNetworkSiteRef name =**
-
-## <a name="step-8---create-the-vpn-gateway-connections"></a><a name="createconnections"></a>Étape 8 : créer les connexions de passerelle VPN
-
-Lorsque vous avez terminé les étapes précédentes, vous pouvez définir les clés prépartagées IPsec/IKE et créer la connexion. Cet ensemble d’étapes utilise PowerShell. Les connexions de réseau virtuel à réseau virtuel pour le modèle de déploiement classique ne peuvent pas être configurées dans le portail Azure.
+Lorsque vous avez terminé les étapes précédentes, vous pouvez définir les clés prépartagées IPsec/IKE et créer la connexion. Cet ensemble d’étapes utilise PowerShell. Les connexions de réseau virtuel à réseau virtuel du modèle de déploiement classique ne peuvent pas être configurées sur le portail Azure car rien ne permet d'y spécifier la clé partagée.
 
 Dans les exemples ci-dessous, notez que la clé partagée est exactement identique. La clé partagée doit toujours correspondre. Veillez à remplacer les valeurs de ces exemples par les noms exacts de vos réseaux virtuels et de vos sites de réseau local.
 
-1. Créez la connexion de TestVNet1 à TestVNet4.
+1. Créez la connexion de TestVNet1 à TestVNet4. Veillez à modifier les valeurs.
 
    ```powershell
    Set-AzureVNetGatewayKey -VNetName 'Group ClassicRG TestVNet1' `
-   -LocalNetworkSiteName '17BE5E2C_VNet4Local' -SharedKey A1b2C3D4
+   -LocalNetworkSiteName 'value for _VNet4Local' -SharedKey A1b2C3D4
    ```
 2. Créez la connexion de TestVNet4 à TestVNet1.
 
    ```powershell
    Set-AzureVNetGatewayKey -VNetName 'Group ClassicRG TestVNet4' `
-   -LocalNetworkSiteName 'F7F7BFC7_VNet1Local' -SharedKey A1b2C3D4
+   -LocalNetworkSiteName 'value for _VNet1Local' -SharedKey A1b2C3D4
    ```
 3. Attendez l’initialisation des connexions. Une fois la passerelle initialisée, le système affiche l’état « Réussite ».
 
@@ -267,7 +230,10 @@ Dans les exemples ci-dessous, notez que la clé partagée est exactement identiq
    StatusCode     : OK
    ```
 
-## <a name="vnet-to-vnet-considerations-for-classic-vnets"></a><a name="faq"></a>Interconnexion de réseaux virtuels pour les réseaux virtuels classiques
+## <a name="faq-and-considerations"></a><a name="faq"></a>FAQ et considérations
+
+Ces considérations s'appliquent aux réseaux virtuels classiques et aux passerelles de réseau virtuel classiques.
+
 * Les réseaux virtuels peuvent être situés dans des abonnements identiques ou différents.
 * Les réseaux virtuels peuvent être situés dans des régions (emplacements) identiques ou différentes.
 * Un service cloud ou un point de terminaison d’équilibrage de charge ne peut pas s’étendre sur différents réseaux virtuels, même si ces derniers sont interconnectés.
@@ -281,4 +247,5 @@ Dans les exemples ci-dessous, notez que la clé partagée est exactement identiq
 * Le trafic de réseau virtuel à réseau virtuel circule sur la dorsale principale d’Azure.
 
 ## <a name="next-steps"></a>Étapes suivantes
+
 Vérifiez vos connexions. Voir [Vérifier une connexion de passerelle VPN](vpn-gateway-verify-connection-resource-manager.md).

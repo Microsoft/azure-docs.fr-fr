@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 10/14/2016
 ms.author: stefsch
 ms.custom: seodec18
-ms.openlocfilehash: fc11c6932d625b119ad933f5d4d128b4355530c5
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 3fa2677f7c71b118ec3f7da717e29d5879ee982b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804433"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88961820"
 ---
 # <a name="network-configuration-details-for-app-service-environment-for-powerapps-with-azure-expressroute"></a>Détails de la configuration réseau pour l’environnement App Service pour PowerApps avec Azure ExpressRoute
 
@@ -35,7 +35,7 @@ L’environnement App Service requiert les paramètres de connectivité réseau 
 
 * Connectivité réseau sortante au service de fichiers Azure sur le port 445.
 
-* Connectivité réseau sortante à des points de terminaison Azure SQL Database situés dans la même région que l’environnement App Service. Les points de terminaison SQL Database se résolvent dans le domaine database.windows.net, qui nécessite un accès ouvert aux ports 1433, 11000-11999 et 14000-14999. Pour plus d’informations sur l’utilisation des ports de SQL Database V12, voir [Ports au-delà de 1433 pour ADO.NET 4.5](../../sql-database/sql-database-develop-direct-route-ports-adonet-v12.md).
+* Connectivité réseau sortante à des points de terminaison Azure SQL Database situés dans la même région que l’environnement App Service. Les points de terminaison SQL Database se résolvent dans le domaine database.windows.net, qui nécessite un accès ouvert aux ports 1433, 11000-11999 et 14000-14999. Pour plus d’informations sur l’utilisation des ports de SQL Database V12, voir [Ports au-delà de 1433 pour ADO.NET 4.5](../../azure-sql/database/adonet-v12-develop-direct-route-ports.md).
 
 * Connectivité réseau sortante aux points de terminaison du plan de gestion Azure (modèle de déploiement classique Azure et points de terminaison Azure Resource Manager). La connectivité à ces points de terminaison inclut les domaines management.core.windows.net et management.azure.com. 
 
@@ -146,15 +146,15 @@ Pour prendre en main les environnements App Service pour PowerApps, consultez [P
 [virtualnetwork]: https://azure.microsoft.com/services/virtual-network/ 
 [ExpressRoute]: https://azure.microsoft.com/services/expressroute/ 
 [requiredports]: app-service-app-service-environment-control-inbound-traffic.md 
-[NetworkSecurityGroups]: https://azure.microsoft.com/documentation/articles/virtual-networks-nsg/ 
-[UDROverview]: https://azure.microsoft.com/documentation/articles/virtual-networks-udr-overview/ 
+[NetworkSecurityGroups]: ../../virtual-network/virtual-network-vnet-plan-design-arm.md
+[UDROverview]: ../../virtual-network/virtual-networks-udr-overview.md
 <!-- Old link -- [UDRHowTo]: https://azure.microsoft.com/documentation/articles/virtual-networks-udr-how-to/ -->
 
-[UDRHowTo]: https://docs.microsoft.com/azure/virtual-network/tutorial-create-route-table-powershell 
+[UDRHowTo]: ../../virtual-network/tutorial-create-route-table-powershell.md
 [HowToCreateAnAppServiceEnvironment]: app-service-web-how-to-create-an-app-service-environment.md 
 [AzureDownloads]: https://azure.microsoft.com/downloads/ 
 [DownloadCenterAddressRanges]: https://www.microsoft.com/download/details.aspx?id=41653 
-[NetworkSecurityGroups]: https://azure.microsoft.com/documentation/articles/virtual-networks-nsg/ 
+[NetworkSecurityGroups]: ../../virtual-network/virtual-network-vnet-plan-design-arm.md
 [IntroToAppServiceEnvironment]:  app-service-app-service-environment-intro.md 
 [NewPortal]:  https://portal.azure.com 
 

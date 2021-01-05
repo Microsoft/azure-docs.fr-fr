@@ -12,18 +12,18 @@ ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 11/06/2018
+ms.date: 06/09/2020
 ms.author: genli
-ms.openlocfilehash: 4edeea749ba22bef173c15f3a0855679b784ce33
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: 8861e850e168169762d95c44a54b6a88a036f396
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80668572"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84628529"
 ---
-# <a name="back-end-server-certificate-is-not-whitelisted-for-an-application-gateway-using-an-internal-load-balancer-with-an-app-service-environment"></a>Un certificat du serveur principal ne figure pas dans la liste verte pour une passerelle d’application qui utilise un équilibreur de charge interne avec un environnement App Service
+# <a name="back-end-server-certificate-is-not-allow-listed-for-an-application-gateway-using-an-internal-load-balancer-with-an-app-service-environment"></a>Un certificat du serveur back-end ne figure pas dans la liste verte pour une passerelle d’application qui utilise un équilibreur de charge interne avec un environnement ASE (App Service Environment)
 
-Cet article permet de résoudre le problème suivant : un certificat ne figure pas dans la liste verte lorsque vous créez une passerelle d’application à l’aide d’un Load Balancer interne (ILB) avec un App Service Environment (ASE) sur le back end lors de l’utilisation du protocole TLS de bout en bout dans Azure.
+Cet article permet de résoudre le problème suivant : un certificat n’est pas mis en liste verte lorsque vous créez une passerelle d’application en utilisant un équilibreur de charge interne (ILB) avec un environnement ASE (App Service Environment) sur le back end et que le chiffrement TLS de bout en bout est activé dans Azure.
 
 ## <a name="symptoms"></a>Symptômes
 
@@ -41,7 +41,7 @@ Lorsque vous créez une passerelle d’application à l’aide d’un équilibre
 - **Port :** 443
 - **Sonde personnalisée :** Nom d’hôte : test.appgwtestase.com
 - **Certificat d’authentification :** .cer de test.appgwtestase.com
-- **Intégrité du serveur principal :** Non sain : le certificat du serveur principal ne figure pas sur la liste verte pour Application Gateway.
+- **Intégrité du serveur principal :** Non sain : le certificat du serveur back-end ne figure pas dans la liste verte pour Application Gateway.
 
 **Configuration ASE :**
 

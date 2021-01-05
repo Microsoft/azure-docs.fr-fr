@@ -4,14 +4,14 @@ description: Répertorie les types de ressources Azure qui peuvent être déplac
 author: rayne-wiselman
 ms.service: azure-resource-manager
 ms.topic: reference
-ms.date: 01/20/2020
+ms.date: 08/25/2020
 ms.author: raynew
-ms.openlocfilehash: 9bc7dc66ccf3049ac878f7871c816e5ade1afde5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 83cd36683a0487f13ab5707e4b1534cc7f20a88a
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76760706"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91948525"
 ---
 # <a name="support-for-moving-azure-resources-across-regions"></a>Prise en charge du déplacement des ressources Azure entre les régions
 
@@ -121,6 +121,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > - [Microsoft.RecoveryServices](#microsoftrecoveryservices)
 > - [Microsoft.Relay](#microsoftrelay)
 > - [Microsoft.ResourceGraph](#microsoftresourcegraph)
+> - [Microsoft.Resources](#microsoftresources)
 > - [Microsoft.SaaS](#microsoftsaas)
 > - [Microsoft.Scheduler](#microsoftscheduler)
 > - [Microsoft.Search](#microsoftsearch)
@@ -186,7 +187,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | service |  Oui | 
+> | service |  Oui, (utilisation d’un modèle) <br/><br/> [Déplacer la Gestion des API d'une région vers une autre](../../api-management/api-management-howto-migrate.md). | 
 
 ## <a name="microsoftappconfiguration"></a>Microsoft.AppConfiguration
 
@@ -200,7 +201,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | apiapps | Non | 
+> | apiapps | Oui, (utilisation d’un modèle)<br/><br/> [Déplacer une application App Service vers une autre région](../../app-service/manage-move-across-regions.md) | 
 > | appidentities | Non | 
 > | gateways | Non | 
 
@@ -217,7 +218,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | automationaccounts | Non | 
+> | automationaccounts | Oui, (utilisation d’un modèle) <br/><br/> [Utilisation de la géoréplication](../../automation/automation-managing-data.md#geo-replication-in-azure-automation) |  
 > | automationaccounts / configurations | Non | 
 > | automationaccounts / runbooks | Non | 
 
@@ -249,14 +250,14 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | batchaccounts | Non |
+> | batchaccounts |  Les comptes Batch ne peuvent pas être déplacés directement d’une région à une autre, mais vous pouvez utiliser un modèle pour exporter un modèle, le modifier et déployer le modèle dans la nouvelle région. <br/><br/> Apprenez-en davantage sur le [déplacement d’un compte Batch d’une région à une autre](../../batch/best-practices.md#moving-batch-accounts-across-regions). |
 
 ## <a name="microsoftbatchai"></a>Microsoft.BatchAI
 
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | clusters | Non | 
+> | clusters | Non <br/><br/> Le service Azure Batch AI a été mis [hors service](/previous-versions/azure/batch-ai/overview-what-happened-batch-ai).
 > | fileservers | Non | 
 > | jobs | Non | 
 > | workspaces | Non | 
@@ -280,7 +281,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | blockchainmembers | Non |
+> | blockchainmembers | Non <br/><br/> Le réseau blockchain ne peut pas avoir de nœuds dans des régions différentes. 
 > | watchers | Non | 
 
 ## <a name="microsoftblueprint"></a>Microsoft.Blueprint
@@ -327,7 +328,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | domainnames | Non |  
+> | domainnames | Aucun travail n’est planifié pour les services classiques.
 > | virtualmachines | Non | 
 
 
@@ -337,7 +338,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | networksecuritygroups | Non |
+> | networksecuritygroups | Aucun travail n’est planifié pour les services classiques.
 > | reservedips | Non | 
 > | virtualnetworks | Non | 
 
@@ -355,15 +356,16 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | accounts | Non | 
+> | Recherche cognitive | Pris en charge avec étapes manuelles.<br/><br/> Apprenez-en davantage sur le [déplacement de votre service Recherche cognitive Azure vers une autre région](../../search/search-howto-move-across-regions.md).
 
 ## <a name="microsoftcompute"></a>Microsoft.Compute
 
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | availabilitysets | Non | 
+> | availabilitysets | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des groupes à haute disponibilité. | 
 > | diskencryptionsets | Non | 
-> | disks | Non | 
+> | disks | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des machines virtuelles Azure et des disques associés. | 
 > | galleries | Non | 
 > | galleries / images | Non | 
 > | galleries / images / versions | Non | 
@@ -375,7 +377,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | sharedvmimages | Non | 
 > | sharedvmimages / versions | Non | 
 > | snapshots | Non | 
-> | virtualmachines | Oui | 
+> | virtualmachines | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des machines virtuelles Azure. | 
 > | virtualmachines / extensions | Non | 
 > | virtualmachinescalesets | Non | 
 
@@ -409,7 +411,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | containerservices | Non | 
+> | containerservices | Non.<br/><br/> Le service a été mis [hors service](https://azure.microsoft.com/updates/azure-container-service-will-retire-on-january-31-2020/).
 > | managedclusters | Non | 
 > | openshiftmanagedclusters | Non | 
 
@@ -542,14 +544,14 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | servers | Non |  
+> | servers | Vous pouvez utiliser un réplica en lecture sur plusieurs régions pour déplacer un serveur existant. [Plus d’informations](../../postgresql/howto-move-regions-portal.md)<br/><br/> Si le service est provisionné avec un stockage de sauvegarde géoredondant, vous pouvez utiliser la géorestauration pour effectuer une restauration dans d’autres régions. [Plus d’informations](../../mariadb/concepts-business-continuity.md#recover-from-an-azure-regional-data-center-outage)
 
 ## <a name="microsoftdbformysql"></a>Microsoft.DBforMySQL
 
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | servers | Non |  
+> | servers | Vous pouvez utiliser un réplica en lecture sur plusieurs régions pour déplacer un serveur existant. [Plus d’informations](../../mysql/howto-move-regions-portal.md)
 
 ## <a name="microsoftdbforpostgresql"></a>Microsoft.DBforPostgreSQL
 
@@ -557,7 +559,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | servergroups | Non | 
-> | servers | Non |  
+> | servers | Vous pouvez utiliser un réplica en lecture sur plusieurs régions pour déplacer un serveur existant. [En savoir plus](../../postgresql/howto-move-regions-portal.md).
 > | serversv2 | Non | 
 
 ## <a name="microsoftdeploymentmanager"></a>Microsoft.DeploymentManager
@@ -577,9 +579,9 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | elasticpools | Non | 
-> | elasticpools / iothubtenants | Non | 
-> | iothubs | Oui | 
+> | elasticpools | Non. La ressource n’est pas exposée.
+> | elasticpools / iothubtenants | Non. La ressource n’est pas exposée.
+> | iothubs | Oui. [En savoir plus](../../iot-hub/iot-hub-how-to-clone.md)
 > | provisioningservices | Non | 
 
 ## <a name="microsoftdevspaces"></a>Microsoft.DevSpaces
@@ -588,6 +590,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | controllers | Non | 
+> | Cluster AKS | Non<br/><br/> [Apprenez-en davantage](../../dev-spaces/faq.md#can-i-migrate-my-aks-cluster-with-azure-dev-spaces-to-another-region) sur le déplacement vers une autre région.
 
 ## <a name="microsoftdevtestlab"></a>Microsoft.DevTestLab
 
@@ -636,7 +639,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | clusters | Non |  
-> | espaces de noms | Non | 
+> | espaces de noms | Oui (avec modèle)<br/><br/> [Déplacer un espace de noms Event Hubs vers une autre région](../../event-hubs/move-across-regions.md) | 
 
 ## <a name="microsoftgenomics"></a>Microsoft.Genomics
 
@@ -693,7 +696,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | accounts | Non | 
+> | accounts | Non. [Plus d’informations](../../azure-monitor/faq.md#how-do-i-move-an-application-insights-resource-to-a-new-region)
 > | actiongroups |  Non | 
 > | activitylogalerts | Non | 
 > | alertrules |  Non | 
@@ -713,7 +716,15 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | iotapps |  Non |  
+> | checknameavailability |  Non.<br/><br/> IoT Central fonctionne avec des zones géographiques, et non des régions.
+> | graph | Non
+
+## <a name="microsoftiothub"></a>Microsoft.IoTHub
+
+> [!div class="mx-tableFixed"]
+> | Type de ressource | Changement de région | 
+> | ------------- | ----------- |
+> |  iothub |  Oui (cloner un hub) <br/><br/> [Cloner un hub IoT dans une autre région](../../iot-hub/iot-hub-how-to-clone.md)
 
 ## <a name="microsoftiotspaces"></a>Microsoft.IoTSpaces
 
@@ -758,7 +769,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | accounts | Non | 
+> | accounts | Non, il s’agit d’un service mondial.
 
 ## <a name="microsoftlogic"></a>Microsoft.Logic
 
@@ -832,14 +843,14 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | accounts |  Non |  
+> | accounts |  Non, Azure Maps est un service géospatial. 
 
 ## <a name="microsoftmarketplaceapps"></a>Microsoft.MarketplaceApps
 
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | classicdevservices | Non | 
+> | classicdevservices | Aucun travail n’est planifié pour les services classiques. 
 
 ## <a name="microsoftmedia"></a>Microsoft.Media
 
@@ -897,13 +908,13 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | expressrouteports | Non | 
 > | frontdoors | Non | 
 > | frontdoorwebapplicationfirewallpolicies | Non | 
-> | loadbalancers | Oui - Référence SKU de base<br>Non - Référence SKU Standard | Oui - Référence SKU de base<br> Oui - Référence SKU Standard |
+> | loadbalancers | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des équilibreurs de charge internes et externes. |
 > | localnetworkgateways |  Non | 
 > | natgateways |  Non | 
 > | networkintentpolicies |  Non | 
-> | networkinterfaces | Oui | 
+> | networkinterfaces | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des cartes réseau. | 
 > | networkprofiles | Non | 
-> | networksecuritygroups | Oui | 
+> | networksecuritygroups | Oui <br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des groupes de sécurité réseau (NGS). | 
 > | networkwatchers |  Non |  
 > | networkwatchers / connectionmonitors |  Non | 
 > | networkwatchers / lenses |  Non | 
@@ -913,7 +924,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | privatednszones / virtualnetworklinks |  Non |  
 > | privateendpoints | Non | 
 > | privatelinkservices | Non | 
-> | publicipaddresses | Oui - Référence SKU de base<br>Non - Référence SKU Standard | Oui - Référence SKU de base<br>Non - Référence SKU Standard |
+> | publicipaddresses | Oui<br/><br/> Utilisez [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) pour déplacer des adresses IP publiques. |
 > | publicipprefixes | Non | 
 > | routefilters | Non | 
 > | routetables |  Non | 
@@ -1001,7 +1012,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | vaults | Non. [Désactiver le coffre et recréer](https://docs.microsoft.com/azure/site-recovery/move-vaults-across-regions) pour Site Recovery  | 
+> | vaults | Non.<br/><br/> Le déplacement de coffres Recovery Services pour Sauvegarde Azure d’une région Azure à une autre n’est pas pris en charge.<br/><br/> Dans les coffres Recovery Services pour Azure Site Recovery, vous pouvez [désactiver et recréer le coffre](../../site-recovery/move-vaults-across-regions.md) dans la région cible. | 
 
 
 ## <a name="microsoftrelay"></a>Microsoft.Relay
@@ -1017,6 +1028,14 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | queries |  Non |  
+
+## <a name="microsoftresources"></a>Microsoft.Resources
+
+> [!div class="mx-tableFixed"]
+> | Type de ressource | Changement de région |
+> | ------------- | ----------- |
+> | deploymentScripts |  Oui<br/><br/>[Déplacer des ressources Microsoft.Resources vers une nouvelle région](microsoft-resources-move-regions.md) |
+> | templateSpecs |  Oui<br/><br/>[Déplacer des ressources Microsoft.Resources vers une nouvelle région](microsoft-resources-move-regions.md) |  
 
 ## <a name="microsoftsaas"></a>Microsoft.SaaS
 
@@ -1115,11 +1134,11 @@ Accédez à un espace de noms du fournisseur de ressources :
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
 > | instancepools | Non | 
-> | managedinstances | Oui | 
+> | managedinstances | Oui <br/><br/> [Apprenez-en davantage](../../azure-sql/database/move-resources-across-regions.md) sur le déplacement des instances managées entre les régions. | 
 > | managedinstances / databases | Oui | 
 > | servers | Oui | 
-> | servers / databases | Oui | 
-> | servers / elasticpools | Oui | 
+> | servers / databases | Oui <br/><br/> [Apprenez-en davantage](../../azure-sql/database/move-resources-across-regions.md) sur le déplacement des bases de données entre les régions.<br/><br/> [Apprenez-en davantage](../../resource-mover/tutorial-move-region-sql.md) sur l’utilisation d’Azure Resource Mover pour déplacer des bases de données Azure SQL.  | 
+> | servers / elasticpools | Oui <br/><br/> [Apprenez-en davantage](../../azure-sql/database/move-resources-across-regions.md) sur le déplacement des pools élastiques entre les régions.<br/><br/> [Apprenez-en davantage](../../resource-mover/tutorial-move-region-sql.md) sur l’utilisation d’Azure Resource Mover pour déplacer des pools élastiques Azure SQL.  | 
 > | virtualclusters | Oui | 
 
 ## <a name="microsoftsqlvirtualmachine"></a>Microsoft.SqlVirtualMachine
@@ -1142,7 +1161,7 @@ Accédez à un espace de noms du fournisseur de ressources :
 > [!div class="mx-tableFixed"]
 > | Type de ressource | Changement de région | 
 > | ------------- | ----------- |
-> | storageaccounts | Oui | 
+> | storageaccounts | Oui<br/><br/> [Déplacer un compte Stockage Azure vers une autre région](../../storage/common/storage-account-move.md) | 
 
 ## <a name="microsoftstoragecache"></a>Microsoft.StorageCache
 

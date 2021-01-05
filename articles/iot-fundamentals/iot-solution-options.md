@@ -7,14 +7,14 @@ services: iot-fundamentals
 ms.topic: overview
 ms.date: 02/05/2020
 ms.author: dobett
-ms.openlocfilehash: 046116addf643d6c0eb0faf2f821b6ef78d440c6
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 7ff8193e87d138878d95e783d144d445436e7a08
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77050626"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96453007"
 ---
-# <a name="choose-the-right-iot-solution"></a>Choisir la bonne solution IoT
+# <a name="what-is-the-right-iot-solution-for-your-business"></a>Quelle est la solution IoT adaptée à votre entreprise ?
 
 Pour créer une solution IoT pour votre entreprise, vous devez généralement choisir entre une approche basée sur des *services de plateforme* et une approche basée sur une *plateforme d’applications managées*.
 
@@ -75,4 +75,4 @@ Pour une explication plus complète des différents services et plateformes et d
 
 Pour en savoir plus sur les principaux attributs caractérisant les solutions IoT réussies, consultez le livre blanc [8 attributes of successful IoT solutions](https://aka.ms/8attributes).
 
-Pour une étude approfondie de l’architecture IoT, consultez [Microsoft Azure IoT Reference Architecture](https://aka.ms/iotrefarchitecture) (Architecture de référence Microsoft Azure IoT).
+Pour une étude approfondie de l’architecture IoT, consultez [Microsoft Azure IoT Reference Architecture](/azure/architecture/reference-architectures/iot) (Architecture de référence Microsoft Azure IoT).

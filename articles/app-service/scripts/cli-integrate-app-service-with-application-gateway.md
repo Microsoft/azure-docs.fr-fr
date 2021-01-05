@@ -15,13 +15,13 @@ ms.tgt_pltfrm: na
 ms.workload: web
 ms.date: 12/09/2019
 ms.author: madsd
-ms.custom: seodec18
-ms.openlocfilehash: ee5e50bdba0a798d335641dc8a0c7ae69832d8f6
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 3820e7bf00f99a846dd2be0edeaf4248e0dfd8ad
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74979505"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97006078"
 ---
 # <a name="integrate-app-service-with-application-gateway-using-cli"></a>Intégrer App Service à Application Gateway à l’aide d’Azure CLI
 
@@ -29,9 +29,9 @@ Cet exemple de script crée une application web Azure App Service, un réseau vi
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devrez utiliser Azure CLI 2.0.74 ou ultérieur. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0.74 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -45,19 +45,19 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 | Commande | Notes |
 |---|---|
-| [`az group create`](https://docs.microsoft.com/cli/azure/group?view=azure-cli-latest#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
-| [`az network vnet create`](https://docs.microsoft.com/cli/azure/network/vnet?view=azure-cli-latest#az-network-vnet-create) | Créer un réseau virtuel. |
-| [`az network public-ip create`](https://docs.microsoft.com/cli/azure/network/public-ip?view=azure-cli-latest#az-network-public-ip-create) | Crée une adresse IP publique. |
-| [`az network public-ip show`](https://docs.microsoft.com/cli/azure/network/public-ip?view=azure-cli-latest#az-network-public-ip-show) | Montre les détails d’une adresse IP publique. |
-| [`az appservice plan create`](https://docs.microsoft.com/cli/azure/appservice/plan?view=azure-cli-latest#az-appservice-plan-create) | Crée un plan App Service. |
-| [`az webapp create`](https://docs.microsoft.com/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) | Crée une application web App Service. |
-| [`az webapp show`](https://docs.microsoft.com/cli/azure/webapp?view=azure-cli-latest#az-webapp-show) | Montre les détails d’une application web App Service. |
-| [`az webapp config access-restriction add`](https://docs.microsoft.com/cli/azure/webapp/config/access-restriction?view=azure-cli-latest#az-webapp-config-access-restriction-add) | Ajoute une restriction d’accès à l’application web App Service. |
-| [`az network application-gateway create`](https://docs.microsoft.com/cli/azure/network/application-gateway?view=azure-cli-latest#az-network-application-gateway-create) | Crée une passerelle d’application. |
-| [`az network application-gateway http-settings update`](https://docs.microsoft.com/cli/azure/network/application-gateway/http-settings?view=azure-cli-latest#az-network-application-gateway-http-settings-update) | Met à jour les paramètres HTTP d’Application Gateway. |
+| [`az group create`](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
+| [`az network vnet create`](/cli/azure/network/vnet#az-network-vnet-create) | Créer un réseau virtuel. |
+| [`az network public-ip create`](/cli/azure/network/public-ip#az-network-public-ip-create) | Crée une adresse IP publique. |
+| [`az network public-ip show`](/cli/azure/network/public-ip#az-network-public-ip-show) | Montre les détails d’une adresse IP publique. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | Crée un plan App Service. |
+| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | Crée une application web App Service. |
+| [`az webapp show`](/cli/azure/webapp#az-webapp-show) | Montre les détails d’une application web App Service. |
+| [`az webapp config access-restriction add`](/cli/azure/webapp/config/access-restriction#az-webapp-config-access-restriction-add) | Ajoute une restriction d’accès à l’application web App Service. |
+| [`az network application-gateway create`](/cli/azure/network/application-gateway#az-network-application-gateway-create) | Crée une passerelle d’application. |
+| [`az network application-gateway http-settings update`](/cli/azure/network/application-gateway/http-settings#az-network-application-gateway-http-settings-update) | Met à jour les paramètres HTTP d’Application Gateway. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
 Vous trouverez des exemples supplémentaires de scripts CLI App Service dans la [documentation relative à Azure App Service](../samples-cli.md).

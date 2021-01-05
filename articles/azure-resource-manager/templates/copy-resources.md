@@ -1,26 +1,26 @@
 ---
 title: Déployer plusieurs instances de ressources
-description: Utilisez l’opération copy et les tableaux dans un modèle Azure Resource Manager pour déployer un type de ressource plusieurs fois.
+description: Utilisez l’opération copy et les tableaux dans un modèle Azure Resource Manager (modèle ARM) pour déployer un même type de ressource plusieurs fois.
 ms.topic: conceptual
-ms.date: 04/29/2020
-ms.openlocfilehash: d4f40b606ffd56019b44cc8b67e5629b935bf50c
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.date: 09/21/2020
+ms.openlocfilehash: 47f3d693b84347973889a6003360d7113c427f4d
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583382"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905908"
 ---
 # <a name="resource-iteration-in-arm-templates"></a>Itération de ressource dans les modèles ARM
 
-Cet article explique comment créer plusieurs instances d’une ressource dans votre modèle Azure Resource Manager (ARM). En ajoutant l’élément **copy** à la section resources de votre modèle, vous pouvez définir dynamiquement le nombre de ressources à déployer. Cela vous évite également de répéter la syntaxe du modèle.
+Cet article explique comment créer plusieurs instances d’une ressource dans votre modèle Azure Resource Manager (modèle ARM). En ajoutant l’élément `copy` à la section resources de votre modèle, vous pouvez définir dynamiquement le nombre de ressources à déployer. Cela vous évite également de répéter la syntaxe du modèle.
 
-Vous pouvez également utiliser l’élément copy avec les éléments [properties](copy-properties.md), [variables](copy-variables.md) et [outputs](copy-outputs.md).
+Vous pouvez également utiliser `copy` avec [properties](copy-properties.md), [variables](copy-variables.md) et [outputs](copy-outputs.md).
 
 Si vous devez spécifier si une ressource est déployée, consultez la page relative à l’[élément Condition](conditional-resource-deployment.md).
 
 ## <a name="syntax"></a>Syntaxe
 
-L’élément copy utilise le format général suivant :
+L’élément `copy` utilise le format général suivant :
 
 ```json
 "copy": {
@@ -31,9 +31,9 @@ L’élément copy utilise le format général suivant :
 }
 ```
 
-La propriété **name** est toute valeur qui identifie la boucle. La propriété **count** spécifie le nombre d’itérations que vous souhaitez pour le type de ressource.
+La propriété `name` est toute valeur qui identifie la boucle. La propriété `count` spécifie le nombre d’itérations que vous souhaitez pour le type de ressource.
 
-Utilisez les propriétés **mode** et **batchSize** pour spécifier si les ressources sont déployées en parallèle ou en séquence. Ces propriétés sont décrites dans [Série ou parallèle](#serial-or-parallel).
+Utilisez les propriétés `mode` et `batchSize` pour spécifier si les ressources sont déployées en parallèle ou en séquence. Ces propriétés sont décrites dans [Série ou parallèle](#serial-or-parallel).
 
 ## <a name="copy-limits"></a>Limites de copie
 
@@ -52,7 +52,7 @@ Soyez prudent lorsque vous utilisez le [déploiement en mode Complet](deployment
 
 ## <a name="resource-iteration"></a>Itération de ressource
 
-L’exemple suivant crée le nombre de comptes de stockage spécifiés dans le paramètre **storageCount**.
+L’exemple suivant crée le nombre de comptes de stockage spécifiés dans le paramètre `storageCount`.
 
 ```json
 {
@@ -97,7 +97,7 @@ Crée les noms suivants :
 * storage1
 * storage2.
 
-Pour décaler la valeur d’index, vous pouvez transmettre une valeur dans la fonction copyIndex(). Le nombre d’itérations est toujours spécifié dans l’élément copy, mais la valeur de copyIndex est décalée en fonction de la valeur spécifiée. Si bien que l’exemple suivant :
+Pour décaler la valeur d’index, vous pouvez passer une valeur dans la fonction `copyIndex()`. Le nombre d’itérations est toujours spécifié dans l’élément copy, mais la valeur de `copyIndex` est décalée en fonction de la valeur spécifiée. Si bien que l’exemple suivant :
 
 ```json
 "name": "[concat('storage', copyIndex(1))]",
@@ -156,6 +156,8 @@ Par défaut, Resource Manager crée les ressources en parallèle. Il n’appliqu
 
 Toutefois, vous souhaiterez peut-être spécifier que les ressources soient déployées en séquence. Par exemple, lors de la mise à jour d’un environnement de production, vous souhaiterez échelonner les mises à jour afin que seulement un certain nombre soient mises à jour à un moment donné. Pour déployer en série plusieurs instances d’une ressource, affectez à `mode` la valeur **serial** et à `batchSize` le nombre d’instances à déployer à la fois. Avec le mode série, Resource Manager crée une dépendance sur les instances précédentes de la boucle, afin de ne pas démarrer un lot tant que le précédent n’est pas terminé.
 
+La valeur de `batchSize` ne peut pas dépasser la valeur de `count` dans l’élément copy.
+
 Par exemple, pour déployer en série des comptes de stockage deux à la fois, utilisez :
 
 ```json
@@ -185,7 +187,7 @@ Par exemple, pour déployer en série des comptes de stockage deux à la fois, u
 }
 ```
 
-La propriété mode accepte également **parallel**, qui est la valeur par défaut.
+La propriété `mode` accepte également **parallel**, qui est la valeur par défaut.
 
 ## <a name="depend-on-resources-in-a-loop"></a>En fonction des ressources dans une boucle
 
@@ -289,12 +291,11 @@ Les exemples suivants montrent des scénarios courants de création de plusieurs
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressource à l’aide de modèles ARM](template-tutorial-create-multiple-instances.md).
+* Pour suivre un tutoriel, consultez [Tutoriel : Créer plusieurs instances de ressources grâce à des modèles ARM](template-tutorial-create-multiple-instances.md).
 * Pour connaître les autres utilisations de l’élément copy, consultez :
   * [Itération de propriété dans les modèles ARM](copy-properties.md)
   * [Itération de variable dans les modèles ARM](copy-variables.md)
   * [Itération de sortie dans les modèles ARM](copy-outputs.md)
 * Pour plus d’informations sur l’utilisation de l’élément copy avec les modèles imbriqués, consultez [Utilisation de l’élément copy](linked-templates.md#using-copy).
-* Pour en savoir plus sur les sections d’un modèle, consultez [Création de modèles ARM](template-syntax.md).
-* Pour savoir comment déployer votre modèle, consultez [Déployer une application avec un modèle ARM](deploy-powershell.md).
-
+* Pour plus d’informations sur les différentes sections d’un modèle, consultez [Présentation de la structure et de la syntaxe des modèles ARM](template-syntax.md).
+* Pour savoir comment déployer votre modèle, consultez [Déployer des ressources avec des modèles ARM et Azure PowerShell](deploy-powershell.md).

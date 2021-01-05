@@ -1,20 +1,18 @@
 ---
 title: Vue d’ensemble d’Azure Service Fabric avec Gestion des API
 description: Cet article présente l’utilisation de Gestion des API Azure en tant que passerelle vers vos applications Service Fabric.
-author: vturecek
 ms.topic: conceptual
 ms.date: 06/22/2017
-ms.author: vturecek
-ms.openlocfilehash: 2a331715d4e4538cfdda8d958ff549a81b627b79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 32f47d62cc9dda7cc88421dbf616bf69ffe152fc
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76028555"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575684"
 ---
 # <a name="service-fabric-with-azure-api-management-overview"></a>Vue d’ensemble d’Azure Service Fabric avec Gestion des API
 
-Les applications cloud ont généralement besoin d’une passerelle frontale afin de fournir un point d’entrée unique pour les utilisateurs, les appareils ou d’autres applications. Dans Service Fabric, une passerelle peut être n’importe quel service sans état, comme une [application ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md), ou un autre service conçu pour l’entrée de trafic, par exemple les [concentrateurs d’événements](https://docs.microsoft.com/azure/event-hubs/), [IoT Hub](https://docs.microsoft.com/azure/iot-hub/) ou [Gestion des API Azure](https://docs.microsoft.com/azure/api-management/).
+Les applications cloud ont généralement besoin d’une passerelle frontale afin de fournir un point d’entrée unique pour les utilisateurs, les appareils ou d’autres applications. Dans Service Fabric, une passerelle peut être n’importe quel service sans état, comme une [application ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md), ou un autre service conçu pour l’entrée de trafic, par exemple les [concentrateurs d’événements](../event-hubs/index.yml), [IoT Hub](../iot-hub/index.yml) ou [Gestion des API Azure](../api-management/index.yml).
 
 Cet article présente l’utilisation de Gestion des API Azure en tant que passerelle vers vos applications Service Fabric. Gestion des API s’intègre directement dans Service Fabric, ce qui vous permet de publier des API avec un ensemble complet de règles de routage vers vos services Service Fabric principaux.
 
@@ -29,13 +27,13 @@ Une architecture Service Fabric commune utilise une application web d’une seul
 
 Dans ce scénario, un service web sans état sert de passerelle vers l’application Service Fabric. Cette approche nécessite que vous écriviez un service web capable de transmettre les requêtes HTTP aux services principaux, comme indiqué dans le diagramme suivant :
 
-![Vue d’ensemble de la topologie Service Fabric avec Gestion des API][sf-web-app-stateless-gateway]
+![Diagramme montrant la façon dont un service web sans état sert de passerelle vers l’application Service Fabric.][sf-web-app-stateless-gateway]
 
 Les applications sont de plus en plus complexes et il en va de même pour les passerelles qui doivent présenter une API devant une multitude de services principaux. Gestion des API Azure est conçue pour gérer les API complexes avec des règles de routage, un contrôle d’accès, une limitation du débit, une surveillance, une journalisation des événements et une mise en cache des réponses, mais impliquant un minimum de travail de votre part. Gestion des API Azure prend en charge la détection du service Service Fabric, la résolution de partition et la sélection de réplica pour acheminer les requêtes intelligemment et directement vers des services principaux dans Service Fabric, ce qui vous évite d’avoir à écrire votre propre passerelle API sans état. 
 
 Dans ce scénario, l’IU web est toujours prise en charge par un service web, tandis que les appels API HTTP sont gérés et acheminés par le biais de Gestion des API Azure, comme indiqué dans le diagramme suivant :
 
-![Vue d’ensemble de la topologie Service Fabric avec Gestion des API][sf-apim-web-app]
+![Diagramme montrant la façon dont l’IU web est toujours prise en charge par un service web, tandis que les appels API HTTP sont gérés et acheminés par le biais de Gestion des API Azure.][sf-apim-web-app]
 
 ## <a name="application-scenarios"></a>Scénarios d’application
 
@@ -51,7 +49,7 @@ Dans le cas le plus simple, le trafic est transféré à une instance de service
 
 Dans le scénario suivant, une application Service Fabric contient un service sans état nommé `fabric:/app/fooservice`, qui expose une API HTTP interne. Le nom d’instance de service est bien connu et peut être codé en dur directement dans la stratégie de traitement entrant Gestion des API. 
 
-![Vue d’ensemble de la topologie Service Fabric avec Gestion des API][sf-apim-static-stateless]
+![Diagramme montrant une application Service Fabric qui contient un service sans état qui expose une API HTTP interne.][sf-apim-static-stateless]
 
 ## <a name="send-traffic-to-a-stateful-service"></a>Envoyer le trafic vers un service avec état
 
@@ -82,7 +80,7 @@ Dans cet exemple, une instance de service sans état est créée pour chaque uti
   - Une requête vers `/api/users/foo` est acheminée vers l’instance de service `fabric:/app/users/foo`
   - Une requête vers `/api/users/bar` est acheminée vers l’instance de service `fabric:/app/users/bar`
 
-![Vue d’ensemble de la topologie Service Fabric avec Gestion des API][sf-apim-dynamic-stateless]
+![Diagramme montrant un exemple où une instance de service sans état est créée pour chaque utilisateur d’une application avec un nom généré de manière dynamique.][sf-apim-dynamic-stateless]
 
 ## <a name="send-traffic-to-multiple-stateful-services"></a>Envoyer le trafic vers plusieurs services avec état
 
@@ -103,7 +101,7 @@ Dans cet exemple, une instance de service avec état est créée pour chaque uti
 
 Chaque instance de service est également partitionnée à l’aide du schéma de partition Int64, avec deux partitions et une plage de clés qui s’étend de `Int64.MinValue` à `Int64.MaxValue`. La stratégie de serveur principal calcule une clé de partition dans cette plage en convertissant la valeur `id` fournie dans le chemin d’accès de requête URL à un entier 64 bits, bien que n’importe quel algorithme puisse être utilisé ici pour calculer la clé de partition. 
 
-![Vue d’ensemble de la topologie Service Fabric avec Gestion des API][sf-apim-dynamic-stateful]
+![Diagramme montrant que chaque instance de service est également partitionnée à l’aide du schéma de partition Int64, avec deux partitions et une plage de clés qui s’étend d’Int64.MinValue à Int64.MaxValue.][sf-apim-dynamic-stateful]
 
 ## <a name="next-steps"></a>Étapes suivantes
 

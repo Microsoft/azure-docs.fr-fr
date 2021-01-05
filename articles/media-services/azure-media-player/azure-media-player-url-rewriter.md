@@ -6,12 +6,13 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
 ms.date: 04/20/2020
-ms.openlocfilehash: f238a2a3c499cf1e36f5e7c40e087375b7db0a70
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: devx-track-js
+ms.openlocfilehash: b037eec13fda0b5ec16a4f2f53ad2a64fb5f8da1
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81727466"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91275555"
 ---
 # <a name="url-rewriter"></a>Réécriture d’URL #
 

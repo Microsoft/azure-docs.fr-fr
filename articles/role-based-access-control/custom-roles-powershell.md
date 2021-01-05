@@ -8,18 +8,18 @@ manager: mtillman
 ms.assetid: 9e225dba-9044-4b13-b573-2f30d77925a9
 ms.service: role-based-access-control
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 03/18/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: ffb53bff4e70fbeb80e518fe13aaeaa8b396cfac
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 799475db567c88f067192d027589e9185ee1782b
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734805"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97369172"
 ---
 # <a name="create-or-update-azure-custom-roles-using-azure-powershell"></a>Créer ou mettre à jour des rôles personnalisés Azure avec Azure PowerShell
 
@@ -63,7 +63,7 @@ API Management Service Contributor                   False
 L’exemple suivant répertorie les rôles personnalisés pouvant être attribués dans l’abonnement sélectionné.
 
 ```azurepowershell
-Get-AzRoleDefinition | ? {$_.IsCustom -eq $true} | FT Name, IsCustom
+Get-AzRoleDefinition -Custom | FT Name, IsCustom
 ```
 
 ```Example
@@ -403,4 +403,4 @@ Are you sure you want to remove role definition with name 'Virtual Machine Opera
 
 - [Tutoriel : Créer un rôle personnalisé Azure à l’aide d’Azure PowerShell](tutorial-custom-role-powershell.md)
 - [Rôle personnalisés Azure](custom-roles.md)
-- [Opérations du fournisseur de ressources Azure Resource Manager](resource-provider-operations.md)
+- [Opérations de fournisseur de ressources Azure](resource-provider-operations.md)

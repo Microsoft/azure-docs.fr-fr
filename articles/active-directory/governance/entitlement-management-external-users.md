@@ -10,32 +10,32 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 03/22/2020
+ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: af0f68ca9520c1715463212da80aaabed48f8269
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b356d5dff453b598eeb773af1a56fc50193e9e16
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128701"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746658"
 ---
 # <a name="govern-access-for-external-users-in-azure-ad-entitlement-management"></a>Régir l’accès des utilisateurs externes dans la gestion des droits d’utilisation Azure AD
 
-La gestion des droits d'utilisation Azure AD utilise [Azure AD B2B (Business-to-Business)](../b2b/what-is-b2b.md) pour collaborer avec des personnes extérieures à votre organisation dans un autre annuaire. Avec Azure AD B2B, les utilisateurs externes s’authentifient auprès de leur annuaire de base, mais disposent d’une représentation dans votre annuaire. La représentation dans votre annuaire permet à l’utilisateur d’avoir accès à vos ressources.
+La gestion des droits d'utilisation Azure AD utilise [Azure AD B2B (Business-to-Business)](../external-identities/what-is-b2b.md) pour collaborer avec des personnes extérieures à votre organisation dans un autre annuaire. Avec Azure AD B2B, les utilisateurs externes s’authentifient auprès de leur annuaire de base, mais disposent d’une représentation dans votre annuaire. La représentation dans votre annuaire permet à l’utilisateur d’avoir accès à vos ressources.
 
 Cet article décrit les paramètres que vous pouvez spécifier pour régir l’accès des utilisateurs externes.
 
 ## <a name="how-entitlement-management-can-help"></a>De quelle façon la gestion des droits d’utilisation peut aider
 
-Lorsque vous utilisez l'expérience d'invitation [Azure AD B2B](../b2b/what-is-b2b.md), vous devez déjà connaître les adresses e-mail des utilisateurs invités externes que vous souhaitez importer dans votre annuaire de ressources, et avec lesquels vous voulez collaborer. Cela fonctionne très bien lorsque vous travaillez sur un projet plus petit ou à court terme et que vous connaissez déjà tous les participants, mais s'avère plus complexe si vous souhaitez collaborer avec un grand nombre d'utilisateurs ou si les participants changent au fil du temps.  Par exemple, vous pouvez travailler avec une autre organisation et avoir un point de contact avec cette organisation, mais au fil du temps, d'autres utilisateurs de cette organisation auront également besoin d'un accès.
+Lorsque vous utilisez l'expérience d'invitation [Azure AD B2B](../external-identities/what-is-b2b.md), vous devez déjà connaître les adresses e-mail des utilisateurs invités externes que vous souhaitez importer dans votre annuaire de ressources, et avec lesquels vous voulez collaborer. Cela fonctionne très bien lorsque vous travaillez sur un projet plus petit ou à court terme et que vous connaissez déjà tous les participants, mais s'avère plus complexe si vous souhaitez collaborer avec un grand nombre d'utilisateurs ou si les participants changent au fil du temps.  Par exemple, vous pouvez travailler avec une autre organisation et avoir un point de contact avec cette organisation, mais au fil du temps, d'autres utilisateurs de cette organisation auront également besoin d'un accès.
 
 Avec la gestion des droits d'utilisation, vous pouvez définir une stratégie autorisant les utilisateurs des organisations que vous spécifiez à pouvoir demander eux-mêmes un package d'accès. Vous pouvez spécifier si une approbation est requise, ainsi qu'une date d’expiration de l’accès. Si une approbation est exigée, vous pouvez également inviter un ou plusieurs utilisateurs de l'organisation externe dans votre annuaire, et le ou les désigner comme approbateurs, car ils sont susceptibles de savoir quels utilisateurs externes de leur organisation ont besoin d'un accès. Une fois le package d'accès configuré, vous pouvez envoyer le lien de ce package à la personne à contacter (sponsor) au sein de l'organisation externe. Cette personne peut le partager avec d'autres utilisateurs de l'organisation externe et ceux-ci peuvent à leur tour utiliser ce lien pour demander le package d'accès. Les utilisateurs de cette organisation déjà invités dans votre répertoire peuvent également utiliser ce lien.
 
-Lorsqu'une demande est approuvée, la gestion des droits d'utilisation accorde à l'utilisateur l'accès nécessaire, notamment une invitation si cet utilisateur n'est pas encore présent dans votre répertoire. Azure AD crée automatiquement un compte invité B2B pour cet utilisateur. Notez qu’un administrateur peut avoir précédemment restreint les organisations autorisées à collaborer, en définissant une [liste d'autorisations ou de refus B2B](../b2b/allow-deny-list.md) pour autoriser ou refuser les invitations liées à d’autres organisations.  Si l’utilisateur ne figure pas sur la liste d'autorisations ou de refus, il ne sera pas invité.
+Lorsqu'une demande est approuvée, la gestion des droits d'utilisation accorde à l'utilisateur l'accès nécessaire, notamment une invitation si cet utilisateur n'est pas encore présent dans votre répertoire. Azure AD crée automatiquement un compte invité B2B pour cet utilisateur. Notez qu’un administrateur peut avoir précédemment restreint les organisations autorisées à collaborer, en définissant une [liste d'autorisations ou de refus B2B](../external-identities/allow-deny-list.md) pour autoriser ou refuser les invitations liées à d’autres organisations.  Si l’utilisateur ne figure pas sur la liste d'autorisations ou de refus, il ne sera pas invité.
 
 Pour limiter dans le temps l'accès de l'utilisateur externe, vous spécifiez une date d'expiration dans la stratégie, comme 180 jours. Une fois ces 180 jours écoulés et en l'absence d’extension, la gestion des droits d'utilisateur supprime tous les accès associés à ce package d'accès. Par défaut, si l'utilisateur invité par le biais de la gestion des droits d'utilisation ne dispose d'aucune autre attribution de package d'accès, lorsqu'il perd sa dernière attribution, son compte invité est bloqué pendant 30 jours, puis supprimé. Et ce, afin d'éviter la prolifération de comptes inutiles. Comme décrit dans les sections suivantes, ces paramètres sont configurables.
 
@@ -57,7 +57,7 @@ Le diagramme et les étapes ci-dessous offrent une vue d’ensemble de la façon
 
 1. La demande passe à l’[état de remise en cours](entitlement-management-process.md).
 
-1. À l’aide du processus d’invitation B2B, un compte d’utilisateur invité est créé dans votre annuaire : **Demandeur A (Invité)**  dans cet exemple. Si une [liste verte ou une liste d’exclusion](../b2b/allow-deny-list.md) est définie, le paramètre de liste est appliqué.
+1. À l’aide du processus d’invitation B2B, un compte d’utilisateur invité est créé dans votre annuaire : **Demandeur A (Invité)**  dans cet exemple. Si une [liste verte ou une liste d’exclusion](../external-identities/allow-deny-list.md) est définie, le paramètre de liste est appliqué.
 
 1. L’utilisateur invité a reçu l’accès à toutes les ressources du package d’accès. Les modifications apportées à Azure AD et à d’autres services Microsoft Online Services, ou à des applications SaaS connectées, peuvent prendre un certain temps. Pour plus d’informations, consultez [Lorsque les modifications sont appliquées](entitlement-management-access-package-resources.md#when-changes-are-applied).
 
@@ -83,9 +83,9 @@ Pour vous assurer que les personnes extérieures à votre organisation peuvent d
 
 - Autoriser les invités à inviter d’autres invités dans votre répertoire signifie que des invitations d’invités peuvent se produire en dehors de la gestion des droits d’utilisation. Nous vous recommandons de définir **Les invités peuvent inviter** sur **Non** pour autoriser uniquement les invitations correctement régies.
 - Si vous utilisez la liste verte B2B, vous devez vous assurer que tous les domaines que vous souhaitez associer à la gestion des droits d’utilisation sont ajoutés à la liste. De même, si vous utilisez la liste d’exclusion B2B, vous devez vous assurer que tous les domaines auxquels vous souhaitez vous associer ne sont pas ajoutés à la liste.
-- Si vous créez une stratégie de gestion des droits d’utilisation pour **Tous les utilisateurs** (toutes les organisations connectées + tous les nouveaux utilisateurs externes), tous les paramètres issus des listes verte et d’exclusion B2B que vous avez sont prioritaires. Par conséquent, veillez à inclure les domaines que vous prévoyez d’inclure dans cette stratégie dans votre liste verte si vous en utilisez une, et excluez-les de votre liste d’exclusion si vous utilisez une liste d’exclusion.
-- Si vous souhaitez créer une stratégie de gestion des droits d’utilisation incluant **Tous les utilisateurs** (toutes les organisations connectées + tous les nouveaux utilisateurs externes), vous devez d’abord activer l’authentification par code secret à usage unique d’e-mail pour votre répertoire. Pour plus d’informations, consultez [Authentification par code secret à usage unique d’e-mail (préversion)](../b2b/one-time-passcode.md#opting-in-to-the-preview).
-- Pour plus d’informations sur les paramètres de collaboration B2B externe Azure AD, consultez [Permettre une collaboration B2B externe et gérer les utilisateurs autorisés à en inviter d’autres](../b2b/delegate-invitations.md).
+- Si vous créez une stratégie de gestion des droits d'utilisation pour **Tous les utilisateurs** (toutes les organisations connectées + tous les nouveaux utilisateurs externes) et qu’un utilisateur n’appartient pas à une organisation connectée dans votre annuaire, une organisation connectée est automatiquement créée pour celui-ci quand il demande le package. Tout paramètre de liste d’autorisation ou de refus B2B que vous avez est prioritaire. Par conséquent, veillez à inclure les domaines que vous prévoyez d’inclure dans cette stratégie dans votre liste verte si vous en utilisez une, et excluez-les de votre liste d’exclusion si vous utilisez une liste d’exclusion.
+- Si vous souhaitez créer une stratégie de gestion des droits d’utilisation incluant **Tous les utilisateurs** (toutes les organisations connectées + tous les nouveaux utilisateurs externes), vous devez d’abord activer l’authentification par code secret à usage unique d’e-mail pour votre répertoire. Pour plus d’informations, consultez [Authentification par code secret à usage unique d’e-mail (préversion)](../external-identities/one-time-passcode.md).
+- Pour plus d’informations sur les paramètres de collaboration B2B externe Azure AD, consultez [Permettre une collaboration B2B externe et gérer les utilisateurs autorisés à en inviter d’autres](../external-identities/delegate-invitations.md).
 
     ![Paramètres de collaboration externe Azure AD](./media/entitlement-management-external-users/collaboration-settings.png)
 
@@ -97,19 +97,19 @@ Pour vous assurer que les personnes extérieures à votre organisation peuvent d
 
 ### <a name="review-your-sharepoint-online-external-sharing-settings"></a>Passer en revue vos paramètres de partage externe SharePoint Online
 
-- Si vous souhaitez inclure des sites SharePoint Online dans vos packages d’accès pour des utilisateurs externes, assurez-vous que votre paramètre de partage externe au niveau de l’organisation est défini sur **Tout le monde** (les utilisateurs n’ont pas besoin de se connecter) ou **Invités nouveaux et existants** (les invités doivent se connecter ou fournir un code de vérification). Pour plus d’informations, consultez [Activer ou désactiver le partage externe](https://docs.microsoft.com/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
+- Si vous souhaitez inclure des sites SharePoint Online dans vos packages d’accès pour des utilisateurs externes, assurez-vous que votre paramètre de partage externe au niveau de l’organisation est défini sur **Tout le monde** (les utilisateurs n’ont pas besoin de se connecter) ou **Invités nouveaux et existants** (les invités doivent se connecter ou fournir un code de vérification). Pour plus d’informations, consultez [Activer ou désactiver le partage externe](/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
 
-- Si vous souhaitez restreindre le partage externe en dehors de la gestion des droits d’utilisation, vous pouvez définir le paramètre de partage externe sur **Invités existants**. Ensuite, seuls les nouveaux utilisateurs qui sont invités par l’intermédiaire de la gestion des droits d’utilisation pourront accéder à ces sites. Pour plus d’informations, consultez [Activer ou désactiver le partage externe](https://docs.microsoft.com/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
+- Si vous souhaitez restreindre le partage externe en dehors de la gestion des droits d’utilisation, vous pouvez définir le paramètre de partage externe sur **Invités existants**. Ensuite, seuls les nouveaux utilisateurs qui sont invités par l’intermédiaire de la gestion des droits d’utilisation pourront accéder à ces sites. Pour plus d’informations, consultez [Activer ou désactiver le partage externe](/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
 
-- Assurez-vous que les paramètres au niveau du site autorisent l’accès invité (mêmes options que celles précédemment listées). Pour plus d’informations, consultez [Activer ou désactiver le partage externe pour un site](https://docs.microsoft.com/sharepoint/change-external-sharing-site).
+- Assurez-vous que les paramètres au niveau du site autorisent l’accès invité (mêmes options que celles précédemment listées). Pour plus d’informations, consultez [Activer ou désactiver le partage externe pour un site](/sharepoint/change-external-sharing-site).
 
-### <a name="review-your-office-365-group-sharing-settings"></a>Passer en revue vos paramètres de partage de groupe Office 365
+### <a name="review-your-microsoft-365-group-sharing-settings"></a>Examinez vos paramètres de partage de groupe Microsoft 365
 
-- Si vous souhaitez inclure des groupes Office 365 dans vos packages d’accès pour des utilisateurs externes, assurez-vous que le paramètre **Permettre aux utilisateurs d’ajouter de nouveaux invités à l’organisation** est défini sur **Activé** pour autoriser l’accès invité. Pour plus d’informations, consultez [Gérer l’accès invité à des groupes Office 365](https://docs.microsoft.com/office365/admin/create-groups/manage-guest-access-in-groups?view=o365-worldwide#manage-groups-guest-access).
+- Si vous souhaitez inclure des groupes Microsoft 365 dans vos packages d’accès pour des utilisateurs externes, assurez-vous que le paramètre **Permettre aux utilisateurs d’ajouter de nouveaux invités à l’organisation** est défini sur **Activé** pour autoriser l’accès invité. Pour plus d’informations, consultez [Gérer l’accès invité à des groupes Microsoft 365](/Microsoft 365/admin/create-groups/manage-guest-access-in-groups?view=Microsoft 365-worldwide#manage-groups-guest-access).
 
-- Si vous souhaitez que les utilisateurs externes puissent accéder au site SharePoint Online et aux ressources associées à un groupe Office 365, veillez à activer le partage externe SharePoint Online. Pour plus d’informations, consultez [Activer ou désactiver le partage externe](https://docs.microsoft.com/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
+- Si vous souhaitez que les utilisateurs externes puissent accéder au site SharePoint Online et aux ressources associées à un groupe Microsoft 365, veillez à activer le partage externe SharePoint Online. Pour plus d’informations, consultez [Activer ou désactiver le partage externe](/sharepoint/turn-external-sharing-on-or-off#change-the-organization-level-external-sharing-setting).
 
-- Pour plus d’informations sur la façon de définir la stratégie d’invité pour les groupes Office 365 au niveau du répertoire dans PowerShell, consultez [Exemple : Configurer une stratégie d’invité pour les groupes au niveau du répertoire](../users-groups-roles/groups-settings-cmdlets.md#example-configure-guest-policy-for-groups-at-the-directory-level).
+- Pour plus d’informations sur la façon de définir la stratégie d’invité pour les groupes Microsoft 365 au niveau du répertoire dans PowerShell, consultez [Exemple : Configurer une stratégie d’invité pour les groupes au niveau du répertoire](../enterprise-users/groups-settings-cmdlets.md#example-configure-guest-policy-for-groups-at-the-directory-level).
 
 ### <a name="review-your-teams-sharing-settings"></a>Passer en revue vos paramètres de partage des équipes
 

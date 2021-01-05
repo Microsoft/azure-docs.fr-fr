@@ -3,16 +3,17 @@ title: Détacher un disque de données d’une machine virtuelle Linux - Azure
 description: Apprenez à détacher un disque de données d’une machine virtuelle dans Azure à l’aide d’Azure CLI ou du portail Azure.
 author: roygara
 ms.service: virtual-machines-linux
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/18/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: f8a0790169b17ad7755386f9bdd4f9372efc83e7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 41f70a476e5cc562207614c4e04658d5f0fc6d09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74036364"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87499515"
 ---
 # <a name="how-to-detach-a-data-disk-from-a-linux-virtual-machine"></a>Comment détacher un disque de données d’une machine virtuelle Linux
 
@@ -106,12 +107,10 @@ Le disque reste dans le stockage, mais il n’est plus attaché à une machine v
 ## <a name="detach-a-data-disk-using-the-portal"></a>Détacher un disque de données avec le portail
 
 1. Dans le menu de gauche, sélectionnez **Machines virtuelles**.
-2. Sélectionnez la machine virtuelle qui possède le disque de données que vous souhaitez détacher, puis cliquez sur **Arrêter** pour libérer la machine virtuelle.
-3. Dans le volet de la machine virtuelle, sélectionnez **Disques**.
-4. En haut du volet **Disques**, sélectionnez **Modifier**.
-5. Dans le volet **Disques**, à l’extrême droite du disque de données que vous souhaitez détacher, cliquez sur le bouton de détachement ![image du bouton de détachement](./media/detach-disk/detach.png).
-5. Une fois que le disque a été supprimé, cliquez sur Enregistrer en haut du volet.
-6. Dans le volet de la machine virtuelle, cliquez sur **Présentation**, puis cliquez sur le bouton **Démarrer** en haut du volet pour redémarrer la machine virtuelle.
+1. Dans le panneau de la machine virtuelle, sélectionnez **Disques**.
+1. En haut du panneau **Disques**, sélectionnez **Modifier**.
+1. Dans le panneau **Disques**, à l’extrême droite du disque de données que vous souhaitez détacher, cliquez sur le bouton détacher ![image du bouton détacher](./media/detach-disk/detach.png).
+1. Une fois que le disque a été supprimé, cliquez sur **Enregistrer** en haut du panneau.
 
 Le disque reste dans le stockage, mais il n’est plus attaché à une machine virtuelle.
 

@@ -1,14 +1,16 @@
 ---
 title: 'Tutoriel : Prédire les intentions - LUIS'
 description: Dans ce tutoriel, vous allez créer une application personnalisée qui prédit l’intention d’un utilisateur sur la base de l’énoncé (texte).
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: tutorial
 ms.date: 05/05/2020
-ms.openlocfilehash: c76273d7c180928d25be70e0abd7abf26c90b44a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 398324099f923a5141b172d61f9fd41a69dbf069
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588936"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95025291"
 ---
 # <a name="tutorial-build-a-luis-app-to-determine-user-intentions"></a>Tutoriel : Générer une application LUIS pour déterminer les intentions d’un utilisateur
 
@@ -113,9 +115,8 @@ Pour classifier un énoncé, l’intention a besoin d’exemples d’énoncés u
 
     `get a medium vegetarian pizza for delivery`
 
-    Ceci n’est pas exactement la même chose qu’un exemple d’énoncé. C’est donc un bon test pour voir si LUIS peut savoir ce qui faut prédire avec cette intention.
-
-    Le dernier paramètre de la chaîne de requête est `query`, l’énoncé est **requête**. Cet énoncé diffère de tous les exemples d’énoncés. Il constitue un bon test et doit retourner l’intention `OrderPizza` en tant qu’intention avec le score le plus élevé.
+  
+    Le paramètre de la chaîne de requête est `query`. L’énoncé **requête** est passé à l’URI. Cet énoncé diffère de tous les exemples d’énoncés. Il doit constituer un bon test pour vérifier si LUIS apprend et prédit l’intention `OrderPizza` en tant qu’intention avec le score le plus élevé.
 
     ```JSON
     {
@@ -192,7 +193,7 @@ Une fois que LUIS a retourné la réponse JSON, il en a fini avec cette demande.
 * [Guide pratique pour entraîner](luis-how-to-train.md)
 * [Comment publier](luis-how-to-publish-app.md)
 * [Guide pratique pour tester dans le portail LUIS](luis-interactive-test.md)
-* [Azure Bot](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+* [Azure Bot](/azure/bot-service/?view=azure-bot-service-4.0)
 
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -1,23 +1,26 @@
 ---
 title: 'Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et Node.js'
 titleSuffix: Azure Cognitive Services
-description: Utilisez l’API Ink Recognizer pour commencer la reconnaissance des traits d’encre numérique dans ce guide de démarrage rapide.
+description: Utilisez l’API Ink Recognizer et JavaScript pour commencer la reconnaissance des traits d’encre numérique dans ce guide de démarrage rapide.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
 ms.topic: quickstart
-ms.date: 12/17/2019
+ms.date: 08/24/2020
 ms.author: aahi
-ms.openlocfilehash: a37f2b7044fcba04ca18093aa73563961e9e35de
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-js
+ms.openlocfilehash: ca1c18fd1ea8507c8b6a58b5f786b9686b1f3a34
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75448139"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369072"
 ---
 # <a name="quickstart-recognize-digital-ink-with-the-ink-recognizer-rest-api-and-javascript"></a>Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et JavaScript
+
+[!INCLUDE [ink-recognizer-deprecation](../includes/deprecation-note.md)]
 
 Utilisez ce guide de démarrage rapide pour commencer à appliquer l’API Ink Recognizer aux traits d’encre numérique. Cette application JavaScript envoie une requête d’API contenant des données de trait d’encre au format JSON, puis affiche la réponse.
 
@@ -164,7 +167,7 @@ Cette application peut être exécutée au sein de votre navigateur web. Une ré
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Référence d’API REST](https://go.microsoft.com/fwlink/?linkid=2089907)
+> [Référence d’API REST](/rest/api/cognitiveservices/inkrecognizer/inkrecognizer)
 
 Pour observer le fonctionnement de l’API Ink Recognizer dans une application d’écriture manuscrite numérique, examinez les exemples d’applications suivants sur GitHub :
 * [C# et UWP (plateforme Windows universelle)](https://go.microsoft.com/fwlink/?linkid=2089803)  

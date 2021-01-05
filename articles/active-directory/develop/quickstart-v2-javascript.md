@@ -1,7 +1,7 @@
 ---
-title: Connecter des utilisateurs dans des applications monopages JavaScript | Azure
+title: 'Démarrage rapide : Connecter des utilisateurs dans des applications monopages JavaScript | Azure'
 titleSuffix: Microsoft identity platform
-description: Découvrez de quelle manière une application JavaScript peut appeler une API qui nécessite des jetons d’accès à l’aide de la plateforme d’identités Microsoft.
+description: Dans ce guide de démarrage rapide, vous découvrez de quelle manière une application JavaScript peut appeler une API qui exige des jetons d’accès émis par la plateforme d’identités Microsoft.
 services: active-directory
 author: navyasric
 manager: CelesteDG
@@ -11,24 +11,25 @@ ms.topic: quickstart
 ms.workload: identity
 ms.date: 04/11/2019
 ms.author: nacanuma
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript
-ms.openlocfilehash: 91a4d10269975152cc62f3f5dc33238a8f6f2e11
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript, devx-track-js
+ms.openlocfilehash: 1d6f04b0d6dec06954c594434ac7a9db62f0c89e
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82890520"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96762786"
 ---
 # <a name="quickstart-sign-in-users-and-get-an-access-token-in-a-javascript-spa"></a>Démarrage rapide : Connecter des utilisateurs et obtenir un jeton d’accès dans une application SPA JavaScript
 
-Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour découvrir comment une application monopage JavaScript peut connecter les utilisateurs de comptes personnels, professionnels et scolaires. Une application monopage JavaScript peut également obtenir un jeton d’accès pour appeler l’API Microsoft Graph ou une API web. (Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour une illustration.)
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment une application monopage JavaScript peut connecter des utilisateurs et appeler Microsoft Graph. L’exemple de code montre également comment obtenir un jeton d’accès pour appeler l’API Microsoft Graph ou n’importe quelle API web.
+
+Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour obtenir une illustration.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un abonnement Azure – [Créer un abonnement Azure gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
+* Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 * [Node.JS](https://nodejs.org/en/download/)
 * [Visual Studio Code](https://code.visualstudio.com/download) (pour modifier des fichiers projet)
-
 
 > [!div renderon="docs"]
 > ## <a name="register-and-download-your-quickstart-application"></a>Inscrire et télécharger votre application de démarrage rapide
@@ -48,12 +49,11 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >
 > #### <a name="step-1-register-your-application"></a>Étape 1 : Inscrivez votre application
 >
-> 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire, ou avec un compte personnel Microsoft.
->
-> 1. Si votre compte vous propose un accès à plusieurs locataires, sélectionnez votre compte en haut à droite, puis définissez votre session de portail sur le locataire Azure AD que vous voulez utiliser.
-> 1. Accédez à la page [Inscriptions d’applications](https://go.microsoft.com/fwlink/?linkid=2083908) de la plateforme d’identité Microsoft pour les développeurs.
-> 1. Sélectionnez **Nouvelle inscription**.
-> 1. Lorsque la page **Inscrire une application** s’affiche, entrez le nom de votre application.
+> 1. Connectez-vous au [portail Azure](https://portal.azure.com).
+> 1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+> 1. Recherchez et sélectionnez **Azure Active Directory**.
+> 1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+> 1. Entrez un **nom** pour votre application. Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
 > 1. Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft**.
 > 1. Sélectionnez **Inscription**. Dans la page **Vue d’ensemble**, notez la valeur de **ID d’application (client)** pour une utilisation ultérieure.
 > 1. Ce démarrage rapide requiert l’activation du [flux d’octroi implicite](v2-oauth2-implicit-grant-flow.md). Dans le volet gauche de l’application inscrite, sélectionnez **Authentification**.
@@ -75,10 +75,10 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > [!div renderon="docs"]
 > Pour exécuter le projet avec un serveur web en utilisant Node.js, [téléchargez les fichiers principaux du projet](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip).
 
-> [!div renderon="portal"]
+> [!div renderon="portal" class="sxs-lookup"]
 > Exécuter le projet avec un serveur web en utilisant Node.js
 
-> [!div renderon="portal" id="autoupdate" class="nextstepaction"]
+> [!div renderon="portal" id="autoupdate" class="sxs-lookup nextstepaction"]
 > [Téléchargez l’exemple de code](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip).
 
 > [!div renderon="docs"]
@@ -92,7 +92,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >  const msalConfig = {
 >    auth: {
 >      clientId: "Enter_the_Application_Id_Here",
->      authority: "Enter_the_Cloud_Instance_Id_Here_OR_Enter_the_Tenant_Info_Here",
+>      authority: "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
 >      redirectUri: "Enter_the_Redirect_Uri_Here",
 >    },
 >    cache: {
@@ -103,7 +103,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >
 >```
 
-> [!div renderon="portal"]
+> [!div class="sxs-lookup" renderon="portal"]
 > > [!NOTE]
 > > `Enter_the_Supported_Account_Info_Here`
 
@@ -111,8 +111,8 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 >
 > Où :
 > - *\<Enter_the_Application_Id_Here>* est l’**ID d’application (client)** de l’application que vous avez inscrite.
-> - *\<Enter_the_Cloud_Instance_Id_Here>* est l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez simplement *https://login.microsoftonline.com* . Pour les clouds **nationaux** (par exemple, Chine), consultez [Clouds nationaux](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud).
-> - *\<Enter_the_Tenant_info_here >* est défini sur une des options suivantes :
+> - *\<Enter_the_Cloud_Instance_Id_Here>* est l’instance du cloud Azure. Pour le cloud Azure principal ou mondial, entrez simplement *https://login.microsoftonline.com* . Pour les clouds **nationaux** (par exemple, Chine), consultez [Clouds nationaux](./authentication-national-cloud.md).
+> - *\<Enter_the_Tenant_info_here>* est défini sur l’une des options suivantes :
 >    - Si votre application prend en charge les *Comptes dans cet annuaire organisationnel*, remplacez cette valeur par l’**ID de locataire** ou le **nom du locataire** (par exemple, *contoso.microsoft.com*).
 >    - Si votre application prend en charge les *Comptes dans un annuaire organisationnel*, remplacez cette valeur par **organizations**.
 >    - Si votre application prend en charge les *Comptes dans un annuaire organisationnel et comptes personnels Microsoft*, remplacez cette valeur par **common**. Pour limiter la prise en charge aux *Comptes Microsoft personnels uniquement*, remplacez cette valeur par **consumers**.
@@ -130,8 +130,8 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > ```javascript
 >   // Add here the endpoints for MS Graph API services you would like to use.
 >   const graphConfig = {
->     graphMeEndpoint: "Enter_the_Graph_Endpoint_Herev1.0/me",
->     graphMailEndpoint: "Enter_the_Graph_Endpoint_Herev1.0/me/messages"
+>     graphMeEndpoint: "Enter_the_Graph_Endpoint_Here/v1.0/me",
+>     graphMailEndpoint: "Enter_the_Graph_Endpoint_Here/v1.0/me/messages"
 >   };
 >
 >   // Add here scopes for access token to be used at MS Graph API endpoints.
@@ -144,14 +144,14 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > [!div renderon="docs"]
 >
 > Où :
-> - *\<Enter_the_Graph_Endpoint_Here>* est le point de terminaison sur lequel les appels d’API seront effectués. Pour le service d’API Microsoft Graph principal ou mondial, entrez simplement `https://graph.microsoft.com`. Pour plus d’informations, consultez [Déploiements sur les clouds nationaux](https://docs.microsoft.com/graph/deployments).
+> - *\<Enter_the_Graph_Endpoint_Here>* est le point de terminaison sur lequel les appels d’API sont effectués. Pour le service d’API Microsoft Graph principal ou mondial, entrez simplement `https://graph.microsoft.com`. Pour plus d’informations, consultez [Déploiements sur les clouds nationaux](/graph/deployments).
 >
 > #### <a name="step-4-run-the-project"></a>Étape 4 : Exécuter le projet
 
 Exécutez le projet avec un serveur web en utilisant [Node.js](https://nodejs.org/en/download/) :
 
 1. Pour démarrer le serveur, exécutez la commande suivante dans le répertoire du projet :
-    ```batch
+    ```cmd
     npm install
     npm start
     ```
@@ -179,7 +179,7 @@ La bibliothèque MSAL connecte les utilisateurs et demande les jetons utilisés 
 
 Sinon, si Node.js est installé, vous pouvez télécharger la dernière version via npm (Node.js Package Manager) :
 
-```batch
+```cmd
 npm install msal
 ```
 
@@ -204,7 +204,7 @@ Le code du guide de démarrage rapide montre également comment initialiser la b
 const myMSALObj = new Msal.UserAgentApplication(msalConfig);
 ```
 
-> |Where  |  |
+> |Where  | Description |
 > |---------|---------|
 > |`clientId`     | ID de l’application inscrite dans le Portail Azure.|
 > |`authority`    | (Facultatif) URL de l’autorité qui prend en charge les types de comptes, comme décrit plus haut dans la section de configuration. L’autorité par défaut est `https://login.microsoftonline.com/common`. |
@@ -232,7 +232,7 @@ myMSALObj.loginPopup(loginRequest)
 });
 ```
 
-> |Where  |  |
+> |Where  | Description |
 > |---------|---------|
 > | `scopes`   | (Facultatif) Contient les étendues demandées pour le consentement de l’utilisateur au moment de la connexion. Par exemple, `[ "user.read" ]` pour Microsoft Graph ou `[ "<Application ID URL>/scope" ]` pour les API web personnalisées (c’est-à-dire `api://<Application ID>/access_as_user`). |
 
@@ -262,7 +262,7 @@ myMSALObj.acquireTokenSilent(tokenRequest)
     });
 ```
 
-> |Where  |  |
+> |Where  | Description |
 > |---------|---------|
 > | `scopes`   | Contient les étendues que vous avez demandé à retourner dans le jeton d’accès pour l’API. Par exemple, `[ "mail.read" ]` pour Microsoft Graph ou `[ "<Application ID URL>/scope" ]` pour les API web personnalisées (c’est-à-dire `api://<Application ID>/access_as_user`).|
 
@@ -300,9 +300,4 @@ myMSALObj.acquireTokenPopup(requestObj)
 Pour obtenir un guide pas à pas plus détaillé sur la création de l’application pour ce guide de démarrage rapide, consultez :
 
 > [!div class="nextstepaction"]
-> [Tutoriel pour se connecter et appeler MS Graph](https://docs.microsoft.com/azure/active-directory/develop/guidedsetups/active-directory-javascriptspa)
-
-Pour parcourir le dépôt MSAL pour la documentation, le Forum aux questions, les problèmes, etc., consultez :
-
-> [!div class="nextstepaction"]
-> [Référentiel GitHub MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)
+> [Tutoriel : Connecter les utilisateurs et appeler l’API Microsoft Graph à partir d’une application monopage (SPA) JavaScript](tutorial-v2-javascript-spa.md)

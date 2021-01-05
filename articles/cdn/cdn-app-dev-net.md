@@ -11,18 +11,18 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/23/2017
 ms.author: mazha
-ms.custom: has-adal-ref
-ms.openlocfilehash: e03616bf0d02f7ce063c027912cba4ab4e8f8d3f
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: has-adal-ref, devx-track-csharp
+ms.openlocfilehash: a812704c42a4da5ddf89fe6c5ba0c9a684047f75
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611464"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88919486"
 ---
-# <a name="get-started-with-azure-cdn-development"></a>Prise en main du développement Azure CDN
+# <a name="get-started-with-the-azure-cdn-library-for-net"></a>Prise en main de la bibliothèque Azure CDN pour .NET
 > [!div class="op_single_selector"]
 > * [Node.JS](cdn-app-dev-node.md)
 > * [.NET](cdn-app-dev-net.md)
@@ -156,7 +156,7 @@ Rédigeons la structure de base de notre programme.
 
 Maintenant que la structure de base de notre programme est écrite, nous devons créer les méthodes appelées par la méthode `Main` .
 
-## <a name="authentication"></a>Authentication
+## <a name="authentication"></a>Authentification
 Pour pouvoir utiliser la bibliothèque Azure CDN Management Library, nous devons authentifier notre principal de service et obtenir un jeton d’authentification.  Cette méthode utilise la bibliothèque ADAL pour récupérer le jeton.
 
 ```csharp

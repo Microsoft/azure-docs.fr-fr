@@ -1,26 +1,14 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements avec C – Azure Event Hubs'
 description: 'Démarrage rapide : Cet article décrit la procédure à suivre pour créer une application C qui envoie des événements à Azure Event Hubs.'
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: c
-ms.devlang: csharp
 ms.topic: quickstart
-ms.custom: seodec18
-ms.date: 11/05/2019
-ms.author: shvija
-ms.openlocfilehash: 5bd4bb66b7e3c3ec37724f8684105befbc9132ff
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.openlocfilehash: bfe1ca1a45f7b33d7431aed13446d8d72f79fb90
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73720665"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "85315660"
 ---
 # <a name="quickstart-send-events-to-azure-event-hubs-using-c"></a>Démarrage rapide : Envoyer des événements vers Azure Event Hubs avec C
 

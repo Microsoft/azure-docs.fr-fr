@@ -3,6 +3,7 @@ title: Configurer une instance ADCD (Application Developers Controlled Distribut
 description: Exécutez un environnement de développement et de test IBM Z (zD&T) sur des machines virtuelles Azure.
 services: virtual-machines-linux
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 documentationcenter: ''
 author: njray
 manager: edprice
@@ -12,12 +13,12 @@ ms.topic: conceptual
 ms.date: 02/22/2019
 tags: ''
 keywords: ''
-ms.openlocfilehash: 66f80c79219090c27da37dfc1d9149df5604961f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: dcd354b906b4d6c92d8b3186fc8e09c94a31ca55
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "68841393"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968398"
 ---
 # <a name="set-up-an-application-developers-controlled-distribution-adcd-in-ibm-zdt-v1"></a>Configurer une instance ADCD (Application Developers Controlled Distribution) dans IBM zD&T v1
 
@@ -27,7 +28,7 @@ Cet article vous montre comment configurer une instance ADCD dans un environneme
 
 Comme zD&T, les ADCD sont accessibles uniquement aux clients et partenaires d’IBM et sont exclusivement conçus à des fins de développement et de test. Ils ne doivent ne pas être utilisés pour les environnements de production. De nombreux packages d’installation IBM sont disponibles en téléchargement via [Passport Advantage](https://www.ibm.com/support/knowledgecenter/en/SSTQBD_12.0.0/com.ibm.zsys.rdt.guide.adcd.doc/topics/installation_ps.html) ou [IBM PartnerWorld](https://www.ibm.com/partnerworld/public).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 - Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -72,11 +73,11 @@ Maintenant que vous disposez du ou des packages, vous devez les charger sur votr
 
 2. Sélectionnez l’onglet **SSH**, puis copiez la commande SSH dans le Presse-papiers.
 
-3. Connectez-vous à votre machine virtuelle à l’aide de vos informations d’identification et le [client SSH](/azure/virtual-machines/linux/use-remote-desktop) choisi. Cette démonstration utilise les extensions Linux pour Windows 10, qui ajoutent un interpréteur de commandes bash à l’invite de commandes Windows. PuTTY fonctionne également correctement.
+3. Connectez-vous à votre machine virtuelle à l’aide de vos informations d’identification et le [client SSH](../../../linux/use-remote-desktop.md) choisi. Cette démonstration utilise les extensions Linux pour Windows 10, qui ajoutent un interpréteur de commandes bash à l’invite de commandes Windows. PuTTY fonctionne également correctement.
 
 4. Une fois connecté, créez un répertoire pour charger les packages d’IBM. N’oubliez pas Linux respecte la casse. Par exemple, cette démonstration suppose que les packages sont chargés sur :
 
-        /home/MyUserID/ZDT/adcd/nov2017/volumes
+    `/home/MyUserID/ZDT/adcd/nov2017/volumes`
 
 5. Chargez les fichiers à l’aide d’un client SSH tel que [WinSCP](https://winscp.net/eng/index.php). SCP faisant partie du protocole SSH, il utilise le port 22, qui est utilisé par SSH. Si votre ordinateur local n’est pas sous Windows, vous pouvez saisir la [command scp](http://man7.org/linux/man-pages/man1/scp.1.html) dans votre session SSH.
 
@@ -89,8 +90,8 @@ Maintenant que vous disposez du ou des packages, vous devez les charger sur votr
 
 8. Lorsque les chargements sont terminés, accédez au répertoire de volumes et décompressez tous les volumes **gz** :
 
-    ```
-        gunzip \*.gz
+    ```console
+    gunzip \*.gz
     ```
     
 ![Explorateur de fichiers montrant des volumes gz décompressés](media/01-gunzip.png)
@@ -100,9 +101,9 @@ Maintenant que vous disposez du ou des packages, vous devez les charger sur votr
 L’étape suivante consiste à configurer zD&T pour utiliser le ou les packages chargés. Le processus de stockage des images dans zD&T vous permet de monter et d’utiliser les images. Il peut utiliser le protocole SSH ou FTP.
 
 1. Démarrez **zDTServer**. Pour cela, vous devez être au niveau racine. Entrez les deux commandes suivantes dans cet ordre :
-    ```
-        sudo su -
-        /opt/ibm/zDT/bin/startServer
+    ```console
+    sudo su -
+    /opt/ibm/zDT/bin/startServer
     ```
 2. Notez la sortie de l’URL par la commande et utilisez cette URL pour accéder au serveur web. Il ressemble à :
      > https://(nom ou adresse IP de votre machine virtuelle):9443/ZDTMC/index.html
@@ -188,9 +189,9 @@ Félicitations ! Vous exécutez à présent un environnement de mainframe IBM su
 
 ## <a name="learn-more"></a>En savoir plus
 
-- [Migration de mainframe : mythes et réalités](https://docs.microsoft.com/azure/architecture/cloud-adoption/infrastructure/mainframe-migration/myths-and-facts)
-- [IBM DB2 pureScale sur Azure](https://docs.microsoft.com/azure/virtual-machines/linux/ibm-db2-purescale-azure)
-- [Dépannage](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/)
+- [Migration de mainframe : mythes et réalités](/azure/architecture/cloud-adoption/infrastructure/mainframe-migration/myths-and-facts)
+- [IBM DB2 pureScale sur Azure](../../../linux/ibm-db2-purescale-azure.md)
+- [Dépannage](../../../troubleshooting/index.yml)
 - [Démystifier la migration d’un mainframe vers Azure](https://azure.microsoft.com/resources/demystifying-mainframe-to-azure-migration/)
 
 <!-- INTERNAL LINKS -->

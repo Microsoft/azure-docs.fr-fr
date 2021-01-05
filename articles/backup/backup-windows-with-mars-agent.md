@@ -3,18 +3,18 @@ title: Sauvegarder des ordinateurs Windows en utilisant l’agent MARS
 description: Utilisez l’agent Microsoft Azure Recovery Services (MARS) pour sauvegarder des ordinateurs Windows.
 ms.topic: conceptual
 ms.date: 03/03/2020
-ms.openlocfilehash: 002f4cd2e0582fb87af622f721f286bd78920350
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d2cdd5d1fa98462a70d72fd9f8723685952b665a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82193290"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90052220"
 ---
-# <a name="back-up-windows-machines-by-using-the-azure-backup-mars-agent"></a>Sauvegarder des ordinateurs Windows en utilisant l’agent MARS Sauvegarde Azure
+# <a name="back-up-windows-server-files-and-folders-to-azure"></a>Sauvegarder les fichiers et dossiers de Windows Server sur Azure
 
 Cet article explique comment sauvegarder des ordinateurs Windows à l’aide du service [Sauvegarde Azure](backup-overview.md) et de l’agent MARS (Microsoft Azure Recovery Services). MARS est également connu sous le nom d’agent de Sauvegarde Azure.
 
-Dans cet article, vous allez apprendre à :
+Dans cet article, vous allez apprendre à :
 
 > [!div class="checklist"]
 >
@@ -104,7 +104,7 @@ Pour effectuer un transfert en mode hors connexion :
 1. Écrivez les données de sauvegarde dans un emplacement intermédiaire.
 1. Utilisez l’outil AzureOfflineBackupDiskPrep pour copier les données de l’emplacement intermédiaire sur un ou plusieurs disques SATA.
 
-    L’outil crée une tâche d’importation Azure. Pour plus d’informations, consultez [Qu’est-ce que le service Azure Import/Export](https://docs.microsoft.com/azure/storage/common/storage-import-export-service).
+    L’outil crée une tâche d’importation Azure. Pour plus d’informations, consultez [Qu’est-ce que le service Azure Import/Export](../storage/common/storage-import-export-service.md).
 1. Envoyez les disques SATA à un centre de données Azure.
 
     Dans le centre de données, les données de disque sont copiées vers un compte de stockage Azure. Sauvegarde Azure copie les données de sauvegarde à partir du compte de stockage vers le coffre, et des sauvegardes incrémentielles sont planifiées.
@@ -115,7 +115,7 @@ Pour plus d'informations sur l’amorçage hors connexion, consultez [Utiliser A
 
 Vous pouvez contrôler la façon dont l’agent MARS utilise la bande passante réseau en activant la limitation de bande passante. Cette limitation s’avère utile si vous avez besoin de sauvegarder des données pendant les heures de travail, mais que vous souhaitez contrôler la quantité de bande passante utilisée par l’activité de sauvegarde et de restauration.
 
-La fonctionnalité de limitation de bande passante de Sauvegarde Azure utilise la [Qualité de service (QoS)](https://docs.microsoft.com/windows-server/networking/technologies/qos/qos-policy-top) sur le système d’exploitation local.
+La fonctionnalité de limitation de bande passante de Sauvegarde Azure utilise la [Qualité de service (QoS)](/windows-server/networking/technologies/qos/qos-policy-top) sur le système d’exploitation local.
 
 La limitation de bande passante pour les sauvegardes est disponible sur Windows Server version 2012 et ultérieures et sur Windows version 8 et ultérieures. Les systèmes d’exploitation doivent exécuter les derniers Service Packs.
 
@@ -125,7 +125,7 @@ Pour activer la limitation de bande passante :
 1. Sous l’onglet **Limitation**, sélectionnez la case **Activer la limitation de la bande passante sur Internet pour les opérations de sauvegarde**.
 
     ![Configurer la limitation de bande passante pour les opérations de sauvegarde](./media/backup-configure-vault/throttling-dialog.png)
-1. Spécifiez la bande passante autorisée pendant et en dehors des heures de travail. Les valeurs de bande passante s'échelonnent de 512 Kbits/s à 1 023 Mbits/s. Sélectionnez ensuite **OK**.
+1. Spécifiez la bande passante autorisée pendant et en dehors des heures de travail. Les valeurs de bande passante s'échelonnent de 512 kbit/s à 1 023 Mbit/s. Sélectionnez ensuite **OK**.
 
 ## <a name="run-an-on-demand-backup"></a>Exécuter une sauvegarde à la demande
 
@@ -150,7 +150,7 @@ Une fois la sauvegarde initiale terminée, l’état **Tâche terminée** appara
 
 | Option de planification de sauvegarde | Durée de conservation des données
 | -- | --
-| Jour | **Conservation par défaut** : correspond à la « conservation en jours pour les sauvegardes quotidiennes ». <br/><br/> **Exception** : en cas d’échec d’une sauvegarde planifiée quotidienne définie pour une conservation à long terme (semaines, mois ou années), une sauvegarde à la demande déclenchée juste après l’échec est prise en compte pour la conservation à long terme. Dans le cas contraire, la sauvegarde planifiée suivante est prise en compte pour la conservation à long terme.<br/><br/> **Exemple de scénario** : la sauvegarde planifiée du jeudi à 8h a échoué. Cette sauvegarde devait être prise en compte pour une conservation hebdomadaire, mensuelle ou annuelle. De ce fait, la première sauvegarde à la demande déclenchée avant la prochaine sauvegarde planifiée du vendredi à 8h est automatiquement marquée pour une conservation hebdomadaire, mensuelle ou annuelle. Cette sauvegarde remplace la sauvegarde du jeudi à 8h.
+| jour | **Conservation par défaut** : correspond à la « conservation en jours pour les sauvegardes quotidiennes ». <br/><br/> **Exception** : en cas d’échec d’une sauvegarde planifiée quotidienne définie pour une conservation à long terme (semaines, mois ou années), une sauvegarde à la demande déclenchée juste après l’échec est prise en compte pour la conservation à long terme. Dans le cas contraire, la sauvegarde planifiée suivante est prise en compte pour la conservation à long terme.<br/><br/> **Exemple de scénario** : la sauvegarde planifiée du jeudi à 8h a échoué. Cette sauvegarde devait être prise en compte pour une conservation hebdomadaire, mensuelle ou annuelle. De ce fait, la première sauvegarde à la demande déclenchée avant la prochaine sauvegarde planifiée du vendredi à 8h est automatiquement marquée pour une conservation hebdomadaire, mensuelle ou annuelle. Cette sauvegarde remplace la sauvegarde du jeudi à 8h.
 | Week | **Conservation par défaut** : un jour. Les sauvegardes à la demandes exécutées pour une source de données associée à une stratégie de sauvegarde hebdomadaire sont supprimées le jour suivant. Elles le sont même s’il s’agit des sauvegardes les plus récentes de la source de données. <br/><br/> **Exception** : en cas d’échec d’une sauvegarde planifiée hebdomadaire définie pour une conservation à long terme (semaines, mois ou années), une sauvegarde à la demande déclenchée juste après l’échec est prise en compte pour la conservation à long terme. Dans le cas contraire, la sauvegarde planifiée suivante est prise en compte pour la conservation à long terme. <br/><br/> **Exemple de scénario** : la sauvegarde planifiée du jeudi à 8h a échoué. Cette sauvegarde devait être prise en compte pour une conservation mensuelle ou annuelle. De ce fait, la première sauvegarde à la demande déclenchée avant la prochaine sauvegarde planifiée du jeudi à 8h est automatiquement marquée pour une conservation mensuelle ou annuelle. Cette sauvegarde remplace la sauvegarde du jeudi à 8h.
 
 Pour plus d’informations, consultez [Créer une stratégie de sauvegarde](#create-a-backup-policy).

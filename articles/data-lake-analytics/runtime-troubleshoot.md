@@ -1,20 +1,16 @@
 ---
 title: Comment résoudre les défaillances du runtime U-SQL Azure Data Lake Analytics
 description: Apprenez à résoudre les défaillances du runtime U-SQL.
-services: data-lake-analytics
-author: guyhay
-ms.author: guyhay
-ms.reviewer: jasonwhowell
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
 ms.topic: troubleshooting
-ms.workload: big-data
 ms.date: 10/10/2019
-ms.openlocfilehash: 1e3fb218e6cda5619bfa1a0936e07d6731a9cc93
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41b7c80c85331f288343351749e6b2e5292b30c6
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73648170"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95241605"
 ---
 # <a name="learn-how-to-troubleshoot-u-sql-runtime-failures-due-to-runtime-changes"></a>Apprenez à résoudre les défaillances du runtime U-SQL en raison des modifications du runtime
 
@@ -48,19 +44,28 @@ release_YYYYMMDD_adl_buildno[_modifier]
 
 Par exemple, release_20190318_adl_3394512_2 correspond à la deuxième version de la build 3394512 de la publication du runtime du 18 mars 2019 et release_20190318_adl_3394512_private correspond à une build privée de la même version. Remarque : La date est liée au moment où le dernier archivage a été effectué pour cette version et pas nécessairement à la date de publication officielle.
 
-Voici les versions actuellement disponibles du runtime.
-
-- release_20190318_adl_3394512
-- release_20190318_adl_5832669 actuellement par défaut
-- release_20190703_adl_4713356
 
 ## <a name="troubleshooting-u-sql-runtime-version-issues"></a>Résoudre les problèmes de version du runtime U-SQL
 
 Vous pouvez rencontrer deux problèmes de version du runtime :
 
-1. Un script ou un code utilisateur change le comportement d’une version à l’autre. Ces changements cassants sont normalement communiqués à l’avance avec la publication des notes de publication. Si vous rencontrez un tel changement cassant, contactez Support Microsoft pour signaler ce comportement cassant (au cas où il n’a pas encore été documenté) et envoyez vos travaux sur l’ancienne version du runtime.
+1. Un script ou un code utilisateur change le comportement d’une version à l’autre. Ces changements cassants sont normalement communiqués à l’avance avec la publication des notes de publication. Si vous rencontrez un tel changement cassant, contactez le Support Microsoft pour signaler ce comportement cassant (au cas où il n’a pas encore été documenté) et envoyez vos travaux sur l’ancienne version du runtime.
 
-2. Vous avez utilisé un runtime autre que celui par défaut, explicitement ou implicitement lorsqu’il a été épinglé à votre compte, et ce runtime a été supprimé après un certain temps. Si vous expérimentez des problèmes de runtimes manquants, mettez à niveau vos scripts pour qu’ils s’exécutent avec le runtime par défaut actuel. Si vous avez besoin de plus de temps, veuillez contacter Support Microsoft
+2. Vous avez utilisé un runtime autre que celui par défaut, explicitement ou implicitement lorsqu’il a été épinglé à votre compte, et ce runtime a été supprimé après un certain temps. Si vous expérimentez des problèmes de runtimes manquants, mettez à niveau vos scripts pour qu’ils s’exécutent avec le runtime par défaut actuel. Si vous avez besoin de plus de temps, contactez le Support Microsoft
+
+## <a name="known-issues"></a>Problèmes connus
+
+* La référence au fichier Newtonsoft.Json version 12.0.3 ou ultérieure dans un script USQL entraîne l’échec de compilation suivant :
+
+    *« Nous sommes désolés, les travaux exécutés dans votre compte Data Lake Analytics vont probablement s’exécuter plus lentement ou ne pas se terminer. Un problème inattendu nous empêche de restaurer automatiquement cette fonctionnalité sur votre compte Azure Data Lake Analytics. Les ingénieurs Azure Data Lake ont été contactés pour enquêter. »*  
+
+    Où la pile des appels contiendra :  
+    `System.IndexOutOfRangeException: Index was outside the bounds of the array.`  
+    `at Roslyn.Compilers.MetadataReader.PEFile.CustomAttributeTableReader.get_Item(UInt32 rowId)`  
+    `...`
+
+    **Solution**: Utilisez le fichier Newtonsoft.json v12.0.2 ou une version antérieure.
+
 
 ## <a name="see-also"></a>Voir aussi
 

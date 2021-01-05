@@ -3,19 +3,21 @@ title: Conversion LINQ en SQL dans Azure Cosmos DB
 description: Découvrez les opérateurs LINQ pris en charge et la façon dont les requêtes LINQ sont mappées aux requêtes SQL dans Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 12/02/2019
+ms.date: 11/11/2020
 ms.author: tisande
-ms.openlocfilehash: d43f95b91df7d0c9c442339de51936200f4688e2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 122c95fe9ac017ad7a6957dcdb8323837be34f21
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75441254"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96545381"
 ---
 # <a name="linq-to-sql-translation"></a>Conversion LINQ en SQL
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Le fournisseur de requêtes d’Azure Cosmos DB effectue le meilleur mappage possible entre une requête LINQ et une requête SQL Cosmos DB. La description suivante suppose une connaissance de base de LINQ.
+Le fournisseur de requêtes d’Azure Cosmos DB effectue le meilleur mappage possible entre une requête LINQ et une requête SQL Cosmos DB. Si vous souhaitez obtenir la requête SQL traduite à partir de LINQ, utilisez la méthode `ToString()` sur l’objet `IQueryable` généré. La description suivante suppose une connaissance de base de [LINQ](/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries). En plus de LINQ, Azure Cosmos DB prend également en charge [Entity Framework Core](/ef/core/providers/cosmos/?tabs=dotnet-core-cli) qui fonctionne avec l’API SQL.
 
 Le système de type du fournisseur de requêtes prend en charge uniquement les types primitifs JSON : numérique, booléen, chaîne et null.
 
@@ -32,7 +34,7 @@ Le fournisseur de requêtes prend en charge les expressions scalaires suivantes�
     family.children[n].grade; //n is an int variable
   ```
   
-- Expressions arithmétiques, y compris les expressions arithmétiques communes sur les valeurs numériques et booléennes. Pour obtenir la liste complète, consultez la [spécification SQL Azure Cosmos DB](https://go.microsoft.com/fwlink/p/?LinkID=510612).
+- Expressions arithmétiques, y compris les expressions arithmétiques communes sur les valeurs numériques et booléennes. Pour obtenir la liste complète, consultez la [spécification SQL Azure Cosmos DB](sql-query-aggregate-functions.md).
   
   ```
     2 * family.children[0].grade;
@@ -54,31 +56,52 @@ Le fournisseur de requêtes prend en charge les expressions scalaires suivantes�
     new int[] { 3, child.grade, 5 };
   ```
 
+## <a name="using-linq"></a>Utilisation de LINQ
+
+Vous pouvez créer une requête LINQ à l’aide de `GetItemLinqQueryable`. Cet exemple illustre la génération et l’exécution asynchrone de requêtes LINQ avec un `FeedIterator` :
+
+```csharp
+using (FeedIterator<Book> setIterator = container.GetItemLinqQueryable<Book>()
+                      .Where(b => b.Title == "War and Peace")
+                      .ToFeedIterator<Book>())
+ {
+     //Asynchronous query execution
+     while (setIterator.HasMoreResults)
+     {
+         foreach(var item in await setIterator.ReadNextAsync()){
+         {
+             Console.WriteLine(item.cost);
+         }
+       }
+     }
+ }
+```
+
 ## <a name="supported-linq-operators"></a><a id="SupportedLinqOperators"></a>Opérateurs LINQ pris en charge
 
 Le fournisseur LINQ inclus avec le kit SDK .NET SQL prend en charge les opérateurs suivants :
 
-- **Select** : les projections sont converties en instructions SQL SELECT, y compris la construction d’objets.
-- **Where** : les filtres sont convertis en instructions SQL WHERE et prennent en charge la conversion de `&&`, `||` et `!` en opérateurs SQL
-- **SelectMany** : autorise le déroulement de tableaux vers la clause SQL JOIN. Permet d’associer/imbriquer des expressions afin de filtrer les éléments de tableau.
-- **OrderBy** et **OrderByDescending** : sont convertis en ORDER BY avec ASC ou DESC.
-- Les opérateurs **Count**, **Sum**, **Min**, **Max** et **Average** pour l’agrégation, et leurs équivalents asynchrones **CountAsync**, **SumAsync**, **MinAsync**, **MaxAsync** et **AverageAsync**.
-- **CompareTo** : se traduit par des comparaisons de plages. Généralement utilisés pour les chaînes, car elles ne sont pas comparables dans .NET.
-- **Skip** et **Take** : traduit en SQL OFFSET et LIMIT afin de limiter les résultats d’une requête et d’effectuer la pagination.
-- **Fonctions mathématiques** : prennent en charge la conversion des fonctions .NET `Abs`, `Acos`, `Asin`, `Atan`, `Ceiling`, `Cos`, `Exp`, `Floor`, `Log`, `Log10`, `Pow`, `Round`, `Sign`, `Sin`, `Sqrt`, `Tan` et `Truncate` vers les fonctions intégrées SQL équivalentes.
-- **Fonctions de chaîne** : prennent en charge la conversion des fonctions .NET `Concat`, `Contains`, `Count`, `EndsWith`,`IndexOf`, `Replace`, `Reverse`, `StartsWith`, `SubString`, `ToLower`, `ToUpper`, `TrimEnd` et `TrimStart` vers les fonctions intégrées SQL équivalentes.
-- **Fonctions de tableau** : prennent en charge la conversion des fonctions .NET `Concat`, `Contains` et `Count` vers les fonctions intégrées SQL équivalentes.
-- **Fonctions d’extension géospatiale** : prennent en charge la conversion des méthodes stub `Distance`, `IsValid`, `IsValidDetailed` et `Within` vers les fonctions intégrées SQL équivalentes.
-- **Fonction d’extension de fonction définie par l’utilisateur** : prend en charge la conversion de la méthode stub `UserDefinedFunctionProvider.Invoke` vers la fonction définie par l’utilisateur correspondante.
-- **Miscellaneous** : prend en charge la conversion des opérateurs conditionnels et `Coalesce`. Peut convertir `Contains` en chaîne CONTAINS, ARRAY_CONTAINS ou SQL IN, selon le contexte.
+- **Select** : les projections sont traduites en [SELECT](sql-query-select.md), y compris la construction d’objets.
+- **Where** : les filtres sont traduits en [WHERE](sql-query-where.md) et prennent en charge la traduction de `&&`, `||` et `!` en opérateurs SQL
+- **SelectMany** : autorise le déroulement de tableaux vers la clause [JOIN](sql-query-join.md). Permet d’associer/imbriquer des expressions afin de filtrer les éléments de tableau.
+- **OrderBy** et **OrderByDescending** : sont traduits en [ORDER BY](sql-query-order-by.md) avec ASC ou DESC.
+- Les opérateurs **Count**, **Sum**, **Min**, **Max** et **Average** pour l’[agrégation](sql-query-aggregate-functions.md), et leurs équivalents asynchrones **CountAsync**, **SumAsync**, **MinAsync**, **MaxAsync** et **AverageAsync**.
+- **CompareTo** : se traduit par des comparaisons de plages. Généralement utilisé pour les chaînes, car elles ne sont pas comparables en .NET.
+- **Skip** et **Take** : traduit en [OFFSET et LIMIT](sql-query-offset-limit.md) afin de limiter les résultats d’une requête et d’effectuer la pagination.
+- **Fonctions mathématiques** : prennent en charge la traduction des fonctions .NET `Abs`, `Acos`, `Asin`, `Atan`, `Ceiling`, `Cos`, `Exp`, `Floor`, `Log`, `Log10`, `Pow`, `Round`, `Sign`, `Sin`, `Sqrt`, `Tan` et `Truncate` vers les [fonctions mathématiques intégrées](sql-query-mathematical-functions.md) équivalentes.
+- **Fonctions de chaîne** : prennent en charge la traduction des fonctions .NET `Concat`, `Contains`, `Count`, `EndsWith`, `IndexOf`, `Replace`, `Reverse`, `StartsWith`, `SubString`, `ToLower`, `ToUpper`, `TrimEnd` et `TrimStart` vers les [fonctions de chaîne intégrées](sql-query-string-functions.md) équivalentes.
+- **Fonctions de tableau** : prennent en charge la traduction des fonctions .NET `Concat`, `Contains` et `Count` vers les [fonctions de tableau intégrées](sql-query-array-functions.md) équivalentes.
+- **Fonctions d’extension géospatiale** : prennent en charge la traduction des méthodes stub `Distance`, `IsValid`, `IsValidDetailed` et `Within` vers les [fonctions géospatiales intégrées](sql-query-geospatial-query.md) équivalentes.
+- **Fonction d’extension de fonction définie par l’utilisateur** : prend en charge la traduction de la méthode stub `UserDefinedFunctionProvider.Invoke` vers la [fonction définie par l’utilisateur](sql-query-udfs.md) correspondante.
+- **Miscellaneous** : prend en charge la traduction de `Coalesce` et des [opérateurs](sql-query-operators.md) conditionnels. Peut traduire `Contains` en chaîne CONTAINS, ARRAY_CONTAINS ou IN, selon le contexte.
 
 ## <a name="examples"></a>Exemples
 
-Les exemples suivants illustrent la conversion de certains opérateurs de requête LINQ standard en requêtes Cosmos DB.
+Les exemples suivants illustrent la traduction de certains opérateurs standard de requête LINQ en requêtes dans Azure Cosmos DB.
 
 ### <a name="select-operator"></a>Opérateur Select
 
-La syntaxe est `input.Select(x => f(x))`, où `f` est une expression scalaire.
+La syntaxe est `input.Select(x => f(x))`, où `f` est une expression scalaire. Dans ce cas, `input` est un objet `IQueryable`.
 
 **Opérateur Select, exemple 1 :**
 
@@ -95,7 +118,7 @@ La syntaxe est `input.Select(x => f(x))`, où `f` est une expression scalaire.
       FROM Families f
     ```
   
-**Opérateur Select, exemple 2 :** 
+**Opérateur Select, exemple 2 :**
 
 - **Expression Lambda LINQ**
   
@@ -122,7 +145,7 @@ La syntaxe est `input.Select(x => f(x))`, où `f` est une expression scalaire.
     });
   ```
   
-- **SQL** 
+- **SQL**
   
   ```sql
       SELECT VALUE {"name":f.children[0].familyName,
@@ -320,7 +343,6 @@ Une requête imbriquée applique la requête interne à chaque élément du cont
       JOIN c IN f.children
       WHERE c.familyName = f.parents[0].familyName
   ```
-
 
 ## <a name="next-steps"></a>Étapes suivantes
 

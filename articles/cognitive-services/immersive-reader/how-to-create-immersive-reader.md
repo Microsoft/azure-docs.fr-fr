@@ -10,12 +10,12 @@ ms.subservice: immersive-reader
 ms.topic: conceptual
 ms.date: 07/22/2019
 ms.author: rwaller
-ms.openlocfilehash: 41efe4592c65ae3cdd85ce1b212554e50691905a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b012da0b2aea4a50002e9adbc0876396ddd4b5e7
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78330717"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368727"
 ---
 # <a name="create-an-immersive-reader-resource-and-configure-azure-active-directory-authentication"></a>Créer une ressource Lecteur immersif et configurer l’authentification Azure Active Directory
 
@@ -29,7 +29,7 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
 
 ## <a name="set-up-powershell-environment"></a>Configurer l’environnement PowerShell
 
-1. Commencez par ouvrir [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview). Assurez-vous que Cloud Shell est défini sur PowerShell dans la liste déroulante en haut à gauche, ou sinon tapez `pwsh`.
+1. Commencez par ouvrir [Azure Cloud Shell](../../cloud-shell/overview.md). Assurez-vous que Cloud Shell est défini sur PowerShell dans la liste déroulante en haut à gauche, ou sinon tapez `pwsh`.
 
 1. Copiez et collez l’extrait de code suivant dans le shell.
 
@@ -44,7 +44,8 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
         [Parameter(Mandatory=$true)] [String] $ResourceGroupLocation,
         [Parameter(Mandatory=$true)] [String] $AADAppDisplayName="ImmersiveReaderAAD",
         [Parameter(Mandatory=$true)] [String] $AADAppIdentifierUri,
-        [Parameter(Mandatory=$true)] [String] $AADAppClientSecret
+        [Parameter(Mandatory=$true)] [String] $AADAppClientSecret,
+        [Parameter(Mandatory=$true)] [String] $AADAppClientSecretExpiration
     )
     {
         $unused = ''
@@ -93,12 +94,13 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
         $clientId = az ad app show --id $AADAppIdentifierUri --query "appId" -o tsv
         if (-not $clientId) {
             Write-Host "Creating new Azure Active Directory app"
-            $clientId = az ad app create --password $AADAppClientSecret --display-name $AADAppDisplayName --identifier-uris $AADAppIdentifierUri --query "appId" -o tsv
+            $clientId = az ad app create --password $AADAppClientSecret --end-date "$AADAppClientSecretExpiration" --display-name $AADAppDisplayName --identifier-uris $AADAppIdentifierUri --query "appId" -o tsv
 
             if (-not $clientId) {
                 throw "Error: Failed to create Azure Active Directory app"
             }
-            Write-Host "Azure Active Directory app created successfully"
+            Write-Host "Azure Active Directory app created successfully."
+            Write-Host "NOTE: To manage your Active Directory app client secrets after this Immersive Reader Resource has been created please visit https://portal.azure.com and go to Home -> Azure Active Directory -> App Registrations -> $AADAppDisplayName -> Certificates and Secrets blade -> Client Secrets section" -ForegroundColor Yellow
         }
 
         # Create a service principal if it doesn't already exist
@@ -155,6 +157,7 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
       -AADAppDisplayName '<AAD_APP_DISPLAY_NAME>' `
       -AADAppIdentifierUri '<AAD_APP_IDENTIFIER_URI>' `
       -AADAppClientSecret '<AAD_APP_CLIENT_SECRET>'
+      -AADAppClientSecretExpiration '<AAD_APP_CLIENT_SECRET_EXPIRATION>'
     ```
 
     | Paramètre | Commentaires |
@@ -168,7 +171,12 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
     | ResourceGroupLocation |Si votre groupe de ressources n’existe pas, vous devez fournir un emplacement dans lequel créer le groupe. Pour trouver une liste d’emplacements, exécutez `az account list-locations`. Utilisez la propriété *name* (sans espaces) du résultat retourné. Ce paramètre est facultatif si votre groupe de ressources existe déjà. |
     | AADAppDisplayName |Nom d’affichage de l’application Azure Active Directory. Si une application Azure AD existante est introuvable, une nouvelle application avec ce nom est créée. Ce paramètre est facultatif si l’application Azure AD existe déjà. |
     | AADAppIdentifierUri |URI de l’application Azure AD. Si une application Azure AD existante est introuvable, une nouvelle application avec cet URI est créée. Par exemple : `https://immersivereaderaad-mycompany`. |
-    | AADAppClientSecret |Mot de passe que vous créez et qui sera utilisé plus tard pour l’authentification lors de l’acquisition d’un jeton pour lancer le Lecteur immersif. Le mot de passe doit comporter au moins 16 caractères et contenir au moins 1 caractère spécial et 1 caractère numérique. |
+    | AADAppClientSecret |Mot de passe que vous créez et qui sera utilisé plus tard pour l’authentification lors de l’acquisition d’un jeton pour lancer le Lecteur immersif. Le mot de passe doit comporter au moins 16 caractères et contenir au moins 1 caractère spécial et 1 caractère numérique. Pour gérer les codes secrets du client d’application Azure AD après avoir créé cette ressource, visitez https://portal.azure.com et accédez à Accueil -> Azure Active Directory -> Inscriptions d’applications-> `[AADAppDisplayName]` -> Certificats et secrets -> section Secrets des clients (comme indiqué dans la capture d’écran « Gérer vos secrets d’application » ci-dessous). |
+    | AADAppClientSecretExpiration |Date ou heure à laquelle votre `[AADAppClientSecret]` expire (par exemple, '2020-12-31T11:59:59+00:00' ou '2020-12-31'). |
+
+    Gérer l’application et les secrets de votre application Azure AD
+
+    ![Panneau Certificats et secrets du portail Azure](./media/client-secrets-blade.png)
 
 1. Copiez la sortie JSON dans un fichier texte pour l’utiliser ultérieurement. La sortie doit se présenter comme suit.
 
@@ -183,11 +191,8 @@ Le script est conçu pour être flexible. Il recherche d’abord les ressources 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Consulter le [guide de démarrage rapide Node.js](./quickstart-nodejs.md) pour voir ce que vous pouvez faire d’autre avec le SDK Lecteur immersif pour Node.js
+* Consulter le [guide de démarrage rapide Node.js](./quickstarts/client-libraries.md?pivots=programming-language-nodejs) pour voir ce que vous pouvez faire d’autre avec le SDK Lecteur immersif pour Node.js
+* Consulter le [tutoriel Android](./tutorial-android.md) pour voir ce que vous pouvez faire d’autre avec le SDK Lecteur immersif en utilisant Java ou Kotlin pour Android
+* Consulter le [tutoriel iOS](./tutorial-ios.md) pour voir ce que vous pouvez faire d’autre avec le SDK Lecteur immersif en utilisant Swift pour iOS
 * Consulter le [didacticiel Python](./tutorial-python.md) pour voir ce que vous pouvez faire d’autre avec le kit SDK Lecteur immersif à l’aide de Python
-* Consulter le [didacticiel Swift](./tutorial-ios-picture-immersive-reader.md) pour voir ce que vous pouvez faire d’autre avec le kit SDK Lecteur immersif à l’aide de Swift
 * Explorer le [SDK Lecteur Immersif](https://github.com/microsoft/immersive-reader-sdk) et la [référence du SDK Lecteur immersif](./reference.md)
-
-
-
-

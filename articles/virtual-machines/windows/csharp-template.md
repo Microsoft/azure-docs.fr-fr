@@ -5,21 +5,22 @@ author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/14/2017
 ms.author: cynthn
-ms.openlocfilehash: dfcc0c550af9df6c884c8cd864ed90daf5f78e2f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 779a09532790ea272d8c95ac28f8c152216efc5a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82082915"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008648"
 ---
 # <a name="deploy-an-azure-virtual-machine-using-c-and-a-resource-manager-template"></a>Déployer une machine virtuelle Azure à l’aide de C# et d’un modèle Resource Manager
 
 Cet article explique la procédure de déploiement d’un modèle Azure Resource Manager à l’aide de C#. Le modèle que vous créez déploie une machine virtuelle unique exécutant Windows Server dans un nouveau réseau virtuel avec un seul sous-réseau.
 
-Pour obtenir une description détaillée de la ressource de machine virtuelle, consultez [Virtual machines in an Azure Resource Manager template (Machines virtuelles dans un modèle Azure Resource Manager)](template-description.md). Pour plus d’informations sur toutes les ressources d’un modèle, consultez [Guide de création d’un modèle Resource Manager](../../azure-resource-manager/resource-manager-template-walkthrough.md).
+Pour obtenir une description détaillée de la ressource de machine virtuelle, consultez [Virtual machines in an Azure Resource Manager template (Machines virtuelles dans un modèle Azure Resource Manager)](template-description.md). Pour plus d’informations sur toutes les ressources d’un modèle, consultez [Guide de création d’un modèle Resource Manager](../../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md).
 
 Ces étapes prennent environ 10 minutes.
 
@@ -27,7 +28,7 @@ Ces étapes prennent environ 10 minutes.
 
 Lors de cette étape, assurez-vous que Visual Studio est installé et que vous créez une application console utilisée pour déployer le modèle.
 
-1. Si vous ne l’avez pas déjà fait, installez [Visual Studio](https://docs.microsoft.com/visualstudio/install/install-visual-studio). Sélectionnez **Développement .NET Desktop** dans la page Charges de travail, puis cliquez sur **Installer**. Dans le résumé, vous pouvez voir que les **Outils de développement .NET Framework 4 - 4.6** sont automatiquement sélectionnés. Si vous avez déjà installé Visual Studio, vous pouvez ajouter la charge de travail .NET en utilisant le lanceur Visual Studio.
+1. Si vous ne l’avez pas déjà fait, installez [Visual Studio](/visualstudio/install/install-visual-studio). Sélectionnez **Développement .NET Desktop** dans la page Charges de travail, puis cliquez sur **Installer**. Dans le résumé, vous pouvez voir que les **Outils de développement .NET Framework 4 - 4.6** sont automatiquement sélectionnés. Si vous avez déjà installé Visual Studio, vous pouvez ajouter la charge de travail .NET en utilisant le lanceur Visual Studio.
 2. Dans Visual Studio, cliquez sur **Fichier** > **Nouveau** > **Projet**.
 3. Dans **Modèles** > **Visual C#** , sélectionnez **Application console (.NET Framework)** , entrez le nom de projet *myDotnetProject*, sélectionnez l’emplacement du projet, puis cliquez sur **OK**.
 
@@ -325,5 +326,5 @@ L’exécution complète de cette application console devrait durer cinq minutes
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Si vous rencontrez des problèmes lors du déploiement, nous vous conseillons de consulter la section [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](../../resource-manager-common-deployment-errors.md).
-* Découvrez comment déployer une machine virtuelle et ses ressources de soutien en consultant [Déployer une machine virtuelle Azure à l’aide de C#](csharp.md).
+* Si vous rencontrez des problèmes lors du déploiement, nous vous conseillons de consulter la section [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](../../azure-resource-manager/templates/common-deployment-errors.md).
+* Découvrez comment déployer une machine virtuelle et ses ressources de soutien en consultant [Déployer une machine virtuelle Azure à l’aide de C#](../../azure-resource-manager/templates/deploy-rest.md).

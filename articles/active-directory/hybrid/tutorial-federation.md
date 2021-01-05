@@ -14,12 +14,12 @@ ms.date: 08/16/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e3a17eb7fdde6840ce04fb0cbce13ec3f1a121e0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 4410708905610562feb15804277021950eb1edeb
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80673696"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96176288"
 ---
 # <a name="tutorial-federate-a-single-ad-forest-environment-to-the-cloud"></a>Tutoriel : Fédérer un environnement de forêt AD unique dans le cloud
 
@@ -29,9 +29,9 @@ Ce didacticiel vous guidera dans la création d’un environnement d’identité
 
 ## <a name="prerequisites"></a>Prérequis
 Voici les conditions préalables requises pour suivre ce didacticiel.
-- Un ordinateur où [Hyper-V](https://docs.microsoft.com/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](https://docs.microsoft.com/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](https://docs.microsoft.com/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
+- Un ordinateur où [Hyper-V](/windows-server/virtualization/hyper-v/hyper-v-technology-overview) est installé.  Il est recommandé d’utiliser [Windows 10](/virtualization/hyper-v-on-windows/about/supported-guest-os) ou [Windows Server 2016](/windows-server/virtualization/hyper-v/supported-windows-guest-operating-systems-for-hyper-v-on-windows).
 - Un [abonnement Azure](https://azure.microsoft.com/free)
-- - Une [carte réseau externe](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
+- - Une [carte réseau externe](/virtualization/hyper-v-on-windows/quick-start/connect-to-network) pour autoriser la machine virtuelle à communiquer avec Internet.
 - Une copie de Windows Server 2016
 - Un [domaine personnalisé](../../active-directory/fundamentals/add-custom-domain.md) qui peut être vérifié
 
@@ -87,7 +87,7 @@ Pour terminer la création de la machine virtuelle, vous devez terminer l’inst
 4. Sur l’écran de démarrage Windows Server, sélectionnez votre langue et cliquez sur **Suivant**.
 5. Cliquez sur **Installer maintenant**.
 6. Saisissez votre clé de licence et cliquez sur **Suivant**.
-7. Acceptez les termes du contrat de licence et cliquez sur **Suivant**.
+7. Cliquez sur **J’accepte les termes du contrat de licence**, puis sur **Suivant**.
 8. Sélectionnez **Personnalisé :  installer Windows uniquement (avancé)**
 9. Cliquez sur **Suivant**.
 10. Une fois l’installation terminée, redémarrez la machine virtuelle, connectez-vous et exécutez les mises à jour Windows pour vous assurer que la machine virtuelle est à jour.  Installez les dernières mises à jour.
@@ -140,7 +140,7 @@ Maintenant que la machine virtuelle a été créée et renommée, et qu’elle d
 $DatabasePath = "c:\windows\NTDS"
 $DomainMode = "WinThreshold"
 $DomainName = "contoso.com"
-$DomaninNetBIOSName = "CONTOSO"
+$DomainNetBIOSName = "CONTOSO"
 $ForestMode = "WinThreshold"
 $LogPath = "c:\windows\NTDS"
 $SysVolPath = "c:\windows\SYSVOL"
@@ -205,7 +205,7 @@ Nous devons maintenant créer un locataire Azure AD pour synchroniser nos utili
 2. Cliquez sur l’**icône plus (+)** et recherchez **Azure Active Directory**.
 3. Dans la liste des résultats, sélectionnez sur **Azure Active Directory**.
 4. Sélectionnez **Create** (Créer).</br>
-![Créer](media/tutorial-password-hash-sync/create1.png)</br>
+![Capture d’écran montrant comment créer un locataire Azure AD.](media/tutorial-password-hash-sync/create1.png)</br>
 5. Indiquez le **nom de l’organisation** avec le **nom de domaine initial**. Sélectionnez ensuite **Créer**. Votre annuaire est alors créé.
 6. Une fois cette opération terminée, cliquez sur **ce lien** pour gérer l’annuaire.
 
@@ -213,10 +213,10 @@ Nous devons maintenant créer un locataire Azure AD pour synchroniser nos utili
 Maintenant que nous avons un locataire Azure AD, nous allons créer un compte d’administrateur général.  Ce compte est utilisé pour créer le compte de connecteur Azure AD lors de l’installation d’Azure AD Connect.  Le compte de connecteur Azure AD sert à écrire des informations dans Azure AD.   Pour créer le compte d’administrateur général, procédez comme suit.
 
 1.  Sous **Gérer**, sélectionnez **Utilisateurs**.</br>
-![Créer](media/tutorial-password-hash-sync/gadmin1.png)</br>
+![Capture d’écran montrant l’option Utilisateur sélectionnée dans la section Gérer où vous créez un administrateur général dans Azure AD.](media/tutorial-password-hash-sync/gadmin1.png)</br>
 2.  Sélectionnez **Tous les utilisateurs**, puis **+ Nouvel utilisateur**.
 3.  Renseignez un nom et un nom d’utilisateur pour cet utilisateur. Il s’agit de votre administrateur général pour le locataire. Vous devez également définir le **rôle d’annuaire** sur **Administrateur général**. Vous pouvez également afficher le mot de passe temporaire. Lorsque vous avez terminé, sélectionnez **Créer**.</br>
-![Créer](media/tutorial-password-hash-sync/gadmin2.png)</br>
+![Capture d’écran montrant le bouton Créer que vous sélectionnez quand vous créez un administrateur général dans Azure AD.](media/tutorial-password-hash-sync/gadmin2.png)</br>
 4. Une fois cette opération terminée, ouvrez une nouvelle fenêtre de navigateur web et connectez-vous à myapps.microsoft.com en utilisant le nouveau compte d’administrateur général et le mot de passe temporaire.
 5. Remplacez le mot de passe de l’administrateur général par quelque chose de facile à retenir.
 
@@ -226,23 +226,23 @@ Maintenant que nous disposons d’un locataire et d’un administrateur généra
 1. De retour sur le [Portail Azure](https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview), veillez à fermer le panneau **Tous les utilisateurs**.
 2. Sur la gauche, sélectionnez **Noms de domaine personnalisé**.
 3. Sélectionnez **Ajouter un domaine personnalisé**.</br>
-![Fédération](media/tutorial-federation/custom1.png)</br>
+![Capture d’écran montrant le bouton Ajouter un domaine personnalisé.](media/tutorial-federation/custom1.png)</br>
 4. Sous **Noms de domaine personnalisé**, saisissez le nom de votre domaine personnalisé dans la zone, et cliquez sur **Ajouter un domaine**.
 5. À l’écran du nom de domaine personnalisé, vous obtiendrez une information MX ou TXT.  Cette information doit être ajoutée aux informations DNS du registre du domaine sous votre domaine.  Vous devez donc aller dans votre registre de domaine, et saisir l’information TXT ou MX dans les réglages DNS de votre domaine.  Cela permettra à Azure de vérifier votre domaine.  Cette opération peut durer jusqu’à 24 heures.  Pour plus d’informations, consultez la documentation [Ajouter un domaine personnalisé](../../active-directory/fundamentals/add-custom-domain.md).</br>
-![Fédération](media/tutorial-federation/custom2.png)</br>
+![Capture d’écran montrant où les informations TXT ou MX sont ajoutées.](media/tutorial-federation/custom2.png)</br>
 6. Pour vous assurer qu’il a été vérifié, cliquez sur le bouton Vérifier.</br>
-![Fédération](media/tutorial-federation/custom3.png)</br>
+![Capture d’écran montrant un message de vérification réussie après sélection du bouton Vérifier.](media/tutorial-federation/custom3.png)</br>
 
 ## <a name="download-and-install-azure-ad-connect"></a>Télécharger et installer Azure AD Connect
 Il est maintenant temps de télécharger et d’installer Azure AD Connect.  Une fois l’installation terminée, nous aborderons l’installation rapide.  Effectuez les actions suivantes :
 
 1. Télécharger [Azure AD Connect](https://www.microsoft.com/download/details.aspx?id=47594)
-2. Accédez à **AzureADConnect.msi**et double-cliquez sur ce fichier.
+2. Accédez à **AzureADConnect.msi** et double-cliquez sur ce fichier.
 3. Sur l'écran d’accueil, sélectionnez la case pour accepter les termes du contrat de licence et cliquez sur **Continuer**.  
 4. Sur l’écran Paramètres Express, cliquez sur **Personnaliser**.  
 5. Sur l’écran Installer les composants nécessaires. Cliquez sur **Installer**.  
 6. Sur l’écran Connexion utilisateur, sélectionnez **Fédération avec AD FS** et cliquez sur **Suivant**.
-![Fédération](media/tutorial-federation/fed1.png)
+![Capture d’écran montrant où sélectionner Fédération avec AD FS.](media/tutorial-federation/fed1.png)
 
 1. Sur l’écran Connexion à Azure AD, entrez le nom d’utilisateur et le mot de passe de l’administrateur général que nous avons créé ci-dessus, et cliquez sur **Suivant**.
 2. Sur l’écran Connecter vos répertoires, cliquez sur **Ajouter un répertoire**.  Sélectionnez ensuite **Créer un compte AD** et saisissez le nom d’utilisateur et le mot de passe contoso\Administrator et cliquez sur **OK**.
@@ -257,7 +257,7 @@ Il est maintenant temps de télécharger et d’installer Azure AD Connect.  U
 11. Sélectionnez **Utiliser un certificat installé sur les serveurs de fédération** et cliquez sur **Parcourir**.
 12. Entrez DC1 dans la zone de recherche, et sélectionnez-le lorsque vous l’avez trouvé.  Cliquez sur **OK**.
 13. Dans la liste déroulante **Fichier de certificat**, sélectionnez le certificat **adfs.contoso.com** créé précédemment.  Cliquez sur **Suivant**.
-![Fédération](media/tutorial-federation/fed2.png)
+![Capture d’écran montrant où sélectionner le fichier de certificat que vous avez créé.](media/tutorial-federation/fed2.png)
 
 1. Dans l’écran Serveur AD FS, cliquez sur **Parcourir**. Entrez DC1 dans la zone de recherche et sélectionnez-le lorsque vous l’avez trouvé.  Cliquez sur **OK**.  Cliquez sur **Suivant**.
 ![Fédération](media/tutorial-federation/fed3.png)
@@ -292,4 +292,3 @@ Vous avez maintenant configuré un environnement d’identité hybride que vous 
 - [Matériel et conditions préalables](how-to-connect-install-prerequisites.md) 
 - [Paramètres personnalisés](how-to-connect-install-custom.md)
 - [Fédération avec Azure AD Connect](how-to-connect-fed-whatis.md)
-

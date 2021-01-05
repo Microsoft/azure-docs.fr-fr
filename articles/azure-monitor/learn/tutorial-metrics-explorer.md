@@ -1,17 +1,17 @@
 ---
 title: Tutoriel - Créer un graphique de métriques dans Azure Monitor
-description: Découvrez comment créer votre premier graphique de métrique avec l’explorateur de métriques Azure.
+description: Découvrez comment créer un graphique de métrique avec Azure Metrics Explorer.
 author: bwren
 ms.author: bwren
 ms.subservice: metrics
 ms.topic: tutorial
 ms.date: 03/09/2020
-ms.openlocfilehash: d8f72471dd3109bf584d18f032ec2f4d949a4993
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 6ce9183fad50c43ea7070f5fa09e0d445caf89df
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79082810"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451247"
 ---
 # <a name="tutorial-create-a-metrics-chart-in-azure-monitor"></a>Tutoriel : Créer un graphique de métriques dans Azure Monitor
 Metrics Explorer est une fonctionnalité d’Azure Monitor dans le portail Azure qui vous permet de créer des graphiques à partir de valeurs de métriques, de corréler visuellement des tendances et d’examiner des pics et des creux dans des valeurs de métriques. Utilisez Metrics Explorer pour examiner l’intégrité et l’utilisation de vos ressources Azure ou pour tracer des graphiques à partir de métriques personnalisées. 
@@ -52,7 +52,7 @@ Vous pouvez ouvrir Metrics Explorer à partir du menu Azure Monitor ou du menu d
 
 4. Si vous le souhaitez, modifiez l’**Agrégation** des métriques. Cela définit la manière dont les valeurs des métriques sont agrégées en fonction de la granularité temporelle du graphique. Par exemple, si la granularité temporelle est définie sur 15 minutes et que l’agrégation est définie sur sum, chaque point du graphique correspond à la somme de toutes les valeurs collectées durant chaque segment de 15 minutes.
 
-    ![Graphique](media/tutorial-metrics-explorer/chart.png)
+    ![La capture d’écran montre un graphique intitulé Sum Ingress for contosoretailweb (Somme de l’entrée pour contosoretailweb).](media/tutorial-metrics-explorer/chart.png)
 
 5. Utilisez le bouton **Ajouter une métrique** et répétez ces étapes si vous souhaitez afficher plusieurs métriques tracées dans le même graphique. Pour afficher plusieurs graphiques dans une même vue, sélectionnez le bouton **Nouveau graphique**.
 
@@ -85,5 +85,5 @@ Vous pouvez personnaliser le style et le titre du graphique, et modifier les par
 Maintenant que vous avez appris à utiliser les métriques dans Azure Monitor, découvrez comment les utiliser pour envoyer des alertes proactives.
 
 > [!div class="nextstepaction"]
-> [Créer, afficher et gérer des alertes de métrique à l'aide d'Azure Monitor](../platform/alerts-metric.md)
+> [Créer, afficher et gérer des alertes de métrique à l'aide d'Azure Monitor](../platform/metrics-charts.md#create-alert-rules)
 

@@ -12,16 +12,18 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/20/2019
+ms.date: 09/16/2020
 ms.author: juliako
-ms.openlocfilehash: dc0d41457729bf5fd78adb88d683ab4fbe23a148
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a2e80fa8eaec1dbf4137ba72662dfb178b6c9b1a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60557140"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91329656"
 ---
 # <a name="quotas-and-limitations"></a>Quotas et limitations
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article décrit les quotas et les limitations associés à Microsoft Azure Media Services.
 

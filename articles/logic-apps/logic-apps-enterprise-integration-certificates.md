@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 08/17/2018
-ms.openlocfilehash: 19a1883685193e80da5f1365ec2a30db0b8754f6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 03fc17c0d071cef4c8de92c6b50d60d961d18aef
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81450138"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91565257"
 ---
 # <a name="improve-security-for-b2b-messages-by-using-certificates"></a>Améliorer la sécurité des messages B2B à l’aide de certificats
 
@@ -51,15 +51,15 @@ Pour utiliser un *certificat public* dans vos applications logiques avec fonctio
    | **Certificate** | <*certificate-file-name*> | Pour trouver et sélectionner le fichier de certificat que vous souhaitez télécharger, cliquez sur l’icône de dossier en regard de la case **Certificat**. |
    ||||
 
-   ![Sélectionnez « Ajouter », indiquez les détails du certificat.](media/logic-apps-enterprise-integration-certificates/public-certificate-details.png)
+   ![La capture d’écran indique où sélectionner Ajouter pour renseigner les détails du certificat.](media/logic-apps-enterprise-integration-certificates/public-certificate-details.png)
 
    Azure charge votre certificat après avoir validé votre choix.
 
-   ![Azure affiche le nouveau certificat](media/logic-apps-enterprise-integration-certificates/new-public-certificate.png) 
+   ![Capture d’écran montrant où Azure affiche le nouveau certificat.](media/logic-apps-enterprise-integration-certificates/new-public-certificate.png) 
 
 ## <a name="upload-a-private-certificate"></a>Téléchargement d’un certificat privé
 
-Pour utiliser un *certificat privé* dans vos applications logiques avec fonctionnalités B2B, vous devez tout d’abord télécharger le certificat dans votre compte d’intégration. Vous devez également disposer d’une clé privée que vous ajoutez d’abord à [Azure Key Vault](../key-vault/key-vault-get-started.md). 
+Pour utiliser un *certificat privé* dans vos applications logiques avec fonctionnalités B2B, vous devez tout d’abord télécharger le certificat dans votre compte d’intégration. Vous devez également disposer d’une clé privée que vous ajoutez d’abord à [Azure Key Vault](../key-vault/general/overview.md). 
 
 Une fois que vous avez défini les propriétés dans les [contrats](logic-apps-enterprise-integration-agreements.md) que vous créez, le certificat est disponible pour vous aider à sécuriser vos messages B2B.
 
@@ -68,7 +68,7 @@ Une fois que vous avez défini les propriétés dans les [contrats](logic-apps-e
 
 1. [Ajoutez votre clé privée dans Azure Key Vault](../key-vault/certificates/certificate-scenarios.md#import-a-certificate) et indiquez un **nom de clé**.
    
-2. Vous devez autoriser Azure Logic Apps à effectuer des opérations sur Azure Key Vault. Pour accorder l’accès au principal de service Logic Apps, utilisez la commande PowerShell [Set-AzKeyVaultAccessPolicy](https://docs.microsoft.com/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy), par exemple :
+2. Vous devez autoriser Azure Logic Apps à effectuer des opérations sur Azure Key Vault. Pour accorder l’accès au principal de service Logic Apps, utilisez la commande PowerShell [Set-AzKeyVaultAccessPolicy](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy), par exemple :
 
    `Set-AzKeyVaultAccessPolicy -VaultName 'TestcertKeyVault' -ServicePrincipalName 
    '7cd684f4-8a78-49b0-91ec-6a35d38739ba' -PermissionsToKeys decrypt, sign, get, list`

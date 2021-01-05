@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: ashishth
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/06/2019
-ms.openlocfilehash: 2d0d5bb871612bc5e16a26eb49808c39661ffb50
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: af9b1f42140c5656c5f55a98c2d635d59e130db5
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75934687"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533731"
 ---
 # <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---architecture-best-practices"></a>Migrer des clusters Apache Hadoop locaux vers Azure HDInsight - bonnes pratiques concernant l’architecture
 
@@ -43,9 +43,9 @@ Le tableau suivant présente les différentes méthodes permettant de créer un 
 |[Azure CLI (version 1.0)](../hdinsight-hadoop-create-linux-clusters-azure-cli.md)||X|||
 |[Azure PowerShell](../hdinsight-hadoop-create-linux-clusters-azure-powershell.md)||X|||
 |[cURL](../hdinsight-hadoop-create-linux-clusters-curl-rest.md)||X|X||
-|[Kit de développement logiciel (SDK) .NET](https://docs.microsoft.com/dotnet/api/overview/azure/hdinsight?view=azure-dotnet)||||X|
-|[Kit de développement logiciel (SDK) Python](https://docs.microsoft.com/python/api/overview/azure/hdinsight?view=azure-python)||||X|
-|[Kit SDK Java](https://docs.microsoft.com/java/api/overview/azure/hdinsight?view=azure-java-stable)||||X|
+|[Kit de développement logiciel (SDK) .NET](/dotnet/api/overview/azure/hdinsight?view=azure-dotnet&preserve-view=true)||||X|
+|[Kit de développement logiciel (SDK) Python](/python/api/overview/azure/hdinsight)||||X|
+|[Kit SDK Java](/java/api/overview/azure/hdinsight)||||X|
 |[Modèles Microsoft Azure Resource Manager](../hdinsight-hadoop-create-linux-clusters-arm-templates.md)||X|||
 
 Pour plus d’informations, consultez l’article [Types de clusters dans HDInsight](../hadoop/apache-hadoop-introduction.md).
@@ -107,7 +107,7 @@ Certaines des meilleures pratiques applicables aux metastores Hive dans HDInsigh
 
 ## <a name="best-practices-for-different-workloads"></a>Bonnes pratiques applicables aux différentes charges de travail
 
-- Envisagez d’utiliser un cluster LLAP pour les requêtes Hive interactives avec des temps de réponse améliorés. [LLAP](https://cwiki.apache.org/confluence/display/Hive/LLAP)  est une nouvelle fonctionnalité de Hive 2.0 qui permet la mise en cache en mémoire des requêtes. LLAP accélère considérablement les requêtes Hive, jusqu’à  [26 fois plus rapides qu’avec Hive 1.x](https://hortonworks.com/blog/announcing-apache-hive-2-1-25x-faster-queries-much/) dans certains cas.
+- Envisagez d’utiliser un cluster LLAP pour les requêtes Hive interactives avec des temps de réponse améliorés. [LLAP](https://cwiki.apache.org/confluence/display/Hive/LLAP) est une nouvelle fonctionnalité de Hive 2.0 qui permet la mise en cache en mémoire des requêtes. LLAP accélère considérablement les requêtes Hive, avec dans certains cas des vitesses jusqu’à [26 fois plus rapides qu’avec Hive 1.x](https://hortonworks.com/blog/announcing-apache-hive-2-1-25x-faster-queries-much/).
 - Envisagez d’utiliser des travaux Spark à la place des travaux Hive.
 - Envisagez de remplacer les requêtes basées sur les impala par des requêtes LLAP.
 - Envisagez de remplacer des travaux MapReduce par des travaux Spark.

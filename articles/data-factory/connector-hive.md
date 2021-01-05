@@ -9,16 +9,16 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 09/04/2019
+ms.date: 11/17/2020
 ms.author: jingwang
-ms.openlocfilehash: 3720d917d71fa4e8c5a14bb60fdc7c405be4bfdb
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 4207c4ddfcbab325b1ae119dcd200af30fc59f58
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81410453"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94844935"
 ---
-# <a name="copy-data-from-hive-using-azure-data-factory"></a>Copier des données de Hive à l’aide d’Azure Data Factory 
+# <a name="copy-and-transform-data-from-hive-using-azure-data-factory"></a>Copier et transformer des données de Hive à l'aide d'Azure Data Factory 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Cet article décrit comment utiliser l’activité de copie dans Azure Data Factory pour copier des données de Hive. Il s’appuie sur l’article [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
@@ -55,19 +55,20 @@ Les propriétés prises en charge pour le service lié Hive sont les suivantes :
 | port | Port TCP utilisé par le serveur Hive pour écouter les connexions clientes. Si vous êtes connecté à Azure HDInsights, spécifiez le port 443. | Oui |
 | serverType | Type du serveur Hive. <br/>Les valeurs autorisées sont les suivantes : **HiveServer1**, **HiveServer2**, **HiveThriftServer** | Non |
 | thriftTransportProtocol | Protocole de transport à utiliser dans la couche Thrift. <br/>Les valeurs autorisées sont les suivantes : **Binary**, **SASL**, **HTTP** | Non |
-| authenticationType | Méthode d’authentification utilisée pour accéder au serveur Hive. <br/>Les valeurs autorisées sont les suivantes : **Anonymous**, **Username**, **UsernameAndPassword**, **WindowsAzureHDInsightService** | Oui |
+| authenticationType | Méthode d’authentification utilisée pour accéder au serveur Hive. <br/>Les valeurs autorisées sont les suivantes : **Anonymous**, **Username**, **UsernameAndPassword**, **WindowsAzureHDInsightService**. L’authentification Kerberos n’est pas prise en charge pour le moment. | Oui |
 | serviceDiscoveryMode | Valeur true pour indiquer l’utilisation du service ZooKeeper, valeur false dans le cas contraire.  | Non |
 | zooKeeperNameSpace | Espace de noms sur ZooKeeper sous lequel les 2 nœuds du serveur Hive sont ajoutés.  | Non |
 | useNativeQuery | Indique si le pilote doit utiliser les requêtes HiveQL natives ou les convertir dans un format équivalent dans HiveQL.  | Non |
 | username | Nom d’utilisateur utilisé pour accéder au serveur Hive.  | Non |
 | mot de passe | Mot de passe correspondant à l’utilisateur. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Non |
 | httpPath | URL partielle correspondant au serveur Hive.  | Non |
-| enableSsl | Indique si les connexions au serveur sont chiffrées suivant le protocole TLS. La valeur par défaut est false.  | Non |
-| trustedCertPath | Chemin complet du fichier .pem contenant les certificats d’autorité de certification approuvés qui permettent de vérifier le serveur en cas de connexion TLS. Cette propriété n’est disponible que si le protocole TLS est utilisé sur un IR auto-hébergé. Valeur par défaut : le fichier cacerts.pem installé avec le runtime d’intégration.  | Non |
+| enableSsl | Indique si les connexions au serveur sont chiffrées à l’aide du protocole TLS. La valeur par défaut est false.  | Non |
+| trustedCertPath | Chemin complet du fichier .pem contenant les certificats d’autorité de certification approuvés permettant de vérifier le serveur en cas de connexion TLS. Cette propriété n’est disponible que si le protocole TLS est utilisé sur un runtime d’intégration auto-hébergé. Valeur par défaut : le fichier cacerts.pem installé avec le runtime d’intégration.  | Non |
 | useSystemTrustStore | Indique s’il faut utiliser un certificat d’autorité de certification provenant du magasin de confiance du système ou d’un fichier PEM spécifié. La valeur par défaut est false.  | Non |
 | allowHostNameCNMismatch | Indique si le nom du certificat TLS/SSL émis par l’autorité de certification doit correspondre au nom d’hôte du serveur en cas de connexion TLS. La valeur par défaut est false.  | Non |
 | allowSelfSignedServerCert | Indique si les certificats auto-signés provenant du serveur sont autorisés ou non. La valeur par défaut est false.  | Non |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
+| storageReference | Référence au service lié du compte de stockage utilisé pour la mise en lots des données dans le flux de données de mappage. Uniquement nécessaire lors de l'utilisation du service lié Hive dans le flux de données de mappage. | Non |
 
 **Exemple :**
 
@@ -164,6 +165,53 @@ Pour copier des données de Hive, définissez le type de source dans l’activit
     }
 ]
 ```
+
+## <a name="mapping-data-flow-properties"></a>Propriétés du mappage de flux de données
+
+Le connecteur Hive est pris en charge en tant que source de [jeu de données inlined](data-flow-source.md#inline-datasets) dans les flux de données de mappage. À lire à l'aide d'une requête ou à partir d'une table Hive dans HDInsight. Les données Hive sont mises en lots dans un compte de stockage sous forme de fichiers Parquet avant d'être transformées dans le cadre d'un flux de données. 
+
+### <a name="source-properties"></a>Propriétés de source
+
+Le tableau ci-dessous répertorie les propriétés prises en charge par une source Hive. Vous pouvez modifier ces propriétés sous l’onglet **Options de la source**.
+
+| Nom | Description | Obligatoire | Valeurs autorisées | Propriété du script de flux de données |
+| ---- | ----------- | -------- | -------------- | ---------------- |
+| Magasin | Le magasin doit être `hive` | Oui |  `hive` | store | 
+| Format | Que la lecture soit effectuée à partir d'une table ou d'une requête | Oui | `table` ou `query` | format |
+| Nom du schéma | En cas de lecture à partir d'une table, il s'agit du schéma de la table source |  Oui, si le format est `table` | String | schemaName |
+| Nom de la table | En cas de lecture à partir d'une table, il s'agit du nom de la table |   Oui, si le format est `table` | String | tableName |
+| Requête | Si le format est `query`, il s'agit de la requête source sur le service lié Hive | Oui, si le format est `query` | String | query |
+| Intermédiaire | La table Hive sera toujours intermédiaire. | Oui | `true` | staged |
+| Conteneur de stockage | Conteneur de stockage utilisé pour la mise en lots des données avant de les lire à partir de Hive ou d'écrire dans Hive. Le cluster Hive doit avoir accès à ce conteneur. | Oui | String | storageContainer |
+| Base de données de la zone de transit | Schéma ou base de données auquel ou à laquelle le compte d'utilisateur spécifié dans le service lié a accès. Utilisé(e) pour créer des tables externes lors de la mise en lots, avant d'être supprimé(e) | non | `true` ou `false` | stagingDatabaseName |
+| Scripts pré-SQL | Code SQL à exécuter sur la table Hive avant de lire les données | non | String | preSQLs |
+
+#### <a name="source-example"></a>Exemple de source
+
+Vous trouverez ci-dessous un exemple de configuration de source Hive :
+
+![Exemple de source Hive](media/data-flow/hive-source.png "[Exemple de source Hive")
+
+Ces paramètres sont convertis en script de flux de données :
+
+```
+source(
+    allowSchemaDrift: true,
+    validateSchema: false,
+    ignoreNoFilesFound: false,
+    format: 'table',
+    store: 'hive',
+    schemaName: 'default',
+    tableName: 'hivesampletable',
+    staged: true,
+    storageContainer: 'khive',
+    storageFolderPath: '',
+    stagingDatabaseName: 'default') ~> hivesource
+```
+### <a name="known-limitations"></a>Limitations connues
+
+* Les types complexes tels que les tableaux, les mappages, les structs et les unions ne sont pas pris en charge pour la lecture. 
+* Le connecteur Hive prend uniquement en charge les tables Hive dans Azure HDInsight version 4.0 ou ultérieure (Apache Hive 3.1.0)
 
 ## <a name="lookup-activity-properties"></a>Propriétés de l’activité Lookup
 

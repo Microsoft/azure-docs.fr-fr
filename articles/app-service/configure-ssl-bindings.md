@@ -6,16 +6,16 @@ ms.topic: tutorial
 ms.date: 04/30/2020
 ms.reviewer: yutlin
 ms.custom: seodec18
-ms.openlocfilehash: c93938db4632f6509e386d440c9be75596ea254f
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.openlocfilehash: f7301809b3befc41110a32062d6e478c412fa56e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82597893"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90981111"
 ---
 # <a name="secure-a-custom-dns-name-with-a-tlsssl-binding-in-azure-app-service"></a>Sécuriser un nom DNS personnalisé avec une liaison TLS/SSL dans Azure App Service
 
-Cet article explique comment sécuriser le [domaine personnalisé](app-service-web-tutorial-custom-domain.md) dans votre [application App Service](https://docs.microsoft.com/azure/app-service/) ou [application de fonction](https://docs.microsoft.com/azure/azure-functions/) en créant une liaison de certificat. Lorsque vous avez terminé, vous pouvez accéder à votre application App Service au niveau du point de terminaison `https://` pour votre nom DNS personnalisé (par exemple, `https://www.contoso.com`). 
+Cet article explique comment sécuriser le [domaine personnalisé](app-service-web-tutorial-custom-domain.md) dans votre [application App Service](./index.yml) ou [application de fonction](../azure-functions/index.yml) en créant une liaison de certificat. Lorsque vous avez terminé, vous pouvez accéder à votre application App Service au niveau du point de terminaison `https://` pour votre nom DNS personnalisé (par exemple, `https://www.contoso.com`). 
 
 ![Application web avec certificat TLS/SSL personnalisé](./media/configure-ssl-bindings/app-with-custom-ssl.png)
 
@@ -37,7 +37,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Pour effectuer les étapes de ce guide pratique, vous devez au préalable :
 
-- [Création d’une application App Service](/azure/app-service/)
+- [Création d’une application App Service](./index.yml)
 - [Mapper un nom de domaine à votre application](app-service-web-tutorial-custom-domain.md) ou [acheter et configurer un nom de domaine dans Azure](manage-custom-dns-buy-domain.md)
 - [Ajouter un certificat privé à votre application](configure-ssl-certificate.md)
 
@@ -52,7 +52,7 @@ Pour effectuer les étapes de ce guide pratique, vous devez au préalable :
 
 Procédez comme suit :
 
-Sur le <a href="https://portal.azure.com" target="_blank">portail Azure</a>, dans le menu de gauche, sélectionnez **App Services** >  **\<nom-application>** .
+Sur le <a href="https://portal.azure.com" target="_blank">portail Azure</a>, dans le menu de gauche, sélectionnez **App Services** >  **\<app-name>** .
 
 À partir de la barre de navigation gauche de votre application, démarrez la boîte de dialogue **Liaison TLS/SSL** en procédant comme suit :
 
@@ -108,7 +108,7 @@ Vous devez potentiellement effectuer deux modifications :
 
 Dans différents navigateurs, accédez à `https://<your.custom.domain>` pour vérifier qu’il fournit votre application.
 
-![Navigation au sein du portail pour accéder à l’application Azure](./media/configure-ssl-bindings/app-with-custom-ssl.png)
+:::image type="content" source="./media/configure-ssl-bindings/app-with-custom-ssl.png" alt-text="Capture d’écran montrant un exemple de navigation vers votre domaine personnalisé avec l’URL contoso.com mise en évidence.":::
 
 Votre code d’application peut inspecter le protocole via l’en-tête « x-appservice-proto ». L’en-tête aura la valeur `http` ou `https`. 
 
@@ -153,7 +153,7 @@ Une fois l’opération terminée, votre application rejette toutes les connexio
 
 Dans App Service, un [arrêt TLS](https://wikipedia.org/wiki/TLS_termination_proxy) se produit au niveau des équilibreurs de charge réseau. Toutes les requêtes HTTPS accèdent donc à votre application en tant que requêtes HTTP non chiffrées. Si votre logique d’application doit vérifier si les requêtes utilisateur sont chiffrées ou non, inspectez l’en-tête `X-Forwarded-Proto`.
 
-Des guides de configuration spécifiques au langage tels que le [guide de configuration Linux Node.js](containers/configure-language-nodejs.md#detect-https-session) vous montrent comment détecter une session HTTPS dans le code de votre application.
+Des guides de configuration spécifiques au langage tels que le [guide de configuration Linux Node.js](configure-language-nodejs.md#detect-https-session) vous montrent comment détecter une session HTTPS dans le code de votre application.
 
 ## <a name="automate-with-scripts"></a>Automatiser des tâches à l’aide de scripts
 
@@ -168,4 +168,4 @@ Des guides de configuration spécifiques au langage tels que le [guide de config
 ## <a name="more-resources"></a>Plus de ressources
 
 * [Utiliser un certificat TLS/SSL dans votre code dans Azure App Service](configure-ssl-certificate-in-code.md)
-* [FORUM AUX QUESTIONS : App Service Certificates](https://docs.microsoft.com/azure/app-service/faq-configuration-and-management/)
+* [FORUM AUX QUESTIONS : App Service Certificates](./faq-configuration-and-management.md)

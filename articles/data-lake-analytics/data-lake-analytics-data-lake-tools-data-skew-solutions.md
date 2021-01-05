@@ -1,19 +1,16 @@
 ---
 title: Résoudre l’asymétrie des données - Azure Data Lake Tools pour Visual Studio
 description: Solutions de dépannage potentielles pour les problèmes d'asymétrie des données à l’aide d’Azure Data Lake Tools pour Visual Studio.
-services: data-lake-analytics
-author: yanancai
-ms.author: yanacai
-ms.reviewer: jasonwhowell
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/16/2016
-ms.openlocfilehash: 9ff7ba5f04a8c1862f8ef136f8f3f6900f00a431
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b82ce187c06afa69e54ea93931e1745f0d52674
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71802547"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92219188"
 ---
 # <a name="resolve-data-skew-problems-by-using-azure-data-lake-tools-for-visual-studio"></a>Résolution de problèmes d'asymétrie des données à l’aide d'Azure Data Lake Tools pour Visual Studio
 
@@ -54,7 +51,9 @@ U-SQL fournit l’instruction CREATE STATISTICS dans des tables. Cette instructi
 
 Exemple de code :
 
-    CREATE STATISTICS IF NOT EXISTS stats_SampleTable_date ON SampleDB.dbo.SampleTable(date) WITH FULLSCAN;
+```usql
+CREATE STATISTICS IF NOT EXISTS stats_SampleTable_date ON SampleDB.dbo.SampleTable(date) WITH FULLSCAN;
+```
 
 >[!NOTE]
 >Les informations statistiques ne sont pas mises à jour automatiquement. Si vous mettez à jour les données dans une table sans recréer les statistiques, les performances des requêtes peuvent décliner.
@@ -65,62 +64,66 @@ Si vous souhaitez additionner les taxes pour chaque état, vous devez utiliser l
 
 En règle générale, vous pouvez définir le paramètre sur 0,5 et 1, 0,5 indiquant une asymétrie peu importante et 1 une asymétrie conséquente. L’indicateur affectant l’optimisation du plan d’exécution de l’instruction en cours et de toutes les instructions en aval, il est important d'ajouter l’indicateur avant l’agrégation permettant d’identifier le décalage éventuel dans les clés.
 
-    SKEWFACTOR (columns) = x
+```usql
+SKEWFACTOR (columns) = x
+```
 
-    Provides a hint that the given columns have a skew factor x from 0 (no skew) through 1 (very heavy skew).
+Il indique que les colonnes données ont un facteur d’inclinaison x compris entre 0 (pas d’inclinaison) et 1 (très forte inclinaison).
 
 Exemple de code :
 
-    //Add a SKEWFACTOR hint.
-    @Impressions =
-        SELECT * FROM
-        searchDM.SML.PageView(@start, @end) AS PageView
-        OPTION(SKEWFACTOR(Query)=0.5)
-        ;
+```usql
+//Add a SKEWFACTOR hint.
+@Impressions =
+    SELECT * FROM
+    searchDM.SML.PageView(@start, @end) AS PageView
+    OPTION(SKEWFACTOR(Query)=0.5)
+    ;
+//Query 1 for key: Query, ClientId
+@Sessions =
+    SELECT
+        ClientId,
+        Query,
+        SUM(PageClicks) AS Clicks
+    FROM
+        @Impressions
+    GROUP BY
+        Query, ClientId
+    ;
+//Query 2 for Key: Query
+@Display =
+    SELECT * FROM @Sessions
+        INNER JOIN @Campaigns
+            ON @Sessions.Query == @Campaigns.Query
+    ;
+```
 
-    //Query 1 for key: Query, ClientId
-    @Sessions =
-        SELECT
-            ClientId,
-            Query,
-            SUM(PageClicks) AS Clicks
-        FROM
-            @Impressions
-        GROUP BY
-            Query, ClientId
-        ;
-
-    //Query 2 for Key: Query
-    @Display =
-        SELECT * FROM @Sessions
-            INNER JOIN @Campaigns
-                ON @Sessions.Query == @Campaigns.Query
-        ;   
-
-### <a name="option-3-use-rowcount"></a>Option 3 : Utiliser ROWCOUNT  
+### <a name="option-3-use-rowcount"></a>Option 3 : Utiliser ROWCOUNT
 Outre SKEWFACTOR, pour les cas de jonction de clés de décalage spécifiques, vous pouvez déterminer l’optimiseur en ajoutant un indicateur ROWCOUNT dans l’instruction U-SQL avant la jointure si vous savez que l’autre ensemble de lignes jointes est peu volumineux. De cette manière, l'optimiseur peut choisir une stratégie de diffusion conjointe pour améliorer les performances. N’oubliez pas que ROWCOUNT ne résout pas le problème d'asymétrie des données, mais peut proposer une aide supplémentaire.
 
-    OPTION(ROWCOUNT = n)
+```usql
+OPTION(ROWCOUNT = n)
+```
 
-    Identify a small row set before JOIN by providing an estimated integer row count.
+Identifiez un petit ensemble de lignes avant JOIN en fournissant une estimation du nombre de lignes (chiffre entier).
 
 Exemple de code :
 
-    //Unstructured (24-hour daily log impressions)
-    @Huge   = EXTRACT ClientId int, ...
-                FROM @"wasb://ads@wcentralus/2015/10/30/{*}.nif"
-                ;
-
-    //Small subset (that is, ForgetMe opt out)
-    @Small  = SELECT * FROM @Huge
-                WHERE Bing.ForgetMe(x,y,z)
-                OPTION(ROWCOUNT=500)
-                ;
-
-    //Result (not enough information to determine simple broadcast JOIN)
-    @Remove = SELECT * FROM Bing.Sessions
-                INNER JOIN @Small ON Sessions.Client == @Small.Client
-                ;
+```usql
+//Unstructured (24-hour daily log impressions)
+@Huge   = EXTRACT ClientId int, ...
+            FROM @"wasb://ads@wcentralus/2015/10/30/{*}.nif"
+            ;
+//Small subset (that is, ForgetMe opt out)
+@Small  = SELECT * FROM @Huge
+            WHERE Bing.ForgetMe(x,y,z)
+            OPTION(ROWCOUNT=500)
+            ;
+//Result (not enough information to determine simple broadcast JOIN)
+@Remove = SELECT * FROM Bing.Sessions
+            INNER JOIN @Small ON Sessions.Client == @Small.Client
+            ;
+```
 
 ## <a name="solution-3-improve-the-user-defined-reducer-and-combiner"></a>Solution 3 : Améliorer le réducteur et le combinateur définis par l’utilisateur
 
@@ -136,19 +139,23 @@ Pour faire passer un réducteur en mode non récursif au mode récursif, vous de
 
 Attribut d'un réducteur récursif :
 
-    [SqlUserDefinedReducer(IsRecursive = true)]
+```usql
+[SqlUserDefinedReducer(IsRecursive = true)]
+```
 
 Exemple de code :
 
-    [SqlUserDefinedReducer(IsRecursive = true)]
-    public class TopNReducer : IReducer
+```usql
+[SqlUserDefinedReducer(IsRecursive = true)]
+public class TopNReducer : IReducer
+{
+    public override IEnumerable<IRow>
+        Reduce(IRowset input, IUpdatableRow output)
     {
-        public override IEnumerable<IRow>
-            Reduce(IRowset input, IUpdatableRow output)
-        {
-            //Your reducer code goes here.
-        }
+        //Your reducer code goes here.
     }
+}
+```
 
 ### <a name="option-2-use-row-level-combiner-mode-if-possible"></a>Option n°2 : Utiliser le mode de combinateur au niveau des lignes si possible
 
@@ -175,12 +182,14 @@ Attributs du mode de combinateur :
 
 Exemple de code :
 
-    [SqlUserDefinedCombiner(Mode = CombinerMode.Right)]
-    public class WatsonDedupCombiner : ICombiner
+```usql
+[SqlUserDefinedCombiner(Mode = CombinerMode.Right)]
+public class WatsonDedupCombiner : ICombiner
+{
+    public override IEnumerable<IRow>
+        Combine(IRowset left, IRowset right, IUpdatableRow output)
     {
-        public override IEnumerable<IRow>
-            Combine(IRowset left, IRowset right, IUpdatableRow output)
-        {
-        //Your combiner code goes here.
-        }
+    //Your combiner code goes here.
     }
+}
+```

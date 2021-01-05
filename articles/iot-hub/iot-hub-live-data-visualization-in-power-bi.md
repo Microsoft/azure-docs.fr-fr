@@ -7,18 +7,18 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.tgt_pltfrm: arduino
-ms.date: 6/06/2019
+ms.date: 6/08/2020
 ms.author: robinsh
-ms.openlocfilehash: f0b909d10790511408e090546fd3359889ea5aca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6d10d0202e9e4c813cffe6373acfb5200ebb3266
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73954625"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92146781"
 ---
 # <a name="visualize-real-time-sensor-data-from-azure-iot-hub-using-power-bi"></a>Visualiser des données de capteur en temps réel depuis Azure IoT Hub, à l’aide de Power BI
 
-![Diagramme de bout en bout](./media/iot-hub-live-data-visualization-in-power-bi/1_end-to-end-diagram.png)
+![Diagramme de bout en bout](./media/iot-hub-live-data-visualization-in-power-bi/end-to-end-diagram.png)
 
 [!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
 
@@ -62,7 +62,7 @@ Commençons par la création d’une tâche Stream Analytics. Une fois la tâche
 
    **Emplacement** : utilisez le même emplacement que votre groupe de ressources.
 
-   ![Créer un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/create-stream-analytics-job-azure.png)
+   ![Créer un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/create-stream-analytics-job.png)
 
 3. Sélectionnez **Create** (Créer).
 
@@ -76,7 +76,7 @@ Commençons par la création d’une tâche Stream Analytics. Une fois la tâche
 
    **Alias d’entrée** : indiquez un alias unique pour l’entrée.
 
-   **Fournir IoT Hub à partir de votre abonnement** : sélectionnez cette case d’option.
+   **Sélectionner un hub IoT dans vos abonnements** : sélectionnez cette case d’option.
 
    **Abonnement**: Sélectionnez l’abonnement Azure que vous utilisez pour ce tutoriel.
 
@@ -92,7 +92,7 @@ Commençons par la création d’une tâche Stream Analytics. Une fois la tâche
 
    Laissez tous les autres champs sur leurs valeurs par défaut.
 
-   ![Ajouter une entrée à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-input-to-stream-analytics-job-azure.png)
+   ![Ajouter une entrée à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-input-to-stream-analytics-job.png)
 
 4. Sélectionnez **Enregistrer**.
 
@@ -114,7 +114,9 @@ Commençons par la création d’une tâche Stream Analytics. Une fois la tâche
 
    **Nom de la table** : Saisissez le nom de la table.
 
-   ![Ajouter une sortie à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-output-to-stream-analytics-job-azure.png)
+   **Mode d'authentification** : Conservez la valeur par défaut.
+
+   ![Ajouter une sortie à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-output-to-stream-analytics-job.png)
 
 5. Sélectionnez **Enregistrer**.
 
@@ -126,19 +128,21 @@ Commençons par la création d’une tâche Stream Analytics. Une fois la tâche
 
 3. Remplacez `[YourOutputAlias]` par l’alias de sortie du travail.
 
-   ![Ajouter une requête à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-query-stream-analytics-job-azure.png)
+   ![Ajouter une requête à un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/add-query-to-stream-analytics-job.png)
 
-4. Sélectionnez **Enregistrer**.
+4. Sélectionnez **Enregistrer la requête**.
 
 ### <a name="run-the-stream-analytics-job"></a>Exécuter la tâche Stream Analytics
 
 Dans la tâche Stream Analytics, sélectionnez **Vue d’ensemble**, puis **Démarrer** > **Maintenant** > **Démarrer**. Une fois la tâche lancée, l’état correspondant passe de **Arrêté** à **Exécution**.
 
-![Exécuter un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/run-stream-analytics-job-azure.png)
+![Exécuter un travail Stream Analytics dans Azure](./media/iot-hub-live-data-visualization-in-power-bi/run-stream-analytics-job.png)
 
 ## <a name="create-and-publish-a-power-bi-report-to-visualize-the-data"></a>Créer et publier un rapport Power BI pour visualiser les données
 
-1. Vérifiez que l’exemple d’application s’exécute correctement sur votre appareil. Si ce n’est pas le cas, vous pouvez consulter les didacticiels sous [Configurer votre appareil](https://docs.microsoft.com/azure/iot-hub/iot-hub-raspberry-pi-kit-node-get-started).
+Les étapes suivantes vous montrent comment créer et publier un rapport à l’aide du service Power BI. Vous pouvez suivre ces étapes, avec quelques modifications, si vous souhaitez utiliser la « nouvelle apparence » dans Power BI. Pour comprendre les différences et savoir comment naviguer dans la « nouvelle apparence », consultez [La « nouvelle apparence » du service Power BI](/power-bi/consumer/service-new-look).
+
+1. Vérifiez que l’exemple d’application s’exécute correctement sur votre appareil. Si ce n’est pas le cas, vous pouvez consulter les didacticiels sous [Configurer votre appareil](./iot-hub-raspberry-pi-kit-node-get-started.md).
 
 2. Connectez-vous à votre compte [Power BI](https://powerbi.microsoft.com/en-us/).
 
@@ -150,7 +154,7 @@ Dans la tâche Stream Analytics, sélectionnez **Vue d’ensemble**, puis **Dé
 
 5. Pour le jeu de données que vous avez créé, sélectionnez **Ajouter un rapport** (première icône à droite du nom du jeu de données).
 
-   ![Créer un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/start-power-bi.png)
+   ![Créer un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-create-report.png)
 
 6. Créez un graphique en courbes pour afficher la température en temps réel et au fil du temps.
 
@@ -164,9 +168,9 @@ Dans la tâche Stream Analytics, sélectionnez **Vue d’ensemble**, puis **Dé
 
       Un graphique en courbes est créé. L’axe des abscisses affiche la date et l’heure du fuseau horaire UTC. Quant à l’axe des ordonnées, il affiche la température fournie par le capteur.
 
-      ![Ajouter un graphique en courbes sur la température dans un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-add-temp.png)
+      ![Ajouter un graphique en courbes sur la température dans un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-add-temperature.png)
 
-7. Créez un autre graphique en courbes pour afficher l’humidité en temps réel, au fil du temps. Pour ce faire, suivez la procédure ci-dessus et placez **EventEnqueuedUtcTime** sur l’axe des abscisses et **Humidité** sur l’axe des ordonnées.
+7. Créez un autre graphique en courbes pour afficher l’humidité en temps réel, au fil du temps. Pour ce faire, cliquez sur une partie vide du canevas et suivez la procédure ci-dessus pour placer **EventEnqueuedUtcTime** sur l’axe des abscisses et **Humidité** sur l’axe des ordonnées.
 
    ![Ajouter un graphique en courbes sur l’humidité dans un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-add-humidity.png)
 
@@ -176,11 +180,18 @@ Dans la tâche Stream Analytics, sélectionnez **Vue d’ensemble**, puis **Dé
 
 10. Sélectionnez **Fichier** > **Publier sur le web**.
 
+    ![Sélectionnez publier sur le web pour le rapport de Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-select-publish-to-web.png)
+
+    > [!NOTE]
+    > Si vous recevez une notification pour contacter votre administrateur, vous devrez peut-être le faire pour pouvoir créer du code incorporé. La création de code incorporé doit être activée avant que vous puissiez effectuer cette étape.
+    >
+    > ![Notification vous invitant à contacter votre administrateur](./media/iot-hub-live-data-visualization-in-power-bi/contact-admin.png)
+
 11. Sélectionnez **Créer un code incorporé**, puis sélectionnez **Publier**.
 
 Vous obtenez le lien d’accès au rapport, que vous pouvez partager avec les utilisateurs pour leur permettre d’y accéder, ainsi qu’un extrait de code, qui permet d’intégrer le rapport dans votre blog ou site web.
 
-![Publier un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-publish.png)
+![Publier un rapport Microsoft Power BI](./media/iot-hub-live-data-visualization-in-power-bi/power-bi-web-output.png)
 
 Microsoft propose également des [applications mobiles Power BI](https://powerbi.microsoft.com/en-us/documentation/powerbi-power-bi-apps-for-mobile-devices/), qui permettent d’afficher les tableaux de bord et rapports Power BI sur votre appareil mobile et d’interagir avec eux.
 

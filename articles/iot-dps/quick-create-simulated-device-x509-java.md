@@ -1,5 +1,5 @@
 ---
-title: Provisionner un appareil X.509 simulé dans Azure IoT Hub à l’aide de Java
+title: 'Démarrage rapide : Provisionner un appareil X.509 simulé auprès d’Azure IoT Hub à l’aide de Java'
 description: 'Démarrage rapide Azure : Créer et provisionner un appareil X.509 simulé à l’aide du SDK d’appareil Java pour le service IoT Hub Device Provisioning (DPS). Ce guide de démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: java
-ms.custom: mvc
-ms.openlocfilehash: 5122726cbda2145d190e3dbeb10a3c5b4ae65947
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-java
+ms.openlocfilehash: 2ed458ee0267a65bb7551940fc522509dc310311
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82588443"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966613"
 ---
 # <a name="quickstart-create-and-provision-a-simulated-x509-device-using-java-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et approvisionner un appareil X.509 simulé auprès du service IoT Hub Device Provisioning à l’aide du Java Device SDK
 
@@ -24,16 +24,16 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil X.509 simulé 
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Examen des [concepts de provisionnement automatique](concepts-auto-provisioning.md).
+- Connaissance des concepts liés à l’[approvisionnement](about-iot-dps.md#provisioning-process).
 - Exécution des étapes décrites dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 - Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
-- [Java SE Development Kit 8](https://aka.ms/azure-jdks).
+- [Java SE Development Kit 8](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 - [Maven](https://maven.apache.org/install.html).
 - [Git](https://git-scm.com/download/).
 
 ## <a name="prepare-the-environment"></a>Préparer l’environnement 
 
-1. Assurez-vous que le [Java SE Development Kit 8](https://aka.ms/azure-jdks) est bien installé sur votre ordinateur.
+1. Assurez-vous que le [Java SE Development Kit 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) est bien installé sur votre ordinateur.
 
 2. Téléchargez et installez [Maven](https://maven.apache.org/install.html).
 
@@ -156,7 +156,7 @@ Cet article présente les inscriptions individuelles.
     java -jar ./provisioning-x509-sample-{version}-with-deps.jar
     ```
 
-5. Dans le portail Azure, accédez au IoT Hub lié à votre service d’approvisionnement et ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID d’appareil s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT***activé**.  Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
+5. Dans le portail Azure, accédez au IoT Hub lié à votre service d’approvisionnement et ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID d’appareil s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT* **activé**.  Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
 
     ![L’appareil est inscrit avec le hub IoT](./media/java-quick-create-simulated-device-x509/hubregistration.png) 
 

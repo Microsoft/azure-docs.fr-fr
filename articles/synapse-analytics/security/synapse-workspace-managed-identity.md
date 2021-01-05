@@ -1,20 +1,21 @@
 ---
-title: Identité managée dans l’espace de travail Azure Synapse
+title: Identité managée dans l’espace de travail Synapse
 description: Article qui explique ce qu’est une identité managée dans l’espace de travail Azure Synapse.
 author: RonyMSFT
 ms.service: synapse-analytics
 ms.topic: overview
-ms.date: 04/15/2020
+ms.subservice: security
+ms.date: 10/16/2020
 ms.author: ronytho
 ms.reviewer: jrasnick
-ms.openlocfilehash: ee0e6249acf3fbbab369d42ae691a5a826df1ee8
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 5506a54193efc813927663533ddfd89be3ddf40a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81421603"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461293"
 ---
-# <a name="azure-synapse-workspace-managed-identity-preview"></a>Identité managée de l’espace de travail Azure Synapse (préversion)
+# <a name="azure-synapse-workspace-managed-identity"></a>Identité managée de l’espace de travail Azure Synapse
 
 Dans cet article, vous allez découvrir ce qu’est une identité managée dans l’espace de travail Azure Synapse.
 
@@ -31,7 +32,7 @@ Une identité managée affectée par le système est créée pour votre espace d
 >[!NOTE]
 >Cette identité managée de l’espace de travail sera appelée « identité managée » dans le reste de ce document.
 
-Azure Synapse utilise l’identité managée pour orchestrer les pipelines. Le cycle de vie de l’identité managée est directement lié à l’espace de travail Azure Synapse. Si vous supprimez l’espace de travail Azure Synapse, l’identité managée est également nettoyée.
+Azure Synapse utilise l’identité managée pour intégrer les pipelines. Le cycle de vie de l’identité managée est directement lié à l’espace de travail Azure Synapse. Si vous supprimez l’espace de travail Azure Synapse, l’identité managée est également nettoyée.
 
 L’identité managée de l’espace de travail a besoin d’autorisations pour effectuer des opérations dans les pipelines. Vous pouvez utiliser l’ID d’objet ou le nom de votre espace de travail Azure Synapse pour rechercher l’identité managée lors de l’octroi d’autorisations.
 
@@ -57,4 +58,4 @@ Dans la fenêtre suivante, choisissez **Identité managée** comme **Méthode d�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Octroi d’autorisations à l’identité managée de l’espace de travail Azure Synapse](./how-to-grant-workspace-managed-identity-permissions.md)
+En savoir plus sur l’[Octroi d’autorisations à l’identité managée de l’espace de travail Azure Synapse](./how-to-grant-workspace-managed-identity-permissions.md)

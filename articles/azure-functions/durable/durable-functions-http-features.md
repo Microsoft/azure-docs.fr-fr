@@ -3,14 +3,14 @@ title: Fonctionnalités HTTP dans Durable Functions - Azure Functions
 description: Découvrez les fonctionnalités HTTP intégrées dans l’extension Durable Functions pour Azure Functions.
 author: cgillum
 ms.topic: conceptual
-ms.date: 09/04/2019
+ms.date: 07/14/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 1ffa116f6877b58d54c22f918b4e83574b85860c
-ms.sourcegitcommit: c8a0fbfa74ef7d1fd4d5b2f88521c5b619eb25f8
+ms.openlocfilehash: 64d40de50f21811a56318971de1836abc8fbf8c9
+ms.sourcegitcommit: daab0491bbc05c43035a3693a96a451845ff193b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82800717"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93027259"
 ---
 # <a name="http-features"></a>Fonctionnalités HTTP
 
@@ -54,6 +54,57 @@ La [liaison du client d’orchestration](durable-functions-bindings.md#orchestra
 **function.json**
 
 [!code-json[Main](~/samples-durable-functions/samples/javascript/HttpStart/function.json)]
+
+# <a name="python"></a>[Python](#tab/python)
+
+**__init__.py**
+
+```python
+import logging
+import azure.functions as func
+import azure.durable_functions as df
+
+async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
+    client = df.DurableOrchestrationClient(starter)
+    function_name = req.route_params['functionName']
+    event_data = req.get_body()
+
+    instance_id = await client.start_new(function_name, instance_id, event_data)
+    
+    logging.info(f"Started orchestration with ID = '{instance_id}'.")
+    return client.create_check_status_response(req, instance_id)
+```
+
+**function.json**
+
+```json
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "orchestrators/{functionName}",
+      "methods": [
+        "post",
+        "get"
+      ]
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    },
+    {
+      "name": "starter",
+      "type": "orchestrationClient",
+      "direction": "in"
+    }
+  ]
+}
+```
 
 ---
 
@@ -148,6 +199,22 @@ module.exports = df.orchestrator(function*(context){
     }
 });
 ```
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+from datetime import datetime, timedelta
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    url = context.get_input()
+    response = yield context.call_http('GET', url)
+    
+    if response["statusCode"] >= 400:
+        # handling of error codes goes here
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 
 ---
 
@@ -170,7 +237,7 @@ L’API « call HTTP » peut implémenter automatiquement le côté client du 
 
 Durable Functions prend en charge en mode natif l’appel d’API qui acceptent des jetons Azure Active Directory pour l’autorisation. Cette prise en charge utilise des [identités managées Azure](../../active-directory/managed-identities-azure-resources/overview.md) pour acquérir ces jetons.
 
-Le code suivant est un exemple de fonction d’orchestrateur .NET. La fonction qui effectue des appels authentifiés pour redémarrer une machine virtuelle à l’aide de l’[API REST Machines virtuelles](https://docs.microsoft.com/rest/api/compute/virtualmachines) d’Azure Resource Manager.
+Le code suivant est un exemple de fonction d’orchestrateur .NET. La fonction qui effectue des appels authentifiés pour redémarrer une machine virtuelle à l’aide de l’[API REST Machines virtuelles](/rest/api/compute/virtualmachines) d’Azure Resource Manager.
 
 # <a name="c"></a>[C#](#tab/csharp)
 
@@ -184,12 +251,12 @@ public static async Task RunOrchestrator(
     string vmName = "myVM";
     string apiVersion = "2019-03-01";
     
-    // Automatically fetches an Azure AD token for resource = https://management.core.windows.net
+    // Automatically fetches an Azure AD token for resource = https://management.core.windows.net/.default
     // and attaches it to the outgoing Azure Resource Manager API call.
     var restartRequest = new DurableHttpRequest(
         HttpMethod.Post, 
         new Uri($"https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart?api-version={apiVersion}"),
-        tokenSource: new ManagedIdentityTokenSource("https://management.core.windows.net"));
+        tokenSource: new ManagedIdentityTokenSource("https://management.core.windows.net/.default"));
     DurableHttpResponse restartResponse = await context.CallHttpAsync(restartRequest);
     if (restartResponse.StatusCode != HttpStatusCode.OK)
     {
@@ -208,7 +275,7 @@ module.exports = df.orchestrator(function*(context) {
     const resourceGroup = "myRG";
     const vmName = "myVM";
     const apiVersion = "2019-03-01";
-    const tokenSource = new df.ManagedIdentityTokenSource("https://management.core.windows.net");
+    const tokenSource = new df.ManagedIdentityTokenSource("https://management.core.windows.net/.default");
 
     // get a list of the Azure subscriptions that I have access to
     const restartResponse = yield context.df.callHttp(
@@ -222,9 +289,33 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    subscription_id = "mySubId"
+    resource_group = "myRg"
+    vm_name = "myVM"
+    api_version = "2019-03-01"
+    token_source = df.ManagedIdentityTokenSource("https://management.core.windows.net/.default")
+
+    # get a list of the Azure subscriptions that I have access to
+    restart_response = yield context.call_http("POST", 
+        f"https://management.azure.com/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.Compute/virtualMachines/{vm_name}/restart?api-version={api_version}",
+        None,
+        None,
+        token_source)
+    return restart_response
+
+main = df.Orchestrator.create(orchestrator_function)
+```
+
 ---
 
-Dans l’exemple précédent, le paramètre `tokenSource` est configuré pour acquérir des jetons Azure AD pour [Azure Resource Manager](../../azure-resource-manager/management/overview.md). Les jetons sont identifiés par l’URI de ressource `https://management.core.windows.net`. Cet exemple part du principe que l’application de fonction actuelle s’exécute localement ou a été déployée en tant qu’application de fonction avec une identité managée. L’identité locale ou l’identité managée est supposée avoir l’autorisation de gérer des machines virtuelles dans le groupe de ressources spécifié `myRG`.
+Dans l’exemple précédent, le paramètre `tokenSource` est configuré pour acquérir des jetons Azure AD pour [Azure Resource Manager](../../azure-resource-manager/management/overview.md). Les jetons sont identifiés par l’URI de ressource `https://management.core.windows.net/.default`. Cet exemple part du principe que l’application de fonction actuelle s’exécute localement ou a été déployée en tant qu’application de fonction avec une identité managée. L’identité locale ou l’identité managée est supposée avoir l’autorisation de gérer des machines virtuelles dans le groupe de ressources spécifié `myRG`.
 
 Lors de l’exécution, la source de jeton configurée retourne automatiquement un jeton d’accès OAuth 2.0. La source ajoute ensuite le jeton en tant que jeton du porteur à l’en-tête Authorization de la demande sortante. Ce modèle constitue une amélioration par rapport à l’ajout manuel d’en-têtes d’autorisation aux requêtes HTTP pour les raisons suivantes :
 
@@ -256,7 +347,7 @@ Si l’une de ces limitations risque d’avoir un impact sur votre cas d’utili
 
 ### <a name="extensibility-net-only"></a>Extensibilité (.NET uniquement)
 
-La personnalisation du comportement du client HTTP interne de l’orchestration est possible par [injection de dépendances .NET Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-dotnet-dependency-injection). Cette possibilité peut s’avérer utile pour effectuer des changements de comportement minimes. Elle peut également s’avérer utile pour le test unitaire du client HTTP en injectant des objets fictifs.
+La personnalisation du comportement du client HTTP interne de l’orchestration est possible par [injection de dépendances .NET Azure Functions](../functions-dotnet-dependency-injection.md). Cette possibilité peut s’avérer utile pour effectuer des changements de comportement minimes. Elle peut également s’avérer utile pour le test unitaire du client HTTP en injectant des objets fictifs.
 
 L’exemple suivant illustre l’utilisation de l’injection de dépendances pour désactiver la validation de certificat TLS/SSL pour des fonctions d’orchestrateur qui appellent des points de terminaison HTTP externes.
 

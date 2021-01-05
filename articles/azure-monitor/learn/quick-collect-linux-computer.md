@@ -13,18 +13,18 @@ ms.topic: quickstart
 ms.date: 12/24/2019
 ms.author: bwren
 ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019
-ms.openlocfilehash: 1da862a7994d7db5ee8c9f090119e14f19c6b13a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 4527d871df3667f483efd529d93f044377f34651
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80637890"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186182"
 ---
 # <a name="quickstart-collect-data-from-a-linux-computer-in-a-hybrid-environment-with-azure-monitor"></a>Démarrage rapide : Collecter des données à partir d’un ordinateur Linux dans un environnement hybride avec Azure Monitor
 
-[Azure Monitor](../overview.md) est capable de collecter directement les données de vos ordinateurs Linux physiques ou virtuels de votre environnement dans un espace de travail Log Analytics pour ensuite procéder à une analyse et à une mise en corrélation détaillées. L’installation de l’[agent Log Analytics](../platform/log-analytics-agent.md) permet à Azure Monitor de collecter des données à partir d’un centre de données ou d’un autre environnement cloud. Ce guide de démarrage rapide montre comment configurer et collecter les données de votre serveur Linux en quelques étapes simples. Pour plus d’informations sur les machines virtuelles Linux Azure, consultez [Collecter des données sur les machines virtuelles Azure](../../azure-monitor/learn/quick-collect-azurevm.md).  
+[Azure Monitor](../overview.md) est capable de collecter directement les données de vos ordinateurs Linux physiques ou virtuels de votre environnement dans un espace de travail Log Analytics pour ensuite procéder à une analyse et à une mise en corrélation détaillées. L’installation de l’[agent Log Analytics](../platform/log-analytics-agent.md) permet à Azure Monitor de collecter des données à partir d’un centre de données ou d’un autre environnement cloud. Ce guide de démarrage rapide montre comment configurer et collecter les données de votre serveur Linux en quelques étapes simples. Pour plus d’informations sur les machines virtuelles Linux Azure, consultez [Collecter des données sur les machines virtuelles Azure](./quick-collect-azurevm.md).  
 
-Pour comprendre la configuration prise en charge, consultez [Systèmes d’exploitation Windows pris en charge](../../azure-monitor/platform/log-analytics-agent.md#supported-linux-operating-systems) et [Configuration du pare-feu réseau](../../azure-monitor/platform/log-analytics-agent.md#network-requirements).
+Pour comprendre la configuration prise en charge, consultez [Systèmes d’exploitation pris en charge](../platform/agents-overview.md#supported-operating-systems) et [Configuration du pare-feu réseau](../platform/log-analytics-agent.md#network-requirements).
  
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -62,11 +62,9 @@ Avant d’installer l’agent Log Analytics pour Linux, vous devez disposer de l
 
 2. Dans votre liste d’espaces de travail Log Analytics, sélectionnez l’espace de travail créé précédemment. (Vous l’avez peut-être nommé **DefaultLAWorkspace**.)
 
-3. Sélectionnez **Paramètres avancés** :
-
-    ![Menu Paramètres avancés pour Log Analytics dans le portail Azure](media/quick-collect-azurevm/log-analytics-advanced-settings-azure-portal.png) 
+3. Sélectionnez **Gestion des agents** :
  
-4. Sélectionnez **Sources connectées**, puis **Serveurs Linux**.
+4. Sélectionnez ensuite **Serveurs Linux**.
 
 5. Des valeurs figurent à droite d’**ID de l’espace de travail** et de **Clé primaire**. Copiez-collez ces deux valeurs dans votre éditeur favori.
 
@@ -115,7 +113,7 @@ Par exemple : `https://user01:password@proxy01.contoso.com:30443`
 
 Azure Monitor peut collecter les événements du journal Linux Syslog et des compteurs de performances que vous spécifiez en vue d’une analyse et d’un reporting à plus long terme. Il peut également prendre des mesures lorsqu’il détecte une condition particulière. Pour configurer la collecte d’événements à partir de Syslog Linux, ainsi que plusieurs compteurs de performances courants avec lesquels commencer, procédez comme suit.  
 
-1. En bas à gauche du portail Azure, sélectionnez **Plus de services**. Dans la zone de recherche, entrez **Log Analytics**. Lorsque vous écrivez, au fur et à mesure de votre saisie, la liste est filtrée. Sélectionnez **Espaces de travail Log Analytics**.
+1. Dans le portail Azure, sélectionnez **Tous les services**. Dans la liste des ressources, tapez Log Analytics. Lorsque vous écrivez, au fur et à mesure de votre saisie, la liste est filtrée. Sélectionnez **Espaces de travail Log Analytics** et dans votre liste d’espaces de travail Log Analytics, sélectionnez l’espace de travail que vous recherchez et **Paramètres avancés** de l’espace de travail **Log Analytics**.
 
 2. Sélectionnez **Données**, puis **Syslog**.  
 
@@ -168,4 +166,4 @@ Maintenant que vous collectez des données opérationnelles et de performances �
 Pour savoir comment consulter et analyser les données, passez au didacticiel suivant.
 
 > [!div class="nextstepaction"]
-> [Consulter ou analyser les données dans Log Analytics](../../azure-monitor/learn/tutorial-viewdata.md)
+> [Consulter ou analyser les données dans Log Analytics](../log-query/log-analytics-tutorial.md)

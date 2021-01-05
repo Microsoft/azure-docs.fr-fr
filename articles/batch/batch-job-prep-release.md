@@ -3,13 +3,13 @@ title: Créer des tâches pour préparer et exécuter des travaux sur des nœuds
 description: Utilisez des tâches de préparation au niveau du travail afin de minimiser le transfert de données vers les nœuds de calcul Azure Batch, et utilisez des tâches de validation pour le nettoyage des nœuds une fois le travail achevé.
 ms.topic: how-to
 ms.date: 02/17/2020
-ms.custom: seodec18
-ms.openlocfilehash: a73baa03500dfbcdd7193035bf70b0f3e03be283
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: 5b1084cfdd5995b7983badcdce71460f7bdec3d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726670"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88919452"
 ---
 # <a name="run-job-preparation-and-job-release-tasks-on-batch-compute-nodes"></a>Exécuter des tâches de préparation et de validation du travail sur les nœuds de calcul Batch
 
@@ -66,7 +66,7 @@ Lorsqu'un travail est marqué comme terminé, la tâche de validation du travail
 > [!NOTE]
 > La suppression du travail exécute également la tâche de validation du travail. Toutefois, si un travail a déjà été arrêté, la tâche de validation n’est pas exécutée une seconde fois si ce travail est supprimé par la suite.
 
-Les tâches de validation du travail peuvent s’exécuter pendant un maximum de 15 minutes avant d’être terminées par le service Batch. Pour plus d’informations, voir la [Documentation de référence sur l’API REST](https://docs.microsoft.com/rest/api/batchservice/job/add#jobreleasetask).
+Les tâches de validation du travail peuvent s’exécuter pendant un maximum de 15 minutes avant d’être terminées par le service Batch. Pour plus d’informations, voir la [Documentation de référence sur l’API REST](/rest/api/batchservice/job/add#jobreleasetask).
 > 
 > 
 
@@ -189,33 +189,33 @@ Le billet MSDN ci-après fournit une vue d’ensemble de différentes méthodes 
 
 Rédigé par l’un des membres de l’équipe Azure Batch, ce billet décrit plusieurs techniques que vous pouvez utiliser pour déployer des applications et des données sur les nœuds de calcul.
 
-[api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[api_net_listjobs]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listjobs.aspx
-[api_rest]: https://msdn.microsoft.com/library/azure/dn820158.aspx
+[api_net]: /dotnet/api/microsoft.azure.batch
+[api_net_listjobs]: /dotnet/api/microsoft.azure.batch.joboperations
+[api_rest]: /rest/api/batchservice/
 [azure_storage]: https://azure.microsoft.com/services/storage/
 [portal]: https://portal.azure.com
 [job_prep_release_sample]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/JobPrepRelease
 [forum_post]: https://social.msdn.microsoft.com/Forums/en-US/87b19671-1bdf-427a-972c-2af7e5ba82d9/installing-applications-and-staging-data-on-batch-compute-nodes?forum=azurebatch
-[net_batch_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient.aspx
+[net_batch_client]: /dotnet/api/microsoft.azure.batch.batchclient
 [net_cloudjob]:https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudjob.aspx
-[net_job_prep]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobpreparationtask.aspx
-[net_job_prep_cloudjob]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudjob.jobpreparationtask.aspx
-[net_job_prep_resourcefiles]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobpreparationtask.resourcefiles.aspx
-[net_job_delete]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.deletejobasync.aspx
-[net_job_terminate]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.terminatejobasync.aspx
-[net_job_release]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobreleasetask.aspx
-[net_job_release_cloudjob]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudjob.jobreleasetask.aspx
-[pool_starttask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.starttask.aspx
+[net_job_prep]: /dotnet/api/microsoft.azure.batch.jobpreparationtask
+[net_job_prep_cloudjob]: /dotnet/api/microsoft.azure.batch.cloudjob
+[net_job_prep_resourcefiles]: /dotnet/api/microsoft.azure.batch.jobpreparationtask
+[net_job_delete]: /previous-versions/azure/mt281411(v=azure.100)
+[net_job_terminate]: /previous-versions/azure/mt188985(v=azure.100)
+[net_job_release]: /dotnet/api/microsoft.azure.batch.jobreleasetask
+[net_job_release_cloudjob]: /dotnet/api/microsoft.azure.batch.cloudjob
+[pool_starttask]: /dotnet/api/microsoft.azure.batch.cloudpool
 
-[net_list_certs]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.certificateoperations.listcertificates.aspx
-[net_list_compute_nodes]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.listcomputenodes.aspx
-[net_list_job_schedules]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobscheduleoperations.listjobschedules.aspx
-[net_list_jobprep_status]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listjobpreparationandreleasetaskstatus.aspx
-[net_list_jobs]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listjobs.aspx
-[net_list_nodefiles]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listnodefiles.aspx
-[net_list_pools]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.listpools.aspx
-[net_list_schedule_jobs]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobscheduleoperations.listjobs.aspx
-[net_list_task_files]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.listnodefiles.aspx
-[net_list_tasks]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listtasks.aspx
+[net_list_certs]: /dotnet/api/microsoft.azure.batch.certificateoperations
+[net_list_compute_nodes]: /dotnet/api/microsoft.azure.batch.pooloperations
+[net_list_job_schedules]: /dotnet/api/microsoft.azure.batch.jobscheduleoperations
+[net_list_jobprep_status]: /dotnet/api/microsoft.azure.batch.joboperations
+[net_list_jobs]: /dotnet/api/microsoft.azure.batch.joboperations
+[net_list_nodefiles]: /dotnet/api/microsoft.azure.batch.joboperations
+[net_list_pools]: /dotnet/api/microsoft.azure.batch.pooloperations
+[net_list_schedule_jobs]: /dotnet/api/microsoft.azure.batch.jobscheduleoperations
+[net_list_task_files]: /dotnet/api/microsoft.azure.batch.cloudtask
+[net_list_tasks]: /dotnet/api/microsoft.azure.batch.joboperations
 
 [1]: ./media/batch-job-prep-release/portal-jobprep-01.png

@@ -2,21 +2,21 @@
 title: Provisionnement d’application en état de quarantaine | Microsoft Docs
 description: Une fois que vous avez configuré une application à des fins de provisionnement d’utilisateurs automatique, découvrez ce qu’est un provisionnement en état de quarantaine et comment y mettre fin.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/28/2020
-ms.author: mimart
+ms.topic: troubleshooting
+ms.date: 09/24/2020
+ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: c1e0039133b7f9a7ae827e348640f6379b7f10ac
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 6a716aef65cc81c5558a214c1ee5f93180810977
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593928"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91266681"
 ---
 # <a name="application-provisioning-in-quarantine-status"></a>Provisionnement d’application en état de quarantaine
 
@@ -34,15 +34,18 @@ Vous avez trois façons de vérifier si une application est en quarantaine :
 
 - Dans le portail Azure, accédez à **Azure Active Directory** > **Journaux d’audit** > filtrez sur **Activité : quarantaine** et examinez l’historique de quarantaine. Lorsque l'affichage de la barre de progression, comme décrit ci-dessus, affiche un approvisionnement en cours de quarantaine, les journaux d’audit vous permettent de consulter l’historique de quarantaine d'une application. 
 
-- Utilisez la requête Microsoft Graph [Get synchronizationJob](https://docs.microsoft.com/graph/api/synchronization-synchronizationjob-get?view=graph-rest-beta&tabs=http) pour obtenir par programmation l’état du travail de provisionnement :
+- Utilisez la requête Microsoft Graph [Get synchronizationJob](/graph/api/synchronization-synchronizationjob-get?tabs=http&view=graph-rest-beta) pour obtenir par programmation l’état du travail de provisionnement :
 
-        `GET https://graph.microsoft.com/beta/servicePrincipals/{id}/synchronization/jobs/{jobId}/`
+```microsoft-graph
+        GET https://graph.microsoft.com/beta/servicePrincipals/{id}/synchronization/jobs/{jobId}/
+```
 
 - Consultez vos e-mails. Quand une application est mise en quarantaine, un e-mail de notification ponctuel est envoyé. Si la raison de la quarantaine change, un e-mail mis à jour est envoyé pour la stipuler. Si vous ne voyez aucun e-mail :
 
   - Vérifiez que vous avez spécifié un **E-mail de notification** valide dans la configuration du provisionnement de l’application.
   - Vérifiez qu’aucun filtre de courrier indésirable ne s’applique à la boîte de réception des e-mails de notification.
   - Vérifiez que vous ne vous êtes pas désabonné des e-mails.
+  - Rechercher les e-mails provenant de azure-noreply@microsoft.com
 
 ## <a name="why-is-my-application-in-quarantine"></a>Pourquoi mon application est-elle en quarantaine ?
 
@@ -50,7 +53,7 @@ Vous avez trois façons de vérifier si une application est en quarantaine :
 |---|---|
 |**Problème de conformité SCIM :** Une réponse HTTP/404 introuvable a été retournée au lieu de la réponse HTTP/200 OK attendue. Dans ce cas, le service d’approvisionnement d’Azure AD a fait une demande à l’application cible et reçu une réponse inattendue.|Vérifiez la section Informations d’identification de l’administrateur pour déterminer si l’application requiert la spécification de l’URL du locataire et vous assurer que l’URL est correcte. Si vous ne voyez pas de problème, contactez le développeur de l’application pour vous assurer que son service est conforme à SCIM. https://tools.ietf.org/html/rfc7644#section-3.4.2 |
 |**Informations d’identification non valides :** Lors d’une tentative d’autorisation d’accès à l’application cible, nous avons reçu une réponse de l’application cible qui indique que les informations d’identification fournies ne sont pas valides.|Accédez à la section Informations d’identification de l’administrateur de l’interface utilisateur de configuration de l’approvisionnement et autorisez à nouveau l’accès avec des informations d’identification valides. Si l’application se trouve dans la galerie, consultez le didacticiel sur la configuration de l’application pour connaître les étapes supplémentaires requises.|
-|**Rôles dupliqués :** Les rôles importés à partir de certaines applications, comme Salesforce et Zendesk, doivent être uniques. |Accédez au [manifeste](https://docs.microsoft.com/azure/active-directory/develop/reference-app-manifest) de l’application dans le portail Azure et supprimez le rôle dupliqué.|
+|**Rôles dupliqués :** Les rôles importés à partir de certaines applications, comme Salesforce et Zendesk, doivent être uniques. |Accédez au [manifeste](../develop/reference-app-manifest.md) de l’application dans le portail Azure et supprimez le rôle dupliqué.|
 
  Une requête Microsoft Graph visant à obtenir l’état du travail de provisionnement indique la raison suivante pour la quarantaine :
 
@@ -72,6 +75,10 @@ Une fois que vous avez résolu le problème, redémarrez le travail de provision
 
 - Utilisez le portail Azure pour redémarrer le travail de provisionnement. Dans la page **Provisionnement** de l’application, sous **Paramètres**, sélectionnez l’État **Effacer l’état en cours et redémarrer la synchronisation**, puis définissez **État du provisionnement** sur **Activé**. Cette action redémarre complètement le service de provisionnement, ce qui peut prendre un certain temps. Un cycle initial complet se réexécute, ce qui permet de supprimer les entiercements, de sortir l’application de quarantaine et d’effacer tous les filigranes.
 
-- Utilisez Microsoft Graph pour [redémarrer le travail de provisionnement](https://docs.microsoft.com/graph/api/synchronization-synchronizationjob-restart?view=graph-rest-beta&tabs=http). Vous bénéficiez d’un contrôle total sur ce que vous redémarrez. Vous pouvez choisir d’effacer les entiercements (pour redémarrer le compteur d’entiercements qui augmente jusqu’à l’état de quarantaine), de supprimer la quarantaine (pour sortir l’application de quarantaine) ou d’effacer les filigranes. Utilisez la requête suivante :
+- Utilisez Microsoft Graph pour [redémarrer le travail de provisionnement](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta). Vous bénéficiez d’un contrôle total sur ce que vous redémarrez. Vous pouvez choisir d’effacer les entiercements (pour redémarrer le compteur d’entiercements qui augmente jusqu’à l’état de quarantaine), de supprimer la quarantaine (pour sortir l’application de quarantaine) ou d’effacer les filigranes. Utilisez la requête suivante :
  
-       `POST /servicePrincipals/{id}/synchronization/jobs/{jobId}/restart`
+```microsoft-graph
+        POST /servicePrincipals/{id}/synchronization/jobs/{jobId}/restart
+```
+
+Remplacez « {id} » par la valeur de l’ID de l’application et remplacez « {jobId} » par l’[ID de la tâche de synchronisation](/graph/api/resources/synchronization-configure-with-directory-extension-attributes?tabs=http&view=graph-rest-beta#list-synchronization-jobs-in-the-context-of-the-service-principal).

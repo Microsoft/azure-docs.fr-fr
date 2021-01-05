@@ -7,16 +7,17 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 05/19/2020
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 90d9c6a2ebf445ba492f2e1634e57910cd235aed
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 68e282f192b87b9f2217e0727753e7d37ff1aeb1
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83679254"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97516100"
 ---
 # <a name="developer-notes-for-custom-policies-in-azure-active-directory-b2c"></a>Notes développeur pour les stratégies personnalisées dans Azure Active Directory B2C
 
@@ -65,7 +66,7 @@ Les fonctionnalités de stratégie personnalisée/Identity Experience Framework 
 | Fonctionnalité | Développement | PRÉVERSION | GA | Notes |
 |-------- | :-----------: | :-------: | :--: | ----- |
 | [Code d’autorisation OAuth2](authorization-code-flow.md) |  |  | X |  |
-| Code d’autorisation OAuth2 avec PKCE |  |  | X | Applications mobiles uniquement  |
+| Code d’autorisation OAuth2 avec PKCE |  |  | X | [Clients publics et applications monopages](authorization-code-flow.md)  |
 | [Flux implicite OAuth2](implicit-flow-single-page-application.md) |  |  | X |  |
 | [Informations d’identification de mot de passe du propriétaire de ressource OAuth2](ropc-custom.md) |  | X |  |  |
 | [OIDC Connect](openid-connect.md) |  |  | X |  |
@@ -97,25 +98,15 @@ Les fonctionnalités de stratégie personnalisée/Identity Experience Framework 
 | Fonctionnalité | Développement | PRÉVERSION | GA | Notes |
 | ------- | :-----------: | :-------: | :--: | ----- |
 | [Authentification par facteur téléphonique](phone-factor-technical-profile.md) |  |  | X |  |
-| [Authentification Azure MFA](multi-factor-auth-technical-profile.md) |  | X |  |  |
+| [Authentification Azure AD MFA](multi-factor-auth-technical-profile.md) |  | X |  |  |
 | [Mot de passe à usage unique](one-time-password-technical-profile.md) |  | X |  |  |
 | [Azure Active Directory](active-directory-technical-profile.md) comme répertoire local |  |  | X |  |
 | Sous-système de messagerie Azure pour la vérification par e-mail |  |  | X |  |
-| [Fournisseurs de services de messagerie tiers](custom-email.md) |  |X  |  |  |
+| [Fournisseurs de services de messagerie tiers](custom-email-mailjet.md) |  |X  |  |  |
 | [Prise en charge multilingue](localization.md)|  |  | X |  |
 | [Validations de prédicats](predicates.md) |  |  | X | Par exemple, la complexité des mots de passe. |
 | [Contrôles d’affichage](display-controls.md) |  |X  |  |  |
 
-
-### <a name="page-layout-versions"></a>Versions des mises en page
-
-| Fonctionnalité | Développement | PRÉVERSION | GA | Notes |
-| ------- | :-----------: | :-------: | :--: | ----- |
-| [2.0.0](page-layout.md#200) |  | X |  |  |
-| [1.2.0](page-layout.md#120) |  | X |  |  |
-| [1.1.0](page-layout.md#110) |  |  | X |  |
-| [1.0.0](page-layout.md#100) |  |  | X |  |
-| [Prise en charge de JavaScript](javascript-samples.md) |  | X |  |  |
 
 ### <a name="app-ief-integration"></a>Intégration App-IEF
 
@@ -125,7 +116,8 @@ Les fonctionnalités de stratégie personnalisée/Identity Experience Framework 
 | Paramètre de chaîne de requête `login_hint` |  |  | X | Disponible sous forme de revendication, peut être transmis au fournisseur d’identité. |
 | Insérer du code JSON dans le parcours utilisateur via `client_assertion` | X |  |  | Sera déconseillé. |
 | Insérer du code JSON dans le parcours utilisateur en tant que `id_token_hint` |  | X |  | Approche à adopter pour transmettre JSON. |
-| [Transmettre le jeton du fournisseur d’identité à l’application](idp-pass-through-custom.md) |  | X |  | Par exemple, de Facebook à l’application. |
+| [Transmettre le jeton du fournisseur d’identité à l’application](idp-pass-through-user-flow.md) |  | X |  | Par exemple, de Facebook à l’application. |
+
 
 ### <a name="session-management"></a>Gestion des sessions
 
@@ -135,7 +127,7 @@ Les fonctionnalités de stratégie personnalisée/Identity Experience Framework 
 | [Fournisseur de session de connexion externe](custom-policy-reference-sso.md#externalloginssosessionprovider) |  |  | X |  |
 | [Fournisseur de session par authentification unique SAML](custom-policy-reference-sso.md#samlssosessionprovider) |  |  | X |  |
 | [OAuthSSOSessionProvider](custom-policy-reference-sso.md#oauthssosessionprovider)  |  | X |  |  |
-| [Authentification unique](session-overview.md#sign-out)  |  | X |  |  |
+| [Authentification unique](session-behavior.md#sign-out)  |  | X |  |  |
 
 ### <a name="security"></a>Sécurité
 

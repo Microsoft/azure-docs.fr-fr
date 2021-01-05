@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 04/16/2019
 ms.author: alkohli
 ms.openlocfilehash: 9ac9865afe37916f1777d92eab8637884eba0c08
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82562120"
 ---
 Votre appareil est associé à un compte de stockage qui est utilisé en tant que destination pour vos données dans Azure. L’accès au compte de stockage est contrôlé par l’abonnement et deux clés d’accès au stockage de 512 bits associées à ce compte de stockage.

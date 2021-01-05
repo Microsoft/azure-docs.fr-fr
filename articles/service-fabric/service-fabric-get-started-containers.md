@@ -3,12 +3,13 @@ title: Créer une application de conteneur Azure Service Fabric
 description: Créez votre première application de conteneur Windows sur Microsoft Azure Service Fabric. Concevez une image Docker avec une application Python, envoyez l’image vers un registre de conteneurs, puis créez et déployez le conteneur dans Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 01/25/2019
-ms.openlocfilehash: 8e1de48874655721f708bfd1dfdda8d975f94c4b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 197423670ffe05f15fdc5bfd351efdfba33b53cd
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229313"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96533772"
 ---
 # <a name="create-your-first-service-fabric-container-application-on-windows"></a>Créer votre première application de conteneur Service Fabric sur Windows
 
@@ -16,7 +17,7 @@ ms.locfileid: "79229313"
 > * [Windows](service-fabric-get-started-containers.md)
 > * [Linux](service-fabric-get-started-containers-linux.md)
 
-L’exécution d’une application existante dans un conteneur Windows sur un cluster Service Fabric ne nécessite aucune modification de votre application. Cet article vous accompagne dans la création d’une image Docker contenant une application web [Flask](http://flask.pocoo.org/) Python et le déploiement dans un cluster Azure Service Fabric. Vous allez également partager votre application en conteneur via [Azure Container Registry](/azure/container-registry/). Cet article suppose une connaissance élémentaire de Docker. Pour en savoir plus sur Docker, consultez la [présentation de Docker](https://docs.docker.com/engine/understanding-docker/).
+L’exécution d’une application existante dans un conteneur Windows sur un cluster Service Fabric ne nécessite aucune modification de votre application. Cet article vous accompagne dans la création d’une image Docker contenant une application web [Flask](http://flask.pocoo.org/) Python et le déploiement dans un cluster Azure Service Fabric. Vous allez également partager votre application en conteneur via [Azure Container Registry](../container-registry/index.yml). Cet article suppose une connaissance élémentaire de Docker. Pour en savoir plus sur Docker, consultez la [présentation de Docker](https://docs.docker.com/engine/understanding-docker/).
 
 > [!NOTE]
 > Cet article s’applique à un environnement de développement Windows.  Le runtime du cluster Service Fabric et le runtime de Docker doivent être en cours d’exécution sur le même système d’exploitation.  Vous ne pouvez pas exécuter des conteneurs Windows sur un cluster Linux.
@@ -35,20 +36,15 @@ L’exécution d’une application existante dans un conteneur Windows sur un cl
 
   Pour cet article, la version (build) de Windows Server avec conteneurs en cours d’exécution sur vos nœuds de cluster doit correspondre à celle installée sur votre ordinateur de développement. En effet, vous générez l’image Docker sur votre ordinateur de développement et il existe des contraintes de compatibilité entre les versions du système d’exploitation de conteneur et le système d’exploitation hôte sur lequel elle est déployée. Pour plus d’informations, consultez [Système d’exploitation de conteneur Windows Server et compatibilité avec le système d’exploitation hôte](#windows-server-container-os-and-host-os-compatibility). 
   
-Pour déterminer la version de Windows Server avec conteneurs dont vous avez besoin pour votre cluster, exécutez la commande `ver` à partir d’une invite de commandes Windows sur votre ordinateur de développement :
-
-* Si la version contient *x.x.14323.x*, sélectionnez *WindowsServer 2016-Datacenter-with-Containers* comme système d’exploitation lors de la [création du cluster](service-fabric-cluster-creation-via-portal.md).
-  * Si la version contient *x.x.16299.x*, sélectionnez *WindowsServerSemiAnnual Datacenter-Core-1709-with-Containers* comme système d’exploitation lors de la [création d’un cluster](service-fabric-cluster-creation-via-portal.md).
+    Pour déterminer la version de Windows Server avec conteneurs dont vous avez besoin pour votre cluster, exécutez la commande `ver` à partir d’une invite de commandes Windows sur votre ordinateur de développement. Consultez [Système d’exploitation de conteneur Windows Server et compatibilité avec le système d’exploitation hôte](#windows-server-container-os-and-host-os-compatibility) avant de [créer un cluster](service-fabric-cluster-creation-via-portal.md).
 
 * Un registre dans Azure Container Registry. [Créez un registre de conteneurs](../container-registry/container-registry-get-started-portal.md) dans votre abonnement Azure.
 
 > [!NOTE]
 > Le déploiement de conteneurs sur un cluster Service Fabric sous Windows 10 est pris en charge.  Consultez [cet article](service-fabric-how-to-debug-windows-containers.md) pour plus d’informations sur la configuration de Windows 10 pour exécuter des conteneurs Windows.
->   
 
 > [!NOTE]
-> La version 6.2 de Service Fabric et les versions ultérieures prennent en charge le déploiement de conteneurs pour les clusters exécutant Windows Server version 1709.  
-> 
+> La version 6.2 de Service Fabric et les versions ultérieures prennent en charge le déploiement de conteneurs pour les clusters exécutant Windows Server version 1709.
 
 ## <a name="define-the-docker-container"></a>Définir le conteneur Docker
 
@@ -108,10 +104,18 @@ if __name__ == "__main__":
 ```
 
 <a id="Build-Containers"></a>
-## <a name="build-the-image"></a>Créer l’image
-Exécutez la commande `docker build` pour créer l’image qui exécute votre application web. Ouvrez une fenêtre PowerShell et accédez au répertoire contenant le fichier Dockerfile. Exécutez la commande suivante :
+
+## <a name="login-to-docker-and-build-the-image"></a>Connexion à Docker et génération de l’image
+
+Nous allons maintenant créer l’image qui exécute votre application web. Lorsque vous extrayez des images publiques de Docker (comme `python:2.7-windowsservercore` dans notre fichier Dockerfile), il est recommandé de s’authentifier auprès de votre compte Docker Hub au lieu de créer une demande de tirage anonyme.
+
+> [!NOTE]
+> Lorsque vous effectuez des demande de tirage (pull request) anonymes fréquentes, vous pouvez voir des erreurs Docker similaires à `ERROR: toomanyrequests: Too Many Requests.` ou `You have reached your pull rate limit.` Authentifiez-vous auprès de Docker Hub pour éviter ces erreurs. Consultez [Gérer le contenu public à l’aide d’Azure Container Registry](../container-registry/buffer-gate-public-content.md) pour plus d’informations.
+
+Ouvrez une fenêtre PowerShell et accédez au répertoire contenant le fichier Dockerfile. Exécutez ensuite les commande suivantes :
 
 ```
+docker login
 docker build -t helloworldapp .
 ```
 
@@ -270,7 +274,7 @@ Windows prend en charge deux modes d’isolation pour les conteneurs : Processu
    >
 
 ## <a name="configure-resource-governance"></a>Configurer la gouvernance des ressources
-La [gouvernance des ressources](service-fabric-resource-governance.md) limite les ressources que le conteneur peut utiliser sur l’hôte. L’élément `ResourceGovernancePolicy`, spécifié dans le manifeste de l’application, est utilisé pour déclarer des limites relatives aux ressources pour un package de code de service. Des limites de ressources peuvent être définies pour les ressources suivantes : mémoire, MemorySwap, CpuShares (poids relatif du processeur), MemoryReservationInMB, BlkioWeight (poids relatif de l’élément BlockIO). Dans cet exemple, le package de service Guest1Pkg obtient un cœur sur les nœuds de cluster où il est placé. Les limites de mémoire sont absolues, ce qui signifie que le package de code est limité à 1024 Mo de mémoire (avec une garantie de réservation identique). Les packages de code (conteneurs ou processus) ne sont pas en mesure d’allouer plus de mémoire que cette limite. Toute tentative en ce sens conduit à une exception de mémoire insuffisante. Pour pouvoir appliquer la limite de ressources, des limites de mémoire doivent être spécifiées pour tous les packages de code au sein d’un package de service.
+La [gouvernance des ressources](service-fabric-resource-governance.md) limite les ressources que le conteneur peut utiliser sur l’hôte. L’élément `ResourceGovernancePolicy`, spécifié dans le manifeste de l’application, est utilisé pour déclarer des limites relatives aux ressources pour un package de code de service. Des limites de ressources peuvent être définies pour les ressources suivantes : Memory, MemorySwap, CpuShares (poids relatif du processeur), MemoryReservationInMB, BlkioWeight (poids relatif de l’élément BlockIO). Dans cet exemple, le package de service Guest1Pkg obtient un cœur sur les nœuds de cluster où il est placé. Les limites de mémoire sont absolues, ce qui signifie que le package de code est limité à 1024 Mo de mémoire (avec une garantie de réservation identique). Les packages de code (conteneurs ou processus) ne sont pas en mesure d’allouer plus de mémoire que cette limite. Toute tentative en ce sens conduit à une exception de mémoire insuffisante. Pour pouvoir appliquer la limite de ressources, des limites de mémoire doivent être spécifiées pour tous les packages de code au sein d’un package de service.
 
 ```xml
 <ServiceManifestImport>
@@ -289,7 +293,7 @@ En démarrant la version 6.1, Service Fabric intègre automatiquement les évén
 
 L’instruction **HEALTHCHECK** qui pointe vers la vérification réalisée pour surveiller l’intégrité du conteneur doit être présente dans le fichier Dockerfile utilisé lors de la génération de l’image conteneur.
 
-![HealthCheckHealthy][3]
+![La capture d’écran montre les détails du package de services déployé NodeServicePackage.][3]
 
 ![HealthCheckUnhealthyApp][4]
 
@@ -332,7 +336,7 @@ Ouvrez un navigateur et accédez à `http://containercluster.westus2.cloudapp.az
 
 ## <a name="clean-up"></a>Nettoyer
 
-Vous continuez à être facturé tant que le cluster est en cours d’exécution. Pensez à [supprimer votre cluster](service-fabric-cluster-delete.md).
+Vous continuez à être facturé tant que le cluster est en cours d’exécution. Pensez à [supprimer votre cluster](./service-fabric-tutorial-delete-cluster.md).
 
 Une fois l’image envoyée (push) dans le registre de conteneurs, vous pouvez supprimer l’image locale de votre ordinateur de développement :
 
@@ -349,7 +353,7 @@ Les conteneurs Windows Server ne sont pas compatibles avec toutes les versions d
 - Les conteneurs Windows Server créés à l’aide de Windows Server 2016 fonctionnent en mode d’isolation Hyper-V uniquement sur un hôte exécutant Windows Server version 1709. 
 - Avec les conteneurs Windows Server créés à l’aide de Windows Server 2016, il peut être nécessaire de vérifier que la version du système d’exploitation du conteneur et celle du système d’exploitation hôte sont identiques lors d’une exécution en mode d’isolation des processus sur un hôte exécutant Windows Server 2016.
  
-Pour plus d’informations, consultez [Compatibilité des versions avec les conteneurs Windows](https://docs.microsoft.com/virtualization/windowscontainers/deploy-containers/version-compatibility).
+Pour plus d’informations, consultez [Compatibilité des versions avec les conteneurs Windows](/virtualization/windowscontainers/deploy-containers/version-compatibility).
 
 Examinez la compatibilité du système d’exploitation hôte et le système d’exploitation de votre conteneur pour créer et déployer des conteneurs sur votre cluster Service Fabric. Par exemple :
 
@@ -533,7 +537,7 @@ Vous pouvez configurer le cluster Service Fabric pour supprimer des images conte
           },
           {
                 "name": "ContainerImagesToSkip",
-                "value": "microsoft/windowsservercore|microsoft/nanoserver|microsoft/dotnet-frameworku|..."
+                "value": "mcr.microsoft.com/windows/servercore|mcr.microsoft.com/windows/nanoserver|mcr.microsoft.com/dotnet/framework/aspnet|..."
           }
           ...
           }

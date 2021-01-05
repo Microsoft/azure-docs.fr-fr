@@ -7,12 +7,12 @@ manager: rochakm
 ms.topic: article
 ms.date: 3/29/2019
 ms.author: sutalasi
-ms.openlocfilehash: 583511194fb100add1d5fc4ea9c06a869cf652b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1570bd9dfa62caa749d5a3983b93c2555be058ec
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77212283"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93348727"
 ---
 # <a name="set-up-disaster-recovery-for-azure-virtual-machines-using-azure-powershell"></a>Configurer la récupération d’urgence pour des machines virtuelles Azure à l’aide d’Azure PowerShell
 
@@ -249,6 +249,15 @@ Write-Output $TempASRJob.State
 $RecoveryProtContainer = Get-AzRecoveryServicesAsrProtectionContainer -Fabric $RecoveryFabric -Name "A2AWestUSProtectionContainer"
 ```
 
+#### <a name="fabric-and-container-creation-when-enabling-zone-to-zone-replication"></a>Création d’une structure et d’un conteneur lors de l’activation de la réplication de zone à zone
+
+Lors de l’activation de la réplication de zone à zone, une seule structure sera créée. Mais il y aura deux conteneurs. En supposant que la région est Europe Ouest, utilisez les commandes suivantes pour récupérer les conteneurs principal et de protection :
+
+```azurepowershell
+$primaryProtectionContainer = Get-AzRecoveryServicesAsrProtectionContainer -Fabric $fabric -Name "asr-a2a-default-westeurope-container"
+$recoveryPprotectionContainer = Get-AzRecoveryServicesAsrProtectionContainer -Fabric $fabric -Name "asr-a2a-default-westeurope-t-container"
+```
+
 ### <a name="create-a-replication-policy"></a>Créer une stratégie de réplication
 
 ```azurepowershell
@@ -287,6 +296,14 @@ Write-Output $TempASRJob.State
 $EusToWusPCMapping = Get-AzRecoveryServicesAsrProtectionContainerMapping -ProtectionContainer $PrimaryProtContainer -Name "A2APrimaryToRecovery"
 ```
 
+#### <a name="protection-container-mapping-creation-when-enabling-zone-to-zone-replication"></a>Création d’un mappage de conteneur de protection lors de l’activation de la réplication de zone à zone
+
+Lors de l’activation de la réplication de zone à zone, utilisez la commande ci-dessous pour créer un mappage de conteneur de protection. En supposant que la région est Europe Ouest, la commande sera -
+
+```azurepowershell
+$protContainerMapping = Get-AzRecoveryServicesAsrProtectionContainerMapping -ProtectionContainer $PrimprotectionContainer -Name "westeurope-westeurope-24-hour-retention-policy-s"
+```
+
 ### <a name="create-a-protection-container-mapping-for-failback-reverse-replication-after-a-failover"></a>Créer un mappage de conteneur de protection pour la restauration automatique (réplication inverse après basculement)
 
 Après un basculement, lorsque vous êtes prêt à ramener la machine virtuelle basculée dans la région Azure d’origine, vous effectuez une restauration automatique. Pour cela, la machine virtuelle basculée est répliquée de façon inverse depuis la région basculée vers la région d’origine. En cas de réplication inverse, les rôles de la région d’origine et de la région de récupération sont inversés. La région d’origine devient alors la nouvelle région de récupération, tandis que celle qui était la région de récupération devient la région principale. Le mappage de conteneur de protection pour une réplication inverse représente les rôles inversés des régions d’origine et de récupération.
@@ -316,7 +333,7 @@ Un compte de stockage de cache est un compte de stockage standard situé dans la
 $EastUSCacheStorageAccount = New-AzStorageAccount -Name "a2acachestorage" -ResourceGroupName "A2AdemoRG" -Location 'East US' -SkuName Standard_LRS -Kind Storage
 ```
 
-Pour les machines virtuelles qui n’**utilisent pas de disques managés**, le compte de stockage cible est le compte de stockage dans la région de récupération vers lequel les disques de la machine virtuelle sont répliqués. Le compte de stockage cible peut être un compte de stockage standard ou un compte de stockage premium. Sélectionnez le type de compte de stockage nécessaire en fonction du taux de modification des données (taux d’écriture d’E/S) pour les disques, ainsi que les limites d’évolution prises en charge par Azure Site Recovery pour ce type de stockage.
+Pour les machines virtuelles qui n’ **utilisent pas de disques managés** , le compte de stockage cible est le compte de stockage dans la région de récupération vers lequel les disques de la machine virtuelle sont répliqués. Le compte de stockage cible peut être un compte de stockage standard ou un compte de stockage premium. Sélectionnez le type de compte de stockage nécessaire en fonction du taux de modification des données (taux d’écriture d’E/S) pour les disques, ainsi que les limites d’évolution prises en charge par Azure Site Recovery pour ce type de stockage.
 
 ```azurepowershell
 #Create Target storage account in the recovery region. In this case a Standard Storage account
@@ -418,7 +435,7 @@ $datadiskId1 = $vm.StorageProfile.DataDisks[0].ManagedDisk.Id
 $RecoveryReplicaDiskAccountType = $vm.StorageProfile.DataDisks[0].ManagedDisk.StorageAccountType
 $RecoveryTargetDiskAccountType = $vm.StorageProfile.DataDisks[0].ManagedDisk.StorageAccountType
 
-$DataDisk1ReplicationConfig  = New-AzRecoveryServicesAsrAzureToAzureDiskReplicationConfig -ManagedDisk -LogStorageAccountId $CacheStorageAccount.Id `
+$DataDisk1ReplicationConfig  = New-AzRecoveryServicesAsrAzureToAzureDiskReplicationConfig -ManagedDisk -LogStorageAccountId $EastUSCacheStorageAccount.Id `
          -DiskId $datadiskId1 -RecoveryResourceGroupId $RecoveryRG.ResourceId -RecoveryReplicaDiskAccountType $RecoveryReplicaDiskAccountType `
          -RecoveryTargetDiskAccountType $RecoveryTargetDiskAccountType
 
@@ -623,7 +640,7 @@ Une fois la reprotection terminée, vous pouvez basculer dans le sens inverse,de
 Vous pouvez désactiver la réplication à l’aide de la cmdlet `Remove-AzRecoveryServicesAsrReplicationProtectedItem`.
 
 ```azurepowershell
-Remove-AzRecoveryServicesAsrReplicationProtectedItem -ReplicationProtectedItem $ReplicatedItem
+Remove-AzRecoveryServicesAsrReplicationProtectedItem -ReplicationProtectedItem $ReplicationProtectedItem
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

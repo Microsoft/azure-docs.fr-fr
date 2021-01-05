@@ -1,16 +1,14 @@
 ---
 title: Utiliser des proxys dans Azure Functions
 description: Présentation de l’utilisation de Azure Functions Proxies
-author: alexkarcher-msft
 ms.topic: conceptual
 ms.date: 01/22/2018
-ms.author: alkarche
-ms.openlocfilehash: 5e756258bb92d7def195959d909068e87e765c0f
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: fb263239f99bcb4ec4c893b700d5c1cce078659f
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82562064"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601371"
 ---
 # <a name="work-with-azure-functions-proxies"></a>Utilisation d’Azure Functions Proxies
 
@@ -57,11 +55,11 @@ La configuration d’un proxy ne doit pas nécessairement être statique. Vous p
 ### <a name="reference-local-functions"></a><a name="reference-localhost"></a>Fonctions locales de référence
 Vous pouvez utiliser `localhost` pour faire référence à une fonction au sein de la même application de fonction directement, sans demande proxy en aller-retour.
 
-`"backendurl": "https://localhost/api/httptriggerC#1"` fait référence à une fonction HTTP locale à l’itinéraire `/api/httptriggerC#1`
+`"backendUri": "https://localhost/api/httptriggerC#1"` fait référence à une fonction HTTP locale à l’itinéraire `/api/httptriggerC#1`
 
  
 >[!Note]  
->Si votre fonction utilise des niveaux d’autorisation de *fonction, administrateur ou système*, vous devez fournir le code et l’ID client, conformément à l’URL d’origine de la fonction. Dans ce cas, la référence doit ressembler à : `"backendurl": "https://localhost/api/httptriggerC#1?code=<keyvalue>&clientId=<keyname>"` Nous recommandons de stocker ces clés dans les [paramètres de l’application] et de les référencer dans vos proxies. Cela évite de stocker des secrets dans votre code source. 
+>Si votre fonction utilise des niveaux d’autorisation de *fonction, administrateur ou système*, vous devez fournir le code et l’ID client, conformément à l’URL d’origine de la fonction. Dans ce cas, la référence doit ressembler à : `"backendUri": "https://localhost/api/httptriggerC#1?code=<keyvalue>&clientId=<keyname>"` Nous recommandons de stocker ces clés dans les [paramètres de l’application] et de les référencer dans vos proxies. Cela évite de stocker des secrets dans votre code source. 
 
 ### <a name="reference-request-parameters"></a><a name="request-parameters"></a>Référencement des paramètres de la demande
 
@@ -76,8 +74,8 @@ Par exemple, si un proxy dispose d’un modèle de routage du type `/pets/{petId
 Outre les paramètres de modèle de routage, les valeurs suivantes peuvent être utilisées dans les valeurs de configuration :
 
 * **{request.method}** : méthode HTTP utilisée lors de la demande d’origine.
-* **{request.headers.\<HeaderName\>}** : un en-tête qui peut être lu à partir de la demande d’origine. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez lire. Si l’en-tête n’est pas inclus dans la demande, la valeur sera une chaîne vide.
-* **{request.querystring.\<ParameterName\>}** : un paramètre de chaîne de requête qui peut être lu à partir de la demande d’origine. Remplacez *\<ParameterName\>* par le nom de l’en-tête que vous souhaitez lire. Si le paramètre n’est pas inclus dans la demande, la valeur sera une chaîne vide.
+* **{request.headers.\<HeaderName\>}**  : un en-tête qui peut être lu à partir de la demande d’origine. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez lire. Si l’en-tête n’est pas inclus dans la demande, la valeur sera une chaîne vide.
+* **{request.querystring.\<ParameterName\>}**  : un paramètre de chaîne de requête qui peut être lu à partir de la demande d’origine. Remplacez *\<ParameterName\>* par le nom du paramètre que vous souhaitez lire. Si le paramètre n’est pas inclus dans la demande, la valeur sera une chaîne vide.
 
 ### <a name="reference-back-end-response-parameters"></a><a name="response-parameters"></a>Référencement des paramètres de réponse du serveur principal
 
@@ -85,11 +83,11 @@ Les paramètres de réponse peuvent être utilisés lors de la modification de l
 
 * **{backend.response.statusCode}** : code d’état HTTP renvoyé dans la réponse du serveur principal.
 * **{backend.response.statusReason}** : motif HTTP renvoyé dans la réponse du serveur principal.
-* **{backend.response.headers.\<HeaderName\>}** : un en-tête qui peut être lu à partir de la réponse du serveur principal. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez lire. Si l’en-tête n’est pas inclus dans la réponse, la valeur sera une chaîne vide.
+* **{backend.response.headers.\<HeaderName\>}**  : un en-tête qui peut être lu à partir de la réponse du serveur principal. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez lire. Si l’en-tête n’est pas inclus dans la réponse, la valeur sera une chaîne vide.
 
 ### <a name="reference-application-settings"></a><a name="use-appsettings"></a>Référencement des paramètres de l’application
 
-Vous pouvez également référencer les [paramètres de l’application définis pour la Function App](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) en mettant le nom du paramètre entre signes de pourcentage (%).
+Vous pouvez également référencer les [paramètres de l’application définis pour la Function App](./functions-how-to-use-azure-function-app-settings.md) en mettant le nom du paramètre entre signes de pourcentage (%).
 
 Par exemple, dans une URL de serveur principal de *https://%ORDER_PROCESSING_HOST%/api/orders* , « %ORDER_PROCESSING_HOST% » sera remplacé par la valeur du paramètre ORDER_PROCESSING_HOST.
 
@@ -110,7 +108,7 @@ Désactivez les traces en ajoutant `"debug":false` à tout proxy de votre instan
 
 ## <a name="advanced-configuration"></a>Configuration avancée
 
-Les serveurs proxy que vous configurez sont stockés dans un fichier *proxies.json* situé à la racine d’un répertoire de Function App. Vous pouvez modifier manuellement ce fichier et le déployer dans le cadre de votre application lors de l’utilisation de l’une des [méthodes de déploiement](https://docs.microsoft.com/azure/azure-functions/functions-continuous-deployment) prises en charge par Functions. 
+Les serveurs proxy que vous configurez sont stockés dans un fichier *proxies.json* situé à la racine d’un répertoire de Function App. Vous pouvez modifier manuellement ce fichier et le déployer dans le cadre de votre application lors de l’utilisation de l’une des [méthodes de déploiement](./functions-continuous-deployment.md) prises en charge par Functions. 
 
 > [!TIP] 
 > Si vous n’avez pas configuré l’une des méthodes de déploiement, vous pouvez également utiliser le fichier *proxies.json* dans le portail. Accédez à votre Function App et sélectionnez **Fonctionnalités de la plateforme**, puis **Éditeur App Service**. Cela vous permettra d’afficher l’ensemble de la structure de fichiers de votre Function App et d’y apporter des modifications.
@@ -173,7 +171,7 @@ Le comportement du proxy peut être contrôlé via plusieurs paramètres d’app
 
 Les proxies lisent toutes les chaînes d’un fichier JSON en utilisant \ en tant que symbole d’échappement. Les proxies interprètent également les accolades. Consultez un ensemble complet d’exemples ci-dessous.
 
-|Caractère|Caractère d’échappement| Exemple|
+|Caractère|Caractère d’échappement|Exemple|
 |-|-|-|
 |{ ou }|{{ ou }}|`{{ example }}` --> `{ example }`
 | \ | \\\\ | `example.com\\text.html` --> `example.com\text.html`
@@ -184,8 +182,8 @@ Les proxies lisent toutes les chaînes d’un fichier JSON en utilisant \ en tan
 L’objet requestOverrides définit les modifications apportées à la demande lors de l’appel de la ressource du serveur principal. L’objet est défini par les propriétés suivantes :
 
 * **backend.request.method** : méthode HTTP utilisée pour appeler le backend.
-* **backend.request.querystring.\<ParameterName\>** : paramètre de chaîne de requête pouvant être défini pour l’appel au backend. Remplacez *\<ParameterName\>* par le nom de l’en-tête que vous souhaitez définir. Notez que si une chaîne vide est fournie, le paramètre reste inclus dans la demande du serveur principal.
-* **backend.request.headers.\<HeaderName\>** : en-tête pouvant être défini pour l’appel au backend. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez définir. Notez que si une chaîne vide est fournie, le paramètre reste inclus dans la demande du serveur principal.
+* **backend.request.querystring.\<ParameterName\>**  : paramètre de chaîne de requête pouvant être défini pour l’appel au backend. Remplacez *\<ParameterName\>* par le nom du paramètre que vous souhaitez définir. Notez que si une chaîne vide est fournie, le paramètre reste inclus dans la demande du serveur principal.
+* **backend.request.headers.\<HeaderName\>**  : en-tête pouvant être défini pour l’appel au backend. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez définir. Notez que si une chaîne vide est fournie, le paramètre reste inclus dans la demande du serveur principal.
 
 Les valeurs peuvent faire référence aux paramètres de l’application et aux paramètres de la demande client d’origine.
 
@@ -217,7 +215,7 @@ L’objet requestOverrides définit les modifications apportées à la réponse 
 * **response.statusCode** : code d’état HTTP à renvoyer au client.
 * **response.statusReason** : motif HTTP à renvoyer au client.
 * **response.body** : représentation sous forme de chaîne du corps à renvoyer au client.
-* **response.headers.\<HeaderName\>** : en-tête pouvant être défini pour la réponse au client. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez définir. Si vous fournissez une chaîne vide, l’en-tête n’est pas inclus dans la réponse.
+* **response.headers.\<HeaderName\>**  : en-tête pouvant être défini pour la réponse au client. Remplacez *\<HeaderName\>* par le nom de l’en-tête que vous souhaitez définir. Si vous fournissez une chaîne vide, l’en-tête n’est pas inclus dans la réponse.
 
 Les valeurs peuvent faire référence aux paramètres de l’application, aux paramètres de la demande client d’origine et aux paramètres de la réponse du serveur principal.
 
@@ -244,7 +242,7 @@ Voici un exemple de configuration :
 > Dans cet exemple, le corps de la réponse est défini directement. Aucune propriété `backendUri` n’est nécessaire. Cet exemple illustre comment utiliser les Proxys Azure Functions pour simuler des API.
 
 [Azure portal]: https://portal.azure.com
-[Déclencheurs HTTP]: https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook
+[Déclencheurs HTTP]: ./functions-bindings-http-webhook.md
 [Modify the back-end request]: #modify-backend-request
 [Modify the response]: #modify-response
 [Définition d’un objet requestOverrides]: #requestOverrides

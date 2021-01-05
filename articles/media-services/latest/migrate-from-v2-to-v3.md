@@ -3,26 +3,28 @@ title: Migrer d’Azure Media Services v2 vers v3 | Microsoft Docs
 description: Cet article décrit les changements qui ont été introduits dans Azure Media Services v3 et montre les différences entre les deux versions. Il fournit également des conseils de migration pour le passage de Media Services v2 à Media Services v3.
 services: media-services
 documentationcenter: na
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 tags: ''
 keywords: azure media services, flux, diffusion, en direct, hors connexion
 ms.service: media-services
 ms.devlang: multiple
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: multiple
 ms.workload: media
-ms.date: 03/09/2020
-ms.author: juliako
-ms.openlocfilehash: 72d413c5d8bc982d885d889da35b29a3607410cc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 0cdf4699f5dc00087845ee6ca0d24ad6493c320b
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79472065"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92426873"
 ---
 # <a name="migration-guidance-for-moving-from-media-services-v2-to-v3"></a>Conseils de migration pour le passage de Media Services v2 à Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 >Soyez notifié de la disponibilité des mises à jour sur cette page en faisant un copier-coller de cette URL : `https://docs.microsoft.com/api/search/rss?search=%22Migrate+from+Azure+Media+Services+v2+to+v3%22&locale=en-us` dans votre lecteur de flux RSS.
 
@@ -42,8 +44,8 @@ Si vous avez un service vidéo développé aujourd’hui sur la base des [API h�
 *  v3 est basée sur une surface d’API unifiée qui expose des fonctionnalités de gestion et de fonctionnement qui s’appuient sur Azure Resource Manager. Vous pouvez utiliser les modèles Azure Resource Manager pour créer et déployer des transformations, des points de terminaison de streaming, des événements en direct, etc.
 * Document sur la [spécification OpenAPI (anciennement Swagger)](https://aka.ms/ams-v3-rest-sdk).
     Expose le schéma pour tous les composants de service, dont l’encodage basé sur un fichier.
-* Kits de développement logiciel (SDK) disponibles pour [.NET](https://aka.ms/ams-v3-dotnet-ref), .NET Core, [Node.js](/javascript/api/overview/azure/mediaservices/management), [Python](https://aka.ms/ams-v3-python-ref), [Java](https://aka.ms/ams-v3-java-ref), [Go](https://aka.ms/ams-v3-go-ref) et Ruby.
-* Intégration d’[Azure CLI](https://aka.ms/ams-v3-cli-ref) pour la prise en charge de scripts simples.
+* Kits de développement logiciel (SDK) disponibles pour [.NET](/dotnet/api/overview/azure/mediaservices/management), .NET Core, [Node.js](/javascript/api/overview/azure/mediaservices/management), [Python](/python/api/overview/azure/mediaservices/management), [Java](/java/api/overview/azure/mediaservices/management), [Go](https://aka.ms/ams-v3-go-ref) et Ruby.
+* Intégration d’[Azure CLI](/cli/azure/ams) pour la prise en charge de scripts simples.
 
 ### <a name="new-features"></a>Nouvelles fonctionnalités
 
@@ -57,7 +59,7 @@ Si vous avez un service vidéo développé aujourd’hui sur la base des [API h�
 * La sortie en direct est plus simple à utiliser que l’entité Program dans les API v2. 
 * Prise en charge améliorée de RTMP (stabilité accrue et meilleure prise en charge de l’encodeur source).
 * Ingestion sécurisée RTMPS.<br/>Quand vous créez un événement en direct, vous obtenez 4 URL de réception. Les 4 URL d’ingestion sont presque identiques, ont le même jeton de streaming (AppId) ; seule la partie du numéro de port est différente. Il existe deux URL principales et de secours pour RTMPS.   
-* Vous disposez d’un contrôle d’accès en fonction du rôle (RBAC) sur vos entités. 
+* Vous disposez d'un contrôle d'accès en fonction du rôle Azure (Azure RBAC) sur vos entités. 
 
 ## <a name="known-issues"></a>Problèmes connus
 
@@ -65,9 +67,9 @@ Si vous avez un service vidéo développé aujourd’hui sur la base des [API h�
 
     * Gérer les [événements en direct](live-events-outputs-concept.md) Media Services v3. 
     * Consulter (et non gérer) les [actifs multimédias](assets-concept.md) v3. 
-    * [Obtenir des informations sur l’accès aux API](access-api-portal.md). 
+    * [Obtenir des informations sur l’accès aux API](./access-api-howto.md). 
 
-    Pour toutes les autres tâches de gestion (par exemple, les [transformations et travaux](transforms-jobs-concept.md) et la [protection de contenu](content-protection-overview.md)), utilisez l’[API REST](https://docs.microsoft.com/rest/api/media/), l’interface [CLI](https://aka.ms/ams-v3-cli-ref) ou l’un des [kits de développement logiciel (SDK)](media-services-apis-overview.md#sdks) pris en charge.
+    Pour toutes les autres tâches de gestion (par exemple, les [transformations et travaux](transforms-jobs-concept.md) et la [protection de contenu](content-protection-overview.md)), utilisez l’[API REST](/rest/api/media/), l’interface [CLI](/cli/azure/ams) ou l’un des [kits de développement logiciel (SDK)](media-services-apis-overview.md#sdks) pris en charge.
 * Vous devez provisionner des unités réservées Multimédia (MRU) dans votre compte afin de contrôler la concurrence et les performances de vos travaux, en particulier ceux impliquant une analyse audio ou vidéo. Pour plus d’informations, consultez [Mise à l’échelle du traitement multimédia](../previous/media-services-scale-media-processing-overview.md). Vous pouvez gérer les MRU à l’aide de [CLI 2.0 pour Media Services v3](media-reserved-units-cli-how-to.md), du [portail Azure](../previous/media-services-portal-scale-media-processing.md) ou des [API v2](../previous/media-services-dotnet-encoding-units.md). Vous devez provisionner des unités réservées Multimédia, indépendamment de la version (v2 ou v3) des API Media Services que vous utilisez.
 * Des entités Media Services créées avec l’API v3 ne peuvent pas être gérées avec l’API v2.  
 * Toutes les entités de l’API V2 ne s’affichent pas automatiquement dans l’API V3.  Voici quelques exemples d’entités dans les deux versions et qui sont incompatibles :  

@@ -2,21 +2,21 @@
 title: Déboguer les applications de proxy d'application - Azure Active Directory | Microsoft Docs
 description: Déboguez les problèmes liés aux applications de proxy d'application Azure Active Directory (Azure AD).
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 05/21/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
-ms.openlocfilehash: 575891d99c077299f5e7abf008c1ebb2b158373f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e61ea30f01e8ae141d24c9bd91b08edef4dbe74e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74382072"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85555058"
 ---
 # <a name="debug-application-proxy-application-issues"></a>Déboguer les problèmes d’application de proxy d’application 
 
@@ -39,7 +39,7 @@ Cet organigramme vous guide tout au long des étapes de débogage des problèmes
 
 ![Organigramme illustrant les étapes de débogage d’une application](media/application-proxy-debug-apps/application-proxy-apps-debugging-flowchart.png)
 
-|  | Action | Description | 
+| Étape | Action | Description |
 |---------|---------|---------|
 |1 | Ouvrez un navigateur, accédez à l’application et entrez vos informations d’identification | Essayez d’utiliser vos informations d’identification pour vous connecter à l’application et consultez les éventuelles erreurs liées à l'utilisateur comme [Impossible d'accéder à cet application d'entreprise](application-proxy-sign-in-bad-gateway-timeout-error.md). |
 |2 | Vérifiez l’affectation d'utilisateurs à l'application | Assurez-vous que votre compte d’utilisateur est autorisé à accéder à l’application à partir du réseau d’entreprise, puis effectuez un test de signature en suivant la procédure [Tester l’application](application-proxy-add-on-premises-application.md#test-the-application). Si les problèmes de connexion persistent, consultez [Résoudre les erreurs de connexion](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context).  |

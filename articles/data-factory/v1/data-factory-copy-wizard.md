@@ -13,12 +13,12 @@ ms.topic: conceptual
 ms.date: 01/22/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 8b872cc30ae66e83274f189138dad6d609e3f536
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 28169e43d0e6949a16cc56c7e7d5d91d6db1ef57
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74927053"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003036"
 ---
 # <a name="copy-or-move-data-easily-with-azure-data-factory-copy-wizard"></a>Copier ou déplacer facilement des données avec l’Assistant de copie Azure Data Factory
 > [!NOTE]
@@ -66,16 +66,18 @@ Vous pouvez utiliser des variables dans le chemin du dossier pour copier des don
 
 Supposons que vos dossiers d’entrée présentent le format suivant :
 
-    2016/03/01/01
-    2016/03/01/02
-    2016/03/01/03
-    ...
+```text
+2016/03/01/01
+2016/03/01/02
+2016/03/01/03
+...
+```
 
 Cliquez sur le bouton **Parcourir** à côté de **Fichier ou dossier**, accédez à l’un de ces dossiers (par exemple, 2016->03->01->02), puis cliquez sur **Choisir**. Vous devez voir `2016/03/01/02` dans la zone de texte. À présent, remplacez **2016** par **{year}** , **03** par **{month}** , **01** par **{day}** et **02** par **{hour}** , puis appuyez sur la touche de tabulation. Vous devez maintenant voir des listes déroulantes pour sélectionner le format de ces quatre variables :
 
 ![Utilisation de variables système](./media/data-factory-copy-wizard/blob-standard-variables-in-folder-path.png)   
 
-Comme la capture d’écran suivante le montre, vous pouvez également configurer une variable **custom** pour utiliser l’une des [chaînes de format prises en charge](https://msdn.microsoft.com/library/8kb3ddd4.aspx). Pour sélectionner un dossier avec cette structure, utilisez d’abord le bouton **Parcourir** . Remplacez alors une valeur avec **{custom}** , puis appuyez sur Tab pour afficher la zone de texte dans laquelle vous pouvez taper la chaîne de format.     
+Comme la capture d’écran suivante le montre, vous pouvez également configurer une variable **custom** pour utiliser l’une des [chaînes de format prises en charge](/dotnet/standard/base-types/custom-date-and-time-format-strings). Pour sélectionner un dossier avec cette structure, utilisez d’abord le bouton **Parcourir** . Remplacez alors une valeur avec **{custom}** , puis appuyez sur Tab pour afficher la zone de texte dans laquelle vous pouvez taper la chaîne de format.     
 
 ![Utilisation de la variable custom](./media/data-factory-copy-wizard/blob-custom-variables-in-folder-path.png)
 
@@ -93,4 +95,3 @@ Une opération de copie unique ne permet le déplacement des données à d’une
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour découvrir une procédure pas à pas rapide sur l’utilisation de l’Assistant Copie de Data Factory afin de créer un pipeline avec une activité de copie, consultez le [Tutoriel : Créez un pipeline à l’aide de l’Assistant Copie](data-factory-copy-data-wizard-tutorial.md).
-

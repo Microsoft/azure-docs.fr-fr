@@ -1,31 +1,29 @@
 ---
-title: Problèmes de diagnostic de Windows Virtual Desktop – Azure
-description: Comment utiliser la fonctionnalité de diagnostic de Windows Virtual Desktop pour diagnostiquer des problèmes.
-services: virtual-desktop
+title: Problèmes de diagnostic de Windows Virtual Desktop (classique) – Azure
+description: Comment utiliser la fonctionnalité de diagnostic de Windows Virtual Desktop (classique) pour diagnostiquer des problèmes.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
-ms.date: 03/30/2020
+ms.date: 05/13/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: e529144198d0c635e74955e98d47dd46ac4fb733
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 7e652f04b42b132e7c1307503b1764dda7b2036b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614182"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88009339"
 ---
-# <a name="identify-and-diagnose-issues"></a>Identifier et diagnostiquer les problèmes
+# <a name="identify-and-diagnose-issues-in-windows-virtual-desktop-classic"></a>Identifier et diagnostiquer les problèmes dans Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../diagnostics-role-service.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../diagnostics-role-service.md).
 
 Windows Virtual Desktop offre une fonctionnalité de diagnostic qui permet à l’administrateur d’identifier les problèmes via une seule interface. Les rôles Windows Virtual Desktop journalisent une activité de diagnostic à chaque fois qu’un utilisateur interagit avec le système. Chaque journal contient des informations importantes telles que les rôles Windows Virtual Desktop impliqués dans la transaction, les messages d’erreur, les informations d’abonnés, et les informations d’utilisateurs. Les activités de diagnostics sont créées par des actions de l’administrateur et de l’utilisateur, et peuvent être divisées en trois catégories principales :
 
 * Activités d’ajout de flux : l’utilisateur déclenche ces activités à chaque fois qu’il essaie de se connecter à son flux via des applications Bureau à distance Microsoft.
 * Activités de connexion : l’utilisateur déclenche ces activités à chaque fois qu’il essaie de se connecter à un bureau ou RemoteApp via des applications Bureau à distance Microsoft.
 * Activités de gestion : l’administrateur déclenche ces activités à chaque fois qu’il effectue des opérations de gestion sur le système, telles que la création de pools d’hôte, l’attribution d’utilisateurs à des groupes d’applications et la création d’attributions de rôles.
-  
+
 Les connexions qui n’atteignent pas Windows Virtual Desktop ne figureront pas dans les résultats de diagnostic, car le service de rôle de diagnostics fait partie de Windows Virtual Desktop. Des problèmes de connexion à Windows Virtual Desktop peuvent survenir lorsque l’utilisateur rencontre des problèmes de connectivité au réseau.
 
 Tout d’abord, si vous ne l’avez pas déjà fait, [téléchargez et importez le module PowerShell Windows Virtual Desktop](/powershell/windows-virtual-desktop/overview/) à utiliser dans votre session PowerShell. Exécutez ensuite l’applet de commande suivante pour vous connecter à votre compte :
@@ -39,7 +37,7 @@ Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
 Windows Virtual Desktop Diagnostics utilise une seule cmdlet PowerShell mais contient de nombreux paramètres facultatifs pour aider à limiter et isoler les problèmes. Les sections suivantes répertorient les cmdlets que vous pouvez exécuter pour diagnostiquer les problèmes. La plupart des filtres peuvent être appliqués ensemble. Les valeurs figurant entre crochets, comme `<tenantName>`, doivent être remplacées par les valeurs qui s’appliquent à votre situation.
 
 >[!IMPORTANT]
->La fonctionnalité de diagnostic est destinée à la résolution des problèmes d’un seul utilisateur. Toutes les requêtes utilisant PowerShell doivent inclure l’un des paramètres *-UserName* ou *-ActivityID*. Pour les fonctionnalités de surveillance, utilisez Log Analytics. Pour plus d’informations sur l’envoi de données de diagnostic à votre espace de travail, voir [Utiliser Log Analytics pour la fonctionnalité de diagnostic](diagnostics-log-analytics-2019.md). 
+>La fonctionnalité de diagnostic est destinée à la résolution des problèmes d’un seul utilisateur. Toutes les requêtes utilisant PowerShell doivent inclure l’un des paramètres *-UserName* ou *-ActivityID*. Pour les fonctionnalités de surveillance, utilisez Log Analytics. Pour plus d’informations sur l’envoi de données de diagnostic à votre espace de travail, voir [Utiliser Log Analytics pour la fonctionnalité de diagnostic](diagnostics-log-analytics-2019.md).
 
 ### <a name="filter-diagnostic-activities-by-user"></a>Filtrer les activités de diagnostic par utilisateur
 
@@ -139,6 +137,7 @@ Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer v
 
 |Code numérique|Code d'erreur|Solution suggérée|
 |---|---|---|
+|1322|ConnectionFailedNoMappingOfSIDinAD|L’utilisateur n’est pas membre d’Azure Active Directory. Suivez les instructions du [Centre d’administration Active Directory](/windows-server/identity/ad-ds/get-started/adac/active-directory-administrative-center) pour les ajouter.|
 |3|UnauthorizedAccess|L’utilisateur qui a tenté d’exécuter la cmdlet PowerShell d’administration n’est pas autorisé à le faire ou a mal tapé son nom d’utilisateur.|
 |1 000|TenantNotFound|Le nom de l’abonné que vous avez saisi ne correspond à aucun abonné existant. Vérifiez que vous n’avez fait aucune faute de frappe et réessayez.|
 |1006|TenantCannotBeRemovedHasSessionHostPools|Vous ne pouvez pas supprimer un abonné tant qu’il contient des objets. Supprimez d’abord les pools d’hôte de la session, puis réessayez.|
@@ -160,6 +159,7 @@ Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer v
 
 |Code numérique|Code d'erreur|Solution suggérée|
 |---|---|---|
+|-2147467259|ConnectionFailedAdErrorNoSuchMember|L’utilisateur n’est pas membre d’Active Directory. Suivez les instructions du [Centre d’administration Active Directory](/windows-server/identity/ad-ds/get-started/adac/active-directory-administrative-center) pour les ajouter.|
 |-2147467259|ConnectionFailedAdTrustedRelationshipFailure|L’hôte de la session n’est pas correctement joint à Active Directory.|
 |-2146233088|ConnectionFailedUserHasValidSessionButRdshIsUnhealthy|Les connexions ont échoué car l’hôte de la session est indisponible. Vérifiez l’intégrité de l’hôte de la session.|
 |-2146233088|ConnectionFailedClientDisconnect|Si vous rencontrez souvent cette erreur, assurez-vous que l’ordinateur est connecté au réseau.|
@@ -170,6 +170,7 @@ Le tableau suivant répertorie les erreurs courantes que pourraient rencontrer v
 |8|ConnectionBroken|La connexion entre le client et passerelle ou serveur a été interrompue. Aucune action n’est nécessaire, sauf si cela se produit de manière inattendue.|
 |14|UnexpectedNetworkDisconnect|La connexion au réseau a été perdue. Demandez à l’utilisateur de se reconnecter.|
 |24|ReverseConnectFailed|La machine virtuelle hôte n’a aucune une ligne directe vers la passerelle Bureau à distance. Vérifiez que l’adresse IP de la passerelle peut être résolue.|
+|1322|ConnectionFailedNoMappingOfSIDinAD|L’utilisateur n’est pas membre d’Active Directory. Suivez les instructions du [Centre d’administration Active Directory](/windows-server/identity/ad-ds/get-started/adac/active-directory-administrative-center) pour les ajouter.|
 
 ## <a name="next-steps"></a>Étapes suivantes
 

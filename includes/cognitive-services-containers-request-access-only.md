@@ -5,10 +5,10 @@ ms.date: 05/18/2020
 ms.service: cognitive-services
 ms.topic: include
 ms.openlocfilehash: 173a7f4fc1cfe7b615393d2ca5ecd2941b5ad928
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83701878"
 ---
 Le formulaire demande des informations sur vous, votre entreprise et le scénario d’utilisateur pour lequel vous allez utiliser le conteneur. Une fois que vous avez envoyé le formulaire, l’équipe Azure Cognitive Services vérifie que vous remplissez bien les critères d’accès au registre de conteneurs privé.

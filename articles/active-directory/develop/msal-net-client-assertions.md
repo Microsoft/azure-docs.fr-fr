@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 11/18/2019
+ms.date: 9/30/2020
 ms.author: jmprieur
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 8c97387bfd2a362d3bf5a6b8a3252242f061da31
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: bb1ce0a8ba568dc651accdc5f8c84e9c2c980e73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80050289"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91612810"
 ---
 # <a name="confidential-client-assertions"></a>Assertions client confidentielles
 
@@ -48,16 +48,16 @@ app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
                                           .Build();
 ```
 
-Les revendications attendues par Azure AD sont :
+Les [revendications attendues par Azure AD](active-directory-certificate-credentials.md) sont :
 
 Type de revendication | Valeur | Description
 ---------- | ---------- | ----------
-aud | `https://login.microsoftonline.com/{tenantId}/v2.0` | La revendication « AUD » (audience) identifie les destinataires auxquels le JWT est destiné (ici Azure AD) consultez [RFC 7519, section 4.1.3]
-exp | Jeudi 27 juin 2019 à 15:04:17 GMT+0200 (Romance Daylight Time) | La revendication « exp » (délai d'expiration) indique le délai d'expiration à partir duquel le JWT ne doit PAS être accepté pour être traité. Consultez [RFC 7519, section 4.1.4]
-iss | {ClientID} | La revendication « ISS » (émetteur) identifie le principal qui a émis le jeton JWT. Le traitement de cette revendication est spécifique à l’application. La valeur « ISS » est une chaîne qui respecte la casse et qui contient une valeur StringOrURI. [RFC 7519, section 4.1.1]
-jti | (un guid) | La revendication « JTI » (ID JWT) fournit un identificateur unique pour le jeton JWT. La valeur de l’identificateur DOIT être assignée de manière à garantir qu’il y a une probabilité négligeable que la même valeur soit affectée par accident à un objet de données différent ; si l’application utilise plusieurs émetteurs, les collisions doivent également être évitées parmi les valeurs générées par différents émetteurs. La revendication « JTI » peut être utilisée pour empêcher la relecture du JWT. La valeur « JTI » est une chaîne qui respecte la casse. [RFC 7519, section 4.1.7]
-nbf | Jeudi 27 juin 2019 à 14:54:17 GMT+0200 (Romance Daylight Time) | La revendication « nbf » (pas avant) indique le délai avant lequel le JWT ne doit PAS être accepté pour être traité. [RFC 7519, section 4.1.5]
-sub | {ClientID} | La revendication « SUB » (objet) identifie l’objet du jeton JWT. Les revendications dans un jeton JWT sont normalement des instructions sur l’objet. La valeur de l’objet DOIT être étendue sur une valeur locale unique dans le contexte de l’émetteur ou être globalement unique. Consultez ensuite [RFC 7519, section 4.1.2]
+aud | `https://login.microsoftonline.com/{tenantId}/v2.0` | La revendication « AUD » (audience) identifie les destinataires auxquels le JWT est destiné (ici Azure AD) consultez [RFC 7519, section 4.1.3](https://tools.ietf.org/html/rfc7519#section-4.1.3).  Dans ce cas, ce destinataire est le serveur de connexion (login.microsoftonline.com).
+exp | 1601519414 | La revendication « exp » (délai d'expiration) indique le délai d'expiration à partir duquel le JWT ne doit PAS être accepté pour être traité. Consultez [RFC 7519, section 4.1.4](https://tools.ietf.org/html/rfc7519#section-4.1.4).  Cela permet à l’instruction d’être utilisée jusqu’à ce moment-là. Réduisez-la donc au minimum : 5 à 10 minutes après `nbf` au maximum.  Azure AD ne détermine actuellement pas de restrictions sur l’heure de `exp`. 
+iss | {ClientID} | La revendication « ISS » (émetteur) identifie le principal qui a émis le jeton JWT ; le cas échéant, votre application cliente.  Utilisez l’ID d’application GUID.
+jti | (un guid) | La revendication « JTI » (ID JWT) fournit un identificateur unique pour le jeton JWT. La valeur de l’identificateur DOIT être assignée de manière à garantir qu’il y a une probabilité négligeable que la même valeur soit affectée par accident à un objet de données différent ; si l’application utilise plusieurs émetteurs, les collisions doivent également être évitées parmi les valeurs générées par différents émetteurs. La valeur « JTI » est une chaîne qui respecte la casse. [RFC 7519, section 4.1.7](https://tools.ietf.org/html/rfc7519#section-4.1.7)
+nbf | 1601519114 | La revendication « nbf » (pas avant) indique le délai avant lequel le JWT ne doit PAS être accepté pour être traité. [RFC 7519, section 4.1.5](https://tools.ietf.org/html/rfc7519#section-4.1.5).  L’utilisation de l’heure actuelle est appropriée. 
+sub | {ClientID} | La revendication « SUB » (objet) identifie l’objet du jeton JWT ; le cas échéant, votre application également. Utilisez la même valeur que `iss`. 
 
 L’exemple suivant montre comment créer ces revendications :
 

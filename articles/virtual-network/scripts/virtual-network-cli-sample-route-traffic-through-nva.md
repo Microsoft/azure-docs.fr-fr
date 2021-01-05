@@ -1,6 +1,6 @@
 ---
 title: Router le trafic via une appliance virtuelle réseau - Exemple de script Azure CLI
-description: Exemple de script Azure CLI - Acheminer le trafic via une appliance virtuelle réseau de pare-feu.
+description: Router le trafic via une appliance virtuelle réseau de pare-feu - Exemple de script Azure CLI.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -15,14 +15,15 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 03/20/2018
 ms.author: kumud
-ms.openlocfilehash: d8704c34d59a8f735d060a7c7ca6463034883714
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 964fda8168867c115502c7262dc1d41e55075866
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74083813"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91317648"
 ---
-# <a name="route-traffic-through-a-network-virtual-appliance-script-sample"></a>Exemple de script pour acheminer le trafic via une appliance virtuelle réseau
+# <a name="route-traffic-through-a-network-virtual-appliance---azure-cli-script-sample"></a>Router le trafic via une appliance virtuelle réseau – Exemple de script Azure CLI
 
 Cet exemple de script permet de créer un réseau virtuel avec des sous-réseaux frontaux et principaux. Il crée également une machine virtuelle sur laquelle le transfert IP est activé pour acheminer le trafic entre les deux sous-réseaux. Après avoir exécuté le script, vous pouvez déployer un logiciel réseau, telle qu’une application de pare-feu, sur la machine virtuelle.
 

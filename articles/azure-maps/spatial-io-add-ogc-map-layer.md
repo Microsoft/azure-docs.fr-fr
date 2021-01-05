@@ -1,19 +1,19 @@
 ---
 title: Ajouter une couche Open Geospatial Consortium (OGC) | Microsoft Azure Maps
 description: Découvrez comment superposer une couche OGC sur la carte et comment utiliser les différentes options de la classe OgcMapLayer.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 03/02/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: b753ecfc07cfb3806838f8a05dbe33ef0bb92730
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d94a681fa987a4b23dbcda744c2f8516da4437a
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334296"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891663"
 ---
 # <a name="add-a-map-layer-from-the-open-geospatial-consortium-ogc"></a>Ajouter une couche fournie par l’Open Geospatial Consortium (OGC)
 
@@ -28,7 +28,7 @@ Les sections suivantes décrivent les fonctionnalités du service de carte web p
 - GetFeatureInfo requiert que le service prenne en charge `EPSG:4326` ou gère les reprojections. 
 - Opérations prises en charge :
 
-    | | |
+    | Opération | Description |
     | :-- | :-- |
     | GetCapabilities | Récupère les métadonnées relatives au service avec les capacités prises en charge |
     | GetMap | Récupère une image de carte pour une région spécifiée |
@@ -42,7 +42,7 @@ Les sections suivantes décrivent les fonctionnalités du service de carte web p
 - L’identificateur TileMatrix doit être une valeur entière qui correspond à un niveau de zoom sur la carte. Sur une carte Azure, le niveau de zoom est une valeur comprise entre `"0"` et `"22"`. Ainsi, `"0"` est pris en charge, contrairement à `"00"`.
 - Opérations prises en charge :
 
-    | | |
+    | Opération | Description |
     | :-- | :-- |
     | GetCapabilities | Récupère les opérations et fonctionnalités prises en charge |
     | GetTile | Récupère les images d’une mosaïque particulière |
@@ -83,10 +83,10 @@ Vous pouvez également spécifier les paramètres de carte pour utiliser un serv
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [OgcMapLayer](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.layer.ogcmaplayer)
+> [OgcMapLayer](/javascript/api/azure-maps-spatial-io/atlas.layer.ogcmaplayer)
 
 > [!div class="nextstepaction"]
-> [OgcMapLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.ogcmaplayeroptions)
+> [OgcMapLayerOptions](/javascript/api/azure-maps-spatial-io/atlas.ogcmaplayeroptions)
 
 Consultez les articles suivants, qui contiennent des exemples de code que vous pouvez ajouter à vos cartes :
 

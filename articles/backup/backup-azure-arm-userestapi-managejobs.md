@@ -4,12 +4,12 @@ description: Dans cet article, découvrez comment suivre et gérer les tâches d
 ms.topic: conceptual
 ms.date: 08/03/2018
 ms.assetid: b234533e-ac51-4482-9452-d97444f98b38
-ms.openlocfilehash: 628569c547aa776ec2fbb7ec7e32edad7c1fe7dd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ced0e0020fe955734bf6cc767480fbadd6eaffc1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233945"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88890278"
 ---
 # <a name="track-backup-and-restore-jobs-using-rest-api"></a>Suivi des tâches de sauvegarde et de restauration à l’aide de l’API REST
 
@@ -17,7 +17,7 @@ Le service Sauvegarde Azure déclenche des tâches qui s’exécutent en arrièr
 
 ## <a name="fetch-job-information-from-operations"></a>Récupérer les informations sur tâches à partir des opérations
 
-Une opération telle que le déclenchement d’une sauvegarde renvoie toujours un ID de tâche (jobID). Par exemple : voici la réponse finale d'une [opération de déclenchement de l'API REST de sauvegarde](backup-azure-arm-userestapi-backupazurevms.md#example-responses-3) :
+Une opération telle que le déclenchement d’une sauvegarde renvoie toujours un ID de tâche (jobID). Par exemple : voici la réponse finale d'une [opération de déclenchement de l'API REST de sauvegarde](backup-azure-arm-userestapi-backupazurevms.md#example-responses-for-on-demand-backup) :
 
 ```http
 {
@@ -33,7 +33,7 @@ Une opération telle que le déclenchement d’une sauvegarde renvoie toujours u
 }
 ```
 
-La tâche de sauvegarde de machine virtuelle est identifiée par le champ « jobId » et peut être suivie comme indiqué [ici](https://docs.microsoft.com/rest/api/backup/jobdetails/) en utilisant une simple requête *GET*.
+La tâche de sauvegarde de machine virtuelle est identifiée par le champ « jobId » et peut être suivie comme indiqué [ici](/rest/api/backup/jobdetails/) en utilisant une simple requête *GET*.
 
 ## <a name="tracking-the-job"></a>Suivi de la tâche
 
@@ -41,13 +41,13 @@ La tâche de sauvegarde de machine virtuelle est identifiée par le champ « jo
 GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}?api-version=2019-05-13
 ```
 
-L’`{jobName}` est « jobId » comme indiqué précédemment. La réponse est toujours 200 OK avec le champ « status » indiquant l’état actuel de la tâche. Une fois que l’état devient « Completed » ou « CompletedWithWarnings », la section « extendedInfo » révèle plus de détails sur la tâche.
+L’`{jobName}` est « jobId » comme indiqué précédemment. La réponse est toujours 200 OK avec le champ « status » indiquant l’état actuel de la tâche. Lorsque l’état est « Completed » ou « CompletedWithWarnings », la section « extendedInfo » révèle plus de détails sur le travail.
 
 ### <a name="response"></a>response
 
 |Nom  |Type  |Description  |
 |---------|---------|---------|
-|200 OK     | [JobResource](https://docs.microsoft.com/rest/api/backup/jobdetails/get#jobresource)        | OK        |
+|200 OK     | [JobResource](/rest/api/backup/jobdetails/get#jobresource)        | OK        |
 
 #### <a name="example-response"></a>Exemple de réponse
 

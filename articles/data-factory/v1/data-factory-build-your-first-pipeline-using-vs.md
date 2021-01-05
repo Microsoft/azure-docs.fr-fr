@@ -3,8 +3,8 @@ title: Créer votre première fabrique de données Azure (Visual Studio)
 description: Dans ce didacticiel, vous allez créer un exemple de pipeline Azure Data Factory avec Visual Studio.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
@@ -12,12 +12,12 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.custom: vs-azure
 ms.date: 01/22/2018
-ms.openlocfilehash: eb9c21bf1972304da688586da9ccabe5063fa112
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b0532e75ac581bad3b5dd8669a591186dc320a86
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75438970"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496566"
 ---
 # <a name="tutorial-create-a-data-factory-by-using-visual-studio"></a>Didacticiel : Créer une fabrique de données à l’aide de Visual Studio
 > [!div class="op_single_selector" title="Tools/SDKs"]
@@ -31,7 +31,7 @@ ms.locfileid: "75438970"
 > [!NOTE]
 > Cet article s’applique à la version 1 de Data Factory. Si vous utilisez la version actuelle du service Data Factory, consultez [Démarrage rapide : Créer une fabrique de données à l’aide d’Azure Data Factory](../quickstart-create-data-factory-dot-net.md).
 
-Ce didacticiel vous explique comment créer une fabrique de données Azure à l’aide de Visual Studio. Vous allez créer un projet Visual Studio à l’aide du modèle de projet Data Factory, puis définir des entités Data Factory (services liés, jeux de données et pipeline) au format JSON et vous allez terminer en publiant/déployant ces entités dans le cloud. 
+Ce tutoriel vous explique comment créer une fabrique de données Azure Data Factory à l’aide de Visual Studio. Vous allez créer un projet Visual Studio à l’aide du modèle de projet Data Factory, puis définir des entités Data Factory (services liés, jeux de données et pipeline) au format JSON et vous allez terminer en publiant/déployant ces entités dans le cloud. 
 
 Le pipeline dans ce didacticiel a une activité : **Activité HDInsight Hive**. Cette activité exécute un script Hive sur un cluster HDInsight qui transforme des données d’entrée pour produire des données de sortie. Le pipeline est programmé pour s’exécuter une fois par mois entre les heures de début et de fin spécifiées. 
 
@@ -67,7 +67,7 @@ Voici les étapes à effectuer dans le cadre de cette procédure pas à pas :
    * Téléchargez le Kit de développement logiciel (SDK) Azure pour Visual Studio 2013 ou Visual Studio 2015. Accédez à la [page de téléchargement d’Azure](https://azure.microsoft.com/downloads/), puis cliquez sur **VS 2013** ou **VS 2015** dans la section  **.NET**.
    * Téléchargez le dernier plug-in Azure Data Factory pour Visual Studio : [VS 2013](https://visualstudiogallery.msdn.microsoft.com/754d998c-8f92-4aa7-835b-e89c8c954aa5) ou [VS 2015](https://visualstudiogallery.msdn.microsoft.com/371a4cf9-0093-40fa-b7dd-be3c74f49005). Vous pouvez également mettre à jour le plug-in en procédant comme suit : dans le menu, cliquez sur **Outils** -> **Extensions et mises à jour** -> **En ligne** -> **Galerie Visual Studio** -> **Outils Microsoft Azure Data Factory pour Visual Studio** -> **Mettre à jour**.
 
-À présent, utilisons Visual Studio pour créer une fabrique de données Azure.
+À présent, utilisons Visual Studio pour créer une fabrique de données Azure Data Factory.
 
 ### <a name="create-visual-studio-project"></a>Création d’un projet Visual Studio
 1. Lancez **Visual Studio 2013** ou **Visual Studio 2015**. Cliquez sur **Fichier**, pointez le curseur de la souris sur **Nouveau**, puis cliquez sur **Projet**. La boîte de dialogue **Nouveau projet** doit s’afficher.  
@@ -91,7 +91,7 @@ Avec le service lié HDInsight à la demande, le cluster HDInsight à la demande
 #### <a name="create-azure-storage-linked-service"></a>Créer le service lié Stockage Azure
 1. Dans l’Explorateur de solutions, cliquez avec le bouton droit sur **Services liés**, pointez sur **Ajouter**, puis cliquez sur **Nouvel élément**.      
 2. Dans la boîte de dialogue **Ajouter un nouvel élément**, sélectionnez **Service lié Azure Storage** dans la liste, puis cliquez sur **Ajouter**.
-    ![Service lié Azure Storage](./media/data-factory-build-your-first-pipeline-using-vs/new-azure-storage-linked-service.png)
+    ![Capture d’écran mettant en évidence le service lié Stockage Azure dans la liste.](./media/data-factory-build-your-first-pipeline-using-vs/new-azure-storage-linked-service.png)
 3. Remplacez `<accountname>` et `<accountkey>` par le nom de votre compte de stockage Azure et par sa clé. Pour découvrir comment obtenir votre clé d’accès au stockage, consultez [Gérer les clés d’accès au compte de stockage](../../storage/common/storage-account-keys-manage.md).
     ![Service lié Azure Storage](./media/data-factory-build-your-first-pipeline-using-vs/azure-storage-linked-service.png)
 4. Enregistrez le fichier **AzureStorageLinkedService1.json** .
@@ -128,7 +128,7 @@ Avec le service lié HDInsight à la demande, le cluster HDInsight à la demande
     > [!IMPORTANT]
     > Le cluster HDInsight crée un **conteneur par défaut** dans le Stockage Blob que vous avez spécifié dans le code JSON (linkedServiceName). HDInsight ne supprime pas ce conteneur lorsque le cluster est supprimé. Ce comportement est normal. Avec le service lié HDInsight à la demande, un cluster HDInsight est créé dès qu’une tranche est traitée, à moins qu’il n’existe un cluster actif (timeToLive). Ce cluster est supprimé, une fois le traitement terminé.
     > 
-    > Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Les noms de ces conteneurs sont conformes au modèle suivant : `adf<yourdatafactoryname>-<linkedservicename>-datetimestamp`. Utilisez des outils tels que [Microsoft Storage Explorer](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob Azure.
+    > Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Les noms de ces conteneurs sont conformes au modèle suivant : `adf<yourdatafactoryname>-<linkedservicename>-datetimestamp`. Utilisez des outils tels que l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage Blob Azure.
 
     Pour plus d’informations sur les propriétés JSON, consultez [Service lié à la demande Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service). 
 4. Enregistrez le fichier **HDInsightOnDemandLinkedService1.json** .
@@ -368,7 +368,7 @@ Au cours de cette étape, vous allez surveiller le pipeline à l’aide de la Vu
 7. Cliquez sur **X** pour fermer le panneau **AzureBlobInput**.
 8. Dans la **Vue de diagramme**, double-cliquez sur le jeu de données **AzureBlobOutput**. La tranche est en cours de traitement.
 
-   ![Dataset](./media/data-factory-build-your-first-pipeline-using-vs/dataset-blade.png)
+   ![Capture d’écran mettant en évidence le jeu de données AzureBlobOutput.](./media/data-factory-build-your-first-pipeline-using-vs/dataset-blade.png)
 9. Quand le traitement est terminé, l’état de la tranche est **Prêt** .
 
    > [!IMPORTANT]
@@ -406,13 +406,13 @@ Vous pouvez également utiliser l’application de surveillance et de gestion po
 
 ### <a name="additional-notes"></a>Remarques supplémentaires
 - Une fabrique de données peut avoir un ou plusieurs pipelines. Un pipeline peut contenir une ou plusieurs activités. Par exemple, une activité de copie censée copier des données d’un magasin de données source vers un magasin de données de destination, et une activité Hive HDInsight pour exécuter un script Hive pour transformer des données d’entrée. Pour connaître l’ensemble des sources et des récepteurs pris en charge par l’activité de copie, consultez [Banques de données et formats pris en charge](data-factory-data-movement-activities.md#supported-data-stores-and-formats) . Pour obtenir la liste des services de calcul pris en charge par Data Factory, consultez [Services liés de calcul](data-factory-compute-linked-services.md) .
-- Les services liés se chargent de lier des magasins de données ou des services de calcul à une fabrique de données Azure. Pour connaître l’ensemble des sources et des récepteurs pris en charge par l’activité de copie, consultez [Banques de données et formats pris en charge](data-factory-data-movement-activities.md#supported-data-stores-and-formats) . Pour obtenir la liste des services de calcul pris en charge par Data Factory et les [activités de transformation](data-factory-data-transformation-activities.md) qui peuvent s’exécuter sur ceux-ci, consultez [Services liés de calcul](data-factory-compute-linked-services.md).
+- Les services liés se chargent de lier des magasins de données ou des services de calcul à une fabrique de données Azure Data Factory. Pour connaître l’ensemble des sources et des récepteurs pris en charge par l’activité de copie, consultez [Banques de données et formats pris en charge](data-factory-data-movement-activities.md#supported-data-stores-and-formats) . Pour obtenir la liste des services de calcul pris en charge par Data Factory et les [activités de transformation](data-factory-data-transformation-activities.md) qui peuvent s’exécuter sur ceux-ci, consultez [Services liés de calcul](data-factory-compute-linked-services.md).
 - Consultez [Déplacer des données depuis et vers le Stockage Blob Azure à l’aide d’Azure Data Factory](data-factory-azure-blob-connector.md#azure-storage-linked-service) pour plus d’informations sur les propriétés JSON utilisées dans la définition de service lié Stockage Azure.
 - Vous pouvez utiliser votre propre cluster HDInsight au lieu d’utiliser un cluster HDInsight à la demande. Pour plus d’informations, consultez [Services de calcul liés](data-factory-compute-linked-services.md) .
 -  La fabrique de données crée pour vous un cluster HDInsight **Linux** avec le code JSON précédent. Pour plus d’informations, voir [Service lié à la demande Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) .
 - Le cluster HDInsight crée un **conteneur par défaut** dans le Stockage Blob que vous avez spécifié dans le code JSON (linkedServiceName). HDInsight ne supprime pas ce conteneur lorsque le cluster est supprimé. Ce comportement est normal. Avec le service lié HDInsight à la demande, un cluster HDInsight est créé dès qu’une tranche est traitée, à moins qu’il n’existe un cluster actif (timeToLive). Ce cluster est supprimé, une fois le traitement terminé.
     
-    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Les noms de ces conteneurs sont conformes au modèle suivant : `adf**yourdatafactoryname**-**linkedservicename**-datetimestamp`. Utilisez des outils tels que [Microsoft Storage Explorer](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob Azure.
+    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Les noms de ces conteneurs sont conformes au modèle suivant : `adf**yourdatafactoryname**-**linkedservicename**-datetimestamp`. Utilisez des outils tels que l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage Blob Azure.
 - À ce stade, c'est le jeu de données de sortie qui pilote la planification : vous devez donc créer un jeu de données de sortie même si l’activité ne génère aucune sortie. Si l’activité ne prend aucune entrée, vous pouvez ignorer la création du jeu de données d’entrée. 
 - Ce didacticiel n’explique pas comment copier des données à l’aide d’Azure Data Factory. Pour un didacticiel sur la copie de données à l’aide d’Azure Data Factory, consultez [Copie de données Blob Storage vers une base de données SQL à l’aide de Data Factory](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
@@ -472,7 +472,7 @@ Ajoutez un fichier de configuration pour chaque environnement en effectuant les 
         "AzureSqlLinkedService1": [
             {
                 "name": "$.properties.typeProperties.connectionString",
-                "value":  "Server=tcp:<Azure sql server name>.database.windows.net,1433;Database=<Azure Sql database>;User ID=<user name>;Password=<password>;Trusted_Connection=False;Encrypt=True;Connection Timeout=30"
+                "value":  "Server=tcp:<logical SQL server name>.database.windows.net,1433;Database=<Azure Sql database>;User ID=<user name>;Password=<password>;Trusted_Connection=False;Encrypt=True;Connection Timeout=30"
             }
         ]
     }
@@ -546,13 +546,13 @@ Au cours du déploiement, les valeurs du fichier de configuration sont utilisée
 Il n’est pas recommandé et souvent déconseillé vis-à-vis de la stratégie de sécurité pour valider des données sensibles telles que des chaînes de connexion au référentiel de code. Consultez l’exemple [ADF Secure Publish](https://github.com/Azure/Azure-DataFactory/tree/master/SamplesV1/ADFSecurePublish) sur GitHub pour en savoir plus sur le stockage d’informations sensibles dans Azure Key Vault et son utilisation lors de la publication des entités Data Factory. L’extension Secure Publish pour Visual Studio permet de stocker les secrets dans Key Vault, et seules les références à ceux-ci sont spécifiés dans des services / configurations de déploiement liés. Ces références sont résolues lorsque vous publiez des entités Data Factory dans Azure. Ces fichiers peuvent ensuite être validés sur le référentiel source sans exposer les secrets.
 
 ## <a name="summary"></a>Résumé
-Dans ce didacticiel, vous avez créé une fabrique de données Azure pour traiter des données en exécutant le script Hive sur un cluster Hadoop HDInsight. Vous avez effectué les étapes suivantes dans le portail Azure à l’aide de Data Factory Editor :  
+Dans ce tutoriel, vous avez créé une fabrique de données Azure Data Factory pour traiter des données en exécutant le script Hive sur un cluster HDInsight Hadoop. Vous avez effectué les étapes suivantes dans le portail Azure à l’aide de Data Factory Editor :  
 
-1. Création d’une **fabrique de données**Azure.
+1. Création d’une **fabrique de données** Azure.
 2. Création de deux **services liés**:
    1. **Azure Storage** pour lier à la fabrique de données votre stockage d’objets blob Azure contenant les fichiers d’entrée/sortie.
    2. **Azure HDInsight** à la demande pour lier à la fabrique de données un cluster Hadoop HDInsight à la demande. Azure Data Factory crée un cluster Hadoop HDInsight juste-à-temps pour traiter les données d’entrée et produire des données de sortie.
-3. Création de deux **jeux de données**qui décrivent les données d’entrée et de sortie pour l’activité HDInsight Hive dans le pipeline.
+3. Création de deux **jeux de données** qui décrivent les données d’entrée et de sortie pour l’activité HDInsight Hive dans le pipeline.
 4. Création d’un **pipeline** avec une activité **Hive HDInsight**.  
 
 ## <a name="next-steps"></a>Étapes suivantes

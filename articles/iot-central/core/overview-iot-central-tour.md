@@ -9,16 +9,14 @@ ms.service: iot-central
 services: iot-central
 ms.custom: mvc
 manager: corywink
-ms.openlocfilehash: b905b1e86810b25c4c94072d6cd414b993e2a883
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: c07d247358d980152648fdf7f702c8efcb72bab9
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77426189"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "90020071"
 ---
 # <a name="take-a-tour-of-the-azure-iot-central-ui"></a>Visite guidée de l’interface utilisateur de Azure IoT Central
-
-
 
 Cet article vous présente l’interface utilisateur de Microsoft Azure IoT Central. Vous pouvez utiliser l’interface utilisateur pour créer, gérer et utiliser une solution Azure IoT Central et ses appareils connectés.
 
@@ -103,7 +101,7 @@ Le menu supérieur s’affiche sur chaque page :
 * Pour rechercher des modèles d’appareils et des appareils, entrez une valeur de **recherche**.
 * Pour modifier la langue de l’interface utilisateur ou le thème, choisissez l’icône des **paramètres**. En savoir plus sur la [gestion de vos préférences d’application](howto-manage-preferences.md)
 * Pour vous déconnecter de l’application, choisissez l’icône **Compte**.
-* Pour obtenir de l’aide et un support, choisissez la liste déroulante **Aide** pour obtenir une liste des ressources. Dans une application relevant du plan tarifaire gratuit, les ressources de support incluent un accès à la [conversation en direct](howto-show-hide-chat.md).
+* Pour obtenir de l’aide et un support, choisissez la liste déroulante **Aide** pour obtenir une liste des ressources. Vous pouvez [obtenir des informations sur votre application](./howto-get-app-info.md) à partir du lien **À propos de votre application**. Dans une application relevant du plan tarifaire gratuit, les ressources de support incluent un accès à la [conversation en direct](howto-show-hide-chat.md).
 
 Vous pouvez choisir entre un thème clair ou un thème foncé pour l’interface utilisateur :
 

@@ -3,20 +3,22 @@ title: Utiliser des procédures stockées, des déclencheurs et des fonctions d�
 description: 'Cet article présente les concepts suivants : procédures stockées, des déclencheurs et fonctions définies par l’utilisateur dans Azure Cosmos DB.'
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 04/09/2020
 ms.author: tisande
 ms.reviewer: sngun
-ms.openlocfilehash: 5fc74c554cbb283bc6bbfee737ef98e59dd4b0ea
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 0bd572da9bba9048e2c8b9c4b426056620c4c265
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509667"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340700"
 ---
 # <a name="stored-procedures-triggers-and-user-defined-functions"></a>Procédures stockées, déclencheurs et fonctions définies par l’utilisateur
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Azure Cosmos DB offre une exécution transactionnelle, intégrée au langage, de JavaScript. Lorsque vous utilisez l’API SQL dans Azure Cosmos DB, vous pouvez écrire les **procédures stockées**, les **déclencheurs** et les **fonctions définies par l’utilisateur** dans le langage JavaScript. Vous pouvez écrire votre logique dans JavaScript et l’exécuter dans le moteur de base de données. Vous pouvez créer et exécuter des déclencheurs, des procédures stockées et des fonctions définies par l’utilisateur à l’aide du [Portail Azure](https://portal.azure.com/), de [l’API de requête avec langage intégré JavaScript dans Azure Cosmos DB](javascript-query-api.md) ou des [Kits de développement logiciel (SDK) clients de l’API SQL Cosmos DB](how-to-use-stored-procedures-triggers-udfs.md).
+Azure Cosmos DB offre une exécution transactionnelle, intégrée au langage, de JavaScript. Lorsque vous utilisez l’API SQL dans Azure Cosmos DB, vous pouvez écrire les **procédures stockées** , les **déclencheurs** et les **fonctions définies par l’utilisateur** dans le langage JavaScript. Vous pouvez écrire votre logique dans JavaScript et l’exécuter dans le moteur de base de données. Vous pouvez créer et exécuter des déclencheurs, des procédures stockées et des fonctions définies par l’utilisateur à l’aide du [Portail Azure](https://portal.azure.com/), de [l’API de requête avec langage intégré JavaScript dans Azure Cosmos DB](javascript-query-api.md) ou des [Kits de développement logiciel (SDK) clients de l’API SQL Cosmos DB](how-to-use-stored-procedures-triggers-udfs.md).
 
 ## <a name="benefits-of-using-server-side-programming"></a>Avantages de l’utilisation de la programmation côté serveur
 
@@ -24,7 +26,7 @@ L’écriture de procédures stockées, déclencheurs et fonctions définies par
 
 * **Logique procédurale :** JavaScript en tant que langage de programmation de haut niveau offre une interface riche et familière permettant d’exprimer la logique métier. Vous pouvez effectuer une séquence d’opérations complexes sur les données.
 
-* **Transactions atomiques :** Azure Cosmos DB garantit que les opérations de base de données effectuées dans un déclencheur ou une procédure stockée sont atomiques. Cette fonctionnalité atomique permet à une application de combiner des applications connexes en un seul lot de façon à ce que toutes les opérations réussissent ou qu’aucune ne réussisse.
+* **Transactions atomiques :** Les opérations de base de données Azure Cosmos DB effectuées dans un déclencheur ou une procédure stockée sont atomiques. Cette fonctionnalité atomique permet à une application de combiner des applications connexes en un seul lot de façon à ce que toutes les opérations réussissent ou qu’aucune ne réussisse.
 
 * **Performances :** Les données JSON sont mappées de manière intrinsèque au système de type de langage JavaScript. Ce mappage permet plusieurs optimisations telles que la matérialisation différée de documents JSON dans le pool de tampons et leur disponibilité sur demande à l’exécution de code. Il existe d'autres avantages en matière de performances en lien avec l'expédition de la logique métier à la base de données, parmi lesquels :
 
@@ -41,7 +43,7 @@ L’écriture de procédures stockées, déclencheurs et fonctions définies par
 
 ## <a name="transactions"></a>Transactions
 
-Une transaction dans une base de données classique peut être définie comme étant une séquence d'opérations effectuées en tant qu'unité de travail logique unique. Chaque transaction offre des **garanties de propriété ACID**. ACID est un acronyme bien connu qui est l’abréviation de : **A**tomicity, **C**onsistency, **I**solation, **D**urability (Atomicité, cohérence, isolation et durabilité). 
+Une transaction dans une base de données classique peut être définie comme étant une séquence d'opérations effectuées en tant qu'unité de travail logique unique. Chaque transaction offre des **garanties de propriété ACID**. ACID est un acronyme bien connu qui est l’abréviation de : **A** tomicity, **C** onsistency, **I** solation, **D** urability (Atomicité, cohérence, isolation et durabilité). 
 
 * L'atomicité permet de s'assurer que toutes les opérations effectuées au sein d'une transaction sont traitées en tant que simple unité validée dans son intégralité ou aucunement. 
 
@@ -55,7 +57,7 @@ Dans Azure Cosmos DB, le runtime JavaScript est hébergé dans le moteur de base
 
 ### <a name="scope-of-a-transaction"></a>Étendue d’une transaction
 
-Les procédures stockées sont associées à un conteneur Azure Cosmos et l’exécution de la procédure stockée est limitée à une clé de partition logique. Les procédures stockées doivent inclure une valeur de clé de partition logique lors de l’exécution qui définit la partition logique pour l’étendue de la transaction. Pour plus d’informations, consultez l’article [Partitionnement dans Azure Cosmos DB](partition-data.md).
+Les procédures stockées sont associées à un conteneur Azure Cosmos et l’exécution de la procédure stockée est limitée à une clé de partition logique. Les procédures stockées doivent inclure une valeur de clé de partition logique lors de l’exécution qui définit la partition logique pour l’étendue de la transaction. Pour plus d’informations, consultez l’article [Partitionnement dans Azure Cosmos DB](partitioning-overview.md).
 
 ### <a name="commit-and-rollback"></a>Validation et restauration
 
@@ -63,7 +65,7 @@ Les transactions sont intégrées de façon native dans le modèle de programmat
 
 ### <a name="data-consistency"></a>Cohérence des données
 
-Les procédures stockées et les déclencheurs sont toujours exécutés dans le réplica principal d’un conteneur Azure Cosmos. Cette fonctionnalité permet de s'assurer que les lectures à partir des procédures stockées offrent une [cohérence forte](consistency-levels-tradeoffs.md). Les requêtes utilisant des fonctions définies par l’utilisateur peuvent être exécutées sur le réplica principal ou un réplica secondaire. Les procédures stockées et les déclencheurs sont destinés à soutenir les écritures transactionnelles. Pendant ce temps, la logique en lecture seule est mieux implémentée en tant que logique côté application et les requêtes utilisant les [kits SDK d’API SQL Azure Cosmos DB](sql-api-dotnet-samples.md) vous aideront à saturer le débit de base de données. 
+Les procédures stockées et les déclencheurs sont toujours exécutés dans le réplica principal d’un conteneur Azure Cosmos. Cette fonctionnalité permet de s'assurer que les lectures à partir des procédures stockées offrent une [cohérence forte](./consistency-levels.md). Les requêtes utilisant des fonctions définies par l’utilisateur peuvent être exécutées sur le réplica principal ou un réplica secondaire. Les procédures stockées et les déclencheurs sont destinés à soutenir les écritures transactionnelles. Pendant ce temps, la logique en lecture seule est mieux implémentée en tant que logique côté application et les requêtes utilisant les [kits SDK d’API SQL Azure Cosmos DB](sql-api-dotnet-samples.md) vous aideront à saturer le débit de base de données. 
 
 > [!TIP]
 > Les requêtes exécutées au sein d’une procédure stockée ou d’un déclencheur peuvent ne pas voir les modifications apportées aux éléments par la même transaction de script. Cette instruction s’applique à la fois aux requêtes SQL, telles que `getContent().getCollection.queryDocuments()`, et aux requêtes intégrées au langage, telles que `getContext().getCollection().filter()`.

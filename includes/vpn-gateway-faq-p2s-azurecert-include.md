@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 08/14/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: f322803d3484b4ec2d5449e19d67d75b35d6d92f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5ef67580928a45609f50d3fe798eb9d054265c0a
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75752334"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93376009"
 ---
 [!INCLUDE [P2S FAQ All](vpn-gateway-faq-p2s-all-include.md)]
 
@@ -23,7 +23,7 @@ Décochez **« Vérifier l’identité du serveur en validant le certificat »
 
 Ignorer la validation de l’identité du serveur n’est pas recommandé en général, mais avec l’authentification par certificat Azure, le même certificat est utilisé pour la validation du serveur dans le protocole de tunneling VPN (IKEv2/SSTP) et le protocole EAP. Étant donné que le certificat de serveur et le nom de domaine complet sont déjà validés par le protocole de tunneling VPN, il est redondant de les valider de nouveau dans EAP.
 
-![point à site](./media/vpn-gateway-faq-p2s-all-include/servercert.png "Certificat de serveur")
+![authentification point à site](./media/vpn-gateway-faq-p2s-all-include/servercert.png "Certificat de serveur")
 
 ### <a name="can-i-use-my-own-internal-pki-root-ca-to-generate-certificates-for-point-to-site-connectivity"></a>Puis-je utiliser ma propre AC racine PKI interne pour générer des certificats pour une connectivité point à site ?
 
@@ -52,4 +52,4 @@ Vous pouvez utiliser votre solution de PKI d’entreprise (votre PKI interne), A
     * Pour le certificat client :
 
       * Lorsque vous créez la clé privée, spécifiez la longueur 4096.
-      * Lors de la création du certificat, pour le paramètre *-extensions*, spécifiez *usr_cert*.
+      * Lors de la création du certificat, pour le paramètre *-extensions* , spécifiez *usr_cert*.

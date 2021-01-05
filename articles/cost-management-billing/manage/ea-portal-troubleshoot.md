@@ -3,16 +3,17 @@ title: Résoudre les problèmes d’accès au portail Azure EA
 description: Cet article décrit certains problèmes courants qui peuvent se produire avec un Contrat Entreprise Azure (EA) dans le portail Azure EA.
 author: bandersmsft
 ms.author: banders
-ms.date: 05/01/2020
-ms.topic: conceptual
+ms.date: 08/20/2020
+ms.topic: troubleshooting
 ms.service: cost-management-billing
+ms.subservice: enterprise
 ms.reviewer: boalcsva
-ms.openlocfilehash: fdcce868cb53c0fdd6a51f2b351491e1ee998d61
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 5402ee3283e5ae11f43884b4002486e8bdefae2c
+ms.sourcegitcommit: 58d3b3314df4ba3cabd4d4a6016b22fa5264f05a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691183"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89294405"
 ---
 # <a name="troubleshoot-azure-ea-portal-access"></a>Résoudre les problèmes d’accès au portail Azure EA
 
@@ -31,7 +32,7 @@ Vous utilisez le portail Azure EA pour accorder l’accès aux utilisateurs ave
 - Compte professionnel ou scolaire inter-locataires - Pour les organisations qui ont configuré Active Directory avec la fédération dans le cloud et qui auront des comptes sur plusieurs locataires.
 - Compte mixte - Vous permet d’ajouter des utilisateurs avec un compte Microsoft et/ou avec un compte professionnel ou scolaire.
 
-Le premier compte professionnel ou scolaire ajouté à l’inscription détermine le domaine _par défaut_ ou _principal_. Pour ajouter un compte professionnel ou scolaire avec un autre locataire, vous devez modifier le niveau d’authentification sous l’inscription en spécifiant l’authentification inter-locataires.
+Le premier compte professionnel ou scolaire ajouté à l’inscription détermine le domaine _par défaut_. Pour ajouter un compte professionnel ou scolaire avec un autre locataire, vous devez modifier le niveau d’authentification sous l’inscription en spécifiant l’authentification inter-locataires.
 
 Pour mettre à jour le niveau d’authentification :
 
@@ -64,15 +65,15 @@ Ou, si vous recevez une erreur _Utilisateur non valide_, cela peut être dû au 
   - Si vous devez vérifier l’alias principal, accédez à [https://account.live.com](https://account.live.com). Cliquez ensuite sur **Vos informations**, puis sur **Gérer la manière dont vous vous connectez à Microsoft**. Suivez les invites pour vérifier une autre adresse e-mail et obtenir un code pour accéder aux informations sensibles. Entrez le code de sécurité. Sélectionnez **Configurer ultérieurement** si vous ne souhaitez pas configurer l’authentification à deux facteurs.
   - Vous verrez la page **Gérer la manière dont vous vous connectez à Microsoft**, dans laquelle vous pouvez consulter vos alias de compte. Vérifiez que l’alias principal est celui que vous utilisez pour vous connecter au portail Azure EA. Si ce n’est pas le cas, vous pouvez en faire votre alias principal. Ou, vous pouvez utiliser l’alias principal pour le portail Azure EA à la place.
 
-## <a name="no-activation-email-received"></a>Aucun e-mail d’activation n’a été reçu
+## <a name="azure-ea-activation-faq"></a>FAQ sur l’activation d’Azure EA
+
+Cette section de l’article décrit les solutions aux problèmes courants liés à l’activation d’Azure EA.
+
+### <a name="i-didnt-receive-an-activation-email"></a>Je n’ai pas reçu d’e-mail d’activation
 
 Un e-mail d’activation provenant du portail Azure EA est envoyé à partir de *waep@microsoft.com* . Si vous n’avez pas reçu l’e-mail d’activation, recherchez-le dans votre dossier de courrier indésirable. Il est envoyé avec l’objet _Invitation à voir/gérer Microsoft Azure service_subject_. Il est envoyé à chaque administrateur EA nouvellement ajouté.
 
 Si vous êtes sûr d’avoir été configuré comme administrateur EA, vous n’êtes pas obligé d’attendre de recevoir l’e-mail d’activation pour vous connecter au portail Azure EA. Au lieu de cela, vous pouvez accéder à https://ea.azure.com et vous connecter avec votre adresse e-mail (compte professionnel, scolaire ou Microsoft) et votre mot de passe.
-
-## <a name="azure-ea-activation-faq"></a>FAQ sur l’activation d’Azure EA
-
-Cette section de l’article décrit les solutions aux problèmes courants liés à l’activation d’Azure EA.
 
 ### <a name="i-would-like-to-add-a-new-ea-administrator-to-my-enrollment"></a>Je souhaite ajouter un nouvel administrateur EA à mon inscription
 

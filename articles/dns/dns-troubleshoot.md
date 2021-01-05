@@ -4,21 +4,21 @@ description: Dans ce parcours d’apprentissage, prenez en main la résolution d
 services: dns
 author: rohinkoul
 ms.service: dns
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 09/20/2019
 ms.author: rohink
-ms.openlocfilehash: b5e1624bf852256f6e8fb0b616258f932c5a8998
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fae63c61949302e25c9dee2899577fa4f0d2a975
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76939025"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965576"
 ---
 # <a name="azure-dns-troubleshooting-guide"></a>Guide de résolution des problèmes d’Azure DNS
 
 Cet article fournit des solutions aux problèmes fréquemment rencontrés avec Azure DNS.
 
-Si cette procédure ne résout pas votre problème, vous pouvez également rechercher ou publier votre problème sur notre [forum de support communautaire sur MSDN](https://social.msdn.microsoft.com/Forums/en-US/home?forum=WAVirtualMachinesVirtualNetwork). Vous pouvez également effectuer une demande de support Azure.
+Si cette procédure ne résout pas votre problème, vous pouvez également rechercher ou publier votre problème sur notre [page de questions Microsoft Q&A pour obtenir l’aide de la communauté](/answers/topics/azure-virtual-network.html). Vous pouvez également effectuer une demande de support Azure.
 
 
 ## <a name="i-cant-create-a-dns-zone"></a>Impossible de créer une zone DNS
@@ -34,7 +34,7 @@ Pour résoudre les problèmes courants, essayez une ou plusieurs des étapes sui
 ### <a name="recommended-articles"></a>Articles recommandés
 
 * [Enregistrements et zones DNS](dns-zones-records.md)
-* [Création d’une zone DNS](dns-getstarted-create-dnszone-portal.md)
+* [Création d’une zone DNS](./dns-getstarted-portal.md)
 
 ## <a name="i-cant-create-a-dns-record"></a>Impossible de créer un enregistrement DNS
 
@@ -50,7 +50,7 @@ Pour résoudre les problèmes courants, essayez une ou plusieurs des étapes sui
 ### <a name="recommended-articles"></a>Articles recommandés
 
 * [Enregistrements et zones DNS](dns-zones-records.md)
-* [Création d’une zone DNS](dns-getstarted-create-dnszone-portal.md)
+* [Création d’une zone DNS](./dns-getstarted-portal.md)
 
 
 
@@ -85,13 +85,12 @@ Exemples de noms d’enregistrement SRV (nom de service « sip », protocole �
 ### <a name="recommended-articles"></a>Articles recommandés
 
 * [Enregistrements et zones DNS](dns-zones-records.md)
-* [Création de jeux d’enregistrements et d’enregistrements DNS à l’aide du portail Azure](dns-getstarted-create-recordset-portal.md)
+* [Création de jeux d’enregistrements et d’enregistrements DNS à l’aide du portail Azure](./dns-getstarted-portal.md)
 * [Type d’enregistrement SRV (Wikipedia)](https://en.wikipedia.org/wiki/SRV_record)
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les [Enregistrements et zones DNS](dns-zones-records.md)
-* Pour commencer à utiliser le DNS Azure, découvrez comment [créer une zone DNS](dns-getstarted-create-dnszone-portal.md) et [créer des enregistrements DNS](dns-getstarted-create-recordset-portal.md).
+* Pour commencer à utiliser le DNS Azure, découvrez comment [créer une zone DNS](./dns-getstarted-portal.md) et [créer des enregistrements DNS](./dns-getstarted-portal.md).
 * Pour migrer une zone DNS, découvrez comment [importer et exporter un fichier de zone DNS](dns-import-export.md).
-

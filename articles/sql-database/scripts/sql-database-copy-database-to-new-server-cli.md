@@ -1,24 +1,24 @@
 ---
-title: 'Exemple CLI : copier une base de données Azure SQL sur un nouveau serveur'
-description: Exemple de script Azure CLI pour copier une base de données SQL sur un nouveau serveur
+title: 'Azure CLI : Copier une base de données d’Azure SQL Database sur un nouveau serveur'
+description: Exemple de script Azure CLI permettant de copier une base de données d’Azure SQL Database sur un nouveau serveur
 services: sql-database
 ms.service: sql-database
 ms.subservice: data-movement
-ms.custom: ''
+ms.custom: devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: sample
 author: stevestein
 ms.author: sstein
 ms.reviewer: carlrab
 ms.date: 03/12/2019
-ms.openlocfilehash: b7e04d7b1ed51a45e132d088b0dd29377312027c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e22d28215c06de96d31faec71f4fb595bb74a4a6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067479"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87495265"
 ---
-# <a name="use-cli-to-copy-a-sql-database-to-a-new-server"></a>Utiliser CLI pour copier une base de données SQL sur un nouveau serveur
+# <a name="use-cli-to-copy-a-database-in-azure-sql-database-to-a-new-server"></a>Utiliser l’interface CLI pour copier une base de données d’Azure SQL Database sur un nouveau serveur
 
 Cet exemple de script Azure CLI crée une copie d’une base de données existante dans un nouveau serveur.
 
@@ -53,7 +53,7 @@ az group delete --name $targetResource
 
 Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à une documentation spécifique.
 
-| | |
+| Commande | Description |
 |---|---|
 | [az sql db copy](/cli/azure/sql/db#az-sql-db-copy) | Crée une copie d’une base de données qui utilise la capture instantanée à l’heure actuelle. |
 
@@ -61,4 +61,4 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
-Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../sql-database-cli-samples.md).
+Vous trouverez des exemples supplémentaires de scripts CLI SQL Database dans [Documentation Azure SQL Database](../../azure-sql/database/az-cli-script-samples-content-guide.md).

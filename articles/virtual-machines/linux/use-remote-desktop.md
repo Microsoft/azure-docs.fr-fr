@@ -10,21 +10,21 @@ ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/12/2019
 ms.author: cynthn
-ms.openlocfilehash: 2e97442d4104f52c1a76ba8cd1d81c99508bb242
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: efcfb2fd431dd9626ddcf918127964672b0e5ce0
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605181"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500476"
 ---
 # <a name="install-and-configure-remote-desktop-to-connect-to-a-linux-vm-in-azure"></a>Installer et configurer le Bureau à distance pour effectuer une connexion à une machine virtuelle Linux dans Azure
 Les machines virtuelles (VM) Linux dans Azure sont généralement gérées à partir de la ligne de commande à l’aide d’une connexion Secure Shell (SSH). Si vous découvrez Linux, ou si vous souhaitez des scénarios de dépannage rapides, l’utilisation du Bureau à distance peut se révéler plus facile. Cet article explique comment installer et configurer un environnement de bureau ([xfce](https://www.xfce.org)) et le Bureau à distance ([xrdp](http://xrdp.org)) pour votre machine virtuelle Linux à l’aide du modèle de déploiement Resource Manager.
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Cet article nécessite que vous disposiez d’une machine virtuelle Ubuntu 18.04 LTS dans Azure. Si vous avez besoin créer une machine virtuelle, utilisez l’une des méthodes suivantes :
 
 - [Azure CLI](quick-create-cli.md)
@@ -84,7 +84,7 @@ sudo passwd azureuser
 
 
 ## <a name="create-a-network-security-group-rule-for-remote-desktop-traffic"></a>Création d’une règle de groupe de sécurité réseau pour le trafic du Bureau à distance
-Pour autoriser le trafic du Bureau à distance à atteindre votre machine virtuelle Linux, une règle de groupe de sécurité réseau doit être créée pour permettre au TCP sur le port 3389 d’atteindre votre machine virtuelle. Pour plus d’informations sur les règles de groupe de sécurité réseau, consultez [Présentation du groupe de sécurité réseau](../../virtual-network/security-overview.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) Vous pouvez également [utiliser le portail Azure pour créer une règle de groupe de sécurité réseau](../windows/nsg-quickstart-portal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Pour autoriser le trafic du Bureau à distance à atteindre votre machine virtuelle Linux, une règle de groupe de sécurité réseau doit être créée pour permettre au TCP sur le port 3389 d’atteindre votre machine virtuelle. Pour plus d’informations sur les règles de groupe de sécurité réseau, consultez [Présentation du groupe de sécurité réseau](../../virtual-network/network-security-groups-overview.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) Vous pouvez également [utiliser le portail Azure pour créer une règle de groupe de sécurité réseau](../windows/nsg-quickstart-portal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 L’exemple suivant permet de créer une règle de groupe de sécurité réseau avec [az vm open-port](/cli/azure/vm#az-vm-open-port) sur le port *3389*. À partir d’Azure CLI, et non de la session SSH sur votre machine virtuelle, ouvrez la règle de groupe de sécurité réseau suivante :
 
@@ -133,11 +133,10 @@ tail -f /var/log/syslog
 
 Les autres distributions de Linux telles que Red Hat Enterprise Linux et SUSE peuvent avoir différentes façons de redémarrer les services et d’autres emplacements de fichiers journaux pour la vérification.
 
-Si vous ne recevez pas de réponse dans votre client Bureau à distance et que vous ne voyez aucun événement dans le journal système, cela indique que le trafic du bureau à distance ne peut pas joindre la machine virtuelle. Passez en revue vos règles de groupe de sécurité réseau pour vous assurer que vous disposez d’une règle autorisant TCP sur le port 3389. Pour plus d’informations, consultez [Résoudre les problèmes de connectivité des applications sur une machine virtuelle Linux Azure](../windows/troubleshoot-app-connection.md).
+Si vous ne recevez pas de réponse dans votre client Bureau à distance et que vous ne voyez aucun événement dans le journal système, cela indique que le trafic du bureau à distance ne peut pas joindre la machine virtuelle. Passez en revue vos règles de groupe de sécurité réseau pour vous assurer que vous disposez d’une règle autorisant TCP sur le port 3389. Pour plus d’informations, consultez [Résoudre les problèmes de connectivité des applications sur une machine virtuelle Linux Azure](../troubleshooting/troubleshoot-app-connection.md).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur la création et l’utilisation de clés SSH avec les machines virtuelles Linux, consultez [Create SSH keys for Linux VMs in Azure](mac-create-ssh-keys.md) (Création de clés SSH pour les machines virtuelles Linux dans Azure).
 
 Pour plus d’informations sur l’utilisation de SSH avec Windows, consultez la page [Utilisation de clés SSH avec Windows sur Azure](ssh-from-windows.md).
-

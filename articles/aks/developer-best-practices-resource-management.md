@@ -7,12 +7,12 @@ author: zr-msft
 ms.topic: conceptual
 ms.date: 11/13/2019
 ms.author: zarhoads
-ms.openlocfilehash: 0052657c947f8a9ff9c9d6aef86ff16d9a22adae
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 693cabac616dca8e108a2029c173a5e1b71c2695
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80803481"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97516733"
 ---
 # <a name="best-practices-for-application-developers-to-manage-resources-in-azure-kubernetes-service-aks"></a>Bonnes pratiques relatives à la gestion des ressources dans Azure Kubernetes Services (AKS) pour le développeur d’applications
 
@@ -22,7 +22,7 @@ Cet article traite des bonnes pratiques relatives à l’exécution d’un clust
 
 > [!div class="checklist"]
 > * Ce que sont les demandes et limites de ressources de pod
-> * Comment développer et déployer des applications avec Dev Spaces et Visual Studio Code
+> * Développer et déployer des applications avec Bridge to Kubernetes et Visual Studio Code
 > * Comment utiliser l’outil `kube-advisor` pour rechercher les problèmes liés aux déploiements
 
 ## <a name="define-pod-resource-requests-and-limits"></a>À définir les demandes et limites de ressources de pod
@@ -34,8 +34,8 @@ L’un des principaux moyens de gérer les ressources de calcul au sein d’un c
 * Les **demandes d’UC/de mémoire pod** définissent une quantité fixe d’UC et de mémoire dont le pod a besoin régulièrement.
     * Quand le planificateur Kubernetes tente de placer un pod sur un nœud, les demandes de pod permettent de déterminer le nœud ayant suffisamment de ressources disponibles pour la planification.
     * Si vous ne définissez pas une requête de pod, elle est définie par défaut sur la limite définie.
-    * Il est très important de surveiller les performances de votre application pour ajuster ces requêtes. En cas de demandes insuffisantes, votre application peut subir une dégradation des performances en raison de la surplanification d’un nœud. Si les requêtes sont surestimées, votre application peut avoir des difficultés à être planifiées.
-* Les **limites de pod/de mémoire** représentent la quantité maximale d’UC et de mémoire qu’un pod peut utiliser. Ces limites permettent de définir les pods à supprimer en cas d’instabilité de nœud en raison de ressources insuffisantes. Sans les limites appropriées, les pods sont supprimés jusqu’à ce que la pression sur les ressources diminue.
+    * Il est très important de surveiller les performances de votre application pour ajuster ces requêtes. En cas de demandes de ressource pod insuffisantes, votre application peut subir une dégradation des performances en raison de la surplanification d’un nœud. Si les requêtes sont surestimées, votre application peut avoir des difficultés à être planifiées.
+* Les **limites de pod/de mémoire** représentent la quantité maximale d’UC et de mémoire qu’un pod peut utiliser. Les limites de mémoire permettent de définir les pods à supprimer en cas d’instabilité de nœud en raison de ressources insuffisantes. Sans les limites appropriées, les pods sont supprimés jusqu’à ce que la pression sur les ressources diminue. Un pod peut être ou non en mesure de dépasser la limite de processeur pendant un certain temps ; il ne sera pas supprimé s’il dépasse cette limite. 
     * Les limites de pod permettent de définir le moment où un pod perd le contrôle de la consommation des ressources. Lorsqu’une limite est dépassée, le pod est prioritaire pour la mise à jour de l’intégrité du nœud et réduire l’impact sur les pods partageant le nœud.
     * Si vous ne définissez pas de limite de pod, elle est définie par défaut sur la valeur disponible la plus élevée sur un nœud donné.
     * Ne définissez pas une limite de pod trop élevée ne pouvant pas être prise en charge par vos nœuds. Chaque nœud AKS réserve une quantité fixe d’UC et de mémoire pour les principaux composants de Kubernetes. Votre application peut tenter de consommer trop de ressources sur le nœud pour que les autres pods s’exécutent correctement.
@@ -60,7 +60,7 @@ metadata:
 spec:
   containers:
   - name: mypod
-    image: nginx:1.15.5
+    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     resources:
       requests:
         cpu: 100m
@@ -74,15 +74,13 @@ Pour plus d’informations sur les mesures et affectations de ressources, consul
 
 ## <a name="develop-and-debug-applications-against-an-aks-cluster"></a>Développer et déboguer des applications sur un cluster AKS
 
-**Guide de bonne pratique** : les équipes de développement doivent déployer et déboguer leurs applications sur un cluster AKS à l’aide de Dev Spaces. Ce modèle de développement garantit que les besoins en termes de réseau, de stockage ou de contrôles d’accès en fonction du rôle sont implémentés avant le déploiement de l’application en production.
+**Guide de bonne pratique** : les équipes de développement doivent déployer et déboguer leurs applications sur un cluster AKS à l’aide de Bridge to Kubernetes.
 
-Avec Azure Dev Spaces, vous développez, déboguez et testez les applications directement sur un cluster AKS. Les développeurs d’une équipe travaillent ensemble pour générer et tester l’application tout au long de son cycle de vie. Vous pouvez continuer à utiliser des outils existants tels que Visual Studio ou Visual Studio Code. Une extension installée pour Dev Spaces permet d’exécuter et de déboguer l’application dans un cluster AKS :
+Avec Bridge to Kubernetes, vous pouvez développer, déboguer et tester les applications directement sur un cluster AKS. Les développeurs d’une équipe travaillent ensemble pour générer et tester l’application tout au long de son cycle de vie. Vous pouvez continuer à utiliser des outils existants tels que Visual Studio ou Visual Studio Code. Une extension est installée pour Bridge to Kubernetes et vous permet de développer directement dans un cluster AKS.
 
-![Déboguer des applications dans un cluster AKS avec Dev Spaces](media/developer-best-practices-resource-management/dev-spaces-debug.png)
+Ce processus de développement et de test intégré à Bridge to Kubernetes évite de recourir à des environnements de test locaux tels que [minikube][minikube]. Au lieu de cela, vous développez et testez votre application sur un cluster AKS. Ce cluster peut être sécurisé et isolé, comme indiqué dans la section précédente sur l’utilisation d’espaces de noms pour isoler logiquement un cluster.
 
-Ce processus de développement et de test intégré à Dev Spaces évite de recourir à des environnements de test locaux tels que [minikube][minikube]. Au lieu de cela, vous développez et testez votre application sur un cluster AKS. Ce cluster peut être sécurisé et isolé, comme indiqué dans la section précédente sur l’utilisation d’espaces de noms pour isoler logiquement un cluster. Votre développement ayant été entièrement réalisé sur un cluster AKS réel, vous pouvez déployer en toute confiance vos applications quand celles-ci sont prêtes à passer en production.
-
-Le service Azure Dev Spaces est destiné à être utilisé avec les applications qui s’exécutent sur les nœuds et pods Linux.
+Bridge to Kubernetes est destiné à être utilisé avec les applications qui s’exécutent sur les nœuds et pods Linux.
 
 ## <a name="use-the-visual-studio-code-extension-for-kubernetes"></a>Utiliser l’extension Visual Studio Code pour Kubernetes
 
@@ -108,7 +106,7 @@ Dans cet article, nous avons traité des bonnes pratiques relatives à l’exéc
 
 Pour implémenter quelques-unes de ces bonnes pratiques, consultez les articles suivants :
 
-* [Développer avec Dev Spaces][dev-spaces]
+* [Développer avec Bridge to Kubernetes][btk]
 * [Rechercher des problèmes avec kube-advisor][aks-kubeadvisor]
 
 <!-- EXTERNAL LINKS -->
@@ -119,7 +117,7 @@ Pour implémenter quelques-unes de ces bonnes pratiques, consultez les articles 
 
 <!-- INTERNAL LINKS -->
 [aks-kubeadvisor]: kube-advisor-tool.md
-[dev-spaces]: ../dev-spaces/get-started-netcore.md
+[btk]: /visualstudio/containers/overview-bridge-to-kubernetes
 [operator-best-practices-isolation]: operator-best-practices-cluster-isolation.md
 [resource-quotas]: operator-best-practices-scheduler.md#enforce-resource-quotas
 [k8s-node-selector]: concepts-clusters-workloads.md#node-selectors

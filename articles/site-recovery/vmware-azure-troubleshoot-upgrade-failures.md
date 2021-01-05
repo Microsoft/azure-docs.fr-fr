@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: troubleshooting
 ms.date: 11/10/2019
 ms.author: raynew
-ms.openlocfilehash: b59f933fedd5f1d3ed3f7972b1a1fe653df31be2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5a6e4b415a9fe8ea80a84e415879df9d2f359478
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75893910"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84434373"
 ---
 # <a name="troubleshoot-microsoft-azure-site-recovery-provider-upgrade-failures"></a>Résoudre les problèmes de mise à niveau du fournisseur Microsoft Azure Site Recovery
 
@@ -65,4 +65,16 @@ Résolution du problème :
 
 1. Utilisez le Gestionnaire des tâches pour suivre la progression de l’installation. Lorsque le processus CX_THIRDPARTY_SETUP. EXE n’est plus visible dans le Gestionnaire des tâches, passez à l’étape suivante.
 1. Vérifiez que C:\thirdparty existe et que le dossier contient les bibliothèques RRD.
-1. Retournez dans le dossier où vous avez téléchargé le programme d’installation unifiée et exécutez MicrosoftAzureSiteRecoveryUnifiedSetup.exe pour terminer la mise à niveau. 
+1. Retournez dans le dossier où vous avez téléchargé le programme d’installation unifiée et exécutez MicrosoftAzureSiteRecoveryUnifiedSetup.exe pour terminer la mise à niveau.
+
+## <a name="upgrade-failure-due-to-master-target-installation-failure"></a>Échec de la mise à niveau en raison d’un échec d’installation du serveur cible maître
+
+Lors de la mise à niveau du fournisseur Microsoft Azure Site Recovery (DRA), l’installation du serveur cible maître échoue avec l’erreur « L’emplacement d’installation n’existe pas et/ou ne dispose pas de 1 Go d’espace libre et/ou n’existe pas sur un lecteur fixe. ».
+
+Ceci peut être dû à une valeur Null pour un paramètre dans la clé de Registre. Pour résoudre le problème :
+
+1. Démarrez l’Éditeur du Registre (regedit.exe) et ouvrez la branche HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\InMage Systems\Installed Products\4.
+1. Regardez la valeur de la clé « InstallDirectory ». Si la valeur est null, ajoutez la valeur du répertoire d’installation actuel.
+1. De même, ouvrez HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\InMage Systems\Installed Products\5 dans l’Éditeur du Registre.
+1. Regardez la valeur de la clé « InstallDirectory » et ajoutez la valeur du répertoire d’installation actuel.
+1. Réexécutez le programme d’installation unifiée.

@@ -1,5 +1,5 @@
 ---
-title: Inscrire un appareil TPM auprès du service Azure Device Provisioning avec Python
+title: 'Démarrage rapide : Inscrire un appareil TPM auprès du service Azure Device Provisioning avec Python'
 description: 'Démarrage rapide : Inscrire un appareil TPM auprès du service Azure IoT Hub Device Provisioning (DPS) à l’aide du SDK du service de provisionnement Python. Ce démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: python
-ms.custom: mvc
-ms.openlocfilehash: c5fe0a577ead9d8c6408d4268d21465a7b762b6d
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-python
+ms.openlocfilehash: 96bd1e85de45ac36515580025dfc392e931643f3
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77920618"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91323761"
 ---
 # <a name="quickstart-enroll-tpm-device-to-iot-hub-device-provisioning-service-using-python-provisioning-service-sdk"></a>Démarrage rapide : Inscrire un appareil TPM auprès du service IoT Hub Device Provisioning à l’aide du Kit de développement logiciel (SDK) du service d’approvisionnement en Python
 

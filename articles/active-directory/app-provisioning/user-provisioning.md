@@ -1,26 +1,28 @@
 ---
-title: Provisionnement automatique des utilisateurs dans les applications SaaS dans Azure AD
+title: Qu’est ce que le provisionnement automatique des utilisateurs dans les applications SaaS dans Azure AD
 description: Cette introduction explique comment utiliser Azure AD pour approvisionner, annuler l’approvisionnement et mettre à jour de façon continue des comptes d’utilisateurs dans diverses applications SaaS tierces.
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
-ms.topic: conceptual
+ms.topic: overview
 ms.workload: identity
 ms.date: 11/25/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: arvinh, celested
-ms.openlocfilehash: 1e72d885858b543999090a4a0521845d556802fd
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 486add54a6d41493c54bd7b0b0339804f6c31847
+ms.sourcegitcommit: cc13f3fc9b8d309986409276b48ffb77953f4458
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593112"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97399993"
 ---
-# <a name="automate-user-provisioning-and-deprovisioning-to-applications-with-azure-ad"></a>Automatiser le provisionnement et le déprovisionnement des utilisateurs dans les applications avec Azure AD
+# <a name="what-is-automated-saas-app-user-provisioning-in-azure-ad"></a>Qu’est ce que le provisionnement automatique des utilisateurs dans les applications SaaS dans Azure AD ?
 
 Dans Azure Active Directory (Azure AD), le terme **approvisionnement de l’application** désigne la création automatique des identités et rôles des utilisateurs dans les applications cloud ([SaaS](https://azure.microsoft.com/overview/what-is-saas/)) auxquelles les utilisateurs ont besoin d’accéder. En plus de créer des identités utilisateur, l’approvisionnement automatique comprend la maintenance et la suppression d’identités utilisateur en cas de modification de l’état ou des rôles. Les scénarios courants incluent la configuration d’un utilisateur Azure AD dans des applications telles que [Dropbox](../saas-apps/dropboxforbusiness-provisioning-tutorial.md), [Salesforce](../saas-apps/salesforce-provisioning-tutorial.md), [ServiceNow](../saas-apps/servicenow-provisioning-tutorial.md), et bien plus encore.
+
+Pour en savoir plus sur SCIM et participer à la conversation de la communauté technique, consultez [Provisionnement avec SCIM](https://aka.ms/scimoverview).
 
 ![Schéma de présentation de l’approvisionnement](./media/user-provisioning/provisioning-overview.png)
 
@@ -59,7 +61,7 @@ Azure AD offre une prise en charge préintégrée de plusieurs applications SaaS
 
    ![Logo Salesforce](./media/user-provisioning/gallery-app-logos.png)
 
-   Si vous souhaitez demander une nouvelle application pour l’approvisionnement, vous pouvez [demander que votre application soit intégrée à notre galerie d’applications](../develop/howto-app-gallery-listing.md). Pour une demande d’approvisionnement d’utilisateurs, nous avons besoin que l’application dispose d’un point de terminaison compatible SCIM. Veuillez demander au fournisseur de l’application de suivre la norme SCIM afin que nous puissions intégrer rapidement l’application à notre plateforme.
+   Si vous souhaitez demander une nouvelle application pour l’approvisionnement, vous pouvez [demander que votre application soit intégrée à notre galerie d’applications](../develop/v2-howto-app-gallery-listing.md). Pour une demande d’approvisionnement d’utilisateurs, nous avons besoin que l’application dispose d’un point de terminaison compatible SCIM. Veuillez demander au fournisseur de l’application de suivre la norme SCIM afin que nous puissions intégrer rapidement l’application à notre plateforme.
 
 * **Applications prenant en charge SCIM 2.0**. Pour plus d’informations sur la connexion générique d’applications qui implémentent des API de gestion des utilisateurs SCIM 2.0, consultez [Créer un point de terminaison SCIM et configurer l’attribution des utilisateurs](use-scim-to-provision-users-and-groups.md).
 
@@ -94,11 +96,8 @@ Pour les applications préintégrées figurant dans la galerie, des instructions
 Pour les autres applications qui prennent en charge SCIM 2.0, suivez les étapes décrites dans l’article [Créer un point de terminaison SCIM et configurer l’attribution des utilisateurs](use-scim-to-provision-users-and-groups.md).
 
 
-## <a name="related-articles"></a>Articles connexes
+## <a name="next-steps"></a>Étapes suivantes
 
 - [Liste des didacticiels sur l’intégration des applications SaaS](../saas-apps/tutorial-list.md)
 - [Personnalisation des mappages d’attributs pour le provisionnement des utilisateurs](customize-application-attributes.md)
-- [Écriture d’expressions pour les mappages d’attributs](../app-provisioning/functions-for-customizing-application-data.md)
-- [Filtres d’étendue pour le provisionnement des utilisateurs](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md)
-- [Créer un point de terminaison SCIM et configurer l’attribution des utilisateurs](use-scim-to-provision-users-and-groups.md)
-- [Azure AD synchronization API overview](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview) (Vue d’ensemble de l’API de synchronisation Azure AD)
+- [Filtres d’étendue pour le provisionnement des utilisateurs](define-conditional-rules-for-provisioning-user-accounts.md)

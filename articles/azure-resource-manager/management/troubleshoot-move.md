@@ -1,14 +1,14 @@
 ---
 title: Résoudre les erreurs de transfert
-description: Utilisez Azure Resource Manager ou une API REST pour déplacer des ressources vers un nouveau groupe de ressources ou abonnement.
+description: Résolvez les problèmes liés au déplacement de ressources vers un nouveau groupe de ressource ou un nouvel abonnement.
 ms.topic: conceptual
 ms.date: 08/27/2019
-ms.openlocfilehash: 5a65f7daa0f5e3b1c8c6ddfdbecc0ff7d53e5afd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41b1e2435caf9874f3582a3394664c7b7f5a8d29
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75891275"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90054160"
 ---
 # <a name="troubleshoot-moving-azure-resources-to-new-resource-group-or-subscription"></a>Résoudre les problèmes liés au déplacement de ressources vers un nouveau groupe de ressource ou abonnement
 
@@ -18,8 +18,8 @@ Cet article propose des suggestions pour résoudre les problèmes liés au dépl
 
 Vous devez convertir votre abonnement Azure si vous souhaitez le mettre à niveau (par exemple, passer d’une offre gratuite au paiement à l’utilisation).
 
-* Pour mettre à niveau votre essai gratuit, consultez [Passer d’un essai gratuit ou d’un abonnement Azure Microsoft Imagine au paiement à l’utilisation](../../billing/billing-upgrade-azure-subscription.md).
-* Pour changer un compte de paiement à l’utilisation, consultez [Remplacer votre abonnement Paiement à l’utilisation Azure par une autre offre](../../billing/billing-how-to-switch-azure-offer.md).
+* Pour mettre à niveau votre essai gratuit, consultez [Passer d’un essai gratuit ou d’un abonnement Azure Microsoft Imagine au paiement à l’utilisation](../../cost-management-billing/manage/upgrade-azure-subscription.md).
+* Pour changer un compte de paiement à l’utilisation, consultez [Remplacer votre abonnement Paiement à l’utilisation Azure par une autre offre](../../cost-management-billing/manage/switch-azure-offer.md).
 
 Si vous ne pouvez pas convertir l’abonnement, [créez une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). Sélectionnez **Gestion des abonnements** comme type de problème.
 

@@ -1,19 +1,17 @@
 ---
 title: Préparer et personnaliser une image de disque dur virtuel principale - Azure
 description: Explique comment préparer, personnaliser et charger une image principale Windows Virtual Desktop dans Azure.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/14/2019
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: fc6eb22f81279003a5355993db231ffec8e31b7d
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 9e4cb4fe8a701600290d24c055e2be5187a711c5
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611957"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95023392"
 ---
 # <a name="prepare-and-customize-a-master-vhd-image"></a>Préparer et personnaliser une image de disque dur virtuel principale
 
@@ -37,11 +35,13 @@ Pour créer une machine virtuelle avec le disque dur virtuel copié :
 
 2. Dans la page Spécifier la génération, sélectionnez **Génération 1**.
 
-    ![Une capture d’écran de la page Spécifier la génération. L’option « Génération 1 » est sélectionnée.](media/a41174fd41302a181e46385e1e701975.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la page Spécifier la génération avec l’option « Génération 1 » sélectionnée](media/a41174fd41302a181e46385e1e701975.png)
 
 3. Sous Type de point de contrôle, désactivez les points de contrôle en décochant la case.
 
-    ![Une capture d’écran de la section Type de point de contrôle de la page Points de contrôle.](media/20c6dda51d7cafef33251188ae1c0c6a.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la section Type de point de contrôle de la page Points de contrôle](media/20c6dda51d7cafef33251188ae1c0c6a.png)
 
 Vous pouvez également exécuter l’applet de commande suivante dans PowerShell pour désactiver les points de contrôle.
 
@@ -53,7 +53,8 @@ Set-VM -Name <VMNAME> -CheckpointType Disabled
 
 Si vous créez une machine virtuelle à partir d’un disque dur virtuel existant, il crée un disque dynamique par défaut. Il peut être remplacé par un disque fixe en choisissant **Modifier le disque...**  comme indiqué dans l’image suivante. Pour plus d’informations, consultez [Préparer un VHD ou VHDX Windows à charger sur Azure](../virtual-machines/windows/prepare-for-upload-vhd-image.md).
 
-![Une capture d’écran de l’option Modifier le disque.](media/35772414b5a0f81f06f54065561d1414.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran de l’option Modifier le disque](media/35772414b5a0f81f06f54065561d1414.png)
 
 Vous pouvez également exécuter l’applet de commande PowerShell suivante pour en faire un disque fixe.
 
@@ -63,9 +64,9 @@ Convert-VHD –Path c:\test\MY-VM.vhdx –DestinationPath c:\test\MY-NEW-VM.vhd 
 
 ## <a name="software-preparation-and-installation"></a>Installation et préparation des logiciels
 
-Cette section explique comment préparer et installer FSLogix et Windows Defender, ainsi que certaines options de configuration de base pour les applications et le registre de votre image. 
+Cette section explique comment préparer et installer FSLogix et Windows Defender, ainsi que certaines options de configuration de base pour les applications et le registre de votre image.
 
-Si vous installez Office 365 ProPlus et OneDrive sur votre machine virtuelle, accédez à [Installer Office sur une image VHD principale](install-office-on-wvd-master-image.md) et suivez les instructions pour installer les applications. Une fois que vous avez terminé, revenez à cet article.
+Si vous installez Microsoft 365 Apps for enterprise et OneDrive sur votre machine virtuelle, accédez à [Installer Office sur une image VHD principale](install-office-on-wvd-master-image.md) et suivez les instructions indiquées pour installer les applications. Une fois que vous avez terminé, revenez à cet article.
 
 Si vos utilisateurs ont besoin d’accéder à certaines applications métier, nous vous recommandons de les installer une fois que vous aurez suivi les instructions de cette section.
 
@@ -92,7 +93,7 @@ Pour désactiver les mises à jour automatiques via une stratégie de groupe loc
 
 Vous pouvez également exécuter la commande suivante dans une invite de commande pour désactiver les mises à jour automatiques.
 
-```batch
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 ```
 
@@ -100,7 +101,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpd
 
 Exécutez cette commande pour spécifier une mise en page de démarrage pour les PC sous Windows 10.
 
-```batch
+```cmd
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SpecialRoamingOverrideAllowed /t REG_DWORD /d 1 /f
 ```
 
@@ -118,7 +119,7 @@ Pour rediriger les fuseaux horaires :
 
 Vous pouvez également exécuter cette commande sur l’image principale pour rediriger les fuseaux horaires :
 
-```batch
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fEnableTimeZoneRedirection /t REG_DWORD /d 1 /f
 ```
 
@@ -126,11 +127,12 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fEnab
 
 Pour l’hôte de session de Windows Virtual Desktop qui utilise Windows 10 Entreprise ou Windows 10 Entreprise multisession, nous vous recommandons de désactiver l’assistant Stockage. Vous pouvez désactiver l’assistant Stockage dans le menu Paramètres sous **Stockage**, comme illustré dans la capture d’écran suivante :
 
-![Une capture d’écran du menu Stockage sous Paramètres. L’option « Assistant Stockage » est désactivée.](media/storagesense.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du menu Stockage sous Paramètres, avec l’option « Assistant Stockage » désactivée](media/storagesense.png)
 
 Vous pouvez également modifier le paramètre avec le registre en exécutant la commande suivante :
 
-```batch
+```cmd
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" /v 01 /t REG_DWORD /d 0 /f
 ```
 
@@ -151,19 +153,19 @@ Cette section décrit la configuration des applications et du système d’explo
 
 Pour une collecte du hub de commentaires des données dans Windows 10 Entreprise multisession, exécutez cette commande :
 
-```batch
+```cmd
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 3 /f
 ```
 
 Exécutez la commande suivante pour résoudre des incidents Watson :
 
-```batch
+```cmd
 remove CorporateWerServer* from Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting
 ```
 
 Entrez les commandes suivantes dans l’éditeur du registre pour corriger la prise en charge de la résolution 5K. Vous devez exécuter les commandes avant de pouvoir activer la pile côte à côte.
 
-```batch
+```cmd
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxMonitors /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxXResolution /t REG_DWORD /d 5120 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxYResolution /t REG_DWORD /d 2880 /f
@@ -183,21 +185,24 @@ Après avoir préparé l’image pour le téléchargement, assurez-vous que la m
 
 Cette section s’applique uniquement lorsque l’image principale a été créée localement.
 
-Les instructions suivantes vous indiqueront comment charger votre image principale dans un compte de stockage Azure. Si vous ne disposez pas d’un compte de stockage Azure, suivez les instructions de [cet article](/azure/javascript/tutorial-vscode-static-website-node-03) pour en créer un.
+Les instructions suivantes vous indiqueront comment charger votre image principale dans un compte de stockage Azure. Si vous ne disposez pas d’un compte de stockage Azure, suivez les instructions de [cet article](/azure/developer/javascript/tutorial-vscode-static-website-node-03) pour en créer un.
 
 1. Convertissez l’image de machine virtuelle (VHD) sur Fixed si vous ne l’avez pas déjà fait. Si l’image n’est pas convertie sur Fixed, elle ne sera pas correctement créée.
 
-2. Chargez le disque dur virtuel vers un conteneur d’objets blob dans votre compte de stockage. Vous pouvez le télécharger rapidement avec l’[outil Explorateur de stockage](https://azure.microsoft.com/features/storage-explorer/). Pour en savoir plus sur l’outil Explorateur de stockage, consultez [cet article](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer?tabs=windows).
+2. Chargez le disque dur virtuel vers un conteneur d’objets blob dans votre compte de stockage. Vous pouvez le télécharger rapidement avec l’[outil Explorateur de stockage](https://azure.microsoft.com/features/storage-explorer/). Pour en savoir plus sur l’outil Explorateur de stockage, consultez [cet article](../vs-azure-tools-storage-manage-with-storage-explorer.md?tabs=windows).
 
-    ![Capture d’écran de la fenêtre de recherche de l’outil Explorateur de stockage Microsoft Azure. La case à cocher « Télécharger les fichiers .vhd ou vhdx en tant qu’objets blob de pages (recommandé) » est sélectionnée.](media/897aa9a9b6acc0aa775c31e7fd82df02.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la fenêtre de recherche de l’outil Explorateur Stockage Microsoft Azure, avec la case « Charger les fichiers .vhd/vhdx en tant qu’objets blob de pages (recommandé) » cochée](media/897aa9a9b6acc0aa775c31e7fd82df02.png)
 
 3. Ensuite, accédez au portail Azure dans votre navigateur et recherchez « images ». Votre recherche doit vous conduire à la page **Créer une image**, comme représenté dans la capture d’écran suivante :
 
-    ![Une capture d’écran de la page Créer une image du portail Azure, remplie avec des exemples de valeurs pour l’image.](media/d3c840fe3e2430c8b9b1f44b27d2bf4f.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la page Créer une image du Portail Azure, comportant des exemples de valeurs pour l’image](media/d3c840fe3e2430c8b9b1f44b27d2bf4f.png)
 
 4. Une fois l’image créée, vous devez voir une notification telle que celle de la capture d’écran suivante :
 
-    ![Une capture d’écran de la notification « image créée avec succès ».](media/1f41b7192824a2950718a2b7bb9e9d69.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la notification « Image créée »](media/1f41b7192824a2950718a2b7bb9e9d69.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

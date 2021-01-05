@@ -1,6 +1,6 @@
 ---
-title: Copier des données d’une source REST à l’aide d’Azure Data Factory
-description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory pour copier des données d’une source REST dans le cloud ou locale vers des banques de données réceptrices prises en charge.
+title: Copier des données depuis et vers un point de terminaison REST à l’aide d’Azure Data Factory
+description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory pour copier des données d’une source REST locale ou dans le cloud vers des banques de données réceptrices prises en charge, ou d’une banque de données source prise en charge vers un récepteur REST.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -9,21 +9,21 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 11/20/2019
+ms.date: 12/08/2020
 ms.author: jingwang
-ms.openlocfilehash: 2657f1998e3ca908bc52166154ac3353e1e5a66b
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 1b3ab569666ea413ba36da0dc00f6c37336c4443
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415044"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96931299"
 ---
-# <a name="copy-data-from-a-rest-endpoint-by-using-azure-data-factory"></a>Copier des données d’un point de terminaison REST à l’aide d’Azure Data Factory
+# <a name="copy-data-from-and-to-a-rest-endpoint-by-using-azure-data-factory"></a>Copier des données depuis et vers un point de terminaison REST à l’aide d’Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
-Cet article décrit comment utiliser l’activité de copie dans Azure Data Factory pour copier des données depuis un point de terminaison REST. Il s’appuie sur l’article [Activité de copie dans Azure Data Factory](copy-activity-overview.md), qui constitue une présentation de l’activité de copie.
+Cet article décrit comment utiliser l’activité Copy dans Azure Data Factory pour copier des données depuis et vers un point de terminaison REST. Il s’appuie sur l’article [Activité de copie dans Azure Data Factory](copy-activity-overview.md), qui constitue une présentation de l’activité de copie.
 
-Les différences entre ce connecteur REST, un [connecteur HTTP](connector-http.md) et le [connecteur Table Web](connector-web-table.md) sont les suivantes :
+Les différences entre ce connecteur REST, un [connecteur HTTP](connector-http.md) et le [connecteur Table web](connector-web-table.md) sont les suivantes :
 
 - Le **connecteur REST** prend spécifiquement en charge la copie de données à partir d’API RESTful. 
 - Le **connecteur HTTP** est générique pour récupérer des données à partir de n’importe quel point de terminaison HTTP, par exemple pour télécharger un fichier. Avant que ce connecteur REST soit disponible, vous utiliserez peut-être un connecteur HTTP pour copier des données à partir d’une API RESTful, ce qui est pris en charge mais moins fonctionnel comparé au connecteur REST.
@@ -31,14 +31,14 @@ Les différences entre ce connecteur REST, un [connecteur HTTP](connector-http.m
 
 ## <a name="supported-capabilities"></a>Fonctionnalités prises en charge
 
-Vous pouvez copier des données d’une source REST vers toute banque de données réceptrice prise en charge. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs pour l’activité de copie, consultez [Magasins de données et formats pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
+Vous pouvez copier des données d’une source REST vers toute banque de données réceptrice prise en charge. Vous pouvez également copier des données de n’importe quelle banque de données source prise en charge vers un récepteur REST. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs pour l’activité de copie, consultez [Magasins de données et formats pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
 Plus précisément, ce connecteur REST générique prend en charge ce qui suit :
 
-- La récupération des données à partir du point de terminaison REST à l’aide des méthodes **GET** ou **POST**.
-- Le récupération de données avec une des authentifications suivantes : **Anonyme**, **De base**, **Principal de service AAD** et **Identités managées pour ressources Azure**.
+- La copie de données à partir d’un point de terminaison REST à l’aide des méthodes **GET** ou **POST** et la copie de données vers un point de terminaison REST à l’aide des méthodes **POST**, **PUT** ou **PATCH**.
+- Copie de données avec une des authentifications suivantes : **Anonyme**, **De base**, **Principal de service AAD** et **Identités managées pour ressources Azure**.
 - La **[Pagination](#pagination-support)** dans les API REST.
-- La copie de la réponse JSON REST [en l’état](#export-json-response-as-is) ou son analyse à l’aide d’un [mappage de schéma](copy-activity-schema-and-type-mapping.md#schema-mapping). Seule la charge utile de réponse dans **JSON** est prise en charge.
+- Pour REST en tant que source, la copie de la réponse JSON REST [en l’état](#export-json-response-as-is) ou son analyse à l’aide d’une [mise en correspondance du schéma](copy-activity-schema-and-type-mapping.md#schema-mapping). Seule la charge utile de réponse dans **JSON** est prise en charge.
 
 > [!TIP]
 > Pour tester une requête pour l’extraction de données avant de configurer le connecteur REST dans Data Factory, obtenez des informations à partir de la spécification d’API sur les exigences d’en-tête et de corps. Vous pouvez vous servir d’outils tels que Postman ou un navigateur web pour valider.
@@ -62,7 +62,7 @@ Les propriétés prises en charge pour le service lié REST sont les suivantes 
 | type | La propriété **type** doit être définie sur **RestService**. | Oui |
 | url | URL de base du service REST. | Oui |
 | enableServerCertificateValidation | Indique s'il convient de valider ou non le certificat TLS/SSL côté serveur lors de la connexion au point de terminaison. | Non<br /> (la valeur par défaut est **true**) |
-| authenticationType | Type d’authentification utilisé pour se connecter au service REST. Les valeurs autorisées sont **Anonyme**, **De base**, **AadServicePrincipal** et **ManagedServiceIdentity**. Pour d’autres propriétés et exemples, voir les sections correspondantes ci-dessous. | Oui |
+| authenticationType | Type d’authentification utilisé pour se connecter au service REST. Les valeurs autorisées sont **Anonymous**, **Basic**, **AadServicePrincipal** et **ManagedServiceIdentity**. Pour d’autres propriétés et exemples, voir les sections correspondantes ci-dessous. | Oui |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion au magasin de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, cette propriété utilise Azure Integration Runtime par défaut. |Non |
 
 ### <a name="use-basic-authentication"></a>Utiliser une authentification de base
@@ -107,7 +107,8 @@ Définissez la propriété **authenticationType** sur **AadServicePrincipal**. O
 | servicePrincipalId | Spécifiez l’ID de l’application Azure Active Directory. | Oui |
 | servicePrincipalKey | Spécifiez la clé de l’application Azure Active Directory. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 | tenant | Spécifiez les informations de locataire (nom de domaine ou ID de locataire) dans lesquels se trouve votre application. Récupérez-le en pointant la souris dans le coin supérieur droit du Portail Azure. | Oui |
-| aadResourceId | Spécifiez la ressource AAD pour laquelle vous demandez une autorisation, par exemple, `https://management.core.windows.net`.| Oui |
+| aadResourceId | Spécifiez la ressource AAD pour laquelle vous demandez une autorisation, par exemple `https://management.core.windows.net`.| Oui |
+| azureCloudType | Pour l’authentification du principal du service, spécifiez le type d’environnement cloud Azure auquel votre application AAD est inscrite. <br/> Les valeurs autorisées sont **AzurePublic**, **AzureChina**, **AzureUsGovernment** et **AzureGermany**. Par défaut, l’environnement cloud de la fabrique de données est utilisé. | Non |
 
 **Exemple**
 
@@ -141,7 +142,7 @@ Définissez la propriété **authenticationType** sur **ManagedServiceIdentity**
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| aadResourceId | Spécifiez la ressource AAD pour laquelle vous demandez une autorisation, par exemple, `https://management.core.windows.net`.| Oui |
+| aadResourceId | Spécifiez la ressource AAD pour laquelle vous demandez une autorisation, par exemple `https://management.core.windows.net`.| Oui |
 
 **Exemple**
 
@@ -176,7 +177,7 @@ Pour copier des données à partir de REST, les propriétés suivantes sont pris
 | type | La propriété **type** du jeu de données doit être définie sur **RestResource**. | Oui |
 | relativeUrl | URL relative de la ressource qui contient les données. Quand cette propriété n’est pas spécifiée, seule l’URL indiquée dans la définition du service lié est utilisée. Le connecteur HTTP copie les données à partir de l’URL combinée : `[URL specified in linked service]/[relative URL specified in dataset]`. | Non |
 
-Si vous avez défini `requestMethod`, `additionalHeaders`, `requestBody` et `paginationRules` dans le jeu de données, il reste pris en charge tel quel, mais nous vous suggérons d’utiliser le nouveau modèle dans la source d’activité à l’avenir.
+Si vous avez défini `requestMethod`, `additionalHeaders`, `requestBody` et `paginationRules` dans le jeu de données, il reste pris en charge tel quel, mais nous vous suggérons d’utiliser le nouveau modèle dans l’activité à l’avenir.
 
 **Exemple :**
 
@@ -199,7 +200,7 @@ Si vous avez défini `requestMethod`, `additionalHeaders`, `requestBody` et `pag
 
 ## <a name="copy-activity-properties"></a>Propriétés de l’activité de copie
 
-Cette section fournit la liste des propriétés prises en charge par la source REST.
+Cette section fournit la liste des propriétés prises en charge par la source et le récepteur REST.
 
 Pour obtenir la liste complète des sections et des propriétés permettant de définir des activités, consultez [Pipelines](concepts-pipelines-activities.md). 
 
@@ -210,7 +211,7 @@ Les propriétés prises en charge dans la section **source** de l’activité de
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété **type** de la source d’activité de copie doit être définie sur **RestSource**. | Oui |
-| requestMethod | Méthode HTTP. Les valeurs autorisées sont **Get** (par défaut) et **Post**. | Non |
+| requestMethod | Méthode HTTP. Les valeurs autorisées sont **GET** (par défaut) et **POST**. | Non |
 | additionalHeaders | En-têtes de requête HTTP supplémentaires. | Non |
 | requestBody | Corps de la requête HTTP. | Non |
 | paginationRules | Règles de pagination pour composer des requêtes de page suivantes. Pour plus de détails, voir la section [Prise en charge la pagination](#pagination-support). | Non |
@@ -292,9 +293,69 @@ Les propriétés prises en charge dans la section **source** de l’activité de
 ]
 ```
 
+### <a name="rest-as-sink"></a>REST en tant que récepteur
+
+Les propriétés prises en charge dans la section **sink** (récepteur) de l’activité de copie sont les suivantes :
+
+| Propriété | Description | Obligatoire |
+|:--- |:--- |:--- |
+| type | La propriété **type** du récepteur de l’activité Copy doit être définie sur **RestSink**. | Oui |
+| requestMethod | Méthode HTTP. Les valeurs autorisées sont **POST** (valeur par défaut), **PUT** et **PATCH**. | Non |
+| additionalHeaders | En-têtes de requête HTTP supplémentaires. | Non |
+| httpRequestTimeout | Délai d’expiration (valeur **TimeSpan**) pour l’obtention d’une réponse par la requête HTTP. Cette valeur correspond au délai d’expiration pour l’obtention d’une réponse, et non au délai d’expiration pour l’écriture des données. La valeur par défaut est **00:01:40**.  | Non |
+| requestInterval | Intervalle de temps en millisecondes entre les différentes demandes. La valeur de l’intervalle de demande doit être un nombre compris entre [10, 60000]. |  Non |
+| httpCompressionType | Type de compression HTTP à utiliser lors de l’envoi de données avec un niveau de compression optimal. Les valeurs autorisées sont **none** et **gzip**. | Non |
+| writeBatchSize | Nombre d’enregistrements à écrire dans le récepteur REST par lot. La valeur par défaut est 10 000. | Non |
+
+Le connecteur REST en tant que récepteur fonctionne avec les API REST qui acceptent JSON. Les données sont envoyées au format JSON avec le modèle suivant. Si nécessaire, vous pouvez utiliser le [mappage de schéma](copy-activity-schema-and-type-mapping.md#schema-mapping) de l’activité de copie pour remodeler les données sources de façon à les rendre conformes à la charge utile attendue par l’API REST.
+
+```json
+[
+    { <data object> },
+    { <data object> },
+    ...
+]
+```
+
+**Exemple :**
+
+```json
+"activities":[
+    {
+        "name": "CopyToREST",
+        "type": "Copy",
+        "inputs": [
+            {
+                "referenceName": "<input dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "outputs": [
+            {
+                "referenceName": "<REST output dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "typeProperties": {
+            "source": {
+                "type": "<source type>"
+            },
+            "sink": {
+                "type": "RestSink",
+                "requestMethod": "POST",
+                "httpRequestTimeout": "00:01:40",
+                "requestInterval": 10,
+                "writeBatchSize": 10000,
+                "httpCompressionType": "none",
+            },
+        }
+    }
+]
+```
+
 ## <a name="pagination-support"></a>Prise en charge la pagination
 
-Normalement, l’API REST limite sa taille de charge utile de réponse par demande à un nombre raisonnable. Pour retourner une grande quantité de données, elle fractionne le résultat en plusieurs pages et exige des appelants qu’ils envoient des demandes consécutives pour obtenir la page suivante du résultat. En règle générale, la requête d’une page est dynamique et composée par les informations retournées à partir de la réponse de la page précédente.
+Normalement, quand vous copiez des données à partir de l’API REST, celles-ci limite la taille de charge utile de réponse d’une même demande à un nombre raisonnable. Pour retourner une grande quantité de données, elle fractionne le résultat en plusieurs pages et exige des appelants qu’ils envoient des demandes consécutives pour obtenir la page suivante du résultat. En règle générale, la requête d’une page est dynamique et composée par les informations retournées à partir de la réponse de la page précédente.
 
 Ce connecteur REST générique prend en charge les modèles de pagination suivants : 
 
@@ -319,12 +380,12 @@ Les **règles de pagination** sont définies en tant que dictionnaire dans un je
 
 | Valeur | Description |
 |:--- |:--- |
-| Headers.*response_header* OR Headers[’response_header’] | « response_header » est défini par l’utilisateur et fait référence à un nom d’en-tête dans la réponse HTTP en cours, dont la valeur sera être utilisée pour émettre la requête suivante. |
+| Headers.*response_header* OR Headers[’response_header’] | « response_header » est défini par l’utilisateur et fait référence à un nom d’en-tête dans la réponse HTTP actuelle, dont la valeur sera utilisée pour émettre la prochaine requête. |
 | Expression JSONPath commençant par « $ » (représentant la racine du corps de la réponse) | Le corps de la réponse ne doit contenir qu’un seul objet JSON. L’expression JSONPath doit retourner une seule valeur primitive qui sera utilisée pour émettre la requête suivante. |
 
 **Exemple :**
 
-L’API Graph Facebook retourne une réponse dans la structure suivante. Dans ce cas, l’URL de la page suivante est représentée dans ***paging.next*** :
+L’API Graph Facebook retourne une réponse dans la structure suivante. Dans ce cas, l’URL de la page suivante est représentée dans **_paging.next_* _ :
 
 ```json
 {
@@ -379,7 +440,7 @@ Cette section décrit comment utiliser un modèle de solution pour copier des do
 ### <a name="about-the-solution-template"></a>À propos du modèle de solution
 
 Le modèle comporte deux activités :
-- L’activité **Web** récupère le jeton du porteur, puis le transmet à l’activité de copie suivante en tant qu’autorisation.
+- L’activité _ *Web** récupère le jeton du porteur, puis le transmet à l’activité Copy suivante en tant qu’autorisation.
 - L’activité **Copier** copie les données de REST vers Azure Data Lake Storage.
 
 Le modèle définit deux paramètres :
@@ -403,7 +464,7 @@ Le modèle définit deux paramètres :
 3. Sélectionnez **Utiliser ce modèle**.
     ![Utiliser ce modèle](media/solution-template-copy-from-rest-or-http-using-oauth/use-this-template.png)
 
-4. Vous pouvez voir le pipeline créé comme indiqué dans l’exemple suivant :  ![Pipeline](media/solution-template-copy-from-rest-or-http-using-oauth/pipeline.png)
+4. Vous pouvez voir le pipeline créé comme indiqué dans l’exemple suivant :  ![La capture d’écran montre le pipeline créé à partir du modèle.](media/solution-template-copy-from-rest-or-http-using-oauth/pipeline.png)
 
 5. Sélectionnez l’activité **Web**. Dans **Paramètres**, spécifiez l’**URL**, la **méthode**, les **en-têtes** et le **corps** correspondants pour récupérer le jeton du porteur OAuth à partir de l’API de connexion du service à partir duquel vous souhaitez copier des données. L’espace réservé dans le modèle illustre un exemple de norme OAuth Azure Active Directory (AAD). Remarque : l’authentification AAD est prise en charge en mode natif par le connecteur REST, qui ici n’est qu’un exemple de flux OAuth. 
 

@@ -10,12 +10,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 4a4d3a1480a852218e698862a509c4af45e49eb8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9d9b2546553e03d1555cf4c587d699d9a4ea7e51
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76714417"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000978"
 ---
 # <a name="project-lead-tasks-in-the-team-data-science-process"></a>Tâches du coordinateur de projet dans Team Data Science Process
 
@@ -49,7 +49,7 @@ Pour cloner des dépôts et modifier leur contenu sur votre ordinateur local ou 
 
 - Un abonnement Azure.
 - Git installé sur votre ordinateur. Si vous utilisez une machine virtuelle DSVM, Git est préinstallé. Dans le cas contraire, consultez l’[annexe Plateformes et outils](platforms-and-tools.md#appendix).
-- Si vous souhaitez utiliser une machine virtuelle DSVM, l’instance DSVM Windows ou Linux doit être créée et configurée dans Azure. Pour obtenir des informations complémentaires et des instructions, consultez la [documentation sur Data Science Virtual Machine](/azure/machine-learning/data-science-virtual-machine/).
+- Si vous souhaitez utiliser une machine virtuelle DSVM, l’instance DSVM Windows ou Linux doit être créée et configurée dans Azure. Pour obtenir des informations complémentaires et des instructions, consultez la [documentation sur Data Science Virtual Machine](../data-science-virtual-machine/index.yml).
 - Pour une machine virtuelle DSVM Windows, [Git Credential Manager (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) installé sur votre ordinateur. Dans le fichier *README.md*, accédez à la section **Télécharger et installer**, puis sélectionnez le **programme d’installation le plus récent**. Téléchargez le programme d’installation *.exe* et exécutez-le. 
 - Pour une machine virtuelle DSVM Linux, une clé publique SSH créée dans votre instance DSVM et ajoutée à Azure DevOps. Pour obtenir des informations complémentaires et des instructions, consultez la section **Créer une clé publique SSH** dans l’[annexe Plateformes et outils](platforms-and-tools.md#appendix). 
 
@@ -57,7 +57,7 @@ Pour cloner des dépôts et modifier leur contenu sur votre ordinateur local ou 
 
 Pour créer un dépôt de projet dans le projet **MyTeam** de votre équipe :
 
-1. Accédez à la page **Résumé** du projet de votre équipe à l’adresse *https:\//\<nom de serveur>/\<nom d’organisation>/\<nom d’équipe>* (par exemple, **https:\//dev.azure.com/DataScienceUnit/MyTeam**), puis sélectionnez **Dépôts** dans le volet de navigation gauche. 
+1. Accédez à la page **Résumé** de votre équipe via *https:\//\<server name>/\<organization name>/\<team name>* , par exemple, **https:\//dev.azure.com/DataScienceUnit/MyTeam**, puis sélectionnez **Repos** dans le volet de navigation gauche. 
    
 1. Sélectionnez le nom du dépôt en haut de la page, puis **Nouveau dépôt** dans la liste déroulante.
    
@@ -83,7 +83,7 @@ Pour renseigner votre dépôt de projet avec le contenu de votre dépôt de mod�
    
    ![Sélectionner Importer](./media/project-lead-tasks/project-leads-5-create-project-repo-4.png)
    
-1. Dans la boîte de dialogue **Importer un dépôt Git**, sélectionnez **Git** comme **Type de source**, puis entrez l’URL du dépôt **TeamTemplate** en dessous de **URL clone**. L’URL est *https:\//\<nom de serveur>/\<nom d’organisation>/\<nom d’équipe>/_git/\<nom de dépôt de modèle d’équipe>* . Par exemple : **https:\//dev.azure.com/DataScienceUnit/MyTeam/_git/TeamTemplate**. 
+1. Dans la boîte de dialogue **Importer un dépôt Git**, sélectionnez **Git** comme **Type de source**, puis entrez l’URL du dépôt **TeamTemplate** en dessous de **URL clone**. L’URL est *https:\//\<server name>/\<organization name>/\<team name>/_git/\<team template repository name>* . Par exemple : **https:\//dev.azure.com/DataScienceUnit/MyTeam/_git/TeamTemplate**. 
    
 1. Sélectionnez **Importer**. Le contenu de votre dépôt de modèle d’équipe est importé dans votre dépôt de projet. 
    

@@ -1,27 +1,22 @@
 ---
 title: Emplacements de données pour Windows Virtual Desktop - Azure
 description: Brève vue d’ensemble des emplacements de stockage des données et métadonnées de Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 04/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 853f5766c4fd6344eecfd7be1d7911163133a8a5
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: e626b7e729e394b1012848904f5ce12279c3ef24
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611532"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88010070"
 ---
-# <a name="data-locations-for-windows-virtual-desktop"></a>Emplacements de données pour Windows Virtual Desktop
+# <a name="data-and-metadata-locations-for-windows-virtual-desktop"></a>Emplacements de données et de métadonnées pour Windows Virtual Desktop
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/data-locations-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/data-locations-2019.md).
 
 Windows Virtual Desktop est disponible pour tous les emplacements géographiques. Les administrateurs peuvent choisir l’emplacement de stockage des données utilisateur au moment de la création des machines virtuelles du pool d’hôtes et des services associés, par exemple les serveurs de fichiers. Découvrez plus en détail les zones géographiques Azure sur la [carte des centres de données Azure](https://azuredatacentermap.azurewebsites.net/).
 

@@ -17,12 +17,12 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6d7c9713f27643e792ea381e1a2419cbc4b67a99
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6a881dee50195fe4995c77d793b4f4b75091d20b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82129197"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89231110"
 ---
 # <a name="interpret-the-azure-ad-sign-in-logs-schema-in-azure-monitor"></a>Interpréter le schéma des journaux de connexion Azure Active Directory dans Azure Monitor
 
@@ -165,7 +165,7 @@ Cet article décrit le schéma de journal de connexion Azure Active Directory (A
 | Identité | Identité extraite du jeton présenté lors de la création de la demande. Il peut s’agir d’un compte d’utilisateur, d’un compte système ou d’un principal du service. |
 | Level | Fournit le type de message. Pour l’audit, il s’agit toujours d’*Information*. |
 | Emplacement | Indique l’emplacement de l’activité de connexion. |
-| Propriétés | Répertorie toutes les propriétés associées aux connexions. Pour plus d’informations, voir la [documentation de référence sur l’API Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/signin). Ce schéma utilise les mêmes noms d’attribut que la ressource de connexion pour une meilleure lisibilité.
+| Propriétés | Répertorie toutes les propriétés associées aux connexions. Pour plus d’informations, voir la [documentation de référence sur l’API Microsoft Graph](/graph/api/resources/signin?view=graph-rest-beta). Ce schéma utilise les mêmes noms d’attribut que la ressource de connexion pour une meilleure lisibilité.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

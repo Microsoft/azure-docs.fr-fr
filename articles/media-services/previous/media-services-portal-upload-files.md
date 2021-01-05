@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: 3ebeb3c601dd3f734265d49d60728056561928be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 00035782a17936405b2b042035220dde87da12b1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61127807"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89257056"
 ---
-# <a name="upload-files-to-a-media-services-account-in-the-azure-portal"></a>Charger des fichiers vers un compte Media Services dans le portail Azure 
+# <a name="upload-files-to-a-media-services-account-in-the-azure-portal"></a>Charger des fichiers vers un compte Media Services dans le portail Azure
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector"]
 > * [Portail](media-services-portal-upload-files.md)
@@ -30,7 +32,7 @@ ms.locfileid: "61127807"
 > 
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. Pour obtenir les fichiers de téléchargement à jour via le portail, consultez [Utiliser le portail pour charger, encoder et diffuser du contenu](../latest/manage-assets-quickstart.md).<br/>Consultez également [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Dans Azure Media Services, vous chargez vos fichiers numériques vers une ressource. Cette ressource peut contenir des fichiers vidéo, des fichiers audio, des images, des collections de miniatures, des pistes textuelles et des fichiers de sous-titres (ainsi que les métadonnées concernant ces fichiers). Une fois les fichiers chargés, votre contenu est stocké en toute sécurité dans le cloud, à des fins de traitement approfondi et de diffusion en continu.
 
@@ -65,5 +67,3 @@ Une fois le chargement terminé, la nouvelle ressource est répertoriée dans le
 * Vous pouvez désormais [encoder vos ressources chargées](media-services-portal-encode.md).
 
 * Vous pouvez également utiliser Azure Functions pour déclencher une tâche de codage lorsqu’un fichier arrive dans le conteneur configuré. Pour plus d’informations, consultez l’exemple dans [Media Services : Intégration d’Azure Media Services dans Azure Functions et Logic Apps](https://azure.microsoft.com/resources/samples/media-services-dotnet-functions-integration/).
-
-

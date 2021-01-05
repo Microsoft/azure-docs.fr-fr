@@ -5,24 +5,24 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: conceptual
-ms.date: 03/25/2020
+ms.date: 08/07/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 622950c394d59d8ba504901f5bb0eea6bc04707f
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: 96d1eaff4d1b93ad3bb489f177020c351fe4d13d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82160713"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95904033"
 ---
 # <a name="conditional-access-conditions"></a>Accès conditionnel : Conditions
 
 Dans une stratégie d’accès conditionnel, un administrateur peut s’aider des signaux des conditions telles que le risque, la plateforme d’appareil ou l’emplacement pour prendre de meilleures décisions en matière de stratégie. 
 
-![Définir une stratégie d’accès conditionnel et spécifier des conditions](./media/concept-conditional-access-conditions/conditional-access-conditions.png)
+[ ![Define a Conditional Access policy and specify conditions](./media/concept-conditional-access-conditions/conditional-access-conditions.png)](./media/concept-conditional-access-conditions/conditional-access-conditions.png#lightbox)
 
 Il est possible de combiner plusieurs conditions pour créer des stratégies d’accès conditionnel spécifiques parfaitement adaptées aux besoins.
 
@@ -31,6 +31,10 @@ Par exemple, pour prendre ses décisions quant à l’accès à une application 
 ## <a name="sign-in-risk"></a>Risque à la connexion
 
 Pour les clients ayant accès à [Identity Protection](../identity-protection/overview-identity-protection.md), le risque à la connexion peut être évalué dans le cadre d’une stratégie d’accès conditionnel. Le risque à la connexion reflète la probabilité qu’une requête d’authentification donnée soit rejetée par le propriétaire de l’identité. Pour plus d’informations sur le risque à la connexion, consultez les articles [Que sont les risques ?](../identity-protection/concept-identity-protection-risks.md#sign-in-risk) et [ Configurer et activer des stratégies de risque](../identity-protection/howto-identity-protection-configure-risk-policies.md).
+
+## <a name="user-risk"></a>Risque de l’utilisateur 
+
+Pour les clients ayant accès à [Identity Protection](../identity-protection/overview-identity-protection.md), le risque utilisateur peut être évalué dans le cadre d’une stratégie d’accès conditionnel. Un risque utilisateur reflète la probabilité qu’une identité ou un compte donné soit compromis. Pour plus d’informations sur le risque utilisateur, consultez les articles [Qu’est-ce que le risque](../identity-protection/concept-identity-protection-risks.md#user-risk) et [Comment : Configurer et activer des stratégies de risque](../identity-protection/howto-identity-protection-configure-risk-policies.md).
 
 ## <a name="device-platforms"></a>Plateformes d’appareils
 
@@ -41,13 +45,13 @@ L’accès conditionnel Azure AD prend en charge les plateformes d’appareil su
 - Android
 - iOS
 - Windows Phone
--  Windows
+- Windows
 - macOS
 
-> [!WARNING]
-> Microsoft a connaissance d’un problème concernant les stratégies d’accès conditionnel et les appareils macOS 10.15.4. Pour plus d’informations, consultez le billet de blog suivant : [Known Issue: Conditional access unexpectedly blocking macOS 10.15.4 native mail client/other apps](https://techcommunity.microsoft.com/t5/intune-customer-success/known-issue-conditional-access-unexpectedly-blocking-macos-10-15/ba-p/1322283).
-
 Si vous bloquez l’authentification héritée à l’aide de la condition **Autres clients**, vous pouvez également définir la condition de plateforme de l’appareil.
+
+> [!IMPORTANT]
+> Microsoft vous recommande de disposer d’une stratégie d’accès conditionnel pour les plateformes d’appareil non prises en charge. Par exemple, si vous souhaitez bloquer l’accès à vos ressources d’entreprise à partir de Linux ou d’un autre client non pris en charge, vous devez configurer une stratégie avec une condition de plateformes d’appareil incluant n’importe quel appareil et excluant les plateformes d’appareil prises en charge et définir Accorder le contrôle sur Bloquer l’accès.
 
 ## <a name="locations"></a>Emplacements
 
@@ -59,18 +63,28 @@ Par exemple, certaines organisations ne souhaitent pas exiger l’authentificati
 
 Pour plus d’informations sur les emplacements, consultez l’article [Qu’est-ce que la condition d’emplacement de l’accès conditionnel Azure Active Directory ?](location-condition.md).
 
-## <a name="client-apps-preview"></a>Applications clientes (préversion)
+## <a name="client-apps"></a>Applications clientes
 
-Par défaut, les stratégies d’accès conditionnel s’appliquent aux applications basées sur un navigateur ainsi qu’aux applications qui utilisent des protocoles d’authentification moderne. En plus de ces applications, les administrateurs peuvent choisir d’inclure les clients Exchange ActiveSync et d’autres clients qui utilisent des protocoles hérités.
+Par défaut, toutes les stratégies d’accès conditionnel nouvellement créées s’appliquent à tous les types d’applications clientes, même si la condition des applications clientes n’est pas configurée. 
 
-- Browser
-   - Cette option inclut les applications web qui utilisent des protocoles comme SAML, WS-Federation, OpenID Connect, ou les services inscrits en tant que clients confidentiels OAuth.
-- Applications mobiles et clients de bureau
-   - Clients d’authentification moderne
-      - Cette option inclut les applications comme les applications de bureau et de téléphone Office.
+> [!NOTE]
+> Le comportement de la condition des applications clientes a été mis à jour en août 2020. Si vous disposez de stratégies d’accès conditionnel, elles restent inchangées. Toutefois, si vous cliquez sur une stratégie, le bouton bascule de configuration a été supprimé et les applications clientes auxquelles la stratégie s’applique sont sélectionnées.
+
+> [!IMPORTANT]
+> Les connexions à partir des clients d’authentification hérités ne prennent pas en charge MFA ni ne transmettent d’informations relatives à l’état de l’appareil à Azure AD. Elles seront donc bloquées par les contrôles d’octroi d’accès conditionnel, comme MFA ou la conformité des appareils. Si vous avez des comptes qui doivent utiliser l’authentification héritée, vous devez soit exclure ces comptes de la stratégie, soit configurer la stratégie pour qu’elle s’applique uniquement aux clients d’authentification modernes.
+
+Lorsqu’il est réglé sur **Oui**, le bouton bascule **Configuration** s’applique aux éléments cochés, tandis que lorsqu’il est réglé sur **Non**, il s’applique à toutes les applications clientes, y compris les clients d’authentification modernes et hérités. Ce bouton bascule n’apparaît pas dans les stratégies créées avant août 2020.
+
+- Clients d’authentification moderne
+   - Browser
+      - Cette option inclut les applications web qui utilisent des protocoles comme SAML, WS-Federation, OpenID Connect, ou les services inscrits en tant que clients confidentiels OAuth.
+   - Applications mobiles et clients de bureau
+      -  Cette option inclut les applications comme les applications de bureau et de téléphone Office.
+- Clients d’authentification hérités
    - Clients Exchange ActiveSync
-      - Par défaut, cela inclut toute utilisation du protocole EAS (Exchange ActiveSync). La sélection de **Appliquer la stratégie uniquement aux plateformes prises en charge** permet de limiter aux plateformes prises en charge comme iOS, Android et Windows.
+      - Cela inclut toute utilisation du protocole EAS (Exchange ActiveSync).
       - Si une stratégie bloque l’utilisation d’Exchange ActiveSync, l’utilisateur concerné reçoit un e-mail de mise en quarantaine. Cet e-mail contient des informations sur la raison du blocage et fournit éventuellement des instructions de correction.
+      - Les administrateurs peuvent appliquer la stratégie uniquement aux plateformes prises en charge (par exemple, iOS, Android et Windows) via l’API MS Graph d’accès conditionnel.
    - Autres clients
       - Cette option inclut les clients qui utilisent des protocoles d’authentification de base/hérités qui ne prennent pas en charge l’authentification moderne.
          - SMTP authentifié : utilisé par les clients POP et IMAP pour envoyer des e-mails.
@@ -105,6 +119,9 @@ Ce paramètre fonctionne avec tous les navigateurs. Toutefois, pour satisfaire �
 | Windows Server 2008 R2 | Internet Explorer |
 | macOS | Chrome, Safari |
 
+> [!NOTE]
+> Edge 85 ou version ultérieure exige que l’utilisateur soit connecté au navigateur pour transmettre correctement l’identité de l’appareil. Dans le cas contraire, il se comporte comme Chrome sans l’extension Comptes. Cette connexion peut ne pas se produire automatiquement dans un scénario de jonction Azure AD Hybride. 
+
 #### <a name="why-do-i-see-a-certificate-prompt-in-the-browser"></a>Pourquoi une invite de saisie de certificat s’affiche-t-elle dans mon navigateur ?
 
 Sur des systèmes Windows 7, iOS, Android et macOS, Azure AD identifie l’appareil à l’aide d’un certificat client, qui est approvisionné lorsque l’appareil est inscrit auprès d’Azure AD.  Lorsqu’un utilisateur se connecte pour la première fois via le navigateur, l’utilisateur est invité à sélectionner le certificat. Il doit sélectionner ce certificat avant d’utiliser le navigateur.
@@ -115,21 +132,17 @@ Dans **Windows 10 Creators Update (version 1703)** ou version ultérieure, la pr
 
 Pour déployer automatiquement cette extension sur les navigateurs Chrome, créez la clé de Registre suivante :
 
-|    |    |
-| --- | --- |
-| Path | HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\ExtensionInstallForcelist |
-| Nom | 1 |
-| Type | REG_SZ (String) |
-| Données | ppnbnpeolgkicgegkbkbjmhlideopiji;https\://clients2.google.com/service/update2/crx |
+- Chemin d’accès HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\ExtensionInstallForcelist
+- Nom 1
+- REG_SZ de type (String)
+- Data ppnbnpeolgkicgegkbkbjmhlideopiji;https\://clients2.google.com/service/update2/crx
 
 Pour la prise en charge de Chrome dans **Windows 8.1 et 7**, créez la clé de Registre suivante :
 
-|    |    |
-| --- | --- |
-| Path | HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\AutoSelectCertificateForUrls |
-| Nom | 1 |
-| Type | REG_SZ (String) |
-| Données | {"pattern":"https://device.login.microsoftonline.com","filter":{"ISSUER":{"CN":"MS-Organization-Access"}}} |
+- Chemin d’accès HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\AutoSelectCertificateForUrls
+- Nom 1
+- REG_SZ de type (String)
+- Data {« pattern » : « https://device.login.microsoftonline.com », « Filter »:{« ISSUER »:{« CN » : « MS-Organization-Access »}}}
 
 Ces navigateurs prennent en charge l’authentification des appareils, ce qui permet de les identifier et de les valider par rapport à une stratégie. La vérification de l’appareil échoue si le navigateur est en cours d’exécution en mode privé.
 
@@ -142,27 +155,27 @@ Ce paramètre a un impact sur les tentatives d’accès provenant des applicatio
 | Applications clientes | Service cible | Plateforme |
 | --- | --- | --- |
 | Application Dynamics CRM | Dynamics CRM | Windows 10, Windows 8.1, iOS et Android |
-| Application de messagerie/calendrier/contacts, Outlook 2016, Outlook 2013 (avec l’authentification moderne)| Office 365 Exchange Online | Windows 10 |
+| Application de messagerie/calendrier/contacts, Outlook 2016, Outlook 2013 (avec l’authentification moderne)| Exchange Online | Windows 10 |
 | Stratégie MFA et d’emplacement pour les applications. Les stratégies basées sur les appareils ne sont pas prises en charge.| Tout service d’application Mes applications | Android et iOS |
 | Services Microsoft Teams, soit tous les services qui prennent en charge Microsoft Teams et toutes ses applications clientes : Bureau Windows, iOS, Android, WP et client web | Microsoft Teams | Windows 10, Windows 8.1, Windows 7, iOS, Android et macOS |
-| Applications Office 2016, Office 2013 (avec authentification moderne), [client de synchronisation OneDrive](/onedrive/enable-conditional-access) | Office 365 SharePoint Online | Windows 8.1, Windows 7 |
-| Applications Office 2016, Universal Office, Office 2013 (avec authentification moderne), [client de synchronisation OneDrive](/onedrive/enable-conditional-access) | Office 365 SharePoint Online | Windows 10 |
-| Office 2016 (Word, Excel, PowerPoint, OneNote uniquement). | Office 365 SharePoint Online | macOS |
-| Office 2019| Office 365 SharePoint Online | Windows 10, macOS |
-| Applications mobiles Office | Office 365 SharePoint Online | Android, iOS |
-| Application Yammer Office | Office 365 Yammer | Windows 10, iOS, Android |
-| Outlook 2019 | Office 365 SharePoint Online | Windows 10, macOS |
-| Outlook 2016 (Office pour Mac OS) | Office 365 Exchange Online | macOS |
-| Outlook 2016, Outlook 2013 (avec authentification moderne), Skype Entreprise (avec authentification moderne) | Office 365 Exchange Online | Windows 8.1, Windows 7 |
-| Application Outlook Mobile | Office 365 Exchange Online | Android, iOS |
+| Applications Office 2016, Office 2013 (avec authentification moderne), [client de synchronisation OneDrive](/onedrive/enable-conditional-access) | SharePoint | Windows 8.1, Windows 7 |
+| Applications Office 2016, Universal Office, Office 2013 (avec authentification moderne), [client de synchronisation OneDrive](/onedrive/enable-conditional-access) | SharePoint Online | Windows 10 |
+| Office 2016 (Word, Excel, PowerPoint, OneNote uniquement). | SharePoint | macOS |
+| Office 2019| SharePoint | Windows 10, macOS |
+| Applications mobiles Office | SharePoint | Android, iOS |
+| Application Yammer Office | Yammer | Windows 10, iOS, Android |
+| Outlook 2019 | SharePoint | Windows 10, macOS |
+| Outlook 2016 (Office pour Mac OS) | Exchange Online | macOS |
+| Outlook 2016, Outlook 2013 (avec authentification moderne), Skype Entreprise (avec authentification moderne) | Exchange Online | Windows 8.1, Windows 7 |
+| Application Outlook Mobile | Exchange Online | Android, iOS |
 | Application Power BI | Service Power BI | Windows 10, Windows 8.1, Windows 7, Android et iOS |
-| Skype Entreprise | Office 365 Exchange Online| Android, iOS |
+| Skype Entreprise | Exchange Online| Android, iOS |
 | Application Visual Studio Team Services | Visual Studio Team Services | Windows 10, Windows 8.1, Windows 7, iOS, Android |
 
 ### <a name="exchange-activesync-clients"></a>Clients Exchange ActiveSync
 
 - Les organisations peuvent uniquement sélectionner des clients Exchange ActiveSync lors de l’affectation d’une stratégie à des utilisateurs ou groupes. La sélection des options **Tous les utilisateurs**, **Tous les utilisateurs invités et externes** ou **Rôles d’annuaire** a pour effet de bloquer l’ensemble des utilisateurs.
-- Quand une stratégie affectée à des clients Exchange ActiveSync est créée, **Office 365 Exchange Online** doit être la seule application cloud affectée à la stratégie. 
+- Quand une stratégie affectée à des clients Exchange ActiveSync est créée, **Exchange Online** doit être la seule application cloud affectée à la stratégie. 
 - Les organisations peuvent limiter l’étendue de cette stratégie à des plateformes spécifiques à l’aide de la condition **Plateformes d’appareils**.
 
 Si le contrôle d’accès affecté à la stratégie a l’option **Demander une application cliente approuvée** activée, l’utilisateur est invité à installer et à utiliser le client mobile Outlook. Si l’**authentification multifacteur** est exigée pour les utilisateurs, ceux-ci sont bloqués, car l’authentification de base ne prend pas en charge l’authentification multifacteur.
@@ -181,7 +194,7 @@ En sélectionnant **Autres clients**, vous pouvez spécifier une condition affec
 Une organisation peut utiliser la condition État de l’appareil pour exclure de ses stratégies d’accès conditionnel les appareils joints à une version hybride d’Azure AD et/ou les appareils marqués comme conformes à une stratégie de conformité Microsoft Intune.
 
 Par exemple, *Tous les utilisateurs* qui accèdent à l’application cloud *Microsoft Azure Management*, incluant **Tous les états d’appareils**, mais excluant **Appareil joint à une version hybride d’Azure AD** et **Appareil marqué comme conforme**, et pour *Contrôles d’accès*, **Bloquer**. 
-   - Cet exemple crée une stratégie qui autorise l’accès à Microsoft Azure Management uniquement à partir d’appareils joints à une version hybride d’Azure AD et/ou d’appareils marqués comme conformes.
+   - Cet exemple crée une stratégie qui autorise l’accès à Microsoft Azure Management uniquement à partir d’appareils avec jointure hybride Azure AD ou d’appareils marqués comme étant conformes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

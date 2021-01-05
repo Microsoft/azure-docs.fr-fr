@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Elium pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateurs dans Elium.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: fb48deae-4653-448a-ba2f-90258edab3a7
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/19/2019
 ms.author: Zhchia
-ms.openlocfilehash: a3e1c936d46e0d9b0ad3b98dafeda7df0b4a23db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e8f027ccc577df79e561fca7194c20b6cc7ef2c6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058461"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005501"
 ---
 # <a name="tutorial-configure-elium-for-automatic-user-provisioning"></a>Tutoriel : Configurer Elium pour le provisionnement automatique d’utilisateurs
 
@@ -112,7 +108,7 @@ Pour configurer le provisionnement d’utilisateurs automatique pour Elium dans 
 
     ![Paramètre Automatique pour le mode de provisionnement](common/provisioning-automatic.png)
 
-1. Dans la section **Informations d’identification d’administrateur**, tapez **\<tenantURL\>/scim/v2** dans le champ **URL de locataire**. (La valeur **tenantURL** est la valeur récupérée précédemment à partir de la console d’administration Elium.) Tapez également la valeur Elium **Jeton secret** dans le champ **Jeton secret**. Enfin, sélectionnez **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Elium. Si la connexion échoue, vérifiez que votre compte Elium dispose d’autorisations d’administration, puis réessayez.
+1. Dans la section **Informations d’identification d’administrateur**, saisissez **\<tenantURL\>/scim/v2** dans le champ **URL de locataire**. (La valeur **tenantURL** est la valeur récupérée précédemment à partir de la console d’administration Elium.) Tapez également la valeur Elium **Jeton secret** dans le champ **Jeton secret**. Enfin, sélectionnez **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Elium. Si la connexion échoue, vérifiez que votre compte Elium dispose d’autorisations d’administration, puis réessayez.
 
     ![Champs URL de locataire et Jeton secret dans Informations d’identification d’administrateur](common/provisioning-testconnection-tenanturltoken.png)
 

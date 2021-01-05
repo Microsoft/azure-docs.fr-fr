@@ -10,12 +10,12 @@ metadata:
   author: tfitzmac
   ms.author: tomfitz
   ms.date: 01/02/2020
-  ms.openlocfilehash: 60f7d4b9c9bd9057e0869b3efe1843eeb8d873f8
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: ba787d1ec1cd3283ab76d631c6ca79281b9cf599
+  ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "75648376"
+  ms.lasthandoff: 12/01/2020
+  ms.locfileid: "96433896"
 landingContent:
 - title: À propos des applications managées
   linkLists:
@@ -36,7 +36,7 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Publier une définition d’application
-      url: publish-managed-app-definition-quickstart.md
+      url: ./publish-service-catalog-app.md
     - text: Déployer une application de catalogue de services
       url: deploy-service-catalog-quickstart.md
   - linkListType: tutorial
@@ -44,7 +44,7 @@ landingContent:
     - text: Créer les fichiers de définition
       url: publish-service-catalog-app.md
     - text: Publier l’application marketplace
-      url: publish-marketplace-app.md
+      url: ../../marketplace/create-new-azure-apps-offer.md
     - text: Créer une application managée avec un fournisseur personnalisé
       url: tutorial-create-managed-app-with-custom-provider.md
   - linkListType: how-to-guide

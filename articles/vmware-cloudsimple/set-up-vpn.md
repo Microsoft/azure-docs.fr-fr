@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: d000d8390375466232c7daac2a4a056ef424be79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5cd08ce938a25e3311358892c9afa9eefd6c6dbf
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77087129"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92424682"
 ---
 # <a name="configure-a-vpn-connection-to-your-cloudsimple-private-cloud"></a>Configurer une connexion VPN vers votre cloud privé CloudSimple
 
@@ -63,7 +63,7 @@ L’exemple ci-dessous illustre l’importation de la connexion à l’aide du c
 
 4. Sélectionnez le fichier de configuration OpenVPN (. ovpn) pour le protocole que vous souhaitez utiliser, puis cliquez sur **Ouvrir**.
 
-    ![VPN](media/import-p2s-vpn-config-choose-ovpn.png)
+    ![Capture d'écran mettant en évidence les fichiers de configuration OpenVPN que vous pouvez sélectionner.](media/import-p2s-vpn-config-choose-ovpn.png)
 
 La connexion s’affiche maintenant dans le menu Viscosity.
 
@@ -71,7 +71,7 @@ La connexion s’affiche maintenant dans le menu Viscosity.
 
 Pour vous connecter au VPN à l’aide du client OpenVPN Viscosity, sélectionnez la connexion dans le menu. L’icône de menu se met à jour pour indiquer que la connexion est établie.
 
-![VPN](media/vis03.png)
+![Capture d'écran représentant l'état de connectivité VPN CloudSimple.](media/vis03.png)
 
 ### <a name="connecting-to-multiple-private-clouds"></a>Connexion à plusieurs clouds privés
 
@@ -79,9 +79,9 @@ Une connexion VPN de point à site résout les noms DNS du premier cloud privé 
 
 1. Lancez le [portail CloudSimple](access-cloudsimple-portal.md).
 
-2. Accédez à **Ressources** > **Clouds privés**, puis sélectionnez le cloud privé auquel vous souhaitez vous connecter.
+2. Accédez à **Ressources** > **Clouds privés** , puis sélectionnez le cloud privé auquel vous souhaitez vous connecter.
 
-3. Sur la page **Résumé** du cloud privé sous **Informations de base**, copiez l’adresse IP du serveur DNS du cloud privé.
+3. Sur la page **Résumé** du cloud privé sous **Informations de base** , copiez l’adresse IP du serveur DNS du cloud privé.
 
     ![Serveurs DNS de cloud privé](media/private-cloud-dns-server.png)
 

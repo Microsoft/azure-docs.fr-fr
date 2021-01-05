@@ -1,0 +1,56 @@
+- name: Documentation Azure Hub Education
+  href: ./index.yml
+- name: Vue d’ensemble
+  items:
+    - name: "Qu’est-ce que le Hub Education\_?"
+      href: about-education-hub.md
+- name: Démarrages rapides
+  items:
+    - name: Accéder au Hub Education
+      href: access-education-hub.md
+    - name: Bien démarrer avec le Hub Education
+      href: get-started-education-hub.md
+    - name: Configurer un cours et créer une classe
+      href: set-up-course-classroom.md
+- name: Guides pratiques
+  items:
+    - name: Gérer votre subvention universitaire
+      href: hub-overview-page.md
+    - name: Créer une attribution et allouer du crédit
+      href: create-assignment-allocate-credit.md
+- name: Support
+  items:
+    - name: Service Desk
+      href: educator-service-desk.md
+- name: Azure Dev Tools for Teaching
+  items:
+    - name: Vue d’ensemble
+      items:
+        - name: "Qu’est-ce qu’Azure Dev Tools for Teaching\_?"
+          href: azure-dev-tools-teaching/about-program.md
+        - name: Azure for Students
+          href: azure-dev-tools-teaching/azure-students-program.md
+        - name: Kit de démarrage Azure pour les étudiants
+          href: azure-dev-tools-teaching/azure-students-starter-program.md
+    - name: Démarrages rapides
+      items:
+        - name: S’inscrire ou renouveler un abonnement
+          href: azure-dev-tools-teaching/enroll-renew-subscription.md
+        - name: Configurer l’accès
+          href: azure-dev-tools-teaching/set-up-access.md
+    - name: Guides pratiques
+      items:
+        - name: Comment gérer les étudiants
+          href: azure-dev-tools-teaching/manage-students.md
+        - name: Comment télécharger les logiciels
+          href: azure-dev-tools-teaching/download-software.md
+    - name: Dépannage
+      items:
+        - name: Erreurs de connexion
+          href: azure-dev-tools-teaching/troubleshoot-login.md
+- name: Ressources
+  items:
+    - name: Questions fréquentes (FAQ)
+      href: azure-dev-tools-teaching/program-faq.md
+    - name: Support
+      href: azure-dev-tools-teaching/program-support.md

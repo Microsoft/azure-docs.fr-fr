@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 04/20/2020
 ms.author: apimpm
-ms.openlocfilehash: 17c92558ebef2eee0a4daead45d16a295cedd1bb
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 427ebfe865002612be2f9aeb9db416f5c2f41e52
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790477"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88065452"
 ---
 # <a name="how-to-deploy-an-azure-api-management-service-instance-to-multiple-azure-regions"></a>Comment déployer une instance de service Gestion des API Azure dans plusieurs régions Azure
 
@@ -28,6 +28,9 @@ Un nouveau service de Gestion des API Azure contient initialement une seule [uni
 
 > [!NOTE]
 > Seul le composant passerelle de la gestion des API est déployé dans toutes les régions. Le composant de gestion des services et le portail des développeurs sont hébergés uniquement dans la région principale. Par conséquent, en cas de panne de la région primaire, l’accès au portail des développeurs et la possibilité de modifier la configuration (par exemple, l’ajout d’API et l’application de stratégies) seront altérés jusqu’à ce que la région primaire soit de nouveau en ligne. Lorsque la région primaire n’est pas en ligne, les régions secondaires disponibles continuent de servir le trafic d’API à l’aide de la dernière configuration disponible.
+
+>[!IMPORTANT]
+> La fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique. Pour toutes les autres régions, les données client sont stockées dans Zone géographique.
 
 [!INCLUDE [premium.md](../../includes/api-management-availability-premium.md)]
 

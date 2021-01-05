@@ -2,13 +2,13 @@
 title: Informations de référence sur YAML - ACR Tasks
 description: Référence pour la définition de tâches dans YAML pour ACR Tasks, y compris les propriétés de tâche, les types d’étapes, les propriétés d’étape et les variables intégrées.
 ms.topic: article
-ms.date: 10/23/2019
-ms.openlocfilehash: 9558f698b4a9dbca46431fc02ced6ae30de29121
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/08/2020
+ms.openlocfilehash: 042310d29f5561c2cd77b0b9cccfc587ca4aa767
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225777"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88067581"
 ---
 # <a name="acr-tasks-reference-yaml"></a>Référence ACR Tasks : YAML
 
@@ -18,7 +18,7 @@ Cet article contient les informations de référence pour la création des fichi
 
 ## <a name="acr-taskyaml-file-format"></a>format de fichier acr-task.yaml
 
-ACR Tasks prend en charge la déclaration de tâche en plusieurs étapes dans la syntaxe YAML standard. Vous définissez les étapes d’une tâche dans un fichier YAML. Vous pouvez ensuite exécuter la tâche manuellement en transmettant le fichier à la commande [az acr run][az-acr-run]. Vous pouvez également utiliser le fichier pour créer une tâche avec [az acr task create][az-acr-task-create] qui se déclenche automatiquement lors d’une mise à jour d’un commit Git ou d’une image de base. Bien que cet article fasse référence à `acr-task.yaml` comme fichier qui contient les étapes, ACR Tasks accepte n’importe quel nom de fichier valide avec une [extension prise en charge](#supported-task-filename-extensions).
+ACR Tasks prend en charge la déclaration de tâche en plusieurs étapes dans la syntaxe YAML standard. Vous définissez les étapes d’une tâche dans un fichier YAML. Vous pouvez ensuite exécuter la tâche manuellement en transmettant le fichier à la commande [az acr run][az-acr-run]. Vous pouvez également utiliser le fichier pour créer une tâche avec [az acr task create][az-acr-task-create] qui se déclenche automatiquement à l’occasion d’une validation Git, d’une mise à jour d’image de base ou d’une planification. Bien que cet article fasse référence à `acr-task.yaml` comme fichier qui contient les étapes, ACR Tasks accepte n’importe quel nom de fichier valide avec une [extension prise en charge](#supported-task-filename-extensions).
 
 Les primitives `acr-task.yaml` de niveau supérieur sont des **propriétés de tâche**, des **types d’étape** et des **propriétés d’étape** :
 
@@ -79,10 +79,11 @@ Les propriétés de tâche apparaissent généralement dans la partie supérieur
 | -------- | ---- | -------- | ----------- | ------------------ | ------------- |
 | `version` | string | Oui | Version du fichier `acr-task.yaml` analysé par le service ACR Tasks. Si ACR Tasks s’efforce de maintenir la compatibilité descendante, cette valeur permet à ACR Tasks d’assurer la compatibilité au sein d’une version définie. En l’absence de version définie explicitement, la dernière version est utilisée par défaut. | Non | None |
 | `stepTimeout` | int (secondes) | Oui | Nombre maximal de secondes pendant lesquelles une étape peut être exécutée. Si la propriété est spécifiée sur une tâche, elle définit la propriété `timeout` par défaut de toutes les étapes. Si la propriété `timeout` est spécifiée à une étape, elle remplace la propriété fournie par la tâche. | Oui | 600 (10 minutes) |
-| `workingDirectory` | string | Oui | Répertoire de travail du conteneur pendant l’exécution. Si la propriété est spécifiée sur une tâche, elle définit la propriété `workingDirectory` par défaut de toutes les étapes. Si elle est spécifiée à une étape, elle remplace la propriété fournie par la tâche. | Oui | `/workspace` |
-| `env` | [chaîne, chaîne,...] | Oui |  Tableau de chaînes au format `key=value` qui définissent les variables d’environnement pour la tâche. Si la propriété est spécifiée sur une tâche, elle définit la propriété `env` par défaut de toutes les étapes. Si elle est spécifiée à une étape, elle remplace toutes les variables d’environnement héritées de la tâche. | None |
-| `secrets` | [clé secrète, clé secrète, ...] | Oui | Tableau d’objets [clé secrète](#secret). | None |
-| `networks` | [réseau, réseau,...] | Oui | Tableau d’objets [réseau](#network). | None |
+| `workingDirectory` | string | Oui | Répertoire de travail du conteneur pendant l’exécution. Si la propriété est spécifiée sur une tâche, elle définit la propriété `workingDirectory` par défaut de toutes les étapes. Si elle est spécifiée à une étape, elle remplace la propriété fournie par la tâche. | Oui | `c:\workspace` sous Windows ou `/workspace` sous Linux |
+| `env` | [chaîne, chaîne,...] | Oui |  Tableau de chaînes au format `key=value` qui définissent les variables d’environnement pour la tâche. Si la propriété est spécifiée sur une tâche, elle définit la propriété `env` par défaut de toutes les étapes. Si elle est spécifiée à une étape, elle remplace toutes les variables d’environnement héritées de la tâche. | Oui | None |
+| `secrets` | [clé secrète, clé secrète, ...] | Oui | Tableau d’objets [clé secrète](#secret). | Non | None |
+| `networks` | [réseau, réseau,...] | Oui | Tableau d’objets [réseau](#network). | Non | None |
+| `volumes` | [volume, volume, ...] | Oui | Tableau d’objets [volume](#volume). Spécifie les volumes avec du contenu source à monter dans une étape. | Non | None |
 
 ### <a name="secret"></a>secret
 
@@ -104,7 +105,16 @@ L’objet réseau a les propriétés suivantes.
 | `driver` | string | Oui | Pilote de gestion du réseau. | None |
 | `ipv6` | bool | Oui | Indique si la mise en réseau IPv6 est activée. | `false` |
 | `skipCreation` | bool | Oui | Indique si vous souhaitez ignorer la création du réseau. | `false` |
-| `isDefault` | bool | Oui | Indique si le réseau est un réseau par défaut fourni avec Azure Container Registry | `false` |
+| `isDefault` | bool | Oui | Indique si le réseau est un réseau par défaut fourni avec Azure Container Registry. | `false` |
+
+### <a name="volume"></a>volume
+
+L’objet volume comporte les propriétés suivantes.
+
+| Propriété | Type | Facultatif | Description | Valeur par défaut |
+| -------- | ---- | -------- | ----------- | ------- | 
+| `name` | string | Non | Nom du volume à monter. Ne peut contenir que des caractères alphanumériques, « - » et « _ ». | None |
+| `secret` | map[string]string | Non | Chaque clé du mappage est le nom d’un fichier créé et rempli dans le volume. Chaque valeur est la version de type chaîne du secret. Les valeurs de secret doivent être encodées en base64. | None |
 
 ## <a name="task-step-types"></a>Types d’étape de tâche
 
@@ -141,7 +151,7 @@ Le type d’étape `build` prend en charge les paramètres du tableau suivant. L
 
 Le type d’étape `build` prend en charge les propriétés suivantes : La section [Propriétés d’étape de tâche](#task-step-properties) de cet article comporte les détails de ces propriétés.
 
-| | | |
+| Propriétés | Type | Obligatoire |
 | -------- | ---- | -------- |
 | `detach` | bool | Facultatif |
 | `disableWorkingDirectoryOverride` | bool | Facultatif |
@@ -161,6 +171,7 @@ Le type d’étape `build` prend en charge les propriétés suivantes : La sect
 | `secret` | object | Facultatif |
 | `startDelay` | int (secondes) | Facultatif |
 | `timeout` | int (secondes) | Facultatif |
+| `volumeMount` | object | Facultatif |
 | `when` | [chaîne, chaîne,...] | Facultatif |
 | `workingDirectory` | string | Facultatif |
 
@@ -213,7 +224,7 @@ steps:
 
 Le type d’étape `push` prend en charge les propriétés suivantes : La section [Propriétés d’étape de tâche](#task-step-properties) de cet article comporte les détails de ces propriétés.
 
-| | | |
+| Propriété | Type | Obligatoire |
 | -------- | ---- | -------- |
 | `env` | [chaîne, chaîne,...] | Facultatif |
 | `id` | string | Facultatif |
@@ -258,7 +269,7 @@ steps:
 
 Le type d’étape `cmd` prend en charge les propriétés suivantes :
 
-| | | |
+| Propriété | Type | Obligatoire |
 | -------- | ---- | -------- |
 | `detach` | bool | Facultatif |
 | `disableWorkingDirectoryOverride` | bool | Facultatif |
@@ -278,6 +289,7 @@ Le type d’étape `cmd` prend en charge les propriétés suivantes :
 | `secret` | object | Facultatif |
 | `startDelay` | int (secondes) | Facultatif |
 | `timeout` | int (secondes) | Facultatif |
+| `volumeMount` | object | Facultatif |
 | `when` | [chaîne, chaîne,...] | Facultatif |
 | `workingDirectory` | string | Facultatif |
 
@@ -352,6 +364,19 @@ steps:
       - cmd: $Registry/myimage:mytag
     ```
 
+#### <a name="access-secret-volumes"></a>Accéder aux volumes de secrets
+
+La propriété `volumes` permet de spécifier les volumes et les secrets qu’ils contiennent pour les étapes `build` et `cmd` d’une tâche. Dans chaque étape, une propriété facultative `volumeMounts` liste les volumes et les chemins de conteneurs correspondants à monter dans le conteneur à cette étape. Les secrets sont fournis sous forme de fichiers dans le chemin de montage de chaque volume.
+
+Exécutez une tâche et montez deux secrets dans une étape : l’un stocké dans un coffre de clés et l’autre sur la ligne de commande :
+
+```azurecli
+az acr run -f mounts-secrets.yaml --set-secret mysecret=abcdefg123456 https://github.com/Azure-Samples/acr-tasks.git
+```
+
+<!-- SOURCE: https://github.com/Azure-Samples/acr-tasks/blob/master/mounts-secrets.yaml -->
+[!code-yml[task](~/acr-tasks/mounts-secrets.yaml)]
+
 ## <a name="task-step-properties"></a>Propriétés d’étape de tâche
 
 Chaque type d’étape prend en charge plusieurs propriétés appropriées pour son type. Le tableau suivant définit toutes les propriétés d’étape disponibles. Certains types d’étape ne prennent pas en charge toutes les propriétés. Pour connaître les propriétés disponibles pour chaque type d’étape, consultez les sections de référence sur les types d’étape [cmd](#cmd), [build](#build) et [push](#push).
@@ -379,9 +404,18 @@ Chaque type d’étape prend en charge plusieurs propriétés appropriées pour 
 | `timeout` | int (secondes) | Oui | Nombre maximal de secondes pendant lesquelles une étape peut s’exécuter avant d’être terminée. | 600 |
 | [`when`](#example-when) | [chaîne, chaîne,...] | Oui | Configure les dépendances d’une étape sur une ou plusieurs autres étapes au sein de la tâche. | None |
 | `user` | string | Oui | Nom d’utilisateur ou UID d’un conteneur | None |
-| `workingDirectory` | string | Oui | Définit le répertoire de travail pour une étape. Par défaut, ACR Tasks crée un répertoire racine comme répertoire de travail. Toutefois, si votre build dispose de plusieurs étapes, les étapes précédentes peuvent partager des artefacts avec étapes suivantes en spécifiant le même répertoire de travail. | `/workspace` |
+| `workingDirectory` | string | Oui | Définit le répertoire de travail pour une étape. Par défaut, ACR Tasks crée un répertoire racine comme répertoire de travail. Toutefois, si votre build dispose de plusieurs étapes, les étapes précédentes peuvent partager des artefacts avec étapes suivantes en spécifiant le même répertoire de travail. | `c:\workspace` sous Windows ou `/workspace` sous Linux |
 
-### <a name="examples-task-step-properties"></a>Exemples : propriétés d’étape de tâche
+### <a name="volumemount"></a>volumeMount
+
+L’objet volumeMount comporte les propriétés suivantes.
+
+| Propriété | Type | Facultatif | Description | Valeur par défaut |
+| -------- | ---- | -------- | ----------- | ------- | 
+| `name` | string | Non | Nom du volume à monter. Doit correspondre exactement au nom d’une propriété `volumes`. | None |
+| `mountPath`   | string | non | Chemin absolu pour monter des fichiers dans le conteneur.  | None |
+
+### <a name="examples-task-step-properties"></a>Exemples : Propriétés d’étape de tâche
 
 #### <a name="example-id"></a>Exemple : id
 
@@ -467,6 +501,10 @@ version: v1.1.0
 steps:
     - build: -t $Registry/hello-world:$ID .
 ```
+
+### <a name="runsharedvolume"></a>Run.SharedVolume
+
+Identificateur unique d’un volume partagé accessible par toutes les étapes de la tâche. Le volume est monté sur `c:\workspace` sous Windows ou `/workspace` sous Linux. 
 
 ### <a name="runregistry"></a>Run.Registry
 

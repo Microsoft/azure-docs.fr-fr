@@ -1,33 +1,33 @@
 ---
-title: Utilisation du protocole SAML par Azure AD
+title: Comment la plateforme d’identités Microsoft utilise le protocole SAML
 description: Cet article fournit une vue d’ensemble des profils SAML d’authentification unique et de déconnexion unique dans Azure Active Directory.
 services: active-directory
-author: rwike77
+author: kenwith
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 10/05/2018
-ms.author: ryanwi
+ms.author: kenwith
 ms.custom: aaddev
-ms.reviewer: hirsin
-ms.openlocfilehash: 44d06030d8015d2df9499ce903eb9cb06e1ef27a
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.reviewer: paulgarn
+ms.openlocfilehash: 06f80f94be25e42c9e8f0270e6cb15aca086ae18
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80885648"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994398"
 ---
-# <a name="how-azure-ad-uses-the-saml-protocol"></a>Utilisation du protocole SAML par Azure AD
+# <a name="how-microsoft-identity-platform-uses-the-saml-protocol"></a>Comment la plateforme d’identités Microsoft utilise le protocole SAML
 
-Azure Active Directory (Azure AD) utilise le protocole SAML 2.0 pour permettre aux applications de fournir une expérience d’authentification unique à leurs utilisateurs. Les profils SAML [Authentification unique](single-sign-on-saml-protocol.md) et [Déconnexion unique](single-sign-out-saml-protocol.md) d’Azure AD expliquent comment les assertions, les protocoles et les liaisons SAML sont utilisées dans le service de fournisseur d’identité.
+La plateforme d’identités Microsoft utilise le protocole SAML 2.0 pour permettre aux applications de fournir une expérience d’authentification unique aux utilisateurs. Les profils SAML [Authentification unique](single-sign-on-saml-protocol.md) et [Déconnexion unique](single-sign-out-saml-protocol.md) d’Azure AD expliquent comment les assertions, les protocoles et les liaisons SAML sont utilisées dans le service de fournisseur d’identité.
 
-Le protocole SAML a besoin du fournisseur d’identité (Azure AD) et du fournisseur de services (l’application) pour échanger des informations à leur sujet.
+Le protocole SAML nécessite que le fournisseur d’identité (la plateforme d’identités Microsoft) et le fournisseur de services (l’application) échangent des informations les concernant.
 
 Lorsqu’une application est enregistrée auprès d’Azure AD, le développeur d’applications enregistre les informations liées à la fédération auprès d’Azure AD. Ces informations englobent notamment **l’URI de redirection** et **l’URI des métadonnées** de l’application.
 
-Azure AD utilise **l’URI des métadonnées** du service cloud pour récupérer la clé de signature et l’URI de déconnexion. Le client peut ouvrir l’application dans **Azure AD -> Inscription de l’application** puis, dans **Paramètres -> Propriétés**, il peut mettre à jour l’URL de déconnexion. Ainsi, Azure AD peut envoyer la réponse à l’URL correcte. 
+La plateforme d’identités Microsoft utilise l’**URI de métadonnées** du service cloud pour récupérer la clé de signature et l’URI de déconnexion. Le client peut ouvrir l’application dans **Azure AD -> Inscription de l’application** puis, dans **Paramètres -> Propriétés**, il peut mettre à jour l’URL de déconnexion. De cette façon, la plateforme d’identités Microsoft peut envoyer la réponse à l’URL correcte. 
 
 Azure Active Directory expose les points de terminaison d’authentification unique et de déconnexion unique communs (indépendants du client) et spécifiques au client. Ces URL représentent les emplacements adressables et ne jouent pas simplement le rôle d’identificateurs. Vous pouvez donc accéder au point de terminaison pour lire les métadonnées.
 

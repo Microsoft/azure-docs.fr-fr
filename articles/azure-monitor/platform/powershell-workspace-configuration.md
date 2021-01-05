@@ -5,43 +5,49 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 05/19/2019
-ms.openlocfilehash: 2584cedceab1386cbab9c72bb4b510eebe2122bd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/26/2020
+ms.openlocfilehash: d0bbde0ee4fd0eaf7387abaf6d548dc563e5b715
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80054708"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86515442"
 ---
-# <a name="manage-log-analytics-workspace-in-azure-monitor-using-powershell"></a>Gérer un espace de travail Log Analytics dans Azure Monitor à l’aide de PowerShell
+# <a name="create-and-configure-a-log-analytics-workspace-in-azure-monitor-using-powershell"></a>Créer et configurer un espace de travail Log Analytics dans Azure Monitor à l’aide de PowerShell
+Cet article fournit deux exemples de code qui montrent comment créer et configurer un espace de travail Log Analytics dans Azure Monitor.  
 
-Vous pouvez utiliser les [cmdlets PowerShell Log Analytics](https://docs.microsoft.com/powershell/module/az.operationalinsights/) pour exécuter diverses fonctions au sein d’un espace de travail Log Analytics dans Azure Monitor à partir d’une ligne de commande ou dans le cadre d’un script.  Voici quelques exemples des tâches que vous pouvez effectuer avec PowerShell :
-
-* Créer un espace de travail
-* Ajouter ou supprimer une solution
-* Importer et exporter des recherches enregistrées
-* Créer un groupe d’ordinateurs
-* Activer la collecte de journaux d’activité IIS à partir d’ordinateurs sur lesquels l’agent Windows est installé
-* Collecter les compteurs de performances d’ordinateurs Linux et Windows
-* Collecter les événements de Syslog sur des ordinateurs Linux
-* Collecter les événements des journaux des événements Windows
-* Collecter des journaux des événements personnalisés
-* Ajouter l’agent Log Analytics à une machine virtuelle Azure
-* Configurer Log Analytics pour indexer les données collectées à l’aide des diagnostics Azure
-
-Cet article fournit deux exemples de code qui illustrent quelques-unes des fonctions que vous pouvez effectuer à partir de PowerShell.  Pour obtenir des informations sur d’autres fonctions, consultez [Informations de référence sur les applets de commande PowerShell Log Analytics](https://docs.microsoft.com/powershell/module/az.operationalinsights/) .
 
 > [!NOTE]
 > Avant, Log Analytics s’appelait Operational Insights, ce qui explique pourquoi ce nom est présent dans les applets de commande.
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 Ces exemples fonctionnent avec la version 1.0.0 ou ultérieure du module Az.OperationalInsights.
 
+## <a name="create-workspace"></a>Créer un espace de travail
+L’exemple de script suivant crée un espace de travail sans configuration de source de données. 
 
-## <a name="create-and-configure-a-log-analytics-workspace"></a>Créer et configurer un espace de travail Log Analytics
-L’exemple de script suivant illustre comment :
+```powershell
+$ResourceGroup = "my-resource-group"
+$WorkspaceName = "log-analytics-" + (Get-Random -Maximum 99999) # workspace names need to be unique across all Azure subscriptions - Get-Random helps with this for the example code
+$Location = "westeurope"
+
+# Create the resource group if needed
+try {
+    Get-AzResourceGroup -Name $ResourceGroup -ErrorAction Stop
+} catch {
+    New-AzResourceGroup -Name $ResourceGroup -Location $Location
+}
+
+# Create the workspace
+New-AzOperationalInsightsWorkspace -Location $Location -Name $WorkspaceName -Sku Standard -ResourceGroupName $ResourceGroup
+```
+
+## <a name="create-workspace-and-configure-data-sources"></a>Créer un espace de travail et configurer des sources de données
+
+L’exemple de script suivant crée un espace de travail et configure plusieurs sources de données. Ces sources de données sont requises uniquement si vous analysez des machines virtuelles à l’aide de l’[agent Log Analytics](log-analytics-agent.md).
+
+Le script exécute les fonctions suivantes :
 
 1. Créer un espace de travail
 2. Répertorier les solutions disponibles
@@ -57,10 +63,19 @@ L’exemple de script suivant illustre comment :
 12. Collecter un journal personnalisé
 
 ```powershell
-
-$ResourceGroup = "oms-example"
+$ResourceGroup = "my-resource-group"
 $WorkspaceName = "log-analytics-" + (Get-Random -Maximum 99999) # workspace names need to be unique across all Azure subscriptions - Get-Random helps with this for the example code
 $Location = "westeurope"
+
+# Create the resource group if needed
+try {
+    Get-AzResourceGroup -Name $ResourceGroup -ErrorAction Stop
+} catch {
+    New-AzResourceGroup -Name $ResourceGroup -Location $Location
+}
+
+# Create the workspace
+New-AzOperationalInsightsWorkspace -Location $Location -Name $WorkspaceName -Sku Standard -ResourceGroupName $ResourceGroup
 
 # List of solutions to enable
 $Solutions = "Security", "Updates", "SQLAssessment"
@@ -178,101 +193,32 @@ New-AzOperationalInsightsCustomLogDataSource -ResourceGroupName $ResourceGroup -
 ```
 
 > [!NOTE]
-> Le format du paramètre **CustomLogRawJson** qui définit la configuration d’un journal personnalisé peut être complexe. Utilisez [AzOperationalInsightsDataSource](https://docs.microsoft.com/powershell/module/az.operationalinsights/get-azoperationalinsightsdatasource?view=azps-3.2.0) pour récupérer la configuration d’un journal personnalisé existant. La propriété **Properties** correspond à la configuration requise pour le paramètre **CustomLogRawJson**.
+> Le format du paramètre **CustomLogRawJson** qui définit la configuration d’un journal personnalisé peut être complexe. Utilisez [AzOperationalInsightsDataSource](/powershell/module/az.operationalinsights/get-azoperationalinsightsdatasource?view=azps-3.2.0) pour récupérer la configuration d’un journal personnalisé existant. La propriété **Properties** correspond à la configuration requise pour le paramètre **CustomLogRawJson**.
 
 Dans l’exemple ci-dessus regexDelimiter a été défini comme « \\n » pour le saut de ligne. Le délimiteur de journal peut également être un horodateur.  Voici les formats pris en charge :
 
-| Format | Le format RegEx JSON utilise deux \\ pour chaque \ dans une expression régulière standard, par conséquent si les tests dans une application RegEx réduit \\ à \ | | |
-| --- | --- | --- | --- |
-| `YYYY-MM-DD HH:MM:SS` | `((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]` | | |
-| `M/D/YYYY HH:MM:SS AM/PM` | `(([0-1]\\d)|[0-9])/(([0-3]\\d)|(\\d))/((\\d{2})|(\\d{4}))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]\\s(AM|PM|am|pm)` | | |
+| Format | Le format RegEx JSON utilise deux `\\` pour chaque `\` dans une expression régulière (RegEx) standard. Par conséquent, des tests sont effectués dans une application RegEx réduisent `\\` à `\`. |
+| --- | --- |
+| `YYYY-MM-DD HH:MM:SS` | `((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]` |
+| `M/D/YYYY HH:MM:SS AM/PM` | `(([0-1]\\d)|[0-9])/(([0-3]\\d)|(\\d))/((\\d{2})|(\\d{4}))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]\\s(AM|PM|am|pm)` |
 | `dd/MMM/yyyy HH:MM:SS` | `(([0-2][1-9]|[3][0-1])\\/(Jan|Feb|Mar|May|Apr|Jul|Jun|Aug|Oct|Sep|Nov|Dec|jan|feb|mar|may|apr|jul|jun|aug|oct|sep|nov|dec)\\/((19|20)[0-9][0-9]))\\s((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9])` |
-| `MMM dd yyyy HH:MM:SS` | `(((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)).*?((?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d]).*?((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d]).*?((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?))` | | |
-| `yyMMdd HH:mm:ss` | `([0-9]{2}([0][1-9]|[1][0-2])([0-2][0-9]|[3][0-1])\\s\\s?([0-1]?[0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])` | | |
-| `ddMMyy HH:mm:ss` | `(([0-2][0-9]|[3][0-1])([0][1-9]|[1][0-2])[0-9]{2}\\s\\s?([0-1]?[0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])` | | |
-| `MMM d HH:mm:ss` | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s\\s?([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0-1]?[0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])` | | |
-| `MMM  d HH:mm:ss` <br> deux espaces après MMM | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s\\s([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])` | | |
-| `MMM d HH:mm:ss` | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])` | | |
-| `dd/MMM/yyyy:HH:mm:ss +zzzz` <br> sachant que + est le signe + ou le signe - <br> sachant que zzzz est le décalage de temps | `(([0-2][1-9]|[3][0-1])\\/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\/((19|20)[0-9][0-9]):([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])\\s[\\+|\\-][0-9]{4})` | | |
-| `yyyy-MM-ddTHH:mm:ss` <br> Le T est la lettre T | `((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))T((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]` | | |
+| `MMM dd yyyy HH:MM:SS` | `(((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)).*?((?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d]).*?((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d]).*?((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?))` |
+| `yyMMdd HH:mm:ss` | `([0-9]{2}([0][1-9]|[1][0-2])([0-2][0-9]|[3][0-1])\\s\\s?([0-1]?[0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])` |
+| `ddMMyy HH:mm:ss` | `(([0-2][0-9]|[3][0-1])([0][1-9]|[1][0-2])[0-9]{2}\\s\\s?([0-1]?[0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9])` |
+| `MMM d HH:mm:ss` | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s\\s?([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0-1]?[0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])` |
+| `MMM  d HH:mm:ss` <br> deux espaces après MMM | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s\\s([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])` |
+| `MMM d HH:mm:ss` | `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s([0]?[1-9]|[1-2][0-9]|[3][0-1])\\s([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])` |
+| `dd/MMM/yyyy:HH:mm:ss +zzzz` <br> sachant que + est le signe + ou le signe - <br> sachant que zzzz est le décalage de temps | `(([0-2][1-9]|[3][0-1])\\/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\/((19|20)[0-9][0-9]):([0][0-9]|[1][0-2]):([0-5][0-9]):([0-5][0-9])\\s[\\+|\\-][0-9]{4})` |
+| `yyyy-MM-ddTHH:mm:ss` <br> Le T est la lettre T | `((\\d{2})|(\\d{4}))-([0-1]\\d)-(([0-3]\\d)|(\\d))T((\\d)|([0-1]\\d)|(2[0-4])):[0-5][0-9]:[0-5][0-9]` |
 
-## <a name="configuring-log-analytics-to-send-azure-diagnostics"></a>Configuration de Log Analytics pour envoyer les diagnostics Azure
-Pour une analyse sans agent des ressources Azure, celles-ci doivent avoir les diagnostics Azure activés et configurés pour écrire dans un espace de travail Log Analytics. Cette approche a pour effet d’envoyer des données directement dans l’espace de travail et ne nécessite pas d’écriture de données dans un compte de stockage. Les ressources prises en charge sont les suivantes :
-
-| Type de ressource | Journaux d’activité | Mesures |
-| --- | --- | --- |
-| Passerelles d’application    | Oui | Oui |
-| Comptes Automation     | Oui | |
-| Comptes Batch          | Oui | Oui |
-| Data Lake analytics     | Oui | |
-| Data Lake Store         | Oui | |
-| Pool élastique SQL        |     | Oui |
-| Espace de noms Event Hub     |     | Oui |
-| IoT Hubs                |     | Oui |
-| Key Vault               | Oui | |
-| Équilibreurs de charge          | Oui | |
-| Logic Apps              | Oui | Oui |
-| Network Security Group | Oui | |
-| Cache Azure pour Redis             |     | Oui |
-| Services de recherche         | Oui | Oui |
-| Espace de noms Service Bus   |     | Oui |
-| SQL (v12)               |     | Oui |
-| Sites web               |     | Oui |
-| Batteries de serveurs web        |     | Oui |
-
-Pour plus d’informations sur les métriques disponibles, voir [Mesures prises en charge avec Azure Monitor](../../azure-monitor/platform/metrics-supported.md).
-
-Pour plus d’informations sur les journaux d’activité disponibles, voir [Schéma et services pris en charge pour les journaux de ressources](../../azure-monitor/platform/diagnostic-logs-schema.md).
-
-```powershell
-$workspaceId = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx/resourcegroups/oi-default-east-us/providers/microsoft.operationalinsights/workspaces/rollingbaskets"
-
-$resourceId = "/SUBSCRIPTIONS/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx/RESOURCEGROUPS/DEMO/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/DEMO"
-
-Set-AzDiagnosticSetting -ResourceId $resourceId -WorkspaceId $workspaceId -Enabled $true
-```
-
-Vous pouvez également utiliser l’applet de commande précédente pour collecter des journaux d’activité à partir de ressources qui se trouvent dans différents abonnements. La cmdlet peut fonctionner sur différents abonnements dans la mesure où vous fournissez les ID de la ressource qui crée les journaux d’activité et de l’espace de travail auquel les journaux d’activité sont envoyés.
-
-
-## <a name="configuring-log-analytics-workspace-to-collect-azure-diagnostics-from-storage"></a>Configuration de l’espace de travail Log Analytics pour collecter les diagnostics Azure à partir du stockage
-Pour collecter des données de journal à partir d’une instance en cours d’exécution d’un service cloud classique ou d’un cluster Service Fabric, vous devez commencer par écrire les données dans le Stockage Azure. Vous pouvez ensuite configurer un espace de travail Log Analytics pour collecter les journaux d’activité du compte de stockage. Les ressources prises en charge sont les suivantes :
-
-* Services cloud classiques (rôles de travail et web)
-* Clusters Service Fabric
-
-L’exemple suivant montre comment :
-
-1. Répertorier les emplacements et les comptes de stockage existants à partir desquels l’espace de travail indexe les données
-2. Créer une configuration pour lire à partir d’un compte de stockage
-3. Mettre à jour la configuration créée pour indexer les données à partir d’emplacements supplémentaires
-4. Supprimer la configuration créée
-
-```powershell
-# validTables = "WADWindowsEventLogsTable", "LinuxsyslogVer2v0", "WADServiceFabric*EventTable", "WADETWEventTable"
-$workspace = (Get-AzOperationalInsightsWorkspace).Where({$_.Name -eq "your workspace name"})
-
-# Update these two lines with the storage account resource ID and the storage account key for the storage account you want the workspace to index
-$storageId = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx/resourceGroups/demo/providers/Microsoft.Storage/storageAccounts/wadv2storage"
-$key = "abcd=="
-
-# List existing insights
-Get-AzOperationalInsightsStorageInsight -ResourceGroupName $workspace.ResourceGroupName -WorkspaceName $workspace.Name
-
-# Create a new insight
-New-AzOperationalInsightsStorageInsight -ResourceGroupName $workspace.ResourceGroupName -WorkspaceName $workspace.Name -Name "newinsight" -StorageAccountResourceId $storageId -StorageAccountKey $key -Tables @("WADWindowsEventLogsTable") -Containers @("wad-iis-logfiles")
-
-# Update existing insight
-Set-AzOperationalInsightsStorageInsight -ResourceGroupName $workspace.ResourceGroupName -WorkspaceName $workspace.Name -Name "newinsight" -Tables @("WADWindowsEventLogsTable", "WADETWEventTable") -Containers @("wad-iis-logfiles")
-
-# Remove the insight
-Remove-AzOperationalInsightsStorageInsight -ResourceGroupName $workspace.ResourceGroupName -WorkspaceName $workspace.Name -Name "newinsight"
-
-```
-
-Vous pouvez également utiliser le script précédent pour collecter les journaux d’activité de comptes de stockage dans différents abonnements. Le script peut fonctionner sur différents abonnements dans la mesure où vous fournissez l'ID de ressource du compte de stockage et une clé d'accès correspondante. Lorsque vous modifiez la clé d’accès, vous devez mettre à jour Storage Insight pour avoir la nouvelle clé.
+## <a name="troubleshooting"></a>Dépannage
+Lorsque vous créez un espace de travail qui a été supprimé au cours des 14 derniers jours et qui se trouve dans l’[état de suppression réversible](./delete-workspace.md#soft-delete-behavior), l’opération peut avoir des résultats différents en fonction de la configuration de votre espace de travail :
+1. Si vous fournissez les mêmes nom d’espace de travail, groupe de ressources, abonnement et région que dans l’espace de travail supprimé, votre espace de travail est récupéré avec ses données, sa configuration et ses agents connectés.
+2. Si vous utilisez le même nom d’espace de travail, mais un groupe de ressources, un abonnement ou une région différents, vous recevez un message erreur indiquant que *le nom de l’espace de travail « nom-espace-de-travail » n’est pas unique* ou qu’il y a un *conflit*. Pour annuler la suppression réversible afin de supprimer définitivement votre espace de travail et d’en créer un nouveau sous le même nom, procédez comme suit pour récupérer l’espace de travail avant d’effectuer la suppression définitive :
+   * [Récupérer](./delete-workspace.md#recover-workspace) votre espace de travail
+   * [Supprimer définitivement](./delete-workspace.md#permanent-workspace-delete) votre espace de travail
+   * Créer un espace de travail en reprenant le même nom d’espace de travail
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Passez en revue les applets de commande PowerShell de Log Analytics](https://docs.microsoft.com/powershell/module/az.operationalinsights/) pour obtenir plus d’informations sur l’utilisation de PowerShell pour configurer Log Analytics.
-
+* [Passez en revue les applets de commande PowerShell de Log Analytics](/powershell/module/az.operationalinsights/) pour obtenir plus d’informations sur l’utilisation de PowerShell pour configurer Log Analytics.

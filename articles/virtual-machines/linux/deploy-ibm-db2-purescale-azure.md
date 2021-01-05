@@ -3,15 +3,15 @@ title: Déployer IBM DB2 pureScale sur Azure
 description: Découvrez comment déployer un exemple d’architecture utilisé récemment par une entreprise pour migrer son environnement IBM DB2 s’exécutant sur z/OS vers IBM DB2 pureScale sur Azure.
 author: njray
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/09/2018
 ms.author: edprice
-ms.openlocfilehash: 98e912894a4d93a057a2f6a2153d0690deaed250
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 17ea965758150adb72d8e8f9fee9937bd5387a48
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78968895"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016316"
 ---
 # <a name="deploy-ibm-db2-purescale-on-azure"></a>Déployer IBM DB2 pureScale sur Azure
 
@@ -26,7 +26,7 @@ Pour déployer cette architecture, téléchargez et exécutez le script deploy.s
 Le dépôt comporte également des scripts pour la configuration d’un tableau de bord Grafana. Vous pouvez utiliser le tableau de bord pour interroger Prometheus, le système de supervision et d’alerte open source inclus dans DB2.
 
 > [!NOTE]
-> Le script deploy.sh sur le client crée des clés SSH privées et les transmet au modèle de déploiement via HTTPS. Pour une sécurité accrue, nous vous recommandons d’utiliser [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-overview) pour stocker des secrets, des clés et des mots de passe.
+> Le script deploy.sh sur le client crée des clés SSH privées et les transmet au modèle de déploiement via HTTPS. Pour une sécurité accrue, nous vous recommandons d’utiliser [Azure Key Vault](../../key-vault/general/overview.md) pour stocker des secrets, des clés et des mots de passe.
 
 ## <a name="how-the-deployment-script-works"></a>Fonctionnement du script de déploiement
 

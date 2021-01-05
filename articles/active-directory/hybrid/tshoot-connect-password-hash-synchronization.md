@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 03/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6feed11fcfc597658f3ec148b5dd18bb7e3f8f83
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77271679306b0fbde10c748afc7535f3ad3d0945
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227797"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91317563"
 ---
 # <a name="troubleshoot-password-hash-synchronization-with-azure-ad-connect-sync"></a>Résoudre les problèmes de synchronisation du hachage de mot de passe avec Azure AD Connect Sync
 
@@ -120,7 +120,7 @@ Chaque connecteur Active Directory local a son propre canal de synchronisation d
 
 Si le compte AD DS utilisé par le connecteur Active Directory local pour synchroniser les hachages de mot de passe n’a pas les autorisations appropriées, l’erreur suivante est retournée :
 
-![Informations d’identification incorrectes](./media/tshoot-connect-password-hash-synchronization/phsglobalaccountincorrectpermission.png)
+![Capture d’écran montrant l’erreur renvoyée quand le compte AD DS a un nom d’utilisateur ou un mot de passe incorrect.](./media/tshoot-connect-password-hash-synchronization/phsglobalaccountincorrectpermission.png)
 
 #### <a name="incorrect-ad-ds-account-username-or-password"></a>Nom d’utilisateur ou mot de passe du compte AD DS incorrect
 
@@ -288,12 +288,15 @@ Si vous avez utilisé une installation personnalisée, définissez les autorisat
 6. Les contrôleurs de domaine sont-ils accessibles pour Azure AD Connect ? Si le serveur Connect ne peut pas se connecter à tous les contrôleurs de domaine, vous devez configurer **Utiliser uniquement le contrôleur de domaine préféré**.  
     
     ![Contrôleur de domaine utilisé par le connecteur Active Directory](./media/tshoot-connect-password-hash-synchronization/preferreddc.png)  
-    
+
 7. Revenez à **Synchronization Service Manager** et **Configurer une partition d’annuaire**. 
  
 8. Sélectionnez votre domaine dans **Sélectionner les partitions d’annuaire**, cochez la case **Utiliser uniquement les contrôleurs de domaine préférés**, puis cliquez sur **Configurer**. 
 
 9. Dans la liste, entrez les contrôleurs de domaine que Connect doit utiliser pour la synchronisation de mot de passe. La même liste est également utilisée pour importer et exporter. Effectuez ces étapes pour tous vos domaines.
+
+> [!NOTE]
+> Pour appliquer ces modifications, redémarrez le service **Microsoft Azure AD Sync** (ADSync).
 
 10. Si le script indique qu’il n’y a aucune pulsation, exécutez le script [Déclencher une synchronisation complète de tous les mots de passe](#trigger-a-full-sync-of-all-passwords).
 
@@ -335,7 +338,7 @@ Vous pouvez résoudre facilement les problèmes de synchronisation du hachage de
 
     i. Cliquez sur **Propriétés de l’objet métaverse** pour afficher une liste d’attributs de l’utilisateur.  
 
-    ![Informations de métaverse](./media/tshoot-connect-password-hash-synchronization/mvpasswordsync.png)  
+    ![Capture d’écran montrant la liste des attributs utilisateur pour les propriétés d’objet métaverse.](./media/tshoot-connect-password-hash-synchronization/mvpasswordsync.png)  
 
     Vérifiez qu’aucun attribut **cloudFiltered** n’est présent. Assurez-vous que les attributs de domaine (domainFQDN et domainNetBios) ont les valeurs attendues.
 

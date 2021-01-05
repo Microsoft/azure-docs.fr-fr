@@ -1,24 +1,24 @@
 ---
-title: Déplacer une adresse IP publique Azure vers une autre région Azure à l’aide d’Azure PowerShell
-description: Utilisez un modèle Azure Resource Manager pour déplacer une adresse IP publique d’une région Azure vers une autre à l’aide d’Azure PowerShell.
+title: Déplacer la configuration des adresses IP publiques Azure vers une autre région Azure via Azure PowerShell
+description: Utilisez un modèle Azure Resource Manager pour déplacer la configuration d’adresses IP publiques d’une région Azure vers une autre à l’aide d’Azure PowerShell.
 author: asudbring
 ms.service: virtual-network
 ms.subservice: ip-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/29/2019
 ms.author: allensu
-ms.openlocfilehash: 76924705ff801ce3be6a5c76f7ae276bdbf93def
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4f72c22ee26375e025af7b3a391fdd45187e7041
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82147877"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006266"
 ---
-# <a name="move-azure-public-ip-to-another-region-using-azure-powershell"></a>Déplacer une adresse IP publique Azure vers une autre région à l’aide d’Azure PowerShell
+# <a name="move-azure-public-ip-configuration-to-another-region-using-azure-powershell"></a>Déplacer la configuration d’adresses IP publiques Azure vers une autre région à l’aide d’Azure PowerShell
 
-Il existe différents scénarios dans lesquels vous pouvez être amené à déplacer vos adresses IP publiques Azure existantes d’une région à une autre. Par exemple, vous pouvez avoir besoin de créer une adresse IP publique avec la même configuration et la même référence SKU à des fins de test. Vous pouvez également déplacer une adresse IP publique vers une autre région dans le cadre de la planification de la reprise d’activité après sinistre.
+Il existe différents scénarios dans lesquels vous pouvez être amené à déplacer les configurations de vos adresses IP publiques Azure existantes d’une région à une autre. Par exemple, vous pouvez avoir besoin de créer une adresse IP publique avec la même configuration et la même référence SKU à des fins de test. Vous pouvez également déplacer une configuration d’adresses IP publiques vers une autre région dans le cadre de la planification de la récupération d’urgence.
 
-Les adresses IP publiques Azure sont spécifiques à une région et ne peuvent pas être déplacées d’une région vers une autre. Toutefois, vous pouvez utiliser un modèle Azure Resource Manager pour exporter la configuration existante d’une adresse IP publique.  Vous pouvez ensuite déplacer la ressource dans une autre région en exportant l’adresse IP publique vers un modèle, en modifiant les paramètres pour qu’ils correspondent à la région de destination, puis en déployant le modèle dans la nouvelle région.  Pour plus d’informations sur Resource Manager et les modèles, consultez [Exporter des groupes de ressources vers des modèles](https://docs.microsoft.com/azure/azure-resource-manager/manage-resource-groups-powershell#export-resource-groups-to-templates)
+**Les adresses IP publiques Azure sont spécifiques à une région et ne peuvent pas être déplacées d’une région à une autre.** Toutefois, vous pouvez utiliser un modèle Azure Resource Manager pour exporter la configuration existante d’une adresse IP publique.  Vous pouvez ensuite déplacer la ressource dans une autre région en exportant l’adresse IP publique vers un modèle, en modifiant les paramètres pour qu’ils correspondent à la région de destination, puis en déployant le modèle dans la nouvelle région.  Pour plus d’informations sur Resource Manager et les modèles, consultez [Exporter des groupes de ressources vers des modèles](https://docs.microsoft.com/azure/azure-resource-manager/manage-resource-groups-powershell#export-resource-groups-to-templates)
 
 
 ## <a name="prerequisites"></a>Prérequis
@@ -62,7 +62,7 @@ Les étapes suivantes montrent comment préparer l’adresse IP publique pour le
    Export-AzResourceGroup -ResourceGroupName <source-resource-group-name> -Resource $sourceVNETID -IncludeParameterDefaultValue
    ```
 
-4. Le fichier téléchargé est nommé d’après le groupe de ressources à partir duquel la ressource a été exportée.  Recherchez le fichier nommé **\<resource-group-name>.json** qui a été exporté à partir de la commande, et ouvrez-le dans l’éditeur de votre choix :
+4. Le fichier téléchargé est nommé d’après le groupe de ressources à partir duquel la ressource a été exportée.  Recherchez le fichier **\<resource-group-name>.json** qui a été exporté à partir de la commande et ouvrez-le dans l’éditeur de votre choix :
    
    ```azurepowershell
    notepad <source-resource-group-name>.json
@@ -118,7 +118,7 @@ Les étapes suivantes montrent comment préparer l’adresse IP publique pour le
     ```
 8. Vous pouvez également changer d’autres paramètres dans le modèle ; ces paramètres sont facultatifs en fonction de vos besoins :
 
-    * **Référence SKU** : vous pouvez permuter la référence SKU de l’adresse IP publique dans la configuration entre les valeurs basic et standard en modifiant la propriété **sku** > **name** dans le fichier **\<resource-group-name>.json** :
+    * **Référence SKU** : vous pouvez permuter la SKU de l’adresse IP publique dans la configuration entre les valeurs « basic » et « standard » en modifiant la propriété **sku** > **name** dans le fichier **\<resource-group-name>.json** :
 
          ```json
             "resources": [
@@ -170,7 +170,7 @@ Les étapes suivantes montrent comment préparer l’adresse IP publique pour le
     ```azurepowershell-interactive
     New-AzResourceGroup -Name <target-resource-group-name> -location <target-region>
     ```
-11. Déployez le fichier **\<nom_groupe_de_ressources>.json** modifié sur le groupe de ressources créé à l’étape précédente à l’aide de [New-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-2.6.0) :
+11. Déployez le fichier **\<resource-group-name>.json** modifié sur le groupe de ressources créé à l’étape précédente à l’aide de [New-AzResourceGroupDeployment](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-2.6.0) :
 
     ```azurepowershell-interactive
 

@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 04/03/2020
 ms.author: trbye
-ms.openlocfilehash: f663c9af8c352d0170c633fe76b3fbc5268aad1e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9356cbb6eb210d6745d90e8ad001917e73592cd3
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81400032"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96021982"
 ---
 # <a name="about-the-speech-sdk"></a>À propos du kit SDK Speech
 
@@ -29,19 +29,54 @@ Le SDK Speech expose de nombreuses fonctionnalités du service Speech, mais pas 
 
 ### <a name="speech-to-text"></a>Reconnaissance vocale
 
-La [reconnaissance vocale](speech-to-text.md) transcrit des flux audio en texte que vos applications, outils ou appareils peuvent utiliser ou afficher. Utilisez la reconnaissance vocale avec [LUIS (Language Understanding Intelligent Service)](../luis/index.yml) pour déduire les intentions de l’utilisateur à partir des transcriptions et agir sur des commandes vocales. Utilisez la [Traduction vocale](speech-translation.md) pour traduire une entrée vocale dans une autre langue en un seul appel. Pour plus d'informations, consultez [Les bases de la reconnaissance vocale](speech-to-text-basics.md).
+La [reconnaissance vocale](speech-to-text.md) transcrit des flux audio en texte que vos applications, outils ou appareils peuvent utiliser ou afficher. Utilisez la reconnaissance vocale avec [LUIS (Language Understanding Intelligent Service)](../luis/index.yml) pour déduire les intentions de l’utilisateur à partir des transcriptions et agir sur des commandes vocales. Utilisez la [Traduction vocale](speech-translation.md) pour traduire une entrée vocale dans une autre langue en un seul appel. Pour plus d'informations, consultez [Les bases de la reconnaissance vocale](./get-started-speech-to-text.md).
+
+**Reconnaissance vocale (SR), Liste d’expressions, Intention, Traduction et Conteneurs locaux** sont disponibles sur les plateformes suivantes :
+
+  - C++/Windows & Linux & macOS
+  - C#(Framework & .NET Core)/Windows & UWP & Unity & Xamarin & Linux & macOS
+  - Java (JRE et Android)
+  - JavaScript (navigateur et NodeJS)
+  - Python
+  - Swift
+  - Objective-C  
+  - Go (SR uniquement)
 
 ### <a name="text-to-speech"></a>Synthèse vocale
 
 La [Synthèse vocale ](text-to-speech.md) convertit le texte en discours synthétisé proche de celui d'un être humain. Le texte d'entrée correspond à des littéraux de chaîne ou utilise [SSML (Speech Synthesis Markup Language)](speech-synthesis-markup.md). Pour plus d'informations sur les voix standard ou neurales, consultez [Langage de synthèse vocale et prise en charge vocale](language-support.md#text-to-speech).
 
+La **Synthèse vocale (TTS)** est disponible sur les plateformes suivantes :
+
+  - C++/Windows & Linux
+  - C#/Windows & UWP & Unity
+  - Java (JRE et Android)
+  - Python
+  - Swift
+  - Objective-C
+  - L’API REST TTS peut être utilisée dans tous les autres cas.
+
 ### <a name="voice-assistants"></a>Assistants vocaux
 
-Les assistants vocaux qui utilisent le SDK Speech permettent aux développeurs de créer des interfaces conversationnelles naturelles pour leurs applications et leurs expériences. Le service d'assistance vocale permet une interaction rapide et fiable entre un appareil et un assistant. L'implémentation utilise le canal Direct Line Speech de Bot Framework ou le service intégré Commandes personnalisées (préversion) pour la réalisation des tâches. En outre, des assistants vocaux peuvent être créés à l'aide du [portail Custom Voice](https://aka.ms/customvoice) pour offrir une expérience vocale unique.
+Les [assistants vocaux](voice-assistants.md) qui utilisent le SDK Speech permettent aux développeurs de créer des interfaces conversationnelles naturelles pour leurs applications et leurs expériences. Le service d'assistance vocale permet une interaction rapide et fiable entre un appareil et un assistant. L'implémentation utilise le canal Direct Line Speech de Bot Framework ou le service intégré Commandes personnalisées (préversion) pour la réalisation des tâches. En outre, des assistants vocaux peuvent utiliser des voix personnalisées dans le [Portail Custom Voice](https://aka.ms/customvoice) pour ajouter une expérience de sortie vocale unique.
+
+Les **Assistants vocaux** sont disponibles sur les plateformes suivantes :
+
+  - C++/Windows & Linux & macOS
+  - C#/Windows
+  - Java/Windows & Linux & macOS & Android (SDK Speech Devices)
 
 #### <a name="keyword-spotting"></a>Identification de mot clé
 
-Le SDK Speech prend en charge le concept d'[identification de mot clé](speech-devices-sdk-create-kws.md). Il s'agit d'identifier un mot clé dans le discours, puis de déclencher l'action correspondante. Par exemple, « Bonjour Cortana » active de l'Assistant Cortana.
+Le SDK Speech prend en charge le concept d'[identification de mot clé](./custom-keyword-basics.md). Il s'agit d'identifier un mot clé dans le discours, puis de déclencher l'action correspondante. Par exemple, « Bonjour Cortana » active de l'Assistant Cortana.
+
+L’**Identification de mot clé (KWS)** est disponible sur les plateformes suivantes :
+
+  - C++/Windows & Linux
+  - C#/Windows & Linux
+  - Python/Windows & Linux
+  - Java/Windows & Linux & Android (SDK Speech Devices)
+  - La fonctionnalité d’identification de mot clé (KWS) peut fonctionner avec n’importe quel type de microphone. Toutefois, sa prise en charge officielle est actuellement limitée aux réseaux de microphones présents dans le matériel Azure Kinect DK ou dans le Kit de développement logiciel (SDK) Speech Devices
 
 ### <a name="meeting-scenarios"></a>Scénarios de réunion
 
@@ -51,9 +86,20 @@ Le SDK Speech est parfait pour transcrire des scénarios de réunion, que ce soi
 
 La [Transcription de conversation](conversation-transcription.md) permet la reconnaissance vocale en temps réel (et asynchrone), l'identification de l'orateur et l'attribution de phrases à chaque orateur (également appelée *diarisation*). Il est parfait pour la transcription de rencontres en personne, avec possibilité de distinguer les orateurs.
 
+La **Transcription de conversation** est disponible sur les plateformes suivantes :
+
+  - C++/Windows & Linux
+  - C# (Framework & .NET Core)/Windows & UWP & Linux
+  - Java/Windows & Linux & Android (SDK Speech Devices)
+
 #### <a name="multi-device-conversation"></a>Conversation multi-appareil
 
 Avec la [Conversation multi-appareils](multi-device-conversation.md), connectez plusieurs appareils ou clients à une conversation pour envoyer des messages vocaux ou textuels, avec une prise en charge aisée de la transcription et de la traduction.
+
+La **Conversation multi-appareils** est disponible sur les plateformes suivantes :
+
+  - C++/Windows
+  - C# (Framework & .NET Core)/Windows
 
 ### <a name="custom--agent-scenarios"></a>Scénarios personnalisés / d'agent
 
@@ -63,9 +109,17 @@ Le SDK Speech peut être utilisé pour transcrire des scénarios de centre d'app
 
 La [Transcription de centre d'appels](call-center-transcription.md) est un scénario courant de reconnaissance vocale pour la transcription de gros volumes de données téléphoniques qui peuvent provenir de différents systèmes, tels que la réponse vocale interactive (RVI). Les derniers modèles de reconnaissance vocale du service Speech excellent à retranscrire ces données de téléphonie, même quand celles-ci sont difficiles à comprendre pour un humain.
 
+La **Transcription de centre d'appels** est disponible par le biais du service Reconnaissance vocale par lots via son API REST et peut être utilisée dans n’importe quelle situation.
+
 ### <a name="codec-compressed-audio-input"></a>Entrée audio compressée par codec
 
 Plusieurs des langages de programmation du SDK Speech prennent en charge les flux d'entrée audio compressés par codec. Pour plus d'informations, consultez <a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/how-to-use-codec-compressed-audio-input-streams" target="_blank">Utiliser des formats d'entrée audio compressés<span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+
+L’**entrée audio compressée par codec** est disponible sur les plateformes suivantes :
+
+  - C++/Linux
+  - C#/Linux
+  - Java/Linux, Android et iOS
 
 ## <a name="rest-api"></a>API REST
 
@@ -125,5 +179,5 @@ La synthèse vocale personnalisée, également appelée Custom Voice, est un ens
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Obtenir votre abonnement d’essai gratuit au service Speech](https://azure.microsoft.com/try/cognitive-services/)
-* [Découvrir comment utiliser la reconnaissance vocale en C#](quickstarts/speech-to-text-from-microphone.md?pivots=programming-language-csharp&tabs=dotnet)
+* [Créez un compte Azure gratuit](https://azure.microsoft.com/free/cognitive-services/)
+* [Découvrir comment utiliser la reconnaissance vocale en C#](./get-started-speech-to-text.md?pivots=programming-language-csharp&tabs=dotnet)

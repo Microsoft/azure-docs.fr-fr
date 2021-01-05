@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 02/14/2020
-ms.openlocfilehash: 44368ab90abd189c6a8a0792494828c87142eb20
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 095fd0b534c0dffaf80d2464fb9734f295335b84
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77672393"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87317176"
 ---
 # <a name="collect-data-from-azure-diagnostics-extension-to-azure-monitor-logs"></a>Collecter des données de l’extension de diagnostic Azure et les enregistrer dans des journaux d’activité Azure Monitor
 L’extension de diagnostic Azure est un [agent présent dans Azure Monitor](agents-overview.md) qui collecte des données d’analyse dans le système d’exploitation invité de ressources de calcul Azure, notamment des machines virtuelles. Cet article explique comment collecter des données recueillies par l’extension de diagnostic dans Stockage Azure et les enregistrer des journaux d’activité Azure Monitor.
@@ -63,6 +63,7 @@ Après environ 30 minutes, vous pourrez voir les données du compte de stockage
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Collecter les journaux d’activité et les indicateurs de performance des services Azure](collect-azure-metrics-logs.md) pour les services pris en charge par Azure.
-* [Activer les solutions](../../azure-monitor/insights/solutions.md) pour fournir des informations sur les données.
-* [Utiliser les requêtes de recherche](../../azure-monitor/log-query/log-query-overview.md) pour analyser les données.
+* [Collecter les journaux d’activité et les indicateurs de performance des services Azure](./resource-logs.md#send-to-log-analytics-workspace) pour les services pris en charge par Azure.
+* [Activer les solutions](../insights/solutions.md) pour fournir des informations sur les données.
+* [Utiliser les requêtes de recherche](../log-query/log-query-overview.md) pour analyser les données.
+

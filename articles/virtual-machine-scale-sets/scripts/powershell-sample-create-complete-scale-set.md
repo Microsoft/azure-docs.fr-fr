@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: powershell
 ms.date: 05/29/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: df2c1b10f0d63e3cafbd6f20805a296710219461
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: d37f5f624459db6bc336884987a16c60503492a8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83699553"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078501"
 ---
 # <a name="create-a-complete-virtual-machine-scale-set-with-powershell"></a>Créer un groupe de machines virtuelles identiques complet à l’aide de PowerShell
 
@@ -61,4 +61,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 | [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

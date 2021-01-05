@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/18/2018
 ms.author: alkohli
-ms.openlocfilehash: 88b903d68e4398b4e30b0b7435279c29bee6cd6b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 709794dcccf9b100cbb11381ac34cfb86238b22b
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228085"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94533989"
 ---
 # <a name="install-update-11-on-your-storsimple-virtual-array"></a>Installer Update 1.1 sur StorSimple Virtual Array
 
@@ -101,26 +101,26 @@ Cette procédure prend environ quatre minutes. Effectuez les opérations suivan
 
 1. Dans l’interface utilisateur web locale, accédez à **Maintenance** > **Mise à jour logicielle**. Prenez note de la version du logiciel que vous exécutez. **Effectuez cette mise à jour uniquement si vous exécutez la version Update 1 (10.0.10296.0). Si vous exécutez Update 0.6, [installez Update 1](storsimple-virtual-array-install-update-1.md) sur votre appareil avant d’appliquer Update 1.1.**
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-11/update1m.png)
+    ![Capture d’écran montrant les Mises à jour logicielles sélectionnées dans le menu Maintenance.](./media/storsimple-virtual-array-install-update-11/update1m.png)
 
 2. Dans le **chemin d’accès au fichier de mise à jour**, entrez le nom du fichier de mise à jour ou de correctif. Vous pouvez également accéder au fichier d'installation de la mise à jour ou du correctif si celui-ci est placé sur un partage réseau. Cliquez sur **Appliquer**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-11/update2m.png)
+    ![Capture d’écran montrant la zone de texte Mise à jour du chemin du fichier sur la page Mise à jour logicielle.](./media/storsimple-virtual-array-install-update-11/update2m.png)
 
 3. Un avertissement s’affiche. Puisque la baie virtuelle est un appareil à nœud unique, l’application de la mise à jour entraîne le redémarrage de l’appareil et provoque un temps d’arrêt. Cliquez sur l’icône en forme de coche.
    
-   ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-11/update3m.png)
+   ![Capture d’écran montrant une boîte de dialogue avertissant d’un temps d’arrêt.](./media/storsimple-virtual-array-install-update-11/update3m.png)
 
 4. La mise à jour démarre. Une fois l’appareil correctement mis à jour, il est redémarré. L’interface utilisateur locale n’est pas accessible pendant cet intervalle.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-11/update5m.png)
+    ![Capture d’écran montrant un message confirmant la réussite de la mise à jour.](./media/storsimple-virtual-array-install-update-11/update5m.png)
 
 5. Une fois le redémarrage effectué, vous êtes redirigé vers la page **Se connecter** . Pour vérifier que le logiciel de l’appareil a été mis à jour, accédez à **Maintenance** > **Mise à jour logicielle** dans l’interface utilisateur web locale. La version logicielle doit être **10.0.0.0.0.10307** pour Update 1.1.
    
    > [!NOTE]
    > L’affichage des versions logicielles diffère légèrement entre l’interface utilisateur web locale et le portail Azure. Par exemple, la même version s’affiche comme **10.0.0.0.0.10307** dans l’interface utilisateur web locale et comme **10.0.10307.0** dans le portail Azure.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update-11/update6m.png)
+    ![Capture d’écran montrant la page des mises à jour logicielles avec la version actuelle du logiciel.](./media/storsimple-virtual-array-install-update-11/update6m.png)
 
 6. Répétez les étapes 2 à 4 pour installer le correctif de sécurité Windows à l’aide du fichier `Windows8.1-KB4284815-x64`. Le groupe virtuel redémarre après l’installation. Vous devez ensuite vous connecter à l’interface utilisateur web locale.
 

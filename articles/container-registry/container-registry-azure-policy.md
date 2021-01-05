@@ -2,32 +2,29 @@
 title: Conformité avec Azure Policy
 description: Attribuer des stratégies intégrées dans Azure Policy pour auditer la conformité de vos registres de conteneurs Azure
 ms.topic: article
-ms.date: 02/26/2020
-ms.openlocfilehash: a2bfdc18f4bbf16fe8fa6bcbcba7bab18aedabf1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/11/2020
+ms.openlocfilehash: 26c56616bcc411063d0ebfda28ba1e6fdf44c7fb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82144994"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89291011"
 ---
 # <a name="audit-compliance-of-azure-container-registries-using-azure-policy"></a>Auditer la conformité des registres de conteneurs Azure à l’aide d’Azure Policy
 
 [Azure Policy](../governance/policy/overview.md) est un service d’Azure que vous utilisez pour créer, affecter et gérer des stratégies. Ces stratégies appliquent différentes règles et effets sur vos ressources, qui restent donc conformes aux normes et aux contrats de niveau de service de l’entreprise.
 
-Cet article présente les stratégies intégrées (préversion) pour Azure Container Registry. Utilisez ces stratégies pour auditer la conformité des registres nouveaux et existants.
+Cet article présente les stratégies intégrées pour Azure Container Registry. Utilisez ces stratégies pour auditer la conformité des registres nouveaux et existants.
 
 L’utilisation d’Azure Policy est gratuite.
-
-> [!IMPORTANT]
-> Actuellement, cette fonctionnalité est uniquement disponible en tant que version préliminaire. Les préversions sont à votre disposition, à condition que vous acceptiez les [conditions d’utilisation supplémentaires][terms-of-use]. Certains aspects de cette fonctionnalité sont susceptibles d’être modifiés avant la mise à disposition générale.
 
 ## <a name="built-in-policy-definitions"></a>Définitions de stratégie intégrées
 
 Les définitions de stratégies intégrées suivantes sont spécifiques à Azure Container Registry :
 
-[!INCLUDE [azure-policy-samples-policies-container-registry](../../includes/policy/samples/bycat/policies-container-registry.md)]
+[!INCLUDE [azure-policy-reference-policies-container-registry](../../includes/policy/reference/bycat/policies-container-registry.md)]
 
-Consultez aussi la définition de stratégie réseau intégrée : [[préversion] Container Registry doit utiliser un point de terminaison de service de réseau virtuel](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fc4857be7-912a-4c75-87e6-e30292bcdf78).
+Voir aussi la définition de stratégie réseau intégrée : [Container Registry doit utiliser un point de terminaison de service de réseau virtuel.](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fc4857be7-912a-4c75-87e6-e30292bcdf78)
 
 ## <a name="assign-policies"></a>Attribuer des stratégies
 
@@ -48,7 +45,10 @@ De nombreuses raisons peuvent expliquer une ressource non conforme. Pour en dét
 
 1. Sélectionnez **Tous les services** et recherchez **Stratégie**.
 1. Sélectionnez **Conformité**.
-1. Utilisez les filtres pour limiter les états de conformité ou pour rechercher des stratégies ![Policy compliance in portal](./media/container-registry-azure-policy/azure-policy-compliance.png).
+1. Utilisez les filtres pour limiter les états de conformité ou pour rechercher des stratégies.
+
+    ![Conformité de la stratégie dans le portail](./media/container-registry-azure-policy/azure-policy-compliance.png)
+    
 1. Sélectionnez une stratégie pour passer en revue l’ensemble des détails et des événements relatifs à la conformité. Si vous le souhaitez, sélectionnez un registre spécifique pour la conformité des ressources.
 
 ### <a name="policy-compliance-in-the-azure-cli"></a>Conformité de la stratégie dans Azure CLI
@@ -64,8 +64,8 @@ Exemple de sortie :
 ```
 Name                                                                                   ID
 -------------------------------------------------------------------------------------  --------------------------------------------------------------------------------------------------------------------------------
-[Preview]: Container Registries should not allow unrestricted network access           /subscriptions/<subscriptionID>/providers/Microsoft.Authorization/policyAssignments/b4faf132dc344b84ba68a441
-[Preview]: Container Registries should be encrypted with a Customer-Managed Key (CMK)  /subscriptions/<subscriptionID>/providers/Microsoft.Authorization/policyAssignments/cce1ed4f38a147ad994ab60a
+Container Registries should not allow unrestricted network access           /subscriptions/<subscriptionID>/providers/Microsoft.Authorization/policyAssignments/b4faf132dc344b84ba68a441
+Container Registries should be encrypted with a Customer-Managed Key (CMK)  /subscriptions/<subscriptionID>/providers/Microsoft.Authorization/policyAssignments/cce1ed4f38a147ad994ab60a
 ```
 
 Exécutez ensuite [az policy state list](/cli/azure/policy/state#az-policy-state-list) pour retourner l’état de conformité au format JSON pour toutes les ressources sous un ID de stratégie spécifique :
@@ -87,12 +87,8 @@ az policy state list \
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur les [définitions](../governance/policy/concepts/definition-structure.md) et les [effets](../governance/policy/concepts/effects.md) Azure Policy
+* En savoir plus sur les [définitions](../governance/policy/concepts/definition-structure.md) et les [effets](../governance/policy/concepts/effects.md) Azure Policy.
 
-* Créer une [définition de stratégie personnalisée](../governance/policy/tutorials/create-custom-policy-definition.md)
+* Créez une [définition de stratégie personnalisée](../governance/policy/tutorials/create-custom-policy-definition.md).
 
-* En savoir plus sur les [capacités de gouvernance](../governance/index.yml) dans Azure
-
-
-<!-- LINKS - External -->
-[terms-of-use]: https://azure.microsoft.com/support/legal/preview-supplemental-terms/
+* En savoir plus sur les [capacités de gouvernance](../governance/index.yml) dans Azure.

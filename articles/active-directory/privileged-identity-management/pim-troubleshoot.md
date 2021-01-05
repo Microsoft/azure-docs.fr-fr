@@ -7,18 +7,18 @@ author: curtand
 manager: daveba
 editor: ''
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.subservice: pim
 ms.date: 10/18/2019
 ms.author: curtand
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 474f2634e6f7ddc1840548c39ae86cb54c3bf08e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dcbebcb32e912abdf0112007c743c6890fae36e4
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78299667"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92372393"
 ---
 # <a name="troubleshoot-a-problem-with-privileged-identity-management"></a>Détecter un problème avec Privileged Identity Management
 
@@ -36,10 +36,10 @@ Ce problème peut se produire lorsque le rôle administrateur de l’accès util
 
 ### <a name="resolution"></a>Résolution
 
-Attribuez le rôle d’administrateur de l’accès utilisateur au nom de principal du service Privileged Identity Management (MS – PIM) au niveau de l’abonnement. Cette attribution doit autoriser le service Privileged Identity Management à accéder aux ressources Azure. Le rôle peut être attribué au niveau d’un groupe d’administration ou au niveau de l’abonnement, en fonction de vos besoins. Pour plus d’informations sur les principaux de service, consultez [Attribuer une application à un rôle](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application).
+Attribuez le rôle d’administrateur de l’accès utilisateur au nom de principal du service Privileged Identity Management (MS – PIM) au niveau de l’abonnement. Cette attribution doit autoriser le service Privileged Identity Management à accéder aux ressources Azure. Le rôle peut être attribué au niveau d’un groupe d’administration ou au niveau de l’abonnement, en fonction de vos besoins. Pour plus d’informations sur les principaux de service, consultez [Attribuer une application à un rôle](../develop/howto-create-service-principal-portal.md#assign-a-role-to-the-application).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Exigences relatives aux licences pour l’utilisation de Privileged Identity Management](subscription-requirements.md)
-- [Sécurisation de l’accès privilégié pour les déploiements hybrides et cloud dans Azure AD](../users-groups-roles/directory-admin-roles-secure.md?toc=%2fazure%2factive-directory%2fprivileged-identity-management%2ftoc.json)
+- [Sécurisation de l’accès privilégié pour les déploiements hybrides et cloud dans Azure AD](../roles/security-planning.md?toc=%2fazure%2factive-directory%2fprivileged-identity-management%2ftoc.json)
 - [Déployer Privileged Identity Management](pim-deployment-plan.md)

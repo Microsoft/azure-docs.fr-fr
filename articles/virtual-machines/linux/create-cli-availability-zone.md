@@ -3,15 +3,15 @@ title: Créer une machine virtuelle Linux en zone avec Azure CLI
 description: Créer une machine virtuelle Linux dans une zone de disponibilité avec l’interface de ligne de commande Azure
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 04/05/2018
 ms.author: cynthn
-ms.openlocfilehash: 568bac3c6c80173e38d7b15de17e90cb4fbdab80
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 964d2b5d89fd91aca68e9b47b0049529fe284848
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208956"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016401"
 ---
 # <a name="create-a-linux-virtual-machine-in-an-availability-zone-with-the-azure-cli"></a>Créer une machine virtuelle Linux dans une zone de disponibilité avec l’interface de ligne de commande Azure
 
@@ -23,7 +23,7 @@ Vérifiez que vous avez installé la dernière version [d’Azure CLI](/cli/azur
 
 
 ## <a name="check-vm-sku-availability"></a>Vérifier la disponibilité de la référence SKU de machine virtuelle
-La disponibilité des tailles de machine virtuelle, ou des références SKU, peut varier selon la région et le fuseau horaire. Pour vous aider à planifier l’utilisation des Zones de disponibilité, vous pouvez répertorier les références SKU de machine virtuelle disponibles par zone et par région Azure. Cela permet de s’assure que vous choisissez une taille de machine virtuelle appropriée et obtenez la résilience de votre choix entre les zones. Pour plus d’informations sur les différents types de machine virtuelle et les tailles, consultez [Vue d’ensemble des tailles de machine virtuelle](sizes.md).
+La disponibilité des tailles de machine virtuelle, ou des références SKU, peut varier selon la région et le fuseau horaire. Pour vous aider à planifier l’utilisation des Zones de disponibilité, vous pouvez répertorier les références SKU de machine virtuelle disponibles par zone et par région Azure. Cela permet de s’assure que vous choisissez une taille de machine virtuelle appropriée et obtenez la résilience de votre choix entre les zones. Pour plus d’informations sur les différents types de machine virtuelle et les tailles, consultez [Vue d’ensemble des tailles de machine virtuelle](../sizes.md).
 
 Vous pouvez afficher les références SKU de machine virtuelle disponibles avec la commande [az vm list-skus](/cli/azure/vm). L’exemple suivant répertorie les références SKU de machine virtuelle disponibles dans la région *eastus2* :
 
@@ -188,8 +188,4 @@ Le résultat montre que l’adresse IP se trouve dans la même zone de disponibi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](availability.md) des machines virtuelles Azure.
-
-
-
-
+Dans cet article, vous avez appris à créer une machine virtuelle dans une zone de disponibilité. Apprenez-en davantage sur la [disponibilité](../availability.md) des machines virtuelles Azure.

@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 53ea54406969d246845018191960b13b8ee9a08a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 806f175db2abefd6bebcd875c7adf4eb22f57f58
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61129761"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89257362"
 ---
-# <a name="h264-multiple-bitrate-1080p-audio-51"></a>H264 – Vitesse de transmission multiple – 1 080 pixels – Audio 5.1 
+# <a name="h264-multiple-bitrate-1080p-audio-51"></a>H264 – Vitesse de transmission multiple – 1 080 pixels – Audio 5.1
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 `Media Encoder Standard` définit un ensemble de présélections d’encodage à utiliser lors de la création des travaux d’encodage. Vous pouvez utiliser un `preset name` afin de spécifier le format dans lequel vous souhaitez encoder votre fichier multimédia. Sinon, vous pouvez créer vos propres présélections basées sur JSON ou XML (à l’aide de l’encodage UTF-8 ou UTF-16). Vous pouvez ensuite transmettre la présélection personnalisée à l’encodeur. Pour obtenir la liste de tous les noms de présélections pris en charge par cet encodeur `Media Encoder Standard`, consultez [Présélections de tâches pour Media Encoder Standard](media-services-mes-presets-overview.md).  
   

@@ -1,51 +1,45 @@
 ---
 title: Configurer des identités managées sur une machine virtuelle Azure à l’aide d’Azure CLI - Azure AD
-description: Instructions détaillées pour configurer des identités affectées par le système et l’utilisateur sur une machine virtuelle Azure en utilisant Azure CLI.
+description: Instructions pas à pas pour configurer des identités managées affectées par le système et l’utilisateur sur une machine virtuelle Azure en utilisant Azure CLI.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 09/26/2019
-ms.author: markvi
+ms.date: 12/15/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2f2efaceefc53b3c0b5dfd899baf9fd30fdf9a76
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 90b18c2556796f23be0c1135b0bad0d53368a46d
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224905"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590951"
 ---
 # <a name="configure-managed-identities-for-azure-resources-on-an-azure-vm-using-azure-cli"></a>Configurer des identités managées pour ressources Azure sur une machine virtuelle Azure en utilisant Azure CLI
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
-Les identités managées pour ressources Azure fournissent des services Azure avec une identité managée automatiquement dans Azure Active Directory. Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code. 
+Les identités managées pour ressources Azure fournissent automatiquement aux services Azure une identité managée dans Azure Active Directory. Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code. 
 
 Cet article explique comment effectuer les opérations suivantes d’identités managées pour ressources Azure sur une machine virtuelle Azure en utilisant Azure CLI :
 
 - Activer et désactiver l’identité managée affectée par le système sur une machine virtuelle Azure
 - Ajouter et supprimer une identité managée affectée par l’utilisateur sur une machine virtuelle Azure
 
-## <a name="prerequisites"></a>Conditions préalables requises
+Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
 
-- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#how-does-the-managed-identities-for-azure-resources-work)** .
-- Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
-- Pour exécuter les exemples de script d’Azure CLI, vous disposez de trois options :
-    - Utilisez [Azure Cloud Shell](../../cloud-shell/overview.md) à partir du portail Azure (voir section suivante).
-    - Utilisez l’interface intégrée Azure Cloud Shell via le bouton « Essayer », situé dans le coin supérieur droit de chaque bloc de code.
-    - [Installez la dernière version d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) si vous préférez utiliser une console CLI locale. 
-      
-      > [!NOTE]
-      > Les commandes ont été mises à jour pour refléter la dernière version [d’Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).     
+## <a name="prerequisites"></a>Prérequis
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+- Si vous n’êtes pas familiarisé avec les identités managées pour les ressources Azure, consultez [Que sont les identités managées pour les ressources Azure ?](overview.md) Pour en savoir plus sur les types d’identités managées affectées par le système et par l’utilisateur, consultez [Types d’identités managées](overview.md#managed-identity-types).
+
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="system-assigned-managed-identity"></a>Identité managée affectée par le système
 
@@ -53,21 +47,15 @@ Dans cette section, vous allez découvrir comment activer et désactiver l’ide
 
 ### <a name="enable-system-assigned-managed-identity-during-creation-of-an-azure-vm"></a>Activer une identité managée affectée par le système lors de la création d’une machine virtuelle Azure
 
-Pour créer une machine virtuelle Azure avec l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
+Pour créer une machine virtuelle Azure avec l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur de machine virtuelle](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
 
-1. Si vous utilisez l’interface de ligne de commande Azure dans une console locale, commencez par vous connecter à Azure avec [az login](/cli/azure/reference-index#az-login). Utilisez un compte associé à l’abonnement Azure sur lequel vous souhaitez déployer la machine virtuelle :
-
-   ```azurecli-interactive
-   az login
-   ```
-
-2. Créez un [groupe de ressources](../../azure-resource-manager/management/overview.md#terminology) pour l’imbrication et le déploiement de votre machine virtuelle et de ses ressources connexes, à l’aide de la commande [az group create](/cli/azure/group/#az-group-create). Vous pouvez ignorer cette étape si vous possédez déjà le groupe de ressources que vous souhaitez utiliser à la place :
+1. Créez un [groupe de ressources](../../azure-resource-manager/management/overview.md#terminology) pour l’imbrication et le déploiement de votre machine virtuelle et de ses ressources connexes, à l’aide de la commande [az group create](/cli/azure/group/#az-group-create). Vous pouvez ignorer cette étape si vous possédez déjà le groupe de ressources que vous souhaitez utiliser à la place :
 
    ```azurecli-interactive 
    az group create --name myResourceGroup --location westus
    ```
 
-3. Créez une machine virtuelle à l’aide de la commande [az vm create](/cli/azure/vm/#az-vm-create). L’exemple suivant crée une machine virtuelle nommée *myVM* avec une identité managée affectée par le système, comme le demande le paramètre `--assign-identity`. Les paramètres `--admin-username` et `--admin-password` spécifient le nom d’utilisateur et le mot de passe d’administration du compte pour la connexion à la machine virtuelle. Mettez à jour ces valeurs en fonction de votre environnement : 
+1. Créez une machine virtuelle à l’aide de la commande [az vm create](/cli/azure/vm/#az-vm-create). L’exemple suivant crée une machine virtuelle nommée *myVM* avec une identité managée affectée par le système, comme le demande le paramètre `--assign-identity`. Les paramètres `--admin-username` et `--admin-password` spécifient le nom d’utilisateur et le mot de passe d’administration du compte pour la connexion à la machine virtuelle. Mettez à jour ces valeurs en fonction de votre environnement : 
 
    ```azurecli-interactive 
    az vm create --resource-group myResourceGroup --name myVM --image win2016datacenter --generate-ssh-keys --assign-identity --admin-username azureuser --admin-password myPassword12
@@ -75,7 +63,7 @@ Pour créer une machine virtuelle Azure avec l’identité managée affectée pa
 
 ### <a name="enable-system-assigned-managed-identity-on-an-existing-azure-vm"></a>Activer une identité managée affectée par le système sur une machine virtuelle Azure existante
 
-Pour activer l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
+Pour activer l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
 
 1. Si vous utilisez l’interface de ligne de commande Azure dans une console locale, commencez par vous connecter à Azure avec [az login](/cli/azure/reference-index#az-login). Utilisez un compte associé à l’abonnement Azure qui contient la machine virtuelle.
 
@@ -91,7 +79,7 @@ Pour activer l’identité managée affectée par le système sur une machine vi
 
 ### <a name="disable-system-assigned-identity-from-an-azure-vm"></a>Désactiver l’identité affectée par le système d’une machine virtuelle Azure
 
-Pour désactiver l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
+Pour désactiver l’identité managée affectée par le système sur une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor).  Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
 
 Si vous disposez d’une machine virtuelle qui n’a plus besoin de l’identité affectée par le système, mais a toujours besoin d’identités affectées par l’utilisateur, utilisez la commande suivante :
 
@@ -111,11 +99,12 @@ az vm update -n myVM -g myResourceGroup --set identity.type="none"
 
 ## <a name="user-assigned-managed-identity"></a>Identité managée affectée par l’utilisateur
 
-Dans cette section, vous allez découvrir comment ajouter et supprimer une identité managée affectée par l’utilisateur sur une machine virtuelle Azure en utilisant Azure CLI.
+Dans cette section, vous allez découvrir comment ajouter et supprimer une identité managée affectée par l’utilisateur sur une machine virtuelle Azure en utilisant Azure CLI. Si vous créez votre identité managée affectée par l’utilisateur dans un autre groupe de ressources que votre machine virtuelle. Vous devrez utiliser l’URL de votre identité managée pour l’affecter à votre machine virtuelle.
+Autrement dit, --identities "/subscriptions/<SUBID>/resourcegroups/<RESROURCEGROUP>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<NOM_IDENTITÉ_AFFECTÉE_PAR_L’UTILISATEUR>"
 
 ### <a name="assign-a-user-assigned-managed-identity-during-the-creation-of-an-azure-vm"></a>Attribuer une identité managée affectée par l’utilisateur lors de la création d’une machine virtuelle Azure
 
-Pour affecter une identité managée affectée par l’utilisateur à une machine virtuelle lors de sa création, votre compte a besoin de l’affectation de rôle [Opérateur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) et [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-operator). Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
+Pour affecter une identité managée affectée par l’utilisateur à une machine virtuelle lors de sa création, votre compte a besoin de l’affectation de rôle [Opérateur d’identité managée](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) et [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-operator). Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
 
 1. Vous pouvez ignorer cette étape si vous disposez déjà d’un groupe de ressources que vous souhaitez utiliser. Créez un [groupe de ressources](~/articles/azure-resource-manager/management/overview.md#terminology) pour contenir et déployer votre identité managée affectée par l’utilisateur en utilisant la commande [az group create](/cli/azure/group/#az-group-create). N’oubliez pas de remplacer les valeurs des paramètres `<RESOURCE GROUP>` et `<LOCATION>` par vos propres valeurs. :
 
@@ -155,12 +144,12 @@ Pour affecter une identité managée affectée par l’utilisateur à une machin
 
 ### <a name="assign-a-user-assigned-managed-identity-to-an-existing-azure-vm"></a>Attribuer une identité managée affectée par l’utilisateur à une machine virtuelle Azure existante
 
-Pour affecter une identité managée affectée par l’utilisateur à une machine virtuelle, votre compte a besoin de l’affectation de rôle [Opérateur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) et [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-operator). Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
+Pour affecter une identité managée affectée par l’utilisateur à une machine virtuelle, votre compte a besoin de l’affectation de rôle [Opérateur d’identité managée](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) et [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-operator). Aucune attribution de rôle d’annuaire Azure AD supplémentaire n’est requise.
 
 1. Créez une identité attribuée à l’utilisateur avec la commande [az identity create](/cli/azure/identity#az-identity-create).  Le paramètre `-g` spécifie le groupe de ressources où l’identité managée affectée par l’utilisateur est créée, et le paramètre `-n` spécifie son nom. N’oubliez pas de remplacer les valeurs des paramètres `<RESOURCE GROUP>` et `<USER ASSIGNED IDENTITY NAME>` par vos propres valeurs :
 
     > [!IMPORTANT]
-    > La création d’identités managées affectées par l’utilisateur avec des caractères spéciaux (tel un trait de soulignement) dans le nom n’est pas prise en charge actuellement. Utilisez des caractères alphanumériques. Revenez ultérieurement pour des mises à jour.  Pour plus d’informations, consultez [FAQ et problèmes connus](known-issues.md)
+    > La création d’identités managées affectées par l’utilisateur avec des caractères spéciaux (tel un trait de soulignement) dans le nom n’est pas prise en charge actuellement. Utilisez des caractères alphanumériques. Revenez ultérieurement pour des mises à jour.  Pour plus d’informations, voir [FAQ et problèmes connus](known-issues.md).
 
     ```azurecli-interactive
     az identity create -g <RESOURCE GROUP> -n <USER ASSIGNED IDENTITY NAME>
@@ -182,7 +171,7 @@ Pour affecter une identité managée affectée par l’utilisateur à une machin
    }
    ```
 
-2. Attribuez l’identité managée affectée par l’utilisateur à votre machine virtuelle en utilisant la commande [az vm identity assign](/cli/azure/vm). N’oubliez pas de remplacer les valeurs des paramètres `<RESOURCE GROUP>` et `<VM NAME>` par vos propres valeurs. `<USER ASSIGNED IDENTITY NAME>` est la propriété `name` de ressource de l’identité managée affectée par l’utilisateur, telle que créée à l’étape précédente :
+2. Attribuez l’identité managée affectée par l’utilisateur à votre machine virtuelle en utilisant la commande [az vm identity assign](/cli/azure/vm). N’oubliez pas de remplacer les valeurs des paramètres `<RESOURCE GROUP>` et `<VM NAME>` par vos propres valeurs. `<USER ASSIGNED IDENTITY NAME>` est la propriété `name` de ressource de l’identité managée affectée par l’utilisateur, telle que créée à l’étape précédente. Si vous avez créé votre identité managée affectée par l’utilisateur dans un autre groupe de ressources que votre machine virtuelle. Vous devrez utiliser l’URL de votre identité managée.
 
     ```azurecli-interactive
     az vm identity assign -g <RESOURCE GROUP> -n <VM NAME> --identities <USER ASSIGNED IDENTITY>
@@ -190,7 +179,7 @@ Pour affecter une identité managée affectée par l’utilisateur à une machin
 
 ### <a name="remove-a-user-assigned-managed-identity-from-an-azure-vm"></a>Supprimer une identité managée affectée par l’utilisateur d’une machine virtuelle Azure
 
-Pour supprimer une identité affectée par l’utilisateur à une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor). 
+Pour supprimer une identité affectée par l’utilisateur à une machine virtuelle, votre compte a besoin de l’affectation de rôle [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor). 
 
 S’il s’agit de la seule identité managée affectée par l’utilisateur attribuée à la machine virtuelle, `UserAssigned` est supprimé de la valeur du type d’identité.  N’oubliez pas de remplacer les valeurs des paramètres `<RESOURCE GROUP>` et `<VM NAME>` par vos propres valeurs. `<USER ASSIGNED IDENTITY>` sera la propriété `name` de l’identité managée affectée par l’utilisateur, qui est accessible dans la section identity de la machine virtuelle en utilisant la commande `az vm identity show` :
 
@@ -217,21 +206,4 @@ az vm update -n myVM -g myResourceGroup --set identity.type='SystemAssigned' ide
 - [Vue d’ensemble des identités managées pour les ressources Azure](overview.md)
 - Pour obtenir les guides de démarrages rapides complets sur la création de machines virtuelles Azure, consultez : 
   - [Créer une machine virtuelle Windows avec l’interface Azure CLI](../../virtual-machines/windows/quick-create-cli.md)  
-  - [Créer une machine virtuelle Linux avec Azure CLI](../../virtual-machines/linux/quick-create-cli.md) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  - [Créer une machine virtuelle Linux avec Azure CLI](../../virtual-machines/linux/quick-create-cli.md)

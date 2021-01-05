@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 0755c01fe8e13e8e39c0b453198f2b67c51a2bc4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc42c22579346c272ee5a6f41147e6b5b09643ba
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177262"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95563386"
 ---
 #### <a name="to-download-hotfixes"></a>Pour télécharger des correctifs logiciels
 
@@ -52,18 +52,18 @@ Procédez comme suit pour installer et vérifier les correctifs logiciels en mod
    
     Vous trouverez ci-dessous un exemple de sortie pour l’installation des mises à jour prioritaires. Pour la première mise à jour de commande, vous devez pointer vers le fichier spécifique.
    
-        ```
-        Controller0>Start-HcsHotfix -Path \\10.100.100.100\share
-        \FirstOrderUpdate\HcsSoftwareUpdate.exe -Credential contoso\John
+    ```output
+    Controller0>Start-HcsHotfix -Path \\10.100.100.100\share
+    \FirstOrderUpdate\HcsSoftwareUpdate.exe -Credential contoso\John
    
-        Confirm
+    Confirm
    
-        This operation starts the hotfix installation and could reboot one or
-        both of the controllers. If the device is serving I/Os, these will not
-        be disrupted. Are you sure you want to continue?
-        [Y] Yes [N] No [?] Help (default is "Y"): Y
-   
-        ```
+    This operation starts the hotfix installation and could reboot one or
+    both of the controllers. If the device is serving I/Os, these will not
+    be disrupted. Are you sure you want to continue?
+    [Y] Yes [N] No [?] Help (default is "Y"): Y
+
+    ```
 4. Tapez **Y** lorsque vous êtes invité à confirmer l’installation du correctif.
 5. Contrôlez la mise à jour à l'aide de l'applet de commande `Get-HcsUpdateStatus` . La mise à jour se termine d’abord sur le contrôleur passif. Une fois le contrôleur passif mis à jour, un basculement se produit et la mise à jour est ensuite appliquée à l’autre contrôleur. La mise à jour est terminée lorsque les deux contrôleurs sont mis à jour.
    
@@ -101,7 +101,7 @@ Procédez comme suit pour installer et vérifier les correctifs logiciels en mod
    * `FriendlySoftwareVersion: StorSimple 8000 Series Update 4.0`
    * `HcsSoftwareVersion: 6.3.9600.17820`
    
-     Si le numéro de version ne change pas après la mise à jour, cela indique que le correctif n’a pas pu s’appliquer. Dans ce cas, contactez le [Support Microsoft](../articles/storsimple/storsimple-contact-microsoft-support.md) pour obtenir une assistance supplémentaire.
+     Si le numéro de version ne change pas après la mise à jour, cela indique que le correctif n’a pas pu s’appliquer. Dans ce cas, contactez le [Support Microsoft](../articles/storsimple/storsimple-8000-contact-microsoft-support.md) pour obtenir une assistance supplémentaire.
      
      > [!IMPORTANT]
      > Vous devez redémarrer le contrôleur actif via la cmdlet `Restart-HcsController` avant d’appliquer la prochaine mise à jour.
@@ -128,26 +128,28 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
     `Enter-HcsMaintenanceMode`
    
     Voici un exemple de sortie obtenue.
+
+    ```output
+    Controller0>Enter-HcsMaintenanceMode
+    Checking device state...
    
-        Controller0>Enter-HcsMaintenanceMode
-        Checking device state...
+    In maintenance mode, your device will not service IOs and will be disconnected from the Microsoft Azure StorSimple Manager service. Entering maintenance mode will end the current session and reboot both controllers, which takes a few minutes to complete. Are you sure you want to enter maintenance mode?
+    [Y] Yes [N] No (Default is "Y"): Y
    
-        In maintenance mode, your device will not service IOs and will be disconnected from the Microsoft Azure StorSimple Manager service. Entering maintenance mode will end the current session and reboot both controllers, which takes a few minutes to complete. Are you sure you want to enter maintenance mode?
-        [Y] Yes [N] No (Default is "Y"): Y
+    -----------------------MAINTENANCE MODE------------------------
+    Microsoft Azure StorSimple Appliance Model 8600
+    Name: Update4-8600-mystorsimple
+    Copyright (C) 2014 Microsoft Corporation. All rights reserved.
+    You are connected to Controller0 - Passive
+    ---------------------------------------------------------------
    
-        -----------------------MAINTENANCE MODE------------------------
-        Microsoft Azure StorSimple Appliance Model 8600
-        Name: Update4-8600-mystorsimple
-        Copyright (C) 2014 Microsoft Corporation. All rights reserved.
-        You are connected to Controller0 - Passive
-        ---------------------------------------------------------------
-   
-        Serial Console Menu
-        [1] Log in with full access
-        [2] Log into peer controller with full access
-        [3] Connect with limited access
-        [4] Change language
-        Please enter your choice>
+    Serial Console Menu
+    [1] Log in with full access
+    [2] Log into peer controller with full access
+    [3] Connect with limited access
+    [4] Change language
+    Please enter your choice>
+    ```
    
     Les deux contrôleurs redémarrent alors en mode maintenance.
 2. Pour installer la mise à jour du microprogramme de disque, tapez :
@@ -155,14 +157,17 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
     `Start-HcsHotfix -Path <path to update file> -Credential <credentials in domain\username format>`
    
     Voici un exemple de sortie obtenue.
-   
-        Controller1>Start-HcsHotfix -Path \\10.100.100.100\share\ThirdOrderUpdates\ -Credential contoso\john
-        Enter Password:
-        WARNING: In maintenance mode, hotfixes should be installed on each controller sequentially. After the hotfix is installed on this controller, install it on the peer controller.
-        Confirm
-        This operation starts a hotfix installation and could reboot one or both of the controllers. By installing new updates you agree to, and accept any additional terms associated with, the new functionality listed in the release notes (https://go.microsoft.com/fwLink/?LinkID=613790). Are you sure you want to continue?
-        [Y] Yes [N] No (Default is "Y"): Y
-        WARNING: Installation is currently in progress. This operation can take several minutes to complete.
+
+    ```output
+    Controller1>Start-HcsHotfix -Path \\10.100.100.100\share\ThirdOrderUpdates\ -Credential contoso\john
+    Enter Password:
+    WARNING: In maintenance mode, hotfixes should be installed on each controller sequentially. After the hotfix is installed on this controller, install it on the peer controller.
+    Confirm
+    This operation starts a hotfix installation and could reboot one or both of the controllers. By installing new updates you agree to, and accept any additional terms associated with, the new functionality listed in the release notes (https://go.microsoft.com/fwLink/?LinkID=613790). Are you sure you want to continue?
+    [Y] Yes [N] No (Default is "Y"): Y
+    WARNING: Installation is currently in progress. This operation can take several minutes to complete.
+    ```
+
 3. Surveillez la progression de l’installation à l’aide de la commande `Get-HcsUpdateStatus` . La mise à jour est terminée quand `RunInProgress` passe à `False`.
 4. Une fois l’installation terminée, le contrôleur sur lequel le correctif logiciel en mode Maintenance a été installé redémarre. Connectez-vous avec l’option 1, **Se connecter avec accès total**, et vérifiez la version du microprogramme de disque. Tapez :
    
@@ -173,91 +178,92 @@ Pour installer les mises à jour du microprogramme de disque, suivez les instruc
    `XMGJ, XGEG, KZ50, F6C2, VR08, N002, 0106`
    
    Voici un exemple de sortie obtenue.
-   
-       -----------------------MAINTENANCE MODE------------------------
-       Microsoft Azure StorSimple Appliance Model 8600
-       Name: Update4-8600-mystorsimple
-       Software Version: 6.3.9600.17820
-       Copyright (C) 2014 Microsoft Corporation. All rights reserved.
-       You are connected to Controller1
-       ---------------------------------------------------------------
-   
-       Controller1>Get-HcsFirmwareVersion
-   
-       Controller0 : TalladegaFirmware
-           ActiveBIOS:0.45.0010
-              BackupBIOS:0.45.0006
-              MainCPLD:17.0.000b
-              ActiveBMCRoot:2.0.001F
-              BackupBMCRoot:2.0.001F
-              BMCBoot:2.0.0002
-              LsiFirmware:20.00.04.00
-              LsiBios:07.37.00.00
-              Battery1Firmware:06.2C
-              Battery2Firmware:06.2C
-              DomFirmware:X231600
-              CanisterFirmware:3.5.0.56
-              CanisterBootloader:5.03
-              CanisterConfigCRC:0x9134777A
-              CanisterVPDStructure:0x06
-              CanisterGEMCPLD:0x19
-              CanisterVPDCRC:0x142F7DC2
-              MidplaneVPDStructure:0x0C
-              MidplaneVPDCRC:0xA6BD4F64
-              MidplaneCPLD:0x10
-              PCM1Firmware:1.00|1.05
-              PCM1VPDStructure:0x05
-              PCM1VPDCRC:0x41BEF99C
-              PCM2Firmware:1.00|1.05
-              PCM2VPDStructure:0x05
-              PCM2VPDCRC:0x41BEF99C
 
-           EbodFirmware
-              CanisterFirmware:3.5.0.56
-              CanisterBootloader:5.03
-              CanisterConfigCRC:0xB23150F8
-              CanisterVPDStructure:0x06
-              CanisterGEMCPLD:0x14
-              CanisterVPDCRC:0xBAA55828
-              MidplaneVPDStructure:0x0C
-              MidplaneVPDCRC:0xA6BD4F64
-              MidplaneCPLD:0x10
-              PCM1Firmware:3.11
-              PCM1VPDStructure:0x03
-              PCM1VPDCRC:0x6B58AD13
-              PCM2Firmware:3.11
-              PCM2VPDStructure:0x03
-              PCM2VPDCRC:0x6B58AD13
+    ```output
+    -----------------------MAINTENANCE MODE------------------------
+    Microsoft Azure StorSimple Appliance Model 8600
+    Name: Update4-8600-mystorsimple
+    Software Version: 6.3.9600.17820
+    Copyright (C) 2014 Microsoft Corporation. All rights reserved.
+    You are connected to Controller1
+    ---------------------------------------------------------------
+   
+    Controller1>Get-HcsFirmwareVersion
+   
+    Controller0 : TalladegaFirmware
+        ActiveBIOS:0.45.0010
+           BackupBIOS:0.45.0006
+           MainCPLD:17.0.000b
+           ActiveBMCRoot:2.0.001F
+           BackupBMCRoot:2.0.001F
+           BMCBoot:2.0.0002
+           LsiFirmware:20.00.04.00
+           LsiBios:07.37.00.00
+           Battery1Firmware:06.2C
+           Battery2Firmware:06.2C
+           DomFirmware:X231600
+           CanisterFirmware:3.5.0.56
+           CanisterBootloader:5.03
+           CanisterConfigCRC:0x9134777A
+           CanisterVPDStructure:0x06
+           CanisterGEMCPLD:0x19
+           CanisterVPDCRC:0x142F7DC2
+           MidplaneVPDStructure:0x0C
+           MidplaneVPDCRC:0xA6BD4F64
+           MidplaneCPLD:0x10
+           PCM1Firmware:1.00|1.05
+           PCM1VPDStructure:0x05
+           PCM1VPDCRC:0x41BEF99C
+           PCM2Firmware:1.00|1.05
+           PCM2VPDStructure:0x05
+           PCM2VPDCRC:0x41BEF99C
 
-           DisksFirmware
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              SmrtStor:TXA2D20800GA6XYR:KZ50
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
-              WD:WD4001FYYG-01SL3:VR08
+        EbodFirmware
+           CanisterFirmware:3.5.0.56
+           CanisterBootloader:5.03
+           CanisterConfigCRC:0xB23150F8
+           CanisterVPDStructure:0x06
+           CanisterGEMCPLD:0x14
+           CanisterVPDCRC:0xBAA55828
+           MidplaneVPDStructure:0x0C
+           MidplaneVPDCRC:0xA6BD4F64
+           MidplaneCPLD:0x10
+           PCM1Firmware:3.11
+           PCM1VPDStructure:0x03
+           PCM1VPDCRC:0x6B58AD13
+           PCM2Firmware:3.11
+           PCM2VPDStructure:0x03
+           PCM2VPDCRC:0x6B58AD13
+
+        DisksFirmware
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           SmrtStor:TXA2D20800GA6XYR:KZ50
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+           WD:WD4001FYYG-01SL3:VR08
+    ```
    
     Exécutez la commande `Get-HcsFirmwareVersion` sur le deuxième contrôleur pour vérifier que la version du logiciel a été mise à jour. Vous pouvez à présent quitter le mode Maintenance. Pour ce faire, tapez la commande suivante pour chaque contrôleur d’appareil :
    
    `Exit-HcsMaintenanceMode`
 
 5. Les contrôleurs redémarrent quand vous quittez le mode maintenance. Une fois que les mises à jour du microprogramme de disque ont été appliquées avec succès et que l’appareil a quitté le mode Maintenance, revenez au portail Azure Classic. Remarque : il se peut que le portail n’affiche pas les mises à jour installées en mode maintenance pendant 24 heures.
-

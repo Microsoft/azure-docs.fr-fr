@@ -7,12 +7,13 @@ ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 1/28/2020
-ms.openlocfilehash: 5cde80bf3205557884dfe8f2b8f5e79031bbca69
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4adf0b8a7c12abed9689b9ac0cc9c5d5c8c3f980
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612059"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94488432"
 ---
 # <a name="read-input-in-any-format-using-net-custom-deserializers"></a>Lire les entrées dans n’importe quel format avec des désérialiseurs .NET personnalisés
 
@@ -112,7 +113,7 @@ message MessageBodyProto {
 }
 ```
 
-L’exécution de `protoc.exe` à partir du NuGet **Google.Protobuf.Tools** génère un fichier. cs avec la définition. Le fichier généré n’est pas montré ici.
+L’exécution de `protoc.exe` à partir du NuGet **Google.Protobuf.Tools** génère un fichier. cs avec la définition. Le fichier généré n’est pas montré ici. Vous devez vous vérifier que la version de Protobuf NuGet utilisée dans votre projet Stream Analytics correspond à la version de Protobuf qui a servi à générer l’entrée. 
 
 L’extrait de code suivant est l’implémentation du désérialiseur en supposant que le fichier généré est inclus dans le projet. Cette implémentation est simplement un wrapper léger sur le fichier généré.
 
@@ -200,7 +201,7 @@ namespace ExampleCustomCode.Serialization
 
 ## <a name="serialization-format-for-rest-apis"></a>Format de sérialisation pour les API REST
 
-Chaque entrée de Stream Analytics a un **format de sérialisation**. Pour plus d’informations sur les options d’entrée, consultez la documentation relative à [l’API REST d’entrée](https://docs.microsoft.com/rest/api/streamanalytics/stream-analytics-input).
+Chaque entrée de Stream Analytics a un **format de sérialisation**. Pour plus d’informations sur les options d’entrée, consultez la documentation relative à [l’API REST d’entrée](/rest/api/streamanalytics/2016-03-01/inputs).
 
 Le code JavaScript suivant est un exemple de format de sérialisation du désérialiseur .NET lors de l’utilisation de l’API REST :
 
@@ -238,7 +239,7 @@ Vous pouvez faire une [demande de prise en charge](https://aka.ms/ccodereqregion
 
 ### <a name="when-will-this-feature-be-available-in-all-azure-regions"></a>Quand cette fonctionnalité sera-t-elle disponible dans toutes les régions Azure ?
 
-Cette fonctionnalité est disponible dans [6 régions](https://docs.microsoft.com/azure/stream-analytics/custom-deserializer-examples#region-support). Si vous êtes intéressé par l’utilisation de cette fonctionnalité dans une autre région, vous pouvez [envoyer une demande](https://aka.ms/ccodereqregion). La prise en charge de toutes les régions Azure fait partie de la feuille de route.
+Cette fonctionnalité est disponible dans [6 régions](#region-support). Si vous êtes intéressé par l’utilisation de cette fonctionnalité dans une autre région, vous pouvez [envoyer une demande](https://aka.ms/ccodereqregion). La prise en charge de toutes les régions Azure fait partie de la feuille de route.
 
 ### <a name="can-i-access-metadatapropertyvalue-from-my-inputs-similar-to-getmetadatapropertyvalue-function"></a>Puis-je accéder à MetadataPropertyValue à partir de mes entrées similaires à la fonction GetMetadataPropertyValue ?
 
@@ -248,9 +249,9 @@ Cette fonctionnalité n'est pas prise en charge. Si vous avez besoin de cette fo
 
 Une fois que vous avez implémenté votre désérialiseur, vous pouvez aider d’autres personnes en le partageant avec la communauté. Envoyez votre code au [référentiel GitHub d’Azure Stream Analytics](https://github.com/Azure/azure-stream-analytics/tree/master/CustomDeserializers).
 
-### <a name="what-are-the-other-limitation-of-using-custom-deserializers-in-stream-analytics"></a>Quelles sont les autres limites de l’utilisation de désérialiseurs personnalisés dans Stream Analytics ?
+### <a name="what-are-the-other-limitations-of-using-custom-deserializers-in-stream-analytics"></a>Quelles sont les autres limites de l’utilisation de désérialiseurs personnalisés dans Stream Analytics ?
 
-Si votre entrée est au format Protobuf avec un schéma contenant le type MapField, vous ne pourrez pas implémenter de désérialiseur personnalisé. Nous travaillons actuellement sur la prise en charge de ce type.
+Si votre entrée est au format Protobuf avec un schéma contenant le type `MapField`, vous ne pourrez pas implémenter de désérialiseur personnalisé. En outre, les désérialiseurs personnalisés ne prennent pas en charge les exemples de données ou les données d’aperçu. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

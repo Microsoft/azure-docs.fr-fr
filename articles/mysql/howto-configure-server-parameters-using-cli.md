@@ -1,21 +1,25 @@
 ---
 title: Configurer les paramètres de serveur - Azure CLI - Azure Database pour MySQL
 description: Cet article décrit comment configurer les paramètres de service dans Azure Database pour MySQL à l’aide de l’utilitaire en ligne de commande Azure CLI.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.devlang: azurecli
-ms.topic: conceptual
-ms.date: 4/1/2020
-ms.openlocfilehash: ca5f80e57f90e4dd26ac2e4a175998ff3de2c102
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.topic: how-to
+ms.date: 10/1/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: a5a84d93400e713f66545387fd146148ee735c06
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80546434"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541536"
 ---
-# <a name="customize-server-parameters-by-using-azure-cli"></a>Personnaliser les paramètres de serveur à l’aide d’Azure CLI
+# <a name="configure-server-parameters-in-azure-database-for-mysql-using-the-azure-cli"></a>Configurer les paramètres de serveur dans Azure Database pour MySQL avec l’interface de ligne de commande Azure
 Vous pouvez répertorier, afficher et mettre à jour les paramètres de configuration d’un serveur Azure Database pour MySQL à l’aide d’Azure CLI, l’utilitaire en ligne de commande Azure. Un sous-ensemble de configurations de moteur est exposé au niveau du serveur et peut être modifié. 
+
+>[!Note]
+> Les paramètres de serveur peuvent être mis à jour globalement au niveau du serveur à partir d’[Azure CLI](./howto-configure-server-parameters-using-cli.md), de [PowerShell](./howto-configure-server-parameters-using-powershell.md) ou du [portail Azure](./howto-server-parameters.md).
 
 ## <a name="prerequisites"></a>Prérequis
 Pour parcourir ce guide pratique, vous avez besoin des éléments suivants :
@@ -50,6 +54,14 @@ Si vous souhaitez réinitialiser la valeur d’un paramètre de configuration, o
 az mysql server configuration set --name slow_query_log --resource-group myresourcegroup --server mydemoserver
 ```
 Ce code réinitialise la configuration **slow\_query\_log** à la valeur par défaut **OFF**. 
+
+## <a name="setting-parameters-not-listed"></a>Configurer les paramètres non listés
+Si le paramètre de serveur que vous souhaitez mettre à jour n’est pas listé dans le portail Azure, vous pouvez éventuellement définir le paramètre au niveau de la connexion avec `init_connect`. Cela définit les paramètres de serveur pour chaque client qui se connecte. 
+
+Mettez à jour le paramètre **init\_connect** de configuration du serveur du serveur **mydemoserver.mysql.database.azure.com** sous le groupe de ressources **myresourcegroup** pour définir les valeurs comme le jeu de caractères.
+```azurecli-interactive
+az mysql server configuration set --name init_connect --resource-group myresourcegroup --server mydemoserver --value "SET character_set_client=utf8;SET character_set_database=utf8mb4;SET character_set_connection=latin1;SET character_set_results=latin1;"
+```
 
 ## <a name="working-with-the-time-zone-parameter"></a>Utilisation avec le paramètre de fuseau horaire
 

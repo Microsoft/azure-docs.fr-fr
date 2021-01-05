@@ -3,18 +3,18 @@ title: 'Démarrage rapide : créer un cluster AKS (Azure Kubernetes Service)'
 description: Découvrez comment créer rapidement un cluster Kubernetes à l’aide d’un modèle Azure Resource Manager et déployer une application dans AKS (Azure Kubernetes Service)
 services: container-service
 ms.topic: quickstart
-ms.date: 04/19/2019
-ms.custom: mvc,subject-armqs
-ms.openlocfilehash: bbe5d9ac21ae9e03d629a1667567a915c8653a8a
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.date: 09/11/2020
+ms.custom: mvc,subject-armqs, devx-track-azurecli
+ms.openlocfilehash: 271913a731a2bdf5af94885b5fe4027c0334853c
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81602650"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94887499"
 ---
-# <a name="quickstart-deploy-an-azure-kubernetes-service-aks-cluster-using-an-azure-resource-manager-template"></a>Démarrage rapide : déployer un cluster AKS (Azure Kubernetes Service) à l’aide d’un modèle Azure Resource Manager
+# <a name="quickstart-deploy-an-azure-kubernetes-service-aks-cluster-using-an-arm-template"></a>Démarrage rapide : Déployer un cluster AKS (Azure Kubernetes Service) à l’aide d’un modèle ARM
 
-AKS (Azure Kubernetes Service) est un service Kubernetes managé qui vous permet de déployer et de gérer rapidement des clusters. Dans ce guide de démarrage rapide, vous déployez un cluster AKS à l’aide d’un modèle Azure Resource Manager. Une application multiconteneur composée d’un front-end web et d’une instance Redis est exécutée dans le cluster.
+AKS (Azure Kubernetes Service) est un service Kubernetes managé qui vous permet de déployer et de gérer rapidement des clusters. Dans ce guide de démarrage rapide, vous allez déployer un cluster AKS à l’aide d’un modèle ARM (Azure Resource Manager). Une application multiconteneur composée d’un front-end web et d’une instance Redis est exécutée dans le cluster.
 
 ![Image de la navigation vers Azure Vote](media/container-service-kubernetes-walkthrough/azure-voting-application.png)
 
@@ -22,15 +22,17 @@ AKS (Azure Kubernetes Service) est un service Kubernetes managé qui vous permet
 
 Ce guide de démarrage rapide suppose une compréhension élémentaire des concepts liés à Kubernetes. Pour plus d’informations, consultez [Concepts de base de Kubernetes pour AKS (Azure Kubernetes Service)][kubernetes-concepts].
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[![Déployer sur Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-aks%2Fazuredeploy.json)
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, ce guide de démarrage rapide exige au minimum Azure CLI version 2.0.61. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][azure-cli-install].
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="prerequisites"></a>Prérequis
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Pour créer un cluster AKS à l’aide d’un modèle Resource Manager, vous fournissez une clé publique SSH et un principal de service Azure Active Directory.  Vous pouvez également utiliser une [identité managée](use-managed-identity.md) au lieu d’un principal de service pour les autorisations. Si vous avez besoin d’une de ces ressources, consultez la section suivante ; sinon, passez à la section [Créer un cluster AKS](#create-an-aks-cluster).
+- Cet article nécessite la version 2.0.61 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
+
+- Pour créer un cluster AKS à l’aide d’un modèle Resource Manager, vous fournissez une clé publique SSH et un principal de service Azure Active Directory. Vous pouvez également utiliser une [identité managée](use-managed-identity.md) au lieu d’un principal de service pour les autorisations. Si vous avez besoin de l’une de ces ressources, consultez la section suivante ; sinon, passez à la section [Vérifier le modèle](#review-the-template).
 
 ### <a name="create-an-ssh-key-pair"></a>Création d’une paire de clés SSH
 
@@ -68,17 +70,15 @@ Le résultat ressemble à l’exemple suivant :
 
 Prenez note des valeurs de *appId* et de *password*. Ces valeurs sont utilisées dans les étapes suivantes.
 
-## <a name="create-an-aks-cluster"></a>Créer un cluster AKS
-
-### <a name="review-the-template"></a>Vérifier le modèle
+## <a name="review-the-template"></a>Vérifier le modèle
 
 Le modèle utilisé dans ce guide de démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/101-aks/).
 
-:::code language="json" source="~/quickstart-templates/101-aks/azuredeploy.json" range="1-126" highlight="86-118":::
+:::code language="json" source="~/quickstart-templates/101-aks/azuredeploy.json":::
 
 Pour plus d’exemples AKS, consultez le site [Modèles de démarrage rapide AKS][aks-quickstart-templates].
 
-### <a name="deploy-the-template"></a>Déployer le modèle
+## <a name="deploy-the-template"></a>Déployer le modèle
 
 1. Cliquez sur l’image ci-après pour vous connecter à Azure et ouvrir un modèle.
 
@@ -140,9 +140,6 @@ aks-agentpool-41324942-2   Ready    agent   6m45s   v1.12.6
 
 Un fichier manifeste Kubernetes définit un état souhaité pour le cluster, notamment les images conteneur à exécuter. Dans ce guide de démarrage rapide, un manifeste est utilisé afin de créer tous les objets nécessaires pour l’exécution de l’application Azure Vote. Ce manifeste inclut deux [déploiements Kubernetes][kubernetes-deployment] : un pour les exemples d’applications Azure Vote Python et l’autre pour une instance Redis. Deux [services Kubernetes][kubernetes-service] sont également créés : un service interne pour l’instance Redis et un service externe pour accéder à l’application Azure Vote à partir d’Internet.
 
-> [!TIP]
-> Dans ce guide de démarrage rapide, vous créez et déployez manuellement vos manifestes d’application sur le cluster AKS. Dans des scénarios plus probables, vous pouvez utiliser [Azure Dev Spaces][azure-dev-spaces] pour itérer et déboguer votre code rapidement, directement dans le cluster AKS. Vous pouvez utiliser les espaces Dev Spaces sur des plateformes de système d’exploitation ainsi que des environnements de développement et collaborer avec les autres personnes de votre équipe.
-
 Créez un fichier nommé `azure-vote.yaml`, et copiez-y la définition YAML suivante. Si vous utilisez Azure Cloud Shell, vous pouvez créer ce fichier à l’aide de `vi` ou de `nano` comme si vous travailliez sur un système virtuel ou physique :
 
 ```yaml
@@ -164,7 +161,10 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-back
-        image: redis
+        image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
         resources:
           requests:
             cpu: 100m
@@ -204,7 +204,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
-        image: microsoft/azure-vote-front:v1
+        image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
         resources:
           requests:
             cpu: 100m
@@ -303,12 +303,12 @@ Pour en savoir plus sur AKS et parcourir le code complet de l’exemple de dépl
 [kubectl]: https://kubernetes.io/docs/user-guide/kubectl/
 [kubectl-apply]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply
 [kubectl-get]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get
-[azure-dev-spaces]: https://docs.microsoft.com/azure/dev-spaces/
+[azure-dev-spaces]: ../dev-spaces/index.yml
 [aks-quickstart-templates]: https://azure.microsoft.com/resources/templates/?term=Azure+Kubernetes+Service
 
 <!-- LINKS - internal -->
 [kubernetes-concepts]: concepts-clusters-workloads.md
-[aks-monitor]: https://aka.ms/coingfonboarding
+[aks-monitor]: ../azure-monitor/insights/container-insights-onboard.md
 [aks-tutorial]: ./tutorial-kubernetes-prepare-app.md
 [az-aks-browse]: /cli/azure/aks?view=azure-cli-latest#az-aks-browse
 [az-aks-create]: /cli/azure/aks?view=azure-cli-latest#az-aks-create

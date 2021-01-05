@@ -10,14 +10,19 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: aahi
-ms.openlocfilehash: 5a08ee7f5ea3d5e8c393ea4c1a64c353e24777e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6141bd67681df757536792981d47756a20ed33db
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74072698"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353321"
 ---
 # <a name="share-your-custom-search-instance"></a>Partager votre instance de Recherche personnalisée
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Vous pouvez facilement autoriser des modifications et des tests collaboratifs sur votre instance en la partageant avec les membres de votre équipe. Vous pouvez partager votre instance avec d’autres personnes en utilisant juste leur adresse e-mail. Pour partager une instance :
 

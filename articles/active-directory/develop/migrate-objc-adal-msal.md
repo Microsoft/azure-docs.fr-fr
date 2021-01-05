@@ -13,12 +13,12 @@ ms.date: 08/28/2019
 ms.author: marsma
 ms.reviewer: oldalton
 ms.custom: aaddev
-ms.openlocfilehash: 6050bdc8c2600998b9804b04b62102e74612719f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fb66d8a4bf97a6f8a10534c9c4459123ad6a2654
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77085179"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107917"
 ---
 # <a name="migrate-applications-to-msal-for-ios-and-macos"></a>Migrer des applications vers MSAL pour iOS et macOS
 
@@ -45,7 +45,7 @@ La plateforme d’identités Microsoft présente quelques différences clés ave
 * Le point de terminaison Azure Active Directory v1.0 exige que toutes les autorisations soient déclarées à l’avance pendant l’inscription de l’application. Cela signifie que ces autorisations sont statiques.
 * La plateforme d’identités Microsoft vous permet de demander des autorisations de manière dynamique. Les applications peuvent demander des autorisations uniquement en fonction des besoins, et en demander plus à mesure qu’elles en ont besoin.
 
-Pour plus d’informations sur les différences entre Azure Active Directory v1.0 et la plateforme d’identités Microsoft, consultez [Pourquoi mettre à jour à la plateforme d’identités Microsoft (v2.0) ?](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison).
+Pour plus d’informations sur les différences entre Azure Active Directory v1.0 et la plateforme d’identités Microsoft, consultez [Pourquoi mettre à jour à la plateforme d’identités Microsoft (v2.0) ?](../azuread-dev/azure-ad-endpoint-comparison.md).
 
 ## <a name="adal-and-msal-library-differences"></a>Différences entre les bibliothèques ADAL et MSAL
 
@@ -77,7 +77,7 @@ Il s’agit de l’étendue intégrée pour chaque application. Elle fait réfé
 
 Pour utiliser l’étendue `/.default`, ajoutez `/.default` à l’identificateur de ressource. Par exemple : `https://graph.microsoft.com/.default`. Si votre ressource se termine par une barre oblique (`/`), vous devez quand même ajouter `/.default`, y compris la barre oblique de début. Vous obtiendrez ainsi une étendue avec une double barre oblique (`//`).
 
-Pour en savoir plus sur l’utilisation de l’étendue « /.default », consultez [cet article](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#the-default-scope).
+Pour en savoir plus sur l’utilisation de l’étendue « /.default », consultez [cet article](./v2-permissions-and-consent.md#the-default-scope).
 
 ### <a name="supporting-different-webview-types--browsers"></a>Prise en charge de différents types WebView & navigateurs
 
@@ -136,7 +136,7 @@ MSAL fournit plus de clarté entre les erreurs qui peuvent être gérées par vo
 
 La gestion de toutes les autres erreurs dans la [liste `MSALError`](https://github.com/AzureAD/microsoft-authentication-library-for-objc/blob/master/MSAL/src/public/MSALError.h#L128) est facultative. Vous pouvez utiliser les informations contenues dans ces erreurs pour améliorer l’expérience utilisateur.
 
-Pour plus d’informations sur la gestion des erreurs MSAL, consultez [Gestion des exceptions et erreurs à l’aide de MSAL](msal-handling-exceptions.md).
+Pour plus d’informations sur la gestion des erreurs MSAL, consultez [Gestion des exceptions et erreurs à l’aide de MSAL](msal-error-handling-ios.md).
 
 ### <a name="broker-support"></a>Prise en charge de service réparti
 
@@ -207,7 +207,7 @@ MSAL sur iOS prend également en charge deux autres types d’authentification u
 
 ## <a name="intune-mam-sdk"></a>SDK GAM Intune
 
-Le [SDK Intune GAM](https://docs.microsoft.com/intune/app-sdk-get-started) prend en charge MSAL pour iOS à compter de la version [11.1.2](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/releases/tag/11.1.2).
+Le [SDK Intune GAM](/intune/app-sdk-get-started) prend en charge MSAL pour iOS à compter de la version [11.1.2](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/releases/tag/11.1.2).
 
 ## <a name="msal-and-adal-in-the-same-app"></a>MSAL et ADAL dans la même application
 

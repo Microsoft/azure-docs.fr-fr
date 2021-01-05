@@ -1,36 +1,37 @@
 ---
-title: Série HB – Machines virtuelles Microsoft Azure
+title: Série HB
 description: Spécifications pour les machines virtuelles de la série HB.
-services: virtual-machines
-author: jonbeck7
+author: ju-shim
 ms.service: virtual-machines
-ms.topic: article
-ms.date: 02/03/2020
-ms.author: lahugh
-ms.openlocfilehash: 600f10e81742e9bb66c800b747fd7b2dc062754d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.subservice: sizes
+ms.topic: conceptual
+ms.date: 10/09/2020
+ms.author: amverma
+ms.reviewer: jushiman
+ms.openlocfilehash: f3fbc1ad3f9e7f3f3c9d2667ae9c3f566325aa51
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78164829"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91931697"
 ---
 # <a name="hb-series"></a>Série HB
 
 Les machines virtuelles de la série HB sont optimisées pour des applications tributaires de la bande passante mémoire, par exemple la dynamique des fluides, l’analyse explicite par éléments finis et la modélisation du climat. Les machines virtuelles HB disposent de 60 cœurs de processeur AMD EPYC 7551, de 4 Go de RAM par cœur de processeur, et d’aucun multithreading simultané. Une machine virtuelle HB fournit jusqu’à 260 Go/s de bande passante de mémoire.
 
-ACU : 199-216
+Les machines virtuelles d’origine de la série HB sont dotées de la technologie Mellanox EDR InfiniBand à 100 Gb/s. Ces machines virtuelles sont connectées dans une arborescence FAT non bloquante pour des performances RDMA optimisées et cohérentes. Ces machines virtuelles prennent en charge le routage adaptatif et le transport connecté dynamique (DCT, en plus des transports RC et UD standards). Ces fonctionnalités améliorent les performances, l’extensibilité et la cohérence des applications, et leur utilisation est fortement recommandée.
 
-Premium Storage : Prise en charge
+[ACU](acu.md) : 199-216<br>
+[Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Générations 1 et 2<br>
+<br>
 
-Mise en cache du Stockage Premium : Prise en charge
-
-Migration dynamique : Non pris en charge
-
-Mises à jour avec préservation de la mémoire : Non pris en charge
-
-| Taille | Processeurs virtuels | Processeur | Mémoire (Go) | Bande passante mémoire (Go/s) | Fréquence du processeur de base (GHz) | Fréquence de tous les cœurs (GHz, pic) | Fréquence d’un cœur (GHz, pic) | Performances RDMA (Gbit/s) | Prise en charge MPI | Stockage temporaire (Go) | Disques de données max. | Cartes réseau Ethernet max. |
+| Taille | Processeurs virtuels | Processeur | Mémoire (Gio) | Bande passante mémoire (Go/s) | Fréquence du processeur de base (GHz) | Fréquence de tous les cœurs (GHz, pic) | Fréquence d’un cœur (GHz, pic) | Performances RDMA (Gbit/s) | Prise en charge MPI | Stockage temporaire (Gio) | Disques de données max. | Cartes réseau virtuelles Ethernet max. |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Standard_HB60rs | 60 | AMD EPYC 7551 | 240 | 263 | 2 | 2.55 | 2.55 | 100 | Tous | 700 | 4 | 1 |
+| Standard_HB60rs | 60 | AMD EPYC 7551 | 240 | 263 | 2.0 | 2.55 | 2.55 | 100 | Tous | 700 | 4 | 8 |
 
 [!INCLUDE [virtual-machines-common-sizes-table-defs](../../includes/virtual-machines-common-sizes-table-defs.md)]
 
@@ -44,5 +45,7 @@ Mises à jour avec préservation de la mémoire : Non pris en charge
 - [Générations précédentes](sizes-previous-gen.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
-
-Lisez-en davantage sur les [Unités de calcul Azure (ACU)](acu.md) pour découvrir comment comparer les performances de calcul entre les références Azure.
+- En savoir plus sur [la configuration de vos machines virtuelles](./workloads/hpc/configure.md), [l’activation d’InfiniBand](./workloads/hpc/enable-infiniband.md), [la configuration de MPI](./workloads/hpc/setup-mpi.md) et l’optimisation des applications HPC pour Azure dans l’article relatifs aux [charges de travail HPC](./workloads/hpc/overview.md).
+- Découvrez des informations sur les dernières annonces et des exemples et des résultats HPC sur les [blogs de la communauté Azure Compute Tech](https://techcommunity.microsoft.com/t5/azure-compute/bg-p/AzureCompute).
+- Pour une vision plus globale de l’architecture d’exécution des charges de travail HPC, consultez [Calcul haute performance (HPC) sur Azure](/azure/architecture/topics/high-performance-computing/).
+- Lisez-en davantage sur les [Unités de calcul Azure (ACU)](acu.md) pour découvrir comment comparer les performances de calcul entre les références Azure.

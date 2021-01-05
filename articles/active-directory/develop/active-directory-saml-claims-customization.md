@@ -1,32 +1,32 @@
 ---
-title: Personnaliser les revendications de jeton SAML pour les applications Azure AD
+title: Personnaliser les revendications de jeton SAML pour les applications
 titleSuffix: Microsoft identity platform
-description: Découvrez comment personnaliser les revendications émises dans le jeton SAML pour les applications d’entreprise dans Azure AD.
+description: Découvrez comment personnaliser les revendications émises par Plateforme d’identités Microsoft dans le jeton SAML pour les applications d’entreprise.
 services: active-directory
-author: rwike77
+author: kenwith
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
-ms.topic: article
-ms.date: 10/22/2019
-ms.author: ryanwi
+ms.topic: how-to
+ms.date: 12/09/2020
+ms.author: kenwith
 ms.reviewer: luleon, paulgarn, jeedes
 ms.custom: aaddev
-ms.openlocfilehash: 87a9632ec2433b8698e3ae3761ba733aa6bc63a5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1c88b9f77513021609b99c81ea572c2b5b3d365b
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885682"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96936792"
 ---
 # <a name="how-to-customize-claims-issued-in-the-saml-token-for-enterprise-applications"></a>Procédure : personnaliser des revendications émises dans le jeton SAML pour les applications d’entreprise
 
-Actuellement, Azure Active Directory (Azure AD) prend en charge l’authentification unique avec la plupart des applications d’entreprise, y compris les applications pré-intégrées dans la galerie d’applications Azure AD et les applications personnalisées. Quand un utilisateur s’authentifie auprès d’une application par l’intermédiaire d’Azure AD en utilisant le protocole SAML 2.0, Azure AD envoie un jeton à l’application (via HTTP POST). Après quoi, l’application valide et utilise ce jeton pour connecter l’utilisateur au lieu de lui demander un nom d’utilisateur et un mot de passe. Ces jetons SAML contiennent des informations sur l’utilisateur appelées *revendications*.
+Actuellement, Plateforme d’identités Microsoft prend en charge l’authentification unique avec la plupart des applications d’entreprise, y compris les applications pré-intégrées dans la galerie d’applications Azure AD et les applications personnalisées. Quand un utilisateur s’authentifie auprès d’une application par l’intermédiaire de Plateforme d’identités Microsoft en utilisant le protocole SAML 2.0, Plateforme d’identités Microsoft envoie un jeton à l’application (via une requête HTTP POST). Après quoi, l’application valide et utilise ce jeton pour connecter l’utilisateur au lieu de lui demander un nom d’utilisateur et un mot de passe. Ces jetons SAML contiennent des informations sur l’utilisateur appelées *revendications*.
 
 Une *revendication* concerne ce qu’un fournisseur d’identité déclare sur un utilisateur dans le jeton qu’il émet sur cet utilisateur. Dans un [jeton SAML](https://en.wikipedia.org/wiki/SAML_2.0), ces données sont généralement contenues dans l’instruction d’attribut SAML. L’ID unique de l’utilisateur est généralement présent dans le SAML Subject, également appelé « identificateur de nom ».
 
-Par défaut, Azure AD émet un jeton SAML à destination de votre application qui contient une revendication `NameIdentifier`, dont la valeur est le nom de l’utilisateur (ou nom d’utilisateur principal) dans Azure AD, qui peut identifier l’utilisateur de façon unique. Le jeton SAML contient également des revendications supplémentaires contenant l’adresse de messagerie de l’utilisateur, son prénom et son nom.
+Par défaut, Plateforme d’identités Microsoft émet un jeton SAML à destination de votre application qui contient une revendication `NameIdentifier`, dont la valeur est le nom de l’utilisateur (ou nom d’utilisateur principal) dans Azure AD et qui peut identifier l’utilisateur de façon unique. Le jeton SAML contient également des revendications supplémentaires contenant l’adresse de messagerie de l’utilisateur, son prénom et son nom.
 
 Pour afficher ou modifier les revendications émises dans le jeton SAML à destination de l’application, ouvrez l’application dans le portail Azure. Ensuite, ouvrez la section **Attributs et revendications de l’utilisateur**.
 
@@ -48,19 +48,18 @@ Pour modifier le NameID (valeur d’identificateur du nom) :
 
 ### <a name="nameid-format"></a>Format NameID
 
-Si la requête SAML contient l’élément NameIDPolicy dans un format spécifique, Azure AD respecte le format de la requête.
+Si la requête SAML contient l’élément NameIDPolicy dans un format spécifique, Plateforme d’identités Microsoft respecte le format de la requête.
 
-Si la requête SAML ne contient aucun élément pour NameIDPolicy, alors Azure AD émet la revendication NameID au format que vous spécifiez. Si aucun format n’est spécifié, Azure AD utilise le format source par défaut associé à la source de la revendication sélectionnée.
+Si la requête SAML ne contient aucun élément pour NameIDPolicy, alors Plateforme d’identités Microsoft émet la revendication NameID au format que vous spécifiez. Si aucun format n’est spécifié, Plateforme d’identités Microsoft utilise le format source par défaut associé à la source de la revendication sélectionnée.
 
 Dans le menu déroulant **Choisir le format du nom de l’identificateur**, vous pouvez sélectionner l’une des options suivantes.
 
 | Format NameID | Description |
 |---------------|-------------|
-| **Par défaut** | Par défaut, Azure AD utilise le format de la source. |
-| **Persistent** | Azure AD utilisera Persistent comme format pour NameID. |
-| **EmailAddress** | Azure AD utilisera EmailAddress comme format pour NameID. |
-| **Unspecified** | Azure AD utilisera Unspecified comme format pour NameID. |
-| **Nom de domaine complet Windows** | Azure AD utilise WindowsDomainQualifiedName comme format de NameID. |
+| **Par défaut** | Plateforme d’identités Microsoft utilise le format source par défaut. |
+| **Persistent** | Plateforme d’identités Microsoft utilise Persistent comme format de NameID. |
+| **EmailAddress** | Plateforme d’identités Microsoft utilise EmailAddress comme format de NameID. |
+| **Unspecified** | Plateforme d’identités Microsoft utilise Unspecified comme format de NameID. |
 
 Un élément NameID temporaire est également pris en charge, mais il n’est pas disponible dans la liste déroulante et ne peut pas être configuré côté Azure. Pour en savoir plus sur l’attribut NameIDPolicy, consultez [Protocole SAML d’authentification unique](single-sign-on-saml-protocol.md).
 
@@ -88,11 +87,11 @@ Vous pouvez également attribuer une valeur constante (statique) quelconque à t
 
 1. Entrez la valeur constante sans guillemets dans **Attribut source** conformément à votre organisation, puis cliquez sur **Enregistrer**.
 
-    ![Ouvrez la section Attributs et revendications de l’utilisateur dans le Portail Microsoft Azure](./media/active-directory-saml-claims-customization/organization-attribute.png)
+    ![Organisation de la section Attributs et revendications de l’utilisateur dans le Portail Microsoft Azure](./media/active-directory-saml-claims-customization/organization-attribute.png)
 
 1. La valeur constante sera affichée comme ci-dessous.
 
-    ![Ouvrez la section Attributs et revendications de l’utilisateur dans le Portail Microsoft Azure](./media/active-directory-saml-claims-customization/edit-attributes-claims.png)
+    ![Modification de la section Attributs et revendications de l’utilisateur dans le Portail Microsoft Azure](./media/active-directory-saml-claims-customization/edit-attributes-claims.png)
 
 ### <a name="special-claims---transformations"></a>Revendications spéciales - Transformations
 
@@ -121,7 +120,7 @@ Pour appliquer une transformation à un attribut utilisateur :
 2. Sélectionnez la fonction dans la liste déroulante de transformation. Selon la fonction sélectionnée, vous devrez fournir des paramètres et une valeur constante à évaluer dans la transformation. Pour plus d’informations sur les fonctions disponibles, reportez-vous au tableau ci-dessous.
 3. Pour appliquer plusieurs transformations, cliquez sur **Ajouter une transformation**. Vous pouvez appliquer un maximum de deux transformations à une revendication. Par exemple, vous pouvez d’abord extraire le préfixe e-mail de `user.mail`. Ensuite, mettez la chaîne en majuscules.
 
-   ![Modifier la valeur NameID (identificateur du nom)](./media/active-directory-saml-claims-customization/sso-saml-multiple-claims-transformation.png)
+   ![Transformation de plusieurs revendications](./media/active-directory-saml-claims-customization/sso-saml-multiple-claims-transformation.png)
 
 Vous pouvez utiliser les fonctions suivantes pour transformer des revendications.
 
@@ -129,8 +128,8 @@ Vous pouvez utiliser les fonctions suivantes pour transformer des revendications
 |----------|-------------|
 | **ExtractMailPrefix()** | Supprime le suffixe de domaine de l’adresse e-mail ou du nom d’utilisateur principal. Ainsi, seule la première partie du nom d’utilisateur transmis est extraite (par exemple, « joe_smith » au lieu de joe_smith@contoso.com). |
 | **Join()** | Crée une nouvelle valeur en joignant deux attributs. Si vous le souhaitez, vous pouvez utiliser un séparateur entre les deux attributs. Pour la transformation de revendication NameID, la jointure est limitée à un domaine vérifié. Si la valeur d’identificateur utilisateur sélectionné possède un domaine, extrait le nom d’utilisateur pour ajouter le domaine vérifié sélectionné. Par exemple, si vous sélectionnez l’adresse e-mail (joe_smith@contoso.com) comme valeur d’identificateur utilisateur et que vous sélectionnez contoso.onmicrosoft.com comme domaine vérifié, le résultat est joe_smith@contoso.onmicrosoft.com. |
-| **ToLower()** | Convertit les caractères de l’attribut sélectionné en minuscules. |
-| **ToUpper()** | Convertit les caractères de l’attribut sélectionné en majuscules. |
+| **ToLowercase()** | Convertit les caractères de l’attribut sélectionné en minuscules. |
+| **ToUppercase()** | Convertit les caractères de l’attribut sélectionné en majuscules. |
 | **Contains()** | Génère un attribut ou une constante si l’entrée correspond à la valeur spécifiée. Sinon, vous pouvez spécifier une autre sortie s’il n’existe aucune correspondance.<br/>Par exemple, vous pouvez émettre une revendication où la valeur est l’adresse e-mail utilisateur si elle contient le domaine «@contoso.com». Dans ce cas, nous vous conseillons de générer le nom d’utilisateur principal. Pour ce faire, configurez les valeurs suivantes :<br/>*Paramètre 1 (entrée)*  : user.email<br/>*Valeur* : "@contoso.com"<br/>Paramètre 2 (sortie) : user.email<br/>Paramètre 3 (sortie s’il n’existe aucune correspondance) : user.userprincipalname |
 | **EndWith()** | Génère un attribut ou une constante si l’entrée se termine par la valeur spécifiée. Sinon, vous pouvez spécifier une autre sortie s’il n’existe aucune correspondance.<br/>Par exemple, vous pouvez émettre une revendication dont la valeur est l’ID d’employé de l’utilisateur, si l’ID d’employé se termine par « 000 ». Dans ce cas, nous vous recommandons d’obtenir un attribut d’extension en sortie. Pour ce faire, configurez les valeurs suivantes :<br/>*Paramètre 1 (entrée)*  : user.employeeid<br/>*Valeur* : "000"<br/>Paramètre 2 (sortie) : user.employeeid<br/>Paramètre 3 (sortie, s’il n’existe aucune correspondance) : user.extensionattribute1 |
 | **StartWith()** | Génère un attribut ou une constante si l’entrée commence par la valeur spécifiée. Sinon, vous pouvez spécifier une autre sortie s’il n’existe aucune correspondance.<br/>Par exemple, vous pouvez émettre une revendication dont la valeur est l’ID d’employé de l’utilisateur, si la valeur de Pays/région commence par « US ». Dans ce cas, nous vous recommandons d’obtenir un attribut d’extension en sortie. Pour ce faire, configurez les valeurs suivantes :<br/>*Paramètre 1 (entrée)*  : user.country<br/>*Valeur* : "US"<br/>Paramètre 2 (sortie) : user.employeeid<br/>Paramètre 3 (sortie, s’il n’existe aucune correspondance) : user.extensionattribute1 |
@@ -164,19 +163,19 @@ Pour ajouter une condition de revendication :
 
 1. Dans **Gérer les revendications**, développez les conditions de la revendication.
 2. Sélectionnez le type d’utilisateur.
-3. Sélectionnez le ou les groupes auxquels l’utilisateur doit appartenir. Vous pouvez sélectionner jusqu’à 10 groupes uniques sur l’ensemble des revendications pour une application donnée. 
+3. Sélectionnez le ou les groupes auxquels l’utilisateur doit appartenir. Vous pouvez sélectionner jusqu’à 50 groupes uniques sur l’ensemble des revendications pour une application donnée. 
 4. Sélectionnez la **Source** où la revendication va récupérer sa valeur. Vous pouvez sélectionner un attribut utilisateur dans le menu déroulant d’attribut de la source ou appliquer une transformation à l’attribut utilisateur avant de l’émettre en tant que réclamation.
 
-L’ordre dans lequel vous ajoutez les conditions est important. Azure AD évalue les conditions de haut en bas pour décider quelle valeur émettre dans la revendication. 
+L’ordre dans lequel vous ajoutez les conditions est important. Azure AD évalue les conditions de haut en bas pour décider quelle valeur émettre dans la revendication. La dernière valeur qui correspond à l’expression sera émise dans la revendication.
 
-Par exemple, Brita Simon est un utilisateur invité dans le locataire Contoso. Elle appartient à une autre organisation qui utilise également Azure AD. Étant donné la configuration ci-dessous pour l’application Fabrikam, quand Brita tente de se connecter à Fabrikam, Azure AD évalue les conditions comme suit.
+Par exemple, Britta Simon est figure parmi les utilisateurs invités dans le locataire Contoso. Elle appartient à une autre organisation qui utilise également Azure AD. Étant donné la configuration ci-dessous pour l’application Fabrikam, quand Britta tente de se connecter à Fabrikam, Plateforme d’identités Microsoft évalue les conditions comme suit.
 
-Tout d’abord, Azure AD vérifie si le type d’utilisateur de Brita est `All guests`. Dans la mesure où la valeur est True, Azure AD attribue la source de la revendication à `user.extensionattribute1`. Deuxièmement, Azure AD vérifie si le type d’utilisateur de Brita est `AAD guests`, puisque c’est également le cas, Azure AD attribue la source de la revendication à `user.mail`. Enfin, la revendication est émise avec la valeur `user.email` pour Brita.
+Tout d’abord, Plateforme d’identités Microsoft vérifie si le type d’utilisateur de Britta est `All guests`. Dans la mesure où la valeur est True, Plateforme d’identités Microsoft attribue la source de la revendication à `user.extensionattribute1`. Ensuite, Plateforme d’identités Microsoft vérifie si le type d’utilisateur de Britta est `AAD guests`. Puisque la valeur est également True, alors Plateforme d’identités Microsoft attribue la source de la revendication à `user.mail`. Enfin, la revendication est émise avec la valeur `user.mail` pour Britta.
 
 ![Configuration conditionnelle des revendications](./media/active-directory-saml-claims-customization/sso-saml-user-conditional-claims.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Gestion des applications dans Azure AD](../manage-apps/what-is-application-management.md)
-* [Configurer l’authentification unique pour les applications ne faisant pas partie de la galerie d’applications Azure AD](../manage-apps/configure-federated-single-sign-on-non-gallery-applications.md)
-* [Résoudre les erreurs d’authentification unique basée sur SAML](../azuread-dev/howto-v1-debug-saml-sso-issues.md)
+* [Configurer l’authentification unique pour les applications ne faisant pas partie de la galerie d’applications Azure AD](../manage-apps/configure-saml-single-sign-on.md)
+* [Résoudre les erreurs d’authentification unique basée sur SAML](../manage-apps/debug-saml-sso-issues.md)

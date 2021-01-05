@@ -3,8 +3,8 @@ title: Appeler le programme MapReduce à partir d'Azure Data Factory
 description: Learn how to process data by running MapReduce programs on an Azure HDInsight cluster from an Azure data factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.assetid: c34db93f-570a-44f1-a7d6-00390f4dc0fa
@@ -12,12 +12,12 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 598a16d25ba375b984a966cba190181edbda3d15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8bdcaf20330a3700681fd96f858370dd7dcdf4c7
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74703148"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495427"
 ---
 # <a name="invoke-mapreduce-programs-from-data-factory"></a>Appeler des programmes MapReduce à partir de Data Factory
 > [!div class="op_single_selector" title1="Activités de transformation"]
@@ -26,8 +26,8 @@ ms.locfileid: "74703148"
 > * [Activité MapReduce](data-factory-map-reduce.md)
 > * [Activité de diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md)
 > * [Activité Spark](data-factory-spark.md)
-> * [Activité d’exécution par lot Machine Learning](data-factory-azure-ml-batch-execution-activity.md)
-> * [Activité des ressources de mise à jour de Machine Learning](data-factory-azure-ml-update-resource-activity.md)
+> * [Activité Exécution par lots Azure Machine Learning studio (classique)](data-factory-azure-ml-batch-execution-activity.md)
+> * [Activité Mettre à jour une ressource Azure Machine Learning studio (classique)](data-factory-azure-ml-update-resource-activity.md)
 > * [Activité de procédure stockée](data-factory-stored-proc-activity.md)
 > * [Activité U-SQL Data Lake Analytics](data-factory-usql-activity.md)
 > * [Activité personnalisée .NET](data-factory-use-custom-activities.md)
@@ -235,14 +235,14 @@ Le pipeline de cet exemple n'a qu'une seule activité de type : HDInsightMapRed
 ## <a name="run-spark-programs"></a>Exécuter des programmes Spark
 Vous pouvez utiliser l'activité MapReduce pour exécuter des programmes Spark sur votre cluster HDInsight Spark. Consultez la page [Appeler des programmes Spark à partir d'Azure Data Factory](data-factory-spark.md) pour plus d'informations.  
 
-[developer-reference]: https://go.microsoft.com/fwlink/?LinkId=516908
+[developer-reference]: /previous-versions/azure/dn834987(v=azure.100)
 [cmdlet-reference]: https://go.microsoft.com/fwlink/?LinkId=517456
 
 
 [adfgetstarted]: data-factory-copy-data-from-azure-blob-storage-to-sql-database.md
 [adfgetstartedmonitoring]:data-factory-copy-data-from-azure-blob-storage-to-sql-database.md#monitor-pipelines 
 
-[Developer Reference]: https://go.microsoft.com/fwlink/?LinkId=516908
+[Developer Reference]: /previous-versions/azure/dn834987(v=azure.100)
 [Azure Portal]: https://portal.azure.com
 
 ## <a name="see-also"></a>Voir aussi
@@ -251,4 +251,3 @@ Vous pouvez utiliser l'activité MapReduce pour exécuter des programmes Spark s
 * [Activité de diffusion en continu Hadoop](data-factory-hadoop-streaming-activity.md)
 * [Appeler des programmes Spark](data-factory-spark.md)
 * [Appeler des scripts R](https://github.com/Azure/Azure-DataFactory/tree/master/SamplesV1/RunRScriptUsingADFSample)
-

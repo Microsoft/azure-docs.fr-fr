@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 06/20/2018
 ms.author: apimpm
-ms.openlocfilehash: 48a83fad3395f6ecf06fb1f1ba95aa1b06a53431
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: adb221c12af436135b1e740fdef7c5c0a0a7f0cb
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259134"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93096034"
 ---
 # <a name="how-to-integrate-azure-api-management-with-azure-application-insights"></a>Guide pratique pour intégrer la Gestion des API Azure avec Azure Application Insights
 
@@ -33,7 +33,7 @@ Pour suivre ce guide, vous devrez disposer d’une instance de Gestion des API A
 Pour pouvoir utiliser Azure Application Insights, il faut commencer par créer une instance du service.
 
 1. Ouvrez le **Portail Azure** et accédez à **Application Insights**.  
-    ![Création App Insights](media/api-management-howto-app-insights/apim-app-insights-instance-1.png)  
+    ![Capture d’écran montrant comment accéder à Application Insights.](media/api-management-howto-app-insights/apim-app-insights-instance-1.png)  
 2. Cliquez sur **+ Ajouter**.  
     ![Création App Insights](media/api-management-howto-app-insights/apim-app-insights-instance-2.png)  
 3. Remplissez le formulaire. Sélectionnez le **Type d’application** **Général**.
@@ -44,14 +44,14 @@ Pour pouvoir utiliser Azure Application Insights, il faut commencer par créer u
 1. Accédez à votre **instance de service Gestion des API Azure** sur le **Portail Azure**.
 2. Sélectionnez **Application Insights** dans le menu de gauche.
 3. Cliquez sur **+ Ajouter**.  
-    ![Enregistreur d'événements App Insights](media/api-management-howto-app-insights/apim-app-insights-logger-1.png)  
+    ![Capture d’écran montrant où ajouter une nouvelle connexion.](media/api-management-howto-app-insights/apim-app-insights-logger-1.png)  
 4. Sélectionnez l’instance **Application Insights** créée et indiquez une courte description.
 5. Cliquez sur **Créer**.
 6. Vous venez de créer un enregistreur d’événements Azure Application Insights avec une clé d’instrumentation. Il devrait maintenant apparaître dans la liste.  
-    ![Enregistreur d'événements App Insights](media/api-management-howto-app-insights/apim-app-insights-logger-2.png)  
+    ![Capture d’écran montrant où afficher l’enregistreur d’événements Azure Application Insights nouvellement créé avec la clé d’instrumentation.](media/api-management-howto-app-insights/apim-app-insights-logger-2.png)  
 
 > [!NOTE]
-> En arrière-plan, une entité [Enregistreur d’événements](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/logger/createorupdate) est créée dans votre instance de gestion des API, qui contient la clé d’instrumentation de l’instance Application Insights.
+> En arrière-plan, une entité [Enregistreur d’événements](/rest/api/apimanagement/2019-12-01/logger/createorupdate) est créée dans votre instance de gestion des API, qui contient la clé d’instrumentation de l’instance Application Insights.
 
 ## <a name="enable-application-insights-logging-for-your-api"></a>Activer la journalisation Application Insights pour l’API
 
@@ -70,7 +70,7 @@ Pour pouvoir utiliser Azure Application Insights, il faut commencer par créer u
 > Le remplacement de la valeur par défaut **0** dans le champ **Premiers octets du corps** peut considérablement réduire les performances de vos API.
 
 > [!NOTE]
-> En arrière-plan, une entité [Diagnostic](https://docs.microsoft.com/rest/api/apimanagement/2019-12-01/diagnostic/createorupdate) nommée « applicationinsights » est créée au niveau de l’API.
+> En arrière-plan, une entité [Diagnostic](/rest/api/apimanagement/2019-12-01/diagnostic/createorupdate) nommée « applicationinsights » est créée au niveau de l’API.
 
 | Nom du paramètre                        | Type de valeur                        | Description                                                                                                                                                                                                                                                                                                                                      |
 |-------------------------------------|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -97,8 +97,8 @@ Pour pouvoir utiliser Azure Application Insights, il faut commencer par créer u
 
 Azure Application Insights reçoit :
 
-+ un élément de télémétrie *Demande* pour chaque demande entrante (*demande frontale*, *réponse frontale*) ;
-+ un élément de télémétrie *Dépendance* pour chaque demande transmise à un service principal (*demande principale*, *réponse principale*) ;
++ un élément de télémétrie *Demande* pour chaque demande entrante ( *demande frontale* , *réponse frontale* ) ;
++ un élément de télémétrie *Dépendance* pour chaque demande transmise à un service principal ( *demande principale* , *réponse principale* ) ;
 + un élément de télémétrie *Exception* pour chaque demande ayant échoué.
 
 Une demande ayant échoué peut être une demande qui :
@@ -126,5 +126,5 @@ Il est également utile d’ignorer la journalisation des en-têtes et du corps 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-+ Découvrez plus en détail [Azure Application Insights](https://docs.microsoft.com/azure/application-insights/).
++ Découvrez plus en détail [Azure Application Insights](/azure/application-insights/).
 + Étudiez la possibilité de [journalisation avec Azure Event Hubs](api-management-howto-log-event-hubs.md).

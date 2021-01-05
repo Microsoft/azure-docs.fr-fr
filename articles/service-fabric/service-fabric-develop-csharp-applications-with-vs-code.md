@@ -5,12 +5,12 @@ author: peterpogorski
 ms.topic: article
 ms.date: 06/29/2018
 ms.author: pepogors
-ms.openlocfilehash: 1d7478e6b81ef2c53ca6194197336e91d3ff250b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5fbd523a38b3c4860316e45b8b7c03a17de19499
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614521"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678329"
 ---
 # <a name="develop-c-service-fabric-applications-with-visual-studio-code"></a>Développer des applications Service Fabric en C# avec Visual Studio Code
 
@@ -57,7 +57,7 @@ L’application doit maintenant apparaître dans votre espace de travail VS Code
 ## <a name="deploy-the-application-to-the-local-cluster"></a>Déployer l’application sur le cluster local
 Une fois que vous avez généré l’application, vous pouvez la déployer sur le cluster local. 
 
-1. Dans la **Palette de commandes**, sélectionnez la commande **Service Fabric : Déployer l’application (Localhost)** . La sortie du processus d’installation est envoyée au terminal intégré.
+1. Dans la **Palette de commandes** , sélectionnez la commande **Service Fabric : Déployer l’application (Localhost)** . La sortie du processus d’installation est envoyée au terminal intégré.
 
    ![Commande Déployer une application dans VS Code](./media/service-fabric-develop-csharp-applications-with-vs-code/sf-deploy-application.png)
 
@@ -74,7 +74,7 @@ En même temps que le déploiement de l’application sur le cluster local, vous
 
 1. Vérifiez que vous avez créé votre application en suivant les instructions ci-dessus. Mettez à jour le fichier config généré `Cloud.json` avec les détails du cluster distant sur lequel vous souhaitez publier.
 
-2. Dans la **Palette de commandes**, sélectionnez la commande **Service Fabric : publier une application**. La sortie du processus d’installation est envoyée au terminal intégré.
+2. Dans la **Palette de commandes** , sélectionnez la commande **Service Fabric : publier une application**. La sortie du processus d’installation est envoyée au terminal intégré.
 
    ![Commande Publier une application dans VS Code](./media/service-fabric-develop-csharp-applications-with-vs-code/sf-publish-application.png)
 
@@ -91,9 +91,9 @@ Pour définir un point d’arrêt et déboguer, effectuez les étapes suivantes 
 
 2. Sélectionnez **.NET Core Attach** (Attacher .NET Core) dans le menu de configuration de débogage.
 
-   ![Icône de débogage dans l’espace de travail VS Code](./media/service-fabric-develop-csharp-applications-with-vs-code/debug-start.png)
+   ![Capture d’écran montrant l’attachement .NET Core sélectionné dans le menu de configuration de débogage.](./media/service-fabric-develop-csharp-applications-with-vs-code/debug-start.png)
 
-3. Ouvrez Service Fabric Explorer dans un navigateur : http:\//localhost:19080/Explorer. Cliquez sur **Applications**, puis descendez dans la hiérarchie pour déterminer le nœud principal sur lequel CounterService est exécuté. Dans l’image sous le nœud principal pour CounterService se trouve le nœud 0.
+3. Ouvrez Service Fabric Explorer dans un navigateur : http:\//localhost:19080/Explorer. Cliquez sur **Applications** , puis descendez dans la hiérarchie pour déterminer le nœud principal sur lequel CounterService est exécuté. Dans l’image sous le nœud principal pour CounterService se trouve le nœud 0.
 
    ![Nœud principal pour CounterService](./media/service-fabric-develop-csharp-applications-with-vs-code/counter-service-primary-node.png)
 

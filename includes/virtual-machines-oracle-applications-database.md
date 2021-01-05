@@ -2,14 +2,14 @@
 author: dlepow
 ms.service: virtual-machines-linux
 ms.topic: include
-ms.date: 07/10/2019
+ms.date: 06/01/2020
 ms.author: danlep
-ms.openlocfilehash: 8106b1a77f11874b1b13f41bfc9e62ea800afc98
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b9e275cbdaf264df3d0a40f032693fd93553e520
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68361261"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84317705"
 ---
 ### <a name="database-tier"></a>Couche base de données
 
@@ -17,7 +17,7 @@ La couche de base de données contient les instances de base de données pour l�
 
 Si vous choisissez d’utiliser Oracle DB, l’instance de base de données peut être déployée sur Azure via les images Oracle DB disponibles sur la place de marché Azure. Vous pouvez également utiliser l’interconnexion entre Azure et OCI pour déployer la base de données Oracle dans un modèle PaaS sur OCI.
 
-Concernant Oracle RAC, vous pouvez déployer Oracle RAC sur Azure CloudSimple dans un modèle IaaS ou dans OCI dans un modèle PaaS. Nous vous recommandons d’utiliser un système RAC à deux nœuds. 
+Pour Oracle RAC, vous pouvez utiliser OCI dans le modèle PaaS. Nous vous recommandons d’utiliser un système RAC à deux nœuds. Bien qu’il soit possible de déployer Oracle RAC sur Azure CloudSimple dans le modèle IaaS, il ne s’agit pas d’une configuration prise en charge par Oracle. Reportez-vous aux [programmes Oracle éligibles pour connaître les environnements cloud autorisés](http://www.oracle.com/us/corporate/pricing/authorized-cloud-environments-3493562.pdf).
 
 Enfin, pour les systèmes Exadata, utilisez l’interconnexion OCI et déployez le système Exadata dans OCI. Le diagramme d’architecture ci-dessus montre un système Exadata déployé dans OCI sur deux sous-réseaux.
 

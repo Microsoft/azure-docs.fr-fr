@@ -15,14 +15,16 @@ ms.topic: article
 ms.date: 03/18/2019
 ms.author: anilmur
 ms.reviewer: juliako
-ms.openlocfilehash: 6210d6ee4877c6ba84178340cf0a6610e402da31
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 09d0e53840c2bf7a0d67c7c7fb0b224f9f77c587
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81641103"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89268303"
 ---
 # <a name="live-streaming-using-azure-media-services-to-create-multi-bitrate-streams"></a>Comment effectuer une diffusion de vidéo en flux continu à l’aide d’Azure Media Services pour créer des flux à vitesses de transmission multiples.
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
 > À partir du 12 mai 2018, les canaux en direct ne prendront plus en charge le protocole de réception du flux de transport RTP/MPEG-2. Effectuez la migration à partir de RTP/MPEG-2 vers le protocole de réception RTMP ou MP4 fragmenté (Smooth Streaming).
@@ -360,11 +362,10 @@ Consultez les parcours d’apprentissage de Media Services.
 
 [Créer des canaux encodant en temps réel un flux à débit binaire unique en flux à débit binaire adaptatif avec le Kit de développement logiciel (SDK) .NET](media-services-dotnet-creating-live-encoder-enabled-channel.md)
 
-[Gérer des canaux avec l’API REST](https://docs.microsoft.com/rest/api/media/operations/channel)
+[Gérer des canaux avec l’API REST](/rest/api/media/operations/channel)
 
 [Concepts Azure Media Services](media-services-concepts.md)
 
 [Spécification d’ingestion en direct au format MP4 fragmenté Azure Media Services](../media-services-fmp4-live-ingest-overview.md)
 
 [live-overview]: ./media/media-services-manage-live-encoder-enabled-channels/media-services-live-streaming-new.png
-

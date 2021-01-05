@@ -9,12 +9,12 @@ ms.subservice: disks
 ms.date: 10/10/2019
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: c2b49a7e7e14bfbefcca64133ff23fdfabe53e7b
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 4284e94f8d8d0effd160c5048f54fcbede417e38
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198422"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86129762"
 ---
 # <a name="encrypt-virtual-machine-scale-sets-with-azure-resource-manager"></a>Chiffrer des groupes de machines virtuelles identiques avec Azure Resource Manager
 
@@ -38,9 +38,9 @@ Tout d’abord, sélectionnez le modèle qui convient à votre scénario.
 
 Exécutez ensuite les opérations qui suivent :
 
-     1. Click **Deploy to Azure**.
-     2. Fill in the required fields then agree to the terms and conditions.
-     3. Click **Purchase** to deploy the template.
+1. Cliquez sur **Déployer dans Azure**.
+2. Renseignez les champs obligatoires, puis acceptez les conditions générales.
+3. Sélectionnez **Acheter** pour déployer le modèle.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

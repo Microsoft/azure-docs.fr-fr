@@ -1,24 +1,24 @@
 ---
 title: Créer une offre Dynamics 365 for Customer Engagement & PowerApps sur la Place de marché commerciale Microsoft
 description: Guide pratique pour créer une offre Dynamics 365 for Customer Engagement & PowerApps pour lister ou vendre sur la Place de marché Azure, AppSource ou via le programme de fournisseur de solutions Cloud (CSP) dans l’Espace partenaires.
-author: dsindona
-ms.author: dsindona
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
-ms.topic: conceptual
-ms.date: 02/17/2020
-ms.openlocfilehash: cfec905d61daf961d9ca71026e9b7ec82f852bd5
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.topic: how-to
+author: navits09
+ms.author: navits
+ms.date: 06/17/2020
+ms.openlocfilehash: 96bdfc513023cafb2d94a68c06f1065cf20c3ba8
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734771"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130168"
 ---
 # <a name="create-a-dynamics-365-for-customer-engagement--powerapps-offer"></a>Créer une offre Dynamics 365 for Customer Engagement et PowerApps
 
 Cette rubrique explique comment créer une nouvelle offre Dynamics 365 for Customer Engagement et PowerApps. Toutes les applications de Dynamics 365 for Customer Engagement (PowerApps, Sales, Service, Project Service et Field Service) doivent passer par notre processus de certification et proposer une expérience d’essai. Le processus de certification vérifie que votre solution respecte les exigences standard, la compatibilité et les pratiques appropriées. Cette expérience d’essai permet aux utilisateurs de déployer votre solution dans un environnement Dynamics 365 en ligne.
 
-Avant de commencer, [créez un compte Place de marché commerciale dans l’Espace partenaires](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) si vous ne l’avez pas déjà fait. Vérifiez que votre compte est inscrit dans le programme Place de marché commerciale.
+Avant de commencer, [créez un compte Place de marché commerciale dans l’Espace partenaires](create-account.md) si vous ne l’avez pas déjà fait. Vérifiez que votre compte est inscrit dans le programme du marketplace commercial.
 
 ## <a name="create-a-new-offer"></a>Créer une offre
 
@@ -26,17 +26,18 @@ Avant de commencer, [créez un compte Place de marché commerciale dans l’Espa
 2. Dans le menu de navigation de gauche, sélectionnez **Place de marché commerciale** > **Vue d’ensemble**.
 3. Dans la page Vue d’ensemble, sélectionnez **+ Nouvelle offre** > **Dynamics 365 for Customer Engagement & PowerApps**.
 
-    ![Illustre le menu de navigation de gauche.](./media/new-offer-dynamics-365-cepa.png)
+    ![Illustre le menu de navigation de gauche.](./media/new-offer-dynamics-365-customer-engagement-powerapps.png)
 
 > [!NOTE]
-> Après la publication d’une offre, les modifications qui lui ont été apportées dans l’Espace partenaires apparaissent uniquement dans les vitrines après la republication de l’offre. Veillez à toujours effectuer une nouvelle publication après avoir apporté des modifications.
+> Après la publication d’une offre, les modifications qui lui ont été apportées dans l’Espace partenaires n’apparaissent dans les magasins en ligne qu’après republication de l’offre. Veillez à toujours effectuer une nouvelle publication après avoir apporté des modifications.
 
 ## <a name="new-offer"></a>Nouvelle offre
 
 Entrez un **ID d’offre**. Il s’agit d’un identificateur unique par offre dans votre compte.
 
 - Cet ID est visible par les clients dans l’adresse web de l’offre de la Place de marché et des modèles Resource Manager, le cas échéant.
-- Utilisez uniquement des lettres minuscules et des chiffres. Il peut inclure des traits d’union et des traits de soulignement, mais pas d’espaces, et est limité à 50 caractères. Par exemple, si vous entrez **test-offer-1**, l’adresse web de l’offre sera `https://azuremarketplace.microsoft.com/marketplace/../test-offer-1`.
+- L’ID d’offre associé à l’ID d’éditeur doit contenir moins de 40 caractères.
+- Utilisez uniquement des lettres minuscules et des chiffres. Il peut contenir des traits d’union et des traits de soulignement, mais pas d’espaces. Par exemple, si votre ID d’éditeur est testpublisherid et que vous entrez **test-offer-1** , l’adresse web de l’offre sera `https://appsource.microsoft.com/product/dynamics-365/testpublisherid.test-offer-1`.
 - L’ID d’offre ne peut pas être changé une fois que vous avez sélectionné **Créer**.
 
 Entrez un **Alias d’offre**. Il s’agit du nom attribué à l’offre dans l’Espace partenaires.
@@ -56,47 +57,28 @@ Sélectionnez l’option que vous souhaitez utiliser pour cette offre.
 
 #### <a name="get-it-now-free"></a>Obtenez-en une maintenant (gratuit)
 
-Répertoriez votre offre gratuitement pour les clients en fournissant une URL valide (qui commence par *http* ou *https*) où ils peuvent accéder à votre application.  Par exemple : `https://contoso.com/my-app`.
+Référencez votre offre gratuitement pour les clients.
 
 #### <a name="free-trial-listing"></a>Essai gratuit (annonce)
 
-Répertoriez votre offre en tant qu’essai gratuit pour les clients en fournissant une URL valide (qui commence par *http* ou *https*) où ils peuvent accéder obtenir un essai.  Par exemple : `https://contoso.com/trial/my-app`. Les versions d’évaluation gratuites sont créées, gérées et configurées par votre service et n’ont pas d’abonnements gérés par Microsoft.
+Référencez votre offre pour les clients avec un lien vers un essai gratuit. Les versions d’évaluation gratuites sont créées, gérées et configurées par votre service et n’ont pas d’abonnements gérés par Microsoft.
 
 > [!NOTE]
 > Les jetons que votre application recevra via votre lien d’évaluation peuvent uniquement être utilisés pour obtenir des informations utilisateur par le biais de Azure Active Directory (Azure AD) pour automatiser la création de comptes dans votre application. Les comptes Microsoft ne sont pas pris en charge pour l’authentification à l’aide de ce jeton.
 
 #### <a name="contact-me"></a>Me contacter
 
-Collectez des informations de contact client en connectant votre système de gestion de la relation client (CRM). Le client devra autoriser le partage de ses informations. Ces informations client, ainsi que le nom de l’offre, son ID et la place de marché sur laquelle il a trouvé votre offre, seront envoyées au système CRM que vous avez configuré. Pour plus d’informations sur la configuration de votre CRM, consultez [Connecter la gestion des prospects](#connect-lead-management). 
+Collectez des informations de contact client en connectant votre système de gestion de la relation client (CRM). Le client devra autoriser le partage de ses informations. Ces informations client, ainsi que le nom de l’offre, son ID et la place de marché sur laquelle il a trouvé votre offre, seront envoyées au système CRM que vous avez configuré. Pour plus d’informations sur la configuration de votre CRM, consultez [Prospects](#customer-leads).
 
 Sélectionnez **Enregistrer le brouillon** avant de continuer.
 
 ### <a name="test-drive"></a>Test drive
 
-Une version d’évaluation constitue un excellent moyen de présenter votre offre à vos clients potentiels en leur offrant la possibilité de l’essayer avant d’acheter, ce qui se traduit par une hausse du taux de conversion et par la génération de prospects de qualité. [Découvrez-en plus sur les versions d’évaluation](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/what-is-test-drive).
+Une version d’évaluation est un bon moyen de présenter votre offre à vos clients potentiels en leur donnant la possibilité de l’« essayer avant de l’acheter », ce qui se traduit par une hausse du taux de conversion et par la génération de prospects de qualité. Pour plus d’informations, commencez par [Qu’est-ce qu’un test drive](../what-is-test-drive.md).
 
-Pour activer une version d’évaluation pour une durée déterminée, cochez la case **Activer un test drive**. Pour supprimer une version d'évaluation de votre offre, désactivez cette case à cocher. Configurez l’environnement de la version d’évaluation dans la section [Configuration technique de la version d’évaluation](#test-drive-technical-configuration) plus loin dans cette rubrique.
+Pour activer une version d’évaluation pour une durée déterminée, cochez la case **Activer une version d’évaluation**. Pour supprimer une version d'évaluation de votre offre, désactivez cette case à cocher.
 
-Pour plus d’informations, consultez [Proposer une version d’évaluation de votre offre sur la Place de marché commerciale](https://docs.microsoft.com/azure/marketplace/partner-center-portal/test-drive).
-
-#### <a name="type-of-test-drive"></a>Type de version d’évaluation
-
-Choisissez parmi les options suivantes :
-
-- **[Azure Resource Manager](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/azure-resource-manager-test-drive)** – Modèle de déploiement qui contient toutes les ressources Azure qui constituent votre solution. Les produits adaptés à ce scénario utilisent uniquement des ressources Azure.
-- **[Dynamics 365 Business Central](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cpp-business-central-offer)** – Microsoft héberge et gère le service de version d’évaluation (dont le provisionnement et le déploiement) pour un système de planification des ressources d’entreprise Business Central (finance, opérations, chaîne d’approvisionnement, CRM, etc.).  
-- **[Dynamics 365 for Customer Engagement](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/dyn365ce/cpp-customer-engagement-offer)** – Microsoft héberge et gère le service de version d’évaluation (dont le provisionnement et le déploiement) pour un système Customer Engagement (ventes, service, service de projet, service après-vente, etc.).  
-- **[Dynamics 365 for Operations](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cpp-dynamics-365-operations-offer)** – Microsoft héberge et gère le service de version d’évaluation (dont le provisionnement et le déploiement) pour un système de planification des ressources d’entreprise Finances et opérations (finances, opérations, fabrication, chaîne d’approvisionnement, etc.). 
-- **[Application logique](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/logic-app-test-drive)** – Modèle de déploiement englobant toutes les architectures de solutions complexes. Tous les produits personnalisés doivent tous utiliser ce type de version d’évaluation.
-- **[Power BI](https://docs.microsoft.com/power-bi/service-template-apps-overview)** – Lien hypertexte vers un tableau de bord personnalisé. Les produits dotés d’un visuel Power BI interactif doivent utiliser ce type de version d’évaluation. Il vous suffit de charger votre URL Power BI incorporée.
-
-#### <a name="additional-test-drive-resources"></a>Ressources supplémentaires pour version d’évaluation
-
-- [Bonnes pratiques techniques](https://github.com/Azure/AzureTestDrive/wiki/Test-Drive-Best-Practices)
-- [Bonnes pratiques marketing](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/marketing-and-best-practices)
-- [Vue d’ensemble des versions d’évaluation ](https://assetsprod.microsoft.com/mpn/azure-marketplace-appsource-test-drives.pdf) au format PDF (veillez à désactiver votre bloqueur de fenêtres publicitaires)
-
-## <a name="connect-lead-management"></a>Connecter la gestion des prospects
+### <a name="customer-leads"></a>Prospects
 
 [!INCLUDE [Connect lead management](./includes/connect-lead-management.md)]
 
@@ -108,9 +90,14 @@ Sélectionnez **Enregistrer le brouillon** avant de continuer.
 
 Cette page vous permet de définir les catégories et les secteurs d’activité auxquels votre offre est destinée sur la Place de marché, la version de votre application et les contrats juridiques accompagnant votre offre.
 
-### <a name="category"></a>Catégorie
+### <a name="category"></a>Category
 
-Sélectionnez une catégorie au minimum et trois au maximum. Elles permettent de placer votre offre dans les zones de recherche appropriées sur la Place de marché. Veillez à décrire l’adéquation de votre offre à ces catégories dans la description de l’offre.
+Sélectionnez les catégories et les sous-catégories pour placer votre offre dans les zones de recherche appropriées sur la Place de marché. Veillez à décrire l’adéquation de votre offre à ces catégories dans la description de l’offre. Sélectionnez :
+
+- Au moins une et jusqu’à deux catégories, y compris une catégorie principale et une catégorie secondaire (facultatif).
+- Jusqu’à deux sous-catégories pour chaque catégorie principale et/ou secondaire. Si aucune sous-catégorie n’est applicable à votre offre, sélectionnez **Non applicable**.
+
+Consultez la liste complète des catégories et sous-catégories dans [Bonnes pratiques pour le référencement des offres](../gtm-offer-listing-best-practices.md).
 
 ### <a name="industry"></a>Secteur d’activité
 
@@ -139,6 +126,21 @@ Définissez les détails de la Place de marché pour chaque langue/marché, comm
 > [!NOTE]
 > Il n’est pas nécessaire que le contenu du référencement de l’offre (par exemple, la description, les documents, les captures d’écran et les conditions d’utilisation) soit en anglais, tant que sa description commence par l’expression : « This application is available only in [langue autre que l’anglais]. » Il est également possible de fournir une *URL de lien utile* pour offrir du contenu dans une langue autre que celle utilisée dans le contenu de la liste des offres.
 
+Voici un exemple de la façon dont les informations de l’offre s’affichent dans Microsoft AppSource (les prix listés sont fournis à titre d’exemple uniquement et ne reflètent pas les coûts réels) :
+
+:::image type="content" source="media/example-azure-marketplace-d365-customer-engagement.png" alt-text="Illustre la façon dont cette offre s’affiche dans Microsoft AppSource.":::
+
+#### <a name="call-out-descriptions"></a>Descriptions de légende
+
+1. Logo
+2. Products
+3. Catégories
+4. Adresse du support technique (lien)
+5. Adresse conditions d’utilisation (lien)
+6. Nom de l’offre
+7. Description
+8. Captures d’écran/vidéos
+
 ### <a name="name"></a>Nom
 
 Le nom que vous entrez ici s’affichera auprès des clients comme titre de votre référencement d’offre. Ce champ est prérempli avec le texte que vous avez entré pour **Alias d’offre** lorsque vous avez créé l’offre, mais vous pouvez modifier cette valeur. Ce nom peut être une marque déposée (et vous pouvez inclure des symboles de marque ou de copyright). Le nom ne peut pas comporter plus de 50 caractères et ne peut pas contenir d’emoji.
@@ -149,26 +151,11 @@ Fournissez une brève description de votre offre, jusqu’à 100 caractères. C
 
 ### <a name="description"></a>Description
 
-Fournissez une description plus longue de votre offre, jusqu’à 3 000 caractères. Cette description s’affichera pour les clients dans la vue d’ensemble de la place de marché. Incluez la proposition de valeur de votre offre, les principaux avantages, les associations de catégorie et/ou de secteur d’activité, les opportunités d’achat dans l’application et toutes les informations requises.
+[!INCLUDE [Long description-1](./includes/long-description-1.md)]
 
-Quelques conseils pour rédiger votre description :
+[!INCLUDE [Long description-2](./includes/long-description-2.md)]
 
-- Décrivez clairement la proposition de valeur de votre offre dès les premières phrases de votre description. Incluez les informations suivantes dans votre proposition de valeur :
-  - Description du produit
-  - Type d’utilisateur qui tire parti du produit
-  - Les clients ont des besoins ou des problèmes auxquels le produit répond
-- Gardez à l’esprit que les premières phrases peuvent être affichées dans les résultats de recherche.  
-- Ne comptez pas sur les fonctionnalités de votre produit pour convaincre. Concentrez-vous plutôt sur ce que votre application peut apporter aux clients.  
-- Autant que possible, utilisez le vocabulaire propre au secteur visé, ainsi que des termes décrivant les avantages proposés.
-
-Pour que la description de votre offre soit plus accrocheuse, utilisez l’éditeur de texte enrichi pour appliquer la mise en forme.
-
-![Utilisation de l’éditeur de texte enrichi](./media/rich-text-editor.png)
-
-| <center>Changer la mise en forme du texte | <center>Ajouter des puces ou une numérotation | <center>Ajouter ou supprimer une mise en retrait de texte |
-| --- | --- | --- |
-| <center>![Changer la mise en forme du texte à l’aide de l’éditeur de texte enrichi](./media/text-editor3.png) |  <center>![Ajouter des listes à l’aide de l’éditeur de texte enrichi](./media/text-editor4.png) |  <center>![Mettre du texte en retrait à l’aide de l’éditeur de texte enrichi](./media/text-editor5.png) |
-
+[!INCLUDE [Rich text editor](./includes/rich-text-editor.md)]
 
 ### <a name="search-keywords"></a>Mots clés de recherche
 
@@ -194,7 +181,7 @@ Entrez l’adresse où figure la politique de confidentialité de votre organisa
 
 Entrez le nom, l’adresse e-mail et le numéro de téléphone d’un **contact du support** et d’un **contact en ingénierie**. Ces informations ne seront pas présentées aux clients, mais seront accessibles à Microsoft et pourront être fournies aux partenaires CSP.
 
-Dans la section **Contact de support**, vous devez également fournir **l’URL du support technique** où les partenaires CSP peuvent trouver l’assistance pour votre offre.
+Dans la section **Contact de support** , vous devez également fournir **l’URL du support technique** où les partenaires CSP peuvent trouver l’assistance pour votre offre.
 
 ### <a name="supporting-documents"></a>Documents de soutien
 
@@ -204,31 +191,35 @@ Fournissez ici entrez un et trois documents marketing d’accompagnement, comme 
 
 Fournissez des logos et des images pour votre offre. Toutes les images doivent être au format .png.
 
+[!INCLUDE [logo tips](../includes/graphics-suggestions.md)]
+
 >[!NOTE]
 >Si vous rencontrez un problème de chargement de fichiers, vérifiez que votre réseau local ne bloque pas le service https://upload.xboxlive.com utilisé par l’Espace partenaires.
 
 #### <a name="store-logos"></a>Stocker des logos
 
-Fournissez le logo de votre offre en trois tailles (en pixels) :
-- **Petite** (obligatoire ; 48 x 48)
-- **Grande** (obligatoire ; 216 x 216)
-- **Large** (facultative ; 255 x 115)
+Fournissez un fichier PNG pour le logo de **grande taille**. L’Espace partenaires s’en servira pour créer un logo de **petite taille**. Si vous le souhaitez, vous pouvez par la suite le remplacer par une autre image.
 
-#### <a name="hero"></a>Bannière
+- **Grand** (de 216 x 216 à 350 x 350 px, obligatoire)
+- **Petit** (48 x 48 px, facultatif)
 
-L’image de héros est facultative. Si vous en fournissez une, elle doit être au format 815 x 290 pixels.
+Ces logos sont utilisés à différents emplacements dans la liste :
+
+[!INCLUDE [logos-appsource-only](../includes/logos-appsource-only.md)]
+
+[!INCLUDE [Logo tips](../includes/graphics-suggestions.md)]
 
 #### <a name="screenshots"></a>Captures d’écran.
 
 Ajoutez des captures d’écran qui illustrent le fonctionnement de votre offre. Au moins une capture d’écran est requise, et vous pouvez en ajouter jusqu’à cinq. Toutes les captures d’écran doivent être au format 1280 x 720 pixels.
 
-#### <a name="videos"></a>Videos
+#### <a name="videos"></a>Vidéos
 
 Vous pouvez éventuellement ajouter jusqu’à quatre vidéos qui illustrent votre offre. Ces vidéos doivent être hébergées sur YouTube et/ou Vimeo. Pour chacune d’entre elles, entrez le nom de la vidéo, son URL et une image miniature de la vidéo (1280 x 720 pixels)
 
 #### <a name="additional-marketplace-listing-resources"></a>Ressources d’annonce supplémentaires de place de marché
 
-[Meilleures pratiques pour les annonces d’offre d’une place de marché](https://docs.microsoft.com/azure/marketplace/gtm-offer-listing-best-practices)
+[Meilleures pratiques pour les annonces d’offre d’une place de marché](../gtm-offer-listing-best-practices.md)
 
 Sélectionnez **Enregistrer le brouillon** avant de continuer.
 
@@ -273,13 +264,18 @@ Indiquez l’URL de la page web de configuration qui permet au client de configu
 
 ### <a name="crm-package"></a>Package CRM
 
-Dans le champ **URL de votre emplacement de package**, entrez l’URL d’un compte de stockage Azure qui contient le fichier .zip du package CRM téléchargé. Cette URL doit inclure une clé SAP en lecture seule pour permettre à Microsoft de récupérer votre package à des fins de vérification.
+Dans le champ **URL de votre emplacement de package** , entrez l’URL d’un compte de stockage Blob Azure qui contient le fichier .zip du package CRM téléchargé. Incluez une clé SAP en lecture seule dans l’URL pour que Microsoft puisse sélectionner votre package à des fins de vérification.
 
-Cochez la case intitulée **Il y a plusieurs packages CRM dans mon fichier de package**, le cas échéant. Dans ce cas, veillez à inclure tous les packages dans votre fichier .zip.
+> [!IMPORTANT]
+> Pour éviter un bloc de publication, assurez-vous que la date d’expiration de l’URL de votre stockage d’objets BLOB n’a pas expiré. Vous pouvez modifier la date en accédant à votre stratégie. Nous vous recommandons d’avoir une **Heure d’expiration** d’au moins un mois dans le futur.
+
+Sélectionnez la case intitulée **Il y a plusieurs packages CRM dans mon fichier de package** , le cas échéant. Dans ce cas, veillez à inclure tous les packages dans votre fichier .zip.
+
+Pour plus d’informations sur la façon de générer votre package et de mettre à jour sa structure, consultez l’[Étape 3 : Créer un package AppSource pour votre application](/powerapps/developer/common-data-service/create-package-app-appsource).
 
 ### <a name="crm-package-availability"></a>Disponibilité du package CRM
 
-Dans cette section, sélectionnez **+ Ajouter une région** pour spécifier les régions géographiques dans lesquelles votre package CRM sera disponible pour les clients. Un déploiement sur les régions souveraines suivantes exige une autorisation spéciale et une validation pendant le processus de certification : [Allemagne](https://docs.microsoft.com/azure/germany/), [cloud US Government](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome)et TIP.
+Dans cette section, sélectionnez **+ Ajouter une région** pour spécifier les régions géographiques dans lesquelles votre package CRM sera disponible pour les clients. Un déploiement sur les régions souveraines suivantes exige une autorisation spéciale et une validation pendant le processus de certification : [Allemagne](../../germany/index.yml), [cloud US Government](../../azure-government/documentation-government-welcome.md)et TIP.
 
 Par défaut, **l’URL de configuration d’application** que vous avez saisie ci-dessus sera utilisée pour chaque région. Si vous le préférez, vous pouvez entrer une URL de configuration d’application distincte pour une ou plusieurs régions spécifiques. 
 
@@ -287,98 +283,11 @@ Sélectionnez **Enregistrer le brouillon** avant de continuer.
 
 ## <a name="test-drive-technical-configuration"></a>Configuration technique de la version d’évaluation
 
-Cette page vous permet de configurer une démonstration (« version d’évaluation ») qui permet aux clients d’évaluer votre offre avant de l’acheter. Pour en savoir, consultez l’article [Qu’est-ce qu’une version d’évaluation ?](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/what-is-test-drive).
+Cette page vous permet de configurer une démonstration (« version d’évaluation ») qui permet aux clients d’évaluer votre offre avant de l’acheter. Pour en savoir, consultez [Qu’est-ce qu’un test drive ?](../what-is-test-drive.md).
 
-Pour activer une version d'évaluation, cochez la case Activer une version d'évaluation dans l’onglet [Configuration de l’offre](#test-drive). Pour supprimer une version d'évaluation de votre offre, désactivez cette case à cocher.
+Pour activer une version d’évaluation, cochez la case **Activer une version d’évaluation** sous l’onglet [Configuration de l’offre](#test-drive). Pour supprimer une version d'évaluation de votre offre, désactivez cette case à cocher.
 
-Pour en savoir, consultez l’article [Qu’est-ce qu’une version d’évaluation ?](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/what-is-test-drive).
-
-Les types de version d’évaluation suivants sont disponibles, chacun avec ses propres exigences de configuration technique :
-
-- [Azure Resource Manager](#technical-configuration-for-azure-resource-manager-test-drive)
-- [Dynamics 365](#technical-configuration-for-dynamics-365-test-drive)
-- [Application logique](#technical-configuration-for-logic-app-test-drive)
-- [Power BI](#technical-configuration-not-required-for-power-bi-test-drives) (configuration technique non requise)
-
-### <a name="technical-configuration-for-azure-resource-manager-test-drive"></a>Configuration technique pour la version d’évaluation d’Azure Resource Manager
-
-Un modèle de déploiement qui contient toutes les ressources Azure comprenant votre solution. Les produits adaptés à ce scénario utilisent uniquement des ressources Azure. En savoir plus sur la configuration d’une [version d’évaluation d’Azure Resource Manager](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/test-drive/azure-resource-manager-test-drive).
-
-- **Régions** (obligatoire) – À l’heure actuelle, vous pouvez mettre votre version d’évaluation à disposition dans 26 régions Azure. En règle générale, vous devez rendre votre version d’évaluation disponible dans les régions où vous prévoyez le plus grand nombre de clients, de sorte qu’ils puissent sélectionner la région la plus proche pour des performances optimales. Vous devez vous assurer que votre abonnement a l’autorisation de déployer toutes les ressources nécessaires dans chacune des régions sélectionnées.
-- **Instances** – Sélectionnez le type (chaud ou froid) et le nombre d’instances disponibles, qui seront multipliés par le nombre de régions où votre offre sera disponible.
-
-    **Chaud** – Ce type d’instance est déployé et en attente de l’accès par région sélectionnée. Les clients peuvent accéder instantanément aux instances *à chaud* d’une version d’évaluation au lieu d’attendre un déploiement. L’inconvénient est que ces instances sont toujours en cours d’exécution sur votre abonnement Azure, entraînant des coûts de fonctionnement plus importants. Il est vivement recommandé d’avoir au moins une instance *à chaud*, étant donné que la plupart de vos clients ne souhaitent pas attendre la fin des déploiements complets, et il y a donc une chute dans l’utilisation du client si aucune instance *à chaud* n’est disponible.
-
-    **Froid** – Ce type d’instance représente le nombre total d’instances pouvant éventuellement être déployées par région. Les instances à froid nécessitent le modèle Resource Manager entier de la version d’évaluation pour être déployées lorsqu’un client demande la version d’évaluation, les instances *à froid* sont donc plus lentes à charger que les instances *à chaud*. L’inconvénient est que vous avez uniquement à payer pour la durée de la version d’évaluation, elle n’est *pas* toujours en cours d’exécution sur votre abonnement Azure comme c’est le cas avec une instance *à chaud*.
-
-- **Version d’évaluation du Azure Resource Manager** – Chargez le fichier .zip contenant votre modèle Azure Resource Manager. Apprenez-en plus sur la création d’un modèle Azure Resource Manager dans l’article de démarrage rapide [Créer et déployer des modèles Azure Resource Manager à l’aide du portail Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal).
-
-- **Durée de la version d’évaluation** (obligatoire) – Entrez le nombre d’heures durant lesquelles la version d’évaluation restera active. La version d’évaluation prend fin automatiquement à l’issue de cette période. Cette durée ne peut être définie qu’en heures pleines (par exemple, « 2 » heures convient, mais pas « 1,5 »).
-
-### <a name="technical-configuration-for-dynamics-365-test-drive"></a>Configuration technique pour la version d’évaluation de Dynamics 365
-
-Microsoft peut retirer la complexité de la configuration d’une version d’évaluation en hébergeant et en conservant l’approvisionnement et le déploiement du service à l’aide de ce type de version d’évaluation. La configuration de ce type de version d’évaluation hébergé est la même, peu importe si la version d’évaluation cible un public Business Central, Customer Engagement ou Operations.
-
-- **Nombre maximal de versions d’évaluation simultanées** (obligatoire) – Définissez le nombre maximum de clients pouvant utiliser votre version d’évaluation simultanément. Chaque utilisateur simultané consommera une licence Dynamics 365 tant que la version d’évaluation est active. Vérifiez donc que vous avez assez de licences pour prendre en charge la limite maximale définie. La valeur recommandée se situe entre 3 et 5.
-
-- **Durée de la version d’évaluation** (obligatoire) – Entrez le nombre d’heures durant lesquelles la version d’évaluation restera active. Passée cette durée, la session prendra fin et ne consommera plus aucune de vos licences. La valeur recommandée est de 2 à 24 heures, selon la complexité de votre offre. Cette durée ne peut être définie qu’en heures pleines (par exemple, « 2 » heures convient, mais pas « 1,5 »). L’utilisateur peut demander une nouvelle session s’il n’a pas eu assez de temps et s’il souhaite de nouveau accéder à la version d’évaluation.
-
-- **URL de l’instance** (obligatoire) – URL où le client commencera son évaluation. Il s’agit généralement de l’URL de votre instance Dynamics 365 exécutant votre application et où les exemples de données sont installés (par exemple `https://testdrive.crm.dynamics.com`).
-
-- **URL de l’API web de l’instance**(obligatoire) – Récupérez l’URL de l’API web pour votre instance Dynamics 365 en vous connectant à votre compte Microsoft 365 et en accédant à **Paramètres** \&gt; **Personnalisation** \&gt; **Ressources développeur** \&gt; **API web de l’instance (URL racine du service)** , puis copiez l’URL trouvée ici (par exemple `https://testdrive.crm.dynamics.com/api/data/v9.0`).
-
-- **Nom du rôle** (obligatoire) – Indiquez le nom du rôle de sécurité que vous avez défini dans votre version d’évaluation personnalisée Dynamics 365. Ce nom de rôle de sécurité sera attribué à l’utilisateur lors de la version d’évaluation (par exemple, test-drive-role).
-
-### <a name="technical-configuration-for-logic-app-test-drive"></a>Configuration technique pour la version d’évaluation d’applications logiques
-
-Tous les produits personnalisés doivent utiliser ce type de modèle de déploiement de version d’évaluation, qui englobe une variété d’architectures de solution complexes. Pour plus d’informations sur la configuration de versions d’évaluation d’applications logiques, consultez [Operations](https://github.com/Microsoft/AppSource/blob/master/Setup-your-Azure-subscription-for-Dynamics365-Operations-Test-Drives.md) et [Customer Engagement](https://github.com/Microsoft/AppSource/wiki/Setting-up-Test-Drives-for-Dynamics-365-app) sur GitHub.
-
-- **Régions** (obligatoire, liste déroulante à sélection unique) – À l’heure actuelle, vous pouvez mettre votre version d’évaluation à disposition dans 26 régions Azure. Les ressources pour votre application logique seront déployées dans la région que vous sélectionnez. Si votre application logique compte des ressources personnalisées stockées dans une région spécifique, assurez-vous que celle-ci est sélectionnée ici. La meilleure façon de procéder consiste à déployer entièrement votre application logique localement vers votre abonnement Azure dans le portail et à vérifier qu’elle fonctionne correctement avant de la sélectionner.
-
-- **Nombre maximal de versions d’évaluation simultanées** (obligatoire) – Définissez le nombre maximum de clients pouvant utiliser votre version d’évaluation simultanément. Ces versions d’évaluation sont déjà déployées, permettant ainsi aux clients d’y accéder instantanément sans attendre un déploiement.
-
-- **Durée de la version d’évaluation** (obligatoire) – Entrez la durée d’activité de la version d’évaluation, en nombre d’heures. La version d’évaluation se termine automatiquement à la fin de cette période.
-
-- **Nom du groupe de ressources Azure** (obligatoire) – Entrez le nom du [Groupe de ressources Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview#resource-groups) dans lequel votre version d’évaluation d’application logique est enregistrée.
-
-- **Nom de l’application logique Azure** (obligatoire) – Entrez le nom de l’application logique qui affecte la version d’évaluation à l’utilisateur. Cette application logique doit être enregistrée dans le groupe de ressources Azure ci-dessus.
-
-- **Déprovisionner le nom d’application logique** (obligatoire) – Entrez le nom de l’application logique qui déprovisionne la version d’évaluation une fois que le client a terminé. Cette application logique doit être enregistrée dans le groupe de ressources Azure ci-dessus.
-
-### <a name="technical-configuration-not-required-for-power-bi-test-drives"></a>Configuration technique non requise pour les versions d’évaluation de Power BI
-
-Les produits souhaitant afficher un visuel interactif Power BI peuvent utiliser un lien hypertexte pour partager un tableau de bord personnalisé et intégré qui sert de version d’évaluation, sans configuration technique supplémentaire. En savoir plus sur la configuration d’applications de modèle [Power BI](https://docs.microsoft.com/power-bi/service-template-apps-overview).
-
-### <a name="deployment-subscription-details"></a>Détails de l’abonnement de déploiement
-
-Pour permettre à Microsoft de déployer la version d’évaluation en votre nom, créez et fournissez un abonnement Azure distinct et unique (non obligatoire pour les versions d’évaluation Power BI).
-
-- **ID d’abonnement Azure** (obligatoire pour Azure Resource Manager et les applications logiques) – Entrez l’ID d’abonnement pour accorder l’accès aux services de votre compte Azure pour les rapports d’utilisation des ressources et la facturation. Nous vous recommandons d’envisager la [création d’un abonnement Azure distinct](https://docs.microsoft.com/azure/billing/billing-create-subscription) à utiliser pour les versions d’évaluation si vous n’en avez pas déjà. Pour trouver vos ID d’abonnement Azure en vous connectant au [portail Azure](https://portal.azure.com/) et en accédant à l’onglet **Abonnements** dans le menu de gauche. Sélectionnez l’onglet pour afficher votre ID d’abonnement (par exemple, « a83645ac-1234-5ab6-6789-1h234g764ghty »).
-
-- **ID de locataire Azure AD** (obligatoire) – Entrez votre [ID de locataire](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) Azure Active Directory (AD). Pour trouver cet ID, connectez-vous au [Portail Azure](https://portal.azure.com/), sélectionnez l’onglet Active Directory dans le menu de gauche, sélectionnez **Propriétés**, puis cherchez l’**ID du répertoire** (par exemple, 50c464d3-4930-494c-963c-1e951d15360e). Vous pouvez aussi chercher l’ID de locataire de votre organisation à partir de l’URL de votre nom de domaine à l’adresse [https://www.whatismytenantid.com](https://www.whatismytenantid.com).
-
-- **Nom de locataire Azure AD** (obligatoire pour Dynamic 365) – Entrez votre nom Azure Active Directory (AD). Pour rechercher ce nom, connectez-vous au [portail Azure](https://portal.azure.com/), et dans le coin supérieur droit, le nom de votre locataire s’affichera sous le nom de votre compte.
-
-- **ID d’application Azure AD** (obligatoire) – Entrez votre [ID d’application](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) Azure Active Directory (AD). Pour trouver cet ID, connectez-vous sur le [Portail Azure](https://portal.azure.com/), sélectionnez l’onglet Active Directory dans le menu de gauche, puis **Inscriptions d’applications**, cherchez le numéro de l’**ID de l’application** (par exemple, 50c464d3-4930-494c-963c-1e951d15360e).
-
-- **Clé secrète client Azure AD** (obligatoire) – Entrez la [clé secrète client](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#certificates-and-secrets) de votre application Azure AD. Pour trouver cette valeur, connectez-vous au [portail Azure](https://portal.azure.com/). Dans le volet de navigation gauche, sélectionnez l’onglet **Azure Active Directory**,puis **Inscriptions d’applications**, et enfin votre application de version d’évaluation. Ensuite, sélectionnez **Certificats et clés secrètes**, **Nouvelle clé secrète client**, entrez une description, sélectionnez **Jamais** sous **Expiration** puis choisissez **Ajouter**. Veillez à copier la valeur. Ne quittez pas la page avant d’avoir copié la valeur, vous ne pourriez alors plus obtenir la valeur.)
-
-### <a name="test-drive-marketplace-listings"></a>Référencements de versions d'évaluation sur la place de marché
-
-L'option **Référencement sur la place de marché** située sous l’onglet **Version d'évaluation** affiche les langues dans lesquelles votre version d'évaluation est disponible. Actuellement, **Anglais (États-Unis)** est le seul emplacement disponible. Sélectionnez le nom de la langue pour entrer des informations qui décrivent l’expérience de la version d'évaluation.
-
-- **Description** (obligatoire) – Décrivez votre version d’évaluation, ce qui sera présenté, les objectifs que l’utilisateur pourra essayer, les fonctionnalités à explorer et toute autre information qui aidera l’utilisateur à se décider d’acheter ou non votre offre. Jusqu’à 3 000 caractères peuvent être entrés dans ce champ. 
-
-- **Informations d’accès** (obligatoire pour les versions d’évaluation Azure Resource Manager et logiques) – Expliquez ce qu’un client doit savoir pour accéder et utiliser la version d’évaluation en question. Détaillez un scénario d’utilisation de votre offre ainsi que tout ce que le client doit savoir pour accéder aux fonctionnalités disponibles dans la version d’évaluation. Jusqu’à 10 000 caractères peuvent être entrés dans ce champ.
-
-- **Manuel de l’utilisateur** (obligatoire) – Exploration approfondie de l’expérience de votre version d’évaluation. Le manuel de l’utilisateur doit couvrir exactement ce que vous souhaitez que le client accomplisse dans la version d’évaluation et sert de référence pour toutes les questions qu’ils peuvent avoir. Le fichier doit être au format PDF et être nommé (255 caractères maximum) après le chargement.
-
-- **Vidéos** (facultatif) – Chargez des vidéos sur un site d’hébergement externe et référencez le lien et l’image miniature (533 x 324 pixels) ici. Le client disposera ainsi d’informations complètes qui l’aideront à mieux comprendre la version d’évaluation, notamment la façon d’exploiter les fonctionnalités de l’offre et de comprendre les scénarios qui font ressortir ses avantages.
-  - **Nom** (obligatoire)
-  - **Adresse** (obligatoire ; YouTube ou Vimeo uniquement)
-  - **Miniature** (ce fichier image doit être au format PNG et 533 x 324 pixels)
-
-Sélectionnez **Enregistrer le brouillon** avant de continuer.
+Une fois que vous avez fini de configurer votre test drive, sélectionnez **Enregistrer le brouillon** avant de continuer.
 
 ## <a name="supplemental-content"></a>Contenu supplémentaire
 
@@ -399,11 +308,11 @@ Après avoir complété toutes les sections obligatoires de l’offre, sélectio
 S’il s’agit de votre première publication de cette offre, vous pouvez :
 
 - Consultez l’état d’achèvement de chaque section de l’offre.
-    - **Non démarrée** – La section n’a pas encore été modifiée et doit être complétée.
+    - **Non démarrée**  – La section n’a pas encore été modifiée et doit être complétée.
     - **Incomplète** – La section comporte des erreurs qui doivent être corrigées ou nécessite un complément d’informations. Revenir à la ou les sections et les mettre à jour.
-    - **Complète** – La section est complète, toutes les données obligatoires ont été fournies et aucune erreur n’est présente. Toutes les sections de l’offre doivent être dans l’état Complète avant de pouvoir envoyer l’offre.
-- Dans la sections **Notes pour la certification**, fournissez des instructions de test à l’équipe de certification pour veiller à ce que votre application soit testée correctement, en plus de toutes autres notes supplémentaires utiles pour comprendre l’application.
-- Envoyez l’offre pour publication en sélectionnant **Envoyer**. Nous vous enverrons un e-mail pour vous faire savoir si une version d’essai de l’offre est disponible pour vérification et approbation. Retournez dans Partner Center et sélectionnez **Publier** afin de publier pour le public (ou pour le public privé si l’offre est privée).
+    - **Complète** : la section est complète, toutes les données obligatoires ont été fournies et aucune erreur n’est présente. Toutes les sections de l’offre doivent être dans l’état Complète avant de pouvoir envoyer l’offre.
+- Dans la sections **Notes pour la certification** , fournissez des instructions de test à l’équipe de certification pour veiller à ce que votre application soit testée correctement, en plus de toutes autres notes supplémentaires utiles pour comprendre l’application.
+- Envoyez l’offre pour publication en sélectionnant **Envoyer**. Nous vous enverrons un e-mail pour vous faire savoir si une version d’essai de l’offre est disponible pour vérification et approbation. Revenez à l’Espace partenaires et sélectionnez **Go-Live** pour l’offre de publication sur le public.
 
 ## <a name="next-step"></a>Étape suivante
 

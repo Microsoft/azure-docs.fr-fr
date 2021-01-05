@@ -8,12 +8,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.date: 04/29/2020
 ms.author: makromer
-ms.openlocfilehash: 3d2ef6fb0cd7af444b9bff755eee4eee70d03d15
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 5d93cb49c77a4c8164a8b4e9bca349a805f39678
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691895"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93041623"
 ---
 # <a name="migrate-normalized-database-schema-from-azure-sql-database-to-azure-cosmosdb-denormalized-container"></a>Migrer un schéma de base de données normalisé d’Azure SQL Database vers un conteneur dénormalisé Azure Cosmos DB
 
@@ -96,11 +96,11 @@ Le conteneur Cosmos DB obtenu incorpore la requête interne dans un document et 
 
 19. Dans Paramètres du récepteur, définissez la Clé de partition sur ```\SalesOrderID``` et l’action de collection sur « recréer ». Assurez-vous que l’onglet Mappage ressemble à ceci :
 
-![Paramètres du récepteur](media/data-flow/cosmosb7.png)
+![Capture d’écran montrant l’onglet Mappage.](media/data-flow/cosmosb7.png)
 
 20. Cliquez sur l’aperçu des données pour vous assurer que vous voyez ces 32 lignes prêtes pour insertion en tant que nouveaux documents dans votre nouveau conteneur :
 
-![Paramètres du récepteur](media/data-flow/cosmosb8.png)
+![Capture d’écran montrant l’onglet Aperçu des données.](media/data-flow/cosmosb8.png)
 
 Si tout semble correct, vous êtes prêt à créer un pipeline, à y ajouter cette activité de flux de données, et à l’exécuter. Vous pouvez l’exécuter à partir d’un débogage ou d’une exécution déclenchée. Après quelques minutes, vous devriez avoir un nouveau conteneur dénormalisé de commandes nommé « orders » dans votre base de données Cosmos DB.
 

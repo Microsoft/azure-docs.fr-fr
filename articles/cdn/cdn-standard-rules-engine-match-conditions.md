@@ -8,10 +8,10 @@ ms.topic: article
 ms.date: 11/01/2019
 ms.author: allensu
 ms.openlocfilehash: b8050b973027ac91ede0ba98f4d1c76831da9828
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81259922"
 ---
 # <a name="match-conditions-in-the-standard-rules-engine-for-azure-cdn"></a>Conditions de correspondance du moteur de règles Standard pour Azure CDN
@@ -170,7 +170,7 @@ Opérateur | URL de la demande | Transformation de cas
 
 #### <a name="key-information"></a>Informations essentielles
 
-- Lorsque vous utilisez cette condition de règle, veillez à inclure les informations de protocole. Par exemple : *https://www.\<yourdomain\>.com* .
+- Lorsque vous utilisez cette condition de règle, veillez à inclure les informations de protocole. Par exemple : *https://www.\<yourdomain\>.com*.
 
 ### <a name="url-file-extension"></a>Extension de fichier d’URL
 

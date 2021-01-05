@@ -5,15 +5,16 @@ description: Créer ou modifier un Peering direct à l’aide de PowerShell
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/27/2019
 ms.author: prmitiki
-ms.openlocfilehash: 7639499aaef8d479c2552849b2124e709c46fd36
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: be4bab10d369fcefe626bbe890acfff7fc7004b0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81680779"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079062"
 ---
 # <a name="create-or-modify-a-direct-peering-by-using-powershell"></a>Créer ou modifier un Peering direct à l’aide de PowerShell
 

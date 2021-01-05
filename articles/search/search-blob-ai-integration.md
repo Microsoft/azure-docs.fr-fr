@@ -1,19 +1,19 @@
 ---
 title: Utiliser l’IA pour comprendre les données de stockage blob
 titleSuffix: Azure Cognitive Search
-description: Ajoutez des fonctionnalités de traitement sémantique en langage naturel et d’analyse d’images aux objets blob Azure en utilisant un pipeline d’enrichissement par IA dans Recherche cognitive Azure.
+description: Découvrez les fonctionnalités d’analyse du langage naturel et des images dans Recherche cognitive Azure, ainsi que la façon dont ces processus s’appliquent au contenu stocké dans des blobs Azure.
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 591437eb3951164d53388b6164103948e9ad65e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/23/2020
+ms.openlocfilehash: a0d32f00bd3c7f8daa2984bdc7c9b9dfb5add218
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73496439"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91362795"
 ---
 # <a name="use-ai-to-understand-blob-storage-data"></a>Utiliser l’IA pour comprendre les données de stockage blob
 
@@ -22,9 +22,9 @@ Dans Stockage Blob Azure, les données sont souvent constituées de divers conte
 + Extraction de texte d’images à l’aide de la reconnaissance optique de caractères (OCR)
 + Création d’une description de scène ou d’étiquettes à partir d’une photo
 + Détection de langue et traduction de texte dans différentes langues
-+ Traitement de texte avec la reconnaissance d’entité nommée (NER) pour rechercher des références à des personnes, dates, lieux ou organisations 
++ Inférer une structure via un reconnaissance d’entité en recherchant des références à des personnes, des dates, des lieux ou des organisations
 
-Même si vous n’êtes intéressé que par une seule de ces fonctionnalités d’IA, il est courant d’en combiner plusieurs dans le même pipeline (par exemple, extraction de texte d’une image numérisée et recherche des dates et des emplacements référencés). 
+Même si vous n’êtes intéressé que par une seule de ces fonctionnalités d’IA, il est courant d’en combiner plusieurs dans le même pipeline (par exemple, extraction de texte d’une image numérisée et recherche des dates et des emplacements référencés). Il est également courant d’inclure un traitement personnalisé d’IA ou d’apprentissage automatique sous la forme de packages externes de pointe ou de modèles internes adaptés à vos données et à vos besoins.
 
 L’enrichissement par IA crée de nouvelles informations, capturées sous forme de texte, stockées dans des champs. Après l’enrichissement, vous pouvez accéder à ces informations à partir d’un index de recherche en effectuant une recherche en texte intégral ou renvoyer les documents enrichis à Stockage Azure pour permettre de nouvelles expériences applicatives comme notamment l’exploration de données pour des scénarios de découverte ou d’analytique. 
 
@@ -32,39 +32,45 @@ Dans cet article, nous examinons l’enrichissement par IA à travers un objecti
 
 ## <a name="what-it-means-to-enrich-blob-data-with-ai"></a>Que signifie « enrichir » des données blob avec l’IA ?
 
-L’*enrichissement par IA*  fait partie de l’architecture d’indexation de Recherche cognitive Azure qui intègre l’IA (intelligence artificielle) de Microsoft ou une IA personnalisée que vous fournissez. Il permet de mettre en œuvre des scénarios de bout en bout quand il s’agit de traiter des objets blob (existants ou nouvellement obtenus ou mis à jour), d’ouvrir tous les formats de fichiers pour en extraire des images et du texte, d’extraire les informations souhaitées avec différentes fonctionnalités d’IA, puis de les indexer dans un index de recherche pour accélérer la recherche, l’extraction et l’exploration. 
+L’*enrichissement par IA * fait partie de l’architecture d’indexation de Recherche cognitive Azure qui intègre l’IA (intelligence artificielle) de Microsoft ou une IA personnalisée que vous fournissez. Il permet de mettre en œuvre des scénarios de bout en bout quand il s’agit de traiter des objets blob (existants ou nouvellement obtenus ou mis à jour), d’ouvrir tous les formats de fichiers pour en extraire des images et du texte, d’extraire les informations souhaitées avec différentes fonctionnalités d’IA, puis de les indexer dans un index de recherche pour accélérer la recherche, l’extraction et l’exploration. 
 
 Les entrées sont vos objets blob, dans un même conteneur, dans Stockage Blob Azure. Les objets blob peuvent correspondre à pratiquement tout type de données texte ou image. 
 
-La sortie est toujours un index de recherche, utilisé pour la recherche, l’extraction et l’exploration rapides de texte dans les applications clientes. Par ailleurs, la sortie peut aussi être une *base de connaissances* qui projette des documents enrichis dans des objets blob Azure ou des tables Azure pour exercer une analyse en aval dans des outils comme Power BI ou des charges de travail de science des données.
+La sortie est toujours un index de recherche, utilisé pour la recherche, l’extraction et l’exploration rapides de texte dans les applications clientes. Par ailleurs, la sortie peut aussi être une [*base de connaissances*](knowledge-store-concept-intro.md) qui projette des documents enrichis dans des blobs Azure ou des tables Azure pour effectuer une analyse en aval dans des outils comme Power BI ou des charges de travail de science des données.
 
 Au milieu se trouve l’architecture du pipeline proprement dite. Le pipeline est basé sur la fonctionnalité d’*indexeur*, à laquelle vous pouvez affecter un *ensemble de compétences*, qui se compose d’une ou plusieurs *compétences* fournissant l’IA. L’objectif du pipeline est de produire des *documents enrichis* : le contenu brut de départ se dote d’une structure, d’un contexte et d’informations supplémentaires à mesure qu’il avance dans le pipeline. Les documents enrichis sont consommés pendant l’indexation pour créer des index inversés et d’autres structures utilisées dans la recherche en texte intégral ou l’exploration et l’analytique.
 
-## <a name="start-with-services"></a>Commencer avec les services
+## <a name="required-resources"></a>Ressources nécessaires
 
-Vous avez besoin de Recherche cognitive Azure et de Stockage d’objets blob Azure. Dans Stockage Blob, vous avez besoin d’un conteneur qui fournit le contenu source.
+Vous avez besoin des services Stockage Blob Azure et Recherche cognitive Azure, ainsi que d’un troisième service ou mécanisme fournissant l’intelligence artificielle :
 
-Vous pouvez commencer directement dans votre page du portail des comptes Stockage. Dans la page de navigation de gauche, sous **Service Blob**, cliquez sur **Ajouter Recherche cognitive Azure** pour créer un nouveau service ou en sélectionner un existant. 
++ Pour l’intelligence artificielle intégrée, le service Recherche cognitive s’intègre avec la vision d’Azure Cognitive Services et les API de traitement en langage naturel. Vous pouvez [attacher une ressource Cognitive Services](cognitive-search-attach-cognitive-services.md) pour ajouter la reconnaissance optique de caractères, l’analyse d’images ou le traitement en langage naturel (détection de la langue, traduction de texte, reconnaissance d’entité et extraction de phrases clés). 
 
-Une fois que vous avez ajouté Recherche cognitive Azure à votre compte de stockage, vous pouvez suivre le processus standard d’enrichissement de données dans une source de données Azure. Nous vous recommandons d’utiliser l’Assistant **Importation des données** de Recherche cognitive Azure pour une mise en route simple de l’enrichissement par IA. Ce guide de démarrage rapide vous accompagne tout au long de la procédure : [Créez un pipeline d’enrichissement par IA sur le portail](cognitive-search-quickstart-blob.md). 
++ Pour une IA personnalisée qui utilise des ressources Azure, vous pouvez définir une compétence personnalisée qui encapsule la fonction ou le modèle externes que vous souhaitez utiliser. Des [compétences personnalisées](cognitive-search-custom-skill-interface.md) peuvent utiliser du code fourni par Azure Functions, Azure Machine Learning, Azure Form Recognizer ou une autre ressource accessible via le protocole HTTPS.
 
-Dans les sections suivantes, nous allons explorer d’autres composants et concepts.
++ Pour une IA personnalisée non-Azure, votre modèle ou module doit être accessible à un indexeur via le protocole HTTP.
+
+Si tous les services ne sont pas immédiatement disponibles, commencez directement sur la page du portail de votre compte de stockage. Dans la page de navigation de gauche, sous **Service Blob**, cliquez sur **Ajouter Recherche cognitive Azure** pour créer un nouveau service ou en sélectionner un existant. 
+
+Une fois que vous avez ajouté Recherche cognitive Azure à votre compte de stockage, vous pouvez suivre le processus standard d’enrichissement de données dans une source de données Azure. Nous vous recommandons d’utiliser l’Assistant **Importation des données** de Recherche cognitive Azure pour une mise en route simple de l’enrichissement par IA. Vous pouvez attacher une ressource Cognitive Services pendant le flux de travail. Ce guide de démarrage rapide vous accompagne tout au long de la procédure : [Créez un pipeline d’enrichissement par IA sur le portail](cognitive-search-quickstart-blob.md). 
+
+Les sections suivantes examinent de plus près les composants et le flux de travail.
 
 ## <a name="use-a-blob-indexer"></a>Utiliser un indexeur d’objets blob
 
 L’enrichissement par IA est une extension du pipeline d’indexation, et dans Recherche cognitive Azure, ces pipelines reposent sur un *indexeur*. Un indexeur est un sous-service qui reconnaît les sources de données. Avec sa logique interne, il échantillonne les données, lit les données de métadonnées, extrait les données et les sérialise dans des documents JSON à partir de formats natifs pour être ensuite importées. Les indexeurs sont souvent utilisés seuls pour l’importation, indépendamment de l’IA, mais si vous voulez créer un pipeline d’enrichissement par IA, vous devrez l’associer à un indexeur et à un ensemble de compétences. Cette section met en lumière l’indexeur ; la section suivante porte sur les ensembles de compétences.
 
-Dans Stockage Azure, les objets blob sont indexés à l’aide de l’[indexeur de stockage d’objets blob de Recherche cognitive Azure](search-howto-indexing-azure-blob-storage.md). Vous pouvez appeler cet indexeur à partir de l’Assistant **Importation des données**, d’une API REST ou du kit SDK .NET. Dans le code, vous pouvez utiliser cet indexeur en définissant le type et en fournissant des informations de connexion qui incluent un compte Stockage Azure associé à un conteneur d’objets blob. Vous pouvez créer un sous-ensemble de vos objets blob en créant un répertoire virtuel, que vous pouvez ensuite transmettre comme paramètre, ou en filtrant sur une extension de type de fichier.
+Les blobs dans le service Stockage Azure sont indexés à l’aide de l’[indexeur de blobs](search-howto-indexing-azure-blob-storage.md). Vous pouvez appeler cet indexeur à partir de l’Assistant **Importation de données**, d’une API REST ou d’un Kit de développement logiciel (SDK). Un indexeur de blobs est appelé quand la source de données que l’indexeur utilise est un conteneur d’objets blob Azure. Vous pouvez indexer un sous-ensemble de vos blobs en créant un répertoire virtuel, que vous pouvez ensuite transmettre comme paramètre, ou en filtrant sur une extension de type de fichier.
 
 Un indexeur effectue le « craquage de document » en ouvrant un objet blob pour en inspecter le contenu. Une fois connecté à la source de données, il s’agit de la première étape du pipeline. Pour les données blob, c’est à ce stade que les fichiers PDF, les documents Office, les images et d’autres types de contenu sont détectés. Le craquage de document avec extraction de texte n’est pas facturé. Le craquage de document avec extraction d’images est facturé aux tarifs indiqués dans la [page des tarifs](https://azure.microsoft.com/pricing/details/search/).
 
 Même si le craquage concerne tous les documents, l’enrichissement ne se produit que si vous fournissez explicitement les compétences nécessaires. Par exemple, si votre pipeline est constitué exclusivement par l’analyse d’images, le texte contenu dans votre conteneur ou vos documents est ignoré.
 
-L’indexeur d’objets blob est assorti de paramètres de configuration et prend en charge le suivi des modifications si les données sous-jacentes fournissent suffisamment d’informations. Vous trouverez des informations supplémentaires sur les fonctionnalités de base dans [Indexeur de stockage d’objets blob de Recherche cognitive Azure](search-howto-indexing-azure-blob-storage.md).
+L’indexeur de blobs intègre des paramètres de configuration et prend en charge le suivi des modifications si les données sous-jacentes fournissent suffisamment d’informations. Pour plus d’informations, consultez [Comment configurer un indexeur de blobs](search-howto-indexing-azure-blob-storage.md).
 
 ## <a name="add-ai-components"></a>Ajouter des composants d’IA
 
-L’enrichissement par AI s’appuie sur certains modules qui recherchent des modèles ou des caractéristiques, puis effectuent une opération en conséquence. La reconnaissance faciale dans les photos, les descriptions textuelles de photos, la détection d’expressions clés dans un document et la reconnaissance optique (ou la reconnaissance de texte imprimé ou manuscrit dans des fichiers binaires) sont autant d’exemples représentatifs.
+L’enrichissement par IA s’appuie sur des modules qui recherchent des modèles ou des caractéristiques, puis effectue une opération en conséquence. La reconnaissance faciale dans les photos, les descriptions textuelles de photos, la détection d’expressions clés dans un document et la reconnaissance optique (ou la reconnaissance de texte imprimé ou manuscrit dans des fichiers binaires) sont autant d’exemples représentatifs.
 
 Dans Recherche cognitive Azure, les *compétences* sont les composants individuels du traitement de l’IA que vous pouvez utiliser de façon autonome ou en association avec d’autres compétences. 
 
@@ -79,20 +85,6 @@ Si les compétences personnalisées peuvent paraître complexes, elles peuvent s
 Les compétences intégrées adossées à Cognitive Services nécessitent une clé d’abonnement tout-en-un [Cognitive Services ](cognitive-search-attach-cognitive-services.md) attachée qui vous donne accès à la ressource. Une clé tout-en-un vous fait bénéficier de l’analyse d’images, de la détection de langue, de la traduction de texte et de l’analyse de texte. Les autres compétences intégrées sont les fonctionnalités de Recherche cognitive Azure et ne nécessitent pas de service ou de clé supplémentaire. Les fonctionnalités de mise en forme, de fractionnement et de fusion de texte sont des exemples de compétences d’assistance qui sont parfois nécessaires au moment de concevoir le pipeline.
 
 Si vous utilisez uniquement des compétences personnalisées et des compétences d’utilitaire intégrées, il n’existe aucune dépendance ou de coûts en rapport avec Cognitive Services.
-
-<!-- ## Order of operations
-
-Now we've covered indexers, content extraction, and skills, we can take a closer look at pipeline mechanisms and order of operations.
-
-A skillset is a composition of one or more skills. When multiple skills are involved, the skillset operates as sequential pipeline, producing dependency graphs, where output from one skill becomes input to another. 
-
-For example, given a large blob of unstructured text, a sample order of operations for text analytics might be as follows:
-
-1. Use Text Splitter to break the blob into smaller parts.
-1. Use Language Detection to determine if content is English or another language.
-1. Use Text Translator to get all text into a common language.
-1. Run Entity Recognition, Key Phrase Extraction, or Sentiment Analysis on chunks of text. In this step, new fields are created and populated. Entities might be location, people, organization, dates. Key phrases are short combinations of words that appear to belong together. Sentiment score is a rating on continuum of negative (0) to positive (1) sentiment.
-1. Use Text Merger to reconstitute the document from the smaller chunks. -->
 
 ## <a name="consume-ai-enriched-output-in-downstream-solutions"></a>Consommer une sortie enrichie par l’IA dans des solutions en aval
 
@@ -112,7 +104,7 @@ Un document enrichi à la fin du pipeline est différent de sa version d’entr�
 
 L’enrichissement par IA offre bien plus de possibilités, qui permettent d’exploiter au mieux les données contenues dans Stockage Azure. Vous pouvez notamment combiner les services Cognitive Services de différentes manières ou créer des compétences personnalisées s’il n’existe pas de service cognitif pour le scénario. Pour en savoir plus, suivez les liens ci-dessous.
 
-+ [Charger, télécharger et répertorier des blobs à l’aide du portail Azure (Stockage blob Azure)](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
++ [Charger, télécharger et répertorier des blobs à l’aide du portail Azure (Stockage blob Azure)](../storage/blobs/storage-quickstart-blobs-portal.md)
 + [Configurer un indexeur blob (Recherche cognitive Azure)](search-howto-indexing-azure-blob-storage.md) 
 + [Vue d’ensemble de l’enrichissement de l’IA (Recherche cognitive Azure)](cognitive-search-concept-intro.md) 
 + [Créer un ensemble de compétences (Recherche cognitive Azure)](cognitive-search-defining-skillset.md)

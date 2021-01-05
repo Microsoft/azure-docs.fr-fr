@@ -10,14 +10,19 @@ ms.subservice: bing-visual-search
 ms.topic: conceptual
 ms.date: 04/03/2019
 ms.author: scottwhi
-ms.openlocfilehash: df66dbeebb04209921ff91c4b99a14580f026718
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e0a3bdc7e68301c067b7e1ca80a3e708522e0df1
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74111637"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96493353"
 ---
 # <a name="examples-of-bing-insights-usage"></a>Exemples d’utilisation d’insights de Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Cet article contient des exemples d’utilisation et d’affichage d’insights relatifs aux images sur Bing.com.
 
@@ -75,9 +80,12 @@ Les balises autres que celles par défaut incluent le rectangle englobant qui id
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour configurer votre première demande, consultez ces guides de démarrage rapide : [C#](quickstarts/csharp.md) | [Java](quickstarts/java.md) | [node.js](quickstarts/nodejs.md) | [Python](quickstarts/python.md)
+Pour configurer votre première demande, consultez ces guides de démarrage rapide :
 
+* [C#](quickstarts/csharp.md)
 
+* [Java](quickstarts/java.md)
 
+* [node.js](quickstarts/nodejs.md)
 
-
+* [Python](quickstarts/python.md)

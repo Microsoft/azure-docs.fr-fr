@@ -8,12 +8,12 @@ ms.author: robreed
 ms.date: 05/02/2018
 ms.topic: how-to
 manager: carmonm
-ms.openlocfilehash: bd65f33663dea3663f14fb4167448e39b9b7d0b7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c2999d5bd6d780d5815f22d18e6e8cdd580987af
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82099765"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87020166"
 ---
 # <a name="run-scripts-in-your-windows-vm"></a>Exécuter des scripts dans votre machine virtuelle Windows
 
@@ -34,7 +34,7 @@ Pour automatiser les tâches ou résoudre les problèmes, vous devrez peut-être
 La fonctionnalité [Commande d’exécution](run-command.md) permet l’administration de la machine virtuelle et de l’application, ainsi que le dépannage, à l’aide de scripts. Elle est disponible même lorsque la machine virtuelle n’est pas accessible, par exemple, si le pare-feu invité n’a pas le port RDP ou SSH ouvert.
 
 * Exécutez des scripts dans des machines virtuelles Azure.
-* L’exécution peut se faire à l’aide du [portail Azure](run-command.md), de [l’API REST](/rest/api/compute/virtual%20machines%20run%20commands/runcommand), de la [CLI Azure](/cli/azure/vm/run-command?view=azure-cli-latest#az-vm-run-command-invoke) ou de [PowerShell](https://docs.microsoft.com/powershell/module/az.compute/invoke-azvmruncommand)
+* L’exécution peut se faire à l’aide du [portail Azure](run-command.md), de [l’API REST](/rest/api/compute/virtual%20machines%20run%20commands/runcommand), de la [CLI Azure](/cli/azure/vm/run-command?view=azure-cli-latest#az-vm-run-command-invoke) ou de [PowerShell](/powershell/module/az.compute/invoke-azvmruncommand)
 * Exécutez rapidement un script et affichez la sortie, puis répétez autant que nécessaire dans le portail Azure.
 * Le script peut être tapé directement, ou vous pouvez exécuter l’un des scripts intégrés.
 * Exécutez le script PowerShell sur des ordinateurs Windows et le script Bash sur des ordinateurs Linux.
@@ -57,7 +57,7 @@ Le [Runbook Worker hybride](../../automation/automation-hybrid-runbook-worker.md
 
 ## <a name="serial-console"></a>Console série
 
-La [Console série](serial-console.md) offre un accès direct à une machine virtuelle, semblable au fait de disposer d’un clavier connecté à la machine virtuelle.
+La [Console série](../troubleshooting/serial-console-windows.md) offre un accès direct à une machine virtuelle, semblable au fait de disposer d’un clavier connecté à la machine virtuelle.
 
 * Exécutez des commandes dans des machines Azure.
 * L’exécution peut se faire à l’aide d’une console basée sur texte vers la machine virtuelle dans le portail Azure.
@@ -71,4 +71,4 @@ En savoir plus sur les différentes fonctionnalités qui sont disponibles pour e
 * [Extension de script personnalisé](../extensions/custom-script-windows.md)
 * [Commande d’exécution](run-command.md)
 * [Runbook Worker hybride](../../automation/automation-hybrid-runbook-worker.md)
-* [Console série](serial-console.md)
+* [Console série](../troubleshooting/serial-console-windows.md)

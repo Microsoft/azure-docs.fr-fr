@@ -5,12 +5,12 @@ ms.subservice: cloud-provisioning
 ms.topic: include
 ms.date: 10/16/2019
 ms.author: billmath
-ms.openlocfilehash: 3aa1571b46938b03f556fa124d3f0a2a70f2c5c3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6d95e40623f17a39145778a2fc067dccc68fd872
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "79504248"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95560027"
 ---
 ## <a name="steps-to-enable-single-sign-on"></a>Procédure d’activation de l’authentification unique
 L’approvisionnement cloud fonctionne avec l’authentification unique.  Il n’existe actuellement aucune option permettant d’activer l’authentification unique lors de l’installation de l’agent. Toutefois, vous pouvez utiliser les étapes ci-dessous pour activer l’authentification unique et l’utiliser. 
@@ -23,7 +23,7 @@ L’approvisionnement cloud fonctionne avec l’authentification unique.  Il n�
 
 ### <a name="step-2-import-the-seamless-sso-powershell-module"></a>Étape 2 : Importer le module PowerShell Authentification unique (SSO) transparente
 
-1. Téléchargez et installez [Azure AD PowerShell V2](https://docs.microsoft.com/powershell/azure/active-directory/overview).
+1. Téléchargez et installez [Azure AD PowerShell V2](/powershell/azure/active-directory/overview).
 2. Accédez au dossier `%programfiles%\Microsoft Azure Active Directory Connect`.
 3. Importez le module PowerShell Authentification unique (SSO) transparente à l’aide de la commande suivante : `Import-Module .\AzureADSSO.psd1`.
 

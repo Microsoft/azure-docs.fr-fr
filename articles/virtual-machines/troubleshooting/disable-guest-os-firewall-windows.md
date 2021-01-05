@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/22/2018
 ms.author: delhan
-ms.openlocfilehash: 5d8aa456a6454dd511b7dcda5d3f74a739033356
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.openlocfilehash: c0426c5359e4d82d0316613586b9298596d82605
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83774335"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87009762"
 ---
 # <a name="disable-the-guest-os-firewall-in-azure-vm"></a>Désactiver le pare-feu du système d’exploitation invité dans une machine virtuelle Azure
 
@@ -74,7 +74,7 @@ Si vous avez un agent Azure fonctionnel, vous pouvez utiliser la fonctionnalité
 
 #### <a name="mitigation-3-pstools-commands"></a>Atténuation 3 : Commandes PSTools
 
-1.  Sur la machine virtuelle de dépannage, téléchargez [PSTools](https://docs.microsoft.com/sysinternals/downloads/pstools).
+1.  Sur la machine virtuelle de dépannage, téléchargez [PSTools](/sysinternals/downloads/pstools).
 
 2.  Ouvrez une instance CMD, puis accédez à la machine virtuelle via son adresse IP privée.
 

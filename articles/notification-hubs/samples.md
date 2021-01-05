@@ -5,20 +5,19 @@ services: notification-hubs
 documentationcenter: ''
 author: sethmanheim
 manager: femila
-editor: jwargo
 ms.service: notification-hubs
 ms.workload: mobile
 ms.topic: article
-ms.date: 01/17/2020
+ms.date: 08/06/2020
 ms.author: sethm
-ms.reviewer: jowargo
+ms.reviewer: thsomasu
 ms.lastreviewed: 03/28/2019
-ms.openlocfilehash: e9cba45da35d7ef2483256ab636d7e0798ea8b31
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: be6845075c5f3fe5e5fd74e643550c61c6c85e43
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594897"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87901791"
 ---
 # <a name="azure-notification-hubs-samples"></a>Exemples Azure Notification Hubs
 
@@ -30,7 +29,7 @@ Cet article fournit des liens vers des exemples qui illustrent des fonctionnalit
 - [Android](https://github.com/Azure/azure-notificationhubs-android/)
 - [Apache Cordova](https://github.com/Azure/azure-notificationhubs-samples/tree/master/apache-cordova)
 - [Ionic](https://github.com/Azure/azure-notificationhubs-samples/tree/master/Ionic)
-- [iOS](https://github.com/Azure/azure-notificationhubs-ios/tree/master/Samples)
+- [iOS](https://github.com/Azure/azure-notificationhubs-ios)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

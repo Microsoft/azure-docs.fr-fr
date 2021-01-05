@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 753892790a6f6b898b48d955e6806837967f3e92
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 274dc731b69686a67a9ac5dba25a5d9c98581652
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80882962"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444042"
 ---
 # <a name="desktop-app-that-calls-web-apis-call-a-web-api"></a>Application de bureau qui appelle des API web : Appeler une API web
 
@@ -129,5 +129,4 @@ catch(MsalUiRequiredException ex)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Passer en production](scenario-desktop-production.md)
+Passez à l’article suivant de ce scénario, [Passer en production](scenario-desktop-production.md).

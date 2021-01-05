@@ -3,15 +3,15 @@ title: Déplacer un groupe de sécurité réseau Azure vers une autre région Az
 description: Utilisez un modèle Azure Resource Manager pour déplacer un groupe de sécurité réseau Azure d’une région Azure vers une autre à l’aide du Portail Azure.
 author: asudbring
 ms.service: virtual-network
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/31/2019
 ms.author: allensu
-ms.openlocfilehash: dce267178c3caf813ccdcac4bba86ccfde3f3421
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a22dc6dc0c4fc199d3f262b18aeeae5090a06dce
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75647184"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84689314"
 ---
 # <a name="move-azure-network-security-group-nsg-to-another-region-using-the-azure-portal"></a>Déplacer un groupe de sécurité réseau Azure vers une autre région à l’aide du Portail Azure
 

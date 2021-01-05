@@ -1,16 +1,14 @@
 ---
 title: 'Testabilité : Communication de service'
 description: La communication service à service constitue un point d’intégration critique d’une application Service Fabric. Cet article aborde les problématiques de conception et les techniques de test.
-author: vturecek
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: vturecek
-ms.openlocfilehash: 87b922cb9655588a22c739d26c9ce9e49d35781a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fbf889422d69d031d777acd80cf3becfb3184568
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75465549"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575922"
 ---
 # <a name="service-fabric-testability-scenarios-service-communication"></a>Scénarios de testabilité Service Fabric Communication de service
 Les microservices et les styles architecturaux orientés services émergent naturellement dans Azure Service Fabric. Dans ces types d’architectures distribuées, les applications de microservices compartimentés sont généralement composées de plusieurs services qui interagissent entre eux. Même dans le cas le plus simple, vous disposez habituellement d’au moins un service web sans état et d’un service de stockage de données avec état qui communiquent.

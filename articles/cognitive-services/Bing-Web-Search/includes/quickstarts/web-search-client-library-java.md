@@ -7,13 +7,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/05/2020
+ms.custom: devx-track-java
 ms.author: aahi
-ms.openlocfilehash: c204f8482d46d6586d490cb2bd3dd1a4cddac682
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 042a3edf8efe080064a3c41fd55975a40bf47e5e
+ms.sourcegitcommit: 8a1ba1ebc76635b643b6634cc64e137f74a1e4da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78925075"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94386553"
 ---
 La bibliothèque de client de l’API Recherche Web Bing simplifie l’intégration de l’API dans votre application Java. Dans ce démarrage rapide, vous allez apprendre à envoyer une requête, recevoir une réponse JSON et filtrer et analyser les résultats.
 
@@ -23,7 +24,7 @@ Vous voulez voir le code tout de suite ? Des exemples de [bibliothèques de clie
 
 Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage rapide :
 
-* [JDK 7 ou 8](https://aka.ms/azure-jdks)
+* [JDK 7 ou 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 * [Apache Maven](https://maven.apache.org/download.cgi) ou votre outil favori d’automatisation de création
 * Une clé d’abonnement
 
@@ -294,4 +295,4 @@ Lorsque vous avez terminé ce projet, veillez à supprimer votre clé d’abonne
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Référence du SDK Java Azure](https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingwebsearchapi?view=azure-java-stable)
+* [Référence du SDK Java Azure](/java/api/overview/azure/cognitiveservices/client/bingwebsearchapi?view=azure-java-stable)

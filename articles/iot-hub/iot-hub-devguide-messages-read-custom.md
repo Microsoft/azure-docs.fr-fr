@@ -8,12 +8,12 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 04/09/2018
-ms.openlocfilehash: e5e92c40cef15e99431dc9652820c71e87935f67
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8aebb5b6f6a3ac53bc49fd1d2f75de88667865fb
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61244342"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147636"
 ---
 # <a name="use-message-routes-and-custom-endpoints-for-device-to-cloud-messages"></a>Utiliser des itinéraires de messages et des points de terminaison personnalisés pour les messages appareil-à-cloud
 
@@ -46,7 +46,7 @@ Pour plus d’informations sur la lecture à partir de points de terminaison per
 
 * Lecture à partir des [conteneurs de Stockage Azure](../storage/blobs/storage-blobs-introduction.md).
 
-* Lecture à partir d’[Event Hubs](../event-hubs/event-hubs-csharp-ephcs-getstarted.md).
+* Lecture à partir d’[Event Hubs](../event-hubs/event-hubs-dotnet-standard-getstarted-send.md).
 
 * Lecture à partir de [files d’attente Service Bus](../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md).
 

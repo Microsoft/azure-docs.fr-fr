@@ -4,17 +4,17 @@ description: Utilisez Visual Studio Code avec Azure IoT Tools pour envoyer un mo
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 01/8/2019
+ms.date: 10/13/2020
 ms.topic: conceptual
 ms.reviewer: ''
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: e4ac1a6e56cdbf47fd174d5244fc6ab51c63fb07
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ccc87b1b3103e799a5974542de602090df8e1e4b
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133894"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92048387"
 ---
 # <a name="deploy-azure-iot-edge-modules-from-visual-studio-code"></a>Déployer des modules Azure IoT Edge à partir de Visual Studio Code
 
@@ -22,10 +22,13 @@ Une fois que vous avez créé des modules IoT Edge avec votre logique métier, v
 
 Cet article explique comment créer un manifeste de déploiement JSON, puis utiliser ce fichier pour étendre le déploiement à un appareil IoT Edge. Pour plus d’informations sur la création d’un déploiement ciblant plusieurs appareils en fonction de leurs balises partagées, consultez [Déployer des modules IoT Edge à l’échelle à l’aide de Visual Studio Code](how-to-deploy-vscode-at-scale.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Un [hub IoT](../iot-hub/iot-hub-create-through-portal.md) dans votre abonnement Azure.
-* Un [appareil IoT Edge](how-to-register-device.md#register-with-visual-studio-code) avec le runtime IoT Edge installé.
+* Un appareil IoT Edge.
+
+  Si vous n’avez aucun appareil IoT Edge configuré, vous pouvez en créer un sur une machine virtuelle Azure. Suivez les étapes décrites dans l’un des articles de démarrage rapide pour [Créer un appareil Linux virtuel](quickstart-linux.md) ou [Créer un appareil Windows virtuel](quickstart.md).
+
 * [Visual Studio Code](https://code.visualstudio.com/).
 * [Outils Azure IoT](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools#overview) pour Visual Studio Code.
 
@@ -37,12 +40,15 @@ Pour déployer des modules à l’aide de Visual Studio Code, enregistrez locale
 
 Par exemple, voici un manifeste de déploiement de base comportant un seul module :
 
+>[!NOTE]
+>Cet exemple de manifeste de déploiement utilise la version de schéma 1.1 pour l’agent et le hub IoT Edge. La version de schéma 1.1 a été publiée avec IoT Edge version 1.0.10 ; elle fournit des fonctionnalités telles que l’ordre de démarrage des modules et la hiérarchisation des routes.
+
    ```json
    {
      "modulesContent": {
        "$edgeAgent": {
          "properties.desired": {
-           "schemaVersion": "1.0",
+           "schemaVersion": "1.1",
            "runtime": {
              "type": "docker",
              "settings": {
@@ -85,7 +91,7 @@ Par exemple, voici un manifeste de déploiement de base comportant un seul modul
        },
        "$edgeHub": {
          "properties.desired": {
-           "schemaVersion": "1.0",
+           "schemaVersion": "1.1",
            "routes": {
                "route": "FROM /messages/* INTO $upstream"
            },

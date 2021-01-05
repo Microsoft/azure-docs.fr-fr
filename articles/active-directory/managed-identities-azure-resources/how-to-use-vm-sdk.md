@@ -3,24 +3,24 @@ title: Utiliser des identités managées sur une machine virtuelle Azure avec de
 description: Exemples de code pour l’utilisation de kits de développement logiciel (SDK) Azure avec une machine virtuelle Azure qui a des identités managées pour ressources Azure.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 12/01/2017
-ms.author: markvi
+ms.date: 11/03/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 422b4c63a86904721fc6910193ffa63a8fe46f0a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9eb5f1d81874c8303d095aec320f60cc9ae6a7dc
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74184150"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93360562"
 ---
 # <a name="how-to-use-managed-identities-for-azure-resources-on-an-azure-vm-with-azure-sdks"></a>Comment utiliser des identités managées pour ressources Azure sur une machine virtuelle Azure avec des kits de développement logiciel (SDK) Azure 
 

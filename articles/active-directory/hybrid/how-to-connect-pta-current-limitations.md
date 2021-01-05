@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/04/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 97dc67d46b08bf5765c59806b45edd82f38720cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3e9c4489f59f72e4d0b5c7a0b911da188eb0828c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60347735"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89280194"
 ---
 # <a name="azure-active-directory-pass-through-authentication-current-limitations"></a>Authentification directe Azure Active Directory : Limites actuelles
 
@@ -43,9 +43,9 @@ Les scénarios suivants sont pris en charge :
 
 Les scénarios suivants ne sont _pas_ pris en charge :
 
-- Détection des utilisateurs avec des [informations d’identification volées](../reports-monitoring/concept-risk-events.md#leaked-credentials).
+- Détection des utilisateurs avec des [informations d’identification volées](../identity-protection/overview-identity-protection.md).
 - Azure AD Domain Services a besoin que la synchronisation du hachage de mot de passe soit activée sur le locataire. Ainsi, les locataires qui utilisent l’authentification directe _uniquement_ ne fonctionnent pas pour les scénarios qui ont besoin d’Azure AD Domain Services.
-- L’authentification directe n’est pas intégrée à [Azure AD Connect Health](whatis-hybrid-identity-health.md).
+- L’authentification directe n’est pas intégrée à [Azure AD Connect Health](./whatis-azure-ad-connect.md).
 
 > [!IMPORTANT]
 > Comme solution de contournement _uniquement_ pour les scénarios non pris en charge (à l’exception de l’intégration d’Azure AD Connect Health), activez la synchronisation de hachage du mot de passe dans la page [Fonctionnalités facultatives](how-to-connect-install-custom.md#optional-features) de l’Assistant Azure AD Connect.

@@ -4,27 +4,31 @@ titleSuffix: Azure Media Services
 description: En savoir plus sur la protection du contenu avec le chiffrement dynamique, les protocoles de diffusion en continu et les types de chiffrement dans Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 03/17/2020
-ms.author: juliako
-ms.custom: seodec18
-ms.openlocfilehash: c1c9440f7ec70cea98f270f04c3030c800dd0fde
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: 5d6530cf7b8d8611ff23a3517112cb0aa7442d6d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79461110"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95971166"
 ---
 # <a name="protect-your-content-with-media-services-dynamic-encryption"></a>Protéger votre contenu à l’aide du chiffrement dynamique de Media Services
 
-Utilisez Azure Media Services pour sécuriser votre contenu multimédia du moment où il quitte votre ordinateur jusqu’à sa remise, en passant par le stockage et le traitement. Media Services vous permet de transmettre votre contenu dynamique ou à la demande chiffré dynamiquement avec la norme Advanced Encryption Standard (AES-128) ou un des principaux systèmes de gestion des droits numériques (DRM) : Microsoft PlayReady, Google Widevine et Apple FairPlay. Media Services fournit également un service de distribution de clés AES et licences (PlayReady, Widevine et FairPlay) DRM aux clients autorisés. Si le contenu est chiffré avec une clé en clair AES et est envoyé via HTTPS, il ne s’affiche en clair qu’une fois qu’il atteint le client. 
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+Utilisez Azure Media Services pour sécuriser votre contenu multimédia du moment où il quitte votre ordinateur jusqu’à sa remise, en passant par le stockage et le traitement. Media Services vous permet de transmettre votre contenu dynamique ou à la demande chiffré dynamiquement avec la norme Advanced Encryption Standard (AES-128) ou un des principaux systèmes de gestion des droits numériques (DRM) : Microsoft PlayReady, Google Widevine et Apple FairPlay. Media Services fournit également un service de distribution de clés AES et licences (PlayReady, Widevine et FairPlay) DRM aux clients autorisés. Si le contenu est chiffré avec une clé en clair AES et est envoyé via HTTPS, il ne s’affiche en clair qu’une fois qu’il atteint le client.
+
+[!INCLUDE [Widevine is not available in the GovCloud region.](./includes/widevine-not-available-govcloud.md)]
 
 Dans Media Services v3, une clé de contenu est associée à un localisateur de streaming (consultez [cet exemple](protect-with-aes128.md)). Si vous utilisez le service de remise de clé Azure Media Services, vous pouvez demander à ce service de générer la clé de contenu pour vous. Vous devez générer la clé de contenu vous-même si vous utilisez votre propre service de remise de clé, ou si vous avez besoin de gérer un scénario de haute disponibilité au cours duquel vous avez besoin d’avoir la même clé de contenu dans deux centres de données.
 
@@ -134,7 +138,7 @@ Le chiffrement HLS/CMAF + FairPlay (y compris HEVC/H.265) est pris en charge sur
 
 * iOS 11 ou version ultérieure.
 * iPhone 8 ou version ultérieure.
-* MacOS High Sierra avec un UC Intel de 7e génération.
+* macOS High Sierra avec un processeur Intel de 7e génération.
 
 ### <a name="mpeg-dash"></a>MPEG-DASH
 
@@ -154,6 +158,10 @@ Le protocole Smooth Streaming prend en charge les formats de conteneur et schém
 |---|---|---|
 |fMP4|AES|`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=cbc)`|
 |fMP4 | CENC (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=cenc)`|
+|fMP4 | PIFF 1.1 (PlayReady) |`https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=piff)`|
+
+> [!NOTE]
+> La prise en charge de PIFF 1.1 est fournie en tant que solution de compatibilité descendante pour les Smart TV (Samsung, LG) qui implémentaient la version « Silverlight » précoce de la norme CENC. Nous vous recommandons d’utiliser le format PIFF uniquement là où il est nécessaire pour la prise en charge des Smart TV Samsung ou LG livrés entre 2009 et 2015 qui prenaient en charge la version PIFF 1.1 du chiffrement PlayReady. 
 
 ### <a name="browsers"></a>Navigateurs
 
@@ -244,7 +252,7 @@ streamingPolicy.EnvelopEncryption.customKeyAcquisitionUrlTemplate = "https://myk
 
 `ContentKeyId` a une valeur de la clé demandée. Vous pouvez utiliser `AlternativeMediaId` si vous souhaitez mapper la demande à une entité de votre côté. Par exemple, `AlternativeMediaId` peut être utilisé pour vous aider à rechercher des autorisations.
 
-Pour accéder à des exemples REST qui utilisent des URL d’acquisition de clé ou de licence personnalisées, voir [Stratégies de diffusion en continu – Créer](https://docs.microsoft.com/rest/api/media/streamingpolicies/create).
+Pour accéder à des exemples REST qui utilisent des URL d’acquisition de clé ou de licence personnalisées, voir [Stratégies de diffusion en continu – Créer](/rest/api/media/streamingpolicies/create).
 
 > [!NOTE]
 > Widevine est un service fourni par Google Inc. soumis aux conditions de service et à la politique de confidentialité de Google, Inc.
@@ -265,5 +273,5 @@ Découvrez l’article [Communauté Azure Media Services](media-services-communi
 * [Protéger avec DRM](protect-with-drm.md)
 * [Concevoir un système de protection de contenu multi-DRM avec contrôle d’accès](design-multi-drm-system-with-access-control.md)
 * [Chiffrement côté stockage](storage-account-concept.md#storage-side-encryption)
-* [Forum Aux Questions (FAQ)](frequently-asked-questions.md)
-* [JSON Web Token Handler](https://docs.microsoft.com/dotnet/framework/security/json-web-token-handler)
+* [Forum Aux Questions](frequently-asked-questions.md)
+* [JSON Web Token Handler](/dotnet/framework/security/json-web-token-handler)

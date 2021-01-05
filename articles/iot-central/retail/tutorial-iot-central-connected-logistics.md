@@ -5,115 +5,133 @@ author: KishorIoT
 ms.author: nandab
 ms.service: iot-central
 ms.subservice: iot-central-retail
-ms.topic: overview
+ms.topic: tutorial
 ms.date: 10/20/2019
-ms.openlocfilehash: eac43ae68b10436b3e45452c6b1d03bec3ae4c9c
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: 398441123d5ad309d9c2d506a75b80b58a6d56d0
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81001298"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97346212"
 ---
 # <a name="tutorial-deploy-and-walk-through-a-connected-logistics-application-template"></a>Tutoriel : Déployer et découvrir un modèle d’application logistique connectée
 
-
-
-Ce didacticiel vous montre comment prendre en main le déploiement d’un modèle d’application **logistique connectée** IoT Central. Vous allez apprendre à déployer le modèle et découvrir les fonctionnalités prêtes à l’emploi incluses ainsi que les différentes possibilités qui s’offrent à vous.
+Ce tutoriel vous montre comment bien démarrer avec le modèle d’application de *logistique connectée* IoT Central. Vous allez voir comment déployer et utiliser ce modèle.
 
 Dans ce tutoriel, vous allez apprendre à :
 
-* créer une application de logistique connectée
-* Examiner l’application 
+> [!div class="checklist"]
+> * Créer une application de logistique connectée
+> * Utiliser les fonctionnalités clés de l’application
+> * Utiliser le tableau de bord pour présenter l’activité des opérations de l’appareil de logistique critique
+> * Utiliser le modèle d’appareil
+> * Suivre les règles
+> * Utiliser des travaux
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Aucune configuration requise spécifique n’est requise pour déployer cette application
-* Il est recommandé d’avoir un abonnement Azure, mais vous pouvez essayer sans
+* Le déploiement de cette application ne nécessite aucun prérequis.
+* Vous pouvez utiliser le plan tarifaire gratuit ou utiliser un abonnement Azure.
 
-## <a name="create-connected-logistics-application-template"></a>Créer un modèle d’application logistique connectée
+## <a name="create-connected-logistics-application"></a>Créer une application de logistique connectée
 
-Vous pouvez créer une application à l’aide de la procédure suivante
+Créez une application à l’aide de la procédure suivante :
 
-1. Accédez au site web du gestionnaire d’applications Azure IoT Central. Sélectionnez **Générer** dans la barre de navigation de gauche, puis cliquez sur l’onglet **Distribution**.
+1. Accédez au site de [création d’applications Azure IoT Central](https://aka.ms/iotcentral). Ensuite, connectez-vous avec un compte Microsoft personnel, scolaire ou professionnel. Sélectionnez **Générer** dans la barre de navigation de gauche, puis sélectionnez l’onglet **Distribution** :
 
-    > [!div class="mx-imgBorder"]
-    > ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/iotc-retail-homepage.png)
+    :::image type="content" source="media/tutorial-iot-central-connected-logistics/iotc-retail-homepage.png" alt-text="Modèle de logistique connectée":::
 
-2. Sélectionnez **Créer une application** sous **Application logistique connectée**
+1. Sélectionnez **Créer une application** sous **Application de logistique connectée**.
 
-3. **Créer une application** ouvre le nouveau formulaire d’application et remplit les détails demandés comme indiqué ci-dessous.
-   * **Nom de l’application** : vous pouvez utiliser le nom suggéré par défaut ou entrer le nom convivial de l’application.
-   * **URL** : vous pouvez utiliser l’URL par défaut suggérée ou entrer votre URL conviviale unique et facile à mémoriser. Ensuite, le paramètre par défaut est recommandé si vous disposez déjà d’un abonnement Azure. Vous pouvez commencer avec le plan tarifaire d’essai gratuit de 7 jours pour ensuite le convertir en plan tarifaire standard à tout moment avant l’expiration de l’essai gratuit.
-   * **Informations de facturation** : Les informations sur le répertoire, l’abonnement Azure et la région sont requises pour configurer les ressources.
-   * **Créer** : Sélectionnez Créer en bas de la page pour déployer votre application.
+1. La commande **Créer une application** ouvre le formulaire **Nouvelle application**. Entrez les informations suivantes :
 
-    > [!div class="mx-imgBorder"]
-    > ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-app-create.png)
 
-    > [!div class="mx-imgBorder"]
-    > ![Informations de facturation concernant la logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-app-create-billinginfo.png)
+    * **Nom de l’application** : vous pouvez utiliser le nom suggéré par défaut ou entrer le nom convivial de l’application.
+    * **URL** : vous pouvez utiliser l’URL par défaut suggérée ou entrer votre URL conviviale unique et facile à mémoriser. Ensuite, le paramètre par défaut est recommandé si vous disposez déjà d’un abonnement Azure. Vous pouvez commencer avec le plan tarifaire d’essai gratuit de 7 jours pour ensuite le convertir en plan tarifaire standard à tout moment avant l’expiration de l’essai gratuit.
+    * **Informations de facturation** : Les informations sur l’annuaire, l’abonnement Azure et la région sont nécessaires pour provisionner les ressources.
+    * **Créer** : Sélectionnez Créer en bas de la page pour déployer votre application.
 
-## <a name="walk-through-the-application"></a>examiner l’application 
+    :::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-app-create.png" alt-text="Modèle d’application de logistique connectée":::
 
-## <a name="dashboard"></a>tableau de bord
+    :::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-app-create-billinginfo.png" alt-text="Informations de facturation concernant la logistique connectée":::
 
-Après le déploiement réussi du modèle d’application, votre tableau de bord par défaut est un portail dédié à l’opérateur de logistique connectée. Northwind Trader est un fournisseur logistique fictif gérant une flotte d’engins de transport de marchandises par voie maritime et terrestre. Dans ce tableau de bord figurent deux passerelles différentes qui fournissent des données de télémétrie sur les livraisons ainsi que les commandes, tâches et actions associées que vous pouvez effectuer. Ce tableau de bord est préconfiguré pour présenter l’activité des opérations de l’appareil de logistique critique.
-Le tableau de bord distingue logiquement deux opérations de gestion des appareils de passerelle différentes : 
-   * L’itinéraire logistique pour les livraisons par camion et les informations d’emplacement pour le transport maritime sont des éléments essentiels pour le transport multimodal
-   * État de la passerelle et informations pertinentes 
+## <a name="walk-through-the-application"></a>examiner l’application
+
+Vous trouverez ci-dessous une capture d’écran montrant comment sélectionner le modèle d’application de logistique connectée.
 
 > [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-dashboard1.png)
+> ![Capture d’écran montrant comment sélectionner le modèle d’application de logistique connectée](./media/tutorial-iot-central-connected-logistics/iotc-retail-homepage.png)
 
-   * Vous pouvez facilement effectuer le suivi du nombre total de passerelles, des balises actives et inconnues.
-   * Vous pouvez effectuer des opérations de gestion des appareils telles que la mise à jour des microprogrammes, la désactivation et l’activation des capteurs, la modification du seuil des capteurs, la modification des intervalles de télémétrie ou la modification des contrats de service des appareils.
-   * Consulter la consommation de la batterie des appareils
+Les sections suivantes passent en revue les principales fonctionnalités de l’application.
 
-> [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-dashboard2.png)
+### <a name="dashboard"></a>Tableau de bord
 
-## <a name="device-template"></a>Modèle d'appareil
-
-Cliquez sur l’onglet Modèles d’appareils pour voir le modèle de capacité de la passerelle. Un modèle de capacité est structuré autour de deux interfaces différentes, **Propriétés et télémétrie de la passerelle** et **Commandes de la passerelle**
-
-**Propriétés et télémétrie de la passerelle** – Cette interface représente toutes les données de télémétrie liées aux capteurs, à la localisation, aux informations d’appareil ainsi que la capacité de propriété de jumeau d’appareil telle que les seuils de capteur et les intervalles de mise à jour.
+Une fois le modèle d’application déployé, votre tableau de bord par défaut devient un portail dédié à l’opérateur de logistique connectée. Northwind Trader est une entreprise logistique fictive qui gère une flotte d’engins de transport de marchandises par voie maritime et voie terrestre. Dans ce tableau de bord figurent deux passerelles qui fournissent des données de télémétrie sur les expéditions, ainsi que les commandes, tâches et actions qui leur sont associées.
 
 > [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-devicetemplate1.png)
-
-**Commandes de la passerelle** : cette interface organise toutes les fonctionnalités de commande de la passerelle
+> ![Capture d’écran montrant comment créer une application à partir du modèle d’application de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-app-create.png)
 
 > [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-devicetemplate2.png)
+> ![Capture d’écran montrant les options de facturation lors de la création de l’application](./media/tutorial-iot-central-connected-logistics/connected-logistics-app-create-billinginfo.png)
 
-## <a name="rules"></a>Règles
-Sélectionnez l’onglet Règles pour afficher deux règles différentes qui existent dans ce modèle d’application. Ces règles sont configurées pour envoyer des notifications par e-mail aux opérateurs pour des investigations supplémentaires.
- 
-**Alerte de vol de passerelle** : Cette règle est déclenchée quand les capteurs détectent une lumière inattendue pendant le trajet. Les opérateurs doivent être informés au plus vite pour enquêter sur un vol éventuel.
- 
-**Aucune réponse de la passerelle** : Cette règle se déclenche si la passerelle ne se signale pas au cloud pendant une période prolongée. L’absence de réponse de la passerelle peut être due à une batterie faible, à une perte de connectivité ou encore à l’intégrité de l’appareil.
+Ce tableau de bord est préconfiguré pour présenter l’activité des opérations de l’appareil de logistique critique.
 
-> [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-rules.png)
+Le tableau de bord permet d’effectuer deux opérations de gestion des appareils de passerelle :
 
-## <a name="jobs"></a>travaux
-Sélectionnez l’onglet Tâches pour afficher cinq types de tâches disponibles dans le cadre de ce modèle d’application :
+* Afficher les itinéraires des expéditions par camion, ainsi que l’emplacement précis lors des expéditions par voie maritime
+* Afficher l’état de la passerelle et d’autres informations pertinentes
 
-> [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-jobs.png)
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-dashboard1.png" alt-text="Tableau de bord de logistique connectée":::
 
-Vous pouvez utiliser la fonctionnalité Tâches pour effectuer des opérations sur l’ensemble de la solution. Ici, les tâches utilisent les commandes de l’appareil et la capacité de jumeau pour notamment désactiver des capteurs spécifiques sur l’ensemble de la passerelle ou modifier le seuil des capteurs en fonction de l’itinéraire et du mode de transport. 
-   * La désactivation des capteurs de chocs lors du transport maritime est une opération standard. Elle permet d’économiser la batterie ou d’abaisser le seuil de température en cas de transport frigorifique. 
- 
-   * La fonctionnalité Tâches vous permet d’effectuer des opérations à l’échelle du système comme la mise à jour des microprogrammes sur les passerelles ou celle du contrat de service pour le fonctionnement normal des activités de maintenance.
+* Vous pouvez effectuer le suivi du nombre total de passerelles, ainsi que des balises actives et inconnues.
+* Vous pouvez effectuer des opérations de gestion des appareils telles que la mise à jour des microprogrammes, la désactivation et l’activation des capteurs, la modification du seuil des capteurs, la modification des intervalles de télémétrie ou la modification des contrats de service des appareils.
+* Consultez la consommation de la batterie des appareils.
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-dashboard2.png" alt-text="État du tableau de bord de logistique connectée":::
+
+#### <a name="device-template"></a>Modèle d'appareil
+
+Sélectionnez **Modèles d’appareils** pour voir le modèle de fonctions de la passerelle. Un modèle de fonctions est structuré autour de deux interfaces : **Propriétés et télémétrie de la passerelle** et **Commandes de la passerelle**
+
+**Propriétés et télémétrie de la passerelle** : cette interface définit toutes les données de télémétrie relatives aux capteurs, à l’emplacement et aux informations sur l’appareil. L’interface définit également les fonctionnalités des propriétés des jumeaux d’appareil, telles que les seuils de capteur et les intervalles de mise à jour.
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-devicetemplate1.png" alt-text="Interface Propriétés et télémétrie":::
+
+**Commandes de la passerelle** - Cette interface organise toutes les fonctionnalités de commande de la passerelle :
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-devicetemplate2.png" alt-text="Interface des commandes de la passerelle":::
+
+### <a name="rules"></a>Règles
+
+Sélectionnez l’onglet **Règles** pour les règles de ce modèle d’application. Ces règles sont configurées pour envoyer des notifications par e-mail aux opérateurs à des fins d’investigation supplémentaire.
+
+**Alerte de vol de passerelle** : Cette règle est déclenchée quand les capteurs détectent une lumière inattendue pendant le trajet. Les opérateurs doivent être informés immédiatement afin d’enquêter sur un vol éventuel.
+
+**Aucune réponse de la passerelle** : Cette règle se déclenche si la passerelle ne se signale pas au cloud pendant une période prolongée. L’absence de réponse de la passerelle peut être due à une batterie faible, à une perte de la connectivité ou encore à un appareil endommagé.
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-rules.png" alt-text="Définitions des règles":::
+
+### <a name="jobs"></a>travaux
+
+Sélectionnez l’onglet **Travaux** pour afficher les travaux de cette application :
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-jobs.png" alt-text="Travaux à exécuter":::
+
+Vous pouvez utiliser les travaux pour effectuer des opérations à l’échelle de l’application. Les travaux de cette application utilisent les commandes de l’appareil ainsi que des fonctionnalités de jumeau pour notamment désactiver des capteurs spécifiques sur l’ensemble de la passerelle ou modifier le seuil des capteurs en fonction de l’itinéraire et du mode de transport :
+
+* La désactivation des capteurs de chocs lors du transport maritime est une opération standard. Elle permet d’économiser la batterie ou d’abaisser le seuil de température en cas de transport frigorifique.
+
+* La fonctionnalité Tâches vous permet d’effectuer des opérations à l’échelle du système comme la mise à jour des microprogrammes sur les passerelles ou celle du contrat de service pour le fonctionnement normal des activités de maintenance.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
-Si vous n’envisagez pas de continuer à utiliser cette application, supprimez le modèle d’application en accédant à **Administration** > **Paramètres de l’application**, puis cliquez sur **supprimer**.
 
-> [!div class="mx-imgBorder"]
-> ![Tableau de bord de logistique connectée](./media/tutorial-iot-central-connected-logistics/connected-logistics-cleanup.png)
+Si vous n’envisagez pas de continuer à utiliser cette application, supprimez le modèle d’application en accédant à **Administration** > **Paramètres de l’application**, puis sélectionnez **Supprimer**.
+
+:::image type="content" source="media/tutorial-iot-central-connected-logistics/connected-logistics-cleanup.png" alt-text="Nettoyage du modèle":::
 
 ## <a name="next-steps"></a>Étapes suivantes
-* En savoir plus sur le [concept de logistique connectée](./architecture-connected-logistics.md)
+* En savoir plus sur 
+> [!div class="nextstepaction"]
+> [Concept de la logistique connectée](./architecture-connected-logistics.md)
 * En savoir plus sur d’autres [modèles de distribution IoT Central](./overview-iot-central-retail.md)
 * En savoir plus sur [Vue d’ensemble d’IoT Central](../core/overview-iot-central.md)

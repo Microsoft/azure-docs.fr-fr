@@ -10,19 +10,26 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: amishu
-zone_pivot_groups: programming-languages-set-twelve
-ms.openlocfilehash: 13cb35ffa650661da2855787279c4bdc37126ac9
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-csharp
+zone_pivot_groups: programming-languages-set-twenty-two
+ms.openlocfilehash: ace584b51f0aa457e30d8e48d97834aa735a1a57
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585015"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026571"
 ---
 # <a name="use-codec-compressed-audio-input-with-the-speech-sdk"></a>Utiliser une entrée audio compressée par codec avec le SDK Speech
 
 L’API **Compressed Audio Input Stream** du SDK du service Speech permet de diffuser en streaming du contenu audio compressé vers le service Speech à l’aide d’un `PullStream` ou d’un `PushStream`.
 
-La diffusion en continu de données d’audio en entrée est actuellement prise en charge pour C#, C++, Java sur Windows (les applications UWP ne sont pas prises en charge) et Linux (Ubuntu 16.04, Ubuntu 18.04, Debian 9, RHEL 7/8, CentOS 7/8). Il est également pris en charge pour la plateforme Java dans Android et Objective-C dans iOS.
+Plateforme | Languages | Version de GStreamer prise en charge
+| :--- | ---: | :---:
+Windows (sauf UWP)  | C++, C#, Java, Python | [1.15.1](https://gstreamer.freedesktop.org/data/pkg/windows/1.15.1/)
+Linux  | C++, C#, Java, Python | [architectures cibles et distributions Linux prises en charge](~/articles/cognitive-services/speech-service/speech-sdk.md)
+Android  | Java | [1.14.4](https://gstreamer.freedesktop.org/data/pkg/android/1.14.4/)
+
+## <a name="speech-sdk-version-required-for-compressed-audio-input"></a>Version du SDK Speech requise pour l’entrée audio compressée
 * Le Kit de développement logiciel (SDK) Speech version 1.10.0 ou ultérieure est requis pour RHEL 8 et CentOS 8.
 * Le Kit de développement logiciel (SDK) Speech version 1.11.0 ou ultérieure est requis pour Windows.
 
@@ -42,8 +49,8 @@ La diffusion en continu de données d’audio en entrée est actuellement prise 
 [!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/java/prerequisites.md)]
 ::: zone-end
 
-::: zone pivot="programming-language-objectivec"
-[!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/objectivec/prerequisites.md)]
+::: zone pivot="programming-language-python"
+[!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/python/prerequisites.md)]
 ::: zone-end
 
 ## <a name="example-code-using-codec-compressed-audio-input"></a>Exemple de code utilisant une entrée audio compressé par codec
@@ -60,11 +67,11 @@ La diffusion en continu de données d’audio en entrée est actuellement prise 
 [!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/java/examples.md)]
 ::: zone-end
 
-::: zone pivot="programming-language-objectivec"
-[!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/objectivec/examples.md)]
+::: zone pivot="programming-language-python"
+[!INCLUDE [prerequisites](includes/how-to/compressed-audio-input/python/examples.md)]
 ::: zone-end
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Découvrir comment effectuer la reconnaissance vocale](quickstarts/speech-to-text-from-microphone.md)
+> [Découvrir comment effectuer la reconnaissance vocale](./get-started-speech-to-text.md)

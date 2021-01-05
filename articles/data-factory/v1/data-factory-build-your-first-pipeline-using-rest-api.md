@@ -3,20 +3,20 @@ title: Générer votre première fabrique de données Data Factory (REST)
 description: Dans ce didacticiel, vous allez créer un exemple de pipeline Azure Data Factory à l’aide de l’API REST Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.date: 11/01/2017
-ms.openlocfilehash: 9d8b05a2268a122289c529050c75fd27dd73245b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 835f72df5c0c693c90b0cf7c45f7805b767d2bcb
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75438965"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496362"
 ---
 # <a name="tutorial-build-your-first-azure-data-factory-using-data-factory-rest-api"></a>Didacticiel : Créer votre première fabrique de données Azure en utilisant l’API REST Data Factory
 > [!div class="op_single_selector"]
@@ -53,7 +53,7 @@ Le pipeline dans ce didacticiel a une activité : **Activité HDInsight Hive**.
   2. Obtenez un **ID client** et une **clé secrète**.
   3. Obtenez l’ **ID de locataire**.
   4. Attribuez l’application **ADFGetStartedApp** au rôle **Collaborateurs de fabrique de données**.
-* Installez [Azure PowerShell](/powershell/azure/overview).
+* Installez [Azure PowerShell](/powershell/azure/).
 * Démarrez **PowerShell** et exécutez la commande suivante. Conservez Azure PowerShell ouvert jusqu’à la fin de ce tutoriel. Si vous fermez puis rouvrez Azure PowerShell, vous devez réexécuter ces commandes.
   1. Exécutez **Connect-AzAccount**, puis saisissez le nom d’utilisateur et le mot de passe que vous avez utilisés pour la connexion au portail Azure.
   2. Exécutez **Get-AzSubscription** pour voir tous les abonnements de ce compte.
@@ -132,7 +132,7 @@ Notez les points suivants :
 * Vous pouvez utiliser votre **propre cluster HDInsight** au lieu d’utiliser un cluster HDInsight à la demande. Pour plus d’informations, voir [Service lié Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) .
 * Le cluster HDInsight crée un **conteneur par défaut** dans le stockage d’objets blob que vous avez spécifié dans le JSON (**linkedServiceName**). HDInsight ne supprime pas ce conteneur lorsque le cluster est supprimé. Ce comportement est normal. Avec le service lié HDInsight disponible à la demande, un cluster HDInsight est créé dès qu’une tranche est traitée, à moins qu’il n’existe un cluster actif (**timeToLive**). Ce cluster est supprimé, une fois le traitement terminé.
 
-    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « **nomdevotrefabriquededonnéesadf**-**nomduservicelié**-horodatage ». Utilisez des outils tels que [Microsoft Storage Explorer](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage d’objets blob Azure.
+    Comme un nombre croissant de tranches sont traitées, vous voyez un grand nombre de conteneurs dans votre stockage d’objets blob Azure. Si vous n’en avez pas besoin pour dépanner les travaux, il se peut que vous deviez les supprimer pour réduire les frais de stockage. Le nom de ces conteneurs suit un modèle : « **nomdevotrefabriquededonnéesadf**-**nomduservicelié**-horodatage ». Utilisez des outils tels que l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com/) pour supprimer des conteneurs dans votre stockage Blob Azure.
 
 Pour plus d’informations, voir [Service lié à la demande Azure HDInsight](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) .
 
@@ -314,7 +314,7 @@ Dans cette étape, vous créez une fabrique de données Azure Data Factory nomm�
 
 Notez les points suivants :
 
-* Le nom de la fabrique de données Azure doit être un nom global unique. Si le message d’erreur **Le nom de la fabrique de données « FirstDataFactoryREST » n’est pas disponible**s’affiche dans les résultats, procédez comme suit :
+* Le nom de la fabrique de données Azure doit être un nom global unique. Si le message d’erreur **Le nom de la fabrique de données « FirstDataFactoryREST » n’est pas disponible** s’affiche dans les résultats, procédez comme suit :
   1. Modifiez le nom (par exemple, votrenomFirstDataFactoryREST) dans le fichier **datafactory.json** . Consultez la rubrique [Data Factory - Règles d’affectation des noms](data-factory-naming-rules.md) pour savoir comment nommer les artefacts Data Factory.
   2. Dans la première commande où une valeur est attribuée à la variable **$cmd** , remplacez FirstDataFactoryREST par le nouveau nom, puis exécutez la commande.
   3. Exécutez les deux commandes suivantes pour appeler l’API REST afin de créer la fabrique de données et d’imprimer les résultats de l’opération.
@@ -476,11 +476,11 @@ Vous pouvez également utiliser le portail Azure pour surveiller les tranches et
 ## <a name="summary"></a>Résumé
 Dans ce didacticiel, vous avez créé une fabrique de données Azure pour traiter des données en exécutant le script Hive sur un cluster Hadoop HDInsight. Vous avez effectué les étapes suivantes dans le portail Azure à l’aide de Data Factory Editor :
 
-1. Création d’une **fabrique de données**Azure.
+1. Création d’une **fabrique de données** Azure.
 2. Création de deux **services liés**:
    1. **Azure Storage** pour lier à la fabrique de données votre stockage d’objets blob Azure contenant les fichiers d’entrée/sortie.
    2. **Azure HDInsight** à la demande pour lier à la fabrique de données un cluster Hadoop HDInsight à la demande. Azure Data Factory crée un cluster Hadoop HDInsight juste-à-temps pour traiter les données d’entrée et produire des données de sortie.
-3. Création de deux **jeux de données**qui décrivent les données d’entrée et de sortie pour l’activité HDInsight Hive dans le pipeline.
+3. Création de deux **jeux de données** qui décrivent les données d’entrée et de sortie pour l’activité HDInsight Hive dans le pipeline.
 4. Création d’un **pipeline** avec une activité **Hive HDInsight**.
 
 ## <a name="next-steps"></a>Étapes suivantes

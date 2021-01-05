@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 01/15/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 6a90b23c10e08e8b14a18f9619cff5aaeb003cab
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 22d68722afe4be6113263a7e7282dde3f188b18a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76045679"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96027956"
 ---
 ### <a name="to-modify-the-local-network-gateway-gatewayipaddress---no-gateway-connection"></a><a name="gwipnoconnection"></a> Pour modifier la passerelle de réseau local GatewayIpAddress - sans connexion de passerelle
 
@@ -45,7 +45,7 @@ Si le périphérique VPN auquel vous souhaitez vous connecter a changé son adre
    -Location "East US" -AddressPrefix @('10.101.0.0/24','10.101.1.0/24') `
    -GatewayIpAddress "104.40.81.124" -ResourceGroupName TestRG1
    ```
-3. Créez la connexion. Dans cet exemple, nous allons configurer un type de connexion IPsec. Lorsque vous recréez votre connexion, utilisez le type de connexion spécifié pour votre configuration. Pour les autres types de connexion, consultez la page sur [les applets de commande PowerShell](https://msdn.microsoft.com/library/mt603611.aspx) .  Pour obtenir le nom de la passerelle VirtualNetworkGateway, vous pouvez exécuter la cmdlet « Get-AzVirtualNetworkGateway ».
+3. Créez la connexion. Dans cet exemple, nous allons configurer un type de connexion IPsec. Lorsque vous recréez votre connexion, utilisez le type de connexion spécifié pour votre configuration. Pour les autres types de connexion, consultez la page sur [les applets de commande PowerShell](/powershell/module/Azurerm.Network/New-AzureRmVirtualNetworkGatewayConnection) .  Pour obtenir le nom de la passerelle VirtualNetworkGateway, vous pouvez exécuter la cmdlet « Get-AzVirtualNetworkGateway ».
    
     Définissez les variables.
 

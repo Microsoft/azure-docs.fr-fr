@@ -1,29 +1,33 @@
 ---
-title: Implémenter des styles dynamiques pour les cartes d’intérieur du Créateur Azure Maps
-description: Découvrez comment implémenter des styles dynamiques pour les cartes d’intérieur du Créateur
+title: Implémenter des styles dynamiques pour les cartes d’intérieur Azure Maps Creator (préversion)
+description: Découvrez comment implémenter des styles dynamiques pour les cartes d’intérieur Creator (préversion).
 author: anastasia-ms
 ms.author: v-stharr
-ms.date: 05/18/2020
+ms.date: 12/07/2020
 ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 6d31edaea109f2969cc68c566594dc436be203d7
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 266dc5d62f6224495075546528ad71d806d415ac
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743544"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96903443"
 ---
-# <a name="implement-dynamic-styling-for-creator-indoor-maps"></a>Implémenter des styles dynamiques pour les cartes d’intérieur du Créateur
+# <a name="implement-dynamic-styling-for-creator-preview-indoor-maps"></a>Implémenter des styles dynamiques pour les cartes d’intérieur Creator (préversion)
 
-Le [service État de caractéristique](https://docs.microsoft.com/rest/api/maps/featurestate) du Créateur Azure Maps permet d’appliquer des styles basés sur les propriétés dynamiques des caractéristiques de données cartographiques intérieures.  Par exemple, vous pouvez afficher des salles de réunion d’un bâtiment dans une couleur spécifique reflétant leur état d’occupation. Cet article explique comment afficher de façon dynamique des caractéristiques de carte d’intérieur avec le [service État de caractéristique](https://docs.microsoft.com/rest/api/maps/featurestate) et le [module web Intérieur](how-to-use-indoor-module.md).
+> [!IMPORTANT]
+> Les services Azure Maps Creator sont disponibles en préversion publique.
+> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+Le [service État de caractéristique](/rest/api/maps/featurestate) du Créateur Azure Maps permet d’appliquer des styles basés sur les propriétés dynamiques des caractéristiques de données cartographiques intérieures.  Par exemple, vous pouvez afficher des salles de réunion d’un bâtiment dans une couleur spécifique reflétant leur état d’occupation. Cet article explique comment afficher de façon dynamique des caractéristiques de carte d’intérieur avec le [service État de caractéristique](/rest/api/maps/featurestate) et le [module web Intérieur](how-to-use-indoor-module.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
-1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-account-with-azure-maps)
+1. [Créer un compte Azure Maps](quick-demo-map-app.md#create-an-azure-maps-account)
 2. [Obtenir une clé d’abonnement principale](quick-demo-map-app.md#get-the-primary-key-for-your-account), également appelée clé primaire ou clé d’abonnement.
-3. [Créer une ressource de Créateur](how-to-manage-creator.md)
+3. [Créer une ressource Creator (préversion)](how-to-manage-creator.md)
 4. Téléchargez l’[exemple de package de dessin](https://github.com/Azure-Samples/am-creator-indoor-data-examples).
 5. [Créez une carte d’intérieur](tutorial-creator-indoor-maps.md) pour obtenir un ID `tilesetId` et un ID `statesetId`.
 6. Générez une application web en suivant les étapes décrites dans [comment utiliser le module Cartes d’intérieur](how-to-use-indoor-module.md).
@@ -48,7 +52,7 @@ Le script suivant implémente l’événement de clic de souris. Le code récup�
 /* Upon a mouse click, log the feature properties to the browser's console. */
 map.events.add("click", function(e){
 
-    var features = map.layers.getRenderedShapes(e.position, "indoor")
+    var features = map.layers.getRenderedShapes(e.position, "indoor");
 
     var result = features.reduce(function (ids, feature) {
         if (feature.layer.id == "indoor_unit_office") {
@@ -68,7 +72,7 @@ Dans la section suivante, nous allons définir l’*état* d’occupation du bur
 
 1. Dans l’application Postman, sélectionnez **Nouveau**. Dans la fenêtre **Create New** (Créer nouveau), sélectionnez **Request** (Demande). Entrez un **Nom de demande**, puis sélectionnez une collection. Cliquez sur **Enregistrer**.
 
-2. Utilisez l’[API d’états de mise à jour de caractéristique](https://docs.microsoft.com/rest/api/maps/featurestate/updatestatespreview) pour mettre à jour l’état. Transmettez l’ID de stateset, et `UNIT26` pour l’une des deux unités. Ajoutez votre clé d’abonnement Azure Maps. Voici l’URL d’une requête **POST** pour mettre à jour l’état :
+2. Utilisez l’[API d’états de mise à jour de caractéristique](/rest/api/maps/featurestate/updatestatespreview) pour mettre à jour l’état. Transmettez l’ID de stateset, et `UNIT26` pour l’une des deux unités. Ajoutez votre clé d’abonnement Azure Maps. Voici l’URL d’une requête **POST** pour mettre à jour l’état :
 
     ```http
     https://atlas.microsoft.com/featureState/state?api-version=1.0&statesetID={statesetId}&featureID=UNIT26&subscription-key={Azure-Maps-Primary-Subscription-key}
@@ -113,7 +117,7 @@ L’application web que vous avez précédemment ouverte dans un navigateur doit
 Pour en savoir plus, consultez :
 
 > [!div class="nextstepaction"]
-> [Créateur pour cartes d’intérieur](creator-indoor-maps.md)
+> [Creator (préversion) pour cartes d’intérieur](creator-indoor-maps.md)
 
 Consultez les références des API mentionnées dans cet article :
 
@@ -134,4 +138,3 @@ Consultez les références des API mentionnées dans cet article :
 
 > [!div class="nextstepaction"]
 > [Service de caractéristique web](creator-indoor-maps.md#web-feature-service-api)
-

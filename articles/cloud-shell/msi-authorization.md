@@ -10,12 +10,12 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.topic: article
 ms.date: 04/14/2018
-ms.openlocfilehash: a5d49a16324a5a97f4a0507f9abf47ea602ea072
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0fb19524079f84e92e1ddbc98a61917026492663
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72328717"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89469896"
 ---
 # <a name="use-managed-identities-for-azure-resources-in-azure-cloud-shell"></a>Utiliser des identités managées pour les ressources Azure dans Azure Cloud Shell
 
@@ -43,8 +43,8 @@ Le sous-système MSI local met en cache des jetons. Par conséquent, vous pouvez
 
 Si vous mettez le jeton en cache dans votre code, vous devez être prêt à gérer les scénarios dans lesquels la ressource indique que le jeton a expiré.
 
-Pour gérer les erreurs de jeton, visitez la [page MSI sur le curling des jetons d’accès MSI](https://docs.microsoft.com/azure/active-directory/managed-service-identity/how-to-use-vm-token#error-handling).
+Pour gérer les erreurs de jeton, visitez la [page MSI sur le curling des jetons d’accès MSI](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md#error-handling).
 
 ## <a name="next-steps"></a>Étapes suivantes
-[En savoir plus sur MSI](https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview)  
-[Acquisition de jetons d’accès à partir de machines virtuelles MSI](https://docs.microsoft.com/azure/active-directory/managed-service-identity/how-to-use-vm-token)
+[En savoir plus sur MSI](../active-directory/managed-identities-azure-resources/overview.md)  
+[Acquisition de jetons d’accès à partir de machines virtuelles MSI](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md)

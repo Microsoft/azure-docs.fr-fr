@@ -3,25 +3,25 @@ title: Configuration en un clic de l’authentification unique (SSO) pour votre 
 description: Étapes de la configuration en un clic de l’authentification unique pour votre application à partir de la Place de marché Azure.
 services: active-directory
 documentationCenter: na
-author: jeevansd
-manager: mtillman
-ms.reviewer: celested
+author: kenwith
+manager: celestedg
+ms.reviewer: kenwith
 ms.assetid: e0416991-4b5d-4b18-89bb-91b6070ed3ba
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: tutorial
+ms.topic: conceptual
 ms.date: 06/11/2019
-ms.author: jeedes
+ms.author: kenwith
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a83d27af4fd783b95c53ef3a9169cb72bfc29d34
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: fe4e981782878ce4f86dd7dcb8ae635a60b2405a
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67872429"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658704"
 ---
 # <a name="one-click-app-configuration-of-single-sign-on"></a>Configuration en un clic de l’authentification unique pour une application
 
@@ -37,10 +37,10 @@ La fonctionnalité d’authentification SSO en un clic a été conçue pour conf
 - Configuration de l’authentification unique plus efficace et précise.
 - Aucune communication et aucun support de partenaire ne sont nécessaires pour la configuration. L’application fournit l’interface utilisateur pour la configuration SAML.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 - Abonnement actif de l’application à configurer avec l’authentification unique. Vous avez également besoin d’informations d’identification de l’administrateur.
-- L’**Extension de connexion sécurisée à Mes applications** de Microsoft installée dans le navigateur. Pour plus d’informations, consultez [Accéder aux applications du portail Mes applications et les utiliser](https://docs.microsoft.com/azure/active-directory/user-help/my-apps-portal-end-user-access).
+- L’**Extension de connexion sécurisée à Mes applications** de Microsoft installée dans le navigateur. Pour plus d’informations, consultez [Accéder aux applications du portail Mes applications et les utiliser](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="one-click-sso-configuration-steps"></a>Étapes de configuration SSO en un clic
 
@@ -59,7 +59,7 @@ La fonctionnalité d’authentification SSO en un clic a été conçue pour conf
 
    ![Installer l’extension du navigateur My Apps Secure Sign-in](./media/one-click-sso-tutorial/install-myappssecure-extension.png)
 
-6. Après avoir ajouté l’extension au navigateur, sélectionnez **Configurer\<Nom de l’application\>** . Une fois que vous êtes redirigé vers le portail d’administration de l’application, connectez-vous en tant qu’administrateur.
+6. Après avoir ajouté l’extension au navigateur, sélectionnez **Configurer \<Application Name\>** . Une fois que vous êtes redirigé vers le portail d’administration de l’application, connectez-vous en tant qu’administrateur.
 
    ![Configurer le nom de l’application](./media/one-click-sso-tutorial/setup-sso.png)
 
@@ -84,6 +84,5 @@ La fonctionnalité d’authentification SSO en un clic a été conçue pour conf
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/saas-apps/tutorial-list)
-* [Présentation de l’Extension de navigateur de connexion sécurisée à Mes applications](https://docs.microsoft.com/azure/active-directory/user-help/my-apps-portal-end-user-access)
- 
+* [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](../saas-apps/tutorial-list.md)
+* [Présentation de l’Extension de navigateur de connexion sécurisée à Mes applications](../user-help/my-apps-portal-end-user-access.md)

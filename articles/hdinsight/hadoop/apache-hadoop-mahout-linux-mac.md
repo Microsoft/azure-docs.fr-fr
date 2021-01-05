@@ -1,35 +1,31 @@
 ---
 title: Générer des recommandations à l’aide d’Apache Mahout dans Azure HDInsight
-description: Apprenez à utiliser la bibliothèque à apprentissage automatique Apache Mahout pour générer des recommandations de films avec HDInsight (Hadoop).
+description: Apprenez à utiliser la bibliothèque à apprentissage automatique Apache Mahout pour générer des recommandations de films avec HDInsight.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
-ms.date: 01/03/2020
-ms.openlocfilehash: 33110e9f1d45fcd11e5f4cad1b589ab929a9472d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.custom: hdinsightactive,seoapr2020
+ms.date: 05/14/2020
+ms.openlocfilehash: a4e4a45519526dd0eeb938a3b83e737d82589c1e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75767634"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86207669"
 ---
-# <a name="generate-movie-recommendations-using-apache-mahout-with-apache-hadoop-in-hdinsight-ssh"></a>Générer des recommandations de films en utilisant Apache Mahout avec Apache Hadoop dans HDInsight (SSH)
-
-[!INCLUDE [mahout-selector](../../../includes/hdinsight-selector-mahout.md)]
+# <a name="generate-recommendations-using-apache-mahout-in-azure-hdinsight"></a>Générer des recommandations à l’aide d’Apache Mahout dans Azure HDInsight
 
 Apprenez à utiliser la bibliothèque à apprentissage automatique [Apache Mahout](https://mahout.apache.org) avec Azure HDInsight pour générer des recommandations de films
 
 Mahout est une bibliothèque d’[apprentissage automatique](https://en.wikipedia.org/wiki/Machine_learning) pour Apache Hadoop. Mahout contient des algorithmes pour le traitement des données, tel que le filtrage, la classification et le clustering. Dans cet article, vous utilisez un moteur de recommandation pour générer des recommandations en fonction des films vus par vos amis.
 
+Pour plus d'informations sur la version de Mahout dans HDInsight, consultez [Versions HDInsight et composants Apache Hadoop](../hdinsight-component-versioning.md).
+
 ## <a name="prerequisites"></a>Prérequis
 
 Un cluster Apache Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./apache-hadoop-linux-tutorial-get-started.md).
-
-## <a name="apache-mahout-versioning"></a>Contrôle de version Apache Mahout
-
-Pour plus d'informations sur la version de Mahout dans HDInsight, consultez [Versions HDInsight et composants Apache Hadoop](../hdinsight-component-versioning.md).
 
 ## <a name="understanding-recommendations"></a>Présentation des recommandations
 
@@ -51,11 +47,13 @@ Il existe deux fichiers, `moviedb.txt` et `user-ratings.txt`. Le fichier `user-r
 
 Les données contenues dans `user-ratings.txt` respectent la structure suivante : `userID`, `movieID`, `userRating` et `timestamp`, ce qui indique la note attribuée par chaque utilisateur à un film. Voici un exemple de ces données :
 
+```output
     196    242    3    881250949
     186    302    3    891717742
     22     377    1    878887116
     244    51     2    880606923
     166    346    1    886397596
+```
 
 ## <a name="run-the-analysis"></a>Exécution de l'analyse
 

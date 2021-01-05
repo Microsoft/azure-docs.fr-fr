@@ -11,13 +11,13 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 01/29/2018
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: 7232d7d3bfad23a91bf93adb679973f5a419aa76
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: f20e5271cdca18ad40710e5defdf8175754ef891
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81457754"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078671"
 ---
 # <a name="restrict-web-traffic-using-azure-powershell"></a>Limiter le trafic web avec Azure PowerShell
 
@@ -69,6 +69,6 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 |[Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) | Supprime un groupe de ressources et toutes les ressources contenues. | 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez d’autres exemples de scripts PowerShell de passerelle d’application dans la [documentation sur Azure Application Gateway](../powershell-samples.md).

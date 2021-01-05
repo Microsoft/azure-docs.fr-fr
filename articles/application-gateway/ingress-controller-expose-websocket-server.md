@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur la façon d’exposer un s
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 1f068c9d98a827afd16da01bdc40cbb6ca5dc465
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 68d4ff7e4617136e4c58ce672f34de56e46f0229
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79297830"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85207785"
 ---
 # <a name="expose-a-websocket-server-to-application-gateway"></a>Exposer un serveur WebSocket à Application Gateway
 
@@ -78,7 +78,7 @@ spec:
 Étant donné que toutes les conditions préalables sont remplies et que vous disposez d’un Application Gateway contrôlé par une entrée Kubernetes dans votre AKS, le déploiement ci-dessus se traduirait par un serveur WebSockets exposé sur le port 80 de l’adresse IP publique de votre Application Gateway et le domaine `ws.contoso.com`.
 
 La commande cURL suivante testerait le déploiement du serveur WebSocket :
-```sh
+```shell
 curl -i -N -H "Connection: Upgrade" \
         -H "Upgrade: websocket" \
         -H "Origin: http://localhost" \

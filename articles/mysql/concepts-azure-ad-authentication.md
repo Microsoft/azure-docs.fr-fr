@@ -5,13 +5,13 @@ author: lfittl-msft
 ms.author: lufittl
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 01/22/2019
-ms.openlocfilehash: 0c56652b4e098213bae0c69d4be5ac77e1b1393c
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.date: 07/23/2020
+ms.openlocfilehash: 942789d5541e796247af2dbdf9371cce4701105e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83635284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87171890"
 ---
 # <a name="use-azure-active-directory-for-authenticating-with-mysql"></a>Utiliser Azure Active Directory pour l’authentification avec MySQL
 
@@ -66,14 +66,18 @@ L’authentification Azure Active Directory prend en charge les méthodes suivan
 - Intégration d’Azure Active Directory
 - Authentification universelle Azure Active Directory avec MFA
 - Utilisation des certificats ou de clés secrètes client d’application Active Directory
+- [Identité gérée](howto-connect-with-managed-identity.md)
 
 Une fois authentifié auprès d’Active Directory, vous récupérez un jeton. Ce jeton est votre mot de passe de connexion.
+
+Notez que les opérations de gestion, telles que l’ajout de nouveaux utilisateurs, sont uniquement prises en charge pour les rôles d’utilisateur Azure AD à ce stade.
 
 > [!NOTE]
 > Pour plus d’informations sur la façon de se connecter avec un jeton Active Directory, consultez [Configurer et se connecter avec Azure AD pour Azure Database pour MySQL](howto-configure-sign-in-azure-ad-authentication.md).
 
 ## <a name="additional-considerations"></a>Considérations supplémentaires
 
+- L’authentification Azure Active Directory est disponible uniquement pour MySQL 5.7 et versions ultérieures.
 - Un seul utilisateur administrateur Azure AD peut être configuré pour un serveur Azure Database pour MySQL à tout moment.
 - Seul un administrateur d’Azure AD pour MySQL peut se connecter initialement au serveur Azure Database pour MySQL à l’aide d’un compte Azure Active Directory. L’administrateur Active Directory peut configurer les utilisateurs de base de données Azure AD suivants.
 - Si un utilisateur est supprimé d’Azure AD, il ne pourra plus s’authentifier auprès d’Azure AD, et il ne sera donc plus possible d’acquérir un code d'accès pour cet utilisateur. Dans ce cas, bien que l'utilisateur correspondant se trouve toujours dans la base de données, il ne sera pas possible de se connecter au serveur avec cet utilisateur.

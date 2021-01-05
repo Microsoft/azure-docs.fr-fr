@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Déplacer un peering public vers le peering Microsoft'
 description: Cet article explique comment déplacer votre peering public vers le peering Microsoft sur ExpressRoute.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: how-to
 ms.date: 12/12/2019
-ms.author: cherylmc
-ms.openlocfilehash: 48ecfcc0d6241e7926892a3ca1c9925b0dc07241
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 608d6c87442821e904fde16c6b75841fe792e3f0
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75436837"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206286"
 ---
 # <a name="move-a-public-peering-to-microsoft-peering"></a>Déplacer un peering public vers le peering Microsoft
 
@@ -31,9 +31,9 @@ Pour vous connecter au peering Microsoft, vous devez configurer et gérer un pro
 > [!Warning]
 > Le pool IP NAT proposé à Microsoft ne doit pas être publié sur Internet. Cela interromprait la connectivité avec d'autres services Microsoft.
 
-Reportez-vous à [Routage asymétrique avec chemins d’accès réseau multiples](https://docs.microsoft.com/azure/expressroute/expressroute-asymmetric-routing) pour bien comprendre le routage asymétrique avant de configurer le peering Microsoft.
+Reportez-vous à [Routage asymétrique avec chemins d’accès réseau multiples](./expressroute-asymmetric-routing.md) pour bien comprendre le routage asymétrique avant de configurer le peering Microsoft.
 
-* Si vous utilisez le peering public et disposez actuellement de règles de réseau IP pour les adresses IP publiques qui sont utilisées pour accéder au [Stockage Azure](../storage/common/storage-network-security.md) ou à [Azure SQL Database](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md), vérifiez que le pool d’adresses IP NAT configuré avec l’appairage Microsoft se trouve bien dans la liste des adresses IP publiques du compte de stockage Azure ou du compte Azure SQL.<br>
+* Si vous utilisez le peering public et disposez actuellement de règles de réseau IP pour les adresses IP publiques qui sont utilisées pour accéder au [Stockage Azure](../storage/common/storage-network-security.md) ou à [Azure SQL Database](../azure-sql/database/vnet-service-endpoint-rule-overview.md), vérifiez que le pool d’adresses IP NAT configuré avec l’appairage Microsoft se trouve bien dans la liste des adresses IP publiques du compte de stockage Azure ou du compte Azure SQL.<br>
 * Pour passer au peering Microsoft sans temps d’arrêt, suivez les étapes fournies dans cet article, dans l’ordre indiqué.
 
 ## <a name="1-create-microsoft-peering"></a><a name="create"></a>1. Créer un peering Microsoft

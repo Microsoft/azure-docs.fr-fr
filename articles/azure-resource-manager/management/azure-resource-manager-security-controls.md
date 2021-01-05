@@ -3,12 +3,12 @@ title: Contrôles de sécurité
 description: Check-list des contrôles de sécurité intégrés pour l’évaluation du service Azure Resource Manager.
 ms.topic: conceptual
 ms.date: 09/04/2019
-ms.openlocfilehash: d0a0625153e428a0d261e52d40b31ef5142eddfd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bb8742c38fae88dc1fd1fd1ec175b248f30df3a0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75476719"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86054455"
 ---
 # <a name="security-controls-for-azure-resource-manager"></a>Contrôles de sécurité pour Azure Resource Manager
 
@@ -47,7 +47,7 @@ Cet article décrit les contrôles de sécurité intégrés à Azure Resource Ma
 
 | Contrôle de sécurité | Oui/Non | Notes|
 |---|---|--|
-| Authentification| Oui | Basée sur [Azure Active Directory](/azure/active-directory).|
+| Authentification| Oui | Basée sur [Azure Active Directory](../../active-directory/index.yml).|
 | Autorisation| Oui | |
 
 ## <a name="configuration-management"></a>Gestion des configurations

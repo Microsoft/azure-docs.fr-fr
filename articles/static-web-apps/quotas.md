@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: overview
 ms.date: 05/08/2020
 ms.author: cshoe
-ms.openlocfilehash: 6fa70eba5875c32d41fa1cfc8daf9b1cdf8f19df
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 915f8675ffda0d70347905d11c7d93975b9d4526
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599108"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132735"
 ---
 # <a name="quotas-in-azure-static-web-apps-preview"></a>Quotas dans Azure Static Web Apps (préversion)
 
@@ -26,7 +26,7 @@ Les quotas suivants sont disponibles pour Azure Static Web Apps (préversion).
 | Bande passante incluse          | 100 Go par mois |
 | Dépassement de bande passante           | Non disponible      |
 | Applications par abonnement Azure | 10               |
-| Taille de l’application                    | 100 Mo           |
+| Taille de l’application                    | 250 Mo           |
 | Environnements de pré-production | 1                |
 | Domaines personnalisés              | 1                |
 | Autorisation<br><br>Avec des rôles personnalisés et des règles d’acheminement | Jusqu’à 25 utilisateurs finaux invités et rôles affectés |

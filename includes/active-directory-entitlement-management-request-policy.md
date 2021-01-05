@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/30/2020
 ms.author: ajburnle
 ms.custom: include file
-ms.openlocfilehash: 7fd716be397d9ef6b9d6132cd4470f653f3cea0f
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: b7029c5cdd004910caa83425536bbe481e4b01f3
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80655938"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95556885"
 ---
 ## <a name="for-users-in-your-directory"></a>Pour les utilisateurs dans votre répertoire
 
@@ -33,7 +33,7 @@ Suivez ces étapes si vous souhaitez autoriser les utilisateurs de votre annuair
     | **Tous les membres (à l’exclusion des invités)** | Choisissez cette option si vous souhaitez que tous les utilisateurs membres de votre annuaire puissent demander ce package d’accès. Cette option n’inclut pas les utilisateurs que vous avez invités dans votre annuaire. |
     | **Tous les utilisateurs (y compris les invités)** | Choisissez cette option si vous souhaitez que tous les utilisateurs membres et les utilisateurs invités de votre annuaire puissent demander ce package d’accès. |
 
-    Les utilisateurs invités font référence à des utilisateurs externes qui ont été invités dans votre annuaire avec [Azure AD B2B](../articles/active-directory/b2b/what-is-b2b.md). Pour plus d’informations sur les différences entre les utilisateurs membres et les utilisateurs invités, consultez [Quelles sont les autorisations utilisateur par défaut dans Azure Active Directory ?](../articles/active-directory/fundamentals/users-default-permissions.md).
+    Les utilisateurs invités font référence à des utilisateurs externes qui ont été invités dans votre annuaire avec [Azure AD B2B](../articles/active-directory/external-identities/what-is-b2b.md). Pour plus d’informations sur les différences entre les utilisateurs membres et les utilisateurs invités, consultez [Quelles sont les autorisations utilisateur par défaut dans Azure Active Directory ?](../articles/active-directory/fundamentals/users-default-permissions.md).
 
 1. Si vous avez sélectionné **Utilisateurs et groupes spécifiques**, cliquez sur **Ajouter des utilisateurs et des groupes**.
 
@@ -47,10 +47,10 @@ Suivez ces étapes si vous souhaitez autoriser les utilisateurs de votre annuair
 
 ## <a name="for-users-not-in-your-directory"></a>Pour les utilisateurs qui ne sont pas dans votre répertoire
 
- **Les utilisateurs absents de votre annuaire** sont des utilisateurs qui se trouvent dans un autre annuaire ou domaine Azure AD. Ces utilisateurs n’ont peut-être pas encore été invités dans votre annuaire. Les annuaires Azure AD doivent être configurés pour autoriser les invitations dans **Restrictions de collaboration**. Pour plus d’informations, consultez [Permettre une collaboration B2B externe et gérer les utilisateurs autorisés à en inviter d’autres](../articles/active-directory/b2b/delegate-invitations.md).
+ **Les utilisateurs absents de votre annuaire** sont des utilisateurs qui se trouvent dans un autre annuaire ou domaine Azure AD. Ces utilisateurs n’ont peut-être pas encore été invités dans votre annuaire. Les annuaires Azure AD doivent être configurés pour autoriser les invitations dans **Restrictions de collaboration**. Pour plus d’informations, consultez [Permettre une collaboration B2B externe et gérer les utilisateurs autorisés à en inviter d’autres](../articles/active-directory/external-identities/delegate-invitations.md).
 
 > [!NOTE]
-> Un compte d’utilisateur invité sera créé pour un utilisateur qui n’est pas encore dans votre répertoire et dont la demande est approuvée ou approuvée automatiquement. L’invité est invité, mais ne recevra pas d’invitation par e-mail. Il recevra un e-mail une fois l’attribution au package d’accès fournie. Par défaut, quand cet utilisateur invité n’a plus aucune attribution de package d’accès (pour cause d’expiration ou d’annulation), son compte ne peut plus se connecter et est supprimé par la suite. Si vous voulez que des utilisateurs invités demeurent indéfiniment dans votre répertoire, même s’ils n’ont plus d’attribution de package d’accès, vous pouvez modifier les paramètres de votre configuration de gestion des droits d’utilisation. Pour plus d’informations sur l’objet utilisateur invité, consultez [Propriétés d’un utilisateur Azure Active Directory B2B Collaboration](../articles/active-directory/b2b/user-properties.md).
+> Un compte d’utilisateur invité sera créé pour un utilisateur qui n’est pas encore dans votre répertoire et dont la demande est approuvée ou approuvée automatiquement. L’invité est invité, mais ne recevra pas d’invitation par e-mail. Il recevra un e-mail une fois l’attribution au package d’accès fournie. Par défaut, quand cet utilisateur invité n’a plus aucune attribution de package d’accès (pour cause d’expiration ou d’annulation), son compte ne peut plus se connecter et est supprimé par la suite. Si vous voulez que des utilisateurs invités demeurent indéfiniment dans votre répertoire, même s’ils n’ont plus d’attribution de package d’accès, vous pouvez modifier les paramètres de votre configuration de gestion des droits d’utilisation. Pour plus d’informations sur l’objet utilisateur invité, consultez [Propriétés d’un utilisateur Azure Active Directory B2B Collaboration](../articles/active-directory/external-identities/user-properties.md).
 
 Suivez ces étapes si vous souhaitez autoriser les utilisateurs absents de votre annuaire à demander ce package d’accès :
 
@@ -81,7 +81,7 @@ Suivez ces étapes si vous souhaitez autoriser les utilisateurs absents de votre
 1. Une fois que vous avez sélectionné toutes les organisations connectées, cliquez sur **Sélectionner**.
 
     > [!NOTE]
-    > Tous les utilisateurs des organisations connectées sélectionnées pourront demander ce package d’accès. Cela comprend les utilisateurs Azure AD de tous les sous-domaines associés à l’organisation, à moins que ces domaines soient bloqués par la liste d’autorisation ou de refus d’Azure B2B. Pour plus d’informations, consultez [Autoriser ou bloquer des invitations aux utilisateurs B2B à partir d’organisations spécifiques](../articles/active-directory/b2b/allow-deny-list.md).
+    > Tous les utilisateurs des organisations connectées sélectionnées pourront demander ce package d’accès. Cela comprend les utilisateurs Azure AD de tous les sous-domaines associés à l’organisation, à moins que ces domaines soient bloqués par la liste d’autorisation ou de refus d’Azure B2B. Pour plus d’informations, consultez [Autoriser ou bloquer des invitations aux utilisateurs B2B à partir d’organisations spécifiques](../articles/active-directory/external-identities/allow-deny-list.md).
 
 1. Passez à la section [Approbation](#approval) plus bas.
 
@@ -194,7 +194,7 @@ Par exemple, si vous avez mentionné Alice et Bob comme premier et deuxième app
 
 1. Dans la zone **Passer aux autres approbateurs après combien de jours ?** , entrez le nombre de jours dont les approbateurs disposent pour approuver ou refuser une demande. Si aucun approbateur n’a approuvé ou refusé la demande pendant la durée de validité de celle-ci, la demande expire (délai d’expiration) et l’utilisateur doit soumettre une autre demande pour le package d’accès. 
 
-    Les demandes ne peuvent être transférées aux approbateurs de substitution qu’un jour après que la durée de la demande a atteint sa demi-vie. Dans cet exemple, la durée de la demande est de 14 jours. Ainsi, la durée de la demande atteint sa demi-vie le jour 7. La demande ne peut donc pas être transférée avant le jour 8. Par ailleurs, les demandes ne peuvent pas être transférées le dernier jour de leur durée. Ainsi, dans l’exemple, l’ultime limite pour le transfert de la demande est le jour 13.
+    Les demandes ne peuvent être transférées à d’autres approbateurs qu’une journée après que la demande a atteint la moitié de sa durée de vie, et le délai d’expiration de la décision de l’approbateur principal doit être d’au moins quatre jours. Si le délai d’expiration de la demande est inférieur ou égal à trois jours, il n’y a pas assez de temps pour transférer la demande à d’autres approbateurs. Dans cet exemple, la durée de la demande est de 14 jours. Ainsi, la durée de la demande atteint sa demi-vie le jour 7. La demande ne peut donc pas être transférée avant le jour 8. Par ailleurs, les demandes ne peuvent pas être transférées le dernier jour de leur durée. Ainsi, dans l’exemple, l’ultime limite pour le transfert de la demande est le jour 13.
 
 ## <a name="enable-requests"></a>Activer les demandes
 
@@ -204,6 +204,36 @@ Par exemple, si vous avez mentionné Alice et Bob comme premier et deuxième app
 
     Si vous avez sélectionné **Aucun (attributions directes d’administrateur uniquement)** et que vous affectez la valeur **No** à Activer, les administrateurs ne pourront pas attribuer directement ce package d’accès.
 
-    ![Package d’accès - Stratégie - Paramètre Activer la stratégie](./media/active-directory-entitlement-management-request-policy/enable-requests.png)
+    ![Capture d’écran montrant l’option permettant d’activer de nouvelles demandes et affectations.](./media/active-directory-entitlement-management-request-policy/enable-requests.png)
 
 1. Cliquez sur **Suivant**.
+
+## <a name="add-requestor-information-preview-to-an-access-package"></a>Ajout d’informations sur le demandeur (préversion) à un package d'accès
+
+1. Accédez à l’onglet **Informations sur le demandeur**, puis cliquez sur le sous-onglet **Questions**.
+ 
+1. Tapez ce que vous souhaitez demander au demandeur, également appelé « chaîne d’affichage », pour la question dans la zone **Question**.
+
+    ![Package d’accès – Stratégie – Activation du paramètre Informations sur le demandeur](./media/active-directory-entitlement-management-request-policy/add-requestor-info-question.png)
+
+1. Si vous souhaitez ajouter vos propres options de localisation, cliquez sur **Ajouter une localisation**.
+    1. Une fois dans le volet **Ajouter des localisations pour les questions**, sélectionnez le **code de la langue** dans laquelle vous localisez la question.
+    1. Dans la langue que vous avez configurée, tapez la question dans la zone **Texte localisé**.
+    1. Une fois que vous avez ajouté toutes les localisations nécessaires, cliquez sur **Enregistrer**.
+
+    ![Package d’accès – Stratégie – Configuration du texte localisé](./media/active-directory-entitlement-management-request-policy/add-localization-question.png)
+
+1. Sélectionnez le **Format de la réponse** dans lequel vous souhaitez que les demandeurs répondent : *texte court*, *choix multiples* et *texte long*.
+ 
+    ![Package d’accès – Stratégie – Sélection du bouton Afficher et modifier le format de réponse Choix multiples](./media/active-directory-entitlement-management-request-policy/answer-format-view-edit.png)
+ 
+1. Si vous sélectionnez Choix multiples, cliquez sur le bouton **Afficher et modifier** pour configurer les options de réponse.
+    1. Une fois que vous avez sélectionné Afficher et modifier, le volet **Afficher/modifier la question** s’ouvre.
+    1. Tapez les options de réponse que vous souhaitez donner au demandeur lorsqu’il répond à la question dans les zones **Valeurs de réponse** .
+    1. Tapez le nombre de réponses dont vous avez besoin, puis cliquez sur **Enregistrer**.
+    
+    ![Package d’accès – Stratégie –Saisie des options de choix multiples](./media/active-directory-entitlement-management-request-policy/answer-multiple-choice.png)
+  
+1. Pour exiger que les demandeurs répondent à cette question lorsqu’ils demandent l’accès à un package d’accès, cochez la case sous **Obligatoire**.
+
+1. Cliquez sur Suivant.

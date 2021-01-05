@@ -1,22 +1,22 @@
 ---
-title: 'Azure ExpressRoute : Connecter un réseau virtuel au circuit : Interface de ligne de commande'
-description: Cet article vous montre comment lier des réseaux virtuels à des circuits ExpressRoute en utilisant le modèle de déploiement Resource Manager et l’interface CLI.
+title: 'Tutoriel : Lier un réseau virtuel à un circuit ExpressRoute – Azure CLI'
+description: Ce tutoriel montre comment lier des réseaux virtuels à des circuits ExpressRoute en utilisant le modèle de déploiement Resource Manager et Azure CLI.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: cherylmc
-ms.openlocfilehash: fdd809bcba703dbd8f9ee1e7c18185fd20e4586f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: tutorial
+ms.date: 10/08/2020
+ms.author: duau
+ms.openlocfilehash: b9dda384e2ef30808559d10012dea2909b2af0fd
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79476132"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206932"
 ---
-# <a name="connect-a-virtual-network-to-an-expressroute-circuit-using-cli"></a>Connecter un réseau virtuel à un circuit ExpressRoute à l’aide de l’interface CLI
+# <a name="tutorial-connect-a-virtual-network-to-an-expressroute-circuit-using-cli"></a>Tutoriel : Connecter un réseau virtuel à un circuit ExpressRoute à l’aide de l’interface CLI
 
-Cet article est conçu pour vous aider à lier des réseaux virtuels à des circuits ExpressRoute de Azure à l’aide de l’interface CLI. Pour pouvoir être liés avec l’interface Azure CLI, les réseaux virtuels doivent être créés à l’aide du modèle de déploiement Resource Manager. Ils peuvent appartenir au même abonnement ou faire partie d’un autre abonnement. Si vous souhaitez utiliser une autre méthode pour connecter votre réseau virtuel à un circuit ExpressRoute, vous pouvez sélectionner un article dans la liste suivante :
+Ce tutoriel montre comment lier des réseaux virtuels (VNets) à des circuits Azure ExpressRoute à l’aide d’Azure CLI. Pour pouvoir être liés avec l’interface Azure CLI, les réseaux virtuels doivent être créés à l’aide du modèle de déploiement Resource Manager. Ils peuvent appartenir au même abonnement ou faire partie d’un autre abonnement. Si vous souhaitez utiliser une autre méthode pour connecter votre réseau virtuel à un circuit ExpressRoute, vous pouvez sélectionner un article dans la liste suivante :
 
 > [!div class="op_single_selector"]
 > * [Azure portal](expressroute-howto-linkvnet-portal-resource-manager.md)
@@ -26,29 +26,31 @@ Cet article est conçu pour vous aider à lier des réseaux virtuels à des circ
 > * [PowerShell (classique)](expressroute-howto-linkvnet-classic.md)
 > 
 
-## <a name="configuration-prerequisites"></a>Prérequis de configuration
+Dans ce tutoriel, vous allez apprendre à :
+> [!div class="checklist"]
+> - Connecter un réseau virtuel du même abonnement à un circuit
+> - Connecter un réseau virtuel d’un autre abonnement à un circuit
+> - Modifier une connexion de réseau virtuel
+> - Configurer ExpressRoute FastPath
 
-* Vous avez besoin de la dernière version de l’interface de ligne de commande (CLI). Pour plus d’informations, consultez la rubrique [Installation de l’interface de ligne de commande Azure (CLI)](https://docs.microsoft.com/cli/azure/install-azure-cli).
+## <a name="prerequisites"></a>Prérequis
 
-* Avant de commencer la configuration, vous devez examiner les [conditions préalables](expressroute-prerequisites.md), la [configuration requise pour le routage](expressroute-routing.md) et les [flux de travail](expressroute-workflows.md).
-
+* Vous avez besoin de la dernière version de l’interface de ligne de commande (CLI). Pour plus d’informations, consultez la rubrique [Installation de l’interface de ligne de commande Azure (CLI)](/cli/azure/install-azure-cli).
+* Avant de commencer la configuration, examinez les [conditions préalables](expressroute-prerequisites.md), la [configuration requise pour le routage](expressroute-routing.md) et les [flux de travail](expressroute-workflows.md).
 * Vous devez disposer d’un circuit ExpressRoute actif. 
   * Suivez les instructions permettant de [créer un circuit ExpressRoute](howto-circuit-cli.md) et faites-le activer par votre fournisseur de service de connectivité. 
   * Vérifiez que le peering privé Azure est configuré pour votre circuit. Pour obtenir des instructions de routage, consultez l'article sur la [configuration du routage](howto-routing-cli.md) . 
-  * Assurez-vous que le peering privé Azure est configuré. Le peering BGP entre votre réseau et Microsoft doit être opérationnel pour que vous puissiez activer la connectivité de bout en bout.
-  * Vérifiez qu’un réseau virtuel et une passerelle de réseau virtuel ont été créés et entièrement approvisionnés. Suivez les instructions fournies dans l’article [Configurer une passerelle de réseau virtuel pour ExpressRoute](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli). Veillez à utiliser `--gateway-type ExpressRoute`.
-
+  * Assurez-vous que le peering privé Azure est configuré. L’homologation BGP entre votre réseau et Microsoft doit être établie pour que vous puissiez activer la connectivité de bout en bout.
+  * Vérifiez qu’un réseau virtuel et une passerelle de réseau virtuel ont été créés et entièrement approvisionnés. Suivez les instructions fournies dans l’article [Configurer une passerelle de réseau virtuel pour ExpressRoute](../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli.md). Veillez à utiliser `--gateway-type ExpressRoute`.
 * Vous pouvez lier jusqu’à 10 réseaux virtuels à un circuit ExpressRoute standard. Tous les réseaux virtuels doivent figurer dans la même région géopolitique lors de l’utilisation d’un circuit ExpressRoute standard. 
-
-* Un réseau virtuel unique peut être lié à quatre circuits ExpressRoute maximum. Utilisez la procédure ci-dessous afin de créer un objet de connexion pour chaque circuit ExpressRoute auquel vous vous connectez. Les circuits ExpressRoute peuvent être dans le même abonnement, dans des abonnements différents ou dans une combinaison des deux.
-
-* Si vous avez activé le module complémentaire ExpressRoute Premium, vous pouvez lier un réseau virtuel à l’extérieur de la zone géopolitique du circuit ExpressRoute ou connecter un plus grand nombre de réseaux virtuels à votre circuit ExpressRoute. Pour plus d’informations sur le module complémentaire Premium, consultez le [FAQ ExpressRoute](expressroute-faqs.md).
+* Un réseau virtuel unique peut être lié à quatre circuits ExpressRoute maximum. Pour créer un objet connexion pour chaque circuit ExpressRoute auquel vous vous connectez, procédez comme suit. Les circuits ExpressRoute peuvent être dans le même abonnement, dans des abonnements différents ou dans une combinaison des deux.
+* Si vous activez le module complémentaire ExpressRoute Premium, vous pouvez lier des réseaux virtuels à l’extérieur de la région géopolitique du circuit ExpressRoute. Le module complémentaire Premium vous permet également de connecter plus de 10 réseaux virtuels à votre circuit ExpressRoute en fonction de la bande passante choisie. Pour plus d’informations sur le module complémentaire Premium, consultez le [FAQ](expressroute-faqs.md) .
 
 ## <a name="connect-a-virtual-network-in-the-same-subscription-to-a-circuit"></a>Connecter un réseau virtuel du même abonnement à un circuit
 
 Vous pouvez connecter une passerelle de réseau virtuel à un circuit ExpressRoute à l’aide de l’exemple suivant. Assurez-vous que la passerelle de réseau virtuel est créée et prête pour la liaison avant d’exécuter la commande.
 
-```azurecli
+```azurecli-interactive
 az network vpn-connection create --name ERConnection --resource-group ExpressRouteResourceGroup --vnet-gateway1 VNet1GW --express-route-circuit2 MyCircuit
 ```
 
@@ -56,7 +58,7 @@ az network vpn-connection create --name ERConnection --resource-group ExpressRou
 
 Vous pouvez partager un circuit ExpressRoute entre plusieurs abonnements. La figure suivante montre un schéma simple sur le fonctionnement du partage de circuits ExpressRoute entre plusieurs abonnements.
 
-Chacun des petits clouds dans le cloud principal est utilisé pour représenter les abonnements appartenant à différents services au sein d’une organisation. Chacun des services au sein de l’organisation peut utiliser son propre abonnement pour déployer ses services, mais ils peuvent partager un même circuit ExpressRoute pour se connecter à votre réseau local. Un seul service (dans cet exemple : le service informatique) peut détenir le circuit ExpressRoute. D’autres abonnements au sein de l’organisation peuvent utiliser le circuit ExpressRoute.
+Chacun des petits clouds dans le cloud principal est utilisé pour représenter les abonnements appartenant à différents services au sein d’une organisation. Les départements au sein de l’organisation utilisent leur propre abonnement pour déployer leurs services, mais ils peuvent partager un même circuit ExpressRoute pour se reconnecter à votre réseau local. Un seul service (dans cet exemple : le service informatique) peut détenir le circuit ExpressRoute. D’autres abonnements au sein de l’organisation peuvent utiliser le circuit ExpressRoute.
 
 > [!NOTE]
 > Les frais de connectivité et de bande passante pour le circuit dédié s’appliquent au propriétaire du circuit ExpressRoute. Tous les réseaux virtuels partagent la même bande passante.
@@ -67,7 +69,7 @@ Chacun des petits clouds dans le cloud principal est utilisé pour représenter 
 
 ### <a name="administration---circuit-owners-and-circuit-users"></a>Administration : propriétaires de circuit et utilisateurs du circuit
 
-Le « propriétaire du circuit » est un utilisateur avancé autorisé de la ressource de circuit ExpressRoute. Le propriétaire du circuit peut créer des autorisations utilisables par les « utilisateurs du circuit ». Les utilisateurs du circuit sont les propriétaires des passerelles de réseau virtuel qui ne figurent pas dans le même abonnement que le circuit ExpressRoute. Les utilisateurs du circuit peuvent utiliser des autorisations (une seule autorisation par réseau virtuel).
+Le « propriétaire du circuit » est un utilisateur avancé autorisé de la ressource de circuit ExpressRoute. Le propriétaire du circuit peut créer des autorisations utilisables par les « utilisateurs du circuit ». Les utilisateurs du circuit sont propriétaires de passerelles de réseau virtuel qui ne figurent pas dans le même abonnement que le circuit ExpressRoute. Les utilisateurs du circuit peuvent utiliser des autorisations (une seule autorisation par réseau virtuel).
 
 Le propriétaire du circuit a le pouvoir de modifier et de révoquer les autorisations à tout moment. Lorsqu’une autorisation est révoquée, toutes les connexions sont supprimées de l’abonnement dont l’accès a été révoqué.
 
@@ -75,11 +77,11 @@ Le propriétaire du circuit a le pouvoir de modifier et de révoquer les autoris
 
 **Création d’une autorisation**
 
-Le propriétaire du circuit crée une autorisation, ce qui entraîne la création d’une clé d’autorisation qui peut être utilisée par un utilisateur du circuit pour connecter ses passerelles de réseau virtuel à un circuit ExpressRoute. Une autorisation n’est valide que pour une seule connexion.
+Le propriétaire du circuit crée une autorisation, ce qui entraîne la création d’une clé d’autorisation dont un utilisateur du circuit peut se servir pour connecter ses passerelles de réseau virtuel au circuit ExpressRoute. Une autorisation n’est valide que pour une seule connexion.
 
 L’exemple suivant montre comment créer une autorisation :
 
-```azurecli
+```azurecli-interactive
 az network express-route auth create --circuit-name MyCircuit -g ExpressRouteResourceGroup -n MyAuthorization
 ```
 
@@ -99,7 +101,7 @@ La réponse contient la clé et l’état d’autorisation :
 
 Le propriétaire du circuit peut vérifier toutes les autorisations émises pour un circuit donné en exécutant l’exemple suivant :
 
-```azurecli
+```azurecli-interactive
 az network express-route auth list --circuit-name MyCircuit -g ExpressRouteResourceGroup
 ```
 
@@ -107,7 +109,7 @@ az network express-route auth list --circuit-name MyCircuit -g ExpressRouteResou
 
 Le propriétaire du circuit peut ajouter des autorisations à l’aide de l’exemple suivant :
 
-```azurecli
+```azurecli-interactive
 az network express-route auth create --circuit-name MyCircuit -g ExpressRouteResourceGroup -n MyAuthorization1
 ```
 
@@ -115,7 +117,7 @@ az network express-route auth create --circuit-name MyCircuit -g ExpressRouteRes
 
 Le propriétaire du circuit peut révoquer/supprimer les autorisations accordées à l’utilisateur en exécutant l’exemple suivant :
 
-```azurecli
+```azurecli-interactive
 az network express-route auth delete --circuit-name MyCircuit -g ExpressRouteResourceGroup -n MyAuthorization1
 ```
 
@@ -123,15 +125,15 @@ az network express-route auth delete --circuit-name MyCircuit -g ExpressRouteRes
 
 L’utilisateur du circuit a besoin de l’ID de pair et d’une clé d’autorisation de la part du propriétaire du circuit. La clé d'autorisation est un GUID.
 
-```powershell
-Get-AzExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "MyRG"
+```azurecli-interactive
+az network express-route show -n MyCircuit -g ExpressRouteResourceGroup
 ```
 
 **Réclamation d’une autorisation de connexion**
 
 L’utilisateur du circuit peut exécuter l’applet de commande suivante pour utiliser une autorisation de liaison :
 
-```azurecli
+```azurecli-interactive
 az network vpn-connection create --name ERConnection --resource-group ExpressRouteResourceGroup --vnet-gateway1 VNet1GW --express-route-circuit2 MyCircuit --authorization-key "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 ```
 
@@ -146,27 +148,37 @@ Vous pouvez mettre à jour certaines propriétés d’une connexion de réseau v
 
 Votre réseau virtuel peut être connecté à plusieurs circuits ExpressRoute. Vous pouvez recevoir le même préfixe à partir de plusieurs circuits ExpressRoute. Pour choisir la connexion pour envoyer le trafic destiné à ce préfixe, vous pouvez modifier le *RoutingWeight* d’une connexion. Le trafic est envoyé sur la connexion avec le *RoutingWeight*.le plus élevé.
 
-```azurecli
+```azurecli-interactive
 az network vpn-connection update --name ERConnection --resource-group ExpressRouteResourceGroup --routing-weight 100
 ```
 
 La plage de *RoutingWeight* est de 0 à 32000. La valeur par défaut est 0.
 
 ## <a name="configure-expressroute-fastpath"></a>Configurer ExpressRoute FastPath 
-Vous pouvez activer [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) si votre circuit ExpressRoute se trouve sur [ExpressRoute Direct](expressroute-erdirect-about.md) et votre passerelle de réseau virtuel est Très hautes performances ou ErGw3AZ. FastPath améliore les performances de chemin d’accès de données comme le nombre de paquets et de connexions par seconde entre votre réseau local et votre réseau virtuel. 
+Vous pouvez activer [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) si votre passerelle de réseau virtuel est Très hautes performances ou ErGw3AZ. FastPath améliore le niveau de performance de chemin d’accès de données comme le nombre de paquets et de connexions par seconde entre votre réseau local et votre réseau virtuel. 
 
 **Configurer FastPath sur une nouvelle connexion**
 
-```azurecli
+```azurecli-interactive
 az network vpn-connection create --name ERConnection --resource-group ExpressRouteResourceGroup --express-route-gateway-bypass true --vnet-gateway1 VNet1GW --express-route-circuit2 MyCircuit
 ```
 
 **Mise à jour d’une connexion existante pour activer FastPath**
 
-```azurecli
+```azurecli-interactive
 az network vpn-connection update --name ERConnection --resource-group ExpressRouteResourceGroup --express-route-gateway-bypass true
+```
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous n’avez plus besoin de la connexion ExpressRoute, à partir de l’abonnement où se trouve la passerelle, utilisez la commande `az network vpn-connection delete` pour supprimer le lien entre la passerelle et le circuit.
+
+```azurecli-interactive
+az network vpn-connection delete --name ERConnection --resource-group ExpressRouteResourceGroup
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d'informations sur ExpressRoute, consultez la [FAQ sur ExpressRoute](expressroute-faqs.md).
+Ce tutoriel vous a montré comment connecter un réseau virtuel à un circuit dans le même abonnement et dans un autre abonnement. Pour plus d’informations sur la passerelle ExpressRoute, consultez : 
+
+> [!div class="nextstepaction"]
+> [À propos des passerelles de réseau virtuel ExpressRoute](expressroute-about-virtual-network-gateways.md)

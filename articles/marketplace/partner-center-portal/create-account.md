@@ -1,51 +1,43 @@
 ---
-title: Créer un compte Place de marché commerciale dans l’Espace partenaires
-description: Découvrez comment créer un compte Place de marché commerciale dans l’Espace partenaires.
-author: qianw211
-ms.author: dsindona
+title: Créer un compte Place de marché commerciale dans l’Espace partenaires pour Place de marché Azure
+description: Découvrez comment créer un compte Place de marché commerciale Microsoft dans l’Espace partenaires.
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
-ms.topic: guide
-ms.date: 04/14/2020
-ms.openlocfilehash: 1bd71a4fb150d544125703679cf0fa0b8951e1eb
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.topic: how-to
+ms.date: 11/02/2020
+author: parthpandyaMSFT
+ms.author: parthp
+ms.custom: contperf-fy21q2
+ms.openlocfilehash: d88e2b18d4e4f9df0606832356e383aaaf51cf73
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81684131"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97028442"
 ---
 # <a name="create-a-commercial-marketplace-account-in-partner-center"></a>Créer un compte Place de marché commerciale dans l’Espace partenaires
 
-Pour publier des offres sur la [Place de marché Azure](https://azuremarketplace.microsoft.com/) ou [Microsoft AppSource](https://appsource.microsoft.com/), vous devrez créer un compte dans le cadre du programme Place de marché commerciale dans l’Espace partenaires. Dans cet article, nous allons aborder la création d’un compte Espace partenaires et l’ajout de nouveaux éditeurs au programme Place de marché commerciale.
+Pour publier des offres sur la [Microsoft AppSource](https://appsource.microsoft.com/) ou [Place de marché Azure](https://azuremarketplace.microsoft.com/), vous devrez créer un compte dans le cadre du programme de marketplace commercial dans Espace partenaires. Cet article aborde la création d’un compte Espace partenaires et l’ajout de nouveaux éditeurs au programme de la place de marché commerciale.
 
->[!IMPORTANT]
->Si vous avez un compte dans le [portail Cloud Partner (CPP)](https://cloudpartner.azure.com) qui a été déplacé vers l’Espace partenaires, vous n’avez pas besoin de créer un nouveau compte. Pour plus d’informations, consultez [Éditeurs migrant à partir du portail CPP](#publishers-moving-from-cpp).
+>[!NOTE]
+>Si vous aviez un compte Portail Cloud Partner, notez que nous l’avons déplacé vers Espace partenaires. Vous n’avez pas besoin de créer un nouveau compte. Pour plus d’informations, consultez [Éditeurs qui effectuent une migration à partir du portail Cloud Partner](#publishers-who-moved-from-the-cloud-partner-portal).
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Pour créer un compte sur l’Espace partenaires, vérifiez que vous disposez :
+Pour créer un compte dans Espace partenaires, vérifiez que vous répondez aux conditions préalables suivantes. Nous vérifierons ces informations au cours du processus de création du compte.
 
-- D’une autorisation pour signer les accords juridiques au nom de votre société.
-- De la raison sociale de votre entreprise, de son adresse et de l’interlocuteur principal (il peut s’agir de vous).
-
-Nous vérifierons ces informations lors du processus de création de compte.
+- Vous devez utiliser un compte professionnel associé à votre entreprise ou organisation. Les comptes personnels ne sont pas pris en charge. Pour plus d’informations, consultez [Comptes professionnels d’entreprise et Espace partenaires](company-work-accounts.md).
+- Connaissez la raison sociale, l’adresse et de l’interlocuteur principal de votre entreprise. Il peut s’agir de vous.
+- Vous devez être autorisé à signer les accords juridiques au nom de votre société.
 
 Il existe deux façons de créer un compte :
 
-- Si vous êtes nouveau dans l’Espace partenaires et que vous n’avez pas de compte Microsoft Network, créez votre compte à l’aide de [Créer un compte à l’aide de la page Inscription à l’Espace partenaires](#create-an-account-using-the-partner-center-enrollment-page).
-- Si vous êtes inscrit au Microsoft Partner Network, créez un compte directement à partir de l’Espace partenaires en procédant de la manière décrite dans [Créer un compte à l’aide d’une inscription Microsoft Partner Network existante](#create-an-account-using-existing-microsoft-partner-center-enrollments).
+- Si vous êtes nouveau dans Espace partenaires et que vous n’avez pas de compte Microsoft Partner Network (MPN), continuez vers [Créer un compte à l’aide de la page Inscription à l’Espace partenaires](#create-an-account-using-the-partner-center-enrollment-page).
+- Si vous êtes déjà inscrit à Microsoft Partner Network ou à un programme de développement, créez un compte directement à partir d’Espace partenaires. Accédez à [Créer un compte à l’aide d’une inscription à Espace partenaires existante](#create-an-account-using-existing-partner-center-enrollments).
 
 ## <a name="create-an-account-using-the-partner-center-enrollment-page"></a>Créer un compte à l’aide de la page Inscription à l’Espace partenaires
 
-Utilisez cette méthode si vous ne connaissez pas l’Espace partenaires et si vous n’êtes pas inscrit au Microsoft Partner Network. Cette section traite de la création d’un nouveau compte Espace partenaires, notamment comment :
-
-- [S’inscrire à la page d’inscription à l’Espace partenaires](#register-on-the-partner-center-enrollment-page)
-- [Se connecter avec un compte professionnel](#sign-in-with-a-work-account)
-- [Accepter les conditions générales](#agree-to-terms-and-conditions)
-- [Fournir votre profil d’éditeur](#provide-your-publisher-profile)
-
->[!IMPORTANT]
->Si vous avez un compte dans le [portail Cloud Partner (CPP)](https://cloudpartner.azure.com) qui a été déplacé vers l’Espace partenaires, vous n’avez pas besoin de créer un nouveau compte. Pour plus d’informations, consultez [Éditeurs migrant à partir du portail CPP](#publishers-moving-from-cpp).
+Utilisez cette méthode si vous ne connaissez pas l’Espace partenaires et si vous n’êtes pas inscrit au Microsoft Partner Network. Effectuez les étapes de cette section pour créer un nouveau compte Espace partenaires et un nouveau profil d’éditeur.
 
 ### <a name="register-on-the-partner-center-enrollment-page"></a>S’inscrire à la page d’inscription à l’Espace partenaires
 
@@ -53,116 +45,109 @@ Passez en revue les informations de la page d’inscription [**Bienvenue dans l�
 
 ### <a name="sign-in-with-a-work-account"></a>Se connecter avec un compte professionnel
 
-Connectez-vous avec un compte professionnel afin de pouvoir lier le compte e-mail professionnel de votre société à votre nouveau compte Espace partenaires. L’association de ces comptes permet aux employés de votre société de se connecter à l’Espace partenaires avec les noms d’utilisateur et mots de passe de leur compte professionnel.
+Connectez-vous avec un compte professionnel afin de pouvoir lier le compte e-mail professionnel de votre société à votre nouveau compte Espace partenaires. Une fois que vous avez associé ces deux comptes, les employés de votre société peuvent se connecter à l’Espace partenaires avec les noms d’utilisateur et mots de passe de leur compte professionnel.
 
 >[!NOTE]
->Pour vérifier si votre entreprise possède déjà un compte professionnel, pour savoir comment créer un compte professionnel ou comment configurer plusieurs comptes professionnels afin de les utiliser avec l’Espace partenaires, consultez [Compte professionnel de votre société et Espace partenaires](./company-work-accounts.md).
+>Pour vérifier si votre entreprise possède déjà un compte professionnel, découvrez comment créer un compte professionnel ou comment configurer plusieurs comptes professionnels afin de les utiliser avec Espace partenaires, consultez [Compte professionnel de votre société et Espace partenaires](company-work-accounts.md).
 
-### <a name="agree-to-terms-and-conditions"></a>Accepter les conditions générales
+### <a name="agree-to-the-terms-and-conditions"></a>Accepter les conditions générales
 
-Vous devez accepter les conditions générales du [contrat d’éditeur de la Place de marché Microsoft Azure](https://go.microsoft.com/fwlink/?LinkID=699560).
+Dans le cadre du processus d’inscription, vous devez accepter les conditions générales du [contrat de l’éditeur Microsoft](https://go.microsoft.com/fwlink/?LinkID=699560).
 
 ### <a name="provide-your-publisher-profile"></a>Fournir votre profil d’éditeur
 
-Votre profil d’éditeur inclut le nom de votre entreprise et l’identifiant MPN. Si vous ne l’avez pas encore fait, vous devez rejoindre le [Microsoft Partner Network](https://partner.microsoft.com/commercial). Une fois que vous aurez rejoint le Microsoft Partner Network, vous recevrez un identifiant MPN.
+Votre profil d’éditeur inclut le nom de votre entreprise et l’identifiant MPN. Si vous ne l’avez pas encore fait, rejoignez le [Microsoft Partner Network](https://partner.microsoft.com/commercial). Une fois que vous aurez rejoint le Microsoft Partner Network, vous recevrez un identifiant MPN.
 
-Créez un ID d’éditeur. Il identifie de manière unique votre société et vos offres sur la Place de marché Azure et AppSource.
+1. Créez un ID d’éditeur. Il identifie de manière unique votre société et vos offres sur la Place de marché Azure et AppSource.
 
-Une fois que vous avez confirmé vos informations de profil d’éditeur, acceptez les conditions générales et créez votre compte Espace partenaires en sélectionnant **Accepter et continuer**.
+1. Une fois que vous avez confirmé vos informations de profil d’éditeur, acceptez les conditions générales et créez votre compte Espace partenaires en sélectionnant **Accepter et continuer**.
 
->[!IMPORTANT]
->*Vous devez être autorisé à agir au nom de votre entreprise pour accepter ces conditions.*
+    > [!IMPORTANT]
+    > Pour accepter ces conditions, vous devez être autorisé à agir au nom de votre entreprise.
 
-Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la Place de marché commerciale. **La Place de marché commerciale** s’affiche dans la barre de navigation de gauche. Si vous sélectionnez **Paramètres** > **Paramètres partenaire** > **Programmes**, vous verrez que la Place de marché commerciale est répertoriée comme inscrite.
+    Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la place de marché commerciale. Le compte de la place de marché commerciale s’affiche dans le volet de gauche.
 
-Merci de créer un compte Place de marché commerciale dans l’Espace partenaires. Pour obtenir de l’aide, consultez [Vue d’ensemble de la Place de marché commerciale](./commercial-marketplace-overview.md). Pour obtenir de l’aide sur l’ajout d’éditeurs, consultez [Ajouter de nouveaux éditeurs au programme Place de marché commerciale](#add-new-publishers-to-the-commercial-marketplace-program).
+1. Pour vérifier que le compte de la Place de marché commerciale est indiqué comme inscrit, sélectionnez **Paramètres** (icône d’engrenage) en haut à droite > **Paramètres du compte** > **Programmes**.
 
-## <a name="create-an-account-using-existing-microsoft-partner-center-enrollments"></a>Créer un compte à l’aide d’une inscription Microsoft Partner Network existante
+Vous venez de créer un compte de la place de marché commerciale dans l’Espace partenaires. Continuez vers [Ajouter de nouveaux éditeurs au programme de marketplace commercial](#add-new-publishers-to-the-commercial-marketplace-program).
 
-Référez-vous à cette section pour créer un compte de Place de marché commerciale si vous êtes inscrit à l’Espace partenaires Microsoft.
+## <a name="create-an-account-using-existing-partner-center-enrollments"></a>Créer un compte à l’aide d’une inscription existante à Espace partenaires
 
-Il existe deux types d’inscriptions que vous pouvez utiliser pour configurer votre compte de Place de marché commerciale. Choisissez l’inscription qui vous convient :
+Référez-vous à cette section pour créer un compte de la place de marché commerciale si vous êtes inscrit à l’Espace partenaires Microsoft. Il existe deux types d’inscriptions que vous pouvez utiliser pour configurer votre compte de la place de marché commerciale. Choisissez le scénario qui vous concerne :
 
-- Si êtes inscrit à Microsoft Partner Network, créez votre compte en procédant de la manière décrite dans la section [Inscrit à Microsoft Partner Network](#enrolled-in-the-microsoft-partner-network).
-- Si vous êtes inscrit au inscrire, créez votre compte en procédant de la manière décrite dans la section [Inscrit au programme pour les développeurs](#enrolled-in-a-developer-program).
+*Que se passe-t-il si je suis déjà inscrit dans le Microsoft Partner Network ?*
+- [Utilisez une inscription existante à Microsoft Partner Network](#use-a-microsoft-partner-network-enrollment) pour créer votre compte.
 
-Pour les deux méthodes, vous allez suivre les étapes suivantes :
+*Que se passe-t-il si je suis déjà inscrit dans un programme pour les développeurs ?*
+- [Utilisez une inscription existante à un programme de développement](#use-a-developer-program-enrollment) pour créer votre compte.
 
-- Se connecter à l’Espace partenaires à l’aide de vos informations d’identification
-- Entrer les informations de votre profil de publication
+Pour les deux types d’inscription, vous vous connectez à Espace partenaires à l’aide de vos informations d’identification. Veillez à ce que les informations de votre compte et de votre profil d’éditeur soient disponibles.
 
-Veillez à avoir les informations de votre compte sous la main.
+### <a name="use-a-microsoft-partner-network-enrollment"></a>Utiliser une inscription à Microsoft Partner Network
 
->[!IMPORTANT]
->Si vous avez un compte dans le [portail Cloud Partner (CPP)](https://cloudpartner.azure.com/) qui a été déplacé vers l’Espace partenaires, vous n’avez pas besoin de créer un nouveau compte. Pour plus d’informations, consultez [Éditeurs migrant à partir du portail CPP](#publishers-moving-from-cpp).
-
-### <a name="enrolled-in-the-microsoft-partner-network"></a>Inscrit à Microsoft Partner Network
-
-Si vous êtes inscrit à Microsoft Partner Network, suivez les instructions de cette section pour créer votre compte directement à partir de l’Espace partenaires.
-
-Connectez-vous à [l’Espace partenaires](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/partnership) avec votre compte Microsoft Partner Network afin de lier le domaine du compte de messagerie professionnelle de votre société à votre nouveau compte Espace partenaires. L’association de ces comptes permet aux employés de votre société de se connecter à l’Espace partenaires avec les noms d’utilisateur et mots de passe de leur compte professionnel.
-
->[!NOTE]
->Pour vérifier si votre entreprise possède déjà un compte professionnel Espace partenaires, pour savoir comment créer un compte professionnel ou comment configurer plusieurs comptes professionnels afin de les utiliser avec l’Espace partenaires, consultez [Compte professionnel de votre société et Espace partenaires](./company-work-accounts.md).
-
-Une fois connecté, suivez les étapes suivantes pour terminer la configuration de votre compte.
+Lorsque vous utilisez votre compte Microsoft Partner Network, il lie le domaine du compte de messagerie professionnelle de votre entreprise à votre nouveau compte Espace partenaires. Une fois que vous avez associé ces deux comptes, les employés de votre société peuvent se connecter à l’Espace partenaires avec les noms d’utilisateur et mots de passe de leur compte professionnel. 
 
 >[!NOTE]
 > Pour vous connecter à Microsoft Partner Network, vous devez avoir un rôle d’**administrateur de compte** ou d’**administrateur général**.
 
-1. Dans l’[Espace partenaires](https://partner.microsoft.com/), sélectionnez **Paramètres** > **Paramètres Partenaire** > **Programmes** > **Prise en main**.
-2. Microsoft Partner Network détecte votre abonnement et affiche la page de profil de l’éditeur qui vous permet d’entrer le nom de votre société et l’ID MPN.
-3. Lisez les conditions générales de [l’Accord de l’éditeur de la Place de marché Microsoft](https://go.microsoft.com/fwlink/?LinkID=699560), puis sélectionnez **Accepter et continuer** pour terminer l’inscription.
+1. Connectez-vous à [Espace partenaires](https://partner.microsoft.com/dashboard/) avec votre compte Microsoft Partner Network.
+1. Sélectionnez **Paramètres** > **Paramètres du compte** > **Programmes** > **Démarrage**.
 
-    >[!IMPORTANT]
-    >*Vous devez être autorisé à agir au nom de votre entreprise pour accepter ces conditions.*
+   Microsoft Partner Network détecte votre abonnement et affiche le volet **Profil de l’éditeur**.
 
-Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la Place de marché commerciale. **La Place de marché commerciale** s’affiche dans la barre de navigation de gauche. Si vous sélectionnez **Paramètres** > **Paramètres partenaire** > **Programmes**, vous verrez que la Place de marché commerciale est répertoriée comme inscrite.
+1. Entrez le nom de votre société et votre ID MPN.
+1. Lisez les conditions générales du [contrat de l’éditeur Microsoft](https://go.microsoft.com/fwlink/?LinkID=699560), puis sélectionnez **Accepter et continuer** pour terminer l’inscription.
 
-Nous vous remercions d’avoir créé un compte dans l’Espace partenaires. Pour obtenir de l’aide, consultez [Vue d’ensemble de la Place de marché commerciale](./commercial-marketplace-overview.md). Pour obtenir de l’aide sur l’ajout d’éditeurs, consultez [Ajouter de nouveaux éditeurs au programme Place de marché commerciale](#add-new-publishers-to-the-commercial-marketplace-program).
+    > [!IMPORTANT]
+    > Pour accepter ces conditions, vous devez être autorisé à agir au nom de votre entreprise.
 
-### <a name="enrolled-in-a-developer-program"></a>Inscrit au programme pour les développeurs
+    Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la place de marché commerciale. Le compte de la place de marché commerciale s’affiche dans le volet de gauche.
 
-Si vous êtes inscrit au programme pour les développeurs de l’Espace partenaires, référez-vous à cette section pour créer votre compte directement à partir de l’Espace partenaires.
+1. Pour vérifier que le compte de la Place de marché commerciale est indiqué comme inscrit, sélectionnez **Paramètres** > **Paramètres du compte** > **Programmes**.
+
+Vous venez de créer un compte de la place de marché commerciale dans l’Espace partenaires. Continuez vers [Ajouter de nouveaux éditeurs au programme de marketplace commercial](#add-new-publishers-to-the-commercial-marketplace-program).
+
+### <a name="use-a-developer-program-enrollment"></a>Utiliser l’inscription à un programme de développement
 
 >[!NOTE]
->Pour vous inscrire à la Place de marché commerciale en utilisant le compte avec lequel vous êtes connecté, vous devez vous être inscrit à l’Espace partenaires à l’aide d’un compte d’entreprise. Si vous vous êtes inscrit avec un compte individuel, votre inscription à la Place de marché commerciale s’affiche sous un nouveau compte.
+>Pour vous inscrire à la place de marché commerciale en utilisant le compte avec lequel vous êtes connecté, vous devez vous être inscrit à l’Espace partenaires à l’aide d’un compte d’entreprise. Si vous vous êtes inscrit avec un compte individuel, votre inscription à la place de marché commerciale s’affiche sous un nouveau compte.
 >
->Les comptes individuels sont destinés aux développeurs indépendants. Les comptes d’entreprise sont destinés aux organisations et aux entreprises. Les comptes d’entreprise permettent de soumettre des applications avec des fonctionnalités supplémentaires. Pour les comptes d’entreprise, après inscription, nous avons besoin d’une vérification plus approfondie afin de confirmer que vous êtes autorisé à créer un compte pour votre entreprise. Cette vérification peut prendre de quelques jours à quelques semaines, et comprend souvent un appel téléphonique à votre entreprise. Les deux types de comptes vous permettent de soumettre des applications, des compléments et des services. Pour plus d’informations, voir  [Types de compte, emplacements et frais](https://docs.microsoft.com/windows/uwp/publish/account-types-locations-and-fees).
+>Les comptes individuels sont destinés aux développeurs indépendants. Les comptes d’entreprise sont destinés aux organisations et aux entreprises. Les comptes d’entreprise permettent de soumettre des applications avec des fonctionnalités supplémentaires.
+>
+> Pour vous assurer que vous êtes autorisé à configurer le compte de votre société, nous avons besoin d’une vérification supplémentaire des comptes d’entreprise après l’inscription. Cette vérification peut prendre de quelques jours à quelques semaines, et comprend souvent un appel téléphonique à votre entreprise. Les deux types de comptes vous permettent de soumettre des applications, des compléments et des services. Pour plus d’informations, voir  [Types de compte, emplacements et frais](/windows/uwp/publish/account-types-locations-and-fees).
 
-Connectez-vous à l’[Espace partenaires](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/partnership) avec votre compte de l’Espace partenaires Microsoft pour vous inscrire au programme de la Place de marché commerciale en utilisant ce même compte. En vous inscrivant à la Place de marché commerciale à l’aide du même compte, vous pouvez voir vos inscriptions au programme et à la Place de marché commerciale dans le menu de navigation de gauche de l’Espace partenaires.
+Lorsque vous vous inscrivez au programme de marketplace commercial avec le même compte que votre programme de développement, vous pouvez voir toutes vos inscriptions à un programme dans le volet gauche d’Espace partenaires.
 
-Une fois connecté, suivez les étapes suivantes pour terminer la configuration de votre compte :
-
-1. Dans l’Espace partenaires, sélectionnez **Paramètres** > **Paramètres de développeur** > **Programmes** > **Prise en main**, puis entrez votre adresse e-mail professionnelle.
-2. Renseignez les détails sur la page de votre profil d’éditeur.
-3. Lisez les conditions générales de [l’Accord de l’éditeur de la Place de marché Microsoft](https://go.microsoft.com/fwlink/?LinkID=699560), puis sélectionnez **Accepter et continuer** pour terminer l’inscription.
+1. Connectez-vous à [Espace partenaires](https://partner.microsoft.com/dashboard/) avec votre compte existant.
+1. Sélectionnez **Paramètres** > **Paramètres du compte** > **Programmes** > **Démarrage**, puis entrez votre adresse e-mail professionnelle.
+1. Renseignez les détails sur la page de votre **profil d’éditeur**.
+2. Lisez les conditions générales du [contrat de l’éditeur Microsoft](https://go.microsoft.com/fwlink/?LinkID=699560), puis sélectionnez **Accepter et continuer** pour terminer l’inscription.
 
     >[!Important]
-    >*Vous devez être autorisé à agir au nom de votre entreprise pour accepter ces conditions.*
+    > Pour accepter ces conditions, vous devez être autorisé à agir au nom de votre entreprise.
 
-Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la Place de marché commerciale. **La Place de marché commerciale** s’affiche dans la barre de navigation de gauche. En sélectionnant **Paramètres** > **Paramètres de développeur** > **Programmes**, vous pouvez voir que vous être inscrit à la Place de marché commerciale.
+    Une fois inscrit, vous allez être dirigé vers la page de vue d’ensemble de la place de marché commerciale. Le compte de la place de marché commerciale s’affiche dans le volet de gauche.
 
-Nous vous remercions d’avoir créé un compte dans l’Espace partenaires. Pour obtenir de l’aide, consultez [Vue d’ensemble de la Place de marché commerciale](./commercial-marketplace-overview.md). Pour obtenir de l’aide sur l’ajout d’éditeurs, consultez [Ajouter de nouveaux éditeurs au programme Place de marché commerciale](#add-new-publishers-to-the-commercial-marketplace-program).
+1. Pour vérifier que le compte de la Place de marché commerciale est indiqué comme inscrit, sélectionnez **Paramètres** > **Paramètres du compte** > **Programmes**.
 
-## <a name="publishers-moving-from-cpp"></a>Éditeurs migrant à partir du portail CPP
+Vous venez de créer un compte de la place de marché commerciale dans l’Espace partenaires. Pour obtenir de l’aide sur l’ajout d’éditeurs, continuez vers [Ajouter de nouveaux éditeurs au marketplace commercial](#add-new-publishers-to-the-commercial-marketplace-program).
 
-Si votre compte a été migré depuis le [portail Cloud Partner (CPP)](https://cloudpartner.azure.com), vous n’avez pas besoin de créer un nouveau compte Espace partenaires. Vous devez avoir reçu un lien personnalisé vers votre nouveau compte Espace partenaires dans votre messagerie électronique et dans une bannière de notification après vous être connecté à votre compte CPP existant.
+## <a name="publishers-who-moved-from-the-cloud-partner-portal"></a>Éditeurs qui effectuent une migration à partir du portail Cloud Partner
 
-Une fois que vous avez activé votre nouveau compte Espace partenaires en cliquant sur ce lien personnalisé, vous pouvez revenir à votre compte en vous rendant sur le [Tableau de bord de la Place de marché commerciale](https://partner.microsoft.com/dashboard/commercial-marketplace/overview) dans l’Espace partenaires.
+Si vous aviez un compte Portail Cloud Partner, notez que nous l’avons déplacé vers l’Espace partenaires. Vous n’avez pas besoin de créer un nouveau compte dans l’Espace partenaires. Vous devriez avoir reçu un lien personnalisé vers votre nouveau compte Partner Center, à la fois dans un courrier électronique et dans une bannière de notification, après vous être connecté à votre compte Portail Microsoft Cloud Partner existant.
 
-Le contrat d’éditeur et les informations sur le profil de l’entreprise seront migrés vers votre nouveau compte Espace partenaires, ainsi que les informations de profil et de paiement précédemment configurées, les comptes d’utilisateur et les autorisations, ainsi que les offres actives associées à votre compte CPP.
+Après avoir sélectionné le lien personnalisé et activé votre nouveau compte Espace partenaires, vous pouvez revenir à votre compte en vous rendant sur le [tableau de bord de la place de marché commerciale](https://partner.microsoft.com/dashboard/commercial-marketplace/overview) dans l’Espace partenaires.
 
-Une fois que les informations de votre compte ont été déplacées de CPP vers l’Espace partenaires, vous n’utiliserez plus le portail CPP pour effectuer des mises à jour de compte ou pour gérer les utilisateurs, les autorisations et la facturation. Pendant une période limitée, les mises à jour de compte que vous effectuez dans l’Espace partenaires seront automatiquement répercutées dans votre compte CPP en lecture seule jusqu’à ce que le portail CPP soit déprécié.
+Le contrat d’éditeur et les informations sur le profil de l’entreprise ont été déplacés vers votre nouveau compte Espace partenaires, ainsi que les informations de profil et de paiement précédemment configurées, les comptes d’utilisateur et les autorisations, et les offres actives associées à votre compte Portail Microsoft Cloud Partner.
 
-## <a name="add-new-publishers-to-the-commercial-marketplace-program"></a>Ajouter de nouveaux éditeurs au programme Place de marché commerciale
+## <a name="add-new-publishers-to-the-commercial-marketplace-program"></a>Ajouter de nouveaux éditeurs au programme place de marché commerciale
 
-Une organisation peut avoir plusieurs éditeurs associés à un compte Place de marché commerciale. Un utilisateur existant peut ajouter d’autres éditeurs après s’être connecté à l’Espace partenaires, en sélectionnant **Paramètres du compte** > **Éditeurs** > **Ajouter un éditeur**.
+Une organisation peut avoir plusieurs éditeurs associés à un compte de la place de marché commerciale. Un utilisateur existant peut ajouter d’autres éditeurs après s’être connecté à l’Espace partenaires, en sélectionnant **Paramètres** > **Paramètres du compte** > **Profil de l’organisation** > **Identificateurs** > **Ajouter un éditeur**.
 
 >[!NOTE]
 >Avant d’ajouter un nouvel éditeur, affichez la liste des éditeurs existants en vous connectant à l’Espace partenaires et en sélectionnant **Paramètres du compte** > **Éditeurs**.
 
-Un autre utilisateur du même locataire Azure Active Directory peut ajouter un nouvel éditeur en effectuant les étapes ci-dessous :
+Des utilisateurs supplémentaires du même locataire Azure Active Directory peuvent ajouter un nouvel éditeur en procédant comme suit.
 
 1. Lancez le processus d’inscription dans l’[Espace partenaires Microsoft](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/partnership).
 2. Sélectionnez **Se connecter avec un compte professionnel** et entrez votre adresse e-mail professionnelle.
@@ -170,12 +155,13 @@ Un autre utilisateur du même locataire Azure Active Directory peut ajouter un n
 4. Choisissez l’ID MPN que vous voulez associer à l’éditeur.
 5. Mettez à jour les **détails de l’éditeur** dans le formulaire.
 
-   1. **Nom de l’éditeur** : nom qui sera affiché sur la Place de marché commerciale avec l’offre.
-   1. **PublisherID** : identificateur utilisé par l’Espace partenaires pour identifier de manière unique votre éditeur. La valeur par défaut de ce champ est mappée à un `PublisherID` existant et unique dans le système, qui ne peut pas être réutilisé. Par conséquent, ce champ doit être mis à jour.
-   1. **Informations de contact** : mettez à jour les informations de contact si nécessaire.
+   * **Nom de l’éditeur** : nom qui est affiché sur la place de marché commerciale avec l’offre.  
+   * **PublisherID** : identificateur utilisé par l’Espace partenaires pour identifier de manière unique l’éditeur. La valeur par défaut de ce champ correspond à un ID d’éditeur existant et unique dans le système. Étant donné que l’ID de l’éditeur ne peut pas être réutilisé, ce champ doit être mis à jour.  
+   * **Informations de contact** : mettez à jour les informations de contact si nécessaire.
 
-Une fois le processus terminé, vous pouvez gérer votre nouvel éditeur en accédant au programme **Place de marché commerciale** dans le menu de navigation de gauche. Si le programme **Place de marché commerciale** n’est pas visible, actualisez la page. Le nouvel éditeur apparaîtra dans la liste **Éditeurs**.
+Une fois ce processus terminé, accédez au compte de marketplace commercial répertorié dans le volet gauche pour gérer l’éditeur nouvellement créé. Si le compte de la place de marché commerciale n’est pas visible, actualisez la page. Le nouvel éditeur apparaît dans la liste **Éditeurs**.
 
-## <a name="next-step"></a>Étape suivante
+## <a name="next-steps"></a>Étapes suivantes
 
-- [Gérer votre compte Place de marché commerciale dans l’Espace partenaires](./manage-account.md)
+- [Qu’est-ce que la place de marché commerciale Microsoft ?](../overview.md)
+- [Gérer votre compte Place de marché commerciale dans l’Espace partenaires](manage-account.md)

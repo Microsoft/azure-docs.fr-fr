@@ -2,18 +2,18 @@
 title: 'Peering privé Azure ExpressRoute : Configurer le mode de transport IPsec – Hôtes Windows'
 description: Découvrez comment activer le mode de transport IPsec entre des machines virtuelles Azure exécutant Windows et des hôtes Windows locaux via le peering privé ExpressRoute, à l’aide d’objets de stratégie de groupe ou d’unités d’organisation.
 services: expressroute
-author: fabferri
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/17/2018
-ms.author: fabferri
+ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: 1bc33047d31262af443cddc418853fbacd88aec1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2dcb8489d94b9afc3ae4df829b37dd9785383d85
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74022011"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "92208241"
 ---
 # <a name="configure-ipsec-transport-mode-for-expressroute-private-peering"></a>Configurer le mode de transport IPsec pour le peering privé ExpressRoute
 
@@ -65,7 +65,7 @@ Lorsque vous configurez une stratégie IPsec, il est important de comprendre sa 
 
 Assurez-vous de satisfaire les prérequis suivants :
 
-* Vous devez disposer d’une configuration Active Directory fonctionnelle que vous pouvez utiliser pour implémenter les paramètres de stratégie de groupe. Pour plus d’informations sur les objets de stratégie de groupe, consultez [Objets de stratégie de groupe](https://msdn.microsoft.com/library/windows/desktop/aa374162(v=vs.85).aspx).
+* Vous devez disposer d’une configuration Active Directory fonctionnelle que vous pouvez utiliser pour implémenter les paramètres de stratégie de groupe. Pour plus d’informations sur les objets de stratégie de groupe, consultez [Objets de stratégie de groupe](/previous-versions/windows/desktop/Policy/group-policy-objects).
 
 * Vous devez disposer d’un circuit ExpressRoute actif.
   * Pour plus d’informations sur la création d’un circuit ExpressRoute, consultez [Créer un circuit ExpressRoute](expressroute-howto-circuit-arm.md). 
@@ -129,7 +129,7 @@ Pour appliquer l’objet de stratégie de groupe à l’unité d’organisation,
 
    [![16]][16]
 
-3. Dans**l’Assistant Action de filtrage de sécurité IP**, cliquez sur **Suivant**.
+3. Dans **l’Assistant Action de filtrage de sécurité IP**, cliquez sur **Suivant**.
 
    [![17]][17]
 4. Attribuez un nom explicite à l’action de filtrage de manière à pouvoir la localiser facilement quand vous en aurez besoin. Dans cet exemple, l’action de filtrage se nomme **myEncryption**. Vous pouvez également ajouter une description. Cliquez ensuite sur **Suivant**.

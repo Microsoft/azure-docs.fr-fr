@@ -1,18 +1,18 @@
 ---
 title: 'Démarrage rapide : Créer un blueprint avec PowerShell'
 description: Dans ce guide de démarrage rapide, vous allez utiliser Azure Blueprints pour créer, définir et déployer des artefacts avec PowerShell.
-ms.date: 05/06/2020
+ms.date: 08/27/2020
 ms.topic: quickstart
-ms.openlocfilehash: 79feafa48d5d180949b8a23163f2ee9b686e6076
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: 339cd4628cda5f469a783db02c10f86259c93941
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82864111"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89051489"
 ---
 # <a name="quickstart-define-and-assign-an-azure-blueprint-with-powershell"></a>Démarrage rapide : Définir et affecter un blueprint Azure avec PowerShell
 
-Un utilisateur qui sait comment créer et affecter des blueprints peut définir des modèles courants et développer des configurations réutilisables et rapides à déployer en fonction de modèles Resource Manager, de stratégies, d’exigences en matière de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprint pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation, notamment :
+Un utilisateur qui sait comment créer et affecter des blueprints peut définir des modèles courants et développer des configurations réutilisables et rapides à déployer en fonction de modèles Azure Resource Manager (modèles ARM), de stratégies, d’exigences en matière de sécurité, etc. Dans ce tutoriel, vous allez découvrir comment utiliser Azure Blueprint pour effectuer des tâches courantes liées à la création, à la publication et à l’affectation d’un blueprint dans votre organisation, notamment :
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -189,7 +189,7 @@ La première étape de la définition d’un modèle standard à des fins de con
 
 1. Ajoutez le modèle sous le groupe de ressources. Le **TemplateFile** d’un modèle Resource Manager comprend le composant JSON normal du modèle. Le modèle réutilise également les paramètres de blueprint **storageAccountType**, **tagName** et **tagValue** en transmettant chacun au modèle. Les paramètres de blueprint sont accessibles au modèle en utilisant le paramètre **TemplateParameterFile** et dans le fichier JSON, cette paire clé/valeur est utilisée pour injecter la valeur. Les noms de paramètres de blueprint et de modèle peuvent être les mêmes.
 
-   - Fichier de modèle JSON Azure Resource Manager – \artifacts\templateStorage.json
+   - Fichier de modèle JSON Resource Manager – \artifacts\templateStorage.json
 
      ```json
      {
@@ -243,7 +243,7 @@ La première étape de la définition d’un modèle standard à des fins de con
      }
      ```
 
-   - Fichier de paramètres de modèle JSON Azure Resource Manager – \artifacts\templateStorageParams.json
+   - Fichier de paramètres de modèle JSON Resource Manager – \artifacts\templateStorageParams.json
 
      ```json
      {

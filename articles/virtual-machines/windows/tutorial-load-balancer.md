@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.date: 12/03/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 0ece182765be2ee3b18334569799769e251d1af4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: b93c8d48313dc41928400efdddf14e88c8a7e6c2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100343"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86508116"
 ---
 # <a name="tutorial-load-balance-windows-virtual-machines-in-azure-to-create-a-highly-available-application-with-azure-powershell"></a>Tutoriel : Équilibrer la charge des machines virtuelles Windows dans Azure pour créer une application hautement disponible avec Azure PowerShell
 L’équilibrage de charge offre un niveau plus élevé de disponibilité en répartissant les demandes entrantes sur plusieurs machines virtuelles. Dans ce didacticiel, vous allez découvrir les différents composants de l’équilibreur de charge Azure qui répartissent le trafic et fournissent une haute disponibilité. Vous allez apprendre à effectuer les actions suivantes :
@@ -43,7 +43,7 @@ Azure Cloud Shell est un interpréteur de commandes interactif et gratuit que vo
 Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite d’un bloc de code. Vous pouvez également lancer Cloud Shell dans un onglet distinct du navigateur en accédant à [https://shell.azure.com/powershell](https://shell.azure.com/powershell). Sélectionnez **Copier** pour copier les blocs de code, collez-les dans Cloud Shell, puis appuyez sur Entrée pour les exécuter.
 
 ## <a name="create-azure-load-balancer"></a>Créer un équilibreur de charge Azure
-Cette section explique en détail comment vous pouvez créer et configurer chaque composant de l’équilibreur de charge. Avant de créer un équilibreur de charge, créez un groupe de ressources avec [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupLoadBalancer* dans l’emplacement *EastUS* :
+Cette section explique en détail comment vous pouvez créer et configurer chaque composant de l’équilibreur de charge. Avant de créer un équilibreur de charge, créez un groupe de ressources avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupLoadBalancer* dans l’emplacement *EastUS* :
 
 ```azurepowershell-interactive
 New-AzResourceGroup `
@@ -52,7 +52,7 @@ New-AzResourceGroup `
 ```
 
 ### <a name="create-a-public-ip-address"></a>Créer une adresse IP publique
-Pour accéder à votre application sur Internet, vous avez besoin d’une adresse IP publique pour l’équilibreur de charge. Créez une adresse IP publique avec [New-AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress). L’exemple suivant crée une adresse IP publique nommée *myPublicIP* dans le groupe de ressources *myResourceGroupLoadBalancer* :
+Pour accéder à votre application sur Internet, vous avez besoin d’une adresse IP publique pour l’équilibreur de charge. Créez une adresse IP publique avec [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress). L’exemple suivant crée une adresse IP publique nommée *myPublicIP* dans le groupe de ressources *myResourceGroupLoadBalancer* :
 
 ```azurepowershell-interactive
 $publicIP = New-AzPublicIpAddress `
@@ -63,7 +63,7 @@ $publicIP = New-AzPublicIpAddress `
 ```
 
 ### <a name="create-a-load-balancer"></a>Créer un équilibrage de charge
-Créez un pool IP frontal avec [New-AzLoadBalancerFrontendIpConfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerfrontendipconfig). L’exemple suivant crée un pool IP frontal nommé *myFrontEndPool* et joint l’adresse *myPublicIP* : 
+Créez un pool IP frontal avec [New-AzLoadBalancerFrontendIpConfig](/powershell/module/az.network/new-azloadbalancerfrontendipconfig). L’exemple suivant crée un pool IP frontal nommé *myFrontEndPool* et joint l’adresse *myPublicIP* : 
 
 ```azurepowershell-interactive
 $frontendIP = New-AzLoadBalancerFrontendIpConfig `
@@ -71,14 +71,14 @@ $frontendIP = New-AzLoadBalancerFrontendIpConfig `
   -PublicIpAddress $publicIP
 ```
 
-Créez un pool d’adresses principales avec [New-AzLoadBalancerBackendAddressPoolConfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig). Les machines virtuelles s’attachent à ce pool principal lors des étapes suivantes. L’exemple suivant crée un pool d’adresses principales nommé *myBackEndPool* :
+Créez un pool d’adresses principales avec [New-AzLoadBalancerBackendAddressPoolConfig](/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig). Les machines virtuelles s’attachent à ce pool principal lors des étapes suivantes. L’exemple suivant crée un pool d’adresses principales nommé *myBackEndPool* :
 
 ```azurepowershell-interactive
 $backendPool = New-AzLoadBalancerBackendAddressPoolConfig `
   -Name "myBackEndPool"
 ```
 
-Maintenant, créez l’équilibreur de charge avec [New-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancer). L’exemple suivant crée un équilibreur de charge nommé *myLoadBalancer* à l’aide du pool IP frontal et du pool IP principal créés lors des étapes précédentes :
+Maintenant, créez l’équilibreur de charge avec [New-AzLoadBalancer](/powershell/module/az.network/new-azloadbalancer). L’exemple suivant crée un équilibreur de charge nommé *myLoadBalancer* à l’aide du pool IP frontal et du pool IP principal créés lors des étapes précédentes :
 
 ```azurepowershell-interactive
 $lb = New-AzLoadBalancer `
@@ -94,7 +94,7 @@ Pour permettre à l’équilibrage de charge de surveiller l’état de votre ap
 
 L’exemple suivant permet de créer une sonde TCP. Vous pouvez également créer des sondes HTTP personnalisées pour des contrôles d’intégrité plus affinés. Lorsque vous utilisez une sonde HTTP personnalisée, vous devez créer la page de contrôle d’intégrité, par exemple *healthcheck.aspx*. La sonde doit retourner une réponse **HTTP 200 OK** pour l’équilibreur de charge pour assurer la rotation de l’hôte.
 
-Pour créer une sonde d’intégrité TCP, utilisez [Add-AzLoadBalancerProbeConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerprobeconfig). L’exemple suivant crée une sonde d’intégrité nommée *myHealthProbe* qui surveille chaque machine virtuelle sur le port *TCP* *80* :
+Pour créer une sonde d’intégrité TCP, utilisez [Add-AzLoadBalancerProbeConfig](/powershell/module/az.network/add-azloadbalancerprobeconfig). L’exemple suivant crée une sonde d’intégrité nommée *myHealthProbe* qui surveille chaque machine virtuelle sur le port *TCP* *80* :
 
 ```azurepowershell-interactive
 Add-AzLoadBalancerProbeConfig `
@@ -106,7 +106,7 @@ Add-AzLoadBalancerProbeConfig `
   -ProbeCount 2
 ```
 
-Pour appliquer la sonde d’intégrité, mettez à jour l’équilibreur de charge avec [Set-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer) :
+Pour appliquer la sonde d’intégrité, mettez à jour l’équilibreur de charge avec [Set-AzLoadBalancer](/powershell/module/az.network/set-azloadbalancer) :
 
 ```azurepowershell-interactive
 Set-AzLoadBalancer -LoadBalancer $lb
@@ -115,7 +115,7 @@ Set-AzLoadBalancer -LoadBalancer $lb
 ### <a name="create-a-load-balancer-rule"></a>Créer une règle d’équilibreur de charge
 Une règle d’équilibrage de charge est utilisée pour définir la distribution du trafic vers les machines virtuelles. Vous définissez la configuration IP frontale pour le trafic entrant et le pool d’adresses IP principal pour recevoir le trafic, ainsi que le port source et le port de destination requis. Pour veiller à ce que seules les machines virtuelles saines reçoivent le trafic, vous devez également définir la sonde d’intégrité à utiliser.
 
-Créez une règle d’équilibreur de charge avec [Add-AzLoadBalancerRuleConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerruleconfig). L’exemple suivant crée une règle d’équilibreur de charge nommée *myLoadBalancerRule* et équilibre le trafic sur le port *TCP* *80* :
+Créez une règle d’équilibreur de charge avec [Add-AzLoadBalancerRuleConfig](/powershell/module/az.network/add-azloadbalancerruleconfig). L’exemple suivant crée une règle d’équilibreur de charge nommée *myLoadBalancerRule* et équilibre le trafic sur le port *TCP* *80* :
 
 ```azurepowershell-interactive
 $probe = Get-AzLoadBalancerProbeConfig -LoadBalancer $lb -Name "myHealthProbe"
@@ -131,7 +131,7 @@ Add-AzLoadBalancerRuleConfig `
   -Probe $probe
 ```
 
-Mettez à jour l’équilibreur de charge avec [New-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer) :
+Mettez à jour l’équilibreur de charge avec [New-AzLoadBalancer](/powershell/module/az.network/set-azloadbalancer) :
 
 ```azurepowershell-interactive
 Set-AzLoadBalancer -LoadBalancer $lb
@@ -141,7 +141,7 @@ Set-AzLoadBalancer -LoadBalancer $lb
 Avant de déployer des machines virtuelles et de pouvoir tester votre équilibreur, créez les ressources de réseau virtuel de prise en charge. Pour plus d’informations sur les réseaux virtuels, consultez le didacticiel [Manage Azure Virtual Networks (Gérer les réseaux virtuels Azure)](tutorial-virtual-network.md).
 
 ### <a name="create-network-resources"></a>Créer des ressources réseau
-Créez un réseau virtuel avec [New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork). L’exemple suivant crée un réseau virtuel nommé *myVnet* avec un sous-réseau nommé *mySubnet* :
+Créez un réseau virtuel avec [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork). L’exemple suivant crée un réseau virtuel nommé *myVnet* avec un sous-réseau nommé *mySubnet* :
 
 ```azurepowershell-interactive
 # Create subnet config
@@ -158,7 +158,7 @@ $vnet = New-AzVirtualNetwork `
   -Subnet $subnetConfig
 ```
 
-Des cartes d’interface réseau virtuelles sont créées avec [New-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface). L’exemple suivant crée trois cartes réseau virtuelles. (Une carte d’interface réseau virtuelle pour chaque machine virtuelle que vous créez pour votre application dans les étapes suivantes). Vous pouvez créer des machines virtuelles et des cartes d’interface réseau virtuelles supplémentaires à tout moment et les ajouter à l’équilibreur de charge :
+Des cartes d’interface réseau virtuelles sont créées avec [New-AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface). L’exemple suivant crée trois cartes réseau virtuelles. (Une carte d’interface réseau virtuelle pour chaque machine virtuelle que vous créez pour votre application dans les étapes suivantes). Vous pouvez créer des machines virtuelles et des cartes d’interface réseau virtuelles supplémentaires à tout moment et les ajouter à l’équilibreur de charge :
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -176,7 +176,7 @@ for ($i=1; $i -le 3; $i++)
 ## <a name="create-virtual-machines"></a>Créer des machines virtuelles
 Pour améliorer la haute disponibilité de votre application, placez vos machines virtuelles dans un groupe à haute disponibilité.
 
-Créez un groupe à haute disponibilité avec la commande [New-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/new-azavailabilityset). L’exemple suivant permet de créer un groupe à haute disponibilité nommé *myAvailabilitySet* :
+Créez un groupe à haute disponibilité avec la commande [New-AzAvailabilitySet](/powershell/module/az.compute/new-azavailabilityset). L’exemple suivant permet de créer un groupe à haute disponibilité nommé *myAvailabilitySet* :
 
 ```azurepowershell-interactive
 $availabilitySet = New-AzAvailabilitySet `
@@ -188,13 +188,13 @@ $availabilitySet = New-AzAvailabilitySet `
   -PlatformUpdateDomainCount 2
 ```
 
-Définissez un nom d’utilisateur administrateur et un mot de passe pour les machines virtuelles avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential) :
+Définissez un nom d’utilisateur administrateur et un mot de passe pour les machines virtuelles avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1) :
 
 ```azurepowershell-interactive
 $cred = Get-Credential
 ```
 
-Vous pouvez maintenant créer les machines virtuelles avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). Dans l’exemple suivant, vous créez trois machines virtuelles et générez les composants de réseau virtuel requis s’ils n’existent pas déjà :
+Vous pouvez maintenant créer les machines virtuelles avec [New-AzVM](/powershell/module/az.compute/new-azvm). Dans l’exemple suivant, vous créez trois machines virtuelles et générez les composants de réseau virtuel requis s’ils n’existent pas déjà :
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -219,7 +219,7 @@ Le paramètre `-AsJob` crée la machine virtuelle en tant que tâche en arrière
 ### <a name="install-iis-with-custom-script-extension"></a>Installer IIS avec l’extension de script personnalisé
 Dans un didacticiel précédent [How to customize a Windows virtual machine (Personnalisation d’une machine virtuelle Windows)](tutorial-automate-vm-deployment.md), vous avez appris à automatiser la personnalisation des machines virtuelles avec l’extension de script personnalisé pour Windows. Vous pouvez utiliser la même approche pour installer et configurer IIS sur vos machines virtuelles.
 
-Utilisez [Set-AzVMExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension) pour installer l’extension de script personnalisé. L’extension exécute `powershell Add-WindowsFeature Web-Server` pour installer le serveur web IIS, puis met à jour la page *Default.htm* pour qu’elle affiche le nom d’hôte de la machine virtuelle :
+Utilisez [Set-AzVMExtension](/powershell/module/az.compute/set-azvmextension) pour installer l’extension de script personnalisé. L’extension exécute `powershell Add-WindowsFeature Web-Server` pour installer le serveur web IIS, puis met à jour la page *Default.htm* pour qu’elle affiche le nom d’hôte de la machine virtuelle :
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -237,7 +237,7 @@ for ($i=1; $i -le 3; $i++)
 ```
 
 ## <a name="test-load-balancer"></a>Tester l’équilibreur de charge
-Obtenez l’adresse IP publique de votre équilibreur de charge avec [Get-AzPublicIPAddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress). L’exemple suivant obtient l’adresse IP pour *myPublicIP* créée précédemment :
+Obtenez l’adresse IP publique de votre équilibreur de charge avec [Get-AzPublicIPAddress](/powershell/module/az.network/get-azpublicipaddress). L’exemple suivant obtient l’adresse IP pour *myPublicIP* créée précédemment :
 
 ```azurepowershell-interactive
 Get-AzPublicIPAddress `
@@ -256,7 +256,7 @@ Pour visualiser la distribution de trafic par l’équilibreur de charge sur les
 Vous devrez peut-être effectuer la maintenance sur la machine virtuelle exécutant votre application, avec par exemple l’installation des mises à jour du système d’exploitation. Pour faire face à une augmentation du trafic vers votre application, vous devrez peut-être ajouter des machines virtuelles supplémentaires. Cette section vous indique comment supprimer ou ajouter une machine virtuelle pour l’équilibrage de charge.
 
 ### <a name="remove-a-vm-from-the-load-balancer"></a>Supprimer une machine virtuelle de l’équilibrage de charge
-Obtenez la carte d’interface réseau avec [Get-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/get-aznetworkinterface), puis définissez la propriété *LoadBalancerBackendAddressPools* de la carte d’interface réseau virtuelle sur *$null*. Pour finir, mettez à jour la carte d’interface réseau virtuelle.
+Obtenez la carte d’interface réseau avec [Get-AzNetworkInterface](/powershell/module/az.network/get-aznetworkinterface), puis définissez la propriété *LoadBalancerBackendAddressPools* de la carte d’interface réseau virtuelle sur *$null*. Pour finir, mettez à jour la carte d’interface réseau virtuelle.
 
 ```azurepowershell-interactive
 $nic = Get-AzNetworkInterface `
@@ -269,7 +269,7 @@ Set-AzNetworkInterface -NetworkInterface $nic
 Pour visualiser la distribution de trafic par l’équilibreur de charge sur les deux machines virtuelles restantes exécutant votre application, vous pouvez forcer l’actualisation de votre navigateur web. Vous pouvez maintenant effectuer la maintenance sur la machine virtuelle, avec par exemple l’installation des mises à jour du système d’exploitation ou le redémarrage de la machine virtuelle.
 
 ### <a name="add-a-vm-to-the-load-balancer"></a>Ajouter une machine virtuelle à l’équilibrage de charge
-Après avoir effectué des opérations de maintenance sur la machine virtuelle ou si vous devez développer sa capacité, définissez la propriété *LoadBalancerBackendAddressPools* de la carte d’interface réseau virtuelle sur le *BackendAddressPool* de [Get-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/get-azloadbalancer) :
+Après avoir effectué des opérations de maintenance sur la machine virtuelle ou si vous devez développer sa capacité, définissez la propriété *LoadBalancerBackendAddressPools* de la carte d’interface réseau virtuelle sur le *BackendAddressPool* de [Get-AzLoadBalancer](/powershell/module/az.network/get-azloadbalancer) :
 
 Récupérez l’équilibreur de charge :
 

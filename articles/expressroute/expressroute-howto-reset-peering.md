@@ -1,26 +1,26 @@
 ---
 title: 'Azure ExpressRoute : Réinitialiser le peering d’un circuit'
-description: Comment désactiver et activer les peerings d’un circuit ExpressRoute.
+description: Apprenez à activer et à désactiver les Peerings d’un circuit Azure ExpressRoute à l’aide d’Azure PowerShell.
 services: expressroute
 author: charwen
 ms.service: expressroute
-ms.topic: conceptual
-ms.date: 01/13/2018
-ms.author: charwen
-ms.openlocfilehash: 9f32eb439872de9e4687d046745c03bafd86b2fa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 12/15/2020
+ms.author: duau
+ms.openlocfilehash: 0bde96ae5f4a9aff6f4a16a4f1544d9b39e5cb66
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75941735"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97559571"
 ---
 # <a name="reset-expressroute-circuit-peerings"></a>Réinitialiser les peerings d’un circuit ExpressRoute
 
-Cet article décrit comment désactiver et activer des peerings d’un circuit ExpressRoute à l’aide de PowerShell. Lorsque vous désactivez un peering, la session BGP sur la connexion principale et la connexion secondaire de votre circuit ExpressRoute s’arrête. Vous perdez la connectivité via ce peering Microsoft. Lorsque vous activez un peering, la session BGP sur la connexion principale et la connexion secondaire de votre circuit ExpressRoute s’affiche. Vous retrouvez la connectivité via ce peering Microsoft. Vous pouvez activer et désactiver le peering Microsoft et le peering privé Azure de manière indépendante sur un circuit ExpressRoute. Lorsque vous commencez par configurer les peerings sur votre circuit ExpressRoute, ils sont activés par défaut.
+Cet article décrit comment activer et désactiver les Peerings d’un circuit ExpressRoute à l’aide de PowerShell. Les Peerings sont activés par défaut lorsque vous les créez. Lorsque vous désactivez un Peering, la session BGP sur les connexions principale et secondaire de votre circuit ExpressRoute s’arrête. Vous perdez la connectivité pour ce Peering à Microsoft. Lorsque vous activez un Peering, la session BGP sur les connexions principale et secondaire de votre circuit ExpressRoute est établie. La connectivité à Microsoft sera restaurée pour ce Peering. Vous pouvez activer et désactiver le Peering pour le Peering Microsoft et le Peering privé Azure indépendamment sur le circuit ExpressRoute.
 
-Il existe quelques scénarios où il peut s’avérer utile de réinitialiser vos peerings ExpressRoute.
-* Testez votre conception et votre implémentation de récupération d’urgence. Par exemple, vous avez deux circuits ExpressRoute. Vous pouvez désactiver les peerings d’un circuit et forcer votre trafic réseau à basculer sur l’autre circuit.
-* Activez le protocole Bidirectional Forwarding Detection (BFD) sur le peering privé Azure ou le peering Microsoft de votre circuit ExpressRoute. Par défaut, le protocole BFD est activé dans le peering privé Azure si le circuit ExpressRoute a été créé après le 1er août 2018, et il est activé dans le peering Microsoft si le circuit ExpressRoute a été créé après le 10 janvier 2020. Si votre circuit a été créé avant, BFD n’a pas été activé. Vous pouvez activer BFD en désactivant le peering, puis en le réactivant. 
+Il existe deux scénarios dans lesquels il peut s’avérer utile de réinitialiser vos Peerings ExpressRoute.
+* Si vous souhaitez tester la conception et l’implémentation de la récupération d’urgence. Par exemple, vous avez deux circuits ExpressRoute. Vous pouvez désactiver les Peerings sur un circuit et forcer votre trafic à basculer sur l’autre circuit.
+* Activez la détection de transfert bidirectionnel (BFD) sur le Peering privé Azure ou le Peering Microsoft de votre circuit ExpressRoute. La BFD est activée par défaut sur le Peering privé Azure si vous avez créé votre circuit ExpressRoute après le 1er août 2018, et après le 10 janvier 2020 pour le Peering Microsoft. Si votre circuit a été créé avant la date indiquée, vous devez réinitialiser le Peering pour activer la BFD. 
 
 ### <a name="working-with-azure-powershell"></a>Utilisation d’Azure PowerShell
 

@@ -1,18 +1,18 @@
 ---
 title: Supprimer un coffre Azure Site Recovery
 description: Découvrez comment supprimer un coffre Recovery Services configuré pour Azure Site Recovery
-author: rajani-janaki-ram
+author: sideeksh
 manager: rochakm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 11/05/2019
-ms.author: rajanaki
-ms.openlocfilehash: 0e409ffdedbac822aedf48833f2dd85f8e04afa2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: sideeksh
+ms.openlocfilehash: a33e04a24013d5450c98b91048fa418958d16886
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75894978"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89426382"
 ---
 # <a name="delete-a-site-recovery-services-vault"></a>Supprimer un coffre de services Site Recovery
 
@@ -64,12 +64,14 @@ Avant de pouvoir supprimer un coffre, vous devez supprimer les serveurs inscrits
 
 Pour supprimer l’archivage Site Recovery, même s’il contient des éléments protégés, utilisez les commandes suivantes :
 
-    Connect-AzAccount
+```azurepowershell
+Connect-AzAccount
 
-    Select-AzSubscription -SubscriptionName "XXXXX"
+Select-AzSubscription -SubscriptionName "XXXXX"
 
-    $vault = Get-AzRecoveryServicesVault -Name "vaultname"
+$vault = Get-AzRecoveryServicesVault -Name "vaultname"
 
-    Remove-AzRecoveryServicesVault -Vault $vault
+Remove-AzRecoveryServicesVault -Vault $vault
+```
 
-Découvrez-en plus sur [Get-AzRecoveryServicesVault](https://docs.microsoft.com/powershell/module/az.recoveryservices/get-azrecoveryservicesvault) et [Remove-AzRecoveryServicesVault](https://docs.microsoft.com/powershell/module/az.recoveryservices/remove-azrecoveryservicesvault).
+Découvrez-en plus sur [Get-AzRecoveryServicesVault](/powershell/module/az.recoveryservices/get-azrecoveryservicesvault) et [Remove-AzRecoveryServicesVault](/powershell/module/az.recoveryservices/remove-azrecoveryservicesvault).

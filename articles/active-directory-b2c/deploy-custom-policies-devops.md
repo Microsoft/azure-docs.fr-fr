@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: b23b60ae49a4973fa04e6fa5f795f99536e32e7f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 13f5f8da0bd58cef0974e8ea8f5f3c5172daa0ba
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188747"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96928730"
 ---
 # <a name="deploy-custom-policies-with-azure-pipelines"></a>Déployer des stratégies personnalisées avec Azure Pipelines
 
@@ -29,18 +29,18 @@ Trois étapes principales sont nécessaires pour permettre à Azure Pipelines de
 1. Configurer un pipeline Azure
 
 > [!IMPORTANT]
-> La gestion de stratégies Azure AD B2C personnalisées avec un pipeline Azure utilise actuellement des opérations en **préversion** disponibles sur le point de terminaison `/beta` de l’API Microsoft Graph. L’utilisation de ces API dans les applications de production n’est pas prise en charge. Pour plus d’informations, voir la [référence du point de terminaison beta de l’API REST Microsoft Graph](https://docs.microsoft.com/graph/api/overview?toc=./ref/toc.json&view=graph-rest-beta).
+> La gestion de stratégies Azure AD B2C personnalisées avec un pipeline Azure utilise actuellement des opérations en **préversion** disponibles sur le point de terminaison `/beta` de l’API Microsoft Graph. L’utilisation de ces API dans les applications de production n’est pas prise en charge. Pour plus d’informations, voir la [référence du point de terminaison beta de l’API REST Microsoft Graph](/graph/api/overview?toc=.%2fref%2ftoc.json&view=graph-rest-beta).
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Locataire Azure AD B2C](tutorial-create-tenant.md) et informations d'identification d'un utilisateur de l'annuaire disposant du rôle [Administrateur de stratégies B2C IEF](../active-directory/users-groups-roles/directory-assign-admin-roles.md#b2c-ief-policy-administrator)
+* [Locataire Azure AD B2C](tutorial-create-tenant.md) et informations d'identification d'un utilisateur de l'annuaire disposant du rôle [Administrateur de stratégies B2C IEF](../active-directory/roles/permissions-reference.md#b2c-ief-policy-administrator)
 * [Stratégies personnalisées](custom-policy-get-started.md) téléchargées sur votre locataire
 * [Application de gestion](microsoft-graph-get-started.md) inscrite dans votre locataire avec l’autorisation de l’API Microsoft Graph *Policy.ReadWrite.TrustFramework*
 * [Pipeline Azure](https://azure.microsoft.com/services/devops/pipelines/) et accès à un [projet Azure DevOps Services][devops-create-project]
 
 ## <a name="client-credentials-grant-flow"></a>Flux d’octroi d’informations d’identification de client
 
-Le scénario décrit ici utilise des appels de service à service entre Azure Pipelines et Azure AD B2C à l’aide du [flux d’octroi d’informations d’identification de client](../active-directory/develop/v1-oauth2-client-creds-grant-flow.md) OAuth 2.0. Le flux d’octroi permet à un service web tel qu’Azure Pipelines (le client confidentiel) d’utiliser ses propres informations d’identification au lieu d’emprunter l’identité d’un utilisateur pour s’authentifier lorsqu’il appelle un autre service web (en l’occurrence l’API Microsoft Graph). Azure Pipelines obtient un jeton de manière non interactive, puis adresse des demandes à l’API Microsoft Graph.
+Le scénario décrit ici utilise des appels de service à service entre Azure Pipelines et Azure AD B2C à l’aide du [flux d’octroi d’informations d’identification de client](../active-directory/azuread-dev/v1-oauth2-client-creds-grant-flow.md) OAuth 2.0. Le flux d’octroi permet à un service web tel qu’Azure Pipelines (le client confidentiel) d’utiliser ses propres informations d’identification au lieu d’emprunter l’identité d’un utilisateur pour s’authentifier lorsqu’il appelle un autre service web (en l’occurrence l’API Microsoft Graph). Azure Pipelines obtient un jeton de manière non interactive, puis adresse des demandes à l’API Microsoft Graph.
 
 ## <a name="register-an-application-for-management-tasks"></a>Inscrire une application pour des tâches de gestion
 
@@ -151,7 +151,7 @@ Ensuite, ajoutez une tâche pour déployer un fichier de stratégie.
     * **Version de la tâche** : 2.*
     * **Nom d'affichage** : Nom de la stratégie que cette tâche doit charger. Par exemple, *B2C_1A_TrustFrameworkBase*.
     * **Type** : Chemin d'accès au fichier
-    * **Chemin d’accès au script** : Sélectionnez les points de suspension (***...***), accédez au dossier *Scripts*, puis sélectionnez le fichier *DeployToB2C.ps1*.
+    * **Chemin d’accès au script** : Sélectionnez les points de suspension (**_..._* _), accédez au dossier _Scripts*, puis sélectionnez le fichier *DeployToB2C.ps1*.
     * **Arguments :**
 
         Entrez les valeurs suivantes pour les **Arguments**. Remplacez `{alias-name}` par l’alias que vous avez spécifié dans la section précédente.
@@ -176,7 +176,7 @@ Si la tâche se termine avec succès, ajoutez des tâches de déploiement en sui
 
 L’ID `PolicyId` est une valeur trouvée au début d’un fichier de stratégie XML au sein du nœud TrustFrameworkPolicy. Par exemple, l’ID `PolicyId` dans le fichier XML de stratégie suivant est *B2C_1A_TrustFrameworkBase* :
 
-```XML
+```xml
 <TrustFrameworkPolicy
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -211,10 +211,10 @@ Vous devez voir une bannière de notification indiquant qu’une mise en product
 
 Pour en savoir plus :
 
-* [Appels de service à service utilisant des informations d’identification de client](https://docs.microsoft.com/azure/active-directory/develop/v1-oauth2-client-creds-grant-flow)
-* [Azure DevOps Services](https://docs.microsoft.com/azure/devops/user-guide/?view=azure-devops)
+* [Appels de service à service utilisant des informations d’identification de client](../active-directory/azuread-dev/v1-oauth2-client-creds-grant-flow.md)
+* [Azure DevOps Services](/azure/devops/user-guide/)
 
 <!-- LINKS - External -->
-[devops]: https://docs.microsoft.com/azure/devops/?view=azure-devops
-[devops-create-project]:  https://docs.microsoft.com/azure/devops/organizations/projects/create-project?view=azure-devops
-[devops-pipelines]: https://docs.microsoft.com/azure/devops/pipelines
+[devops]: /azure/devops/
+[devops-create-project]:  /azure/devops/organizations/projects/create-project
+[devops-pipelines]: /azure/devops/pipelines

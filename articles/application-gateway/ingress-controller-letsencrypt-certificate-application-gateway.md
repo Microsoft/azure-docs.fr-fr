@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur la façon d’obtenir un c
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 92e9747865f1a0910c8bae4001cc597ae9ea3da6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: df8722e8160538daa1535711092790dbb2405097
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73957985"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84807031"
 ---
 # <a name="use-certificates-with-letsencryptorg-on-application-gateway-for-aks-clusters"></a>Utiliser des certificats avec LetsEncrypt.org sur Application Gateway pour des clusters AKS
 

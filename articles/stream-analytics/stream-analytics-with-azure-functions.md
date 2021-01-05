@@ -5,20 +5,23 @@ author: mamccrea
 ms.author: mamccrea
 ms.service: stream-analytics
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 ms.date: 01/27/2020
-ms.openlocfilehash: 837174b3ccc08a74583587cb9efd34f8f720aec5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bb2eb36e4116c17efb20946b0da4586678838f3b
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77589451"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862001"
 ---
 # <a name="tutorial-run-azure-functions-from-azure-stream-analytics-jobs"></a>Tutoriel : Exécuter Azure Functions à partir des travaux Azure Stream Analytics 
 
 Vous pouvez exécuter Azure Functions à partir d’Azure Stream Analytics en configurant Functions comme l’un des récepteurs de sortie de la tâche Stream Analytics. Functions offre une expérience de calcul à la demande basée sur des événements, qui vous permet d’implémenter le code qui est déclenché par les événements qui se produisent dans Azure ou dans des services tiers. Comme ce logiciel peut répondre à des déclencheurs, il constitue l’outil de sortie logique pour des travaux Stream Analytics.
 
 Stream Analytics appelle Functions via des déclencheurs HTTP. L’adaptateur de sortie de Functions permet aux utilisateurs de connecter Functions à Stream Analytics, de telle sorte que les événements puissent être déclenchés en fonction des requêtes Stream Analytics. 
+
+> [!NOTE]
+> Il n’est pas possible d’établir une connexion à Azure Functions au sein d’un réseau virtuel à partir d’une tâche Stream Analytics qui s’exécute dans un cluster multilocataire.
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -52,7 +55,7 @@ Suivez le didacticiel [Détection des fraudes en temps réel](stream-analytics-r
 
 1. Consultez la section [Créer une application de fonction](../azure-functions/functions-create-first-azure-function.md#create-a-function-app) de la documentation Functions. Cette section vous explique comment créer une application de fonction et une [fonction déclenchée par HTTP dans Azure Functions](../azure-functions/functions-create-first-azure-function.md#create-function) en utilisant le langage C#.  
 
-2. Accédez à la fonction **run.csx**. Mettez-la à jour avec le code suivant. Remplacez **«\< your redis cache connection string goes here \>»** par la chaîne de connexion principale de Cache Redis Azure que vous avez récupérée dans la section précédente. 
+2. Accédez à la fonction **run.csx**. Mettez-la à jour avec le code suivant. Remplacez **« \<your Azure Cache for Redis connection string goes here\> »** par la chaîne de connexion principale d’Azure Cache pour Redis que vous avez récupérée dans la section précédente. 
 
     ```csharp
     using System;
@@ -130,11 +133,11 @@ Suivez le didacticiel [Détection des fraudes en temps réel](stream-analytics-r
  
 4. Revenez au portail Azure. Sous l’onglet **Fonctionnalités de la plateforme**, accédez à votre fonction. Sous **Outils de développement**, sélectionnez **Éditeur App Service**. 
  
-   ![Capture d’écran de l’Éditeur App Service](./media/stream-analytics-with-azure-functions/image3.png)
+   ![Capture d’écran montrant l’onglet Fonctionnalités de la plateforme, avec Éditeur App Service sélectionné.](./media/stream-analytics-with-azure-functions/image3.png)
 
 5. Dans l’éditeur App Service, cliquez avec le bouton droit sur votre répertoire racine et téléchargez le fichier **project.json**. Une fois le téléchargement terminé, actualisez la page. Vous devriez maintenant voir un fichier généré automatiquement appelé **project.lock.json**. Ce fichier généré automatiquement contient des références aux fichiers .dll spécifiés dans le fichier project.json.  
 
-   ![Capture d’écran de l’Éditeur App Service](./media/stream-analytics-with-azure-functions/image4.png)
+   ![Capture d’écran montrant l’option Charger des fichiers sélectionnée dans le menu.](./media/stream-analytics-with-azure-functions/image4.png)
 
 ## <a name="update-the-stream-analytics-job-with-the-function-as-output"></a>Mettre à jour le travail Stream Analytics en utilisant la fonction comme sortie
 
@@ -192,13 +195,15 @@ Suivez le didacticiel [Détection des fraudes en temps réel](stream-analytics-r
 Si une défaillance se produit lors de l’envoi d’événements à Azure Functions, Stream Analytics retente la plupart des opérations. Toutes les exceptions HTTP sont retentées jusqu’à réussite, à l’exception de l’erreur HTTP 413 (Entité trop volumineuse). L’erreur causée par une entité trop volumineuse est traitée comme une erreur de données soumise à la [stratégie Retenter ou supprimer](stream-analytics-output-error-policy.md).
 
 > [!NOTE]
-> Le délai d’expiration des requêtes HTTP adressées à Azure Functions par Stream Analytics est défini sur 100 secondes. Si le traitement d’un lot par votre application Azure Functions prend plus de 100 secondes, Stream Analytics génère une erreur.
+> Le délai d’expiration des requêtes HTTP adressées à Azure Functions par Stream Analytics est défini sur 100 secondes. Si le traitement d’un lot par votre application Azure Functions prend plus de 100 secondes, Stream Analytics génère une erreur et retente l’opération.
+
+Toute nouvelle tentative après expiration du délai peut entraîner l’écriture d’événements en double dans le récepteur de sortie. Lorsque Stream Analytics retente l’opération pour un lot ayant échoué, la nouvelle tentative concerne tous les événements dans le lot. Prenons l’exemple d’un lot de 20 événements qui sont envoyés à Azure Functions à partir de Stream Analytics. Supposons qu’Azure Functions traite les 10 premiers événements de ce lot en 100 secondes. Après ces 100 secondes, Stream Analytics interrompt la requête, car il n’a pas reçu de réponse positive de la part d’Azure Functions, et une autre requête est envoyée pour le même lot. Les dix premiers événements du lot sont retraités par Azure Functions, ce qui crée un doublon. 
 
 ## <a name="known-issues"></a>Problèmes connus
 
 Dans le portail Azure, lorsque vous essayez de rétablir les valeurs maximales de taille et de nombre de lots à des valeurs vides (par défaut), la valeur bascule sur la valeur précédemment saisie au moment de la sauvegarde. Dans ce cas, entrez manuellement les valeurs par défaut pour ces champs.
 
-Actuellement, l’utilisation du [routage HTTP](https://docs.microsoft.com/sandbox/functions-recipes/routes?tabs=csharp) sur votre instance Azure Functions n’est pas prise en charge par Stream Analytics.
+Actuellement, l’utilisation du [routage HTTP](/sandbox/functions-recipes/routes?tabs=csharp) sur votre instance Azure Functions n’est pas prise en charge par Stream Analytics.
 
 La prise en charge de la connexion aux applications Azure Functions hébergées dans un réseau virtuel n’est pas activée.
 

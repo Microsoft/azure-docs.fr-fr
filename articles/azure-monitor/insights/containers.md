@@ -5,13 +5,13 @@ ms.subservice: logs
 ms.topic: conceptual
 author: mgoedtel
 ms.author: magoedte
-ms.date: 07/22/2019
-ms.openlocfilehash: 171f897f6e110e8f759281c139addab477ecede3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/06/2020
+ms.openlocfilehash: a02ea022bedd92e9deaa0730cc1be051a9d20c88
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77664692"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93145682"
 ---
 # <a name="container-monitoring-solution-in-azure-monitor"></a>Solution Container Monitoring dans Azure Monitor
 
@@ -31,7 +31,7 @@ La solution montre les conteneurs qui sont actuellement exécutés, l’image co
 
 Si vous avez des conteneurs déployés dans [Azure Service Fabric](../../service-fabric/service-fabric-overview.md), nous vous recommandons d’activer la [solution Service Fabric](../../service-fabric/service-fabric-diagnostics-oms-setup.md) et cette solution pour inclure la surveillance des événements de cluster. Avant d’activer la solution Service Fabric, consultez [Utilisation de la solution Service Fabric](../../service-fabric/service-fabric-diagnostics-event-analysis-oms.md) pour comprendre ce qu’elle fournit et comment l’utiliser.
 
-Si vous souhaitez superviser les performances de vos charges de travail déployées dans des environnements Kubernetes hébergés sur Azure Kubernetes Service (AKS), consultez l’article [Surveillance d’Azure Kubernetes Service](../../azure-monitor/insights/container-insights-overview.md). La solution de surveillance de conteneur ne prend pas en charge la surveillance de cette plateforme.  
+Si vous souhaitez superviser les performances de vos charges de travail déployées dans des environnements Kubernetes hébergés sur Azure Kubernetes Service (AKS), consultez l’article [Surveillance d’Azure Kubernetes Service](./container-insights-overview.md). La solution de surveillance de conteneur ne prend pas en charge la surveillance de cette plateforme.  
 
 Le diagramme suivant montre les relations entre différents hôtes de conteneur et agents avec Azure Monitor.
 
@@ -45,7 +45,7 @@ Avant de commencer, prenez connaissance des informations suivantes pour vérifie
 
 Le tableau suivant présente l’orchestration de Docker et la prise en charge de la supervision du système d’exploitation pour ce qui est des journaux, des performances et de l’inventaire de conteneur avec Azure Monitor.   
 
-| | ACS | Linux | Windows | Conteneur<br>Inventaire | Image<br>Inventaire | Nœud<br>Inventaire | Conteneur<br>Performances | Conteneur<br>Événement | Événement<br>Journal | Conteneur<br>Journal |
+|Orchestration Docker | ACS | Linux | Windows | Conteneur<br>Inventaire | Image<br>Inventaire | Nœud<br>Inventaire | Conteneur<br>Performances | Conteneur<br>Événement | Événement<br>Journal | Conteneur<br>Journal |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | Kubernetes | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; | &#8226; |
 | Mésosphère<br>DC/OS | &#8226; | &#8226; | | &#8226; | &#8226; | &#8226; | &#8226;| &#8226; | &#8226; | &#8226; |
@@ -92,11 +92,11 @@ Le tableau suivant présente l’orchestration de Docker et la prise en charge d
 
 Utilisez les informations suivantes pour installer et configurer la solution.
 
-1. Ajoutez la solution Container Monitoring à votre espace de travail Log Analytics à partir de la [Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.ContainersOMS?tab=Overview) ou en procédant de la manière décrite dans [Ajouter des solutions de supervision à partir de la Galerie Solutions](../../azure-monitor/insights/solutions.md).
+1. Ajoutez la solution Container Monitoring à votre espace de travail Log Analytics à partir de la [Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.ContainersOMS?tab=Overview) ou en procédant de la manière décrite dans [Ajouter des solutions de supervision à partir de la Galerie Solutions](./solutions.md).
 
 2. Installez et utilisez Docker avec un agent Log Analytics. Pour configurer votre agent, vous pouvez utiliser les méthodes suivantes, selon votre système d’exploitation et votre orchestrateur Docker.
    - Pour les hôtes autonomes :
-     - Sur les systèmes d’exploitation Linux pris en charge, installez et exécutez Docker, puis installez et configurez [l’agent Log Analytics pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md).  
+     - Sur les systèmes d’exploitation Linux pris en charge, installez et exécutez Docker, puis installez et configurez [l’agent Log Analytics pour Linux](../learn/quick-collect-linux-computer.md).  
      - Sur CoreOS, vous ne pouvez pas exécuter l’agent Log Analytics pour Linux. À la place, vous exécutez une version en conteneur de l’agent Log Analytics pour Linux. Si vous utilisez des conteneurs dans Azure Government Cloud, consultez les sections relatives aux hôtes de conteneurs Linux, y compris CoreOS ou aux hôtes de conteneurs Linux Azure Government, y compris CoreOS.
      - Sur Windows Server 2016 et Windows 10, installez le moteur et le client Docker, puis connectez un agent afin de collecter les données et les envoyer à Azure Monitor. Consultez [Installer et configurer des hôtes de conteneur Windows](#install-and-configure-windows-container-hosts) si vous avez un environnement Windows.
    - Pour l’orchestration Docker à plusieurs hôtes :
@@ -105,14 +105,14 @@ Utilisez les informations suivantes pour installer et configurer la solution.
        - Consultez la section [Configurer un agent Log Analytics Linux pour Kubernetes](#configure-a-log-analytics-linux-agent-for-kubernetes).
        - Consultez la section [Configurer un agent Log Analytics Windows pour Kubernetes](#configure-a-log-analytics-windows-agent-for-kubernetes).
        - Consultez la section Utiliser Helm pour déployer l’agent Log Analytics sur Linux Kubernetes.
-     - Si vous disposez d’un cluster DC/OS Azure Container Service, consultez l’article [Superviser un cluster DC/OS Azure Container Service avec Azure Monitor](../../container-service/dcos-swarm/container-service-monitoring-oms.md).
+     - Si vous disposez d’un cluster DC/OS Azure Container Service, consultez l’article [Superviser un cluster DC/OS Azure Container Service avec Azure Monitor](/previous-versions/azure/container-service/dcos-swarm/container-service-monitoring-oms).
      - Si vous utilisez un environnement en mode Docker Swarm, apprenez en davantage en consultant la section Configurer un agent Log Analytics pour Docker Swarm.
      - Si vous avez un cluster Service Fabric, découvrez-en plus dans [Superviser des conteneurs avec Azure Monitor](../../service-fabric/service-fabric-diagnostics-oms-containers.md).
 
-Examinez l’article relatif au [moteur Docker sur Windows](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon) pour en savoir plus sur l’installation et la configuration de vos moteurs Docker sur les ordinateurs exécutant Windows.
+Examinez l’article relatif au [moteur Docker sur Windows](/virtualization/windowscontainers/manage-docker/configure-docker-daemon) pour en savoir plus sur l’installation et la configuration de vos moteurs Docker sur les ordinateurs exécutant Windows.
 
 > [!IMPORTANT]
-> Docker doit être en cours d’exécution **avant** l’installation de [l’agent Log Analytics pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) sur vos hôtes de conteneur. Si vous avez installé l’agent avant d’installer Docker, vous devez réinstaller l’agent Log Analytics pour Linux. Pour plus d’informations sur Docker, voir le [site web Docker](https://www.docker.com).
+> Docker doit être en cours d’exécution **avant** l’installation de [l’agent Log Analytics pour Linux](../learn/quick-collect-linux-computer.md) sur vos hôtes de conteneur. Si vous avez installé l’agent avant d’installer Docker, vous devez réinstaller l’agent Log Analytics pour Linux. Pour plus d’informations sur Docker, voir le [site web Docker](https://www.docker.com).
 
 ### <a name="install-and-configure-linux-container-hosts"></a>Installer et configurer des hôtes de conteneur Linux
 
@@ -120,7 +120,7 @@ Après avoir installé Docker, utilisez les paramètres suivants pour votre hôt
 
 **Pour tous les hôtes de conteneur Linux, à l’exception de CoreOS :**
 
-- Pour plus d’informations sur l’installation de l’agent Log Analytics pour Linux, consultez l’article [Présentation de l’agent Log Analytics](../../azure-monitor/platform/log-analytics-agent.md).
+- Pour plus d’informations sur l’installation de l’agent Log Analytics pour Linux, consultez l’article [Présentation de l’agent Log Analytics](../platform/log-analytics-agent.md).
 
 **Pour tous les hôtes de conteneur Linux, avec CoreOS :**
 
@@ -140,7 +140,7 @@ sudo docker run --privileged -d -v /var/run/docker.sock:/var/run/docker.sock -v 
 
 **Passage de l’utilisation d’un agent Linux installé à un agent exécuté dans un conteneur**
 
-Si vous utilisiez précédemment l’agent installé directement et souhaitez désormais utiliser un agent qui s’exécute dans un conteneur, vous devez commencer par supprimer l’agent Log Analytics pour Linux. Pour comprendre comment désinstaller l’agent, consultez l’article [Uninstalling the Log Analytics agent for Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) (Désinstallation de l’agent Log Analytics pour Linux).  
+Si vous utilisiez précédemment l’agent installé directement et souhaitez désormais utiliser un agent qui s’exécute dans un conteneur, vous devez commencer par supprimer l’agent Log Analytics pour Linux. Pour comprendre comment désinstaller l’agent, consultez l’article [Uninstalling the Log Analytics agent for Linux](../learn/quick-collect-linux-computer.md) (Désinstallation de l’agent Log Analytics pour Linux).  
 
 #### <a name="configure-a-log-analytics-agent-for-docker-swarm"></a>Configurer un agent Log Analytics pour Docker Swarm
 
@@ -185,8 +185,8 @@ Pour Docker Swarm, une fois que vous avez créé le secret de l’ID de l’espa
 
 Il existe trois façons d’ajouter l’agent Log Analytics pour Red Hat OpenShift dans le but de démarrer la collecte des données de supervision des conteneurs.
 
-* [Installer l’agent Log Analytics pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) directement sur chaque nœud OpenShift  
-* [Activer l’extension de machine virtuelle Log Analytics](../../azure-monitor/learn/quick-collect-azurevm.md) sur chaque nœud OpenShift résidant dans Azure  
+* [Installer l’agent Log Analytics pour Linux](../learn/quick-collect-linux-computer.md) directement sur chaque nœud OpenShift  
+* [Activer l’extension de machine virtuelle Log Analytics](../learn/quick-collect-azurevm.md) sur chaque nœud OpenShift résidant dans Azure  
 * Installer l’agent Log Analytics en tant que daemon-set OpenShift  
 
 Dans cette section, nous allons aborder les étapes nécessaires à l’installation de l’agent Log Analytics comme un daemon-set OpenShift.  
@@ -476,12 +476,12 @@ Pour déployer l’agent Log Analytics sur votre environnement Linux Kubernetes 
  
     RESOURCES:
     ==> v1/Secret
-    NAME            TYPE    DATA  AGE
-    omsagent-msoms  Opaque  3     17m
+    NAME            TYPE    DATA  AGE
+    omsagent-msoms  Opaque  3     17m
  
     ==> v1beta1/DaemonSet
-    NAME            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE-SELECTOR  AGE
-    omsagent-msoms  3        3        3      3           3          <none>         17m
+    NAME            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE-SELECTOR  AGE
+    omsagent-msoms  3        3        3      3           3          <none>         17m
     ```
    
     Pour plus d’informations, consultez [Azure Log Analytics Container Monitoring Solution](https://aka.ms/omscontainerhelm) (Solution de surveillance de conteneur Azure Log Analytics).
@@ -505,13 +505,13 @@ dockerd --register-service -H npipe:// -H 0.0.0.0:2375
 Start-Service docker
 ```
 
-Pour plus d’informations sur la configuration du démon Docker utilisée avec les conteneurs de Windows, reportez-vous à [Moteur Docker sur Windows](https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/configure-docker-daemon).
+Pour plus d’informations sur la configuration du démon Docker utilisée avec les conteneurs de Windows, reportez-vous à [Moteur Docker sur Windows](/virtualization/windowscontainers/manage-docker/configure-docker-daemon).
 
 #### <a name="install-windows-agents"></a>Installer les agents Windows
 
-Pour activer la surveillance des conteneurs Windows et Hyper-V, installez Microsoft Monitoring Agent (MMA) sur les ordinateurs Windows qui sont des hôtes de conteneurs. Pour les ordinateurs exécutant Windows dans votre environnement local, consultez [Connecter des ordinateurs Windows à Azure Monitor](../../azure-monitor/platform/agent-windows.md). Connectez les machines virtuelles exécutées dans Azure à Azure Monitor à l’aide de l’[extension de machine virtuelle](../../azure-monitor/learn/quick-collect-azurevm.md).
+Pour activer la surveillance des conteneurs Windows et Hyper-V, installez Microsoft Monitoring Agent (MMA) sur les ordinateurs Windows qui sont des hôtes de conteneurs. Pour les ordinateurs exécutant Windows dans votre environnement local, consultez [Connecter des ordinateurs Windows à Azure Monitor](../platform/agent-windows.md). Connectez les machines virtuelles exécutées dans Azure à Azure Monitor à l’aide de l’[extension de machine virtuelle](../learn/quick-collect-azurevm.md).
 
-Vous pouvez surveiller les conteneurs Windows en cours d’exécution sur Service Fabric. Toutefois, seules les [machines virtuelles qui s’exécutent dans Azure](../../azure-monitor/learn/quick-collect-azurevm.md) et les [ordinateurs exécutant Windows dans votre environnement local](../../azure-monitor/platform/agent-windows.md) sont actuellement pris en charge pour Service Fabric.
+Vous pouvez surveiller les conteneurs Windows en cours d’exécution sur Service Fabric. Toutefois, seules les [machines virtuelles qui s’exécutent dans Azure](../learn/quick-collect-azurevm.md) et les [ordinateurs exécutant Windows dans votre environnement local](../platform/agent-windows.md) sont actuellement pris en charge pour Service Fabric.
 
 Vous pouvez vérifier que la solution de supervision de conteneurs est correctement configurée pour Windows. Pour vérifier que le pack d’administration a été correctement téléchargé, recherchez *ContainerManagement.xxx*. Les fichiers doivent se trouver dans le dossier C:\Program Files\Microsoft Monitoring Agent\Agent\Health Service State\Management Packs.
 
@@ -527,9 +527,9 @@ La solution de supervision de conteneurs collecte diverses métriques de perform
 
 Les données sont collectées toutes les trois minutes par les types d’agents suivants.
 
-- [Agent Log Analytics pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md)
-- [Agent Windows](../../azure-monitor/platform/agent-windows.md)
-- [Extension de machine virtuelle Log Analytics](../../azure-monitor/learn/quick-collect-azurevm.md)
+- [Agent Log Analytics pour Linux](../learn/quick-collect-linux-computer.md)
+- [Agent Windows](../platform/agent-windows.md)
+- [Extension de machine virtuelle Log Analytics](../learn/quick-collect-azurevm.md)
 
 ### <a name="container-records"></a>Enregistrements de conteneur
 
@@ -560,25 +560,25 @@ La vignette affiche une vue d’ensemble du nombre de conteneurs présents dans 
 
 Cliquez sur la vignette **Conteneurs**. À partir de là, vous voyez les vues organisées par :
 
-- **Événements de conteneur** : affiche l’état du conteneur et les ordinateurs dont le conteneur a échoué.
-- **Journaux d’activité de conteneur** : affiche un graphique montrant les fichiers journaux de conteneur générés jusqu’à maintenant, ainsi que la liste des ordinateurs contenant le plus grand nombre de fichiers journaux.
-- **Événements Kubernetes** : affiche un graphique montrant les événements Kubernetes générés jusqu’à maintenant, ainsi que la liste des raisons pour lesquelles les pods ont généré ces événements. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
-- **Inventaire des espaces de noms Kubernetes** : indique le nombre d’espaces de noms et de pods, et montre leur hiérarchie. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
-- **Inventaire des nœuds de conteneur** : affiche le nombre de types d’orchestration utilisés sur les nœuds/hôtes de conteneur. Les nœuds/hôtes d’ordinateur sont également répertoriés avec le nombre de conteneurs. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
-- **Inventaire des images de conteneur** : affiche le nombre total des images de conteneur utilisées, ainsi que le nombre de types d’images. Le nombre d’images est également répertorié avec la balise d’image.
-- **État des conteneurs** : affiche le nombre total de nœuds de conteneur/ordinateurs hôtes comprenant des conteneurs en cours d’exécution. Les ordinateurs sont également répertoriés avec le nombre d’ordinateurs hôtes en cours d’exécution.
-- **Processus de conteneur** : affiche un graphique en courbes représentant les processus de conteneur exécutés jusqu’à maintenant. Les conteneurs peuvent également être répertoriés en exécutant la commande /process dans les conteneurs. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
-- **Performances de l’UC du conteneur** : affiche un graphique en courbes représentant l’utilisation moyenne de l’UC jusqu’à maintenant pour les nœuds/hôtes d’ordinateur. Répertorie également les nœuds/hôtes d’ordinateur en fonction de l’utilisation moyenne de l’UC.
-- **Performances de la mémoire du conteneur** : affiche un graphique en courbes représentant l’utilisation de la mémoire jusqu’à maintenant. Répertorie également l’utilisation de la mémoire par l’ordinateur en fonction du nom de l’instance.
-- **Performances de l’ordinateur** : affiche des graphiques en courbes représentant le pourcentage de performance de l’UC, le pourcentage d’utilisation de la mémoire et les mégaoctets d’espace disque libre dans le temps. Vous pouvez pointer sur une ligne du graphique pour afficher plus de détails.
+- **Événements de conteneur**  : affiche l’état du conteneur et les ordinateurs dont le conteneur a échoué.
+- **Journaux d’activité de conteneur**  : affiche un graphique montrant les fichiers journaux de conteneur générés jusqu’à maintenant, ainsi que la liste des ordinateurs contenant le plus grand nombre de fichiers journaux.
+- **Événements Kubernetes**  : affiche un graphique montrant les événements Kubernetes générés jusqu’à maintenant, ainsi que la liste des raisons pour lesquelles les pods ont généré ces événements. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
+- **Inventaire des espaces de noms Kubernetes**  : indique le nombre d’espaces de noms et de pods, et montre leur hiérarchie. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
+- **Inventaire des nœuds de conteneur**  : affiche le nombre de types d’orchestration utilisés sur les nœuds/hôtes de conteneur. Les nœuds/hôtes d’ordinateur sont également répertoriés avec le nombre de conteneurs. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
+- **Inventaire des images de conteneur**  : affiche le nombre total des images de conteneur utilisées, ainsi que le nombre de types d’images. Le nombre d’images est également répertorié avec la balise d’image.
+- **État des conteneurs**  : affiche le nombre total de nœuds de conteneur/ordinateurs hôtes comprenant des conteneurs en cours d’exécution. Les ordinateurs sont également répertoriés avec le nombre d’ordinateurs hôtes en cours d’exécution.
+- **Processus de conteneur**  : affiche un graphique en courbes représentant les processus de conteneur exécutés jusqu’à maintenant. Les conteneurs peuvent également être répertoriés en exécutant la commande /process dans les conteneurs. *Ce jeu de données est utilisé uniquement dans les environnements Linux.*
+- **Performances de l’UC du conteneur**  : affiche un graphique en courbes représentant l’utilisation moyenne de l’UC jusqu’à maintenant pour les nœuds/hôtes d’ordinateur. Répertorie également les nœuds/hôtes d’ordinateur en fonction de l’utilisation moyenne de l’UC.
+- **Performances de la mémoire du conteneur**  : affiche un graphique en courbes représentant l’utilisation de la mémoire jusqu’à maintenant. Répertorie également l’utilisation de la mémoire par l’ordinateur en fonction du nom de l’instance.
+- **Performances de l’ordinateur**  : affiche des graphiques en courbes représentant le pourcentage de performance de l’UC, le pourcentage d’utilisation de la mémoire et les mégaoctets d’espace disque libre dans le temps. Vous pouvez pointer sur une ligne du graphique pour afficher plus de détails.
 
 Chaque zone du tableau de bord est une représentation visuelle d’une recherche exécutée sur des données collectées.
 
-![Tableau de bord Conteneurs](./media/containers/containers-dash01.png)
+![Capture d’écran qui montre un tableau de bord permettant de consulter les données collectées. ](./media/containers/containers-dash01.png)
 
 ![Tableau de bord Conteneurs](./media/containers/containers-dash02.png)
 
-Dans la zone **État du conteneur**, cliquez sur la zone supérieure, comme illustré ci-dessous.
+Dans la zone **État du conteneur** , cliquez sur la zone supérieure, comme illustré ci-dessous.
 
 ![État des conteneurs](./media/containers/containers-status.png)
 
@@ -599,9 +599,9 @@ Log Analytics marque un conteneur comme étant en **Échec** s’il a été ferm
 2. Log Analytics s’ouvre et affiche l’état de vos conteneurs, comme ci-dessous.  
    ![État des conteneurs](./media/containers/containers-log-search.png)
 3. Développez la ligne Failed, puis cliquez sur + pour ajouter ses critères à la requête. Commentez la ligne Summarize dans la requête.
-   ![Conteneurs défectueux](./media/containers/containers-state-failed-select.png)  
+   ![Capture d’écran montrant la ligne qui doit être commentée.](./media/containers/containers-state-failed-select.png)  
 1. Exécutez la requête, puis développez une ligne dans les résultats pour afficher l’ID de l’image.  
-   ![Conteneurs défectueux](./media/containers/containers-state-failed.png)  
+   ![Capture d’écran montrant comment afficher l’ID de l’image.](./media/containers/containers-state-failed.png)  
 1. Tapez ce qui suit dans la requête de journal. `ContainerImageInventory | where ImageID == <ImageID>` pour afficher des détails sur l’image, tels que sa taille ou le nombre d’images arrêtées et en échec.  
    ![Conteneurs défectueux](./media/containers/containers-failed04.png)
 
@@ -609,15 +609,14 @@ Log Analytics marque un conteneur comme étant en **Échec** s’il a été ferm
 
 Lorsque vous résolvez une erreur spécifique, il peut être utile de voir l’emplacement où elle se produit dans votre environnement. Les types de journaux suivants vous aident à créer des requêtes qui retournent les informations souhaitées.
 
-- **ContainerImageInventory** : utilisez ce type de journal lorsque vous recherchez des informations organisées par image, et de consulter des informations sur les images, telles que leurs ID ou tailles.
-- **ContainerInventory** : utilisez ce type de journal lorsque vous recherchez des informations sur l’emplacement des conteneurs, leurs noms et les images qu’ils exécutent.
-- **ContainerLog** : utilisez ce type de journal lorsque vous recherchez des informations et entrées spécifiques du journal des erreurs.
+- **ContainerImageInventory**  : utilisez ce type de journal lorsque vous recherchez des informations organisées par image, et de consulter des informations sur les images, telles que leurs ID ou tailles.
+- **ContainerInventory**  : utilisez ce type de journal lorsque vous recherchez des informations sur l’emplacement des conteneurs, leurs noms et les images qu’ils exécutent.
+- **ContainerLog**  : utilisez ce type de journal lorsque vous recherchez des informations et entrées spécifiques du journal des erreurs.
 - **ContainerNodeInventory_CL** Utilisez ce type lorsque vous souhaitez obtenir les informations sur le nœud ou l’hôte où résident les conteneurs. Il fournit la version Docker, le type d’orchestration, ainsi que des informations relatives au stockage et au réseau.
 - **ContainerProcess_CL** Ce type permet de visualiser rapidement le processus actuellement exécuté dans le conteneur.
-- **ContainerServiceLog** : utilisez ce type de journal lorsque vous recherchez des informations de piste d’audit pour le démon Docker, telles que les commandes de démarrage, d’arrêter, de suppression ou d’extraction.
+- **ContainerServiceLog**  : utilisez ce type de journal lorsque vous recherchez des informations de piste d’audit pour le démon Docker, telles que les commandes de démarrage, d’arrêter, de suppression ou d’extraction.
 - **KubeEvents_CL** Ce type permet d’afficher les événements Kubernetes.
 - **KubePodInventory_CL** Utilisez ce type lorsque vous voulez comprendre les informations de hiérarchie du cluster.
-
 
 ### <a name="to-query-logs-for-container-data"></a>Pour interroger des journaux afin de rechercher des données de conteneur
 
@@ -628,7 +627,7 @@ Lorsque vous résolvez une erreur spécifique, il peut être utile de voir l’e
 
 ## <a name="example-log-queries"></a>Exemples de requêtes de journal
 
-Il est souvent utile de créer des requêtes en commençant par un exemple ou deux, puis en les modifiant afin de les adapter à votre environnement. Comme point de départ, vous pouvez utiliser la zone **Exemples de requêtes** pour vous aider à créer des requêtes plus avancées.
+Il est souvent utile de créer des requêtes en commençant par un exemple ou deux, puis en les modifiant afin de les adapter à votre environnement. Pour commencer, vous pouvez utiliser la zone **EXEMPLES DE REQUÊTES** tout à droite de la page de la solution pour créer des requêtes plus avancées.
 
 ![Requêtes de conteneurs](./media/containers/containers-queries.png)
 
@@ -641,3 +640,4 @@ Après avoir créé une requête qui vous semble utile, enregistrez-la en cliqua
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Interroger des journaux](../log-query/log-query-overview.md) pour consulter des enregistrements de données de conteneur détaillés.
+

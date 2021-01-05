@@ -12,13 +12,16 @@ ms.custom:
 - mvc
 - seo-javascript-september2019
 - mqtt
+- 'Role: Cloud Development'
+- devx-track-js
+- devx-track-azurecli
 ms.date: 06/21/2019
-ms.openlocfilehash: 5c34dcc606e87e11a3a018df1b2d6bbedb262d04
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 7aa95e2117dc3bb2e837e62ef42e3a770f2266d5
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82209109"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94842122"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-and-read-it-with-a-back-end-application-nodejs"></a>Démarrage rapide : Envoyer des données de télémétrie d’un appareil à un hub IoT et les lire avec une application back-end (Node.js)
 
@@ -26,31 +29,23 @@ ms.locfileid: "82209109"
 
  Dans ce guide de démarrage rapide, vous envoyez la télémétrie d’une application d’appareil simulé via Azure IoT Hub à une application back-end pour traitement. IoT Hub est un service Azure qui vous permet de traiter de gros volumes de données de télémétrie envoyées par vos appareils IoT dans le cloud à des fins de stockage ou de traitement. Ce guide de démarrage rapide utilise deux applications Node.js prédéfinies : une pour envoyer la télémétrie et l’autre pour lire cette télémétrie à partir du hub. Avant d’exécuter ces deux applications, vous créez un IoT Hub et inscrivez un appareil auprès du concentrateur.
 
-## <a name="prerequisites"></a>Prérequis
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-* Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
+## <a name="prerequisites"></a>Prérequis
 
 * [Node.js 10+](https://nodejs.org). Si vous utilisez Azure Cloud Shell, ne mettez pas à jour la version installée de Node.js. Azure Cloud Shell a déjà la dernière version de Node.js.
 
+    Vous pouvez vérifier la version actuelle de Node.js sur votre machine de développement à l’aide de la commande suivante :
+
+    ```cmd/sh
+    node --version
+    ```
+
 * [Un exemple de projet Node.js](https://github.com/Azure-Samples/azure-iot-samples-node/archive/master.zip).
 
-* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Le port 8883 ouvert dans votre pare-feu. L’exemple d’appareil de ce guide de démarrage rapide utilise le protocole MQTT, lequel communique sur le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les différentes façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
-Vous pouvez vérifier la version actuelle de Node.js sur votre machine de développement à l’aide de la commande suivante :
-
-```cmd/sh
-node --version
-```
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-### <a name="add-azure-iot-extension"></a>Ajouter une extension Azure IoT
-
-Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et du service IoT Hub Device Provisioning (DPS) à Azure CLI.
-
-```azurecli-interactive
-az extension add --name azure-iot
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
@@ -77,7 +72,7 @@ Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dan
    **YourIoTHubName** : Remplacez l’espace réservé ci-dessous par le nom que vous avez choisi pour votre hub IoT.
 
     ```azurecli-interactive
-    az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
+    az iot hub device-identity connection-string show --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
     ```
 
     Notez la chaîne de connexion à l’appareil, qui ressemble à ce qui suit :

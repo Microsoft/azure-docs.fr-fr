@@ -1,16 +1,16 @@
 ---
 title: Utiliser une alerte pour déclencher un runbook Azure Automation
-description: Découvrez comment déclencher un runbook à exécuter quand une alerte Azure est déclenchée.
+description: Cet article explique comment déclencher un runbook à exécuter quand une alerte Azure est levée.
 services: automation
 ms.subservice: process-automation
 ms.date: 04/29/2019
 ms.topic: conceptual
-ms.openlocfilehash: eb7a1cc0cb589fa3d2fe605913d47be4444516e8
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.openlocfilehash: acf31af6d3ba3d78a6435210fa17562aaddac0a3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82996862"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86186603"
 ---
 # <a name="use-an-alert-to-trigger-an-azure-automation-runbook"></a>Utiliser une alerte pour déclencher un runbook Azure Automation
 
@@ -22,7 +22,7 @@ Vous pouvez utiliser des runbooks Automation avec trois types d’alerte :
 
 * Alertes courantes
 * Alertes de journal d’activité
-* Alerte de métrique quasiment en temps réel
+* Alertes de métrique en quasi temps réel
 
 > [!NOTE]
 > Le schéma d’alerte commun standardise l’expérience de consommation pour les notifications d’alerte dans Azure de nos jours. Les trois types d’alerte actuels dans Azure (métrique, journal et journal d’activité) ont traditionnellement eu leurs propres modèles d’e-mail, schémas de webhook, etc. Pour en savoir plus, consultez [Schéma d’alerte courant](../azure-monitor/platform/alerts-common-schema.md)
@@ -45,7 +45,7 @@ Comme décrit dans la section précédente, chaque type d’alerte a un schéma 
 
 Dans cet exemple, il s’agit d’une alerte depuis une machine virtuelle. Il récupère les données de la machine virtuelle à partir de la charge utile, puis utilise ces informations pour arrêter la machine virtuelle. La connexion doit être configurée dans le compte Automation sur lequel le runbook est exécuté. Lorsque vous utilisez des alertes pour déclencher des runbooks, il est important de vérifier l’état de l’alerte dans le runbook déclenché. Le runbook se déclenche chaque fois que l’alerte change d’état. Les alertes présentent plusieurs états dont les deux plus courants sont Activé et Résolu. Recherchez l'état dans la logique de runbook pour vous assurer que le runbook ne s’exécute pas plusieurs fois. L’exemple de cet article montre uniquement comment rechercher des alertes avec état Activé uniquement.
 
-Le runbook utilise le `AzureRunAsConnection` [compte d'identification](automation-create-runas-account.md) pour s’authentifier auprès d’Azure afin d’effectuer l’action de gestion sur la machine virtuelle.
+Le runbook utilise le `AzureRunAsConnection` [compte d'identification](./manage-runas-account.md) pour s’authentifier auprès d’Azure afin d’effectuer l’action de gestion sur la machine virtuelle.
 
 Utilisez cet exemple pour créer un runbook appelé **Stop-AzureVmInResponsetoVMAlert**. Vous pouvez modifier le script PowerShell et l’utiliser avec de nombreuses ressources différentes.
 
@@ -191,9 +191,8 @@ Les alertes utilisent des groupes d’actions, qui sont des collections d’acti
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour plus d’informations sur le démarrage d’un runbook Automation avec un Webhook, consultez [Démarrer un runbook depuis un Webhook](automation-webhooks.md).
-* Pour plus d’informations sur les différentes façons de démarrer un Runbook, voir [Démarrage d’un Runbook](automation-starting-a-runbook.md).
-* Pour découvrir comment créer une alerte de journal d’activité, consultez [Créer des alertes de journal d’activité](../azure-monitor/platform/activity-log-alerts.md?toc=%2fazure%2fautomation%2ftoc.json).
+* Pour démarrer un runbook à l’aide d’un webhook, consultez [Démarrer un runbook depuis un Webhook](automation-webhooks.md).
+* Pour découvrir les différentes façons de démarrer un runbook, consultez [Démarrer un runbook](./start-runbooks.md).
+* Pour créer une alerte de journal d’activité, consultez [Créer des alertes de journal d’activité](../azure-monitor/platform/activity-log-alerts.md?toc=%2fazure%2fautomation%2ftoc.json).
 * Pour apprendre à créer une alerte quasiment en temps réel, consultez [Créer une règle d’alerte avec le portail Azure](../azure-monitor/platform/alerts-metric.md?toc=/azure/azure-monitor/toc.json).
-* Pour obtenir des informations de référence sur les cmdlets PowerShell, consultez [Az.Automation](https://docs.microsoft.com/powershell/module/az.automation/?view=azps-3.7.0#automation
-).
+* Pour obtenir des informations de référence sur les cmdlets PowerShell, consultez [Az.Automation](/powershell/module/az.automation/?view=azps-3.7.0#automation).

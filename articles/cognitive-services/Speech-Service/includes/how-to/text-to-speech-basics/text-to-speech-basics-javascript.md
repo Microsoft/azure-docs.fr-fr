@@ -4,53 +4,41 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/15/2020
 ms.author: trbye
-ms.openlocfilehash: d91082ae3c0ae5e501675a06b02e2f55f20ce236
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: devx-track-js
+ms.openlocfilehash: f0335e28b3f0fd2d339aa329b92203ddb8d3216c
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81399566"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94425528"
 ---
+Dans ce guide de démarrage rapide, vous découvrez les modèles de conception courants qui permettent d’utiliser la synthèse vocale au moyen du kit SDK Speech. Vous commencez par créer une configuration et une synthèse de base, puis passez à des exemples plus poussés en matière de développement d’applications personnalisées, notamment :
+
+* Obtention de réponses en tant que flux en mémoire
+* Personnalisation du taux d’échantillonnage de sortie et de la vitesse de transmission
+* Envoi de demandes de synthèse à l’aide de SSML (Speech Synthesis Markup Language)
+* Utilisation de voix neurales
+
+## <a name="skip-to-samples-on-github"></a>Passer aux exemples sur GitHub
+
+Si vous souhaitez passer directement à l’exemple de code, consultez les [exemples de démarrage rapide JavaScript](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/quickstart/javascript/node/text-to-speech) sur GitHub.
+
 ## <a name="prerequisites"></a>Prérequis
 
-Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../get-started.md).
+Cet article part du principe que vous disposez d’un compte Azure et d’un abonnement au service Speech. Si vous n’avez pas de compte et d’abonnement, [essayez le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free).
 
 ## <a name="install-the-speech-sdk"></a>Installer le Kit de développement logiciel (SDK) Speech
 
-Avant de pouvoir faire quoi que ce soit, vous devez installer le <a href="https://www.npmjs.com/package/microsoft-cognitiveservices-speech-sdk" target="_blank">Speech SDK JavaScript<span class="docon docon-navigate-external x-hidden-focus"></span></a>. Suivez les instructions ci-dessous, en fonction de votre plateforme :
+Avant de pouvoir faire quoi que ce soit, vous devez installer le <a href="https://www.npmjs.com/package/microsoft-cognitiveservices-speech-sdk" target="_blank">SDK Speech pour JavaScript<span class="docon docon-navigate-external x-hidden-focus"></span></a>. Suivez les instructions ci-dessous, en fonction de votre plateforme :
 - <a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/speech-sdk?tabs=nodejs#get-the-speech-sdk" target="_blank">Node.js <span 
 class="docon docon-navigate-external x-hidden-focus"></span></a>
 - <a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/speech-sdk?tabs=browser#get-the-speech-sdk" target="_blank">Navigateur web <span class="docon docon-navigate-external x-hidden-focus"></span></a>
 
-En outre, selon l’environnement cible, utilisez l’un des éléments suivants :
-
-# <a name="import"></a>[import](#tab/import)
-
-```javascript
-import { readFileSync } from "fs";
-import {
-    AudioConfig,
-    SpeechConfig,
-    SpeechSynthesisOutputFormat,
-    SpeechSynthesizer 
-} from "microsoft-cognitiveservices-speech-sdk";
-```
-
-Pour plus d’informations sur `import`, consultez la page consacrée aux directives <a href="https://javascript.info/import-export" target="_blank">export et import <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
-
-# <a name="require"></a>[require](#tab/require)
-
-```javascript
-const readFileSync = require("fs").readFileSync;
-const sdk = require("microsoft-cognitiveservices-speech-sdk");
-```
-
-Pour plus d’informations sur `require`, consultez la <a href="https://nodejs.org/en/knowledge/getting-started/what-is-require/" target="_blank">présentation de require <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
-
+De plus, selon l’environnement cible, utilisez l’un des éléments suivants :
 
 # <a name="script"></a>[script](#tab/script)
 
-Téléchargez et extrayez le fichier *microsoft.cognitiveservices.speech.sdk.bundle.js* du <a href="https://aka.ms/csspeech/jsbrowserpackage" target="_blank">SDK Speech JavaScript <span class="docon docon-navigate-external x-hidden-focus"></span></a>, et placez-le dans un dossier accessible à votre fichier HTML.
+Téléchargez et extrayez le fichier *microsoft.cognitiveservices.speech.sdk.bundle.js* du <a href="https://aka.ms/csspeech/jsbrowserpackage" target="_blank">SDK Speech pour JavaScript <span class="docon docon-navigate-external x-hidden-focus"></span></a>, puis placez-le dans un dossier accessible à votre fichier HTML.
 
 ```html
 <script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>;
@@ -59,33 +47,52 @@ Téléchargez et extrayez le fichier *microsoft.cognitiveservices.speech.sdk.bun
 > [!TIP]
 > Si vous ciblez un navigateur web et que vous utilisez l’étiquette `<script>`, le préfixe `sdk` n’est pas nécessaire. Le préfixe `sdk` est un alias utilisé pour nommer le module `require`.
 
+# <a name="import"></a>[import](#tab/import)
+
+```javascript
+import * from "microsoft-cognitiveservices-speech-sdk";
+```
+
+Pour plus d’informations sur `import`, consultez la page consacrée aux directives <a href="https://javascript.info/import-export" target="_blank">export et import <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+
+# <a name="require"></a>[require](#tab/require)
+
+```javascript
+const sdk = require("microsoft-cognitiveservices-speech-sdk");
+```
+
+Pour plus d’informations sur `require`, consultez la <a href="https://nodejs.org/en/knowledge/getting-started/what-is-require/" target="_blank">présentation de require <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+
 ---
+
 
 ## <a name="create-a-speech-configuration"></a>Créer une configuration Speech
 
-Pour appeler le service Speech à l’aide du SDK Speech, vous devez créer une classe [`SpeechConfig`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?view=azure-node-latest). Celle-ci comprend des informations sur votre abonnement, telles que votre clé et la région, le point de terminaison, l’hôte ou le jeton d’autorisation associés.
+Pour appeler le service Speech à l’aide du SDK Speech, vous devez créer une classe [`SpeechConfig`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?preserve-view=true&view=azure-node-latest). Celle-ci comprend des informations sur votre abonnement, telles que votre clé et la région, le point de terminaison, l’hôte ou le jeton d’autorisation associés.
 
 > [!NOTE]
 > Quand vous procédez à une reconnaissance vocale, une synthèse vocale, une traduction ou une reconnaissance intentionnelle, vous devez toujours créer une configuration.
 
-Vous pouvez initialiser une [`SpeechConfig`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?view=azure-node-latest) de plusieurs façons :
+Vous pouvez initialiser une [`SpeechConfig`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?preserve-view=true&view=azure-node-latest) de plusieurs façons :
 
 * Avec un abonnement : transmettez une clé et la région associée.
 * Avec un point de terminaison : transmettez un point de terminaison de service Speech. Une clé ou un jeton d’autorisation est facultatif.
 * Avec un hôte : transmettez une adresse d’hôte. Une clé ou un jeton d’autorisation est facultatif.
 * Avec un jeton d’autorisation : transmettez un jeton d’autorisation et la région associée.
 
-Dans cet exemple, vous allez créer un objet [`SpeechConfig`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?view=azure-node-latest) à partir d’une clé d’abonnement et d’une région. Consultez la page de [prise en charge des régions](https://docs.microsoft.com/azure/cognitive-services/speech-service/regions#speech-sdk) pour rechercher l’identificateur de votre région. Vous pouvez aussi créer un code réutilisable de base à utiliser pour le reste de cet article, que vous modifiez pour différentes personnalisations.
+Dans cet exemple, vous allez créer un objet [`SpeechConfig`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?preserve-view=true&view=azure-node-latest) à partir d’une clé d’abonnement et d’une région. Pour obtenir ces informations d’identification, suivez les étapes indiquées dans [Essayer le service Speech gratuitement](../../../overview.md#try-the-speech-service-for-free). Vous pouvez aussi créer un code réutilisable de base à utiliser pour le reste de cet article, que vous modifiez pour différentes personnalisations.
 
 ```javascript
 function synthesizeSpeech() {
     const speechConfig = SpeechConfig.fromSubscription("YourSubscriptionKey", "YourServiceRegion");
 }
+
+synthesizeSpeech();
 ```
 
 ## <a name="synthesize-speech-to-a-file"></a>Synthétiser la voix dans un fichier
 
-Ensuite, vous allez créer un objet [`SpeechSynthesizer`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer?view=azure-node-latest), qui exécute des conversions de synthèse vocale et des sorties vers des haut-parleurs, des fichiers ou d’autres flux de sortie. [`SpeechSynthesizer`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer?view=azure-node-latest) accepte en tant que paramètres l’objet [`SpeechConfig`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?view=azure-node-latest) créé à l’étape précédente et un objet [`AudioConfig`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/audioconfig?view=azure-node-latest) qui spécifie la façon dont les résultats de sortie doivent être gérés.
+Ensuite, vous allez créer un objet [`SpeechSynthesizer`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer?preserve-view=true&view=azure-node-latest), qui exécute des conversions de synthèse vocale et des sorties vers des haut-parleurs, des fichiers ou d’autres flux de sortie. [`SpeechSynthesizer`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesizer?preserve-view=true&view=azure-node-latest) accepte en tant que paramètres l’objet [`SpeechConfig`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechconfig?preserve-view=true&view=azure-node-latest) créé à l’étape précédente et un objet [`AudioConfig`](/javascript/api/microsoft-cognitiveservices-speech-sdk/audioconfig?preserve-view=true&view=azure-node-latest) qui spécifie la façon dont les résultats de sortie doivent être gérés.
 
 Pour commencer, créez un `AudioConfig` pour écrire automatiquement la sortie dans un fichier `.wav` à l’aide de la fonction statique `fromAudioFileOutput()`.
 
@@ -111,12 +118,11 @@ function synthesizeSpeech() {
                 console.log(JSON.stringify(result));
             }
             synthesizer.close();
-        }
-    },
-    error => {
-        console.log(error);
-        synthesizer.close();
-    });
+        },
+        error => {
+            console.log(error);
+            synthesizer.close();
+        });
 }
 ```
 
@@ -160,7 +166,7 @@ Il est facile d’apporter cette modification à partir de l’exemple précéde
 > [!NOTE]
 > Le fait de transmettre `undefined` pour `AudioConfig`, au lieu de l’omettre comme dans l’exemple de sortie de haut-parleur précédent, n’aura pas pour effet de lire par défaut l’audio sur l’appareil de sortie actuellement actif.
 
-Cette fois, vous allez enregistrer le résultat dans une variable [`SpeechSynthesisResult`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisresult?view=azure-node-latest). La propriété `SpeechSynthesisResult.audioData` retourne un `ArrayBuffer` des données de sortie. Vous pouvez utiliser cet `ArrayBuffer` manuellement.
+Cette fois, vous allez enregistrer le résultat dans une variable [`SpeechSynthesisResult`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisresult?preserve-view=true&view=azure-node-latest). La propriété `SpeechSynthesisResult.audioData` retourne un `ArrayBuffer` des données de sortie. Vous pouvez utiliser cet `ArrayBuffer` manuellement.
 
 ```javascript
 function synthesizeSpeech() {
@@ -193,7 +199,7 @@ La section suivante montre comment personnaliser les attributs de sortie audio, 
 * Le taux d’échantillonnage
 * La profondeur de bits
 
-Pour changer de format audio, utilisez la propriété `speechSynthesisOutputFormat` sur l’objet `SpeechConfig`. Cette propriété attend un `enum` de type [`SpeechSynthesisOutputFormat`](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?view=azure-node-latest), dont vous allez vous servir pour sélectionner le format de sortie. Consultez les documents de référence pour obtenir la [liste des formats audio](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?view=azure-node-latest) disponibles.
+Pour changer de format audio, utilisez la propriété `speechSynthesisOutputFormat` sur l’objet `SpeechConfig`. Cette propriété attend un `enum` de type [`SpeechSynthesisOutputFormat`](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?preserve-view=true&view=azure-node-latest), dont vous allez vous servir pour sélectionner le format de sortie. Consultez les documents de référence pour obtenir la [liste des formats audio](/javascript/api/microsoft-cognitiveservices-speech-sdk/speechsynthesisoutputformat?preserve-view=true&view=azure-node-latest) disponibles.
 
 Il existe diverses options pour les différents types de fichiers, ce qui permet de répondre à vos besoins. Notez que par définition, les formats bruts comme `Raw24Khz16BitMonoPcm` n’incluent pas d’en-têtes audio. N’utilisez les formats bruts que si vous savez que votre implémentation en aval pourra décoder un flux binaire brut ou bien si vous envisagez de créer manuellement des en-têtes en fonction de la profondeur de bits, du taux d’échantillonnage, du nombre de canaux, etc.
 
@@ -230,7 +236,7 @@ Si vous exécutez à nouveau votre programme, un fichier `.wav` est écrit dans 
 Le langage SSML (Speech Synthesis Markup Language) vous permet d’ajuster la tonalité, la prononciation, la vitesse d’élocution, le volume et d’autres éléments de sortie de la synthèse vocale en soumettant vos demandes à partir d’un schéma XML. Cette section présente quelques exemples d’utilisation pratiques, mais pour des indications plus détaillées, consultez l’[article de procédures SSML](../../../speech-synthesis-markup.md).
 
 Pour commencer à utiliser SSML pour la personnalisation, vous allez apporter une modification simple qui change la voix.
-Tout d’abord, créez un fichier XML pour la configuration SSML dans le répertoire racine de votre projet, à savoir `ssml.xml`. L’élément racine est toujours `<speak>`, et le fait d’intégrer le texte dans un élément `<voice>` vous permet de changer la voix à l’aide du paramètre `name`. Cet exemple change la voix en voix masculine de langue anglaise (Royaume-Uni). Notez que cette voix est une voix **standard**, dont le coût et la disponibilité sont différents de ceux des voix **neuronales**. Consultez la [liste complète](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#standard-voices) des voix **standard** prises en charge.
+Tout d’abord, créez un fichier XML pour la configuration SSML dans le répertoire racine de votre projet, à savoir `ssml.xml`. L’élément racine est toujours `<speak>`, et le fait d’intégrer le texte dans un élément `<voice>` vous permet de changer la voix à l’aide du paramètre `name`. Cet exemple change la voix en voix masculine de langue anglaise (Royaume-Uni). Notez que cette voix est une voix **standard** , dont le coût et la disponibilité sont différents de ceux des voix **neuronales**. Consultez la [liste complète](../../../language-support.md#standard-voices) des voix **standard** prises en charge.
 
 ```xml
 <speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="en-US">
@@ -291,10 +297,10 @@ Bien que la sortie fonctionne, vous pouvez y apporter d’autres modifications s
 
 Les voix neuronales sont des algorithmes de synthèse vocale qui reposent sur des réseaux neuronaux profonds. Lorsque vous utilisez une voix neuronale, il est presque impossible de distinguer la voix synthétisée des enregistrements humains. Grâce à la prosodie naturelle quasi humaine et à la bonne articulation des mots, les voix neuronales réduisent considérablement la fatigue d’écoute des utilisateurs qui interagissent avec les systèmes d’intelligence artificielle.
 
-Pour passer à une voix neuronale, remplacez `name` par une des [options de voix neuronale](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#neural-voices). Ensuite, ajoutez un espace de noms XML pour `mstts` et intégrez votre texte dans la balise `<mstts:express-as>`. Utilisez le paramètre `style` pour personnaliser le style vocal. Cet exemple utilise le style vocal `cheerful`, mais essayez de le remplacer par `customerservice` ou `chat` pour voir la différence.
+Pour passer à une voix neuronale, remplacez `name` par une des [options de voix neuronale](../../../language-support.md#neural-voices). Ensuite, ajoutez un espace de noms XML pour `mstts` et intégrez votre texte dans la balise `<mstts:express-as>`. Utilisez le paramètre `style` pour personnaliser le style vocal. Cet exemple utilise le style vocal `cheerful`, mais essayez de le remplacer par `customerservice` ou `chat` pour voir la différence.
 
 > [!IMPORTANT]
-> Les voix neuronales sont **uniquement** prises en charge pour les ressources vocales créées dans les régions *USA Est*, *Asie Sud-Est* et *Europe Ouest*.
+> Les voix neuronales sont **uniquement** prises en charge pour les ressources vocales créées dans les régions *USA Est* , *Asie Sud-Est* et *Europe Ouest*.
 
 ```xml
 <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis"

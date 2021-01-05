@@ -1,19 +1,19 @@
 ---
 title: 'Tutoriel : Créer une application Android'
 description: Dans ce tutoriel, vous allez apprendre à créer une application Android à l’aide d’Azure Spatial Anchors.
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 04/03/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: tutorial
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: e1773ef81a5b727187a9a69ccc7ce7ad0421fb2c
-ms.sourcegitcommit: 940e16ff194d5163f277f98d038833b1055a1a3e
+ms.openlocfilehash: af0d01a20728d2332d4a8d71819f73baf68a65a4
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80246770"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95998382"
 ---
 # <a name="tutorial-step-by-step-instructions-to-create-a-new-android-app-using-azure-spatial-anchors"></a>Tutoriel : Instructions pas à pas pour créer une application Android à l’aide d’Azure Spatial Anchors
 
@@ -117,7 +117,7 @@ Ajoutez maintenant le code suivant à la méthode `onCreate()` de votre `app\jav
 
 Enfin, ajoutez la méthode `handleTap()` suivante pour tout lier ensemble. Une sphère est alors créée et placée là où l’utilisateur a appuyé. Au départ, la sphère est noire, car à cet instant, `this.recommendedSessionProgress` est défini sur zéro. Cette valeur sera ajustée par la suite.
 
-[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=150-158,170-171,174-182,198-199)]
+[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=151-159,171-172,175-183,199-200)]
 
 [Redéployez](#trying-it-out) votre application sur votre appareil pour la vérifier une nouvelle fois. Cette fois, vous pouvez déplacer votre appareil pour permettre à ARCore de commencer à reconnaître votre environnement. Appuyez ensuite sur l’écran pour créer et placer votre sphère noire sur la surface de votre choix.
 
@@ -169,7 +169,7 @@ Ajoutez ensuite les variables de membre suivantes dans votre classe `MainActivit
 
 Ajoutez maintenant la méthode `initializeSession()` suivante au sein de la classe `mainActivity`. Une fois appelée, elle assurera la création et l’initialisation d’une session Azure Spatial Anchors pendant le démarrage de votre application.
 
-[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=89-97,146)]
+[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=89-97,147)]
 
 À présent, raccordez la méthode `initializeSession()` dans la méthode `onCreate()`. De même, veillez à ce que les images issues de votre flux de caméra sont envoyées au kit SDK Azure Spatial Anchors à des fins de traitement.
 
@@ -177,17 +177,17 @@ Ajoutez maintenant la méthode `initializeSession()` suivante au sein de la clas
 
 Enfin, ajoutez le code suivant à votre méthode `handleTap()`. Ce code a pour effet d’attache une ancre spatiale Azure locale à la sphère noire que vous placez dans le monde réel.
 
-[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=150-158,170-182,198-199&highlight=12-13)]
+[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=151-159,171-183,199-200&highlight=12-13)]
 
 [Redéployez](#trying-it-out) une nouvelle fois votre application. Déplacez votre appareil, appuyez sur l’écran, puis placez une sphère noire. Cette fois, votre code crée une ancre spatiale Azure locale et l’attache à votre sphère.
 
-Avant de poursuivre, vous devez créer un identificateur et une clé de compte Azure Spatial Anchors si vous n’en possédez pas déjà. Pour vous en procurer, suivez les instructions dans la section ci-dessous.
+Avant de poursuivre, vous devez créer un compte Azure Spatial Anchors pour obtenir l’identificateur, la clé et le domaine du compte, si vous ne les avez pas. Pour vous en procurer, suivez les instructions dans la section ci-dessous.
 
 [!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
 
 ## <a name="upload-your-local-anchor-into-the-cloud"></a>Charger votre ancre locale dans le cloud
 
-Une fois que vous disposez de l’identificateur et de la clé du compte Azure Spatial Anchors, revenez dans `app\java\<PackageName>\MainActivity` et ajoutez-y les importations suivantes :
+Une fois que vous disposez de l’identificateur, de la clé et du domaine du compte Azure Spatial Anchors, revenez dans `app\java\<PackageName>\MainActivity` et ajoutez-y les importations suivantes :
 
 [!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=40-45&highlight=3-6)]
 
@@ -195,9 +195,9 @@ Ajoutez ensuite les variables de membre suivantes dans votre classe `MainActivit
 
 [!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=60-65&highlight=3-6)]
 
-À présent, ajoutez le code suivant à votre méthode `initializeSession()`. En premier lieu, ce code permet à votre application de surveiller la progression du kit SDK Azure Spatial Anchors à mesure qu’il collecte des images à partir de votre flux de caméra. Pendant ce temps, la couleur de votre sphère commence à passer de sa couleur noire initiale au gris. Ensuite, elle prend la couleur blanche une fois que le nombre d’images collectées est suffisant pour soumettre l’ancre au cloud. En second lieu, ce code fournit les informations d’identification nécessaires pour communiquer avec le back-end cloud. Voici où vous allez configurer votre application pour qu’elle utilise l’identificateur et la clé de votre compte. Vous les avez copiés dans un éditeur de texte pendant la [configuration de la ressource Spatial Anchors](#create-a-spatial-anchors-resource).
+À présent, ajoutez le code suivant à votre méthode `initializeSession()`. En premier lieu, ce code permet à votre application de surveiller la progression du kit SDK Azure Spatial Anchors à mesure qu’il collecte des images à partir de votre flux de caméra. Pendant ce temps, la couleur de votre sphère commence à passer de sa couleur noire initiale au gris. Ensuite, elle prend la couleur blanche une fois que le nombre d’images collectées est suffisant pour soumettre l’ancre au cloud. En second lieu, ce code fournit les informations d’identification nécessaires pour communiquer avec le back-end cloud. Voici où vous allez configurer votre application pour qu’elle utilise l’identificateur, la clé et le domaine de votre compte. Vous les avez copiés dans un éditeur de texte pendant la [configuration de la ressource Spatial Anchors](#create-a-spatial-anchors-resource).
 
-[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=89-120,142-146&highlight=11-36)]
+[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=89-120,142-148&highlight=11-37)]
 
 Ensuite, ajoutez la méthode `uploadCloudAnchorAsync()` suivante à l’intérieur de votre classe `mainActivity`. Une fois appelée, cette méthode attend de manière asynchrone que le nombre d’images collectées à partir de votre appareil soit suffisant. Dès lors, elle fait passer la couleur de votre sphère au jaune et commence à charger l’ancre spatiale Azure locale dans le cloud. À l’issue du chargement, le code retourne un identificateur d’ancre.
 
@@ -205,7 +205,7 @@ Ensuite, ajoutez la méthode `uploadCloudAnchorAsync()` suivante à l’intérie
 
 Enfin, raccordez tout ensemble. Dans votre méthode `handleTap()`, ajoutez le code suivant. Il appelle la méthode `uploadCloudAnchorAsync()` aussitôt que la sphère est créée. Une fois la méthode retournée, le code ci-dessous apporte une dernière mise à jour à la sphère en lui donnant la couleur bleue.
 
-[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=150-158,170-199&highlight=24-37)]
+[!code-java[MainActivity](../../../includes/spatial-anchors-new-android-app-finished.md?range=151-159,171-200&highlight=24-37)]
 
 [Redéployez](#trying-it-out) une nouvelle fois votre application. Déplacez votre appareil, appuyez sur l’écran, puis placez la sphère. Cette fois, la sphère change de couleur, passant du noir à blanc à mesure que les images de la caméra sont collectées. Une fois que le nombre d’images est suffisant, la sphère devient jaune et le chargement cloud débute. À l’issue du chargement, la sphère passe au bleu. Si vous le souhaitez, vous pouvez aussi utiliser la fenêtre `Logcat` dans Android Studio pour analyser les messages de journal envoyés par votre application. Par exemple, ces messages peuvent indiquer la progression de la session pendant les captures d’images ou l’identificateur d’ancre retourné par le cloud à l’issue du chargement.
 

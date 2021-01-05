@@ -1,0 +1,57 @@
+- name: Metrics Advisor
+  href: index.yml
+- name: Vue d’ensemble
+  expanded: true
+  items:
+    - name: "Qu’est-ce que Metrics Advisor\_?"
+      href: overview.md
+    - name: Nouveautés
+      href: whats-new.md
+- name: Démarrages rapides
+  items:
+    - name: Utiliser le portail web
+      href: quickstarts/web-portal.md
+    - name: Utiliser l’API REST ou les bibliothèques clientes
+      href: quickstarts/rest-api-and-client-library.md
+- name: Articles Comment faire
+  items:
+    - name: Intégrer vos données
+      href: how-tos/onboard-your-data.md
+    - name: Connecter différentes sources de flux de données
+      href: data-feeds-from-different-sources.md
+    - name: Gérer des flux de données
+      href: how-tos/manage-data-feeds.md
+    - name: Configurer des métriques et affiner la configuration de la détection
+      href: how-tos/configure-metrics.md
+    - name: Configurer des alertes et obtenir des notifications à l’aide d’un hook
+      href: how-tos/alerts.md
+    - name: Diagnostiquer un incident
+      href: how-tos/diagnose-incident.md
+    - name: Ajuster la détection des anomalies à l’aide de commentaires
+      href: how-tos/anomaly-feedback.md
+    - name: Créer un graphe de métriques
+      href: how-tos/metrics-graph.md
+- name: Informations de référence
+  items:
+    - name: Glossaire
+      href: glossary.md
+    - name: Questions fréquentes (FAQ)
+      href: faq.md
+    - name: API Metrics Advisor
+      href: 'https://go.microsoft.com/fwlink/?linkid=2141634'
+    - name: Informations de référence sur Azure CLI
+      href: /cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list
+    - name: Référence sur PowerShell
+      href: /powershell/module/azurerm.cognitiveservices/
+- name: Ressources
+  items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/metrics-advisor/context/context
+    - name: Tarifs
+      href: 'http://go.microsoft.com/fwlink/?LinkID=761229'
+    - name: Disponibilité régionale
+      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+    - name: Conformité
+      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Chiffrement
+      href: encryption.md

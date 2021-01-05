@@ -8,18 +8,16 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: abjork
-ms.openlocfilehash: 40460b58ede0ca0da8fe25475906bdbe41bfffe0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8f329b6377915a3df6e3f3e212cbd8d41f9ed80d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80158280"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90017658"
 ---
 # <a name="how-to-use-analytics-to-analyze-device-data"></a>Guide pratique pour utiliser une analytique permettant d’analyser les données des appareils
 
 *Cet article s’applique aux opérateurs, aux créateurs et aux administrateurs.*
-
-
 
 Azure IoT Central fournit des fonctionnalités d’analyse enrichies pour analyser les tendances historiques et mettre en corrélation différentes données de télémétrie de vos appareils. Pour commencer, accédez à la zone **Analytique** du volet de gauche.
 
@@ -86,10 +84,12 @@ Une fois que vous avez interrogé vos données, vous pouvez commencer à les vis
 
   ![Zoom sur les données](media/howto-create-analytics/zoom.png)
 
-Sous les points de suspension, il y a plus de contrôles de graphique pour interagir avec les données.
+Sous les points de suspension, il y a plus de contrôles de graphique pour interagir avec les données :
 
 - **Afficher la grille :** vos résultats sont disponibles sous forme de tableau, ce qui vous permet de voir la valeur de chaque point de données.
 
-- **Placer un marqueur :** Le contrôle ’Placer un marqueur’ permet d’ancrer certains points de données sur le graphique. Il est utile lorsque vous tentez de comparer des données pour plusieurs lignes sur différentes périodes.
+- **Télécharger au format CSV :** Vos résultats peuvent être exportés sous la forme d’un fichier de valeurs séparées par des virgules (CSV). Ce fichier CSV contient des données pour chaque appareil. Les résultats sont exportés en utilisant l’intervalle et le délai spécifiés. 
+
+- **Placer un marqueur :** Le contrôle « Placer un marqueur » permet d’ancrer certains points de données sur le graphique. Il est utile lorsque vous tentez de comparer des données pour plusieurs lignes sur différentes périodes.
 
   ![Affichage du mode grille pour votre analytique](media/howto-create-analytics/additionalchartcontrols.png)

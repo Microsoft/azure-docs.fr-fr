@@ -1,17 +1,17 @@
 ---
 title: Règles de pare-feu - Azure Database for MariaDB
 description: Découvrez comment utiliser des règles de pare-feu pour activer les connexions à votre serveur Azure Database pour MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: 743e3f50d747993250399493d97fc2becab19319
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 7/17/2020
+ms.openlocfilehash: 452ef4787812dbdf88eb541cf5a164f2888dddcc
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79532040"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905432"
 ---
 # <a name="azure-database-for-mariadb-server-firewall-rules"></a>Règles de pare-feu d’un serveur Azure Database for MariaDB
 Le pare-feu empêche tout accès à votre serveur de base de données jusqu’à ce que vous spécifiiez les ordinateurs qui disposent d’autorisations. Le pare-feu octroie l’accès au serveur en fonction de l’adresse IP d’origine de chaque demande.
@@ -56,9 +56,9 @@ Voir aussi [Créer et gérer des règles de pare-feu Azure Database for MariaDB 
 ## <a name="troubleshooting-firewall-issues"></a>Résolution des problèmes de pare-feu
 Tenez compte des points suivants quand l’accès au service de serveur Azure Database for MariaDB présente un comportement anormal :
 
-* **Les modifications apportées à la liste verte n’ont pas encore pris effet :** jusqu’à cinq minutes peuvent s’écouler avant que les changements apportés à la configuration du pare-feu du serveur Azure Database for MariaDB prennent effet.
+* **Les modifications apportées à la liste d’approbation n’ont pas encore pris effet :** jusqu’à cinq minutes peuvent s’écouler avant que les modifications apportées à la configuration du pare-feu du serveur Azure Database for MariaDB ne soient effectives.
 
-* **La connexion n’est pas autorisée ou un mot de passe incorrect a été utilisé :** si une connexion n’a pas d’autorisations sur le serveur Azure Database for MariaDB ou si le mot de passe utilisé est incorrect, la connexion au serveur Azure Database for MariaDB est refusée. Créer un paramètre de pare-feu permet uniquement aux clients de tenter de se connecter à votre serveur ; chaque client doit fournir les informations d’identification de sécurité nécessaires.
+* **La connexion n’est pas autorisée ou un mot de passe incorrect a été utilisé :** si une connexion n’a pas d’autorisations sur le serveur Azure Database for MariaDB ou que le mot de passe est incorrect, la connexion au serveur Azure Database for MariaDB est refusée. Créer un paramètre de pare-feu permet uniquement aux clients de tenter de se connecter à votre serveur ; chaque client doit fournir les informations d’identification de sécurité nécessaires.
 
 * **Adresse IP dynamique :** si vous avez une connexion Internet avec un adressage IP dynamique et que le pare-feu demeure infranchissable, vous pouvez essayer l’une des solutions suivantes :
 
@@ -67,6 +67,12 @@ Tenez compte des points suivants quand l’accès au service de serveur Azure Da
    * Obtenez un adressage IP statique à la place pour vos ordinateurs clients, puis ajoutez les adresses IP en tant que règles de pare-feu.
 
 * **L’adresse IP du serveur semble être publique :** les connexions au serveur Azure Database for MariaDB sont routées par le biais d’une passerelle Azure accessible publiquement. Toutefois, l’adresse IP réelle du serveur est protégée par le pare-feu. Pour plus d’informations, consultez l’article [Architecture de connectivité](concepts-connectivity-architecture.md). 
+
+* **Impossible de se connecter à partir d’une ressource Azure avec l’adresse IP autorisée :** vérifiez si le point de terminaison de service **Microsoft.Sql** est activé pour le sous-réseau à partir duquel vous vous connectez. Si **Microsoft.Sql** est activé, il signifie que vous souhaitez utiliser uniquement les [règles de point de terminaison de service de réseau virtuel](concepts-data-access-security-vnet.md) sur ce sous-réseau.
+
+   Par exemple, vous pouvez voir l’erreur suivante si vous vous connectez à partir d’une machine virtuelle Azure dans un sous-réseau où **Microsoft.Sql** est activé, mais qui n’a pas de règle de réseau virtuel correspondante : `FATAL: Client from Azure Virtual Networks is not allowed to access the server`.
+
+* **La règle de pare-feu n’est pas disponible pour le format IPv6 :** Les règles de pare-feu doivent être au format IPv4. Si vous spécifiez des règles de pare-feu au format IPv6, l’erreur de validation s’affiche.
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Créer et gérer des règles de pare-feu Azure Database for MariaDB à l’aide du portail Azure](./howto-manage-firewall-portal.md)

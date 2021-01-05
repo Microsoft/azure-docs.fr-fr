@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Way We Do | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Way We Do.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 84fc4f36-ecd1-42c6-8a70-cb0f3dc15655
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 06/20/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: faa23f61e5a213c492a7fb51bfc5b108e5c77946
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0205617198ec8e57cb891d2415d2b5413a945f1b
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67310403"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608933"
 ---
 # <a name="tutorial-integrate-way-we-do-with-azure-active-directory"></a>Tutoriel : Intégrer Way We Do à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Way We Do à Azure Active Di
 * Permettre à vos utilisateurs de se connecter automatiquement à Way We Do avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -122,26 +117,26 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     ![Enregistrer Way We Do](./media/waywedo-tutorial/tutorial_waywedo_save.png)
 
-    a. Cliquez sur le bouton bascule de **Turn on single sign-on** (Activer l’authentification unique) pour choisir **Yes** (Oui) et ainsi activer l’authentification unique.
+    1. Cliquez sur le bouton bascule de **Turn on single sign-on** (Activer l’authentification unique) pour choisir **Yes** (Oui) et ainsi activer l’authentification unique.
 
-    b. Dans la zone de texte **Single sign-on name** (Nom de l’authentification unique), entrez votre nom.
+    1. Dans la zone de texte **Single sign-on name** (Nom de l’authentification unique), entrez votre nom.
 
-    c. Dans la zone de texte **Entity ID**, collez l’**Identificateur Azure AD** que vous avez copié dans le portail Azure.
+    1. Dans la zone de texte **Entity ID**, collez l’**Identificateur Azure AD** que vous avez copié dans le portail Azure.
 
-    d. Dans la zone de texte **SAML SSO URL** (URL d’authentification unique SAML), collez la valeur **URL de connexion** que vous avez copiée dans le portail Azure.
+    1. Dans la zone de texte **SAML SSO URL** (URL d’authentification unique SAML), collez la valeur **URL de connexion** que vous avez copiée dans le portail Azure.
 
-    e. Chargez le certificat en cliquant sur le bouton **Select** (sélectionner) situé en regard de **Certificate** (Certificat).
+    1. Chargez le certificat en cliquant sur le bouton **Select** (sélectionner) situé en regard de **Certificate** (Certificat).
 
-    f. **Paramètres facultatifs** -
-    
-    * Enable Passwords (Activer les mots de passe) - Lorsque cette option est désactivée, le mot de passe habituel fonctionne pour Way We Do de telle sorte que les utilisateurs n’ont pas d’autre choix que celui d’utiliser l’authentification unique.
+    1. **Paramètres facultatifs** -
 
-    * Enable Auto-provisioning (Activer le provisionnement automatique) - Lorsque cette option est activée, l’adresse e-mail utilisée pour l’authentification est automatiquement comparée à la liste des utilisateurs dans Way We Do. Si l’adresse e-mail ne correspond pas à un utilisateur actif dans Way We Do, un nouveau compte d’utilisateur pour la personne se connectant est ajouté, dans lequel il lui est demandé de renseigner les informations manquantes.
+        * Enable Passwords (Activer les mots de passe) - Lorsque cette option est désactivée, le mot de passe habituel fonctionne pour Way We Do de telle sorte que les utilisateurs n’ont pas d’autre choix que celui d’utiliser l’authentification unique.
 
-      > [!NOTE]
-      > Les utilisateurs ajoutés via l’authentification unique sont ajoutés en tant qu’utilisateurs généraux et aucun rôle ne leur est attribué dans le système. Un administrateur est en mesure d’accéder et de modifier son rôle de sécurité en tant qu’éditeur ou administrateur, il peut également affecter un ou plusieurs rôles d’organigramme.
+        * Enable Auto-provisioning (Activer le provisionnement automatique) - Lorsque cette option est activée, l’adresse e-mail utilisée pour l’authentification est automatiquement comparée à la liste des utilisateurs dans Way We Do. Si l’adresse e-mail ne correspond pas à un utilisateur actif dans Way We Do, un nouveau compte d’utilisateur pour la personne se connectant est ajouté, dans lequel il lui est demandé de renseigner les informations manquantes.
 
-    g. Cliquez sur **Save** pour enregistrer vos paramètres.
+          > [!NOTE]
+          > Les utilisateurs ajoutés via l’authentification unique sont ajoutés en tant qu’utilisateurs généraux et aucun rôle ne leur est attribué dans le système. Un administrateur est en mesure d’accéder et de modifier son rôle de sécurité en tant qu’éditeur ou administrateur, il peut également affecter un ou plusieurs rôles d’organigramme.
+
+    1. Cliquez sur **Save** pour enregistrer vos paramètres.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
@@ -182,12 +177,12 @@ Dans cette section, l’utilisateur Britta Simon est créé dans Way We Do. Way 
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Quand vous sélectionnez la vignette Way We Do dans le panneau d’accès, vous devez être automatiquement connecté à l’application Way We Do pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette Way We Do dans le panneau d’accès, vous devez être automatiquement connecté à l’application Way We Do pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

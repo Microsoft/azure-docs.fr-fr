@@ -11,14 +11,19 @@ ms.subservice: bing-web-search
 ms.topic: conceptual
 ms.date: 07/08/2019
 ms.author: aahi
-ms.openlocfilehash: 630b86f55a537d109c851cb585cfccc34d229f83
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a85c5b2333418367742678a529b69c95164eda53
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74110642"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350481"
 ---
 # <a name="resize-and-crop-thumbnail-images"></a>Redimensionner et rogner les images miniatures
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Certaines réponses des API Recherche Bing incluent des URL vers les images miniatures affichées par Bing, que vous pouvez redimensionner et rogner, et qui peuvent contenir des paramètres de requête. Par exemple :
 

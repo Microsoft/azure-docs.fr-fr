@@ -5,16 +5,16 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 04/10/2020
+ms.date: 11/18/2020
 ms.author: victorh
-ms.openlocfilehash: 93677b3e473ab825665fed5590ac345a8cfcc300
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 01f7aa61d3bfb3c712320bbf138160a7ff8197c7
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81113451"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95502191"
 ---
-# <a name="azure-firewall-rule-processing-logic"></a>Logique de traitement des règles du service Pare-feu Azure
+# <a name="configure-azure-firewall-rules"></a>Configurer des règles de pare-feu Azure
 Vous pouvez configurer des règles NAT, des règles de réseau et des règles d'application sur Pare-feu Azure. Les collections de règles sont traitées en fonction du type de règle par ordre de priorité, des nombres inférieurs aux nombres supérieurs, compris entre 100 et 65 000. Un nom de règle de collection peut contenir uniquement des lettres, des chiffres, des traits de soulignement, des points ou des traits d’union. Il doit commencer par une lettre ou un chiffre et se terminer par une lettre, un chiffre ou un trait de soulignement. La longueur maximale du nom est limitée à 80 caractères.
 
 Le mieux est de commencer par espacer les numéros de priorité de la collection de règles par incréments de 100 (100, 200, 300, etc.). Vous avez ainsi de l’espace pour ajouter d’autres collections de règles si nécessaire.
@@ -26,7 +26,13 @@ Le mieux est de commencer par espacer les numéros de priorité de la collection
 
 ### <a name="network-rules-and-applications-rules"></a>Règles de réseau et règles d’application
 
-Si vous configurez des règles de réseau et des règles d'application, les règles de réseau sont appliquées par ordre de priorité avant les règles d'application. Ce processus prend fin dès qu’une règle est exécutée. Ainsi, si une correspondance est trouvée dans une règle de réseau, aucune autre règle n'est traitée.  En l’absence de correspondance avec les règles de réseau, si le protocole est HTTP, HTTPS ou MSSQL, le paquet est évalué par les règles d’application par ordre de priorité. Si aucune correspondance n’est trouvée, le paquet est évalué par rapport à la [collection de règles de l’infrastructure](infrastructure-fqdns.md). S’il n’existe toujours pas de correspondance, le paquet est refusé par défaut.
+Si vous configurez des règles de réseau et des règles d'application, les règles de réseau sont appliquées par ordre de priorité avant les règles d'application. Ce processus prend fin dès qu’une règle est exécutée. Ainsi, si une correspondance est trouvée dans une règle de réseau, aucune autre règle n'est traitée.  En l’absence de correspondance avec les règles de réseau, si le protocole est HTTP, HTTPS ou MSSQL, le paquet est évalué par les règles d’application, par ordre de priorité. Si aucune correspondance n’est trouvée, le paquet est évalué par rapport à la [collection de règles de l’infrastructure](infrastructure-fqdns.md). S’il n’existe toujours pas de correspondance, le paquet est refusé par défaut.
+
+#### <a name="network-rule-protocol"></a>Protocole de règle de réseau
+
+Les règles de réseau peuvent être configurées pour le protocole **TCP**, **UDP**, **ICMP** ou n’importe quel protocole IP (**N’importe lequel**). La valeur de protocole IP « N’importe lequel » inclut tous les protocoles IP tels que définis dans le document sur les [numéros de protocole IANA (Internet Assigned Numbers Authority)](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml). Si un port de destination est configuré de manière explicite, la règle est traduite en règle TCP+UDP.
+
+Avant le 9 novembre 2020 **N’importe lequel** signifiait **TCP**, **UDP** ou **ICMP**. Par conséquent, vous avez peut-être configuré une règle avant cette date avec Protocole = N’importe lequel et les ports de destination = ' * '. Si vous n’avez pas réellement l’intention d’autoriser n’importe quel protocole IP comme actuellement défini, modifiez la règle pour configurer explicitement le ou les protocoles souhaités (TCP, UDP ou ICMP).
 
 ## <a name="inbound-connectivity"></a>Connectivité entrante
 

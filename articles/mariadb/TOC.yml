@@ -1,4 +1,4 @@
-- name: Documents de Azure Database pour MariaDB
+- name: Documentation Azure DB for MariaDB
   href: index.yml
 - name: Vue d’ensemble
   items:
@@ -6,6 +6,10 @@
       href: overview.md
     - name: "Quelle option MariaDB dois-je choisir\_?"
       href: select-right-deployment-type.md
+    - name: Mises à jour de service
+      items:
+        - name: Expiration du certificat racine SSL
+          href: concepts-certificate-rotation.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -38,9 +42,6 @@
   items:
     - name: Azure CLI
       href: sample-scripts-azure-cli.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
     - name: Base de données et serveurs
@@ -57,7 +58,7 @@
           href: concepts-pricing-tiers.md
         - name: Prépayer pour une capacité de réserve
           href: concept-reserved-pricing.md
-        - name: limites
+        - name: Limites
           href: concepts-limits.md
     - name: Accès aux données et sécurité
       items:
@@ -75,8 +76,13 @@
           href: concepts-data-access-security-private-link.md
         - name: Protection avancée contre les menaces
           href: concepts-data-access-and-security-threat-protection.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
         - name: Base de référence de la sécurité
           href: security-baseline.md
+    - name: Maintenance planifiée
+      href: concepts-planned-maintenance-notification.md
     - name: Continuité de l’activité
       items:
         - name: Introduction à la continuité de l’activité
@@ -98,6 +104,8 @@
           href: concepts-query-performance-insight.md
         - name: Recommandations sur les performances
           href: concepts-performance-recommendations.md
+        - name: Paramètres de serveur
+          href: concepts-server-parameters.md
     - name: Développement
       items:
         - name: Compatibilité des pilotes et des outils
@@ -139,9 +147,17 @@
         - name: Créer des utilisateurs
           href: howto-create-users.md
         - name: Chaînes de connexion
-          href: howto-connection-string.md
+          items:
+            - name: Connecter des applications
+              href: howto-connection-string.md
+            - name: Azure PowerShell
+              href: howto-connection-string-powershell.md
         - name: Configuration du chiffrement SSL
           href: howto-configure-ssl.md
+        - name: Configurer TLS
+          href: howto-tls-configurations.md
+        - name: Se connecter avec la redirection
+          href: howto-redirection.md
     - name: Configurer les paramètres du serveur
       items:
         - name: Portail Azure
@@ -220,6 +236,10 @@
           href: howto-restart-server-cli.md
         - name: Azure PowerShell
           href: howto-restart-server-powershell.md
+    - name: Déplacer d’une région à l’autre
+      items:
+        - name: Portail Azure
+          href: howto-move-regions-portal.md
 - name: Informations de référence
   items:
     - name: Azure CLI
@@ -230,6 +250,9 @@
       href: /azure/templates/microsoft.dbformariadb/allversions
     - name: Procédures stockées de gestion
       href: reference-stored-procedures.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Modèles de déploiement
@@ -239,7 +262,7 @@
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/mariadb/'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-database-mariadb.html'
+      href: /answers/topics/azure-database-mariadb.html
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-database-mariadb'
     - name: Demander une fonctionnalité

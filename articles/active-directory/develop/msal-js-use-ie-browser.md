@@ -13,14 +13,14 @@ ms.date: 05/16/2019
 ms.author: nacanuma
 ms.reviewer: saeeda
 ms.custom: aaddev
-ms.openlocfilehash: c4f3c4153e1404a5576427be7ef218f5a669387e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 633166f3bb46212991920d6720737f8268b3f401
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76695855"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87026852"
 ---
-# <a name="known-issues-on-internet-explorer-and-microsoft-edge-browsers-msaljs"></a>Problèmes connus sur les navigateurs Internet Explorer et Microsoft Edge (MSAL.js)
+# <a name="known-issues-on-internet-explorer-browsers-msaljs"></a>Problèmes connus sur les navigateurs Internet Explorer (MSAL.js)
 
 La bibliothèque d’authentification Microsoft pour JavaScript (MSAL.js) est générée pour [JavaScript ES5](https://fr.wikipedia.org/wiki/ECMAScript#ECMAScript_Edition_5_.28ES5.29) de manière à pouvoir s’exécuter dans Internet Explorer. Toutefois, il existe quelques éléments à connaître.
 

@@ -15,12 +15,12 @@ ms.date: 02/18/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ac09fb3faf55be6c07a1e0a88b6e2032c9ab8ce
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1fff90777c63820b54a1cb37156021c894de19c8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78299327"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89226928"
 ---
 # <a name="understand-the-azure-ad-schema"></a>Comprendre le schéma Azure AD
 Dans Azure Active Directory (Azure AD), un objet (par exemple, un annuaire) est une construction de données globale programmatique qui représente des éléments, tels que des utilisateurs, des groupes et des contacts. Lorsque vous créez un utilisateur ou un contact dans Azure AD, vous créez une instance de cet objet. Ces instances peuvent être différenciées en fonction de leurs propriétés.
@@ -51,7 +51,7 @@ Par exemple, s’il existait un attribut e-mail "john.smith@contoso.com" et que 
 * **ENTRÉE** (e-mail) : "john.smith@contoso.com"
 * **SORTIE** : "john.smith"
 
-Pour plus d’informations sur l’écriture d’expressions personnalisées et sur la syntaxe, consultez [Écriture d’expressions pour les mappages d’attributs dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/manage-apps/functions-for-customizing-application-data).
+Pour plus d’informations sur l’écriture d’expressions personnalisées et sur la syntaxe, consultez [Écriture d’expressions pour les mappages d’attributs dans Azure Active Directory](../app-provisioning/functions-for-customizing-application-data.md).
 
 Le tableau suivant liste certains attributs courants et la façon dont ils sont synchronisés avec Azure AD.
 

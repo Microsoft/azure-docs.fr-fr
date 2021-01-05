@@ -2,19 +2,20 @@
 title: Afficher des éléments mathématiques dans le lecteur immersif
 titleSuffix: Azure Cognitive Services
 description: Cet article vous explique comment afficher des éléments mathématiques dans le lecteur immersif.
-author: pasta
+author: nitinme
 manager: guillasi
 ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: conceptual
 ms.date: 01/14/2020
-ms.author: pasta
-ms.openlocfilehash: e01cc9e8cedb6c38da0b56e04419c706d5d0566e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: nitinme
+ms.custom: devx-track-js
+ms.openlocfilehash: 75b748604e8faa502970ac71e3fec4fae2774c19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75946032"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91334512"
 ---
 # <a name="how-to-display-math-in-the-immersive-reader"></a>Guide pratique pour afficher des éléments mathématiques dans le lecteur immersif
 

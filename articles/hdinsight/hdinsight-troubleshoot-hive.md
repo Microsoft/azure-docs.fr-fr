@@ -8,12 +8,12 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.topic: troubleshooting
 ms.date: 08/15/2019
-ms.openlocfilehash: 02247adb9852a72b386feb2ef0924b0f1b3d6277
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f1a26e3323e4d1db2e9b2bda9afaa2756307749b
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75895231"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93288960"
 ---
 # <a name="troubleshoot-apache-hive-by-using-azure-hdinsight"></a>Résolution de problèmes Apache Hive à l’aide d’Azure HDInsight
 
@@ -120,17 +120,17 @@ Le code présenté dans les étapes de résolution suppose que les chemins de do
    Vous devez fournir un exemple de programme comme premier argument.
 
    Noms de programme valides :
-    - **ContainerReuseAnalyzer**: Imprimer les détails de réutilisation du conteneur dans un DAG
-    - **CriticalPath**: Trouver le chemin critique d’un DAG
-    - **LocalityAnalyzer**: Imprimer les détails de localité dans un DAG
-    - **ShuffleTimeAnalyzer**: Analyser les détails de délai de lecture aléatoire dans un DAG
-    - **SkewAnalyzer**: Analyser les détails d’asymétrie dans un DAG
-    - **SlowNodeAnalyzer**: Imprimer les détails des nœuds dans un DAG
-    - **SlowTaskIdentifier**: Imprimer les détails des tâches lentes dans un DAG
-    - **SlowestVertexAnalyzer**: Imprimer les détails des données vertex les plus lentes dans un DAG
-    - **SpillAnalyzer**: Imprimer les détails de dépassement dans un DAG
-    - **TaskConcurrencyAnalyzer**: Imprimer les détails de simultanéité des tâches dans un DAG
-    - **VertexLevelCriticalPathAnalyzer**: Trouver le chemin critique au niveau des données vertex dans un DAG
+    - **ContainerReuseAnalyzer** : Imprimer les détails de réutilisation du conteneur dans un DAG
+    - **CriticalPath** : Trouver le chemin critique d’un DAG
+    - **LocalityAnalyzer** : Imprimer les détails de localité dans un DAG
+    - **ShuffleTimeAnalyzer** : Analyser les détails de délai de lecture aléatoire dans un DAG
+    - **SkewAnalyzer** : Analyser les détails d’asymétrie dans un DAG
+    - **SlowNodeAnalyzer** : Imprimer les détails des nœuds dans un DAG
+    - **SlowTaskIdentifier** : Imprimer les détails des tâches lentes dans un DAG
+    - **SlowestVertexAnalyzer** : Imprimer les détails des données vertex les plus lentes dans un DAG
+    - **SpillAnalyzer** : Imprimer les détails de dépassement dans un DAG
+    - **TaskConcurrencyAnalyzer** : Imprimer les détails de simultanéité des tâches dans un DAG
+    - **VertexLevelCriticalPathAnalyzer** : Trouver le chemin critique au niveau des données vertex dans un DAG
 
 ### <a name="additional-reading"></a>Documentation supplémentaire
 
@@ -163,10 +163,4 @@ Il existe deux façons de collecter les données de DAG Tez :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-- Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-- Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-- Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

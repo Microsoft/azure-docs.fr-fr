@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/16/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bd4743bc38c3b2b4b9495b33535b4b73f48d1372
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bde937adba8d2469390a6cf404f6cce8c5008e87
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71176673"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86144708"
 ---
 # <a name="azure-active-directory-seamless-single-sign-on-technical-deep-dive"></a>Authentification unique transparente Azure Active Directory : Présentation technique approfondie
 
@@ -45,6 +45,9 @@ L’authentification unique transparente s’active via Azure AD Connect comme i
 
 >[!IMPORTANT]
 > Pour des raisons de sécurité, le compte d’ordinateur `AZUREADSSOACC` doit être fortement protégé. Seuls des administrateurs de domaine doivent être en mesure de gérer le compte d’ordinateur. Vérifiez que la délégation Kerberos sur le compte d’ordinateur est désactivée et qu’aucun autre compte dans Active Directory ne dispose d’autorisations de délégation sur le compte d’ordinateur `AZUREADSSOACC`. Stockez le compte d’ordinateur dans une unité d’organisation (UO) où il sera protégé contre les suppressions accidentelles et à laquelle seuls des administrateurs de domaine ont accès. La clé de déchiffrement Kerberos sur le compte d’ordinateur doit également être traitée comme sensible. Il est fortement recommandé que vous [substituiez la clé de déchiffrement Kerberos](how-to-connect-sso-faq.md) du `AZUREADSSOACC` compte d’ordinateur au moins tous les 30 jours.
+
+>[!IMPORTANT]
+> L’authentification unique transparente prend en charge les types de chiffrement AES256_HMAC_SHA1, AES128_HMAC_SHA1 et RC4_HMAC_MD5 pour Kerberos. Il est recommandé de définir le type de chiffrement du compte AzureADSSOAcc$ sur AES256_HMAC_SHA1 ou l’un des types AES plutôt que sur RC4 pour plus de sécurité. Le type de chiffrement est stocké dans l’attribut msDS-SupportedEncryptionTypes du compte de votre annuaire Active Directory.  Si le type de chiffrement du compte AzureADSSOAcc$ a la valeur RC4_HMAC_MD5 et que vous voulez le remplacer par l’un des types de chiffrement AES, veillez d’abord à remplacer la clé de déchiffrement Kerberos du compte AzureADSSOAcc$, comme expliqué dans les [questions fréquentes (FAQ)](how-to-connect-sso-faq.md), sous la question concernée, sans quoi l’authentification unique transparente ne se produira pas.
 
 Une fois la configuration terminée, l’authentification unique transparente fonctionne de la même façon que n’importe quelle autre connexion utilisant l’authentification Windows intégrée (IWA).
 

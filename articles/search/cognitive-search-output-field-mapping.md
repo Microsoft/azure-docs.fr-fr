@@ -8,24 +8,38 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: f0537af684632a08a39e3e681900d62238365073
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 58bb87d5af785d3cffd96f3bd02477f97ed967a9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74280979"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001301"
 ---
 # <a name="how-to-map-ai-enriched-fields-to-a-searchable-index"></a>Guide pratique pour mapper des champs enrichis par IA sur un index pouvant faire l’objet d’une recherche
 
-Dans cet article, vous allez apprendre à mapper des champs d’entrée enrichis sur des champs de sortie dans un index pouvant faire l’objet d’une recherche. Une fois que vous avez [défini un ensemble de compétences](cognitive-search-defining-skillset.md), vous devez mapper les champs de sortie de n’importe quelle compétence qui fournit directement des valeurs sur un champ donné dans votre index de recherche. 
+![Étapes de l'indexeur](./media/cognitive-search-output-field-mapping/indexer-stages-output-field-mapping.png "étapes de l'indexeur")
 
-Les mappages de champs de sortie sont nécessaires au déplacement de contenu de documents enrichis vers l’index.  Le document enrichi est en fait une arborescence d’informations, et même si l’index prend en charge les types complexes, vous pouvez parfois souhaiter transformer les informations de l’arborescence enrichie en un type plus simple (par exemple, un tableau de chaînes). Les mappages de champs de sortie vous permettent d’effectuer des transformations de formes de données en aplatissant les informations.
+Dans cet article, vous allez apprendre à mapper des champs d’entrée enrichis sur des champs de sortie dans un index pouvant faire l’objet d’une recherche. Une fois que vous avez [défini un ensemble de compétences](cognitive-search-defining-skillset.md), vous devez mapper les champs de sortie de n’importe quelle compétence qui fournit directement des valeurs sur un champ donné dans votre index de recherche.
+
+Les mappages de champs de sortie sont nécessaires au déplacement de contenu de documents enrichis vers l’index.  Le document enrichi est en fait une arborescence d’informations, et même si l’index prend en charge les types complexes, vous pouvez parfois souhaiter transformer les informations de l’arborescence enrichie en un type plus simple (par exemple, un tableau de chaînes). Les mappages de champs de sortie vous permettent d’effectuer des transformations de formes de données en aplatissant les informations. Les mappages de champs de sortie se produisent toujours après l’exécution d’un ensemble de compétences, même s’il est possible d’exécuter cette étape sans aucun ensemble de compétences défini.
+
+Exemples de mappages de champs de sortie :
+
+* Dans le cadre de votre ensemble de compétences, vous avez extrait les noms des organisations mentionnées dans chacune des pages de votre document. Vous souhaitez maintenant mapper chacun de ces noms d’organisation dans un champ de votre index de type Edm.Collection(Edm.String).
+
+* Dans le cadre de votre ensemble de compétences, vous avez créé un nouveau nœud appelé « document/translated_text ». Vous souhaitez mapper les informations de ce nœud à un champ spécifique dans votre index.
+
+* Vous n’avez pas d’ensemble de compétences, mais vous indexez un type complexe à partir d’une base de données Cosmos DB. Vous aimeriez accéder à un nœud sur ce type complexe et le mapper à un champ de votre index.
+
+> [!NOTE]
+> Nous avons récemment activé la fonctionnalité de mappage des fonctions sur les mappages de champs de sortie. Pour plus d’informations sur les fonctions de mappage, consultez [Fonctions de mappage de champs](./search-indexer-field-mappings.md#field-mapping-functions).
 
 ## <a name="use-outputfieldmappings"></a>Utiliser outputFieldMappings
+
 Pour mapper les champs, ajoutez `outputFieldMappings` à la définition de l’indexeur comme indiqué ci-dessous :
 
 ```http
-PUT https://[servicename].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
+PUT https://[servicename].search.windows.net/indexers/[indexer name]?api-version=2020-06-30
 api-key: [admin key]
 Content-Type: application/json
 ```
@@ -50,7 +64,10 @@ Le corps de la demande est structuré comme suit :
     "outputFieldMappings": [
         {
             "sourceFieldName": "/document/content/organizations/*/description",
-            "targetFieldName": "descriptions"
+            "targetFieldName": "descriptions",
+            "mappingFunction": {
+                "name": "base64Decode"
+            }
         },
         {
             "sourceFieldName": "/document/content/organizations",

@@ -1,112 +1,85 @@
 ---
-title: 'Tutoriel : Intégration d’Azure Active Directory à RStudio Connect | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et RStudio Connect.
+title: 'Tutoriel : Intégration d’Azure Active Directory à RStudio Connect SAML Authentication | Microsoft Docs'
+description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et RStudio Connect SAML Authentication.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 9bc78022-6d38-4476-8f03-e3ca2551e72e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
-ms.date: 04/04/2019
+ms.date: 09/21/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2bb5dd845b03bd94f0a94db50c01b804cf6f55c2
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 84e8c7fc1d2655ea0685ac79841a9c467bf766cf
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81407093"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96182389"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-rstudio-connect"></a>Tutoriel : Intégration d’Azure Active Directory à RStudio Connect
+# <a name="tutorial-azure-active-directory-integration-with-rstudio-connect-saml-authentication"></a>Tutoriel : Intégration d’Azure Active Directory à RStudio Connect SAML Authentication
 
-Dans ce tutoriel, vous allez apprendre à intégrer RStudio Connect à Azure Active Directory (Azure AD).
-L’intégration de RStudio Connect à Azure AD vous offre les avantages suivants :
+Ce tutoriel explique comment intégrer RStudio Connect SAML Authentication à Azure Active Directory (Azure AD).
+L’intégration de RStudio Connect SAML Authentication à Azure AD vous offre les avantages suivants :
 
-* Dans Azure AD, vous pouvez contrôler qui a accès à RStudio Connect.
-* Vous pouvez permettre à vos utilisateurs de se connecter automatiquement à RStudio Connect (par le biais de l’authentification unique) avec leur compte Azure AD.
+* Dans Azure AD, vous pouvez contrôler qui a accès à RStudio Connect SAML Authentication.
+* Vous pouvez permettre à vos utilisateurs de se connecter automatiquement à RStudio Connect SAML Authentication (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
-
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour configurer l’intégration de RStudio Connect à Azure AD, vous avez besoin des éléments suivants :
+Pour configurer l’intégration de RStudio Connect SAML Authentication à Azure AD, vous avez besoin des éléments suivants :
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un [compte gratuit](https://azure.microsoft.com/free/)
-* RStudio Connect. Il existe une [évaluation gratuite de 45 jours.](https://www.rstudio.com/products/connect/)
+* RStudio Connect SAML Authentication. Il existe une [évaluation gratuite de 45 jours.](https://www.rstudio.com/products/connect/)
 
 ## <a name="scenario-description"></a>Description du scénario
 
 Dans ce didacticiel, vous configurez et testez l’authentification unique Azure AD dans un environnement de test.
 
-* RStudio Connect prend en charge l’authentification unique lancée par le **fournisseur de services et le fournisseur d’identité**
+* RStudio Connect SAML Authentication prend en charge l’authentification unique lancée par le **fournisseur de services et le fournisseur d’identité**
 
-* RStudio Connect prend en charge le provisionnement d’utilisateurs **juste-à-temps**
+* RStudio Connect SAML Authentication prend en charge l’attribution d’utilisateurs **juste-à-temps**
 
-## <a name="adding-rstudio-connect-from-the-gallery"></a>Ajout de RStudio Connect à partir de la galerie
+## <a name="adding-rstudio-connect-saml-authentication-from-the-gallery"></a>Ajout de RStudio Connect SAML Authentication à partir de la galerie
 
-Pour configurer l’intégration de RStudio Connect à Azure AD, vous devez ajouter RStudio Connect, à partir de la galerie, à votre liste d’applications SaaS managées.
+Pour configurer l’intégration de RStudio Connect SAML Authentication à Azure AD, vous devez ajouter RStudio Connect SAML Authentication à votre liste d’applications SaaS managées à partir de la galerie.
 
-**Pour ajouter RStudio Connect à partir de la galerie, effectuez les étapes suivantes :**
+1. Connectez-vous au portail Azure avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
+1. Dans le panneau de navigation gauche, sélectionnez le service **Azure Active Directory**.
+1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
+1. Dans la section **Ajouter à partir de la galerie**, tapez **RStudio Connect SAML Authentication** dans la zone de recherche.
+1. Sélectionnez **RStudio Connect SAML Authentication** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
-1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
 
-    ![Bouton Azure Active Directory](common/select-azuread.png)
+## <a name="configure-and-test-azure-ad-sso-for-rstudio-connect-saml-authentication"></a>Configurer et tester l’authentification unique Azure AD pour RStudio Connect SAML Authentication
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+Configurez et testez l’authentification unique Azure AD avec RStudio Connect SAML Authentication à l’aide d’un utilisateur de test appelé **B.Simon**. Pour que l’authentification unique fonctionne, vous devez établir un lien entre un utilisateur Azure AD et l’utilisateur RStudio Connect SAML Authentication associé.
 
-    ![Panneau Applications d’entreprise](common/enterprise-applications.png)
+Pour configurer et tester l’authentification unique Azure AD avec RStudio Connect SAML Authentication, effectuez les étapes suivantes :
 
-3. Pour ajouter l’application, cliquez sur le bouton **Nouvelle application** en haut de la boîte de dialogue.
+1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-sso)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
+    * **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec Britta Simon.
+    * **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique Azure AD.
+2. **[Configurer l’authentification unique RStudio Connect SAML Authentication](#configure-rstudio-connect-saml-authentication-sso)** pour configurer les paramètres de l’authentification unique côté application.
+    * **[Créer un utilisateur de test RStudio Connect SAML Authentication](#create-rstudio-connect-saml-authentication-test-user)** pour avoir un équivalent de Britta Simon dans RStudio Connect SAML Authentication lié à la représentation Azure AD de l’utilisateur.
+3. **[Tester l’authentification unique](#test-sso)** pour vérifier si la configuration fonctionne.
 
-    ![Bouton Nouvelle application](common/add-new-app.png)
+## <a name="configure-azure-ad-sso"></a>Configurer l’authentification unique Azure AD
 
-4. Dans la zone de recherche, tapez **RStudio Connect**, sélectionnez **RStudio Connect** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+Effectuez les étapes suivantes pour activer l’authentification unique Azure AD dans le Portail Azure.
 
-    ![RStudio Connect dans la liste des résultats](common/search-new-app.png)
+1. Dans le portail Azure, accédez à la page d’intégration de l’application **RStudio Connect SAML Authentication**, recherchez la section **Gérer** et sélectionnez **Authentification unique**.
+1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
+1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
+   ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD auprès de RStudio Connect avec un utilisateur de test appelé **Britta Simon**.
-Pour que l’authentification unique fonctionne, une relation entre l’utilisateur Azure AD et l’utilisateur RStudio Connect associé doit être établie.
+1. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez les étapes suivantes, en remplaçant `<example.com>` par l’adresse et le port de votre serveur RStudio Connect SAML Authentication :
 
-Pour configurer et tester l’authentification unique Azure AD auprès de RStudio Connect, vous devez suivre les indications des sections suivantes :
-
-1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-single-sign-on)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
-2. **[Configurer l’authentification unique RStudio Connect](#configure-rstudio-connect-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
-3. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec Britta Simon.
-4. **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique Azure AD.
-5. **[Créer un utilisateur de test RStudio Connect](#create-rstudio-connect-test-user)** pour avoir un équivalent de Britta Simon dans RStudio Connect lié à la représentation Azure AD de l’utilisateur.
-6. **[Tester l’authentification unique](#test-single-sign-on)** : pour vérifier si la configuration fonctionne.
-
-### <a name="configure-azure-ad-single-sign-on"></a>Configurer l’authentification unique Azure AD
-
-Dans cette section, vous activez l’authentification unique Azure AD dans le portail Azure.
-
-Pour configurer l’authentification unique Azure AD auprès de RStudio Connect, effectuez les étapes suivantes :
-
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **RStudio Connect**, sélectionnez **Authentification unique**.
-
-    ![Lien Configurer l’authentification unique](common/select-sso.png)
-
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
-
-    ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
-
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
-
-    ![Modifier la configuration SAML de base](common/edit-urls.png)
-
-4. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez les étapes suivantes, en remplaçant `<example.com>` par l’adresse et le port de votre serveur RStudio Connect :
-
-    ![Informations d’authentification unique dans Domaine et URL RStudio Connect](common/idp-intiated.png)
+    ![Informations d’authentification unique dans Domaine et URL RStudio Connect SAML Authentication](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://<example.com>/__login__/saml`
 
@@ -114,14 +87,14 @@ Pour configurer l’authentification unique Azure AD auprès de RStudio Connect,
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL RStudio Connect](common/metadata-upload-additional-signon.png)
+    ![Chargement des métadonnée RStudio Connect SAML Authentication](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://<example.com>/`
 
     > [!NOTE]
-    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur, l’URL de réponse et l’URL de connexion réels. Elles sont déterminées à partir de l’adresse du serveur RStudio Connect (`https://example.com` dans les exemples ci-dessus). Contactez l’[équipe de support RStudio Connect](mailto:support@rstudio.com) si vous rencontrez des problèmes. Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur, l’URL de réponse et l’URL de connexion réels. Elles sont déterminées à partir de l’adresse du serveur RStudio Connect SAML Authentication (`https://example.com` dans les exemples ci-dessus). Contactez l’[équipe du support technique RStudio Connect SAML Authentication](mailto:support@rstudio.com) si vous rencontrez des problèmes. Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-6. Votre application RStudio Connect s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration d’attributs de jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **nameidentifier** est mappé avec **user.userprincipalname**. L’application RStudio Connect s’attend à ce que **nameidentifier** soit mappé sur **user.mail**. Vous devez donc modifier le mappage d’attribut en cliquant sur l’icône **Modifier**.
+6. Votre application RStudio Connect SAML Authentication s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration d’attributs de jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **nameidentifier** est mappé avec **user.userprincipalname**. L’application RStudio Connect SAML Authentication s’attend à ce que **nameidentifier** soit mappé sur **user.mail**. Vous devez donc changer le mappage d’attribut en cliquant sur l’icône **Modifier**.
 
     ![image](common/edit-attribute.png)
 
@@ -129,9 +102,33 @@ Pour configurer l’authentification unique Azure AD auprès de RStudio Connect,
 
     ![Lien Téléchargement de certificat](common/copy-metadataurl.png)
 
-### <a name="configure-rstudio-connect-single-sign-on"></a>Configurer l’authentification unique RStudio Connect
+### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
-Pour configurer l’authentification unique pour **RStudio Connect**, vous devez utiliser l’**URL des métadonnées de fédération d'application** et l’**adresse du serveur** utilisées ci-dessus. Cette opération est effectuée dans le fichier de configuration RStudio Connect dans `/etc/rstudio-connect.rstudio-connect.gcfg`.
+Dans cette section, vous allez créer un utilisateur de test appelé B. Simon dans le portail Azure.
+
+1. Dans le volet gauche du Portail Azure, sélectionnez **Azure Active Directory**, **Utilisateurs**, puis **Tous les utilisateurs**.
+1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
+1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
+   1. Dans le champ **Nom**, entrez `B.Simon`.  
+   1. Dans le champ **Nom de l’utilisateur**, entrez username@companydomain.extension. Par exemple : `B.Simon@contoso.com`.
+   1. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ **Mot de passe**.
+   1. Cliquez sur **Créer**.
+
+### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
+
+Dans cette section, vous autorisez B.Simon à utiliser l’authentification unique Azure en lui accordant l’accès à RStudio Connect SAML Authentication.
+
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Dans la liste des applications, sélectionnez **RStudio Connect SAML Authentication**.
+1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
+1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
+1. Si vous attendez qu’un rôle soit attribué aux utilisateurs, vous pouvez le sélectionner dans la liste déroulante **Sélectionner un rôle** . Si aucun rôle n’a été configuré pour cette application, vous voyez le rôle « Accès par défaut » sélectionné.
+1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+
+## <a name="configure-rstudio-connect-saml-authentication-sso"></a>Configurer l’authentification unique RStudio Connect SAML Authentication
+
+Pour configurer l’authentification unique pour **RStudio Connect SAML Authentication**, vous devez utiliser l’**URL des métadonnées de fédération d’application** et l’**adresse du serveur** utilisées ci-dessus. Cette opération est effectuée dans le fichier de configuration RStudio Connect SAML Authentication dans `/etc/rstudio-connect.rstudio-connect.gcfg`.
 
 Voici un exemple de fichier de configuration :
 
@@ -139,7 +136,7 @@ Voici un exemple de fichier de configuration :
 [Server]
 SenderEmail =
 
-; Important! The user-facing URL of your RStudio Connect server.
+; Important! The user-facing URL of your RStudio Connect SAML Authentication server.
 Address = 
 
 [Http]
@@ -151,82 +148,37 @@ Provider = saml
 [SAML]
 Logging = true
 
-; Important! The URL where your IdP hosts the SAML metadata or the path to a local copy of it placed in the RStudio Connect server.
+; Important! The URL where your IdP hosts the SAML metadata or the path to a local copy of it placed in the RStudio Connect SAML Authentication server.
 IdPMetaData = 
 
 IdPAttributeProfile = azure
 SSOInitiated = IdPAndSP
 ```
 
-Stockez l’**adresse du serveur** dans la valeur `Server.Address`, et l’**URL des métadonnées de fédération d'application** dans la valeur `SAML.IdPMetaData`. Notez que cet exemple de configuration utilise une connexion HTTP non chiffrée, alors qu’Azure AD exige l’utilisation d’une connexion HTTPS chiffrée. Vous pouvez soit utiliser un [proxy inverse ](https://docs.rstudio.com/connect/admin/proxy/) devant RStudio Connect, soit configurer RStudio Connect pour une [utilisation directe de HTTPS](https://docs.rstudio.com/connect/admin/appendix/configuration/#HTTPS). 
+Stockez l’**adresse du serveur** dans la valeur `Server.Address`, et l’**URL des métadonnées de fédération d'application** dans la valeur `SAML.IdPMetaData`. Notez que cet exemple de configuration utilise une connexion HTTP non chiffrée, alors qu’Azure AD exige l’utilisation d’une connexion HTTPS chiffrée. Vous pouvez soit utiliser un [proxy inverse](https://docs.rstudio.com/connect/admin/proxy/) devant RStudio Connect SAML Authentication, soit configurer RStudio Connect SAML Authentication pour une [utilisation directe de HTTPS](https://docs.rstudio.com/connect/admin/appendix/configuration/#HTTPS). 
 
-Si vous rencontrez des problèmes de configuration, vous pouvez lire le [Guide de l’administrateur RStudio Connect](https://docs.rstudio.com/connect/admin/authentication/saml/) ou envoyer un e-mail à l’[équipe du support technique de RStudio](mailto:support@rstudio.com) pour obtenir de l’aide.
+Si vous rencontrez des problèmes de configuration, vous pouvez lire le [Guide de l’administrateur RStudio Connect SAML Authentication](https://docs.rstudio.com/connect/admin/authentication/saml/) ou envoyer un e-mail à l’[équipe du support technique de RStudio](mailto:support@rstudio.com) pour obtenir de l’aide.
 
-### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
+### <a name="create-rstudio-connect-saml-authentication-test-user"></a>Créer un utilisateur de test RStudio Connect SAML Authentication
 
-L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
+Dans cette section, un utilisateur appelé Britta Simon est créé dans RStudio Connect SAML Authentication. RStudio Connect SAML Authentication prend en charge le provisionnement juste-à-temps, option activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. S’il n’y a pas déjà un utilisateur dans RStudio Connect SAML Authentication, un utilisateur est créé quand vous tentez d’y accéder.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+## <a name="test-sso"></a>Tester l’authentification unique (SSO) 
 
-    ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
+Dans cette section, vous allez tester votre configuration de l’authentification unique Azure AD avec les options suivantes. 
 
-2. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
+#### <a name="sp-initiated"></a>Lancée par le fournisseur de services :
 
-    ![Bouton Nouvel utilisateur](common/new-user.png)
+* Cliquez sur **Tester cette application** dans le portail Azure. Vous êtes alors redirigé vers l’URL de connexion RStudio Connect SAML Authentication, à partir de laquelle vous pouvez lancer le flux de connexion.  
 
-3. Dans les propriétés de l’utilisateur, effectuez les étapes suivantes.
+* Accédez directement à l’URL de connexion RStudio Connect SAML Authentication pour lancer le flux de connexion.
 
-    ![Boîte de dialogue Utilisateur](common/user-properties.png)
+#### <a name="idp-initiated"></a>Lancée par le fournisseur d’identité :
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
-    b. Dans le champ **Nom d’utilisateur**, tapez `brittasimon@yourcompanydomain.extension`. Par exemple : BrittaSimon@contoso.com
+* Sur le portail Azure, cliquez sur **Tester cette application**. Vous êtes alors automatiquement connecté à l’application RStudio Connect SAML Authentication pour laquelle vous avez configuré l’authentification unique 
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+Vous pouvez aussi utiliser le panneau d’accès Microsoft pour tester l’application dans n’importe quel mode. Si, au moment de cliquer sur la vignette RStudio Connect SAML Authentication dans le volet d’accès, le mode Fournisseur de services est configuré, vous êtes redirigé vers la page de connexion de l’application pour lancer le flux de connexion ; s’il s’agit du mode Fournisseur d’identité, vous êtes automatiquement connecté à l’application RStudio Connect SAML Authentication pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
-    d. Cliquez sur **Créer**.
+## <a name="next-steps"></a>Étapes suivantes
 
-### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
-
-Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à RStudio Connect.
-
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **RStudio Connect**.
-
-    ![Panneau Applications d’entreprise](common/enterprise-applications.png)
-
-2. Dans la liste des applications, sélectionnez **RStudio Connect**.
-
-    ![Lien RStudio Connect dans la liste des applications](common/all-applications.png)
-
-3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes**.
-
-    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
-
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
-
-    ![Volet Ajouter une attribution](common/add-assign-user.png)
-
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
-
-### <a name="create-rstudio-connect-test-user"></a>Créer un utilisateur de test RStudio Connect
-
-Dans cette section, un utilisateur appelé Britta Simon est créé dans RStudio Connect. RStudio Connect prend en charge le provisionnement juste-à-temps, option activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. S’il n’y a pas déjà un utilisateur dans RStudio Connect, un utilisateur est créé lorsque vous tentez d’y accéder.
-
-### <a name="test-single-sign-on"></a>Tester l’authentification unique 
-
-Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
-
-Quand vous cliquez sur la vignette RStudio Connect dans le volet d’accès, vous devez être automatiquement connecté à l’application RStudio Connect pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
-
-## <a name="additional-resources"></a>Ressources supplémentaires
-
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
-
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
-
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+Après avoir configuré RStudio Connect SAML Authentication, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).

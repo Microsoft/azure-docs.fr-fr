@@ -10,12 +10,12 @@ ms.workload: azure-vs
 ms.topic: how-to
 ms.date: 11/03/2017
 ms.author: ghogen
-ms.openlocfilehash: d864230ff524f6c008f9f05c16505cd9d0e9f229
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 7cf2474c9ca005d85cea28f2b8fa1e23836b191f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583353"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96487556"
 ---
 # <a name="publish-an-aspnet-web-app-to-an-azure-vm-from-visual-studio"></a>Publier une application web ASP.NET sur une machine virtuelle Azure à partir de Visual Studio
 
@@ -26,7 +26,7 @@ Pour pouvoir publier un projet ASP.NET sur une machine virtuelle Azure à l’ai
 
 - Elle doit être configurée pour exécuter une application web ASP.NET et WebDeploy doit être installé. Pour plus d’informations, consultez [Créer une machine virtuelle ASP.NET avec WebDeploy](https://github.com/aspnet/Tooling/blob/AspNetVMs/docs/create-asp-net-vm-with-webdeploy.md).
 
-- La machine virtuelle doit avoir un nom DNS configuré. Pour en savoir plus, consultez [Créer un nom de domaine complet dans le portail Azure pour une machine virtuelle Windows](portal-create-fqdn.md).
+- La machine virtuelle doit avoir un nom DNS configuré. Pour en savoir plus, consultez [Créer un nom de domaine complet dans le portail Azure pour une machine virtuelle Windows](../create-fqdn.md).
 
 ## <a name="publish-your-aspnet-web-app-to-the-azure-vm-using-visual-studio"></a>Publier votre application web ASP.NET sur la machine virtuelle Azure à l’aide de Visual Studio
 La section suivante décrit comment publier une application web ASP.NET existante sur une machine virtuelle Azure.
@@ -111,7 +111,7 @@ Vos paramètres doivent ressembler à ce qui suit :
 
 ### <a name="set-up-cicd-for-automated-deployment-to-azure-vm"></a>Configurer l’intégration continue/la livraison continue pour le déploiement automatisé sur Machines virtuelles Azure
 
-Pour configurer un pipeline de livraison continue avec Azure Pipelines, voir [Déployer sur une machine virtuelle Windows](https://docs.microsoft.com/vsts/build-release/apps/cd/deploy-webdeploy-iis-deploygroups).
+Pour configurer un pipeline de livraison continue avec Azure Pipelines, voir [Déployer sur une machine virtuelle Windows](/vsts/build-release/apps/cd/deploy-webdeploy-iis-deploygroups).
 
 [VM Overview - DNS Name]: ../../../includes/media/publish-web-app-from-visual-studio/VMOverviewDNSName.png
 [IP Address Config - DNS Name]: ../../../includes/media/publish-web-app-from-visual-studio/IPAddressConfigDNSName.png
@@ -122,7 +122,7 @@ Pour configurer un pipeline de livraison continue avec Azure Pipelines, voir [D�
 [Sélecteur de machine virtuelle Azure]: ../../../includes/media/publish-web-app-from-visual-studio/ChooseVM-SelectVM.png
 [Connexion à WebDeploy]: ../../../includes/media/publish-web-app-from-visual-studio/WebDeployLogin.png
 [Erreur de certificat]: ../../../includes/media/publish-web-app-from-visual-studio/CertificateError.png
-[Sortie, fenêtre]: ../../../includes/media/publish-web-app-from-visual-studio/OutputWindow.png
+[Fenêtre Sortie]: ../../../includes/media/publish-web-app-from-visual-studio/OutputWindow.png
 [Page Publier - Bouton Publier]: ../../../includes/media/publish-web-app-from-visual-studio/PublishPagePublishButton.png
 [Page Publier - Bouton Paramètres]: ../../../includes/media/publish-web-app-from-visual-studio/PublishPageSettingsButton.png
 [Paramètres de publication - Page Connexion]: ../../../includes/media/publish-web-app-from-visual-studio/PublishSettingsConnectionPage.png

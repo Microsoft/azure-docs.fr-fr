@@ -6,15 +6,15 @@ ms.author: jushiman
 ms.topic: how-to
 ms.service: virtual-machine-scale-sets
 ms.subservice: networking
-ms.date: 07/17/2017
+ms.date: 06/25/2020
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 46a12006274ca8516c936e37189c9233dde9b410
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 234834af4fcf4ad809f548d171a4c1c406d85895
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125194"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016690"
 ---
 # <a name="networking-for-azure-virtual-machine-scale-sets"></a>Mise en réseau pour des groupes de machines virtuelles identiques Azure
 
@@ -43,26 +43,7 @@ La mise en réseau accélérée Azure améliore les performances du réseau en a
 ```
 
 ## <a name="azure-virtual-machine-scale-sets-with-azure-load-balancer"></a>Groupes de machines virtuelles identiques avec Azure Load Balancer
-
-Lorsque vous utilisez des groupes de machines virtuelles identiques et un équilibreur de charge, prenez en compte ce qui suit :
-
-* **Plusieurs groupes de machines virtuelles identiques ne peuvent pas utiliser le même équilibreur de charge**.
-* **Réacheminement de port et règles NAT de trafic entrant** :
-  * Chaque groupe de machines virtuelles identiques doit avoir une règle NAT de trafic entrant.
-  * Une fois le groupe identique créé, le port principal ne peut pas être modifié lorsqu'une règle d'équilibrage de charge est utilisée par une sonde d'intégrité pour l'équilibreur de charge. Pour modifier le port, vous pouvez supprimer la sonde d'intégrité en mettant à jour le groupe identique de machines virtuelles Azure, puis mettre à jour le port et reconfigurer la sonde d'intégrité.
-  * Lorsque vous utilisez un groupe de machines virtuelles identiques dans le pool principal de l’équilibreur de charge, des règles NAT de trafic entrant par défaut sont automatiquement créées.
-* **Règles d’équilibrage de charge** :
-  * Lorsque vous utilisez un groupe de machines virtuelles identiques dans le pool principal de l’équilibreur de charge, des règles d’équilibrage de charge par défaut sont automatiquement créées.
-* **Règles de trafic sortant** :
-  *  Pour créer une règle de trafic sortant pour un pool principal déjà référencé par une règle d’équilibrage de charge, vous devez d’abord définir **« Créer des règles de trafic sortant implicites »** sur **Non** dans le portail au moment de créer la règle d’équilibrage de charge entrante.
-
-  :::image type="content" source="./media/vmsslb.png" alt-text="Création d'une règle d’équilibrage de charge" border="true":::
-
-Les méthodes suivantes peuvent être utilisées pour déployer un groupe identique de machines virtuelles avec un équilibreur de charge Azure existant.
-
-* [Configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant à l’aide du portail Azure](https://docs.microsoft.com/azure/load-balancer/configure-vm-scale-set-portal).
-* [Configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant à l’aide d’Azure PowerShell](https://docs.microsoft.com/azure/load-balancer/configure-vm-scale-set-powershell).
-* [Configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant à l’aide d’Azure CLI](https://docs.microsoft.com/azure/load-balancer/configure-vm-scale-set-cli).
+Consultez [Azure Load Balancer et Virtual Machine Scale Sets](../load-balancer/load-balancer-standard-virtual-machine-scale-sets.md) pour en savoir plus sur comment configurer votre Standard Load Balancer avec Virtual Machine Scale Sets en fonction de votre scénario.
 
 ## <a name="create-a-scale-set-that-references-an-application-gateway"></a>Créer un groupe identique qui fait référence à une passerelle d’application
 Pour créer un groupe identique qui utilise une passerelle d’application, référencez le pool d’adresses principal de la passerelle d’application dans la section ipConfigurations de votre groupe identique, comme dans cette configuration de modèle ARM :
@@ -242,7 +223,7 @@ Exemple de sortie provenant d’[Azure Resource Explorer](https://resources.azur
 Une ou plusieurs configurations IP peuvent être associées à chaque carte réseau attachée à une machine virtuelle, dans un groupe identique. Une adresse IP privée est affectée à chaque configuration. Une ressource d’adresse IP publique peut également être associée à chaque configuration. Pour comprendre combien d’adresses IP peuvent être attribuées à une carte réseau et combien d’adresses IP publiques vous pouvez utiliser dans un abonnement Azure, consultez [Limites Azure](../azure-resource-manager/management/azure-subscription-service-limits.md?toc=%2fazure%2fvirtual-network%2ftoc.json#azure-resource-manager-virtual-networking-limits).
 
 ## <a name="multiple-nics-per-virtual-machine"></a>Plusieurs cartes réseau par machine virtuelle
-Chaque machine virtuelle peut compter jusqu’à 8 cartes réseau, en fonction de la taille de la machine. Le nombre maximal de cartes réseau par machine est indiqué dans l’[article sur la taille des machines virtuelles](../virtual-machines/windows/sizes.md). Toutes les cartes réseau connectées à une instance de machine virtuelle doivent se connecter au même réseau virtuel. Les cartes réseau peuvent se connecter à différents sous-réseaux, mais tous les sous-réseaux doivent faire partie du même réseau virtuel.
+Chaque machine virtuelle peut compter jusqu’à 8 cartes réseau, en fonction de la taille de la machine. Le nombre maximal de cartes réseau par machine est indiqué dans l’[article sur la taille des machines virtuelles](../virtual-machines/sizes.md). Toutes les cartes réseau connectées à une instance de machine virtuelle doivent se connecter au même réseau virtuel. Les cartes réseau peuvent se connecter à différents sous-réseaux, mais tous les sous-réseaux doivent faire partie du même réseau virtuel.
 
 L’exemple suivant est un profil réseau de groupe identique illustrant plusieurs entrées de cartes réseau et plusieurs adresses IP publiques par machine virtuelle :
 
@@ -318,7 +299,7 @@ L’exemple suivant est un profil réseau de groupe identique illustrant plusieu
 ```
 
 ## <a name="nsg--asgs-per-scale-set"></a>Groupes de sécurité réseau et d’application par groupe identique
-Des [groupes de sécurité réseau](../virtual-network/security-overview.md) vous permettent de filtrer le trafic à destination et en provenance des ressources Azure dans un réseau virtuel Azure à l’aide de règles de sécurité. Des [groupes de sécurité d’application](../virtual-network/security-overview.md#application-security-groups) vous permettent de gérer la sécurité du réseau de ressources Azure et de les regrouper pour former une extension de la structure de votre application.
+Des [groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md) vous permettent de filtrer le trafic à destination et en provenance des ressources Azure dans un réseau virtuel Azure à l’aide de règles de sécurité. Des [groupes de sécurité d’application](../virtual-network/network-security-groups-overview.md#application-security-groups) vous permettent de gérer la sécurité du réseau de ressources Azure et de les regrouper pour former une extension de la structure de votre application.
 
 Des groupes de sécurité réseau peuvent être appliqués directement à un groupe identique en ajoutant une référence à la section de configuration de l’interface réseau des propriétés des machines virtuelles du groupe identique.
 

@@ -1,19 +1,19 @@
 ---
 title: Concevoir des tables scalables et performantes dans le stockage Table Azure. | Microsoft Docs
-description: Concevoir des tables scalables et performantes dans le stockage Table Azure.
+description: Découvrez comment concevoir des tables scalables et performantes dans le stockage Table Azure. Examinez les partitions de table, les transactions de groupe d’entités et les considérations relatives à la capacité et au coût.
 services: storage
-author: SnehaGunda
 ms.service: storage
+author: tamram
+ms.author: tamram
 ms.topic: article
 ms.date: 03/09/2020
-ms.author: sngun
 ms.subservice: tables
-ms.openlocfilehash: 1dba3a6f3ebd7b6675e6d0d90d98a45625ad04ee
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 8f3bd2a998066804bfb589e3262ac5e68db601fb
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83656909"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93306938"
 ---
 # <a name="design-scalable-and-performant-tables"></a>Conception de tables extensibles et performantes
 
@@ -22,7 +22,7 @@ ms.locfileid: "83656909"
 Pour concevoir des tables scalables et performantes, vous devez prendre en compte un certain nombre de facteurs, comme les performances, la scalabilité et le coût. Si vous avez déjà conçu des schémas pour des bases de données relationnelles, ces considérations doivent vous être familières, mais bien qu’il existe quelques similitudes entre le modèle de stockage du service de Table Azure et les modèles relationnels, il existe également plusieurs différences importantes. Ces différences conduisent généralement à des conceptions différentes qui peuvent sembler absurdes ou incorrectes à une personne ayant une bonne connaissance des bases de données relationnelles, mais qui sont logiques pour une personne menant une conception pour un magasin de paires clé/valeur NoSQL comme celui du service de Table Azure. Un grand nombre des différences de conception reflètent le fait que le service de Table est conçu pour prendre en charge des applications à l’échelle du cloud qui peuvent contenir des milliards d’entités (ou lignes dans la terminologie de base de données relationnelle) de données ou pour des jeux de données devant prendre en charge des volumes de transactions très élevés. Par conséquent, vous devez concevoir différemment la façon dont vous stockez vos données et comprendre comment fonctionne le service de Table. Un magasin de données NoSQL bien conçu améliore la scalabilité de votre solution, pour un coût inférieur à celui d’une solution qui utilise une base de données relationnelle. Ce guide fournit une aide relative à ces sujets.  
 
 ## <a name="about-the-azure-table-service"></a>À propos du service de Table Azure
-Cette section présente certaines des principales fonctionnalités du service de Table qui sont particulièrement adaptées aux conceptions orientées vers l'amélioration des performances et de l'extensibilité. Si vous ne connaissez pas le Stockage Azure et le service de Table, lisez d’abord [Présentation du Stockage Microsoft Azure](../../storage/common/storage-introduction.md) et [Bien démarrer avec le stockage Table Azure à l’aide de .NET](../../cosmos-db/table-storage-how-to-use-dotnet.md) avant de lire le reste de cet article. Bien que ce guide porte sur le service de Table, il aborde également les services de File d’attente et Blob Azure, en expliquant comment les utiliser avec le service de Table.  
+Cette section présente certaines des principales fonctionnalités du service de Table qui sont particulièrement adaptées aux conceptions orientées vers l'amélioration des performances et de l'extensibilité. Si vous ne connaissez pas le Stockage Azure et le service de Table, lisez d’abord [Présentation du Stockage Microsoft Azure](../../storage/common/storage-introduction.md) et [Bien démarrer avec le stockage Table Azure à l’aide de .NET](../../cosmos-db/tutorial-develop-table-dotnet.md) avant de lire le reste de cet article. Bien que ce guide porte sur le service de Table, il aborde également les services de File d’attente et Blob Azure, en expliquant comment les utiliser avec le service de Table.  
 
 Qu'est-ce que le service de Table ? Comme le laisse entendre son nom, le service de Table utilise un format tabulaire pour stocker des données. Selon la terminologie standard, chaque ligne de la table représente une entité et les colonnes stockent les différentes propriétés de cette entité. Chaque entité a une paire de clés qui permet de l’identifier de manière unique et une colonne d’horodatage que le service de Table utilise pour suivre les dernières mises à jour de l’entité. L’horodatage est appliqué automatiquement et vous ne pouvez pas le remplacer manuellement par une valeur arbitraire. Le service de Table utilise le dernier horodatage modifié (ou LMT, pour Last Modified Timestamp) afin de gérer l’accès concurrentiel optimiste.  
 
@@ -50,7 +50,7 @@ L'exemple suivant présente la conception d'une table simple pour stocker des en
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Don</td>
@@ -70,7 +70,7 @@ L'exemple suivant présente la conception d'une table simple pour stocker des en
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Juin</td>
@@ -107,7 +107,7 @@ L'exemple suivant présente la conception d'une table simple pour stocker des en
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Ken</td>
@@ -121,7 +121,7 @@ L'exemple suivant présente la conception d'une table simple pour stocker des en
 </table>
 
 
-Jusqu’ici, ces données ressemblent à une table de base de données relationnelle, les principales différences étant les colonnes obligatoires et la possibilité de stocker plusieurs types d’entité dans la même table. Par ailleurs, chacune des propriétés définies par l’utilisateur, comme **FirstName** ou **Age**, est caractérisée par un type de données, par exemple, un nombre entier ou une chaîne, tout comme une colonne dans une base de données relationnelle. Bien que, contrairement à une base de données relationnelle, la nature sans schéma du service de Table signifie qu'une propriété n'a pas nécessairement besoin d'avoir les mêmes types de données pour chaque entité. Pour stocker des types de données complexes dans une seule propriété, vous devez utiliser un format sérialisé comme JSON ou XML. Pour plus d’informations sur les plages de dates et les types de données pris en charge, les règles d’affectation de noms et les contraintes de taille, consultez l’article [Présentation du modèle de données du service de Table](https://msdn.microsoft.com/library/azure/dd179338.aspx).
+Jusqu’ici, ces données ressemblent à une table de base de données relationnelle, les principales différences étant les colonnes obligatoires et la possibilité de stocker plusieurs types d’entité dans la même table. Par ailleurs, chacune des propriétés définies par l’utilisateur, comme **FirstName** ou **Age** , est caractérisée par un type de données, par exemple, un nombre entier ou une chaîne, tout comme une colonne dans une base de données relationnelle. Bien que, contrairement à une base de données relationnelle, la nature sans schéma du service de Table signifie qu'une propriété n'a pas nécessairement besoin d'avoir les mêmes types de données pour chaque entité. Pour stocker des types de données complexes dans une seule propriété, vous devez utiliser un format sérialisé comme JSON ou XML. Pour plus d’informations sur les plages de dates et les types de données pris en charge, les règles d’affectation de noms et les contraintes de taille, consultez l’article [Présentation du modèle de données du service de Table](/rest/api/storageservices/Understanding-the-Table-Service-Data-Model).
 
 Le choix de la valeur de **PartitionKey** et de **RowKey** est fondamental pour une bonne conception de table. Toutes les entités stockées dans une table doivent avoir une combinaison unique de **PartitionKey** et **RowKey**. Comme avec les clés dans une table de base de données relationnelle, les valeurs de **PartitionKey** et **RowKey** sont indexées pour créer un index cluster afin de permettre des recherches rapides. Toutefois, le service de Table ne crée pas d’index secondaire, **PartitionKey** et **RowKey** sont par conséquent les seules propriétés indexées. Certains des modèles décrits dans [Modèles de conception de table](table-storage-design-patterns.md) illustrent comment contourner cette limitation apparente.  
 
@@ -132,12 +132,12 @@ Le nom du compte, le nom de la table et la valeur de **PartitionKey** identifien
 
 Dans le service de Table, un nœud individuel traite une ou plusieurs partitions complètes et le service se met à l’échelle en équilibrant la charge des partitions de manière dynamique sur les nœuds. Si un nœud est en sous-charge, le service de Table peut *fractionner* la plage de partitions traitées par ce nœud en différents nœuds. En cas de réduction du trafic, le service peut *fusionner* les plages de partitions à partir des nœuds silencieux en un nœud unique.  
 
-Pour plus d’informations sur les détails internes du service de Table et notamment la façon dont le service gère les partitions, consultez la documentation [Microsoft Azure Storage : service de stockage sur le cloud à haute disponibilité et à cohérence forte](https://docs.microsoft.com/archive/blogs/windowsazurestorage/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency).  
+Pour plus d’informations sur les détails internes du service de Table et notamment la façon dont le service gère les partitions, consultez la documentation [Microsoft Azure Storage : service de stockage sur le cloud à haute disponibilité et à cohérence forte](/archive/blogs/windowsazurestorage/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency).  
 
 ## <a name="entity-group-transactions"></a>Transactions de groupe d’entités
 Dans le service de Table, les transactions de groupe d'entités (EGT) constituent l'unique mécanisme intégré pour effectuer des mises à jour atomiques entre plusieurs entités. Les EGT sont également parfois appelées *transactions par lots*. Les EGT peuvent uniquement fonctionner sur des entités stockées dans la même partition (autrement dit, elles partagent la même clé de partition dans une table donnée). Par conséquent, chaque fois que vous avez besoin d’un comportement transactionnel atomique sur plusieurs entités, vous devez vérifier que ces entités sont dans la même partition. Ceci justifie souvent la conservation de plusieurs types d'entité dans la même table (et partition) au lieu de l'utilisation de plusieurs tables pour différents types d'entité. Une seule EGT peut traiter jusqu'à 100 entités.  Si vous envoyez plusieurs EGT simultanées pour traitement, vérifiez bien que ces EGT ne fonctionnent pas sur des entités communes aux différentes EGT. Sinon, le traitement risque d’être retardé.
 
-Les EGT représentent également un éventuel compromis à prendre en compte dans votre conception. Autrement dit, l’utilisation de plusieurs partitions augmente la scalabilité de votre application, car Azure a plus d’occasions d’équilibrer la charge des requêtes sur les nœuds. Toutefois, l’utilisation de plusieurs partitions peut limiter la capacité de votre application à effectuer des transactions atomiques et à assurer une cohérence forte pour vos données. Par ailleurs, il s’agit d’objectifs de scalabilité spécifiques au niveau d’une partition qui peuvent limiter le débit de transactions attendu pour un nœud unique. Pour plus d’informations sur les objectifs d’extensibilité pour les comptes de stockage Azure standard, voir [objectifs d’extensibilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md). Pour plus d’informations sur les objectifs d’extensibilité pour le stockage Table, voir [Objectifs d’extensibilité et de performances pour le stockage Table](scalability-targets.md).
+Les EGT représentent également un éventuel compromis à prendre en compte dans votre conception. Autrement dit, l’utilisation de plusieurs partitions augmente la scalabilité de votre application, car Azure a plus d’occasions d’équilibrer la charge des requêtes sur les nœuds. Toutefois, l’utilisation de plusieurs partitions peut limiter la capacité de votre application à effectuer des transactions atomiques et à assurer une cohérence forte pour vos données. Par ailleurs, il s’agit d’objectifs de scalabilité spécifiques au niveau d’une partition qui peuvent limiter le débit de transactions attendu pour un nœud unique. Pour plus d’informations sur les objectifs d’extensibilité pour les comptes de stockage Azure standard, voir [objectifs d’extensibilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md). Pour plus d’informations sur les objectifs de scalabilité concernant le service de Table, consultez [Objectifs de scalabilité et de performances pour le stockage de tables](scalability-targets.md).
 
 ## <a name="capacity-considerations"></a>Considérations relatives à la capacité
 

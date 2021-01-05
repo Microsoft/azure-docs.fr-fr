@@ -1,33 +1,33 @@
 ---
-title: Créer une alerte de mesure avec un modèle Resource Manager
+title: Créer une alerte de métrique plus récente à l’aide d’un modèle Resource Manager
 description: Découvrez comment utiliser un modèle Resource Manager pour créer une alerte de métrique.
 author: harelbr
 ms.author: harelbr
 services: azure-monitor
 ms.topic: conceptual
-ms.date: 2/24/2020
+ms.date: 10/7/2020
 ms.subservice: alerts
-ms.openlocfilehash: 02424d7df24305d6642c364f12e3ed6e8674a01d
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 51ae97567e9c3720c7e36a81bfa7bff44935aac6
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80677009"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511618"
 ---
 # <a name="create-a-metric-alert-with-a-resource-manager-template"></a>Créer une alerte de mesure avec un modèle Resource Manager
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Cet article explique comment vous pouvez utiliser un [modèle Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md) pour configurer les [alertes de métriques plus récentes](../../azure-monitor/platform/alerts-metric-near-real-time.md) dans Azure Monitor. Les modèles Resource Manager vous permettent de configurer des alertes par programmation de manière cohérente et reproductible dans vos environnements. Les alertes de métrique plus récentes sont disponibles pour [cet ensemble de types de ressources](../../azure-monitor/platform/alerts-metric-near-real-time.md#metrics-and-dimensions-supported).
+Cet article explique comment vous pouvez utiliser un [modèle Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md) pour configurer les [alertes de métriques plus récentes](./alerts-metric-near-real-time.md) dans Azure Monitor. Les modèles Resource Manager vous permettent de configurer des alertes par programmation de manière cohérente et reproductible dans vos environnements. Les alertes de métrique plus récentes sont disponibles pour [cet ensemble de types de ressources](./alerts-metric-near-real-time.md#metrics-and-dimensions-supported).
 
 > [!IMPORTANT]
-> Modèle de ressource pour créer des alertes de métrique pour le type de ressource : Espace de travail Azure Log Analytics (notamment) `Microsoft.OperationalInsights/workspaces`, nécessite des étapes supplémentaires. Pour plus d’informations, consultez l’article [Alerte de métrique pour les journaux d’activité - Modèle de ressource](../../azure-monitor/platform/alerts-metric-logs.md#resource-template-for-metric-alerts-for-logs).
+> Modèle de ressource pour créer des alertes de métrique pour le type de ressource : Espace de travail Azure Log Analytics (notamment) `Microsoft.OperationalInsights/workspaces`, nécessite des étapes supplémentaires. Pour plus d’informations, consultez l’article [Alerte de métrique pour les journaux d’activité - Modèle de ressource](./alerts-metric-logs.md#resource-template-for-metric-alerts-for-logs).
 
 Les étapes de base sont les suivantes :
 
 1. Utilisez un des modèles ci-dessous sous la forme d’un fichier JSON qui décrit comment créer l’alerte.
 2. Modifier et utiliser le fichier de paramètres correspondant en tant que code JSON pour personnaliser l’alerte.
-3. Pour le paramètre `metricName`, consultez les métriques disponibles dans [Métriques prises en charge par Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-supported).
+3. Pour le paramètre `metricName`, consultez les métriques disponibles dans [Métriques prises en charge par Azure Monitor](./metrics-supported.md).
 4. Déployez le modèle à l’aide de [n’importe quelle méthode de déploiement](../../azure-resource-manager/templates/deploy-powershell.md).
 
 ## <a name="template-for-a-simple-static-threshold-metric-alert"></a>Modèle pour une alerte de métrique de seuil statique simple
@@ -204,7 +204,7 @@ Enregistrez le code JSON ci-après sous le nom simplestaticmetricalert.json pour
 }
 ```
 
-Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](https://docs.microsoft.com/rest/api/monitor/metricalerts/createorupdate).
+Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](/rest/api/monitor/metricalerts/createorupdate).
 
 Vous pouvez définir les valeurs des paramètres sur la ligne de commande ou par le biais d’un fichier de paramètres. Vous trouverez ci-après un exemple de fichier de paramètres.
 
@@ -268,9 +268,9 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
-    --resource-group ResourceGroupofTargetResource \
+    --resource-group ResourceGroupOfTargetResource \
     --template-file simplestaticmetricalert.json \
     --parameters @simplestaticmetricalert.parameters.json
 ```
@@ -377,7 +377,7 @@ Enregistrez le code JSON ci-après sous le nom simpledynamicmetricalert.json pou
                 "description": "The number of unhealthy periods to alert on (must be lower or equal to numberOfEvaluationPeriods)."
             }
         },
-    "ignoreDataBefore": {
+        "ignoreDataBefore": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
@@ -477,7 +477,7 @@ Enregistrez le code JSON ci-après sous le nom simpledynamicmetricalert.json pou
 }
 ```
 
-Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](https://docs.microsoft.com/rest/api/monitor/metricalerts/createorupdate).
+Une explication du schéma et des propriétés pour une règle d’alerte [est disponible ici](/rest/api/monitor/metricalerts/createorupdate).
 
 Vous pouvez définir les valeurs des paramètres sur la ligne de commande ou par le biais d’un fichier de paramètres. Vous trouverez ci-après un exemple de fichier de paramètres. 
 
@@ -518,7 +518,7 @@ Enregistrez le code JSON ci-après sous le nom simpledynamicmetricalert.paramete
         "minFailingPeriodsToAlert": {
             "value": "3"
         },
-    "ignoreDataBefore": {
+        "ignoreDataBefore": {
             "value": ""
         },
         "timeAggregation": {
@@ -550,7 +550,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
     --resource-group ResourceGroupofTargetResource \
     --template-file simpledynamicmetricalert.json \
@@ -570,7 +570,6 @@ Notez les contraintes suivantes liées à l’utilisation de dimensions dans une
 - Vous ne pouvez pas utiliser « \* » comme valeur de dimension.
 - Quand des métriques configurées dans différents critères prennent en charge la même dimension, une valeur de dimension configurée doit être explicitement définie de la même façon pour toutes ces métriques (dans les critères appropriés).
     - Dans l’exemple ci-dessous, dans la mesure où les métriques **Transactions** et **SuccessE2ELatency** ont une dimension **ApiName** et que *criterion1* spécifie la valeur *"GetBlob"* pour la dimension **ApiName**, *criterion2* doit également définir une valeur *"GetBlob"* pour la dimension **ApiName**.
-
 
 Enregistrez le code JSON ci-après sous le nom advancedstaticmetricalert.json pour les besoins de cette procédure pas à pas.
 
@@ -792,7 +791,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
     --resource-group ResourceGroupofTargetResource \
     --template-file advancedstaticmetricalert.json \
@@ -976,7 +975,7 @@ Enregistrez et modifiez le code json ci-après sous le nom multidimensionalstati
                             "values": ["*"]
                         },
                         {
-                "name":"ApiName",
+                            "name":"ApiName",
                             "operator": "Include",
                             "values": ["GetBlob", "PutBlob"]    
                         }
@@ -1012,7 +1011,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
     --resource-group ResourceGroupofTargetResource \
     --template-file multidimensionalstaticmetricalert.json \
@@ -1232,7 +1231,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
     --resource-group ResourceGroupofTargetResource \
     --template-file advanceddynamicmetricalert.json \
@@ -1248,7 +1247,7 @@ az group deployment create \
 
 Vous pouvez utiliser le modèle suivant pour créer une règle d’alerte de métrique de seuil statique plus avancée sur une métrique personnalisée.
 
-Pour en savoir plus sur les métriques personnalisées dans Azure Monitor, consultez [Métriques personnalisées dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-custom-overview).
+Pour en savoir plus sur les métriques personnalisées dans Azure Monitor, consultez [Métriques personnalisées dans Azure Monitor](./metrics-custom-overview.md).
 
 Lorsque vous créez une règle d’alerte sur une métrique personnalisée, vous devez spécifier à la fois le nom et l’espace de noms de la métrique. Vous devez également vous assurer que la métrique personnalisée est déjà signalée, car vous ne pouvez pas créer de règle d’alerte sur une métrique personnalisée qui n’existe pas encore.
 
@@ -1495,7 +1494,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AlertDeployment \
     --resource-group ResourceGroupOfTargetResource \
     --template-file customstaticmetricalert.json \
@@ -1504,7 +1503,7 @@ az group deployment create \
 
 >[!NOTE]
 >
-> Vous pouvez rechercher l’espace de noms de métrique d’une métrique personnalisée spécifique en [parcourant vos métriques personnalisées à l’aide du Portail Azure](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-custom-overview#browse-your-custom-metrics-via-the-azure-portal)
+> Vous pouvez rechercher l’espace de noms de métrique d’une métrique personnalisée spécifique en [parcourant vos métriques personnalisées à l’aide du Portail Azure](./metrics-custom-overview.md#browse-your-custom-metrics-via-the-azure-portal)
 
 
 ## <a name="template-for-a-metric-alert-that-monitors-multiple-resources"></a>Modèle pour une alerte de métrique qui supervise plusieurs ressources
@@ -1521,7 +1520,9 @@ Cette section décrit les modèles Azure Resource Manager pour trois scénarios 
 
 > [!NOTE]
 >
-> Dans une règle d’alerte métrique qui surveille plusieurs ressources, une seule condition est autorisée.
+> Dans une règle d’alerte métrique qui surveille plusieurs ressources, les limitations suivantes s’appliquent :
+> - L’étendue de la règle d’alerte doit contenir au moins une ressource du type de ressource sélectionné.
+> - La règle d’alerte ne peut contenir qu’une seule condition.
 
 ### <a name="static-threshold-alert-on-all-virtual-machines-in-one-or-more-resource-groups"></a>Alerte de seuil statique sur toutes les machines virtuelles dans un ou plusieurs groupes de ressources
 
@@ -1634,7 +1635,7 @@ Enregistrez le fichier JSON ci-après sous le nom all-vms-in-resource-group-stat
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -1828,7 +1829,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file all-vms-in-resource-group-static.json \
@@ -1946,7 +1947,7 @@ Enregistrez le fichier JSON ci-après sous le nom all-vms-in-resource-group-dyna
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -2163,7 +2164,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file all-vms-in-resource-group-dynamic.json \
@@ -2281,7 +2282,7 @@ Enregistrez le fichier JSON ci-après sous le nom all-vms-in-subscription-static
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -2473,7 +2474,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file all-vms-in-subscription-static.json \
@@ -2591,7 +2592,7 @@ Enregistrez le fichier JSON ci-après sous le nom all-vms-in-subscription-dynami
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -2805,7 +2806,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file all-vms-in-subscription-dynamic.json \
@@ -2923,7 +2924,7 @@ Enregistrez le fichier JSON ci-après sous le nom list-of-vms-static.json pour l
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -3118,7 +3119,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file list-of-vms-static.json \
@@ -3236,7 +3237,7 @@ Enregistrez le fichier JSON ci-après sous le nom list-of-vms-dynamic.json pour 
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "Resource type of target resources to be monitored. Currently only supported resource type is Microsoft.Compute/virtualMachines"
+                "description": "Resource type of target resources to be monitored."
             }
         },
         "metricName": {
@@ -3453,7 +3454,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name MultiResourceAlertDeployment \
     --resource-group ResourceGroupWhereRuleShouldbeSaved \
     --template-file list-of-vms-dynamic.json \
@@ -3462,7 +3463,7 @@ az group deployment create \
 
 ## <a name="template-for-an-availability-test-along-with-a-metric-alert"></a>Modèle de test de disponibilité avec alerte de métrique
 
-Les [tests de disponibilité d’Application Insights](../../azure-monitor/app/monitor-web-app-availability.md) vous aident à surveiller la disponibilité de votre site web ou application à partir de divers emplacements dans le monde. Les alertes de test de disponibilité vous informent quand des tests de disponibilité d’un certain nombre d’emplacements échouent.
+Les [tests de disponibilité d’Application Insights](../app/monitor-web-app-availability.md) vous aident à surveiller la disponibilité de votre site web ou application à partir de divers emplacements dans le monde. Les alertes de test de disponibilité vous informent quand des tests de disponibilité d’un certain nombre d’emplacements échouent.
 Alertes de test de disponibilité du même type de ressource que les alertes de métrique (Microsoft.Insights/metricAlerts). L’exemple de modèle de Azure Resource Manager suivant permet de configurer un test de disponibilité simple et une alerte associée.
 
 Enregistrez le code json ci-après sous le nom availabilityalert.json pour les besoins de cette procédure pas à pas.
@@ -3549,7 +3550,6 @@ Enregistrez le code json ci-après sous le nom availabilityalert.json pour les b
         ],
         "evaluationFrequency": "PT1M",
         "windowSize": "PT5M",
-        "templateType": 0,
         "criteria": {
           "odata.type": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
           "webTestId": "[resourceId('Microsoft.Insights/webtests', variables('pingTestName'))]",
@@ -3615,7 +3615,7 @@ Utilisation de l’interface de ligne de commande Azure
 ```azurecli
 az login
 
-az group deployment create \
+az deployment group create \
     --name AvailabilityAlertDeployment \
     --resource-group ResourceGroupofApplicationInsightsComponent \
     --template-file availabilityalert.json \
@@ -3627,3 +3627,4 @@ az group deployment create \
 - Découvrez-en plus sur les [alertes dans Azure](alerts-overview.md).
 - Découvrez comment [créer un groupe d’actions avec des modèles Resource Manager](action-groups-create-resource-manager-template.md).
 - Pour les propriétés et la syntaxe JSON, consultez la référence de modèle [Microsoft.Insights/metricAlerts](/azure/templates/microsoft.insights/metricalerts).
+

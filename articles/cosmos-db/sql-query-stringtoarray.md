@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : StringToArray'
 description: Découvrez la fonction système SQL StringToArray dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 18acbd94fa3d717fc20b9e1020b9bf7c6db7744d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7ae1f69e92e890daae528eb1f4dfb95f76560043
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302914"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93337980"
 ---
 # <a name="stringtoarray-azure-cosmos-db"></a>StringToArray (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une expression convertie en tableau. Si l’expression ne peut pas être convertie, le résultat est indéfini.  
   
 ## <a name="syntax"></a>Syntaxe
@@ -33,7 +36,7 @@ StringToArray(<str_expr>)
   Retourne une expression de tableau ou une valeur non définie. 
   
 ## <a name="remarks"></a>Notes
-  Les valeurs de chaîne imbriquées doivent être écrites avec des guillemets doubles pour être valides dans le code JSON. Pour plus d’informations sur le format JSON, consultez [json.org](https://json.org/)
+  Les valeurs de chaîne imbriquées doivent être écrites avec des guillemets doubles pour être valides dans le code JSON. Pour plus d’informations sur le format JSON, consultez [json.org](https://json.org/). Cette fonction système n’utilisera pas l’index.
   
 ## <a name="examples"></a>Exemples
   
@@ -90,10 +93,6 @@ Voici le jeu de résultats obtenu.
 ```json
 [{}]
 ```
-
-## <a name="remarks"></a>Notes
-
-Cette fonction système n’utilisera pas l’index.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

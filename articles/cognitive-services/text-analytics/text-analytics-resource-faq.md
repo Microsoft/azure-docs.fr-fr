@@ -10,12 +10,12 @@ ms.subservice: text-analytics
 ms.topic: conceptual
 ms.date: 02/13/2019
 ms.author: aahi
-ms.openlocfilehash: aca3b0bea65923cee1bae25020058666c973922c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ffa70afa0edf29181bc622cbef6ff8716134b1f7
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73837122"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94364936"
 ---
 # <a name="frequently-asked-questions-faq-about-the-text-analytics-cognitive-service"></a>Questions fréquentes (FAQ) sur l’API Analyse de texte de Cognitive Service
 
@@ -29,11 +29,11 @@ Il y a toujours une certaine imprécision dans l’analyse des sentiments, mais 
 
 ## <a name="can-i-add-my-own-training-data-or-models"></a>Puis-je ajouter mes propres données de formation ou mes propres modèles ?
 
-Non, les modèles sont préintégrés. Les seules opérations disponibles sur les données téléchargées sont le calcul du score, l’extraction d’expressions clés et la détection de la langue. Nous n’hébergeons pas de modèles personnalisés. Si vous souhaitez créer et héberger des modèles de Machine Learning personnalisés, tournez-vous vers [les modèles de Machine Learning de Microsoft R Server](https://docs.microsoft.com/r-server/r/concept-what-is-the-microsoftml-package).
+Non, les modèles sont préintégrés. Les seules opérations disponibles sur les données téléchargées sont le calcul du score, l’extraction d’expressions clés et la détection de la langue. Nous n’hébergeons pas de modèles personnalisés. Si vous souhaitez créer et héberger des modèles de Machine Learning personnalisés, tournez-vous vers [les modèles de Machine Learning de Microsoft R Server](/r-server/r/concept-what-is-the-microsoftml-package).
 
 ## <a name="can-i-request-additional-languages"></a>Puis-je demander des langues supplémentaires ?
 
-L’analyse des sentiments et l’extraction des expressions clés sont disponibles pour un [certain nombre de langues](text-analytics-supported-languages.md). Le traitement du langage naturel est complexe et nécessite de nombreux tests avant de pouvoir publier de nouvelles fonctionnalités. Pour cette raison, nous évitons d’annoncer une prise en charge à l’avance, afin que personne n’attende une fonctionnalité dont le développement nécessite plus de temps que prévu. 
+L’analyse des sentiments et l’extraction des expressions clés sont disponibles pour un [certain nombre de langues](./language-support.md). Le traitement du langage naturel est complexe et nécessite de nombreux tests avant de pouvoir publier de nouvelles fonctionnalités. Pour cette raison, nous évitons d’annoncer une prise en charge à l’avance, afin que personne n’attende une fonctionnalité dont le développement nécessite plus de temps que prévu. 
 
 Pour nous aider à hiérarchiser les langues à ajouter, votez pour des langues spécifiques sur [User Voice](https://cognitive.uservoice.com/forums/555922-text-analytics). 
 

@@ -7,18 +7,18 @@ author: mmacy
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 08/28/2019
 ms.author: marsma
 ms.reviewer: oldalton
 ms.custom: aaddev
-ms.openlocfilehash: 62b79ee7398286b8e6c8ed8612bd001595e1f6ea
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41389bc5ed8580cd80dbc40e771c7f15241f5ae7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77084967"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85479400"
 ---
 # <a name="microsoft-authentication-library-for-ios-and-macos-differences"></a>Différences entre les bibliothèques MSAL pour iOS et macOS
 

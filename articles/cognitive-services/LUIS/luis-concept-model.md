@@ -1,14 +1,16 @@
 ---
 title: Concevoir avec des modèles – LUIS
 description: Language Understanding fournit plusieurs types de modèles. Certains modèles peuvent être utilisés de plusieurs manières.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 04/30/2020
-ms.openlocfilehash: 933588f96570e931cdc627aaae82bee1037bbdaa
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 576ba945018d13db9cd24888f3c41a2215857694
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83591877"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91316509"
 ---
 # <a name="design-with-intent-and-entity-models"></a>Conception avec modèles d’intention et d’entité
 
@@ -36,9 +38,9 @@ L’énoncé suivant est un **exemple positif** pour l’intention `OrderBook` e
 
 ## <a name="entities-extract-data"></a>Les entités extraient les données
 
-Une entité représente une unité de données que vous souhaitez extraire de l’énoncé. Une entité issue du Machine Learning est une entité de niveau supérieur contenant des sous-entités qui sont également des entités issues du Machine Learning.
+Une entité représente une unité de données que vous souhaitez extraire de l’énoncé. Une entité de machine-learning est une entité de niveau supérieur contenant des sous-entités qui sont également des entités de machine-learning.
 
-Un exemple d’entité issue du Machine Learning est une commande de billet d’avion. Conceptuellement, il s’agit d’une transaction unique comportant de nombreuses unités de données plus petites, telles que la date, l’heure, le nombre de places, le type de siège, le lieu d’origine, le lieu de destination et le choix du repas.
+Un exemple d’entité de machine-learning est une commande de billet d’avion. Conceptuellement, il s’agit d’une transaction unique comportant de nombreuses unités de données plus petites, telles que la date, l’heure, le nombre de places, le type de siège, le lieu d’origine, le lieu de destination et le choix du repas.
 
 ## <a name="intents-versus-entities"></a>Intentions et entités
 
@@ -65,11 +67,11 @@ La décomposition du modèle comprend les éléments suivants :
 
 * [intentions](#intents-classify-utterances)
     * [fonctionnalités](#features)
-* [entités issues du Machine Learning](reference-entity-machine-learned-entity.md)
-    * sous-entités (également des entités issues du Machine Learning)
+* [Entité de machine-learning](reference-entity-machine-learned-entity.md)
+    * sous-entités (également des entités de machine-learning)
         * [fonctionnalités](#features)
             * [liste d’expressions](luis-concept-feature.md)
-            * [entités non issues du Machine Learning](luis-concept-feature.md) telles que des [expressions régulières](reference-entity-regular-expression.md), des [listes](reference-entity-list.md) et des [entités prédéfinies](luis-reference-prebuilt-entities.md)
+            * [entités non machine-learning](luis-concept-feature.md) telles que des [expressions régulières](reference-entity-regular-expression.md), des [listes](reference-entity-list.md) et des [entités prédéfinies](luis-reference-prebuilt-entities.md)
 
 <a name="entities-extract-data"></a>
 <a name="machine-learned-entities"></a>

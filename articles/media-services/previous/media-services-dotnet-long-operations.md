@@ -14,20 +14,23 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 43d9a6adc935010eab6e5e52d73f2019c8afcf5f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 44cecbd8d2cdc95e342d7aaf2b33f6cc0192e182
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74887156"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89262025"
 ---
 # <a name="delivering-live-streaming-with-azure-media-services"></a>Diffusion vidéo en flux continu avec Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
 
 Microsoft Azure Media Services propose des API qui envoient des requêtes à Media Services pour démarrer des opérations (par exemple : créer, démarrer, arrêter ou supprimer un canal). Ces opérations sont des opérations de longue durée.
 
-Le kit de développement logiciel (SDK) .NET de Media Services fournit des API qui envoient la requête et attendent que l'opération se termine (en interne, les API interrogent la progression des opérations à intervalles donnés). Par exemple, lorsque vous appelez channel.Start(), la méthode est renvoyée une fois le canal démarré. Vous pouvez également utiliser la version asynchrone : await channel.StartAsync(). Pour plus d’informations sur le modèle asynchrone basé sur des tâches, consultez [TAP](https://msdn.microsoft.com/library/hh873175\(v=vs.110\).aspx). Les API qui envoient une demande d'opération, puis interrogent l'état de l'opération jusqu'à ce que celle-ci soit terminée sont appelées « méthodes d'interrogation » Ces méthodes (en particulier la version asynchrone) sont recommandées pour les applications clientes riches et/ou les services avec état.
+Le kit de développement logiciel (SDK) .NET de Media Services fournit des API qui envoient la requête et attendent que l'opération se termine (en interne, les API interrogent la progression des opérations à intervalles donnés). Par exemple, lorsque vous appelez channel.Start(), la méthode est renvoyée une fois le canal démarré. Vous pouvez également utiliser la version asynchrone : await channel.StartAsync(). Pour plus d’informations sur le modèle asynchrone basé sur des tâches, consultez [TAP](./media-services-mes-schema.md). Les API qui envoient une demande d'opération, puis interrogent l'état de l'opération jusqu'à ce que celle-ci soit terminée sont appelées « méthodes d'interrogation » Ces méthodes (en particulier la version asynchrone) sont recommandées pour les applications clientes riches et/ou les services avec état.
 
 Dans certains scénarios, une application ne peut pas attendre une requête HTTP de longue durée et cherche à interroger manuellement la progression de l'opération. Par exemple, un navigateur qui interagit avec un service Web sans état : lorsque le navigateur demande à créer un canal, le service web lance une opération de longue durée et renvoie l'ID d'opération dans le navigateur. Le navigateur peut alors demander au service Web l'état de l'opération, en fonction de l'ID. Le kit de développement logiciel (SDK) .NET de Media Services fournit des API qui sont utiles dans ce genre de scénario. Ces API sont appelées « méthodes sans interrogation ».
 Le modèle de dénomination des « méthodes sans interrogation » est le suivant : Send*NomOpération*Operation (par exemple, SendCreateOperation). Les méthodes Send*NomOpération*Operation retournent l’objet **IOperation**. L’objet retourné contient des informations qui peuvent être utilisées pour suivre l’opération. Les méthodes Send*NomOpération*OperationAsync retournent **Task\<IOperation>** .
@@ -215,4 +218,3 @@ Console.WriteLine(channelId);
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

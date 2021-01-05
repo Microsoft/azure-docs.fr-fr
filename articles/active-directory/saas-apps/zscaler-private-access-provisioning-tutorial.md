@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Zscaler Private Access (ZPA) pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Zscaler Private Access (ZPA).
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: ee9128c3-ff02-4739-8c51-0693d8451742
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/07/2019
 ms.author: Zhchia
-ms.openlocfilehash: 609d2726eaaaeb49210e19f000bcc2faef1de5d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: da3ad4f70e0cc41fe95327eb74093c1471c877bd
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064148"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351569"
 ---
 # <a name="tutorial-configure-zscaler-private-access-zpa-for-automatic-user-provisioning"></a>Tutoriel : Configurer Zscaler Private Access (ZPA) pour l’approvisionnement automatique d’utilisateurs
 
@@ -82,7 +78,7 @@ Avant de configurer et d’activer l’approvisionnement automatique d’utilisa
 
     ![Zscaler Private Access (ZPA) – Créer un jeton](media/zscaler-private-access-provisioning-tutorial/token.png)
 
-8.  Pour localiser l’**URL de locataire**, accédez à **Administration > Configuration IdP**. Cliquez sur le nom de la configuration IdP que vous venez d’ajouter sur la page.
+8.  Pour localiser **Tenant URL** (URL de locataire), accédez à **Administration > IdP Configuration (Configuration IdP)** . Cliquez sur le nom de la configuration IdP que vous venez d’ajouter sur la page.
 
     ![Zscaler Private Access (ZPA) – Nom d’IdP](media/zscaler-private-access-provisioning-tutorial/idpname.png)
 
@@ -118,7 +114,7 @@ Avant de configurer Zscaler Private Access (ZPA) pour l’approvisionnement auto
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Zscaler Private Access (ZPA) en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Zscaler Private Access (ZPA) en suivant les instructions fournies dans le [didacticiel sur l’authentification unique Zscaler Private Access (ZPA)](https://docs.microsoft.com/azure/active-directory/saas-apps/zscalerprivateaccess-tutorial). La configuration de l’authentification unique est indépendante de celle de l’approvisionnement automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
+> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Zscaler Private Access (ZPA) en suivant les instructions fournies dans le [didacticiel sur l’authentification unique Zscaler Private Access (ZPA)](./zscalerprivateaccess-tutorial.md). La configuration de l’authentification unique est indépendante de celle de l’approvisionnement automatique d’utilisateurs, même si ces deux fonctionnalités se complètent.
 
 > [!NOTE]
 > Pour en savoir plus sur le point de terminaison SCIM de Zscaler Private Access, consultez ce [document](https://www.zscaler.com/partners/microsoft).
@@ -135,11 +131,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification Administrateur**, entrez la valeur **Point de terminaison du fournisseur de services SCIM** récupérée précédemment dans **URL de locataire**. Entrez la valeur **Jeton du porteur** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Zscaler Private Access (ZPA). Si la connexion échoue, vérifiez que votre compte Zscaler Private Access (ZPA) dispose des autorisations d’administrateur et réessayez.
 
@@ -193,4 +189,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

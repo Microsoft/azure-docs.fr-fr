@@ -6,18 +6,19 @@ ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 06/04/2018
 ms.author: sngun
-ms.openlocfilehash: 40735f91e2ca58cc42f723c7993686d92f0e5ff0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4cb07d9d19d85cd8dff9a52eeeb7e173b60f4d6d
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77623342"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93080768"
 ---
 # <a name="retiring-the-s1-s2-and-s3-performance-levels"></a>Mise hors service des niveaux de performances S1, S2 et S3
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 > [!IMPORTANT] 
 > Les niveaux de performances S1, S2 et S3 abordés dans cet article vont être mis hors service et ne sont plus disponibles pour les nouveaux comptes Azure Cosmos DB.
->
 
 Cet article fournit une vue d’ensemble des niveaux de performances S1, S2 et S3, et explique comment les collections qui les utilisent peuvent être migrées vers des collections à partition unique. Après avoir lu cet article, vous serez en mesure de répondre aux questions suivantes :
 
@@ -43,7 +44,7 @@ Les niveaux de performances S1, S2 et S3 n’offrent pas la même flexibilité q
 
 Le tableau suivant compare les options de débit et de stockage disponibles dans les collections à partition unique, les collections partitionnées et les niveaux de performances S1, S2 et S3. Voici un exemple pour la région USA Est 2 :
 
-|   |Collection partitionnée|Collection à partition unique|S1|S2|S3|
+| Nom du quota  |Collection partitionnée|Collection à partition unique|S1|S2|S3|
 |---|---|---|---|---|---|
 |Débit maximal|Illimité|10 000 RU/s|250 RU/s|1 000 RU/s|2 500 RU/s|
 |Débit minimal|2 500 RU/s|400 RU/s|250 RU/s|1 000 RU/s|2 500 RU/s|
@@ -76,13 +77,13 @@ Dans chacun de ces cas, après avoir migré la collection, vous serez en mesure 
 
 Supposons que vous avez 10 collections S1, d’une capacité de stockage de 1 Go chacune, dans la région USA Est et que vous migrez ces 10 collections S1 vers 10 collections à partition unique dotées d’un débit de 400 RU/s (niveau minimal). Votre facture se présentera comme suit si vous conservez les 10 collections à partition unique pendant un mois complet :
 
-![Comparaison entre la tarification de 10 collections S1 et de 10 collections utilisant la tarification d’une collection à partition unique](./media/performance-levels/s1-vs-standard-pricing.png)
+:::image type="content" source="./media/performance-levels/s1-vs-standard-pricing.png" alt-text="Comparaison entre la tarification de 10 collections S1 et de 10 collections utilisant la tarification d’une collection à partition unique" border="false":::
 
 <a name="more-storage-needed"></a>
 
 ## <a name="what-if-i-need-more-than-20-gb-of-storage"></a>Que se passe-t-il si j’ai besoin de plus de 20 Go de stockage ?
 
-Que vous disposiez d’une collection avec un niveau de performances S1, S2 ou S3 ou d’une collection à partition unique disposant de 20 Go de stockage disponible, vous pouvez utiliser l’outil de migration de données Azure Cosmos DB pour migrer vos données vers une collection partitionnée bénéficiant d’un stockage quasi illimité. Pour plus d’informations sur les avantages d’une collection partitionnée, voir [Partitionnement et mise à l’échelle dans Azure Cosmos DB](sql-api-partition-data.md). 
+Que vous disposiez d’une collection avec un niveau de performances S1, S2 ou S3 ou d’une collection à partition unique disposant de 20 Go de stockage disponible, vous pouvez utiliser l’outil de migration de données Azure Cosmos DB pour migrer vos données vers une collection partitionnée bénéficiant d’un stockage quasi illimité. Pour plus d’informations sur les avantages d’une collection partitionnée, voir [Partitionnement et mise à l’échelle dans Azure Cosmos DB](partitioning-overview.md). 
 
 <a name="change-before"></a>
 
@@ -116,12 +117,12 @@ Voici un extrait de code permettant de remplacer le débit de la collection par 
     await client.ReplaceOfferAsync(offer);
 ```
 
-Visitez [MSDN](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.aspx) pour afficher des exemples supplémentaires et en savoir plus sur nos méthodes d’offre :
+Visitez [MSDN](/dotnet/api/microsoft.azure.documents.client.documentclient) pour afficher des exemples supplémentaires et en savoir plus sur nos méthodes d’offre :
 
-* [**ReadOfferAsync**](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.readofferasync.aspx)
-* [**ReadOffersFeedAsync**](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.readoffersfeedasync.aspx)
-* [**ReplaceOfferAsync**](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.replaceofferasync.aspx)
-* [**CreateOfferQuery**](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.linq.documentqueryable.createofferquery.aspx)
+* [**ReadOfferAsync**](/dotnet/api/microsoft.azure.documents.client.documentclient.readofferasync)
+* [**ReadOffersFeedAsync**](/dotnet/api/microsoft.azure.documents.client.documentclient.readoffersfeedasync)
+* [**ReplaceOfferAsync**](/dotnet/api/microsoft.azure.documents.client.documentclient.replaceofferasync)
+* [**CreateOfferQuery**](/previous-versions/azure/dn975114(v=azure.100))
 
 <a name="ea-customer"></a>
 
@@ -132,6 +133,6 @@ Les clients Contrat Entreprise bénéficieront d’une protection en matière de
 ## <a name="next-steps"></a>Étapes suivantes
 Pour en savoir plus sur la tarification et la gestion des données avec Azure Cosmos DB, explorez les ressources suivantes :
 
-1.  [Partitioning data in Cosmos DB (Partitionnement des données dans Cosmos DB)](sql-api-partition-data.md). Découvrez la différence entre les conteneurs à partition unique et les conteneurs partitionnés, et bénéficiez de conseils concernant l’implémentation d’une stratégie de partitionnement pour une mise à l’échelle en toute transparence.
+1.  [Partitioning data in Cosmos DB (Partitionnement des données dans Cosmos DB)](partitioning-overview.md). Découvrez la différence entre les conteneurs à partition unique et les conteneurs partitionnés, et bénéficiez de conseils concernant l’implémentation d’une stratégie de partitionnement pour une mise à l’échelle en toute transparence.
 2.  [Tarification Cosmos DB](https://azure.microsoft.com/pricing/details/cosmos-db/). Apprenez-en davantage sur le coût de l’approvisionnement du débit et de la consommation du stockage.
 3.  [Unités de requête](request-units.md). Découvrez la consommation de débit pour les différents types d’opérations, telles que les opérations de lecture, d’écriture et de requête.

@@ -9,12 +9,12 @@ ms.author: normesta
 ms.reviewer: fryu
 ms.subservice: common
 ms.custom: monitoring
-ms.openlocfilehash: 9a081a28d4c96e3c38986cbb3c0990bc89c5ab99
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 5465fa63a3dff71de2e370281df9351e2bac76c7
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83684466"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92790523"
 ---
 # <a name="storage-analytics"></a>Storage Analytics
 
@@ -37,11 +37,11 @@ Les actions suivantes effectuées par Storage Analytics sont facturables :
 * Demandes de création d'objets blob pour la journalisation.
 * Demandes de création d'entités de table pour les métriques.
 
-Si vous avez configuré une stratégie de rétention des données, vous n'êtes pas facturé pour les transactions de suppression lorsque Storage Analytics supprime les anciennes données de journalisation et de métriques. Toutefois, les transactions de suppression d'un client sont facturables. Pour plus d'informations sur les stratégies de rétention, consultez [Définition d'une stratégie de rétention des données Storage Analytics](https://msdn.microsoft.com/library/azure/hh343263.aspx).
+Si vous avez configuré une stratégie de rétention des données, vous n'êtes pas facturé pour les transactions de suppression lorsque Storage Analytics supprime les anciennes données de journalisation et de métriques. Toutefois, les transactions de suppression d'un client sont facturables. Pour plus d'informations sur les stratégies de rétention, consultez [Définition d'une stratégie de rétention des données Storage Analytics](/rest/api/storageservices/Setting-a-Storage-Analytics-Data-Retention-Policy).
 
 ### <a name="understanding-billable-requests"></a>Présentation des demandes facturables
 
-Chaque demande adressée à un service de stockage d’un compte est facturable ou non. Storage Analytics enregistre chaque demande effectuée à un service, avec un message d’état qui indique comment la demande a été traitée. De même, Storage Analytics stocke des métriques pour un service et pour les opérations de l'API de ce service, y compris les pourcentages et le décompte de certains messages d'état. Conjointement, ces fonctionnalités peuvent vous aider à analyser vos demandes facturables, à améliorer votre application et à diagnostiquer les problèmes liés aux demandes à vos services. Pour plus d'informations sur la facturation, consultez [Présentation de la facturation d’Azure Storage - bande passante, transactions et capacité](https://docs.microsoft.com/archive/blogs/windowsazurestorage/understanding-windows-azure-storage-billing-bandwidth-transactions-and-capacity).
+Chaque demande adressée à un service de stockage d’un compte est facturable ou non. Storage Analytics enregistre chaque demande effectuée à un service, avec un message d’état qui indique comment la demande a été traitée. De même, Storage Analytics stocke des métriques pour un service et pour les opérations de l'API de ce service, y compris les pourcentages et le décompte de certains messages d'état. Conjointement, ces fonctionnalités peuvent vous aider à analyser vos demandes facturables, à améliorer votre application et à diagnostiquer les problèmes liés aux demandes à vos services. Pour plus d'informations sur la facturation, consultez [Présentation de la facturation d’Azure Storage - bande passante, transactions et capacité](/archive/blogs/windowsazurestorage/understanding-windows-azure-storage-billing-bandwidth-transactions-and-capacity).
 
 Lorsque vous consultez des données Storage Analytics, vous pouvez utiliser les tables de la rubrique [Opérations et messages d'état enregistrés Storage Analytics](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages) pour identifier les demandes facturables. Vous pouvez ensuite comparer vos données de journaux d’activité et de métriques aux messages d’état pour déterminer si vous avez été facturé pour une demande spécifique. Vous pouvez également utiliser les tables de la rubrique précédente pour examiner la disponibilité d'un service de stockage ou d'une opération individuelle de l'API.
 

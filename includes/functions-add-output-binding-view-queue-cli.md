@@ -4,12 +4,12 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 03/25/2020
 ms.author: glenga
-ms.openlocfilehash: 44823ce888e97b308f29403612f598c0eb585ae5
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: 894a89126d1ee3ed909134f3e0dd914166568654
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80673353"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90606552"
 ---
 Vous pouvez voir la file d’attente dans le [portail Azure](../articles/storage/queues/storage-quickstart-queues-portal.md) ou dans l’[Explorateur Stockage Microsoft Azure](https://storageexplorer.com/). Vous pouvez également voir la file d’attente dans Azure CLI, en effectuant les étapes suivantes :
 
@@ -18,7 +18,7 @@ Vous pouvez voir la file d’attente dans le [portail Azure](../articles/storage
     # <a name="bash"></a>[bash](#tab/bash)
     
     ```bash
-    AZURE_STORAGE_CONNECTION_STRING="<MY_CONNECTION_STRING>"
+    export AZURE_STORAGE_CONNECTION_STRING="<MY_CONNECTION_STRING>"
     ```
     
     # <a name="powershell"></a>[PowerShell](#tab/powershell)

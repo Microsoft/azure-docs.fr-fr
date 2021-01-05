@@ -10,12 +10,12 @@ ms.service: key-vault
 ms.subservice: general
 ms.topic: reference
 ms.date: 12/16/2019
-ms.openlocfilehash: bbb30c0ad41babca4158391c9e4e5c5d4d25cbf9
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 30b7e34f2a791cfd8dec1a6d8e81d706fa07939f
+ms.sourcegitcommit: d479ad7ae4b6c2c416049cb0e0221ce15470acf6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427701"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91631220"
 ---
 # <a name="azure-key-vault-rest-api-error-codes"></a>Codes d’erreur d’API REST Azure Key Vault
  
@@ -89,7 +89,7 @@ Les jetons sont encodés en base64 et les valeurs peuvent être décodées sur d
 
 Nous pouvons voir de nombreuses parties importantes dans ce jeton :
 
-- aud (public) : Ressource du jeton. Notez qu’il s’agit de <https://vault.azure.net>. Ce jeton ne fonctionnera PAS pour les ressources qui ne correspondent pas explicitement à cette valeur, un graphique par exemple.
+- aud (public) : Ressource du jeton. Notez qu’il s’agit de `https://vault.azure.net`. Ce jeton ne fonctionnera PAS pour les ressources qui ne correspondent pas explicitement à cette valeur, un graphique par exemple.
 - iat (émis à) : Nombre de cycles depuis le début de la période où le jeton a été émis.
 - nbf (pas avant) : Nombre de cycles depuis le début de la période où ce jeton devient valide.
 - exp (expiration) : Nombre de cycles depuis le début de la période où ce jeton arrive à expiration.
@@ -128,7 +128,7 @@ Si vous ne pouvez obtenir que le jeton d’accès de réponse, vous pouvez le d�
 Une erreur HTTP 403 signifie que la requête a été authentifiée (elle connaît l’identité à l’origine de la requête), mais que l’identité n’est pas autorisée à accéder à la ressource demandée. Deux causes sont possibles :
 
 - Il n’existe aucune stratégie d’accès pour l’identité.
-- L’adresse IP de la ressource à l’origine de la requête ne figure pas dans la liste verte des paramètres de pare-feu du coffre de clés.
+- L’adresse IP de la ressource à l’origine de la requête n’est pas approuvée dans les paramètres de pare-feu du coffre de clés.
 
 Une erreur HTTP 403 se produit souvent lorsque l’application du client n’utilise pas l’ID client à laquelle le client s’attend. Cela signifie généralement que les stratégies d’accès ne sont pas correctement configurées pour l’identité appelante réelle.
 
@@ -166,5 +166,3 @@ La limitation de requêtes est contournée à l’aide des techniques suivantes 
 - Si le nombre de requêtes ne peut pas être réduit en mettant en cache et si le backoff temporisé ne fonctionne pas, envisagez de fractionner les clés en plusieurs coffres de clés. La limite de service pour un abonnement est de 5 fois la limite de Key Vault individuel. Si vous utilisez plus de 5 coffres de clés, vous devez envisager l’utilisation de plusieurs abonnements. 
 
 Des instructions détaillées, notamment sur la demande d’augmentation des limites, sont disponibles ici : [Aide sur la limitation de requêtes Key Vault](overview-throttling.md)
-
-

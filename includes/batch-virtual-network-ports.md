@@ -3,24 +3,22 @@ title: Fichier include
 description: Fichier include
 services: batch
 documentationcenter: ''
-author: LauraBrenner
+author: JnHs
 manager: evansma
 editor: ''
-ms.assetid: ''
 ms.service: batch
 ms.devlang: na
 ms.topic: include
 ms.tgt_pltfrm: na
-ms.workload: ''
-ms.date: 04/03/2020
-ms.author: labrenne
+ms.date: 06/16/2020
+ms.author: jenhayes
 ms.custom: include file
-ms.openlocfilehash: dc08dcded6418208751edbffcb5d263db059ec01
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: e4f17fbfad1e7e550b3a1e95c93e4b061d0f1c3c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80657469"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993418"
 ---
 ### <a name="general-requirements"></a>Conditions générales
 
@@ -40,16 +38,14 @@ Les exigences de réseau virtuel supplémentaires diffèrent si le pool Batch es
 
 **ID de sous-réseau** : lorsque vous spécifiez le sous-réseau à l’aide de l’API Batch, utilisez l’*identificateur de ressource* du sous-réseau. L’identificateur du sous-réseau est au format :
 
-  ```
-  /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/virtualNetworks/{network}/subnets/{subnet}
-  ```
+`/subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/virtualNetworks/{network}/subnets/{subnet}`
 
 **Autorisations** : vérifiez si vos stratégies ou verrous de sécurité l’abonnement ou le groupe de ressources du réseau virtuel restreignent les autorisations d’un utilisateur pour gérer le réseau virtuel.
 
 **Ressources de mise en réseau supplémentaires** : Batch alloue automatiquement des ressources de mise en réseau supplémentaires dans le groupe de ressources contenant le réseau virtuel.
 
 > [!IMPORTANT]
->Pour chaque 50 nœuds dédiés (ou chaque 20 nœuds de faible priorité), Batch alloue : un groupe de sécurité réseau (NSG), une adresse IP publique et un équilibreur de charge. Ces ressources sont limitées par les [quotas de ressources](../articles/azure-resource-manager/management/azure-subscription-service-limits.md) de l’abonnement. Pour les grands pools, vous devrez peut-être demander une augmentation du quota pour une ou plusieurs de ces ressources.
+> Pour chaque 100 nœuds dédiés ou de faible priorité, Batch alloue : un groupe de sécurité réseau (NSG), une adresse IP publique et un équilibreur de charge. Ces ressources sont limitées par les [quotas de ressources](../articles/azure-resource-manager/management/azure-subscription-service-limits.md) de l’abonnement. Pour les grands pools, vous devrez peut-être demander une augmentation du quota pour une ou plusieurs de ces ressources.
 
 #### <a name="network-security-groups-batch-default"></a>Groupes de sécurité réseau : configuration Batch par défaut
 
@@ -61,11 +57,11 @@ Le sous-réseau doit autoriser les communications entrantes issues du service Ba
 * Le trafic sortant sur n’importe quel port vers internet. Ce trafic peut être modifié par des règles de groupe de sécurité réseau au niveau du sous-réseau (voir ci-dessous).
 
 > [!IMPORTANT]
-> Soyez prudent si vous modifiez ou ajoutez des règles de trafic entrant ou sortant dans des groupes de sécurité réseau configurés par Batch. Si la communication vers les nœuds de calcul dans le sous-réseau spécifié est refusée par un groupe de sécurité réseau, alors le service Batch définit l’état des nœuds de calcul sur **inutilisable**. En outre, aucun verrou de ressource ne doit être appliqué à une ressource créée par Batch, sinon cela peut empêcher le nettoyage des ressources à la suite d’actions lancées par l’utilisateur, telles que la suppression d’un pool.
+> Soyez prudent si vous modifiez ou ajoutez des règles de trafic entrant ou sortant dans des groupes de sécurité réseau configurés par Batch. Si la communication vers les nœuds de calcul dans le sous-réseau spécifié est refusée par un groupe de sécurité réseau, le service Batch définit l’état des nœuds de calcul sur **inutilisable**. En outre, aucun verrou de ressource ne doit être appliqué à une ressource créée par Batch, puisque cela peut empêcher le nettoyage des ressources à la suite d’actions lancées par l’utilisateur, telles que la suppression d’un pool.
 
 #### <a name="network-security-groups-specifying-subnet-level-rules"></a>Groupes de sécurité réseau : spécification de règles au niveau du sous-réseau
 
-Il n’est pas nécessaire de spécifier des groupes de sécurité réseau au niveau du sous-réseau du réseau virtuel, car Batch configure ses propres groupes de sécurité réseau (voir ci-dessus). Si vous avez un groupe de sécurité réseau associé au sous-réseau dans lequel les nœuds de calcul Batch sont déployés ou si vous souhaitez appliquer des règles de groupe de sécurité réseau personnalisées pour remplacer celles appliquées par défaut, vous devez configurer ce groupe de sécurité réseau avec au moins les règles de sécurité entrantes et sortantes, comme indiqué dans les tableaux suivants.
+Vous n’avez pas besoin de spécifier des groupes de sécurité réseau au niveau du sous-réseau du réseau virtuel, car Batch configure ses propres groupes de sécurité réseau (voir ci-dessus). Si vous avez un groupe de sécurité réseau associé au sous-réseau dans lequel les nœuds de calcul Batch sont déployés ou si vous souhaitez appliquer des règles de groupe de sécurité réseau personnalisées pour remplacer celles appliquées par défaut, vous devez configurer ce groupe de sécurité réseau avec au moins les règles de sécurité entrantes et sortantes montrées dans les tableaux suivants.
 
 Configurez le trafic entrant sur le port 3389 (Windows) ou 22 (Linux) uniquement si vous avez besoin d’autoriser l’accès à distance aux nœuds de calcul depuis des sources externes. Vous devrez peut-être activer les règles du port 22 sur Linux si vous avez besoin de la prise en charge des tâches multi-instances avec certains runtimes MPI. Le fait d’autoriser le trafic sur ces ports n’est pas strictement nécessaire pour que les nœuds de calcul du pool soient utilisables.
 
@@ -73,17 +69,17 @@ Configurez le trafic entrant sur le port 3389 (Windows) ou 22 (Linux) uniquemen
 
 | Adresses IP sources | Balise du service source | Ports source | Destination | Ports de destination | Protocol | Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| N/A | [Étiquette de service](../articles/virtual-network/security-overview.md#service-tags) `BatchNodeManagement` (si vous utilisez une variante régionale, dans la même région que votre compte Batch) | * | Quelconque | 29876-29877 | TCP | Allow |
+| N/A | [Étiquette de service](../articles/virtual-network/network-security-groups-overview.md#service-tags) `BatchNodeManagement` (si vous utilisez une variante régionale, dans la même région que votre compte Batch) | * | Quelconque | 29876-29877 | TCP | Allow |
 | Adresses IP sources utilisateurs pour accéder à distance à des nœuds de calcul et/ou à un sous-réseau de nœuds de calcul pour les tâches multi-instances de Linux, si nécessaire. | N/A | * | Quelconque | 3389 (Windows), 22 (Linux) | TCP | Allow |
 
 > [!WARNING]
-> Les adresses IP du service Batch peuvent changer au fil du temps. Par conséquent, il est fortement recommandé d’utiliser l’étiquette de service `BatchNodeManagement` (ou une variante régionale) pour les règles de groupe de sécurité réseau. Il n’est pas recommandé de définir les règles de groupe de sécurité réseau directement avec des adresses IP du service Batch.
+> Les adresses IP du service Batch peuvent changer au fil du temps. Par conséquent, il est fortement recommandé d’utiliser l’étiquette de service `BatchNodeManagement` (ou une variante régionale) pour les règles de groupe de sécurité réseau. Évitez de renseigner les règles NSG avec des adresses IP spécifiques du service Batch.
 
 **Règles de sécurité de trafic entrant**
 
 | Source | Ports source | Destination | Identification de destination | Ports de destination | Protocol | Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| Quelconque | * | [Balise du service](../articles/virtual-network/security-overview.md#service-tags) | `Storage` (si vous utilisez une variante régionale, dans la même région que votre compte Batch) | 443 | TCP | Allow |
+| Quelconque | * | [Balise du service](../articles/virtual-network/network-security-groups-overview.md#service-tags) | `Storage` (si vous utilisez une variante régionale, dans la même région que votre compte Batch) | 443 | TCP | Allow |
 
 ### <a name="pools-in-the-cloud-services-configuration"></a>Pools dans la configuration des services cloud
 
@@ -91,19 +87,17 @@ Configurez le trafic entrant sur le port 3389 (Windows) ou 22 (Linux) uniquemen
 
 **ID de sous-réseau** : lorsque vous spécifiez le sous-réseau à l’aide de l’API Batch, utilisez l’*identificateur de ressource* du sous-réseau. L’identificateur du sous-réseau est au format :
 
-  ```
-  /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.ClassicNetwork /virtualNetworks/{network}/subnets/{subnet}
-  ```
+`/subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.ClassicNetwork /virtualNetworks/{network}/subnets/{subnet}`
 
-**Autorisations** : le `Microsoft Azure Batch`principal du service doit jouer le rôle de contrôle d’accès en fonction du rôle (RBAC) `Classic Virtual Machine Contributor` pour le réseau virtuel spécifié.
+**Autorisations** : le `Microsoft Azure Batch`principal du service doit avoir le rôle Azure `Classic Virtual Machine Contributor` pour le réseau virtuel spécifié.
 
 #### <a name="network-security-groups"></a>Groupes de sécurité réseau
 
 Le sous-réseau doit autoriser les communications entrantes issues du service Batch pour pouvoir planifier des tâches sur les nœuds de calcul, et également les communications sortantes pour communiquer avec le stockage Azure ou d’autres ressources.
 
-Il est inutile de spécifier un groupe de sécurité réseau, étant donné que Batch configure les communications entrantes uniquement à partir d’adresses IP Batch pour les nœuds du pool. Cependant, si le sous-réseau spécifié comporte des groupes de sécurité réseau associés et/ou un pare-feu, configurez les règles de sécurité du trafic entrant et sortant comme indiqué dans les tableaux suivants. Si la communication vers les nœuds de calcul dans le sous-réseau spécifié est refusée par un groupe de sécurité réseau, alors le service Batch définit l’état des nœuds de calcul sur **inutilisable**.
+Il est inutile de spécifier un groupe de sécurité réseau, étant donné que Batch configure les communications entrantes uniquement à partir d’adresses IP Batch pour les nœuds du pool. Cependant, si le sous-réseau spécifié comporte des groupes de sécurité réseau associés et/ou un pare-feu, configurez les règles de sécurité du trafic entrant et sortant comme indiqué dans les tableaux suivants. Si la communication vers les nœuds de calcul dans le sous-réseau spécifié est refusée par un groupe de sécurité réseau, le service Batch définit l’état des nœuds de calcul sur **inutilisable**.
 
-Configurez le trafic entrant sur le port 3389 (Windows) si vous avez besoin d’autoriser l’accès RDP aux nœuds du pool. Il n’est pas exigé que les nœuds du pool soient utilisables.
+Configurez le trafic entrant sur le port 3389 (Windows) si vous avez besoin d’autoriser l’accès RDP aux nœuds du pool. Ce n’est pas nécessaire pour que les nœuds du pool soient utilisables.
 
 **Règles de sécurité entrantes**
 

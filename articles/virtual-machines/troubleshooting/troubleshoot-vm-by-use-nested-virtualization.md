@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: article
 ms.date: 11/19/2019
 ms.author: genli
-ms.openlocfilehash: e1acfc3216ccfaeac035f1ff31e82c7b67c17daf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f950cb63b5083a85ab5420434abdd9a720115b1a
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76119616"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94734546"
 ---
 # <a name="troubleshoot-a-faulty-azure-vm-by-using-nested-virtualization-in-azure"></a>Dépanner une machine virtuelle Azure défaillante à l’aide d’une virtualisation imbriquée dans Azure
 
@@ -111,7 +111,7 @@ Pour monter la machine virtuelle défaillante, la machine virtuelle de secours d
 
 1.  Après avoir remis en ligne la machine virtuelle, arrêtez la machine virtuelle dans le Gestionnaire Hyper-V.
 
-2.  [Démonter et détacher le disque du système d’exploitation réparé](troubleshoot-recovery-disks-portal-windows.md#unmount-and-detach-original-virtual-hard-disk
+2.  [Démonter et détacher le disque du système d’exploitation réparé](troubleshoot-recovery-disks-portal-windows.md#unmount-and-detach-the-original-virtual-hard-disk
 ).
 3.  [Remplacez le disque du système d’exploitation utilisé par la machine virtuelle avec le disque du système d’exploitation réparé](troubleshoot-recovery-disks-portal-windows.md#swap-the-os-disk-for-the-vm
 ).

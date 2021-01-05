@@ -7,12 +7,12 @@ ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 06/22/2017
-ms.openlocfilehash: d828103bef8e57f5d0cdfe6c243c52e2d0526663
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c12c4b9f4a3757a3974e4aff7699d0265bfd7840
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80257544"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93124371"
 ---
 # <a name="scale-an-azure-stream-analytics-job-to-increase-throughput"></a>Mettre à l’échelle des travaux Azure Stream Analytics pour augmenter le débit
 Cet article vous indique comment régler une requête Stream Analytics pour augmenter le débit des travaux Stream Analytics. Vous pouvez utiliser le guide suivant pour mettre à l’échelle votre travail afin de gérer une charge plus élevée et de bénéficier de davantage de ressources système (par exemple, plus de bande passante, de ressources processeur, de mémoire).
@@ -23,8 +23,8 @@ Comme prérequis, vous devrez peut-être consulter les articles suivants :
 ## <a name="case-1--your-query-is-inherently-fully-parallelizable-across-input-partitions"></a>Cas 1 : Votre requête est par définition entièrement parallélisable sur plusieurs partitions d’entrée
 Si votre requête est par définition entièrement parallélisable sur plusieurs partitions d’entrée, vous pouvez suivre les étapes suivantes :
 1.  Créez une requête massivement parallèle en utilisant le mot clé **PARTITION BY**. Pour plus d’informations, consultez la section Travaux massivement parallèles [dans cette page](stream-analytics-parallelization.md).
-2.  En fonction des types de sorties utilisés dans votre requête, certaines sorties peuvent ne pas être parallélisables ou nécessiter une configuration supplémentaire pour être massivement parallèles. Par exemple, la sortie PowerBI n’est pas parallélisable. Les sorties sont toujours fusionnées avant l’envoi vers le récepteur de sortie. Les objets blob, les tables, ADLS, Service Bus et Azure Function sont automatiquement parallélisés. Les sorties SQL et SQL DW comportent une option pour la parallélisation. La configuration de PartitionKey pour Event Hub doit correspondre au champ **PARTITION BY** (généralement PartitionId). Pour Event Hub, assurez-vous également que le nombre de partitions d’entrée est égal au nombre de partitions de sortie pour éviter tout croisement entre les partitions. 
-3.  Exécutez votre requête avec **6 unités de streaming** (ce qui est la capacité totale d’un seul nœud de calcul) pour mesurer le débit maximal réalisable et, si vous utilisez **GROUP BY**, pour mesurer le nombre de groupes (cardinalité) que le travail peut gérer. Les symptômes généraux qui indiquent que le travail a atteint les limites des ressources système sont les suivants.
+2.  En fonction des types de sorties utilisés dans votre requête, certaines sorties peuvent ne pas être parallélisables ou nécessiter une configuration supplémentaire pour être massivement parallèles. Par exemple, la sortie PowerBI n’est pas parallélisable. Les sorties sont toujours fusionnées avant l’envoi vers le récepteur de sortie. Les objets blob, les tables, ADLS, Service Bus et Azure Function sont automatiquement parallélisés. Les sorties SQL et Azure Synapse Analytics comportent une option pour la parallélisation. La configuration de PartitionKey pour Event Hub doit correspondre au champ **PARTITION BY** (généralement PartitionId). Pour Event Hub, assurez-vous également que le nombre de partitions d’entrée est égal au nombre de partitions de sortie pour éviter tout croisement entre les partitions. 
+3.  Exécutez votre requête avec **6 unités de streaming** (ce qui est la capacité totale d’un seul nœud de calcul) pour mesurer le débit maximal réalisable et, si vous utilisez **GROUP BY** , pour mesurer le nombre de groupes (cardinalité) que le travail peut gérer. Les symptômes généraux qui indiquent que le travail a atteint les limites des ressources système sont les suivants.
     - La métrique % d’utilisation de SU est supérieure à 80 %. Cela indique une utilisation élevée de la mémoire. Les facteurs qui contribuent à l’augmentation de cette métrique sont décrits [ici](stream-analytics-streaming-unit-consumption.md). 
     -   L’horodatage de sortie est en retard par rapport au temps horloge. Selon la logique de votre requête, l’horodatage de sortie peut présenter un décalage logique par rapport au temps horloge. Toutefois, ils doivent avancer à peu près à la même vitesse. Si l’horodatage de sortie est de plus en plus en retard, cela indique que le système est surchargé. Cela peut être le résultat de la limitation du récepteur de sortie en aval ou d’une utilisation élevée du processeur. Comme nous ne fournissons pas de métrique d’utilisation du processeur à ce stade, il peut être difficile de différencier les deux.
         - Si le problème est dû à une limitation du récepteur, vous devrez peut-être augmenter le nombre de partitions de sortie (et également de partitions d’entrée pour que le travail reste entièrement parallélisable), ou augmenter la quantité de ressources du récepteur (par exemple le nombre d’unités de requête pour CosmosDB).
@@ -78,13 +78,13 @@ Pour certains cas d’usage d’éditeurs de logiciels indépendants, où il est
 
 
 ## <a name="get-help"></a>Obtenir de l’aide
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
+Pour obtenir de l’aide supplémentaire, essayez notre [page de questions Microsoft Q&A pour Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)
 
 <!--Image references-->
 
@@ -97,10 +97,9 @@ Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https:/
 <!--Link references-->
 
 [microsoft.support]: https://support.microsoft.com
-[azure.event.hubs.developer.guide]: https://msdn.microsoft.com/library/azure/dn789972.aspx
+[azure.event.hubs.developer.guide]: /previous-versions/azure/dn789972(v=azure.100)
 
 [stream.analytics.introduction]: stream-analytics-introduction.md
 [stream.analytics.get.started]: stream-analytics-real-time-fraud-detection.md
-[stream.analytics.query.language.reference]: https://go.microsoft.com/fwlink/?LinkID=513299
-[stream.analytics.rest.api.reference]: https://go.microsoft.com/fwlink/?LinkId=517301
-
+[stream.analytics.query.language.reference]: /stream-analytics-query/stream-analytics-query-language-reference
+[stream.analytics.rest.api.reference]: /rest/api/streamanalytics/

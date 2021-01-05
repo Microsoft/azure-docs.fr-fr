@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: 851c5eb4ebfee4e4a4836a07b51578dd2b0c68cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f3e4c411223a3e8fc0602602cd941a00f7a19cca
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231897"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87028241"
 ---
 # <a name="troubleshooting-specific-rdp-error-messages-to-a-windows-vm-in-azure"></a>Résolution des messages d’erreur RDP spécifiques des machines virtuelles Windows dans Azure
 Il peut arriver que vous receviez un message d’erreur spécifique lorsque vous utilisez la connexion Bureau à distance à une machine virtuelle Windows dans Azure. Cet article décrit en détail certains des messages d’erreur les plus couramment rencontrés, ainsi que les étapes de dépannage à suivre pour les résoudre. Si vous rencontrez des problèmes de connexion à votre machine virtuelle avec le protocole RDP mais que vous ne recevez pas de message d’erreur spécifique, consultez le [guide de résolution des problèmes de Bureau à distance](troubleshoot-rdp-connection.md).
@@ -40,11 +40,13 @@ Cause : La période de grâce du Gestionnaire de licences de 120 jours pour le
 
 Pour contourner ce problème, enregistrez une copie locale du fichier RDP à partir du portail, puis exécutez cette commande au niveau d’une invite de commande PowerShell pour vous connecter. Cette étape ne désactive la licence que pour cette connexion :
 
-        mstsc <File name>.RDP /admin
+```powershell
+mstsc <File name>.RDP /admin
+```
 
 Si vous n’avez pas besoin de plus de deux connexions Bureau à distance simultanées à la machine virtuelle, vous pouvez utiliser le Gestionnaire de serveur pour supprimer le rôle de serveur Bureau à distance.
 
-Pour plus d’information, consultez le billet de blog [Azure VM fails with « No Remote Desktop License Servers available » (La machine virtuelle Azure échoue et affiche le message « Aucun serveur de licences Bureau à distance n’est disponible »)](https://blogs.msdn.microsoft.com/mast/2014/01/21/rdp-to-azure-vm-fails-with-no-remote-desktop-license-servers-available/).
+Pour plus d’information, consultez le billet de blog [Azure VM fails with « No Remote Desktop License Servers available » (La machine virtuelle Azure échoue et affiche le message « Aucun serveur de licences Bureau à distance n’est disponible »)](/archive/blogs/mast/rdp-to-azure-vm-fails-with-no-remote-desktop-license-servers-available).
 
 <a id="rdpname"></a>
 
@@ -55,9 +57,11 @@ Solutions possibles :
 
 * Si vous êtes sur un intranet d’entreprise, vérifiez que votre ordinateur a bien accès au serveur proxy et qu’il peut lui transmettre le trafic HTTPS.
 * Si vous utilisez un fichier RDP stocké localement, essayez d’utiliser celui généré par le portail. Grâce à cette étape, vous êtes certain de disposer du nom DNS correct de la machine virtuelle ou du service cloud et du port du point de terminaison de la machine virtuelle. Voici un exemple de fichier RDP généré par le portail :
-  
-        full address:s:tailspin-azdatatier.cloudapp.net:55919
-        prompt for credentials:i:1
+
+    ```output
+    full address:s:tailspin-azdatatier.cloudapp.net:55919
+    prompt for credentials:i:1
+    ```
 
 La partie adresse de ce fichier RDP comporte :
 
@@ -107,6 +111,5 @@ Vérifiez que le compte que vous utilisez pour vous connecter dispose des droits
 ## <a name="next-steps"></a>Étapes suivantes
 Si aucune de ces erreurs ne s’est produite et que vous avez rencontré un problème inconnu en vous connectant avec le protocole RDP, consultez le [guide de dépannage du Bureau à distance](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-* Pour connaître les étapes de résolution des problèmes d’accès aux applications exécutées sur une machine virtuelle, consultez [Résolution des problèmes d’accès à une application exécutée sur une machine virtuelle Azure](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-* Si vous rencontrez des problèmes pour vous connecter à une machine virtuelle Linux dans Azure avec SSH (Secure Shell), consultez [Résolution des problèmes de connexions SSH à une machine virtuelle de Linux dans Azure](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-
+* Pour connaître les étapes de résolution des problèmes d’accès aux applications exécutées sur une machine virtuelle, consultez [Résolution des problèmes d’accès à une application exécutée sur une machine virtuelle Azure](./troubleshoot-app-connection.md?toc=/azure/virtual-machines/linux/toc.json).
+* Si vous rencontrez des problèmes pour vous connecter à une machine virtuelle Linux dans Azure avec SSH (Secure Shell), consultez [Résolution des problèmes de connexions SSH à une machine virtuelle de Linux dans Azure](./troubleshoot-ssh-connection.md?toc=/azure/virtual-machines/linux/toc.json).

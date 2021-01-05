@@ -7,12 +7,12 @@ ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 10/18/2016
 tags: connectors
-ms.openlocfilehash: edfbf090c3409d583cda6fd2c9957c37be5dfb7a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9fe4988b5499943f4b11ec5d640209ceb68e84ec
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75378430"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87040250"
 ---
 # <a name="access-and-manage-files-in-onedrive-connector-by-using-azure-logic-apps"></a>Accéder aux fichiers et les gérer dans le connecteur OneDrive à l’aide d'Azure Logic Apps
 
@@ -40,11 +40,11 @@ Un déclencheur est un événement qui peut être utilisé pour lancer le flux d
 
 1. Dans le Concepteur d'application logique, saisissez `onedrive` pour obtenir la liste des déclencheurs :  
 
-   ![](./media/connectors-create-api-onedrive/onedrive-1.png)
+   ![Une boîte de dialogue intitulée « Afficher les API gérées par Microsoft » comporte une zone qui contient « onedrive ». Vous trouverez ci-dessous une liste de quatre déclencheurs. Le premier est « OneDrive – Quand un fichier est créé ». Le second, « OneDrive – Quand un fichier est modifié », a été sélectionné.](./media/connectors-create-api-onedrive/onedrive-1.png)
 
 2. Sélectionnez **Quand un fichier est modifié**. Si une connexion existe déjà, sélectionnez le bouton Afficher le sélecteur pour sélectionner un dossier.
 
-   ![](./media/connectors-create-api-onedrive/sample-folder.png)
+   ![Une boîte de dialogue intitulée « Quand un fichier est modifié » contient une zone intitulée « DOSSIER » avec un bouton Parcourir associé.](./media/connectors-create-api-onedrive/sample-folder.png)
 
    Si vous êtes invité à vous connecter, entrez les informations de connexion pour créer la connexion. [Créer la connexion](connectors-create-api-onedrive.md#create-the-connection) dans cet article répertorie les étapes.
 
@@ -52,7 +52,7 @@ Un déclencheur est un événement qui peut être utilisé pour lancer le flux d
 
 3. Sélectionnez le bouton **Modifier**, puis renseignez les valeurs **Fréquence** et **Intervalle**. Par exemple, si vous souhaitez que le déclencheur interroge le service toutes les 15 minutes, définissez le champ **Fréquence** sur **Minute**, et le champ **Intervalle** sur **15**. 
 
-   ![](./media/connectors-create-api-onedrive/trigger-properties.png)
+   ![Une boîte de dialogue intitulée « Quand un fichier est modifié » présente cinq cases nommées : « DOSSIER », « FRÉQUENCE », « INTERVALLE », « FUSEAU HORAIRE » et « HEURE DE DÉBUT ». Il existe des listes déroulantes pour les champs « FRÉQUENCE » et « FUSEAU HORAIRE ».](./media/connectors-create-api-onedrive/trigger-properties.png)
 
 4. **Enregistrez** vos modifications (dans le coin supérieur gauche de la barre d’outils). Votre application logique est enregistrée et peut être activée automatiquement.
 
@@ -62,23 +62,23 @@ Une action est une opération effectuée par le flux de travail défini dans une
 
 1. Sélectionnez le signe plus. Vous disposez de plusieurs options : **Ajouter une action**, **Ajouter une condition** ou l’une des options **Plus**.
 
-   ![](./media/connectors-create-api-onedrive/add-action.png)
+   ![Une capture d’écran illustre quatre boutons : « + Nouvelle étape », « Ajouter une action », « Ajouter une condition » et « … Plus ».](./media/connectors-create-api-onedrive/add-action.png)
 
 2. Choisissez **Ajouter une action**.
 
 3. Dans la zone de recherche, saisissez `onedrive` pour obtenir la liste de toutes les actions disponibles.
 
-   ![](./media/connectors-create-api-onedrive/onedrive-actions.png) 
+   ![Une boîte de dialogue intitulée « Afficher les API gérées par Microsoft » comporte une zone qui contient « onedrive ». Vous trouverez ci-dessous une liste de huit actions. La première est « OneDrive – Créer un fichier » et elle est sélectionnée.](./media/connectors-create-api-onedrive/onedrive-actions.png) 
 
 4. Dans notre exemple, choisissez **OneDrive - Créer un fichier**. Si une connexion existe déjà, sélectionnez le **chemin du dossier** où placer le fichier, entrez le **nom de fichier** et choisissez le **contenu du fichier** souhaité :  
 
-   ![](./media/connectors-create-api-onedrive/sample-action.png)
+   ![Une boîte de dialogue intitulée « Créer un fichier » affiche trois zones nommées « CHEMIN DU DOSSIER », « NOM DE FICHIER » et « CONTENU DU DOSSIER ». Il y a un bouton Parcourir de répertoire à côté de la zone « CHEMIN DU DOSSIER ».](./media/connectors-create-api-onedrive/sample-action.png)
 
    Si vous êtes invité à indiquer les informations de connexion, entrez les informations requises pour [créer la connexion comme décrit](#create-the-connection) dans cette rubrique.
 
    Dans cet exemple, vous créez un fichier dans un dossier OneDrive. Vous pouvez utiliser les résultats d’un autre déclencheur pour créer le fichier OneDrive. Par exemple, ajoutez le déclencheur Outlook Office 365 *Lorsqu’un nouveau courrier électronique arrive*. Puis ajoutez l’action OneDrive *Créer un fichier* qui utilise les champs Pièces jointes et Type de contenu d’une instruction ForEach pour créer le fichier dans OneDrive.
 
-   ![](./media/connectors-create-api-onedrive/foreach-action.png)
+   ![Une boîte de dialogue intitulée « Pour chaque » comporte une zone nommée « SÉLECTIONNER UNE SORTIE PARMI LES ÉTAPES PRÉCÉDENTES » qui contient « Pièces jointes ». La boîte de dialogue « Créer un fichier » recouvre le reste de la zone « Pour chaque », avec les cases intitulées « CHEMIN DU DOSSIER », « NOM DE FICHIER » et « CONTENU DU FICHIER ». ](./media/connectors-create-api-onedrive/foreach-action.png)
 
 5. **Enregistrez** vos modifications (dans le coin supérieur gauche de la barre d’outils). Votre application logique est enregistrée et peut être activée automatiquement.
 

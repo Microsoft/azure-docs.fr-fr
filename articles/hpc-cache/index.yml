@@ -8,14 +8,14 @@ metadata:
   ms.topic: landing-page
   ms.collection: collection
   author: ekpgh
-  ms.author: rohogue
+  ms.author: v-erkel
   ms.date: 11/07/2019
-  ms.openlocfilehash: 3cee41dd9cb4852eab884345404ba89eff8d9d91
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: a31fb7a2878766e960e602e5167df4f92a978f25
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77651030"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87061294"
 landingContent:
 - title: À propos d’Azure HPC Cache
   linkLists:
@@ -28,7 +28,7 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Configurer des prérequis pour Azure HPC Cache
-      url: hpc-cache-prereqs.md
+      url: hpc-cache-prerequisites.md
     - text: Créer le cache
       url: hpc-cache-create.md
     - text: Ajouter du stockage

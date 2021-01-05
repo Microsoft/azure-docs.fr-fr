@@ -11,25 +11,26 @@ ms.workload: identity
 ms.date: 02/11/2020
 ms.author: nacanuma
 ms.custom: aaddev
-ms.openlocfilehash: f159105046231ba5fb4e458cdd70d930a411a920
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: 30a9b710ffbf98ebc523217a3b8a7fd9a2640c49
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80882333"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443039"
 ---
 # <a name="single-page-application-code-configuration"></a>Application monopage : Configuration de code
 
 En savoir plus sur la configuration du code de votre application monopage (SPA).
 
-## <a name="msal-libraries-that-support-implicit-flow"></a>Bibliothèques MSAL qui prennent en charge le flux implicite
+## <a name="msal-libraries-for-spas-and-supported-authentication-flows"></a>Bibliothèques MSAL pour les SPA et les flux d’authentification pris en charge
 
-La plateforme d’identités Microsoft fournit les bibliothèques MSAL (Microsoft Authentication Library) suivantes pour prendre en charge le flux implicite à l’aide des pratiques de sécurité recommandées par le secteur :
+La plateforme d’identité Microsoft fournit la bibliothèque d’authentification Microsoft suivante pour JavaScript (MSAL.js) pour prendre en charge le flux implicite et le flux de code d’autorisation avec PKCE à l’aide des pratiques de sécurité recommandées par le secteur :
 
-| Bibliothèque MSAL | Description |
-|--------------|--------------|
-| ![MSAL.js](media/sample-v2-code/logo_js.png) <br/> [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)  | Bibliothèque JavaScript brute à utiliser dans n’importe quelle application web côté client qui est créée par l’intermédiaire de frameworks JavaScript ou SPA, tels que Angular, Vue.js and React.js. |
-| ![MSAL Angular](media/sample-v2-code/logo_angular.png) <br/> [MSAL Angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) | Wrapper de la bibliothèque MSAL.js principale pour simplifier l’utilisation dans les applications monopages qui sont créées à l’aide du framework Angular. |
+| Bibliothèque MSAL | Flux | Description |
+|--------------|------|-------------|
+| ![MSAL.js](media/sample-v2-code/logo_js.png) <br/> [MSAL.js (2.x)](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser) | Flux du code d’autorisation (PKCE) | Bibliothèque JavaScript brute à utiliser dans n’importe quelle application web côté client qui est créée par l’intermédiaire de frameworks JavaScript ou SPA, tels que Angular, Vue.js and React.js. |
+| ![MSAL.js](media/sample-v2-code/logo_js.png) <br/> [MSAL.js (1.x)](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-core) | Flux implicite | Bibliothèque JavaScript brute à utiliser dans n’importe quelle application web côté client qui est créée par l’intermédiaire de frameworks JavaScript ou SPA, tels que Angular, Vue.js and React.js. |
+| ![MSAL Angular](media/sample-v2-code/logo_angular.png) <br/> [MSAL Angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) | Flux implicite | Wrapper de la bibliothèque MSAL.js principale pour simplifier l’utilisation dans les applications monopages qui sont créées à l’aide du framework Angular. |
 
 ## <a name="application-code-configuration"></a>Configuration du code de l’application
 
@@ -41,10 +42,9 @@ Dans une bibliothèque MSAL, les informations d’inscription d’application so
 // Configuration object constructed.
 const config = {
     auth: {
-        clientId: 'your_app_id',
-        redirectUri: "your_app_redirect_uri" //defaults to application start page
+        clientId: 'your_client_id'
     }
-}
+};
 
 // create UserAgentApplication instance
 const userAgentApplication = new UserAgentApplication(config);
@@ -75,5 +75,4 @@ export class AppModule { }
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Se connecter et se déconnecter](scenario-spa-sign-in.md)
+Passez à l’article suivant de ce scénario, [Connexion et déconnexion](scenario-spa-sign-in.md).

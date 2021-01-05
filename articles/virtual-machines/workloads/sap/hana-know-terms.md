@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 02/21/2020
+ms.date: 11/20/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 6785ae821f701121185f0064c6317c69d50191ab
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7777888bd27325e9094032458922969494a9a64e
+ms.sourcegitcommit: 9889a3983b88222c30275fd0cfe60807976fd65b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617061"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94984955"
 ---
 # <a name="know-the-terms"></a>Maîtriser la terminologie
 
@@ -44,6 +45,7 @@ Plusieurs définitions communes sont largement utilisées dans ce guide sur l’
 - **Révision** : il existe deux révisions de tampons pour les tampons Grande instance HANA. Celles-ci diffèrent des hôtes de machines virtuelles Azure en termes d’architecture et de proximité
     - « Révision 3 » (Rev 3) est la conception d’origine qui a été déployée à partir du milieu de l’année 2016.
     - « Révision 4 » (Rev 4) est une nouvelle conception qui peut fournir une proximité plus proche des hôtes de machines virtuelles Azure, avec une faible latence réseau entre les machines virtuelles Azure et les unités Grande instance HANA. 
+    - « Révision 4.2 » (Rev 4.2) : sur les contrôleurs de domaine Révision 4 existants, les ressources sont renommées selon BareMetal Infrastructure.  Les clients peuvent accéder à leurs ressources en tant qu’instances BareMetal à partir du portail Azure. 
 
 De nombreuses ressources supplémentaires sont disponibles sur le déploiement d’une charge de travail SAP dans le cloud. Si vous planifiez un déploiement de SAP HANA dans Azure, vous devez être expérimenté, connaitre les principes d’Azure IaaS et le déploiement des charges de travail SAP sur Azure IaaS. Avant de continuer, consultez [Utiliser des solutions SAP sur des machines virtuelles Azure](get-started.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) pour plus d’informations. 
 

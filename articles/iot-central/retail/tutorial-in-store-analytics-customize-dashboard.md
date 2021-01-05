@@ -11,12 +11,12 @@ ms.custom:
 ms.author: timlt
 author: timlt
 ms.date: 11/12/2019
-ms.openlocfilehash: 47edaec54a2470e9b657b2f214be923439e1e8a2
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: 5165f7d6e16e0d136dbf8d4507090c78372185cb
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80999589"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97348048"
 ---
 # <a name="tutorial--customize-the-operator-dashboard-and-manage-devices-in-azure-iot-central"></a>Tutoriel :  Personnaliser le tableau de bord de l’opérateur et gérer les appareils dans Azure IoT Central
 

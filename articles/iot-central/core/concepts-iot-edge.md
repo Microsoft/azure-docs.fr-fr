@@ -3,16 +3,19 @@ title: Azure IoT Edge et Azure IoT Central | Microsoft Docs
 description: Découvrez comment utiliser Azure IoT Edge avec une application IoT Central.
 author: dominicbetts
 ms.author: dobett
-ms.date: 12/12/2019
+ms.date: 12/19/2020
 ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: 89d068fbd835a5b4f8886a2ed77691f94a701bb0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom:
+- device-developer
+- iot-edge
+ms.openlocfilehash: 9a7c886ba4dd6e7ab4bd62700f5437855a16a5ad
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81759093"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97796565"
 ---
 # <a name="connect-azure-iot-edge-devices-to-an-azure-iot-central-application"></a>Connecter des appareils Azure IoT Edge à une application Azure IoT Central
 
@@ -58,11 +61,11 @@ Dans Azure IoT Central, vous pouvez importer un manifeste de déploiement pour c
 
 ![Organigramme du cycle de vie d’un manifeste de déploiement](./media/concepts-iot-edge/dmflow.png)
 
-IoT Plug-and-Play (préversion) modélise un appareil IoT Edge de la façon suivante :
+IoT Central modélise ainsi un appareil IoT Edge :
 
-* À chaque modèle d’appareil IoT Edge correspond un modèle de capacité d’appareil.
+* À chaque modèle d’appareil IoT Edge correspond un modèle d’appareil.
 * Un modèle de capacité de module est généré pour chaque module personnalisé listé dans le manifeste de déploiement.
-* Une relation est établie entre chaque modèle de capacité de module et un modèle de capacité d’appareil.
+* Une relation est établie entre chaque modèle de capacité de module et un modèle d’appareil.
 * Un modèle de capacité de module implémente des interfaces de module.
 * Chaque interface de module contient des données de télémétrie, des propriétés et des commandes.
 
@@ -70,7 +73,7 @@ IoT Plug-and-Play (préversion) modélise un appareil IoT Edge de la façon suiv
 
 ## <a name="iot-edge-gateway-devices"></a>Appareils de passerelle IoT Edge
 
-Si vous avez sélectionné un appareil IoT Edge comme appareil de passerelle, vous pouvez ajouter des relations en aval aux modèles de capacité d’appareil pour les appareils que vous souhaitez connecter à l’appareil de passerelle.
+Si vous avez sélectionné un appareil IoT Edge comme appareil de passerelle, vous pouvez ajouter des relations en aval aux modèles d’appareil pour les appareils que vous souhaitez connecter à l’appareil de passerelle.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

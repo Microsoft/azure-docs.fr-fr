@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: troubleshooting
 ms.date: 03/31/2020
 ms.author: v-mibufo
-ms.openlocfilehash: 16c8eed3377c2191b4345ec59ec1eba8be01369d
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 76c3f729a8520c7bff7b49a1d2200d7950f8a9f4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80634106"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87074300"
 ---
 # <a name="vm-is-unresponsive-with-c01a001d-error-when-applying-windows-update"></a>La machine virtuelle ne répond pas avec l’erreur « C01A001D » lors de l’application d’une mise à jour Windows
 
@@ -27,7 +27,7 @@ Cet article décrit les étapes à suivre pour résoudre les problèmes lorsqu�
 
 ## <a name="symptoms"></a>Symptômes
 
-Lorsque vous utilisez [Diagnostics de démarrage](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics) pour afficher la capture d’écran de la machine virtuelle, la mise à jour Windows (en Ko) en cours est affichée, mais échoue avec le code d’erreur : « C01A001D ».
+Lorsque vous utilisez [Diagnostics de démarrage](./boot-diagnostics.md) pour afficher la capture d’écran de la machine virtuelle, la mise à jour Windows (en Ko) en cours est affichée, mais échoue avec le code d’erreur : « C01A001D ».
 
 ![Windows Update sans réponse](./media/unresponsive-vm-apply-windows-update/unresponsive-windows-update.png)
 
@@ -49,17 +49,17 @@ Impossible de créer un fichier de base dans le système de fichiers. Le systèm
 
 ### <a name="create-and-access-a-repair-vm"></a>Créer une machine virtuelle de réparation et y accéder
 
-1. Suivez les [étapes 1 à 3 des commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands) pour préparer une machine virtuelle de réparation.
+1. Suivez les [étapes 1 à 3 des commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md) pour préparer une machine virtuelle de réparation.
 2. Connectez-vous à la machine virtuelle de réparation à l’aide de la connexion Bureau à distance.
 
 ### <a name="free-up-space-on-the-hard-disk"></a>Libérer de l’espace sur le disque dur
 
 Si le disque n’est pas déjà de 1 To, vous devez le redimensionner. Une fois que la taille du disque est de 1 To, effectuez un nettoyage de disque et une défragmentation du lecteur.
 
-1. Vérifiez si le disque est plein. Si la taille du disque est inférieure à 1 To, [augmentez-la jusqu’à un maximum de 1 To à l’aide de PowerShell](https://docs.microsoft.com/azure/virtual-machines/windows/expand-os-disk?toc=%2Fazure%2Fvirtual-machines%2Fwindows%2Ftoc.json).
+1. Vérifiez si le disque est plein. Si la taille du disque est inférieure à 1 To, [augmentez-la jusqu’à un maximum de 1 To à l’aide de PowerShell](../windows/expand-os-disk.md?toc=%2Fazure%2Fvirtual-machines%2Fwindows%2Ftoc.json).
 2. Une fois que le disque fait 1 To, effectuez un nettoyage de disque.
-    - [Détachez le disque de données de la machine virtuelle corrompue](https://docs.microsoft.com/azure/virtual-machines/windows/detach-disk).
-    - [Attachez le disque de données à une machine virtuelle opérationnelle](https://docs.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#attach-an-existing-data-disk-to-a-vm).
+    - [Détachez le disque de données de la machine virtuelle corrompue](../windows/detach-disk.md).
+    - [Attachez le disque de données à une machine virtuelle opérationnelle](../windows/attach-disk-ps.md#attach-an-existing-data-disk-to-a-vm).
     - Utilisez l’[outil Nettoyage de disque](https://support.microsoft.com/help/4026616/windows-10-disk-cleanup) pour libérer de l’espace.
 3. Après le redimensionnement et le nettoyage, défragmentez le lecteur :
 
@@ -115,4 +115,4 @@ Si le disque n’est pas déjà de 1 To, vous devez le redimensionner. Une fois
 
 ### <a name="rebuild-the-vm"></a>Régénérez la machine virtuelle.
 
-Suivez l’[étape 5 des commandes de réparation de machine virtuelle](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/repair-windows-vm-using-azure-virtual-machine-repair-commands#repair-process-example) pour réassembler la machine virtuelle.
+Suivez l’[étape 5 des commandes de réparation de machine virtuelle](./repair-windows-vm-using-azure-virtual-machine-repair-commands.md#repair-process-example) pour réassembler la machine virtuelle.

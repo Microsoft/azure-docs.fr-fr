@@ -1,25 +1,22 @@
 ---
-title: Intégration du contrôle de code source dans Azure Automation
-description: Cet article décrit l’intégration du contrôle de code source avec GitHub dans Azure Automation.
+title: Utiliser une intégration du contrôle de code source dans Azure Automation
+description: Cet article explique comment synchroniser le contrôle de code source d’Azure Automation avec d’autres référentiels.
 services: automation
 ms.subservice: process-automation
-ms.date: 12/10/2019
+ms.date: 11/12/2020
 ms.topic: conceptual
-ms.openlocfilehash: 166902978d1641458f18aeee6269c8d819e85233
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c2ddb0143bb9cba0dc2fc48ff9b9df94dc55c29c
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80132928"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94579451"
 ---
-# <a name="source-control-integration-in-azure-automation"></a>Intégration du contrôle de code source dans Azure Automation
+# <a name="use-source-control-integration"></a>Utiliser l’intégration du contrôle de code source
 
  L’intégration du contrôle de code source à Azure Automation vous permet d’effectuer des synchronisations unidirectionnelles à partir de votre dépôt de contrôle de code source. Avec le contrôle de code source, vous avez la garantie que les runbooks de votre compte Automation sont à jour par rapport aux scripts de votre dépôt de contrôle de code source GitHub ou Azure Repos. Cette fonctionnalité simplifie la promotion du code qui a été testé dans votre environnement de développement dans votre compte Automation de production.
- 
- L’intégration du contrôle de code source vous permet de facilement collaborer avec votre équipe, suivre les modifications et restaurer des versions antérieures de vos runbooks. Par exemple, le contrôle de code source vous permet de synchroniser différentes branches dans le contrôle de code source avec vos comptes Automation de développement, de test et de production. 
 
->[!NOTE]
->Cet article a été mis à jour pour tenir compte de l’utilisation du nouveau module Az d’Azure PowerShell. Vous pouvez toujours utiliser le module AzureRM, qui continue à recevoir des correctifs de bogues jusqu’à au moins décembre 2020. Pour en savoir plus sur le nouveau module Az et la compatibilité avec AzureRM, consultez [Présentation du nouveau module Az d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-3.5.0). Pour obtenir des instructions relatives à l’installation du module Az sur votre Runbook Worker hybride, voir [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps?view=azps-3.5.0). Pour votre compte Automation, vous pouvez mettre à jour vos modules vers la dernière version en suivant les instructions du [Guide de mise à jour des modules Azure PowerShell dans Azure Automation](automation-update-azure-modules.md).
+ L’intégration du contrôle de code source vous permet de facilement collaborer avec votre équipe, suivre les modifications et restaurer des versions antérieures de vos runbooks. Par exemple, le contrôle de code source vous permet de synchroniser différentes branches dans le contrôle de code source avec vos comptes Automation de développement, de test et de production.
 
 ## <a name="source-control-types"></a>Types de contrôle de code source
 
@@ -38,7 +35,7 @@ Azure Automation prend en charge trois types de contrôles de code source :
 > [!NOTE]
 > Les travaux de synchronisation du contrôle de code source sont exécutés sous le compte Automation de l’utilisateur et sont facturés au même tarif que les autres tâches Automation.
 
-## <a name="configuring-source-control"></a>Configuration du contrôle de code source
+## <a name="configure-source-control"></a>Configuration du contrôle de code source
 
 Cette section explique comment configurer le contrôle de code source pour votre compte Automation. Vous pouvez utiliser le portail Azure ou PowerShell.
 
@@ -50,11 +47,11 @@ Utilisez cette procédure pour configurer le contrôle de code source à l’aid
 
     ![Sélection du contrôle de code source](./media/source-control-integration/select-source-control.png)
 
-2. Choisissez **Type de contrôle de code source**, puis cliquez sur **Authentifier**. 
+2. Choisissez **Type de contrôle de code source**, puis cliquez sur **Authentifier**.
 
 3. Une fenêtre de navigateur s’ouvre et vous invite à vous connecter. Suivez les invites pour effectuer l’authentification.
 
-4. Dans la page Récapitulatif du contrôle de code source, utilisez les champs pour renseigner les propriétés du contrôle de code source définies ci-dessous. Lorsque vous avez terminé, cliquez sur **Enregistrer**. 
+4. Dans la page Récapitulatif du contrôle de code source, utilisez les champs pour renseigner les propriétés du contrôle de code source définies ci-dessous. Lorsque vous avez terminé, cliquez sur **Enregistrer**.
 
     |Propriété  |Description  |
     |---------|---------|
@@ -76,10 +73,9 @@ Utilisez cette procédure pour configurer le contrôle de code source à l’aid
 
 ### <a name="configure-source-control-in-powershell"></a>Configurer le contrôle de code source dans PowerShell
 
-Vous pouvez également utiliser PowerShell pour configurer le contrôle de code source dans Azure Automation. Pour utiliser des applets de commande PowerShell pour cette opération, vous avez besoin d’un jeton d’accès personnel (PAT). Pour créer la connexion de contrôle de code source, utilisez l’applet de commande [New-AzAutomationSourceControl](https://docs.microsoft.com/powershell/module/az.automation/new-azautomationsourcecontrol?view=azps-3.5.0
-). Cette applet de commande exige une chaîne sécurisée pour le PAT. Pour savoir comment créer une chaîne sécurisée, consultez [ConvertTo-SecureString](/powershell/module/microsoft.powershell.security/convertto-securestring?view=powershell-6).
+Vous pouvez également utiliser PowerShell pour configurer le contrôle de code source dans Azure Automation. Pour utiliser des applets de commande PowerShell pour cette opération, vous avez besoin d’un jeton d’accès personnel (PAT). Pour créer la connexion de contrôle de code source, utilisez l’applet de commande [New-AzAutomationSourceControl](/powershell/module/az.automation/new-azautomationsourcecontrol). Cette applet de commande exige une chaîne sécurisée pour le PAT. Pour savoir comment créer une chaîne sécurisée, consultez [ConvertTo-SecureString](/powershell/module/microsoft.powershell.security/convertto-securestring).
 
-Les sous-sections suivantes illustrent la création par PowerShell de la connexion de contrôle de code source pour GitHub, Azure Repos (Git) et Azure Repos (TFVC). 
+Les sous-sections suivantes illustrent la création par PowerShell de la connexion de contrôle de code source pour GitHub, Azure Repos (Git) et Azure Repos (TFVC).
 
 #### <a name="create-source-control-connection-for-github"></a>Créer une connexion de contrôle de code source pour GitHub
 
@@ -120,6 +116,8 @@ Le tableau suivant définit les autorisations PAT minimales nécessaires pour Gi
 |`repo:status`     | État de la validation d’accès         |
 |`repo_deployment`      | État du déploiement d’accès         |
 |`public_repo`     | Référentiels publics d’accès         |
+|`repo:invite` | Invitations au référentiel d’accès |
+|`security_events` | Lire et écrire des événements de sécurité |
 |**`admin:repo_hook`**     |         |
 |`write:repo_hook`     | Écrire des hooks de référentiel         |
 |`read:repo_hook`|Lire des hooks de référentiel|
@@ -139,15 +137,15 @@ La liste suivante définit les autorisations PAT minimales nécessaires pour Azu
 
 <sup>1</sup> L’autorisation `Service connections` est uniquement nécessaire si vous avez activé la synchronisation automatique.
 
-## <a name="synchronizing"></a>Synchronisation
+## <a name="synchronize-with-source-control"></a>Synchroniser avec le contrôle de code source
 
-Suivez ces étapes pour effectuer une synchronisation avec le contrôle de code source. 
+Suivez ces étapes pour effectuer une synchronisation avec le contrôle de code source.
 
-1. Sélectionnez la source dans le tableau de la page Contrôle de code source. 
+1. Sélectionnez la source dans le tableau de la page Contrôle de code source.
 
-2. Cliquez sur **Démarrer la synchronisation** pour initialiser le processus de synchronisation. 
+2. Cliquez sur **Démarrer la synchronisation** pour initialiser le processus de synchronisation.
 
-3. Visualisez l’état du travail de synchronisation actuel ou des travaux précédents en cliquant sur l’onglet **Travaux de synchronisation**. 
+3. Visualisez l’état du travail de synchronisation actuel ou des travaux précédents en cliquant sur l’onglet **Travaux de synchronisation**.
 
 4. Dans le menu déroulant **Contrôle de code source**, sélectionnez un mécanisme de contrôle de code source.
 
@@ -161,7 +159,7 @@ Suivez ces étapes pour effectuer une synchronisation avec le contrôle de code 
     Azure Automation Source Control.
     Supported runbooks to sync: PowerShell Workflow, PowerShell Scripts, DSC Configurations, Graphical, and Python 2.
 
-    Setting AzureRmEnvironment.
+    Setting AzEnvironment.
 
     Getting AzureRunAsConnection.
 
@@ -187,27 +185,28 @@ Suivez ces étapes pour effectuer une synchronisation avec le contrôle de code 
 
 6. Vous pouvez disposer d’une journalisation supplémentaire en sélectionnant **Tous les journaux** dans la page Récapitulatif du travail de synchronisation du contrôle de code source. Ces entrées de journal supplémentaires peuvent vous aider à résoudre les problèmes qui peuvent survenir lorsque vous utilisez le contrôle de code source.
 
-## <a name="disconnecting-source-control"></a>Déconnexion du contrôle de code source
+## <a name="disconnect-source-control"></a>Déconnecter le contrôle de code source
 
 Pour vous déconnecter d’un dépôt de contrôle de code source :
 
 1. Ouvrez **Contrôle de code source** sous **Paramètres du compte** dans votre compte Automation.
 
-2. Sélectionnez le mécanisme de contrôle de code source à supprimer. 
+2. Sélectionnez le mécanisme de contrôle de code source à supprimer.
 
 3. Dans la page Récapitulatif du contrôle de code source, cliquez sur **Supprimer**.
 
-## <a name="handling-encoding-issues"></a>Gestion des problèmes d’encodage
+## <a name="handle-encoding-issues"></a>Gérer les problèmes d’encodage
 
 Si plusieurs personnes modifient des runbooks dans votre dépôt de contrôle de code source à l’aide de différents éditeurs, des problèmes d’encodage peuvent se produire. Pour plus d’informations sur cette situation, consultez [Causes courantes des problèmes d’encodage](/powershell/scripting/components/vscode/understanding-file-encoding#common-causes-of-encoding-issues).
 
-## <a name="updating-the-pat"></a>Mise à jour du PAT
+## <a name="update-the-pat"></a>Mettre à jour le jeton d’accès personnel (PAT, Personal Access Token)
 
 Actuellement, vous ne pouvez pas utiliser le portail Azure pour mettre à jour le PAT dans le contrôle de code source. Lorsque votre PAT a expiré ou a été révoqué, vous pouvez mettre à jour le contrôle de code source avec un nouveau jeton d’accès de l’une des manières suivantes :
 
-* Utilisez l’[API REST](https://docs.microsoft.com/rest/api/automation/sourcecontrol/update).
+* Utilisez l’[API REST](/rest/api/automation/sourcecontrol/update).
 * Utilisez l’applet de commande [Update-AzAutomationSourceControl](/powershell/module/az.automation/update-azautomationsourcecontrol).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur les types de runbooks, sur leurs avantages et sur leurs limites, voir [Types de runbooks Azure Automation](automation-runbook-types.md).
+* Pour découvrir comment intégrer le contrôle de code source dans Azure Automation, consultez [Azure Automation : Intégration du contrôle de code source dans Azure Automation](https://azure.microsoft.com/blog/azure-automation-source-control-13/).  
+* Pour découvrir comment intégrer le contrôle de code source du runbook avec Visual Studio Online, consultez [Azure Automation : Intégration du contrôle de code source de Runbook à l’aide de Visual Studio Team Services](https://azure.microsoft.com/blog/azure-automation-integrating-runbook-source-control-using-visual-studio-online/).

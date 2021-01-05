@@ -3,13 +3,13 @@ author: IEvangelist
 ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/03/2020
-ms.author: dapine
-ms.openlocfilehash: 1a1207b056a0cd86d1855d990a8857ef8d9752e4
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.author: trbye
+ms.openlocfilehash: a110ff1db9b75287eb1b75d80003796354aba35b
+ms.sourcegitcommit: 0100d26b1cac3e55016724c30d59408ee052a9ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82979563"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86035609"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
@@ -42,7 +42,7 @@ Créez un fichier nommé `index.html` dans le dossier, puis ouvrez-le dans un é
 Si vous souhaitez héberger la page web sur un serveur web, vous avez la possibilité de fournir une source de jeton pour votre application de démonstration.
 De cette façon, votre clé d’abonnement ne quitte jamais le serveur et vous permet d’utiliser les fonctionnalités de reconnaissance vocale sans avoir à entrer de code d’autorisation.
 
-Créez un nouveau fichier appelé `token.php`. Dans cet exemple, nous supposons que votre serveur web prend en charge le langage de script PHP. Entrez le code suivant :
+Créez un nouveau fichier appelé `token.php`. Dans cet exemple, nous supposons que votre serveur web prend en charge le langage de script PHP avec curl activé. Entrez le code suivant :
 
 ```php
 <?php

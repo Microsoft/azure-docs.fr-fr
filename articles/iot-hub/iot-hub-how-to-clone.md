@@ -7,12 +7,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 12/09/2019
 ms.author: robinsh
-ms.openlocfilehash: c54853717f7e0b234df013e5aee575682d0d3d97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 370ea2f16632ae18142f0770742e5a52d3cabae0
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75429149"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151660"
 ---
 # <a name="how-to-clone-an-azure-iot-hub-to-another-region"></a>Comment cloner un hub IoT Azure dans une autre région
 
@@ -385,7 +385,7 @@ Le portail valide désormais votre modèle et déploie votre hub cloné. Si vous
 
 Maintenant que votre clone est opérationnel, vous devez copier tous les appareils du hub d’origine vers le clone. 
 
-Pour ce faire, plusieurs options s’offrent à vous. À l’origine, vous avez utilisé [Service de provisionnement des appareils (DPS)](/azure/iot-dps/about-iot-dps)pour approvisionner les appareils, ou vous ne l’avez pas fait. Si vous l’avez fait, cela n’est pas difficile. Si ce n’est pas le cas, cela peut s’avérer très compliqué. 
+Pour ce faire, plusieurs options s’offrent à vous. À l’origine, vous avez utilisé [Service de provisionnement des appareils (DPS)](../iot-dps/about-iot-dps.md)pour approvisionner les appareils, ou vous ne l’avez pas fait. Si vous l’avez fait, cela n’est pas difficile. Si ce n’est pas le cas, cela peut s’avérer très compliqué. 
 
 Si vous n’avez pas utilisé DPS pour approvisionner vos appareils, vous pouvez ignorer la section suivante et commencer par [Utilisation de Importer/Exporter pour déplacer les appareils vers le nouveau hub](#using-import-export-to-move-the-devices-to-the-new-hub).
 
@@ -601,4 +601,4 @@ Pour plus d’informations sur IoT Hub et le développement du hub, consultez le
 
 * [Aperçu de gestion des appareils IoT Hub](iot-hub-device-management-overview.md)
 
-* Si vous souhaitez déployer l’exemple d’application, consultez [Déploiement d’applications .NET Core](https://docs.microsoft.com/dotnet/core/deploying/index).
+* Si vous souhaitez déployer l’exemple d’application, consultez [Déploiement d’applications .NET Core](/dotnet/core/deploying/index).

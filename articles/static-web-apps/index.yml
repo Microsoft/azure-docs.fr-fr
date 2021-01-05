@@ -1,20 +1,20 @@
 ### YamlMime:Landing
 title: Documentation sur Azure Static Web Apps
-summary: Azure Static Web Apps vous permet de générer des applications web JavaScript qui sont automatiquement publiées à partir de modifications apportées à GitHub.
+summary: Azure Static Web Apps vous permet de générer des applications web modernes qui sont automatiquement publiées lorsque des modifications sont apportées dans GitHub.
 metadata:
   title: Documentation sur Azure Static Web Apps
-  description: Azure Static Web Apps vous permet de générer des applications web JavaScript qui sont automatiquement publiées à partir de modifications apportées à GitHub.
+  description: Azure Static Web Apps vous permet de générer des applications web modernes qui sont automatiquement publiées lorsque des modifications sont apportées dans GitHub.
   ms.topic: landing-page
   ms.service: static-web-apps
   author: craigshoemaker
   ms.author: cshoe
-  ms.date: 04/09/2020
-  ms.openlocfilehash: db4bccbc2b366cbd2997542b3b10068b0f5941a2
-  ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+  ms.date: 12/08/2020
+  ms.openlocfilehash: 880d675915a17e24269361c0ceed320a257d0ba9
+  ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/20/2020
-  ms.locfileid: "83701839"
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96906129"
 landingContent:
 - title: À propos de Static Web Apps
   linkLists:
@@ -27,17 +27,19 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Créer votre première application Angular
-      url: /azure/static-web-apps/getting-started?tabs=angular
+      url: ./getting-started.md?tabs=angular
     - text: Créer votre première application React
-      url: /azure/static-web-apps/getting-started?tabs=react
+      url: ./getting-started.md?tabs=react
     - text: Créer votre première application Vue
-      url: /azure/static-web-apps/getting-started?tabs=vue
+      url: ./getting-started.md?tabs=vue
     - text: Créer votre première application (aucun framework)
-      url: /azure/static-web-apps/getting-started?tabs=vanilla-javascript
+      url: ./getting-started.md?tabs=vanilla-javascript
   - linkListType: learn
     links:
-    - text: Publier une application Angular, React, Svelte ou Vue JavaScript et une API JavaScript
+    - text: Publier une application Angular, React, Svelte ou Vue JavaScript
       url: /learn/modules/publish-app-service-static-web-app-api
+    - text: Publier une API
+      url: /learn/modules/publish-static-web-app-api-preview-url
   - linkListType: video
     links:
     - text: Créer et déployer une application web statique
@@ -52,6 +54,10 @@ landingContent:
       url: publish-hugo.md
     - text: Publier à partir de VuePress
       url: publish-vuepress.md
+    - text: Publier à partir de Jekyll
+      url: publish-jekyll.md
+    - text: Effectuer un déploiement à partir de Blazor
+      url: deploy-blazor.md
     - text: Déployer à partir de Next.js
       url: deploy-nextjs.md
     - text: Déployer à partir de Nuxt.js
@@ -60,6 +66,8 @@ landingContent:
     links:
     - text: Publier une application web statique avec Gatsby
       url: /learn/modules/create-deploy-static-webapp-gatsby-app-service
+    - text: Publier une application web statique avec Blazor
+      url: /learn/modules/publish-app-service-static-web-app-api-dotnet
 - title: Concepts clés
   linkLists:
   - linkListType: concept

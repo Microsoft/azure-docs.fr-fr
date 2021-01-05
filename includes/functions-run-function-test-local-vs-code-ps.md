@@ -4,18 +4,17 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 02/19/2020
 ms.author: glenga
-ms.openlocfilehash: edf5fc33ec14d41630462cca1a4ace0663473196
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: a5c113849296275432acf1f5603377a1909a2c04
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78191021"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96842391"
 ---
 ## <a name="run-the-function-locally"></a>Exécuter la fonction localement
 
 Azure Functions Core Tools s’intègre à Visual Studio Code pour vous permettre d’exécuter et de déboguer un projet Azure Functions localement. Pour plus d’informations sur le débogage dans Visual Studio Code, consultez [Déboguer localement des fonctions PowerShell Azure](../articles/azure-functions/functions-debug-powershell-local.md). 
-
-1. Appuyez sur F5 pour démarrer le projet d’application de fonction. La sortie de Core Tools est affichée dans le panneau **Terminal**.
+1. Pour appeler votre fonction, appuyez sur <kbd>F5</kbd> pour démarrer le projet d’application de fonction. La sortie de Core Tools est affichée dans le panneau **Terminal**. Si vous rencontrez des problèmes d’exécution sur Windows, assurez-vous que le terminal par défaut pour Visual Studio Code n’est pas défini sur **WSL Bash**.
 
 1. Dans le panneau **Terminal**, copiez le point de terminaison de l’URL de votre fonction déclenchée via HTTP.
 
@@ -30,7 +29,7 @@ Azure Functions Core Tools s’intègre à Visual Studio Code pour vous permettr
 
     Vous pouvez également exécuter la requête GET depuis un navigateur avec l’URL suivante :
 
-    <http://localhost:7071/api/HttpExample?name=PowerShell>
+    `http://localhost:7071/api/HttpExample?name=PowerShell`
 
     Quand vous appelez le point de terminaison HttpTrigger sans passer de paramètre `name` comme paramètre de requête ou dans le corps, la fonction retourne une erreur `BadRequest`. Quand vous examinez le code dans run.ps1, vous voyez que cette erreur est voulue.
 

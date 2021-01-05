@@ -1,19 +1,20 @@
 ---
 title: Ajouter ou supprimer des nœuds dans un cluster Service Fabric autonome
 description: Apprenez à ajouter ou supprimer des nœuds d’un cluster Azure Service Fabric sur une machine physique ou virtuelle sous Windows Server, qu’elle soit locale ou dans un cloud.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: dekapur
-ms.openlocfilehash: f9bee35ee8e82070b4cf601139b471562ba5e10b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3e5f32274d2263bc5bf1bbec8f1626d519f8ca3f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75934203"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842918"
 ---
 # <a name="add-or-remove-nodes-to-a-standalone-service-fabric-cluster-running-on-windows-server"></a>Ajouter ou supprimer des nœuds d’un cluster Service Fabric autonome sous Windows Server
-Une fois que vous avez [créé votre cluster Service Fabric autonome sur des ordinateurs Windows Server](service-fabric-cluster-creation-for-windows-server.md), les besoins de votre entreprise peuvent évoluer et vous obliger à ajouter ou supprimer des nœuds dans votre cluster. Cet article fournit des étapes détaillées pour effectuer ces tâches. Veuillez noter que la fonctionnalité d’ajout/suppression de nœud n’est pas prise en charge dans les clusters de développement locaux.
+Une fois que vous avez [créé votre cluster Service Fabric autonome sur des ordinateurs Windows Server](service-fabric-cluster-creation-for-windows-server.md), les besoins de votre entreprise peuvent évoluer et vous obliger à ajouter ou supprimer des nœuds dans votre cluster, comme décrit dans cet article.
+
+> [!NOTE]
+> La fonctionnalité d’ajout et de suppression de nœud n’est pas prise en charge dans les clusters de développement locaux.
 
 ## <a name="add-nodes-to-your-cluster"></a>Ajouter des nœuds à votre cluster
 
@@ -142,5 +143,4 @@ Le remplacement des nœuds principaux doit être effectué un nœud à la fois, 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Paramètres de configuration pour un cluster Windows autonome](service-fabric-cluster-manifest.md)
 * [Sécuriser un cluster autonome sur Windows à l’aide de certificats X509](service-fabric-windows-cluster-x509-security.md)
-* [Créer un cluster Service Fabric autonome avec des machines virtuelles Azure sous Windows](service-fabric-cluster-creation-with-windows-azure-vms.md)
-
+* [Créer un cluster Service Fabric autonome avec des machines virtuelles Azure sous Windows](./service-fabric-cluster-creation-via-arm.md)

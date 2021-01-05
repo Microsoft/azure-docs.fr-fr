@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 8/25/2017
 ms.author: alkohli
-ms.openlocfilehash: 3d6ef22e4df36996d68194589f43ea0f57def22c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a5a7a31c174271f963bb005f10b8376a59133d36
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232217"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014871"
 ---
 # <a name="replace-a-disk-drive-on-your-storsimple-8000-series-device"></a>Remplacer un lecteur de disque sur votre appareil de la gamme StorSimple 8000
 

@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/11/2020
-ms.openlocfilehash: 56d8cad05a42da8de680ade487dddee9a97aab3a
-ms.sourcegitcommit: 07d62796de0d1f9c0fa14bfcc425f852fdb08fb1
+ms.openlocfilehash: 67d17af4f615907ca50b27ce8fa26973e5869608
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80364184"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93314252"
 ---
-# <a name="score-model-module"></a>Score Model module
+# <a name="score-model"></a>Noter un modèle
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour générer des prédictions à l’aide d’un modèle de classification ou de régression entraîné.
 
@@ -48,8 +48,8 @@ Le score, ou la valeur prédite, peut être indiqué dans différents formats en
 
 ## <a name="publish-scores-as-a-web-service"></a>Publier des scores en tant que service web
 
-Une utilisation courante du scoring consiste à retourner la sortie en tant que partie d’un service web prédictif. Pour plus d’informations, consultez [ce didacticiel](https://docs.microsoft.com/azure/machine-learning/tutorial-designer-automobile-price-deploy) sur le déploiement d’un point de terminaison en temps réel basé sur un pipeline dans le concepteur Azure Machine Learning.
+Une utilisation courante du scoring consiste à retourner la sortie en tant que partie d’un service web prédictif. Pour plus d’informations, consultez [ce didacticiel](../tutorial-designer-automobile-price-deploy.md) sur le déploiement d’un point de terminaison en temps réel basé sur un pipeline dans le concepteur Azure Machine Learning.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

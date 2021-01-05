@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 07/13/2017
-ms.openlocfilehash: 75c65cf9f76e711a3aeed764de8b92ed619bad2f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ee5aec2e483f41c73d57fc1d91427e5657bda3e7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77666941"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87317992"
 ---
 # <a name="plan-hyper-v-virtual-machine-capacity-with-the-capacity-and-performance-solution-deprecated"></a>Planifier la capacité des machines virtuelles Hyper-V avec la solution Capacity and Performance (déprécié)
 
@@ -41,10 +41,10 @@ Le tableau suivant décrit les sources connectées qui sont prises en charge par
 
 | Source connectée | Support | Description |
 |---|---|---|
-| [Agents Windows](../../azure-monitor/platform/agent-windows.md) | Oui | La solution collecte des informations sur la capacité et les données de performances des agents Windows. |
-| [Agents Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) | Non    | La solution ne collecte pas d’informations sur la capacité ni sur les données de performances des agents Linux directs.|
-| [Groupe d’administration SCOM](../../azure-monitor/platform/om-agents.md) | Oui |La solution collecte les données de capacité et de performances des agents dans un groupe d’administration SCOM connecté. Une connexion directe entre l’agent SCOM et Log Analytics n’est pas obligatoire.|
-| [Compte Azure Storage](../../azure-monitor/platform/collect-azure-metrics-logs.md) | Non | Le stockage Azure n’inclut pas de données de performances ni de capacité.|
+| [Agents Windows](../platform/agent-windows.md) | Oui | La solution collecte des informations sur la capacité et les données de performances des agents Windows. |
+| [Agents Linux](../learn/quick-collect-linux-computer.md) | Non | La solution ne collecte pas d’informations sur la capacité ni sur les données de performances des agents Linux directs.|
+| [Groupe d’administration SCOM](../platform/om-agents.md) | Oui |La solution collecte les données de capacité et de performances des agents dans un groupe d’administration SCOM connecté. Une connexion directe entre l’agent SCOM et Log Analytics n’est pas obligatoire.|
+| [Compte Azure Storage](../platform/resource-logs.md#send-to-log-analytics-workspace) | Non | Le stockage Azure n’inclut pas de données de performances ni de capacité.|
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -55,7 +55,7 @@ Le tableau suivant décrit les sources connectées qui sont prises en charge par
 
 Exécutez l’étape suivante pour ajouter la solution Capacité et performances dans votre espace de travail.
 
-- Ajoutez la solution Capacity and Performance dans votre espace de travail Log Analytics en suivant la procédure décrite dans [Ajouter des solutions Log Analytics à partir de la galerie de solutions](../../azure-monitor/insights/solutions.md).
+- Ajoutez la solution Capacity and Performance dans votre espace de travail Log Analytics en suivant la procédure décrite dans [Ajouter des solutions Log Analytics à partir de la galerie de solutions](./solutions.md).
 
 ## <a name="management-packs"></a>Packs d’administration
 
@@ -72,7 +72,7 @@ New Management Pack with id:"Microsoft.IntelligencePacks.CapacityPerformance", v
 
 Lorsque la solution Capacité et performances est mise à jour, le numéro de version change.
 
-Pour plus d’informations sur la façon dont ces packs d’administration de solution sont mis à jour, consultez [Connecter Operations Manager à Log Analytics](../../azure-monitor/platform/om-agents.md).
+Pour plus d’informations sur la façon dont ces packs d’administration de solution sont mis à jour, consultez [Connecter Operations Manager à Log Analytics](../platform/om-agents.md).
 
 ## <a name="using-the-solution"></a>Utilisation de la solution
 
@@ -109,7 +109,7 @@ Cliquez sur la vignette Capacité et performances pour ouvrir le tableau de bord
 
 Les environnements informatiques de production varient considérablement d’une organisation à l’autre. En outre, les charges de travail de capacité et de performance peuvent dépendre du mode d’exécution de vos machines virtuelles et de ce que vous considérez normal. Des procédures spécifiques pour vous aider à mesurer les performances ne seraient probablement pas applicables à votre environnement. Des conseils plus généraux sont donc mieux appropriés pour vous aider. Microsoft publie de nombreux articles regroupant des conseils pour vous aider à mesurer les performances.
 
-En résumé, la solution collecte les données de capacité et de performances à partir de nombreuses sources, notamment les compteurs de performances. Utilisez ces données de capacité et de performances, qui sont présentées dans différentes surfaces dans la solution et comparez vos résultats à ceux de l’article [Measuring Performance on Hyper-V (Mesure des performances sur Hyper-V)](https://msdn.microsoft.com/library/cc768535.aspx). Même si cet article a été publié il y a quelque temps, les mesures, les remarques à prendre en compte et les instructions restent valides. Cet article contient des liens vers d’autres ressources utiles.
+En résumé, la solution collecte les données de capacité et de performances à partir de nombreuses sources, notamment les compteurs de performances. Utilisez ces données de capacité et de performances, qui sont présentées dans différentes surfaces dans la solution et comparez vos résultats à ceux de l’article [Measuring Performance on Hyper-V (Mesure des performances sur Hyper-V)](https://www.microsoft.com/en-us/download/details.aspx?id=56495). Même si cet article a été publié il y a quelque temps, les mesures, les remarques à prendre en compte et les instructions restent valides. Cet article contient des liens vers d’autres ressources utiles.
 
 
 ## <a name="sample-log-searches"></a>Exemples de recherches dans les journaux
@@ -129,4 +129,5 @@ Le tableau ci-dessous contient des exemples de recherche dans les journaux pour 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Utilisez les [Recherches dans les journaux de Log Analytics](../../azure-monitor/log-query/log-query-overview.md) pour afficher les données détaillées de capacité et de performances.
+* Utilisez les [Recherches dans les journaux de Log Analytics](../log-query/log-query-overview.md) pour afficher les données détaillées de capacité et de performances.
+

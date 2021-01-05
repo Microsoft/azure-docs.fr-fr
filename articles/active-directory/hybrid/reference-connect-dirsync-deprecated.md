@@ -17,17 +17,17 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.custom: H1Hack27Feb2017
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 803fcc0161f2a092006e60db5a98f5bf18dce1c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 915b56e9a9340920e99f4d3d4de6da4c39233eab
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60381176"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90014801"
 ---
 # <a name="upgrade-windows-azure-active-directory-sync-and-azure-active-directory-sync"></a>Mettre à niveau Microsoft Azure Active Directory Sync et Azure Active Directory Sync
-Azure AD Connect est la meilleure façon de connecter votre répertoire local avec Azure AD et Office 365. C’est l’occasion idéale d’effectuer la mise à niveau vers Azure AD Connect à partir de Microsoft Azure Active Directory Sync (DirSync) ou Azure AD Sync, car ces outils sont désormais dépréciés et ne sont plus pris en charge depuis le 13 avril 2017.
+Azure AD Connect est la meilleure façon de connecter votre répertoire local avec Azure AD et Microsoft 365. C’est l’occasion idéale d’effectuer la mise à niveau vers Azure AD Connect à partir de Microsoft Azure Active Directory Sync (DirSync) ou Azure AD Sync, car ces outils sont désormais dépréciés et ne sont plus pris en charge depuis le 13 avril 2017.
 
-Les deux outils de synchronisation des identités qui sont déconseillés étaient proposés pour les clients de forêt unique (DirSync) et pour les clients à forêts multiples et expérimentés (Azure AD Sync). Ces outils plus anciens ont été remplacés par une solution unique qui est disponible pour tous les scénarios : Azure AD Connect. Cette solution offre de nouvelles fonctionnalités, des améliorations de fonctionnalités et la prise en charge de nouveaux scénarios. Pour pouvoir continuer à synchroniser vos données d’identités locales vers Azure AD et Office 365, nous vous recommandons vivement d’effectuer la mise à niveau vers Azure AD Connect. Microsoft ne garantit pas que ces versions plus anciennes fonctionneront après le 31 décembre 2017.
+Les deux outils de synchronisation des identités qui sont déconseillés étaient proposés pour les clients de forêt unique (DirSync) et pour les clients à forêts multiples et expérimentés (Azure AD Sync). Ces outils plus anciens ont été remplacés par une solution unique qui est disponible pour tous les scénarios : Azure AD Connect. Cette solution offre de nouvelles fonctionnalités, des améliorations de fonctionnalités et la prise en charge de nouveaux scénarios. Pour pouvoir continuer à synchroniser vos données d’identités locales vers Azure AD et Microsoft 365, nous vous recommandons vivement d’effectuer la mise à niveau vers Azure AD Connect. Microsoft ne garantit pas que ces versions plus anciennes fonctionneront après le 31 décembre 2017.
 
 La dernière version de DirSync a été publiée en juillet 2014 et la dernière version d’Azure AD Sync a été publiée en mai 2015.
 
@@ -56,7 +56,7 @@ Si vous souhaitez savoir comment effectuer une mise à niveau sur place depuis D
 >
 
 ## <a name="faq"></a>Questions fréquentes (FAQ)
-**Q : J’ai reçu une notification par courrier électronique de l’équipe Azure et/ou un message du centre de messages Office 365, mais j’utilise Connect.**  
+**Q : J’ai reçu une notification par courrier électronique de l’équipe Azure et/ou un message du centre de messages Microsoft 365, mais j’utilise Connect.**  
 La notification a été également envoyée aux clients à l'aide d'Azure AD Connect avec un numéro de build 1.0. \*. 0 (à l'aide d'une version pre-1.1). Microsoft recommande aux clients de maintenir à jour leurs versions d’Azure AD Connect. Grâce à la fonctionnalité de [mise à niveau automatique](how-to-connect-install-automatic-upgrade.md) introduite dans la version 1.1, il est facile de toujours avoir une version récente d’Azure AD Connect installée.
 
 **Q : DirSync/Azure AD Sync vont-ils cesser de fonctionner le 13 avril 2017 ?**  

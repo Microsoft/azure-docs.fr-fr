@@ -1,44 +1,33 @@
 ---
-title: Comprendre l’outil de migration pour les alertes Azure Monitor
-description: Découvrez comment l’outil de migration des alertes fonctionne et résolvez les problèmes.
+title: Comprendre la migration pour les alertes Azure Monitor
+description: Comprendre le fonctionnement de la migration des alertes et résoudre les problèmes.
 ms.topic: conceptual
 ms.date: 07/10/2019
 ms.author: yalavi
 author: yalavi
 ms.subservice: alerts
-ms.openlocfilehash: d31c856e17348c23ad61130869af6ae440d3050d
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 6509425f11b09a2fa5229f9dd68a508241391925
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114309"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91875918"
 ---
-# <a name="understand-how-the-migration-tool-works"></a>Comprendre le fonctionnement de l’outil de migration
+# <a name="understand-migration-options-to-newer-alerts"></a>Comprendre les options de migration vers les alertes plus récentes
 
-Comme [précédemment annoncé](monitoring-classic-retirement.md), les alertes classiques dans Azure Monitor seront mises hors service le 31 août 2019 (c’était initialement prévu pour le 30 juin 2019). Un outil de migration est disponible dans le Portail Azure pour les clients qui utilisent des règles d’alerte classiques et qui souhaitent déclencher la migration eux-mêmes.
+Les alertes classiques ne sont [mises hors service](./monitoring-classic-retirement.md), bien qu’elles soient toujours utilisées pour les ressources qui ne prennent pas encore en charge les nouvelles alertes. Une nouvelle date sera annoncée bientôt pour la migration des alertes restantes ([cloud Azure Government](../../azure-government/documentation-government-welcome.md) et [Azure China 21Vianet](https://docs.azure.cn/)).
 
-Cet article explique le fonctionnement de l’outil de migration volontaire. Il décrit également les solutions pour certains problèmes courants.
-
-> [!NOTE]
-> En raison de retards dans le déploiement de l’outil de migration, la date de mise hors service des alertes classiques a été [repoussée au 31 août 2019](https://azure.microsoft.com/updates/azure-monitor-classic-alerts-retirement-date-extended-to-august-31st-2019/) (la date annoncée à l’origine était le 30 juin 2019).
-
-## <a name="classic-alert-rules-that-will-not-be-migrated"></a>Les règles d’alerte classiques qui ne seront pas migrées
+Cet article explique comment fonctionne l’outil de migration manuelle et de migration volontaire, qui sera utilisé pour migrer les règles d’alerte restantes. Il décrit également les solutions pour certains problèmes courants.
 
 > [!IMPORTANT]
 > Les alertes de journal d’activité (y compris les alertes d’intégrité de service) et les alertes de journal ne sont pas affectées par la migration. La migration s’applique uniquement aux règles d’alerte classiques décrites [ici](monitoring-classic-retirement.md#retirement-of-classic-monitoring-and-alerting-platform).
 
-Bien que l’outil peut migrer presque toutes les [règles d’alerte classiques](monitoring-classic-retirement.md#retirement-of-classic-monitoring-and-alerting-platform), il existe quelques exceptions. Les règles d’alerte suivantes ne seront pas migrées avec l’outil (ou lors de la migration automatique à partir de septembre 2019) :
-
-- Les règles d’alerte classiques des métriques d’invité pour les machines virtuelles (Windows et Linux). Consultez les [conseils permettant de recréer ces règles d’alerte dans les nouvelles alertes de métriques](#guest-metrics-on-virtual-machines) plus loin dans cet article.
-- Les règles d’alerte classiques des métriques de stockage classiques. Consultez les [conseils pour la surveillance de vos comptes de stockage classiques](https://azure.microsoft.com/blog/modernize-alerting-using-arm-storage-accounts/).
-- Les règles d’alerte classiques pour certaines métriques de compte de stockage. Consultez les [détails](#storage-account-metrics) plus loin dans cet article.
-- Les règles d’alerte classiques sur certaines métriques Cosmos DB. Consultez les [détails](#cosmos-db-metrics) plus loin dans cet article.
-- Règles d’alerte classiques sur toutes les mesures de services cloud et de machines virtuelles classiques (Microsoft. ClassicCompute/virtualMachines et Microsoft. ClassicCompute/domainNames/Slots/Roles). Consultez les [détails](#classic-compute-metrics) plus loin dans cet article.
-
-Si votre abonnement a des règles classiques de ce type, vous devez les migrer manuellement. Étant donné que nous ne pouvons pas fournir une migration automatique, les alertes de métrique classiques existantes de ces types continueront à fonctionner jusqu'à juin 2020. Cette extension vous donne le temps de passer aux nouvelles alertes. Vous pouvez également continuer à créer des alertes classiques sur les exceptions listées ci-dessus jusqu’en juin 2020. Toutefois, pour tout le reste, aucune nouvelle alerte classique ne peut être créée après août 2019.
-
 > [!NOTE]
-> Outre les exceptions répertoriées ci-dessus, si vos règles d’alerte classiques ne sont pas valides, par exemple si elles portent sur des [métriques dépréciées](#classic-alert-rules-on-deprecated-metrics) ou des ressources qui ont été supprimées, elles ne seront pas migrées et ne seront pas disponibles une fois le service mis hors service.
+> Si vos règles d’alerte classiques ne sont pas valides, par exemple si elles portent sur des [métriques déconseillées](#classic-alert-rules-on-deprecated-metrics) ou des ressources qui ont été supprimées, elles ne seront pas migrées et ne seront pas disponibles une fois le service mis hors service.
+
+## <a name="manually-migrating-classic-alerts-to-newer-alerts"></a>Migration manuelle des alertes classiques vers des alertes plus récentes
+
+Les clients qui souhaitent migrer manuellement leurs alertes restantes peuvent déjà le faire à l’aide des sections suivantes. Ces sections définissent également les métriques qui sont mises hors service par le fournisseur de ressources et qui ne peuvent actuellement pas être migrées directement.
 
 ### <a name="guest-metrics-on-virtual-machines"></a>Métriques d’invité sur les machines virtuelles
 
@@ -64,7 +53,7 @@ Toutes les alertes classiques sur les comptes de stockage peuvent être migrées
 - SASThrottlingError
 - ThrottlingError
 
-Les règles d’alerte classiques sur les métriques de pourcentage doivent être migrées selon [le mappage entre les anciennes et nouvelles métriques de stockage](https://docs.microsoft.com/azure/storage/common/storage-metrics-migration#metrics-mapping-between-old-metrics-and-new-metrics). Les seuils devront être modifiés en conséquence, car la nouvelle métrique disponible est absolue.
+Les règles d’alerte classiques sur les métriques de pourcentage doivent être migrées selon [le mappage entre les anciennes et nouvelles métriques de stockage](../../storage/common/storage-metrics-migration.md#metrics-mapping-between-old-metrics-and-new-metrics). Les seuils devront être modifiés en conséquence, car la nouvelle métrique disponible est absolue.
 
 Les règles d’alerte classiques sur AnonymousThrottlingError, SASThrottlingError et ThrottlingError doivent être fractionnées en deux nouvelles alertes, car il n’existe aucune métrique combinée qui fournit les mêmes fonctionnalités. Les seuils devront être adaptés de manière appropriée.
 
@@ -104,7 +93,7 @@ Les alertes sur les mesures de requêtes Mongo ayant échoué doivent être frac
 
 ### <a name="classic-compute-metrics"></a>Calcul classique de mesures
 
-Les alertes sur les mesures de calcul classiques ne seront pas migrées à l’aide de l’outil de migration, car les ressources de calcul classiques ne sont pas encore prises en charge avec les nouvelles alertes. La prise en charge des nouvelles alertes sur ces types de ressources sera ajoutée à l’avenir. Une fois disponible, les clients doivent recréer de nouvelles règles d’alerte équivalentes en fonction de leurs règles d’alerte classiques avant juin 2020.
+Les alertes sur les mesures de calcul classiques ne seront pas migrées à l’aide de l’outil de migration, car les ressources de calcul classiques ne sont pas encore prises en charge avec les nouvelles alertes. La prise en charge des nouvelles alertes sur ces types de ressources est actuellement disponible en version préliminaire publique, et les clients peuvent recréer de nouvelles règles d’alerte équivalentes basées sur leurs règles d’alerte classiques.
 
 ### <a name="classic-alert-rules-on-deprecated-metrics"></a>Règles d’alerte classiques sur des métriques déconseillées
 
@@ -265,10 +254,12 @@ Dans le cadre de la migration, de nouvelles alertes de métrique et de nouveaux 
 
 ### <a name="policy-with-deny-effect-preventing-us-from-migrating-your-rules"></a>Une stratégie avec effet de refus nous empêche de migrer vos règles
 
-Dans le cadre de la migration, de nouvelles alertes de métrique et de nouveaux groupes d’actions seront créés, et les règles d’alerte classiques seront alors supprimées. Toutefois, une stratégie peut nous empêcher de créer des ressources. En fonction de la stratégie, certaines ou l’intégralité des règles n’ont pas pu être migrées. Les stratégies qui bloquent le processus sont listées dans l’[outil de migration](https://portal.azure.com/#blade/Microsoft_Azure_Monitoring/MigrationBladeViewModel). Pour résoudre ce problème, effectuez l’une ou l’autre des étapes suivantes :
+Dans le cadre de la migration, de nouvelles alertes de métrique et de nouveaux groupes d’actions seront créés, et les règles d’alerte classiques seront alors supprimées. Toutefois, une affectation [Azure Policy](../../governance/policy/index.yml) peut nous empêcher de créer des ressources. En fonction de l’affectation de stratégie, certaines ou l’intégralité des règles n’ont pas pu être migrées. Les affectations de stratégie qui bloquent le processus sont listées dans l’[outil de migration](https://portal.azure.com/#blade/Microsoft_Azure_Monitoring/MigrationBladeViewModel). Pour résoudre ce problème, effectuez l’une ou l’autre des étapes suivantes :
 
-- Excluez les abonnements ou les groupes de ressources pendant la durée du processus de migration à partir de l’attribution de stratégie. [En savoir plus sur la gestion de l’étendue de l’exclusion des stratégies](../../governance/policy/tutorials/create-and-manage.md#exempt-a-non-compliant-or-denied-resource-using-exclusion).
-- Supprimez l’effet de refus ou modifiez-le en le remplaçant par un effet d’audit ou d’ajout (qui, par exemple, permet de résoudre les problèmes liés aux balises manquantes). [En savoir plus sur la gestion de l’effet des stratégies](../../governance/policy/concepts/definition-structure.md#policy-rule).
+- Excluez les abonnements, les groupes de ressources ou les ressources individuelles pendant la durée du processus de migration à partir de l’affectation de stratégie. [En savoir plus sur la gestion des étendues de l’exclusion de stratégie](../../governance/policy/tutorials/create-and-manage.md#remove-a-non-compliant-or-denied-resource-from-the-scope-with-an-exclusion).
+- Définissez le « mode d’application » sur **Désactivé** sur l’affectation de stratégie. [En savoir plus sur la propriété enforcementMode de l’affectation de stratégie](../../governance/policy/concepts/assignment-structure.md#enforcement-mode).
+- Définissez une exemption Azure Policy (préversion) sur les abonnements, les groupes de ressources ou les ressources individuelles pour l’affectation de stratégie. [En savoir plus sur la structure d’exemption Azure Policy](../../governance/policy/concepts/exemption-structure.md).
+- Supprimez l’effet ou modifiez-le en le remplaçant par un effet désactivé, d’audit, d’ajout ou de modification (qui, par exemple, permet de résoudre les problèmes liés aux balises manquantes). [En savoir plus sur la gestion des effets de stratégie](../../governance/policy/concepts/definition-structure.md#policy-rule).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

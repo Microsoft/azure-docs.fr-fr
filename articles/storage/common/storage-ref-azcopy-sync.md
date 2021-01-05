@@ -4,16 +4,16 @@ description: Cet article fournit des informations de référence sur la commande
 author: normesta
 ms.service: storage
 ms.topic: reference
-ms.date: 10/16/2019
+ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: d855019be7f357a35a26d14e68ba3d427d984e17
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: de97640ab462ac8ea7342d235d0fad802c232179
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82086026"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92783366"
 ---
 # <a name="azcopy-sync"></a>azcopy sync
 
@@ -33,7 +33,7 @@ Il existe plusieurs différences entre la commande sync et la commande copy :
 
 1. Par défaut, l’indicateur récursif possède la valeur true et la synchronisation copie tous les sous-répertoires. La synchronisation copie uniquement les fichiers de niveau supérieur à l’intérieur d’un répertoire si l’indicateur récursif possède la valeur false.
 2. Lors de la synchronisation entre répertoires virtuels, ajoutez une barre oblique finale au chemin d’accès (voir exemples) s’il existe un objet blob portant le même nom que l’un des répertoires virtuels.
-3. Si l’indicateur « deleteDestination » est défini sur true ou prompt, la synchronisation supprime les fichiers et objets blob de destination qui ne sont pas présents au niveau de la source.
+3. Si l’indicateur « `deleteDestination` » est défini sur true ou prompt, la synchronisation supprime les fichiers et objets blob de destination qui ne sont pas présents au niveau de la source.
 
 ## <a name="related-conceptual-articles"></a>Articles conceptuels associés
 
@@ -66,10 +66,7 @@ Synchroniser un fichier :
 azcopy sync "/path/to/file.txt" "https://[account].blob.core.windows.net/[container]/[path/to/blob]"
 ```
 
-> [!NOTE]
-> Le blob de destination *doit* exister. Utilisez `azcopy copy` pour copier un fichier unique qui n’existe pas encore dans la destination. Sinon, l’erreur suivante s’affiche : `Cannot perform sync due to error: sync must happen between source and destination of the same type, e.g. either file <-> file, or directory/container <-> directory/container`.
-
-Comme ci-dessus, mais cette fois-ci, calcule également le hachage MD5 du contenu du fichier et l’enregistre en tant que propriété Content-MD5 de l’objet blob :
+Comme ci-dessus, mais calcule également le hachage MD5 du contenu du fichier et l’enregistre en tant que propriété Content-MD5 de l’objet blob. 
 
 ```azcopy
 azcopy sync "/path/to/file.txt" "https://[account].blob.core.windows.net/[container]/[path/to/blob]" --put-md5
@@ -87,22 +84,22 @@ or
 azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --put-md5
 ```
 
-Synchroniser uniquement les principaux fichiers d’un répertoire, mais pas ses sous-répertoires :
+Synchronisez uniquement les fichiers à l’intérieur d’un répertoire, mais pas les sous-répertoires ou les fichiers à l’intérieur des sous-répertoires :
 
 ```azcopy
 azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --recursive=false
 ```
 
-Synchroniser un sous-ensemble de fichiers dans un répertoire (par exemple, uniquement les fichiers .jpg et PDF, ou uniquement les fichiers dont le nom est « exactName ») :
+Synchroniser un sous-ensemble de fichiers dans un répertoire (par exemple, uniquement les fichiers .jpg et PDF, ou uniquement les fichiers dont le nom est « `exactName` ») :
 
 ```azcopy
-azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --include="*.jpg;*.pdf;exactName"
+azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --include-pattern="*.jpg;*.pdf;exactName"
 ```
 
 Synchroniser l’intégralité d’un répertoire, mais exclure certains fichiers (par exemple, tous ceux dont le nom commence par « foo » ou se termine par « bar ») :
 
 ```azcopy
-azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --exclude="foo*;*bar"
+azcopy sync "/path/to/dir" "https://[account].blob.core.windows.net/[container]/[path/to/virtual/dir]" --exclude-pattern="foo*;*bar"
 ```
 
 Synchronisez un objet blob :
@@ -134,29 +131,35 @@ azcopy sync "https://[account].file.core.windows.net/[share]/[path/to/dir]?[SAS]
 
 ## <a name="options"></a>Options
 
-**--block-size-mb** float         Taille de bloc (spécifiée en Mio) utilisée lors du chargement dans Stockage Azure ou le téléchargement à partir de Stockage Azure. La valeur par défaut est calculée automatiquement en fonction de la taille du fichier. Les fractions décimales sont autorisées (par exemple : 0,25).
+**--block-size-mb** float    Taille de bloc (spécifiée en Mio) utilisée lors du chargement dans Stockage Azure ou le téléchargement à partir de Stockage Azure. La valeur par défaut est calculée automatiquement en fonction de la taille du fichier. Les fractions décimales sont autorisées (par exemple : `0.25`).
 
-**--check-md5** string         Spécifie la manière dont les hachages MD5 doivent être validés lors du téléchargement. Disponible uniquement lors du téléchargement. Valeurs disponibles : NoCheck, LogOnly, FailIfDifferent, FailIfDifferentOrMissing. (par défaut « FailIfDifferent ») (par défaut « FailIfDifferent »)
+**--check-md5** string   Spécifie la manière dont les hachages MD5 doivent être validés lors du téléchargement. Disponible uniquement lors du téléchargement. Les valeurs disponibles sont les suivantes : `NoCheck`, `LogOnly`, `FailIfDifferent`, `FailIfDifferentOrMissing`. (par défaut `FailIfDifferent`). (valeur par défaut `FailIfDifferent`)
 
-**--delete-destination** string   Détermine si les fichiers de l’emplacement de destination qui ne sont pas présents dans l’emplacement source doivent être supprimés. Valeurs possibles : true, false ou prompt. Si la valeur est définie sur prompt, l’utilisateur est invité à répondre à une question avant de planifier la suppression des fichiers et des objets blob. (par défaut : « false ») (par défaut : « false »)
+**--delete-destination** string   Détermine si les fichiers de l’emplacement de destination qui ne sont pas présents dans l’emplacement source doivent être supprimés. Peut être défini sur `true`, `false`, ou `prompt`. Si la valeur est définie sur `prompt`, l’utilisateur est invité à répondre à une question avant de planifier la suppression des fichiers et des objets blob. (par défaut `false`). (valeur par défaut `false`)
 
-**--exclude-attributes** string   (Windows uniquement) Exclut les fichiers dont les attributs correspondent à la liste d’attributs. Par exemple : A;S;R
+**--exclude-attributes** string (Windows uniquement) Exclut les fichiers dont les attributs correspondent à la liste d’attributs. Par exemple : `A;S;R`
 
-**--exclude-path** string Exclut ces chemins lors de la copie. Cette option ne prend pas en charge les caractères génériques (*). Vérifie le préfixe de chemin relatif (Par exemple : myFolder;myFolder/subDirName/file.pdf.) En cas d’utilisation combinée avec la traversée de comptes, les chemins n’incluent pas le nom du conteneur.
+**--exclude-path** string    Exclut ces chemins d’accès lorsque la source est comparée à la destination. Cette option ne prend pas en charge les caractères génériques (*). Vérifie le préfixe du chemin d’accès relatif (par exemple, `myFolder;myFolder/subDirName/file.pdf`).
 
-**--exclude-pattern** string      Exclut les fichiers dont le nom correspond à la liste de caractères génériques. Par exemple : \*.jpg;\*.pdf;exactName
+Chaîne **--exclude-pattern** Exclut les fichiers dont le nom correspond à la liste de caractères génériques. Par exemple : `*.jpg;*.pdf;exactName`
 
-**-h, --help**                        Aide pour la synchronisation
+**--help**    Aide pour la synchronisation.
 
-**--include-attributes** string   (Windows uniquement) Inclut uniquement les fichiers dont les attributs correspondent à la liste d’attributs. Par exemple : A;S;R
+**--include-attributes** string   (Windows uniquement) Inclut uniquement les fichiers dont les attributs correspondent à la liste d’attributs. Par exemple : `A;S;R`
 
-**--include-pattern** string      Inclut uniquement les fichiers dont le nom correspond à la liste de caractères génériques. Par exemple : \*.jpg;\*.pdf;exactName
+Chaîne **--include-pattern** Inclut uniquement les fichiers dont le nom correspond à la liste de caractères génériques. Par exemple : `*.jpg;*.pdf;exactName`
 
-**--log-level** string            Définit le niveau de détail pour le fichier journal. Niveaux disponibles : INFO (toutes les requêtes et réponses), WARNING (réponses lentes), ERROR (uniquement les échecs de requêtes) et NONE (aucun journal de sortie). (par défaut : INFO) (par défaut : « INFO »)
+**--log-level** string     Définit le niveau de détail pour le fichier journal. Niveaux disponibles : `INFO`(toutes les demandes et réponses), `WARNING`(réponses lentes), `ERROR`(uniquement les demandes ayant échoué) et `NONE`(aucun journal de sortie). (par défaut `INFO`). 
 
-**--put-md5**                     Crée un hachage MD5 de chaque fichier, puis enregistre le hachage en tant que propriété Content-MD5 de l’objet blob ou du fichier de destination. (par défaut, le hachage n’est pas créé.) Disponible uniquement lors du chargement.
+**--preserve-smb-info** False par défaut. Conserve les informations de propriété SMB (heure de la dernière écriture, heure de création, bits d’attribut) entre les ressources prenant en charge SMB (Windows et Azure Files). Cet indicateur s’applique aux fichiers et aux dossiers, à moins qu’un filtre de fichier uniquement soit spécifié (par exemple, include-pattern).  Les informations transférées pour les dossiers sont les mêmes que pour les fichiers, à l’exception de l’heure de la dernière écriture, qui n’est pas conservée pour les dossiers.
 
-**--recursive**                   True par défaut. Examine les sous-répertoires de manière récursive lors de la synchronisation des répertoires. (par défaut : true) (par défaut : true)
+**--preserve-smb-permissions** False par défaut. Conserve les listes de contrôle d’accès (ACL) SMB entre les ressources prenant en charge SMB (Windows et Azure Files). Cet indicateur s’applique aux fichiers et aux dossiers, à moins qu’un filtre de fichier uniquement soit spécifié (par exemple, `include-pattern`).
+
+**--put-md5**     Crée un hachage MD5 de chaque fichier, puis enregistre le hachage en tant que propriété Content-MD5 de l’objet blob ou du fichier de destination. (par défaut, le hachage n’est pas créé.) Disponible uniquement lors du chargement.
+
+**--recursive**    `True` par défaut. Examine les sous-répertoires de manière récursive lors de la synchronisation des répertoires. (par défaut `True`). 
+
+**--s2s-preserve-access-tier**  Conserver le niveau d’accès lors d’une copie de service à service. Pour vérifier si le compte de stockage de destination prend en charge la définition du niveau d’accès, consultez [Stockage Blob Azure : niveaux d’accès chaud, froid et archive](../blobs/storage-blob-storage-tiers.md). Si la définition du niveau d’accès n’est pas prise en charge, utilisez s2sPreserveAccessTier=false pour contourner la copie du niveau d’accès. (par défaut `true`). 
 
 ## <a name="options-inherited-from-parent-commands"></a>Options héritées des commandes parentes
 
@@ -164,6 +167,7 @@ azcopy sync "https://[account].file.core.windows.net/[share]/[path/to/dir]?[SAS]
 |---|---|
 |--cap-mbps uint32|Limite la vitesse de transfert, en mégabits par seconde. Par moment, le débit peut dépasser légèrement cette limite. Si cette option est définie sur zéro ou si elle est omise, le débit n’est pas limité.|
 |--output-type (chaîne)|Met en forme la sortie de la commande. Les formats possibles sont « text » et « JSON ». La valeur par défaut est « text ».|
+|--trusted-microsoft-suffixes (chaîne)   |Spécifie des suffixes de domaine supplémentaires où des jetons de connexion Azure Active Directory peuvent être envoyés.  La valeur par défaut est «  *.core.windows.net;* .core.chinacloudapi.cn; *.core.cloudapi.de;* .core.usgovcloudapi.net ». Tous les éléments répertoriés ici sont ajoutés à la valeur par défaut. Pour la sécurité, vous devez placer uniquement des domaines Microsoft Azure ici. Séparez plusieurs entrées par des points-virgules.|
 
 ## <a name="see-also"></a>Voir aussi
 

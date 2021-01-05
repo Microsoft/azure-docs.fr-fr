@@ -1,6 +1,6 @@
 ---
 title: Clustering de données de point sur une carte | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir comment regrouper les données des points et comment les afficher sur une carte avec le SDK web Microsoft Azure Maps.
+description: Découvrez comment mettre en cluster des données de point sur des cartes. Découvrez comment utiliser le Kit de développement logiciel (SDK) web Azure Maps pour mettre en cluster des données, réagir aux événements de souris en cluster et afficher les agrégats de cluster.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 07/29/2019
@@ -8,21 +8,21 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: cpendle
-ms.custom: codepen
-ms.openlocfilehash: ce2891201331ee1efd861d2f13cec78c0551b6ba
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: e80465cf8d43918e6ed6da8ebb3b96f3f197e887
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80804569"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97679952"
 ---
 # <a name="clustering-point-data"></a>Clustering de données de point
 
 Lors de la visualisation de nombreux points de données sur la carte, les points peuvent se chevaucher. Le chevauchement peut rendre la carte illisible et difficile à utiliser. Le clustering de point de données est le processus permettant de combiner des données de point proches les unes des autres et de les représenter sur une carte en tant qu’un point de données en cluster unique. Lorsque l’utilisateur effectue un zoom avant sur la carte, les clusters se décomposent pour afficher les points de données individuels qui les composent. Quand vous travaillez avec un grand nombre de points de données, utilisez les processus de clustering pour améliorer l’expérience de vos utilisateurs.
 
-<br/>
+</br>
 
-<iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Clustering-point-data-in-Azure-Maps/player" width="960" height="540" allowFullScreen frameBorder="0"></iframe>
+>[!VIDEO https://channel9.msdn.com/Shows/Internet-of-Things-Show/Clustering-point-data-in-Azure-Maps/player?format=ny]
 
 ## <a name="enabling-clustering-on-a-data-source"></a>Activer le clustering sur une source de données
 
@@ -132,13 +132,13 @@ Consultez le <a href='https://codepen.io/azuremaps/pen/jgYyRL/'>Agrégats de clu
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [Classe DataSource](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.source.datasource?view=azure-iot-typescript-latest)
+> [Classe DataSource](/javascript/api/azure-maps-control/atlas.source.datasource)
 
 > [!div class="nextstepaction"]
-> [Objet DataSourceOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.datasourceoptions?view=azure-iot-typescript-latest)
+> [Objet DataSourceOptions](/javascript/api/azure-maps-control/atlas.datasourceoptions)
 
 > [!div class="nextstepaction"]
-> [Espace de noms atlas.math](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.math?view=azure-iot-typescript-latest)
+> [Espace de noms atlas.math](/javascript/api/azure-maps-control/atlas.math)
 
 Consultez les exemples de code pour ajouter la fonctionnalité à votre application :
 

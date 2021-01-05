@@ -1,20 +1,22 @@
 ---
 title: Accéder aux journaux des requêtes lentes - Azure CLI - Azure Database for MariaDB
 description: Cet article décrit comment accéder aux journaux des requêtes lentes dans Azure Database for MariaDB à l’aide de l’utilitaire de ligne de commande Azure CLI.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 4/13/2020
-ms.openlocfilehash: 75efdd8ed855fe78651fce5828aacb2384052ae5
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: cea1571a48afe00350dde247c3c10e222a446247
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81270534"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94539870"
 ---
-# <a name="configure-and-access-slow-query-logs-by-using-azure-cli"></a>Configurer et consulter les journaux des requêtes lentes à l’aide d’Azure CLI
+# <a name="configure-and-access-azure-database-for-maria-db-slow-query-logs-by-using-azure-cli"></a>Configurer et accéder au journaux des requêtes lentes dans Azure Database pour Maria DB en utilisant Azure CLI
+
 Vous pouvez télécharger les journaux des requêtes lentes Azure Database for MariaDB à l’aide d’Azure CLI, l’utilitaire en ligne de commande Azure.
 
 ## <a name="prerequisites"></a>Prérequis

@@ -3,17 +3,17 @@ title: 'Questions fréquentes : SRE et DevOps | Microsoft Docs'
 titleSuffix: Azure
 description: 'Questions fréquentes : Comprendre la relation entre SRE et DevOps'
 author: dnblankedelman
-manager: efreeman
+manager: ScottCa
 ms.service: site-reliability-engineering
 ms.topic: article
-ms.date: 04/22/2020
+ms.date: 09/14/2020
 ms.author: dnb
-ms.openlocfilehash: e917c609b484b1a58377fea2f6cdd75dde30ca6c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 62872443c386c45d9821053dc901ad8e0055b74f
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195784"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92674266"
 ---
 # <a name="frequently-asked-questions-whats-the-relationship-between-sre-and-devops"></a>Forum Aux Questions : Quelle est la relation entre SRE et DevOps ?
 
@@ -30,7 +30,7 @@ SRE et DevOps sont des pratiques opérationnelles modernes qui ont été créée
 
 Ces deux pratiques opérationnelles attirent l’attention sur des sujets essentiels pour gérer ces défis, par exemple, la supervision/l’observabilité, l’automatisation, la documentation et les outils de développement de logiciels collaboratifs.
 
-SRE et DevOps partagent une grande partie des outils et des domaines de travail. Comme indiqué dans l’ouvrage _The Site Reliability Workbook_, « SRE croit aux mêmes choses que DevOps, mais pour des raisons légèrement différentes ».
+SRE et DevOps partagent une grande partie des outils et des domaines de travail. Comme indiqué dans l’ouvrage _The Site Reliability Workbook_ , « SRE croit aux mêmes choses que DevOps, mais pour des raisons légèrement différentes ».
 
 ## <a name="three-different-ways-to-compare-the-two-operations-practices"></a>Trois façons différentes de comparer les deux pratiques opérationnelles
 
@@ -50,7 +50,7 @@ D’après la définition de SRE du [hub d’ingénierie de fiabilité de site](
 
 Le mot résumant SRE est donc « fiabilité ». Il s’agit aussi du deuxième mot du nom, ce choix paraît donc évident.
 
-D’après la définition de DevOps du [Centre de ressources Azure DevOps](https://docs.microsoft.com/azure/devops/learn/) :
+D’après la définition de DevOps du [Centre de ressources Azure DevOps](/azure/devops/learn/) :
 
 > DevOps rassemble des personnes, des processus et des produits pour permettre la distribution continue de valeur ajoutée aux clients finaux.
 
@@ -60,7 +60,7 @@ Par conséquent, « SRE est à la fiabilité ce que DevOps est à la distributi
 
 ### <a name="direction-of-attention"></a>Sens de l’attention
 
-Cette réponse est tirée ou légèrement paraphrasée d’une contribution de Thomas Limoncelli dans l’ouvrage _Seeking SRE_, mentionné dans notre [liste d’ouvrages](../resources/books.md). Ce dernier note que les ingénieurs DevOps se focalisent en grande partie sur le pipeline du cycle de vie du développement de logiciels avec des responsabilités occasionnelles d’opérations de production, tandis que les ingénieurs SRE se focalisent sur les opérations de production avec des responsabilités occasionnelles de pipeline.
+Cette réponse est tirée ou légèrement paraphrasée d’une contribution de Thomas Limoncelli dans l’ouvrage _Seeking SRE_ , mentionné dans notre [liste d’ouvrages](../resources/books.md). Ce dernier note que les ingénieurs DevOps se focalisent en grande partie sur le pipeline du cycle de vie du développement de logiciels avec des responsabilités occasionnelles d’opérations de production, tandis que les ingénieurs SRE se focalisent sur les opérations de production avec des responsabilités occasionnelles de pipeline.
 
 Plus important encore, il dessine un diagramme qui commence par le processus de développement logiciel d’un côté et le travail des opérations de production de l’autre. Les deux sont connectés par le pipeline habituel, qui consiste à prendre le code d’un développeur, le conduire à travers le nombre de tests et de phases souhaités, puis le passer en production.
 
@@ -80,4 +80,4 @@ Nous espérons que les réponses précédentes vous permettent de comprendre dan
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous souhaitez en savoir plus sur l’ingénierie de fiabilité de site ou sur DevOps ? Consultez notre [hub d’ingénierie de fiabilité de site](../index.yml) et le [centre de ressources Azure DevOps](https://docs.microsoft.com/azure/devops/learn/).
+Vous souhaitez en savoir plus sur l’ingénierie de fiabilité de site ou sur DevOps ? Consultez notre [hub d’ingénierie de fiabilité de site](../index.yml) et le [centre de ressources Azure DevOps](/azure/devops/learn/).

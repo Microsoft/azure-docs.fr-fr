@@ -9,39 +9,44 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-image-search
 ms.topic: quickstart
-ms.date: 03/31/2020
+ms.date: 05/08/2020
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: fffe56986a3b3a64910678d19321e2d04b8fcc55
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: cf5478dfb15665047e39d51c71ec9e85a436fe91
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80478569"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96341850"
 ---
 # <a name="quickstart-search-for-images-using-the-bing-image-search-rest-api-and-php"></a>Démarrage rapide : Rechercher des images à l’aide de l’API REST Recherche d’images Bing et de PHP
 
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
 Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche d’images Bing et recevoir une réponse JSON. L’application simple présentée dans cet article envoie une requête de recherche et affiche les résultats bruts.
 
-Alors que cette application est écrite en PHP, l’API est un service web RESTful compatible avec n’importe quel langage de programmation qui peut formuler des requêtes HTTP et analyser JSON.
+Bien que cette application est écrite en PHP, l’API est un service web RESTful compatible avec n’importe quel langage de programmation qui peut formuler des requêtes HTTP et analyser JSON.
 
 Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/php/Search/BingWebSearchv7.php).
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [PHP 5.6.x ou ultérieur](https://php.net/downloads.php).
+* [PHP 5.6.x ou ultérieur](https://php.net/downloads.php)
 
 [!INCLUDE [cognitive-services-bing-image-search-signup-requirements](../../../../includes/cognitive-services-bing-image-search-signup-requirements.md)]
 
-Consultez également [Tarification Cognitive Services - API Recherche Bing](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/).
+Pour plus d’informations, consultez [Tarifs de Cognitive Services - API Recherche Bing](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/).
 
 ## <a name="create-and-initialize-the-application"></a>Créer et initialiser l’application
 
-Pour exécuter cette application, suivez les étapes ci-dessous.
+Pour exécuter cette application, suivez les étapes ci-dessous :
 
-1. Vérifiez que la prise en charge HTTP sécurisée est activée dans votre fichier `php.ini`. Sur Windows, ce fichier se trouve dans `C:\windows`.
+1. Vérifiez que la prise en charge HTTP sécurisée est activée dans votre fichier `php.ini`. Sur Windows, ce fichier se trouve dans *C:\windows*.
 2. Créez un projet PHP dans votre éditeur ou IDE favori.
-3. Définissez le point de terminaison d’API, votre clé d’abonnement et le terme de recherche. Le point de terminaison peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+3. Définissez le point de terminaison d’API, votre clé d’abonnement et le terme de recherche. Le point de terminaison peut être le point de terminaison global dans le code ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```php
     $endpoint = 'https://api.cognitive.microsoft.com/bing/v7.0/images/search';
@@ -138,9 +143,8 @@ Les réponses de l’API Recherche d’images Bing sont retournées au format JS
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Qu’est-ce que la Recherche d’images Bing ?](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/overview)  
+* [Qu’est-ce que l’API Recherche d’images Bing ?](../overview.md)  
 * [Essayez une démonstration interactive en ligne](https://azure.microsoft.com/services/cognitive-services/bing-image-search-api/) 
-* [Détail des prix](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/) des API Recherche Bing. 
-* [Obtenir une clé d’accès Cognitive Services gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-image-search-api)  
-* [Documentation Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services)
-* [Informations de référence sur l’API Recherche d’images Bing](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)
+* [Détail des prix des API Recherche Bing](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/) 
+* [Documentation Azure Cognitive Services](../../index.yml)
+* [Informations de référence sur l’API Recherche d’images Bing](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference)

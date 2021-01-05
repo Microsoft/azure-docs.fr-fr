@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 04/27/2017
-ms.openlocfilehash: dd3279db67fb45aee43cf1b0ef1bebf49433eef4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5cecf24f4ba086feba5ab87b5752fd665c540dff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77663230"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86498676"
 ---
 # <a name="targeting-monitoring-solutions-in-azure-monitor-preview"></a>Ciblage des solutions de supervision dans Azure Monitor (préversion)
 Lorsque vous ajoutez une solution de supervision à votre abonnement, par défaut, celle-ci est automatiquement déployée sur tous les agents Windows et Linux connectés à votre espace de travail Log Analytics.  Vous pouvez gérer vos coûts et limiter la quantité de données collectées pour une solution en limitant celle-ci à un ensemble spécifique d’agents.  Cet article explique comment utiliser le **ciblage de solution**, une fonctionnalité qui permet d’appliquer une étendue à vos solutions.
@@ -59,7 +59,7 @@ Appliquez une configuration d’étendue à l’aide de la procédure suivante.
 Voici les critères pour les agents et les solutions qui ne peuvent pas être utilisés avec le ciblage de solution.
 
 - Le ciblage de solution s’applique uniquement aux solutions avec déploiement sur les agents.
-- Le ciblage de solution s’applique uniquement aux solutions fournies par Microsoft.  Il ne s’applique pas aux solutions [créées par vous-même ou vos partenaires](solutions-creating.md).
+- Le ciblage de solution s’applique uniquement aux solutions fournies par Microsoft.  Il ne s’applique pas aux solutions [créées par vous-même ou vos partenaires](./solutions.md).
 - Vous pouvez uniquement filtrer les agents qui se connectent directement à Azure Monitor.  Les solutions se déploient automatiquement sur les agents (qu’ils soient inclus dans une configuration d’étendue ou non) qui font partie d’un groupe d’administration Operations Manager connecté.
 
 ### <a name="exceptions"></a>Exceptions

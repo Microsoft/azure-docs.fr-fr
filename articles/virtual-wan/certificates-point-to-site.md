@@ -1,18 +1,18 @@
 ---
 title: Génération et exportation de certificats pour les connexions VPN utilisateur | Azure Virtual WAN
-description: Créez un certificat racine auto-signé, exportez la clé publique et générez des certificats clients avec PowerShell sous Windows 10 ou Windows Server 2016.
+description: Créez un certificat racine autosigné, exportez la clé publique, puis générez des certificats clients pour des connexions VPN utilisateur avec PowerShell sur Windows 10 ou Windows Server 2016.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
-ms.topic: conceptual
-ms.date: 03/18/2020
+ms.topic: how-to
+ms.date: 09/22/2020
 ms.author: cherylmc
-ms.openlocfilehash: 0303bac88f34c895a4a680cd5bff0e9d1513d2e5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2205f170ee846d4db94db7f524a1c424cfbc8f7b
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80059959"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91328036"
 ---
 # <a name="generate-and-export-certificates-for-user-vpn-connections"></a>Génération et exportation de certificats pour les connexions VPN utilisateur
 

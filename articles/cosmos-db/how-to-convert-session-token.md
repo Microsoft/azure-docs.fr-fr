@@ -3,17 +3,20 @@ title: Comment convertir des formats de jeton de session dans le Kit de dévelop
 description: Découvrez comment convertir les formats de jeton de session pour garantir la compatibilité entre les différentes versions du Kit de développement logiciel (SDK) .NET
 author: vinhms
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 04/30/2020
 ms.author: vitrinh
-ms.openlocfilehash: 377d8e3e923d6a8fa3b1722cee6451a696ce2490
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 7ed06eeb7330989b4a251dc77e516eb8ac578bff
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793933"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93342043"
 ---
 # <a name="convert-session-token-formats-in-net-sdk"></a>Convertir les format de jeton de session dans le Kit de développement logiciel (SDK) .NET
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article explique comment effectuer une conversion entre différents formats de jeton de session pour garantir la compatibilité entre les différentes versions du Kit de développement logiciel (SDK).
 
@@ -110,6 +113,6 @@ else
 Consultez les articles suivants :
 
 * [Utiliser des jetons de sessions pour gérer la cohérence dans Azure Cosmos DB](how-to-manage-consistency.md#utilize-session-tokens)
-* [Choisir le niveau de cohérence approprié dans Azure Cosmos DB](consistency-levels-choosing.md)
-* [Compromis entre cohérence, disponibilité et niveau de performance dans Azure Cosmos DB](consistency-levels-tradeoffs.md)
-* [Compromis entre disponibilité et performance pour différents niveaux de cohérence](consistency-levels-tradeoffs.md)
+* [Choisir le niveau de cohérence approprié dans Azure Cosmos DB](./consistency-levels.md)
+* [Compromis entre cohérence, disponibilité et niveau de performance dans Azure Cosmos DB](./consistency-levels.md)
+* [Compromis entre disponibilité et performance pour différents niveaux de cohérence](./consistency-levels.md)

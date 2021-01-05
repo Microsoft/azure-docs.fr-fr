@@ -11,12 +11,12 @@ metadata:
   author: spelluru
   ms.author: spelluru
   ms.date: 03/15/2020
-  ms.openlocfilehash: f70bdf831d5b65aab9d6d01f88122d1a0fdd9957
-  ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+  ms.openlocfilehash: 13bb875c371458969ae5b4e8592085c5faa2c947
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/12/2020
-  ms.locfileid: "83200395"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88927423"
 highlightedContent:
   items:
   - title: Choisir entre les différents services de messagerie Azure
@@ -74,13 +74,13 @@ conceptualContent:
       text: En savoir plus
   - title: Envoyer et recevoir des événements
     links:
-    - url: ../event-hubs/get-started-dotnet-standard-send-v2.md
+    - url: ../event-hubs/event-hubs-dotnet-standard-getstarted-send.md
       itemType: quickstart
       text: Envoyer et recevoir des événements à partir d’Azure Event Hubs à l’aide de .NET Core
     - url: ../event-hubs/event-hubs-java-get-started-send.md
       itemType: quickstart
       text: Utiliser Java pour envoyer ou recevoir des événements d’Azure Event Hubs
-    - url: ../event-hubs/get-started-python-send-v2.md
+    - url: ../event-hubs/event-hubs-python-get-started-send.md
       itemType: quickstart
       text: Envoyer des événements à des hubs d’événements ou en recevoir de ces derniers à l’aide de Python
     footerLink:

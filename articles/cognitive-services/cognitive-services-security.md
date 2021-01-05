@@ -1,24 +1,25 @@
 ---
-title: Sécurité
+title: Sécurité Azure Cognitive Services
 titleSuffix: Azure Cognitive Services
 description: Découvrez les différentes considérations relatives à la sécurité dans le cadre de l’utilisation de Cognitive Services.
 services: cognitive-services
-author: IEvangelist
+author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: conceptual
-ms.date: 03/23/2020
-ms.author: dapine
-ms.openlocfilehash: c86d806c408c2e8226e632a0b15e1e8729c987f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/28/2020
+ms.author: erhopf
+ms.custom: devx-track-python, devx-track-js, devx-track-csharp
+ms.openlocfilehash: f14ac72443dedc8e33e607a82b2145c7ebf95ad2
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80131535"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368778"
 ---
 # <a name="azure-cognitive-services-security"></a>Sécurité Azure Cognitive Services
 
-La sécurité doit être considérée comme une priorité absolue lors du développement de toute application. Avec l’arrivée d’applications prenant en charge l’intelligence artificielle, la sécurité devient encore plus importante. Cet article présente divers aspects de la sécurité Azure Cognitive Services, tels que l’utilisation du protocole TLS, l’authentification et la configuration sécurisée des données sensibles.
+La sécurité doit être considérée comme une priorité absolue lors du développement de toute application. Avec l’arrivée d’applications prenant en charge l’intelligence artificielle, la sécurité devient encore plus importante. Cet article présente divers aspects de la sécurité Azure Cognitive Services, tels que l'utilisation du protocole TLS, l'authentification, la configuration sécurisée des données sensibles et Customer Lockbox pour l'accès aux données client.
 
 ## <a name="transport-layer-security-tls"></a>TLS (Transport Layer Security)
 
@@ -32,7 +33,7 @@ Pour les utilisateurs .NET, prenez en compte les <a href="https://docs.microsoft
 
 ## <a name="authentication"></a>Authentification
 
-En ce qui concerne l’authentification, plusieurs fausses idées sont largement répandues. Les gens confondent souvent authentification et autorisation. L’identité est également une composante majeure de la sécurité. Une identité est une collection d’informations sur un <a href="https://en.wikipedia.org/wiki/Principal_(computer_security)" target="_blank">principal<span class="docon docon-navigate-external x-hidden-focus"></span></a>. Les fournisseurs d’identité (IdP) fournissent des identités aux services d’authentification. L’authentification est l’action consistant à vérifier l’identité d’un utilisateur. L’autorisation est la spécification de droits d’accès et de privilèges sur des ressources pour une identité donnée. Plusieurs des offres de Cognitive Services incluent le contrôle d’accès en fonction du rôle (RBAC). La fonctionnalité RBAC peut être utilisée pour simplifier une partie du cérémonial impliqué dans la gestion manuelle des principaux. Pour en savoir plus, reportez-vous au [contrôle d’accès en fonction du rôle pour les ressources Azure](../role-based-access-control/overview.md).
+En ce qui concerne l’authentification, plusieurs fausses idées sont largement répandues. Les gens confondent souvent authentification et autorisation. L’identité est également une composante majeure de la sécurité. Une identité est une collection d’informations sur un <a href="https://en.wikipedia.org/wiki/Principal_(computer_security)" target="_blank">principal<span class="docon docon-navigate-external x-hidden-focus"></span></a>. Les fournisseurs d’identité (IdP) fournissent des identités aux services d’authentification. L’authentification est l’action consistant à vérifier l’identité d’un utilisateur. L’autorisation est la spécification de droits d’accès et de privilèges sur des ressources pour une identité donnée. Plusieurs des offres de Cognitive Services incluent le contrôle d’accès en fonction du rôle Azure (Azure RBAC). La fonctionnalité Azure RBAC peut être utilisée pour simplifier une partie du cérémonial impliqué dans la gestion manuelle des principaux. Pour en savoir plus, reportez-vous au [contrôle d’accès en fonction du rôle Azure pour les ressources Azure](../role-based-access-control/overview.md).
 
 Pour plus d’informations sur l’authentification avec les clés d’abonnement, les jetons d’accès et Azure Active Directory (AAD), consultez <a href="https://docs.microsoft.com/azure/cognitive-services/authentication" target="_blank">Authentifier des requêtes auprès d’Azure Cognitive Services<span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 
@@ -59,7 +60,7 @@ Créez et assignez une variable d’environnement persistante, la valeur étant 
 setx ENVIRONMENT_VARIABLE_KEY="value"
 ```
 
-Dans une nouvelle instance de l’**invite de commandes**, lisez la variable d’environnement.
+Dans une nouvelle instance de l’ **invite de commandes** , lisez la variable d’environnement.
 
 ```CMD
 :: Prints the env var value
@@ -75,7 +76,7 @@ Créez et assignez une variable d’environnement persistante, en fonction de la
 [System.Environment]::SetEnvironmentVariable('ENVIRONMENT_VARIABLE_KEY', 'value', 'User')
 ```
 
-Dans une nouvelle instance de **Windows PowerShell**, lisez la variable d’environnement.
+Dans une nouvelle instance de **Windows PowerShell** , lisez la variable d’environnement.
 
 ```powershell
 # Prints the env var value
@@ -91,7 +92,7 @@ Créez et assignez une variable d’environnement persistante, en fonction de la
 echo export ENVIRONMENT_VARIABLE_KEY="value" >> /etc/environment && source /etc/environment
 ```
 
-Dans une nouvelle instance de **Bash**, lisez la variable d’environnement.
+Dans une nouvelle instance de **Bash** , lisez la variable d’environnement.
 
 ```Bash
 # Prints the env var value
@@ -194,7 +195,32 @@ NSString* value =
 
 ---
 
+## <a name="customer-lockbox"></a>Customer Lockbox
+
+[Customer Lockbox pour Microsoft Azure](../security/fundamentals/customer-lockbox-overview.md) fournit une interface dans laquelle les clients peuvent vérifier et approuver/refuser les demandes d'accès aux données client. Il est utilisé lorsqu’un ingénieur Microsoft doit accéder aux données client dans le cadre d’une demande de support. Pour plus d'informations sur la façon dont les demandes Customer Lockbox sont initiées, suivies et stockées en vue d'audits et de révisions ultérieures, consultez [Customer Lockbox](../security/fundamentals/customer-lockbox-overview.md). 
+
+Customer Lockbox est disponible pour le service cognitif suivant :
+
+* Convertisseur
+
+Pour les services suivants, les ingénieurs Microsoft n’accéderont pas aux données client dans le niveau E0 : 
+
+* Language Understanding
+* Face
+* Content Moderator
+* Personalizer
+
+> [!IMPORTANT]
+> Pour **Form Recognizer** , les ingénieurs Microsoft n’accéderont pas aux données client dans les ressources créées après le 10 juillet 2020.
+
+Pour demander à utiliser la référence SKU E0, complétez et envoyez ce  [formulaire de demande](https://aka.ms/cogsvc-cmk). Comptez environ 3 à 5 jours ouvrables pour obtenir des nouvelles sur le statut de votre demande. Selon la demande, vous pouvez être placé dans une file d’attente et approuvé lorsque de l’espace devient disponible. Une fois que votre demande d’utilisation de la référence SKU E0 avec LUIS aura été approuvée, vous devrez créer une nouvelle ressource à partir du portail Azure et sélectionner le niveau tarifaire E0. Les utilisateurs n'auront pas la possibilité de procéder à la mise à niveau de la référence SKU F0 vers la nouvelle référence SKU E0.
+
+Actuellement, le service Speech ne prend pas en charge Customer Lockbox. Cependant, les données client peuvent être stockées à l’aide de BYOS (« Apportez votre propre stockage» ), ce qui vous permet d’effectuer des contrôles de données semblables à ceux de Customer Lockbox. N'oubliez pas que les données du service Speech restent et sont traitées dans la région où la ressource Speech a été créée. Cela s'applique à toutes les données au repos ainsi qu'aux données en transit. Lorsque vous utilisez des fonctionnalités de personnalisation, telles que Custom Speech et Custom Voice, toutes les données client sont transférées, stockées et traitées dans la région où résident votre BYOS (si utilisé) et la ressource du service Speech.
+
+> [!IMPORTANT]
+> Microsoft **n'utilise pas** les données client pour améliorer ses modèles vocaux. En outre, si la journalisation des points de terminaison est désactivée et qu'aucune personnalisation n'est utilisée, aucune donnée client n'est stockée. 
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Explorer les offres [Cognitive Services](welcome.md)
+* Explorer les offres [Cognitive Services](./what-are-cognitive-services.md)
 * En savoir plus sur les [réseaux virtuels Cognitive Services](cognitive-services-virtual-networks.md)

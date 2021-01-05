@@ -1,17 +1,17 @@
 ---
 title: Private Link - Portail Azure - Azure Database pour PostgreSQL - Serveur unique
 description: Découvrez comment configurer Private Link pour Azure Database pour PostgreSQL – Serveur unique à partir du Portail Azure
-author: kummanish
-ms.author: manishku
+author: mksuni
+ms.author: sumuth
 ms.service: postgresql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2020
-ms.openlocfilehash: 72dcf95c8ae8d8da34532fa96e3bf0371f5112fd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 23b9774f28f915596abafbd8c1f6c38fc4f55748
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79370914"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995282"
 ---
 # <a name="create-and-manage-private-link-for-azure-database-for-postgresql---single-server-using-portal"></a>Créer et gérer le service Azure Private Link pour Azure Database pour PostgreSQL – Serveur unique à l’aide du Portail Azure
 
@@ -20,7 +20,7 @@ Private Endpoint est le composant fondamental de Private Link dans Azure. Il per
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 > [!NOTE]
-> Cette fonctionnalité est disponible dans toutes les régions Azure où Azure Database pour PostgreSQL Serveur unique prend en charge les niveaux tarifaires Usage général et Mémoire optimisée.
+> La fonctionnalité de liaison privée est disponible uniquement pour les serveurs Azure Database pour PostgreSQL dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur de base de données se trouve dans l’un de ces niveaux tarifaires.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 Connectez-vous au [portail Azure](https://portal.azure.com).
@@ -95,6 +95,10 @@ Dans cette section, vous allez créer un réseau virtuel et le sous-réseau pour
 
 1. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**.
 
+> [!NOTE]
+> Il peut arriver que l’instance Azure Database pour PostgreSQL et le sous-réseau de réseau virtuel se trouvent dans des abonnements différents. Dans ce cas, vous devez vérifier les configurations suivantes :
+> - Assurez-vous que le fournisseur de ressources **Microsoft.DBforPostgreSQL** est inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
+
 ## <a name="create-an-azure-database-for-postgresql-single-server"></a>Créer un serveur unique Azure Database pour PostgreSQL
 
 Dans cette section, vous allez créer un serveur Azure Database pour PostgreSQL dans Azure. 
@@ -127,9 +131,9 @@ Dans cette section, vous allez créer un serveur Azure Database pour PostgreSQL 
 Dans cette section, vous allez créer un serveur PostgreSQL et lui ajouter un point de terminaison privé. 
 
 1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Mise en réseau** > **Liaison privée**.
-2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **générer une connexion privée à un service**, sélectionnez **Démarrer**.
+2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **Générer une connexion privée à un service**, sélectionnez **Démarrer**.
 
-    ![Présentation de Private Link](media/concepts-data-access-and-security-private-link/privatelink-overview.png)
+    :::image type="content" source="media/concepts-data-access-and-security-private-link/privatelink-overview.png" alt-text="Présentation de Private Link":::
 
 1. Dans **Créer un point de terminaison privé – Informations de base**, entrez ou sélectionnez ces informations :
 
@@ -160,16 +164,19 @@ Dans cette section, vous allez créer un serveur PostgreSQL et lui ajouter un po
     | ------- | ----- |
     |**MISE EN RÉSEAU**| |
     | Réseau virtuel| Sélectionnez *MyVirtualNetwork*. |
-    | Subnet | Sélectionnez *mySubnet*. |
+    | Subnet | Sélectionnez *mySubnet*. |
     |**INTÉGRATION À DNS PRIVÉ**||
     |Intégrer à une zone DNS privée |Sélectionnez **Oui**. |
     |Zone DNS privée |Sélectionnez *(New)privatelink.postgres.database.azure.com* |
     |||
 
+    > [!Note] 
+    > Utilisez la zone DNS privée prédéfinie pour votre service ou indiquez le nom de la zone DNS de votre choix. Pour plus d’informations, reportez-vous à la [Configuration de la zone DNS des services Azure](../private-link/private-endpoint-dns.md).
+
 1. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
 2. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**. 
 
-    ![Instance Private Link créée](media/concepts-data-access-and-security-private-link/show-postgres-private-link.png)
+    :::image type="content" source="media/concepts-data-access-and-security-private-link/show-postgres-private-link.png" alt-text="Instance Private Link créée":::
 
     > [!NOTE] 
     > Le FQDN dans le paramètre DNS du client n’est pas résolu en adresse IP privée configurée. Vous devez configurer une zone DNS pour le FQDN configuré, comme indiqué [ici](../dns/dns-operations-recordsets-portal.md).
@@ -202,7 +209,7 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 
 ## <a name="access-the-postgresql-server-privately-from-the-vm"></a>Accéder au serveur PostgreSQL en privé à partir de la machine virtuelle
 
-1. Dans le Bureau à distance de  *myVM*, ouvrez PowerShell.
+1. Dans le Bureau à distance de *myVM*, ouvrez PowerShell.
 
 2. Entrez `nslookup mydemopostgresserver.privatelink.postgres.database.azure.com`. 
 
@@ -215,7 +222,7 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
     Address:  10.1.3.4
     ```
 
-3. Testez la connexion de liaison privée pour le serveur PostgreSQL à l’aide de n’importe quel client disponible. Dans l’exemple ci-dessous, j’ai utilisé [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download?view=sql-server-ver15) pour effectuer l’opération.
+3. Testez la connexion de liaison privée pour le serveur PostgreSQL à l’aide de n’importe quel client disponible. Dans l’exemple ci-dessous, j’ai utilisé [Azure Data Studio](/sql/azure-data-studio/download?view=sql-server-ver15&preserve-view=true) pour effectuer l’opération.
 
 4. Dans **Nouvelle connexion**, entrez ou sélectionnez les informations suivantes :
 
@@ -239,10 +246,13 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 Lorsque vous avez fini d’utiliser le point de terminaison privé, le serveur PostgreSQL et la machine virtuelle, supprimez le groupe de ressources et toutes les ressources qu’il contient :
 
-1. Entrez *myResourceGroup* dans la zone **Rechercher** en haut du portail, puis sélectionnez *myResourceGroup* dans les résultats de la recherche.
+1. Entrez *myResourceGroup* dans la zone **Rechercher** en haut du portail, puis sélectionnez  *myResourceGroup*  dans les résultats de la recherche.
 2. Sélectionnez **Supprimer le groupe de ressources**.
 3. Entrez myResourceGroup dans **TAPER LE NOM DU GROUPE DE RESSOURCES**, puis sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database pour PostgreSQL – Serveur unique et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur PostgreSQL via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](https://docs.microsoft.com/azure/private-link/private-endpoint-overview)
+Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database pour PostgreSQL – Serveur unique et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur PostgreSQL via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](../private-link/private-endpoint-overview.md)
+
+<!-- Link references, to text, Within this same GitHub repo. -->
+[resource-manager-portal]: ../azure-resource-manager/management/resource-providers-and-types.md

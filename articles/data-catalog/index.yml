@@ -9,10 +9,10 @@ metadata:
   ms.service: data-catalog
   ms.topic: landing-page
   ms.openlocfilehash: eb60085cd76fa9d3857b5e284b2cdd03f35fcb13
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
+  ms.lasthandoff: 10/09/2020
   ms.locfileid: "70172675"
 landingContent:
 - title: À propos d’Azure Data Catalog

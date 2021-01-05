@@ -3,12 +3,12 @@ title: Créer et personnaliser des plans de récupération dans Azure Site Recov
 description: Découvrez comment créer et personnaliser des plans de reprise d’activité pour la reprise d’activité après sinistre avec le service Azure Site Recovery.
 ms.topic: how-to
 ms.date: 01/23/2020
-ms.openlocfilehash: 6540317324a9f0d9bccc046ecf95824d4128bd09
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0dcde98e8dcaef12896c18c25429f0ba7b1b27d4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76705834"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009719"
 ---
 # <a name="create-and-customize-recovery-plans"></a>Créer et personnaliser des plans de récupération
 
@@ -29,9 +29,9 @@ Cet article décrit la création et la personnalisation d’un plan de récupér
    Hyper-V (gérée par VMM) vers Azure  | Sélectionner le serveur VMM | Sélectionner Azure
   
     Notez les points suivants :
-    -  Vous ne pouvez utiliser un plan de récupération pour le basculement qu’à partir de l’emplacement source vers Azure. Vous ne pouvez pas utiliser un plan de récupération pour la restauration automatique à partir d’Azure.
-    - Le basculement et la récupération doivent être activés sur les ordinateurs de l’emplacement source. 
-    - Un plan de récupération peut contenir des ordinateurs ayant les mêmes source et cible. 
+    - Vous pouvez utiliser des plans de récupération pour le basculement vers Azure et la restauration automatique à partir d’Azure.
+    - Le basculement et la récupération doivent être activés sur les ordinateurs de l’emplacement source.
+    - Un plan de récupération peut contenir des ordinateurs ayant les mêmes source et cible.
     - Vous pouvez inclure des machines virtuelles VMware et Hyper-V gérées par VMM dans le même plan.
     - Les machines virtuelles VMware et les serveurs physiques peuvent se trouver dans le même plan.
 
@@ -53,7 +53,7 @@ Vous créez d’autres groupes et ajoutez des ordinateurs à différents groupes
 
 Vous pouvez personnaliser un plan de récupération en ajoutant un script ou une action manuelle. Notez les points suivants :
 
-- Si vous exécutez une réplication vers Azure, vous pouvez intégrer les runbooks Azure Automation dans votre plan de récupération. [En savoir plus](site-recovery-runbook-automation.md).
+- Si vous exécutez une réplication vers Azure, vous pouvez intégrer les runbooks Azure Automation dans votre plan de récupération. [Plus d’informations](site-recovery-runbook-automation.md)
 - Si vous répliquez des machines virtuelles Hyper-V gérées par System Center VMM, vous pouvez créer un script sur le serveur VMM local et l’inclure dans le plan de récupération.
 - Lorsque vous ajoutez un script, vous ajoutez un nouvel ensemble d’actions au groupe. Par exemple, un ensemble d’étapes préliminaires au sein du groupe 1 est créé avec le nom : *Groupe 1 : Étapes préliminaires*. L’ensemble des étapes préliminaires sont répertoriées dans cet ensemble. Vous ne pouvez ajouter de script sur le site principal que si vous disposez d’un serveur VMM déployé.
 - Si vous ajoutez une action manuelle lorsque le plan de récupération s’exécute, il s’arrête au point où vous avez inséré l’action manuelle. Une boîte de dialogue vous invite à spécifier que l’action manuelle est terminée.
@@ -76,7 +76,7 @@ Vous pouvez personnaliser un plan de récupération en ajoutant un script ou une
     1. Tapez un nom pour l’action, ainsi que les instructions de l’action. La personne qui exécute le basculement verra ces instructions.
     1. Spécifiez si vous souhaitez ajouter l’action manuelle pour tous les types de basculement (Test, Basculement, Basculement planifié (le cas échéant)). Cliquez ensuite sur **OK**.
 4. Si vous souhaitez ajouter un script, procédez comme suit :
-    1. Si vous ajoutez un script VMM, sélectionnez **Basculement vers script VMM**, puis dans **Chemin du script**, entrez le chemin d’accès relatif au partage. Par exemple, si le partage est situé à l’emplacement \\\<VMMServerName>\MSSCVMMLibrary\RPScripts, specify the path: \RPScripts\RPScript.PS1.
+    1. Si vous ajoutez un script VMM, sélectionnez **Basculement vers script VMM**, puis dans **Chemin du script**, entrez le chemin d’accès relatif au partage. Par exemple, si le partage est situé à l’emplacement \\\<VMMServerName>\MSSCVMMLibrary\RPScripts, spécifiez le chemin d’accès : \RPScripts\RPScript.PS1.
     1. Si vous ajoutez un Runbook Azure Automation, spécifiez le **Compte Azure Automation** dans lequel se trouve le Runbook, puis sélectionnez le **Script Runbook Azure** approprié.
 5. Afin de vous assurer du bon fonctionnement du script, effectuez un test de basculement du plan de récupération.
 

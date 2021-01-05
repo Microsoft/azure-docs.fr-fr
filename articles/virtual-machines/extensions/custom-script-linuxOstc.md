@@ -1,5 +1,5 @@
 ---
-title: Exécuter des scripts personnalisés sur des machines virtuelles Linux dans Azure
+title: Exécuter une extension de script personnalisée version 1 (déconseillée) sur des machines virtuelles Linux dans Azure
 description: Automatiser les tâches de configuration de machine virtuelle Linux à l’aide de l’extension de script personnalisé v1
 services: virtual-machines-linux
 documentationcenter: ''
@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 08/14/2018
 ms.author: danis
-ms.openlocfilehash: 1ca20f2c8cda84c241391f67ac542faa4a1f5ecd
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: afce76c8f5330f7d73ff58cc9b9307af2b8832f4
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594710"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962125"
 ---
 # <a name="use-the-azure-custom-script-extension-version-1-with-linux-virtual-machines"></a>Utiliser l’extension de script personnalisé Azure Version 1 avec des machines virtuelles Linux
 
@@ -58,7 +59,7 @@ L’extension vous permet d’utiliser vos informations d’identification de st
 
 ### <a name="internet-connectivity"></a>Connectivité Internet
 
-Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du stockage Azure, vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](../../virtual-network/security-overview.md#service-tags).
+Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du stockage Azure, vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](../../virtual-network/network-security-groups-overview.md#service-tags).
 
 Si votre script se trouve sur un serveur local, vous devrez peut-être encore ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires.
 

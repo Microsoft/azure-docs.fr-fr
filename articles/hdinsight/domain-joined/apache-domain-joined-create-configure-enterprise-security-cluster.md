@@ -6,14 +6,14 @@ ms.service: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/10/2019
-ms.openlocfilehash: fb3484d013314897ea2e9157b642d8f2b85dcd60
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 07bd92e17b827dfeede5958587cecbdc97694329
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437647"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003920"
 ---
 # <a name="create-and-configure-enterprise-security-package-clusters-in-azure-hdinsight"></a>Créer et configurer des clusters de Pack Sécurité Entreprise dans Azure HDInsight
 
@@ -192,11 +192,11 @@ Créez un administrateur de locataire Azure Active Directory.
 
 1. Dans la page **Connexion à Azure AD**, entrez le nom d’utilisateur et le mot de passe de l’administrateur général pour l’instance Azure AD. Utilisez le nom d’utilisateur `fabrikamazureadmin@hdifabrikam.com` que vous avez créé lorsque vous avez configuré votre locataire Active Directory. Sélectionnez ensuite **Suivant**.
 
-    ![Page « Connexion à Azure AD »](./media/apache-domain-joined-create-configure-enterprise-security-cluster/hdinsight-image-0058.png)
+    ![Page « Connexion à Azure AD ».](./media/apache-domain-joined-create-configure-enterprise-security-cluster/hdinsight-image-0058.png)
 
 1. Dans la page **Connexion à Active Directory Domain Services**, entrez le nom d’utilisateur et le mot de passe d’un compte d’administrateur d’entreprise. Utilisez le nom d’utilisateur `HDIFabrikam\HDIFabrikamAdmin` et le mot de passe que vous avez créés précédemment. Sélectionnez ensuite **Suivant**.
 
-   ![Page « Connexion à Azure AD »](./media/apache-domain-joined-create-configure-enterprise-security-cluster/hdinsight-image-0060.png)
+   ![Page « Connexion à ADDS ».](./media/apache-domain-joined-create-configure-enterprise-security-cluster/hdinsight-image-0060.png)
 1. Dans la page **Configuration de la connexion à Azure AD**, sélectionnez **Suivant**.
    ![Page « Configuration de la connexion à Azure AD »](./media/apache-domain-joined-create-configure-enterprise-security-cluster/hdinsight-image-0062.png)
 
@@ -227,7 +227,7 @@ Créez une identité managée affectée par l’utilisateur que vous pourrez uti
 
 ### <a name="enable-azure-ad-ds"></a>Activer Azure AD DS
 
-Effectuez les étapes suivantes pour activer Azure AD DS. Pour plus d’informations, consultez [Activer Azure AD DS à l’aide du portail Azure](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-getting-started).
+Effectuez les étapes suivantes pour activer Azure AD DS. Pour plus d’informations, consultez [Activer Azure AD DS à l’aide du portail Azure](../../active-directory-domain-services/tutorial-create-instance.md).
 
 1. Créez un réseau virtuel pour héberger Azure AD DS. Exécutez le code PowerShell suivant.
 
@@ -302,7 +302,7 @@ Dans notre scénario, nous avons configuré Azure AD DS pour utiliser les adres
 
 Le protocole LDAP (Lightweight Directory Access Protocol) est utilisé pour la lecture et l’écriture sur Azure Active Directory. Vous pouvez rendre le trafic LDAP confidentiel et sécurisé à l’aide de la technologie SSL (Secure Sockets Layer) ou TLS (Transport Layer Security). Vous pouvez activer le protocole LDAP sur SSL (LDAPS) en installant un certificat au format correct.
 
-Pour plus d’informations sur le trafic LDAP sécurisé, consultez [Configurer le protocole LDAP sécurisé pour un domaine managé Azure AD DS](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-admin-guide-configure-secure-ldap).
+Pour plus d’informations sur le trafic LDAP sécurisé, consultez [Configurer le protocole LDAP sécurisé pour un domaine managé Azure AD DS](../../active-directory-domain-services/tutorial-configure-ldaps.md).
 
 Dans cette section, vous allez créer un certificat auto-signé, télécharger le certificat et configurer le protocole LDAP sécurisé (LDAPS) pour le domaine managé Azure AD DS **HDIFabrikam**.
 
@@ -357,7 +357,7 @@ Vérifiez que le certificat se trouve dans le magasin **personnel** de l’ordin
         | Destination port range | 636 |
         | Protocol | Quelconque |
         | Action | Allow |
-        | Priority | \<Nombre souhaité> |
+        | Priority | \<Desired number> |
         | Nom | Port_LDAP_636 |
 
     ![Boîte de dialogue « Ajouter une règle de sécurité de trafic entrant »](./media/apache-domain-joined-create-configure-enterprise-security-cluster/add-inbound-security-rule.png)

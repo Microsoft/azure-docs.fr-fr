@@ -10,19 +10,19 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 11/05/2019
 ms.author: wolfma
-ms.openlocfilehash: 2641464e52b80c59b6c6b5a123ad1605c1d41495
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 3a3799fc1e931993c00ba497765f4cd3e60d3493
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81275539"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91377562"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](../../../../get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement](../../../../quickstarts/setup-platform.md?tabs=android&pivots=programming-language-java)
 > * Veiller à avoir accès à un microphone pour la capture audio
 
@@ -58,7 +58,7 @@ Le texte et la représentation graphique de votre interface utilisateur doivent 
 
 1. Dans le même fichier, remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement.
 
-1. De plus, recherchez la chaîne `YourServiceRegion` et remplacez-la par l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) associée à votre abonnement. Par exemple, utilisez `westus` pour l’abonnement d’essai gratuit.
+1. De plus, recherchez la chaîne `YourServiceRegion` et remplacez-la par l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) associée à votre abonnement.
 
 ## <a name="build-and-run-the-app"></a>Générer et exécuter l’application
 

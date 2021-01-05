@@ -8,18 +8,16 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: philmea
-ms.openlocfilehash: 8f76f143b6c6a26b88b78e20d8d5d8ae1ae48553
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 660f6dfae23331455408ae7127274550a3a4cc3a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80157987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90019833"
 ---
 # <a name="customize-the-azure-iot-central-ui"></a>Personnaliser l’interface utilisateur d’Azure IoT Central
 
 Cet article explique comment, en tant qu’administrateur, vous pouvez personnaliser l’interface utilisateur de votre application en appliquant des thèmes personnalisés et en modifiant les liens d’aide pour pointer vers vos propres ressources d’aide personnalisées. 
-
-
 
 La capture d’écran suivante montre une page utilisant le thème standard :
 

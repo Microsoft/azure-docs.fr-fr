@@ -12,12 +12,13 @@ ms.date: 06/28/2017
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: e16d0ed264f32746c11d89e88ea1e67f9383b773
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+- devx-track-java
+ms.openlocfilehash: 763b9e05adc07c02265dbb511c073b42df44ea95
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732514"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92146856"
 ---
 # <a name="send-cloud-to-device-messages-with-iot-hub-java"></a>Envoi de messages cloud à appareil avec IoT Hub (Java)
 
@@ -46,17 +47,17 @@ Vous trouverez des informations supplémentaires sur les messages cloud-à-appar
 > [!NOTE]
 > IoT Hub offre la prise en charge de Kits de développement logiciel (SDK) pour plusieurs plateformes d’appareils et plusieurs langages (notamment C, Java, Python et Javascript) par le biais des Kits Azure IoT device SDK. Pour obtenir des instructions détaillées sur la façon de connecter votre appareil au code de ce didacticiel, et à Azure IoT Hub de manière générale, consultez le [Centre de développement Azure IoT](https://azure.microsoft.com/develop/iot).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Une version opérationnelle complète du guide de démarrage rapide [Envoyer des données de télémétrie d’un appareil vers un hub IoT](quickstart-send-telemetry-java.md) ou du didacticiel [Configurer le routage des messages avec IoT Hub](tutorial-routing.md).
 
-* [Java SE Development Kit 8](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
+* [Java SE Development Kit 8](/java/azure/jdk/?view=azure-java-stable). Veillez à sélectionner **Java 8** sous **Prise en charge à long terme** pour accéder aux téléchargements du kit JDK 8.
 
 * [Maven 3](https://maven.apache.org/download.cgi)
 
 * Un compte Azure actif. Si vous ne possédez pas de compte, vous pouvez créer un [compte gratuit](https://azure.microsoft.com/pricing/free-trial/) en quelques minutes.
 
-* Assurez-vous que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d’informations sur les façons de contourner ce problème, consultez [Connexion à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
+* Vérifiez que le port 8883 est ouvert dans votre pare-feu. L’exemple d’appareil décrit dans cet article utilise le protocole MQTT, qui communique via le port 8883. Ce port peut être bloqué dans certains environnements réseau professionnels et scolaires. Pour plus d'informations sur les différentes façons de contourner ce problème, consultez [Se connecter à IoT Hub (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
 ## <a name="receive-messages-in-the-simulated-device-app"></a>Recevoir des messages dans l’application d’appareil simulé
 
@@ -87,14 +88,25 @@ Dans cette section, vous modifiez l’application d’appareil simulé créée d
     client.open();
     ```
 
-    > [!NOTE]
-    > Si vous utilisez HTTPS au lieu de MQTT ou d’AMQP comme moyen de transport, l’instance **DeviceClient** vérifie les messages à partir d’IoT Hub peu fréquemment (moins de toutes les 25 minutes). Pour plus d’informations sur les différences entre la prise en charge de MQTT, d’AMQP et de HTTPS et la limitation d’IoT Hub, consultez la [section sur les messages du Guide du développeur IoT Hub](iot-hub-devguide-messaging.md).
-
 4. Pour générer l’application **simulated-device** à l’aide de Maven, exécutez la commande suivante à l’invite de commandes dans le dossier simulated-device :
 
     ```cmd/sh
     mvn clean package -DskipTests
     ```
+
+La méthode `execute` dans la classe `AppMessageCallback` retourne `IotHubMessageResult.COMPLETE`. Cela notifie IoT Hub que le message a été traité avec succès et peut être supprimé en toute sécurité de la file d’attente de l’appareil. L’appareil doit retourner cette valeur quand son traitement se termine correctement, quel que soit le protocole utilisé.
+
+Avec AMQP et HTTPS, mais pas MQTT, l’appareil peut également :
+
+* abandonner un message - IoT Hub conserve alors le message dans la file d’attente de l’appareil pour un traitement ultérieur ;
+* rejeter un message, ce qui le supprime définitivement de la file d’attente de l’appareil.
+
+S’il se produit un événement qui empêche l’appareil de traiter, d’abandonner ou de rejeter le message, IoT Hub le met à nouveau en file d’attente après un délai d’attente déterminé. C’est la raison pour laquelle la logique de traitement des messages de l’application pour périphérique doit être *idempotente* pour qu’un message identique reçu plusieurs fois produise le même résultat.
+
+Pour plus d'informations sur la façon dont IoT Hub traite les messages cloud-à-appareil, y compris sur le cycle de vie des messages cloud-à-appareil, consultez [Envoyer des messages cloud-à-appareil à partir d'un hub IoT](iot-hub-devguide-messages-c2d.md).
+
+> [!NOTE]
+> Si vous utilisez HTTPS plutôt que MQTT ou AMQP comme moyen de transport, l'instance **DeviceClient** ne vérifie pas très souvent les messages provenant d'IoT Hub (au minimum toutes les 25 minutes). Pour plus d'informations sur les différences de prise en charge entre MQTT, AMQP et HTTPS, consultez [Conseils sur les communications cloud-à-appareil](iot-hub-devguide-c2d-guidance.md) et [Choisir un protocole de communication](iot-hub-devguide-protocols.md).
 
 ## <a name="get-the-iot-hub-connection-string"></a>Obtenir la chaîne de connexion du hub IoT
 

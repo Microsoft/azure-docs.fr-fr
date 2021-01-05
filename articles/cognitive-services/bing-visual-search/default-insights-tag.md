@@ -10,14 +10,19 @@ ms.subservice: bing-visual-search
 ms.topic: conceptual
 ms.date: 04/04/2019
 ms.author: scottwhi
-ms.openlocfilehash: b6bc323f4e8deaf975c292f92d862b1fbe0e2714
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b44b77445192aec68e2be803978ab3aad64906d6
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "60510120"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96486995"
 ---
 # <a name="default-insights-tag"></a>Balise insights par défaut
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 La balise insights par défaut est celle dont le champ `displayName` est défini sur une chaîne vide. L’exemple suivant montre la liste possible d’insights par défaut (actions). La liste des actions incluses dans la réponse dépend de l’image. Et pour chaque action, la liste des propriétés peut varier selon l’image. Par conséquent, vérifiez si la propriété existe avant de l’utiliser.
 
@@ -425,4 +430,12 @@ L’insight DocumentLevelSuggestions donne une liste de critères de recherche s
 
 Regardez les [exemples d’utilisation des insights Bing](bing-insights-usage.md) pour voir comment Bing peut afficher les insights visuels.
 
-Pour configurer rapidement votre première requête, consultez les guides de démarrage rapide : [C#](quickstarts/csharp.md) | [Java](quickstarts/java.md) | [node.js](quickstarts/nodejs.md) | [Python](quickstarts/python.md).
+Pour configurer rapidement votre première demande, consultez ces guides de démarrage rapide :
+
+* [C#](quickstarts/csharp.md)
+
+* [Java](quickstarts/java.md)
+
+* [node.js](quickstarts/nodejs.md)
+
+* [Python](quickstarts/python.md)

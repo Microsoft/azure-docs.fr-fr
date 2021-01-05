@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : SIGN'
 description: Découvrez la fonction système SQL SIGN dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 84335acbee1e4166e5346f5c5cac6ef8dae11e99
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 02fceb8ac594a8caff8942b8a7cb0c6bcd2a47e3
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302064"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339604"
 ---
 # <a name="sign-azure-cosmos-db"></a>SIGN (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne le signe positif (+1), nul (0) ou négatif (-1) de l'expression numérique spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe

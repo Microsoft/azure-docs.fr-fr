@@ -5,27 +5,25 @@ author: vhorne
 ms.service: firewall
 services: firewall
 ms.topic: conceptual
-ms.date: 02/18/2020
+ms.date: 07/13/2020
 ms.author: victorh
-ms.openlocfilehash: 58f670f3f55a63f0c1823adc13c98f5863d4d650
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 23a7682d8a64de57db4ff9ae785ada90d4a06944
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77444858"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87084668"
 ---
 # <a name="azure-firewall-central-management"></a>Gestion centrale de Pare-feu Azure
 
-[!INCLUDE [Preview](../../includes/firewall-manager-preview-notice.md)]
-
 Si vous gérez plusieurs pare-feu, vous savez que les règles de pare-feu qui changent continuellement compliquent leur synchronisation. Les équipes informatiques centrales doivent disposer d’un moyen de définir des stratégies de pare-feu de base et de les appliquer à plusieurs unités commerciales. En même temps, les équipes DevOps veulent créer leurs propres stratégies de pare-feu dérivées locales pour une meilleure agilité.
 
-La préversion d’Azure Firewall Manager peut aider à résoudre ces problèmes.
+Azure Firewall Manager peut aider à résoudre ces problèmes.
 
 
-## <a name="azure-firewall-manager-preview"></a>Azure Firewall Manager (préversion)
+## <a name="azure-firewall-manager"></a>Azure Firewall Manager
 
-Azure Firewall Manager (préversion) est un service de gestion de la sécurité réseau qui fournit une stratégie de sécurité centralisée et la gestion des itinéraires pour les périmètres de sécurité informatiques. Il permet aux équipes informatiques des entreprises de définir de manière centralisée des règles de niveau réseau et application pour filtrer le trafic sur plusieurs instances Pare-feu Azure. Vous pouvez couvrir différentes régions et différents abonnements Azure dans les architectures Hub-and-spoke pour la gouvernance et la protection du trafic. Il offre également à DevOps une meilleure agilité avec des stratégies de sécurité de pare-feu locales dérivées qui sont implémentées dans les organisations.
+Azure Firewall Manager est un service de gestion de la sécurité réseau qui fournit une stratégie de sécurité centralisée et la gestion des itinéraires pour les périmètres de sécurité informatiques. Il permet aux équipes informatiques des entreprises de définir de manière centralisée des règles de niveau réseau et application pour filtrer le trafic sur plusieurs instances Pare-feu Azure. Vous pouvez couvrir différentes régions et différents abonnements Azure dans les architectures Hub-and-spoke pour la gouvernance et la protection du trafic. Il offre également à DevOps une meilleure agilité avec des stratégies de sécurité de pare-feu locales dérivées qui sont implémentées dans les organisations.
 
 ### <a name="firewall-policy"></a>Stratégie de pare-feu
 
@@ -48,4 +46,4 @@ Les principales solutions tierces suivantes prennent en charge la gestion centra
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur la préversion d’Azure Firewall Manager, consultez [Présentation de la préversion d’Azure Firewall Manager](../firewall-manager/overview.md).
+Pour plus d’informations sur Azure Firewall Manager, consultez [Qu’est-ce qu’Azure Firewall Manager ?](../firewall-manager/overview.md)

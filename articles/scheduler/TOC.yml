@@ -49,7 +49,7 @@
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/updates/'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-scheduler.html'
+      href: /answers/topics/azure-scheduler.html
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-scheduler'
     - name: Tarifs
@@ -58,5 +58,5 @@
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=scheduler'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=scheduler'

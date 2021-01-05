@@ -1,6 +1,6 @@
 ---
 title: Activer les diagnostics dans Azure Cloud Services à l’aide de PowerShell | Microsoft Docs
-description: Découvrez comment activer les diagnostics pour les services cloud à l’aide de PowerShell
+description: Découvrez comment utiliser PowerShell pour activer la collecte des données de diagnostic à partir d’un service Cloud Azure avec l’extension Diagnostics Azure.
 services: cloud-services
 documentationcenter: .net
 author: tgore03
@@ -9,18 +9,18 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 09/06/2016
 ms.author: tagore
-ms.openlocfilehash: 76cdffed813fd182980b36f848e0ae42f3226539
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f0bf7fa56ca511981820f63cd7178493a7d048e3
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75386542"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92077505"
 ---
 # <a name="enable-diagnostics-in-azure-cloud-services-using-powershell"></a>Activer les diagnostics dans Azure Cloud Services à l’aide de PowerShell
-Vous pouvez collecter des données de diagnostic telles que les journaux des applications, les compteurs de performances, etc. à partir d’un service cloud à l’aide de l’extension de diagnostics Azure. Cet article décrit comment activer l’extension Diagnostics Azure pour un service cloud à l’aide de PowerShell.  Voir [Installer et configurer Azure PowerShell](/powershell/azure/overview) pour connaître les conditions requises pour cet article.
+Vous pouvez collecter des données de diagnostic telles que les journaux des applications, les compteurs de performances, etc. à partir d’un service cloud à l’aide de l’extension de diagnostics Azure. Cet article décrit comment activer l’extension Diagnostics Azure pour un service cloud à l’aide de PowerShell.  Voir [Installer et configurer Azure PowerShell](/powershell/azure/) pour connaître les conditions requises pour cet article.
 
 ## <a name="enable-diagnostics-extension-as-part-of-deploying-a-cloud-service"></a>Activer l’extension de diagnostics lors du déploiement d’un service cloud
-Cette approche peut s’appliquer aux scénarios d’intégration continue où l’extension de diagnostics peut être activée dans le cadre du déploiement d’un service cloud. Lorsque vous créez un déploiement de service cloud, vous pouvez activer l’extension de diagnostics en transmettant le paramètre *ExtensionConfiguration* à la cmdlet [New-AzureDeployment](/powershell/module/servicemanagement/azure/new-azuredeployment?view=azuresmps-3.7.0) . Le paramètre *ExtensionConfiguration* prend un tableau de configurations de diagnostics qui peut être créé à l’aide de l’applet de commande [New-AzureServiceDiagnosticsExtensionConfig](/powershell/module/servicemanagement/azure/new-azureservicediagnosticsextensionconfig?view=azuresmps-3.7.0) .
+Cette approche peut s’appliquer aux scénarios d’intégration continue où l’extension de diagnostics peut être activée dans le cadre du déploiement d’un service cloud. Lorsque vous créez un déploiement de service cloud, vous pouvez activer l’extension de diagnostics en transmettant le paramètre *ExtensionConfiguration* à la cmdlet [New-AzureDeployment](/powershell/module/servicemanagement/azure.service/new-azuredeployment?view=azuresmps-3.7.0) . Le paramètre *ExtensionConfiguration* prend un tableau de configurations de diagnostics qui peut être créé à l’aide de l’applet de commande [New-AzureServiceDiagnosticsExtensionConfig](/powershell/module/servicemanagement/azure.service/new-azureservicediagnosticsextensionconfig?view=azuresmps-3.7.0) .
 
 L’exemple suivant montre comment vous pouvez activer les diagnostics pour un service cloud avec un rôle web et un rôle de travail possédant chacun sa propre configuration de diagnostics.
 
@@ -92,7 +92,7 @@ $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "Worke
 ```
 
 ## <a name="enable-diagnostics-extension-on-an-existing-cloud-service"></a>Activer l’extension de diagnostics sur un service cloud existant
-Vous pouvez utiliser l’applet de commande [Set-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure/set-azureservicediagnosticsextension?view=azuresmps-3.7.0) pour activer ou mettre à jour la configuration de diagnostics sur un service cloud qui est déjà en cours d’exécution.
+Vous pouvez utiliser l’applet de commande [Set-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure.service/set-azureservicediagnosticsextension?view=azuresmps-3.7.0) pour activer ou mettre à jour la configuration de diagnostics sur un service cloud qui est déjà en cours d’exécution.
 
 [!INCLUDE [cloud-services-wad-warning](../../includes/cloud-services-wad-warning.md)]
 
@@ -108,14 +108,14 @@ Set-AzureServiceDiagnosticsExtension -DiagnosticsConfiguration @($webrole_diagco
 ```
 
 ## <a name="get-current-diagnostics-extension-configuration"></a>Obtenir la configuration actuelle de l’extension de diagnostics
-Pour obtenir la configuration de diagnostics actuelle pour un service cloud, utilisez l’applet de commande [Get-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure/get-azureservicediagnosticsextension?view=azuresmps-3.7.0) :
+Pour obtenir la configuration de diagnostics actuelle pour un service cloud, utilisez l’applet de commande [Get-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure.service/get-azureservicediagnosticsextension?view=azuresmps-3.7.0) :
 
 ```powershell
 Get-AzureServiceDiagnosticsExtension -ServiceName "MyService"
 ```
 
 ## <a name="remove-diagnostics-extension"></a>Supprimer l’extension de diagnostics
-Pour désactiver les diagnostics sur un service cloud, vous pouvez utiliser la cmdlet [Remove-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure/remove-azureservicediagnosticsextension?view=azuresmps-3.7.0).
+Pour désactiver les diagnostics sur un service cloud, vous pouvez utiliser la cmdlet [Remove-AzureServiceDiagnosticsExtension](/powershell/module/servicemanagement/azure.service/remove-azureservicediagnosticsextension?view=azuresmps-3.7.0).
 
 ```powershell
 Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService"
@@ -131,8 +131,5 @@ Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService" -Role "WebRole"
 
 ## <a name="next-steps"></a>Étapes suivantes
 * Pour obtenir une aide supplémentaire sur l’utilisation des diagnostics Azure et d’autres techniques pour résoudre les problèmes, consultez la page [Activation de Diagnostics dans Azure Cloud Services et Azure Virtual Machines](cloud-services-dotnet-diagnostics.md).
-* Le [schéma de configuration des diagnostics](/azure/azure-monitor/platform/diagnostics-extension-schema-1dot3) explique les différentes options de configuration xml pour l’extension de diagnostics.
-* Pour savoir comment activer l’extension de diagnostics pour les machines virtuelles, consultez [Créer une machine virtuelle Windows avec la surveillance et les diagnostics à l’aide d’un modèle Azure Resource Manager](../virtual-machines/windows/extensions-diagnostics-template.md)
-
-
-
+* Le [schéma de configuration des diagnostics](../azure-monitor/platform/diagnostics-extension-schema-windows.md) explique les différentes options de configuration xml pour l’extension de diagnostics.
+* Pour savoir comment activer l’extension de diagnostics pour les machines virtuelles, consultez [Créer une machine virtuelle Windows avec la surveillance et les diagnostics à l’aide d’un modèle Azure Resource Manager](../virtual-machines/extensions/diagnostics-template.md)

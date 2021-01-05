@@ -1,6 +1,6 @@
 ---
 title: Azure VMware Solution by CloudSimple - Tables de pare-feu
-description: Découvrez les tables de pare-feu et les règles de pare-feu de cloud privé CloudSimple.
+description: En savoir plus sur les tables et les règles de pare-feu du Cloud privé CloudSimple, y compris les règles par défaut qui sont créées sur chaque table de pare-feu.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 08/20/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 89bef6cef48f2b972aa3f931008b0db84431b832
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c44c39f66a0a0161eea8a7e9656bbe0e3d1015c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77025042"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88140868"
 ---
 # <a name="firewall-tables-overview"></a>Vue d’ensemble des tables de pare-feu
 

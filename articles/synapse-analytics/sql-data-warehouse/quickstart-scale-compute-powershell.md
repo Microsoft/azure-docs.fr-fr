@@ -1,26 +1,26 @@
 ---
-title: Mettre à l’échelle le calcul pour le pool SQL Synapse (Azure PowerShell)
-description: Vous pouvez mettre à l’échelle le calcul pour le pool SQL Synapse (entrepôt de données) à l’aide d’Azure PowerShell.
+title: 'Démarrage rapide : Mettre à l’échelle des ressources de calcul pour le pool SQL dédié (anciennement SQL DW) (Azure PowerShell)'
+description: Vous pouvez mettre à l’échelle des ressources de calcul pour le pool SQL dédié (anciennement SQL DW) à l’aide d’Azure PowerShell.
 services: synapse-analytics
 author: Antvgski
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
 ms.author: anvang
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: e3038617c6270acf9af295c910e9fd5c7dae2043
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: seo-lt-2019, devx-track-azurepowershell
+ms.openlocfilehash: 87e10740e6081431bad96daa930f61238ca495bd
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80633778"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96921913"
 ---
-# <a name="quickstart-scale-compute-for-synapse-sql-pool-with-azure-powershell"></a>Démarrage rapide : Mettre à l’échelle le calcul pour le pool SQL Synapse avec Azure PowerShell
+# <a name="quickstart-scale-compute-for-dedicated-sql-pool-formerly-sql-dw-with-azure-powershell"></a>Démarrage rapide : Mettre à l’échelle des ressources de calcul pour le pool SQL dédié (anciennement SQL DW) avec Azure PowerShell
 
-Vous pouvez mettre à l’échelle le calcul pour le pool SQL Synapse (entrepôt de données) à l’aide d’Azure PowerShell. [Effectuez un scale-out du calcul](sql-data-warehouse-manage-compute-overview.md) pour améliorer les performances, ou réduisez-le pour diminuer les coûts.
+Vous pouvez mettre à l’échelle des ressources de calcul pour le pool SQL dédié (anciennement SQL DW) à l’aide d’Azure PowerShell. [Effectuez un scale-out du calcul](sql-data-warehouse-manage-compute-overview.md) pour améliorer les performances, ou réduisez-le pour diminuer les coûts.
 
 Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
@@ -28,7 +28,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Ce guide de démarrage rapide part du principe que vous disposez déjà d’un pool SQL que vous pouvez mettre à l’échelle. Si vous devez en créer un, utilisez [Créer et connecter - Portail](create-data-warehouse-portal.md) pour créer un pool SQL nommé **mySampleDataWarehouse**.
+Ce guide de démarrage rapide part du principe que vous disposez déjà d’un pool SQL dédié (anciennement SQL DW) que vous pouvez mettre à l’échelle. Si vous devez en créer un, utilisez [Créer et connecter – Portail](create-data-warehouse-portal.md) pour créer un pool SQL dédié (anciennement SQL DW) nommé **mySampleDataWarehouse**.
 
 ## <a name="log-in-to-azure"></a>Connexion à Azure
 
@@ -67,7 +67,7 @@ Suivez ces étapes pour rechercher des informations sur l’emplacement de votre
 
 ## <a name="scale-compute"></a>Mise à l’échelle des ressources de calcul
 
-Dans le pool SQL, vous pouvez augmenter ou réduire les ressources de calcul en ajustant les unités DWU (Data Warehouse Unit). Le guide [Créer et connecter – Portail](create-data-warehouse-portal.md) a permis de créer **mySampleDataWarehouse** et de l’initialiser avec 400 DWU. Les étapes suivantes ajustent les DWU de **mySampleDataWarehouse**.
+Dans le pool SQL dédié (anciennement SQL DW), vous pouvez augmenter ou réduire les ressources de calcul en ajustant les unités DWU (Data Warehouse Unit). Le guide [Créer et connecter – Portail](create-data-warehouse-portal.md) a permis de créer **mySampleDataWarehouse** et de l’initialiser avec 400 DWU. Les étapes suivantes ajustent les DWU de **mySampleDataWarehouse**.
 
 Pour modifier les unités de l’entrepôt de données, utilisez la cmdlet PowerShell [Set-AzSqlDatabase](/powershell/module/az.sql/set-azsqldatabase?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json). L’exemple suivant définit les unités DWU (Data Warehouse Units) sur DW300c pour la base de données **mySampleDataWarehouse** qui est hébergée dans le groupe de ressources **resourcegroupname** sur le serveur **sqlpoolservername**.
 
@@ -121,7 +121,7 @@ $database | Select-Object DatabaseName,Status
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous savez maintenant mettre à l’échelle le calcul pour le pool SQL. Pour en savoir plus sur le pool SQL, passez au tutoriel sur le chargement des données.
+Vous savez maintenant comment mettre à l’échelle les ressources de calcul du pool SQL dédié (anciennement SQL DW). Pour en savoir plus sur le pool SQL dédié (anciennement SQL DW), passez au tutoriel sur le chargement des données.
 
 > [!div class="nextstepaction"]
->[Charger des données dans un pool SQL](load-data-from-azure-blob-storage-using-polybase.md)
+>[Charger les données dans un pool SQL dédié](load-data-from-azure-blob-storage-using-copy.md)

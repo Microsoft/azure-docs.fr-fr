@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.date: 09/06/2016
 ms.author: robinsh
 ms.custom: amqp
-ms.openlocfilehash: d4916d651638f0d1dbb4f10e0e0732f5c330d300
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f52d1d1c5f264550076688d5e25e110de230eff4
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81767012"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92152236"
 ---
 # <a name="azure-iot-device-sdk-for-c--more-about-serializer"></a>Kit de développement logiciel (SDK) Azure IoT device pour C : en savoir plus sur serializer
 
@@ -28,7 +28,7 @@ En conclusion, nous reverrons certains des sujets abordés dans les articles pr�
 
 Toutes les procédures décrites dans cet article sont basées sur des exemples du Kit de développement logiciel (SDK) du **serializer** . Si vous souhaitez approfondir, consultez les applications **simplesample\_amqp** et **simplesample\_http** incluses dans le Kit de développement logiciel (SDK) d’appareil Azure IoT (Azure IoT device SDK) pour C.
 
-Vous trouverez [**Azure IoT device SDK pour C**](https://github.com/Azure/azure-iot-sdk-c) dans le référentiel GitHub. Vous pouvez consulter les détails de l’[API dans Référence de l’API C](https://docs.microsoft.com/azure/iot-hub/iot-c-sdk-ref/).
+Vous trouverez [**Azure IoT device SDK pour C**](https://github.com/Azure/azure-iot-sdk-c) dans le référentiel GitHub. Vous pouvez consulter les détails de l’[API dans Référence de l’API C](/azure/iot-hub/iot-c-sdk-ref/).
 
 ## <a name="the-modeling-language"></a>Le langage de modélisation
 
@@ -670,4 +670,4 @@ Ceci conclut également la série en trois parties sur le développement d’app
 
 Pour en savoir plus sur le développement pour IoT Hub, consultez les [Kits de développement logiciel (SDK) Azure IoT](iot-hub-devguide-sdks.md).
 
-Pour explorer davantage les capacités d’IoT Hub, consultez l’article [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/tutorial-simulate-device-linux.md).
+Pour explorer davantage les capacités d’IoT Hub, consultez l’article [Déploiement d’une IA sur des appareils de périmètre avec Azure IoT Edge](../iot-edge/quickstart-linux.md).

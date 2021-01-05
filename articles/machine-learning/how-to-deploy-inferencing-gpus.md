@@ -5,27 +5,28 @@ description: Cet article explique comment utiliser Azure Machine Learning pour d
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.author: vaidyas
 author: csteegz
 ms.reviewer: larryfr
-ms.date: 03/05/2020
-ms.openlocfilehash: b0fd537d1930e7c9d5f7a33f56ec5d00b1556562
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/17/2020
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python, deploy
+ms.openlocfilehash: 8480a0b8722fbfff0f1d8a8fafc1a64f38d21d6e
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78398341"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93307208"
 ---
 # <a name="deploy-a-deep-learning-model-for-inference-with-gpu"></a>Déployer un modèle de deep learning pour une inférence avec GPU
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Cet article explique comment utiliser Azure Machine Learning pour déployer un modèle compatible GPU en tant que service web. Les informations contenues dans cet article sont basées sur le déploiement d’un modèle sur Azure Kubernetes service (AKS). Le cluster AKS fournit une ressource GPU qui est utilisée par le modèle pour l’inférence.
 
 L’inférence, ou notation de modèle, est la phase au cours de laquelle le modèle déployé est utilisé pour effectuer des prédictions. L’utilisation de GPU au lieu d’UC offre des avantages en termes de performances pour le calcul hautement parallélisable.
 
 > [!IMPORTANT]
-> Pour les déploiements de service web, l’inférence GPU est uniquement prise en charge sur Azure Kubernetes Service. Pour l'inférence à l’aide d’un __pipeline d'apprentissage machine__, les GPU sont uniquement pris en charge sur Azure Machine Learning Compute. Pour plus d’informations sur l’utilisation des pipelines d’apprentissage machine, voir [Exécuter des prédictions par lot](how-to-use-parallel-run-step.md). 
+> Pour les déploiements de service web, l’inférence GPU est uniquement prise en charge sur Azure Kubernetes Service. Pour l'inférence à l’aide d’un __pipeline d'apprentissage machine__ , les GPU sont uniquement pris en charge sur Azure Machine Learning Compute. Pour plus d’informations sur l’utilisation des pipelines Azure Machine Learning, consultez [Tutoriel : Créer un pipeline Azure Machine Learning pour le scoring par lots](tutorial-pipeline-batch-scoring-classification.md). 
 
 > [!TIP]
 > Bien que les extraits de code de cet article utilisent un modèle TensorFlow, vous pouvez appliquer les informations à n’importe quel framework Machine Learning qui prend en charge les GPU.
@@ -33,11 +34,11 @@ L’inférence, ou notation de modèle, est la phase au cours de laquelle le mod
 > [!NOTE]
 > Les informations contenues dans cet article s’appuient sur l’article[How to deploy to Azure Kubernetes Service (Comment déployer sur Azure Kubernetes Service)](how-to-deploy-azure-kubernetes-service.md). L’article « How to deploy to Azure Kubernetes Service » couvre généralement le déploiement sur AKS,mais cet article traite du déploiement spécifique au GPU.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Un espace de travail Azure Machine Learning. Pour plus d’informations, voir la page [Créer un espace de travail Azure Machine Learning](how-to-manage-workspace.md).
 
-* Un environnement de développement Python dans lequel le SDK Azure Machine Learning est installé. Pour plus d’informations, consultez [Kit SDK Azure Machine Learning](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py).  
+* Un environnement de développement Python dans lequel le SDK Azure Machine Learning est installé. Pour plus d’informations, consultez [Kit SDK Azure Machine Learning](/python/api/overview/azure/ml/install?preserve-view=true&view=azure-ml-py).  
 
 * Un modèle inscrit qui utilise un GPU.
 
@@ -139,7 +140,7 @@ Ce fichier est nommé `score.py`. Pour plus d’informations sur les scripts d�
 
 ## <a name="define-the-conda-environment"></a>Définir l’environnement Conda
 
-Le fichier d’environnement Conda spécifie les dépendances pour le service. Il inclut les dépendances requises aussi bien par le modèle que par le script d’entrée. Notez que vous devez spécifier azureml-defaults avec la version 1.0.45 ou une version supérieure en tant que dépendance pip, car elle contient les fonctionnalités nécessaires pour héberger le modèle comme un service web. Le code YAML suivant définit l’environnement pour un modèle Tensorflow. Il spécifie `tensorflow-gpu`, qui utilise le GPU utilisé dans ce déploiement :
+Le fichier d’environnement Conda spécifie les dépendances pour le service. Il inclut les dépendances requises aussi bien par le modèle que par le script d’entrée. Notez que vous devez indiquer azureml-defaults avec la version >= 1.0.45 en tant que dépendance pip, car elle contient les fonctionnalités nécessaires pour héberger le modèle en tant que service web. Le code YAML suivant définit l’environnement pour un modèle Tensorflow. Il spécifie `tensorflow-gpu`, qui utilise le GPU utilisé dans ce déploiement :
 
 ```yaml
 name: project_environment
@@ -151,8 +152,8 @@ dependencies:
 - pip:
   # You must list azureml-defaults as a pip dependency
   - azureml-defaults>=1.0.45
-- numpy
-- tensorflow-gpu=1.12
+  - numpy
+  - tensorflow-gpu=1.12
 channels:
 - conda-forge
 ```
@@ -160,6 +161,9 @@ channels:
 Pour cet exemple, le fichier est enregistré sous nom `myenv.yml`.
 
 ## <a name="define-the-deployment-configuration"></a>Définir la configuration du déploiement
+
+> [!IMPORTANT]
+> AKS n’autorise pas les pods à partager des GPU ; vous ne pouvez avoir qu’autant de réplicas d’un service web compatible GPU qu’il y a de GPU dans le cluster.
 
 La configuration du déploiement définit l’environnement Azure Kubernetes Service utilisé pour exécuter le service web :
 
@@ -172,7 +176,7 @@ gpu_aks_config = AksWebservice.deploy_configuration(autoscale_enabled=False,
                                                     memory_gb=4)
 ```
 
-Pour plus d’informations, consultez la documentation de référence pour [AksService.deploy_configuration](/python/api/azureml-core/azureml.core.webservice.akswebservice?view=azure-ml-py#deploy-configuration-autoscale-enabled-none--autoscale-min-replicas-none--autoscale-max-replicas-none--autoscale-refresh-seconds-none--autoscale-target-utilization-none--collect-model-data-none--auth-enabled-none--cpu-cores-none--memory-gb-none--enable-app-insights-none--scoring-timeout-ms-none--replica-max-concurrent-requests-none--max-request-wait-time-none--num-replicas-none--primary-key-none--secondary-key-none--tags-none--properties-none--description-none--gpu-cores-none--period-seconds-none--initial-delay-seconds-none--timeout-seconds-none--success-threshold-none--failure-threshold-none--namespace-none--token-auth-enabled-none--compute-target-name-none-).
+Pour plus d’informations, consultez la documentation de référence pour [AksService.deploy_configuration](/python/api/azureml-core/azureml.core.webservice.akswebservice?view=azure-ml-py&preserve-view=true#&preserve-view=truedeploy-configuration-autoscale-enabled-none--autoscale-min-replicas-none--autoscale-max-replicas-none--autoscale-refresh-seconds-none--autoscale-target-utilization-none--collect-model-data-none--auth-enabled-none--cpu-cores-none--memory-gb-none--enable-app-insights-none--scoring-timeout-ms-none--replica-max-concurrent-requests-none--max-request-wait-time-none--num-replicas-none--primary-key-none--secondary-key-none--tags-none--properties-none--description-none--gpu-cores-none--period-seconds-none--initial-delay-seconds-none--timeout-seconds-none--success-threshold-none--failure-threshold-none--namespace-none--token-auth-enabled-none--compute-target-name-none-).
 
 ## <a name="define-the-inference-configuration"></a>Définir la configuration de l’inférence
 
@@ -188,7 +192,7 @@ inference_config = InferenceConfig(entry_script="score.py", environment=myenv)
 ```
 
 Pour plus d’informations sur les environnements , consultez [Créer et gérer des environnements pour la formation et le déploiement](how-to-use-environments.md).
-Pour plus d’informations, consultez la documentation de référence pour [InferenceConfig](https://docs.microsoft.com/python/api/azureml-core/azureml.core.model.inferenceconfig?view=azure-ml-py).
+Pour plus d’informations, consultez la documentation de référence pour [InferenceConfig](/python/api/azureml-core/azureml.core.model.inferenceconfig?preserve-view=true&view=azure-ml-py).
 
 ## <a name="deploy-the-model"></a>Déployer le modèle
 
@@ -213,10 +217,7 @@ aks_service.wait_for_deployment(show_output=True)
 print(aks_service.state)
 ```
 
-> [!NOTE]
-> Si l’objet `InferenceConfig` a `enable_gpu=True`, le paramètre `deployment_target` doit référencer un cluster qui fournit un GPU. Si ce n'est pas le cas, le déploiement échouera.
-
-Pour plus d’informations, consultez la documentation de référence sur [le modèle](https://docs.microsoft.com/python/api/azureml-core/azureml.core.model.model?view=azure-ml-py).
+Pour plus d’informations, consultez la documentation de référence sur [le modèle](/python/api/azureml-core/azureml.core.model.model?preserve-view=true&view=azure-ml-py).
 
 ## <a name="issue-a-sample-query-to-your-service"></a>Envoyer un exemple de requête à votre service
 

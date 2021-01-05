@@ -2,23 +2,23 @@
 title: Circuits Azure ExpressRoute et peering
 description: Cette page fournit une vue d’ensemble des circuits ExpressRoute et des domaines de routage/peering.
 services: expressroute
-author: mialdrid
+author: duongau
 ms.service: expressroute
 ms.topic: conceptual
 ms.date: 12/13/2019
-ms.author: mialdrid
-ms.openlocfilehash: c68ffd019937f902567c3deda8d879448dc082da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 87fed1d2ac4f5fa85c01d7af10bec10c1412744f
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236353"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202342"
 ---
 # <a name="expressroute-circuits-and-peering"></a>Circuits ExpressRoute et peering
 
 Les circuits ExpressRoute vous permettent de connecter votre infrastructure locale à Microsoft via un fournisseur de connectivité. Cet article vous aide à comprendre les circuits ExpressRoute et les domaines de routage/le peering. La figure suivante affiche une représentation logique de la connectivité entre votre WAN et Microsoft.
 
-![](./media/expressroute-circuit-peerings/expressroute-basic.png)
+![Diagramme montrant la façon dont les circuits ExpressRoute connectent votre infrastructure locale à Microsoft via un fournisseur de connectivité.](./media/expressroute-circuit-peerings/expressroute-basic.png)
 
 > [!IMPORTANT]
 > Le peering public Azure a été déconseillé, et il n’est pas disponible pour les nouveaux circuits ExpressRoute. Les nouveaux circuits prennent en charge le peering Microsoft et le peering privé.  
@@ -42,7 +42,7 @@ Des limites et quotas par défaut s'appliquent à chaque circuit ExpressRoute. C
 
 Un circuit ExpressRoute a plusieurs domaines de routage/peerings qui lui sont associés : public Azure, privé Azure et Microsoft. Chaque peering est configuré de manière identique sur une paire de routeurs (en configuration actif-actif ou de partage de la charge) pour la haute disponibilité. Les services Azure sont classés en *Public Azure* et *Privé Azure* pour représenter les schémas d’adressage IP.
 
-![](./media/expressroute-circuit-peerings/expressroute-peerings.png)
+![Diagramme montrant la façon dont les Peerings publics Azure, privés Azure et Microsoft sont configurés dans un circuit ExpressRoute.](./media/expressroute-circuit-peerings/expressroute-peerings.png)
 
 ### <a name="azure-private-peering"></a><a name="privatepeering"></a>Peering privé Azure
 
@@ -54,7 +54,7 @@ Vous pouvez connecter plusieurs réseaux virtuels au domaine de peering privé. 
 
 [!INCLUDE [expressroute-office365-include](../../includes/expressroute-office365-include.md)]
 
-La connectivité aux services en ligne Microsoft (Office 365 et les services Azure PaaS) s’effectue via l’appairage Microsoft. Nous activons la connectivité bidirectionnelle entre votre réseau étendu et les services cloud Microsoft via le domaine de routage de peering Microsoft. Vous devez vous connecter aux services cloud Microsoft uniquement via des adresses IP publiques qui sont détenues par vous ou votre fournisseur de connectivité. Vous devez également respecter toutes les règles définies. Pour plus d’informations, consultez la page [Composants requis ExpressRoute](expressroute-prerequisites.md).
+La connectivité aux services en ligne Microsoft (Microsoft 365 et les services PaaS Azure) s’effectue via un Peering Microsoft. Nous activons la connectivité bidirectionnelle entre votre réseau étendu et les services cloud Microsoft via le domaine de routage de peering Microsoft. Vous devez vous connecter aux services cloud Microsoft uniquement via des adresses IP publiques qui sont détenues par vous ou votre fournisseur de connectivité. Vous devez également respecter toutes les règles définies. Pour plus d’informations, consultez la page [Composants requis ExpressRoute](expressroute-prerequisites.md).
 
 Pour plus d’informations sur les services pris en charge, les coûts et les détails de configuration, consultez le [Forum Aux Questions](expressroute-faqs.md) . Pour plus d’informations sur la liste des fournisseurs de connectivité offrant une prise en charge du peering Microsoft, consultez la page [Emplacements ExpressRoute](expressroute-locations.md)
 
@@ -70,7 +70,7 @@ Chaque peering requiert des sessions BGP distinctes (une paire pour chaque type 
 
 ## <a name="expressroute-health"></a><a name="health"></a>Intégrité ExpressRoute
 
-Les circuits ExpressRoute peuvent faire l’objet d’une surveillance en matière de disponibilité, de connectivité aux réseaux virtuels et d’utilisation de la bande passante à l’aide de [Network Performance Monitor](https://docs.microsoft.com/azure/networking/network-monitoring-overview) (NPM).
+Les circuits ExpressRoute peuvent faire l’objet d’une surveillance en matière de disponibilité, de connectivité aux réseaux virtuels et d’utilisation de la bande passante à l’aide de [Network Performance Monitor](../networking/network-monitoring-overview.md) (NPM).
 
 NPM supervise l’intégrité du peering privé Azure et du peering Microsoft. Pour plus d’informations, consultez notre [billet](https://azure.microsoft.com/blog/monitoring-of-azure-expressroute-in-preview/).
 

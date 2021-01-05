@@ -6,17 +6,17 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/16/2020
-ms.openlocfilehash: 18cd74ac9298b7dd058de2b224f677ec0d8f2d64
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 736daa8a09a8f08721c7b7d9c20f012f274b384a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79480281"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87045522"
 ---
 # <a name="azure-monitor-log-query-examples"></a>Exemples de requêtes de journal dans Azure Monitor
 Cet article inclut divers exemples de [requêtes](log-query-overview.md) utilisant le [langage de requête Kusto](/azure/kusto/query/) pour récupérer différents types de données de journal à partir d'Azure Monitor. Plusieurs méthodes sont utilisées pour consolider et analyser les données. Vous pouvez utiliser ces exemples pour identifier les stratégies qui vous conviennent.  
 
-Consultez les [informations de référence sur le langage Kusto](https://docs.microsoft.com/azure/kusto/query/) pour plus de détails sur les différents mots clés utilisés dans ces exemples. Si vous ne connaissez pas Azure Monitor, lisez une [leçon sur la création de requêtes](get-started-queries.md).
+Consultez les [informations de référence sur le langage Kusto](/azure/kusto/query/) pour plus de détails sur les différents mots clés utilisés dans ces exemples. Si vous ne connaissez pas Azure Monitor, lisez une [leçon sur la création de requêtes](get-started-queries.md).
 
 ## <a name="events"></a>Événements
 
@@ -229,7 +229,7 @@ protection_data | join (heartbeat_data) on Computer, round_time
 ### <a name="count-security-events-by-activity-id"></a>Compter les événements de sécurité par ID d’activité
 
 
-Cet exemple s’appuie sur la structure fixe de la colonne **Activity** : \<ID\>-\<Name\>.
+Cet exemple s’appuie sur la structure fixe de la colonne **Activity** : \<ID\>-\<Name\>.
 Il analyse la valeur **Activity** dans deux nouvelles colonnes et compte les occurrences de chaque élément **activityID**.
 
 ```Kusto
@@ -270,7 +270,7 @@ SecurityEvent
 ```
 
 ### <a name="parse-activity-name-and-id"></a>Analyser le nom d’activité et l’ID
-Les deux exemples ci-dessous s’appuient sur la structure fixe de la colonne **Activity** : \<ID\>-\<Name\>. Le premier exemple utilise l’opérateur **parse** pour affecter des valeurs à deux nouvelles colonnes : **activityID** et **activityDesc**.
+Les deux exemples ci-dessous s’appuient sur la structure fixe de la colonne **Activity** : \<ID\>-\<Name\>. Le premier exemple utilise l’opérateur **parse** pour affecter des valeurs à deux nouvelles colonnes : **activityID** et **activityDesc**.
 
 ```Kusto
 SecurityEvent
@@ -375,7 +375,7 @@ suspicious_users_that_later_logged_in
 
 ## <a name="usage"></a>Usage
 
-Le type de données `Usage` permet d’assurer le suivi du volume de données ingérées par la solution ou le type de données. Il existe d’autres techniques pour étudier les volumes de données ingérées par [ordinateur](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#data-volume-by-computer) ou [abonnement, groupe de ressources ou ressource Azure](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#data-volume-by-azure-resource-resource-group-or-subscription).
+Le type de données `Usage` permet d’assurer le suivi du volume de données ingérées par la solution ou le type de données. Il existe d’autres techniques pour étudier les volumes de données ingérées par [ordinateur](../platform/manage-cost-storage.md#data-volume-by-computer) ou [abonnement, groupe de ressources ou ressource Azure](../platform/manage-cost-storage.md#data-volume-by-azure-resource-resource-group-or-subscription).
 
 #### <a name="data-volume-by-solution"></a>Volume de données par solution
 

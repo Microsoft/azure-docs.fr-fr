@@ -1,20 +1,20 @@
 ---
 title: 'Démarrage rapide : Créer une application iOS'
-description: Dans ce démarrage rapide, vous allez apprendre à générer une application iOS à l’aide de Spatial Anchors.
-author: craigktreasure
-manager: vriveras
+description: Découvrez comment créer une application iOS en utilisant Azure Spatial Anchors par programmation en Swift ou Objective-C.
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
 ms.custom: has-adal-ref
-ms.openlocfilehash: 1da5bd7020304c67bd9f9058612f47d528611a9e
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 4434118313989eb8bc70f1d44e977b2df3633050
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83195330"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96009073"
 ---
 # <a name="quickstart-create-an-ios-app-with-azure-spatial-anchors-in-either-swift-or-objective-c"></a>Démarrage rapide : Créer une application iOS avec Azure Spatial Anchors, en Swift ou Objective-C
 
@@ -101,6 +101,8 @@ Localisez le champ `spatialAnchorsAccountKey` et remplacez `Set me` par la clé 
 
 Localisez le champ `spatialAnchorsAccountId` et remplacez `Set me` par l’identificateur du compte.
 
+Recherchez le champ `spatialAnchorsAccountDomain` et remplacez `Set me` par le domaine du compte.
+
 # <a name="objective-c"></a>[Objective-C](#tab/openproject-objc)
 
 Ouvrez `iOS/Objective-C/SampleObjC/BaseViewController.m`.
@@ -108,6 +110,8 @@ Ouvrez `iOS/Objective-C/SampleObjC/BaseViewController.m`.
 Localisez le champ `SpatialAnchorsAccountKey` et remplacez `Set me` par la clé du compte.
 
 Localisez le champ `SpatialAnchorsAccountId` et remplacez `Set me` par l’identificateur du compte.
+
+Recherchez le champ `SpatialAnchorsAccountDomain` et remplacez `Set me` par le domaine du compte.
 
 ---
 

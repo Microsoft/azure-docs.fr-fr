@@ -2,19 +2,17 @@
 title: Paramètres de liste déroulante des classeurs Azure Monitor
 description: Créez des rapports complexes en toute simplicité grâce à des classeurs paramétrables prédéfinis et personnalisés contenant des paramètres de liste déroulante.
 services: azure-monitor
-author: mrbullwinkle
 manager: carmonm
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
 ms.date: 10/23/2019
-ms.author: mbullwin
-ms.openlocfilehash: f3220a363025d80fd7636dbfc3af3d2d9d7bc040
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 07a8ece76bffe0fbbcbc211e83730433cdeda2c4
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658280"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92143808"
 ---
 # <a name="workbook-drop-down-parameters"></a>Paramètres de liste déroulante des classeurs
 
@@ -48,7 +46,9 @@ Le moyen le plus simple de spécifier une liste déroulante consiste à fournir 
     ![Image représentant la création d’une liste déroulante statique](./media/workbook-dropdowns/dropdown-create.png)
 
 ## <a name="creating-a-static-dropdown-with-groups-of-items"></a>Créer une liste déroulante statique comportant des groupes d’éléments
+
 Si le résultat/JSON de votre requête contient un champ « group », la liste déroulante affiche des groupes de valeurs. Suivez l’exemple ci-dessus, en utilisant cette fois le JSON suivant :
+
 ```json
 [
     { "value":"dev", "label":"Development", "group":"Development" },
@@ -59,7 +59,8 @@ Si le résultat/JSON de votre requête contient un champ « group », la liste
     { "value":"prod2", "label":"Prod 2", "group":"Production" }
 ]
 ```
-    ![Image showing an example of a grouped dropdown](./media/workbook-dropdowns/grouped-dropDown.png)
+
+![Image montrant un exemple de liste déroulante groupée](./media/workbook-dropdowns/grouped-dropDown.png)
 
 
 ## <a name="creating-a-dynamic-drop-down-parameter"></a>Créer un paramètre de liste déroulante dynamique
@@ -86,6 +87,7 @@ Si le résultat/JSON de votre requête contient un champ « group », la liste
     ![Image représentant la création d’une liste déroulante dynamique](./media/workbook-dropdowns/dropdown-dynamic.png)
 
 ## <a name="referencing-drop-down-parameter"></a>Faire référence à un paramètre de liste déroulante
+
 ### <a name="in-kql"></a>En KQL
 1. Ajoutez un contrôle de requête au classeur et sélectionnez une ressource Application Insights.
 2. Dans l’éditeur KQL, entrez cet extrait de code :
@@ -122,7 +124,8 @@ dependencies
 | serialize Rank = row_number()
 | project value = name, label = strcat('🌐 ', name), selected = iff(Rank == 1, true, false), group = operation_Name
 ```
-    ![Image showing a drop-down parameter using value, label, selection and group options](./media/workbook-dropdowns/dropdown-more-options.png)
+
+![Image montrant un paramètre de liste déroulante utilisant les options de valeur, d’étiquette, de sélection et de groupe](./media/workbook-dropdowns/dropdown-more-options.png)
 
 
 ## <a name="drop-down-parameter-options"></a>Options des paramètres de liste déroulante
@@ -151,5 +154,5 @@ Voici un exemple de liste déroulante à sélection multiple :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Commencez](workbooks-visualizations.md) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
+* [Commencez](./workbooks-overview.md#visualizations) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
 * [Contrôlez](workbooks-access-control.md) et partagez l’accès à vos ressources de classeur.

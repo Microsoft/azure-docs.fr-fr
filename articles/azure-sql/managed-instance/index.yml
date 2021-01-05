@@ -1,0 +1,137 @@
+### YamlMime:Landing
+title: Documentation Azure SQL Managed Instance
+summary: Découvrez la documentation sur Azure SQL Managed Instance, instance managée dans Azure basée sur la dernière version stable de Microsoft SQL Server.
+metadata:
+  title: Documentation Azure SQL Managed Instance
+  description: Découvrez la documentation sur Azure SQL Managed Instance, instance managée dans Azure basée sur la dernière version stable de Microsoft SQL Server.
+  services: sql-database
+  ms.service: sql-managed-instance
+  ms.subservice: operations
+  ms.topic: landing-page
+  author: stevestein
+  ms.author: sstein
+  ms.reviewer: 
+  ms.date: 05/27/2020
+  ms.openlocfilehash: a647b65725b15b04d30ae7789d6d4429fe949377
+  ms.sourcegitcommit: 1cf157f9a57850739adef72219e79d76ed89e264
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/13/2020
+  ms.locfileid: "94593907"
+landingContent:
+- title: Azure SQL Managed Instance
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Créer une instance SQL Database Managed Instance
+      url: instance-create-quickstart.md
+  - linkListType: video
+    links:
+    - text: Vue d’ensemble d’Azure SQL Managed Instance
+      url: https://channel9.msdn.com/Series/Azure-SQL-for-Beginners/Azure-SQL-Managed-Instance-Overview-6-of-61
+  - linkListType: concept
+    links:
+    - text: Nouveautés
+      url: ../database/doc-changes-updates-release-notes.md?tabs=managed-instance
+    - text: Qu’est-ce que SQL Managed Instance ?
+      url: sql-managed-instance-paas-overview.md
+    - text: Options d’achat
+      url: ../database/purchasing-models.md
+    - text: Niveaux de service
+      url: ../database/service-tiers-general-purpose-business-critical.md
+    - text: Réplication transactionnelle
+      url: replication-transactional-overview.md
+    - text: Migrer à partir de SQL Server
+      url: migrate-to-instance-from-sql-server.md
+    - text: Différences T-SQL avec SQL Server
+      url: transact-sql-tsql-differences-sql-server.md
+- title: Sécurité avancée
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Fonctionnalités de sécurité
+      url: ../database/security-overview.md
+    - text: Bonnes pratiques de sécurité
+      url: ../database/security-best-practice.md
+    - text: Connexions, comptes d’utilisateur, rôles et autorisations
+      url: ../database/logins-create-manage.md
+    - text: Azure Active Directory
+      url: ../database/authentication-aad-overview.md
+    - text: Audit
+      url: auditing-configure.md
+    - text: Transparent Data Encryption (TDE)
+      url: ../database/transparent-data-encryption-tde-overview.md
+    - text: Masquage dynamique des données
+      url: ../database/dynamic-data-masking-overview.md
+    - text: Points de terminaison publics
+      url: public-endpoint-overview.md
+- title: Découvrir Azure SQL
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Azure SQL pour les débutants
+      url: https://aka.ms/azuresql4beginners
+    - text: Fondamentaux Azure SQL
+      url: /learn/paths/azure-sql-fundamentals/
+    - text: Ateliers pratiques Azure SQL
+      url: https://aka.ms/asqlworkshop
+    - text: Bootcamp Azure SQL
+      url: https://aka.ms/azuresqlbootcamp
+    - text: Ressources SQL éducatives
+      url: /sql/sql-server/educational-sql-resources
+- title: Informations de référence
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Exemples d’interface de ligne de commande Azure
+      url: ../database/az-cli-script-samples-content-guide.md
+    - text: Exemples PowerShell
+      url: ../database/powershell-script-content-guide.md
+    - text: Exemples de modèles ARM
+      url: ../database/arm-templates-content-guide.md
+  - linkListType: download
+    links:
+    - text: SQL Server Management Studio (SSMS)
+      url: /sql/ssms/download-sql-server-management-studio-ssms
+    - text: Azure Data Studio
+      url: /sql/azure-data-studio/download-azure-data-studio
+    - text: SQL Server Data Tools
+      url: /sql/ssdt/download-sql-server-data-tools-ssdt
+    - text: Visual Studio 2019
+      url: https://visualstudio.microsoft.com/downloads/
+  - linkListType: reference
+    links:
+    - text: Guide de migration
+      url: https://datamigration.microsoft.com/
+    - text: Transact-SQL (T-SQL)
+      url: /sql/t-sql/language-reference
+    - text: Azure CLI
+      url: /cli/azure/sql
+    - text: PowerShell
+      url: /powershell/module/az.sql
+    - text: API REST
+      url: /rest/api/sql/
+- title: Continuité de l’activité
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Continuité de l’activité
+      url: ../database/business-continuity-high-availability-disaster-recover-hadr-overview.md
+    - text: Haute disponibilité
+      url: ../database/high-availability-sla.md
+    - text: Groupes de basculement automatique
+      url: ../database/auto-failover-group-overview.md
+    - text: Sauvegardes automatisées
+      url: ../database/automated-backups-overview.md
+    - text: Récupérer avec la sauvegarde
+      url: ../database/recovery-using-backups.md
+    - text: Rétention des sauvegardes à long terme
+      url: ../database/long-term-retention-overview.md
+- title: Pools d’instances
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Qu’est-ce qu’un pool d’instances ?
+      url: instance-pools-overview.md
+    - text: Configurer
+      url: instance-pools-configure.md

@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/28/2018
 ms.author: tomfitz
-ms.openlocfilehash: 4fcaf0e5842ce8a65175d2fc1dfa2483a1203b2f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fe70c42387e9dedea8943b5dcce04a1f9ded5190
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649637"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87033283"
 ---
 # <a name="microsoftstoragestorageaccountselector-ui-element"></a>Élément d’interface utilisateur Microsoft.Storage.StorageAccountSelector
 
@@ -20,11 +20,11 @@ Contrôle permettant de sélectionner un compte de stockage nouveau ou existant.
 
 Le contrôle affiche la valeur par défaut.
 
-![Microsoft.Storage.StorageAccountSelector](./media/managed-application-elements/microsoft.storage.storageaccountselector.png)
+![Microsoft.Storage.StorageAccountSelector](./media/managed-application-elements/microsoft-storage-storageaccountselector.png)
 
 Le contrôle permet à l’utilisateur de créer un nouveau compte de stockage ou de sélectionner un compte de stockage existant.
 
-![Microsoft.Storage.StorageAccountSelector nouveau](./media/managed-application-elements/microsoft.storage.storageaccountselector-new.png)
+![Microsoft.Storage.StorageAccountSelector nouveau](./media/managed-application-elements/microsoft-storage-storageaccountselector-new.png)
 
 ## <a name="schema"></a>schéma
 

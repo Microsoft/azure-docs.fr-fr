@@ -3,23 +3,23 @@ title: Catalogue de sauvegarde du Gestionnaire d’instantanés StorSimple | Mi
 description: Décrit comment utiliser le composant logiciel enfichable MMC du Gestionnaire d’instantanés StorSimple pour afficher et gérer le catalogue de sauvegarde.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 6abdbfd2-22ce-45a5-aa15-38fae4c8f4ec
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
-ms.author: twooley
-ms.openlocfilehash: 38ef7774263e4b28b7c316fd0870ca8f7b89d6b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 2efc35e65ca1db2b5241e1d3b2798e068880c87e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75931704"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90054991"
 ---
 # <a name="use-storsimple-snapshot-manager-to-manage-the-backup-catalog"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour gérer le catalogue de sauvegarde
 

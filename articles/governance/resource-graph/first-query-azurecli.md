@@ -1,14 +1,15 @@
 ---
 title: 'Démarrage rapide : Votre première requête Azure CLI'
 description: Dans ce guide de démarrage rapide, vous suivez les étapes pour activer l’extension Resource Graph pour Azure CLI et vous exécutez votre première requête.
-ms.date: 11/21/2019
+ms.date: 10/14/2020
 ms.topic: quickstart
-ms.openlocfilehash: e75152c720d94f084b43f855452e5e8ce4dc6bc8
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 216972fb3c64efa22dc4d344e5021a3c2da74266
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215637"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92056768"
 ---
 # <a name="quickstart-run-your-first-resource-graph-query-using-azure-cli"></a>Démarrage rapide : Exécuter votre première requête Resource Graph à l’aide d’Azure CLI
 
@@ -24,9 +25,9 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 
 ## <a name="add-the-resource-graph-extension"></a>Ajouter l’extension Resource Graph
 
-Pour permettre à Azure CLI d’interroger Azure Resource Graph, vous devez ajouter l’extension. Cette extension fonctionne avec Azure CLI quel que soit l’endroit où vous l’utilisez : [bash sur Windows 10](/windows/wsl/install-win10), [Cloud Shell](https://shell.azure.com) (en version autonome et à l’intérieur du portail), [image Docker Azure CLI](https://hub.docker.com/r/microsoft/azure-cli/) ou installation locale.
+Pour permettre à Azure CLI d’interroger Azure Resource Graph, vous devez ajouter l’extension. Cette extension fonctionne avec Azure CLI quel que soit l’endroit où vous l’utilisez : [bash sur Windows 10](/windows/wsl/install-win10), [Cloud Shell](https://shell.azure.com) (en version autonome et à l’intérieur du portail), [image Docker Azure CLI](https://hub.docker.com/_/microsoft-azure-cli) ou installation locale.
 
-1. Vérifiez que la version la plus récente d’Azure CLI est installée (**2.0.76** au minimum). S’il n’est pas installé, suivez [ces instructions](/cli/azure/install-azure-cli-windows?view=azure-cli-latest).
+1. Vérifiez que la version la plus récente d’Azure CLI est installée (**2.0.76** au minimum). S’il n’est pas installé, suivez [ces instructions](/cli/azure/install-azure-cli-windows).
 
 1. Dans l’environnement Azure CLI de choix, vous devez l’importer avec la commande suivante :
 
@@ -69,7 +70,7 @@ Une fois l’extension Azure CLI ajoutée à l’environnement de votre choix, v
    ```
 
    > [!NOTE]
-   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cela signifie que les résultats de la requête sont d’abord limités avant d’être triés.
+   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cet ordre de commande limite d’abord les résultats de la requête, puis les classe.
 
 1. Mettez à jour la requête pour d’abord trier (`order by`) les résultats en fonction de la propriété **name**, puis les limiter (`limit`) aux cinq premiers :
 
@@ -78,7 +79,7 @@ Une fois l’extension Azure CLI ajoutée à l’environnement de votre choix, v
    az graph query -q 'Resources | project name, type | order by name asc | limit 5'
    ```
 
-Si votre environnement ne change pas et que vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et conformes aux attentes. En effet, ils sont classés en fonction de la propriété **name** et limités aux cinq premiers.
+Si votre environnement ne change pas et si vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et classés en fonction de la propriété **Name**, mais toujours limités aux cinq premiers.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

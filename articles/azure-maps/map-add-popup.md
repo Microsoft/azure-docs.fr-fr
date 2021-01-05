@@ -1,20 +1,20 @@
 ---
 title: Ajouter une fenêtre contextuelle à un point sur une carte | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à ajouter une fenêtre contextuelle à un point à l’aide du Kit de développement logiciel (SDK) Web Microsoft Azure Maps.
-author: Philmea
-ms.author: philmea
+description: En savoir plus sur les fenêtres contextuelles, les modèles de fenêtres contextuelles et les événements contextuels dans Azure Maps. Découvrez comment ajouter une fenêtre contextuelle à un point sur une carte et comment réutiliser et personnaliser des fenêtres contextuelles.
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 02/27/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: d7ca2f07e4568257baf72f2f298631b86f776c2a
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: 903574a8c8696f10d9903a685bab8d12b3e6395f
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83119271"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891034"
 ---
 # <a name="add-a-popup-to-the-map"></a>Ajouter une fenêtre contextuelle à la carte
 
@@ -22,7 +22,7 @@ Cet article vous explique comment ajouter une fenêtre contextuelle à un point 
 
 ## <a name="understand-the-code"></a>Comprendre le code
 
-Le code suivant ajoute une caractéristique de point, qui a des propriétés `name` et `description`, à la carte à l’aide d’un calque de symboles. Une instance de la [classe Popup](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.popup) est créée, mais elle n’est pas affichée. Les événements de souris sont ajoutés au calque de symboles pour déclencher l’ouverture et la fermeture de la fenêtre contextuelle. Quand vous survolez le symbole de marqueur, la propriété `position` de la fenêtre contextuelle est mise à jour avec la position du marqueur et l’option `content` est mise à jour avec du code HTML qui encapsule les propriétés `name` et `description` de la caractéristique de point survolée. La fenêtre contextuelle est ensuite affichée sur la carte à l’aide de sa fonction `open`.
+Le code suivant ajoute une caractéristique de point, qui a des propriétés `name` et `description`, à la carte à l’aide d’un calque de symboles. Une instance de la [classe Popup](/javascript/api/azure-maps-control/atlas.popup) est créée, mais elle n’est pas affichée. Les événements de souris sont ajoutés au calque de symboles pour déclencher l’ouverture et la fermeture de la fenêtre contextuelle. Quand vous survolez le symbole de marqueur, la propriété `position` de la fenêtre contextuelle est mise à jour avec la position du marqueur et l’option `content` est mise à jour avec du code HTML qui encapsule les propriétés `name` et `description` de la caractéristique de point survolée. La fenêtre contextuelle est ensuite affichée sur la carte à l’aide de sa fonction `open`.
 
 ```javascript
 //Define an HTML template for a custom popup content laypout.
@@ -80,7 +80,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Ajouter une fenêtre contextuelle à l’aide d’Azure Maps' src='//codepen.io/azuremaps/embed/MPRPvz/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Affichez l’objet Pen <a href='https://codepen.io/azuremaps/pen/MPRPvz/'>Ajouter une fenêtre contextuelle à l’aide d’Azure Maps</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Ajouter une fenêtre contextuelle à l’aide d’Azure Maps' src='//codepen.io/azuremaps/embed/MPRPvz/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Affichez l’objet Pen <a href='https://codepen.io/azuremaps/pen/MPRPvz/'>Ajouter une fenêtre contextuelle à l’aide d’Azure Maps</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="reusing-a-popup-with-multiple-points"></a>Réutilisation d’une fenêtre contextuelle avec plusieurs points
@@ -89,7 +89,7 @@ Dans certains cas, la meilleure approche consiste à créer une fenêtre context
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Réutilisation d’une fenêtre contextuelle avec plusieurs épingles' src='//codepen.io/azuremaps/embed/rQbjvK/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/rQbjvK/'>Reusing Popup with Multiple Pin</a> (Réutilisation d’une fenêtre contextuelle avec plusieurs épingles) Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Réutilisation d’une fenêtre contextuelle avec plusieurs épingles' src='//codepen.io/azuremaps/embed/rQbjvK/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/rQbjvK/'>Reusing Popup with Multiple Pin</a> (Réutilisation d’une fenêtre contextuelle avec plusieurs épingles) Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="customizing-a-popup"></a>Personnalisation d’une fenêtre contextuelle
@@ -98,7 +98,7 @@ Par défaut, la fenêtre contextuelle a un arrière-plan blanc, une flèche de p
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Fenêtre contextuelle personnalisée" src="//codepen.io/azuremaps/embed/ymKgdg/?height=500&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Fenêtre contextuelle personnalisée" src="//codepen.io/azuremaps/embed/ymKgdg/?height=500&theme-id=0&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez la page <a href='https://codepen.io/azuremaps/pen/ymKgdg/'>Customized Popup</a> (Fenêtre contextuelle personnalisée) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -252,7 +252,7 @@ Cliquez sur les points sur la carte dans CodePen. Il existe sur la carte un poin
 
 <br/>
 
-<iframe height='500' scrolling='no' title='PopupTemplates' src='//codepen.io/azuremaps/embed/dyovrzL/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/dyovrzL/'>PopupTemplates</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='PopupTemplates' src='//codepen.io/azuremaps/embed/dyovrzL/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/dyovrzL/'>PopupTemplates</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="reuse-popup-template"></a>Réutiliser le modèle de fenêtre contextuelle
@@ -261,7 +261,7 @@ Vous pouvez réutiliser les modèles de fenêtre contextuelle comme vous réutil
 
 <br/>
 
-<iframe height='500' scrolling='no' title='ReusePopupTemplate' src='//codepen.io/azuremaps/embed/WNvjxGw/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/WNvjxGw/'>ReusePopupTemplates</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='ReusePopupTemplate' src='//codepen.io/azuremaps/embed/WNvjxGw/?height=500&theme-id=0&default-tab=result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/WNvjxGw/'>ReusePopupTemplates</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="popup-events"></a>Événements de fenêtres contextuelles
@@ -270,7 +270,7 @@ Les fenêtres contextuelles peuvent être ouvertes, fermées et déplacées. La 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Événements de fenêtres contextuelles" src="//codepen.io/azuremaps/embed/BXrpvB/?height=500&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Événements de fenêtres contextuelles" src="//codepen.io/azuremaps/embed/BXrpvB/?height=500&theme-id=0&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez la page <a href='https://codepen.io/azuremaps/pen/BXrpvB/'>Popup events</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -279,13 +279,13 @@ Consultez la page <a href='https://codepen.io/azuremaps/pen/BXrpvB/'>Popup event
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [Popup](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.popup)
+> [Popup](/javascript/api/azure-maps-control/atlas.popup)
 
 > [!div class="nextstepaction"]
-> [PopupOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.popupoptions)
+> [PopupOptions](/javascript/api/azure-maps-control/atlas.popupoptions)
 
 > [!div class="nextstepaction"]
-> [PopupTemplate](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.popuptemplate)
+> [PopupTemplate](/javascript/api/azure-maps-control/atlas.popuptemplate)
 
 Pour voir des exemples de codes complets, consultez les articles suivants qui sont très intéressants :
 

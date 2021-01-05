@@ -1,16 +1,15 @@
 ---
 title: Déboguer votre application dans Eclipse
 description: Améliorez la fiabilité et les performances de vos services en les développant et en procédant à leur débogage dans Eclipse sur un cluster de développement local.
-author: suhuruli
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: suhuruli
-ms.openlocfilehash: 15448a9bd8998a99e8fce578b05130694ecd5fd0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: d321e0c10b66a15e6cb309cefe711602fa12957c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614483"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91534107"
 ---
 # <a name="debug-your-java-service-fabric-application-using-eclipse"></a>Débogage de votre application Java Service Fabric avec Eclipse
 > [!div class="op_single_selector"]
@@ -41,5 +40,5 @@ Si l’application se bloque, vous pouvez également activer le vidage de la mé
 
 ### <a name="next-steps"></a>Étapes suivantes
 
-* [Collecter les journaux avec Diagnostics Azure pour Linux](service-fabric-diagnostics-how-to-setup-lad.md).
+* [Collecter les journaux avec Diagnostics Azure pour Linux](./service-fabric-diagnostics-event-aggregation-lad.md).
 * [Surveiller et diagnostiquer les services localement](service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally-linux.md).

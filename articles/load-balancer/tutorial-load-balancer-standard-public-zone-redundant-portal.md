@@ -15,12 +15,12 @@ ms.workload: infrastructure-services
 ms.date: 02/27/2019
 ms.author: allensu
 ms.custom: seodec18
-ms.openlocfilehash: f521cc68476e2f9df1cc8288cf41156da3851cd0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 4e07285eca0fd10b73b386fcf139cdad5b94ddc2
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78251890"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94696402"
 ---
 # <a name="tutorial-load-balance-vms-across-availability-zones-with-a-standard-load-balancer-using-the-azure-portal"></a>Tutoriel : Équilibrer la charge des machines virtuelles sur les zones de disponibilité avec un équilibreur de charge standard à l’aide du portail Azure
 
@@ -37,9 +37,13 @@ L’équilibrage de charge offre un niveau plus élevé de disponibilité en ré
 
 Pour plus d’informations sur l’utilisation des zones de disponibilité avec un équilibreur de charge standard, voir [Équilibreur de charge standard et zones de disponibilité](load-balancer-standard-availability-zones.md).
 
-Si vous préférez, vous pouvez suivre ce didacticiel en utilisant [Azure CLI](load-balancer-standard-public-zone-redundant-cli.md).
+Si vous préférez, vous pouvez suivre ce didacticiel en utilisant [Azure CLI](./quickstart-load-balancer-standard-public-cli.md).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
+
+## <a name="prerequisites"></a>Prérequis
+
+* Un abonnement Azure
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -75,12 +79,12 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | myResourceGroupLBAZ (sélectionnez un groupe de ressources existant) |
-| **\<nom_réseau_virtuel>** | myVNet          |
-| **\<nom_région>**          | Europe Ouest      |
-| **\<espace_d’adressage_IPv4>**   | 10.0.0.0\16          |
-| **\<nom_sous-réseau>**          | myBackendSubnet        |
-| **\<plage_adresses_sous-réseau>** | 10.0.0.0\24          |
+| **\<resource-group-name>**  | myResourceGroupLBAZ (sélectionnez un groupe de ressources existant) |
+| **\<virtual-network-name>** | myVNet          |
+| **\<region-name>**          | Europe Ouest      |
+| **\<IPv4-address-space>**   | 10.0.0.0/16          |
+| **\<subnet-name>**          | myBackendSubnet        |
+| **\<subnet-address-range>** | 10.0.0.0/24          |
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 
@@ -93,7 +97,7 @@ Créez un groupe de sécurité réseau pour définir les connexions entrantes ve
     - *myNetworkSecurityGroup* : pour le nom du groupe de sécurité réseau.
     - *myResourceGroupLBAZ* : pour le nom du groupe de ressources existant.
    
-![Créez un réseau virtuel](./media/load-balancer-standard-public-availability-zones-portal/create-nsg.png)
+![La capture d’écran montre le volet Créer un groupe de sécurité réseau.](./media/load-balancer-standard-public-availability-zones-portal/create-nsg.png)
 
 ### <a name="create-network-security-group-rules"></a>Créer des règles pour le groupe de sécurité réseau
 
@@ -112,7 +116,7 @@ Dans cette section, vous allez créer des règles pour le groupe de sécurité r
     - *Allow HTTP* : pour la description de la règle de l’équilibreur de charge.
 4. Cliquez sur **OK**.
  
-   ![Créez un réseau virtuel](./media/load-balancer-standard-public-availability-zones-portal/8-load-balancer-nsg-rules.png)
+   ![La capture d’écran montre le volet Ajouter une règle de sécurité de trafic entrant.](./media/load-balancer-standard-public-availability-zones-portal/8-load-balancer-nsg-rules.png)
 5. Répétez les étapes 2 à 4 pour créer une autre règle nommée *myRDPRule* pour autoriser une connexion RDP entrante à l’aide du port 3389 avec les valeurs suivantes :
     - *Service Tag* : pour **Source**.
     - *Internet* : pour **Balise de service source**
@@ -140,9 +144,6 @@ Dans différentes zones (zone 1, zone 2 et zone 3) de la région, créez des mac
     - *myNetworkSecurityGroup* : pour le nom du groupe de sécurité réseau (pare-feu).
 5. Cliquez sur **Désactivé** pour désactiver les diagnostics de démarrage.
 6. Cliquez sur **OK**, vérifiez les paramètres sur la page de résumé, puis cliquez sur **Créer**.
-  
-   ![Création d'une machine virtuelle](./media/load-balancer-standard-public-availability-zones-portal/create-vm-standard-ip.png)
-
 7. Créez une deuxième machine virtuelle nommée *VM2* dans Zone 2 et une troisième machine virtuelle dans Zone 3, avec *myVnet* en tant que réseau virtuel, *myBackendSubnet* en tant que sous-réseau, \**myNetworkSecurityGroup* en tant que groupe de sécurité réseau à l’aide des étapes 1 à 16.
 
 ### <a name="install-iis-on-vms"></a>Installer IIS sur des machines virtuelles
@@ -234,8 +235,10 @@ Pour visualiser la distribution du trafic par l’équilibreur de charge entre l
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Lorsque vous n’en avez plus besoin, supprimez le groupe de ressources, l’équilibreur de charge et toutes les ressources associées. Pour ce faire, sélectionnez le groupe de ressources qui contient l’équilibreur de charge, puis cliquez sur **Supprimer**.
+Lorsque vous n’en avez plus besoin, supprimez le groupe de ressources, l’équilibreur de charge et toutes les ressources associées. Pour ce faire, sélectionnez le groupe de ressources qui contient l’équilibreur de charge et sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur l’[équilibreur de charge standard](load-balancer-standard-overview.md).
+Découvrez-en plus sur l’équilibrage de la charge d’une machine virtuelle dans une zone de disponibilité spécifique.
+> [!div class="nextstepaction"]
+> [Équilibrer la charge de machines virtuelles dans une zone de disponibilité](tutorial-load-balancer-standard-public-zonal-portal.md)

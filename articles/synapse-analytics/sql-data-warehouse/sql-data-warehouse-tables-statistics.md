@@ -1,52 +1,52 @@
 ---
-title: Créer et mettre à jour des statistiques
-description: Recommandations et exemples pour la création et la mise à jour de statistiques d’optimisation des requêtes sur des tables dans le pool SQL Synapse.
+title: Création et mise à jour des statistiques sur des tables
+description: Recommandations et exemples de création et de mise à jour des statistiques d’optimisation des requêtes sur les tables dans le pool SQL dédié.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 05/09/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: 6f2af87cf5cef1b5a80bc16d962fba579b4ff309
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.custom: seo-lt-2019, azure-synapse
+ms.openlocfilehash: e7fc89dcc0e7938ea2958d5c804abe82e20f186d
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80985862"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96447935"
 ---
-# <a name="table-statistics-in-synapse-sql-pool"></a>Statistiques de table dans le pool SQL Synapse
+# <a name="table-statistics-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Statistiques des tables pour le pool SQL dédié dans Azure Synapse Analytics
 
-Dans cet article, vous trouverez des recommandations et des exemples pour la création et la mise à jour des statistiques d’optimisation des requêtes sur les tables dans le pool SQL.
+Dans cet article, vous trouverez des recommandations et des exemples de création et de mise à jour des statistiques d’optimisation des requêtes sur les tables dans le pool SQL dédié.
 
 ## <a name="why-use-statistics"></a>Pourquoi utiliser des statistiques ?
 
-Plus le pool SQL connaît vos données, plus il peut exécuter des requêtes sur celles-ci rapidement. Après le chargement des données dans le pool SQL, la collecte de statistiques sur vos données est l’une des actions les plus importantes pour optimiser vos requêtes.
+Plus le pool SQL dédié connaît vos données, plus vite il peut exécuter des requêtes dessus. Après le chargement des données dans le pool SQL dédié, collecter des statistiques sur ces données constitue l’une des actions les plus importantes à effectuer pour optimiser les requêtes.
 
-L’optimiseur de requête du pool SQL est un optimiseur basé sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement.
+L’optimiseur de requête du pool SQL dédié s’appuie sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement.
 
 Par exemple, si l’optimiseur estime que la date de filtrage de votre requête va renvoyer une ligne, il choisira un certain plan. S’il estime que la date sélectionnée va renvoyer un million de lignes, il choisira un autre plan.
 
 ## <a name="automatic-creation-of-statistic"></a>Création automatique de statistiques
 
-Lorsque l’option AUTO_CREATE_STATISTICS de la base de données est activée, le pool SQL analyse les requêtes utilisateur entrantes à la recherche de statistiques manquantes.
+Lorsque l’option AUTO_CREATE_STATISTICS de la base de données est activée, le pool SQL dédié analyse les requêtes utilisateur entrantes à la recherche de statistiques manquantes.
 
 Si des statistiques manquent, l’optimiseur de requête crée des statistiques sur des colonnes individuelles dans le prédicat de requête ou la condition de jointure afin d’améliorer les estimations de cardinalité pour le plan de requête.
 
 > [!NOTE]
 > La création automatique de statistiques est activée par défaut.
 
-Vous pouvez vérifier si l’option AUTO_CREATE_STATISTICS est configurée pour votre pool SQL en exécutant la commande suivante :
+Vous pouvez vérifier si l’option AUTO_CREATE_STATISTICS est configurée pour votre pool SQL dédié en exécutant la commande suivante :
 
 ```sql
 SELECT name, is_auto_create_stats_on
 FROM sys.databases
 ```
 
-Si l’option AUTO_CREATE_STATISTICS n’est pas configurée pour votre pool SQL, nous vous recommandons de l’activer en exécutant la commande suivante :
+Si la propriété AUTO_CREATE_STATISTICS n’est pas configurée pour votre pool SQL dédié, nous vous recommandons de l’activer en exécutant la commande suivante :
 
 ```sql
 ALTER DATABASE <yourdatawarehousename>
@@ -82,11 +82,11 @@ table_name spécifie le nom de la table contenant les statistiques à afficher. 
 
 ## <a name="update-statistics"></a>Mettre à jour les statistiques
 
-Une meilleure pratique consiste à mettre à jour les statistiques sur les colonnes de date à chaque fois qu’une date est ajoutée. Chaque fois que de nouvelles lignes sont chargées dans le pool SQL, de nouvelles dates de transaction et de chargement sont également ajoutées. Ces ajouts affectent la distribution des données et rendent les statistiques obsolètes.
+Une meilleure pratique consiste à mettre à jour les statistiques sur les colonnes de date à chaque fois qu’une date est ajoutée. Chaque fois que de nouvelles lignes sont chargées dans le pool SQL dédié, de nouvelles dates de chargement ou de transaction sont ajoutées. Ces ajouts affectent la distribution des données et rendent les statistiques obsolètes.
 
 Vous n’aurez peut-être jamais à mettre à jour les statistiques d’une colonne de pays/région dans une table des clients, car la distribution des valeurs change rarement. Si l’on part du principe que la distribution des données est constante d’un client à l’autre, l’ajout de nouvelles lignes dans une table ne devrait pas affecter cette distribution.
 
-Toutefois, si votre pool SQL indique un seul pays/une seule région et que vous importez des données d’un nouveau pays/d’une nouvelle région, ce qui entraîne donc le stockage de données de plusieurs pays/régions, il est nécessaire de mettre à jour les statistiques de la colonne de pays/région.
+Toutefois, si votre pool SQL dédié ne contient qu’un seul pays/une seule région et que vous importez des données d’un nouveau pays/d’une nouvelle région (en conséquence de quoi sont stockées des données de plusieurs pays/régions), vous devez mettre à jour les statistiques de la colonne relative au pays/à la région.
 
 Voici certaines recommandations pour la mise à jour des statistiques :
 
@@ -97,14 +97,60 @@ Voici certaines recommandations pour la mise à jour des statistiques :
 
 L’une des premières questions que vous devez vous poser quand vous dépannez une requête est la suivante : **« Les statistiques sont-elles à jour ? »**
 
-Or, vous ne pouvez pas répondre à cette question en vous appuyant sur l’âge des données. Un objet de statistiques à jour peut être ancien si aucune modification notable n’affecte les données sous-jacentes.
+Or, vous ne pouvez pas répondre à cette question en vous appuyant sur l’âge des données. Un objet de statistiques à jour peut être ancien si aucune modification notable n’affecte les données sous-jacentes. Quand le nombre de lignes ou la distribution des valeurs change de manière substantielle dans une colonne, *alors* il est temps de mettre à jour les statistiques. 
 
-> [!TIP]
-> Quand le nombre de lignes ou la distribution des valeurs change de manière substantielle dans une colonne, *alors* il est temps de mettre à jour les statistiques.
+Il n’existe aucune vue de gestion dynamique pour déterminer si les données de la table ont changé depuis la dernière mise à jour des statistiques.  Les deux requêtes suivantes peuvent vous aider à déterminer si vos statistiques sont obsolètes.
 
-Il n’existe aucune vue de gestion dynamique pour déterminer si les données de la table ont changé depuis la dernière mise à jour des statistiques. Le fait de connaître l’ancienneté de vos statistiques peut vous donner un petit aperçu.
+**Requête 1 :**  Déterminez la différence entre le nombre de lignes des statistiques (**stats_row_count**) et le nombre réel de lignes (**actual_row_count**). 
 
-Vous pouvez utiliser la requête suivante pour déterminer la date de la dernière mise à jour des statistiques sur chaque table.
+```sql
+select 
+objIdsWithStats.[object_id], 
+actualRowCounts.[schema], 
+actualRowCounts.logical_table_name, 
+statsRowCounts.stats_row_count, 
+actualRowCounts.actual_row_count,
+row_count_difference = CASE
+    WHEN actualRowCounts.actual_row_count >= statsRowCounts.stats_row_count THEN actualRowCounts.actual_row_count - statsRowCounts.stats_row_count
+    ELSE statsRowCounts.stats_row_count - actualRowCounts.actual_row_count
+END,
+percent_deviation_from_actual = CASE
+    WHEN actualRowCounts.actual_row_count = 0 THEN statsRowCounts.stats_row_count
+    WHEN statsRowCounts.stats_row_count = 0 THEN actualRowCounts.actual_row_count
+    WHEN actualRowCounts.actual_row_count >= statsRowCounts.stats_row_count THEN CONVERT(NUMERIC(18, 0), CONVERT(NUMERIC(18, 2), (actualRowCounts.actual_row_count - statsRowCounts.stats_row_count)) / CONVERT(NUMERIC(18, 2), actualRowCounts.actual_row_count) * 100)
+    ELSE CONVERT(NUMERIC(18, 0), CONVERT(NUMERIC(18, 2), (statsRowCounts.stats_row_count - actualRowCounts.actual_row_count)) / CONVERT(NUMERIC(18, 2), actualRowCounts.actual_row_count) * 100)
+END
+from
+(
+    select distinct object_id from sys.stats where stats_id > 1
+) objIdsWithStats
+left join
+(
+    select object_id, sum(rows) as stats_row_count from sys.partitions group by object_id
+) statsRowCounts
+on objIdsWithStats.object_id = statsRowCounts.object_id 
+left join
+(
+    SELECT sm.name [schema] ,
+    tb.name logical_table_name ,
+    tb.object_id object_id ,
+    SUM(rg.row_count) actual_row_count
+    FROM sys.schemas sm
+    INNER JOIN sys.tables tb ON sm.schema_id = tb.schema_id
+    INNER JOIN sys.pdw_table_mappings mp ON tb.object_id = mp.object_id
+    INNER JOIN sys.pdw_nodes_tables nt ON nt.name = mp.physical_name
+    INNER JOIN sys.dm_pdw_nodes_db_partition_stats rg
+    ON rg.object_id = nt.object_id
+    AND rg.pdw_node_id = nt.pdw_node_id
+    AND rg.distribution_id = nt.distribution_id
+    WHERE 1 = 1
+    GROUP BY sm.name, tb.name, tb.object_id
+) actualRowCounts
+on objIdsWithStats.object_id = actualRowCounts.object_id
+
+```
+
+**Requête 2 :** Déterminez l’ancienneté de vos statistiques en vérifiant à quand remonte la dernière mise à jour de vos statistiques sur chaque table. 
 
 > [!NOTE]
 > Si la distribution des valeurs d’une colonne a subi une modification significative, vous devez mettre à jour les statistiques, quelle que soit la date de la dernière mise à jour.
@@ -136,11 +182,11 @@ WHERE
     st.[user_created] = 1;
 ```
 
-Par exemple, les statistiques des **colonnes de date** d’un pool SQL doivent souvent être mises à jour. Chaque fois que de nouvelles lignes sont chargées dans le pool SQL, de nouvelles dates de transaction et de chargement sont également ajoutées. Ces ajouts affectent la distribution des données et rendent les statistiques obsolètes.
+Par exemple, les statistiques des **colonnes de date** d’un pool SQL dédié doivent être mises à jour fréquemment. Chaque fois que de nouvelles lignes sont chargées dans le pool SQL dédié, de nouvelles dates de chargement ou de transaction sont ajoutées. Ces ajouts affectent la distribution des données et rendent les statistiques obsolètes.
 
 À l’inverse, les statistiques d’une colonne indiquant le sexe d’un client dans une table n’auront peut-être jamais besoin d’être mises à jour. Si l’on part du principe que la distribution des données est constante d’un client à l’autre, l’ajout de nouvelles lignes dans une table ne devrait pas affecter cette distribution.
 
-Si votre pool SQL ne fait mention que d’un seul sexe et qu’une nouvelle exigence nécessite le recours à plusieurs sexes, vous devez mettre à jour les statistiques de la colonne relative au sexe.
+Si votre pool SQL dédié ne contient qu’un seul sexe alors qu’une nouvelle exigence impose le recours à plusieurs sexes, vous devez mettre à jour les statistiques de la colonne relative au sexe.
 
 Pour plus d’informations, consultez les conseils généraux sur les [statistiques](/sql/relational-databases/statistics/statistics?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest).
 
@@ -168,7 +214,7 @@ Ces exemples indiquent comment utiliser différentes options pour créer des sta
 
 Pour créer des statistiques sur une colonne, indiquez le nom de l’objet de statistiques ainsi que celui de la colonne.
 
-Cette syntaxe a recours à toutes les options par défaut. Par défaut, le pool SQL échantillonne **20 %** de la table quand il crée des statistiques.
+Cette syntaxe a recours à toutes les options par défaut. Par défaut, **20 %** de la table est échantillonné lors de la création de statistiques.
 
 ```sql
 CREATE STATISTICS [statistics_name] ON [schema_name].[table_name]([column_name]);
@@ -266,11 +312,11 @@ CREATE STATISTICS stats_col2 on dbo.table2 (col2);
 CREATE STATISTICS stats_col3 on dbo.table3 (col3);
 ```
 
-### <a name="use-a-stored-procedure-to-create-statistics-on-all-columns-in-a-database"></a>Utiliser une procédure stockée pour créer des statistiques sur toutes les colonnes d’une base de données
+### <a name="use-a-stored-procedure-to-create-statistics-on-all-columns-in-a-sql-pool"></a>Utiliser une procédure stockée pour créer des statistiques sur toutes les colonnes d’un pool SQL
 
-Le pool SQL n’inclut pas de procédure stockée par le système équivalente à sp_create_stats dans SQL Server. Cette procédure stockée crée un objet de statistiques sur une colonne portant sur chaque colonne de la base de données non pourvue de statistiques.
+Le pool SQL dédié ne possède pas de procédure stockée système équivalente à sp_create_stats dans SQL Server. Cette procédure stockée crée un objet de statistiques sur une colonne portant sur chaque colonne du pool SQL non pourvu de statistiques.
 
-L’exemple suivant vous aidera à commencer à concevoir votre base de données. N’hésitez pas à l’adapter à vos besoins.
+L’exemple suivant vous aidera à commencer à concevoir votre pool SQL. N’hésitez pas à l’adapter à vos besoins.
 
 ```sql
 CREATE PROCEDURE    [dbo].[prc_sqldw_create_stats]
@@ -416,7 +462,7 @@ UPDATE STATISTICS dbo.table1;
 L’instruction UPDATE STATISTICS est facile à utiliser. N’oubliez pas que cette action met à jour *toutes* les statistiques dans la table et, par conséquent, peut effectuer davantage de tâches que nécessaire. Si les performances ne sont pas un problème, il s’agit de la méthode la plus simple et la plus exhaustive pour garantir que les statistiques sont à jour.
 
 > [!NOTE]
-> Lors de la mise à jour de toutes les statistiques d’une table, le pool SQL procède à une analyse pour échantillonner la table à la recherche de chaque objet de statistiques. Si la table est volumineuse et comprend un grand nombre de colonnes et de statistiques, il peut s’avérer plus efficace de mettre à jour les statistiques individuellement, en fonction des besoins.
+> Lors de la mise à jour de toutes les statistiques d’une table, le pool SQL dédié procède à une analyse afin d’échantillonner la table pour chaque objet de statistiques. Si la table est volumineuse et comprend un grand nombre de colonnes et de statistiques, il peut s’avérer plus efficace de mettre à jour les statistiques individuellement, en fonction des besoins.
 
 Pour obtenir une implémentation d’une procédure `UPDATE STATISTICS`, consultez [Tables temporaires](sql-data-warehouse-tables-temporary.md). La méthode d’implémentation est légèrement différente de celle de la procédure `CREATE STATISTICS` précédente, mais le résultat est le même.
 
@@ -500,7 +546,7 @@ La fonction DBCC SHOW_STATISTICS() présente les données contenues dans un obje
 Métadonnées de l’en-tête sur les statistiques. L’histogramme affiche la distribution des valeurs dans la première colonne de l’objet de statistiques. Le vecteur de densité mesure la corrélation entre les colonnes.
 
 > [!NOTE]
-> Le pool SQL calcule les évaluations de cardinalité avec certaines données dans l’objet de statistiques.
+> Le pool SQL dédié calcule les estimations de cardinalité avec certaines données de l’objet de statistiques.
 
 ### <a name="show-header-density-and-histogram"></a>Afficher l’en-tête, la densité et l’histogramme
 
@@ -532,7 +578,7 @@ DBCC SHOW_STATISTICS (dbo.table1, stats_col1) WITH histogram, density_vector
 
 ## <a name="dbcc-show_statistics-differences"></a>Différences liées à la fonction DBCC SHOW_STATISTICS()
 
-La fonction DBCC SHOW_STATISTICS() est implémentée de manière plus stricte dans le pool SQL que dans SQL Server :
+La fonction DBCC SHOW_STATISTICS() est implémentée de manière plus stricte dans le pool SQL dédié que dans SQL Server :
 
 - Les fonctionnalités non documentées ne sont pas prises en charge.
 - Impossible d’utiliser le paramètre Stats_stream.

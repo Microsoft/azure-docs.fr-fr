@@ -8,12 +8,12 @@ ms.service: storage
 ms.subservice: blobs
 ms.topic: conceptual
 ms.reviewer: clausjor
-ms.openlocfilehash: ff82986b27d038c536872b07e1308b0d48fadaef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 404999cfac5037702eb61fdf74b2c5245ce9eb30
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74270217"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95526117"
 ---
 # <a name="performance-tiers-for-block-blob-storage"></a>Niveaux de performance du stockage d’objets blob de blocs
 
@@ -83,6 +83,6 @@ Vous ne pouvez pas déplacer les données stockées dans un compte de stockage d
 Évaluer les niveaux chaud, froid et archive dans les comptes de stockage de blobs et GPv2.
 
 - [Découvrir comment réalimenter les données d’objets blob à partir du niveau Archive](storage-blob-rehydration.md)
-- [Évaluer l’utilisation des comptes de stockage actuels en activant les métriques Azure Storage](../common/storage-enable-and-view-metrics.md)
+- [Évaluer l’utilisation des comptes de stockage actuels en activant les métriques Azure Storage](./monitor-blob-storage.md)
 - [Vérifier la tarification du niveau chaud, froid et archive dans les comptes de stockage d’objets blob et GPv2 par région](https://azure.microsoft.com/pricing/details/storage/)
 - [Vérifier la tarification des transferts de données](https://azure.microsoft.com/pricing/details/data-transfers/)

@@ -6,15 +6,15 @@ ms.service: iot-hub
 services: iot-hub
 ms.devlang: c
 ms.topic: quickstart
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: b8cba8f7a21b04dc722124eb2873c64f67fd6def
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 037ff64f4811515e7ce64d66a36e08e71de54058
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83727129"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94831988"
 ---
 # <a name="quickstart-enable-ssh-and-rdp-over-an-iot-hub-device-stream-by-using-a-c-proxy-application-preview"></a>Démarrage rapide : Activer SSH et RDP sur un flux d’appareil IoT Hub à l’aide d’une application de proxy C (préversion)
 
@@ -46,9 +46,7 @@ La figure suivante illustre la manière dont les programmes de proxy locaux d’
 > [!NOTE]
 > Le trafic SSH envoyé sur un flux d’appareil est traité par tunnel par le biais d’un point de terminaison de streaming du hub IoT, plutôt que directement entre le service et l’appareil. Pour plus d’informations, consultez les [avantages de l’utilisation des flux d’appareil Iot Hub](iot-hub-device-streams-overview.md#benefits). De plus, la figure illustre le démon SSH en cours d’exécution sur le même appareil (ou ordinateur) que le proxy local de l’appareil. Dans ce guide de démarrage rapide, le fait de fournir l’adresse IP du démon SSH permet au proxy local de l’appareil et au démon de s’exécuter également sur des ordinateurs différents.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -62,11 +60,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 * Installez [Visual Studio 2019](https://www.visualstudio.com/vs/) avec la charge de travail [Développement Desktop en C++](https://www.visualstudio.com/vs/support/selecting-workloads-visual-studio-2017/) activée.
 * Installez la dernière version de [Git](https://git-scm.com/download/).
 
-* Exécutez la commande suivante afin d’ajouter l’extension Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et IoT Device Provisioning Service (DPS) à Azure CLI.
-
-   ```azurecli-interactive
-   az extension add --name azure-iot
-   ```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 [!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
@@ -76,7 +70,7 @@ Pour ce guide de démarrage rapide, vous utilisez [Azure IoT device SDK for C](i
 
 1. Téléchargez le [système de génération CMake](https://cmake.org/download/).
 
-    Important : les composants requis pour Visual Studio (Visual Studio et la charge de travail *Développement Desktop en C++* ) sont installés sur votre machine *avant* de commencer l’installation de CMake. Une fois les prérequis en place et le téléchargement vérifié, vous pouvez installer le système de génération CMake.
+    Important : les composants requis pour Visual Studio (Visual Studio et la charge de travail *Développement Desktop en C++*) sont installés sur votre machine *avant* de commencer l’installation de CMake. Une fois les prérequis en place et le téléchargement vérifié, vous pouvez installer le système de génération CMake.
 
 1. Ouvrez une invite de commandes ou l’interpréteur de commandes Git Bash. Exécutez les commandes suivantes pour cloner le dépôt GitHub du [SDK Azure IoT pour C](https://github.com/Azure/azure-iot-sdk-c) :
 
@@ -126,7 +120,7 @@ Pour ce guide de démarrage rapide, vous utilisez [Azure IoT device SDK for C](i
 
 ## <a name="register-a-device"></a>Inscrire un appareil
 
-Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dans cette section, vous utilisez Azure Cloud Shell avec l’[extension IoT](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour inscrire un appareil simulé.
+Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dans cette section, vous utilisez Azure Cloud Shell avec l’[extension IoT](/cli/azure/ext/azure-iot/iot?view=azure-cli-latest) pour inscrire un appareil simulé.
 
 1. Pour créer l’identité d’appareil, exécutez la commande suivante dans Cloud Shell :
 

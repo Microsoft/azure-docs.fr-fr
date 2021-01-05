@@ -2,33 +2,38 @@
 title: Gérer l’utilisation et les coûts pour Azure Application Insights | Microsoft Docs
 description: Gérer les volumes de données de télémétrie et surveiller les coûts dans Application Insights.
 ms.topic: conceptual
+ms.custom: devx-track-dotnet
 author: DaleKoetke
 ms.author: dalek
-ms.date: 11/27/2019
+ms.date: 5/7/2020
 ms.reviewer: mbullwin
-ms.openlocfilehash: 0225484de06ae4e595f1dcbcdd520f4e0e4d53f5
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 69ac1e82c267dee521143c4ed5f6c2be4d32e2ea
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81405385"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96531324"
 ---
 # <a name="manage-usage-and-costs-for-application-insights"></a>Gérer l’utilisation et les coûts pour Application Insights
 
 > [!NOTE]
-> Cet article explique en quoi consistent vos coûts pour Application Insights et comment les contrôler.  Un article associé, [Surveiller l’utilisation et l’estimation des coûts](https://docs.microsoft.com/azure/azure-monitor/platform/usage-estimated-costs), explique comment visualiser l’utilisation et les coûts estimés avec plusieurs fonctionnalités de surveillance Azure en fonction des différents modèles tarifaires.
+> Cet article explique en quoi consistent vos coûts pour Application Insights et comment les contrôler.  Un article associé, [Surveiller l’utilisation et l’estimation des coûts](../platform/usage-estimated-costs.md), explique comment visualiser l’utilisation et les coûts estimés avec plusieurs fonctionnalités de surveillance Azure en fonction des différents modèles tarifaires.
 
 Application Insights est conçu pour vous fournir tout ce dont vous avez besoin pour surveiller la disponibilité, les performances et l’utilisation de vos applications web, qu’elles soit hébergées dans Azure ou localement. Application Insights prend en charge les langages et les infrastructures courants, tels que .NET, Java et Node.js, et s’intègre aux processus et outils DevOps tels qu’Azure DevOps, Jira et PagerDuty. Il est important de comprendre ce qui détermine les coûts de surveillance de vos applications. Dans cet article, nous allons examiner les coûts de surveillance des applications et la façon dont vous pouvez les surveiller et les contrôler de manière proactive.
 
-Si vous avez des questions sur les tarifs d’Application Insights, vous pouvez poster une question dans notre [forum](https://social.msdn.microsoft.com/Forums/home?forum=ApplicationInsights&filter=alltypes&sort=lastpostdesc).
+Si vous avez des questions sur le fonctionnement de la tarification d’Application Insights, vous pouvez publier une question dans notre [page Q&A Microsoft](/answers/topics/azure-monitor.html).
 
 ## <a name="pricing-model"></a>Modèle de tarification
 
-Les tarifs d’[Azure Application Insights][start] suivent un modèle de **paiement à l’utilisation**, basé sur le volume de données ingérées. Ils peuvent donc varier si la période de conservation des données est plus longue. Chaque ressource d’Application Insights est facturée comme un service distinct et s’ajoute à votre facture d’abonnement Azure. Le volume de données est mesuré comme la taille du package de données JSON non compressé reçu par Application Insights de la part de votre application. Il n’existe aucun frais de volume de données pour l’utilisation du [Flux de métriques temps réel](../../azure-monitor/app/live-stream.md).
+Les tarifs d’[Azure Application Insights][start] suivent un modèle de **paiement à l’utilisation**, basé sur le volume de données ingérées. Ils peuvent donc varier si la période de conservation des données est plus longue. Chaque ressource d’Application Insights est facturée comme un service distinct et s’ajoute à votre facture d’abonnement Azure. Le volume de données est mesuré comme la taille du package de données JSON non compressé reçu par Application Insights de la part de votre application. Il n’existe aucun frais de volume de données pour l’utilisation du [Flux de métriques temps réel](./live-stream.md).
 
-Les [tests web à plusieurs étapes](../../azure-monitor/app/availability-multistep.md) donnent lieu à des frais supplémentaires. Il s’agit de tests web qui exécutent une séquence d’actions. Aucun frais supplémentaire n’est facturé pour les *tests Ping* sur une seule page. Les données de télémétrie des tests Ping et des tests à plusieurs étapes sont facturées comme les autres données de télémétrie de votre application.
+Les [tests web à plusieurs étapes](./availability-multistep.md) donnent lieu à des frais supplémentaires. Il s’agit de tests web qui exécutent une séquence d’actions. Aucun frais supplémentaire n’est facturé pour les *tests Ping* sur une seule page. Les données de télémétrie des tests Ping et des tests à plusieurs étapes sont facturées comme les autres données de télémétrie de votre application.
 
-L’option Application Insights [Activation des alertes sur les dimensions de métrique personnalisées](https://docs.microsoft.com/azure/azure-monitor/app/pre-aggregated-metrics-log-metrics#custom-metrics-dimensions-and-pre-aggregation) peut également engendrer des coûts supplémentaires, car elle est susceptible d’entraîner la création de métriques pré-agrégation supplémentaires. [Cliquez ici pour en savoir plus](https://docs.microsoft.com/azure/azure-monitor/app/pre-aggregated-metrics-log-metrics) sur les métriques basées sur les journaux et pré-agrégées dans Application Insights et sur les [tarifs](https://azure.microsoft.com/pricing/details/monitor/) des métriques personnalisées Azure Monitor.
+L’option Application Insights [Activation des alertes sur les dimensions de métrique personnalisées](./pre-aggregated-metrics-log-metrics.md#custom-metrics-dimensions-and-pre-aggregation) peut également engendrer des coûts supplémentaires, car elle est susceptible d’entraîner la création de métriques pré-agrégation supplémentaires. [Cliquez ici pour en savoir plus](./pre-aggregated-metrics-log-metrics.md) sur les métriques basées sur les journaux et pré-agrégées dans Application Insights et sur les [tarifs](https://azure.microsoft.com/pricing/details/monitor/) des métriques personnalisées Azure Monitor.
+
+### <a name="workspace-based-application-insights"></a>Application Insights basé sur l’espace de travail
+
+Pour les ressources Application Insights qui envoient leurs données à un espace de travail Log Analytics, appelé [ressources Application Insights basées sur l’espace de travail](create-workspace-resource.md), la facturation de l’ingestion et de la conservation des données est effectuée par l’espace de travail où se trouvent les données d’ Application Insights. Cela permet aux clients de tirer parti de toutes les options du [modèle de tarification](../platform/manage-cost-storage.md#pricing-model) Log Analytics qui incluent des réservations de capacité en plus du paiement à l’utilisation. Log Analytics dispose également de plus d’options pour la conservation des données, notamment la [rétention par type de données](../platform/manage-cost-storage.md#retention-by-data-type). Les types de données Application Insights dans l’espace de travail reçoivent 90 jours de rétention sans frais. L’utilisation des tests Web et l’activation des alertes sur les dimensions métriques personnalisées sont toujours signalées par le biais d’Application Insights. Découvrez comment suivre les coûts d’ingestion et de conservation des données dans Log Analytics à l’aide [des coûts d’utilisation et des coûts estimés](../platform/manage-cost-storage.md#understand-your-usage-and-estimate-costs), [Azure Cost Management + facturation](../platform/manage-cost-storage.md#viewing-log-analytics-usage-on-your-azure-bill) et [les requêtes log Analytics](#data-volume-for-workspace-based-application-insights-resources). 
 
 ## <a name="estimating-the-costs-to-manage-your-application"></a>Estimation des coûts de gestion de votre application
 
@@ -40,11 +45,11 @@ Il existe ici deux approches possibles : utiliser la surveillance par défaut e
 
 Avec l’[échantillonnage adaptatif](sampling.md#adaptive-sampling) du kit SDK ASP.NET, le volume de données est automatiquement ajusté pour demeurer à un taux de trafic maximal spécifié pour la surveillance Application Insights par défaut. Si l’application génère une faible quantité de données de télémétrie, comme lors du débogage ou en raison d’une faible utilisation, les éléments ne sont pas supprimés par le processeur d’échantillonnage tant que le volume reste inférieur au niveau configuré d’événements par seconde. Pour une application à volume élevé, avec le seuil par défaut de 5 événements par seconde, l’échantillonnage adaptatif limite le nombre d’événements quotidiens à 432 000. En utilisant une taille moyenne d’événement standard de 1 Ko, cela correspond à 13,4 Go de données de télémétrie pour un mois de 31 jours par nœud hébergeant votre application (puisque l’échantillonnage s’effectue localement sur chaque nœud). 
 
-Pour les kits de développement logiciel (SDK) qui ne prennent pas en charge l’échantillonnage adaptatif, vous pouvez utiliser l’[échantillonnage d’ingestion](https://docs.microsoft.com/azure/azure-monitor/app/sampling#ingestion-sampling) où l’échantillonnage a lieu quand les données sont reçues par Application Insights en fonction d’un pourcentage de données à conserver, ou l’[échantillonnage à débit fixe pour les sites web ASP.NET, ASP.NET Core et Java](sampling.md#fixed-rate-sampling) afin de réduire le trafic envoyé à partir de votre serveur web et de vos navigateurs web.
+Pour les kits de développement logiciel (SDK) qui ne prennent pas en charge l’échantillonnage adaptatif, vous pouvez utiliser l’[échantillonnage d’ingestion](./sampling.md#ingestion-sampling) où l’échantillonnage a lieu quand les données sont reçues par Application Insights en fonction d’un pourcentage de données à conserver, ou l’[échantillonnage à débit fixe pour les sites web ASP.NET, ASP.NET Core et Java](sampling.md#fixed-rate-sampling) afin de réduire le trafic envoyé à partir de votre serveur web et de vos navigateurs web.
 
 ### <a name="learn-from-what-similar-customers-collect"></a>Apprendre de ce que les clients similaires collectent
 
-Dans la calculatrice de prix Azure Monitor pour Application Insights, si vous activez la fonctionnalité « Estimer le volume de données en fonction de l’activité de l’application », vous pouvez fournir des entrées relatives à votre application (demandes par mois et affichages de pages par mois, dans l’éventualité où vous collecterez les données de télémétrie côté client), puis la calculatrice vous indiquera le volume médian et la quantité 90e centile de données collectées par des applications similaires. Ces applications couvrent la plage de configuration d’Application Insights (p. ex., certains ont l’[échantillonnage](../../azure-monitor/app/sampling.md) par défaut, d’autres n’ont aucun échantillonnage, etc.) et vous disposez encore du contrôle permettant de réduire le volume de données que vous ingérez par échantillonnage bien au-dessous du niveau médian. Toutefois, il s’agit d’un point de départ pour comprendre ce que les autres clients similaires voient.
+Dans la calculatrice de prix Azure Monitor pour Application Insights, si vous activez la fonctionnalité « Estimer le volume de données en fonction de l’activité de l’application », vous pouvez fournir des entrées relatives à votre application (demandes par mois et affichages de pages par mois, dans l’éventualité où vous collecterez les données de télémétrie côté client), puis la calculatrice vous indiquera le volume médian et la quantité 90e centile de données collectées par des applications similaires. Ces applications couvrent la plage de configuration d’Application Insights (p. ex., certains ont l’[échantillonnage](./sampling.md) par défaut, d’autres n’ont aucun échantillonnage, etc.) et vous disposez encore du contrôle permettant de réduire le volume de données que vous ingérez par échantillonnage bien au-dessous du niveau médian. Toutefois, il s’agit d’un point de départ pour comprendre ce que les autres clients similaires voient.
 
 ## <a name="understand-your-usage-and-estimate-costs"></a>Comprendre votre utilisation et estimer les coûts
 
@@ -52,17 +57,17 @@ Application Insights vous permet de comprendre facilement à combien vont s’é
 
 ![Choisir les tarifs](./media/pricing/pricing-001.png)
 
-R. Consultez votre volume de données pour le mois. Cela inclut toutes les données reçues et conservées (après tous les [échantillonnages](../../azure-monitor/app/sampling.md)) provenant de votre serveur, de vos applications clientes et des tests de disponibilité.  
-B. Les [tests web multiétapes](../../azure-monitor/app/availability-multistep.md) font l’objet d’une facturation distincte. (Cela n’inclut pas les tests de disponibilité simples, qui sont compris dans les frais de volume de données.)  
+R. Consultez votre volume de données pour le mois. Cela inclut toutes les données reçues et conservées (après tous les [échantillonnages](./sampling.md)) provenant de votre serveur, de vos applications clientes et des tests de disponibilité.  
+B. Les [tests web multiétapes](./availability-multistep.md) font l’objet d’une facturation distincte. (Cela n’inclut pas les tests de disponibilité simples, qui sont compris dans les frais de volume de données.)  
 C. Affichez les tendances des volumes de données pour le mois antérieur.  
-D. Utilisez [l’échantillonnage](../../azure-monitor/app/sampling.md) d’ingestion des données.
+D. Utilisez [l’échantillonnage](./sampling.md) d’ingestion des données.
 E. Définissez la limite quotidienne de volume de données.  
 
 (Tous les prix indiqués dans les captures d’écran de cet article sont fournis uniquement à titre d’exemple. Pour connaître les prix actuels dans votre devise et pour votre région, consultez la page [Tarification Application Insights][pricing].)
 
 Pour étudier votre utilisation d’Application Insights de façon plus approfondie, ouvrez la page **Métriques**, ajoutez la métrique nommée « Volume de point de données », puis sélectionnez l’option *Appliquer la division* pour répartir les données selon le « type de l’élément de télémétrie ».
 
-Les frais liés à Application Insights sont ajoutés à votre facture Azure. Les informations relatives à votre facture Azure s’affichent dans la section **Facturation** du portail Azure ou sur le [portail de facturation Azure](https://account.windowsazure.com/Subscriptions).
+Les frais liés à Application Insights sont ajoutés à votre facture Azure. Les informations relatives à votre facture Azure s’affichent dans la section Azure **Cost Management + Facturation** du portail Azure ou sur le [portail de facturation Azure](https://account.windowsazure.com/Subscriptions).  [Pour plus d’informations sur l’utilisation d’Application Insights, voir ci-dessous](#viewing-application-insights-usage-on-your-azure-bill). 
 
 ![Dans le menu de gauche, sélectionnez Facturation.](./media/pricing/02-billing.png)
 
@@ -75,7 +80,7 @@ Pour en savoir plus sur vos volumes de données, sélectionnez **Métriques** po
 
 ### <a name="queries-to-understand-data-volume-details"></a>Requêtes pour comprendre les détails du volume de données
 
-Il existe deux approches pour examiner les volumes de données dans Application Insights. La première utilise des informations agrégées dans la table `systemEvents` et la deuxième utilise la propriété `_BilledSize`, qui est disponible sur chaque événement ingéré.
+Il existe deux approches pour examiner les volumes de données dans Application Insights. La première utilise des informations agrégées dans la table `systemEvents` et la deuxième utilise la propriété `_BilledSize`, qui est disponible sur chaque événement ingéré. `systemEvents` n’aura pas d’informations sur la taille des données pour [L’application Insights basée sur l’espace de travail](#data-volume-for-workspace-based-application-insights-resources).
 
 #### <a name="using-aggregated-data-volume-information"></a>Utilisation des informations agrégées de volume de données
 
@@ -101,7 +106,7 @@ systemEvents
 | summarize sum(BillingTelemetrySizeInBytes) by BillingTelemetryType, bin(timestamp, 1d) | render barchart  
 ```
 
-Notez que cette requête peut être utilisée dans une [alerte de journal Azure](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-unified-log) pour configurer des alertes sur des volumes de données.  
+Notez que cette requête peut être utilisée dans une [alerte de journal Azure](../platform/alerts-unified-log.md) pour configurer des alertes sur des volumes de données.  
 
 Pour en savoir plus sur les changements de vos données de télémétrie, nous obtenons le nombre d’événements par type à l’aide de la requête :
 
@@ -127,22 +132,63 @@ dependencies
 | render barchart  
 ```
 
+#### <a name="data-volume-for-workspace-based-application-insights-resources"></a>Volume de données pour les ressources d’Application Insights basées sur l’espace de travail
+
+Pour examiner les tendances du volume de données de toutes les ressources [d’Application Insights basées sur l’espace de travail](create-workspace-resource.md) dans un espace de travail pour la semaine passée, accédez à l’espace de travail Log Analytics et exécutez la requête :
+
+```kusto
+union (AppAvailabilityResults),
+      (AppBrowserTimings),
+      (AppDependencies),
+      (AppExceptions),
+      (AppEvents),
+      (AppMetrics),
+      (AppPageViews),
+      (AppPerformanceCounters),
+      (AppRequests),
+      (AppSystemEvents),
+      (AppTraces)
+| where TimeGenerated >= startofday(ago(7d)) and TimeGenerated < startofday(now())
+| summarize sum(_BilledSize) by _ResourceId, bin(TimeGenerated, 1d)
+| render areachart
+```
+
+Pour interroger les tendances du volume de données par type pour une ressource Application Insights basée sur un espace de travail spécifique, dans l’espace de travail Log Analytics, utilisez :
+
+```kusto
+union (AppAvailabilityResults),
+      (AppBrowserTimings),
+      (AppDependencies),
+      (AppExceptions),
+      (AppEvents),
+      (AppMetrics),
+      (AppPageViews),
+      (AppPerformanceCounters),
+      (AppRequests),
+      (AppSystemEvents),
+      (AppTraces)
+| where TimeGenerated >= startofday(ago(7d)) and TimeGenerated < startofday(now())
+| where _ResourceId contains "<myAppInsightsResourceName>"
+| summarize sum(_BilledSize) by Type, bin(TimeGenerated, 1d)
+| render areachart
+```
+
 ## <a name="viewing-application-insights-usage-on-your-azure-bill"></a>Visualisation de l’utilisation d’Application Insights sur votre facture Azure
 
-Azure fournit de nombreuses fonctionnalités utiles dans le hub [Azure Cost Management + facturation](https://docs.microsoft.com/azure/cost-management/quick-acm-cost-analysis?toc=/azure/billing/TOC.json). Par exemple, la fonctionnalité « Analyse des coûts » vous permet de voir vos dépenses en ressources Azure. L’ajout d’un filtre par type de ressource (dans microsoft.insights/components for Application Insights) vous permettra de suivre vos dépenses.
+Azure fournit de nombreuses fonctionnalités utiles dans le hub [Azure Cost Management + facturation](../../cost-management-billing/costs/quick-acm-cost-analysis.md?toc=/azure/billing/TOC.json). Par exemple, la fonctionnalité « Analyse des coûts » vous permet de voir vos dépenses en ressources Azure. L’ajout d’un filtre par type de ressource (dans microsoft.insights/components for Application Insights) vous permettra de suivre vos dépenses. Ensuite, pour « Regrouper par », sélectionnez « Catégorie du compteur » ou « Compteur ».  Pour les ressources d’Application Insights sur les plans de tarification actuels, la majorité de l’utilisation s’affichera comme Log Analytics pour la Catégorie du compteur puisqu’il existe un seul serveur principal des journaux d’activité pour tous les composants Azure Monitor. 
 
-Vous pouvez mieux comprendre votre utilisation en [téléchargeant votre utilisation à partir du portail Azure](https://docs.microsoft.com/azure/billing/billing-download-azure-invoice-daily-usage-date#download-usage-in-azure-portal).
-Dans la feuille de calcul téléchargée, vous pouvez voir l’utilisation par ressource Azure par jour. Dans cette feuille de calcul Excel, vous pouvez trouver l’utilisation de vos ressources Application Insights en filtrant d’abord la colonne « Catégorie du compteur » pour afficher « Application Insights » et « Log Analytics », puis en ajoutant le filtre « contient microsoft.insights/components » sur la colonne « ID d’instance ».  La plus grande part de l’utilisation d’Application Insights est signalée sur des compteurs avec la catégorie du compteur de Log Analytics, car il existe un seul backend de journaux pour tous les composants Azure Monitor.  Seules les ressources Application Insights sur les niveaux tarifaires hérités et les tests web à plusieurs étapes sont signalées avec une catégorie de compteur d’Application Insights.  L’utilisation est indiquée dans la colonne « Quantité consommée » et l’unité pour chaque entrée est affichée dans la colonne « Unité de mesure ».  Plus de détails sont disponibles pour vous aider à [comprendre votre facture Microsoft Azure](https://docs.microsoft.com/azure/billing/billing-understand-your-bill).
+Vous pouvez mieux comprendre votre utilisation en [téléchargeant votre utilisation à partir du portail Azure](../../cost-management-billing/manage/download-azure-invoice-daily-usage-date.md#download-usage-in-azure-portal).
+Dans la feuille de calcul téléchargée, vous pouvez voir l’utilisation par ressource Azure par jour. Dans cette feuille de calcul Excel, vous pouvez trouver l’utilisation de vos ressources Application Insights en filtrant d’abord la colonne « Catégorie du compteur » pour afficher « Application Insights » et « Log Analytics », puis en ajoutant le filtre « contient microsoft.insights/components » sur la colonne « ID d’instance ».  La plus grande part de l’utilisation d’Application Insights est signalée sur des compteurs avec la catégorie du compteur de Log Analytics, car il existe un seul backend de journaux pour tous les composants Azure Monitor.  Seules les ressources Application Insights sur les niveaux tarifaires hérités et les tests web à plusieurs étapes sont signalées avec une catégorie de compteur d’Application Insights.  L’utilisation est indiquée dans la colonne « Quantité consommée » et l’unité pour chaque entrée est affichée dans la colonne « Unité de mesure ».  Plus de détails sont disponibles pour vous aider à [comprendre votre facture Microsoft Azure](../../cost-management-billing/understand/review-individual-bill.md).
 
 ## <a name="managing-your-data-volume"></a>Gestion de votre volume de données
 
 Voici quelques suggestions de techniques pour vous aider à gérer le volume de données que vous envoyez :
 
-* **Échantillonnage** : vous pouvez effectuer un échantillonnage pour réduire la quantité de données de télémétrie envoyées à partir de votre serveur et de vos applications clientes, avec une distorsion minimale des métriques. L’échantillonnage est le principal outil dont vous disposez pour ajuster la quantité de données que vous envoyez. Découvrez plus en détail les [fonctionnalités d’échantillonnage](../../azure-monitor/app/sampling.md).
+* **Échantillonnage** : vous pouvez effectuer un échantillonnage pour réduire la quantité de données de télémétrie envoyées à partir de votre serveur et de vos applications clientes, avec une distorsion minimale des métriques. L’échantillonnage est le principal outil dont vous disposez pour ajuster la quantité de données que vous envoyez. Découvrez plus en détail les [fonctionnalités d’échantillonnage](./sampling.md).
 
-* **Limitez les appels AJAX** : vous pouvez [Limiter le nombre d’appels Ajax qui peuvent être signalés](../../azure-monitor/app/javascript.md#configuration) dans chaque affichage de page, ou désactiver les rapports Ajax.
+* **Limitez les appels AJAX** : vous pouvez [Limiter le nombre d’appels Ajax qui peuvent être signalés](./javascript.md#configuration) dans chaque affichage de page, ou désactiver les rapports Ajax.
 
-* **Désactivez les modules inutiles** : [Modifiez ApplicationInsights.config](../../azure-monitor/app/configuration-with-applicationinsights-config.md) pour désactiver les modules de collecte dont vous n’avez pas besoin. Par exemple, vous pouvez décider que les compteurs de performances ou les données de dépendance ne sont pas essentiels.
+* **Désactivez les modules inutiles** : [Modifiez ApplicationInsights.config](./configuration-with-applicationinsights-config.md) pour désactiver les modules de collecte dont vous n’avez pas besoin. Par exemple, vous pouvez décider que les compteurs de performances ou les données de dépendance ne sont pas essentiels.
 
 * **Procédez à la pré-agrégation des métriques** : Si vous placez des appels de TrackMetric dans votre application, vous pouvez réduire le trafic en utilisant la surcharge qui accepte votre calcul de la moyenne et de l’écart type d’un lot de mesures. Une autre possibilité consiste à utiliser un [package de pré-agrégation](https://www.myget.org/gallery/applicationinsights-sdk-labs).
  
@@ -162,7 +208,7 @@ Voici quelques suggestions de techniques pour vous aider à gérer le volume de 
 
 Vous pouvez utiliser la limite quotidienne de volume pour limiter les données collectées. Toutefois, si la limite est atteinte, toutes les données de télémétrie envoyées à partir de votre application sont perdues pour le reste de la journée. Il est *déconseillé* que votre application atteigne la limite quotidienne. Vous ne pouvez pas suivre l’intégrité et les performances de votre application une fois qu’elle a atteint la limite quotidienne.
 
-Au lieu d’utiliser la limite quotidienne de volume, utilisez [l’échantillonnage](../../azure-monitor/app/sampling.md) pour régler le volume de données sur le niveau souhaité. Ensuite, n’utilisez la limite quotidienne qu’en « dernier recours », au cas où votre application commencerait soudainement à envoyer des volumes de données de télémétrie beaucoup plus élevés.
+Au lieu d’utiliser la limite quotidienne de volume, utilisez [l’échantillonnage](./sampling.md) pour régler le volume de données sur le niveau souhaité. Ensuite, n’utilisez la limite quotidienne qu’en « dernier recours », au cas où votre application commencerait soudainement à envoyer des volumes de données de télémétrie beaucoup plus élevés.
 
 ### <a name="identify-what-daily-data-limit-to-define"></a>Identifier la limite de données quotidienne à définir
 
@@ -174,24 +220,24 @@ Pour changer la limite quotidienne, accédez à la section **Configurer** de vot
 
 ![Ajuster la limite du volume quotidien des données de télémétrie](./media/pricing/pricing-003.png)
 
-Pour [modifier la limite quotidienne via Azure Resource Manager](../../azure-monitor/app/powershell.md), la propriété à modifier est `dailyQuota`.  Avec Azure Resource Manager, vous pouvez également définir `dailyQuotaResetTime` et `warningThreshold` pour le plafond quotidien.
+Pour [modifier la limite quotidienne via Azure Resource Manager](./powershell.md), la propriété à modifier est `dailyQuota`.  Avec Azure Resource Manager, vous pouvez également définir `dailyQuotaResetTime` et `warningThreshold` pour le plafond quotidien.
 
 ### <a name="create-alerts-for-the-daily-cap"></a>Créer des alertes pour la limite quotidienne
 
-La limite quotidienne Application Insights crée un événement dans le journal d’activité Azure quand les volumes de données ingérées atteignent le niveau d’avertissement ou le plafond quotidien.  Vous pouvez [créer une alerte en fonction de ces événements du journal d’activité](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log#create-with-the-azure-portal). Les noms de signal de ces événements sont :
+La limite quotidienne d’Application Insights crée un événement dans le journal d’activité Azure quand les volumes de données ingérées atteignent le niveau d’avertissement ou le plafond quotidien.  Vous pouvez [créer une alerte en fonction de ces événements du journal d’activité](../platform/alerts-activity-log.md#create-with-the-azure-portal). Les noms de signal de ces événements sont :
 
 * Seuil d’avertissement de la limite quotidienne du composant Application Insights atteint
 
 * Limite quotidienne du composant Application Insights atteinte
 
 ## <a name="sampling"></a>échantillonnage
-[L’échantillonnage](../../azure-monitor/app/sampling.md) est une méthode vous permettant de réduire la fréquence d’envoi des données de télémétrie à votre application, tout en conservant la capacité à trouver des événements connexes pendant les recherches de diagnostic. Vous conservez également le décompte des événements corrects.
+L’[échantillonnage](./sampling.md) est une méthode vous permettant de réduire la fréquence d’envoi des données de télémétrie à votre application, tout en conservant la capacité à trouver des événements connexes pendant les recherches de diagnostic. Vous conservez également le décompte des événements corrects.
 
 L’échantillonnage est un moyen efficace de réduire les coûts et de respecter votre quota mensuel. L’algorithme d’échantillonnage conserve les éléments associés à la télémétrie ; ainsi, quand vous utilisez la recherche par exemple, vous pouvez trouver la demande liée à une exception spécifique. L’algorithme conserve également le décompte correct. Cela vous permet de voir les valeurs correctes des taux de demandes, des taux d’exception et des autres compteurs dans Metric Explorer.
 
 Il existe plusieurs formes d’échantillonnage.
 
-* [L’échantillonnage adaptatif](../../azure-monitor/app/sampling.md) est la méthode par défaut pour le SDK ASP.NET. L’échantillonnage adaptatif s’ajuste automatiquement au volume de données de télémétrie envoyées par votre application. Il fonctionne automatiquement dans le SDK de votre application web, afin de réduire le trafic de télémétrie sur le réseau. 
+* [L’échantillonnage adaptatif](./sampling.md) est la méthode par défaut pour le SDK ASP.NET. L’échantillonnage adaptatif s’ajuste automatiquement au volume de données de télémétrie envoyées par votre application. Il fonctionne automatiquement dans le SDK de votre application web, afin de réduire le trafic de télémétrie sur le réseau. 
 * *échantillonnage d’ingestion* est une méthode alternative qui fonctionne au niveau où les données de télémétrie issues de votre application entrent dans le service Application Insights. L’échantillonnage d’ingestion n’affecte pas le volume de télémétrie envoyé depuis votre application, mais il réduit le volume conservé par le service. Vous pouvez utiliser l’échantillonnage d’ingestion pour réduire le quota utilisé par les données de télémétrie provenant des navigateurs et d’autres SDK.
 
 Pour définir l’échantillonnage d’ingestion, accédez au volet **Tarification** :
@@ -202,21 +248,23 @@ Pour définir l’échantillonnage d’ingestion, accédez au volet **Tarificati
 > Le volet **Échantillonnage des données** contrôle uniquement la valeur d’échantillonnage de l’ingestion. Il ne reflète pas le taux d’échantillonnage qui est appliqué par le SDK Application Insights dans votre application. Si les données de télémétrie entrantes ont déjà été échantillonnées dans le SDK, l’échantillonnage d’ingestion n’est pas appliqué.
 >
 
-Pour découvrir le taux d’échantillonnage réel, indépendamment de l’endroit où il a été appliqué, utilisez une [requête Analytics](analytics.md). La requête ressemble à ceci :
+Pour découvrir le taux d’échantillonnage réel, indépendamment de l’endroit où il a été appliqué, utilisez une [requête Analytics](../log-query/log-query-overview.md). La requête ressemble à ceci :
 
-    requests | where timestamp > ago(1d)
-    | summarize 100/avg(itemCount) by bin(timestamp, 1h)
-    | render areachart
+```kusto
+requests | where timestamp > ago(1d)
+| summarize 100/avg(itemCount) by bin(timestamp, 1h)
+| render areachart
+```
 
 Pour chaque enregistrement conservé, `itemCount` indique le nombre d’enregistrements d’origine qu’il représente. Ce nombre est égal à 1 + le nombre d’enregistrements précédents ignorés.
 
 ## <a name="change-the-data-retention-period"></a>Changer la période de rétention des données
 
-La rétention par défaut pour les ressources Application Insights est de 90 jours. Différentes périodes de rétention peuvent être sélectionnées pour chaque ressource Application Insights. L’ensemble complet de périodes de conservation disponibles est 30, 60, 90, 120, 180, 270, 365, 550 et 730 jours.
+La rétention par défaut pour les ressources Application Insights est de 90 jours. Différentes périodes de rétention peuvent être sélectionnées pour chaque ressource Application Insights. L’ensemble complet de périodes de conservation disponibles est 30, 60, 90, 120, 180, 270, 365, 550 et 730 jours. [En savoir plus](https://azure.microsoft.com/pricing/details/monitor/) sur la tarification pour une conservation des données plus longue. 
 
 Pour changer le délai de conservation, dans votre ressource Application Insights, accédez à la page **Utilisation et coûts estimés**, puis sélectionnez l’option **Conservation des données** :
 
-![Ajuster la limite du volume quotidien des données de télémétrie](./media/pricing/pricing-005.png)
+![Capture d’écran montrant où modifier la période de rétention des données.](./media/pricing/pricing-005.png)
 
 En cas de diminution de la conservation, une période de grâce de plusieurs jours s’applique avant la suppression des données les plus anciennes.
 
@@ -224,7 +272,7 @@ La conservation peut également être [définie par programmation à l’aide du
 
 ## <a name="data-transfer-charges-using-application-insights"></a>Frais de transfert de données avec Application Insights
 
-L’envoi de données à Application Insights peut entraîner des frais de bande passante. Comme décrit dans la [page sur les tarifs de bande passante Azure](https://azure.microsoft.com/pricing/details/bandwidth/), le transfert de données entre des services Azure situés dans deux régions différentes est facturé en tant que transfert de données sortant au tarif normal. Le transfert de données entrantes est gratuit. Toutefois, ces frais sont très limités (et ne représentent qu’un faible pourcentage) par rapport aux coûts liés à l’ingestion de données de journal d’Application Insights. Ainsi, la maîtrise des coûts pour Log Analytics doit s’appuyer sur le volume de données ingérées. Vous trouverez des explications à ce sujet [ici](https://docs.microsoft.com/azure/azure-monitor/app/pricing#managing-your-data-volume).
+L’envoi de données à Application Insights peut entraîner des frais de bande passante. Comme décrit dans la [page sur les tarifs de bande passante Azure](https://azure.microsoft.com/pricing/details/bandwidth/), le transfert de données entre des services Azure situés dans deux régions différentes est facturé en tant que transfert de données sortant au tarif normal. Le transfert de données entrantes est gratuit. Toutefois, ces frais sont très limités (et ne représentent qu’un faible pourcentage) par rapport aux coûts liés à l’ingestion de données de journal d’Application Insights. Ainsi, la maîtrise des coûts pour Log Analytics doit s’appuyer sur le volume de données ingérées. Vous trouverez des explications à ce sujet [ici](#managing-your-data-volume).
 
 ## <a name="limits-summary"></a>Synthèse des limites
 
@@ -246,11 +294,11 @@ Le niveau Par nœud (anciennement Entreprise) donne lieu à une facturation pour
 Pour connaître les prix actuels dans votre devise et pour votre région, consultez la page [Tarification Application Insights](https://azure.microsoft.com/pricing/details/application-insights/).
 
 > [!NOTE]
-> En avril 2018, nous [introduisons](https://azure.microsoft.com/blog/introducing-a-new-way-to-purchase-azure-monitoring-services/) un nouveau modèle tarifaire pour la surveillance Azure. Ce modèle adopte un modèle de « paiement à l’utilisation » simple sur le portefeuille complet de services de surveillance. En savoir plus sur le [nouveau modèle tarifaire](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-usage-and-estimated-costs), sur [l’évaluation de l’impact du passage à ce modèle](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-usage-and-estimated-costs#understanding-your-azure-monitor-costs) en fonction de vos modèles d’utilisation et sur [l’adoption du nouveau modèle](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-usage-and-estimated-costs#azure-monitor-pricing-model)
+> En avril 2018, nous [introduisons](https://azure.microsoft.com/blog/introducing-a-new-way-to-purchase-azure-monitoring-services/) un nouveau modèle tarifaire pour la surveillance Azure. Ce modèle adopte un modèle de « paiement à l’utilisation » simple sur le portefeuille complet de services de surveillance. En savoir plus sur le [nouveau modèle tarifaire](../platform/usage-estimated-costs.md), sur [l’évaluation de l’impact du passage à ce modèle](../platform/usage-estimated-costs.md#understanding-your-azure-monitor-costs) en fonction de vos modèles d’utilisation et sur [l’adoption du nouveau modèle](../platform/usage-estimated-costs.md#azure-monitor-pricing-model)
 
 ### <a name="per-node-tier-and-operations-management-suite-subscription-entitlements"></a>Niveau tarifaire Par nœud et droits d’abonnement à Operations Management Suite
 
-Comme [annoncé récemment](https://blogs.technet.microsoft.com/msoms/2017/05/19/azure-application-insights-enterprise-as-part-of-operations-management-suite-subscription/), les clients qui achètent Operations Management Suite E1 et E2 peuvent obtenir Application Insights Par nœud comme composant supplémentaire, sans frais supplémentaires. Plus précisément, chaque unité Operations Management Suite E1 et E2 donne droit à un nœud Application Insights du niveau Par nœud. Chaque nœud Application Insights inclut l’intégration de 200 Mo de données maximum par jour (en plus de l’intégration des données Log Analytics), avec une période de rétention des données de 90 jours, sans coût supplémentaire. Le niveau est décrit plus loin dans cet article.
+Comme [annoncé récemment](/archive/blogs/msoms/azure-application-insights-enterprise-as-part-of-operations-management-suite-subscription), les clients qui achètent Operations Management Suite E1 et E2 peuvent obtenir Application Insights Par nœud comme composant supplémentaire, sans frais supplémentaires. Plus précisément, chaque unité Operations Management Suite E1 et E2 donne droit à un nœud Application Insights du niveau Par nœud. Chaque nœud Application Insights inclut l’intégration de 200 Mo de données maximum par jour (en plus de l’intégration des données Log Analytics), avec une période de rétention des données de 90 jours, sans coût supplémentaire. Le niveau est décrit plus loin dans cet article.
 
 Ce niveau ne s’appliquant qu’aux clients détenant un abonnement Operations Management Suite, ceux sans abonnement Operations Management Suite ne peuvent pas le sélectionner.
 
@@ -263,7 +311,7 @@ Ce niveau ne s’appliquant qu’aux clients détenant un abonnement Operations 
   * Un *nœud* correspond à une machine serveur virtuelle ou physique ou à une instance de rôle PaaS (Platform-as-a-Service) qui héberge votre application.
   * Les ordinateurs de développement, les navigateurs clients et les appareils mobiles ne sont pas considérés comme des nœuds.
   * Si votre application comporte plusieurs composants qui envoient des données de télémétrie, comme un service web et un Worker principal, ces composants sont comptabilisés séparément.
-  * Les données des [Flux de métriques temps réel](../../azure-monitor/app/live-stream.md) ne sont pas comptabilisées dans la tarification. Dans un abonnement, vos frais sont calculés par nœud, et non par application. Si vous disposez de cinq nœuds envoyant des données de télémétrie pour 12 applications, les frais sont calculés pour cinq nœuds.
+  * Les données des [Flux de métriques temps réel](./live-stream.md) ne sont pas comptabilisées dans la tarification. Dans un abonnement, vos frais sont calculés par nœud, et non par application. Si vous disposez de cinq nœuds envoyant des données de télémétrie pour 12 applications, les frais sont calculés pour cinq nœuds.
 * Bien que les frais indiqués soient par mois, vous êtes facturé uniquement pour toutes les heures dans lesquelles un nœud envoie des données de télémétrie à partir d’une application. Le tarif horaire est le prix mensuel indiqué divisé par 744 (nombre d’heures dans un mois de 31 jours).
 * Une allocation de volume de données de 200 Mo par jour est accordée pour chaque nœud détecté (avec une granularité par heure). Le volume de données alloué inutilisé n’est pas reporté de jour en jour.
   * Si vous choisissez le niveau tarifaire Par nœud, chaque abonnement reçoit un volume quotidien de données en fonction du nombre de nœuds qui envoient des données de télémétrie aux ressources Application Insights dans cet abonnement. Par conséquent, si vous disposez de cinq nœuds qui envoient des données toute la journée, une allocation groupée de 1 Go est appliquée à toutes les ressources Application Insights de cet abonnement. Le fait que certains nœuds envoient plus de données que d’autres a peu d’importance, car les données incluses sont partagées entre tous les nœuds. Si, un jour donné, les ressources Application Insights reçoivent plus de données que le volume quotidien alloué pour cet abonnement, les frais de données de dépassement par Go s’appliquent. 
@@ -292,10 +340,11 @@ Vous pouvez utiliser le service Azure Resource Management pour écrire un script
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Échantillonnage](../../azure-monitor/app/sampling.md)
+* [Échantillonnage](./sampling.md)
 
 [api]: app-insights-api-custom-events-metrics.md
 [apiproperties]: app-insights-api-custom-events-metrics.md#properties
-[start]: ../../azure-monitor/app/app-insights-overview.md
+[start]: ./app-insights-overview.md
 [pricing]: https://azure.microsoft.com/pricing/details/application-insights/
 [pricing]: https://azure.microsoft.com/pricing/details/application-insights/
+

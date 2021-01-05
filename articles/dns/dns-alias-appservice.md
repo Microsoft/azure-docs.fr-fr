@@ -4,15 +4,15 @@ description: Utilisez un enregistrement d’alias Azure DNS pour héberger des a
 services: dns
 author: rohinkoul
 ms.service: dns
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/10/2019
 ms.author: rohink
-ms.openlocfilehash: 8ba96a028d51e6e5503bb4a8e6735b48033c9ba1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 72adb2732eb0832589cbc25fb7e4288eb1899214
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76937363"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954509"
 ---
 # <a name="host-load-balanced-azure-web-apps-at-the-zone-apex"></a>Héberger des applications web Azure à charge équilibrée à l’extrémité de la zone
 
@@ -26,11 +26,11 @@ Cet article explique comment créer un enregistrement d’alias pour une extrém
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Vous devez disposer d’un nom de domaine disponible, que vous pouvez héberger dans Azure DNS pour le test. Vous devez disposer d’un contrôle total de ce domaine. Le contrôle total comprend notamment la possibilité de définir les enregistrements de serveur de noms pour le domaine.
 
-Pour obtenir des instructions pour héberger votre domaine dans Azure DNS, consultez [Tutoriel : Héberger votre domaine dans Azure DNS](dns-delegate-domain-azure-dns.md).
+Pour obtenir des instructions sur l’hébergement de votre domaine dans Azure DNS, consultez [Tutoriel : Héberger votre domaine dans Azure DNS](dns-delegate-domain-azure-dns.md).
 
 L’exemple de domaine utilisé pour ce tutoriel est contoso.com, mais utilisez votre propre nom de domaine.
 
@@ -43,7 +43,7 @@ Créez un groupe de ressources qui contiendra toutes les ressources utilisées d
 Créez deux plans Web App Service dans votre groupe de ressources en suivant les informations de configuration du tableau ci-dessous. Pour plus d’informations sur la création d’un plan App Service, voir [Gérer un plan App Service dans Azure](../app-service/app-service-plan-manage.md).
 
 
-|Name  |Système d’exploitation  |Location  |Niveau de tarification  |
+|Nom  |Système d’exploitation  |Emplacement  |Niveau de tarification  |
 |---------|---------|---------|---------|
 |ASP-01     |Windows|USA Est|Dev/Test D1-Shared|
 |ASP-02     |Windows|USA Centre|Dev/Test D1-Shared|
@@ -58,7 +58,7 @@ Créez deux applications web, une dans chaque plan App Service.
 4. Sélectionnez **Create** (Créer).
 5. Acceptez les valeurs par défaut et utilisez le tableau suivant pour configurer les deux applications web :
 
-   |Name<br>(doit être unique sur . azurewebsites.net)|Groupe de ressources |Pile d’exécution|Région|Plan App Service/Emplacement
+   |Nom<br>(doit être unique sur . azurewebsites.net)|Groupe de ressources |Pile d’exécution|Région|Plan App Service/Emplacement
    |---------|---------|-|-|-------|
    |App-01|Utilisez l’existant<br>Sélectionnez votre groupe de ressources|.NET Core 2.2|USA Est|ASP-01(D1)|
    |App-02|Utilisez l’existant<br>Sélectionnez votre groupe de ressources|.NET Core 2.2|USA Centre|ASP-02(D1)|
@@ -76,7 +76,7 @@ Notez maintenant l’adresse IP et le nom d’hôte des applications web.
 
 Créez un profil Traffic Manager dans votre groupe de ressources. Utilisez les valeurs par défaut et tapez un nom unique sur l’espace de noms trafficmanager.net.
 
-Pour plus d’informations sur la création d’un profil Traffic Manager, voir [Démarrage rapide : Créer un profil Traffic Manager pour une application web hautement disponible](../traffic-manager/quickstart-create-traffic-manager-profile.md).
+Pour plus d’informations sur la création d’un profil Traffic Manager, consultez [Démarrage rapide : Créer un profil Traffic Manager pour une application web hautement disponible](../traffic-manager/quickstart-create-traffic-manager-profile.md).
 
 ### <a name="create-endpoints"></a>Créer des points de terminaison
 
@@ -87,14 +87,14 @@ Vous pouvez maintenant créer les points de terminaison pour les deux applicatio
 3. Sélectionnez **Ajouter**.
 4. Aidez-vous du tableau suivant pour configurer les points de terminaison :
 
-   |Type  |Name  |Cible  |Location  |Paramètres d’en-tête personnalisé|
+   |Type  |Nom  |Cible  |Emplacement  |Paramètres d’en-tête personnalisé|
    |---------|---------|---------|---------|---------|
-   |Point de terminaison externe     |End-01|Adresse IP enregistrée pour App-01|USA Est|host:\<URL enregistrée pour App-01\><br>Exemple : **host:app-01.azurewebsites.net**|
-   |Point de terminaison externe     |End-02|Adresse IP enregistrée pour App-02|USA Centre|host:\<URL enregistrée pour App-02\><br>Exemple : **host:app-02.azurewebsites.net**
+   |Point de terminaison externe     |End-01|Adresse IP enregistrée pour App-01|USA Est|Hôte : \<the URL you recorded for App-01\><br>Exemple : **host:app-01.azurewebsites.net**|
+   |Point de terminaison externe     |End-02|Adresse IP enregistrée pour App-02|USA Centre|Hôte : \<the URL you recorded for App-02\><br>Exemple : **host:app-02.azurewebsites.net**
 
 ## <a name="create-dns-zone"></a>Créer une zone DNS
 
-Vous pouvez utiliser une zone DNS existante à des fins de test, ou en créer une nouvelle. Pour créer et déléguer une nouvelle zone DNS dans Azure, voir [Tutoriel : Héberger un domaine dans Azure DNS](dns-delegate-domain-azure-dns.md).
+Vous pouvez utiliser une zone DNS existante à des fins de test, ou en créer une nouvelle. Pour créer et déléguer une nouvelle zone DNS dans Azure, consultez [Tutoriel : Héberger votre domaine dans Azure DNS](dns-delegate-domain-azure-dns.md).
 
 ## <a name="add-a-txt-record-for-custom-domain-validation"></a>Ajouter un enregistrement TXT pour la validation d’un domaine personnalisé
 
@@ -104,7 +104,7 @@ Lorsque vous ajoutez un nom d’hôte personnalisé à vos applications web, il 
 2. Sélectionnez **Jeu d’enregistrements**.
 3. Ajoutez le jeu d’enregistrements suivant le tableau ci-dessous. Pour la valeur, utilisez l’URL de l’application Web réelle enregistrée précédemment :
 
-   |Name  |Type  |Valeur|
+   |Nom  |Type  |Valeur|
    |---------|---------|-|
    |@     |TXT|App-01.azurewebsites.net|
 
@@ -132,7 +132,7 @@ Ajoutez maintenant un enregistrement d’alias d’apex de zone.
 2. Sélectionnez **Jeu d’enregistrements**.
 3. Ajoutez le jeu d’enregistrements suivant le tableau ci-dessous :
 
-   |Name  |Type  |Jeu d’enregistrements d’alias  |Type d’alias  |Ressource Azure|
+   |Nom  |Type  |Jeu d’enregistrements d’alias  |Type d’alias  |Ressource Azure|
    |---------|---------|---------|---------|-----|
    |@     |Un|Oui|Ressource Azure|Traffic Manager – votre profil|
 
@@ -156,8 +156,8 @@ Vous pouvez maintenant passer aux tests, pour vérifier que vous pouvez atteindr
 
 Pour en savoir plus sur les enregistrements d’alias, consultez les articles suivant :
 
-- [Tutoriel : Configurer un enregistrement d’alias pour référencer une adresse IP publique Azure](tutorial-alias-pip.md)
-- [Tutoriel : configurer un enregistrement d’alias pour prendre en charge les noms de domaine apex avec Traffic Manager](tutorial-alias-tm.md)
-- [FAQ DNS](https://docs.microsoft.com/azure/dns/dns-faq#alias-records)
+- [Tutoriel : Configurer un enregistrement d'alias pour faire référence à une adresse IP publique](tutorial-alias-pip.md)
+- [Tutoriel : Configurer un enregistrement d'alias pour prendre en charge des noms de domaine d'apex avec Traffic Manager](tutorial-alias-tm.md)
+- [FAQ DNS](./dns-faq.md#alias-records)
 
 Pour savoir comment migrer un nom DNS actif, consultez [Migrer un nom DNS actif vers Azure App Service](../app-service/manage-custom-dns-migrate-domain.md).

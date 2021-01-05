@@ -6,16 +6,16 @@ manager: jillfra
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/12/2018
 ms.author: ghogen
-ms.custom: aaddev, vs-azure
-ms.openlocfilehash: d42d905bf35c015213e76bc50c4bc339a5c4a062
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp, aaddev, vs-azure
+ms.openlocfilehash: ab72512b2e5d915dbd4b8a3d7d8446a5932eef9e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80886107"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88165445"
 ---
 # <a name="what-happened-to-my-mvc-project-visual-studio-azure-active-directory-connected-service"></a>Qu'est-il arrivé à mon projet MVC (service connecté Azure Active Directory Visual Studio) ?
 
@@ -162,5 +162,5 @@ Lors de l’ajout du service connecté, Visual Studio 2015 sauvegarde les fichie
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Scénarios d’authentification pour Azure Active Directory](authentication-scenarios.md)
+- [Scénarios d’authentification pour Azure Active Directory](./authentication-vs-authorization.md)
 - [Ajouter la connexion avec Microsoft à une application web ASP.NET](quickstart-v2-aspnet-webapp.md)

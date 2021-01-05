@@ -1,19 +1,14 @@
 ---
 title: Autoriser l’accès avec une signature d’accès partagé dans Azure Event Hubs
 description: Cet article fournit des informations sur l’autorisation de l’accès aux ressources Azure Event Hubs à l’aide de signatures d’accès partagé.
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
 ms.topic: conceptual
-ms.date: 08/22/2019
-ms.author: spelluru
-ms.openlocfilehash: bdb1896f8a40c6de21ae76b536bfccec316341cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: 6a2d7385f82864e8d378055333377fb9c3f73c19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69992445"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85323120"
 ---
 # <a name="authorizing-access-to-event-hubs-resources-using-shared-access-signatures"></a>Autorisation de l’accès aux ressources Event Hubs à l’aide de signatures d’accès partagé
 Une signature d’accès partagé (SAS, Shared Access Signature) vous offre un moyen d’accorder un accès limité aux ressources de votre espace de noms Event Hubs. Une signature d’accès partagé protège l’accès aux ressources Event Hubs en fonction de règles d’autorisation. Ces règles sont configurées sur un espace de noms ou une entité (hub d’événements ou rubrique). Cet article offre une vue d’ensemble du modèle SAS et passe en revue les bonnes pratiques relatives aux signatures d’accès partagé.

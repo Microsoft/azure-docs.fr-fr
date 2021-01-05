@@ -1,25 +1,29 @@
 ---
 title: 'Démarrage rapide : API Cassandra avec Python - Azure Cosmos DB'
 description: Ce guide de démarrage rapide montre comment utiliser l’API Apache Cassandra Azure Cosmos DB pour créer une application de profil avec Python.
-author: SnehaGunda
-ms.author: sngun
+author: TheovanKraay
+ms.author: thvankra
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
 ms.devlang: python
 ms.topic: quickstart
-ms.date: 09/24/2018
-ms.openlocfilehash: 0b432653c452b6763e746f61b86e881c9cee62cc
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 08/13/2020
+ms.custom: devx-track-python
+ms.openlocfilehash: 8a76a37de64733ba3e0126c7885d8690d2d83c1b
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77134650"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93099717"
 ---
 # <a name="quickstart-build-a-cassandra-app-with-python-sdk-and-azure-cosmos-db"></a>Démarrage rapide : Générer une application Cassandra avec le SDK Python et Azure Cosmos DB
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-cassandra-dotnet.md)
-> * [Java](create-cassandra-java.md)
+> * [.NET Core](create-cassandra-dotnet-core.md)
+> * [Java v3](create-cassandra-java.md)
+> * [Java v4](create-cassandra-java-v4.md)
 > * [Node.JS](create-cassandra-nodejs.md)
 > * [Python](create-cassandra-python.md)
 >  
@@ -65,68 +69,29 @@ Nous allons maintenant cloner une application API Cassandra à partir de GitHub,
 
 Cette étape est facultative. Si vous voulez savoir comment le code crée les ressources de base de données, vous pouvez consulter les extraits de code suivants. Tous les extraits de code sont tirés du fichier *pyquickstart.py*. Sinon, vous pouvez passer à l’étape [Mise à jour de votre chaîne de connexion](#update-your-connection-string). 
 
-* Les valeurs de nom d’utilisateur et de mot de passe ont été définies en utilisant la page de chaîne de connexion du portail Azure. `path\to\cert` fournit le chemin d’un certificat X509. 
+* Le `cluster` est initialisé avec `contactPoint` et les informations de `port` récupérées depuis le portail Azure. Le `cluster` se connecte ensuite à l’API Cassandra Azure Cosmos DB à l’aide de la méthode `connect()`. Une connexion autorisée est établie à l’aide d’un nom d’utilisateur, d’un mot de passe et d’un certificat par défaut ou d’un certificat explicite si vous en fournissez un dans le fichier config.
 
-   ```python
-    ssl_opts = {
-            'ca_certs': 'path\to\cert',
-            'ssl_version': ssl.PROTOCOL_TLSv1_2
-            }
-    auth_provider = PlainTextAuthProvider( username=cfg.config['username'], password=cfg.config['password'])
-    cluster = Cluster([cfg.config['contactPoint']], port = cfg.config['port'], auth_provider=auth_provider, ssl_options=ssl_opts)
-    session = cluster.connect()
-   
-   ```
-
-* Le `cluster` est initialisé avec les informations contactPoint. Le contactPoint est récupéré à partir du portail Azure.
-
-    ```python
-   cluster = Cluster([cfg.config['contactPoint']], port = cfg.config['port'], auth_provider=auth_provider)
-    ```
-
-* Le `cluster` se connecte à l’API Cassandra Azure Cosmos DB.
-
-    ```python
-    session = cluster.connect()
-    ```
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="authenticateAndConnect":::
 
 * Un espace de clés est créé.
 
-    ```python
-   session.execute('CREATE KEYSPACE IF NOT EXISTS uprofile WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter1\' : \'1\' }')
-    ```
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="createKeyspace":::
 
 * Une table est créée.
 
-   ```
-   session.execute('CREATE TABLE IF NOT EXISTS uprofile.user (user_id int PRIMARY KEY, user_name text, user_bcity text)');
-   ```
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="createTable":::
 
 * Des entités clé/valeur sont insérées.
 
-    ```Python
-    insert_data = session.prepare("INSERT INTO  uprofile.user  (user_id, user_name , user_bcity) VALUES (?,?,?)")
-    session.execute(insert_data, [1,'Lybkov','Seattle'])
-    session.execute(insert_data, [2,'Doniv','Dubai'])
-    session.execute(insert_data, [3,'Keviv','Chennai'])
-    session.execute(insert_data, [4,'Ehtevs','Pune'])
-    session.execute(insert_data, [5,'Dnivog','Belgaum'])
-    ....
-    
-    ```
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="insertData":::
 
 * Requête pour obtenir toutes les valeurs de clé.
 
-    ```Python
-    rows = session.execute('SELECT * FROM uprofile.user')
-    ```  
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="queryAllItems":::
     
 * Requête pour obtenir une paire clé-valeur.
 
-    ```Python
-    
-    rows = session.execute('SELECT * FROM uprofile.user where user_id=1')
-    ```  
+  :::code language="python" source="~/cosmosdb-cassandra-python-sample/pyquickstart.py" id="queryByID":::
 
 ## <a name="update-your-connection-string"></a>Mise à jour de votre chaîne de connexion
 
@@ -134,37 +99,37 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
 1. Dans votre compte Azure Cosmos DB, sur le [portail Azure](https://portal.azure.com/), sélectionnez **Chaîne de connexion**. 
 
-    Utilisez le ![bouton Copier](./media/create-cassandra-python/copy.png) à droite de l’écran pour copier la valeur supérieure, c’est-à-dire le POINT DE CONTACT.
+1. Utilisez le bouton :::image type="icon" source="./media/create-cassandra-python/copy.png"::: à droite de l’écran pour copier la valeur supérieure, c’est-à-dire le POINT DE CONTACT. 
 
-    ![Affichez et copiez un nom d’utilisateur, un mot de passe et un point de contact dans le panneau de chaîne de connexion du portail Azure](./media/create-cassandra-python/keys.png)
+   :::image type="content" source="./media/create-cassandra-python/keys.png" alt-text="Afficher et copier un nom d’utilisateur, un mot de passe et un point de contact dans le panneau de chaîne de connexion du portail Azure":::
 
-2. Ouvrez le fichier *config.py*. 
+1. Ouvrez le fichier *config.py*. 
 
-3. Collez la valeur POINT DE CONTACT à partir du portail sur `<FILLME>` à la ligne 10.
+1. Collez la valeur POINT DE CONTACT à partir du portail sur `<FILLME>` à la ligne 10.
 
     La ligne 10 doit maintenant ressembler à 
 
     `'contactPoint': 'cosmos-db-quickstarts.cassandra.cosmosdb.azure.com:10350'`
 
-4. Copiez la valeur NOM D’UTILISATEUR à partir du portail et collez-la sur `<FILLME>` à la ligne 6.
+1. Copiez la valeur NOM D’UTILISATEUR à partir du portail et collez-la sur `<FILLME>` à la ligne 6.
 
     La ligne 6 doit maintenant ressembler à 
 
     `'username': 'cosmos-db-quickstart',`
     
-5. Copiez la valeur MOT DE PASSE à partir du portail et collez-la sur `<FILLME>` à la ligne 8.
+1. Copiez la valeur MOT DE PASSE à partir du portail et collez-la sur `<FILLME>` à la ligne 8.
 
     La ligne 8 doit maintenant ressembler à
 
     `'password' = '2Ggkr662ifxz2Mg==`';`
 
-6. Enregistrez le fichier *config.py*.
+1. Enregistrez le fichier *config.py*.
     
 ## <a name="use-the-x509-certificate"></a>Utiliser le certificat X509
 
 1. Téléchargez le certificat racine Baltimore CyberTrust localement à partir de [https://cacert.omniroot.com/bc2025.crt](https://cacert.omniroot.com/bc2025.crt). Renommez le fichier avec l’extension de fichier *.cer*.
 
-   Le certificat a le numéro de série `02:00:00:b9` et l’empreinte digitale SHA1 `d4🇩🇪20:d0:5e:66:fc:53:fe:1a:50:88:2c:78:db:28:52:ca:e4:74`.
+   Le certificat a le numéro de série `02:00:00:b9` et l’empreinte digitale SHA1 `d4:de:20:d0:5e:66:fc:53:fe:1a:50:88:2c:78:db:28:52:ca:e4:74`.
 
 2. Ouvrez *pyquickstart.py* et changez `path\to\cert` pour le faire pointer vers votre nouveau certificat.
 
@@ -193,11 +158,11 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
     Appuyez sur CTRL+C pour arrêter l’exécution du programme et fermer la fenêtre de console. 
 
-    ![Consulter et vérifier la sortie](./media/create-cassandra-python/output.png)
+    :::image type="content" source="./media/create-cassandra-python/output.png" alt-text="Afficher et vérifier la sortie":::
     
 4. Dans le portail Azure, ouvrez **l’Explorateur de données** pour interroger, modifier et utiliser ces nouvelles données. 
 
-    ![Afficher les données dans l’Explorateur de données](./media/create-cassandra-python/data-explorer.png)
+    :::image type="content" source="./media/create-cassandra-python/data-explorer.png" alt-text="Afficher les données dans l’Explorateur de données":::
 
 ## <a name="review-slas-in-the-azure-portal"></a>Vérification des contrats SLA dans le portail Azure
 

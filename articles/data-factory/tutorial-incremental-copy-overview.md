@@ -12,12 +12,12 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019
 ms.date: 01/22/2018
-ms.openlocfilehash: 00d54f9adcab93152881852b6fcac417e9d7c7d9
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: f1fb209f44ae7922de87277100fbf55add184766
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81409899"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84194493"
 ---
 # <a name="incrementally-load-data-from-a-source-data-store-to-a-destination-data-store"></a>Charger de façon incrémentielle des données d’un magasin de données source vers un magasin de données de destination
 
@@ -32,7 +32,7 @@ Dans ce cas, vous définissez un filigrane dans votre base de données source. U
 
 Pour des instructions pas à pas, consultez les didacticiels suivants : 
 - [Copier de façon incrémentielle les données d’une table d’Azure SQL Database dans un stockage Blob Azure](tutorial-incremental-copy-powershell.md)
-- [Copier de façon incrémentielle des données provenant de plusieurs tables d’une base de données SQL Server locale vers Azure SQL Database](tutorial-incremental-copy-multiple-tables-powershell.md)
+- [Copier de façon incrémentielle des données provenant de plusieurs tables d’une instance SQL Server vers Azure SQL Database](tutorial-incremental-copy-multiple-tables-powershell.md)
 
 Pour les modèles, consultez ce qui suit :
 - [Copie delta avec une table de contrôles](solution-template-delta-copy-with-control-table.md)

@@ -3,40 +3,40 @@ title: Indexer des données géospatiales avec Azure Cosmos DB
 description: Indexer des données spatiales avec Azure Cosmos DB
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 05/03/2020
+ms.date: 11/03/2020
 ms.author: tisande
-ms.openlocfilehash: cd96f440c4e8c971d1f1473f667d31e60edef137
-ms.sourcegitcommit: 11572a869ef8dbec8e7c721bc7744e2859b79962
+ms.openlocfilehash: 47eedf1ddbb155180d364c42ec179b3e01279e44
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82839201"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93336212"
 ---
 # <a name="index-geospatial-data-with-azure-cosmos-db"></a>Indexer des données géospatiales avec Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Nous avons conçu le moteur de base de données d’Azure Cosmos DB pour être véritablement indépendant du schéma et assurer une prise en charge de JSON de première qualité. Le moteur de base de données optimisé en écriture d’Azure Cosmos DB comprend les données spatiales représentées dans la norme GeoJSON en mode natif.
 
-En bref, la géométrie est projetée à partir des coordonnées géodésiques sur un plan 2D, puis divisée progressivement en cellules à l'aide un **quadtree**. Ces cellules sont mappées en 1D selon l'emplacement de la cellule dans une **courbe de remplissage d'espace de Hilbert**qui permet de préserver la localité des points. En outre, quand les données d’emplacement sont indexées, elles passent par un processus connu sous le nom de **pavage**, c’est-à-dire que toutes les cellules qui se croisent à un emplacement sont identifiées et stockées en tant que clés dans l’index Azure Cosmos DB. Au moment de la requête, des arguments comme les points et les polygones sont également fractionnés pour extraire les plages d’ID de cellule appropriées, puis utilisés pour récupérer des données à partir de l’index.
+En bref, la géométrie est projetée à partir des coordonnées géodésiques sur un plan 2D, puis divisée progressivement en cellules à l'aide un **quadtree**. Ces cellules sont mappées en 1D selon l'emplacement de la cellule dans une **courbe de remplissage d'espace de Hilbert** qui permet de préserver la localité des points. En outre, quand les données d’emplacement sont indexées, elles passent par un processus connu sous le nom de **pavage** , c’est-à-dire que toutes les cellules qui se croisent à un emplacement sont identifiées et stockées en tant que clés dans l’index Azure Cosmos DB. Au moment de la requête, des arguments comme les points et les polygones sont également fractionnés pour extraire les plages d’ID de cellule appropriées, puis utilisés pour récupérer des données à partir de l’index.
 
-Si vous spécifiez une stratégie d’indexation qui inclut un index spatial pour /* (tous les chemins d’accès), toutes les données trouvées dans le conteneur sont indexées pour des requêtes spatiales efficaces.
+Si vous spécifiez une stratégie d’indexation comportant un index spatial pour `/*` (tous les chemins), toutes les données trouvées dans le conteneur sont indexées de façon à optimiser l’efficacité des requêtes spatiales.
 
 > [!NOTE]
-> Azure Cosmos DB prend en charge l’indexation des instances Points, LineStrings, Polygons et MultiPolygons.
->
->
+> Azure Cosmos DB prend en charge l’indexation des types Point, LineString, Polygon et MultiPolygon. Si vous indexez l’un d’eux, nous indexerons automatiquement tous les autres. Par exemple, si vous indexez des types Polygon, nous indexerons également les types Point, LineString et MultiPolygon. L’indexation d’un nouveau type spatial n’a pas d’incidence sur la charge des unités de requête en écriture ni la taille de l’index, sauf si vous disposez de données GeoJSON valides de ce type.
 
-## <a name="modifying-geospatial-data-type"></a>Modification du type de données géospatiales
+## <a name="modifying-geospatial-configuration"></a>Modification de la configuration géospatiale
 
 Dans le conteneur, la **Configuration géospatiale** spécifie le mode d’indexation des données spatiales. Spécifiez une **Configuration géospatiale** par conteneur : géographie ou géométrie.
 
 Vous pouvez basculer entre les types spatiaux **géographie** et **géométrie** dans le portail Azure. Avant de basculer vers le type spatial géométrie, il est important de créer une [stratégie d’indexation de géométrie spatiale valide avec un cadre englobant](#geometry-data-indexing-examples).
 
-Voici comment définir la **configuration géospatiale** dans l’**Explorateur de données** au sein du portail Azure :
+Voici comment définir la **configuration géospatiale** dans l’ **Explorateur de données** au sein du portail Azure :
 
-![Définition de la configuration géospatiale](./media/sql-query-geospatial-index/geospatial-configuration.png)
+:::image type="content" source="./media/sql-query-geospatial-index/geospatial-configuration.png" alt-text="Définition de la configuration géospatiale":::
 
-Vous pouvez également modifier la `geospatialConfig` dans le kit de développement logiciel (SDK) .NET pour ajuster la **Configuration géospatiale** :
+Vous pouvez également modifier la `geospatialConfig` dans le kit de développement logiciel (SDK) .NET pour ajuster la **Configuration géospatiale**  :
 
 Si `geospatialConfig` n’est pas spécifiée, le type de données géographie est utilisé par défaut. Lorsque vous modifiez `geospatialConfig`, toutes les données géospatiales présentes dans le conteneur sont réindexées.
 
@@ -77,15 +77,15 @@ L’extrait de code JSON suivant montre une stratégie d’indexation avec l’i
 **JSON de stratégie d’indexation de conteneur avec indexation spatiale géographique**
 
 ```json
-    {
-       "automatic":true,
-       "indexingMode":"Consistent",
-        "includedPaths": [
+{
+    "automatic": true,
+    "indexingMode": "Consistent",
+    "includedPaths": [
         {
             "path": "/*"
         }
-        ],
-        "spatialIndexes": [
+    ],
+    "spatialIndexes": [
         {
             "path": "/*",
             "types": [
@@ -96,8 +96,8 @@ L’extrait de code JSON suivant montre une stratégie d’indexation avec l’i
             ]
         }
     ],
-       "excludedPaths":[]
-    }
+    "excludedPaths": []
+}
 ```
 
 > [!NOTE]
@@ -116,14 +116,14 @@ Le cadre englobant présente les propriétés suivantes :
 - **xmax** : coordonnée x indexée maximale ;
 - **ymax** : coordonnée y indexée maximale.
 
-Un cadre englobant est nécessaire, car les données géométriques occupent un plan qui peut être infini. Les index spatiaux, eux, ont besoin d’un espace fini. Pour le type de données **géographie**, la Terre fait office de limite ; il n’est donc pas nécessaire de définir un cadre englobant.
+Un cadre englobant est nécessaire, car les données géométriques occupent un plan qui peut être infini. Les index spatiaux, eux, ont besoin d’un espace fini. Pour le type de données **géographie** , la Terre fait office de limite ; il n’est donc pas nécessaire de définir un cadre englobant.
 
 Créez un cadre englobant contenant la totalité (ou la plupart) de vos données. Seules les opérations calculées sur les objets qui se trouvent entièrement à l’intérieur du cadre englobant pourront avoir recours à l’index spatial. Le fait de définir un cadre englobant plus grand que nécessaire aura un impact négatif sur les performances des requêtes.
 
 Voici un exemple de stratégie d’indexation qui indexe des données **géométrie** avec **geospatialConfig** défini sur `geometry` :
 
 ```json
- {
+{
     "indexingMode": "consistent",
     "automatic": true,
     "includedPaths": [

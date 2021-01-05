@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Workgrid pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes d’utilisateur sur Workgrid.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: fb48deae-4653-448a-ba2f-90258edab3a7
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/17/2019
 ms.author: Zhchia
-ms.openlocfilehash: 94d70447117c73a309959ddf66972c921aa5e687
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec39e4796d2a06ad88a8e88ea99b953064eb6d21
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77062805"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348328"
 ---
 # <a name="tutorial-configure-workgrid--for-automatic-user-provisioning"></a>Tutoriel : Configurer Workgrid pour l'approvisionnement automatique d’utilisateurs
 
@@ -58,15 +54,15 @@ Avant de configurer Workgrid pour l’approvisionnement automatique d’utilisat
 
 1. Connectez-vous à Workgrid. Accédez à **Utilisateurs > Attribution d'utilisateurs**.
 
-    ![Workgrid](media/Workgrid-provisioning-tutorial/user.png)
+    ![Capture d’écran de l’interface utilisateur de Workgrid avec les options Utilisateurs et Attribution d’utilisateurs en évidence.](media/Workgrid-provisioning-tutorial/user.png)
 
 2. Sous **API de gestion de compte**, cliquez sur **Créer des informations d'identification**.
 
-    ![Workgrid](media/Workgrid-provisioning-tutorial/scim.png)
+    ![Capture d’écran de la section API de gestion de compte avec l’option Créer des informations d’identification en évidence.](media/Workgrid-provisioning-tutorial/scim.png)
 
 3. Copiez les valeurs **Point de terminaison SCIM** et **Jeton d'accès**. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** dans l’onglet Approvisionnement de votre application Workgrid dans le portail Azure.
 
-    ![Workgrid](media/Workgrid-provisioning-tutorial/token.png)
+    ![Capture d’écran de la section API de gestion de compte avec Point de terminaison SCIM et Jeton d’accès en évidence.](media/Workgrid-provisioning-tutorial/token.png)
 
 
 ## <a name="add-workgrid--from-the-gallery"></a>Ajouter de Workgrid à partir de la galerie
@@ -96,7 +92,7 @@ Pour configurer Workgrid pour l'approvisionnement automatique d’utilisateurs a
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Workgrid en fonction des affectations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Workgrid en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Workgrid](Workgrid-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Workgrid en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Workgrid](Workgrid-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
 
 ### <a name="to-configure-automatic-user-provisioning-for-workgrid--in-azure-ad"></a>Pour configurer l’attribution automatique d’utilisateurs pour Workgrid dans Azure AD :
 
@@ -110,11 +106,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section Informations d'identification de l'administrateur, entrez respectivement les valeurs du **Point de terminaison SCIM** et du **Jeton d'accès** récupérées précédemment dans les champs **URL de locataire** et **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Workgrid. Si la connexion échoue, vérifiez que votre compte Workgrid dispose des autorisations d’administrateur et réessayez.
 
@@ -128,7 +124,7 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur Workgrid**.
 
-    ![Workgrid - Mappages d’utilisateur](media/Workgrid-provisioning-tutorial/usermapping.png)
+    ![Capture d’écran de la section Mappages avec l’option Synchroniser les utilisateurs Azure Active Directory avec Workgrid en évidence.](media/Workgrid-provisioning-tutorial/usermapping.png)
 
 9. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Workgrid. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Workgrid pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
@@ -136,11 +132,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 10. Dans la section **Mappages**, sélectionnez **Synchroniser les groupes Azure Active Directory avec Workgrid**
 
-    ![Workgrid - Mappages d’utilisateur](media/Workgrid-provisioning-tutorial/groupmapping.png)
+    ![Capture d’écran de la section Mappages avec l’option Synchroniser les groupes Azure Active Directory avec Workgrid en évidence.](media/Workgrid-provisioning-tutorial/groupmapping.png)
 
 12. Dans la section **Mappages des attributs**, passez en revue les attributs du groupe qui sont synchronisés entre Azure AD et Workgrid. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans Workgrid pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Workgrid - Mappages d’utilisateur](media/Workgrid-provisioning-tutorial/groupattribute.png)
+    ![Capture d’écran de la section Mappages des attributs avec trois mappages affichés.](media/Workgrid-provisioning-tutorial/groupattribute.png)
 
 13. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 

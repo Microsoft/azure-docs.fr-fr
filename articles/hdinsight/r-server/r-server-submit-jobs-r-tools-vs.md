@@ -8,18 +8,18 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 06/19/2019
-ms.openlocfilehash: 73d1478ec2d6c90428f22a30ec82634df115d2f5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 08426c74b26c18b15466578d9921520da1e9c923
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435254"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993786"
 ---
 # <a name="submit-jobs-from-r-tools-for-visual-studio"></a>Soumettre des travaux à partir d’outils R pour Visual Studio
 
-[Outils R pour Visual Studio](https://marketplace.visualstudio.com/items?itemName=MikhailArkhipov007.RTVS2019) (RTVS) est une extension gratuite et open source pour les éditions Community (gratuite), Professional et Enterprise de [Visual Studio 2017](https://www.visualstudio.com/downloads/) et [Visual Studio 2015 Update 3](https://go.microsoft.com/fwlink/?LinkId=691129) ou version ultérieure. RTVS n’est pas disponible pour [Visual Studio 2019](https://docs.microsoft.com/visualstudio/porting/port-migrate-and-upgrade-visual-studio-projects?view=vs-2019).
+[Outils R pour Visual Studio](https://marketplace.visualstudio.com/items?itemName=MikhailArkhipov007.RTVS2019) (RTVS) est une extension gratuite et open source pour les éditions Community (gratuite), Professional et Enterprise de [Visual Studio 2017](https://www.visualstudio.com/downloads/) et [Visual Studio 2015 Update 3](https://go.microsoft.com/fwlink/?LinkId=691129) ou version ultérieure. RTVS n’est pas disponible pour [Visual Studio 2019](/visualstudio/porting/port-migrate-and-upgrade-visual-studio-projects?preserve-view=true&view=vs-2019).
 
-RTVS améliore votre flux de travail R en offrant des outils tels que la [fenêtre interactive R](https://docs.microsoft.com/visualstudio/rtvs/interactive-repl) (REPL), intellisense (saisie semi-automatique du code), [la visualisation de tracé](https://docs.microsoft.com/visualstudio/rtvs/visualizing-data) par le biais de bibliothèques R telles que ggplot2 et ggviz, [le débogage du code R](https://docs.microsoft.com/visualstudio/rtvs/debugging), et bien plus encore.
+RTVS améliore votre flux de travail R en offrant des outils tels que la [fenêtre interactive R](/visualstudio/rtvs/interactive-repl) (REPL), intellisense (saisie semi-automatique du code), [la visualisation de tracé](/visualstudio/rtvs/visualizing-data) par le biais de bibliothèques R telles que ggplot2 et ggviz, [le débogage du code R](/visualstudio/rtvs/debugging), et bien plus encore.
 
 ## <a name="set-up-your-environment"></a>Configurer votre environnement
 
@@ -32,7 +32,7 @@ RTVS améliore votre flux de travail R en offrant des outils tels que la [fenêt
 3. Vous devez avoir des clés publiques et privées pour l’authentification SSH.
    <!-- {TODO tbd, no such file yet}[use SSH with HDInsight](hdinsight-hadoop-linux-use-ssh-windows.md) -->
 
-4. Installez [ML Server](https://msdn.microsoft.com/microsoft-r/rserver-install-windows) sur votre ordinateur. ML Server propose les fonctions [`RevoScaleR`](https://msdn.microsoft.com/microsoft-r/scaler/scaler) et `RxSpark`.
+4. Installez [ML Server](/previous-versions/machine-learning-server/install/r-server-install-windows) sur votre ordinateur. ML Server propose les fonctions [`RevoScaleR`](/machine-learning-server/r-reference/revoscaler/revoscaler) et `RxSpark`.
 
 5. Installez [PuTTY](https://www.putty.org/) pour fournir un contexte de calcul afin d’exécuter les fonctions `RevoScaleR` de votre client local sur votre cluster HDInsight.
 
@@ -49,7 +49,7 @@ RTVS améliore votre flux de travail R en offrant des outils tels que la [fenêt
 ## <a name="execute-local-r-methods"></a>Exécuter des méthodes R locales
 
 1. Créez votre cluster HDInsight ML Services.
-2. Installez [l’extension RTVS](https://docs.microsoft.com/visualstudio/rtvs/installation).
+2. Installez [l’extension RTVS](/visualstudio/rtvs/installation).
 3. Téléchargez [l’exemple de fichier zip](https://github.com/Microsoft/RTVS-docs/archive/master.zip).
 4. Ouvrez `examples/Examples.sln` pour lancer la solution dans Visual Studio.
 5. Ouvrez le fichier `1-Getting Started with R.R` dans le dossier de solution `A first look at R`.

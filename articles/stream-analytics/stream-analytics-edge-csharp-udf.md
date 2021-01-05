@@ -7,13 +7,13 @@ ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: tutorial
 ms.date: 12/06/2018
-ms.custom: seodec18
-ms.openlocfilehash: 1d71f4c5616efb05efe2733c49507b085ca2dcf6
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: d53f13cb740b3feb39dc64ce012ff320afbb1db5
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75426292"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130491"
 ---
 # <a name="tutorial-write-a-c-user-defined-function-for-azure-stream-analytics-job-preview"></a>Tutoriel : Écrire une fonction C# définie par l’utilisateur pour un travail Azure Stream Analytics (préversion)
 
@@ -32,11 +32,11 @@ Avant de commencer, veillez à effectuer les prérequis suivants :
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 * Installez les [outils Stream Analytics pour Visual Studio](stream-analytics-tools-for-visual-studio-install.md) et les charges de travail **Développement Azure** ou **Stockage et traitement de données**.
-* Examinez le [guide de développement Stream Analytics Edge] existant si vous générez un travail IoT Edge (stream-analytics-tools-for-visual-studio-edge-jobs.md).
+* Consultez le [guide de développement Stream Analytics sur appareils de périphérie](stream-analytics-tools-for-visual-studio-edge-jobs.md) existant si vous créez un travail IoT Edge.
 
 ## <a name="create-a-container-in-your-azure-storage-account"></a>Créez un conteneur dans votre compte Stockage Azure.
 
-Le conteneur que vous créez sera utilisé pour stocker le package C# compilé. Si vous créez un travail de périphérie, ce compte de stockage est également utilisé pour déployer le package sur votre appareil IoT Edge. Utilisez un conteneur dédié pour chaque travail Stream Analytics. La réutilisation du même conteneur pour plusieurs travaux de périphérie Stream Analytics n’est pas prise en charge. Si vous avez déjà un compte de stockage avec des conteneurs existants, vous pouvez les utiliser. Sinon, vous devez [créer un conteneur](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). 
+Le conteneur que vous créez sera utilisé pour stocker le package C# compilé. Si vous créez un travail de périphérie, ce compte de stockage est également utilisé pour déployer le package sur votre appareil IoT Edge. Utilisez un conteneur dédié pour chaque travail Stream Analytics. La réutilisation du même conteneur pour plusieurs travaux de périphérie Stream Analytics n’est pas prise en charge. Si vous avez déjà un compte de stockage avec des conteneurs existants, vous pouvez les utiliser. Sinon, vous devez [créer un conteneur](../storage/blobs/storage-quickstart-blobs-portal.md). 
 
 ## <a name="create-a-stream-analytics-project-in-visual-studio"></a>Créer un projet Stream Analytics dans Visual Studio
 
@@ -44,9 +44,9 @@ Le conteneur que vous créez sera utilisé pour stocker le package C# compilé.
 
 2. Sélectionnez **Fichier > Nouveau > Projet**.
 
-3. Dans la liste des modèles sur la gauche, sélectionnez **Stream Analytics**, puis **Application de périphérie Azure Stream Analytics** ou **Application Azure Stream Analytics**.
+3. Dans la liste des modèles sur la gauche, sélectionnez **Stream Analytics** , puis **Application de périphérie Azure Stream Analytics** ou **Application Azure Stream Analytics**.
 
-4.  Entrez les éléments **Nom**, **Emplacement** et **Nom de la solution** de votre projet, puis sélectionnez **OK**.
+4.  Entrez les éléments **Nom** , **Emplacement** et **Nom de la solution** de votre projet, puis sélectionnez **OK**.
 
     ![Créer un projet de périphérie Azure Stream Analytics dans Visual Studio](./media/stream-analytics-edge-csharp-udf/stream-analytics-create-edge-app.png)
 
@@ -71,7 +71,7 @@ Le conteneur que vous créez sera utilisé pour stocker le package C# compilé.
 ## <a name="write-a-c-udf-with-codebehind"></a>Écrire une fonction C# définie par l’utilisateur avec du code-behind
 Un fichier code-behind est un fichier C# associé à un seul script de requête ASA. Visual Studio Tools compresse automatiquement le fichier code-behind et le charge sur votre compte de stockage Azure au moment de l’envoi. Toutes les classes doivent être définies en tant que classes *publiques* et tous les objets doivent être définis en tant qu’objets *publics statiques*.
 
-1. Dans **l’Explorateur de solutions**, développez **Script.asql** pour rechercher le fichier code-behind **Script.asaql.cs**.
+1. Dans **l’Explorateur de solutions** , développez **Script.asql** pour rechercher le fichier code-behind **Script.asaql.cs**.
 
 2. Remplacez le code par l’exemple suivant :
 
@@ -97,7 +97,7 @@ Un fichier code-behind est un fichier C# associé à un seul script de requête
 
 ## <a name="implement-the-udf"></a>Implémenter la fonction définie par l’utilisateur
 
-1. Dans **l’Explorateur de solutions**, ouvrez le fichier **Script.asaql**.
+1. Dans **l’Explorateur de solutions** , ouvrez le fichier **Script.asaql**.
 
 2. Remplacez la requête existante par ce qui suit :
 
@@ -111,7 +111,7 @@ Un fichier code-behind est un fichier C# associé à un seul script de requête
 
 1. Téléchargez l’[exemple de fichier de données du simulateur de température](https://raw.githubusercontent.com/Azure/azure-stream-analytics/master/Sample%20Data/TemperatureSampleData.json).
 
-2. Dans **l’Explorateur de solutions**, développez **Entrées**, cliquez avec le bouton droit sur **Input.json**, puis sélectionnez **Ajouter une entrée locale**.
+2. Dans **l’Explorateur de solutions** , développez **Entrées** , cliquez avec le bouton droit sur **Input.json** , puis sélectionnez **Ajouter une entrée locale**.
 
    ![Ajouter une entrée locale au travail Stream Analytics dans Visual Studio](./media/stream-analytics-edge-csharp-udf/stream-analytics-add-local-input.png)
 
@@ -144,7 +144,7 @@ Une fois que vous avez testé votre requête localement, sélectionnez **Envoyer
 ![Envoyer votre travail de périphérie Stream Analytics sur Azure à partir de Visual Studio](./media/stream-analytics-edge-csharp-udf/stream-analytics-udf-submit-job.png)
 
 ## <a name="deploy-to-iot-edge-devices"></a>Déployer sur des appareils IoT Edge
-Si vous avez choisi de générer un travail de périphérie Stream Analytics, vous pouvez le déployer en tant que module IoT Edge. Suivez le [guide de démarrage rapide sur IoT Edge](https://docs.microsoft.com/azure/iot-edge/quickstart) pour créer un hub IoT, inscrire un appareil IoT Edge, et installer et démarrer le runtime IoT Edge sur votre appareil. Ensuite, suivez le tutoriel [Déployer la tâche](https://docs.microsoft.com/azure/iot-edge/tutorial-deploy-stream-analytics#deploy-the-job) pour déployer votre travail Stream Analytics en tant que module IoT Edge. 
+Si vous avez choisi de générer un travail de périphérie Stream Analytics, vous pouvez le déployer en tant que module IoT Edge. Suivez le [guide de démarrage rapide sur IoT Edge](../iot-edge/quickstart.md) pour créer un hub IoT, inscrire un appareil IoT Edge, et installer et démarrer le runtime IoT Edge sur votre appareil. Ensuite, suivez le tutoriel [Déployer la tâche](../iot-edge/tutorial-deploy-stream-analytics.md#deploy-the-job) pour déployer votre travail Stream Analytics en tant que module IoT Edge. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

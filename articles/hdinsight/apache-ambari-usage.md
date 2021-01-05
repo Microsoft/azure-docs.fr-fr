@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 02/05/2020
-ms.openlocfilehash: 466c170985715be52a90d579c19ca23aefefe2e5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cfb83c4ec9972fda3813d414583bc73edeef3229
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77066000"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93285969"
 ---
 # <a name="apache-ambari-usage-in-azure-hdinsight"></a>Utilisation d’Apache Ambari dans Azure HDInsight
 
@@ -56,7 +56,7 @@ Voici la séquence de démarrage des services au moment du démarrage :
 
 ## <a name="ambari-database"></a>Base de données Ambari
 
-HDInsight crée une base de données SQL Azure en coulisses pour servir de base de données pour le serveur Ambari. Le [niveau de service par défaut est S0](../sql-database/sql-database-elastic-pool-scale.md).
+HDInsight crée une base de données dans SQL Database en coulisses afin de servir de base de données pour le serveur Ambari. Le [niveau de service par défaut est S0](../azure-sql/database/elastic-pool-scale.md).
 
 Pour tout cluster avec un nombre de nœuds Worker supérieur à 16 lors de la création du cluster, S2 est le niveau de service de la base de données.
 
@@ -71,10 +71,4 @@ Ne jamais modifier manuellement les fichiers de configuration sur un nœud de cl
 * [Gérer des clusters HDInsight à l’aide de l’interface utilisateur web d’Apache Ambari](hdinsight-hadoop-manage-ambari.md)
 * [Gérer des clusters HDInsight à l’aide de l’API REST d’Apache Ambari](hdinsight-hadoop-manage-ambari-rest-api.md)
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../includes/hdinsight-troubleshooting-next-steps.md)]

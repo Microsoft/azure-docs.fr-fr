@@ -1,24 +1,15 @@
 ---
 title: Contrôle d’accès Azure Service Bus avec des signatures d’accès partagé
 description: Vue d’ensemble du contrôle d’accès Service Bus avec des signatures d’accès partagé, et informations sur l’autorisation SAP avec Azure Service Bus.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-editor: spelluru
-ms.assetid: ''
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 12/20/2019
-ms.author: aschhab
-ms.openlocfilehash: c381d9413c4003bc2ab9a9357ff2769e84d14c3e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/03/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: f71320613682f7d4b9f3b706845e68f581b3dc10
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229621"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339408"
 ---
 # <a name="service-bus-access-control-with-shared-access-signatures"></a>Contrôle d’accès Service Bus avec des signatures d’accès partagé
 
@@ -37,7 +28,7 @@ SAP protège l’accès à Service Bus en fonction de règles d’autorisation. 
 
 Les signatures d’accès partagé sont un mécanisme d’autorisation reposant sur des revendications à l’aide de simples jetons. À l’aide d’une SAP, les clés ne sont jamais transmises simultanément. Les clés sont utilisées pour signer par chiffrement des informations qui peuvent être vérifiées ultérieurement par le service. Une SAP peut être utilisée de façon similaire à un schéma de nom d’utilisateur et de mot de passe où le client est en possession immédiate d’un nom de règle d’autorisation et d’une clé correspondante. Une SAP peut également être utilisée comme un modèle de sécurité fédéré, où le client reçoit un jeton d’accès signé et limité dans le temps d’un service d’émission de jeton de sécurité sans jamais être en possession de la clé de signature.
 
-L’authentification SAP dans Service Bus est configurée avec des [règles d’autorisation d’accès partagé](/dotnet/api/microsoft.servicebus.messaging.sharedaccessauthorizationrule) nommées ayant les droits d’accès associés, ainsi qu’une paire de clés de chiffrement primaire et secondaire. Les clés sont des valeurs de 256 bits dans une représentation Base64. Vous pouvez configurer des règles au niveau de l’espace de noms, sur les [relais](../service-bus-relay/relay-what-is-it.md), [files d’attente](service-bus-messaging-overview.md#queues) et [rubriques](service-bus-messaging-overview.md#topics) Service Bus.
+L’authentification SAP dans Service Bus est configurée avec des [règles d’autorisation d’accès partagé](/dotnet/api/microsoft.servicebus.messaging.sharedaccessauthorizationrule) nommées ayant les droits d’accès associés, ainsi qu’une paire de clés de chiffrement primaire et secondaire. Les clés sont des valeurs de 256 bits dans une représentation Base64. Vous pouvez configurer des règles au niveau de l’espace de noms, sur les [relais](../azure-relay/relay-what-is-it.md), [files d’attente](service-bus-messaging-overview.md#queues) et [rubriques](service-bus-messaging-overview.md#topics) Service Bus.
 
 Le jeton de [signature d’accès partagé](/dotnet/api/microsoft.servicebus.sharedaccesssignaturetokenprovider) contient le nom de la règle d’autorisation choisie, l’URI de la ressource à laquelle accéder, un délai d’expiration et une signature de chiffrement HMAC-SHA256 calculé sur ces champs à l’aide de la clé de chiffrement primaire ou secondaire de la règle d’autorisation choisie.
 
@@ -45,7 +36,7 @@ Le jeton de [signature d’accès partagé](/dotnet/api/microsoft.servicebus.sha
 
 Chaque espace de noms Service Bus et chaque entité Service Bus ont une stratégie d’autorisation d’accès partagé constituée de règles. La stratégie au niveau de l’espace de noms s’applique à toutes les entités à l’intérieur de l’espace de noms, quelle que soit leur configuration de stratégie individuelle.
 
-Pour chaque règle de stratégie d’autorisation, vous choisissez trois éléments d’information : le **nom**, **l’étendue** et les **autorisations**. Le **nom** est un nom unique au sein de cette étendue. L’étendue est l’URI de la ressource en question. Pour un espace de noms Service Bus, l’étendue est le nom de domaine complet (FQDN), tel que `https://<yournamespace>.servicebus.windows.net/`.
+Pour chaque règle de stratégie d’autorisation, vous choisissez trois éléments d’information : le **nom** , **l’étendue** et les **autorisations**. Le **nom** est un nom unique au sein de cette étendue. L’étendue est l’URI de la ressource en question. Pour un espace de noms Service Bus, l’étendue est le nom de domaine complet (FQDN), tel que `https://<yournamespace>.servicebus.windows.net/`.
 
 Les droits qui sont attribués par la règle de stratégie peuvent être une combinaison de :
 
@@ -59,7 +50,21 @@ Une stratégie d’entité et d’espace de noms peut contenir 12 règles d’au
 
 Une *clé primaire* et une *clé secondaire* sont attribuées à une règle d’autorisation. Il s’agit de clés de chiffrement fortes. Ne les perdez pas et ne les diffusez pas ; elles seront toujours disponibles sur le [portail Azure][Azure portal]. Vous pouvez utiliser n’importe laquelle des clés générées et vous pouvez les régénérer à tout moment. Si vous régénérez ou modifiez une clé dans la stratégie, tous les jetons précédemment émis en fonction de cette clé deviennent instantanément non valides. Toutefois, les connexions en cours créées en fonction de ces jetons continuent de fonctionner jusqu’à ce que le jeton expire.
 
-Lorsque vous créez un espace de noms Service Bus, une règle de stratégie nommée **RootManageSharedAccessKey** est automatiquement créée pour l’espace de noms. Cette stratégie dispose d’autorisations Gérer pour l’espace de noms complet. Il est recommandé de traiter cette règle comme un compte **racine** d’administration et de ne pas l’utiliser dans votre application. Vous pouvez créer des règles de stratégies supplémentaires sous l’onglet **Configurer** pour l’espace de noms dans le portail via Powershell ou Azure CLI.
+Lorsque vous créez un espace de noms Service Bus, une règle de stratégie nommée **RootManageSharedAccessKey** est automatiquement créée pour l’espace de noms. Cette stratégie dispose d’autorisations Gérer pour l’espace de noms complet. Il est recommandé de traiter cette règle comme un compte **racine** d’administration et de ne pas l’utiliser dans votre application. Vous pouvez créer des règles de stratégies supplémentaires sous l’onglet **Configurer** pour l’espace de noms dans le portail via PowerShell ou Azure CLI.
+
+## <a name="best-practices-when-using-sas"></a>Bonnes pratiques lors de l’utilisation de SAP
+Lorsque vous utilisez des signatures d'accès partagé dans vos applications, vous devez être conscient de deux risques potentiels :
+
+- Si une signature d’accès partagé est divulguée, toute personne qui se la procure peut s’en servir, ce qui peut compromettre vos ressources Event Hubs.
+- Si une signature d’accès partagé fournie à une application cliente expire et que l’application est incapable d’en récupérer une nouvelle à partir de votre service, le fonctionnement de votre application risque d’être entravé.
+
+Les recommandations suivantes relatives à l’utilisation des signatures d’accès partagé peuvent aider à limiter ces risques :
+
+- **Faites en sorte que les clients renouvellent automatiquement la signature d’accès partagé si nécessaire**  : les clients doivent renouveler la signature d’accès partagé bien avant l’heure d’expiration pour laisser suffisamment de temps pour de nouvelles tentatives si le service qui fournit la signature est indisponible. Si votre signature d’accès partagé doit être utilisée pour un petit nombre d’opérations immédiates de courte durée, censées être terminées avant l’heure d’expiration, cela ne sera peut-être pas nécessaire, car il n’est pas prévu que la signature d’accès partagé soit renouvelée. Toutefois, si vous avez un client qui effectue régulièrement des demandes par le biais de signatures d'accès partagé, le risque d'expiration est à prendre en compte. La principale considération consiste à trouver un équilibre entre la nécessité que la signature d’accès partagé ait une durée de vie limitée (comme indiqué plus haut) et la nécessité de veiller à ce que le client demande le renouvellement suffisamment tôt pour éviter une interruption due à une expiration de la signature avant le renouvellement effectif.
+- **Faites attention à la date de début de la signature d’accès partagé**  : si vous définissez la date de début d’une signature d’accès partagé sur **maintenant** , en raison du décalage d’horloge (différences constatées dans l’heure actuelle sur des machines différentes), des défaillances peuvent être observées par intermittence pendant les premières minutes. En règle générale, définissez une heure de début située au moins 15 minutes avant l’heure courante ou ne la définissez pas du tout, et elle sera alors valide immédiatement dans tous les cas. Généralement, le même principe s’applique également à l’heure d’expiration. N’oubliez pas que vous pouvez observer jusqu’à 15 minutes de décalage d’horloge (dans un sens ou dans l’autre) sur une demande. 
+- **Soyez précis quant à la ressource pour laquelle vous voulez configurer l’accès**  : il est recommandé de fournir à l’utilisateur les privilèges minimaux requis, ce qui s’inscrit dans les bonnes pratiques de sécurité. Si un utilisateur a besoin d'un accès en lecture à une seule entité, accordez-lui un accès en lecture à cette seule entité, plutôt qu'un accès en lecture/écriture/suppression à toutes les entités. Cela permet également d’atténuer les dégâts si une signature d’accès partagé est compromise, car son pouvoir est moindre entre les mains d’un attaquant.
+- **N’utilisez pas toujours une signature d’accès partagé**  : parfois, les risques associés à une opération particulière sur vos hubs d’événements l’emportent sur les avantages offerts par la signature d’accès partagé. Pour ces opérations, créez un service de niveau intermédiaire qui écrit dans vos hubs d’événements après avoir effectué la validation des règles métier, l’authentification et un audit.
+- **Utilisez toujours HTTPS**  : utilisez toujours HTTPS pour créer ou distribuer une signature d’accès partagé. Si une signature d’accès partagé est transmise sur HTTP et interceptée, un attaquant qui lance une attaque de type « attaque de l’intercepteur » (man-in-the-middle) peut lire la signature et s’en servir exactement comme l’utilisateur concerné aurait pu le faire, d’où le risque que les données sensibles soient compromises ou que les données soient altérées par l’utilisateur malveillant.
 
 ## <a name="configuration-for-shared-access-signature-authentication"></a>Configuration de l’authentification de signature d’accès partagé
 
@@ -67,7 +72,7 @@ Vous pouvez configurer la règle [SharedAccessAuthorizationRule](/dotnet/api/mic
 
 ![SAS](./media/service-bus-sas/service-bus-namespace.png)
 
-Dans cette figure, les règles d’autorisation *manageRuleNS*, *sendRuleNS* et *listenRuleNS* s’appliquent à la file d’attente Q1 et à la rubrique T1, tandis que *listenRuleQ* et *sendRuleQ* s’appliquent uniquement à la file d’attente Q1, et *sendRuleT* uniquement à la rubrique T1.
+Dans cette figure, les règles d’autorisation *manageRuleNS* , *sendRuleNS* et *listenRuleNS* s’appliquent à la file d’attente Q1 et à la rubrique T1, tandis que *listenRuleQ* et *sendRuleQ* s’appliquent uniquement à la file d’attente Q1, et *sendRuleT* uniquement à la rubrique T1.
 
 ## <a name="generate-a-shared-access-signature-token"></a>Générer un jeton de signature d’accès partagé
 
@@ -82,7 +87,7 @@ SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-e
 * **`sr`** - URI de la ressource faisant l’objet de l’accès.
 * **`sig`** - Signature.
 
-La `signature-string` est le hachage SHA-256 calculé sur l’URI de ressource (**étendue** comme décrit dans la section précédente) et la représentation de chaîne du délai d’expiration du jeton, séparée par LF.
+La `signature-string` est le hachage SHA-256 calculé sur l’URI de ressource ( **étendue** comme décrit dans la section précédente) et la représentation de chaîne du délai d’expiration du jeton, séparée par LF.
 
 Le calcul de hachage est similaire au code de pseudo suivant et retourne une valeur de hachage de 256 bits/32 octets.
 
@@ -94,11 +99,14 @@ Le jeton contient les valeurs non hachées afin que le destinataire puisse recal
 
 L’URI de ressource est l’URI complet de la ressource Service Bus à laquelle vous souhaitez accéder. Par exemple, `http://<namespace>.servicebus.windows.net/<entityPath>` ou `sb://<namespace>.servicebus.windows.net/<entityPath>` ; qui est, `http://contoso.servicebus.windows.net/contosoTopics/T1/Subscriptions/S3`. 
 
-**L’URI doit être [encodée en pourcentage](https://msdn.microsoft.com/library/4fkewx0t.aspx).**
+**L’URI doit être [encodée en pourcentage](/dotnet/api/system.web.httputility.urlencode).**
 
 La règle de l’autorisation d’accès partagé utilisée pour la signature doit être configurée sur l’entité spécifiée par cette URI, ou par un de ses parents hiérarchiques. Par exemple, `http://contoso.servicebus.windows.net/contosoTopics/T1` ou `http://contoso.servicebus.windows.net` dans l’exemple précédent.
 
 Un jeton SAP est valable pour toutes les ressources avec le préfixe `<resourceURI>` utilisé dans `signature-string`.
+
+> [!NOTE]
+> Pour obtenir des exemples de génération d’un jeton SAS au moyen de différents langages de programmation, consultez [Générer un jeton SAS](/rest/api/eventhub/generate-sas-token). 
 
 ## <a name="regenerating-keys"></a>Régénération des clés
 
@@ -166,7 +174,7 @@ sendClient.Send(helloMessage);
 
 Vous pouvez aussi utiliser le fournisseur de jetons directement pour l’émission de jetons à transmettre à d’autres clients.
 
-Les chaînes de connexion peuvent inclure un nom de règle (*SharedAccessKeyName*) et la clé de la règle (*SharedAccessKey*) ou un jeton émis précédemment (*SharedAccessSignature*). Lorsque ceux-ci sont présents dans la chaîne de connexion transmise à un constructeur ou une méthode de fabrique acceptant une chaîne de connexion, le fournisseur de jetons SAP est automatiquement créé et renseigné.
+Les chaînes de connexion peuvent inclure un nom de règle ( *SharedAccessKeyName* ) et la clé de la règle ( *SharedAccessKey* ) ou un jeton émis précédemment ( *SharedAccessSignature* ). Lorsque ceux-ci sont présents dans la chaîne de connexion transmise à un constructeur ou une méthode de fabrique acceptant une chaîne de connexion, le fournisseur de jetons SAP est automatiquement créé et renseigné.
 
 Pour utiliser une autorisation SAS avec les relais Service Bus, vous pouvez utiliser des clés SAS configurées sur un espace de noms Service Bus. Si vous créez explicitement un relais sur l’espace de noms ([NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) avec un objet [RelayDescription](/dotnet/api/microsoft.servicebus.messaging.relaydescription)), vous pouvez définir les règles SAP pour ce relais. Pour utiliser une autorisation SAS avec des abonnements Service Bus, vous pouvez utiliser des clés SAS configurées sur un espace de noms Service Bus ou sur une rubrique.
 
@@ -187,7 +195,7 @@ Si vous donnez un jeton SAS à un expéditeur ou un client, celui-ci ne dispose 
 
 ## <a name="use-the-shared-access-signature-at-amqp-level"></a>Utilisation de la signature d’accès partagé (au niveau d’AMQP)
 
-Dans la section précédente, vous avez vu comment utiliser le jeton SAS avec une requête HTTP POST pour envoyer des données au Service Bus. Comme vous le savez, vous pouvez accéder au Service Bus à l’aide du protocole AMQP (Advanced Message Queuing Protocol) qui est le protocole privilégié pour des raisons de performances dans de nombreux scénarios. L’utilisation de jetons SAP avec AMQP est décrite dans le document [AMQP Claim-Based Security Version 1.0](https://www.oasis-open.org/committees/download.php/50506/amqp-cbs-v1%200-wd02%202013-08-12.doc). Bien qu’au stade d’ébauche depuis 2013, elle est bien prise en charge par Azure aujourd’hui.
+Dans la section précédente, vous avez vu comment utiliser le jeton SAS avec une requête HTTP POST pour envoyer des données au Service Bus. Comme vous le savez, vous pouvez accéder au Service Bus à l’aide du protocole AMQP (Advanced Message Queuing Protocol) qui est le protocole privilégié pour des raisons de performances dans de nombreux scénarios. L’utilisation de jetons SAS avec AMQP est décrite dans le document [AMQP Claim-Based Security Version 1.0](https://www.oasis-open.org/committees/download.php/50506/amqp-cbs-v1%200-wd02%202013-08-12.doc), qui est à l’état de brouillon depuis 2013, mais prise en charge par Azure aujourd’hui.
 
 Avant de commencer à envoyer des données vers Service Bus, le serveur de publication doit envoyer le jeton SAP dans un message AMQP à un nœud AMQP bien défini nommé **$cbs** (il s’agit d’une sorte de file d’attente « spéciale » que le service utilise pour acquérir et valider tous les jetons SAP). Le serveur de publication doit spécifier le champ **ReplyTo** dans le message AMQP. Il s’agit du nœud sur lequel le service répond au serveur de publication avec le résultat de la validation du jeton (système de demande/réponse simple entre le serveur de publication et le service). Ce nœud de réponse est créé « à la volée » en ce qui concerne la « création dynamique du nœud à distance », comme le décrit la spécification AMQP 1.0. Après avoir vérifié que le jeton SAS est valide, le serveur de publication peut continuer et commencer à envoyer des données au service.
 

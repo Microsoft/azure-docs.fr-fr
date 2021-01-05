@@ -2,20 +2,19 @@
 title: Intégrer Azure Automation à Event Grid | Microsoft Docs
 description: Découvrez comment ajouter automatiquement une balise lors de la création d’une nouvelle machine virtuelle et envoyer une notification à Microsoft Teams.
 keywords: automation, runbook, teams, event grid, machine virtuelle, VM
-services: automation
+services: automation,event-grid
 author: eamonoreilly
-manager: ''
 ms.service: automation
 ms.topic: tutorial
 ms.workload: infrastructure-services
-ms.date: 05/10/2019
+ms.date: 07/07/2020
 ms.author: eamono
-ms.openlocfilehash: 9f99ce5862850c2453e9e72241fff77fe091616f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3b9b49a4d38566891f442a3d2d7eac9bf1d36465
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "65521424"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87462001"
 ---
 # <a name="tutorial-integrate-azure-automation-with-event-grid-and-microsoft-teams"></a>Tutoriel : Intégrer Azure Automation à Event Grid et Microsoft Teams
 
@@ -34,7 +33,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [requires-azurerm](../../includes/requires-azurerm.md)]
 
-Un [compte Azure Automation](../automation/automation-offering-get-started.md) est requis pour terminer ce didacticiel et mettre le runbook déclenché par l’abonnement Azure Event Grid en attente.
+Un [compte Azure Automation](../automation/index.yml) est requis pour terminer ce didacticiel et mettre le runbook déclenché par l’abonnement Azure Event Grid en attente.
 
 * Le module `AzureRM.Tags` doit être chargé dans votre compte Automation, consultez [How to import modules in Azure Automation](../automation/automation-update-azure-modules.md) (Importation de modules dans Azure Automation) pour apprendre à importer des modules dans Azure Automation.
 

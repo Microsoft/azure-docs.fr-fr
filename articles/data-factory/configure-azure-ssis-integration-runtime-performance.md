@@ -10,12 +10,12 @@ author: swinarko
 ms.author: sawinark
 ms.reviewer: ''
 manager: anandsub
-ms.openlocfilehash: ca88e42438c7cb48b062aa67d82053afbb9244bf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f0fcd61230d68d7b26017237e2b7e0465fcb1f07
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418284"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92635318"
 ---
 # <a name="configure-the-azure-ssis-integration-runtime-for-high-performance"></a>Configurer Azure-SSIS Integration Runtime pour de hautes performances
 
@@ -51,25 +51,25 @@ $AzureSSISNodeNumber = 2
 # Azure-SSIS IR edition/license info: Standard or Enterprise
 $AzureSSISEdition = "Standard" # Standard by default, while Enterprise lets you use advanced/premium features on your Azure-SSIS IR
 # Azure-SSIS IR hybrid usage info: LicenseIncluded or BasePrice
-$AzureSSISLicenseType = "LicenseIncluded" # LicenseIncluded by default, while BasePrice lets you bring your own on-premises SQL Server license with Software Assurance to earn cost savings from Azure Hybrid Benefit (AHB) option
+$AzureSSISLicenseType = "LicenseIncluded" # LicenseIncluded by default, while BasePrice lets you bring your existing SQL Server license with Software Assurance to earn cost savings from Azure Hybrid Benefit (AHB) option
 # For a Standard_D1_v2 node, up to 4 parallel executions per node are supported, but for other nodes, up to max(2 x number of cores, 8) are currently supported
 $AzureSSISMaxParallelExecutionsPerNode = 8
 # Custom setup info
 $SetupScriptContainerSasUri = "" # OPTIONAL to provide SAS URI of blob container where your custom setup script and its associated files are stored
 # Virtual network info: Classic or Azure Resource Manager
-$VnetId = "[your virtual network resource ID or leave it empty]" # REQUIRED if you use Azure SQL Database with virtual network service endpoints/Managed Instance/on-premises data, Azure Resource Manager virtual network is recommended, Classic virtual network will be deprecated soon
-$SubnetName = "[your subnet name or leave it empty]" # WARNING: Please use the same subnet as the one used with your Azure SQL Database with virtual network service endpoints or a different subnet than the one used for your Managed Instance
+$VnetId = "[your virtual network resource ID or leave it empty]" # REQUIRED if you use Azure SQL Database with virtual network service endpoints/SQL Managed Instance/on-premises data, Azure Resource Manager virtual network is recommended, Classic virtual network will be deprecated soon
+$SubnetName = "[your subnet name or leave it empty]" # WARNING: Please use the same subnet as the one used with your Azure SQL Database with virtual network service endpoints or a different subnet than the one used for your SQL Managed Instance
 
 ### SSISDB info
-$SSISDBServerEndpoint = "[your Azure SQL Database server name or Managed Instance name.DNS prefix].database.windows.net" # WARNING: Please ensure that there is no existing SSISDB, so we can prepare and manage one on your behalf
+$SSISDBServerEndpoint = "[your server name or managed instance name.DNS prefix].database.windows.net" # WARNING: Please ensure that there is no existing SSISDB, so we can prepare and manage one on your behalf
 # Authentication info: SQL or Azure Active Directory (AAD)
 $SSISDBServerAdminUserName = "[your server admin username for SQL authentication or leave it empty for AAD authentication]"
 $SSISDBServerAdminPassword = "[your server admin password for SQL authentication or leave it empty for AAD authentication]"
-$SSISDBPricingTier = "[Basic|S0|S1|S2|S3|S4|S6|S7|S9|S12|P1|P2|P4|P6|P11|P15|…|ELASTIC_POOL(name = <elastic_pool_name>) for Azure SQL Database or leave it empty for Managed Instance]"
+$SSISDBPricingTier = "[Basic|S0|S1|S2|S3|S4|S6|S7|S9|S12|P1|P2|P4|P6|P11|P15|…|ELASTIC_POOL(name = <elastic_pool_name>) for Azure SQL Database or leave it empty for SQL Managed Instance]"
 ```
 
 ## <a name="azuressislocation"></a>AzureSSISLocation
-**AzureSSISLocation** est l’emplacement du nœud du rôle de travail du runtime d’intégration. Le nœud du rôle de travail maintient une connexion constante avec la base de données du catalogue SSIS (SSISDB) sur une base de données Azure SQL. Définissez **AzureSSISLocation** au même emplacement que le serveur SQL Database qui héberge SSISDB, ce qui permet au runtime d’intégration de fonctionner le plus efficacement possible.
+**AzureSSISLocation** est l’emplacement du nœud du rôle de travail du runtime d’intégration. Le nœud Worker maintient une connexion constante avec la base de données du catalogue SSIS (SSISDB) dans Azure SQL Database. Définissez **AzureSSISLocation** au même emplacement que le [serveur SQL logique](../azure-sql/database/logical-servers.md) qui héberge SSISDB. Ainsi, le runtime d’intégration fonctionnera le plus efficacement possible.
 
 ## <a name="azuressisnodesize"></a>AzureSSISNodeSize
 Data Factory, y compris le runtime d’intégration Azure-SSIS, prend en charge les options suivantes :
@@ -104,24 +104,27 @@ Si vous n’avez pas de nombreux packages à exécuter et que vous voulez exécu
 
 Ces données représentent une seule exécution de package sur un seul nœud de rôle de travail. Le package charge 3 millions d’enregistrements avec des colonnes de prénoms et de noms depuis le stockage Blob Azure, génère une colonne avec des noms complets et écrit les enregistrements dont le nom complet a plus de 20 caractères dans le stockage Blob Azure.
 
+L’axe des Y est le nombre de packages dont l’exécution s’est terminée en une heure. Notez qu’il ne s’agit que d’un résultat de test d’un package gourmand en mémoire. Si vous souhaitez connaître le débit de votre package, il est recommandé d’effectuer le test par vous-même.
+
 ![Vitesse d’exécution du package Azure-SSIS Integration Runtime](media/configure-azure-ssis-integration-runtime-performance/ssisir-execution-speedV2.png)
 
 ### <a name="configure-for-overall-throughput"></a>Configurer pour le débit global
 
 Si vous avez beaucoup de packages à exécuter et que vous vous souciez surtout du débit global, utilisez les informations données dans le tableau suivant pour choisir un type de machine virtuelle approprié à votre scénario.
 
+L’axe des Y est le nombre de packages dont l’exécution s’est terminée en une heure. Notez qu’il ne s’agit que d’un résultat de test d’un package gourmand en mémoire. Si vous souhaitez connaître le débit de votre package, il est recommandé d’effectuer le test par vous-même.
+
 ![Débit global maximal d’Azure-SSIS Integration Runtime](media/configure-azure-ssis-integration-runtime-performance/ssisir-overall-throughputV2.png)
 
 ## <a name="azuressisnodenumber"></a>AzureSSISNodeNumber
 
-**AzureSSISNodeNumber** ajuste l’évolutivité du runtime d’intégration. Le débit du runtime d’intégration est proportionnel au **AzureSSISNodeNumber**. Définir le **AzureSSISNodeNumber** une petite valeur dans un premier temps, surveiller le débit du runtime d’intégration, puis modifiez la valeur pour votre scénario. Pour reconfigurer le nœud du rôle de travail, consultez [Gérer Azure-SSIS Integration Runtime](manage-azure-ssis-integration-runtime.md).
+**AzureSSISNodeNumber** ajuste l’évolutivité du runtime d’intégration. Le débit du runtime d’intégration est proportionnel au **AzureSSISNodeNumber** . Définir le **AzureSSISNodeNumber** une petite valeur dans un premier temps, surveiller le débit du runtime d’intégration, puis modifiez la valeur pour votre scénario. Pour reconfigurer le nœud du rôle de travail, consultez [Gérer Azure-SSIS Integration Runtime](manage-azure-ssis-integration-runtime.md).
 
 ## <a name="azuressismaxparallelexecutionspernode"></a>AzureSSISMaxParallelExecutionsPerNode
 
-Lorsque vous utilisez déjà un nœud de rôle de travail puissant pour exécuter des packages, l’augmentation de **AzureSSISMaxParallelExecutionsPerNode** peut augmenter le débit global du runtime d’intégration. Pour les nœuds Standard_D1_v2, 1 à 4 exécutions parallèles par nœud sont prises en charge. Pour tous les autres types de nœuds, 1-max(2 x le nombre de cœurs, 8) exécutions parallèles par nœud sont prises en charge. Si vous souhaitez **AzureSSISMaxParallelExecutionsPerNode** au-delà de la valeur maximale que nous avons prise en charge, vous pouvez ouvrir un ticket de support et nous pouvons augmenter la valeur maximale pour vous, après quoi vous devrez utiliser Azure Powershell pour mettre à jour **AzureSSISMaxParallelExecutionsPerNode**.
-Vous pouvez estimer la valeur appropriée sur la base du coût de votre package et sur les configurations suivantes des nœuds de rôle de travail. Pour plus d’informations, consultez [Tailles de machines virtuelles à usage général](../virtual-machines/windows/sizes-general.md).
+Lorsque vous utilisez déjà un nœud de rôle de travail puissant pour exécuter des packages, l’augmentation de **AzureSSISMaxParallelExecutionsPerNode** peut augmenter le débit global du runtime d’intégration. Si vous souhaitez augmenter la valeur maximale, vous devez utiliser Azure PowerShell pour mettre à jour **AzureSSISMaxParallelExecutionsPerNode** . Vous pouvez estimer la valeur appropriée sur la base du coût de votre package et sur les configurations suivantes des nœuds de rôle de travail. Pour plus d’informations, consultez [Tailles de machines virtuelles à usage général](../virtual-machines/sizes-general.md).
 
-| Size             | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Débit de stockage temporaire local max : E/S par seconde MBps de lecture / MBps d’écriture | Disques de données max / débit : E/S par seconde | Nombre max de cartes réseau / Performance réseau attendue (Mbits/s) |
+| Taille             | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Débit de stockage temporaire max. : IOPS / MBps en lecture / MBps en écriture | Disques de données max. / débit : E/S par seconde | Nombre max de cartes réseau / Performance réseau attendue (Mbits/s) |
 |------------------|------|-------------|------------------------|------------------------------------------------------------|-----------------------------------|------------------------------------------------|
 | Standard\_D1\_v2 | 1    | 3,5         | 50                     | 3000 / 46 / 23                                             | 2 / 2 x 500                         | 2 / 750                                        |
 | Standard\_D2\_v2 | 2    | 7           | 100                    | 6000 / 93 / 46                                             | 4 / 4 x 500                         | 2 / 1 500                                       |
@@ -142,7 +145,7 @@ Vous pouvez estimer la valeur appropriée sur la base du coût de votre package 
 | Standard\_E32\_v3| 32   | 256         | 800                    | 48000 / 750 / 375                                          | 32/96 x 500                       | 8 / 16 000                                      |
 | Standard\_E64\_v3| 64   | 432         | 1 600                   | 96000 / 1000 / 500                                         | 32/192 x 500                      | 8 / 30000                                      |
 
-Voici les instructions à suivre pour définir la valeur correcte pour la propriété **AzureSSISMaxParallelExecutionsPerNode** : 
+Voici les instructions à suivre pour définir la valeur correcte pour la propriété **AzureSSISMaxParallelExecutionsPerNode**  : 
 
 1. Commencez par définir une petite valeur.
 2. Augmentez-la par petites quantités pour vérifier si le débit global est amélioré.
@@ -150,7 +153,7 @@ Voici les instructions à suivre pour définir la valeur correcte pour la propri
 
 ## <a name="ssisdbpricingtier"></a>SSISDBPricingTier
 
-**SSISDBPricingTier** est le niveau de tarification pour la base de données du catalogue SSIS (SSISDB) sur une base de données Azure SQL. Ce paramètre affecte le nombre maximal de rôles de travail dans l’instance IR, la vitesse de la file d’attente de l’exécution d’un package et la vitesse de chargement du journal d’exécution.
+**SSISDBPricingTier** est le niveau de tarification pour la base de données du catalogue SSIS (SSISDB) dans Azure SQL Database. Ce paramètre affecte le nombre maximal de rôles de travail dans l’instance IR, la vitesse de la file d’attente de l’exécution d’un package et la vitesse de chargement du journal d’exécution.
 
 -   Si vous ne vous souciez pas de la vitesse d’exécution de la file d’attente du package et de chargement du journal d’exécution, vous pouvez choisir le niveau tarifaire le plus bas de la base de données. Azure SQL Database avec le tarif De base prend en charge 8 threads de travail dans une instance de runtime d’intégration.
 
@@ -158,7 +161,7 @@ Voici les instructions à suivre pour définir la valeur correcte pour la propri
 
 -   Choisissez une base de données plus puissante, telles que s3, si le niveau de journalisation est mis sur Informations détaillées. Selon notre test interne non officiel, le niveau tarifaire s3 peut prendre en charge l’exécution du package SSIS avec 2 nœuds, 128 nombres parallèle et le niveau de journalisation détaillé.
 
-Vous pouvez également ajuster le niveau tarifaire de la base de données en fonction des informations d’utilisation de l’[unité de transaction de base de données](../sql-database/sql-database-what-is-a-dtu.md) (DTU) disponibles sur le portail Azure.
+Vous pouvez également ajuster le niveau tarifaire de la base de données en fonction des informations d’utilisation de l’[unité de transaction de base de données](../azure-sql/database/service-tiers-dtu.md) (DTU) disponibles sur le portail Azure.
 
 ## <a name="design-for-high-performance"></a>Conception pour de hautes performances
 La conception d’un package SSIS à exécuter sur Azure diffère de la conception d’un package pour une exécution locale. Au lieu de combiner plusieurs tâches indépendantes dans le même package, séparez-les en plusieurs packages pour une exécution plus efficace dans Azure-SSIS Integration Runtime. Créez une exécution pour chaque package, afin qu’aucun package ne doive attendre que l’exécution des autres soit terminée. Cette approche tire parti de l’évolutivité d’Azure-SSIS Integration Runtime et améliore le débit global.

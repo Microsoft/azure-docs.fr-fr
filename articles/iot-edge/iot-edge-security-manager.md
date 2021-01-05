@@ -9,12 +9,12 @@ ms.author: eustacea
 ms.date: 08/30/2019
 ms.topic: conceptual
 ms.service: iot-edge
-ms.openlocfilehash: d5cfa16196a8815b711fd5277a80f6eb67d3a388
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d50ff37c3d29ae8e9e25d8759ef3c55787a58047
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76548694"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92042998"
 ---
 # <a name="azure-iot-edge-security-manager"></a>Gestionnaire de sécurité Azure IoT Edge
 
@@ -75,7 +75,7 @@ Le démon de sécurité IoT Edge est conçu pour tirer parti de n’importe quel
 
 #### <a name="cloud-interface"></a>Interface Cloud
 
-L’interface cloud permet au démon de sécurité IoT Edge d’accéder à des services cloud comme les compléments cloud pour la sécurité des appareils, par exemple le renouvellement de la sécurité.  Par exemple, le démon de sécurité IoT Edge utilise actuellement cette interface pour accéder au service Azure IoT Hub [Device Provisioning](https://docs.microsoft.com/azure/iot-dps/) pour la gestion du cycle de vie des identités d’appareil.  
+L’interface cloud permet au démon de sécurité IoT Edge d’accéder à des services cloud comme les compléments cloud pour la sécurité des appareils, par exemple le renouvellement de la sécurité.  Par exemple, le démon de sécurité IoT Edge utilise actuellement cette interface pour accéder au service Azure IoT Hub [Device Provisioning](../iot-dps/index.yml) pour la gestion du cycle de vie des identités d’appareil.  
 
 #### <a name="management-api"></a>API de gestion
 

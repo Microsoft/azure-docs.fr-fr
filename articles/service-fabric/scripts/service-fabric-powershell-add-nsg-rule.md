@@ -14,12 +14,12 @@ ms.topic: sample
 ms.date: 11/28/2017
 ms.author: atsenthi
 ms.custom: mvc
-ms.openlocfilehash: 33ee8028031bf94d69d11b08c347f84db94494a3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 167fa74b04af7c086c2c95b0fdd56e5932483080
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75610418"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87076200"
 ---
 # <a name="add-an-inbound-network-security-group-rule"></a>Ajouter une règle de groupe de sécurité réseau de trafic entrant
 
@@ -27,7 +27,7 @@ Cet exemple de script crée une règle de groupe de sécurité réseau visant à
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview). 
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/). 
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -46,4 +46,4 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

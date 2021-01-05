@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/31/2020
 ms.author: rdhillon
-ms.openlocfilehash: 1e5253d617c87d5869cebc817da6d265ebfdfa7e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 45a7a146dd929408b50a0045fe2598726ee05505
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77539465"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95544307"
 ---
 # <a name="troubleshoot-azure-private-link-connectivity-problems"></a>Résoudre les problèmes de connectivité d’Azure Private Link
 
@@ -37,7 +37,7 @@ Voici les scénarios de connectivité disponibles avec Private Link :
 
 ## <a name="deployment-troubleshooting"></a>Résolution des problèmes liés au déploiement
 
-Lisez les informations de la section [Désactivation des stratégies réseau sur le service Private Link](https://docs.microsoft.com/azure/private-link/disable-private-link-service-network-policy) pour résoudre les problèmes vous empêchant de sélectionner l’adresse IP source à partir du sous-réseau de votre choix pour votre service Private Link.
+Lisez les informations de la section [Désactivation des stratégies réseau sur le service Private Link](./disable-private-link-service-network-policy.md) pour résoudre les problèmes vous empêchant de sélectionner l’adresse IP source à partir du sous-réseau de votre choix pour votre service Private Link.
 
 Vérifiez que le paramètre **privateLinkServiceNetworkPolicies** est désactivé pour le sous-réseau à partir duquel vous sélectionnez l’adresse IP source.
 
@@ -99,7 +99,7 @@ Si vous rencontrez des problèmes de connectivité liés à votre installation P
        - Si la connexion est établie avec le pool back-end suivant les règles d’équilibrage de charge, votre équilibreur de charge est opérationnel.
        - Vous pouvez également consulter la métrique de l’équilibreur de charge avec Azure Monitor pour voir si les données transitent par l’équilibreur de charge.
 
-1. Utilisez [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview) pour vérifier que les données sont transmises.
+1. Utilisez [Azure Monitor](../azure-monitor/overview.md) pour vérifier que les données sont transmises.
 
     a. Sur une ressource du service Private Link, sélectionnez **Métriques**.
      - Sélectionnez **Octets entrants** ou **Octets sortants**.
@@ -111,5 +111,5 @@ Si vous rencontrez des problèmes de connectivité liés à votre installation P
 
 ## <a name="next-steps"></a>Étapes suivantes
 
- * [Créer un service Private Link (CLI)](https://docs.microsoft.com/azure/private-link/create-private-link-service-cli)
+ * [Créer un service Private Link (CLI)](./create-private-link-service-cli.md)
  * [Guide de résolution des problèmes des points de terminaison privés Azure](troubleshoot-private-endpoint-connectivity.md)

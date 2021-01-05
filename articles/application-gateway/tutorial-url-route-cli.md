@@ -4,16 +4,16 @@ description: Avec cet article, découvrez comment acheminer le trafic web selon 
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/01/2019
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: b6bc0b00579bdef0a358f756b8cf2b6034aca017
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 8e8fed99fe0b1de52d2e2d0018dfd8867b54b63b
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68688175"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566518"
 ---
 # <a name="route-web-traffic-based-on-the-url-using-the-azure-cli"></a>Acheminer le trafic web selon l’URL à l’aide d’Azure CLI
 
@@ -23,21 +23,20 @@ En tant qu’administrateur gérant le trafic web, vous souhaitez aider vos clie
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Créer un groupe de ressources pour les ressources réseau dont vous aurez besoin
-> * Créer les ressources réseau
-> * Créer une passerelle d’application pour le trafic provenant de votre application
-> * Spécifier des pools de serveurs et des règles d’acheminement pour les différents types de trafic
-> * Créer un groupe identique pour chaque pool afin que ce dernier puisse effectuer une mise à l'échelle
-> * Exécuter un test pour vérifier que les différents types de trafic sont dirigés vers le bon pool
+* Créer un groupe de ressources pour les ressources réseau dont vous aurez besoin
+* Créer les ressources réseau
+* Créer une passerelle d’application pour le trafic provenant de votre application
+* Spécifier des pools de serveurs et des règles d’acheminement pour les différents types de trafic
+* Créer un groupe identique pour chaque pool afin que ce dernier puisse effectuer une mise à l'échelle
+* Exécuter un test pour vérifier que les différents types de trafic sont dirigés vers le bon pool
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure PowerShell](tutorial-url-route-powershell.md) ou le [portail Azure](create-url-route-portal.md).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, cet article nécessite l’exécution d’Azure CLI version 2.0.4 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Cet tutoriel nécessite la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 

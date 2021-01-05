@@ -7,13 +7,13 @@ ms.devlang: azurecli
 ms.topic: sample
 ms.date: 11/13/2018
 ms.author: zhshang
-ms.custom: mvc
-ms.openlocfilehash: 45958f020f2e5dbdb0a50f0190aff78568865f74
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 17b8df919c5059da3f3abd7a4f06aca1eadd0817
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74158082"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94563968"
 ---
 # <a name="create-a-signalr-service"></a>Créer une ressource SignalR Service 
 
@@ -21,9 +21,9 @@ Cet exemple de script crée une ressource Azure SignalR Service dans un groupe d
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 

@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : POWER'
 description: Découvrez la fonction système SQL POWER dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 683c53c369f136ad4b917b93e9a92a71072d05e0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 39db52223feea63a4e3afbd4775f884acbbca548
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71349635"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341686"
 ---
 # <a name="power-azure-cosmos-db"></a>POWER (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne la valeur de l’expression spécifiée élevée à la puissance spécifiée.  
   
 ## <a name="syntax"></a>Syntaxe

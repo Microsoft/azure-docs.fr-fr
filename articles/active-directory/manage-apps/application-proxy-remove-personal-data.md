@@ -2,25 +2,25 @@
 title: Supprimer des données personnelles - Proxy d’application Azure Active Directory
 description: Supprimez des données personnelles des connecteurs installés sur des appareils pour des proxy d'application Azure Active Directory.
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2018
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fe97956d99bd5c677e499b532ef85a1bb4d324ef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 99fb466debd5a2ee4bb659aea3494469a8bbe8e1
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74275409"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658415"
 ---
 # <a name="remove-personal-data-for-azure-active-directory-application-proxy"></a>Supprimer des données personnelles pour des proxy d’application Azure Active Directory
 
@@ -35,7 +35,7 @@ Le proxy d’application peut écrire des données personnelles dans les types d
 
 ## <a name="remove-personal-data-from-windows-event-logs"></a>Supprimer des données personnelles de journaux des événements Windows
 
-Pour obtenir des informations sur la configuration de la conservation des données dans les journaux des événements Windows, consultez [Paramètres de journaux des événements](https://technet.microsoft.com/library/cc952132.aspx). Pour en savoir plus sur les journaux des événements Windows, consultez [Utilisation des journaux des événements](https://msdn.microsoft.com/library/windows/desktop/aa385772.aspx).
+Pour obtenir des informations sur la configuration de la conservation des données dans les journaux des événements Windows, consultez [Paramètres de journaux des événements](https://technet.microsoft.com/library/cc952132.aspx). Pour en savoir plus sur les journaux des événements Windows, consultez [Utilisation des journaux des événements](/windows/win32/wes/using-windows-event-log).
 
 [!INCLUDE [GDPR-related guidance](../../../includes/gdpr-hybrid-note.md)]
 
@@ -54,7 +54,7 @@ Utiliser les sections suivantes pour supprimer les données personnelles de jour
 
 Pour afficher ou exporter des données spécifiques, recherchez des entrées associées dans chaque journal des événements du connecteur. Les journaux d’activité se trouvent dans `C:\ProgramData\Microsoft\Microsoft AAD Application Proxy Connector\Trace`.
 
-Étant donné que les journaux d’activité sont des fichiers texte, vous pouvez utiliser [findstr](https://docs.microsoft.com/windows-server/administration/windows-commands/findstr) pour rechercher les entrées de texte associées à un utilisateur.  
+Étant donné que les journaux d’activité sont des fichiers texte, vous pouvez utiliser [findstr](/windows-server/administration/windows-commands/findstr) pour rechercher les entrées de texte associées à un utilisateur.  
 
 Pour rechercher des données personnelles, recherchez UserID (ID utilisateur) dans les fichiers journaux.
 

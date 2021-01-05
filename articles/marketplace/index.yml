@@ -1,21 +1,21 @@
 ### YamlMime:Landing
 title: Bienvenue sur la place de marché commerciale
-summary: Découvrez la place de marché commerciale, place de marché d’applications et de services en ligne qui permet à des entreprises de toutes tailles de proposer des solutions à leurs clients partout dans le monde.
+summary: Découvrez la Place de marché commerciale, une place de marché d’applications et de services en ligne qui permet à des entreprises de toutes tailles de proposer des solutions à leurs clients partout dans le monde.
 metadata:
   title: Bienvenue sur la place de marché commerciale
-  description: Découvrez la place de marché commerciale, place de marché d’applications et de services en ligne qui permet à des entreprises de toutes tailles de proposer des solutions à leurs clients partout dans le monde.
+  description: Découvrez la Place de marché commerciale, une place de marché d’applications et de services en ligne qui permet à des entreprises de toutes tailles de proposer des solutions à leurs clients partout dans le monde.
   ms.service: marketplace
   ms.subservice: partnercenter-marketplace-publisher
   ms.topic: landing-page
-  author: marleva
-  ms.author: maevan
-  ms.date: 04/02/2020
-  ms.openlocfilehash: 330dd34e19189dbcd641549f1cd42bf5c5cbaacb
-  ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+  author: mingshen-ms
+  ms.author: mingshen
+  ms.date: 09/02/2020
+  ms.openlocfilehash: 95903c1068d64545ae025fb5899a80014b8f26f2
+  ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/08/2020
-  ms.locfileid: "82983888"
+  ms.lasthandoff: 12/06/2020
+  ms.locfileid: "96746384"
 landingContent:
 - title: Utilisation de la place de marché commerciale
   linkLists:
@@ -29,14 +29,12 @@ landingContent:
       url: ./policies-terms.md
     - text: Questions fréquentes (FAQ) sur la place de marché commerciale de Microsoft
       url: ./marketplace-faq-publisher-guide.md
-    - text: Notes de publication
-      url: ./marketplace-roadmap.md
+    - text: Contrat de l’éditeur Microsoft
+      url: https://go.microsoft.com/fwlink/?LinkID=699560
 - title: Tâches et scénarios courants
   linkLists:
   - linkListType: overview
     links:
-    - text: Créer une nouvelle offre SaaS
-      url: ./partner-center-portal/create-new-saas-offer.md
     - text: Meilleures pratiques marketing
       url: ./gtm-marketing-best-practices.md
     - text: Fournisseurs de solutions cloud
@@ -47,12 +45,12 @@ landingContent:
     links:
     - text: Prospects de votre offre de place de marché
       url: ./partner-center-portal/commercial-marketplace-get-customer-leads.md
-    - text: Option Co-vente de l'Espace partenaires
-      url: ./partner-center-portal/commercial-marketplace-co-sell.md
+    - text: Option de co-vente dans la place de marché commerciale
+      url: commercial-marketplace-co-sell.md
     - text: Engagement en tant que partenaire de co-vente
       url: ./marketplace-co-sell.md
     - text: Mettre les solutions à disposition dans Microsoft AppSource et dans Office
-      url: https://docs.microsoft.com/office/dev/store/submit-to-appsource-via-partner-center
+      url: /office/dev/store/submit-to-appsource-via-partner-center
     - text: Participer au forum de la communauté de la Place de marché Azure et d’AppSource
       url: https://www.microsoftpartnercommunity.com/t5/Microsoft-AppSource-and-Azure/bd-p/2222
     - text: S’inscrire à des webinaires pour discuter ou les regarder plus tard à la demande
@@ -62,29 +60,29 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Tableau de bord Résumé
-      url: ./partner-center-portal/summary-dashboard.md
+      url: ./summary-dashboard.md
     - text: Tableau de bord des insights de la Place de marché
-      url: ./partner-center-portal/insights-dashboard.md
+      url: ./insights-dashboard.md
     - text: Tableau de bord de l’utilisation
-      url: ./partner-center-portal/usage-dashboard.md
+      url: ./usage-dashboard.md
     - text: Tableau de bord Client
-      url: ./partner-center-portal/customer-dashboard.md
+      url: ./customer-dashboard.md
     - text: Tableau de bord des commandes
-      url: ./partner-center-portal/orders-dashboard.md
+      url: ./orders-dashboard.md
     - text: Tableau de bord Téléchargements
       url: ./partner-center-portal/downloads-dashboard.md
     - text: Tableau de bord des évaluations et des avis
       url: ./partner-center-portal/ratings-reviews.md
-- title: Gérer vos offres
+- title: Créer une offre
   linkLists:
   - linkListType: how-to-guide
     links:
     - text: Offres SaaS
-      url: ./partner-center-portal/create-new-saas-offer.md
+      url: plan-saas-offer.md
     - text: Offres de machines virtuelles
       url: ./marketplace-virtual-machines.md
     - text: Offres d’application Azure
-      url: ./partner-center-portal/create-new-azure-apps-offer.md
+      url: ./create-new-azure-apps-offer.md
     - text: Offres Dynamics 365 for Customer Engagement et PowerApps
       url: ./partner-center-portal/create-new-customer-engagement-offer.md
     - text: Offres Dynamics 365 Business Central
@@ -92,21 +90,21 @@ landingContent:
     - text: Offres Dynamics 365 for Operations
       url: ./partner-center-portal/create-new-operations-offer.md
     - text: Autres types d’offre
-      url: ./cloud-partner-portal/cpp-marketplace-offers.md
+      url: ./publisher-guide-by-offer-type.md
 - title: Recevoir vos paiements
   linkLists:
   - linkListType: concept
     links:
-    - text: Rapports de paiement
-      url: ./partner-center-portal/payout-summary-overview.md
+    - text: Relevés de paiements
+      url: /partner-center/payout-statement?context=/azure/marketplace/context/context
     - text: Seuils, modes et délais de paiement
-      url: ./partner-center-portal/payment-thresholds-methods-timeframes.md
+      url: /partner-center/payment-thresholds-methods-timeframes?context=/azure/marketplace/context/context
     - text: Configurer votre compte de paiement et vos déclarations de taxe
-      url: ./partner-center-portal/set-up-your-payout-account-tax-forms.md
+      url: /partner-center/set-up-your-payout-account?context=/azure/marketplace/context/context
     - text: Détails des taxes
-      url: ./partner-center-portal/tax-details-paid-transactions.md
+      url: /partner-center/tax-details-marketplace?context=/azure/marketplace/context/context
     - text: Facturation de la Place de marché commerciale
-      url: ./partner-center-portal/billing-details.md
+      url: ./marketplace-commercial-transaction-capabilities-and-considerations.md
 - title: Informations de référence sur l'API
   linkLists:
   - linkListType: reference
@@ -116,24 +114,24 @@ landingContent:
     - text: API de service de mesure de la Place de marché
       url: ./partner-center-portal/marketplace-metering-service-apis-faq.md
     - text: Référence d’API pour le portail Cloud Partner
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-overview.md
+      url: ./cloud-partner-portal-api-overview.md
     - text: Prérequis de l’API
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-prerequisites.md
+      url: ./cloud-partner-portal-api-prerequisites.md
     - text: Récupération des offres
-      url: .//cloud-partner-portal-orig/cloud-partner-portal-api-retrieve-offers.md
+      url: ./cloud-partner-portal-api-retrieve-offers.md
     - text: Créer ou modifier une offre
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-creating-offer.md
+      url: ./cloud-partner-portal-api-creating-offer.md
     - text: Tarification des offres de machine virtuelle
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-setting-price.md
+      url: ./cloud-partner-portal-api-setting-price.md
     - text: Démarrer
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-go-live.md
+      url: ./cloud-partner-portal-api-go-live.md
 - title: Obtenir de l’aide
   linkLists:
   - linkListType: get-started
     links:
     - text: Options de support
-      url: ./partner-center-portal/support.md
+      url: ./support.md
     - text: Résoudre les erreurs d’authentification
-      url: ./cloud-partner-portal-orig/cloud-partner-portal-api-troubleshooting-authentication-errors.md
+      url: ./cloud-partner-portal-api-troubleshooting-authentication-errors.md
     - text: Disponibilité géographique et devises
       url: ./marketplace-geo-availability-currencies.md

@@ -2,14 +2,14 @@
 title: Utiliser les données Azure Blockchain Workbench dans Microsoft Power BI
 description: Découvrez comment charger et afficher les données de la base de données SQL Azure Blockchain Workbench dans Microsoft Power BI.
 ms.date: 04/22/2020
-ms.topic: article
+ms.topic: how-to
 ms.reviewer: sunri
-ms.openlocfilehash: 4245603fee5b3d24488426c3dc2d026a3c0d7848
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7e0e585ce45616c2402972c725b502f4b704d1cd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82082524"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000145"
 ---
 # <a name="using-azure-blockchain-workbench-data-with-microsoft-power-bi"></a>Utiliser les données Azure Blockchain Workbench avec Microsoft Power BI
 
@@ -41,7 +41,7 @@ Cet article contient une procédure pas à pas montrant comment se connecter à 
 
 6.  Une fois que vous êtes connecté à la base de données, la boîte de dialogue **Navigateur** affiche les tables et vues disponibles dans la base de données. Les vues sont destinées aux rapports et leurs noms sont précédés de **vw**.
 
-    ![Navigateur](./media/data-powerbi/navigator.png)
+    ![Capture d’écran de Power BI Desktop montrant la boîte de dialogue Navigateur avec l’option vwContractAction sélectionnée.](./media/data-powerbi/navigator.png)
 
 7.  Sélectionnez les vues à inclure. À des fins de démonstration, nous incluons **vwContractAction** qui fournit des détails sur les actions effectuées sur un contrat.
 

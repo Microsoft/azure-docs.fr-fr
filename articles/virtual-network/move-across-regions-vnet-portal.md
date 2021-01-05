@@ -3,15 +3,15 @@ title: Déplacer un réseau virtuel Azure vers une autre région Azure en utilis
 description: Déplacez un réseau virtuel Azure d’une région Azure vers une autre en utilisant un modèle Resource Manager et le portail Azure.
 author: asudbring
 ms.service: virtual-network
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/26/2019
 ms.author: allensu
-ms.openlocfilehash: c54725d9a947b0c912a822686d7b2cffe1a7b5c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ed3da649ba65484a79b42ba5bb45431839e123d4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75640786"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84711440"
 ---
 # <a name="move-an-azure-virtual-network-to-another-region-by-using-the-azure-portal"></a>Déplacer un réseau virtuel Azure vers une autre région en utilisant le portail Azure
 

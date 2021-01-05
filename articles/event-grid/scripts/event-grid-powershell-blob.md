@@ -1,22 +1,15 @@
 ---
 title: Azure PowerShell - S’abonner à un compte de stockage blob
 description: Cet article fournit un exemple de script Azure PowerShell qui montre comment s’abonner à des événements Event Grid pour un compte Stockage Blob.
-services: event-grid
-documentationcenter: na
-author: spelluru
-ms.service: event-grid
 ms.devlang: powershell
 ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: a8a0982ca118663cbf0f7e4d72412ce8feda3c4b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/08/2020
+ms.openlocfilehash: 15daa9843eb721ebf9caa2ae49e75fadbd0a4be8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76721436"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87460794"
 ---
 # <a name="subscribe-to-events-for-a-blob-storage-account-with-powershell"></a>S’abonner aux événements d’un compte de stockage blob avec PowerShell
 
@@ -36,9 +29,9 @@ Ce script utilise la commande suivante pour créer l’abonnement aux événemen
 
 | Commande | Notes |
 |---|---|
-| [New-AzEventGridSubscription](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
+| [New-AzEventGridSubscription](/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

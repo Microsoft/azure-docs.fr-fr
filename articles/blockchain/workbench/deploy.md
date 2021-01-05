@@ -1,15 +1,16 @@
 ---
 title: Déployer Azure Blockchain Workbench Preview
 description: Guide pratique pour déployer Azure Blockchain Workbench Preview
-ms.date: 01/08/2020
-ms.topic: article
-ms.reviewer: brendal
-ms.openlocfilehash: 141bb8825e47eb2309f9f551990a2976e8f4e209
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 07/16/2020
+ms.topic: how-to
+ms.reviewer: ravastra
+ms.custom: references_regions
+ms.openlocfilehash: b46a35b45a51d0cc76942c4ca142c4c7792a28b4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "78943200"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87077028"
 ---
 # <a name="deploy-azure-blockchain-workbench-preview"></a>Déployer Azure Blockchain Workbench Preview
 
@@ -28,7 +29,7 @@ Blockchain Workbench vous permet de déployer un registre blockchain, ainsi qu�
 * Event Grid
 * Azure Key Vault
 * Service Bus
-* SQL Database (S0 standard) + serveur logique SQL
+* SQL Database (Standard S0)
 * Compte de stockage Azure (LRS standard)
 * Groupe de machines virtuelles identiques avec capacité de 1
 * Groupe de ressources de réseau virtuel (avec Load Balancer, groupe de sécurité réseau, adresse IP publique, réseau virtuel)
@@ -40,12 +41,12 @@ Voici un exemple de déploiement créé dans le groupe de ressources **myblockch
 
 Le coût associé à Blockchain Workbench est un agrégat du coût des services Azure sous-jacents. Les informations de tarification pour les services Azure peuvent être calculées à l’aide de la [calculatrice de prix](https://azure.microsoft.com/pricing/calculator/).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Azure Blockchain Workbench requiert des inscriptions d’applications et la configuration Azure AD. Vous pouvez choisir d’effectuer les [configurations manuellement](#azure-ad-configuration) pour Azure AD avant le déploiement ou l’exécution d’un script post-déploiement. Si vous redéployez Blockchain Workbench, consultez la [configuration Azure AD](#azure-ad-configuration) pour vérifier votre configuration Azure AD.
 
 > [!IMPORTANT]
-> La solution Workbench n’a pas besoin d’être déployée dans le même locataire que celui que vous utilisez pour inscrire une application Azure AD. Elle doit être déployée dans un locataire pour lequel vous disposez d’autorisations suffisantes pour déployer des ressources. Pour plus d’informations sur les locataires Azure AD, consultez [Obtention d’un client Azure Active Directory](../../active-directory/develop/quickstart-create-new-tenant.md) et [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/quickstart-v1-integrate-apps-with-azure-ad.md).
+> La solution Workbench n’a pas besoin d’être déployée dans le même locataire que celui que vous utilisez pour inscrire une application Azure AD. Elle doit être déployée dans un locataire pour lequel vous disposez d’autorisations suffisantes pour déployer des ressources. Pour plus d’informations sur les locataires Azure AD, consultez [Obtention d’un client Azure Active Directory](../../active-directory/develop/quickstart-create-new-tenant.md) et [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/quickstart-register-app.md).
 
 ## <a name="deploy-blockchain-workbench"></a>Déployer Blockchain Workbench
 
@@ -66,10 +67,10 @@ Une fois que les étapes préalables requises ont été exécutées, vous êtes 
     | Mot de passe | Le mot de passe est utilisé pour la connexion aux machines virtuelles. |
     | SSH | Utilisez une clé publique RSA au format ligne unique et commençant par **ssh-rsa** ou utilisez le format PEM multiligne. Vous pouvez générer des clés SSH à l’aide de `ssh-keygen` sur Linux et OS X, ou à l’aide de PuTTYGen sur Windows. Pour plus d’informations sur les clés SSH, consultez [Comment utiliser des clés SSH avec Windows sur Azure](../../virtual-machines/linux/ssh-from-windows.md). |
     | Mot de passe de base de données et de Blockchain | Spécifiez le mot de passe à utiliser pour accéder à la base de données créée dans le cadre du déploiement. Le mot de passe doit remplir trois des quatre conditions suivantes : il doit comprendre entre 12 et 72 caractères, 1 caractère minuscule, 1 caractère majuscule, 1 chiffre et 1 caractère spécial qui ne soit pas le signe dièze (#), le symbole de pourcentage (%), une virgule (,), une étoile (*), un guillemet inverse (\`), un guillemet double ("), un guillemet unique ('), un tiret (-) ou un point-virgule (;) |
-    | Région du déploiement | Spécifiez où déployer les ressources Blockchain Workbench. Pour une disponibilité optimale, cette région doit correspondre au paramètre **Emplacement**. |
-    | Subscription | Spécifiez l’abonnement Azure que vous souhaitez utiliser pour votre déploiement. |
+    | Région du déploiement | Spécifiez où déployer les ressources Blockchain Workbench. Pour une disponibilité optimale, cette valeur doit correspondre au paramètre d’emplacement **Région**. Toutes les régions ne sont pas disponibles pendant la préversion. Les fonctionnalités peuvent ne pas être disponibles dans certaines régions. Azure Blockchain Data Manager est disponible dans les régions Azure suivantes : USA Est et Europe Ouest.|
+    | Abonnement | Spécifiez l’abonnement Azure que vous souhaitez utiliser pour votre déploiement. |
     | Groupes de ressources | Créez un groupe de ressources en sélectionnant **Créer** et donnez un nom unique au groupe de ressources. |
-    | Location | Spécifiez la région où vous souhaitez déployer l’infrastructure. |
+    | Emplacement | Spécifiez la région où vous souhaitez déployer l’infrastructure. |
 
 1. Sélectionnez **OK** à la fin de la section de configuration du paramètre de base.
 
@@ -84,7 +85,7 @@ Une fois que les étapes préalables requises ont été exécutées, vous êtes 
     | Paramètre | Description  |
     |---------|--------------|
     | Niveau tarifaire d’Azure Blockchain Service | Choisissez le niveau **De base** ou **Standard** d’Azure Blockchain Service qui est utilisé pour Blockchain Workbench |
-    | Paramètres Azure Active Directory | Choisissez **Ajouter ultérieurement**.</br>Remarque : si vous avez choisi de [préconfigurer Azure AD](#azure-ad-configuration) ou si vous redéployez, choisissez *Ajouter maintenant*. |
+    | Paramètres Azure Active Directory | Choisissez **Ajouter ultérieurement**.</br>Remarque : Si vous avez choisi de [préconfigurer Azure AD](#azure-ad-configuration) ou si vous redéployez, optez pour *Ajouter maintenant*. |
     | Sélection de machine virtuelle | Sélectionnez le niveau de performance de stockage préféré et la taille de machine virtuelle pour votre réseau blockchain. Choisissez une plus petite taille de machine virtuelle, comme *Standard DS1 v2*, si vous êtes sur un abonnement doté de limites de service faibles, tel que l’abonnement gratuit d’Azure. |
 
     Pour **Utiliser l’existant** :
@@ -103,10 +104,10 @@ Une fois que les étapes préalables requises ont été exécutées, vous êtes 
      | Paramètre | Description  |
      |---------|--------------|
      | Point de terminaison Ethereum RPC | Indiquez le point de terminaison RPC d’un réseau blockchain PoA existant. Le point de terminaison commence par https:// ou http:// et se termine par un numéro de port. Par exemple : `http<s>://<network-url>:<port>` |
-     | Paramètres Azure Active Directory | Choisissez **Ajouter ultérieurement**.</br>Remarque : si vous avez choisi de [préconfigurer Azure AD](#azure-ad-configuration) ou si vous redéployez, choisissez *Ajouter maintenant*. |
+     | Paramètres Azure Active Directory | Choisissez **Ajouter ultérieurement**.</br>Remarque : Si vous avez choisi de [préconfigurer Azure AD](#azure-ad-configuration) ou si vous redéployez, optez pour *Ajouter maintenant*. |
      | Sélection de machine virtuelle | Sélectionnez le niveau de performance de stockage préféré et la taille de machine virtuelle pour votre réseau blockchain. Choisissez une plus petite taille de machine virtuelle, comme *Standard DS1 v2*, si vous êtes sur un abonnement doté de limites de service faibles, tel que l’abonnement gratuit d’Azure. |
 
-1. Sélectionnez **OK** pour terminer les Paramètres avancés.
+1. Sélectionnez **Vérifier + créer** pour terminer la configuration de Paramètres avancés.
 
 1. Passez en revue le récapitulatif pour vérifier que vos paramètres sont corrects.
 
@@ -177,7 +178,6 @@ Si vous choisissez de configurer manuellement ou de vérifier les paramètres Az
 
 Le déploiement de Blockchain Workbench nécessite l’inscription d’une application Azure AD. Vous avez besoin d’un locataire Azure Active Directory (Azure AD) pour inscrire l’application. Vous pouvez utiliser un locataire existant ou en créer un. Si vous utilisez un locataire Azure AD existant, vous avez besoin d’autorisations suffisantes pour inscrire les applications, accorder les autorisations API Graph et autoriser l’accès des invités au sein d’un locataire Azure AD. Si vous n’avez pas d’autorisations suffisantes dans un locataire Azure AD existant, créez un locataire.
 
-
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 1. Sélectionnez votre compte en haut à droite, puis basculez vers le locataire Azure AD souhaité. Le locataire doit être locataire de l’administrateur de l’abonnement où Azure Blockchain Workbench est déployé et vous devez disposer d’autorisations suffisantes pour inscrire les applications.
 1. Sélectionnez le service **Azure Active Directory** dans le volet de navigation gauche. Sélectionnez **Inscription d’applications** > **Nouvelle inscription**.
@@ -194,11 +194,9 @@ Le déploiement de Blockchain Workbench nécessite l’inscription d’une appli
 
 Ensuite, vous devez modifier le manifeste pour utiliser des rôles d’application dans Azure AD afin de spécifier les administrateurs Blockchain Workbench.  Pour plus d’informations sur les manifestes de l’application, consultez [Manifeste de l’application Azure Active Directory](../../active-directory/develop/reference-app-manifest.md).
 
-
 1. Un GUID est requis pour le manifeste. Vous pouvez générer un GUID à l’aide de la commande PowerShell `[guid]::NewGuid()` ou `New-GUID` cmdlet. Une autre option consiste à utiliser un site web générateur de GUID.
 1. Pour l’application que vous avez inscrite, sélectionnez **Manifeste** dans la section **Gérer**.
-1. Vous vous apprêtez à mettre à jour la section **appRoles** du manifeste. Remplacez `"appRoles": []` par le fichier JSON fourni. Remplacez la valeur du champ **id** par le GUID que vous avez généré. 
-
+1. Vous vous apprêtez à mettre à jour la section **appRoles** du manifeste. Remplacez `"appRoles": []` par le fichier JSON fourni. Remplacez la valeur du champ `id` par le GUID que vous avez généré.
     ![Modifier le manifeste](media/deploy/edit-manifest.png)
 
     ``` json
@@ -262,7 +260,7 @@ L’ID de l’application et les informations du locataire sont requis pour le d
 
 ### <a name="get-tenant-domain-name"></a>Obtenir un nom de domaine de locataire
 
-Rassemblez et stockez le nom de domaine du locataire Active Directory où les applications sont inscrites. 
+Rassemblez et stockez le nom de domaine du locataire Active Directory où les applications sont inscrites.
 
 Sélectionnez le service **Azure Active Directory** dans le volet de navigation gauche. Sélectionnez **Noms de domaine personnalisés**. Copiez et stockez le nom de domaine.
 
@@ -299,7 +297,7 @@ Une fois Azure Blockchain Workbench déployé, vous devez configurer **l’URL d
 
 Lorsqu’un déploiement n’est plus nécessaire, vous pouvez le supprimer en supprimant le groupe de ressources Blockchain Workbench.
 
-1. Dans le portail Azure, accédez à **Groupe de ressources** dans le volet de navigation de gauche et sélectionnez le groupe de ressources que vous souhaitez supprimer. 
+1. Dans le portail Azure, accédez à **Groupe de ressources** dans le volet de navigation de gauche et sélectionnez le groupe de ressources que vous souhaitez supprimer.
 1. Sélectionnez **Supprimer le groupe de ressources**. Validez la suppression en entrant le nom du groupe de ressources, puis sélectionnez **Supprimer**.
 
     ![Supprimer un groupe de ressources](media/deploy/delete-resource-group.png)

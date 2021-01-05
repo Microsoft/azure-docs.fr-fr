@@ -4,15 +4,14 @@ description: Le modèle de déploiement Classic, désormais remplacé par le mod
 author: sowmyavenkat86
 ms.author: svenkat
 ms.date: 01/27/2020
-ms.topic: article
-ms.service: azure-supportability
+ms.topic: how-to
 ms.assetid: ce37c848-ddd9-46ab-978e-6a1445728a3b
-ms.openlocfilehash: a3d5106cafc1d3bfe77f3e42e85cedb668fc4fa0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b5b5e8c11bfe164aaa3539742dac8c4d267c69e1
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76835586"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745602"
 ---
 # <a name="classic-deployment-model"></a>Modèle de déploiement classique
 

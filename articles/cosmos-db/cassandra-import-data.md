@@ -9,14 +9,15 @@ ms.subservice: cosmosdb-cassandra
 ms.topic: tutorial
 ms.date: 12/03/2018
 ms.custom: seodec18
-ms.openlocfilehash: b450d8463c09647b8f87547afe9d714c4b8659c4
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: bd2d27addb6860e49ac12eb36d8b625b8bf92001
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858563"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93100403"
 ---
 # <a name="tutorial-migrate-your-data-to-cassandra-api-account-in-azure-cosmos-db"></a>Tutoriel : Migrer vos données vers un compte d'API Cassandra dans Azure Cosmos DB
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Si vous êtes développeur, vous avez peut-être des charges de travail Cassandra exécutées localement ou dans le cloud que vous aimeriez faire migrer vers Azure. Vous pouvez migrer de telles charges de travail vers un compte d’API Cassandra dans Azure Cosmos DB. Ce tutoriel fournit des instructions sur les différentes options permettant de migrer des données Apache Cassandra vers le compte d’API Cassandra dans Azure Cosmos DB.
 
@@ -66,7 +67,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 * **Augmenter le débit :** la durée de la migration de vos données dépend de la quantité de débit que vous avez provisionnée pour les tables dans Azure Cosmos DB. Augmentez le débit pendant la durée de la migration. Si le débit est plus élevé, vous pouvez éviter la limitation de débit et procéder à une migration plus rapide. Une fois que vous avez effectué la migration, diminuez le débit pour réduire les coûts. Il est également recommandé d’avoir le compte Azure Cosmos dans la même région que votre base de données source. 
 
-* **Activer TLS** : Azure Cosmos DB obéit à des normes et à des exigences strictes en matière de sécurité. Veillez à activer TLS lorsque vous interagissez avec votre compte. Quand vous utilisez CQL avec SSH, vous pouvez fournir des informations sur TLS.
+* **Activer TLS**  : Azure Cosmos DB obéit à des normes et à des exigences strictes en matière de sécurité. Veillez à activer TLS lorsque vous interagissez avec votre compte. Quand vous utilisez CQL avec SSH, vous pouvez fournir des informations sur TLS.
 
 ## <a name="options-to-migrate-data"></a>Options pour migrer des données
 
@@ -105,7 +106,7 @@ La migration de données par le biais de tâches Spark est une solution recomman
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Dès que vous n’en avez plus besoin, vous pouvez supprimer le groupe de ressources, le compte Azure Cosmos et toutes les ressources associées. Pour cela, sélectionnez le groupe de ressources de la machine virtuelle, sélectionnez **Supprimer**, puis confirmez le nom du groupe de ressources à supprimer.
+Dès que vous n’en avez plus besoin, vous pouvez supprimer le groupe de ressources, le compte Azure Cosmos et toutes les ressources associées. Pour cela, sélectionnez le groupe de ressources de la machine virtuelle, sélectionnez **Supprimer** , puis confirmez le nom du groupe de ressources à supprimer.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

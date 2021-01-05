@@ -1,7 +1,7 @@
 ---
 title: Vue d'ensemble de la documentation de Microsoft Security Code Analysis
-description: Cet article est une vue d'ensemble de l'extension Microsoft Security Code Analysis.
-author: vharindra
+description: En savoir plus sur l’extension Microsoft Security Code Analysis. Grâce à cette extension, vous pouvez ajouter l’analyse du code de sécurité aux pipelines CI/CD Azure DevOps.
+author: sukhans
 manager: sukhans
 ms.author: terrylan
 ms.date: 07/31/2019
@@ -12,12 +12,12 @@ ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.openlocfilehash: 963bc909b69962cded0a50d717e3a653d3d69769
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a3af3307892e82ecd0697124954e99837ad5eb9e
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74851466"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94515691"
 ---
 # <a name="about-microsoft-security-code-analysis"></a>À propos de Microsoft Security Code Analysis
 
@@ -39,7 +39,7 @@ L'ajout d'outils Microsoft Security Code Analysis à votre pipeline Azure DevOps
 
 ### <a name="clean-builds"></a>Des builds propres
 
-Après avoir résolu les problèmes initiaux signalés par les outils, vous pouvez configurer l’extension pour interrompre les builds en cas de nouveaux problèmes. La configuration de builds d'intégration continue sur chaque demande de tirage (pull request) est simple.
+Après avoir résolu les problèmes initiaux signalés par les outils, vous pouvez configurer l’extension pour interrompre les builds en cas de nouveaux problèmes.  La configuration de builds d'intégration continue sur chaque demande de tirage (pull request) est simple.
 
 ### <a name="set-it-and-forget-it"></a>Définissez-la, puis oubliez-la
 
@@ -71,13 +71,9 @@ BinSkim est un outil d'analyse léger et exécutable qui vérifie les paramètre
 
 Les mots de passe et autres secrets stockés dans le code source constituent un problème important. Credential Scanner est un outil d'analyse statique propriétaire qui permet de résoudre ce problème. Cet outil détecte les informations d'identification, les secrets, les certificats et tout autre contenu sensible dans votre code source et dans la sortie de votre build.
 
-### <a name="microsoft-security-risk-detection"></a>Microsoft Security Risk Detection
-
-Microsoft Security Risk Detection (MSRD) est un service basé sur le cloud destiné aux tests à données aléatoires (fuzzing). Il identifie les bogues de sécurité exploitables dans les logiciels. Ce service requiert un abonnement et une activation séparés. Pour plus d'informations, consultez le [Centre pour développeurs MSRD](https://docs.microsoft.com/security-risk-detection/).
-
 ### <a name="roslyn-analyzers"></a>Analyseurs Roslyn
 
-Roslyn Analyzers est un outil intégré au compilateur de Microsoft qui permet une analyse statique du code C# et Visual Basic managé. Pour plus d'informations, consultez [Analyseurs basés sur Roslyn](https://docs.microsoft.com/dotnet/standard/analyzers/).
+Roslyn Analyzers est un outil intégré au compilateur de Microsoft qui permet une analyse statique du code C# et Visual Basic managé. Pour plus d'informations, consultez [Analyseurs basés sur Roslyn](/dotnet/fundamentals/code-analysis/quality-rules/security-warnings).
 
 ### <a name="tslint"></a>TSLint
 

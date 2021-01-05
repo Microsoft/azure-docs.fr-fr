@@ -14,17 +14,20 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: b1f8b158c511919a72e72629d72b0e5ff73ff7db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 88d21c7ee092f8d4971770699bdcade4bf40039d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78268111"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89267800"
 ---
-# <a name="use-media-services-to-deliver-drm-licenses-or-aes-keys"></a>Utiliser Media Services pour fournir des licences DRM ou des clés AES 
+# <a name="use-media-services-to-deliver-drm-licenses-or-aes-keys"></a>Utiliser Media Services pour fournir des licences DRM ou des clés AES
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Azure Media Services vous permet de recevoir, d’encoder, d’ajouter une protection de contenu et de diffuser votre contenu. Pour plus d’informations, consultez [Utiliser le chiffrement commun dynamique PlayReady et/ou Widevine](media-services-protect-with-playready-widevine.md). Certains clients souhaitent utiliser Media Services uniquement pour fournir des licences et/ou des clés et encoder, chiffrer et diffuser à l’aide de leurs serveurs locaux. Cet article décrit comment vous pouvez utiliser Media Services pour fournir des licences PlayReady et/ou Widevine et exécuter les autres opérations avec vos serveurs locaux. 
 

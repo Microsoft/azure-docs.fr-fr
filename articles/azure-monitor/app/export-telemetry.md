@@ -2,37 +2,39 @@
 title: Exportation continue des données de télémétrie d’Application Insights | Microsoft Docs
 description: Exportez les données de diagnostic et les données d’utilisation dans le stockage Microsoft Azure et téléchargez-les à partir de là.
 ms.topic: conceptual
-ms.date: 03/25/2020
-ms.openlocfilehash: f6afe42e483ab7ad5810169fc301946c75308c29
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 05/26/2020
+ms.openlocfilehash: f67a5c555c438298cee701ca065aaf8c01c6406e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80298284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87324333"
 ---
 # <a name="export-telemetry-from-application-insights"></a>Exporter la télémétrie depuis Application Insights
 Vous souhaitez conserver votre télémétrie plus longtemps que la période de rétention standard ? Ou la traiter d’une façon spécialisée ? L’exportation continue est idéale dans ce cas. Les événements que vous voyez dans le portail Application Insights peuvent être exportés vers le stockage Microsoft Azure au format JSON. À partir de là, vous pouvez télécharger vos données et écrire le code dont vous avez besoin pour les traiter.  
+
+> [!NOTE]
+> L’exportation continue est uniquement prise en charge pour les ressources Application Insights classiques. [Les ressources Application Insights basées sur un espace de travail](./create-workspace-resource.md) doivent utiliser des [paramètres de diagnostic](./create-workspace-resource.md#export-telemetry).
+>
 
 Avant de configurer l’exportation continue, d’autres options doivent être prises en considération :
 
 * Le bouton Exporter en haut d’un onglet de métriques ou de recherche permet de transférer des tables et des graphiques dans une feuille de calcul Excel.
 
-* [Analytics](../../azure-monitor/app/analytics.md) fournit un puissant langage de requête pour la télémétrie et peut également en exporter les résultats.
-* Si vous cherchez à [explorer vos données dans Power BI](../../azure-monitor/app/export-power-bi.md ), vous pouvez le faire sans utiliser l’exportation continue.
+* [Analytics](../log-query/log-query-overview.md) fournit un puissant langage de requête pour la télémétrie et peut également en exporter les résultats.
+* Si vous cherchez à [explorer vos données dans Power BI](./export-power-bi.md), vous pouvez le faire sans utiliser l’exportation continue.
 * [L’API REST d’accès aux données](https://dev.applicationinsights.io/) vous permet d’accéder à vos données de télémétrie par programme.
-* Vous pouvez également configurer [l’exportation continue par le biais de Powershell](https://docs.microsoft.com/powershell/module/az.applicationinsights/new-azapplicationinsightscontinuousexport).
+* Vous pouvez également configurer [l’exportation continue par le biais de Powershell](/powershell/module/az.applicationinsights/new-azapplicationinsightscontinuousexport).
 
-Une fois que l’exportation continue a copié vos données vers l’espace de stockage (où elles peuvent rester aussi longtemps que vous le souhaitez), elles restent disponibles dans Application Insights pendant la [période de rétention](../../azure-monitor/app/data-retention-privacy.md) habituelle.
+Une fois que l’exportation continue a copié vos données vers l’espace de stockage (où elles peuvent rester aussi longtemps que vous le souhaitez), elles restent disponibles dans Application Insights pendant la [période de rétention](./data-retention-privacy.md) habituelle.
 
 ## <a name="continuous-export-advanced-storage-configuration"></a>Configuration de stockage avancée de l’exportation continue
 
 L’exportation continue **ne prend pas en charge** les fonctionnalités/configurations de stockage Azure suivantes :
 
-* [Pare-feu de réseau virtuel/Stockage Azure](https://docs.microsoft.com/azure/storage/common/storage-network-security) utilisés conjointement avec le Stockage Blob Azure.
+* [Pare-feu de réseau virtuel/Stockage Azure](../../storage/common/storage-network-security.md) utilisés conjointement avec le Stockage Blob Azure.
 
-* [Stockage immuable](https://docs.microsoft.com/azure/storage/blobs/storage-blob-immutable-storage) pour le Stockage Blob Azure.
-
-* [Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-introduction).
+* [Azure Data Lake Storage Gen2](../../storage/blobs/data-lake-storage-introduction.md).
 
 ## <a name="create-a-continuous-export"></a><a name="setup"></a> Créez une exportation continue.
 
@@ -49,7 +51,8 @@ L’exportation continue **ne prend pas en charge** les fonctionnalités/configu
 
 4. Créez ou sélectionnez un conteneur dans votre stockage.
 
-Une fois que vous avez créé l’exportation, elle démarre. Vous n’obtenez que les données qui arrivent après la création de l’exportation.
+> [!NOTE]
+> Une fois votre exportation créée, les données nouvellement ingérées commencent à circuler vers Stockage Blob Azure. L’exportation continue transmet uniquement les nouvelles données de télémétrie créées/ingérées après activation de l’exportation continue. Les données présentes avant l’activation de l’exportation continue ne sont pas exportées, et il n’existe aucun moyen permettant d’exporter rétroactivement des données créées précédemment à l’aide de l’exportation continue.
 
 Il peut y avoir un délai d'environ une heure avant que les données n’apparaissent dans le stockage.
 
@@ -57,13 +60,13 @@ Une fois la première exportation terminée, vous trouverez une structure simila
 
 |Nom | Description |
 |:----|:------|
-| [Disponibilité](export-data-model.md#availability) | Consigne les [tests web de disponibilité](../../azure-monitor/app/monitor-web-app-availability.md).  |
-| [Event](export-data-model.md#events) | Événements personnalisés générés par [TrackEvent()](../../azure-monitor/app/api-custom-events-metrics.md#trackevent). 
-| [Exceptions](export-data-model.md#exceptions) |Signale des [exceptions](../../azure-monitor/app/asp-net-exceptions.md) sur le serveur et dans le navigateur.
-| [Messages](export-data-model.md#trace-messages) | Envoyé par [TrackTrace](../../azure-monitor/app/api-custom-events-metrics.md#tracktrace) et par les [adaptateurs de journalisation](../../azure-monitor/app/asp-net-trace-logs.md).
+| [Disponibilité](export-data-model.md#availability) | Consigne les [tests web de disponibilité](./monitor-web-app-availability.md).  |
+| [Event](export-data-model.md#events) | Événements personnalisés générés par [TrackEvent()](./api-custom-events-metrics.md#trackevent). 
+| [Exceptions](export-data-model.md#exceptions) |Signale des [exceptions](./asp-net-exceptions.md) sur le serveur et dans le navigateur.
+| [Messages](export-data-model.md#trace-messages) | Envoyé par [TrackTrace](./api-custom-events-metrics.md#tracktrace) et par les [adaptateurs de journalisation](./asp-net-trace-logs.md).
 | [Métriques](export-data-model.md#metrics) | Généré par les appels d’API des métriques.
 | [PerformanceCounters](export-data-model.md) | Compteurs de performances collectés par Application Insights.
-| [Demandes](export-data-model.md#requests)| Envoyées par [TrackRequest](../../azure-monitor/app/api-custom-events-metrics.md#trackrequest). Les modules standard les utilisent pour consigner le temps de réponse du serveur, mesuré sur le serveur.| 
+| [Demandes](export-data-model.md#requests)| Envoyées par [TrackRequest](./api-custom-events-metrics.md#trackrequest). Les modules standard les utilisent pour consigner le temps de réponse du serveur, mesuré sur le serveur.| 
 
 ### <a name="to-edit-continuous-export"></a>Pour modifier une exportation continue
 
@@ -81,14 +84,14 @@ Pour arrêter définitivement l’exportation, supprimez-la simplement. Cette op
 ## <a name="what-events-do-you-get"></a><a name="analyze"></a> Quels sont les événements que vous obtenez ?
 Les données exportées sont les données de télémétrie brutes que nous recevons de votre application. Toutefois, nous ajoutons les données d’emplacement que nous calculons à partir de l’adresse IP du client.
 
-Les données qui ont été ignorées par l’ [échantillonnage](../../azure-monitor/app/sampling.md) ne sont pas incluses dans les données exportées.
+Les données qui ont été ignorées par l’ [échantillonnage](./sampling.md) ne sont pas incluses dans les données exportées.
 
 Les autres mesures calculées ne sont pas incluses. Par exemple, nous n’exportons pas l’utilisation moyenne du processeur, mais nous exportons la télémétrie brute à partir de laquelle la moyenne est calculée.
 
-Les données incluent également les résultats de n’importe quel [test web de disponibilité](../../azure-monitor/app/monitor-web-app-availability.md) que vous avez configuré.
+Les données incluent également les résultats de n’importe quel [test web de disponibilité](./monitor-web-app-availability.md) que vous avez configuré.
 
 > [!NOTE]
-> **Échantillonnage.** Si votre application envoie beaucoup de données, la fonctionnalité d’échantillonnage peut fonctionner et envoyer seulement une partie des données de télémétrie générées. [En savoir plus sur l'échantillonnage.](../../azure-monitor/app/sampling.md)
+> **Échantillonnage.** Si votre application envoie beaucoup de données, la fonctionnalité d’échantillonnage peut fonctionner et envoyer seulement une partie des données de télémétrie générées. [En savoir plus sur l'échantillonnage.](./sampling.md)
 >
 >
 
@@ -105,7 +108,9 @@ La date et l’heure sont au format UTC et correspondent au moment où la télé
 
 Voici le format du chemin d’accès :
 
-    $"{applicationName}_{instrumentationKey}/{type}/{blobDeliveryTimeUtc:yyyy-MM-dd}/{ blobDeliveryTimeUtc:HH}/{blobId}_{blobCreationTimeUtc:yyyyMMdd_HHmmss}.blob"
+```console
+$"{applicationName}_{instrumentationKey}/{type}/{blobDeliveryTimeUtc:yyyy-MM-dd}/{ blobDeliveryTimeUtc:HH}/{blobId}_{blobCreationTimeUtc:yyyyMMdd_HHmmss}.blob"
+```
 
 Where
 
@@ -115,37 +120,41 @@ Where
 ## <a name="data-format"></a><a name="format"></a> Format de données
 * Chaque objet blob est un fichier texte qui contient plusieurs lignes séparées par des \n. Il contient les données de télémétrie traitées sur une période de trente secondes environ.
 * Chaque ligne représente un point de données de télémétrie, par exemple une demande ou un affichage de page.
-* Chaque ligne est un document JSON sans mise en forme. Si vous souhaitez l'examiner, ouvrez-le dans Visual Studio et choisissez Modifier, Options avancées, Formater le fichier :
+* Chaque ligne est un document JSON sans mise en forme. Si vous souhaitez afficher les lignes, ouvrez le blob dans Visual Studio et choisissez **Modifier** > **le fichier de format** > **avancé** :
 
-![Consultez la télémétrie avec un outil approprié.](./media/export-telemetry/06-json.png)
+   ![Consultez la télémétrie avec un outil approprié.](./media/export-telemetry/06-json.png)
 
 Les durées sont exprimées en nombre de cycles, où 10 000 cycles = 1 ms. Par exemple, ces valeurs indiquent une durée de 1 ms pour envoyer une demande à partir du navigateur, 3 ms pour la recevoir et 1,8 s pour traiter la page dans le navigateur :
 
-    "sendRequest": {"value": 10000.0},
-    "receiveRequest": {"value": 30000.0},
-    "clientProcess": {"value": 17970000.0}
+```json
+"sendRequest": {"value": 10000.0},
+"receiveRequest": {"value": 30000.0},
+"clientProcess": {"value": 17970000.0}
+```
 
 [Référence de modèle de données détaillé pour les valeurs et types de propriétés.](export-data-model.md)
 
 ## <a name="processing-the-data"></a>Traitement des données
 À petite échelle, vous pouvez écrire du code pour décomposer vos données, les lire dans une feuille de calcul et ainsi de suite. Par exemple :
 
-    private IEnumerable<T> DeserializeMany<T>(string folderName)
-    {
-      var files = Directory.EnumerateFiles(folderName, "*.blob", SearchOption.AllDirectories);
-      foreach (var file in files)
+```csharp
+private IEnumerable<T> DeserializeMany<T>(string folderName)
+{
+   var files = Directory.EnumerateFiles(folderName, "*.blob", SearchOption.AllDirectories);
+   foreach (var file in files)
+   {
+      using (var fileReader = File.OpenText(file))
       {
-         using (var fileReader = File.OpenText(file))
+         string fileContent = fileReader.ReadToEnd();
+         IEnumerable<string> entities = fileContent.Split('\n').Where(s => !string.IsNullOrWhiteSpace(s));
+         foreach (var entity in entities)
          {
-            string fileContent = fileReader.ReadToEnd();
-            IEnumerable<string> entities = fileContent.Split('\n').Where(s => !string.IsNullOrWhiteSpace(s));
-            foreach (var entity in entities)
-            {
-                yield return JsonConvert.DeserializeObject<T>(entity);
-            }
+            yield return JsonConvert.DeserializeObject<T>(entity);
          }
       }
-    }
+   }
+}
+```
 
 Pour obtenir un exemple de code plus long, consultez [Utilisation d’un rôle de travail][exportasa].
 
@@ -201,5 +210,6 @@ L’exportation continue redémarre.
 
 <!--Link references-->
 
-[exportasa]: ../../azure-monitor/app/code-sample-export-sql-stream-analytics.md
-[roles]: ../../azure-monitor/app/resources-roles-access-control.md
+[exportasa]: ./code-sample-export-sql-stream-analytics.md
+[roles]: ./resources-roles-access-control.md
+

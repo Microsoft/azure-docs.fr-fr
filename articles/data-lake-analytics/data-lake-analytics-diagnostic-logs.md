@@ -1,19 +1,15 @@
 ---
 title: Activer et afficher les journaux de diagnostic d’Azure Data Lake Analytics
 description: Découvrez comment configurer les journaux de diagnostic pour Azure Data Lake Analytics et comment y accéder.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: jasonwhowell
-ms.author: jasonh
-ms.assetid: cf5633d4-bc43-444e-90fc-f90fbd0b7935
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/12/2018
-ms.openlocfilehash: 7fd88383e909ebd6be64c22721b813946e37179e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cd339729f2300ff7e13e7422bf73373b4ce4658e
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60616493"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221007"
 ---
 # <a name="accessing-diagnostic-logs-for-azure-data-lake-analytics"></a>Accès aux journaux de diagnostic d’Azure Data Lake Analytics
 
@@ -29,7 +25,7 @@ La journalisation de diagnostic vous permet de collecter les pistes d’audit d�
 
 2. Ouvrez votre compte Data Lake Analytics et sélectionnez **Journaux de diagnostic** dans la section __Surveiller__. Ensuite, sélectionnez __Activer les diagnostics__.
 
-    ![Activer les diagnostics pour collecter des journaux d’activité d’audit et de requêtes](./media/data-lake-analytics-diagnostic-logs/turn-on-logging.png)
+    ![Capture d’écran montrant l’action « Journaux de diagnostic » sélectionnée et « Activer les diagnostics pour collecter les journaux suivants » en évidence.](./media/data-lake-analytics-diagnostic-logs/turn-on-logging.png)
 
 3. Dans __Paramètres de diagnostic__, entrez un __Nom__ pour cette configuration de journalisation, puis sélectionnez les options de journalisation.
 
@@ -60,32 +56,34 @@ La journalisation de diagnostic vous permet de collecter les pistes d’audit d�
 
 2. Les journaux d’activité sont stockés dans ces conteneurs, selon la structure de fichiers suivante :
 
-        resourceId=/
-          SUBSCRIPTIONS/
-            <<SUBSCRIPTION_ID>>/
-              RESOURCEGROUPS/
-                <<RESOURCE_GRP_NAME>>/
-                  PROVIDERS/
-                    MICROSOFT.DATALAKEANALYTICS/
-                      ACCOUNTS/
-                        <DATA_LAKE_ANALYTICS_NAME>>/
-                          y=####/
-                            m=##/
-                              d=##/
-                                h=##/
-                                  m=00/
-                                    PT1H.json
+   ```text
+   resourceId=/
+     SUBSCRIPTIONS/
+       <<SUBSCRIPTION_ID>>/
+         RESOURCEGROUPS/
+           <<RESOURCE_GRP_NAME>>/
+             PROVIDERS/
+               MICROSOFT.DATALAKEANALYTICS/
+                 ACCOUNTS/
+                   <DATA_LAKE_ANALYTICS_NAME>>/
+                     y=####/
+                       m=##/
+                         d=##/
+                           h=##/
+                             m=00/
+                               PT1H.json
+   ```
 
    > [!NOTE]
    > Le panneau `##` dans le chemin d’accès contiennent l’année, le mois, le jour et l’heure auxquels le journal a été créé. Data Lake Analytics crée un fichier toutes les heures, par conséquent, `m=` contient toujours une valeur de `00`.
 
     Par exemple, le chemin d’accès complet à un journal d’audit peut être :
 
-        https://adllogs.blob.core.windows.net/insights-logs-audit/resourceId=/SUBSCRIPTIONS/<sub-id>/RESOURCEGROUPS/myresourcegroup/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/mydatalakeanalytics/y=2016/m=07/d=18/h=04/m=00/PT1H.json
+    `https://adllogs.blob.core.windows.net/insights-logs-audit/resourceId=/SUBSCRIPTIONS/<sub-id>/RESOURCEGROUPS/myresourcegroup/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/mydatalakeanalytics/y=2016/m=07/d=18/h=04/m=00/PT1H.json`
 
     De même, le chemin d’accès complet à un journal de demande peut être :
 
-        https://adllogs.blob.core.windows.net/insights-logs-requests/resourceId=/SUBSCRIPTIONS/<sub-id>/RESOURCEGROUPS/myresourcegroup/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/mydatalakeanalytics/y=2016/m=07/d=18/h=14/m=00/PT1H.json
+    `https://adllogs.blob.core.windows.net/insights-logs-requests/resourceId=/SUBSCRIPTIONS/<sub-id>/RESOURCEGROUPS/myresourcegroup/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/mydatalakeanalytics/y=2016/m=07/d=18/h=14/m=00/PT1H.json`
 
 ## <a name="log-structure"></a>Structure journal
 
@@ -95,33 +93,35 @@ Les journaux d’activité d’audit et de demande présentent un format JSON st
 
 Voici un exemple d’entrée dans le journal de demande au format JSON. Chaque objet blob a un objet racine appelé **enregistrements** qui contient un tableau d’objets du journal.
 
+```json
+{
+"records":
+  [
+    . . . .
+    ,
     {
-    "records":
-      [        
-        . . . .
-        ,
-        {
-             "time": "2016-07-07T21:02:53.456Z",
-             "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/<data_lake_analytics_account_name>",
-             "category": "Requests",
-             "operationName": "GetAggregatedJobHistory",
-             "resultType": "200",
-             "callerIpAddress": "::ffff:1.1.1.1",
-             "correlationId": "4a11c709-05f5-417c-a98d-6e81b3e29c58",
-             "identity": "1808bd5f-62af-45f4-89d8-03c5e81bac30",
-             "properties": {
-                 "HttpMethod":"POST",
-                 "Path":"/JobAggregatedHistory",
-                 "RequestContentLength":122,
-                 "ClientRequestId":"3b7adbd9-3519-4f28-a61c-bd89506163b8",
-                 "StartTime":"2016-07-07T21:02:52.472Z",
-                 "EndTime":"2016-07-07T21:02:53.456Z"
-                 }
-        }
-        ,
-        . . . .
-      ]
+         "time": "2016-07-07T21:02:53.456Z",
+         "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/<data_lake_analytics_account_name>",
+         "category": "Requests",
+         "operationName": "GetAggregatedJobHistory",
+         "resultType": "200",
+         "callerIpAddress": "::ffff:1.1.1.1",
+         "correlationId": "4a11c709-05f5-417c-a98d-6e81b3e29c58",
+         "identity": "1808bd5f-62af-45f4-89d8-03c5e81bac30",
+         "properties": {
+             "HttpMethod":"POST",
+             "Path":"/JobAggregatedHistory",
+             "RequestContentLength":122,
+             "ClientRequestId":"3b7adbd9-3519-4f28-a61c-bd89506163b8",
+             "StartTime":"2016-07-07T21:02:52.472Z",
+             "EndTime":"2016-07-07T21:02:53.456Z"
+             }
     }
+    ,
+    . . . .
+  ]
+}
+```
 
 #### <a name="request-log-schema"></a>Schéma du journal de requête
 
@@ -152,28 +152,26 @@ Voici un exemple d’entrée dans le journal de demande au format JSON. Chaque o
 
 Voici un exemple d’entrée dans le journal d’audit au format JSON. Chaque objet blob a un objet racine appelé **enregistrements** qui contient un tableau d’objets du journal.
 
+```json
+{
+"records":
+  [
     {
-    "records":
-      [        
-        . . . .
-        ,
-        {
-             "time": "2016-07-28T19:15:16.245Z",
-             "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/<data_lake_ANALYTICS_account_name>",
-             "category": "Audit",
-             "operationName": "JobSubmitted",
-             "identity": "user@somewhere.com",
-             "properties": {
-                 "JobId":"D74B928F-5194-4E6C-971F-C27026C290E6",
-                 "JobName": "New Job",
-                 "JobRuntimeName": "default",
-                 "SubmitTime": "7/28/2016 7:14:57 PM"
-                 }
-        }
-        ,
-        . . . .
-      ]
+         "time": "2016-07-28T19:15:16.245Z",
+         "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKEANALYTICS/ACCOUNTS/<data_lake_ANALYTICS_account_name>",
+         "category": "Audit",
+         "operationName": "JobSubmitted",
+         "identity": "user@somewhere.com",
+         "properties": {
+             "JobId":"D74B928F-5194-4E6C-971F-C27026C290E6",
+             "JobName": "New Job",
+             "JobRuntimeName": "default",
+             "SubmitTime": "7/28/2016 7:14:57 PM"
+             }
     }
+  ]
+}
+```
 
 #### <a name="audit-log-schema"></a>Schéma du journal d’audit
 
@@ -213,4 +211,5 @@ Voici un exemple d’entrée dans le journal d’audit au format JSON. Chaque ob
 Azure Data Lake Analytics fournit un exemple de traitement et d’analyse des données de journal. Vous pouvez trouver l’exemple à l’adresse [https://github.com/Azure/AzureDataLake/tree/master/Samples/AzureDiagnosticsSample](https://github.com/Azure/AzureDataLake/tree/master/Samples/AzureDiagnosticsSample).
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Présentation d’Azure Data Lake Analytics](data-lake-analytics-overview.md)
+
+[Présentation d’Azure Data Lake Analytics](data-lake-analytics-overview.md)

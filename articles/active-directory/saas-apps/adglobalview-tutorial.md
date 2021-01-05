@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à ADP Globalview | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ADP GlobalView.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: ffb6464f-714d-41a9-869a-2b7e5ae9f125
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 09/10/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1184129783b448cb2d6dc22e488ffe38401a1218
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: c11dd5ae3bc312cfea1a047c2db4396ba2cb50da
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72264109"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92309032"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-adp-globalview"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à ADP Globalview
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer ADP Globalview à Azure Acti
 * Permettre à vos utilisateurs de se connecter automatiquement à ADP Globalview avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -85,11 +80,11 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
     
     Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<subdomain>.globalview.adp.com/federate`|
-    | `https://<subdomain>.globalview.adp.com/federate2`|
-    | |
+    ```https
+    https://<subdomain>.globalview.adp.com/federate
+    https://<subdomain>.globalview.adp.com/federate2
+    ```
+
 
     > [!NOTE]
     > Cette valeur n’est pas la valeur réelle. Mettez à jour cette valeur avec l’identificateur réel. Pour obtenir cette valeur, contactez l’[équipe du support technique ADP Globalview](https://www.adp.com/contact-us/overview.aspx). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
@@ -144,15 +139,14 @@ Dans cette section, vous créez un utilisateur appelé B.Simon dans ADP Globalvi
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette ADP Globalview dans le panneau d’accès doit vous connecter automatiquement à l’application ADP Globalview pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette ADP Globalview dans le panneau d’accès doit vous connecter automatiquement à l’application ADP Globalview pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer ADP Globalview avec Azure AD](https://aad.portal.azure.com/)
-

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 07/10/2019
 ms.author: mimckitt
-ms.openlocfilehash: 573bd0797e63fc512e59b0e0882c718e4569111c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: aba47500400004c1d6a7044a266bad6f20d5d9c9
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81262891"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91360546"
 ---
 # <a name="proactively-ensuring-you-have-access-to-grub-and-sysrq-could-save-you-lots-of-down-time"></a>Vous assurer de manière proactive que vous avez accès à GRUB et sysrq peut vous faire gagner beaucoup de temps
 
@@ -37,11 +37,11 @@ Les raisons d’effectuer une récupération de machine virtuelle sont nombreuse
    - Fichiers de configuration sshd altérés
    - Configurations de mise en réseau
 
- De nombreux autres scénarios, comme détaillé [ici](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-linux#common-scenarios-for-accessing-the-serial-console)
+ De nombreux autres scénarios, comme détaillé [ici](./serial-console-linux.md#common-scenarios-for-accessing-the-serial-console)
 
 Vérifiez que vous pouvez accéder à GRUB et à la Serial console sur vos machines virtuelles déployées dans Azure. 
 
-Si vous débutez avec la Serial console, reportez-vous à [ce lien](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-linux/).
+Si vous débutez avec la Serial console, reportez-vous à [ce lien](./serial-console-linux.md).
 
 > [!TIP]
 > Veillez à effectuer des sauvegardes de fichiers avant d’apporter des modifications
@@ -76,7 +76,7 @@ La garantie de pouvoir accéder à la Serial console Azure et à GRUB signifie q
 
 - Échange de disque : peut être automatisé à l’aide de l’un des éléments suivants :
 
-   - [Scripts de récupération Power Shell](https://github.com/Azure/azure-support-scripts/tree/master/VMRecovery/ResourceManager)
+   - [Scripts de récupération PowerShell](https://github.com/Azure/azure-support-scripts/tree/master/VMRecovery/ResourceManager)
    - [Scripts de récupération bash](https://github.com/sribs/azure-support-scripts)
 
 - Méthode héritée
@@ -98,7 +98,7 @@ Dans cet article, nous allons examiner différentes distributions Linux et docum
 La clé sysrq est activée sur certaines distributions Linux plus récentes par défaut, bien que sur d’autres, elle puisse être configurée pour accepter des valeurs uniquement pour certaines fonctions SysRq.
 Sur les distributions plus anciennes, il est possible qu’elle soit complètement désactivée.
 
-La caractéristique SysRq est utile pour redémarrer une machine virtuelle bloquée ou suspendue directement à partir de la Serial console Azure, ce qui permet également d’accéder au menu GRUB. Vous pouvez également redémarrer une machine virtuelle à partir d’une autre fenêtre du portail ou d’une session ssh pour supprimer la connexion à la console actuelle, ce qui a pour conséquence l’expiration des délais d’attente utilisés pour afficher le menu GRUB.
+La caractéristique SysRq est utile pour redémarrer une machine virtuelle bloquée ou qui ne répond pas directement à partir de la console série Azure, ce qui permet également d’accéder au menu GRUB. Vous pouvez également redémarrer une machine virtuelle à partir d’une autre fenêtre du portail ou d’une session ssh pour supprimer la connexion à la console actuelle, ce qui a pour conséquence l’expiration des délais d’attente utilisés pour afficher le menu GRUB.
 La machine virtuelle doit être configurée pour accepter la valeur 1 pour le paramètre kernel, ce qui active toutes les fonctions de sysrq ou 128, qui permet le redémarrage ou mise hors tension
 
 
@@ -210,11 +210,11 @@ Interrompre le processus BOOT et accéder au menu GRUB
 
 Sélectionnez Options avancées pour Ubuntu, puis appuyez sur Entrée
 
-![ubunturec1](./media/virtual-machines-serial-console/ubunturec1.png)
+![La capture d’écran représente la Serial console dans laquelle les options avancées pour Ubuntu sont sélectionnées.](./media/virtual-machines-serial-console/ubunturec1.png)
 
 Sélectionnez la ligne qui affiche *(mode de récupération)* . N’appuyez pas sur Entrée mais bien sur « e »
 
-![ubunturec2](./media/virtual-machines-serial-console/ubunturec2.png)
+![La capture d’écran représente la Serial console dans laquelle la version du mode récupération est sélectionnée.](./media/virtual-machines-serial-console/ubunturec2.png)
 
 Localisez la ligne qui chargera le noyau et remplacez le dernier paramètre **nomodeset** par la destination en tant que **console=ttyS0**
 
@@ -226,12 +226,12 @@ change to
 linux /boot/vmlinuz-4.15.0-1023-azure root=UUID=21b294f1-25bd-4265-9c4e-d6e4aeb57e97 ro recovery console=ttyS0
 ```
 
-![ubunturec3](./media/virtual-machines-serial-console/ubunturec3.png)
+![Capture d’écran représentant la Serial console avec la valeur modifiée.](./media/virtual-machines-serial-console/ubunturec3.png)
 
 Appuyez sur **Ctrl-x** pour démarrer et charger le noyau.
 Si tout se passe bien, vous verrez ces options supplémentaires, qui peuvent vous aider à effectuer d’autres options de récupération
 
-![ubunturec4](./media/virtual-machines-serial-console/ubunturec4.png)
+![Capture d’écran représentant la Serial console dans le menu Récupération, qui offre des options de récupération supplémentaires.](./media/virtual-machines-serial-console/ubunturec4.png)
 
 
 ## <a name="red-hat-grub-configuration"></a>Configuration de Red Hat GRUB
@@ -337,16 +337,16 @@ terminal --timeout=5 serial console
 
 La dernière ligne *terminal –-timeout = 5 serial console* augmente davantage le délai d’expiration de **GRUB** en ajoutant une invite de 5 secondes pour afficher **Appuyez sur une touche pour continuer.**
 
-![rh6-1](./media/virtual-machines-serial-console/rh6-1.png)
+![Capture d’écran représentant une console avec la sortie.](./media/virtual-machines-serial-console/rh6-1.png)
 
 Le menu GRUB doit s’afficher à l’écran pour le délai d’expiration configuré timeout=15 sans avoir besoin d’appuyer sur Échap. Veillez à cliquer dans la console du navigateur pour activer le menu et sélectionner le noyau requis
 
-![rh6-2](./media/virtual-machines-serial-console/rh6-2.png)
+![Capture d’écran représentant une console avec deux options Linux.](./media/virtual-machines-serial-console/rh6-2.png)
 
 ## <a name="suse"></a>SuSE
 
 ## <a name="sles-12-sp1"></a>SLES 12 SP1
-Utilisez le chargeur de YaST conformément aux [documents](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-grub-single-user-mode#grub-access-in-suse-sles) officiels
+Utilisez le chargeur de YaST conformément aux [documents](./serial-console-grub-single-user-mode.md#grub-access-in-suse-sles) officiels
 
 Ou ajoutez ou modifiez les paramètres suivants dans /etc/default/grub :
 
@@ -405,18 +405,18 @@ Vous pouvez accéder à un interpréteur de commandes sans avoir à entrer un mo
 L’accès à GRUB vous permet d’interrompre le processus d’initialisation. Cette interaction est utile pour de nombreuses procédures de récupération.
 Si vous n’avez pas de mot de passe racine et que le mode mono-utilisateur requiert que vous ayez un mot de passe racine, vous pouvez démarrer le noyau en remplaçant le programme init par une invite bash. Cette interruption peut être obtenue en ajoutant init=/bin/bash à la ligne de démarrage du noyau
 
-![bash1](./media/virtual-machines-serial-console/bash1.png)
+![Capture d’écran représentant une console avec la ligne de démarrage mise à jour.](./media/virtual-machines-serial-console/bash1.png)
 
 Remontez votre système de fichiers / (racine) RW à l’aide de la commande
 
 `mount -o remount,rw /`
 
-![bash2](./media/virtual-machines-serial-console/bash2.png)
+![Capture d’écran représentant une console avec une action de remontage.](./media/virtual-machines-serial-console/bash2.png)
 
 
 Vous pouvez maintenant effectuer une modification du mot de passe racine ou de nombreuses autres modifications de configuration Linux
 
-![bash3](./media/virtual-machines-serial-console/bash3.png)
+![Capture d’écran représentant une console dans laquelle vous pouvez modifier le mot de passe racine et d’autres configurations.](./media/virtual-machines-serial-console/bash3.png)
 
 Redémarrez la machine virtuelle avec 
 
@@ -430,11 +430,11 @@ Redémarrez la machine virtuelle avec
 Vous pouvez également avoir besoin d’accéder à la machine virtuelle en mode mon-utilisateur ou en mode d’urgence. Sélectionnez le noyau que vous souhaitez démarrer ou interrompre à l’aide des touches de direction.
 Accédez au mode souhaité en ajoutant le mot clé **single** ou **1** à la ligne de démarrage du noyau. Sur les systèmes RHEL, vous pouvez également ajouter **rd.break**.
 
-Pour plus d’informations sur l’accès au mode mono-utilisateur, consultez [ce document](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-grub-single-user-mode#general-single-user-mode-access) 
+Pour plus d’informations sur l’accès au mode mono-utilisateur, consultez [ce document](./serial-console-grub-single-user-mode.md#general-single-user-mode-access) 
 
 
 ![single_user_ubuntu](./media/virtual-machines-serial-console/single-user-ubuntu.png)
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-En savoir plus sur la [Serial console Azure]( https://docs.microsoft.com/azure/virtual-machines/troubleshooting/serial-console-linux)
+En savoir plus sur la [Serial console Azure]( ./serial-console-linux.md)

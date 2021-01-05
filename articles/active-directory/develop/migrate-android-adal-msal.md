@@ -1,5 +1,6 @@
 ---
 title: Guide de migration ADAL vers MSAL pour Android | Azure
+titleSuffix: Microsoft identity platform
 description: Découvrez comment migrer votre application Android ADAL (bibliothèque d’authentification Active Directory) Azure vers Microsoft Authentication Library (MSAL).
 services: active-directory
 author: mmacy
@@ -9,16 +10,16 @@ ms.subservice: develop
 ms.topic: conceptual
 ms.tgt_pltfrm: Android
 ms.workload: identity
-ms.date: 09/6/2019
+ms.date: 10/14/2020
 ms.author: marsma
 ms.reviewer: shoatman
 ms.custom: aaddev
-ms.openlocfilehash: 21866bb7dab3d5a093ffc4655161b80853eadfc5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bf9b3a154e19fab08c46f9838f555e223f10e8a0
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77084056"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672285"
 ---
 # <a name="adal-to-msal-migration-guide-for-android"></a>Guide de migration ADAL vers MSAL pour Android
 
@@ -31,7 +32,7 @@ ADAL fonctionne avec le point de terminaison Azure Active Directory v1.0. Micro
 Prend en charge :
   - Identité organisationnelle (Azure Active Directory).
   - Identités non organisationnelles telles que Outlook.com, Xbox Live, etc
-  - (B2C uniquement) Connexion fédérée avec Google, Facebook, Twitter et Amazon
+  - (Azure AD B2C uniquement) Connexion fédérée avec Google, Facebook, Twitter et Amazon
 
 - Ses normes sont compatibles avec :
   - OAuth v2.0
@@ -67,7 +68,7 @@ Dans votre inscription d’application dans le portail, vous voyez un onglet **A
 
 ### <a name="user-consent"></a>Consentement de l’utilisateur
 
-Avec ADAL et le point de terminaison AAD v1, le consentement de l’utilisateur pour les ressources qu’il possède a été donné lors de la première utilisation. Avec MSAL et la plateforme d’identités Microsoft, le consentement peut être demandé de manière incrémentielle. Le consentement incrémentiel s’avère utile pour les autorisations qu’un utilisateur peut considérer comme un privilège élevé ou mettre en doute si elles ne sont pas octroyées avec une explication claire de leur caractère obligatoire. Dans ADAL, ces autorisations peuvent entraîner l’abandon de la connexion à votre application par l’utilisateur.
+Avec ADAL et le point de terminaison Azure AD v1, le consentement de l’utilisateur pour les ressources qu’il possède a été donné lors de la première utilisation. Avec MSAL et la plateforme d’identités Microsoft, le consentement peut être demandé de manière incrémentielle. Le consentement incrémentiel s’avère utile pour les autorisations qu’un utilisateur peut considérer comme un privilège élevé ou mettre en doute si elles ne sont pas octroyées avec une explication claire de leur caractère obligatoire. Dans ADAL, ces autorisations peuvent entraîner l’abandon de la connexion à votre application par l’utilisateur.
 
 > [!TIP]
 > Nous vous recommandons d’utiliser le consentement incrémentiel dans les scénarios où vous avez besoin de fournir à votre utilisateur un contexte supplémentaire sur la raison pour laquelle votre application a besoin d’une autorisation.
@@ -88,7 +89,7 @@ Si vous utilisez actuellement ADAL et que vous n’avez pas besoin d’utiliser 
 > [!CAUTION]
 > Il n’est pas possible de définir à la fois des étendues et un ID de la ressource. Toute tentative d’une telle définition entraîne un `IllegalArgumentException`.
 
- Cela entraîne le même comportement v1 que celui que vous connaissez. Toutes les autorisations demandées dans votre inscription d’application sont demandées à l’utilisateur lors de sa première interaction.
+Cela entraîne le même comportement v1 que celui que vous connaissez. Toutes les autorisations demandées dans votre inscription d’application sont demandées à l’utilisateur lors de sa première interaction.
 
 ### <a name="authenticate-and-request-permissions-only-as-needed"></a>Authentifier et demander des autorisations uniquement si elles sont nécessaires
 
@@ -130,13 +131,13 @@ Si vous tentez d’utiliser une autorité qui n’est pas connue de Microsoft et
 ### <a name="logging"></a>Journalisation
 Vous pouvez maintenant configurer la journalisation de façon déclarative dans le cadre de votre configuration, comme suit :
 
- ```
- "logging": {
-    "pii_enabled": false,
-    "log_level": "WARNING",
-    "logcat_enabled": true
-  }
-  ```
+```json
+"logging": {
+  "pii_enabled": false,
+  "log_level": "WARNING",
+  "logcat_enabled": true
+}
+```
 
 ## <a name="migrate-from-userinfo-to-account"></a>Migrer depuis UserInfo vers Account
 
@@ -229,8 +230,6 @@ public interface SilentAuthenticationCallback {
      */
     void onError(final MsalException exception);
 }
-
-
 ```
 
 ## <a name="migrate-to-the-new-exceptions"></a>Migrer vers les nouvelles exceptions
@@ -238,21 +237,29 @@ public interface SilentAuthenticationCallback {
 Dans ADAL, il existe un seul type d’exception, `AuthenticationException`, qui inclut une méthode pour récupérer la valeur d’énumération `ADALError`.
 Dans MSAL, il existe une hiérarchie d’exceptions. Chacune possède son propre ensemble de codes d’erreur spécifiques associés.
 
-Liste des exceptions MSAL
+| Exception                                        | Description                                                         |
+|--------------------------------------------------|---------------------------------------------------------------------|
+| `MsalArgumentException`                          | Levée si un ou plusieurs arguments d’entrée ne sont pas valides.                 |
+| `MsalClientException`                            | Levée si l’erreur est côté client.                                 |
+| `MsalDeclinedScopeException`                     | Levée si une ou plusieurs étendues demandées ont été refusées par le serveur. |
+| `MsalException`                                  | Exception vérifiée par défaut levée par MSAL.                           |
+| `MsalIntuneAppProtectionPolicyRequiredException` | Levée si la stratégie de protection MAMCA est activée pour la ressource.         |
+| `MsalServiceException`                           | Levée si l’erreur est côté serveur.                                 |
+| `MsalUiRequiredException`                        | Levée si le jeton ne peut pas être actualisé silencieusement.                    |
+| `MsalUserCancelException`                        | Levée si l’utilisateur a annulé le workflow d’authentification.                |
 
-|Exception  | Description  |
-|---------|---------|
-| `MsalException`     | Exception vérifiée par défaut levée par MSAL.  |
-| `MsalClientException`     | Levée si l’erreur est côté client. |
-| `MsalArgumentException`     | Levée si un ou plusieurs arguments d’entrée ne sont pas valides. |
-| `MsalClientException`     | Levée si l’erreur est côté client. |
-| `MsalServiceException`     | Levée si l’erreur est côté serveur. |
-| `MsalUserCancelException`     | Levée si l’utilisateur a annulé le workflow d’authentification.  |
-| `MsalUiRequiredException`     | Levée si le jeton ne peut pas être actualisé silencieusement.  |
-| `MsalDeclinedScopeException`     | Levée si une ou plusieurs étendues demandées ont été refusées par le serveur.  |
-| `MsalIntuneAppProtectionPolicyRequiredException` | Levée si la stratégie de protection MAMCA est activée pour la ressource. |
+### <a name="adalerror-to-msalexception-translation"></a>Traduction d’ADALError vers MsalException
 
-### <a name="adalerror-to-msalexception-errorcode"></a>ADALError vers MsalException ErrorCode
+| Si vous interceptez ces erreurs dans ADAL…  | …interceptez les exceptions MSAL suivantes :                                                         |
+|--------------------------------------------------|---------------------------------------------------------------------|
+| *Aucune ADALError équivalente* | `MsalArgumentException`                          |
+| <ul><li>`ADALError.ANDROIDKEYSTORE_FAILED`<li>`ADALError.AUTH_FAILED_USER_MISMATCH`<li>`ADALError.DECRYPTION_FAILED`<li>`ADALError.DEVELOPER_AUTHORITY_CAN_NOT_BE_VALIDED`<li>`ADALError.EVELOPER_AUTHORITY_IS_NOT_VALID_INSTANCE`<li>`ADALError.DEVELOPER_AUTHORITY_IS_NOT_VALID_URL`<li>`ADALError.DEVICE_CONNECTION_IS_NOT_AVAILABLE`<li>`ADALError.DEVICE_NO_SUCH_ALGORITHM`<li>`ADALError.ENCODING_IS_NOT_SUPPORTED`<li>`ADALError.ENCRYPTION_ERROR`<li>`ADALError.IO_EXCEPTION`<li>`ADALError.JSON_PARSE_ERROR`<li>`ADALError.NO_NETWORK_CONNECTION_POWER_OPTIMIZATION`<li>`ADALError.SOCKET_TIMEOUT_EXCEPTION`</ul> | `MsalClientException`                            |
+| *Aucune ADALError équivalente* | `MsalDeclinedScopeException`                     |
+| <ul><li>`ADALError.APP_PACKAGE_NAME_NOT_FOUND`<li>`ADALError.BROKER_APP_VERIFICATION_FAILED`<li>`ADALError.PACKAGE_NAME_NOT_FOUND`</ul> | `MsalException`                                  |
+| *Aucune ADALError équivalente* | `MsalIntuneAppProtectionPolicyRequiredException` |
+| <ul><li>`ADALError.SERVER_ERROR`<li>`ADALError.SERVER_INVALID_REQUEST`</ul> | `MsalServiceException`                           |
+| <ul><li>`ADALError.AUTH_REFRESH_FAILED_PROMPT_NOT_ALLOWED` | `MsalUiRequiredException`</ul>                        |
+| *Aucune ADALError équivalente* | `MsalUserCancelException`                        |
 
 ### <a name="adal-logging-to-msal-logging"></a>Journalisation ADAL vers journalisation MSAL
 
@@ -271,30 +278,30 @@ Liste des exceptions MSAL
 // New interface
   StringBuilder logs = new StringBuilder();
   Logger.getInstance().setExternalLogger(new ILoggerCallback() {
-            @Override
-            public void log(String tag, Logger.LogLevel logLevel, String message, boolean containsPII) {
-                logs.append(message).append('\n');
-            }
-        });
+      @Override
+      public void log(String tag, Logger.LogLevel logLevel, String message, boolean containsPII) {
+          logs.append(message).append('\n');
+      }
+  });
 
 // New Log Levels:
 public enum LogLevel
 {
-        /**
-         * Error level logging.
-         */
-        ERROR,
-        /**
-         * Warning level logging.
-         */
-        WARNING,
-        /**
-         * Info level logging.
-         */
-        INFO,
-        /**
-         * Verbose level logging.
-         */
-        VERBOSE
+    /**
+     * Error level logging.
+     */
+    ERROR,
+    /**
+     * Warning level logging.
+     */
+    WARNING,
+    /**
+     * Info level logging.
+     */
+    INFO,
+    /**
+     * Verbose level logging.
+     */
+    VERBOSE
 }
 ```

@@ -4,17 +4,17 @@ description: Automatisez les tâches et les workflows qui gèrent des ressources
 services: logic-apps
 ms.suite: integration
 author: gplarsen
-ms.author: plarsen
+ms.author: daberry
 ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 01/07/2020
 tags: connectors
-ms.openlocfilehash: dccb715c974037b4e3080f3e51576feae34c03df
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4995a91783c2302f3bda5cc9409f017248ca29fa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76757966"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88761642"
 ---
 # <a name="manage-ibm-informix-database-resources-by-using-azure-logic-apps"></a>Gérer des ressources de base de données IBM Informix à l’aide d’Azure Logic Apps
 

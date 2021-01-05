@@ -10,14 +10,14 @@ ms.reviewer: craigg
 ms.service: dms
 ms.workload: data-services
 ms.custom: mvc
-ms.topic: article
-ms.date: 09/05/2019
-ms.openlocfilehash: 9652b78674d6a6b905eb049564d1b17cdc7c17b7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: troubleshooting
+ms.date: 07/08/2020
+ms.openlocfilehash: cc3323a3ae2d604557d7e09b38252d63f17c5470
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78254927"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92319907"
 ---
 # <a name="status-of-migration-scenarios-supported-by-azure-database-migration-service"></a>État des scénarios de migration pris en charge par Azure Database Migration Service
 
@@ -25,11 +25,11 @@ Azure Database Migration Service est conçu pour prendre en charge différents s
 
 ## <a name="offline-versus-online-migrations"></a>Migrations hors connexion et en ligne
 
-Avec Azure Database Migration Service, vous pouvez opter pour une migration hors connexion ou en ligne. Avec les migrations *hors connexion*, les temps d’arrêt de l’application commencent en même temps que la migration. Pour limiter le temps d’arrêt au temps nécessaire pour basculer vers le nouvel environnement une fois la migration terminée, utilisez une migration *en ligne*. Nous vous recommandons de tester une migration hors connexion pour déterminer si le temps d’arrêt est acceptable ; dans le cas contraire, privilégiez une migration en ligne.
+Avec Azure Database Migration Service, vous pouvez opter pour une migration hors connexion ou en ligne. Avec les migrations *hors connexion* , les temps d’arrêt de l’application commencent en même temps que la migration. Pour limiter le temps d’arrêt au temps nécessaire pour basculer vers le nouvel environnement une fois la migration terminée, utilisez une migration *en ligne* . Nous vous recommandons de tester une migration hors connexion pour déterminer si le temps d’arrêt est acceptable ; dans le cas contraire, privilégiez une migration en ligne.
 
 ## <a name="migration-scenario-status"></a>État du scénario de migration
 
-L’état des scénarios de migration pris en charge par Azure Database Migration Service varie dans le temps. En règle générale, les scénarios sont d’abord publiés en **préversion privée**. Pour participer à une préversion privée, les clients doivent soumettre une candidature par le biais du [site DMS Preview](https://aka.ms/dms-preview). Au terme de la préversion privée, le scénario passe à l’état de **préversion publique**. Les utilisateurs d’Azure Database Migration Service peuvent essayer des scénarios de migration en préversion directement à partir de l’interface utilisateur. Aucune inscription n’est nécessaire.  Toutefois, il se peut que les scénarios de migration en préversion publique ne soient pas disponibles dans toutes les régions et subissent des modifications supplémentaires avant la version finale. Au terme de la préversion publique, le scénario passe à l’état de **disponibilité générale**. La disponibilité générale est l’état de la version finale : les fonctionnalités sont complètes et accessibles à tous les utilisateurs.
+L’état des scénarios de migration pris en charge par Azure Database Migration Service varie dans le temps. En règle générale, les scénarios sont d’abord publiés en **préversion privée** . Pour participer à une préversion privée, les clients doivent soumettre une candidature par le biais du [site DMS Preview](https://aka.ms/dms-preview). Au terme de la préversion privée, le scénario passe à l’état de **préversion publique** . Les utilisateurs d’Azure Database Migration Service peuvent essayer des scénarios de migration en préversion directement à partir de l’interface utilisateur. Aucune inscription n’est nécessaire.  Toutefois, il se peut que les scénarios de migration en préversion publique ne soient pas disponibles dans toutes les régions et subissent des modifications supplémentaires avant la version finale. Au terme de la préversion publique, le scénario passe à l’état de **disponibilité générale** . La disponibilité générale est l’état de la version finale : les fonctionnalités sont complètes et accessibles à tous les utilisateurs.
 
 ## <a name="migration-scenario-support"></a>Prise en charge du scénario de migration
 
@@ -48,18 +48,20 @@ Le tableau suivant présente la prise en charge d’Azure Database Migration Ser
 | Cible  | Source | Support | Statut |
 | ------------- | ------------- |:-------------:|:-------------:|
 | **Base de données Azure SQL** | SQL Server | ✔ | GA |
-|   | RDS SQL |  |  |
-|   | Oracle |  |  |
+|   | RDS SQL | X |  |
+|   | Oracle | X |  |
 | **Base de données Azure SQL MI** | SQL Server | ✔ | GA |
-|   | RDS SQL |  |  |
-|   | Oracle |  |   |
+|   | RDS SQL | X |  |
+|   | Oracle | X |   |
 | **Machine virtuelle Azure SQL** | SQL Server | ✔ | GA |
-|   | Oracle |   |   |
+|   | Oracle | X |   |
 | **Azure Cosmos DB** | MongoDB | ✔ | GA |
-| **Base de données Azure pour MySQL** | MySQL |   |   |
-|   | RDS MySQL |   |   |
-| **Base de données Azure pour PostgreSQL** | PostgreSQL |  |
-|  | RDS PostgreSQL |   |   |
+| **Base de données Azure pour MySQL** | MySQL | X |   |
+|   | RDS MySQL | X |   |
+| **Azure DB pour PostgreSQL - Serveur unique** | PostgreSQL | X |
+|  | RDS PostgreSQL | X |   |
+| **Azure DB pour PostgreSQL - Hyperscale (Citus)** | PostgreSQL | X |
+|  | RDS PostgreSQL | X |   |
 
 ### <a name="online-continuous-sync-migration-support"></a>Prise en charge de la migration en ligne (synchronisation continue)
 
@@ -69,18 +71,22 @@ Le tableau suivant présente la prise en charge d’Azure Database Migration Ser
 | ------------- | ------------- |:-------------:|:-------------:|
 | **Base de données Azure SQL** | SQL Server | ✔ | GA |
 |   | RDS SQL | ✔ | GA |
-|   | Oracle |  |  |
+|   | Oracle | X |  |
 | **Base de données Azure SQL MI** | SQL Server | ✔ | GA |
 |   | RDS SQL | ✔ | GA |
-|   | Oracle | ✔ | Préversion privée |
-| **Machine virtuelle Azure SQL** | SQL Server |   |   |
-|   | Oracle  |  |  |
+|   | Oracle | X |  |
+| **Machine virtuelle Azure SQL** | SQL Server | X |   |
+|   | Oracle  | X |  |
 | **Azure Cosmos DB** | MongoDB | ✔ | GA |
 | **Base de données Azure pour MySQL** | MySQL | ✔ | GA |
 |   | RDS MySQL | ✔ | GA |
-| **Base de données Azure pour PostgreSQL** | PostgreSQL | ✔ | GA |
+| **Azure DB pour PostgreSQL - Serveur unique** | PostgreSQL | ✔ | GA |
+|   | Azure DB pour PostgreSQL - Serveur unique | ✔ | GA |
 |   | RDS PostgreSQL | ✔ | GA |
 |   | Oracle | ✔ | Préversion publique |
+| **Azure DB pour PostgreSQL - Hyperscale (Citus)** | PostgreSQL | ✔ | GA |
+|   | RDS PostgreSQL | ✔ | GA |
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -8,12 +8,12 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 2ebeb7f6fee77c43c9da97b922fc215d75196145
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6c70b42e7d0f647a3b2b60d29b5098a791e4975f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82117567"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88924518"
 ---
 # <a name="how-to-model-relational-sql-data-for-import-and-indexing-in-azure-cognitive-search"></a>Comment modéliser des données relationnelles SQL pour l’importation et l’indexation dans la Recherche cognitive Azure
 
@@ -107,7 +107,7 @@ La solution consiste à capturer les détails des chambres avec une requête JSO
 Cet ensemble de lignes est maintenant prêt pour l’importation dans la Recherche cognitive Azure.
 
 > [!NOTE]
-> Cette approche suppose que la collection JSON incorporée ne dépasse pas les [limites de tailles de colonne maximales de SQL Server](https://docs.microsoft.com/sql/sql-server/maximum-capacity-specifications-for-sql-server). 
+> Cette approche suppose que la collection JSON incorporée ne dépasse pas les [limites de tailles de colonne maximales de SQL Server](/sql/sql-server/maximum-capacity-specifications-for-sql-server). 
 
  ## <a name="use-a-complex-collection-for-the-many-side-of-a-one-to-many-relationship"></a>Utiliser une collection complexe pour le côté « plusieurs » d’une relation un-à-plusieurs
 

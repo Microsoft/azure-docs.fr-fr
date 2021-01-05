@@ -1,48 +1,59 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Documentation de l’API Azure pour FHIR Preview
+### YamlMime:Landing
+title: Documentation sur l’API Azure pour FHIR
+summary: L’API Azure pour FHIR est une API managée, normalisée et conforme dédiée aux données médicales qui permet d’obtenir des solutions avec une analytique actionnable et le machine learning.
 metadata:
-  title: Documentation de l’API Azure pour FHIR Preview
-  meta.description: Learn how Azure API for FHIR can power healthcare iteroperability in Azure.
+  title: Documentation sur l’API Azure pour FHIR - tutoriels, guides pratiques
+  description: L’API Azure pour FHIR est une API managée, normalisée et conforme dédiée aux données médicales qui permet d’obtenir des solutions avec une analytique actionnable et le machine learning.
   services: healthcare-apis
-  author: hansenms
-  manager: dougseven
-  ms.author: mihansen
   ms.service: healthcare-apis
   ms.subservice: fhir
   ms.topic: landing-page
-  ms.date: 02/07/2019
-abstract:
-  description: 'L’API Azure pour FHIR® Preview est une API conforme, complètement managée et basée sur des standards pour les données médicales, qui vous permet de créer des systèmes intégrant l’analytique, le machine learning et l’intelligence actionnable avec vos données médicales.'
-sections:
-  - title: null
-    items:
-      - type: paragraph
-        text: FHIR&reg; est la marque déposée de HL7 et est utilisé avec l’autorisation de HL7.
-  - title: "Démarrages en 5\_minutes"
-    items:
-      - type: paragraph
-        text: Découvrir comment l’API Azure pour FHIR Preview peut assurer l’interopérabilité des données médicales dans Azure en sélectionnant un lien sous forme de flèche <img src="media/index/link.jpg" height="15" width="15"></img>.
-      - type: table
-        style: dataMatrix
-        columns:
-          - image:
-              src: media/index/portal.svg
-            title: Portail Azure
-          - image:
-              src: media/index/powershell.svg
-            title: Azure PowerShell
-          - image:
-              src: media/index/cli.svg
-            title: D’Azure CLI
-        rows:
-          - title: Déployer l’API Azure pour FHIR
-            values:
-              - href: fhir-paas-portal-quickstart.md
-              - href: fhir-paas-powershell-quickstart.md
-              - href: fhir-paas-cli-quickstart.md
-          - title: Déployer le serveur FHIR open source
-            values:
-              - href: fhir-oss-portal-quickstart.md
-              - href: fhir-oss-powershell-quickstart.md
-              - href: fhir-oss-cli-quickstart.md
+  ms.collection: collection
+  author: matjazl
+  ms.author: matjazl
+  ms.date: 08/13/2020
+  ms.openlocfilehash: d633b5376832672ecc7c917e24728666b889e16c
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "88183443"
+landingContent:
+- title: Démarrer avec l’API Azure pour FHIR
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce que l’API Azure pour FHIR ?
+      url: overview.md
+    - text: Qu’est-ce que le Connecteur Azure IoT pour FHIR (préversion) ?
+      url: overview.md#azure-iot-connector-for-fhir-preview
+  - linkListType: quickstart
+    links:
+    - text: Déployer le serveur d’API pour FHIR
+      url: fhir-paas-portal-quickstart.md
+    - text: Déployer le connecteur Azure IoT pour FHIR (préversion)
+      url: iot-fhir-portal-quickstart.md
+- title: Tutoriels de configuration
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Déployer une application JavaScript pour lire les données du service FHIR
+      url: tutorial-web-app-fhir-server.md
+    - text: Accéder à l’API FHIR avec Postman
+      url: access-fhir-postman-tutorial.md
+    - text: Intégration de SMART pour les applications tierces et les dossiers médicaux
+      url: use-smart-on-fhir-proxy.md
+    - text: Recevoir des données d’appareil via Azure IoT Hub
+      url: device-data-through-iot-hub.md
+- title: Inscrire des applications pour l’authentification AD
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Inscrire une application de ressource
+      url: register-resource-azure-ad-client-app.md
+    - text: Inscrire une application cliente confidentielle
+      url: register-confidential-azure-ad-client-app.md
+    - text: Inscrire une application cliente publique
+      url: register-public-azure-ad-client-app.md
+    - text: Inscrire une application cliente de service
+      url: register-service-azure-ad-client-app.md

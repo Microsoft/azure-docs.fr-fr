@@ -1,19 +1,19 @@
 ---
 title: 'Tutoriel : Concevoir une base de données Azure Database pour PostgreSQL - Serveur unique - Azure CLI'
 description: Ce tutoriel montre comment créer, configurer et interroger votre première base de données Azure pour PostgreSQL (serveur unique) à l’aide d’Azure CLI.
-author: rachel-msft
-ms.author: raagyema
+author: lfittl-msft
+ms.author: lufittl
 ms.service: postgresql
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.devlang: azurecli
 ms.topic: tutorial
 ms.date: 06/25/2019
-ms.openlocfilehash: c79e64fddaf404b459dd2215e4a2e9236f1bc221
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 019e6e738ea312b7e6a16c44354c7dcd54e24f2f
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75460008"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93331894"
 ---
 # <a name="tutorial-design-an-azure-database-for-postgresql---single-server-using-azure-cli"></a>Tutoriel : Concevoir une base de données Azure pour PostgreSQL (serveur unique) à l’aide d’Azure CLI 
 Dans ce didacticiel, vous allez utiliser l’interface Azure CLI (interface de ligne de commande) et d’autres utilitaires pour apprendre à :
@@ -27,6 +27,9 @@ Dans ce didacticiel, vous allez utiliser l’interface Azure CLI (interface de l
 > * Restaurer des données
 
 Vous pouvez utiliser Azure Cloud Shell dans le navigateur, ou [installer Azure CLI]( /cli/azure/install-azure-cli) sur votre ordinateur pour exécuter les commandes de ce tutoriel.
+
+## <a name="prerequisites"></a>Prérequis
+Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 [!INCLUDE [cloud-shell-try-it](../../includes/cloud-shell-try-it.md)]
 
@@ -199,9 +202,9 @@ az postgres server restore --resource-group myresourcegroup --name mydemoserver-
 
 La commande `az postgres server restore` a besoin des paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources dans lequel se trouve le serveur source.  |
+| resource-group |  myResourceGroup |  Groupe de ressources dans lequel se trouve le serveur source.  |
 | name | mydemoserver-restored | Nom du serveur créé par la commande de restauration. |
 | restore-point-in-time | 2017-04-13T13:59:00Z | Choisissez la date et l’heure à utiliser pour la restauration. Elles doivent être comprises dans la période de rétention de la sauvegarde du serveur source. Utilisez le format de date et d’heure ISO8601. Par exemple, vous pouvez utiliser votre fuseau horaire local, comme `2017-04-13T05:59:00-08:00`, ou le format UTC Zulu `2017-04-13T13:59:00Z`. |
 | source-server | mydemoserver | Nom ou identifiant du serveur source à partir duquel la restauration s’effectuera. |
@@ -210,16 +213,21 @@ La restauration d’un serveur à un point antérieur dans le temps entraîne la
 
 La commande est synchrone ; elle est renvoyée après la restauration du serveur. Une fois la restauration terminée, recherchez le serveur créé. Vérifiez que les données ont été restaurées comme prévu.
 
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Au cours des étapes précédentes, vous avez créé des ressources Azure dans un groupe de serveurs. Si vous pensez ne pas avoir besoin de ces ressources à l’avenir, supprimez le groupe de serveurs. Appuyez sur le bouton *Supprimer* dans la page *Vue d’ensemble* de votre groupe de serveurs. Quand vous y êtes invité dans une page contextuelle, confirmez le nom du groupe de serveurs, puis cliquez sur le bouton *Supprimer*.
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 Dans ce didacticiel, vous avez appris à utiliser l’interface Azure CLI (interface de ligne de commande) et d’autres utilitaires pour :
 > [!div class="checklist"]
 > * Créer un serveur Azure Database pour PostgreSQL
 > * Configurer le pare-feu du serveur
-> * Utiliser l’utilitaire [**psql**](https://www.postgresql.org/docs/9.6/static/app-psql.html) pour créer une base de données
+> * Utiliser l’utilitaire **psql** pour créer une base de données
 > * Charger un exemple de données
 > * Interroger des données
 > * Mettre à jour des données
 > * Restaurer des données
 
-Ensuite, suivez ce tutoriel afin d’apprendre à utiliser le portail Azure pour effectuer des tâches similaires : [Concevoir votre première base de données Azure Database pour PostgreSQL à l’aide du portail Azure](tutorial-design-database-using-azure-portal.md)
+> [!div class="nextstepaction"]
+> [Concevoir votre première base de données Azure Database pour PostgreSQL à l’aide du portail Azure](tutorial-design-database-using-azure-portal.md)

@@ -1,18 +1,18 @@
 ---
 title: Détecter un problème de restauration automatique dans la récupération d’urgence de machines virtuelles VMware avec Azure Site Recovery
 description: Cet article explique comment résoudre les problèmes de restauration automatique et de reprotection pendant la reprise d’activité de machines virtuelles VMware sur Azure avec Azure Site Recovery.
-author: rajani-janaki-ram
-manager: gauravd
+author: Sharmistha-Rai
+manager: gaggupta
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/27/2018
-ms.author: rajanaki
-ms.openlocfilehash: b577b82585ffad0547818b4f19554a2f39cb830c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: sharrai
+ms.openlocfilehash: ed4e52470264441a99c5ccf0a736bb00233510c1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75498091"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87423114"
 ---
 # <a name="troubleshoot-failback-to-on-premises-from-azure"></a>Résoudre les problèmes de restauration automatique sur l’infrastructure locale à partir d’Azure
 
@@ -29,7 +29,7 @@ Une restauration automatique implique essentiellement deux étapes principales. 
 - Si vous ne pouvez pas atteindre le serveur de configuration depuis le serveur de processus, utilisez Telnet pour vérifier la connectivité au serveur de configuration sur le port 443. Vous pouvez également essayer d’exécuter un test ping sur le serveur de configuration à partir du serveur de processus. Un serveur de processus doit également avoir une pulsation lorsqu’il est connecté au serveur de configuration.
 - Un serveur Windows Server 2008 R2 SP1 qui est protégé en tant que serveur physique local ne peut pas être restauré à partir d’Azure sur un site local.
 - Vous ne pouvez pas effectuer de restauration automatique dans les circonstances suivantes :
-    - Vous avez effectué une migration des machines vers Azure. [Plus d’informations](migrate-overview.md#what-do-we-mean-by-migration)
+    - Vous avez effectué une migration des machines vers Azure. 
     - Vous avez déplacé une machine virtuelle vers un autre groupe de ressources.
     - Vous avez supprimé la machine virtuelle Azure.
     - Vous avez désactivé la protection de la machine virtuelle.
@@ -64,12 +64,12 @@ Ce problème peut se produire si une machine virtuelle portant le même nom se t
 Pour résoudre ce problème :
 
 * Sélectionnez un serveur cible principal situé sur un hôte différent. La reprotection va donc créer la machine sur un autre hôte, ce qui évitera les conflits de noms.
-* Vous pouvez également utiliser vMotion pour déplacer la cible principale vers un autre hôte où le conflit de noms ne se produira pas. Si la machine virtuelle existante est une machine isolée, renommez-la pour que la nouvelle machine virtuelle puisse être créée sur le même hôte ESXi.
+* Vous pouvez également utiliser VMotion pour déplacer la cible principale vers un autre hôte où le conflit de noms ne se produira pas. Si la machine virtuelle existante est une machine isolée, renommez-la pour que la nouvelle machine virtuelle puisse être créée sur le même hôte ESXi.
 
 
 ### <a name="error-code-78093"></a>Code d'erreur 78093
 
-**La machine virtuelle n’est pas en cours d’exécution, est dans un état suspendu ou n’est pas accessible.**
+**La machine virtuelle n'est pas en cours d'exécution, ne répond pas ou n'est pas accessible.**
 
 Pour résoudre ce problème :
 
@@ -98,4 +98,4 @@ Ce problème se produit quand la machine virtuelle locale est exécutée sur un 
 Pour résoudre ce problème :
 
 * Provisionnez davantage de mémoire sur l’hôte ESXi.
-* De plus, vous pouvez utiliser vMotion pour déplacer la machine virtuelle vers un autre hôte ESXi disposant de suffisamment de mémoire pour démarrer la machine virtuelle.
+* De plus, vous pouvez utiliser VMotion pour déplacer la machine virtuelle vers un autre hôte ESXi disposant de suffisamment de mémoire pour démarrer la machine virtuelle.

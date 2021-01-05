@@ -7,19 +7,19 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: tagore
-ms.openlocfilehash: d40e392984d2675c748bda00c61cdaeb1c0932da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fa918a3a6894205ed36c4b576608e7a71e523a92
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75387018"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87092709"
 ---
 # <a name="connecting-azure-cloud-services-roles-to-a-custom-ad-domain-controller-hosted-in-azure"></a>Connexion des rôles de services cloud Azure à un contrôleur de domaine Active Directory personnalisé hébergé dans Azure
 Nous allons tout d’abord définir un réseau virtuel (VNet) dans Azure. Nous allons ensuite ajouter un contrôleur de domaine Active Directory (hébergé sur une machine virtuelle Azure) sur le réseau virtuel. Ensuite, nous ajouterons des rôles de service cloud existants sur le réseau virtuel créé au préalable, puis les connecterons au contrôleur de domaine.
 
 Avant de commencer, quelques aspects à prendre en compte :
 
-1. Ce didacticiel utilise Powershell. Par conséquent, vérifiez qu’Azure Powershell est installé et prêt à l’emploi. Pour obtenir de l’aide sur la configuration d’Azure Powershell, consultez l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/overview).
+1. Ce didacticiel utilise Powershell. Par conséquent, vérifiez qu’Azure Powershell est installé et prêt à l’emploi. Pour obtenir de l’aide sur la configuration d’Azure Powershell, consultez l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/).
 2. Vos instances de contrôleur de domaine AD et de rôle web/de travail doivent se trouver dans le réseau virtuel.
 
 Suivez ce guide pas à pas et, si vous rencontrez des problèmes, laissez-nous un commentaire à la fin de l’article. Nous reviendrons vers vous (oui, nous lisons les commentaires).

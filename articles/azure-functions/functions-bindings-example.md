@@ -3,14 +3,15 @@ title: Exemples de liaison et de déclencheur Azure Functions
 description: Apprenez à configurer les liaisons d’Azure Functions
 author: craigshoemaker
 ms.topic: reference
+ms.custom: devx-track-csharp
 ms.date: 02/18/2019
 ms.author: cshoe
-ms.openlocfilehash: 8685c0fe02ad6c68918736e857c2015e2bfb4595
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c95524a5de6696bd0ffe7463451d152a9d3a19b4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74227240"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88205962"
 ---
 # <a name="azure-functions-trigger-and-binding-example"></a>Exemples de liaison et de déclencheur Azure Functions
 

@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: 9ff961638aa170948d51793a21e86d18dd7e1d80
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9b616b03698e83d256a7b81e4548edbf21dba058
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69016790"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021127"
 ---
-# <a name="how-to-build-a-smooth-streaming-windows-store-application"></a>Génération d'une application Windows Store de diffusion en continu lisse  
+# <a name="how-to-build-a-smooth-streaming-windows-store-application"></a>Génération d'une application Windows Store de diffusion en continu lisse
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]  
 
 Le Kit de développement logiciel (SDK) du client de diffusion en continu lisse pour Windows 8 permet aux développeurs de générer des applications Windows Store pour la lecture de contenu de diffusion en continu lisse à la demande et en direct. Outre la lecture de contenu de diffusion en continu lisse, le Kit de développement logiciel propose également des fonctionnalités avancées comme la protection Microsoft PlayReady, la limitation du niveau de qualité, le magnétoscope numérique en direct (Live DVR), la commutation des flux audio, l'écoute des mises à jour d'état (par exemple, les modifications des niveaux de qualité), les événements d'erreur, etc. Pour plus d'informations sur les fonctionnalités prises en charge, consultez les [notes de publicationn](https://www.iis.net/learn/media/smooth-streaming/smooth-streaming-client-sdk-for-windows-8-release-notes). Pour plus d’informations, consultez [Player Framework for Windows 8](https://playerframework.codeplex.com/). 
 
@@ -53,7 +56,7 @@ Dans cette leçon, vous allez apprendre à créer une application Windows Store 
 
 ![Exemple d'application Windows Store de diffusion en continu lisse][PlayerApplication]
 
-Pour plus d'informations sur le développement d'une application Windows Store, consultez la rubrique [Développement d'applications fantastiques pour Windows 8](https://msdn.microsoft.com/windows/apps/br229512.aspx). Cette leçon aborde les procédures suivantes :
+Pour plus d'informations sur le développement d'une application Windows Store, consultez la rubrique [Développement d'applications fantastiques pour Windows 8](https://developer.microsoft.com/en-us/windows/). Cette leçon aborde les procédures suivantes :
 
 1. Création d'un projet Windows Store
 2. Conception de l'interface utilisateur (XAML)
@@ -151,15 +154,24 @@ Dans le fichier XAML, certains gestionnaires d'événements sont associés aux c
 
 1. Dans l'Explorateur de solutions, cliquez avec le bouton droit sur **MainPage.xaml**, puis cliquez sur **Afficher le code**.
 2. Au début du fichier, ajoutez l'instruction using suivante :
-   
+
+    ```csharp
         using Windows.Media;
+    ```
+
 3. Au début de la classe **MainPage** , ajoutez le membre de données suivant :
-   
-         private MediaExtensionManager extensions = new MediaExtensionManager();
+
+    ```csharp
+        private MediaExtensionManager extensions = new MediaExtensionManager();
+    ```
+
 4. À la fin du constructeur **MainPage** , ajoutez les deux lignes suivantes :
-   
+
+    ```csharp
         extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
         extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
+    ```
+
 5. À la fin de la classe **MainPage** , collez le code suivant :
    ```csharp
          # region UI Button Click Events
@@ -1036,4 +1048,3 @@ Vous avez terminé la leçon 4.  Dans cette leçon, vous avez ajouté la foncti
 
 [PlayerApplication]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-1.png
 [CodeViewPic]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-2.png
-

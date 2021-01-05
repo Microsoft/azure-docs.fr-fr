@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à TAS | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et TAS.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 129b6e69-e3b4-41d7-9ab5-a2ddd0068f76
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/19/2019
 ms.author: jeedes
-ms.openlocfilehash: efd64830c0d9afa83838adef96cf1c103b4485e8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f2687909a7067bc135f6fcf27fce2e1694325887
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68943275"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95987989"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-tas"></a>Tutoriel : Intégration d’Azure Active Directory à TAS
 
@@ -31,7 +27,7 @@ L’intégration de TAS à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à TAS (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -103,7 +99,7 @@ Pour configurer l’authentification unique Azure AD avec TAS, effectuez les é
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL TAS](common/idp-intiated.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://taseu.combtas.com/<DOMAIN>`
 
@@ -111,7 +107,7 @@ Pour configurer l’authentification unique Azure AD avec TAS, effectuez les é
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
-    ![Informations d’authentification unique dans Domaine et URL TAS](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://taseu.combtas.com/<DOMAIN>`
 
@@ -138,11 +134,11 @@ Pour configurer l’authentification unique Azure AD avec TAS, effectuez les é
 
 2. Sur le côté gauche du menu, cliquez sur **Settings** (Paramètres) et accédez à **Administrator**, puis cliquez sur **Manage Single sign on** (Gérer l’authentification unique).
 
-    ![Configuration de TAS](./media/tas-tutorial/configure01.png)
+    ![Capture d’écran montrant l’option Manage Single sign on sélectionnée](./media/tas-tutorial/configure01.png)
 
 3. Dans la page **Manage Single sign on** (Gérer l’authentification unique), effectuez les étapes suivantes :
 
-    ![Configuration de TAS](./media/tas-tutorial/configure02.png)
+    ![Capture d’écran montrant la page Manage Single sign on dans laquelle vous pouvez entrer les valeurs décrites](./media/tas-tutorial/configure02.png)
 
     a. Dans la zone de texte **Name** (Nom), tapez le nom de votre environnement.
     
@@ -222,13 +218,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans T
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette TAS dans le volet d’accès doit vous connecter automatiquement à l’application TAS pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette TAS dans le volet d’accès doit vous connecter automatiquement à l’application TAS pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

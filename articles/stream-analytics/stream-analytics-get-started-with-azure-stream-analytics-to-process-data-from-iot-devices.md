@@ -5,14 +5,14 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/26/2019
-ms.openlocfilehash: 0755131f7d8071e37eadc1339ebc5e122725fa71
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 311aca139220622a0436d490e73a536c3fc898c9
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75426242"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93129012"
 ---
 # <a name="process-real-time-iot-data-streams-with-azure-stream-analytics"></a>Traiter des flux de données IoT en temps réel à l’aide d’Azure Stream Analytics
 
@@ -125,7 +125,7 @@ HAVING Avg(temp)>100
 
 ![Requête de filtre de 30 secondes](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-10.png)
 
-Les résultats doivent contenir uniquement 245 lignes et répertorier les noms des capteurs pour lesquels la température moyenne est supérieure à 100 degrés. Dans cette requête, nous avons regroupé le flux d’événements en fonction du champ **dspl**, qui correspond au nom du capteur, et par valeur **Intervalle de temps** de 30 secondes. Les requêtes temporelles doivent indiquer le mode de calcul du temps. À l’aide de la clause **TIMESTAMP BY**, vous avez spécifié la colonne **OUTPUTTIME** pour associer les valeurs de temps avec l’ensemble des calculs temporels. Pour obtenir des informations détaillées, consultez [Gestion du temps](https://docs.microsoft.com/stream-analytics-query/time-management-azure-stream-analytics) et [Fonctions de fenêtrage](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics).
+Les résultats doivent contenir uniquement 245 lignes et répertorier les noms des capteurs pour lesquels la température moyenne est supérieure à 100 degrés. Dans cette requête, nous avons regroupé le flux d’événements en fonction du champ **dspl** , qui correspond au nom du capteur, et par valeur **Intervalle de temps** de 30 secondes. Les requêtes temporelles doivent indiquer le mode de calcul du temps. À l’aide de la clause **TIMESTAMP BY** , vous avez spécifié la colonne **OUTPUTTIME** pour associer les valeurs de temps avec l’ensemble des calculs temporels. Pour obtenir des informations détaillées, consultez [Gestion du temps](/stream-analytics-query/time-management-azure-stream-analytics) et [Fonctions de fenêtrage](/stream-analytics-query/windowing-azure-stream-analytics).
 
 ### <a name="query-detect-absence-of-events"></a>Requête : Détection de l’absence d’événements
 
@@ -148,9 +148,8 @@ WHERE t2.dspl IS NULL
 
 ![Détection de l’absence d’événements](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-11.png)
 
-Ici, nous utilisons une jointure **LEFT OUTER** sur le même flux de données (jointure réflexive). Pour une jointure **INNER**, un résultat n’est renvoyé que si une correspondance est trouvée.  Par contre, pour une jointure **LEFT OUTER**, si un événement du côté gauche de la jointure n’a pas de correspondance, une ligne contenant la valeur NULL pour toutes les colonnes de la ligne de droite est renvoyée. Cette technique est très utile pour rechercher une absence d’événements. Pour plus d'informations, consultez [JOIN](https://docs.microsoft.com/stream-analytics-query/join-azure-stream-analytics).
+Ici, nous utilisons une jointure **LEFT OUTER** sur le même flux de données (jointure réflexive). Pour une jointure **INNER** , un résultat n’est renvoyé que si une correspondance est trouvée.  Par contre, pour une jointure **LEFT OUTER** , si un événement du côté gauche de la jointure n’a pas de correspondance, une ligne contenant la valeur NULL pour toutes les colonnes de la ligne de droite est renvoyée. Cette technique est très utile pour rechercher une absence d’événements. Pour plus d'informations, consultez [JOIN](/stream-analytics-query/join-azure-stream-analytics).
 
 ## <a name="conclusion"></a>Conclusion
 
 L’objectif de cet article est de montrer comment écrire différentes requêtes en langage de requête Stream Analytics et afficher les résultats dans le navigateur. Toutefois, il ne s’agit que d’une prise en main. Ce langage prend en charge un large éventail d’entrées et de sorties et peut même tirer parti de fonctions d’Azure Machine Learning, ce qui en fait un outil robuste pour l’analyse des flux de données. Pour en savoir plus sur la méthode à suivre pour écrire des requêtes, voir [Exemples de requête pour les modes d’utilisation courants dans Stream Analytics](stream-analytics-stream-analytics-query-patterns.md).
-

@@ -4,24 +4,26 @@ titleSuffix: Azure Media Services
 description: Découvrez comment surveiller les métriques et journaux de diagnostic Azure Media Services via Azure Monitor.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/08/2019
-ms.author: juliako
-ms.openlocfilehash: f051d02ac06163cf1861ab6bfc6afd0dcbb0ad8a
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.topic: conceptual
+ms.date: 11/02/2020
+ms.author: inhenkel
+ms.openlocfilehash: ed436336b9b1f9f5815938d13315e821694e5f1c
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82559529"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685169"
 ---
-# <a name="monitor-media-services-metrics-and-diagnostic-logs-via-azure-monitor"></a>Surveiller les métriques et journaux de diagnostic Media Services via Azure Monitor
+# <a name="monitor-media-services-metrics-and-diagnostic-logs-with-azure-monitor"></a>Surveiller les métriques et journaux de diagnostic Media Services via Azure Monitor
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 [Azure Monitor](../../azure-monitor/overview.md) vous permet de surveiller les métriques et les journaux de diagnostic qui vous aident à comprendre le fonctionnement de vos applications. Toutes les données collectées par Azure Monitor font partie d’un des deux types fondamentaux : métriques et journaux. Vous pouvez surveiller les journaux de diagnostic Media Services et créer des alertes et notifications pour les métriques et les journaux collectés. Vous pouvez visualiser et analyser les métriques à l’aide [Metrics Explorer](../../azure-monitor/platform/metrics-getting-started.md). Vous pouvez envoyer les journaux d’activité au [Stockage Azure](https://azure.microsoft.com/services/storage/), les transmettre à [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/), les exporter vers [Log Analytics](https://azure.microsoft.com/services/log-analytics/) ou utiliser des services tiers.
 
@@ -58,15 +60,17 @@ Vous devez également examiner les [quotas et limites de compte](limits-quotas-c
 
 ### <a name="streaming-endpoint"></a>Point de terminaison de streaming
 
-Les métriques de [points de terminaison de streaming](https://docs.microsoft.com/rest/api/media/streamingendpoints) Media Services suivantes sont pris en charge :
+Les métriques de [points de terminaison de streaming](/rest/api/media/streamingendpoints) Media Services suivantes sont pris en charge :
 
 |Nom de métrique|Nom complet|Description|
 |---|---|---|
 |Demandes|Demandes|Fournit le nombre total de requêtes HTTP traitées par le point de terminaison de streaming.|
 |Sortie|Sortie|Nombre total d’octets de sortie par minute par point de terminaison de streaming.|
 |SuccessE2ELatency|Latence de réussite de bout en bout|Durée à partir de laquelle le point de terminaison de streaming a reçu la requête lorsque le dernier octet de la réponse a été envoyé.|
+|Utilisation de l’UC| | Utilisation de l’UC pour les points de terminaison de streaming Premium. Ces données ne sont pas disponibles pour les points de terminaison de streaming Standard. |
+|Bande passante en sortie | | Sortie de la bande passante en bits par seconde.|
 
-### <a name="why-would-i-want-to-use-metrics"></a>Pourquoi utiliser des métriques ?
+### <a name="metrics-are-useful"></a>Utilité des métriques
 
 Voici quelques exemples de la façon dont la surveillance de métriques Media Services peut vous aider à comprendre le fonctionnement de vos applications. Voici quelques questions qui peuvent être traitées avec les métriques Media Services :
 
@@ -78,7 +82,9 @@ Voici quelques exemples de la façon dont la surveillance de métriques Media Se
 * Comment voir combien de demandes TLS ou DASH sont extraites du packager ?
 * Comment définir une alerte pour savoir quand la valeur seuil du nombre de requêtes ayant échoué a été atteinte ?
 
-### <a name="example"></a> Exemple
+L’accès concurrentiel devient une préoccupation pour le nombre de points de terminaison de streaming utilisés dans un seul compte dans le temps. Vous devez garder à l’esprit la relation entre le nombre de flux simultanés et les paramètres de publication complexes tels que l’empaquetage dynamique sur plusieurs protocoles, plusieurs chiffrements DRM, etc. Chaque stream en direct publié supplémentaire vient s’ajouter à l’UC et à la bande passante en sortie sur le point de terminaison de streaming. En tenant compte de cela, vous devez utiliser Azure Monitor pour observer attentivement l’utilisation du point de terminaison de streaming (capacité d’UC et de sortie) afin de vous assurer que vous le mettez à l’échelle de manière appropriée (ou fractionnez le trafic entre plusieurs points de terminaison de streaming si vous obtenez une concurrence très élevée).
+
+### <a name="example"></a>Exemple
 
 Consultez [Surveiller les métriques Media Services](media-services-metrics-howto.md).
 
@@ -105,7 +111,7 @@ Voici quelques éléments que vous pouvez examiner avec les journaux de diagnost
 * Voir les erreurs par type de DRM ou de stratégie.
 * Voir le nombre de requêtes de licence non autorisées émises par les clients.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 Consultez [Comment surveiller les journaux de diagnostic Media Services](media-services-diagnostic-logs-howto.md).
 

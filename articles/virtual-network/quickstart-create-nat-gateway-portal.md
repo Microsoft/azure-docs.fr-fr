@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Créer une passerelle NAT - Portail Azure'
+title: 'Tutoriel : Créer une passerelle NAT - Portail Azure'
 titlesuffix: Azure Virtual Network NAT
 description: Ce guide de démarrage rapide montre comment créer une passerelle NAT à l’aide du portail Azure
 services: virtual-network
@@ -8,22 +8,23 @@ author: asudbring
 manager: KumudD
 Customer intent: I want to create a NAT gateway for outbound connectivity for my virtual network.
 ms.service: virtual-network
+ms.subservice: nat
 ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/24/2020
 ms.author: allensu
-ms.openlocfilehash: 1ff13d8ef0ca4c6cf499c3245d3ef14370283075
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 5010dc08b695a0376ace5dde935c63caf0c39633
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80066385"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012071"
 ---
-# <a name="quickstart-create-a-nat-gateway-using-the-azure-portal"></a>Démarrage rapide : Créer une passerelle NAT avec le portail Azure
+# <a name="tutorial-create-a-nat-gateway-using-the-azure-portal"></a>Tutoriel : Créer une passerelle NAT avec le portail Azure
 
-Ce guide de démarrage rapide vous montre comment utiliser le service NAT de Réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
+Ce tutoriel vous montre comment utiliser le service NAT de réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
 
 Si vous préférez, au lieu d’utiliser le portail, vous pouvez effectuer ces étapes dans [Azure CLI](quickstart-create-nat-gateway-cli.md), [Azure PowerShell](quickstart-create-nat-gateway-powershell.md) ou déployer un [modèle ARM](quickstart-create-nat-gateway-powershell.md).
 
@@ -39,12 +40,12 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | myResourceGroupNAT |
-| **\<nom_réseau_virtuel>** | myVNet          |
-| **\<nom_région>**          | USA Est 2      |
-| **\<espace_d’adressage_IPv4>**   | 192.168.0.0\16          |
-| **\<nom_sous-réseau>**          | mySubnet        |
-| **\<plage_adresses_sous-réseau>** | 192.168.0.0\24          |
+| **\<resource-group-name>**  | myResourceGroupNAT |
+| **\<virtual-network-name>** | myVNet          |
+| **\<region-name>**          | USA Est 2      |
+| **\<IPv4-address-space>**   | 192.168.0.0\16          |
+| **\<subnet-name>**          | mySubnet        |
+| **\<subnet-address-range>** | 192.168.0.0\24          |
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 

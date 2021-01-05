@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 04/10/2019
 ms.author: jmprieur
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: f389943d284c573312473f426048f8aadb79088e
-ms.sourcegitcommit: 31ef5e4d21aa889756fa72b857ca173db727f2c3
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 21f29135cc3b94e5b8c2dfc99b0f7be26b37d123
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81533970"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995197"
 ---
 # <a name="migrating-applications-to-msalnet"></a>Migration d’applications vers MSAL.NET
 
@@ -37,7 +37,7 @@ Cet article décrit les différences entre la Bibliothèque d'authentification M
 
 Dans la plupart des cas, vous avez besoin d’utiliser MSAL.NET et le point de terminaison de la plateforme d’identités Microsoft, à savoir la dernière génération de bibliothèques d’authentification de Microsoft. En utilisant MSAL.NET, vous acquérez des jetons pour la connexion des utilisateurs à votre application avec Azure AD (comptes professionnels et scolaires), des comptes (personnels) Microsoft (MSA) ou Azure AD B2C.
 
-Si vous connaissez déjà le point de terminaison Azure AD pour développeurs (v1.0) (et ADAL.NET), envisagez de lire l’article sur les [différences du point de terminaison de la plateforme d’identités Microsoft (v2.0)](active-directory-v2-compare.md).
+Si vous connaissez déjà le point de terminaison Azure AD pour développeurs (v1.0) (et ADAL.NET), envisagez de lire l’article sur les [différences du point de terminaison de la plateforme d’identités Microsoft (v2.0)](../azuread-dev/azure-ad-endpoint-comparison.md).
 
 En revanche, vous devez quand même utiliser ADAL.NET si votre application a besoin de connecter les utilisateurs avec des versions antérieures des [services de fédération Active Directory (AD FS)](/windows-server/identity/active-directory-federation-services). Pour plus d'informations, consultez le [support ADFS](https://aka.ms/msal-net-adfs-support).
 
@@ -161,7 +161,7 @@ Pour plus d’informations sur les jetons v1.0 et v2.0, consultez [Jetons d’ac
 
 ## <a name="scopes-for-a-web-api-accepting-v10-tokens"></a>Étendues pour une API web acceptant des jetons v1.0
 
-Les autorisations OAuth2 sont des étendues d’autorisation qu’une application (ressource) de l’API web v1.0 expose aux applications clientes. Ces étendues d’autorisation peuvent être accordées aux applications clientes durant le consentement. Consultez la section sur oauth2Permissions dans le [manifeste de l’application Azure Active Directory](active-directory-application-manifest.md).
+Les autorisations OAuth2 sont des étendues d’autorisation qu’une application (ressource) de l’API web v1.0 expose aux applications clientes. Ces étendues d’autorisation peuvent être accordées aux applications clientes durant le consentement. Consultez la section sur oauth2Permissions dans le [manifeste de l’application Azure Active Directory](./reference-app-manifest.md).
 
 ### <a name="scopes-to-request-access-to-specific-oauth2-permissions-of-a-v10-application"></a>Étendues pour demander l’accès à des autorisations OAuth2 spécifiques d’une application v1.0
 
@@ -176,8 +176,8 @@ var scopes = new [] {  ResourceId+"/user_impersonation"};
 Pour lire et écrire avec MSAL.NET Azure Active Directory à l’aide de l’API Microsoft Graph (https://graph.microsoft.com/) ), vous devez créer la liste des étendues, comme dans l’extrait de code suivant :
 
 ```csharp
-ResourceId = "https://graph.microsoft.com/";
-var scopes = new [] { ResourceId + "Directory.Read", ResourceID + "Directory.Write"}
+string ResourceId = "https://graph.microsoft.com/"; 
+string[] scopes = { ResourceId + "Directory.Read", ResourceId + "Directory.Write" }
 ```
 
 #### <a name="warning-should-you-have-one-or-two-slashes-in-the-scope-corresponding-to-a-v10-web-api"></a>Avertissement : Une ou deux barres obliques dans l’étendue correspondant à une API web v1.0 ?

@@ -1,24 +1,29 @@
 ---
-title: Conteneurs Docker - LUIS
+title: Installer et exécuter des conteneurs Docker pour LUIS
 titleSuffix: Azure Cognitive Services
-description: Le conteneur LUIS charge votre application entraînée ou publiée dans un conteneur docker et fournit l’accès aux prédictions de requête à partir des points de terminaison d’API du conteneur.
+description: Utilisez le conteneur LUIS pour charger votre application formée ou publiée, et accéder à ses prédictions localement.
 services: cognitive-services
 author: aahill
 manager: nitinme
-ms.custom: seodec18
+ms.custom: seodec18, cog-serv-seo-aug-2020
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 04/01/2020
+ms.date: 09/28/2020
 ms.author: aahi
-ms.openlocfilehash: 2df36d80aea34da1693cecde524d239abd2bb04a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+keywords: local, Docker, conteneur
+ms.openlocfilehash: 778fe388ae3db68d836384299a8a1c7c06e31f41
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100241"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96001799"
 ---
-# <a name="install-and-run-luis-docker-containers"></a>Installer et exécuter des conteneurs Docker LUIS
+# <a name="install-and-run-docker-containers-for-luis"></a>Installer et exécuter des conteneurs Docker pour LUIS
+
+[!INCLUDE [container image location note](../containers/includes/image-location-note.md)]
+
+Les conteneurs vous permettent d’utiliser LUIS dans votre propre environnement. Les conteneurs conviennent particulièrement bien à certaines exigences de sécurité et de gouvernance des données. Cet article explique comment télécharger, installer et exécuter un conteneur LUIS.
 
 Le conteneur Language Understanding (LUIS) charge votre modèle Language Understanding qui a été entraîné ou publié. En tant qu’[application LUIS](https://www.luis.ai), le conteneur Docker fournit l’accès aux prédictions de requêtes à partir des points de terminaison d’API du conteneur. Vous pouvez collecter les journaux de requête du conteneur et les charger à nouveau dans l’application Language Understanding pour améliorer la précision de prédiction de l’application.
 
@@ -26,7 +31,7 @@ La vidéo suivante illustre l’utilisation de ce conteneur.
 
 [![Démonstration d’un conteneur pour Cognitive Services](./media/luis-container-how-to/luis-containers-demo-video-still.png)](https://aka.ms/luis-container-demo)
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -53,7 +58,7 @@ API de création d’applications empaquetées :
 
 ### <a name="container-requirements-and-recommendations"></a>Exigences et suggestions relatives au conteneur
 
-Ce conteneur prend en charge des valeurs minimales et recommandées pour les paramètres :
+Le tableau ci-dessous répertorie les valeurs minimales et recommandées pour l’hôte de conteneur. Vos besoins peuvent varier en fonction du volume du trafic.
 
 |Conteneur| Minimum | Recommandé | TPS<br>(Minimum, maximum)|
 |-----------|---------|-------------|--|
@@ -66,10 +71,10 @@ Le nombre de cœurs et la quantité de mémoire correspondent aux paramètres `-
 
 ## <a name="get-the-container-image-with-docker-pull"></a>Obtenir l’image conteneur avec `docker pull`
 
-Utilisez la commande [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) pour télécharger une image conteneur à partir du référentiel `mcr.microsoft.com/azure-cognitive-services/luis` :
+Utilisez la commande [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) pour télécharger une image conteneur à partir du référentiel `mcr.microsoft.com/azure-cognitive-services/language/luis` :
 
 ```
-docker pull mcr.microsoft.com/azure-cognitive-services/luis:latest
+docker pull mcr.microsoft.com/azure-cognitive-services/language/luis:latest
 ```
 
 Pour obtenir une description complète des balises disponibles utilisées dans la commande précédente, telles que `latest`, consultez [LUIS](https://go.microsoft.com/fwlink/?linkid=2043204) sur Docker Hub.
@@ -206,7 +211,7 @@ docker run --rm -it -p 5000:5000 ^
 --cpus 2 ^
 --mount type=bind,src=c:\input,target=/input ^
 --mount type=bind,src=c:\output\,target=/output ^
-mcr.microsoft.com/azure-cognitive-services/luis ^
+mcr.microsoft.com/azure-cognitive-services/language/luis ^
 Eula=accept ^
 Billing={ENDPOINT_URI} ^
 ApiKey={API_KEY}
@@ -276,7 +281,7 @@ Les paramètres de requête configurent ce qui est retourné dans la réponse de
 |`staging`|boolean|Retourne une requête à partir des résultats de l’environnement intermédiaire si la valeur est true. |
 |`log`|boolean|Enregistre les requêtes, qui peuvent être utilisées ultérieurement pour l’[apprentissage actif](luis-how-to-review-endpoint-utterances.md). La valeur par défaut est true.|
 
-***
+**_
 
 ### <a name="query-the-luis-app"></a>Interroger l’application LUIS
 
@@ -294,7 +299,7 @@ curl -G \
 "http://localhost:5000/luis/v3.0/apps/{APP_ID}/slots/production/predict"
 ```
 
-Pour effectuer des requêtes dans l’environnement intermédiaire (**Staging**), remplacez `production` dans l’itinéraire par `staging` :
+Pour adresser des requêtes à l’environnement _ *Intermédiaire**, remplacez `production` dans l’itinéraire par `staging` :
 
 `http://localhost:5000/luis/v3.0/apps/{APP_ID}/slots/staging/predict`
 
@@ -330,7 +335,7 @@ curl -X GET \
 ```
 Le nom de version a un maximum de 10 caractères et contient uniquement des caractères autorisés dans une URL.
 
-***
+**_
 
 ## <a name="import-the-endpoint-logs-for-active-learning"></a>Importer les journaux d’activité de point de terminaison pour l’apprentissage actif
 
@@ -341,11 +346,11 @@ L’emplacement suivant montre la structure de répertoires imbriqués pour les 
 /output/luis/{INSTANCE_ID}/
 ```
 
-À partir du portail LUIS, sélectionnez votre application, puis sélectionnez **Import endpoint logs** (Importer les journaux d’activité de point de terminaison) pour charger ces journaux d’activité.
+Dans le portail LUIS, sélectionnez votre application, puis _ *Importer les journaux de point de terminaison** pour charger ces journaux.
 
 ![Importer les fichiers journaux du conteneur pour l’apprentissage actif](./media/luis-container-how-to/upload-endpoint-log-files.png)
 
-Une fois le journal chargé, [passez en revue les énoncés de point de terminaison](https://docs.microsoft.com/azure/cognitive-services/luis/luis-concept-review-endpoint-utterances) dans le portail LUIS.
+Une fois le journal chargé, [passez en revue les énoncés de point de terminaison](./luis-concept-review-endpoint-utterances.md) dans le portail LUIS.
 
 <!--  ## Validate container is running -->
 

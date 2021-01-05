@@ -17,12 +17,12 @@ ms.date: 04/09/2020
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0822bdd886a9a29f2cdb6843d3dc4404d7360f32
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 8dbf14b1816d367f864cc3a2977497b34111df3f
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261021"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97586191"
 ---
 # <a name="azure-ad-activity-logs-in-azure-monitor"></a>Journaux d’activité Azure Active Directory dans Azure Monitor
 
@@ -111,11 +111,11 @@ Le tableau suivant contient les coûts estimés par mois pour un Event Hub de ba
 
 
 
-| Catégorie de journal       | Nombre d’utilisateurs | Événements par jour | Événements par mois (30 jours) | Coût par mois en dollars américains (estimation) |
-| :--                | ---             | ---            | ---                        | --:                          |
-| Audit et connexions | 100 000         | 16 500 000     | 495 000 000                |  1093,00 $                       |
-| Audit              | 100 000         | 1 500 000      | 45 000 000                 |  246,66 $                     |
-| Connexions           | 100 000         | 15 000 000     | 450 000 000                |  847,28 $                     |
+| Catégorie de journal | Nombre d’utilisateurs | Événements par jour | Événements par mois (30 jours) | Coût par mois en dollars américains (estimation) |
+|:-|--|--|--|-:|
+| Audit et connexions | 100 000 | 16 500 000 | 495 000 000 | 1093,00 $ |
+| Audit | 100 000 | 1 500 000 | 45 000 000 | 246,66 $ |
+| Connexions | 100 000 | 15 000 000 | 450 000 000 | 847,28 $ |
 
 
 
@@ -126,7 +126,7 @@ Le tableau suivant contient les coûts estimés par mois pour un Event Hub de ba
 
 
 
-Pour connaître les coûts liés à la gestion des journaux d’activité Azure Monitor, consultez [Gérer les coûts en contrôlant le volume et la rétention dans les journaux d’activité Azure Monitor](https://docs.microsoft.com/azure/log-analytics/log-analytics-manage-cost-storage).
+Pour connaître les coûts liés à la gestion des journaux d’activité Azure Monitor, consultez [Gérer les coûts en contrôlant le volume et la rétention dans les journaux d’activité Azure Monitor](../../azure-monitor/platform/manage-cost-storage.md).
 
 ## <a name="frequently-asked-questions"></a>Forum aux questions
 
@@ -180,13 +180,13 @@ Cette section répond aux questions fréquemment posées et traitent des problè
 
 **Q : Quels sont les outils SIEM actuellement pris en charge ?** 
 
-**R** : **R** : Actuellement, Azure Monitor est pris en charge par [Splunk](tutorial-integrate-activity-logs-with-splunk.md), IBM QRadar, [Sumo Logic](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory), [ArcSight](https://docs.microsoft.com/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-arcsight), LogRhythm et Logz.io. Pour en savoir plus sur le fonctionnement des connecteurs, consultez la section [Diffuser des données de surveillance Azure vers un Event Hub pour les utiliser dans un outil externe](../../azure-monitor/platform/stream-monitoring-data-event-hubs.md).
+**R** : **R** : Actuellement, Azure Monitor est pris en charge par [Splunk](./howto-integrate-activity-logs-with-splunk.md), IBM QRadar, [Sumo Logic](https://help.sumologic.com/Send-Data/Applications-and-Other-Data-Sources/Azure_Active_Directory), [ArcSight](./howto-integrate-activity-logs-with-arcsight.md), LogRhythm et Logz.io. Pour en savoir plus sur le fonctionnement des connecteurs, consultez la section [Diffuser des données de surveillance Azure vers un Event Hub pour les utiliser dans un outil externe](../../azure-monitor/platform/stream-monitoring-data-event-hubs.md).
 
 ---
 
 **Q : Comment puis-je intégrer les journaux d’activité Azure AD à mon instance Splunk ?**
 
-**R** : Tout d’abord, [acheminez les journaux d’activité Azure AD vers un Event Hub](quickstart-azure-monitor-stream-logs-to-event-hub.md), puis suivez les étapes pour [intégrer des journaux d’activité avec Splunk](tutorial-integrate-activity-logs-with-splunk.md).
+**R** : Tout d’abord, [acheminez les journaux d’activité Azure AD vers un Event Hub](./tutorial-azure-monitor-stream-logs-to-event-hub.md), puis suivez les étapes pour [intégrer des journaux d’activité avec Splunk](./howto-integrate-activity-logs-with-splunk.md).
 
 ---
 
@@ -198,7 +198,7 @@ Cette section répond aux questions fréquemment posées et traitent des problè
 
 **Q : Puis-je accéder aux données d’un Event Hub sans avoir recours à un outil SIEM externe ?** 
 
-**R** : Oui. Vous pouvez utiliser l’[API Event Hubs](../../event-hubs/event-hubs-dotnet-standard-getstarted-receive-eph.md) pour accéder aux journaux d’activité à partir de votre application personnalisée. 
+**R** : Oui. Vous pouvez utiliser l’[API Event Hubs](../../event-hubs/event-hubs-dotnet-standard-getstarted-send.md) pour accéder aux journaux d’activité à partir de votre application personnalisée. 
 
 ---
 
@@ -206,5 +206,5 @@ Cette section répond aux questions fréquemment posées et traitent des problè
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Archiver les journaux d’activité dans un compte de stockage](quickstart-azure-monitor-route-logs-to-storage-account.md)
-* [Acheminer les journaux d’activité vers un Event Hub](quickstart-azure-monitor-stream-logs-to-event-hub.md)
+* [Acheminer les journaux d’activité vers un Event Hub](./tutorial-azure-monitor-stream-logs-to-event-hub.md)
 * [Intégrer les journaux d’activité à Azure Monitor](howto-integrate-activity-logs-with-log-analytics.md)

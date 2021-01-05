@@ -3,12 +3,13 @@ title: Sérialisation des objets Reliable Collection
 description: Découvrez-en plus sur la sérialisation des objets Reliable Collection dans Azure Service Fabric, notamment la stratégie par défaut et la définition de la sérialisation personnalisée.
 ms.topic: conceptual
 ms.date: 5/8/2017
-ms.openlocfilehash: 666e1bb45a9c75ee143f15a0d871d6ae1408eca9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 1d29f5d3391bdea0b21997a392d4d2e053b7ec65
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639545"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89018618"
 ---
 # <a name="reliable-collection-object-serialization-in-azure-service-fabric"></a>Sérialisation des objets Reliable Collections dans Azure Service Fabric
 Les objets Reliable Collections répliquent et conserver leurs éléments pour permettre à ces derniers de résister aux pannes d’ordinateur et de courant.
@@ -19,7 +20,7 @@ Reliable State Manager contient des sérialiseurs intégrés et autorise l’ins
 
 ## <a name="built-in-serializers"></a>Sérialiseurs intégrés
 
-Reliable State Manager intègre un sérialiseur qui est utilisé pour certains types courants de manière à garantir par défaut une sérialisation efficace. Pour d’autres types, Reliable State Manager utilise le [DataContractSerializer](https://msdn.microsoft.com/library/system.runtime.serialization.datacontractserializer(v=vs.110).aspx).
+Reliable State Manager intègre un sérialiseur qui est utilisé pour certains types courants de manière à garantir par défaut une sérialisation efficace. Pour d’autres types, Reliable State Manager utilise le [DataContractSerializer](/dotnet/api/system.runtime.serialization.datacontractserializer?view=netcore-3.1).
 Les sérialiseurs intégrés sont plus efficaces car ils savent que leurs types ne peuvent pas être modifiés et ils n’ont besoin d’inclure aucune information sur le type, par exemple son nom.
 
 Reliable State Manager intègre un sérialiseur pour les types suivants : 
@@ -44,7 +45,7 @@ Reliable State Manager intègre un sérialiseur pour les types suivants :
 
 Les sérialiseurs personnalisés sont couramment utilisés pour augmenter les performances ou pour chiffrer les données sur le réseau et sur le disque. Pour différentes raisons, les sérialiseurs personnalisés sont généralement plus efficaces que les sérialiseurs génériques, car ils n’ont pas besoin de sérialiser des informations relatives au type. 
 
-[IReliableStateManager.TryAddStateSerializer\<T>](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestatemanager.tryaddstateserializer) permet d’inscrire un sérialiseur personnalisé pour le type T donné. Cette inscription doit intervenir dans la construction du StatefulServiceBase afin de s’assurer que, avant le début de la récupération, tous les objets Reliable Collections ont bien accès au sérialiseur approprié pour lire leurs données persistantes.
+[IReliableStateManager.TryAddStateSerializer\<T>](/dotnet/api/microsoft.servicefabric.data.ireliablestatemanager.tryaddstateserializer) permet d’inscrire un sérialiseur personnalisé pour le type T donné. Cette inscription doit intervenir dans la construction du StatefulServiceBase afin de s’assurer que, avant le début de la récupération, tous les objets Reliable Collections ont bien accès au sérialiseur approprié pour lire leurs données persistantes.
 
 ```csharp
 public StatefulBackendService(StatefulServiceContext context)
@@ -62,10 +63,10 @@ public StatefulBackendService(StatefulServiceContext context)
 
 ### <a name="how-to-implement-a-custom-serializer"></a>Comment implémenter un sérialiseur personnalisé
 
-Un sérialiseur personnalisé doit implémenter l’interface [IStateSerializer\<T>](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.istateserializer-1).
+Un sérialiseur personnalisé doit implémenter l’interface [IStateSerializer\<T>](/dotnet/api/microsoft.servicefabric.data.istateserializer-1).
 
 > [!NOTE]
-> IStateSerializer\<T> inclut une surcharge d’écriture et de lecture qui prend une valeur de base T supplémentaire. Cette API s’applique à la sérialisation différentielle. La fonctionnalité de sérialisation différentielle n’est pas exposée pour le moment. Par conséquent, ces deux surcharges ne sont pas appelées tant que la sérialisation différentielle n’est pas exposée et activée.
+> IStateSerializer\<T> inclut une surcharge d’écriture et de lecture qui prend une valeur de base T supplémentaire. Cette API s’applique à la sérialisation différentielle. La fonctionnalité de sérialisation différentielle n’est pas exposée pour le moment. Par conséquent, ces deux surcharges ne sont pas appelées tant que la sérialisation différentielle n’est pas exposée et activée.
 
 Voici un exemple de type personnalisé appelé OrderKey qui contient quatre propriétés
 
@@ -131,7 +132,7 @@ Si vous utilisez le sérialiseur intégré, vous n’avez pas à vous soucier de
 Si toutefois vous utilisez un sérialiseur personnalisé ou le DataContractSerializer, les données doivent être indéfiniment compatibles en amont et en aval.
 En d’autres termes, chaque version du sérialiseur doit être en mesure de sérialiser et désérialiser n’importe quelle version du type.
 
-Les utilisateurs du contrat de données doivent suivre des règles de version bien définies pour l’ajout, la suppression et la modification de champs. En outre, le contrat de données prend en charge les champs inconnus, avec raccordement au processus de sérialisation et de désérialisation, ainsi que l’héritage de classe. Pour plus d'informations, consultez la page [Utilisation du contrat de données](https://msdn.microsoft.com/library/ms733127.aspx).
+Les utilisateurs du contrat de données doivent suivre des règles de version bien définies pour l’ajout, la suppression et la modification de champs. En outre, le contrat de données prend en charge les champs inconnus, avec raccordement au processus de sérialisation et de désérialisation, ainsi que l’héritage de classe. Pour plus d'informations, consultez la page [Utilisation du contrat de données](/dotnet/framework/wcf/feature-details/using-data-contracts).
 
 Les utilisateurs de sérialiseurs personnalisés doivent respecter les instructions du sérialiseur qu’ils utilisent afin de s’assurer de sa compatibilité en amont et en aval.
 Une façon courante de prendre en charge toutes les versions consiste à ajouter au début des informations sur la taille et à ajouter uniquement les propriétés facultatives.
@@ -139,7 +140,7 @@ Chaque version peut ainsi lire un maximum d’informations et passer à la derni
 
 ## <a name="next-steps"></a>Étapes suivantes
   * [Sérialisation et mise à niveau](service-fabric-application-upgrade-data-serialization.md)
-  * [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+  * [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)
   * [mise à niveau de votre application à l’aide de Visual Studio](service-fabric-application-upgrade-tutorial.md) vous guide à travers une mise à niveau de l’application à l’aide de Visual Studio.
   * [mise à niveau de votre application à l’aide de PowerShell](service-fabric-application-upgrade-tutorial-powershell.md) vous guide à travers une mise à niveau de l’application à l’aide de PowerShell.
   * Contrôlez les mises à niveau de votre application à l'aide des [Paramètres de mise à niveau](service-fabric-application-upgrade-parameters.md).

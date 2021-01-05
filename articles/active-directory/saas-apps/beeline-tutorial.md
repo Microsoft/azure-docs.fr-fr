@@ -1,58 +1,53 @@
 ---
-title: 'Didacticiel : Intégration d’Azure Active Directory à BeeLine | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et BeeLine.
+title: 'Tutoriel : Intégration d’Azure Active Directory à Beeline | Microsoft Docs'
+description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Beeline.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 0726859d-1dac-44a0-810b-da56d89039ee
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/06/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 64ed7f5d73b4e5a0eb4e7ff4ed6c0ce0788880fd
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 4274596f7d53488a2ca5d0e0d3ab3021531907df
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73157735"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97674083"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-beeline"></a>Didacticiel : Intégration d’Azure Active Directory à Beeline
+# <a name="tutorial-azure-active-directory-integration-with-beeline"></a>Tutoriel : Intégration d’Azure Active Directory à Beeline
 
-Dans ce didacticiel, vous allez apprendre à intégrer BeeLine à Azure Active Directory (Azure AD).
-L’intégration de BeeLine à Azure AD vous offre les avantages suivants :
+Dans ce didacticiel, vous allez apprendre à intégrer Beeline à Azure Active Directory (Azure AD).
+L’intégration de Beeline à Azure AD vous offre les avantages suivants :
 
-* Dans Azure AD, vous pouvez contrôler qui a accès à BeeLine.
-* Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à BeeLine (par le biais de l’authentification unique) avec leur compte Azure AD.
+* Dans Azure AD, vous pouvez contrôler qui a accès à Beeline.
+* Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à Beeline (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-Pour configurer l’intégration d’Azure AD avec BeeLine, vous avez besoin des éléments suivants :
+Pour configurer l’intégration d’Azure AD avec Beeline, vous avez besoin des éléments suivants :
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
-* Abonnement BeeLine pour lequel l’authentification unique est activée
+* Un abonnement Beeline pour lequel l’authentification unique est activée
 
 ## <a name="scenario-description"></a>Description du scénario
 
 Dans ce didacticiel, vous configurez et testez l’authentification unique Azure AD dans un environnement de test.
 
-* BeeLine prend en charge l’authentification unique initiée par le **fournisseur d’identité**
+* Beeline prend en charge l’authentification unique lancée par le **fournisseur d’identité**
 
-## <a name="adding-beeline-from-the-gallery"></a>Ajout de BeeLine à partir de la galerie
+## <a name="adding-beeline-from-the-gallery"></a>Ajout de Beeline depuis la galerie
 
-Pour configurer l’intégration de BeeLine avec Azure AD, vous devez ajouter BeeLine, à partir de la galerie, à votre liste d’applications SaaS gérées.
+Pour configurer l’intégration de Beeline avec Azure AD, vous devez ajouter Beeline disponible dans la galerie, à votre liste d’applications SaaS gérées.
 
-**Pour ajouter BeeLine à partir de la galerie, effectuez les étapes suivantes :**
+**Pour ajouter Beeline à partir de la galerie, procédez comme suit :**
 
 1. Dans le volet de navigation gauche du **[portail Azure](https://portal.azure.com)** , cliquez sur l’icône **Azure Active Directory**.
 
@@ -66,31 +61,31 @@ Pour configurer l’intégration de BeeLine avec Azure AD, vous devez ajouter B
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **BeeLine**, sélectionnez **BeeLine** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **Beeline**, sélectionnez **Beeline** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![BeeLine dans la liste des résultats](common/search-new-app.png)
+    ![Beeline dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
-Dans cette section, vous allez configurer et tester l’authentification unique Azure AD auprès de BeeLine, à l’aide d’un utilisateur de test nommé **Britta Simon**.
-Pour que l’authentification unique fonctionne, une relation entre l’utilisateur Azure AD et l’utilisateur BeeLine associé doit être établie.
+Dans cette section, vous allez configurer et tester l’authentification unique Azure AD auprès de Beeline, à l’aide d’un utilisateur de test nommé **Britta Simon**.
+Pour que l’authentification unique fonctionne, une relation entre l’utilisateur Azure AD et l’utilisateur Beeline associé doit être établie.
 
-Pour configurer et tester l’authentification unique Azure AD avec BeeLine, vous devez suivre les indications des sections suivantes :
+Pour configurer et tester l’authentification unique Azure AD avec Beeline, vous devez suivre les indications des sections suivantes :
 
 1. **[Configurer l’authentification unique Azure AD](#configure-azure-ad-single-sign-on)** pour permettre à vos utilisateurs d’utiliser cette fonctionnalité.
-2. **[Configurer l’authentification unique de BeeLine](#configure-beeline-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
+2. **[Configurer l’authentification unique de Beeline](#configure-beeline-single-sign-on)** pour configurer les paramètres de l’authentification unique côté application.
 3. **[Créer un utilisateur de test Azure AD](#create-an-azure-ad-test-user)** pour tester l’authentification unique Azure AD avec Britta Simon.
 4. **[Affecter l’utilisateur de test Azure AD](#assign-the-azure-ad-test-user)** pour permettre à Britta Simon d’utiliser l’authentification unique Azure AD.
-5. **[Créer l’utilisateur de test BeeLine](#create-beeline-test-user)** pour avoir dans BeeLine un équivalent de Britta Simon lié à la représentation Azure AD associée.
+5. **[Créer l’utilisateur de test Beeline](#create-beeline-test-user)** pour avoir dans Beeline un équivalent de Britta Simon lié à la représentation Azure AD associée.
 6. **[Tester l’authentification unique](#test-single-sign-on)** : pour vérifier si la configuration fonctionne.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Configurer l’authentification unique Azure AD
 
 Dans cette section, vous activez l’authentification unique Azure AD dans le portail Azure.
 
-Pour configurer l’authentification unique Azure AD auprès de BeeLine, effectuez les étapes suivantes :
+Pour configurer l’authentification unique Azure AD auprès de Beeline, effectuez les étapes suivantes :
 
-1. Dans la page d’intégration de l’application [BeeLine](https://portal.azure.com/) sur le **portail Azure**, sélectionnez **Authentification unique**.
+1. Dans la page d’intégration de l’application [Beeline](https://portal.azure.com/) dans le **portail Azure**, sélectionnez **Authentification unique**.
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
@@ -106,19 +101,18 @@ Pour configurer l’authentification unique Azure AD auprès de BeeLine, effectu
 
     ![Informations d’authentification unique relatives au domaine et aux URL BeeLine](common/idp-intiated.png)
 
-    a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://projects.beeline.net/<instancename>`
+    a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://projects.beeline.com/<ProjInstanceName>`
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
-    
-    | |
-    |--|
-    | `https://projects.beeline.net/<instancename>/SSO_External.ashx`|
-    | `https://projects.beeline.net/<companyname>/SSO_External.ashx` |
+
+    ```https
+    https://projects.beeline.com/<ProjInstanceName>/SSO_External.ashx
+    ```
 
     > [!NOTE]
-    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur et l’URL de réponse réels. Pour obtenir ces valeurs, contactez [l’équipe du support technique de BeeLine](https://www.beeline.com/contact-us/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur et l’URL de réponse réels. Pour obtenir ces valeurs, contactez l’[équipe du support technique de Beeline](https://www.beeline.com/support-beeline/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. L’application Beeline attend les assertions SAML dans un format spécifique. Collaborez avec l’[équipe de support technique de BeeLine](https://www.beeline.com/contact-us/) pour identifier tout d’abord l’identificateur d’utilisateur correct qui sera mappé à l’application. Suivez également les instructions de l’[équipe de support technique de BeeLine](https://www.beeline.com/contact-us/) concernant l’attribut à utiliser pour ce mappage. Vous pouvez gérer la valeur de cet attribut à partir de l’onglet **Attributs utilisateur** de l’application. La capture d’écran suivante montre un exemple : Ici, nous avons mis en correspondance la revendication **Identificateur d’utilisateur** avec l’attribut **userprincipalname**, qui fournit l’ID utilisateur unique qui sera envoyé à l’application BeeLine dans chaque réponse SAML correcte.
+5. L’application Beeline attend les assertions SAML dans un format spécifique. Collaborez avec l’[équipe de support technique de Beeline](https://www.beeline.com/support-beeline/) pour identifier tout d’abord l’identificateur d’utilisateur correct qui sera mappé à l’application. Suivez également les instructions de l’[équipe de support technique de Beeline](https://www.beeline.com/support-beeline/) concernant l’attribut à utiliser pour ce mappage. Vous pouvez gérer la valeur de cet attribut à partir de l’onglet **Attributs utilisateur** de l’application. La capture d’écran suivante montre un exemple : Ici, nous avons mis en correspondance la revendication **Identificateur d’utilisateur** avec l’attribut **userprincipalname**, qui fournit l’ID utilisateur unique qui sera envoyé à l’application Beeline dans chaque réponse SAML correcte.
 
     ![image](common/edit-attribute.png)
 
@@ -126,19 +120,14 @@ Pour configurer l’authentification unique Azure AD auprès de BeeLine, effectu
 
     ![Lien Téléchargement de certificat](common/metadataxml.png)
 
-7. Dans la section **Configurer BeeLine**, copiez l’URL ou les URL appropriées en fonction de vos besoins.
+7. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Beeline**, sélectionnez **Propriétés** et copiez l’URL d’accès utilisateur.
 
-    ![Copier les URL de configuration](common/copy-configuration-urls.png)
+    ![Copier l’URL de l’accès utilisateur](media/beeline-tutorial/client-access-url.png)
 
-    a. URL de connexion
 
-    b. Identificateur Azure AD
+### <a name="configure-beeline-single-sign-on"></a>Configurer l’authentification unique de Beeline
 
-    c. URL de déconnexion
-
-### <a name="configure-beeline-single-sign-on"></a>Configurer l’authentification unique de BeeLine
-
-Pour configurer l’authentification unique côté **BeeLine**, vous devez envoyer le **XML des métadonnées de fédération** téléchargé et les URL appropriées, copiées à partir du portail Azure, à l’[équipe du support technique de BeeLine](https://www.beeline.com/contact-us/). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Beeline**, vous devez envoyer le **XML des métadonnées de fédération** téléchargé et l’URL d’accès utilisateur, copié à partir des propriétés dans le portail Azure, à l’[équipe du support technique de Beeline](https://www.beeline.com/support-beeline/). Il lui faut les métadonnées et l’URL d’accès utilisateur afin que la connexion d’authentification unique SAML soit correctement configurée des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD
 
@@ -157,7 +146,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -167,15 +156,15 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
 ### <a name="assign-the-azure-ad-test-user"></a>Affecter l’utilisateur de test Azure AD
 
-Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à BeeLine.
+Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Beeline.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **BeeLine**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **Beeline**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
-2. Dans la liste des applications, sélectionnez **BeeLine**.
+2. Dans la liste des applications, sélectionnez **Beeline**.
 
-    ![Lien BeeLine dans la liste des applications](common/all-applications.png)
+    ![Lien Beeline dans la liste des applications](common/all-applications.png)
 
 3. Dans le menu de gauche, sélectionnez **Utilisateurs et groupes**.
 
@@ -191,20 +180,20 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
 
-### <a name="create-beeline-test-user"></a>Créer l’utilisateur de test BeeLine
+### <a name="create-beeline-test-user"></a>Créer l’utilisateur de test Beeline
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Beeline. Tous les utilisateurs de BeeLine doivent être approvisionnés dans cette application avant de procéder à l’authentification unique. Vous devez donc collaborer avec l’[équipe de support technique de Beeline](https://www.beeline.com/contact-us/) pour approvisionner ces utilisateurs dans l’application.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Beeline. Tous les utilisateurs de Beeline doivent être provisionnés dans cette application avant de procéder à l’authentification unique. Vous devez donc collaborer avec l’[équipe de support technique de Beeline](https://www.beeline.com/support-beeline/) pour provisionner ces utilisateurs dans l’application.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette BeeLine dans le volet d’accès doit vous connecter automatiquement à l’application BeeLine pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Beeline dans le volet d’accès doit vous connecter automatiquement à l’instance de Beeline dans laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -1,16 +1,14 @@
 ---
 title: Mise à l’échelle d’un cluster autonome Azure Service Fabric
 description: En savoir plus sur la mise à l’échelle de clusters autonomes Service Fabric, qu’il s’agisse d’une diminution ou d’une réduction de taille des instances, ou d’une montée ou descente en puissance.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 11/13/2018
-ms.author: dekapur
-ms.openlocfilehash: 16ec0eb429ec6e8f6613490226b7cff01dff1b32
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8184b2455e938fa0500308b462176e78b8dadcab
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75451915"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91843029"
 ---
 # <a name="scaling-service-fabric-standalone-clusters"></a>Mise à l’échelle de clusters autonomes Service Fabric
 Un cluster Service Fabric est un groupe de machines virtuelles ou physiques connectées au réseau, sur lequel vos microservices sont déployés et gérés. Une machine ou une machine virtuelle faisant partie d’un cluster est appelée un nœud. Les clusters peuvent potentiellement comporter des milliers de nœuds. Une fois que vous avez créé un cluster Service Fabric, vous pouvez le mettre à l’échelle horizontalement (modifier le nombre de nœuds) ou verticalement (modifier les ressources des nœuds).  Une mise à l’échelle peut s’effectuer à tout moment, même lorsque des charges de travail sont en cours d’exécution sur le cluster.  Lorsque vous mettez vos nœuds à l’échelle, vos applications sont automatiquement mises à l’échelle.
@@ -28,7 +26,7 @@ Les clusters autonomes vous permettent de déployer un cluster Service Fabric en
 La suppression de nœuds peut entraîner plusieurs mises à niveau. Certains nœuds, identifiés avec la balise `IsSeedNode=”true”`, peuvent être identifiés en interrogeant le manifeste du cluster à l’aide de [Get-ServiceFabricClusterManifest](/powershell/module/servicefabric/get-servicefabricclustermanifest). La suppression de ces nœuds peut prendre plus de temps car, dans ce cas, les nœuds initiaux devront être déplacés. Le cluster doit conserver au moins 3 nœuds de type nœud principal.
 
 > [!WARNING]
-> Nous vous recommandons de ne pas réduire le nombre de nœuds sous la [taille de niveau de fiabilité](service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster) pour le cluster. Cela interférera avec la possibilité de réplication des services système Service Fabric sur le cluster, et déstabilisera, voire détruira, le cluster.
+> Nous vous recommandons de ne pas réduire le nombre de nœuds sous la [taille de niveau de fiabilité](service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster) pour le cluster. Cela interférera avec la possibilité de réplication des services système Service Fabric sur le cluster, et déstabilisera, voire détruira, le cluster.
 >
 
 Lors de la mise à l’échelle d’un cluster autonome, gardez les instructions suivantes à l’esprit :

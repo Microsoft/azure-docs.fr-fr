@@ -3,29 +3,30 @@ title: SDK Java Azure Data Lake Storage Gen2 pour les fichiers et les listes de 
 description: Utilisez des bibliothèques Stockage Azure pour Java pour gérer les répertoires et les listes de contrôle d’accès (ACL, access-control list) de fichiers et de répertoires dans des comptes de stockage dotés d’un espace de noms hiérarchique (HNS) activé.
 author: normesta
 ms.service: storage
-ms.date: 03/20/2020
+ms.date: 09/10/2020
+ms.custom: devx-track-java
 ms.author: normesta
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: data-lake-storage-gen2
 ms.reviewer: prishet
-ms.openlocfilehash: 45870dd7d3035b6b49340fd6e8016794088e775a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6e8219f744a91628f9860f0af133c07eddb4253
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80061553"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913383"
 ---
 # <a name="use-java-to-manage-directories-files-and-acls-in-azure-data-lake-storage-gen2"></a>Utiliser Java pour gérer les répertoires, les fichiers et les listes de contrôle d’accès dans Azure Data Lake Storage Gen2
 
 Cet article vous explique comment utiliser Java pour créer et gérer des répertoires, des fichiers et des autorisations dans des comptes de stockage dotés d’un espace de noms hiérarchique (HNS) activé. 
 
-[Package (Maven)](https://search.maven.org/artifact/com.azure/azure-storage-file-datalake) | [Exemples](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake) | [Référence de l’API](https://azuresdkdocs.blob.core.windows.net/$web/java/azure-storage-file-datalake/12.0.1/index.html) | [Mappage de Gen1 à Gen2](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake/GEN1_GEN2_MAPPING.md) | [Envoyer des commentaires](https://github.com/Azure/azure-sdk-for-java/issues)
+[Package (Maven)](https://search.maven.org/artifact/com.azure/azure-storage-file-datalake) | [Exemples](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake) | [Référence de l’API](/java/api/overview/azure/storage-file-datalake-readme) | [Mappage de Gen1 à Gen2](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake/GEN1_GEN2_MAPPING.md) | [Envoyer des commentaires](https://github.com/Azure/azure-sdk-for-java/issues)
 
 ## <a name="prerequisites"></a>Prérequis
 
 > [!div class="checklist"]
 > * Un abonnement Azure. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
-> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](data-lake-storage-quickstart-create-account.md) instructions.
+> * Un compte de stockage doté d’un espace de noms hiérarchique (HNS) activé. Pour créer un test, suivez [ces](../common/storage-account-create.md) instructions.
 
 ## <a name="set-up-your-project"></a>Configuration de votre projet
 
@@ -105,11 +106,11 @@ static public DataLakeServiceClient GetDataLakeServiceClient
 > Pour plus d’exemples, consultez la documentation [Bibliothèque de client Azure Identity pour Java](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/identity/azure-identity).
 
 
-## <a name="create-a-file-system"></a>Créer un système de fichiers
+## <a name="create-a-container"></a>Créez un conteneur.
 
-Un système de fichiers agit comme un conteneur pour vos fichiers. Vous pouvez en créer un en appelant la méthode **DataLakeServiceClient.createFileSystem**.
+Un conteneur fait office de système de fichiers pour vos fichiers. Vous pouvez en créer un en appelant la méthode **DataLakeServiceClient.createFileSystem**.
 
-Cet exemple crée un système de fichiers nommé `my-file-system`. 
+Cet exemple crée un conteneur nommé `my-file-system`. 
 
 ```java
 static public DataLakeFileSystemClient CreateFileSystem
@@ -123,7 +124,7 @@ static public DataLakeFileSystemClient CreateFileSystem
 
 Créez une référence de répertoire en appelant la méthode **DataLakeFileSystemClient.createDirectory**.
 
-Cet exemple ajoute un répertoire nommé `my-directory` à un système de fichiers, puis ajoute un sous-répertoire nommé `my-subdirectory`. 
+Cet exemple ajoute un répertoire nommé `my-directory` à un conteneur, puis ajoute un sous-répertoire nommé `my-subdirectory`. 
 
 ```java
 static public DataLakeDirectoryClient CreateDirectory
@@ -187,51 +188,6 @@ static public void DeleteDirectory(DataLakeFileSystemClient fileSystemClient){
 }
 ```
 
-## <a name="manage-a-directory-acl"></a>Gérer la liste ACL d’un répertoire
-
-Cet exemple obtient puis définit l’ACL d’un répertoire nommé `my-directory`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
-
-> [!NOTE]
-> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control).
-
-```java
-static public void ManageDirectoryACLs(DataLakeFileSystemClient fileSystemClient){
-
-    DataLakeDirectoryClient directoryClient =
-        fileSystemClient.getDirectoryClient("my-directory");
-
-    PathAccessControl directoryAccessControl =
-        directoryClient.getAccessControl();
-
-    List<PathAccessControlEntry> pathPermissions = directoryAccessControl.getAccessControlList();
-       
-    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
-             
-    RolePermissions groupPermission = new RolePermissions();
-    groupPermission.setExecutePermission(true).setReadPermission(true);
-  
-    RolePermissions ownerPermission = new RolePermissions();
-    ownerPermission.setExecutePermission(true).setReadPermission(true).setWritePermission(true);
-  
-    RolePermissions otherPermission = new RolePermissions();
-    otherPermission.setReadPermission(true);
-  
-    PathPermissions permissions = new PathPermissions();
-  
-    permissions.setGroup(groupPermission);
-    permissions.setOwner(ownerPermission);
-    permissions.setOther(otherPermission);
-
-    directoryClient.setPermissions(permissions, null, null);
-
-    pathPermissions = directoryClient.getAccessControl().getAccessControlList();
-     
-    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
-
-}
-
-```
-
 ## <a name="upload-a-file-to-a-directory"></a>Charger un fichier dans un répertoire
 
 Tout d’abord, créez une référence de fichier dans le répertoire cible en créant une instance de la classe **DataLakeFileClient**. Téléchargez un fichier en appelant la méthode **DataLakeFileClient.append**. Veillez à effectuer le chargement en appelant la méthode **DataLakeFileClient.FlushAsync**.
@@ -249,7 +205,7 @@ static public void UploadFile(DataLakeFileSystemClient fileSystemClient)
 
     File file = new File("C:\\mytestfile.txt");
 
-    InputStream targetStream = new FileInputStream(file);
+    InputStream targetStream = new BufferedInputStream(new FileInputStream(file));
 
     long fileSize = file.length();
 
@@ -281,54 +237,6 @@ static public void UploadFileBulk(DataLakeFileSystemClient fileSystemClient)
 
     }
 
-```
-
-
-## <a name="manage-a-file-acl"></a>Gérer la liste ACL d’un fichier
-
-Cet exemple obtient puis définit l’ACL d’un fichier nommé `upload-file.txt`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
-
-> [!NOTE]
-> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control).
-
-```java
-static public void ManageFileACLs(DataLakeFileSystemClient fileSystemClient){
-
-    DataLakeDirectoryClient directoryClient =
-        fileSystemClient.getDirectoryClient("my-directory");
-
-    DataLakeFileClient fileClient = 
-        directoryClient.getFileClient("uploaded-file.txt");
-
-    PathAccessControl fileAccessControl =
-        fileClient.getAccessControl();
-
-    List<PathAccessControlEntry> pathPermissions = fileAccessControl.getAccessControlList();
-     
-    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
-           
-    RolePermissions groupPermission = new RolePermissions();
-    groupPermission.setExecutePermission(true).setReadPermission(true);
-
-    RolePermissions ownerPermission = new RolePermissions();
-    ownerPermission.setExecutePermission(true).setReadPermission(true).setWritePermission(true);
-
-    RolePermissions otherPermission = new RolePermissions();
-    otherPermission.setReadPermission(true);
-
-    PathPermissions permissions = new PathPermissions();
-
-    permissions.setGroup(groupPermission);
-    permissions.setOwner(ownerPermission);
-    permissions.setOther(otherPermission);
-
-    fileClient.setPermissions(permissions, null, null);
-
-    pathPermissions = fileClient.getAccessControl().getAccessControlList();
-   
-    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
-
-}
 ```
 
 ## <a name="download-from-a-directory"></a>Télécharger à partir d’un répertoire
@@ -390,9 +298,114 @@ static public void ListFilesInDirectory(DataLakeFileSystemClient fileSystemClien
 }
 ```
 
+## <a name="manage-access-control-lists-acls"></a>Gérer les listes de contrôle d’accès (ACL)
+
+Vous pouvez obtenir, définir et mettre à jour les autorisations d’accès des répertoires et des fichiers.
+
+> [!NOTE]
+> Si vous utilisez Azure Active Directory (Azure AD) pour autoriser l’accès, assurez-vous que le [rôle Propriétaire des données blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) est attribué à votre principal de sécurité. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+### <a name="manage-a-directory-acl"></a>Gérer la liste ACL d’un répertoire
+
+Cet exemple obtient puis définit l’ACL d’un répertoire nommé `my-directory`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
+
+> [!NOTE]
+> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+```java
+static public void ManageDirectoryACLs(DataLakeFileSystemClient fileSystemClient){
+
+    DataLakeDirectoryClient directoryClient =
+        fileSystemClient.getDirectoryClient("my-directory");
+
+    PathAccessControl directoryAccessControl =
+        directoryClient.getAccessControl();
+
+    List<PathAccessControlEntry> pathPermissions = directoryAccessControl.getAccessControlList();
+       
+    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
+             
+    RolePermissions groupPermission = new RolePermissions();
+    groupPermission.setExecutePermission(true).setReadPermission(true);
+  
+    RolePermissions ownerPermission = new RolePermissions();
+    ownerPermission.setExecutePermission(true).setReadPermission(true).setWritePermission(true);
+  
+    RolePermissions otherPermission = new RolePermissions();
+    otherPermission.setReadPermission(true);
+  
+    PathPermissions permissions = new PathPermissions();
+  
+    permissions.setGroup(groupPermission);
+    permissions.setOwner(ownerPermission);
+    permissions.setOther(otherPermission);
+
+    directoryClient.setPermissions(permissions, null, null);
+
+    pathPermissions = directoryClient.getAccessControl().getAccessControlList();
+     
+    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
+
+}
+
+```
+
+Vous pouvez également obtenir et définir la liste de contrôle d’accès du répertoire racine d’un conteneur. Pour obtenir le répertoire racine, transmettez une chaîne vide (`""`) dans la méthode **DataLakeFileSystemClient.getDirectoryClient**.
+
+### <a name="manage-a-file-acl"></a>Gérer la liste ACL d’un fichier
+
+Cet exemple obtient puis définit l’ACL d’un fichier nommé `upload-file.txt`. Cet exemple donne à l’utilisateur propriétaire des autorisations de lecture, d’écriture et d’exécution, donne au groupe propriétaire uniquement des autorisations de lecture et d’exécution et donne à tous les autres l’accès en lecture.
+
+> [!NOTE]
+> Si votre application autorise l’accès en utilisant Azure Active Directory (Azure AD), vérifiez que le [rôle de propriétaire des données Blob du stockage](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner) a été attribué au principal de sécurité utilisé par votre application pour autoriser l’accès. Pour en savoir plus sur l’application des autorisations ACL et les conséquences de leur modification, consultez [Contrôle d’accès dans Azure Data Lake Storage Gen2](./data-lake-storage-access-control.md).
+
+```java
+static public void ManageFileACLs(DataLakeFileSystemClient fileSystemClient){
+
+    DataLakeDirectoryClient directoryClient =
+        fileSystemClient.getDirectoryClient("my-directory");
+
+    DataLakeFileClient fileClient = 
+        directoryClient.getFileClient("uploaded-file.txt");
+
+    PathAccessControl fileAccessControl =
+        fileClient.getAccessControl();
+
+    List<PathAccessControlEntry> pathPermissions = fileAccessControl.getAccessControlList();
+     
+    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
+           
+    RolePermissions groupPermission = new RolePermissions();
+    groupPermission.setExecutePermission(true).setReadPermission(true);
+
+    RolePermissions ownerPermission = new RolePermissions();
+    ownerPermission.setExecutePermission(true).setReadPermission(true).setWritePermission(true);
+
+    RolePermissions otherPermission = new RolePermissions();
+    otherPermission.setReadPermission(true);
+
+    PathPermissions permissions = new PathPermissions();
+
+    permissions.setGroup(groupPermission);
+    permissions.setOwner(ownerPermission);
+    permissions.setOther(otherPermission);
+
+    fileClient.setPermissions(permissions, null, null);
+
+    pathPermissions = fileClient.getAccessControl().getAccessControlList();
+   
+    System.out.println(PathAccessControlEntry.serializeList(pathPermissions));
+
+}
+```
+
+### <a name="set-an-acl-recursively"></a>Définir une liste de contrôle d’accès (ACL) de manière récursive
+
+Vous pouvez ajouter, mettre à jour et supprimer des listes ACL de manière récursive au niveau des éléments enfants existants d’un répertoire parent sans avoir à apporter ces modifications individuellement à chaque élément enfant. Pour plus d’informations, consultez [Définir des listes de contrôle d’accès (ACL) de manière récursive pour Azure Data Lake Storage Gen2](recursive-access-control-lists.md).
+
 ## <a name="see-also"></a>Voir aussi
 
-* [Documentation de référence de l’API](https://azuresdkdocs.blob.core.windows.net/$web/java/azure-storage-file-datalake/12.0.1/index.html)
+* [Documentation de référence de l’API](/java/api/overview/azure/storage-file-datalake-readme)
 * [Package (Maven)](https://search.maven.org/artifact/com.azure/azure-storage-file-datalake)
 * [Exemples](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake)
 * [Mappage de Gen1 à Gen2](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-file-datalake/GEN1_GEN2_MAPPING.md)

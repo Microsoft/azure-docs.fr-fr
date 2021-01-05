@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Adobe Experience Manager | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Adobe Experience Manager.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 88a95bb5-c17c-474f-bb92-1f80f5344b5a
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: f39751f40b32c5da24e13d75d2607d7da0a57ad3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 9a98a77b9cc89b7a1a05e676048775aa38c83733
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73154116"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97671964"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-adobe-experience-manager"></a>Didacticiel : Intégration d’Azure Active Directory à Adobe Experience Manager
 
@@ -32,7 +27,7 @@ L’intégration d’Adobe Experience Manager à Azure AD vous offre les avantag
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Adobe Experience Manager (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -70,7 +65,7 @@ Pour configurer l’intégration d’Adobe Experience Manager à Azure AD, vous 
 
 4. Dans la zone de recherche, tapez **Adobe Experience Manager**, sélectionnez **Adobe Experience Manager** dans le volet des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Adobe Experience Manager dans la liste des résultats](common/search-new-app.png)
+    ![Adobe Experience Manager dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -106,7 +101,7 @@ Pour configurer l’authentification unique Azure AD avec [Nom de l’applicati
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Adobe Experience Manager Domain and URLs (Domaines et URL Adobe Experience Manager)](common/idp-intiated.png)
+    ![Capture d’écran montrant la section Basic SAML Configuration et mettant en évidence les zones de texte Identifier et Reply URL.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une valeur unique que vous définissez sur votre serveur AEM également.
 
@@ -141,35 +136,35 @@ Pour configurer l’authentification unique Azure AD avec [Nom de l’applicati
 
 2. Sélectionnez **Paramètres** > **Sécurité** > **Utilisateurs**.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_user.png)
+    ![Capture d’écran montrant la vignette Users dans Adobe Experience Manager.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_user.png)
 
 3. Sélectionnez **Administrateur** ou tout autre utilisateur approprié.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin6.png)
+    ![Capture d’écran mettant en évidence l’utilisateur Administrator.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin6.png)
 
 4. Sélectionnez **Paramètres du compte** > **Gérer TrustStore**.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_managetrust.png)
+    ![Capture d’écran montrant Manage TrustStore sous Account settings.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_managetrust.png)
 
 5. Sous **Ajouter un certificat à partir d’un fichier CER**, cliquez sur **Sélectionner un fichier de certificat**. Accédez au fichier de certificat que vous avez téléchargé à partir du portail Azure et sélectionnez-le.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_user2.png)
+    ![Capture d’écran mettant en évidence le bouton Select Certificate File.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_user2.png)
 
 6. Le certificat est ajouté au TrustStore. Notez l’alias du certificat.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin7.png)
+    ![Capture d’écran montrant que le certificat est ajouté au TrustStore.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin7.png)
 
 7. Sur la page **Utilisateurs**, sélectionnez **authentication-service**.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin8.png)
+    ![Capture d’écran mettant en évidence authentication-service sur l’écran.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin8.png)
 
 8. Sélectionnez **Paramètres du compte** > **Create/Manage KeyStore** (Créer/gérer KeyStore). Créez KeyStore en fournissant un mot de passe.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin9.png)
+    ![Capture d’écran mettant en évidence Manage KeyStore.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin9.png)
 
 9. Revenez à l’écran d’administrateur. Puis sélectionnez **Paramètres** > **Opérations** > **Console Web**.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin1.png)
+    ![Capture d’écran mettant Web Console sous Operations dans la section Settings.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin1.png)
 
     La page de configuration s’ouvre.
 
@@ -177,7 +172,7 @@ Pour configurer l’authentification unique Azure AD avec [Nom de l’applicati
 
 10. Rechercher **Adobe Granite SAML 2.0 Authentication Handler**. Puis cliquez sur l’icône **Ajouter**.
 
-    ![Bouton Enregistrer de la page Configurer l’authentification unique](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin3.png)
+    ![Capture d’écran mettant en évidence Adobe Granite SAML 2.0 Authentication Handler.](./media/adobeexperiencemanager-tutorial/tutorial_adobeexperiencemanager_admin3.png)
 
 11. Sur cette page, effectuez les actions suivantes.
 
@@ -220,7 +215,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -258,18 +253,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 Dans cette section, vous créez un utilisateur appelé Britta Simon dans Adobe Experience Manager. Si vous avez sélectionné l’option **Autocreate CRX Users** (Créer automatiquement des utilisateurs CRX), les utilisateurs sont créés automatiquement après une authentification réussie.
 
-Si vous souhaitez créer manuellement des utilisateurs, collaborez avec l’[équipe de support technique Adobe Experience Manager](https://helpx.adobe.com/support/experience-manager.html)  pour ajouter les utilisateurs dans la plateforme Adobe Experience Manager.
+Si vous souhaitez créer manuellement des utilisateurs, collaborez avec [l’équipe de support technique Adobe Experience Manager](https://helpx.adobe.com/support/experience-manager.html) pour ajouter les utilisateurs dans la plateforme Adobe Experience Manager.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Adobe Experience Manager dans le volet d’accès, vous devez être connecté automatiquement à l’application Adobe Experience Manager pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Adobe Experience Manager dans le volet d’accès, vous devez être connecté automatiquement à l’application Adobe Experience Manager pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

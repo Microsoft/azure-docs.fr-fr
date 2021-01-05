@@ -1,17 +1,15 @@
 ---
 title: 'Démarrage rapide : Créer une application Java sur Azure Service Fabric'
 description: Dans le cadre de ce démarrage rapide, vous créez une application Java pour Azure à l’aide d’un exemple d’application de services fiables Service Fabric.
-author: suhuruli
 ms.topic: quickstart
 ms.date: 01/29/2019
-ms.author: suhuruli
-ms.custom: mvc, devcenter, seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: fc615149b092aebfdde767fb3b716fb897bfd551
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devcenter, seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 2f1e5f8f73f74d4b427e574b9e6a75aaf84a4211
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77121505"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91529846"
 ---
 # <a name="quickstart--deploy-a-java-app-to-azure-service-fabric-on-linux"></a>Démarrage rapide :  Déployer une application Java dans Azure Service Fabric sur Linux
 
@@ -21,9 +19,9 @@ Azure Service Fabric est une plateforme de systèmes distribués pour le déploi
 
 ## <a name="prerequisites"></a>Prérequis
 
-- [Environnement Java](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#set-up-java-development) et [Yeoman](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#set-up-yeoman-generators-for-containers-and-guest-executables)
-- [Eclipse Neon (4.6)+](https://www.eclipse.org/downloads/packages/) et [plug-in Eclipse pour Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#install-the-eclipse-plug-in-optional)
-- [SDK Service Fabric et interface de ligne de commande (CLI)](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started-linux#installation-methods)
+- [Environnement Java](./service-fabric-get-started-linux.md#set-up-java-development) et [Yeoman](./service-fabric-get-started-linux.md#set-up-yeoman-generators-for-containers-and-guest-executables)
+- [Eclipse Neon (4.6)+](https://www.eclipse.org/downloads/packages/) et [plug-in Eclipse pour Service Fabric](./service-fabric-get-started-linux.md#install-the-eclipse-plug-in-optional)
+- [SDK Service Fabric et interface de ligne de commande (CLI)](./service-fabric-get-started-linux.md#installation-methods)
 - [Git](https://git-scm.com/downloads)
 
 ## <a name="download-the-sample"></a>Télécharger l’exemple

@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 09/06/2019
 ms.author: hich
 ms.openlocfilehash: 00cd1d39c0110aac9ea96f73127e83197976c95a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82190127"
 ---
 # <a name="deploy-associations-for-a-custom-provider-using-azure-policy"></a>Déployer des associations pour un fournisseur personnalisé à l’aide d’Azure Policy

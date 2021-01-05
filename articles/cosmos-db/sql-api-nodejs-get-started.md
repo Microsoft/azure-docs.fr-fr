@@ -8,19 +8,21 @@ ms.devlang: nodejs
 ms.topic: tutorial
 ms.date: 04/20/2020
 ms.author: dech
-ms.openlocfilehash: ef493b6b21eb0ba0ad6d22a21e4e205a9fecacb6
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.custom: devx-track-js
+ms.openlocfilehash: 1115d7bb0d6857aa39f246743df54a6cf3fd3676
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858070"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93098655"
 ---
 # <a name="tutorial-build-a-nodejs-console-app-with-the-javascript-sdk-to-manage-azure-cosmos-db-sql-api-data"></a>Tutoriel : Générer une application console Node.js avec le SDK JavaScript pour gérer des données de l’API SQL Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](sql-api-get-started.md)
-> * [Java](sql-api-java-get-started.md)
-> * [Java asynchrone](sql-api-async-java-get-started.md)
+> * [Java](./create-sql-api-java.md)
+> * [Java asynchrone](./create-sql-api-java.md)
 > * [Node.JS](sql-api-nodejs-get-started.md)
 > 
 
@@ -90,7 +92,7 @@ Maintenant que votre application existe, vous devez vous assurer qu’elle peut 
 
    Vous pouvez trouver les détails sur le point de terminaison et la clé dans le volet **Clés** du [portail Azure](https://portal.azure.com).
 
-   ![Obtenir des clés à partir de la capture d’écran du portail Azure][keys]
+   :::image type="content" source="media/sql-api-nodejs-get-started/node-js-tutorial-keys.png" alt-text="Obtenir des clés à partir de la capture d’écran du portail Azure":::
 
 Le SDK JavaScript utilise les termes génériques *conteneur* et *élément*. Un conteneur peut être une collection, un graphique ou une table. Un élément peut être un document, arête/sommet ou ligne, et correspond au contenu à l’intérieur d’un conteneur. Dans l’extrait de code précédent, le code `module.exports = config;` est utilisé pour exporter l’objet de configuration, afin que vous puissiez le référencer dans le fichier *app.js*.
 
@@ -117,12 +119,12 @@ Le SDK JavaScript utilise les termes génériques *conteneur* et *élément*. Un
 
 ## <a name="connect-to-the-azure-cosmos-account"></a>Se connecter au compte Azure Cosmos
 
-Dans le fichier *app.js*, copiez et collez le code suivant afin d’utiliser le point de terminaison et la clé précédemment enregistrés pour créer un objet CosmosClient.
+Dans le fichier *app.js* , copiez et collez le code suivant afin d’utiliser le point de terminaison et la clé précédemment enregistrés pour créer un objet CosmosClient.
 
 :::code language="javascript" source="~/cosmosdb-nodejs-get-started/app.js" id="CreateClientObjectDatabaseContainer":::
 
 > [!Note]
-> Si vous vous connectez à l’**émulateur Cosmos DB**, désactivez la vérification TLS pour votre processus de nœud :
+> Si vous vous connectez à l’ **émulateur Cosmos DB** , désactivez la vérification TLS pour votre processus de nœud :
 >   ```javascript
 >   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 >   const client = new CosmosClient({ endpoint, key });
@@ -156,7 +158,7 @@ Azure Cosmos DB prend en charge le remplacement du contenu d’éléments. Copie
 
 ## <a name="delete-an-item"></a><a id="DeleteItem"></a>Supprimer un élément
 
-Azure Cosmos DB prend en charge la suppression des éléments JSON. Le code suivant montre comment obtenir un élément par son ID et le supprimer. Copiez et collez le code suivant dans le fichier *app.js* :
+Azure Cosmos DB prend en charge la suppression des éléments JSON. Le code suivant montre comment obtenir un élément par son ID et le supprimer. Copiez et collez le code suivant dans le fichier *app.js*  :
 
 :::code language="javascript" source="~/cosmosdb-nodejs-get-started/app.js" id="DeleteItem":::
 
@@ -215,12 +217,11 @@ node app.js
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Dès que vous n’avez plus besoin de ces ressources, vous pouvez supprimer le groupe de ressources, le compte Azure Cosmos DB et toutes les ressources associées. Pour ce faire, sélectionnez le groupe de ressources que vous avez utilisé pour le compte Azure Cosmos DB, sélectionnez **Supprimer**, puis confirmez le nom du groupe de ressources à supprimer.
+Dès que vous n’avez plus besoin de ces ressources, vous pouvez supprimer le groupe de ressources, le compte Azure Cosmos DB et toutes les ressources associées. Pour ce faire, sélectionnez le groupe de ressources que vous avez utilisé pour le compte Azure Cosmos DB, sélectionnez **Supprimer** , puis confirmez le nom du groupe de ressources à supprimer.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Surveiller un compte Azure Cosmos DB](monitor-accounts.md)
+> [Surveiller un compte Azure Cosmos DB](./monitor-cosmos-db.md)
 
 [create-account]: create-sql-api-dotnet.md#create-account
-[keys]: media/sql-api-nodejs-get-started/node-js-tutorial-keys.png

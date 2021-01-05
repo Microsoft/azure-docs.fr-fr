@@ -8,22 +8,31 @@ ms.date: 2/5/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.custom: amqp
-ms.openlocfilehash: 353ed321ce3b6161b28bf67d852a81f809880603
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: amqp, devx-track-azurecli
+ms.openlocfilehash: bc62590b9517b2c6d16fdf2637990b845248d2ec
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733009"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932351"
 ---
 # <a name="tutorial-configure-an-iot-edge-device"></a>Tutoriel : Configurer un appareil IoT Edge
-
-> [!NOTE]
-> Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Si vous êtes arrivé directement à cet article, nous vous encourageons à commencer par le [premier article](tutorial-machine-learning-edge-01-intro.md) de la série afin d’obtenir de meilleurs résultats.
 
 Dans cet article, nous allons configurer une machine virtuelle Azure qui exécute Linux comme un appareil IoT Edge servant de passerelle transparente. La configuration d’une passerelle transparente permet aux appareils de se connecter à Azure IoT Hub à travers la passerelle sans savoir que la passerelle existe. De la même façon, l’utilisateur qui interagit avec les appareils dans Azure IoT Hub n’a pas conscience de l’appareil de passerelle intermédiaire. À la fin, nous ajouterons des données d’analytique Edge à notre système en ajoutant des modules IoT Edge à la passerelle transparente.
 
 Les étapes décrites dans cet article sont généralement effectuées par un développeur de cloud.
+
+Dans cette section du tutoriel, vous allez apprendre à :
+
+> [!div class="checklist"]
+>
+> * Créer des certificats pour permettre à votre appareil de passerelle de se connecter de façon sécurisée à vos appareils en aval.
+> * Créer un appareil IoT Edge.
+> * Créer une machine virtuelle Azure pour simuler votre appareil IoT Edge.
+
+## <a name="prerequisites"></a>Prérequis
+
+Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Chaque article de la série s’appuie sur le travail réalisé dans le cadre de l’article précédent. Si vous êtes tombé directement sur cet article, reportez-vous au [premier article](tutorial-machine-learning-edge-01-intro.md) de la série.
 
 ## <a name="create-certificates"></a>Créer des certificats
 
@@ -80,7 +89,7 @@ Pour stocker nos certificats de manière sécurisée et les rendre accessibles s
 
     ![Copier le nom du coffre de clés](media/tutorial-machine-learning-edge-05-configure-edge-device/find-key-vault-name.png)
 
-3. Sur votre machine de développement, chargez les certificats dans Key Vault. Remplacez **\<subscriptionId\>** et **\<keyvaultname\>** par les informations de votre ressource.
+3. Sur votre machine de développement, chargez les certificats dans Key Vault. Remplacez **\<subscriptionId\>** et **\<keyvaultname\>** par vos informations de ressource.
 
     ```powershell
     c:\source\IoTEdgeAndMlSample\CreateCertificates\upload-keyvaultcerts.ps1 -SubscriptionId <subscriptionId> -KeyVaultName <keyvaultname>
@@ -96,7 +105,7 @@ Pour stocker nos certificats de manière sécurisée et les rendre accessibles s
 
 Pour connecter un appareil Azure IoT Edge à un hub IoT, nous créons d’abord une identité pour l’appareil dans le hub. Nous prenons la chaîne de connexion de l’identité d’appareil dans le cloud et l’utilisons pour configurer le runtime sur notre appareil IoT Edge. Une fois que l’appareil configuré se connecte au hub, nous pouvons déployer des modules et envoyer des messages. Nous pouvons aussi modifier la configuration de l’appareil IoT Edge physique en changeant son identité d’appareil correspondante dans le hub IoT.
 
-Pour ce tutoriel, nous créons la nouvelle identité d’appareil à l’aide de Visual Studio Code. Vous pouvez également effectuer ces étapes dans le [portail Azure](how-to-register-device.md#register-in-the-azure-portal) ou avec [Azure CLI](how-to-register-device.md#register-with-the-azure-cli).
+Pour ce tutoriel, nous créons la nouvelle identité d’appareil à l’aide de Visual Studio Code. Vous pouvez également effectuer ces étapes en utilisant le portail Azure ou Azure CLI.
 
 1. Sur votre machine de développement, ouvrez Visual Studio Code.
 
@@ -167,7 +176,7 @@ Ensuite, exécutez le script afin de créer la machine virtuelle pour votre appa
     * Créer le groupe de ressources s’il n’existe pas déjà
     * Créer la machine virtuelle
     * Ajouter des exceptions NSG pour la machine virtuelle sur les ports 22 (SSH), 5671 (AMQP), 5672 (AMPQ) et 443 (TLS)
-    * Installer [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
+    * Installer [Azure CLI](/cli/azure/install-azure-cli-apt)
 
 7. Le script génère la chaîne de connexion SSH permettant de se connecter à la machine virtuelle. Copiez la chaîne de connexion pour la prochaine étape.
 
@@ -294,12 +303,13 @@ Par la suite, nous mettons à jour les certificats et le nom d’hôte en modifi
     ```bash
     journalctl -u iotedge --no-pager --no-full
     ```
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Ce tutoriel fait partie d’un ensemble où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Nous venons de terminer la configuration d’une machine virtuelle Azure comme passerelle transparente d’Azure IoT Edge. Nous avons d’abord généré des certificats de test que nous avons chargés dans Azure Key Vault. Ensuite, nous avons utilisé un script et un modèle Resource Manager pour déployer la machine virtuelle avec l’image « Ubuntu Server 16.04 LTS + Azure IoT Edge runtime » de la Place de marché Azure. Une fois la machine virtuelle en cours d’exécution, nous nous sommes connectés via SSH. Nous nous sommes connectés à Azure et nous avons téléchargé des certificats à partir de Key Vault. Nous avons effectué plusieurs mises à jour de la configuration du runtime IoT Edge en mettant à jour le fichier config.yaml.
-
-Pour plus d’informations, consultez [Guide pratique pour utiliser un appareil IoT Edge en tant que passerelle](iot-edge-as-gateway.md) et [Configurer un appareil IoT Edge en tant que passerelle transparente](how-to-create-transparent-gateway.md).
 
 Passez à l’article suivant pour générer des modules IoT Edge.
 

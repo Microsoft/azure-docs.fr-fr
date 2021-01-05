@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 11/21/2019
-ms.openlocfilehash: 4112555347ce1d718375fbab3f166c6f2f5deeaa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3d99293ea83c883f8d0870d78dfbec58f74c9bd1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80333502"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87927315"
 ---
 # <a name="how-to-troubleshoot-issues-with-the-log-analytics-agent-for-windows"></a>Guide pratique pour résoudre les problèmes liés à l’agent Log Analytics pour Windows 
 
@@ -37,8 +37,9 @@ Vérifiez que le pare-feu et le proxy sont configurés pour autoriser les URL et
 |*.ods.opinsights.azure.com |Port 443 |Règle de trafic sortant|Oui |  
 |*.oms.opinsights.azure.com |Port 443 |Règle de trafic sortant|Oui |  
 |*.blob.core.windows.net |Port 443 |Règle de trafic sortant|Oui |  
+|*.agentsvc.azure-automation.net |Port 443 |Règle de trafic sortant|Oui |  
 
-Pour obtenir les informations relatives au pare-feu nécessaires pour Azure Government, consultez [Azure Government Monitoring + Management](../../azure-government/documentation-government-services-monitoringandmanagement.md#azure-monitor-logs). Si vous envisagez d’utiliser le Runbook Worker hybride Azure Automation pour vous connecter et vous inscrire auprès du service Automation afin d’utiliser des runbooks et des solutions de gestion dans votre environnement, il doit avoir accès au numéro de port et aux URL décrites dans la section [Configurer votre réseau pour le Runbook Worker hybride](../../automation/automation-hybrid-runbook-worker.md#network-planning). 
+Pour obtenir les informations relatives au pare-feu nécessaires pour Azure Government, consultez [Azure Government Monitoring + Management](../../azure-government/compare-azure-government-global-azure.md#azure-monitor). Si vous envisagez d’utiliser le Runbook Worker hybride Azure Automation pour vous connecter et vous inscrire auprès du service Automation afin d’utiliser des runbooks et des solutions de gestion dans votre environnement, il doit avoir accès au numéro de port et aux URL décrites dans la section [Configurer votre réseau pour le Runbook Worker hybride](../../automation/automation-hybrid-runbook-worker.md#network-planning). 
 
 Plusieurs méthodes vous permettent de vérifier si l’agent communique correctement avec Azure Monitor.
 
@@ -68,7 +69,7 @@ Plusieurs méthodes vous permettent de vérifier si l’agent communique correct
     |2127 |Modules du service de contrôle d’intégrité |Échec d’envoi de données avec code d'erreur reçu |Si cela se produit uniquement périodiquement pendant la journée, il peut s’agir d’une simple anomalie aléatoire qui peut être ignorée. Surveillez pour comprendre la fréquence à laquelle cela se produit. Si cela se produit souvent au cours de la journée, vérifiez tout d’abord votre configuration réseau et les paramètres de proxy. Si la description inclut le code d’erreur HTTP 404 et qu’il s’agit de la première fois où l’agent tente d’envoyer des données au service, elle inclura une erreur 500 avec un code d’erreur 404 interne. 404 signifie qu’un élément est introuvable, ce qui indique que la zone de stockage pour le nouvel espace de travail est toujours en cours de provisionnement. Lors de la tentative suivante, les données seront correctement écrites dans l’espace de travail, comme prévu. Une erreur HTTP 403 peut indiquer un problème d’autorisation ou d’informations d’identification. Des informations supplémentaires sont incluses avec l’erreur 403 pour aider à résoudre le problème.|
     |4000 |Connecteur de service |Échec de la résolution de nom DNS |La machine n’a pas pu résoudre l’adresse Internet utilisée lors de l’envoi de données au service. Cela peut être des paramètres de résolution DNS sur votre machine, des paramètres de proxy incorrects ou peut-être un problème DNS temporaire avec votre fournisseur. Si cela se produit régulièrement, cela peut provenir d’un problème temporaire de réseau.|
     |4001 |Connecteur de service |La connexion au service a échoué. |Cette erreur peut se produire lorsque l’agent ne peut pas communiquer directement ou via un pare-feu/serveur proxy avec le service Azure Monitor. Vérifiez les paramètres de proxy de l’agent ou que le pare-feu/proxy réseau autorise le trafic TCP de l’ordinateur au service.|
-    |4002 |Connecteur de service |Le service a retourné le code d’état HTTP 403 en réponse à une requête. Vérifiez l’intégrité du service auprès de l’administrateur de service. La requête sera retentée ultérieurement. |Cette erreur est consignée pendant la phase d'inscription initiale de l'agent et vous verrez une URL semblable à la suivante : *https://\<workspaceID>.oms.opinsights.azure.com/AgentService.svc/AgentTopologyRequest*. Une erreur 403 se rapporte à une interdiction et peut résulter d’une erreur de saisie de la clé ou de l’ID de l’espace de travail, ou d’une date et d’une heure incorrectes sur l’ordinateur. Si l’heure est à +/-15 minutes de l’heure actuelle, l’intégration échoue. Pour corriger ce problème, mettez à jour la date et/ou le fuseau horaire de votre ordinateur Windows.|
+    |4002 |Connecteur de service |Le service a retourné le code d’état HTTP 403 en réponse à une requête. Vérifiez l’intégrité du service auprès de l’administrateur de service. La requête sera retentée ultérieurement. |Cette erreur est consignée pendant la phase d’inscription initiale de l’agent et vous verrez une URL semblable à ce qui suit : *https://\<workspaceID>.oms.opinsights.azure.com/AgentService.svc/AgentTopologyRequest*. Une erreur 403 se rapporte à une interdiction et peut résulter d’une erreur de saisie de la clé ou de l’ID de l’espace de travail, ou d’une date et d’une heure incorrectes sur l’ordinateur. Si l’heure est à +/-15 minutes de l’heure actuelle, l’intégration échoue. Pour corriger ce problème, mettez à jour la date et/ou le fuseau horaire de votre ordinateur Windows.|
 
 ## <a name="data-collection-issues"></a>Problèmes de collecte de données
 
@@ -103,4 +104,3 @@ Si la requête retourne des résultats, vous devez déterminer si un type de don
     |8000 |HealthService |Cet événement spécifie si un flux de travail lié aux performances, à un événement ou à un autre type de données collectées est dans l’incapacité de transférer au service pour ingestion à l’espace de travail. | L’événement d’ID 2136 issu de la source HealthService est écrit avec cet événement et peut indiquer que l’agent ne peut pas communiquer avec le service, probablement en raison d’une configuration incorrecte des paramètres de proxy et d’authentification, d’une panne de réseau ou du fait que le pare-feu/proxy du réseau n’autorise pas le trafic TCP de l’ordinateur au service.| 
     |10102 et 10103 |Modules du service de contrôle d’intégrité |Le flux de travail n’a pas pu résoudre la source de données. |Cela peut se produire si l’instance ou le compteur de performances spécifié n’existe pas sur l’ordinateur ou est incorrectement défini dans les paramètres de données de l’espace de travail. S’il s’agit d’un [compteur de performances](data-sources-performance-counters.md#configuring-performance-counters) spécifié par l’utilisateur, vérifiez que les informations spécifiées suivent le format correct et existent sur les ordinateurs cibles. |
     |26002 |Modules du service de contrôle d’intégrité |Le flux de travail n’a pas pu résoudre la source de données. |Cela peut se produire si le journal des événements Windows spécifié n’existe pas sur l’ordinateur. Cette erreur peut être ignorée en toute sécurité si l’ordinateur n’est pas censé avoir ce journal des événements inscrit. Sinon, s’il s’agit d’un [journal des événements](data-sources-windows-events.md#configuring-windows-event-logs) spécifié par l’utilisateur, vérifiez que les informations spécifiées sont correctes. |
-

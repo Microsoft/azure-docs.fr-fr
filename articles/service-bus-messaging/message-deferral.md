@@ -1,24 +1,15 @@
 ---
 title: Azure Service Bus - Report des messages
 description: Cet article explique comment reporter la remise des messages Azure Service Bus. Le message reste dans la file d’attente ou l’abonnement, mais il est mis de côté.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 5e32c461902c1e340c6cece22669a59847e660cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: fasttrack-edit
+ms.openlocfilehash: 7c9ec55de24c97df3530d80deef55ed87be84077
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77538394"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86511277"
 ---
 # <a name="message-deferral"></a>Report de message
 
@@ -29,6 +20,9 @@ Le report est une fonctionnalité créée spécifiquement pour des scénarios de
 Un exemple simple illustrant cela est une séquence de traitement d’une commande dans laquelle une notification de paiement provenant d’un fournisseur de paiement externe s’affiche dans un système avant que le bon de commande associé ait été transmis du magasin au système de traitement. Dans ce cas, le système de traitement peut reporter le traitement de la notification de paiement jusqu’à ce qu’une commande y soit associée. Dans les scénarios de rendez-vous, dans lesquels des messages provenant de différentes sources font avancer un flux de travail, l’ordre d’exécution en temps réel peut effectivement être correct, mais les messages reflétant les résultats peuvent arriver dans le désordre.
 
 Enfin, le report permet de faciliter la réorganisation des messages, de leur ordre d’arrivée à l’ordre dans lequel ils peuvent être traités, tout en laissant en toute sécurité ces messages (dont le traitement doit être différé) dans le magasin de messages.
+
+> [!NOTE]
+> Les messages différés ne sont pas automatiquement déplacés vers la file d'attente de lettres mortes [après leur expiration](./service-bus-dead-letter-queues.md#exceeding-timetolive). Ce comportement est lié à la conception.
 
 ## <a name="message-deferral-apis"></a>API de report de message
 

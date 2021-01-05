@@ -1,14 +1,15 @@
 ---
 title: 'Démarrage rapide : Nouvelle affectation de stratégie avec Azure CLI'
 description: Dans ce guide de démarrage rapide, vous allez utiliser Azure CLI pour créer une attribution Azure Policy afin d’identifier les ressources non conformes.
-ms.date: 01/11/2020
+ms.date: 10/14/2020
 ms.topic: quickstart
-ms.openlocfilehash: b1d93cdb4dfa1c82e8004af4052c22bba60f3a3a
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 9955f911f9a92d7b353a8f3d022af7884b5a6aae
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83745740"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93090136"
 ---
 # <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources-with-azure-cli"></a>Démarrage rapide : Créer une affectation de stratégie pour identifier les ressources non conformes avec Azure CLI
 
@@ -23,7 +24,7 @@ Azure CLI permet de créer et de gérer des ressources Azure à partir de la lig
 
 - Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-- Ce guide de démarrage rapide nécessite que vous exécutiez la version 2.0.76 (ou ultérieure) d’Azure CLI pour installer et utiliser l’interface de ligne de commande localement. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Pour suivre ce guide de démarrage rapide, vous devez utiliser Azure CLI version 2.0.76 ou ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 - Inscrivez le fournisseur de ressources Azure Policy Insights à l'aide d'Azure CLI. L’inscription du fournisseur de ressources permet de s’assurer que votre abonnement fonctionne avec lui. Pour inscrire un fournisseur de ressources, vous devez avoir l’autorisation pour une opération de fournisseur de ressources. Cette opération est incluse dans les rôles de contributeur et de propriétaire. Exécutez la commande suivante pour enregistrer le fournisseur de ressources :
 

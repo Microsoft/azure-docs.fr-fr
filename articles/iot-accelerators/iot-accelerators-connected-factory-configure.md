@@ -8,14 +8,17 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 12/12/2017
 ms.author: dobett
-ms.openlocfilehash: 5fa3d4d4fdfa0dd81cd8ab8772ffb3903dda289f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e015c6761b920ef37af2bbfd67ced5fc3218d532
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73820128"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002236"
 ---
 # <a name="configure-the-connected-factory-solution-accelerator"></a>Configurer l’accélérateur de solution Usine connectée
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 L’accélérateur de solution Usine connectée simule le tableau de bord d’une société fictive nommée Contoso. Cette société possède de nombreuses usines implantées dans le monde entier.
 
@@ -85,7 +88,7 @@ L’extrait de code suivant montre un plan du fichier de configuration `ContosoT
 }
 ```
 
-Les propriétés communes de  `<global_configuration>`, `<factory_configuration>`, `<production_line_configuration>` et `<station_configuration>` sont :
+Les propriétés communes de `<global_configuration>`, `<factory_configuration>`, `<production_line_configuration>`, et `<station_configuration>` sont :
 
 * **Name** (de type chaîne)
 
@@ -309,7 +312,7 @@ Pour certaines opérations, telles que la visualisation de la dernière valeur o
 
 Pour plus d’informations sur la façon dont les données de télémétrie sont intégrées à l’Usine connectée, consultez [Définition d’OPC Publisher](overview-opc-publisher.md).
 
-## <a name="example-how-kpi1-is-calculated"></a>Exemple : Mode de calcul de KPI1
+## <a name="example-how-kpi1-is-calculated"></a>Exemple : mode de calcul de KPI1
 
 La configuration du fichier `ContosoTopologyDescription.json` contrôle la façon dont les valeurs de l’OEE/du KPI sont calculées. L’exemple suivant montre comment les propriétés de ce fichier contrôlent le calcul de KPI1.
 

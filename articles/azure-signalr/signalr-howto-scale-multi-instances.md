@@ -4,14 +4,15 @@ description: Dans de nombreux scénarios de mise à l’échelle, le client doit
 author: sffamily
 ms.service: signalr
 ms.topic: conceptual
+ms.custom: devx-track-csharp
 ms.date: 03/27/2019
 ms.author: zhshang
-ms.openlocfilehash: 43d703312cbc1fc067a2d51d5623ed028ba01405
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd6ac8c4d4fc4c3fec4f549f8ef4f955e2b1c637
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74158158"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89439212"
 ---
 # <a name="how-to-scale-signalr-service-with-multiple-instances"></a>Comment mettre à l’échelle SignalR Service avec plusieurs instances ?
 La dernière version du SDK de SignalR Service prend en charge plusieurs points de terminaison pour les instances de SignalR Service. Vous pouvez utiliser cette fonctionnalité pour la messagerie multirégion ou pour mettre à l’échelle des connexions simultanées.
@@ -26,7 +27,7 @@ Si la clé commence par `Azure:SignalR:ConnectionString:`, elle doit être au fo
 
 Vous pouvez ajouter plusieurs chaînes de connexion d’instance à l’aide des commandes `dotnet` suivantes :
 
-```batch
+```cmd
 dotnet user-secrets set Azure:SignalR:ConnectionString:east-region-a <ConnectionString1>
 dotnet user-secrets set Azure:SignalR:ConnectionString:east-region-b:primary <ConnectionString2>
 dotnet user-secrets set Azure:SignalR:ConnectionString:backup:secondary <ConnectionString3>

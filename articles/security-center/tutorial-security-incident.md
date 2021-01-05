@@ -1,6 +1,6 @@
 ---
-title: Didacticiel sur la réponse aux incidents - Azure Security Center
-description: Dans ce tutoriel, vous apprenez à trier les alertes de sécurité, à déterminer la cause racine et l’étendue d’un incident, et à effectuer des recherches dans les données de sécurité.
+title: Tutoriel sur la réponse aux alertes - Azure Security Center
+description: Dans ce tutoriel, vous allez apprendre à trier les alertes de sécurité et à déterminer la cause racine et l’étendue d’une alerte.
 services: security-center
 documentationcenter: na
 author: memildin
@@ -12,115 +12,115 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 08/30/2018
+ms.date: 09/30/2020
 ms.author: memildin
-ms.openlocfilehash: 971b93422e2b3f2053e0c5564c7ba924a631d810
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: b9f0b3219a75900a44a73ca0fc3e453f023bddb8
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80585768"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92787157"
 ---
-# <a name="tutorial-respond-to-security-incidents"></a>Tutoriel : Répondre à des incidents de sécurité
-Security center analyse continuellement vos charges de travail de cloud hybride à l’aide d’analyses avancées et d’informations sur les menaces pour vous avertir des activités malveillantes. En outre, vous pouvez intégrer des alertes à partir d’autres produits et services de sécurité dans Security Center et créer des alertes personnalisées en fonction de vos propres indicateurs ou sources d’informations. Une fois une alerte générée, une action rapide est nécessaire pour examiner et résoudre la situation. Dans ce didacticiel, vous apprendrez à :
+# <a name="tutorial-triage-investigate-and-respond-to-security-alerts"></a>Tutoriel : Trier les alertes de sécurité, les examiner et y répondre
+Security Center analyse continuellement vos charges de travail de cloud hybride à l’aide de l’analytique avancée et du renseignement sur les menaces, afin de vous avertir des activités potentiellement malveillantes détectées sur vos ressources cloud. Vous pouvez également intégrer à Security Center des alertes provenant d’autres produits et services de sécurité. Lorsqu’une alerte est déclenchée, vous devez agir rapidement pour examiner et résoudre le problème de sécurité potentiel. 
+
+Dans ce didacticiel, vous apprendrez à :
 
 > [!div class="checklist"]
 > * Trier les alertes de sécurité
-> * Examiner de plus près pour déterminer la cause racine et l’étendue d’un incident de sécurité
-> * Rechercher des données de sécurité pour faciliter les recherches
+> * Examiner une alerte de sécurité pour déterminer la cause racine
+> * Répondre à une alerte de sécurité et atténuer cette cause racine
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
-Pour parcourir les fonctionnalités traitées dans ce tutoriel, vous devez avoir accès au niveau tarifaire Standard de Security Center. Vous pouvez essayer Security Center Standard gratuitement. Pour en savoir plus, consultez la [page de tarification](https://azure.microsoft.com/pricing/details/security-center/). Le démarrage rapide [Intégrer votre abonnement Azure à Security Center Standard](security-center-get-started.md) vous guide dans la mise à niveau vers le plan Standard.
+Pour parcourir les fonctionnalités couvertes dans ce tutoriel, vous devez avoir activé Azure Defender. Vous pouvez essayer gratuitement Azure Defender. Pour en savoir plus, consultez la [page de tarification](https://azure.microsoft.com/pricing/details/security-center/). Le guide de démarrage rapide [Bien démarrer avec Security Center](security-center-get-started.md) vous guide tout au long de la procédure de mise à niveau.
 
-## <a name="scenario"></a>Scénario
-Contoso a récemment migré une partie de ses ressources locales dans Azure, notamment certaines bases de données SQL et charges de travail métier reposant sur des machines virtuelles. L’équipe principale de réponse aux incidents de sécurité informatique (CSIRT) de Contoso rencontre aujourd’hui des difficultés pour étudier les problèmes de sécurité car les renseignements sur la sécurité ne sont pas intégrés à leurs outils actuels de réponse aux incidents. Cette absence d’intégration pose un problème durant l’étape de détection (trop de faux positifs) et durant les étapes d’évaluation et de diagnostic. Dans le cadre de la migration, l’équipe a décidé d’opter pour Security Center pour l’aider à résoudre ce problème.
-
-La première phase de cette migration s’est terminée après l’intégration de toutes les ressources et l’application de toutes les recommandations de sécurité d’Azure Security Center. L’équipe CSIRT de Contoso est le point central pour la gestion des incidents de sécurité informatique. Elle se compose d’un groupe de personnes chargées de traiter les incidents de sécurité. Les membres de l’équipe ont des responsabilités clairement définies pour s’assurer que tous les domaines d’action sont couverts.
-
-Pour les besoins de ce scénario, nous allons nous concentrer sur les rôles des personnes suivantes, qui font partie de l’équipe CSIRT de Contoso :
-
-![Cycle de vie de la réponse aux incidents](./media/tutorial-security-incident/security-center-incident-response.png)
-
-Judy travaille aux opérations de sécurité. Ses responsabilités incluent :
-
-* La surveillance et l’élimination en continu des menaces de sécurité.
-* La remontée des problèmes au propriétaire des charges de travail de cloud ou à l’analyste de la sécurité en fonction des besoins.
-
-Sam est analyste sécurité et ses responsabilités incluent :
-
-* L’examen des attaques.
-* La correction des alertes.
-* La collaboration avec les propriétaires des charges de travail pour déterminer et appliquer des mesures de correction.
-
-Comme vous pouvez le voir, Judy et Sam ont des responsabilités différentes, et ils doivent travailler ensemble en se partageant les informations d’Azure Security Center.
 
 ## <a name="triage-security-alerts"></a>Trier les alertes de sécurité
-Security Center fournit une vue unifiée de toutes les alertes de sécurité. Les alertes de sécurité sont classées en fonction de leur gravité et les alertes liées sont combinées dans un seul incident de sécurité lorsque c’est possible. Lorsque vous triez les alertes et les incidents, vous devez :
+Security Center fournit une vue unifiée de toutes les alertes de sécurité. Les alertes de sécurité sont classées en fonction de la gravité de l’activité détectée. 
 
-- Fermer les alertes pour lesquelles aucune action supplémentaire n’est nécessaire, par exemple, si c’est un faux positif
-- Agir pour corriger les attaques connues, par exemple empêcher le trafic réseau venant d’une adresse IP malveillante
-- Déterminer quelles alertes nécessitent un examen supplémentaire
+Triez vos alertes à partir de la page **Alertes de sécurité**  :
+
+:::image type="content" source="./media/tutorial-security-incident/alerts-list.png" alt-text="Page de la liste des alertes de sécurité" lightbox="./media/tutorial-security-incident/alerts-list.png":::
+
+Utilisez cette page pour examiner les alertes de sécurité actives dans votre environnement pour décider de l’alerte à examiner en premier.
+
+Quand vous triez les alertes de sécurité, hiérarchisez-les en fonction de leur gravité en traitant d’abord celles qui présentent un niveau de gravité supérieur. Découvrez-en plus sur la gravité des alertes dans [Comment les alertes sont-elles classifiées ?](security-center-alerts-overview.md#how-are-alerts-classified).
+
+> [!TIP]
+> Vous pouvez connecter Azure Security Center aux solutions SIEM les plus populaires, y compris Azure Sentinel, et consommer les alertes à partir de l’outil de votre choix. Apprenez-en davantage dans [Diffuser des alertes vers un système SIEM, SOAR ou une solution de gestion des services informatiques](export-to-siem.md).
 
 
-1. Dans le menu principal de Security Center sous **DETECTION**, sélectionnez **Alertes de sécurité** :
+## <a name="investigate-a-security-alert"></a>Examiner une alerte de sécurité
 
-   ![Alertes de sécurité](./media/tutorial-security-incident/tutorial-security-incident-fig1.png)
+Quand vous avez décidé de l’alerte à examiner en premier :
 
-2. Dans la liste des alertes, cliquez sur un incident de sécurité, qui est un ensemble d’alertes, pour en savoir plus sur cet incident. **Incident de sécurité détecté** s’ouvre.
+1. Sélectionnez l’alerte souhaitée.
+1. Dans la page de vue d’ensemble de l’alerte, sélectionnez la ressource à examiner en premier.
+1. Commencez votre investigation dans le volet gauche, qui affiche les informations générales de l’alerte de sécurité.
 
-   ![Incident de sécurité](./media/tutorial-security-incident/tutorial-security-incident-fig2.png)
+    :::image type="content" source="./media/tutorial-security-incident/alert-details-left-pane.png" alt-text="Volet gauche de la page Détails de l’alerte mettant en évidence les informations générales":::
 
-3. Dans cet écran, la description de l’incident de sécurité est affichée au-dessus, ainsi que la liste des alertes faisant parties de l’incident. Cliquez sur l’alerte sur laquelle vous souhaitez approfondir vos recherches et obtenir plus d’informations.
+    Ce volet affiche les éléments suivants :
+    - Gravité de l’alerte, état et durée d’activité
+    - Description qui explique l’activité précise détectée
+    - Ressources affectées
+    - Intention de la chaîne d’arrêt de l’activité sur la matrice MITRE ATT&CK
 
-   ![Incident de sécurité](./media/tutorial-security-incident/tutorial-security-incident-fig3.png)
+1. Pour obtenir des informations plus détaillées qui peuvent vous aider à examiner l’activité suspecte, consultez l’onglet **Détails de l’alerte**.
 
-   Le type d’alerte peut varier, lisez [Présentation des alertes de sécurité dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-alerts-type) pour plus d’informations sur le type d’alerte, ainsi que les étapes de correction possibles. Pour les alertes qui peuvent être ignorées en toute sécurité, vous pouvez cliquer avec le bouton droit sur l’alerte et sélectionnez l’option **Ignorer** :
+1. Une fois que vous avez consulté cette page, vous avez peut-être suffisamment d’informations pour passer à l’élaboration d’une réponse. Si vous avez besoin de plus de détails :
 
-   ![Alerte](./media/tutorial-security-incident/tutorial-security-incident-fig4.png)
+    - Contactez le propriétaire de la ressource pour vérifier si l’activité détectée est un faux positif.
+    - Examinez les journaux bruts générés par la ressource attaquée.
 
-4. Si la cause première et la portée de l’activité malveillante sont inconnues, passez à l’étape suivante pour approfondir vos recherches.
+## <a name="respond-to-a-security-alert"></a>Répondre à une alerte de sécurité
+Après avoir examiné une alerte de sécurité et compris son étendue, vous pouvez y répondre à partir d’Azure Security Center :
 
-## <a name="investigate-an-alert-or-incident"></a>Examiner une alerte ou un incident
-1. Sur la page **Alerte de sécurité**, cliquez sur le bouton **Démarrer l’investigation** (si vous avez déjà démarré, le nom devient **Poursuivre l’investigation**).
+1.  Ouvrez l’onglet **Entreprendre une action** pour voir les réponses recommandées.
 
-   ![Investigation](./media/tutorial-security-incident/tutorial-security-incident-fig5.png)
+    :::image type="content" source="./media/tutorial-security-incident/alert-details-take-action.png" alt-text="Onglet Entreprendre une action pour les alertes de sécurité" lightbox="./media/tutorial-security-incident/alert-details-take-action.png":::
 
-   Le mappage d’investigation est une représentation graphique des entités connectées à cette alerte ou cet incident de sécurité. En cliquant sur une entité du mappage, les informations sur cette entité font apparaitre de nouvelles entités et le mappage se développe. Les propriétés de l’entité sélectionnée dans le mappage sont mises en surbrillance dans le volet situé à droite de la page. Les informations disponibles sur chaque onglet varient en fonction de l’entité sélectionnée. Pendant le processus d’investigation, passez en revue toutes les informations pertinentes pour mieux comprendre le mouvement de l’attaquant.
+1.  Consultez la section **Atténuer la menace** , qui indique les étapes d’investigation manuelle nécessaires à l’atténuation du problème.
+1.  Pour renforcer vos ressources et empêcher les futures attaques de ce genre, appliquez les recommandations de sécurité indiquées dans la section **Empêcher les attaques futures**.
+1.  Pour déclencher une application logique avec des étapes de réponse automatisée, utilisez la section **Déclencher une réponse automatisée**.
+1.  Si l’activité détectée *n’est pas* malveillante, vous pouvez supprimer les alertes futures de ce genre à l’aide de la section **Supprimer les alertes similaires**.
 
-2. Si vous avez besoin de plus de preuves, ou si vous devez examiner plus en détail des entités trouvées lors de l’analyse, passez à l’étape suivante.
+1.  Quand vous avez terminé d’examiner l’alerte et y avez répondu de manière appropriée, changez l’état en **Ignoré**.
 
-## <a name="search-data-for-investigation"></a>Rechercher des données pour l’investigation
+    :::image type="content" source="./media/tutorial-security-incident/set-status-dismissed.png" alt-text="Définition de l’état d’une alerte":::
 
-Vous pouvez utiliser les fonctionnalités de recherche dans Security Center pour rechercher plus de preuves des systèmes compromis et obtenir plus de détails sur les entités faisant parties de l’investigation.
+    L’alerte est alors supprimée de la liste des alertes principales. Vous pouvez utiliser le filtre de la page de la liste des alertes pour voir toutes les alertes ayant l’état **Ignoré**.
 
-Pour effectuer une recherche, ouvrez le tableau de bord **Security Center**, cliquez sur **Recherche** dans le volet de navigation de gauche, sélectionnez l’espace de travail contenant les entités sur lesquelles vous souhaitez effectuer des recherches, saisissez la requête de recherche, et cliquez sur le bouton de recherche.
+1.  Nous vous encourageons à fournir à Microsoft des commentaires sur l’alerte,
+    1. en la signalant comme étant **Utile** ou **Inutile**.
+    1. Sélectionnez une raison et ajoutez un commentaire.
 
-## <a name="clean-up-resources"></a>Nettoyer les ressources
-D’autres guides de démarrage rapide et didacticiels de cette collection reposent sur ce guide. Si vous envisagez de suivre les didacticiels et guides de démarrage rapide suivants, conservez le niveau Standard et gardez l’approvisionnement automatique activé. Dans le cas contraire, ou si vous voulez revenir au niveau Gratuit :
+        :::image type="content" source="./media/tutorial-security-incident/alert-feedback.png" alt-text="Fournir des commentaires à Microsoft sur l’utilité d’une alerte":::
 
-1. Revenez au menu principal de Security Center et sélectionnez **Stratégie de sécurité**.
-2. Sélectionnez la stratégie ou l’abonnement pour lequel vous voulez revenir au niveau Gratuit. La fenêtre **Stratégie de sécurité** s’ouvre.
-3. Dans **COMPOSANTS DE LA STRATÉGIE**, sélectionnez **Niveau tarifaire**.
-4. Sélectionnez **Gratuit** pour modifier l’abonnement et passer du niveau Standard au niveau Gratuit.
-5. Sélectionnez **Enregistrer**.
+    > [!TIP]
+    > Nous examinons vos commentaires afin d’améliorer nos algorithmes et de fournir de meilleures alertes de sécurité.
 
-Si vous voulez désactiver l’approvisionnement automatique :
+## <a name="end-the-tutorial"></a>Terminer le tutoriel
 
-1. Revenez au menu principal de Security Center et sélectionnez **Stratégie de sécurité**.
-2. Sélectionnez l’abonnement pour lequel vous souhaitez désactiver l’approvisionnement automatique.
-3. Dans **Stratégie de sécurité : collecte de données**, sélectionnez **Désactivé** sous **Intégration** pour désactiver l’approvisionnement automatique.
+D’autres guides de démarrage rapide et didacticiels de cette collection reposent sur ce guide. Si vous envisagez de suivre les tutoriels et guides de démarrage rapide suivants, maintenez activés le provisionnement automatique et Azure Defender. 
+
+Si vous n’envisagez pas de continuer ou si vous souhaitez désactiver l’une de ces fonctionnalités :
+
+1. Revenez au menu principal de Security Center et sélectionnez **Tarifs et paramètres**.
+1. Sélectionnez l’abonnement approprié.
+1. Pour passer à une version antérieure, sélectionnez **Azure Defender désactivé**.
+1. Pour désactiver le provisionnement automatique, ouvrez la page **Collecte de données** et définissez **Provisionnement automatique** sur **Désactivé**.
 4. Sélectionnez **Enregistrer**.
 
 >[!NOTE]
-> La désactivation du provisionnement automatique ne supprime pas l’agent Log Analytics des machines virtuelles Azure sur lesquelles l’agent a été provisionné. La désactivation de l’approvisionnement automatique limite la surveillance de la sécurité pour vos ressources.
+> La désactivation du provisionnement automatique ne supprime pas l’agent Log Analytics des machines virtuelles Azure sur lesquelles il est déjà installé. La désactivation de l’approvisionnement automatique limite la surveillance de la sécurité pour vos ressources.
 >
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans ce didacticiel, vous avez appris les fonctionnalités de Security Center à utiliser pour répondre à un incident de sécurité, telles que :
+Dans ce tutoriel, vous avez appris les fonctionnalités de Security Center à utiliser pour répondre à une alerte de sécurité. Pour des documents connexes, consultez :
 
-> [!div class="checklist"]
-> * Un incident de sécurité qui est une agrégation d’alertes associées pour une ressource
-> * Un mappage d’investigation est une représentation graphique des entités connectées à cette alerte ou cet incident de sécurité
-> * Les fonctionnalités de recherche afin de rechercher plus de preuves des systèmes compromis
+- [Répondre aux alertes Azure Defender pour Key Vault](defender-for-key-vault-usage.md)
+- [Alertes de sécurité - guide de référence](alerts-reference.md)
+- [Présentation d’Azure Defender](azure-defender.md)

@@ -7,14 +7,14 @@ ms.topic: include
 ms.date: 10/19/2018
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 9c51ce726545d1c64d69c86c36fc69ea43c3b882
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c63cee1c451918569e9b7aa2e76209e8069d86ac
+ms.sourcegitcommit: 419c8c8061c0ff6dc12c66ad6eda1b266d2f40bd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76279388"
+ms.lasthandoff: 10/18/2020
+ms.locfileid: "92167648"
 ---
-Spécifie le nombre d’appels de fonction agrégés lorsque vous [calculez des métriques pour Application Insights](../articles/azure-functions/functions-monitoring.md#configure-the-aggregator). 
+Spécifie le nombre d’appels de fonction agrégés lorsque vous [calculez des métriques pour Application Insights](../articles/azure-functions/configure-monitoring.md#configure-the-aggregator). 
 
 ```json
 {

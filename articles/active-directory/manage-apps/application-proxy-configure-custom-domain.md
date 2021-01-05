@@ -1,27 +1,22 @@
 ---
-title: Domaines personnalisés dans le proxy d’application Azure AD | Microsoft Docs
+title: Domaines personnalisés dans le proxy d’application Azure AD
 description: Configurer et gérer des domaines personnalisés dans le Proxy d’application Azure AD.
 services: active-directory
-documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/24/2019
-ms.author: mimart
-ms.reviewer: harshja
-ms.custom: it-pro
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3f35658a75adb4d4c6c279e45087e741b8117e65
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kenwith
+ms.reviewer: japere
+ms.openlocfilehash: bef120e754c84798b2d1b48f4f00fbb8f5fb3c1d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79481379"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997611"
 ---
 # <a name="configure-custom-domains-with-azure-ad-application-proxy"></a>Configurer des domaines personnalisés dans avec le Proxy d’application Azure AD
 
@@ -31,7 +26,7 @@ Lorsque vous publiez une application via le Proxy d’application Azure Active D
 
 Il est judicieux de configurer des domaines personnalisés pour vos applications chaque fois que c’est possible. Voici quelques raisons d’utiliser des domaines personnalisés :
 
-- Les liens entre applications fonctionnent même en dehors du réseau d’entreprise. Sans domaine personnalisé, si votre application comprend des liens internes codés en dur vers des cibles situées en dehors du Proxy d’application, et que les liens ne peuvent pas être résolus à l’extérieur, ils sont rompus. Lorsque vos URL internes et externes sont identiques, vous évitez ce problème. Si vous n’êtes pas en mesure d’utiliser des domaines personnalisés, pour d’autres façons de résoudre ce problème, voir [Rediriger les liens codés en dur pour les applications publiées avec le Proxy d’application Azure AD](../application-proxy-link-translation.md). 
+- Les liens entre applications fonctionnent même en dehors du réseau d’entreprise. Sans domaine personnalisé, si votre application comprend des liens internes codés en dur vers des cibles situées en dehors du Proxy d’application, et que les liens ne peuvent pas être résolus à l’extérieur, ils sont rompus. Lorsque vos URL internes et externes sont identiques, vous évitez ce problème. Si vous n’êtes pas en mesure d’utiliser des domaines personnalisés, pour d’autres façons de résoudre ce problème, voir [Rediriger les liens codés en dur pour les applications publiées avec le Proxy d’application Azure AD](./application-proxy-configure-hard-coded-link-translation.md). 
   
 - Vos utilisateurs bénéficient alors d’une expérience plus simple, car ils peuvent accéder à l’application via la même URL tant à l’intérieur qu’à l’extérieur de votre réseau. Ils n’ont pas besoin de retenir différentes URL internes et externes, ou d’effectuer le suivi de leur emplacement actuel. 
 
@@ -91,11 +86,11 @@ Pour publier votre application via le Proxy d’application avec un domaine pers
    
    ![Sélectionner un domaine personnalisé](./media/application-proxy-configure-custom-domain/application-proxy.png)
    
-6. Si le domaine a déjà un certificat, le champ **Certificat** affiche les informations du certificat. Dans le cas contraire, sélectionnez le champ **Certificat**. 
+6. Si le domaine a déjà un certificat, le champ **Certificat** affiche les informations du certificat. Dans le cas contraire, sélectionnez le champ **Certificat**.
    
    ![Cliquez pour télécharger un certificat.](./media/application-proxy-configure-custom-domain/certificate.png)
    
-7. Dans la page **Certificat SSL**, recherchez et sélectionnez votre fichier de certificat PFX. Entrez le mot de passe du certificat, puis sélectionnez **Charger le certificat**. Pour plus d’informations sur les certificats, voir la section [Certificats pour les domaines personnalisés](#certificates-for-custom-domains).
+7. Dans la page **Certificat SSL**, recherchez et sélectionnez votre fichier de certificat PFX. Entrez le mot de passe du certificat, puis sélectionnez **Charger le certificat**. Pour plus d’informations sur les certificats, voir la section [Certificats pour les domaines personnalisés](#certificates-for-custom-domains). Si le certificat n’est pas valide ou s’il y a un problème avec le mot de passe, un message d’erreur s’affiche. Le [FAQ sur le proxy d’application](application-proxy-faq.md#application-configuration) contient des étapes de dépannage que vous pouvez essayer.
    
    ![Télécharger le certificat](./media/application-proxy-configure-custom-domain/ssl-certificate.png)
    
@@ -126,7 +121,7 @@ Un certificat crée la connexion TLS sécurisée pour votre domaine personnalis
 
 Vous devez utiliser un certificat PFX pour vous assurer que tous les certificats intermédiaires requis sont inclus. Le certificat doit comporter la clé privée.
 
-Aucune restriction ne s’applique aux méthodes de signature de certificat. Les certificats des type chiffrement à courbe elliptique (ECC) ou autre nom de l’objet (SAN), ainsi que d’autres types de certificat courants sont pris en charge. 
+La plupart des méthodes de signature de certificat courantes sont prises en charge, telles que la méthode Autre nom de l’objet (SAN). 
 
 Vous pouvez utiliser un certificat avec caractères génériques tant que ceux-ci correspondent à l’URL externe. Vous devez utiliser des certificats avec caractères génériques pour des [applications génériques](application-proxy-wildcard.md). Si vous souhaitez utiliser le certificat pour accéder également aux sous-domaines, vous devez ajouter les caractères génériques du sous-domaine en tant qu’autres noms d’objet dans le même certificat. Par exemple, un certificat pour *\*.adventure-works.com* ne peut fonctionner pour *\*.apps.adventure-works.com* que si vous ajoutez *\*.apps.adventure-works.com* en tant qu’autre nom de l’objet. 
 
@@ -138,11 +133,11 @@ Nous vous déconseillons d’utiliser une autorité de certification racine priv
 
 La gestion des certificats s’effectue par le biais les pages d’application individuelles. Accédez à la page **Proxy d’application** de l’application pour accéder au champ **Certificat**.
 
-Vous pouvez utiliser le même certificat pour plusieurs applications. Si un certificat chargé fonctionne avec une autre application, il est appliqué automatiquement. Vous n’êtes pas invité à le charger à nouveau lorsque vous ajoutez ou configurez l’application. 
+Lorsqu’un certificat est téléchargé pour une application, il est également automatiquement appliqué aux **nouvelles applications** configurées qui utilisent le même certificat. Vous devrez télécharger à nouveau le certificat pour les applications existantes dans votre locataire.
 
 Quand un certificat expire, vous recevez un message d’avertissement vous demandant de charger un autre certificat. Si le certificat est révoqué, il se peut que vos utilisateurs reçoivent un avertissement de sécurité lors de l’accès à l’application. Pour mettre à jour le certificat d’une application, accédez à la page **Proxy d’application** de l’application, sélectionnez **Certificat**, puis chargez un nouveau certificat. Si l’ancien certificat n’est pas utilisé par d’autres applications, il est automatiquement supprimé. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Activer l’authentification unique](application-proxy-configure-single-sign-on-with-kcd.md) pour vos applications publiées avec l’authentification Azure AD.
-* [Activer l’accès conditionnel](../conditional-access/overview.md) à vos applications publiées.
 
+* [Activer l’authentification unique](application-proxy-configure-single-sign-on-with-kcd.md) pour vos applications publiées avec l’authentification Azure AD.
+* [Accès conditionnel](../conditional-access/concept-conditional-access-cloud-apps.md) pour vos applications cloud publiées.

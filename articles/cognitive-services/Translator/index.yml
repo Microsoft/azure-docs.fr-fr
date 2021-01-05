@@ -13,12 +13,13 @@ metadata:
   ms.topic: landing-page
   ms.date: 10/14/2019
   ms.author: erhopf
-  ms.openlocfilehash: 26fc174ef0993339487a2edcc32cbb4fd864f96e
-  ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+  ms.custom: contperf-fy21q2
+  ms.openlocfilehash: f0f2e009220292d298848cf93c479639b2318062
+  ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/19/2020
-  ms.locfileid: "83592744"
+  ms.lasthandoff: 12/16/2020
+  ms.locfileid: "97588486"
 landingContent:
 - title: Convertisseur
   linkLists:
@@ -33,25 +34,15 @@ landingContent:
     - text: Conformité
       url: https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/
     - text: Création d’un abonnement
-      url: translator-text-how-to-signup.md
+      url: ./translator-how-to-signup.md
     - text: Questions fréquentes (FAQ)
       url: https://www.microsoft.com/translator/faq.aspx
 - title: Bien démarrer
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Traduire le texte
-      url: quickstart-translate.md
-    - text: Translittérer du texte
-      url: quickstart-transliterate.md
-    - text: Détection de la langue
-      url: quickstart-detect.md
-    - text: Recherche dans le dictionnaire
-      url: quickstart-dictionary.md
-    - text: Déterminer la longueur des phrases
-      url: quickstart-sentences.md
-    - text: Lister les langages pris en charge
-      url: quickstart-languages.md
+    - text: Démarrage rapide
+      url: quickstart-translator.md
   - linkListType: tutorial
     links:
     - text: Créer une application de traduction WPF, C#
@@ -106,3 +97,9 @@ landingContent:
       url: https://aka.ms/TranslatorGitHub
     - text: Stack Overflow
       url: https://stackoverflow.com/questions/tagged/microsoft-translator
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/translator/context/context

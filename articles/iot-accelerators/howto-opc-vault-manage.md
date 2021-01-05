@@ -8,14 +8,17 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 890a25ed2cf11d657cad930815d78dbf968cc9f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0829d4b3fca068ddb0db2df53dd635ab7ad80bed
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71203656"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91281913"
 ---
 # <a name="manage-the-opc-vault-certificate-service"></a>Gérer le service de certificats OPC Vault
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Cet article décrit les tâches d’administration liées au service de gestion de certificats OPC Vault dans Azure. Il indique notamment comment renouveler les certificats de l’autorité de certification émettrice, comment renouveler la liste de révocation de certificats et comment accorder et révoquer un accès utilisateur.
 
@@ -75,7 +78,7 @@ Par défaut, un utilisateur authentifié dans le locataire peut se connecter dan
 8. Sélectionnez **Attribuer**.
 9. Pour les utilisateurs possédant le rôle Administrateur ou Approbateur, continuez à ajouter des stratégies d’accès Azure Key Vault.
 
-### <a name="remove-user"></a>Supprimer un utilisateur
+### <a name="remove-user"></a>Supprimer l’utilisateur
 
 1. Ouvrez le portail Azure.
 2. Accédez à **Azure Active Directory** > **Enterprise applications (Applications d’entreprise)** .

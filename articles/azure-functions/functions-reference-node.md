@@ -2,24 +2,29 @@
 title: Information de référence pour les développeurs JavaScript sur Azure Functions
 description: Découvrez comment développer des fonctions à l’aide de JavaScript.
 ms.assetid: 45dedd78-3ff9-411f-bb4b-16d29a11384c
-ms.topic: reference
-ms.date: 12/17/2019
-ms.openlocfilehash: 345df8e1ea88caa6f8dbe941245c1f989c3e81c6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 11/17/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: 21ab58095fa919e6302251c16e474b02f1445993
+ms.sourcegitcommit: ab94795f9b8443eef47abae5bc6848bb9d8d8d01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234961"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96301988"
 ---
 # <a name="azure-functions-javascript-developer-guide"></a>Guide des développeurs JavaScript sur Azure Functions
 
-Ce guide contient des informations sur les complexités de l’écriture de fonctions Azure avec JavaScript.
+Ce guide contient des informations détaillées qui vous permettront de développer des fonctions Azure à l’aide de JavaScript.
 
-Une fonction JavaScript est une `function` exportée qui s’exécute quand elle est déclenchée ([les déclencheurs sont configurés dans function.json](functions-triggers-bindings.md)). Le premier argument transmis à chaque fonction à un objet `context` qui est utilisé pour la réception et l’envoi des données de liaison, la journalisation et la communication avec le runtime.
+Si vous êtes développeur Express.js, Node.js ou JavaScript et que vous débutez avec Azure Functions, lisez d’abord l’un des articles suivants :
 
-Cet article suppose que vous ayez déjà lu l’article [Informations de référence pour les développeurs sur Azure Functions](functions-reference.md). Complétez le démarrage rapide de Functions pour créer votre première fonction, à l’aide de [Visual Studio Code](functions-create-first-function-vs-code.md) ou [dans le portail](functions-create-first-azure-function.md).
+| Prise en main | Concepts| Apprentissage guidé |
+| -- | -- | -- | 
+| <ul><li>[Fonction Node.js avec Visual Studio Code](./create-first-function-vs-code-node.md)</li><li>[Fonction Node.js avec le terminal/l’invite de commandes](./create-first-function-cli-java.md)</li></ul> | <ul><li>[Guide du développeur](functions-reference.md)</li><li>[Options d’hébergement](functions-scale.md)</li><li>[Fonctions TypeScript](#typescript)</li><li>[Considérations&nbsp; relatives aux performances](functions-best-practices.md)</li></ul> | <ul><li>[Créer des applications serverless](/learn/paths/create-serverless-applications/)</li><li>[Refactoriser des API Node.js et Express en API serverless](/learn/modules/shift-nodejs-express-apis-serverless/)</li></ul> |
 
-Cet article prend également en charge le [développement d’applications TypeScript](#typescript).
+## <a name="javascript-function-basics"></a>Principes de base sur les fonctions JavaScript
+
+Une fonction JavaScript (Node.js) est une `function` exportée qui s’exécute quand elle est déclenchée ([les déclencheurs sont configurés dans function.json](functions-triggers-bindings.md)). Le premier argument transmis à chaque fonction à un objet `context` qui est utilisé pour la réception et l’envoi des données de liaison, la journalisation et la communication avec le runtime.
 
 ## <a name="folder-structure"></a>Structure de dossiers
 
@@ -118,7 +123,7 @@ Les entrées sont réparties en deux catégories dans Azure Functions : l’une 
    };
    ```
    
- - **En tant qu’entrées à l’aide de l’objet [`arguments`](https://msdn.microsoft.com/library/87dw3w1k.aspx) JavaScript.** Cette approche revient pratiquement au même que la transmission des entrées en tant que paramètres, mais elle vous permet de gérer des entrées de manière dynamique.
+ - **En tant qu’entrées à l’aide de l’objet [`arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) JavaScript.** Cette approche revient pratiquement au même que la transmission des entrées en tant que paramètres, mais elle vous permet de gérer des entrées de manière dynamique.
  
    ```javascript
    module.exports = async function(context) { 
@@ -128,7 +133,7 @@ Les entrées sont réparties en deux catégories dans Azure Functions : l’une 
    };
    ```
 
-### <a name="outputs"></a>Outputs
+### <a name="outputs"></a>Sorties
 Une fonction peut écrire des données dans les sorties (liaisons de `direction === "out"`) de plusieurs façons. Dans tous les cas, la propriété `name` de la liaison, comme définie dans *function.json* correspond au nom du membre d’objet faisant l’objet d’une écriture dans votre fonction. 
 
 Vous pouvez assigner des données aux liaisons de sortie de l’une des manières suivantes (ne combinez pas ces méthodes) :
@@ -178,15 +183,38 @@ Pour définir le type de données pour une liaison d’entrée, utilisez la prop
 Les options pour `dataType` sont `binary`, `stream` et `string`.
 
 ## <a name="context-object"></a>Objet de contexte
-Le runtime utilise un objet `context` pour transmettre des données vers et à partir de votre fonction et vous permettre de communiquer avec le runtime. L’objet de contexte peut être utilisé pour lire et définir des données à partir de liaisons, écrire des journaux d’activité et utiliser le rappel `context.done` lorsque votre fonction exportée est synchrone.
 
-L’objet `context` est toujours le premier paramètre d’une fonction. Il doit être inclus, car il possède des méthodes importantes telles que `context.done` et `context.log`. Vous pouvez nommer l’objet comme vous le souhaitez (par exemple, `ctx` ou `c`).
+Le runtime utilise un objet `context` pour transmettre des données vers et à partir de votre fonction et du runtime. Utilisé pour lire et définir les données de liaisons et pour écrire dans des journaux, l’objet `context` est toujours le premier paramètre à être transmis à une fonction.
+
+Pour les fonctions présentant du code synchrone, l’objet de contexte comprend le rappel `done` que vous appelez quand le traitement de la fonction est terminé. Il n’est pas nécessaire d’appeler explicitement `done` pendant l’écriture de code asynchrone ; le rappel `done` est appelé implicitement.
 
 ```javascript
-// You must include a context, but other arguments are optional
-module.exports = function(ctx) {
-    // function logic goes here :)
-    ctx.done();
+module.exports = (context) => {
+
+    // function logic goes here
+
+    context.log("The function has executed.");
+
+    context.done();
+};
+```
+
+Le contexte transmis à votre fonction expose une propriété `executionContext`, qui est un objet avec les propriétés suivantes :
+
+| Nom de la propriété  | Type  | Description |
+|---------|---------|---------|
+| `invocationId` | String | Fournit un identificateur unique pour l’appel de fonction spécifique. |
+| `functionName` | String | Fournit le nom de la fonction en cours d’exécution. |
+| `functionDirectory` | String | Fournit le répertoire de l’application Functions. |
+
+L'exemple suivant montre comment retourner `invocationId`.
+
+```javascript
+module.exports = (context, req) => {
+    context.res = {
+        body: context.executionContext.invocationId
+    };
+    context.done();
 };
 ```
 
@@ -262,49 +290,17 @@ context.done(null, { myOutput: { text: 'hello there, world', noNumber: true }});
 context.log(message)
 ```
 
-Vous permet d’écrire dans les journaux d’activité de fonction de streaming au niveau de trace par défaut. Des méthodes de journalisation supplémentaires sont disponibles sur `context.log` pour vous permettre d’écrire des journaux d’activité de fonction à d’autres niveaux de trace :
+Vous permet d’écrire dans les journaux d’activité de fonction de streaming au niveau de trace par défaut, avec d’autres niveaux de journalisation disponibles. La journalisation du suivi est décrite en détail dans la section suivante. 
 
+## <a name="write-trace-output-to-logs"></a>Écrire la sortie de trace dans les journaux
 
-| Méthode                 | Description                                |
-| ---------------------- | ------------------------------------------ |
-| **error(_message_)**   | Écrit dans la journalisation du niveau d’erreur, ou à un niveau inférieur.   |
-| **warn(_message_)**    | Écrit dans la journalisation du niveau d’avertissement, ou à un niveau inférieur. |
-| **info(_message_)**    | Écrit dans la journalisation du niveau d’information, ou à un niveau inférieur.    |
-| **verbose(_message_)** | Écrit dans la journalisation du niveau détaillé.           |
+Dans Functions, vous utilisez les méthodes `context.log` pour écrire la sortie de trace dans les journaux et la console. Lorsque vous appelez `context.log()`, votre message est écrit dans les journaux au niveau de trace par défaut, qui est le niveau de trace d’_informations_. Functions s’intègre à Azure Application Insights pour mieux capturer les journaux de vos applications de fonction. Application Insights, qui fait partie de Azure Monitor, fournit des fonctionnalités pour la collecte, le rendu visuel et l’analyse des données de télémétrie d’application et de vos sorties de trace. Pour en savoir plus, consultez [Surveiller l’exécution des fonctions Azure](functions-monitoring.md).
 
-L’exemple suivant écrit un journal au niveau de trace d’avertissement :
+L’exemple suivant écrit un journal au niveau de la trace des informations, y compris l’ID d’appel :
 
 ```javascript
-context.log.warn("Something has happened."); 
+context.log("Something has happened. " + context.invocationId); 
 ```
-
-Vous pouvez [configurer le seuil du niveau de trace pour la journalisation](#configure-the-trace-level-for-console-logging) dans le fichier host.json. Pour plus d’informations sur l’écriture de journaux d’activité, consultez [Écriture de sorties de trace](#writing-trace-output-to-the-console) plus loin.
-
-Consultez [Supervision des fonctions Azure](functions-monitoring.md) pour en savoir plus sur l’affichage et l’interrogation des journaux d’activité de fonction.
-
-## <a name="writing-trace-output-to-the-console"></a>Écrire la sortie de trace dans la console 
-
-Dans Functions, vous utilisez les méthodes `context.log` pour écrire la sortie de trace dans la console. Dans Functions v2.x, les sorties de trace via `console.log` sont capturées au niveau de l’application Functions. Cela signifie que les sorties de `console.log` ne sont pas liées à un appel de fonction spécifique et qu’elles ne sont pas affichées dans les journaux d’activité d’une fonction spécifique. Elles sont, toutefois, propagées à Application Insights. Dans Functions v1.x, vous ne pouvez pas utiliser `console.log` pour écrire dans la console.
-
-Lorsque vous appelez `context.log()`, votre message est écrit dans la console au niveau de trace par défaut, qui est le niveau de trace d’_informations_. Le code suivant écrit dans la console au niveau de trace d’informations :
-
-```javascript
-context.log({hello: 'world'});  
-```
-
-Ce code est équivalent au code ci-dessus :
-
-```javascript
-context.log.info({hello: 'world'});  
-```
-
-Ce code écrit dans la console au niveau de trace d’erreur :
-
-```javascript
-context.log.error("An error has occurred.");  
-```
-
-Étant donné que le niveau d’_erreur_ constitue le niveau de trace le plus élevé, cette trace est écrite dans la sortie à tous les niveaux de trace tant que la journalisation est activée.
 
 Toutes les méthodes `context.log` prennent en charge le même format de paramètre que celui pris en charge par la [méthode util.format](https://nodejs.org/api/util.html#util_util_format_format) Node.js. Prenons le code suivant, qui écrit des journaux d’activité de fonction en utilisant le niveau de trace par défaut :
 
@@ -320,9 +316,39 @@ context.log('Node.js HTTP trigger function processed a request. RequestUri=%s', 
 context.log('Request Headers = ', JSON.stringify(req.headers));
 ```
 
-### <a name="configure-the-trace-level-for-console-logging"></a>Configurer le niveau de trace pour la journalisation de la console
+> [!NOTE]  
+> N’utilisez pas `console.log` pour écrire des sorties de trace. Étant donné que la sortie de `console.log` est capturée au niveau de l’application de la fonction, elle n’est pas liée à un appel de fonction spécifique et n’est pas affichée dans les journaux d’une fonction spécifique. En outre, la version 1. x du runtime Functions ne prend pas en charge l’utilisation de `console.log` pour écrire dans la console.
 
-Functions 1.x vous permet de définir le niveau de trace du seuil pour écrire dans la console, ce qui facilite le contrôle de l’écriture des traces dans la console à partir de votre fonction. Utilisez la propriété `tracing.consoleLevel` dans le fichier host.json pour définir le seuil de toutes les traces écrites dans la console. Ce paramètre s’applique à toutes les fonctions dans votre Function App. L’exemple suivant définit le seuil de trace permettant d’activer la journalisation détaillée :
+### <a name="trace-levels"></a>Niveaux de trace
+
+Outre le niveau par défaut, les méthodes de journalisation suivantes sont disponibles pour vous permettre d’écrire des journaux de fonctions à des niveaux de suivi spécifiques.
+
+| Méthode                 | Description                                |
+| ---------------------- | ------------------------------------------ |
+| **error(_message_)**   | Écrit un événement au niveau de l’erreur dans les journaux.   |
+| **warn(_message_)**    | Écrit un événement de niveau avertissement dans les journaux. |
+| **info(_message_)**    | Écrit dans la journalisation du niveau d’information, ou à un niveau inférieur.    |
+| **verbose(_message_)** | Écrit dans la journalisation du niveau détaillé.           |
+
+L’exemple suivant écrit le même journal au niveau de la trace d’avertissement, au lieu du niveau information :
+
+```javascript
+context.log.warn("Something has happened. " + context.invocationId); 
+```
+
+Étant donné que le niveau d’_erreur_ constitue le niveau de trace le plus élevé, cette trace est écrite dans la sortie à tous les niveaux de trace tant que la journalisation est activée.
+
+### <a name="configure-the-trace-level-for-logging"></a>Configurer le niveau de trace pour la journalisation
+
+Functions vous permet de définir le seuil de niveau de trace pour l’écriture dans les journaux ou la console. Les paramètres de seuil spécifiques dépendent de votre version du runtime Functions.
+
+# <a name="v2x"></a>[v2.x+](#tab/v2)
+
+Utilisez la propriété `logging.logLevel` dans le fichier host.json pour définir le seuil des traces écrites dans les journaux. Cet objet JSON vous permet de définir un seuil par défaut pour toutes les fonctions de votre application de fonction, et vous pouvez définir des seuils spécifiques pour les fonctions individuelles. Pour plus d’informations, consultez [Comment configurer la surveillance de Azure Functions](configure-monitoring.md).
+
+# <a name="v1x"></a>[v1.x](#tab/v1)
+
+Utilisez la propriété `tracing.consoleLevel` dans le fichier host.json pour définir le seuil de toutes les traces écrites dans les journaux et la console. Ce paramètre s’applique à toutes les fonctions dans votre Function App. L’exemple suivant définit le seuil de trace permettant d’activer la journalisation détaillée :
 
 ```json
 {
@@ -332,7 +358,65 @@ Functions 1.x vous permet de définir le niveau de trace du seuil pour écrire d
 }  
 ```
 
-Les valeurs de **consoleLevel** correspondent aux noms des méthodes `context.log`. Pour désactiver toutes les journalisations de trace dans la console, définissez **consoleLevel** sur _désactivé_. Pour plus d’informations, consultez l’article de référence sur [host.json](functions-host-json-v1.md).
+Les valeurs de **consoleLevel** correspondent aux noms des méthodes `context.log`. Pour désactiver toutes les journalisations de trace dans la console, définissez **consoleLevel** sur _désactivé_. Pour plus d’informations, consultez l’article de référence sur [host.json v1.x](functions-host-json-v1.md).
+
+---
+
+### <a name="log-custom-telemetry"></a>Enregistrer une télémétrie personnalisée
+
+Par défaut, Functions écrit la sortie en tant que traces dans Application Insights. Pour plus de contrôle, vous pouvez utiliser à la place le kit de développement logiciel [Application Insights node.js](https://github.com/microsoft/applicationinsights-node.js) pour envoyer des données de télémétrie personnalisées à votre instance Application Insights. 
+
+# <a name="v2x"></a>[v2.x+](#tab/v2)
+
+```javascript
+const appInsights = require("applicationinsights");
+appInsights.setup();
+const client = appInsights.defaultClient;
+
+module.exports = function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+    // Use this with 'tagOverrides' to correlate custom telemetry to the parent function invocation.
+    var operationIdOverride = {"ai.operation.id":context.traceContext.traceparent};
+
+    client.trackEvent({name: "my custom event", tagOverrides:operationIdOverride, properties: {customProperty2: "custom property value"}});
+    client.trackException({exception: new Error("handled exceptions can be logged with this method"), tagOverrides:operationIdOverride});
+    client.trackMetric({name: "custom metric", value: 3, tagOverrides:operationIdOverride});
+    client.trackTrace({message: "trace message", tagOverrides:operationIdOverride});
+    client.trackDependency({target:"http://dbname", name:"select customers proc", data:"SELECT * FROM Customers", duration:231, resultCode:0, success: true, dependencyTypeName: "ZSQL", tagOverrides:operationIdOverride});
+    client.trackRequest({name:"GET /customers", url:"http://myserver/customers", duration:309, resultCode:200, success:true, tagOverrides:operationIdOverride});
+
+    context.done();
+};
+```
+
+# <a name="v1x"></a>[v1.x](#tab/v1)
+
+```javascript
+const appInsights = require("applicationinsights");
+appInsights.setup();
+const client = appInsights.defaultClient;
+
+module.exports = function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+    // Use this with 'tagOverrides' to correlate custom telemetry to the parent function invocation.
+    var operationIdOverride = {"ai.operation.id":context.operationId};
+
+    client.trackEvent({name: "my custom event", tagOverrides:operationIdOverride, properties: {customProperty2: "custom property value"}});
+    client.trackException({exception: new Error("handled exceptions can be logged with this method"), tagOverrides:operationIdOverride});
+    client.trackMetric({name: "custom metric", value: 3, tagOverrides:operationIdOverride});
+    client.trackTrace({message: "trace message", tagOverrides:operationIdOverride});
+    client.trackDependency({target:"http://dbname", name:"select customers proc", data:"SELECT * FROM Customers", duration:231, resultCode:0, success: true, dependencyTypeName: "ZSQL", tagOverrides:operationIdOverride});
+    client.trackRequest({name:"GET /customers", url:"http://myserver/customers", duration:309, resultCode:200, success:true, tagOverrides:operationIdOverride});
+
+    context.done();
+};
+```
+
+---
+
+Le paramètre `tagOverrides` définit `operation_Id` sur l’ID d'appel de la fonction. Ce paramètre permet de mettre en corrélation toutes les données de télémétrie générées automatiquement et personnalisées pour un appel de fonction donné.
 
 ## <a name="http-triggers-and-bindings"></a>Déclencheurs et liaisons HTTP
 
@@ -424,12 +508,20 @@ Le tableau suivant présente les versions Node.js actuellement prises en charge 
 | Version de Functions | Version de nœud (Windows) | Version de nœud (Linux) |
 |---|---| --- |
 | 1.x | 6.11.2 (verrouillée par le runtime) | n/a |
-| 2.x  | ~8<br/>~10 (recommandé)<br/>~12<sup>*</sup> | ~8 (recommandé)<br/>~10  |
-| 3.x | ~10<br/>~12 (recommandé)  | ~10<br/>~12 (recommandé) |
+| 2.x  | `~8`<br/>`~10` (recommandé)<br/>`~12` | `node|8`<br/>`node|10` (recommandé)  |
+| 3.x | `~10`<br/>`~12` (recommandé)<br/>`~14` (préversion)  | `node|10`<br/>`node|12` (recommandé)<br/>`node|14` (préversion) |
 
-<sup>*</sup> Le nœud ~12 est actuellement autorisé sur la version 2.x du runtime Fonctions. Toutefois, pour de meilleures performances, nous vous recommandons d’utiliser la version 3.x du runtime Functions avec le nœud ~12. 
+Vous pouvez voir la version que le runtime utilise en journalisant `process.version` depuis n’importe quelle fonction.
 
-Vous pouvez voir la version que le runtime utilise en vérifiant le paramètre d’application ci-dessus ou en affichant `process.version` à partir de n’importe quelle fonction. Ciblez la version dans Azure en définissant le [paramètre d’application](functions-how-to-use-azure-function-app-settings.md#settings) WEBSITE_NODE_DEFAULT_VERSION sur une version LTS prise en charge, `~10` par exemple.
+### <a name="setting-the-node-version"></a>Définition de la version de Node
+
+Pour les applications de fonction Windows, ciblez la version dans Azure en définissant le [paramètre d’application](functions-how-to-use-azure-function-app-settings.md#settings) `WEBSITE_NODE_DEFAULT_VERSION` sur une version de LTS prise en charge, par exemple `~12`.
+
+Pour les applications de fonction Linux, exécutez la commande Azure CLI suivante pour mettre à jour la version de Node.
+
+```bash
+az functionapp config set --linux-fx-version "node|12" --name "<MY_APP_NAME>" --resource-group "<MY_RESOURCE_GROUP_NAME>"
+```
 
 ## <a name="dependency-management"></a>Gestion des dépendances
 Pour utiliser les bibliothèques de communauté dans votre code JavaScript, comme indiqué dans l’exemple ci-dessous, vous devez vérifier que toutes les dépendances sont installées sur votre application de fonction dans Azure.
@@ -471,21 +563,42 @@ Vous pouvez installer des packages sur votre application de fonction de deux fa�
 
 ## <a name="environment-variables"></a>Variables d'environnement
 
-Dans Functions, les [paramètres de l’application](functions-app-settings.md), par exemple, les chaînes de connexion de service, sont exposées en tant que variables d’environnement pendant l’exécution. Vous pouvez accéder à ces paramètres à l’aide de `process.env`, comme illustré ici dans les deuxième et troisième appels à `context.log()`, où nous consignons les variables d’environnement `AzureWebJobsStorage` et `WEBSITE_SITE_NAME` :
+Ajoutez vos propres variables d’environnement à une application de fonction, dans vos environnements locaux et cloud, par exemple des secrets opérationnels (chaînes de connexion, clés et points de terminaison) ou des paramètres de l’environnement (comme des variables de profilage). Accédez à ces paramètres en utilisant `process.env` dans le code de votre fonction.
+
+### <a name="in-local-development-environment"></a>Dans un environnement de développement local
+
+Dans le cas d’une exécution locale, votre projet Functions comprend un [fichier `local.settings.json`](/azure/azure-functions/functions-run-local), où vous stockez vos variables d’environnement dans l’objet `Values`. 
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "translatorTextEndPoint": "https://api.cognitive.microsofttranslator.com/",
+    "translatorTextKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "languageWorkers__node__arguments": "--prof"
+  }
+}
+```
+
+### <a name="in-azure-cloud-environment"></a>Dans un environnement cloud Azure
+
+Dans le cas d’une exécution dans Azure, l’application de fonction vous permet de définir des [paramètres d’application](functions-app-settings.md), comme des chaînes de connexion de service, et expose ces paramètres en tant que variables d’environnement lors de l’exécution. 
+
+[!INCLUDE [Function app settings](../../includes/functions-app-settings.md)]
+
+### <a name="access-environment-variables-in-code"></a>Accéder aux variables d’environnement dans le code
+
+Accédez aux paramètres d’application en utilisant `process.env`, comme illustré ici dans les deuxième et troisième appels à `context.log()`, où nous journalisons les variables d’environnement `AzureWebJobsStorage` et `WEBSITE_SITE_NAME` :
 
 ```javascript
 module.exports = async function (context, myTimer) {
-    var timeStamp = new Date().toISOString();
 
-    context.log('Node.js timer trigger function ran!', timeStamp);
     context.log("AzureWebJobsStorage: " + process.env["AzureWebJobsStorage"]);
     context.log("WEBSITE_SITE_NAME: " + process.env["WEBSITE_SITE_NAME"]);
 };
 ```
-
-[!INCLUDE [Function app settings](../../includes/functions-app-settings.md)]
-
-Lors de l’exécution en local, les paramètres de l’application sont lus à partir du fichier projet [local.settings.json](functions-run-local.md#local-settings-file).
 
 ## <a name="configure-function-entry-point"></a>Configurer le point d’entrée de la fonction
 
@@ -559,22 +672,19 @@ Dans cet exemple, il est important de noter que même si un objet est en cours d
 
 Avec le paramètre de démarrage `--inspect`, un processus Node.js écoute un client de débogage sur le port spécifié. Dans Azure Functions 2.x, vous pouvez spécifier des arguments à transmettre au processus Node.js qui exécute votre code en ajoutant la variable d’environnement ou le paramètre d’application `languageWorkers:node:arguments = <args>`. 
 
-Pour déboguer localement, ajoutez `"languageWorkers:node:arguments": "--inspect=5858"` sous `Values` dans votre fichier [local.settings.json](https://docs.microsoft.com/azure/azure-functions/functions-run-local#local-settings-file) et associez un débogueur au port 5858.
+Pour déboguer localement, ajoutez `"languageWorkers:node:arguments": "--inspect=5858"` sous `Values` dans votre fichier [local.settings.json](./functions-run-local.md#local-settings-file) et associez un débogueur au port 5858.
 
 Lorsque vous déboguez à l’aide de VS Code, le paramètre `--inspect` est automatiquement ajouté à l’aide de la valeur `port` au fichier launch.json du projet.
 
-Dans la version 1.x, le paramètre `languageWorkers:node:arguments` ne fonctionne pas. Le port de débogage peut être sélectionné avec le paramètre [`--nodeDebugPort`](https://docs.microsoft.com/azure/azure-functions/functions-run-local#start) d’Azure Functions Core Tools.
+Dans la version 1.x, le paramètre `languageWorkers:node:arguments` ne fonctionne pas. Le port de débogage peut être sélectionné avec le paramètre [`--nodeDebugPort`](./functions-run-local.md#start) d’Azure Functions Core Tools.
 
 ## <a name="typescript"></a>TypeScript
 
-Lorsque vous ciblez la version 2.x du runtime Functions, [Azure Functions pour Visual Studio Code](functions-create-first-function-vs-code.md) et [Azure Functions Core Tools](functions-run-local.md) vous permettent de créer des applications de fonction à l’aide d’un modèle qui prend en charge des projets d’application de fonction TypeScript. Le modèle génère les fichiers de projet `package.json` et `tsconfig.json` qui simplifient la transpilation, l’exécution et la publication de fonctions JavaScript à partir du code TypeScript grâce à ces outils.
+Lorsque vous ciblez la version 2.x du runtime Functions, [Azure Functions pour Visual Studio Code](./create-first-function-cli-typescript.md) et [Azure Functions Core Tools](functions-run-local.md) vous permettent de créer des applications de fonction à l’aide d’un modèle qui prend en charge des projets d’application de fonction TypeScript. Le modèle génère les fichiers de projet `package.json` et `tsconfig.json` qui simplifient la transpilation, l’exécution et la publication de fonctions JavaScript à partir du code TypeScript grâce à ces outils.
 
 Un fichier `.funcignore` généré est utilisé pour indiquer les fichiers exclus lorsqu’un projet est publié dans Azure.  
 
 Les fichiers TypeScript (.ts) sont transpilés en fichiers JavaScript (.js) dans le répertoire de sortie `dist`. Les modèles TypeScript utilisent le [`scriptFile`paramètre](#using-scriptfile) dans `function.json` pour indiquer l’emplacement du fichier .js correspondant dans le dossier `dist`. L’emplacement de sortie est défini par le modèle à l’aide du paramètre `outDir` dans le fichier `tsconfig.json`. Si vous modifiez ce paramètre ou le nom du dossier, le runtime n’est pas en mesure de trouver le code à exécuter.
-
-> [!NOTE]
-> Il existe une prise en charge expérimentale de TypeScript version 1.x du runtime Functions. La version expérimentale transpile les fichiers TypeScript en fichiers JavaScript lorsque la fonction est appelée. Dans la version 2.x, cette prise en charge expérimentale a été remplacée par la méthode contrôlée par l’outil qui effectue la transpilation avant l’initialisation de l’hôte et pendant le processus de déploiement.
 
 La façon dont vous développez localement et déployez à partir d’un projet TypeScript dépend de votre outil de développement.
 
@@ -635,7 +745,7 @@ Quand vous utilisez des fonctions JavaScript, tenez compte des considérations d
 
 ### <a name="choose-single-vcpu-app-service-plans"></a>Choisir des plans App Service à processeur virtuel unique
 
-Lorsque vous créez une application de fonction qui utilise le plan App Service, nous vous recommandons de sélectionner un plan à processeur virtuel unique plutôt qu’un plan à plusieurs processeurs virtuels. À l’heure actuelle, Functions exécute les fonctions JavaScript plus efficacement sur des machines virtuelles à processeur virtuel unique. Le recours à de plus grandes machines virtuelles ne produit pas les améliorations de performances attendues. Le cas échéant, vous pouvez effectuer un scale-out manuellement en ajoutant des instances de machine virtuelle à processeur virtuel unique, ou vous pouvez activer la mise à l’échelle automatique. Pour plus d’informations, consultez [Mettre à l’échelle le nombre d’instances manuellement ou automatiquement](../monitoring-and-diagnostics/insights-how-to-scale.md?toc=%2fazure%2fapp-service%2ftoc.json).
+Lorsque vous créez une application de fonction qui utilise le plan App Service, nous vous recommandons de sélectionner un plan à processeur virtuel unique plutôt qu’un plan à plusieurs processeurs virtuels. À l’heure actuelle, Functions exécute les fonctions JavaScript plus efficacement sur des machines virtuelles à processeur virtuel unique. Le recours à de plus grandes machines virtuelles ne produit pas les améliorations de performances attendues. Le cas échéant, vous pouvez effectuer un scale-out manuellement en ajoutant des instances de machine virtuelle à processeur virtuel unique, ou vous pouvez activer la mise à l’échelle automatique. Pour plus d’informations, consultez [Mettre à l’échelle le nombre d’instances manuellement ou automatiquement](../azure-monitor/platform/autoscale-get-started.md?toc=/azure/app-service/toc.json).
 
 ### <a name="cold-start"></a>Démarrage à froid
 

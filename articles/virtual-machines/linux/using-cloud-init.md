@@ -1,40 +1,33 @@
 ---
 title: Vue d’ensemble de la prise en charge de cloud-init pour les machines virtuelles Linux dans Azure
 description: Vue d’ensemble des fonctionnalités cloud-init permettant de configurer une machine virtuelle lors de l’approvisionnement dans Azure.
-services: virtual-machines-linux
-documentationcenter: ''
 author: danielsollondon
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
-ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-linux
-ms.devlang: azurecli
-ms.topic: article
-ms.date: 01/23/2019
+ms.topic: how-to
+ms.date: 10/14/2020
 ms.author: danis
-ms.openlocfilehash: 1f0395956fa6977be5d1d6f4f4faf06b84c094d8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87cb4a233470fadc9cde616790aff0d5cd7b151b
+ms.sourcegitcommit: 93329b2fcdb9b4091dbd632ee031801f74beb05b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79465037"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92096655"
 ---
 # <a name="cloud-init-support-for-virtual-machines-in-azure"></a>Prise en charge cloud-init pour les machines virtuelles dans Azure
 Cet article décrit la prise en charge existante pour [cloud-init](https://cloudinit.readthedocs.io) destinée à la configuration d’une machine virtuelle ou de groupes de machines virtuelles identiques au moment du provisionnement dans Azure. Ces configurations cloud-init sont exécutées au premier démarrage une fois que les ressources ont été approvisionnées par Azure.  
 
 L’approvisionnement de la machine virtuelle est le processus par lequel Azure transmet à votre machine virtuelle les valeurs des paramètres de création, tels que le nom d’hôte, le nom d’utilisateur, le mot de passe, etc. et les met à la disposition de la machine virtuelle au moment de son démarrage. Un « agent d’approvisionnement » consomme ces valeurs, configure la machine virtuelle et renvoie un rapport une fois terminé. 
 
-Azure prend en charge deux agents d’approvisionnement : [cloud-init](https://cloudinit.readthedocs.io) et l’[agent Linux Azure (WALA)](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-linux).
+Azure prend en charge deux agents d’approvisionnement : [cloud-init](https://cloudinit.readthedocs.io) et l’[agent Linux Azure (WALA)](../extensions/agent-linux.md).
 
 ## <a name="cloud-init-overview"></a>Présentation de cloud-init
 [cloud-init](https://cloudinit.readthedocs.io) est une approche courante permettant de personnaliser une machine virtuelle Linux lors de son premier démarrage. Vous pouvez utiliser cloud-init pour installer des packages et écrire des fichiers, ou encore pour configurer des utilisateurs ou des paramètres de sécurité. cloud-init étant appelé pendant le processus de démarrage initial, aucune autre étape ni aucun agent ne sont nécessaires pour appliquer votre configuration.  Pour plus d’informations sur la façon de mettre correctement en forme vos fichiers `#cloud-config` ou d’autres entrées, consultez le [site de documentation cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/format.html#cloud-config-data).  Les fichiers `#cloud-config` sont des fichiers texte encodés en base64.
 
 cloud-init fonctionne aussi sur les différentes distributions. Par exemple, vous n’utilisez pas **apt-get install** ou **yum install** pour installer un package. Au lieu de cela, vous pouvez définir une liste des packages à installer, Après quoi cloud-init se charge d’utiliser automatiquement l’outil de gestion de package natif correspondant à la distribution que vous sélectionnez.
 
-Nous travaillons activement avec nos partenaires de distribution Linux afin de mettre des images compatibles cloud-init à disposition sur la Place de marché Azure. Ces images permettent à vos déploiements et configurations cloud-init de fonctionner de manière fluide avec des machines virtuelles et des groupes de machines virtuelles identiques. Dans un premier temps, nous collaborons avec les partenaires de distribution Linux agréés et vérifions en amont pour garantir le fonctionnement de cloud-init avec le système d’exploitation sur Azure, puis les packages sont mis à jour et rendus accessibles publiquement dans les référentiels de packages de la distribution. 
+Nous travaillons activement avec nos partenaires de distribution Linux afin de mettre des images compatibles cloud-init à disposition sur Place de marché Azure. Ces images permettent à vos déploiements et configurations cloud-init de fonctionner de manière fluide avec des machines virtuelles et des groupes de machines virtuelles identiques. Dans un premier temps, nous collaborons avec les partenaires de distribution Linux agréés et vérifions en amont pour garantir le fonctionnement de cloud-init avec le système d’exploitation sur Azure, puis les packages sont mis à jour et rendus accessibles publiquement dans les référentiels de packages de la distribution. 
 
 Il existe deux étapes pour rendre cloud-init disponible pour les systèmes d’exploitation de distribution Linux approuvés sur Azure, la prise en charge des packages, puis la prise en charge des images :
 * « prise en charge des packages cloud-init sur Azure » documente quels packages cloud-init sont pris en charge ou en préversion. Vous pouvez donc utiliser ces packages avec le système d’exploitation dans une image personnalisée.
@@ -44,6 +37,7 @@ Il existe deux étapes pour rendre cloud-init disponible pour les systèmes d’
 ### <a name="canonical"></a>Canonical
 | Éditeur/version| Offre | SKU | Version | image compatible avec cloud-init | prise en charge des packages cloud-init sur Azure|
 |:--- |:--- |:--- |:--- |:--- |:--- |
+|Canonical 20.04 |UbuntuServer |18.04-LTS |latest |Oui | Oui |
 |Canonical 18.04 |UbuntuServer |18.04-LTS |latest |Oui | Oui |
 |Canonical 16.04|UbuntuServer |16.04-LTS |latest |Oui | Oui |
 |Canonical 14.04|UbuntuServer |14.04.5-LTS |latest |Oui | Oui |
@@ -52,34 +46,67 @@ Il existe deux étapes pour rendre cloud-init disponible pour les systèmes d’
 | Éditeur/version | Offre | SKU | Version | image compatible avec cloud-init | prise en charge des packages cloud-init sur Azure|
 |:--- |:--- |:--- |:--- |:--- |:--- |
 |RedHat 7.6 |RHEL |7-RAW-CI |7.6.2019072418 |Oui | Oui, prise en charge de la version du package : *18.2-1.el7_6.2*|
-|RedHat 7.7 |RHEL |7-RAW-CI |7.7.2019081601 | Oui (Notez qu’il s’agit d’une image de préversion, et que lorsque toutes les images RHEL 7.7 prendront en charge cloud-init, elle sera supprimée au milieu de l’année 2020 ; vous recevrez un avis) | Oui, prise en charge de la version du package : *18.5-3.el7*|
-|RedHat 7.7 |RHEL |7-RAW | n/a| Non, les mises à jour des images seront terminées fin avril 2020| Oui, prise en charge de la version du package : *18.5-3.el7*|
-|RedHat 7.7 |RHEL |7-LVM | n/a| Non, les mises à jour des images seront terminées fin avril| Oui, prise en charge de la version du package : *18.5-3.el7*|
-|RedHat 7.7 |RHEL |7,7 | n/a| Non, les mises à jour des images seront terminées fin avril | Oui, prise en charge de la version du package : *18.5-3.el7*|
-|RedHat 7.7 |rhel-byos | rhel-lvm77 | n/a|Non, les mises à jour des images seront terminées fin avril  | Oui, prise en charge de la version du package : *18.5-3.el7*|
+|RedHat 7.7 |RHEL |7-RAW-CI |7.7.2019081601 | Oui (Remarque : Il s’agit d’une image de préversion et elle **ne doit plus** être utilisée, elle sera supprimée le 1er septembre 2020.) | N/A |
+|RedHat 7.7 (Gen1)|RHEL |7,7 | 7.7.2020051912 | Oui | Oui, prise en charge de la version du package : *18.5-6.el7*|
+|RedHat 7.7 (Gen2)|RHEL | 77-gen2 | 7.7.2020051913 | Oui | Oui, prise en charge de la version du package : *18.5-6.el7*|
+|RedHat 7.7 (Gen1)|RHEL |7-LVM | 7.7.2020051921 | Oui | Oui, prise en charge de la version du package : *18.5-6.el7*|
+|RedHat 7.7 (Gen2)|RHEL | 7lvm-gen2 | 7.7.2020051922  | Oui | Oui, prise en charge de la version du package : *18.5-6.el7*|
+|RedHat 7.7 (Gen1) |rhel-byos | rhel-lvm77 | 7.7.20200416 | Oui  | Oui, prise en charge de la version du package : *18.5-6.el7*|
+|RedHat 8.1 (Gen1) |RHEL |8.1-ci |8.1.2020042511 | Oui (Remarque : Il s’agit d’une image de préversion et, lorsque toutes les images RHEL 8.1 prendront en charge cloud-init, elle sera supprimée le 1er août 2020.) | Non, ETA pour la prise en charge complète en juin 2020|
+|RedHat 8.1 (Gen2) |RHEL |81-ci-gen2 |8.1.2020042524 | Oui (Remarque : Il s’agit d’une image de préversion et, lorsque toutes les images RHEL 8.1 prendront en charge cloud-init, elle sera supprimée le 1er août 2020.) | Non, ETA pour la prise en charge complète en juin 2020 |
+
+* Toutes les images RedHat:RHEL 7.8 et 8.2 (Gen1 et Gen2) sont approvisionnées à l’aide de cloud-init.
 
 ### <a name="centos"></a>CentOS
 
 | Éditeur/version | Offre | SKU | Version | image compatible avec cloud-init | prise en charge des packages cloud-init sur Azure|
 |:--- |:--- |:--- |:--- |:--- |:--- |
-|OpenLogic 7.7 |CentOS |7-CI |7.7.20190920 |Oui (Notez qu’il s’agit d’une image de préversion, et que lorsque toutes les images CentOS 7.7 prendront en charge cloud-init, elle sera supprimée au milieu de l’année 2020 ; vous recevrez un avis) | Oui, prise en charge de la version du package : *18.5-3.el7.centos*|
+|OpenLogic 7.7 |CentOS |7-CI |7.7.20190920 |Oui (Remarque : Il s’agit d’une image de préversion et elle **ne doit plus** être utilisée, elle sera supprimée le 1er septembre 2020.) | N/A |
+|OpenLogic 7.7 |CentOS | 7,7 |7.7.2020062400 |Oui | Oui, prise en charge de la version du package : `18.5-6.el7.centos.5`|
+|OpenLogic 7.7 (Gen2) |CentOS | 7_7-gen2 |7.7.2020062401 |Oui | Oui, prise en charge de la version du package : `18.5-6.el7.centos.5`|
+|OpenLogic 7.7 |CentOS-HPC | 7,7 |7.6.2020062600 |Oui | Oui, prise en charge de la version du package : `18.5-6.el7.centos.5`|
+|OpenLogic 7.7 (Gen2) |CentOS-HPC | 7_7-gen2 |7.6.2020062601 |Oui | Oui, prise en charge de la version du package : `18.5-6.el7.centos.5`|
+|OpenLogic 8.1 |CentOS | 8_1 |8.1.2020062400 |Oui | Oui, prise en charge de la version du package : `18.5-7.el8_1.1`|
+|OpenLogic 8.1 (Gen2) |CentOS | 8_1-gen2 |8.1.2020062401 |Oui | Oui, prise en charge de la version du package : `18.5-7.el8_1.1`|
+|OpenLogic 8.1 |CentOS-HPC | 8_1 |8.1.2020062400 |Oui | Oui, prise en charge de la version du package : `18.5-7.el8_1.1`|
+|OpenLogic 8.1 (Gen2) |CentOS-HPC:8_1-gen2 | 8_1-gen2 |8.1.2020062401 |Oui | Oui, prise en charge de la version du package : `18.5-7.el8_1.1`|
 
-* Les images CentOS 7.7 compatibles cloud-init seront mises à jour ici en mars 2020 
+* Toutes les images OpenLogic:CentOS 7.8 et 8.2 (Gen1 et Gen2) sont approvisionnées à l’aide de cloud-init.
 
 ### <a name="oracle"></a>Oracle
 
 | Éditeur/version | Offre | SKU | Version | image compatible avec cloud-init | prise en charge des packages cloud-init sur Azure|
 |:--- |:--- |:--- |:--- |:--- |:--- |
-|Oracle 7.7 |Oracle-Linux |77-ci |7.7.01| Image de préversion (Notez qu’il s’agit d’une image de préversion, et que lorsque toutes les images Oracle 7.7 prendront en charge cloud-init, elle sera supprimée au milieu de l’année 2020 ; vous recevrez un avis) | Non, en préversion, le package est : *18.5-3.0.1.el7*
+|Oracle 7.7 |Oracle-Linux |77-ci |7.7.01| Image de préversion (Remarque : Il s’agit d’une image de préversion et, lorsque toutes les images Oracle 7.7 prendront en charge cloud-init, elle sera supprimée au milieu de l’année 2020 ; vous recevrez un avis.) | Non, en préversion, le package est : *18.5-3.0.1.el7*
 
-### <a name="debian--suse-sles"></a>Debian et SuSE SLES
-Nous travaillons actuellement à la version préliminaire de la prise en charge, nous prévoyons des mises à jour en février et mars 2020.
+### <a name="suse-sles"></a>SUSE SLES
+Ces images SLES ont été mises à jour de façon à approvisionner à l’aide de cloud-init, les variantes d’images Gen2 ont également été mises à jour.
+* suse:sles-15-sp1-{basic/byos/hpc/hpc-byos/chost-byos}:gen1:2020.06.10
+* suse:sles-sap-15-sp1:gen1:2020.06.10
+* suse:sles-sap-15-sp1-byos:gen1:2020.06.10
+* suse:manager-proxy-4-byos:gen1:2020.06.10
+* suse:manager-server-4-byos:gen1:2020.06.10
+* suse:sles-{byos/sap/sap-byos}:15:2020.06.10
+* suse:sles-12-sp5:gen1:2020.06.10
+* suse:sles-12-sp5{-byos/basic/hpc-byos/hpc}:gen1:2020.06.10
+* suse:sles-{byos/sap/sap-byos}:12-sp4:2020.06.10
+* suse:sles-{byos/sap/sap-byos}:12-sp3:2020.06.10
+* suse:sles-{byos/sap/sap-byos}:12-sp2:2020.06.10
+
+
+### <a name="debian"></a>Debian
+| Éditeur/version | Offre | SKU | Version | image compatible avec cloud-init | prise en charge des packages cloud-init sur Azure|
+|:--- |:--- |:--- |:--- |:--- |:--- |
+| debian (Gen1) |debian-10 | 10-cloudinit |cloud-init-preview| Oui (Remarque : Il s’agit d’une image de préversion et elle **ne doit plus** être utilisée, elle sera supprimée le 1er janvier 2021.) | Non, en préversion |
+| debian (Gen2) |debian-10 | 10-cloudinit-gen2 |cloud-init-preview| Oui (Remarque : Il s’agit d’une image de préversion et elle **ne doit plus** être utilisée, elle sera supprimée le 1er janvier 2021.) | Non, en préversion |
+| debian (Gen1) |debian-10 | 10-cloudinit |10:0.20201013.422| Oui | Oui, prise en charge de la version du package : `20.2-2~deb10u1` |
+| debian (Gen2) |debian-10 | 10-cloudinit-gen2 |0.20201013.422| Oui | Oui, prise en charge de la version du package : `20.2-2~deb10u1` |
+
 
 Actuellement Azure Stack prend en charge l’approvisionnement d’images compatibles cloud-init.
 
-
 ## <a name="what-is-the-difference-between-cloud-init-and-the-linux-agent-wala"></a>Quelle est la différence entre cloud-init et l’agent Linux (WALA) ?
-WALA est un agent spécifique à la plateforme Azure, qui est utilisé pour approvisionner et configurer des machines virtuelles et gérer des [extensions Azure](https://docs.microsoft.com/azure/virtual-machines/extensions/features-linux). 
+WALA est un agent spécifique à la plateforme Azure, qui est utilisé pour approvisionner et configurer des machines virtuelles et gérer des [extensions Azure](../extensions/features-linux.md). 
 
 Nous améliorons la tâche de configuration des machines virtuelles afin d’utiliser cloud-init au lieu de l’agent Linux, ceci pour permettre aux clients cloud-init existants de s’appuyer sur leurs scripts cloud-init actuels ou aux nouveaux clients de tirer parti de la riche fonctionnalité de configuration de cloud-init. Si vous possédez des investissements existants dans des scripts cloud-init pour la configuration de systèmes Linux, **aucun autre paramètre n’est requis** pour permettre aux processus cloud-init de les traiter. 
 
@@ -94,12 +121,13 @@ Il est aussi simple de déployer une machine virtuelle cloud-init que de référ
 
 La première étape du déploiement de cette image est la création d’un groupe de ressources avec la commande [az group create](/cli/azure/group). Un groupe de ressources Azure est un conteneur logique dans lequel les ressources Azure sont déployées et gérées. 
 
-L’exemple suivant crée un groupe de ressources nommé *myResourceGroup* à l’emplacement *eastus*.
+L’exemple suivant crée un groupe de ressources nommé *myResourceGroup* à l’emplacement *eastus* .
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
-Il est ensuite question de créer un fichier dans l’interpréteur de commandes actuel, nommé *cloud-init.txt*, et de le coller dans la configuration suivante. Pour cet exemple, créez le fichier dans Cloud Shell et non sur votre ordinateur local. Vous pouvez utiliser l’éditeur de votre choix. Entrez `sensible-editor cloud-init.txt` pour créer le fichier et afficher la liste des éditeurs disponibles. Choisissez le n°1 pour utiliser l’éditeur **nano**. Vérifiez que l’intégralité du fichier cloud-init est copiée, en particulier la première ligne :
+
+Il est ensuite question de créer un fichier dans l’interpréteur de commandes actuel, nommé *cloud-init.txt* , et de le coller dans la configuration suivante. Pour cet exemple, créez le fichier dans Cloud Shell et non sur votre ordinateur local. Vous pouvez utiliser l’éditeur de votre choix. Entrez `sensible-editor cloud-init.txt` pour créer le fichier et afficher la liste des éditeurs disponibles. Choisissez le n°1 pour utiliser l’éditeur **nano** . Vérifiez que l’intégralité du fichier cloud-init est copiée, en particulier la première ligne :
 
 ```yaml
 #cloud-config
@@ -111,7 +139,7 @@ Appuyez sur `ctrl-X` pour quitter le fichier, saisissez `y` pour l’enregistrer
 
 Enfin, vous devez créer une machine virtuelle avec la commande [az vm create](/cli/azure/vm). 
 
-L’exemple suivant crée une machine virtuelle nommée *centos74* et des clés SSH si elles n’existent pas déjà dans un emplacement de clé par défaut. Pour utiliser un ensemble spécifique de clés, utilisez l’option `--ssh-key-value`.  Utilisez le paramètre `--custom-data` à transmettre dans votre fichier de configuration cloud-init. Indiquez le chemin complet vers la configuration *cloud-init.txt* si vous avez enregistré le fichier en dehors de votre répertoire de travail actuel. L’exemple suivant crée une machine virtuelle nommée *centos74* :
+L’exemple suivant crée une machine virtuelle nommée *centos74* et des clés SSH si elles n’existent pas déjà dans un emplacement de clé par défaut. Pour utiliser un ensemble spécifique de clés, utilisez l’option `--ssh-key-value`.  Utilisez le paramètre `--custom-data` à transmettre dans votre fichier de configuration cloud-init. Indiquez le chemin complet vers la configuration *cloud-init.txt* si vous avez enregistré le fichier en dehors de votre répertoire de travail actuel. 
 
 ```azurecli-interactive 
 az vm create \
@@ -124,8 +152,10 @@ az vm create \
 
 Lorsque la machine virtuelle est créée, l’interface de ligne de commande Azure affiche des informations spécifiques à votre déploiement. Notez la valeur de `publicIpAddress`. Cette adresse est utilisée pour accéder à la machine virtuelle.  Vous devez patienter un certain temps que la machine virtuelle soit créée, que les packages soient installés et que l’application démarre. Certaines tâches en arrière-plan continuent à s’exécuter une fois que l’interface CLI Azure vous renvoie à l’invite de commandes. Vous pouvez exécuter une commande SSH dans la machine virtuelle et suivre la procédure décrite dans la section de résolution des problèmes afin d’afficher les journaux d’activité cloud-init. 
 
+Vous pouvez également déployer une machine virtuelle compatible avec cloud-init en transférant les [paramètres dans le modèle ARM](../../azure-resource-manager/templates/deploy-cli.md#inline-parameters).
+
 ## <a name="troubleshooting-cloud-init"></a>Résolution des problèmes cloud-init
-Une fois la machine virtuelle configurée, cloud-init est exécuté dans l’ensemble des modules et des scripts définis dans `--custom-data` pour la configuration de la machine virtuelle.  Si vous devez corriger des erreurs ou des omissions dans la configuration, vous devez chercher le nom du module (`disk_setup` ou `runcmd` par exemple) dans le journal cloud-init, situé dans **/var/log/cloud-init.log**.
+Une fois la machine virtuelle configurée, cloud-init est exécuté dans l’ensemble des modules et des scripts définis dans `--custom-data` pour la configuration de la machine virtuelle.  Si vous devez corriger des erreurs ou des omissions dans la configuration, vous devez chercher le nom du module (`disk_setup` ou `runcmd` par exemple) dans le journal cloud-init, situé dans **/var/log/cloud-init.log** .
 
 > [!NOTE]
 > Toutes les défaillances de module n’entraînent pas d’échec irrécupérable de configuration cloud-init. Par exemple, si vous utilisez le module `runcmd`, si le script est mis en échec, cloud-init fera tout de même état d’une réussite de configuration permise par l’exécution du module runcmd.
@@ -133,10 +163,13 @@ Une fois la machine virtuelle configurée, cloud-init est exécuté dans l’ens
 Pour plus d’informations sur la journalisation de cloud-init, consultez la [documentation cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/logging.html). 
 
 ## <a name="next-steps"></a>Étapes suivantes
+
+[Résoudre les problèmes liés à cloud-init](cloud-init-troubleshooting.md).
+
+
 Pour obtenir des exemples cloud-init de modifications de configuration, consultez les documents suivants :
  
 - [Ajouter un utilisateur Linux supplémentaire à une machine virtuelle](cloudinit-add-user.md)
 - [Exécuter un gestionnaire de package pour mettre à jour les packages existants au premier démarrage](cloudinit-update-vm.md)
 - [Use cloud-init to set hostname for a Linux VM in Azure](cloudinit-update-vm-hostname.md) (Utiliser cloud-init pour définir un nom d’hôte pour une machine virtuelle Linux dans Azure) 
 - [Installer un package d’application, mettre à jour des fichiers de configuration et injecter des clés](tutorial-automate-vm-deployment.md)
- 

@@ -1,18 +1,18 @@
 ---
 title: Conseils d’automatisation pour les des partenaires Azure Virtual WAN | Microsoft Docs
-description: Cet article aide les partenaires à configurer l’automatisation d’Azure Virtual WAN.
+description: Configurez un environnement d’automatisation pour la connexion et la configuration d’un réseau privé virtuel (VPN) local ou SD-WAN, ou un appareil de branche, pour Azure Virtual WAN.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: conceptual
-ms.date: 02/12/2020
+ms.date: 06/29/2020
 ms.author: cherylmc
-ms.openlocfilehash: 7848dda09b39f446dd218b7ce1eb2a07664bcaa6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 29fff3a6a430e3bc1a0b3a13876b55d22f7cb545
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77190411"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566467"
 ---
 # <a name="automation-guidelines-for-virtual-wan-partners"></a>Conseils d’automatisation pour les partenaires Virtual WAN
 
@@ -33,9 +33,9 @@ Un appareil de branche (un périphérique VPN client local ou SDWAN CPE) utilise
 
 ### <a name="additional-information"></a><a name ="additional"></a>Informations supplémentaires
 
-* [API REST](https://docs.microsoft.com/rest/api/virtualwan/virtualhubs) pour automatiser la création d’un hub virtuel
-* [API REST](https://docs.microsoft.com/rest/api/virtualwan/vpngateways) pour automatiser la passerelle VPN Azure pour Virtual WAN
-* [API REST](https://docs.microsoft.com/rest/api/virtualwan/vpnconnections) pour connecter un VPNSite à un hub VPN Azure
+* [API REST](/rest/api/virtualwan/virtualhubs) pour automatiser la création d’un hub virtuel
+* [API REST](/rest/api/virtualwan/vpngateways) pour automatiser la passerelle VPN Azure pour Virtual WAN
+* [API REST](/rest/api/virtualwan/vpnconnections) pour connecter un VPNSite à un hub VPN Azure
 * [Stratégies IPsec par défaut](#default)
 
 ## <a name="customer-experience"></a><a name ="ae"></a>Expérience client
@@ -54,7 +54,7 @@ Réfléchissez à l’expérience que votre client attend concernant Azure Virtu
 
 ###  <a name="access-control"></a><a name="access"></a>Contrôle d’accès
 
-Les clients doivent pouvoir configurer un contrôle d'accès approprié pour le réseau WAN virtuel dans l’interface utilisateur de l’appareil. L’utilisation d’un principal de service Azure est recommandée. Un accès basé sur le principal de service fournit au contrôleur de l’appareil une authentification adéquate pour charger des informations de branche. Pour plus d’informations, consultez la page [Créer un principal de service](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application). Bien que cette fonctionnalité ne fasse pas partie de l’offre Azure Virtual WAN, nous répertorions ci-dessous les étapes classiques à suivre pour configurer l’accès dans Azure. Suite à cela, les détails pertinents sont saisis dans le tableau de bord de gestion de périphérique.
+Les clients doivent pouvoir configurer un contrôle d'accès approprié pour le réseau WAN virtuel dans l’interface utilisateur de l’appareil. L’utilisation d’un principal de service Azure est recommandée. Un accès basé sur le principal de service fournit au contrôleur de l’appareil une authentification adéquate pour charger des informations de branche. Pour plus d’informations, consultez la page [Créer un principal de service](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Bien que cette fonctionnalité ne fasse pas partie de l’offre Azure Virtual WAN, nous répertorions ci-dessous les étapes classiques à suivre pour configurer l’accès dans Azure. Suite à cela, les détails pertinents sont saisis dans le tableau de bord de gestion de périphérique.
 
 * Créez une application Azure Active Directory pour votre contrôleur de périphérique local.
 * Obtenir un ID d’application et une clé d’authentification
@@ -63,11 +63,11 @@ Les clients doivent pouvoir configurer un contrôle d'accès approprié pour le 
 
 ###  <a name="upload-branch-device-information"></a><a name="branch"></a>Charger les informations d’appareil de branche
 
-Il est recommandé de concevoir l’expérience utilisateur pour charger les informations de branche (site local) dans Azure. Vous pouvez utiliser les [API REST](https://docs.microsoft.com/rest/api/virtualwan/vpnsites) pour VPNSite afin de créer les informations de site dans Virtual WAN. Vous pouvez fournir tous les appareils VPN/SDWAN de branche, ou sélectionner les personnalisations d’appareil adéquates.
+Il est recommandé de concevoir l’expérience utilisateur pour charger les informations de branche (site local) dans Azure. Vous pouvez utiliser les [API REST](/rest/api/virtualwan/vpnsites) pour VPNSite afin de créer les informations de site dans Virtual WAN. Vous pouvez fournir tous les appareils VPN/SDWAN de branche, ou sélectionner les personnalisations d’appareil adéquates.
 
 ### <a name="device-configuration-download-and-connectivity"></a><a name="device"></a>Téléchargement de la configuration de l’appareil et connectivité
 
-Cette étape inclut le téléchargement de la configuration Azure et la configuration de la connectivité à partir de l’appareil de branche dans Azure Virtual WAN. Dans cette étape, un client qui n’utilise pas un fournisseur doit télécharger manuellement la configuration Azure et l’appliquer à son appareil VPN/SDWAN local. En tant que fournisseur, vous devez automatiser cette étape. Pour plus d’informations, consultez la page sur les [API REST](https://docs.microsoft.com/rest/api/virtualwan/vpnsitesconfiguration/download) de téléchargement. Le contrôleur d’appareil peut appeler l’API REST « GetVpnConfiguration » pour télécharger la configuration Azure.
+Cette étape inclut le téléchargement de la configuration Azure et la configuration de la connectivité à partir de l’appareil de branche dans Azure Virtual WAN. Dans cette étape, un client qui n’utilise pas un fournisseur doit télécharger manuellement la configuration Azure et l’appliquer à son appareil VPN/SDWAN local. En tant que fournisseur, vous devez automatiser cette étape. Pour plus d’informations, consultez la page sur les [API REST](/rest/api/virtualwan/vpnsitesconfiguration/download) de téléchargement. Le contrôleur d’appareil peut appeler l’API REST « GetVpnConfiguration » pour télécharger la configuration Azure.
 
 **Notes sur la configuration**
 

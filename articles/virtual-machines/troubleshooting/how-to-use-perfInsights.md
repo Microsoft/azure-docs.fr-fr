@@ -1,7 +1,7 @@
 ---
 title: Utilisation de PerfInsights dans Microsoft Azure | Microsoft Docs
 description: Découvrez comment utiliser PerfInsights pour résoudre les problèmes de performances liés aux machines virtuelles Windows.
-services: virtual-machines-windows'
+services: virtual-machines-windows
 documentationcenter: ''
 author: anandhms
 manager: dcscontentpm
@@ -13,14 +13,14 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: 783b479dd3e5f429516799d7d3ea82f363cac2ec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9e298bf39446024f384b9af142fe3000e936bb6d
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226745"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656850"
 ---
-# <a name="how-to-use-perfinsights"></a>Utilisation de PerfInsights
+# <a name="how-to-use-perfinsights-in-azure"></a>Comment utiliser PerfInsights dans Azure
 
 [PerfInsights](https://aka.ms/perfinsightsdownload) est un outil de diagnostics autonome qui collecte et analyse les données de diagnostic, et fournit un rapport afin de faciliter la résolution des problèmes de performances liés aux machines virtuelles Windows dans Azure. Vous pouvez exécuter PerfInsights sur les machines virtuelles sous forme d’outil autonome, directement à partir du portail en utilisant les [diagnostics de performances pour les machines virtuelles Azure](performance-diagnostics.md) ou en installant [l’extension de machine virtuelle des diagnostics de performances Azure](performance-diagnostics-vm-extension.md).
 
@@ -65,7 +65,7 @@ Ce scénario exécute le test d’évaluation [Diskspd](https://github.com/Micro
 
 ### <a name="performance-analysis"></a>Analyse des performances
 
-Ce scénario exécute un suivi du [compteur de performances](https://msdn.microsoft.com/library/windows/desktop/aa373083(v=vs.85).aspx) en utilisant les compteurs spécifiés dans le fichier RuleEngineConfig.json. Si la machine virtuelle est identifiée en tant que serveur qui exécute SQL Server, elle exécute un suivi du compteur de performances. Il le fait en utilisant les compteurs trouvés dans le fichier RuleEngineConfig.json. Ce scénario inclut également des données de diagnostics de performances.
+Ce scénario exécute un suivi du [compteur de performances](/windows/win32/perfctrs/performance-counters-portal) en utilisant les compteurs spécifiés dans le fichier RuleEngineConfig.json. Si la machine virtuelle est identifiée en tant que serveur qui exécute SQL Server, elle exécute un suivi du compteur de performances. Il le fait en utilisant les compteurs trouvés dans le fichier RuleEngineConfig.json. Ce scénario inclut également des données de diagnostics de performances.
 
 ### <a name="azure-files-analysis"></a>Analyse de fichiers Azure
 
@@ -101,9 +101,8 @@ Lorsque vous exécutez une analyse avancée des performances, vous sélectionnez
 
 Les informations portant sur la configuration de la machine virtuelle Windows, des disques ou des pools de stockage, les compteurs de performances, les journaux d’activité et les différentes traces sont recueillies. Cela varie selon le scénario de performances que vous utilisez. Le tableau suivant fournit les détails :
 
-|Données collectées                              |  |  | Scénarios de performances |  |  | |
-|----------------------------------|----------------------------|------------------------------------|--------------------------|--------------------------------|----------------------|----------------------|
-|                               | Analyse rapide des performances | Benchmarking | Analyse des performances | Analyse de fichiers Azure | Analyse avancée des performances |
+| Données collectées | Analyse rapide des performances | Benchmarking | Analyse des performances | Analyse de fichiers Azure | Analyse avancée des performances |
+|----------------------------------|----------------------------|------------------------------------|--------------------------|--------------------------------|----------------------|
 | Informations tirées des journaux d’événements       | Oui                        | Oui                                | Oui                      | Oui                  | Oui                  |
 | Informations système                | Oui                        | Oui                                | Oui                      | Oui                  | Oui                  |
 | Mappage de volume                        | Oui                        | Oui                                | Oui                      | Oui                  | Oui                  |
@@ -124,10 +123,10 @@ Les informations portant sur la configuration de la machine virtuelle Windows, d
 | Suivi XPerf                       |                            |                                    |                          |                      | Oui                  |
 | Suivi StorPort                    |                            |                                    |                          |                      | Oui                  |
 | Suivi réseau                     |                            |                                    |                          | Oui                  | Oui                  |
-| Suivi d’évaluation Diskspd ***       |                            | Oui                                |                          |                      |                      |
+| Suivi d’évaluation Diskspd **_       |                            | Oui                                |                          |                      |                      |
 |       |                            |                         |                                                   |                      |                      |
 
-### <a name="performance-diagnostics-trace-"></a>Suivi des diagnostics de performances (*)
+### <a name="performance-diagnostics-trace-_"></a>Suivi des diagnostics de performances (_)
 
 Exécute un moteur basé sur des règles en arrière-plan afin de collecter des données et diagnostiquer les problèmes de performances en cours. Les règles actuellement prises en charge sont les suivantes :
 
@@ -155,7 +154,7 @@ Collecte les compteurs de performances suivants :
 #### <a name="for-azure-files"></a>Pour les fichiers Azure
 \SMB Client Shares
 
-### <a name="diskspd-benchmark-trace-"></a>Suivi d’évaluation Diskspd (***)
+### <a name="diskspd-benchmark-trace-_"></a>Suivi d’évaluation Diskspd (**_)
 Tests de charge de travail d’E/S Diskspd (disque de système d’exploitation [écriture] et disques du pool [lecture/écriture])
 
 ## <a name="run-the-perfinsights-tool-on-your-vm"></a>Exécuter l’outil PerfInsights sur votre machine virtuelle
@@ -166,7 +165,14 @@ Tests de charge de travail d’E/S Diskspd (disque de système d’exploitation 
 
 -  Cet outil doit être exécuté sur la machine virtuelle qui présente le problème de performances. 
 
--  Les systèmes d’exploitation pris en charge sont les suivants : Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 et Windows Server 2016 ; Windows 8.1 et Windows 10.
+-  Les systèmes d’exploitation suivants sont pris en charge : _ Windows Server 2019
+   * Windows Server 2016
+   * Windows Server 2012 R2
+   * Windows Server 2012
+   * Windows Server 2008 R2
+   * Windows 10
+   * Windows 8.1
+   * Windows 8
 
 #### <a name="possible-problems-when-you-run-the-tool-on-production-vms"></a>Problèmes possibles lorsque vous exécutez l’outil sur des machines virtuelles de production
 
@@ -252,8 +258,8 @@ Le fichier **PerformanceDiagnostics\_aaaa-MM-jj\_hh-mm-ss-fff.zip** peut inclure
 
 Sélectionnez l’onglet **Conclusions**.
 
-![Capture d’écran du rapport de PerfInsights](media/how-to-use-perfInsights/pi-finding-tab.png)
-![Capture d’écran du rapport de PerfInsights](media/how-to-use-perfInsights/pi-findings.png)
+![Capture d’écran de l’onglet Vue d’ensemble du rapport PerfInsights.](media/how-to-use-perfInsights/pi-finding-tab.png)
+![Capture d’écran de l’onglet Stockage du rapport PerfInsights.](media/how-to-use-perfInsights/pi-findings.png)
 
 > [!NOTE] 
 > Les conclusions identifiées comme étant d’importance élevée sont des problèmes connus qui peuvent conduire à des problèmes de performances. Les conclusions identifiées comme étant d’importance moyenne représentent des configurations non optimales ne provoquant pas forcément de problèmes de performances. Les conclusions identifiées comme étant d’importance faible sont des instructions données à titre informatif uniquement.
@@ -301,7 +307,7 @@ Diskspd est un générateur de charge de stockage et un outil de test de perform
 
 ### <a name="xperf"></a>XPerf
 
-Xperf est un outil en ligne de commande qui permet de capturer des suivis à partir de Windows Performance Toolkit. Pour plus d’informations, consultez [Windows Performance Toolkit : Xperf](https://blogs.msdn.microsoft.com/ntdebugging/2008/04/03/windows-performance-toolkit-xperf/).
+Xperf est un outil en ligne de commande qui permet de capturer des suivis à partir de Windows Performance Toolkit. Pour plus d’informations, consultez [Windows Performance Toolkit : Xperf](/archive/blogs/ntdebugging/windows-performance-toolkit-xperf).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -314,4 +320,3 @@ La capture d’écran suivante affiche un message semblable à ce que vous pouve
 Suivez les instructions dans le message pour accéder à l’espace de travail de transfert de fichier. Pour plus de sécurité, vous devez modifier votre mot de passe à la première utilisation.
 
 Après vous être connecté, vous voyez s’afficher une boîte de dialogue vous invitant à charger le fichier **PerformanceDiagnostics\_aaaa-MM-jj\_hh-mm-ss-fff.zip** collecté par PerfInsights.
-

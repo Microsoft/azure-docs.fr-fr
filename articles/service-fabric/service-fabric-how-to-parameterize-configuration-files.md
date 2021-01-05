@@ -1,16 +1,14 @@
 ---
 title: Paramétrer les fichiers de configuration dans Azure Service Fabric
 description: Apprenez à paramétrer les fichiers de configuration dans Service Fabric, une technique utile lors de la gestion de plusieurs environnements.
-author: mikkelhegn
 ms.topic: conceptual
 ms.date: 10/09/2018
-ms.author: mikhegn
-ms.openlocfilehash: 4e96a732cffd70b0a5c24e7ebafe214297a72720
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ca376230c427c47e839b2dee96e8daa83ccedf15
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75644628"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576755"
 ---
 # <a name="how-to-parameterize-configuration-files-in-service-fabric"></a>Guide pratique pour paramétrer les fichiers de configuration dans Service Fabric
 

@@ -1,38 +1,44 @@
 ---
 title: Démarrage rapide – Envoyer une requête à l’API en C# en utilisant Recherche d’entreprises locales Bing
 titleSuffix: Azure Cognitive Services
-description: Utilisez ce démarrage rapide pour commencer à envoyer des demandes à l’API Recherche d’entreprises locales Bing, un service Azure Cognitive Services.
+description: Utilisez ce guide de démarrage rapide pour commencer à envoyer des demandes en C# à l’API Recherche d’entreprises locales Bing, un service Azure Cognitive Services.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-local-business
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 10/22/2020
 ms.author: aahi
-ms.openlocfilehash: 62e975121c05bd4fde2438480f7042b0957a9c82
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 02fc67862a332ef51e164c17ef973bb610cf4fc7
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80475601"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499116"
 ---
 # <a name="quickstart-send-a-query-to-the-bing-local-business-search-api-in-c"></a>Démarrage rapide : Envoyer une requête à l'API Recherche d'entreprises locales Bing en C#
 
-Utilisez ce démarrage rapide pour commencer à envoyer des demandes à l’API Recherche d’entreprises locales Bing, un service Azure Cognitive Services. Alors que cette application simple est écrite en C#, l’API est un service web RESTful compatible avec tous les langages de programmation capables de formuler des requêtes HTTP et d’analyser du JSON.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
-Cet exemple d’application récupère des données de réponse locales auprès de l’API pour la requête de recherche `hotel in Bellevue`.
+Utilisez ce guide de démarrage rapide pour découvrir comment envoyer des demandes à l’API Recherche d’entreprises locales Bing, un service Azure Cognitive Services. Bien que cette application simple soit écrite en C#, l’API est un service web RESTful compatible avec tous les langages de programmation capables de formuler des requêtes HTTP et d’analyser du JSON.
+
+Cet exemple d’application récupère des données de réponse locales auprès de l’API pour une requête de recherche.
 
 ## <a name="prerequisites"></a>Prérequis
 
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
 * N’importe quelle édition de [Visual Studio 2019](https://www.visualstudio.com/downloads/).
 * Si vous utilisez Linux/MacOS, cette application peut être exécutée à l’aide de [Mono](https://www.mono-project.com/).
-
-Vous devez disposer d’un [compte d’API Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) avec les API Recherche Bing. [L’essai gratuit](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) est suffisant pour suivre ce guide de démarrage rapide.  Consultez également [Tarification Cognitive Services - API Recherche Bing](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/).
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
 
 ## <a name="create-the-request"></a>Créer la requête 
 
-Le code suivant crée une `WebRequest`, définit l’en-tête de la clé d’accès et ajoute une chaîne de requête pour « restaurant in Bellevue ».  Ensuite, il envoie la requête et affecte la réponse à une chaîne devant contenir le texte JSON.
+Le code suivant crée une `WebRequest`, définit l’en-tête de la clé d’accès et ajoute une chaîne de requête pour *restaurant in Bellevue*.  Ensuite, il envoie la requête et affecte la réponse à une chaîne devant contenir le texte JSON.
 
 ```csharp
     // Replace the accessKey string value with your valid access key.
@@ -54,10 +60,10 @@ Le code suivant crée une `WebRequest`, définit l’en-tête de la clé d’acc
 
 ## <a name="run-the-complete-application"></a>Exécuter l’application complète
 
-L’API Recherche d’entreprises locales Bing retourne des résultats localisés issus du moteur de recherche Bing.
+Le code suivant utilise l’API Recherche d’entreprises locales Bing pour retourner des résultats localisés issus du moteur de recherche Bing. Vous pouvez utiliser ce code en procédant comme suit :
 1. Créez une solution de console dans Visual Studio (l’édition Community suffit).
 2. Remplacez Program.cs par le code ci-dessous.
-3. Remplacez la valeur accessKey par une clé d’accès valide pour votre abonnement.
+3. Remplacez la valeur `accessKey` par une clé d’accès valide pour votre abonnement.
 4. Exécutez le programme.
 
 ```csharp
@@ -72,8 +78,8 @@ namespace localSearch
     class Program
     {
         // **********************************************
-        // *** Update or verify the following values. ***
-        // **********************************************
+        // **_ Update or verify the following values. _*_
+        // _*********************************************
 
         // Replace the accessKey string value with your valid access key.
         const string accessKey = "enter key here";
@@ -210,5 +216,5 @@ namespace localSearch
 
 ## <a name="next-steps"></a>Étapes suivantes
 - [Démarrage rapide Java de la Recherche d’entreprises locales](local-search-java-quickstart.md)
-- [Démarrage rapide Node de la Recherche d’entreprises locales](local-search-node-quickstart.md)
+- [Démarrage rapide Node.js de la Recherche d’entreprises locales](local-search-node-quickstart.md)
 - [Démarrage rapide Python de la Recherche d’entreprises locales](local-search-python-quickstart.md)

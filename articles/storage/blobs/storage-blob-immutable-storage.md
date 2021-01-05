@@ -5,16 +5,16 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 11/18/2019
+ms.date: 11/13/2020
 ms.author: tamram
 ms.reviewer: hux
 ms.subservice: blobs
-ms.openlocfilehash: bb66e90f1d835a6341b47bb698cf05bc442e0ac0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: acb2ebb0d7ce70c6b5963a8a6c3e392091e4bb1e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82129248"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010059"
 ---
 # <a name="store-business-critical-blob-data-with-immutable-storage"></a>Stocker des données blob critiques pour l’entreprise avec un stockage immuable
 
@@ -22,7 +22,7 @@ Le stockage immuable pour le Stockage Blob Azure permet aux utilisateurs de stoc
 
 Pour plus d’informations sur la définition et la suppression de conservations légales ou sur la création d’une stratégie de rétention basée sur la durée à l’aide du Portail Azure, de PowerShell ou d’Azure CLI, consultez [Définir et gérer des stratégies d’immuabilité pour le stockage blob](storage-blob-immutability-policies-manage.md).
 
-[!INCLUDE [updated-for-az](../../../includes/storage-data-lake-gen2-support.md)]
+[!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
 ## <a name="about-immutable-blob-storage"></a>À propos du stockage blob immuable
 
@@ -76,9 +76,9 @@ Les limites suivantes s’appliquent aux stratégies de rétention :
 
 ### <a name="allow-protected-append-blobs-writes"></a>Autoriser les écritures protégées d’objets blob d’ajout
 
-Les objets blob d’ajout sont constitués de blocs de données et sont optimisés pour les opérations d’ajout de données nécessaires dans les scénarios d’audit et de journalisation. Du fait de la conception des objets blob d’ajout, les nouveaux blocs ne peuvent être ajoutés qu’à la fin des objets blob. Indépendamment de l’immuabilité, la modification ou la suppression de blocs existants dans un objet blob d’ajout ne sont absolument pas autorisées. Pour en savoir plus sur les objets blob d’ajout, consultez [À propos des objets blob d’ajout](https://docs.microsoft.com/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-append-blobs).
+Les objets blob d’ajout sont constitués de blocs de données et sont optimisés pour les opérations d’ajout de données nécessaires dans les scénarios d’audit et de journalisation. Du fait de la conception des objets blob d’ajout, les nouveaux blocs ne peuvent être ajoutés qu’à la fin des objets blob. Indépendamment de l’immuabilité, la modification ou la suppression de blocs existants dans un objet blob d’ajout ne sont absolument pas autorisées. Pour en savoir plus sur les objets blob d’ajout, consultez [À propos des objets blob d’ajout](/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-append-blobs).
 
-Seules les stratégies de rétention limitées dans le temps ont un paramètre `allowProtectedAppendWrites` qui autorise l’écriture de nouveaux blocs dans un objet blob d’ajout tout en conservant la protection et la conformité de l’immuabilité. S’il est activé, vous êtes autorisé à créer un objet blob d’ajout directement dans le conteneur protégé par une stratégie et à continuer à ajouter de nouveaux blocs de données à la fin des objets blob d’ajout existants à l’aide de l’API *AppendBlock*. Seuls de nouveaux blocs peuvent être ajoutés et les blocs existants ne peuvent pas être modifiés ou supprimés. La protection de l’immuabilité de la durée de rétention continue de s’appliquer, ce qui empêche la suppression de l’objet blob d’ajout tant que la période de rétention effective n’est pas passée. L’activation de ce paramètre n’affecte pas le comportement d’immuabilité des objets blob de blocs ou de pages.
+Seules les stratégies de rétention limitées dans le temps ont un paramètre `allowProtectedAppendWrites` qui autorise l’écriture de nouveaux blocs dans un objet blob d’ajout tout en conservant la protection et la conformité de l’immuabilité. Si ce paramètre est activé, vous êtes autorisé à créer un objet blob d’ajout directement dans le conteneur protégé par une stratégie et à continuer à ajouter de nouveaux blocs de données à la fin des objets blob d’ajout existants à l’aide de l’API *AppendBlock*. Seuls de nouveaux blocs peuvent être ajoutés et les blocs existants ne peuvent pas être modifiés ou supprimés. La protection de l’immuabilité de la durée de rétention continue de s’appliquer, ce qui empêche la suppression de l’objet blob d’ajout tant que la période de rétention effective n’est pas passée. L’activation de ce paramètre n’affecte pas le comportement d’immuabilité des objets blob de blocs ou de pages.
 
 Sachant que ce paramètre fait partie d’une stratégie de rétention limitée dans le temps, les objets blob d’ajout restent toujours à l’état immuable pendant la période de rétention *effective*. Comme il est possible d’ajouter de nouvelles données au-delà de la création initiale de l’objet blob d’ajout, il existe une légère différence quant à la façon dont la durée de rétention est déterminée. La rétention effective est égale à la différence entre le moment où l’objet blob d’ajout est **modifié pour la dernier fois** et l’intervalle de rétention spécifié par l’utilisateur. De la même manière, quand l’intervalle de rétention est allongé, le stockage immuable utilise la valeur la plus récente de l’intervalle de rétention spécifié par l’utilisateur pour calculer la durée de conservation effective.
 
@@ -102,17 +102,21 @@ Les limites suivantes s’appliquent aux conservations légales :
 - Pour un conteneur, 10 journaux d’activité de stratégie de rétention légale au maximum sont conservés pour la durée de la stratégie.
 
 ## <a name="scenarios"></a>Scénarios
-Le tableau suivant montre les types d’opérations de stockage blob qui sont désactivés dans chaque scénario immuable. Pour plus d’informations, consultez la documentation [API REST du service Blob Azure](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api).
 
-|Scénario  |État des objets blob  |Opérations Blob refusées  |Protection de conteneur et de compte
-|---------|---------|---------|---------|
-|L’intervalle de rétention effective sur l’objet Blob n’a pas encore expiré et/ou une conservation juridique est définie     |Immuable : non modifiable et non supprimable         | Put Blob<sup>1</sup>, Put Block<sup>1</sup>, Put Block List<sup>1</sup>, Delete Container, Delete Blob, t Blob Metadata, Put Page, Set Blob Properties, Snapshot Blob, Incremental Copy Blob, Append Block<sup>2</sup>         |Suppression de conteneur refusée ; Suppression de compte de stockage refusée         |
-|L’intervalle de rétention effective sur l’objet blob a expiré et aucune conservation légale n’est définie    |Non modifiable seulement (suppressions autorisées)         |Put Blob<sup>1</sup>, Put Block<sup>1</sup>, Put Block List<sup>1</sup>, Set Blob Metadata, Put Page, Set Blob Properties,  Snapshot Blob, Incremental Copy Blob, Append Block<sup>2</sup>         |Suppression de conteneur refusée s’il existe au moins 1 objet blob dans le conteneur protégé ; suppression de compte de stockage refusée uniquement pour les stratégies limitées dans le temps *verrouillées*         |
-|Aucune stratégie WORM appliquée (aucune rétention limitée dans le temps et aucune balise de conservation légale)     |Mutable         |None         |None         |
+Le tableau suivant montre les types d’opérations de stockage blob qui sont désactivés dans chaque scénario immuable. Pour plus d’informations, consultez la documentation [API REST du service Blob Azure](/rest/api/storageservices/blob-service-rest-api).
+
+| Scénario | État des objets blob | Opérations Blob refusées | Protection de conteneur et de compte |
+|--|--|--|--|
+| L’intervalle de rétention effective sur l’objet Blob n’a pas encore expiré et/ou une conservation juridique est définie | Immuable : non modifiable et non supprimable | Put Blob<sup>1</sup>, Put Block<sup>1</sup>, Put Block List<sup>1</sup>, Delete Container, Delete Blob, t Blob Metadata, Put Page, Set Blob Properties, Snapshot Blob, Incremental Copy Blob, Append Block<sup>2</sup> | Suppression de conteneur refusée ; Suppression de compte de stockage refusée |
+| L’intervalle de rétention effective sur l’objet blob a expiré et aucune conservation légale n’est définie | Non modifiable seulement (suppressions autorisées) | Put Blob<sup>1</sup>, Put Block<sup>1</sup>, Put Block List<sup>1</sup>, Set Blob Metadata, Put Page, Set Blob Properties,  Snapshot Blob, Incremental Copy Blob, Append Block<sup>2</sup> | Suppression de conteneur refusée s’il existe au moins 1 objet blob dans le conteneur protégé ; suppression de compte de stockage refusée uniquement pour les stratégies limitées dans le temps *verrouillées* |
+| Aucune stratégie WORM appliquée (aucune rétention limitée dans le temps et aucune balise de conservation légale) | Mutable | None | None |
 
 <sup>1</sup> Le service Blob permet à ces opérations de créer un seul objet blob. Toutes les opérations d’écrasement ultérieures sur un chemin d’objets blob existant dans un conteneur immuable ne sont pas autorisées.
 
 <sup>2</sup> Append Block n’est autorisé que pour les stratégies de rétention limitée dans le temps avec la propriété `allowProtectedAppendWrites` activée. Pour plus d’informations, consultez la section [Autoriser les écritures protégées d’objets blob d’ajout](#allow-protected-append-blobs-writes).
+
+> [!IMPORTANT]
+> Certaines charges de travail, telles que [Sauvegarde SQL vers une URL](/sql/relational-databases/backup-restore/sql-server-backup-to-url), créent un blob et l’ajoutent ensuite. Si le conteneur est dotée d’une stratégie active de rétention basée sur le temps ou d’une conservation légale en place, ce modèle échouera.
 
 ## <a name="pricing"></a>Tarifs
 
@@ -166,11 +170,11 @@ Oui. Lors de la définition initiale d’une stratégie de conservation limitée
 
 **Puis-je utiliser la suppression réversible en même temps que les stratégies de blob immuable ?**
 
-Oui, si vos exigences de conformité autorisent l’activation de la suppression réversible. [La suppression réversible pour le Stockage Blob Azure](storage-blob-soft-delete.md) s’applique à tous les conteneurs d’un compte de stockage, indépendamment de la conservation légale ou d’une stratégie de rétention limitée dans le temps. Nous recommandons d’activer la suppression réversible pour une protection supplémentaire avant d’appliquer et de confirmer toutes les stratégies WORM immuables.
+Oui, si vos exigences de conformité autorisent l’activation de la suppression réversible. [La suppression réversible pour le Stockage Blob Azure](./soft-delete-blob-overview.md) s’applique à tous les conteneurs d’un compte de stockage, indépendamment de la conservation légale ou d’une stratégie de rétention limitée dans le temps. Nous recommandons d’activer la suppression réversible pour une protection supplémentaire avant d’appliquer et de confirmer toutes les stratégies WORM immuables.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Définir et gérer des stratégies d’immuabilité pour le stockage Blob](storage-blob-immutability-policies-manage.md)
 - [Définir des règles pour hiérarchiser et supprimer automatiquement les données Blob avec la gestion du cycle de vie](storage-lifecycle-management-concepts.md)
-- [Suppression réversible pour les objets blob de Stockage Azure](../blobs/storage-blob-soft-delete.md)
+- [Suppression réversible pour les objets blob de Stockage Azure](./soft-delete-blob-overview.md)
 - [Protéger des abonnements, des groupes de ressources et des ressources avec des verrous Azure Resource Manager](../../azure-resource-manager/management/lock-resources.md).

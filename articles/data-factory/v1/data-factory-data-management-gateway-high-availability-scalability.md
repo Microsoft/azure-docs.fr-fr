@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: abnarain
 robots: noindex
-ms.openlocfilehash: 4ee89f4bba70bb5e81eef21247d556f65a2a1f16
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b8d05293359cff16bb6d8c9a629a1fbf68104365
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80065205"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003614"
 ---
 # <a name="data-management-gateway---high-availability-and-scalability-preview"></a>Passerelle de gestion des données - Haute disponibilité et scalabilité (préversion)
 > [!NOTE]
@@ -79,12 +79,12 @@ Cette section part du principe que vous avez parcouru les deux articles suivants
         ![Passerelle de gestion des données - Installation rapide terminée](media/data-factory-data-management-gateway-high-availability-scalability/express-setup-success.png)
     2. Lancez le Gestionnaire de configuration de passerelle de gestion des données en suivant [ces instructions](data-factory-data-management-gateway.md#configuration-manager). Le nom de la passerelle, le nom du nœud, l’état, etc. s’affichent.
 
-        ![Passerelle de gestion des données - Installation terminée](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-gateway-installation-success.png)
+        ![Capture d’écran montrant l’endroit où sont affichés le nom de la passerelle, le nom du nœud et l’état.](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-gateway-installation-success.png)
 4. Si vous choisissez **Installation manuelle** :
     1. Téléchargez le package d’installation à partir du Centre de téléchargement Microsoft, puis exécutez-le pour installer la passerelle sur votre ordinateur.
     2. Utilisez la **clé d’authentification** indiquée dans la page **Configurer** pour inscrire la passerelle.
     
-        ![Passerelle de gestion des données - Installation terminée](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-gateway-authentication-key.png)
+        ![Capture d’écran montrant l’endroit où utiliser la clé d’authentification.](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-gateway-authentication-key.png)
     3. Dans la page **Nouveau nœud de passerelle**, vous pouvez indiquer un **nom** personnalisé pour le nœud de passerelle. Par défaut, un nom de nœud est identique à celui de l’ordinateur.    
 
         ![Passerelle de gestion des données - Spécifier un nom](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-gateway-name.png)
@@ -108,7 +108,7 @@ Cette section part du principe que vous avez parcouru les deux articles suivants
 6. Dans le portail Azure, lancez la page **Passerelle** : 
     1. Dans la page d’accueil de la fabrique de données dans le portail, cliquez sur **Services liés**.
     
-        ![Page d’accueil Data Factory](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-home-page.png)
+        ![Capture d’écran mettant en évidence la vignette des service liés.](media/data-factory-data-management-gateway-high-availability-scalability/data-factory-home-page.png)
     2. Sélectionnez la **passerelle** pour afficher la page **Passerelle** :
     
         ![Page d’accueil Data Factory](media/data-factory-data-management-gateway-high-availability-scalability/linked-services-gateway.png)
@@ -164,7 +164,7 @@ Voici la configuration requise pour le certificat TLS/SSL utilisé pour sécuris
 - Chaque nœud de runtime d’intégration doit approuver ce certificat, ainsi que l’ordinateur client qui exécute l’application du gestionnaire d’informations d’identification. 
   > [!NOTE]
   > L’application du gestionnaire d’informations d’identification est utilisée lors de la définition en toute sécurité des informations d’identification à partir de l’Assistant Copie / portail Azure. Et elle peut être déclenchée à partir de n’importe quel ordinateur appartenant au même réseau que le magasin de données local ou privé.
-- Les certificats utilisant des caractères génériques sont pris en charge. Si votre nom de domaine complet est **node1.domain.contoso.com**, vous pouvez utiliser * **.domain.contoso.com** comme nom du sujet du certificat.
+- Les certificats utilisant des caractères génériques sont pris en charge. Si votre nom de domaine complet est **node1.domain.contoso.com**, vous pouvez utiliser **_.domain.contoso.com_* comme nom du sujet du certificat.
 - Les certificats SAN ne sont pas recommandés, car seul le dernier élément des Autres noms de l’objet sera utilisé et tous les autres seront ignorés en raison d’une limitation actuelle. Par exemple, si vous avez un certificat SAN dont les noms SAN sont **node1.domain.contoso.com** et **node2.domain.contoso.com**, vous ne pouvez utiliser ce certificat que sur l’ordinateur dont le FQDN est **node2.domain.contoso.com**.
 - Prise en charge de toutes les tailles de clé prises en charge par Windows Server 2012 R2 pour les certificats TLS/SSL.
 - Les certificat utilisant des clés CNG ne sont pas pris en charge.

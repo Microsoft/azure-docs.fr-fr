@@ -10,17 +10,17 @@ tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/13/2020
 ms.author: kumud
-ms.openlocfilehash: 4169bfb5da5b1ad13bab0eb01397f7c1fb20b11b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f7253be2844f40ca52df2f9b3bc9cbba552fea2b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80060321"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85480131"
 ---
 # <a name="add-network-interfaces-to-or-remove-network-interfaces-from-virtual-machines"></a>Ajouter ou supprimer des interfaces réseau pour des machines virtuelles
 
@@ -32,9 +32,9 @@ Si vous avez besoin d’ajouter, de modifier ou de supprimer des adresses IP pou
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Si vous n’en avez pas, configurez un compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio). Effectuez l’une de ces tâches avant de commencer le reste de cet article :
+Si vous n’en avez pas, configurez un compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio). Effectuez une des tâches suivantes avant de commencer les étapes décrites dans la suite de cet article :
 
-- **Utilisateurs du portail** : connectez-vous au [portail Azure](https://portal.azure.com) avec votre compte Azure.
+- **Utilisateurs du portail** : Connectez-vous au [portail Azure](https://portal.azure.com) avec votre compte Azure.
 
 - **Utilisateurs de PowerShell** : exécutez les commandes dans [Azure Cloud Shell](https://shell.azure.com/powershell) ou exécutez PowerShell à partir de votre ordinateur. Azure Cloud Shell est un interpréteur de commandes interactif et gratuit que vous pouvez utiliser pour exécuter les étapes de cet article. Il contient des outils Azure courants préinstallés et configurés pour être utilisés avec votre compte. Sous l’onglet de navigateur Azure Cloud Shell, ouvrez la liste déroulante **Sélectionner un environnement**, puis choisissez **PowerShell** si ce n’est pas déjà fait.
 
@@ -151,7 +151,7 @@ Pour plus d’informations sur les paramètres d’interface réseau et leur mod
 
 - La suppression d’une machine virtuelle n’a pas pour effet de supprimer les interfaces réseau qui y sont attachées. Lorsque vous supprimez une machine virtuelle, les interfaces réseau sont détachées de la machine virtuelle. Vous pouvez attacher ces interfaces réseau à différentes machines virtuelles, ou les supprimer.
 
-- Comme pour IPv6, vous ne pouvez pas attacher une interface réseau pour laquelle l’accélération réseau est activée à une machine virtuelle après l’avoir créée. En outre, pour tirer parti l’accélération réseau, vous devez également effectuer certaines actions dans le système d’exploitation de la machine virtuelle. Apprenez-en davantage sur l’accélération réseau et d’autres contraintes liées à son utilisation pour les machines virtuelles [Windows](create-vm-accelerated-networking-powershell.md) ou [Linux](create-vm-accelerated-networking-cli.md).
+- Pour obtenir des performances optimales, vous devez disposer d’une mise en réseau accélérée. Dans certains cas, vous devez activer explicitement la mise en réseau accélérée pour les machines virtuelles [Windows](create-vm-accelerated-networking-powershell.md) ou [Linux](create-vm-accelerated-networking-cli.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

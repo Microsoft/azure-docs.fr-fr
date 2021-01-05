@@ -5,30 +5,33 @@ author: cynthn
 ms.service: virtual-machines-windows
 ms.subservice: imaging
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/27/2018
 ms.author: cynthn
-ms.openlocfilehash: 258bddec85e4ab182ff0b07c49cdc93f92264f95
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: legacy
+ms.openlocfilehash: 751fa9f9fe2ba17a982b71a6332be302804f0dcc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82084462"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89047290"
 ---
 # <a name="create-a-managed-image-of-a-generalized-vm-in-azure"></a>Créer une image managée d’une machine virtuelle généralisée dans Azure
 
 Une ressource d’image managée peut être créée à partir d’une machine virtuelle généralisée stockée en tant que disque managé ou non managé dans un compte de stockage. L’image peut ensuite être utilisée pour créer plusieurs machines virtuelles. Pour plus d'informations sur la facturation des images managées, reportez-vous à [Tarification de la fonctionnalité Disques managés](https://azure.microsoft.com/pricing/details/managed-disks/). 
 
- 
+Une image managée prend en charge jusqu’à 20 déploiements simultanés. Une tentative de création simultanée de plus de 20 machines virtuelles à partir de la même image managée peut entraîner l’expiration des délais d’approvisionnement en raison des limites de performances de stockage d’un disque dur virtuel unique. Pour créer plus de 20 machines virtuelles simultanément, utilisez une [galerie d’images partagées](shared-image-galleries.md) configurée avec 1 réplica tous les 20 déploiements de machines virtuelles simultanées.
 
 ## <a name="generalize-the-windows-vm-using-sysprep"></a>Généraliser la machine virtuelle Windows à l’aide de Sysprep
 
-Sysprep supprime toutes vos informations de compte personnel et de sécurité, puis prépare la machine en vue de son utilisation en tant qu’image. Pour plus d’informations sur Sysprep, voir [Vue d’ensemble de Sysprep](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
+Sysprep supprime toutes vos informations de compte personnel et de sécurité, puis prépare la machine en vue de son utilisation en tant qu’image. Pour plus d’informations sur Sysprep, voir [Vue d’ensemble de Sysprep](/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
 
-Vérifiez que les rôles serveur exécutés sur la machine sont pris en charge par Sysprep. Pour plus d’informations, voir [Prise en charge de Sysprep pour les rôles serveur](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep-support-for-server-roles) et [Scénarios non pris en charge](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview#unsupported-scenarios).
+Vérifiez que les rôles serveur exécutés sur la machine sont pris en charge par Sysprep. Pour plus d’informations, voir [Prise en charge de Sysprep pour les rôles serveur](/windows-hardware/manufacture/desktop/sysprep-support-for-server-roles) et [Scénarios non pris en charge](/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview#unsupported-scenarios). 
 
 > [!IMPORTANT]
 > Après que vous avez exécuté Sysprep sur une machine virtuelle, celle-ci est considérée comme *généralisée* et ne peut plus être redémarrée. Le processus de généralisation d’une machine virtuelle n’est pas réversible. Si vous devez conserver le fonctionnement de machine virtuelle d’origine, vous devez créer une [copie de la machine virtuelle](create-vm-specialized.md#option-3-copy-an-existing-azure-vm) et généraliser la copie. 
+>
+>Sysprep requiert le déchiffrement complet des lecteurs. Si vous avez activé le chiffrement sur votre machine virtuelle, désactivez-le avant d’exécuter Sysprep.
 >
 > Si vous prévoyez d’exécuter Sysprep avant de charger votre disque dur virtuel sur Azure pour la première fois, vérifiez que vous avez [préparé votre machine virtuelle](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).  
 > 
@@ -38,20 +41,22 @@ Pour généraliser votre machine virtuelle Windows, procédez comme suit :
 
 1. Connectez-vous à votre machine virtuelle Windows.
    
-2. Ouvrez une fenêtre d’invite de commandes en tant qu’administrateur. Remplacez le répertoire par %windir%\system32\sysprep, puis exécutez `sysprep.exe`.
+2. Ouvrez une fenêtre d’invite de commandes en tant qu’administrateur. 
+
+3. Supprimez le répertoire Panther (C:\Windows\Panther). Remplacez ensuite le répertoire par %windir%\system32\sysprep, puis exécutez `sysprep.exe`.
    
-3. Dans la boîte de dialogue **Outil de préparation du système**, sélectionnez **Entrer en mode OOBE (Out-of-Box Experience)** , puis activez la case à cocher **Généraliser**.
+4. Dans la boîte de dialogue **Outil de préparation du système**, sélectionnez **Entrer en mode OOBE (Out-of-Box Experience)** , puis activez la case à cocher **Généraliser**.
    
-4. Dans **Options d’arrêt**, sélectionnez **Arrêter**.
+5. Dans **Options d’arrêt**, sélectionnez **Arrêter**.
    
-5. Sélectionnez **OK**.
+6. Sélectionnez **OK**.
    
     ![Démarrer Sysprep](./media/upload-generalized-managed/sysprepgeneral.png)
 
 6. Une fois l’exécution de Sysprep terminée, la machine virtuelle est arrêtée. Ne redémarrez pas la machine virtuelle.
 
 > [!TIP]
-> **Facultatif** Utilisez [DISM](https://docs.microsoft.com/windows-hardware/manufacture/desktop/dism-optimize-image-command-line-options) pour optimiser votre image et réduire la durée du premier démarrage de votre machine virtuelle.
+> **Facultatif** Utilisez [DISM](/windows-hardware/manufacture/desktop/dism-optimize-image-command-line-options) pour optimiser votre image et réduire la durée du premier démarrage de votre machine virtuelle.
 >
 > Pour optimiser votre image, montez votre VHD en double-cliquant dessus dans l’Explorateur Windows, puis exécutez DISM avec le paramètre `/optimize-image`.
 >
@@ -86,7 +91,7 @@ Une fois l’image créée, elle apparaît en tant que ressource **Image** dans 
 
 
 
-## <a name="create-an-image-of-a-vm-using-powershell"></a>Créer une image de machine virtuelle à l’aide de Powershell
+## <a name="create-an-image-of-a-vm-using-powershell"></a>Création d’une image de machine virtuelle avec PowerShell
 
  
 
@@ -177,7 +182,7 @@ Si vous souhaitez créer une image uniquement du disque du système d’exploita
     ``` 
 
 
-## <a name="create-an-image-from-a-snapshot-using-powershell"></a>Créer une image à partir d’une capture instantanée à l’aide de Powershell
+## <a name="create-an-image-from-a-snapshot-using-powershell"></a>Création d’une image à partir d’une capture instantanée avec PowerShell
 
 Vous pouvez créer une image gérée à partir d’une capture instantanée d’une machine virtuelle généralisée en procédant comme suit :
 
@@ -246,4 +251,3 @@ Pour créer une image managée à partir d’une machine virtuelle qui n’utili
     
 ## <a name="next-steps"></a>Étapes suivantes
 - [Créer une machine virtuelle à partir d’une image gérée](create-vm-generalized-managed.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).    
-

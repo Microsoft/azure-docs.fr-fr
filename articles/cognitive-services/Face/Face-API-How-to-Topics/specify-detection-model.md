@@ -10,12 +10,13 @@ ms.subservice: face-api
 ms.topic: conceptual
 ms.date: 05/16/2019
 ms.author: yluiu
-ms.openlocfilehash: 40ca1dbf981c5a9025cf5a0bac6b007709d69a77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5a70b10f7d22c9cc04427bdfbb44243fad457ba0
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76934576"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92913481"
 ---
 # <a name="specify-a-face-detection-model"></a>Spécifier un modèle de détection des visages
 
@@ -51,7 +52,7 @@ Si vous utilisez la bibliothèque cliente, vous pouvez attribuer la valeur de `d
 
 ```csharp
 string imageUrl = "https://news.microsoft.com/ceo/assets/photos/06_web.jpg";
-var faces = await faceClient.Face.DetectWithUrlAsync(imageUrl, false, false, recognitionModel: "recognition_02", detectionModel: "detection_02");
+var faces = await faceClient.Face.DetectWithUrlAsync(imageUrl, false, false, recognitionModel: "recognition_03", detectionModel: "detection_02");
 ```
 
 ## <a name="add-face-to-person-with-specified-model"></a>Ajouter un visage à une personne avec le modèle spécifié
@@ -63,7 +64,7 @@ Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
 ```csharp
 // Create a PersonGroup and add a person with face detected by "detection_02" model
 string personGroupId = "mypersongroupid";
-await faceClient.PersonGroup.CreateAsync(personGroupId, "My Person Group Name", recognitionModel: "recognition_02");
+await faceClient.PersonGroup.CreateAsync(personGroupId, "My Person Group Name", recognitionModel: "recognition_03");
 
 string personId = (await faceClient.PersonGroupPerson.CreateAsync(personGroupId, "My Person Name")).PersonId;
 
@@ -71,26 +72,26 @@ string imageUrl = "https://news.microsoft.com/ceo/assets/photos/06_web.jpg";
 await client.PersonGroupPerson.AddFaceFromUrlAsync(personGroupId, personId, imageUrl, detectionModel: "detection_02");
 ```
 
-Ce code crée un **PersonGroup** avec l’ID `mypersongroupid` et lui ajoute un objet **Person**. Puis il ajoute un visage à cet objet **Person** à l’aide du modèle `detection_02`. Si vous ne spécifiez pas le paramètre *detectionModel*, l’API utilise le modèle par défaut, `detection_01`.
+Ce code crée un **PersonGroup** avec l’ID `mypersongroupid` et lui ajoute un objet **Person**. Puis il ajoute un visage à cet objet **Person** à l’aide du modèle `detection_02`. Si vous ne spécifiez pas le paramètre *detectionModel* , l’API utilise le modèle par défaut, `detection_01`.
 
 > [!NOTE]
-> Vous n’avez pas besoin d’utiliser le même modèle de détection pour tous les visages dans un objet **Person**, et vous n’avez pas besoin d’utiliser le même modèle de détection lors de la détection de nouveaux visage à comparer avec un objet **Person** (dans l’API [Visage - Identifier], par exemple).
+> Vous n’avez pas besoin d’utiliser le même modèle de détection pour tous les visages dans un objet **Person** , et vous n’avez pas besoin d’utiliser le même modèle de détection lors de la détection de nouveaux visage à comparer avec un objet **Person** (dans l’API [Visage - Identifier], par exemple).
 
 ## <a name="add-face-to-facelist-with-specified-model"></a>Ajouter un visage à FaceList avec le modèle spécifié
 
 Vous pouvez également spécifier un modèle de détection lorsque vous ajoutez un visage à un objet **FaceList** existant. Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
 
 ```csharp
-await faceClient.FaceList.CreateAsync(faceListId, "My face collection", recognitionModel: "recognition_02");
+await faceClient.FaceList.CreateAsync(faceListId, "My face collection", recognitionModel: "recognition_03");
 
 string imageUrl = "https://news.microsoft.com/ceo/assets/photos/06_web.jpg";
 await client.FaceList.AddFaceFromUrlAsync(faceListId, imageUrl, detectionModel: "detection_02");
 ```
 
-Ce code crée un objet **FaceList** appelé `My face collection` et lui ajoute un visage avec le modèle `detection_02`. Si vous ne spécifiez pas le paramètre *detectionModel*, l’API utilise le modèle par défaut, `detection_01`.
+Ce code crée un objet **FaceList** appelé `My face collection` et lui ajoute un visage avec le modèle `detection_02`. Si vous ne spécifiez pas le paramètre *detectionModel* , l’API utilise le modèle par défaut, `detection_01`.
 
 > [!NOTE]
-> Vous n’avez pas besoin d’utiliser le même modèle de détection pour tous les visages dans un objet **FaceList**, et vous n’avez pas besoin d’utiliser le même modèle de détection lors de la détection de nouveaux visage à comparer avec un objet **FaceList**.
+> Vous n’avez pas besoin d’utiliser le même modèle de détection pour tous les visages dans un objet **FaceList** , et vous n’avez pas besoin d’utiliser le même modèle de détection lors de la détection de nouveaux visage à comparer avec un objet **FaceList**.
 
 ## <a name="evaluate-different-models"></a>Évaluer des modèles différents
 
@@ -109,9 +110,9 @@ La meilleure façon de comparer les performances des modèles `detection_01` et 
 
 Dans cet article, vous avez appris comment spécifier le modèle de détection des visages à utiliser avec différentes API Visage. Voici maintenant un guide de démarrage rapide pour commencer à utiliser la détection des visages.
 
-* [SDK .NET Visage](../Quickstarts/csharp-sdk.md)
-* [Kit de développement logiciel (SDK) Face Python](../Quickstarts/python-sdk.md)
-* [Kit de développement logiciel (SDK) Go face Go](../Quickstarts/go-sdk.md)
+* [SDK .NET Visage](../quickstarts/client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp)
+* [Kit de développement logiciel (SDK) Face Python](../quickstarts/client-libraries.md?pivots=programming-language-python%253fpivots%253dprogramming-language-python)
+* [Kit de développement logiciel (SDK) Go face Go](../quickstarts/client-libraries.md?pivots=programming-language-go%253fpivots%253dprogramming-language-go)
 
 [Face - Detect]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d
 [Face - Find Similar]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237

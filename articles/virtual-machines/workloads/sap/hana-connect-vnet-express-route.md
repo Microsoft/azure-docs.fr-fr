@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/25/2019
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: f7ac8e69c4e149fdd0f365e19f7a0282a547af43
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c5a8a8157721f34abf7761a85febc7bcea3abb88
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617200"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967837"
 ---
 # <a name="connect-a-virtual-network-to-hana-large-instances"></a>Connecter un réseau virtuel à de grandes instances HANA
 
@@ -96,7 +97,7 @@ New-AzVirtualNetworkGatewayConnection -Name $myConnectionName `
 ```
 
 > [!NOTE]
-> Le dernier paramètre de la commande New-AzVirtualNetworkGatewayConnection, **ExpressRouteGatewayBypass** est un nouveau paramètre qui active ExpressRoute Fast Path. Il s’agit d’une fonctionnalité qui réduit la latence réseau entre vos unités de Grande instance HANA et les machines virtuelles Azure. La fonctionnalité a été ajoutée en mai 2019. Pour plus d’informations, voir l’article [Architecture réseau de SAP HANA (grandes instances)](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-network-architecture). Avant d’exécuter les commandes, assurez-vous que vous exécutez la dernière version des cmdlets PowerShell.
+> Le dernier paramètre de la commande New-AzVirtualNetworkGatewayConnection, **ExpressRouteGatewayBypass** est un nouveau paramètre qui active ExpressRoute Fast Path. Il s’agit d’une fonctionnalité qui réduit la latence réseau entre vos unités de Grande instance HANA et les machines virtuelles Azure. La fonctionnalité a été ajoutée en mai 2019. Pour plus d’informations, voir l’article [Architecture réseau de SAP HANA (grandes instances)](./hana-network-architecture.md). Avant d’exécuter les commandes, assurez-vous que vous exécutez la dernière version des cmdlets PowerShell.
 
 Pour connecter la passerelle à plusieurs circuits ExpressRoute associés à votre abonnement, vous devrez peut-être exécuter plusieurs fois cette étape. Par exemple, vous allez probablement connecter la même passerelle de réseau virtuel au circuit ExpressRoute qui relie le réseau virtuel à votre réseau local.
 
@@ -139,7 +140,7 @@ Vous devez prendre en compte les aspects suivants :
 - Il existe une limitation concernant les ASN (numéros de système autonome) utilisables pour annoncer vos itinéraires locaux vers des Grandes instances HANA. Votre système local ne doit pas publier d’itinéraires avec des ASN privés dans la plage de 65000 à 65020 ou 65515. 
 - Pour le scénario de connexion d’accès direct local à de grandes instances HANA, vous devez calculer un tarif pour le circuit qui vous connecte à Azure. Pour connaître les prix, voir [Composant additionnel Global Reach](https://azure.microsoft.com/pricing/details/expressroute/).
 
-Pour que l’un des scénarios ou les deux soient appliqués à votre déploiement, adresses une demande de support à Azure en procédant de la manière décrite dans [Ouvrir une demande de support pour les Grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-li-portal#open-a-support-request-for-hana-large-instances).
+Pour que l’un des scénarios ou les deux soient appliqués à votre déploiement, adresses une demande de support à Azure en procédant de la manière décrite dans [Ouvrir une demande de support pour les Grandes instances HANA](./hana-li-portal.md#open-a-support-request-for-hana-large-instances).
 
 Les données nécessaires et les mots-clés que vous devez utiliser pour que Microsoft puisse router et exécuter votre demande ressemblent à ceci :
 

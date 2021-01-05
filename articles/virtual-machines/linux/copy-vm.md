@@ -3,20 +3,20 @@ title: Copier une machine virtuelle Linux avec Azure CLI
 description: Apprenez à créer une copie de votre machine virtuelle Azure Linux à l’aide d’Azure CLI et de la fonctionnalité Disques managés.
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 10/17/2018
 ms.author: cynthn
-ms.custom: legacy
-ms.openlocfilehash: 406eda6902ae451c7fdf79e1bd1215c035a66750
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: legacy, devx-track-azurecli
+ms.openlocfilehash: f92f286fc9d9438331617cb567272a331834af42
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792222"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92735384"
 ---
 # <a name="create-a-copy-of-a-linux-vm-by-using-azure-cli-and-managed-disks"></a>Créer une copie de machine virtuelle Linux à l’aide d’Azure CLI et de la fonctionnalité Disques managés
 
-Cet article explique comment créer une copie de votre machine virtuelle Azure (VM) exécutée dans Linux en utilisant Azure CLI. Pour copier, créer, stocker et partager des images de machine virtuelle à grande échelle, consultez [Galeries d’images partagées](shared-images.md).
+Cet article explique comment créer une copie de votre machine virtuelle Azure (VM) exécutée dans Linux en utilisant Azure CLI. Pour copier, créer, stocker et partager des images de machine virtuelle à grande échelle, consultez [Galeries d’images partagées](../shared-images-cli.md).
 
 Vous pouvez également [charger et créer une machine virtuelle à partir d’un disque dur virtuel](upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
@@ -31,7 +31,7 @@ Vous pouvez également [charger et créer une machine virtuelle à partir d’un
 ## <a name="stop-the-source-vm"></a>Arrêter la machine virtuelle source
 
 Libérez la machine virtuelle source à l’aide de la commande [az vm deallocate](/cli/azure/vm#az-vm-deallocate).
-L’exemple suivant libère la machine virtuelle nommée *myVM* dans le groupe de ressources *myResourceGroup* :
+L’exemple suivant libère la machine virtuelle nommée *myVM* dans le groupe de ressources *myResourceGroup*  :
 
 ```azurecli
 az vm deallocate \
@@ -43,7 +43,7 @@ az vm deallocate \
 
 Pour copier une machine virtuelle, vous devez créer une copie du disque dur virtuel sous-jacent. Ce processus crée un disque dur virtuel spécialisé (VHD) en tant que disque managé qui contient la même configuration et les mêmes paramètres que la machine virtuelle source.
 
-Pour plus d’informations sur Azure Disques managés, consultez [Vue d’ensemble d’Azure Disques managés](../windows/managed-disks-overview.md). 
+Pour plus d’informations sur Azure Disques managés, consultez [Vue d’ensemble d’Azure Disques managés](../managed-disks-overview.md). 
 
 1.  Répertoriez chaque machine virtuelle et le nom de leur disque de système d’exploitation avec la commande [az vm list](/cli/azure/vm#az-vm-list). L’exemple suivant répertorie toutes les machines virtuelles dans le groupe de ressources nommé *myResourceGroup* :
     
@@ -83,7 +83,7 @@ Si vous copiez une machine virtuelle à des fins de dépannage ou dans le cadre 
 
 Si vous souhaitez créer une infrastructure de réseau virtuel pour vos machines virtuelles copiées, exécutez les procédures suivantes. Si vous ne souhaitez pas créer de réseau virtuel, passez à [Créer une machine virtuelle](#create-a-vm).
 
-1.  Exécutez la commande [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create) pour créer le réseau virtuel. L’exemple suivant permet de créer un réseau virtuel nommé *myVnet* et un sous-réseau nommé *mySubnet* :
+1.  Exécutez la commande [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create) pour créer le réseau virtuel. L’exemple suivant permet de créer un réseau virtuel nommé *myVnet* et un sous-réseau nommé *mySubnet*  :
 
     ```azurecli
     az network vnet create --resource-group myResourceGroup \
@@ -93,7 +93,7 @@ Si vous souhaitez créer une infrastructure de réseau virtuel pour vos machines
         --subnet-prefix 192.168.1.0/24
     ```
 
-1.  Exécutez la commande [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) pour créer une adresse IP publique. L’exemple suivant permet de créer une adresse IP publique nommée *myPublicIP* avec le nom DNS de *mypublicdns*. (Comme le nom DNS doit être unique, fournissez un nom unique.)
+1.  Exécutez la commande [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) pour créer une adresse IP publique. L’exemple suivant permet de créer une adresse IP publique nommée *myPublicIP* avec le nom DNS de *mypublicdns* . (Comme le nom DNS doit être unique, fournissez un nom unique.)
 
     ```azurecli
     az network public-ip create --resource-group myResourceGroup \
@@ -102,7 +102,7 @@ Si vous souhaitez créer une infrastructure de réseau virtuel pour vos machines
     ```
 
 1.  Exécutez la commande [az network nic create](/cli/azure/network/nic#az-network-nic-create) pour créer la carte réseau.
-    L’exemple suivant permet de créer une carte réseau nommée *myNic* et associée au sous-réseau *mySubnet* :
+    L’exemple suivant permet de créer une carte réseau nommée *myNic* et associée au sous-réseau *mySubnet*  :
 
     ```azurecli
     az network nic create --resource-group myResourceGroup \
@@ -126,4 +126,4 @@ az vm create --resource-group myResourceGroup \
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour savoir comment utiliser une [galerie d’images partagée](shared-images.md) pour gérer les images de machine virtuelle.
+Pour savoir comment utiliser une [galerie d’images partagée](../shared-images-cli.md) pour gérer les images de machine virtuelle.

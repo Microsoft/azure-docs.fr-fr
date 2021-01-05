@@ -5,12 +5,13 @@ author: jakrams
 ms.author: jakras
 ms.date: 02/05/2020
 ms.topic: conceptual
-ms.openlocfilehash: 7832f999de2f6f16cfe816c061925e371f90662e
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: ff69486ab24c999e40b0afc13c91d6f729c352a0
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758688"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206558"
 ---
 # <a name="models"></a>Modèles
 
@@ -27,7 +28,6 @@ Chaque entité peut avoir des [composants](components.md) attachés. Dans le cas
 La création de modèles pour le runtime s’effectue en [convertissant les modèles d’entrée](../how-tos/conversion/model-conversion.md) à partir de formats de fichiers tels que FBX et GLTF. Le processus de conversion extrait toutes les ressources, telles que les textures, les matériaux et les maillages, et les convertit en formats de runtime optimisés. Il extraira également les informations structurelles et les convertira en structure graphique d’entité ou de composant ARR.
 
 > [!IMPORTANT]
->
 > La [conversion de modèle](../how-tos/conversion/model-conversion.md) est la seule façon de créer des [maillages](meshes.md). Bien que les maillages puissent être partagés entre les entités au moment de l’exécution, il n’existe aucun autre moyen d’obtenir un maillage dans le runtime, autre que le chargement d’un modèle.
 
 ## <a name="loading-models"></a>Chargement de modèles
@@ -117,6 +117,13 @@ Par la suite, vous pouvez parcourir la hiérarchie d’entités et modifier les 
 
 > [!CAUTION]
 > Toutes les fonctions *Async* dans ARR retournent des objets d’opérations asynchrones. Vous devez stocker une référence à ces objets jusqu’à ce que l’opération soit terminée. Sinon, le récupérateur de mémoire C# peut supprimer l’opération prématurément et elle ne pourra jamais se terminer. Dans l’exemple de code ci-dessus, l’utilisation de *await* garantit que la variable locale « loadOp » contient une référence jusqu’à ce que le chargement du modèle soit terminé. Toutefois, si vous deviez utiliser à la place l’événement *Completed*, vous devez stocker l’opération asynchrone dans une variable membre.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [RemoteManager.LoadModelAsync(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.loadmodelasync)
+* [RemoteManager.LoadModelFromSASAsync(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.loadmodelfromsasasync)
+* [RemoteManager::LoadModelAsync(), C++](/cpp/api/remote-rendering/remotemanager#loadmodelasync)
+* [RemoteManager::LoadModelFromSASAsync(), C++](/cpp/api/remote-rendering/remotemanager#loadmodelfromsasasync)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

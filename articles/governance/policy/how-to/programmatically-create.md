@@ -1,14 +1,14 @@
 ---
 title: Créer des stratégies par programmation
 description: Cet article vous explique comment créer et gérer des stratégies par programmation pour Azure Policy avec Azure CLI, Azure PowerShell et l’API REST.
-ms.date: 01/31/2019
+ms.date: 08/17/2020
 ms.topic: how-to
-ms.openlocfilehash: 08ed43a464d1dd7de8220428dbc1c61ce9fc3ad6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 86c1b60608780cba4d8ae27e3c82ace458f09a26
+ms.sourcegitcommit: 03c0a713f602e671b278f5a6101c54c75d87658d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231181"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920013"
 ---
 # <a name="programmatically-create-policies"></a>Créer des stratégies par programmation
 
@@ -16,7 +16,7 @@ Cet article vous explique comment créer et gérer des stratégies par programma
 
 Pour plus d’informations sur la conformité, consultez [Obtention de données de conformité](get-compliance-data.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, vérifiez que les conditions préalables suivantes sont remplies :
 
@@ -92,10 +92,10 @@ Pour une meilleure visibilité de vos ressources, la première chose à faire es
 
    - Ressource : `/subscriptions/{subID}/resourceGroups/{rgName}/providers/{rType}/{rName}`
    - Groupe de ressources : `/subscriptions/{subId}/resourceGroups/{rgName}`
-   - Abonnement : `/subscriptions/{subId}/`
+   - Abonnement : `/subscriptions/{subId}`
    - Groupe d'administration : `/providers/Microsoft.Management/managementGroups/{mgName}`
 
-Pour plus d'informations sur la gestion des stratégies de ressources à l'aide du module Azure Resource Manager PowerShell, consultez [Az.Resources](/powershell/module/az.resources/#policies).
+Pour plus d’informations sur la gestion des stratégies de ressources à l’aide du module Resource Manager PowerShell, consultez [Az.Resources](/powershell/module/az.resources/#policies).
 
 ### <a name="create-and-assign-a-policy-definition-using-armclient"></a>Créer et assigner une définition de stratégie avec ARMClient
 
@@ -133,10 +133,10 @@ Pour créer une définition de stratégie, procédez comme suit.
 
    ```console
    # For defining a policy in a subscription
-   armclient PUT "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/AuditStorageAccounts?api-version=2016-12-01" @<path to policy definition JSON file>
+   armclient PUT "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/AuditStorageAccounts?api-version=2019-09-01" @<path to policy definition JSON file>
 
    # For defining a policy in a management group
-   armclient PUT "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/AuditStorageAccounts?api-version=2016-12-01" @<path to policy definition JSON file>
+   armclient PUT "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/AuditStorageAccounts?api-version=2019-09-01" @<path to policy definition JSON file>
    ```
 
    Remplacez {subscriptionId} précédent par l’ID de votre abonnement ou {managementGroupId} par l’ID de votre [groupe d’administration](../../management-groups/overview.md).
@@ -162,7 +162,7 @@ Utilisez la procédure suivante pour créer une attribution de stratégie et ass
 1. Créez l’attribution de stratégie à l’aide de l’appel suivant :
 
    ```console
-   armclient PUT "/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>/providers/Microsoft.Authorization/policyAssignments/Audit Storage Accounts Open to Public Networks?api-version=2017-06-01-preview" @<path to Assignment JSON file>
+   armclient PUT "/subscriptions/<subscriptionID>/resourceGroups/<resourceGroupName>/providers/Microsoft.Authorization/policyAssignments/Audit Storage Accounts Open to Public Networks?api-version=2019-09-01" @<path to Assignment JSON file>
    ```
 
    Remplacez les informations de l’exemple entre &lt;&gt; par vos propres valeurs.
@@ -203,12 +203,12 @@ Pour créer une définition de stratégie, procédez comme suit :
    ```
 
    La commande crée une définition de stratégie nommée _Audit Storage Accounts Open to Public Networks_.
-   Pour plus d’informations sur les autres paramètres utilisables, consultez [az policy definition create](/cli/azure/policy/definition#az-policy-definition-create).
+   Pour plus d’informations sur les autres paramètres utilisables, consultez [az policy definition create](/cli/azure/policy/definition#az_policy_definition_create).
 
    Lorsqu’il est appelé sans paramètre d’emplacement, par défaut, `az policy definition creation` enregistre la définition de stratégie dans l’abonnement sélectionné du contexte de sessions. Pour enregistrer la définition dans un autre emplacement, utilisez les paramètres suivants :
 
-   - **--subscription** : enregistre dans un autre abonnement. Nécessite une valeur _GUID_ pour l’ID d’abonnement ou une valeur _chaîne_ pour le nom de l’abonnement.
-   - **--management-group** : enregistre dans un groupe d’administration. Une valeur de _chaîne_ est nécessaire.
+   - **subscription** : enregistrer dans un autre abonnement. Nécessite une valeur _GUID_ pour l’ID d’abonnement ou une valeur _chaîne_ pour le nom de l’abonnement.
+   - **--management-group** : enregistrer dans un groupe d’administration. Une valeur de _chaîne_ est nécessaire.
 
 1. Pour créer une attribution de stratégie, utilisez la commande suivante. Remplacez les informations de l’exemple entre &lt;&gt; par vos propres valeurs.
 
@@ -216,7 +216,7 @@ Pour créer une définition de stratégie, procédez comme suit :
    az policy assignment create --name '<name>' --scope '<scope>' --policy '<policy definition ID>'
    ```
 
-   Le paramètre **--scope** sur `az policy assignment create` peut être défini pour un groupe d’administration, un abonnement, un groupe de ressources ou une seule ressource. Le paramètre utilise un chemin de ressource complet. Pour chaque conteneur, le modèle **--scope** est le suivant. Remplacez `{rName}`, `{rgName}`, `{subId}` et `{mgName}` par le nom de la ressource, le nom du groupe de ressources, l’ID de l’abonnement et le nom du groupe d’administration, respectivement. `{rType}` est remplacé par le **type de la ressource**, comme `Microsoft.Compute/virtualMachines` pour une machine virtuelle.
+   Le paramètre **Scope** sur `az policy assignment create` peut être défini pour un groupe d’administration, un abonnement, un groupe de ressources ou une seule ressource. Le paramètre utilise un chemin de ressource complet. Pour chaque conteneur, le modèle pour **scope** est le suivant. Remplacez `{rName}`, `{rgName}`, `{subId}` et `{mgName}` par le nom de la ressource, le nom du groupe de ressources, l’ID de l’abonnement et le nom du groupe d’administration, respectivement. `{rType}` est remplacé par le **type de la ressource**, comme `Microsoft.Compute/virtualMachines` pour une machine virtuelle.
 
    - Ressource : `/subscriptions/{subID}/resourceGroups/{rgName}/providers/{rType}/{rName}`
    - Groupe de ressources : `/subscriptions/{subID}/resourceGroups/{rgName}`
@@ -235,7 +235,7 @@ L’ID de définition de stratégie pour la définition de stratégie que vous a
 "/subscription/<subscriptionId>/providers/Microsoft.Authorization/policyDefinitions/Audit Storage Accounts Open to Public Networks"
 ```
 
-Pour plus d’informations sur la façon dont vous pouvez gérer les stratégies de ressources avec Azure CLI, consultez [Stratégies de ressources Azure CLI](/cli/azure/policy?view=azure-cli-latest).
+Pour plus d’informations sur la façon dont vous pouvez gérer les stratégies de ressources avec Azure CLI, consultez [Stratégies de ressources Azure CLI](/cli/azure/policy).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -243,6 +243,6 @@ Pour plus d’informations sur les commandes et les requêtes de cet article, co
 
 - [Ressources API REST Azure](/rest/api/resources/)
 - [Modules Azure PowerShell](/powershell/module/az.resources/#policies)
-- [Commandes de stratégie Azure CLI](/cli/azure/policy?view=azure-cli-latest)
+- [Commandes de stratégie Azure CLI](/cli/azure/policy)
 - [Informations de référence sur l’API REST du fournisseur de ressources Azure Policy Insights](/rest/api/policy-insights)
 - [Organiser vos ressources avec des groupes d’administration Azure](../../management-groups/overview.md).

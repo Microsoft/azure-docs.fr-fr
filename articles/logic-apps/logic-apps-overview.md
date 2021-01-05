@@ -1,20 +1,20 @@
 ---
-title: Automatiser les tâches pour l’intégration d’entreprise
-description: Découvrez comment automatiser des workflows qui intègrent des applications, des données, des services et des systèmes avec un minimum de code pour l’intégration d’entreprise à l’aide d’Azure Logic Apps.
+title: Vue d’ensemble d’Azure Logic Apps
+description: Azure Logic Apps est une solution cloud permettant la création et l’orchestration de workflows automatisés qui intègrent applications, données, services et systèmes, avec un minimum de code pour des scénarios de niveau entreprise.
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: logicappspm
 ms.topic: overview
 ms.custom: mvc
 ms.date: 03/11/2020
-ms.openlocfilehash: 0ba41d63195c906b57046dc6c9fd57c9f08399ab
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4c4e8c8f809452286fee493e20dbef2cc538c8bd
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79290547"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96921528"
 ---
-# <a name="overview---what-is-azure-logic-apps"></a>Vue d’ensemble d’Azure Logic Apps
+# <a name="what-is-azure-logic-apps"></a>Qu’est-ce qu’Azure Logic Apps ?
 
 [Azure Logic Apps](https://azure.microsoft.com/services/logic-apps) est un service cloud qui vous permet de planifier, d’automatiser et d’orchestrer des tâches, des processus métier et des [workflows](#logic-app-concepts) quand vous avez besoin d’intégrer des applications, des données, des systèmes et des services entre des entreprises ou des organisations. Logic Apps simplifie la conception et la création de solutions scalables pour l’[intégration](https://azure.microsoft.com/product-categories/integration/) d’applications, l’intégration de données, l’intégration de systèmes, l’intégration d’applications d’entreprise (IAE) et la communication interentreprises (B2B), que ce soit dans un environnement cloud, un environnement local, ou les deux.
 
@@ -32,7 +32,7 @@ Pour créer des solutions d’intégration d’entreprise avec Azure Logic Apps,
 
 > [!VIDEO https://channel9.msdn.com/Blogs/Azure/Introducing-Azure-Logic-Apps/player]
 
-## <a name="how-does-logic-apps-work"></a>Comment fonctionne Logic Apps ? 
+## <a name="how-do-logic-apps-work"></a>Comment les applications logiques fonctionnent-elles ? 
 
 Chaque flux de travail d’application logique commence par un déclencheur, qui se déclenche lorsqu’un événement spécifique se produit, ou lorsque de nouvelles données disponibles répondent aux critères spécifiques. Plusieurs déclencheurs fournis par les connecteurs dans Logic Apps incluent des fonctionnalités de planification de base qui vous permettent de configurer la régularité d’exécution des charges de travail. Pour configurer une planification plus complexe ou des fréquences avancées, vous pouvez utiliser un déclencheur de fréquence comme première étape d’un workflow. Découvrez les [workflows basés sur une planification](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md).
 
@@ -42,7 +42,7 @@ Chaque fois que le déclencheur s’active, le moteur Logic Apps crée une insta
 
 Vous pouvez créer vos applications logiques visuellement avec le Concepteur d’applications logiques, disponible dans le portail Azure via votre navigateur et dans Visual Studio. Pour disposer d’applications logiques plus personnalisées, vous pouvez créer ou modifier des définitions d’application logique dans JavaScript Objet Notation (JSON) en travaillant dans l’éditeur « code ». Vous pouvez également utiliser des commandes Azure PowerShell et des modèles Azure Resource Manager pour sélectionner des tâches. Les applications logiques se déploient et s’exécutent dans le cloud sur Azure. Pour avoir une présentation plus complète, regardez cette vidéo : [Utiliser Azure Enterprise Integration Services pour exécuter des applications cloud à grande échelle](https://channel9.msdn.com/Events/Connect/2017/T119/)
 
-## <a name="why-use-logic-apps"></a>Pourquoi utiliser Logic Apps ?
+## <a name="why-use-logic-apps"></a>Pourquoi utiliser des applications logiques ?
 
 Avec des entreprises de plus en plus portées sur la numérisation, les applications logiques vous permettent de connecter facilement et rapidement des systèmes hérités, modernes et innovants, en fournissant des API prédéfinies en tant que connecteurs gérés par Microsoft. De cette façon, vous pouvez vous concentrer sur la logique métier et les fonctionnalités de vos applications. Vous n’avez pas à vous soucier de la création, de l’hébergement, de la mise à l’échelle, de la gestion, de la maintenance et de la surveillance de vos applications. Logic Apps gère ces problèmes pour vous. De plus, vous payez uniquement ce que vous utilisez, avec un [modèle de tarification](../logic-apps/logic-apps-pricing.md) basé sur la consommation.
 
@@ -74,7 +74,7 @@ Commencez par vos systèmes et services actuels et augmentez de façon incrémen
 
 * Profiter de ces produits et services :
 
-  * [Microsoft BizTalk Server](https://docs.microsoft.com/biztalk/core/introducing-biztalk-server)
+  * [Microsoft BizTalk Server](/biztalk/core/introducing-biztalk-server)
   * [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md)
   * [Azure Functions](../azure-functions/functions-overview.md)
   * [Gestion des API Azure](../api-management/api-management-key-concepts.md)
@@ -85,7 +85,7 @@ Commencez par vos systèmes et services actuels et augmentez de façon incrémen
 
 * Échanger des messages avec les protocoles [EDIFACT](../logic-apps/logic-apps-enterprise-integration-edifact.md), [AS2](../logic-apps/logic-apps-enterprise-integration-as2.md), et [X12](../logic-apps/logic-apps-enterprise-integration-x12.md)
 
-* Stockez et gérez ces artefacts B2B et plus à un seul emplacement avec les [comptes d’intégration](../logic-apps/logic-apps-enterprise-integration-accounts.md) :
+* Stockez et gérez ces artefacts B2B et plus à un seul emplacement avec les [comptes d’intégration](./logic-apps-enterprise-integration-create-integration-account.md) :
 
   * [Partenaires](../logic-apps/logic-apps-enterprise-integration-partners.md)
   * [Contrats](../logic-apps/logic-apps-enterprise-integration-agreements.md) 
@@ -94,7 +94,7 @@ Commencez par vos systèmes et services actuels et augmentez de façon incrémen
 
 Par exemple, si vous utilisez Microsoft BizTalk Server, les applications logiques peuvent communiquer avec votre instance BizTalk Server en utilisant le [connecteur BizTalk Server](../connectors/apis-list.md#on-premises-connectors). Vous pouvez alors étendre ou effectuer des opérations BizTalk dans vos applications logiques en incluant des [connecteurs de compte d’intégration](../connectors/apis-list.md#integration-account-connectors), qui sont disponibles avec le pack EIP (Enterprise Integration Pack).
 
-Dans l’autre sens, BizTalk Server peut se connecter et communiquer avec les applications logiques en utilisant [Microsoft BizTalk Server Adapter pour Logic Apps](https://www.microsoft.com/download/details.aspx?id=54287). Découvrez comment [configurer et utiliser BizTalk Server Adapter](https://docs.microsoft.com/biztalk/core/logic-app-adapter) dans votre instance BizTalk Server.
+Dans l’autre sens, BizTalk Server peut se connecter et communiquer avec les applications logiques en utilisant [Microsoft BizTalk Server Adapter pour Logic Apps](https://www.microsoft.com/download/details.aspx?id=54287). Découvrez comment [configurer et utiliser BizTalk Server Adapter](/biztalk/core/logic-app-adapter) dans votre instance BizTalk Server.
 
 ### <a name="write-once-reuse-often"></a>Écrire une seule fois pour réutiliser souvent
 
@@ -102,9 +102,9 @@ Créez vos applications logiques en tant que modèles Azure Resource Manager pou
 
 ### <a name="access-resources-inside-azure-virtual-networks"></a>Accéder aux ressources situées dans les réseaux virtuels Azure
 
-Logic Apps peut accéder à des ressources sécurisées, par exemple des machines virtuelles et d’autres systèmes ou services, dans un [réseau virtuel Azure](../virtual-network/virtual-networks-overview.md) quand vous créez un [*environnement ISE* (environnement de service d’intégration)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md). Un ISE est une instance isolée du service Logic Apps qui utilise des ressources dédiées et s’exécute séparément du service Logic Apps multilocataire « mondial ».
+Logic Apps peut accéder à des ressources sécurisées, par exemple des machines virtuelles et d’autres systèmes ou services, dans un [réseau virtuel Azure](../virtual-network/virtual-networks-overview.md) quand vous créez un [*environnement ISE* (environnement de service d’intégration)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md). Un environnement ISE est une instance dédiée du service Logic Apps qui utilise des ressources dédiées et s’exécute séparément du service Logic Apps multilocataire « mondial ».
 
-L’exécution d’applications logiques dans votre propre instance isolée distincte aide à réduire l’impact que d’autres locataires Azure pourraient avoir sur les performances de vos applications, également appelé [effet « voisins bruyants »](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). Un ISE offre également les avantages suivants :
+L’exécution d’applications logiques dans votre propre instance dédiée distincte aide à réduire l’impact que d’autres locataires Azure peuvent avoir sur le niveau de performance de vos applications. Cet impact est également appelé [effet « voisins bruyants »](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors). Un ISE offre également les avantages suivants :
 
 * Vous avez vos propres adresses IP statiques, qui sont distinctes des adresses IP statiques partagées par les applications logiques dans le service multilocataire. Vous pouvez également configurer une adresse IP sortante publique, statique et prévisible pour communiquer avec les systèmes de destination. De cette façon, vous n’avez pas besoin de configurer d’ouvertures de pare-feu supplémentaires sur ces systèmes de destination pour chaque environnement ISE.
 

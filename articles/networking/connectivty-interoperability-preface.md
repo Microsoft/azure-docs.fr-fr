@@ -11,10 +11,10 @@ ms.workload: infrastructure-services
 ms.date: 10/18/2018
 ms.author: rambala
 ms.openlocfilehash: 3aec41a145d2c94a45a453393831902069b9c41b
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80518187"
 ---
 # <a name="interoperability-in-azure--test-setup"></a>Interopérabilité dans Azure : Configuration des tests

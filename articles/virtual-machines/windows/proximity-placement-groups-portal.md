@@ -8,11 +8,11 @@ ms.workload: infrastructure-services
 ms.date: 04/24/2020
 ms.author: cynthn
 ms.openlocfilehash: 6a14e2bd7385430c3d0fbec06259a876af556e38
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82190399"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010722"
 ---
 # <a name="create-a-proximity-placement-group-using-the-portal"></a>Créer un groupe de placements de proximité à l’aide du portail
 

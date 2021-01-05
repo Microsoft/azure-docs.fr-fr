@@ -10,17 +10,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 06/27/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f228da5afc5998d8fa59ce2d720cec4c9f955b67
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8dddfb8426b769c06cb5b7494431b7eee34dbf9e
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67479046"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94410893"
 ---
 # <a name="adsync-service-account"></a>Compte de service ADSync
 Azure AD Connect installe un service local qui orchestre la synchronisation entre Active Directory et Azure Active Directory.  Le service de synchronisation Microsoft Azure AD Sync (ADSync) s’exécute sur un serveur de votre environnement local.  Les informations d’identification du service sont définies par défaut dans les installations Express, mais peuvent être personnalisées pour répondre aux exigences de sécurité de votre organisation.  Ces informations d’identification ne sont pas utilisées pour se connecter à vos forêts locales ou à Azure Active Directory.
@@ -46,9 +46,9 @@ Microsoft recommande l'exécution du service ADSync dans le contexte d'un compte
 - compte de service administré - utilisez un compte de service administré autonome ou en groupe configuré par votre administrateur
 - compte de domaine - utilisez un compte de service de domaine configuré par votre administrateur
 
-![](media/concept-adsync-service-account/adsync1.png)
+![Capture d’écran de la page Azure AD Connect - Configuration rapide, avec les cases d’option « Personnaliser » ou « Utiliser la configuration rapide ».](media/concept-adsync-service-account/adsync1.png)
 
-![](media/concept-adsync-service-account/adsync2.png)
+![Capture d’écran de la page Azure AD Connect « Installer les composants nécessaires » avec l’option permettant d’utiliser un compte de service administré existant sélectionné.](media/concept-adsync-service-account/adsync2.png)
 
 ## <a name="diagnosing-adsync-service-account-changes"></a>Diagnostic des modifications du compte de service ADSync
 Modifier les informations d'identification du service ADSync après l'installation entraînera un échec de démarrage du service, une perte d'accès à la base de synchronisation et un échec d'authentification avec vos répertoires connectés (Azure et AD DS).  L'octroi d'un accès de base de données au nouveau compte de service ADSync ne suffit pas à résoudre ce problème. Aucune synchronisation ne sera possible avant la restauration des informations d'identification d'origine.
@@ -61,7 +61,7 @@ Les clés de chiffrement du service AdSync sont introuvables et ont été recré
 
 Lors de la résolution de ce problème, les clés de chiffrement Microsoft Azure AD Sync seront inaccessibles en cas de modification des informations d'identification de connexion au service AdSync.  Si les informations d’identification ont été modifiées, utilisez l’application Services pour rétablir la valeur d'origine du compte d'ouverture de session (par exemple, NT SERVICE\AdSync) et redémarrez le service.  Cela aura pour effet de rétablir le bon fonctionnement du service AdSync.
 
-Pour plus d’informations, consultez l'[article](https://go.microsoft.com/fwlink/?linkid=2086764) suivant.
+Pour plus d’informations, consultez l'[article](./whatis-hybrid-identity.md) suivant.
 
 ### <a name="example-2"></a>Exemple 2
 
@@ -69,7 +69,7 @@ Le service n’a pas pu démarrer en raison de l'impossibilité d'établir une c
 
 Lors de la résolution de ce problème, le service Microsoft Azure AD Sync ne sera plus autorisé à accéder au fournisseur de base de données locale en cas de modification des informations d'identification de connexion au service AdSync.  Si les informations d’identification ont été modifiées, utilisez l’application Services pour rétablir la valeur d'origine du compte d'ouverture de session (par exemple, NT SERVICE\AdSync) et redémarrez le service.  Cela aura pour effet de rétablir le bon fonctionnement du service AdSync.
 
-Pour plus d’informations, consultez l'[article](https://go.microsoft.com/fwlink/?linkid=2086764) suivant.
+Pour plus d’informations, consultez l'[article](./whatis-hybrid-identity.md) suivant.
 
 Autres détails Les informations d'erreur suivantes ont été renvoyées par le fournisseur :
  

@@ -13,14 +13,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 67c7955316d4c9670509affb478813df0768f261
-ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+ms.openlocfilehash: ff15206e2373ce6481cb65cbbeeb3c88cd2b7154
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83832552"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89269418"
 ---
 # <a name="media-services-v2-frequently-asked-questions"></a>Forum Aux Questions (FAQ) Media Services v2
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article répond aux questions fréquemment posées par communauté des utilisateurs d’Azure Media Services (AMS).
 
@@ -66,18 +68,20 @@ Q : Comment faire pivoter une vidéo au cours du processus d’encodage ?
 
 A : [Media Encoder Standard](media-services-dotnet-encode-with-media-encoder-standard.md) prend en charge les angles de rotation 90, 180 et 270. Le comportement par défaut est « Auto », ce qui signifie qu’il tente de détecter les métadonnées de rotation dans le fichier MP4/MOV entrant et de les compenser. Incluez l’élément **Sources** suivant dans l’une des présélections json définies [ici](media-services-mes-presets-overview.md):
 
-    "Version": 1.0,
-    "Sources": [
-    {
-      "Streams": [],
-      "Filters": {
-        "Rotation": "90"
-      }
-    }
-    ],
-    "Codecs": [
+```json
+"Version": 1.0,
+"Sources": [
+{
+  "Streams": [],
+  "Filters": {
+    "Rotation": "90"
+  }
+}
+],
+"Codecs": [
 
-    ...
+...
+```
 
 
 ## <a name="media-services-learning-paths"></a>Parcours d’apprentissage de Media Services

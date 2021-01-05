@@ -5,12 +5,13 @@ ms.topic: tutorial
 ms.author: lazinnat
 author: lazinnat
 ms.date: 06/20/2019
-ms.openlocfilehash: c3750da6bd76c8cb3908fbdc71ba676f09d77def
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 50a65583c41dd94b174a33432afcf42b31e67df0
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75648806"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96437046"
 ---
 # <a name="tutorial-create-managed-application-with-custom-actions-and-resources"></a>Tutoriel : Créer une application managée avec des actions et des ressources personnalisées
 
@@ -40,7 +41,7 @@ Pour suivre ce tutoriel, vous devez savoir :
 
 Dans ce tutoriel, vous allez créer une application managée et son groupe de ressources managé contenant une instance de fournisseur personnalisé, un compte de stockage et une fonction. La fonction Azure utilisée dans cet exemple implémente une API qui gère des opérations de fournisseur personnalisé pour des actions et des ressources. Le compte Stockage Azure est utilisé comme stockage de base pour vos ressources de fournisseur personnalisé.
 
-La définition de l’interface utilisateur pour la création d’une instance d’application managée comprend des éléments d’entrée `funcname` et `storagename`. Le nom du compte de stockage et le nom de la fonction doivent être globalement uniques. Par défaut, les fichiers de fonction seront déployés à partir d’un [exemple de package de fonction](https://github.com/Azure/azure-quickstart-templates/tree/master/101-custom-rp-with-function/artifacts/functionzip), mais vous pouvez changer cela en ajoutant un élément d’entrée pour un lien de package dans *createUIDefinition.json* :
+La définition de l’interface utilisateur pour la création d’une instance d’application managée comprend des éléments d’entrée `funcname` et `storagename`. Le nom du compte de stockage et le nom de la fonction doivent être globalement uniques. Par défaut, les fichiers de fonction seront déployés à partir d’un [exemple de package de fonction](https://github.com/Azure/azure-quickstart-templates/tree/master/101-custom-rp-with-function/artifacts/functionzip), mais vous pouvez changer cela en ajoutant un élément d’entrée pour un lien de package dans *createUiDefinition.json* :
 
 ```json
 {
@@ -73,7 +74,7 @@ La définition de l’interface utilisateur pour la création d’une instance d
 }
 ```
 
-et une sortie dans *createUIDefinition.json* :
+et une sortie dans *createUiDefinition.json* :
 
 ```json
   "funcname": "[steps('applicationSettings').funcname]",
@@ -81,13 +82,13 @@ et une sortie dans *createUIDefinition.json* :
   "zipFileBlobUri": "[steps('applicationSettings').zipFileBlobUri]"
 ```
 
-L’exemple *createUIDefinition.json* complet se trouve dans [Référence : Artefacts des éléments d’interface utilisateur](reference-createuidefinition-artifact.md).
+L’exemple *createUiDefinition.json* complet se trouve dans [Référence : Artefacts des éléments d’interface utilisateur](reference-createuidefinition-artifact.md).
 
 ## <a name="template-with-custom-provider"></a>Modèle avec fournisseur personnalisé
 
 Pour créer une instance d’application managée avec un fournisseur personnalisé, vous devez définir une ressource de fournisseur personnalisé avec le nom **public** et le type **Microsoft.CustomProviders/resourceProviders** dans votre fichier **mainTemplate.json**. Dans cette ressource, vous définissez les types de ressources et les actions de votre service. Pour déployer des instances de fonction Azure et de compte Stockage Azure, définissez des ressources de type `Microsoft.Web/sites` et `Microsoft.Storage/storageAccounts`, respectivement.
 
-Dans ce tutoriel, vous allez créer un type de ressource `users`, une action personnalisée `ping`, et une action personnalisée `users/contextAction` qui sera exécutée dans le contexte d’une ressource personnalisée `users`. Pour chaque type de ressource et action, fournissez un point de terminaison pointant vers la fonction nommée dans [createUIDefinition.json](#user-interface-definition). Comme **routingType**, affectez la valeur `Proxy,Cache` pour les types de ressources et `Proxy` pour les actions :
+Dans ce tutoriel, vous allez créer un type de ressource `users`, une action personnalisée `ping`, et une action personnalisée `users/contextAction` qui sera exécutée dans le contexte d’une ressource personnalisée `users`. Pour chaque type de ressource et action, fournissez un point de terminaison pointant vers la fonction nommée dans [createUiDefinition.json](#user-interface-definition). Comme **routingType**, affectez la valeur `Proxy,Cache` pour les types de ressources et `Proxy` pour les actions :
 
 ```json
 {
@@ -338,11 +339,11 @@ Vous pouvez accéder à l’instance d’application managée et effectuer une *
 
 * Accédez à la page « Users » et cliquez sur le bouton « Add ». Fournissez des entrées pour la création d’une ressource et envoyez le formulaire :
 
-![Créer une ressource personnalisée](./media/tutorial-create-managed-app-with-custom-provider/create-custom-resource.png)
+![Capture d’écran montrant le bouton Add sélectionné dans Users.](./media/tutorial-create-managed-app-with-custom-provider/create-custom-resource.png)
 
 * Accédez à la page « Users », sélectionnez une ressource « users » et cliquez sur « Custom Context Action » :
 
-![Créer une ressource personnalisée](./media/tutorial-create-managed-app-with-custom-provider/perform-custom-resource-action.png)
+![Capture d’écran montrant Custom Context Action sélectionné.](./media/tutorial-create-managed-app-with-custom-provider/perform-custom-resource-action.png)
 
 [!INCLUDE [clean-up-section-portal](../../../includes/clean-up-section-portal.md)]
 
@@ -352,6 +353,6 @@ Si vous avez des questions sur Applications managées Azure, n’hésitez pas à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour publier votre application gérée sur la Place de marché Microsoft Azure, consultez [Applications gérées Azure sur la Place de marché](publish-marketplace-app.md).
+Pour publier votre application gérée sur la Place de marché Microsoft Azure, consultez [Applications gérées Azure sur la Place de marché](../../marketplace/create-new-azure-apps-offer.md).
 
 Apprenez-en davantage sur les [fournisseurs personnalisés Azure](../custom-providers/overview.md).

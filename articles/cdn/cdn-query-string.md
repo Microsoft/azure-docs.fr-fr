@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/11/2018
 ms.author: allensu
-ms.openlocfilehash: a0df9cecc4ccd09db3f6b07fa6fd4c5283753aa2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1521d08ef9d431bbe8b3fd3a578297d440ed56b3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260205"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018577"
 ---
 # <a name="control-azure-cdn-caching-behavior-with-query-strings---standard-tier"></a>Contrôler le comportement de mise en cache du CDN Azure avec des chaînes de requête - niveau standard
 > [!div class="op_single_selector"]

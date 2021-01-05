@@ -2,17 +2,19 @@
 title: Versions de cluster prises en charge dans Azure Service Fabric
 description: Découvrez les versions de cluster dans Azure Service Fabric, notamment un lien vers les versions les plus récentes à partir du blog de l’équipe Service Fabric.
 ms.topic: troubleshooting
-ms.date: 04/20/2020
-ms.openlocfilehash: b68314a116b0d9da8baf5f61eeffeef2b30835c4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/15/2020
+ms.openlocfilehash: 4407ddb80b00c847e14643be816bc681718dcb8b
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81732878"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652209"
 ---
 # <a name="supported-service-fabric-versions"></a>Versions de Service Fabric prises en charge
 
 Assurez-vous que votre cluster exécute toujours une version prise en charge d’Azure Service Fabric. La prise en charge de la version précédente se termine sous 60 jours après que nous annonçons le lancement d’une nouvelle version d’Azure Service Fabric. Les nouvelles versions sont annoncées sur le [blog de l’équipe Service Fabric](https://azure.microsoft.com/updates/?product=service-fabric).
+
+Pour une version donnée du runtime Service Fabric, vous pouvez utiliser les versions spécifiées ou anciennes des packages SDK/NuGet. Les versions plus récentes des packages ne sont pas prises en charge et peuvent avoir des difficultés à cibler les clusters plus anciens, car elles peuvent comporter des modifications de fonctionnalité ou de protocole non prises en charge par ces environnements.
 
 Consultez les documents suivants pour savoir plus en détail comment faire en sorte que votre cluster exécute toujours une version prise en charge de Service Fabric :
 
@@ -37,10 +39,22 @@ Le tableau suivant répertorie les versions de Service Fabric et leurs dates de 
 | 6.3.* | 6.1.480.* |Inférieure ou égale à la version 3.2 |31 mars 2019  |
 | 6.4.* | 6.2.301.* |Inférieure ou égale à la version 3.3 |15 septembre 2019 |
 | 6.5.* | 6.4.617.* |Inférieure ou égale à la version 3.4 |1er août 2020 |
-| 7.0.466.* | 6.4.664.* |Inférieure ou égale à la version 4.0|1er août 2020  |
-| 7.0.466.* | 6.5.* |Inférieure ou égale à la version 4.0|1er août 2020 |
-| 7.0.470.* | 7.0.466.* |Inférieure ou égale à la version 4.0 |1er août 2020  |
-| 7.1.409.* | 7.0.466.* |Inférieure ou égale à la version 4.0 |Version actuelle ; par conséquent, pas de date de fin |
+| 7.0.466.* | 6.4.664.* |Inférieure ou égale à la version 4.0|31 janvier 2021  |
+| 7.0.466.* | 6.5.* |Inférieure ou égale à la version 4.0|31 janvier 2021 |
+| 7.0.470.* | 7.0.466.* |Inférieure ou égale à la version 4.0 |31 janvier 2021  |
+| 7.0.472.* | 7.0.466.* |Inférieure ou égale à la version 4.0 |31 janvier 2021  |
+| 7.0.478.* | 7.0.466.* |Inférieure ou égale à la version 4.0 |31 janvier 2021  |
+| 7.1.409.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.417.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.428.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.456.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.458.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.459.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.1.503.* | 7.0.466.* |Inférieure ou égale à la version 4.1 |31 mars 2021 |
+| 7.2.413.* | 7.0.470.* |Inférieure ou égale à la version 4.2 |Version actuelle ; par conséquent, pas de date de fin |
+| 7.2.432.* | 7.0.470.* |Inférieure ou égale à la version 4.2 |Version actuelle ; par conséquent, pas de date de fin |
+| 7.2.433.* | 7.0.470.* |Inférieure ou égale à la version 4.2 |Version actuelle ; par conséquent, pas de date de fin |
+| 7.2.445.* | 7.0.470.* |Inférieure ou égale à la version 4.2 |Version actuelle ; par conséquent, pas de date de fin |
 
 ## <a name="supported-operating-systems"></a>Systèmes d’exploitation pris en charge
 
@@ -55,6 +69,7 @@ Le tableau suivant répertorie les systèmes d’exploitation pris en charge pou
 | Windows Server 1809 | 6.4.654.9590 |
 | Windows Server 2019 | 6.4.654.9590 |
 | Linux Ubuntu 16.04 | 6.0 |
+| Linux Ubuntu 18.04 | 7.1 |
 
 ## <a name="supported-version-names"></a>Noms des versions prises en charge
 
@@ -70,7 +85,7 @@ Le tableau suivant répertorie les noms de version de Service Fabric et leurs nu
 | 5.5 CU1 | 5.5.216.0    | N/D |
 | 5.5 CU2 | 5.5.219.0    | N/D |
 | 5.5 CU3 | 5.5.227.0    | N/D |
-| 5.5 CU4 | 5.5.232.0    | N/D |
+| 5.5 CU4 | 5.5.232.0 | N/D |
 | 5.6 RTO | 5.6.204.9494 | N/D |
 | 5.6 CU2 | 5.6.210.9494 | N/D |
 | 5.6 CU3 | 5.6.220.9494 | N/D |
@@ -83,7 +98,7 @@ Le tableau suivant répertorie les noms de version de Service Fabric et leurs nu
 | 6.1 CU2 | 6.1.467.9494 | 6.1.185.1 |
 | 6.1 CU3 | 6.1.472.9494 | N/D |
 | 6.1 CU4 | 6.1.480.9494 | 6.1.187.1 |
-| 6.2 RTO | 6.2.269.9494 | 6.2.184.1 | 
+| 6.2 RTO | 6.2.269.9494 | 6.2.184.1 | 
 | 6.2 CU1 | 6.2.274.9494 | 6.2.191.1 |
 | 6.2 CU2 | 6.2.283.9494 | 6.2.194.1 |
 | 6.2 CU3 | 6.2.301.9494 | 6.2.199.1 |
@@ -107,4 +122,17 @@ Le tableau suivant répertorie les noms de version de Service Fabric et leurs nu
 | 7.0 CU2 | 7.0.464.9590 | 7.0.464.1 |
 | 7.0 CU3 | 7.0.466.9590 | 7.0.465.1 |
 | 7.0 CU4 | 7.0.470.9590 | 7.0.469.1 |
+| 7.0 CU6 | 7.0.472.9590 | 7.0.471.1 |
+| 7.0 CU9 | 7.0.478.9590 | 7.0.472.1 |
 | 7.1 RTO | 7.1.409.9590 | 7.1.410.1 |
+| 7.1 CU1 | 7.1.417.9590 | 7.1.418.1 |
+| 7.1 CU2 | 7.1.428.9590 | 7.1.428.1 |
+| 7.1 CU3 | 7.1.456.9590 | 7.1.452.1 |
+| 7.1 CU5 | 7.1.458.9590 | 7.1.454.1 |
+| 7.1 CU6 | 7.1.459.9590 | 7.1.455.1 |
+| 7.1 CU8 | 7.1.503.9590 | 7.1.508.1 |
+| 7.2 RTO | 7.2.413.9590 | NA |
+| 7.2 CU2 | 7.2.432.9590 | 7.2.431.1 |
+| 7.2 CU3 | 7.2.433.9590 | NA |
+| 7.2 CU4 | 7.2.445.9590 | 7.2.447.1 |
+

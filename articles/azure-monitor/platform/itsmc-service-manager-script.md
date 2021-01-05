@@ -6,16 +6,16 @@ ms.topic: conceptual
 author: nolavime
 ms.author: v-jysur
 ms.date: 01/23/2018
-ms.openlocfilehash: decb674c2b55b93a81169c540ee04713bdf2799e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d620df0b55b024cd5d7c25ea17d9b09c5c5da8ff
+ms.sourcegitcommit: a4533b9d3d4cd6bb6faf92dd91c2c3e1f98ab86a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80054853"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "97722876"
 ---
 # <a name="create-service-manager-web-app-using-the-automated-script"></a>Créer l’application web Service Manager à l’aide du script automatisé
 
-Utilisez le script suivant pour créer l’application web pour votre instance Service Manager. Pour plus d’informations sur la connexion Service Manager ici : [Application web Service Manager](../../azure-monitor/platform/itsmc-connections.md#create-and-deploy-service-manager-web-app-service)
+Utilisez le script suivant pour créer l’application web pour votre instance Service Manager. Pour plus d’informations sur la connexion Service Manager ici : [Application web Service Manager](./itsmc-connections-scsm.md)
 
 Exécutez le script en fournissant les informations obligatoires suivantes :
 
@@ -138,14 +138,14 @@ if(!$resourceProvider -or $resourceProvider[0].RegistrationState -ne "Registered
     {
         Write-Host "Failed to Register Microsoft.Web Resource Provider. Please register it in Azure Portal."
         exit
-    }   
+    }
 }
 do
 {
     $rand = Get-Random -Maximum 32000
 
     $siteName = $siteNamePrefix + $rand
-    
+
     $resource = Get-AzResource -Name $siteName -ResourceType Microsoft.Web/sites
 
 }while($resource)
@@ -276,7 +276,7 @@ if(!$resourceProvider -or $resourceProvider[0].RegistrationState -ne "Registered
     catch
     {
         Write-Host "Failed to Register Microsoft.Relay Resource Provider. Please register it in Azure Portal."
-    }   
+    }
 }
 
 $resource = Get-AzResource -Name $serviceName -ResourceType Microsoft.Relay/namespaces
@@ -314,6 +314,9 @@ Write-Host "URI:"  $azureSite
 if(!$err)
 {
     Write-Host "ServiceBus Namespace:"  $serviceName  
-}```
-## Next steps
-[Configure the Hybrid connection](../../azure-monitor/platform/itsmc-connections.md#configure-the-hybrid-connection).
+}
+```
+
+## <a name="next-steps"></a>Étapes suivantes
+[Configurez la connexion hybride](./itsmc-connections-scsm.md#configure-the-hybrid-connection).
+

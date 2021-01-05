@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: availability
 ms.date: 02/28/2020
 ms.reviewer: jushiman
-ms.custom: avverma
-ms.openlocfilehash: 9e2b15eceff9bca4cee960fa462eb5148e3716dd
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: avverma, devx-track-azurecli
+ms.openlocfilehash: ae508754775d4eb622d8e91ef58eb0d6e1c45692
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83197034"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94889012"
 ---
 # <a name="automatic-instance-repairs-for-azure-virtual-machine-scale-sets"></a>Réparations automatiques d’instances pour les groupes de machines virtuelles identiques Azure
 
@@ -36,9 +36,9 @@ Avant d’activer la stratégie de réparation automatique d’instances, vérif
 
 Pour les instances marquées comme non saines, des réparations automatiques sont déclenchées par le groupe identique. Assurez-vous que le point de terminaison d’application est correctement configuré avant d’activer la stratégie de réparation automatique afin d’éviter les réparations d’instances involontaires pendant la configuration du point de terminaison.
 
-**Activer le groupe à placement unique**
+**Nombre maximal d'instances dans le groupe identique**
 
-Cette fonctionnalité est actuellement disponible uniquement pour les groupes identiques déployés en tant que groupe à placement unique. La propriété *singlePlacementGroup* doit avoir la valeur *true* pour que votre groupe identique utilise la fonctionnalité de réparation automatique d’instances. En savoir plus sur les [groupes de placement](./virtual-machine-scale-sets-placement-groups.md#placement-groups).
+Cette fonction n'est actuellement disponible que pour les groupes identiques composés d'un maximum de 200 instances. Le groupe identique peut être déployé en tant que groupe à placement unique ou groupe à placements multiples, mais le nombre d'instances ne peut pas être supérieur à 200 si les réparations automatiques d'instances sont activées pour le groupe identique.
 
 **Version d’API**
 
@@ -141,7 +141,7 @@ New-AzVmssConfig `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-L’exemple suivant active la stratégie de réparation automatique lors de la création d’un groupe identique à l’aide de la commande *[az vmss create](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest#az-vmss-create)* . Commencez par créer un groupe de ressources, puis créez un groupe identique dont la période de grâce de la stratégie de réparation automatique est définie sur 30 minutes.
+L’exemple suivant active la stratégie de réparation automatique lors de la création d’un groupe identique à l’aide de la commande *[az vmss create](/cli/azure/vmss?view=azure-cli-latest#az-vmss-create)* . Commencez par créer un groupe de ressources, puis créez un groupe identique dont la période de grâce de la stratégie de réparation automatique est définie sur 30 minutes.
 
 ```azurecli-interactive
 az group create --name <myResourceGroup> --location <VMSSLocation>
@@ -209,7 +209,7 @@ Update-AzVmss `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Voici un exemple de mise à jour de la stratégie de réparation automatique d’instances d’un groupe identique existant, à l’aide de la commande *[az vmss update](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest#az-vmss-update)* .
+Voici un exemple de mise à jour de la stratégie de réparation automatique d’instances d’un groupe identique existant, à l’aide de la commande *[az vmss update](/cli/azure/vmss?view=azure-cli-latest#az-vmss-update)* .
 
 ```azurecli-interactive
 az vmss update \  
@@ -223,7 +223,7 @@ az vmss update \
 
 ### <a name="rest-api"></a>API REST 
 
-Utilisez [Get Instance View](https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/getinstanceview) avec la version d’API 2019-12-01 ou ultérieure pour que le groupe de machines virtuelles identiques affichage le paramètre *serviceState* pour les réparations automatiques sous la propriété *orchestrationServices*. 
+Utilisez [Get Instance View](/rest/api/compute/virtualmachinescalesets/getinstanceview) avec la version d’API 2019-12-01 ou ultérieure pour que le groupe de machines virtuelles identiques affichage le paramètre *serviceState* pour les réparations automatiques sous la propriété *orchestrationServices*. 
 
 ```http
 GET '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView?api-version=2019-12-01'
@@ -259,7 +259,7 @@ Utilisez l’API *setOrchestrationServiceState* avec la version d’API 2019-12
 
 ### <a name="azure-cli"></a>Azure CLI 
 
-Utilisez la cmdlet [get-instance-view](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest#az-vmss-get-instance-view) pour afficher le paramètre *serviceState* pour les réparations automatiques d’instances. 
+Utilisez la cmdlet [get-instance-view](/cli/azure/vmss?view=azure-cli-latest#az-vmss-get-instance-view) pour afficher le paramètre *serviceState* pour les réparations automatiques d’instances. 
 
 ```azurecli-interactive
 az vmss get-instance-view \
@@ -267,7 +267,7 @@ az vmss get-instance-view \
     --resource-group MyResourceGroup
 ```
 
-Utilisez la cmdlet [set-orchestration-service-state](https://docs.microsoft.com/cli/azure/vmss?view=azure-cli-latest#az-vmss-set-orchestration-service-state) pour mettre à jour le paramètre *serviceState* pour les automatiques d’instances. Une fois que le groupe identique est paramétré pour la fonctionnalité de réparation automatique, vous pouvez utiliser cette cmdlet pour interrompre ou reprendre les réparations automatiques pour votre groupe identique. 
+Utilisez la cmdlet [set-orchestration-service-state](/cli/azure/vmss?view=azure-cli-latest#az-vmss-set-orchestration-service-state) pour mettre à jour le paramètre *serviceState* pour les automatiques d’instances. Une fois que le groupe identique est paramétré pour la fonctionnalité de réparation automatique, vous pouvez utiliser cette cmdlet pour interrompre ou reprendre les réparations automatiques pour votre groupe identique. 
 
 ```azurecli-interactive
 az vmss set-orchestration-service-state \
@@ -278,7 +278,7 @@ az vmss set-orchestration-service-state \
 ```
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-Utilisez la cmdlet [Get-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss?view=azps-3.7.0) avec la paramètre *InstanceView* pour afficher le paramètre *serviceState* pour les réparations automatiques d’instances.
+Utilisez la cmdlet [Get-AzVmss](/powershell/module/az.compute/get-azvmss?view=azps-3.7.0) avec la paramètre *InstanceView* pour afficher le paramètre *serviceState* pour les réparations automatiques d’instances.
 
 ```azurepowershell-interactive
 Get-AzVmss `

@@ -8,18 +8,18 @@ author: asudbring
 manager: kumudD
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/17/2019
 ms.author: allensu
-ms.openlocfilehash: 8e79f4c791d0252c719846da3aa8024b0e622dca
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: a008d7b26738b9552a7a43ab026391bd9afe0aa8
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477008"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96780941"
 ---
 # <a name="load-balancer-health-probes"></a>Sondes d’intégrité Load Balancer
 
@@ -29,8 +29,8 @@ Les sondes d’intégrité prennent en charge plusieurs protocoles. La disponibi
 
 | | Référence SKU standard | Référence SKU De base |
 | --- | --- | --- |
-| [Types de sonde](#types) | TCP, HTTP, HTTPS | TCP, HTTP |
-| [Comportement en cas de panne de sonde](#probedown) | Toutes les sondes sont en panne, tous les flux TCP continuent. | Toutes les sondes sont en panne, tous les flux TCP arrivent à expiration. | 
+| **[Types de sondes](#types)** | TCP, HTTP, HTTPS | TCP, HTTP |
+| **[Comportement en cas de panne de sonde](#probedown)** | Toutes les sondes sont en panne, tous les flux TCP continuent. | Toutes les sondes sont en panne, tous les flux TCP arrivent à expiration. | 
 
 
 >[!IMPORTANT]
@@ -92,8 +92,8 @@ Les protocoles disponibles dépendent de la référence SKU Load Balancer utilis
 
 || TCP | HTTP | HTTPS |
 | --- | --- | --- | --- |
-| Référence SKU standard |    &#9989; |   &#9989; |   &#9989; |
-| Référence SKU De base |   &#9989; |   &#9989; | &#10060; |
+| **Référence Standard** |    &#9989; |   &#9989; |   &#9989; |
+| **Référence De base** |   &#9989; |   &#9989; | &#10060; |
 
 ### <a name="tcp-probe"></a><a name="tcpprobe"></a> Sonde TCP
 
@@ -121,7 +121,7 @@ L’exemple suivant montre comment exprimer ce type de configuration de sonde da
 ### <a name="http--https-probe"></a><a name="httpprobe"></a> <a name="httpsprobe"></a> Sonde HTTP/HTTPS
 
 >[!NOTE]
->La sonde HTTPS est disponible uniquement pour [Standard Load Balancer](load-balancer-standard-overview.md).
+>La sonde HTTPS est disponible uniquement pour [Standard Load Balancer](./load-balancer-overview.md).
 
 Les sondes HTTP et HTTPS sont basées sur la sonde TCP, et émettent un HTTP GET avec le chemin spécifié. Les deux sondes prennent en charge les chemins d’accès relatifs pour le HTTP GET. Les sondes HTTPS sont identiques aux sondes HTTP avec un wrapper Transport Layer Security (TLS, anciennement appelé SSL) supplémentaire. La sonde d’intégrité est marquée comme étant en fonctionnement lorsque l’instance répond avec un statut HTTP de 200 dans la période d’expiration.  Par défaut, la sonde d’intégrité tente de vérifier le port de sonde d’intégrité configuré toutes les 15 secondes. L’intervalle d’analyse de sonde minimal est de 5 secondes. La durée totale de tous les intervalles ne peut pas dépasser 120 secondes.
 
@@ -169,7 +169,7 @@ Les rôles de service cloud (rôles de travail et rôles Web) utilisent par déf
 
 Une sonde d’agent invité procède à une vérification de l’agent invité situé à l’intérieur de la machine virtuelle. Ensuite, il écoute et répond HTTP 200 OK uniquement lorsque l’instance est prête (les autres états sont de type occupé, recyclage ou arrêt).
 
-Pour plus d’informations, consultez les sections relatives à la [configuration du fichier de définition de service (csdef) pour les sondes d’intégrité](https://msdn.microsoft.com/library/azure/ee758710.aspx) ou à la [création d’un équilibreur de charge public pour les services cloud](https://docs.microsoft.com/azure/load-balancer/load-balancer-get-started-internet-classic-cloud#check-load-balancer-health-status-for-cloud-services).
+Pour plus d’informations, consultez les sections relatives à la [configuration du fichier de définition de service (csdef) pour les sondes d’intégrité](/previous-versions/azure/reference/ee758710(v=azure.100)) ou à la [création d’un équilibreur de charge public pour les services cloud](/previous-versions/azure/load-balancer/load-balancer-get-started-internet-classic-cloud#check-load-balancer-health-status-for-cloud-services).
 
 Si l’agent invité ne répond pas avec HTTP 200 OK, l’équilibreur de charge marque l’instance comme ne répondant pas. Il arrête ensuite d’envoyer des flux vers cette instance. L’équilibreur de charge continue de vérifier l’instance. 
 
@@ -215,7 +215,7 @@ Si l’ensemble des sondes de l’ensemble des instances d’un pool principal �
 
 Load Balancer utilise un service de détection distribué pour son modèle de contrôle d’intégrité interne. Le service de sondage se trouve sur chaque hôte où il y a des machines virtuelles, et il peut être programmé pour générer des sondes d’intégrité à la demande en fonction de la configuration du client. Le trafic de la sonde d’intégrité se fait directement entre le service de sondage qui génère la sonde d’intégrité et la machine virtuelle du client. Toutes les sondes d’intégrité de l’équilibreur de charge ont pour source l’adresse IP 168.63.129.16.  Vous pouvez utiliser l’espace d’adressage IP à l’intérieur d’un réseau virtuel qui n’est pas un espace RFC1918.  L’utilisation d’une adresse IP réservée au niveau mondial et détenue par Microsoft réduit le risque d’un conflit d’adresse IP avec l’espace d’adressage IP que vous utilisez au sein du réseau virtuel.  Cette adresse IP est la même dans toutes les régions et ne change pas : elle ne constitue pas un risque de sécurité, car seul le composant de la plateforme Azure interne peut émettre un paquet depuis cette adresse IP. 
 
-L’étiquette du service AzureLoadBalancer identifie cette adresse IP source dans vos [groupes de sécurité réseau](../virtual-network/security-overview.md) et autorise par défaut le trafic de la sonde d’intégrité.
+L’étiquette du service AzureLoadBalancer identifie cette adresse IP source dans vos [groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md) et autorise par défaut le trafic de la sonde d’intégrité.
 
 En plus des sondes d’intégrité Load Balancer, les [opérations suivantes utilisent cette adresse IP](../virtual-network/what-is-ip-address-168-63-129-16.md):
 
@@ -233,15 +233,15 @@ Il peut parfois être utile pour votre application de générer une réponse de 
 
 Pour l’équilibrage de charge UDP, vous devez générer un signal de sonde d’intégrité personnalisé à partir du point de terminaison back-end, et utiliser une sonde d’intégrité TCP, HTTP ou HTTPS ciblant l’écouteur correspondant, afin de refléter l’intégrité de votre application UDP.
 
-Quand vous utilisez des [règles d’équilibrage de charge de ports à haute disponibilité](load-balancer-ha-ports-overview.md) avec [Standard Load Balancer](load-balancer-standard-overview.md), tous les ports font l’objet de l’équilibrage de charge et une même réponse de sonde d’intégrité doit refléter l’état de l’intégralité de l’instance.
+Quand vous utilisez des [règles d’équilibrage de charge de ports à haute disponibilité](load-balancer-ha-ports-overview.md) avec [Standard Load Balancer](./load-balancer-overview.md), tous les ports font l’objet de l’équilibrage de charge et une même réponse de sonde d’intégrité doit refléter l’état de l’intégralité de l’instance.
 
 Ne traduisez pas ou n’utilisez pas de proxy pour une sonde d’intégrité via l’instance qui reçoit la sonde d’intégrité pour la transférer vers une autre instance de votre réseau virtuel, car cette configuration peut entraîner des défaillances en cascade dans votre scénario.  Considérez le scénario suivant : un ensemble d’appliances de tiers est déployé dans le pool de back-ends d’une ressource d’équilibreur de charge pour fournir une mise à l’échelle et une redondance pour les appliances, et la sonde d’intégrité est configurée pour sonder un port que l’appliance de tiers met en proxy ou traduit vers les autres machines virtuelles derrière l’appliance.  Si vous sondez le même port que celui que vous utilisez pour traduire ou mettre en proxy les demandes vers les autres machines virtuelles derrière l’appliance, toute réponse de la sonde provenant d’une même machine virtuelle derrière l’appliance marque l’appliance elle-même comme étant hors service. Cette configuration peut entraîner un échec en cascade du scénario d’application dans son intégralité en raison de la présence d’un seul point de terminaison back-end derrière l’appliance.  Le déclencheur peut être un échec intermittent de la sonde, qui fait que l’équilibreur de charge marque comme étant hors service la destination d’origine (l’instance de l’appliance), qui à son tour peut rendre inopérant le scénario de toute votre application. Au lieu de cela, sondez l’intégrité de l’appliance elle-même. La sélection de la sonde pour déterminer le signal d’intégrité est une considération importante pour les scénarios d’appliances virtuelles réseau, et vous devez consulter le fournisseur de votre application pour savoir quel est le signal d’intégrité approprié pour de tels scénarios.
 
 Si vous n’autorisez pas l’[adresse IP source](#probesource) de la sonde dans vos stratégies de pare-feu, la sonde d’intégrité échoue, car il lui est impossible d’atteindre votre instance.  L’équilibreur de charge marque à son tour votre instance comme étant hors service, en raison de l’échec de la sonde d’intégrité.  Une configuration incorrecte peut entraîner l’échec du scénario de votre application avec équilibrage de charge.
 
-Pour que la sonde d’intégrité de l’équilibreur de charge marque positivement votre instance, vous **devez** autoriser cette adresse IP dans tous les [groupes de sécurité réseau](../virtual-network/security-overview.md) Azure et dans les stratégies de pare-feu local.  Par défaut, chaque groupe de sécurité réseau inclut l’[étiquette du service](../virtual-network/security-overview.md#service-tags) AzureLoadBalancer pour autoriser le trafic de la sonde d’intégrité.
+Pour que la sonde d’intégrité de l’équilibreur de charge marque positivement votre instance, vous **devez** autoriser cette adresse IP dans tous les [groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md) Azure et dans les stratégies de pare-feu local.  Par défaut, chaque groupe de sécurité réseau inclut l’[étiquette du service](../virtual-network/network-security-groups-overview.md#service-tags) AzureLoadBalancer pour autoriser le trafic de la sonde d’intégrité.
 
-Si vous voulez tester une défaillance de la sonde d’intégrité ou marquer négativement une instance individuelle, vous pouvez utiliser un [groupe de sécurité réseau ](../virtual-network/security-overview.md) pour bloquer explicitement la sonde d’intégrité (port de destination ou [adresse IP source](#probesource)) et simuler la défaillance d’une sonde.
+Si vous voulez tester une défaillance de la sonde d’intégrité ou marquer négativement une instance individuelle, vous pouvez utiliser un [groupe de sécurité réseau ](../virtual-network/network-security-groups-overview.md) pour bloquer explicitement la sonde d’intégrité (port de destination ou [adresse IP source](#probesource)) et simuler la défaillance d’une sonde.
 
 Ne configurez pas votre réseau virtuel avec la plage d’adresses IP détenue par Microsoft qui contient 168.63.129.16.  Ces configurations vont entrer en conflit avec l’adresse IP de la sonde d’intégrité et risquent de faire échouer votre scénario.
 
@@ -251,7 +251,7 @@ N’activez pas les [horodatages TCP](https://tools.ietf.org/html/rfc1323).  L�
 
 ## <a name="monitoring"></a>Surveillance
 
-Les [Standard Load Balancer](load-balancer-standard-overview.md) publics et internes exposent l’état des sondes d’intégrité par point de terminaison et par point de terminaison back-end comme des métriques multidimensionnelles par le biais d’Azure Monitor. Ces métriques peuvent être utilisées par d’autres services Azure ou par des applications partenaires. 
+Les [Standard Load Balancer](./load-balancer-overview.md) publics et internes exposent l’état des sondes d’intégrité par point de terminaison et par point de terminaison back-end comme des métriques multidimensionnelles par le biais d’Azure Monitor. Ces métriques peuvent être utilisées par d’autres services Azure ou par des applications partenaires. 
 
 Une instance Load Balancer publique de base expose l’état de la sonde d’intégrité résumé, par pool principal, via les journaux Azure Monitor.  Les journaux Azure Monitor ne sont pas disponibles pour les instances Load Balancer de base internes.  Vous pouvez utiliser les [journaux Azure Monitor](load-balancer-monitor-log.md) pour vérifier le nombre et l’état d’intégrité des sondes d’équilibreurs de charge publics. La journalisation peut être utilisée avec Power BI ou Operational Insights pour fournir des statistiques sur l’état d’intégrité de l’équilibreur de charge.
 
@@ -262,7 +262,7 @@ Une instance Load Balancer publique de base expose l’état de la sonde d’int
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [référence Standard de Load Balancer](load-balancer-standard-overview.md)
-- [Créez un équilibreur de charge public dans le Gestionnaire des ressources à l’aide de PowerShell](quickstart-create-standard-load-balancer-powershell.md)
-- [API REST pour les sondes d’intégrité](https://docs.microsoft.com/rest/api/load-balancer/loadbalancerprobes/)
+- En savoir plus sur la [référence Standard de Load Balancer](./load-balancer-overview.md)
+- [Créez un équilibreur de charge public dans le Gestionnaire des ressources à l’aide de PowerShell](quickstart-load-balancer-standard-public-powershell.md)
+- [API REST pour les sondes d’intégrité](/rest/api/load-balancer/loadbalancerprobes/)
 - Demander de nouvelles capacités de sonde d’intégrité avec le [UserVoice de Load Balancer](https://aka.ms/lbuservoice)

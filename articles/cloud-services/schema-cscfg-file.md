@@ -10,10 +10,10 @@ caps.latest.revision: 35
 author: tgore03
 ms.author: tagore
 ms.openlocfilehash: cb77181e00c97b7f426429793f17af3cb5e84ebe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "79534743"
 ---
 # <a name="azure-cloud-services-config-schema-cscfg-file"></a>Schéma de définition d’Azure Cloud Services (fichier .cscfg)

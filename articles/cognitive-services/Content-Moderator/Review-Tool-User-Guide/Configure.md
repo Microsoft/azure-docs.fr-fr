@@ -10,12 +10,12 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 03/15/2019
 ms.author: pafarley
-ms.openlocfilehash: 2d685683bdc359b31a5a6c550c19e8c0d858f12a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 8812fd1e6c1efb2aa44c77573bc4b8f1c099834d
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79218851"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92912019"
 ---
 # <a name="configure-the-review-tool"></a>Configurer l’outil de révision
 
@@ -60,13 +60,13 @@ Pour attribuer du contenu à une sous-équipe, cliquez sur les points de suspens
 
 ### <a name="switch-between-subteams"></a>Basculer entre les sous-équipes
 
-Si vous êtes membre de plusieurs sous-équipes, vous pouvez passer de l’une à l’autre pour voir vos différentes révisions de contenu. Dans l’onglet **Révision**, sélectionnez le menu déroulant intitulé **Par défaut** et sélectionnez **Choisir une sous-équipe**. Il est possible d’afficher les révisions de contenu de différentes sous-équipes à condition d’en être membre.
+Si vous êtes membre de plusieurs sous-équipes, vous pouvez passer de l’une à l’autre pour voir vos différentes révisions de contenu. Dans l’onglet **Révision** , sélectionnez le menu déroulant intitulé **Par défaut** et sélectionnez **Choisir une sous-équipe**. Il est possible d’afficher les révisions de contenu de différentes sous-équipes à condition d’en être membre.
 
 ![Basculer entre les sous-équipes](images/3-review-image-subteam-2.png)
 
 ## <a name="tags"></a>Balises
 
-L’onglet **Tags** permet de définir des tags de modération personnalisés en plus des deux tags de modération par défaut, à savoir **isadult** (**a**) et **isracy** (**r**). Une fois créé, un tag personnalisé devient accessible dans les révisions au même titre que les tags par défaut. Pour choisir quels tags apparaissent, modifiez leurs paramètres de visibilité.
+L’onglet **Tags** permet de définir des tags de modération personnalisés en plus des deux tags de modération par défaut, à savoir **isadult** ( **a** ) et **isracy** ( **r** ). Une fois créé, un tag personnalisé devient accessible dans les révisions au même titre que les tags par défaut. Pour choisir quels tags apparaissent, modifiez leurs paramètres de visibilité.
 
 ![Affichage des tags, avec les cases à cocher « Est visible »](images/tags-4-disable.png)
 
@@ -75,7 +75,7 @@ L’onglet **Tags** permet de définir des tags de modération personnalisés en
 Pour créer un nouveau tag, il faut entrer un code court, un nom et une description dans leurs champs respectifs.
 
 - **Code court** : code à deux lettres du tag. Exemple : **cb**.
-- **Name** : nom court et descriptif du tag en minuscules, sans espaces. Exemple : **isbullying**.
+- **Name**  : nom court et descriptif du tag en minuscules, sans espaces. Exemple : **isbullying**.
 - **Description** : (facultatif) description du type de contenu ciblé par votre tag. Exemple : **Description de cas de cyberharcèlement**.
 
 Cliquez sur **Ajouter** pour ajouter un tag, puis sur **Enregistrer** lorsque vous avez terminé la création de tags.
@@ -90,7 +90,7 @@ Pour supprimer des tags personnalisés, sélectionnez l’icône de corbeille à
 
 L’onglet **Connecteurs** permet de gérer les connecteurs, c’est-à-dire des plug-ins propres au service capables de traiter le contenu de différentes manières dans le cadre de [flux de travail](../review-api.md#workflows) de contenu.
 
-Le connecteur par défaut lors de la création d’un flux de travail est le connecteur Content Moderator, qui peut marquer le contenu comme **adult** ou **racy**, recherchez des grossièretés, etc. Cependant, vous pouvez utiliser d’autres connecteurs (listés ci-dessous) du moment que vous disposez d’informations d’identification pour leurs services respectifs (par exemple, une clé d’abonnement [Visage](https://docs.microsoft.com/azure/cognitive-services/face/overview) est nécessaire pour pouvoir utiliser le connecteur Visage).
+Le connecteur par défaut lors de la création d’un flux de travail est le connecteur Content Moderator, qui peut marquer le contenu comme **adult** ou **racy** , recherchez des grossièretés, etc. Cependant, vous pouvez utiliser d’autres connecteurs (listés ci-dessous) du moment que vous disposez d’informations d’identification pour leurs services respectifs (par exemple, une clé d’abonnement [Visage](../../face/overview.md) est nécessaire pour pouvoir utiliser le connecteur Visage).
 
 [L’Outil de révision](./human-in-the-loop.md) comprend les connecteurs suivants :
 
@@ -125,7 +125,7 @@ Si vous avez créé une [ressource Content Moderator](https://ms.portal.azure.co
 
 ![Clés Content Moderator du portail Azure](images/credentials-azure-portal-keys.PNG)
 
-Dans l’onglet **Informations d’identification** de [l’Outil de révision](https://contentmoderator.cognitive.microsoft.com), accédez au volet **Paramètres des flux de travail**, sélectionnez **Modifier** et collez votre clé dans le champ **Ocp-Apim-Subscription-Key**. Les flux de travail qui appellent les API de modération utiliseront vos informations d’identification Azure.
+Dans l’onglet **Informations d’identification** de [l’Outil de révision](https://contentmoderator.cognitive.microsoft.com), accédez au volet **Paramètres des flux de travail** , sélectionnez **Modifier** et collez votre clé dans le champ **Ocp-Apim-Subscription-Key**. Les flux de travail qui appellent les API de modération utiliseront vos informations d’identification Azure.
 
 > [!NOTE]
 > Les deux autres champs du volet **Paramètres des flux de travail** sont destinés aux listes de termes et d’images personnalisés. Pour plus d’informations à ce sujet, voir les guides [Termes personnalisés](../try-terms-list-api.md) et [Images personnalisées](../try-image-list-api.md).

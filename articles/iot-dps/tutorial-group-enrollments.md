@@ -8,13 +8,13 @@ ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: java
-ms.custom: mvc
-ms.openlocfilehash: d6cb3af134ff272d79cfc440047a3d90733ee9e8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-java
+ms.openlocfilehash: 4cfbfe3e3e3ba620d8292767012c9bb866d8a878
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74976806"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968092"
 ---
 # <a name="tutorial-create-and-provision-a-simulated-x509-device-using-java-device-and-service-sdk-and-group-enrollments-for-iot-hub-device-provisioning-service"></a>Tutoriel : Créer et approvisionner un appareil X.509 simulé pour le service IoT Hub Device Provisioning à l’aide du Kit de développement logiciel (SDK) pour services et appareils Java et de groupes d’inscription
 
@@ -23,9 +23,9 @@ Ces étapes indiquent comment simuler un appareil X.509 sur votre ordinateur de 
 Avant de continuer, veillez à réaliser les étapes décrites dans la section [Configuration du service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 
 
-## <a name="prepare-the-environment"></a>Préparer l’environnement 
+## <a name="prerequisites"></a>Prérequis
 
-1. Assurez-vous que le [Java SE Development Kit 8](https://aka.ms/azure-jdks) est bien installé sur votre ordinateur.
+1. Assurez-vous que le [Java SE Development Kit 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) est bien installé sur votre ordinateur.
 
 1. Téléchargez et installez [Maven](https://maven.apache.org/install.html).
 
@@ -72,7 +72,7 @@ Avant de continuer, veillez à réaliser les étapes décrites dans la section [
     git clone https://github.com/Azure/azure-iot-sdk-java.git --recursive
     ```
 
-1. Dans le code source téléchargé, accédez au dossier d’exemples **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_** . Ouvrez le fichier **_/src/main/java/samples/com/microsoft/azure/sdk/iot/ServiceEnrollmentGroupSample.java_** dans l’éditeur de votre choix, puis ajoutez les informations suivantes :
+1. Dans le code source téléchargé, accédez au dossier d’exemples **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_**. Ouvrez le fichier **_/src/main/java/samples/com/microsoft/azure/sdk/iot/ServiceEnrollmentGroupSample.java_** dans l’éditeur de votre choix, puis ajoutez les informations suivantes :
 
     1. Ajoutez `[Provisioning Connection String]` pour votre service d’approvisionnement. Pour cela, procédez comme suit depuis le portail :
 
@@ -84,7 +84,7 @@ Avant de continuer, veillez à réaliser les étapes décrites dans la section [
 
             ![Comment obtenir la chaîne de connexion d’approvisionnement à partir du portail](./media/tutorial-group-enrollments/provisioning-string.png)  
 
-        1. Dans l’exemple de fichier de code **_ServiceEnrollmentGroupSample.java_** , remplacez `[Provisioning Connection String]` par la **chaîne de connexion de la clé primaire**.
+        1. Dans l’exemple de fichier de code **_ServiceEnrollmentGroupSample.java_**, remplacez `[Provisioning Connection String]` par la **chaîne de connexion de la clé primaire**.
 
             ```java
             private static final String PROVISIONING_CONNECTION_STRING = "[Provisioning Connection String]";
@@ -126,7 +126,7 @@ Avant de continuer, veillez à réaliser les étapes décrites dans la section [
 
     1. Enregistrez le fichier _ServiceEnrollmentGroupSample.java_.
 
-1. Ouvrez une fenêtre de commande, puis accédez au dossier **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_** .
+1. Ouvrez une fenêtre de commande, puis accédez au dossier **_azure-iot-sdk-java/provisioning/provisioning-samples/service-enrollment-group-sample_**.
 
 1. Générez l’exemple de code à l’aide de cette commande :
 
@@ -241,7 +241,7 @@ Avant de continuer, veillez à réaliser les étapes décrites dans la section [
 
     ![Inscription réussie](./media/tutorial-group-enrollments/registration.png)
 
-1. Dans le portail, accédez au IoT Hub lié à votre service d’approvisionnement, ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID de périphérique s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT***activé**. Notez que vous devrez peut-être cliquer sur le bouton **Actualiser** en haut, si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
+1. Dans le portail, accédez au IoT Hub lié à votre service d’approvisionnement, ouvrez le panneau **Device Explorer**. En cas de réussite de l’approvisionnement de l’appareil simulé X.509 sur le Hub, son ID de périphérique s’affiche sur le panneau **Device Explorer**, avec un *ÉTAT* **activé**. Notez que vous devrez peut-être cliquer sur le bouton **Actualiser** en haut, si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
 
     ![L’appareil est inscrit avec le hub IoT](./media/tutorial-group-enrollments/hub-registration.png) 
 
@@ -260,4 +260,4 @@ Si vous envisagez de continuer à manipuler et explorer l’exemple de client d�
 Dans ce didacticiel, vous avez créé un appareil X.509 simulé sur un ordinateur Windows. Vous l’avez également approvisionné vers votre hub IoT à l’aide du service Azure IoT Hub Device Provisioning et de groupes d’inscription. Pour en savoir plus sur votre appareil X.509, passez aux concepts d’appareil. 
 
 > [!div class="nextstepaction"]
-> [Concepts d’appareil du service IoT Hub Device Provisioning](concepts-device.md)
+> [Concepts du service IoT Hub Device Provisioning](concepts-service.md)

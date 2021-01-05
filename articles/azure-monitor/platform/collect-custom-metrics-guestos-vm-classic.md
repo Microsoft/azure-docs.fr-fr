@@ -7,18 +7,18 @@ ms.topic: conceptual
 ms.date: 09/09/2019
 ms.author: ancav
 ms.subservice: ''
-ms.openlocfilehash: 65bb1a3915ece384974da12b4e7a1ad0c1e08133
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87277c0c61f6d63e453386724dd472d2663e3148
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655810"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87045206"
 ---
 # <a name="send-guest-os-metrics-to-the-azure-monitor-metrics-database-for-a-windows-virtual-machine-classic"></a>Envoyer les mesures du système d’exploitation invité à une base de données de mesures Azure Monitor d’une machine virtuelle Windows (classique)
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-[L’extension Diagnostics](https://docs.microsoft.com/azure/monitoring-and-diagnostics/azure-diagnostics) (également appelée « WAD » ou « Diagnostics ») d’Azure Monitor vous permet de collecter des métriques et des journaux d’activité à partir du système d’exploitation invité qui est exécuté dans le cadre d’une machine virtuelle, d’un service cloud ou d’un cluster Service Fabric. L’extension peut envoyer des données de télémétrie à de [nombreux emplacements différents](https://docs.microsoft.com/azure/monitoring/monitoring-data-collection?toc=/azure/azure-monitor/toc.json).
+[L’extension Diagnostics](./diagnostics-extension-overview.md) (également appelée « WAD » ou « Diagnostics ») d’Azure Monitor vous permet de collecter des métriques et des journaux d’activité à partir du système d’exploitation invité qui est exécuté dans le cadre d’une machine virtuelle, d’un service cloud ou d’un cluster Service Fabric. L’extension peut envoyer des données de télémétrie à de [nombreux emplacements différents](./data-platform.md?toc=/azure/azure-monitor/toc.json).
 
 Cet article décrit le processus permettant d’envoyer les mesures de performances du système d’exploitation invité d’une machine virtuelle Windows (classique) à la base de données des mesures Azure Monitor. À partir de la version 1.11 de l’extension Diagnostics, vous pouvez écrire des métriques directement dans le magasin de métriques Azure Monitor, où les métriques standard de la plateforme sont déjà collectées. 
 
@@ -26,13 +26,13 @@ En les stockant dans cet emplacement, vous avez accès aux mêmes actions que ce
 
 La procédure décrite dans cet article fonctionne uniquement avec les machines virtuelles classiques qui exécutent un système d’exploitation Windows.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 - Vous devez être [administrateur ou coadministrateur de services fédérés](../../cost-management-billing/manage/add-change-subscription-administrator.md) dans votre abonnement Azure. 
 
-- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services). 
+- Votre abonnement doit être inscrit auprès de [Microsoft.Insights](../../azure-resource-manager/management/resource-providers-and-types.md). 
 
-- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview).
+- Vous devez avoir installé [Azure PowerShell](/powershell/azure) ou [Azure Cloud Shell](../../cloud-shell/overview.md).
 
 - Votre ressource de machine virtuelle doit se trouver dans une région [ prenant en charge les métriques personnalisées](metrics-custom-overview.md#supported-regions).
 
@@ -48,7 +48,7 @@ La procédure décrite dans cet article fonctionne uniquement avec les machines 
 
 ## <a name="create-a-service-principal"></a>Créer un principal du service
 
-Créez un principal de service dans votre locataire Azure Active Directory en suivant les instructions indiquées dans [Créer un principal du service](../../active-directory/develop/howto-create-service-principal-portal.md). Notez ce qui suit au cours de ce processus : 
+Créez un principal du service dans votre locataire Azure Active Directory en suivant les instructions indiquées dans [Créer un principal du service](../../active-directory/develop/howto-create-service-principal-portal.md). Notez ce qui suit au cours de ce processus : 
 - Créez un secret client pour cette application.
 - Enregistrez la clé et l’ID client pour les utiliser ultérieurement.
 
@@ -204,4 +204,3 @@ Donnez à l’application créée dans « Surveillance de l’éditeur de métri
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur les [métriques personnalisées](metrics-custom-overview.md).
-

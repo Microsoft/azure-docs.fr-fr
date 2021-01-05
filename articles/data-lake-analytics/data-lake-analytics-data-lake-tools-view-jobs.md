@@ -2,17 +2,14 @@
 title: Utiliser l’Explorateur de travaux et la Vue des travaux - Azure Data Lake Analytics
 description: Cet article explique comment utiliser l’Explorateur de travaux et la Vue des travaux pour les travaux Azure Data Lake Analytics.
 ms.service: data-lake-analytics
-author: jasonwhowell
-ms.author: jasonh
-ms.assetid: bdf27b4d-6f58-4093-ab83-4fa3a99b5650
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/02/2017
-ms.openlocfilehash: 2d33a6ec5ff6b687913914e9433b85765aaa7aec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1e9a9df4c2ec57dfeec8cf5ddd5348228b9cc3e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71309948"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018560"
 ---
 # <a name="use-job-browser-and-job-view-for-azure-data-lake-analytics"></a>Utiliser l’Explorateur de travaux et la Vue des travaux pour Azure Data Lake Analytics
 Le service Azure Data Lake Analytics archive les travaux soumis dans un magasin de requêtes. Dans cet article, vous allez apprendre à utiliser l’Explorateur de travaux et la Vue des travaux dans Azure Data Lake Tools pour Visual Studio pour trouver les informations d’historique des travaux. 
@@ -40,7 +37,7 @@ La Vue des travaux contient les éléments suivants :
     
       Le statut de tâche indique les phases du travail :
     
-      ![Azure Data Lake Analytics - Statut des phases du travail](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-job-phases.png)
+      ![Capture d’écran montrant les phases de travail d’Azure Data Lake Analytics.](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-job-phases.png)
     
     * Préparation : Chargez votre script dans le cloud en le compilant et en l’optimisant à l’aide du service de compilation.
     * Mise en file d'attente : Les travaux sont mis en file d’attente quand ils attendent des ressources suffisantes ou quand leur nombre dépasse la limite maximale de travaux simultanés par compte. Le paramètre de priorité détermine l’ordre des travaux mis en file d’attente : plus le numéro est faible, plus la priorité est élevée.
@@ -52,7 +49,7 @@ La Vue des travaux contient les éléments suivants :
     
       Les informations de base sur le travail apparaissent dans la partie inférieure du volet Résumé des tâches.
     
-      ![Azure Data Lake Analytics - Statut des phases du travail](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-job-info.png)
+      ![Capture d’écran montrant le Résumé des travaux avec des descriptions dans les zones de texte.](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-job-info.png)
     
     * Résultat du travail : A réussi ou a échoué. Le travail peut échouer à chaque phase.
     * Durée totale : Temps écoulé (durée) entre l’heure de soumission et l’heure de fin.
@@ -62,10 +59,10 @@ La Vue des travaux contient les éléments suivants :
     * Compte : Compte Data Lake Analytics utilisé pour exécuter le travail.
     * Auteur : Utilisateur qui a envoyé le travail. Il peut s’agit du compte d’une personne réelle ou d’un compte système.
     * Priorité : Priorité du travail. Plus le numéro est faible, plus la priorité est élevée. Cette valeur affecte uniquement l’ordre des travaux dans la file d’attente. Définir une priorité plus élevée n’accélère pas les travaux en cours d’exécution.
-    * Parallélisme : Nombre maximal d’unités Azure Data Lake Analytics (ADLAU) simultanées demandées, également appelées vertex. Actuellement, un vertex est égal à une machine virtuelle avec deux cœurs virtuels et six Go de RAM, mais cette quantité peut être mise à niveau dans les prochaines mises à jour Data Lake Analytics.
+    * Parallélisme : Nombre maximal demandé d’unités Azure Data Lake Analytics (ADLAU) simultanées, également appelées vertex. Actuellement, un vertex est égal à une machine virtuelle avec deux cœurs virtuels et six Go de RAM, mais cette quantité peut être mise à niveau dans les prochaines mises à jour Data Lake Analytics.
     * Octets restants : Octets qui restent à traiter jusqu'à ce que la tâche soit terminée.
     * Octets lus/écrits : Octets qui ont été lus/écrits depuis le début de l’exécution du travail.
-    * Total des vertex : Le travail est divisé en plusieurs éléments, chaque élément étant appelé un vertex. Cette valeur indique le nombre d’éléments qui composent le travail. Vous pouvez considérer un vertex comme une unité de processus de base, également appelée Azure Data Lake Analytics Unit (ADLAU), et les vertex peuvent être exécutés dans un parallélisme. 
+    * Total des vertex : Le travail est divisé en plusieurs éléments, chaque élément étant appelé un vertex. Cette valeur indique le nombre d’éléments qui composent le travail. Vous pouvez considérer un vertex comme une unité de processus de base, également appelée Unité Azure Data Lake Analytics (ADLAU), et des vertex peuvent être exécutés dans le parallélisme. 
     * Terminé/En cours d’exécution/Échec : Nombre de vertex terminés/en cours d’exécution/ayant échoué. Les vertex peuvent échouer en raison d’erreurs au niveau du code utilisateur et du système, mais le système tente de relancer automatiquement plusieurs fois les vertex ayant échoué. Si le vertex échoue toujours après une nouvelle tentative, la totalité du travail échoue.
 * Graphique du travail
   
@@ -73,7 +70,7 @@ La Vue des travaux contient les éléments suivants :
   
     ![Azure Data Lake Analytics - Statut des phases du travail](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-logical-to-physical-plan.png)
   
-    Un travail est divisé en plusieurs éléments. Chaque élément est appelé un vertex. Les vertex sont regroupés en Super Vertex (également appelé phase) et visualisés sous la forme d’un graphique de travail. Les panneaux verts dans le graphique du travail indiquant les différentes phases.
+    Un travail est divisé en plusieurs éléments. Chaque élément est appelé un vertex. Les vertex sont regroupés en Super Vertex (également appelé phase) et visualisés sous la forme d’un Graphique du travail. Les panneaux verts dans le graphique du travail indiquant les différentes phases.
   
     Chaque vertex d’une phase effectue le même type de travail en utilisant différentes parties des mêmes données. Par exemple, si vous disposez d’un fichier contenant un To de données et des centaines de vertex à lire, chaque vertex lit un bloc de données. Ces vertex sont regroupés dans la même phase et effectuent le même travail sur différentes parties du même fichier d’entrée.
   

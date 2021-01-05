@@ -7,12 +7,12 @@ ms.reviewer: sngun
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 02/12/2020
-ms.openlocfilehash: 81818cc5ba2af1f9f0f70f7aa27fe62ed2c90c77
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ca4c1810912771f56661ca5b682b6991735f526e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80065680"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023140"
 ---
 # <a name="understand-how-the-reservation-discount-is-applied-to-azure-cosmos-db"></a>Comprendre comment la remise de réservation est appliquée à Azure Cosmos DB
 
@@ -117,8 +117,8 @@ Pour plus d’informations sur les réservations Azure, consultez les articles s
 
 * [Qu’est-ce qu’une réservation Azure ?](save-compute-costs-reservations.md)  
 * [Prépayer des ressources Azure Cosmos DB avec une capacité réservée Azure Cosmos DB](../../cosmos-db/cosmos-db-reserved-capacity.md)  
-* [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../sql-database/sql-database-reserved-capacity.md)  
+* [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../azure-sql/database/reserved-capacity-overview.md)  
 * [Gérer les réservations pour Azure](manage-reserved-vm-instance.md)  
 * [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](understand-reserved-instance-usage.md)  
 * [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](understand-reserved-instance-usage-ea.md)
-* [Comprendre l’utilisation d’une réservations pour les abonnements CSP](https://docs.microsoft.com/partner-center/azure-reservations)
+* [Comprendre l’utilisation d’une réservations pour les abonnements CSP](/partner-center/azure-reservations)

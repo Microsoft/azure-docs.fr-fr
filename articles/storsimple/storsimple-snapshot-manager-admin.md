@@ -3,23 +3,23 @@ title: Administration du Gestionnaire d’instantanés StorSimple | Microsoft Do
 description: Fournit une vue d’ensemble et des liens vers d’autres informations sur les tâches et les flux de travail d’administration du Gestionnaire d’instantanés StorSimple.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 1cdbb61d-bd16-4be4-ade2-ceab11508acb
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2016
-ms.author: twooley
-ms.openlocfilehash: b8fe87a2df633af310bc661308813a60987e77d6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 16d782c6a25d8d2d8e1323b7cb683f41d8c99649
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75933272"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90054974"
 ---
 # <a name="use-storsimple-snapshot-manager-to-administer-your-storsimple-solution"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour gérer votre solution StorSimple
 

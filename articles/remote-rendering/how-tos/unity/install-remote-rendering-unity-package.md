@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/26/2020
 ms.topic: how-to
-ms.openlocfilehash: 86ffe47c009f9e0ae121ffc6ab57bff8fb73210f
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 3704d1a418baeec18c3303b8203a0185790cbcc7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679195"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85564301"
 ---
 # <a name="install-the-remote-rendering-package-for-unity"></a>Installer le package Remote Rendering pour Unity
 
@@ -23,6 +23,7 @@ Ce package contient la totalité de l’API C# ainsi que tous les fichiers binai
 Le package se nomme **com.microsoft.azure.remote-rendering**, conformément au schéma de nommage des packages de Unity.
 
 Le package ne fait pas partie du [dépôt d’exemples ARR](https://github.com/Azure/azure-remote-rendering) et n’est pas disponible dans le registre de packages interne de Unity. Pour l’ajouter à un projet, vous devez modifier manuellement le fichier `manifest.md` du projet pour ajouter ce qui suit :
+
 ```json
 {
   "scopedRegistries": [
@@ -33,21 +34,22 @@ Le package ne fait pas partie du [dépôt d’exemples ARR](https://github.com/A
     }
    ],
   "dependencies": {
-    "com.microsoft.azure.remote-rendering": "0.1.11",
+    "com.microsoft.azure.remote-rendering": "0.1.31",
     ...existing dependencies...
   }
 }
 ```
+
 Après avoir ajouté le package, vous pouvez utiliser l’outil Package Manager de Unity pour vous assurer d’avoir la dernière version.
-Pour obtenir des instructions plus complètes, consultez le [Tutoriel : Configuration d’un projet Unity en partant de zéro](../../tutorials/unity/project-setup.md).
+Pour obtenir des instructions plus complètes, consultez le [Tutoriel : Afficher des modèles distants](../../tutorials/unity/view-remote-models/view-remote-models.md).
 
 ## <a name="unity-render-pipelines"></a>Pipelines de rendu Unity
 
-Remote Rendering fonctionne avec le **pipeline de rendu universel** et le **pipeline de rendu standard**. Pour des raisons de performances, il est recommandé d’utiliser le pipeline de rendu universel.
+Remote Rendering fonctionne avec **:::no-loc text="Universal render pipeline":::** et **:::no-loc text="Standard render pipeline":::** . Pour des raisons de performances, il est recommandé d’utiliser le pipeline de rendu universel.
 
-Pour utiliser le **pipeline de rendu universel**, vous devez installer son package dans Unity. Vous pouvez effectuer cette opération à l’aide de l’interface utilisateur **Package Manager** de Unity (nom du package **Universal RP**, version 7.2.1 ou ultérieure), ou du fichier `Packages/manifest.json` comme décrit dans le [tutoriel sur la configuration de projet Unity](../../tutorials/unity/project-setup.md#configure-the-projects-manifest).
+Pour utiliser **:::no-loc text="Universal render pipeline":::** , vous devez installer son package dans Unity. Vous pouvez effectuer cette opération à l’aide de l’interface utilisateur **Package Manager** de Unity (nom du package **Universal RP**, version 7.3.1 ou ultérieure), ou du fichier `Packages/manifest.json` comme décrit dans le [tutoriel sur la configuration de projet Unity](../../tutorials/unity/view-remote-models/view-remote-models.md#include-the-azure-remote-rendering-package).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Composants et objets de jeu Unity](objects-components.md)
-* [Tutoriel : Configuration d’un projet Unity en partant de zéro](../../tutorials/unity/project-setup.md)
+* [Tutoriel : Afficher des modèles distants](../../tutorials/unity/view-remote-models/view-remote-models.md)

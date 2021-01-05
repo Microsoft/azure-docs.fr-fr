@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à ChronicX® | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ChronicX®.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: f3f19be6-6ee8-413c-919c-4884ffe685ca
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/20/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 24990ce397d91bb71ebbc455be345d9451d2dce1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0603e04424acfe979f44110b973b79f6c07e0b81
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158660"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673605"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-chronicx"></a>Didacticiel : Intégration d’Azure Active Directory à ChronicX®
 
@@ -32,7 +27,7 @@ L’intégration de ChronicX® dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à ChronicX® (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -69,7 +64,7 @@ Pour configurer l’intégration de ChronicX® à Azure AD, vous devez ajouter C
 
 4. Dans la zone de recherche, tapez **ChronicX®**, sélectionnez **ChronicX®** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![ChronicX® dans la liste des résultats](common/search-new-app.png)
+    ![ChronicX® dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -149,7 +144,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -188,18 +183,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 Dans cette section, un utilisateur nommé Britta Simon est créé dans ChronicX®. ChronicX® prend en charge l’attribution d’utilisateurs juste-à-temps, une option activée par défaut. Vous n’avez aucune opération à effectuer dans cette section. Si l’utilisateur souhaité n’existe pas déjà dans ChronicX®, il est créé après l’authentification.
 
 > [!Note]
-> Si vous devez créer un utilisateur manuellement, contactez  [l’équipe du support technique de ChronicX®](https://www.casebank.com/contact-us/).
+> Si vous devez créer un utilisateur manuellement, contactez [l’équipe de support ChronicX®](https://www.casebank.com/contact-us/).
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette ChronicX® dans le volet d’accès doit vous connecter automatiquement à l’application ChronicX® pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette ChronicX® dans le volet d’accès doit vous connecter automatiquement à l’application ChronicX® pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -1,40 +1,42 @@
 ---
-title: Types pris en charge pour la reconnaissance d’entité nommée
+title: Catégories prises en charge pour la reconnaissance d’entité nommée
 titleSuffix: Azure Cognitive Services
-description: En savoir plus sur les types d’entités pris en charge dans l’API Analyse de texte.
+description: Découvrez plus d’informations sur les catégories d’entité prises en charge dans l’API Analyse de texte.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: article
-ms.date: 02/06/2020
+ms.date: 07/28/2020
 ms.author: aahi
-ms.openlocfilehash: 164e803a6af8a7d1ccdc9c70cc3e42b787857b3a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77b75b1134bbc8366478b1f9f4d14e86e9684f70
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77086876"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91709310"
 ---
-# <a name="supported-types-for-named-entity-recognition-version-3-preview"></a>Types pris en charge pour la reconnaissance d’entité nommée version 3 (préversion)
+# <a name="supported-entity-categories-in-the-text-analytics-api-v3"></a>Catégories d’entité prises en charge dans l’API Analyse de texte v3
 
-L’API Analyse de texte permet d’identifier et de lever toute ambiguïté sur les entités trouvées dans le texte. La [reconnaissance d’entité nommée](how-tos/text-analytics-how-to-entity-linking.md) (NER) est la capacité d’identifier différentes entités dans du texte et de les classer en classes prédéfinies.
+Utilisez cet article pour rechercher les catégories d’entité qui peuvent être retournées par la [Reconnaissance d’entité nommée](how-tos/text-analytics-how-to-entity-linking.md) (NER). Une préversion de NER v3.1 est également disponible, elle permet de détecter les informations personnelles (`PII`) et médicales (`PHI`). Cliquez également sur l’onglet **Intégrité** pour voir la liste des catégories prises en charge dans l’Analyse de texte pour l’intégrité.
 
-## <a name="entity-types"></a>Types d’entités
-
-Les types et les sous-types d’entité pris en charge (le cas échéant) sont répertoriés ci-dessous :
+## <a name="entity-categories"></a>Catégories d’entité
 
 #### <a name="general"></a>[Généralités](#tab/general)
 
 [!INCLUDE [supported entity types - general](./includes/entity-types/general-entities.md)]
 
-#### <a name="personal-information"></a>[Informations personnelles](#tab/personal)
+#### <a name="pii"></a>[PII](#tab/personal)
 
 [!INCLUDE [supported entity types - personally identifying information](./includes/entity-types/personal-information-entities.md)]
 
-***
+#### <a name="health"></a>[Intégrité](#tab/health)
 
-## <a name="next-steps"></a>Étapes suivantes
+[!INCLUDE [biomedical entity types](./includes/entity-types/health-entities.md)]
 
-* [Comment utiliser une reconnaissance d’entité nommée dans Analyse de texte](how-tos/text-analytics-how-to-entity-linking.md)
+Étapes suivantes
+
+## <a name="next-steps"></a>[Comment utiliser une reconnaissance d’entité nommée dans Analyse de texte](how-tos/text-analytics-how-to-entity-linking.md)
+
+_ <bpt id="p1">[</bpt>How to use Named Entity Recognition in Text Analytics<ept id="p1">](how-tos/text-analytics-how-to-entity-linking.md)</ept>

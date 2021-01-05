@@ -3,14 +3,14 @@ title: Déploiements Gestionnaire des ressources et classiques
 description: Décrit les différences entre le modèle de déploiement de Resource Manager et le modèle de déploiement classique (ou de gestion des services).
 ms.topic: conceptual
 ms.date: 02/06/2020
-ms.openlocfilehash: 85691d562f2b58cdced3264de11f3dd29a7ca168
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: da260db84de0cc8bd092eb95491b7cc38df93a12
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064510"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185842"
 ---
-# <a name="azure-resource-manager-vs-classic-deployment-understand-deployment-models-and-the-state-of-your-resources"></a>Déploiement Azure Resource Manager et déploiement classique : comprendre les modèles de déploiement et l’état de vos ressources
+# <a name="azure-resource-manager-vs-classic-deployment-understand-deployment-models-and-the-state-of-your-resources"></a>Déploiement Azure Resource Manager et déploiement Classic : comprendre les modèles de déploiement et l’état de vos ressources
 
 > [!NOTE]
 > Les informations fournies dans cet article sont uniquement utilisées lorsque vous effectuez une migration d’un déploiement classique à un déploiement Azure Resource Manager.
@@ -78,6 +78,8 @@ Le diagramme suivant affiche les ressources de calcul, de réseau et de stockage
 
 ![Architecture Resource Manager](./media/deployment-models/arm_arch3.png)
 
+SRP : Fournisseur de ressources de stockage, CRP : Fournisseur de ressources de calcul, NRP : Fournisseur de ressources réseau
+
 Notez les relations suivantes entre les ressources :
 
 * Toutes les ressources existent au sein d’un groupe de ressources.
@@ -120,10 +122,10 @@ Pour en savoir plus sur la connexion de réseaux virtuels à partir de modèles 
 
 Si vous êtes prêt à migrer vos ressources d’un déploiement classique vers un déploiement Resource Manager, consultez les articles suivants :
 
-1. [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../../virtual-machines/windows/migration-classic-resource-manager-deep-dive.md)
-2. [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../../virtual-machines/windows/migration-classic-resource-manager-overview.md)
-3. [Migration de ressources IaaS d’un environnement Classic vers Azure Resource Manager à l’aide d’Azure PowerShell](../../virtual-machines/windows/migration-classic-resource-manager-ps.md)
-4. [Migration de ressources IaaS d’un environnement Classic vers Azure Resource Manager à l’aide de l’interface de ligne de commande Azure](../../virtual-machines/virtual-machines-linux-cli-migration-classic-resource-manager.md)
+1. [Étude technique approfondie de la migration prise en charge par la plateforme de ressources Classic vers Azure Resource Manager](../../virtual-machines/migration-classic-resource-manager-deep-dive.md)
+2. [Migration prise en charge par la plateforme de ressources IaaS Classic vers Azure Resource Manager](../../virtual-machines/migration-classic-resource-manager-overview.md)
+3. [Migration de ressources IaaS d’un environnement Classic vers Azure Resource Manager à l’aide d’Azure PowerShell](../../virtual-machines/migration-classic-resource-manager-ps.md)
+4. [Migration de ressources IaaS d’un environnement Classic vers Azure Resource Manager à l’aide de l’interface de ligne de commande Azure](../../virtual-machines/migration-classic-resource-manager-cli.md)
 
 ## <a name="frequently-asked-questions"></a>Forum aux questions
 
@@ -150,4 +152,3 @@ Vous trouverez un ensemble complet de modèles de démarrage sur [Modèles de d�
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour connaître les commandes permettant de déployer un modèle, consultez [Déploiement d’une application avec un modèle Azure Resource Manager](../templates/deploy-powershell.md).
-

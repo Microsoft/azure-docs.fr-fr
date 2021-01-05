@@ -13,12 +13,12 @@ ms.date: 04/14/2020
 ms.author: curtand
 ms.reviewer: sahenry
 ms.custom: oldportal;it-pro;
-ms.openlocfilehash: d692302df1f5c03a7dce60858b31e0ca66de4c80
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 56ee7df52abf97c920dfe2fa4ba5d1d858975f7d
+ms.sourcegitcommit: f5580dd1d1799de15646e195f0120b9f9255617b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83744535"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91537088"
 ---
 # <a name="delegate-user-management-with-my-staff-preview"></a>Déléguer la gestion des utilisateurs avec Mon personnel (préversion)
 
@@ -104,7 +104,7 @@ Si la connexion à l'aide d'un numéro de téléphone en guise de nom d'utilisat
 
 1. Lorsque vous avez terminé, sélectionnez **OK**.
 
-    ![Supprimer le numéro de téléphone d'un membre du personnel dans Mon personnel](media/my-staff-team-manager/enableforms2.png)
+    ![Capture d’écran de la fenêtre « Activer le numéro de téléphone pour la connexion ? » avec le bouton « OK » sélectionné](media/my-staff-team-manager/enableforms2.png)
 
 ### <a name="remove-a-phone-number"></a>Supprimer un numéro de téléphone
 

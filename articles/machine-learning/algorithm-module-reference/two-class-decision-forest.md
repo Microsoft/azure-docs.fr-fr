@@ -8,17 +8,17 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 04/22/2020
-ms.openlocfilehash: c98935781699510d84247f80367d5c57cb388f6b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 09/03/2020
+ms.openlocfilehash: c4c303a7640454ba0cb6622b21fd161354266068
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137635"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94375923"
 ---
 # <a name="two-class-decision-forest-module"></a>Module Forêt d’arbres décisionnels à deux classes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour créer un modèle Machine Learning basé sur l’algorithme de forêt d’arbres décisionnels.  
 
@@ -72,11 +72,10 @@ Pour plus d’informations, voir [Arbres de décision](https://go.microsoft.com/
 4.  Dans le champ **Nombre d’arbres de décision**, saisissez le nombre maximal d’arbres de décision qui peuvent être créés dans l’ensemble. Plus il y en a, meilleure peut être la couverture, mais plus le temps d’apprentissage augmente.  
   
     > [!NOTE]
-    >  Cette valeur contrôle également le nombre d’arbres qui s’affichent dans la visualisation du modèle entraîné. Si vous souhaitez voir ou imprimer un seul arbre, vous pouvez définir la valeur sur 1. Toutefois, un seul arbre sera produit (l’arbre avec le jeu de paramètres initial) sans qu’aucune autre itération soit effectuée.
+    >  Si vous définissez la valeur sur 1. Toutefois, un seul arbre sera produit (l’arbre avec le jeu de paramètres initial) sans qu’aucune autre itération soit effectuée.
   
 5.  Dans le champ **Profondeur maximale des arbres de décision**, tapez un nombre pour limiter la profondeur de chacun des arbres de décision. Le fait d’augmenter la profondeur de l’arbre est susceptible d’améliorer la précision, au prix d’un risque de surajustement et d’augmentation du temps d’apprentissage.
   
-6.  Dans le champ **Nombre de fractionnements aléatoires par nœud**, tapez le nombre de fractionnements à utiliser pour créer chacun des nœuds de l’arbre. Le *fractionnement* consiste à diviser de manière aléatoire les fonctionnalités à chaque niveau de l’arbre (nœud).
   
 7.  Dans le champ **Nombre minimal d’échantillons par nœud terminal**, indiquez le nombre minimal de cas requis pour la création d’un nœud terminal dans un arbre.
   
@@ -90,7 +89,7 @@ Pour plus d’informations, voir [Arbres de décision](https://go.microsoft.com/
 
     + Si vous définissez **Create trainer mode** (Créer un mode d’apprentissage) sur **Single Parameter** (Paramètre unique), connectez un jeu de données balisé au module [Entraîner le modèle](train-model.md).  
   
-    + Si vous définissez **Créer un mode d’entraînement** sur **Plage de paramètres**, connectez un jeu de données étiqueté et entraînez le modèle en utilisant [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md).  
+    + Si vous définissez **Créer un mode d’entraînement** sur **Plage de paramètres**, connectez un jeu de données avec balises et entraînez le modèle en utilisant [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md).  
   
     > [!NOTE]
     > 
@@ -98,7 +97,7 @@ Pour plus d’informations, voir [Arbres de décision](https://go.microsoft.com/
     > 
     > Si vous transmettez un ensemble unique de valeurs de paramètre au module [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md), quand il attend une plage de paramètres pour chaque paramètre, il ignore les valeurs et utilise les valeurs par défaut pour l’apprenant.  
     > 
-    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent dans une plage de valeurs.  
+    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent sur une plage de valeurs.  
     
 ## <a name="results"></a>Résultats
 

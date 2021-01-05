@@ -11,19 +11,24 @@ ms.topic: conceptual
 ms.date: 07/17/2019
 ms.author: scottwhi
 ms.custom: seodec2018
-ms.openlocfilehash: 5d1b0b19523eb37aa83aa59b24114be9f76ffa55
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 02fea02cca5950ef8467377a866e9a765af9e2e1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68882771"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349552"
 ---
 # <a name="add-analytics-to-the-bing-search-apis"></a>Ajouter une analytique à l’API Recherche Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Bing Statistiques fournit l’analytique pour les API Recherche Bing. L’analytique inclut le volume d’appels, les principales chaînes de requête, la répartition géographique, et bien plus encore. Vous pouvez activer Statistiques Bing dans le [portail Azure](https://ms.portal.azure.com) en accédant à votre ressource Azure et en cliquant sur **Activer Statistiques Bing**.
 
 > [!IMPORTANT]
-> * Statistiques Bing n’est pas disponible avec des abonnements d’essai gratuit ou des ressources sur le niveau tarifaire gratuit `F0`.
+> * Statistiques Bing n’est pas disponible avec des ressources sur le niveau tarifaire gratuit `F0`.
 > * Vous ne pouvez pas utiliser de données disponibles via le tableau de bord Bing statistiques pour créer des applications en vue de les distribuer à des tiers.
 > * L’activation de Statistiques Bing augmente légèrement le prix de votre abonnement. Pour en savoir plus, voir les [tarifs](https://aka.ms/bingstatisticspricing).
 
@@ -53,7 +58,7 @@ Par défaut, les graphiques et diagrammes affichent toutes les données et métr
 - **Délai d’exécution** : période de rapport. Vous pouvez spécifier les valeurs suivantes :
   - **Tout** : Inclut jusqu’à 13 mois de données  
   - **Dernières 24 heures** : Inclut l’analytique des dernières 24 heures  
-  - **Semaine dernière** : Inclut l’analytique des sept derniers jours  
+  - **Semaine dernière** : Inclut l’analytique des 7 derniers jours  
   - **Mois dernier** : Inclut l’analytique des 30 derniers jours  
   - **Plage de dates personnalisée** : Inclut l’analytique de la plage de dates spécifiée, si elle est disponible  
 

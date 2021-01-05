@@ -13,12 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 11/15/2017
 ms.author: tarcher
-ms.openlocfilehash: 8bacadd8941131f608411e61cc15c120c1b2bc60
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-terraform, devx-track-azurecli
+ms.openlocfilehash: dbbd1511a6063223a2b76786b3c7c4394e2fa407
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79458152"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92745440"
 ---
 # <a name="deploy-with-terraform-from-bash-in-azure-cloud-shell"></a>Effectuer un déploiement avec Terraform à partir de Bash dans Azure Cloud Shell
 Cet article vous guide dans la création d’un groupe de ressources avec le [fournisseur Terraform AzureRM](https://www.terraform.io/docs/providers/azurerm/index.html).

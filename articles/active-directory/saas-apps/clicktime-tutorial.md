@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à ClickTime | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et ClickTime.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: d437b5ab-4d71-4c13-96d0-79018cebbbd4
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/21/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 233ddde25645cbdd9073011eeec2a20e42c8e9a8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3337d66934c1fe317296cffaa9a663e212cce12d
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73157411"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673169"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-clicktime"></a>Didacticiel : Intégration d’Azure Active Directory à ClickTime
 
@@ -32,7 +27,7 @@ L’intégration de ClickTime à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à ClickTime (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de ClickTime à Azure AD, vous devez ajouter Cl
 
 4. Dans la zone de recherche, tapez **ClickTime**, sélectionnez **ClickTime** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![ClickTime dans la liste des résultats](common/search-new-app.png)
+    ![ClickTime dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -109,11 +104,11 @@ Pour configurer l’authentification unique Azure AD avec ClickTime, effectuez l
     a. Dans la zone de texte **Identificateur**, tapez une URL : `https://app.clicktime.com/sp/`
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
-    
-    | |
-    |--|
-    | `https://app.clicktime.com/Login/` |
-    | `https://app.clicktime.com/App/Login/Consume.aspx` |
+
+    ```http
+    https://app.clicktime.com/Login/
+    https://app.clicktime.com/App/Login/Consume.aspx
+    ```
 
 4. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -136,15 +131,15 @@ Pour configurer l’authentification unique Azure AD avec ClickTime, effectuez l
 1. Dans la barre d’outils située en haut, cliquez sur **Preferences**, puis sur **Security Settings**.
 
 1. Dans la section de configuration **Single Sign-On Preferences** , procédez comme suit :
-   
+
     ![Paramètres de sécurité](./media/clicktime-tutorial/tic777280.png "Paramètres de sécurité")
-   
+
     a.  Sélectionnez **Autoriser** la connexion à l’aide de l’authentification unique (SSO) avec **Azure AD**.
-   
+
     b. Dans la zone de texte **Identity Provider Endpoint** (Point de terminaison du fournisseur d’identité), collez la valeur **URL de connexion** que vous avez copiée à partir du portail Azure.
-   
+
     c.  Dans le **Bloc-notes**, ouvrez le **certificat codé en base 64** téléchargé dans le portail Azure, copiez son contenu, puis collez-le dans la zone de texte **X.509 Certificate** (Certificat X.509).
-   
+
     d.  Cliquez sur **Enregistrer**.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
@@ -164,7 +159,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -211,37 +206,36 @@ Dans le cas de ClickTime, l’approvisionnement est une tâche manuelle.
 1. Connectez-vous à votre client **ClickTime** .
 
 1. Dans la barre d’outils située en haut, cliquez sur **Company**, puis sur **People**.
-   
-    ![Personnes](./media/clicktime-tutorial/tic777282.png "Personnes")
+
+    ![Capture d’écran montrant le locataire ClickTime avec Company et People sélectionnés.](./media/clicktime-tutorial/tic777282.png "Personnes")
 
 1. Cliquez sur **Add Person**.
-   
+
     ![Ajouter une personne](./media/clicktime-tutorial/tic777283.png "Add Person")
 
 1. Dans la section New Person, procédez comme suit :
-   
-    ![Personnes](./media/clicktime-tutorial/tic777284.png "Personnes")
-   
+
+    ![Capture d’écran montrant la section Add Person, où vous pouvez ajouter les informations de cette étape.](./media/clicktime-tutorial/tic777284.png "Personnes")
+
     a.  Dans la zone de texte **Full Name** (Nom complet), tapez le nom complet d’un utilisateur, par exemple, **Britta Simon**. 
-  
+
     b.  Dans la zone de texte **Email address** (Adresse e-mail), tapez l’e-mail de l’utilisateur, par exemple **brittasimon\@contoso.com**.
-       
+
     > [!NOTE]
     > Si vous le souhaitez, vous pouvez définir d’autres propriétés relatives à l’objet de la nouvelle personne.
-   
+
     c.  Cliquez sur **Enregistrer**.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette ClickTime dans le volet d’accès, vous devez être connecté automatiquement à l’application ClickTime pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette ClickTime dans le volet d’accès, vous devez être connecté automatiquement à l’application ClickTime pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

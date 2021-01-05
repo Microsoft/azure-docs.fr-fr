@@ -1,29 +1,24 @@
 ---
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à F5 | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et F5.
+description: Dans cet article, découvrez les étapes que vous devez effectuer pour intégrer la touche F5 à Azure Active Directory (Azure AD).
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 9c5fb47a-1c5d-437a-b4c1-dbf739eaf5e3
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 11/11/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 984fd0c7946a50922315269c87e08b1c35b74348
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 8d24ed014dd66235383b58cbcb7404aaf00f863e
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74074761"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92308957"
 ---
-# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-f5"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à F5
+# <a name="tutorial-azure-active-directory-ad-single-sign-on-sso-integration-with-f5"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory (AD) à F5
 
 Dans ce tutoriel, vous allez découvrir comment intégrer F5 à Azure Active Directory (Azure AD). Quand vous intégrez F5 à Azure AD, vous pouvez :
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer F5 à Azure Active Dir
 * Permettre à vos utilisateurs de se connecter automatiquement à F5 avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,8 +39,9 @@ Pour commencer, vous devez disposer de ce qui suit :
 
 Dans ce tutoriel, vous allez configurer et tester l’authentification unique Azure AD dans un environnement de test.
 
-* F5 prend en charge l’authentification unique lancée par le **fournisseur de services et le fournisseur d’identité**.
-* La fonctionnalité d’authentification unique F5 peut être configurée de trois façons différentes.
+F5 prend en charge l’authentification unique lancée par le **fournisseur de services et le fournisseur d’identité**.
+
+La fonctionnalité d’authentification unique F5 peut être configurée de trois façons différentes :
 
 - [Configurer l’authentification unique F5 pour une application Kerberos avancée](#configure-f5-single-sign-on-for-advanced-kerberos-application)
 
@@ -150,38 +146,38 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Vous devez importer le certificat de métadonnées dans F5 (Kerberos avancé) qui sera utilisé plus tard lors du processus d’installation. Accédez à **System > Certificate Management > Traffic Certificate Management >> SSL Certificate Lists** (Système > Gestion des certificats > Gestion des certificats de trafic > Liste des certificats SSL). Cliquez sur **Import** en haut à droite.
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure01.png)
+    ![Capture d’écran mettant en évidence le bouton Import pour importer le certificat de métadonnées.](./media/advance-kerbf5-tutorial/configure01.png)
  
 1. Pour configurer le fournisseur d’identité SAML, accédez à **Access > Federation > SAML Service Provider > Create > From Metadata** (Accès > Fédération > Fournisseur de services SAML > Créer > À partir de métadonnées).
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure02.png)
+    ![Capture d’écran qui souligne comment créer le fournisseur d’identité SAML à partir de métadonnées.](./media/advance-kerbf5-tutorial/configure02.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure03.png)
+    ![Capture d’écran montrant l’écran Create New SAML IdP Connector.](./media/advance-kerbf5-tutorial/configure03.png)
  
     ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure04.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure05.png)
+    ![Capture d’écran montrant l’écran Single Sign On Service Settings. ](./media/advance-kerbf5-tutorial/configure05.png)
  
 1. Spécifiez le certificat chargé à la tâche 3.
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure06.png)
+    ![Capture d’écran montrant l’écran Edit SAML IdP Connector.](./media/advance-kerbf5-tutorial/configure06.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure07.png)
+    ![Capture d’écran montrant l’écran Single Logout Service Settings.](./media/advance-kerbf5-tutorial/configure07.png)
 
  1. Pour configurer le fournisseur de services SAML, accédez à **Access > Federation > SAML Service Federation > Local SP Services > Create** (Accès > Fédération > Fédération de service SAML > Services de fournisseur de services locaux > Créer).
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure08.png)
+    ![Capture d’écran montrant la page où vous créez un service de fournisseur de services local.](./media/advance-kerbf5-tutorial/configure08.png)
  
 1. Cliquez sur **OK**.
 
 1. Sélectionnez la configuration de fournisseur de services, puis cliquez sur **Bind/UnBind IdP Connectors** (Lier/Dissocier les connecteurs IdP).
 
-     ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure09.png)
+     ![Capture d’écran montrant le fournisseur de services SAML.](./media/advance-kerbf5-tutorial/configure09.png)
  
  
 1. Cliquez sur **Add New Row** (Ajouter une nouvelle ligne) et sélectionnez le connecteur IdP externe (**External IdP connector**) créé à l’étape précédente.
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure10.png)
+    ![Capture d’écran mettant en évidence le bouton Add New Row.](./media/advance-kerbf5-tutorial/configure10.png)
  
 1. Pour configurer l’authentification unique Kerberos, accédez à **Access > Single Sign-on > Kerberos** (Accès > Authentification unique > Kerberos).
 
@@ -192,54 +188,54 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     • Source de domaine de l’utilisateur  `session.logon.last.domain`
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure11.png)
+    ![Capture d’écran mettant en évidence Access > Single Sign On.](./media/advance-kerbf5-tutorial/configure11.png)
 
 1. Pour configurer un profil d’accès, accédez à **Access > Profile/Policies > Access Profile (per session policies)** (Accès > Profil/stratégies > Profil d’accès (stratégies par session)).
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure12.png)
+    ![Capture d’écran mettant en évidence l’onglet Properties sous l’option de menu Profiles/Policies.](./media/advance-kerbf5-tutorial/configure12.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure13.png)
+    ![Capture d’écran montrant l’onglet SSO/Auth Domains.](./media/advance-kerbf5-tutorial/configure13.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure14.png)
+    ![Capture d’écran montrant l’onglet Access Policy.](./media/advance-kerbf5-tutorial/configure14.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure15.png)
+    ![Capture d’écran montrant l’onglet Properties de la stratégie d’accès.](./media/advance-kerbf5-tutorial/configure15.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure16.png)
+    ![Capture d’écran montrant les propriétés de l’attribution de variable.](./media/advance-kerbf5-tutorial/configure16.png)
  
     * session.logon.last.usernameUPN   expr {[mcget {session.saml.last.identity}]}
 
     * session.ad.lastactualdomain  TEXT superdemo.live
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure17.png)
+    ![Capture d’écran montrant les propriétés de requête Active Directory.](./media/advance-kerbf5-tutorial/configure17.png)
 
     * (userPrincipalName=%{session.logon.last.usernameUPN})
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure18.png)
+    ![Capture d’écran montrant l’onglet Branch Rules et la règle Check Account.](./media/advance-kerbf5-tutorial/configure18.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure19.png)
+    ![Capture d’écran montrant les zones de texte de variable personnalisée et d’expression personnalisée.](./media/advance-kerbf5-tutorial/configure19.png)
 
     * session.logon.last.username  expr { "[mcget {session.ad.last.attr.sAMAccountName}]" }
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure20.png)
+    ![Capture d’écran montrant les valeurs dans les champs SSO Token Name et SSO Token Password.](./media/advance-kerbf5-tutorial/configure20.png)
 
     * mcget {session.logon.last.username}
     * mcget {session.logon.last.password}
 
 1. Pour ajouter un nouveau nœud, accédez à **Local Traffic > Nodes > Node List > +** (Trafic local > Nœuds > Liste de nœuds).
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure21.png)
+    ![Capture d’écran mettant en évidence Local Traffic > Nodes.](./media/advance-kerbf5-tutorial/configure21.png)
  
 1. Pour créer un pool, accédez à **Local Traffic > Pools > Pool List > Create** (Trafic local > Pools > Liste de pools > Créer).
 
-     ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure22.png)
+     ![Capture d’écran mettant en évidence Local Traffic > Pools.](./media/advance-kerbf5-tutorial/configure22.png)
 
  1. Pour créer un serveur virtuel, accédez à **Local Traffic > Virtual Servers > Virtual Server List > +** (Trafic local > Serveurs virtuels > Liste des serveurs virtuels).
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure23.png)
+    ![Capture d’écran mettant en évidence Local Traffic > Virtual Servers.](./media/advance-kerbf5-tutorial/configure23.png)
 
 1. Spécifiez le profil d’accès créé à l’étape précédente.
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure24.png) 
+    ![Capture d’écran montrant où vous spécifiez le profil d’accès que vous avez créé.](./media/advance-kerbf5-tutorial/configure24.png) 
 
 ### <a name="setting-up-kerberos-delegation"></a>Configuration de la délégation Kerberos 
 
@@ -268,20 +264,20 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
     * Configurez la délégation appropriée pour le compte de délégation F5.
     * Dans l’exemple ci-dessous, le compte de délégation APM est configuré pour KCD pour l’application FRP-App1.superdemo.live.
 
-        ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure25.png)
+        ![Capture d’écran montrant les propriétés du compte de délégation APM > onglet Delegation.](./media/advance-kerbf5-tutorial/configure25.png)
 
 1. Fournissez les informations mentionnées dans [ce document de référence](https://techdocs.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-single-sign-on-11-5-0/2.html).
 
 1. Annexe : Mappages de variables BIG-IP SAML – F5 illustrés ci-dessous :
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure26.png)
+    ![Capture d’écran montrant l’onglet Overview > Active Sessions.](./media/advance-kerbf5-tutorial/configure26.png)
 
-    ![Configuration de F5 (Kerberos avancé)](./media/advance-kerbf5-tutorial/configure27.png) 
+    ![Capture d’écran montrant les variables et les clés de session.](./media/advance-kerbf5-tutorial/configure27.png) 
 
 1. Voici la liste complète des attributs SAML par défaut. GivenName est représenté à l’aide de la chaîne suivante.
 `session.saml.last.attr.name.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname`
 
-| | |
+| session | Attribut |
 | -- | -- |
 | eb46b6b6.session.saml.last.assertionID | `<TENANT ID>` |
 | eb46b6b6.session.saml.last.assertionIssueInstant  | `<ID>` |
@@ -324,19 +320,18 @@ Dans cette section, vous allez créer un utilisateur appelé B.Simon dans F5. Co
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette F5 dans le volet d’accès, vous devez être connecté automatiquement à l’application F5 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette F5 dans le volet d’accès, vous devez être connecté automatiquement à l’application F5 pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer F5 avec Azure AD](https://aad.portal.azure.com/)
 
 - [Configurer l’authentification unique F5 pour une application basée sur l’en-tête](headerf5-tutorial.md)
 
 - [Configurer l’authentification unique F5 pour une application Kerberos](kerbf5-tutorial.md)
-

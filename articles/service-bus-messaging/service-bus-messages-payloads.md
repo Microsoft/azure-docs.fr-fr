@@ -1,24 +1,14 @@
 ---
 title: Messages, charges utiles et sérialisation Azure Service Bus | Microsoft Docs
 description: Cet article fournit une vue d’ensemble des messages, des charges utiles, du routage des messages et de la sérialisation Azure Service Bus.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 11e56ae2483a254fb00e3593da7841f3f3d844f3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: d426489776dff652cbf72d640f3e74b1bc8e30d4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76759395"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85341687"
 ---
 # <a name="messages-payloads-and-serialization"></a>Messages, charges utiles et sérialisation
 
@@ -64,10 +54,10 @@ Le modèle de message abstrait permet de publier un message dans une file d’at
 
 Certaines des propriétés de répartiteur décrites ci-dessus, plus précisément [To](/dotnet/api/microsoft.azure.servicebus.message.to), [ReplyTo](/dotnet/api/microsoft.azure.servicebus.message.replyto), [ReplyToSessionId](/dotnet/api/microsoft.azure.servicebus.message.replytosessionid), [MessageId](/dotnet/api/microsoft.azure.servicebus.message.messageid), [CorrelationId](/dotnet/api/microsoft.azure.servicebus.message.correlationid) et [SessionId](/dotnet/api/microsoft.azure.servicebus.message.sessionid), sont conçues pour aider les applications à router les messages vers des destinations spécifiques. Pour illustrer ceci, considérons quelques modèles :
 
-- **Requête/réponse simples** : un serveur de publication envoie un message dans une file d’attente et attend une réponse du consommateur du message. Pour recevoir la réponse, le serveur de publication dispose d’une file d’attente à laquelle les réponses doivent être remises. L’adresse de cette file d’attente est exprimée dans la propriété **ReplyTo** du message sortant. Lorsque le consommateur répond, la valeur **MessageId** du message traité est copiée dans la propriété **CorrelationId** du message de réponse, et le message est remis à la destination indiquée par la propriété **ReplyTo**. Selon le contexte de l’application, un même message peut entraîner plusieurs réponses.
-- **Requête/réponse multidiffusion** : dans le cadre de cette variante du modèle précédent, un serveur de publication envoie le message dans une rubrique, et plusieurs abonnés sont habilités à consommer le message. Chacun de ces abonnés peut répondre de la manière précédemment décrite. Ce modèle est utilisé dans les scénarios de détection ou de liste d’appel, et le répondant s’identifie généralement avec une propriété utilisateur ou dans la charge utile. Si la propriété **ReplyTo** pointe vers une rubrique, cet ensemble de réponses de détection peut être distribué à une audience.
-- **Multiplexage** : cette fonctionnalité de session permet de multiplexer des flux de messages associés par le biais d’une file d’attente ou d’un abonnement uniques, de sorte que chaque session (ou groupe) de messages associés, identifiée par des valeurs **SessionId** correspondantes, soit routée vers un destinataire spécifique pendant que ce dernier maintient sa session verrouillée. Pour plus d’informations sur les détails des sessions, consultez [cet article](message-sessions.md).
-- **Requête/réponse multiplexées** : cette fonctionnalité de session autorise le multiplexage des réponses et permet ainsi à plusieurs serveurs de publication de partager une file d’attente de réponse. En définissant la propriété **ReplyToSessionId**, le serveur de publication peut demander aux consommateurs de copier cette valeur dans la propriété **SessionId** du message de réponse. La file d’attente ou la rubrique de publication n’ont pas besoin de prendre en charge la session. Une fois le message envoyé, le moteur de publication peut alors attendre spécifiquement qu’une session présentant la valeur **SessionId** correspondante se matérialise sur la file d’attente en acceptant de manière conditionnelle un destinataire de session. 
+- **Requête/réponse simple** : Un serveur de publication envoie un message dans une file d’attente et attend une réponse du consommateur du message. Pour recevoir la réponse, le serveur de publication dispose d’une file d’attente à laquelle les réponses doivent être remises. L’adresse de cette file d’attente est exprimée dans la propriété **ReplyTo** du message sortant. Lorsque le consommateur répond, la valeur **MessageId** du message traité est copiée dans la propriété **CorrelationId** du message de réponse, et le message est remis à la destination indiquée par la propriété **ReplyTo**. Selon le contexte de l’application, un même message peut entraîner plusieurs réponses.
+- **Requête/réponse multidiffusion** : Dans le cadre de cette variante du modèle précédent, un serveur de publication envoie le message dans une rubrique, et plusieurs abonnés sont habilités à consommer le message. Chacun de ces abonnés peut répondre de la manière précédemment décrite. Ce modèle est utilisé dans les scénarios de détection ou de liste d’appel, et le répondant s’identifie généralement avec une propriété utilisateur ou dans la charge utile. Si la propriété **ReplyTo** pointe vers une rubrique, cet ensemble de réponses de détection peut être distribué à une audience.
+- **Multiplexage** : Cette fonctionnalité de session permet de multiplexer des flux de messages associés par le biais d’une file d’attente ou d’un abonnement uniques, de sorte que chaque session (ou groupe) de messages associés, identifiée par des valeurs **SessionId** correspondantes, soit routée vers un destinataire spécifique pendant que ce dernier maintient sa session verrouillée. Pour plus d’informations sur les détails des sessions, consultez [cet article](message-sessions.md).
+- **Requête/réponse multiplexée** : Cette fonctionnalité de session autorise le multiplexage des réponses et permet ainsi à plusieurs serveurs de publication de partager une file d’attente de réponse. En définissant la propriété **ReplyToSessionId**, le serveur de publication peut demander aux consommateurs de copier cette valeur dans la propriété **SessionId** du message de réponse. La file d’attente ou la rubrique de publication n’ont pas besoin de prendre en charge la session. Une fois le message envoyé, le moteur de publication peut alors attendre spécifiquement qu’une session présentant la valeur **SessionId** correspondante se matérialise sur la file d’attente en acceptant de manière conditionnelle un destinataire de session. 
 
 Le routage à l’intérieur d’un espace de noms Service Bus peut être effectué à l’aide de règles de chaînage de transferts automatiques et d’abonnement aux rubriques. Le routage au sein des espaces de noms est réalisable [par l’intermédiaire d’Azure Logic Apps](https://azure.microsoft.com/services/logic-apps/). Comme indiqué dans la liste précédente, la propriété **To** est réservée pour une utilisation ultérieure et peut finalement être interprétée par le répartiteur avec une fonctionnalité activée spécialement. Les applications destinées à implémenter le routage doivent effectuer cette opération à l’aide des propriétés utilisateur plutôt qu’en s’appuyant sur la propriété **To** ; toutefois, le choix de cette dernière solution n’entraîne plus de problèmes de compatibilité.
 

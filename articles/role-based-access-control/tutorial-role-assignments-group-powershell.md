@@ -13,12 +13,12 @@ ms.tgt_pltfrm: ''
 ms.workload: identity
 ms.date: 02/02/2019
 ms.author: rolyon
-ms.openlocfilehash: 0d72ea23b74137e7e57f892b831b0be1b4a89de5
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 9b1a2f87498d7869b21e6a8ab44fc1f9660456ad
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735519"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94648291"
 ---
 # <a name="tutorial-grant-a-group-access-to-azure-resources-using-azure-powershell"></a>Tutoriel : Accorder à un groupe l’accès aux ressources Azure à l’aide d’Azure PowerShell
 
@@ -40,7 +40,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 Pour exécuter ce didacticiel, les éléments suivants sont nécessaires :
 
 - Autorisations pour créer des groupes dans Azure Active Directory (ou disposer d’un groupe existant)
-- [Azure Cloud Shell](/azure/cloud-shell/quickstart-powershell)
+- [Azure Cloud Shell](../cloud-shell/quickstart-powershell.md)
 
 ## <a name="role-assignments"></a>Affectations de rôles
 

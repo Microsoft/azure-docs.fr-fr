@@ -7,14 +7,20 @@ ms.author: b-trconn
 ms.service: container-service
 ms.topic: article
 ms.date: 09/25/2019
-ms.openlocfilehash: 24163adcec889e9eedc2362ff1f01f00257a98f3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: eb5c568f056a99187a0e7a78a6f89b206f2d8dec
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80063175"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220242"
 ---
-# <a name="manage-security-context-constraints-in-azure-red-hat-openshift"></a>Gérer les contraintes de contexte de sécurité dans Azure Red Hat OpenShift 
+# <a name="manage-security-context-constraints-in-azure-red-hat-openshift"></a>Gérer les contraintes de contexte de sécurité dans Azure Red Hat OpenShift
+
+> [!IMPORTANT]
+> Azure Red Hat OpenShift 3.11 sera mis hors service le 30 juin 2022. La prise en charge de la création de nouveaux clusters Azure Red Hat OpenShift 3.11 se poursuit jusqu’au 30 novembre 2020. Après la mise hors service, les clusters Azure Red Hat OpenShift 3.11 restants seront arrêtés pour éviter des failles de sécurité.
+> 
+> Suivez ce guide pour [créer un cluster Azure Red Hat OpenShift 4](tutorial-create-cluster.md).
+> Si vous avez des questions spécifiques, n’hésitez pas à [nous contacter](mailto:arofeedback@microsoft.com).
 
 Les contraintes de contexte de sécurité permettent aux administrateurs de cluster de contrôler les autorisations pour les pods. Pour en savoir plus sur ce type d’API, consultez la [documentation sur l’architecture des contraintes de contexte de sécurité](https://docs.openshift.com/container-platform/3.11/architecture/additional_concepts/authorization.html). Vous pouvez gérer les contraintes de contexte de sécurité dans votre instance comme des objets d’API normaux en utilisant l’interface de ligne de commande.
 
@@ -37,7 +43,7 @@ restricted         false     []        MustRunAs   MustRunAsRange     MustRunAs 
 
 ## <a name="examine-an-object-for-security-context-constraints"></a>Examiner les contraintes de contexte de sécurité dans un objet
 
-Pour examiner une contrainte de contexte de sécurité particulière, utilisez `oc get`, `oc describe` ou `oc edit`.  Par exemple, pour examiner la contrainte de contexte de sécurité **restricted**, utilisez cette commande :
+Pour examiner une contrainte de contexte de sécurité particulière, utilisez `oc get`, `oc describe` ou `oc edit`.  Par exemple, pour examiner la contrainte de contexte de sécurité **restricted** , utilisez cette commande :
 ```bash
 $ oc describe scc restricted
 Name:                    restricted

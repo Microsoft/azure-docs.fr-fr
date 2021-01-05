@@ -7,12 +7,12 @@ ms.service: storsimple
 ms.topic: conceptual
 ms.date: 07/25/2019
 ms.author: alkohli
-ms.openlocfilehash: 020208a8b67d248c02fc659d4dc48fa22d333839
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5970e82619667a47ba160c84df2cdeb145b0dab8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80298819"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966171"
 ---
 # <a name="storsimple-virtual-array-system-requirements"></a>Configuration système requise pour StorSimple Virtual Array
 
@@ -29,7 +29,7 @@ Les conditions requises sont les suivantes :
 
 Les informations de configuration système requise StorSimple publiées dans cet article s'appliquent uniquement aux tableaux virtuels StorSimple.
 
-* Pour les appareils de la gamme 8000, accédez à [Configuration système requise pour votre appareil de la gamme StorSimple 8000](storsimple-system-requirements.md).
+* Pour les appareils de la gamme 8000, accédez à [Configuration système requise pour votre appareil de la gamme StorSimple 8000](./storsimple-8000-system-requirements.md).
 * Pour les appareils de la gamme 7000, accédez à [Configuration système requise pour votre appareil de la gamme StorSimple 5000-7000](http://onlinehelp.storsimple.com/1_StorSimple_System_Requirements).
 
 ## <a name="software-requirements"></a>Configuration logicielle requise
@@ -84,12 +84,12 @@ La configuration logicielle requise suivante concerne les clients SMB qui accèd
 
 
 ### <a name="supported-storage-format"></a>Format de stockage pris en charge
-Seul le stockage d’objets blob de blocs Azure est pris en charge. Les objets blob de pages ne sont pas pris en charge. En savoir plus [sur les objets blob de blocs et de pages](https://docs.microsoft.com/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs).
+Seul le stockage d’objets blob de blocs Azure est pris en charge. Les objets blob de pages ne sont pas pris en charge. En savoir plus [sur les objets blob de blocs et de pages](/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs).
 
 ## <a name="networking-requirements"></a>Configuration requise du réseau
 Le tableau ci-dessous répertorie les ports qui doivent être ouverts dans votre pare-feu pour autoriser le trafic iSCSI, SMB, cloud ou de gestion. Dans ce tableau, *entrée* ou *entrant* représente la direction à partir de laquelle les demandes client entrantes accèdent à votre appareil. *Sortant* ou *Sortie* représente la direction vers laquelle votre appareil StorSimple envoie des données de façon externe, au-delà du déploiement : par exemple, sortant vers Internet.
 
-| **Numéro de port<sup>1</sup>** | **Entrant ou sortant** | **Étendue de ports** | **Obligatoire** | **Remarques** |
+| **Numéro de port <sup>1</sup>** | **Entrant ou sortant** | **Étendue de ports** | **Obligatoire** | **Remarques** |
 | --- | --- | --- | --- | --- |
 | TCP 80 (HTTP) |Sortie |WAN |Non |Le port de sortie est utilisé pour accéder à Internet afin de récupérer les mises à jour. <br></br>Le proxy web sortant est configurable par l’utilisateur. |
 | TCP 443 (HTTPS) |Sortie |WAN |Oui |Le port de sortie est utilisé pour accéder aux données dans le cloud. <br></br>Le proxy web sortant est configurable par l’utilisateur. |

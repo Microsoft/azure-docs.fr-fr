@@ -1,6 +1,6 @@
 ---
 title: Chiffrer des disques pour des groupes identiques Azure avec Azure CLI
-description: Découvrez comment utiliser Azure PowerShell pour chiffrer les instances de machine virtuelle et les disques attachés dans un groupe de machines virtuelles identiques Windows
+description: Découvrez comment utiliser Azure CLI pour chiffrer des instances de machine virtuelle et les disques attachés dans un groupe de machines virtuelles identiques Windows
 author: ju-shim
 ms.author: jushiman
 ms.topic: tutorial
@@ -8,21 +8,21 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: disks
 ms.date: 10/15/2019
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: fd8b88e55f487032f76aa379018f09c144842d60
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 6edfa1beb568bb05bd0f3f1ef9e7792ac3c3cbe2
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83200291"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94515742"
 ---
 # <a name="encrypt-os-and-attached-data-disks-in-a-virtual-machine-scale-set-with-the-azure-cli"></a>Chiffrer des disques de système d’exploitation et de données attachés dans un groupe de machines virtuelles identiques avec l’interface Azure CLI
 
 L’interface de ligne de commande (CLI) Azure permet de créer et gérer des ressources Azure à partir de la ligne de commande ou dans les scripts. Ce guide de démarrage rapide explique comment utiliser Azure CLI pour créer et chiffrer un groupe de machines virtuelles identiques. Pour plus d’informations sur l’application d’Azure Disk Encryption à un groupe de machines virtuelles identiques, consultez [Azure Disk Encryption pour les groupes de machines virtuelles identiques](disk-encryption-overview.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.31 ou une version ultérieure pour poursuivre la procédure décrite dans ce didacticiel. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.31 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-scale-set"></a>Créer un groupe identique
 
@@ -32,7 +32,7 @@ Pour pouvoir créer un groupe identique, vous devez créer un groupe de ressourc
 az group create --name myResourceGroup --location eastus
 ```
 
-Créez à présent un groupe de machines virtuelles identiques avec [az vmss create](/cli/azure/vmss). L’exemple suivant crée un groupe identique nommé *myScaleSet* qui est définit pour une mise à jour automatique lorsque des modifications sont appliquées, et qui génère des clés SSH s’il n’en existe pas dans *~/.ssh/id_rsa*. Un disque de données de 32 Go est attaché à chaque instance de machine virtuelle, et [l’extension de script personnalisé](../virtual-machines/linux/extensions-customscript.md) Azure est utilisée pour préparer les disques de données avec [az vmss extension set](/cli/azure/vmss/extension) :
+Créez à présent un groupe de machines virtuelles identiques avec [az vmss create](/cli/azure/vmss). L’exemple suivant crée un groupe identique nommé *myScaleSet* qui est définit pour une mise à jour automatique lorsque des modifications sont appliquées, et qui génère des clés SSH s’il n’en existe pas dans *~/.ssh/id_rsa*. Un disque de données de 32 Go est attaché à chaque instance de machine virtuelle, et [l’extension de script personnalisé](../virtual-machines/extensions/custom-script-linux.md) Azure est utilisée pour préparer les disques de données avec [az vmss extension set](/cli/azure/vmss/extension) :
 
 ```azurecli-interactive
 # Create a scale set with attached data disk
@@ -139,7 +139,7 @@ az vmss encryption show --resource-group myResourceGroup --name myScaleSet
 
 Une fois les instances de machine virtuelle chiffrées, le code d’état indique *EncryptionState/encrypted* comme dans l’exemple de sortie suivant :
 
-```bash
+```console
 [
   {
     "disks": [

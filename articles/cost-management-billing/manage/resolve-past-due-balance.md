@@ -5,21 +5,22 @@ author: genlin
 ms.reviewer: dcscontentpm
 tags: billing
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/13/2020
+ms.subservice: billing
+ms.topic: how-to
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: cbfd5f7bf47cdaf43df00c710bd6680373d67b09
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3c42db58017dc3a692c227f6eb454cf7b597e77b
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77200603"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91297582"
 ---
 # <a name="resolve-past-due-balance-for-your-azure-subscription"></a>Résoudre un solde impayé pour votre abonnement Azure
 
 Cet article s’applique aux clients qui se sont inscrits à Azure Online avec une carte de crédit, et qui disposent d’un compte de facturation Programme Microsoft Online Services. Découvrez comment [vérifier votre type de compte de facturation](#check-the-type-of-your-account). Si vous avez un compte de facturation Contrat client Microsoft, consultez [Payer votre facture pour Microsoft Azure](../understand/pay-bill.md) à la place.
 
-Si votre paiement n’a pas été reçu ou si nous ne pouvons pas traiter votre paiement, vous recevrez un e-mail et verrez une alerte sur le portail Azure vous informant que l’échéance du paiement de cet abonnement est dépassée. Si votre mode de paiement par défaut est la carte de crédit, l’[administrateur du compte](billing-subscription-transfer.md#whoisaa) peut régler ces frais en souffrance sur le portail Azure. Si vous payez par facture (chèque/virement bancaire), envoyez votre paiement à l’adresse indiquée au bas de la facture.
+Si votre paiement n’a pas été reçu ou si nous ne pouvons pas traiter votre paiement, vous recevrez un e-mail et verrez une alerte sur le portail Azure vous informant que l’échéance du paiement de cet abonnement est dépassée. Si votre mode de paiement par défaut est la carte de crédit, l’[administrateur du compte](../understand/subscription-transfer.md#whoisaa) peut régler ces frais en souffrance sur le portail Azure. Si vous payez par facture (chèque/virement bancaire), envoyez votre paiement à l’adresse indiquée au bas de la facture.
 
 > [!IMPORTANT]
 > * Si vous avez plusieurs abonnements associés à la même carte de crédit et qu’ils sont tous en retard de paiement, vous devez payer l’intégralité du solde restant dû en une seule fois.

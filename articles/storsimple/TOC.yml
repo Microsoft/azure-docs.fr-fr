@@ -194,7 +194,7 @@
                   items:
                     - name: "Questions fréquentes\_: Volumes épinglés localement"
                       href: storsimple-8000-local-volume-faq.md
-                - name: Contrôle d’accès en fonction du rôle
+                - name: Contrôle d'accès en fonction du rôle Azure
                   href: storsimple-8000-role-based-access-control.md
                 - name: Gérer les ACR
                   href: storsimple-8000-manage-acrs.md
@@ -323,8 +323,6 @@
               items:
                 - name: "Jusqu’aux appareils StorSimple de la série\_8000"
                   href: storsimple-8000-migrate-from-5000-7000.md
-                - name: Vers Azure File Sync
-                  href: storsimple-5000-7000-afs-migration.md
             - name: À partir d’autres appareils de stockage
               href: 'https://download.microsoft.com/download/9/4/A/94AB8165-CCC4-430B-801B-9FD40C8DA340/Migrating Data to StorSimple Volumes_09-02-15.pdf'
         - name: Update
@@ -354,19 +352,19 @@
             - name: Update 1
               href: storsimple-update1-release-notes.md
             - name: "Update\_0.3"
-              href: storsimple-february-2015-release-notes.md
+              href: ./index.yml
             - name: "Update\_0.2"
-              href: storsimple-january-2015-release-notes.md
+              href: ./index.yml
             - name: "Update\_0.1"
-              href: storsimple-october-2014-release-notes.md
+              href: ./index.yml
             - name: Version commerciale - GA
-              href: storsimple-july-2014-release-notes.md
+              href: ./index.yml
     - name: Informations de référence
       items:
         - name: API REST
-          href: 'https://docs.microsoft.com/rest/api/storsimple'
+          href: /rest/api/storsimple
         - name: Applets de commande Windows PowerShell pour StorSimple
-          href: 'https://technet.microsoft.com/library/dn688168.aspx'
+          href: /powershell/module/hcs/?viewFallbackFrom=winserverr2-ps
         - name: Modèle Resource Manager
           href: /azure/templates/microsoft.storsimple/allversions
 - name: StorSimple Data Manager
@@ -400,7 +398,7 @@
     - name: Notes de publication
       items:
         - name: Notes de publication de StorSimple
-          href: 'https://aka.ms/storsimple-virtual-array-latest-relnote'
+          href: ./storsimple-virtual-array-update-04-release-notes.md
         - name: Notes de publication pour les fournisseurs de solutions Cloud
           href: 'https://partner.microsoft.com/Support/whats-new'
         - name: "StorSimple pour les fournisseurs de solutions cloud\_: Questions fréquentes (FAQ)"
@@ -414,13 +412,13 @@
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Blog sur le marketing
-      href: 'https://blogs.technet.com/b/cis/'
+      href: /archive/blogs/cis/
     - name: Marketing
       href: 'https://azure.microsoft.com/services/storsimple/'
     - name: Options de support StorSimple
       href: storsimple-8000-support-options.md
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-storsimple.html'
+      href: /answers/topics/azure-storsimple.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/storsimple/'
     - name: Calculatrice de prix
@@ -428,7 +426,7 @@
     - name: Mises à jour de service
       href: 'https://azure.microsoft.com/updates/?product=storsimple'
     - name: Blog sur le support technique
-      href: 'https://blogs.msdn.com/b/storsimple/'
+      href: /archive/blogs/storsimple/
     - name: Mentions tierces
       href: 'https://download.microsoft.com/download/2/0/0/2003271D-69D5-4143-85A2-F1D8EA058F52/StorSimple TPNs.zip'
     - name: Videos

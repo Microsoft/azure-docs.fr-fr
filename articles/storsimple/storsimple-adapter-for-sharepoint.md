@@ -3,7 +3,7 @@ title: Installer un adaptateur StorSimple pour SharePoint | Microsoft Docs
 description: Décrit comment installer et configurer ou supprimer StorSimple Adapter pour SharePoint dans une batterie de serveurs SharePoint.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: 36c20b75-f2e5-4184-a6b5-9c5e618f79b2
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/06/2017
-ms.author: twooley
-ms.openlocfilehash: a841ce8b664389ccd8fdf55de9965f09412fecf5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 639efab3a9eaef400b3fbe3d0b134d02f458b865
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75930222"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966290"
 ---
 # <a name="install-and-configure-the-storsimple-adapter-for-sharepoint"></a>Installation et configuration de StorSimple Adapter for SharePoint
 ## <a name="overview"></a>Vue d’ensemble
@@ -53,7 +53,7 @@ L’implémentation Microsoft Azure StorSimple de RBS offre les avantages suivan
 Le déplacement du contenu blob vers le système de fichiers peut entraîner d’autres réductions de coût et avantages. Par exemple, RBS peut réduire les besoins en stockage de niveau 1 coûteux et, puisqu’il réduit la base de données de contenu, réduire le nombre de bases de données requises dans la batterie de serveurs SharePoint. Toutefois, d'autres facteurs comme les limites de taille de base de données et la quantité de contenu non RBS, peuvent également affecter les exigences de stockage. Pour plus d’informations sur les coûts et les avantages de RBS, consultez [Planification de RBS (SharePoint Foundation 2010)][4] et [Choix de l’utilisation de RBS dans SharePoint 2013][5].
 
 ### <a name="capacity-and-performance-limits"></a>Limites de capacité et de performances
-Avant d'envisager l'utilisation de RBS dans votre solution SharePoint, vous devez être conscient des limites de performances et de capacité de SharePoint Server 2010 et de SharePoint Server 2013, et comment ces limites se situent par rapport à des performances acceptables. Pour plus d'informations, consultez la rubrique [Limites des logiciels et limites pour SharePoint 2013](https://technet.microsoft.com/library/cc262787.aspx).
+Avant d'envisager l'utilisation de RBS dans votre solution SharePoint, vous devez être conscient des limites de performances et de capacité de SharePoint Server 2010 et de SharePoint Server 2013, et comment ces limites se situent par rapport à des performances acceptables. Pour plus d'informations, consultez la rubrique [Limites des logiciels et limites pour SharePoint 2013](/SharePoint/install/software-boundaries-and-limits-0).
 
 Avant de configurer RBS, passez en revue les éléments suivants :
 
@@ -226,7 +226,7 @@ Avant de désinstaller le logiciel StorSimple Adapter pour SharePoint, vous deve
 4. Sur la page **Configuration de l'adaptateur StorSimple**, cliquez sur le bouton **Désactiver** sous chaque base de données de contenu que vous souhaitez supprimer du stockage d'objets BLOB externe. 
 5. Supprimez les objets de SharePoint et téléchargez-les à nouveau.
 
-Vous pouvez aussi utiliser l’applet de commande Microsoft `RBS Migrate()` PowerShell fournie avec SharePoint. Pour plus d'informations, consultez [Migration du contenu vers ou à partir de RBS](https://technet.microsoft.com/library/ff628255.aspx).
+Vous pouvez aussi utiliser l’applet de commande Microsoft `RBS Migrate()` PowerShell fournie avec SharePoint. Pour plus d'informations, consultez [Migration du contenu vers ou à partir de RBS](/previous-versions/office/sharepoint-foundation-2010/ff628255(v=office.14)).
 
 Après avoir redéplacé les objets BLOB vers la base de données de contenu, passez à l'étape suivante : [Désinstaller l’adaptateur](#uninstall-the-adapter).
 
@@ -258,8 +258,8 @@ Après avoir déplacé les objets BLOB vers les bases de données de contenu SQL
 
 <!--Reference links-->
 [1]: https://www.microsoft.com/download/details.aspx?id=44073
-[2]: https://technet.microsoft.com/library/ff628583(v=office.15).aspx
-[3]: https://technet.microsoft.com/library/ff628583(v=office.14).aspx
-[4]: https://technet.microsoft.com/library/ff628569(v=office.14).aspx
-[5]: https://technet.microsoft.com/library/ff628583(v=office.15).aspx
-[8]: https://technet.microsoft.com/library/ff943565.aspx
+[2]: /SharePoint/administration/rbs-planning
+[3]: /previous-versions/office/sharepoint-server-2010/ff628583(v=office.14)
+[4]: /previous-versions/office/sharepoint-foundation-2010/ff628569(v=office.14)
+[5]: /SharePoint/administration/rbs-planning
+[8]: /SharePoint/administration/maintain-rbs

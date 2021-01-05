@@ -10,17 +10,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/28/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 24143f8c94a294da90be84bacfe633db0cd24f85
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0a655f355bb77d937f4daff2f8987769416ebd8c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60244491"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279667"
 ---
 # <a name="getting-started-with-azure-ad-connect-using-express-settings"></a>Prise en main d’Azure AD Connect à l’aide de paramètres express
 La **configuration rapide** d’Azure AD Connect est utilisée lorsque vous disposez d’une topologie à une forêt unique et quand la [synchronisation de hachage du mot de passe](how-to-connect-password-hash-synchronization.md) est utilisée pour l’authentification. **configuration rapide** est l’option par défaut et s’applique à la plupart des scénarios de déploiement. L’extension de votre répertoire local dans le cloud n’est plus qu’à quelques clics.
@@ -42,13 +42,13 @@ Vous pouvez voir ces étapes en action dans la section [vidéos](#videos) .
    Si vous recevez une erreur et que vous avez des problèmes de connectivité, consultez [Résoudre les problèmes de connectivité liés à Azure AD Connect](tshoot-connect-connectivity.md).
 6. Sur l’écran Connexion à AD DS, entrez le nom d’utilisateur et le mot de passe d’un compte d’administrateur d’entreprise. Vous pouvez saisir la partie domaine au format NetBios ou nom de domaine complet, c’est-à-dire FABRIKAM\administrator ou fabrikam.com\administrator. Cliquez sur **Suivant**.  
    ![Connexion à AD DS](./media/how-to-connect-install-express/connectad.png)
-7. La page [**Configuration de connexion Azure AD**](plan-connect-user-signin.md#azure-ad-sign-in-configuration) s’affiche uniquement si vous n’avez pas effectué l’étape de [vérification de vos noms de domaines](../active-directory-domains-add-azure-portal.md) dans les [conditions préalables](how-to-connect-install-prerequisites.md).
+7. La page [**Configuration de connexion Azure AD**](plan-connect-user-signin.md#azure-ad-sign-in-configuration) s’affiche uniquement si vous n’avez pas effectué l’étape de [vérification de vos noms de domaines](../fundamentals/add-custom-domain.md) dans les [conditions préalables](how-to-connect-install-prerequisites.md).
    ![Domaines non vérifiés](./media/how-to-connect-install-express/unverifieddomain.png)  
    Si vous voyez cette page, passez en revue chaque domaine marqué **Non ajouté** et **Non vérifié**. Assurez-vous que les domaines que vous utilisez ont été vérifiés dans Azure AD. Cliquez sur le symbole d’actualisation dès que vous avez vérifié vos domaines.
 8. Sur l’écran Prêt à configurer, cliquez sur **Installer**.
    * Dans la page Prêt à configurer, vous pouvez éventuellement décocher la case **Démarrer le processus de synchronisation dès que la configuration est terminée** . Vous devez décocher cette case si vous souhaitez effectuer une configuration supplémentaire, tel que le [filtrage](how-to-connect-sync-configure-filtering.md). Si vous désélectionnez cette option, l’Assistant configure la synchronisation, mais laisse le planificateur désactivé. Il n’est pas exécuté jusqu’à ce que vous l’activiez manuellement en [exécutant de nouveau l’Assistant d’installation](how-to-connect-installation-wizard.md).
    * En laissant la case **Démarrer le processus de synchronisation dès que la configuration est terminée** cochée, cela déclenche immédiatement une synchronisation complète sur Azure AD de tous les utilisateurs, groupes et contacts.
-   * Si Exchange est présent dans votre répertoire Active Directory local, vous avez également la possibilité d’activer le [**déploiement Exchange hybride**](https://technet.microsoft.com/library/jj200581.aspx). Activez cette option si vous envisagez de disposer simultanément de boîtes aux lettres Exchange dans le cloud et en local.
+   * Si Exchange est présent dans votre répertoire Active Directory local, vous avez également la possibilité d’activer le [**déploiement Exchange hybride**](/exchange/exchange-hybrid). Activez cette option si vous envisagez de disposer simultanément de boîtes aux lettres Exchange dans le cloud et en local.
      ![Azure AD Connect prêt à configurer](./media/how-to-connect-install-express/readytoconfigure.png)
 9. Une fois l’installation terminée, cliquez sur **Quitter**.
 10. Une fois l’installation terminée, déconnectez-vous puis reconnectez-vous à Windows avant d’utiliser le gestionnaire Synchronization Service Manager ou l’éditeur de règles de synchronisation.

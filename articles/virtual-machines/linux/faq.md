@@ -4,15 +4,15 @@ description: Fournit des réponses à certaines questions courantes sur les mach
 author: cynthn
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/08/2019
 ms.author: cynthn
-ms.openlocfilehash: 3c6a5e011a536cc9c34565d4f72a9bee6c6a5254
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 84cb9860f247610621bff130aff155abf222f3c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "78945163"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91274892"
 ---
 # <a name="frequently-asked-question-about-linux-virtual-machines"></a>Forum aux questions sur les machines virtuelles Linux
 Cet article traite certaines questions courantes concernant les machines virtuelles Linux créées dans Azure avec le modèle de déploiement Resource Manager. Pour la version Windows de cette rubrique, consultez les [Questions fréquences sur les machines virtuelles Windows](../windows/faq.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
@@ -21,7 +21,7 @@ Cet article traite certaines questions courantes concernant les machines virtuel
 Tous les abonnés peuvent exécuter des logiciels serveur sur une machine virtuelle Azure. Pour plus d’informations, consultez [Linux dans des distributions prises en charge par Azure](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 ## <a name="how-much-storage-can-i-use-with-a-virtual-machine"></a>Quelle quantité de stockage puis-je utiliser avec une machine virtuelle ?
-Chaque disque de données peut avoir une capacité allant jusqu’à 32 767 Gio. Le nombre de disques de données que vous pouvez utiliser dépend de la taille de la machine virtuelle. Pour en savoir plus, voir la rubrique [Tailles de machines virtuelles](sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Chaque disque de données peut avoir une capacité allant jusqu’à 32 767 Gio. Le nombre de disques de données que vous pouvez utiliser dépend de la taille de la machine virtuelle. Pour en savoir plus, voir la rubrique [Tailles de machines virtuelles](../sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 Les disques managés Azure sont les offres de stockage sur disque recommandées à utiliser avec les machines virtuelles Azure pour le stockage persistant de données. Vous pouvez utiliser plusieurs disques managés avec chaque machine virtuelle. Ces disques offrent deux types d’options de stockage durable : les disques managés Premium et les disques managés Standard. Pour obtenir des informations sur la tarification, consultez [Tarification de la fonctionnalité Disques managés](https://azure.microsoft.com/pricing/details/managed-disks).
 
@@ -30,7 +30,7 @@ Les comptes de stockage Azure peuvent aussi fournir le stockage pour le disque d
 ## <a name="how-can-i-access-my-virtual-machine"></a>Comment puis-je accéder à ma machine virtuelle ?
 Établissez une connexion à distance pour vous connecter à la machine virtuelle à l’aide de SSH (Secure Shell). Consultez les instructions sur la connexion [à partir de Windows](ssh-from-windows.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ou [à partir de Linux et Mac](mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Par défaut, SSH autorise un maximum de 10 connexions simultanées. Vous pouvez augmenter ce nombre en modifiant le fichier de configuration.
 
-Si vous rencontrez des problèmes, consultez [Dépanner les connexions Secure Shell (SSH)](troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Si vous rencontrez des problèmes, consultez [Dépanner les connexions Secure Shell (SSH)](../troubleshooting/troubleshoot-ssh-connection.md?toc=/azure/virtual-machines/linux/toc.json).
 
 ## <a name="can-i-use-the-temporary-disk-devsdb1-to-store-data"></a>Est-ce que je peux utiliser le disque temporaire (/dev/sdb1) pour stocker les données ?
 N’utilisez pas le disque temporaire (/dev/sdb1) pour stocker des données. Il s’agit uniquement d’un stockage temporaire. Vous risquez de perdre des données qui ne pourront pas être récupérées.
@@ -56,24 +56,48 @@ Les noms d’utilisateur doivent avoir une longueur de 1 à 32 caractères.
 
 Les noms d’utilisateur suivants ne sont pas autorisés :
 
-| | | | |
-|-----------------|-----------|--------------------|----------|
-| `administrator` | `admin`   | `user`             | `user1`  |
-| `test`          | `user2`   | `test1`            | `user3`  |
-| `admin1`        | `1`       | `123`              | `a`      |
-| `actuser`       | `adm`     | `admin2`           | `aspnet` |
-| `backup`        | `console` | `david`            | `guest`  |
-| `john`          | `owner`   | `root`             | `server` |
-| `sql`           | `support` | `support_388945a0` | `sys`    |
-| `test2`         | `test3`   | `user4`            | `user5`  |
-| `video`         |
+- `1`
+- `123`
+- `a`
+- `actuser`
+- `adm`
+- `admin`
+- `admin1`
+- `admin2`
+- `administrator`
+- `aspnet`
+- `backup`
+- `console`
+- `david`
+- `guest`
+- `john`
+- `owner`
+- `root`
+- `server`
+- `sql`
+- `support_388945a0`
+- `support`
+- `sys`
+- `test`
+- `test1`
+- `test2`
+- `test3`
+- `user`
+- `user1`
+- `user2`
+- `user3`
+- `user4`
+- `user5`
+- `video`
+
 
 ## <a name="what-are-the-password-requirements-when-creating-a-vm"></a>Quelles sont les exigences en matière de mot de passe lors de la création d’une machine virtuelle ?
 
 Il existe différentes exigences en termes de longueur du mot de passe, selon l’outil que vous utilisez :
  - Portail : entre 12 et 72 caractères
  - PowerShell : entre 8 et 123 caractères
- - Interface CLI : entre 12 et 123 caractères
+ - Interface CLI : entre 12 et 123 caractères
+ - Modèles Azure Resource Manager (ARM) : 12 à 72 caractères (les caractères de contrôle ne sont pas autorisés)
  
 
 Les mots de passe doivent également répondre à 3 des 4 exigences de complexité suivantes :

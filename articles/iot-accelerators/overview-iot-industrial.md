@@ -8,14 +8,17 @@ ms.topic: overview
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 3c474b57533cb6165ce7fe77defccd4cb7042b06
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 3df10c9d7630e9db76994e8e508f30adb986e0d5
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82189920"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91281811"
 ---
 # <a name="what-is-industrial-iot-iiot"></a>Définition de l’IoT industriel (IIoT)
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 L’IIoT est l’Internet des objets industriel. L’IIoT améliore l’efficacité industrielle par le biais de l’application de l’IoT dans le secteur de l’industrie. 
 
@@ -49,5 +52,4 @@ OPC Vault est une implémentation de GDS (OPC UA Global Discovery Server) qui pe
 
 Après cette présentation de l’IoT industriel et de ses composants, nous vous suggérons l’étape suivante :
 
-> [!div class="nextstepaction"]
-> [Définition d’OPC Twin](overview-opc-twin.md)
+[Définition d’OPC Twin](overview-opc-twin.md)

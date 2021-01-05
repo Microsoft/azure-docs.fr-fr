@@ -8,28 +8,28 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 4541874a9e8fc4111e5c65d02f07535c4d14f9f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 000e43a7861bd155ebbd7175db96dd323731464b
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77565976"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92518209"
 ---
 # <a name="how-to-secure-your-private-cloud-environment"></a>Sécurisation de votre environnement cloud privé
 
 Définissez le contrôle d’accès en fonction du rôle (RBAC) pour le service et le portail CloudSimple ainsi que le cloud privé à partir d’Azure.  Les utilisateurs, les groupes et les rôles pouvant accéder aux vCenter du cloud privé sont indiqués à l’aide de l’authentification unique VMware.  
 
-## <a name="rbac-for-cloudsimple-service"></a>RBAC pour le service CloudSimple
+## <a name="azure-rbac-for-cloudsimple-service"></a>Azure RBAC pour le service CloudSimple
 
 La création du service CloudSimple requiert un rôle **Propriétaire** ou **Contributeur** sur l’abonnement Azure.  Par défaut, tous les propriétaires et contributeurs peuvent créer un service CloudSimple et accéder au portail CloudSimple pour créer et gérer des clouds privés.  Seul un service CloudSimple peut être créé par région.  Pour restreindre l’accès à des administrateurs précis, suivez la procédure ci-dessous.
 
 1. Créez un service CloudSimple dans un nouveau **groupe de ressources** sur le portail Azure
-2. Indiquez le RBAC de ce groupe de ressources.
+2. Spécifiez Azure RBAC pour le groupe de ressources.
 3. Acheter des nœuds et utiliser le même groupe de ressources que celui du service CloudSimple
 
 Seuls les utilisateurs disposant de privilèges **Propriétaire** ou **Contributeur** sur le groupe de ressources peuvent voir le service CloudSimple et lancer le portail CloudSimple.
 
-Pour plus d’informations sur le RBAC, consultez la page [Qu’est-ce que le contrôle d’accès en fonction du rôle (RBAC) pour les ressources Azure ?](../role-based-access-control/overview.md)
+Pour plus d’informations, consultez [Qu’est-ce que le contrôle d’accès en fonction du rôle Azure (Azure RBAC) ?](../role-based-access-control/overview.md)
 
 ## <a name="rbac-for-private-cloud-vcenter"></a>RBAC pour le cloud privé vCenter
 

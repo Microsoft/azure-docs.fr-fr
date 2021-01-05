@@ -6,16 +6,16 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: conceptual
 ms.date: 02/28/2020
-ms.openlocfilehash: ad5cc696892764ce68d4714ead98b8afd9c37669
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5f7afe044ab4f782f2028598c2c56e75edf95860
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82144152"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92317374"
 ---
 # <a name="common-scenarios-examples-tutorials-and-walkthroughs-for-azure-logic-apps"></a>Scénarios, exemples, didacticiels et procédures pas à pas courants relatifs à Azure Logic Apps
 
-[Azure Logic Apps](../logic-apps/logic-apps-overview.md) vous permet d’orchestrer et d’intégrer différents services en fournissant [des centaines de connecteurs prêts à l’emploi](../connectors/apis-list.md), des connecteurs SQL Server ou SAP locaux à Azure Cognitive Services. Le service Logic Apps est un service « sans serveur ». Ainsi, vous n’avez pas à vous soucier de la mise à l’échelle ni des instances. Il vous suffit de définir le workflow avec un déclencheur et les actions exécutées par ce workflow. La plateforme sous-jacente gère la mise à l’échelle, la disponibilité et les performances. Le service Logic Apps se révèle d’une grande utilité pour les cas d’usage et les scénarios impliquant la coordination de plusieurs actions dans plusieurs systèmes et services.
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md) vous permet d’orchestrer et d’intégrer différents services en fournissant [des centaines de connecteurs prêts à l’emploi](../connectors/apis-list.md), des connecteurs SQL Server ou SAP à Azure Cognitive Services. Le service Logic Apps est un service « sans serveur ». Ainsi, vous n’avez pas à vous soucier de la mise à l’échelle ni des instances. Il vous suffit de définir le workflow avec un déclencheur et les actions exécutées par ce workflow. La plateforme sous-jacente gère la mise à l’échelle, la disponibilité et les performances. Le service Logic Apps se révèle d’une grande utilité pour les cas d’usage et les scénarios impliquant la coordination de plusieurs actions dans plusieurs systèmes et services.
 
 Pour vous aider à en savoir plus sur les capacités et les modèles pris en charge par Azure Logic Apps, cet article décrit des points de départ courants, des exemples et des scénarios.
 
@@ -36,10 +36,10 @@ Voici des exemples qui décrivent les déclencheurs couramment utilisés :
     * [Créer et exécuter des tâches, processus et workflows automatisés récurrents avec Azure Logic Apps](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md)
     * [Tutoriel : Créer des workflows automatisés périodiques basés sur la planification à l’aide d’Azure Logic Apps](../logic-apps/tutorial-build-schedule-recurring-logic-app-workflow.md)
 
-  * Le déclencheur **Lors de la réception d’un e-mail** permet à votre application logique de vérifier l’existence de nouveaux e-mails à partir de n’importe quel fournisseur de messagerie pris en charge par Logic Apps, par exemple, [Office 365 Outlook](../connectors/connectors-create-api-office365-outlook.md), [Gmail](https://docs.microsoft.com/connectors/gmail/), [Outlook.com](https://docs.microsoft.com/connectors/outlook/), etc.
+  * Le déclencheur **Lors de la réception d’un e-mail** permet à votre application logique de vérifier l’existence de nouveaux e-mails à partir de n’importe quel fournisseur de messagerie pris en charge par Logic Apps, par exemple, [Office 365 Outlook](../connectors/connectors-create-api-office365-outlook.md), [Gmail](/connectors/gmail/), [Outlook.com](/connectors/outlook/), etc.
 
     > [!IMPORTANT]
-    > Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans les applications logiques. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur avec seulement certains services approuvés par Google, ou vous pouvez [créer une application cliente Google à utiliser pour l’authentification avec votre connecteur Gmail](https://docs.microsoft.com/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
+    > Si vous souhaitez utiliser le connecteur Gmail, seuls les comptes professionnels G-Suite peuvent utiliser ce connecteur sans restriction dans les applications logiques. Si vous disposez d’un compte de consommateur Gmail, vous pouvez utiliser ce connecteur uniquement avec certains services approuvés par Google, ou vous pouvez [créer une application cliente Google pour servir lors de l’authentification avec votre connecteur Gmail](/connectors/gmail/#authentication-and-bring-your-own-application). Pour plus d’informations, consultez [Stratégies de confidentialité et de sécurité des données pour les connecteurs Google dans Azure Logic Apps](../connectors/connectors-google-data-security-privacy-policy.md).
 
     Pour plus d’informations, consultez les rubriques suivantes :<p>
 
@@ -105,11 +105,11 @@ Vous pouvez développer et déployer des applications logiques entièrement avec
 * [Vue d’ensemble : Automatiser le déploiement d’applications logiques](../logic-apps/logic-apps-azure-resource-manager-templates-overview.md)
 * [Créer des modèles Azure Resource Manager afin d’automatiser le déploiement pour le service Azure Logic Apps](../logic-apps/logic-apps-create-azure-resource-manager-templates.md)
 * [Déployer des modèles Azure Resource Manager pour Azure Logic Apps](../logic-apps/logic-apps-deploy-azure-resource-manager-templates.md)
-* [Exemple : Se connecter à des files d’attente Azure Service Bus à partir d’Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-service-bus-queues-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
-* [Exemple : Se connecter à des comptes Stockage Azure à partir d'Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-storage-accounts-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
-* [Exemple : Configurer une action Function App pour Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/set-up-an-azure-function-app-action-for-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
-* [Exemple : Se connecter à un compte d'intégration à partir d'Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-an-integration-account-from-azure-logic-apps-and-deploy-by-using-azure-devops-pipelines/)
-* [Exemple : Orchestrer Azure Pipelines à l’aide d’Azure Logic Apps](https://docs.microsoft.com/samples/azure-samples/azure-logic-apps-pipeline-orchestration/azure-devops-orchestration-with-logic-apps/)
+* [Exemple : Se connecter à des files d’attente Azure Service Bus à partir d’Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-service-bus-queues-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
+* [Exemple : Se connecter à des comptes Stockage Azure à partir d'Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-azure-storage-accounts-from-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
+* [Exemple : Configurer une action Function App pour Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](/samples/azure-samples/azure-logic-apps-deployment-samples/set-up-an-azure-function-app-action-for-azure-logic-apps-and-deploy-with-azure-devops-pipelines/)
+* [Exemple : Se connecter à un compte d'intégration à partir d'Azure Logic Apps et déployer avec Azure Pipelines dans Azure DevOps](/samples/azure-samples/azure-logic-apps-deployment-samples/connect-to-an-integration-account-from-azure-logic-apps-and-deploy-by-using-azure-devops-pipelines/)
+* [Exemple : Orchestrer Azure Pipelines à l’aide d’Azure Logic Apps](/samples/azure-samples/azure-logic-apps-pipeline-orchestration/azure-devops-orchestration-with-logic-apps/)
 
 ### <a name="manage"></a>Gérer
 
@@ -126,7 +126,7 @@ Vous pouvez développer et déployer des applications logiques entièrement avec
 
 ## <a name="handle-content-types-conversions-and-transformations"></a>Gérer les types de contenu, les conversions et les transformations
 
-Vous pouvez accéder à plusieurs types de contenu, les convertir et les transformer à l’aide des nombreuses fonctions du [langage de définition de flux de travail](https://aka.ms/logicappsdocs) d’Azure Logic Apps. Par exemple, vous pouvez effectuer des conversions entre une chaîne, JSON et XML avec les expressions de flux de travail `@json()` et `@xml()`. Le moteur Logic Apps préserve les types de contenu pour prendre en charge le transfert de contenu entre les services sans perte.
+Vous pouvez accéder à plusieurs types de contenu, les convertir et les transformer à l’aide des nombreuses fonctions du [langage de définition de flux de travail](./logic-apps-workflow-definition-language.md) d’Azure Logic Apps. Par exemple, vous pouvez effectuer des conversions entre une chaîne, JSON et XML avec les expressions de flux de travail `@json()` et `@xml()`. Le moteur Logic Apps préserve les types de contenu pour prendre en charge le transfert de contenu entre les services sans perte.
 
 * [Gérer les types de contenu dans Azure Logic Apps](../logic-apps/logic-apps-content-type.md), comme `application/`, `application/octet-stream` et `multipart/formdata`
 * [Guide de référence sur l’utilisation des fonctions dans les expressions pour Azure Logic Apps et Power Automate](../logic-apps/workflow-definition-language-functions-reference.md)
@@ -143,7 +143,7 @@ Azure Logic Apps s’intègre à de nombreux services, comme Azure Functions, la
 * [Tutoriel : Créer un tableau de bord social reposant sur l’intelligence artificielle à l’aide de Logic Apps et Power BI](https://aka.ms/logicappsdemo)
 * [Tutoriel : Superviser les modifications d’une machine virtuelle avec Azure Event Grid et Azure Logic Apps](../event-grid/monitor-virtual-machine-changes-event-grid-logic-app.md)
 * [Tutoriel : Notifications et surveillance à distance IoT à l'aide d'Azure Logic Apps, avec connexion de votre hub IoT et de votre boîte aux lettres](../iot-hub/iot-hub-monitoring-notifications-with-azure-logic-apps.md)
-* [Blog : Appeler des services SOAP à l’aide d’Azure Logic Apps](https://blogs.msdn.microsoft.com/logicapps/2016/04/07/using-soap-services-with-logic-apps/)
+* [Blog : Appeler des services SOAP à l’aide d’Azure Logic Apps](/archive/blogs/logicapps/using-soap-services-with-logic-apps)
 
 ## <a name="end-to-end-scenarios"></a>Scénarios de bout en bout
 

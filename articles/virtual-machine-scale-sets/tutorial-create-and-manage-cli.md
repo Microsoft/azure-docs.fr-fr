@@ -1,5 +1,5 @@
 ---
-title: Tutoriel - Créer et gérer un groupe de machines virtuelles identiques Azure
+title: 'Tutoriel : Créer et gérer un groupe de machines virtuelles identiques – Azure CLI'
 description: Découvrez comment utiliser Azure CLI pour créer un groupe de machines virtuelles identiques, et effectuer certaines tâches de gestion courantes comme le démarrage et l’arrêt d’une instance, ou la modification de la capacité du groupe identique.
 author: ju-shim
 ms.author: jushiman
@@ -8,15 +8,15 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 03/27/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 252b3b3ecf2de24410d046473ee2cfd2215254a9
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 0f94823b958ae5f95789dd4ef9a62057bdf764a8
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198221"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517459"
 ---
-# <a name="tutorial-create-and-manage-a-virtual-machine-scale-set-with-the-azure-cli"></a>Tutoriel : Créer et gérer un groupe de machines virtuelles identiques avec Azure CLI
+# <a name="tutorial-create-and-manage-a-virtual-machine-scale-set-with-the-azure-cli"></a>Tutoriel : Créer et gérer un groupe de machines virtuelles identiques avec Azure CLI
 Un groupe de machines virtuelles identiques vous permet de déployer et de gérer un ensemble de machines virtuelles identiques prenant en charge la mise à l’échelle automatique. Tout au long du cycle de vie du groupe de machines virtuelles identiques, vous devrez peut-être exécuter une ou plusieurs tâches de gestion. Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
@@ -26,11 +26,11 @@ Un groupe de machines virtuelles identiques vous permet de déployer et de gére
 > * Mettre un groupe identique à l’échelle manuellement
 > * Effectuer des tâches courantes de gestion de groupe identique
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.29 ou une version ultérieure pour poursuivre la procédure décrite dans ce didacticiel. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+- Cet article nécessite la version 2.0.29 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
@@ -167,6 +167,9 @@ CentOS   OpenLogic   7.3   OpenLogic:CentOS:7.3:7.3.20170925   7.3.20170925
 
 Pour déployer un groupe identique qui utilise une image spécifique, servez-vous de la valeur de la colonne *Urn*. Lorsque vous spécifiez l’image, le numéro de version de l’image peut être remplacé par la valeur *latest* qui sélectionne la dernière version de la distribution. Dans l’exemple suivant, l’argument `--image` permet de spécifier la version la plus récente d’une image CentOS 7.3.
 
+> [!IMPORTANT]
+> Nous vous recommandons d’utiliser la *toute dernière* version de l’image. Spécifiez « latest » pour utiliser la version la plus récente d’une image disponible au moment du déploiement. Notez que, même si vous utilisez « latest », l’image de machine virtuelle ne sera pas automatiquement mise à jour après le déploiement, quand bien même une nouvelle version serait disponible.
+
 Comme la création et la configuration de toutes les ressources et les instances de machine virtuelle du groupe identique prennent quelques minutes, il est inutile de déployer le groupe identique suivant :
 
 ```azurecli-interactive
@@ -187,12 +190,12 @@ Le tableau suivant classe les tailles courantes de machine virtuelle en fonction
 
 | Type                     | Tailles courantes           |    Description       |
 |--------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| [Usage général](../virtual-machines/linux/sizes-general.md)         |Dsv3, Dv3, DSv2, Dv2, DS, D, Av2, A0-7| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
-| [Optimisé pour le calcul](../virtual-machines/linux/sizes-compute.md)   | Fs, F             | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
-| [Mémoire optimisée](../virtual-machines/linux/sizes-memory.md)    | Esv3, Ev3, M, GS, G, DSv2, DS, Dv2, D   | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
-| [Optimisé pour le stockage](../virtual-machines/linux/sizes-storage.md)      | Ls                | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
-| [GPU](../virtual-machines/linux/sizes-gpu.md)          | NV, NC            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
-| [Hautes performances](../virtual-machines/linux/sizes-hpc.md) | H, A8-11          | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). 
+| [Usage général](../virtual-machines/sizes-general.md)         |Dsv3, Dv3, DSv2, Dv2, DS, D, Av2, A0-7| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md)   | Fs, F             | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md)    | Esv3, Ev3, M, GS, G, DSv2, DS, Dv2, D   | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
+| [Optimisé pour le stockage](../virtual-machines/sizes-storage.md)      | Ls                | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
+| [GPU](../virtual-machines/sizes-gpu.md)          | NV, NC            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
+| [Hautes performances](../virtual-machines/sizes-hpc.md) | H, A8-11          | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). 
 
 ### <a name="find-available-vm-instance-sizes"></a>Rechercher des tailles d’instance de machine virtuelle disponibles
 Pour afficher la liste des tailles d’instance de machine virtuelle disponibles dans une région particulière, utilisez la commande [az vm list-sizes](/cli/azure/vm).

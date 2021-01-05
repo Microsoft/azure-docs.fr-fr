@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: jairoc
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e168deea1ba442d48f483264c1e97ce618040f18
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a4e8ec75d6610e19f241d2047518c3a43132a6e
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74379118"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93079017"
 ---
 # <a name="troubleshooting-hybrid-azure-active-directory-joined-down-level-devices"></a>Dépanner des appareils hybrides de bas niveau joints à Azure Active Directory 
 
@@ -40,7 +40,6 @@ Cet article vous fournit des conseils sur la façon de résoudre les problèmes 
 
 - Le fonctionnement de la jonction Azure AD Hybride pour appareils Windows de bas niveau est légèrement différent dans Windows 10. De nombreux clients ne se rendent pas compte qu’ils ont besoin d’AD FS (pour les domaines fédérés) ou de l’authentification unique transparente configurée (pour les domaines managés).
 - Pour les clients disposant de domaines fédérés : si le point de connexion de service a été configuré de sorte qu’il pointe vers le nom de domaine géré (par exemple contoso.onmicrosoft.com au lieu de contoso.com), la jonction Azure AD Hybride pour appareils Windows de bas niveau ne fonctionne pas.
-- Pour le moment, le nombre maximal d’appareils par utilisateur s’applique également aux appareils de bas niveau joints par Azure AD Hybride. 
 - Le même appareil physique apparaît plusieurs fois dans Azure AD si plusieurs utilisateurs de domaine se connectent aux appareils de bas niveau joints par Azure AD Hybride.  Par exemple, si *jdoe* et *jharnett* se connectent à un appareil, une inscription (DeviceID) distincte est créée pour chacun d’eux dans l’onglet d’informations **UTILISATEUR**. 
 - Vous pouvez également obtenir plusieurs entrées pour un appareil dans l’onglet Informations utilisateur en raison d’une réinstallation du système d’exploitation ou d’une réinscription manuelle.
 - L’inscription / jointure d’appareils initiale est configurée pour effectuer une tentative à la connexion ou au verrouillage / déverrouillage. Un délai de cinq minutes peut être déclenché par une tâche du Planificateur de tâches. 
@@ -56,7 +55,7 @@ Cet article vous fournit des conseils sur la façon de résoudre les problèmes 
 
 Cette commande affiche une boîte de dialogue qui vous donne des détails sur l’état de la jonction.
 
-![Workplace Join pour Windows](./media/troubleshoot-hybrid-join-windows-legacy/01.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-legacy/01.png" alt-text="Capture d’écran de la boîte de dialogue Workplace Join for Windows. Le texte qui contient une adresse e-mail indique qu’un certain appareil est joint à un espace de travail." border="false":::
 
 ## <a name="step-2-evaluate-the-hybrid-azure-ad-join-status"></a>Étape 2 : Évaluer l’état de la jointure Azure AD hybride 
 
@@ -66,7 +65,7 @@ Si l’appareil n’a pas été joint par Azure AD Hybride, vous pouvez tenter d
 
 - Une mauvaise configuration d’AD FS ou d’Azure AD, ou des problèmes de réseau
 
-    ![Workplace Join pour Windows](./media/troubleshoot-hybrid-join-windows-legacy/02.png)
+    :::image type="content" source="./media/troubleshoot-hybrid-join-windows-legacy/02.png" alt-text="Capture d’écran de la boîte de dialogue Workplace Join for Windows. Le texte signale qu’une erreur s’est produite lors de l’authentification du compte." border="false":::
     
    - Autoworkplace.exe ne peut pas s’authentifier sans assistance auprès d’Azure AD ou d’AD FS. Cela peut être dû à l’absence ou à une mauvaise configuration d’AD FS (pour les domaines fédérés) ou de l’authentification unique transparente d’Azure AD (pour les domaines managés), ou encore à des problèmes de réseau. 
    - Le problème peut être lié au fait que l’authentification multifacteur (MFA) est activée/configurée pour l’utilisateur, alors que le paramètre WIAORMUTLIAUTHN n’est pas configuré sur le serveur AD FS. 
@@ -77,7 +76,7 @@ Si l’appareil n’a pas été joint par Azure AD Hybride, vous pouvez tenter d
    - Votre organisation utilise l’authentification unique Azure AD sans interruption, `https://autologon.microsoftazuread-sso.com` ou `https://aadg.windows.net.nsatc.net` ne sont pas présents dans les paramètres intranet Internet Explorer de l’appareil et l’option **Autoriser les mises à jour de la barre d’état via le script** n’est pas activée pour la zone Intranet.
 - Vous n’êtes pas connecté en tant qu’utilisateur du domaine
 
-   ![Workplace Join pour Windows](./media/troubleshoot-hybrid-join-windows-legacy/03.png)
+   :::image type="content" source="./media/troubleshoot-hybrid-join-windows-legacy/03.png" alt-text="Capture d’écran de la boîte de dialogue Workplace Join for Windows. Le texte signale qu’une erreur s’est produite lors de la vérification du compte." border="false":::
 
    Cette situation peut se produire pour différentes raisons :
 
@@ -85,13 +84,13 @@ Si l’appareil n’a pas été joint par Azure AD Hybride, vous pouvez tenter d
    - Le client ne peut pas se connecter à un contrôleur de domaine.    
 - Un quota a été atteint.
 
-    ![Workplace Join pour Windows](./media/troubleshoot-hybrid-join-windows-legacy/04.png)
+    :::image type="content" source="./media/troubleshoot-hybrid-join-windows-legacy/04.png" alt-text="Capture d’écran de la boîte de dialogue Workplace Join for Windows. Le texte signale une erreur, car l’utilisateur a atteint le nombre maximal d’appareils joints." border="false":::
 
 - Le service ne répond pas. 
 
-    ![Workplace Join pour Windows](./media/troubleshoot-hybrid-join-windows-legacy/05.png)
+    :::image type="content" source="./media/troubleshoot-hybrid-join-windows-legacy/05.png" alt-text="Capture d’écran de la boîte de dialogue Workplace Join for Windows. Le texte signale qu’une erreur s’est produite parce que le serveur n’a pas répondu." border="false":::
 
-Vous pouvez également trouver les informations d’état dans le journal des événements sous **Applications and Services Log\Microsoft-Workplace Join**.
+Vous pouvez aussi trouver ces informations dans le journal des événements, sous : **Applications and Services Log\Microsoft-Workplace Join**
   
 **Voici les causes les plus courantes d’échec d’une jointure Azure AD hybride :** 
 

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Druva pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateurs sur Druva.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: a276c004-9f71-4efc-8cca-1f615760249f
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: 3d1bb0bcbc0df98d7a884004cf96fe9810589185
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2ef564ae61aab10e1d100ccaf2547248e4a6a8e8
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058108"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352165"
 ---
 # <a name="tutorial-configure-druva-for-automatic-user-provisioning"></a>Tutoriel : Configurer Druva pour le provisionnement automatique d’utilisateurs
 
@@ -62,15 +58,15 @@ Avant de configurer Druva pour le provisionnement automatique d’utilisateurs a
 
 2. Accédez à **Manage (Gérer)**  > **Deployments (Déploiements)**  > **Users (Utilisateurs)** .
 
-    ![Druva : ajouter SCIM](media/druva-provisioning-tutorial/manage.png)
+    :::image type="content" source="media/druva-provisioning-tutorial/manage.png" alt-text="Capture d’écran de la console d’administration Druva. L’option Manage est mise en évidence et le menu Manage est visible. Dans ce menu, sous Deployments, Users est mis en évidence." border="false":::
 
 3.  Accédez aux **Paramètres**. Cliquez sur **Generate Token** (Générer un jeton).
 
-    ![Druva : ajouter SCIM](media/druva-provisioning-tutorial/settings.png)
+    :::image type="content" source="media/druva-provisioning-tutorial/settings.png" alt-text="Capture d’écran d’une page dans la console d’administration Druva. Settings est mis en évidence et l’onglet Settings est ouvert. Le bouton Generate token est mis en évidence." border="false":::
 
 4.  Copiez la valeur du **jeton d’authentification**. Cette valeur devra être entrée dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application Druva dans le Portail Azure.
     
-    ![Druva : ajouter SCIM](media/druva-provisioning-tutorial/auth.png)
+    :::image type="content" source="media/druva-provisioning-tutorial/auth.png" alt-text="Capture d’écran de la page Create token dans la console d’administration Druva. Un lien nommé Copy Token est disponible pour la copie de la valeur du jeton d’authentification." border="false":::
 
 ## <a name="add-druva-from-the-gallery"></a>Ajouter Druva à partir de la galerie
 
@@ -99,7 +95,7 @@ Pour configurer Druva pour le provisionnement automatique d’utilisateurs avec 
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Druva en fonction des affectations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Druva en suivant les instructions fournies dans le [tutoriel sur l’authentification unique Druva](druva-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Druva en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Druva](druva-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-druva-in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour Druva dans Azure AD :
 
@@ -113,11 +109,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5.  Sous la section Informations d’identification de l’administrateur, entrez `https://apis.druva.com/insync/scim` dans le champ **URL de locataire**. Entrez la valeur du **jeton d’authentification** dans le champ **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Druva. Si la connexion échoue, vérifiez que votre compte Druva dispose des autorisations d’administrateur, puis réessayez.
 

@@ -3,17 +3,20 @@ title: Fonctions définies par l’utilisateur dans Azure Cosmos DB
 description: Découvrez les fonctions définies par l’utilisateur dans Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 04/09/2020
 ms.author: tisande
-ms.openlocfilehash: 455f44fb365152b75a3811563b646c6243f686db
-ms.sourcegitcommit: ae3d707f1fe68ba5d7d206be1ca82958f12751e8
+ms.custom: devx-track-js
+ms.openlocfilehash: 98698264f0beb25a8b4f74861f1150ae889d7115
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81011121"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96546333"
 ---
 # <a name="user-defined-functions-udfs-in-azure-cosmos-db"></a>Fonctions définies par l’utilisateur dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 L’API SQL prend en charge les fonctions définies par l’utilisateur. Les fonctions scalaires définies par l’utilisateur vous permettent de passer zéro ou plusieurs arguments et de retourner un résultat contenant un seul argument. L’API vérifie que chaque argument est une valeur JSON légale.  
 
@@ -141,4 +144,4 @@ Comme le montrent les exemples précédents, les fonctions définies par l’uti
 
 - [Présentation d’Azure Cosmos DB](introduction.md)
 - [Fonctions système](sql-query-system-functions.md)
-- [Agrégats](sql-query-aggregates.md)
+- [Agrégats](sql-query-aggregate-functions.md)

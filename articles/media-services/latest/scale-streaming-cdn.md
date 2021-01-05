@@ -4,22 +4,24 @@ titleSuffix: Azure Media Services
 description: Apprenez-en davantage sur la diffusion de contenu avec l’intégration de CDN, ainsi que la prérécupération et Origin-Assist CDN-Prefetch.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 02/13/2020
-ms.author: juliako
-ms.openlocfilehash: 4ed8ada306720b7a8b44ddd59cefe399238c906a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 6bdf6015ca5633c77280111a55055a7394cee5bd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128069"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001369"
 ---
 # <a name="stream-content-with-cdn-integration"></a>Diffuser du contenu avec l’intégration de CDN
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Le réseau de diffusion de contenu (CDN) Azure offre aux développeurs une solution globale pour la distribution rapide de contenu haut débit aux utilisateurs en mettant en cache leur contenu sur des nœuds physiques disposés stratégiquement dans le monde entier.  
 
@@ -29,14 +31,19 @@ Le contenu qui est souvent demandé est fourni directement par le cache CDN tan
 
 Vous devez également prendre en compte le fonctionnement du streaming adaptif. Chaque fragment vidéo individuel est mis en cache comme entité propre. Par exemple, imaginez la première fois qu’une vidéo est visionnée. Si le viewer ne regarde que quelques secondes ici et là, seuls les fragments vidéo associés à ce que la personne a regardé sont mis en cache dans CDN. Avec le streaming adaptatif, vous avez en général 5 à 7 vitesses de transmission de vidéo différentes. Si une personne regarde à une certaine vitesse de transmission et qu’une autre personne regarde à une autre vitesse de transmission, le contenu qu’ils regardent chacun est mis en cache séparément dans le CDN. Même si deux personnes regardent du contenu à la même vitesse de transmission, leur streaming peut se faire via des protocoles différents. Chaque protocole (HLS, MPEG-DASH, Smooth Streaming) est mis en cache séparément. Ainsi, chaque vitesse de transmission et chaque protocole sont mis en cache séparément, et seuls les fragments vidéo qui ont été demandés sont mis en cache.
 
-Pour décider d’activer ou non CDN sur le [point de terminaison de streaming](streaming-endpoint-concept.md) Media Services, prenez en compte le nombre de viewers prévus. CDN n’est utile que si vous prévoyez un grand nombre de viewers pour votre contenu. Si vous prévoyez une concurrence maximale inférieure à 500 viewers, il est recommandé de désactiver CDN, car celui-ci se met à l’échelle de façon optimale lorsque la concurrence est élevée.
+À l’exception de l’environnement de test, nous vous recommandons d’activer le CDN pour les points de terminaison de streaming Standard et Premium. Chaque type de point de terminaison de streaming a une limite de débit prise en charge différente.
+Il est difficile d’effectuer un calcul précis quant au nombre maximal de flux simultanés pris en charge par un point de terminaison de streaming, car différents facteurs doivent être pris en compte. notamment :
+
+- Vitesse de transmission maximale utilisée pour le streaming
+- Comportement du lecteur avant la mise en mémoire tampon et comportement de commutation. Les lecteurs tentent de lire en rafale les segments en provenance d’une origine, et utilisent la vitesse de chargement pour calculer la commutation à débit adaptatif. Si un point de terminaison de streaming est proche de la saturation, les temps de réponse peuvent varier et les lecteurs commencent à basculer vers une qualité inférieure. Ceci réduisant la charge sur les lecteurs de point de terminaison de streaming, le retour à une qualité supérieure crée des déclencheurs de commutation indésirables.
+Globalement, il est possible d’estimer de manière sécurisée le nombre maximal de flux simultanés en prenant le débit maximal de point de terminaison de streaming et en le divisant par la vitesse de transmission maximale (en supposant que tous les lecteurs utilisent la vitesse de transmission la plus élevée). Par exemple, vous pouvez avoir un point de terminaison de streaming Standard qui est limité à 600 Mbits/s et une vitesse de transmission la plus élevée de 3 Mbits/s. Dans ce cas, environ 200 flux simultanés sont pris en charge à la vitesse de transmission la plus élevée. N’oubliez pas de tenir compte des exigences de bande passante audio. Bien qu’un flux audio ne puisse être diffusé qu’à 128 Kbits/s, le streaming total augmente rapidement lorsque vous le multipliez par le nombre de flux simultanés.
 
 Cette rubrique explique comment activer l’[intégration CDN](#enable-azure-cdn-integration). Elle explique également la prérécupération (mise en cache active) et le concept[Origin-Assist CDN-Prefetch](#origin-assist-cdn-prefetch).
 
 ## <a name="considerations"></a>Considérations
 
-* Le [point de terminaison de streaming](streaming-endpoint-concept.md) `hostname` et l’URL de diffusion en continu restent identiques, que vous activiez CDN ou non.
-* Si vous avez besoin de tester votre contenu avec ou sans CDN, créez un autre point de terminaison de streaming pour lequel CDN n’est pas activé.
+- Le [point de terminaison de streaming](streaming-endpoint-concept.md) `hostname` et l’URL de diffusion en continu restent identiques, que vous activiez CDN ou non.
+- Si vous avez besoin de tester votre contenu avec ou sans CDN, créez un autre point de terminaison de streaming pour lequel CDN n’est pas activé.
 
 ## <a name="enable-azure-cdn-integration"></a>Activer l’intégration au CDN Azure
 
@@ -47,7 +54,7 @@ Cette rubrique explique comment activer l’[intégration CDN](#enable-azure-cd
 
 Une fois le point de terminaison de streaming configuré et le CDN activé, il existe un délai d’attente défini sur Media Services avant la mise à jour des DNS pour le mappage du point de terminaison de streaming au point de terminaison CDN.
 
-Si vous souhaitez activer/désactiver le CDN ultérieurement, votre point de terminaison de streaming doit avoir l’état **Arrêté**. Il peut s’écouler jusqu’à deux heures avant que l’intégration d’Azure CDN soit active et que les modifications soient actives sur tous les comptes POP CDN. Toutefois, vous pouvez démarrer votre point de terminaison de streaming et le flux sans interruptions depuis le point de terminaison de streaming. Une fois l’intégration terminée, le flux est remis à partir du CDN. Pendant la durée de l’approvisionnement, votre point de terminaison de streaming est en état de **démarrage** et vous pouvez observer une dégradation des performances.
+Si vous souhaitez activer/désactiver le CDN ultérieurement, votre point de terminaison de streaming doit avoir l’état **Arrêté**. Une fois le point de terminaison de streaming démarré, il peut s’écouler jusqu’à quatre heures avant que l’intégration d’Azure CDN soit activée et que les modifications soient actives sur tous les comptes POP CDN. Toutefois, vous pouvez démarrer votre point de terminaison de streaming et le flux sans interruptions depuis le point de terminaison de streaming. Une fois l’intégration terminée, le flux est remis à partir du CDN. Pendant la durée de l’approvisionnement, votre point de terminaison de streaming est en état de **démarrage** et vous pouvez observer une dégradation des performances.
 
 Lorsque le point de terminaison de streaming Standard est créé, il est configuré par défaut avec Standard Verizon. Vous pouvez configurer les fournisseurs Premium Verizon ou Standard Akamai à l’aide des API REST.
 

@@ -3,25 +3,25 @@ title: Scénarios courants de gestion des droits d’utilisation – Azure AD
 description: Découvrez les grandes étapes à suivre dans les scénarios courants de la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/28/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d9d259c6e2a6ac9ced5f9a1c29d4aec08010f4dc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c0f45a1481661aa350815560d795ab7411f99545
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78190549"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92317846"
 ---
 # <a name="common-scenarios-in-azure-ad-entitlement-management"></a>Scénarios courants de la gestion des droits d’utilisation Azure AD
 
@@ -119,24 +119,24 @@ Il y a plusieurs façons de configurer la gestion des droits d’utilisation pou
 1. [Regardez la vidéo : Gestion quotidienne : Les choses ont changé](https://www.microsoft.com/videoplayer/embed/RE3LD4Z)
 1. Ouvrir le package d’accès
 1. [Ouvrir les paramètres de cycle de vie](entitlement-management-access-package-lifecycle-policy.md#open-lifecycle-settings)
-1. [Mettre à jour les paramètres d’expiration](entitlement-management-access-package-lifecycle-policy.md#lifecycle)
+1. [Mettre à jour les paramètres d’expiration](entitlement-management-access-package-lifecycle-policy.md#lifecycle) 
 
 ### <a name="access-package-manager-update-how-access-is-approved-for-a-project"></a>Gestionnaire de package d’accès : Mettre à jour la manière dont l’accès est approuvé pour un projet
 
 1. [Regardez la vidéo : Gestion quotidienne : Les choses ont changé](https://www.microsoft.com/videoplayer/embed/RE3LD4Z)
-1. [Ouvrir une stratégie existante de paramètres de demande et d’approbation](entitlement-management-access-package-request-policy.md#open-an-existing-policy-of-request-and-approval-settings)
-1. [Mettre à jour les paramètres d’approbation](entitlement-management-access-package-request-policy.md#approval)
+1. [Ouvrir une stratégie existante de paramètres de demande](entitlement-management-access-package-request-policy.md#open-an-existing-access-package-and-add-a-new-policy-of-request-settings)
+1. [Mettre à jour les paramètres d’approbation](entitlement-management-access-package-approval-policy.md#change-approval-settings-of-an-existing-access-package)
 
 ### <a name="access-package-manager-update-the-people-for-a-project"></a>Gestionnaire de package d’accès : Mettre à jour les personnes d’un projet
 
 1. [Regardez la vidéo : Gestion quotidienne : Les choses ont changé](https://www.microsoft.com/videoplayer/embed/RE3LD4Z)
 1. [Supprimer les utilisateurs qui n’ont plus besoin d’un accès](entitlement-management-access-package-assignments.md)
-1. [Ouvrir une stratégie existante de paramètres de demande et d’approbation](entitlement-management-access-package-request-policy.md#open-an-existing-policy-of-request-and-approval-settings)
+1. [Ouvrir une stratégie existante de paramètres de demande](entitlement-management-access-package-request-policy.md#open-an-existing-access-package-and-add-a-new-policy-of-request-settings)
 1. [Ajouter des utilisateurs qui ont besoin d’un accès](entitlement-management-access-package-request-policy.md#for-users-in-your-directory)
 
 ### <a name="access-package-manager-directly-assign-specific-users-to-an-access-package"></a>Gestionnaire de package d’accès : Affecter directement des utilisateurs spécifiques à un package d’accès
 
-1. [Si les utilisateurs ont besoin de différents paramètres de cycle de vie, ajouter une nouvelle stratégie au package d’accès](entitlement-management-access-package-request-policy.md#add-a-new-policy-of-request-and-approval-settings)
+1. [Si les utilisateurs ont besoin de différents paramètres de cycle de vie, ajouter une nouvelle stratégie au package d’accès](entitlement-management-access-package-request-policy.md#open-an-existing-access-package-and-add-a-new-policy-of-request-settings)
 1. [Affecter directement des utilisateurs spécifiques au package d’accès](entitlement-management-access-package-assignments.md#directly-assign-a-user)
 
 ## <a name="assignments-and-reports"></a>Affectations et rapports
@@ -154,7 +154,7 @@ Il y a plusieurs façons de configurer la gestion des droits d’utilisation pou
 
 ## <a name="programmatic-administration"></a>Administration programmatique
 
-Vous pouvez également gérer les packages, les catalogues, les stratégies, les requêtes et les affectations d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié dans une application qui a l’autorisation déléguée `EntitlementManagement.ReadWrite.All` peut appeler l’[API de gestion des droits d’utilisation](https://docs.microsoft.com/graph/api/resources/entitlementmanagement-root?view=graph-rest-beta).
+Vous pouvez également gérer les packages, les catalogues, les stratégies, les requêtes et les affectations d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié dans une application qui a l’autorisation déléguée `EntitlementManagement.ReadWrite.All` peut appeler l’[API de gestion des droits d’utilisation](/graph/tutorial-access-package-api?view=graph-rest-beta).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

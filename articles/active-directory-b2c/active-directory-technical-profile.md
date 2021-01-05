@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 03/26/2020
+ms.date: 12/11/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 7db47eda47850c1c080b6a49256c8a0b37bb0d3c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3f92bfe98a45117264c957481a75493de652abc9
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80330382"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508099"
 ---
 # <a name="define-an-azure-active-directory-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique Azure Active Directory dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -41,7 +41,7 @@ Faisant suite au [pack de démarrage de stratégie personnalisée](custom-policy
 
 L’exemple suivant montre le profil technique **AAD-Common** :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-Common">
   <DisplayName>Azure Active Directory</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureActiveDirectoryProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -64,13 +64,13 @@ Pour lire, mettre à jour ou supprimer un compte d’utilisateur existant, la re
 
 Pour créer un compte d’utilisateur, la revendication d’entrée est une clé qui identifie de façon unique un compte local ou fédéré. Par exemple, un compte local : **signInNames.emailAddress** ou **signInNames.userName**. Pour un compte fédéré : **alternativeSecurityId**.
 
-L’élément [InputClaimsTransformations](technicalprofiles.md#inputclaimstransformations) peut contenir une collection d’éléments de transformation de revendications d’entrée qui sont utilisés pour modifier la revendication d’entrée ou en générer une nouvelle.
+L’élément [InputClaimsTransformations](technicalprofiles.md#input-claims-transformations) peut contenir une collection d’éléments de transformation de revendications d’entrée qui sont utilisés pour modifier la revendication d’entrée ou en générer une nouvelle.
 
 ## <a name="outputclaims"></a>OutputClaims
 
 L’élément **OutputClaims** contient une liste de revendications retournée par le profil technique Azure AD. Il se peut que vous deviez mapper le nom de la revendication définie dans votre stratégie au nom défini dans Azure Active Directory. Vous pouvez également inclure des revendications qui ne sont pas retournées par Azure Active Directory, pour autant que vous définissiez l’attribut `DefaultValue`.
 
-L’élément [OutputClaimsTransformations](technicalprofiles.md#outputclaimstransformations) peut contenir une collection d’éléments **OutputClaimsTransformation** qui sont utilisés pour modifier les revendications de sortie ou en générer de nouvelles.
+L’élément [OutputClaimsTransformations](technicalprofiles.md#output-claims-transformations) peut contenir une collection d’éléments **OutputClaimsTransformation** qui sont utilisés pour modifier les revendications de sortie ou en générer de nouvelles.
 
 Par exemple, le profil technique **AAD-UserWriteUsingLogonEmail** crée un compte local et retourne les revendications suivantes :
 
@@ -96,7 +96,7 @@ L’élément **PersistedClaims** contient toutes les valeurs qui doivent être 
 
 Le profil technique **AAD-UserWriteUsingLogonEmail**, qui crée un nouveau compte local, conserve les revendications suivantes :
 
-```XML
+```xml
   <PersistedClaims>
     <!-- Required claims -->
     <PersistedClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames.emailAddress" />
@@ -126,7 +126,7 @@ Le nom de la revendication est le nom de l’attribut Azure AD, sauf si l’attr
 
 L’opération **Read** lit les données sur un seul compte d’utilisateur. Le profil technique suivant lit les données d’un compte d’utilisateur à l’aide de l’objectId de l’utilisateur :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-UserReadUsingObjectId">
   <Metadata>
     <Item Key="Operation">Read</Item>
@@ -156,7 +156,7 @@ L’opération **Read** lit les données sur un seul compte d’utilisateur. Le 
 
 L’opération **Write** crée ou met à jour un seul compte d’utilisateur. Le profil technique suivant crée un compte de réseau social :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-UserWriteUsingAlternativeSecurityId">
   <Metadata>
     <Item Key="Operation">Write</Item>
@@ -196,7 +196,7 @@ L’opération **Write** crée ou met à jour un seul compte d’utilisateur. Le
 
 L’opération **DeleteClaims** efface les informations d’une liste fournie de revendications. Le profil technique suivant supprime les revendications :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-DeleteClaimsUsingObjectId">
   <Metadata>
     <Item Key="Operation">DeleteClaims</Item>
@@ -217,7 +217,7 @@ L’opération **DeleteClaims** efface les informations d’une liste fournie de
 
 L’opération **DeleteClaimsPrincipal** supprime un seul compte d’utilisateur de l’annuaire. Le profil technique suivant supprime un compte d’utilisateur du répertoire en utilisant le nom d’utilisateur principal :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-DeleteUserUsingObjectId">
   <Metadata>
     <Item Key="Operation">DeleteClaimsPrincipal</Item>
@@ -232,7 +232,7 @@ L’opération **DeleteClaimsPrincipal** supprime un seul compte d’utilisateur
 
 Le profil technique suivant supprime un compte d’utilisateur social en utilisant **alternativeSecurityId** :
 
-```XML
+```xml
 <TechnicalProfile Id="AAD-DeleteUserUsingAlternativeSecurityId">
   <Metadata>
     <Item Key="Operation">DeleteClaimsPrincipal</Item>
@@ -251,9 +251,9 @@ Le profil technique suivant supprime un compte d’utilisateur social en utilisa
 | Opération | Oui | Opération à effectuer. Valeurs possibles : `Read`, `Write`, `DeleteClaims` ou `DeleteClaimsPrincipal`. |
 | RaiseErrorIfClaimsPrincipalDoesNotExist | Non | Génère une erreur si l’objet utilisateur n’existe pas dans le répertoire. Valeurs possibles : `true` ou `false`. |
 | RaiseErrorIfClaimsPrincipalAlreadyExists | Non | Génère une erreur si l’objet utilisateur existe déjà. Valeurs possibles : `true` ou `false`.|
-| ApplicationObjectId | Non | Identificateur d’objet d’application pour les attributs d’extension. Valeur : ObjectId d'une application. Pour plus d’informations, voir [Utiliser des attributs personnalisés dans une stratégie personnalisée de modification de profil](custom-policy-custom-attributes.md). |
-| ClientId | Non | Identificateur client pour accéder au locataire en tant que tiers. Pour plus d’informations, voir [Utiliser des attributs personnalisés dans une stratégie personnalisée de modification de profil](custom-policy-custom-attributes.md). |
-| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+| ApplicationObjectId | Non | Identificateur d’objet d’application pour les attributs d’extension. Valeur : ObjectId d'une application. Pour plus d’informations, consultez [Utiliser des attributs personnalisés](user-flow-custom-attributes.md?pivots=b2c-custom-policy). |
+| ClientId | Non | Identificateur client pour accéder au locataire en tant que tiers. Pour plus d’informations, voir [Utiliser des attributs personnalisés dans une stratégie personnalisée de modification de profil](user-flow-custom-attributes.md?pivots=b2c-custom-policy). |
+| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
 
 ### <a name="ui-elements"></a>Éléments d’interface utilisateur
  
@@ -269,7 +269,7 @@ Les paramètres suivants peuvent être utilisés pour configurer le message d’
 
 Consultez l’article suivant pour obtenir un exemple d’utilisation d’un profil technique Azure AD :
 
-- [Ajouter des revendications et personnaliser l’entrée utilisateur avec des stratégies personnalisées dans Azure Active Directory B2C](custom-policy-configure-user-input.md)
+- [Ajouter des revendications et personnaliser l’entrée utilisateur avec des stratégies personnalisées dans Azure Active Directory B2C](configure-user-input.md)
 
 
 

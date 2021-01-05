@@ -12,12 +12,12 @@ ms.topic: troubleshooting
 ms.workload: infrastructure
 ms.date: 5/22/2017
 ms.author: xujing
-ms.openlocfilehash: f5639d1cf94c77d699dc6de9841698b045ac1f96
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 52508a6820ce0cbbbe3a0341a99894f8b92b1645
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76543016"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87831224"
 ---
 # <a name="understand-common-error-messages-when-you-manage-virtual-machines-in-azure"></a>Présentation des messages d’erreur courants lors de la gestion des machines virtuelles dans Azure
 
@@ -176,7 +176,7 @@ Cette section répertorie les messages d’erreur pouvant apparaître lors de la
 |  OSProvisioningClientError  |  Le nom d’utilisateur spécifié pour la machine virtuelle n’est pas valide pour cette distribution Linux. Détails de l’erreur : {0}.  |
 |  OSProvisioningInternalError  |  Échec du provisionnement du système d’exploitation pour la machine virtuelle « {0} » en raison d’une erreur interne.  |
 |  OSProvisioningTimedOut  |  Le provisionnement du système d’exploitation de la machine virtuelle « {0} » ne s’est pas terminé dans le délai imparti. La machine virtuelle peut cependant le terminer avec succès. Vérifiez l’état d’approvisionnement ultérieurement.  |
-|  OSProvisioningTimedOut  |  Le provisionnement du système d’exploitation de la machine virtuelle « {0} » ne s’est pas terminé dans le délai imparti. La machine virtuelle peut cependant le terminer avec succès. Vérifiez l’état d’approvisionnement ultérieurement. Vérifiez également que l’image a été correctement préparée (généralisée).   <ul><li>Instructions pour Windows : https://azure.microsoft.com/documentation/articles/virtual-machines-windows-upload-image/ </li><li> Instructions pour Linux : https://azure.microsoft.com/documentation/articles/virtual-machines-linux-capture-image/</li></ul>  |
+|  OSProvisioningTimedOut  |  Le provisionnement du système d’exploitation de la machine virtuelle « {0} » ne s’est pas terminé dans le délai imparti. La machine virtuelle peut cependant le terminer avec succès. Vérifiez l’état d’approvisionnement ultérieurement. Vérifiez également que l’image a été correctement préparée (généralisée).   <ul><li>Instructions pour [Windows]( ../windows/upload-generalized-managed.md)</li><li> Instructions pour [Linux](../linux/capture-image.md)</li></ul>  |
 |  OSProvisioningTimedOut  |  Le provisionnement du système d’exploitation de la machine virtuelle « {0} » ne s’est pas terminé dans le délai imparti. Toutefois, l’agent invité de la machine virtuelle a été détecté en cours d’exécution. Cela signifie que le système d’exploitation invité n’a pas été correctement préparé pour être utilisé en tant qu’image de machine virtuelle (avec CreateOption=FromImage). Pour résoudre ce problème, utilisez le disque VHD tel quel avec CreateOption=Attach ou préparez-le correctement pour l’utiliser en tant qu’image :   <ul><li>Instructions pour Windows : https://azure.microsoft.com/documentation/articles/virtual-machines-windows-upload-image/ </li><li> Instructions pour Linux : https://azure.microsoft.com/documentation/articles/virtual-machines-linux-capture-image/</li></ul>  |
 |  OverConstrainedAllocationRequest  |  La taille de machine virtuelle requise n’est pas disponible à l’emplacement sélectionné.  |
 |  ResourceUpdateBlockedOnPlatformUpdate  |  Impossible de mettre à jour la ressource pour le moment en raison d’une mise à jour en cours de la plateforme. Veuillez réessayer plus tard.  |

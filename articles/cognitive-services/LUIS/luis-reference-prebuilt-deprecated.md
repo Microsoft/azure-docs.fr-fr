@@ -3,20 +3,18 @@ title: Entités prédéfinies déconseillées - LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie désapprouvée dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 ms.custom: seodec18
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 07/29/2019
-ms.author: diberry
-ms.openlocfilehash: 46da828b7553fdf9cdded817febd3bb95cd4cbb9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a050990c28b9137440ec05d918774d76f216be8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270672"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91540844"
 ---
 # <a name="deprecated-prebuilt-entities-in-a-luis-app"></a>Entités prédéfinies dépréciées dans une application LUIS
 Les entités prédéfinies suivantes sont désapprouvées et ne peuvent pas être ajoutées à de nouvelles applications LUIS.

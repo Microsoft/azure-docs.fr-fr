@@ -13,23 +13,25 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 897513abcc9f829f1cbdc315208e4451ae4dbc41
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c01883c75ad5d6633abeffcd29a7d3cf2485d6fc
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60637588"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511720"
 ---
-# <a name="import-a-postman-collection-with-live-streaming-operations"></a>Importer une collection Postman avec les opérations de Live Streaming 
+# <a name="import-a-postman-collection-with-live-streaming-operations"></a>Importer une collection Postman avec les opérations de Live Streaming
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cet article contient une définition de la **collection Postman** contenant les requêtes HTTP groupées qui appellent les API REST Media Services de **diffusion en continu**. Pour plus d’informations sur la configuration de **Postman** afin de pouvoir l’utiliser pour appeler l’API REST Media Services, consultez le didacticiel [Configurer Postman pour les appels d’API REST Media Services](media-rest-apis-with-postman.md).
 
-```
+```json
 {
     "info": {
         "name": "Azure Media Live Streaming Quickstart",
         "_postman_id": "0dc5e4c6-4865-cbe9-250c-78e40b634256",
-        "description": "Quickstart collection to use Live Streaming and Encding on Azure Media Services\n",
+        "description": "Quickstart collection to use Live Streaming and Encoding on Azure Media Services\n",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -523,7 +525,7 @@ Cet article contient une définition de la **collection Postman** contenant les 
                                 "Assets"
                             ]
                         },
-                        "description": "Create Assets\nThe Asset entity contains digital files (including video, audio, images, thumbnail collections, text tracks and closed caption files) and the metadata about these files. After the digital files are uploaded into an asset, they could be used in the Media Services encoding and streaming workflows.\n\n[Asset Entity REST API](https://msdn.microsoft.com/library/azure/hh974277.aspx)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Assets\nThe Asset entity contains digital files (including video, audio, images, thumbnail collections, text tracks and closed caption files) and the metadata about these files. After the digital files are uploaded into an asset, they could be used in the Media Services encoding and streaming workflows.\n\n[Asset Entity REST API](/rest/api/media/operations/asset)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -610,7 +612,7 @@ Cet article contient une définition de la **collection Postman** contenant les 
                                 "Programs"
                             ]
                         },
-                        "description": "Create Program\n\n[Create Programs documentation](https://docs.microsoft.com/rest/api/media/operations/program#create_programs)\n\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Create Program\n\n[Create Programs documentation](/rest/api/media/operations/program#create_programs)\n\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -754,7 +756,7 @@ Cet article contient une définition de la **collection Postman** contenant les 
                                 "Start"
                             ]
                         },
-                        "description": "Start Programs\n\n[Start a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#start_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Start Programs\n\n[Start a Program documentation](/rest/api/media/operations/program#start_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 },
@@ -880,7 +882,7 @@ Cet article contient une définition de la **collection Postman** contenant les 
                                 "Stop"
                             ]
                         },
-                        "description": "Strop Programs\n\n[Stop a Program documentation](https://docs.microsoft.com/rest/api/media/operations/program#stop_programs)\n\n[Full REST API documentation](https://msdn.microsoft.com/library/azure/hh973617.aspx)"
+                        "description": "Strop Programs\n\n[Stop a Program documentation](/rest/api/media/operations/program#stop_programs)\n\n[Full REST API documentation](/rest/api/media/operations/azure-media-services-rest-api-reference)"
                     },
                     "response": []
                 }

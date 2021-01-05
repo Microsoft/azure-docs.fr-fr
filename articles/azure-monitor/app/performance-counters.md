@@ -3,16 +3,17 @@ title: Compteurs de performances dans Application Insights | Microsoft Docs
 description: Surveillez les compteurs de performances système et .NET personnalisés dans Application Insights.
 ms.topic: conceptual
 ms.date: 12/13/2018
-ms.openlocfilehash: 274e02c484c091cbb13ac2cf69bf99672f579f33
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4da8aef69b6a83c17fa8a20a80b2c485378e0aef
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83701464"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88918517"
 ---
 # <a name="system-performance-counters-in-application-insights"></a>Compteurs de performances système dans Application Insights
 
-Windows offre un large éventail de [compteurs de performance](https://docs.microsoft.com/windows/desktop/PerfCtrs/about-performance-counters) tels que le niveau d’occupation du processeur, la mémoire, le disque et l’utilisation du réseau. Vous pouvez également définir vos propres compteurs de performances. La collection de compteurs de performance est prise en charge tant que votre application est exécutée sous IIS sur un hôte ou une machine virtuelle local sur lequel vous disposez d’un accès administratif. Bien que les applications exécutées en tant qu’applications web Azure n’aient pas d’accès direct aux compteurs de performance, un sous-ensemble des compteurs disponibles sont collectés par Application Insights.
+Windows offre un large éventail de [compteurs de performance](/windows/desktop/perfctrs/about-performance-counters) tels que le niveau d’occupation du processeur, la mémoire, le disque et l’utilisation du réseau. Vous pouvez également définir vos propres compteurs de performances. La collection de compteurs de performance est prise en charge tant que votre application est exécutée sous IIS sur un hôte ou une machine virtuelle local sur lequel vous disposez d’un accès administratif. Bien que les applications exécutées en tant qu’applications web Azure n’aient pas d’accès direct aux compteurs de performance, un sous-ensemble des compteurs disponibles sont collectés par Application Insights.
 
 ## <a name="view-counters"></a>Afficher des compteurs
 
@@ -40,7 +41,7 @@ Si le compteur de performances que vous souhaitez n’est pas inclus dans la lis
 
     `Get-Counter -ListSet *`
 
-    (Voir [`Get-Counter`](https://technet.microsoft.com/library/hh849685.aspx).)
+    (Voir [`Get-Counter`](/powershell/module/microsoft.powershell.diagnostics/get-counter?view=powershell-5.1).)
 2. Ouvrez ApplicationInsights.config.
 
    * Si vous avez ajouté Application Insights à votre application pendant le développement, modifiez ApplicationInsights.config dans votre projet, puis redéployez-le sur vos serveurs.
@@ -109,7 +110,7 @@ using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
 ```
 
 ## <a name="performance-counters-in-analytics"></a>Compteurs de performances dans Analytics
-Vous pouvez rechercher et afficher des rapports de compteur de performances dans [Analytics](../../azure-monitor/app/analytics.md).
+Vous pouvez rechercher et afficher des rapports de compteur de performances dans [Analytics](../log-query/log-query-overview.md).
 
 Le schéma **compteur de performances** expose les noms `category`, `counter` et `instance` nom de chaque compteur de performance.  Dans les données de télémétrie de chaque application, vous voyez uniquement les compteurs de cette application. Par exemple, pour voir les compteurs disponibles : 
 
@@ -131,7 +132,7 @@ Comme les autres données de télémétrie, **performanceCounters** possède ég
 
 * *taux d’exceptions* est un compteur de performances système. Le CLR compte l’ensemble des exceptions gérées et non gérées qui sont levées et divise le total d’un intervalle d'échantillonnage par la longueur de cet intervalle. Le Kit de développement logiciel (SDK) Application Insights collecte ce résultat et l’envoie au portail.
 
-* *Exceptions* représente le nombre de rapports TrackException reçus par le portail au cours de l’intervalle d’échantillonnage du graphique. Il comprend uniquement les exceptions gérées pour lesquelles vous avez écrit des appels TrackException dans votre code et n’inclut pas toutes les [exceptions non gérées](../../azure-monitor/app/asp-net-exceptions.md). 
+* *Exceptions* représente le nombre de rapports TrackException reçus par le portail au cours de l’intervalle d’échantillonnage du graphique. Il comprend uniquement les exceptions gérées pour lesquelles vous avez écrit des appels TrackException dans votre code et n’inclut pas toutes les [exceptions non gérées](./asp-net-exceptions.md). 
 
 ## <a name="performance-counters-for-applications-running-in-azure-web-apps"></a>Compteurs de performance pour applications exécutés dans Azure Web Apps
 
@@ -147,10 +148,10 @@ La prise en charge des compteurs de performances dans ASP.Net Core est limitée�
 * Les versions 2.8.0 et ultérieures du kit de développement logiciel (SDK) prennent en charge le compteur processeur/mémoire dans Linux. Aucun autre compteur n’est pris en charge dans Linux. La méthode recommandée pour obtenir les compteurs système dans Linux (et dans d’autres environnements non-Windows) consiste à utiliser [EventCounters](eventcounters.md)
 
 ## <a name="alerts"></a>Alertes
-Comme d’autres mesures, vous pouvez [définir une alerte](../../azure-monitor/platform/alerts-log.md) pour vous avertir si un compteur de performances dépasse une limite que vous spécifiez. Ouvrez le volet Alertes et cliquez sur Ajouter une alerte.
+Comme d’autres mesures, vous pouvez [définir une alerte](../platform/alerts-log.md) pour vous avertir si un compteur de performances dépasse une limite que vous spécifiez. Ouvrez le volet Alertes et cliquez sur Ajouter une alerte.
 
 ## <a name="next-steps"></a><a name="next"></a>Étapes suivantes
 
-* [Suivi des dépendances](../../azure-monitor/app/asp-net-dependencies.md)
-* [Suivi des exceptions](../../azure-monitor/app/asp-net-exceptions.md)
+* [Suivi des dépendances](./asp-net-dependencies.md)
+* [Suivi des exceptions](./asp-net-exceptions.md)
 

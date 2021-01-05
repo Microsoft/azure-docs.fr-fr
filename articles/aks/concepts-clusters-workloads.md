@@ -4,18 +4,18 @@ description: Découvrez les composants de charge de travail et de cluster de bas
 services: container-service
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 13169628aff2fe4bff64fed36db54d18d4f830b8
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 17203123ceb0c196bd8f9011e2962f5022e54698
+ms.sourcegitcommit: 693df7d78dfd5393a28bf1508e3e7487e2132293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208157"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92901298"
 ---
 # <a name="kubernetes-core-concepts-for-azure-kubernetes-service-aks"></a>Concepts de base de Kubernetes pour AKS (Azure Kubernetes Service)
 
 Le développement d’applications adoptant progressivement une approche basée sur les conteneurs, il est important et nécessaire d’orchestrer et de gérer les ressources. Kubernetes est la plateforme leader du marché qui offre la possibilité de fournir une planification fiable des charges de travail d’applications à tolérance de panne. AKS (Azure Kubernetes Service) est une offre Kubernetes managés qui simplifie la gestion et le déploiement des applications basées sur des conteneurs.
 
-Cet article présente les principaux composants de l’infrastructure Kubernetes, tels que le *plan de contrôle*, les *nœuds* et les *pools de nœuds*. Les ressources de charge de travail telles que les *pods*, les *déploiements* et les *ensembles* sont également présentées, ainsi que le regroupement de ressources dans des *espaces de noms*.
+Cet article présente les principaux composants de l’infrastructure Kubernetes, tels que le *plan de contrôle* , les *nœuds* et les *pools de nœuds* . Les ressources de charge de travail telles que les *pods* , les *déploiements* et les *ensembles* sont également présentées, ainsi que le regroupement de ressources dans des *espaces de noms* .
 
 ## <a name="what-is-kubernetes"></a>Présentation de Kubernetes
 
@@ -23,7 +23,7 @@ Kubernetes est une plateforme évoluant rapidement qui gère les applications ba
 
 Vous pouvez générer et exécuter des applications modernes, portables et basées sur des microservices qui bénéficient de l’orchestration et de la gestion par Kubernetes de la disponibilité des composants d’application. Kubernetes prend en charge les applications sans état et avec état à mesure que les équipes adoptent les applications basées sur des microservices.
 
-En tant que plateforme ouverte, Kubernetes vous permet de créer des applications avec vos langage de programmation, système d’exploitation, bibliothèques ou bus de messagerie préférés. Les outils d’intégration et de livraison continues (CI/CD) existants peuvent s’intégrer à Kubernetes dans le cadre de la planification et du déploiement de versions.
+En tant que plateforme ouverte, Kubernetes vous permet de créer des applications avec vos langages de programmation, système d’exploitation, bibliothèques ou bus de messagerie préférés. Les outils d’intégration et de livraison continues (CI/CD) existants peuvent s’intégrer à Kubernetes dans le cadre de la planification et du déploiement de versions.
 
 AKS (Azure Kubernetes Service) fournit un service Kubernetes managé qui réduit la complexité des tâches de gestion principales et de déploiement, y compris la coordination des mises à niveau. Le plan de contrôle AKS est géré par la plateforme Azure ; vous ne payez que pour les nœuds AKS qui exécutent vos applications. AKS repose sur le moteur open source Azure Kubernetes Service ([aks-engine][aks-engine]).
 
@@ -38,18 +38,18 @@ Un cluster Kubernetes comprend deux composants :
 
 ## <a name="control-plane"></a>Plan de contrôle
 
-Quand vous créez un cluster AKS, un plan de contrôle est automatiquement créé et configuré. Ce plan de contrôle est fourni en tant que ressource Azure managée tirée de l’utilisateur. Il n’existe aucun coût lié au plan de contrôler ; seuls les nœuds qui font partie du cluster AKS occasionnent des frais.
+Quand vous créez un cluster AKS, un plan de contrôle est automatiquement créé et configuré. Ce plan de contrôle est fourni en tant que ressource Azure managée tirée de l’utilisateur. Il n’existe aucun coût lié au plan de contrôler ; seuls les nœuds qui font partie du cluster AKS occasionnent des frais. Le plan de contrôle et ses ressources se trouvent uniquement sur la région dans laquelle le cluster a été créé.
 
 Le plan de contrôle inclut les composants Kubernetes principaux suivants :
 
-- *kube-apiserver* : le serveur d’API détermine la façon dont les API Kubernetes sous-jacentes sont exposées. Ce composant fournit l’interaction des outils de gestion, tels que `kubectl` ou le tableau de bord Kubernetes.
-- *etcd* : pour maintenir l’état de la configuration et du cluster Kubernetes, le composant *etcd* hautement disponible est un magasin de valeurs essentiel dans Kubernetes.
-- *kube-scheduler* : quand vous créez ou mettez à l’échelle des applications, le planificateur détermine les nœuds pouvant exécuter la charge de travail et les démarre.
-- *kube-controller-manager* : le gestionnaire de contrôleurs surveille une série de contrôleurs plus petits qui effectuent des actions telles que la réplication des pods et la gestion des opérations sur les nœuds.
+- *kube-apiserver*  : le serveur d’API détermine la façon dont les API Kubernetes sous-jacentes sont exposées. Ce composant fournit l’interaction des outils de gestion, tels que `kubectl` ou le tableau de bord Kubernetes.
+- *etcd*  : pour maintenir l’état de la configuration et du cluster Kubernetes, le composant *etcd* hautement disponible est un magasin de valeurs essentiel dans Kubernetes.
+- *kube-scheduler*  : quand vous créez ou mettez à l’échelle des applications, le planificateur détermine les nœuds pouvant exécuter la charge de travail et les démarre.
+- *kube-controller-manager*  : le gestionnaire de contrôleurs surveille une série de contrôleurs plus petits qui effectuent des actions telles que la réplication des pods et la gestion des opérations sur les nœuds.
 
 AKS fournit un plan de contrôle monolocataire doté de dispositifs dédiés (serveur d’API, Scheduler, etc.). Vous définissez le nombre et la taille des nœuds, puis la plateforme Azure configure la communication sécurisée entre les nœuds et le plan de contrôle. L’interaction avec le plan de contrôle se produit par le biais d’API Kubernetes, telles que `kubectl` ou le tableau de bord Kubernetes.
 
-Ce plan de contrôle managé signifie que vous n’avez pas besoin de configurer de composants tels qu’un magasin *etcd* hautement disponible, mais aussi que vous ne pouvez pas accéder directement au plan de contrôle. Les mises à niveau de Kubernetes sont orchestrées par l’intermédiaire de l’interface de ligne de commande Azure ou du Portail Azure, qui met à niveau le plan de contrôle, puis les nœuds. Pour résoudre les problèmes éventuels, vous pouvez consulter les journaux d’activité du plan de contrôle par le biais des journaux d’activité Azure Monitor.
+Ce plan de contrôle managé évite d’avoir à configurer des composants tels qu’un magasin *etcd* hautement disponible, mais n’est pas accessible directement. Les mises à niveau de Kubernetes sont orchestrées par l’intermédiaire de l’interface de ligne de commande Azure ou du Portail Azure, qui met à niveau le plan de contrôle, puis les nœuds. Pour résoudre les problèmes éventuels, vous pouvez consulter les journaux d’activité du plan de contrôle par le biais des journaux d’activité Azure Monitor.
 
 Si vous devez configurer le plan de contrôle d’une façon particulière ou avez besoin d’un accès direct à ce dernier, vous pouvez déployer votre propre cluster Kubernetes à l’aide d’[aks-engine][aks-engine].
 
@@ -73,7 +73,7 @@ Si vous avez besoin d’utiliser un autre système d’exploitation hôte ou run
 
 ### <a name="resource-reservations"></a>Réservations de ressources
 
-Les ressources de nœud sont utilisées par AKS pour faire fonctionner le nœud dans le cadre de votre cluster. Cela peut créer un écart entre les ressources totales de votre nœud et les ressources allouables quand elles sont utilisées dans AKS. Il est important de le noter lors de la définition de demandes et de limites pour les pods déployés par l’utilisateur.
+Les ressources de nœud sont utilisées par AKS pour faire fonctionner le nœud dans le cadre de votre cluster. Cette utilisation peut créer un écart entre les ressources totales du nœud et les ressources allouables quand elles sont utilisées dans AKS. Il est important de noter cette information au moment de définir les demandes et les limites des pods déployés par l’utilisateur.
 
 Pour rechercher les ressources allouables d’un nœud, exécutez :
 ```kubectl
@@ -86,7 +86,7 @@ Pour conserver les fonctionnalités et les performances des nœuds, les ressourc
 >[!NOTE]
 > L’utilisation de modules complémentaires AKS tels que Container Insights (OMS) nécessite des ressources de nœud supplémentaires.
 
-- **Processeur** : le processeur réservé dépend du type de nœud et de la configuration du cluster, ce qui peut aboutir à un processeur moins allouable en raison de l’exécution de fonctionnalités supplémentaires
+- **Processeur**  : le processeur réservé dépend du type de nœud et de la configuration du cluster, ce qui peut le rendre moins allouable en raison de l’exécution de fonctionnalités supplémentaires.
 
 | Cœurs de processeur sur l’hôte | 1    | 2    | 4    | 8    | 16 | 32|64|
 |---|---|---|---|---|---|---|---|
@@ -94,7 +94,7 @@ Pour conserver les fonctionnalités et les performances des nœuds, les ressourc
 
 - **Mémoire** – la mémoire utilisée par AKS comprend la somme de deux valeurs.
 
-1. Le démon kubelet est installé sur tous les nœuds de l’agent Kubernetes pour gérer la création et l’arrêt du conteneur. Par défaut sur AKS, ce démon a la règle d’éviction suivante : *memory.available<750Mi*, ce qui signifie qu’un nœud doit toujours avoir au moins 750 Mi allouable à tout moment.  Lorsqu’un hôte se trouve au-dessous de ce seuil de mémoire disponible, kubelet met fin à l’un des pods en cours d’exécution pour libérer de la mémoire sur l’ordinateur hôte et le protéger. Il s’agit d’une action réactive lorsque la mémoire disponible diminue au-delà du seuil 750Mi.
+1. Le démon kubelet est installé sur tous les nœuds de l’agent Kubernetes pour gérer la création et l’arrêt du conteneur. Par défaut sur AKS, ce démon a la règle d’éviction suivante : *memory.available<750Mi* , ce qui signifie qu’un nœud doit toujours avoir au moins 750 Mi allouable à tout moment.  Lorsqu’un hôte se trouve au-dessous de ce seuil de mémoire disponible, kubelet met fin à l’un des pods en cours d’exécution pour libérer de la mémoire sur l’ordinateur hôte et le protéger. Cette action se déclenche lorsque la mémoire disponible descend au-dessous du seuil de 750 Mi.
 
 2. La deuxième valeur est une vitesse régressive des réservations de la mémoire pour que le démon kubelet fonctionne correctement (kube-reserved).
     - 25 % des 4 premiers Go de mémoire
@@ -103,11 +103,11 @@ Pour conserver les fonctionnalités et les performances des nœuds, les ressourc
     - 6 % des 112 Go suivants de mémoire (jusqu’à 128 Go)
     - 2 % de la mémoire au-dessus de 128 Go
 
-Les règles ci-dessus relatives à l’allocation de mémoire et d’UC sont utilisées pour assurer l’intégrité des nœuds de l’agent, dont certains pods de système d’hébergement critiques pour l’intégrité du cluster. Ces règles d’allocation font également en sorte que le nœud signale moins de mémoire allouée et d’UC qu’il ne le ferait s’il faisait partie d’un cluster Kubernetes. Vous ne pouvez pas changer les réservations de ressources ci-dessus.
+Les règles ci-dessus relatives à l’allocation de mémoire et d’UC sont utilisées pour assurer l’intégrité des nœuds de l’agent, dont certains pods de système d’hébergement critiques pour l’intégrité du cluster. Du fait de ces règles d’allocation, le nœud signale moins de mémoire et de processeurs allouables que s’il ne faisait pas partie d’un cluster Kubernetes. Vous ne pouvez pas changer les réservations de ressources ci-dessus.
 
-Par exemple, si un nœud offre 7 Go, il signalera 34 % de la mémoire non allouable en plus du seuil d’éviction dur de 750Mi.
+Par exemple, si un nœud offre 7 Go, il signalera 34 % de la mémoire non-allouable incluant le seuil d’éviction dur de 750Mi.
 
-`(0.25*4) + (0.20*3) = + 1 GB + 0.6GB = 1.6GB / 7GB = 22.86% reserved`
+`0.75 + (0.25*4) + (0.20*3) = 0.75GB + 1GB + 0.6GB = 2.35GB / 7GB = 33.57% réservé`
 
 En plus des réservations pour Kubernetes lui-même, le système d’exploitation du nœud sous-jacent réserve également une quantité de ressources de processeur et de mémoire pour gérer les fonctions du système d’exploitation.
 
@@ -115,7 +115,7 @@ Pour connaître les meilleures pratiques associées, consultez la section [Meill
 
 ### <a name="node-pools"></a>Pools de nœuds
 
-Les nœuds d’une même configuration sont regroupés dans des *pools de nœuds*. Un cluster Kubernetes contient un ou plusieurs pools de nœuds. Le nombre et la taille initiaux des nœuds sont définis quand vous créez un cluster AKS, opération qui engendre la création d’un *nœud de pools par défaut*. Ce pool de nœuds par défaut dans AKS contient les machines virtuelles sous-jacentes qui exécutent vos nœuds d’agent.
+Les nœuds d’une même configuration sont regroupés dans des *pools de nœuds* . Un cluster Kubernetes contient un ou plusieurs pools de nœuds. Le nombre et la taille initiaux des nœuds sont définis quand vous créez un cluster AKS, opération qui engendre la création d’un *nœud de pools par défaut* . Ce pool de nœuds par défaut dans AKS contient les machines virtuelles sous-jacentes qui exécutent vos nœuds d’agent.
 
 > [!NOTE]
 > Pour garantir un fonctionnement fiable de votre cluster, vous devez exécuter au moins 2 (deux) nœuds dans le pool de nœuds par défaut.
@@ -128,7 +128,7 @@ Pour en savoir plus sur l’utilisation de plusieurs pools de nœuds dans AKS, v
 
 Dans un cluster AKS qui contient plusieurs pools de nœuds, vous devrez peut-être indiquer au planificateur Kubernetes Scheduler le pool de nœuds qui devra être utilisé pour une ressource donnée. Par exemple, les contrôleurs d’entrée ne doivent pas s’exécuter sur des nœuds Windows Server. Les sélecteurs de nœud vous permettent de définir différents paramètres, comme le système d’exploitation des nœuds, pour contrôler à quel endroit un pod doit être planifié.
 
-L’exemple de base suivant planifie une instance NGINX sur un nœud Linux en utilisant le sélecteur de nœud *"beta.kubernetes.io/os": linux* :
+L’exemple de base suivant planifie une instance NGINX sur un nœud Linux en utilisant le sélecteur de nœud *"beta.kubernetes.io/os": linux*  :
 
 ```yaml
 kind: Pod
@@ -138,7 +138,7 @@ metadata:
 spec:
   containers:
     - name: myfrontend
-      image: nginx:1.15.12
+      image: mcr.microsoft.com/oss/nginx/nginx:1.15.12-alpine
   nodeSelector:
     "beta.kubernetes.io/os": linux
 ```
@@ -151,9 +151,9 @@ Kubernetes Utilise des *pods* pour exécuter une instance de votre application. 
 
 Quand vous créez un pod, vous pouvez définir des *demandes de ressources* afin de demander une certaine quantité de ressources de processeur ou de mémoire. Le planificateur de Kubernetes essaie de planifier les pods afin qu’ils s’exécutent sur un nœud dont les ressources permettent de répondre à la demande. Vous pouvez également spécifier des limites de ressources maximales qui empêchent un pod donné de consommer trop de ressources de calcul à partir du nœud sous-jacent. Une bonne pratique consiste à inclure des limites de ressources pour tous les pods afin d'aider le Scheduler Kubernetes à identifier les ressources nécessaires et autorisées.
 
-Pour plus d’informations, consultez [Kubernetes pods][kubernetes-pods] (Pods Kubernetes) et [Kubernetes pod lifecycle][kubernetes-pod-lifecycle] (Cycle de vie des pods Kubernetes).
+Pour plus d’informations, consultez [Kubernetes pods][kubernetes-pods] (Pods Kubernetes) et [Kubernetes pod lifecycle][kubernetes-pod-lifecycle] (cycle de vie des pods Kubernetes).
 
-Un pod est une ressource logique, tandis que les conteneurs sont l’endroit où s’exécutent les charges de travail d’applications. Les pods sont en général des ressources éphémères jetables, et ceux planifiés individuellement ne bénéficient pas de toutes les fonctionnalités de haute disponibilité et de redondance fournies par Kubernetes. Au lieu de cela, les pods sont généralement déployés et gérés par des *contrôleurs* Kubernetes, tels que le contrôleur de déploiement.
+Un pod est une ressource logique, tandis que les conteneurs sont l’endroit où s’exécutent les charges de travail d’applications. Les pods sont en général des ressources éphémères jetables, et ceux planifiés individuellement ne bénéficient pas de toutes les fonctionnalités de haute disponibilité et de redondance fournies par Kubernetes. En effet, les pods sont déployés et gérés par des *contrôleurs* Kubernetes, comme le contrôleur de déploiement.
 
 ## <a name="deployments-and-yaml-manifests"></a>Déploiements et manifestes YAML
 
@@ -163,9 +163,9 @@ Vous pouvez mettre à jour les déploiements pour changer la configuration des p
 
 La plupart des applications sans état dans AKS doivent utiliser le modèle de déploiement plutôt que la planification de pods individuels. Kubernetes peut superviser l’intégrité et l’état des déploiements pour s’assurer que le nombre requis de réplicas s’exécutent dans le cluster. Quand vous planifiez uniquement des pods individuels, ces derniers ne sont pas redémarrés s’ils rencontrent un problème et ne sont pas replanifiés sur des nœuds sains si leur nœud actuel rencontre un problème.
 
-Si une application requiert qu’un quorum d’instances soit toujours disponible pour les prises de décisions de gestion, il convient qu’aucun processus de mise à jour ne rompe ce dispositif. Vous pouvez utiliser des *budgets d’interruption de pods* pour définir le nombre de réplicas dans un déploiement pouvant être retirés pendant une mise à niveau d’un nœud ou une mise à jour. Par exemple, si votre déploiement comprend *5* réplicas, vous pouvez définir une interruption de pods de *4* pour autoriser la suppression ou la replanification d’un seul réplica à la fois. Comme dans le cas des limites de ressources des pods, une bonne pratique consiste à définir des budgets d’interruption de pods sur les applications qui nécessitent la présence systématique d’un nombre minimal de réplicas.
+Si une application requiert qu’un quorum d’instances soit toujours disponible pour les prises de décisions de gestion, il convient qu’aucun processus de mise à jour ne rompe ce dispositif. Vous pouvez utiliser des *budgets d’interruption de pods* pour définir le nombre de réplicas dans un déploiement pouvant être retirés pendant une mise à niveau d’un nœud ou une mise à jour. Par exemple, si votre déploiement comprend *cinq (5)*  réplicas, vous pouvez définir une interruption de pods de *4* pour limiter la suppression ou la replanification autorisée à un seul réplica à la fois. Comme dans le cas des limites de ressources des pods, une bonne pratique consiste à définir des budgets d’interruption de pods sur les applications qui nécessitent la présence systématique d’un nombre minimal de réplicas.
 
-Les déploiements sont généralement créés et gérés avec `kubectl create` ou `kubectl apply`. Pour créer un déploiement, vous définissez un fichier manifeste dans le format YAML (YAML Ain't Markup Language). L’exemple suivant crée un déploiement de base du serveur web NGINX. Le déploiement spécifie la création de *3* réplicas et l’ouverture du port *80* sur le conteneur. Des demandes et limites de ressources sont également définies pour l’UC et la mémoire.
+Les déploiements sont généralement créés et gérés avec `kubectl create` ou `kubectl apply`. Pour créer un déploiement, vous définissez un fichier manifeste dans le format YAML (YAML Ain't Markup Language). L’exemple suivant crée un déploiement de base du serveur web NGINX. Le déploiement spécifie la création de *trois (3)*  réplicas ; le port  *80* doit être ouvert sur le conteneur. Des demandes et limites de ressources sont également définies pour l’UC et la mémoire.
 
 ```yaml
 apiVersion: apps/v1
@@ -184,7 +184,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.15.2
+        image: mcr.microsoft.com/oss/nginx/nginx:1.15.2-alpine
         ports:
         - containerPort: 80
         resources:
@@ -202,13 +202,9 @@ Pour plus d’informations, consultez la section [Déploiements Kubernetes][kube
 
 ### <a name="package-management-with-helm"></a>Gestion des packages avec Helm
 
-Dans Kubernetes, la gestion des applications fait souvent appel à [Helm][helm]. Vous pouvez créer et utiliser des *graphiques* Helm publics existants qui contiennent une version empaquetée d’un code d’application et de manifestes YAML Kubernetes pour le déploiement de ressources. Ces graphiques Helm peuvent être stockés localement, ou souvent dans un référentiel distant, tel qu’un [référentiel de graphiques Helm Azure Container Registry][acr-helm].
+Dans Kubernetes, la gestion des applications fait souvent appel à [Helm][helm]. Vous pouvez créer et utiliser des *graphiques* Helm (charts) publics existants qui contiennent une version empaquetée d’un code d’application et de manifestes YAML Kubernetes pour le déploiement de ressources. Ces graphiques Helm peuvent être stockés localement, ou souvent dans un référentiel distant, tel qu’un [référentiel de graphiques Helm Azure Container Registry][acr-helm].
 
-Pour que vous puissiez utiliser Helm, un composant de serveur appelé *Tiller* est installé dans votre cluster Kubernetes. Le composant Tiller gère l’installation des graphiques au sein du cluster. Le client Helm est lui-même installé localement sur votre ordinateur, ou peut être utilisé dans [Azure Cloud Shell][azure-cloud-shell]. Vous pouvez rechercher ou créer des graphiques Helm avec le client, puis les installer sur votre cluster Kubernetes.
-
-![Helm comprend un composant client et un composant Tiller côté serveur qui crée des ressources à l’intérieur du cluster Kubernetes](media/concepts-clusters-workloads/use-helm.png)
-
-Pour plus d’informations, consultez la section [Installer des applications avec Helm dans AKS (Azure Kubernetes Service)][aks-helm].
+Pour utiliser Helm, installez le client Helm sur votre ordinateur, ou utilisez le client Helm dans [Azure Cloud Shell][azure-cloud-shell]. Vous pouvez rechercher ou créer des graphiques Helm avec le client, puis les installer sur votre cluster Kubernetes. Pour plus d’informations, consultez la section [Installer des applications existantes avec Helm dans AKS][aks-helm].
 
 ## <a name="statefulsets-and-daemonsets"></a>Ressources StatefulSet et ressources DaemonSet
 
@@ -216,8 +212,8 @@ Le contrôleur de déploiement utilise le planificateur de Kubernetes pour exéc
 
 Il existe deux ressources Kubernetes qui vous permettent de gérer ces types d’applications :
 
-- *Ressources StatefulSet* : maintiennent l’état des applications au-delà du cycle de vie d’un pod individuel, tel que le stockage.
-- *Ressources DaemonSet* : garantissent une instance en cours d’exécution sur chaque nœud, tôt dans le processus de démarrage de Kubernetes.
+- *Ressources StatefulSet*  : maintiennent l’état des applications au-delà du cycle de vie d’un pod individuel, tel que le stockage.
+- *Ressources DaemonSet*  : garantissent une instance en cours d’exécution sur chaque nœud, tôt dans le processus de démarrage de Kubernetes.
 
 ### <a name="statefulsets"></a>Ressources StatefulSet
 
@@ -244,15 +240,15 @@ Pour plus d’informations, consultez la section [Kubernetes DaemonSets][kuberne
 
 ## <a name="namespaces"></a>Espaces de noms
 
-Les ressources Kubernetes, telles que les pods et les déploiements, sont regroupées logiquement dans un *espace de noms*. Ces regroupements permettent de scinder un cluster AKS logiquement et de restreindre l’accès pour la création, l’affichage ou la gestion des ressources. Vous pouvez créer des espaces de noms pour séparer les groupes métier, par exemple. Les utilisateurs ne peuvent interagir qu’avec les ressources appartenant aux espaces de noms qui leur sont attribués.
+Les ressources Kubernetes, telles que les pods et les déploiements, sont regroupées logiquement dans un *espace de noms* . Ces regroupements permettent de scinder un cluster AKS logiquement et de restreindre l’accès pour la création, l’affichage ou la gestion des ressources. Vous pouvez créer des espaces de noms pour séparer les groupes métier, par exemple. Les utilisateurs ne peuvent interagir qu’avec les ressources appartenant aux espaces de noms qui leur sont attribués.
 
 ![Espaces de noms Kubernetes pour séparer logiquement les ressources et les applications](media/concepts-clusters-workloads/namespaces.png)
 
 Quand vous créez un cluster AKS, les espaces de noms suivants sont disponibles :
 
-- *default* : espace de noms dans lequel sont créés par défaut les pods et les déploiements quand aucun espace de noms n’est fourni. Dans les environnements plus petits, vous pouvez déployer les applications directement dans l’espace de noms par défaut sans provoquer la création de séparations logiques supplémentaires. Quand vous interagissez avec l’API Kubernetes, comme avec `kubectl get pods`, l’espace de noms par défaut est utilisé si aucun n’est spécifié.
-- *kube-system* : espace de noms où se trouvent les principales ressources, telles que les fonctionnalités réseau, comme le DNS et le proxy, ou bien le tableau de bord Kubernetes. En règle générale, vous ne déployez pas vos propres applications dans cet espace de noms.
-- *kube-public* : cet espace de noms n'est généralement pas utilisé, mais vous pouvez y recourir pour rendre les ressources visibles dans l'ensemble du cluster et consultables par tous les utilisateurs.
+- *default*  : espace de noms dans lequel sont créés par défaut les pods et les déploiements quand aucun espace de noms n’est fourni. Dans les environnements plus petits, vous pouvez déployer les applications directement dans l’espace de noms par défaut sans provoquer la création de séparations logiques supplémentaires. Quand vous interagissez avec l’API Kubernetes, comme avec `kubectl get pods`, l’espace de noms par défaut est utilisé si aucun n’est spécifié.
+- *kube-system*  : espace de noms où se trouvent les principales ressources, telles que les fonctionnalités réseau, comme le DNS et le proxy, ou bien le tableau de bord Kubernetes. En règle générale, vous ne déployez pas vos propres applications dans cet espace de noms.
+- *kube-public*  : cet espace de noms n'est généralement pas utilisé, mais vous pouvez y recourir pour rendre les ressources visibles dans l'ensemble du cluster et consultables par tous les utilisateurs.
 
 Pour plus d’informations, consultez la section [Espace de noms Kubernetes][kubernetes-namespaces].
 

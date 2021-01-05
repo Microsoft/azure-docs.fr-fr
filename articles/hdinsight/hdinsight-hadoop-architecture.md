@@ -1,19 +1,19 @@
 ---
 title: Architecture Apache Hadoop - Azure HDInsight
 description: Décrit le stockage et le traitement Apache Hadoop sur les clusters Azure HDInsight.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 02/07/2020
-ms.openlocfilehash: 3feacd94558ba275c81469827993aef106ae633c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 389aee77ac56407f3a116d42ad62fbd94de1bb4e
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162206"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92541942"
 ---
 # <a name="apache-hadoop-architecture-in-hdinsight"></a>Architecture Apache Hadoop dans HDInsight
 
@@ -37,7 +37,7 @@ Quand une application MapReduce s’exécute sur un cluster, ResourceManager fou
 
 ResourceManager exécute également un processus de serveur web qui fournit une interface utilisateur web pour superviser l’état des applications.
 
-Quand un utilisateur soumet une application MapReduce à exécuter sur le cluster, l’application est soumise à ResourceManager. À son tour, ResourceManager alloue un conteneur sur les nœuds NodeManager disponibles. Ces nœuds représentent l’emplacement où l’application s’exécute réellement. Le premier conteneur alloué exécute une application spéciale, appelée ApplicationMaster. Celle-ci se charge de l’acquisition des ressources, sous la forme de conteneurs suivants, nécessaires pour exécuter l’application soumise. ApplicationMaster examine les phases de l’application (par exemple, la phase de mappage et la phase de réduction), ainsi que les facteurs permettant de déterminer la quantité de données à traiter. ApplicationMaster demande ensuite (*négocie*) les ressources auprès de ResourceManager pour le compte de l’application. ResourceManager accorde à son tour des ressources à partir des NodeManagers dans le cluster à ApplicationMaster qui peut les utiliser pour exécuter l’application.
+Quand un utilisateur soumet une application MapReduce à exécuter sur le cluster, l’application est soumise à ResourceManager. À son tour, ResourceManager alloue un conteneur sur les nœuds NodeManager disponibles. Ces nœuds représentent l’emplacement où l’application s’exécute réellement. Le premier conteneur alloué exécute une application spéciale, appelée ApplicationMaster. Celle-ci se charge de l’acquisition des ressources, sous la forme de conteneurs suivants, nécessaires pour exécuter l’application soumise. ApplicationMaster examine les phases de l’application (par exemple, la phase de mappage et la phase de réduction), ainsi que les facteurs permettant de déterminer la quantité de données à traiter. ApplicationMaster demande ensuite ( *négocie* ) les ressources auprès de ResourceManager pour le compte de l’application. ResourceManager accorde à son tour des ressources à partir des NodeManagers dans le cluster à ApplicationMaster qui peut les utiliser pour exécuter l’application.
 
 Les NodeManagers exécutent les tâches qui forment l’application, puis informent ApplicationMaster de leur progression et de leur l’état. ApplicationMaster informe à son tour ResourceManager de l’état de l’application. ResourceManager retourne les résultats au client.
 
@@ -53,12 +53,12 @@ Pour annuler la suppression d’un fichier de votre compte de stockage, consulte
 
 ### <a name="azure-storage"></a>Stockage Azure
 
-* [Suppression réversible pour les objets blob de Stockage Azure](../storage/blobs/storage-blob-soft-delete.md)
-* [Annuler la suppression d’un objet blob](https://docs.microsoft.com/rest/api/storageservices/undelete-blob)
+* [Suppression réversible pour les objets blob de Stockage Azure](../storage/blobs/soft-delete-blob-overview.md)
+* [Annuler la suppression d’un objet blob](/rest/api/storageservices/undelete-blob)
 
 ### <a name="azure-data-lake-storage-gen-1"></a>Azure Data Lake Storage Gen 1
 
-[Restore-AzDataLakeStoreDeletedItem](https://docs.microsoft.com/powershell/module/az.datalakestore/restore-azdatalakestoredeleteditem)
+[Restore-AzDataLakeStoreDeletedItem](/powershell/module/az.datalakestore/restore-azdatalakestoredeleteditem)
 
 ### <a name="azure-data-lake-storage-gen-2"></a>Azure Data Lake Storage Gen 2
 

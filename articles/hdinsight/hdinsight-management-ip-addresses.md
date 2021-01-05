@@ -7,26 +7,34 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
-ms.date: 03/03/2020
-ms.openlocfilehash: f1a539096ac1a154ca37bbe6703f820787f927fb
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.date: 08/11/2020
+ms.openlocfilehash: 9fa38e045bbe29e5d45587adf0d277c1414fee4c
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82778258"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96549036"
 ---
 # <a name="hdinsight-management-ip-addresses"></a>Adresses IP de gestion HDInsight
 
+Cet article répertorie les adresses IP utilisées par les services d’intégrité et de gestion Azure HDInsight. Si vous utilisez des groupes de sécurité réseau (NSG) ou des itinéraires définis par l’utilisateur (UDR), vous devrez peut-être ajouter une partie de ces adresses IP à la liste d’autorisation pour le trafic réseau entrant.
+
+## <a name="introduction"></a>Introduction
+ 
 > [!Important]
-> Dans la plupart des cas, vous pouvez désormais utiliser la fonctionnalité [balise de service](hdinsight-service-tags.md) pour les groupes de sécurité réseau, au lieu d’ajouter manuellement des adresses IP. Les nouvelles régions seront ajoutées uniquement pour les balises de service et les adresses IP statiques seront éventuellement déconseillées.
+> Dans la plupart des cas, vous pouvez désormais utiliser des [balises de service](hdinsight-service-tags.md) pour les groupes de sécurité réseau au lieu d’ajouter manuellement des adresses IP. Les adresses IP ne seront pas publiées pour les nouvelles régions Azure, seules des balises de service seront publiées. Les adresses IP statiques pour les adresses IP de gestion seront finalement dépréciées.
 
 Si vous utilisez des groupes de sécurité réseau ou des routes définies par l’utilisateur pour contrôler le trafic vers votre cluster HDInsight, vérifiez que votre cluster peut communiquer avec les services de gestion et d’intégrité Azure.  Certaines adresses IP sont propres à une région, et d’autres s’appliquent à toutes les régions Azure. Vous devrez peut-être autoriser le trafic provenant du service Azure DNS si vous n’utilisez pas de DNS personnalisé.
+
+Si vous avez besoin d’adresses IP pour une région qui n’est pas mentionnée ici, vous pouvez utiliser l’[API Service Tag Discovery](../virtual-network/service-tags-overview.md#use-the-service-tag-discovery-api-public-preview) pour rechercher des adresses IP pour votre région. Si vous ne parvenez pas à utiliser l’API, téléchargez le [fichier JSON de balises de service](../virtual-network/service-tags-overview.md#discover-service-tags-by-using-downloadable-json-files) et recherchez la région de votre choix.
+
+HDInsight effectue une validation pour ces règles avec la création et la mise à l’échelle du cluster afin d’éviter d’autres erreurs. Si la validation ne réussit pas, la création et la mise à l’échelle échouent.
 
 Les sections suivantes traitent des adresses IP spécifiques qui doivent être autorisées.
 
 ## <a name="azure-dns-service"></a>Service Azure DNS
 
-Si vous utilisez le service DNS fourni par Azure, autorisez l’accès à partir de l’adresse __168.63.129.16__ sur le port 53. Pour plus d’informations, voir le document [Résolution de noms pour les machines virtuelles et les instances de rôle](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md). Si vous utilisez un service DNS personnalisé, ignorez cette étape.
+Si vous utilisez le service DNS fourni par Azure, autorisez l’accès à l’adresse __168.63.129.16__ sur le port 53 à la fois pour TCP et UDP. Pour plus d’informations, voir le document [Résolution de noms pour les machines virtuelles et les instances de rôle](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md). Si vous utilisez un service DNS personnalisé, ignorez cette étape.
 
 ## <a name="health-and-management-services-all-regions"></a>Services de gestion et d'intégrité : Toutes les régions
 
@@ -79,8 +87,9 @@ Autorisez le trafic provenant des adresses IP répertoriées pour les services d
 | &nbsp; | USA Ouest | 13.64.254.98</br>23.101.196.19 | \*:443 | Trafic entrant |
 | &nbsp; | USA Ouest 2 | 52.175.211.210</br>52.175.222.222 | \*:443 | Trafic entrant |
 | &nbsp; | Émirats arabes unis Nord | 65.52.252.96</br>65.52.252.97 | \*:443 | Trafic entrant |
+| &nbsp; | Émirats arabes unis Centre | 20.37.76.96</br>20.37.76.99 | \*:443 | Trafic entrant |
 
-Pour plus d’informations sur les adresses IP à utiliser pour Azure Government, voir le document [Intelligence et analyse Azure Government](https://docs.microsoft.com/azure/azure-government/documentation-government-services-intelligenceandanalytics).
+Pour plus d’informations sur les adresses IP à utiliser pour Azure Government, voir le document [Intelligence et analyse Azure Government](../azure-government/compare-azure-government-global-azure.md).
 
 Pour plus d’informations, consultez [Contrôler le trafic réseau](./control-network-traffic.md).
 

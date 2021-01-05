@@ -4,19 +4,19 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: trbye
-ms.openlocfilehash: 989862c533487f1b8e5a79a691e2afd039dd59ff
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 1dfe1e24b61326a8b131efd81f79f3d86f10711c
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81400499"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91377075"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, assurez-vous de :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](../../../../get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](../../../../quickstarts/setup-platform.md?tabs=macos&pivots=programming-language-cpp)
 
 [!INCLUDE [Audio input format](~/articles/cognitive-services/speech-service/includes/audio-input-format-chart.md)]
@@ -29,7 +29,7 @@ Avant de commencer, assurez-vous de :
 
 1. Dans ce nouveau fichier, remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement au service Speech.
 
-1. Remplacez la chaîne `YourServiceRegion` par l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) qui est associée à votre abonnement (par exemple, `westus` pour l’abonnement à un essai gratuit).
+1. Remplacez la chaîne `YourServiceRegion` par l'**identificateur Région** de la [région](https://aka.ms/speech/sdkregion) associée à votre abonnement.
 
 1. Remplacez la chaîne `whatstheweatherlike.wav` par le nom de votre fichier.
 

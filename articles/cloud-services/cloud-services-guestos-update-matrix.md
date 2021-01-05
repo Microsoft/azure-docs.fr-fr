@@ -10,14 +10,14 @@ ms.service: cloud-services
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 5/4/2020
+ms.date: 11/17/2020
 ms.author: yohaddad
-ms.openlocfilehash: 19a442126fe2f090851236eb41cb6995df857c77
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: a5cc0fdf0473cb8ceafd164a34df6f0bd66dd6d3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791542"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013698"
 ---
 # <a name="azure-guest-os-releases-and-sdk-compatibility-matrix"></a>Versions du SE invité et matrice de compatibilité du Kit de développement logiciel (SDK) Azure
 Fournit des informations récentes sur les dernières publications du SE (système d’exploitation) invité de Microsoft Azure pour Cloud Services. Ces informations vous permettent de planifier votre mise à niveau avant la désactivation d’un SE invité. Si vous configurez vos rôles pour utiliser les mises à jour *automatiques* d’un SE invité comme cela est décrit dans [Paramètres de mise à jour du SE invité Azure][Azure Guest OS Update Settings], il n’est pas indispensable que vous lisiez cette page.
@@ -41,6 +41,24 @@ Fournit des informations récentes sur les dernières publications du SE (systè
 Vous ne savez pas comment mettre à jour votre système d’exploitation invité ? Consultez [cet article][cloud updates].
 
 ## <a name="news-updates"></a>Nouvelles mises à jour
+
+###### <a name="november-17-2020"></a>**17 novembre 2020**
+Publication de l’OS invité octobre. 
+
+###### <a name="october-10-2020"></a>**10 octobre 2020**
+Publication du système d’exploitation invité du mois de septembre. 
+
+###### <a name="september-5-2020"></a>**5 septembre 2020**
+Publication du système d’exploitation invité du mois d’août. 
+
+###### <a name="august-17-2020"></a>**17 août 2020**
+Le système d’exploitation invité de juillet a été publié. 
+
+###### <a name="august-10-2020"></a>**10 août 2020**
+Le système d’exploitation invité de juin a été publié. 
+
+###### <a name="june-2-2020"></a>**2 juin 2020**
+Le système d’exploitation invité de mai a été publié. 
 
 ###### <a name="may-4-2020"></a>**4 mai 2020**
 Le système d’exploitation invité d’avril a été publié. 
@@ -128,8 +146,14 @@ Publication du système d’exploitation invité du mois de septembre.
 
 | Chaîne de configuration | Date de publication | Date de désactivation |
 | --- | --- | --- |
-|  WA-GUEST-OS-6.18_202004-01  |  4 mai 2020  |  Post 6.20  |  
-|  WA-GUEST-OS-6.17_202003-01  |  2 avril 2020  |  Post 6.19  |  
+|  WA-GUEST-OS-6.24_202010-02 |  17 novembre 2020  |  Post 6.26  |  
+|  WA-GUEST-OS-6.23_202009-01  |  10 octobre 2020  |  Post 6.25  |  
+|~~WA-GUEST-OS-6.22_202008-02~~|  5 septembre 2020  |  17 novembre 2020  |  
+|~~WA-GUEST-OS-6.21_202007-01~~|  17 août 2020  |  10 octobre 2020  |  
+|~~WA-GUEST-OS-6.20_202006-02~~|  10 août 2020  |  5 septembre 2020  |  
+|~~WA-GUEST-OS-6.19_202005-02~~|  2 juin 2020  |  17 août 2020  |  
+|~~WA-GUEST-OS-6.18_202004-01~~|  4 mai 2020  |  10 août 2020  |  
+|~~WA-GUEST-OS-6.17_202003-01~~|  2 avril 2020  |  2 juin 2020  |  
 |~~WA-GUEST-OS-6.16_202002-01~~|  5 mars 2020  |  4 mai 2020  |  
 |~~WA-GUEST-OS-6.15_202001-01~~|  24 janvier 2020  |  2 avril 2020  |  
 |~~WA-GUEST-OS-6.14_201912-01~~| 8 janvier 2020 | 5 mars 2020 |  
@@ -159,8 +183,14 @@ Publication du système d’exploitation invité du mois de septembre.
 
 | Chaîne de configuration | Date de publication | Date de désactivation |
 | --- | --- | --- |
-|  WA-GUEST-OS-5.42_202004-01  |  4 mai 2020  |  Post 5.44  |  
-|  WA-GUEST-OS-5.41_202003-01  |  2 avril 2020  |  Post 5.43  |  
+|  WA-GUEST-OS-5.48_202010-02  |  17 novembre 2020  |  Post 5.50  | 
+|  WA-GUEST-OS-5.47_202009-01  |  10 octobre 2020  |  Post 5.49  | 
+|~~WA-GUEST-OS-5.46_202008-02~~|  5 septembre 2020  |  17 novembre 2020  |  
+|~~WA-GUEST-OS-5.45_202007-01~~|  17 août 2020  |  10 octobre 2020  |  
+|~~WA-GUEST-OS-5.44_202006-02~~|  10 août 2020  |  5 septembre 2020  |  
+|~~WA-GUEST-OS-5.43_202005-02~~|  2 juin 2020  |  17 août 2020  |  
+|~~WA-GUEST-OS-5.42_202004-01~~|  4 mai 2020  |  10 août 2020  |  
+|~~WA-GUEST-OS-5.41_202003-01~~|  2 avril 2020  |  2 juin 2020  |  
 |~~WA-GUEST-OS-5.40_202002-01~~|  5 mars 2020  |  4 mai 2020  |  
 |~~WA-GUEST-OS-5.39_202001-01~~|  24 janvier 2020  |  2 avril 2020  |  
 |~~WA-GUEST-OS-5.38_201912-01~~| 8 janvier 2020 | 5 mars 2020 |  
@@ -187,8 +217,14 @@ Publication du système d’exploitation invité du mois de septembre.
 
 | Chaîne de configuration | Date de publication | Date de désactivation |
 | --- | --- | --- |
-|  WA-GUEST-OS-4.77_202004-01  |  4 mai 2020  |  Post 4.79  |  
-|  WA-GUEST-OS-4.76_202003-01  |  2 avril 2020  |  Post 4.78  |  
+|  WA-GUEST-OS-4.83_202010-02  |  17 novembre 2020  |  Post 4.85  | 
+|  WA-GUEST-OS-4.82_202009-01  |  10 octobre 2020  |  Post 4.84  | 
+|~~WA-GUEST-OS-4.81_202008-02~~|  5 septembre 2020  |  17 novembre 2020  | 
+|~~WA-GUEST-OS-4.80_202007-01~~|  17 août 2020  |  10 octobre 2020  | 
+|~~WA-GUEST-OS-4.79_202006-02~~|  10 août 2020  |  5 septembre 2020  | 
+|~~WA-GUEST-OS-4.78_202005-02~~|  2 juin 2020  |  17 août 2020  |  
+|~~WA-GUEST-OS-4.77_202004-01~~|  4 mai 2020  |  10 août 2020  |  
+|~~WA-GUEST-OS-4.76_202003-01~~|  2 avril 2020  |  2 juin 2020  |  
 |~~WA-GUEST-OS-4.75_202002-01~~|  5 mars 2020  |  4 mai 2020  |  
 |~~WA-GUEST-OS-4.74_202001-01~~|  24 janvier 2020  |  2 avril 2020  |  
 |~~WA-GUEST-OS-4.73_201912-01~~| 8 janvier 2020 | 5 mars 2020 |  
@@ -215,8 +251,14 @@ Publication du système d’exploitation invité du mois de septembre.
 
 | Chaîne de configuration | Date de publication | Date de désactivation |
 | --- | --- | --- |
-|  WA-GUEST-OS-3.84_202004-01  |  4 mai 2020  |  Post 3.86  |  
-|  WA-GUEST-OS-3.83_202003-01  |  2 avril 2020  |  Post 3.85  |  
+|  WA-GUEST-OS-3.90_202010-02  |  17 novembre 2020  |  Post 3.92  |  
+|  WA-GUEST-OS-3.89_202009-01  |  10 octobre 2020  |  Post 3.91  |  
+|~~WA-GUEST-OS-3.88_202008-02~~|  5 septembre 2020  |  17 novembre 2020  |  
+|~~WA-GUEST-OS-3.87_202007-01~~|  17 août 2020  |  10 octobre 2020  |  
+|~~WA-GUEST-OS-3.86_202006-02~~|  10 août 2020  |  5 septembre 2020  |  
+|~~WA-GUEST-OS-3.85_202005-02~~|  2 juin 2020  |  17 août 2020  |  
+|~~WA-GUEST-OS-3.84_202004-01~~|  4 mai 2020  |  10 août 2020  |  
+|~~WA-GUEST-OS-3.83_202003-01~~|  2 avril 2020  |  2 juin 2020  |  
 |~~WA-GUEST-OS-3.82_202002-01~~|  5 mars 2020  |  4 mai 2020  |  
 |~~WA-GUEST-OS-3.81_202001-01~~|  24 janvier 2020  |  2 avril 2020  |  
 |~~WA-GUEST-OS-3.80_201912-01~~| 8 janvier 2020 | 5 mars 2020 |  
@@ -243,8 +285,14 @@ Publication du système d’exploitation invité du mois de septembre.
 
 | Chaîne de configuration | Date de publication | Date de désactivation |
 | --- | --- | --- |
-|  WA-GUEST-OS-2.97_202004-01  |  4 mai 2020  |  Post 2.99  |  
-|  WA-GUEST-OS-2.96_202003-01  |  2 avril 2020  |  Post 2.98  |  
+|  WA-GUEST-OS-2.103_202010-02  |  17 novembre 2020  |  Post 2.105  |  
+|  WA-GUEST-OS-2.102_202009-01  |  10 octobre 2020  |  Post 2.104  |  
+|~~WA-GUEST-OS-2.101_202008-02~~|  5 septembre 2020  |  17 novembre 2020 |    
+|~~WA-GUEST-OS-2.100_202007-01~~|  17 août 2020  |  10 octobre 2020  |  
+|~~WA-GUEST-OS-2.99_202006-02~~|  10 août 2020  | 5 septembre 2020  |  
+|~~WA-GUEST-OS-2.98_202005-02~~|  2 juin 2020  |  17 août 2020  |  
+|~~WA-GUEST-OS-2.97_202004-01~~|  4 mai 2020  |  10 août 2020  |  
+|~~WA-GUEST-OS-2.96_202003-01~~|  2 avril 2020  |  2 juin 2020  |  
 |~~WA-GUEST-OS-2.95_202002-01~~|  5 mars 2020  |  4 mai 2020  |  
 |~~WA-GUEST-OS-2.94_202001-01~~|  24 janvier 2020  |  2 avril 2020  |  
 |~~WA-GUEST-OS-2.93_201912-01~~| 8 janvier 2020 | 5 mars 2020 |  
@@ -320,26 +368,26 @@ Si vous procédez à une mise à jour manuelle de votre SE invité, consultez la
 ## <a name="guest-os-supportability-and-retirement-policy"></a>Stratégie de prise en charge et de suppression du système d’exploitation invité
 La prise en charge et la stratégie de suppression du SE invité sont détaillées [ici][retirepolicy].
 
-[cloud updates]: https://docs.microsoft.com/azure/cloud-services/cloud-services-update-azure-service
+[cloud updates]: ./cloud-services-update-azure-service.md
 [Flux RSS de mise à jour du SE invité]: https://raw.githubusercontent.com/MicrosoftDocs/azure-cloud-services-files/master/GuestOS/GuestOSFeed.xml
-[Install .NET on a Cloud Service Role]: https://azure.microsoft.com/documentation/articles/cloud-services-dotnet-install-dotnet/?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
+[Install .NET on a Cloud Service Role]: ./cloud-services-dotnet-install-dotnet.md?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
 [Azure Guest OS Update Settings]: cloud-services-how-to-configure-portal.md
 [ssl3 announcement]: https://azure.microsoft.com/blog/2014/12/09/azure-security-ssl-3-0-update/
-[Microsoft Security Advisory 3009008]: https://technet.microsoft.com/library/security/3009008.aspx
+[Microsoft Security Advisory 3009008]: /security-updates/SecurityAdvisories/2015/3009008
 [ssl3-fixit]: https://go.microsoft.com/?linkid=9863266
-[MS14-066]: https://technet.microsoft.com/library/security/ms14-066.aspx
-[MS14-046]: https://technet.microsoft.com/library/security/ms14-046.aspx
-[retire policy sdk]: https://msdn.microsoft.com/library/dn479282.aspx
+[MS14-066]: /security-updates/SecurityBulletins/2014/ms14-066
+[MS14-046]: /security-updates/SecurityBulletins/2014/ms14-046
+[retire policy sdk]: /previous-versions/azure/reference/dn479282(v=azure.100)
 [server and gos]: https://msdn.microsoft.com/library/dn775043.aspx
 [azuresupport]: https://azure.microsoft.com/support/options/
 [net install pkg]: https://www.microsoft.com/download/details.aspx?id=42643
 [msrc]: https://technet.microsoft.com/security/dn440717.aspx
 [update guest os portal]: https://msdn.microsoft.com/library/gg433101.aspx
 [update guest os svc]: https://msdn.microsoft.com/library/gg456324.aspx
-[restarts]: https://blogs.msdn.com/b/kwill/archive/2012/09/19/role-instance-restarts-due-to-os-upgrades.aspx
+[restarts]: /archive/blogs/kwill/role-instance-restarts-due-to-os-upgrades
 [patches]: cloud-services-guestos-msrc-releases.md
 [retirepolicy]: cloud-services-guestos-retirement-policy.md
 [fam1retire]: cloud-services-guestos-family1-retirement.md
-[fix]: https://technet.microsoft.com/library/security/ms17-010.aspx
+[fix]: /security-updates/SecurityBulletins/2017/ms17-010
 [Windows Azure SDK]: https://www.microsoft.com/en-us/download/details.aspx?id=54917
-[plus]: https://docs.microsoft.com/azure/cloud-services/applications-dont-support-tls-1-2  
+[plus]: ./applications-dont-support-tls-1-2.md

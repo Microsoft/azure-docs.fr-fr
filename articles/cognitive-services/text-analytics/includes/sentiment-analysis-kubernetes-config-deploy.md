@@ -6,15 +6,16 @@ services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
+ms.subservice: text-analytics
 ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: b43299974034f55b57b86191b3556c3d5c2ee83b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ca8d4d725ff25687d1005ddab1964316a147c730
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80877817"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017852"
 ---
 ### <a name="deploy-the-sentiment-analysis-container-to-an-aks-cluster"></a>Déployer le conteneur Analyse des sentiments vers un cluster AKS
 

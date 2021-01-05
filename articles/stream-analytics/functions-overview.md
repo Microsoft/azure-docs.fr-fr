@@ -7,10 +7,10 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 04/07/2020
 ms.openlocfilehash: d167c603ada885a1a4917c66bab110e4ce38cab4
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82598366"
 ---
 # <a name="user-defined-functions-in-azure-stream-analytics"></a>Fonctions définies par l’utilisateur dans Azure Stream Analytics

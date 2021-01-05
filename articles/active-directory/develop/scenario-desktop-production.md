@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: ea564eb69f102d8e548bf8ae9a626598fa264cd4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 325f95f2830ef021a4ac79de48695dda570f7817
+ms.sourcegitcommit: 8c3a656f82aa6f9c2792a27b02bbaa634786f42d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80882877"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97629780"
 ---
 # <a name="desktop-app-that-calls-web-apis-move-to-production"></a>Application de bureau qui appelle des API Web : Passer en production
 
@@ -59,7 +59,7 @@ string[] scopesForVendorApi = new string[]
 var accounts = await app.GetAccountsAsync();
 var result = await app.AcquireTokenInteractive(scopesForCustomerApi)
                      .WithAccount(accounts.FirstOrDefault())
-                     .WithExtraScopeToConsent(scopesForVendorApi)
+                     .WithExtraScopesToConsent(scopesForVendorApi)
                      .ExecuteAsync();
 ```
 

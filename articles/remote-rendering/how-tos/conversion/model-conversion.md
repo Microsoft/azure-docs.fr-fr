@@ -5,12 +5,12 @@ author: jakrams
 ms.author: jakras
 ms.date: 02/04/2020
 ms.topic: how-to
-ms.openlocfilehash: 135c58a665779ffaad8750ffe618bdbe38639b66
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: e899b249261ea3238695a2e2be6001cb6a9bc763
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679291"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91318056"
 ---
 # <a name="convert-models"></a>Convertir des modèles
 
@@ -21,9 +21,8 @@ Une fois converti, un modèle peut être chargé à partir d’un compte Stockag
 
 Le service de conversion prend en charge les formats suivants :
 
-- **FBX** (version 2011 et ultérieure)
-- **GLTF** (version 2.x)
-- **GLB** (version 2.x)
+- **FBX**  (version 2011 vers la version 2020)
+- **GLTF**/**GLB** (version 2.x)
 
 Il existe des différences mineures entre les formats en ce qui concerne la conversion des propriétés de matériau, comme indiqué dans le chapitre [Mappage de matériaux pour les formats de modèle](../../reference/material-mapping.md).
 
@@ -39,6 +38,11 @@ Il existe des différences mineures entre les formats en ce qui concerne la conv
 
 Toutes les données du modèle (entrée et sortie) sont stockées dans le stockage Blob Azure fourni par l’utilisateur. Azure Remote Rendering vous donne un contrôle total sur la gestion de vos ressources.
 
+## <a name="pricing"></a>Tarifs
+
+Pour plus d’informations sur les tarifs de conversion, consultez la page [Tarification Remote Rendering](https://azure.microsoft.com/pricing/details/remote-rendering).
+
+
 ## <a name="conversion-parameters"></a>Paramètres de conversion
 
 Pour connaître les différentes options de conversion, consultez [ce chapitre](configure-model-conversion.md).
@@ -53,4 +57,5 @@ Pour connaître les différentes options de conversion, consultez [ce chapitre](
 - [Utiliser Stockage Blob Azure pour une conversion de modèle](blob-storage.md)
 - [API REST de conversion de modèle](conversion-rest-api.md)
 - [Configurer la conversion de modèle](configure-model-conversion.md)
+- [Disposition des fichiers pour la conversion](layout-files-for-conversion.md)
 - [Mappage de matériaux pour les formats de modèle](../../reference/material-mapping.md)

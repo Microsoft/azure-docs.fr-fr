@@ -8,13 +8,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 04/09/2020
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: f0760f6e61904295771ba349f8101e2d6dc6afe3
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.custom: mqtt, devx-track-python
+ms.openlocfilehash: ad6399a4713520ca0550d143cf3f19f87d55337c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759748"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87876799"
 ---
 # <a name="send-cloud-to-device-messages-with-iot-hub-python"></a>Envoi de messages cloud-à-appareil avec IoT Hub (Python)
 

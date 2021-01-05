@@ -2,14 +2,14 @@
 author: trevorbye
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 04/04/2020
+ms.date: 10/15/2020
 ms.author: trbye
-ms.openlocfilehash: 924532318fc6638059bbe9eef0065349463523ae
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: d50d4c554f47629f6e04adf957e02f8ffcc48fe5
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81400878"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96509197"
 ---
 Ce guide explique comment installer le [Kit de développement logiciel (SDK) Speech](~/articles/cognitive-services/speech-service/speech-sdk.md) pour Python. Si vous voulez simplement le nom du package pour commencer seul, exécutez `pip install azure-cognitiveservices-speech`.
 
@@ -20,35 +20,31 @@ Ce guide explique comment installer le [Kit de développement logiciel (SDK) Spe
 - Le package Python du kit SDK Speech est disponible pour les systèmes d’exploitation suivants :
   - Windows : x64 et x86
   - Mac : macOS X version 10.12 ou ultérieure
-  - Linux : Ubuntu 16.04/18.04, Debian 9, RHEL 7/8, CentOS 7/8 sur x64
+  - Linux : consultez la liste des [architectures cibles et distributions Linux prises en charge](~/articles/cognitive-services/speech-service/speech-sdk.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
 - Les plateformes Linux prises en charge nécessitent l’installation de certaines bibliothèques (`libssl` pour la prise en charge du protocole SSL et `libasound2` pour la prise en charge du son). Reportez-vous à votre distribution ci-dessous pour connaître les commandes nécessaires à l’installation des versions appropriées de ces bibliothèques.
 
-  - Sur Ubuntu, exécutez les commandes suivantes pour installer les packages requis :
+  - Sur Ubuntu/Debian, exécutez les commandes suivantes pour installer les packages requis :
 
-        ```sh
-        sudo apt-get update
-        sudo apt-get install build-essential libssl1.0.0 libasound2
-        ```
+    ```sh
+    sudo apt-get update
+    sudo apt-get install build-essential libssl1.0.0 libasound2
+    ```
 
-  - Sur Debian 9, exécutez les commandes suivantes pour installer les packages requis :
+    Si libssl1.0.0 n’est pas disponible, installez libssl1.0.x (où x est supérieur à 0) ou libssl1.1 à la place.
 
-        ```sh
-        sudo apt-get update
-        sudo apt-get install build-essential libssl1.0.2 libasound2
-        ```
+  - Sur RHEL/CentOS, exécutez les commandes suivantes pour installer les packages nécessaires :
 
-  - Sur RHEL/CentOS 8, exécutez les commandes suivantes pour installer les packages nécessaires :
-
-        ```sh
-        sudo yum update
-        sudo yum install alsa-lib openssl python3
-        ```
+    ```sh
+    sudo yum update
+    sudo yum install alsa-lib openssl python3
+    ```
 
 > [!NOTE]
-> Sur RHEL/CentOS 8, suivez les instructions du [Guide pratique pour configurer OpenSSL pour Linux](~/articles/cognitive-services/speech-service/how-to-configure-openssl-linux.md).
+> - Sur RHEL/CentOS 7, suivez les instructions décrivant [comment configurer RHEL/CentOS 7 pour le Kit de développement logiciel (SDK) Speech](~/articles/cognitive-services/speech-service/how-to-configure-rhel-centos-7.md).
+> - Sur RHEL/CentOS 8, suivez les instructions du [Guide pratique pour configurer OpenSSL pour Linux](~/articles/cognitive-services/speech-service/how-to-configure-openssl-linux.md).
 
 - Sur Windows, vous avez besoin de [Microsoft Redistributable Visual C++ pour Visual Studio 2019](https://support.microsoft.com/help/2977003/the-latest-supported-visual-c-downloads) pour votre plateforme. Notez que la première installation peut nécessiter le redémarrage de Windows avant de continuer à suivre ce guide.
 - Enfin, vous aurez besoin de [Python 3.5 à 3.8](https://www.python.org/downloads/). Pour vérifier votre installation, ouvrez une invite de commandes, tapez la commande `python --version` et vérifiez le résultat. Si elle est correctement installée, vous obtenez une réponse « Python 3.5.1 » ou similaire.
@@ -94,7 +90,7 @@ Les mises à jour du package Python du kit SDK Speech sont distribuées via PyPI
 Si une nouvelle version est disponible, vous pouvez effectuer la mise à jour avec la commande `pip install --upgrade azure-cognitiveservices-speech`.
 Vérifiez la version actuellement installée en inspectant la variable `azure.cognitiveservices.speech.__version__`.
 
-Si vous avez un problème ou si une fonctionnalité est manquante, consultez [Options d’aide et de support](~/articles/cognitive-services/speech-service/support.md).
+Si vous avez un problème ou si une fonctionnalité est manquante, consultez [Options d’aide et de support](../../../../cognitive-services-support-options.md?context=%2fazure%2fcognitive-services%2fspeech-service%2fcontext%2fcontext%253fcontext%253d%2fazure%2fcognitive-services%2fspeech-service%2fcontext%2fcontext).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

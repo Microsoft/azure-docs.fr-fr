@@ -1,27 +1,22 @@
 - name: Documentation du lecteur immersif
   href: index.yml
-- name: Vue d’ensemble
-  items:
-    - name: "Qu’est-ce que le lecteur immersif\_?"
-      href: Overview.md
-- name: Démarrages rapides
-  expanded: true
-  items:
-    - name: 'Utilisation de C#'
-      href: Quickstart.md
-    - name: Utilisation de Node.js
-      href: quickstart-nodejs.md
-    - name: Utilisation de Swift (iOS)
-      href: ios-quickstart.md
+- name: "Qu’est-ce que le lecteur immersif\_?"
+  href: Overview.md
+- name: Démarrage rapide
+  href: ./quickstarts/client-libraries.md
 - name: Tutoriels
   items:
+    - name: Lancer le Lecteur immersif (Android)
+      href: tutorial-android.md
+    - name: Lancer le Lecteur immersif (iOS)
+      href: tutorial-ios.md
     - name: Lancer le lecteur immersif (Python)
       href: tutorial-python.md
     - name: Utiliser plusieurs ressources du Lecteur immersif
       href: tutorial-multiple-resources.md
 - name: Procédure
   items:
-    - name: Créer une ressource de Lecteur immersif
+    - name: Créer une ressource de lecteur immersif
       href: how-to-create-immersive-reader.md
     - name: Définir la stratégie de cookie
       href: how-to/set-cookie-policy.md
@@ -29,16 +24,26 @@
       href: how-to/display-math.md
     - name: Lancer le Lecteur immersif avec du contenu HTML
       href: how-to-launch-with-html.md
-    - name: Bouton Personnaliser le Lecteur immersif
+    - name: Personnaliser le bouton Lecteur immersif
       href: how-to-customize-launch-button.md
     - name: Mettre en cache le jeton d’authentification
       href: how-to-cache-token.md
+    - name: Configurer la lecture à haute voix
+      href: how-to-configure-read-aloud.md
+    - name: Configurer la traduction
+      href: how-to-configure-translation.md
+    - name: Stocker les préférences utilisateur
+      href: how-to-store-user-preferences.md
 - name: Informations de référence
   items:
-    - name: Informations de référence sur le SDK
+    - name: Kit de développement logiciel (SDK) JavaScript
       href: reference.md
+    - name: Notes de publication
+      href: release-notes.md
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/immersive-reader/context/context
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
     - name: Support multilingue

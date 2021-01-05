@@ -6,11 +6,13 @@
     - name: Qu’est-ce que Content Moderator ?
       href: overview.md
       expanded: true
+    - name: Nouveautés
+      href: whats-new.md
 - name: Démarrages rapides
   items:
     - name: Essayer Content Moderator sur le web
       href: quick-start.md
-    - name: Utilisation de la bibliothèque de client
+    - name: Utilisation de la bibliothèque de client ou de l’API REST
       href: client-libraries.md
 - name: Tutoriels
   items:
@@ -18,8 +20,6 @@
       href: ecommerce-retail-catalog-moderation.md
     - name: Modérer le contenu de Facebook
       href: facebook-post-moderation.md
-    - name: Modération de vidéos et de transcriptions
-      href: video-transcript-moderation-review-tutorial-dotnet.md
 - name: Concepts
   items:
     - name: Modération d’image
@@ -36,7 +36,7 @@
   items:
     - name: Modérer du contenu
       items:
-        - name: API REST
+        - name: Console d’API
           items:
             - name: "Images\_: console d’API"
               href: try-image-api.md
@@ -58,7 +58,7 @@
       items:
         - name: Outil de révision (navigateur)
           href: Review-Tool-User-Guide/Review-Moderated-Images.md
-        - name: API REST
+        - name: Console d’API
           href: try-review-api-review.md
         - name: Révisions de vidéos (.NET)
           href: video-reviews-quickstart-dotnet.md
@@ -68,11 +68,11 @@
       items:
         - name: Outil de révision (navigateur)
           href: Review-Tool-User-Guide/Workflows.md
-        - name: API REST
+        - name: Console d’API
           href: try-review-api-workflow.md
     - name: Définir et utiliser des travaux
       items:
-        - name: API REST
+        - name: Console d’API
           href: try-review-api-job.md
         - name: Kit de développement logiciel (SDK) .NET
           href: moderation-jobs-quickstart-dotnet.md
@@ -87,17 +87,19 @@
     - name: Kits SDK
       items:
         - name: .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/contentmoderator?view=azure-dotnet'
+          href: /dotnet/api/overview/azure/cognitiveservices/client/contentmoderator?view=azure-dotnet
         - name: Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/contentmoderator?view=azure-java-stable'
+          href: /java/api/overview/azure/cognitiveservices/client/contentmoderator?view=azure-java-stable
         - name: Node.js
-          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-contentmoderator/?view=azure-node-latest'
+          href: /javascript/api/@azure/cognitiveservices-contentmoderator/?view=azure-node-latest
         - name: Python
-          href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/contentmoderator?view=azure-python'
+          href: /python/api/overview/azure/cognitiveservices/contentmoderator?view=azure-python
         - name: Go
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/contentmoderator'
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/content-moderator/context/context
     - name: Exemples
       items:
         - name: Exemples du kit SDK .NET
@@ -106,10 +108,10 @@
           href: 'https://github.com/Azure-Samples/cognitive-services-python-sdk-samples'
         - name: Exemples du kit SDK Node.js
           href: 'https://github.com/Azure-Samples/cognitive-services-node-sdk-samples'
-        - name: 'Exemples d’API REST en C#'
+        - name: Exemples d’API REST en C#
           href: samples-rest.md
         - name: Autres exemples Azure
-          href: 'https://docs.microsoft.com/samples/browse/?products=azure&term=content-moderator'
+          href: /samples/browse/?products=azure&term=content-moderator
     - name: Série de webinaires Azure
       href: 'https://info.microsoft.com/cognitive-services-content-moderator-ondemand.html'
     - name: Tarification et limites

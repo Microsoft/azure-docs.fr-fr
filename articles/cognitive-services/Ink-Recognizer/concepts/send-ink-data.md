@@ -3,21 +3,23 @@ title: Envoyer des données manuscrites à l’API Ink Recognizer
 titleSuffix: Azure Cognitive Services
 description: Apprenez à appeler l’API Ink Recognizer pour différentes applications.
 services: cognitive-services
-author: erhopf
+author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
 ms.topic: conceptual
-ms.date: 05/02/2019
-ms.author: erhopf
-ms.openlocfilehash: 0ad961495d44f13522a3c02224a5612aaedaf076
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/24/2020
+ms.author: aahi
+ms.openlocfilehash: 9ecf3ad43b46d491d5f15270790251a0bc4e882e
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79219207"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94365361"
 ---
 # <a name="send-ink-data-to-the-ink-recognizer-api"></a>Envoyer des données manuscrites à l’API Ink Recognizer 
+
+[!INCLUDE [ink-recognizer-deprecation](../includes/deprecation-note.md)]
 
 Les entrées manuscrites numériques font référence aux technologies qui permettent de représenter sous forme numérique des entrées comme l’écriture manuscrite et les dessins. Ces représentations sont généralement obtenues à l’aide d’un numériseur qui capture les mouvements des appareils d’entrée, comme les stylets. Alors que les appareils permettent toujours des expériences d’écriture manuscrite numériques riches, l’intelligence artificielle et le machine learning permettent la reconnaissance de formes et de texte écrits dans n’importe quel contexte. L’API Ink Recognizer vous permet d’envoyer des traits d’encre pour obtenir des informations détaillées les concernant. 
 
@@ -62,7 +64,7 @@ L’API Ink Recognizer retourne une réponse d’analyse sur les objets qu’ell
 
 ## <a name="shapes-recognized-by-the-ink-recognizer-api"></a>Formes reconnues par l’API Ink Recognizer
 
-L’API Ink Recognizer peut identifier les formes les plus couramment utilisées dans la prise de notes. L’image ci-dessous montre quelques exemples simples. Pour obtenir la liste complète des formes et des contenus d’entrée manuscrite reconnus par l’API, consultez l’[article sur les informations de référence de l’API](https://go.microsoft.com/fwlink/?linkid=2089907). 
+L’API Ink Recognizer peut identifier les formes les plus couramment utilisées dans la prise de notes. L’image ci-dessous montre quelques exemples simples. Pour obtenir la liste complète des formes et des contenus d’entrée manuscrite reconnus par l’API, consultez l’[article sur les informations de référence de l’API](/rest/api/cognitiveservices/inkrecognizer/inkrecognizer). 
 
 ![Liste des formes reconnues par l’API Ink Recognizer](../media/shapes.png)
 
@@ -82,12 +84,12 @@ Avoir des résultats de reconnaissance à l’avance vous donne des informations
 
 ## <a name="integrate-the-ink-recognizer-api-with-windows-ink"></a>Intégrer l’API Ink Recognizer dans Windows Ink
 
-[Windows Ink](https://docs.microsoft.com/windows/uwp/design/input/pen-and-stylus-interactions) fournit des outils et des technologies qui permettent des expériences d’entrée manuscrite numérique sur divers appareils. Vous pouvez combiner la plateforme Windows Ink avec l’API Ink Recognizer pour créer des applications qui affichent et interprètent les traits d’encre numériques.
+[Windows Ink](/windows/uwp/design/input/pen-and-stylus-interactions) fournit des outils et des technologies qui permettent des expériences d’entrée manuscrite numérique sur divers appareils. Vous pouvez combiner la plateforme Windows Ink avec l’API Ink Recognizer pour créer des applications qui affichent et interprètent les traits d’encre numériques.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Qu’est-ce que l’API Ink Recognizer ?](../overview.md)
-* [Informations de référence sur l’API REST Ink Recognizer](https://go.microsoft.com/fwlink/?linkid=2089907)
+* [Informations de référence sur l’API REST Ink Recognizer](/rest/api/cognitiveservices/inkrecognizer/inkrecognizer)
 
 * Commencer à envoyer des données de trait d’encre numérique en :
     * [C#](../quickstarts/csharp.md)

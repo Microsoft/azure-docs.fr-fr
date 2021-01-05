@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 08/01/2019
+ms.date: 06/04/2020
 ms.author: jingwang
-ms.openlocfilehash: efb450f4da58c73c134d9f6b6aad6193f786912d
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 08f117e2fc4939eee1458c0807cac5a292785608
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415002"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84669866"
 ---
 # <a name="copy-data-from-marketo-using-azure-data-factory-preview"></a>Copier des données de Marketo avec Azure Data Factory (préversion)
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -35,7 +35,7 @@ Ce connecteur Marketo est pris en charge pour les activités suivantes :
 
 Vous pouvez copier les données depuis Marketo vers tout magasin de données récepteur pris en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Azure Data Factory fournit un pilote intégré qui permet la connexion. Vous n’avez donc pas besoin d’installer manuellement un pilote à l’aide de ce connecteur.
+Actuellement, l’instance Marketo qui est intégrée à un CRM externe n’est pas prise en charge.
 
 >[!NOTE]
 >Ce connecteur Marketo repose sur l’API REST Marketo. N’oubliez pas que le connecteur Marketo comporte une [limite de demandes simultanées](https://developers.marketo.com/rest-api/) côté service. Si vous rencontrez les messages de type « Erreur lors de la tentative d’utilisation de l’API REST : limite maximale de débit de 100 dépassée pendant 20 secondes (606) » ou « Erreur lors de la tentative d’utilisation de l’API REST : limite de 10 accès simultanés atteinte (615) », envisagez de réduire les exécutions d’activité de copie simultanées pour diminuer le nombre de requêtes envoyées au service.
@@ -57,8 +57,8 @@ Les propriétés prises en charge pour le service lié Marketo sont les suivante
 | clientId | ID client de votre service Marketo.  | Oui |
 | clientSecret | Secret client de votre service Marketo. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
 | useEncryptedEndpoints | Indique si les points de terminaison de la source de données sont chiffrés suivant le protocole HTTPS. La valeur par défaut est true.  | Non |
-| useHostVerification | Indique si le nom d'hôte du certificat du serveur doit correspondre à celui du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
-| usePeerVerification | Indique si l'identité du serveur doit être vérifiée en cas de connexion TLS. La valeur par défaut est true.  | Non |
+| useHostVerification | Indique si le nom d’hôte du certificat du serveur doit correspondre à celui du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
+| usePeerVerification | Indique s’il faut vérifier l’identité du serveur en cas de connexion TLS. La valeur par défaut est true.  | Non |
 
 **Exemple :**
 

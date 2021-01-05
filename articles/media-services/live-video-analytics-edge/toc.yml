@@ -1,0 +1,126 @@
+- name: Documentation Live Video Analytics sur IoT Edge (préversion)
+  href: index.yml
+- name: Vue d’ensemble
+  items:
+    - name: À propos de Live Video Analytics sur IoT Edge
+      href: overview.md
+    - name: Terminologie
+      href: terminology.md
+    - name: Nouveautés
+      items:
+        - name: Notes de publication
+          href: release-notes.md
+- name: Démarrages rapides
+  items:
+    - name: Bien démarrer - Live Video Analytics sur IoT Edge
+      href: get-started-detect-motion-emit-events-quickstart.md
+    - name: Détecter les mouvements et enregistrer des vidéos sur Media Services
+      href: detect-motion-record-video-clips-media-services-quickstart.md
+    - name: Détecter les événements de mouvement et d’émission
+      items:
+        - name: Utilisation d’appels de méthode directe
+          displayName: 'detect motion, emit events'
+          href: detect-motion-emit-events-quickstart.md
+    - name: Détecter les mouvements et enregistrer des vidéos sur des appareils périphériques
+      items:
+        - name: Utilisation d’appels de méthode directe
+          displayName: 'detect motion, record video on edge devices'
+          href: detect-motion-record-video-clips-edge-devices-quickstart.md
+    - name: Analyse de vidéo en direct à l’aide de votre propre modèle
+      items:
+        - name: avec une extension HTTP
+          items:
+            - name: Utilisation d’appels de méthode directe
+              displayName: 'analyze, your own model, http'
+              href: use-your-model-quickstart.md
+        - name: avec une extension gRPC
+          items:
+            - name: Utilisation d’appels de méthode directe
+              displayName: 'analyze, your own model, grpc'
+              href: analyze-live-video-use-your-grpc-model-quickstart.md
+- name: Tutoriels
+  items:
+    - name: Enregistrement de vidéo continu
+      href: continuous-video-recording-tutorial.md
+    - name: Enregistrement de vidéo basé sur les événements
+      href: event-based-video-recording-tutorial.md
+    - name: Lecture d’enregistrements sur plusieurs jours
+      href: playback-multi-day-recordings-tutorial.md
+    - name: Analyser la vidéo en direct
+      items:
+        - name: Avec OVMS via l’extension HTTP
+          displayName: 'intel, OpenVINO'
+          href: use-intel-openvino-tutorial.md
+        - name: Utiliser Custom Vision
+          href: custom-vision-tutorial.md
+        - name: Utiliser l’analyse spatiale
+          href: spatial-analysis-tutorial.md
+- name: Exemples
+  items:
+    - name: Exemples de méthode directe C#
+      href: 'https://github.com/Azure-Samples/live-video-analytics-iot-edge-csharp'
+    - name: Exemples de méthode directe Python
+      href: 'https://github.com/Azure-Samples/live-video-analytics-iot-edge-python'
+- name: Concepts
+  items:
+    - name: Graphe multimédia
+      href: media-graph-concept.md
+    - name: Extension de graphe multimédia
+      displayName: AI
+      href: media-graph-extension-concept.md
+    - name: Enregistrement de vidéo
+      href: video-recording-concept.md
+    - name: Lecture de vidéo
+      href: video-playback-concept.md
+    - name: Scénarios
+      items:
+        - name: Enregistrement de vidéo continu
+          href: continuous-video-recording-concept.md
+        - name: Enregistrement de vidéo basé sur les événements
+          href: event-based-video-recording-concept.md
+        - name: Live Video Analytics sans enregistrement de vidéo
+          href: analyze-live-video-concept.md
+- name: Guides pratiques
+  items:
+    - name: Créer un rôle Azure Resource Manager personnalisé
+      href: create-custom-azure-resource-manager-role-how-to.md
+    - name: Déployer sur un appareil IoT Edge
+      href: deploy-iot-edge-device.md
+    - name: Surveillance et journalisation
+      href: monitoring-logging.md
+    - name: Lecture d’un enregistrement
+      href: playback-recordings-how-to.md
+    - name: Gérer une stratégie d’enregistrement
+      href: manage-recording-policy-how-to.md
+    - name: Appeler des méthodes directes avec le portail
+      href: use-azure-portal-to-invoke-direct-methods.md
+    - name: Effectuer un déploiement sur Azure Stack Edge
+      href: deploy-azure-stack-edge-how-to.md
+    - name: Configurer une porte de signal
+      href: configure-signal-gate-how-to.md
+    - name: Dépanner
+      href: troubleshoot-how-to.md
+    - name: Mise à niveau
+      href: upgrading-lva-module.md
+    - name: Développer et déployer un serveur d’inférence gRPC
+      href: develop-deploy-grpc-inference-srv-how-to.md
+- name: Informations de référence
+  items:
+    - name: Protocole d’extension HTTP
+      href: http-extension-protocol.md
+    - name: Protocole d’extension gRPC
+      href: grpc-extension-protocol.md
+    - name: Schéma des métadonnées d’inférence
+      href: inference-metadata-schema.md
+    - name: Méthodes directes
+      href: direct-methods.md
+    - name: Schéma de configuration de jumeau de module
+      href: module-twin-configuration-schema.md
+    - name: Quotas et limitations
+      href: quotas-limitations.md
+    - name: FAQ
+      href: faq.md
+    - name: Préparation à la production et bonnes pratiques
+      href: production-readiness.md
+    - name: Transparence et principes d’une IA responsable
+      href: 'https://azure.microsoft.com/resources/transparency-note-live-video-analytics-lva/'

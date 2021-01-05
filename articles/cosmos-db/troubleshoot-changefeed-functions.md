@@ -3,18 +3,20 @@ title: Résoudre les problèmes lors de l’utilisation du déclencheur Azure Fu
 description: Problèmes courants, solutions de contournement et procédures de diagnostic relatifs à l’utilisation du déclencheur Azure Functions pour Cosmos DB
 author: ealsur
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.date: 03/13/2020
 ms.author: maquaran
 ms.topic: troubleshooting
 ms.reviewer: sngun
-ms.openlocfilehash: 7bf7d418e3f2680b32f61e42cffc76c921068508
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9fc5da214a50cb000d2154d08bb9b6f6f98ac5ec
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79365506"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340527"
 ---
 # <a name="diagnose-and-troubleshoot-issues-when-using-azure-functions-trigger-for-cosmos-db"></a>Diagnostiquer et résoudre les problèmes lors de l’utilisation du déclencheur Azure Functions pour Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article aborde les problèmes courants, solutions de contournement et procédures de diagnostic relatifs à l’utilisation du [déclencheur Azure Functions pour Cosmos DB](change-feed-functions.md).
 

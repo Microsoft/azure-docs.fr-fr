@@ -1,14 +1,16 @@
 ---
 title: Cycle de vie d’une base de connaissances – QnA Maker
 description: QnA Maker apprend mieux dans un cycle itératif de modifications du modèle, d’énoncés d’exemples, de publication et de collecte des données à partir de requêtes du point de terminaison.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
-ms.date: 02/27/2020
-ms.openlocfilehash: 98fbd81baa717c981486f33cfb2b3a608cec27c7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/01/2020
+ms.openlocfilehash: e52e7151bc30a19bd6f6041d52effdd799a87c99
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77914950"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91776967"
 ---
 # <a name="knowledge-base-lifecycle-in-qna-maker"></a>Cycle de vie d’une base de connaissances dans QnA Maker
 QnA Maker apprend mieux dans un cycle itératif de modifications du modèle, d’énoncés d’exemples, de publication et de collecte des données à partir de requêtes du point de terminaison.
@@ -16,11 +18,18 @@ QnA Maker apprend mieux dans un cycle itératif de modifications du modèle, d�
 ![Cycle de création](../media/qnamaker-concepts-lifecycle/kb-lifecycle.png)
 
 ## <a name="creating-a-qna-maker-knowledge-base"></a>Création d’une base de connaissances QnA Maker
-Le point de terminaison de la base de connaissances QnA Maker recherche une réponse correspondent le mieux à une requête utilisateur dans le contenu de la base de connaissances. La création d’une base de connaissances est une action ponctuelle destinée à créer un référentiel contenant des questions, des réponses et des métadonnées associées. Vous pouvez créer une base de connaissances en y intégrant du contenu existant, tel que des pages FAQ, des manuels de produits ou des paires structurées de questions-réponses. Découvrez comment [créer une base de connaissances](../quickstarts/create-publish-knowledge-base.md).
+Le point de terminaison de la base de connaissances QnA Maker recherche une réponse correspondent le mieux à une requête utilisateur dans le contenu de la base de connaissances. La création d’une base de connaissances est une action ponctuelle destinée à créer un référentiel contenant des questions, des réponses et des métadonnées associées. Une base de connaissances peut être créée en analysant du contenu préexistant comme les sources suivantes :
+
+- Pages de FAQ
+- Manuels de produit
+- Paires Q-A
+
+Découvrez comment [créer une base de connaissances](../quickstarts/create-publish-knowledge-base.md).
 
 ## <a name="testing-and-updating-the-knowledge-base"></a>Test et mise à jour de la base de connaissances
 
-La base de connaissances peut être testée dès qu’elle contient des données, qui ont été ajoutées manuellement ou par le biais d’une extraction automatique. Vous pouvez effectuer un test interactif à partir du panneau **Test** du portail QnA Maker en entrant les requêtes utilisateur courantes et en vérifiant que les réponses retournées sont correctes et affichent un score de confiance suffisant.
+La base de connaissances peut être testée dès qu’elle contient des données, qui ont été ajoutées manuellement ou par le biais d’une extraction automatique. Des tests interactifs peuvent être effectués dans le portail QnA Maker, via le volet **Test**. Vous entrez des requêtes utilisateur courantes. Ensuite, vous vérifiez que les réponses sont retournées avec la réponse correcte et un score de confiance suffisant.
+
 
 * **Pour améliorer les scores de confiance faibles** : ajoutez des questions alternatives.
 * **Si une requête retourne par erreur la [réponse par défaut](../How-to/change-default-answer.md)**  : ajoutez de nouvelles réponses à la bonne question.
@@ -41,7 +50,7 @@ Pour les grandes bases de connaissances, utilisez les tests automatisés avec l�
 ## <a name="publish-the-knowledge-base"></a>Publier la base de connaissances
 Une fois que vous avez testé la base de connaissances, vous pouvez la publier. Le processus de publication envoie (push) la dernière version de la base de connaissances testée à un index de Recherche cognitive Azure dédié, qui représente la base de connaissances **publiée**. Il crée également un point de terminaison qui peut être appelé dans votre application ou bot conversationnel.
 
-De cette manière, les modifications apportées à la version de test de la base de connaissances n’impactent pas la version publiée qui est potentiellement utilisée dans une application de production.
+En raison de l’action de publication, toute autre modification apportée à la version de test de la base de connaissances n’affecte pas la version publiée. La version publiée peut être active dans une application de production.
 
 Chacune de ces bases de connaissances peut être ciblée séparément pour le test. À l’aide des API, vous pouvez cibler la version de test de la base de connaissances en utilisant la propriété de corps `isTest` dans l’appel generateAnswer.
 
@@ -69,11 +78,11 @@ Une base de connaissances a deux états : *test* et *publiée*.
 
 ### <a name="test-knowledge-base"></a>Base de connaissances de test
 
-La *base de connaissances de test* est la version actuellement modifiée, enregistrée et testée en lien avec la précision et l’exhaustivité des réponses. Les modifications apportées à la base de connaissances de test n’affectent pas l’utilisateur final de votre application ou bot conversationnel. La base de connaissances de test est connue comme `test` dans la requête HTTP. La base de connaissances de `test` est disponible dans le volet **Test** interactif du portail QnA Maker.
+La *base de connaissances de test* correspond à la version actuellement modifiée et enregistrée. La version de test a été testée pour garantir la précision et l’exhaustivité des réponses. Les modifications apportées à la base de connaissances de test n’affectent pas l’utilisateur final de votre application ou bot conversationnel. La base de connaissances de test est connue comme `test` dans la requête HTTP. La base de connaissances de `test` est disponible dans le volet **Test** interactif du portail QnA Maker.
 
 ### <a name="production-knowledge-base"></a>Base de connaissances de production
 
-La *base de connaissances publiée* est la version utilisée dans votre bot conversationnel ou application. La publication d’une base de connaissances a pour effet de placer le contenu de la base de connaissances de test dans la base de connaissance publiée. Étant donné que la base de connaissances publiée est la version que l’application utilise via le point de terminaison, assurez-vous que le contenu est correct et dûment testé. La base de connaissances de test est connue comme `prod` dans la requête HTTP.
+La *base de connaissances publiée* est la version utilisée dans votre bot conversationnel ou application. La publication d’une base de connaissances place le contenu de sa version de test dans sa version publiée. La base de connaissances publiée est la version utilisée par l’application via le point de terminaison. Assurez-vous que le contenu est correct et bien testé. La base de connaissances de test est connue comme `prod` dans la requête HTTP.
 
 
 ## <a name="next-steps"></a>Étapes suivantes

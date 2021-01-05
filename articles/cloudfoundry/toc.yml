@@ -8,15 +8,15 @@
 - name: Tutoriels
   items:
     - name: Créer une application CF sur Azure
-      href: /azure/cloudfoundry/create-cloud-foundry-on-azure
+      href: ./create-cloud-foundry-on-azure.md
     - name: Déployer une application CF dans Azure
-      href: /azure/virtual-machines/linux/cloudfoundry-deploy-your-first-app
+      href: ./cloudfoundry-deploy-your-first-app.md
     - name: CloudFoundry sur Azure
-      href: /azure/virtual-machines/linux/cloudfoundry-get-started
+      href: ./cloudfoundry-get-started.md
     - name: Déployer CF OMS Nozzle
-      href: /azure/cloudfoundry/cloudfoundry-oms-nozzle
+      href: ./cloudfoundry-oms-nozzle.md
     - name: Intégrer Cloud Foundry avec Azure
-      href: /azure/cloudfoundry/how-cloud-foundry-integrates-with-azure
+      href: ./how-cloud-foundry-integrates-with-azure.md
 - name: Ressources
   items:
     - name: Feuille de route Azure

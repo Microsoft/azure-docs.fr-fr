@@ -8,12 +8,14 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 01/29/2018
-ms.openlocfilehash: f56332fa7f53c729ffaa28ea375f043d1b4a3678
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+ms.openlocfilehash: e25b9d6cbe8446fb2f10150f17f7e2b0ccf85d3c
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60626245"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147631"
 ---
 # <a name="send-device-to-cloud-and-cloud-to-device-messages-with-iot-hub"></a>Envoyer des messages d’appareil-à-cloud et de cloud-à-appareil avec IoT Hub
 
@@ -21,7 +23,7 @@ IoT Hub permet une communication bidirectionnelle avec vos appareils. Utilisez l
 
 ## <a name="sending-device-to-cloud-messages-to-iot-hub"></a>Envoi de messages appareil-à-cloud à IoT Hub
 
-IoT Hub a un point de terminaison de service intégré qui peut être utilisé par des services backend pour lire des messages de télémétrie provenant de vos appareils. Ce point de terminaison est compatible avec [Event Hubs](https://docs.microsoft.com/azure/event-hubs/) et vous pouvez utiliser les SDK IoT Hub standard pour [lire sur ce point de terminaison intégré](iot-hub-devguide-messages-read-builtin.md).
+IoT Hub a un point de terminaison de service intégré qui peut être utilisé par des services backend pour lire des messages de télémétrie provenant de vos appareils. Ce point de terminaison est compatible avec [Event Hubs](../event-hubs/index.yml) et vous pouvez utiliser les SDK IoT Hub standard pour [lire sur ce point de terminaison intégré](iot-hub-devguide-messages-read-builtin.md).
 
 IoT Hub prend également en charge les [points de terminaison personnalisés](iot-hub-devguide-endpoints.md#custom-endpoints), qui peuvent être définis par les utilisateurs pour envoyer des données de télémétrie et des événements des appareils à des services Azure avec le [routage des messages](iot-hub-devguide-messages-d2c.md).
 
@@ -37,9 +39,9 @@ Les principales propriétés de la fonctionnalité de messagerie IoT Hub sont la
 
 Utilisez les messages appareil-à-cloud pour envoyer des alertes et des données de télémétrie de série chronologique à partir de votre application pour appareil, et des messages cloud-à-appareil pour envoyer des notifications unidirectionnelles à votre application pour appareil.
 
-* Reportez-vous à [Aide sur la communication appareil-à-cloud](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-d2c-guidance) pour choisir entre les messages appareil-à-cloud, les propriétés signalées ou le chargement de fichiers.
+* Reportez-vous à [Aide sur la communication appareil-à-cloud](./iot-hub-devguide-d2c-guidance.md) pour choisir entre les messages appareil-à-cloud, les propriétés signalées ou le chargement de fichiers.
 
-* Reportez-vous à [l’aide sur la communication cloud-à-appareil](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-c2d-guidance) pour choisir entre les messages cloud-à-appareil, les propriétés souhaitées ou les méthodes directes.
+* Reportez-vous à [l’aide sur la communication cloud-à-appareil](./iot-hub-devguide-c2d-guidance.md) pour choisir entre les messages cloud-à-appareil, les propriétés souhaitées ou les méthodes directes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

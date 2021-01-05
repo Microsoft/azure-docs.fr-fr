@@ -3,20 +3,20 @@ title: Gérer des points de terminaison dans Azure Traffic Manager | Microsoft D
 description: Cet article vous aide à ajouter, supprimer, activer et désactiver des points de terminaison d’Azure Traffic Manager.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/08/2017
-ms.author: rohink
-ms.openlocfilehash: 2aee4282fe6a66151ea39018f0d6c0db51f2c027
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: fc6e8bcda17f9d788a430ed763bd9f8702eaf250
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76939136"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003546"
 ---
 # <a name="add-disable-enable-or-delete-endpoints"></a>Ajouter, désactiver, activer ou supprimer des points de terminaison
 

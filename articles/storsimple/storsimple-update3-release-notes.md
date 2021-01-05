@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 01/09/2018
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 4b61caecd67881eb08c82ea0c26522c63c3e8396
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e081acc357c1b8872dd3a25c552d4cbe9785e212
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228125"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007067"
 ---
 # <a name="update-3-release-notes-for-your-storsimple-8000-series-device"></a>Notes de publication Update 3 pour votre appareil StorSimple série 8000
 
@@ -79,11 +79,10 @@ Le tableau suivant récapitule les problèmes connus dans cette version.
 | 22 |Mises à jour |Lorsque vous appliquez Update 3, la page **Maintenance** dans le portail Azure Classic affiche le message suivant lié à Update 2 : « La série StorSimple 8000 Update 2 permet à Microsoft de collecter de façon proactive les informations des journaux de votre appareil quand nous détectons des problèmes potentiels ». Cela est trompeur car cela indique que l’appareil est mis à jour vers Update 2. Une fois l’appareil mis à jour vers Update 3, le message disparaît. |Ce problème sera résolu dans une prochaine version. |Oui |Non |
 
 ## <a name="controller-and-firmware-updates-in-update-3"></a>Mises à jour du contrôleur et du microprogramme dans Update 3
-Cette version contient des mises à jour du microprogramme et du pilote LSI. Pour plus d’informations sur la procédure d’installation du microprogramme et du pilote LSI, consultez [Installer Update 3 sur votre appareil StorSimple](storsimple-install-update-3.md) .
+Cette version contient des mises à jour du microprogramme et du pilote LSI. Pour plus d’informations sur la procédure d’installation du microprogramme et du pilote LSI, consultez [Installer Update 3 sur votre appareil StorSimple](./index.yml) .
 
 ## <a name="virtual-device-updates-in-update-3"></a>Mises à jour des appareils virtuels dans Update 3
 Cette mise à jour ne peut pas s’appliquer à l’équipement cloud StorSimple (également connu sous le nom d’appareil virtuel). De nouveaux appareils virtuels devront être créés. 
 
 ## <a name="next-step"></a>Étape suivante
-Découvrez comment [installer Update 3](storsimple-install-update-3.md) sur votre appareil StorSimple.
-
+Découvrez comment [installer Update 3](./index.yml) sur votre appareil StorSimple.

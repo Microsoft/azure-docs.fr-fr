@@ -4,6 +4,8 @@
   items:
     - name: "Qu’est-ce que Data Lake Analytics\_?"
       href: data-lake-analytics-overview.md
+    - name: Nouveautés de Data Lake Analytics
+      href: data-lake-analytics-whats-new.md
 - name: Bien démarrer
   items:
     - name: Portail Azure
@@ -16,12 +18,16 @@
       href: data-lake-analytics-get-started-powershell.md
     - name: Azure CLI
       href: data-lake-analytics-get-started-cli.md
-- name: Exemples
+- name: Concepts
   items:
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
-- name: Procédures
+    - name: Sécurité
+      items:
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
+        - name: Base de référence de la sécurité pour Azure Security Benchmark
+          href: security-baseline.md
+- name: Guides pratiques
   items:
     - name: Gérer Data Lake Analytics
       items:
@@ -62,7 +68,7 @@
             - name: Concepts de base
               href: data-lake-analytics-u-sql-get-started.md
             - name: Référence sur le langage
-              href: 'https://msdn.microsoft.com/library/azure/mt591959'
+              href: 'https://docs.microsoft.com/u-sql'
             - name: Catalogue
               href: data-lake-analytics-u-sql-catalog.md
             - name: Opérateurs définis par l’utilisateur
@@ -73,8 +79,6 @@
               href: data-lake-analytics-u-sql-r-extensions.md
             - name: Extensions cognitives
               href: data-lake-analytics-u-sql-cognitive.md
-            - name: Guide de programmabilité
-              href: data-lake-analytics-u-sql-programmability-guide.md
         - name: Visual Studio
           items:
             - name: Installer
@@ -107,8 +111,32 @@
               href: data-lake-analytics-data-lake-tools-for-vscode.md
             - name: Code personnalisé
               href: data-lake-analytics-u-sql-develop-with-python-r-csharp-in-vscode.md
+            - name: Accès aux ressources
+              href: data-lake-analytics-data-lake-tools-for-vscode-access-resource.md
             - name: Exécution et débogage locaux
               href: data-lake-tools-for-vscode-local-run-and-debug.md
+        - name: Guide de programmabilité
+          items:
+            - name: Vue d’ensemble du guide de programmabilité
+              href: data-lake-analytics-u-sql-programmability-guide.md
+            - name: Guide de programmabilité - UDT et UDAGG
+              href: data-lake-analytics-u-sql-programmability-guide-UDT-AGG.md
+            - name: Guide de programmabilité - UDO
+              items:
+                - name: Vue d’ensemble des objets définis par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-UDO.md
+                - name: Utiliser un extracteur défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-extractor.md
+                - name: Utiliser un générateur de sortie défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-outputter.md
+                - name: Utiliser un processeur défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-processor.md
+                - name: Utiliser un applicateur défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-applier.md
+                - name: Utiliser un combinateur défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-combiner.md
+                - name: Utiliser un réducteur défini par l’utilisateur
+                  href: data-lake-analytics-u-sql-programmability-guide-reducer.md
     - name: Planifier des tâches U-SQL
       items:
         - name: Planifier des tâches avec SSIS
@@ -133,7 +161,7 @@
           href: understand-spark-code-concepts.md
     - name: Résoudre les problèmes des travaux U-SQL
       items:
-        - name: Résoudre les échecs du runtime U-SQL
+        - name: Résoudre les échecs du runtime U-SQL et les problèmes connus
           href: runtime-troubleshoot.md
         - name: Résoudre les problèmes d’une mise à niveau .NET
           href: dotnet-upgrade-troubleshoot.md
@@ -146,23 +174,26 @@
     - name: Node.js
       href: 'https://www.npmjs.com/package/azure-arm-datalake-analytics'
     - name: Python
-      href: 'https://docs.microsoft.com/python/api/overview/azure/data-lake-analytics?view=azure-python'
+      href: /python/api/overview/azure/data-lake-analytics
     - name: REST
       href: /rest/api/datalakeanalytics/
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.datalakeanalytics/allversions
-    - name: Interface de ligne de commande
-      href: 'https://docs.microsoft.com/cli/azure/dla'
+    - name: Azure CLI
+      href: /cli/azure/dla
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Blog sur Azure Data Lake
-      href: 'https://blogs.msdn.microsoft.com/azuredatalake/'
+      href: /archive/blogs/azuredatalake/
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=intelligence-analytics'
     - name: Demander des changements
       href: 'https://feedback.azure.com/forums/327234-data-lake'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-data-lake-analytics.html'
+      href: /answers/topics/azure-data-lake-analytics.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/data-lake-analytics/'
     - name: Calculatrice de prix
@@ -171,7 +202,7 @@
       href: 'https://azure.microsoft.com/updates/?product=data-lake-analytics'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-data-lake'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=data-lake-analytics'
     - name: Exemples de code
       href: 'https://azure.microsoft.com/resources/samples/?service=data-lake-analytics'

@@ -3,16 +3,16 @@ title: Les modèles d’applications dans Azure IoT Central | Microsoft Docs
 description: Les modèles d’applications Azure IoT Central permettent de passer rapidement au développement de solutions IoT.
 author: philmea
 ms.author: philmea
-ms.date: 10/25/2019
+ms.date: 12/19/2020
 ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: 244de9a3236977308a9f7bcaf5106e86a0984201
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 27f054cb085e5064ffed0e75b77d53a1406b566e
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82024674"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97797126"
 ---
 # <a name="what-are-application-templates"></a>Présentation des modèles d’application
 
@@ -30,12 +30,7 @@ Vous choisissez le modèle d’application lorsque vous créez votre application
 
 ## <a name="custom-templates"></a>Modèles personnalisés
 
-Si vous souhaitez créer votre application à partir de zéro, choisissez l’un des deux modèles d’application personnalisés suivants :
-
-- Application personnalisée
-- Application personnalisée (hérité)
-
-Choisissez le modèle **Application personnalisée**, sauf si vous avez une raison particulière d’utiliser le modèle hérité.
+Si vous souhaitez créer votre application à partir de zéro, choisissez l’un des modèles d’**application personnalisée**.
 
 ## <a name="industry-focused-templates"></a>Modèles sectoriels
 
@@ -47,6 +42,7 @@ Azure IoT Central est une plateforme d’applications indépendante du secteur. 
   - Analytique en magasin – Monitorage des conditions
   - Analytique en magasin – Validation de l’achat
   - Gestion intelligente des stocks
+  - Analytique vidéo - Détection d’objets et de mouvements
 - [Énergie](../energy/overview-iot-central-energy.md)
   - Monitorage des compteurs intelligents
   - Monitorage des panneaux solaires
@@ -56,6 +52,10 @@ Azure IoT Central est une plateforme d’applications indépendante du secteur. 
   - Monitorage de la qualité de l’eau
 - [Santé](../healthcare/overview-iot-central-healthcare.md)
   - Monitorage continu des patients
+
+## <a name="application-versions"></a>Versions d’application
+
+Les modèles sont associés à des versions d’application IoT Central spécifiques. Vous pouvez trouver la version d’une application dans la page [À propos de votre application](./howto-get-app-info.md) à partir du lien **Aide**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

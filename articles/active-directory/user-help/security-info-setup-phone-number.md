@@ -12,10 +12,10 @@ ms.topic: end-user-help
 ms.date: 02/13/2019
 ms.author: curtand
 ms.openlocfilehash: 7500b6b146a627dcdebacd9d2e2c7c61bc43c105
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "83744448"
 ---
 # <a name="set-up-a-phone-number-as-your-verification-method"></a>Configurer un numéro de téléphone comme méthode de vérification
@@ -102,11 +102,11 @@ Pour utiliser l'appel téléphonique comme méthode par défaut lorsque vous vou
 
     ![Lien Changer pour la méthode de connexion par défaut](media/security-info/securityinfo-myprofile-phonetext-defaultchange.png)
 
-2. Sélectionnez **Téléphone - Appeler ( *_votre_numéro_de_téléphone_* )** dans la liste déroulante des méthodes disponibles, puis sélectionnez **Confirmer**.
+2. Sélectionnez **Téléphone - Appeler (*_votre_numéro_de_téléphone_*)** dans la liste déroulante des méthodes disponibles, puis sélectionnez **Confirmer**.
 
     ![Choisir la méthode de connexion par défaut](media/security-info/securityinfo-myprofile-phonecall-changeddefault.png)
 
-    La méthode par défaut utilisée pour la connexion devient **Téléphone - Appeler ( *_votre_numéro_de_téléphone_* )** .
+    La méthode par défaut utilisée pour la connexion devient **Téléphone - Appeler (*_votre_numéro_de_téléphone_*)** .
 
 ## <a name="additional-security-info-methods"></a>Autres méthodes d’informations de sécurité
 

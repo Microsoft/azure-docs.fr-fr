@@ -9,18 +9,18 @@ ms.custom: mvc
 ms.service: iot-accelerators
 services: iot-accelerators
 manager: timlt
-ms.openlocfilehash: 1a27d748e16f892a748cf18569c13ca3f9ead1dd
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 5012383e64a85ee025273f5339b828f5338e1d4f
+ms.sourcegitcommit: 8c3a656f82aa6f9c2792a27b02bbaa634786f42d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "71309514"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97629066"
 ---
 # <a name="what-are-azure-iot-solution-accelerators"></a>Que sont les accélérateurs de solution IoT ?
 
 Une solution IoT cloud utilise généralement un code personnalisé et des services cloud pour gérer la connectivité des appareils, le traitement et l’analytique de données et la présentation.
 
-Les accélérateurs de solution IoT sont complets et prêts à déployer des solutions IoT qui implémentent des scénarios IoT courants. Les scénarios incluent la supervision à distance, l’usine connectée, la maintenance prédictive et la simulation d’appareil. Lorsque vous déployez un accélérateur de solution, le déploiement inclut tous les services informatiques nécessaires ainsi que tout code d’application requis.
+Les accélérateurs de solution IoT sont complets et prêts à déployer des solutions IoT qui implémentent des scénarios IoT courants. Les scénarios incluent l’usine connectée et la simulation d’appareil. Lorsque vous déployez un accélérateur de solution, le déploiement inclut tous les services informatiques nécessaires ainsi que tout code d’application requis.
 
 Les accélérateurs de solution représentent le point de départ de vos solutions IoT. Le code source de tous les accélérateurs de solution est open source et disponible sur GitHub. Nous vous invitons à télécharger et personnaliser les accélérateurs de solution afin qu’ils répondent à vos exigences.
 
@@ -28,17 +28,12 @@ Vous pouvez aussi utiliser les accélérateurs de solution en tant qu’outils d
 
 Le code d’application de chaque accélérateur de solution inclut une application web qui vous permet de gérer l’accélérateur de solution.
 
+> [!NOTE]
+> Les solutions de supervision à distance et de maintenance prédictive ont été supprimées du site [Accélérateurs de solutions Azure IoT](https://www.azureiotsolutions.com/Accelerators). Pour en savoir plus, consultez [Présentation des accélérateurs de solutions Azure IoT (version précédente)](/previous-versions/azure/iot-accelerators/about-iot-accelerators).
+
 ## <a name="supported-iot-scenarios"></a>Scénarios IoT pris en charge
 
-Vous disposez actuellement de quatre accélérateurs de solution à déployer :
-
-### <a name="remote-monitoring"></a>Surveillance à distance
-
-Utilisez l’[accélérateur de solution de supervision à distance](iot-accelerators-remote-monitoring-sample-walkthrough.md) pour collecter des données de télémétrie sur des appareils distants et pour les contrôler. On peut citer par exemple des systèmes de refroidissement installés dans les locaux de vos clients ou des valves installées dans des stations de pompage distantes.
-
-Vous pouvez utiliser le tableau de bord de surveillance à distance pour afficher les données de télémétrie de vos appareils connectés, provisionner de nouveaux appareils ou mettre à niveau le microprogramme sur vos appareils connectés :
-
-[![Tableau de bord de la solution de supervision à distance](./media/about-iot-accelerators/rm-dashboard-inline.png)](./media/about-iot-accelerators/rm-dashboard-expanded.png#lightbox)
+À l’heure actuelle, vous pouvez déployer deux accélérateurs de solutions :
 
 ### <a name="connected-factory"></a>Fabrique connectée
 
@@ -46,15 +41,7 @@ Utilisez l’[accélérateur de solution Fabrique connectée](iot-accelerators-c
 
 Vous pouvez utiliser le tableau de bord d’usine connectée pour surveiller et gérer vos appareils industriels :
 
-[![Tableau de bord de la solution Usine connectée](./media/about-iot-accelerators/cf-dashboard-inline.png)](./media/about-iot-accelerators/cf-dashboard-expanded.png#lightbox)
-
-### <a name="predictive-maintenance"></a>Maintenance prédictive
-
-Utilisez l’[accélérateur de solution Maintenance prédictive](iot-accelerators-predictive-walkthrough.md) pour prédire l’échec d’un appareil distant afin d’effectuer la maintenance en amont avant que l’échec ne se produise. Cet accélérateur de solution utilise des algorithmes de machine Learning pour prédire des défaillances de données de télémétrie. On peut citer par exemple les moteurs d’avion ou les ascenseurs.
-
-Vous pouvez utiliser le tableau de bord de maintenance prédictive pour afficher l’analytique de maintenance prédictive :
-
-[![Tableau de bord de la solution Usine connectée](./media/about-iot-accelerators/pm-dashboard-inline.png)](./media/about-iot-accelerators/pm-dashboard-expanded.png#lightbox)
+:::image type="content" source="./media/about-iot-accelerators/cf-dashboard-inline.png" alt-text="Capture d’écran montrant le tableau de bord de la solution d’usine connectée." lightbox="./media/about-iot-accelerators/cf-dashboard-expanded.png":::
 
 ### <a name="device-simulation"></a>Simulation d’appareil
 
@@ -62,7 +49,7 @@ Utilisez l’[accélérateur de solution Simulation d’appareil](iot-accelerato
 
 Vous pouvez utiliser l’application web de simulation d’appareils pour configurer et exécuter des simulations :
 
-[![Tableau de bord de la solution Usine connectée](./media/about-iot-accelerators/ds-dashboard-inline.png)](./media/about-iot-accelerators/ds-dashboard-expanded.png#lightbox)
+:::image type="content" source="./media/about-iot-accelerators/ds-dashboard-inline.png" alt-text="Capture d’écran montrant le tableau de bord de la solution de simulation d’appareil." lightbox="./media/about-iot-accelerators/ds-dashboard-expanded.png":::
 
 ## <a name="design-principles"></a>Principes de conception
 
@@ -80,30 +67,17 @@ Les accélérateurs de solution originaux ont été conçus avec .NET et une arc
 
 | Accélérateur de solution   | Architecture  | Languages     |
 | ---------------------- | ------------- | ------------- |
-| Surveillance à distance      | Microservices | [Java](https://github.com/Azure/azure-iot-pcs-remote-monitoring-java) et [.NET](https://github.com/Azure/azure-iot-pcs-remote-monitoring-dotnet) |
-| Maintenance prédictive | MVC           | [.NET](https://github.com/Azure/azure-iot-predictive-maintenance)          |
 | Fabrique connectée      | MVC           | [.NET](https://github.com/Azure/azure-iot-connected-factory)          |
 | Simulation d’appareil      | Microservices | [.NET](https://github.com/Azure/device-simulation-dotnet)          |
 
-Pour en savoir plus sur l’architecture de microservices, consultez [Présentation de l’architecture de référence Azure IoT](https://docs.microsoft.com/azure/architecture/reference-architectures/iot/).
+Pour en savoir plus sur l’architecture de microservices, consultez [Présentation de l’architecture de référence Azure IoT](/azure/architecture/reference-architectures/iot/).
 
 ## <a name="deployment-options"></a>Options de déploiement
 
 Vous pouvez déployer les accélérateurs de solution à partir du site [Accélérateurs de solution Microsoft Azure IoT](https://www.azureiotsolutions.com/Accelerators#) ou à l’aide de la ligne de commande.
 
-Vous pouvez déployer l’accélérateur de solution de supervision à distance dans les configurations suivantes :
-
-* **Standard :** déploiement étendu de l’infrastructure pour le développement d’un déploiement de production. Azure Container Service déploie les microservices sur plusieurs machines virtuelles Azure. Kubernetes orchestre les conteneurs Docker qui hébergent les microservices individuels.
-* **Basic :** version à coût réduit pour une démonstration ou pour tester un déploiement. Tous les microservices se déploient sur une seule machine virtuelle Azure.
-* **Locale :** déploiement de machine locale pour développement et test. Cette approche déploie les microservices vers un conteneur Docker local et se connecte à IoT Hub, Azure Cosmos DB et aux services de stockage Azure dans le cloud.
-
 Le coût associé à l’exécution d’un accélérateur de solution est le [coût combiné de l’exécution des services Azure sous-jacents](https://azure.microsoft.com/pricing). Vous pouvez voir les détails des services Azure utilisés lors du choix des options de déploiement.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour essayer l’un des accélérateurs de solution IoT, consultez les démarrages rapides :
-
-* [Essayer une solution de supervision à distance](quickstart-remote-monitoring-deploy.md)
-* [Essayer une solution d’usine connectée](quickstart-connected-factory-deploy.md)
-* [Essayer une solution de maintenance prédictive](quickstart-predictive-maintenance-deploy.md)
-* [Essayer une solution de simulation d’appareil](quickstart-device-simulation-deploy.md)
+Pour essayer un des accélérateurs de solutions IoT, consultez le démarrage rapide [Essayer une solution d’usine connectée](quickstart-connected-factory-deploy.md).

@@ -11,10 +11,10 @@ ms.topic: article
 ms.date: 04/12/2020
 ms.author: ellbe
 ms.openlocfilehash: 3a71a29fdf4af10162e2f7961fb457d0e99b18e8
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81687120"
 ---
 # <a name="automatically-identify-the-spoken-language-with-language-identification-model"></a>Identifier automatiquement la langue parlée avec le modèle d’identification de langue

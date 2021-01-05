@@ -1,18 +1,18 @@
 ---
 title: Azure Disk Encryption pour les machines virtuelles et les groupes de machines virtuelles identiques
-description: Cet article fournit une vue d’ensemble d’Azure Disk Encryption.
+description: En savoir plus sur Azure Disk Encryption pour les machines virtuelles et les groupes de machines virtuelles identiques. Azure Disk Encryption fonctionne pour les machines virtuelles Linux et Windows.
 author: msmbaldwin
 ms.service: security
 ms.topic: article
 ms.author: mbaldwin
 ms.date: 10/15/2019
 ms.custom: seodec18
-ms.openlocfilehash: c881b2b9743766e4d35e6cb05f6f3469803850bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 21194bf2fe76a7eb0ee034d4a502c20ee3032dd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80062124"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543671"
 ---
 # <a name="azure-disk-encryption-for-virtual-machines-and-virtual-machine-scale-sets"></a>Azure Disk Encryption pour les machines virtuelles et les groupes de machines virtuelles identiques
 

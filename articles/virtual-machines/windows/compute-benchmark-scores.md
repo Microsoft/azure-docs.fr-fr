@@ -4,17 +4,17 @@ description: Comparez les scores de test d’évaluation de calcul SPECint pour 
 author: cynthn
 ms.service: virtual-machines-windows
 ms.subservice: sizes
-ms.topic: article
+ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 04/29/2020
 ms.author: cynthn
 ms.reviewer: davberg
-ms.openlocfilehash: c3e0fdc398d3b0b851c6f548119858e6c41a5a19
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: ccaf44f733958bff461e954c78196f7376a59771
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583924"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87836205"
 ---
 # <a name="compute-benchmark-scores-for-windows-vms"></a>Calcul des scores de test d’évaluation pour les machines virtuelles Windows
 Les scores de test d’évaluation SPECInt suivants montrent les performances de calcul de certaines machines virtuelles Azure exécutant Windows Server. Les scores de test d’évaluation de calcul sont également disponibles pour [les machines virtuelles Linux](../linux/compute-benchmark-scores.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
@@ -34,7 +34,7 @@ Les scores de test d’évaluation SPECInt suivants montrent les performances de
 | Standard_A2m_v2 | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 11 | 26,3 | 0,8 | 
 | Standard_A2m_v2 | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 21 | 28,4 | 1.0 | 
 | Standard_A4_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2660 0 à 2,20 GHz | 27 | 56,6 | 1.0 | 
-| Standard_A4_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 13 | 52,8 | 2 | 
+| Standard_A4_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 13 | 52,8 | 2.0 | 
 | Standard_A4_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 15 | 52,1 | 4.5 | 
 | Standard_A4m_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2660 0 à 2,20 GHz | 17 | 56,4 | 1.8 | 
 | Standard_A4m_v2 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 6 | 53,4 | 1.9 | 
@@ -242,7 +242,7 @@ Les scores de test d’évaluation SPECInt suivants montrent les performances de
 | Taille | Processeurs virtuels | Nœuds NUMA | UC | Exécutions | Taux de base moy. | StdDev | 
 | ---- | ----: | ---------: | --- | ---: | ------------: | -----: | 
 | Standard_F1s | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 31 | 33,2 | 1.0 | 
-| Standard_F1s | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 41 | 35,1 | 2 | 
+| Standard_F1s | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 41 | 35,1 | 2.0 | 
 | Standard_F2s | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 18 | 63,7 | 1.8 | 
 | Standard_F2s | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 21 | 66,6 | 3.8 | 
 | Standard_F4s | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 14 | 128,4 | 2,9 | 
@@ -257,7 +257,7 @@ Les scores de test d’évaluation SPECInt suivants montrent les performances de
 | Taille | Processeurs virtuels | Nœuds NUMA | UC | Exécutions | Taux de base moy. | StdDev | 
 | ---- | ----: | ---------: | --- | ---: | ------------: | -----: | 
 | Standard_F1 | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 15 | 32,8 | 1.8 | 
-| Standard_F1 | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 13 | 33,3 | 2 | 
+| Standard_F1 | 1 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 13 | 33,3 | 2.0 | 
 | Standard_F2 | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 27 | 64,9 | 6.0 | 
 | Standard_F2 | 2 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v4 à 2,30 GHz | 21 | 67,8 | 4,9 | 
 | Standard_F4 | 4 | 1 | Processeur Intel(R) Xeon(R) E5-2673 v3 à 2,40 GHz | 18 | 128,4 | 3.3 | 
@@ -389,5 +389,4 @@ Les scores de test d’évaluation SPECInt suivants montrent les performances de
 Les chiffres Windows ont été calculés en exécutant [SPECint 2006](https://www.spec.org/cpu2006/results/rint2006.html) sur Windows Server. SPECint a été exécuté à l’aide de l’option de taux de base (SPECint_rate2006), avec une copie par processeur virtuel. SPECint se compose de 12 tests distincts, chacun exécuté trois fois, en prenant la valeur médiane de chaque test et en les pondérant pour former un score composite. Ces tests ont été exécutés sur plusieurs machines virtuelles pour fournir les scores moyens indiqués.
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Pour plus d’informations sur les capacités de stockage, les détails du disque et d’autres considérations relatives au choix d’une taille de machine virtuelle, consultez [Tailles des machines virtuelles](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
-
+* Pour plus d’informations sur les capacités de stockage, les détails du disque et d’autres considérations relatives au choix d’une taille de machine virtuelle, consultez [Tailles des machines virtuelles](../sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).

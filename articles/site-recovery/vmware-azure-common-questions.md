@@ -3,12 +3,12 @@ title: Questions courantes sur la récupération d’urgence pour VMware avec Az
 description: Obtenez des réponses à des questions courantes sur la récupération d’urgence de machines virtuelles VMware locales sur Azure à l’aide d’Azure Site Recovery.
 ms.date: 11/14/2019
 ms.topic: conceptual
-ms.openlocfilehash: d551cef7037c0b6d7286cbb4b70d8f7a8f7f5cae
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8f292e7f624b80e8e13514a714c5759d88fbe57c
+ms.sourcegitcommit: 8a1ba1ebc76635b643b6634cc64e137f74a1e4da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259508"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94379988"
 ---
 # <a name="common-questions-about-vmware-to-azure-replication"></a>Questions courantes sur la réplication de VMware vers Azure
 
@@ -75,7 +75,7 @@ Site Recovery est certifié pour ISO 27001:2013 et 27018, HIPAA et DPA. Les éva
 
 Utilisez la [calculatrice de prix](https://aka.ms/asr_pricing_calculator) pour estimer les coûts d’utilisation de Site Recovery.
 
-Pour obtenir une estimation détaillée des coûts, exécutez l’outil Planificateur de déploiement pour [VMware](https://aka.ms/siterecovery_deployment_planner) et utilisez le [rapport d’estimation des coûts](https://aka.ms/asr_DP_costreport).
+Pour obtenir une estimation détaillée des coûts, exécutez l’outil Planificateur de déploiement pour [VMware](./site-recovery-deployment-planner.md) et utilisez le [rapport d’estimation des coûts](./site-recovery-vmware-deployment-planner-cost-estimation.md).
 
 ### <a name="is-there-any-difference-in-cost-between-replicating-to-storage-or-directly-to-managed-disks"></a>Existe-t-il une différence de coût entre la réplication vers le stockage ou directement vers des disques managés ?
 
@@ -114,7 +114,7 @@ Site Recovery réplique des machines virtuelles VMware locales et des serveurs p
 
 Non. À compter de mars 2019, dans le portail Azure, vous ne pouvez répliquer que sur des disques managés Azure.
 
-La réplication de nouvelles machines virtuelles vers un compte de stockage n’est possible qu’à l’aide de PowerShell ou de l’API REST (version 2018-01-10 ou 2016-08-10).
+La réplication de nouvelles machines virtuelles vers un compte de stockage n’est possible qu’à l’aide de PowerShell ([module Az.RecoveryServices version 1.4.5](https://www.powershellgallery.com/packages/Az.RecoveryServices/1.4.5)) ou de l’API REST (version 2018-01-10 ou 2016-08-10). [Découvrez comment](./vmware-azure-disaster-recovery-powershell.md) configurer la réplication à l’aide des commandes PowerShell.
 
 ### <a name="what-are-the-benefits-of-replicating-to-managed-disks"></a>Quels sont les avantages de la réplication vers des disques managés ?
 
@@ -122,7 +122,7 @@ La réplication de nouvelles machines virtuelles vers un compte de stockage n’
 
 ### <a name="can-i-change-the-managed-disk-type-after-a-machine-is-protected"></a>Puis-je modifier le type de disque managé une fois qu’une machine est protégée ?
 
-Oui, vous pouvez facilement [modifier le type de disque managé](https://docs.microsoft.com/azure/virtual-machines/windows/convert-disk-storage) pour les réplications en cours. Avant de modifier le type, vérifiez qu’aucune URL de signature d’accès partagé n’est générée sur le disque managé :
+Oui, vous pouvez facilement [modifier le type de disque managé](../virtual-machines/windows/convert-disk-storage.md) pour les réplications en cours. Avant de modifier le type, vérifiez qu’aucune URL de signature d’accès partagé n’est générée sur le disque managé :
 
 1. Accédez à la ressource **Disque managé** sur le portail Azure et vérifiez qu’une bannière d’URL de signature d’accès partagé apparaît dans le panneau **Vue d’ensemble**.
 1. Si la bannière est présente, sélectionnez-la pour annuler l’exportation en cours.
@@ -176,17 +176,21 @@ Pour la réplication VMware vers Azure, vous pouvez modifier la taille de disque
 
 ### <a name="can-i-migrate-on-premises-machines-to-a-new-vcenter-server-without-impacting-ongoing-replication"></a>Puis-je migrer des machines locales vers un nouveau vCenter Server sans que cela compromette la réplication en cours ?
 
-Non. Une modification du vCenter VMware ou de la migration aura une incidence sur la réplication en cours. Configurez Site Recovery avec le nouveau vCenter Server et activez à nouveau la réplication des machines.
+Reportez-vous à nos [conseils](vmware-azure-manage-vcenter.md#migrate-all-vms-to-a-new-server) pour migrer des machines vers un nouveau vCenter
 
 ### <a name="can-i-replicate-to-a-cache-or-target-storage-account-that-has-a-virtual-network-with-azure-firewalls-configured-on-it"></a>Puis-je répliquer vers un compte de stockage de cache ou cible dans lequel un réseau virtuel (avec des pare-feux Azure) est configuré ?
 
 Non, Site Recovery ne prend pas en charge la réplication vers un Stockage Azure sur des réseaux virtuels.
 
+### <a name="what-is-the-frequency-of-generation-of-crash-consistent-recovery-points"></a>Quelle est la fréquence de génération de points de récupération cohérents en cas d’incident ?
+
+Site Recovery génère des points de récupération cohérents en cas d’incident toutes les cinq minutes.
+
 ## <a name="component-upgrade"></a>Mise à niveau de composant
 
 ### <a name="my-version-of-the-mobility-services-agent-or-configuration-server-is-old-and-my-upgrade-failed-what-do-i-do"></a>Ma version de l’agent de services de mobilité ou du serveur de configuration est ancienne et ma mise à niveau a échoué. Que faire ?
 
-Site Recovery suit le modèle de prise en charge N-4. [En savoir plus](https://aka.ms/asr_support_statement) sur la mise à niveau à partir de versions très anciennes.
+Site Recovery suit le modèle de prise en charge N-4. [En savoir plus](./service-updates-how-to.md#support-statement-for-azure-site-recovery) sur la mise à niveau à partir de versions très anciennes.
 
 ### <a name="where-can-i-find-the-release-notes-and-update-rollups-for-azure-site-recovery"></a>Où puis-je trouver les notes de publication et correctifs cumulatifs pour Azure Site Recovery ?
 
@@ -194,11 +198,11 @@ Site Recovery suit le modèle de prise en charge N-4. [En savoir plus](https://a
 
 ### <a name="where-can-i-find-upgrade-information-for-disaster-recovery-to-azure"></a>Où puis-je trouver des informations de mise à niveau pour la récupération d’urgence vers Azure ?
 
-[Apprenez-en davantage sur la mise à niveau](https://aka.ms/asr_vmware_upgrades).
+[Apprenez-en davantage sur la mise à niveau](./service-updates-how-to.md#vmware-vmphysical-server-disaster-recovery-to-azure).
 
 ## <a name="do-i-need-to-reboot-source-machines-for-each-upgrade"></a>Dois-je redémarrer les machines sources pour chaque mise à niveau ?
 
-Un redémarrage est recommandé mais non obligatoire pour chaque mise à niveau. [Plus d’informations](https://aka.ms/asr_vmware_upgrades)
+Un redémarrage est recommandé mais non obligatoire pour chaque mise à niveau. [Plus d’informations](./service-updates-how-to.md#reboot-after-mobility-service-upgrade)
 
 ## <a name="configuration-server"></a>Serveur de configuration
 
@@ -242,7 +246,7 @@ Bien que ce soit possible, la machine virtuelle Azure exécutant le serveur de c
 
 - Les informations de mise à jour les plus récentes sont disponibles dans la [page relatives aux mises à jour d’Azure](https://azure.microsoft.com/updates/?product=site-recovery).
 - Vous pouvez télécharger la dernière version à partir du portail. Vous pouvez également télécharger la dernière version du serveur de configuration directement à partir du [Centre de téléchargement Microsoft](https://aka.ms/asrconfigurationserver).
-- Si votre version est antérieure de plus de quatre versions à la version actuelle, consultez la [déclaration de support](https://aka.ms/asr_support_statement) pour obtenir des instructions de mise à niveau.
+- Si votre version est antérieure de plus de quatre versions à la version actuelle, consultez la [déclaration de support](./service-updates-how-to.md#support-statement-for-azure-site-recovery) pour obtenir des instructions de mise à niveau.
 
 ### <a name="should-i-back-up-the-configuration-server"></a>Dois-je sauvegarder le serveur de configuration ?
 

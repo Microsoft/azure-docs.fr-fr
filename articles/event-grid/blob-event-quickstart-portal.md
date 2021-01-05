@@ -1,20 +1,14 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements de Stockage Blob à un point de terminaison web – Portail'
 description: 'Démarrage rapide : Utilisez Azure Event Grid et le portail Azure pour créer un compte de stockage d’objets blob, et abonnez-vous à ses événements. Envoyez les événements à un webhook.'
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: spelluru
-ms.date: 04/16/2020
+ms.date: 07/07/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: ada451b6bb3578a2903e9bd832b98981d7029d1d
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.openlocfilehash: 46cd88558334239a1a9971c63b8b2608def3c4d3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81605728"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005688"
 ---
 # <a name="quickstart-route-blob-storage-events-to-web-endpoint-with-the-azure-portal"></a>Démarrage rapide : Acheminer des événements de stockage Blob vers un point de terminaison web avec le portail Azure
 
@@ -56,7 +50,7 @@ Avant de nous abonner aux événements du stockage d’objets blob, nous allons 
 
 1. Sélectionnez **Déployer sur Azure** pour déployer la solution sur votre abonnement. 
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png" alt="Button to Deploy to Aquent." /></a>
 2. Dans la page **Déploiement personnalisé**, procédez comme suit : 
     1. Pour **Groupe de ressources**, sélectionnez le groupe de ressources que vous avez créé lors de la création du compte de stockage. Il sera plus facile pour vous de nettoyer une fois que vous aurez terminé le tutoriel en supprimant le groupe de ressources.  
     2. Pour **Nom du site**, entrez un nom pour l’application web.
@@ -86,12 +80,15 @@ Avant de nous abonner aux événements du stockage d’objets blob, nous allons 
 Vous vous abonnez à une rubrique pour communiquer à Event Grid les événements qui vous intéressent, et où les envoyer.
 
 1. Dans le portail, accédez au compte de stockage Azure que vous avez créé précédemment. Dans le menu de gauche, sélectionnez **Toutes les ressources** et votre compte de stockage. 
-2. Dans la page **Compte de stockage**, sélectionnez **Événements** dans le menu de gauche.
+2. Dans la page **Compte de stockage**, sélectionnez **Événements** dans le menu de gauche. 
 1. Sélectionnez **Autres options**, puis **Webhook**. Vous envoyez des événements à votre application de visionneuse, avec un webhook comme point de terminaison. 
 
    ![Sélectionner Webhook](./media/blob-event-quickstart-portal/select-web-hook.png)
 3. Dans la page **Créer un abonnement aux événements**, effectuez les étapes suivantes : 
     1. Entrez un **nom** pour l’abonnement aux événements.
+    2. Entrez un **nom** pour la **rubrique système**. Pour en savoir plus sur les rubriques système, consultez [Vue d’ensemble des rubriques système](system-topics.md).
+
+       ![Entrez des noms pour l’abonnement aux événements et la rubrique système](./media/blob-event-quickstart-portal/event-subscription-name-system-topic.png)
     2. Sélectionnez **Webhook** pour **Type de point de terminaison**. 
 
        ![Sélectionner le type de point de terminaison webhook](./media/blob-event-quickstart-portal/select-web-hook-end-point-type.png)

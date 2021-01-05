@@ -3,12 +3,12 @@ title: Applications de rendu
 description: Vous pouvez utiliser n’importe quelle application de rendu avec Azure Batch. Toutefois, les images de machine virtuelle de la Place de marché Azure sont disponibles avec des applications courantes préinstallées.
 ms.date: 09/19/2019
 ms.topic: how-to
-ms.openlocfilehash: 70e3fb18f0cc4788303ed16656e1eed0f8177dfc
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: f876671c6ac16137c2c1cf8d40bd70860c06975b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726483"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85960484"
 ---
 # <a name="pre-installed-applications-on-rendering-vm-images"></a>Applications de rendu d’images de machine virtuelle préinstallées
 
@@ -87,4 +87,4 @@ La liste suivante s’applique aux images de rendu Windows Server 2016 version�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour utiliser les images de machine virtuelle de rendu, celles-ci doivent être spécifiées dans la configuration du pool au moment de la création du pool. Consultez les [capacités du pool Batch pour le rendu](https://docs.microsoft.com/azure/batch/batch-rendering-functionality#batch-pools).
+Pour utiliser les images de machine virtuelle de rendu, celles-ci doivent être spécifiées dans la configuration du pool au moment de la création du pool. Consultez les [capacités du pool Batch pour le rendu](./batch-rendering-functionality.md#batch-pools).

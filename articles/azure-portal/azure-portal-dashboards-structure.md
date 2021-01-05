@@ -1,30 +1,21 @@
 ---
-title: Structure des tableaux de bord Azure | Microsoft Docs
+title: Structure des tableaux de bord Azure
 description: Parcourez la structure JSON d’un tableau de bord Azure à l’aide d’un exemple de tableau de bord. Comprend une référence aux propriétés de ressource.
-services: azure-portal
-documentationcenter: ''
-author: adamabmsft
-manager: mtillman
-ms.service: azure-portal
-ms.devlang: NA
 ms.topic: conceptual
-ms.tgt_pltfrm: NA
-ms.workload: na
 ms.date: 12/20/2019
-ms.author: mblythe
-ms.openlocfilehash: ad0d3a1bf2c293039df3bba3aa18da7d6e7dd0a5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d37e2fd9c9f6ef6e7ddea6dea002f26f20cd66a7
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81459217"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745959"
 ---
 # <a name="the-structure-of-azure-dashboards"></a>Structure des tableaux de bord Azure
 Ce document décrit la structure d’un tableau de bord Azure, en utilisant le tableau de bord suivant comme exemple :
 
 ![exemple de tableau de bord](./media/azure-portal-dashboards-structure/sample-dashboard.png)
 
-Étant donné que les [tableaux de bord Azure sont des ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview), ce tableau de bord peut être représenté au format JSON.  Le document JSON suivant représente le tableau de bord visualisé ci-dessus.
+Étant donné que les [tableaux de bord Azure sont des ressources](../azure-resource-manager/management/overview.md), ce tableau de bord peut être représenté au format JSON.  Le document JSON suivant représente le tableau de bord visualisé ci-dessus.
 
 ```json
 
@@ -303,7 +294,7 @@ Le nom est le segment de l’ID de ressource qui n’inclut pas l’abonnement, 
 Tous les tableaux de bord sont de type __Microsoft.Portal/dashboards__.
 
 ### <a name="the-location-property"></a>Propriété location
-Contrairement à d’autres ressources, les tableaux de bord n’ont pas de composant d’exécution.  Pour les tableaux de bord, la propriété location indique l’emplacement géographique principal qui stocke la représentation JSON du tableau de bord. La valeur doit correspondre à l’un des codes d’emplacement que vous pouvez extraire à l’aide de l’[API des emplacements sur la ressource des abonnements](https://docs.microsoft.com/rest/api/resources/subscriptions).
+Contrairement à d’autres ressources, les tableaux de bord n’ont pas de composant d’exécution.  Pour les tableaux de bord, la propriété location indique l’emplacement géographique principal qui stocke la représentation JSON du tableau de bord. La valeur doit correspondre à l’un des codes d’emplacement que vous pouvez extraire à l’aide de l’[API des emplacements sur la ressource des abonnements](/rest/api/resources/subscriptions).
 
 ### <a name="the-tags-property"></a>Propriété tags
 Les étiquettes (tags) sont une fonctionnalité commune des ressources Azure qui vous permettent d’organiser vos ressources dans des paires nom/valeur arbitraires. Pour les tableaux de bord, il existe une étiquette spéciale appelée __hidden-title__. Si cette propriété est renseignée pour votre tableau de bord, elle lui sert aussi de nom d’affichage dans le portail. Vous ne pouvez pas renommer des ID de ressources Azure, mais vous pouvez renommer des étiquettes. Cette étiquette permet de disposer d’un nom d’affichage modifiable pour votre tableau de bord.
@@ -329,7 +320,7 @@ La propriété __position__ contient les informations de taille et d’emplaceme
 
 `location: { x: 0, y: 0, rowSpan: 2, colSpan: 1 }`
 
-![unités de grille](./media/azure-portal-dashboards-structure/grid-units.png)
+![Capture d’écran montrant une vue rapprochée de la grille, avec une unité de grille carrée mise en surbrillance.](./media/azure-portal-dashboards-structure/grid-units.png)
 
 ### <a name="the-metadata-object"></a>Objet metadata
 Chaque partie a une propriété metadata ; un objet n’a qu’une seule propriété obligatoire appelée __type__. Cette chaîne indique au portail quelle partie afficher. Notre exemple de tableau de bord utilise ces types de parties de contrôle :

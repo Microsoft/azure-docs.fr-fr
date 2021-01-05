@@ -9,16 +9,17 @@ ms.service: cognitive-search
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 159aaa8424c3d7a711b587464b80696929f02186
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4860918fc4f995ad267fc35b142d3fcb460ce177
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72792380"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89002825"
 ---
 # <a name="upgrade-to-azure-search-net-sdk-version-11"></a>Effectuer une mise à niveau vers la version 1.1 du SDK .NET Recherche Azure
 
-Si vous utilisez la version préliminaire 1.0.2 ou une version antérieure du [Kit de développement logiciel (SDK) .NET Azure Search](https://aka.ms/search-sdk), cet article vous aidera à mettre à niveau votre application pour utiliser la version 1.1.
+Si vous utilisez la version préliminaire 1.0.2 ou une version antérieure du [Kit de développement logiciel (SDK) .NET Azure Search](/dotnet/api/overview/azure/search), cet article vous aidera à mettre à niveau votre application pour utiliser la version 1.1.
 
 Pour avoir un aperçu général du kit de développement logiciel et avoir des exemples, voir [Comment utiliser Azure Search à partir d’une application .NET](search-howto-dotnet-sdk.md).
 
@@ -34,10 +35,12 @@ Si vous utilisiez précédemment la version préliminaire 1.0.0-preview, 1.0.1-p
 
 Si vous utilisiez précédemment la version préliminaire 0.13.0-preview ou une version antérieure, vous obtiendrez sans doute les erreurs de build suivantes :
 
-    Program.cs(137,56,137,62): error CS0117: 'Microsoft.Azure.Search.Models.IndexBatch' does not contain a definition for 'Create'
-    Program.cs(137,99,137,105): error CS0117: 'Microsoft.Azure.Search.Models.IndexAction' does not contain a definition for 'Create'
-    Program.cs(146,41,146,54): error CS1061: 'Microsoft.Azure.Search.IndexBatchException' does not contain a definition for 'IndexResponse' and no extension method 'IndexResponse' accepting a first argument of type 'Microsoft.Azure.Search.IndexBatchException' could be found (are you missing a using directive or an assembly reference?)
-    Program.cs(163,13,163,42): error CS0246: The type or namespace name 'DocumentSearchResponse' could not be found (are you missing a using directive or an assembly reference?)
+```output
+Program.cs(137,56,137,62): error CS0117: 'Microsoft.Azure.Search.Models.IndexBatch' does not contain a definition for 'Create'
+Program.cs(137,99,137,105): error CS0117: 'Microsoft.Azure.Search.Models.IndexAction' does not contain a definition for 'Create'
+Program.cs(146,41,146,54): error CS1061: 'Microsoft.Azure.Search.IndexBatchException' does not contain a definition for 'IndexResponse' and no extension method 'IndexResponse' accepting a first argument of type 'Microsoft.Azure.Search.IndexBatchException' could be found (are you missing a using directive or an assembly reference?)
+Program.cs(163,13,163,42): error CS0246: The type or namespace name 'DocumentSearchResponse' could not be found (are you missing a using directive or an assembly reference?)
+```
 
 L’étape suivante consiste à corriger les erreurs de build une par une. La plupart d’entre elles nécessitent la modification de certains noms de classe et de méthode qui ont été renommés dans le kit de développement logiciel. [Liste des dernières modifications dans la version 1.1](#ListOfChangesV1) répertorie ces changements de nom.
 
@@ -58,18 +61,24 @@ La liste qui suit est classée selon la probabilité que la modification affecte
 #### <a name="example"></a>Exemple
 Si votre code ressemble à ce qui suit :
 
-    var batch = IndexBatch.Create(documents.Select(doc => IndexAction.Create(doc)));
-    indexClient.Documents.Index(batch);
+```csharp
+var batch = IndexBatch.Create(documents.Select(doc => IndexAction.Create(doc)));
+indexClient.Documents.Index(batch);
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    var batch = IndexBatch.New(documents.Select(doc => IndexAction.Upload(doc)));
-    indexClient.Documents.Index(batch);
+```csharp
+var batch = IndexBatch.New(documents.Select(doc => IndexAction.Upload(doc)));
+indexClient.Documents.Index(batch);
+```
 
 Si vous le souhaitez, vous pouvez encore le simplifier en le ramenant à ce qui suit :
 
-    var batch = IndexBatch.Upload(documents);
-    indexClient.Documents.Index(batch);
+```csharp
+var batch = IndexBatch.Upload(documents);
+indexClient.Documents.Index(batch);
+```
 
 ### <a name="indexbatchexception-changes"></a>Modifications IndexBatchException
 La propriété `IndexBatchException.IndexResponse` a été renommée `IndexingResults`, et son type est désormais `IList<IndexingResult>`.
@@ -77,21 +86,25 @@ La propriété `IndexBatchException.IndexResponse` a été renommée `IndexingRe
 #### <a name="example"></a>Exemple
 Si votre code ressemble à ce qui suit :
 
-    catch (IndexBatchException e)
-    {
-        Console.WriteLine(
-            "Failed to index some of the documents: {0}",
-            String.Join(", ", e.IndexResponse.Results.Where(r => !r.Succeeded).Select(r => r.Key)));
-    }
+```csharp
+catch (IndexBatchException e)
+{
+    Console.WriteLine(
+        "Failed to index some of the documents: {0}",
+        String.Join(", ", e.IndexResponse.Results.Where(r => !r.Succeeded).Select(r => r.Key)));
+}
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    catch (IndexBatchException e)
-    {
-        Console.WriteLine(
-            "Failed to index some of the documents: {0}",
-            String.Join(", ", e.IndexingResults.Where(r => !r.Succeeded).Select(r => r.Key)));
-    }
+```csharp
+catch (IndexBatchException e)
+{
+    Console.WriteLine(
+        "Failed to index some of the documents: {0}",
+        String.Join(", ", e.IndexingResults.Where(r => !r.Succeeded).Select(r => r.Key)));
+}
+```
 
 <a name="OperationMethodChanges"></a>
 
@@ -102,48 +115,56 @@ Par exemple, l’opération « Obtenir des statistiques d’Index » dans les 
 
 Dans `IIndexOperations` :
 
-    // Asynchronous operation with all parameters
-    Task<IndexGetStatisticsResponse> GetStatisticsAsync(
-        string indexName,
-        CancellationToken cancellationToken);
+```csharp
+// Asynchronous operation with all parameters
+Task<IndexGetStatisticsResponse> GetStatisticsAsync(
+    string indexName,
+    CancellationToken cancellationToken);
+```
 
 Dans `IndexOperationsExtensions` :
 
-    // Asynchronous operation with only required parameters
-    public static Task<IndexGetStatisticsResponse> GetStatisticsAsync(
-        this IIndexOperations operations,
-        string indexName);
+```csharp
+// Asynchronous operation with only required parameters
+public static Task<IndexGetStatisticsResponse> GetStatisticsAsync(
+    this IIndexOperations operations,
+    string indexName);
 
-    // Synchronous operation with only required parameters
-    public static IndexGetStatisticsResponse GetStatistics(
-        this IIndexOperations operations,
-        string indexName);
+// Synchronous operation with only required parameters
+public static IndexGetStatisticsResponse GetStatistics(
+    this IIndexOperations operations,
+    string indexName);
+```
 
 Les signatures de méthode pour la même opération en version 1.1 ressemblent à ce qui suit :
 
 Dans `IIndexesOperations` :
 
-    // Asynchronous operation with lower-level HTTP features exposed
-    Task<AzureOperationResponse<IndexGetStatisticsResult>> GetStatisticsWithHttpMessagesAsync(
-        string indexName,
-        SearchRequestOptions searchRequestOptions = default(SearchRequestOptions),
-        Dictionary<string, List<string>> customHeaders = null,
-        CancellationToken cancellationToken = default(CancellationToken));
+```csharp
+// Asynchronous operation with lower-level HTTP features exposed
+Task<AzureOperationResponse<IndexGetStatisticsResult>> GetStatisticsWithHttpMessagesAsync(
+    string indexName,
+    SearchRequestOptions searchRequestOptions = default(SearchRequestOptions),
+    Dictionary<string, List<string>> customHeaders = null,
+    CancellationToken cancellationToken = default(CancellationToken));
+```
 
 Dans `IndexesOperationsExtensions` :
 
-    // Simplified asynchronous operation
-    public static Task<IndexGetStatisticsResult> GetStatisticsAsync(
-        this IIndexesOperations operations,
-        string indexName,
-        SearchRequestOptions searchRequestOptions = default(SearchRequestOptions),
-        CancellationToken cancellationToken = default(CancellationToken));
+```csharp
+// Simplified asynchronous operation
+public static Task<IndexGetStatisticsResult> GetStatisticsAsync(
+    this IIndexesOperations operations,
+    string indexName,
+    SearchRequestOptions searchRequestOptions = default(SearchRequestOptions),
+    CancellationToken cancellationToken = default(CancellationToken));
 
-    // Simplified synchronous operation
-    public static IndexGetStatisticsResult GetStatistics(
-        this IIndexesOperations operations,
-        string indexName,
-        SearchRequestOptions searchRequestOptions = default(SearchRequestOptions));
+// Simplified synchronous operation
+public static IndexGetStatisticsResult GetStatistics(
+    this IIndexesOperations operations,
+    string indexName,
+    SearchRequestOptions searchRequestOptions = default(SearchRequestOptions));
+```
 
 À partir de la version 1.1, le Kit de développement logiciel (SDK) .NET Azure Search organise les méthodes d'opération différemment :
 
@@ -157,20 +178,24 @@ Une nouvelle classe nommée `ScoringParameter` a été ajoutée à la dernière 
 #### <a name="example"></a>Exemple
 Si votre code ressemble à ce qui suit :
 
-    var sp = new SearchParameters();
-    sp.ScoringProfile = "jobsScoringFeatured";      // Use a scoring profile
-    sp.ScoringParameters = new[] { "featuredParam-featured", "mapCenterParam-" + lon + "," + lat };
+```csharp
+var sp = new SearchParameters();
+sp.ScoringProfile = "jobsScoringFeatured";      // Use a scoring profile
+sp.ScoringParameters = new[] { "featuredParam-featured", "mapCenterParam-" + lon + "," + lat };
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build : 
 
-    var sp = new SearchParameters();
-    sp.ScoringProfile = "jobsScoringFeatured";      // Use a scoring profile
-    sp.ScoringParameters =
-        new[]
-        {
-            new ScoringParameter("featuredParam", new[] { "featured" }),
-            new ScoringParameter("mapCenterParam", GeographyPoint.Create(lat, lon))
-        };
+```csharp
+var sp = new SearchParameters();
+sp.ScoringProfile = "jobsScoringFeatured";      // Use a scoring profile
+sp.ScoringParameters =
+    new[]
+    {
+        new ScoringParameter("featuredParam", new[] { "featured" }),
+        new ScoringParameter("mapCenterParam", GeographyPoint.Create(lat, lon))
+    };
+```
 
 ### <a name="model-class-changes"></a>Modifications de modèles de classe
 En raison des modifications de signature décrites dans [Modifications des méthodes d’opération](#OperationMethodChanges), de nombreuses classes de l’espace de noms `Microsoft.Azure.Search.Models` ont été renommées ou supprimées. Par exemple :
@@ -187,83 +212,95 @@ Pour résumer, les classes dérivées de `OperationResponse`qui servaient unique
 #### <a name="example"></a>Exemple
 Si votre code ressemble à ce qui suit :
 
-    IndexerGetStatusResponse statusResponse = null;
+```csharp
+IndexerGetStatusResponse statusResponse = null;
 
-    try
-    {
-        statusResponse = _searchClient.Indexers.GetStatus(indexer.Name);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Error polling for indexer status: {0}", ex.Message);
-        return;
-    }
+try
+{
+    statusResponse = _searchClient.Indexers.GetStatus(indexer.Name);
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error polling for indexer status: {0}", ex.Message);
+    return;
+}
 
-    IndexerExecutionResult lastResult = statusResponse.ExecutionInfo.LastResult;
+IndexerExecutionResult lastResult = statusResponse.ExecutionInfo.LastResult;
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    IndexerExecutionInfo status = null;
+```csharp
+IndexerExecutionInfo status = null;
 
-    try
-    {
-        status = _searchClient.Indexers.GetStatus(indexer.Name);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Error polling for indexer status: {0}", ex.Message);
-        return;
-    }
+try
+{
+    status = _searchClient.Indexers.GetStatus(indexer.Name);
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error polling for indexer status: {0}", ex.Message);
+    return;
+}
 
-    IndexerExecutionResult lastResult = status.LastResult;
+IndexerExecutionResult lastResult = status.LastResult;
+```
 
 #### <a name="response-classes-and-ienumerable"></a>Les classes de réponse et IEnumerable
 Une modification supplémentaire pouvant affecter votre code est que les classes de réponse contenant des collections ne sont plus mises en œuvre `IEnumerable<T>`. Au lieu de cela, vous pourrez directement accéder à la propriété de collection. Par exemple, si votre code ressemble à ceci :
 
-    DocumentSearchResponse<Hotel> response = indexClient.Documents.Search<Hotel>(searchText, sp);
-    foreach (SearchResult<Hotel> result in response)
-    {
-        Console.WriteLine(result.Document);
-    }
+```csharp
+DocumentSearchResponse<Hotel> response = indexClient.Documents.Search<Hotel>(searchText, sp);
+foreach (SearchResult<Hotel> result in response)
+{
+    Console.WriteLine(result.Document);
+}
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    DocumentSearchResult<Hotel> response = indexClient.Documents.Search<Hotel>(searchText, sp);
-    foreach (SearchResult<Hotel> result in response.Results)
-    {
-        Console.WriteLine(result.Document);
-    }
+```csharp
+DocumentSearchResult<Hotel> response = indexClient.Documents.Search<Hotel>(searchText, sp);
+foreach (SearchResult<Hotel> result in response.Results)
+{
+    Console.WriteLine(result.Document);
+}
+```
 
 #### <a name="special-case-for-web-applications"></a>Cas particulier pour les applications web
 Si vous disposez d’une application web qui sérialise `DocumentSearchResponse` directement pour envoyer des résultats de recherche au navigateur, vous devez modifier votre code sinon les résultats ne seront pas sérialisés correctement. Par exemple, si votre code ressemble à ceci :
 
-    public ActionResult Search(string q = "")
-    {
-        // If blank search, assume they want to search everything
-        if (string.IsNullOrWhiteSpace(q))
-            q = "*";
+```csharp
+public ActionResult Search(string q = "")
+{
+    // If blank search, assume they want to search everything
+    if (string.IsNullOrWhiteSpace(q))
+        q = "*";
 
-        return new JsonResult
-        {
-            JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-            Data = _featuresSearch.Search(q)
-        };
-    }
+    return new JsonResult
+    {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = _featuresSearch.Search(q)
+    };
+}
+```
 
 Vous pouvez le modifier en faisant en sorte que la propriété `.Results` de la réponse de la recherche corrige le rendu des résultats de recherche :
 
-    public ActionResult Search(string q = "")
-    {
-        // If blank search, assume they want to search everything
-        if (string.IsNullOrWhiteSpace(q))
-            q = "*";
+```csharp
+public ActionResult Search(string q = "")
+{
+    // If blank search, assume they want to search everything
+    if (string.IsNullOrWhiteSpace(q))
+        q = "*";
 
-        return new JsonResult
-        {
-            JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-            Data = _featuresSearch.Search(q).Results
-        };
-    }
+    return new JsonResult
+    {
+        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+        Data = _featuresSearch.Search(q).Results
+    };
+}
+```
 
 Vous devrez rechercher ces cas dans votre code vous-même. **Le compilateur ne vous avertira pas** parce que `JsonResult.Data` est de type `object`.
 
@@ -277,17 +314,21 @@ Dans les versions antérieures du Kit de développement logiciel (SDK), `SearchS
 
 Enfin, les constructeurs incluant un élément `Uri` et `SearchCredentials` ont été modifiés. Par exemple, si vous avez un code qui ressemble à c qui suit :
 
-    var client =
-        new SearchServiceClient(
-            new SearchCredentials("abc123"),
-            new Uri("http://myservice.search.windows.net"));
+```csharp
+var client =
+    new SearchServiceClient(
+        new SearchCredentials("abc123"),
+        new Uri("http://myservice.search.windows.net"));
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    var client =
-        new SearchServiceClient(
-            new Uri("http://myservice.search.windows.net"),
-            new SearchCredentials("abc123"));
+```csharp
+var client =
+    new SearchServiceClient(
+        new Uri("http://myservice.search.windows.net"),
+        new SearchCredentials("abc123"));
+```
 
 Notez également que le type du paramètre d’informations d’identification a été modifié en `ServiceClientCredentials`. Il est peu probable que cela affecte votre code, car l’élément `SearchCredentials` est dérivé de `ServiceClientCredentials`.
 
@@ -302,13 +343,17 @@ Dans les versions antérieures du Kit de développement logiciel (SDK), vous pou
 ### <a name="example"></a>Exemple
 Si vous avez un code qui ressemble à ce qui suit :
 
-    client.SetClientRequestId(Guid.NewGuid());
-    ...
-    long count = client.Documents.Count();
+```csharp
+client.SetClientRequestId(Guid.NewGuid());
+...
+long count = client.Documents.Count();
+```
 
 vous pouvez le modifier pour résoudre les éventuelles erreurs de build :
 
-    long count = client.Documents.Count(new SearchRequestOptions(requestId: Guid.NewGuid()));
+```csharp
+long count = client.Documents.Count(new SearchRequestOptions(requestId: Guid.NewGuid()));
+```
 
 ### <a name="interface-name-changes"></a>Modifications de nom d’interface
 Les noms d’interface du groupe d’opération ont tous changé pour être cohérents avec les noms de propriété correspondants :
@@ -335,12 +380,14 @@ Les filtres peuvent également ne pas fonctionner comme prévu car c’est la va
 ### <a name="fix-details"></a>Corriger des détails
 Nous avons résolu ce problème dans la version 1.1 du Kit de développement logiciel (SDK). Maintenant, si vous avez une classe de modèle comme suit :
 
-    public class Model
-    {
-        public string Key { get; set; }
+```csharp
+public class Model
+{
+    public string Key { get; set; }
 
-        public int IntValue { get; set; }
-    }
+    public int IntValue { get; set; }
+}
+```
 
 et si vous définissez `IntValue` sur 0, cette valeur est correctement sérialisée en tant que 0 sur le câble et stockée en tant que 0 dans l’index. Le retour fonctionne également comme prévu.
 
@@ -348,9 +395,10 @@ Cette approche présente un problème à ne pas ignorer : si vous utilisez un ty
 
 Il ne s’agit pas d’une préoccupation hypothétique : imaginez un scénario dans lequel vous ajoutez un nouveau champ à un index existant qui est de type `Edm.Int32`. Après la mise à jour de la définition d’index, ce nouveau champ prendra la valeur null pour tous les documents (car tous les types peuvent avoir la valeur null dans Azure Search). Si vous utilisez ensuite une classe de modèle avec une propriété `int` ne pouvant être définie sur null pour ce champ, vous obtiendrez l’exception `JsonSerializationException` ci-dessous lorsque vous tenterez de récupérer des documents :
 
-    Error converting value {null} to type 'System.Int32'. Path 'IntValue'.
+```output
+Error converting value {null} to type 'System.Int32'. Path 'IntValue'.
+```
 
 Pour cette raison, nous vous recommandons d’utiliser des types pour lesquels la valeur null est autorisée en tant que meilleure pratique.
 
 Pour plus d’informations sur ce bogue et le correctif, consultez [ce problème sur GitHub](https://github.com/Azure/azure-sdk-for-net/issues/1063).
-

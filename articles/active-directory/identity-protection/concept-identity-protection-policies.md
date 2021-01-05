@@ -5,30 +5,30 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
 ms.topic: conceptual
-ms.date: 10/18/2019
+ms.date: 05/20/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4a44e32efa3e38cf9c4df7dc00e3189c129db418
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 28a9080ce878e262573adf0b3c79394079c09ca2
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72886840"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94835966"
 ---
 # <a name="identity-protection-policies"></a>Stratégies Identity Protection
 
-Azure Active Directory Identity Protection comprend trois stratégies par défaut que les administrateurs peuvent choisir d’activer. Ces stratégies incluent une personnalisation limitée, mais s’appliquent à la plupart des organisations. Toutes les stratégies permettent d’exclure des utilisateurs, tels que vos [comptes d’administrateur d’accès en urgence ou d’interruption](../users-groups-roles/directory-emergency-access.md).
+Azure Active Directory Identity Protection comprend trois stratégies par défaut que les administrateurs peuvent choisir d’activer. Ces stratégies incluent une personnalisation limitée, mais s’appliquent à la plupart des organisations. Toutes les stratégies permettent d’exclure des utilisateurs, tels que vos [comptes d’administrateur d’accès en urgence ou d’interruption](../roles/security-emergency-access.md).
 
 ![Stratégies Identity Protection](./media/concept-identity-protection-policies/identity-protection-policies.png)
 
-## <a name="azure-mfa-registration-policy"></a>Stratégie d’inscription Azure MFA
+## <a name="azure-ad-mfa-registration-policy"></a>Stratégie d'inscription Azure AD MFA
 
-Identity protection peut aider les organisations à déployer Azure Multi-Factor Authentication (MFA) à l’aide d’une stratégie d’accès conditionnel nécessitant une inscription à la connexion. L’activation de cette stratégie est un excellent moyen de s’assurer que les nouveaux utilisateurs de votre organisation se sont inscrits à l’authentification MFA la première fois. L’authentification multifacteur est l’une des méthodes d’auto-restauration pour les événements à risque dans Identity Protection. L’auto-restauration permet à vos utilisateurs d’effectuer leurs propres actions pour réduire le volume d’appels du support technique.
+Identity Protection peut aider les organisations à déployer Azure AD Multi-Factor Authentication (MFA) à l'aide d'une stratégie d'accès conditionnel exigeant une inscription lors de la connexion. L’activation de cette stratégie est un excellent moyen de s’assurer que les nouveaux utilisateurs de votre organisation se sont inscrits à l’authentification MFA la première fois. L’authentification multifacteur est l’une des méthodes d’auto-restauration pour les événements à risque dans Identity Protection. L’auto-restauration permet à vos utilisateurs d’effectuer leurs propres actions pour réduire le volume d’appels du support technique.
 
-Pour plus d’informations sur l’authentification multifacteur Azure, consultez l’article [Fonctionnement : Azure Multi-Factor Authentication](../authentication/concept-mfa-howitworks.md).
+Pour plus d'informations sur Azure AD Multi-Factor Authentication, consultez l'article [Fonctionnement : Azure AD Multi-Factor Authentication](../authentication/concept-mfa-howitworks.md).
 
 ## <a name="sign-in-risk-policy"></a>Stratégie en matière de risque à la connexion
 
@@ -37,11 +37,11 @@ Identity Protection analyse les signaux de chaque connexion, en temps réel et h
 Si un risque est détecté, les utilisateurs peuvent effectuer l’authentification multifacteur pour résoudre automatiquement et fermer l’événement de connexion risquée afin d’éviter toute perturbation inutile pour les administrateurs.
 
 > [!NOTE] 
-> Les utilisateurs doivent avoir déjà été inscrits à Azure Multi-Factor Authentication avant de déclencher la stratégie de connexion à risque.
+> Les utilisateurs doivent s'être préalablement inscrits à Azure AD Multi-Factor Authentication avant de déclencher la stratégie de connexion à risque.
 
 ### <a name="custom-conditional-access-policy"></a>Stratégie d’accès conditionnel personnalisé
 
-Les administrateurs peuvent également choisir de créer une stratégie d’accès conditionnel personnalisée, y compris le risque de connexion en tant que condition d’affectation. Pour plus d’informations sur l’accès conditionnel, consultez l’article [Qu’est-ce que l’accès conditionnel ?](../conditional-access/overview.md)
+Les administrateurs peuvent également choisir de créer une stratégie d’accès conditionnel personnalisée, y compris le risque de connexion en tant que condition d’affectation. Pour plus d’informations sur le risque en tant que condition dans une politique d’accès conditionnel, consultez l’article [Accès conditionnel : Conditions](../conditional-access/concept-conditional-access-conditions.md#sign-in-risk)
 
 ![Stratégie de risque de connexion d’accès conditionnel personnalisé](./media/concept-identity-protection-policies/identity-protection-custom-sign-in-policy.png)
 
@@ -58,8 +58,8 @@ Si un risque est détecté, les utilisateurs peuvent effectuer la réinitialisat
 
 - [Activer la réinitialisation de mot de passe en libre-service Azure AD](../authentication/howto-sspr-deployment.md)
 
-- [Activation d’Azure Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)
+- [Activer l’authentification multifacteur Azure AD](../authentication/howto-mfa-getstarted.md)
 
-- [Activer une stratégie d’inscription d’authentification multifacteur](howto-identity-protection-configure-mfa-policy.md)
+- [Activer la stratégie d'inscription Azure AD Multi-Factor Authentication](howto-identity-protection-configure-mfa-policy.md)
 
 - [Activer les stratégies de connexion et de risque utilisateur](howto-identity-protection-configure-risk-policies.md)

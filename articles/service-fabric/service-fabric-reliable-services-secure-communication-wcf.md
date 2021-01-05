@@ -5,12 +5,13 @@ author: suchiagicha
 ms.topic: conceptual
 ms.date: 04/20/2017
 ms.author: pepogors
-ms.openlocfilehash: ca5eafa4612503a13f80b7f238e4827979c0358b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e8b5e5944d58e9bf3291b3870027257b2c87ad24
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614160"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89012668"
 ---
 # <a name="secure-wcf-based-communications-for-a-service"></a>Sécuriser les communications basées sur WCF pour un service
 La sécurité est un des aspects les plus importants de la communication. L’infrastructure d’application Reliable Services fournit quelques piles et outils de communication prédéfinis afin d’améliorer la sécurité. Cet article explique comment améliorer la sécurité lorsque vous utilisez un service de communication à distance.
@@ -120,4 +121,4 @@ Nous utilisons un [exemple](service-fabric-reliable-services-communication-wcf.m
         client => client.Channel.Add(2, 3)).Result;
     ```
 
-En guise de prochaine étape, lisez [API web avec OWIN dans Reliable Services](service-fabric-reliable-services-communication-webapi.md).
+En guise de prochaine étape, lisez [API web avec OWIN dans Reliable Services](./service-fabric-reliable-services-communication-aspnetcore.md).

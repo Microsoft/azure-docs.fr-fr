@@ -5,12 +5,12 @@ ms.topic: quickstart
 ms.date: 07/10/2019
 ms.author: atsenthi
 ms.custom: mvc
-ms.openlocfilehash: 477d47fabc59c5718c449418f225d6a38838b270
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 934b679813323fe144f935811eb613ab68b561db
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75466270"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87089615"
 ---
 # <a name="quickstart-deploy-windows-containers-to-service-fabric"></a>Démarrage rapide : Déployer des conteneurs Windows sur Service Fabric
 
@@ -86,7 +86,7 @@ Toujours dans le fichier *ApplicationManifest.xml*, affectez à **PasswordEncryp
 
 L’exemple de script suivant crée un cluster Service Fabric à cinq nœuds sécurisé avec un certificat X.509. La commande crée un certificat auto-signé et le charge vers un nouveau coffre de clés. Le certificat est également copié dans un répertoire local. Pour plus d’informations sur la création d’un cluster à l’aide de ce script, consultez [Créer un cluster Service Fabric](scripts/service-fabric-powershell-create-secure-cluster-cert.md).
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview).
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/).
 
 Avant d’exécuter le script suivant, exécutez `Connect-AzAccount` dans PowerShell pour créer une connexion avec Azure.
 
@@ -148,7 +148,7 @@ Ouvrez un navigateur et accédez à l’adresse que vous avez indiquée dans le 
 
 ## <a name="clean-up"></a>Nettoyer
 
-Vous continuez à être facturé tant que le cluster est en cours d’exécution. Songez à [supprimer votre cluster](service-fabric-cluster-delete.md).
+Vous continuez à être facturé tant que le cluster est en cours d’exécution. Songez à [supprimer votre cluster](./service-fabric-tutorial-delete-cluster.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

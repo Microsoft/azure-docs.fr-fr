@@ -6,11 +6,11 @@ author: bwren
 ms.author: bwren
 ms.date: 06/14/2019
 ms.openlocfilehash: 4d0ceacd37748e9761903d02fd7e052d70b10e15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234429"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011878"
 ---
 # <a name="managing-and-maintaining-the-log-analytics-agent-for-windows-and-linux"></a>Gestion et maintenance de l’agent Log Analytics sous Windows et Linux
 
@@ -28,7 +28,7 @@ L’agent Log Analytics pour Windows et Linux peut être mis à niveau vers la d
 
 ### <a name="upgrade-windows-agent"></a>Mise à niveau de l’agent Windows 
 
-Pour mettre à jour l’agent vers la dernière version sur une machine virtuelle Windows qui n’a pas été installée à l’aide de l’extension de machine virtuelle Log Analytics, vous l’exécutez à partir de l’invite de commandes, d’un script ou d’une autre solution d’automatisation ou bien à l’aide de l’Assistant d’installation MMASetup-\<platform\>.msi.  
+Pour mettre à jour l’agent vers la dernière version sur une machine virtuelle Windows qui n’a pas été installée à l’aide de l’extension de machine virtuelle Log Analytics, vous l’exécutez à partir de l’invite de commandes, d’un script ou d’une autre solution d’automatisation, ou bien à l’aide de l’Assistant d’installation MMASetup-\<platform\>.msi.  
 
 Vous pouvez télécharger la dernière version de l’agent Windows sur votre espace de travail Log Analytics, en effectuant les opérations suivantes.
 
@@ -50,7 +50,7 @@ Vous pouvez télécharger la dernière version de l’agent Windows sur votre es
 
 1. Connectez-vous à la machine avec un compte disposant des droits d’administration.
 
-2. Exécutez **MMASetup-\<platform\>.exe** pour démarrer l’Assistant d’installation.
+2. Exécutez **MMASetup-\<platform\>.exe** pour démarrer l’Assistant Installation.
 
 3. Sur la première page de l’Assistant d’installation, cliquez sur **Suivant**.
 
@@ -236,7 +236,7 @@ Utilisez une des procédures suivantes pour désinstaller l’agent Windows ou L
 3. Dans **Programmes et fonctionnalités**, sélectionnez **Microsoft Monitoring Agent**, cliquez sur **Désinstaller** puis sur **Oui**.
 
 >[!NOTE]
->Pour exécuter l’Assistant d’installation de l’agent, vous pouvez aussi double-cliquer sur le fichier **MMASetup-\<plateforme\>.exe**, disponible en téléchargement à partir d’un espace de travail dans le portail Azure.
+>Pour exécuter l’Assistant d’installation de l’agent, vous pouvez aussi double-cliquer sur le fichier **MMASetup-\<platform\>.exe**, disponible en téléchargement à partir d’un espace de travail dans le portail Azure.
 
 #### <a name="uninstall-from-the-command-line"></a>Désinstaller à partir de la ligne de commande
 Le fichier téléchargé de l’agent est un package d’installation autonome créé avec IExpress. Le programme d’installation de l’agent et les fichiers de prise en charge sont contenus dans le package et doivent être extraits pour effectuer une désinstallation correcte à l’aide de la ligne de commande indiquée dans l’exemple suivant.

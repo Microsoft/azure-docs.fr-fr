@@ -3,23 +3,26 @@ title: Prise en main d’Azure Cost Management pour les partenaires
 description: Cet article explique aux partenaires comment utiliser les fonctionnalités d’Azure Cost Management et comment autoriser l’accès à Cost Management à leurs clients.
 author: bandersmsft
 ms.author: banders
-ms.date: 03/02/2020
+ms.date: 11/16/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: aparnag
 ms.custom: secdec18
-ms.openlocfilehash: d1425407b9d451a8c35e736c38b8fac059a7c9d8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cd3ca4d3ddf73469cd1f1fc065eccb369cf765af
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79204883"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905674"
 ---
 # <a name="get-started-with-azure-cost-management-for-partners"></a>Prise en main d’Azure Cost Management pour les partenaires
 
-Azure Cost Management est disponible de façon native pour les partenaires directs qui ont intégré leurs clients à un Contrat client Microsoft et qui ont [acheté un plan Azure](/partner-center/purchase-azure-plan). Cet article explique comment les partenaires utilisent les fonctionnalités d’[Azure Cost Management](../index.yml) pour afficher les coûts des abonnements dans le plan Azure. Il leur explique également comment autoriser l’accès à Cost Management à leurs clients.
+Azure Cost Management est disponible de façon native pour les partenaires directs qui ont intégré leurs clients à un Contrat client Microsoft et qui ont [acheté un plan Azure](/partner-center/purchase-azure-plan). Cet article explique comment les partenaires utilisent les fonctionnalités d’[Azure Cost Management](../index.yml) pour afficher les coûts des abonnements dans le plan Azure. Il leur explique également comment autoriser l’accès à Cost Management aux prix à la revente à leurs clients.
 
-Pour les partenaires directs et les fournisseurs indirects, l’administrateur général et les agents d’administration du fournisseur indirect peuvent accéder à Cost Management dans le locataire du partenaire. Les revendeurs et les clients peuvent accéder à Cost Management dans le locataire du client et voir les coûts pour les abonnements, où les coûts sont calculés et indiqués aux prix à la revente. Ils doivent cependant disposer d’un accès RBAC à l’abonnement dans le locataire du client pour voir les coûts. La stratégie de visibilité des coûts pour le locataire du client doit être activée par le fournisseur.
+Pour les partenaires directs et les fournisseurs indirects, l’administrateur général et les agents d’administration peuvent accéder à Cost Management dans le locataire du partenaire et gérer les coûts aux prix facturés.
+
+Les revendeurs et les clients peuvent accéder à Cost Management dans le locataire du client et voir les coûts pour les abonnements, où les coûts sont calculés et indiqués aux prix à la revente. Ils doivent cependant disposer d’un accès Azure RBAC à l’abonnement dans le locataire du client pour voir les coûts. La stratégie de visibilité des coûts pour le locataire du client doit être activée par le fournisseur.
 
 Les clients peuvent utiliser les fonctionnalités de Cost Management si elles sont activées par leur partenaire CSP.
 
@@ -33,10 +36,12 @@ Les partenaires CSP utilisent Cost Management pour :
 - Exporter leurs données d’utilisation et de coût vers un objet blob de stockage avec un abonnement avec paiement à l’utilisation.
 
 Voici un exemple montrant les coûts pour tous les clients.
-![Exemple montrant les coûts pour tous les clients](./media/get-started-partners/customer-costs1.png)
+
+[![Exemple montrant les coûts pour tous les clients](./media/get-started-partners/customer-costs1.png)](./media/get-started-partners/customer-costs1.png#lightbox)
 
 Voici un exemple montrant les coûts pour un client unique.
-![Exemple montrant les coûts pour un client unique](./media/get-started-partners/customer-costs2.png)
+
+[![Exemple montrant les coûts pour un client unique](./media/get-started-partners/customer-costs2.png)](./media/get-started-partners/customer-costs2.png#lightbox)
 
 Toutes les fonctionnalités disponibles dans Azure Cost Management sont également disponibles avec les API REST. Utilisez les API pour automatiser les tâches de gestion des coûts.
 
@@ -50,14 +55,13 @@ Azure Cost Management nécessite un accès en lecture à votre abonnement ou vot
 
 Pour plus d’informations sur l’autorisation et l’attribution de l’accès à Azure Cost Management pour un compte de facturation, consultez [Attribuer des rôles et des autorisations aux utilisateurs](/partner-center/permissions-overview). Les rôles **Administrateur général** et **Agent d’administration** peuvent gérer les coûts d’un compte de facturation.
 
-Pour accéder à Azure Cost Management dans l’étendue de l’abonnement, tout utilisateur disposant d’un accès RBAC à un abonnement peut afficher les coûts au tarif de vente au détail (paiement à l’utilisation). Toutefois, la stratégie de visibilité des coûts pour le locataire client doit être activée. Pour accéder à la liste complète des types de comptes pris en charge, consultez [Comprendre les données de Cost Management](understand-cost-mgt-data.md).
-
+Pour accéder à Azure Cost Management dans l’étendue de l’abonnement, tout utilisateur disposant d’un accès Azure RBAC à un abonnement peut afficher les coûts au tarif de vente au détail (paiement à l’utilisation). Toutefois, la [stratégie de visibilité des coûts pour le locataire client](#enable-the-policy-to-view-azure-usage-charges) doit être activée. Pour accéder à la liste complète des types de comptes pris en charge, consultez [Comprendre les données de Cost Management](understand-cost-mgt-data.md).
 
 ## <a name="how-cost-management-uses-scopes"></a>Utilisation des étendues par Cost Management
 
-Les étendues vous permettent de gérer les données de facturation, de définir des rôles propres aux paiements, d’afficher les factures et de gérer les comptes de manière générale. Les rôles de facturation et de compte sont gérés séparément des étendues utilisées pour la gestion des ressources, qui utilisent le contrôle d’accès en fonction du rôle (RBAC). Pour distinguer clairement l’intention des différentes étendues, y compris les différences en termes de contrôle d’accès, elles sont désignées comme étendues de facturation et étendues RBAC, respectivement.
+Les étendues vous permettent de gérer les données de facturation, de définir des rôles propres aux paiements, d’afficher les factures et de gérer les comptes de manière générale. Les rôles de facturation et de compte sont gérés séparément des étendues utilisées pour la gestion des ressources, qui utilisent Azure RBAC. Pour distinguer clairement l’intention des différentes étendues, y compris les différences en termes de contrôle d’accès, elles sont désignées comme étendues de facturation et étendues Azure RBAC, respectivement.
 
-Pour comprendre les étendues de facturation, les étendues RBAC et le fonctionnement de la gestion des coûts avec les étendues, consultez [Comprendre et utiliser des étendues](understand-work-scopes.md).
+Pour comprendre les étendues de facturation, les étendues Azure RBAC et le fonctionnement de la gestion des coûts avec les étendues, consultez [Comprendre et utiliser des étendues](understand-work-scopes.md).
 
 ## <a name="manage-costs-with-partner-tenant-billing-scopes"></a>Gérer les coûts avec les étendues de facturation de locataire partenaire
 
@@ -110,23 +114,23 @@ L’étendue de client n’inclut pas les clients bénéficiant de l’offre CSP
 
 Seuls les utilisateurs ayant les rôles **Administrateur général** et **Agent d’administration** peuvent gérer et voir les coûts pour les comptes de facturation, les profils de facturation et les clients directement dans le locataire Azure du partenaire. Pour plus d’informations sur les rôles de l’espace Partenaires, consultez [Affecter des rôles et des autorisations aux utilisateurs](/partner-center/permissions-overview).
 
-## <a name="enable-cost-management-in-the-customer-tenant"></a>Autoriser l’accès à la gestion des coûts dans le locataire client
+## <a name="enable-cost-management-for-customer-tenant-subscriptions"></a>Activer la gestion des coûts pour les abonnements des locataires des clients
 
-Les partenaires peuvent autoriser l’accès à Cost Management une fois les clients intégrés à un contrat client Microsoft. Ils peuvent ainsi activer une stratégie permettant aux clients de voir leurs coûts calculés selon les tarifs de paiement à l’utilisation au détail. Les coûts sont indiqués dans la devise de facturation du client pour sa consommation dans les étendues de groupe de ressources et d’abonnement RBAC.
+Les partenaires peuvent autoriser l’accès à Cost Management une fois les clients intégrés à un contrat client Microsoft. Ils peuvent ainsi activer une stratégie permettant aux clients de voir leurs coûts pour les services consommés Azure calculés selon les tarifs de paiement à l’utilisation au détail. Les coûts sont indiqués dans la devise de facturation du client pour sa consommation dans les étendues de groupe de ressources et d’abonnement Azure RBAC.
 
-Quand la stratégie de visualisation des coûts est activée par le partenaire, tout utilisateur disposant d’un accès Azure Resource Manager à l’abonnement peut gérer et analyser les coûts selon les tarifs de paiement à l’utilisation. En effet, les revendeurs et les clients qui disposent de l’accès RBAC approprié aux abonnements Azure peuvent voir les coûts.
+Quand la stratégie de visualisation des coûts est activée par le partenaire, tout utilisateur disposant d’un accès Azure Resource Manager à l’abonnement peut gérer et analyser les coûts selon les tarifs de paiement à l’utilisation. En effet, les revendeurs et les clients qui disposent de l’accès Azure RBAC approprié aux abonnements Azure peuvent voir les coûts.
 
-Quelle que soit la stratégie appliquée, les partenaires peuvent également voir les coûts s’ils ont accès à l’abonnement et au groupe de ressources.
+Quelle que soit la stratégie, les administrateurs généraux et les agents d’administration du fournisseur peuvent voir les coûts d’abonnement s’ils ont accès à l’abonnement et au groupe de ressources.
 
 ### <a name="enable-the-policy-to-view-azure-usage-charges"></a>Activer la stratégie de visualisation des frais d’utilisation d’Azure
 
-Les partenaires utilisent les informations suivantes pour activer la stratégie de visualisation des frais d’utilisation d’Azure pour leurs clients.
+Pour afficher et mettre à jour la stratégie, vous devez être membre du groupe **agent d’administration**. Utilisez les informations suivantes pour activer la stratégie permettant aux clients d’afficher les frais d’utilisation d’Azure.
 
-Dans le portail Azure, connectez-vous au locataire partenaire, puis sélectionnez **Gestion des coûts + facturation**. Sélectionnez le compte de facturation Contrat Partenaire Microsoft approprié, puis sélectionnez **Clients**. La liste des clients est associée au compte de facturation.
+Dans le portail Azure, connectez-vous au *locataire partenaire* et sélectionnez **Gestion des coûts + facturation**. Sélectionnez l’étendue de facturation appropriée dans la zone Étendue de facturation, puis sélectionnez **Clients**. La liste des clients est associée au compte de facturation. *Si vous vous connectez par erreur au locataire du client, vous ne verrez pas la liste **Clients**.*
 
 Dans la liste des clients, sélectionnez le client auquel vous souhaitez donner l’autorisation de voir les coûts.
 
-![Sélectionner des clients dans Cost Management](./media/get-started-partners/customer-list.png)
+[![Sélectionner des clients dans Cost Management](./media/get-started-partners/customer-list.png)](./media/get-started-partners/customer-list.png#lightbox)
 
 Sous **Paramètres**, sélectionnez **Stratégies**.
 
@@ -137,24 +141,27 @@ Quand la stratégie est définie sur **Non**, Azure Cost Management n’est pas 
 
 Quand la stratégie de coût est définie sur **Oui**, les utilisateurs d’abonnement associés au locataire client peuvent voir les frais d’utilisation selon les tarifs de paiement à l’utilisation.
 
-Quand la stratégie de visualisation des coûts est activée, tous les services associés à l’utilisation d’abonnements indiquent les coûts selon les tarifs de paiement à l’utilisation. L’utilisation de réservations apparaît avec des frais nuls pour les coûts réels et amortis. Les achats et les droits ne sont pas associés à un abonnement spécifique. Ainsi, les achats ne sont pas affichés dans l’étendue d’abonnement.
+Quand la stratégie de visualisation des coûts est activée, tous les services associés à l’utilisation d’abonnements indiquent les coûts selon les tarifs de paiement à l’utilisation. L’utilisation de réservations apparaît avec des frais nuls pour les coûts réels et amortis. Les achats et les droits ne sont pas associés à un abonnement spécifique. Ainsi, les achats ne sont pas affichés dans l’étendue d’abonnement. L’agent d’administration/administrateur général d’un partenaire direct ou d’un fournisseur indirect peut également utiliser l’[API de mise à jour du client](/rest/api/billing/2019-10-01-preview/policies/updatecustomer) pour définir la stratégie de visibilité des coûts de chaque client à grande échelle.
 
+### <a name="view-subscription-costs-in-the-customer-tenant"></a>Afficher les coûts d’abonnement dans le locataire du client
 
-### <a name="view-customer-costs"></a>Consulter les coûts client
+Pour afficher les coûts d’un abonnement, ouvrez **Cost Management + Facturation** dans le locataire Azure du client. Sélectionnez **Analyse du coût** pour l’abonnement requis afin de commencer à examiner les coûts. Vous pouvez afficher les coûts de consommation pour chaque abonnement individuellement dans le locataire du client.
 
-Pour voir les coûts relatifs au locataire client, ouvrez **Gestion des coûts + Facturation**. Sélectionnez **Analyse des coûts**, puis définissez l’étendue sur l’abonnement du locataire client pour commencer à examiner les coûts.
+[![Voir l’analyse des coûts en tant que client ](./media/get-started-partners/subscription-costs.png)](./media/get-started-partners/subscription-costs.png#lightbox)
 
-![Voir l’analyse des coûts en tant que client ](./media/get-started-partners/customer-tenant-view-cost-analysis.png)
+L’analyse des coûts, les budgets et les alertes sont disponibles pour les étendues Azure RBAC de groupe de ressources et d’abonnement selon les tarifs de paiement à l’utilisation.
 
-L’analyse des coûts, les budgets et les alertes sont disponibles pour les étendues RBAC de groupe de ressources et d’abonnement selon les tarifs de paiement à l’utilisation.
+Les vues amorties et les coûts réels pour les instances réservées dans les étendues Azure RBAC indiquent des frais nuls. Les frais d’achat des droits, tels que les frais relatifs aux instances réservées ou à la Place de marché, s’affichent uniquement dans les étendues de facturation du locataire du partenaire au sein duquel les achats ont été effectués.
 
-Les vues amorties et les coûts réels pour les instances réservées dans les étendues RBAC indiquent des frais nuls. Les coûts des instances réservées sont indiqués uniquement dans les étendues de facturation dans lesquelles les achats ont été effectués.
+Les tarifs utilisés pour calculer les coûts affichés dans la vue sont les mêmes que ceux indiqués dans la calculatrice de prix Azure pour tous les clients. Les coûts indiqués n’incluent pas les remises ni les crédits que le partenaire peut avoir, comme les crédits partenaires, les remises de niveau et les remises globales sur les services.
+
+ 
 
 ## <a name="analyze-costs-in-cost-analysis"></a>Analyser les coûts dans la vue d’analyse des coûts
 
-Les partenaires ayant accès aux étendues de facturation du locataire partenaire peuvent explorer et analyser les coûts facturés dans la vue d’analyse des coûts pour l’ensemble des clients, pour un client spécifique ou pour une facture. Dans la vue d’[analyse des coûts](quick-acm-cost-analysis.md), vous pouvez également [enregistrer des vues](quick-acm-cost-analysis.md#saving-and-sharing-customized-views) et exporter des données dans des fichiers [CSV et PNG](quick-acm-cost-analysis.md#automation-and-offline-analysis).
+Les partenaires ayant accès aux étendues de facturation du locataire partenaire peuvent explorer et analyser les coûts facturés dans la vue d’analyse des coûts pour l’ensemble des clients, pour un client spécifique ou pour une facture. Dans la vue d’[analyse des coûts](quick-acm-cost-analysis.md), vous pouvez également [enregistrer des vues](quick-acm-cost-analysis.md#saving-and-sharing-customized-views) et exporter des données dans des fichiers [CSV et PNG](quick-acm-cost-analysis.md#download-usage-data).
 
-Les utilisateurs RBAC disposant d’un accès à l’abonnement dans le locataire client peuvent également analyser les coûts de vente au détail des abonnements dans le locataire client, enregistrer des vues et exporter des données vers des fichiers CSV et PNG.
+Les utilisateurs Azure RBAC disposant d’un accès à l’abonnement dans le locataire client peuvent également analyser les coûts de vente au détail des abonnements dans le locataire client, enregistrer des vues et exporter des données vers des fichiers CSV et PNG.
 
 Vous pouvez utiliser les fonctionnalités Filtrer et Regrouper lors de l’analyse des coûts pour analyser les frais en fonction de plusieurs champs. Les champs spécifiques au partenaire sont affichés dans la section suivante.
 
@@ -181,7 +188,7 @@ Les champs de données suivants sont disponibles dans les fichiers de détails s
 | costCenter | Centre de coûts associé à l’abonnement. | N/A |
 | billingPeriodStartDate | Date de début de la période de facturation, comme indiqué sur la facture. | N/A |
 | billingPeriodEndDate | Date de fin de la période de facturation, comme indiqué sur la facture. | N/A |
-| servicePeriodStartDate | Date de début de la période d’évaluation pendant laquelle l’utilisation du service a été évaluée, dans le but de déterminer les frais. Les tarifs associés aux services Azure sont déterminés pour la période d’évaluation. | ChargeStartDate dans l’Espace partenaires. Date de début du cycle de facturation, sauf en cas de dates de données d’utilisation latente non facturées précédemment, lors d’un cycle de facturation précédent. L’heure est toujours définie sur le début de la journée, 0:00. |
+| servicePeriodStartDate | Date de début de la période d’évaluation pendant laquelle l’utilisation du service a été évaluée, dans le but de déterminer les frais. Les tarifs associés aux services Azure sont déterminés pour la période d’évaluation. | ChargeStartDate dans l’Espace partenaires.  Date de début du cycle de facturation, sauf en cas de dates de données d’utilisation latente non facturées précédemment, lors d’un cycle de facturation précédent. L’heure est toujours définie sur le début de la journée, 0:00. |
 | servicePeriodEndDate | Date de fin de la période pendant laquelle l’utilisation du service a été évaluée, dans le but de déterminer les frais. Les tarifs associés aux services Azure sont déterminés en fonction de la période d’évaluation. | N/A |
 | Date | Pour les données de consommation Azure, ce champ affiche la date d’utilisation évaluée. Pour une instance réservée, il affiche la date d’achat. Dans le cas des frais récurrents et ponctuels, tels que la Place de marché et le support, il affiche la date d’achat. | N/A |
 | productID | Identificateur du produit qui a accumulé des frais par consommation ou achat. Il s’agit de la clé concaténée de productID et SKuID, comme indiqué dans l’Espace partenaires. | ID du produit. |
@@ -218,8 +225,8 @@ Les champs de données suivants sont disponibles dans les fichiers de détails s
 | costinBillingCurrency | Coût étendu ou combiné avant l’application des taxes, dans la devise facturée. | N/A |
 | CostInPricingCurrency | Coût étendu ou combiné avant l’application des taxes, dans la devise de tarification, à corréler avec les prix. | N/A |
 | **costinUSD** | Estimation du coût du coût étendu ou combiné avant l’application des taxes, en USD. | N/A |
-| **paygCostInBillingCurrency** | Affiche les coûts si la tarification est indiquée dans les prix de vente au détail. Indique les tarifs du paiement à l’utilisation dans la devise de facturation. Disponible uniquement dans les étendues RBAC. | N/A |
-| **paygCostInUSD** | Affiche les coûts si la tarification est indiquée dans les prix de vente au détail. Affiche les tarifs du paiement à l’utilisation, en USD. Disponible uniquement dans les étendues RBAC. | N/A |
+| **paygCostInBillingCurrency** | Affiche les coûts si la tarification est indiquée dans les prix de vente au détail. Indique les tarifs du paiement à l’utilisation dans la devise de facturation. Disponible uniquement dans les étendues Azure RBAC. | N/A |
+| **paygCostInUSD** | Affiche les coûts si la tarification est indiquée dans les prix de vente au détail. Affiche les tarifs du paiement à l’utilisation, en USD. Disponible uniquement dans les étendues Azure RBAC. | N/A |
 | exchangeRate | Taux de change utilisé pour convertir un montant de la devise de tarification vers la devise de facturation. | Appelé PCToBCExchangeRate dans l’Espace partenaires. Taux de change pour la conversion de la devise de tarification vers la devise de facturation.|
 | exchangeRateDate | Date associée au taux de change utilisé pour convertir un montant de la devise de tarification vers la devise de facturation. | Appelé PCToBCExchangeRateDat dans l’Espace partenaires. Date du taux de change pour la conversion de la devise de tarification vers la devise de facturation.|
 | isAzureCreditEligible | Indique si le coût est éligible au paiement en crédits Azure. | N/A |
@@ -246,7 +253,7 @@ Quand la propriété **PartnerEarnedCreditApplied** a la valeur _True_, le coût
 
 Quand la propriété **PartnerEarnedCreditApplied** a la valeur _False_, le coût associé n’est pas éligible au crédit ou le service acheté n’est pas éligible au crédit Partenaires.
 
-L’affichage des données d’utilisation des services prend généralement entre 8 et 24 heures dans Cost Management. Pour plus d’informations, consultez la section [La fréquence de mise à jour des données d’utilisation varie](understand-cost-mgt-data.md#usage-data-update-frequency-varies). Les crédits PEC s’affichent dans un délai de 48 heures à compter de l’heure d’accès dans Azure Cost Management.
+L’affichage des données d’utilisation des services prend généralement entre 8 et 24 heures dans Cost Management. Pour plus d’informations, consultez [Mises à jour et rétention des données de coût et d’utilisation](understand-cost-mgt-data.md#cost-and-usage-data-updates-and-retention). Les crédits PEC s’affichent dans un délai de 48 heures à compter de l’heure d’accès dans Azure Cost Management.
 
 
 Vous pouvez également grouper et filtrer sur la propriété **PartnerEarnedCreditApplied** à l’aide des options **Grouper par**. Utilisez les options pour examiner les coûts avec et sans crédit PEC.
@@ -255,9 +262,9 @@ Vous pouvez également grouper et filtrer sur la propriété **PartnerEarnedCred
 
 ## <a name="export-cost-data-to-azure-storage"></a>Exporter des données de coût vers le stockage Azure
 
-Les partenaires ayant accès aux étendues de facturation d’un locataire partenaire peuvent exporter leurs données d’utilisation et de coût vers un objet blob de stockage Azure. L’objet blob doit se trouver sur un abonnement dans le locataire partenaire qui n’est pas un abonnement de service partagé ni l’abonnement d’un client. Pour activer l’exportation des données de coût, nous vous recommandons de configurer un abonnement avec paiement à l’utilisation indépendant dans le locataire partenaire pour héberger les données de coût exportées. Le compte de stockage d’exportation est créé sur l’objet blob de stockage Azure hébergé dans l’abonnement avec paiement à l’utilisation. En fonction de l’étendue dans laquelle le partenaire crée l’exportation, les données associées sont automatiquement exportées vers le compte de stockage de manière récurrente.
+Les partenaires ayant accès aux étendues de facturation d’un locataire partenaire peuvent exporter leurs données d’utilisation et de coût vers un objet blob de stockage Azure. L’objet blob doit se trouver sur un abonnement dans le locataire partenaire qui n’est pas un [abonnement de service partagé](/partner-center/shared-services) ni l’abonnement d’un client. Pour activer l’exportation des données de coût, nous vous recommandons de configurer un abonnement avec paiement à l’utilisation indépendant dans le locataire partenaire pour héberger les données de coût exportées. Le compte de stockage d’exportation est créé sur l’objet blob de stockage Azure hébergé dans l’abonnement avec paiement à l’utilisation. En fonction de l’étendue dans laquelle le partenaire crée l’exportation, les données associées sont automatiquement exportées vers le compte de stockage de manière récurrente.
 
-Les utilisateurs disposant d’un accès RBAC à l’abonnement peuvent également exporter les données de coût vers un objet blob de stockage Azure hébergé dans un abonnement quelconque du locataire client.
+Les utilisateurs disposant d’un accès Azure RBAC à l’abonnement peuvent également exporter les données de coût vers un objet blob de stockage Azure hébergé dans un abonnement quelconque du locataire client.
 
 ### <a name="create-an-export-in-a-partner-tenant-or-customer-tenant"></a>Créer une exportation dans un locataire partenaire ou un locataire client
 
@@ -271,7 +278,7 @@ Ensuite, sélectionnez **Ajouter**, tapez le nom et sélectionnez un type d’ex
 
 Lorsque vous créez une exportation dans le locataire partenaire, sélectionnez l’abonnement avec paiement à l’utilisation dans le locataire partenaire. Créez un compte de stockage Azure à l’aide de cet abonnement.
 
-Pour les utilisateurs RBAC dans le locataire client, sélectionnez un abonnement dans le locataire client. Créez un compte de stockage Azure à l’aide de l’abonnement.
+Pour les utilisateurs Azure RBAC dans le locataire client, sélectionnez un abonnement dans le locataire client. Créez un compte de stockage Azure à l’aide de l’abonnement.
 
 Passez en revue le contenu, puis sélectionnez **Créer** pour planifier une exportation.
 

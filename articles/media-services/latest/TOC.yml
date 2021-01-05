@@ -7,50 +7,96 @@
     - name: Nouveautés de Media Services
       displayName: release notes
       href: release-notes.md
+    - name: Conformité Media Services
+      href: concept-compliance.md
 - name: Démarrages rapides
-  expanded: true
   items:
-    - name: Événement en direct avec le portail et Wirecast
-      displayName: 'live, event, portal, wirecast'
-      href: live-events-wirecast-quickstart.md
-    - name: Événement en direct avec le portail et OBS
-      displayName: 'live, event, portal, obs'
-      href: live-events-obs-quickstart.md
-- name: Tutoriels
-  items:
-    - name: Encoder le fichier distant et diffuser la vidéo en streaming
+    - name: Configurer votre environnement
       items:
-        - name: Avec REST
-          displayName: 'encoding, job, transform'
-          href: stream-files-tutorial-with-rest.md
-        - name: Avec l’interface CLI
-          href: stream-files-cli-quickstart.md
-        - name: Avec .NET
+        - name: Trouver votre abonnement Azure
+          href: how-to-set-azure-subscription.md
+        - name: Créer un compte Media Services
+          href: create-account-howto.md
+        - name: Accéder à l’API
+          href: access-api-howto.md
+        - name: Configurer Azure Cloud Shell
+          href: ../../cloud-shell/overview.md
+        - name: Développer avec REST
+          items:
+            - name: Se connecter à Postman
+              href: media-rest-apis-with-postman.md
+        - name: Développer avec des kits SDK
+          items:
+            - name: Se connecter à Java
+              href: configure-connect-java-howto.md
+            - name: Se connecter à .NET
+              href: configure-connect-dotnet-howto.md
+            - name: Se connecter à Node.js
+              href: configure-connect-nodejs-howto.md
+            - name: Se connecter avec Python
+              href: configure-connect-python-howto.md
+    - name: Essayer Media Services dans le portail Azure
+      items:
+        - name: Événement en direct avec le portail et Wirecast
+          href: live-events-wirecast-quickstart.md
+        - name: Événement en direct avec le portail et OBS
+          href: live-events-obs-quickstart.md
+        - name: 'Utiliser le portail pour charger, encoder et diffuser du contenu'
+          href: manage-assets-quickstart.md
+        - name: Utiliser le portail pour chiffrer du contenu
+          href: encrypt-content-quickstart.md
+    - name: Utiliser un modèle ARM
+      items:
+        - name: Créer un compte avec ARM
+          href: quickstart-arm-template-account.md
+- name: Didacticiels
+  items:
+    - name: .NET
+      items:
+        - name: Encoder et diffuser en streaming un fichier distant .NET
           href: stream-files-dotnet-quickstart.md
-        - name: Avec Node.js
+        - name: Encoder et diffuser en streaming un fichier chargé .NET
+          href: stream-files-tutorial-with-api.md
+        - name: Streaming en direct avec .NET
+          href: stream-live-tutorial-with-api.md
+        - name: Analyser votre vidéo avec .NET
+          href: analyze-videos-tutorial-with-api.md
+        - name: Chiffrer dynamiquement avec AES-128
+          href: protect-with-aes128.md
+        - name: Chiffrer dynamiquement avec DRM
+          href: protect-with-drm.md
+        - name: Protection de contenu avec Azure AD
+          href: azure-ad-content-protection.md
+          displayName: 'AAD, Active Directory'
+    - name: REST
+      items:
+        - name: Encoder et diffuser en streaming un fichier distant REST
+          href: stream-files-tutorial-with-rest.md
+        - name: Clés gérées par le client avec l’API REST
+          href: tutorial-byok-postman.md
+    - name: Interface de ligne de commande
+      items:
+        - name: Encoder et diffuser en streaming un fichier distant CLI
+          href: stream-files-cli-quickstart.md
+    - name: Node.js
+      items:
+        - name: Encoder et diffuser en streaming un fichier distant Node.js
           href: stream-files-nodejs-quickstart.md
-    - name: Encoder le fichier chargé et diffuser la vidéo
-      displayName: 'encode, encoding, job, transform'
-      href: stream-files-tutorial-with-api.md
-    - name: Diffuser en direct
-      href: stream-live-tutorial-with-api.md
-      displayName: 'Live Events, Live Outputs, ingest'
-    - name: Analyser votre vidéo
-      displayName: 'job, transform, VideoAnalyzerPreset, AudioAnalyzerPreset'
-      href: analyze-videos-tutorial-with-api.md
-    - name: Chiffrer dynamiquement avec AES-128
-      href: protect-with-aes128.md
-    - name: Chiffrer dynamiquement avec DRM
-      displayName: 'PlayReady, Widevine, FairPlay'
-      href: protect-with-drm.md
+    - name: Portail Azure
+      items:
+        - name: Tutoriel sur les clés gérées par le client ou BYOK
+          href: tutorial-byok-portal.md
+        - name: Stocker les événements AMS dans Azure Log Analytics
+          href: tutorial-events-log-analytics.md
 - name: Exemples
   items:
     - name: "Exemples Media Services\_v3"
       displayName: '.NET, Java'
-      href: 'https://docs.microsoft.com/samples/browse/?products=azure-media-services'
+      href: /samples/browse/?products=azure-media-services
     - name: Exemples Media Services v3 REST
       href: 'https://github.com/Azure-Samples/media-services-v3-rest-postman'
 - name: Concepts
+  expanded: true
   items:
     - name: Vue d’ensemble
       href: concepts-overview.md
@@ -62,13 +108,15 @@
         - name: Compte de stockage
           href: storage-account-concept.md
           displayName: Storage side encryption
+        - name: Identités managées et services multimédias
+          displayName: content protection
+          href: concept-managed-identities.md
+        - name: Clés gérées par le client
+          href: concept-use-customer-managed-keys-byok.md
     - name: Éléments multimédias
       items:
         - name: Éléments multimédias
           href: assets-concept.md
-        - name: Gérer les ressources
-          href: manage-asset-concept.md
-          displayName: 'name, naming, file name, upload, output, download'
     - name: Traitement des fichiers
       items:
         - name: Transformations et travaux
@@ -86,18 +134,20 @@
           href: autogen-bitrate-ladder.md
         - name: Encodage sensible au contenu
           href: content-aware-encoding.md
+        - name: Unités réservées Multimédia
+          href: concept-media-reserved-units.md
     - name: Analyse du contenu (Video Indexer)
       items:
         - name: Vue d’ensemble
           href: analyzing-video-audio-files-concept.md
           displayName: 'analyze, analyzing, presets, jobs'
-        - name: Transformations et travaux
-          href: transforms-jobs-concept.md
+    - name: Transformations et travaux
+      href: transforms-jobs-concept.md
     - name: Vidéo en flux continu
       items:
         - name: Vue d’ensemble
           href: live-streaming-overview.md
-        - name: Événements en direct et Sorties en direct
+        - name: Événements en direct et sorties en direct
           href: live-events-outputs-concept.md
           displayName: 'vanity, ingest'
         - name: Encodeurs live locaux testés
@@ -124,7 +174,7 @@
         - name: Filtres
           displayName: "manifest, dynamic manifest, filter, hls, dash, m3u8, mpd,\tcontent delivery"
           href: filters-concept.md
-        - name: Points de terminaison de diffusion en continu
+        - name: Points de terminaison de streaming
           displayName: 'origin, packager, cdn'
           href: streaming-endpoint-concept.md
         - name: Mise à l’échelle du streaming avec CDN
@@ -164,10 +214,10 @@
           href: media-services-metrics-diagnostic-logs.md
         - name: Schémas des journaux de diagnostic
           href: media-services-diagnostic-logs-schema.md
-    - name: Clients Player
+    - name: Azure Media Player
       items:
-        - name: Azure Media Player
-          href: use-azure-media-player.md
+        - name: Présentation du lecteur multimédia Azure
+          href: ../azure-media-player/azure-media-player-overview.md
     - name: Développement avec les API v3
       items:
         - name: Vue d’ensemble
@@ -175,7 +225,7 @@
           displayName: 'accessing, long-running, sdk, invalid character, name, naming, file name'
         - name: 'Paginer, filtrer et classer des entités'
           href: entities-overview.md
-        - name: RBAC
+        - name: "Azure\_RBAC"
           href: rbac-overview.md
         - name: Codes d’erreur
           items:
@@ -187,12 +237,27 @@
               href: job-error-codes.md
     - name: Haute disponibilité
       items:
-        - name: Encodage
+        - name: Vidéo à la demande
           displayName: 'failover, bcdr, HA, high availability'
           href: media-services-high-availability-encoding.md
-        - name: Diffusion en continu
-          displayName: 'failover, bcdr, HA, high availability'
-          href: media-services-high-availability-streaming.md
+    - name: Architectures Media Services
+      displayName: architectures
+      href: architectures-concept.md
+    - name: Dépannage
+      items:
+        - name: Forum aux questions
+          displayName: faqs
+          href: frequently-asked-questions.md
+        - name: Codes d’erreur
+          items:
+            - name: Codes d’erreur du point de terminaison de streaming
+              href: streaming-endpoint-error-codes.md
+            - name: Codes d’erreur d’événement en direct
+              href: live-event-error-codes.md
+            - name: Codes d’erreur des tâches
+              href: job-error-codes.md
+        - name: Réinitialiser les informations d’identification de compte
+          href: cli-reset-account-credentials.md
     - name: Migration de v2 vers v3
       items:
         - name: v2 ou v3
@@ -203,78 +268,56 @@
           displayName: naming
 - name: Guides pratiques
   items:
-    - name: Bien démarrer
+    - name: Créer des ressources et charger des éléments multimédias
       items:
-        - name: Créer un compte
-          href: create-account-howto.md
-          displayName: 'portal, cli, storage'
-        - name: Réinitialiser les informations d’identification
-          href: cli-reset-account-credentials.md
-        - name: Accéder à l’API
-          displayName: 'portal, cli'
-          href: access-api-howto.md
-        - name: Mettre à l’échelle les unités réservées Multimédia
-          href: media-reserved-units-cli-how-to.md
         - name: Créer une ressource
-          href: cli-create-asset.md
-    - name: Guides du développeur
-      items:
-        - name: Développer avec REST
-          items:
-            - name: Se connecter à Postman
-              href: media-rest-apis-with-postman.md
-        - name: Développer avec des kits SDK
-          items:
-            - name: Se connecter à Java
-              href: configure-connect-java-howto.md
-            - name: Se connecter à .NET
-              href: configure-connect-dotnet-howto.md
-            - name: Se connecter à Node.js
-              href: configure-connect-nodejs-howto.md
-            - name: Se connecter avec Python
-              href: configure-connect-python-howto.md
-    - name: Téléchargement de contenu
-      items:
-        - name: À partir de HTTPS
-          displayName: upload
-          href: job-input-from-http-how-to.md
-        - name: À partir d’un fichier local
-          items:
-            - name: Avec .NET
-              displayName: upload
-              href: job-input-from-local-file-how-to.md
-            - name: Avec REST
-              displayName: upload
-              href: upload-files-rest-how-to.md
-            - name: Avec l’interface CLI
-              href: cli-upload-file-asset.md
+          href: how-to-create-asset.md
+        - name: Charger des éléments multimédia
+          href: how-to-upload-media.md
     - name: Créer des transformations et des travaux
       items:
         - name: Créer des transformations
-          href: cli-create-transform.md
+          href: how-to-create-transform.md
+        - name: Créer une transformation audio simple avec REST
+          href: how-to-create-basic-audio-transform.md
+        - name: Créer une transformation copyAllBitrateNonInterleaved avec REST
+          href: how-to-create-copyallbitratenoninterleaved-transform.md
+        - name: Copier des vidéos sans encodage avec REST
+          href: how-to-create-copy-video-audio-transform.md
         - name: Créer des tâches
           href: cli-create-jobs.md
+        - name: Créer une entrée de travail avec un fichier local et .NET
+          displayName: upload
+          href: job-input-from-local-file-how-to.md
         - name: Travaux avec plusieurs sorties de transformation
           href: job-multiple-transform-outputs.md
     - name: Encodage de contenu
       items:
         - name: HTTPS en tant qu’entrée de travail
-          displayName: 'encode, encoding'
           href: job-input-from-http-how-to.md
         - name: Fichier local en tant qu’entrée de travail
-          displayName: 'encode, encoding'
           href: job-input-from-local-file-how-to.md
         - name: Encoder avec une transformation personnalisée
           items:
             - name: Avec .NET
               displayName: 'encode, encoding, custom, transform'
-              href: customize-encoder-presets-how-to.md
+              items:
+                - name: Personnaliser les présélections de l’encodeur
+                  href: customize-encoder-presets-how-to.md
+                - name: Créer une transformation de superposition
+                  href: how-to-create-overlay.md
+                - name: Générer des miniatures avec .NET
+                  href: media-services-generate-thumbnails-dotnet.md
             - name: Avec l’interface CLI
               displayName: 'encode, encoding, custom, transform'
               href: custom-preset-cli-howto.md
             - name: Avec REST
               displayName: 'encode, encoding, custom, transform'
               href: custom-preset-rest-howto.md
+            - name: Générer des miniatures avec REST
+              href: media-services-generate-thumbnails-rest.md
+            - name: Mettre à l’échelle des unités réservées Multimédia
+              href: media-reserved-units-cli-how-to.md
         - name: Sous-clip d’une vidéo
           items:
             - name: Avec .NET
@@ -338,42 +381,43 @@
           href: download-results-howto.md
         - name: Signal audio descriptif
           href: signal-descriptive-audio-howto.md
-    - name: Dépanner
+    - name: Utiliser des lecteurs multimédias
       items:
-        - name: Forum aux questions
-          displayName: faqs
-          href: frequently-asked-questions.md
-        - name: Codes d’erreur
-          items:
-            - name: Codes d’erreur du point de terminaison de streaming
-              href: streaming-endpoint-error-codes.md
-            - name: Codes d’erreur d’événement en direct
-              href: live-event-error-codes.md
-            - name: Codes d’erreur des tâches
-              href: job-error-codes.md
+        - name: Installation complète du Lecteur multimédia Azure
+          href: ../azure-media-player/azure-media-player-full-setup.md
+        - name: Utiliser le lecteur Video.js
+          href: how-to-video-js-player.md
+        - name: Utiliser le lecteur vidéo Shaka
+          href: how-to-shaka-player.md
 - name: Informations de référence
   items:
     - name: Spécification OpenAPI (Swagger)
       href: 'https://aka.ms/ams-v3-rest-sdk'
       displayName: schema
     - name: REST
-      href: 'https://docs.microsoft.com/rest/api/media/'
+      href: /rest/api/media/
     - name: Azure CLI
-      href: 'https://aka.ms/ams-v3-cli-ref'
+      href: /cli/azure/ams
     - name: Kits SDK
       items:
         - name: .NET
-          href: 'https://aka.ms/ams-v3-dotnet-ref'
+          href: /dotnet/api/overview/azure/mediaservices/management
         - name: Java
-          href: 'https://aka.ms/ams-v3-java-ref'
+          href: /java/api/overview/azure/mediaservices/management
         - name: Python
-          href: 'https://aka.ms/ams-v3-python-ref'
+          href: /python/api/overview/azure/mediaservices/management
         - name: Node.js
-          href: 'https://aka.ms/ams-v3-nodejs-ref'
+          href: /javascript/api/overview/azure/mediaservices/management
         - name: Go
           href: 'https://aka.ms/ams-v3-go-ref'
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.media/allversions
+    - name: Schémas d’encodeur standard
+      items:
+        - name: Métadonnées d’entrée
+          href: input-metadata-schema.md
+        - name: Métadonnées de sortie
+          href: output-metadata-schema.md
 - name: Ressources
   items:
     - name: Communauté Azure Media Services
@@ -383,14 +427,14 @@
       href: 'https://azure.microsoft.com/roadmap/?category=web-mobile'
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/media-services/'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=media-services'
     - name: Spécification OpenAPI (Swagger)
       href: 'https://aka.ms/ams-v3-rest-sdk'
     - name: Kits de développement logiciel/outils
       items:
         - name: Azure CLI
-          href: 'https://aka.ms/ams-v3-cli'
+          href: /cli/azure/install-azure-cli
         - name: .NET
           href: 'https://aka.ms/ams-v3-dotnet-sdk'
         - name: Java
@@ -409,5 +453,7 @@
       href: limits-quotas-constraints.md
     - name: Clouds et régions Azure
       href: azure-clouds-regions.md
+    - name: Points de terminaison et noms de code régionaux
+      href: azure-regions-code-names.md
     - name: Mises à jour de la documentation
       href: docs-release-notes.md

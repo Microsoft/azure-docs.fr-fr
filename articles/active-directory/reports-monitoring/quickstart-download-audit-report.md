@@ -18,10 +18,10 @@ ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: a6cbea49fe39c92c8a2fc50e501cb4ef5cff74b1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "68989692"
 ---
 # <a name="quickstart-download-an-audit-report-using-the-azure-portal"></a>Démarrage rapide : Télécharger un rapport d’audit avec le portail Azure

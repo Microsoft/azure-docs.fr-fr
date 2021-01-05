@@ -10,16 +10,22 @@ ms.subservice: bing-image-search
 ms.topic: tutorial
 ms.date: 12/06/2019
 ms.author: aahi
-ms.openlocfilehash: 69c5fc9805bed8fdfde3dd208e7fb66254e82c3c
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: cef39b940f0d61fc60ea10156acfd781289157de
+ms.sourcegitcommit: 1cf157f9a57850739adef72219e79d76ed89e264
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75383873"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94591969"
 ---
 # <a name="tutorial-extract-image-details-using-the-bing-image-search-api-and-c"></a>Tutoriel : Extraire les détails de l’image avec l’API Recherche d’images Bing et C#
 
-Plusieurs [points de terminaison](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/image-search-endpoint) sont disponibles via l’API Recherche d’images Bing. Le point de terminaison `/details` accepte une requête POST avec une image, et peut retourner divers détails relatifs à l’image. Cette application C# envoie une image à l’aide de cette API et affiche les détails retournés par Bing, qui sont des objets JSON, par exemple les éléments suivants :
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Plusieurs [points de terminaison](./image-search-endpoint.md) sont disponibles via l’API Recherche d’images Bing. Le point de terminaison `/details` accepte une requête POST avec une image, et peut retourner divers détails relatifs à l’image. Cette application C# envoie une image à l’aide de cette API et affiche les détails retournés par Bing, qui sont des objets JSON, par exemple les éléments suivants :
 
 ![[Résultats JSON]](media/cognitive-services-bing-images-api/jsonResult.jpg)
 

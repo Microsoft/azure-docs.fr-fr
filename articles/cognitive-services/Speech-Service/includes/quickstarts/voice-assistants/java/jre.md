@@ -4,21 +4,21 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: travisw
-ms.openlocfilehash: 38e6bae69710dc9e1dbc8789ee9ccb636193c7f7
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 8ee14b94977b3152e0aab853fa3919a739d0dfdd
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80671331"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187655"
 ---
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, assurez-vous de :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](~/articles/cognitive-services/speech-service/get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](~/articles/cognitive-services/speech-service/quickstarts/setup-platform.md?tabs=jre&pivots=programming-language-java)
-> * Créer un bot connecté au [canal Direct Line Speech](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-directlinespeech)
+> * Créer un bot connecté au [canal Direct Line Speech](/azure/bot-service/bot-service-channel-connect-directlinespeech)
 > * Veiller à avoir accès à un microphone pour la capture audio
 
   > [!NOTE]
@@ -115,7 +115,7 @@ En outre, pour activer la journalisation, mettez à jour le fichier _pom.xml_ en
 
 1. Dans la méthode `main`, vous configurez d’abord votre `DialogServiceConfig` et vous l’utilisez pour créer une instance de `DialogServiceConnector`. Cette instance se connecte au canal Direct Line Speech pour interagir avec votre bot. Une instance `AudioConfig` est également utilisée pour spécifier la source d’entrée audio. Dans cet exemple, le microphone par défaut est utilisé avec `AudioConfig.fromDefaultMicrophoneInput()`.
 
-   - Remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement, que vous pouvez obtenir auprès de [ce site web](~/articles/cognitive-services/speech-service/get-started.md).
+   - Remplacez la chaîne `YourSubscriptionKey` par votre clé d’abonnement, que vous pouvez obtenir auprès de [ce site web](../../../../overview.md#try-the-speech-service-for-free).
    - Remplacez la chaîne `YourServiceRegion` par la [région](~/articles/cognitive-services/speech-service/regions.md) associée à votre abonnement.
 
    > [!NOTE]

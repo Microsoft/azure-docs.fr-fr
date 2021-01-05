@@ -8,23 +8,23 @@ ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 02/28/2020
 ms.author: banders
-ms.openlocfilehash: 57123abfe7f343a75d264d43afb88f9de1409e8a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d7af95b9fe2f6d31faa239985f8e8165fd968372
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78207679"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91978592"
 ---
-# <a name="save-costs-with-a-reserved-instance-of-azure-dedicated-hosts"></a>Économiser sur les coûts grâce à une instance réservée d’hôtes Azure Dedicated Host
+# <a name="save-costs-with-azure-dedicated-host-reservations"></a>Réduisez les coûts avec les réservations Azure Dedicated Host
 
-Lorsque vous validez une instance réservée d’hôtes Azure Dedicated Host, vous pouvez économiser de l’argent. La remise de réservation est appliquée automatiquement au nombre d’hôtes dédiés en cours d’exécution qui correspondent à l’étendue et aux attributs de la réservation. Vous n’avez pas besoin d’attribuer une réservation à un hôte dédié pour obtenir les remises. Un achat d’instance réservée couvre uniquement la partie calcul de votre utilisation et inclut les coûts liés aux licences logicielles. Consultez l’article [Vue d’ensemble des hôtes Azure Dedicated Host pour machines virtuelles](https://docs.microsoft.com/azure/virtual-machines/windows/dedicated-hosts).
+Lorsque vous validez une instance réservée d’hôtes Azure Dedicated Host, vous pouvez économiser de l’argent. La remise de réservation est appliquée automatiquement au nombre d’hôtes dédiés en cours d’exécution qui correspondent à l’étendue et aux attributs de la réservation. Vous n’avez pas besoin d’attribuer une réservation à un hôte dédié pour obtenir les remises. Un achat d’instance réservée couvre uniquement la partie calcul de votre utilisation et inclut les coûts liés aux licences logicielles. Consultez l’article [Vue d’ensemble des hôtes Azure Dedicated Host pour machines virtuelles](./dedicated-hosts.md).
 
 ## <a name="determine-the-right-dedicated-host-sku-before-you-buy"></a>Déterminer la référence SKU appropriée de l’hôte dédié avant de l’acheter
 
 
 Avant d’acheter une réservation, vous devez déterminer l’hôte dédié dont vous avez besoin. Une référence SKU est définie pour un hôte dédié représentant la série et le type de la machine virtuelle. 
 
-Commencez par passer en revue les tailles prises en charge pour la [machine virtuelle Windows](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) ou [Linux](https://docs.microsoft.com/azure/virtual-machines/linux/sizes?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) afin d’identifier la série de machine virtuelle.
+Commencez par passer en revue les tailles prises en charge pour la [machine virtuelle Windows](./sizes.md) ou [Linux](./sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) afin d’identifier la série de machine virtuelle.
 
 Ensuite, vérifiez qu’elle est prise en charge sur les hôtes Azure Dedicated Host. La page de [tarification des hôtes Azure Dedicated Host](https://aka.ms/ADHPricing) contient la liste complète des références SKU d’hôtes dédiés, les informations de l’UC et diverses options de tarification (y compris les instances réservées).
 
@@ -40,7 +40,7 @@ Les remises de réservation ne s’appliquent pas dans les cas suivants :
 
 - **Clouds** : les réservations ne sont pas disponibles à l’achat dans les régions Allemagne et Chine.
 
-- **Quota insuffisant** : une réservation qui est limitée à un seul abonnement doit avoir un quota de processeurs virtuels disponible dans l’abonnement pour la nouvelle instance réservée. Par exemple, si l’abonnement cible a une limite de quota de 10 processeurs virtuels pour la série DSv3, vous ne pouvez pas acheter de réservation d’hôtes dédiés prenant en charge cette série. La vérification du quota pour les réservations inclut les machines virtuelles et les hôtes dédiés déjà déployés dans l’abonnement. Pour résoudre ce problème, vous pouvez  [créer une demande d’augmentation de quota](https://docs.microsoft.com/azure/azure-supportability/resource-manager-core-quotas-request). 
+- **Quota insuffisant** : une réservation qui est limitée à un seul abonnement doit avoir un quota de processeurs virtuels disponible dans l’abonnement pour la nouvelle instance réservée. Par exemple, si l’abonnement cible a une limite de quota de 10 processeurs virtuels pour la série DSv3, vous ne pouvez pas acheter de réservation d’hôtes dédiés prenant en charge cette série. La vérification du quota pour les réservations inclut les machines virtuelles et les hôtes dédiés déjà déployés dans l’abonnement. Pour résoudre ce problème, vous pouvez  [créer une demande d’augmentation de quota](../azure-portal/supportability/resource-manager-core-quotas-request.md). 
 
 - **Restrictions de capacité** : dans de rares cas, Azure limite l’achat de nouvelles réservations pour un sous-ensemble de références SKU d’hôtes dédiés, en raison d’une faible capacité dans une région donnée.
 
@@ -48,7 +48,7 @@ Les remises de réservation ne s’appliquent pas dans les cas suivants :
 
 Vous pouvez acheter une instance réservée pour une instance Azure Dedicated Host dans le  [Portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/documentation/filters/%7B%22reservedResourceType%22%3A%22VirtualMachines%22%7D).
 
-Payez la réservation  [comptant ou par paiements mensuels](https://docs.microsoft.com/azure/billing/billing-monthly-payments-reservations). Ces conditions s’appliquent à l’achat d’une instance Azure Dedicated Host réservée :
+Payez la réservation  [comptant ou par paiements mensuels](../cost-management-billing/reservations/prepare-buy-reservation.md). Ces conditions s’appliquent à l’achat d’une instance Azure Dedicated Host réservée :
 
 - Vous devez avoir le rôle Propriétaire pour au moins un abonnement EA ou un abonnement assorti d’un paiement à l’utilisation.
 
@@ -87,7 +87,7 @@ Si vous avez un Accord Entreprise, vous pouvez utiliser l’option  **Ajouter**
 
 Vos données d’utilisation ont un prix effectif de zéro pour l’utilisation qui bénéficie d’une remise de réservation. Vous pouvez voir l’instance de machine virtuelle qui a reçu la remise de réservation pour chaque réservation.
 
-Pour plus d’informations sur l’affichage des remises de réservation dans les données d’utilisation, consultez  [Comprendre l’utilisation de la réservation Azure pour l’inscription de votre entreprise](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage-ea) si vous êtes un client EA. Si vous avez un abonnement individuel, consultez  [Comprendre l’utilisation d’une réservation Azure pour votre abonnement avec paiement à l’utilisation](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage).
+Pour plus d’informations sur l’affichage des remises de réservation dans les données d’utilisation, consultez  [Comprendre l’utilisation de la réservation Azure pour l’inscription de votre entreprise](../cost-management-billing/reservations/understand-reserved-instance-usage-ea.md) si vous êtes un client EA. Si vous avez un abonnement individuel, consultez  [Comprendre l’utilisation d’une réservation Azure pour votre abonnement avec paiement à l’utilisation](../cost-management-billing/reservations/understand-reserved-instance-usage.md).
 
 ## <a name="change-a-reservation-after-purchase"></a>Modifier une réservation après achat
 
@@ -115,7 +115,7 @@ Toutefois, vous pouvez  *échanger* une réservation si vous souhaitez y appor
 
 ## <a name="cancel-exchange-or-refund-reservations"></a>Annuler, échanger ou rembourser des réservations
 
-Vous pouvez annuler, échanger ou rembourser des réservations avec certaines limitations. Pour plus d’informations, consultez  [Échanges et remboursements en libre-service pour les réservations Azure](https://docs.microsoft.com/azure/billing/billing-azure-reservations-self-service-exchange-and-refund).
+Vous pouvez annuler, échanger ou rembourser des réservations avec certaines limitations. Pour plus d’informations, consultez  [Échanges et remboursements en libre-service pour les réservations Azure](../cost-management-billing/reservations/exchange-and-refund-azure-reservations.md).
 
 ## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Contactez-nous.
 
@@ -123,26 +123,24 @@ Si vous avez des questions ou besoin d’aide,  [créez une demande de support]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour découvrir comment gérer une réservation, consultez  [Gérer les réservations Azure](https://docs.microsoft.com/azure/billing/billing-manage-reserved-vm-instance).
+Pour découvrir comment gérer une réservation, consultez  [Gérer les réservations Azure](../cost-management-billing/reservations/manage-reserved-vm-instance.md).
 
 Pour plus d’informations sur les réservations Azure, consultez les articles suivants :
 
-- [Qu’est-ce qu’une réservation Azure ?](https://docs.microsoft.com/azure/billing/billing-save-compute-costs-reservations)
+- [Qu’est-ce qu’une réservation Azure ?](../cost-management-billing/reservations/save-compute-costs-reservations.md)
 
-- [Utilisation d’hôtes dédiés Azure](https://docs.microsoft.com/azure/virtual-machines/windows/dedicated-hosts)
+- [Utilisation d’hôtes dédiés Azure](./dedicated-hosts.md)
 
 - [Tarifs des hôtes dédiés](https://azure.microsoft.com/pricing/details/virtual-machines/dedicated-host/)
 
-- [Gérer les réservations dans Azure](https://docs.microsoft.com/azure/billing/billing-manage-reserved-vm-instance)
+- [Gérer les réservations dans Azure](../cost-management-billing/reservations/manage-reserved-vm-instance.md)
 
-- [Comprendre comment la remise de réservation est appliquée](https://docs.microsoft.com/azure/billing/billing-understand-vm-reservation-charges)
+- [Comprendre comment la remise de réservation est appliquée](../cost-management-billing/manage/understand-vm-reservation-charges.md)
 
-- [Comprendre l’utilisation d’une réservation pour un abonnement avec paiement à l’utilisation](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage)
+- [Comprendre l’utilisation d’une réservation pour un abonnement avec paiement à l’utilisation](../cost-management-billing/reservations/understand-reserved-instance-usage.md)
 
-- [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](https://docs.microsoft.com/azure/billing/billing-understand-reserved-instance-usage-ea)
+- [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](../cost-management-billing/reservations/understand-reserved-instance-usage-ea.md)
 
-- [Coûts des logiciels Windows non inclus dans les réservations](https://docs.microsoft.com/azure/billing/billing-reserved-instance-windows-software-costs)
+- [Coûts des logiciels Windows non inclus dans les réservations](../cost-management-billing/reservations/reserved-instance-windows-software-costs.md)
 
-- [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](https://docs.microsoft.com/partner-center/azure-reservations)
-
-
+- [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](/partner-center/azure-reservations)

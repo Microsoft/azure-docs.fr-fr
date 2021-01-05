@@ -4,29 +4,35 @@ titleSuffix: Azure Media Services
 description: Découvrez comment analyser du contenu audio et vidéo à l’aide d’AudioAnalyzerPreset et de VideoAnalyzerPreset dans Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 01/30/2020
-ms.author: juliako
-ms.openlocfilehash: 1d28fc37b98493322b9e201ac899b7911dd1d705
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 10/21/2020
+ms.author: inhenkel
+ms.openlocfilehash: 61f5a470046ba3ddca157e83737a29ed936a0c3a
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232825"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656323"
 ---
 # <a name="analyze-video-and-audio-files-with-azure-media-services"></a>Analyser des fichiers vidéo et audio avec Azure Media Services
 
+[!INCLUDE [regulation](../video-indexer/includes/regulation.md)]
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
 Azure Media Services v3 vous permet d’extraire les insights de vos fichiers vidéo et audio avec Video Indexer. Cet article décrit les présélections de l’analyseur Media Services V3 utilisées pour extraire ces Insights. Si vous souhaitez des informations plus détaillées, utilisez directement Video Indexer. Pour comprendre à quel moment utiliser Video Indexer plutôt que les présélections de l’analyseur de Media Services, consultez le [document de comparaison](../video-indexer/compare-video-indexer-with-media-services-presets.md).
 
-Pour analyser votre contenu à l’aide des préréglages Media Services v3, vous créez une **transformation** et envoyez un **travail** qui utilise l’un de ces préréglages : [VideoAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset) ou **AudioAnalyzerPreset**. Pour un didacticiel présentant comment utiliser **VideoAnalyzerPreset**, consultez [Analyser des vidéos avec Azure Media Services](analyze-videos-tutorial-with-api.md).
+Il existe deux modes pour le préréglage de l’analyseur audio, de base et standard. Consultez la description des différences dans le tableau ci-dessous.
+
+Pour analyser votre contenu à l’aide des préréglages Media Services v3, vous créez une **transformation** et envoyez un **travail** qui utilise l’un de ces préréglages : [VideoAnalyzerPreset](/rest/api/media/transforms/createorupdate#videoanalyzerpreset) ou **AudioAnalyzerPreset**. Pour un didacticiel présentant comment utiliser **VideoAnalyzerPreset**, consultez [Analyser des vidéos avec Azure Media Services](analyze-videos-tutorial-with-api.md).
 
 > [!NOTE]
-> Lorsque vous utilisez des présélections pour l’analyseur vidéo ou audio, utilisez le Portail Azure pour paramétrer votre compte de sorte à ce qu’il dispose de 10 unités réservées Multimédia S3. Pour plus d’informations, consultez [Vue d’ensemble de la mise à l’échelle du traitement multimédia](media-reserved-units-cli-how-to.md).
+> Lorsque vous utilisez des présélections pour l’analyseur vidéo ou audio, utilisez le portail Azure pour paramétrer votre compte de sorte à ce qu’il dispose de 10 unités réservées Multimédia S3, bien que cela ne soit pas obligatoire. Vous pouvez utiliser S1 ou S2 pour les présélections audio. Pour plus d’informations, consultez [Vue d’ensemble de la mise à l’échelle du traitement multimédia](media-reserved-units-cli-how-to.md).
 
 ## <a name="compliance-privacy-and-security"></a>Conformité, confidentialité et sécurité
 
@@ -38,17 +44,29 @@ Actuellement, Media Services prend en charge les préréglages d’analyseur int
 
 |**Nom du préréglage**|**Scénario**|**Détails**|
 |---|---|---|
-|[AudioAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#audioanalyzerpreset)|Analyse de contenu audio|Ce préréglage applique un ensemble prédéfini d’opérations d’analyse basée sur l’IA, notamment la transcription de la parole. Actuellement, le préréglage prend en charge le traitement du contenu avec une seule piste audio qui inclut la reconnaissance vocale dans une seule langue. Vous pouvez spécifier la langue de la charge utile audio de l’entrée en utilisant le format BCP-47 « balise de langue-région ». Les langues prises en charge sont l’anglais (« en-US » et « en-GB »), l’espagnol (« es-ES » et « es-MX »), le français (« fr-FR »), l’italien (« it-IT »), le japonais (« ja-JP »), le portugais (« pt-BR »), le chinois (« zh-CN »), l’allemand (« de-DE »), l’arabe (« ar-EG » et « ar-SY »), le russe (« ru-RU »), l’hindi (« hi-IN ») et le coréen (« ko-KR »).<br/><br/> Si la langue n’est pas spécifiée ou a la valeur Null, la fonctionnalité de détection automatique de la langue choisit la première langue détectée et continue avec cette langue pendant la durée de traitement du fichier. Cette fonctionnalité prend actuellement en charge les langues suivantes : allemand, anglais, chinois, espagnol, français, italien, japonais, portugais et russe. Elle ne prend pas en charge le basculement dynamique d’une langue à l’autre après la détection de la première langue. La fonctionnalité de détection automatique de la langue fonctionne mieux sur des enregistrements audio avec des voix clairement identifiables. Si la détection automatique de la langue ne parvient pas à trouver la langue, la transcription utilise l’anglais.|
-|[VideoAnalyzerPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#videoanalyzerpreset)|Analyse de contenu audio et vidéo|Extrait des insights (métadonnées enrichies) des contenus audio et vidéo, et génère en sortie un fichier au format JSON. Vous pouvez spécifier si vous voulez extraire seulement des insights audio lors du traitement d’un fichier vidéo. Pour plus d’informations, consultez [Analyser un contenu vidéo](analyze-videos-tutorial-with-api.md).|
-|[FaceDetectorPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset)|Détection des visages présents dans la vidéo|Décrit les paramètres à utiliser lors de l’analyse d’une vidéo pour détecter les visages qui y figurent.|
+|[AudioAnalyzerPreset](/rest/api/media/transforms/createorupdate#audioanalyzerpreset)|Analyse de contenu audio Standard|Ce préréglage applique un ensemble prédéfini d’opérations d’analyse basée sur l’IA, notamment la transcription de la parole. Actuellement, le préréglage prend en charge le traitement du contenu avec une seule piste audio qui inclut la reconnaissance vocale dans une seule langue. Vous pouvez spécifier la langue de la charge utile audio de l’entrée en utilisant le format BCP-47 « balise de langue-région ». Les langues prises en charge sont l’anglais (« en-US » et « en-GB »), l’espagnol (« es-ES » et « es-MX »), le français (« fr-FR »), l’italien (« it-IT »), le japonais (« ja-JP »), le portugais (« pt-BR »), le chinois (« zh-CN »), l’allemand (« de-DE »), l’arabe (« ar-EG » et « ar-SY »), le russe (« ru-RU »), l’hindi (« hi-IN ») et le coréen (« ko-KR »).<br/><br/> Si la langue n’est pas spécifiée ou a la valeur Null, la fonctionnalité de détection automatique de la langue choisit la première langue détectée et continue avec cette langue pendant la durée de traitement du fichier. Cette fonctionnalité prend actuellement en charge les langues suivantes : allemand, anglais, chinois, espagnol, français, italien, japonais, portugais et russe. Elle ne prend pas en charge le basculement dynamique d’une langue à l’autre après la détection de la première langue. La fonctionnalité de détection automatique de la langue fonctionne mieux sur des enregistrements audio avec des voix clairement identifiables. Si la détection automatique de la langue ne parvient pas à trouver la langue, la transcription utilise l’anglais.|
+|[AudioAnalyzerPreset](/rest/api/media/transforms/createorupdate#audioanalyzerpreset)|Analyse de contenu audio De base|Ce mode effectue une transcription de la parole en texte et la génération d’un fichier de sous-titres/CC au format VTT. La sortie de ce mode comprend un fichier JSON Insights incluant uniquement les mots clés, la transcription et les informations relatives au minutage. La détection automatique de la langue et la diarisation de l’orateur ne sont pas incluses dans ce mode. La liste des langues prises en charge est accessible [ici](#built-in-presets).|
+|[VideoAnalyzerPreset](/rest/api/media/transforms/createorupdate#videoanalyzerpreset)|Analyse de contenu audio et vidéo|Extrait des insights (métadonnées enrichies) des contenus audio et vidéo, et génère en sortie un fichier au format JSON. Vous pouvez spécifier si vous voulez extraire seulement des insights audio lors du traitement d’un fichier vidéo. Pour plus d’informations, consultez [Analyser un contenu vidéo](analyze-videos-tutorial-with-api.md).|
+|[FaceDetectorPreset](/rest/api/media/transforms/createorupdate#facedetectorpreset)|Détection des visages présents dans la vidéo|Décrit les paramètres à utiliser lors de l’analyse d’une vidéo pour détecter les visages qui y figurent.|
 
-### <a name="audioanalyzerpreset"></a>AudioAnalyzerPreset
+### <a name="audioanalyzerpreset-standard-mode"></a>Mode standard AudioAnalyzerPreset
 
-Le préréglage vous permet d’extraire plusieurs insights audio d’un fichier audio ou vidéo. La sortie inclut un fichier JSON (avec tous les insights) et un fichier VTT pour la transcription audio. Ce paramètre accepte une propriété qui spécifie la langue du fichier d’entrée sous la forme d’une chaîne [BCP47](https://tools.ietf.org/html/bcp47). Les analyses audio sont les suivantes :
+Le préréglage vous permet d’extraire plusieurs insights audio d’un fichier audio ou vidéo.
+
+La sortie inclut un fichier JSON (avec tous les insights) et un fichier VTT pour la transcription audio. Ce paramètre accepte une propriété qui spécifie la langue du fichier d’entrée sous la forme d’une chaîne [BCP47](https://tools.ietf.org/html/bcp47). Les analyses audio sont les suivantes :
 
 * **Transcription audio** : transcription des mots prononcés avec horodatages. Plusieurs langues sont prises en charge.
 * **Indexation de l'orateur** : mappage des orateurs et des mots prononcés correspondants.
 * **Analyse des sentiments dans du texte** : sortie de l’analyse des sentiments effectuée sur la transcription audio.
+* **Mots clés** : mots clés extraits de la transcription audio.
+
+### <a name="audioanalyzerpreset-basic-mode"></a>Mode de base AudioAnalyzerPreset
+
+Le préréglage vous permet d’extraire plusieurs insights audio d’un fichier audio ou vidéo.
+
+La sortie inclut un fichier JSON et un fichier VTT pour la transcription audio. Ce paramètre accepte une propriété qui spécifie la langue du fichier d’entrée sous la forme d’une chaîne [BCP47](https://tools.ietf.org/html/bcp47). La sortie comprend les éléments suivants :
+
+* **Transcription audio** : transcription des mots prononcés avec horodatages. Plusieurs langues sont prises en charge, mais la détection automatique de la langue et la diarisation de l’orateur ne sont pas incluses.
 * **Mots clés** : mots clés extraits de la transcription audio.
 
 ### <a name="videoanalyzerpreset"></a>VideoAnalyzerPreset
@@ -239,7 +257,7 @@ Exemple :
       ],
       "instances": [
         {
-      "thumbnailId": "00000000-0000-0000-0000-000000000000",
+          "thumbnailId": "00000000-0000-0000-0000-000000000000",
           "start": "00: 00: 05.2670000",
           "end": "00: 00: 10.3000000"
         }

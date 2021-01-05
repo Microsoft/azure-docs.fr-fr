@@ -8,17 +8,17 @@ manager: KumudD
 ms.service: virtual-network
 ms.subservice: ip-services
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/24/2017
 ms.author: allensu
-ms.openlocfilehash: e4197923fa71c719611bea7603113cab331d4ba8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 5cd050c88fbc954a211c3a75cdabcb557ae998c4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82147795"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073920"
 ---
 # <a name="assign-multiple-ip-addresses-to-virtual-machines-using-powershell"></a>Affecter plusieurs adresses IP à des machines virtuelles avec PowerShell
 
@@ -34,7 +34,7 @@ Cet article explique comment créer une machine virtuelle dans le modèle de dé
 
 Les étapes qui suivent expliquent comment créer un exemple de machine virtuelle avec plusieurs adresses IP, comme décrit dans le scénario. Modifiez les valeurs des variables en fonction des besoins de votre implémentation.
 
-1. Ouvrez une invite de commandes PowerShell et effectuez les étapes restantes de cette section dans une même session PowerShell. Si vous n’avez pas installé, ni configuré PowerShell, effectuez les étapes de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/overview) .
+1. Ouvrez une invite de commandes PowerShell et effectuez les étapes restantes de cette section dans une même session PowerShell. Si vous n’avez pas installé, ni configuré PowerShell, effectuez les étapes de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/) .
 2. Connectez-vous à votre compte avec la commande `Connect-AzAccount`.
 3. Remplacez *myResourceGroup* et *westus* par le nom et l’emplacement de votre choix. Créez un groupe de ressources. Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
 
@@ -94,7 +94,7 @@ Les étapes qui suivent expliquent comment créer un exemple de machine virtuell
 
 6. Définissez la configuration IP principale de la carte réseau. Remplacez 10.0.0.4 par une adresse valide dans le sous-réseau que vous avez créé, si vous n’utilisez pas la valeur définie précédemment. Avant d’attribuer une adresse IP statique, il est recommandé de vérifier tout d’abord qu’elle n’est pas déjà utilisée. Entrez la commande `Test-AzPrivateIPAddressAvailability -IPAddress 10.0.0.4 -VirtualNetwork $VNet`. Si l’adresse est disponible, la sortie retourne *True*. S’il n’est pas disponible, la sortie retourne *False* et la liste des adresses disponibles. 
 
-    Dans les commandes suivantes, **remplacez \<<replace-with-your-unique-name> par le nom DNS unique à utiliser.** Le nom doit être unique sur toutes les adresses IP publiques au sein d’une région Azure. Il s'agit d'un paramètre facultatif. Il peut être supprimé si vous voulez uniquement vous connecter à la machine virtuelle à l’aide de l’adresse IP publique.
+    Dans les commandes suivantes, **remplacez \<replace-with-your-unique-name> par le nom DNS unique à utiliser.** Le nom doit être unique sur toutes les adresses IP publiques au sein d’une région Azure. Il s'agit d'un paramètre facultatif. Il peut être supprimé si vous voulez uniquement vous connecter à la machine virtuelle à l’aide de l’adresse IP publique.
 
     ```powershell
     
@@ -196,7 +196,7 @@ Les étapes qui suivent expliquent comment créer un exemple de machine virtuell
 
 Vous pouvez ajouter des adresses IP privées et publiques à l’interface réseau Azure en suivant les étapes décrites ci-après. Les exemples fournis dans les sections suivantes supposent que vous disposez déjà d’une machine virtuelle avec les trois configurations IP décrites dans le [scénario](#scenario) de cet article, mais ce n’est pas une condition obligatoire.
 
-1. Ouvrez une invite de commandes PowerShell et effectuez les étapes restantes de cette section dans une même session PowerShell. Si vous n’avez pas installé, ni configuré PowerShell, effectuez les étapes de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/overview) .
+1. Ouvrez une invite de commandes PowerShell et effectuez les étapes restantes de cette section dans une même session PowerShell. Si vous n’avez pas installé, ni configuré PowerShell, effectuez les étapes de l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/) .
 2. Remplacez les « valeurs » des $Variables suivantes par le nom de l’interface réseau à laquelle vous voulez ajouter une adresse IP, et par le groupe de ressources et l’emplacement dans lesquels réside l’interface réseau :
 
    ```powershell

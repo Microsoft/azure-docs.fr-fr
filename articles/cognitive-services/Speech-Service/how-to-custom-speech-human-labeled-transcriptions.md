@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 09/06/2019
 ms.author: erhopf
-ms.openlocfilehash: 81b4ffc8f77673e52bb78f891e3de618b67e0d1b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4516bbddd3fda593021288a440e1b354d4d7f1e3
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74806060"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96340235"
 ---
 # <a name="how-to-create-human-labeled-transcriptions"></a>Comment créer des transcriptions étiquetées à la main
 
@@ -164,8 +164,8 @@ Voici quelques exemples de normalisation effectuée automatiquement au niveau de
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Préparer et tester les données](how-to-custom-speech-test-data.md)
+- [Préparer et tester les données](./how-to-custom-speech-test-and-train.md)
 - [Inspecter les données](how-to-custom-speech-inspect-data.md)
 - [Évaluer les données](how-to-custom-speech-evaluate-data.md)
 - [Entraîner un modèle](how-to-custom-speech-train-model.md)
-- [Déployer un modèle](how-to-custom-speech-deploy-model.md)
+- [Déployer un modèle](./how-to-custom-speech-train-model.md)

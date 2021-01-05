@@ -3,16 +3,16 @@ title: Créer une machine virtuelle Windows avec le Générateur d’images Azur
 description: Créer une machine virtuelle Windows avec le Générateur d’images Azure.
 author: cynthn
 ms.author: cynthn
-ms.date: 07/31/2019
+ms.date: 05/05/2020
 ms.topic: how-to
 ms.service: virtual-machines-windows
 ms.subservice: imaging
-ms.openlocfilehash: 269b2f4674f2c99fc438c1a7be65e5660ca58d08
-ms.sourcegitcommit: af1cbaaa4f0faa53f91fbde4d6009ffb7662f7eb
+ms.openlocfilehash: 62d80426dec6f5d63d8fa5d67d64d6aafb881110
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81869507"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91320011"
 ---
 # <a name="preview-create-a-windows-vm-with-azure-image-builder"></a>Aperçu : Créer une machine virtuelle Windows avec le Générateur d’images Azure
 
@@ -21,6 +21,11 @@ Cet article vous montre comment créer une image Windows personnalisée à l’a
 - Redémarrage de Windows : redémarre la machine virtuelle.
 - PowerShell (inline) : exécute des commandes spécifiques. Dans cet exemple, il crée un répertoire sur la machine virtuelle à l’aide de `mkdir c:\\buildActions`.
 - Fichier : copier un fichier de GitHub vers la machine virtuelle. Cet exemple copie [index.md](https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/quickquickstarts/exampleArtifacts/buildArtifacts/index.html) vers `c:\buildArtifacts\index.html` sur la machine virtuelle.
+- buildTimeoutInMinutes : augmenter le temps de génération pour permettre l’exécution de builds plus longues. La valeur par défaut est de 240 minutes, et vous pouvez augmenter le temps de génération pour permettre l’exécution de builds plus longues.
+- vmProfile : spécifier les propriétés vmSize et Network.
+- osDiskSizeGB : augmenter la taille de l’image.
+- identity : fournir une identité pour qu’Azure Image Builder l’utilise pendant la génération.
+
 
 Vous pouvez également spécifier un `buildTimeoutInMinutes`. La valeur par défaut est de 240 minutes, et vous pouvez augmenter le temps de génération pour permettre l’exécution de builds plus longues.
 
@@ -50,7 +55,8 @@ Vérifiez votre inscription.
 
 ```azurecli-interactive
 az provider show -n Microsoft.VirtualMachineImages | grep registrationState
-
+az provider show -n Microsoft.KeyVault | grep registrationState
+az provider show -n Microsoft.Compute | grep registrationState
 az provider show -n Microsoft.Storage | grep registrationState
 ```
 
@@ -58,9 +64,11 @@ Si elle n’est pas inscrite, exécutez la commande suivante :
 
 ```azurecli-interactive
 az provider register -n Microsoft.VirtualMachineImages
-
+az provider register -n Microsoft.Compute
+az provider register -n Microsoft.KeyVault
 az provider register -n Microsoft.Storage
 ```
+
 
 ## <a name="set-variables"></a>Définition des variables
 
@@ -93,18 +101,41 @@ Ce groupe de ressources sert à stocker l’artefact de modèle de configuration
 az group create -n $imageResourceGroup -l $location
 ```
 
-## <a name="set-permissions-on-the-resource-group"></a>Définir des autorisations sur le groupe de ressources
+## <a name="create-a-user-assigned-identity-and-set-permissions-on-the-resource-group"></a>Créer une identité affectée par l’utilisateur et définir des autorisations sur le groupe de ressources
+Image Builder utilise l’[identité de l’utilisateur](../../active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm.md#user-assigned-managed-identity) fourni pour injecter l’image dans le groupe de ressources. Dans cet exemple, vous allez créer une définition de rôle Azure qui dispose des actions granulaires pour distribuer l’image. La définition de rôle sera ensuite attribuée à l’identité de l’utilisateur.
 
-Accordez l’autorisation « contributeur » au générateur d’images pour créer l’image dans le groupe de ressources. À défaut, la génération de l'image échoue. 
+## <a name="create-user-assigned-managed-identity-and-grant-permissions"></a>Créer une identité managée affectée par l’utilisateur et octroyer des autorisations 
+```bash
+# create user assigned identity for image builder to access the storage account where the script is located
+idenityName=aibBuiUserId$(date +'%s')
+az identity create -g $imageResourceGroup -n $idenityName
 
-La valeur `--assignee` est l’ID d’inscription d’application du service Générateur d’images. 
+# get identity id
+imgBuilderCliId=$(az identity show -g $imageResourceGroup -n $idenityName | grep "clientId" | cut -c16- | tr -d '",')
 
-```azurecli-interactive
+# get the user identity URI, needed for the template
+imgBuilderId=/subscriptions/$subscriptionID/resourcegroups/$imageResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$idenityName
+
+# download preconfigured role definition example
+curl https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/solutions/12_Creating_AIB_Security_Roles/aibRoleImageCreation.json -o aibRoleImageCreation.json
+
+imageRoleDefName="Azure Image Builder Image Def"$(date +'%s')
+
+# update the definition
+sed -i -e "s/<subscriptionID>/$subscriptionID/g" aibRoleImageCreation.json
+sed -i -e "s/<rgName>/$imageResourceGroup/g" aibRoleImageCreation.json
+sed -i -e "s/Azure Image Builder Service Image Creation Role/$imageRoleDefName/g" aibRoleImageCreation.json
+
+# create role definitions
+az role definition create --role-definition ./aibRoleImageCreation.json
+
+# grant role definition to the user assigned identity
 az role assignment create \
-    --assignee cf32a0cc-373c-47c9-9156-0db11f6a6dfc \
-    --role Contributor \
+    --assignee $imgBuilderCliId \
+    --role $imageRoleDefName \
     --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
 ```
+
 
 
 ## <a name="download-the-image-configuration-template-example"></a>Télécharger l’exemple de modèle de configuration d’image
@@ -119,18 +150,19 @@ sed -i -e "s/<rgName>/$imageResourceGroup/g" helloImageTemplateWin.json
 sed -i -e "s/<region>/$location/g" helloImageTemplateWin.json
 sed -i -e "s/<imageName>/$imageName/g" helloImageTemplateWin.json
 sed -i -e "s/<runOutputName>/$runOutputName/g" helloImageTemplateWin.json
+sed -i -e "s%<imgBuilderId>%$imgBuilderId%g" helloImageTemplateWin.json
 
 ```
 
 Vous pouvez modifier cet exemple dans le terminal à l’aide d’un éditeur de texte comme `vi`.
 
 ```azurecli-interactive
-vi helloImageTemplateLinux.json
+vi helloImageTemplateWin.json
 ```
 
 > [!NOTE]
-> Pour l’image source, vous devez toujours [spécifier une version](https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md#image-version-failure) ; vous ne pouvez pas utiliser `latest`.
-> Si vous ajoutez ou modifiez le groupe de ressources où l’image est distribuée, vous devez vous assurer que les [autorisations sont définies](#set-permissions-on-the-resource-group) sur le groupe de ressources.
+> Pour l’image source, vous devez toujours [spécifier une version](../linux/image-builder-troubleshoot.md#build--step-failed-for-image-version) ; vous ne pouvez pas utiliser `latest`.
+> Si vous ajoutez ou modifiez le groupe de ressources où l’image est distribuée, vous devez vous assurer que les [autorisations sont définies](#create-a-user-assigned-identity-and-set-permissions-on-the-resource-group) sur le groupe de ressources.
  
 ## <a name="create-the-image"></a>Création de l’image
 
@@ -153,7 +185,7 @@ En arrière-plan, le générateur d’images crée également un groupe de resso
 > Vous ne devez pas supprimer directement le groupe de ressources de mise en lots. Commencez par supprimer l’artefact de modèle d’image ; cela supprimera le groupe de ressources de mise en lots.
 
 Si le service signale un échec lors de la soumission du modèle de configuration d’image,
--  consultez ces étapes de [résolution des problèmes](https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md#template-submission-errors--troubleshooting). 
+-  consultez ces étapes de [résolution des problèmes](../linux/image-builder-troubleshoot.md#troubleshoot-image-template-submission-errors). 
 - Vous devez supprimer le modèle, à l’aide de l’extrait de code suivant, avant de retenter la soumission.
 
 ```azurecli-interactive
@@ -176,12 +208,12 @@ az resource invoke-action \
 
 Attendez que la compilation soit terminée. Cela peut durer environ 15 minutes.
 
-Si vous rencontrez des erreurs, passez en revue ces étapes de [résolution des problèmes](https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md#image-build-errors--troubleshooting).
+Si vous rencontrez des erreurs, passez en revue ces étapes de [résolution des problèmes](../linux/image-builder-troubleshoot.md#troubleshoot-common-build-errors).
 
 
 ## <a name="create-the-vm"></a>Création de la machine virtuelle
 
-Créez la machine virtuelle avec l’image que vous avez créée. Remplacez *\<password>* par votre mot de passe pour l’utilisateur `aibuser` sur la machine virtuelle.
+Créez la machine virtuelle avec l’image que vous avez créée. Remplacez *\<password>* par votre mot de passe pour le `aibuser` sur la machine virtuelle.
 
 ```azurecli-interactive
 az vm create \
@@ -216,6 +248,18 @@ az resource delete \
     --resource-group $imageResourceGroup \
     --resource-type Microsoft.VirtualMachineImages/imageTemplates \
     -n helloImageTemplateWin01
+```
+
+### <a name="delete-the-role-assignment-role-definition-and-user-identity"></a>Supprimez l’attribution de rôle, la définition de rôle et l’identité de l’utilisateur.
+```azurecli-interactive
+az role assignment delete \
+    --assignee $imgBuilderCliId \
+    --role "$imageRoleDefName" \
+    --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
+
+az role definition delete --name "$imageRoleDefName"
+
+az identity delete --ids $imgBuilderId
 ```
 
 ### <a name="delete-the-image-resource-group"></a>Supprimer le groupe de ressources d’image

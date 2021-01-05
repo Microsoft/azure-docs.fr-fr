@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: ae8c7c43ecbf9bc625e1e46be3e2c71c8d57b6f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 33b55afb7796b197f7130ec9288abb01cc115651
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720093"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86085648"
 ---
 # <a name="explore-data-in-sql-server-virtual-machine-on-azure"></a>Explorer les données d’une machine virtuelle SQL Server sur Azure
 
@@ -55,14 +55,18 @@ L’utilisation de Python pour explorer les données et générer des fonctionna
 
 Le format de chaîne de connexion ci-après vous permet de vous connecter à une base de données SQL Server à partir de Python à l’aide de pyodbc (en remplaçant les variables servername, dbname, username et password par les valeurs qui vous correspondent) :
 
-    #Set up the SQL Azure connection
-    import pyodbc    
-    conn = pyodbc.connect('DRIVER={SQL Server};SERVER=<servername>;DATABASE=<dbname>;UID=<username>;PWD=<password>')
+```python
+#Set up the SQL Azure connection
+import pyodbc    
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=<servername>;DATABASE=<dbname>;UID=<username>;PWD=<password>')
+```
 
 La [bibliothèque Pandas](https://pandas.pydata.org/) de Python offre un ensemble élaboré de structures de données et d’outils d’analyse des données pour la manipulation des données dans le cadre d’une programmation en Python. Le code suivant lit les résultats renvoyés par une base de données SQL Server dans une trame de données Pandas :
 
-    # Query database and load the returned results in pandas data frame
-    data_frame = pd.read_sql('''select <columnname1>, <columnname2>... from <tablename>''', conn)
+```python
+# Query database and load the returned results in pandas data frame
+data_frame = pd.read_sql('''select <columnname1>, <columnname2>... from <tablename>''', conn)
+```
 
 Vous pouvez à présent utiliser la trame de données Pandas comme décrit dans la rubrique [Traiter les données Azure Blob dans votre environnement de science des données](data-blob.md).
 

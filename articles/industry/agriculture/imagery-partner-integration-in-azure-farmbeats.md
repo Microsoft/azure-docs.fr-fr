@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 11/04/2019
 ms.author: v-umha
 ms.custom: has-adal-ref
-ms.openlocfilehash: 430907f43fb40f0ee24505bdc366a98a49f23b47
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 40e17a9f73d98f24c6c7fbb55ef38cc2bc088861
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82613283"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92675933"
 ---
 # <a name="imagery-partner-integration"></a>Intégration de partenaire d’imagerie
 
@@ -26,7 +26,7 @@ FarmBeats offre les possibilités suivantes :
 
 Les informations suivantes expliquent comment récupérer tout type d’imagerie dans le système FarmBeats.
 
-Quand vous sélectionnez la section **Drone Imagery**, une fenêtre indépendante s’ouvre avec une image haute résolution de l’orthophotographie du drone. Vous pouvez accéder au logiciel du partenaire, qui vous permet de planifier les vols de drone et de récupérer les données brutes. Vous l’utiliserez également pour la planification des trajectoires et l’assemblage des images orthophotographiques.
+Quand vous sélectionnez la section **Drone Imagery** , une fenêtre indépendante s’ouvre avec une image haute résolution de l’orthophotographie du drone. Vous pouvez accéder au logiciel du partenaire, qui vous permet de planifier les vols de drone et de récupérer les données brutes. Vous l’utiliserez également pour la planification des trajectoires et l’assemblage des images orthophotographiques.
 
 Les partenaires de drone doivent permettre aux clients de lier leur compte client à leur instance FarmBeats sur Azure.
 
@@ -43,9 +43,9 @@ Les API incluent une documentation technique Swagger. Pour plus d’informations
 
 ## <a name="authentication"></a>Authentification
 
-FarmBeats utilise Microsoft Azure [Active Directory](https://docs.microsoft.com/azure/app-service/overview-authentication-authorization) (Azure AD). Azure App Service offre une prise en charge intégrée de l’authentification et de l’autorisation. 
+FarmBeats utilise Microsoft Azure [Active Directory](../../app-service/overview-authentication-authorization.md) (Azure AD). Azure App Service offre une prise en charge intégrée de l’authentification et de l’autorisation. 
 
-Pour plus d’informations sur Azure AD, consultez [Azure Active Directory](https://docs.microsoft.com/azure/app-service/overview-authentication-authorization).   
+Pour plus d’informations sur Azure AD, consultez [Azure Active Directory](../../app-service/overview-authentication-authorization.md).   
 
 FarmBeats Datahub utilise l’authentification du porteur, qui nécessite les informations d’identification suivantes :
 
@@ -138,10 +138,10 @@ Une fois que le partenaire dispose d’informations d’identification pour se c
 
 1.  Il crée un type étendu pour les champs suivants en fonction du type de données imagerie à charger :
 
-    - **Source de la scène** : Par exemple, drone_partner_name
-    - **Type de scène** : Par exemple, drone
-    - **Type de fichier de scène** : Par exemple, chlorophyll index
-    - **Type de contenu de fichier de scène** : Par exemple, image/tiff
+    - **Source de la scène**  : Par exemple, drone_partner_name
+    - **Type de scène**  : Par exemple, drone
+    - **Type de fichier de scène**  : Par exemple, chlorophyll index
+    - **Type de contenu de fichier de scène**  : Par exemple, image/tiff
 
 2.  Il appelle l’API /Farms pour obtenir la liste des fermes dans le système Azure FarmBeats.
 3.  Il donne au client la possibilité de choisir une ferme unique dans la liste des fermes.

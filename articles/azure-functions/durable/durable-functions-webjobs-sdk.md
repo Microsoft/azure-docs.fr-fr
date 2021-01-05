@@ -4,12 +4,12 @@ description: Découvrez comment coder et configurer Fonctions durables pour s’
 ms.topic: conceptual
 ms.date: 04/25/2018
 ms.author: azfuncdf
-ms.openlocfilehash: ad498bdbc4e6dc9745c6ef45b3dc601ad36c0a62
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 826e475eb71563b52d687903aeac4ec936e267f6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82733411"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009498"
 ---
 # <a name="how-to-run-durable-functions-as-webjobs"></a>Comment exécuter Durable Functions en tant que WebJobs
 
@@ -31,7 +31,7 @@ Cet article suppose que vous connaissez les principes de base du SDK WebJobs, du
 
 Pour accomplir les étapes décrites dans cet article :
 
-* [Installez Visual Studio 2019](https://docs.microsoft.com/visualstudio/install/) avec la charge de travail de **développement Azure**.
+* [Installez Visual Studio 2019](/visualstudio/install/) avec la charge de travail de **développement Azure**.
 
   Si vous possédez déjà Visual Studio, mais que vous n’avez pas cette charge de travail, ajoutez-la en sélectionnant **Outils**  > **Obtenir les outils et fonctionnalités**.
 

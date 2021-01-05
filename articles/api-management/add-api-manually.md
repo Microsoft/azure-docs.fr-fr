@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/20/2020
 ms.author: apimpm
-ms.openlocfilehash: 644e29c3b5e37cd95280cfd2261e644b20bbda98
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 39a3b9d7dd9efbda93de0b5d7c5f9938922d0012
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82203265"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96183820"
 ---
 # <a name="add-an-api-manually"></a>Ajouter une API manuellement
 
@@ -39,13 +39,13 @@ Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion d
 2. Dans le menu de gauche, cliquez sur **Ajouter l’API**.
 3. Sélectionnez **API vide** dans la liste.  
     ![API vide](media/add-api-manually/blank-api.png)  
-4. Entrez des paramètres pour l’API. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+4. Entrez des paramètres pour l’API. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 5. Sélectionnez **Create** (Créer).
 
 À ce stade, vous ne disposez d’aucune opération dans Gestion des API qui correspond aux opérations dans votre API de serveur principal. Si vous appelez une opération qui est exposée via le serveur principal, mais pas par l’intermédiaire de Gestion des API, vous obtenez une erreur **404**.
 
 >[!NOTE] 
-> Par défaut, lorsque vous ajoutez une API, même si elle est connectée à un service de serveur principal, APIM n’exposera pas d’opérations tant que vous ne les mettez pas sur liste verte. Pour mettre une opération de votre service de serveur principal sur liste verte, créez une opération APIM qui correspond à l’opération de serveur principal.
+> Par défaut, lorsque vous ajoutez une API, même si elle est connectée à un service de serveur principal, APIM n’exposera pas d’opérations tant que vous ne les aurez pas autorisées. Pour autoriser une opération de votre service de serveur principal, créez une opération APIM qui correspond à l’opération de serveur principal.
 
 ## <a name="add-and-test-an-operation"></a>Ajouter et tester une opération
 

@@ -1,27 +1,22 @@
 ---
 title: Environnement Windows Virtual Desktop - Azure
-description: Éléments de base d’un environnement Windows Virtual Desktop.
-services: virtual-desktop
+description: Découvrez les éléments de base d’un environnement Windows Virtual Desktop, tels que les pools d’hôtes et les groupes d’applications.
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 04/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: ad535dd18b89cbe2fceab90f73789180ad332b57
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 99a07dd1791b539ea44fcbab250aa9c227ee1705
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612365"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88002609"
 ---
 # <a name="windows-virtual-desktop-environment"></a>Environnement Windows Virtual Desktop
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/environment-setup-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/environment-setup-2019.md).
 
 Windows Virtual Desktop est un service qui offre aux utilisateurs un accès facile et sécurisé à leurs postes de travail virtualisés et à leurs applications distantes. Cette rubrique fournit des informations supplémentaires sur la structure générale de l’environnement Windows Virtual Desktop.
 
@@ -52,7 +47,7 @@ Pour publier des ressources pour des utilisateurs, vous devez affecter ceux-ci �
 
 ## <a name="workspaces"></a>Workspaces
 
-Un espace de travail est un regroupement logique de groupes d’applications dans le Windows Virtual Desktop. Chaque groupe d’applications Windows Virtual Desktop doit être associé à un espace de travail pour que les utilisateurs puissent voir les applications et les bureaux distants qui y sont publiés.  
+Un espace de travail est un regroupement logique de groupes d’applications dans le Windows Virtual Desktop. Chaque groupe d’applications Windows Virtual Desktop doit être associé à un espace de travail pour que les utilisateurs puissent voir les applications et les bureaux distants qui y sont publiés.
 
 ## <a name="end-users"></a>Utilisateurs finaux
 
@@ -66,7 +61,7 @@ Pour savoir comment configurer votre pool d’hôtes Windows Virtual Desktop, co
 
 Pour savoir comment vous connecter à un Windows Virtual Desktop, voir les articles suivants :
 
-- [Se connecter avec Windows 10 ou Windows 7](connect-windows-7-and-10.md)
+- [Se connecter avec Windows 10 ou Windows 7](connect-windows-7-10.md)
 - [Se connecter avec un navigateur web](connect-web.md)
 - [Se connecter avec le client Android](connect-android.md)
 - [Se connecter avec le client macOS](connect-macos.md)

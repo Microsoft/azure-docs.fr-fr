@@ -3,18 +3,17 @@ title: Remplacement de sous-réseau Azure Traffic Manager avec Azure PowerShell 
 description: Cet article va vous aider à comprendre comment le remplacement de sous-réseau Traffic Manager permet de remplacer la méthode de routage d’un profil Traffic Manager pour diriger le trafic vers un point de terminaison en fonction de l’adresse IP de l’utilisateur final via une plage d’adresses IP prédéfinie pour les mappages de point de terminaison à l’aide d’Azure PowerShell.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
-manager: twooley
-ms.topic: article
+author: duongau
+ms.topic: how-to
 ms.service: traffic-manager
 ms.date: 09/18/2019
-ms.author: rohink
-ms.openlocfilehash: 323093ec78a9486d19496b0ee90e37cb42eea341
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 01bd3b1e945ee7c9ac16af7048536c0a9e2d731a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938419"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89401586"
 ---
 # <a name="traffic-manager-subnet-override-using-azure-powershell"></a>Remplacement de sous-réseau Traffic Manager avec Azure PowerShell
 

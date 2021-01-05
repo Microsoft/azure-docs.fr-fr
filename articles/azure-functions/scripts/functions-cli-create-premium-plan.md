@@ -4,12 +4,13 @@ description: Créer une application de fonction dans un plan Premium scalable da
 ms.service: azure-functions
 ms.topic: sample
 ms.date: 11/23/2019
-ms.openlocfilehash: dd31dbadce4f0a55853607504b4322277784f27f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 714dd8d886f567bcdf07c93803662ef4b2c635f3
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74534586"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565158"
 ---
 # <a name="create-a-function-app-in-a-premium-plan---azure-cli"></a>Créer une application de fonction dans un plan Premium - Azure CLI
 
@@ -17,9 +18,9 @@ Cet exemple de script Azure Functions crée une application de fonction, qui con
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, Azure CLI version 2.0 ou une version ultérieure est indispensable pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -37,7 +38,7 @@ Chaque commande du tableau renvoie à une documentation spécifique. Ce script u
 |---|---|
 | [az group create](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
 | [az storage account create](/cli/azure/storage/account#az-storage-account-create) | Crée un compte de stockage Azure. |
-| [az functionapp plan create](/cli/azure/functionapp/plan#az-functionapp-plan-create) | Crée un plan Premium. |
+| [az functionapp plan create](/cli/azure/functionapp/plan#az-functionapp-plan-create) | Crée un plan Premium dans une [référence SKU](../functions-premium-plan.md#available-instance-skus) spécifique. |
 | [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | Crée une application de fonction dans le plan App Service. |
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -3,25 +3,25 @@ title: Auto-révision d’un package d’accès dans la gestion des droits d’u
 description: Découvrez comment réviser l’accès utilisateur pour les packages d’accès de gestion des droits d’utilisation dans les révisions d’accès Azure Active Directory (préversion).
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 11/01/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 45da1170705bab1206a98c59e02c7616c25ce502
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 31c44f2423cdc5c43638fe2515757bcb11a9814c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78967771"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87798441"
 ---
 # <a name="self-review-of-an-access-package-in-azure-ad-entitlement-management"></a>Auto-révision d’un package d’accès dans la gestion des droits d’utilisation Azure AD
 

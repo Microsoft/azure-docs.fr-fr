@@ -9,13 +9,13 @@ services: iot-hub
 ms.devlang: nodejs
 ms.topic: conceptual
 ms.date: 06/28/2017
-ms.custom: mqtt
-ms.openlocfilehash: af9743233a61e8e6d816b362d35e6a38735df35b
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.custom: mqtt, devx-track-js
+ms.openlocfilehash: db4f78e14696c421adaedd16b0b3f8d598f12846
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732247"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91251896"
 ---
 # <a name="upload-files-from-your-device-to-the-cloud-with-iot-hub-nodejs"></a>Charger des fichiers sur le cloud à partir d’un appareil avec IoT Hub (Node.js)
 
@@ -30,7 +30,7 @@ Ce tutoriel s’appuie sur le code du tutoriel [Envoyer des messages cloud-à-ap
 Le guide de démarrage rapide [Envoyer des données de télémétrie d’un appareil à un hub IoT](quickstart-send-telemetry-node.md) présente les fonctionnalités de messages appareil-à-cloud de base d’IoT Hub. Toutefois, dans certains scénarios, vous ne pouvez pas facilement mapper les données que vos appareils envoient dans des messages appareil-à-cloud relativement petits et acceptés par IoT Hub. Par exemple :
 
 * Fichiers volumineux qui contiennent des images
-* Videos
+* Vidéos
 * Données de vibration échantillonnées à une fréquence élevée
 * Un certain type de données prétraitées.
 
@@ -44,6 +44,8 @@ Ces fichiers sont généralement traités par lot dans le cloud à l’aide d’
 
 > [!NOTE]
 > IoT Hub prend en charge de nombreuses plateformes d’appareils et de nombreux langages (notamment C, .NET, Javascript, Python et Java) par le biais des kits Azure IoT device SDK. Pour obtenir des instructions pas à pas expliquant comment connecter votre appareil à Azure IoT Hub, voir le Centre de développement Azure IoT.
+
+[!INCLUDE [iot-hub-include-x509-ca-signed-file-upload-support-note](../../includes/iot-hub-include-x509-ca-signed-file-upload-support-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 

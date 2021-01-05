@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 50c52369a5a957a4dd6279cac5079e2dea023106
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa0514834d1619bbbae4501fe6b1af16d7964ff7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61463401"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89261473"
 ---
 # <a name="sample-presets-for-media-encoder-standard-mes"></a>Exemples de présélections pour MES (Media Encoder Standard)
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 **Media Encoder Standard** définit un ensemble de présélections d’encodage système prédéfinies à utiliser lors de la création des travaux d’encodage. Il est recommandé d’utiliser les paramètres prédéfinis « Diffusion en continu adaptative » si vous souhaitez encoder une vidéo pour une diffusion en continu avec Media Services. Lorsque vous spécifiez cette présélection, Media Encoder Standard [générera automatiquement une échelle des vitesses de transmission](media-services-autogen-bitrate-ladder-with-mes.md). 
 
@@ -29,7 +31,7 @@ ms.locfileid: "61463401"
 Media Services prend entièrement en charge la personnalisation de toutes les valeurs dans les présélections afin de répondre à vos exigences et vos besoins spécifiques de codage. Si vous avez besoin de personnaliser une valeur d’encodage prédéfinie, nous vous conseillons de commencer par l’une des présélections système ci-dessous qui sont fournies dans cette section comme modèle pour votre configuration personnalisée. Pour consulter une explication de la signification des éléments des présélections et les valeurs valides pour chaque élément, consultez la rubrique [Schéma Media Encoder Standard](media-services-mes-schema.md).  
   
 > [!NOTE]
->  Lorsque vous utilisez une présélection pour les encodages 4K, vous devez obtenir le type d’unité réservé `S3`. Pour plus d’informations, consultez [Mise à l’échelle de l’encodage](https://azure.microsoft.com/documentation/articles/media-services-portal-encoding-units).  
+>  Lorsque vous utilisez une présélection pour les encodages 4K, vous devez obtenir le type d’unité réservé `S3`. Pour plus d’informations, consultez [Mise à l’échelle de l’encodage](./media-services-scale-media-processing-overview.md).  
 
 #### <a name="video-rotation-default-setting-in-presets"></a>Paramètre par défaut de rotation de la vidéo dans les présélections :
 Lorsque vous utilisez Media Encoder Standard, la rotation vidéo est activée par défaut. Si votre vidéo a été enregistrée sur un appareil mobile en mode Portrait, alors ces présélections font pivoter la font pivoter en mode Paysage avant l’encodage.
@@ -86,4 +88,4 @@ Lorsque vous utilisez Media Encoder Standard, la rotation vidéo est activée pa
   
  [H264 - Vitesse de transmission unique qualité faible SD pour Android](media-services-mes-preset-H264-Single-Bitrate-Low-Quality-SD-for-Android.md) produit un seul fichier MP4 avec une vitesse de transmission de 56 kbit/s, et de l’audio stéréo AAC.  
   
- Pour plus d’informations sur les encodeurs Azure Media Services, consultez la section [Vue d’ensemble et comparaison d’encodeurs multimédia à la demande Azure](https://azure.microsoft.com/documentation/articles/media-services-encode-asset/).
+ Pour plus d’informations sur les encodeurs Azure Media Services, consultez la section [Vue d’ensemble et comparaison d’encodeurs multimédia à la demande Azure](./media-services-encode-asset.md).

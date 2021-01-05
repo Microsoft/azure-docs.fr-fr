@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à MongoDB Cloud | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et MongoDB Cloud.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: ef392044-235b-4d80-8a33-eeba9b142849
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/03/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: ef8094464b428f1f46017b0d4abaac5aeb1fa428
-ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+ms.openlocfilehash: af1c0702929e7cd700c8d19ab24e40f9c6f43a21
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82024509"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96602170"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-mongodb-cloud"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à MongoDB Cloud
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer MongoDB Cloud à Azure
 * Permettre à vos utilisateurs de se connecter automatiquement à MongoDB Cloud avec leur compte Azure AD
 * gérer vos comptes à un emplacement central : le portail Azure.
 
-Pour en savoir plus sur l’intégration d’applications SaaS (software as a service) à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
+Pour en savoir plus sur l’intégration d’applications SaaS (software as a service) à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -45,7 +41,7 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 * MongoDB Cloud prend en charge l’authentification unique initiée par le **fournisseur de services** et le **fournisseur d’identité**.
 * MongoDB Cloud prend en charge le provisionnement d’utilisateurs **juste-à-temps**.
-* Après avoir configuré MongoDB Cloud, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. Pour plus d’informations, consultez [Découvrir comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré MongoDB Cloud, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. Pour plus d’informations, consultez [Découvrir comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="add-mongodb-cloud-from-the-gallery"></a>Ajouter MongoDB Cloud à partir de la galerie
 
@@ -101,11 +97,11 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Outre les attributs précédents, l’application MongoDB Cloud s’attend à ce que quelques attributs supplémentaires soient repassés dans la réponse SAML. Ces attributs sont également préremplis, mais vous pouvez les examiner pour voir s’ils répondent à vos besoins.
     
-    | Nom | |  Attribut source|
-    | ---------------| --------------- | --------- |
-    | email | | user.userprincipalname |
-    | firstName | | user.givenname |
-    | lastName | | user.surname |
+    | Nom | Attribut source|
+    | ---------------| --------- |
+    | email | user.userprincipalname |
+    | firstName | user.givenname |
+    | lastName | user.surname |
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **XML de métadonnées de fédération**. Sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -156,21 +152,20 @@ MongoDB Cloud prend en charge le provisionnement d’utilisateurs juste-à-temps
 
 Dans cette section, vous allez tester votre configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous sélectionnez la vignette MongoDB Cloud dans le volet d’accès, vous êtes connecté automatiquement à l’application MongoDB Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations, consultez [Se connecter et démarrer des applications à partir du portail Mes applications](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette MongoDB Cloud dans le volet d’accès, vous êtes connecté automatiquement à l’application MongoDB Cloud pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations, consultez [Se connecter et démarrer des applications à partir du portail Mes applications](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
-- [S’inscrire à MongoDB Atlas sur Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/mongodb.mongodb_atlas_azure_08082019?tab=Overview)
+- [S’inscrire à MongoDB Atlas sur Azure](https://azuremarketplace.microsoft.com/marketplace/apps/mongodb.mdb_atlas_oct2020?tab=Overview)
 
 - [Essayer MongoDB Cloud avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)
 
-- [Protéger MongoDB Cloud avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
-
+- [Protéger MongoDB Cloud avec une visibilité et des contrôles avancés](/cloud-app-security/proxy-intro-aad)

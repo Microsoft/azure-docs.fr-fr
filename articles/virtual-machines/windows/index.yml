@@ -10,21 +10,21 @@ metadata:
   author: cynthn
   ms.author: cynthn
   ms.date: 09/09/2019
-  ms.openlocfilehash: 8ff93dc3071a442f28878baa958d3583bc046b44
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: a0376262468d076b64d1c22427bb5f9aa4ecc6df
+  ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77115562"
+  ms.lasthandoff: 10/13/2020
+  ms.locfileid: "91973680"
 landingContent:
 - title: Dernières fonctionnalités
   linkLists:
   - linkListType: whats-new
     links:
     - text: Machines virtuelles Spot
-      url: spot-vms.md
+      url: ../spot-vms.md
     - text: Hôtes dédiés
-      url: dedicated-hosts.md
+      url: ../dedicated-hosts.md
     - text: Groupes de placements de proximité
       url: proximity-placement-groups.md
 - title: Bien démarrer
@@ -32,28 +32,28 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Portail Azure
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-quick-create-portal
+      url: ./quick-create-portal.md
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-quick-create-powershell
+      url: ./quick-create-powershell.md
     - text: Azure CLI
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-quick-create-cli
+      url: ./quick-create-cli.md
 - title: Guides pas à pas
   linkLists:
   - linkListType: tutorial
     links:
     - text: Créer et gérer des machines virtuelles Windows
-      url: /azure/virtual-machines/windows/tutorial-manage-vm
+      url: ./tutorial-manage-vm.md
     - text: Disques de machine virtuelle
-      url: /azure/virtual-machines/windows/tutorial-manage-data-disk
+      url: ./tutorial-manage-data-disk.md
     - text: Automatiser la configuration de machine virtuelle
-      url: /azure/virtual-machines/windows/tutorial-automate-vm-deployment
+      url: ./tutorial-automate-vm-deployment.md
     - text: Créer des images de machines virtuelles personnalisées
-      url: /azure/virtual-machines/windows/tutorial-custom-images
+      url: ./tutorial-custom-images.md
     - text: Gérer les machines virtuelles avec des réseaux virtuels
-      url: /azure/virtual-machines/windows/tutorial-virtual-network
+      url: ./tutorial-virtual-network.md
 - title: Entrainement auto-rythmé
   linkLists:
   - linkListType: learn
     links:
     - text: " Créer une machine virtuelle Windows dans Azure"
-      url: https://docs.microsoft.com/learn/modules/create-windows-virtual-machine-in-azure/
+      url: /learn/modules/create-windows-virtual-machine-in-azure/

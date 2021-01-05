@@ -5,17 +5,18 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.date: 04/23/2020
+ms.date: 11/30/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.topic: reference
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 11c9d66f891e8f5d53fc2a965e75f095417d20d4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 1652c52dcc6870e396d74a2f38fe63c304d37df5
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82184008"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672266"
 ---
 # <a name="azure-ad-connect--adsynctools-powershell-reference"></a>Azure AD Connect :  Documentation de référence concernant ADSyncTools PowerShell
 La documentation suivante fournit des informations de référence sur le module ADSyncTools.psm1 PowerShell inclus avec Azure AD Connect.
@@ -26,7 +27,9 @@ Pour installer le module PowerShell ADSyncTools, effectuez les étapes suivantes
 1.  Ouvrez Windows PowerShell avec des privilèges d’administrateur.
 2.  Tapez ou collez le code suivant : 
     ``` powershell
-    Import-module -Name "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\AdSyncTools"
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+        Import-module -Name "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\AdSyncTools"
     ```
 3.  Appuyez sur Entrée.
 4.  Pour vérifier que le module a été installé, entrez ou copiez-collez ceci :
@@ -553,8 +556,8 @@ Cette fonction interroge l’historique des exécutions de AAD Connect et export
 #Required Parameters
 ```
 
-$sourcePath = Read-Host -Prompt « Entrez un nom de fichier pour votre chemin d'accès au fichier journal » #"\<Source_Path\>" $outputPath = Read-Host -Prompt « Entrez un nom de fichier pour votre chemin d’accès au fichier de sortie » #"\<Out_Path\>"
- 
+$sourcePath = Read-Host -Prompt « Entrez un nom de fichier pour votre chemin d’accès au fichier journal » #"\<Source_Path\>" $outputPath = Read-Host -Prompt « Entrez un nom de fichier pour votre chemin d’accès au fichier de sortie » #"\<Out_Path\>"
+
  Get-ADSyncToolsUsersSourceAnchorChanged -sourcePath $sourcePath -outputPath $outputPath
 
 #### <a name="example-2"></a>EXEMPLE 2

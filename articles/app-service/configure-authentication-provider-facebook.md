@@ -8,10 +8,10 @@ ms.custom:
 - seodec18
 - fasttrack-edit
 ms.openlocfilehash: b6aad323c0d6fa8f59c9fad203640c477b162503
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80519954"
 ---
 # <a name="configure-your-app-service-or-azure-functions-app-to-use-facebook-login"></a>Configurer votre application App Service ou Azure Functions pour utiliser une connexion Facebook
@@ -48,7 +48,7 @@ Pour effectuer la procédure de cet article, vous avez besoin d’un compte Face
 
 1. Le compte Facebook que vous avez utilisé pour inscrire l'application est un administrateur de l'application. À ce stade, seuls les administrateurs peuvent se connecter à cette application.
 
-   Pour authentifier d’autres comptes Facebook, sélectionnez **Révision de l’application** et activez **Rendre public \<nom-de-votre-application** pour activer l’accès public général à l’application à l’aide de l’authentification Facebook.
+   Pour authentifier d’autres comptes Facebook, sélectionnez **Révision de l’application** et activez **Rendre \<your-app-name> public** pour activer l’accès public général à l’application à l’aide de l’authentification Facebook.
 
 ## <a name="add-facebook-information-to-your-application"></a><a name="secrets"> </a>Ajouter des informations Facebook à votre application
 

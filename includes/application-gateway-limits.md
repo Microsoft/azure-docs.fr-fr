@@ -4,12 +4,12 @@ ms.service: application-gateway
 ms.topic: include
 ms.date: 03/04/2020
 ms.author: victorh
-ms.openlocfilehash: a3fb3dbf026a696b9d472efcba139c371ff1e587
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff97aa6c6f04ad41ba6e1b986f3cc0734ec7a326
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334931"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92526113"
 ---
 | Ressource | Limite | Remarque |
 | --- | --- | --- |
@@ -39,6 +39,6 @@ ms.locfileid: "80334931"
 | Taille de téléchargement maximale WAF |Passerelles v1 WAF moyennes, 100 Mo<br>Grandes passerelles v1 WAF, 500 Mo<br>WAF v2, 750 Mo| |
 | Limite de taille de corps de WAF, sans les fichiers|128 Ko||
 | Règles personnalisées WAF maximales|100||
-| Nombre maximal d’exclusions WAF|100||
+| Exclusions WAF maximales par passerelle applicative|40||
 
-<sup>1</sup> En cas de références SKU avec WAF activé, nous vous recommandons de limiter le nombre de ressources à 40 pour des performances optimales.
+<sup>1</sup> Dans le cas des références SKU compatibles WAF, vous devez limiter le nombre de ressources à 40.

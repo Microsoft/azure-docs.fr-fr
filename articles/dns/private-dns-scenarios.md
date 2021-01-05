@@ -8,10 +8,10 @@ ms.topic: article
 ms.date: 10/05/2019
 ms.author: rohink
 ms.openlocfilehash: ab850adb2e9a25778d5f44ba711eb0762fe562c8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "76939338"
 ---
 # <a name="azure-dns-private-zones-scenarios"></a>Scénarios Azure DNS Private Zones

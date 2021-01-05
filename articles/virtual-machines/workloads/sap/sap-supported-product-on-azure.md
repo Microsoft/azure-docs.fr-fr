@@ -10,18 +10,19 @@ tags: azure-resource-manager
 keywords: SAP
 ms.assetid: d7c59cc1-b2d0-4d90-9126-628f9c7a5538
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 04/21/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 8b2f4e7a16c967b26b545d1405f973bf8b8afaae
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: a02c30423ab3c6de87eac7d34b5f0004e54a8d5d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82086128"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957807"
 ---
 # <a name="what-sap-software-is-supported-for-azure-deployments"></a>Logiciels SAP dont le déploiement est pris en charge sur Azure
 Cet article explique comment identifier les logiciels SAP dont le déploiement est pris en charge sur Azure, ainsi que les versions de système d’exploitation ou système de gestion de base de données nécessaires.
@@ -87,12 +88,12 @@ Connaissant les versions de SGBD prises en charge avec l’infrastructure Azure 
 Azure inclut deux services que vous pouvez utiliser pour exécuter une base de données HANA :
 
 - Machines virtuelles Azure
-- [Grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture)
+- [Grandes instances HANA](./hana-overview-architecture.md)
 
 Pour l’exécution de SAP HANA, SAP doit remplir des besoins d’infrastructure aux conditions plus nombreuses et plus fortes pour exécuter NetWeaver ou d’autres applications et SGBD SAP. Par conséquent, un plus petit nombre de machines virtuelles Azure sont éligibles pour l’exécution du SGBD SAP HANA. La liste des infrastructures Azure prises en charge pour SAP HANA figure dans le [répertoire de matériel SAP HANA](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure). 
 
 > [!NOTE]
-> Les unités qui commencent par la lettre « S » sont des unités de [grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture). 
+> Les unités qui commencent par la lettre « S » sont des unités de [grandes instances HANA](./hana-overview-architecture.md). 
 
 > [!NOTE]
 > Aucune certification SAP spécifique ne dépend des versions majeures de SAP HANA. Contrairement à une idée reçue au sujet de la colonne **Scénario de certification** des [plateformes IaaS certifiées HANA](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure), la colonne ne comprend **aucune instruction sur la version majeure ou mineure HANA certifiée**. Vous devez partir du principe que toutes les unités répertoriées peuvent être utilisées pour HANA 1.0 et HANA 2.0 tant que les versions certifiées du système d'exploitation des unités spécifiques sont également prises en charge par les versions HANA 1.0. 
@@ -138,12 +139,11 @@ La prise en charge de SAP BPC 10.1 SP08 est décrite dans la [Note de support SA
 La prise en charge de SAP Hybris Commerce Platform sur Azure est détaillée dans la [documentation Hybris](https://help.sap.com/viewer/a74589c3a81a4a95bf51d87258c0ab15/1811/en-US/8c71300f866910149b40c88dfc0de431.html). La prise en charge du système SGBD pour SAP Hybris Commerce Platform se répartit comme suit :
 
 - SQL Server et Oracle sur la plateforme du système d’exploitation Windows. Les versions minimales les plus récentes s’appliquent à SAP NetWeaver. Pour plus d’informations, consultez [la note n°1928533 sur la prise en charge de SAP](https://launchpad.support.sap.com/#/notes/1928533)
-- SAP HANA sur Red Hat et SUSE Linux. Les types de machines virtuelles certifiés SAP HANA sont requis, comme indiqué plus haut dans [ce document](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-supported-product-on-azure#sap-hana-support). SAP Hybris Commerce Platform est considéré comme une charge de travail OLTP
+- SAP HANA sur Red Hat et SUSE Linux. Les types de machines virtuelles certifiés SAP HANA sont requis, comme indiqué plus haut dans [ce document](#sap-hana-support). SAP Hybris Commerce Platform est considéré comme une charge de travail OLTP
 - SQL Azure DB à partir de SAP (Hybris) Commerce Platform version 1811
 
 
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Découvrez les étapes suivantes dans [Planification et implémentation de machines virtuelles Azure pour SAP NetWeaver](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/planning-guide)
-
+Découvrez les étapes suivantes dans [Planification et implémentation de machines virtuelles Azure pour SAP NetWeaver](./planning-guide.md)

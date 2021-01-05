@@ -1,36 +1,138 @@
 ### YamlMime:Landing
-title: Documentation Azure VMware Solution (AVS)
-summary: Découvrez comment utiliser Azure VMware Solution (AVS) pour déployer un cloud privé VMware sur Azure
+title: Documentation sur Azure VMware Solution
+summary: Découvrez comment utiliser Azure VMware Solution pour déployer un cloud privé VMware sur Azure
 metadata:
-  title: Documentation Azure VMware Solution (AVS)
-  description: Découvrez comment utiliser Azure VMware Solution (AVS) pour déployer un cloud privé VMware sur Azure
+  title: Documentation sur Azure VMware Solution
+  description: Découvrez comment utiliser Azure VMware Solution pour déployer un cloud privé VMware sur Azure
   ms.service: azure-vmware
   ms.topic: landing-page
   author: dikamath
   ms.author: dikamath
-  ms.date: 05/04/2020
-  ms.openlocfilehash: 2ae8f6bc5257dc4d7383516201912c504c4d6038
-  ms.sourcegitcommit: d9cd51c3a7ac46f256db575c1dfe1303b6460d04
+  ms.date: 11/19/2020
+  ms.openlocfilehash: c460df29183cbf40bee1f539435669121b3ee6ed
+  ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/04/2020
-  ms.locfileid: "82739448"
+  ms.lasthandoff: 12/04/2020
+  ms.locfileid: "96608416"
 landingContent:
-- title: À propos d’Azure VMware Solution (AVS)
+- title: À propos d’Azure VMware Solution
   linkLists:
   - linkListType: overview
     links:
-    - text: Qu’est-ce qu’Azure VMware Solution (AVS) ?
+    - text: Présentation d’Azure VMware Solution
       url: introduction.md
-  - linkListType: get-started
+  - linkListType: concept
     links:
-    - text: Check-list sur les réseaux
-      url: tutorial-network-checklist.md
+    - text: Clusters et cloud privé
+      url: concepts-private-clouds-clusters.md
+    - text: Réseau et interconnectivité d’un cloud privé
+      url: concepts-networking.md
+    - text: Stockage dans des clouds privés
+      url: concepts-storage.md
+    - text: Accès et identité pour les clouds privés
+      url: concepts-identity.md
+    - text: Contrôle d’accès en fonction du rôle vSphere
+      url: concepts-role-based-access-control.md
+    - text: Superviser et réparer des clouds privés
+      url: concepts-monitor-repair-private-cloud.md
+    - text: Mises à niveau de clouds privés
+      url: concepts-upgrades.md
+- title: Prise en main
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: 0 - Planifier le déploiement
+      url: production-ready-deployment-steps.md
+    - text: 1 - Déployer Azure VMware Solution
+      url: deploy-azure-vmware-solution.md
+    - text: 2 - Se connecter localement
+      url: azure-vmware-solution-on-premises.md
+    - text: 3 - Déployer et configurer HCX
+      url: tutorial-deploy-vmware-hcx.md
   - linkListType: tutorial
     links:
-    - text: Créer un cloud privé AVS
+    - text: Check-list pour la planification réseau
+      url: tutorial-network-checklist.md
+    - text: Créer un cloud privé
       url: tutorial-create-private-cloud.md
-    - text: Configurer la mise en réseau
-      url: tutorial-configure-networking.md
     - text: Accéder à un cloud privé
       url: tutorial-access-private-cloud.md
+    - text: Configurer la mise en réseau
+      url: tutorial-configure-networking.md
+    - text: Créer un segment réseau NSX-T
+      url: tutorial-nsx-t-network-segment.md
+    - text: Appairer un environnement local à un cloud privé
+      url: tutorial-expressroute-global-reach-private-cloud.md
+    - text: Mettre à l’échelle un cloud privé
+      url: tutorial-scale-private-cloud.md
+- title: Étendre Azure VMware Solution
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Activer Azure VMware Solution
+      url: enable-azure-vmware-solution.md
+    - text: Faire des économies avec une instance réservée
+      url: reserved-instance.md
+    - text: Évaluation de la migration
+      url: ../migrate/how-to-create-azure-vmware-solution-assessment.md?context=/azure/migrate/context/migrate-context.json
+    - text: Gérer DHCP
+      url: manage-dhcp.md
+    - text: Déployer la reprise d’activité pour les machines virtuelles
+      url: disaster-recovery-for-virtual-machines.md
+    - text: Déployer une machine virtuelle via la bibliothèque de contenu
+      url: ./deploy-vm-content-library.md
+    - text: Configurer GitHub Enterprise Server
+      url: github-enterprise-server.md
+    - text: Utilisation d’adresses IP publiques
+      url: public-ip-usage.md
+    - text: Créer un tunnel IPSec
+      url: create-ipsec-tunnel.md
+- title: Intégration native Azure
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Gestion des API
+      url: concepts-api-management.md
+    - text: Hub-and-spoke
+      url: concepts-hub-and-spoke.md
+    - text: Azure Security Center
+      url: azure-security-integration.md
+    - text: Azure Backup Server
+      url: set-up-backup-server-for-azure-vmware-solution.md
+    - text: Gestion du cycle de vie sur des machines virtuelles
+      url: lifecycle-management-of-azure-vmware-solution-vms.md
+    - text: Application Gateway
+      url: protect-azure-vmware-solution-with-application-gateway.md
+    - text: Traffic Manager
+      url: deploy-traffic-manager-balance-workloads.md
+- title: Solutions VMware
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Configurer des opérations vRealize
+      url: vrealize-operations-for-azure-vmware-solution.md
+    - text: Déployer VMware Horizon
+      url: azure-vmware-solution-horizon.md
+- title: Écosystème VMware
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Solutions de sauvegarde pour les machines virtuelles
+      url: ecosystem-back-up-vms.md
+- title: Ressources
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/ext/vmware/vmware
+    - text: Azure PowerShell
+      url: /powershell/module/az.vmware
+    - text: Questions fréquentes (FAQ)
+      url: faq.md
+- title: Dépannage
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Ouvrir une demande de support pour les échecs de déploiement
+      url: fix-deployment-provisioning-failures.md

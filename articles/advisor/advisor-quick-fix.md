@@ -4,12 +4,12 @@ description: Effectuer une correction en bloc à l’aide d’un correctif rapid
 ms.topic: article
 ms.date: 03/13/2020
 ms.author: sagupt
-ms.openlocfilehash: 3c3ac27f04aa516fbef1bfff30e3392659b58919
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a9c86a7ae510d9657f64c71db2aa8c4e3e558f52
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79503925"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90968587"
 ---
 # <a name="quick-fix-remediation-for-advisor"></a>Application d’un correctif rapide pour Advisor
 Un **correctif rapide** offre un moyen plus rapide et plus facile de corriger les recommandations dans plusieurs ressources. Il permet d’apporter des corrections en bloc aux ressources et d’optimiser vos abonnements plus rapidement grâce à une correction à grande échelle.
@@ -20,13 +20,13 @@ Cette fonctionnalité est disponible uniquement pour certaines recommandations d
 
 1. Dans la liste des recommandations portant l’étiquette **Correctif rapide**, cliquez sur la recommandation.
 
-   ![Correctif rapide Advisor](./media/quick-fix-1.png)
+   :::image type="content" source="./media/quick-fix-1.png" alt-text="{Capture d’écran d’Azure Advisor montrant des étiquettes Correctif rapide dans les recommandations.}":::
    
    *Les prix indiqués dans l’image sont fournis uniquement à titre d’exemple*
 
 2. Dans la page Détails de la recommandation, vous verrez la liste des ressources pour lesquelles vous avez cette recommandation. Sélectionnez toutes les ressources que vous souhaitez corriger.
 
-   ![Correctif rapide Advisor](./media/quick-fix-2.png)
+   :::image type="content" source="./media/quick-fix-2.png" alt-text="{Capture d’écran d’Azure Advisor montrant des étiquettes Correctif rapide dans les recommandations.}":::
    
    *Les prix indiqués dans l’image sont fournis uniquement à titre d’exemple*
 
@@ -50,4 +50,4 @@ Pour plus d’informations sur les recommandations d’Advisor, consultez :
 * [Recommandations du conseiller en matière de performances](advisor-performance-recommendations.md)
 * [Recommandations du conseiller en matière de sécurité](advisor-security-recommendations.md)
 * [Recommandations d’excellence opérationnelle Advisor](advisor-operational-excellence-recommendations.md)
-* [API REST Advisor](https://docs.microsoft.com/rest/api/advisor/)
+* [API REST Advisor](/rest/api/advisor/)

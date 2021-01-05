@@ -10,12 +10,12 @@ ms.workload: data-services
 ms.topic: article
 ms.custom: seo-lt-2019
 ms.date: 03/12/2020
-ms.openlocfilehash: 2e289f30ef1c1883c38884eb563a41bccc841329
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9550556aa022a9211072fd4c5fb18acb4ee7882e
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79462649"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92637987"
 ---
 # <a name="use-powershell-to-create-a-data-factory-pipeline-to-copy-data-in-the-cloud"></a>Utiliser PowerShell pour créer un pipeline de fabrique de données afin de copier des données dans le cloud
 
@@ -26,7 +26,7 @@ Cet exemple de script PowerShell crée dans Azure Data Factory un pipeline qui c
 [!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install-no-ssh-az.md)]
 
 ## <a name="prerequisites"></a>Prérequis
-* **Compte Stockage Azure**. Vous utilisez le stockage Blob à la fois comme magasins de données **source** et **récepteur**. Si vous ne possédez pas de compte de stockage Azure, consultez [Créer un compte de stockage](../../storage/common/storage-account-create.md) pour en créer un. 
+* **Compte Stockage Azure** . Vous utilisez le stockage Blob à la fois comme magasins de données **source** et **récepteur** . Si vous ne possédez pas de compte de stockage Azure, consultez [Créer un compte de stockage](../../storage/common/storage-account-create.md) pour en créer un. 
 * Créez un **conteneur d’objets blob** dans le stockage Blob, créez un **dossier** d’entrée dans le conteneur et chargez des fichiers sur le dossier. Vous pouvez utiliser des outils tels que l’[Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/) pour vous connecter au stockage Blob Azure, créer un conteneur d’objets blob, charger le fichier d’entrée et vérifier le fichier de sortie.
 
 ## <a name="sample-script"></a>Exemple de script
@@ -68,6 +68,6 @@ Ce script utilise les commandes suivantes :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).
 
 Des exemples supplémentaires de scripts PowerShell pour Azure Data Factory sont à votre disposition dans [Exemples PowerShell pour Azure Data Factory](../samples-powershell.md).

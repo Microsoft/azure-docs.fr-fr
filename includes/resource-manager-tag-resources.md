@@ -9,10 +9,10 @@ ms.date: 03/19/2020
 ms.author: tomfitz
 ms.custom: include file
 ms.openlocfilehash: a00291182059506aeab9cde965fa4cbd5177ecf7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80132099"
 ---
 Si un utilisateur ne dispose pas de l’accès requis pour appliquer des étiquettes, vous pouvez lui attribuer le rôle **Contributeur d’étiquette**. Pour plus d’informations, consultez [Didacticiel : Accorder un accès utilisateur aux ressources Azure à l’aide du contrôle RBAC et du portail Azure](../articles/role-based-access-control/quickstart-assign-role-user-portal.md).

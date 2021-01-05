@@ -12,12 +12,12 @@ manager: daveba
 ms.reviewer: jairoc
 ms.collection: M365-identity-device-management
 ms.custom: has-adal-ref
-ms.openlocfilehash: 08f083fe60076c80b5b7d60f555daac499974254
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: e235bf90568a1382a5ecee3ff4d2283aaa32f10b
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611311"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93083214"
 ---
 # <a name="troubleshooting-hybrid-azure-active-directory-joined-devices"></a>Résolution des problèmes liés aux appareils hybrides joints à Azure Active Directory
 
@@ -28,8 +28,8 @@ Pour les autres clients Windows, consultez l’article [Dépanner des appareils 
 Cet article suppose que vous avez [configuré des appareils hybrides joints à Azure Active Directory](hybrid-azuread-join-plan.md) de façon à prendre en charge les scénarios suivants :
 
 - Accès conditionnel basé sur les appareils
-- [Itinérance d’entreprise des paramètres](../active-directory-windows-enterprise-state-roaming-overview.md)
-- [Windows Hello Entreprise](../active-directory-azureadjoin-passport-deployment.md)
+- [Itinérance d’entreprise des paramètres](./enterprise-state-roaming-overview.md)
+- [Windows Hello Entreprise](/windows/security/identity-protection/hello-for-business/hello-identity-verification)
 
 Ce document fournit des conseils de dépannage pour résoudre les problèmes potentiels.
 
@@ -95,16 +95,16 @@ Examinez les champs suivants et assurez-vous qu’ils disposent des valeurs atte
 
 #### <a name="domainjoined--yes"></a>DomainJoined : YES
 
-Ce champ indique si l’appareil est joint à un répertoire Active Directory local ou non. Si la valeur est **NON**, l’appareil ne peut pas effectuer de jonction hybride Azure AD.
+Ce champ indique si l’appareil est joint à un répertoire Active Directory local ou non. Si la valeur est **NON** , l’appareil ne peut pas effectuer de jonction hybride Azure AD.
 
 #### <a name="workplacejoined--no"></a>WorkplaceJoined : Non
 
-Ce champ indique si l’appareil est inscrit auprès d’Azure AD mais en tant qu’appareil personnel (avec la mention *Joint à l’espace de travail*). Cette valeur doit être **NON** pour un ordinateur appartenant à un domaine qui est également une jonction hybride Azure AD. Si la valeur est **OUI**, un compte professionnel ou scolaire a été ajouté avant l’achèvement d’une jonction hybride Azure AD. Dans ce cas, le compte est ignoré lors de l’utilisation de la version mise à jour anniversaire de Windows 10 (1607).
+Ce champ indique si l’appareil est inscrit auprès d’Azure AD mais en tant qu’appareil personnel (avec la mention *Joint à l’espace de travail* ). Cette valeur doit être **NON** pour un ordinateur appartenant à un domaine qui est également une jonction hybride Azure AD. Si la valeur est **OUI** , un compte professionnel ou scolaire a été ajouté avant l’achèvement d’une jonction hybride Azure AD. Dans ce cas, le compte est ignoré lors de l’utilisation de Windows 10, version 1607 ou ultérieure.
 
 #### <a name="azureadjoined--yes"></a>AzureAdJoined : YES
 
 Ce champ indique si l’appareil est joint. La valeur sera **Oui** si l’appareil est un appareil joint à Azure AD ou un appareil hybride joint à Azure AD.
-Si la valeur est **Non**, la jonction à Azure AD n’est pas encore terminée.
+Si la valeur est **Non** , la jonction à Azure AD n’est pas encore terminée.
 
 Passez aux étapes suivantes pour poursuivre le dépannage.
 
@@ -135,9 +135,9 @@ Servez-vous des journaux de l’Observateur d’événements pour identifier la 
 1. Ouvrez les journaux d’événements **User Device Registration** dans l’Observateur d’événements. Il se trouvent sous **Journaux des applications et des services** > **Microsoft** > **Windows** > **User Device Registration**.
 2. Recherchez les événements associés aux ID d’événement 304, 305 et 307.
 
-![Événement du journal des échecs](./media/troubleshoot-hybrid-join-windows-current/1.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-current/1.png" alt-text="Capture d’écran de l’observateur d’événements. Un événement ayant l’ID 304 est sélectionné et ses informations sont affichées avec le code d’erreur et la phase en évidence." border="false":::
 
-![Événement du journal des échecs](./media/troubleshoot-hybrid-join-windows-current/2.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-current/2.png" alt-text="Capture d’écran de l’observateur d’événements. Un événement ayant l’ID 305 est visible et ses informations sont affichées avec le code d’erreur en évidence." border="false":::
 
 ### <a name="step-4-check-for-possible-causes-and-resolutions-from-the-lists-below"></a>Étape 4 : Rechercher les causes et les résolutions possibles dans les listes suivantes
 
@@ -210,7 +210,7 @@ Servez-vous des journaux de l’Observateur d’événements pour identifier la 
 1. Ouvrez les journaux d’événements **User Device Registration** dans l’Observateur d’événements. Il se trouvent sous **Journaux des applications et des services** > **Microsoft** > **Windows** > **User Device Registration**.
 2. Recherchez les événements associés à l’ID d’événement 201.
 
-![Événement du journal des échecs](./media/troubleshoot-hybrid-join-windows-current/5.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-current/5.png" alt-text="Capture d’écran de l’observateur d’événements. Un événement ayant l’ID 201 est sélectionné et ses informations sont affichées avec le code d’erreur en évidence." border="false":::
 
 ###### <a name="network-errors"></a>Erreurs réseau
 
@@ -255,7 +255,7 @@ Utilisez les journaux de l’observateur d’événements pour rechercher le cod
 1. Ouvrez les journaux d’événements **User Device Registration** dans l’Observateur d’événements. Il se trouvent sous **Journaux des applications et des services** > **Microsoft** > **Windows** > **User Device Registration**.
 2. Recherchez les événements associés à l’ID d’événement 305.
 
-![Événement du journal des échecs](./media/troubleshoot-hybrid-join-windows-current/3.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-current/3.png" alt-text="Capture d’écran de l’observateur d’événements. Un événement ayant l’ID 305 est visible. Ses informations sont affichées avec les codes d’erreur ADAL et l’état en évidence." border="false":::
 
 ##### <a name="configuration-errors"></a>Erreurs de configuration
 
@@ -330,7 +330,7 @@ Servez-vous des journaux de l’Observateur d’événements pour identifier la 
 1. Ouvrez les journaux d’événements **User Device Registration** dans l’Observateur d’événements. Il se trouvent sous **Journaux des applications et des services** > **Microsoft** > **Windows** > **User Device Registration**.
 2. Recherchez les événements associés à l’ID d’événement 204.
 
-![Événement du journal des échecs](./media/troubleshoot-hybrid-join-windows-current/4.png)
+:::image type="content" source="./media/troubleshoot-hybrid-join-windows-current/4.png" alt-text="Capture d’écran de l’observateur d’événements. Des informations sur un événement ayant l’ID 204 sont affichées avec le code d’erreur, l’état HTTP et le message en évidence." border="false":::
 
 ##### <a name="http-errors-returned-from-drs-server"></a>Erreurs HTTP retournées à partir du serveur DRS
 
@@ -404,7 +404,7 @@ Téléchargez le fichier Auth.zip à partir de [https://github.com/CSS-Windows/W
 #### <a name="wamdefaultset-yes-and-azureadprt-yes"></a>WamDefaultSet : OUI et AzureADPrt : YES
 
 Ces champs indiquent que l’utilisateur s’est correctement authentifié auprès d’Azure AD lors de la connexion à l’appareil.
-Si les valeurs sont **NON**, il peut être dû :
+Si les valeurs sont **NON** , il peut être dû :
 
 - Clé de stockage défectueuse dans le module de plateforme sécurisée (TPM) associé à l’appareil lors de l’inscription (vérifiez KeySignTest pendant l’exécution avec élévation de privilèges).
 - ID de connexion de substitution

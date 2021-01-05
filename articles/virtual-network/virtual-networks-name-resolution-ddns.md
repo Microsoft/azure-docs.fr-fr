@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: c315961a-fa33-45cf-82b9-4551e70d32dd
 ms.service: dns
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/23/2017
 ms.author: subsarma
-ms.openlocfilehash: c2ef842fd62ef060f06536d66387c3facd0627b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9f5b535a341956e5675ba96ba9570bd3f2ff3443
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60640376"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84710947"
 ---
 # <a name="use-dynamic-dns-to-register-hostnames-in-your-own-dns-server"></a>Utiliser un DNS dynamique pour inscrire les noms d’hôte sur votre propre serveur DNS
 
@@ -61,7 +61,7 @@ then
 fi
 ```
 
-Vous pouvez également utiliser la commande `nsupdate` pour effectuer des mises à jour DDNS sécurisées. Par exemple, quand vous utilisez un serveur DNS Bind, une paire de clés publique/privée est [générée](http://linux.yyz.us/nsupdate/). Le serveur DNS est [configuré](http://linux.yyz.us/dns/ddns-server.html) avec la partie publique de la clé, ce qui lui permet de vérifier la signature sur la demande. Pour fournir la paire de clés à `nsupdate`, utilisez l’option `-k`, afin que la demande de mise à jour DDNS soit signée.
+Vous pouvez également utiliser la commande `nsupdate` pour effectuer des mises à jour DDNS sécurisées. Par exemple, quand vous utilisez un serveur DNS Bind, une paire de clés publique-privée est générée (`http://linux.yyz.us/nsupdate/`). Le serveur DNS est configuré (`http://linux.yyz.us/dns/ddns-server.html`) avec la partie publique de la clé, ce qui lui permet de vérifier la signature sur la demande. Pour fournir la paire de clés à `nsupdate`, utilisez l’option `-k`, afin que la demande de mise à jour DDNS soit signée.
 
 Quand vous utilisez un serveur DNS Windows, vous pouvez utiliser l’authentification Kerberos avec le paramètre `-g` dans `nsupdate` (mais elle n’est pas disponible dans la version Windows de `nsupdate`). Pour utiliser Kerberos, utilisez `kinit` afin de charger les informations d’identification. Par exemple, vous pouvez charger les informations d’identification à partir d’un [fichier keytab](https://www.itadmintools.com/2011/07/creating-kerberos-keytab-files.html), puis `nsupdate -g` récupère les informations d’identification à partir du cache.
 

@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 05/29/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 2742b0b73d4143159fd1ed1338988b01a2171041
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: d954f7cdda4cae65f822489828226e0364d0fc29
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124327"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91570535"
 ---
 # <a name="manage-a-virtual-machine-scale-set-with-the-azure-cli"></a>Gérer un groupe de machines virtuelles identiques avec l’interface Azure CLI
 Tout au long du cycle de vie du groupe de machines virtuelles identiques, vous devrez peut-être exécuter une ou plusieurs tâches de gestion. En outre, vous souhaiterez peut-être créer des scripts pour automatiser les diverses tâches liées au cycle de vie. Cet article décrit en détail certaines des commandes Azure CLI courantes qui vous permettent d’effectuer ces tâches.
@@ -49,6 +49,20 @@ az vmss get-instance-view \
     --instance-id 0
 ```
 
+Vous pouvez également obtenir des informations détaillées sur *instanceView* pour toutes les instances d’un appel d’API, ce qui peut aider à éviter la limitation des API pour les installations de grande taille. Indiquez vos propres valeurs pour `--resource-group`, `--subscription` et `--name`.
+
+```azurecli
+az vmss list-instances \
+    --expand instanceView \
+    --select instanceView \
+    --resource-group <resourceGroupName> \
+    --subscription <subID> \
+    --name <vmssName>
+```
+
+```rest
+GET "https://management.azure.com/subscriptions/<sub-id>/resourceGroups/<resourceGroupName>/providers/Microsoft.Compute/virtualMachineScaleSets/<VMSSName>/virtualMachines?api-version=2019-03-01&%24expand=instanceView"
+```
 
 ## <a name="list-connection-information-for-vms"></a>Répertorier les informations de connexion pour les machines virtuelles
 Pour vous connecter aux machines virtuelles d’un groupe identique, vous établissez une connexion SSH ou RDP à une adresse IP publique et à un numéro de port assignés. Par défaut, des règles de traduction d’adresses réseau (NAT) sont ajoutées à l’équilibreur de charge Azure qui transfère le trafic de connexion à distance à chaque machine virtuelle. Pour afficher l’adresse et les ports à connecter à des instances de machine virtuelle dans un groupe identique, utilisez la commande [az mise liste-instance-connexion-info](/cli/azure/vmss). L’exemple suivant répertorie les informations de connexion pour les instances de machine virtuelle du groupe identique nommé *myScaleSet* et dans le groupe de ressources *myResourceGroup*. Spécifiez vos propres valeurs pour ces noms :

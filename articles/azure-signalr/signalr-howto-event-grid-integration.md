@@ -7,22 +7,22 @@ ms.service: signalr
 ms.topic: conceptual
 ms.date: 11/13/2019
 ms.author: chenyl
-ms.openlocfilehash: a76c9aaabf984723e2b60a7cd42425c9b29c916a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84b83c1dd541418c446a89a6f51be668cb41e54e
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76710835"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94562642"
 ---
 # <a name="how-to-send-events-from-azure-signalr-service-to-event-grid"></a>Comment envoyer des événements d’Azure SignalR Service à Event Grid
 
 Azure Event Grid est un service de routage d’événements entièrement géré qui permet une consommation d’événements uniforme avec un modèle publication-abonnement. Dans ce guide, vous utilisez l’interface Azure CLI pour créer un Azure SignalR Service, vous abonner aux événements de connexion, puis déployer un exemple d’application web pour recevoir les événements. Enfin, vous pouvez vous connecter et déconnecter et voir la charge utile d’événement dans l’exemple d’application.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit][azure-account] avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Les commandes CLI de cet article sont mises en forme pour le shell **Bash**. Si vous utilisez un autre shell, comme PowerShell ou l’invite de commandes, il peut être nécessaire d’ajuster en conséquence les caractères de continuation de ligne ou les lignes d’affectation des variables. Cet article utilise des variables pour réduire le nombre de modifications nécessaires des commandes.
+ - Les commandes CLI de cet article sont mises en forme pour le shell **Bash**. Si vous utilisez un autre shell, comme PowerShell ou l’invite de commandes, il peut être nécessaire d’ajuster en conséquence les caractères de continuation de ligne ou les lignes d’affectation des variables. Cet article utilise des variables pour réduire le nombre de modifications nécessaires des commandes.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -80,7 +80,7 @@ Pour déployer l’exemple d’application, définissez `SITE_NAME` avec un nom 
 ```azurecli-interactive
 SITE_NAME=<your-site-name>
 
-az group deployment create \
+az deployment group create \
     --resource-group $RESOURCE_GROUP_NAME \
     --template-uri "https://raw.githubusercontent.com/Azure-Samples/azure-event-grid-viewer/master/azuredeploy.json" \
     --parameters siteName=$SITE_NAME hostingPlanName=$SITE_NAME-plan

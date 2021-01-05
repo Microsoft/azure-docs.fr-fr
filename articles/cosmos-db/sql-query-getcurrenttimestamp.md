@@ -3,19 +3,22 @@ title: 'Langage de requête Azure Cosmos DB : GetCurrentTimestamp'
 description: Découvrez la fonction système SQL GetCurrentTimestamp dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 09/13/2019
+ms.date: 08/19/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: b816c63da56025fe6e9cbaece2cde5dcd01585d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6720b0e5d13f2baaaf063fef2244b0c1f1863571
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71351011"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341924"
 ---
 # <a name="getcurrenttimestamp-azure-cosmos-db"></a>GetCurrentTimestamp (Azure Cosmos DB)
- Retourne le nombre de millisecondes qui se sont écoulées depuis le jeudi 1er janvier 1970 à 00:00:00. 
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
+ Retourne le nombre de millisecondes qui se sont écoulées depuis le jeudi 1er janvier 1970 à 00:00:00.
   
 ## <a name="syntax"></a>Syntaxe
   
@@ -25,13 +28,13 @@ GetCurrentTimestamp ()
   
 ## <a name="return-types"></a>Types de retour
   
-  Retourne une valeur numérique représentant le nombre de millisecondes qui se sont écoulées depuis l’époque Unix, c’est-à-dire, le nombre de millisecondes qui se sont écoulées depuis le jeudi 1er janvier 1970 à 00:00:00.
+Retourne une valeur numérique signée représentant le nombre de millisecondes qui se sont écoulées depuis l’époque Unix, c’est-à-dire, depuis le jeudi 1er janvier 1970 à 00:00:00.
 
 ## <a name="remarks"></a>Notes
 
-  GetCurrentTimestamp() est une fonction non déterministe.
-  
-  Le résultat retourné est au format UTC (temps universel coordonné).
+GetCurrentTimestamp() est une fonction non déterministe. Le résultat retourné est au format UTC (temps universel coordonné).
+
+Cette fonction système n’utilisera pas l’index.
 
 ## <a name="examples"></a>Exemples
   

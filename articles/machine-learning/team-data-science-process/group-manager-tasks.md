@@ -7,15 +7,15 @@ editor: marktab
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 11/17/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 4ec7f4242e5046e90fdf0eb8c6c0579f402e4f55
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7ab6d6511d1e2cec82b321003c9d663249ddcf49
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721351"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94740224"
 ---
 # <a name="team-data-science-process-group-manager-tasks"></a>Tâches du responsable de groupe Team Data Science Process
 
@@ -57,7 +57,7 @@ Le tutoriel suivant présente en détail les différentes étapes.
    
    ![Créer un projet](./media/group-manager-tasks/create-project.png)
 
-La page **Résumé** du projet **GroupCommon** s’ouvre. L’URL de la page est *https: \//\<nomserveur>/\<nom-organisation>/GroupCommon*.
+La page **Résumé** du projet **GroupCommon** s’ouvre. L’URL de la page est *https:\//\<servername>/\<organization-name>/GroupCommon*.
 
 ![Page Résumé du projet](./media/group-manager-tasks/project-summary.png)
 
@@ -127,8 +127,6 @@ Pour importer les dépôts de l’équipe TDSP :
    
 1. En haut de la page **Dépôts**, dans la liste déroulante, sélectionnez le dépôt **GroupUtilities**.
    
-1. Répétez le processus d’importation pour importer le contenu du dépôt **Utilities** de l’équipe Microsoft TDSP, *https:\//github.com/Azure/Azure-TDSP-Utilities.git*, dans votre dépôt **GroupUtilities**. 
-   
 Chacun des deux dépôts de votre groupe contient à présent tous les fichiers du dépôt correspondant de l’équipe Microsoft TDSP, à l’exception de ceux du répertoire *.git*. 
 
 ## <a name="customize-the-contents-of-the-group-repositories"></a>Personnaliser le contenu des dépôts du groupe
@@ -167,7 +165,7 @@ Si vous souhaitez apporter des modifications à partir de votre ordinateur local
 
 - Un abonnement Azure, si vous voulez créer un machine virtuelle DSVM.
 - Git installé sur votre ordinateur. Si vous utilisez une machine virtuelle DSVM, Git est préinstallé. Dans le cas contraire, consultez l’[annexe Plateformes et outils](platforms-and-tools.md#appendix).
-- Si vous souhaitez utiliser une machine virtuelle DSVM, l’instance DSVM Windows ou Linux doit être créée et configurée dans Azure. Pour obtenir des informations complémentaires et des instructions, consultez la [documentation sur Data Science Virtual Machine](/azure/machine-learning/data-science-virtual-machine/).
+- Si vous souhaitez utiliser une machine virtuelle DSVM, l’instance DSVM Windows ou Linux doit être créée et configurée dans Azure. Pour obtenir des informations complémentaires et des instructions, consultez la [documentation sur Data Science Virtual Machine](../data-science-virtual-machine/index.yml).
 - Pour une machine virtuelle DSVM Windows, [Git Credential Manager (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) installé sur votre ordinateur. Dans le fichier *README.md*, accédez à la section **Télécharger et installer**, puis sélectionnez le **programme d’installation le plus récent**. Téléchargez le programme d’installation *.exe* et exécutez-le. 
 - Pour une machine virtuelle DSVM Linux, une clé publique SSH créée dans votre instance DSVM et ajoutée à Azure DevOps. Pour obtenir des informations complémentaires et des instructions, consultez la section **Créer une clé publique SSH** dans l’[annexe Plateformes et outils](platforms-and-tools.md#appendix). 
 

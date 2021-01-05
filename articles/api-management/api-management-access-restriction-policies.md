@@ -4,35 +4,31 @@ description: Découvrez les stratégies de restriction des accès disponibles da
 services: api-management
 documentationcenter: ''
 author: vladvino
-manager: erikre
-editor: ''
 ms.assetid: 034febe3-465f-4840-9fc6-c448ef520b0f
 ms.service: api-management
-ms.workload: mobile
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 11/23/2020
 ms.author: apimpm
-ms.openlocfilehash: 3ba620d66b84e6724751b2024059e8ecd66888cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e38dcf1e12629405ae5f28a987ba20557037ee67
+ms.sourcegitcommit: e0ec3c06206ebd79195d12009fd21349de4a995d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231665"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97683447"
 ---
 # <a name="api-management-access-restriction-policies"></a>Stratégies de restriction des accès de la Gestion des API
 
-Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](https://go.microsoft.com/fwlink/?LinkID=398186).
+Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](./api-management-policies.md).
 
 ## <a name="access-restriction-policies"></a><a name="AccessRestrictionPolicies"></a> Stratégies de restriction des accès
 
--   [Check HTTP header](api-management-access-restriction-policies.md#CheckHTTPHeader) : applique l’existence et/ou la valeur d’un en-tête HTTP.
--   [Limit call rate by subscription](api-management-access-restriction-policies.md#LimitCallRate) : empêche les pics d’utilisation de l’API en limitant le débit d’appels par abonnement.
+-   [Check HTTP header](#CheckHTTPHeader) : applique l’existence et/ou la valeur d’un en-tête HTTP.
+-   [Limit call rate by subscription](#LimitCallRate) : empêche les pics d’utilisation de l’API en limitant le débit d’appels par abonnement.
 -   [Limit call rate by key](#LimitCallRateByKey) : empêche les pics d’utilisation de l’API en limitant le débit d’appels par clé.
--   [Restrict caller IPs](api-management-access-restriction-policies.md#RestrictCallerIPs) : filtre (autorise/rejette) les appels de certaines adresses IP spécifiques et/ou de certaines plages d’adresses.
--   [Set usage quota by subscription](api-management-access-restriction-policies.md#SetUsageQuota) : vous permet d’appliquer un volume d’appel et/ou un quota de bande passante renouvelable ou illimité par abonnement.
+-   [Restrict caller IPs](#RestrictCallerIPs) : filtre (autorise/rejette) les appels de certaines adresses IP spécifiques et/ou de certaines plages d’adresses.
+-   [Set usage quota by subscription](#SetUsageQuota) : vous permet d’appliquer un volume d’appel et/ou un quota de bande passante renouvelable ou illimité par abonnement.
 -   [Set usage quota by key](#SetUsageQuotaByKey) : vous permet d’appliquer un volume d’appel et/ou un quota de bande passante renouvelable ou illimité par clé.
--   [Validate JWT](api-management-access-restriction-policies.md#ValidateJWT) : applique l’existence et la validité d’un JWT extrait d’un en-tête HTTP ou d’un paramètre de requête spécifié.
+-   [Validate JWT](#ValidateJWT) : applique l’existence et la validité d’un JWT extrait d’un en-tête HTTP ou d’un paramètre de requête spécifié.
 
 > [!TIP]
 > Vous pouvez utiliser des stratégies de restriction d’accès dans différentes étendues à des fins différentes. Par exemple, vous pouvez sécuriser l’intégralité de l’API avec l’authentification AAD en appliquant la stratégie `validate-jwt` au niveau de l’API ou vous pouvez l’appliquer au niveau de l’opération d’API et utiliser `claims` pour un contrôle plus granulaire.
@@ -76,7 +72,7 @@ Utilisez la stratégie `check-header` pour imposer un en-tête HTTP donné à un
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound
 
@@ -93,6 +89,9 @@ La stratégie `rate-limit` évite les pics d’utilisation des API par abonnemen
 
 > [!CAUTION]
 > En raison de la nature distribuée de l’architecture de limitation, la limitation du débit n’est jamais totalement exacte. La différence entre le nombre configuré et le nombre réel de requêtes autorisées varie en fonction du volume et du débit des requêtes, de la latence du backend et d’autres facteurs.
+
+> [!NOTE]
+> Pour comprendre la différence entre les limites de taux et les quotas, consultez [Limites de taux et quotas.](./api-management-sample-flexible-throttling.md#rate-limits-and-quotas)
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -124,7 +123,7 @@ La stratégie `rate-limit` évite les pics d’utilisation des API par abonnemen
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | rate-limit | Élément racine.                                                                                                                                                                                                                                                                                            | Oui      |
 | api        | Ajoutez un ou plusieurs éléments de ce type pour imposer une limite de débit d’appels aux API au sein du produit. Les limites de débit d’appels au niveau du produit et de l’API s’appliquent indépendamment les unes des autres. L’API peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré.                    | Non       |
-| opération  | Ajoutez un ou plusieurs éléments de ce type pour imposer une limite de débit d’appels aux opérations au sein d’une API. Les limites de débit d’appels au niveau du produit, de l’API et de l’opération s’appliquent indépendamment les unes des autres. L’opération peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré. | Non       |
+| operation  | Ajoutez un ou plusieurs éléments de ce type pour imposer une limite de débit d’appels aux opérations au sein d’une API. Les limites de débit d’appels au niveau du produit, de l’API et de l’opération s’appliquent indépendamment les unes des autres. L’opération peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré. | Non       |
 
 ### <a name="attributes"></a>Attributs
 
@@ -136,7 +135,7 @@ La stratégie `rate-limit` évite les pics d’utilisation des API par abonnemen
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 
@@ -149,10 +148,13 @@ Cette stratégie peut être utilisée dans les [sections](https://azure.microsof
 
 La stratégie `rate-limit-by-key` évite les pics d’utilisation des API par clé en limitant le débit d’appels à un nombre spécifié pour une période donnée. La clé peut avoir une valeur de chaîne arbitraire ; elle est généralement fournie par le biais d’une expression de stratégie. Une condition d’incrément facultative peut être ajoutée pour spécifier quelles demandes doivent être comptées dans la limite. Lorsque cette stratégie est déclenchée, l’appelant reçoit le code d’état de réponse `429 Too Many Requests`.
 
-Pour plus d’informations et d’exemples sur cette stratégie, consultez la page [Limitation avancée des demandes dans la Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-flexible-throttling/).
+Pour plus d’informations et d’exemples sur cette stratégie, consultez la page [Limitation avancée des demandes dans la Gestion des API Azure](./api-management-sample-flexible-throttling.md).
 
 > [!CAUTION]
 > En raison de la nature distribuée de l’architecture de limitation, la limitation du débit n’est jamais totalement exacte. La différence entre le nombre configuré et le nombre réel de requêtes autorisées varie en fonction du volume et du débit des requêtes, de la latence du backend et d’autres facteurs.
+
+> [!NOTE]
+> Pour comprendre la différence entre les limites de taux et les quotas, consultez [Limites de taux et quotas.](./api-management-sample-flexible-throttling.md#rate-limits-and-quotas)
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -200,7 +202,7 @@ Dans l’exemple suivant, la limite de débit est indexée par l’adresse IP de
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 
@@ -247,7 +249,7 @@ Dans l’exemple suivant, la stratégie autorise uniquement les requêtes entran
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 -   **Étendues de la stratégie :** toutes les étendues
@@ -259,7 +261,10 @@ La stratégie `quota` applique un volume d’appels et/ou un quota de bande pass
 > [!IMPORTANT]
 > Cette stratégie ne peut être utilisée qu’une seule fois par document de stratégie.
 >
-> Les [expressions de stratégie](api-management-policy-expressions.md) ne peuvent être utilisées dans aucun attribut de cette stratégie.
+> Des [expressions de stratégie](api-management-policy-expressions.md) ne peuvent pas être utilisées dans les attributs de stratégie pour cette stratégie.
+
+> [!NOTE]
+> Pour comprendre la différence entre les limites de taux et les quotas, consultez [Limites de taux et quotas.](./api-management-sample-flexible-throttling.md#rate-limits-and-quotas)
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -291,7 +296,7 @@ La stratégie `quota` applique un volume d’appels et/ou un quota de bande pass
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | quota     | Élément racine.                                                                                                                                                                                                                                                                                | Oui      |
 | api       | Ajoutez un ou plusieurs éléments de ce type pour imposer un quota d’appel aux API au sein du produit. Les quotas d’appel au niveau du produit et de l’API s’appliquent indépendamment les uns des autres. L’API peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré.                    | Non       |
-| opération | Ajoutez un ou plusieurs éléments de ce type pour imposer un quota d’appel aux opérations au sein d’une API. Les quotas d’appel au niveau du produit, de l’API et de l’opération s’appliquent indépendamment les uns des autres. L’opération peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré. | Non       |
+| operation | Ajoutez un ou plusieurs éléments de ce type pour imposer un quota d’appel aux opérations au sein d’une API. Les quotas d’appel au niveau du produit, de l’API et de l’opération s’appliquent indépendamment les uns des autres. L’opération peut être référencée via `name` ou `id`. Si les deux attributs sont fournis, `id` sera utilisé et `name` sera ignoré. | Non       |
 
 ### <a name="attributes"></a>Attributs
 
@@ -304,7 +309,7 @@ La stratégie `quota` applique un volume d’appels et/ou un quota de bande pass
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 -   **Étendues de la stratégie :** product
@@ -316,7 +321,10 @@ Cette stratégie peut être utilisée dans les [sections](https://azure.microsof
 
 La stratégie `quota-by-key` applique un volume d’appels et/ou un quota de bande passante renouvelable ou illimité par clé. La clé peut avoir une valeur de chaîne arbitraire ; elle est généralement fournie par le biais d’une expression de stratégie. Une condition d’incrément facultative peut être ajoutée pour spécifier quelles demandes doivent être comptées dans le quota. Si plusieurs stratégies incrémentent la même valeur de clé, celle-ci est incrémentée une seule fois par demande. Quand la limite d’appels est atteinte, l’appelant reçoit le code d’état de réponse `403 Forbidden`.
 
-Pour plus d’informations et d’exemples sur cette stratégie, consultez la page [Limitation avancée des demandes dans la Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-flexible-throttling/).
+Pour plus d’informations et d’exemples sur cette stratégie, consultez la page [Limitation avancée des demandes dans la Gestion des API Azure](./api-management-sample-flexible-throttling.md).
+
+> [!NOTE]
+> Pour comprendre la différence entre les limites de taux et les quotas, consultez [Limites de taux et quotas.](./api-management-sample-flexible-throttling.md#rate-limits-and-quotas)
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -365,19 +373,19 @@ Dans l’exemple suivant, le quota est indexé par l’adresse IP de l’appelan
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 -   **Étendues de la stratégie :** toutes les étendues
 
 ## <a name="validate-jwt"></a><a name="ValidateJWT"></a> Validate JWT
 
-La stratégie `validate-jwt` applique l’existence et la validité d’un JWT extrait d’un en-tête HTTP ou d’un paramètre de requête spécifié.
+La stratégie `validate-jwt` applique l’existence et la validité d’un jeton JWT (JSON Web Token) extrait à partir de l’en-tête HTTP spécifié ou du paramètre de requête spécifié.
 
 > [!IMPORTANT]
 > La stratégie `validate-jwt` exige que la revendication inscrite `exp` soit incluse dans le jeton JWT, sauf si l’attribut `require-expiration-time` est spécifié et a la valeur `false`.
-> La stratégie `validate-jwt` prend en charge les algorithmes de signature HS256 et RS256. Pour HS256, la clé doit être fournie en ligne au sein de la stratégie au format encodé en base 64. Pour RS256, la clé doit être fournie par le biais d’un point de terminaison de configuration Open ID.
-> La stratégie `validate-jwt` prend en charge les jetons chiffrés avec des clés symétriques à l'aide des algorithmes de chiffrement suivants : A128CBC-HS256, A192CBC-HS384, A256CBC-HS512.
+> La stratégie `validate-jwt` prend en charge les algorithmes de signature HS256 et RS256. Pour HS256, la clé doit être fournie en ligne au sein de la stratégie au format encodé en base 64. Pour l’algorithme RS256, la clé peut être fournie soit via un point de terminaison de configuration OpenID, soit en spécifiant l’ID d’un certificat chargé qui contient la clé publique ou la paire modulo-exposant de la clé publique.
+> La stratégie `validate-jwt` prend en charge les jetons chiffrés avec des clés symétriques à l’aide des algorithmes de chiffrement suivants : A128CBC-HS256, A192CBC-HS384, A256CBC-HS512.
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -428,6 +436,22 @@ La stratégie `validate-jwt` applique l’existence et la validité d’un JWT e
 <validate-jwt header-name="Authorization" require-scheme="Bearer">
     <issuer-signing-keys>
         <key>{{jwt-signing-key}}</key>  <!-- signing key specified as a named value -->
+    </issuer-signing-keys>
+    <audiences>
+        <audience>@(context.Request.OriginalUrl.Host)</audience>  <!-- audience is set to API Management host name -->
+    </audiences>
+    <issuers>
+        <issuer>http://contoso.com/</issuer>
+    </issuers>
+</validate-jwt>
+```
+
+#### <a name="token-validation-with-rsa-certificate"></a>Validation de jeton avec certificat RSA
+
+```xml
+<validate-jwt header-name="Authorization" require-scheme="Bearer">
+    <issuer-signing-keys>
+        <key certificate-id="my-rsa-cert" />  <!-- signing key specified as certificate ID, enclosed in double-quotes -->
     </issuer-signing-keys>
     <audiences>
         <audience>@(context.Request.OriginalUrl.Host)</audience>  <!-- audience is set to API Management host name -->
@@ -507,8 +531,8 @@ Cet exemple montre comment utiliser la stratégie [Validate JWT](api-management-
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | validate-jwt        | Élément racine.                                                                                                                                                                                                                                                                                                                                         | Oui      |
 | audiences           | Contient la liste des revendications d’audience acceptables qui peuvent être présentes sur le jeton. Si plusieurs valeurs d’audience sont présentes, chacune est tentée jusqu’à ce que toutes soient épuisées (auquel cas la validation échoue) ou que l’une d’elles réussisse. Au moins une audience doit être spécifiée.                                                                     | Non       |
-| issuer-signing-keys | Liste de clés de sécurité encodées en base 64 utilisé pour valider les jetons signés. Si plusieurs clés de sécurité sont présentes, chacune est tentée jusqu’à ce que toutes soient épuisées (auquel cas la validation échoue) ou que l’une d’elles réussisse (utile pour la substitution de jeton). Les éléments clés ont un attribut `id` facultatif utilisé pour comparer à la revendication `kid`.               | Non       |
-| decryption-keys     | Liste de clés codée en Base64 utilisée pour déchiffrer les jetons. Si plusieurs clés de sécurité sont présentes, chacune est tentée jusqu’à ce que toutes soient épuisées (auquel cas la validation échoue) ou que l’une d’elles réussisse. Les éléments clés ont un attribut `id` facultatif utilisé pour comparer à la revendication `kid`.                                                 | Non       |
+| issuer-signing-keys | Liste de clés de sécurité encodées en base 64 utilisé pour valider les jetons signés. Si plusieurs clés de sécurité sont présentes, chacune est tentée jusqu’à ce qu’il n’en reste plus (ce qui entraîne un échec de validation) ou jusqu’à ce que l’une d’elles soit la clé appropriée (utile pour la substitution de jeton). Les éléments clés ont un attribut `id` facultatif utilisé pour comparer à la revendication `kid`. <br/><br/>Vous pouvez également fournir une clé de signature d’émetteur en utilisant :<br/><br/> - `certificate-id` au format `<key certificate-id="mycertificate" />` pour spécifier l’identificateur d’une entité de certificat [chargée](/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-certificate-entity#Add) vers le service Gestion des API<br/>- Paire RSA du modulo `n` et de l’exposant `e` au format `<key n="<modulus>" e="<exponent>" />` pour spécifier les paramètres RSA au format d’encodage base64url               | Non       |
+| decryption-keys     | Liste de clés codée en Base64 utilisée pour déchiffrer les jetons. Si plusieurs clés de sécurité sont présentes, chacune est tentée jusqu’à ce qu’il n’en reste plus (ce qui entraîne un échec de validation) ou jusqu’à ce que l’une d’elles soit la clé appropriée. Les éléments clés ont un attribut `id` facultatif utilisé pour comparer à la revendication `kid`.<br/><br/>Vous pouvez également fournir une clé de déchiffrement en utilisant :<br/><br/> - `certificate-id` au format `<key certificate-id="mycertificate" />` pour spécifier l’identificateur d’une entité de certificat [chargée](/rest/api/apimanagement/apimanagementrest/azure-api-management-rest-api-certificate-entity#Add) vers le service Gestion des API                                                 | Non       |
 | issuers             | Liste des services principaux acceptables qui ont émis le jeton. Si plusieurs valeurs d’émetteur sont présentes, chacune est tentée jusqu’à ce que toutes soient épuisées (auquel cas la validation échoue) ou que l’une d’elles réussisse.                                                                                                                                         | Non       |
 | openid-config       | Élément utilisé pour spécifier un point de terminaison de configuration Open ID conforme à partir duquel l’émetteur et les clés de signature peuvent être obtenus.                                                                                                                                                                                                                        | Non       |
 | required-claims     | Contient une liste de revendications censées être présentes sur le jeton pour qu’il soit considéré comme valide. Si l’attribut `match` a la valeur `all`, toutes les valeurs de revendication de la stratégie doivent être présentes dans le jeton pour que la validation réussisse. Si l’attribut `match` a la valeur `any`, au moins une revendication doit être présente dans le jeton pour que la validation réussisse. | Non       |
@@ -534,7 +558,7 @@ Cet exemple montre comment utiliser la stratégie [Validate JWT](api-management-
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 -   **Étendues de la stratégie :** toutes les étendues
@@ -545,5 +569,5 @@ Pour plus d’informations sur l’utilisation de stratégies, consultez les pag
 
 -   [Stratégies dans Gestion des API](api-management-howto-policies.md)
 -   [Transform and protect your API](transform-api.md) (Transformer et protéger votre API)
--   [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
--   [Exemples de stratégie](policy-samples.md)
+-   [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
+-   [Exemples de stratégie](./policy-reference.md)

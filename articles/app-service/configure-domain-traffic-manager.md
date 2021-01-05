@@ -5,21 +5,21 @@ ms.assetid: 0f96c0e7-0901-489b-a95a-e3b66ca0a1c2
 ms.topic: article
 ms.date: 03/05/2020
 ms.custom: seodec18
-ms.openlocfilehash: 5ae68a8871bc2894191644e4ab183be4b469bf16
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 0e8d5fa14678a2a26234dfcd73f4a50af62ca7aa
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82610239"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012939"
 ---
 # <a name="configure-a-custom-domain-name-in-azure-app-service-with-traffic-manager-integration"></a>Configurer un nom de domaine personnalisé dans Azure App Service avec l’intégration de Traffic Manager
 
 [!INCLUDE [web-selector](../../includes/websites-custom-domain-selector.md)]
 
 > [!NOTE]
-> Pour Services cloud, consultez [Configuration d’un nom de domaine personnalisé pour un service cloud Azure](../cloud-services/cloud-services-custom-domain-name.md).
+> Pour Services cloud, consultez [Configuration d’un nom de domaine personnalisé pour un service cloud Azure](../cloud-services/cloud-services-custom-domain-name-portal.md).
 
-Lorsque vous utilisez [Azure Traffic Manager](/azure/traffic-manager/) pour équilibrer la charge du trafic vers [Azure App service](overview.md), l’application App Service est accessible à l’aide de **\<traffic-manager-endpoint>.trafficmanager.net**. Afin de proposer un nom de domaine encore plus reconnaissable pour vos utilisateurs, vous pouvez attribuer un nom de domaine personnalisé, tel que www\.contoso.com, avec votre application App Service.
+Lorsque vous utilisez [Azure Traffic Manager](../traffic-manager/index.yml) pour équilibrer la charge du trafic vers [Azure App service](overview.md), l’application App Service est accessible à l’aide de **\<traffic-manager-endpoint>.trafficmanager.net**. Afin de proposer un nom de domaine encore plus reconnaissable pour vos utilisateurs, vous pouvez attribuer un nom de domaine personnalisé, tel que www\.contoso.com, avec votre application App Service.
 
 Cet article explique comment configurer un nom de domaine personnalisé avec une application App Service qui est intégrée à [Traffic Manager](../traffic-manager/traffic-manager-overview.md).
 
@@ -55,7 +55,7 @@ Cliquez sur **Appliquer**.
 
 ## <a name="create-traffic-manager-endpoint"></a>Créer le point de terminaison Traffic Manager
 
-En suivant les étapes de la rubrique [Ajout ou suppression de points de terminaison](../traffic-manager/traffic-manager-endpoints.md), ajoutez votre application App Service comme point de terminaison dans votre profil Traffic Manager.
+En suivant les étapes de la rubrique [Ajout ou suppression de points de terminaison](../traffic-manager/traffic-manager-manage-endpoints.md), ajoutez votre application App Service comme point de terminaison dans votre profil Traffic Manager.
 
 Une fois votre application App Service associé à un niveau tarifaire pris en charge, elle apparaît dans la liste des cibles App Service disponibles lorsque vous ajoutez le point de terminaison. Si votre application n’est pas listée, pensez à [vérifier le niveau tarifaire de votre application](#prepare-the-app).
 

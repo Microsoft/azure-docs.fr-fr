@@ -3,13 +3,13 @@ title: Créer votre première application Service Fabric en C#
 description: Introduction à la création d'une application Microsoft Azure Service Fabric avec des services avec et sans état.
 ms.topic: conceptual
 ms.date: 07/10/2019
-ms.custom: sfrev
-ms.openlocfilehash: 15dd9bf6ac19bdac7bc8b50fc70e0b3b0a4e9a83
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: sfrev, devx-track-csharp
+ms.openlocfilehash: 1de77f870bce5766ab704249034d6d7b6c8b098e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77083776"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89012736"
 ---
 # <a name="get-started-with-reliable-services"></a>Prise en main de Reliable Services
 
@@ -23,10 +23,10 @@ Une application Azure Service Fabric contient un ou plusieurs services qui exéc
 
 Pour prendre en main Reliable Services, il vous suffit de comprendre quelques concepts de base :
 
-* **Type de service** : il s’agit de l’implémentation de votre service. Elle est définie par la classe que vous écrivez qui étend `StatelessService` et tout autre code ou dépendances utilisés ici, ainsi qu’un nom et un numéro de version.
-* **Instance de service nommée** : pour exécuter votre service, vous créez des instances nommées de votre type de service, de la même manière que vous créez des instances d’objet d’un type de classe. Une instance de service a un nom qui se présente sous la forme d’un URI utilisant le schéma « fabric:/ », par exemple « fabric:/MyApp/MyService ».
-* **Hôte de service** : les instances de service nommées que vous créez doivent s’exécuter au sein d’un processus hôte. L’hôte de service est simplement un processus dans lequel les instances de votre service peuvent s’exécuter.
-* **Inscription du service** : l’inscription rassemble tous les éléments. Le type de service doit être inscrit auprès du runtime Service Fabric dans un hôte de service pour autoriser Service Fabric à créer des instances de ce type à exécuter.  
+* **Type de service** : il s'agit de l'implémentation de votre service. Elle est définie par la classe que vous écrivez qui étend `StatelessService` et tout autre code ou dépendances utilisés ici, ainsi qu’un nom et un numéro de version.
+* **Instance de service nommée** : pour exécuter votre service, vous créez des instances nommées de votre type de service, de la même manière que vous créez des instances d'objet d'un type de classe. Une instance de service a un nom qui se présente sous la forme d’un URI utilisant le schéma « fabric:/ », par exemple « fabric:/MyApp/MyService ».
+* **Hôte de service** : Les instances de service nommées que vous créez doivent s’exécuter au sein d’un processus hôte. L’hôte de service est simplement un processus dans lequel les instances de votre service peuvent s’exécuter.
+* **Inscription du service** : l'inscription rassemble tous les éléments. Le type de service doit être inscrit auprès du runtime Service Fabric dans un hôte de service pour autoriser Service Fabric à créer des instances de ce type à exécuter.  
 
 ## <a name="create-a-stateless-service"></a>Création d'un service sans état
 
@@ -169,11 +169,11 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
 var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
 ```
 
-[IReliableDictionary](https://msdn.microsoft.com/library/dn971511.aspx) est une implémentation de dictionnaire qui peut servir à stocker de façon fiable l’état dans le service. Avec Service Fabric et les collections fiables, vous pouvez stocker des données directement dans votre service sans avoir besoin d’un magasin persistant externe. Les Reliable Collections rendent vos données hautement disponibles. Pour ce faire, Service Fabric crée et gère plusieurs *réplicas* de votre service pour vous. Il fournit également une API qui élimine la complexité de la gestion de ces réplicas et leurs transitions d’état.
+[IReliableDictionary](/dotnet/api/microsoft.servicefabric.data.collections.ireliabledictionary-2?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliabledictionary_2) est une implémentation de dictionnaire qui peut servir à stocker de façon fiable l’état dans le service. Avec Service Fabric et les collections fiables, vous pouvez stocker des données directement dans votre service sans avoir besoin d’un magasin persistant externe. Les Reliable Collections rendent vos données hautement disponibles. Pour ce faire, Service Fabric crée et gère plusieurs *réplicas* de votre service pour vous. Il fournit également une API qui élimine la complexité de la gestion de ces réplicas et leurs transitions d’état.
 
 Les collections fiables peuvent stocker n’importe quel type .NET, y compris vos types personnalisés, avec quelques inconvénients :
 
-* Service Fabric rend votre état hautement disponible en *répliquant* l’état sur tous les nœuds, et les Reliable Collections stockent vos données sur le disque local de chaque réplica. Cela signifie que tout ce qui est stocké dans les Reliable Collections doit être *sérialisable*. Par défaut, les Reliable Collections utilisent [DataContract](https://msdn.microsoft.com/library/system.runtime.serialization.datacontractattribute%28v=vs.110%29.aspx) pour la sérialisation. Il est donc important de vérifier que vos types sont [pris en charge par le sérialiseur de contrat de données](https://msdn.microsoft.com/library/ms731923%28v=vs.110%29.aspx) quand vous utilisez le sérialiseur par défaut.
+* Service Fabric rend votre état hautement disponible en *répliquant* l’état sur tous les nœuds, et les Reliable Collections stockent vos données sur le disque local de chaque réplica. Cela signifie que tout ce qui est stocké dans les Reliable Collections doit être *sérialisable*. Par défaut, les Reliable Collections utilisent [DataContract](/dotnet/api/system.runtime.serialization.datacontractattribute?view=netcore-3.1) pour la sérialisation. Il est donc important de vérifier que vos types sont [pris en charge par le sérialiseur de contrat de données](/dotnet/framework/wcf/feature-details/types-supported-by-the-data-contract-serializer) quand vous utilisez le sérialiseur par défaut.
 * Les objets sont répliqués à des fins de haute disponibilité quand vous envoyez des transactions sur des collections fiables. Les objets stockés dans les collections fiables sont conservés dans la mémoire locale de votre service. Cela signifie que vous avez une référence locale à l’objet.
   
    Il est important de ne pas muter les instances locales de ces objets sans effectuer une opération de mise à jour sur la collection fiable dans une transaction. En effet, les modifications des instances locales d’objets ne sont pas répliquées automatiquement. Vous devez réinsérer l’objet dans le dictionnaire ou utiliser l’une des méthodes de *mise à jour* sur le dictionnaire.
@@ -212,7 +212,7 @@ Une fois que les services commencent à s’exécuter, vous pouvez afficher les 
 ## <a name="next-steps"></a>Étapes suivantes
 [Déboguer votre application Service Fabric dans Visual Studio](service-fabric-debugging-your-application.md)
 
-[Prise en main : services de l’API Web Service Fabric avec auto-hébergement OWIN](service-fabric-reliable-services-communication-webapi.md)
+[Prise en main : services de l’API Web Service Fabric avec auto-hébergement OWIN](./service-fabric-reliable-services-communication-aspnetcore.md)
 
 [En savoir plus sur les Collections fiables](service-fabric-reliable-services-reliable-collections.md)
 
@@ -220,5 +220,4 @@ Une fois que les services commencent à s’exécuter, vous pouvez afficher les 
 
 [Mise à niveau de l’application](service-fabric-application-upgrade.md)
 
-[Référence du développeur pour les services fiables](https://msdn.microsoft.com/library/azure/dn706529.aspx)
-
+[Référence du développeur pour les services fiables](/previous-versions/azure/dn706529(v=azure.100))

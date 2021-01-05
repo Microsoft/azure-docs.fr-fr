@@ -10,12 +10,12 @@ ms.author: grhuynh
 ms.service: genomics
 ms.topic: conceptual
 ms.date: 04/06/2018
-ms.openlocfilehash: 28a4a53851155c56e8d34981862bf52a3a2cf15b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3097041c96f70dda384f0b116bbbc9bc9130be4d
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72249176"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93395748"
 ---
 # <a name="overview-of-business-continuity-with-microsoft-genomics"></a>Vue d’ensemble de la continuité d’activité avec Microsoft Genomics
 Cette vue d’ensemble décrit les fonctionnalités de Microsoft Genomics en matière de continuité d’activité et de récupération d’urgence. En savoir plus sur les options de récupération après des événements d’interruption, comme la panne d’une région Azure, pouvant entraîner des pertes de données. 
@@ -43,7 +43,7 @@ Lorsque la région d’origine est restaurée, le service Microsoft Genomics ne 
 Si vous vous inquiétez de la rapidité de la récupération en cas de panne du centre de données, il existe une procédure vous permettant de réduire le délai de soumission manuelle de vos workflows Microsoft Genomics vers une région secondaire :
 
 * Identifiez une région secondaire appropriée et créez proactivement un compte Genomics dans cette région.
-* Dupliquez vos données dans les régions primaire et secondaire afin de les rendre immédiatement disponibles dans la région secondaire. Cette opération peut être effectuée manuellement ou à l’aide de la fonctionnalité de [stockage géo-redondant](https://docs.microsoft.com/azure/storage/common/storage-redundancy) disponible dans Stockage Azure. 
+* Dupliquez vos données dans les régions primaire et secondaire afin de les rendre immédiatement disponibles dans la région secondaire. Cette opération peut être effectuée manuellement ou à l’aide de la fonctionnalité de [stockage géo-redondant](../storage/common/storage-redundancy.md) disponible dans Stockage Azure. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans cet article, vous avez découvert les options dédiées à la continuité d’activité et à la récupération d’urgence en lien avec l’utilisation du service Microsoft Genomics. Pour plus d’informations sur la continuité d’activité et la récupération d’urgence au sein d’Azure en général, consultez la [documentation technique sur la résilience Azure.](https://docs.microsoft.com/azure/architecture/resiliency/recovery-loss-azure-region) 
+Dans cet article, vous avez découvert les options dédiées à la continuité d’activité et à la récupération d’urgence en lien avec l’utilisation du service Microsoft Genomics. Pour plus d’informations sur la continuité d’activité et la récupération d’urgence au sein d’Azure en général, consultez la [documentation technique sur la résilience Azure.](/azure/architecture/resiliency/recovery-loss-azure-region)

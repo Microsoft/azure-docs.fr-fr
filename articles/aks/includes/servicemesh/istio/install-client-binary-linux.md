@@ -1,14 +1,14 @@
 ---
 author: paulbouwer
 ms.topic: include
-ms.date: 11/15/2019
+ms.date: 10/02/2020
 ms.author: pabouwer
-ms.openlocfilehash: b310de560f9791e1fc49d54dfbf0789c38d37f57
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 164844a9da09563f8fbefe7ec60aff7eb05ace2d
+ms.sourcegitcommit: 67e8e1caa8427c1d78f6426c70bf8339a8b4e01d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77593953"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91666704"
 ---
 ## <a name="download-and-install-the-istio-istioctl-client-binary"></a>Télécharger et installer le binaire client istioctl d’Istio
 
@@ -16,16 +16,15 @@ Dans un interpréteur de commandes bash sur Linux ou sur [Sous-système Windows 
 
 ```bash
 # Specify the Istio version that will be leveraged throughout these instructions
-ISTIO_VERSION=1.4.0
+ISTIO_VERSION=1.7.3
 
-curl -sL "https://github.com/istio/istio/releases/download/$ISTIO_VERSION/istio-$ISTIO_VERSION-linux.tar.gz" | tar xz
+curl -sL "https://github.com/istio/istio/releases/download/$ISTIO_VERSION/istioctl-$ISTIO_VERSION-linux-amd64.tar.gz" | tar xz
 ```
 
-Le binaire client `istioctl` s’exécute sur votre machine cliente et vous permet d’interagir avec le maillage de services Istio. Utilisez les commandes suivantes pour installer le binaire client Istio `istioctl` dans un interpréteur de commandes bash sur Linux ou le [sous-système Windows pour Linux][install-wsl]. Ces commandes copient le binaire client `istioctl` à l’emplacement du programme utilisateur standard dans votre `PATH`.
+Le binaire client `istioctl` s’exécute sur votre machine cliente et vous permet d’installer et de gérer Istio dans votre cluster AKS. Utilisez les commandes suivantes pour installer le binaire client Istio `istioctl` dans un interpréteur de commandes bash sur Linux ou le [sous-système Windows pour Linux][install-wsl]. Ces commandes copient le binaire client `istioctl` à l’emplacement du programme utilisateur standard dans votre `PATH`.
 
 ```bash
-cd istio-$ISTIO_VERSION
-sudo cp ./bin/istioctl /usr/local/bin/istioctl
+sudo mv ./istioctl /usr/local/bin/istioctl
 sudo chmod +x /usr/local/bin/istioctl
 ```
 
@@ -42,4 +41,4 @@ echo "source ~/completions/istioctl.bash" >> ~/.bashrc
 ```
 
 <!-- LINKS - external -->
-[install-wsl]: https://docs.microsoft.com/windows/wsl/install-win10
+[install-wsl]: /windows/wsl/install-win10

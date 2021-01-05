@@ -1,31 +1,34 @@
 ---
-title: Créer une application Java à l’aide de l’API Cassandra d’Azure Cosmos DB
-description: Ce guide de démarrage rapide montre comment utiliser l’API Cassandra Azure Cosmos DB pour créer une application de profil avec le portail Azure et Java
+title: Application Java avec l’API Cassandra d’Azure Cosmos DB à l’aide du kit SDK Java 3.0
+description: Ce guide de démarrage rapide montre comment utiliser l’API Cassandra Azure Cosmos DB pour créer une application de profil avec le portail Azure et le SDK Java 3.0.
 ms.service: cosmos-db
-author: SnehaGunda
-ms.author: sngun
+author: TheovanKraay
+ms.author: thvankra
 ms.subservice: cosmosdb-cassandra
 ms.devlang: java
 ms.topic: quickstart
-ms.date: 09/24/2018
-ms.custom: seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 124bbcedceffca318367799441f66e330bc41fef
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.date: 05/18/2020
+ms.custom: seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: df7f857edc4c1296b6a6e1fae13d70aa4f178728
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811316"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93099770"
 ---
-# <a name="quickstart-build-a-java-app-to-manage-azure-cosmos-db-cassandra-api-data"></a>Démarrage rapide : Créer une application Java pour gérer les données de l’API Cassandra d’Azure Cosmos DB
+# <a name="quickstart-build-a-java-app-to-manage-azure-cosmos-db-cassandra-api-data-v3-driver"></a>Créer une application Java pour gérer les données de l’API Cassandra Azure Cosmos DB (pilote v3)
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-cassandra-dotnet.md)
-> * [Java](create-cassandra-java.md)
+> * [.NET Core](create-cassandra-dotnet-core.md)
+> * [Java v3](create-cassandra-java.md)
+> * [Java v4](create-cassandra-java-v4.md)
 > * [Node.JS](create-cassandra-nodejs.md)
 > * [Python](create-cassandra-python.md)
 >  
 
-Dans ce démarrage rapide, vous allez créer un compte d’API Cassandra Azure Cosmos DB et utiliser une application Java Cassandra clonée à partir de GitHub pour créer une base de données et un conteneur Cassandra. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
+Dans le cadre de ce guide de démarrage rapide, vous allez créer un compte d’API Cassandra Azure Cosmos DB et utiliser une application Java Cassandra clonée à partir de GitHub pour créer une base de données et un conteneur Cassandra avec les [pilotes Apache Cassandra v3.x](https://github.com/datastax/java-driver/tree/3.x) pour Java. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et d’interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -144,9 +147,9 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
 1. Dans votre compte Azure Cosmos DB, sur le [portail Azure](https://portal.azure.com/), sélectionnez **Chaîne de connexion**. 
 
-    ![Afficher et copier un nom d’utilisateur depuis la page Chaîne de connexion du portail Azure](./media/create-cassandra-java/copy-username-connection-string-azure-portal.png)
+    :::image type="content" source="./media/create-cassandra-java/copy-username-connection-string-azure-portal.png" alt-text="Afficher et copier un nom d’utilisateur depuis la page Chaîne de connexion du portail Azure":::
 
-2. Utilisez le ![bouton Copier](./media/create-cassandra-java/copy-button-azure-portal.png) à droite de l’écran pour copier la valeur POINT DE CONTACT.
+2. Utilisez le bouton :::image type="icon" source="./media/create-cassandra-java/copy-button-azure-portal.png"::: sur le côté droit de l’écran pour copier la valeur de POINT DE CONTACT. 
 
 3. Ouvrez le fichier *config.properties* à partir du dossier *C:\git-samples\azure-cosmosdb-cassandra-java-getting-started\java-examples\src\main\resources*. 
 
@@ -200,7 +203,7 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
 4. Dans le portail Azure, ouvrez **l’Explorateur de données** pour interroger, modifier et utiliser ces nouvelles données. 
 
-    ![Voir les données dans l’Explorateur de données - Azure Cosmos DB](./media/create-cassandra-java/view-data-explorer-java-app.png)
+    :::image type="content" source="./media/create-cassandra-java/view-data-explorer-java-app.png" alt-text="Afficher les données dans l’Explorateur de données – Azure Cosmos DB":::
 
 ## <a name="review-slas-in-the-azure-portal"></a>Vérification des contrats SLA dans le portail Azure
 

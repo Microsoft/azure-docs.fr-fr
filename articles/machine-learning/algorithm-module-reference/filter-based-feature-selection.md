@@ -8,17 +8,17 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 10/10/2019
-ms.openlocfilehash: c009a98931240e92527035e51fdce3f1c92f5212
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/10/2020
+ms.openlocfilehash: f4a7f5581703ae6932f3b40e62085fed76f5e6f2
+ms.sourcegitcommit: ba7fafe5b3f84b053ecbeeddfb0d3ff07e509e40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477593"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91945700"
 ---
 # <a name="filter-based-feature-selection"></a>Sélection de caractéristiques par filtrage
 
-Cet article décrit comment utiliser le module de sélection de caractéristiques par filtrage dans le concepteur Azure Machine Learning (préversion). Ce module vous aide à identifier les colonnes de votre jeu de données d’entrée qui ont la plus grande capacité de prédiction. 
+Cet article décrit comment utiliser le module de sélection de caractéristiques par filtrage dans le concepteur Azure Machine Learning. Ce module vous aide à identifier les colonnes de votre jeu de données d’entrée qui ont la plus grande capacité de prédiction. 
 
 En général, la *sélection de caractéristiques* fait référence au processus d’application de tests statistiques à des entrées, en fonction d’une sortie donnée. L’objectif est de déterminer quelles colonnes prédisent le mieux la sortie. Le module de sélection de caractéristiques par filtrage permet de choisir parmi plusieurs algorithmes de sélection de caractéristiques. Le module inclut des méthodes de corrélation telles que les valeurs de corrélation de Pearson et de test du khi-deux. 
 
@@ -90,8 +90,14 @@ Vous choisissez une métrique statistique standard. Le module calcule la corrél
 
     - Si vous spécifiez moins de colonnes de résultats qu’il n’y a de colonnes de caractéristiques, les caractéristiques sont classées par ordre décroissant de leur score. Seules les caractéristiques principales sont retournées. 
 
-7.  Envoyez le pipeline, ou sélectionnez le module de sélection de caractéristiques par filtrage et sélectionnez **Exécuter la sélection**.
+7.  Envoyez le pipeline.
 
+> [!IMPORTANT]
+> Si vous envisagez d’utiliser **Sélection de caractéristiques par filtrage** dans l’inférence, vous devez utiliser [Transformation d’une sélection de colonnes](./select-columns-transform.md) pour stocker le résultat sélectionné de la fonctionnalité et [Appliquer une transformation](./apply-transformation.md) pour appliquer la transformation sélectionnée de la fonctionnalité au jeu de données de scoring.
+>
+> Reportez-vous à la capture d’écran suivante pour créer votre pipeline, afin de vous assurer que les sélections de colonnes sont les mêmes pour le processus de scoring.
+> [!div class="mx-imgBorder"]
+> ![Exemple de pipeline](media/module/filter-based-feature-selection-score.png)
 
 ## <a name="results"></a>Résultats
 

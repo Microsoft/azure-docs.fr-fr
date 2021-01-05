@@ -11,10 +11,10 @@ ms.topic: article
 ms.date: 09/01/2019
 ms.author: juliako
 ms.openlocfilehash: f0dede42891069bb5d01ddc33f3797c20c5493d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "72968736"
 ---
 # <a name="automatically-identify-and-transcribe-multi-language-content-preview"></a>Identifier et transcrire automatiquement du contenu multilingue (préversion)

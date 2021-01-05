@@ -1,27 +1,18 @@
 ---
 title: Azure Service Bus – Migrer vers l’autorisation de signature d’accès partagé
 description: Découvrez plus en détail la migration depuis le service Access Control Service d’Azure Active Directory vers le service de signature d’accès partagé (SAS).
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/27/2020
-ms.author: aschhab
-ms.openlocfilehash: 532bbaf0b983b2d4310780686777cbe895afebe4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: e8cd12ac97020417f9958beded1fd198dd485fff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76774614"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88064619"
 ---
 # <a name="service-bus---migrate-from-azure-active-directory-access-control-service-to-shared-access-signature-authorization"></a>Service Bus – Migrer depuis le service Access Control Service d’Azure Active Directory vers le service de signature d’accès partagé
 
-Les applications Service Bus avaient précédemment la possibilité d’utiliser deux modèles d’autorisation différents : le modèle de jeton de [Signature d’accès partagé (SAP)](service-bus-sas.md) fourni directement par Service Bus et un modèle fédéré où la gestion des règles d’autorisation se fait en interne par le service Access Control Service (ACS) [Azure Active Directory](/azure/active-directory/). Les jetons obtenus à partir d’Access Control Service sont envoyés à Service Bus pour autoriser l’accès aux fonctionnalités souhaitées.
+Les applications Service Bus avaient précédemment la possibilité d’utiliser deux modèles d’autorisation différents : le modèle de jeton de [Signature d’accès partagé (SAP)](service-bus-sas.md) fourni directement par Service Bus et un modèle fédéré où la gestion des règles d’autorisation se fait en interne par le service Access Control Service (ACS) [Azure Active Directory](../active-directory/index.yml). Les jetons obtenus à partir d’Access Control Service sont envoyés à Service Bus pour autoriser l’accès aux fonctionnalités souhaitées.
 
 Le modèle d’autorisation d’Access Control Service a longtemps été remplacé par l’[autorisation de signature d’accès partagé](service-bus-authentication-and-authorization.md) en tant que modèle par défaut et toute la documentation, les conseils et les exemples utilisent exclusivement la signature d’accès partagé. En outre, il n’est plus possible de créer de nouveaux espaces de noms Service Bus qui sont associés à Access Control Service.
 
@@ -65,4 +56,3 @@ Pour en savoir plus sur l’authentification de Service Bus, consultez les sujet
 
 * [Authentification et de autorisation Service Bus](service-bus-authentication-and-authorization.md)
 * [Authentification Service Bus avec les signatures d’accès partagé](service-bus-sas.md)
-

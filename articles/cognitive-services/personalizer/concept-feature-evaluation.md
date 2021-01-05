@@ -3,19 +3,17 @@ title: Évaluation des fonctionnalités - Personalizer
 titleSuffix: Azure Cognitive Services
 description: Lorsque vous exécutez une évaluation dans votre ressource Personalizer à partir du portail Azure, Personalizer fournit des informations sur les fonctionnalités de contexte et les actions qui influencent le modèle.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
 ms.topic: conceptual
 ms.date: 07/29/2019
-ms.author: diberry
-ms.openlocfilehash: 31243b5e9da55aafbc376fa416c1b00a4499c116
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c0e47a2943cf8c934d201f76aefc41868adf0b25
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "70242411"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87127721"
 ---
 # <a name="feature-evaluation"></a>Évaluation des fonctionnalités
 

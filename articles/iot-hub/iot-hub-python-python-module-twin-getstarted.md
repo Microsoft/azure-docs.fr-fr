@@ -8,12 +8,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 04/03/2020
 ms.author: menchi
-ms.openlocfilehash: f846af548913e0cb3e872560e4b8438da306a255
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.custom: devx-track-python
+ms.openlocfilehash: 665281adc892e6b3655c0b1d0533cb3148e62940
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80756951"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92139401"
 ---
 # <a name="get-started-with-iot-hub-module-identity-and-module-twin-python"></a>Bien démarrer avec l’identité de module et le jumeau de module IoT Hub (Python)
 
@@ -269,4 +270,4 @@ Pour continuer la prise en main de IoT Hub et explorer les autres scénarios IoT
 
 * [Prise en main de la gestion d’appareils](iot-hub-node-node-device-management-get-started.md)
 
-* [Bien démarrer avec IoT Edge](../iot-edge/tutorial-simulate-device-linux.md)
+* [Bien démarrer avec IoT Edge](../iot-edge/quickstart-linux.md)

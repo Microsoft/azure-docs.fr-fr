@@ -2,26 +2,21 @@
 title: "Tutoriel : Intégration d'Azure Active Directory à 23 Video | Microsoft Docs"
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et 23 Video.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 5e73dd1d-3995-4a73-b9cf-1b2318d49cb3
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 08/07/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: b5061c2e4c627e7919683bbf00970b626554df43
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 5ade2f0c2afcb15541003cc8c1e5fccdb22de35b
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "68879801"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92319152"
 ---
 # <a name="tutorial-integrate-23-video-with-azure-active-directory"></a>Tutoriel : Intégrer 23 Video à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer 23 Video à Azure Active Di
 * Permettre à vos utilisateurs de se connecter automatiquement à 23 Video avec leur compte Azure AD
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -143,11 +138,11 @@ L’objectif de cette section est de créer un utilisateur appelé B.Simon dans 
 
 3. Dans la section **Users**, cliquez sur **Configure**.
 
-    ![Affecter des utilisateurs](./media/23video-tutorial/tutorial-23video-10.png)
+    ![Capture d’écran mettant en évidence la section Users.](./media/23video-tutorial/tutorial-23video-10.png)
 
 4. Cliquez sur **Add a new user**.
 
-    ![Affecter des utilisateurs](./media/23video-tutorial/tutorial-23video-11.png)
+    ![Capture d’écran mettant en évidence le bouton Add a new user.](./media/23video-tutorial/tutorial-23video-11.png)
 
 5. Dans la section **Invite someone to join this site** , procédez comme suit :
 
@@ -161,12 +156,12 @@ L’objectif de cette section est de créer un utilisateur appelé B.Simon dans 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette 23 Video dans le panneau d’accès doit vous connecter automatiquement à l’application 23 Video pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette 23 Video dans le panneau d’accès doit vous connecter automatiquement à l’application 23 Video pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

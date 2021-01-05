@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Proofpoint on Demand | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Proofpoint on Demand.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 773e7f7d-ec31-411b-860d-6a6633335d43
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/31/2018
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 34bdd8561b30358e3cb5c9a64ed4405ba8d94588
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 673856800ccb05a2b4b52511777a9a24769bcd6f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73160146"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993599"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-proofpoint-on-demand"></a>Didacticiel : Intégration d’Azure Active Directory avec Proofpoint on Demand
 
@@ -32,7 +27,7 @@ L’intégration de Proofpoint on Demand dans Azure AD vous offre les avantages
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à Proofpoint on Demand (via l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -41,6 +36,9 @@ Pour configurer l’intégration d’Azure AD avec Proofpoint on Demand, vous a
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
 * Un abonnement Proofpoint on Demand pour lequel l’authentification unique est activée
+
+> [!NOTE]
+> Si vous utilisez une authentification multifacteur ou sans mot de passe avec Azure AD, désactivez la valeur AuthnContext dans la demande SAML. Autrement, Azure AD lève l’erreur en cas d’incompatibilité d’ AuthnContext et ne renvoie pas le jeton à l’application.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -192,13 +190,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans P
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la vignette Proofpoint on Demand dans le volet d’accès, vous devez être connecté automatiquement à l’application Proofpoint on Demand pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la vignette Proofpoint on Demand dans le volet d’accès, vous devez être connecté automatiquement à l’application Proofpoint on Demand pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

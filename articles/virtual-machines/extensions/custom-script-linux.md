@@ -1,5 +1,5 @@
 ---
-title: Exécuter des scripts personnalisés sur des machines virtuelles Linux dans Azure
+title: Exécuter une extension de script personnalisé sur des machines virtuelles Linux dans Azure
 description: Automatiser les tâches de configuration de machine virtuelle Linux à l’aide de l’extension de script personnalisé v2
 services: virtual-machines-linux
 documentationcenter: ''
@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: cf17ab2b-8d7e-4078-b6df-955c6d5071c2
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 04/25/2018
 ms.author: mimckitt
-ms.openlocfilehash: 92bb254873669ae7c0894d633f17b5701b7ddc97
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 24d1992db5f1826045fdb47397e44dc2e2fbdaf9
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594727"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94962159"
 ---
 # <a name="use-the-azure-custom-script-extension-version-2-with-linux-virtual-machines"></a>Utiliser l’extension de script personnalisé Azure version 2 avec des machines virtuelles Linux
 L’extension de script personnalisé version 2 télécharge et exécute des scripts sur des machines virtuelles Azure. Elle est utile pour la configuration de post-déploiement, l’installation de logiciels ou toute autre tâche de configuration/gestion. Il est possible de télécharger des scripts à partir du Stockage Azure ou de tout autre emplacement Internet accessible, ou de les fournir au runtime de l’extension. 
@@ -38,14 +39,14 @@ Basculez entre les déploiements existant et nouveau pour utiliser plutôt la no
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-L’extension de script personnalisé pour Linux s’exécute sur les systèmes d’exploitation pris en charge par l’extension. Pour en savoir plus, voir cet [article](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
+L’extension de script personnalisé pour Linux s’exécute sur les systèmes d’exploitation pris en charge par l’extension. Pour en savoir plus, voir cet [article](../linux/endorsed-distros.md).
 
 ### <a name="script-location"></a>Emplacement du script
 
 L’extension vous permet d’utiliser vos informations d’identification de stockage d’objets blob Azure pour accéder au stockage d’objets blob Azure. Par ailleurs, le script peut être placé n’importe où, tant que la machine virtuelle peut effectuer le routage vers ce point de terminaison, par exemple GitHub, un serveur de fichiers interne, etc.
 
 ### <a name="internet-connectivity"></a>Connectivité Internet
-Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du stockage Azure, vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](https://docs.microsoft.com/azure/virtual-network/security-overview#service-tags).
+Si vous devez télécharger un script en externe, par exemple à partir de GitHub ou du stockage Azure, vous devez ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires. Par exemple, si votre script se trouve dans le Stockage Azure, vous pouvez en autoriser l’accès à l’aide de balises de service du groupe de sécurité réseau Azure pour le [Stockage](../../virtual-network/network-security-groups-overview.md#service-tags).
 
 Si votre script se trouve sur un serveur local, vous devrez peut-être encore ouvrir des ports de pare-feu/de groupe de sécurité réseau supplémentaires.
 
@@ -55,8 +56,10 @@ Si votre script se trouve sur un serveur local, vous devrez peut-être encore ou
 * Vérifiez que l’exécution des scripts ne nécessite pas d’entrée utilisateur.
 * L’exécution du script est autorisée pendant 90 minutes. Toute exécution d’une durée supérieure entraîne l’échec du provisionnement de l’extension.
 * N’insérez pas de redémarrages dans le script, car cela entraîne des problèmes avec d’autres extensions en cours d’installation : après un redémarrage, l’extension ne poursuit pas son exécution. 
+* Il n’est pas recommandé d’exécuter un script qui provoquera l’arrêt ou la mise à jour de l’agent de machine virtuelle. Cela peut laisser l’extension dans un état de transition et entraîner l’expiration du délai d’attente.
 * Si l’un de vos scripts provoque un redémarrage, installez des applications, puis exécutez des scripts, etc. Vous devez planifier le redémarrage à l’aide d’une tâche Cron, d’outils tels que DSC ou d’extensions Chef ou Puppet.
-* L’extension n’exécute un script qu’une seule fois. Si vous souhaitez exécuter un script à chaque démarrage, vous pouvez utiliser [une image cloud-init](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init) et utiliser un module [Scripts au démarrage](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#scripts-per-boot). Vous pouvez également utiliser le script pour créer une unité de service SystemD.
+* L’extension n’exécute un script qu’une seule fois. Si vous souhaitez exécuter un script à chaque démarrage, vous pouvez utiliser [une image cloud-init](../linux/using-cloud-init.md) et utiliser un module [Scripts au démarrage](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#scripts-per-boot). Vous pouvez également utiliser le script pour créer une unité de service SystemD.
+* Vous ne pouvez appliquer qu’une seule version d’une extension à la machine virtuelle. Pour pouvoir exécuter un deuxième script personnalisé, vous devez supprimer l’extension de script personnalisé et la réappliquer avec le script mis à jour. 
 * Si vous souhaitez planifier le moment de l’exécution d’un script, vous devez utiliser l’extension pour créer une tâche Cron. 
 * Lors de l’exécution du script, vous voyez seulement l’état de l’extension « transition en cours » dans le portail Azure ou l’interface Azure CLI. Si vous souhaitez que les mises à jour de l’état d’un script en cours d’exécution soient plus fréquentes, vous devez créer votre propre solution.
 * L’extension de script personnalisé ne prend pas en charge les serveurs proxy en mode natif, en revanche vous pouvez utiliser un outil de transfert de fichiers qui prend en charge les serveurs proxy dans votre script, par exemple *Curl*. 
@@ -134,7 +137,7 @@ Ces éléments doivent être traités comme des données sensibles et spécifié
 * `fileUris` : (facultatif, tableau de chaînes) URL des fichiers à télécharger.
 * `storageAccountName` : (facultatif, chaîne) nom du compte de stockage. Si vous spécifiez des informations d’identification de stockage, toutes les propriétés `fileUris` doivent être des URL d’objets blob Azure.
 * `storageAccountKey` : (facultatif, chaîne) clé d’accès du compte de stockage
-* `managedIdentity` : (facultatif, objet JSON) [identité managée](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) pour le téléchargement de fichiers
+* `managedIdentity` : (facultatif, objet JSON) [identité managée](../../active-directory/managed-identities-azure-resources/overview.md) pour le téléchargement de fichiers
   * `clientId` : (facultatif, chaîne) ID de client de l’identité managée
   * `objectId` : (facultatif, chaîne) ID d’objet de l’identité managée
 
@@ -212,9 +215,9 @@ CustomScript utilise l’algorithme suivant pour exécuter un script.
 > [!NOTE]
 > Cette propriété **doit** uniquement être spécifiée dans les paramètres protégés.
 
-CustomScript (versions 2.1 et ultérieures) prend en charge l’[identité managée](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) pour télécharger des fichiers à partir des URL fournies dans le paramètre « fileUris ». Il permet à CustomScript d’accéder aux objets blob/conteneurs privés de Stockage Azure sans que l’utilisateur doive passer des secrets comme des jetons SAS ou des clés de compte de stockage.
+CustomScript (versions 2.1 et ultérieures) prend en charge l’[identité managée](../../active-directory/managed-identities-azure-resources/overview.md) pour télécharger des fichiers à partir des URL fournies dans le paramètre « fileUris ». Il permet à CustomScript d’accéder aux objets blob/conteneurs privés de Stockage Azure sans que l’utilisateur doive passer des secrets comme des jetons SAS ou des clés de compte de stockage.
 
-Pour utiliser cette fonctionnalité, l’utilisateur doit ajouter une identité [attribuée par le système](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet#add-a-system-assigned-identity) ou [attribuée par l’utilisateur](https://docs.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet#add-a-user-assigned-identity) à la machine virtuelle ou au groupe de machines virtuelles identiques où CustomScript doit s’exécuter, et [accorder l’accès à l’identité managée au conteneur ou à l’objet blob de Stockage Azure](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/tutorial-vm-windows-access-storage#grant-access).
+Pour utiliser cette fonctionnalité, l’utilisateur doit ajouter une identité [attribuée par le système](../../app-service/overview-managed-identity.md?tabs=dotnet#add-a-system-assigned-identity) ou [attribuée par l’utilisateur](../../app-service/overview-managed-identity.md?tabs=dotnet#add-a-user-assigned-identity) à la machine virtuelle ou au groupe de machines virtuelles identiques où CustomScript doit s’exécuter, et [accorder l’accès à l’identité managée au conteneur ou à l’objet blob de Stockage Azure](../../active-directory/managed-identities-azure-resources/tutorial-vm-windows-access-storage.md#grant-access).
 
 Pour utiliser l’identité attribuée par le système sur la machine virtuelle/groupe de machines virtuelles identiques cible, définissez le champ « managedidentity » sur un objet JSON vide. 
 

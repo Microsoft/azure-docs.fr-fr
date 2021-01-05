@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 02/17/2020
+ms.date: 05/26/2020
 ms.author: jingwang
-ms.openlocfilehash: 2c2071e4b2a3daa528c7d01f64e38247b063e6f1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f890e4c47a427b6ca8c07463d6795f0813ef5bbd
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417414"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92638191"
 ---
 # <a name="copy-data-from-db2-by-using-azure-data-factory"></a>Copier des données de DB2 à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -36,7 +36,7 @@ Ce connecteur de base de données DB2 est pris en charge pour les activités sui
 
 Vous pouvez copier des données d’une base de données DB2 vers toute banque de données réceptrice prise en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-En particulier, ce connecteur DB2 prend en charge les plateformes et versions IBM DB2 suivantes avec les versions 9, 10 et 11 de SQL Access Manager (SQLAM) DRDA (Distributed Relational Database Architecture) :
+En particulier, ce connecteur DB2 prend en charge les plateformes et versions IBM DB2 suivantes avec les versions 9, 10 et 11 de SQL Access Manager (SQLAM) DRDA (Distributed Relational Database Architecture).  Il utilise le protocole DDM/DRDA.
 
 * IBM DB2 pour z/OS 12.1
 * IBM DB2 pour z/OS 11.1
@@ -49,7 +49,7 @@ En particulier, ce connecteur DB2 prend en charge les plateformes et versions IB
 * IBM DB2 pour LUW 10.1
 
 >[!TIP]
->Le connecteur DB2 s’appuie sur le Fournisseur OLE DB Microsoft pour DB2. Pour résoudre les erreurs du connecteur DB2, reportez-vous à [Codes d’erreur du fournisseur de données](https://docs.microsoft.com/host-integration-server/db2oledbv/data-provider-error-codes#drda-protocol-errors).
+>Le connecteur DB2 s’appuie sur le Fournisseur OLE DB Microsoft pour DB2. Pour résoudre les erreurs du connecteur DB2, reportez-vous à [Codes d’erreur du fournisseur de données](/host-integration-server/db2oledbv/data-provider-error-codes#drda-protocol-errors).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -70,19 +70,70 @@ Les propriétés prises en charge pour le service lié DB2 sont les suivantes :
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type doit être définie sur : **Db2** | Oui |
-| server |Nom du serveur DB2. Vous pouvez spécifier le numéro de port à la suite du nom du serveur en le séparant par un signe deux-points, par exemple, `server:port`. |Oui |
+| connectionString | Spécifiez les informations nécessaires pour se connecter à l’instance DB2.<br/> Vous pouvez également définir un mot de passe dans Azure Key Vault et extraire la configuration `password` de la chaîne de connexion. Pour plus d’informations, reportez-vous aux exemples suivants et à l’article [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
+
+Propriétés courantes dans la chaîne de connexion :
+
+| Propriété | Description | Obligatoire |
+|:--- |:--- |:--- |
+| server |Nom du serveur DB2. Vous pouvez spécifier le numéro de port à la suite du nom du serveur en le séparant par un signe deux-points, par exemple, `server:port`.<br>Le connecteur DB2 utilise le protocole DDM/DRDA et, par défaut s’il n’est pas spécifié, le port 50000. Le port utilisé par votre base de données DB2 peut être différent selon la version et vos paramètres. Par exemple, le port par défaut est 50000 pour DB2 LUW, et 446 ou 448 pour AS400 lorsque le protocole TLS est activé. Pour plus d’informations sur la configuration classique du port, consultez les documents DB2 suivants : [DB2 z/OS](https://www.ibm.com/support/knowledgecenter/SSEPGG_11.5.0/com.ibm.db2.luw.qb.dbconn.doc/doc/t0008229.html), [DB2 iSeries](https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_74/ddp/rbal1ports.htm) et [DB2 LUW](https://www.ibm.com/support/knowledgecenter/en/SSEKCU_1.1.3.0/com.ibm.psc.doc/install/psc_t_install_typical_db2_port.html). |Oui |
 | database |Nom de la base de données DB2. |Oui |
-| authenticationType |Type d'authentification utilisé pour se connecter à la base de données DB2.<br/>Valeur autorisée : **De base**. |Oui |
+| authenticationType |Type d'authentification utilisé pour se connecter à la base de données DB2.<br/>Valeur autorisée : **De base** . |Oui |
 | username |Spécifiez le nom d’utilisateur pour la connexion à la base de données DB2. |Oui |
 | mot de passe |Spécifiez le mot de passe du compte d’utilisateur que vous avez spécifié pour le nom d’utilisateur. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). |Oui |
-| packageCollection | Spécifiez sous quel emplacement les packages nécessaires sont créés automatiquement par ADF lors de l’interrogation de la base de données. | Non |
+| packageCollection | Spécifiez sous quel emplacement les packages nécessaires sont créés automatiquement par ADF lors de l’interrogation de la base de données. Si cette option n’est pas définie, Data Factory utilise {username} comme valeur par défaut. | Non |
 | certificateCommonName | Lorsque vous utilisez le chiffrement SSL (Secure Sockets Layer) ou TLS (Transport Layer Security), vous devez entrer une valeur pour le nom commun du certificat. | Non |
-| connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
 
 > [!TIP]
 > Si vous recevez un message d’erreur indiquant `The package corresponding to an SQL statement execution request was not found. SQLSTATE=51002 SQLCODE=-805`, la raison est qu’un package nécessaire n’est pas créé pour l’utilisateur. Par défaut, ADF tente de créer le package sous le regroupement nommé en tant qu’utilisateur que vous avez utilisé pour vous connecter à DB2. Spécifiez la propriété du regroupement des packages pour indiquer à quel endroit vous souhaitez qu’ADF crée les packages nécessaires lors de l’interrogation de la base de données.
 
 **Exemple :**
+
+```json
+{
+    "name": "Db2LinkedService",
+    "properties": {
+        "type": "Db2",
+        "typeProperties": {
+            "connectionString": "server=<server:port>;database=<database>;authenticationType=Basic;username=<username>;password=<password>;packageCollection=<packagecollection>;certificateCommonName=<certname>;"
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+**Exemple : stockage du mot de passe dans Azure Key Vault**
+
+```json
+{
+    "name": "Db2LinkedService",
+    "properties": {
+        "type": "Db2",
+        "typeProperties": {
+            "connectionString": "server=<server:port>;database=<database>;authenticationType=Basic;username=<username>;packageCollection=<packagecollection>;certificateCommonName=<certname>;",
+            "password": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<Azure Key Vault linked service name>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<secretName>" 
+            }
+        },
+        "connectVia": {
+            "referenceName": "<name of Integration Runtime>",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
+
+Si vous utilisiez le service lié DB2 avec la charge utile suivante, il reste pris en charge tel quel, mais nous vous suggérons d’utiliser le nouveau à l’avenir.
+
+**Charge utile précédente :**
 
 ```json
 {

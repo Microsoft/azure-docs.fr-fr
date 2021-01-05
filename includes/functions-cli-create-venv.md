@@ -4,12 +4,12 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 03/30/2020
 ms.author: glenga
-ms.openlocfilehash: 44969063765099d350e21abfbd07792891443911
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: f89383c1b7d0ccce82f35d91acbe1ff8c902db29
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80673128"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84448906"
 ---
 ::: zone pivot="programming-language-python"  
 ## <a name="create-and-activate-a-virtual-environment"></a><a name="create-venv"></a>Créer et activer un environnement virtuel
@@ -54,5 +54,5 @@ py -m venv .venv
 
 ---
 
-Vous devez exécuter toutes les commandes suivantes dans cet environnement virtuel activé. (Pour quitter l’environnement virtuel, exécutez `deactivate`.)
+Vous devez exécuter toutes les commandes suivantes dans cet environnement virtuel activé.   
 ::: zone-end

@@ -2,23 +2,23 @@
 title: Ajouter ou supprimer des utilisateurs - Azure Active Directory | Microsoft Docs
 description: Instructions pour ajouter de nouveaux utilisateurs ou supprimer des utilisateurs existants à l’aide d’Azure Active Directory.
 services: active-directory
-author: msaburnley
+author: ajburnle
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: fundamentals
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/12/2019
 ms.author: ajburnle
 ms.reviewer: jeffsta
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3d72616422934501e042375edfb10a25aa27c527
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: de529a8ffb0c72854904717c71dbc322c919f1a8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230433"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996693"
 ---
 # <a name="add-or-delete-users-using-azure-active-directory"></a>Ajouter ou supprimer des utilisateurs à l’aide d’Azure Active Directory
 
@@ -44,7 +44,7 @@ Pour ajouter un nouvel utilisateur, procédez comme suit :
 
    - **Nom d’utilisateur**. Obligatoire. Nom d’utilisateur du nouvel utilisateur. Par exemple : `mary@contoso.com`.
 
-     Le domaine dans le nom d’utilisateur doit correspondre au nom de domaine par défaut initial, *\<votrenomdedomaine>.onmicrosoft.com*, ou à un nom de domaine personnalisé, comme *contoso.com*. Pour plus d’informations sur la création d’un nom de domaine personnalisé, consultez [Ajouter votre nom de domaine personnalisé à l’aide du Portail Azure Active Directory](add-custom-domain.md).
+     Le domaine dans le nom d’utilisateur doit correspondre au nom de domaine par défaut initial, *\<yourdomainname>.onmicrosoft.com*, ou à un nom de domaine personnalisé, comme *contoso.com*. Pour plus d’informations sur la création d’un nom de domaine personnalisé, consultez [Ajouter votre nom de domaine personnalisé à l’aide du Portail Azure Active Directory](add-custom-domain.md).
 
    - **Groupes**. Si vous le souhaitez, vous pouvez ajouter l’utilisateur à un ou plusieurs groupes existants. Vous pouvez également ajouter l’utilisateur à des groupes ultérieurement. Pour plus d’informations sur l’ajout d’utilisateurs à des groupes, consultez [Créer un groupe de base et ajouter des membres avec Azure Active Directory](active-directory-groups-create-azure-portal.md).
 
@@ -60,7 +60,7 @@ L’utilisateur est créé et ajouté à votre organisation Azure AD.
 
 ## <a name="add-a-new-guest-user"></a>Ajouter un nouvel utilisateur invité
 
-Vous pouvez également inviter un nouvel utilisateur invité à collaborer avec votre organisation en sélectionnant **Inviter un utilisateur** sur la page **Nouvel utilisateur**. Si les paramètres de collaboration externe de votre organisation sont configurés de telle sorte que vous êtes autorisé à inviter des invités, l'utilisateur recevra par e-mail une invitation qu'il devra accepter pour entamer la collaboration. Pour plus d'informations sur l'invitation d’utilisateurs en vue d’une collaboration B2B, voir [Inviter des utilisateurs B2B à Azure Active Directory](../b2b/add-users-administrator.md)
+Vous pouvez également inviter un nouvel utilisateur invité à collaborer avec votre organisation en sélectionnant **Inviter un utilisateur** sur la page **Nouvel utilisateur**. Si les paramètres de collaboration externe de votre organisation sont configurés de telle sorte que vous êtes autorisé à inviter des invités, l'utilisateur recevra par e-mail une invitation qu'il devra accepter pour entamer la collaboration. Pour plus d'informations sur l'invitation d’utilisateurs en vue d’une collaboration B2B, voir [Inviter des utilisateurs B2B à Azure Active Directory](../external-identities/add-users-administrator.md)
 
 ## <a name="add-a-consumer-user"></a>Ajouter un utilisateur consommateur
 
@@ -103,6 +103,6 @@ Une fois que vous avez ajouté vos utilisateurs, vous pouvez exécuter les proc�
 
 - [Créer un groupe de base et ajouter des membres](active-directory-groups-create-azure-portal.md)
 
-- [Travailler avec des utilisateurs et groupes dynamiques](../users-groups-roles/groups-create-rule.md)
+- [Travailler avec des utilisateurs et groupes dynamiques](../enterprise-users/groups-create-rule.md)
 
-Ou vous pouvez effectuer d’autres tâches de gestion des utilisateurs, comme [ajouter des utilisateurs invités depuis un autre répertoire](../b2b/what-is-b2b.md) ou [restaurer un utilisateur supprimé](active-directory-users-restore.md). Pour en savoir plus sur les autres actions disponibles, consultez la [documentation Gestion des utilisateurs Azure Active Directory](../users-groups-roles/index.yml).
+Ou vous pouvez effectuer d’autres tâches de gestion des utilisateurs, comme [ajouter des utilisateurs invités depuis un autre répertoire](../external-identities/what-is-b2b.md) ou [restaurer un utilisateur supprimé](active-directory-users-restore.md). Pour en savoir plus sur les autres actions disponibles, consultez la [documentation Gestion des utilisateurs Azure Active Directory](../enterprise-users/index.yml).

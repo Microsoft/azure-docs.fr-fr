@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 2a919996d00f8ef3fa00109944b60d53b63d95ff
-ms.sourcegitcommit: c5661c5cab5f6f13b19ce5203ac2159883b30c0e
+ms.openlocfilehash: 37d9bd78a80ac52d2a790537bf47e33807720349
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80529123"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85202957"
 ---
 # <a name="claimstransformations"></a>ClaimsTransformations
 
@@ -121,7 +121,7 @@ Si la revendication d’entrée et la revendication de sortie sont du même type
 
 Par exemple, vous pouvez stocker la dernière version de vos conditions d’utilisation du service que l’utilisateur a acceptée. Quand vous mettez à jour les conditions d’utilisation du service, vous pouvez demander à l’utilisateur d’accepter la nouvelle version. Dans l’exemple suivant, la transformation de revendication **HasTOSVersionChanged** compare la valeur de la revendication **TOSVersion** à la valeur de la revendication **LastTOSAcceptedVersion**, puis retourne la revendication **TOSVersionChanged** booléenne.
 
-```XML
+```xml
 <BuildingBlocks>
   <ClaimsSchema>
     <ClaimType Id="TOSVersionChanged">

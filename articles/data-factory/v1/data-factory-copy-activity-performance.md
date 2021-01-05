@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 05/25/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: c4ca328aa0ddc61d86a435b93fe775f294287b98
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5910b94dba03f105197a94cf1ea1805f45249f3f
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79527382"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451345"
 ---
 # <a name="copy-activity-performance-and-tuning-guide"></a>Guide sur les performances et le réglage de l’activité de copie
 
@@ -32,7 +32,7 @@ L’activité de copie Azure Data Factory offre une solution de chargement de do
 
 Azure fournit un ensemble de solutions d’entrepôt de données et de stockage de données de niveau entreprise, et l’activité de copie offre une expérience de chargement des données hautement optimisée qui est facile à configurer et à mettre en œuvre. Avec une seule activité de copie, vous pouvez obtenir ce qui suit :
 
-* Chargement de données dans **Azure SQL Data Warehouse** à **1,2 Gbits/s**. Consultez [Charger 1 To dans Azure SQL Data Warehouse en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
+* Charger des données dans **Azure Synapse Analytics** à **1,2 Gbit/s**. Consultez [Charger 1 To dans Azure Synapse Analytics en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
 * Chargement de données dans le **stockage des objets blob Azure** à **1,0 Gbit/s**
 * Chargement de données dans **Azure Data Lake Store** à **1,0 Gbit/s**
 
@@ -183,9 +183,9 @@ Il est **important** de garder à l’esprit que vous êtes facturé selon la du
 ## <a name="staged-copy"></a>copie intermédiaire
 Lorsque vous copiez des données entre une banque de données source et une banque de données réceptrice, vous pouvez choisir d’utiliser le stockage Blob comme banque intermédiaire. La fonctionnalité intermédiaire est particulièrement utile dans les cas suivants :
 
-1. **Vous voulez recevoir des données à partir de divers magasins de données dans SQL Data Warehouse via PolyBase**. SQL Data Warehouse utilise PolyBase comme un mécanisme de haut débit pour charger des données volumineuses dans SQL Data Warehouse. Toutefois, la source de données doit se trouver dans le stockage Blob, et se conformer à des critères supplémentaires. Lorsque vous chargez des données à partir d’une banque de données autre que le stockage Blob, vous pouvez activer la copie de données via un stockage Blob intermédiaire. Dans ce cas, Data Factory effectue les transformations de données requises pour garantir la conformité vis-à-vis des exigences de PolyBase. Ensuite, il utilise PolyBase pour charger des données dans SQL Data Warehouse. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse). Consultez [Charger 1 To dans Azure SQL Data Warehouse en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
+1. **Vous voulez ingérer des données à partir de divers magasins de données dans Azure Synapse Analytics via PolyBase.** Azure Synapse Analytics utilise PolyBase comme un mécanisme à haut débit pour charger des données volumineuses dans Azure Synapse Analytics. Toutefois, la source de données doit se trouver dans le stockage Blob, et se conformer à des critères supplémentaires. Lorsque vous chargez des données à partir d’une banque de données autre que le stockage Blob, vous pouvez activer la copie de données via un stockage Blob intermédiaire. Dans ce cas, Data Factory effectue les transformations de données requises pour garantir la conformité vis-à-vis des exigences de PolyBase. Ensuite, il utilise PolyBase pour charger les données dans Azure Synapse Analytics. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-synapse-analytics). Consultez [Charger 1 To dans Azure Synapse Analytics en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
 2. **Il peut être assez long parfois d’effectuer des déplacements de données hybrides (c’est-à-dire, de copier entre une banque de données locale et une banque de données cloud) sur une connexion réseau lente**. Pour améliorer les performances, vous pouvez compresser les données locales afin de réduire le temps nécessaire pour déplacer des données vers la banque de données intermédiaire dans le cloud. Ensuite, vous pouvez décompresser les données dans la banque intermédiaire avant de les charger dans la banque de données de destination.
-3. **Vous ne souhaitez pas ouvrir les ports autres que le port 80 et le port 443 dans votre pare-feu, en raison des stratégies informatiques d’entreprise**. Par exemple, lorsque vous copiez des données d’une banque de données locale vers un récepteur Azure SQL Database ou un récepteur Azure SQL Data Warehouse, vous devez activer les communications TCP sortantes sur le port 1433 pour le pare-feu Windows et votre pare-feu d’entreprise. Dans ce scénario, tirez parti de la passerelle pour commencer par copier les données dans une instance de stockage blob intermédiaire via HTTP ou HTTPS sur le port 443. Ensuite, chargez les données dans SQL Database ou SQL Data Warehouse à partir du stockage Blob intermédiaire. Dans ce flux, vous n’avez pas besoin d’activer le port 1433.
+3. **Vous ne souhaitez pas ouvrir les ports autres que le port 80 et le port 443 dans votre pare-feu, en raison des stratégies informatiques d’entreprise**. Par exemple, lorsque vous copiez des données d’un magasin de données local vers un récepteur Azure SQL Database ou un récepteur Azure Synapse Analytics, vous devez activer les communications TCP sortantes sur le port 1433 pour le pare-feu Windows et votre pare-feu d’entreprise. Dans ce scénario, tirez parti de la passerelle pour commencer par copier les données dans une instance de stockage blob intermédiaire via HTTP ou HTTPS sur le port 443. Ensuite, chargez les données dans SQL Database ou Azure Synapse Analytics à partir du stockage d’objet blob intermédiaire. Dans ce flux, vous n’avez pas besoin d’activer le port 1433.
 
 ### <a name="how-staged-copy-works"></a>Fonctionnement de la copie intermédiaire
 Lorsque vous activez la fonctionnalité intermédiaire, tout d’abord les données sont copiées à partir de la banque de données source vers la banque de données intermédiaire (indiquez la vôtre). Ensuite, les données sont copiées à partir de la banque de données intermédiaire dans la banque de données de réceptrice. Data Factory gère automatiquement le flux à deux étapes pour vous. Data Factory nettoie également les données temporaires du stockage intermédiaire une fois le déplacement de données terminé.
@@ -208,7 +208,7 @@ Configurez le paramètre **enableStaging** sur l’activité de copie pour spéc
 | Propriété | Description | Valeur par défaut | Obligatoire |
 | --- | --- | --- | --- |
 | **enableStaging** |Indiquez si vous souhaitez copier les données via un magasin de données intermédiaire. |False |Non |
-| **linkedServiceName** |Spécifiez le nom d’un service lié [AzureStorage](data-factory-azure-blob-connector.md#azure-storage-linked-service) ou [AzureStorageSas](data-factory-azure-blob-connector.md#azure-storage-sas-linked-service) faisant référence à l’instance de stockage que vous utilisez comme banque de données intermédiaire. <br/><br/> Vous ne pouvez pas utiliser le stockage avec une signature d’accès partagé pour charger les données dans SQL Data Warehouse via PolyBase. Vous pouvez l’utiliser dans tous les autres scénarios. |N/A |Oui, quand **enableStaging** est défini sur TRUE |
+| **linkedServiceName** |Spécifiez le nom d’un service lié [AzureStorage](data-factory-azure-blob-connector.md#azure-storage-linked-service) ou [AzureStorageSas](data-factory-azure-blob-connector.md#azure-storage-sas-linked-service) faisant référence à l’instance de stockage que vous utilisez comme banque de données intermédiaire. <br/><br/> Vous ne pouvez pas utiliser le stockage avec une signature d’accès partagé pour charger les données dans Azure Synapse Analytics via PolyBase. Vous pouvez l’utiliser dans tous les autres scénarios. |N/A |Oui, quand **enableStaging** est défini sur TRUE |
 | **path** |Spécifiez le chemin du stockage Blob où vous souhaitez placer les données intermédiaires. Si vous ne renseignez pas le chemin d’accès, le service crée un conteneur pour stocker les données temporaires. <br/><br/> Ne spécifiez un chemin d’accès que si vous utilisez le stockage avec une signature d’accès partagé, ou si vous avez besoin de données temporaires dans un emplacement spécifique. |N/A |Non |
 | **enableCompression** |Spécifie si les données doivent être compressées avant d’être copiées vers la destination. Ce paramètre réduit le volume de données transférées. |False |Non |
 
@@ -282,7 +282,7 @@ Vérifiez que la banque de données sous-jacente n’est pas submergée par d’
 
 Pour les banques de données Microsoft, consultez les [rubriques relatives à la surveillance et au réglage](#performance-reference) spécifiques aux banques de données, qui peuvent vous aider à comprendre les caractéristiques de performances de celles-ci, à réduire les temps de réponse et à maximiser le débit.
 
-Si vous copiez des données depuis le stockage Blob vers SQL Data Warehouse, envisagez d’utiliser **PolyBase** pour améliorer les performances. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse) . Consultez [Charger 1 To dans Azure SQL Data Warehouse en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
+Si vous copiez des données depuis le stockage d’objets blob vers Azure Synapse Analytics, envisagez d’utiliser **PolyBase** pour améliorer les performances. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-synapse-analytics). Consultez [Charger 1 To dans Azure Synapse Analytics en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
 
 ### <a name="file-based-data-stores"></a>Magasins de données basés sur un fichier
 *(Inclut le stockage des objets blob, Data Lake Store, Amazon S3, les systèmes de fichiers locaux et HDFS locaux)*
@@ -292,7 +292,7 @@ Si vous copiez des données depuis le stockage Blob vers SQL Data Warehouse, env
 * Pour le scénario de **système de fichiers local** où l’utilisation d’une **passerelle de gestion des données** est requise, voir la section [Considérations relatives à la passerelle de gestion des données](#considerations-for-data-management-gateway).
 
 ### <a name="relational-data-stores"></a>Bases de données relationnelles
-*(Inclut SQL Database, SQL Data Warehouse, Amazon Redshift, les bases de données SQL Server et les bases de données Oracle, MySQL, DB2, Teradata, Sybase et PostgreSQL, etc.)*
+*(Inclut SQL Database, Azure Synapse Analytics, Amazon Redshift, les bases de données SQL Server et les bases de données Oracle, MySQL, DB2, Teradata, Sybase et PostgreSQL, etc.)*
 
 * **Modèle de données** : Votre schéma de table a des répercussions sur le débit de copie. Une taille de ligne importante vous donne de meilleures performances qu’une petite taille de ligne pour copier la même quantité de données. Raison : la base de données peut récupérer plus efficacement moins de lots de données contenant moins de lignes.
 * **Requête ou procédure stockée** : optimisez la logique de la requête ou de la procédure stockée que vous spécifiez dans la source d’activité de copie pour extraire les données plus efficacement.
@@ -304,7 +304,7 @@ Vérifiez que la banque de données sous-jacente n’est pas submergée par d’
 
 Pour les banques de données Microsoft, voir les [rubriques relatives à la surveillance et au réglage](#performance-reference) qui sont spécifiques aux banques de données. Ces rubriques peuvent vous aider à comprendre les caractéristiques des performances des banques de données et à déterminer comment réduire les temps de réponse et optimiser le débit.
 
-Si vous copiez des données depuis le **stockage Blob** vers **SQL Data Warehouse**, envisagez d’utiliser **PolyBase** pour améliorer les performances. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure SQL Data Warehouse](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse) . Consultez [Charger 1 To dans Azure SQL Data Warehouse en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
+Si vous copiez des données depuis le **stockage d’objets blob** vers **Azure Synapse Analytics**, envisagez d’utiliser **PolyBase** pour améliorer les performances. Pour plus d’informations, consultez [Utiliser PolyBase pour charger des données dans Azure Synapse Analytics](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-synapse-analytics). Consultez [Charger 1 To dans Azure Synapse Analytics en moins de 15 minutes avec Azure Data Factory](data-factory-load-sql-data-warehouse.md) pour obtenir une procédure pas à pas avec un cas d’utilisation.
 
 ### <a name="file-based-data-stores"></a>Magasins de données basés sur un fichier
 *(Inclut le stockage des objets blob, Data Lake Store, Amazon S3, les systèmes de fichiers locaux et HDFS locaux)*
@@ -315,7 +315,7 @@ Si vous copiez des données depuis le **stockage Blob** vers **SQL Data Warehous
 * Pour les scénarios de **systèmes de fichiers locaux** nécessitant l’utilisation d’une **passerelle de gestion des données**, voir la section [Considérations relatives à la passerelle de gestion des données](#considerations-for-data-management-gateway).
 
 ### <a name="relational-data-stores"></a>Bases de données relationnelles
-*(Inclut SQL Database, SQL Data Warehouse, les bases de données SQL Server et les bases de données Oracle)*
+*(Inclut SQL Database, Azure Synapse Analytics, les bases de données SQL Server et les bases de données Oracle)*
 
 * **Comportement de copie**: selon les propriétés que vous avez configurées pour **sqlSink**, l’activité de copie écrit des données dans la base de données de destination de différentes façons.
   * Par défaut, le service de déplacement de données utilise une API de copie en bloc pour insérer des données en mode Append, ce qui optimise les performances.
@@ -366,8 +366,8 @@ Si la taille des données à copier est importante, vous pouvez ajuster votre lo
 
 Faites attention au nombre de jeux de données et d’activités de copie nécessitant que Data Factory se connecte à la même banque de données en même temps. De nombreux travaux de copie simultanés peuvent limiter une banque de données, et entraîner une dégradation des performances, une multiplication des tentatives internes de travail de copie et, dans certains cas, des échecs d’exécution.
 
-## <a name="sample-scenario-copy-from-an-on-premises-sql-server-to-blob-storage"></a>Exemple de scénario : copie depuis un SQL Server local vers le stockage Blob
-**Scénario** : un pipeline est conçu pour copier des données d’un serveur SQL Server local vers un stockage Blob au format CSV. Pour accélérer la copie des travaux, les fichiers CSV doivent être compressés au format bzip2.
+## <a name="sample-scenario-copy-from-a-sql-server-database-to-blob-storage"></a>Exemple de scénario : Copier d’une base de données SQL Server vers Stockage Blob
+**Scénario** : Un pipeline est conçu pour copier des données d’une base de données SQL Server vers un Stockage Blob au format CSV. Pour accélérer la copie des travaux, les fichiers CSV doivent être compressés au format bzip2.
 
 **Test et analyse** : le débit de l’activité de copie est inférieur à 2 Mbits/s, ce qui est beaucoup plus lent que le test d’évaluation des performances.
 
@@ -418,8 +418,8 @@ Voici des références relatives à la surveillance et au réglage des performan
 
 * Stockage Blob Azure : [Objectifs de performance et de scalabilité pour le stockage d’objets blob](../../storage/blobs/scalability-targets.md) et [Liste de contrôle des performances et de la scalabilité pour le stockage d’objets blob](../../storage/blobs/storage-performance-checklist.md).
 * Stockage Table Azure : [Objectifs de performance et de scalabilité pour le stockage Table](../../storage/tables/scalability-targets.md) et [Liste de contrôle des performances et de la scalabilité pour le stockage Table](../../storage/tables/storage-performance-checklist.md).
-* Azure SQL Database : vous pouvez [surveiller les performances](../../sql-database/sql-database-single-database-monitor.md) et vérifier le pourcentage de l’unité de transaction de base de données (DTU)
-* Azure SQL Data Warehouse : sa capacité est mesurée en Data Warehouse Units (DWU) ; voir [Gestion de la puissance de calcul dans Azure SQL Data Warehouse (Vue d’ensemble)](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-manage-compute-overview.md)
+* Azure SQL Database : vous pouvez [surveiller les performances](../../azure-sql/database/monitor-tune-overview.md) et vérifier le pourcentage de l’unité de transaction de base de données (DTU)
+* Azure Synapse Analytics : sa capacité est mesurée en Data Warehouse Units (DWU) ; voir [Gestion de la puissance de calcul dans Azure Synapse Analytics (Vue d’ensemble)](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-manage-compute-overview.md)
 * Azure Cosmos DB : [Niveaux de performances dans Azure Cosmos DB](../../cosmos-db/performance-levels.md)
-* Serveur SQL Server local : [Surveillance et réglage des performances](https://msdn.microsoft.com/library/ms189081.aspx)
-* Serveur de fichiers local : [Réglage des performances des serveurs de fichiers](https://msdn.microsoft.com/library/dn567661.aspx)
+* Serveur SQL Server local : [Surveillance et réglage des performances](/sql/relational-databases/performance/monitor-and-tune-for-performance)
+* Serveur de fichiers local : [Réglage des performances des serveurs de fichiers](/previous-versions//dn567661(v=vs.85))

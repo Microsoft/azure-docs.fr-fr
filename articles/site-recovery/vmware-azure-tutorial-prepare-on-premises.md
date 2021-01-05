@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 11/12/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 4969a1f14e53aabf79495e179213f9763d4c8803
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b8fd34c8f1e3a32a8252074941a49d61aa540207
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222626"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86134904"
 ---
 # <a name="prepare-on-premises-vmware-servers-for-disaster-recovery-to-azure"></a>Préparer des serveurs VMware locaux à la récupération d’urgence vers Azure
 
@@ -103,7 +103,7 @@ Pour vous connecter à des machines virtuelles Linux à l’aide de SSH après l
 - Sur la machine locale, avant le basculement, vérifiez que le service Secure Shell est configuré pour démarrer automatiquement au démarrage du système.
 - Vérifiez que les règles de pare-feu autorisent une connexion SSH.
 - Sur la machine virtuelle Azure, après le basculement, autorisez les connexions entrantes au port SSH pour les règles des groupes de sécurité réseau sur la machine virtuelle basculée, et pour le sous-réseau Azure auquel elle est connectée.
-- [Ajoutez une adresse IP publique](site-recovery-monitoring-and-troubleshooting.md) pour la machine virtuelle.
+- [Ajoutez une adresse IP publique](./site-recovery-monitor-and-troubleshoot.md) pour la machine virtuelle.
 - Vous pouvez vérifier les **Diagnostics de démarrage** pour afficher une capture d’écran de la machine virtuelle.
 
 

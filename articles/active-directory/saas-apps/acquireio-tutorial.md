@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à AcquireIO | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et AcquireIO.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 97815e13-32ec-4470-b075-1253f5814f4f
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/14/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 01bcc3678485119afae1d567d97eff9dcebe6b95
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 5fe070bc1abe0592b3082c597c1812781335448a
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76714621"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673181"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-acquireio"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à AcquireIO
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer AcquireIO à Azure Active Di
 * Permettre à vos utilisateurs de se connecter automatiquement à AcquireIO avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -78,7 +73,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 1. Dans la page **Sélectionner une méthode d’authentification unique**, sélectionnez **SAML**.
 1. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône de modification/stylet de **Configuration SAML de base** pour modifier les paramètres.
 
-   ![Modifier la configuration SAML de base](common/edit-urls.png)
+    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
 1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
 
@@ -115,7 +110,7 @@ Dans cette section, vous allez autoriser B. Simon à utiliser l’authentificat
 1. Dans la liste des applications, sélectionnez **AcquireIO**.
 1. Dans la page de vue d’ensemble de l’application, recherchez la section **Gérer** et sélectionnez **Utilisateurs et groupes**.
 
-   ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
+    ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
 1. Sélectionnez **Ajouter un utilisateur**, puis **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
@@ -139,15 +134,15 @@ Dans cette section, vous allez autoriser B. Simon à utiliser l’authentificat
 
 1. Sur le côté gauche du menu, cliquez sur **App Store**.
 
-     ![Configuration d’AcquireIO](./media/acquireio-tutorial/config01.png)
+    ![Capture d’écran mettant en évidence l’App Store.](./media/acquireio-tutorial/config01.png)
 
 1. Faites défiler l’écran vers le bas jusqu’à **Active Directory**, puis cliquez sur **Installer**.
 
-    ![Configuration d’AcquireIO](./media/acquireio-tutorial/config02.png)
+    ![Capture d’écran mettant en évidence la section Active Directory et le bouton Install.](./media/acquireio-tutorial/config02.png)
 
 1. Sur la fenêtre contextuelle d’Active Directory, procédez comme suit :
 
-    ![Configuration d’AcquireIO](./media/acquireio-tutorial/config03.png)
+    ![Capture d’écran montrant l’écran Active Directory.](./media/acquireio-tutorial/config03.png)
 
     a. Cliquez sur **COPY** pour copier l’URL de réponse pour votre instance et collez-la dans la zone de texte **URL de réponse** de la section **Configuration SAML de base** du portail Azure.
 
@@ -167,7 +162,7 @@ Pour permettre aux utilisateurs Azure AD de se connecter à AcquireIO, vous deve
 
 1. Sur le côté gauche du menu, cliquez sur **Profils** et accédez à **Ajouter un profil**.
 
-     ![Configuration d’AcquireIO](./media/acquireio-tutorial/config04.png)
+    ![Capture d’écran mettant en évidence Profiles dans le menu sur le côté gauche de l’écran ainsi que l’option Add Profile.](./media/acquireio-tutorial/config04.png)
 
 1. Dans la fenêtre contextuelle **Add customer** (Ajouter un client), effectuez les étapes suivantes :
 
@@ -183,14 +178,14 @@ Pour permettre aux utilisateurs Azure AD de se connecter à AcquireIO, vous deve
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette AcquireIO dans le volet d’accès, vous devez être connecté automatiquement à l’application AcquireIO pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette AcquireIO dans le volet d’accès, vous devez être connecté automatiquement à l’application AcquireIO pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer AcquireIO avec Azure AD](https://aad.portal.azure.com/)

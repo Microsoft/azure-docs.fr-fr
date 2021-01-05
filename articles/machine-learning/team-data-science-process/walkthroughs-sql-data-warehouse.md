@@ -1,6 +1,6 @@
 ---
-title: Analytique sur SQL Data Warehouse avec T-SQL, Python - Team Data Science Process
-description: Exemples qui montrent comment utiliser SQL Data Warehouse pour effectuer une analyse prédictive.
+title: Analytique sur Azure Synapse Analytics avec T-SQL, Python - TDSP (Team Data Science Process)
+description: Exemples qui montrent comment utiliser U-SQL sur Azure Synapse Analytics pour effectuer des analyses prédictives.
 services: machine-learning
 author: marktab
 manager: marktab
@@ -11,23 +11,23 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: f657f02a39a023f6cb620895549105e7fd1eb233
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 92cd3a9cc82a38cae6a56b7796e22d035979f2d5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80128162"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89439848"
 ---
-# <a name="sql-data-warehouse-data-science-walkthroughs-using-t-sql-and-python-on-azure"></a>Procédures pas à pas sur la science des données SQL Data Warehouse à l’aide de T-SQL et de Python sur Azure
+# <a name="azure-synapse-analytics-data-science-walkthroughs-using-t-sql-and-python-on-azure"></a>Procédures pas à pas sur la science des données Azure Synapse Analytics à l’aide de T-SQL et de Python sur Azure
 
-Ces procédures pas à pas utilisent SQL Data Warehouse pour effectuer une analyse prédictive. Ils suivent les étapes décrites dans le processus TDSP (Team Data Science Process). Vous trouverez une vue d’ensemble du processus TDSP sur la page [Processus de science des données](overview.md) Pour une présentation de SQL Data Warehouse, consultez [En quoi consiste Azure SQL Data Warehouse ?](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md)
+Ces procédures pas à pas utilisent Azure Synapse Analytics pour effectuer une analyse prédictive. Ils suivent les étapes décrites dans le processus TDSP (Team Data Science Process). Vous trouverez une vue d’ensemble du processus TDSP sur la page [Processus de science des données](overview.md) Pour obtenir une présentation d’Azure Synapse Analytics, consultez [Qu’est-ce qu’Azure Synapse Analytics ?](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md)
 
 D’autres guides de la science des données qui appliquent le processus TDSP sont regroupés en fonction de la **plateforme** qu’ils utilisent. Consultez [Procédures pas à pas du processus TDSP (Team Data Science Process)](walkthroughs.md) pour connaître les détails de ces exemples.
 
 
-## <a name="predict-taxi-tips-using-t-sql-and-ipython-notebooks-with-sql-data-warehouse"></a>Prédire les pourboires de taxi à l’aide de Notebooks T-SQL et IPython avec SQL Data Warehouse
+## <a name="predict-taxi-tips-using-t-sql-and-ipython-notebooks-with-azure-synapse-analytics"></a>Prédire les pourboires de taxi à l’aide de notebooks T-SQL et IPython avec Azure Synapse Analytics
 
-La procédure pas à pas [Utiliser SQL Data Warehouse](sqldw-walkthrough.md) explique comment générer et déployer des modèles de régression et de classification machine learning à l’aide de SQL Data Warehouse (SQL DW).  Les données sont un jeu de données des courses et tarifs de taxi à New York disponible publiquement.
+La procédure pas à pas [Utiliser Azure Synapse Analytics](sqldw-walkthrough.md) explique comment générer et déployer des modèles de régression et de classification Machine Learning à l’aide d’Azure Synapse Analytics.  Les données sont un jeu de données des courses et tarifs de taxi à New York disponible publiquement.
 
 
 ## <a name="next-steps"></a>Étapes suivantes

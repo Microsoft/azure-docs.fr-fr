@@ -5,19 +5,19 @@ author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 1/8/2019
-ms.openlocfilehash: 684116f92544e61a892b3653f8539f9f8f03e0c9
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 3d23ee6119b625e11ce44bb9ad11ce4b3ee0280d
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584084"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91295734"
 ---
 # <a name="create-users-in-azure-database-for-postgresql---hyperscale-citus"></a>Créer des utilisateurs dans Azure Database pour PostgreSQL - Hyperscale (Citus)
 
 > [!NOTE]
-> Le terme « utilisateurs » fait référence aux utilisateurs au sein d’un groupe de serveurs Hyperscale (Citus). Pour en savoir plus sur les utilisateurs de l’abonnement Azure et leurs privilèges, consultez l’article [Contrôle d’accès en fonction du rôle (RBAC) Azure](../role-based-access-control/built-in-roles.md) ou lisez [comment personnaliser les rôles](../role-based-access-control/custom-roles.md).
+> Le terme « utilisateurs » fait référence aux utilisateurs au sein d’un groupe de serveurs Hyperscale (Citus). Pour en savoir plus sur les utilisateurs de l’abonnement Azure et leurs privilèges, consultez l’article [Contrôle d’accès en fonction du rôle (Azure RBAC) Azure](../role-based-access-control/built-in-roles.md) ou lisez [comment personnaliser les rôles](../role-based-access-control/custom-roles.md).
 
 ## <a name="the-server-admin-account"></a>Compte d’administrateur de serveur
 
@@ -28,7 +28,7 @@ Le moteur PostgreSQL utilise des [rôles](https://www.postgresql.org/docs/curren
 * `postgres`
 * `citus`
 
-Étant donné qu’Hyperscale est un service PaaS managé, seul Microsoft peut se connecter avec le rôle de superutilisateur `postgres`. Pour un accès administratif limité, Hyperscale fournit le rôle `citus`.
+Étant donné qu’Hyperscale (Citus) est un service PaaS managé, seul Microsoft peut se connecter avec le rôle de superutilisateur `postgres`. Pour un accès administratif limité, Hyperscale (Citus) fournit le rôle `citus`.
 
 Autorisations pour le rôle `citus` :
 
@@ -46,13 +46,13 @@ Notez que le rôle `citus` présente des restrictions :
 
 Comme mentionné, le compte administrateur `citus` ne dispose pas des autorisations nécessaires pour créer des utilisateurs supplémentaires. Pour ajouter un utilisateur, utilisez le portail Azure.
 
-1. Accédez à la page **Rôles** pour votre groupe de serveurs Hyperscale, puis cliquez sur **+ Ajouter** :
+1. Accédez à la page **Rôles** pour votre groupe de serveurs Hyperscale (Citus), puis cliquez sur **+ Ajouter** :
 
-   ![La page Rôles](media/howto-hyperscale-create-users/1-role-page.png)
+   :::image type="content" source="media/howto-hyperscale-create-users/1-role-page.png" alt-text="La page Rôles":::
 
 2. Saisissez le nom de rôle et le mot de passe. Cliquez sur **Enregistrer**.
 
-   ![Ajouter un rôle](media/howto-hyperscale-create-users/2-add-user-fields.png)
+   :::image type="content" source="media/howto-hyperscale-create-users/2-add-user-fields.png" alt-text="La page Rôles":::
 
 L’utilisateur est créé sur le nœud coordinateur du groupe de serveurs et est propagé à tous les nœuds Worker. Les rôles créés via le portail Azure comportent l’attribut `LOGIN`, ce qui signifie qu’il s’agit d’utilisateurs véritables qui peuvent se connecter à la base de données.
 
@@ -66,23 +66,18 @@ Par exemple, pour autoriser `db_user` à lire `mytable`, accordez l’autorisati
 GRANT SELECT ON mytable TO db_user;
 ```
 
-Hyperscale (Citus) propage les instructions GRANT sur une table unique à travers l’ensemble du cluster, en les appliquant à tous les nœuds Worker. Toutefois, les allocations à l’échelle du système (par exemple, pour toutes les tables d’un schéma) doivent être exécutées sur chaque nœud de date.  Utilisez la fonction d’assistance `run_command_on_workers()` :
+Hyperscale (Citus) propage les instructions GRANT sur une table unique à travers l’ensemble du cluster, en les appliquant à tous les nœuds Worker. Il propage également les allocations à l’ensemble du système (par exemple, pour toutes les tables d’un schéma) :
 
 ```sql
--- applies to the coordinator node
+-- applies to the coordinator node and propagates to workers
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO db_user;
-
--- make it apply to workers as well
-SELECT run_command_on_workers(
-  'GRANT SELECT ON ALL TABLES IN SCHEMA public TO db_user;'
-);
 ```
 
 ## <a name="how-to-delete-a-user-role-or-change-their-password"></a>Comment supprimer un rôle d’utilisateur ou modifier son mot de passe
 
-Pour mettre à jour un utilisateur, accédez à la page **Rôles** pour votre groupe de serveurs Hyperscale, puis cliquez sur les points de suspension **...** à côté de l’utilisateur. L’ellipse ouvre un menu pour supprimer l’utilisateur ou réinitialiser son mot de passe.
+Pour mettre à jour un utilisateur, accédez à la page **Rôles** pour votre groupe de serveurs Hyperscale (Citus), puis cliquez sur les points de suspension **...** à côté de l’utilisateur. L’ellipse ouvre un menu pour supprimer l’utilisateur ou réinitialiser son mot de passe.
 
-   ![Modifier un rôle](media/howto-hyperscale-create-users/edit-role.png)
+   :::image type="content" source="media/howto-hyperscale-create-users/edit-role.png" alt-text="La page Rôles":::
 
 Le rôle `citus` est privilégié et ne peut pas être supprimé.
 

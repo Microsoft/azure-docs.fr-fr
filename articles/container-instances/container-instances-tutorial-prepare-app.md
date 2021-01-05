@@ -3,13 +3,13 @@ title: Tutoriel - Préparer le registre de conteneurs pour un déploiement
 description: Tutoriel Azure Container Instances (partie 1 sur 3) - Préparer une application dans une image conteneur pour le déploiement sur Azure Container Instances
 ms.topic: tutorial
 ms.date: 03/21/2018
-ms.custom: seodec18, mvc
-ms.openlocfilehash: 487dca97dc47bf214bedf38f44b2d29a71567cbb
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: seodec18, mvc, devx-track-js
+ms.openlocfilehash: 1eca34fb5da50b15f15322a3b534556bcd3bda09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74533337"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91303112"
 ---
 # <a name="tutorial-create-a-container-image-for-deployment-to-azure-container-instances"></a>Tutoriel : Créer une image conteneur à déployer sur Azure Container Instances
 

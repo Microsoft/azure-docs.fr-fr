@@ -1,31 +1,29 @@
 ---
 title: Nettoyer un cluster autonome
-description: Dans ce tutoriel, vous allez apprendre à nettoyer des ressources AWS ou Azure dans votre cluster Service Fabric autonome.
-author: dkkapur
+description: Dans ce tutoriel, découvrez comment supprimer des ressources AWS ou Azure pour votre cluster Service Fabric autonome.
 ms.topic: tutorial
 ms.date: 07/22/2019
-ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: bfb23ca5f5eb9540491fbd05efdfd6997db15e6b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0d46e9068a311594f779411c3ccee2b408febb3f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75639018"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842884"
 ---
 # <a name="tutorial-clean-up-your-standalone-cluster"></a>Didacticiel : Supprimer votre cluster autonome
 
-Les clusters autonomes Service Fabric vous permettent de choisir votre propre environnement et de créer un cluster dans le cadre de l’approche « n’importe quel SE, n’importe quel cloud » suivie par Service Fabric. Dans le cadre de cette série de tutoriels, vous créez un cluster autonome hébergé sur AWS ou Azure et vous installez une application dans celui-ci.
+Les clusters Service Fabric autonomes vous permettent de choisir votre propre environnement pour héberger Service Fabric. Dans le cadre de cette série de tutoriels, vous allez créer un cluster autonome hébergé sur AWS ou Azure, puis installer une application dans celui-ci.
 
-Ce tutoriel est la quatrième partie de la série. Cette partie du didacticiel vous montre comment supprimer les ressources AWS ou Azure que vous avez créées pour héberger votre cluster Service Fabric.
+Ce tutoriel est la quatrième partie de la série. Cette partie du tutoriel vous montre comment supprimer les ressources AWS ou Azure que vous avez créées pour héberger votre cluster Service Fabric.
 
-Dans ce quatrième volet, vous apprenez à :
+Dans cet article, vous allez apprendre à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
-> * Supprimer un cluster Service Fabric
-> * Nettoyer vos ressources AWS ou Azure
+> * Enlever un cluster Service Fabric
+> * Supprimer vos ressources AWS ou Azure
 
-## <a name="clean-up-service-fabric-cluster"></a>Supprimer un cluster Service Fabric
+## <a name="remove-a-service-fabric-cluster"></a>Enlever un cluster Service Fabric
 
 1. Établissez une connexion RDP à la machine virtuelle que vous avez utilisée pour installer Service Fabric.
 2. Ouvrez PowerShell.
@@ -36,7 +34,7 @@ Dans ce quatrième volet, vous apprenez à :
   .\RemoveServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.Unsecure.MultiMachine.json
   ```
 
-5. Entrez `Y` lorsque vous y êtes invité, si l’opération s’est déroulée correctement, vous devez obtenir le résultat suivant, avec vos propres adresses IP dans :
+5. Quand vous y êtes invité, entrez `Y`. Si l’opération s’est déroulée correctement, vous devez obtenir le résultat suivant (avec vos propres adresses IP) :
 
   ```powershell
   Best Practices Analyzer completed successfully.
@@ -49,23 +47,23 @@ Dans ce quatrième volet, vous apprenez à :
   The cluster is successfully removed.
   ```
 
-## <a name="clean-up-aws-resources"></a>Supprimer les ressources AWS
+## <a name="delete-aws-resources"></a>Supprimer des ressources AWS
 
 1. Connectez-vous à votre compte AWS.
 2. Accédez à la console EC2.
 3. Sélectionnez les trois nœuds que vous avez créés dans la première partie du didacticiel.
-4. Cliquez sur **Actions** > **État de l’instance** > **Terminer**.
+4. Sélectionnez **Actions** > **État de l’instance** > **Terminer**.
 
-## <a name="clean-up-azure-resources"></a>Nettoyage des ressources Azure
+## <a name="delete-azure-resources"></a>Supprimer les ressources Azure
 
 1. Connectez-vous au portail Azure.
 2. Accédez à la section **Machines virtuelles**.
 3. Sélectionnez les cases des trois nœuds que vous avez créés dans la première partie du didacticiel.
-4. Cliquez sur **Supprimer**.
+4. Sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans la quatrième partie de la série, vous avez appris à supprimer vos ressources créées au cours des étapes précédentes.
+Dans ce tutoriel, vous avez appris à supprimer les ressources que vous avez créées lors des étapes précédentes.
 
 > [!div class="checklist"]
 > * Nettoyage des ressources

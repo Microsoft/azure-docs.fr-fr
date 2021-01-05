@@ -8,12 +8,12 @@ services: iot-edge
 ms.topic: conceptual
 ms.date: 11/19/2019
 ms.author: kgremban
-ms.openlocfilehash: 23fbbd87230ea0a0147dc9d90c77729f4d531e98
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d07a1d1ab0d3b1f4315c09f1c403126139b34612
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76511142"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92043899"
 ---
 # <a name="connect-modbus-tcp-devices-through-an-iot-edge-device-gateway"></a>Connecter des appareils Modbus TCP via une passerelle d’appareils IoT Edge
 
@@ -35,7 +35,7 @@ Cet article suppose que vous utilisez le protocole Modbus TCP. Pour plus d’inf
 
 Si vous souhaitez tester la fonctionnalité de passerelle Modbus, Microsoft propose un module d’exemple que vous pouvez utiliser. Vous pouvez accéder au module à partir de la Place de marché Azure, de [Modbus](https://azuremarketplace.microsoft.com/marketplace/apps/microsoft_iot.edge-modbus?tab=Overview) ou avec l’URI d’image `mcr.microsoft.com/azureiotedge/modbus:1.0`.
 
-Si vous souhaitez créer votre propre module et le personnaliser en fonction de votre environnement, un projet open source [Module Modbus Azure IoT Edge](https://github.com/Azure/iot-edge-modbus) existe sur GitHub. Suivez les instructions du projet pour créer votre propre image conteneur. Pour créer une image de conteneur, reportez-vous aux rubriques [Développer des modules C# dans Visual Studio](how-to-visual-studio-develop-csharp-module.md) ou [Développer des modules dans Visual Studio Code](how-to-vs-code-develop-module.md). Ces articles fournissent des instructions sur la création de modules et sur la publication des images conteneur sur un registre.
+Si vous souhaitez créer votre propre module et le personnaliser en fonction de votre environnement, un projet open source [Module Modbus Azure IoT Edge](https://github.com/Azure/iot-edge-modbus) existe sur GitHub. Suivez les instructions du projet pour créer votre propre image conteneur. Pour créer une image de conteneur, reportez-vous aux rubriques [Développer des modules C# dans Visual Studio](./how-to-visual-studio-develop-module.md) ou [Développer des modules dans Visual Studio Code](how-to-vs-code-develop-module.md). Ces articles fournissent des instructions sur la création de modules et sur la publication des images conteneur sur un registre.
 
 ## <a name="try-the-solution"></a>Essayer la solution
 

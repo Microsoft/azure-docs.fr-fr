@@ -3,20 +3,18 @@ title: Conversion de données - LUIS
 titleSuffix: Azure Cognitive Services
 description: Découvrez comment les énoncés peuvent être modifiés avant les prédictions de Language Understanding (LUIS)
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 07/29/2019
-ms.author: diberry
-ms.openlocfilehash: b2455df87c8eae1a48cb6c8b1381dad85d304bf4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 42a9caff0433808734ee853cbad90a2088bf4e1e
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82099238"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019243"
 ---
 # <a name="convert-data-format-of-utterances"></a>Convertir le format de données des énoncés
 LUIS fournit les conversions suivantes d’un énoncé utilisateur avant prédiction
@@ -28,7 +26,7 @@ LUIS fournit les conversions suivantes d’un énoncé utilisateur avant prédic
 La reconnaissance vocale est fournie en tant qu’intégration à LUIS.
 
 ### <a name="intent-conversion-concepts"></a>Concepts de conversion d’intention
-La conversion de la reconnaissance vocale dans LUIS vous permet d’envoyer des énoncés parlés d’envoi à un point de terminaison et de recevoir une réponse de prédiction LUIS. Le processus est une intégration du service de [reconnaissance vocale](https://docs.microsoft.com/azure/cognitive-services/Speech) avec LUIS. En savoir plus sur la conversion de sortie orale en intention avec un [tutoriel](../speech-service/how-to-recognize-intents-from-speech-csharp.md).
+La conversion de la reconnaissance vocale dans LUIS vous permet d’envoyer des énoncés parlés d’envoi à un point de terminaison et de recevoir une réponse de prédiction LUIS. Le processus est une intégration du service de [reconnaissance vocale](/azure/cognitive-services/Speech) avec LUIS. En savoir plus sur la conversion de sortie orale en intention avec un [tutoriel](../speech-service/how-to-recognize-intents-from-speech-csharp.md).
 
 ### <a name="key-requirements"></a>Conditions clés
 Vous n’avez pas besoin de créer une clé d’**API Reconnaissance vocale Bing** pour cette intégration. Une clé **Language Understanding** créée dans le portail Azure fonctionne pour cette intégration. N’utilisez pas la clé de démarrage LUIS.
@@ -43,4 +41,3 @@ Voir les [limites de clés](luis-limits.md#key-limits) pour plus d’information
 
 > [!div class="nextstepaction"]
 > [Extraction des données](luis-concept-data-extraction.md)
-

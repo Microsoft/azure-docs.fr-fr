@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: user-help
 ms.workload: identity
 ms.topic: end-user-help
-ms.date: 01/04/2019
+ms.date: 08/31/2020
 ms.author: curtand
 ms.reviewer: jairoc
 ms.custom: user-help, seo-update-azuread-jan
-ms.openlocfilehash: 68d7b06aa6473a99422d8cfb51f6e3a465933a0f
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 0435b99525c34eb72d7cc5315ccb4359859cd528
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83747390"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90033045"
 ---
 # <a name="register-your-personal-device-on-your-organizations-network"></a>Inscrire votre appareil personnel sur le réseau de votre organisation
 Inscrivez votre appareil personnel (généralement un téléphone ou une tablette) sur le réseau de votre organisation. Une fois votre appareil inscrit, il peut accéder aux ressources restreintes de votre organisation.
@@ -31,9 +31,9 @@ Quand vous inscrivez votre appareil sur le réseau de votre organisation, les ac
 
 - Windows inscrit votre appareil sur le réseau de votre organisation.
 
-- Selon les choix de votre organisation, vous devrez peut-être configurer une vérification en deux étapes à travers [l’authentification multifacteur](multi-factor-authentication-end-user-first-time.md) ou des [informations de sécurité](user-help-security-info-overview.md).
+- Selon les choix de votre organisation, vous devrez peut-être configurer une vérification en deux étapes à travers [l’authentification à 2 facteurs](multi-factor-authentication-end-user-first-time.md) ou des [informations de sécurité](./security-info-setup-signin.md).
 
-- Selon les choix de votre organisation, vous pouvez être automatiquement inscrit dans une solution de gestion des appareils mobiles, comme Microsoft Intune. Pour plus d’informations sur l’inscription dans Microsoft Intune, consultez [Inscrire votre appareil sur Intune](https://docs.microsoft.com/intune-user-help/enroll-your-device-in-intune-all).
+- Selon les choix de votre organisation, vous pouvez être automatiquement inscrit dans une solution de gestion des appareils mobiles, comme Microsoft Intune. Pour plus d’informations sur l’inscription dans Microsoft Intune, consultez [Inscrire votre appareil sur Intune](/intune-user-help/enroll-your-device-in-intune-all).
 
 - Vous suivrez le processus de connexion en utilisant le nom d’utilisateur et le mot de passe de votre compte professionnel ou scolaire.
 
@@ -70,6 +70,3 @@ Vous pouvez vérifier que vous êtes inscrit en examinant vos paramètres.
 Après avoir inscrit votre appareil personnel sur le réseau de votre organisation, vous devriez pouvoir accéder à la plupart de vos ressources.
 
 - Si votre organisation vous demande de joindre votre appareil professionnel, consultez [Joindre votre appareil professionnel au réseau de votre organisation](user-help-join-device-on-network.md).
-
-
-

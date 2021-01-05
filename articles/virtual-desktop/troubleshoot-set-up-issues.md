@@ -1,27 +1,22 @@
 ---
 title: Création d’un pool d’hôtes pour un environnement Windows Virtual Desktop – Azure
 description: Découvrez comment détecter et résoudre les problèmes de locataire et de pool d’hôtes lors de la configuration d’un environnement Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
-ms.date: 01/08/2020
+ms.date: 09/14/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 65a61babe58e1cb9438262186a7f4cf37cb10a34
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 126a8e48a8db1c41299a7cb7a34f172342110667
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612551"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95023120"
 ---
 # <a name="host-pool-creation"></a>Création d’un pool d’hôtes
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/troubleshoot-set-up-issues-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service, et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/troubleshoot-set-up-issues-2019.md).
 
 Cet article décrit les problèmes pouvant survenir lors de la configuration initiale du locataire Windows Virtual Desktop et de l’infrastructure associée du pool d’hôtes de la session.
 
@@ -37,32 +32,40 @@ Pour utiliser l’image multisession Windows 10 Entreprise, accédez à la Plac
 
 ### <a name="error-create-a-free-account-appears-when-accessing-the-service"></a>Erreur : « Créer un compte gratuit » s’affiche lors de l’accès au service
 
-![Image du portail Azure affichant le message « Créer un compte gratuit »](media/create-new-account.png)
+> [!div class="mx-imgBorder"]
+> ![Image du portail Azure affichant le message « Créer un compte gratuit »](media/create-new-account.png)
 
-**Cause** : Aucun abonnement n’est actif dans le compte que vous avez utilisé pour vous connecter à Azure, ou le compte n’est pas autorisé à visualiser les abonnements. 
+**Cause** : Aucun abonnement n’est actif dans le compte que vous avez utilisé pour vous connecter à Azure, ou le compte n’est pas autorisé à visualiser les abonnements.
 
 **Correctif** : Connectez-vous à l’abonnement dans lequel vous allez déployer les machines virtuelles hôtes de session avec un compte disposant au moins d’un accès de niveau contributeur.
 
 ### <a name="error-exceeding-quota-limit"></a>Erreur : « Dépassement de la limite de quota »
 
-Si votre opération dépasse la limite de quota, vous pouvez effectuer une des actions suivantes : 
+Si votre opération dépasse la limite de quota, vous pouvez effectuer une des actions suivantes :
 
 - Créez un pool d’hôtes avec les mêmes paramètres, mais avec moins de machines virtuelles et de cœurs de machines virtuelles.
 
 - Ouvrez dans un navigateur le lien que vous voyez dans le champ statusMessage pour envoyer une demande d’augmentation du quota de votre abonnement Azure pour la référence SKU de machine virtuelle spécifiée.
 
+### <a name="error-cant-see-user-assignments-in-app-groups"></a>Erreur : Impossible de voir les affectations d’utilisateurs dans les groupes d’applications.
+
+Cause : Cette erreur se produit généralement après que vous avez déplacé l’abonnement d’un locataire Azure Active Directory (AD) vers un autre. Si vos anciennes attributions restent liées à l’ancien locataire Azure AD, le portail Azure en perd la trace.
+
+Correctif : Vous devez réaffecter les utilisateurs aux groupes d’applications.
+
 ## <a name="azure-resource-manager-template-errors"></a>Erreurs de modèle Azure Resource Manager
 
 Suivez les instructions ci-après pour détecter les problèmes d’échecs de déploiements de modèles Azure Resource Manager et DSC PowerShell.
 
-1. Passez en revue les erreurs du déploiement à l’aide de l’article [Afficher les opérations de déploiement avec Azure Resource Manager](../azure-resource-manager/resource-manager-deployment-operations.md).
-2. Si le déploiement est dépourvu d’erreurs, passez en revue les erreurs dans le journal d’activité à l’aide de l’article [Afficher les journaux d’activité pour auditer les actions sur les ressources](../azure-resource-manager/resource-group-audit.md).
-3. Une fois l’erreur identifiée, utilisez le message d’erreur et les ressources figurant dans l’article [Résolution des erreurs courantes dans des déploiements Azure avec Azure Resource Manager](../azure-resource-manager/resource-manager-common-deployment-errors.md) pour résoudre le problème.
+1. Passez en revue les erreurs du déploiement à l’aide de l’article [Afficher les opérations de déploiement avec Azure Resource Manager](../azure-resource-manager/templates/deployment-history.md).
+2. Si le déploiement est dépourvu d’erreurs, passez en revue les erreurs dans le journal d’activité à l’aide de l’article [Afficher les journaux d’activité pour auditer les actions sur les ressources](../azure-resource-manager/management/view-activity-logs.md).
+3. Une fois l’erreur identifiée, utilisez le message d’erreur et les ressources figurant dans l’article [Résolution des erreurs courantes dans des déploiements Azure avec Azure Resource Manager](../azure-resource-manager/templates/common-deployment-errors.md) pour résoudre le problème.
 4. Supprimez toutes les ressources créées lors du déploiement précédent, puis essayez de redéployer le modèle.
 
 ### <a name="error-your-deployment-failedhostnamejoindomain"></a>Erreur : Votre déploiement a échoué….\<hostname>/joindomain
 
-![Capture d’écran du message d’échec du déploiement](media/failure-joindomain.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du message d’échec du déploiement](media/failure-joindomain.png)
 
 Exemple d’erreur brute :
 
@@ -103,7 +106,8 @@ Pour corriger cela, effectuez les actions suivantes :
 
 ### <a name="error-vmextensionprovisioningerror"></a>Erreur : VMExtensionProvisioningError
 
-![Capture d’écran du message d’échec du déploiement indiquant l’échec de l’approvisionnement du terminal](media/failure-vmextensionprovisioning.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du message d’échec du déploiement indiquant l’échec du provisionnement du terminal](media/failure-vmextensionprovisioning.png)
 
 **Cause 1 :** Erreur temporaire au niveau de l’environnement Windows Virtual Desktop.
 
@@ -113,14 +117,15 @@ Pour corriger cela, effectuez les actions suivantes :
 
 ### <a name="error-the-admin-username-specified-isnt-allowed"></a>Erreur : Le nom d’utilisateur spécifié pour l’administrateur n’est pas autorisé
 
-![Capture d’écran du message d’échec du déploiement dans lequel un nom d’administrateur spécifié n’est pas autorisé](media/failure-username.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du message d’échec du déploiement dans lequel un nom d’administrateur spécifié n’est pas autorisé](media/failure-username.png)
 
 Exemple d’erreur brute :
 
 ```Error
- { …{ "provisioningOperation": 
- "Create", "provisioningState": "Failed", "timestamp": "2019-01-29T20:53:18.904917Z", "duration": "PT3.0574505S", "trackingId": 
- "1f460af8-34dd-4c03-9359-9ab249a1a005", "statusCode": "BadRequest", "statusMessage": { "error": { "code": "InvalidParameter", "message": 
+ { …{ "provisioningOperation":
+ "Create", "provisioningState": "Failed", "timestamp": "2019-01-29T20:53:18.904917Z", "duration": "PT3.0574505S", "trackingId":
+ "1f460af8-34dd-4c03-9359-9ab249a1a005", "statusCode": "BadRequest", "statusMessage": { "error": { "code": "InvalidParameter", "message":
  "The Admin Username specified is not allowed.", "target": "adminUsername" } … }
 ```
 
@@ -130,16 +135,17 @@ Exemple d’erreur brute :
 
 ### <a name="error-vm-has-reported-a-failure-when-processing-extension"></a>Erreur : La machine virtuelle a signalé un échec lors du traitement de l’extension
 
-![Capture d’écran du message d’échec du déploiement indiquant que l’opération de ressource s’est terminée avec l’échec de l’approvisionnement du terminal](media/failure-processing.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du message d’échec du déploiement indiquant que l’opération de ressource s’est terminée avec l’échec du provisionnement du terminal](media/failure-processing.png)
 
 Exemple d’erreur brute :
 
 ```Error
 { … "code": "ResourceDeploymentFailure", "message":
- "The resource operation completed with terminal provisioning state 'Failed'.", "details": [ { "code": 
- "VMExtensionProvisioningError", "message": "VM has reported a failure when processing extension 'dscextension'. 
+ "The resource operation completed with terminal provisioning state 'Failed'.", "details": [ { "code":
+ "VMExtensionProvisioningError", "message": "VM has reported a failure when processing extension 'dscextension'.
  Error message: \"DSC Configuration 'SessionHost' completed with error(s). Following are the first few:
- PowerShell DSC resource MSFT_ScriptResource failed to execute Set-TargetResource functionality with error message: 
+ PowerShell DSC resource MSFT_ScriptResource failed to execute Set-TargetResource functionality with error message:
  One or more errors occurred. The SendConfigurationApply function did not succeed.\"." } ] … }
 ```
 
@@ -149,7 +155,8 @@ Exemple d’erreur brute :
 
 ### <a name="error-deploymentfailed--powershell-dsc-configuration-firstsessionhost-completed-with-errors"></a>Erreur : DeploymentFailed - La configuration DSC PowerShell de « FirstSessionHost » s’est terminée avec des erreurs
 
-![Capture d’écran du message d’échec du déploiement indiquant que la configuration DSC PowerShell de « FirstSessionHost » s’est terminée avec des erreurs](media/failure-dsc.png)
+> [!div class="mx-imgBorder"]
+> ![Capture d’écran du message d’échec du déploiement indiquant que la configuration DSC PowerShell de « FirstSessionHost » s’est terminée avec des erreurs](media/failure-dsc.png)
 
 Exemple d’erreur brute :
 
@@ -159,7 +166,7 @@ Exemple d’erreur brute :
    "message": "At least one resource deployment operation failed. Please list
  deployment operations for details. 4 Please see https://aka.ms/arm-debug for usage details.",
  "details": [
-         { "code": "Conflict",  
+         { "code": "Conflict",
          "message": "{\r\n \"status\": \"Failed\",\r\n \"error\": {\r\n \"code\":
          \"ResourceDeploymentFailure\",\r\n \"message\": \"The resource
          operation completed with terminal provisioning state 'Failed'.\",\r\n
@@ -251,6 +258,12 @@ the VM.\\\"
 **Cause :** Cette erreur découle du fait qu’une route statique, une règle de pare-feu ou un Groupe de sécurité réseau (NSG) bloquent le téléchargement du fichier zip lié au modèle Azure Resource Manager.
 
 **Correctif :** Supprimez la route statique, la règle de pare-feu ou le NSG qui bloquent le téléchargement. Si vous le souhaitez, ouvrez le fichier json du modèle Azure Resource Manager dans un éditeur de texte, recherchez le lien d’accès au fichier zip, puis téléchargez la ressource à un emplacement autorisé.
+
+### <a name="error-cant-delete-a-session-host-from-the-host-pool-after-deleting-the-vm"></a>Erreur : Impossible de supprimer un hôte de session du pool hôte après la suppression de la machine virtuelle
+
+**Cause :** Vous devez supprimer l’hôte de session avant de supprimer la machine virtuelle.
+
+**Correctif :** Mettez l’hôte de session en mode maintenance, déconnectez tous les utilisateurs de l’hôte de session, puis supprimez l’hôte.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

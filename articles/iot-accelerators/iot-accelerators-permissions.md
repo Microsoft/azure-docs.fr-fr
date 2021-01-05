@@ -8,21 +8,21 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 12/13/2018
 ms.author: dobett
-ms.openlocfilehash: 87f6b9cef50e4b8c388be835b2aa7bed8177ac4b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5a088cb07fa74b65e497de54be8c97bd51d31c16
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61447430"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97387834"
 ---
 # <a name="use-the-azureiotsolutionscom-site-to-deploy-your-solution-accelerator"></a>Utiliser le site azureiotsolutions.com pour déployer votre accélérateur de solution
 
-Vous pouvez déployer des accélérateurs de solution Azure IoT sur votre abonnement Azure à partir du site [AzureIoTSolutions.com](https://www.azureiotsolutions.com/Accelerators). AzureIoTSolutions.com héberge à la fois les accélérateurs de solution open source Microsoft et de partenaire. Ces accélérateurs de solutions sont adaptés à [l’architecture de référence Azure IoT](https://aka.ms/iotrefarchitecture). Vous pouvez utiliser le site pour déployer rapidement un accélérateur de solution comme environnement de démonstration ou de production.
+Vous pouvez déployer des accélérateurs de solution Azure IoT sur votre abonnement Azure à partir du site [AzureIoTSolutions.com](https://www.azureiotsolutions.com/Accelerators). AzureIoTSolutions.com héberge à la fois les accélérateurs de solution open source Microsoft et de partenaire. Ces accélérateurs de solutions sont adaptés à [l’architecture de référence Azure IoT](/azure/architecture/reference-architectures/iot). Vous pouvez utiliser le site pour déployer rapidement un accélérateur de solution comme environnement de démonstration ou de production.
 
-![AzureIoTSolutions.com](media/iot-accelerators-permissions/iotsolutionscom.png)
+:::image type="content" source="media/iot-accelerators-permissions/iotsolutionscom.png" alt-text="Page d’accueil des solutions IoT":::
 
 > [!TIP]
-> Si vous avez besoin de davantage de contrôle sur le processus de déploiement, vous pouvez utiliser [l’interface CLI pour déployer un accélérateur de solution](iot-accelerators-remote-monitoring-deploy-cli.md).
+> Si vous avez besoin de davantage de contrôle sur le processus de déploiement, vous pouvez utiliser l’interface CLI pour déployer un accélérateur de solution.
 
 Vous pouvez déployer les accélérateurs de solution dans les configurations suivantes :
 
@@ -38,7 +38,7 @@ Pour pouvoir déployer un accélérateur de solution, vous devez vous connecter 
 
 Vos autorisations pour déployer des accélérateurs de solutions, gérer les utilisateurs et gérer les services Azure dépendent de votre rôle dans l’annuaire sélectionné. Les rôles Azure AD courants associés aux accélérateurs de solutions sont les suivants :
 
-* **Administrateur général** : il peut y avoir de nombreux [administrateurs généraux](../active-directory/users-groups-roles/directory-assign-admin-roles.md) pour chaque locataire Azure AD :
+* **Administrateur général** : il peut y avoir de nombreux [administrateurs généraux](../active-directory/roles/permissions-reference.md) pour chaque locataire Azure AD :
 
   * Quand vous créez un locataire Azure AD, vous en êtes l’administrateur général par défaut.
   * L’administrateur général peut déployer des accélérateurs de solution de base et standard.
@@ -64,9 +64,4 @@ Si vous êtes fabricant de matériel, cliquez sur **Devenir un partenaire** pour
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour essayer l’un des accélérateurs de solution IoT, consultez les démarrages rapides :
-
-* [Essayer une solution de supervision à distance](quickstart-remote-monitoring-deploy.md)
-* [Essayer une solution d’usine connectée](quickstart-connected-factory-deploy.md)
-* [Essayer une solution de maintenance prédictive](quickstart-predictive-maintenance-deploy.md)
-* [Essayer une solution de simulation d’appareil](quickstart-device-simulation-deploy.md)
+Pour essayer l’un des accélérateurs de solution IoT, consultez le démarrage rapide : [Essayer une solution de fabrique connectée](quickstart-connected-factory-deploy.md).

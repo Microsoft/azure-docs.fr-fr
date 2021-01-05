@@ -2,25 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Wikispaces | Microsoft Azure'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Wikispaces.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 665b95aa-f7f5-4406-9e2a-6fc299a1599c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/28/2019
 ms.author: jeedes
-ms.openlocfilehash: 7a683923ba48b1f354f90ac94d746cb92f359e7a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 877f589c19663503b9bb0b1627f1dffe0eba1a23
+ms.sourcegitcommit: ab94795f9b8443eef47abae5bc6848bb9d8d8d01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74233319"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96302740"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-wikispaces"></a>Didacticiel : Intégration d’Azure AD à Wikispaces
 
@@ -31,7 +27,7 @@ L’intégration de Wikispaces dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Wikispaces (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -110,7 +106,7 @@ Pour configurer l’authentification unique Azure AD auprès de Wikispaces, effe
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://session.wikispaces.net/<instancename>`
 
     > [!NOTE]
-    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez [l’équipe de support technique de Wikispaces](https://www.wikispaces.com/site/help). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
+    > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Pour obtenir ces valeurs, contactez [l’équipe de support technique de Wikispaces](https://wikispaces.psu.edu/). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
 5. Sur la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le fichier **XML de métadonnées de fédération** en fonction des options définies selon vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -128,7 +124,7 @@ Pour configurer l’authentification unique Azure AD auprès de Wikispaces, effe
 
 ### <a name="configure-wikispaces-single-sign-on"></a>Configurer l’authentification unique Wikispaces
 
-Pour configurer l’authentification unique côté **Wikispaces**, vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL appropriées copiées depuis le portail Azure à l’[équipe du support technique Wikispaces](https://www.wikispaces.com/site/help). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Wikispaces**, vous devez envoyer le fichier **XML des métadonnées de fédération** téléchargé et les URL appropriées copiées depuis le portail Azure à l’[équipe du support technique Wikispaces](https://wikispaces.psu.edu/). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
 
@@ -194,11 +190,11 @@ Pour pouvoir se connecter à Wikispaces, les utilisateurs Azure AD doivent être
 
 3. Cliquez sur **Invite People**.
    
-    ![Inviter des personnes](./media/wikispaces-tutorial/ic787194.png "Inviter des personnes")
+    ![Capture d’écran montrant la page Members dans laquelle vous pouvez sélectionner Invite People.](./media/wikispaces-tutorial/ic787194.png "Inviter des personnes")
 
 4. Dans la section **Invite People** , procédez comme suit :
    
-    ![Inviter des personnes](./media/wikispaces-tutorial/ic787208.png "Inviter des personnes")
+    ![Capture d’écran montrant la section Invite People où vous pouvez entrer des données utilisateur.](./media/wikispaces-tutorial/ic787208.png "Inviter des personnes")
    
     a. Indiquez les **noms d’utilisateurs ou l’adresse e-mail** du compte Azure AD valide que vous souhaitez provisionner dans les zones de texte correspondantes.
    
@@ -214,13 +210,12 @@ Pour pouvoir se connecter à Wikispaces, les utilisateurs Azure AD doivent être
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Wikispaces dans le volet d’accès doit vous connecter automatiquement à l’application Wikispaces pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Wikispaces dans le volet d’accès doit vous connecter automatiquement à l’application Wikispaces pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

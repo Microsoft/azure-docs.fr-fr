@@ -5,15 +5,16 @@ description: Activer Azure Peering Service sur un Peering direct en utilisant Po
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/27/2019
 ms.author: prmitiki
-ms.openlocfilehash: c029b822d00ce545e3623a6212421a55b2d1971f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 98341fbbbcafb6aee938870c22050c6edec352ac
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81686971"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079045"
 ---
 # <a name="enable-azure-peering-service-on-a-direct-peering-by-using-powershell"></a>Activer Azure Peering Service sur un Peering direct en utilisant PowerShell
 

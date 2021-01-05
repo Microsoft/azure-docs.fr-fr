@@ -3,17 +3,17 @@ title: Documentation Azure Database for MariaDB
 summary: Azure Database for MariaDB est un service de base de données relationnelle fondé sur le moteur de serveur open source MariaDB.  C’est un produit de base de données en tant que service complètement managé qui peut gérer des charges de travail critiques avec des performances prévisibles et une scalabilité dynamique. Développez des applications avec Azure Database for MariaDB en tirant parti des outils open source et de la plateforme de votre choix. Découvrez comment utiliser Azure Database pour MariaDB avec nos guides de démarrage rapide, nos didacticiels et nos exemples.
 metadata:
   description: Azure Database for MariaDB est un service de base de données relationnelle du cloud Microsoft qui est conçu pour les développeurs et basé sur le moteur de base de données open source MariaDB.
-  author: ajlam
-  ms.author: andrela
+  author: savjani
+  ms.author: pariks
   ms.date: 09/05/2019
   ms.service: mariadb
   ms.topic: landing-page
-  ms.openlocfilehash: bd4bb93a43bd493069ed03f6197595fe782d605a
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: a94e88dc1f7dca73f20cfee3b8cbea8cfad011af
+  ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "70735371"
+  ms.lasthandoff: 12/15/2020
+  ms.locfileid: "97516573"
 landingContent:
 - title: À propos d’Azure Database for MariaDB
   linkLists:
@@ -110,12 +110,12 @@ landingContent:
   - linkListType: get-started
     links:
     - text: Scripts Azure CLI pour les tâches courantes
-      url: /azure/mariadb/sample-scripts-azure-cli/
+      url: ./sample-scripts-azure-cli.md
   - linkListType: reference
     links:
     - text: Informations de référence sur Azure CLI pour les développeurs
-      url: /rest/api/mariadb/
+      url: /cli/azure/mariadb/
     - text: Informations de référence sur l’API REST pour les développeurs
-      url: /cli/azure/mariadb
+      url: /rest/api/mariadb/
     - text: Modèles Microsoft Azure Resource Manager
       url: /azure/templates/microsoft.dbformariadb/allversions

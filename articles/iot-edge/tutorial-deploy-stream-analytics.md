@@ -3,20 +3,20 @@ title: Tutoriel - Stream Analytics en périphérie à l’aide d’Azure IoT Edg
 description: Dans ce tutoriel, vous déployez Azure Stream Analytics en tant que module dans un appareil IoT Edge
 author: kgremban
 ms.author: kgremban
-ms.date: 11/11/2019
+ms.date: 07/29/2020
 ms.topic: tutorial
 ms.service: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: d8c3bde0f32c1df6c98f6a71f6ab830c21256903
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 61779527d4b855f4327ad4b77a1e22207a94b8c0
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76906289"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92048370"
 ---
 # <a name="tutorial-deploy-azure-stream-analytics-as-an-iot-edge-module"></a>Tutoriel : Déployer Azure Stream Analytics en tant que module IoT Edge
 
-De nombreuses solutions IoT utilisent les services d’analytique pour obtenir des insights sur les données envoyées par les appareils IoT au fur et à mesure de leur arrivée dans le cloud. Avec Azure IoT Edge, vous pouvez utiliser cette logique [Azure Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/) et la transposer à l’appareil lui-même. Lors du traitement des flux de données de télémétrie en périphérie, vous pouvez réduire la quantité de données chargées et réduire le temps nécessaire pour réagir aux informations actionnables.
+De nombreuses solutions IoT utilisent les services d’analytique pour obtenir des insights sur les données envoyées par les appareils IoT au fur et à mesure de leur arrivée dans le cloud. Avec Azure IoT Edge, vous pouvez utiliser cette logique [Azure Stream Analytics](../stream-analytics/index.yml) et la transposer à l’appareil lui-même. Lors du traitement des flux de données de télémétrie en périphérie, vous pouvez réduire la quantité de données chargées et réduire le temps nécessaire pour réagir aux informations actionnables.
 
 Azure IoT Edge et Azure Stream Analytics sont intégrés pour simplifier le développement de vos charges de travail. Vous pouvez créer un travail Azure Stream Analytics dans le portail Azure, puis le déployer en tant que module IoT Edge sans code supplémentaire.  
 
@@ -134,7 +134,7 @@ Lorsque votre travail Stream Analytics est créé dans le portail Azure, vous po
     HAVING Avg(machine.temperature) > 70
     ```
 
-1. Sélectionnez **Enregistrer**.
+1. Sélectionnez **Enregistrer la requête**.
 
 ### <a name="configure-iot-edge-settings"></a>Configurer les paramètres IoT Edge
 
@@ -169,7 +169,7 @@ Pour ce didacticiel, vous déployez deux modules. Le premier est **SimulatedTemp
    1. Cliquez sur **Ajouter** et sélectionnez **Module IoT Edge**.
    1. Pour le nom, tapez **SimulatedTemperatureSensor**.
    1. Pour l’URI de l’image, entrez **mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0**.
-   1. Laissez les autres paramètres inchangés et sélectionnez **Enregistrer**.
+   1. Laissez les autres paramètres inchangés et sélectionnez **Ajouter**.
 
 1. Ajoutez votre travail Azure Stream Analytics Edge en suivant les étapes :
 
@@ -187,9 +187,9 @@ Pour ce didacticiel, vous déployez deux modules. Le premier est **SimulatedTemp
 
    Par défaut, le module Stream Analytics prend le nom de la tâche sur laquelle il est basé. Vous pouvez modifier le nom du module dans cette page si vous le souhaitez, mais cela n’est pas nécessaire.
 
-1. Sélectionnez **Annuler** ou **Enregistrer**.
+1. Sélectionnez **Mettre à jour** ou **Annuler**.
 
-1. Notez le nom de votre module Stream Analytics car vous en aurez besoin à l’étape suivante, puis sélectionnez **Suivant : Routes** pour continuer.
+1. Notez le nom de votre module Stream Analytics. Vous en aurez besoin à l’étape suivante. Ensuite, sélectionnez **Suivant : Routes** pour continuer.
 
 1. Sous l’onglet **Routes**, vous définissez la manière dont les messages sont transmis entre les modules et le hub IoT. Les messages sont construits à l’aide de paires nom/valeur. Remplacez le nom et les valeurs `route` et `upstream` par défaut par les paires indiquées dans le tableau suivant, les paires nom/valeur suivantes, en remplaçant les instances de _{moduleName}_ par le nom de votre module Azure Stream Analytics.
 

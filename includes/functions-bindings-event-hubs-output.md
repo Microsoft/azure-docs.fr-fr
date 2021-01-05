@@ -4,12 +4,12 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 02/21/2020
 ms.author: cshoe
-ms.openlocfilehash: 78836ca4e51875be4237267b3bb9256cc4541fe2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 11ad3bdcaa40c479c9358fd623edf0e6fdafa0d6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81791629"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002071"
 ---
 Utilisez la liaison de sortie Event Hubs pour écrire des événements dans un flux d’événements du hub d’événements. Vous devez disposer de l’autorisation d’envoi à un hub d’événements pour y écrire les événements.
 
@@ -235,7 +235,7 @@ Les attributs ne sont pas pris en charge par Python.
 
 # <a name="java"></a>[Java](#tab/java)
 
-Dans la [bibliothèque du runtime des fonctions Java](https://docs.microsoft.com/java/api/overview/azure/functions/runtime), utilisez l’annotation [EventHubOutput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.eventhuboutput) sur les paramètres dont la valeur serait publiée à l’attention d’Event Hub. Le type de paramètre doit être `OutputBinding<T>`, où `T` désigne un POJO ou n’importe quel type Java natif.
+Dans la [bibliothèque du runtime des fonctions Java](/java/api/overview/azure/functions/runtime), utilisez l’annotation [EventHubOutput](/java/api/com.microsoft.azure.functions.annotation.eventhuboutput) sur les paramètres dont la valeur serait publiée à l’attention d’Event Hub. Le type de paramètre doit être `OutputBinding<T>`, où `T` désigne un POJO ou n’importe quel type Java natif.
 
 ---
 
@@ -274,15 +274,15 @@ Il existe deux options pour produire en sortie un message Event Hub à partir d�
 
 - **Valeur de retour** : Définissez la propriété `name` dans *function.json* sur `$return`. Avec cette configuration, la valeur renvoyée de la fonction est conservée sous la forme d’un message Event Hub.
 
-- **Impératif** : Passez une valeur à la méthode [set](https://docs.microsoft.com/python/api/azure-functions/azure.functions.out?view=azure-python#set-val--t-----none) du paramètre déclaré en tant que type [Out](https://docs.microsoft.com/python/api/azure-functions/azure.functions.out?view=azure-python). La valeur transmise à `set` est conservée en tant que message d’Event Hub.
+- **Impératif** : Passez une valeur à la méthode [set](/python/api/azure-functions/azure.functions.out?view=azure-python#set-val--t-----none) du paramètre déclaré en tant que type [Out](/python/api/azure-functions/azure.functions.out?view=azure-python). La valeur transmise à `set` est conservée en tant que message d’Event Hub.
 
 # <a name="java"></a>[Java](#tab/java)
 
-Il existe deux options pour produire en sortie un message Event hub à partir d’une fonction en utilisant l’annotation [EventHubOutput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.eventhuboutput) :
+Il existe deux options pour produire en sortie un message Event hub à partir d’une fonction en utilisant l’annotation [EventHubOutput](/java/api/com.microsoft.azure.functions.annotation.eventhuboutput) :
 
 - **Valeur de retour** : En appliquant l’annotation à la fonction elle-même, la valeur de retour de la fonction est conservée sous la forme d’un message Event Hub.
 
-- **Impératif** : Pour définir explicitement la valeur du message, appliquez l’annotation à un paramètre spécifique du type [`OutputBinding<T>`](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.OutputBinding), où `T` est un POJO ou n’importe quel type Java natif. Avec cette configuration, le passage d’une valeur à la méthode `setValue` rend la valeur persistante en tant que message Event Hub.
+- **Impératif** : Pour définir explicitement la valeur du message, appliquez l’annotation à un paramètre spécifique du type [`OutputBinding<T>`](/java/api/com.microsoft.azure.functions.OutputBinding), où `T` est un POJO ou n’importe quel type Java natif. Avec cette configuration, le passage d’une valeur à la méthode `setValue` rend la valeur persistante en tant que message Event Hub.
 
 ---
 
@@ -290,4 +290,4 @@ Il existe deux options pour produire en sortie un message Event hub à partir d�
 
 | Liaison | Informations de référence |
 |---|---|
-| Event Hub | [Guide des opérations](https://docs.microsoft.com/rest/api/eventhub/publisher-policy-operations) |
+| Event Hub | [Guide des opérations](/rest/api/eventhub/publisher-policy-operations) |

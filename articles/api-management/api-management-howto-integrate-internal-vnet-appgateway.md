@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: sasolank
-ms.openlocfilehash: 733f4b74ca7643476586189b36f4e1d3e446968b
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 3db1c8bfc3a11151342589af0873d88e3d90c6a1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811178"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91825627"
 ---
 # <a name="integrate-api-management-in-an-internal-vnet-with-application-gateway"></a>Intégrer le service Gestion des API dans un réseau virtuel interne avec Application Gateway
 
@@ -88,6 +88,11 @@ Dans ce guide, nous allons également exposer le **portail des développeurs** �
 
 > [!WARNING]
 > Pour empêcher le pare-feu d’applications web Application Gateway de rompre le téléchargement de la spécification OpenAPI dans le portail des développeurs, vous devez désactiver la règle de pare-feu `942200 - "Detects MySQL comment-/space-obfuscated injections and backtick termination"`.
+> 
+> Les règles WAF d’Application Gateway, qui peuvent nuire aux fonctionnalités du portail, notamment :
+> 
+> - `920300`, `920330`, `931130`, `942100`, `942110`, `942180`, `942200`, `942260`, `942340`, `942370` pour le mode administratif
+> - `942200`, `942260`, `942370`, `942430`, `942440` pour le portail publié
 
 ## <a name="create-a-resource-group-for-resource-manager"></a>Créer un groupe de ressources pour Resource Manager
 
@@ -288,7 +293,7 @@ Créez des sondes personnalisées pour le point de terminaison de domaine de pro
 
 ```powershell
 $apimprobe = New-AzApplicationGatewayProbeConfig -Name "apimproxyprobe" -Protocol "Https" -HostName $gatewayHostname -Path "/status-0123456789abcdef" -Interval 30 -Timeout 120 -UnhealthyThreshold 8
-$apimPortalProbe = New-AzApplicationGatewayProbeConfig -Name "apimportalprobe" -Protocol "Https" -HostName $portalHostname -Path "/signin" -Interval 60 -Timeout 300 -UnhealthyThreshold 8
+$apimPortalProbe = New-AzApplicationGatewayProbeConfig -Name "apimportalprobe" -Protocol "Https" -HostName $portalHostname -Path "/internal-status-0123456789abcdef" -Interval 60 -Timeout 300 -UnhealthyThreshold 8
 ```
 
 ### <a name="step-7"></a>Étape 7
@@ -330,7 +335,7 @@ $rule02 = New-AzApplicationGatewayRequestRoutingRule -Name "rule2" -RuleType Bas
 
 ### <a name="step-11"></a>Étape 11
 
-Configurez le nombre d’instances et la taille de la passerelle Application Gateway. Dans cet exemple, nous utilisons la [référence (SKU) WAF](../application-gateway/application-gateway-webapplicationfirewall-overview.md) pour renforcer la sécurité de la ressource du service Gestion des API.
+Configurez le nombre d’instances et la taille de la passerelle Application Gateway. Dans cet exemple, nous utilisons la [référence (SKU) WAF](../web-application-firewall/ag/ag-overview.md) pour renforcer la sécurité de la ressource du service Gestion des API.
 
 ```powershell
 $sku = New-AzApplicationGatewaySku -Name "WAF_Medium" -Tier "WAF" -Capacity 2
@@ -368,9 +373,9 @@ Le service Gestion des API Azure configuré dans un réseau virtuel fournit une 
 
 ## <a name="next-steps"></a><a name="next-steps"> </a>Étapes suivantes
 * En savoir plus sur Azure Application Gateway
-  * [Vue d’ensemble d’Application Gateway](../application-gateway/application-gateway-introduction.md)
-  * [Pare-feu d’applications web sur Application Gateway](../application-gateway/application-gateway-webapplicationfirewall-overview.md)
-  * [Application Gateway à l’aide du routage basé sur le chemin](../application-gateway/application-gateway-create-url-route-arm-ps.md)
+  * [Vue d’ensemble d’Application Gateway](../application-gateway/overview.md)
+  * [Pare-feu d’applications web sur Application Gateway](../web-application-firewall/ag/ag-overview.md)
+  * [Application Gateway à l’aide du routage basé sur le chemin](../application-gateway/tutorial-url-route-powershell.md)
 * En savoir plus sur le service Gestion des API et les réseaux virtuels
   * [Utilisation de Gestion des API disponible uniquement dans le réseau virtuel](api-management-using-with-internal-vnet.md)
   * [Avec la gestion des API dans le réseau virtuel](api-management-using-with-vnet.md)

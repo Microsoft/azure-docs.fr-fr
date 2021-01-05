@@ -1,19 +1,20 @@
 ---
 title: Exemple de script Azure CLI - Créer un magasin Azure App Configuration
 titleSuffix: Azure App Configuration
-description: Utiliser un script Azure CLI pour créer un magasin Azure App Configuration
+description: Créez un magasin Azure App Configuration à l’aide d’un exemple de script Azure CLI. Consultez les liens des articles de référence pour connaître les commandes utilisées dans le script.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: sample
 ms.date: 01/24/2020
-ms.author: lcozzens
-ms.openlocfilehash: a4d15b8ea9b6881add23875e201d7c6be39bb24b
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.author: alkemper
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 4554ca64dccaa69e3a6fb63e5c28a6bcbb1a32e4
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83774198"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930838"
 ---
 # <a name="create-an-azure-app-configuration-store"></a>Créer un magasin Azure App Configuration
 
@@ -21,9 +22,9 @@ Cet exemple de script crée une instance d’Azure App Configuration dans un nou
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

@@ -16,12 +16,12 @@ ms.date: 07/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c2886b842aab81732beec0fdd7957aab8e2b4f5e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5e55526e0a63a0c603e2b62ccb3ac0efed911cff
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76548864"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996625"
 ---
 # <a name="azure-ad-connect-sync-understanding-the-default-configuration"></a>Synchronisation d’Azure AD Connect : Présentation de la configuration par défaut
 Cet article présente les règles de configuration out-of-box. Il décrit les règles et l’impact que celles-ci ont sur la configuration. Il vous guide également tout au long de la configuration par défaut de la synchronisation Azure AD Connect. L’objectif est que le lecteur comprenne comment fonctionne le modèle de configuration, nommé approvisionnement déclaratif, dans un exemple réel. Cet article suppose que vous avez déjà installé et configuré la synchronisation Azure AD Connect à l’aide de l’Assistant d’installation.
@@ -160,7 +160,7 @@ Vous pouvez également voir que cette règle de synchronisation est utilisée po
 #### <a name="scoping-filter"></a>Filtre d’étendue
 La section Filtre d’étendue sert à configurer à quel moment une règle de synchronisation doit s’appliquer. Comme le nom de la règle de synchronisation que vous examinez indique qu’elle ne doit être appliquée qu’aux utilisateurs activés, l’étendue est configurée de sorte que l’attribut AD **userAccountControl** ne doive pas avoir le bit 2 défini. Lorsque le moteur de synchronisation détecte un utilisateur dans Active Directory, il applique la synchronisation lorsque **userAccountControl** est défini sur la valeur décimale 512 (utilisateur normal activé). Il n’applique pas la règle lorsque l’utilisateur a **userAccountControl** défini sur 514 (utilisateur normal désactivé).
 
-![Onglet Étendue dans l’Éditeur de règles de synchronisation](./media/concept-azure-ad-connect-sync-default-configuration/syncrulescopingfilter.png)
+![Capture d’écran montrant la section « Filtre d’étendue » de la fenêtre « Modifier une règle de synchronisation entrante ».](./media/concept-azure-ad-connect-sync-default-configuration/syncrulescopingfilter.png)
 
 Le filtre d’étendue possède des groupes et des clauses qui peuvent être imbriqués. Toutes les clauses à l’intérieur d’un groupe doivent être satisfaites pour qu’une règle de synchronisation s’applique. Quand plusieurs groupes sont définis, au moins l’un d’entre eux doit être satisfait pour que la règle s’applique. C’est-à-dire qu’une opération OR logique est évaluée entre les groupes et qu’une opération AND logique est évaluée à l’intérieur d’un groupe. On trouve un exemple de cette configuration dans la règle de synchronisation sortante **Sortant vers AAD – Group Join**, indiquée ci-dessous. Il existe plusieurs groupes de filtres de synchronisation, par exemple, un pour les groupes de sécurité (`securityEnabled EQUAL True`) et un autre pour les groupes de distribution (`securityEnabled EQUAL False`).
 
@@ -223,7 +223,7 @@ Nous en savons maintenant assez sur les règles de synchronisation pour comprend
 | Nom | Commentaire |
 |:--- |:--- |
 | Entrant depuis AD – User Join |Règle pour joindre les objets de l’espace de connecteur avec métaverse. |
-| Entrant depuis AD – Utilisateur AccountEnabled |Attributs requis pour la connexion à Azure AD et Office 365. Nous voulons ces attributs à partir du compte activé. |
+| Entrant depuis AD – Utilisateur AccountEnabled |Attributs requis pour la connexion à Azure AD et Microsoft 365. Nous voulons ces attributs à partir du compte activé. |
 | Entrant depuis AD – Utilisateur Common à partir d’Exchange |Attributs trouvés dans la liste d’adresses globale. Nous supposons que la qualité des données est meilleure dans la forêt où nous avons trouvé la boîte aux lettres de l’utilisateur. |
 | Entrant depuis AD – Utilisateur Common |Attributs trouvés dans la liste d’adresses globale. Dans le cas où nous ne trouvons pas de boîte aux lettres, tout autre objet joint peut contribuer à la valeur d’attribut. |
 | Entrant depuis AD – Utilisateur Exchange |Existe seulement si Exchange a été détecté. Transfère tous les attributs Exchange d’infrastructure. |

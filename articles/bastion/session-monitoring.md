@@ -4,15 +4,15 @@ description: Cet article explique comment sélectionner une session en cours et 
 services: bastion
 author: charwen
 ms.service: bastion
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2020
 ms.author: charwen
-ms.openlocfilehash: 617ec30fc9b97e89b6ccd0de6255d65da94d7b63
-ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+ms.openlocfilehash: beb4f8fc5b9e22bc3e2bdd4732c8321dfcd70780
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83780447"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90980720"
 ---
 # <a name="session-monitoring-and-management-for-azure-bastion"></a>Surveillance et gestion de session Azure Bastion
 
@@ -22,13 +22,13 @@ Une fois que le service Bastion approvisionné et déployé dans votre réseau v
 
 1. Dans le [portail Azure](https://portal.azure.com), accédez à votre ressource Azure Bastion, puis sélectionnez **Sessions** dans la page Azure Bastion.
 
-   ![sessions](./media/session-monitoring/sessions.png)
+   ![Capture d’écran montrant le menu Paramètres du Portail Azure avec les sessions sélectionnées.](./media/session-monitoring/sessions.png)
 2. Dans la page **Sessions**, vous pouvez voir les sessions à distance en cours sur le côté droit.
 
    ![afficher une session](./media/session-monitoring/view-session.png)
 3. Sélectionnez **Actualiser** pour afficher la liste à jour des sessions à distance. Lorsque vous sélectionnez Actualiser, Azure bastion récupère les informations de surveillance les plus récentes et les actualise dans le portail.
 
-   ![actualiser](./media/session-monitoring/refresh.png)
+   ![Capture d’écran montrant une session qui utilise Azure Bastion avec l’option d’actualisation mise en surbrillance.](./media/session-monitoring/refresh.png)
 
 
 ## <a name="delete-or-force-disconnect-an-ongoing-remote-session"></a><a name="view"></a>Forcer la déconnexion d’une session à distance en cours ou la supprimer
@@ -37,16 +37,16 @@ Vous pouvez sélectionner un ensemble de sessions et forcer leur déconnexion. L
 
 1. Accédez à votre ressource Azure Bastion et sélectionnez **Sessions** dans la page Azure Bastion.
 
-   ![naviguer](./media/session-monitoring/navigate.png)
+   ![Capture d’écran montrant le Portail Azure avec les Sessions sélectionnées sous Paramètres.](./media/session-monitoring/navigate.png)
 2. Une fois l’option Sessions sélectionnée, la liste des sessions à distance s’affiche.
 
    ![afficher la liste des sessions](./media/session-monitoring/list.png)
 3. Sélectionnez une session à distance et les trois ellipses situées à droite de la ligne de la session, puis choisissez **Supprimer**.
 
-   ![supprimer](./media/session-monitoring/delete.png)
+   ![Capture d’écran montrant le Portail Azure présentant une session avec l’icône Supprimer sélectionnée.](./media/session-monitoring/delete.png)
 4. Lorsque vous sélectionnez Supprimer, la session à distance est déconnectée et l’utilisateur voit s’afficher un message « Vous avez été déconnecté » dans la session à distance.
 
-   ![déconnecter](./media/session-monitoring/disconnect.png)
+   ![Capture d’écran montrant un message indiquant que vous avez été déconnecté.](./media/session-monitoring/disconnect.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 01/31/2020
-ms.openlocfilehash: df96ceb47bf33b734f2127bade50af18713a97a0
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: be192a5807c40ea65ea6533ec6244183e5a4b644
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82581366"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88958794"
 ---
 # <a name="azure-monitor-for-vms-generally-available-ga-frequently-asked-questions"></a>Questions fréquentes sur Azure Monitor pour machines virtuelles (version en disponibilité générale)
 Ces Questions fréquentes (FAQ) sur la disponibilité générale couvrent les modifications apportées au 4e trimestre 2019 et au 1er trimestre 2020, lors de la préparation pour la disponibilité générale.
@@ -39,7 +39,7 @@ Lorsqu’un espace de travail Log Analytics est mis à niveau vers la dernière 
 Utilisez la commande suivante pour mettre à niveau un espace de travail à l’aide de PowerShell :
 
 ```PowerShell
-Set-AzureRmOperationalInsightsIntelligencePack -ResourceGroupName <resource-group-name> -WorkspaceName <workspace-name> -IntelligencePackName "VMInsights" -Enabled $True
+Set-AzOperationalInsightsIntelligencePack -ResourceGroupName <resource-group-name> -WorkspaceName <workspace-name> -IntelligencePackName "VMInsights" -Enabled $True
 ```
 
 ## <a name="what-should-i-do-about-the-performance-counters-in-my-workspace-if-i-install-the-vminsights-solution"></a>Que faire avec les compteurs de performances de mon espace de travail si j’installe la solution VMInsights ?

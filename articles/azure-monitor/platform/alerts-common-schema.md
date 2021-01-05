@@ -4,12 +4,12 @@ description: Comprendre le schéma d’alerte commun, pourquoi vous devez l’ut
 ms.topic: conceptual
 ms.subservice: alerts
 ms.date: 03/14/2019
-ms.openlocfilehash: 1445e8cf38b2694146fc8749ba5e77f2297de969
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aa619976c8fa03b925d66e884ad03fc4e385693e
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226413"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565600"
 ---
 # <a name="common-alert-schema"></a>Schéma d’alerte courant
 
@@ -39,7 +39,7 @@ Le schéma d’alerte commun se manifeste principalement dans vos notifications 
 
 En outre, le nouveau schéma enrichira l’expérience de consommation des alertes dans le portail Azure et Azure mobile app dans un futur proche. 
 
-[Découvrez-en plus sur les définitions de schéma pour les webhooks/applications logiques/fonctions Azure/runbooks automation.](https://aka.ms/commonAlertSchemaDefinitions)
+[Découvrez-en plus sur les définitions de schéma pour les webhooks/applications logiques/fonctions Azure/runbooks automation.](./alerts-common-schema-definitions.md)
 
 > [!NOTE]
 > Les actions suivantes ne prennent pas en charge le schéma d’alerte commun : connecteur ITSM.
@@ -52,8 +52,8 @@ Vous pouvez adhérer ou ne pas adhérer au schéma d’alerte commun par le biai
 > 1. Les types d’alerte suivants prennent en charge le schéma commun par défaut (aucune adhésion requise) :
 >     * Alertes de détection intelligente
 > 1. Les types d’alerte suivants ne prennent pas en charge le schéma commun :
->     * Alertes générées par [Azure Monitor pour machines virtuelles](https://docs.microsoft.com/azure/azure-monitor/insights/vminsights-overview)
->     * Alertes générées par [Azure Cost Management](https://docs.microsoft.com/azure/billing/billing-cost-management-budget-scenario)
+>     * Alertes générées par [Azure Monitor pour machines virtuelles](../insights/vminsights-overview.md)
+>     * Alertes générées par [Azure Cost Management](../../cost-management-billing/manage/cost-management-budget-scenario.md)
 
 ### <a name="through-the-azure-portal"></a>À l’aide du portail Azure
 
@@ -64,9 +64,9 @@ Vous pouvez adhérer ou ne pas adhérer au schéma d’alerte commun par le biai
 
 ### <a name="through-the-action-groups-rest-api"></a>Par le biais de l’API REST Groupes d’actions
 
-Vous pouvez également utiliser l’[API Groupes d’actions](https://docs.microsoft.com/rest/api/monitor/actiongroups) pour adhérer au schéma d’alerte commun. Tout en effectuant l’appel d’API REST [Créer ou mettre à jour](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate), vous pouvez définir l’indicateur « useCommonAlertSchema » sur « true » (adhérer) ou « false » (ne pas adhérer) pour les actions suivantes : e-mail/webhook/application logique/fonction Azure/runbook automation.
+Vous pouvez également utiliser l’[API Groupes d’actions](/rest/api/monitor/actiongroups) pour adhérer au schéma d’alerte commun. Tout en effectuant l’appel d’API REST [Créer ou mettre à jour](/rest/api/monitor/actiongroups/createorupdate), vous pouvez définir l’indicateur « useCommonAlertSchema » sur « true » (adhérer) ou « false » (ne pas adhérer) pour les actions suivantes : e-mail/webhook/application logique/fonction Azure/runbook automation.
 
-Par exemple, le corps de demande suivant apporté à l’API REST [Créer ou mettre à jour](https://docs.microsoft.com/rest/api/monitor/actiongroups/createorupdate) effectue les opérations suivantes :
+Par exemple, le corps de demande suivant apporté à l’API REST [Créer ou mettre à jour](/rest/api/monitor/actiongroups/createorupdate) effectue les opérations suivantes :
 
 * Activer le schéma d’alerte commun pour l’action d’e-mail « John Doe's email »
 * Désactiver le schéma d’alerte commun pour l’action d’e-mail « Jane Smith's email »
@@ -120,8 +120,5 @@ Par exemple, le corps de demande suivant apporté à l’API REST [Créer ou met
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Définitions de schéma d’alerte commun pour les webhooks/applications logiques/fonctions Azure/runbooks automation.](https://aka.ms/commonAlertSchemaDefinitions)
-- [Découvrez comment créer une application logique qui s’appuie sur le schéma d’alerte courant pour gérer toutes vos alertes.](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-common-schema-integrations) 
-
-
-
+- [Définitions de schéma d’alerte commun pour les webhooks/applications logiques/fonctions Azure/runbooks automation.](./alerts-common-schema-definitions.md)
+- [Découvrez comment créer une application logique qui s’appuie sur le schéma d’alerte courant pour gérer toutes vos alertes.](./alerts-common-schema-integrations.md)

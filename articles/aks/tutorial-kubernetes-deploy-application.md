@@ -3,14 +3,14 @@ title: Didacticiel Kubernetes sur Azure - Déployer une application
 description: Dans le cadre de ce didacticiel Azure Kubernetes Service (AKS), vous allez déployer une application multiconteneur dans votre cluster à l’aide d’une image personnalisée stockée dans Azure Container Registry.
 services: container-service
 ms.topic: tutorial
-ms.date: 12/19/2018
+ms.date: 09/30/2020
 ms.custom: mvc
-ms.openlocfilehash: 3b614fcb6692f35884af2fc4e19210267ab8ab04
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 8114aa0b6c2483d543376727a44d14041ed02b37
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77593272"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91576487"
 ---
 # <a name="tutorial-run-applications-in-azure-kubernetes-service-aks"></a>Didacticiel : Exécuter des applications dans Azure Kubernetes Service (ACS)
 
@@ -54,7 +54,7 @@ Remplacez *microsoft* par le nom de votre serveur de connexion ACR. Le nom de l�
 ```yaml
 containers:
 - name: azure-vote-front
-  image: microsoft/azure-vote-front:v1
+  image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
 ```
 
 Fournissez le nom de votre propre serveur de connexion ACR afin que votre fichier manifeste ressemble à ceci :

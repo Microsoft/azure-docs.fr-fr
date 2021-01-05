@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Trend Micro Web Security (TMWS)'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Trend Micro Web Security (TMWS).
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 827285d3-8e65-43cd-8453-baeda32ef174
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/21/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9d09af492439beb931b4ab1cd08ccb9e1d82fc3f
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: b76c41787d7a35fb3024fa18c0122bc966243bbc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583148"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008393"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-trend-micro-web-security-tmws"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Trend Micro Web Security (TMWS)
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Trend Micro Web Securi
 * Permettre aux utilisateurs de se connecter automatiquement à TMWS avec leur compte Azure AD.
 * gérer vos comptes à un emplacement central : le portail Azure.
 
-Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on).
+Pour en savoir plus sur l’intégration d’applications SaaS à Azure AD, consultez l’article [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +40,7 @@ Pour commencer, vous avez besoin des éléments suivants :
 Dans ce tutoriel, vous allez configurer et tester l’authentification SSO Azure AD dans un environnement de test.
 
 * TMWS prend en charge l’authentification unique lancée par le fournisseur de services.
-* Après avoir configuré TMWS, vous pouvez appliquer le contrôle de session qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. Pour savoir comment appliquer un contrôle de session avec Microsoft Cloud App Security, consultez [Déployer le contrôle d’application par accès conditionnel pour les applications](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré TMWS, vous pouvez appliquer le contrôle de session qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. Pour savoir comment appliquer un contrôle de session avec Microsoft Cloud App Security, consultez [Déployer le contrôle d’application par accès conditionnel pour les applications](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="add-tmws-from-the-gallery"></a>Ajouter TMWS à partir de la galerie
 
@@ -120,7 +116,7 @@ Dans cette section, vous allez créer un utilisateur de test appelé B.Simon dan
 1. Sélectionnez **Nouvel utilisateur** dans la partie supérieure de l’écran.
 1. Dans les propriétés **Utilisateur**, effectuez les étapes suivantes :
    1. Dans la zone **Nom**, entrez `B.Simon`.  
-   1. Dans la zone **Nom d’utilisateur**, entrez ***nom_utilisateur *@* domaine_entreprise *.* extension***. Par exemple : `B.Simon@contoso.com`.
+   1. Dans la zone **Nom d’utilisateur**, entrez **_nom_utilisateur_@* domaine_entreprise *.* extension***. Par exemple : `B.Simon@contoso.com`.
    1. Sélectionnez **Afficher le mot de passe**, puis notez la valeur affichée dans la zone **Mot de passe**.
    1. Sélectionnez **Create** (Créer).
 
@@ -234,15 +230,14 @@ Après avoir configuré le service Azure AD et spécifié Azure AD comme méthod
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Trend Micro Web Security avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)
 
-- [Guide pratique pour protéger Trend Micro Web Security avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
-
+- [Guide pratique pour protéger Trend Micro Web Security avec une visibilité et des contrôles avancés](/cloud-app-security/proxy-intro-aad)

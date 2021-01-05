@@ -10,12 +10,12 @@ ms.custom: develop apps
 ms.topic: include
 ms.date: 07/13/2018
 ms.author: ninarn
-ms.openlocfilehash: 6ead2e0ea326b5c3f2e76e7aa9cc4ab3c50d4154
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b06004143d4a1ec5a2808e21b1f78833e410c195
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177143"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95554175"
 ---
 ### <a name="obtain-the-connection-string-from-the-azure-portal"></a>Obtenir la chaîne de connexion sur le portail Azure
 Utilisez le [portail Azure](https://portal.azure.com/) pour obtenir la chaîne de connexion nécessaire pour que votre programme client interagisse avec Azure SQL Database.
@@ -38,7 +38,7 @@ Utilisez le [portail Azure](https://portal.azure.com/) pour obtenir la chaîne d
 
 8. Dans le format de votre choix, collez les informations de chaîne de connexion dans votre code de programme client.
 
-Pour plus d’informations, consultez [Connection strings and configuration files](https://msdn.microsoft.com/library/ms254494.aspx) (Chaînes de connexion et fichiers de configuration).
+Pour plus d’informations, consultez [Connection strings and configuration files](/dotnet/framework/data/adonet/connection-strings-and-configuration-files) (Chaînes de connexion et fichiers de configuration).
 
 <!-- Image references. -->
 

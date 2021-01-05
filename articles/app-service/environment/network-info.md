@@ -4,15 +4,15 @@ description: Découvrez le trafic réseau ASE et comment définir des groupes de
 author: ccompy
 ms.assetid: 955a4d84-94ca-418d-aa79-b57a5eb8cb85
 ms.topic: article
-ms.date: 01/24/2020
+ms.date: 07/27/2020
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 4aec7fa78292f224952dd2ae929d2b8bfd97ab9b
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 91b6134e7c809a8af75aa1cf23523e352e0a1a0e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477690"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997339"
 ---
 # <a name="networking-considerations-for-an-app-service-environment"></a>Considérations relatives à la mise en réseau pour un environnement App Service Environment #
 
@@ -25,7 +25,7 @@ ms.locfileid: "80477690"
 
 Tous les environnements ASE, externes et ILB ont une adresse IP virtuelle publique, qui est utilisée pour le trafic de gestion entrant et en tant qu’adresse de départ lors l’appels de l’ASE vers Internet. Tous les appels d’un ASE à destination d’Internet quittent le réseau virtuel via une adresse IP virtuelle assignée à l’ASE. L’adresse IP publique de cette adresse IP virtuelle constitue l’adresse IP source de tous les appels de l’ASE à destination d’Internet. Si les applications hébergées dans votre environnement ASE appellent des ressources de votre réseau virtuel ou hébergées dans un VPN, l’adresse IP source sera l’une des adresses IP du sous-réseau utilisé par votre environnement ASE. Comme l’ASE se trouve à l’intérieur du réseau virtuel, il peut également accéder aux ressources de celui-ci sans configuration supplémentaire. Si le réseau virtuel est connecté à votre réseau local, les applications dans votre environnement ASE ont également accès aux ressources sans configuration supplémentaire.
 
-![ASE externe][1] 
+![ASE externe][1] 
 
 Si vous avez un ASE externe, l’adresse IP virtuelle publique est également le point de terminaison que vos applications ASE peuvent résoudre :
 
@@ -153,18 +153,21 @@ Les groupes de sécurité réseau peuvent être configurés à l’aide du porta
 Pour permettre à un ASE de fonctionner, les entrées nécessaires dans un groupe de sécurité réseau doivent autoriser le trafic :
 
 **Entrant**
-* depuis la balise de service IP nommée AppServiceManagement sur les ports 454, 455 ;
-* depuis l’équilibreur de charge, sur le port 16001 ;
+* Protocole TCP de la balise de service IP AppServiceManagement sur les ports 454, 455
+* Protocole TCP depuis l’équilibreur de charge sur le port 16001
 * depuis le sous-réseau ASE vers le sous-réseau ASE, sur tous les ports.
 
 **Sortante**
-* vers toutes les adresses IP sur le port 123 ;
-* vers toutes les adresses IP sur les ports 80 et 443 ;
-* vers la balise de service IP AzureSQL sur le port 1433 ;
-* vers toutes les adresses IP sur le port 12000 ;
+* UDP vers toutes les adresses IP sur le port 53
+* UDP vers toutes les adresses IP sur le port 123
+* Protocole TCP vers toutes les adresses IP sur les ports 80 et 443
+* Protocole TCP vers l’étiquette de service IP `Sql` sur le port 1433
+* Protocole TCP vers toutes les adresses IP sur le port 12000
 * vers le sous-réseau ASE sur tous les ports.
 
-Le port DNS n’a pas besoin d’être ajouté, car le trafic vers DNS n’est pas affecté par les règles NSG. Ces ports n’incluent pas ceux dont vos applications ont besoin pour fonctionner correctement. Les ports d’accès normaux pour les applications sont les suivants :
+Ces ports n’incluent pas ceux dont vos applications ont besoin pour fonctionner correctement. Par exemple, votre application peut avoir besoin d’appeler un serveur MySQL sur le port 3306. Le protocole Network Time Protocol (NTP) sur le port 123 est le protocole de synchronisation date/heure utilisé par le système d'exploitation. Les points de terminaison NTP ne sont pas spécifiques à App Services, ils peuvent varier avec le système d’exploitation et ne figurent pas dans une liste d’adresses bien définie. Pour éviter les problèmes de synchronisation date/heure, vous devez autoriser le trafic UDP vers toutes les adresses sur le port 123. Le trafic TCP sortant du port 12000 est destiné à la prise en charge et à l’analyse du système. Les points de terminaison sont dynamiques et ne se trouvent pas dans un ensemble bien défini d’adresses.
+
+Les ports d’accès normaux pour les applications sont les suivants :
 
 | Utilisation | Ports |
 |----------|-------------|
@@ -177,9 +180,9 @@ En tenant compte des exigences liées au trafic entrant et sortant, les groupes 
 
 ![Règles de sécurité de trafic entrant][4]
 
-Une règle par défaut permet la communication entre les adresses IP dans le réseau virtuel avec le sous-réseau ASE. Une autre règle par défaut permet la communication entre l’équilibrage de charges, également appelé l’adresse IP virtuelle publique, et l’ASE. Vous pouvez afficher les règles par défaut en sélectionnant **Règles par défaut** en regard de l’icône **Ajouter**. Si vous placez une règle de refus pour toute autre communication avant les règles par défaut, vous bloquez le trafic entre l’adresse IP virtuelle et l’ASE. Pour éviter le trafic provenant de l’intérieur du réseau virtuel, ajoutez votre propre règle pour autoriser le trafic entrant. Utilisez une source égale à AzureLoadBalancer avec une destination **Tout** et une plage de ports **\*** . Étant donné que la règle de groupes de sécurité réseau est appliquée au sous-réseau de l’ASE, vous n’avez pas besoin de définir une destination spécifique.
+Une règle par défaut permet la communication entre les adresses IP dans le réseau virtuel avec le sous-réseau ASE. Une autre règle par défaut permet la communication entre l’équilibrage de charges, également appelé l’adresse IP virtuelle publique, et l’ASE. Vous pouvez afficher les règles par défaut en sélectionnant **Règles par défaut** en regard de l’icône **Ajouter**. Si vous placez une règle de refus pour toute autre communication avant les règles par défaut, vous bloquez le trafic entre l’adresse IP virtuelle et l’ASE. Pour éviter le trafic provenant de l’intérieur du réseau virtuel, ajoutez votre propre règle pour autoriser le trafic entrant. Utilisez une source égale à AzureLoadBalancer avec une destination **Tout** et une plage de ports *\** _. Étant donné que la règle de groupes de sécurité réseau est appliquée au sous-réseau de l’ASE, vous n’avez pas besoin de définir une destination spécifique.
 
-Si vous avez attribué une adresse IP à votre application, assurez-vous que vous conservez les ports ouverts. Vous pouvez consulter les ports utilisés en sélectionnant **App Service Environment** > **Adresses IP**.  
+Si vous avez attribué une adresse IP à votre application, assurez-vous que vous conservez les ports ouverts. Vous pouvez consulter les ports utilisés en sélectionnant *App Service Environment** > **Adresses IP**.  
 
 Tous les éléments affichés dans les règles de trafic sortant suivants sont nécessaires, à l’exception du dernier élément. Ils autorisent l’accès réseau aux dépendances de l’ASE décrites plus haut dans ce document. Si vous bloquez un d'entre eux, votre ASE cesse de fonctionner. Le dernier élément de la liste autorise votre ASE à communiquer avec les autres ressources de votre réseau virtuel.
 
@@ -238,17 +241,17 @@ Lorsque les points de terminaison de service sont activés sur un sous-réseau a
 [ASENetwork]: ./network-info.md
 [UsingASE]: ./using-an-ase.md
 [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
+[NSGs]: ../../virtual-network/network-security-groups-overview.md
 [ConfigureASEv1]: app-service-web-configure-an-app-service-environment.md
 [ASEv1Intro]: app-service-app-service-environment-intro.md
-[mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md
+[mobileapps]: /previous-versions/azure/app-service-mobile/app-service-mobile-value-prop
 [Functions]: ../../azure-functions/index.yml
 [Pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [ARMOverview]: ../../azure-resource-manager/management/overview.md
 [ConfigureSSL]: ../configure-ss-cert.md
 [Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
-[AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
+[AppGW]: ../../web-application-firewall/ag/ag-overview.md
 [ASEManagement]: ./management-addresses.md
 [serviceendpoints]: ../../virtual-network/virtual-network-service-endpoints-overview.md
 [forcedtunnel]: ./forced-tunnel-support.md

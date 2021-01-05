@@ -2,17 +2,18 @@
 title: 'Azure ExpressRoute : Connecter un réseau virtuel à un circuit : classique'
 description: Ce document explique comment lier des réseaux virtuels à des circuits ExpressRoute à l’aide du modèle de déploiement classique et de PowerShell.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/06/2019
-ms.author: cherylmc
-ms.openlocfilehash: 53c200b01dfa6bce09cfc058dc24ab8e38d253a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 0e8a1d48934d73f1035c6f2c4c76e56d9a0e4052
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74930034"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206968"
 ---
 # <a name="connect-a-virtual-network-to-an-expressroute-circuit-using-powershell-classic"></a>Connectez un réseau virtuel à un circuit ExpressRoute à l’aide de PowerShell (classique)
 > [!div class="op_single_selector"]
@@ -41,7 +42,7 @@ Vous pouvez lier jusqu’à 10 réseaux virtuels à un circuit ExpressRoute. To
    * Suivez les instructions pour [créer un circuit ExpressRoute](expressroute-howto-circuit-classic.md) et faites-le activer par votre fournisseur de service de connectivité.
    * Vérifiez que le peering privé Azure est configuré pour votre circuit. Pour obtenir des instructions sur le routage, consultez l’article [Configurer le routage](expressroute-howto-routing-classic.md) .
    * Vérifiez que le peering privé Azure est configuré, et que le peering BGP entre votre réseau et Microsoft est opérationnel pour pouvoir activer la connectivité de bout en bout.
-   * Vous devez disposer d'un réseau virtuel et d’une passerelle de réseau virtuel créés et totalement approvisionnés. Suivez les instructions pour [configurer un réseau virtuel pour ExpressRoute](expressroute-howto-vnet-portal-classic.md).
+   * Vous devez disposer d'un réseau virtuel et d’une passerelle de réseau virtuel créés et totalement approvisionnés. Suivez les instructions pour [configurer un réseau virtuel pour ExpressRoute](./expressroute-howto-add-gateway-portal-resource-manager.md).
 
 ### <a name="download-the-latest-powershell-cmdlets"></a>Télécharger les dernières applets de commande PowerShell
 

@@ -1,30 +1,31 @@
 ---
-title: Mettre à jour les unités de requête/s pour une table d’API Table pour Azure Cosmos DB
-description: Mettre à jour les unités de requête/s pour une table d’API Table pour Azure Cosmos DB
+title: Scripts Azure CLI pour les opérations de débit (RU/s) sur des ressources de l’API Table Azure Cosmos DB
+description: Scripts Azure CLI pour les opérations de débit (RU/s) sur des ressources de l’API Table Azure Cosmos DB
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.topic: sample
-ms.date: 9/25/2019
-ms.openlocfilehash: 8cc04b766ba63fb522417310177a539ea04fcdd6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 10/07/2020
+ms.openlocfilehash: 6e76da71cb14122817090e64354babf5a618db8b
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "71274866"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94562659"
 ---
-# <a name="update-rus-for-a-table-api-table-for-azure-cosmos-db-azure-cli"></a>Mettre à jour les unités de requête/s pour une table de l’API Table pour Azure Cosmos DB avec Azure CLI
+# <a name="throughput-rus-operations-with-azure-cli-for-a-table-for-azure-cosmos-db-table-api"></a>Opérations de débit (RU/s) avec Azure CLI sur une table de l’API Table Azure Cosmos DB
+[!INCLUDE[appliesto-table-api](../../../includes/appliesto-table-api.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser localement l’interface de ligne de commande, cette rubrique vous impose d’exécuter Azure CLI version 2.0.73 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.12.1 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 
-Ce script crée une table d’API Table, puis met à jour le débit de la table.
+Ce script crée une table d’API Table, puis met à jour le débit de la table. Le script migre ensuite du débit standard à un débit avec mise à l’échelle automatique, puis il lit la valeur de ce débit après sa migration.
 
-[!code-azurecli-interactive[main](../../../../../cli_scripts/cosmosdb/table/throughput.sh "Update RU/s for a Table API table.")]
+[!code-azurecli-interactive[main](../../../../../cli_scripts/cosmosdb/table/throughput.sh "Throughput operations for Table API.")]
 
 ## <a name="clean-up-deployment"></a>Nettoyer le déploiement
 
@@ -43,7 +44,8 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 | [az group create](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
 | [az cosmosdb create](/cli/azure/cosmosdb#az-cosmosdb-create) | Crée un compte Azure Cosmos DB. |
 | [az cosmosdb table create](/cli/azure/cosmosdb/table#az-cosmosdb-table-create) | Crée une table d’API Table Azure Cosmos. |
-| [az cosmosdb table throughput update](/cli/azure/cosmosdb/table/throughput#az-cosmosdb-table-throughput-update) | Met à jour les unités de requête/s pour une table d’API Table Azure Cosmos DB. |
+| [az cosmosdb table throughput update](/cli/azure/cosmosdb/table/throughput#az-cosmosdb-table-throughput-update) | Met à jour le débit d’une table de l’API Table Azure Cosmos. |
+| [az cosmosdb table throughput migrate](/cli/azure/cosmosdb/table/throughput#az-cosmosdb-table-throughput-migrate) | Migre le débit d’une table de l’API Table Azure Cosmos. |
 | [az group delete](/cli/azure/resource#az-resource-delete) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
-ms.date: 03/17/2020
+ms.date: 08/06/2020
 ms.author: swmachan
-ms.openlocfilehash: 386f34e001457da4c5ae0e170ab2c090725ad5b7
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 8841c55d8f276f048db53a531bd2e9218e498b34
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592234"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95016494"
 ---
 # <a name="request-limits-for-translator"></a>Limites de requête pour Translator
 
@@ -23,17 +23,17 @@ Cet article fournit des seuils de limitation de requêtes pour Translator. Les s
 
 ## <a name="character-and-array-limits-per-request"></a>Limites de caractères et de tableaux par requête
 
-Chaque demande de traduction est limitée à 5 000 caractères, dans toutes les langues cibles de traduction. Par exemple, l’envoi d’une demande de traduction de 1 500 caractères à traduire en 3 langues différentes génère une demande d’une taille de 1 500 x 3 = 4 500 caractères, qui satisfait la limite de demande. Vous êtes facturé au caractère, et non pas au nombre de requêtes. Il est recommandé d’envoyer des requêtes plus courtes.
+Chaque demande de traduction est limitée à 10 000 caractères, dans toutes les langues cibles de traduction. Par exemple, l’envoi d’une demande de traduction de 3 000 caractères à traduire en 3 langues différentes génère une demande d’une taille de 3 000 x 3 = 9 000 caractères, qui satisfait la limite de demande. Vous êtes facturé au caractère, et non pas au nombre de requêtes. Il est recommandé d’envoyer des requêtes plus courtes.
 
 Les tableaux suivants répertorient les limites d’éléments de tableau et de caractères pour chaque opération de Translator.
 
-| Opération | Taille maximale d’un élément de tableau |   Nombre maximal d’éléments de tableau |  Taille de requête maximale (caractères) |
+| Opération | Taille maximale d’un élément de tableau |    Nombre maximal d’éléments de tableau |    Taille de requête maximale (caractères) |
 |:----|:----|:----|:----|
-| Translate | 5 000 | 100   | 5 000 |
+| Translate | 10 000    | 100   | 10 000 |
 | Transliterate | 5 000 | 10    | 5 000 |
-| Detect | 10 000 | 100 |   50 000 |
-| BreakSentence | 10 000    | 100 | 50 000 |
-| Recherche dans le dictionnaire| 100 |  10  | 1 000 |
+| Detect | 50 000 | 100 |   50 000 |
+| BreakSentence | 50 000    | 100 | 50 000 |
+| Recherche dans le dictionnaire| 100 |  10  | 1 000 |
 | Exemples de dictionnaire | 100 pour le texte et 100 pour la traduction (200 au total)| 10|   2 000 |
 
 ## <a name="character-limits-per-hour"></a>Limites de caractères par heure
@@ -52,28 +52,27 @@ Si vous atteignez ou dépassez ces limites, ou si vous envoyez une partie trop i
 | S3 / C3 | 120 millions de caractères par heure |
 | S4 / C4 | 200 millions de caractères par heure |
 
-Les limites pour les [abonnements multiservice](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#authentication) sont les mêmes que pour le niveau S1.
+Les limites pour les [abonnements multiservice](./reference/v3-0-reference.md#authentication) sont les mêmes que pour le niveau S1.
 
 Ces limites s’appliquent uniquement aux modèles de traduction standard de Microsoft. Les systèmes de traduction personnalisés qui utilisent Custom Translator sont limités à 1 800 caractères par seconde.
 
 ## <a name="latency"></a>Latence
 
-Translator a une latence maximale de 15 secondes avec les modèles standards et de 120 secondes avec les modèles personnalisés. En général, les réponses *pour un texte de moins de 100 caractères* sont retournées dans un délai de 150 à 300 millisecondes. Les modèles de traducteurs personnalisés ont des caractéristiques de latence similaires sur le taux de requêtes soutenu et peuvent avoir une latence plus élevée lorsque le taux de requêtes est intermittent. Les temps de réponse peuvent varier en fonction de la taille de la requête et de la paire de langues. Si vous ne recevez pas une traduction ou une [réponse d’erreur](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#errors) pendant ce laps de temps, vérifiez votre code et votre connexion réseau, puis réessayez. 
+Translator a une latence maximale de 15 secondes avec les modèles standards et de 120 secondes avec les modèles personnalisés. En général, les réponses *pour un texte de moins de 100 caractères* sont retournées dans un délai de 150 à 300 millisecondes. Les modèles de traducteurs personnalisés ont des caractéristiques de latence similaires sur le taux de requêtes soutenu et peuvent avoir une latence plus élevée lorsque le taux de requêtes est intermittent. Les temps de réponse peuvent varier en fonction de la taille de la requête et de la paire de langues. Si vous ne recevez pas de traduction ou de [réponse d’erreur](./reference/v3-0-reference.md#errors) pendant ce laps de temps, vérifiez votre code et votre connexion réseau, puis réessayez. 
 
 ## <a name="sentence-length-limits"></a>Limites de longueur de phrase
 
-Quand vous utilisez la fonction [BreakSentence](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-break-sentence), la longueur des phrases est limitée à 275 caractères. Il existe des exceptions pour les langues suivantes :
+Quand vous utilisez la fonction [BreakSentence](./reference/v3-0-break-sentence.md), la longueur des phrases est limitée à 275 caractères. Il existe des exceptions pour les langues suivantes :
 
 | Langage | Code | Limite de caractères |
 |----------|------|-----------------|
-| Chinois | zh | 132 |
-| Allemand | de | 290 |
-| Italien | it | 280 |
-| Japonais | ja | 150 |
-| Portugais | pt | 290 |
-| Espagnol | es | 280 |
-| Italien | it | 280 |
-| Thaï | th | 258 |
+| Chinois | zh | 166 |
+| Allemand | de | 800 |
+| Italien | it | 800 |
+| Japonais | ja | 166 |
+| Portugais | pt | 800 |
+| Espagnol | es | 800 |
+| Thaï | th | 180 |
 
 > [!NOTE]
 > Cette limite ne s’applique pas aux traductions.
@@ -82,4 +81,4 @@ Quand vous utilisez la fonction [BreakSentence](https://docs.microsoft.com/azure
 
 * [Tarification](https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/)
 * [Disponibilité régionale](https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services)
-* [Référence de Translator v3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference)
+* [Référence de Translator v3](./reference/v3-0-reference.md)

@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: robinsh
 ms.custom: mvc
-ms.openlocfilehash: 8f245653a8b84944e1e8a3f48a49992f0065be58
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e5ae5948c8baf1573393c73026c84d0f62e8693e
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74084405"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92480103"
 ---
 # <a name="tutorial-use-an-azure-resource-manager-template-to-configure-iot-hub-message-routing"></a>Tutoriel : Utiliser un modèle Azure Resource Manager pour configurer le routage des messages IoT Hub
 
@@ -30,7 +30,7 @@ ms.locfileid: "74084405"
 
 Dans la deuxième partie de ce tutoriel, vous téléchargez et vous exécutez une application Visual Studio qui envoie des messages au hub IoT. Ce téléchargement contient un dossier où se trouvent le modèle et le fichier de paramètres Azure Resource Manager ainsi que les scripts Azure CLI et PowerShell.
 
-Téléchargez maintenant les [exemples Azure IoT pour C#](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip). Décompressez le fichier master.zip. Le modèle Resource Manager et le fichier de paramètres sont dans les fichiers **template_iothub.json** et **template_iothub_parameters.json**, sous /iot-hub/Tutorials/Routing/SimulatedDevice/resources/.
+Téléchargez maintenant les [exemples Azure IoT pour C#](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip). Décompressez le fichier master.zip. Le modèle Resource Manager et le fichier de paramètres sont dans les fichiers **template_iothub.json** et **template_iothub_parameters.json** , sous /iot-hub/Tutorials/Routing/SimulatedDevice/resources/.
 
 ## <a name="create-your-resources"></a>Créer vos ressources
 
@@ -46,49 +46,49 @@ La section suivante présente les différents paramètres utilisés.
 
 La plupart de ces paramètres ont des valeurs par défaut. Les paramètres qui finissent par **_in** sont concaténés avec la valeur *randomValue* pour les rendre globalement uniques. 
 
-**randomValue** : cette valeur est générée à partir de la date/heure actuelle à laquelle vous déployez le modèle. Ce champ ne figure pas dans le fichier de paramètres, car il est généré directement dans le modèle.
+**randomValue**  : cette valeur est générée à partir de la date/heure actuelle à laquelle vous déployez le modèle. Ce champ ne figure pas dans le fichier de paramètres, car il est généré directement dans le modèle.
 
-**subscriptionId** : ce champ est automatiquement défini sur l’abonnement dans lequel vous déployez le modèle. Ce champ ne figure pas dans le fichier de paramètres, car il est défini automatiquement.
+**subscriptionId**  : ce champ est automatiquement défini sur l’abonnement dans lequel vous déployez le modèle. Ce champ ne figure pas dans le fichier de paramètres, car il est défini automatiquement.
 
-**IoTHubName_in** : ce champ indique le nom du hub IoT de base, qui est concaténé avec la valeur randomValue pour être globalement unique.
+**IoTHubName_in**  : ce champ indique le nom du hub IoT de base, qui est concaténé avec la valeur randomValue pour être globalement unique.
 
-**location** : ce champ indique la région Azure où vous déployez le modèle (par exemple, « westus »).
+**location**  : ce champ indique la région Azure où vous déployez le modèle (par exemple, « westus »).
 
-**consumer_group** : ce champ indique le groupe de consommateurs défini pour les messages qui entrent par le point de terminaison de routage. Il permet de filtrer les résultats dans Azure Stream Analytics. Par exemple, vous pouvez afficher tout le flux de données ou, si vous avez des données transitant par le groupe de consommateurs **Contoso**, vous pouvez configurer un flux Azure Stream Analytics (et un rapport Power BI) qui affiche uniquement les entrées correspondantes. Ce champ est utilisé dans la deuxième partie de ce tutoriel.
+**consumer_group**  : ce champ indique le groupe de consommateurs défini pour les messages qui entrent par le point de terminaison de routage. Il permet de filtrer les résultats dans Azure Stream Analytics. Par exemple, vous pouvez afficher tout le flux de données ou, si vous avez des données transitant par le groupe de consommateurs **Contoso** , vous pouvez configurer un flux Azure Stream Analytics (et un rapport Power BI) qui affiche uniquement les entrées correspondantes. Ce champ est utilisé dans la deuxième partie de ce tutoriel.
 
-**sku_name** : ce champ indique le niveau de mise à l’échelle du hub IoT. Cette valeur doit être définie sur S1 ou un niveau supérieur. Le niveau gratuit n’est pas possible dans ce tutoriel, car il n’autorise pas les points de terminaison multiples.
+**sku_name**  : ce champ indique le niveau de mise à l’échelle du hub IoT. Cette valeur doit être définie sur S1 ou un niveau supérieur. Le niveau gratuit n’est pas possible dans ce tutoriel, car il n’autorise pas les points de terminaison multiples.
 
-**sku_units** : ce champ est associé au champ **sku_name** ; il indique le nombre d’unités IoT Hub pouvant être utilisées.
+**sku_units**  : ce champ est associé au champ **sku_name**  ; il indique le nombre d’unités IoT Hub pouvant être utilisées.
 
-**d2c_partitions** : ce champ indique le nombre de partitions utilisées pour le flux d’événements.
+**d2c_partitions**  : ce champ indique le nombre de partitions utilisées pour le flux d’événements.
 
-**storageAccountName_in** : ce champ indique le nom du compte de stockage à créer. Les messages sont routés vers un conteneur dans le compte de stockage. Ce champ est concaténé avec la valeur randomValue pour rendre le nom globalement unique.
+**storageAccountName_in**  : ce champ indique le nom du compte de stockage à créer. Les messages sont routés vers un conteneur dans le compte de stockage. Ce champ est concaténé avec la valeur randomValue pour rendre le nom globalement unique.
 
-**storageContainerName** : ce champ indique le nom du conteneur dans lequel les messages routés vers le compte de stockage sont stockés.
+**storageContainerName**  : ce champ indique le nom du conteneur dans lequel les messages routés vers le compte de stockage sont stockés.
 
-**storage_endpoint** : ce champ indique le nom du point de terminaison du compte de stockage utilisé par le routage des messages.
+**storage_endpoint**  : ce champ indique le nom du point de terminaison du compte de stockage utilisé par le routage des messages.
 
-**service_bus_namespace_in** : ce champ indique le nom de l’espace de noms Service Bus à créer. Cette valeur est concaténée avec la valeur randomValue pour rendre le nom globalement unique.
+**service_bus_namespace_in**  : ce champ indique le nom de l’espace de noms Service Bus à créer. Cette valeur est concaténée avec la valeur randomValue pour rendre le nom globalement unique.
 
-**service_bus_queue_in** : ce champ indique le nom de la file d’attente Service Bus utilisée pour le routage des messages. Cette valeur est concaténée avec la valeur randomValue pour rendre le nom globalement unique.
+**service_bus_queue_in**  : ce champ indique le nom de la file d’attente Service Bus utilisée pour le routage des messages. Cette valeur est concaténée avec la valeur randomValue pour rendre le nom globalement unique.
 
-**AuthRules_sb_queue** : ce champ spécifie les règles d’autorisation de la file d’attente Service Bus qui sont utilisées pour récupérer la chaîne de connexion de la file d’attente.
+**AuthRules_sb_queue**  : ce champ spécifie les règles d’autorisation de la file d’attente Service Bus qui sont utilisées pour récupérer la chaîne de connexion de la file d’attente.
 
 ### <a name="variables"></a>Variables
 
 Utilisées dans le modèle, ces valeurs sont essentiellement dérivées des paramètres.
 
-**queueAuthorizationRuleResourceId** : ce champ indique l’ID de ressource pour la règle d’autorisation de la file d’attente Service Bus. L’ID de ressource est ensuite utilisé pour récupérer la chaîne de connexion de la file d’attente.
+**queueAuthorizationRuleResourceId**  : ce champ indique l’ID de ressource pour la règle d’autorisation de la file d’attente Service Bus. L’ID de ressource est ensuite utilisé pour récupérer la chaîne de connexion de la file d’attente.
 
-**iotHubName** : ce champ indique le nom du hub IoT après sa concaténation avec la valeur randomValue. 
+**iotHubName**  : ce champ indique le nom du hub IoT après sa concaténation avec la valeur randomValue. 
 
-**storageAccountName** : ce champ indique le nom du compte de stockage après sa concaténation avec la valeur randomValue. 
+**storageAccountName**  : ce champ indique le nom du compte de stockage après sa concaténation avec la valeur randomValue. 
 
-**service_bus_namespace** : ce champ indique l’espace de noms après sa concaténation avec la valeur randomValue.
+**service_bus_namespace**  : ce champ indique l’espace de noms après sa concaténation avec la valeur randomValue.
 
-**service_bus_queue** : ce champ indique le nom de la file d’attente Service Bus après sa concaténation avec la valeur randomValue.
+**service_bus_queue**  : ce champ indique le nom de la file d’attente Service Bus après sa concaténation avec la valeur randomValue.
 
-**sbVersion** : version de l’API Service Bus à utiliser. Dans ce cas, la version est « 2017-04-01 ».
+**sbVersion**  : version de l’API Service Bus à utiliser. Dans ce cas, la version est « 2017-04-01 ».
 
 ### <a name="resources-storage-account-and-container"></a>Ressources : compte de stockage et conteneur
 
@@ -358,7 +358,7 @@ Pour déployer le modèle sur Azure, chargez le modèle et le fichier de paramè
 
 Pour charger les fichiers, sélectionnez l’icône **Charger/télécharger des fichiers** dans la barre de menus, puis choisissez Charger.
 
-![Barre de menus Cloud Shell avec l’icône Charger/télécharger des fichiers en surbrillance](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_files.png)
+![Capture d’écran qui met en évidence l’icône Charger/Télécharger des fichiers.](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_files.png)
 
 Dans l’Explorateur de fichiers qui s’affiche, recherchez les fichiers sur votre disque local et sélectionnez-les, puis choisissez **Ouvrir**.
 

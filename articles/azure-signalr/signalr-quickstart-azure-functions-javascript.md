@@ -1,18 +1,19 @@
 ---
 title: Utiliser JavaScript pour créer une salle de conversation avec Azure Functions et SignalR Service
-description: Un démarrage rapide pour utiliser le service Azure SignalR et Azure Functions afin de créer une salle de conversation.
+description: Guide de démarrage rapide pour utiliser Azure SignalR Service et Azure Functions afin de créer une salle de conversation à l’aide de JavaScript.
 author: sffamily
 ms.service: signalr
 ms.devlang: javascript
 ms.topic: quickstart
 ms.date: 12/14/2019
 ms.author: zhshang
-ms.openlocfilehash: 2726d5da2613be4ae2065246543d206cf814f353
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-js
+ms.openlocfilehash: 061dce01d2437d04d371ac65c115a1d95136fb5d
+ms.sourcegitcommit: 642988f1ac17cfd7a72ad38ce38ed7a5c2926b6c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77083194"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94874693"
 ---
 # <a name="quickstart-use-javascript-to-create-a-chat-room-with-azure-functions-and-signalr-service"></a>Démarrage rapide : Utiliser JavaScript pour créer une salle de conversation avec Azure Functions et SignalR Service
 
@@ -31,13 +32,21 @@ Azure SignalR Service vous permet d’ajouter facilement des fonctionnalités en
 > [!NOTE]
 > Ce démarrage rapide peut être exécuté sur macOS, Windows ou Linux.
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
+
 ## <a name="log-in-to-azure"></a>Connexion à Azure
 
 Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compte Azure.
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
+
 [!INCLUDE [Create instance](includes/signalr-quickstart-create-instance.md)]
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
+
 [!INCLUDE [Clone application](includes/signalr-quickstart-clone-application.md)]
+
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
 
 ## <a name="configure-and-run-the-azure-function-app"></a>Configurer et exécuter l’application de fonction Azure
 
@@ -49,7 +58,7 @@ Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compt
 
 1. Sélectionnez et copiez la chaîne de connexion principale.
 
-    ![Créer un service SignalR](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-keys.png)
+    ![Capture d’écran qui met en évidence la chaîne de connexion principale.](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-keys.png)
 
 1. Dans votre éditeur de code, ouvrez le dossier *src/chat/javascript* situé dans le référentiel cloné.
 
@@ -69,14 +78,21 @@ Connectez-vous au portail Azure sur <https://portal.azure.com/> avec votre compt
     ```
 
     ![Créer un service SignalR](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-run-application.png)
+    
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
 
 [!INCLUDE [Run web application](includes/signalr-quickstart-run-web-application.md)]
 
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
+
 [!INCLUDE [Cleanup](includes/signalr-quickstart-cleanup.md)]
+
+Vous rencontrez des problèmes ? Essayez le [guide de résolution des problèmes](signalr-howto-troubleshoot-guide.md) ou [faites-le nous savoir](https://aka.ms/asrs/qsjs).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Dans ce démarrage rapide, vous avez généré et exécuté une application serverless en temps réel dans VS Code. Apprenez-en plus sur le déploiement d’Azure Functions à partir de VS Code.
 
 > [!div class="nextstepaction"]
-> [Déployer Azure Functions avec VS Code](/azure/javascript/tutorial-vscode-serverless-node-01)
+> [Déployer Azure Functions avec VS Code](/azure/developer/javascript/tutorial-vscode-serverless-node-01)
+

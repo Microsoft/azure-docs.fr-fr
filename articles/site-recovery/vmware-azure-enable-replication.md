@@ -6,12 +6,12 @@ ms.service: site-recovery
 ms.date: 04/01/2020
 ms.topic: conceptual
 ms.author: ramamill
-ms.openlocfilehash: 6547bcf2061213cd01550367171d432900693ea5
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: 74870d10348421bf726b9bdc58504a74cf4105a9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80584141"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004209"
 ---
 # <a name="enable-replication-to-azure-for-vmware-vms"></a>Activer la réplication des machines virtuelles VMware dans Azure
 
@@ -106,9 +106,9 @@ Ensuite, vérifiez les propriétés de la machine virtuelle source. N’oubliez 
    :::image type="content" source="./media/vmware-azure-enable-replication/vmproperties.png" alt-text="Fenêtre de propriétés Calcul et réseau":::
 
    - **Nom de machine virtuelle Azure** : si besoin, modifiez ce nom afin de respecter les exigences d’Azure.
-   - **Taille ou type de machine virtuelle cible** : la taille de machine virtuelle par défaut est choisie en fonction de paramètres, tels que le nombre de disques, le nombre de cartes réseau, le nombre de cœurs du processeur, la mémoire et les tailles de rôle de machine virtuelle disponibles dans la région Azure cible. Azure Site Recovery sélectionne la première taille de machine virtuelle disponible réunissant tous les critères. Si besoin, vous pouvez à tout moment sélectionner une autre taille de machine virtuelle avant le basculement. La taille du disque de la machine virtuelle dépend également de la taille du disque source et n’est modifiable qu’après le basculement. Pour plus d’informations sur les tailles de disque et les taux d’IOPS, consultez l’article [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](/azure/virtual-machines/windows/disk-scalability-targets).
-   - **Groupe de ressources** : vous pouvez sélectionner un [groupe de ressources](/azure/azure-resource-manager/management/overview#resource-groups) à partir duquel une machine virtuelle fait partie d’un post-basculement. Vous pouvez changer ce paramètre à tout moment avant le basculement. Après le basculement, si vous effectuez la migration de la machine virtuelle vers un autre groupe de ressources, les paramètres de protection de cette machine ne sont plus actifs.
-   - **Groupe à haute disponibilité** : vous pouvez sélectionner un [groupe à haute disponibilité](/azure/virtual-machines/windows/tutorial-availability-sets) si votre machine virtuelle doit faire partie d’un post-basculement. Lorsque vous sélectionnez un groupe à haute disponibilité, gardez à l’esprit les informations suivantes :
+   - **Taille ou type de machine virtuelle cible** : la taille de machine virtuelle par défaut est choisie en fonction de paramètres, tels que le nombre de disques, le nombre de cartes réseau, le nombre de cœurs du processeur, la mémoire et les tailles de rôle de machine virtuelle disponibles dans la région Azure cible. Azure Site Recovery sélectionne la première taille de machine virtuelle disponible réunissant tous les critères. Si besoin, vous pouvez à tout moment sélectionner une autre taille de machine virtuelle avant le basculement. La taille du disque de la machine virtuelle dépend également de la taille du disque source et n’est modifiable qu’après le basculement. Pour plus d’informations sur les tailles de disque et les taux d’IOPS, consultez l’article [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](../virtual-machines/windows/disk-scalability-targets.md).
+   - **Groupe de ressources** : vous pouvez sélectionner un [groupe de ressources](../azure-resource-manager/management/overview.md#resource-groups) à partir duquel une machine virtuelle fait partie d’un post-basculement. Vous pouvez changer ce paramètre à tout moment avant le basculement. Après le basculement, si vous effectuez la migration de la machine virtuelle vers un autre groupe de ressources, les paramètres de protection de cette machine ne sont plus actifs.
+   - **Groupe à haute disponibilité** : vous pouvez sélectionner un [groupe à haute disponibilité](../virtual-machines/windows/tutorial-availability-sets.md) si votre machine virtuelle doit faire partie d’un post-basculement. Lorsque vous sélectionnez un groupe à haute disponibilité, gardez à l’esprit les informations suivantes :
      - Seuls les groupes à haute disponibilité qui appartiennent au groupe de ressources spécifié sont répertoriés.
      - Les machines virtuelles situées sur différents réseaux virtuels ne peuvent pas faire partie du même groupe à haute disponibilité.
      - Seules les machines virtuelles de même taille peuvent faire partie d’un groupe à haute disponibilité.

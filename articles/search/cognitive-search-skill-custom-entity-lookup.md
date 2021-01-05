@@ -7,13 +7,13 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 01/30/2020
-ms.openlocfilehash: 3659070d4ffd4346a8827d2748e67db436fc15b3
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.date: 06/17/2020
+ms.openlocfilehash: 5511551f240fe4fdd2f2aa3bc8a3a2615505f35f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82085737"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88936110"
 ---
 #     <a name="custom-entity-lookup-cognitive-skill-preview"></a>Compétence cognitive Recherche d'entité personnalisée (préversion)
 
@@ -22,7 +22,7 @@ ms.locfileid: "82085737"
 
 La compétence **Recherche d'entité personnalisée** recherche du texte dans une liste de mots et d'expressions personnalisée et définie par l'utilisateur. À l'aide de cette liste, elle étiquète tous les documents contenant des entités correspondantes. La compétence prend également en charge un degré de correspondance approximative qui peut être appliqué pour rechercher des correspondances similaires sans être rigoureusement exactes.  
 
-Cette compétence n'est pas liée à une API Cognitive Services et peut être utilisée gratuitement pendant toute la durée de la préversion. Vous devez néanmoins [joindre une ressource Cognitive Services](https://docs.microsoft.com/azure/search/cognitive-search-attach-cognitive-services) pour passer outre la limite d'enrichissement quotidienne. La limite quotidienne s'applique à l'accès gratuit à Cognitive Services via Recherche cognitive Azure.
+Cette compétence n'est pas liée à une API Cognitive Services et peut être utilisée gratuitement pendant toute la durée de la préversion. Vous devez néanmoins [joindre une ressource Cognitive Services](./cognitive-search-attach-cognitive-services.md) pour passer outre la limite d'enrichissement quotidienne. La limite quotidienne s'applique à l'accès gratuit à Cognitive Services via Recherche cognitive Azure.
 
 ## <a name="odatatype"></a>@odata.type  
 Microsoft.Skills.Text.CustomEntityLookupSkill 
@@ -38,17 +38,17 @@ Les paramètres respectent la casse.
 
 | Nom du paramètre     | Description |
 |--------------------|-------------|
-| entitiesDefinitionUri    | Chemin d'accès à un fichier JSON ou CSV contenant tout le texte cible à comparer. Cette définition d'entité est lue au début de l'exécution d'un indexeur ; les mises à jour de ce fichier à mi-parcours ne seront pas réalisées avant l'exécution suivante. Cette configuration doit être accessible via HTTPS. Reportez-vous à la section Format de [définition d'entité personnalisée](#custom-entity-definition-format) ci-dessous pour en savoir plus sur le schéma CSV ou JSON attendu.|
-|inlineEntitiesDefinition | Définitions d'entités JSON au format inline. Ce paramètre remplace le paramètre entitiesDefinitionUri s'il est présent. Un maximum de 10 Ko de configuration peut être fourni au format inline. Reportez-vous à la section [Définition d'entité personnalisée](#custom-entity-definition-format) ci-dessous pour en savoir plus sur le schéma JSON attendu. |
-|defaultLanguageCode |    (Facultatif) Code langue du texte d'entrée utilisé pour « tokeniser » et délimiter le texte. Langues prises en charge : `da, de, en, es, fi, fr, it, ko, pt`. La langue par défaut est l'anglais (`en`). Si vous utilisez un format codelangue-codepays, seule la partie codelangue du format est utilisée.  |
+| `entitiesDefinitionUri`    | Chemin d'accès à un fichier JSON ou CSV contenant tout le texte cible à comparer. Cette définition d'entité est lue au début de l'exécution d'un indexeur ; les mises à jour de ce fichier à mi-parcours ne seront pas réalisées avant l'exécution suivante. Cette configuration doit être accessible via HTTPS. Reportez-vous à la section Format de [définition d'entité personnalisée](#custom-entity-definition-format) ci-dessous pour en savoir plus sur le schéma CSV ou JSON attendu.|
+|`inlineEntitiesDefinition` | Définitions d'entités JSON au format inline. Ce paramètre remplace le paramètre entitiesDefinitionUri s'il est présent. Un maximum de 10 Ko de configuration peut être fourni au format inline. Reportez-vous à la section [Définition d'entité personnalisée](#custom-entity-definition-format) ci-dessous pour en savoir plus sur le schéma JSON attendu. |
+|`defaultLanguageCode` |    (Facultatif) Code langue du texte d'entrée utilisé pour « tokeniser » et délimiter le texte. Langues prises en charge : `da, de, en, es, fi, fr, it, ko, pt`. La langue par défaut est l'anglais (`en`). Si vous utilisez un format codelangue-codepays, seule la partie codelangue du format est utilisée.  |
 
 
 ## <a name="skill-inputs"></a>Entrées de la compétence
 
 | Nom d’entrée      | Description                   |
 |---------------|-------------------------------|
-| text          | Texte à analyser.          |
-| languageCode    | facultatif. La valeur par défaut est `"en"`.  |
+| `text`          | Texte à analyser.          |
+| `languageCode`    | facultatif. La valeur par défaut est `"en"`.  |
 
 
 ## <a name="skill-outputs"></a>Sorties de la compétence
@@ -56,7 +56,7 @@ Les paramètres respectent la casse.
 
 | Nom de sortie      | Description                   |
 |---------------|-------------------------------|
-| entities | Groupe d'objets contenant des informations sur les correspondances trouvées et les métadonnées associées. Chacune des entités identifiées peut contenir les champs suivants :  <ul> <li> *nom* : entité de niveau supérieur identifiée. L'entité représente la forme « normalisée ». </li> <li> *ID* :  identificateur unique de l'entité, tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li> <li> *description* : description de l'entité telle que définie par l'utilisateur dans le « Format de définition d'entité personnalisée ». </li> <li> *type :* type de l'entité tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li> <li> *subtype :* sous-type de l'entité, tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li>  <li> *matches* : collection qui décrit chacune des correspondances de cette entité sur le texte source. Chaque correspondance comportera les membres suivants : </li> <ul> <li> *text* : correspondance en texte brut issue du document source. </li> <li> *offset* : emplacement où la correspondance a été trouvée dans le texte. </li> <li> *length* :  longueur du texte de la correspondance. </li> <li> *matchDistance* : nombre de caractères séparant cette correspondance du nom ou de l'alias de l'entité d'origine.  </li> </ul> </ul>
+| `entities` | Groupe d'objets contenant des informations sur les correspondances trouvées et les métadonnées associées. Chacune des entités identifiées peut contenir les champs suivants :  <ul> <li> *nom* : entité de niveau supérieur identifiée. L'entité représente la forme « normalisée ». </li> <li> *ID* :  identificateur unique de l'entité, tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li> <li> *description* : description de l'entité telle que définie par l'utilisateur dans le « Format de définition d'entité personnalisée ». </li> <li> *type :* type de l'entité tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li> <li> *subtype :* sous-type de l'entité, tel que défini par l'utilisateur dans le « Format de définition d'entité personnalisée ».</li>  <li> *matches* : collection qui décrit chacune des correspondances de cette entité sur le texte source. Chaque correspondance comportera les membres suivants : </li> <ul> <li> *text* : correspondance en texte brut issue du document source. </li> <li> *offset* : emplacement où la correspondance a été trouvée dans le texte. </li> <li> *length* :  longueur du texte de la correspondance. </li> <li> *matchDistance* : nombre de caractères séparant cette correspondance du nom ou de l'alias de l'entité d'origine.  </li> </ul> </ul>
   |
 
 ## <a name="custom-entity-definition-format"></a>Format de définition d'entité personnalisée
@@ -145,22 +145,22 @@ Les tableaux ci-dessous décrivent plus en détail les différents paramètres d
 
 |  Nom du champ  |        Description  |
 |--------------|----------------------|
-| name | descripteur d'entité de niveau supérieur. Dans la sortie de la compétence, les correspondances seront regroupées en fonction de ce nom. Il s'agit de la forme « normalisée » du texte trouvé.  |
-| description  | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
-| type | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
-| subtype | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
-| id | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
-| caseSensitive | (Facultatif) La valeur par défaut est « False ». Valeur booléenne indiquant si les comparaisons avec le nom de l'entité doivent respecter la casse des caractères. Exemples de correspondances qui ne respectent pas la casse de « Microsoft » : microsoft, microSoft, MICROSOFT |
-| fuzzyEditDistance | (Facultatif) La valeur par défaut est 0. La valeur maximale est 5. Indique le nombre acceptable de caractères divergents qui constitueraient encore une correspondance avec le nom de l'entité. La plus petite approximation possible d'une correspondance donnée est renvoyée.  Par exemple, si la distance de modification est définie sur 3, « Windows 10 » correspondra encore à « Windows », « Windows10 » et « windows 7 ». <br/> Lorsque le respect de la casse est défini sur « False », les différences de casse ne comptent PAS dans le cadre de la tolérance aux approximations, mais sinon elles comptent. |
-| defaultCaseSensitive | (Facultatif) Modifie la valeur de respect de la casse par défaut pour cette entité. Elle peut être utilisée pour modifier les valeurs caseSensitive par défaut de tous les alias. |
-| defaultFuzzyEditDistance | (Facultatif) Modifie la valeur par défaut de la distance de modification approximative pour cette entité. Elle peut être utilisée pour modifier les valeurs fuzzyEditDistance par défaut de tous les alias. |
-| aliases | (Facultatif) Groupe d'objets complexes qui peut être utilisé pour spécifier d'autres orthographes ou des synonymes au nom de l'entité racine. |
+| `name` | descripteur d'entité de niveau supérieur. Dans la sortie de la compétence, les correspondances seront regroupées en fonction de ce nom. Il s'agit de la forme « normalisée » du texte trouvé.  |
+| `description`  | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
+| `type` | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
+| `subtype` | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
+| `id` | (Facultatif) Ce champ peut être utilisé pour transmettre des métadonnées personnalisées au sujet du(des) texte(s) comparés. La valeur de ce champ apparaîtra avec chaque correspondance de son entité dans la sortie de la compétence. |
+| `caseSensitive` | (Facultatif) La valeur par défaut est « False ». Valeur booléenne indiquant si les comparaisons avec le nom de l'entité doivent respecter la casse des caractères. Exemples de correspondances qui ne respectent pas la casse de « Microsoft » : microsoft, microSoft, MICROSOFT |
+| `fuzzyEditDistance` | (Facultatif) La valeur par défaut est 0. La valeur maximale est 5. Indique le nombre acceptable de caractères divergents qui constitueraient encore une correspondance avec le nom de l'entité. La plus petite approximation possible d'une correspondance donnée est renvoyée.  Par exemple, si la distance de modification est définie sur 3, « Windows 10 » correspondra encore à « Windows », « Windows10 » et « windows 7 ». <br/> Lorsque le respect de la casse est défini sur « False », les différences de casse ne comptent PAS dans le cadre de la tolérance aux approximations, mais sinon elles comptent. |
+| `defaultCaseSensitive` | (Facultatif) Modifie la valeur de respect de la casse par défaut pour cette entité. Elle peut être utilisée pour modifier les valeurs caseSensitive par défaut de tous les alias. |
+| `defaultFuzzyEditDistance` | (Facultatif) Modifie la valeur par défaut de la distance de modification approximative pour cette entité. Elle peut être utilisée pour modifier les valeurs fuzzyEditDistance par défaut de tous les alias. |
+| `aliases` | (Facultatif) Groupe d'objets complexes qui peut être utilisé pour spécifier d'autres orthographes ou des synonymes au nom de l'entité racine. |
 
 | Propriétés des alias | Description |
 |------------------|-------------|
-| text  | Autre orthographe ou représentation d'un nom d'entité cible.  |
-| caseSensitive | (Facultatif) Agit de la même manière que le paramètre « caseSensitive » de l'entité racine ci-dessus, mais ne s'applique qu'à cet alias. |
-| fuzzyEditDistance | (Facultatif) Agit de la même manière que le paramètre « fuzzyEditDistance » de l'entité racine ci-dessus, mais ne s'applique qu'à cet alias. |
+| `text`  | Autre orthographe ou représentation d'un nom d'entité cible.  |
+| `caseSensitive` | (Facultatif) Agit de la même manière que le paramètre « caseSensitive » de l'entité racine ci-dessus, mais ne s'applique qu'à cet alias. |
+| `fuzzyEditDistance` | (Facultatif) Agit de la même manière que le paramètre « fuzzyEditDistance » de l'entité racine ci-dessus, mais ne s'applique qu'à cet alias. |
 
 
 ### <a name="inline-format"></a>Format inline
@@ -188,7 +188,7 @@ Voici un exemple de définition de compétence utilisant un format inline :
       }, 
       { 
         "name" : "Xbox One", 
-        "type": "Harware",
+        "type": "Hardware",
         "subtype" : "Gaming Device",
         "id" : "4e36bf9d-5550-4396-8647-8e43d7564a76",
         "description" : "The Xbox One product"
@@ -208,7 +208,7 @@ Voici un exemple de définition de compétence utilisant un format inline :
     ]
   }
 ```
-Par ailleurs, si vous décidez de fournir un pointeur vers le fichier de définition des entités, un exemple de définition de compétence utilisant le format entitiesDefinitionUri est présenté ci-dessous :
+Par ailleurs, si vous décidez de fournir un pointeur vers le fichier de définition des entités, un exemple de définition de compétence utilisant le format `entitiesDefinitionUri` est présenté ci-dessous :
 
 ```json
   {
@@ -240,7 +240,7 @@ Par ailleurs, si vous décidez de fournir un pointeur vers le fichier de défini
         "recordId": "1",
         "data":
            {
-             "text": "The company microsoft was founded by Bill Gates. Microsoft's gaming console is called Xbox",
+             "text": "The company, Microsoft, was founded by Bill Gates. Microsoft's gaming console is called Xbox",
              "languageCode": "en"
            }
       }

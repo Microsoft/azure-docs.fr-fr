@@ -8,35 +8,50 @@ manager: femila
 ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
-ms.date: 12/09/2019
+ms.date: 11/16/2020
 ms.author: juliako
-ms.openlocfilehash: 2fac5e07f9646c4fc0fac7b1be53b5a5ac1ea803
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bf48f873127a12c3cabb28da33d34cedcda2793b
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225453"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94831564"
 ---
-# <a name="examine-the-video-indexer-output-produced-by-api"></a>Examiner la sortie de Video Indexer générée par l’API
+# <a name="examine-the-video-indexer-output"></a>Examiner la sortie Video Indexer
 
-Si vous appelez l’API **Get Video Index** (Obtenir un index vidéo) et si l’état de la réponse est OK, vous obtenez une sortie JSON détaillée en tant que contenu de la réponse. Le contenu JSON détaille les insights des vidéos spécifiées. Ces insights incluent : des transcriptions, des OCR, des visages, des rubriques, des blocs, etc. Chaque type d’insight comprend des instances d’intervalle de temps qui indiquent quand l’insight apparaît dans la vidéo. 
+Quand une vidéo est indexée, Video Indexer produit le contenu JSON qui contient les détails des insights vidéo spécifiés. Ces insights incluent : des transcriptions, des OCR, des visages, des rubriques, des blocs, etc. Chaque type d’insight comprend des instances d’intervalle de temps qui indiquent quand l’insight apparaît dans la vidéo. 
+
+Vous pouvez examiner visuellement les insights résumés de la vidéo en appuyant sur le bouton **Lire** sur le site web de [Video Indexer](https://www.videoindexer.ai/). 
+
+Vous pouvez également utiliser l’API en appelant l’API **Get Video Index** et, si l’état de la réponse est OK, vous obtenez une sortie JSON détaillée en tant que contenu de la réponse.
+
+![Insights](./media/video-indexer-output-json/video-indexer-summarized-insights.png)
+
+Cet article examine la sortie Video Indexer (contenu JSON). <br/>Pour plus d’informations sur les fonctionnalités et les insights à votre disposition, consultez [Insights de Video Indexer](video-indexer-overview.md#video-insights).
+
+> [!NOTE]
+> Tous les jetons d’accès dans Video Indexer arrivent à expiration au bout d’une heure.
+
+## <a name="get-the-insights"></a>Obtenir des insights
+
+### <a name="insightsoutput-produced-in-the-websiteportal"></a>Insights/sortie produits dans le site web ou le portail
+
+1. Accédez au site web [Video Indexer](https://www.videoindexer.ai/) et connectez-vous.
+1. Recherchez une vidéo dont vous souhaitez examiner la sortie.
+1. Appuyez sur **Lecture**.
+1. Sélectionnez l’onglet **Insights** (insights résumés) ou l’onglet **Chronologie** (permet de filtrer les insights pertinents).
+1. Téléchargez les artefacts et ce qu’ils contiennent.
+
+Pour plus d’informations, voir [View and edit video insights](video-indexer-view-edit.md) (Afficher et modifier les insights des vidéos).
+
+## <a name="insightsoutput-produced-by-api"></a>Insights/sortie produits par l’API
 
 1. Pour récupérer le fichier JSON, appelez [Get Video Index API](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Index?)
 1. Si vous êtes également intéressé par des artefacts spécifiques, appelez [Get Video Artifact Download URL API](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Artifact-Download-Url?)
 
     Dans l’appel d’API, spécifiez le type d’artefact demandé (OCR, Faces, Key frames etc.)
 
-Vous pouvez également examiner visuellement les insights résumés de la vidéo en appuyant sur le bouton **Lire** sur le site web [Video Indexer](https://www.videoindexer.ai/). Pour plus d’informations, voir [View and edit video insights](video-indexer-view-edit.md) (Afficher et modifier les insights des vidéos).
-
-![Insights](./media/video-indexer-output-json/video-indexer-summarized-insights.png)
-
-Cet article examine le contenu JSON retourné par l’API **Get Video Index** (Obtenir un index vidéo). 
-
-> [!NOTE]
-> Tous les jetons d’accès dans Video Indexer arrivent à expiration au bout d’une heure.
-
-
-## <a name="root-elements"></a>Éléments racines
+## <a name="root-elements-of-the-insights"></a>Éléments racines des insights
 
 |Nom|Description|
 |---|---|
@@ -86,10 +101,10 @@ Cette section présente le résumé des insights.
 |duration|Contient la durée d’un insight. La durée est exprimée en secondes.|
 |thumbnailVideoId|ID de la vidéo à partir de laquelle la vidéo miniature a été réalisée.
 |thumbnailId|ID de la miniature de la vidéo. Pour obtenir la vidéo miniature réelle, appelez la méthode [Get-Thumbnail](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Thumbnail) et transmettez-lui les attributs thumbnailVideoId et thumbnailId.|
-|visages|Peut contenir zéro ou plusieurs visages. Pour plus d’informations, consultez la section [faces](#faces).|
+|faces/animatedCharacters|Peut contenir zéro ou plusieurs visages. Pour plus d’informations, consultez la section [faces/animatedCharacters](#facesanimatedcharacters).|
 |mots clés|Peut contenir zéro ou plusieurs mots clés. Pour plus d’informations, consultez la section [keywords](#keywords).|
 |sentiments|Peut contenir zéro ou plusieurs sentiments. Pour plus d’informations, consultez la section [sentiments](#sentiments).|
-|audioEffects| Peut contenir zéro ou plusieurs éléments audioEffect. Pour plus d’informations, consultez la section [audioEffects](#audioEffects).|
+|audioEffects| Peut contenir zéro ou plusieurs éléments audioEffect. Pour plus d’informations, consultez la section [audioEffects](#audioeffects).|
 |étiquettes| Peut contenir zéro ou plusieurs étiquettes. Pour plus d’informations, consultez la section [labels](#labels).|
 |brands| Peut contenir zéro ou plusieurs marques. Pour plus d’informations, consultez la section [brands](#brands).|
 |statistiques | Pour plus d’informations, consultez la section [statistics](#statistics).|
@@ -162,16 +177,17 @@ Un visage peut être doté d’un ID, d’un nom, d’une miniature, d’autres 
 |ocr|L’insight [OCR](#ocr).|
 |mots clés|L’insight [mots clés](#keywords).|
 |blocks|Peut contenir un ou plusieurs [blocs](#blocks).|
-|visages|L’insight [visages](#faces).|
+|faces/animatedCharacters|L’insight [faces/animatedCharacters](#facesanimatedcharacters).|
 |étiquettes|L’insight [étiquettes](#labels).|
 |captures|L’insight [captures](#shots).|
 |brands|L’insight [brands](#brands).|
-|audioEffects|L’insight [audioEffects](#audioEffects).|
+|audioEffects|L’insight [audioEffects](#audioeffects).|
 |sentiments|L’insight [sentiments](#sentiments).|
 |visualContentModeration|L’insight [visualContentModeration](#visualcontentmoderation).|
 |textualContentModeration|L’insight [textualContentModeration](#textualcontentmoderation).|
 |émotions| L’insight [émotions](#emotions).|
 |topics|L’insight [rubriques](#topics).|
+|speakers|L’insight [speakers](#speakers) (intervenants).|
 
 Exemple :
 
@@ -207,36 +223,45 @@ instances|Liste des intervalles de temps de ce bloc.|
 |---|---|
 |id|ID de la ligne.|
 |text|La transcription proprement dite.|
+|confidence|Fiabilité de la précision de la transcription.|
+|speakerId|ID de l’intervenant.|
 |langage|La langue de la transcription. Permet de prendre en charge la transcription lorsque chaque ligne peut avoir une langue différente.|
 |instances|Liste des intervalles de temps pendant lesquels cette ligne est apparue. Si l’instance est un attribut transcript, il n’y a qu’une seule instance.|
 
 Exemple :
 
 ```json
-"transcript": [
+"transcript":[
 {
-    "id": 0,
-    "text": "Hi I'm Doug from office.",
-    "language": "en-US",
-    "instances": [
-    {
-        "start": "00:00:00.5100000",
-        "end": "00:00:02.7200000"
-    }
-    ]
+  "id":1,
+  "text":"Well, good morning everyone and welcome to",
+  "confidence":0.8839,
+  "speakerId":1,
+  "language":"en-US",
+  "instances":[
+     {
+    "adjustedStart":"0:00:10.21",
+    "adjustedEnd":"0:00:12.81",
+    "start":"0:00:10.21",
+    "end":"0:00:12.81"
+     }
+  ]
 },
 {
-    "id": 1,
-    "text": "I have a guest. It's Michelle.",
-    "language": "en-US",
-    "instances": [
-    {
-        "start": "00:00:02.7200000",
-        "end": "00:00:03.9600000"
-    }
-    ]
-}
-] 
+  "id":2,
+  "text":"ignite 2016. Your mission at Microsoft is to empower every",
+  "confidence":0.8944,
+  "speakerId":2,
+  "language":"en-US",
+  "instances":[
+     {
+    "adjustedStart":"0:00:12.81",
+    "adjustedEnd":"0:00:17.03",
+    "start":"0:00:12.81",
+    "end":"0:00:17.03"
+     }
+  ]
+},
 ```
 
 #### <a name="ocr"></a>ocr
@@ -305,7 +330,11 @@ Exemple :
 }
 ```
 
-#### <a name="faces"></a>visages
+#### <a name="facesanimatedcharacters"></a>faces/animatedCharacters
+
+L’élément `animatedCharacters` remplace `faces` dans le cas où la vidéo a été indexée avec un modèle de personnages animés. Cette opération s’effectue à l’aide d’un modèle personnalisé dans Custom Vision, et Video Indexer l’exécute sur des images clés.
+
+Si des visages (et non des personnages animés) sont présents, Video Indexer utilise l’API Visage sur toutes les images de la vidéo pour détecter les visages et les célébrités.
 
 |Nom|Description|
 |---|---|
@@ -561,7 +590,7 @@ Noms des entreprises et des marques de produits détectés dans la reconnaissanc
 |SpeakerLongestMonolog|Monologue le plus long de l’intervenant. Si le monologue de l’intervenant comporte des silences, ils sont inclus. Les silences du début et de la fin du monologue sont supprimés.| 
 |SpeakerTalkToListenRatio|Le calcul est basé sur le temps passé sur le monologue de l’intervenant (sans les silences intermédiaires) divisé par la durée totale de la vidéo. L’heure est arrondie à la troisième décimale.|
 
-#### <a name="audioeffects"></a><a id="audioEffects"/>audioEffects
+#### <a name="audioeffects"></a>audioEffects
 
 |Nom|Description|
 |---|---|
@@ -808,6 +837,42 @@ Video Indexer fait des inférences des principales rubriques à partir de transc
 . . .
 ```
 
+#### <a name="speakers"></a>speakers
+
+|Nom|Description|
+|---|---|
+|id|ID de l’intervenant.|
+|name|Nom de l’intervenant sous la forme « Speaker # *<number>*  », par exemple : « Speaker #1 ».|
+|instances |Liste des intervalles de temps pendant lesquels cet intervenant est apparu.|
+
+```json
+"speakers":[
+{
+  "id":1,
+  "name":"Speaker #1",
+  "instances":[
+     {
+    "adjustedStart":"0:00:10.21",
+    "adjustedEnd":"0:00:12.81",
+    "start":"0:00:10.21",
+    "end":"0:00:12.81"
+     }
+  ]
+},
+{
+  "id":2,
+  "name":"Speaker #2",
+  "instances":[
+     {
+    "adjustedStart":"0:00:12.81",
+    "adjustedEnd":"0:00:17.03",
+    "start":"0:00:12.81",
+    "end":"0:00:17.03"
+     }
+  ]
+},
+` ` `
+```
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Portail des développeurs Video Indexer](https://api-portal.videoindexer.ai)

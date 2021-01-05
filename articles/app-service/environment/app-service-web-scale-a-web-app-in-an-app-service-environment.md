@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 10/17/2016
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 43849ca7084f2237c37ad537c50f4e94ac4ea7c0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0e665ec27da0a898e754817f946b965ac7360fda
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74688676"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86220556"
 ---
 # <a name="scaling-apps-in-an-app-service-environment-v1"></a>Mise à l’échelle d’applications dans un environnement App Service v1
 Dans Azure App Service, il existe normalement trois éléments que vous pouvez mettre à l'échelle :
@@ -30,7 +30,7 @@ En ce qui concerne les tailles de travaux, l'administrateur de l'environnement A
 
 La modification de l'un ou l'autre élément s'effectue via l'interface utilisateur appropriée pour vos plans App Service hébergés par ASE.  
 
-![][1]
+![Capture d’écran montrant où afficher les détails du plan de service Scale et du plan de service Worker Pool.][1]
 
 Vous ne pouvez pas mettre à l'échelle votre ASP au-delà du nombre de ressources de calcul disponibles du pool de travaux où se trouve votre ASP.  Si vous avez besoin de ressources de calcul dans ce pool de travaux, vous devez demander à l'administrateur de votre environnement App Service de les ajouter.  Pour plus d’informations sur la reconfiguration de votre environnement App Service Environment, consultez [Comment configurer un environnement App Service][HowtoConfigureASE].  Vous pouvez également tirer parti des fonctionnalités de mise à l'échelle automatique d'ASE pour ajouter de la capacité en fonction de la planification ou des mesures.  Pour obtenir des informations sur la configuration de mise à l’échelle automatique de l’environnement ASE lui-même, consultez [Configuration de la mise à l’échelle automatique pour un environnement App Service][ASEAutoscale].
 
@@ -41,14 +41,14 @@ Lorsque vous créez votre application web dans un environnement App Service, ell
 
 Si votre environnement Application Service a une capacité suffisante, l'opération est assez simple.  Vous accédez à votre plan App Service qui contient les sites que vous souhaitez mettre à l'échelle et vous sélectionnez Mettre à l'échelle.  Ceci affiche l'interface utilisateur où vous pouvez définir manuellement l'échelle de votre ASP ou configurer des règles de mise à l'échelle automatique pour votre ASP.  Pour mettre à l'échelle manuellement votre application, il vous suffit de définir ***Mise à l'échelle selon*** sur ***un nombre d'instances saisi manuellement***.  À partir de là, faites glisser le curseur vers la quantité souhaitée ou entrez la quantité souhaitée dans la zone à côté du curseur.  
 
-![][2] 
+![Capture d’écran montrant où vous pouvez définir l'échelle de votre ASP ou configurer des règles de mise à l'échelle automatique pour votre ASP.][2] 
 
 Les règles de mise à l'échelle automatique d'un ASP dans un travail ASE fonctionnent de manière normale.  Vous pouvez sélectionner ***Pourcentage UC*** sous ***Mise à l'échelle selon*** et créer des règles de mise à l'échelle automatique de votre ASP basées sur le pourcentage UC ou vous pouvez créer des règles plus complexes à l'aide des ***règles de performances et de planification***.  Pour plus d’informations sur la configuration de la mise à l’échelle automatique, utilisez le guide [Mise à l’échelle d’une application dans Azure App Service][AppScale]. 
 
 ### <a name="worker-pool-selection"></a>Sélection du pool de travaux
 Comme indiqué précédemment, la sélection du pool de travaux s'effectue à partir de l'interface utilisateur du plan App Service (ASP).  Ouvrez le panneau de l'ASP que vous souhaitez mettre à l'échelle et sélectionnez le pool de travaux.  Tous les pools de travaux que vous avez configurés dans votre environnement App Service s'affichent.  Si vous n'avez qu'un pool de travaux, lui seul apparaît.  Pour modifier le pool de travaux dans lequel se trouve votre ASP, il suffit de sélectionner le pool de travaux vers lequel vous souhaitez déplacer votre plan App Service.  
 
-![][3]
+![Capture d’écran montrant où vous pouvez modifier le worker pool dans lequel se trouve votre ASP.][3]
 
 Avant de déplacer votre ASP à partir d'un pool de travaux vers un autre, il est important de vous assurer que la capacité est adaptée pour votre ASP.  Dans la liste des pools de travaux, non seulement figure le nom du pool de travaux, mais également le nombre de travaux disponibles dans ce pool.  Veillez à ce qu'il y ait suffisamment d'instances disponibles pour contenir votre plan App Service.  Si vous avez besoin de plus de ressources de calcul dans le pool de travaux vers lequel vous souhaitez déplacer votre plan, demandez à l'administrateur de votre environnement App Service de les ajouter.  
 

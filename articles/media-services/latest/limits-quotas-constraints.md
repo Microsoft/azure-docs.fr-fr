@@ -3,23 +3,25 @@ title: Quotas et limites dans Azure Media Services
 description: Cette rubrique décrit les quotas et les limites de Microsoft Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: article
-ms.date: 04/01/2020
-ms.author: juliako
-ms.openlocfilehash: e9855a02a57d71793f3a5d6c5ce01cbfda341b70
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 10/23/2020
+ms.author: inhenkel
+ms.openlocfilehash: d6ca7a444f2a3d4babe220548edb10bd37784be7
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632223"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678114"
 ---
 <!-- If you update limits in this topic, make sure to also update https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#media-services-limits -->
 # <a name="azure-media-services-quotas-and-limits"></a>Quotas et limites d'Azure Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Cet article répertorie quelques-unes des limites les plus courantes de Microsoft Azure Media Services, parfois appelées des quotas.
 
@@ -28,14 +30,14 @@ Cet article répertorie quelques-unes des limites les plus courantes de Microsof
 
 ## <a name="account-limits"></a>Limites relatives aux comptes
 
-| Ressource | Limite par défaut | 
-| --- | --- | 
-| [Comptes Media Services](media-services-account-concept.md) dans le cadre d'un même abonnement | 25 (fixe) |
+| Ressource | Limite par défaut |
+| --- | --- |
+| [Comptes Media Services](media-services-account-concept.md) dans le cadre d'un même abonnement | 100 (fixe) |
 
 ## <a name="asset-limits"></a>Limites relatives aux ressources
 
-| Ressource | Limite par défaut | 
-| --- | --- | 
+| Ressource | Limite par défaut |
+| --- | --- |
 | [Ressources](assets-concept.md) par compte Media Services | 1 000 000|
 
 ## <a name="storage-limits"></a>Limites de stockage
@@ -62,13 +64,13 @@ Le tableau suivant indique les limites pour les unités réservées Multimédia 
 | Ressource | Limite par défaut | 
 | --- | --- | 
 | [Travaux](transforms-jobs-concept.md) par compte Media Services | 500 000 <sup>(3)</sup> (fixe)|
-| Entrées par travail | 50 (fixe)|
-| Sorties par travail | 20 (fixe) |
+| Entrées de travaux - par travail | 50 (fixe)|
+| Sorties de travaux - par travail | 20 (fixe) |
 | [Transformations](transforms-jobs-concept.md) par compte Media Services | 100 (fixe)|
-| Sorties dans une transformation | 20 (fixe) |
+| Sorties de transformation dans une transformation | 20 (fixe) |
 | Fichiers par entrée de travail|10 (fixe)|
 
-<sup>3</sup> Ce nombre comprend les travaux en file d'attente, terminés, actifs et annulés. Il n’inclut pas les travaux supprimés. 
+<sup>3</sup> Ce nombre comprend les travaux en file d’attente, terminés, actifs et annulés. Il n’inclut pas les travaux supprimés. 
 
 Les enregistrements de travaux de votre compte qui ont plus de 90 jours sont automatiquement supprimés, même si le nombre total d’enregistrements est inférieur au quota maximal. 
 
@@ -78,30 +80,31 @@ Les enregistrements de travaux de votre compte qui ont plus de 90 jours sont aut
 | --- | --- | 
 | [Événements en direct](live-events-outputs-concept.md) <sup>(4)</sup> par compte Media Services |5|
 | Sorties en direct par événement en direct |3 <sup>(5)</sup> |
-| Durée maximale de la sortie en direct | 25 heures |
+| Durée maximale de la sortie en direct | [Taille de la fenêtre DVR](live-event-cloud-dvr.md) |
 
 <sup>4</sup> Pour plus d'informations sur les limites relatives aux événements en direct, consultez [Comparaison et limites des types d'événements en direct](live-event-types-comparison.md).
 
 <sup>5</sup> Les sorties en direct démarrent dès leur création et s'arrêtent lors de leur suppression.
 
-## <a name="packaging--delivery-limits"></a>Limites relatives à l'empaquetage et à la remise
+## <a name="packaging--delivery-limits"></a>Limites relatives à l’empaquetage et à la remise
 
-| Ressource | Limite par défaut | 
-| --- | --- | 
-| [Points de terminaison de streaming](streaming-endpoint-concept.md) (arrêtés ou en cours d'exécution) par compte Media Services|2 |
+| Ressource | Limite par défaut |
+| --- | --- |
+| [Points de terminaison de streaming](streaming-endpoint-concept.md) (arrêtés ou en cours d'exécution) par compte Media Services | 2 |
+| Unités de streaming Premium | 10 |
 | [Filtres de manifeste dynamique](filters-dynamic-manifest-overview.md)|100|
 | [Stratégies de diffusion en continu](streaming-policy-concept.md) | 100 <sup>(6)</sup> |
 | [Localisateurs de streaming](streaming-locators-concept.md) uniques associés à une ressource à un moment donné | 100<sup>(7)</sup> (fixe) |
 
-<sup>6</sup> Lorsque vous utilisez une [stratégie de streaming](https://docs.microsoft.com/rest/api/media/streamingpolicies) personnalisée, vous devez concevoir un ensemble limité de ces stratégies pour votre compte Media Services et les réutiliser pour vos éléments StreamingLocators chaque fois que les mêmes protocoles et options de chiffrement sont nécessaires. Vous ne devez pas créer une stratégie de diffusion en continu pour chaque localisateur de diffusion en continu.
+<sup>6</sup> Quand vous utilisez une [stratégie de streaming](/rest/api/media/streamingpolicies) personnalisée, vous devez concevoir un ensemble limité de ces stratégies pour votre compte Media Services, et les réutiliser pour vos éléments StreamingLocators chaque fois que les mêmes protocoles et options de chiffrement sont nécessaires. Vous ne devez pas créer une stratégie de diffusion en continu pour chaque localisateur de diffusion en continu.
 
-<sup>7</sup> Les localisateurs de streaming ne sont pas conçus pour gérer le contrôle d'accès par utilisateur. Pour accorder différents droits d’accès aux utilisateurs, utilisez les solutions de gestion des droits numériques (DRM).
+<sup>7</sup> Les localisateurs de streaming ne sont pas conçus pour gérer le contrôle d’accès par utilisateur. Pour accorder différents droits d’accès aux utilisateurs, utilisez les solutions de gestion des droits numériques (DRM).
 
 ## <a name="protection-limits"></a>Limites relatives à la protection
 
-| Ressource | Limite par défaut | 
-| --- | --- | 
-| Options par [stratégie de clé de contenu](content-key-policy-concept.md) |30 | 
+| Ressource | Limite par défaut |
+| --- | --- |
+| Options par [stratégie de clé de contenu](content-key-policy-concept.md) |30 |
 | Licences par mois pour chacun des types de DRM sur le service de remise de clé Media Services par compte|1 000 000|
 
 ## <a name="support-ticket"></a>Ticket de support

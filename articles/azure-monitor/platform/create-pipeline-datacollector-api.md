@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 08/09/2018
-ms.openlocfilehash: 96c64f6a0167b678f14bf0199069ecd6b4c8d57a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ac2b79046718fe45ad0dad0396b6f7653efbb779
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80055112"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86505327"
 ---
 # <a name="create-a-data-pipeline-with-the-data-collector-api"></a>Créer un pipeline de données avec l’API Collecte de données
 
@@ -43,7 +43,7 @@ Cet article n’explique pas comment créer des données ou [les charger dans un
 
 Bien que la configuration détaillée du stockage blob, de Logic App ou d’Azure Function ne soit pas décrite dans le présent article, des instructions détaillées sont disponibles sur les pages produits spécifiques.
 
-Dans le cadre de la surveillance de ce pipeline, nous utilisons Application Insights pour surveiller notre fonction Azure ([voir détails ici](../../azure-functions/functions-monitoring.md)) et Azure Monitor pour surveiller notre application logique ([voir détails ici](../../logic-apps/logic-apps-monitor-your-logic-apps-oms.md)). 
+Dans le cadre de la surveillance de ce pipeline, nous utilisons Application Insights pour surveiller notre fonction Azure ([voir détails ici](../../azure-functions/functions-monitoring.md)) et Azure Monitor pour surveiller notre application logique ([voir détails ici](../../logic-apps/monitor-logic-apps-log-analytics.md)). 
 
 ## <a name="setting-up-the-pipeline"></a>Configuration du pipeline
 Pour configurer le pipeline, assurez-vous que vous avez créé et configuré votre conteneur blob. Vérifiez également que l’espace de travail Log Analytics vers lequel vous souhaitez envoyer les données a bien été créé.

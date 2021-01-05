@@ -3,24 +3,25 @@ title: Activer des abonnements et comptes Azure
 description: Activez l’accès à l’aide des API Azure Resource Manager pour les comptes nouveaux et existants et résoudre les problèmes de compte courants.
 author: bandersmsft
 ms.author: banders
-ms.date: 03/12/2020
+ms.date: 10/23/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.reviewer: vitavor
 ms.custom: secdec18
 ROBOTS: NOINDEX
-ms.openlocfilehash: 62138163b3c3f94d60c55cf93d84db5dff446823
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b1b7ea7467be107bd1af9daf0869c77ff0b94c70
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79474660"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92537341"
 ---
 # <a name="activate-azure-subscriptions-and-accounts-with-cloudyn"></a>Activer des abonnements et des comptes Azure avec Cloudyn
 
 L’ajout ou la mise à jour de vos informations d’identification Azure Resource Manager permet à Cloudyn de découvrir tous les comptes et abonnements au sein de votre locataire Azure. De plus, si l’extension Diagnostics Azure est activée sur vos machines virtuelles, Cloudyn peut collecter les métriques étendues telles que l’utilisation du processeur et de la mémoire. Cet article explique comment activer l’accès à l’aide des API Azure Resource Manager pour les comptes nouveaux et existants. Il indique également comment et résoudre les problèmes de compte courants.
 
-Cloudyn ne peut pas accéder à la plupart des données de votre abonnement Azure quand celui-ci _n’est pas activé_. Vous devez modifier les comptes _non activés_ afin que Cloudyn puisse y accéder.
+Cloudyn ne peut pas accéder à la plupart des données de votre abonnement Azure quand celui-ci _n’est pas activé_ . Vous devez modifier les comptes _non activés_ afin que Cloudyn puisse y accéder.
 
 [!INCLUDE [cloudyn-note](../../../includes/cloudyn-note.md)]
 
@@ -38,12 +39,12 @@ Si le rôle **Collaborateur** est affecté à votre compte, vous ne disposez pas
 ### <a name="check-azure-active-directory-permissions"></a>Vérifier les autorisations Azure Active Directory
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
-2. Dans le portail Azure, sélectionnez **Azure Active Directory**.
-3. Dans Azure Active Directory, sélectionnez **Paramètres utilisateur**.
-4. Vérifiez l’option **Inscriptions d’applications**.
-    - Si elle est définie sur **Oui**, les utilisateurs non-administrateurs peuvent inscrire des applications AD. Ce paramètre signifie que n’importe quel utilisateur dans Azure AD peut inscrire une application.  
+2. Dans le portail Azure, sélectionnez **Azure Active Directory** .
+3. Dans Azure Active Directory, sélectionnez **Paramètres utilisateur** .
+4. Vérifiez l’option **Inscriptions d’applications** .
+    - Si elle est définie sur **Oui** , les utilisateurs non-administrateurs peuvent inscrire des applications AD. Ce paramètre signifie que n’importe quel utilisateur dans Azure AD peut inscrire une application.  
     ![Sélectionner des inscriptions d’applications dans les paramètres utilisateur](./media/activate-subs-accounts/app-register.png)
-    - Si l’option **Inscriptions des applications** est définie sur **Non**, seuls les utilisateurs administratifs de locataire peuvent inscrire des applications Azure Active Directory. Votre administrateur de locataire doit inscrire l’application CloudynCollector.
+    - Si l’option **Inscriptions des applications** est définie sur **Non** , seuls les utilisateurs administratifs de locataire peuvent inscrire des applications Azure Active Directory. Votre administrateur de locataire doit inscrire l’application CloudynCollector.
 
 
 ## <a name="add-an-account-or-update-a-subscription"></a>Ajouter un compte ou mettre à jour un abonnement
@@ -62,19 +63,19 @@ Quand vous ajoutez un compte ou mettez à jour un abonnement, vous accordez à C
     ![Sélectionner votre ID de locataire dans la zone Redécouvrir les abonnements](./media/activate-subs-accounts/existing-sub.png)
 2. Si nécessaire, entrez l’ID de locataire. Si vous ne le connaissez pas, effectuez les étapes suivantes pour le rechercher :
     1. Connectez-vous au [portail Azure](https://portal.azure.com).
-    2. Dans le portail Azure, sélectionnez **Azure Active Directory**.
+    2. Dans le portail Azure, sélectionnez **Azure Active Directory** .
     3. Pour obtenir l’ID de locataire, sélectionnez **Propriétés** pour votre client Azure AD.
     4. Copiez le GUID ID de répertoire. Cette valeur est votre ID de locataire.
-    Pour plus d’informations, consultez [Obtenir l’ID de locataire](../../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+    Pour plus d’informations, consultez [Obtenir l’ID de locataire](../../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
 3. Si nécessaire, sélectionnez votre Code produit. Si vous ne le connaissez pas, effectuez les étapes suivantes pour le rechercher.
-    1. Dans l’angle supérieur droit du portail Azure, cliquez sur vos informations utilisateur, puis sur **Afficher ma facture**.
-    2. Sous **Compte de facturation**, cliquez sur **Abonnements**.
-    3. Sous **Mes abonnements**, sélectionnez l’abonnement.
-    4. Votre code produit est affiché sous **ID de l’offre**. Copiez l’ID de l’offre de l’abonnement.
-4. Dans la boîte de dialogue Ajouter un compte (ou Modifier l’abonnement), cliquez sur **Enregistrer** (ou **Suivant**). Vous êtes redirigé vers le portail Azure.
+    1. Dans l’angle supérieur droit du portail Azure, cliquez sur vos informations utilisateur, puis sur **Afficher ma facture** .
+    2. Sous **Compte de facturation** , cliquez sur **Abonnements** .
+    3. Sous **Mes abonnements** , sélectionnez l’abonnement.
+    4. Votre code produit est affiché sous **ID de l’offre** . Copiez l’ID de l’offre de l’abonnement.
+4. Dans la boîte de dialogue Ajouter un compte (ou Modifier l’abonnement), cliquez sur **Enregistrer** (ou **Suivant** ). Vous êtes redirigé vers le portail Azure.
 5. Connectez-vous au portail. Cliquez sur **Accepter** pour autoriser Cloudyn Collector à accéder à votre compte Azure.
 
-    Vous êtes redirigé vers la page de gestion des comptes Cloudyn et votre abonnement est mis à jour avec un état du compte **actif**. Il doit afficher un symbole de coche verte dans la colonne Resource Manager.
+    Vous êtes redirigé vers la page de gestion des comptes Cloudyn et votre abonnement est mis à jour avec un état du compte **actif** . Il doit afficher un symbole de coche verte dans la colonne Resource Manager.
 
     Si vous ne voyez pas un symbole de coche verte pour un ou plusieurs des abonnements, cela signifie que vous n’avez pas d’autorisations pour créer l’application de lecteur (le CloudynCollector) pour l’abonnement. Un utilisateur avec des autorisations plus élevées pour l’abonnement doit répéter ce processus.
 
@@ -86,8 +87,8 @@ Pour une présentation de ce processus, regardez la vidéo [Connecting to Azure 
 
 Lorsque vous utilisez le portail Cloudyn pour la première fois, les messages suivants peuvent s’afficher si vous disposez d’un contrat Entreprise ou de fournisseur de solutions cloud (CSP) :
 
-- *La clé d’API spécifiée n’est pas une clé d’inscription de niveau supérieur* dans l’Assistant **Configurer Cloudyn**.
-- *Inscription directe – Non*, sur le portail Contrat Entreprise.
+- *La clé d’API spécifiée n’est pas une clé d’inscription de niveau supérieur* dans l’Assistant **Configurer Cloudyn** .
+- *Inscription directe – Non* , sur le portail Contrat Entreprise.
 - *Aucune donnée d’utilisation trouvée pour les 30 derniers jours. Contactez votre distributeur pour vous assurer que le balisage a été activé pour votre compte Azure* s’affiche dans le portail Cloudyn.
 
 Ces messages indiquent que vous avez acheté un Contrat Entreprise Azure via un revendeur ou un CSP. Votre revendeur ou CSP doit activer le _balisage_ pour votre compte Azure afin que vous puissiez afficher vos données dans Cloudyn.
@@ -95,7 +96,7 @@ Ces messages indiquent que vous avez acheté un Contrat Entreprise Azure via un 
 Voici comment corriger les problèmes :
 
 1. Votre revendeur doit activer le _balisage_ pour votre compte. Consultez les instructions sous [Indirect Customer Onboarding Guide](https://ea.azure.com/api/v3Help/v2IndirectCustomerOnboardingGuide) (Guide d’intégration de client indirecte).
-2. Vous générez la clé Azure Enterprise Agreement à utiliser avec Cloudyn. Pour connaître les instruction, consultez [Inscrire un Accord Entreprise Azure et afficher les données de coût](https://docs.microsoft.com/azure/cost-management/quick-register-ea).
+2. Vous générez la clé Azure Enterprise Agreement à utiliser avec Cloudyn.
 
 Afin de pouvoir générer la clé API Azure Enterprise Agreement pour configurer Cloudyn, activez l’API de facturation Azure en suivant les instructions sous :
 
@@ -104,7 +105,7 @@ Afin de pouvoir générer la clé API Azure Enterprise Agreement pour configurer
 
 Vous devrez peut-être également accorder aux administrateurs de service, propriétaires de compte et administrateurs d’entreprise l’autorisation _d’afficher les frais_ avec l’API de facturation.
 
-Seul un administrateur de service Azure peut activer Cloudyn. Les autorisations de coadministrateur sont insuffisantes. Vous pouvez toutefois contourner l’exigence de l’administrateur. Vous pouvez demander à votre administrateur Azure Active Directory qu’il vous accorde une autorisation afin d’autoriser le **CloudynAzureCollector** avec un script PowerShell. Le script suivant accorde l’autorisation d’inscrire le principal du service Azure Active Directory **CloudynAzureCollector**.
+Seul un administrateur de service Azure peut activer Cloudyn. Les autorisations de coadministrateur sont insuffisantes. Vous pouvez toutefois contourner l’exigence de l’administrateur. Vous pouvez demander à votre administrateur Azure Active Directory qu’il vous accorde une autorisation afin d’autoriser le **CloudynAzureCollector** avec un script PowerShell. Le script suivant accorde l’autorisation d’inscrire le principal du service Azure Active Directory **CloudynAzureCollector** .
 
 
 ```powershell

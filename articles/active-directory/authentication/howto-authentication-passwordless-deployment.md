@@ -7,16 +7,16 @@ ms.subservice: authentication
 ms.topic: conceptual
 ms.date: 01/30/2020
 ms.author: baselden
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.reviewer: baselden, librown
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e3ed549e51b911452bca7d4d4a16c7ef45594a8f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a786907c5c954aa45de266b6d92dd47867a8445d
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81451429"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743613"
 ---
 # <a name="plan-a-passwordless-authentication-deployment-in-azure-active-directory"></a>Planifier un déploiement d’authentification sans mot de passe dans Azure Active Directory
 
@@ -43,9 +43,9 @@ Avec une approche sans mot de passe, le mot de passe est remplacé par une chose
 ## <a name="passwordless-authentication-methods"></a>Méthodes d’authentification sans mot de passe
 Microsoft propose trois options d’authentification sans mot de passe qui conviennent à de nombreux scénarios. Ces méthodes peuvent être utilisées conjointement :
 
-- [Windows Hello Entreprise](https://docs.microsoft.com/azure/security/fundamentals/ad-passwordless) est idéal pour les personnes utilisant leur ordinateur Windows dédié.
-- La connexion par clé de sécurité avec les [clés de sécurité FIDO2](https://docs.microsoft.com/azure/security/fundamentals/ad-passwordless) s’avère particulièrement pratique pour les utilisateurs qui se connectent à des machines partagées comme des bornes, mais aussi dans des situations où l’utilisation de téléphones est limitée, et pour des identités à privilèges élevés.
-- La connexion par téléphone avec [l’application Microsoft Authenticator](https://docs.microsoft.com/azure/security/fundamentals/ad-passwordless) est utile pour fournir une option sans mot de passe aux personnes disposant d’appareils mobiles. L’application Authenticator convertit n’importe quel téléphone iOS ou Android en information d’identification forte dépourvue de mot de passe, permettant aux utilisateurs de se connecter sur tout navigateur ou plateforme. Les utilisateurs se connectent avec l’obtention d’une notification sur leur téléphone, la mise en correspondance d’un nombre affiché à l’écran avec celui de leur téléphone et l’utilisation de leurs données biométriques ou de leur code confidentiel pour la confirmation.
+- [Windows Hello Entreprise](./concept-authentication-passwordless.md) est idéal pour les personnes utilisant leur ordinateur Windows dédié.
+- La connexion par clé de sécurité avec les [clés de sécurité FIDO2](./concept-authentication-passwordless.md) s’avère particulièrement pratique pour les utilisateurs qui se connectent à des machines partagées comme des bornes, mais aussi dans des situations où l’utilisation de téléphones est limitée, et pour des identités à privilèges élevés.
+- La connexion par téléphone avec [l’application Microsoft Authenticator](./concept-authentication-passwordless.md) est utile pour fournir une option sans mot de passe aux personnes disposant d’appareils mobiles. L’application Authenticator convertit n’importe quel téléphone iOS ou Android en information d’identification forte dépourvue de mot de passe, permettant aux utilisateurs de se connecter sur tout navigateur ou plateforme. Les utilisateurs se connectent avec l’obtention d’une notification sur leur téléphone, la mise en correspondance d’un nombre affiché à l’écran avec celui de leur téléphone et l’utilisation de leurs données biométriques ou de leur code confidentiel pour la confirmation.
 
 ### <a name="passwordless-authentication-scenarios"></a>Scénarios d’authentification sans mot de passe
 
@@ -59,7 +59,7 @@ Les méthodes d’authentification sans mot de passe de Microsoft permettent dif
 | **Connexion avec une application web** : <br> Depuis un appareil mobile ou non Windows | **Oui** | **Non** | **Non** |
 | **Connexion de l’ordinateur** : <br> Ordinateur non Windows | **Non** | **Non** | **Non** |
 
-Pour plus d’informations sur la sélection de la meilleure méthode pour votre organisation, consultez [Choix d’une méthode sans mot de passe](https://docs.microsoft.com/azure/active-directory/authentication/concept-authentication-passwordless#choose-a-passwordless-method).
+Pour plus d’informations sur la sélection de la meilleure méthode pour votre organisation, consultez [Choix d’une méthode sans mot de passe](./concept-authentication-passwordless.md#choose-a-passwordless-method).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -67,20 +67,20 @@ Les organisations doivent respecter les prérequis suivants avant d’initier un
 
 | Configuration requise | Application Authenticator | Clés de sécurité FIDO2 |
 | --- | --- | --- |
-| [L’inscription combinée pour Azure Multi-Factor Authentication et la réinitialisation de mot de passe en libre-service (SSPR)](howto-registration-mfa-sspr-combined.md) est activée | √ | √ |
-| [Les utilisateurs peuvent exécuter Azure Multi-Factor Authentication](howto-mfa-getstarted.md) | √ | √ |
-| [Les utilisateurs se sont inscrits à Azure Multi-Factor Authentication et SSPR](howto-registration-mfa-sspr-combined.md) | √ | √ |
+| [L'inscription combinée d'Azure AD Multi-Factor Authentication et de la réinitialisation de mot de passe en libre-service (SSPR)](howto-registration-mfa-sspr-combined.md) est activée | √ | √ |
+| [Les utilisateurs peuvent exécuter Azure AD Multi-Factor Authentication](howto-mfa-getstarted.md) | √ | √ |
+| [Les utilisateurs se sont inscrits à Azure AD Multi-Factor Authentication et SSPR](howto-registration-mfa-sspr-combined.md) | √ | √ |
 | [Les utilisateurs ont inscrit leurs appareils mobiles sur Azure Active Directory](../devices/overview.md) | √ |   |
 | Windows 10 version 1809 ou supérieure, utilisant un navigateur pris en charge, comme Microsoft Edge ou Mozilla Firefox <br> (version 67 ou supérieure). <br> *Microsoft recommande la version 1903 ou supérieure pour la prise en charge native*. |   | √ |
-| Des clés de sécurité FIDO2 compatibles. Vérifiez que vous utilisez un appareil de sécurité FIDO2 [vérifié et testé Microsoft](howto-authentication-passwordless-enable.md), ou un autre appareil de sécurité FIDO2 compatible. |   | √ |
+| Des clés de sécurité FIDO2 compatibles. Vérifiez que vous utilisez un appareil de sécurité FIDO2 [vérifié et testé Microsoft](./concept-authentication-passwordless.md), ou un autre appareil de sécurité FIDO2 compatible. |   | √ |
 
 ### <a name="prerequisites-for-windows-hello-for-business"></a>Prérequis pour Windows Hello Entreprise
 
-Les prérequis pour Windows Hello dépendent étroitement de la configuration, locale, hybride ou cloud uniquement, dans laquelle vous déployez. Pour plus d’informations, consultez la [liste complète des prérequis pour Windows Hello Entreprise](https://docs.microsoft.com/windows/security/identity-protection/hello-for-business/hello-identity-verification).
+Les prérequis pour Windows Hello dépendent étroitement de la configuration, locale, hybride ou cloud uniquement, dans laquelle vous déployez. Pour plus d’informations, consultez la [liste complète des prérequis pour Windows Hello Entreprise](/windows/security/identity-protection/hello-for-business/hello-identity-verification).
 
-### <a name="azure-multi-factor-authentication"></a>Azure Multi-Factor Authentication
+### <a name="azure-ad-multi-factor-authentication"></a>Authentification multifacteur Azure AD
 
-Les utilisateurs inscrivent leur méthode sans mot de passe dans le cadre du processus d’inscription Azure Multi-Factor Authentication. L’authentification multifacteur avec un nom d’utilisateur et un mot de passe, associée à une autre méthode inscrite, peut être utilisée comme solution de secours, au cas où ils ne peuvent pas utiliser leur téléphone ou leur clé de sécurité dans certains scénarios.
+Les utilisateurs inscrivent leur méthode sans mot de passe dans le cadre du processus d'inscription Azure AD Multi-Factor Authentication. L’authentification multifacteur avec un nom d’utilisateur et un mot de passe, associée à une autre méthode inscrite, peut être utilisée comme solution de secours, au cas où ils ne peuvent pas utiliser leur téléphone ou leur clé de sécurité dans certains scénarios.
 
 ### <a name="licensing"></a>Licence 
 Il n’y a aucun coût supplémentaire pour l’authentification sans mot de passe ; en revanche, certains prérequis peuvent nécessiter un abonnement Premium. Pour obtenir des informations détaillées sur les fonctionnalités et les licences, consultez la page [Tarification Azure Active Directory](https://azure.microsoft.com/pricing/details/active-directory/). 
@@ -126,13 +126,13 @@ Lorsque vous déployez l’authentification sans mot de passe, vous devez d’ab
 
 Les groupes peuvent être synchronisés à partir d’un annuaire local, ou à partir d’Azure AD. À partir du moment où vous êtes satisfait des résultats de votre pilote, vous pouvez activer l’authentification sans mot de passe pour tous les utilisateurs.
 
-Consultez les [Bonnes pratiques pour un pilote](https://aka.ms/deploymentplans) dans la page des plans de déploiement.
+Consultez les [Bonnes pratiques pour un pilote](../fundamentals/active-directory-deployment-plans.md) dans la page des plans de déploiement.
 
 ## <a name="plan-passwordless-authentication-with-the-microsoft-authenticator-app"></a>Planifier l’authentification sans mot de passe avec l’application Microsoft Authenticator
 
 L’application Microsoft Authenticator est téléchargeable gratuitement à partir de Google Play ou d’Apple App Store. [En savoir plus sur le téléchargement de l’application Microsoft Authenticator](https://www.microsoft.com/p/microsoft-authenticator/9nblgggzmcj6). Demandez aux utilisateurs de télécharger l’application Microsoft Authenticator et de suivre les instructions pour activer la connexion par téléphone. 
 
-L’application transforme n’importe quel téléphone iOS ou Android en informations d’identification fortes et sans mot de passe. Les utilisateurs se connectent à n’importe quelle plateforme ou n’importe quel navigateur en obtenant une notification sur leur téléphone, en faisant correspondre un nombre affiché à l’écran à celui affiché sur leur téléphone, puis en utilisant les données biométriques ou un code confidentiel pour confirmer. [Consultez les détails sur le fonctionnement de l’application Microsoft Authenticator](https://docs.microsoft.com/azure/active-directory/authentication/concept-authentication-passwordless#microsoft-authenticator-app).
+L’application transforme n’importe quel téléphone iOS ou Android en informations d’identification fortes et sans mot de passe. Les utilisateurs se connectent à n’importe quelle plateforme ou n’importe quel navigateur en obtenant une notification sur leur téléphone, en faisant correspondre un nombre affiché à l’écran à celui affiché sur leur téléphone, puis en utilisant les données biométriques ou un code confidentiel pour confirmer. [Consultez les détails sur le fonctionnement de l’application Microsoft Authenticator](./concept-authentication-passwordless.md#microsoft-authenticator-app).
 
 ![se connecter avec l’application Authenticator](./media/howto-authentication-passwordless-deployment/passwordless-dp-sign-in.png)
 
@@ -140,7 +140,7 @@ L’application transforme n’importe quel téléphone iOS ou Android en inform
 
 **Intégration AD FS** - Lorsqu’un utilisateur active l’information d’identification sans mot de passe Microsoft Authenticator, l’authentification de cet utilisateur implique par défaut l’envoi d’une notification pour approbation. Les utilisateurs d’un locataire hybride ne peuvent pas être dirigés vers ADFS pour se connecter, sauf s’ils sélectionnent « Utiliser votre mot de passe à la place ». Ce processus contourne également les stratégies d’accès conditionnel locales, ainsi que les flux d’authentification directe. Toutefois, si un paramètre *login_hint* est spécifié, l’utilisateur est automatiquement transféré vers AD FS et contourne la possibilité d’utiliser l’information d’identification sans mot de passe.
 
-**Serveur Azure Multi-Factor Authentication** - Les utilisateurs finaux activés pour Multi-Factor Authentication via le serveur Azure MFA local d’une organisation peuvent créer et utiliser une information d’identification de connexion unique par téléphone sans mot de passe. Si l’utilisateur tente de mettre à niveau plusieurs installations (supérieures à 5) de Microsoft Authenticator avec cette information d’identification, cette modification peut générer une erreur.
+**Serveur Azure AD Multi-Factor Authentication** - Les utilisateurs finaux activés pour une authentification multifacteur via le serveur Azure MFA local d'une organisation peuvent créer et utiliser une information d'identification unique de connexion par téléphone sans mot de passe. Si l’utilisateur tente de mettre à niveau plusieurs installations (supérieures à 5) de Microsoft Authenticator avec cette information d’identification, cette modification peut générer une erreur.
 
 **Inscription de l’appareil** - Pour utiliser l’application Authenticator dans l’authentification sans mot de passe, l’appareil doit être inscrit dans le locataire Azure AD et ne pas être un appareil partagé. Un appareil ne peut être inscrit que dans un seul locataire. Cette limite signifie que seulement un compte professionnel ou scolaire est pris en charge pour la connexion par téléphone avec l’application Authenticator.
 
@@ -150,7 +150,7 @@ Il existe trois types de déploiements de connexion sans mot de passe disponible
 -    Applications web Azure Active Directory sur un navigateur pris en charge
 -    Appareils Windows 10 joints à Azure Active Directory
 -    Appareils Windows 10 joints à Azure Active Directory hybride (préversion)
-     -    Donne accès aux ressources informatiques et locales. Pour plus d’informations sur l’accès aux ressources locales, consultez [Authentification unique auprès de ressources locales à l’aide de clés FIDO2](https://docs.microsoft.com/azure/active-directory/authentication/howto-authentication-passwordless-security-key-on-premises).
+     -    Donne accès aux ressources informatiques et locales. Pour plus d’informations sur l’accès aux ressources locales, consultez [Authentification unique auprès de ressources locales à l’aide de clés FIDO2](./howto-authentication-passwordless-security-key-on-premises.md).
 
 Vous devez activer le paramètre **Clés de sécurité FIDO2 compatibles**. Microsoft a annoncé des [partenariats clés avec des fournisseurs de clés FIDO2](https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/Microsoft-passwordless-partnership-leads-to-innovation-and-great/ba-p/566493).
 
@@ -160,11 +160,11 @@ Vous devez activer le paramètre **Clés de sécurité FIDO2 compatibles**. Micr
 -    Windows 10 version 1809 prend en charge la connexion FIDO2 et peut nécessiter le déploiement d’un logiciel du fabricant de la clé FIDO2. Nous vous recommandons d’utiliser la version 1903 ou une version ultérieure. 
 
 **Pour les appareils joints à un domaine Azure Active Directory hybride** : 
--    Windows 10 Insider Build 18945 ou version ultérieure
+-    Windows 10 version 2004 ou ultérieure
 -    Serveurs de domaine entièrement corrigés exécutant Windows Server 2016 ou 2019.
 -    Version la plus récente d’Azure AD Connect
 
-Pour obtenir la liste complète des conditions requises, consultez [Activer la connexion par clé de sécurité sans mot de passe à des appareils Windows 10 à l’aide d’Azure Active Directory](https://docs.microsoft.com/azure/active-directory/authentication/howto-authentication-passwordless-security-key-windows#requirements).
+Pour obtenir la liste complète des conditions requises, consultez [Activer la connexion par clé de sécurité sans mot de passe à des appareils Windows 10 à l’aide d’Azure Active Directory](./howto-authentication-passwordless-security-key-windows.md#requirements).
 
 
 ### <a name="security-key-life-cycle"></a>Cycle de vie des clés de sécurité
@@ -320,7 +320,7 @@ Suivez les étapes de l’article [Activer la connexion par clé de sécurité s
 | --- | --- |
 | L’utilisateur ne peut pas effectuer d’inscription combinée. | Vérifiez que [l’inscription combinée](concept-registration-mfa-sspr-combined.md) est activée. |
 | L’utilisateur ne peut pas ajouter de clé de sécurité dans ses [paramètres de sécurité](https://aka.ms/mysecurityinfo). | Vérifiez que les [clés de sécurité](howto-authentication-passwordless-security-key.md) sont activées. |
-| L’utilisateur ne peut pas ajouter de clé de sécurité dans les options de connexion Windows 10. | [Vérifiez que les clés de sécurité sont prévues pour la connexion Windows](howto-authentication-passwordless-enable.md) |
+| L’utilisateur ne peut pas ajouter de clé de sécurité dans les options de connexion Windows 10. | [Vérifiez que les clés de sécurité sont prévues pour la connexion Windows](./concept-authentication-passwordless.md) |
 | **Message d’erreur** : Nous avons détecté que ce navigateur ou ce système d’exploitation ne prend pas en charge les clés de sécurité FIDO2. | Les appareils de sécurité FIDO2 sans mot de passe ne peuvent être inscrits que dans les navigateurs pris en charge (Microsoft Edge, Firefox version 67) sur Windows 10 version 1809 ou ultérieure. |
 | **Message d’erreur** : La stratégie de votre entreprise vous demande d’utiliser une autre méthode pour vous connecter. | Vérifiez que les clés de sécurité sont activées dans le locataire. |
 | L’utilisateur ne peut pas gérer ma clé de sécurité sur Windows 10 version 1809 | La version 1809 vous demande d’utiliser le logiciel de gestion de clés de sécurité fourni par le fournisseur de clés FIDO2. Contactez le fournisseur pour obtenir de l’aide. |
@@ -331,4 +331,3 @@ Suivez les étapes de l’article [Activer la connexion par clé de sécurité s
 - [Activer la connexion par clé de sécurité sans mot de passe pour Azure AD](howto-authentication-passwordless-security-key.md)
 - [Activer la connexion sans mot de passe avec l’application Microsoft Authenticator](howto-authentication-passwordless-phone.md)
 - [En savoir plus sur les insights et l’utilisation de méthodes d’authentification](howto-authentication-methods-usage-insights.md)
-

@@ -1,18 +1,18 @@
 ---
 title: Fonctions Azure Blueprints
 description: Décrit les fonctions pouvant être utilisées avec les artefacts de blueprint dans les définitions et affectations Azure Blueprints.
-ms.date: 05/22/2020
+ms.date: 08/27/2020
 ms.topic: reference
-ms.openlocfilehash: e804cc98f7bd6d3e94e6b518f0ed0575f9f8f440
-ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+ms.openlocfilehash: fe984ee7664b0d50fb891d946f9f40a200ccce09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83834779"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89050758"
 ---
 # <a name="functions-for-use-with-azure-blueprints"></a>Fonctions à utiliser avec Azure Blueprints
 
-Azure Blueprints fournit des fonctions pour une définition de blueprint plus dynamique. Ces fonctions sont conçues pour être utilisées avec les définitions et artefacts de blueprint. Outre l’obtention d’une valeur dynamique grâce à un paramètre de blueprint, un artefact Azure Resource Manager permet de tirer pleinement profit des fonctions Resource Manager.
+Azure Blueprints fournit des fonctions pour une définition de blueprint plus dynamique. Ces fonctions sont conçues pour être utilisées avec les définitions et artefacts de blueprint. En plus de l’obtention d’une valeur dynamique grâce à un paramètre de blueprint, un artefact Azure Resource Manager Template (modèle ARM) permet de tirer pleinement profit des fonctionnalités de Resource Manager.
 
 Les fonctions suivantes sont prises en charge :
 
@@ -30,7 +30,7 @@ Les fonctions suivantes sont prises en charge :
 Retourne un objet de propriétés rempli avec ces sorties d’artefacts de blueprint.
 
 > [!NOTE]
-> La fonction `artifacts()` ne peut pas être utilisée à partir d’un modèle de Gestionnaire des ressources. La fonction peut être utilisée uniquement dans le JSON de définition du blueprint ou dans le JSON d’artefact lors de la gestion du blueprint avec Azure PowerShell ou l’API REST dans le cadre de [Blueprints-as-code](https://github.com/Azure/azure-blueprints/blob/master/README.md).
+> La fonction `artifacts()` ne peut pas être utilisée à l’intérieur d’un modèle ARM. La fonction peut être utilisée uniquement dans le JSON de définition du blueprint ou dans le JSON d’artefact lors de la gestion du blueprint avec Azure PowerShell ou l’API REST dans le cadre de [Blueprints-as-code](https://github.com/Azure/azure-blueprints/blob/master/README.md).
 
 ### <a name="parameters"></a>Paramètres
 
@@ -60,9 +60,9 @@ Objet de propriétés de sortie. Les propriétés **outputs** dépendent du type
 }
 ```
 
-#### <a name="resource-manager-template-artifact"></a>Artefact de modèle Resource Manager
+#### <a name="arm-template-artifact"></a>Artefact de modèle ARM
 
-Les propriétés **outputs** de l’objet retourné sont définies dans le modèle Resource Manager et retournées par le déploiement.
+Les propriétés **outputs** de l’objet retourné sont définies dans le modèle ARM et retournées par le déploiement.
 
 #### <a name="role-assignment-artifact"></a>Artefact d’affectation de rôle
 
@@ -78,7 +78,7 @@ Les propriétés **outputs** de l’objet retourné sont définies dans le modè
 
 ### <a name="example"></a>Exemple
 
-Un artefact de modèle Resource Manager avec l’ID _myTemplateArtifact_ contenant l’exemple de propriété de sortie suivant :
+Un artefact de modèle ARM avec l’ID _myTemplateArtifact_ contenant l’exemple de propriété de sortie suivant :
 
 ```json
 {
@@ -134,7 +134,7 @@ Chaîne de valeurs concaténées.
 
 ### <a name="remarks"></a>Notes
 
-La fonction Azure Blueprint diffère de la fonction de modèle Azure Resource Manager, car elle n’est compatible qu’avec des chaînes.
+La fonction Azure Blueprint diffère de la fonction de modèle ARM, car elle n’est compatible qu’avec des chaînes.
 
 ### <a name="example"></a>Exemple
 
@@ -158,7 +158,7 @@ Valeur du paramètre de blueprint ou d’artefact de blueprint spécifié.
 
 ### <a name="remarks"></a>Notes
 
-La fonction Azure Blueprint diffère de la fonction de modèle Azure Resource Manager, car elle n’est compatible qu’avec des paramètres de blueprint.
+La fonction Azure Blueprint diffère de la fonction de modèle ARM, car elle n’est compatible qu’avec des paramètres de blueprint.
 
 ### <a name="example"></a>Exemple
 
@@ -174,7 +174,7 @@ Définissez les _principalIds_ de paramètre dans la définition de blueprint :
                 "type": "array",
                 "metadata": {
                     "displayName": "Principal IDs",
-                    "description": "This is a blueprint parameter that any artifact can reference. We'll display these descriptions for you in the info bubble. Supply principal IDs for the users,groups, or service principals for the RBAC assignment.",
+                    "description": "This is a blueprint parameter that any artifact can reference. We'll display these descriptions for you in the info bubble. Supply principal IDs for the users,groups, or service principals for the Azure role assignment.",
                     "strongType": "PrincipalId"
                 }
             }
@@ -218,7 +218,7 @@ L’objet renvoyé présente le format suivant :
 
 ### <a name="remarks"></a>Notes
 
-La fonction Azure Blueprint diffère de la fonction de modèle Azure Resource Manager. La fonction `resourceGroup()` ne peut pas être utilisée dans un artefact de niveau d’abonnement ou la définition de blueprint. Elle ne peut être utilisée que dans des artefacts de blueprint faisant partie d’un artefact de groupe de ressources.
+La fonction Azure Blueprint diffère de la fonction de modèle ARM. La fonction `resourceGroup()` ne peut pas être utilisée dans un artefact de niveau d’abonnement ou la définition de blueprint. Elle ne peut être utilisée que dans des artefacts de blueprint faisant partie d’un artefact de groupe de ressources.
 
 Une utilisation courante de la fonction `resourceGroup()` consiste à créer des ressources dans le même emplacement que l’artefact de groupe de ressources.
 

@@ -2,32 +2,28 @@
 title: 'Tutoriel : Configurer Wrike pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur Wrike.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/26/2019
 ms.author: Zhchia
-ms.openlocfilehash: 5dd4f5ac6152c22b5e2a84ecc0774672bcd5590b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 53b1db1a8c4da59055c0af5f448fa0c8a6933daf
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064187"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95988091"
 ---
 # <a name="tutorial-configure-wrike-for-automatic-user-provisioning"></a>Tutoriel : Configurer Wrike pour l’approvisionnement automatique d’utilisateurs
 
 L’objectif de ce tutoriel est de présenter les étapes à effectuer dans Wrike et Azure Active Directory (Azure AD) pour configurer Azure AD en vue de provisionner et déprovisionner des utilisateurs ou des groupes dans Wrike.
 
 > [!NOTE]
-> Ce tutoriel décrit un connecteur reposant sur le service de provisionnement d’utilisateurs Azure AD. Pour en savoir plus sur l’objet et le fonctionnement de ce service et pour accéder aux questions fréquentes (FAQ), consultez [Automatiser le provisionnement et le déprovisionnement des utilisateurs pour les applications SaaS (software as a service) avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/manage-apps/user-provisioning).
+> Ce tutoriel décrit un connecteur reposant sur le service de provisionnement d’utilisateurs Azure AD. Pour en savoir plus sur l’objet et le fonctionnement de ce service et pour accéder aux questions fréquentes (FAQ), consultez [Automatiser le provisionnement et le déprovisionnement des utilisateurs pour les applications SaaS (software as a service) avec Azure Active Directory](../app-provisioning/user-provisioning.md).
 >
 > Ce connecteur est actuellement en préversion publique. Pour plus d’informations sur les conditions d’utilisation Microsoft Azure générales relatives aux fonctionnalités d'évaluation, consultez [Conditions d’utilisation supplémentaires des préversions Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 

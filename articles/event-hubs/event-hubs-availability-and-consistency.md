@@ -1,24 +1,15 @@
 ---
 title: Disponibilité et cohérence - Azure Event Hubs | Microsoft Docs
 description: Découvrez comment obtenir la quantité maximale de disponibilité et de cohérence avec Azure Event Hubs à l’aide de partitions.
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-editor: ''
-ms.assetid: 8f3637a1-bbd7-481e-be49-b3adf9510ba1
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 03/27/2020
-ms.author: shvija
-ms.openlocfilehash: 0546adb6131479a8f5d2e7e31819483200586839
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 81bacd5507396352bb814310979498234ee35347
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80397333"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96902899"
 ---
 # <a name="availability-and-consistency-in-event-hubs"></a>Disponibilité et cohérence dans Event Hubs
 
@@ -49,7 +40,9 @@ Si vous créez un objet **[EventHubClient](/dotnet/api/microsoft.azure.eventhubs
 Pour les cas d’utilisation qui exigent un temps d’activité maximum, ce modèle est conseillé.
 
 ## <a name="consistency"></a>Cohérence
-Dans certains scénarios, l’ordre des événements peut être important. Par exemple, vous souhaiterez peut-être que votre système principal traite une commande de mise à jour avant une commande de suppression. Dans ce cas, vous pouvez définir la clé de partition sur un événement, ou utiliser un objet `PartitionSender` (si vous utilisez l’ancienne bibliothèque Microsoft.Azure.Messaging) pour envoyer uniquement les événements à une certaine partition. Cela garantit que ces événements sont lus dans l’ordre lorsqu’ils sont lus à partir de la partition. Si vous utilisez la bibliothèque **Azure.Messaging.EventHubs** et pour obtenir plus d’informations, consultez [Migration du code de PartitionSender vers EventHubProducerClient pour la publication d’événements sur une partition](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md#migrating-code-from-partitionsender-to-eventhubproducerclient-for-publishing-events-to-a-partition).
+Dans certains scénarios, l’ordre des événements peut être important. Par exemple, vous souhaiterez peut-être que votre système principal traite une commande de mise à jour avant une commande de suppression. Dans ce cas, vous pouvez définir la clé de partition sur un événement, ou utiliser un objet `PartitionSender` (si vous utilisez l’ancienne bibliothèque Microsoft.Azure.Messaging) pour envoyer uniquement les événements à une certaine partition. Cela garantit que ces événements sont lus dans l’ordre lorsqu’ils sont lus à partir de la partition. 
+
+Si vous utilisez la bibliothèque **Azure.Messaging.EventHubs** la plus récente, consultez [Migration du code de PartitionSender vers EventHubProducerClient pour la publication d’événements sur une partition](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md#migrating-code-from-partitionsender-to-eventhubproducerclient-for-publishing-events-to-a-partition).
 
 #### <a name="azuremessagingeventhubs-500-or-later"></a>[Azure.Messaging.EventHubs (version 5.0.0 ou ultérieure)](#tab/latest)
 
@@ -151,5 +144,5 @@ L’exemple envoie votre événement à l’une des partitions disponibles dans 
 ## <a name="next-steps"></a>Étapes suivantes
 Vous pouvez en apprendre plus sur Event Hubs en consultant les liens suivants :
 
-* [Présentation du service Event Hubs](event-hubs-what-is-event-hubs.md)
+* [Présentation du service Event Hubs](./event-hubs-about.md)
 * [Créer un concentrateur d’événements](event-hubs-create.md)

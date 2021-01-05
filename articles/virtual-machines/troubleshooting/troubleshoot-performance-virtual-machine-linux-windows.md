@@ -13,16 +13,16 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 09/18/2019
 ms.author: v-miegge
-ms.openlocfilehash: 176b0634fe2c7ee2f47162e439c4ea16bde77a8a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 53fd2332224d903c5a4b33563470cf3569f82b13
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75772616"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86526654"
 ---
 # <a name="troubleshoot-azure-virtual-machine-performance-on-linux-or-windows"></a>Résoudre les problèmes de performances des machines virtuelles Azure sur Linux ou Windows
 
-Cet article décrit comment résoudre les problèmes de performances génériques des machines virtuelles en supervisant et en observant les goulots d’étranglement. Il offre des solutions possibles aux problèmes pouvant survenir. Outre la supervision, vous pouvez utiliser Perfinsights qui peut fournir un rapport avec les bonnes pratiques suggérées et les goulots d’étranglement clés concernant les E/S, le processeur et la mémoire. PerfInsights est disponible à la fois pour les machines virtuelles [Windows](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfInsights) et [Linux](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfinsights-linux) dans Azure.
+Cet article décrit comment résoudre les problèmes de performances génériques des machines virtuelles en supervisant et en observant les goulots d’étranglement. Il offre des solutions possibles aux problèmes pouvant survenir. Outre la supervision, vous pouvez utiliser Perfinsights qui peut fournir un rapport avec les bonnes pratiques suggérées et les goulots d’étranglement clés concernant les E/S, le processeur et la mémoire. PerfInsights est disponible à la fois pour les machines virtuelles [Windows](./how-to-use-perfinsights.md) et [Linux](./how-to-use-perfinsights-linux.md) dans Azure.
 
 Cet article vous guide dans l’utilisation de la supervision pour diagnostiquer les goulots d’étranglement de performances.
 
@@ -30,7 +30,7 @@ Cet article vous guide dans l’utilisation de la supervision pour diagnostiquer
 
 ### <a name="azure-iaas-virtual-machine-monitoring"></a>Supervision d’une machine virtuelle IaaS Azure
 
-Pour superviser la machine virtuelle invitée, utilisez la fonctionnalité de supervision de machine virtuelle Azure, qui vous informe de certaines conditions de ressources générales. Pour vérifier si les diagnostics de machine virtuelle sont activés, consultez [Vue d’ensemble des journaux de ressource Azure](https://docs.microsoft.com/azure/azure-monitor/learn/tutorial-resource-logs). Si vous voyez le message suivant, cela signifie probablement que les diagnostics ne sont pas activés :
+Pour superviser la machine virtuelle invitée, utilisez la fonctionnalité de supervision de machine virtuelle Azure, qui vous informe de certaines conditions de ressources générales. Pour vérifier si les diagnostics de machine virtuelle sont activés, consultez [Vue d’ensemble des journaux de ressource Azure](../../azure-monitor/learn/tutorial-resource-logs.md). Si vous voyez le message suivant, cela signifie probablement que les diagnostics ne sont pas activés :
 
 ![La supervision n’est pas activée.](media/troubleshoot-performance-virtual-machine-linux-windows/1-virtual-machines-monitoring-not-enabled.png)
  
@@ -101,7 +101,7 @@ Passez en revue vos données pour détecter la présence de goulots d’étrangl
 
 ### <a name="cpu-observe-trends"></a>Processeur : observation des tendances
 
-Quand vous examinez les problèmes de performances, tenez compte des tendances et déterminez si elles vous concernent. Dans les sections suivantes, nous allons utiliser les graphes de supervision du portail pour visualiser les tendances. Ils peuvent également être utiles pour faire des recoupements entre différents comportements de ressources sur la même période. Pour personnaliser les graphes, cliquez sur [Plateforme de données Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/data-platform).
+Quand vous examinez les problèmes de performances, tenez compte des tendances et déterminez si elles vous concernent. Dans les sections suivantes, nous allons utiliser les graphes de supervision du portail pour visualiser les tendances. Ils peuvent également être utiles pour faire des recoupements entre différents comportements de ressources sur la même période. Pour personnaliser les graphes, cliquez sur [Plateforme de données Azure Monitor](../../azure-monitor/platform/data-platform.md).
 
 Pic : un pic peut être associé à une tâche planifiée ou un événement connu. Si vous pouvez identifier la tâche, déterminez si elle s’exécute au niveau de performance requis. Si les performances sont acceptables, vous n’aurez peut-être pas besoin d’augmenter les ressources.
 
@@ -120,7 +120,7 @@ Si votre application ou votre processus ne s’exécute pas au niveau de perform
 
 Si vous avez augmenté la taille de la machine virtuelle et que le processeur fonctionne toujours à 95 %, déterminez si ce paramètre améliore les performances ou le débit de l’application de façon à offrir un niveau acceptable. Si ce n’est pas le cas, procédez à la résolution du problème au niveau de l’application/du processus concerné.
 
-Vous pouvez utiliser Perfinsights pour [Windows](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfInsights) ou [Linux](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfinsights-linux) afin d’analyser le processus qui pilote la consommation du processeur. 
+Vous pouvez utiliser Perfinsights pour [Windows](./how-to-use-perfinsights.md) ou [Linux](./how-to-use-perfinsights-linux.md) afin d’analyser le processus qui pilote la consommation du processeur. 
 
 ## <a name="check-for-memory-bottleneck"></a>Vérifier la présence d’un goulot d’étranglement au niveau de la mémoire
 
@@ -151,13 +151,13 @@ Pour résoudre les problèmes d’utilisation élevée de la mémoire, effectuez
 
 Si, après une mise à niveau vers une machine virtuelle plus grande, vous constatez toujours une augmentation régulière et constante jusqu’à 100 %, identifiez l’application/le processus concerné et procédez à la résolution du problème.
 
-Vous pouvez utiliser Perfinsights pour [Windows](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfInsights) ou [Linux](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfinsights-linux) afin d’analyser le processus qui pilote la consommation de mémoire. 
+Vous pouvez utiliser Perfinsights pour [Windows](./how-to-use-perfinsights.md) ou [Linux](./how-to-use-perfinsights-linux.md) afin d’analyser le processus qui pilote la consommation de mémoire. 
 
 ## <a name="check-for-disk-bottleneck"></a>Vérifier la présence d’un goulot d’étranglement au niveau du disque
 
 Pour vérifier le sous-système de stockage de la machine virtuelle, vérifiez les diagnostics au niveau de la machine virtuelle Azure. Utilisez pour cela les compteurs fournis dans les diagnostics de machine virtuelle et les diagnostics de compte de stockage.
 
-Dans le cas d’une résolution des problèmes spécifique aux machines virtuelles, vous pouvez utiliser Perfinsights pour [Windows](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfInsights) ou [Linux](https://docs.microsoft.com/azure/virtual-machines/troubleshooting/how-to-use-perfinsights-linux), ce qui peut aider à analyser quel processus pilote les E/S. 
+Dans le cas d’une résolution des problèmes spécifique aux machines virtuelles, vous pouvez utiliser Perfinsights pour [Windows](./how-to-use-perfinsights.md) ou [Linux](./how-to-use-perfinsights-linux.md), ce qui peut aider à analyser quel processus pilote les E/S. 
 
 Notez que nous ne proposons pas de compteurs pour les comptes de stockage redondants interzones et Premium. En cas de problème lié à ces compteurs, ouvrez un cas de support.
 
@@ -208,7 +208,7 @@ Pour déterminer si vous atteignez la limite d’IOPS, accédez aux diagnostics 
 
 Avec les nouvelles offres de disque sous le stockage standard, les limites de débit et IOPS peuvent différer, mais la limite cumulée du compte de stockage standard est de 20 000 IOPS (le stockage Premium a des limites différentes au niveau du compte ou du disque). Apprenez-en plus sur les différentes offres de disque de stockage standard et les limites par disque :
 
-* [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](https://docs.microsoft.com/azure/virtual-machines/windows/disk-scalability-targets).
+* [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](../windows/disk-scalability-targets.md).
 
 #### <a name="references"></a>References
 
@@ -224,19 +224,19 @@ Vérifiez les limites de débit des disques durs virtuels attachés à la machin
 
 Les nouvelles offres de disque sous le stockage standard ont des limites de débit et IOPS différentes (les IOPS ne sont pas exposées par disque dur virtuel). Examinez les données pour voir si vous atteignez les limites du débit combiné (en Mbits/s) du ou des disques durs virtuels au niveau de la machine virtuelle à l’aide des métriques de lecture et écriture sur disque, puis optimisez la configuration du stockage de la machine virtuelle pour porter la capacité au-delà des limites d’un seul disque dur virtuel. Apprenez-en plus sur les différentes offres de disque de stockage standard et les limites par disque :
 
-* [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](https://docs.microsoft.com/azure/virtual-machines/windows/disk-scalability-targets).
+* [Cibles de scalabilité et de performance des disques de machine virtuelle sur Windows](../windows/disk-scalability-targets.md).
 
 ### <a name="high-disk-utilizationlatency-remediation"></a>Solution en cas d’utilisation/latence élevée du disque
 
 Réduire la latence du client et optimiser les E/S de machine virtuelle pour porter la capacité au-delà des limites d’un disque dur virtuel
 
-* [Optimisation des E/S pour Windows dans Azure](https://azure.microsoft.com/documentation/articles/virtual-machines-sql-server-performance-best-practices/)
+* [Optimisation des E/S pour Windows dans Azure](../../azure-sql/virtual-machines/windows/performance-guidelines-best-practices.md?toc=/azure/virtual-machines/windows/toc.json)
 
-* [Optimisation des E/S pour Linux dans Azure](https://blogs.msdn.microsoft.com/igorpag/2014/10/23/azure-storage-secrets-and-linux-io-optimizations/)
+* [Optimisation des E/S pour Linux dans Azure](/archive/blogs/igorpag/azure-storage-secrets-and-linux-io-optimizations)
 
 #### <a name="reduce-throttling"></a>Réduire la limitation
 
-Si vous atteignez les limites supérieures des comptes de stockage, rééquilibrez les disques durs virtuels entre les comptes de stockage. Consultez [Objectifs de performance et de scalabilité du stockage Azure](https://azure.microsoft.com/documentation/articles/storage-scalability-targets/).
+Si vous atteignez les limites supérieures des comptes de stockage, rééquilibrez les disques durs virtuels entre les comptes de stockage. Consultez [Objectifs de performance et de scalabilité du stockage Azure](../../storage/common/scalability-targets-standard-account.md).
 
 ### <a name="increase-throughput-and-reduce-latency"></a>Augmenter le débit et réduire la latence
 
@@ -244,9 +244,9 @@ En présence d’une application sensible à la latence, si vous avez besoin d�
 
 Ces articles décrivent les scénarios spécifiques :
 
-* [Migration vers le stockage Premium Azure](https://azure.microsoft.com/documentation/articles/storage-migration-to-premium-storage/)
+* [Migration vers le stockage Premium Azure](../windows/migrate-to-managed-disks.md)
 
-* [Utilisation du stockage Premium Azure avec SQL Server](https://azure.microsoft.com/documentation/articles/virtual-machines-sql-server-use-premium-storage/)
+* [Utilisation du stockage Premium Azure avec SQL Server](/previous-versions/azure/virtual-machines/windows/sqlclassic/virtual-machines-windows-classic-sql-server-premium-storage)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

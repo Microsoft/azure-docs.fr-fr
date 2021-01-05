@@ -6,12 +6,12 @@ ms.author: larryme
 ms.date: 04/02/2019
 ms.topic: article
 ms.service: storage
-ms.openlocfilehash: 86419811cdf2c11204caae0ca5bf6f65fba063d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8f57210ff6b65ee3a893fb344a48629466e90004
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76288912"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97095353"
 ---
 # <a name="move-mainframe-storage-to-azure"></a>Déplacement du stockage du mainframe vers Azure
 
@@ -45,7 +45,7 @@ Les options [IaaS](https://azure.microsoft.com/overview/what-is-iaas/) d’Azure
 
 Microsoft offre l’équivalent de plusieurs pétaoctets de stockage aux applications hébergées dans Azure, et vous disposez de plusieurs options de stockage. Celles-ci vont du stockage SSD pour de hautes performances au stockage Blob à faible coût pour le stockage de masse et les archives. En outre, Azure fournit une option de redondance des données pour le stockage. Une option qui requiert davantage d’efforts de configuration dans un environnement mainframe.
 
-Le Stockage Azure est disponible en tant que [Disques Azure](/azure/virtual-machines/windows/managed-disks-overview), [Fichiers Azure](/azure/storage/files/storage-files-introduction) et [Objets Blob Azure](/azure/storage/blobs/storage-blobs-overview) comme le résume le tableau suivant. Découvrez [quand utiliser chaque option](https://docs.microsoft.com/azure/storage/common/storage-decide-blobs-files-disks).
+Le Stockage Azure est disponible en tant que [Disques Azure](../../../managed-disks-overview.md), [Fichiers Azure](../../../../storage/files/storage-files-introduction.md) et [Objets Blob Azure](../../../../storage/blobs/storage-blobs-overview.md) comme le résume le tableau suivant. Découvrez [quand utiliser chaque option](../../../../storage/common/storage-introduction.md).
 
 <!-- markdownlint-disable MD033 -->
 
@@ -57,7 +57,7 @@ Le Stockage Azure est disponible en tant que [Disques Azure](/azure/virtual-mach
 <tr><td>Azure Files
 </td>
 <td>
-Fournit une interface SMB, des bibliothèques clientes et une interface <a href="https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api">REST</a> qui permet d’accéder en tout lieu aux fichiers stockés.
+Fournit une interface SMB, des bibliothèques clientes et une interface <a href="/rest/api/storageservices/file-service-rest-api">REST</a> qui permet d’accéder en tout lieu aux fichiers stockés.
 </td>
 <td><ul>
 <li>Développer et transférer une application dans le cloud quand celle-ci utilise les API du système de fichiers natif pour partager des données avec d’autres applications s’exécutant dans Azure.</li>
@@ -67,7 +67,7 @@ Fournit une interface SMB, des bibliothèques clientes et une interface <a href
 </tr>
 <tr><td>Objets blob Azure
 </td>
-<td>Fournit des bibliothèques de client et une interface <a href="https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api">REST</a> qui permet de stocker des données non structurées et d’y accéder à grande échelle dans des objets blob de blocs. Prend également en charge <a href="/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2</a> pour les solutions d’analytique d’entreprise Big Data.
+<td>Fournit des bibliothèques de client et une interface <a href="/rest/api/storageservices/blob-service-rest-api">REST</a> qui permet de stocker des données non structurées et d’y accéder à grande échelle dans des objets blob de blocs. Prend également en charge <a href="/azure/storage/blobs/data-lake-storage-introduction">Azure Data Lake Storage Gen2</a> pour les solutions d’analytique d’entreprise Big Data.
 </td>
 <td><ul>
 <li>Prendre en charge le streaming et l’accès aléatoire dans une application.</li>
@@ -77,7 +77,7 @@ Fournit une interface SMB, des bibliothèques clientes et une interface <a href
 </tr>
 <tr><td>Disques Azure
 </td>
-<td>Fournit des bibliothèques clientes et une interface <a href="https://docs.microsoft.com/rest/api/compute/disks">REST</a> qui permet de stocker de manière permanente les données et d’y accéder à partir d’un disque dur virtuel joint.
+<td>Fournit des bibliothèques clientes et une interface <a href="/rest/api/compute/disks">REST</a> qui permet de stocker de manière permanente les données et d’y accéder à partir d’un disque dur virtuel joint.
 </td>
 <td><ul>
 <li>Développer et transférer des applications qui utilisent les API du système de fichiers natif pour lire et écrire des données sur des disques persistants.</li>
@@ -105,10 +105,10 @@ Le stockage Blob fournit le plus grand volume de stockage sur Azure. En plus de 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Migration de mainframe](/azure/architecture/cloud-adoption/infrastructure/mainframe-migration/overview)
-- [Réhébergement du mainframe sur des machines virtuelles Azure](/azure/virtual-machines/workloads/mainframe-rehosting/overview)
+- [Réhébergement du mainframe sur des machines virtuelles Azure](../overview.md)
 - [Déplacer le calcul mainframe vers Azure](mainframe-compute-Azure.md)
-- [Choisir quand utiliser Objets Blob Azure, Fichiers Azure ou Disques Azure](https://docs.microsoft.com/azure/storage/common/storage-decide-blobs-files-disks)
-- [Disques managés SSD Standard pour les charges de travail des machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/windows/disks-standard-ssd)
+- [Choisir quand utiliser Objets Blob Azure, Fichiers Azure ou Disques Azure](../../../../storage/common/storage-introduction.md)
+- [Disques managés SSD Standard pour les charges de travail des machines virtuelles Azure](../../../disks-types.md#standard-ssd)
 
 ### <a name="ibm-resources"></a>Ressources IBM
 
@@ -127,4 +127,4 @@ Le stockage Blob fournit le plus grand volume de stockage sur Azure. En plus de 
 ### <a name="more-migration-resources"></a>Autres ressources de migration
 
 - [Azure Virtual Datacenter: Lift and Shift Guide](https://azure.microsoft.com/resources/azure-virtual-datacenter-lift-and-shift-guide/)
-- [iSCSI GlusterFS](https://docs.gluster.org/en/latest/Administrator%20Guide/GlusterFS%20iSCSI/)
+- [iSCSI GlusterFS](https://glusterdocs.readthedocs.io/en/latest/Administrator%20Guide/GlusterFS%20iSCSI/)

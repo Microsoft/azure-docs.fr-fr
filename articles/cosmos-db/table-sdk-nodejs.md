@@ -1,6 +1,6 @@
 ---
 title: API Table Azure Cosmos DB pour Node.js
-description: Découvrez l’API Table Azure Cosmos DB, notamment les dates de publication, les dates de retrait et les modifications apportées à chaque version.
+description: Découvrez l’API Table Azure Cosmos DB pour Node.js, notamment les dates de publication, les dates de retrait et les modifications apportées à chaque version.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: nodejs
@@ -8,14 +8,16 @@ ms.topic: reference
 ms.date: 11/20/2018
 author: sakash279
 ms.author: akshanka
-ms.openlocfilehash: 0f94ae4a4b5ad7806658c4ae54146d4ac940750e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 414b7107d02f78676970ecda6ca9373ac3b8db4b
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76771298"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93101168"
 ---
 # <a name="azure-cosmos-db-table-api-for-nodejs-release-notes-and-resources"></a>API Table Azure Cosmos DB pour Node.js : notes de publication et ressources
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
+
 > [!div class="op_single_selector"]
 > * [.NET](table-sdk-dotnet.md)
 > * [.NET Standard](table-sdk-dotnet-standard.md)
@@ -36,7 +38,7 @@ ms.locfileid: "76771298"
 
 ## <a name="release-notes"></a>Notes de publication
 
-### <a name="100"></a><a name="1.0.0"/>1.0.0
+### <a name="100"></a><a name="1.0.0"></a>1.0.0
 * Version en disponibilité générale
 
 ## <a name="release-and-retirement-dates"></a>Dates de lancement et de suppression

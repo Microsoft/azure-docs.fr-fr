@@ -6,14 +6,17 @@ ms.author: brendm
 ms.service: spring-cloud
 ms.topic: how-to
 ms.date: 04/20/2020
-ms.openlocfilehash: 7022c4587b425168fc5bd2182ed65c281633aabf
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-java
+ms.openlocfilehash: cd0b9d1369fb1c0e662de83b7056da0ff7c83bd1
+ms.sourcegitcommit: 30505c01d43ef71dac08138a960903c2b53f2499
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176951"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92090826"
 ---
 # <a name="integrate-azure-spring-cloud-with-azure-load-balance-solutions"></a>Intégrer Azure Spring Cloud à des solutions d’équilibrage de charge Azure
+
+**Cet article s’applique à :** ✔️ Java ✔️ C#
 
 Azure Spring Cloud prend en charge les microservices sur Azure.  L’augmentation de l’activité peut nécessiter plusieurs centres de données avec la gestion de plusieurs instances d’Azure Spring Cloud.
 
@@ -25,10 +28,10 @@ Azure fournit déjà différentes solutions d’équilibrage de charge. Il exist
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Azure Spring Cloud : [Guide pratique pour créer un service Azure Spring Cloud](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart-launch-app-portal)
-* Azure Traffic Manager : [Guide pratique pour créer un profil Traffic Manager](https://docs.microsoft.com/azure/traffic-manager/quickstart-create-traffic-manager-profile/)
-* Azure Application Gateway : [Guide pratique pour créer une passerelle Application Gateway](https://docs.microsoft.com/azure/application-gateway/quick-create-portal)
-* Azure Front Door : [Guide pratique pour créer un profil Front Door](https://docs.microsoft.com/azure/frontdoor/quickstart-create-front-door)
+* Azure Spring Cloud : [Guide pratique pour créer un service Azure Spring Cloud](./spring-cloud-quickstart.md)
+* Azure Traffic Manager : [Guide pratique pour créer un profil Traffic Manager](../traffic-manager/quickstart-create-traffic-manager-profile.md)
+* Azure Application Gateway : [Guide pratique pour créer une passerelle Application Gateway](../application-gateway/quick-create-portal.md)
+* Azure Front Door : [Guide pratique pour créer un profil Front Door](../frontdoor/quickstart-create-front-door.md)
 
 ## <a name="integrate-azure-spring-cloud-with-azure-traffic-manager"></a>Intégrer Azure Spring Cloud à Azure Traffic Manager
 
@@ -89,6 +92,6 @@ Pour effectuer une intégration au service Azure Spring Cloud et configurer le p
     ![Front Door 2](media/spring-cloud-load-balancers/front-door-2.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Guide pratique pour créer un profil Traffic Manager](https://docs.microsoft.com/azure/traffic-manager/quickstart-create-traffic-manager-profile/)
-* [Guide pratique pour créer une passerelle Application Gateway](https://docs.microsoft.com/azure/application-gateway/quick-create-portal)
-* [Guide pratique pour créer un profil Front Door](https://docs.microsoft.com/azure/frontdoor/quickstart-create-front-door)
+* [Guide pratique pour créer un profil Traffic Manager](../traffic-manager/quickstart-create-traffic-manager-profile.md)
+* [Guide pratique pour créer une passerelle Application Gateway](../application-gateway/quick-create-portal.md)
+* [Guide pratique pour créer un profil Front Door](../frontdoor/quickstart-create-front-door.md)

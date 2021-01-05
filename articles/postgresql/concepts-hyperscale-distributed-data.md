@@ -7,12 +7,12 @@ ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
 ms.date: 05/06/2019
-ms.openlocfilehash: ade7632dc042741a07bdb59e34e30b3fb464e0e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7757fdb4953640597a805c3d74a9e1ef08ef2c07
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224753"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86114497"
 ---
 # <a name="distributed-data-in-azure-database-for-postgresql--hyperscale-citus"></a>Données distribuées dans Azure Database pour PostgreSQL – Hyperscale (Citus)
 
@@ -55,7 +55,7 @@ La table de métadonnées `pg_dist_shard` sur le coordinateur contient une ligne
 
 ```sql
 SELECT * from pg_dist_shard;
- logicalrelid  | shardid | shardstorage | shardminvalue | shardmaxvalue 
+ logicalrelid  | shardid | shardstorage | shardminvalue | shardmaxvalue
 ---------------+---------+--------------+---------------+---------------
  github_events |  102026 | t            | 268435456     | 402653183
  github_events |  102027 | t            | 402653184     | 536870911
@@ -84,11 +84,14 @@ JOIN pg_dist_node node
 WHERE shardid = 102027;
 ```
 
-    ┌─────────┬───────────┬──────────┐
-    │ shardid │ nodename  │ nodeport │
-    ├─────────┼───────────┼──────────┤
-    │  102027 │ localhost │     5433 │
-    └─────────┴───────────┴──────────┘
+```output
+┌─────────┬───────────┬──────────┐
+│ shardid │ nodename  │ nodeport │
+├─────────┼───────────┼──────────┤
+│  102027 │ localhost │     5433 │
+└─────────┴───────────┴──────────┘
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
+
 - Apprendre à [choisir une colonne de distribution](concepts-hyperscale-choose-distribution-column.md) pour les tables distribuées.

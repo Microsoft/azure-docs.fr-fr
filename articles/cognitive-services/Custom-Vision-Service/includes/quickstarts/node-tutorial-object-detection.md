@@ -2,233 +2,194 @@
 author: areddish
 ms.author: areddish
 ms.service: cognitive-services
-ms.date: 04/14/2020
-ms.openlocfilehash: cc4cd4b099a37ef103e2da79b8c15269008e7423
-ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+ms.date: 10/26/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: 0c6c80849f48cb4f859bcbaaeb4f072eb575ba74
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83837881"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021271"
 ---
-Cet article vous montre comment bien démarrer avec le SDK Vision par ordinateur et Node.js pour générer un modèle de détection d’objet. Une fois le projet créé, vous pouvez ajouter des régions étiquetées, charger des images, entraîner le projet, obtenir l’URL du point de terminaison de prédiction publié du projet et utiliser le point de terminaison pour tester une image par programmation. Utilisez cet exemple comme modèle pour générer votre propre application Node.js.
+Ce guide fournit des instructions et un exemple de code pour vous aider à commencer à utiliser la bibliothèque de client Custom Vision pour Node.js afin de générer un modèle de détection d’objets. Vous allez créer un projet, ajouter des étiquettes, entraîner le projet et utiliser l’URL de point de terminaison de prédiction du projet pour le tester programmatiquement. Utilisez cet exemple comme modèle pour générer votre propre application de reconnaissance d’image.
+
+> [!NOTE]
+> Si vous souhaitez créer et entraîner un modèle de détection d’objets _sans_ écrire de code, consultez à la place les [instructions basées sur le navigateur](../../get-started-build-detector.md).
+
+Utilisez la bibliothèque de client Custom Vision pour .NET pour :
+
+* Créer un projet de service Custom Vision
+* Ajouter des balises au projet
+* Charger et étiqueter des images
+* Entraîner le projet
+* Publier l’itération actuelle
+* Tester le point de terminaison de prédiction
+
+Documentation de référence [(entraînement)](/javascript/api/@azure/cognitiveservices-customvision-training/?view=azure-node-latest) [(prédiction)](/javascript/api/@azure/cognitiveservices-customvision-prediction/?view=azure-node-latest) | Code source de la bibliothèque [(entraînement)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/cognitiveservices/cognitiveservices-customvision-training) [(prédiction)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/cognitiveservices/cognitiveservices-customvision-prediction) | Package (npm) [(entraînement)](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-training) [(prédiction)](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-prediction) | [Exemples](/samples/browse/?products=azure&terms=custom%20vision&languages=javascript)
+
 
 ## <a name="prerequisites"></a>Prérequis
 
-- [Node.js 8](https://www.nodejs.org/en/download/) ou ultérieur installé.
-- [npm](https://www.npmjs.com/) installé.
-- [!INCLUDE [create-resources](../../includes/create-resources.md)]
+* Abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Version actuelle de [Node.js](https://nodejs.org/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesCustomVision"  title="Créer une ressource Custom Vision"  target="_blank">créez une ressource Custom Vision <span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour créer une ressource d’entraînement et de prédiction et obtenir vos clés et votre point de terminaison. Attendez qu’elle se déploie, puis cliquez sur le bouton **Accéder à la ressource**.
+    * Vous aurez besoin de la clé et du point de terminaison des ressources que vous créez pour connecter votre application Custom Vision. Vous collerez votre clé et votre point de terminaison dans le code ci-dessous plus loin dans le guide de démarrage rapide.
+    * Vous pouvez utiliser le niveau tarifaire Gratuit (`F0`) pour tester le service, puis passer par la suite à un niveau payant pour la production.
 
-[!INCLUDE [get-keys](../../includes/get-keys.md)]
+## <a name="setting-up"></a>Configuration
 
-[!INCLUDE [node-get-images](../../includes/node-get-images.md)]
+### <a name="create-a-new-nodejs-application"></a>Création d’une application Node.js
 
+Dans une fenêtre de console (telle que cmd, PowerShell ou bash), créez un répertoire pour votre application et accédez-y. 
 
-## <a name="install-the-custom-vision-sdk"></a>Installer le kit de développement logiciel (SDK) Vision personnalisée
+```console
+mkdir myapp && cd myapp
+```
 
-Pour installer les SDK du service Custom Vision pour Node.js dans votre projet, exécutez les commandes suivantes :
+Exécutez la commande `npm init` pour créer une application de nœud avec un fichier `package.json`. 
+
+```console
+npm init
+```
+
+### <a name="install-the-client-library"></a>Installer la bibliothèque de client
+
+Pour écrire une application d’analyse d’image avec Custom Vision pour Node.js, vous avez besoin des packages NPM Custom Vision. Pour les installer, exécutez la commande suivante dans PowerShell :
 
 ```shell
 npm install @azure/cognitiveservices-customvision-training
 npm install @azure/cognitiveservices-customvision-prediction
 ```
 
-## <a name="add-the-code"></a>Ajouter le code
+Le fichier `package.json` de votre application sera mis à jour avec les dépendances.
 
-Créez un fichier nommé *sample.js* dans le répertoire de projet de votre choix.
+Créez un fichier nommé `index.js` et importez les bibliothèques suivantes :
 
-### <a name="create-the-custom-vision-service-project"></a>Créer le projet Service Vision personnalisée
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_imports)]
 
-Pour créer un nouveau projet Service Vision personnalisée, ajoutez le code suivant à votre script. Insérez vos clés d’abonnement dans les définitions appropriées et définissez la valeur de chemin sampleDataRoot sur le chemin de votre dossier d’image. Assurez-vous que la valeur endPoint correspond aux points de terminaison d’entraînement et de prédiction que vous avez créés sur [Customvision.ai](https://www.customvision.ai/). Notez que la différence entre la création d’un projet de détection d’objet et un projet de classification d’images dépend du domaine spécifié dans l’appel de **createProject**.
+> [!TIP]
+> Vous voulez voir l’intégralité du fichier de code de démarrage rapide à la fois ? Vous le trouverez sur [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js), qui contient les exemples de code utilisés dans ce guide de démarrage rapide.
 
-```javascript
-const fs = require('fs');
-const util = require('util');
-const TrainingApi = require("@azure/cognitiveservices-customvision-training");
-const PredictionApi = require("@azure/cognitiveservices-customvision-prediction");
-const msRest = require("@azure/ms-rest-js");
+Créez des variables pour le point de terminaison et les clés Azure de votre ressource. 
 
-const setTimeoutPromise = util.promisify(setTimeout);
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_creds)]
 
-const trainingKey = "<your training key>";
-const predictionKey = "<your prediction key>";
-const predictionResourceId = "<your prediction resource id>";
-const sampleDataRoot = "<path to image files>";
+> [!IMPORTANT]
+> Accédez au portail Azure. Si la ressource [nom du produit] que vous avez créée dans la section **Prérequis** a été déployée, cliquez sur le bouton **Accéder à la ressource** sous **Étapes suivantes**. La clé et le point de terminaison se trouvent dans la page **Clé et point de terminaison** de la ressource, sous **Gestion des ressources**. 
+>
+> N’oubliez pas de supprimer la clé de votre code une fois que vous avez terminé, et ne la postez jamais publiquement. Pour la production, envisagez d’utiliser une méthode de stockage et d’accès sécurisée pour vos informations d’identification. Pour plus d’informations, consultez l’article sur la [sécurité](../../../../cognitive-services/cognitive-services-security.md) de Cognitive Services.
 
-const endPoint = "https://<my-resource-name>.cognitiveservices.azure.com/"
+Ajoutez également des champs pour le nom de votre projet et un paramètre de délai d’attente pour les appels asynchrones.
 
-const publishIterationName = "detectModel";
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_vars)]
 
-const credentials = new msRest.ApiKeyCredentials({ inHeader: { "Training-key": trainingKey } });
-const trainer = new TrainingApi.TrainingAPIClient(credentials, endPoint);
+## <a name="object-model"></a>Modèle objet
 
-/* Helper function to let us use await inside a forEach loop.
- * This lets us insert delays between image uploads to accommodate the rate limit.
- */
-async function asyncForEach (array, callback) {
-    for (let i = 0; i < array.length; i++) {
-        await callback(array[i], i, array);
-    }
-}
+|Nom|Description|
+|---|---|
+|[TrainingAPIClient](/javascript/api/@azure/cognitiveservices-customvision-training/trainingapiclient?view=azure-node-latest) | Cette classe gère la création, l’entraînement et la publication de vos modèles. |
+|[PredictionAPIClient](/javascript/api/@azure/cognitiveservices-customvision-prediction/predictionapiclient?view=azure-node-latest)| Cette classe gère l’interrogation de vos modèles pour les prédictions de détection d’objets.|
+|[Prédiction](/javascript/api/@azure/cognitiveservices-customvision-prediction/prediction?view=azure-node-latest)| Cette interface définit une prédiction unique sur une seule image. Elle comprend des propriétés pour l’ID et le nom de l’objet ainsi qu’un score de confiance.|
 
-(async () => {
-    console.log("Creating project...");
-    const domains = await trainer.getDomains()
-    const objDetectDomain = domains.find(domain => domain.type === "ObjectDetection");
-    const sampleProject = await trainer.createProject("Sample Obj Detection Project", { domainId: objDetectDomain.id });
-```
+## <a name="code-examples"></a>Exemples de code
 
-### <a name="create-tags-in-the-project"></a>Créer des balises dans un projet
+Ces extraits de code vous montrent comment effectuer les tâches suivantes avec la bibliothèque de client Custom Vision pour JavaScript :
 
-Pour créer des balises de classification dans votre projet, ajoutez le code suivant à la fin du fichier *sample.js* :
+* [Authentifier le client](#authenticate-the-client)
+* [Créer un projet de service Custom Vision](#create-a-new-custom-vision-project)
+* [Ajouter des balises au projet](#add-tags-to-the-project)
+* [Charger et étiqueter des images](#upload-and-tag-images)
+* [Entraîner le projet](#train-the-project)
+* [Publier l’itération actuelle](#publish-the-current-iteration)
+* [Tester le point de terminaison de prédiction](#test-the-prediction-endpoint)
 
-```javascript
-    const forkTag = await trainer.createTag(sampleProject.id, "Fork");
-    const scissorsTag = await trainer.createTag(sampleProject.id, "Scissors");
-```
+## <a name="authenticate-the-client"></a>Authentifier le client
 
-### <a name="upload-and-tag-images"></a>Charger et étiqueter des images
+Instanciez les objets clients avec le point de terminaison et la clé. Créez un objet **ApiKeyCredentials** avec votre clé et utilisez-le avec votre point de terminaison pour créer un objet [TrainingAPIClient](/javascript/api/@azure/cognitiveservices-customvision-training/trainingapiclient?view=azure-node-latest) et un objet [PredictionAPIClient](/javascript/api/@azure/cognitiveservices-customvision-prediction/predictionapiclient?view=azure-node-latest).
 
-Lorsque vous appliquez des balises à des images dans des projets de détection d’objet, vous devez préciser la région de chaque objet balisé avec des coordonnées normalisées. 
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_auth)]
+
+## <a name="add-helper-function"></a>Ajouter une fonction d’assistance
+
+Ajoutez la fonction suivante pour faciliter la réalisation de plusieurs appels asynchrones. Vous l’utiliserez plus tard.
+
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_auth)]
+
+## <a name="create-a-new-custom-vision-project"></a>Créer un projet de service Custom Vision
+
+Démarrez une nouvelle fonction destinée à contenir tous vos appels de fonction Custom Vision. Ajoutez le code suivant pour créer un projet de service Custom Vision.
+
+
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_create)]
+
+## <a name="create-a-new-custom-vision-project"></a>Créer un projet de service Custom Vision
+
+Démarrez une nouvelle fonction destinée à contenir tous vos appels de fonction Custom Vision. Ajoutez le code suivant pour créer un projet de service Custom Vision.
+
+
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_create)]
+
+## <a name="upload-and-tag-images"></a>Charger et étiqueter des images
+
+Tout d’abord, téléchargez les exemples d’images pour ce projet. Enregistrez le contenu du [dossier des exemples d’images](https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/CustomVision/ObjectDetection/Images) sur votre appareil local.
+
+Pour ajouter les exemples d’images au projet, insérez le code suivant après la création de mots clés. Ce code charge chaque image avec la balise correspondante. Lorsque vous appliquez des balises à des images dans des projets de détection d’objet, vous devez préciser la région de chaque objet balisé avec des coordonnées normalisées. Pour ce tutoriel, les régions sont codées en dur inline avec le code. Les régions spécifient le niveau du bit dans des coordonnées normalisées, et ces dernières sont données dans l’ordre : gauche, haut, largeur et hauteur. Vous pouvez charger jusqu’à 64 images dans un même lot.
+
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_upload)]
+
+
+> [!IMPORTANT]
+> Vous devrez changer le chemin des images (`sampleDataRoot`) en fonction de l’emplacement à partir duquel vous avez téléchargé le dépôt d’exemples du kit SDK Python pour Cognitive Services.
 
 > [!NOTE]
 > Si vous n’avez pas d’utilitaire permettant d’effectuer des opérations de glisser-déposer pour marquer les coordonnées des régions, vous pouvez utiliser l’IU web sur [Customvision.ai](https://www.customvision.ai/). Dans cet exemple, les coordonnées sont déjà fournies.
 
-Pour ajouter les images, les régions et les balises au projet, insérez le code suivant après la création de la balise. Notez que pour ce didacticiel, les régions sont codées en dur avec le code. Les régions spécifient le niveau du bit dans des coordonnées normalisées, et ces dernières sont données dans l’ordre : gauche, haut, largeur et hauteur. Vous pouvez charger jusqu’à 64 images dans un même lot.
 
-```javascript
-const forkImageRegions = {
-    "fork_1.jpg": [0.145833328, 0.3509314, 0.5894608, 0.238562092],
-    "fork_2.jpg": [0.294117659, 0.216944471, 0.534313738, 0.5980392],
-    "fork_3.jpg": [0.09191177, 0.0682516545, 0.757352948, 0.6143791],
-    "fork_4.jpg": [0.254901975, 0.185898721, 0.5232843, 0.594771266],
-    "fork_5.jpg": [0.2365196, 0.128709182, 0.5845588, 0.71405226],
-    "fork_6.jpg": [0.115196079, 0.133611143, 0.676470637, 0.6993464],
-    "fork_7.jpg": [0.164215669, 0.31008172, 0.767156839, 0.410130739],
-    "fork_8.jpg": [0.118872553, 0.318251669, 0.817401946, 0.225490168],
-    "fork_9.jpg": [0.18259804, 0.2136765, 0.6335784, 0.643790841],
-    "fork_10.jpg": [0.05269608, 0.282303959, 0.8088235, 0.452614367],
-    "fork_11.jpg": [0.05759804, 0.0894935, 0.9007353, 0.3251634],
-    "fork_12.jpg": [0.3345588, 0.07315363, 0.375, 0.9150327],
-    "fork_13.jpg": [0.269607842, 0.194068655, 0.4093137, 0.6732026],
-    "fork_14.jpg": [0.143382356, 0.218578458, 0.7977941, 0.295751631],
-    "fork_15.jpg": [0.19240196, 0.0633497, 0.5710784, 0.8398692],
-    "fork_16.jpg": [0.140931368, 0.480016381, 0.6838235, 0.240196079],
-    "fork_17.jpg": [0.305147052, 0.2512582, 0.4791667, 0.5408496],
-    "fork_18.jpg": [0.234068632, 0.445702642, 0.6127451, 0.344771236],
-    "fork_19.jpg": [0.219362751, 0.141781077, 0.5919118, 0.6683006],
-    "fork_20.jpg": [0.180147052, 0.239820287, 0.6887255, 0.235294119]
-};
+## <a name="train-the-project"></a>Entraîner le projet
 
-const scissorsImageRegions = {
-    "scissors_1.jpg": [0.4007353, 0.194068655, 0.259803921, 0.6617647],
-    "scissors_2.jpg": [0.426470578, 0.185898721, 0.172794119, 0.5539216],
-    "scissors_3.jpg": [0.289215684, 0.259428144, 0.403186262, 0.421568632],
-    "scissors_4.jpg": [0.343137264, 0.105833367, 0.332107842, 0.8055556],
-    "scissors_5.jpg": [0.3125, 0.09766343, 0.435049027, 0.71405226],
-    "scissors_6.jpg": [0.379901975, 0.24308826, 0.32107842, 0.5718954],
-    "scissors_7.jpg": [0.341911763, 0.20714055, 0.3137255, 0.6356209],
-    "scissors_8.jpg": [0.231617644, 0.08459154, 0.504901946, 0.8480392],
-    "scissors_9.jpg": [0.170343131, 0.332957536, 0.767156839, 0.403594762],
-    "scissors_10.jpg": [0.204656869, 0.120539248, 0.5245098, 0.743464053],
-    "scissors_11.jpg": [0.05514706, 0.159754932, 0.799019635, 0.730392158],
-    "scissors_12.jpg": [0.265931368, 0.169558853, 0.5061275, 0.606209159],
-    "scissors_13.jpg": [0.241421565, 0.184264734, 0.448529422, 0.6830065],
-    "scissors_14.jpg": [0.05759804, 0.05027781, 0.75, 0.882352948],
-    "scissors_15.jpg": [0.191176474, 0.169558853, 0.6936275, 0.6748366],
-    "scissors_16.jpg": [0.1004902, 0.279036, 0.6911765, 0.477124184],
-    "scissors_17.jpg": [0.2720588, 0.131977156, 0.4987745, 0.6911765],
-    "scissors_18.jpg": [0.180147052, 0.112369314, 0.6262255, 0.6666667],
-    "scissors_19.jpg": [0.333333343, 0.0274019931, 0.443627447, 0.852941155],
-    "scissors_20.jpg": [0.158088237, 0.04047389, 0.6691176, 0.843137264]
-};
+Ce code crée la première itération du modèle de prédiction. 
 
-console.log("Adding images...");
-let fileUploadPromises = [];
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_train)]
 
-const forkDir = `${sampleDataRoot}/Fork`;
-const forkFiles = fs.readdirSync(forkDir);
 
-await asyncForEach(forkFiles, async (file) => {
-    const region = { tagId : forkTag.id, left : forkImageRegions[file][0], top : forkImageRegions[file][1], width : forkImageRegions[file][2], height : forkImageRegions[file][3] };
-    const entry = { name : file, contents : fs.readFileSync(`${forkDir}/${file}`), regions : [region] };
-    const batch = { images : [entry] };
-    // Wait one second to accommodate rate limit.
-    await setTimeoutPromise(1000, null);
-    fileUploadPromises.push(trainer.createImagesFromFiles(sampleProject.id, batch));
-});
+## <a name="publish-the-current-iteration"></a>Publier l’itération actuelle
 
-const scissorsDir = `${sampleDataRoot}/Scissors`;
-const scissorsFiles = fs.readdirSync(scissorsDir);
+Ce code publie l’itération entraînée sur le point de terminaison de prédiction. Le nom donné à l’itération publiée peut être utilisé pour envoyer des requêtes de prédiction. Les itérations ne sont pas disponibles sur le point de terminaison de prédiction tant qu’elles n’ont pas été publiées.
 
-await asyncForEach(scissorsFiles, async (file) => {
-    const region = { tagId : scissorsTag.id, left : scissorsImageRegions[file][0], top : scissorsImageRegions[file][1], width : scissorsImageRegions[file][2], height : scissorsImageRegions[file][3] };
-    const entry = { name : file, contents : fs.readFileSync(`${scissorsDir}/${file}`), regions : [region] };
-    const batch = { images : [entry] };
-    // Wait one second to accommodate rate limit.
-    await setTimeoutPromise(1000, null);
-    fileUploadPromises.push(trainer.createImagesFromFiles(sampleProject.id, batch));
-});
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_publish)]
 
-await Promise.all(fileUploadPromises);
-```
 
-### <a name="train-the-project-and-publish"></a>Entraîner le projet et publier
+## <a name="test-the-prediction-endpoint"></a>Tester le point de terminaison de prédiction
 
-Ce code crée la première itération du modèle de prédiction, puis publie cette itération sur le point de terminaison de prédiction. Le nom donné à l’itération publiée peut être utilisé pour envoyer des requêtes de prédiction. Les itérations ne sont pas disponibles sur le point de terminaison de prédiction tant qu’elles n’ont pas été publiées.
+Pour envoyer une image au point de terminaison de prédiction et récupérer la prédiction, ajoutez le code suivant à votre fonction. 
 
-```javascript
-console.log("Training...");
-let trainingIteration = await trainer.trainProject(sampleProject.id);
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_test)]
 
-// Wait for training to complete
-console.log("Training started...");
-while (trainingIteration.status == "Training") {
-    console.log("Training status: " + trainingIteration.status);
-    // wait for one second
-    await setTimeoutPromise(1000, null);
-    trainingIteration = await trainer.getIteration(sampleProject.id, trainingIteration.id)
-}
-console.log("Training status: " + trainingIteration.status);
+Ensuite, fermez votre fonction Custom Vision et appelez-la.
 
-// Publish the iteration to the end point
-await trainer.publishIteration(sampleProject.id, trainingIteration.id, publishIterationName, predictionResourceId);
-```
-
-### <a name="get-and-use-the-published-iteration-on-the-prediction-endpoint"></a>Obtenir et utiliser l’itération publiée sur le point de terminaison de prédiction
-
-Pour envoyer une image au point de terminaison de prédiction et récupérer la prédiction, ajoutez le code suivant à la fin du fichier :
-
-```javascript
-    const predictor_credentials = new msRest.ApiKeyCredentials({ inHeader: { "Prediction-key": predictionKey } });
-    const predictor = new PredictionApi.PredictionAPIClient(predictor_credentials, endPoint);
-
-    const testFile = fs.readFileSync(`${sampleDataRoot}/Test/test_od_image.jpg`);
-
-    const results = await predictor.detectImage(sampleProject.id, publishIterationName, testFile)
-
-    // Show results
-    console.log("Results:");
-    results.predictions.forEach(predictedResult => {
-        console.log(`\t ${predictedResult.tagName}: ${(predictedResult.probability * 100.0).toFixed(2)}% ${predictedResult.boundingBox.left},${predictedResult.boundingBox.top},${predictedResult.boundingBox.width},${predictedResult.boundingBox.height}`);
-    });
-})()
-```
+[!code-javascript[](~/cognitive-services-quickstart-code/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js?name=snippet_function_close)]
 
 ## <a name="run-the-application"></a>Exécution de l'application
 
-Exécutez *sample.js*.
+Exécutez l’application avec la commande `node` de votre fichier de démarrage rapide.
 
 ```shell
-node sample.js
+node index.js
 ```
 
-La sortie de l’application doit apparaître dans la console. Vous pouvez alors vérifier que l’image test (trouvée dans **samples/vision/images/Test**) est balisée de façon appropriée et que la région de détection est correcte.
+La sortie de l’application doit apparaître dans la console. Vous pouvez alors vérifier que l’image test (qui se trouve dans **<sampleDataRoot>/Test/** ) est étiquetée façon appropriée et que la région de détection est correcte. Vous pouvez aussi revenir sur le [site web Custom Vision](https://customvision.ai) et consulter l’état actuel de votre nouveau projet.
+
 
 [!INCLUDE [clean-od-project](../../includes/clean-od-project.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous savez maintenant comment effectuer la détection d’objet dans le code. Cet exemple exécute une seule itération d’entraînement, mais vous aurez souvent besoin d’entraîner et de tester votre modèle à plusieurs reprises pour le rendre plus précis. Le guide d’entraînement suivant traite de la classification d’images, mais ses principes sont identiques à la détection d’objet.
+Vous avez à présent effectué chaque étape du processus de détection d’objet dans le code. Cet exemple exécute une seule itération d’entraînement, mais vous aurez souvent besoin d’entraîner et de tester votre modèle à plusieurs reprises pour le rendre plus précis. Le guide suivant traite de la classification d’images, mais ses principes sont identiques à la détection d’objet.
 
 > [!div class="nextstepaction"]
 > [Tester et réentraîner un modèle](../../test-your-model.md)
+
+* Qu’est-ce que Custom Vision ?
+* Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/javascript/CustomVision/ObjectDetection/CustomVisionQuickstart.js).
+* [Documentation de référence du SDK (entraînement)](/javascript/api/@azure/cognitiveservices-customvision-training/?view=azure-node-latest)
+* [Documentation de référence du SDK (prédiction)](/javascript/api/@azure/cognitiveservices-customvision-prediction/?view=azure-node-latest)

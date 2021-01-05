@@ -1,24 +1,26 @@
 ---
-title: Se connecter à l’aide de C++ – Azure Database pour MySQL
+title: 'Démarrage rapide : Se connecter à l’aide de C++ – Azure Database pour MySQL'
 description: Ce guide de démarrage rapide fournit un exemple de code C++ que vous pouvez utiliser pour vous connecter à la base de données Azure pour MySQL et pour interroger les données de cette dernière.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.custom: mvc
 ms.devlang: cpp
 ms.topic: quickstart
-ms.date: 3/18/2020
-ms.openlocfilehash: c09327e208719d31b1ae1587c14d0223269abfa9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 5/26/2020
+ms.openlocfilehash: e8b2842300e43a9de88cc0b9b3ae9ce6cd754612
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80062585"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94535841"
 ---
-# <a name="azure-database-for-mysql-use-connectorc-to-connect-and-query-data"></a>Azure Database pour MySQL : Utiliser Connector/C++ pour se connecter et interroger des données
+# <a name="quickstart-use-connectorc-to-connect-and-query-data-in-azure-database-for-mysql"></a>Démarrage rapide : Utiliser Connector/C++ pour vous connecter et interroger des données dans Azure Database pour MySQL
+
 Ce guide de démarrage rapide explique comment se connecter à une base de données Azure Database pour MySQL à l’aide d’une application C#. Il détaille l’utilisation d’instructions SQL pour interroger la base de données, la mettre à jour, y insérer des données ou en supprimer. Cette rubrique part du principe que vous connaissez les bases du développement C++ et que vous ne savez pas utiliser Azure Database pour MySQL.
 
 ## <a name="prerequisites"></a>Prérequis
+
 Ce guide de démarrage rapide s’appuie sur les ressources créées dans l’un des guides suivants :
 - [Créer un serveur de base de données Azure pour MySQL à l’aide du Portail Azure](./quickstart-create-mysql-server-database-using-azure-portal.md)
 - [Création d’un serveur de base de données Azure pour MySQL à l’aide d’Azure CLI](./quickstart-create-mysql-server-database-using-azure-cli.md)
@@ -28,6 +30,9 @@ Il vous faudra également :
 - Installez [Visual Studio](https://www.visualstudio.com/downloads/)
 - Installer [MySQL Connector/C++](https://dev.mysql.com/downloads/connector/cpp/) 
 - Installer [Boost](https://www.boost.org/)
+
+> [!IMPORTANT] 
+> Vérifiez que l’adresse IP à partir de laquelle vous vous connectez a été ajoutée aux règles de pare-feu du serveur à l’aide du [portail Azure](./howto-manage-firewall-using-portal.md) ou [d’Azure CLI](./howto-manage-firewall-using-cli.md)
 
 ## <a name="install-visual-studio-and-net"></a>Installer Visual Studio et .NET
 Les étapes de cette section supposent que vous êtes familiarisé avec l’utilisation de .NET.
@@ -52,7 +57,7 @@ Obtenez les informations requises pour vous connecter à la base de données Azu
 2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources**, puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
 3. Cliquez sur le nom du serveur.
 4. Dans le panneau **Vue d’ensemble** du serveur, notez le **nom du serveur** et le **nom de connexion de l’administrateur du serveur**. Si vous oubliez votre mot de passe, vous pouvez également le réinitialiser dans ce panneau.
- ![Nom du serveur de base de données Azure pour MySQL](./media/connect-cpp/1_server-overview-name-login.png)
+ :::image type="content" source="./media/connect-cpp/1_server-overview-name-login.png" alt-text="Nom du serveur de base de données Azure pour MySQL":::
 
 ## <a name="connect-create-table-and-insert-data"></a>Se connecter, créer des tables et insérer des données
 Utilisez le code suivant pour vous connecter et charger les données à l’aide d’instructions SQL **CREATE TABLE** et **INSERT INTO**. Le code utilise la classe sql::Driver avec la méthode connect() pour établir une connexion à MySQL. Le code utilise ensuite les méthodes createStatement() et execute() pour exécuter les commandes de base de données. 
@@ -301,6 +306,16 @@ int main()
     system("pause");
     return 0;
 }
+```
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Pour nettoyer toutes les ressources utilisées dans le cadre de ce guide de démarrage rapide, supprimez le groupe de ressources à l’aide de la commande suivante :
+
+```azurecli
+az group delete \
+    --name $AZ_RESOURCE_GROUP \
+    --yes
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

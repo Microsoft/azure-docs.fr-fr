@@ -9,12 +9,13 @@ ms.service: cognitive-search
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: fcad05749892e3a652e110a7e351450bffaca6f2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 0e9f4602582a8c24f74d6603b732e7b91d97fa8d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72792979"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89002689"
 ---
 # <a name="upgrade-to-azure-search-net-sdk-version-3"></a>Effectuer une mise à niveau vers la version 3 du SDK .NET Recherche Azure
 
@@ -25,7 +26,7 @@ Indexer execution result errors no longer have status
 the data source API will no longer return in the response of any REST operation, the connection string specified by the user.
 --->
 
-Si vous utilisez la version préliminaire 2.0 ou une version antérieure du [Kit de développement logiciel (SDK) .NET Azure Search](https://aka.ms/search-sdk), cet article vous aidera à mettre à niveau votre application pour utiliser la version 3.
+Si vous utilisez la version préliminaire 2.0 ou une version antérieure du [Kit de développement logiciel (SDK) .NET Azure Search](/dotnet/api/overview/azure/search), cet article vous aidera à mettre à niveau votre application pour utiliser la version 3.
 
 Pour avoir un aperçu général du kit de développement logiciel et avoir des exemples, voir [Comment utiliser Azure Search à partir d’une application .NET](search-howto-dotnet-sdk.md).
 
@@ -41,7 +42,7 @@ La version 3 du SDK .NET Azure Search contient des modifications par rapport aux
 ## <a name="whats-new-in-version-3"></a>Nouveautés de la version 3
 La version 3 du SDK .NET Azure Search cible la dernière version disponible de l’API REST Azure Search, spécifiquement 2016-09-01. Cela permet d’utiliser de nombreuses nouvelles fonctionnalités d’Azure Search à partir d’une application .NET, notamment les suivantes :
 
-* [Analyseurs personnalisés](https://aka.ms/customanalyzers)
+* [Analyseurs personnalisés](index-add-custom-analyzers.md)
 * Prise en charge des indexeurs [Stockage Blob Azure](search-howto-indexing-azure-blob-storage.md) et [Stockage Table Azure](search-howto-indexing-azure-tables.md)
 * Personnalisation des indexeurs avec les [mappages de champs](search-indexer-field-mappings.md)
 * Prise en charge des ETag pour permettre la mise à jour simultanée sécurisée des définitions d’index, des indexeurs et des sources de données
@@ -57,7 +58,9 @@ Une fois que NuGet a téléchargé les nouveaux packages et leurs dépendances, 
 
 Si la compilation échoue, vous devriez voir une erreur de ce type :
 
-    Program.cs(31,45,31,86): error CS0266: Cannot implicitly convert type 'Microsoft.Azure.Search.ISearchIndexClient' to 'Microsoft.Azure.Search.SearchIndexClient'. An explicit conversion exists (are you missing a cast?)
+```output
+Program.cs(31,45,31,86): error CS0266: Cannot implicitly convert type 'Microsoft.Azure.Search.ISearchIndexClient' to 'Microsoft.Azure.Search.SearchIndexClient'. An explicit conversion exists (are you missing a cast?)
+```
 
 L’étape suivante consiste à corriger cette erreur de build. Consultez [Dernières modifications dans la version 3](#ListOfChanges) pour plus d’informations sur la cause de l’erreur et les possibilités de correction.
 

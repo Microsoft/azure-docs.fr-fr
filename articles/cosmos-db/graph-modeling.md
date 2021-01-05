@@ -1,20 +1,21 @@
 ---
 title: Modélisation des données de graphe pour l’API Gremlin d’Azure Cosmos DB
 description: Découvrez comment modéliser une base de données de graphe avec l’API Gremlin d’Azure Cosmos DB. Cet article explique à quel moment utiliser une base de données de graphe et précise les bonnes pratiques de modélisation des entités et des relations.
-author: LuisBosquez
+author: christopheranderson
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/02/2019
-ms.author: lbosq
-ms.openlocfilehash: dc9a5616aa2bb1f7e09045b9cfe4f4d7e9c69be2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: chrande
+ms.openlocfilehash: d99e2e2ffd63b050e7373c98084fed3fb14727bf
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898324"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93357043"
 ---
 # <a name="graph-data-modeling-for-azure-cosmos-db-gremlin-api"></a>Modélisation des données de graphe pour l’API Gremlin d’Azure Cosmos DB
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
 
 Le document suivant est conçu pour fournir des recommandations de modélisation des données de graphe. Cette étape est essentielle afin de garantir la scalabilité et les performances d’un système de base de données de graphe à mesure que les données évoluent. Un modèle de données efficace est particulièrement important avec des graphes à grande échelle.
 
@@ -35,9 +36,9 @@ Une solution de base de données de graphe peut être appliquée de façon optim
 * Il existe des **relations plusieurs-à-plusieurs** entre les entités.
 * Il existe des **exigences d’écriture et de lecture sur les entités et les relations**. 
 
-Si les critères ci-dessus sont remplis, il est probable qu’une approche de base de données de graphe fournira des avantages pour la **complexité des requêtes**, la **scalabilité du modèle de données** et les **performances des requêtes**.
+Si les critères ci-dessus sont remplis, il est probable qu’une approche de base de données de graphe fournira des avantages pour la **complexité des requêtes** , la **scalabilité du modèle de données** et les **performances des requêtes**.
 
-L’étape suivante consiste à déterminer si le graphe va être utilisé à des fins analytiques ou transactionnelles. Si le graphe est destiné à être utilisé pour des calculs intensifs et des charges de travail importantes de traitement des données, il peut être utile d’explorer le [connecteur Spark Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/spark-connector) et l’utilisation de la [bibliothèque GraphX](https://spark.apache.org/graphx/). 
+L’étape suivante consiste à déterminer si le graphe va être utilisé à des fins analytiques ou transactionnelles. Si le graphe est destiné à être utilisé pour des calculs intensifs et des charges de travail importantes de traitement des données, il peut être utile d’explorer le [connecteur Spark Cosmos DB](./spark-connector.md) et l’utilisation de la [bibliothèque GraphX](https://spark.apache.org/graphx/). 
 
 ## <a name="how-to-use-graph-objects"></a>Comment utiliser des objets de graphe
 
@@ -71,13 +72,13 @@ La première étape pour un modèle de données de graphe consiste à mapper cha
 
 Un piège courant est de mapper les propriétés d’une même entité en tant que sommet distinct. Prenons l’exemple ci-dessous, où la même entité est représentée de deux manières différentes :
 
-* **Propriétés basées sur les sommets** : Dans cette approche, l’entité utilise trois sommets distincts et deux arêtes pour décrire ses propriétés. Bien que cette approche puisse réduire la redondance, elle accroît la complexité du modèle. Un accroissement de la complexité du modèle peut entraîner une augmentation des temps de latence, de la complexité des requêtes et du temps de calcul. Ce modèle peut également présenter des problèmes liés au partitionnement.
+* **Propriétés basées sur les sommets**  : Dans cette approche, l’entité utilise trois sommets distincts et deux arêtes pour décrire ses propriétés. Bien que cette approche puisse réduire la redondance, elle accroît la complexité du modèle. Un accroissement de la complexité du modèle peut entraîner une augmentation des temps de latence, de la complexité des requêtes et du temps de calcul. Ce modèle peut également présenter des problèmes liés au partitionnement.
 
-![Modèle d’entité avec des sommets pour les propriétés.](./media/graph-modeling/graph-modeling-1.png)
+:::image type="content" source="./media/graph-modeling/graph-modeling-1.png" alt-text="Modèle d’entité avec des sommets pour les propriétés." border="false":::
 
-* **Sommet avec des propriétés incorporées** : Cette approche tire parti de la liste de paires clé-valeur pour représenter toutes les propriétés de l’entité à l’intérieur d’un sommet. Cette approche aboutit à une complexité réduite du modèle, ce qui permet des requêtes plus simples et des traversées moins consommatrices de ressources.
+* **Sommet avec des propriétés incorporées**  : Cette approche tire parti de la liste de paires clé-valeur pour représenter toutes les propriétés de l’entité à l’intérieur d’un sommet. Cette approche aboutit à une complexité réduite du modèle, ce qui permet des requêtes plus simples et des traversées moins consommatrices de ressources.
 
-![Modèle d’entité avec des sommets pour les propriétés.](./media/graph-modeling/graph-modeling-2.png)
+:::image type="content" source="./media/graph-modeling/graph-modeling-2.png" alt-text="Diagramme montrant le sommet Luis du diagramme précédent avec ID, étiquette et propriétés." border="false":::
 
 > [!NOTE]
 > Les exemples ci-dessus montrent un modèle de graphe simplifié seulement pour comparer les deux méthodes de division des propriétés de l’entité.
@@ -105,7 +106,7 @@ L’utilisation d’étiquettes de relation descriptives peut améliorer l’eff
 * Utilisez des termes non génériques pour étiqueter une relation.
 * Associez l’étiquette du sommet source à l’étiquette du sommet cible avec le nom de la relation.
 
-![Exemples d’étiquetage des relations.](./media/graph-modeling/graph-modeling-3.png)
+:::image type="content" source="./media/graph-modeling/graph-modeling-3.png" alt-text="Exemples d’étiquetage des relations." border="false":::
 
 Plus l’étiquette utilisée par la traversée pour filtrer les arêtes sera spécifique, meilleur sera le résultat. Cette décision peut également avoir un impact significatif sur le coût des requêtes. Vous pouvez évaluer le coût des requêtes à tout moment [en utilisant l’étape executionProfile](graph-execution-profile.md).
 

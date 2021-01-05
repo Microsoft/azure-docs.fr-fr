@@ -5,12 +5,12 @@ author: cgillum
 ms.topic: conceptual
 ms.date: 11/29/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 8da4ce7801cc98f9ffb32eb7b506eaf1ccd877dd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b117fca23b26919f3c404dd32ba64c0c89d66ae7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77562057"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87033562"
 ---
 # <a name="function-chaining-in-durable-functions---hello-sequence-sample"></a>Chaînage de fonctions dans Fonctions durables - Exemple de séquence Hello
 
@@ -60,7 +60,7 @@ Voici la fonction :
 
 Toutes les fonctions d’orchestration JavaScript doivent inclure le module [`durable-functions`](https://www.npmjs.com/package/durable-functions). Il s’agit d’une bibliothèque qui vous permet d’écrire des fonctions Durable Functions en JavaScript. Il existe trois différences importantes entre une fonction d’orchestration et les autres fonctions JavaScript :
 
-1. La fonction est une [fonction de générateur](https://docs.microsoft.com/scripting/javascript/advanced/iterators-and-generators-javascript).
+1. La fonction est une [fonction de générateur](/scripting/javascript/advanced/iterators-and-generators-javascript).
 2. La fonction est encapsulée dans un appel à la méthode `orchestrator` du module `durable-functions` (ici `df`).
 3. La fonction doit être synchrone. Étant donné que la méthode « orchestrator » gère l’appel à « context.done », la fonction doit simplement retourner (« return ») un résultat.
 

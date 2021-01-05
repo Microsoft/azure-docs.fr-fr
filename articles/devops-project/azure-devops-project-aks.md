@@ -8,12 +8,12 @@ ms.technology: devops-cicd
 ms.topic: tutorial
 ms.date: 03/24/2020
 author: mlearned
-ms.openlocfilehash: 7e298afa7efa6035b24f689d1163308ac6b14bff
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: af61254643e9f072995bceed1b6ecf8ecc29e5f8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233327"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91855450"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-kubernetes-service-with-azure-devops-starter"></a>Déployer des applications ASP.NET Core dans Azure Kubernetes Service avec Azure DevOps Starter
 
@@ -24,7 +24,7 @@ De plus, DevOps Starter :
 * Crée automatiquement des ressources Azure, telles qu’Azure Kubernetes Service (AKS)
 * Crée et configure un pipeline de mise en production dans Azure DevOps qui définit un pipeline de build et de mise en production pour CI/CD.
 * Crée une ressource Azure Application Insights pour la supervision
-* Permet à [Azure Monitor pour conteneurs](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview) de superviser les performances des charges de travail de conteneur sur le cluster AKS
+* Permet à [Azure Monitor pour conteneurs](../azure-monitor/insights/container-insights-overview.md) de superviser les performances des charges de travail de conteneur sur le cluster AKS
 
 Ce didacticiel présente les procédures suivantes :
 
@@ -151,7 +151,7 @@ Si vous êtes en phase de test, vous pouvez éviter une hausse des frais de fact
 > [!IMPORTANT]
 > La procédure suivante supprime définitivement les ressources. La fonctionnalité *Supprimer* détruit les données qui sont créées par le projet dans DevOps Starter, à la fois dans Azure et dans Azure DevOps, et vous ne pourrez plus les récupérer. Utilisez cette procédure uniquement après avoir lu attentivement les invites.
 
-1. Dans le portail Azure, accédez au tableau de bord DevOps Starter.
+1. Dans le Portail Azure, accédez au tableau de bord DevOps Starter.
 1. En haut à droite, sélectionnez **Supprimer**. 
 1. À l’invite, sélectionnez **Oui** pour *supprimer définitivement* les ressources.
 
@@ -171,4 +171,4 @@ Si vous le souhaitez, vous pouvez modifier ces pipelines de build et de mise en 
 Pour en savoir plus sur l’utilisation du tableau de bord Kubernetes, consultez :
 
 > [!div class="nextstepaction"]
-> [Utiliser le tableau de bord Kubernetes](https://docs.microsoft.com/azure/aks/kubernetes-dashboard)
+> [Utiliser le tableau de bord Kubernetes](../aks/kubernetes-dashboard.md)

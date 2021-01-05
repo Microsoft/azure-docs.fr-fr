@@ -30,6 +30,26 @@
       items:
         - name: Créer une application de centre de microtraitement
           href: tutorial-micro-fulfillment-center.md
+    - name: Analytique vidéo - Détection d’objets et de mouvements
+      items:
+        - name: 0 - Déployer une application de détection d’objets et de mouvements
+          href: tutorial-video-analytics-deploy.md
+        - name: 1 - Créer une application d’analytique vidéo
+          items:
+            - name: Détection d’objets et de mouvements (YOLO v3)
+              href: tutorial-video-analytics-create-app-yolo-v3.md
+            - name: Détection d’objets et de mouvements (OpenVINO)
+              href: tutorial-video-analytics-create-app-openvino.md
+        - name: 2 - Configurer un appareil IoT Edge
+          items:
+            - name: Créer un appareil d’analytique vidéo sur la périphérie (machine virtuelle Linux)
+              href: tutorial-video-analytics-iot-edge-vm.md
+            - name: Créer un appareil d’analytique vidéo sur la périphérie (Intel NUC)
+              href: tutorial-video-analytics-iot-edge-nuc.md
+        - name: 3 - Superviser et gérer une application d’analytique vidéo
+          href: tutorial-video-analytics-manage.md
+        - name: 4 - Modifier et créer des modules de passerelle d’analytique vidéo en direct
+          href: tutorial-video-analytics-build-module.md
 - name: Concepts
   items:
     - name: Architecture du modèle d’application de logistique connectée
@@ -42,16 +62,16 @@
       href: store-analytics-architecture.md
     - name: Architecture du modèle d’application de centre de microtraitement
       href: architecture-micro-fulfillment-center.md
+    - name: Architecture du modèle d’application d’analytique vidéo
+      href: architecture-video-analytics.md
     - name: Connectivité
       href: ../core/concepts-get-connected.md?toc=/azure/iot-central/retail/toc.json&bc=/azure/iot-central/retail/breadcrumb/toc.json
     - name: Présentation des modèles d’application
       href: ../core/concepts-app-templates.md?toc=/azure/iot-central/retail/toc.json&bc=/azure/iot-central/retail/breadcrumb/toc.json
 - name: Guides pratiques
   items:
-    - name: Connecter des appareils
+    - name: Connecter et développer des appareils
       items:
-        - name: Préparer et connecter un kit de développement IoT MXChip
-          href: ../core/howto-connect-devkit.md?toc=/azure/iot-central/retail/toc.json&bc=/azure/iot-central/retail/breadcrumb/toc.json
         - name: "Préparer et connecter un Rigado Cascade\_500"
           href: ../core/howto-connect-rigado-cascade-500.md?toc=/azure/iot-central/retail/toc.json&bc=/azure/iot-central/retail/breadcrumb/toc.json
         - name: Préparer et connecter un appareil RuuviTag
@@ -113,31 +133,31 @@
 - name: Ressources
   items:
     - name: Options d’aide et de support
-      href: /azure/iot-fundamentals/iot-support-help
+      href: ../../iot-fundamentals/iot-support-help.md
     - name: Services Azure IoT
       items:
         - name: IoT Hub
-          href: /azure/iot-hub
+          href: ../../iot-hub/index.yml
         - name: Service IoT Hub Device Provisioning
-          href: /azure/iot-dps
+          href: ../../iot-dps/index.yml
         - name: IoT Central
-          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+          href: /microsoft-iot-central/
         - name: IoT Edge
-          href: /azure/iot-edge
+          href: ../../iot-edge/index.yml
         - name: Accélérateurs de solution IoT
-          href: /azure/iot-accelerators
+          href: ../../iot-accelerators/index.yml
         - name: IoT Plug-and-Play
-          href: /azure/iot-pnp
+          href: ../../iot-pnp/index.yml
         - name: Azure Maps
-          href: /azure/azure-maps
+          href: ../../azure-maps/index.yml
         - name: Time Series Insights
-          href: /azure/time-series-insights
+          href: ../../time-series-insights/index.yml
     - name: Kits de développement logiciel (SDK) Azure IoT
       items:
         - name: Kits de développement logiciel (SDK) IoT Service
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+          href: ../../iot-hub/iot-hub-devguide-sdks.md#azure-iot-hub-service-sdks
         - name: Kits de développement logiciel (SDK) IoT Device
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+          href: ../../iot-hub/iot-hub-devguide-sdks.md#azure-iot-hub-device-sdks
     - name: Demandes de données client
       href: ../core/iot-central-customer-data-requests.md?toc=/azure/iot-central/retail/toc.json&bc=/azure/iot-central/retail/breadcrumb/toc.json
     - name: Navigateurs pris en charge

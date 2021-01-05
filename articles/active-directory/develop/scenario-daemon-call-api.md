@@ -1,6 +1,6 @@
 ---
 title: Appeler une API web à partir d’une application démon - Plateforme d’identités Microsoft | Azure
-description: Découvrez comment générer une application démon appelant des API web
+description: Découvrez comment générer une application démon appelant une API web.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 10/30/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: e440628526dada7655cc71f63fc9fff006cc5ef5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 0dfd729a48b7e81028078fd035b3b900f4d7b9bc
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885444"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444113"
 ---
 # <a name="daemon-app-that-calls-web-apis---call-a-web-api-from-the-app"></a>Application démon appelant des API web - appeler une API web à partir de l’application
 
@@ -69,17 +69,14 @@ Pour les applications de démon, les API web que vous appelez doivent être pré
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-> [!div class="nextstepaction"]
-> [Application démon - déplacement en production](https://docs.microsoft.com/azure/active-directory/develop/scenario-daemon-production?tabs=dotnet)
+Passez à l’article suivant de ce scénario, [Passer en production](./scenario-daemon-production.md?tabs=dotnet).
 
 # <a name="python"></a>[Python](#tab/python)
 
-> [!div class="nextstepaction"]
-> [Application démon - déplacement en production](https://docs.microsoft.com/azure/active-directory/develop/scenario-daemon-production?tabs=python)
+Passez à l’article suivant de ce scénario, [Passer en production](./scenario-daemon-production.md?tabs=python).
 
 # <a name="java"></a>[Java](#tab/java)
 
-> [!div class="nextstepaction"]
-> [Application démon - déplacement en production](https://docs.microsoft.com/azure/active-directory/develop/scenario-daemon-production?tabs=java)
+Passez à l’article suivant de ce scénario, [Passer en production](./scenario-daemon-production.md?tabs=java).
 
 ---

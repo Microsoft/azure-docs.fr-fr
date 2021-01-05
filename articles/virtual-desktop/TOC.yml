@@ -1,10 +1,12 @@
-- name: "Windows Virtual Desktop - Version Printemps\_2020"
+- name: Windows Virtual Desktop
   href: index.yml
 - name: Vue d’ensemble
   items:
     - name: "Qu’est-ce que Windows Virtual Desktop\_?"
       href: overview.md
-    - name: "Documentation de la version Automne\_2019"
+    - name: Nouveautés
+      href: whats-new.md
+    - name: Documentation Windows Virtual Desktop (classique)
       href: ./virtual-desktop-fall-2019/tenant-setup-azure-active-directory.md
 - name: Tutoriels
   items:
@@ -18,10 +20,12 @@
       href: set-up-service-alerts.md
 - name: Procédures
   items:
+    - name: Migrer manuellement
+      href: manual-migration.md
     - name: Se connecter à des ressources Windows Virtual Desktop
       items:
         - name: Se connecter avec le client Windows Desktop
-          href: connect-windows-7-and-10.md
+          href: connect-windows-7-10.md
         - name: Se connecter avec le client web
           href: connect-web.md
         - name: Se connecter avec le client Android
@@ -30,18 +34,28 @@
           href: connect-macos.md
         - name: Se connecter avec le client iOS
           href: connect-ios.md
+        - name: Se connecter avec le client Microsoft Store
+          href: connect-microsoft-store.md
+        - name: Se connecter aux appareils Linux
+          href: linux-overview.md
+    - name: Configurer des redirections d’appareil
+      href: configure-device-redirections.md
     - name: Configurer le module PowerShell
       href: powershell-module.md
     - name: Créer un pool d’hôtes et des hôtes de session
       items:
         - name: PowerShell
           href: create-host-pools-powershell.md
+        - name: "Déployer une machine virtuelle Windows\_7"
+          href: deploy-windows-7-virtual-machine.md
         - name: Déployer un hôte de session basé sur GPU
           href: configure-vm-gpu.md
         - name: Développer un pool d’hôtes existant
           href: expand-existing-host-pool.md
         - name: Gérer les groupes d’applications avec PowerShell
           href: manage-app-groups-powershell.md
+    - name: Supprimer un pool d’hôtes
+      href: delete-host-pool.md
     - name: Créer un conteneur de profils
       items:
         - name: Utiliser un partage de fichiers basé sur machine virtuelle
@@ -50,6 +64,8 @@
           href: create-fslogix-profile-container.md
         - name: Utiliser Azure Files et Azure AD DS
           href: create-profile-container-adds.md
+        - name: Utiliser Azure Files et AD DS
+          href: create-file-share.md
     - name: Configurer les paramètres d’un pool d’hôtes
       items:
         - name: Propriétés RDP
@@ -66,6 +82,8 @@
           href: set-up-customize-master-image.md
         - name: Installer Office sur une image VHD principale
           href: install-office-on-wvd-master-image.md
+    - name: Mettre à l’échelle des hôtes de session automatiquement
+      href: set-up-scaling-script.md
     - name: Personnaliser un flux
       href: customize-feed-for-virtual-desktop-users.md
     - name: Utiliser les diagnostics des services
@@ -74,20 +92,56 @@
           href: diagnostics-log-analytics.md
     - name: Publier des applications intégrées
       href: publish-apps.md
-    - name: Configurer l’attachement d’application MSIX
-      href: app-attach.md
+    - name: Utiliser l’attachement d’application MSIX
+      items:
+        - name: Configurer l’attachement d’application MSIX avec le portail Azure
+          href: app-attach-azure-portal.md
+        - name: Configurer l’attachement d’application MSIX avec PowerShell
+          href: app-attach-powershell.md
+        - name: Créer des scripts PowerShell
+          href: app-attach.md
+        - name: Préparer une image MSIX
+          href: app-attach-image-prep.md
+        - name: Configurer un partage de fichiers
+          href: app-attach-file-share.md
     - name: Utiliser Microsoft Teams
       href: teams-on-wvd.md
-    - name: Configurer Azure Multi-Factor Authentication
+    - name: "Configurer l’authentification multifacteur Azure\_AD"
       href: set-up-mfa.md
+    - name: Configurer les mises à jour automatiques
+      href: configure-automatic-updates.md
     - name: Installer des modules linguistiques
       href: language-packs.md
+    - name: Utiliser Azure Advisor
+      href: azure-advisor.md
+    - name: Résoudre les recommandations
+      href: azure-advisor-recommendations.md
+    - name: Utiliser Azure Monitor pour Windows Virtual Desktop
+      href: azure-monitor.md
+    - name: Définir un plan de reprise d’activité
+      href: disaster-recovery.md
 - name: Concepts
   items:
+    - name: Rôles intégrés
+      href: rbac.md
+    - name: Authentification
+      href: authentication.md
     - name: Environnement Windows Virtual Desktop
       href: environment-setup.md
-    - name: Déterminer la latence des connexions utilisateur
-      href: connection-latency.md
+    - name: Connectivité réseau
+      items:
+        - name: Présentation de la connectivité réseau
+          href: network-connectivity.md
+        - name: RDP Shortpath
+          href: shortpath.md
+        - name: Implémenter la qualité de service (QoS)
+          href: rdp-quality-of-service-qos.md
+        - name: Liste des URL requises
+          href: safe-url-list.md
+        - name: Remarques relatives à la bande passante
+          href: rdp-bandwidth.md
+        - name: Déterminer la latence des connexions utilisateur
+          href: connection-latency.md
     - name: Accès délégué dans Windows Virtual Desktop
       href: delegated-access-virtual-desktop.md
     - name: Méthodes d’équilibrage de charge des pools d’hôtes
@@ -98,8 +152,20 @@
       href: store-fslogix-profile.md
     - name: Intégrations des partenaires
       href: partners.md
+    - name: Questions fréquentes (FAQ) sur Windows Virtual Desktop
+      href: faq.md
     - name: "FAQ sur Windows\_10 Entreprise multisession"
       href: windows-10-multisession-faq.md
+    - name: Attachement d’application MSIX
+      items:
+        - name: "Qu’est-ce que l’attachement d’application MSIX\_?"
+          href: what-is-app-attach.md
+        - name: Glossaire
+          href: app-attach-glossary.md
+        - name: Questions fréquentes (FAQ)
+          href: app-attach-faq.md
+    - name: Glossaire Azure Monitor
+      href: azure-monitor-glossary.md
     - name: Emplacements des données
       href: data-locations.md
 - name: Dépanner
@@ -108,7 +174,7 @@
       href: troubleshoot-set-up-overview.md
     - name: Identifier et diagnostiquer les problèmes
       href: diagnostics-role-service.md
-    - name: Création d’un pool de locataires et d’hôtes
+    - name: Création d’un pool d’hôtes
       href: troubleshoot-set-up-issues.md
     - name: Configuration d’une machine virtuelle hôte de session
       href: troubleshoot-vm-configuration.md
@@ -120,6 +186,8 @@
       href: troubleshoot-powershell.md
     - name: Diagnostic des problèmes de performances graphiques
       href: remotefx-graphics-performance-counters.md
+    - name: Azure Monitor
+      href: troubleshoot-azure-monitor.md
 - name: Informations de référence
   items:
     - name: Bonnes pratiques de sécurité
@@ -127,19 +195,27 @@
     - name: Prise en charge Linux
       href: linux-overview.md
     - name: Paramètres de fichier RDP pris en charge
-      href: 'https://docs.microsoft.com/windows-server/remote/remote-desktop-services/clients/rdp-files?context=/azure/virtual-desktop/context/context'
-    - name: Guide réseau
-      href: 'https://docs.microsoft.com/windows-server/remote/remote-desktop-services/network-guidance?context=/azure/virtual-desktop/context/context'
+      href: /windows-server/remote/remote-desktop-services/clients/rdp-files?context=/azure/virtual-desktop/context/context
     - name: Guide des tailles des machines virtuelles
-      href: 'https://docs.microsoft.com/windows-server/remote/remote-desktop-services/virtual-machine-recs?context=/azure/virtual-desktop/context/context'
+      href: /windows-server/remote/remote-desktop-services/virtual-machine-recs?context=/azure/virtual-desktop/context/context
+    - name: Interface de ligne de commande Microsoft Azure
+      href: /cli/azure/ext/desktopvirtualization/?view=azure-cli-latest
+    - name: Exemples de scénarios Azure
+      href: /azure/architecture/example-scenario/wvd/windows-virtual-desktop
+    - name: Découverte des e-mails
+      href: /windows-server/remote/remote-desktop-services/rds-email-discovery
 - name: Ressources
   items:
+    - name: PowerShell
+      href: /powershell/module/az.desktopvirtualization/?view=azps-4.2.0#desktopvirtualization
+    - name: Référence d’API REST
+      href: /rest/api/desktopvirtualization/
     - name: Outil d’estimation de l’expérience
       href: 'https://azure.microsoft.com/services/virtual-desktop/assessment/'
     - name: Calculatrice de prix
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Parcours d’apprentissage
-      href: 'https://docs.microsoft.com/learn/paths/m365-wvd/'
+      href: /learn/paths/m365-wvd/
     - name: Vidéos pratiques
       href: 'https://support.microsoft.com/help/4563049/how-to-videos-about-windows-virtual-desktop'
     - name: Groupe de support de la communauté technique

@@ -1,6 +1,14 @@
-- name: Configuration d’un projet Unity en partant de zéro
-  href: project-setup.md
-- name: Utilisation d’entités distantes dans Unity
-  href: working-with-remote-entities.md
-- name: Changement d’environnement et de matériaux
-  href: changing-environment-and-materials.md
+- name: Vue d’ensemble
+  href: tutorial-landing.md
+- name: Affichage d’un modèle rendu à distance
+  href: view-remote-models/view-remote-models.md
+- name: Interfaces et modèles personnalisés
+  href: custom-models/custom-models.md
+- name: Manipulation de modèles
+  href: manipulate-models/manipulate-models.md
+- name: 'Affinage des matériaux, de l’éclairage et des effets'
+  href: materials-lighting-effects/materials-lighting-effects.md
+- name: Sécurisation d’Azure Remote Rendering et du stockage de modèles
+  href: security/security.md
+- name: Création d’une application Azure Remote Rendering prête à la commercialisation
+  href: commercial-ready/commercial-ready.md

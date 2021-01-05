@@ -4,15 +4,13 @@ ms.service: cosmos-db
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: sngun
-ms.openlocfilehash: 72c6cfc2907c89c01fa7832b651705f10a5dd22e
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 09bb95ae98670a7c9492b20fef08fc6243a342c2
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "67176818"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95559122"
 ---
-Vous pouvez également [essayer Azure Cosmos DB gratuitement](https://azure.microsoft.com/try/cosmosdb/) sans abonnement Azure, libre de tout frais et engagement. Vous pouvez aussi utiliser l’[émulateur Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/local-emulator) pour ce didacticiel avec la chaîne de connexion suivante :   
+Vous pouvez également [essayer Azure Cosmos DB gratuitement](https://azure.microsoft.com/try/cosmosdb/) sans abonnement Azure, libre de tout frais et engagement. Vous pouvez aussi utiliser l’[émulateur Azure Cosmos DB](../articles/cosmos-db/local-emulator.md) pour ce tutoriel avec la chaîne de connexion suivante :
 
-    mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true
-
-   
+`mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true`

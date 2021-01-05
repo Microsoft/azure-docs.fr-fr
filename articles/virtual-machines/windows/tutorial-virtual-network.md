@@ -7,17 +7,17 @@ ms.subservice: networking
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 12/04/2018
+ms.date: 08/04/2020
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: dff2acba63eaa2caabaddb0228424744be6ded16
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 84da38fe71446c54f17c4d4329c7294c5e5176d2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82101686"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87800192"
 ---
-# <a name="tutorial-create-and-manage-azure-virtual-networks-for-windows-virtual-machines-with-azure-powershell"></a>Tutoriel : Créer et gérer des réseaux virtuels Azure pour des machines virtuelles Windows avec Azure PowerShell
+# <a name="tutorial-create-and-manage-azure-virtual-networks-for-windows-virtual-machines-with-azure-powershell"></a>Tutoriel : Créer et gérer des réseaux virtuels Azure pour des machines virtuelles Windows avec Azure PowerShell
 
 Les machines virtuelles Azure utilisent la gestion réseau Azure pour la communication réseau interne et externe. Ce didacticiel vous guide dans le déploiement de deux machines virtuelles et la configuration de la gestion réseau Azure pour celles-ci. Les exemples de ce didacticiel supposent que les machines virtuelles hébergent une application web avec un back-end de base de données. Le didacticiel ne comprend cependant pas le déploiement d’une application. Dans ce tutoriel, vous allez apprendre à :
 
@@ -31,7 +31,7 @@ Les machines virtuelles Azure utilisent la gestion réseau Azure pour la communi
 
 ## <a name="vm-networking-overview"></a>Vue d’ensemble de la mise en réseau de machines virtuelles
 
-Avec les réseaux virtuels Azure, les connexions réseau sont sécurisées entre les machines virtuelles, Internet et d’autres services Azure comme Azure SQL Database. Les réseaux virtuels sont divisés en segments logiques, appelés sous-réseaux. Les sous-réseaux sont utilisés pour contrôler le flux du réseau et comme une limite de sécurité. Quand vous déployez une machine virtuelle, elle inclut généralement une interface de réseau virtuel, qui est attachée à un sous-réseau.
+Avec les réseaux virtuels Azure, les connexions réseau sont sécurisées entre les machines virtuelles, Internet et d’autres services Azure comme Azure SQL Database. Les réseaux virtuels sont divisés en segments logiques, appelés sous-réseaux. Les sous-réseaux sont utilisés pour contrôler le flux du réseau et comme une limite de sécurité. Quand vous déployez une machine virtuelle, elle inclut généralement une interface de réseau virtuel, qui est attachée à un sous-réseau.
 
 En suivant ce didacticiel, vous pourrez créer les ressources suivantes :
 
@@ -59,13 +59,13 @@ Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite 
 
 Pour ce didacticiel, un seul réseau virtuel est créé avec deux sous-réseaux. Un sous-réseau frontal pour l’hébergement d’une application web et un sous-réseau principal pour l’hébergement d’un serveur de base de données.
 
-Avant de créer une machine virtuelle, créez un groupe de ressources à l’aide de [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). L’exemple suivant crée un groupe de ressources nommé *myRGNetwork* à l’emplacement *EastUS* :
+Avant de créer une machine virtuelle, créez un groupe de ressources à l’aide de [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). L’exemple suivant crée un groupe de ressources nommé *myRGNetwork* à l’emplacement *EastUS* :
 
 ```azurepowershell-interactive
 New-AzResourceGroup -ResourceGroupName myRGNetwork -Location EastUS
 ```
 
-Créez une configuration de sous-réseau nommée *myFrontendSubnet* à l’aide de [New-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) :
+Créez une configuration de sous-réseau nommée *myFrontendSubnet* à l’aide de [New-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/new-azvirtualnetworksubnetconfig) :
 
 ```azurepowershell-interactive
 $frontendSubnet = New-AzVirtualNetworkSubnetConfig `
@@ -83,7 +83,7 @@ $backendSubnet = New-AzVirtualNetworkSubnetConfig `
 
 ## <a name="create-virtual-network"></a>Création d’un réseau virtuel
 
-Créez un réseau virtuel nommé *myVNet* en utilisant *myFrontendSubnet* et *myBackendSubnet* avec [New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork) :
+Créez un réseau virtuel nommé *myVNet* en utilisant *myFrontendSubnet* et *myBackendSubnet* avec [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork) :
 
 ```azurepowershell-interactive
 $vnet = New-AzVirtualNetwork `
@@ -102,7 +102,7 @@ Une adresse IP publique permet aux ressources Azure d’être accessibles sur In
 
 La méthode d’allocation peut être définie comme étant statique, ce qui garantit que l’adresse IP reste affectée à une machine virtuelle, même lorsqu’elle est libérée. Si vous utilisez une adresse IP statique, l’adresse IP elle-même ne peut pas être spécifiée. Elle est plutôt allouée à partir d’un pool d’adresses disponibles.
 
-Créez une adresse IP publique nommée *myPublicIPAddress* avec [New-AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress) :
+Créez une adresse IP publique nommée *myPublicIPAddress* avec [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) :
 
 ```azurepowershell-interactive
 $pip = New-AzPublicIpAddress `
@@ -116,7 +116,7 @@ Vous pouvez changer le paramètre -AllocationMethod en `Static` pour assigner un
 
 ## <a name="create-a-front-end-vm"></a>Créer une machine virtuelle frontale
 
-Pour communiquer avec un réseau virtuel, une machine virtuelle a besoin d’une interface réseau virtuelle. Créez une carte réseau à l’aide de [New-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface) :
+Pour communiquer avec un réseau virtuel, une machine virtuelle a besoin d’une interface réseau virtuelle. Créez une carte réseau à l’aide de [New-AzNetworkInterface](/powershell/module/az.network/new-aznetworkinterface) :
 
 ```azurepowershell-interactive
 $frontendNic = New-AzNetworkInterface `
@@ -127,13 +127,13 @@ $frontendNic = New-AzNetworkInterface `
   -PublicIpAddressId $pip.Id
 ```
 
-Définissez le nom d’utilisateur et le mot de passe pour le compte Administrateur sur la machine virtuelle avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential). Vous utilisez ces informations d’identification pour vous connecter à la machine virtuelle en suivant des étapes supplémentaires :
+Définissez le nom d’utilisateur et le mot de passe pour le compte Administrateur sur la machine virtuelle avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1). Vous utilisez ces informations d’identification pour vous connecter à la machine virtuelle en suivant des étapes supplémentaires :
 
 ```azurepowershell-interactive
 $cred = Get-Credential
 ```
 
-Créez les machines virtuelles avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm).
+Créez les machines virtuelles avec [New-AzVM](/powershell/module/az.compute/new-azvm).
 
 ```azurepowershell-interactive
 New-AzVM `
@@ -163,7 +163,7 @@ Tous les groupes de ressources réseau contiennent un ensemble de règles par d�
 
 ### <a name="create-network-security-groups"></a>Créer des groupes de sécurité réseau
 
-Créez une règle de trafic entrant nommée *myFrontendNSGRule* pour autoriser le trafic web entrant sur *myFrontendVM* avec [New-AzNetworkSecurityRuleConfig](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecurityruleconfig) :
+Créez une règle de trafic entrant nommée *myFrontendNSGRule* pour autoriser le trafic web entrant sur *myFrontendVM* avec [New-AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig) :
 
 ```azurepowershell-interactive
 $nsgFrontendRule = New-AzNetworkSecurityRuleConfig `
@@ -193,7 +193,7 @@ $nsgBackendRule = New-AzNetworkSecurityRuleConfig `
   -Access Allow
 ```
 
-Ajoutez un groupe de sécurité réseau nommé *myFrontendNSG* avec [New-AzNetworkSecurityGroup](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecuritygroup) :
+Ajoutez un groupe de sécurité réseau nommé *myFrontendNSG* avec [New-AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup) :
 
 ```azurepowershell-interactive
 $nsgFrontend = New-AzNetworkSecurityGroup `

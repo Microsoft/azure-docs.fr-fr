@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/22/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 5b1170f721cf8521cfe1762df0cc616c938ddf28
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6521efe024ba0ea29ae427aeaf06ca0e5fa8dd7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236417"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84194916"
 ---
 # <a name="push-data-to-an-azure-cognitive-search-index-by-using-azure-data-factory"></a>Transmettre des données vers un index de Recherche cognitive Azure à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -47,7 +47,7 @@ Que vous utilisiez des outils ou des API, la création d’un pipeline qui dépl
 2. Création de **jeux de données** pour représenter les données d’entrée et de sortie de l’opération de copie.
 3. Création d’un **pipeline** avec une activité de copie qui utilise un jeu de données en tant qu’entrée et un jeu de données en tant que sortie.
 
-Lorsque vous utilisez l’Assistant, les définitions JSON de ces entités Data Factory (services liés, jeux de données et pipeline) sont automatiquement créées pour vous. Lorsque vous utilisez des outils/API (à l’exception de l’API .NET), vous devez définir ces entités Data Factory au format JSON.  Pour obtenir un exemple contenant des définitions JSON pour les entités Data Factory utilisées pour copier des données vers un index de recherche, consultez la section [Exemple JSON : copier des données d’un serveur SQL Server local vers un index Recherche cognitive Azure](#json-example-copy-data-from-on-premises-sql-server-to-azure-cognitive-search-index) de cet article.
+Lorsque vous utilisez l’Assistant, les définitions JSON de ces entités Data Factory (services liés, jeux de données et pipeline) sont automatiquement créées pour vous. Lorsque vous utilisez des outils/API (à l’exception de l’API .NET), vous devez définir ces entités Data Factory au format JSON.  Pour obtenir un exemple contenant des définitions JSON pour les entités Data Factory utilisées pour copier des données vers un index de recherche, consultez la section [Exemple JSON : Copier des données de SQL Server vers un index Recherche cognitive Azure](#json-example-copy-data-from-sql-server-to-azure-cognitive-search-index) de cet article.
 
 Les sections suivantes offrent des informations détaillées sur les propriétés JSON utilisées pour définir les entités Data Factory propres à un Index de recherche :
 
@@ -108,7 +108,7 @@ Le tableau suivant indique si un type de données Recherche cognitive Azure est 
 | Tableau de chaînes | N |
 | GeographyPoint | N |
 
-## <a name="json-example-copy-data-from-on-premises-sql-server-to-azure-cognitive-search-index"></a>Exemple JSON : copier des données d’un serveur SQL Server local vers un index Recherche cognitive Azure
+## <a name="json-example-copy-data-from-sql-server-to-azure-cognitive-search-index"></a>Exemple JSON : Copier des données de SQL Server vers un index Recherche cognitive Azure
 
 L’exemple suivant montre :
 
@@ -118,7 +118,7 @@ L’exemple suivant montre :
 4. Un [jeu de données](data-factory-create-datasets.md) de sortie de type [AzureSearchIndex](#dataset-properties).
 4. Un [pipeline](data-factory-create-pipelines.md) avec une activité de copie qui utilise [SqlSource](data-factory-sqlserver-connector.md#copy-activity-properties) et [AzureSearchIndexSink](#copy-activity-properties).
 
-L’exemple copie toutes les heures les données de série chronologique d’une base de données SQL Server locale vers un index de recherche. Les propriétés JSON utilisées dans cet exemple sont décrites dans les sections suivant les exemples.
+L’exemple copie toutes les heures les données de série chronologique d’une base de données SQL Server vers un index de recherche. Les propriétés JSON utilisées dans cet exemple sont décrites dans les sections suivant les exemples.
 
 Dans un premier temps, configurez la passerelle de gestion des données sur votre ordinateur local. Les instructions se trouvent dans l’article [Déplacement de données entre des emplacements locaux et le cloud](data-factory-move-data-between-onprem-and-cloud.md) .
 

@@ -1,37 +1,33 @@
 ---
-title: Vues T-SQL avec SQL Synapse
-description: Conseils pour l’utilisation de vues T-SQL et le développement de solutions avec SQL Synapse.
+title: Vues T-SQL avec pools SQL
+description: Conseils d’utilisation de vues T-SQL et de développement de solutions avec un pool SQL dédié et un pool SQL serverless dans Azure Synapse Analytics.
 services: synapse-analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 3a073c9539f2fb996ae59ef513525c217170f2e7
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 6fb75257a86e9e46d6c180a2a38193adecb2b36a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426653"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451672"
 ---
-# <a name="t-sql-views-using-synapse-sql"></a>Vues T-SQL avec SQL Synapse
-Cet article fournit des conseils pour l’utilisation de vues T-SQL et le développement de solutions avec SQL Synapse. 
+# <a name="t-sql-views-with-dedicated-sql-pool-and-serverless-sql-pool-in-azure-synapse-analytics"></a>Vues T-SQL avec un pool SQL dédié et un pool SQL serverless dans Azure Synapse Analytics
 
-## <a name="why-use-views"></a>Pourquoi utiliser des vues ?
+Dans cet article, vous trouverez des conseils d’utilisation de vues T-SQL et de développement de solutions avec un pool SQL dédié et un pool SQL serverless dans Azure Synapse Analytics.
+
+## <a name="why-use-views"></a>Pourquoi utiliser des vues
 
 Des vues peuvent être utilisées de différentes façons afin d’améliorer la qualité de votre solution.  Cet article met en évidence présente exemples montrant comment enrichir votre solution avec des vues, ainsi que les limites à prendre en considération.
 
 ### <a name="sql-pool---create-view"></a>Pool SQL – Créer une vue
 
 > [!NOTE]
-> **Pool SQL** : La syntaxe de CREATE VIEW n’est pas abordée dans cet article. Pour plus d’informations, consultez la documentation [CREATE VIEW](/sql/t-sql/statements/create-view-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
-
-### <a name="sql-on-demand-preview---create-view"></a>SQL à la demande (préversion) – Créer une vue
-
-> [!NOTE]
-> **SQL à la demande** : La syntaxe de CREATE VIEW n’est pas abordée dans cet article. Pour plus d’informations, consultez la documentation [CREATE VIEW](/sql/t-sql/statements/create-view-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+> La syntaxe de CREATE VIEW n’est pas abordée dans cet article. Pour plus d’informations, consultez la documentation [CREATE VIEW](/sql/t-sql/statements/create-view-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
 
 ## <a name="architectural-abstraction"></a>Abstraction architecturale
 
@@ -54,7 +50,6 @@ FROM   dbo.DimDate_stg AS stg
 
 RENAME OBJECT DimDate TO DimDate_Old;
 RENAME OBJECT DimDate_New TO DimDate;
-
 ```
 
 Gardez à l’esprit que cette approche peut avoir pour effet que des tables apparaissent et disparaissent pour l’utilisateur, et que des messages d’erreur « Cette table n’existe pas » s’affichent. Vous pouvez utiliser des vues pour fournir aux utilisateurs une couche de présentation cohérente pendant que les objets sous-jacents sont renommés.

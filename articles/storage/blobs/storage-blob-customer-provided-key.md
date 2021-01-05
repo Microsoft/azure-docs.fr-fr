@@ -5,20 +5,21 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 11/26/2019
+ms.date: 07/20/2020
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: ea8254f108aed9d40e6970a27409035b1e10ab41
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 50d592d0020ae1b5a704296ef68f5153f0207714
+ms.sourcegitcommit: 0dcafc8436a0fe3ba12cb82384d6b69c9a6b9536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74806998"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94427573"
 ---
 # <a name="specify-a-customer-provided-key-on-a-request-to-blob-storage-with-net"></a>Spécifier une clé fournie par le client sur une demande au stockage d’objets blob avec .NET
 
-Les clients effectuant des requêtes auprès du stockage d’objets blob Azure ont la possibilité de fournir une clé de chiffrement sur une requête individuelle. L’inclusion de la clé de chiffrement dans la requête offre un contrôle précis des paramètres de chiffrement pour les opérations de stockage d’objets blob. Les clés fournies par le client (préversion) peuvent être stockées dans Azure Key Vault ou dans un autre magasin de clés.
+Les clients effectuant des requêtes auprès du stockage d’objets blob Azure ont la possibilité de fournir une clé de chiffrement sur une requête individuelle. L’inclusion de la clé de chiffrement dans la requête offre un contrôle précis des paramètres de chiffrement pour les opérations de stockage d’objets blob. Les clés fournies par le client peuvent être stockées dans Azure Key Vault ou dans un autre magasin de clés.
 
 Cet article explique comment spécifier une clé fournie par le client sur une demande avec .NET.
 
@@ -74,5 +75,5 @@ async static Task UploadBlobWithClientKey(string accountName, string containerNa
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+- [Fournir une clé de chiffrement lors d’une requête au stockage d’objets blob](encryption-customer-provided-keys.md)
 - [Chiffrement du stockage Azure pour les données au repos](../common/storage-service-encryption.md)
-- [Autoriser l’accès aux objets blob et files d’attente avec Azure Active Directory et les identités managées pour les ressources Azure](../common/storage-auth-aad-msi.md)

@@ -8,14 +8,14 @@ manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.topic: conceptual
-ms.date: 04/01/2020
+ms.date: 10/29/2020
 ms.author: aahi
-ms.openlocfilehash: 458cda927a6a123fcd9962efc6ab705e13f43286
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: cedcf8a3fcd656c4af0ca7493c598791d35d20d9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80878780"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996121"
 ---
 # <a name="use-docker-compose-to-deploy-multiple-containers"></a>Utiliser Docker Compose pour déployer plusieurs conteneurs
 
@@ -25,24 +25,17 @@ Cet article vous montre comment déployer plusieurs conteneurs Azure Cognitive S
 
 Il peut être utile d’orchestrer plusieurs images conteneur sur un même ordinateur hôte. Dans cet article, nous allons regrouper les conteneurs Read et Form Recognizer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Cette procédure nécessite plusieurs outils qui doivent être installés et exécutés localement :
 
-* Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
+* Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services) avant de commencer.
 * [Moteur Docker](https://www.docker.com/products/docker-engine). Vérifiez que l’interface CLI Docker fonctionne dans une fenêtre de console.
 * Une ressource Azure avec le niveau de tarification approprié. Seuls les niveaux tarifaires suivants fonctionnent avec ce conteneur :
   * La ressource **Vision par ordinateur** avec le niveau tarifaire F0 ou Standard.
   * La ressource **Form Recognizer** avec le niveau tarifaire F0 ou Standard.
   * La ressource **Cognitive Services** avec un niveau tarifaire S0.
-
-## <a name="request-access-to-the-container-registry"></a>Demander l’accès au registre de conteneurs
-
-Complétez et envoyez le [formulaire de demande de conteneurs Cognitive Services Speech](https://aka.ms/speechcontainerspreview/). 
-
-[!INCLUDE [Request access to the container registry](../../../includes/cognitive-services-containers-request-access-only.md)]
-
-[!INCLUDE [Authenticate to the container registry](../../../includes/cognitive-services-containers-access-registry.md)]
+* Si vous utilisez un conteneur en préversion contrôlée, vous devez remplir le [formulaire de demande en ligne](https://aka.ms/csgate/) pour l’utiliser.
 
 ## <a name="docker-compose-file"></a>Fichier Docker Compose
 
@@ -52,7 +45,7 @@ Le fichier YAML définit tous les services à déployer. Ces services s’appuie
 version: '3.7'
 services:
   forms:
-    image: "containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer"
+    image: "mcr.microsoft.com/azure-cognitive-services/form-recognizer/layout"
     environment:
        eula: accept
        billing: # < Your form recognizer billing URL >
@@ -70,7 +63,7 @@ services:
       - "5010:5000"
 
   ocr:
-    image: "containerpreview.azurecr.io/microsoft/cognitive-services-read"
+    image: "mcr.microsoft.com/azure-cognitive-services/vision/read:3.1-preview"
     environment:
       eula: accept
       apikey: # < Your computer vision API key >
@@ -98,8 +91,8 @@ docker-compose up
 La première fois que Docker exécute la commande **docker-compose up** en utilisant cette configuration, il extrait les images configurées sous le nœud **services**, puis les télécharge et les monte :
 
 ```console
-Pulling forms (containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer:)...
-latest: Pulling from microsoft/cognitive-services-form-recognizer
+Pulling forms (mcr.microsoft.com/azure-cognitive-services/form-recognizer/layout:)...
+latest: Pulling from azure-cognitive-services/form-recognizer/layout
 743f2d6c1f65: Pull complete
 72befba99561: Pull complete
 2a40b9192d02: Pull complete
@@ -113,8 +106,8 @@ fd93b5f95865: Pull complete
 ef41dcbc5857: Pull complete
 4d05c86a4178: Pull complete
 34e811d37201: Pull complete
-Pulling ocr (containerpreview.azurecr.io/microsoft/cognitive-services-read:)...
-latest: Pulling from microsoft/cognitive-services-read
+Pulling ocr (mcr.microsoft.com/azure-cognitive-services/vision/read:3.1-preview:)...
+latest: Pulling from /azure-cognitive-services/vision/read:3.1-preview
 f476d66f5408: Already exists
 8882c27f669e: Already exists
 d9af21273955: Already exists
@@ -166,8 +159,8 @@ Voici un exemple de sortie :
 
 ```
 IMAGE ID            REPOSITORY                                                                 TAG
-2ce533f88e80        containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer   latest
-4be104c126c5        containerpreview.azurecr.io/microsoft/cognitive-services-read              latest
+2ce533f88e80        mcr.microsoft.com/azure-cognitive-services/form-recognizer/layout          latest
+4be104c126c5        mcr.microsoft.com/azure-cognitive-services/vision/read:3.1-preview         latest
 ```
 
 ### <a name="test-containers"></a>Conteneurs de test

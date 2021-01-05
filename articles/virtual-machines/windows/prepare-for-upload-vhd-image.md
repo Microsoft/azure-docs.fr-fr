@@ -6,20 +6,20 @@ manager: dcscontentpm
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.topic: troubleshooting
-ms.date: 04/28/2020
+ms.date: 09/02/2020
 ms.author: genli
-ms.openlocfilehash: bf96cea2f64c52714ed6c63b0e973d0d26999856
-ms.sourcegitcommit: 602e6db62069d568a91981a1117244ffd757f1c2
+ms.openlocfilehash: 390cda604b71404735b7c14382d30067e154ef70
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82864383"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91976180"
 ---
 # <a name="prepare-a-windows-vhd-or-vhdx-to-upload-to-azure"></a>Préparer un disque dur virtuel Windows à charger sur Azure
 
-Avant de charger une machine virtuelle Windows locale sur Azure, vous devez préparer le disque dur virtuel (VHD ou VHDX). Azure prend en charge les machines virtuelles des générations 1 et 2 qui sont au format de fichier VHD et ont un disque de taille fixe. La taille maximale autorisée pour le disque dur virtuel s’élève à 2 To.
+Avant de charger une machine virtuelle Windows locale sur Azure, vous devez préparer le disque dur virtuel (VHD ou VHDX). Azure prend en charge les machines virtuelles des générations 1 et 2 qui sont au format de fichier VHD et ont un disque de taille fixe. La taille maximale autorisée pour le disque dur virtuel du système d’exploitation sur une machine virtuelle de première génération est de 2 To.
 
-Sur une machine virtuelle de génération 1, vous pouvez convertir un système de fichiers VHDX en disque dur virtuel. Vous pouvez également convertir un disque de taille dynamique en disque de taille fixe. En revanche, vous ne pouvez pas modifier la génération d’une machine virtuelle. Pour plus d’informations, consultez les articles [Dois-je créer une machine virtuelle de génération 1 ou 2 dans Hyper-V ?](/windows-server/virtualization/hyper-v/plan/Should-I-create-a-generation-1-or-2-virtual-machine-in-Hyper-V) et [Support pour les machines virtuelles de génération 2 sur Azure](generation-2.md).
+Vous pouvez convertir un fichier VHDX en VHD, convertir un disque à expansion dynamique en disque de taille fixe, mais vous ne pouvez pas modifier la génération d’une machine virtuelle. Pour plus d’informations, consultez les articles [Dois-je créer une machine virtuelle de génération 1 ou 2 dans Hyper-V ?](/windows-server/virtualization/hyper-v/plan/Should-I-create-a-generation-1-or-2-virtual-machine-in-Hyper-V) et [Support pour les machines virtuelles de génération 2 sur Azure](../generation-2.md).
 
 Pour plus d’informations sur la stratégie de prise en charge des machines virtuelles Azure, consultez la page [Prise en charge des logiciels serveur Microsoft pour les machines virtuelles Microsoft Azure](https://support.microsoft.com/help/2721672/).
 
@@ -55,49 +55,6 @@ Windows Resource Protection did not find any integrity violations.
 
 Une fois l’analyse du Vérificateur des fichiers système terminée, installez les mises à jour Windows, puis redémarrez l’ordinateur.
 
-## <a name="convert-the-virtual-disk-to-a-fixed-size-vhd"></a>Convertir le disque virtuel en disque dur virtuel de taille fixe
-
-Utilisez l’une des méthodes décrites dans cette section pour convertir votre disque virtuel au format requis pour Azure :
-
-1. Sauvegardez la machine virtuelle avant d’exécuter le processus de conversion de disque virtuel.
-
-1. Vérifiez que le disque dur virtuel Windows fonctionne correctement sur le serveur local. Résolvez toute erreur dans la machine virtuelle elle-même avant de tenter une conversion ou un chargement sur Azure.
-
-1. Taille du disque dur virtuel :
-
-   1. Tous les VHD sur Azure doivent avoir une taille virtuelle alignée sur 1 Mo. Avant de convertir un disque brut en disque dur virtuel (VHD), vous devez vous assurer que la taille du disque brut est un multiple de 1 Mo.
-      Les fractions d’un mégaoctet entraînent des erreurs lors de la création d’images à partir du disque dur virtuel chargé.
-
-   1. La taille maximale autorisée pour le disque dur virtuel du système d’exploitation est de 2 To.
-
-Après avoir converti le disque, créez une machine virtuelle qui utilise le disque. Démarrez et connectez-vous à la machine virtuelle pour finir de la préparer en vue du chargement.
-
-### <a name="use-hyper-v-manager-to-convert-the-disk"></a>Utilisez le gestionnaire Hyper-V pour convertir le disque
-
-1. Ouvrez le Gestionnaire Hyper-V et sélectionnez votre ordinateur local sur la gauche. Dans le menu au-dessus de la liste d’ordinateurs, sélectionnez **Action** > **Modifier le disque**.
-1. À la page **Rechercher un disque dur virtuel**, sélectionnez le disque virtuel.
-1. À la page **Choisir une action**, sélectionnez **Convertir** > **suivant**.
-1. Pour convertir un VHDX, sélectionnez **VHD** > **Suivant**.
-1. Pour convertir un disque à taille dynamique, sélectionnez **Taille fixe** > **Suivant**.
-1. Recherchez et sélectionnez un chemin d’accès pour enregistrer le nouveau fichier de disque dur virtuel.
-1. Sélectionnez **Terminer**.
-
-### <a name="use-powershell-to-convert-the-disk"></a>Utilisez PowerShell pour convertir le disque
-
-Vous pouvez convertir un disque virtuel à l’aide de la cmdlet [Convert-VHD](/powershell/module/hyper-v/convert-vhd) dans PowerShell.
-
-L’exemple de commande suivant convertit le disque VHDX en disque VHD. Il convertit également le disque à taille dynamique en disque de taille fixe.
-
-```powershell
-Convert-VHD -Path C:\test\MyVM.vhdx -DestinationPath C:\test\MyNewVM.vhd -VHDType Fixed
-```
-
-Dans cette commande, remplacez la valeur **Path** par le chemin d’accès du disque dur virtuel que vous souhaitez convertir. Remplacez la valeur **DestinationPath** par les nouveaux chemin d’accès et nom du disque converti.
-
-### <a name="convert-from-vmware-vmdk-disk-format"></a>Convertir à partir du format de disque VMDK VMware
-
-Si vous disposez d’une image de machine virtuelle Windows au [format de fichier VMDK](https://en.wikipedia.org/wiki/VMDK), utilisez [Microsoft Virtual Machine Converter](https://www.microsoft.com/download/details.aspx?id=42497) pour le convertir au format de disque dur virtuel. Pour plus d'informations, consultez [How to convert a VMware VMDK to Hyper-V VHD](/archive/blogs/timomta/how-to-convert-a-vmware-vmdk-to-hyper-v-vhd) (en anglais).
-
 ## <a name="set-windows-configurations-for-azure"></a>Définir les configurations Windows pour Azure
 
 > [!NOTE]
@@ -114,7 +71,7 @@ Si vous disposez d’une image de machine virtuelle Windows au [format de fichie
    netsh.exe winhttp reset proxy
    ```
 
-    Si la machine virtuelle doit fonctionner avec un proxy spécifique, vous devez ajouter une exception de proxy à l’adresse IP Azure ([168.63.129.16](/azure/virtual-network/what-is-ip-address-168-63-129-16)) pour que la machine virtuelle puisse se connecter à Azure :
+    Si la machine virtuelle doit fonctionner avec un proxy spécifique, vous devez ajouter une exception de proxy à l’adresse IP Azure ([168.63.129.16](../../virtual-network/what-is-ip-address-168-63-129-16.md)) pour que la machine virtuelle puisse se connecter à Azure :
 
     ```
     $proxyAddress='<your proxy server>'
@@ -387,13 +344,13 @@ Assurez-vous que la machine virtuelle est saine, sécurisé et accessible au pro
 
 1. Redémarrez la machine virtuelle pour vous assurer que Windows est toujours sain et qu’il est accessible par le biais de la connexion RDP. À ce stade, envisagez de créer une machine virtuelle sur votre serveur Hyper-V local pour vous assurer que la machine virtuelle démarre complètement. Faites un test pour vous assurer que vous pouvez contacter la machine virtuelle via RDP.
 
-1. Supprimez tous les filtres Interface TDI supplémentaires. Par exemple, supprimez les logiciels qui analysent les paquets TCP ou les pare-feu supplémentaires. Si vous voulez vérifier ça ultérieurement, vous pouvez le faire une fois machine virtuelle déployée dans Azure.
+1. Supprimez tous les filtres Interface TDI supplémentaires. Par exemple, supprimez les logiciels qui analysent les paquets TCP ou les pare-feu supplémentaires.
 
 1. Désinstallez tous les autres logiciels ou pilotes tiers liés aux composants physiques ou toute autre technologie de virtualisation.
 
 ### <a name="install-windows-updates"></a>Installer les mises à jour Windows
 
-Dans l’idéal, vous devez conserver l’ordinateur à jour au *niveau du correctif logiciel*. Si ce n’est pas possible, vérifiez que les mises à jour suivantes sont installées. Pour obtenir les dernières mises à jour, consultez les pages de l’historique des mises à jour de Windows : [Windows 10 et Windows Server 2019](https://support.microsoft.com/help/4000825), [Windows 8.1 et Windows Server 2012 R2](https://support.microsoft.com/help/4009470) et [Windows 7 SP1 et Windows Server 2008 R2 SP1](https://support.microsoft.com/help/4009469).
+Dans l’idéal, vous devez garder l’ordinateur à jour *au niveau du correctif*. Si cela n’est pas possible, assurez-vous que les mises à jour suivantes sont installées. Pour obtenir les dernières mises à jour, consultez les pages de l’historique des mises à jour de Windows : [Windows 10 et Windows Server 2019](https://support.microsoft.com/help/4000825), [Windows 8.1 et Windows Server 2012 R2](https://support.microsoft.com/help/4009470) et [Windows 7 SP1 et Windows Server 2008 R2 SP1](https://support.microsoft.com/help/4009469).
 
 <br />
 
@@ -438,7 +395,7 @@ Dans l’idéal, vous devez conserver l’ordinateur à jour au *niveau du corre
 > [!NOTE]
 > Pour éviter un redémarrage accidentel durant le provisionnement d’une machine virtuelle, nous vous recommandons de vous assurer que toutes les installations de Windows Update sont terminées et qu’aucune mise à jour n’est en attente. Pour ce faire, vous pouvez, par exemple, installer toutes les mises à jour Windows disponibles et effectuer un redémarrage avant d’exécuter la commande `sysprep.exe`.
 
-### <a name="determine-when-to-use-sysprep"></a>Déterminer quand utiliser Sysprep
+## <a name="determine-when-to-use-sysprep"></a>Déterminer quand utiliser Sysprep
 
 L’outil de préparation du système (`sysprep.exe`) est un processus que vous pouvez exécuter pour réinitialiser une installation Windows.
 Sysprep fournit une expérience « prête à l’emploi » en supprimant toutes les données personnelles et en réinitialisant plusieurs composants.
@@ -448,11 +405,14 @@ En général, vous exécutez `sysprep.exe` pour créer un modèle à partir duqu
 Si vous souhaitez ne créer qu’une seule machine virtuelle à partir d’un seul disque, vous n’avez pas besoin d’utiliser Sysprep. Au lieu de cela, vous pouvez créer la machine virtuelle à partir d’une *image spécialisée*. Pour obtenir des informations sur la création d’une machine virtuelle à partir d’un disque spécialisé, consultez les pages :
 
 - [Créer une machine virtuelle à partir d’un disque spécialisé](create-vm-specialized.md)
-- [Créer une machine virtuelle à partir d’un disque dur virtuel spécialisé](/azure/virtual-machines/windows/create-vm-specialized-portal)
+- [Créer une machine virtuelle à partir d’un disque dur virtuel spécialisé](./create-vm-specialized-portal.md)
 
 Pour créer une image généralisée, vous devez exécuter Sysprep. Pour plus d’informations, consultez [Utilisation de Sysprep : Une introduction](/previous-versions/windows/it-pro/windows-xp/bb457073(v=technet.10)).
 
 Tous les rôles ou toutes les applications installés sur un ordinateur Windows ne prennent pas forcément en charge des images généralisées. Avant d’exécuter cette procédure, vérifiez que Sysprep prend bien en charge le rôle de l’ordinateur. Pour plus d’informations, voir [Prise en charge de Sysprep pour les rôles serveur](/windows-hardware/manufacture/desktop/sysprep-support-for-server-roles).
+
+En particulier, un déchiffrement complet des lecteurs est nécessaire avant l’exécution de Sysprep. Si vous avez activé le chiffrement sur votre machine virtuelle, désactivez-le avant d’exécuter Sysprep.
+
 
 ### <a name="generalize-a-vhd"></a>Généraliser un disque dur virtuel
 
@@ -461,6 +421,7 @@ Tous les rôles ou toutes les applications installés sur un ordinateur Windows 
 
 1. Connectez-vous à la machine virtuelle Windows.
 1. Démarrez une session PowerShell en tant qu’administrateur.
+1. Supprimez le répertoire Panther (C:\Windows\Panther).
 1. Modifier le répertoire en `%windir%\system32\sysprep`. Exécutez ensuite `sysprep.exe`.
 1. Dans la boîte de dialogue **Outil de préparation du système**, sélectionnez **Entrer en mode OOBE (Out-of-Box Experience)** , puis vérifiez que la case à cocher **Généraliser** est activée.
 
@@ -469,10 +430,77 @@ Tous les rôles ou toutes les applications installés sur un ordinateur Windows 
 1. Sélectionnez **OK**.
 1. Lorsque l’exécution de Sysprep est terminée, arrêtez la machine virtuelle. N’utilisez pas l’option **Redémarrer** pour arrêter la machine virtuelle.
 
-Le disque dur virtuel est maintenant prêt à être chargé. Pour plus d’informations sur la création d’une machine virtuelle à partir d’un disque généralisé, consultez la page [Charger un disque dur virtuel généralisé sur Azure pour créer une machine virtuelle](sa-upload-generalized.md).
+Le disque dur virtuel est maintenant prêt à être chargé. Pour plus d’informations sur la création d’une machine virtuelle à partir d’un disque généralisé, consultez la page [Charger un disque dur virtuel généralisé sur Azure pour créer une machine virtuelle](/previous-versions/azure/virtual-machines/windows/sa-upload-generalized).
 
 >[!NOTE]
-> Un fichier *unattend.xml* personnalisé n’est pas pris en charge. Bien que nous prenions en charge la propriété **additionalUnattendContent**, celle-ci n’offre qu’une prise en charge limitée de l’ajout d’options [microsoft-windows-shell-setup](/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup) dans le fichier *unattend.xml* que l’agent d’approvisionnement Azure utilise. Vous pouvez, par exemple, utiliser [additionalUnattendContent](/dotnet/api/microsoft.azure.management.compute.models.additionalunattendcontent?view=azure-dotnet) pour ajouter FirstLogonCommands et LogonCommands. Pour plus d'informations, consultez l’[exemple additionalUnattendContent FirstLogonCommands](https://github.com/Azure/azure-quickstart-templates/issues/1407).
+> Un fichier *unattend.xml* personnalisé n’est pas pris en charge. Bien que nous prenions en charge la propriété **additionalUnattendContent**, celle-ci n’offre qu’une prise en charge limitée de l’ajout d’options [microsoft-windows-shell-setup](/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup) dans le fichier *unattend.xml* que l’agent d’approvisionnement Azure utilise. Vous pouvez, par exemple, utiliser [additionalUnattendContent](/dotnet/api/microsoft.azure.management.compute.models.additionalunattendcontent?view=azure-dotnet&preserve-view=true) pour ajouter FirstLogonCommands et LogonCommands. Pour plus d'informations, consultez l’[exemple additionalUnattendContent FirstLogonCommands](https://github.com/Azure/azure-quickstart-templates/issues/1407).
+
+## <a name="convert-the-virtual-disk-to-a-fixed-size-vhd"></a>Convertir le disque virtuel en disque dur virtuel de taille fixe
+
+Utilisez l’une des méthodes décrites dans cette section pour convertir et redimensionner votre disque virtuel au format requis pour Azure :
+
+1. Sauvegardez la machine virtuelle avant d’exécuter la conversion de disque virtuel ou de redimensionner le processus.
+
+1. Vérifiez que le disque dur virtuel Windows fonctionne correctement sur le serveur local. Résolvez toute erreur dans la machine virtuelle elle-même avant de tenter une conversion ou un chargement sur Azure.
+
+1. Convertissez le disque virtuel en type fixe.
+
+1. Redimensionnez le disque virtuel pour répondre aux exigences d’Azure :
+
+   1. Les disques dans Azure doivent avoir une taille virtuelle alignée sur 1 Mio. Si votre disque dur virtuel est une fraction de 1 Mio, vous devrez redimensionner le disque en un multiple de 1 Mio. Les disques qui sont des fractions d’un Mio entraînent des erreurs lors de la création d’images à partir du disque dur virtuel chargé. Pour vérifier la taille, vous pouvez utiliser la cmdlet PowerShell [Get-VHD](/powershell/module/hyper-v/get-vhd) pour afficher « Size », qui doit être un multiple de 1 Mio dans Azure, et « FileSize », qui est égal à « Size » plus 512 octets pour le pied de page VHD.
+   
+   1. La taille maximale autorisée pour le disque dur virtuel du système d’exploitation avec une machine virtuelle de première génération est de 2,048 Gio (2 Tio), 
+   1. La taille maximale pour un disque de données est de 32,767 Gio (32 Tio).
+
+> [!NOTE]
+> - Si vous préparez un disque de système d’exploitation Windows après l’avoir converti en disque fixe et redimensionné, si nécessaire, créez une machine virtuelle qui utilise le disque. Démarrez et connectez-vous à la machine virtuelle et poursuivez avec les sections de cet article pour finir de la préparer pour le téléchargement.  
+> - Si vous préparez un disque de données, vous pouvez vous arrêter avec cette section et poursuivre le téléchargement de votre disque.
+
+### <a name="use-hyper-v-manager-to-convert-the-disk"></a>Utilisez le gestionnaire Hyper-V pour convertir le disque
+
+1. Ouvrez le Gestionnaire Hyper-V et sélectionnez votre ordinateur local sur la gauche. Dans le menu au-dessus de la liste d’ordinateurs, sélectionnez **Action** > **Modifier le disque**.
+1. À la page **Rechercher un disque dur virtuel**, sélectionnez le disque virtuel.
+1. À la page **Choisir une action**, sélectionnez **Convertir** > **suivant**.
+1. Pour convertir un VHDX, sélectionnez **VHD** > **Suivant**.
+1. Pour convertir un disque à taille dynamique, sélectionnez **Taille fixe** > **Suivant**.
+1. Recherchez et sélectionnez un chemin d’accès pour enregistrer le nouveau fichier de disque dur virtuel.
+1. Sélectionnez **Terminer**.
+
+### <a name="use-powershell-to-convert-the-disk"></a>Utilisez PowerShell pour convertir le disque
+
+Vous pouvez convertir un disque virtuel à l’aide de la cmdlet [Convert-VHD](/powershell/module/hyper-v/convert-vhd) dans PowerShell. Si vous avez besoin d’informations sur l’installation de cette cmdlet, consultez [Installer le rôle Hyper-V](/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server).
+
+L’exemple de commande suivant convertit le disque VHDX en disque VHD. Il convertit également le disque à taille dynamique en disque de taille fixe.
+
+```powershell
+Convert-VHD -Path C:\test\MyVM.vhdx -DestinationPath C:\test\MyNewVM.vhd -VHDType Fixed
+```
+
+Dans cette commande, remplacez la valeur **Path** par le chemin d’accès du disque dur virtuel que vous souhaitez convertir. Remplacez la valeur **DestinationPath** par les nouveaux chemin d’accès et nom du disque converti.
+
+### <a name="use-hyper-v-manager-to-resize-the-disk"></a>Utiliser le gestionnaire Hyper-V pour redimensionner le disque
+
+1. Ouvrez le Gestionnaire Hyper-V et sélectionnez votre ordinateur local sur la gauche. Dans le menu au-dessus de la liste d’ordinateurs, sélectionnez **Action** > **Modifier le disque**.
+1. À la page **Rechercher un disque dur virtuel**, sélectionnez le disque virtuel.
+1. À la page **Choisir une action**, sélectionnez **Développer** > **Suivant**.
+1. Sur la page **Rechercher un disque dur virtuel**, entrez la nouvelle taille en Gio > **Suivant**.
+1. Sélectionnez **Terminer**.
+
+### <a name="use-powershell-to-resize-the-disk"></a>Utiliser PowerShell pour redimensionner le disque
+
+Vous pouvez redimensionner un disque virtuel à l’aide de la cmdlet [Resize-VHD](/powershell/module/hyper-v/resize-vhd) dans PowerShell. Si vous avez besoin d’informations sur l’installation de cette cmdlet, consultez [Installer le rôle Hyper-V](/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server).
+
+L’exemple suivant redimensionne le disque de 100,5 Mio à 101 Mio pour respecter les exigences d’alignement Azure.
+
+```powershell
+Resize-VHD -Path C:\test\MyNewVM.vhd -SizeBytes 105906176
+```
+
+Dans cette commande, remplacez la valeur **Path** par le chemin d’accès du disque dur virtuel que vous souhaitez redimensionner. Remplacez la valeur **SizeBytes** par la nouvelle taille en octets du disque.
+
+### <a name="convert-from-vmware-vmdk-disk-format"></a>Convertir à partir du format de disque VMDK VMware
+
+Si vous disposez d’une image de machine virtuelle Windows au [format de fichier VMDK](https://en.wikipedia.org/wiki/VMDK), vous pouvez utiliser [Azure Migrate](../../migrate/server-migrate-overview.md) pour convertir le fichier VMDK et le charger sur Azure.
 
 ## <a name="complete-the-recommended-configurations"></a>Remplir les configurations recommandées
 
@@ -492,4 +520,4 @@ Les paramètres suivants n’affectent pas le chargement du disque dur virtuel. 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Télécharger une image de machine virtuelle Windows dans Azure pour des déploiements Resource Manager](upload-generalized-managed.md)
-- [Résoudre des problèmes liés à l’activation de machines virtuelles Windows Azure](troubleshoot-activation-problems.md)
+- [Résoudre des problèmes liés à l’activation de machines virtuelles Windows Azure](../troubleshooting/troubleshoot-activation-problems.md)

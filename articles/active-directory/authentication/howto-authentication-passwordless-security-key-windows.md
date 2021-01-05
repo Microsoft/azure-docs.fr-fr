@@ -5,41 +5,39 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 01/30/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 11/24/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: librown, aakapo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8b8f5d6aaa96c24eb37eb78d237a489f1d25293c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 04a46a691b2f629b64cfe09c22813b05c593af1c
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80653986"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96743460"
 ---
 # <a name="enable-passwordless-security-key-sign-in-to-windows-10-devices-with-azure-active-directory-preview"></a>Activer la connexion par clé de sécurité sans mot de passe à des appareils Windows 10 à l’aide d’Azure Active Directory (préversion)
 
 Ce document met l’accent sur l’activation de l’authentification sans mot de passe, basée sur une clé de sécurité FIDO2, avec des appareils Windows 10. À la fin de cet article, vous serez en mesure de vous connecter à vos appareils Windows 10 joints à Azure AD et à ceux joints à Azure AD Hybride avec votre compte Azure AD, à l’aide d’une clé de sécurité FIDO2.
 
-|     |
-| --- |
-| Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)|
-|     |
+> [!NOTE]
+> Les clés de sécurité FIDO2 sont une fonctionnalité d’évaluation publique d’Azure Active Directory. Pour plus d’informations sur les préversions, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="requirements"></a>Spécifications
 
 | Type d’appareil | Appareil joints Azure AD | Appareils joints Azure AD hybrides |
 | --- | --- | --- |
-| [Azure Multi-Factor Authentication](howto-mfa-getstarted.md) | X | X |
+| [Azure AD Multi-Factor Authentication](howto-mfa-getstarted.md) | X | X |
 | [Inscription d’informations de sécurité combinée – Préversion](concept-registration-mfa-sspr-combined.md) | X | X |
 | [Clés de sécurité FIDO2](concept-authentication-passwordless.md#fido2-security-keys) compatibles | X | X |
-| WebAuthN nécessite Windows 10 version 1809 ou plus | X | X |
-| [Les appareils joints à Azure AD](../devices/concept-azure-ad-join.md) nécessitent Windows 10 version 1903 ou ultérieure | X |   |
-| [Les appareils joints à Azure AD Hybride](../devices/concept-azure-ad-join-hybrid.md) nécessitent Windows 10 Insider Build 18945 ou une version ultérieure |   | X |
+| WebAuthN nécessite Windows 10 version 1903 ou plus | X | X |
+| [Les appareils joints à Azure AD](../devices/concept-azure-ad-join.md) nécessitent Windows 10 version 1909 ou ultérieure | X |   |
+| Les [appareils de jointure Azure AD Hybride](../devices/concept-azure-ad-join-hybrid.md) nécessitent Windows 10 version 2004 ou ultérieure |   | X |
 | Contrôleurs de domaine Windows Server 2016/2019 entièrement corrigés |   | X |
 | [Azure AD Connect](../hybrid/how-to-connect-install-roadmap.md#install-azure-ad-connect) version 1.4.32.0 ou ultérieure |   | X |
-| [Microsoft Intune](https://docs.microsoft.com/intune/fundamentals/what-is-intune) (facultatif) | X | X |
+| [Microsoft Intune](/intune/fundamentals/what-is-intune) (facultatif) | X | X |
 | Package d’approvisionnement (facultatif) | X | X |
 | Stratégie de groupe (facultatif) |   | X |
 
@@ -58,9 +56,9 @@ Les scénarios suivants ne sont pas pris en charge :
 
 ## <a name="prepare-devices-for-preview"></a>Préparer les appareils pour la préversion
 
-Les appareils joints à Azure AD avec lesquels vous exécutez des pilotes pendant l’évaluation des fonctionnalités doivent exécuter Windows 10 version 1809 ou ultérieure. Vous bénéficierez de la meilleure expérience sur Windows 10 version 1903 ou ultérieure.
+Les appareils joints à Azure AD avec lesquels vous exécutez des pilotes pendant l’évaluation des fonctionnalités doivent exécuter Windows 10 version 1909 ou ultérieure.
 
-Les appareils joints à Azure AD Hybride doivent exécuter Windows 10 Insider Build 18945 ou une version ultérieure.
+Les appareils de jointure Azure AD Hybride doivent exécuter Windows 10 version 2004 ou ultérieure.
 
 ## <a name="enable-security-keys-for-windows-sign-in"></a>Activer les clés de sécurité pour la connexion Windows
 
@@ -102,7 +100,7 @@ Pour cibler des groupes d’appareils spécifiques pour activer le fournisseur d
       - OMA-URI : ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin
       - Type de données : Integer
       - Valeur : 1
-1. Cette stratégie peut être attribuée à des utilisateurs, des appareils ou des groupes spécifiques. Pour plus d’informations, consultez [Attribuer des profils d’utilisateur et d’appareil dans Microsoft Intune](https://docs.microsoft.com/intune/device-profile-assign).
+1. Cette stratégie peut être attribuée à des utilisateurs, des appareils ou des groupes spécifiques. Pour plus d’informations, consultez [Attribuer des profils d’utilisateur et d’appareil dans Microsoft Intune](/intune/device-profile-assign).
 
 ![Création de stratégies de configuration d’appareil Intune personnalisées](./media/howto-authentication-passwordless-security-key/intune-custom-profile.png)
 
@@ -124,10 +122,10 @@ Pour les appareils non gérés par Intune, un package d’approvisionnement peut
 1. Prenez note du chemin d’accès (ou modifiez-le) dans la fenêtre **Générer** sous **Sélectionnez l’emplacement d’enregistrement du package d’approvisionnement**, et sélectionnez **Suivant**.
 1. Sélectionnez **Générer** sur la page **Générer le package d’approvisionnement**.
 1. Enregistrez les deux fichiers créés (*ppkg* et *cat*) dans un emplacement où vous pourrez les appliquer aux machines plus tard.
-1. Pour appliquer le package d’approvisionnement que vous avez créé, consultez [Appliquer un package d’approvisionnement](https://docs.microsoft.com/windows/configuration/provisioning-packages/provisioning-apply-package).
+1. Pour appliquer le package d’approvisionnement que vous avez créé, consultez [Appliquer un package d’approvisionnement](/windows/configuration/provisioning-packages/provisioning-apply-package).
 
 > [!NOTE]
-> Les appareils exécutant Windows 10 version 1809 doivent également activer le mode PC partagé (*EnableSharedPCMode*). Pour en savoir plus sur l’activation de cette fonctionnalité, consultez [Configurer un PC partagé ou invité avec Windows 10](https://docs.microsoft.com/windows/configuration/set-up-shared-or-guest-pc).
+> Les appareils exécutant Windows 10 version 1903 doivent également activer le mode PC partagé (*EnableSharedPCMode*). Pour en savoir plus sur l’activation de cette fonctionnalité, consultez [Configurer un PC partagé ou invité avec Windows 10](/windows/configuration/set-up-shared-or-guest-pc).
 
 ### <a name="enable-with-group-policy"></a>Activer avec la stratégie de groupe
 
@@ -136,7 +134,7 @@ Pour les **appareils joints à Azure AD Hybride**, les organisations peuvent con
 - La définition de cette stratégie sur **Activée** permet aux utilisateurs de se connecter avec des clés de sécurité.
 - La définition de cette stratégie sur **Désactivée** ou **Non configurée** empêche les utilisateurs de se connecter avec des clés de sécurité.
 
-Ce paramètre de stratégie de groupe requiert une version mise à jour du modèle de stratégie de groupe `credentialprovider.admx`. Ce nouveau modèle est disponible avec la prochaine version de Windows Server et avec Windows 10 20H1. Ce paramètre peut être géré à l’aide d’un appareil exécutant une de ces versions plus récentes de Windows ou de manière centralisée en suivant les instructions de la rubrique de support [Comment créer et gérer le magasin central pour les modèles d’administration de stratégie de groupe dans Windows](https://support.microsoft.com/help/3087759/how-to-create-and-manage-the-central-store-for-group-policy-administra).
+Ce paramètre de stratégie de groupe requiert une version mise à jour du modèle de stratégie de groupe `CredentialProviders.admx`. Ce nouveau modèle est disponible avec la prochaine version de Windows Server et avec Windows 10 20H1. Ce paramètre peut être géré à l’aide d’un appareil exécutant une de ces versions plus récentes de Windows ou de manière centralisée en suivant les instructions de la rubrique de support [Comment créer et gérer le magasin central pour les modèles d’administration de stratégie de groupe dans Windows](https://support.microsoft.com/help/3087759/how-to-create-and-manage-the-central-store-for-group-policy-administra).
 
 ## <a name="sign-in-with-fido2-security-key"></a>Se connecter avec une clé de sécurité FIDO2
 
@@ -166,4 +164,4 @@ Si vous souhaitez partager des commentaires ou si vous rencontrez des problèmes
 
 [En savoir plus sur l’inscription des appareils](../devices/overview.md)
 
-[En savoir plus sur Azure Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)
+[En savoir plus sur Azure AD Multi-Factor Authentication](../authentication/howto-mfa-getstarted.md)

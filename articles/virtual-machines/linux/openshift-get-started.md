@@ -5,16 +5,16 @@ author: haroldwongms
 manager: mdotson
 ms.service: virtual-machines-linux
 ms.subservice: workloads
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 05/7/2019
 ms.author: haroldw
-ms.openlocfilehash: c338e9a6a793d1c2d0557d70242996175d5a85ed
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 989c67d0d1b1cd8257da089ec9c31f247228018e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759457"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87367943"
 ---
 # <a name="openshift-in-azure"></a>OpenShift dans Azure
 
@@ -30,7 +30,7 @@ Plusieurs versions d’OpenShift sont disponibles.  Seules deux de ces versions 
 
 ## <a name="azure-red-hat-openshift"></a>Azure Red Hat OpenShift
 
-Microsoft Azure Red Hat OpenShift est une version complètement managée d’OpenShift qui s’exécute dans Azure. Ce service est managé et pris en charge par Microsoft et Red Hat conjointement. Pour plus d’informations, consultez la documentation [Azure Red Hat OpenShift Service](https://docs.microsoft.com/azure/openshift/).
+Microsoft Azure Red Hat OpenShift est une version complètement managée d’OpenShift qui s’exécute dans Azure. Ce service est managé et pris en charge par Microsoft et Red Hat conjointement. Pour plus d’informations, consultez la documentation [Azure Red Hat OpenShift Service](../../openshift/index.yml).
 
 ## <a name="openshift-container-platform"></a>OpenShift Container Platform
 

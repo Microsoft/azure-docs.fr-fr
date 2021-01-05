@@ -1,35 +1,32 @@
 ---
 title: Collecter des données relatives à vos modèles de production
 titleSuffix: Azure Machine Learning
-description: Découvrez comment collecter des données de modèle d’entrée Azure Machine Learning dans un stockage d’objets blob Azure.
+description: Découvrez comment collecter des données à partir d’un modèle d’Azure Machine Learning déployé sur un cluster Azure Kubernetes service (AKS).
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
-ms.reviewer: laobri
+ms.reviewer: sgilley
 ms.author: copeters
 author: lostmygithubaccount
-ms.date: 11/12/2019
-ms.custom: seodec18
-ms.openlocfilehash: 44acc81df9eb6dc6a6af28b5b0f4730aa93adffc
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.date: 07/14/2020
+ms.topic: conceptual
+ms.custom: how-to, data4ml
+ms.openlocfilehash: c6b9dc95e1d50481ac5353460910032ca1711ab1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80475427"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000451"
 ---
-# <a name="collect-data-for-models-in-production"></a>Collecter des données pour des modèles en production
+# <a name="collect-data-from-models-in-production"></a>Collecter des données pour des modèles en production
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
-
->[!IMPORTANT]
-> Le SDK de supervision Azure Machine Learning va bientôt être mis hors service. Le SDK convient toujours aux développeurs qui l’utilisent pour superviser la dérive de données dans les modèles. Toutefois, nous recommandons aux nouveaux clients d’utiliser la version simplifiée de la [supervision des données avec Application Insights](https://docs.microsoft.com/azure/machine-learning/how-to-enable-app-insights).
-
-Cet article montre comment collecter des données de modèle d’entrée à partir d’Azure Machine Learning. Il montre également comment déployer les données d’entrée dans un cluster Azure Kubernetes Service (AKS) et comment stocker les données de sortie dans le stockage d’objets blob Azure.
+Cet article montre comment collecter des données à partir d’un modèle d’Azure Machine Learning déployé sur un cluster Azure Kubernetes service (AKS). Les données collectées sont alors stockées dans le Azure Blob.
 
 Une fois la collecte activée, les données que vous collectez vous permettent d’effectuer les opérations suivantes :
 
-* [Superviser les dérives de données](how-to-monitor-data-drift.md) à mesure que les données de production entrent dans votre modèle
+* [Surveiller les dérives de données](how-to-monitor-datasets.md) sur les données de production que vous recueillez.
+
+* Analyser les données collectées à l’aide de [Power BI](#powerbi) ou [Azure Databricks](#databricks)
 
 * Prendre de meilleures décisions concernant le réentraînement ou l’optimisation de votre modèle
 
@@ -68,17 +65,17 @@ Le chemin des données de sortie dans l’objet blob respecte cette syntaxe :
 
 - Vous avez besoin d’un cluster AKS. Pour plus d’informations sur la création et le déploiement d’un cluster AKS, consultez [Où et comment effectuer un déploiement](how-to-deploy-and-where.md)
 
-- [Configurez votre environnement](how-to-configure-environment.md) et installez le [SDK de supervision Azure Machine Learning](https://aka.ms/aml-monitoring-sdk).
+- [Configurez votre environnement](how-to-configure-environment.md) et installez le [SDK de supervision Azure Machine Learning](/python/api/overview/azure/ml/install?preserve-view=true&view=azure-ml-py).
 
 ## <a name="enable-data-collection"></a>Activer la collecte des données
 
-Vous pouvez activer la collectes de données, quel que soit le modèle que vous déployez par le biais d’Azure Machine Learning ou d’autres outils.
+Vous pouvez activer la [collecte de données](/python/api/azureml-monitoring/azureml.monitoring.modeldatacollector.modeldatacollector?preserve-view=true&view=azure-ml-py), quel que soit le modèle que vous déployez par le biais d’Azure Machine Learning ou d’autres outils.
 
 Pour activer la collecte de données, vous devez :
 
 1. Ouvrir le fichier de scoring.
 
-1. Ajoutez le [code suivant](https://aka.ms/aml-monitoring-sdk) au début du fichier :
+1. Ajoutez le code suivant au début du fichier :
 
    ```python 
    from azureml.monitoring import ModelDataCollector
@@ -88,7 +85,7 @@ Pour activer la collecte de données, vous devez :
 
     ```python
     global inputs_dc, prediction_dc
-    inputs_dc = ModelDataCollector("best_model", designation="inputs", feature_names=["feat1", "feat2", "feat3". "feat4", "feat5", "feat6"])
+    inputs_dc = ModelDataCollector("best_model", designation="inputs", feature_names=["feat1", "feat2", "feat3", "feat4", "feat5", "feat6"])
     prediction_dc = ModelDataCollector("best_model", designation="predictions", feature_names=["prediction1", "prediction2"])
     ```
 
@@ -119,41 +116,10 @@ Pour activer la collecte de données, vous devez :
 
 1. Pour créer une image et déployer le modèle Machine Learning, consultez [Où et comment effectuer un déploiement](how-to-deploy-and-where.md).
 
-Si vous avez déjà installé un service et ses dépendances dans votre fichier d’environnement et votre fichier de scoring, activez la collecte de données en effectuant les étapes suivantes :
-
-1. Accéder à [Azure Machine Learning](https://ml.azure.com).
-
-1. Ouvrez votre espace de travail.
-
-1. Sélectionnez **Déploiements** > **Sélectionner un service** > **Modifier**.
-
-   ![Modifier le service](././media/how-to-enable-data-collection/EditService.PNG)
-
-1. Dans **Paramètres avancés**, sélectionnez **Activer les diagnostics et la collecte de données Application Insights**.
-
-1. Sélectionnez **Mettre à jour** pour appliquer les modifications.
 
 ## <a name="disable-data-collection"></a>Désactiver la collecte de données
 
-Vous pouvez arrêter la collecte de données à tout moment. Utilisez le code Python ou Azure Machine Learning pour désactiver la collecte des données.
-
-### <a name="option-1---disable-data-collection-in-azure-machine-learning"></a>Option 1 - Désactiver la collecte de données dans Azure Machine Learning
-
-1. Connectez-vous à [Azure Machine Learning](https://ml.azure.com).
-
-1. Ouvrez votre espace de travail.
-
-1. Sélectionnez **Déploiements** > **Sélectionner un service** > **Modifier**.
-
-   [![Sélection de l’option Éditer](././media/how-to-enable-data-collection/EditService.PNG)](./././media/how-to-enable-data-collection/EditService.PNG#lightbox)
-
-1. Dans **Paramètres avancés**, désélectionnez **Activer les diagnostics et la collecte de données Application Insights**.
-
-1. Sélectionnez **Mettre à jour** pour appliquer la modification.
-
-Vous pouvez également accéder à ces paramètres dans votre espace de travail [Azure Machine Learning](https://ml.azure.com).
-
-### <a name="option-2---use-python-to-disable-data-collection"></a>Option 2 - Utiliser Python pour désactiver la collecte de données
+Vous pouvez arrêter la collecte de données à tout moment. Utilisez le code Python pour désactiver la collecte de données.
 
   ```python 
   ## replace <service_name> with the name of the web service
@@ -166,7 +132,7 @@ Vous pouvez choisir l’outil de votre choix pour analyser les données collect�
 
 ### <a name="quickly-access-your-blob-data"></a>Accéder rapidement à vos données d’objets blob
 
-1. Connectez-vous à [Azure Machine Learning](https://ml.azure.com).
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
 1. Ouvrez votre espace de travail.
 
@@ -181,11 +147,11 @@ Vous pouvez choisir l’outil de votre choix pour analyser les données collect�
    # example: /modeldata/1a2b3c4d-5e6f-7g8h-9i10-j11k12l13m14/myresourcegrp/myWorkspace/aks-w-collv9/best_model/10/inputs/2018/12/31/data.csv
    ```
 
-### <a name="analyze-model-data-using-power-bi"></a>Analyser des données de modèle à l’aide de Power BI
+### <a name="analyze-model-data-using-power-bi"></a><a id="powerbi"></a>Analyser des données de modèle à l’aide de Power BI
 
 1. Téléchargez et ouvrez [Power BI Desktop](https://www.powerbi.com).
 
-1. Sélectionnez **Obtenir des données**, puis sélectionnez [**Stockage Blob Azure**](https://docs.microsoft.com/power-bi/desktop-data-sources).
+1. Sélectionnez **Obtenir des données**, puis sélectionnez [**Stockage Blob Azure**](/power-bi/desktop-data-sources).
 
     [![Configuration de l’objet blob Power BI](./media/how-to-enable-data-collection/PBIBlob.png)](././media/how-to-enable-data-collection/PBIBlob.png#lightbox)
 
@@ -199,7 +165,7 @@ Vous pouvez choisir l’outil de votre choix pour analyser les données collect�
 
 1. Entrez le chemin du modèle dans le filtre. Si vous ne voulez examiner que les fichiers d’une année ou d’un mois spécifique, développez simplement le chemin du filtre. Par exemple, pour rechercher uniquement les données du mois de mars, utilisez ce chemin de filtre :
 
-   /modeldata/\<ID-abonnement>/\<nom-groupe-ressources>/\<nom-espace-de-travail>/\<nom-service-web>/\<nom-modèle>/\<version-modèle>/\<désignation>/\<année>/3
+   /modeldata/\<subscriptionid>/\<resourcegroupname>/\<workspacename>/\<webservicename>/\<modelname>/\<modelversion>/\<designation>/\<year>/3
 
 1. Filtrez les données qui vous concernent en fonction des valeurs de **Nom**. Si vous avez stocké des prédictions et des entrées, vous devrez créer une requête pour chacune d’elles.
 
@@ -217,9 +183,9 @@ Vous pouvez choisir l’outil de votre choix pour analyser les données collect�
 
 1. Commencez à créer vos rapports personnalisés à partir des données de votre modèle.
 
-### <a name="analyze-model-data-using-azure-databricks"></a>Analyser des données de modèle à l’aide d’Azure Databricks
+### <a name="analyze-model-data-using-azure-databricks"></a><a id="databricks"></a>Analyser des données de modèle à l’aide d’Azure Databricks
 
-1. Créez un [espace de travail Azure Databricks](https://docs.microsoft.com/azure/azure-databricks/quickstart-create-databricks-workspace-portal).
+1. Créez un [espace de travail Azure Databricks](/azure/databricks/scenarios/quickstart-create-databricks-workspace-portal).
 
 1. Accédez à votre espace de travail Databricks.
 
@@ -241,3 +207,7 @@ Vous pouvez choisir l’outil de votre choix pour analyser les données collect�
     [![Configuration Databricks](./media/how-to-enable-data-collection/dbsetup.png)](././media/how-to-enable-data-collection/dbsetup.png#lightbox)
 
 1. Suivez les étapes du modèle afin d’afficher et d’analyser vos données.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+[Détectez la dérive des données](how-to-monitor-datasets.md) sur les données que vous avez collectées.

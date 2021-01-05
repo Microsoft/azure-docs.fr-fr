@@ -7,66 +7,86 @@ ms.date: 03/12/2020
 author: sabbour
 ms.author: asabbour
 keywords: aro, openshift, az aro, red hat, cli
-ms.custom: mvc
-ms.openlocfilehash: 45da3034891e5a82fb8423adb6bcd5e867f9d4e2
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 0d69fa10408618fb188b42e1dd8f7b9d02820cc3
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204798"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862409"
 ---
 # <a name="configure-azure-active-directory-authentication-for-an-azure-red-hat-openshift-4-cluster-cli"></a>Configurer l’authentification Azure Active Directory pour un cluster Azure Red Hat OpenShift 4 (CLI)
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.75 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+Si vous choisissez d’installer et d’utiliser l’interface CLI localement, cet article vous demande d’exécuter Azure CLI version 2.6.0 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
 
 Récupérez vos URL spécifiques au cluster qui seront utilisées pour configurer l’application Azure Active Directory.
 
-Construisez l’URL de rappel OAuth du cluster et stockez-la dans une variable **oauthCallbackURL**. Veillez à remplacer **aro-rg** par le nom de votre groupe de ressources et **aro-cluster** par le nom de votre cluster.
+Définissez les variables pour le groupe de ressources et le nom du cluster.
+
+Remplacez **\<resource_group>** par le nom de votre groupe de ressources et **\<aro_cluster>** par le nom de votre cluster.
+
+```azurecli-interactive
+resource_group=<resource_group>
+aro_cluster=<aro_cluster>
+```
+
+Construisez l’URL de rappel OAuth du cluster et stockez-la dans une variable **oauthCallbackURL**. 
 
 > [!NOTE]
 > La section `AAD` de l’URL de rappel OAuth doit correspondre au nom du fournisseur d’identité OAuth que vous allez configurer ultérieurement.
 
+
 ```azurecli-interactive
-domain=$(az aro show -g aro-rg -n aro-cluster --query clusterProfile.domain -o tsv)
-location=$(az aro show -g aro-rg -n aro-cluster --query location -o tsv)
-apiServer=$(az aro show -g aro-rg -n aro-cluster --query apiserverProfile.url -o tsv)
-webConsole=$(az aro show -g aro-rg -n aro-cluster --query consoleProfile.url -o tsv)
-oauthCallbackURL=https://oauth-openshift.apps.$domain.$location.aroapp.io/oauth2callback/AAD
+domain=$(az aro show -g $resource_group -n $aro_cluster --query clusterProfile.domain -o tsv)
+location=$(az aro show -g $resource_group -n $aro_cluster --query location -o tsv)
+apiServer=$(az aro show -g $resource_group -n $aro_cluster --query apiserverProfile.url -o tsv)
+webConsole=$(az aro show -g $resource_group -n $aro_cluster --query consoleProfile.url -o tsv)
 ```
 
-## <a name="create-an-azure-active-directory-application-for-authentication"></a>Créez une application Azure Active Directory pour l’authentification
+Le format d’oauthCallbackURL est légèrement différent pour les domaines personnalisés :
 
-Créez une application Azure Active Directory et récupérez l’identificateur d’application créé. Remplacez **\<ClientSecret >** par un mot de passe sécurisé.
+* Exécutez la commande suivante si vous utilisez un domaine personnalisé, par exemple `contoso.com`. 
+
+    ```azurecli-interactive
+    oauthCallbackURL=https://oauth-openshift.apps.$domain/oauth2callback/AAD
+    ```
+
+* Si vous n’utilisez pas de domaine personnalisé, le `$domain` est une chaîne alphanumérique à huit caractères et est délimité par `$location.aroapp.io`.
+
+    ```azurecli-interactive
+    oauthCallbackURL=https://oauth-openshift.apps.$domain.$location.aroapp.io/oauth2callback/AAD
+    ```
+
+> [!NOTE]
+> La section `AAD` de l’URL de rappel OAuth doit correspondre au nom du fournisseur d’identité OAuth que vous allez configurer ultérieurement.
+
+## <a name="create-an-azure-active-directory-application-for-authentication"></a>Créer une application Azure Active Directory pour l’authentification
+
+Remplacez **\<client_secret>** par un mot de passe sécurisé pour l’application.
 
 ```azurecli-interactive
-az ad app create \
+client_secret=<client_secret>
+```
+
+Créez une application Azure Active Directory et récupérez l’identificateur d’application créé.
+
+```azurecli-interactive
+app_id=$(az ad app create \
   --query appId -o tsv \
   --display-name aro-auth \
   --reply-urls $oauthCallbackURL \
-  --password '<ClientSecret>'
-```
-
-Vous devriez revenir à ce qui suit. Notez-le car il s’agit de la valeur **AppId** dont vous aurez besoin lors des étapes ultérieures.
-
-```output
-6a4cb4b2-f102-4125-b5f5-9ad6689f7224
+  --password $client_secret)
 ```
 
 Récupérez l’ID de locataire de l’abonnement qui possède l’application.
 
 ```azure
-az account show --query tenantId -o tsv
-```
-
-Vous devriez revenir à ce qui suit. Notez qu’il s’agit du **TenantId** dont vous aurez besoin dans les étapes ultérieures.
-
-```output
-72f999sx-8sk1-8snc-js82-2d7cj902db47
+tenant_id=$(az account show --query tenantId -o tsv)
 ```
 
 ## <a name="create-a-manifest-file-to-define-the-optional-claims-to-include-in-the-id-token"></a>Créer un fichier manifeste pour définir les revendications facultatives à inclure dans le jeton d’ID
 
-Les développeurs d’applications peuvent utiliser des [revendications facultatives](https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims) dans leurs applications Azure AD pour spécifier les revendications souhaitées dans les jetons envoyés à leur application.
+Les développeurs d’applications peuvent utiliser des [revendications facultatives](../active-directory/develop/active-directory-optional-claims.md) dans leurs applications Azure AD pour spécifier les revendications souhaitées dans les jetons envoyés à leur application.
 
 Vous pouvez utiliser des revendications facultatives pour :
 
@@ -97,19 +117,15 @@ EOF
 
 ## <a name="update-the-azure-active-directory-applications-optionalclaims-with-a-manifest"></a>Mettre à jour les revendications facultatives de l’application Azure Active Directory avec un manifeste
 
-Remplacez **\<AppID >** par l’ID que vous avez obtenu plus tôt.
-
 ```azurecli-interactive
 az ad app update \
   --set optionalClaims.idToken=@manifest.json \
-  --id <AppId>
+  --id $app_id
 ```
 
 ## <a name="update-the-azure-active-directory-application-scope-permissions"></a>Mettre à jour les autorisations d’étendue d’application Azure Active Directory
 
 Pour pouvoir lire les informations utilisateur d’Azure Active Directory, nous devons définir les étendues appropriées.
-
-Remplacez **\<AppID >** par l’ID que vous avez obtenu plus tôt.
 
 Pour activer la connexion et lire le profil utilisateur, ajoutez l’autorisation pour l’étendue **Azure Active Directory Graph.User.Read**.
 
@@ -117,52 +133,44 @@ Pour activer la connexion et lire le profil utilisateur, ajoutez l’autorisatio
 az ad app permission add \
  --api 00000002-0000-0000-c000-000000000000 \
  --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope \
- --id <AppId>
+ --id $app_id
 ```
 
 > [!NOTE]
-> À moins que vous ne soyez authentifié en tant qu’administrateur général pour cette instance d’Azure Active Directory, vous pouvez ignorer le message demandant d’accorder le consentement, car vous êtes invité à le faire une fois que vous êtes connecté à votre propre compte.
+> Vous pouvez ignorer sans risque le message visant à accorder le consentement, sauf si vous êtes authentifié en tant qu’administrateur général pour cette instance Azure Active Directory. Les utilisateurs de domaines standard sont invités à donner leur consentement lorsqu’ils se connectent pour la première fois au cluster à l’aide de leurs informations d’identification AAD.
 
 ## <a name="assign-users-and-groups-to-the-cluster-optional"></a>Affecter des utilisateurs et des groupes au cluster (facultatif)
 
 Les applications inscrites dans un locataire Azure Active Directory (Azure AD) sont, par défaut, disponibles pour tous les utilisateurs du locataire qui parviennent à s’authentifier. Azure AD permet aux développeurs et administrateurs de locataires de limiter une application à un ensemble spécifique d’utilisateurs ou de groupes de sécurité dans le locataire.
 
-Suivez les instructions de la documentation d’Azure Active Directory pour [Affecter des utilisateurs et des groupes à l’application](https://docs.microsoft.com/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users#app-registration).
+Suivez les instructions de la documentation d’Azure Active Directory pour [affecter des utilisateurs et des groupes à l’application](../active-directory/develop/howto-restrict-your-app-to-a-set-of-users.md#app-registration).
 
 ## <a name="configure-openshift-openid-authentication"></a>Configurer l’authentification OpenShift OpenID
 
 Récupérez les informations d’identification de `kubeadmin`. Exécutez la commande suivante pour rechercher le mot de passe de l’utilisateur `kubeadmin`.
 
 ```azurecli-interactive
-az aro list-credentials \
-  --name aro-cluster \
-  --resource-group aro-rg
+kubeadmin_password=$(az aro list-credentials \
+  --name $aro_cluster \
+  --resource-group $resource_group \
+  --query kubeadminPassword --output tsv)
 ```
 
-L’exemple de sortie suivant indique que le mot de passe sera dans `kubeadminPassword`.
-
-```json
-{
-  "kubeadminPassword": "<generated password>",
-  "kubeadminUsername": "kubeadmin"
-}
-```
-
-Connectez-vous au serveur d’API du cluster OpenShift à l’aide de la commande suivante. La variable `$apiServer` a été définie [plus tôt](). Remplacez **\<kubeadmin password>** par le mot de passe que vous avez récupéré.
+Connectez-vous au serveur d’API du cluster OpenShift à l’aide de la commande suivante. 
 
 ```azurecli-interactive
-oc login $apiServer -u kubeadmin -p <kubeadmin password>
+oc login $apiServer -u kubeadmin -p $kubeadmin_password
 ```
 
-Créez un secret OpenShift pour stocker le secret de l’application Azure Active Directory, en remplaçant **\<ClientSecret>** par le secret que vous avez récupéré précédemment.
+Créez un secret OpenShift pour stocker le secret de l’application Azure Active Directory.
 
 ```azurecli-interactive
 oc create secret generic openid-client-secret-azuread \
   --namespace openshift-config \
-  --from-literal=clientSecret=<ClientSecret>
-```    
+  --from-literal=clientSecret=$client_secret
+```
 
-Créez un fichier **oidc.yaml** pour configurer l’authentification OpenShift OpenID sur Azure Active Directory. Remplacez **\<AppID>** et **\<TenantId>** par les valeurs que vous avez récupérées précédemment.
+Créez un fichier **oidc.yaml** pour configurer l’authentification OpenShift OpenID sur Azure Active Directory. 
 
 ```bash
 cat > oidc.yaml<< EOF
@@ -176,23 +184,23 @@ spec:
     mappingMethod: claim
     type: OpenID
     openID:
-      clientID: <AppId>
-      clientSecret: 
+      clientID: $app_id
+      clientSecret:
         name: openid-client-secret-azuread
-      extraScopes: 
+      extraScopes:
       - email
       - profile
-      extraAuthorizeParameters: 
+      extraAuthorizeParameters:
         include_granted_scopes: "true"
       claims:
-        preferredUsername: 
+        preferredUsername:
         - email
         - upn
-        name: 
+        name:
         - name
-        email: 
+        email:
         - email
-      issuer: https://login.microsoftonline.com/<TenantId>
+      issuer: https://login.microsoftonline.com/$tenant_id
 EOF
 ```
 

@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/04/2020
-ms.openlocfilehash: 469019eb1e90654d1953156337593d5de99b46c0
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: d6f20780ccd90d83631ce07411820fb8c9280c3e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793865"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86084084"
 ---
 # <a name="optimize-apache-pig-with-apache-ambari-in-azure-hdinsight"></a>Optimiser Apache Pig avec Apache Ambari dans Azure HDInsight
 

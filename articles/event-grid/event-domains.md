@@ -1,18 +1,14 @@
 ---
 title: Domaines d’événements dans Azure Event Grid
 description: Cet article décrit comment utiliser les domaines d’événements pour gérer le flux d’événements personnalisés vers vos organisations, clients ou applications.
-services: event-grid
-author: banisadr
-ms.service: event-grid
-ms.author: babanisa
 ms.topic: conceptual
-ms.date: 01/21/2020
-ms.openlocfilehash: f6698f91d7659f9fc2c314a9291380301146f8ed
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.openlocfilehash: 9b313784cd006087f3c2f1354053540cc9224782
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898865"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92328825"
 ---
 # <a name="understand-event-domains-for-managing-event-grid-topics"></a>Comprendre les domaines d’événements pour gérer les rubriques Event Grid
 
@@ -41,13 +37,13 @@ Il vous donne également un point de terminaison unique, dans lequel vous pouvez
 
 ## <a name="access-management"></a>Gestion de l’accès
 
-Avec un domaine, vous bénéficiez d’autorisations détaillées et du contrôle de l’authentification sur chaque rubrique via le contrôle d’accès en fonction du rôle (RBAC) d’Azure. Vous pouvez vous servir de ces rôles pour limiter l’accès de chaque abonné dans votre application aux rubriques que souhaitez uniquement.
+Avec un domaine, vous bénéficiez du contrôle détaillé des autorisations et de l’authentification sur chaque rubrique via le contrôle d’accès en fonction du rôle Azure (Azure RBAC). Vous pouvez vous servir de ces rôles pour limiter l’accès de chaque abonné dans votre application aux rubriques que souhaitez uniquement.
 
-Le contrôle d’accès en fonction du rôle (RBAC) dans les domaines d’événements fonctionne de la même façon que le [contrôle d’accès géré](security-authorization.md) dans le reste d’Event Grid et d’Azure. Utilisez le contrôle d’accès en fonction du rôle (RBAC) pour créer et appliquer des définitions de rôles personnalisés dans des domaines d’événements.
+Azure RBAC dans les domaines d’événements fonctionne de la même façon que le [contrôle d’accès géré](security-authorization.md) dans le reste d’Event Grid et d’Azure. Utilisez Azure RBAC pour créer et appliquer des définitions de rôles personnalisés dans des domaines d’événements.
 
 ### <a name="built-in-roles"></a>Vérification d’accès par rôle : rôles intégrés
 
-Event Grid possède deux définitions de rôles intégrées pour faciliter l’utilisation du contrôle d’accès en fonction du rôle (RBAC) avec des domaines d’événements. Ces rôles sont **EventGrid EventSubscription Contributor (préversion)** et **EventGrid EventSubscription Reader (préversion)** . Vous affectez ces rôles aux utilisateurs qui doivent s’abonner à des rubriques dans votre domaine d’événements. Vous étendez l’attribution de rôle uniquement à la rubrique à laquelle les utilisateurs doivent s’abonner.
+Event Grid possède deux définitions de rôles intégrées pour faciliter l’utilisation d’Azure RBAC avec des domaines d’événements. Ces rôles sont **EventGrid EventSubscription Contributor (préversion)** et **EventGrid EventSubscription Reader (préversion)** . Vous affectez ces rôles aux utilisateurs qui doivent s’abonner à des rubriques dans votre domaine d’événements. Vous étendez l’attribution de rôle uniquement à la rubrique à laquelle les utilisateurs doivent s’abonner.
 
 Pour plus d’informations sur ces rôles, voir [Rôles intégrés pour Event Grid](security-authorization.md#built-in-roles).
 

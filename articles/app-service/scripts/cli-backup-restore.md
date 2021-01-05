@@ -9,12 +9,12 @@ ms.date: 12/07/2017
 ms.author: msangapu
 ms.reviewer: cephalin
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 8c3c0f4f57d21e5c07867a2c43ce3c3114f79a9b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a8b7d20c3eee57d10a7025b05605603f82437cdb
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80058854"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97006411"
 ---
 # <a name="restore-a-web-app-from-a-backup-using-cli"></a>Restaurer une application web à partir d’une sauvegarde à l’aide de l’interface CLI
 
@@ -38,11 +38,11 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 | Commande | Notes |
 |---|---|
-| [`az webapp config backup list`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-list) | Obtient une liste des sauvegardes d’une application web. |
-| [`az webapp config backup restore`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-restore) | Restaure une application web à partir d’une sauvegarde. |
+| [`az webapp config backup list`](/cli/azure/webapp/config/backup#az-webapp-config-backup-list) | Obtient une liste des sauvegardes d’une application web. |
+| [`az webapp config backup restore`](/cli/azure/webapp/config/backup#az-webapp-config-backup-restore) | Restaure une application web à partir d’une sauvegarde. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
 Vous trouverez des exemples supplémentaires de scripts CLI App Service dans la [documentation relative à Azure App Service](../samples-cli.md).

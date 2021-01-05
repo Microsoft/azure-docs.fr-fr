@@ -2,20 +2,20 @@
 title: Surveillance des points de terminaison Azure Traffic Manager | Microsoft Docs
 description: Cet article explique comment Traffic Manager utilise la surveillance des points de terminaison et le basculement automatique des points de terminaison pour aider les clients Azure à déployer des applications haute disponibilité
 services: traffic-manager
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 12/04/2018
-ms.author: rohink
-ms.openlocfilehash: 61aafbe8cb12e93d72f5efd01155f06fb3ec0c28
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.author: duau
+ms.openlocfilehash: 78a1681c743f65081b30657f4fd747ff8aaef5f5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80757259"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89392831"
 ---
 # <a name="traffic-manager-endpoint-monitoring"></a>Surveillance des points de terminaison Traffic Manager
 

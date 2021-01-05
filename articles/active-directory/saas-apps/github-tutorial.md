@@ -1,39 +1,35 @@
 ---
-title: 'Tutoriel : Intégration d’Azure Active Directory à GitHub | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et GitHub.
+title: 'Tutoriel : Intégration d’Azure Active Directory à une organisation GitHub Enterprise Cloud | Microsoft Docs'
+description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et une organisation GitHub Enterprise Cloud.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: 8761f5ca-c57c-4a7e-bf14-ac0421bd3b5e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
-ms.date: 01/31/2020
+ms.date: 08/07/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: e812e1b03637a3ecd7a45f02664c4e3547f1aef1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 67a17aaa647d9aa6943b37d54fc0e3308ad8955f
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79138975"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96558536"
 ---
-# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-github"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à GitHub
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-a-github-enterprise-cloud-organization"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à une organisation GitHub Enterprise Cloud
 
-Dans ce tutoriel, vous allez apprendre à intégrer GitHub à Azure Active Directory (Azure AD). Quand vous intégrez GitHub à Azure AD, vous pouvez :
+Ce tutoriel explique comment intégrer une **organisation** GitHub Enterprise Cloud à Azure Active Directory (Azure AD). L’intégration d’une organisation GitHub Enterprise Cloud à Azure AD vous permet d’effectuer les opérations suivantes :
 
 * Contrôler dans Azure AD qui a accès à votre organisation GitHub Enterprise Cloud.
 * Gérez l’accès à votre organisation GitHub Enterprise Cloud à partir d’emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour configurer l’intégration d’Azure AD à GitHub, vous avez besoin des éléments suivants :
+Pour configurer l’intégration d’Azure AD à une organisation GitHub Enterprise Cloud, vous avez besoin des éléments suivants :
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
 * Une organisation GitHub créée dans [GitHub Enterprise Cloud](https://help.github.com/articles/github-s-products/#github-enterprise), ce qui nécessite le [plan de facturation GitHub Enterprise](https://help.github.com/articles/github-s-billing-plans/#billing-plans-for-organizations)
@@ -45,7 +41,7 @@ Dans ce didacticiel, vous configurez et testez l’authentification unique Azure
 * GitHub prend en charge l’authentification unique initiée par le **fournisseur de services**
 
 * GitHub prend en charge le [provisionnement d’utilisateurs **automatique** (invitations d’organisation)](github-provisioning-tutorial.md)
-* Après avoir configuré GitHub, vous pouvez appliquer le contrôle de session, qui protège l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrir comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-aad)
+* Une fois que vous avez configuré GitHub, vous pouvez appliquer le contrôle de session, qui protège contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Le contrôle de session est étendu à partir de l’accès conditionnel. [Découvrir comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-aad)
 
 ## <a name="adding-github-from-the-gallery"></a>Ajout de GitHub à partir de la galerie
 
@@ -56,8 +52,7 @@ Pour configurer l’intégration de GitHub à Azure AD, vous devez ajouter GitH
 1. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
 1. Pour ajouter une nouvelle application, sélectionnez **Nouvelle application**.
 1. Dans la section **Ajouter à partir de la galerie**, tapez **GitHub** dans la zone de recherche.
-1. Sélectionnez **GitHub** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
-
+1. Sélectionnez **GitHub Enterprise Cloud - Organization** dans le volet de résultats, puis ajoutez l’application. Patientez quelques secondes pendant que l’application est ajoutée à votre locataire.
 
 ## <a name="configure-and-test-azure-ad-single-sign-on-for-github"></a>Configurer et tester l’authentification unique Azure AD pour GitHub
 
@@ -84,16 +79,19 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Dans la section **Configuration SAML de base**, entrez les valeurs pour les champs suivants :
 
-   a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://github.com/orgs/<entity-id>/sso`
+   a. Dans la zone de texte **URL de connexion**, saisissez une URL au format suivant : `https://github.com/orgs/<Organization ID>/sso`
 
-    b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://github.com/orgs/<entity-id>`
+    b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL au format suivant : `https://github.com/orgs/<Organization ID>`
+
+    c. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://github.com/orgs/<Organization ID>/saml/consume`
+
 
     > [!NOTE]
-    > Notez qu’il ne s’agit pas des valeurs réelles. Vous devez mettre à jour ces valeurs avec l’URL de connexion et l’identificateur réels. Nous vous suggérons d’utiliser ici la valeur de chaîne unique dans l’identificateur. Accédez à la section d’administration de GitHub pour extraire ces valeurs.
+    > Notez qu’il ne s’agit pas des valeurs réelles. Vous devez mettre à jour ces valeurs avec l’URL de connexion, l’identificateur et l’URL de réponse réels. Nous vous suggérons d’utiliser ici la valeur de chaîne unique dans l’identificateur. Accédez à la section d’administration de GitHub pour extraire ces valeurs.
 
-5. L’application GitHub s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration Attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **nameidentifier** est mappé avec **user.userprincipalname**. L’application GitHub s’attend à ce que **nameidentifier** soit mappé avec **user.mail**. Vous devez donc modifier le mappage d’attribut en cliquant sur l’icône **Modifier**.
+5. L’application GitHub s’attend à recevoir les assertions SAML dans un format spécifique, ce qui vous oblige à ajouter des mappages d’attributs personnalisés à votre configuration Attributs du jeton SAML. La capture d’écran suivante montre la liste des attributs par défaut, où **Identificateur d’utilisateur unique (ID de nom)** est mappé avec **user.userprincipalname**. L’application GitHub s’attend à ce que **Identificateur d’utilisateur unique (ID de nom)** soit mappé avec **user.mail**. Vous devez donc modifier le mappage d’attributs. Pour cela, cliquez sur l’icône **Modifier** et changez le mappage d’attributs.
 
-    ![image](common/edit-attribute.png)
+    ![Capture d’écran montrant la section « Attributs utilisateur » avec l’icône « Modifier » sélectionnée.](common/edit-attribute.png)
 
 6. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -137,7 +135,13 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 1. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **B. Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** au bas de l’écran.
 1. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
-1. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+
+    ![rôle utilisateur](./media/github-tutorial/user-role.png)
+
+    > [!NOTE]
+    > L’option **Sélectionner un rôle** sera désactivée et le rôle par défaut est UTILISATEUR pour l’utilisateur sélectionné.
+
+7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
 
 ## <a name="configure-github-sso"></a>Configurer l’authentification unique GitHub
 
@@ -145,15 +149,19 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Accédez aux **Paramètres** et cliquez sur **Sécurité**
 
-    ![Paramètres](./media/github-tutorial/tutorial_github_config_github_03.png)
+    ![Capture d’écran montrant le menu « Organization settings » GitHub avec « Security » sélectionné.](./media/github-tutorial/security.png)
 
-3. Cochez la case **Activer l’authentification SAML**, révélant ainsi les champs de configuration de l’authentification unique. Utilisez en suite la valeur d’URL d’authentification unique pour mettre à jour l’URL d’authentification unique dans la configuration d’Azure AD.
+3. Cochez la case **Activer l’authentification SAML**, révélant ainsi les champs de configuration de l’authentification unique. Effectuez les étapes suivantes :
 
-    ![Paramètres](./media/github-tutorial/tutorial_github_config_github_13.png)
+    ![Capture d’écran montrant la section « SAML Single Sign-on » avec « Enable SAML authentication » avec des zones de texte d’URL mises en évidence.](./media/github-tutorial/saml-sso.png)
+
+    a. Copiez la valeur du champ **URL d’authentification unique** et collez-la dans la zone de texte **URL de connexion** de la section **Configuration SAML de base** du portail Azure.
+    
+    b. Copiez la valeur **URL Assertion Consumer Service** et collez-la dans la zone de texte **URL de réponse** de la section **Configuration SAML de base** du portail Azure.
 
 4. Configurez les champs suivants :
 
-    ![Paramètres](./media/github-tutorial/tutorial_github_config_github_051.png)
+    ![Capture d’écran montrant les zones de texte « URL de connexion », « Émetteur » et « Certificat public ».](./media/github-tutorial/configure.png)
 
     a. Dans la zone de texte **Sign on URL** (URL de connexion), collez l’**URL de connexion** que vous avez copiée sur le portail Azure.
 
@@ -163,13 +171,13 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     d. Cliquez sur l’icône **Modifier** pour changer la **méthode de signature** et la **méthode Digest** de **RSA-SHA1** et **SHA1** en **RSA-SHA256** et **SHA256** comme indiqué ci-dessous.
     
-    e. Mettez à jour l’**URL de l’assertion consumer service (URL de réponse)** à partir de l’URL par défaut pour que l’URL dans Github corresponde à celle de l’inscription de l’application Azure.
+    e. Mettez à jour l’**URL Assertion Consumer Service (URL de réponse)** à partir de l’URL par défaut pour que l’URL dans GitHub corresponde à celle de l’inscription de l’application Azure.
 
     ![image](./media/github-tutorial/tutorial_github_sha.png)
 
 5. Cliquez sur **Tester la configuration SAML** pour vérifier l’absence d’échecs ou d’erreurs de validation pendant l’authentification unique (SSO).
 
-    ![Paramètres](./media/github-tutorial/tutorial_github_config_github_06.png)
+    ![Paramètres](./media/github-tutorial/test.png)
 
 6. Cliquez sur **Enregistrer**.
 
@@ -186,21 +194,21 @@ L’objectif de cette section est de créer un utilisateur appelé Britta Simon 
 
 2. Cliquez sur **People**.
 
-    ![Personnes](./media/github-tutorial/tutorial_github_config_github_08.png "Personnes")
+    ![La capture d’écran affiche le site GitHub avec l’option People (Contacts) sélectionnée.](./media/github-tutorial/people.png "Personnes")
 
 3. Cliquez sur **Invite member**.
 
-    ![Inviter des utilisateurs](./media/github-tutorial/tutorial_github_config_github_09.png "Inviter des utilisateurs")
+    ![Inviter des utilisateurs](./media/github-tutorial/invite-member.png "Inviter des utilisateurs")
 
 4. Dans la boîte de dialogue **Invite member**, procédez comme suit :
 
     a. Dans la zone de texte **E-mail** , tapez l’adresse de messagerie du compte de Britta Simon.
 
-    ![Inviter des personnes](./media/github-tutorial/tutorial_github_config_github_10.png "Inviter des personnes")
+    ![Inviter des personnes](./media/github-tutorial/email-box.png "Inviter des personnes")
 
     b. Cliquez sur **Send Invitation**.
 
-    ![Inviter des personnes](./media/github-tutorial/tutorial_github_config_github_11.png "Inviter des personnes")
+    ![Capture d’écran montrant la page de boîte de dialogue « Invite member » avec l’option « Member » sélectionnée et le bouton « Send invitation » sélectionné.](./media/github-tutorial/send-invitation.png "Inviter des personnes")
 
     > [!NOTE]
     > Le titulaire du compte Azure Active Directory reçoit un message électronique contenant un lien à suivre pour confirmer son compte et l’activer.
@@ -209,16 +217,16 @@ L’objectif de cette section est de créer un utilisateur appelé Britta Simon 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette GitHub dans le volet d’accès, vous devez être connecté automatiquement à l’application GitHub pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette GitHub dans le volet d’accès, vous devez être connecté automatiquement à l’application GitHub pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer GitHub avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)

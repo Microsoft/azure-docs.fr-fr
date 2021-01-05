@@ -1,25 +1,19 @@
 ---
 title: Images Azure BYOS (Apportez votre propre abonnement) de Red Hat Enterprise Linux | Microsoft Docs
 description: Découvrez les images BYOS (Apportez votre propre abonnement) pour Red Hat Enterprise Linux sur Azure.
-services: virtual-machines-linux
-documentationcenter: ''
 author: asinn826
-manager: BorisB2015
-editor: ''
-ms.assetid: f495f1b4-ae24-46b9-8d26-c617ce3daf3a
 ms.service: virtual-machines-linux
-ms.devlang: na
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure-services
-ms.date: 02/10/2020
+ms.date: 06/10/2020
 ms.author: alsin
-ms.openlocfilehash: 9ab578b4b688c02c9150dfb23fce53fbb82df405
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.reviewer: cynthn
+ms.openlocfilehash: 9a53eb1004d68045781903b71d02c3416f494be2
+ms.sourcegitcommit: 7e97ae405c1c6c8ac63850e1b88cf9c9c82372da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81273169"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97803814"
 ---
 # <a name="red-hat-enterprise-linux-bring-your-own-subscription-gold-images-in-azure"></a>Images Gold BYOS (Apportez votre propre abonnement) de Red Hat Enterprise Linux dans Azure
 
@@ -35,7 +29,7 @@ Les images RHEL (Red Hat Enterprise Linux) sont disponibles dans Azure sous la f
 - Les stratégies de support standard s’appliquent aux machines virtuelles créées à partir de ces images.
 - Les machines virtuelles provisionnées à partir d’images Red Hat Gold ne sont pas soumises aux redevances RHEL associées aux images RHEL Paiement à l’utilisation.
 - Les images ne sont pas autorisées. Vous devez donc utiliser Red Hat Subscription-Manager pour vous inscrire et vous abonner aux machines virtuelles afin d’obtenir directement les mises à jour auprès de Red Hat.
-- Il n’est actuellement pas possible de basculer dynamiquement entre les modèles de facturation BYOS et Paiement à l’utilisation pour les images Linux. Pour changer de modèle de facturation, vous devez redéployer la machine virtuelle à partir de l’image correspondante.
+- Il est possible de passer d’images assortie d’un paiement à l’utilisation à une stratégie BYOS à l’aide d’[Azure Hybrid Benefit](../../linux/azure-hybrid-benefit-linux.md). En revanche, il n’est pas possible de passer d’une stratégie BYOS déployée initialement à un modèle de facturation de paiement à l’utilisation pour des images Linux. Pour changer de modèle de facturation afin de passer d’une stratégie BYOS au paiement à l’utilisation, vous devez redéployer la machine virtuelle à partir de l’image correspondante.
 
 >[!NOTE]
 > Les images BYOS RHEL génération 2 ne sont actuellement pas disponibles via l’offre de la Place de marché. Si vous avez besoin d’une image BYOS RHEL génération 2, consultez le tableau de bord Cloud Access dans Red Hat Subscription Management. Pour plus d’informations, consultez la [documentation de Red Hat](https://access.redhat.com/articles/4847681).
@@ -69,7 +63,7 @@ La suite de ce document se concentre sur la méthode CLI pour provisionner et ac
 
 ## <a name="use-the-red-hat-gold-images-from-the-azure-cli"></a>Utiliser les images Red Hat Gold depuis Azure CLI
 
-Les instructions suivantes vous guident tout au long du processus de déploiement initial pour une machine virtuelle RHEL avec Azure CLI. Elle part du principe [qu’Azure CLI est installé](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Les instructions suivantes vous guident tout au long du processus de déploiement initial pour une machine virtuelle RHEL avec Azure CLI. Elle part du principe [qu’Azure CLI est installé](/cli/azure/install-azure-cli).
 
 >[!IMPORTANT]
 >Veillez à mettre toutes les lettres en minuscules dans les références à l’éditeur, à l’offre, à l’abonnement et à l’image pour toutes les commandes suivantes.
@@ -96,7 +90,7 @@ Les instructions suivantes vous guident tout au long du processus de déploiemen
 
     OR
 
-    az vm image terms accept --urn RedHat:rhel-byos:rhel-lvm8:8.0.20190620
+    az vm image terms accept --urn redhat:rhel-byos:rhel-lvm8:8.0.20190620
     ```
 
     >[!NOTE]
@@ -108,13 +102,16 @@ Les instructions suivantes vous guident tout au long du processus de déploiemen
     az vm create -n <VM name> -g <resource group name> --image <image urn> --validate
 
     # Example:
-    az vm create -n rhel-byos-vm -g rhel-byos-group --image RedHat:rhel-byos:rhel-lvm75:7.5.20190620
+    az vm create -n rhel-byos-vm -g rhel-byos-group --image redhat:rhel-byos:rhel-lvm8:latest --validate
     ```
 
 1. Provisionnez votre machine virtuelle en exécutant la même commande que dans l’exemple précédent sans l’argument `--validate`.
 
     ```azurecli
-    az vm create -n <VM name> -g <resource group name> --image <image urn> --validate
+    az vm create -n <VM name> -g <resource group name> --image <image urn>
+
+    # Example:
+    az vm create -n rhel-byos-vm -g rhel-byos-group --image redhat:rhel-byos:rhel-lvm8:latest
     ```
 
 1. Établissez une liaison SSH sur votre machine virtuelle et vérifiez que vous disposez d’une image non autorisée. Pour effectuer cette étape, exécutez `sudo yum repolist`. Pour RHEL 8, utilisez `sudo dnf repolist`. La sortie vous invite à utiliser Subscription-Manager pour inscrire la machine virtuelle auprès de Red Hat.
@@ -135,7 +132,7 @@ Le script suivant en est un exemple. Remplacez le groupe de ressources, l’empl
     # Define user name and blank password
     $securePassword = ConvertTo-SecureString 'TestPassword1!' -AsPlainText -Force
     $cred = New-Object System.Management.Automation.PSCredential("azureuser",$securePassword)
-    Get-AzureRmMarketplaceTerms -Publisher RedHat -Product rhel-byos -Name rhel-lvm75 | SetAzureRmMarketplaceTerms -Accept
+    Get-AzureRmMarketplaceTerms -Publisher redhat -Product rhel-byos -Name rhel-lvm75 | SetAzureRmMarketplaceTerms -Accept
 
     # Create a resource group
     New-AzureRmResourceGroup -Name $resourceGroup -Location $location
@@ -197,7 +194,7 @@ Pour connaître les étapes à suivre pour appliquer Azure Disk Encryption, cons
 
     Dans ce cas, contactez Microsoft ou Red Hat pour activer votre abonnement.
 
-- Si vous modifiez un instantané à partir d’une image BYOS RHEL et que vous tentez de publier cette image personnalisée sur [Shared Image Gallery](https://docs.microsoft.com/azure/virtual-machines/linux/shared-image-galleries), vous devez fournir des informations d’abonnement qui correspondent à la source d’origine de l’instantané. Par exemple, la commande peut se présenter comme suit :
+- Si vous modifiez un instantané à partir d’une image BYOS RHEL et que vous tentez de publier cette image personnalisée sur [Shared Image Gallery](../../linux/shared-image-galleries.md), vous devez fournir des informations d’abonnement qui correspondent à la source d’origine de l’instantané. Par exemple, la commande peut se présenter comme suit :
 
     ```azurecli
     az vm create –image \
@@ -219,4 +216,4 @@ Pour connaître les étapes à suivre pour appliquer Azure Disk Encryption, cons
 - Pour en savoir plus sur Azure Red Hat Update Infrastructure, consultez [Azure Red Hat Update Infrastructure](./redhat-rhui.md).
 - Pour plus d’informations sur les images Red Hat dans Azure, consultez la [page de documentation](./redhat-images.md).
 - Pour obtenir des informations sur les stratégies de prise en charge de Red Hat pour toutes les versions de RHEL, consultez la page [Cycle de vie Red Hat Enterprise Linux](https://access.redhat.com/support/policy/updates/errata).
-- Vous trouverez de la documentation supplémentaire sur les images RHEL Gold dans la [documentation de Red Hat](https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/red_hat_cloud_access_reference_guide/using_red_hat_gold_images#con-gold-image-azure).
+- Vous trouverez de la documentation supplémentaire sur les images RHEL Gold dans la [documentation de Red Hat](https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/red_hat_cloud_access_reference_guide/cloud-access-gold-images_cloud-access#proc_using-gold-images-azure_cloud-access).

@@ -6,17 +6,17 @@ author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: bcac6af9efd18ef8abeea7d82961fd8f2fe70ba3
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: a63cd95fdcee7c9ed0c49ba41b4d7e7e6de8f4bf
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633750"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96458725"
 ---
 # <a name="quickstart-create-a-workload-classifier-using-t-sql"></a>Démarrage rapide : Créer un classifieur de charge de travail à l’aide de T-SQL
 
@@ -25,13 +25,13 @@ Dans ce guide de démarrage rapide, vous créez rapidement un classifieur de cha
 Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 > [!NOTE]
-> La création d’une instance de pool Synapse SQL dans Azure Synapse Analytics peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
+> La création d’une instance de pool SQL dédié dans Azure Synapse Analytics peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
 >
 >
 
 ## <a name="prerequisites"></a>Prérequis
 
-Ce démarrage rapide part du principe que vous avez déjà un entrepôt de données SQL ainsi que des autorisations CONTROL DATABASE. Si vous devez en créer un, utilisez la section [Créer et connecter - Portail](create-data-warehouse-portal.md) pour créer un entrepôt de données nommé **mySampleDataWarehouse**.
+Ce guide de démarrage rapide suppose que vous avez déjà provisionné une instance de pool SQL dédié dans Azure Synapse Analytics, et que vous disposez d’autorisations CONTROL DATABASE. Si vous devez en créer une, utilisez [Créer et connecter – Portail](create-data-warehouse-portal.md) pour créer un pool SQL dédié nommé **mySampleDataWarehouse**.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure.
 
@@ -87,27 +87,23 @@ DROP USER [TheCEO]
 ;
 ```
 
-Vous êtes facturé pour les unités d’entrepôt de données et les données stockées dans votre entrepôt de données. Ces ressources de calcul et de stockage sont facturées séparément.
+Vous êtes facturé pour les unités d’entrepôt de données et les données stockées dans votre pool SQL dédié. Ces ressources de calcul et de stockage sont facturées séparément.
 
-- Si vous voulez conserver les données dans le stockage, vous pouvez suspendre le calcul quand vous n’utilisez pas l’entrepôt de données. Quand vous suspendez le calcul, vous êtes facturé uniquement pour le stockage des données. Quand vous êtes prêt à utiliser les données, reprenez le calcul.
-- Si vous voulez éviter des frais futurs, vous pouvez supprimer l’entrepôt de données.
+- Si vous voulez conserver les données dans le stockage, vous pouvez suspendre le calcul quand vous n’utilisez pas le pool SQL dédié. Quand vous suspendez le calcul, vous êtes facturé uniquement pour le stockage des données. Quand vous êtes prêt à utiliser les données, reprenez le calcul.
+- Si vous voulez éviter des frais à venir, vous pouvez supprimer le pool SQL dédié.
 
 Suivez ces étapes pour nettoyer les ressources.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com) et sélectionnez votre entrepôt de données.
+1. Connectez-vous au [portail Azure](https://portal.azure.com), puis sélectionnez votre pool SQL dédié.
 
     ![Nettoyer les ressources](./media/load-data-from-azure-blob-storage-using-polybase/clean-up-resources.png)
 
-2. Pour suspendre le calcul, sélectionnez le bouton **Suspendre**. Quand l’entrepôt de données est suspendu, un bouton **Démarrer** est visible.  Pour reprendre le calcul, sélectionnez **Démarrer**.
+2. Pour suspendre le calcul, sélectionnez le bouton **Suspendre**. Quand le pool SQL dédié est suspendu, un bouton **Démarrer** est visible.  Pour reprendre le calcul, sélectionnez **Démarrer**.
 
-3. Pour supprimer l’entrepôt de données afin de ne pas être facturé pour le calcul ou le stockage, sélectionnez **Supprimer**.
-
-4. Pour supprimer le serveur SQL que vous avez créé, sélectionnez **mynewserver-20180430.database.windows.net** dans l’image précédente, puis **Supprimer**.  N’oubliez pas que la suppression du serveur supprime également toutes les bases de données qui lui sont attribuées.
-
-5. Pour supprimer le groupe de ressources, sélectionnez **myResourceGroup**, puis **Supprimer le groupe de ressources**.
+3. Pour supprimer le pool SQL dédié afin de ne pas être facturé pour le calcul ou le stockage, sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Vous avez créé un classifieur de charge de travail. Exécutez quelques requêtes avec l’identité TheCEO pour voir comment elles fonctionnent. Consultez [sys.dm_pdw_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest) pour voir les requêtes et l’importance attribuée.
-- Pour plus d’informations sur la gestion de charge de travail Synapse SQL, consultez [Importance des charges de travail](sql-data-warehouse-workload-importance.md) et [Classification des charges de travail](sql-data-warehouse-workload-classification.md).
+- Pour plus d’informations sur la gestion de charge de travail du pool SQL dédié, consultez [Importance des charges de travail](sql-data-warehouse-workload-importance.md) et [Classification des charges de travail](sql-data-warehouse-workload-classification.md).
 - Consultez les articles qui expliquent comment [Configurer l’importance de la charge de travail](sql-data-warehouse-how-to-configure-workload-importance.md) et comment [Gérer et surveiller la charge de travail](sql-data-warehouse-how-to-manage-and-monitor-workload-importance.md).

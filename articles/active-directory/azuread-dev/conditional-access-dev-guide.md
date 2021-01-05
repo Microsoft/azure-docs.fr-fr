@@ -13,16 +13,19 @@ ms.custom: aaddev
 ms.topic: conceptual
 ms.workload: identity
 ROBOTS: NOINDEX
-ms.openlocfilehash: 92acb1a475fbd41bfb7351d73c61db866ce2bbc0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b08b07ebcd6e45e95e23dff8686148889e9d4b39
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154931"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96173917"
 ---
-# <a name="developer-guidance-for-azure-active-directory-conditional-access"></a>Guide du développeur pour l’accès conditionnel à Azure Active Directory
+# <a name="developer-guidance-for-the-azure-active-directory-conditional-access-feature"></a>Guide du développeur pour la fonctionnalité d’accès conditionnel d’Azure Active Directory
 
 [!INCLUDE [active-directory-azuread-dev](../../../includes/active-directory-azuread-dev.md)]
+
+> [!NOTE]
+> Pour la version de cet article relatif à la plateforme Microsoft Identity, consultez [Guide du développeur pour l’accès conditionnel à Azure Active Directory](../develop/v2-conditional-access-dev-guide.md).
 
 La fonctionnalité d’accès conditionnel dans Azure Active Directory (Azure AD) offre l’une des méthodes que vous pouvez utiliser pour sécuriser votre application et protéger un service. L’accès conditionnel permet aux développeurs et aux clients d’entreprise de protéger les services dans une multitude de façons, notamment :
 
@@ -30,7 +33,7 @@ La fonctionnalité d’accès conditionnel dans Azure Active Directory (Azure AD
 * Autoriser uniquement les appareils inscrits sur Intune inscrit pour accéder aux services spécifiques
 * Restriction des plages IP et emplacements utilisateur
 
-Pour plus d’informations sur toutes les fonctionnalités de l’accès conditionnel, consultez [Accès conditionnel dans Azure Directory](../active-directory-conditional-access-azure-portal.md).
+Pour plus d’informations sur toutes les fonctionnalités de l’accès conditionnel, consultez [Qu’est-ce que l’accès conditionnel](../conditional-access/overview.md).
 
 Destiné aux développeurs créant des applications pour Azure AD, cet article montre comment utiliser l’accès conditionnel et explique l’impact de l’accès à des ressources non contrôlées auxquelles des stratégies d’accès conditionnel sont peut-être appliquées. Cet article explore également les implications de l’accès conditionnel dans les applications web et le flux On-Behalf-Of accédant à Microsoft Graph et appelant des API.
 
@@ -40,7 +43,7 @@ Il suppose une connaissance des applications [monolocataires et multilocataires]
 
 ### <a name="app-types-impacted"></a>Incidence sur les types d’application
 
-Dans les scénarios les plus courants, l’accès conditionnel ne modifie pas le comportement d’une application ou nécessite des modifications de la part du développeur. Uniquement dans certains cas, lorsqu’une application en mode silencieux ou indirectement demande un jeton pour un service, une application requiert des modifications du code pour gérer des « défis » d’accès conditionnel. Cela peut être aussi simple que l’exécution d’une demande de connexion interactive.
+Dans les scénarios les plus courants, l’accès conditionnel ne modifie pas le comportement d’une application ou nécessite des modifications de la part du développeur.  Uniquement dans certains cas, lorsqu’une application en mode silencieux ou indirectement demande un jeton pour un service, une application requiert des modifications du code pour gérer des « défis » d’accès conditionnel.  Cela peut être aussi simple que l’exécution d’une demande de connexion interactive.
 
 Plus précisément, les scénarios suivants requièrent un code pour gérer des « défis » d’accès conditionnel :
 
@@ -49,7 +52,7 @@ Plus précisément, les scénarios suivants requièrent un code pour gérer des 
 * Applications à page unique en utilisant ADAL.js
 * Les applications appelant une ressource
 
-Les stratégies d’accès conditionnel peuvent être appliquées à l’application, mais peuvent également être appliquées à une API web à laquelle votre application a accès. Pour apprendre à configurer une stratégie d’accès conditionnel, consultez [Démarrage rapide : Exiger une authentification multifacteur (MFA) pour des applications spécifiques disposant d’un accès conditionnel à Azure Active Directory](../conditional-access/app-based-mfa.md).
+Les stratégies d’accès conditionnel peuvent être appliquées à l’application, mais peuvent également être appliquées à une API web à laquelle votre application a accès. Pour en apprendre davantage sur la façon de configurer une stratégie d’accès conditionnel, consultez [Stratégies d’accès conditionnel courantes](../conditional-access/concept-conditional-access-policy-common.md).
 
 Selon le scénario, un client d’entreprise peut appliquer et supprimer des stratégies d’accès conditionnel à tout moment. Afin que votre application continue à fonctionner correctement lorsqu’une nouvelle stratégie est appliquée, vous devez mettre en œuvre la gestion de « défi ». Les exemples suivants illustrent la gestion des défis.
 
@@ -90,7 +93,7 @@ Les développeurs peuvent prendre ce défi et l’ajouter à une nouvelle demand
 
 ### <a name="prerequisites"></a>Prérequis
 
-L’accès conditionnel Azure AD est une fonctionnalité incluse dans [Azure AD Premium](https://docs.microsoft.com/azure/active-directory/active-directory-whatis). Pour en savoir plus sur les conditions requises de licence, consultez le [Rapport d’utilisation sans licence](../active-directory-conditional-access-unlicensed-usage-report.md). Les développeurs peuvent joindre le [Microsoft Developer Network](https://msdn.microsoft.com/dn308572.aspx), qui inclut un abonnement gratuit à la suite Enterprise Mobility, qui comprend Azure AD Premium.
+L’accès conditionnel Azure AD est une fonctionnalité incluse dans [Azure AD Premium](../fundamentals/active-directory-whatis.md). Pour en savoir plus sur les conditions requises de licence, consultez le [Rapport d’utilisation sans licence](../reports-monitoring/overview-reports.md). Les développeurs peuvent joindre le [Microsoft Developer Network](/), qui inclut un abonnement gratuit à la suite Enterprise Mobility, qui comprend Azure AD Premium.
 
 ### <a name="considerations-for-specific-scenarios"></a>Considérations pour des scénarios spécifiques
 
@@ -177,7 +180,7 @@ Pour tester ce scénario, consultez notre [exemple de code Pour le compte de SPA
 
 ## <a name="see-also"></a>Voir aussi
 
-* Vous pouvez en savoir plus sur les fonctionnalités, consultez [Accès conditionnel dans Azure Active Directory](../active-directory-conditional-access-azure-portal.md).
+* Vous pouvez en savoir plus sur les fonctionnalités, consultez [Accès conditionnel dans Azure Active Directory](../conditional-access/overview.md).
 * Pour obtenir plus d’exemples de code Azure AD, consultez [Référentiel GitHub d’exemples de code](https://github.com/azure-samples?utf8=%E2%9C%93&q=active-directory).
 * Pour plus d’informations sur les kits SDK ADAL et l’accès à la documentation de référence, consultez [guide des bibliothèques](active-directory-authentication-libraries.md).
 * Pour en savoir plus sur les scénarios multi-locataire, consultez [comment connecter les utilisateurs à l’aide du modèle multi-locataire](../develop/howto-convert-app-to-be-multi-tenant.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).

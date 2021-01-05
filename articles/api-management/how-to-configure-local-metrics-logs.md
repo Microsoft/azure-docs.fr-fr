@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 04/30/2020
 ms.author: apimpm
-ms.openlocfilehash: dd49680da6f52e32ddb52dbdb23ad5e8f627a91e
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: ac147863fe54be3343eda653fc863ebd08dac54d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82204818"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86254501"
 ---
 # <a name="configure-local-metrics-and-logs-for-azure-api-management-self-hosted-gateway"></a>Configurer des métriques et journaux locaux pour la passerelle auto-hébergée de Gestion des API Azure
 
@@ -204,7 +204,7 @@ La passerelle auto-hébergée génère des journaux dans `stdout` et `stderr` pa
 kubectl logs <pod-name>
 ```
 
-Si votre passerelle auto-hébergée est déployée dans Azure Kubernetes Service, vous pouvez activer [Azure Monitor pour conteneurs](https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-overview) afin de collecter `stdout` et `stderr` à partir de vos charges de travail et d’afficher les journaux dans Log Analytics. 
+Si votre passerelle auto-hébergée est déployée dans Azure Kubernetes Service, vous pouvez activer [Azure Monitor pour conteneurs](../azure-monitor/insights/container-insights-overview.md) afin de collecter `stdout` et `stderr` à partir de vos charges de travail et d’afficher les journaux dans Log Analytics. 
 
 La passerelle auto-hébergée prend également en charge un certain nombre de protocoles, notamment `localsyslog`, `rfc5424` et `journal`. Le tableau ci-dessous récapitule toutes les options prises en charge. 
 
@@ -236,4 +236,3 @@ Voici un exemple de configuration de journalisation locale :
 
 * Pour en savoir plus sur la passerelle auto-hébergée, consultez [Vue d’ensemble de la passerelle auto-hébergée Gestion des API](self-hosted-gateway-overview.md)
 * En savoir plus sur la [configuration et la persistance des journaux dans le cloud](how-to-configure-local-metrics-logs.md)
-

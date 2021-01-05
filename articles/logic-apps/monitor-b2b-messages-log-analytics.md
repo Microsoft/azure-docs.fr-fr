@@ -6,16 +6,16 @@ ms.suite: integration
 ms.reviewer: divswa, logicappspm
 ms.topic: article
 ms.date: 01/30/2020
-ms.openlocfilehash: e9ba5a516293eb72a715dc9d0df7db4d5a4ea3c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5baa4d4d968adb25b5520ca91149970f5c5578e9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76907284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86536264"
 ---
 # <a name="set-up-azure-monitor-logs-and-collect-diagnostics-data-for-b2b-messages-in-azure-logic-apps"></a>Configurer les journaux Azure Monitor et collecter des données de diagnostic pour des messages B2B dans Azure Logic Apps
 
-Après avoir configuré la communication B2B entre les partenaires commerciaux dans votre compte d’intégration, ces partenaires peuvent échanger des messages à l'aide de protocoles comme AS2, X12 et EDIFACT. Pour vérifier le bon fonctionnement de cette communication, vous pouvez configurer les [journaux Azure Monitor](../azure-monitor/platform/data-platform-logs.md) pour votre compte d’intégration. [Azure Monitor](../azure-monitor/overview.md) vous permet de superviser vos environnements cloud et locaux afin de vous aider à garantir plus facilement leur disponibilité et leurs performances. Les journaux Azure Monitor vous permettent d'enregistrer et de stocker des informations relatives aux données et événements d'exécution, tels que les événements déclencheurs, événements d’exécution et événements d’action dans un [espace de travail Log Analytics](../azure-monitor/platform/resource-logs-collect-workspace.md). Pour les messages, la journalisation collecte également des informations, notamment :
+Après avoir configuré la communication B2B entre les partenaires commerciaux dans votre compte d’intégration, ces partenaires peuvent échanger des messages à l'aide de protocoles comme AS2, X12 et EDIFACT. Pour vérifier le bon fonctionnement de cette communication, vous pouvez configurer les [journaux Azure Monitor](../azure-monitor/platform/data-platform-logs.md) pour votre compte d’intégration. [Azure Monitor](../azure-monitor/overview.md) vous permet de superviser vos environnements cloud et locaux afin de vous aider à garantir plus facilement leur disponibilité et leurs performances. Les journaux Azure Monitor vous permettent d'enregistrer et de stocker des informations relatives aux données et événements d'exécution, tels que les événements déclencheurs, événements d’exécution et événements d’action dans un [espace de travail Log Analytics](../azure-monitor/platform/resource-logs.md#send-to-log-analytics-workspace). Pour les messages, la journalisation collecte également des informations, notamment :
 
 * Nombre et état des messages
 * État des accusés de réception
@@ -163,7 +163,7 @@ Après les exécutions de votre application logique, vous pouvez consulter l'ét
 
    * To search results with prebuilt queries, select **Favorites**.
 
-   * Learn [how to build queries by adding filters](../logic-apps/create-monitoring-tracking-queries.md). Or learn more about [how to find data with log searches in Azure Monitor logs](../log-analytics/log-analytics-log-searches.md).
+   * Learn [how to build queries by adding filters](../logic-apps/create-monitoring-tracking-queries.md). Or learn more about [how to find data with log searches in Azure Monitor logs](../azure-monitor/log-query/log-query-overview.md).
 
    * To change query in the search box, update the query with the columns and values that you want to use as filters.
 -->

@@ -5,12 +5,12 @@ description: Découvrez comment sécuriser le trafic qui transite par des pods �
 services: container-service
 ms.topic: article
 ms.date: 05/06/2019
-ms.openlocfilehash: ca0b6d4acd48dde0ea381ab37080fb6af1fb936c
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: 598747c0d64db2ae62f740dca4c3e4141f2562f2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82854222"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87050486"
 ---
 # <a name="secure-traffic-between-pods-using-network-policies-in-azure-kubernetes-service-aks"></a>Sécuriser le trafic entre les pods avec des stratégies réseau dans Azure Kubernetes Service (AKS)
 
@@ -81,7 +81,7 @@ L’exemple de script suivant :
 * Crée un principal de service Azure Active Directory (Azure AD) pour une utilisation avec le cluster AKS.
 * Assigne des autorisations *Contributeur* pour le principal du service du cluster AKS sur le réseau virtuel.
 * Crée un cluster AKS dans le réseau virtuel défini et active la stratégie réseau.
-    * L’option de stratégie réseau *azure* est utilisée. Pour utiliser Calico en tant qu’option de stratégie réseau à la place, utilisez le paramètre `--network-policy calico`. Remarque : Calico peut être utilisé avec `--network-plugin azure` ou `--network-plugin kubenet`.
+    * L’option de stratégie _Réseau Azure_ est utilisée. Pour utiliser Calico en tant qu’option de stratégie réseau à la place, utilisez le paramètre `--network-policy calico`. Remarque : Calico peut être utilisé avec `--network-plugin azure` ou `--network-plugin kubenet`.
 
 Notez qu’au lieu d’utiliser un principal de service, vous pouvez utiliser une identité managée pour les autorisations. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md).
 
@@ -146,7 +146,7 @@ az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAM
 
 ## <a name="deny-all-inbound-traffic-to-a-pod"></a>Refuser tout trafic entrant sur un pod
 
-Avant de définir des règles autorisant un trafic réseau particulier, commencez par créer une stratégie réseau pour refuser tout trafic. Cette stratégie vous donne un point de départ pour commencer à placer en liste verte uniquement le trafic souhaité. Vous pouvez aussi constater aisément que le trafic est ignoré lorsque la stratégie réseau est appliquée.
+Avant de définir des règles autorisant un trafic réseau particulier, commencez par créer une stratégie réseau pour refuser tout trafic. Cette stratégie vous donne un point de départ pour commencer à créer une liste verte uniquement pour le trafic souhaité. Vous pouvez aussi constater aisément que le trafic est ignoré lorsque la stratégie réseau est appliquée.
 
 Pour l’exemple d’environnement d’application et de règles de trafic, commençons par créer un espace de noms nommé *development* (développement) pour l’exécution des exemples de pods :
 
@@ -158,13 +158,13 @@ kubectl label namespace/development purpose=development
 Créez un exemple de pod principal qui exécute NGINX. Ce pod principal peut être utilisé pour simuler un exemple d’application web principale. Créez ce pod dans l’espace de noms *development* et ouvrez le port *80* pour gérer le trafic web. Étiquetez le pod avec *app=webapp,role=backend* de façon à pouvoir le cibler avec une stratégie réseau dans la section suivante :
 
 ```console
-kubectl run backend --image=nginx --labels app=webapp,role=backend --namespace development --expose --port 80 --generator=run-pod/v1
+kubectl run backend --image=nginx --labels app=webapp,role=backend --namespace development --expose --port 80
 ```
 
 Créez un autre pod et attachez une session de terminal pour vérifier que vous accédez correctement à la page web NGINX par défaut :
 
 ```console
-kubectl run --rm -it --image=alpine network-policy --namespace development --generator=run-pod/v1
+kubectl run --rm -it --image=alpine network-policy --namespace development
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour vérifier que vous pouvez accéder à la page web NGINX par défaut :
@@ -220,7 +220,7 @@ kubectl apply -f backend-policy.yaml
 Voyons si vous pouvez réutiliser la page web NGINX sur le pod principal. Créez un autre pod de test et attachez une session de terminal :
 
 ```console
-kubectl run --rm -it --image=alpine network-policy --namespace development --generator=run-pod/v1
+kubectl run --rm -it --image=alpine network-policy --namespace development
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour voir si vous pouvez accéder à la page web NGINX par défaut. Cette fois, définissez une valeur de délai d’attente sur *2* secondes. La stratégie réseau bloque à présent tout le trafic entrant, de sorte que la page ne peut pas être chargée, comme illustré dans l’exemple suivant :
@@ -277,7 +277,7 @@ kubectl apply -f backend-policy.yaml
 Planifiez un pod portant l’étiquette *app=webapp,role=frontend* et attachez une session de terminal :
 
 ```console
-kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace development --generator=run-pod/v1
+kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace development
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour voir si vous pouvez accéder à la page web NGINX par défaut :
@@ -307,7 +307,7 @@ exit
 La stratégie réseau autorise le trafic provenant des pods étiquetés *app: webapp,role: frontend*, mais doit refuser tout autre trafic. Vérifions si un autre pod dépourvu de cette étiquette peut ou non accéder au pod NGINX principal. Créez un autre pod de test et attachez une session de terminal :
 
 ```console
-kubectl run --rm -it --image=alpine network-policy --namespace development --generator=run-pod/v1
+kubectl run --rm -it --image=alpine network-policy --namespace development
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour voir si vous pouvez accéder à la page web NGINX par défaut. La stratégie réseau bloque le trafic entrant, de sorte que la page ne peut pas être chargée, comme indiqué dans l’exemple suivant :
@@ -340,7 +340,7 @@ kubectl label namespace/production purpose=production
 Planifiez un pod de test dans l’espace de noms *production* qui est étiqueté en tant que *app=webapp,role=frontend*. Attachez une session de terminal :
 
 ```console
-kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace production --generator=run-pod/v1
+kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace production
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour vérifier que vous pouvez accéder à la page web NGINX par défaut :
@@ -404,7 +404,7 @@ kubectl apply -f backend-policy.yaml
 Planifiez un autre pod dans l’espace de noms *production* et attachez une session de terminal :
 
 ```console
-kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace production --generator=run-pod/v1
+kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace production
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour vérifier que la stratégie réseau refuse désormais le trafic :
@@ -426,7 +426,7 @@ exit
 En maintenant le refus sur le trafic provenant de l’espace de noms *production*, replanifiez un pod de test dans l’espace de noms *development* et attachez une session de terminal :
 
 ```console
-kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace development --generator=run-pod/v1
+kubectl run --rm -it frontend --image=alpine --labels app=webapp,role=frontend --namespace development
 ```
 
 À l’invite de l’interpréteur de commandes, utilisez `wget` pour vérifier que la stratégie réseau autorise le trafic :
@@ -474,9 +474,9 @@ Pour plus d’informations sur les stratégies, consultez l’article [Kubernete
 [policy-rules]: https://kubernetes.io/docs/concepts/services-networking/network-policies/#behavior-of-to-and-from-selectors
 [aks-github]: https://github.com/azure/aks/issues
 [tigera]: https://www.tigera.io/
-[calicoctl]: https://docs.projectcalico.org/v3.9/reference/calicoctl/
+[calicoctl]: https://docs.projectcalico.org/reference/calicoctl/
 [calico-support]: https://www.tigera.io/tigera-products/calico/
-[calico-logs]: https://docs.projectcalico.org/v3.9/maintenance/component-logs
+[calico-logs]: https://docs.projectcalico.org/maintenance/troubleshoot/component-logs
 [calico-aks-cleanup]: https://github.com/Azure/aks-engine/blob/master/docs/topics/calico-3.3.1-cleanup-after-upgrade.yaml
 
 <!-- LINKS - internal -->

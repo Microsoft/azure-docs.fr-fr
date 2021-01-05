@@ -5,14 +5,17 @@ ms.date: 12/03/2019
 ms.topic: conceptual
 description: Découvrez comment utiliser des secrets Kubernetes au moment de l’exécution ou de la génération quand vous développez des applications avec Azure Dev Spaces
 keywords: Docker, Kubernetes, Azure, AKS, Azure Container Service, conteneurs
-ms.openlocfilehash: d9dd0de348612bbb3baf5fb351c1c9af1c228c1f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 8791480f420dfd76d5291ce82e8ebf7412a41326
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75438464"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91972966"
 ---
 # <a name="how-to-manage-secrets-when-working-with-an-azure-dev-space"></a>Guide pratique pour gérer les secrets en utilisant un espace Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Vos services peuvent exiger certains mots de passe, chaînes de connexion et autres secrets, comme c’est le cas avec les bases de données ou d’autres services Azure sécurisés. En définissant les valeurs de ces secrets dans des fichiers de configuration, vous pouvez les rendre accessibles dans votre code en tant que variables d’environnement.  Ces fichiers de configuration doivent être traités avec soin pour éviter de compromettre la sécurité des secrets.
 

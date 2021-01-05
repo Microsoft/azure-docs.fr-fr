@@ -4,13 +4,13 @@ titleSuffix: Azure Kubernetes Service
 description: Découvrez comment créer et utiliser une adresse IP statique avec l’équilibreur de charge d’Azure Kubernetes Service (AKS).
 services: container-service
 ms.topic: article
-ms.date: 03/09/2020
-ms.openlocfilehash: 5051232f29ad51d9fee893a4a660fc81f6e60d77
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.date: 11/14/2020
+ms.openlocfilehash: 22fd099633556fa9ddce575c2ac238b4950667cb
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80886736"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94651887"
 ---
 # <a name="use-a-static-public-ip-address-and-dns-label-with-the-azure-kubernetes-service-aks-load-balancer"></a>Utiliser une adresse IP publique statique et une étiquette DNS avec l’équilibrage de charge d’Azure Kubernetes Service (AKS)
 
@@ -22,7 +22,7 @@ Cet article vous montre comment créer une adresse IP publique statique et l’a
 
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
-Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 Cet article traite de l’utilisation d’une adresse IP SKU *standard* avec un équilibreur de charge SKU *standard*. Pour plus d’informations, consultez [Types d’adresses IP et méthodes d’allocation dans Azure][ip-sku].
 
@@ -73,6 +73,9 @@ az role assignment create \
 ```
 
 Vous pouvez également utiliser l’identité managée affectée par le système pour les autorisations au lieu du principal du service. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md).
+
+> [!IMPORTANT]
+> Si vous avez personnalisé votre adresse IP sortante, assurez-vous que l’identité de votre cluster dispose des autorisations d’accès tant à l’adresse IP publique sortante qu’à cette adresse IP publique entrante.
 
 Pour créer un service *LoadBalancer* avec l’adresse IP publique statique, ajoutez la propriété `loadBalancerIP` et la valeur de l’adresse IP publique statique au manifeste YAML. Créez un fichier nommé `load-balancer-service.yaml` et copiez-y le YAML suivant. Spécifiez votre propre adresse IP publique créée à l’étape précédente. L’exemple suivant définit aussi l’annotation pour le groupe de ressources nommé *myResourceGroup*. Indiquez le nom de votre propre groupe de ressources.
 
@@ -173,4 +176,4 @@ Pour plus de contrôle du trafic réseau vers vos applications, vous pouvez plut
 [aks-quickstart-cli]: kubernetes-walkthrough.md
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli
-[ip-sku]: ../virtual-network/virtual-network-ip-addresses-overview-arm.md#sku
+[ip-sku]: ../virtual-network/public-ip-addresses.md#sku

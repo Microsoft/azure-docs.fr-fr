@@ -3,17 +3,17 @@ title: Créer une application .NET sur Service Fabric dans Azure
 description: Dans ce tutoriel, vous découvrez comment créer une application avec un service frontal ASP.NET Core et un service principal fiable avec état, et déployer l’application sur un cluster.
 ms.topic: tutorial
 ms.date: 07/10/2019
-ms.custom: mvc
-ms.openlocfilehash: cbfae89ffa446ca3915129fd9add2701ac21d837
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-js, devx-track-csharp
+ms.openlocfilehash: a783f5338dbc7ce0832b346492490525da332e39
+ms.sourcegitcommit: 192f9233ba42e3cdda2794f4307e6620adba3ff2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75465476"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96297115"
 ---
-# <a name="tutorial-create-and-deploy-an-application-with-an-aspnet-core-web-api-front-end-service-and-a-stateful-back-end-service"></a>Tutoriel : créer et déployer une application avec un service frontal API Web ASP.NET Core et un service principal avec état
+# <a name="tutorial-create-and-deploy-an-application-with-an-aspnet-core-web-api-front-end-service-and-a-stateful-back-end-service"></a>Tutoriel : Créer et déployer une application avec un service frontal API Web ASP.NET Core et un service principal avec état
 
-Ce tutoriel est la première partie d’une série d’étapes.  Vous allez découvrir comment créer une application Azure Service Fabric avec un service frontal API Web ASP.NET Core et un service principal avec état pour stocker vos données. Lorsque vous avez terminé, vous disposez d’une application de vote avec un composant web frontal ASP.NET Core qui enregistre les résultats de vote dans un service principal avec état dans le cluster. Si vous ne souhaitez pas créer l’application de vote manuellement, vous pouvez [télécharger le code source](https://github.com/Azure-Samples/service-fabric-dotnet-quickstart/) pour obtenir l’application terminée et passer directement au [Guide de l’exemple d’application de vote](#walkthrough_anchor).  Si vous préférez, vous pouvez également regarder une [vidéo de procédure pas-à-pas](https://channel9.msdn.com/Events/Connect/2017/E100) de ce tutoriel.
+Ce tutoriel est la première partie d’une série d’étapes.  Vous allez découvrir comment créer une application Azure Service Fabric avec un service frontal API Web ASP.NET Core et un service principal avec état pour stocker vos données. Lorsque vous avez terminé, vous disposez d’une application de vote avec un composant web frontal ASP.NET Core qui enregistre les résultats de vote dans un service principal avec état dans le cluster. Cette série de tutoriels demande un ordinateur de développement Windows. Si vous ne souhaitez pas créer l’application de vote manuellement, vous pouvez [télécharger le code source](https://github.com/Azure-Samples/service-fabric-dotnet-quickstart/) pour obtenir l’application terminée et passer directement au [Guide de l’exemple d’application de vote](#walkthrough_anchor).  Si vous préférez, vous pouvez également regarder une [vidéo de procédure pas-à-pas](https://channel9.msdn.com/Events/Connect/2017/E100) de ce tutoriel.
 
 ![API front-end AngularJS+ASP.NET - Connexion à un service back-end avec état dans Service Fabric](./media/service-fabric-tutorial-create-dotnet-app/application-diagram.png)
 
@@ -32,7 +32,7 @@ Cette série de tutoriels vous montre comment effectuer les opérations suivante
 > * [Configurer CI/CD à l’aide d’Azure Pipelines](service-fabric-tutorial-deploy-app-with-cicd-vsts.md)
 > * [Configurer la surveillance et les diagnostics pour l’application](service-fabric-tutorial-monitoring-aspnet.md)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer ce tutoriel :
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
@@ -41,7 +41,7 @@ Avant de commencer ce tutoriel :
 
 ## <a name="create-an-aspnet-web-api-service-as-a-reliable-service"></a>Créer un service API Web ASP.NET en tant que service fiable
 
-Commencez par créer le web frontal de l’application de vote à l’aide d’ASP.NET Core. ASP.NET Core est une infrastructure légère de développement web inter-plateformes, que vous pouvez utiliser pour créer des API web et d’interfaces utilisateur web modernes. Pour bien comprendre comment ASP.NET Core s’intègre avec Service Fabric, il est vivement recommandé de lire l’article [ASP.NET Core dans le modèle Reliable Services de Service Fabric](service-fabric-reliable-services-communication-aspnetcore.md). Pour l’instant, vous pouvez suivre ce tutoriel pour démarrer rapidement. Pour en savoir plus sur ASP.NET Core, consultez la [Documentation d’ASP.NET Core](https://docs.microsoft.com/aspnet/core/).
+Commencez par créer le web frontal de l’application de vote à l’aide d’ASP.NET Core. ASP.NET Core est une infrastructure légère de développement web inter-plateformes, que vous pouvez utiliser pour créer des API web et d’interfaces utilisateur web modernes. Pour bien comprendre comment ASP.NET Core s’intègre avec Service Fabric, il est vivement recommandé de lire l’article [ASP.NET Core dans le modèle Reliable Services de Service Fabric](service-fabric-reliable-services-communication-aspnetcore.md). Pour l’instant, vous pouvez suivre ce tutoriel pour démarrer rapidement. Pour en savoir plus sur ASP.NET Core, consultez la [Documentation d’ASP.NET Core](/aspnet/core/).
 
 1. Lancez Visual Studio en tant qu’**administrateur**.
 
@@ -147,17 +147,17 @@ Ouvrez le fichier **Views/Home/Index.cshtml**. Il s’agit de la vue spécifique
                 </div>
                 <div class="row top-buffer" ng-repeat="vote in votes.data">
                     <div class="col-xs-8">
-                        <button class="btn btn-success text-left btn-block" ng-click="add(vote.key)">
+                        <button class="btn btn-success text-left btn-block" ng-click="add(vote.Key)">
                             <span class="pull-left">
-                                {{vote.key}}
+                                {{vote.Key}}
                             </span>
                             <span class="badge pull-right">
-                                {{vote.value}} Votes
+                                {{vote.Value}} Votes
                             </span>
                         </button>
                     </div>
                     <div class="col-xs-4">
-                        <button class="btn btn-danger pull-right btn-block" ng-click="remove(vote.key)">
+                        <button class="btn btn-danger pull-right btn-block" ng-click="remove(vote.Key)">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             Remove
                         </button>

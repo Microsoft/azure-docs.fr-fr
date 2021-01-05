@@ -4,12 +4,12 @@ ms.service: databox
 ms.topic: include
 ms.date: 04/15/2019
 ms.author: alkohli
-ms.openlocfilehash: e02c0b86cd542b3ea12914e35a6577cf4e9b43d8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9ac7966538102273b91d6b7f15b90e18ceedd421
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177514"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83779936"
 ---
 Vous pouvez également voir les métriques pour superviser les performances de l’appareil et, dans certains cas, pour résoudre les problèmes liés à l’appareil.
 
@@ -27,25 +27,7 @@ Effectuez les étapes suivantes dans le portail Azure pour créer un graphique d
 
     ![Choisir une autre ressource](media/data-box-edge-gateway-view-metrics/view-metrics-3.png)
 
-3. Dans la liste déroulante, sélectionnez une métrique pour superviser votre appareil. Les métriques peuvent être des **métriques de capacité** ou des **métriques de transaction**. Les métriques de capacité sont liées à la capacité de l’appareil. Les métriques de transaction sont liées aux opérations de lecture et d’écriture dans Stockage Azure.
-
-    |Métriques de capacité                     |Description  |
-    |-------------------------------------|-------------|
-    |**Capacité disponible**               | Fait référence à la taille des données qui peuvent être écrites sur l’appareil. En d’autres termes, il s’agit de la capacité qui peut être rendue disponible sur l’appareil. <br></br>Vous pouvez libérer la capacité de l’appareil en supprimant la copie locale des fichiers dont il existe une copie sur l’appareil ainsi que sur le cloud.        |
-    |**Capacité totale**                   | Fait référence au nombre total d’octets sur l’appareil disponibles pour l’écriture de données. On parle également de taille totale du cache local. <br></br> Vous pouvez désormais augmenter la capacité d’un appareil virtuel existant en ajoutant un disque de données. Ajoutez un disque de données par le biais de la gestion de l’hyperviseur pour la machine virtuelle, puis redémarrez celle-ci. Le pool de stockage local de l’appareil de passerelle se développe de manière à accueillir le disque de données nouvellement ajouté. <br></br>Pour plus d’informations, consultez [Ajouter un disque dur pour la machine virtuelle Hyper-V](https://www.youtube.com/watch?v=EWdqUw9tTe4). |
-    
-    |Métriques de transaction              | Description         |
-    |-------------------------------------|---------|
-    |**Octets cloud chargés (appareil)**    | Somme de tous les octets chargés sur tous les partages de votre appareil        |
-    |**Octets cloud chargés (partage)**     | Octets chargés par partage. Il peut s’agir des ordinateurs suivants : <br></br> Moyenne, à savoir (somme de tous les octets chargés par partage/nombre de partages)  <br></br>Maximum, à savoir le nombre maximal d’octets chargés à partir d’un partage <br></br>Minimum, à savoir le nombre minimal d’octets chargés à partir d’un partage      |
-    |**Débit de téléchargement cloud (partage)**| Octets téléchargés par partage. Il peut s’agir des ordinateurs suivants : <br></br> Moyenne, à savoir (somme de tous les octets lus ou téléchargés sur un partage/nombre de partages) <br></br> Maximum, à savoir le nombre maximal d’octets téléchargés à partir d’un partage<br></br> Minimum, à savoir le nombre minimal d’octets téléchargés à partir d’un partage  |
-    |**Débit de lecture cloud**            | Somme de tous les octets lus à partir du cloud sur tous les partages de votre appareil     |
-    |**Débit de chargement cloud**          | Somme de tous les octets écrits dans le cloud sur tous les partages de votre appareil     |
-    |**Débit de chargement cloud (partage)**  | Somme de tous les octets écrits dans le cloud à partir d’un partage/nombre de partages, exprimée en valeur moyenne, maximale ou minimale par partage      |
-    |**Débit de lecture (réseau)**           | Inclut le débit réseau système pour tous les octets lus à partir du cloud. Cette vue peut inclure des données qui ne sont pas limitées aux partages. <br></br>En divisant, vous affichez le trafic sur toutes les cartes réseau de l’appareil. Cela inclut les cartes qui ne sont pas connectées ou activées.      |
-    |**Débit d’écriture (réseau)**       | Inclut le débit réseau système pour tous les octets écrits dans le cloud. Cette vue peut inclure des données qui ne sont pas limitées aux partages. <br></br>En divisant, vous affichez le trafic sur toutes les cartes réseau de l’appareil. Cela inclut les cartes qui ne sont pas connectées ou activées.          |
-    |**Computing en périphérie - Utilisation de la mémoire**      | Cette métrique n’étant pas applicable à Data Box Gateway, elle n’est pas renseignée.          |
-    |**Computing en périphérie - Pourcentage du processeur**    | Cette métrique n’étant pas applicable à Data Box Gateway, elle n’est pas renseignée.         |
+3. Dans la liste déroulante, sélectionnez une métrique pour superviser votre appareil. Pour obtenir la liste complète de ces métriques, consultez [Métriques sur votre appareil](#metrics-on-your-device).
 
 4. Si une métrique est sélectionnée dans la liste déroulante, l’agrégation peut également être définie. L’agrégation fait référence à la valeur réelle agrégée sur un intervalle de temps spécifié. Les valeurs d’agrégation peuvent être les valeurs moyenne, minimale ou maximale. Sélectionnez Moyenne, Maximum ou Minimum comme agrégation.
 

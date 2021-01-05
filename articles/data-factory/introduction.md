@@ -3,18 +3,18 @@ title: Présentation d’Azure Data Factory
 description: Découvrez Azure Data Factory, un service d’intégration de données cloud qui gère et automatise le déplacement et la transformation des données.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: overview
 ms.date: 09/30/2019
-ms.openlocfilehash: 327aadbc2996e91ef0f7639da86a647ddd42247c
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: d8b6a852ff0aeb287b12d63bfa689a38a56d418f
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81410940"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96485011"
 ---
 # <a name="what-is-azure-data-factory"></a>qu'est-ce qu'Azure Data Factory ?
 
@@ -22,17 +22,17 @@ ms.locfileid: "81410940"
 
 Dans le monde des Big Data, les données brutes et désorganisées sont souvent enregistrées dans des systèmes de stockage relationnels, non-relationnels et autres systèmes. Toutefois, lorsqu’elles sont isolées, les données brutes n’ont pas le contexte ou la signification appropriés pour fournir des informations significatives aux analystes, aux scientifiques des données ou aux décideurs en entreprise. 
 
-Les Big Data requièrent un service qui permet d’orchestrer et d’opérationnaliser les processus pour affiner ces gigantesques magasins de données brutes pour les transformer en informations exploitables. Azure Data Factory est un service cloud géré créé pour ces projets complexes d’extraction, de transformation et de chargement (ETL), d’extraction, de chargement et de transformation (ELT) et d’intégration des données.
+Les Big Data nécessitent un service pouvant orchestrer et opérationnaliser les processus qui permettent d’affiner les données brutes de ces gigantesques magasins pour les transformer en insights métier exploitables. Azure Data Factory est un service cloud géré créé pour ces projets complexes d’extraction, de transformation et de chargement (ETL), d’extraction, de chargement et de transformation (ELT) et d’intégration des données.
 
 Prenons l’exemple d’une société d’édition de jeux qui rassemble plusieurs pétaoctets de journaux d’activité sur les jeux générés par les jeux dans le cloud. La société souhaite analyser ces journaux d’activité pour obtenir des informations détaillées sur les préférences des clients, les données démographiques et le comportement d’utilisation. Elle souhaite également identifier les opportunités de vente incitative et de ventes croisées, développer de nouvelles fonctionnalités attrayantes, accroître son activité et fournir une meilleure expérience à ses clients.
 
 Pour analyser ces journaux d’activité, l’entreprise doit utiliser des données de référence comme des informations sur le client, des informations sur les jeux et des informations sur la campagne marketing qui sont contenues dans un magasin de données local. L’entreprise souhaite utiliser ces données issues du magasin de données local et les combiner avec d’autres données de journal dont elle dispose dans un magasin de données dans le cloud. 
 
-Pour extraire des informations, elle souhaite traiter les données combinées au moyen d’un cluster Spark dans le cloud (Azure HDInsight) et publier les données transformées dans un entrepôt de données cloud, tel qu’Azure SQL Data Warehouse, afin de pouvoir créer facilement un rapport à partir de celles-ci. Ils souhaitent automatiser ce flux de travail, et le surveiller et le gérer sur une base quotidienne. Ils veulent également l’exécuter lorsque les fichiers arrivent dans un conteneur de magasin d’objets blob.
+Pour extraire des informations, elle souhaite traiter les données combinées au moyen d’un cluster Spark dans le cloud (Azure HDInsight) et publier les données transformées dans un entrepôt de données cloud, tel qu’Azure Synapse Analytics, afin de pouvoir créer facilement un rapport à partir de celles-ci. Ils souhaitent automatiser ce flux de travail, et le surveiller et le gérer sur une base quotidienne. Ils veulent également l’exécuter lorsque les fichiers arrivent dans un conteneur de magasin d’objets blob.
 
 Azure Data Factory est la plateforme qui résout les scénarios de données de ce type. Il s’agit d’un *service d’ETL et d’intégration de données basé sur le cloud, qui vous permet de créer des workflows orientés données pour l’orchestration des déplacements de données et pour la transformation des données à grande échelle*. À l’aide d’Azure Data Factory, vous pouvez créer et planifier des flux de travail pilotés par les données (appelés pipelines) qui peuvent ingérer des données provenant de différents magasins de données. Vous pouvez créer des processus ETL complexes qui transforment les données visuellement avec des flux de données ou en utilisant des services de calcul comme Azure HDInsight Hadoop, Azure Databricks et Azure SQL Database. 
 
-En outre, vous pouvez publier vos données transformées vers des magasins de données, comme Azure SQL Data Warehouse, pour que des applications décisionnelles puissent les consommer. Enfin, via Azure Data Factory, les données brutes peuvent être organisées en magasins de données et lacs de données pertinents en vue d’améliorer les prises de décisions.
+De plus, vous pouvez publier vos données transformées sur des magasins de données comme Azure Synapse Analytics pour que des applications décisionnelles (BI) puissent les utiliser. Enfin, via Azure Data Factory, les données brutes peuvent être organisées en magasins de données et lacs de données pertinents en vue d’améliorer les prises de décisions.
 
 ![Vue de niveau supérieur de Data Factory](media/data-flow/overview.png)
 
@@ -62,7 +62,15 @@ Data Factory offre une prise en charge complète de l’intégration continue/li
 Une fois que vous avez créé et déployé votre pipeline d’intégration de données afin de bénéficier de la valeur commerciale fournie par les données affinées, surveillez les activités planifiées et les pipelines pour connaître les taux de réussite et d’échec. Azure Data Factory intègre une prise en charge de la supervision des pipelines par le biais d’Azure Monitor, une API, PowerShell, des journaux Azure Monitor et les panneaux de contrôle d’intégrité du portail Azure.
 
 ## <a name="top-level-concepts"></a>Concepts de niveau supérieur
-Un abonnement Azure peut contenir une ou plusieurs instances Azure Data Factory (ou fabriques de données). Azure Data Factory s’articule autour de quatre composants clés. Ces composants fonctionnent ensemble et vous dotent de la plateforme sur laquelle composer des flux de travail orientés données constitués d’étapes de déplacement et de transformation des données.
+Un abonnement Azure peut contenir une ou plusieurs instances Azure Data Factory (ou fabriques de données). Azure Data Factory s’articule autour des composants clés ci-dessous.
+- Pipelines
+- Activités
+- Groupes de données
+- Services liés
+- Flux de données
+- Runtimes d’intégration
+
+Ces composants fonctionnent ensemble et vous dotent de la plateforme sur laquelle composer des flux de travail orientés données constitués d’étapes de déplacement et de transformation des données.
 
 ### <a name="pipeline"></a>Pipeline
 Une fabrique de données peut avoir un ou plusieurs pipelines. Un pipeline est un regroupement logique des activités nécessaires pour effectuer une unité de travail. Ensemble, les activités d’un pipeline effectuent une tâche. Par exemple, un pipeline peut contenir un groupe d’activités qui ingère des données à partir d’un objet Blob Azure, puis exécute une requête Hive sur un cluster HDInsight pour partitionner les données. 
@@ -83,7 +91,7 @@ Les services liés ressemblent à des chaînes de connexion. Ils définissent le
 
 Data Factory fait appel aux services liés pour deux raisons :
 
-- Pour représenter un **magasin de données** qui inclut, sans s’y limiter, une base de données SQL Server, une base de données Oracle, un partage de fichiers locaux ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des banques de données prises en charge, consultez l’article sur l’[activité de copie](copy-activity-overview.md).
+- Pour représenter un **magasin de données** qui inclut, sans s’y limiter, une base de données SQL Server, une base de données Oracle, un partage de fichiers ou un compte de stockage d’objets blob Azure. Pour obtenir la liste des banques de données prises en charge, consultez l’article sur l’[activité de copie](copy-activity-overview.md).
 
 - Pour représenter une **ressource de calcul** qui peut héberger l’exécution d’une activité. Par exemple, l’activité HDInsightHive s’exécute sur un cluster HDInsight Hadoop. Pour obtenir la liste des activités de transformation et des environnements Compute pris en charge, consultez l’article sur la [transformation des données](transform-data.md).
 

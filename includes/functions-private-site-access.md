@@ -4,19 +4,17 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 05/06/2020
 ms.author: glenga
-ms.openlocfilehash: 5e0cff7bde6e80a776d694820ca7b69dafa7c0d9
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 2d66e7f497f85141de172c59b67676e1bb93955e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83648821"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020984"
 ---
-L’accès aux sites privés fait référence au fait de rendre votre application accessible uniquement à partir d’un réseau privé, par exemple, à partir d’un réseau virtuel Azure.
+Le [point de terminaison privé Azure](../articles/private-link/private-endpoint-overview.md) est une interface réseau qui vous connecte de manière privée et sécurisée à un service s’appuyant sur Azure Private Link.  Le point de terminaison privé utilise une adresse IP privée de votre réseau virtuel pour apporter le service à votre réseau virtuel de façon effective.
 
-* L’accès aux sites privés est disponible dans les plans [Premium](../articles/azure-functions/functions-premium-plan.md), [Consommation](../articles/azure-functions/functions-scale.md#consumption-plan) et [App Service](../articles/azure-functions/functions-scale.md#app-service-plan) quand des points de terminaison de service sont configurés.
-    * Les points de terminaison de service peuvent être configurés pour chaque application, sous **Fonctionnalités de la plateforme** > **Mise en réseau** > **Configurer des restrictions d’accès** > **Ajouter une règle**. Les réseaux virtuels peuvent maintenant être sélectionnés comme un type de règle.
-    * Pour plus d’informations, consultez [Points de terminaison de service de réseau virtuel](../articles/virtual-network/virtual-network-service-endpoints-overview.md).
-    * N'oubliez pas qu'avec les points de terminaison de service, votre fonction dispose toujours d'un accès sortant complet à Internet, même si l'intégration au réseau virtuel est configurée.
-* L'accès aux sites privés est également disponible via une instance d'Azure App Service Environment configurée avec un équilibreur de charge interne (ILB). Pour plus d’informations, consultez [Créer et utiliser un équilibreur de charge interne avec un Azure App Service Environment](../articles/app-service/environment/create-ilb-ase.md).
+Vous pouvez utiliser un point de terminaison privé pour vos fonctions hébergées dans les plans [Premium](../articles/azure-functions/functions-premium-plan.md) et [App Service](../articles/azure-functions/functions-scale.md#app-service-plan).
 
-Pour apprendre à configurer l’accès privé aux site, consultez [Établir l’accès privé aux sites avec Azure Functions](../articles/azure-functions/functions-create-private-site-access.md).
+Lors de la création d’une connexion de point de terminaison privé entrant pour les fonctions, vous aurez également besoin d’un enregistrement DNS pour résoudre l’adresse privée.  Par défaut, un enregistrement DNS privé est créé pour vous lors de la création d’un point de terminaison privé à l’aide du portail Azure.
+
+Pour plus d’informations, consultez [Utilisation de points de terminaison privés pour Web Apps](../articles/app-service/networking/private-endpoint.md).

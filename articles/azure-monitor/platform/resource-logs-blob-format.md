@@ -7,17 +7,17 @@ ms.topic: conceptual
 ms.date: 07/06/2018
 ms.author: johnkem
 ms.subservice: logs
-ms.openlocfilehash: 001dfbc78c0027249143e933684523d47af383d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 45b18352d88877a5d611f203d87da83fd0d58c6b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79096780"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87077125"
 ---
 # <a name="prepare-for-format-change-to-azure-monitor-platform-logs-archived-to-a-storage-account"></a>Préparation à la modification du format dans les journaux de plateforme Azure Monitor archivés dans un compte de stockage
 
 > [!WARNING]
-> Si vous envoyez des [journaux ou des métriques d’activité des ressources Azure à un compte de stockage via les paramètres de ressources](resource-logs-collect-storage.md) ou [des journaux d’activité à un compte de stockage via les profils de journaux d’activité](resource-logs-collect-storage.md), le format des données dans le compte de stockage a été modifié en lignes JSON le 1er novembre 2018. Les instructions ci-dessous détaillent les conséquences liées à ce changement et comment mettre à jour vos outils pour qu’ils gèrent ce nouveau format.
+> Si vous envoyez des [journaux ou des métriques d’activité des ressources Azure à un compte de stockage via les paramètres de ressources](./resource-logs.md#send-to-azure-storage) ou [des journaux d’activité à un compte de stockage via les profils de journaux d’activité](./resource-logs.md#send-to-azure-storage), le format des données dans le compte de stockage a été modifié en lignes JSON le 1er novembre 2018. Les instructions ci-dessous détaillent les conséquences liées à ce changement et comment mettre à jour vos outils pour qu’ils gèrent ce nouveau format.
 >
 
 ## <a name="what-changed"></a>Ce qui a changé
@@ -29,9 +29,9 @@ Azure Monitor offre une fonctionnalité qui vous permet d’envoyer des journaux
 * La définition d’un paramètre de diagnostic avant le 1er novembre a continué d’émettre des données dans le format actuel jusqu’au 1er novembre.
 * Cette modification s’est effectuée immédiatement sur toutes les régions cloud publiques. La modification n’aura pas lieu dans Microsoft Azure géré par 21Vianet, Azure Allemagne ou Azure Government pour le moment.
 * Elle affectera les types de données suivants :
-  * [Journaux d’activité des ressources Azure](archive-diagnostic-logs.md) ([voir la liste des ressources ici](diagnostic-logs-schema.md))
+  * [Journaux d’activité des ressources Azure](./resource-logs.md#send-to-azure-storage) ([voir la liste des ressources ici](./resource-logs-schema.md))
   * [Métriques de ressources Azure en cours d’exportation par les paramètres de diagnostic](diagnostic-settings.md)
-  * [Données des journaux d’activité Azure en cours d’exportation par les profils de journaux](activity-log-collect.md)
+  * [Données des journaux d’activité Azure en cours d’exportation par les profils de journaux](./activity-log.md)
 * Cette modification n’affecte pas :
   * Journaux de flux de réseau
   * Les journaux du service Azure ne sont pas encore disponibles via Azure Monitor (par exemple, les journaux de ressources Azure App Service ou les journaux d’analytique de stockage)
@@ -123,7 +123,7 @@ Le nouveau format utilise des [lignes JSON](http://jsonlines.org/), où chaque �
 {"time": "2016-01-05T01:33:56.5264523Z","resourceId": "/SUBSCRIPTIONS/361DA5D4-A47A-4C79-AFDD-XXXXXXXXXXXX/RESOURCEGROUPS/CONTOSOGROUP/PROVIDERS/MICROSOFT.KEYVAULT/VAULTS/CONTOSOKEYVAULT","operationName": "VaultGet","operationVersion": "2015-06-01","category": "AuditEvent","resultType": "Success","resultSignature": "OK","resultDescription": "","durationMs": "83","callerIpAddress": "104.40.82.76","correlationId": "","identity": {"claim": {"http://schemas.microsoft.com/identity/claims/objectidentifier": "d9da5048-2737-4770-bd64-XXXXXXXXXXXX","http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "live.com#username@outlook.com","appid": "1950a258-227b-4e31-a9cf-XXXXXXXXXXXX"}},"properties": {"clientInfo": "azure-resource-manager/2.0","requestUri": "https://control-prod-wus.vaultcore.azure.net/subscriptions/361da5d4-a47a-4c79-afdd-XXXXXXXXXXXX/resourcegroups/contosoresourcegroup/providers/Microsoft.KeyVault/vaults/contosokeyvault?api-version=2015-06-01","id": "https://contosokeyvault.vault.azure.net/","httpStatusCode": 200}}
 ```
 
-Ce nouveau format permet à Azure Monitor d’envoyer (push) des fichiers journaux via des [objets blob d’ajout](https://docs.microsoft.com/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-append-blobs), plus efficaces pour des ajouts en continu de nouvelles données d’événement.
+Ce nouveau format permet à Azure Monitor d’envoyer (push) des fichiers journaux via des [objets blob d’ajout](/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs#about-append-blobs), plus efficaces pour des ajouts en continu de nouvelles données d’événement.
 
 ## <a name="how-to-update"></a>Comment effectuer la mise à jour
 
@@ -133,6 +133,5 @@ Les outils personnalisés doivent être mis à jour pour gérer le format actuel
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur [l’archivage des journaux de ressources relatifs aux ressources dans un compte de stockage](./../../azure-monitor/platform/archive-diagnostic-logs.md)
-* En savoir plus sur [l’archivage des données de journal d’activité dans un compte de stockage](./../../azure-monitor/platform/archive-activity-log.md)
-
+* En savoir plus sur [l’archivage des journaux de ressources relatifs aux ressources dans un compte de stockage](./resource-logs.md#send-to-azure-storage)
+* En savoir plus sur [l’archivage des données de journal d’activité dans un compte de stockage](./activity-log.md#legacy-collection-methods)

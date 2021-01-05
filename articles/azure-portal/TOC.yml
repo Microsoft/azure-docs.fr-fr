@@ -8,36 +8,48 @@
       href: azure-portal-quickstart-center.md
     - name: Navigateurs et appareils pris en charge
       href: azure-portal-supported-browsers-devices.md
+- name: Démarrages rapides
+  items:
+    - name: Créer une machine virtuelle dans le portail
+      href: ../virtual-machines/windows/quick-create-portal.md?toc=/azure/azure-portal/toc.json&bc=/azure/azure-portal/breadcrumb/toc.json
+    - name: Création d’un tableau de bord
+      items:
+        - name: Azure CLI
+          href: quickstart-portal-dashboard-azure-cli.md
+        - name: Azure PowerShell
+          href: quickstart-portal-dashboard-powershell.md
+        - name: Modèle ARM
+          displayName: Resource Manager
+          href: quick-create-template.md
 - name: Concepts
   items:
-    - name: Partager des tableaux de bord à l’aide du contrôle d’accès en fonction du rôle
+    - name: Partager des tableaux de bord avec le contrôle d’accès en fonction du rôle
       href: azure-portal-dashboard-share-access.md
     - name: Créer par programmation des tableaux de bord Azure
       href: azure-portal-dashboards-create-programmatically.md
+      displayName: 'Azure CLI, az portal dashboard, az portal'
 - name: Guides pratiques
   items:
-    - name: Définir vos préférences relatives au portail Azure
+    - name: Gérer les paramètres et les préférences du portail Azure
       href: set-preferences.md
-    - name: Définir des paramètres de délai d’expiration inactif pour tous les utilisateurs
-      href: admin-timeout.md
-    - name: Activer le contraste élevé ou modifier le thème
-      href: azure-portal-change-theme-high-contrast.md
     - name: 'Ajouter, supprimer et trier des favoris'
       href: azure-portal-add-remove-sort-favorites.md
-    - name: Créer et partager des tableaux de bord Azure
-      href: azure-portal-dashboards.md
-    - name: Utiliser une vignette Markdown personnalisée
-      href: azure-portal-markdown-tile.md
-    - name: Exporter ou supprimer des paramètres utilisateur
-      href: azure-portal-export-delete-settings.md
+    - name: Afficher et filtrer les informations sur les ressources
+      href: manage-filter-resource-views.md
+    - name: Créer des tableaux de bord Azure
+      items:
+        - name: Créer et partager des tableaux de bord Azure
+          href: azure-portal-dashboards.md
+        - name: Utiliser une vignette Markdown personnalisée
+          href: azure-portal-markdown-tile.md
     - name: Série de vidéos de procédures sur le portail Azure
       href: azure-portal-video-series.md
     - name: Créer et gérer des demandes de support
       items:
         - name: Créer une demande de support Azure
           href: supportability/how-to-create-azure-support-request.md
-        - name: Charger des fichiers pour une demande de support
-          href: supportability/how-to-use-file-uploader.md
+        - name: Gérer une demande de support Azure
+          href: supportability/how-to-manage-azure-support-request.md
         - name: Demander des augmentations de quota
           items:
             - name: Augmenter les limites des processeurs virtuels de calcul
@@ -70,6 +82,11 @@
       href: azure-portal-safelist-urls.md
     - name: Structure des tableaux de bord Azure
       href: azure-portal-dashboards-structure.md
+    - name: Azure CLI
+      href: /cli/azure/ext/portal/portal
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Feuille de route Azure

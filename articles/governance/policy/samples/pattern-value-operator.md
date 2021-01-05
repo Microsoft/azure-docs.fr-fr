@@ -1,14 +1,14 @@
 ---
 title: 'Modèle : Opérateur value dans une définition de stratégie'
 description: Ce modèle Azure Policy fournit un exemple d’utilisation de l’opérateur value dans une définition de stratégie.
-ms.date: 01/31/2020
+ms.date: 10/14/2020
 ms.topic: sample
-ms.openlocfilehash: ace7b7cd4a765cdb8c7aa764b52b180c60508ab2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 8392c69ff3d63ff4ecad2a26d5d914b4766147b8
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77170147"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92072881"
 ---
 # <a name="azure-policy-pattern-the-value-operator"></a>Modèle Azure Policy : Opérateur value
 

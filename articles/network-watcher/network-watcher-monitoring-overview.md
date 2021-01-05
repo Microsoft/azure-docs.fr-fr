@@ -14,12 +14,12 @@ ms.workload: infrastructure-services
 ms.date: 04/24/2018
 ms.author: damendo
 ms.custom: mvc
-ms.openlocfilehash: 81621a2b63eec804aaa7c74e1d77b06ef1adb79a
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: e4782bf09b8c27132417f6021927408e18755104
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76844987"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96494016"
 ---
 # <a name="what-is-azure-network-watcher"></a>Présentation d’Azure Network Watcher
 
@@ -31,7 +31,7 @@ Azure Network Watcher offre des outils permettant d’effectuer un monitoring et
 
 Les points de terminaison peuvent être une autre machine virtuelle, un nom de domaine complet (FQDN), un identificateur Uniform Resource Identifier (URI) ou une adresse IPv4. La fonctionnalité de *contrôle de la connexion* surveille les communications à intervalles réguliers et vous informe des évolutions de l’accessibilité, de la latence et de la topologie de réseau entre la machine virtuelle et le point de terminaison. Prenons l’exemple d’une machine virtuelle de type serveur web qui communique avec une machine virtuelle de type serveur de base de données. Une personne de votre organisation pourrait, à votre insu, appliquer une règle de sécurité réseau ou un itinéraire personnalisé au sous-réseau ou à la machine virtuelle de type serveur web ou serveur de base de données.
 
-Si un point de terminaison devient inaccessible, l’outil de résolution des problèmes de connexion vous en communique la raison. Il peut s’agir d’un problème de résolution de noms DNS, de processeur, de mémoire ou de pare-feu dans le système d’exploitation d’une des machines virtuelles, ou bien d’une erreur de type de tronçon d’un itinéraire personnalisé ou de règle de sécurité de la machine virtuelle ou du sous-réseau de la connexion sortante. Pour plus d’informations, voir [Règles de sécurité](../virtual-network/security-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#security-rules) et [Types de tronçon d’itinéraires](../virtual-network/virtual-networks-udr-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) dans Azure.
+Si un point de terminaison devient inaccessible, l’outil de résolution des problèmes de connexion vous en communique la raison. Il peut s’agir d’un problème de résolution de noms DNS, de processeur, de mémoire ou de pare-feu dans le système d’exploitation d’une des machines virtuelles, ou bien d’une erreur de type de tronçon d’un itinéraire personnalisé ou de règle de sécurité de la machine virtuelle ou du sous-réseau de la connexion sortante. Pour plus d’informations, voir [Règles de sécurité](../virtual-network/network-security-groups-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#security-rules) et [Types de tronçon d’itinéraires](../virtual-network/virtual-networks-udr-overview.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json) dans Azure.
 
 Le contrôle de la connexion indique également la latence minimale, maximale et moyenne observée au fil du temps. Après en avoir pris connaissance, vous trouverez peut-être des moyens de réduire la latence en déplaçant vos ressources Azure dans différentes régions Azure. Découvrez comment déterminer les [latences relatives entre les régions Azure et les fournisseurs de services Internet](#determine-relative-latencies-between-azure-regions-and-internet-service-providers) et comment effectuer le monitoring de la communication entre une machine virtuelle et un point de terminaison avec le [contrôle de la connexion](connection-monitor.md). Si vous préférez tester une connexion à un moment donné, plutôt que d’effectuer le monitoring de la connexion au fil du temps, comme avec le contrôle de la connexion, utilisez la fonctionnalité de [résolution des problèmes de connexion](#connection-troubleshoot).
 

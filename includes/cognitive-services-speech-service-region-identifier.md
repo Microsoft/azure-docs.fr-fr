@@ -2,14 +2,14 @@
 author: wolfma61
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 02/12/2020
+ms.date: 12/10/2020
 ms.author: wolfma
-ms.openlocfilehash: c8e6c11771ae4cd216b3b1e43f3db7924dca81cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 329241c2660ff7828f57fb21daeb6de20caedc43
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77168175"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97504455"
 ---
 | Geography | Région | Identificateur de la région |
 | ----- | ----- | ----- |

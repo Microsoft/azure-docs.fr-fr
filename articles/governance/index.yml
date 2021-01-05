@@ -10,13 +10,13 @@ metadata:
   ms.collection: collection
   author: DCtheGeek
   ms.author: dacoulte
-  ms.date: 05/22/2020
-  ms.openlocfilehash: 2559676a867478b486c70fbb43f176451b91672f
-  ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+  ms.date: 10/20/2020
+  ms.openlocfilehash: c3a70e38b870d11d7a12e438d3a0390c23df20bd
+  ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/25/2020
-  ms.locfileid: "83836020"
+  ms.lasthandoff: 10/21/2020
+  ms.locfileid: "92317732"
 highlightedContent:
   items:
   - title: Vue d’ensemble de la gouvernance
@@ -28,9 +28,9 @@ highlightedContent:
   - title: Gouvernance dans le Framework d’adoption du cloud
     itemType: architecture
     url: /azure/architecture/cloud-adoption/governance
-  - title: Appliquer et superviser les normes d’infrastructure avec Azure Policy
+  - title: Créer une stratégie de gouvernance cloud sur Azure
     itemType: learn
-    url: /learn/modules/intro-to-governance/
+    url: /learn/modules/build-cloud-governance-strategy-azure/
 productDirectory:
   title: Composants et Services
   items:
@@ -113,7 +113,7 @@ additionalContent:
         url: /powershell/module/az.resources/#resources
       - text: Kit SDK Azure pour .NET
         url: /dotnet/api/overview/azure/managementgroups
-      - text: SDK Azure pour Node
+      - text: Kit SDK Azure pour JavaScript
         url: /javascript/api/@azure/arm-managementgroups/managementgroups
       - text: REST
         url: /rest/api/resources/managementgroups
@@ -142,6 +142,9 @@ additionalContent:
         url: /rest/api/resources/policydefinitions
         note: (Définitions)
       - text: REST
+        url: /rest/api/resources/policyexemptions
+        note: (Exemptions)
+      - text: REST
         url: /rest/api/resources/policysetdefinitions
         note: (Initiatives)
       - text: REST
@@ -157,10 +160,10 @@ additionalContent:
       - text: Kit SDK Azure pour .NET
         url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policydefinition
         note: (Définitions de stratégie)
-      - text: SDK Azure pour Node
+      - text: Kit SDK Azure pour JavaScript
         url: /javascript/api/@azure/arm-policy
         note: (Stratégie)
-      - text: SDK Azure pour Node
+      - text: Kit SDK Azure pour JavaScript
         url: /javascript/api/@azure/arm-policyinsights
         note: (Policy Insights)
       - text: Kit SDK Azure pour Python
@@ -169,6 +172,8 @@ additionalContent:
       links:
       - text: Fonctions Blueprint
         url: ./blueprints/reference/blueprint-functions.md
+      - text: Azure CLI
+        url: /cli/azure/ext/blueprint/blueprint
       - text: Azure PowerShell
         url: /powershell/module/az.blueprint/#blueprint
       - text: Azure PowerShell
@@ -192,11 +197,11 @@ additionalContent:
       - text: Kit de développement logiciel Microsoft Azure SDK pour Go
         url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph
       - text: Kit SDK Azure pour Java
-        url: /java/api/overview/azure/resourcegraph/management?view=azure-java-stable
+        url: /java/api/overview/azure/resourcegraph/management
       - text: Kit SDK Azure pour Java
         url: https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar
         note: (Maven)
-      - text: SDK Azure pour Node
+      - text: Kit SDK Azure pour JavaScript
         url: /javascript/api/@azure/arm-resourcegraph
       - text: Kit SDK Azure pour Python
         url: /python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph

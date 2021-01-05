@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9311c1060b953e87f163cb482db14cdd43f50d3d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2aa1a30c548ef60cd9b596031f4115297dd20844
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60242102"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89278596"
 ---
 # <a name="user-privacy-and-azure-ad-seamless-single-sign-on"></a>Confidentialité des utilisateurs et authentification unique fluide Azure AD
 
@@ -64,7 +64,7 @@ Pour en savoir plus sur les exigences RGPD relatives à Azure AD Connect, consul
 
 ### <a name="note-about-domain-controller-logs"></a>Remarque concernant les journaux d’activité des contrôleurs de domaine
 
-Si l’enregistrement d’audit est activé, ce produit peut générer des journaux d’activité de sécurité pour vos contrôleurs de domaine. Pour en savoir plus sur la configuration des stratégies d’audit, consultez cet [article](https://technet.microsoft.com/library/dd277403.aspx).
+Si l’enregistrement d’audit est activé, ce produit peut générer des journaux d’activité de sécurité pour vos contrôleurs de domaine. Pour en savoir plus sur la configuration des stratégies d’audit, consultez cet [article](/previous-versions/tn-archive/dd277403(v=technet.10)).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

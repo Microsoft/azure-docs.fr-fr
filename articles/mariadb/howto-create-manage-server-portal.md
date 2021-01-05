@@ -1,17 +1,17 @@
 ---
 title: Gérer un serveur - Portail Azure - Azure Database for MariaDB
 description: Découvrez comment gérer un serveur Azure Database for MariaDB à partir du Portail Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/18/2020
-ms.openlocfilehash: 43004f8c52bbec17f78ed4be024cf75224dbd179
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ade70c884a3ef01db45273e4789f34b629473661
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79530238"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005025"
 ---
 # <a name="manage-an-azure-database-for-mariadb-server-using-the-azure-portal"></a>Gérer un serveur Azure Database for MariaDB à l’aide du Portail Azure
 Cet article vous explique comment gérer vos serveurs Azure Database for MariaDB. Les tâches de gestion incluent notamment la mise à l’échelle du calcul et du stockage, la réinitialisation de mot de passe et l’affichage des informations relatives au serveur.
@@ -34,7 +34,7 @@ Vous pouvez passer du niveau Usage général au niveau Mémoire optimisée et in
 
 2. Sélectionnez **Usage général** ou **Mémoire optimisée**, selon le niveau souhaité. 
 
-    ![change-pricing-tier](./media/howto-create-manage-server-portal/change-pricing-tier.png)
+    ![Capture d’écran montrant le portail Azure avec le niveau tarifaire sélectionné et une valeur de mémoire optimisée sélectionnée.](./media/howto-create-manage-server-portal/change-pricing-tier.png)
 
     > [!NOTE]
     > Le changement de niveau entraîne un redémarrage du serveur.
@@ -79,7 +79,7 @@ Vous pouvez modifier le mot de passe du rôle d’administrateur à l’aide du 
 
 2. Entrez un nouveau mot de passe et confirmez-le. La zone de texte vous indique les exigences en matière de complexité du mot de passe.
 
-   ![reset-password](./media/howto-create-manage-server-portal/reset-password.png)
+   ![Capture d’écran montrant la boîte de dialogue Réinitialiser le mot de passe avec les zones Mot de passe et Confirmer le mot de passe.](./media/howto-create-manage-server-portal/reset-password.png)
 
 3. Sélectionnez **OK** pour enregistrer le nouveau mot de passe.
 
@@ -90,11 +90,11 @@ Vous pouvez supprimer votre serveur si vous n’en avez plus besoin.
 
 1. Dans le Portail Azure, sélectionnez votre serveur. Dans la fenêtre **Vue d’ensemble**, sélectionnez **Supprimer**.
 
-    ![delete](./media/howto-create-manage-server-portal/overview-delete.png)
+    ![supprimer](./media/howto-create-manage-server-portal/overview-delete.png)
 
 2. Entrez le nom du serveur dans la zone d’entrée pour confirmer qu’il s’agit du serveur à supprimer.
 
-    ![confirm-delete](./media/howto-create-manage-server-portal/confirm-delete.png)
+    ![Capture d’écran montrant une boîte de dialogue qui vérifie si vous souhaitez supprimer une base de données, ce qui constitue une opération irréversible.](./media/howto-create-manage-server-portal/confirm-delete.png)
 
     > [!NOTE]
     > La suppression d’un serveur est irréversible.

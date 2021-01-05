@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 05/07/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 6404d00b87b9ee745b9e3a92c646404e574417c1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f38755e669a62e9fe74aa6281daccdf39e1f117c
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80881659"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443566"
 ---
 # <a name="a-web-app-that-calls-web-apis-move-to-production"></a>Application web appelant des API web : Passer en production
 
@@ -34,8 +34,7 @@ Apprenez-en davantage en suivant le tutoriel progressif complet sur les applicat
 - Traite le consentement incrémentiel.
 - Appelle votre propre API web.
 
-> [!div class="nextstepaction"]
-> [Tutoriel sur les applications web ASP.NET Core](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial#scope-of-this-tutorial)
+[Tutoriel sur les applications web ASP.NET Core](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial#scope-of-this-tutorial)
 
 <!--- Removing this diagram as it's already shown from the next step linked tutorial
 

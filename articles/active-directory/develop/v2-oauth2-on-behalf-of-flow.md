@@ -1,5 +1,6 @@
 ---
 title: Plateforme d’identités Microsoft et flux On-Behalf-Of OAuth 2.0 | Azure
+titleSuffix: Microsoft identity platform
 description: Cet article explique comment utiliser des messages HTTP pour implémenter l’authentification de service à service en utilisant le flux Pour le compte de OAuth 2.0.
 services: active-directory
 author: hpsin
@@ -8,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 1/3/2020
+ms.date: 08/7/2020
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: 57497c7bd8cd1d0b46c40b6977079f4a6a2d876f
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 018d67b3e4e730cd46eb524a8927b3a6d68d74e8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82689552"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88958658"
 ---
 # <a name="microsoft-identity-platform-and-oauth-20-on-behalf-of-flow"></a>Plateforme d’identités Microsoft et flux On-Behalf-Of OAuth 2.0
 
@@ -31,7 +32,7 @@ Cet article explique comment programmer directement par rapport au protocole dan
 
 ## <a name="protocol-diagram"></a>Schéma de protocole
 
-Supposons que l’utilisateur ait été authentifié dans une application à l’aide du [flux d’octroi de code d’autorisation OAuth 2.0](v2-oauth2-auth-code-flow.md) ou d’un autre flux de connexion. À ce stade, l’application a un jeton d’accès *pour l’API A* (jeton A) avec les revendications et le consentement de l’utilisateur pour accéder à l’API web de niveau intermédiaire (API A). L’API A doit maintenant faire une demande authentifiée à l’API web en aval (API B).
+Supposons que l’utilisateur ait été authentifié dans une application à l’aide du [flux d’octroi de code d’autorisation OAuth 2.0](v2-oauth2-auth-code-flow.md) ou d’un autre flux de connexion. À ce stade, l’application a un jeton d’accès *pour l’API A* (jeton A) avec les revendications et le consentement de l’utilisateur pour accéder à l’API web de niveau intermédiaire (API A). L’API A doit maintenant faire une demande authentifiée à l’API web en aval (API B).
 
 Les étapes qui suivent constituent le flux OBO et sont décrites à l’aide du diagramme suivant.
 
@@ -46,7 +47,7 @@ Les étapes qui suivent constituent le flux OBO et sont décrites à l’aide du
 > [!NOTE]
 > Dans ce scénario, le service de niveau intermédiaire n’a aucune interaction utilisateur pour obtenir le consentement de l’utilisateur pour accéder à l’API en aval. Par conséquent, l’option d’accorder l’accès à l’API en aval est présentée au préalable lors de l’étape de consentement pendant l’authentification. Pour savoir comment effectuer cette configuration pour votre application, consultez [Obtention du consentement pour l’application de niveau intermédiaire](#gaining-consent-for-the-middle-tier-application).
 
-## <a name="service-to-service-access-token-request"></a>Demande de jeton d’accès de service à service
+## <a name="middle-tier-access-token-request"></a>Demande de jeton d’accès de niveau intermédiaire
 
 Pour demander un jeton d’accès, adressez une requête HTTP POST au point de terminaison du jeton de la plateforme d’identités Microsoft spécifique au locataire, avec les paramètres suivants.
 
@@ -60,16 +61,16 @@ Deux cas de figure se présentent, selon que l’application cliente choisit d�
 
 Lorsque l’application utilise un secret partagé, la demande de jeton d’accès de service à service contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | `grant_type` | Obligatoire | Type de la demande de jeton. Pour une demande à l’aide d’un JWT, la valeur doit être `urn:ietf:params:oauth:grant-type:jwt-bearer`. |
 | `client_id` | Obligatoire | L’ID (client) d’application attribué à votre application par la page [Inscriptions d’applications du portail Azure](https://go.microsoft.com/fwlink/?linkid=2083908). |
 | `client_secret` | Obligatoire | La clé secrète client que vous avez générée pour votre application sur la page Inscriptions d’applications du portail Azure. |
-| `assertion` | Obligatoire | Valeur du jeton utilisé dans la demande.  Ce jeton doit avoir l’audience de l’application qui effectue cette requête OBO (l’application indiquée par le champ `client-id`). |
+| `assertion` | Obligatoire | Jeton d’accès qui a été envoyé à l’API de niveau intermédiaire.  Ce jeton doit comporter une revendication d’audience (`aud`) de l’application qui effectue cette requête OBO (l’application indiquée par le champ `client-id`). Les applications ne peuvent pas accepter un jeton pour une autre application. (Par exemple, si un client envoie à une API un jeton pour MS Graph, l’API ne peut pas accepter ce jeton avec OBO.  Au lieu de cela, il doit refuser le jeton.)  |
 | `scope` | Obligatoire | Liste des étendues (séparées par des espaces) pour la demande de jeton. Pour plus d’informations, consultez [Étendues](v2-permissions-and-consent.md). |
 | `requested_token_use` | Obligatoire | Spécifie comment la demande doit être traitée. Dans le flux OBO, la valeur doit être définie sur `on_behalf_of`. |
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 La requête HTTP POST suivante demande un jeton d’accès et un jeton d’actualisation avec l’étendue `user.read` pour l’API web https://graph.microsoft.com.
 
@@ -77,13 +78,13 @@ La requête HTTP POST suivante demande un jeton d’accès et un jeton d’actua
 //line breaks for legibility only
 
 POST /oauth2/v2.0/token HTTP/1.1
-Host: login.microsoftonline.com
+Host: login.microsoftonline.com/<tenant>
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 &client_id=2846f71b-a7a4-4987-bab3-760035b2f389
 &client_secret=BYyVnAt56JpLwUcyo47XODd
-&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiOiIyODQ2ZjcxYi1hN2E0LTQ5ODctYmFiMy03NjAwMzViMmYzODkiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vNzJmOTg4YmYtODZmMS00MWFmLTkxYWItMmQ3Y2QwMTFkYjQ3L3YyLjAiLCJpYXQiOjE0OTM5MjA5MTYsIm5iZiI6MTQ5MzkyMDkxNiwiZXhwIjoxNDkzOTI0ODE2LCJhaW8iOiJBU1FBMi84REFBQUFnZm8vNk9CR0NaaFV2NjJ6MFFYSEZKR0VVYUIwRUlIV3NhcGducndMMnVrPSIsIm5hbWUiOiJOYXZ5YSBDYW51bWFsbGEiLCJvaWQiOiJkNWU5NzljNy0zZDJkLTQyYWYtOGYzMC03MjdkZDRjMmQzODMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJuYWNhbnVtYUBtaWNyb3NvZnQuY29tIiwic3ViIjoiZ1Q5a1FMN2hXRUpUUGg1OWJlX1l5dVZNRDFOTEdiREJFWFRhbEQzU3FZYyIsInRpZCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsInV0aSI6IjN5U3F4UHJweUVPd0ZsTWFFMU1PQUEiLCJ2ZXIiOiIyLjAifQ.TPPJSvpNCSCyUeIiKQoLMixN1-M-Y5U0QxtxVkpepjyoWNG0i49YFAJC6ADdCs5nJXr6f-ozIRuaiPzy29yRUOdSz_8KqG42luCyC1c951HyeDgqUJSz91Ku150D9kP5B9-2R-jgCerD_VVuxXUdkuPFEl3VEADC_1qkGBiIg0AyLLbz7DTMp5DvmbC09DhrQQiouHQGFSk2TPmksqHm3-b3RgeNM1rJmpLThis2ZWBEIPx662pjxL6NJDmV08cPVIcGX4KkFo54Z3rfwiYg4YssiUc4w-w3NJUBQhnzfTl4_Mtq2d7cVlul9uDzras091vFy32tWkrpa970UvdVfQ
+&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiOiIyO{a lot of characters here}
 &scope=https://graph.microsoft.com/user.read+offline_access
 &requested_token_use=on_behalf_of
 ```
@@ -92,19 +93,19 @@ grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 
 Une demande de jeton d’accès de service à service avec un certificat contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | `grant_type` | Obligatoire | Type de la demande de jeton. Pour une demande à l’aide d’un JWT, la valeur doit être `urn:ietf:params:oauth:grant-type:jwt-bearer`. |
 | `client_id` | Obligatoire |  L’ID (client) d’application attribué à votre application par la page [Inscriptions d’applications du portail Azure](https://go.microsoft.com/fwlink/?linkid=2083908). |
 | `client_assertion_type` | Obligatoire | La valeur doit être `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. |
 | `client_assertion` | Obligatoire | Assertion (jeton Web JSON) dont vous avez besoin pour créer et signer avec le certificat inscrit comme informations d’identification pour votre application. Pour découvrir comment inscrire votre certificat et le format de l’assertion, consultez [Informations d’identification de certificat](active-directory-certificate-credentials.md). |
-| `assertion` | Obligatoire | Valeur du jeton utilisé dans la demande. |
+| `assertion` | Obligatoire |  Jeton d’accès qui a été envoyé à l’API de niveau intermédiaire.  Ce jeton doit comporter une revendication d’audience (`aud`) de l’application qui effectue cette requête OBO (l’application indiquée par le champ `client-id`). Les applications ne peuvent pas accepter un jeton pour une autre application. (Par exemple, si un client envoie à une API un jeton pour MS Graph, l’API ne peut pas accepter ce jeton avec OBO.  Au lieu de cela, il doit refuser le jeton.)  |
 | `requested_token_use` | Obligatoire | Spécifie comment la demande doit être traitée. Dans le flux OBO, la valeur doit être définie sur `on_behalf_of`. |
 | `scope` | Obligatoire | Liste des étendues (séparées par des espaces) pour la demande de jeton. Pour plus d’informations, consultez [Étendues](v2-permissions-and-consent.md).|
 
 Notez que les paramètres sont presque les mêmes que dans le cas de la demande par secret partagé, sauf que le paramètre `client_secret` est remplacé par deux paramètres : `client_assertion_type` et `client_assertion`.
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 La requête HTTP POST suivante demande un jeton d’accès avec l’étendue `user.read` pour l’API web https://graph.microsoft.com avec un certificat.
 
@@ -112,19 +113,19 @@ La requête HTTP POST suivante demande un jeton d’accès avec l’étendue `us
 // line breaks for legibility only
 
 POST /oauth2/v2.0/token HTTP/1.1
-Host: login.microsoftonline.com
+Host: login.microsoftonline.com/<tenant>
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
 &client_id=625391af-c675-43e5-8e44-edd3e30ceb15
 &client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer
-&client_assertion=eyJhbGciOiJSUzI1NiIsIng1dCI6Imd4OHRHeXN5amNScUtqRlBuZDdSRnd2d1pJMCJ9.eyJ{a lot of characters here}M8U3bSUKKJDEg
-&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiOiJodHRwczovL2Rkb2JhbGlhbm91dGxvb2sub25taWNyb3NvZnQuY29tLzE5MjNmODYyLWU2ZGMtNDFhMy04MWRhLTgwMmJhZTAwYWY2ZCIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzI2MDM5Y2NlLTQ4OWQtNDAwMi04MjkzLTViMGM1MTM0ZWFjYi8iLCJpYXQiOjE0OTM0MjMxNTIsIm5iZiI6MTQ5MzQyMzE1MiwiZXhwIjoxNDkzNDY2NjUyLCJhY3IiOiIxIiwiYWlvIjoiWTJaZ1lCRFF2aTlVZEc0LzM0L3dpQndqbjhYeVp4YmR1TFhmVE1QeG8yYlN2elgreHBVQSIsImFtciI6WyJwd2QiXSwiYXBwaWQiOiJiMzE1MDA3OS03YmViLTQxN2YtYTA2YS0zZmRjNzhjMzI1NDUiLCJhcHBpZGFjciI6IjAiLCJlX2V4cCI6MzAyNDAwLCJmYW1pbHlfbmFtZSI6IlRlc3QiLCJnaXZlbl9uYW1lIjoiTmF2eWEiLCJpcGFkZHIiOiIxNjcuMjIwLjEuMTc3IiwibmFtZSI6Ik5hdnlhIFRlc3QiLCJvaWQiOiIxY2Q0YmNhYy1iODA4LTQyM2EtOWUyZi04MjdmYmIxYmI3MzkiLCJwbGF0ZiI6IjMiLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJzdWIiOiJEVXpYbkdKMDJIUk0zRW5pbDFxdjZCakxTNUllQy0tQ2ZpbzRxS1MzNEc4IiwidGlkIjoiMjYwMzljY2UtNDg5ZC00MDAyLTgyOTMtNWIwYzUxMzRlYWNiIiwidW5pcXVlX25hbWUiOiJuYXZ5YUBkZG9iYWxpYW5vdXRsb29rLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Im5hdnlhQGRkb2JhbGlhbm91dGxvb2sub25taWNyb3NvZnQuY29tIiwidmVyIjoiMS4wIn0.R-Ke-XO7lK0r5uLwxB8g5CrcPAwRln5SccJCfEjU6IUqpqcjWcDzeDdNOySiVPDU_ZU5knJmzRCF8fcjFtPsaA4R7vdIEbDuOur15FXSvE8FvVSjP_49OH6hBYqoSUAslN3FMfbO6Z8YfCIY4tSOB2I6ahQ_x4ZWFWglC3w5mK-_4iX81bqi95eV4RUKefUuHhQDXtWhrSgIEC0YiluMvA4TnaJdLq_tWXIc4_Tq_KfpkvI004ONKgU7EAMEr1wZ4aDcJV2yf22gQ1sCSig6EGSTmmzDuEPsYiyd4NhidRZJP4HiiQh-hePBQsgcSgYGvz9wC6n57ufYKh2wm_Ti3Q
+&client_assertion=eyJhbGciOiJSUzI1NiIsIng1dCI6Imd4OHRHeXN5amNScUtqRlBuZDdSRnd2d1pJMCJ9.eyJ{a lot of characters here}
+&assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiO{a lot of characters here}
 &requested_token_use=on_behalf_of
 &scope=https://graph.microsoft.com/user.read+offline_access
 ```
 
-## <a name="service-to-service-access-token-response"></a>Réponse de jeton d’accès de service à service
+## <a name="middle-tier-access-token-response"></a>Réponse à une demande de jeton d’accès de niveau intermédiaire
 
 Une réponse correspondant à une réussite est une réponse JSON OAuth 2.0 avec les paramètres suivants.
 
@@ -147,16 +148,18 @@ L’exemple suivant illustre une réponse affirmative à une demande de jeton d�
   "expires_in": 3269,
   "ext_expires_in": 0,
   "access_token": "eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCbmZpRy1tQTZOVGFlN0NkV1c3UWZkQ0NDYy0tY0hGa18wZE50MVEtc2loVzRMd2RwQVZISGpnTVdQZ0tQeVJIaGlDbUN2NkdyMEpmYmRfY1RmMUFxU21TcFJkVXVydVJqX3Nqd0JoN211eHlBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIiwia2lkIjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDcvIiwiaWF0IjoxNDkzOTMwMzA1LCJuYmYiOjE0OTM5MzAzMDUsImV4cCI6MTQ5MzkzMzg3NSwiYWNyIjoiMCIsImFpbyI6IkFTUUEyLzhEQUFBQU9KYnFFWlRNTnEyZFcxYXpKN1RZMDlYeDdOT29EMkJEUlRWMXJ3b2ZRc1k9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJUb2RvRG90bmV0T2JvIiwiYXBwaWQiOiIyODQ2ZjcxYi1hN2E0LTQ5ODctYmFiMy03NjAwMzViMmYzODkiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkNhbnVtYWxsYSIsImdpdmVuX25hbWUiOiJOYXZ5YSIsImlwYWRkciI6IjE2Ny4yMjAuMC4xOTkiLCJuYW1lIjoiTmF2eWEgQ2FudW1hbGxhIiwib2lkIjoiZDVlOTc5YzctM2QyZC00MmFmLThmMzAtNzI3ZGQ0YzJkMzgzIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTIxMjc1MjExODQtMTYwNDAxMjkyMC0xODg3OTI3NTI3LTI2MTE4NDg0IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzM0ZGRkEwNkQxN0M5Iiwic2NwIjoiVXNlci5SZWFkIiwic3ViIjoibWtMMHBiLXlpMXQ1ckRGd2JTZ1JvTWxrZE52b3UzSjNWNm84UFE3alVCRSIsInRpZCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsInVuaXF1ZV9uYW1lIjoibmFjYW51bWFAbWljcm9zb2Z0LmNvbSIsInVwbiI6Im5hY2FudW1hQG1pY3Jvc29mdC5jb20iLCJ1dGkiOiJWR1ItdmtEZlBFQ2M1dWFDaENRSkFBIiwidmVyIjoiMS4wIn0.cubh1L2VtruiiwF8ut1m9uNBmnUJeYx4x0G30F7CqSpzHj1Sv5DCgNZXyUz3pEiz77G8IfOF0_U5A_02k-xzwdYvtJUYGH3bFISzdqymiEGmdfCIRKl9KMeoo2llGv0ScCniIhr2U1yxTIkIpp092xcdaDt-2_2q_ql1Ha_HtjvTV1f9XR3t7_Id9bR5BqwVX5zPO7JMYDVhUZRx08eqZcC-F3wi0xd_5ND_mavMuxe2wrpF-EZviO3yg0QVRr59tE3AoWl8lSGpVc97vvRCnp4WVRk26jJhYXFPsdk4yWqOKZqzr3IFGyD08WizD_vPSrXcCPbZP3XWaoTUKZSNJg",
-  "refresh_token": "OAQABAAAAAABnfiG-mA6NTae7CdWW7QfdAALzDWjw6qSn4GUDfxWzJDZ6lk9qRw4AnqPnvFqnzS3GiikHr5wBM1bV1YyjH3nUeIhKhqJWGwqJFRqs2sE_rqUfz7__3J92JDpi6gDdCZNNaXgreQsH89kLCVNYZeN6kGuFGZrjwxp1wS2JYc97E_3reXBxkHrA09K5aR-WsSKCEjf6WI23FhZMTLhk_ZKOe_nWvcvLj13FyvSrTMZV2cmzyCZDqEHtPVLJgSoASuQlD2NXrfmtcmgWfc3uJSrWLIDSn4FEmVDA63X6EikNp9cllH3Gp7Vzapjlnws1NQ1_Ff5QrmBHp_LKEIwfzVKnLLrQXN0EzP8f6AX6fdVTaeKzm7iw6nH0vkPRpUeLc3q_aNsPzqcTOnFfgng7t2CXUsMAGH5wclAyFCAwL_Cds7KnyDLL7kzOS5AVZ3Mqk2tsPlqopAiHijZaJumdTILDudwKYCFAMpUeUwEf9JmyFjl2eIWPmlbwU7cHKWNvuRCOYVqbsTTpJthwh4PvsL5ov5CawH_TaV8omG_tV6RkziHG9urk9yp2PH9gl7Cv9ATa3Vt3PJWUS8LszjRIAJmyw_EhgHBfYCvEZ8U9PYarvgqrtweLcnlO7BfnnXYEC18z_u5wemAzNBFUje2ttpGtRmRic4AzZ708tBHva2ePJWGX6pgQbiWF8esOrvWjfrrlfOvEn1h6YiBW291M022undMdXzum6t1Y1huwxHPHjCAA"
+  "refresh_token": "OAQABAAAAAABnfiG-mA6NTae7CdWW7QfdAALzDWjw6qSn4GUDfxWzJDZ6lk9qRw4An{a lot of characters here}"
 }
 ```
 
 > [!NOTE]
-> Le jeton d’accès ci-dessus est un jeton au format v1.0. C’est le cas parce que ce jeton est fourni en fonction de la **ressource** sollicitée. Comme Microsoft Graph est configuré pour accepter des jetons v1.0, la plateforme d’identités Microsoft génère des jetons d’accès v1.0 quand un client demande des jetons pour Microsoft Graph. Seules les applications doivent examiner les jetons d’accès. Les clients **ne doivent pas** les inspecter.
+> Le jeton d’accès ci-dessus est un jeton au format v1.0 pour Microsoft Graph. En effet, le format dépend de la **ressource** consultée et n’est pas lié aux points de terminaison utilisés pour le demander. Comme Microsoft Graph est configuré pour accepter des jetons v1.0, la plateforme d’identités Microsoft génère des jetons d’accès v1.0 quand un client demande des jetons pour Microsoft Graph. D’autres applications peuvent indiquer qu’elles veulent des jetons au format v2.0, au format v1.0 ou même dans un format propriétaire ou chiffré.  Les points de terminaison v1.0 et v2.0 peuvent émettre des jetons aux deux formats : ainsi, la ressource reçoit toujours le bon format, quels que soient la façon dont le jeton a été demandé par le client et l’endroit. 
+>
+> Seules les applications doivent examiner les jetons d’accès. Les clients **ne doivent pas** les inspecter. Si vous inspectez les jetons d’accès pour d’autres applications dans votre code, l’application subira une interruption inattendue lorsqu’elle modifiera le format de ses jetons ou commencera à les chiffrer. 
 
 ### <a name="error-response-example"></a>Exemple de réponse d’erreur
 
-Une réponse d’erreur est retournée par le point de terminaison du jeton lors de la tentative d’acquisition d’un jeton d’accès pour l’API en aval si une stratégie d’accès conditionnel comme l’authentification multifacteur est définie sur cette API. Le service de niveau intermédiaire doit faire apparaître cette erreur à l’application cliente afin que celle-ci puisse fournir une interaction utilisateur pour satisfaire la stratégie d’accès conditionnel.
+Une réponse d’erreur est retournée par le point de terminaison du jeton lors de la tentative d’acquisition d’un jeton d’accès pour l’API en aval si une stratégie d’accès conditionnel comme l’[authentification multifacteur](../authentication/concept-mfa-howitworks.md) est définie sur cette API. Le service de niveau intermédiaire doit faire apparaître cette erreur à l’application cliente afin que celle-ci puisse fournir une interaction utilisateur pour satisfaire la stratégie d’accès conditionnel.
 
 ```json
 {
@@ -174,13 +177,23 @@ Une réponse d’erreur est retournée par le point de terminaison du jeton lors
 
 Le service de niveau intermédiaire peut maintenant utiliser le jeton obtenu ci-dessus pour faire des demandes authentifiées à l’API web en aval, en définissant le jeton dans l’en-tête `Authorization`.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 ```HTTP
 GET /v1.0/me HTTP/1.1
 Host: graph.microsoft.com
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCbmZpRy1tQTZOVGFlN0NkV1c3UWZkSzdNN0RyNXlvUUdLNmFEc19vdDF3cEQyZjNqRkxiNlVrcm9PcXA2cXBJclAxZVV0QktzMHEza29HN3RzXzJpSkYtQjY1UV8zVGgzSnktUHZsMjkxaFNBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIiwia2lkIjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDcvIiwiaWF0IjoxNDkzOTMwMDE2LCJuYmYiOjE0OTM5MzAwMTYsImV4cCI6MTQ5MzkzMzg3NSwiYWNyIjoiMCIsImFpbyI6IkFTUUEyLzhEQUFBQUlzQjN5ZUljNkZ1aEhkd1YxckoxS1dlbzJPckZOUUQwN2FENTVjUVRtems9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJUb2RvRG90bmV0T2JvIiwiYXBwaWQiOiIyODQ2ZjcxYi1hN2E0LTQ5ODctYmFiMy03NjAwMzViMmYzODkiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkNhbnVtYWxsYSIsImdpdmVuX25hbWUiOiJOYXZ5YSIsImlwYWRkciI6IjE2Ny4yMjAuMC4xOTkiLCJuYW1lIjoiTmF2eWEgQ2FudW1hbGxhIiwib2lkIjoiZDVlOTc5YzctM2QyZC00MmFmLThmMzAtNzI3ZGQ0YzJkMzgzIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTIxMjc1MjExODQtMTYwNDAxMjkyMC0xODg3OTI3NTI3LTI2MTE4NDg0IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzM0ZGRkEwNkQxN0M5Iiwic2NwIjoiVXNlci5SZWFkIiwic3ViIjoibWtMMHBiLXlpMXQ1ckRGd2JTZ1JvTWxrZE52b3UzSjNWNm84UFE3alVCRSIsInRpZCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsInVuaXF1ZV9uYW1lIjoibmFjYW51bWFAbWljcm9zb2Z0LmNvbSIsInVwbiI6Im5hY2FudW1hQG1pY3Jvc29mdC5jb20iLCJ1dGkiOiJzUVlVekYxdUVVS0NQS0dRTVFVRkFBIiwidmVyIjoiMS4wIn0.Hrn__RGi-HMAzYRyCqX3kBGb6OS7z7y49XPVPpwK_7rJ6nik9E4s6PNY4XkIamJYn7tphpmsHdfM9lQ1gqeeFvFGhweIACsNBWhJ9Nx4dvQnGRkqZ17KnF_wf_QLcyOrOWpUxdSD_oPKcPS-Qr5AFkjw0t7GOKLY-Xw3QLJhzeKmYuuOkmMDJDAl0eNDbH0HiCh3g189a176BfyaR0MgK8wrXI_6MTnFSVfBePqklQeLhcr50YTBfWg3Svgl6MuK_g1hOuaO-XpjUxpdv5dZ0SvI47fAuVDdpCE48igCX5VMj4KUVytDIf6T78aIXMkYHGgW3-xAmuSyYH_Fr0yVAQ
+Authorization: Bearer eyJ0eXAiO ... 0X2tnSQLEANnSPHY0gKcgw
 ```
+
+## <a name="saml-assertions-obtained-with-an-oauth20-obo-flow"></a>Assertions SAML obtenues avec un flux OBO OAuth 2.0
+
+Certains services web basés sur OAuth doivent accéder à d’autres API de service web qui acceptent les instructions d’assertion SAML dans des flux non interactifs. Azure Active Directory peut fournir une instruction d’assertion SAML en réponse à un flux On-Behalf-Of qui utilise un service web basé sur SAML comme ressource cible.
+
+>[!NOTE]
+>Il s’agit d’une extension non standard pour le flux On-Behalf-Of OAuth 2.0 qui permet à une application OAuth2 d’accéder aux points de terminaison d’API du service web qui consomment des jetons SAML.
+
+> [!TIP]
+> Quand vous appelez un service web protégé par SAML à partir d’une application web front-end, vous pouvez simplement appeler l’API et lancer un flux d’authentification interactif normal avec la session existante de l’utilisateur. Vous devez seulement utiliser un flux OBO quand un appel de service à service nécessite un jeton SAML pour fournir le contexte de l’utilisateur.
 
 ## <a name="gaining-consent-for-the-middle-tier-application"></a>Obtention du consentement pour l’application de niveau intermédiaire
 

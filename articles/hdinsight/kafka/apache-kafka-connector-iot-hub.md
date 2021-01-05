@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 11/26/2019
-ms.openlocfilehash: 48a72b5ba3819712b9e1d2536ae2dd3a06eaf3f2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0722119b35ecebf3ed1e7a377707de02a6c127bf
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80238813"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825191"
 ---
 # <a name="use-apache-kafka-on-hdinsight-with-azure-iot-hub"></a>Utiliser Apache Kafka sur HDInsight avec Azure IoT Hub
 
@@ -37,7 +37,7 @@ Pour plus d’informations sur l’API Connect, consultez [https://kafka.apache.
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
-* Azure IoT Hub et un appareil. Pour cet article, consultez [Connecter le simulateur en ligne Raspberry Pi à Azure IoT Hub](https://docs.microsoft.com/azure/iot-hub/iot-hub-raspberry-pi-web-simulator-get-started).
+* Azure IoT Hub et un appareil. Pour cet article, consultez [Connecter le simulateur en ligne Raspberry Pi à Azure IoT Hub](../../iot-hub/iot-hub-raspberry-pi-web-simulator-get-started.md).
 
 * [Outil de génération Scala](https://www.scala-sbt.org/).
 
@@ -162,7 +162,7 @@ Pour récupérer les informations d’IoT Hub utilisées par le connecteur, proc
         > [!IMPORTANT]  
         > La valeur de point de terminaison en provenance du portail peut contenir du texte superflu qui n’est pas utile dans cet exemple. Extrayez le texte qui correspond à ce modèle `sb://<randomnamespace>.servicebus.windows.net/`.
 
-   * __À partir d’[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli)__ , utilisez la commande suivante :
+   * __À partir d’[Azure CLI](/cli/azure/get-started-with-azure-cli)__ , utilisez la commande suivante :
 
        ```azurecli
        az iot hub show --name myhubname --query "{EventHubCompatibleName:properties.eventHubEndpoints.events.path,EventHubCompatibleEndpoint:properties.eventHubEndpoints.events.endpoint,Partitions:properties.eventHubEndpoints.events.partitionCount}"
@@ -184,7 +184,7 @@ Pour récupérer les informations d’IoT Hub utilisées par le connecteur, proc
         2. Copiez la valeur __Clé primaire__.
         3. Copiez la valeur __Clé primaire de la chaîne de connexion__.
 
-    * __À partir d’[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli)__ , utilisez la commande suivante :
+    * __À partir d’[Azure CLI](/cli/azure/get-started-with-azure-cli)__ , utilisez la commande suivante :
 
         1. Pour obtenir la valeur de la clé primaire, utilisez la commande suivante :
 

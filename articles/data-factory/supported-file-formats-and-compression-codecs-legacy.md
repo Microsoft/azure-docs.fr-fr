@@ -9,12 +9,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.date: 12/10/2019
 ms.author: jingwang
-ms.openlocfilehash: b1f11a1ff25117c07e61475e7e83fc0c170cd552
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: b3241bc16c0613189faa169032632303788dac3e
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81414651"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92634128"
 ---
 # <a name="supported-file-formats-and-compression-codecs-in-azure-data-factory-legacy"></a>Formats de fichier et codecs de compression pris en charge dans Azure Data Factory (hérité)
 
@@ -30,7 +30,7 @@ ms.locfileid: "81414651"
 >[!NOTE]
 >Découvrez le nouveau modèle dans l’article [Format de texte délimité](format-delimited-text.md). Les configurations suivantes liées au jeu de données d'une banque de données basée sur un fichier sont toujours prises en charge telles que à des fins de rétrocompatibilité. Nous vous suggérons d’utiliser le nouveau modèle à l’avenir.
 
-Si vous souhaitez lire ou écrire des données dans un fichier texte, définissez la propriété `type` dans la section `format` du jeu de données sur **TextFormat**. Vous pouvez également spécifier les propriétés **facultatives** suivantes, dans la section `format`. Consultez la section [Exemple pour TextFormat](#textformat-example) pour en savoir plus sur la méthode de configuration à suivre.
+Si vous souhaitez lire ou écrire des données dans un fichier texte, définissez la propriété `type` dans la section `format` du jeu de données sur **TextFormat** . Vous pouvez également spécifier les propriétés **facultatives** suivantes, dans la section `format`. Consultez la section [Exemple pour TextFormat](#textformat-example) pour en savoir plus sur la méthode de configuration à suivre.
 
 | Propriété | Description | Valeurs autorisées | Obligatoire |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ Si vous souhaitez lire ou écrire des données dans un fichier texte, définisse
 | escapeChar |caractère spécial utilisé pour échapper un délimiteur de colonne dans le contenu du fichier d’entrée. <br/><br/>Vous ne pouvez pas spécifier à la fois escapeChar et quoteChar pour une table. |Un seul caractère est autorisé. Pas de valeur par défaut. <br/><br/>Exemple : si vous avez une virgule (« , ») comme séparateur de colonnes, mais que vous souhaitez avoir le caractère virgule dans le texte (exemple : « Hello, world »), vous pouvez définir « $ » comme caractère d’échappement et utiliser la chaîne « Hello$, world » dans la source. |Non |
 | quoteChar |caractère utilisé pour mettre entre guillemets une valeur de chaîne. Les délimiteurs de colonnes et de lignes à l’intérieur des guillemets seraient considérés comme faisant partie de la valeur de chaîne. Cette propriété s’applique aux jeux de données d’entrée et de sortie.<br/><br/>Vous ne pouvez pas spécifier à la fois escapeChar et quoteChar pour une table. |Un seul caractère est autorisé. Pas de valeur par défaut. <br/><br/>Par exemple, si vous avez une virgule (,) comme séparateur de colonnes mais que vous voulez avoir le caractère virgule dans le texte (par exemple : « Hello, world »), vous pouvez définir " (guillemet droit) comme caractère de guillemet et utiliser la chaîne "Hello, world" dans la source. |Non |
 | nullValue |un ou plusieurs caractères utilisés pour représenter une valeur Null. |Un ou plusieurs caractères. Les valeurs **par défaut** sont **« \N » et « NULL »** en lecture, et **« \N »** en écriture. |Non |
-| encodingName |spécifiez le nom du codage. |Une liste de noms d’encodage valides. Consultez : [Propriété Encoding.EncodingName](https://msdn.microsoft.com/library/system.text.encoding.aspx). Exemple : windows-1250 ou shift_jis. La valeur **par défaut** est **UTF-8**. |Non |
+| encodingName |spécifiez le nom du codage. |Une liste de noms d’encodage valides. Consultez : [Propriété Encoding.EncodingName](/dotnet/api/system.text.encoding). Exemple : windows-1250 ou shift_jis. La valeur **par défaut** est **UTF-8** . |Non |
 | firstRowAsHeader |Spécifie si la première ligne doit être considérée comme un en-tête. Pour un jeu de données d’entrée, Data Factory lit la première ligne comme un en-tête. Pour un jeu de données de sortie, Data Factory écrit la première ligne comme un en-tête. <br/><br/>Voir [Scénarios d’utilisation de `firstRowAsHeader` et `skipLineCount`](#scenarios-for-using-firstrowasheader-and-skiplinecount) pour obtenir des exemples de scénarios. |True<br/><b>false (valeur par défaut)</b> |Non |
 | skipLineCount |Indique le nombre de lignes **non vides** à ignorer lors de la lecture des données à partir des fichiers d’entrée. Si skipLineCount et firstRowAsHeader sont spécifiés, les lignes sont d’abord ignorées, puis les informations d’en-têtes sont lues à partir du fichier d’entrée. <br/><br/>Voir [Scénarios d’utilisation de `firstRowAsHeader` et `skipLineCount`](#scenarios-for-using-firstrowasheader-and-skiplinecount) pour obtenir des exemples de scénarios. |Integer |Non |
 | treatEmptyAsNull |spécifie s’il faut traiter une chaîne Null ou vide comme une valeur Null lors de la lecture des données à partir d’un fichier d’entrée. |**True (valeur par défaut)**<br/>False |Non |
@@ -84,16 +84,16 @@ Pour utiliser un caractère `escapeChar` au lieu de `quoteChar`, remplacez la li
 >[!NOTE]
 >Découvrez le nouveau modèle dans l’article [Format JSON](format-json.md). Les configurations suivantes liées au jeu de données d'une banque de données basée sur un fichier sont toujours prises en charge telles que à des fins de rétrocompatibilité. Nous vous suggérons d’utiliser le nouveau modèle à l’avenir.
 
-Pour en savoir plus sur **l’importation ou l’exportation de fichiers JSON en l’état dans ou à partir d’Azure Cosmos DB**, consultez la section Importation/exportation de documents JSON de l’article [Déplacer des données vers et depuis Azure Cosmos DB](connector-azure-cosmos-db.md).
+Pour en savoir plus sur **l’importation ou l’exportation de fichiers JSON en l’état dans ou à partir d’Azure Cosmos DB** , consultez la section Importation/exportation de documents JSON de l’article [Déplacer des données vers et depuis Azure Cosmos DB](connector-azure-cosmos-db.md).
 
-Si vous souhaitez analyser des fichiers JSON ou écrire des données au format JSON, définissez la propriété `type` de la section `format` sur **JsonFormat**. Vous pouvez également spécifier les propriétés **facultatives** suivantes, dans la section `format`. Consultez la section [Exemple pour JsonFormat](#jsonformat-example) pour en savoir plus sur la méthode de configuration à suivre.
+Si vous souhaitez analyser des fichiers JSON ou écrire des données au format JSON, définissez la propriété `type` de la section `format` sur **JsonFormat** . Vous pouvez également spécifier les propriétés **facultatives** suivantes, dans la section `format`. Consultez la section [Exemple pour JsonFormat](#jsonformat-example) pour en savoir plus sur la méthode de configuration à suivre.
 
 | Propriété | Description | Obligatoire |
 | --- | --- | --- |
-| filePattern |Indiquez le modèle des données stockées dans chaque fichier JSON. Les valeurs autorisées sont les suivantes : **setOfObjects** et **arrayOfObjects**. La valeur **par défaut** est **setOfObjects**. Consultez la section [Modèles de fichiers JSON](#json-file-patterns) pour en savoir plus sur ces modèles. |Non |
+| filePattern |Indiquez le modèle des données stockées dans chaque fichier JSON. Les valeurs autorisées sont les suivantes : **setOfObjects** et **arrayOfObjects** . La valeur **par défaut** est **setOfObjects** . Consultez la section [Modèles de fichiers JSON](#json-file-patterns) pour en savoir plus sur ces modèles. |Non |
 | jsonNodeReference | Si vous souhaitez effectuer une itération et extraire des données à partir des objets situés à l’intérieur d’un champ de tableau présentant le même modèle, spécifiez le chemin d’accès JSON de ce tableau. Cette propriété est uniquement prise en charge lors de la copie de données **à partir** de fichiers JSON. | Non |
 | jsonPathDefinition | Spécifiez l’expression de chemin JSON pour chaque mappage de colonne avec un nom de colonne personnalisé (commencez par une lettre minuscule). Cette propriété est uniquement prise en charge lors de la copie de données **à partir** de fichiers JSON, et vous pouvez extraire des données d’un objet ou d’un tableau. <br/><br/> Pour les champs situés sous l’objet racine, commencez par $ racine ; pour ceux qui se trouvent dans le tableau sélectionné par la propriété `jsonNodeReference`, commencez par l’élément de tableau. Consultez la section [Exemple pour JsonFormat](#jsonformat-example) pour en savoir plus sur la méthode de configuration à suivre. | Non |
-| encodingName |spécifiez le nom du codage. Pour obtenir la liste des noms de codage valides, consultez : Propriété [Encoding.EncodingName](https://msdn.microsoft.com/library/system.text.encoding.aspx). Par exemple : windows-1250 ou shift_jis. La valeur **par défaut** est : **UTF-8**. |Non |
+| encodingName |spécifiez le nom du codage. Pour obtenir la liste des noms de codage valides, consultez : Propriété [Encoding.EncodingName](/dotnet/api/system.text.encoding). Par exemple : windows-1250 ou shift_jis. La valeur **par défaut** est : **UTF-8** . |Non |
 | nestingSeparator |Caractère utilisé pour séparer les niveaux d'imbrication. La valeur par défaut est . (point). |Non |
 
 >[!NOTE]
@@ -230,7 +230,7 @@ Vous voulez copier ce contenu dans un tableau SQL Azure au format suivant, en ex
 
 Le jeu de données d’entrée présentant le type **JsonFormat** est défini comme suit : (définition partielle présentant uniquement les éléments pertinents). Plus précisément :
 
-- La section `structure` définit les noms de colonne personnalisés et le type de données correspondant lors de la conversion des données au format tabulaire. Cette section est **facultative**, sauf si vous avez besoin d’effectuer un mappage de colonne. Pour plus d’informations, consultez [Mapper des colonnes d’un jeu de données source sur des colonnes d’un jeu de données de destination](copy-activity-schema-and-type-mapping.md).
+- La section `structure` définit les noms de colonne personnalisés et le type de données correspondant lors de la conversion des données au format tabulaire. Cette section est **facultative** , sauf si vous avez besoin d’effectuer un mappage de colonne. Pour plus d’informations, consultez [Mapper des colonnes d’un jeu de données source sur des colonnes d’un jeu de données de destination](copy-activity-schema-and-type-mapping.md).
 - Le paramètre `jsonPathDefinition` indique le chemin JSON de chaque colonne indiquant l’emplacement à partir duquel les données sont extraites. Pour copier les données d’un tableau, vous pouvez utiliser `array[x].property` afin d’extraire la valeur de la propriété spécifiée de l’objet `xth`, ou vous pouvez utiliser `array[*].property` afin de trouver la valeur de tout objet contenant cette propriété.
 
 ```json
@@ -305,8 +305,8 @@ Vous souhaitez copier ce fichier dans une table SQL Azure au format suivant, en
 
 Le jeu de données d’entrée présentant le type **JsonFormat** est défini comme suit : (définition partielle présentant uniquement les éléments pertinents). Plus précisément :
 
-- La section `structure` définit les noms de colonne personnalisés et le type de données correspondant lors de la conversion des données au format tabulaire. Cette section est **facultative**, sauf si vous avez besoin d’effectuer un mappage de colonne. Pour plus d’informations, consultez [Mapper des colonnes d’un jeu de données source sur des colonnes d’un jeu de données de destination](copy-activity-schema-and-type-mapping.md).
-- `jsonNodeReference` indique que les données doivent être itérées et extraites des objets présentant le même modèle sous `orderlines` dans le **tableau**.
+- La section `structure` définit les noms de colonne personnalisés et le type de données correspondant lors de la conversion des données au format tabulaire. Cette section est **facultative** , sauf si vous avez besoin d’effectuer un mappage de colonne. Pour plus d’informations, consultez [Mapper des colonnes d’un jeu de données source sur des colonnes d’un jeu de données de destination](copy-activity-schema-and-type-mapping.md).
+- `jsonNodeReference` indique que les données doivent être itérées et extraites des objets présentant le même modèle sous `orderlines` dans le **tableau** .
 - Le paramètre `jsonPathDefinition` indique le chemin JSON de chaque colonne indiquant l’emplacement à partir duquel les données sont extraites. Dans cet exemple, les éléments `ordernumber`, `orderdate` et `city` se trouvent sous l’objet racine associé au chemin JSON commençant par `$.`, tandis que les éléments `order_pd` et `order_price` sont définis avec le chemin dérivé de l’élément de tableau sans `$.`.
 
 ```json
@@ -375,7 +375,7 @@ Pour chaque enregistrement, vous voulez écrire des données dans un objet JSON
 }
 ```
 
-Le jeu de données de sortie présentant le type **JsonFormat** est défini comme suit : (définition partielle présentant uniquement les éléments pertinents). Plus précisément, la section `structure` définit les noms de propriété personnalisés dans le fichier de destination ; le paramètre `nestingSeparator` (valeur par défaut : «. ») vous permet d’identifier la couche d’imbrication à partir du nom. Cette section est **facultative**, sauf si vous souhaitez modifier le nom de propriété par rapport au nom de la colonne source, ou imbriquer certaines propriétés.
+Le jeu de données de sortie présentant le type **JsonFormat** est défini comme suit : (définition partielle présentant uniquement les éléments pertinents). Plus précisément, la section `structure` définit les noms de propriété personnalisés dans le fichier de destination ; le paramètre `nestingSeparator` (valeur par défaut : «. ») vous permet d’identifier la couche d’imbrication à partir du nom. Cette section est **facultative** , sauf si vous souhaitez modifier le nom de propriété par rapport au nom de la colonne source, ou imbriquer certaines propriétés.
 
 ```json
 "properties": {
@@ -411,7 +411,7 @@ Le jeu de données de sortie présentant le type **JsonFormat** est défini comm
 >[!NOTE]
 >Découvrez le nouveau modèle dans l’article [Format Parquet](format-parquet.md). Les configurations suivantes liées au jeu de données d'une banque de données basée sur un fichier sont toujours prises en charge telles que à des fins de rétrocompatibilité. Nous vous suggérons d’utiliser le nouveau modèle à l’avenir.
 
-Si vous souhaitez analyser les fichiers Parquet ou écrire les données au format Parquet, définissez la propriété `format` `type` sur **ParquetFormat**. Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
+Si vous souhaitez analyser les fichiers Parquet ou écrire les données au format Parquet, définissez la propriété `format` `type` sur **ParquetFormat** . Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
 
 ```json
 "format":
@@ -427,12 +427,12 @@ Notez les points suivants :
 * Le fichier Parquet a les options liées à la compression suivantes : NONE, SNAPPY, GZIP et LZO. Data Factory prend en charge la lecture des données à partir de fichier Parquet dans tous ces formats compressés sauf LZO ; il utilise le codec de compression dans les métadonnées pour lire les données. Toutefois, lors de l’écriture dans un fichier Parquet, Data Factory choisit SNAPPY, qui est la valeur par défaut pour le format Parquet. Actuellement, il n’existe aucune option permettant de remplacer ce comportement.
 
 > [!IMPORTANT]
-> Dans le cas de copies permises par Integration Runtime (auto-hébergé), par exemple, entre des magasins de données locaux et cloud, si vous ne copiez pas les fichiers Parquet **tels quels**, vous devez installer **JRE 8 64 bits (Java Runtime Environment) ou OpenJDK** sur votre machine de runtime d’intégration. Consultez le paragraphe suivant pour plus de détails.
+> Dans le cas de copies permises par Integration Runtime (auto-hébergé), par exemple, entre des magasins de données locaux et cloud, si vous ne copiez pas les fichiers Parquet **tels quels** , vous devez installer **JRE 8 64 bits (Java Runtime Environment) ou OpenJDK** sur votre machine de runtime d’intégration. Consultez le paragraphe suivant pour plus de détails.
 
 Dans le cas de copies s’exécutant sur l’IR auto-hébergé avec sérialisation/désérialisation des fichiers Parquet, ADF localise le runtime Java en vérifiant d’abord le registre *`(SOFTWARE\JavaSoft\Java Runtime Environment\{Current Version}\JavaHome)`* pour JRE puis, s’il ne le trouve pas, en vérifiant la variable système *`JAVA_HOME`* pour OpenJDK.
 
-- **Pour utiliser JRE** : Le runtime d’intégration de 64 bits requiert la version 64 bits de JRE. Vous pouvez la récupérer [ici](https://go.microsoft.com/fwlink/?LinkId=808605).
-- **Pour utiliser OpenJDK** : il est pris en charge depuis la version 3.13 du runtime d’intégration. Empaquetez jvm.dll avec tous les autres assemblys requis d’OpenJDK dans la machine d’IR auto-hébergé et définissez la variable d’environnement système JAVA_HOME en conséquence.
+- **Pour utiliser JRE**  : Le runtime d’intégration de 64 bits requiert la version 64 bits de JRE. Vous pouvez la récupérer [ici](https://go.microsoft.com/fwlink/?LinkId=808605).
+- **Pour utiliser OpenJDK**  : il est pris en charge depuis la version 3.13 du runtime d’intégration. Empaquetez jvm.dll avec tous les autres assemblys requis d’OpenJDK dans la machine d’IR auto-hébergé et définissez la variable d’environnement système JAVA_HOME en conséquence.
 
 >[!TIP]
 >Si, en copiant des données au format Parquet avec le runtime d’intégration auto-hébergé, vous obtenez une erreur indiquant « An error occurred when invoking java, message: **java.lang.OutOfMemoryError:Java heap space** », vous pouvez ajouter une variable d’environnement `_JAVA_OPTIONS` sur l’ordinateur qui héberge le runtime d’intégration auto-hébergé afin d’ajuster la taille de segment de mémoire minimale/maximale nécessaire pour que la machine virtuelle Java puisse effectuer une copie de ce type, puis réexécuter le pipeline.
@@ -471,7 +471,7 @@ Exemple : donnez la valeur `-Xms256m -Xmx16g` à la variable `_JAVA_OPTIONS`. L
 >[!NOTE]
 >Découvrez le nouveau modèle dans l’article [Format ORC](format-orc.md). Les configurations suivantes liées au jeu de données d'une banque de données basée sur un fichier sont toujours prises en charge telles que à des fins de rétrocompatibilité. Nous vous suggérons d’utiliser le nouveau modèle à l’avenir.
 
-Si vous souhaitez analyser les fichiers ORC ou écrire les données au format ORC, définissez la propriété `format` `type` sur **OrcFormat**. Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
+Si vous souhaitez analyser les fichiers ORC ou écrire les données au format ORC, définissez la propriété `format` `type` sur **OrcFormat** . Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
 
 ```json
 "format":
@@ -487,12 +487,12 @@ Notez les points suivants :
 * Le fichier ORC a trois [options liées à la compression](https://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/) : NONE, ZLIB, SNAPPY. Data Factory prend en charge la lecture des données du fichier ORC dans tous ces formats compressés. Il utilise le codec de compression se trouvant dans les métadonnées pour lire les données. Toutefois, lors de l’écriture dans un fichier ORC, Data Factory choisit ZLIB, qui est la valeur par défaut pour ORC. Actuellement, il n’existe aucune option permettant de remplacer ce comportement.
 
 > [!IMPORTANT]
-> Dans le cas de copies permises par Integration Runtime (auto-hébergé), par exemple, entre des magasins de données locaux et cloud, si vous ne copiez pas les fichiers ORC **tels quels**, vous devez installer **JRE 8 64 bits (Java Runtime Environment) ou OpenJDK** sur votre machine de runtime d’intégration. Consultez le paragraphe suivant pour plus de détails.
+> Dans le cas de copies permises par Integration Runtime (auto-hébergé), par exemple, entre des magasins de données locaux et cloud, si vous ne copiez pas les fichiers ORC **tels quels** , vous devez installer **JRE 8 64 bits (Java Runtime Environment) ou OpenJDK** sur votre machine de runtime d’intégration. Consultez le paragraphe suivant pour plus de détails.
 
 Dans le cas de copies s’exécutant sur l’IR auto-hébergé avec sérialisation/désérialisation des fichiers ORC, ADF localise le runtime Java en vérifiant d’abord le registre *`(SOFTWARE\JavaSoft\Java Runtime Environment\{Current Version}\JavaHome)`* pour JRE puis, s’il ne le trouve pas, en vérifiant la variable système *`JAVA_HOME`* pour OpenJDK.
 
-- **Pour utiliser JRE** : Le runtime d’intégration de 64 bits requiert la version 64 bits de JRE. Vous pouvez la récupérer [ici](https://go.microsoft.com/fwlink/?LinkId=808605).
-- **Pour utiliser OpenJDK** : il est pris en charge depuis la version 3.13 du runtime d’intégration. Empaquetez jvm.dll avec tous les autres assemblys requis d’OpenJDK dans la machine d’IR auto-hébergé et définissez la variable d’environnement système JAVA_HOME en conséquence.
+- **Pour utiliser JRE**  : Le runtime d’intégration de 64 bits requiert la version 64 bits de JRE. Vous pouvez la récupérer [ici](https://go.microsoft.com/fwlink/?LinkId=808605).
+- **Pour utiliser OpenJDK**  : il est pris en charge depuis la version 3.13 du runtime d’intégration. Empaquetez jvm.dll avec tous les autres assemblys requis d’OpenJDK dans la machine d’IR auto-hébergé et définissez la variable d’environnement système JAVA_HOME en conséquence.
 
 ### <a name="data-type-mapping-for-orc-files"></a>Mappage de type de données pour fichiers Oracle
 
@@ -523,7 +523,7 @@ Dans le cas de copies s’exécutant sur l’IR auto-hébergé avec sérialisati
 >[!NOTE]
 >Découvrez le nouveau modèle dans l’article [Format Avro](format-avro.md). Les configurations suivantes liées au jeu de données d'une banque de données basée sur un fichier sont toujours prises en charge telles que à des fins de rétrocompatibilité. Nous vous suggérons d’utiliser le nouveau modèle à l’avenir.
 
-Si vous souhaitez analyser les fichiers Avro ou écrire les données au format Avro, définissez la propriété `format` `type` sur **AvroFormat**. Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
+Si vous souhaitez analyser les fichiers Avro ou écrire les données au format Avro, définissez la propriété `format` `type` sur **AvroFormat** . Il est inutile de spécifier des propriétés dans la partie Format de la section typeProperties. Exemple :
 
 ```json
 "format":
@@ -542,7 +542,7 @@ Notez les points suivants :
 
 Azure Data Factory prend en charge la compression/décompression des données pendant la copie. Quand vous spécifiez la propriété `compression` dans un jeu de données d’entrée, l’activité de copie lit les données compressées à partir de la source, puis les décompresse. Quand vous spécifiez la propriété dans un jeu de données de sortie, l’activité de copie compresse les données, puis les écrit dans le récepteur. Voici quelques exemples de scénarios :
 
-* Lire les données compressées GZIP à partir d’un objet blob Azure, les décompresser et écrire des données du résultat dans une base de données Azure SQL. Le jeu de données Azure Blob d’entrée est défini avec la propriété `compression` `type` GZip.
+* Lire les données compressées GZIP à partir d’un objet blob Azure, les décompresser et écrire des données du résultat dans une Azure SQL Database. Le jeu de données Azure Blob d’entrée est défini avec la propriété `compression` `type` GZip.
 * Lire les données d’un fichier de texte brut dans le système de fichiers local, les compresser en utilisant le format GZIP et écrire les données compressées dans un objet blob Azure. Un jeu de données Azure Blob de sortie est défini avec la propriété `compression` `type` GZip.
 * Lire le fichier .zip à partir du serveur FTP, le décompresser pour accéder aux fichiers qu’il contient et placer ces derniers dans Azure Data Lake Store. Le jeu de données FTP d’entrée est défini avec la propriété `compression` `type` ZipDeflate.
 * Lire les données compressées au format GZIP à partir d’un objet blob Azure, les décompresser, les compresser en utilisant le format BZIP2 et écrire les données résultantes dans un objet blob Azure. Le jeu de données Azure Blob d’entrée est défini avec `compression` `type` égal à GZip et le jeu de données de sortie avec `compression` `type` égal à BZIP2.
@@ -575,25 +575,25 @@ Pour spécifier la compression pour un jeu de données, utilisez la propriété 
 
 La section **compression** a deux propriétés :
 
-* **Type** : le codec de compression, qui peut être **GZIP**, **Deflate**, **BZIP2** ou **ZipDeflate**. Notez que lorsque vous utilisez l’activité de copie pour décompresser un ou plusieurs fichiers ZipDeflate et écrire dans le magasin de données du récepteur basé sur des fichiers, les fichiers sont extraits dans le dossier : `<path specified in dataset>/<folder named as source zip file>/`.
-* **Level** : le taux de compression, qui peut être **Optimal** ou **Fastest**.
+* **Type**  : le codec de compression, qui peut être **GZIP** , **Deflate** , **BZIP2** ou **ZipDeflate** . Notez que lorsque vous utilisez l’activité de copie pour décompresser un ou plusieurs fichiers ZipDeflate et écrire dans le magasin de données du récepteur basé sur des fichiers, les fichiers sont extraits dans le dossier : `<path specified in dataset>/<folder named as source zip file>/`.
+* **Level**  : le taux de compression, qui peut être **Optimal** ou **Fastest** .
 
   * **Fastest (Le plus rapide) :** l’opération de compression doit se terminer le plus rapidement possible, même si le fichier résultant n’est pas compressé de façon optimale.
   * **Optimal** : l’opération de compression doit aboutir à une compression optimale, même si elle prend plus de temps.
 
-    Pour plus d’informations, consultez la rubrique [Niveau de compression](https://msdn.microsoft.com/library/system.io.compression.compressionlevel.aspx) .
+    Pour plus d’informations, consultez la rubrique [Niveau de compression](/dotnet/api/system.io.compression.compressionlevel) .
 
 > [!NOTE]
-> Les paramètres de compression ne sont pas pris en charge pour les données au format **AvroFormat**, **OrcFormat** ou **ParquetFormat**. Data Factory détecte et utilise le codec de compression se trouvant dans les métadonnées pour lire des fichiers présentant ces formats. Lors de l’écriture dans des fichiers présentant ces formats, Data Factory choisit le code de la compression par défaut pour ce format. Par exemple, ZLIB pour OrcFormat et SNAPPY pour ParquetFormat.
+> Les paramètres de compression ne sont pas pris en charge pour les données au format **AvroFormat** , **OrcFormat** ou **ParquetFormat** . Data Factory détecte et utilise le codec de compression se trouvant dans les métadonnées pour lire des fichiers présentant ces formats. Lors de l’écriture dans des fichiers présentant ces formats, Data Factory choisit le code de la compression par défaut pour ce format. Par exemple, ZLIB pour OrcFormat et SNAPPY pour ParquetFormat.
 
 ## <a name="unsupported-file-types-and-compression-formats"></a>Types de fichiers et formats de compression non pris en charge
 
 Vous pouvez utiliser les fonctionnalités d’extensibilité d’Azure Data Factory pour transformer les fichiers non pris en charge.
 Parmi les deux options disponibles figurent Azure Functions et les tâches personnalisées par Azure Batch.
 
-Vous pouvez consulter un exemple utilisant une fonction Azure pour [extraire le contenu d’un fichier tar](https://github.com/Azure/Azure-DataFactory/tree/master/SamplesV2/UntarAzureFilesWithAzureFunction). Pour plus d’informations, consultez [Activité Azure Functions](https://docs.microsoft.com/azure/data-factory/control-flow-azure-function-activity).
+Vous pouvez consulter un exemple utilisant une fonction Azure pour [extraire le contenu d’un fichier tar](https://github.com/Azure/Azure-DataFactory/tree/master/SamplesV2/UntarAzureFilesWithAzureFunction). Pour plus d’informations, consultez [Activité Azure Functions](./control-flow-azure-function-activity.md).
 
-Vous pouvez également créer cette fonctionnalité à l’aide d’une activité dotnet personnalisée. Des informations supplémentaires sont disponibles [ici](https://docs.microsoft.com/azure/data-factory/transform-data-using-dotnet-custom-activity)
+Vous pouvez également créer cette fonctionnalité à l’aide d’une activité dotnet personnalisée. Des informations supplémentaires sont disponibles [ici](./transform-data-using-dotnet-custom-activity.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

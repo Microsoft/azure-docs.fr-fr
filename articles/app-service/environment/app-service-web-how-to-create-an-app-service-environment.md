@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 07/11/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 89dc96370f65ff20d7f8be38ff78d6c1664305d3
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 543050bc899c257c4ad5e0d0c399a1de6f0f58f2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477794"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005201"
 ---
 # <a name="how-to-create-an-app-service-environment-v1"></a>Comment créer un environnement App Service Environment v1 
 
@@ -36,15 +36,15 @@ Il est important de connaître les choses que vous ne pouvez pas modifier. Voici
 Lors de la sélection d’un réseau virtuel et de la spécification d’un sous-réseau, assurez-vous qu’il est suffisamment grand pour contenir toute croissance future. 
 
 ### <a name="creating-an-app-service-environment-v1"></a>Création d’un environnement App Service Environment v1
-Pour créer un environnement App Service Environment v1, vous pouvez rechercher ***App Service Environment v1*** dans la Place de marché Azure ou sélectionner **Créer une ressource** -> **Web + Mobile** -> **Environnement App Service**. Pour créer un ASE v1 :
+Pour créer un environnement App Service Environment v1, vous pouvez rechercher ***App Service Environment v1** dans la Place de marché Azure ou sélectionner _ *Créer une ressource** -> **Web + Mobile** -> **Environnement App Service**. Pour créer un ASE v1 :
 
 1. Indiquez le nom de votre ASE. Le nom que vous spécifiez pour l’ASE sera utilisé pour les applications créées dans l’ASE. Si le nom de l’ASE est appsvcenvdemo, le nom du sous-domaine est : .*appsvcenvdemo.p.azurewebsites.net*. Par conséquent, si vous créez une application nommée *mytestapp*, elle est adressable à l’adresse *mytestapp.appsvcenvdemo.p.azurewebsites.net*. Vous ne pouvez pas utiliser d’espace blanc dans le nom de votre ASE. Si vous utilisez des caractères majuscules dans le nom, le nom de domaine correspondra à la version complète de ce nom en minuscules. Si vous utilisez un équilibreur de charge interne (ILB), le nom de votre ASE n’est pas utilisé dans votre sous-domaine, mais il est explicitement indiqué lors de la création de l’ASE.
    
-    ![][1]
+    ![Capture d'écran montrant comment créer un environnement ASE (Azure App Service Environment).][1]
 2. Sélectionnez votre abonnement. L’abonnement que vous utilisez pour votre ASE s’appliquera également à toutes les applications que vous créez dans cet ASE. Vous ne pouvez pas placer votre ASE dans un réseau virtuel qui se trouve dans un autre abonnement.
 3. Sélectionnez ou spécifiez un nouveau groupe de ressources. Le groupe de ressources utilisé pour votre ASE doit être le même que celui utilisé pour votre réseau virtuel. Si vous sélectionnez un réseau virtuel préexistant, la sélection du groupe de ressources pour votre ASE sera mise à jour pour refléter celle de votre réseau virtuel.
    
-    ![][2]
+    ![Capture d'écran montrant comment sélectionner ou modifier un nouveau groupe de ressources.][2]
 4. Effectuez vos sélections de réseau virtuel et d’emplacement. Vous pouvez choisir de créer un réseau virtuel ou de sélectionner un réseau virtuel existant. Si vous sélectionnez un réseau virtuel, vous pouvez indiquer un nom et un emplacement. Le nouveau réseau virtuel se voit affecter la plage d’adresses 192.168.250.0/23 et un sous-réseau nommé **default** est défini sur la plage 192.168.250.0/24. Vous pouvez aussi simplement sélectionner un réseau virtuel préexistant classique ou du Gestionnaire de ressources. La sélection du type de l’adresse IP virtuelle détermine si votre ASE est accessible directement à partir d’internet (externe) ou si elle utilise un équilibrage de charge interne (ILB). Pour en savoir plus, consultez [Utilisation d’un équilibreur de charge interne avec un environnement App Service][ILBASE]. Si vous sélectionnez un type d’adresse IP virtuelle externe, vous pouvez sélectionner le nombre d’adresses IP externes avec lesquelles le système est créé pour l’IP SSL. Si vous sélectionnez Interne, vous devez spécifier le sous-domaine que votre ASE utilisera. Les ASE peuvent être déployés dans les réseaux virtuels qui utilisent *soit* des plages d’adresses publiques, *soit* des espaces d’adressage RFC1918 (par exemple, des adresses privées). Pour utiliser un réseau virtuel avec une plage d’adresses publiques, vous devrez créer le réseau virtuel à l’avance. Lorsque vous sélectionnez un réseau virtuel préexistant, vous devrez créer un nouveau sous-réseau lors de la création de l’ASE. **Vous ne pouvez pas utiliser un sous-réseau créé au préalable dans le portail. Vous pouvez créer un ASE avec un sous-réseau pré-existant si vous le créez à l’aide d’un modèle Resource Manager.** Pour créer un ASE à partir d’un modèle, utilisez les informations dans les rubriques sur la [création d’un environnement App Service à partir du modèle][ILBAseTemplate] et la [création d’un environnement App Service ILB à partir du modèle][ASEfromTemplate].
 
 ### <a name="details"></a>Détails

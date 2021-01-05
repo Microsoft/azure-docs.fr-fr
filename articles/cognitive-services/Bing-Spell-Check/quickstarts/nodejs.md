@@ -1,25 +1,33 @@
 ---
 title: 'Démarrage rapide : Vérifier l’orthographe avec l’API REST et Node.js - Vérification orthographique Bing'
 titleSuffix: Azure Cognitive Services
-description: Commencez à utiliser l’API REST Vérification orthographique Bing pour vérifier l’orthographe et la grammaire avec ce guide de démarrage rapide.
+description: Commencez à utiliser l’API REST Vérification orthographique Bing et Node.js pour vérifier l’orthographe et la grammaire.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-spell-check
 ms.topic: quickstart
-ms.date: 12/16/2019
+ms.date: 05/21/2020
 ms.author: aahi
-ms.openlocfilehash: 69c391e6c3f93a998ade7c5721a528d895f8df76
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-js
+ms.openlocfilehash: 182ccc972fce40adc88ed66b01c92e778f6479a9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75382850"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352692"
 ---
 # <a name="quickstart-check-spelling-with-the-bing-spell-check-rest-api-and-nodejs"></a>Démarrage rapide : Vérifier l’orthographe avec l’API REST Vérification orthographique Bing et Node.js
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API REST Vérification orthographique Bing. Cette simple application Node envoie une demande à l’API et retourne la liste des mots qu’elle n’a pas reconnus, suivie de suggestions de corrections. Bien que cette application soit écrite en Node.js, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cette application est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingSpellCheckv7.js).
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API REST Vérification orthographique Bing. Cette simple application JavaScript envoie une demande à l’API et retourne une liste de suggestions de corrections. 
+
+Bien que cette application soit écrite en JavaScript, l’API est un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cette application est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingSpellCheckv7.js).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -30,7 +38,7 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
 
 ## <a name="create-and-initialize-a-project"></a>Créer et initialiser un projet
 
-1. Créez un fichier JavaScript dans votre IDE ou éditeur favori. Définissez la sévérité et exigez `https`. Créez ensuite des variables pour vos hôte du point de terminaison d’API, chemin et clé d’abonnement. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+1. Créez un fichier JavaScript dans votre IDE ou éditeur favori. Définissez la sévérité et exigez `https`. Créez ensuite des variables pour vos hôte du point de terminaison d’API, chemin et clé d’abonnement. Vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```javascript
     'use strict';
@@ -41,7 +49,11 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
     let key = '<ENTER-KEY-HERE>';
     ```
 
-2. Créez des variables pour vos paramètres de recherche et le texte à vérifier. Ajoutez le code de votre marché après `mkt=`. Le code du marché correspond au pays depuis lequel vous effectuez la demande. De plus, ajoutez votre mode de vérification orthographique après `&mode=`. Le mode est soit `proof` (détecte la plupart des erreurs d’orthographe et de grammaire) ou `spell` (détecte la plupart des erreurs d’orthographe mais pas autant d’erreurs de grammaire).
+2. Créez des variables pour vos paramètres de recherche et le texte à vérifier : 
+
+   1. Attribuez le code de votre marché au paramètre `mkt` à l’aide de l’opérateur `=`. Le code du marché correspond au code du pays ou de la région depuis lesquels vous effectuez la demande. 
+
+   1. Ajoutez le paramètre `mode` avec l’opérateur `&`, puis attribuez le mode de vérification orthographique. Le mode peut être soit `proof` (détecte la plupart des erreurs d’orthographe et de grammaire) ou `spell` (détecte la plupart des erreurs d’orthographe mais pas autant d’erreurs de grammaire).
 
     ```javascript
     let mkt = "en-US";
@@ -52,7 +64,7 @@ Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l�
 
 ## <a name="create-the-request-parameters"></a>Créer les paramètres de demande
 
-Créez vos paramètres de demande en créant un objet avec une méthode `POST`. Ajoutez votre chemin en ajoutant le chemin du point de terminaison et la chaîne de requête. Ajoutez votre clé d’abonnement dans l’en-tête `Ocp-Apim-Subscription-Key`.
+Créez vos paramètres de demande en créant un objet avec une méthode `POST`. Ajoutez votre chemin en ajoutant le chemin du point de terminaison et la chaîne de requête. Ajoutez ensuite votre clé d’abonnement dans l’en-tête `Ocp-Apim-Subscription-Key`.
 
 ```javascript
 let request_params = {
@@ -69,7 +81,7 @@ let request_params = {
 
 ## <a name="create-a-response-handler"></a>Créer un gestionnaire de réponse
 
-Créez une fonction nommée `response_handler` pour prendre la réponse JSON de l’API, puis imprimez-la. Créez une variable pour le corps de la réponse. Ajoutez la réponse quand un indicateur `data` est reçu, à l’aide de `response.on()`. Quand un indicateur `end` est reçu, imprimez le corps JSON dans la console.
+Créez une fonction nommée `response_handler` pour prendre la réponse JSON de l’API, puis imprimez-la. Créez une variable pour le corps de la réponse. Ajoutez la réponse quand un indicateur `data` est reçu, en utilisant `response.on()`. Une fois qu’un indicateur `end` est reçu, affichez le corps JSON dans la console.
 
 ```javascript
 let response_handler = function (response) {
@@ -89,7 +101,7 @@ let response_handler = function (response) {
 
 ## <a name="send-the-request"></a>Envoyer la demande
 
-Appelez l’API en utilisant `https.request()` avec vos paramètres de demande et le gestionnaire de réponse. Écrivez votre texte pour l’API et mettez par la suite fin à la demande.
+Appelez l’API en utilisant `https.request()` avec vos paramètres de demande et le gestionnaire de réponse. Écrivez votre texte dans l’API, puis mettez fin à la demande.
 
 ```javascript
 let req = https.request (request_params, response_handler);
@@ -100,13 +112,13 @@ req.end ();
 
 ## <a name="run-the-application"></a>Exécution de l'application
 
-Créez et exécutez votre projet.
+1. Créez et exécutez votre projet.
 
-Si vous utilisez la ligne de commande, utilisez les commandes suivantes pour générer et exécuter l’application.
+1. Si vous utilisez la ligne de commande, utilisez la commande suivante pour générer et exécuter l’application :
 
-```bash
-node <FILE_NAME>.js
-```
+   ```bash
+   node <FILE_NAME>.js
+   ```
 
 
 ## <a name="example-json-response"></a>Exemple de réponse JSON
@@ -157,4 +169,4 @@ Une réponse correcte est retournée au format JSON, comme dans l’exemple suiv
 > [Créer une application web monopage](../tutorials/spellcheck.md)
 
 - [Qu’est-ce que l’API Vérification orthographique Bing ?](../overview.md)
-- [Informations de référence sur l’API Vérification orthographique Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)
+- [Informations de référence sur l’API Vérification orthographique Bing v7](/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)

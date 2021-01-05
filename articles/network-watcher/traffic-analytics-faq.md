@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/08/2018
 ms.author: damendo
-ms.openlocfilehash: 2402e72d2ef9fcda46f2f40bff48759262ee30e0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f27f2a6319bf2648546a62c2566d938db657738f
+ms.sourcegitcommit: 84e3db454ad2bccf529dabba518558bd28e2a4e6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189043"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96518462"
 ---
 # <a name="traffic-analytics-frequently-asked-questions"></a>Forum aux questions pour Traffic Analytics
 
@@ -36,7 +36,7 @@ Traffic Analytics nécessite les prérequis suivants :
 
 Votre compte doit répondre à l’une des descriptions suivantes pour activer l’analytique du trafic :
 
-- Votre compte doit avoir l’un des rôles RBAC (contrôle d’accès en fonction du rôle) suivants au niveau de l’étendue de l’abonnement : propriétaire, contributeur, lecteur ou contributeur réseau.
+- Votre compte doit avoir l’un des rôles Azure suivants au niveau de l’étendue de l’abonnement : propriétaire, contributeur, lecteur ou contributeur réseau.
 - Si votre compte n’a pas l’un des rôles précédemment répertoriés, il doit avoir un rôle personnalisé auquel sont affectées les actions suivantes au niveau de l’abonnement.
             
     - Microsoft.Network/applicationGateways/read
@@ -58,7 +58,7 @@ Pour vérifier les rôles attribués à un utilisateur pour un abonnement :
 
 3. Pour répertorier tous les rôles attribués à un utilisateur donné, utilisez **Get-AzRoleAssignment -SignInName [e-mail utilisateur] -IncludeClassicAdministrators**. 
 
-Si vous ne voyez aucune sortie, contactez l’administrateur de l’abonnement pour qu’il vous donne les droits d’accès nécessaires pour exécuter les commandes. Pour plus d’informations, consultez [Gérer le contrôle d’accès en fonction du rôle avec Azure PowerShell](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-powershell).
+Si vous ne voyez aucune sortie, contactez l’administrateur de l’abonnement pour qu’il vous donne les droits d’accès nécessaires pour exécuter les commandes. Pour plus d'informations, consultez [Ajouter ou supprimer des attributions de rôle Azure à l'aide d'Azure PowerShell](../role-based-access-control/role-assignments-powershell.md).
 
 
 ## <a name="in-which-azure-regions-is-traffic-analytics-available"></a>Dans quelles régions Traffic Analytics est disponible ?
@@ -126,7 +126,7 @@ Oui.
 
 ## <a name="can-i-use-an-existing-workspace"></a>Puis-je utiliser un espace de travail existant ?
 
-Oui. Si vous sélectionnez un espace de travail existant, vérifiez qu’il a été migré vers le nouveau langage de requête. Si vous ne souhaitez pas mettre à niveau l’espace de travail, vous devez en créer un autre. Pour plus d’informations sur le nouveau langage de requête, consultez [Mise à niveau des journaux d’activité Azure Monitor vers la nouvelle recherche dans les journaux](../log-analytics/log-analytics-log-search-upgrade.md).
+Oui. Si vous sélectionnez un espace de travail existant, vérifiez qu’il a été migré vers le nouveau langage de requête. Si vous ne souhaitez pas mettre à niveau l’espace de travail, vous devez en créer un autre. Pour plus d’informations sur le nouveau langage de requête, consultez [Mise à niveau des journaux d’activité Azure Monitor vers la nouvelle recherche dans les journaux](../azure-monitor/log-query/log-query-overview.md).
 
 ## <a name="can-my-azure-storage-account-be-in-one-subscription-and-my-log-analytics-workspace-be-in-a-different-subscription"></a>Mon compte Stockage Azure peut-il être dans un abonnement spécifique et mon espace de travail Log Analytics dans un autre abonnement ?
 
@@ -176,7 +176,7 @@ Vous voyez les informations de ressources sur le tableau de bord. Toutefois, auc
 
 ## <a name="can-i-configure-traffic-analytics-using-powershell-or-an-azure-resource-manager-template-or-client"></a>Puis-je configurer l’analytique du trafic à l’aide de PowerShell ou d’un modèle/client Azure Resource Manager ?
 
-Vous pouvez configurer l’analytique du trafic à l’aide de Windows PowerShell (versions 6.2.1 et ultérieures). Pour configurer la journalisation de flux et l’analytique du trafic pour un NSG donné à l’aide de l’applet de commande Set, consultez [Set-AzNetworkWatcherConfigFlowLog](https://docs.microsoft.com/powershell/module/az.network/set-aznetworkwatcherconfigflowlog). Pour obtenir l’état de la journalisation de flux et de l’analytique du trafic pour un NSG donné, consultez [Get-AzNetworkWatcherFlowLogStatus](https://docs.microsoft.com/powershell/module/az.network/get-aznetworkwatcherflowlogstatus).
+Vous pouvez configurer l’analytique du trafic à l’aide de Windows PowerShell (versions 6.2.1 et ultérieures). Pour configurer la journalisation de flux et l’analytique du trafic pour un NSG donné à l’aide de l’applet de commande Set, consultez [Set-AzNetworkWatcherConfigFlowLog](/powershell/module/az.network/set-aznetworkwatcherconfigflowlog). Pour obtenir l’état de la journalisation de flux et de l’analytique du trafic pour un NSG donné, consultez [Get-AzNetworkWatcherFlowLogStatus](/powershell/module/az.network/get-aznetworkwatcherflowlogstatus).
 
 Vous ne pouvez pas actuellement utiliser un modèle Azure Resource Manager pour configurer l’analytique du trafic.
 
@@ -250,7 +250,7 @@ Par exemple, conformément au [plan tarifaire](https://azure.microsoft.com/prici
 
 ## <a name="how-frequently-does-traffic-analytics-process-data"></a>Quelle est la fréquence de traitement des données de Traffic Analytics ?
 
-Reportez-vous à la [section sur l’agrégation des données](https://docs.microsoft.com/azure/network-watcher/traffic-analytics-schema#data-aggregation) du schéma de Traffic Analytics et du document d’agrégation des données
+Reportez-vous à la [section sur l’agrégation des données](./traffic-analytics-schema.md#data-aggregation) du schéma de Traffic Analytics et du document d’agrégation des données
 
 ## <a name="how-does-traffic-analytics-decide-that-an-ip-is-malicious"></a>Comment Traffic Analytics décide-t-il qu’une adresse IP est malveillante ? 
 
@@ -262,63 +262,72 @@ Traffic Analytics n’a pas de prise en charge intégrée des alertes. Cependant
 - Vous pouvez utiliser le lien court vers Log Analytics dans Traffic Analytics. 
 - Utilisez le [schéma documenté ici](traffic-analytics-schema.md) pour écrire vos requêtes 
 - Cliquez sur + Nouvelle règle d’alerte pour créer une alerte
-- Reportez-vous à la [documentation des alertes de journal](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-log) pour créer l’alerte
+- Reportez-vous à la [documentation des alertes de journal](../azure-monitor/platform/alerts-log.md) pour créer l’alerte
 
-## <a name="how-do-i-check-which-vms-are-receiving-most-on-premise-traffic"></a>Comment vérifier quels sont les machines virtuelles qui reçoivent le plus de trafic local ?
+## <a name="how-do-i-check-which-vms-are-receiving-most-on-premises-traffic"></a>Comment déterminer quelles machines virtuelles reçoivent le plus de trafic local ?
 
-            AzureNetworkAnalytics_CL
-            | where SubType_s == "FlowLog" and FlowType_s == "S2S" 
-            | where <Scoping condition>
-            | mvexpand vm = pack_array(VM1_s, VM2_s) to typeof(string)
-            | where isnotempty(vm) 
-             | extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d 
-            | make-series TotalTraffic = sum(traffic) default = 0 on FlowStartTime_t from datetime(<time>) to datetime(<time>) step 1m by vm
-            | render timechart
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == "FlowLog" and FlowType_s == "S2S" 
+| where <Scoping condition>
+| mvexpand vm = pack_array(VM1_s, VM2_s) to typeof(string)
+| where isnotempty(vm) 
+| extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d 
+| make-series TotalTraffic = sum(traffic) default = 0 on FlowStartTime_t from datetime(<time>) to datetime(<time>) step 1m by vm
+| render timechart
+```
 
   Pour les adresses IP :
 
-            AzureNetworkAnalytics_CL
-            | where SubType_s == "FlowLog" and FlowType_s == "S2S" 
-            //| where <Scoping condition>
-            | mvexpand IP = pack_array(SrcIP_s, DestIP_s) to typeof(string)
-            | where isnotempty(IP) 
-            | extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d 
-            | make-series TotalTraffic = sum(traffic) default = 0 on FlowStartTime_t from datetime(<time>) to datetime(<time>) step 1m by IP
-            | render timechart
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == "FlowLog" and FlowType_s == "S2S" 
+//| where <Scoping condition>
+| mvexpand IP = pack_array(SrcIP_s, DestIP_s) to typeof(string)
+| where isnotempty(IP) 
+| extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d 
+| make-series TotalTraffic = sum(traffic) default = 0 on FlowStartTime_t from datetime(<time>) to datetime(<time>) step 1m by IP
+| render timechart
+```
 
 Pour l’heure, utilisez le format : aaaa-mm-jj 00:00:00
 
-## <a name="how-do-i-check-standard-deviation-in-traffic-recieved-by-my-vms-from-on-premise-machines"></a>Comment vérifier l'écart type du trafic reçu par mes machines virtuelles à partir de machines locales ?
+## <a name="how-do-i-check-standard-deviation-in-traffic-received-by-my-vms-from-on-premises-machines"></a>Comment vérifier l’écart type du trafic reçu par mes machines virtuelles à partir de machines locales ?
 
-            AzureNetworkAnalytics_CL
-            | where SubType_s == "FlowLog" and FlowType_s == "S2S" 
-            //| where <Scoping condition>
-            | mvexpand vm = pack_array(VM1_s, VM2_s) to typeof(string)
-            | where isnotempty(vm) 
-            | extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d
-            | summarize deviation = stdev(traffic)  by vm
-
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == "FlowLog" and FlowType_s == "S2S" 
+//| where <Scoping condition>
+| mvexpand vm = pack_array(VM1_s, VM2_s) to typeof(string)
+| where isnotempty(vm) 
+| extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + utboundBytes_d
+| summarize deviation = stdev(traffic)  by vm
+```
 
 Pour les adresses IP :
 
-            AzureNetworkAnalytics_CL
-            | where SubType_s == "FlowLog" and FlowType_s == "S2S" 
-            //| where <Scoping condition>
-            | mvexpand IP = pack_array(SrcIP_s, DestIP_s) to typeof(string)
-            | where isnotempty(IP) 
-            | extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d
-            | summarize deviation = stdev(traffic)  by IP
-            
-## <a name="how-do-i-check-which-ports-are-reachable-or-bocked-between-ip-pairs-with-nsg-rules"></a>Comment vérifier quels ports sont accessibles (ou bloqués) entre les paires d'adresses IP avec les règles du groupe de sécurité réseau ?
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == "FlowLog" and FlowType_s == "S2S" 
+//| where <Scoping condition>
+| mvexpand IP = pack_array(SrcIP_s, DestIP_s) to typeof(string)
+| where isnotempty(IP) 
+| extend traffic = AllowedInFlows_d + DeniedInFlows_d + AllowedOutFlows_d + DeniedOutFlows_d // For bytes use: | extend traffic = InboundBytes_d + OutboundBytes_d
+| summarize deviation = stdev(traffic)  by IP
+```
 
-            AzureNetworkAnalytics_CL
-            | where SubType_s == "FlowLog" and TimeGenerated between (startTime .. endTime)
-            | extend sourceIPs = iif(isempty(SrcIP_s), split(SrcPublicIPs_s, " ") , pack_array(SrcIP_s)),
-            destIPs = iif(isempty(DestIP_s), split(DestPublicIPs_s," ") , pack_array(DestIP_s))
-            | mvexpand SourceIp = sourceIPs to typeof(string)
-            | mvexpand DestIp = destIPs to typeof(string)
-            | project SourceIp = tostring(split(SourceIp, "|")[0]), DestIp = tostring(split(DestIp, "|")[0]), NSGList_s, NSGRule_s, DestPort_d, L4Protocol_s, FlowStatus_s 
-            | summarize DestPorts= makeset(DestPort_d) by SourceIp, DestIp, NSGList_s, NSGRule_s, L4Protocol_s, FlowStatus_s
+## <a name="how-do-i-check-which-ports-are-reachable-or-blocked-between-ip-pairs-with-nsg-rules"></a>Comment vérifier quels ports sont accessibles (ou bloqués) entre les paires d’adresses IP avec les règles du groupe de sécurité réseau ?
+
+```
+AzureNetworkAnalytics_CL
+| where SubType_s == "FlowLog" and TimeGenerated between (startTime .. endTime)
+| extend sourceIPs = iif(isempty(SrcIP_s), split(SrcPublicIPs_s, " ") , pack_array(SrcIP_s)),
+destIPs = iif(isempty(DestIP_s), split(DestPublicIPs_s," ") , pack_array(DestIP_s))
+| mvexpand SourceIp = sourceIPs to typeof(string)
+| mvexpand DestIp = destIPs to typeof(string)
+| project SourceIp = tostring(split(SourceIp, "|")[0]), DestIp = tostring(split(DestIp, "|")[0]), NSGList_s, NSGRule_s, DestPort_d, L4Protocol_s, FlowStatus_s 
+| summarize DestPorts= makeset(DestPort_d) by SourceIp, DestIp, NSGList_s, NSGRule_s, L4Protocol_s, FlowStatus_s
+```
 
 ## <a name="how-can-i-navigate-by-using-the-keyboard-in-the-geo-map-view"></a>Comment faire pour naviguer dans la vue de la carte géographique à l’aide du clavier ?
 
@@ -347,7 +356,7 @@ La page de la carte géographique contient deux sections principales :
 ### <a name="keyboard-navigation-at-any-stage"></a>Navigation au clavier à tout moment
     
 - `Esc` réduit la sélection développée.
-- La touche `Up arrow` effectue la même action que `Esc`. La touche `Down arrow` effectue la même action que `Enter`.
+- La touche `Up-arrow` effectue la même action que `Esc`. La touche `Down arrow` effectue la même action que `Enter`.
 - Utilisez `Shift+Plus` pour effectuer un zoom avant et `Shift+Minus` pour effectuer un zoom arrière.
 
 ## <a name="how-can-i-navigate-by-using-the-keyboard-in-the-virtual-network-topology-view"></a>Comment faire pour naviguer dans la vue de la topologie des réseaux virtuels à l’aide du clavier ?
@@ -391,5 +400,7 @@ La page de la topologie des sous-réseaux virtuels contient deux sections princi
 - Une fois que vous avez sélectionné un filtre sur la bannière et appuyé sur `Ctrl+F6`, le focus passe à l’un des nœuds en surbrillance (**Sous-réseau**) dans la vue de la topologie.
 - Pour passer à d’autres nœuds en surbrillance dans la vue de la topologie, utilisez la touche `Shift+Right arrow` pour vous déplacer vers l’avant. 
 - Sur les nœuds en surbrillance, le focus passe à la **boîte à outils Informations** du nœud. Par défaut, le focus passe au bouton **Plus de détails** de la **boîte à outils Informations**. Pour vous déplacer davantage dans la vue de la **boîte**, utilisez les touches `Right arrow` et `Left arrow` pour vous déplacer vers l’avant et vers l’arrière, respectivement. Appuyer sur `Enter` a le même effet que cliquer sur le bouton actif dans la **boîte à outils Informations**.
-- Si vous sélectionnez l’un de ces nœuds, vous pouvez appuyer sur la touche `Shift+Left arrow` pour visiter chacune de ses connexions. Le focus passe à la **boîte à outils Informations** de cette connexion. Vous pouvez à tout moment réappuyer sur `Shift+Right arrow` pour faire revenir le focus sur le nœud.    
+- Si vous sélectionnez l’un de ces nœuds, vous pouvez appuyer sur la touche `Shift+Left arrow` pour visiter chacune de ses connexions. Le focus passe à la **boîte à outils Informations** de cette connexion. Vous pouvez à tout moment réappuyer sur `Shift+Right arrow` pour faire revenir le focus sur le nœud.
 
+## <a name="are-classic-nsgs-supported"></a>Les groupes de sécurité réseau classiques sont-ils pris en charge ?
+Non, Traffic Analytics ne prend pas en charge les groupes de sécurité réseau classiques. Nous vous recommandons de migrer les ressources IaaS du niveau classique à Azure Resource Manager en tant que ressources classiques [déconseillées](https://docs.microsoft.com/azure/virtual-machines/classic-vm-deprecation). Consultez cet article pour en savoir plus sur la [migration](https://docs.microsoft.com/azure/virtual-machines/migration-classic-resource-manager-overview).

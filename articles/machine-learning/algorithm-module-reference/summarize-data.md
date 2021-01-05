@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 01/27/2020
-ms.openlocfilehash: b0def12582dd3795e1b17334406e28d77c3c5656
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5206565b85d1551e5e551f1dfe75d28c93bc53f0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477440"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90898216"
 ---
 # <a name="summarize-data"></a>Totaliser les données
 
-Cet article décrit un module du concepteur Azure Machine Learning (préversion).
+Cet article décrit un module du concepteur Azure Machine Learning.
 
 Utilisez le module Synthétiser les données pour créer un ensemble de mesures statistiques standard qui décrivent chaque colonne de la table d’entrée.
 

@@ -6,19 +6,19 @@ author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: kevin
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: f1f3667c088c5f7300317ea02ca19a72e4e62905
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: e4656531f1424c3414ab00afbbe241a532738400
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427385"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462269"
 ---
-# <a name="maximizing-rowgroup-quality-for-columnstore"></a>Optimiser la qualité du rowgroup pour columnstore
+# <a name="maximize-rowgroup-quality-for-columnstore-index-performance"></a>Optimiser la qualité du rowgroup pour améliorer le niveau de performance de l’index columnstore
 
 La qualité du rowgroup est déterminée par le nombre de lignes d’un rowgroup. L’augmentation de la mémoire disponible peut optimiser le nombre de lignes qu’un index columnstore compresse dans chaque rowgroup.  Utilisez ces méthodes pour améliorer les taux de compression et les performances de requête pour les index columnstore.
 
@@ -26,7 +26,7 @@ La qualité du rowgroup est déterminée par le nombre de lignes d’un rowgroup
 
 Dans la mesure où un index columnstore analyse une table en examinant les segments de colonne des rowgroups, l’optimisation du nombre de lignes dans chaque rowgroup améliore les performances de requête. Quand les rowgroups comportent un grand nombre de lignes, la compression des données s’améliore, ce qui signifie qu’il y a moins de données à lire à partir du disque.
 
-Pour plus d’informations sur les rowgroups, voir [Description des index columnstore](/sql/relational-databases/indexes/columnstore-indexes-overview?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+Pour plus d’informations sur les rowgroups, voir [Description des index columnstore](/sql/relational-databases/indexes/columnstore-indexes-overview?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).
 
 ## <a name="target-size-for-rowgroups"></a>Taille cible des rowgroups
 
@@ -34,15 +34,15 @@ Pour optimiser les performances de requête, l’objectif est de maximiser le no
 
 ## <a name="rowgroups-can-get-trimmed-during-compression"></a>Des rowgroups peuvent être découpés en cours de compression
 
-Pendant un chargement en masse ou une reconstruction d’index columnstore, la mémoire disponible est parfois insuffisante pour compresser toutes les lignes désignées pour chaque rowgroup. Lorsque la mémoire est sollicitée, les index columnstore découpent les rowgroups pour permettre la réussite de la compression dans le columnstore.
+Pendant un chargement en masse ou une reconstruction d’index columnstore, la mémoire disponible est parfois insuffisante pour compresser toutes les lignes désignées de chaque rowgroup. Lorsque la mémoire est sollicitée, les index columnstore découpent les rowgroups pour permettre la réussite de la compression dans le columnstore.
 
 Quand la mémoire est insuffisante pour compresser au moins 10 000 lignes dans chaque rowgroup, une erreur est générée.
 
-Pour plus d’informations sur le chargement en masse, voir [Chargement de données d’index columnstore](/sql/relational-databases/indexes/columnstore-indexes-data-loading-guidance?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest#Bulk ).
+Pour plus d’informations sur le chargement en masse, voir [Chargement de données d’index columnstore](/sql/relational-databases/indexes/columnstore-indexes-data-loading-guidance?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest#Bulk&preserve-view=true ).
 
 ## <a name="how-to-monitor-rowgroup-quality"></a>Comment surveiller la qualité du rowgroup
 
-La vue de gestion dynamique sys.dm_pdw_nodes_db_column_store_row_group_physical_stats ([sys.dm_db_column_store_row_group_physical_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-column-store-row-group-physical-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) contient la définition de vue correspondant à SQL DB) expose des informations utiles telles que le nombre de lignes dans les rowgroups et la raison du découpage, le cas échéant. Vous pouvez créer la vue suivante pour interroger facilement cette vue de gestion dynamique et obtenir ainsi des informations sur le découpage du rowgroup.
+La vue de gestion dynamique sys.dm_pdw_nodes_db_column_store_row_group_physical_stats ([sys.dm_db_column_store_row_group_physical_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-column-store-row-group-physical-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) contient la définition de vue correspondant à SQL DB) expose des informations utiles telles que le nombre de lignes dans les rowgroups et la raison du découpage, le cas échéant. Vous pouvez créer la vue suivante pour interroger facilement cette vue de gestion dynamique et obtenir ainsi des informations sur le découpage du rowgroup.
 
 ```sql
 create view dbo.vCS_rg_physical_stats
@@ -77,14 +77,15 @@ trim_reason_desc indique si le rowgroup a été découpé (trim_reason_desc = NO
 
 ## <a name="how-to-estimate-memory-requirements"></a>Estimation des besoins en mémoire
 
-La mémoire maximale requise pour compresser un rowgroup est d’environ
+La mémoire maximale nécessaire à la compression d’un rowgroup est d’environ :
 
 - 72 Mo +
 - \#lignes \* \#colonnes \* 8 octets +
 - \#lignes \* \#colonnes de chaîne courte \* 32 octets +
 - \#colonnes de chaîne longue \* 16 Mo pour le dictionnaire de compression
 
-où les colonnes de chaîne courte utilisent des données de type chaîne <= 32 octets, et les colonnes de chaîne longueur utilisent des données de type chaîne > 32 octets.
+> [!NOTE]
+> Où les colonnes de chaîne courte utilisent des données de type chaîne <= 32 octets, et les colonnes de chaîne longueur utilisent des données de type chaîne > 32 octets.
 
 Les chaînes longues sont compressés avec une méthode de compression conçue pour la compression de texte. Cette méthode de compression utilise un *dictionnaire* pour stocker les modèles de texte. La taille maximale d’un dictionnaire est de 16 Mo. Il n’y qu’un seul dictionnaire pour chaque colonne de chaîne longue dans le rowgroup.
 
@@ -121,7 +122,7 @@ Concevez la requête de chargement pour vous concentrer uniquement sur le charge
 
 ### <a name="adjust-maxdop"></a>Ajuster MAXDOP
 
-Chaque distribution compresse les rowgroups dans le columnstore en parallèle lorsque plusieurs cœurs de processeur sont disponibles par distribution. Le parallélisme requiert des ressources de mémoire supplémentaires, qui peuvent entraîner une sollicitation de la mémoire et un découpage de rowgroup.
+Chaque distribution compresse les rowgroups dans le columnstore en parallèle lorsque plusieurs cœurs de processeur sont disponibles dans chaque distribution. Le parallélisme requiert des ressources de mémoire supplémentaires, qui peuvent entraîner une sollicitation de la mémoire et un découpage de rowgroup.
 
 Pour réduire la sollicitation de la mémoire, vous pouvez utiliser l’indicateur de requête MAXDOP pour forcer l’exécution de l’opération de chargement en mode série au sein de chaque distribution.
 

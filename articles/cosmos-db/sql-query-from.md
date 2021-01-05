@@ -3,23 +3,25 @@ title: Clause FROM dans Azure Cosmos DB
 description: Découvrez la syntaxe SQL et l’exemple de clause FROM pour Azure Cosmos DB. Cet article contient également des exemples montrant comment définir l’étendue des résultats et obtenir des sous-éléments à l’aide de la clause FROM.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 12/02/2019
+ms.date: 05/08/2020
 ms.author: tisande
-ms.openlocfilehash: 3939594064b63c567720378b9d316acca64d3266
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3844a628a8e3773821736324bfdaab3f64ff9da5
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77587683"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93336246"
 ---
 # <a name="from-clause-in-azure-cosmos-db"></a>Clause FROM dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 La clause FROM (`FROM <from_specification>`) est facultative, sauf si la source est filtrée ou projetée plus loin dans la requête. Une requête comme `SELECT * FROM Families` énumère l’ensemble du conteneur `Families`. Vous pouvez également utiliser l’identificateur ROOT spécial pour le conteneur au lieu d’utiliser le nom du conteneur.
 
-La clause FROM applique les règles suivantes par requête :
+La clause `FROM` applique les règles suivantes par requête :
 
-* Le conteneur peut être un alias, tel que `SELECT f.id FROM Families AS f` ou simplement `SELECT f.id FROM Families f`. Ici, `f` est l’alias de `Families`. AS est un mot clé facultatif pour [attribuer un alias](sql-query-aliasing.md) à l’identificateur.  
+* Le conteneur peut être un alias, tel que `SELECT f.id FROM Families AS f` ou simplement `SELECT f.id FROM Families f`. Ici, `f` est l’alias de `Families`. AS est un mot clé facultatif pour [attribuer un alias](sql-query-working-with-json.md#aliasing) à l’identificateur.  
 
 * Une fois l’alias attribué, vous ne pouvez plus lier le nom source d’origine. Par exemple, `SELECT Families.id FROM Families f` est syntaxiquement incorrect, car l’identificateur `Families`, qui s’est vu attribuer un alias, ne peut plus être résolu.  
 
@@ -30,15 +32,15 @@ La clause FROM applique les règles suivantes par requête :
 ```sql  
 FROM <from_specification>  
   
-<from_specification> ::=   
+<from_specification> ::=
         <from_source> {[ JOIN <from_source>][,...n]}  
   
-<from_source> ::=   
+<from_source> ::=
           <container_expression> [[AS] input_alias]  
         | input_alias IN <container_expression>  
   
-<container_expression> ::=   
-        ROOT   
+<container_expression> ::=
+        ROOT
      | container_name  
      | input_alias  
      | <container_expression> '.' property_name  
@@ -51,9 +53,9 @@ FROM <from_specification>
   
   Spécifie une source de données, avec ou sans alias. Si aucun alias n’est spécifié, il est déduit à partir de `<container_expression>` à l’aide des règles suivantes :  
   
-  -  Si l’expression est un container_name, alors container_name sera être utilisé en tant qu’alias.  
+-  Si l’expression est un container_name, alors container_name sera être utilisé en tant qu’alias.  
   
-  -  Si l’expression est `<container_expression>`, puis property_name, alors property_name sera être utilisé en tant qu’alias. Si l’expression est un container_name, alors container_name sera être utilisé en tant qu’alias.  
+-  Si l’expression est `<container_expression>`, puis property_name, alors property_name sera être utilisé en tant qu’alias. Si l’expression est un container_name, alors container_name sera être utilisé en tant qu’alias.  
   
 - AS `input_alias`  
   
@@ -99,9 +101,9 @@ Si une expression de conteneur accède à des propriétés ou éléments de tabl
   
 Une expression de conteneur peut avoir une étendue de document ou de conteneur :  
   
--   Une expression est étendue à un conteneur si la source sous-jacente de l’expression de conteneur est ROOT ou `container_name`. Une telle expression représente un ensemble de documents récupérés directement à partir du conteneur, et n’est pas dépendante du traitement d’autres expressions de conteneur.  
+- Une expression est étendue à un conteneur si la source sous-jacente de l’expression de conteneur est ROOT ou `container_name`. Une telle expression représente un ensemble de documents récupérés directement à partir du conteneur, et n’est pas dépendante du traitement d’autres expressions de conteneur.  
   
--   Une expression est étendue à un document si la source sous-jacente de l’expression de conteneur est `input_alias`, introduit plus tôt dans la requête. Une telle expression représente un ensemble de documents obtenus en évaluant l’expression de conteneur dans l’étendue de chaque document appartenant au jeu associé au conteneur avec alias.  Le jeu résultant sera une union de jeux obtenus en évaluant l’expression de conteneur pour chacun des documents du jeu sous-jacent. 
+- Une expression est étendue à un document si la source sous-jacente de l’expression de conteneur est `input_alias`, introduit plus tôt dans la requête. Une telle expression représente un ensemble de documents obtenus en évaluant l’expression de conteneur dans l’étendue de chaque document appartenant au jeu associé au conteneur avec alias. Le jeu résultant sera une union de jeux obtenus en évaluant l’expression de conteneur pour chacun des documents du jeu sous-jacent.
 
 ## <a name="examples"></a>Exemples
 

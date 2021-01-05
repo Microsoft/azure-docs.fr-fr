@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 08/19/2019
 ms.author: johndeu
-ms.openlocfilehash: be4009d418f2f8f3dff755e2e990efee593f070b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6454bc863cb5fd628d581fff380c5ab61354f762
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76514219"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87053041"
 ---
 # <a name="smooth-streaming-protocol-ms-sstr-amendment-for-hevc"></a>Avenant relatif au protocole Smooth Streaming (MS-SSTR) pour HEVC 
 
@@ -64,7 +64,7 @@ Les termes suivants sont spécifiques à ce document :
 
 ### <a name="121-normative-references"></a>1.2.1 Références normatives 
 
->  [MS-SSTR] Protocole de diffusion en continu lisse *v20140502*[https://msdn.microsoft.com/library/ff469518.aspx](https://msdn.microsoft.com/library/ff469518.aspx)
+>  [MS-SSTR] Protocole de diffusion en continu lisse *v20140502*[https://msdn.microsoft.com/library/ff469518.aspx](/openspecs/windows_protocols/ms-sstr/8383f27f-7efe-4c60-832a-387274457251)
 > 
 >   [ISO/CEI 14496-12] Organisation internationale de normalisation, « Technologies de l’information -- Codage des objets audiovisuels -- Partie 12: Format ISO de base pour les fichiers médias », ISO/CEI 14496-12:2014, Édition 4, Plus Corrigendum 1, Avenants 1 & 2.
 >   <https://standards.iso.org/ittf/PubliclyAvailableStandards/c061988_ISO_IEC_14496-12_2012.zip>
@@ -242,10 +242,12 @@ ProtectionElement DOIT être présent lorsque le chiffrement commun (CENC) est a
 > 
 >   La syntaxe des champs définis dans cette section, spécifiée dans ABNF [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096) est la suivante :
 
-    FileType = MajorBrand MinorVersion CompatibleBrands
-    MajorBrand = STRING_UINT32
-    MinorVersion = STRING_UINT32
-    CompatibleBrands = "ccff" "iso8" 0\*(STRING_UINT32)
+```properties
+FileType = MajorBrand MinorVersion CompatibleBrands
+MajorBrand = STRING_UINT32
+MinorVersion = STRING_UINT32
+CompatibleBrands = "ccff" "iso8" 0\*(STRING_UINT32)
+```
 
 **Remarque** : les marques de compatibilité « ccff » et « iso8 » indiquent que les fragments sont conformes au « Format de fichier conteneur commun » et au chiffrement commun [ISO/CEI 23001-7] et au format de fichier multimédia de base ISO 4 [ISO/CEI 14496-12].
 
@@ -288,14 +290,18 @@ ProtectionElement DOIT être présent lorsque le chiffrement commun (CENC) est a
 > 
 >   Les présentations contenant le jeu de flux HEVC DOIVENT définir :
 
-    MajorVersion = 2
-    MinorVersion = 2
+```properties
+MajorVersion = 2
+MinorVersion = 2
+```
 
 >   LookaheadCount = 0 (Note: outils déconseillés)
 > 
 >   Les présentations DOIVENT également définir :
 
-    TimeScale = 90000
+```properties
+TimeScale = 90000
+```
 
 >   Collection de flux : collection d’éléments de données de description de flux, comme spécifié dans la section *3.1.1.1.2*.
 > 

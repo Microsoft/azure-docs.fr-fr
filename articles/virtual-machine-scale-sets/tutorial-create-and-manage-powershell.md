@@ -1,5 +1,5 @@
 ---
-title: Tutoriel - Créer et gérer un groupe de machines virtuelles identiques Azure
+title: 'Tutoriel : Créer et gérer un groupe de machines virtuelles identiques Azure – Azure PowerShell'
 description: Découvrez comment utiliser Azure PowerShell pour créer un groupe de machines virtuelles identiques, ainsi que certaines tâches de gestion courantes comme le démarrage et l’arrêt d’une instance, ou la modification de la capacité du groupe identique.
 author: ju-shim
 ms.author: jushiman
@@ -8,15 +8,15 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 05/18/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 2e9c027a927d4aba9c174db8dfc5a72f0cc4f214
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: 1ab52c197ee57351a53919291f1c2e41108396ec
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83195187"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078518"
 ---
-# <a name="tutorial-create-and-manage-a-virtual-machine-scale-set-with-azure-powershell"></a>Didacticiel : Créer et gérer un groupe de machines virtuelles identiques avec Azure PowerShell
+# <a name="tutorial-create-and-manage-a-virtual-machine-scale-set-with-azure-powershell"></a>Tutoriel : Créer et gérer un groupe de machines virtuelles identiques avec Azure PowerShell
 
 Un groupe de machines virtuelles identiques vous permet de déployer et de gérer un ensemble de machines virtuelles identiques prenant en charge la mise à l’échelle automatique. Tout au long du cycle de vie du groupe de machines virtuelles identiques, vous devrez peut-être exécuter une ou plusieurs tâches de gestion. Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
@@ -45,7 +45,7 @@ Le nom du groupe de ressources est spécifié lorsque vous créez ou modifiez un
 
 
 ## <a name="create-a-scale-set"></a>Créer un groupe identique
-Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour les instances de machine virtuelle avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential) :
+Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour les instances de machine virtuelle avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1) :
 
 ```azurepowershell-interactive
 $cred = Get-Credential
@@ -66,6 +66,9 @@ New-AzVmss `
 ```
 
 La création et la configuration de l’ensemble des ressources et des instances de machine virtuelle du groupe identique prennent quelques minutes.
+
+> [!IMPORTANT]
+> Si vous ne parvenez pas à vous connecter à votre groupe identique, vous devrez peut-être créer un groupe de sécurité réseau en ajoutant le paramètre *[-SecurityGroupName "mySecurityGroup"](/powershell/module/az.compute/new-azvmss)* .
 
 
 ## <a name="view-the-vm-instances-in-a-scale-set"></a>Afficher les instances de machine virtuelle dans un groupe identique
@@ -191,6 +194,8 @@ New-AzVmss `
   -Credential $cred
 ```
 
+> [!IMPORTANT]
+> Nous vous recommandons d’utiliser la *toute dernière* version de l’image. Spécifiez « latest » pour utiliser la version la plus récente d’une image disponible au moment du déploiement. Notez que, même si vous utilisez « latest », l’image de machine virtuelle ne sera pas automatiquement mise à jour après le déploiement, quand bien même une nouvelle version serait disponible.
 
 ## <a name="understand-vm-instance-sizes"></a>Comprendre les tailles d’instance de machine virtuelle
 Une taille d’instance de machine virtuelle, ou *référence SKU*, détermine la quantité de ressources de calcul, comme l’UC, le GPU et la mémoire, qui sont mises à la disposition de l’instance de machine virtuelle. Les instances de machine virtuelle doivent être correctement dimensionnées en fonction de la charge de travail attendue.
@@ -200,12 +205,12 @@ Le tableau suivant classe les tailles courantes de machine virtuelle en fonction
 
 | Type                     | Tailles courantes           |    Description       |
 |--------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| [Usage général](../virtual-machines/windows/sizes-general.md)         |Dsv3, Dv3, DSv2, Dv2, DS, D, Av2, A0-7| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
-| [Optimisé pour le calcul](../virtual-machines/windows/sizes-compute.md)   | Fs, F             | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
-| [Mémoire optimisée](../virtual-machines/windows/sizes-memory.md)    | Esv3, Ev3, M, GS, G, DSv2, DS, Dv2, D   | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
-| [Optimisé pour le stockage](../virtual-machines/windows/sizes-storage.md)      | Ls                | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
-| [GPU](../virtual-machines/windows/sizes-gpu.md)          | NV, NC            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
-| [Hautes performances](../virtual-machines/windows/sizes-hpc.md) | H, A8-11          | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). 
+| [Usage général](../virtual-machines/sizes-general.md)         |Dsv3, Dv3, DSv2, Dv2, DS, D, Av2, A0-7| Ratio processeur/mémoire équilibré. Idéale pour le développement/test et pour les petites et moyennes applications et solutions de données.  |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md)   | Fs, F             | Ratio processeur/mémoire élevé. Convient pour les applications au trafic moyen, les appliances réseau et les processus de traitement par lots.        |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md)    | Esv3, Ev3, M, GS, G, DSv2, DS, Dv2, D   | Ratio mémoire/cœur élevé. Idéale pour les bases de données relationnelles, les caches moyens à grands et l’analytique en mémoire.                 |
+| [Optimisé pour le stockage](../virtual-machines/sizes-storage.md)      | Ls                | Débit de disque et E/S élevés. Idéale pour les bases de données NoSQL, SQL et Big Data.                                                         |
+| [GPU](../virtual-machines/sizes-gpu.md)          | NV, NC            | Machines virtuelles spécialisées conçues pour les opérations graphiques lourdes et la retouche vidéo.       |
+| [Hautes performances](../virtual-machines/sizes-hpc.md) | H, A8-11          | Nos machines virtuelles dotées des processeurs les plus puissants avec interfaces réseau haut débit en option (RDMA). 
 
 ### <a name="find-available-vm-instance-sizes"></a>Rechercher des tailles d’instance de machine virtuelle disponibles
 Pour afficher la liste des tailles d’instances de machine virtuelle disponibles dans une région particulière, utilisez la commande [Get-AzVMSize](/powershell/module/az.compute/get-azvmsize). 

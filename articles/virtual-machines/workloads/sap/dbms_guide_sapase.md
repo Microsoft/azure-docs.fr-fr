@@ -9,22 +9,23 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 04/13/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 25d911869c95baba6ac9db3b893292e702e9c0e9
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: a3ef3fc2afa07590ff676d57c22f05ed723539f9
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81273203"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957722"
 ---
 # <a name="sap-ase-azure-virtual-machines-dbms-deployment-for-sap-workload"></a>Déploiement SGBD de machines virtuelles SAP ASE Azure pour charge de travail SAP
 
-Ce document décrit les différents domaines à prendre en compte lors du déploiement de SAP ASE dans Azure IaaS. Comme condition préalable à ce document, vous devez avoir lu le document [Considerations for Azure Virtual Machines DBMS deployment for SAP workload](dbms_guide_general.md) (Facteurs à prendre en compte pour le déploiement SGBD des machines virtuelles Azure pour la charge de travail SAP) et d’autres guides de la [documentation sur la charge de travail SAP sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/get-started). Ce document aborde l’exécution de SAP ASE sur les systèmes d’exploitation Linux et Windows. La version minimale prise en charge sur Azure est SAP ASE 16.0.02 (version 16, pack de support 2). Il est recommandé de déployer la dernière version de SAP et le niveau de correctif logiciel le plus récent.  Au minimum, SAP ASE 16.0.03.07 (version 16, pack de support 3, niveau de correctif logiciel 7) est recommandé.  La version la plus récente de SAP est disponible dans [Targeted ASE 16.0 Release Schedule and CR list Information](https://wiki.scn.sap.com/wiki/display/SYBASE/Targeted+ASE+16.0+Release+Schedule+and+CR+list+Information).
+Ce document décrit les différents domaines à prendre en compte lors du déploiement de SAP ASE dans Azure IaaS. Comme condition préalable à ce document, vous devez avoir lu le document [Considerations for Azure Virtual Machines DBMS deployment for SAP workload](dbms_guide_general.md) (Facteurs à prendre en compte pour le déploiement SGBD des machines virtuelles Azure pour la charge de travail SAP) et d’autres guides de la [documentation sur la charge de travail SAP sur Azure](./get-started.md). Ce document aborde l’exécution de SAP ASE sur les systèmes d’exploitation Linux et Windows. La version minimale prise en charge sur Azure est SAP ASE 16.0.02 (version 16, pack de support 2). Il est recommandé de déployer la dernière version de SAP et le niveau de correctif logiciel le plus récent.  Au minimum, SAP ASE 16.0.03.07 (version 16, pack de support 3, niveau de correctif logiciel 7) est recommandé.  La version la plus récente de SAP est disponible dans [Targeted ASE 16.0 Release Schedule and CR list Information](https://wiki.scn.sap.com/wiki/display/SYBASE/Targeted+ASE+16.0+Release+Schedule+and+CR+list+Information).
 
 Des informations supplémentaires sur la prise en charge des versions avec les applications SAP ou l’emplacement du support d’installation sont disponibles, en plus du tableau de disponibilité des produits SAP aux endroits suivants :
 
@@ -59,7 +60,7 @@ La taille de la page est généralement de 2 048 Ko. Pour plus d’information
 
 ## <a name="recommendations-on-vm-and-disk-structure-for-sap-ase-deployments"></a>Recommandations relatives à la structure des machines virtuelles et des disques pour les déploiements SAP ASE
 
-Les applications SAP ASE pour SAP NetWeaver sont prises en charge sur tous les types de machines virtuelles figurant dans [Note de support SAP n° 1928533](https://launchpad.support.sap.com/#/notes/1928533). Les types de machines virtuelles classiques utilisés pour les serveurs de base de données SAP ASE de taille moyenne incluent Esv3.  Les bases de données volumineuses de plusieurs téraoctets peuvent tirer parti des types de machines virtuelles de la série M. Les performances d’écriture sur le disque du journal des transactions SAP ASE peuvent être améliorées en activant l’accélérateur d’écriture de la série M. L’accélérateur d’écriture doit être testé soigneusement avec SAP ASE en raison de la façon dont SAP ASE effectue les écritures de journal.  Passez en revue [Note de support SAP n° 2816580](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator) et envisagez d’exécuter un test de performances.  
+Les applications SAP ASE pour SAP NetWeaver sont prises en charge sur tous les types de machines virtuelles figurant dans [Note de support SAP n° 1928533](https://launchpad.support.sap.com/#/notes/1928533). Les types de machines virtuelles classiques utilisés pour les serveurs de base de données SAP ASE de taille moyenne incluent Esv3.  Les bases de données volumineuses de plusieurs téraoctets peuvent tirer parti des types de machines virtuelles de la série M. Les performances d’écriture sur le disque du journal des transactions SAP ASE peuvent être améliorées en activant l’accélérateur d’écriture de la série M. L’accélérateur d’écriture doit être testé soigneusement avec SAP ASE en raison de la façon dont SAP ASE effectue les écritures de journal.  Passez en revue [Note de support SAP n° 2816580](../../how-to-enable-write-accelerator.md) et envisagez d’exécuter un test de performances.  
 L’accélérateur d’écriture est conçu pour le disque du journal des transactions uniquement. Le cache au niveau du disque doit être défini sur AUCUN. Ne soyez pas surpris si l’accélérateur d’écriture Azure n’affiche pas les mêmes améliorations qu’avec un autre système de gestion de base de données (SGBD). En fonction de la façon dont SAP ASE écrit dans le journal des transactions, il se peut que l’accélérateur d’écriture Azure produise peu ou pas du tout d’accélération.
 Des disques distincts sont recommandés pour les unités de données et les unités de journaux.  Les bases de données système sybsecurity et `saptools` ne nécessitent pas de disques dédiés et peuvent être placées sur les disques contenant les unités de données et de journaux de la base de données SAP 
 
@@ -71,7 +72,7 @@ SAP ASE écrit des données de façon séquentielle dans les unités de stockage
 Il est recommandé de configurer l’extension automatique de la base de données comme décrit dans l’article [Configuring Automatic Database Space Expansion in SAP Adaptive Server Enterprise](https://blogs.sap.com/2014/07/09/configuring-automatic-database-space-expansion-in-sap-adaptive-server-enterprise/) et [Note de support SAP n° 1815695](https://launchpad.support.sap.com/#/notes/1815695). 
 
 ### <a name="sample-sap-ase-on-azure-virtual-machine-disk-and-file-system-configurations"></a>Exemples de configurations de SAP ASE sur des systèmes de fichiers, des disques et des machines virtuelles Azure 
-Les modèles ci-dessous présentent des exemples de configurations pour Linux et Windows. Avant de confirmer la configuration des machines virtuelles et des disques, vérifiez que les quotas de bande passante de stockage et de réseau de la machine virtuelle individuelle sont suffisants pour répondre aux besoins de l’entreprise. Gardez également à l’esprit que différents types de machines virtuelles Azure ont un nombre maximal différent de disques pouvant être attachés à la machine virtuelle. Par exemple, une machine virtuelle E4s_v3 a un débit d’ES de stockage limité à 48 Mo/s. Si le débit de stockage requis par l’activité de sauvegarde de base de données exige plus de 48 Mo/s, un plus grand type de machine virtuelle avec davantage de débit de bande passante de stockage est inévitable. Quand vous configurez le stockage Azure, vous devez également garder à l’esprit que, en particulier avec le [stockage Premium Azure](https://docs.microsoft.com/azure/virtual-machines/windows/premium-storage-performance) le débit et les E/S par seconde par Go de capacité changent. Pour plus d’informations à ce sujet, consultez l’article [Quels sont les types de disque disponibles dans Azure ?](https://docs.microsoft.com/azure/virtual-machines/windows/disks-types). Les quotas pour des types de machines virtuelles Azure spécifiques sont décrits dans l’article [Tailles de machine virtuelle à mémoire optimisée](https://docs.microsoft.com/azure/virtual-machines/sizes-memory) et les articles qui y sont liés. 
+Les modèles ci-dessous présentent des exemples de configurations pour Linux et Windows. Avant de confirmer la configuration des machines virtuelles et des disques, vérifiez que les quotas de bande passante de stockage et de réseau de la machine virtuelle individuelle sont suffisants pour répondre aux besoins de l’entreprise. Gardez également à l’esprit que différents types de machines virtuelles Azure ont un nombre maximal différent de disques pouvant être attachés à la machine virtuelle. Par exemple, une machine virtuelle E4s_v3 a un débit d’ES de stockage limité à 48 Mo/s. Si le débit de stockage requis par l’activité de sauvegarde de base de données exige plus de 48 Mo/s, un plus grand type de machine virtuelle avec davantage de débit de bande passante de stockage est inévitable. Quand vous configurez le stockage Azure, vous devez également garder à l’esprit que, en particulier avec le [stockage Premium Azure](../../premium-storage-performance.md) le débit et les E/S par seconde par Go de capacité changent. Pour plus d’informations à ce sujet, consultez l’article [Quels sont les types de disque disponibles dans Azure ?](../../disks-types.md). Les quotas pour des types de machines virtuelles Azure spécifiques sont décrits dans l’article [Tailles de machine virtuelle à mémoire optimisée](../../sizes-memory.md) et les articles qui y sont liés. 
 
 > [!NOTE]
 >  Si un système SGBD est déplacé d’un site local vers Azure, il est recommandé d’effectuer une supervision de la machine virtuelle et d’évaluer le processeur, la mémoire, les E/S par seconde et le débit de stockage. Comparez les valeurs maximales observées aux limites de quotas de machines virtuelles décrites dans les articles mentionnés ci-dessus
@@ -213,7 +214,7 @@ L’outil SAP SWPM (Software Provisioning Manager) donne la possibilité de chif
 - Envisager d’utiliser UltraDisk pour les systèmes x-large 
 - Exécuter `saptune` SAP-ASE sur le système d’exploitation Linux 
 - Sécuriser la base de données avec le chiffrement de la base de données, stocker manuellement les clés dans Azure Key Vault 
-- Suivre la [check-list relative à SAP sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-deployment-checklist) 
+- Suivre la [check-list relative à SAP sur Azure](./sap-deployment-checklist.md) 
 - Configurer la sauvegarde de fichier journal et la sauvegarde complète 
 - Tester la haute disponibilité/reprise d’activité, la sauvegarde et la restauration, et exécuter un test de contrainte et de volume 
 - Confirmer le fonctionnement de l’extension automatique de la base de données 
@@ -310,5 +311,4 @@ Un bulletin d’informations mensuel est publié via [Note de support SAP n° 2
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Consultez l’article [Check-list relative à la planification et au déploiement de la charge de travail SAP sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-deployment-checklist)
-
+Consultez l’article [Check-list relative à la planification et au déploiement de la charge de travail SAP sur Azure](./sap-deployment-checklist.md)

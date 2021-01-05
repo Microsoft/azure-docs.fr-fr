@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/05/2020
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: 3eec6583ebdff35d7e40d2eec305a947de0cb87c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 895a81df858e51a266cd87c96a161695a4bf2cc1
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79299451"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95992862"
 ---
 [!INCLUDE [virtual-machines-disks-incremental-snapshots-description](virtual-machines-disks-incremental-snapshots-description.md)]
 
@@ -32,19 +32,21 @@ Vous pouvez utiliser Azure PowerShell pour créer un instantané incrémentiel. 
 Install-Module -Name Az -AllowClobber -Scope CurrentUser
 ```
 
-Une fois la dernière version installée, connectez-vous à votre session PowerShell à l'aide de la commande `az login`.
+Une fois la dernière version installée, connectez-vous à votre session PowerShell à l'aide de la commande `Connect-AzAccount`.
 
-Pour créer un instantané incrémentiel avec Azure PowerShell, définissez la configuration avec [New-AzSnapShotConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azsnapshotconfig?view=azps-2.7.0) avec le paramètre `-Incremental`, puis passez-la en tant que variable à [New-AzSnapshot](https://docs.microsoft.com/powershell/module/az.compute/new-azsnapshot?view=azps-2.7.0) par le biais du paramètre `-Snapshot`.
-
-Remplacez `<yourDiskNameHere>`, `<yourResourceGroupNameHere>` et `<yourDesiredSnapShotNameHere>` par vos valeurs. Vous pouvez ensuite utiliser le script suivant pour créer un instantané incrémentiel :
+Pour créer un instantané incrémentiel avec Azure PowerShell, définissez la configuration avec [New-AzSnapShotConfig](/powershell/module/az.compute/new-azsnapshotconfig?view=azps-2.7.0) avec le paramètre `-Incremental`, puis passez-la en tant que variable à [New-AzSnapshot](/powershell/module/az.compute/new-azsnapshot?view=azps-2.7.0) par le biais du paramètre `-Snapshot`.
 
 ```PowerShell
+$diskName = "yourDiskNameHere>"
+$resourceGroupName = "yourResourceGroupNameHere"
+$snapshotName = "yourDesiredSnapshotNameHere"
+
 # Get the disk that you need to backup by creating an incremental snapshot
-$yourDisk = Get-AzDisk -DiskName <yourDiskNameHere> -ResourceGroupName <yourResourceGroupNameHere>
+$yourDisk = Get-AzDisk -DiskName $diskName -ResourceGroupName $resourceGroupName
 
 # Create an incremental snapshot by setting the SourceUri property with the value of the Id property of the disk
 $snapshotConfig=New-AzSnapshotConfig -SourceUri $yourDisk.Id -Location $yourDisk.Location -CreateOption Copy -Incremental 
-New-AzSnapshot -ResourceGroupName <yourResourceGroupNameHere> -SnapshotName <yourDesiredSnapshotNameHere> -Snapshot $snapshotConfig 
+New-AzSnapshot -ResourceGroupName $resourceGroupName -SnapshotName $snapshotName -Snapshot $snapshotConfig 
 ```
 
 Vous pouvez identifier des instantanés incrémentiels à partir du même disque avec les propriétés `SourceResourceId` et `SourceUniqueId` des instantanés. `SourceResourceId` est l’ID de ressource Azure Resource Manager du disque parent. `SourceUniqueId` est la valeur héritée de la propriété `UniqueId` du disque. Si vous supprimez un disque et que vous créez ensuite un disque portant le même nom, la valeur de la propriété `UniqueId` change.
@@ -52,7 +54,7 @@ Vous pouvez identifier des instantanés incrémentiels à partir du même disque
 Vous pouvez utiliser `SourceResourceId` et `SourceUniqueId` pour créer une liste de tous les instantanés associés à un disque particulier. Remplacez `<yourResourceGroupNameHere>` par votre valeur, puis utilisez l’exemple suivant pour lister vos instantanés incrémentiels existants :
 
 ```PowerShell
-$snapshots = Get-AzSnapshot -ResourceGroupName <yourResourceGroupNameHere>
+$snapshots = Get-AzSnapshot -ResourceGroupName $resourceGroupName
 
 $incrementalSnapshots = New-Object System.Collections.ArrayList
 foreach ($snapshot in $snapshots)

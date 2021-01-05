@@ -8,14 +8,15 @@ manager: femila
 ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
-ms.date: 03/26/2020
+ms.date: 08/10/2020
 ms.author: juliako
-ms.openlocfilehash: 545dbcfb1db5595ff5b2047ec44afa8a065d816d
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.custom: devx-track-js
+ms.openlocfilehash: 1bc751ae293abbb7aa330a99a4b66a917d150906
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594846"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994976"
 ---
 # <a name="embed-video-indexer-widgets-in-your-apps"></a>Incorporer des widgets Video Indexer dans vos applications
 
@@ -102,6 +103,17 @@ Le widget Insights cognitifs peut interagir avec une vidéo sur votre applicatio
 
 ![Widget Insight cognitifs - Video Indexer](./media/video-indexer-embed-widgets/video-indexer-widget03.png)
 
+### <a name="flow-overview"></a>Présentation du flux
+
+Lorsque vous modifiez les transcriptions, le flux suivant se produit :
+
+1. Vous modifiez la transcription dans la chronologie.
+1. Video Indexer obtient ces mises à jour et les enregistre dans le fichier [from transcript edits](customize-language-model-with-website.md#customize-language-models-by-correcting-transcripts) dans le modèle de langage.
+1. Les sous-titres sont mis à jour :
+
+    * Si vous utilisez le widget Lecteur de Video Indexer, il est automatiquement mis à jour.
+    * Si vous utilisez un lecteur externe, vous recevez un nouveau fichier de sous-titres que l’utilisateur peut appeler avec la commande **Obtenir les sous-titres des vidéos**.
+
 ### <a name="cross-origin-communications"></a>Communications cross-origin
 
 Pour que les widgets Video Indexer communiquent avec d’autres composants, le service Video Indexer :
@@ -131,47 +143,48 @@ Cette section montre comment obtenir une interaction entre un widget Cognitive I
 1. Ajoutez un plug-in Video Indexer pour le lecteur AMP :<br/> `<script src="https://breakdown.blob.core.windows.net/public/amp-vb.plugin.js"></script>`
 2. Instanciez le lecteur multimédia Azure avec le plug-in Video Indexer.
 
-        // Init the source.
-        function initSource() {
-            var tracks = [{
-            kind: 'captions',
-            // To load vtt from VI, replace it with your vtt URL.
-            src: this.getSubtitlesUrl("c4c1ad4c9a", "English"),
-            srclang: 'en',
-            label: 'English'
-            }];
-
-            myPlayer.src([
-            {
-                "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest",
-                "type": "application/vnd.ms-sstr+xml"
-            }
-            ], tracks);
+    ```javascript
+    // Init the source.
+    function initSource() {
+        var tracks = [{
+        kind: 'captions',
+        // To load vtt from VI, replace it with your vtt URL.
+        src: this.getSubtitlesUrl("c4c1ad4c9a", "English"),
+        srclang: 'en',
+        label: 'English'
+        }];
+        myPlayer.src([
+        {
+            "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest",
+            "type": "application/vnd.ms-sstr+xml"
         }
+        ], tracks);
+    }
 
-        // Init your AMP instance.
-        var myPlayer = amp('vid1', { /* Options */
-            "nativeControlsForTouch": false,
-            autoplay: true,
-            controls: true,
-            width: "640",
-            height: "400",
-            poster: "",
-            plugins: {
-            videobreakedown: {}
-            }
-        }, function () {
-            // Activate the plug-in.
-            this.videobreakdown({
-            videoId: "c4c1ad4c9a",
-            syncTranscript: true,
-            syncLanguage: true,
-            location: "trial" /* location option for paid accounts (default is trial) */
-            });
-
-            // Set the source dynamically.
-            initSource.call(this);
+    // Init your AMP instance.
+    var myPlayer = amp('vid1', { /* Options */
+        "nativeControlsForTouch": false,
+        autoplay: true,
+        controls: true,
+        width: "640",
+        height: "400",
+        poster: "",
+        plugins: {
+        videobreakedown: {}
+        }
+    }, function () {
+        // Activate the plug-in.
+        this.videobreakdown({
+        videoId: "c4c1ad4c9a",
+        syncTranscript: true,
+        syncLanguage: true,
+        location: "trial" /* location option for paid accounts (default is trial) */
         });
+
+        // Set the source dynamically.
+        initSource.call(this);
+    });
+    ```
 
 3. Copiez le code incorporé Cognitive Insights.
 
@@ -187,42 +200,46 @@ Si vous utilisez un lecteur vidéo autre que le lecteur multimédia Azure, vous 
 
     Par exemple, un lecteur HTML5 standard :
 
-        <video id="vid1" width="640" height="360" controls autoplay preload>
-           <source src="//breakdown.blob.core.windows.net/public/Microsoft%20HoloLens-%20RoboRaid.mp4" type="video/mp4" /> 
-           Your browser does not support the video tag.
-        </video>    
+    ```html
+    <video id="vid1" width="640" height="360" controls autoplay preload>
+       <source src="//breakdown.blob.core.windows.net/public/Microsoft%20HoloLens-%20RoboRaid.mp4" type="video/mp4" /> 
+       Your browser does not support the video tag.
+    </video>
+    ```
 
 2. Incorporez le widget Insight cognitifs.
 3. Implémenter une communication pour votre lecteur en écoutant l’événement « message ». Par exemple :
 
-        <script>
+    ```javascript
+    <script>
     
-            (function(){
-            // Reference your player instance.
-            var playerInstance = document.getElementById('vid1');
+        (function(){
+        // Reference your player instance.
+        var playerInstance = document.getElementById('vid1');
         
-            function jumpTo(evt) {
-              var origin = evt.origin || evt.originalEvent.origin;
+        function jumpTo(evt) {
+          var origin = evt.origin || evt.originalEvent.origin;
         
-              // Validate that the event comes from the videobreakdown domain.
-              if ((origin === "https://www.videobreakdown.com") && evt.data.time !== undefined){
+          // Validate that the event comes from the videobreakdown domain.
+          if ((origin === "https://www.videobreakdown.com") && evt.data.time !== undefined){
                 
-                // Call your player's "jumpTo" implementation.
-                playerInstance.currentTime = evt.data.time;
+            // Call your player's "jumpTo" implementation.
+            playerInstance.currentTime = evt.data.time;
                
-                // Confirm the arrival to us.
-                if ('postMessage' in window) {
-                  evt.source.postMessage({confirm: true, time: evt.data.time}, origin);
-                }
-              }
+            // Confirm the arrival to us.
+            if ('postMessage' in window) {
+              evt.source.postMessage({confirm: true, time: evt.data.time}, origin);
             }
+          }
+        }
         
-            // Listen to the message event.
-            window.addEventListener("message", jumpTo, false);
+        // Listen to the message event.
+        window.addEventListener("message", jumpTo, false);
           
-            }())    
+        }())    
         
-        </script>
+    </script>
+    ```
 
 Pour plus d’informations, consultez la démo [Azure Media Player + VI Insights](https://codepen.io/videoindexer/pen/YEyPLd) (Lecteur multimédia Azure et Video Indexer Insights).
 

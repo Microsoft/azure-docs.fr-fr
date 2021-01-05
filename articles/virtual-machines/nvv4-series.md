@@ -1,18 +1,19 @@
 ---
-title: Série NVv4 – Machines virtuelles Microsoft Azure
+title: Série NVv4
 description: Spécifications pour les machines virtuelles de la série NVv4.
 services: virtual-machines
-author: vikancha
+ms.subservice: sizes
+author: vikancha-MSFT
 ms.service: virtual-machines
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: lahugh
-ms.openlocfilehash: 0295ed7d44d64fcc1aeb68e1beaa37987b177edb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: jushiman
+ms.openlocfilehash: 0b7d200ef39a6b4da6af33a0a9b9314635c3db33
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273861"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97586429"
 ---
 # <a name="nvv4-series"></a>Série NVv4 
 
@@ -20,20 +21,21 @@ Les machines virtuelles de la série NVv4 sont alimentées par des GPU [AMD Rade
 
 <br>
 
-Premium Storage :  Prise en charge
+[ACU](acu.md) : 230-260<br>
+[Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Non pris en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Non pris en charge<br>
+[Génération de machine virtuelle prise en charge](generation-2.md) : Génération 1<br>
+Mise en réseau accélérée : Pris en charge<br>
+<br>
 
-Mise en cache du Stockage Premium :  Prise en charge
-
-Migration dynamique : Non pris en charge
-
-Mises à jour avec préservation de la mémoire : Non pris en charge
-
-| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Nombre max de cartes réseau |
+| Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | GPU | Mémoire GPU : Gio | Disques de données max. | Nombre max. de cartes réseau / Bande passante réseau attendue (Mbits/s) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Standard_NV4as_v4 |4 |14 |88 | 1/8 | 2 | 4 | 2 |
-| Standard_NV8as_v4 |8 |28 |176 | 1/4 | 4 | 8 | 4 |
-| Standard_NV16as_v4 |16 |56 |352 | 1/2 | 8 | 16 | 8 |
-| Standard_NV32as_v4 |32 |112 |704 | 1 | 16 | 32 | 8 |
+| Standard_NV4as_v4 |4 |14 |88 | 1/8 | 2 | 4 | 2 / 1 000 |
+| Standard_NV8as_v4 |8 |28 |176 | 1/4 | 4 | 8 | 4 / 2 000 |
+| Standard_NV16as_v4 |16 |56 |352 | 1/2 | 8 | 16 | 8 / 4 000 |
+| Standard_NV32as_v4 |32 |112 |704 | 1 | 16 | 32 | 8 / 8000 |
 
 <sup>1</sup> Les machines virtuelles de la série NVv4 sont dotées de la technologie SMT (Simultaneous MultiThreading) AMD
 

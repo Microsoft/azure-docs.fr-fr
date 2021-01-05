@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Créer une passerelle NAT - Azure PowerShell'
+title: Créer une passerelle NAT - Azure PowerShell
 titlesuffix: Azure Virtual Network NAT
 description: Ce guide de démarrage rapide montre comment créer une passerelle NAT à l’aide d’Azure PowerShell
 services: virtual-network
@@ -8,22 +8,23 @@ author: asudbring
 manager: KumudD
 Customer intent: I want to create a NAT gateway for outbound connectivity for my virtual network.
 ms.service: virtual-network
+ms.subservice: nat
 ms.devlang: na
-ms.topic: tutorial
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/18/2020
 ms.author: allensu
-ms.openlocfilehash: 1d5f8d6e0b2499bbecd32e7cb3fda2cd2cad4d19
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: de4e32d79cf4dfb3a5f54544c65544297a2c0232
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79202223"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993565"
 ---
-# <a name="quickstart-create-a-nat-gateway-using-azure-powershell"></a>Démarrage rapide : Créer une passerelle NAT avec Azure PowerShell
+# <a name="tutorial-create-a-nat-gateway-using-azure-powershell"></a>Tutoriel : Créer une passerelle NAT avec Azure PowerShell
 
-Ce guide de démarrage rapide vous montre comment utiliser le service NAT de Réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
+Ce tutoriel vous montre comment utiliser le service NAT de réseau virtuel Azure. Vous allez créer une passerelle NAT pour fournir une connectivité sortante à une machine virtuelle dans Azure. 
 
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]

@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: management
 ms.date: 05/29/2018
 ms.reviewer: avverma
-ms.custom: avverma
-ms.openlocfilehash: 7c39088890680b6cfc903083283ed09cb7618d16
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: avverma, devx-track-azurepowershell
+ms.openlocfilehash: e7a4ddaf74df6e04c1597b9c106cd458ddebac55
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124922"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89079589"
 ---
 # <a name="deploy-your-application-on-virtual-machine-scale-sets"></a>Déployer votre application sur des groupes de machines virtuelles identiques
 
@@ -113,4 +113,4 @@ Si vous utilisez une image de machine virtuelle personnalisée avec l’applicat
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Lorsque vous générez et déployez des applications sur vos groupes identiques, vous pouvez consulter [Vue d’ensemble de la conception de groupes identiques](virtual-machine-scale-sets-design-overview.md). Pour plus d’informations sur la façon de gérer votre groupe identique, consultez [Utiliser PowerShell pour gérer votre groupe identique](virtual-machine-scale-sets-windows-manage.md).
+Lorsque vous générez et déployez des applications sur vos groupes identiques, vous pouvez consulter [Vue d’ensemble de la conception de groupes identiques](virtual-machine-scale-sets-design-overview.md). Pour plus d’informations sur la façon de gérer votre groupe identique, consultez [Utiliser PowerShell pour gérer votre groupe identique](./virtual-machine-scale-sets-manage-powershell.md).

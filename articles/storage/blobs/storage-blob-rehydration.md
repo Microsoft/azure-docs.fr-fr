@@ -1,6 +1,6 @@
 ---
 title: Réalimenter les données d’objets blob à partir du niveau Archive
-description: Réalimentez vos objets blob à partir du stockage d’archive pour pouvoir accéder aux données.
+description: Réalimentez vos blobs à partir du stockage d’archive pour pouvoir accéder aux données des blobs. Copiez un blob archivé sur un niveau de service en ligne.
 services: storage
 author: mhopkins-msft
 ms.author: mhopkins
@@ -9,19 +9,19 @@ ms.service: storage
 ms.subservice: blobs
 ms.topic: conceptual
 ms.reviewer: hux
-ms.openlocfilehash: 82ea4ad23e3207f5641ade196f69595cd1e7b323
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f74d4ffdd724039354a311234317dac889cd7cfe
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81684103"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95545928"
 ---
 # <a name="rehydrate-blob-data-from-the-archive-tier"></a>Réalimenter les données d’objets blob à partir du niveau Archive
 
 Lorsqu’un objet blob se trouve dans le niveau d’accès Archive, il est considéré comme étant hors connexion et ne peut être lu ni modifié. Les métadonnées de l’objet blob restent en ligne et disponible, ce qui vous permet de répertorier l’objet blob et ses propriétés. La lecture et la modification des données d’objets blob sont uniquement disponibles avec des niveaux en ligne tels que chaud ou froid. Il existe deux options pour récupérer et accéder aux données stockées dans le niveau d’accès Archive.
 
-1. [Réalimenter un blob archivé dans un niveau en ligne](#rehydrate-an-archived-blob-to-an-online-tier) : Réalimenter un blob d’archive dans un niveau chaud ou froid en modifiant son niveau à l’aide de l’opération [Définir le niveau du blob](https://docs.microsoft.com/rest/api/storageservices/set-blob-tier).
-2. [Copier un blob archivé dans un niveau en ligne](#copy-an-archived-blob-to-an-online-tier) : Créer une copie d’un blob d’archive à l’aide de l’opération [Copier le blob](https://docs.microsoft.com/rest/api/storageservices/copy-blob). Spécifiez un autre nom d’objet blob et un niveau de destination chaud ou froid.
+1. [Réalimenter un blob archivé dans un niveau en ligne](#rehydrate-an-archived-blob-to-an-online-tier) : Réalimenter un blob d’archive dans un niveau chaud ou froid en modifiant son niveau à l’aide de l’opération [Définir le niveau du blob](/rest/api/storageservices/set-blob-tier).
+2. [Copier un blob archivé dans un niveau en ligne](#copy-an-archived-blob-to-an-online-tier) : Créer une copie d’un blob d’archive à l’aide de l’opération [Copier le blob](/rest/api/storageservices/copy-blob). Spécifiez un autre nom d’objet blob et un niveau de destination chaud ou froid.
 
  Pour plus d’informations sur les niveaux, consultez [Stockage Blob Azure : niveaux d’accès chaud, froid et archive](storage-blob-storage-tiers.md).
 
@@ -31,9 +31,12 @@ Lorsqu’un objet blob se trouve dans le niveau d’accès Archive, il est consi
 
 ## <a name="copy-an-archived-blob-to-an-online-tier"></a>Copier un objet blob archivé dans un niveau en ligne
 
-Si vous ne souhaitez pas réalimenter votre blob d’archive, vous pouvez choisir d’effectuer une opération [Copier le blob](https://docs.microsoft.com/rest/api/storageservices/copy-blob). Votre blob d’origine reste inchangé dans le niveau archive pendant qu’un nouveau blob est créé dans le niveau chaud ou froid en ligne pour que vous travailliez dessus. Dans l’opération Copier le blob, vous pouvez également définir la propriété facultative *x-ms-réhydrate-priorité* sur Standard ou Haute pour spécifier la priorité à laquelle vous souhaitez créer votre copie de blob.
+Si vous ne souhaitez pas réalimenter votre blob d’archive, vous pouvez choisir d’effectuer une opération [Copier le blob](/rest/api/storageservices/copy-blob). Votre blob d’origine reste inchangé dans le niveau archive pendant qu’un nouveau blob est créé dans le niveau chaud ou froid en ligne pour que vous travailliez dessus. Dans l’opération Copier le blob, vous pouvez également définir la propriété facultative *x-ms-réhydrate-priorité* sur Standard ou Haute pour spécifier la priorité à laquelle vous souhaitez créer votre copie de blob.
 
 La copie d’un blob à partir d’une archive peut prendre plusieurs heures, selon la priorité de réalimentation sélectionnée. En arrière-plan, l’opération **Copier le blob** lit votre blob source d’archive pour créer un blob en ligne dans le niveau de destination sélectionné. Le nouveau blob peut être visible lorsque vous répertoriez les blobs, mais les données ne sont pas disponibles tant que la lecture du blob d’archive source n’est pas terminée et que les données ne sont pas écrites dans le nouveau blob de destination en ligne. Le nouveau blob est une copie indépendante et toute modification ou suppression de celui-ci ne se répercute pas sur le blob d’archive source.
+
+> [!IMPORTANT]
+> Ne supprimez pas l’objet BLOB source tant que la copie n’est pas terminée avec succès sur la destination. Si l’objet BLOB source est supprimé, l’objet BLOB de destination peut ne pas terminer la copie et sera vide. Vous pouvez vérifier *x-ms-Copy-Status* pour déterminer l’état de l’opération de copie.
 
 Les blobs d’archive peuvent uniquement être copiés vers des niveaux de destination en ligne au sein du même compte de stockage. La copie d’un blob d’archive vers un autre blob d’archive n’est pas prise en charge. Le tableau suivant indique les fonctionnalités de CopyBlob.
 
@@ -91,10 +94,10 @@ $storageAccount =Get-AzStorageAccount -ResourceGroupName $rgName -Name $accountN
 $ctx = $storageAccount.Context
 
 #Select the blob from a container
-$blobs = Get-AzStorageBlob -Container $containerName -Blob $blobName -Context $context
+$blob = Get-AzStorageBlob -Container $containerName -Blob $blobName -Context $ctx
 
 #Change the blob’s access tier to Hot using Standard priority rehydrate
-$blob.ICloudBlob.SetStandardBlobTier("Hot", “Standard”)
+$blob.ICloudBlob.SetStandardBlobTier("Hot", "Standard")
 ```
 ---
 

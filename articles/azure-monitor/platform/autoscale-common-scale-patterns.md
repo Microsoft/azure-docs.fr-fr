@@ -4,17 +4,17 @@ description: Découvrez certains des modèles courants de mise à l’échelle a
 ms.topic: conceptual
 ms.date: 05/07/2017
 ms.subservice: autoscale
-ms.openlocfilehash: a77cf1704c20abb77d432eab16569071208f6da8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: adbfecd05bfd4330e7c7c972cfdb9fe7021eec31
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75396089"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073495"
 ---
 # <a name="overview-of-common-autoscale-patterns"></a>Vue d’ensemble des modèles courants de mise à l’échelle automatique
 Cet article décrit certains des modèles courants de mise à l’échelle de vos ressources dans Azure.
 
-La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](https://docs.microsoft.com/azure/api-management/api-management-key-concepts).
+La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](../../api-management/api-management-key-concepts.md).
 
 ## <a name="lets-get-started"></a>Prise en main
 
@@ -62,4 +62,3 @@ Vous avez un site web frontal et un niveau d’API qui communique avec le serveu
 [3]: ./media/autoscale-common-scale-patterns/weekday-weekend-scale.png
 [4]: ./media/autoscale-common-scale-patterns/holidays-scale.png
 [5]: ./media/autoscale-common-scale-patterns/custom-metric-scale.png
-

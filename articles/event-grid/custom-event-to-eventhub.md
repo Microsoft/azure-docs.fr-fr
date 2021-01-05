@@ -1,20 +1,15 @@
 ---
 title: 'Démarrage rapide : Envoyer des événements personnalisés à Event Hubs - Event Grid, Azure CLI'
 description: 'Démarrage rapide : Utilisez Azure Event Grid et Azure CLI pour publier une rubrique et pour vous abonner à cet événement. Un concentrateur d’événements est utilisé comme point de terminaison.'
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: spelluru
-ms.date: 11/05/2019
+ms.date: 07/07/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: 832c4e453befc9e54051c968e0c364d22afd2bc2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 7c236025f31e10c00b324e5ff3374bd6504b2b7e
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73721413"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91324108"
 ---
 # <a name="quickstart-route-custom-events-to-azure-event-hubs-with-azure-cli-and-event-grid"></a>Démarrage rapide : Acheminer des événements personnalisés vers Azure Event Hubs avec Azure CLI et Event Grid
 
@@ -67,10 +62,10 @@ Le script suivant obtient l’ID de ressource du concentrateur d’événements,
 
 ```azurecli-interactive
 hubid=$(az eventhubs eventhub show --name $hubname --namespace-name $namespace --resource-group gridResourceGroup --query id --output tsv)
+topicid=$(az eventgrid topic show --name $topicname -g gridResourceGroup --query id --output tsv)
 
 az eventgrid event-subscription create \
-  --topic-name $topicname \
-  -g gridResourceGroup \
+  --source-resource-id $topicid \
   --name subtoeventhub \
   --endpoint-type eventhub \
   --endpoint $hubid
@@ -103,8 +98,8 @@ Accédez au concentrateur d’événements dans le portail et notez que Event Gr
 
 En général, vous créez une application qui récupère les événements dans un concentrateur d’événements. Pour créer une application qui obtient les messages dans un concentrateur d’événements, consultez :
 
-* [Bien démarrer avec la réception de messages à l’aide de l’hôte du processeur d’événements dans .NET Standard](../event-hubs/event-hubs-dotnet-standard-getstarted-receive-eph.md)
-* [Recevoir des événements d’Azure Event Hubs avec Java](../event-hubs/event-hubs-java-get-started-receive-eph.md)
+* [Bien démarrer avec la réception de messages à l’aide de l’hôte du processeur d’événements dans .NET Standard](../event-hubs/event-hubs-dotnet-standard-getstarted-send.md)
+* [Recevoir des événements d’Azure Event Hubs avec Java](../event-hubs/event-hubs-java-get-started-send.md)
 * [Recevoir des événements d’Event Hubs avec Apache Storm](../event-hubs/event-hubs-storm-getstarted-receive.md)
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources

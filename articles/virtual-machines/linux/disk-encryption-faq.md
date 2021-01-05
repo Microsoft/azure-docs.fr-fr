@@ -4,16 +4,16 @@ description: Cet article offre des réponses aux questions fréquentes sur Micro
 author: msmbaldwin
 ms.service: virtual-machines-linux
 ms.subservice: security
-ms.topic: article
+ms.topic: conceptual
 ms.author: mbaldwin
 ms.date: 06/05/2019
 ms.custom: seodec18
-ms.openlocfilehash: 7c49467451963ceb52f114430343fafb955ec4f7
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 9d62195759de2d43e863c1cb2c4c3ef911bb52c6
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82786986"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498521"
 ---
 # <a name="azure-disk-encryption-for-linux-virtual-machines-faq"></a>FAQ sur Azure Disk Encryption pour machines virtuelles Linux
 
@@ -57,14 +57,14 @@ Non, Azure Disk Encryption chiffre uniquement les volumes montés.
 
 ## <a name="what-is-storage-server-side-encryption"></a>Qu’est-ce que le chiffrement côté serveur de stockage ?
 
-Le chiffrement côté serveur de stockage chiffre les disques managés Azure dans Stockage Azure. Les disques managés sont chiffrés par défaut avec le chiffrement côté serveur à l’aide d’une clé gérée par la plateforme (à compter du 10 juin 2017). Vous pouvez gérer le chiffrement des disques managés avec vos propres clés en spécifiant une clé gérée par le client. Pour plus d’informations, consultez les pages suivantes : [Chiffrement côté serveur de disques managés Azure](disk-encryption.md).
+Le chiffrement côté serveur de stockage chiffre les disques managés Azure dans Stockage Azure. Les disques managés sont chiffrés par défaut avec le chiffrement côté serveur à l’aide d’une clé gérée par la plateforme (à compter du 10 juin 2017). Vous pouvez gérer le chiffrement des disques managés avec vos propres clés en spécifiant une clé gérée par le client. Pour plus d’informations, consultez les pages suivantes : [Chiffrement côté serveur de disques managés Azure](../disk-encryption.md).
  
 ## <a name="how-is-azure-disk-encryption-different-from-storage-server-side-encryption-with-customer-managed-key-and-when-should-i-use-each-solution"></a>En quoi Azure Disk Encryption diffère-t-il du chiffrement côté serveur de stockage avec clé gérée par le client, et quand dois-je utiliser chaque solution ?
 
 Azure Disk Encryption assure un chiffrement de bout en bout pour le disque du système d’exploitation, les disques de données et le disque temporaire, à l’aide d’une clé gérée par le client.
 - Si vos exigences incluent tout ce qui précède de bout en bout, optez pour Azure Disk Encryption. 
-- Si vos exigences incluent uniquement le chiffrement des données au repos avec clé gérée par le client, utilisez un [chiffrement côté serveur avec clés gérées par le client](disk-encryption.md). Vous ne pouvez pas chiffrer un disque en utilisant Azure Disk Encryption et un chiffrement côté serveur de stockage avec clés gérées par le client. 
-- Si votre distribution Linux n’est pas répertoriée sous [Systèmes d’exploitation pris en charge pour Azure Disk Encryption](disk-encryption-overview.md#supported-operating-systems), ou si vous utilisez un scénario figurant parmi les [scénarios non pris en charge pour Windows](disk-encryption-linux.md#unsupported-scenarios), envisagez un [chiffrement côté serveur avec clés gérées par le client](disk-encryption.md).
+- Si vos exigences incluent uniquement le chiffrement des données au repos avec clé gérée par le client, utilisez un [chiffrement côté serveur avec clés gérées par le client](../disk-encryption.md). Vous ne pouvez pas chiffrer un disque en utilisant Azure Disk Encryption et un chiffrement côté serveur de stockage avec clés gérées par le client. 
+- Si votre distribution Linux n’est pas répertoriée sous [Systèmes d’exploitation pris en charge pour Azure Disk Encryption](disk-encryption-overview.md#supported-operating-systems), ou si vous utilisez un scénario figurant parmi les [scénarios non pris en charge pour Windows](disk-encryption-linux.md#unsupported-scenarios), envisagez un [chiffrement côté serveur avec clés gérées par le client](../disk-encryption.md).
 - Si la stratégie de votre organisation vous permet de chiffrer du contenu au repos avec une clé gérée par Azure, aucune action n’est nécessaire. Le contenu est chiffré par défaut. Pour les disques managés, le contenu du stockage est chiffré par défaut à l’aide d’un chiffrement côté serveur avec clé gérée par la plateforme. La clé est gérée par le service Stockage Azure. 
 
 
@@ -154,15 +154,15 @@ Le chiffrement des disques de données XFS est pris en charge uniquement lorsque
 
 ## <a name="can-i-backup-and-restore-an-encrypted-vm"></a>Puis-je sauvegarder et restaurer une machine virtuelle chiffrée ? 
 
-Sauvegarde Azure fournit un mécanisme permettant de sauvegarder et de restaurer les machines virtuelles chiffrées dans le même abonnement et la même région.  Pour obtenir les instructions correspondantes, consultez [Sauvegarder et restaurer des machines virtuelles chiffrées avec Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-azure-vms-encryption).  La restauration d’une machine virtuelle chiffrée dans une autre région n’est pas prise en charge actuellement.  
+Sauvegarde Azure fournit un mécanisme permettant de sauvegarder et de restaurer les machines virtuelles chiffrées dans le même abonnement et la même région.  Pour obtenir les instructions correspondantes, consultez [Sauvegarder et restaurer des machines virtuelles chiffrées avec Sauvegarde Azure](../../backup/backup-azure-vms-encryption.md).  La restauration d’une machine virtuelle chiffrée dans une autre région n’est pas prise en charge actuellement.  
 
 ## <a name="where-can-i-go-to-ask-questions-or-provide-feedback"></a>Où puis-je poser des questions ou envoyer des commentaires ?
 
-Vous pouvez poser vos questions ou envoyer vos commentaires sur le [forum Azure Disk Encryption](https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDiskEncryption).
+Vous pouvez poser vos questions ou envoyer vos commentaires sur la [Page de questions Microsoft Q&A pour Azure Disk Encryption](/answers/topics/azure-disk-encryption.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Ce document vous a fourni les réponses aux questions les plus courantes concernant Azure Disk Encryption. Pour plus d'informations sur ce service, consultez les articles suivants :
 
 - [Vue d’ensemble d’Azure Disk Encryption](disk-encryption-overview.md)
-- [Appliquer le chiffrement de disque dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-apply-disk-encryption)
-- [Chiffrement des données au repos Azure](https://docs.microsoft.com/azure/security/fundamentals/encryption-atrest)
+- [Appliquer le chiffrement de disque dans Azure Security Center](../../security-center/asset-inventory.md)
+- [Chiffrement des données au repos Azure](../../security/fundamentals/encryption-atrest.md)

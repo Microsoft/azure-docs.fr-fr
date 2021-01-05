@@ -4,15 +4,16 @@ description: Découvrez comment réduire les coûts liés aux frais de timbre Az
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 04/30/2020
+ms.subservice: reservations
+ms.topic: how-to
+ms.date: 07/24/2020
 ms.author: banders
-ms.openlocfilehash: d6d91b455501e2deec4f5ea36e48fafd17144b2c
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: feb7be6ad5dbd0dfbd04b05836842d0476780d40
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628144"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151539"
 ---
 # <a name="save-costs-for-azure-app-service-isolated-stamp-fee-with-reserved-capacity"></a>Réduire les coûts liés aux frais de timbre Azure App Service Isolé avec une capacité réservée
 
@@ -38,7 +39,7 @@ Achetez des réservations d’horodatage Windows si vous avez un ou plusieurs wo
 
 ## <a name="buy-isolated-stamp-reserved-capacity"></a>Achetez une capacité réservée d’horodatage Isolé
 
-Vous pouvez acheter une capacité réservée d’horodatage Isolé dans le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/documentation/filters/%7B%22reservedResourceType%22%3A%22AppService%22%7D). Payez la réservation [à l’avance ou par paiements mensuels](monthly-payments-reservations.md). Pour acheter une capacité réservée, vous devez disposer du rôle Propriétaire sur au moins un abonnement Entreprise ou d’un abonnement individuel avec des tarifs de paiement à l’utilisation.
+Vous pouvez acheter une capacité réservée d’horodatage Isolé dans le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/documentation/filters/%7B%22reservedResourceType%22%3A%22AppService%22%7D). Payez la réservation [à l’avance ou par paiements mensuels](./prepare-buy-reservation.md). Pour acheter une capacité réservée, vous devez disposer du rôle Propriétaire sur au moins un abonnement Entreprise ou d’un abonnement individuel avec des tarifs de paiement à l’utilisation.
 
 - Pour les abonnements Entreprise, l’option **Ajouter des instances réservées** doit être activée sur le [portail EA](https://ea.azure.com/). Ou, si le paramètre est désactivé, vous devez être un administrateur EA.
 - Pour le programme Fournisseur de solutions cloud (CSP), seuls des agents d’administration ou des agents commerciaux peuvent acheter une capacité de réserve Azure Synapse Analytics.

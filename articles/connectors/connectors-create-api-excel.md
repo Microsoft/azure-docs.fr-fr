@@ -7,12 +7,12 @@ ms.reviewer: klam, logicappspm
 ms.topic: conceptual
 ms.date: 08/23/2018
 tags: connectors
-ms.openlocfilehash: b1df1219590aa94331a4404b1315eb7231c59699
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 097db6683127b410e713be53e6de838cf7734ddc
+ms.sourcegitcommit: 4313e0d13714559d67d51770b2b9b92e4b0cc629
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75445883"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91400721"
 ---
 # <a name="manage-excel-online-data-with-azure-logic-apps"></a>Gérer les données Excel Online avec Azure Logic Apps
 
@@ -33,7 +33,7 @@ Si vous débutez avec les applications logiques, consultez [Qu’est-ce qu’Azu
 
 * Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/).
 
-* Un [compte Office 365](https://www.office.com/) pour votre compte Microsoft professionnel ou personnel
+* Un [compte professionnel ou scolaire](https://www.office.com/) pour votre compte Microsoft professionnel ou personnel
 
   Vos données Excel peuvent exister dans un fichier de valeurs séparées par des virgules (CSV) dans un dossier de stockage, OneDrive par exemple. 
   Vous pouvez également utiliser le même fichier CSV avec le [connecteur de fichier plat](../logic-apps/logic-apps-enterprise-integration-flatfile.md).
@@ -53,7 +53,7 @@ Si vous débutez avec les applications logiques, consultez [Qu’est-ce qu’Azu
    > [!NOTE]
    > Le concepteur d’application logique ne peut pas charger les tables qui ont 100 colonnes ou plus. Si possible, réduisez le nombre de colonnes dans la table sélectionnée, afin que le concepteur puisse charger la table.
 
-1. Si vous y êtes invité, connectez-vous à votre compte Office 365.
+1. Si vous y êtes invité, connectez-vous à votre compte professionnel ou scolaire.
 
    Vos informations d’identification autorisent votre application logique à créer une connexion à Excel Online et à accéder à votre données.
 

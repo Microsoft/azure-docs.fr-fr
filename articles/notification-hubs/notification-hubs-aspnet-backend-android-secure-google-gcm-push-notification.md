@@ -1,30 +1,28 @@
 ---
-title: Envoi de notifications push sécurisées avec Azure Notification Hubs
+title: Envoyer des notifications Push sécurisées avec Azure Notification Hubs
 description: Découvrez comment envoyer des notifications Push sécurisées à une application Android depuis Azure. Exemples de code écrits en Java et C#.
 documentationcenter: android
 keywords: notification push,notifications push,messages push,notifications push android
 author: sethmanheim
 manager: femila
-editor: jwargo
 services: notification-hubs
-ms.assetid: daf3de1c-f6a9-43c4-8165-a76bfaa70893
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: android
 ms.devlang: java
 ms.topic: article
-ms.date: 01/04/2019
+ms.date: 08/07/2020
 ms.author: sethm
-ms.reviewer: jowargo
+ms.reviewer: thsomasu
 ms.lastreviewed: 01/04/2019
-ms.openlocfilehash: 419a9f9b5ce698c7516edd55856cbea9891ba029
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2d5d618fabbe7400ce825f984ace1622a524f05
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71212186"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88004029"
 ---
-# <a name="sending-secure-push-notifications-with-azure-notification-hubs"></a>Envoi de notifications push sécurisées avec Azure Notification Hubs
+# <a name="send-secure-push-notifications-with-azure-notification-hubs"></a>Envoyer des notifications Push sécurisées avec Azure Notification Hubs
 
 > [!div class="op_single_selector"]
 > * [Windows Universal](notification-hubs-aspnet-backend-windows-dotnet-wns-secure-push-notification.md)
@@ -42,28 +40,28 @@ En raison de contraintes liées à la réglementation ou à la sécurité, une a
 
 Globalement, le processus est le suivant :
 
-1. Le serveur principal de l'application :
-   * stocke la charge utile sécurisée dans la base de données principale ;
-   * envoie l'ID de cette notification à l'appareil Android (aucune information sécurisée n'est envoyée).
-2. L'application qui se trouve sur l'appareil, lorsqu'elle reçoit la notification :
-   * L'appareil Android contacte le serveur principal en demandant la charge utile sécurisée.
-   * L'application peut afficher la charge utile sous la forme d'une notification sur l'appareil.
+- Le serveur principal :
+  * stocke la charge utile sécurisée dans la base de données principale ;
+  * envoie l'ID de cette notification à l'appareil Android (aucune information sécurisée n'est envoyée).
+- L'application qui se trouve sur l'appareil, lorsqu'elle reçoit la notification :
+  * L'appareil Android contacte le serveur principal en demandant la charge utile sécurisée.
+  * L'application peut afficher la charge utile sous la forme d'une notification sur l'appareil.
 
-Veuillez noter que dans le flux précédent (et dans ce tutoriel), nous partons du principe que l’appareil stocke un jeton d’authentification dans un stockage local, une fois l’utilisateur connecté. Cette approche simplifie nettement l’expérience, car l’appareil peut récupérer la charge utile sécurisée en utilisant ce jeton. Si votre application ne stocke pas les jetons d’authentification sur l’appareil, ou si ces jetons sont susceptibles d’expirer, lorsque l’application sur l’appareil reçoit la notification push, elle doit afficher une notification générique demandant à l’utilisateur de lancer l’application. L'application authentifie alors l'utilisateur et affiche la charge utile de la notification.
+Veuillez noter que dans le flux précédent (et dans ce tutoriel), nous partons du principe que l’appareil stocke un jeton d’authentification dans un stockage local, une fois l’utilisateur connecté. Cette approche simplifie nettement l’expérience, car l’appareil peut récupérer la charge utile sécurisée de la notification en utilisant ce jeton. Si votre application ne stocke pas les jetons d’authentification sur l’appareil, ou si ces jetons sont susceptibles d’expirer, lorsque l’application sur l’appareil reçoit la notification Push, elle doit afficher une notification générique demandant à l’utilisateur de lancer l’application. L'application authentifie alors l'utilisateur et affiche la charge utile de la notification.
 
-Ce didacticiel vous montre comment envoyer des notifications push sécurisées. Il s’appuie sur le didacticiel [Envoi de notifications à des utilisateurs](notification-hubs-aspnet-backend-gcm-android-push-to-user-google-notification.md). Vous devez donc suivre ce dernier au préalable si ce n’est déjà fait.
+Ce didacticiel vous montre comment envoyer des notifications push sécurisées. Il s’appuie sur le tutoriel [Envoi de notifications à des utilisateurs](notification-hubs-aspnet-backend-gcm-android-push-to-user-google-notification.md). Vous devez donc suivre ce dernier au préalable.
 
 > [!NOTE]
-> Ce didacticiel part du principe que vous avez créé et configuré votre hub de notification, comme décrit dans [Prise en main de Notification Hubs (Android)](notification-hubs-android-push-notification-google-gcm-get-started.md).
+> Ce tutoriel part du principe que vous avez créé et configuré votre hub de notification, comme décrit dans [Prise en main de Notification Hubs (Android)](notification-hubs-android-push-notification-google-gcm-get-started.md).
 
 [!INCLUDE [notification-hubs-aspnet-backend-securepush](../../includes/notification-hubs-aspnet-backend-securepush.md)]
 
 ## <a name="modify-the-android-project"></a>Modification du projet Android
 
-Maintenant que vous avez modifié le serveur principal de votre application pour qu'il n'envoie que l'*ID* d'une notification Push, vous devez modifier votre application Android pour gérer cette notification et rappeler votre serveur pour récupérer le message sécurisé à afficher.
+Maintenant que vous avez modifié le serveur principal de votre application pour qu’il n’envoie que l’ID d’une notification Push, vous devez modifier votre application Android pour gérer cette notification et rappeler votre serveur pour récupérer le message sécurisé à afficher.
 Pour atteindre cet objectif, vous devez vous assurer que votre application Android sait comment s’authentifier auprès de votre serveur principal quand elle reçoit les notifications Push.
 
-Modifions maintenant le processus de *connexion* afin d'enregistrer la valeur d'en-tête de l'authentification dans les préférences partagées de votre application. D'autres mécanismes de même type peuvent être utilisés pour stocker n'importe quel jeton d'authentification (par exemple des jetons OAuth) que l'application doit utiliser sans demander d'informations d'identification.
+Modifions maintenant le processus de connexion afin d'enregistrer la valeur d'en-tête de l'authentification dans les préférences partagées de votre application. D'autres mécanismes de même type peuvent être utilisés pour stocker n'importe quel jeton d'authentification (par exemple des jetons OAuth) que l'application doit utiliser sans demander d'informations d'identification.
 
 1. Dans votre projet d’application Android, ajoutez les constantes suivantes au début de la classe `MainActivity` :
 
@@ -71,6 +69,7 @@ Modifions maintenant le processus de *connexion* afin d'enregistrer la valeur d'
     public static final String NOTIFY_USERS_PROPERTIES = "NotifyUsersProperties";
     public static final String AUTHORIZATION_HEADER_PROPERTY = "AuthorizationHeader";
     ```
+
 2. Toujours dans la classe `MainActivity`, mettez à jour la méthode `getAuthorizationHeader()` pour qu’elle contienne le code suivant :
 
     ```java
@@ -86,6 +85,7 @@ Modifions maintenant le processus de *connexion* afin d'enregistrer la valeur d'
         return basicAuthHeader;
     }
     ```
+
 3. Ajoutez les instructions `import` suivantes au début du fichier `MainActivity` :
 
     ```java
@@ -103,6 +103,7 @@ Nous allons maintenant changer le gestionnaire qui est appelé lorsque la notifi
         retrieveNotification(secureMessageId);
     }
     ```
+
 2. Puis ajoutez la méthode `retrieveNotification()` en remplaçant l’espace réservé `{back-end endpoint}` par le point de terminaison du serveur principal obtenu lors du déploiement de votre serveur principal :
 
     ```java

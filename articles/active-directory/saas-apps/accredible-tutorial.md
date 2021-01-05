@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Accredible | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Accredible.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 7284dfb6-df62-41f1-a4a4-1b8322b7ef44
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5be397ca14a90c333e20f0a1a42b63e0c9f0ae0e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3329d092e27e7d8885daa87650734cd8e84202c9
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73154142"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92313651"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-accredible"></a>Didacticiel : Intégration d’Azure Active Directory à Accredible
 
@@ -32,7 +27,7 @@ L’intégration d’Accredible à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Comm100 Live Chat (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -108,11 +103,10 @@ Pour configurer l’authentification unique Azure AD avec Accredible, effectuez 
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
 
-    | |
-    |--|
-    |  `https://api.accredible.com/sp/admin/accredible` |
-    | `https://api.accredible.com/sp/user/accredible` |
-    | |
+    ```http
+    https://api.accredible.com/sp/admin/accredible
+    https://api.accredible.com/sp/user/accredible
+    ```
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant : `https://api.accredible.com/v1/saml/admin/<Unique id>/consume`
 
@@ -196,12 +190,12 @@ Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans A
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Accredible dans le panneau d’accès doit vous connecter automatiquement à l’application Accredible pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Accredible dans le panneau d’accès doit vous connecter automatiquement à l’application Accredible pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

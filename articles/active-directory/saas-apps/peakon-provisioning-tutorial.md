@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Peakon pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur Peakon.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 06/28/2019
 ms.author: zhchia
-ms.openlocfilehash: 0a67dc8069ee71305a47bd5d2a724a61cec234a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c04bbd5459690262b484582e807569b965a0439b
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77063371"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349886"
 ---
 # <a name="tutorial-configure-peakon-for-automatic-user-provisioning"></a>Tutoriel : Configurer Peakon pour le provisionnement automatique d’utilisateurs
 
@@ -50,7 +46,7 @@ Avant de configurer et d’activer le provisionnement automatique d’utilisateu
 
 * Il est recommandé de n’affecter qu’un seul utilisateur Azure AD à Peakon afin de tester la configuration de l’approvisionnement automatique d’utilisateurs. Les autres utilisateurs et/ou groupes peuvent être affectés ultérieurement.
 
-* Quand vous assignez un utilisateur à Peakon, vous devez sélectionner un rôle valide propre à l’application (si disponible) dans la boîte de dialogue d’assignation. Les utilisateurs dont le rôle est **Accès par défaut** sont exclus de l’approvisionnement.
+* Quand vous affectez un utilisateur à Peakon, vous devez sélectionner un rôle valide propre à l’application (si disponible) dans la boîte de dialogue d’affectation. Les utilisateurs dont le rôle est **Accès par défaut** sont exclus de l’approvisionnement.
 
 ## <a name="set-up-peakon-for-provisioning"></a>Configurer Peakon pour l’approvisionnement
 
@@ -60,11 +56,11 @@ Avant de configurer et d’activer le provisionnement automatique d’utilisateu
 
 2.  Sélectionnez **Intégrations**.
     
-    ![Peakon-employee-provision](media/Peakon-provisioning-tutorial/Peakon-select-integration.png)
+    ![Capture d’écran des options de configuration avec l’option Intégrations en évidence.](media/Peakon-provisioning-tutorial/Peakon-select-integration.png)
 
 3.  Activez **Approvisionnement d’employés**.
 
-    ![Peakon-employee-provision](media/Peakon-provisioning-tutorial/peakon05.png)
+    ![Capture d’écran de la section Provisionnement d’employés avec l’option Activer en évidence.](media/Peakon-provisioning-tutorial/peakon05.png)
 
 4.  Copiez les valeurs pour **URL SCIM 2.0** et **Jeton du porteur OAuth**. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** dans l’onglet Approvisionnement de votre application Peakon dans le portail Azure.
 
@@ -109,11 +105,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section **Informations d’identification de l’administrateur**, entrez les valeurs **d’URL SCIM 2.0** et de **Jeton du porteur OAuth** récupérées précédemment dans **URL de locataire** et **Jeton secret**, respectivement. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Peakon. Si la connexion échoue, vérifiez que votre compte Peakon dispose des autorisations d’administrateur et réessayez.
 

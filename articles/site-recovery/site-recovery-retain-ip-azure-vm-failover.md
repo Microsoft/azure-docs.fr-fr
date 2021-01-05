@@ -7,11 +7,11 @@ author: mayurigupta13
 ms.topic: conceptual
 ms.author: mayg
 ms.openlocfilehash: 650fb7f0877a98ef53ed3868550f9c084ecb5885
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229033"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023548"
 ---
 # <a name="retain-ip-addresses-during-failover"></a>Conserver les adresses IP pendant le basculement
 

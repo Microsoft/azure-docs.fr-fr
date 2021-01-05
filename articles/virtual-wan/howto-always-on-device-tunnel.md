@@ -5,15 +5,15 @@ description: Étapes de configuration d’un tunnel d’appareil VPN Always On p
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
-ms.topic: conceptual
-ms.date: 03/13/2020
+ms.topic: how-to
+ms.date: 09/22/2020
 ms.author: cherylmc
-ms.openlocfilehash: e3eea639eaa52c07e877476e9215144e916618d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e814487cb4dab9c8c19daab2ea3bb81391d4a98f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79504037"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90983681"
 ---
 # <a name="configure-an-always-on-vpn-device-tunnel-for-virtual-wan"></a>Configurer un tunnel d’appareil VPN Always On pour un WAN virtuel
 
@@ -24,7 +24,7 @@ ms.locfileid: "79504037"
 Vous devez créer une configuration de point à site et modifier l’affectation du hub virtuel. Consultez les sections suivantes pour obtenir des instructions :
 
 * [Créer une configuration P2S](virtual-wan-point-to-site-portal.md#p2sconfig)
-* [Modifier l’affectation du hub](virtual-wan-point-to-site-portal.md#edit)
+* [Créer un hub avec la passerelle P2S](virtual-wan-point-to-site-portal.md#hub)
 
 ## <a name="configure-the-device-tunnel"></a>Configurer le tunnel d’appareil
 
@@ -34,7 +34,7 @@ Vous devez créer une configuration de point à site et modifier l’affectation
 
 Pour supprimer le profil, exécutez la commande suivante :
 
-![Nettoyage](./media/howto-always-on-device-tunnel/cleanup.png)
+![La capture d’écran affiche une fenêtre PowerShell exécutant la commande Remove-VpnConnection -Name MachineCertTest.](./media/howto-always-on-device-tunnel/cleanup.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: 63715f668438519131eba5bfff7aa38fc73267d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 144db6a5ceaf56a35d3ce11dd54e1dfb4c97d7e3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61094645"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264111"
 ---
-# <a name="retry-logic-in-the-media-services-sdk-for-net"></a>Logique de nouvelle tentative dans le Kit de développement logiciel (SDK) Media Services pour .NET  
+# <a name="retry-logic-in-the-media-services-sdk-for-net"></a>Logique de nouvelle tentative dans le Kit de développement logiciel (SDK) Media Services pour .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Lorsque vous utilisez les services Microsoft Azure, des erreurs temporaires peuvent se produire. Si une erreur temporaire se produit, dans la plupart des cas, après plusieurs tentatives, l’opération aboutit. Le Kit de développement logiciel (SDK) Media Services pour .NET implémente la logique de nouvelle tentative pour gérer des défaillances temporaires liées à des exceptions et erreurs générées par des requêtes web, l’exécution de requêtes, l’enregistrement de modifications et des opérations de stockage.  Par défaut, le Kit de développement logiciel (SDK) Media Services pour .NET effectue quatre nouvelles tentatives avant de lever une nouvelle exception pour votre application. Le code de votre application doit ensuite gérer cette exception correctement.  
 
@@ -50,7 +52,7 @@ Le tableau suivant décrit les exceptions que le Kit de développement logiciel 
 | IOException |Non |Oui |Non |Non |
 
 ### <a name="webexception-status-codes"></a><a name="WebExceptionStatus"></a> Codes d’état WebException
-Le tableau suivant présente les codes d’erreur WebException pour lesquels la logique de nouvelle tentative est implémentée. L’énumération [WebExceptionStatus](https://msdn.microsoft.com/library/system.net.webexceptionstatus.aspx) définit les codes d’état.  
+Le tableau suivant présente les codes d’erreur WebException pour lesquels la logique de nouvelle tentative est implémentée. L’énumération [WebExceptionStatus](/dotnet/api/system.net.webexceptionstatus?view=netcore-3.1) définit les codes d’état.  
 
 | Statut | Web Request | Stockage | Requête | SaveChanges |
 | --- | --- | --- | --- | --- |
@@ -88,4 +90,3 @@ Pour l’implémentation réelle du Kit de développement logiciel (SDK) Media S
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

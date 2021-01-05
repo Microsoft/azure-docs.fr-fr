@@ -10,19 +10,19 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019; seo-dt-2019
-ms.date: 03/12/2020
-ms.openlocfilehash: 7e222762c8bfa7218fd27e15b97de7b1166d749d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 11/09/2020
+ms.openlocfilehash: 172ebb5f5b7896b6b642c1fe6c5d01afb1dbf479
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81418573"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94553605"
 ---
-# <a name="copy-data-from-an-on-premises-sql-server-database-to-azure-blob-storage"></a>Copier des données depuis une base de données SQL Server locale vers un stockage Blob Azure
+# <a name="copy-data-from-a-sql-server-database-to-azure-blob-storage"></a>Copier des données d’une base de données SQL Server vers un stockage Blob Azure
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce didacticiel, vous allez utiliser l’interface utilisateur d’Azure Data Factory pour créer un pipeline Data Factory qui copie les données d’une base de données SQL Server locale vers un stockage Blob Azure. Vous allez créer et utiliser un runtime d’intégration auto-hébergé, qui déplace les données entre les banques de données locales et cloud.
+Dans ce tutoriel, vous allez utiliser l’interface utilisateur Azure Data Factory pour créer un pipeline Data Factory qui copie les données d’une base de données SQL Server vers un stockage Blob Azure. Vous allez créer et utiliser un runtime d’intégration auto-hébergé, qui déplace les données entre les banques de données locales et cloud.
 
 > [!NOTE]
 > Cet article ne fournit pas de présentation détaillée de Data Factory. Pour plus d’informations, consultez [Présentation d’Azure Data Factory](introduction.md).
@@ -45,12 +45,12 @@ Si vous n’avez pas d’abonnement Azure, [créez un compte gratuit](https://az
 ### <a name="azure-roles"></a>Rôles Azure
 Pour créer des instances de fabrique de données, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit avoir le rôle de *Contributeur* ou de *Propriétaire*, ou être *administrateur* de l’abonnement Azure.
 
-Pour afficher les autorisations dont vous disposez dans l’abonnement, accédez au portail Azure. Dans l’angle supérieur droit, sélectionnez votre nom d’utilisateur, puis **Autorisations**. Si vous avez accès à plusieurs abonnements, sélectionnez l’abonnement approprié. Pour obtenir des exemples d’instructions sur l’ajout d’un utilisateur à un rôle, voir [Gérer les accès à l’aide du contrôle d’accès en fonction du rôle et du Portail Azure](../role-based-access-control/role-assignments-portal.md).
+Pour afficher les autorisations dont vous disposez dans l’abonnement, accédez au portail Azure. Dans l’angle supérieur droit, sélectionnez votre nom d’utilisateur, puis **Autorisations**. Si vous avez accès à plusieurs abonnements, sélectionnez l’abonnement approprié. Pour obtenir des exemples d’instructions sur l’ajout d’un utilisateur à un rôle, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide du portail Azure](../role-based-access-control/role-assignments-portal.md).
 
 ### <a name="sql-server-2014-2016-and-2017"></a>SQL Server 2014, 2016 et 2017
-Dans le cadre de ce didacticiel, vous utilisez une base de données SQL Server locale comme magasin de données *source*. Le pipeline de la fabrique de données que vous allez créer dans ce didacticiel copie les données de cette base de données SQL Server locale (source) dans un stockage Blob (récepteur). Créez ensuite un tableau nommé **emp** dans votre base de données SQL Server, puis insérez-y quelques exemples d’entrées.
+Dans le cadre de ce tutoriel, vous allez utiliser une base de données SQL Server comme magasin de données *source*. Le pipeline de la fabrique de données que vous allez créer dans ce tutoriel copie les données de cette base de données SQL Server (source) dans un stockage Blob (récepteur). Créez ensuite un tableau nommé **emp** dans votre base de données SQL Server, puis insérez-y quelques exemples d’entrées.
 
-1. Exécutez SQL Server Management Studio. S’il n’est pas déjà installé sur votre machine, accédez à [Télécharger SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms).
+1. Exécutez SQL Server Management Studio. S’il n’est pas déjà installé sur votre machine, accédez à [Télécharger SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms).
 
 1. Connectez-vous à votre instance SQL Server à l’aide de vos informations d’identification.
 
@@ -74,7 +74,7 @@ Dans le cadre de ce didacticiel, vous utilisez une base de données SQL Server l
    ```
 
 ### <a name="azure-storage-account"></a>Compte Azure Storage
-Dans ce didacticiel, vous utilisez un compte de stockage Azure à usage général (stockage Blob plus spécifiquement) comme banque de données réceptrice/de destination. Si vous ne possédez pas de compte Stockage Azure à usage général, consultez [Créer un compte de stockage](../storage/common/storage-account-create.md). Le pipeline de la fabrique de données que vous allez créer dans ce didacticiel copie les données de cette base de données SQL Server locale (source) dans un stockage Blob (récepteur). 
+Dans ce didacticiel, vous utilisez un compte de stockage Azure à usage général (stockage Blob plus spécifiquement) comme banque de données réceptrice/de destination. Si vous ne possédez pas de compte Stockage Azure à usage général, consultez [Créer un compte de stockage](../storage/common/storage-account-create.md). Le pipeline de la fabrique de données que vous créez dans ce tutoriel copie les données de la base de données SQL Server (source) dans un stockage Blob (récepteur). 
 
 #### <a name="get-the-storage-account-name-and-account-key"></a>Obtenir le nom de compte de stockage et la clé de compte
 Dans ce didacticiel, vous utilisez le nom et la clé de votre compte de stockage. Pour obtenir le nom et la clé de votre compte de stockage, procédez comme suit :
@@ -110,7 +110,7 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 À cette étape, vous allez créer une fabrique de données et démarrer l’interface utilisateur de Data Factory afin de créer un pipeline dans la fabrique de données.
 
 1. Ouvrez le navigateur web **Microsoft Edge** ou **Google Chrome**. L’interface utilisateur de Data Factory n’est actuellement prise en charge que par les navigateurs web Microsoft Edge et Google Chrome.
-1. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Analytics** > **Data Factory** :
+1. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Intégration** > **Data Factory** :
 
    ![Sélection Data Factory dans le volet « Nouveau »](./media/doc-common-process/new-azure-data-factory-menu.png)
 
@@ -144,7 +144,7 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
    ![Page Prise en main](./media/doc-common-process/get-started-page.png)
 
-1. Sous l’onglet **Général** au bas de la fenêtre **Propriétés**, entrez **SQLServerToBlobPipeline** comme **Nom**.
+1. Dans le volet Général, sous **Propriétés**, spécifiez **SQLServerToBlobPipeline** comme **Nom**. Réduisez ensuite le panneau en cliquant sur l’icône Propriétés en haut à droite.
 
 1. Dans la boîte à outils **Activités**, développez **Déplacer et transformer**. Faites glisser et déposez l’activité **Copier** sur l’aire de conception du pipeline. Définissez le nom de l’activité sur **CopySqlServerToAzureBlobActivity**.
 
@@ -178,7 +178,7 @@ Dans cette section, vous allez créer un conteneur d’objets blob nommé **adft
 
     d. Sous **Type d’authentification**, sélectionnez le type d’authentification approprié que Data Factory doit utiliser pour se connecter à votre base de données SQL Server.
 
-    e. Dans les champs **Nom d’utilisateur** et **Mot de passe**, entrez le nom d’utilisateur et le mot de passe. Si vous avez besoin d’utiliser une barre oblique (\\) dans votre nom de serveur ou de compte d’utilisateur, faites-la précéder d’un caractère d’échappement (\\). Par exemple, utilisez *mydomain\\\\myuser*.
+    e. Dans les champs **Nom d’utilisateur** et **Mot de passe**, entrez le nom d’utilisateur et le mot de passe. Utilisez *mondomaine\\monutilisateur* comme nom d’utilisateur si nécessaire.
 
     f. Sélectionnez **Tester la connexion**. Cette étape permet de confirmer que Data Factory peut se connecter à votre base de données SQL Server à l’aide du runtime d’intégration auto-hébergé que vous avez créé.
 

@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/10/2020
 ms.author: sethm
 ms.custom: include file
-ms.openlocfilehash: a9e8574ea2d7222871c7f065383e6c0c62057dd3
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: 7b5034f2163e8478d7ddb7b9271402b094a809d7
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81007815"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95560826"
 ---
 ## <a name="generate-the-certificate-signing-request-file"></a>Générer le fichier de demande de signature de certificat
 
@@ -78,9 +78,9 @@ Pour envoyer des notifications Push vers une application iOS, inscrivez votre a
 Un certificat est nécessaire pour permettre au hub de notification de fonctionner avec **APNS**. Cette opération peut être effectuée de deux manières :
 
 1. Créez un certificat **.p12** qui peut être chargé directement sur le hub de notification.  
-2. Créez un certificat **.p8** qui peut être utilisé pour l’[authentification basée sur un jeton](https://docs.microsoft.com/azure/notification-hubs/notification-hubs-push-notification-http2-token-authentification) (*l’approche la plus récente*).
+2. Créez un certificat **.p8** qui peut être utilisé pour l’[authentification basée sur un jeton](../articles/notification-hubs/notification-hubs-push-notification-http2-token-authentication.md) (*l’approche la plus récente*).
 
-L’approche la plus récente présente un certain nombre d’avantages (par rapport à l’utilisation de certificats), comme indiqué dans [Authentification basée sur un jeton (HTTP/2) pour APNS](https://docs.microsoft.com/azure/notification-hubs/notification-hubs-push-notification-http2-token-authentification). Toutefois, des étapes ont été fournies pour les deux approches. 
+L’approche la plus récente présente un certain nombre d’avantages (par rapport à l’utilisation de certificats), comme indiqué dans [Authentification basée sur un jeton (HTTP/2) pour APNS](../articles/notification-hubs/notification-hubs-push-notification-http2-token-authentication.md). Toutefois, des étapes ont été fournies pour les deux approches. 
 
 ### <a name="option-1-creating-a-p12-push-certificate-that-can-be-uploaded-directly-to-notification-hub"></a>OPTION 1 : Création d’un certificat Push .p12 qui peut être chargé directement sur le hub de notification
 
@@ -95,7 +95,7 @@ L’approche la plus récente présente un certain nombre d’avantages (par rap
     L’écran **Create a new Certificate** (Créer un certificat) s’affiche.
 
     > [!NOTE]
-    > Ce didacticiel utilise un certificat de développement. Le même processus est utilisé lors de l’inscription d’un certificat de production. Assurez-vous simplement que vous utilisez le même type de certificat quand vous envoyez des notifications.
+    > Ce tutoriel utilise un certificat de développement dont votre application se sert pour générer un jeton d’appareil unique. Le même processus est utilisé lors de l’inscription d’un certificat de production. Assurez-vous simplement que vous utilisez le même type de certificat quand vous envoyez des notifications.
 
 3. Sélectionnez **Choose File** (Choisir un fichier), accédez à l’emplacement où vous avez enregistré le fichier de demande de signature de certificat créé lors de la première tâche, puis double-cliquez sur le nom du certificat à charger. Sélectionnez **Continuer**.
 
@@ -211,7 +211,7 @@ Dans cette section, vous créez un hub de notification et configurez l’authent
 Sous **Services de notification**, sélectionnez **Apple (APNS)** , puis suivez les étapes appropriées en fonction de l’approche que vous avez choisie dans la section [Création d’un certificat pour les hubs de notification](#creating-a-certificate-for-notification-hubs).  
 
 > [!NOTE]
-> Utilisez uniquement le mode **Production** ou **Application** si vous souhaitez envoyer des notifications Push aux utilisateurs ayant acheté votre application dans le Store.
+> Si vous créez votre application avec l’App Store ou un profil de distribution ad hoc, utilisez la **production** pour le **mode d’application**. Ceci permettra à votre appareil d’envoyer des notifications Push aux utilisateurs qui ont acheté votre application sur le Store.
 
 ### <a name="option-1-using-a-p12-push-certificate"></a>OPTION 1 : Utilisation d’un certificat Push .p12
 

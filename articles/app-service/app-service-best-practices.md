@@ -7,15 +7,15 @@ ms.topic: article
 ms.date: 07/01/2016
 ms.author: dariac
 ms.custom: seodec18
-ms.openlocfilehash: ded812d5d7a0440466e7284b56c90965ea00406e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 91fd974c730037907258cb4a670f6fa836bfda6c
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75768484"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92144873"
 ---
 # <a name="best-practices-for-azure-app-service"></a>Meilleures pratiques pour Azure App Service
-Cet article résume les meilleures pratiques dans l’utilisation de [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714). 
+Cet article résume les meilleures pratiques dans l’utilisation de [Azure App Service](./overview.md). 
 
 ## <a name="colocation"></a><a name="colocation"></a>Colocalisation
 Lorsqu’une base de données et des ressources Azure composant une solution, telle qu’une application web, se trouvent dans des régions différentes, les effets possibles sont les suivants :
@@ -67,7 +67,7 @@ La configuration Azure App Service par défaut pour les applications Node.js vis
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur les meilleures pratiques, consultez [App Service Diagnostics](https://docs.microsoft.com/azure/app-service/overview-diagnostics) pour connaître les meilleures pratiques applicables spécifiques à votre ressource.
+Pour plus d’informations sur les meilleures pratiques, consultez [App Service Diagnostics](./overview-diagnostics.md) pour connaître les meilleures pratiques applicables spécifiques à votre ressource.
 
 - Accédez à votre application web dans le [portail Azure](https://portal.azure.com).
 - Dans le volet de navigation de gauche, cliquez sur **Diagnostiquer et résoudre les problèmes** pour ouvrir Diagnostics App Service.

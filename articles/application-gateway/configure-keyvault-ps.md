@@ -1,23 +1,23 @@
 ---
 title: Configurer l’arrêt TLS avec les certificats Key Vault - PowerShell
 titleSuffix: Azure Application Gateway
-description: Découvrez comment intégrer Azure Application Gateway avec Key Vault pour les certificats de serveur associés à des écouteurs HTTPS.
+description: Découvrez comment utiliser un script Azure PowerShell pour intégrer votre coffre de clés avec votre passerelle d’application pour les certificats d’arrêt TLS/SSL.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 02/27/2020
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: victorh
-ms.openlocfilehash: ffda4b41497a9fd84db5fcee36202eb1c1dca2c0
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: aaaeed9d8d6a2d84fa13f495f581dc1f5fdc19e2
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81457839"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91323421"
 ---
-# <a name="configure-tls-termination-with-key-vault-certificates-by-using-azure-powershell"></a>Configurer l’arrêt TLS avec les certificats Key Vault à l’aide d’Azure PowerShell
+# <a name="configure-tls-termination-with-key-vault-certificates-using-azure-powershell"></a>Configuration de l'arrêt TLS avec des certificats Key Vault à l'aide d'Azure PowerShell
 
-[Azure Key Vault](../key-vault/general/overview.md) est un magasin des secrets managé par une plateforme, que vous pouvez utiliser pour protéger des secrets, des clés et des certificats TLS/SSL. Azure Application Gateway prend en charge l’intégration dans Key Vault des certificats de serveur associés à des écouteurs HTTPS. Cette prise en charge se limite à la référence SKU v2 d’Application Gateway.
+[Azure Key Vault](../key-vault/general/overview.md) est un magasin des secrets managé par une plateforme que vous pouvez utiliser pour protéger des secrets, des clés et des certificats TLS/SSL. Azure Application Gateway prend en charge l’intégration dans Key Vault des certificats de serveur associés à des écouteurs HTTPS. Cette prise en charge se limite à la référence SKU v2 d’Application Gateway.
 
 Pour plus d'informations, consultez [Arrêt de TLS avec des certificats Key Vault](key-vault-certs.md).
 
@@ -44,9 +44,11 @@ Select-AzSubscription -Subscription <your subscription>
 ```azurepowershell
 $rgname = "KeyVaultTest"
 $location = "East US"
-$kv = "TestKeyVaultAppGw"
+$kv = "<your key vault name>"
 $appgwName = "AppGwKVIntegration"
 ```
+> [!IMPORTANT]
+> Le nom du coffre de clés doit être globalement unique.
 
 ### <a name="create-a-resource-group-and-a-user-managed-identity"></a>Créer un groupe de ressources et une identité managée par l’utilisateur
 
@@ -71,7 +73,7 @@ $certificate = Get-AzKeyVaultCertificate -VaultName $kv -Name "cert1"
 $secretId = $certificate.SecretId.Replace($certificate.Version, "")
 ```
 > [!NOTE]
-> L’indicateur -EnableSoftDelete doit être utilisé pour que l’arrêt TLS fonctionne correctement. Si vous configurez la [suppression réversible de coffre de clés via le portail](../key-vault/general/overview-soft-delete.md#soft-delete-behavior), la période de rétention doit être laissée sur 90 jours, soit la valeur par défaut. Application Gateway ne prend pas encore en charge une autre période de rétention. 
+> L’indicateur -EnableSoftDelete doit être utilisé pour que l’arrêt TLS fonctionne correctement. Si vous configurez la [suppression réversible de coffre de clés via le portail](../key-vault/general/soft-delete-overview.md#soft-delete-behavior), la période de rétention doit être laissée sur 90 jours, soit la valeur par défaut. Application Gateway ne prend pas encore en charge une autre période de rétention. 
 
 ### <a name="create-a-virtual-network"></a>Créez un réseau virtuel
 

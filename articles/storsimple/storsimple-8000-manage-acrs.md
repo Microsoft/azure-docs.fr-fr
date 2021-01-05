@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/31/2017
 ms.author: alkohli
-ms.openlocfilehash: ade7da25d2307a382c17e7a3cbb26b601c34ef78
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 15c35fb314af27b1ced129a12f752d0a2794e0f8
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64693233"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91949902"
 ---
 # <a name="use-the-storsimple-manager-service-to-manage-access-control-records"></a>Utiliser le service StorSimple Manager pour gérer les enregistrements de contrôle d’accès
 
@@ -63,11 +63,11 @@ Effectuez les opérations suivantes pour ajouter un enregistrement de contrôle 
 
     3. Cliquez sur **Ajouter** pour créer l’ACR.
 
-        ![Cliquer sur Ajouter un ACR](./media/storsimple-8000-manage-acrs/createacr2.png)
+        ![Cliquer sur Ajouter un ACR 2](./media/storsimple-8000-manage-acrs/createacr2.png)
 
 4.  L’ACR nouvellement ajouté s’affiche dans la liste tabulaire d’ACR.
 
-    ![Cliquer sur Ajouter un ACR](./media/storsimple-8000-manage-acrs/createacr5.png)
+    ![Cliquer sur Ajouter un ACR 3](./media/storsimple-8000-manage-acrs/createacr5.png)
 
 
 ## <a name="edit-an-access-control-record"></a>Modifier un enregistrement de contrôle d’accès
@@ -89,11 +89,11 @@ Effectuez les opérations suivantes pour modifier un enregistrement de contrôle
 
 3. Dans le panneau **Modifier l’enregistrement de contrôle d’accès**, indiquez un autre IQN correspondant à un autre hôte.
 
-    ![Modifier des enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/editacr2.png)
+    ![Modifier des enregistrements de contrôle d’accès 2](./media/storsimple-8000-manage-acrs/editacr2.png)
 
 4. Cliquez sur **Enregistrer**. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération. 
 
-    ![Modifier des enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/editacr3.png)
+    ![Modifier des enregistrements de contrôle d’accès 3](./media/storsimple-8000-manage-acrs/editacr3.png)
 
 5. Vous êtes informé lorsque l’ACR est mis à jour. La liste tabulaire est également mise à jour pour refléter la modification.
 
@@ -109,23 +109,23 @@ Pour supprimer un enregistrement de contrôle d’accès, procédez comme suit.
 #### <a name="to-delete-an-access-control-record"></a>Pour supprimer un enregistrement de contrôle d’accès
 1.  Accédez à votre service StorSimple Device Manager, double-cliquez sur le nom du service puis, dans la section **Configuration**, cliquez sur **Enregistrements de contrôle d’accès**.
 
-    ![Accéder aux enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/createacr1.png)
+    ![Accéder aux enregistrements de contrôle d’accès 1b](./media/storsimple-8000-manage-acrs/createacr1.png)
 
 2. Dans la liste tabulaire des enregistrements de contrôle d’accès, cliquez et sélectionnez l’enregistrement que vous souhaitez supprimer.
 
-    ![Accéder aux enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/deleteacr1.png)
+    ![Accéder aux enregistrements de contrôle d’accès 2](./media/storsimple-8000-manage-acrs/deleteacr1.png)
 
 3. Cliquez avec le bouton droit pour appeler le menu contextuel, puis sélectionnez **Supprimer**.
 
-    ![Accéder aux enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/deleteacr2.png)
+    ![Accéder aux enregistrements de contrôle d’accès 3](./media/storsimple-8000-manage-acrs/deleteacr2.png)
 
 4. Lorsque vous êtes invité à confirmer l’opération, passez en revue les informations, puis cliquez sur **Supprimer**.
 
-    ![Accéder aux enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/deleteacr3.png)
+    ![Accéder aux enregistrements de contrôle d’accès 4](./media/storsimple-8000-manage-acrs/deleteacr3.png)
 
 5. Vous êtes informé lorsque la suppression est terminée. La liste tabulaire est mise à jour pour refléter la suppression.
 
-    ![Accéder aux enregistrements de contrôle d’accès](./media/storsimple-8000-manage-acrs/deleteacr5.png)
+    ![Accéder aux enregistrements de contrôle d’accès 5](./media/storsimple-8000-manage-acrs/deleteacr5.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur la [gestion des volumes StorSimple](storsimple-8000-manage-volumes-u2.md).

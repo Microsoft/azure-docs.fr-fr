@@ -5,17 +5,17 @@ ms.assetid: def8e481-7803-4371-aa55-64025d116c97
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/29/2016
-ms.custom: seodec18
-ms.openlocfilehash: 516c7f50f7ff9fe947475b12120a527fc69353bc
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.custom: devx-track-csharp, seodec18
+ms.openlocfilehash: 346b1f83a9c18e35b009e88ae82d6984274fd4e4
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82926848"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92147754"
 ---
 # <a name="troubleshoot-an-app-in-azure-app-service-using-visual-studio"></a>Dépanner une application dans Azure App Service à l'aide de Visual Studio
 ## <a name="overview"></a>Vue d’ensemble
-Ce didacticiel explique comment utiliser les outils Visual Studio pour déboguer une application dans [App Service](https://go.microsoft.com/fwlink/?LinkId=529714) en activant le [Mode débogage](https://docs.microsoft.com/visualstudio/debugger/) à distance ou en consultant les journaux des applications et des serveurs web.
+Ce didacticiel explique comment utiliser les outils Visual Studio pour déboguer une application dans [App Service](./overview.md) en activant le [Mode débogage](/visualstudio/debugger/) à distance ou en consultant les journaux des applications et des serveurs web.
 
 Vous apprendrez ce qui suit :
 
@@ -29,7 +29,7 @@ Vous apprendrez ce qui suit :
 Si vous disposez de Visual Studio Ultimate, vous pouvez également utiliser [IntelliTrace](/visualstudio/debugger/intellitrace) à des fins de débogage. IntelliTrace n’est pas couvert dans ce didacticiel.
 
 ## <a name="prerequisites"></a><a name="prerequisites"></a>Configuration requise
-Ce didacticiel fonctionne avec l'environnement de développement, le projet web et l'application App Service que vous avez configurés dans [Créer une application ASP.NET dans Azure App Service](app-service-web-get-started-dotnet-framework.md). Pour les sections WebJobs, vous aurez besoin de l’application créée dans le cadre de la [Prise en main du Kit de développement logiciel (SDK) Azure WebJobs][GetStartedWJ].
+Ce didacticiel fonctionne avec l'environnement de développement, le projet web et l'application App Service que vous avez configurés dans [Créer une application ASP.NET dans Azure App Service](quickstart-dotnet-framework.md). Pour les sections WebJobs, vous aurez besoin de l’application créée dans le cadre de la [Prise en main du Kit de développement logiciel (SDK) Azure WebJobs][GetStartedWJ].
 
 Les exemples de code inclus dans ce didacticiel sont destinés à une application Web C# MVC, mais les procédures de résolution de problèmes sont identiques pour les applications Visual Basic et Web Forms.
 
@@ -49,9 +49,9 @@ Visual Studio permet d'accéder à un sous-ensemble des fonctionnalités de ges
    >
    >
 
-    Pour plus d’informations sur la connexion aux ressources Azure à partir de Visual Studio, consultez la page [Gérer des comptes, des abonnements et des rôles d’administrateur](https://go.microsoft.com/fwlink/?LinkId=324796#BKMK_AccountVCert).
+    Pour plus d’informations sur la connexion aux ressources Azure à partir de Visual Studio, consultez la page [Gérer des comptes, des abonnements et des rôles d’administrateur](../role-based-access-control/role-assignments-portal.md).
 2. Dans l’**Explorateur de serveurs**, développez **Azure**, puis **App Service**.
-3. Développez le groupe de ressources incluant l'application que vous avez créée dans [Créer une application ASP.NET dans Azure App Service](app-service-web-get-started-dotnet-framework.md), puis cliquez avec le bouton droit sur le nœud d'application et sélectionnez **Afficher les paramètres**.
+3. Développez le groupe de ressources incluant l'application que vous avez créée dans [Créer une application ASP.NET dans Azure App Service](quickstart-dotnet-framework.md), puis cliquez avec le bouton droit sur le nœud d'application et sélectionnez **Afficher les paramètres**.
 
     ![Afficher les paramètres dans l'Explorateur de serveurs](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewsettings.png)
 
@@ -70,15 +70,15 @@ En général, vous déployez un projet Web avec l’indicateur `customErrors` d
 
 **Erreur de serveur dans l’application « / » :**
 
-![Page d’erreur inutile](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror.png)
+:::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
 **Nous avons rencontré une erreur :**
 
-![Page d’erreur inutile](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror1.png)
+:::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror1.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
 **Le site Web ne peut pas afficher la page**
 
-![Page d’erreur inutile](./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror2.png)
+:::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/genericerror2.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
 Généralement, la méthode la plus simple pour rechercher la cause d’une erreur consiste à activer les messages d’erreur détaillés : la première capture d’écran de la série précédente montre comment procéder. Vous devez modifier le fichier Web.config déployé. Vous pouvez modifier le fichier *Web.config* dans le projet et redéployer ce dernier, ou vous pouvez créer une [transformation Web.config](https://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/web-config-transformations) et déployer une build de débogage, mais la solution la plus rapide est la suivante : dans l'**Explorateur de solutions**, vous pouvez afficher et modifier directement les fichiers dans l'application distante à l'aide de la fonctionnalité d'*affichage à distance*.
 
@@ -108,9 +108,9 @@ Si le message d'erreur détaillé ne fournit pas assez d'informations et que vou
 
 Le débogage à distance ne fonctionne pas avec les éditions Express de Visual Studio.
 
-Cette section illustre comment déboguer à distance à l'aide du projet que vous créez dans [Créer une application ASP.NET dans Azure App Service](app-service-web-get-started-dotnet-framework.md).
+Cette section illustre comment déboguer à distance à l'aide du projet que vous créez dans [Créer une application ASP.NET dans Azure App Service](quickstart-dotnet-framework.md).
 
-1. Ouvrez le projet web que vous avez créé dans [Créer une application ASP.NET dans Azure App Service](app-service-web-get-started-dotnet-framework.md).
+1. Ouvrez le projet web que vous avez créé dans [Créer une application ASP.NET dans Azure App Service](quickstart-dotnet-framework.md).
 
 1. Ouvrez *Controllers\HomeController.cs*.
 
@@ -125,11 +125,11 @@ Cette section illustre comment déboguer à distance à l'aide du projet que vou
     }
     ```
 
-1. [Définissez un point d’arrêt](https://docs.microsoft.com/visualstudio/debugger/) sur la ligne `ViewBag.Message`.
+1. [Définissez un point d’arrêt](/visualstudio/debugger/) sur la ligne `ViewBag.Message`.
 
 1. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis cliquez sur **Publier**.
 
-1. Dans la liste déroulante **Profil**, sélectionnez le profil utilisé dans [Créer une application ASP.NET dans Azure App Service](app-service-web-get-started-dotnet-framework.md). Puis, cliquez sur Paramètres.
+1. Dans la liste déroulante **Profil**, sélectionnez le profil utilisé dans [Créer une application ASP.NET dans Azure App Service](quickstart-dotnet-framework.md). Puis, cliquez sur Paramètres.
 
 1. Dans la boîte de dialogue **Publier**, cliquez sur l’onglet **Paramètres** et remplacez **Configuration** par **Déboguer**, puis cliquez sur **Enregistrer**.
 
@@ -139,7 +139,7 @@ Cette section illustre comment déboguer à distance à l'aide du projet que vou
 
 1. Dans l'**Explorateur de serveurs**, cliquez avec le bouton droit sur votre application, puis cliquez sur **Attacher le débogueur**.
 
-    ![Attacher le débogueur](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-attachdebugger.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-attachdebugger.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     Le navigateur ouvre automatiquement votre page d'accueil exécutée dans Azure. Vous devrez peut-être attendre environ 20 secondes pendant qu'Azure configure le serveur pour le débogage. Ce retard se produit uniquement la première fois que vous exécutez le mode débogage sur une application au cours d'une période de 48 heures. Si vous commencez à déboguer à nouveau au cours de la même période, aucun retard ne se produit.
 
@@ -176,7 +176,7 @@ Le débogage à distance fonctionne uniquement avec les tâches Web en continu. 
 
 2. Dans le projet ContosoAdsWebJob, ouvrez *Functions.cs*.
 
-3. [Définissez un point d’arrêt](https://docs.microsoft.com/visualstudio/debugger/) sur la première instruction dans la méthode `GnerateThumbnail`.
+3. [Définissez un point d’arrêt](/visualstudio/debugger/) sur la première instruction dans la méthode `GnerateThumbnail`.
 
     ![Définir le point d’arrêt](./media/web-sites-dotnet-troubleshoot-visual-studio/wjbreakpoint.png)
 
@@ -192,7 +192,7 @@ Le débogage à distance fonctionne uniquement avec les tâches Web en continu. 
 
 8. Cliquez sur **Attacher le débogueur**.
 
-    ![Attacher le débogueur](./media/web-sites-dotnet-troubleshoot-visual-studio/wjattach.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/wjattach.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     Le navigateur ouvre automatiquement votre page d'accueil exécutée dans Azure. Vous devrez peut-être attendre environ 20 secondes pendant qu'Azure configure le serveur pour le débogage. Ce retard se produit uniquement la première fois que vous exécutez le mode débogage sur une application au cours d'une période de 48 heures. Si vous commencez à déboguer à nouveau au cours de la même période, aucun retard ne se produit.
 
@@ -241,7 +241,7 @@ Si votre fonction [a écrit des journaux d’activité](https://github.com/Azure
       <httpRuntime targetFramework="4.5" />
     </system.web>
     ```
-* Si le débogueur ne parcourt pas le code que vous voulez déboguer, vous devez modifier le paramètre « Uniquement mon code ».  Pour plus d’informations, consultez la section [Specify whether to debug only user code using Just My Code in Visual Studio](https://docs.microsoft.com/visualstudio/debugger/just-my-code) (Déterminer s’il faut déboguer uniquement le code utilisateur via l’option Uniquement mon code dans Visual Studio).
+* Si le débogueur ne parcourt pas le code que vous voulez déboguer, vous devez modifier le paramètre « Uniquement mon code ».  Pour plus d’informations, consultez la section [Specify whether to debug only user code using Just My Code in Visual Studio](/visualstudio/debugger/just-my-code) (Déterminer s’il faut déboguer uniquement le code utilisateur via l’option Uniquement mon code dans Visual Studio).
 * Lorsque vous activez la fonctionnalité de débogage à distance, un compteur démarre sur le serveur : après 48 heures, la fonctionnalité est automatiquement désactivée. Cette limite de 48 heures a été définie à des fins de sécurité et de performances. Vous pouvez facilement réactiver la fonctionnalité autant de fois que nécessaire. Nous vous recommandons de la désactiver lorsque vous n'utilisez pas le débogage.
 * Vous pouvez manuellement connecter le débogueur à n'importe quel processus, et pas seulement au processus de l'application (w3wp.exe). Pour plus d'informations sur l'utilisation du mode débogage dans Visual Studio, consultez la page [Débogage dans Visual Studio](/visualstudio/debugger/debugging-in-visual-studio).
 
@@ -264,7 +264,7 @@ Les journaux d’activité sont consignés dans des fichiers du dossier *LogFile
 ## <a name="create-and-view-application-trace-logs"></a><a name="apptracelogs"></a>Création et affichage des journaux d’activité de suivi d’application
 Dans cette section, vous effectuerez les tâches suivantes :
 
-* ajout d’instructions de traçage au projet web que vous avez créé dans [Prise en main d’Azure et ASP.NET](app-service-web-get-started-dotnet-framework.md).
+* ajout d’instructions de traçage au projet web que vous avez créé dans [Prise en main d’Azure et ASP.NET](quickstart-dotnet-framework.md).
 * affichage des journaux d’activité lorsque vous exécutez le projet localement ;
 * affichage des journaux d’activité durant leur génération par l’application exécutée dans Azure.
 
@@ -330,7 +330,7 @@ Pour plus d’informations sur la création de journaux d’activité d’applic
     ```
 
 L’élément `WebPageTraceListener` vous permet d’afficher la sortie de suivi en accédant à `/trace.axd`.
-1. Ajoutez un <a href="https://msdn.microsoft.com/library/vstudio/6915t83k(v=vs.100).aspx">élément de suivi</a> sous `<system.web>` dans le fichier Web.config, comme dans l’exemple suivant :
+1. Ajoutez un <a href="/previous-versions/dotnet/netframework-4.0/6915t83k(v=vs.100)">élément de suivi</a> sous `<system.web>` dans le fichier Web.config, comme dans l’exemple suivant :
 
     ``` xml
     <trace enabled="true" writeToDiagnosticsTrace="true" mostRecent="true" pageOutput="false" />
@@ -340,15 +340,17 @@ L’élément `WebPageTraceListener` vous permet d’afficher la sortie de suivi
 1. Dans la barre d’adresse du navigateur, ajoutez *trace.axd* à l’URL, puis appuyez sur Entrée (l’URL ressemble à `http://localhost:53370/trace.axd`).
 1. Sur la page **Suivi d’application**, cliquez sur **Afficher les détails** sur la première ligne (pas la ligne BrowserLink).
 
-    ![trace.axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd1.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd1.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     La page **Détails de la demande** s’affiche et la section **Informations de suivi** affiche la sortie des instructions de suivi ajoutées à la méthode `Index`.
 
-    ![trace.axd](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd2.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-traceaxd2.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     Par défaut, `trace.axd` est uniquement disponible localement. Si vous souhaitez le rendre disponible à partir d'une application distante, vous pouvez ajouter `localOnly="false"` à l'élément `trace` dans le fichier *Web.config*, comme le montre l'exemple suivant :
 
-        <trace enabled="true" writeToDiagnosticsTrace="true" localOnly="false" mostRecent="true" pageOutput="false" />
+    ```xml
+    <trace enabled="true" writeToDiagnosticsTrace="true" localOnly="false" mostRecent="true" pageOutput="false" />
+    ```
 
     Toutefois, l'activation de `trace.axd` dans une application de production n'est pas recommandée pour des raisons de sécurité. Dans les sections suivantes, vous découvrirez une façon plus simple de lire les journaux d’activité de suivi dans une application App Service.
 
@@ -359,11 +361,12 @@ L’élément `WebPageTraceListener` vous permet d’afficher la sortie de suivi
     Une fois que Visual Studio a publié votre mise à jour, il ouvre une fenêtre de navigateur vers votre page d’accueil (en partant du principe que vous n’avez pas désactivé la case à cocher **URL de destination** sous l’onglet **Connexion**).
 3. Dans l’**Explorateur de serveurs**, cliquez avec le bouton droit sur votre application et sélectionnez **Afficher les journaux d’activité de diffusion en continu**.
 
-    ![Afficher la diffusion de journaux d’activité en continu dans le menu contextuel](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewlogsmenu.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-viewlogsmenu.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     La fenêtre **Sortie** indique que vous êtes connecté au service de diffusion de journaux en continu et ajoute une ligne de notification à chaque minute passée sans affichage de journal.
 
-    ![Afficher la diffusion de journaux d’activité en continu dans le menu contextuel](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-nologsyet.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-nologsyet.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
+
 4. Dans la fenêtre du navigateur qui affiche la page d'accueil de votre application, cliquez sur **Contacter**.
 
     En quelques secondes, la sortie du suivi de l’erreur que vous avez ajouté à la méthode `Contact` apparaît dans la fenêtre **Sortie**.
@@ -391,7 +394,7 @@ L’élément `WebPageTraceListener` vous permet d’afficher la sortie de suivi
 ### <a name="output-window-features"></a>Fonctionnalités de la fenêtre Sortie
 L’onglet **Journaux d’activité Microsoft Azure** de la fenêtre **Sortie** contient plusieurs boutons et une zone de texte :
 
-![Boutons de l’onglet Journaux d’activité](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-icons.png)
+:::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-icons.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
 Ces éléments permettent d'effectuer les opérations suivantes :
 
@@ -455,14 +458,15 @@ Tous les journaux d’activité que vous pouvez surveiller dans la fenêtre **So
 
 1. Dans la fenêtre **Sortie**, cliquez sur **Télécharger les journaux d’activité de diffusion en continu**.
 
-    ![Boutons de l’onglet Journaux d’activité](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadicon.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadicon.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
     L'Explorateur de fichiers ouvre votre dossier *Téléchargements* dans lequel le fichier téléchargé est sélectionné.
 
-    ![Fichier téléchargé](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadedfile.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-downloadedfile.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
+
 2. Procédez à l'extraction du fichier *.zip* pour afficher la structure de dossiers suivante :
 
-    ![Fichier téléchargé](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilefolders.png)
+    :::image type="content" source="./media/web-sites-dotnet-troubleshoot-visual-studio/tws-logfilefolders.png" alt-text="Capture d’écran montrant une erreur Erreur de serveur dans l’application « / » dans un navigateur web.":::
 
    * Les journaux d’activité de suivi d’application sont dans des fichiers *.txt* dans le dossier *LogFiles\Application*.
    * Les journaux d’activité de serveur web sont dans des fichiers *.log* dans le dossier *LogFiles\http\RawLogs*. Vous pouvez utiliser un outil tel que [Log Parser](https://www.microsoft.com/download/details.aspx?displaylang=en&id=24659) pour afficher et manipuler ces fichiers.
@@ -501,7 +505,7 @@ Storage accounts offer more storage and longer-lasting retention for logs compar
     This setting specifies which Azure datacenter will host your storage account. For this tutorial your choice won't make a noticeable difference, but for a production web app you want your web server and your storage account to be in the same region to minimize latency and data egress charges. The web app (which you'll create later) should run in a region as close as possible to the browsers accessing your web app in order to minimize latency.
 3. Set the **Replication** drop-down list to **Locally redundant**.
    
-    When geo-replication is enabled for a storage account, the stored content is replicated to a secondary datacenter to enable failover to that location in case of a major disaster in the primary location. Geo-replication can incur additional costs. For test and development accounts, you generally don't want to pay for geo-replication. For more information, see [Create, manage, or delete a storage account](../storage/common/storage-create-storage-account.md).
+    When geo-replication is enabled for a storage account, the stored content is replicated to a secondary datacenter to enable failover to that location in case of a major disaster in the primary location. Geo-replication can incur additional costs. For test and development accounts, you generally don't want to pay for geo-replication. For more information, see [Create, manage, or delete a storage account](../storage/common/storage-account-create.md).
 4. Click **Create**.
 
     ![New storage account](./media/web-sites-dotnet-troubleshoot-visual-studio/newstorage.png)    
@@ -620,7 +624,7 @@ Pour en savoir plus sur la résolution des problèmes liés aux applications dan
 Pour obtenir des réponses sur une question relative à la résolution des problèmes, ouvrez un fil de discussion dans l'un des forums suivants :
 
 * [Forum Azure sur le site ASP.NET](https://forums.asp.net/1247.aspx/1?Azure+and+ASP+NET).
-* [Forum Azure sur Microsoft Q&A](https://docs.microsoft.com/answers/topics/azure-webapps.html).
+* [Forum Azure sur Microsoft Q&A](/answers/topics/azure-webapps.html).
 * [StackOverflow.com](https://www.stackoverflow.com).
 
 ### <a name="debugging-in-visual-studio"></a>Débogage dans Visual Studio
@@ -678,11 +682,11 @@ Pour plus d’informations sur l’analyse des journaux d’activité de serveur
   Un outil pour afficher les données des journaux d’activité de serveur Web (fichiers *.log* ).
 * [Résolution des problèmes de performances IIS ou des erreurs d’application à l’aide de LogParser](https://www.iis.net/learn/troubleshoot/performance-issues/troubleshooting-iis-performance-issues-or-application-errors-using-logparser)<br/>
   Une introduction à l’outil LogParser que vous pouvez utiliser pour analyser les journaux d’activité de serveur Web.
-* [Billets du blog de Robert McMurray sur l’utilisation de LogParser](https://docs.microsoft.com/archive/blogs/robert_mcmurray/using-logparser-with-ftp-7-x-sessions)<br/>
+* [Billets du blog de Robert McMurray sur l’utilisation de LogParser](/archive/blogs/robert_mcmurray/using-logparser-with-ftp-7-x-sessions)<br/>
 * [Code d’état HTTP dans IIS 7.0, IIS 7.5 et IIS 8.0](https://support.microsoft.com/kb/943891)
 
 ### <a name="analyzing-failed-request-tracing-logs"></a>Analyse des journaux d’activité de suivi des demandes ayant échoué
 Le site web Microsoft TechNet comporte une section [Utilisation du suivi des demandes ayant échoué](https://www.iis.net/learn/troubleshoot/using-failed-request-tracing) qui permet de comprendre l’utilisation de ces journaux d’activité. Toutefois, cette documentation se concentre principalement sur la configuration du suivi des demandes ayant échoué dans IIS, ce que vous ne pouvez pas faire dans Azure App Service.
 
-[GetStarted]: app-service-web-get-started-dotnet.md
+[GetStarted]: quickstart-dotnetcore.md?pivots=platform-windows
 [GetStartedWJ]: https://github.com/Azure/azure-webjobs-sdk/wiki

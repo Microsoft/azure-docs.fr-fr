@@ -7,14 +7,20 @@ ms.service: container-service
 ms.topic: conceptual
 ms.date: 03/02/2020
 keywords: aro, openshift, cluster privé, red hat
-ms.openlocfilehash: f4ce6c79fa9fe6d05fdea4b877a8aa7faf404a9b
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 37e9dc996fddf2b592ea6bf7fff1e1f4825f3ca8
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83727447"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220626"
 ---
 # <a name="create-a-private-cluster-with-azure-red-hat-openshift-311"></a>Créer un cluster privé avec Azure Red Hat OpenShift 3.11
+
+> [!IMPORTANT]
+> Azure Red Hat OpenShift 3.11 sera mis hors service le 30 juin 2022. La prise en charge de la création de nouveaux clusters Azure Red Hat OpenShift 3.11 se poursuit jusqu’au 30 novembre 2020. Après la mise hors service, les clusters Azure Red Hat OpenShift 3.11 restants seront arrêtés pour éviter des failles de sécurité.
+> 
+> Suivez ce guide pour [créer un cluster Azure Red Hat OpenShift 4](tutorial-create-cluster.md).
+> Si vous avez des questions spécifiques, n’hésitez pas à [nous contacter](mailto:arofeedback@microsoft.com).
 
 Les clusters privés offrent les avantages suivants :
 

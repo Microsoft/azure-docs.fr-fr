@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/23/2018
 ms.author: memildin
-ms.openlocfilehash: bf715d872fab421de30ebcb146a1981a7d008738
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4e270185550fac5a06d800d74d5fcd751aceb25d
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80585969"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342227"
 ---
 # <a name="manage-user-data-in-azure-security-center"></a>Gérer les données utilisateur dans Azure Security Center
 Cet article fournit des informations sur la façon dont vous pouvez gérer les données utilisateur dans Azure Security Center. La gestion des données utilisateur inclut la possibilité d’accéder à des données, d’en supprimer ou d’en exporter.
@@ -87,7 +87,7 @@ Un administrateur de compte peut exporter les détails de l’alerte via les mé
   GET https://<endpoint>/subscriptions/{subscriptionId}/providers/microsoft.Security/alerts?api-version={api-version}
   ```
 
-Pour plus d’informations, consultez [Get Security Alerts (GET Collection)](https://msdn.microsoft.com/library/mt704050.aspx) (Obtenir des alertes de sécurité (Collection GET)).
+Pour plus d’informations, consultez [Get Security Alerts (GET Collection)](/previous-versions/azure/reference/mt704050(v=azure.100)) (Obtenir des alertes de sécurité (Collection GET)).
 
 ## <a name="restricting-the-use-of-personal-data-for-profiling-or-marketing-without-consent"></a>Restriction de l’utilisation des données personnelles pour le profilage ou le marketing sans consentement
 Un utilisateur de Security Center peut choisir de refuser en supprimant ses [données de contact de sécurité](security-center-provide-security-contact-details.md).

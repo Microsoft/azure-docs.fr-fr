@@ -1,18 +1,18 @@
 ---
 title: Interprétation de votre carte de performance | Microsoft Docs
-description: Il s’agit de la FAQ sur Azure Internet Analyzer.
+description: Découvrez comment interpréter votre carte de performance. L’onglet Carte de performance contient les résultats agrégés et analysés de vos tests.
 services: internet-analyzer
 author: mattcalder
 ms.service: internet-analyzer
-ms.topic: guide
+ms.topic: how-to
 ms.date: 10/16/2019
 ms.author: mebeatty
-ms.openlocfilehash: a05c704f62d93bdc110d8a5943dd266ca22eb5f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f43d094193fb266d1ecec7089b44d8b3fd5e9b43
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73510298"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91330211"
 ---
 # <a name="interpreting-your-scorecard"></a>Interprétation de votre carte de performance
 

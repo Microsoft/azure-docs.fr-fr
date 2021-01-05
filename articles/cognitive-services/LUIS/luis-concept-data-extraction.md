@@ -1,20 +1,21 @@
 ---
 title: Extraction des données : LUIS
 description: Extraire des données d’un texte d’énoncé avec des intentions et des entités. Découvrez quel type de données il est possible d’extraire à partir de Language Understanding (LUIS).
-author: diberry
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 05/01/2020
-ms.openlocfilehash: 3b6b09fd1066a9caa745cddf30d76e2843c3f56c
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: e6f01354bb5aa2b78d3c9962bac49be39dd2c81f
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83589718"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95025991"
 ---
 # <a name="extract-data-from-utterance-text-with-intents-and-entities"></a>Extraire des données d’un texte d’énoncé avec des intentions et des entités
 LUIS donne la possibilité d’obtenir des informations à partir des énoncés d’un utilisateur en langage naturel. Les informations sont extraites de façon à pouvoir être utilisées par un programme, une application ou un chatbot de manière exploitable. Dans les sections suivantes, découvrez quelles sont les données retournées à partir des intentions et des entités avec des exemples de JSON.
 
-Les données les plus difficiles à extraire sont les données issues du Machine Learning, car il n’y a pas de correspondance de texte exacte. L’extraction de données à partir [d’entités](luis-concept-entity-types.md) issues du Machine Learning doit faire partie du [cycle de création](luis-concept-app-iteration.md) jusqu’à ce que vous ayez la certitude de recevoir les données attendues.
+Les données les plus difficiles à extraire sont les données de machine-learning, car il n’y a pas de correspondance de texte exacte. L’extraction de données à partir [d’entités](luis-concept-entity-types.md) de machine-learning doit faire partie du [cycle de création](luis-concept-app-iteration.md) jusqu’à ce que vous ayez la certitude de recevoir les données attendues.
 
 ## <a name="data-location-and-key-usage"></a>Emplacement des données et utilisation de la clé
 LUIS extrait des données à partir de l’énoncé de l’utilisateur au [point de terminaison](luis-glossary.md#endpoint) publié. La **requête HTTPS** (POST ou GET) contient l’énoncé ainsi que certaines configurations facultatives, comme l’environnement de production ou l’environnement intermédiaire.
@@ -231,9 +232,9 @@ Les entités [PersonName](luis-reference-prebuilt-person.md) et [GeographyV2](lu
 
 ### <a name="names-of-people"></a>Noms de personnes
 
-Les noms de personnes peuvent avoir un format légèrement en fonction de la langue et de la culture. Utilisez une entité **[personName](luis-reference-prebuilt-person.md)** prédéfinie ou une **[entité simple](luis-concept-entity-types.md#simple-entity)** avec les [rôles](luis-concept-roles.md) du prénom et du nom.
+Les noms de personnes peuvent avoir un format légèrement en fonction de la langue et de la culture. Utilisez une entité **[personName](luis-reference-prebuilt-person.md)** prédéfinie ou une **[entité simple](luis-concept-entity-types.md)** avec les rôles du prénom et du nom.
 
-Si vous utilisez l’entité simple, veillez à donner des exemples qui utilisent le prénom et le nom à différents endroits de l’énoncé, dans des énoncés de longueurs différentes et pour toutes les intentions, y compris l’intention None. [Vérifiez](luis-how-to-review-endoint-utt.md) régulièrement les énoncés du point de terminaison pour étiqueter les noms qui n’ont pas été prédits correctement.
+Si vous utilisez l’entité simple, veillez à donner des exemples qui utilisent le prénom et le nom à différents endroits de l’énoncé, dans des énoncés de longueurs différentes et pour toutes les intentions, y compris l’intention None. [Vérifiez](./luis-how-to-review-endpoint-utterances.md) régulièrement les énoncés du point de terminaison pour étiqueter les noms qui n’ont pas été prédits correctement.
 
 ### <a name="names-of-places"></a>Noms de lieux
 
@@ -241,17 +242,17 @@ Les noms d’endroits sont définis et connus : villes, départements, États, p
 
 ### <a name="new-and-emerging-names"></a>Nouveaux noms
 
-Certaines applications doivent être capables de rechercher les nouveaux noms, comme les produits ou les entreprises. Ces types de noms sont les plus difficiles à extraire. Commencez par une **[entité simple](luis-concept-entity-types.md#simple-entity)** et ajoutez une [liste d’expressions](luis-concept-feature.md). [Vérifiez](luis-how-to-review-endoint-utt.md) régulièrement les énoncés du point de terminaison pour étiqueter les noms qui n’ont pas été prédits correctement.
+Certaines applications doivent être capables de rechercher les nouveaux noms, comme les produits ou les entreprises. Ces types de noms sont les plus difficiles à extraire. Commencez par une **[entité simple](luis-concept-entity-types.md#simple-entity)** et ajoutez une [liste d’expressions](luis-concept-feature.md). [Vérifiez](./luis-how-to-review-endpoint-utterances.md) régulièrement les énoncés du point de terminaison pour étiqueter les noms qui n’ont pas été prédits correctement.
 
 ## <a name="patternany-entity-data"></a>Données d’entité Pattern.any
 
-[Pattern.any](reference-entity-pattern-any.md) est un espace réservé à longueur variable utilisé uniquement dans le gabarit d’énoncé d’un modèle pour marquer où l’entité commence et se termine. L’entité utilisée dans le modèle doit être trouvée pour que celui-ci soit appliqué. 
+[Pattern.any](reference-entity-pattern-any.md) est un espace réservé à longueur variable utilisé uniquement dans le gabarit d’énoncé d’un modèle pour marquer où l’entité commence et se termine. L’entité utilisée dans le modèle doit être trouvée pour que celui-ci soit appliqué.
 
 ## <a name="sentiment-analysis"></a>analyse de sentiments
-Si l’analyse des sentiments est configurée lors de la [publication](luis-how-to-publish-app.md#sentiment-analysis), la réponse JSON de LUIS l’intègre. Pour plus d’informations sur l’analyse des sentiments, consultez la documentation [Analyse de texte](https://docs.microsoft.com/azure/cognitive-services/text-analytics/).
+Si l’analyse des sentiments est configurée lors de la [publication](luis-how-to-publish-app.md#sentiment-analysis), la réponse JSON de LUIS l’intègre. Pour plus d’informations sur l’analyse des sentiments, consultez la documentation [Analyse de texte](../text-analytics/index.yml).
 
 ## <a name="key-phrase-extraction-entity-data"></a>Données d’entité d’extraction de phrases clés
-L’[entité d’extraction de phrases clés](luis-reference-prebuilt-keyphrase.md) renvoie les phrases clés de l’énoncé, fournies par l’[Analyse de texte](https://docs.microsoft.com/azure/cognitive-services/text-analytics/).
+L’[entité d’extraction de phrases clés](luis-reference-prebuilt-keyphrase.md) renvoie les phrases clés de l’énoncé, fournies par l’[Analyse de texte](../text-analytics/index.yml).
 
 ## <a name="data-matching-multiple-entities"></a>Données correspondant à plusieurs entités
 

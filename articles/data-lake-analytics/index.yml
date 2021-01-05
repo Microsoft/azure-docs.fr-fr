@@ -4,19 +4,18 @@ summary: Data Lake Analytics vous permet d’exécuter des travaux d’analyse d
 metadata:
   title: Service Analytique Azure Data Lake
   description: Data Lake Analytics vous permet d’exécuter des travaux d’analyse de Big Data qui se convertissent en énormes jeux de données.
-  services: data-lake-analytics
   ms.service: data-lake-analytics
   ms.topic: landing-page
   ms.collection: collection
   author: hrasheed-msft
   ms.author: hrasheed
   ms.date: 09/13/2019
-  ms.openlocfilehash: ed785cb383381902e488acbe182446eaa977824a
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 014dbc3b2337238604cfd585ee1d39c4e8dab85b
+  ms.sourcegitcommit: df66dff4e34a0b7780cba503bb141d6b72335a96
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "73825806"
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "96511370"
 landingContent:
 - title: À propos de Data Lake Analytics
   linkLists:
@@ -24,6 +23,8 @@ landingContent:
     links:
     - text: Définition d'Azure Data Lake Analytics
       url: data-lake-analytics-overview.md
+    - text: Nouveautés de Data Lake Analytics
+      url: data-lake-analytics-whats-new.md
   - linkListType: quickstart
     links:
     - text: Créer des travaux U-SQL dans le portail Azure
@@ -39,7 +40,7 @@ landingContent:
     - text: Bien démarrer avec U-SQL
       url: data-lake-analytics-u-sql-get-started.md
     - text: Informations de référence sur le langage U-SQL
-      url: https://docs.microsoft.com/u-sql/
+      url: https://docs.microsoft.com/u-sql
     - text: Prise en main du catalogue U-SQL
       url: data-lake-analytics-u-sql-catalog.md
     - text: Utiliser des opérateurs définis par l’utilisateur

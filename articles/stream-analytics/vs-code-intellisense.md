@@ -5,17 +5,17 @@ ms.service: stream-analytics
 author: su-jie
 ms.author: sujie
 ms.date: 4/11/2020
-ms.topic: conceptual
-ms.openlocfilehash: 25ece3174cd65df9c665888d913cf6b9029904b1
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.topic: how-to
+ms.openlocfilehash: 988b9d364f09a4c88bcaab1fe81ae80c8de5d4d9
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393959"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96491568"
 ---
 # <a name="intellisense-in-azure-stream-analytics-tools-for-visual-studio-code"></a>IntelliSense dans Azure Stream Analytics Tools pour Visual Studio Code
 
-IntelliSense est disponible pour le [langage de requête Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference?toc=https%3A%2F%2Fdocs.microsoft.com%2Fazure%2Fstream-analytics%2Ftoc.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fazure%2Fbread%2Ftoc.json) dans [Azure Stream Analytics Tools pour VS Code](https://marketplace.visualstudio.com/items?itemName=ms-bigdatatools.vscode-asa&ssr=false#overview). IntelliSense est une aide à la saisie semi-automatique de code qui comprend un certain nombre de fonctionnalités : Liste des membres, Informations sur les paramètres, Info Express et Compléter le mot. Les fonctionnalités IntelliSense sont parfois désignées sous d'autres noms tels que « saisie semi-automatique de code », « assistance au contenu » et « optimisation de code ».
+IntelliSense est disponible pour le [langage de requête Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference?bc=https%253a%2f%2fdocs.microsoft.com%2fazure%2fbread%2ftoc.json&toc=https%253a%2f%2fdocs.microsoft.com%2fazure%2fstream-analytics%2ftoc.json) dans [Azure Stream Analytics Tools pour VS Code](https://marketplace.visualstudio.com/items?itemName=ms-bigdatatools.vscode-asa&ssr=false#overview). IntelliSense est une aide à la saisie semi-automatique de code qui comprend un certain nombre de fonctionnalités : Liste des membres, Informations sur les paramètres, Info Express et Compléter le mot. Les fonctionnalités IntelliSense sont parfois désignées sous d'autres noms tels que « saisie semi-automatique de code », « assistance au contenu » et « optimisation de code ».
 
 ![Démo d'IntelliSense](./media/vs-code-intellisense/intellisense.gif)
 
@@ -34,13 +34,12 @@ Vous pouvez déclencher IntelliSense dans n'importe quelle fenêtre de l'éditeu
 
 IntelliSense dans Stream Analytics Tools pour VS Code offre différents types de saisie semi-automatique, y compris des suggestions de serveur de langage, des extraits de code et des saisies textuelles simples à base de mots.
 
-|       |         |       |
-| ----- | ------- | ----- |
+|Completion     |  Type       |
+| ----- | ------- |
 | Mots clés | `keyword`
 | Fonctions | `build-in function`, `user defined function`  |
 | Nom de jeu de données| `input`, `output`, `intermediate result set`|
 | Nom de colonne de jeu de données|`input`, `intermediate result set`|
-|
 
 #### <a name="name-completion"></a>Saisie semi-automatique des noms
 
@@ -72,6 +71,6 @@ Ce problème est dû à l'absence de configuration d'entrée pour fournir des do
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Démarrage rapide : Créer une tâche Azure Stream Analytics dans Visual Studio Code](quick-create-vs-code.md)
+* [Démarrage rapide : Créer une tâche Azure Stream Analytics dans Visual Studio Code](quick-create-visual-studio-code.md)
 * [Tester des requêtes Stream Analytics localement avec des exemples de données à l’aide de Visual Studio Code](visual-studio-code-local-run.md)
 * [Tester des requêtes Stream Analytics localement par rapport à une entrée de stream en direct à l'aide de Visual Studio Code](visual-studio-code-local-run-live-input.md)

@@ -1,27 +1,31 @@
 ---
-title: Se connecter à l’aide de Go – Azure Database pour MySQL
+title: 'Démarrage rapide : Se connecter à l’aide de Go – Azure Database pour MySQL'
 description: Ce guide de démarrage rapide fournit plusieurs exemples de code Go que vous pouvez utiliser pour vous connecter et interroger des données de la base de données Azure pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.custom: mvc
 ms.devlang: go
 ms.topic: quickstart
-ms.date: 3/18/2020
-ms.openlocfilehash: 3b9b18585aac4e31af05218ff732569912508ce9
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.date: 5/26/2020
+ms.openlocfilehash: 0da32fb404972556a1c4c964eec692bad20a4db1
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81681872"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94535756"
 ---
-# <a name="azure-database-for-mysql-use-go-language-to-connect-and-query-data"></a>Azure Database pour MySQL : Utiliser la langage Go pour se connecter et interroger des données
+# <a name="quickstart-use-go-language-to-connect-and-query-data-in-azure-database-for-mysql"></a>Démarrage rapide : Utiliser du langage Go pour se connecter et interroger des données dans Azure Database pour MySQL
+
 Ce guide de démarrage rapide vous explique comment vous connecter à une base de données Azure Database pour MySQL à partir de plateformes Windows, Ubuntu Linux et Mac à l’aide d’un code écrit dans le langage [Go](https://golang.org/). Il détaille l’utilisation d’instructions SQL pour interroger la base de données, la mettre à jour, y insérer des données ou en supprimer. Cette rubrique part du principe que vous connaissez les bases du développement Go et que vous ne savez pas utiliser Azure Database pour MySQL.
 
 ## <a name="prerequisites"></a>Prérequis
 Ce guide de démarrage rapide s’appuie sur les ressources créées dans l’un de ces guides :
 - [Créer un serveur de base de données Azure pour MySQL à l’aide du Portail Azure](./quickstart-create-mysql-server-database-using-azure-portal.md)
 - [Création d’un serveur de base de données Azure pour MySQL à l’aide d’Azure CLI](./quickstart-create-mysql-server-database-using-azure-cli.md)
+
+> [!IMPORTANT] 
+> Vérifiez que l’adresse IP à partir de laquelle vous vous connectez a été ajoutée aux règles de pare-feu du serveur à l’aide du [portail Azure](./howto-manage-firewall-using-portal.md) ou [d’Azure CLI](./howto-manage-firewall-using-cli.md)
 
 ## <a name="install-go-and-mysql-connector"></a>Installer le connecteur pour Go et MySQL
 Installez [Go](https://golang.org/doc/install) et le pilote [go-sql-driver pour MySQL](https://github.com/go-sql-driver/mysql#installation) sur votre propre ordinateur. Suivez les étapes correspondant à votre plateforme :
@@ -82,7 +86,7 @@ Obtenez les informations requises pour vous connecter à la base de données Azu
 2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources**, puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
 3. Cliquez sur le nom du serveur.
 4. Dans le panneau **Vue d’ensemble** du serveur, notez le **nom du serveur** et le **nom de connexion de l’administrateur du serveur**. Si vous oubliez votre mot de passe, vous pouvez également le réinitialiser dans ce panneau.
- ![Nom du serveur de base de données Azure pour MySQL](./media/connect-go/1_server-overview-name-login.png)
+ :::image type="content" source="./media/connect-go/1_server-overview-name-login.png" alt-text="Nom du serveur de base de données Azure pour MySQL":::
    
 
 ## <a name="build-and-run-go-code"></a>Générer et exécuter du code Go 
@@ -346,6 +350,16 @@ func main() {
     fmt.Printf("Deleted %d row(s) of data.\n", rowCount)
     fmt.Println("Done.")
 }
+```
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Pour nettoyer toutes les ressources utilisées dans le cadre de ce guide de démarrage rapide, supprimez le groupe de ressources à l’aide de la commande suivante :
+
+```azurecli
+az group delete \
+    --name $AZ_RESOURCE_GROUP \
+    --yes
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

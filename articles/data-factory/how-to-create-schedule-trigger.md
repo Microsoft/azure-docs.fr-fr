@@ -3,20 +3,21 @@ title: Créer des déclencheurs de planification dans Azure Data Factory
 description: Découvrez comment créer un déclencheur dans Azure Data Factory qui exécute un pipeline selon une planification.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: chez-charlie
+ms.author: chez
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 01/23/2018
-ms.openlocfilehash: a0a01dad5ae86cf20d57ade845326838f8fd686a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/30/2020
+ms.custom: devx-track-python
+ms.openlocfilehash: a6f53d6ce41085b2348857ccb5b45c06132d6a99
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81641508"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001981"
 ---
 # <a name="create-a-trigger-that-runs-a-pipeline-on-a-schedule"></a>Créer un déclencheur qui exécute un pipeline selon une planification
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -47,12 +48,19 @@ Vous pouvez créer un **déclencheur de planification** afin de planifier l’ex
 
 1. Sur la page **Nouveau déclencheur**, procédez comme suit : 
 
-    1. Vérifiez que **Planifier** est sélectionné pour **Type**. 
-    1. Spécifiez la date/heure de début du déclencheur pour **Date de début (UTC)** . Par défaut, elle est définie sur la date/heure actuelle. 
-    1. Spécifiez la **Périodicité** du déclencheur. Sélectionnez une des valeurs dans la liste déroulante (toutes les minutes, horaire, quotidienne, hebdomadaire et mensuelle). Entrez le multiplicateur dans la zone de texte. Par exemple, si vous souhaitez exécuter le déclencheur toutes les 15 minutes, vous sélectionnez **Toutes les minutes**, puis entrez **15** dans la zone de texte. 
-    1. Si vous ne voulez pas spécifier une date/heure de fin dans le champ **Fin**, sélectionnez **No End** (Pas de fin). Pour spécifier une date/heure de fin, sélectionnez **On Date** (À la date) et spécifiez la date/heure de fin, puis sélectionnez **OK**. Un coût est associé à chaque exécution du pipeline. Si vous effectuez un test, vous souhaiterez peut-être vous assurer que le pipeline n’est déclenché que deux fois. Toutefois, vérifiez que la durée est suffisante entre l’heure de publication et l’heure de fin pour permettre l’exécution du pipeline. Le déclencheur ne s’applique que lorsque vous avez publié la solution dans Data Factory, et non lorsque vous enregistrez le déclencheur dans l’interface utilisateur.
+    1. Vérifiez que **Planifier** est sélectionné pour **Type**.
+    1. Spécifiez la date et l’heure de début du déclencheur pour **Date de début**. Par défaut, elles sont définies sur la date et l’heure actuelles en temps universel coordonné (UTC).
+    1. Spécifiez le fuseau horaire dans lequel le déclencheur sera créé. Le paramètre de fuseau horaire s’applique à **Date de début**, **Date de fin** et **Planifier les temps d’exécution** dans les options de périodicité avancée. La modification du paramètre de fuseau horaire ne change pas automatiquement votre date de début. Vérifiez que la date de début est correcte dans le fuseau horaire spécifié. Notez que l’heure d’exécution planifiée du déclencheur sera considérée comme postérieure à la date de début (assurez-vous que la date de début précède d’au moins 1 minute le temps d’exécution, sinon elle déclenchera un pipeline à la prochaine récurrence). 
 
-        ![Paramètres du déclencheur](./media/how-to-create-schedule-trigger/trigger-settings.png)
+        > [!NOTE]
+        > Pour les fuseaux horaires qui respectent l’heure d’été, l’heure de déclenchement est ajustée automatiquement au changement survenant deux fois par an. Pour désactiver le passage à l’heure d’été, sélectionnez un fuseau horaire qui ne tient pas compte de l’heure d’été, par exemple UTC
+
+    1. Spécifiez la **Périodicité** du déclencheur. Sélectionnez une des valeurs dans la liste déroulante (toutes les minutes, horaire, quotidienne, hebdomadaire et mensuelle). Entrez le multiplicateur dans la zone de texte. Par exemple, si vous souhaitez exécuter le déclencheur toutes les 15 minutes, vous sélectionnez **Toutes les minutes**, puis entrez **15** dans la zone de texte. 
+    1. Pour préciser une date et une heure de fin, sélectionnez **Spécifier une date de fin**, puis définissez _Se termine le_ et sélectionnez **OK**. Un coût est associé à chaque exécution du pipeline. Si vous effectuez un test, vous souhaiterez peut-être vous assurer que le pipeline n’est déclenché que deux fois. Toutefois, vérifiez que la durée est suffisante entre l’heure de publication et l’heure de fin pour permettre l’exécution du pipeline. Le déclencheur ne s’applique que lorsque vous avez publié la solution dans Data Factory, et non lorsque vous enregistrez le déclencheur dans l’interface utilisateur.
+
+        ![Paramètres du déclencheur](./media/how-to-create-schedule-trigger/trigger-settings-01.png)
+
+        ![Paramètres du déclencheur pour la date de fin](./media/how-to-create-schedule-trigger/trigger-settings-02.png)
 
 1. Dans la fenêtre **Nouveau déclencheur**, sélectionnez **Oui** dans l’option **Activé**, puis sélectionnez **OK**. Vous pouvez utiliser cette case à cocher pour désactiver le déclencheur ultérieurement. 
 
@@ -70,7 +78,7 @@ Vous pouvez créer un **déclencheur de planification** afin de planifier l’ex
 
     ![Surveiller les exécutions déclenchées](./media/how-to-create-schedule-trigger/monitor-triggered-runs.png)
 
-1. Basculez vers l’affichage **Exécutions du déclencheur**. 
+1. Passez à l’affichage **Exécutions du déclencheur** \ **Planifier**. 
 
     ![Surveiller les exécutions du déclencheur](./media/how-to-create-schedule-trigger/monitor-trigger-runs.png)
 
@@ -94,8 +102,9 @@ Cette section montre comment utiliser Azure PowerShell pour créer, démarrer et
                 "recurrence": {
                     "frequency": "Minute",
                     "interval": 15,
-                    "startTime": "2017-12-08T00:00:00",
-                    "endTime": "2017-12-08T01:00:00"
+                    "startTime": "2017-12-08T00:00:00Z",
+                    "endTime": "2017-12-08T01:00:00Z",
+                    "timeZone": "UTC"
                 }
             },
             "pipelines": [{
@@ -114,11 +123,18 @@ Cette section montre comment utiliser Azure PowerShell pour créer, démarrer et
     ```
 
     Dans l’extrait de code JSON :
-    - L’élément **type** du déclencheur est défini sur « ScheduleTrigger ».
-    - L’élément **frequency** est défini sur « Minute » et l’élément **interval** sur 15. Par conséquent, le déclencheur exécute le pipeline toutes les 15 minutes entre l’heure de début et l’heure de fin.
-    - L’élément **endTime** est une (1) heure après la valeur de l’élément **startTime**. Le déclencheur exécute alors le pipeline 15 minutes, 30 minutes et 45 minutes après l’heure de début. N’oubliez pas de définir l’heure de début sur l’heure UTC actuelle et l’heure de fin sur une (1) heure après l’heure de début. 
+    - L’élément **type** du déclencheur est défini sur « ScheduleTrigger ».
+    - L’élément **frequency** est défini sur « Minute » et l’élément **interval** sur 15. Par conséquent, le déclencheur exécute le pipeline toutes les 15 minutes entre l’heure de début et l’heure de fin.
+    - L’élément **timeZone** spécifie le fuseau horaire dans lequel le déclencheur est créé. Ce paramètre affecte à la fois **startTime** et **endTime**.
+    - L’élément **endTime** est une (1) heure après la valeur de l’élément **startTime**. Le déclencheur exécute alors le pipeline 15 minutes, 30 minutes et 45 minutes après l’heure de début. N’oubliez pas de définir l’heure de début sur l’heure UTC actuelle et l’heure de fin sur une (1) heure après l’heure de début. 
+
+        > [!IMPORTANT]
+        > Pour le fuseau horaire UTC, les éléments startTime et endTime doivent suivre le format « aaaa-MM-jjTHH:mm:ss **Z** », tandis que pour les autres fuseaux horaires, ils suivent le format « aaaa-MM-jjTHH:mm:ss ». 
+        > 
+        > Conformément à la norme ISO 8601, le suffixe _Z_ sur l’horodatage marque la date et l’heure du fuseau horaire UTC et rend la présence du champ timeZone inutile. En revanche, l’absence du suffixe _Z_ pour le fuseau horaire UTC génère une erreur à l’_activation_ du déclencheur.
+
     - Le déclencheur est associé au pipeline **Adfv2QuickStartPipeline**. Pour associer plusieurs pipelines à un déclencheur, ajoutez d’autres sections **pipelineReference**.
-    - Le pipeline du guide de démarrage rapide prend deux valeurs de **paramètres** : **inputPath** et **outputPath**. Par conséquent, les valeurs de ces paramètres sont transmises à partir du déclencheur.
+    - Le pipeline du guide de démarrage rapide prend deux valeurs de **paramètres** : **inputPath** et **outputPath**. Et vous passez des valeurs pour ces paramètres à partir du déclencheur.
 
 1. Créez un déclencheur avec l’applet de commande **Set-AzDataFactoryV2Trigger** :
 
@@ -150,7 +166,11 @@ Cette section montre comment utiliser Azure PowerShell pour créer, démarrer et
     Get-AzDataFactoryV2TriggerRun -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -TriggerName "MyTrigger" -TriggerRunStartedAfter "2017-12-08T00:00:00" -TriggerRunStartedBefore "2017-12-08T01:00:00"
     ```
     
+    > [!NOTE]
+    > L’heure de déclenchement des déclencheurs de planification est spécifiée dans l’horodatage UTC. _TriggerRunStartedAfter_ et _TriggerRunStartedBefore_ attendent également l’horodatage UTC
+
     Pour surveiller les exécutions du déclencheur et du pipeline dans le portail Azure, consultez [Surveiller des exécutions de pipelines](quickstart-create-data-factory-resource-manager-template.md#monitor-the-pipeline).
+
 
 
 ## <a name="net-sdk"></a>Kit de développement logiciel (SDK) .NET
@@ -206,6 +226,16 @@ Pour créer et lancer un déclencheur de planification qui s’exécute toutes l
             client.Triggers.Start(resourceGroup, dataFactoryName, triggerName);
 ```
 
+Pour créer des déclencheurs dans un fuseau horaire différent, autre que UTC, les paramètres suivants sont nécessaires :
+```csharp
+<<ClientInstance>>.SerializationSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+<<ClientInstance>>.SerializationSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Unspecified;
+<<ClientInstance>>.SerializationSettings.DateParseHandling = DateParseHandling.None;
+<<ClientInstance>>.DeserializationSettings.DateParseHandling = DateParseHandling.None;
+<<ClientInstance>>.DeserializationSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+<<ClientInstance>>.DeserializationSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Unspecified;
+```
+
 Pour surveiller une exécution du déclencheur, ajoutez le code suivant avant la dernière instruction `Console.WriteLine` de l’exemple :
 
 ```csharp
@@ -239,7 +269,7 @@ Cette section montre comment utiliser le Kit de développement logiciel (SDK) Py
 ```python
     # Create a trigger
     tr_name = 'mytrigger'
-    scheduler_recurrence = ScheduleTriggerRecurrence(frequency='Minute', interval='15',start_time='2017-12-12T04:00:00', end_time='2017-12-12T05:00:00', time_zone='UTC')
+    scheduler_recurrence = ScheduleTriggerRecurrence(frequency='Minute', interval='15',start_time='2017-12-12T04:00:00Z', end_time='2017-12-12T05:00:00Z', time_zone='UTC')
     pipeline_parameters = {'inputPath':'adftutorial/input', 'outputPath':'adftutorial/output'}
     pipelines_to_run = []
     pipeline_reference = PipelineReference('copyPipeline')
@@ -321,24 +351,46 @@ Le tableau suivant présente une vue d’ensemble globale des principaux éléme
 
 | Propriété JSON | Description |
 |:--- |:--- |
-| **startTime** | Une valeur date-heure. Pour les planifications simples, la valeur de la propriété **startTime** s’applique à la première occurrence. Pour les planifications complexes, le déclencheur ne démarre pas avant la valeur **startTime** spécifiée. |
-| **endTime** | La date et l’heure de fin du déclencheur. Le déclencheur ne s’exécute pas après la date et l’heure de fin spécifiées. La valeur de la propriété ne peut pas être dans le passé. Cette propriété est facultative. |
-| **timeZone** | Fuseau horaire. Actuellement, seul le fuseau horaire UTC est pris en charge. |
+| **startTime** | Une valeur date-heure. Pour les planifications simples, la valeur de la propriété **startTime** s’applique à la première occurrence. Pour les planifications complexes, le déclencheur ne démarre pas avant la valeur **startTime** spécifiée. <br> Pour le fuseau horaire UTC, le format est `'yyyy-MM-ddTHH:mm:ssZ'`, pour les autres fuseaux horaires, le format est `'yyyy-MM-ddTHH:mm:ss'`. |
+| **endTime** | La date et l’heure de fin du déclencheur. Le déclencheur ne s’exécute pas après la date et l’heure de fin spécifiées. La valeur de la propriété ne peut pas être dans le passé. Cette propriété est facultative.  <br> Pour le fuseau horaire UTC, le format est `'yyyy-MM-ddTHH:mm:ssZ'`, pour les autres fuseaux horaires, le format est `'yyyy-MM-ddTHH:mm:ss'`. |
+| **timeZone** | Fuseau horaire dans lequel le déclencheur est créé. Ce paramètre a un impact sur **startTime**, **endTime** et **schedule**. Consultez la [liste des fuseaux horaires pris en charge](#time-zone-option). |
 | **recurrence** | Un objet de périodicité qui spécifie les règles de périodicité pour le déclencheur. L’objet de périodicité prend en charge les éléments suivants : **frequency**, **interval**, **endTime**, **count** et **schedule**. Lorsqu’un objet de périodicité est défini, l’élément **frequency** est requis. Les autres éléments de l’objet de périodicité sont facultatifs. |
 | **frequency** | L’unité de fréquence à laquelle le déclencheur se répète. Les valeurs prises en charge incluent « minute », « heure », « day », « semaine » et « mois ». |
 | **interval** | Un entier positif qui indique l’intervalle de la valeur **frequency**, qui détermine la fréquence d’exécution du déclencheur. Par exemple, si **l’intervalle** est défini sur 3 et la **fréquence** définie sur « semaine », le déclencheur se répète toutes les 3 semaines. |
 | **schedule** | La planification périodique du déclencheur. Un déclencheur dont la valeur **frequency** spécifiée modifie sa périodicité selon une planification périodique. Une propriété **schedule** contient des modifications pour la périodicité basées sur des minutes, heures, jours de la semaine, jours du mois et numéro de semaine.
 
+> [!IMPORTANT]
+> Pour le fuseau horaire UTC, les éléments startTime et endTime doivent suivre le format « aaaa-MM-jjTHH:mm:ss **Z** », tandis que pour les autres fuseaux horaires, ils suivent le format « aaaa-MM-jjTHH:mm:ss ». 
+> 
+> Conformément à la norme ISO 8601, le suffixe _Z_ sur l’horodatage marque la date et l’heure du fuseau horaire UTC et rend la présence du champ timeZone inutile. En revanche, l’absence du suffixe _Z_ pour le fuseau horaire UTC génère une erreur à l’_activation_ du déclencheur.
 
 ### <a name="schema-defaults-limits-and-examples"></a>Valeurs par défaut, limites et exemples du schéma
 
-| Propriété JSON | Type | Obligatoire | Valeur par défaut | Valeurs valides |  Exemple |
+| Propriété JSON | Type | Obligatoire | Valeur par défaut | Valeurs valides | Exemple |
 |:--- |:--- |:--- |:--- |:--- |:--- |
-| **startTime** | String | Oui | None | Dates-Heures ISO-8601 | `"startTime" : "2013-01-09T09:30:00-08:00"` |
+| **startTime** | String | Oui | None | Dates-Heures ISO-8601 | pour le fuseau horaire UTC `"startTime" : "2013-01-09T09:30:00-08:00Z"` <br> pour les autres fuseaux horaires `"2013-01-09T09:30:00-08:00"` |
+| **timeZone** | String | Oui | None | [Valeurs de fuseau horaire](#time-zone-option)  | `"UTC"` |
 | **recurrence** | Object | Oui | None | Objet de périodicité | `"recurrence" : { "frequency" : "monthly", "interval" : 1 }` |
-| **interval** | Number | Non  | 1 | 1 à 1 000 | `"interval":10` |
-| **endTime** | String | Oui | None | Une valeur date-heure représentant une heure dans le futur. | `"endTime" : "2013-02-09T09:30:00-08:00"` |
-| **schedule** | Object | Non  | None | Objet de planification | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
+| **interval** | Number | Non | 1 | 1 à 1 000 | `"interval":10` |
+| **endTime** | String | Oui | None | Une valeur date-heure représentant une heure dans le futur. | pour le fuseau horaire UTC `"endTime" : "2013-02-09T09:30:00-08:00Z"` <br> pour les autres fuseaux horaires `"endTime" : "2013-02-09T09:30:00-08:00"`|
+| **schedule** | Object | Non | None | Objet de planification | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
+
+### <a name="time-zone-option"></a>Option de fuseau horaire
+
+Voici quelques fuseaux horaires pris en charge pour les déclencheurs de planification :
+
+| Time Zone (Fuseau horaire) | Décalage UTC (n’appliquant pas l’heure d’été) | Valeur timeZone | Respect de l’heure d’été | Format horodatage |
+| :--- | :--- | :--- | :--- | :--- |
+| Temps universel coordonné | 0 | `UTC` | Non | `'yyyy-MM-ddTHH:mm:ssZ'`|
+| Pacifique (PT) | -8 | `Pacific Standard Time` | Oui | `'yyyy-MM-ddTHH:mm:ss'` |
+| Centre (CT) | -6 | `Central Standard Time` | Oui | `'yyyy-MM-ddTHH:mm:ss'` |
+| Est (ET) | -5 | `Eastern Standard Time` | Oui | `'yyyy-MM-ddTHH:mm:ss'` |
+| Heure moyenne de Greenwich (GMT) | 0 | `GMT Standard Time` | Oui | `'yyyy-MM-ddTHH:mm:ss'` |
+| Heure standard d’Europe centrale | +1 | `W. Europe Standard Time` | Oui | `'yyyy-MM-ddTHH:mm:ss'` |
+| Inde (IST) | +5:30 | `India Standard Time` | Non | `'yyyy-MM-ddTHH:mm:ss'` |
+| Heure standard de Chine | +8 | `China Standard Time` | Non | `'yyyy-MM-ddTHH:mm:ss'` |
+
+Cette liste est incomplète. Pour obtenir la liste complète des options de fuseau horaire, explorez la [page de création du déclencheur](#data-factory-ui) dans le portail Data Factory
 
 ### <a name="starttime-property"></a>propriété startTime
 Le tableau suivant vous montre comment la propriété **startTime** contrôle une exécution du déclencheur :
@@ -350,9 +402,9 @@ Le tableau suivant vous montre comment la propriété **startTime** contrôle un
 
 Voyons ce qui se passe lorsque l’heure de début se situe dans le passé, avec la valeur de périodicité définie mais pas la valeur de planification. Supposons que l’heure actuelle soit `2017-04-08 13:00`, l’heure de début `2017-04-07 14:00`, et que la périodicité soit tous les deux jours. (La valeur **recurrence** est définie en paramétrant la propriété **frequency** sur « jour » et la propriété **interval** sur 2.) Notez que la valeur **startTime** se situe dans le passé et se produit avant l’heure actuelle.
 
-Dans ces conditions, la première exécution aura lieu le `2017-04-09 at 14:00`. Le moteur d'Azure Scheduler calcule les occurrences de l'exécution à partir de l'heure de début. Toutes les instances dans le passé sont ignorées. Le moteur utilise l'instance suivante qui se produit dans le futur. Dans ce scénario, l’heure de début étant `2017-04-07 at 2:00pm`, l’instance suivante aura lieu 2 jours après cette date, c’est-à-dire `2017-04-09 at 2:00pm`.
+Dans ces conditions, la première exécution aura lieu le `2017-04-09` à `14:00`. Le moteur d'Azure Scheduler calcule les occurrences de l'exécution à partir de l'heure de début. Toutes les instances dans le passé sont ignorées. Le moteur utilise l'instance suivante qui se produit dans le futur. Dans ce scénario, la date de début étant le `2017-04-07` à `2:00pm`, l’instance suivante surviendra 2 jours après cette date, c’est-à-dire le `2017-04-09` à `2:00pm`.
 
-La première heure d’exécution est la même si la valeur **startTime** est `2017-04-05 14:00` ou `2017-04-01 14:00`. Après la première exécution, les exécutions suivantes sont calculées à l’aide de la planification. Par conséquent, les exécutions suivantes sont à `2017-04-11 at 2:00pm`, puis `2017-04-13 at 2:00pm`, puis `2017-04-15 at 2:00pm`, et ainsi de suite.
+La première heure d’exécution est la même si la valeur **startTime** est `2017-04-05 14:00` ou `2017-04-01 14:00`. Après la première exécution, les exécutions suivantes sont calculées à l’aide de la planification. Par conséquent, les exécutions suivantes auront lieu le `2017-04-11` à `2:00pm`, puis le `2017-04-13` à `2:00pm`, puis le `2017-04-15` à `2:00pm`, et ainsi de suite.
 
 Enfin, lorsque les heures ou les minutes ne sont pas définies dans la planification d’un déclencheur, les heures ou minutes de la première exécution sont utilisées par défaut.
 

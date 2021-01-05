@@ -11,12 +11,12 @@ ms.workload: integration
 ms.topic: article
 ms.date: 04/20/2020
 ms.author: apimpm
-ms.openlocfilehash: 6edb639cacc48e8b59c458bcf0ac9c9c5e07b030
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: 466af29a3f073f73d4a0fc62d74709cd59f82425
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203560"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96183785"
 ---
 # <a name="upgrade-and-scale-an-azure-api-management-instance"></a>Mettre à niveau une instance du service Gestion des API Azure et la mettre à l’échelle  
 
@@ -51,7 +51,7 @@ Les niveaux **De base**, **Standard** et **Premium** sont des niveaux de product
 
 Le niveau **Premium** vous permet de distribuer une seule instance du service Gestion des API Azure sur n’importe quel nombre de régions Azure. Quand vous créez un service Gestion des API Azure, l’instance contient une seule unité et se trouve dans une seule région Azure. La région initiale est désignée comme la région **principale**. D’autres régions peuvent être facilement ajoutées. Lorsque vous ajoutez une région, vous spécifiez le nombre d’unités que vous souhaitez allouer. Par exemple, vous pouvez avoir une unité dans la région **principale** et cinq unités, dans une autre région. Vous pouvez adapter le nombre d’unités au trafic dans chaque région. Pour en savoir plus, découvrez [comment déployer une instance de service Gestion des API Azure dans plusieurs régions Azure](api-management-howto-deploy-multi-region.md).
 
-Vous pouvez passer au niveau supérieur ou inférieur de votre choix, quel qu’il soit. Le passage à un niveau supérieur ou inférieur peut entraîner la suppression de certaines fonctionnalités, comme les réseaux virtuels ou les déploiements multirégions, notamment lors du passage du niveau Premium au niveau Standard ou De base.
+Vous pouvez effectuer la mise à niveau et la rétrogradation vers n’importe quel niveau. Le passage à un niveau supérieur ou inférieur peut entraîner la suppression de certaines fonctionnalités, comme les réseaux virtuels ou les déploiements multirégions, notamment lors du passage du niveau Premium au niveau Standard ou De base.
 
 > [!NOTE]
 > Le processus de mise à niveau ou de mise à l’échelle peut durer entre 15 et 45 minutes. Vous recevez une notification lorsque le processus est terminé.
@@ -79,8 +79,13 @@ Vous pouvez passer au niveau supérieur ou inférieur de votre choix, quel qu’
 ## <a name="downtime-during-scaling-up-and-down"></a>Temps d’arrêt pendant la montée et la descente en puissance
 Si vous effectuez une mise à l’échelle à partir de ou vers le niveau développeur, il y aura des temps d’arrêt. Dans le cas contraire, il n’y a aucun temps d’arrêt. 
 
+## <a name="compute-isolation"></a>Isolation du calcul
+Si vos exigences de sécurité incluent l’[isolation de calcul](../azure-government/azure-secure-isolation-guidance.md#compute-isolation), vous pouvez utiliser le niveau de tarification **Isolé**. Ce niveau garantit que les ressources de calcul d’une instance de service de gestion des API consomment l’intégralité de l’hôte physique et fournissent le niveau d’isolation nécessaire pour prendre en charge les charges de travail de niveau 5 du Ministère de la défense des États-Unis (IL5), par exemple. Pour obtenir l’accès au niveau isolé, [créez un ticket de support](../azure-portal/supportability/how-to-create-azure-support-request.md). 
+
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Comment déployer une instance de service Gestion des API Azure dans plusieurs régions Azure](api-management-howto-deploy-multi-region.md)
 - [Mettre à l’échelle automatiquement une instance du service Gestion des API Azure](api-management-howto-autoscale.md)
+- [Optimiser et réduire vos coûts de cloud](../cost-management-billing/costs/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn)

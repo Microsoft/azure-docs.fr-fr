@@ -1,6 +1,6 @@
 ---
 title: Modèles de consommation du véhicule pour le routage | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir des informations sur les modèles de consommation des véhicules pour le routage dans Microsoft Azure Maps.
+description: 'En savoir plus sur les modèles de consommation pris en charge par Azure Maps : combustion et électricité. Découvrez les paramètres utilisés par chaque modèle et les contraintes des paramètres.'
 author: subbarayudukamma
 ms.author: skamma
 ms.date: 05/08/2018
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.openlocfilehash: c1572eddf78ca2d5f8f4e3ee9f1fe47b0d43f5aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b44186d783a249192a8c13ee97063034ee319df7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77190253"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013137"
 ---
 # <a name="consumption-model"></a>Modèle de consommation
 

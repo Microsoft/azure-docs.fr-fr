@@ -1,27 +1,22 @@
 ---
 title: Module PowerShell Windows Virtual Desktop - Azure
 description: Comment installer et configurer le module PowerShell pour Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 6741c034351099f544c20749eb7c7a39e7932181
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: f2f01e2b58c997db08ad4427de7eef1ee3760c4a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83195126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016809"
 ---
 # <a name="set-up-the-powershell-module-for-windows-virtual-desktop"></a>Configurer le module PowerShell pour Windows Virtual Desktop
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop.
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec une intégration Azure Resource Manager.
 
 Le module PowerShell pour Windows Virtual Desktop est intégré au module Azure PowerShell. Cet article vous indique comment configurer le module PowerShell afin de pouvoir exécuter des cmdlets pour Windows Virtual Desktop.
 
@@ -46,6 +41,13 @@ Ensuite, exécutez la cmdlet suivante pour vous connecter à Azure :
 Connect-AzAccount
 ```
 
+>[!IMPORTANT]
+>Si vous vous connectez au portail USGov, exécutez cette applet de commande à la place :
+> 
+> ```powershell
+> Connect-AzAccount -EnvironmentName AzureUSGovernment
+> ```
+
 La connexion à votre compte Azure nécessite un code qui est généré lorsque vous exécutez la cmdlet Connect. Pour vous connecter, accédez à <https://microsoft.com/devicelogin>, entrez le code, puis connectez-vous à l’aide de vos informations d’identification d’administrateur Azure.
 
 ```powershell
@@ -63,7 +65,13 @@ Cela vous permet de vous connecter directement à l’abonnement par défaut cor
 Si vous souhaitez modifier l’abonnement par défaut une fois que vous êtes connecté, exécutez cette cmdlet :
 
 ```powershell
-Select-AzSubscription -SubscriptionName <preferredsubscriptionname>
+Select-AzSubscription -Subscription <preferredsubscriptionname>
+```
+
+Vous pouvez également en sélectionner un dans une liste à l’aide de l’applet de commande Out-GridView :
+
+```powershell
+Get-AzSubscription | Out-GridView -PassThru | Select-AzSubscription
 ```
 
 Lorsque vous sélectionnez un nouvel abonnement à utiliser, vous n’avez pas besoin de spécifier l’ID de cet abonnement dans les cmdlets que vous exécutez par la suite. Par exemple, la cmdlet suivante récupère un hôte de session spécifique sans avoir besoin de l’ID d’abonnement :

@@ -3,24 +3,24 @@ title: Stratégies de streaming dans Azure Media Services | Microsoft Docs
 description: Cet article explique ce que sont les stratégies de streaming et comment Azure Media Services les utilise.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/28/2019
-ms.author: juliako
-ms.openlocfilehash: 9c80056fd62173ff1e5a6ed3979adba71b7706cc
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.author: inhenkel
+ms.openlocfilehash: 9ecb4e0b8a74a163632967781c84d1a110ab3a9a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80582761"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89297210"
 ---
 # <a name="streaming-policies"></a>Stratégies de diffusion en continu
 
-Dans Azure Media Services v3, les [stratégies de diffusion en continu](https://docs.microsoft.com/rest/api/media/streamingpolicies) vous permettent de définir les protocoles de diffusion en continu et les options de chiffrement pour vos [StreamingLocators](streaming-locators-concept.md). Media Services v3 fournit certaines stratégies de streaming prédéfinies pour vous permettre de les utiliser directement pour la version d’essai ou de production. 
+Dans Azure Media Services v3, les [stratégies de diffusion en continu](/rest/api/media/streamingpolicies) vous permettent de définir les protocoles de diffusion en continu et les options de chiffrement pour vos [StreamingLocators](streaming-locators-concept.md). Media Services v3 fournit certaines stratégies de streaming prédéfinies pour vous permettre de les utiliser directement pour la version d’essai ou de production. 
 
 Voici les stratégies de streaming prédéfinies actuellement disponibles :<br/>
 * 'Predefined_DownloadOnly'
@@ -40,15 +40,15 @@ L’« arbre de décision » suivant vous permet de choisir une stratégie de 
 
 Cliquez sur l’image pour l’afficher en plein écran.  
 
-<a href="./media/streaming-policy/large.png" target="_blank"><img src="./media/streaming-policy/large.png"></a> 
+[![Diagramme montrant un arbre de décision conçu pour vous aider à choisir une stratégie de diffusion en continu prédéfinie pour votre scénario.](./media/streaming-policy/large.png)](./media/streaming-policy/large.png#lightbox)
 
 Si vous chiffrez votre contenu, vous devez créer une [stratégie de clé de contenu](content-key-policy-concept.md). La **stratégie de clé de contenu** n’est pas nécessaire pour un téléchargement ou un streaming en clair. 
 
-Si vous avez des exigences particulières (par exemple, si vous souhaitez spécifier différents protocoles, que vous avez besoin d’utiliser un service de distribution de clés personnalisé ou que vous devez utiliser une piste audio claire), vous pouvez [créer](https://docs.microsoft.com/rest/api/media/streamingpolicies/create) une stratégie de streaming personnalisée. 
+Si vous avez des exigences particulières (par exemple, si vous souhaitez spécifier différents protocoles, que vous avez besoin d’utiliser un service de distribution de clés personnalisé ou que vous devez utiliser une piste audio claire), vous pouvez [créer](/rest/api/media/streamingpolicies/create) une stratégie de streaming personnalisée. 
 
 ## <a name="get-a-streaming-policy-definition"></a>Obtenir une définition de stratégie de streaming  
 
-Si vous voulez voir la définition d’une stratégie de streaming, utilisez [Get](https://docs.microsoft.com/rest/api/media/streamingpolicies/get) et spécifiez le nom de la stratégie. Par exemple :
+Si vous voulez voir la définition d’une stratégie de streaming, utilisez [Get](/rest/api/media/streamingpolicies/get) et spécifiez le nom de la stratégie. Par exemple :
 
 ### <a name="rest"></a>REST
 

@@ -5,15 +5,16 @@ services: vpn-gateway
 titleSuffix: Azure VPN Gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 02/14/2018
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: a354f8031c26ca86876dc6f3a2092610226cc84b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: b9502f3fbd50aad756e15daa4db1badda2abf9ab
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75834571"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660064"
 ---
 # <a name="configure-a-vnet-to-vnet-vpn-gateway-connection-using-azure-cli"></a>Configurer une connexion de passerelle VPN de réseau virtuel à réseau virtuel à l’aide d’Azure CLI
 
@@ -69,7 +70,7 @@ Pour cet exercice, vous pouvez combiner des configurations ou choisir simplement
 
 * [Réseaux virtuels situés dans le même abonnement :](#samesub) Les étapes à suivre pour cette configuration utilisent les réseaux virtuels TestVNet1 et TestVNet4.
 
-  ![Diagramme v2v](./media/vpn-gateway-howto-vnet-vnet-cli/v2vrmps.png)
+  ![Diagramme représentant les étapes de réseau virtuel à réseau virtuel pour les réseaux virtuels associés au même abonnement.](./media/vpn-gateway-howto-vnet-vnet-cli/v2vrmps.png)
 
 * [Réseaux virtuels situés dans des abonnements différents :](#difsub) Les étapes à suivre pour cette configuration utilisent les réseaux virtuels TestVNet1 et TestVNet5.
 
@@ -133,7 +134,7 @@ Nous utilisons les valeurs suivantes dans les exemples :
    ```azurecli
    az network vnet create -n TestVNet1 -g TestRG1 --address-prefix 10.11.0.0/16 -l eastus --subnet-name FrontEnd --subnet-prefix 10.11.0.0/24
    ```
-3. Créez un espace d’adressage supplémentaire pour le sous-réseau principal. Notez que dans cette étape, nous spécifions l’espace d’adressage créé précédemment et l’espace d’adressage supplémentaires que nous souhaitons ajouter. Cela vient du fait que la [mise à jour du réseau virtuel du réseau az](https://docs.microsoft.com/cli/azure/network/vnet) écrase les paramètres précédents. Veillez à spécifier tous les préfixes d’adresse lors de l’utilisation de cette commande.
+3. Créez un espace d’adressage supplémentaire pour le sous-réseau principal. Notez que dans cette étape, nous spécifions l’espace d’adressage créé précédemment et l’espace d’adressage supplémentaires que nous souhaitons ajouter. Cela vient du fait que la [mise à jour du réseau virtuel du réseau az](/cli/azure/network/vnet) écrase les paramètres précédents. Veillez à spécifier tous les préfixes d’adresse lors de l’utilisation de cette commande.
 
    ```azurecli
    az network vnet update -n TestVNet1 --address-prefixes 10.11.0.0/16 10.12.0.0/16 -g TestRG1
@@ -213,10 +214,10 @@ Vous avez maintenant deux réseaux virtuels avec des passerelles VPN. L’étape
    ```
    "activeActive": false, 
    "bgpSettings": { 
-    "asn": 65515, 
-    "bgpPeeringAddress": "10.12.255.30", 
-    "peerWeight": 0 
-   }, 
+    "asn": 65515, 
+    "bgpPeeringAddress": "10.12.255.30", 
+    "peerWeight": 0 
+   }, 
    "enableBgp": false, 
    "etag": "W/\"ecb42bc5-c176-44e1-802f-b0ce2962ac04\"", 
    "gatewayDefaultSite": null, 
@@ -355,7 +356,7 @@ Cette étape doit être effectuée dans le cadre du nouvel abonnement, Abonnemen
 
    Copiez la sortie pour « id: ». Envoyez l’ID et le nom de la passerelle de réseau virtuel (VNet5GW) à l’administrateur de Abonnement 1 via e-mail ou une autre méthode.
 
-3. **[Abonnement 1]** Dans cette étape, vous créez la connexion de TestVNet1 à TestVNet5. Vous pouvez utiliser vos propres valeurs pour la clé partagée, toutefois, cette dernière doit correspondre aux deux connexions. La création d’une connexion peut prendre quelques instants. Veillez à vous connecter à Abonnement 1.
+3. **[Abonnement 1]** Dans cette étape, vous créez la connexion de TestVNet1 à TestVNet5. Vous pouvez utiliser vos propres valeurs pour la clé partagée, toutefois, cette dernière doit correspondre aux deux connexions. La création d’une connexion peut prendre quelques instants.  Veillez à vous connecter à Abonnement 1.
 
    ```azurecli
    az network vpn-connection create -n VNet1ToVNet5 -g TestRG1 --vnet-gateway1 /subscriptions/d6ff83d6-713d-41f6-a025-5eb76334fda9/resourceGroups/TestRG1/providers/Microsoft.Network/virtualNetworkGateways/VNet1GW -l eastus --shared-key "eeffgg" --vnet-gateway2 /subscriptions/e7e33b39-fe28-4822-b65c-a4db8bbff7cb/resourceGroups/TestRG5/providers/Microsoft.Network/virtualNetworkGateways/VNet5GW
@@ -377,5 +378,5 @@ Cette étape doit être effectuée dans le cadre du nouvel abonnement, Abonnemen
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez la [documentation relative aux machines virtuelles](https://docs.microsoft.com/azure/).
+* Une fois la connexion achevée, vous pouvez ajouter des machines virtuelles à vos réseaux virtuels. Pour plus d’informations, consultez la [documentation relative aux machines virtuelles](../index.yml).
 * Pour plus d’informations sur le protocole BGP, consultez les articles [Vue d’ensemble du protocole BGP](vpn-gateway-bgp-overview.md) et [Comment configurer BGP](vpn-gateway-bgp-resource-manager-ps.md).

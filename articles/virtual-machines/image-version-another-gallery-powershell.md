@@ -1,5 +1,5 @@
 ---
-title: Copier une image à partir d’une autre galerie
+title: Copiez une image à partir d’une autre galerie en utilisant PowerShell
 description: Copiez une image à partir d’une autre galerie en utilisant Azure PowerShell.
 author: cynthn
 ms.service: virtual-machines
@@ -9,14 +9,14 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: 10cd8514b529f29f68ea3df14cdc208dd8fdd556
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 2f26716a4d04b574bf393f502758a725948419da
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793941"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89299947"
 ---
-# <a name="copy-an-image-from-another-gallery"></a>Copier une image à partir d’une autre galerie
+# <a name="copy-an-image-from-another-gallery-using-powershell"></a>Copiez une image à partir d’une autre galerie en utilisant PowerShell
 
 Si vous avez plusieurs galeries dans votre organisation, vous pouvez créer des images à partir d’images stockées dans d’autres galeries. Par exemple, vous pouvez avoir une galerie de développement et de test pour créer et tester de nouvelles images. Lorsqu’elles sont prêtes à être utilisées en production, vous pouvez les copier dans une galerie de production à l’aide de cet exemple. Vous pouvez également créer une image à partir d’une image dans une autre galerie à l’aide d’[Azure CLI](image-version-another-gallery-cli.md).
 
@@ -100,7 +100,7 @@ Vous obtenez un résultat semblable à ce qui suit :
 }
 ```
 
-Créez une nouvelle définition d’image dans votre bibliothèque de destination à l’aide de la cmdlet [New-AzGalleryImageDefinition](https://docs.microsoft.com/powershell/module/az.compute/new-azgalleryimageversion) et des informations de la sortie ci-dessus.
+Créez une nouvelle définition d’image dans votre bibliothèque de destination à l’aide de la cmdlet [New-AzGalleryImageDefinition](/powershell/module/az.compute/new-azgalleryimageversion) et des informations de la sortie ci-dessus.
 
 
 Dans cet exemple, la définition d’image est nommée *myDestinationImgDef* dans la galerie nommée *myDestinationGallery*.
@@ -114,7 +114,7 @@ $destinationImgDef  = New-AzGalleryImageDefinition `
    -Name 'myDestinationImgDef' `
    -OsState specialized `
    -OsType Windows `
-   -HyperVGeneration v1
+   -HyperVGeneration v1 `
    -Publisher 'myPublisher' `
    -Offer 'myOffer' `
    -Sku 'mySKU'
@@ -123,7 +123,7 @@ $destinationImgDef  = New-AzGalleryImageDefinition `
 
 ## <a name="create-the-image-version"></a>Créer la version de l’image
 
-Créez une version d’image à l’aide de la cmdlet [New-AzGalleryImageVersion](https://docs.microsoft.com/powershell/module/az.compute/new-azgalleryimageversion). Vous devez transmettre l’ID de l’image source dans le paramètre `--managed-image` pour créer la version d’image dans votre bibliothèque de destination. 
+Créez une version d’image à l’aide de la cmdlet [New-AzGalleryImageVersion](/powershell/module/az.compute/new-azgalleryimageversion). Vous devez transmettre l’ID de l’image source dans le paramètre `--managed-image` pour créer la version d’image dans votre bibliothèque de destination. 
 
 Les caractères autorisés pour la version d’image sont les nombres et les points. Les nombres doivent être un entier 32 bits. Format: *MajorVersion*.*MinorVersion*.*Patch*.
 
@@ -156,7 +156,7 @@ $job.State
 > [!NOTE]
 > Vous devez attendre que la version d’image soit totalement intégrée et répliquée avant de pouvoir utiliser la même image managée pour créer une autre version d’image.
 >
-> Vous pouvez également stocker votre image dans le Stockage Premium, en ajoutant `-StorageAccountType Premium_LRS`, ou dans le [stockage redondant interzone](https://docs.microsoft.com/azure/storage/common/storage-redundancy-zrs), en ajoutant `-StorageAccountType Standard_ZRS`, quand vous créez la version de l’image.
+> Vous pouvez également stocker votre image dans le Stockage Premium, en ajoutant `-StorageAccountType Premium_LRS`, ou dans le [stockage redondant interzone](../storage/common/storage-redundancy.md), en ajoutant `-StorageAccountType Standard_ZRS`, quand vous créez la version de l’image.
 >
 
 
@@ -165,3 +165,5 @@ $job.State
 Créez une machine virtuelle à partir d’une version d’image [généralisée](vm-generalized-image-version-powershell.md) ou [spécialisée](vm-specialized-image-version-powershell.md).
 
 [Générateur d’image Azure (préversion)](./linux/image-builder-overview.md) permet d’automatiser la création d’une version de l’image. Vous pouvez même l’utiliser pour mettre à jour et [créer une nouvelle version de l’image à partir d’une image existante](./linux/image-builder-gallery-update-image-version.md). 
+
+Pour savoir comment fournir des informations sur le plan d'achat, consultez [Supply Azure Marketplace purchase plan information when creating images](marketplace-images.md) (Donner des informations sur le plan d'achat de la place de marché Azure lors de la création d’images).

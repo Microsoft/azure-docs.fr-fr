@@ -7,31 +7,34 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/18/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 0a62cd4ad6d992d8994fbd3e66bd0b90e45aa213
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: bc2b72779460c2b7e3999204ace50ca57388b9a2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83637000"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89594184"
 ---
 # <a name="integrate-rest-api-claims-exchanges-in-your-azure-ad-b2c-custom-policy"></a>Intégrer des échanges de revendications de l’API REST dans votre stratégie personnalisée Azure AD B2C
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-La plateforme Identity Experience Framework sur laquelle repose Azure Active Directory B2C (Azure AD B2C) peut s’intégrer avec des API RESTful à l’intérieur d’un parcours utilisateur. Cet article explique comment créer un parcours utilisateur interagissant avec un service RESTful à l’aide d’un [profil technique RESTful](https://identitydivision.visualstudio.com/defaultcollection/Identity%20CXP/_git/GTP?path=%2Fyoelh%2Fdocs%2Frest-api%2Frestful-technical-profile.md&version=GBmaster).
+La plateforme Identity Experience Framework sur laquelle repose Azure Active Directory B2C (Azure AD B2C) peut s’intégrer avec des API RESTful à l’intérieur d’un parcours utilisateur. Cet article explique comment créer un parcours utilisateur interagissant avec un service RESTful à l’aide d’un [profil technique RESTful](restful-technical-profile.md).
 
 Azure AD B2C vous permet d’ajouter votre propre logique métier à un parcours utilisateur en appelant votre propre service RESTful. La plateforme Identity Experience Framework peut envoyer et recevoir des données de votre service RESTful pour échanger des revendications. Vous pouvez par exemple :
 
 - **Valider des données d’entrée utilisateur**. Par exemple, vous pouvez vérifier que l’adresse e-mail fournie par l’utilisateur existe dans la base de données de votre client et, si ce n’est pas le cas, présenter une erreur.
 - **Traiter des revendications**. Si un utilisateur entre son prénom entièrement en minuscules ou majuscules, votre API REST peut modifier la mise en forme en utilisant une majuscule uniquement pour la première lettre avant de le renvoyer à Azure AD B2C.
-- **Enrichir les données utilisateur en les intégrant davantage avec des applications métier d’entreprise**. Votre service RESTful peut recevoir l’adresse e-mail de l’utilisateur, interroger la base de données de clients et retourner le numéro de fidélité de l’utilisateur à Azure AD B2C. Les revendications retournées peuvent alors être stockées dans le compte Azure AD de l’utilisateur, évaluées dans les étapes d’orchestration suivantes ou incluses dans le jeton d’accès.
+- **Enrichir les données utilisateur en les intégrant davantage avec des applications métier d’entreprise**. votre service RESTful peut recevoir l’adresse e-mail de l’utilisateur, interroger la base de données de clients et retourner le numéro de fidélité de l’utilisateur à Azure AD B2C. Les revendications retournées peuvent alors être stockées dans le compte Azure AD de l’utilisateur, évaluées dans les étapes d’orchestration suivantes ou incluses dans le jeton d’accès.
 - **Exécuter une logique métier personnalisée**. Vous pouvez envoyer des notifications Push, mettre à jour des bases de données d’entreprise, exécuter un processus de migration utilisateur, gérer les autorisations, auditer des bases de données et effectuer d’autres flux de travail.
 
 ![Diagramme d’un échange de revendications de service RESTful](media/custom-policy-rest-api-intro/restful-service-claims-exchange.png)
+
+> [!NOTE]
+> S’il n’y a pas de réponse ou que la réponse est lente depuis le service RESTful vers Azure AD B2C, le délai d’expiration est de 30 secondes et le nombre de tentatives est de 2 (ce qui signifie qu’il y a trois tentatives au total). Les paramètres de délai d’expiration et de nombre de tentatives ne sont pas configurables actuellement.
 
 ## <a name="calling-a-restful-service"></a>Appel d’un service RESTful
 
@@ -122,9 +125,9 @@ Les revendications de sortie doivent ressembler à ceci :
 
 ```xml
 <OutputClaims>
-  <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="contacts.0.person.name" />
-  <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="contacts.0.person.emails.0.email" />
-  <OutputClaim ClaimTypeReferenceId="loyaltyNumber" PartnerClaimType="contacts.0.person.loyaltyNumber" />
+  <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="contacts[0].person.name" />
+  <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="contacts[0].person.emails[0].email" />
+  <OutputClaim ClaimTypeReferenceId="loyaltyNumber" PartnerClaimType="contacts[0].person.loyaltyNumber" />
 </OutputClaims>
 ```
 
@@ -142,7 +145,7 @@ Votre API REST peut être basée sur n’importe quelle plateforme et écrite da
 ## <a name="localize-the-rest-api"></a>Localisez l’API REST
 Dans un profil technique RESTful, vous pouvez envoyer la langue/les paramètres régionaux de la session active et, si nécessaire, déclencher un message d’erreur localisé. Le [programme de résolution des revendications](claim-resolver-overview.md) vous permet d’envoyer une revendication contextuelle, telle que la langue de l’utilisateur. L’exemple suivant présente un profil technique RESTful illustrant ce scénario.
 
-```XML
+```xml
 <TechnicalProfile Id="REST-ValidateUserData">
   <DisplayName>Validate user input data</DisplayName>
   <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -162,7 +165,7 @@ Dans un profil technique RESTful, vous pouvez envoyer la langue/les paramètres 
 
 ## <a name="handling-error-messages"></a>Gestion des messages d’erreur
 
-Il se peut que votre API REST doive retourner un message d’erreur tel que « Utilisateur introuvable dans le système CRM ». Quand une erreur se produit, l’API REST doit retourner un message d’erreur HTTP 409 (code d’état de réponse Conflit). Pour plus d’informations, consultez le [Profil technique RESTful ](restful-technical-profile.md#returning-error-message).
+Il se peut que votre API REST doive retourner un message d’erreur tel que « Utilisateur introuvable dans le système CRM ». Quand une erreur se produit, l’API REST doit retourner un message d’erreur HTTP 409 (code d’état de réponse Conflit). Pour plus d’informations, consultez le [Profil technique RESTful ](restful-technical-profile.md#returning-validation-error-message).
 
 Pour ce faire, il suffit d’appeler un profil technique d’API REST à partir d’un profil technique de validation. Cela permet à l’utilisateur de corriger les données sur la page et de réexécuter la validation lors de l’envoi de la page.
 

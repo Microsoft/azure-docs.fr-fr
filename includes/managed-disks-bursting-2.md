@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 04/27/2020
 ms.author: albecker1
 ms.custom: include file
-ms.openlocfilehash: 850ace7af15ab37ab9a4a124d20ed4588771f4d4
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 1a51cd242eb26709464aa502938cd04807aea721
+ms.sourcegitcommit: 7e97ae405c1c6c8ac63850e1b88cf9c9c82372da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594419"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97805666"
 ---
 ## <a name="common-scenarios"></a>Scénarios courants
 Le mode rafale peut être très avantageux pour les scénarios suivants :
@@ -24,9 +24,11 @@ Le mode rafale peut être très avantageux pour les scénarios suivants :
 ## <a name="bursting-flow"></a>Flux de rafale
 Le système de crédit de rafales s’applique de la même manière au niveau de la machine virtuelle et du disque. Votre ressource, qu’il s’agisse d’une machine virtuelle ou d’un disque, commence par utiliser des crédits entièrement stockés. Ces crédits autorisent des rafales de 30 minutes au débit de rafale maximal. Des crédits de rafale s’accumulent lorsque votre ressource s’exécute dans le cadre de ses limites de performances de stockage sur disque. Pour les IOPS et Mo/s que votre ressource utilise en deçà de la limite de performances, vous commencez à accumuler des crédits. Si votre ressource a accumulés des crédits à utiliser pour le mode rafale et que votre charge de travail a besoin de performances supplémentaires, votre ressource peut utiliser ces crédits pour dépasser votre limite de performances afin de bénéficier des performances d’e/s de disque dont elle a besoin pour répondre à la demande.
 
+
+
 ![Diagramme de compartiment de rafale](media/managed-disks-bursting/bucket-diagram.jpg)
 
-À propos de l’accumulation de crédits de rafale, il faut noter qu’il diffère pour chaque ressource, car il est basé sur les IOPS et les Mo/s inutilisés sous les volumes de performances attribués. Cela signifie que des produits offrant des performances de base plus élevées peuvent accumuler des crédits de rafales plus rapidement que des produits offrant des performances de base inférieures. Par exemple, un disque P1 inactif accumule 120 IOPS, tandis qu’un disque P20 en accumule 2 300 quand il est inactif.
+C’est à vous de décider comment vous voulez utiliser les 30 minutes de rafale. Vous pouvez l’utiliser pendant 30 minutes consécutivement ou de manière sporadique tout au long de la journée. Lorsque le produit est déployé, il est prêt à recevoir des crédits complets et, lorsqu’il épuise les crédits, il faut moins d’une journée pour obtenir de nouveau des crédits entièrement mis à profit. Vous pouvez accumuler et dépenser leurs crédits de rafale à votre discrétion et il n’est pas nécessaire que le compartiment de 30 minutes soit à nouveau complet pour la rafale. À propos de l’accumulation de crédits de rafale, il faut noter qu’il diffère pour chaque ressource, car il est basé sur les IOPS et les Mo/s inutilisés sous les volumes de performances attribués. Cela signifie que des produits offrant des performances de base plus élevées peuvent accumuler des crédits de rafales plus rapidement que des produits offrant des performances de base inférieures. Par exemple, un disque P1 inactif accumule 120 IOPS, tandis qu’un disque P20 en accumule 2 300 quand il est inactif.
 
 ## <a name="bursting-states"></a>États de rafale
 Lorsque le mode rafale est activé, votre ressource peut être dans trois états :
@@ -45,7 +47,7 @@ Les exemples suivants illustrent le fonctionnement du mode rafale avec différen
     - Mo/s approvisionnés : 25
     - Maximum de Mo/s en rafale : 170 
 - 2 disques de données P10 
-    - Mo/s approvisionnés : 25
+    - Mo/s approvisionnés : 100
     - Maximum de Mo/s en rafale : 170
 
  Lorsque la machine virtuelle démarre, elle récupère les données du disque du système d’exploitation. Étant donné que ce disque fait partie d’une machine virtuelle en cours de démarrage, il est saturé de crédits de rafale. Ces crédits permettent au disque du système d’exploitation de pousser sa vitesse de démarrage à 170 Mo/s, comme illustré ci-dessous :

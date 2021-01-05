@@ -1,33 +1,36 @@
 ---
 title: Modifier les paramètres de cycle de vie d’un package d’accès dans la gestion des droits d’utilisation Azure AD – Azure Active Directory
-description: Découvrez comment modifier les paramètres de cycle de vie d’un package d’accès dans la gestion des droits d’utilisation Azure Active Directory.
+description: Apprenez à modifier les paramètres d'informations sur le demandeur et de cycle de vie d'un package d'accès dans la fonctionnalité de gestion des droits d'utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/15/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 959d85f496a4a573a969bf736aba137d5b86154a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4fd119238476b842a4dba1efeec86544ca263920
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230393"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90980094"
 ---
 # <a name="change-lifecycle-settings-for-an-access-package-in-azure-ad-entitlement-management"></a>Modifier les paramètres de cycle de vie d’un package d’accès dans la gestion des droits d’utilisation Azure AD
 
 En tant que gestionnaire de package d’accès, vous pouvez modifier les paramètres de cycle de vie d’un package d’accès à tout moment en modifiant une stratégie existante. Si vous modifiez la date d'expiration d'une stratégie, la date d'expiration des demandes en attente d'approbation ou approuvées ne change pas.
 
 Cet article explique comment modifier les paramètres de cycle de vie d’un package d’accès existant.
+
+## <a name="open-requestor-information"></a>Ouvrir les informations relatives au demandeur
+Pour veiller à ce que les utilisateurs bénéficient d'un accès approprié à un package d'accès, des questions personnalisées peuvent être configurées et posées aux utilisateurs sollicitant l'accès à certains packages d'accès. Les options de configuration sont les suivantes : localisation, obligatoire/facultatif et formats texte/réponse à choix multiples. Les questions seront présentées aux demandeurs lorsqu'ils solliciteront l'accès au package, et les approbateurs pourront consulter leurs réponses afin de prendre une décision. Procédez comme suit pour configurer des questions dans un package d'accès :
 
 ## <a name="open-lifecycle-settings"></a>Ouvrir les paramètres de cycle de vie
 

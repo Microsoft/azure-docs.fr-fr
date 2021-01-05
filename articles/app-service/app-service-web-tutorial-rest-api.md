@@ -5,13 +5,13 @@ ms.assetid: a820e400-06af-4852-8627-12b3db4a8e70
 ms.devlang: dotnet
 ms.topic: tutorial
 ms.date: 04/28/2020
-ms.custom: mvc, devcenter, seo-javascript-september2019, seo-javascript-october2019, seodec18
-ms.openlocfilehash: c59ff344cc3e24387c764ba2f23bc3fe0065b371
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.custom: devx-track-csharp, mvc, devcenter, seo-javascript-september2019, seo-javascript-october2019, seodec18
+ms.openlocfilehash: 9481b6d2740d27b8c3d1309e205edda6017868fa
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82559783"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005745"
 ---
 # <a name="tutorial-host-a-restful-api-with-cors-in-azure-app-service"></a>Tutoriel : Héberger une API RESTful avec CORS dans Azure App Service
 
@@ -142,7 +142,7 @@ Ensuite, activez la prise en charge intégrée de CORS dans App Service pour vot
 
 Dans votre référentiel local, ouvrez _wwwroot/index.html_.
 
-Dans la ligne 51, définissez la variable `apiEndpoint` sur l’URL de l’API déployée (`http://<app_name>.azurewebsites.net`). Remplacez _\<appname >_ avec le nom de votre application dans Azure App Service.
+Dans la ligne 51, définissez la variable `apiEndpoint` sur l’URL de l’API déployée (`http://<app_name>.azurewebsites.net`). Remplacez _\<appname>_ par le nom de votre application dans App Service.
 
 Dans la fenêtre de votre terminal local, exécutez à nouveau l’exemple d’application.
 
@@ -203,4 +203,4 @@ Vous avez appris à effectuer les opérations suivantes :
 Passez au tutoriel suivant pour découvrir comment authentifier et autoriser des utilisateurs.
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Authentifier et autoriser des utilisateurs de bout en bout](app-service-web-tutorial-auth-aad.md)
+> [Tutoriel : Authentifier et autoriser des utilisateurs de bout en bout](tutorial-auth-aad.md)

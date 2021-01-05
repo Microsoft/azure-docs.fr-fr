@@ -1,16 +1,16 @@
 ---
 title: Résoudre les problèmes avec les rapports d’intégrité du système
 description: Décrit les rapports d’intégrité envoyés par les composants Azure Service Fabric et leur utilisation pour la résolution des problèmes de cluster ou d’application.
-author: oanapl
+author: georgewallace
 ms.topic: conceptual
 ms.date: 2/28/2018
-ms.author: oanapl
-ms.openlocfilehash: a76ae803b1283ce50d2f4e259943ce5ffcf0274c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: gwallace
+ms.openlocfilehash: 8e60ac5065c2f9543a641daf4f62299c00c61fc8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236557"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000655"
 ---
 # <a name="use-system-health-reports-to-troubleshoot"></a>Utiliser les rapports d’intégrité du système pour la résolution des problèmes
 Les composants Azure Service Fabric fournissent des rapports d’intégrité du système prêts à l’emploi pour toutes les entités du cluster. Le [magasin d’intégrité](service-fabric-health-introduction.md#health-store) crée et supprime des entités en fonction des rapports du système. Il les organise au sein d’une hiérarchie qui tient compte des interactions entre les entités.
@@ -74,17 +74,17 @@ Le rapport d’avertissement relatif à l’état du nœud seed répertorie tous
 * **Étapes suivantes** : si cet avertissement s’affiche dans le cluster, suivez les instructions ci-dessous pour résoudre le problème : Pour un cluster exécutant Service Fabric 6.5 ou une version ultérieure : Pour un cluster Service Fabric sur Azure, Service Fabric tente automatiquement de transformer un nœud seed qui vient de s’arrêter en un nœud non seed. Pour que cela se produise, assurez-vous que le nombre de nœuds non seed dans le type de nœud principal est supérieur ou égal au nombre de nœuds seed avec l’état Arrêté. Le cas échéant, ajoutez des nœuds supplémentaires au type de nœud principal.
 En fonction de l’état du cluster, cela peut prendre un certain temps pour résoudre le problème. Après cela, le rapport d’avertissement est automatiquement effacé.
 
-Pour un cluster Service Fabric autonome, tous les nœuds seed doivent être sains pour effacer le rapport d’avertissement. Selon la raison pour laquelle les nœuds seed sont non sains, différentes actions sont possibles : si le nœud seed est arrêté, les utilisateurs doivent le restaurer ; si le nœud seed est supprimé ou inconnu, il [doit être supprimé du cluster](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-windows-server-add-remove-nodes).
+Pour un cluster Service Fabric autonome, tous les nœuds seed doivent être sains pour effacer le rapport d’avertissement. Selon la raison pour laquelle les nœuds seed sont non sains, différentes actions sont possibles : si le nœud seed est arrêté, les utilisateurs doivent le restaurer ; si le nœud seed est supprimé ou inconnu, il [doit être supprimé du cluster](./service-fabric-cluster-windows-server-add-remove-nodes.md).
 Le rapport d’avertissement est automatiquement effacé lorsque tous les nœuds seed sont sains.
 
 Pour un cluster exécutant une version antérieure à Service Fabric 6.5 : Dans ce cas, le rapport d’avertissement doit être effacé manuellement. **Les utilisateurs doivent s’assurer que tous les nœuds seed sont sains avant d’effacer le rapport** : si le nœud seed est arrêté, les utilisateurs doivent le restaurer ; si le nœud seed est supprimé ou inconnu, il doit être supprimé du cluster.
-Une fois que tous les nœuds seed sont sains, utilisez la commande suivante dans PowerShell pour [effacer le rapport d’avertissement](https://docs.microsoft.com/powershell/module/servicefabric/send-servicefabricclusterhealthreport) :
+Une fois que tous les nœuds seed sont sains, utilisez la commande suivante dans PowerShell pour [effacer le rapport d’avertissement](/powershell/module/servicefabric/send-servicefabricclusterhealthreport) :
 
 ```powershell
 PS C:\> Send-ServiceFabricClusterHealthReport -SourceId "System.FM" -HealthProperty "SeedNodeStatus" -HealthState OK
 
 ## Node system health reports
-System.FM, which represents the Failover Manager service, is the authority that manages information about cluster nodes. Each node should have one report from System.FM showing its state. The node entities are removed when the node state is removed. For more information, see [RemoveNodeStateAsync](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.clustermanagementclient.removenodestateasync).
+System.FM, which represents the Failover Manager service, is the authority that manages information about cluster nodes. Each node should have one report from System.FM showing its state. The node entities are removed when the node state is removed. For more information, see [RemoveNodeStateAsync](/dotnet/api/system.fabric.fabricclient.clustermanagementclient.removenodestateasync).
 
 ### Node up/down
 System.FM reports as OK when the node joins the ring (it's up and running). It reports an error when the node departs the ring (it's down, either for upgrading or simply because it has failed). The health hierarchy built by the health store acts on deployed entities in correlation with System.FM node reports. It considers the node a virtual parent of all deployed entities. The deployed entities on that node are exposed through queries if the node is reported as up by System.FM, with the same instance as the instance associated with the entities. When System.FM reports that the node is down or restarted, as a new instance, the health store automatically cleans up the deployed entities that can exist only on the down node or on the previous instance of the node.
@@ -651,7 +651,7 @@ D’autres appels d’API qui peuvent être bloqués se trouvent dans l’interf
 
 - **IReplicator.CatchupReplicaSet** : cet avertissement indique une chose parmi deux possibilités. Il n’y a pas assez de réplicas. Pour voir si c’est le cas, regardez le statut de réplica des réplicas se trouvant dans la partition ou dans le rapport d’intégrité de System.FM pour une reconfiguration bloquée. Soit que les réplicas n’accusent pas réception des opérations. La cmdlet PowerShell `Get-ServiceFabricDeployedReplicaDetail` peut être utilisée pour déterminer la progression de tous les réplicas. Le problème se situe dans les réplicas dont la valeur `LastAppliedReplicationSequenceNumber` se trouve derrière la valeur `CommittedSequenceNumber` du réplica principal.
 
-- **IReplicator.BuildReplica(\<Remote ReplicaId>)** : cet avertissement indique un problème dans le processus de génération. Pour en savoir plus, consultez [Réplicas et instances](service-fabric-concepts-replica-lifecycle.md). Cela peut être dû à une configuration incorrecte de l’adresse du réplicateur. Pour plus d’informations, consultez [Configuration des services fiables (Reliable Services) avec état](service-fabric-reliable-services-configuration.md) et [Spécifier des ressources dans un manifeste de service](service-fabric-service-manifest-resources.md). Il peut également s’agir d’un problème sur le nœud distant.
+- **IReplicator.BuildReplica(\<Remote ReplicaId>)**  : cet avertissement indique un problème dans le processus de génération. Pour en savoir plus, consultez [Réplicas et instances](service-fabric-concepts-replica-lifecycle.md). Cela peut être dû à une configuration incorrecte de l’adresse du réplicateur. Pour plus d’informations, consultez [Configuration des services fiables (Reliable Services) avec état](service-fabric-reliable-services-configuration.md) et [Spécifier des ressources dans un manifeste de service](service-fabric-service-manifest-resources.md). Il peut également s’agir d’un problème sur le nœud distant.
 
 ### <a name="replicator-system-health-reports"></a>Rapports d’intégrité du système sur le réplicateur
 **File d’attente de réplication complète :** 
@@ -675,7 +675,7 @@ D’autres appels d’API qui peuvent être bloqués se trouvent dans l’interf
 * **Property** : **PrimaryReplicationQueueStatus** ou **SecondaryReplicationQueueStatus** en fonction du rôle du réplica.
 
 ### <a name="slow-naming-operations"></a>Opérations de nommage lentes
-**System.NamingService** signale l’intégrité sur son réplica principal quand une opération de nommage prend trop de temps. [CreateServiceAsync](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.createserviceasync) et [DeleteServiceAsync](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.deleteserviceasync) sont des exemples d’opérations de nommage. D’autres méthodes se trouvent sous FabricClient. Par exemple, dans les [méthodes de gestion de service](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient) ou les [méthodes de gestion de propriété](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.propertymanagementclient).
+**System.NamingService** signale l’intégrité sur son réplica principal quand une opération de nommage prend trop de temps. [CreateServiceAsync](/dotnet/api/system.fabric.fabricclient.servicemanagementclient.createserviceasync) et [DeleteServiceAsync](/dotnet/api/system.fabric.fabricclient.servicemanagementclient.deleteserviceasync) sont des exemples d’opérations de nommage. D’autres méthodes se trouvent sous FabricClient. Par exemple, dans les [méthodes de gestion de service](/dotnet/api/system.fabric.fabricclient.servicemanagementclient) ou les [méthodes de gestion de propriété](/dotnet/api/system.fabric.fabricclient.propertymanagementclient).
 
 > [!NOTE]
 > Le service de nom résout les noms de service dans un emplacement du cluster. Les utilisateurs peuvent l’utiliser pour gérer les noms et propriétés de service. Il s’agit d’un service persistant partitionné Service Fabric. L’une des partitions représente le *propriétaire de l’autorité*, qui contient des métadonnées sur tous les noms et les services Service Fabric. Les noms Service Fabric sont mappés à des partitions différentes, appelées partitions *Propriétaire du nom*. Ainsi, le service est extensible. En savoir plus sur le [service de nommage](service-fabric-architecture.md).
@@ -880,4 +880,3 @@ System.Hosting transmet un avertissement si les capacités de nœud ne sont pas 
 * [Surveiller et diagnostiquer les services localement](service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
 
 * [Mise à niveau des applications Service Fabric](service-fabric-application-upgrade.md)
-

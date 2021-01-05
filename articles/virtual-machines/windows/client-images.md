@@ -4,16 +4,16 @@ description: Comment utiliser les avantages de l’abonnement Visual Studio pour
 author: cynthn
 ms.subservice: imaging
 ms.service: virtual-machines-windows
-ms.topic: article
+ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 12/15/2017
 ms.author: cynthn
-ms.openlocfilehash: 51e4862fe55428f112841ef7176cdb916653de0b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 26bfd9a65cd3e6d36b8190e87d382543cc7f0f60
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82083272"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87292051"
 ---
 # <a name="use-windows-client-in-azure-for-devtest-scenarios"></a>Utilisation d’un client Windows dans Azure pour les scénarios de développement et/ou test
 Vous pouvez utiliser Windows 7, Windows 8 ou Windows 10 Entreprise (x64) dans Azure pour des scénarios de développement / de test à condition de disposer d’un abonnement Visual Studio (anciennement MSDN) approprié. Cet article décrit les conditions d’éligibilité pour les clients Windows 7, Windows 8.1 et Windows 10 Entreprise en cours d’exécution dans Azure et l’utilisation des images de galerie Azure suivantes.
@@ -58,5 +58,4 @@ Vous pouvez également voir l’ID d’offre dans [l’onglet « Abonnements »]
 ![Détails de l’ID de l’offre dans le portail de compte Azure](./media/client-images/offer-id-azure-account-portal.png) 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Vous pouvez désormais déployer vos machines virtuelles à l’aide de [PowerShell](quick-create-powershell.md), de [modèles Resource Manager](ps-template.md) ou de [Visual Studio](../../vs-azure-tools-resource-groups-deployment-projects-create-deploy.md).
-
+Vous pouvez désormais déployer vos machines virtuelles à l’aide de [PowerShell](quick-create-powershell.md), de [modèles Resource Manager](ps-template.md) ou de [Visual Studio](../../azure-resource-manager/templates/create-visual-studio-deployment-project.md).

@@ -1,16 +1,14 @@
 ---
 title: Exécuter un service Azure Service Fabric en tant qu’utilisateur ou groupe AD
 description: Découvrez comment exécuter un service comme utilisateur ou groupe Active Directory sur un cluster autonome Service Fabric Windows.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 03/29/2018
-ms.author: dekapur
-ms.openlocfilehash: d440aadb66562e32331c9725a9367c12440a315d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4a7afc2ddb0f39014a7cf0fd006d7fe23673a95
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75464247"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91840725"
 ---
 # <a name="run-a-service-as-an-active-directory-user-or-group"></a>Exécuter un service comme utilisateur ou groupe Active Directory
 Sur un cluster autonome Windows Server, vous pouvez exécuter un service comme utilisateur ou groupe Active Directory avec une stratégie RunAs.  Par défaut, les applications Service Fabric s’exécutent sous le compte qui exécute le processus Fabric.exe. Les applications en cours d’exécution sous différents comptes sont plus sécurisées, même dans un environnement hébergé partagé. Remarque : cette fonctionnalité utilise Active Directory en local au sein de votre domaine et non Azure Active Directory (Azure AD).  Vous pouvez également exécuter un service en tant que [compte de service administré de groupe (gMSA)](service-fabric-run-service-as-gmsa.md).

@@ -1,22 +1,23 @@
 ---
 title: Prise en charge pour la migration de serveurs physiques dans Azure Migrate
 description: Découvrez la prise en charge pour la migration de serveurs physiques dans Azure Migrate.
+author: rahulg1190
+ms.author: rahugup
+ms.manager: bsiva
 ms.topic: conceptual
-ms.custom: fasttrack-edit
-ms.date: 01/07/2020
-ms.openlocfilehash: 8f8b94ab77a1eef8e771384f5d69da98a1d7ae6c
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.date: 06/14/2020
+ms.openlocfilehash: c549cae0b7bdc5e237ec3cf704a1ead53db91449
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80520281"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754026"
 ---
 # <a name="support-matrix-for-physical-server-migration"></a>Tableau de prise en charge pour la migration de serveurs physiques
 
 Cet article résume les paramètres et les limites de la migration de serveurs physiques avec [Azure Migrate : Migration de serveur](migrate-services-overview.md#azure-migrate-server-migration-tool). Si vous recherchez des informations sur l’évaluation de serveurs physiques VMware pour la migration vers Azure, consultez le [tableau de prise en charge de l’évaluation](migrate-support-matrix-physical.md).
 
-
-## <a name="overview"></a>Vue d’ensemble
+## <a name="migrating-machines-as-physical"></a>Migration de machines en tant qu’ordinateurs physiques
 
 Vous pouvez migrer des machines locales en tant que serveurs physiques à l’aide de la réplication basée sur un agent. Avec cet outil, vous pouvez effectuer la migration d’une large gamme de machines vers Azure :
 
@@ -44,9 +45,10 @@ Le tableau résume la prise en charge de serveurs physiques que vous souhaitez m
 **Réseau/Stockage** | Pour obtenir les informations les plus récentes, consultez les prérequis en matière de [réseau](../site-recovery/vmware-physical-azure-support-matrix.md#network) et de [stockage](../site-recovery/vmware-physical-azure-support-matrix.md#storage) pour Site Recovery. Azure Migrate fournit des exigences identiques pour le réseau/stockage.
 **Conditions requises pour Azure** | Pour obtenir les informations les plus récentes, consultez les exigences d’Azure en matière de [réseau](../site-recovery/vmware-physical-azure-support-matrix.md#azure-vm-network-after-failover), de [stockage](../site-recovery/vmware-physical-azure-support-matrix.md#azure-storage) et de [calcul](../site-recovery/vmware-physical-azure-support-matrix.md#azure-compute) pour Site Recovery. Azure Migrate a des exigences identiques pour la migration de serveurs physiques.
 **Service de mobilité** | L’agent du service Mobilité doit être installé sur chaque machine que vous souhaitez migrer.
-**Démarrage UEFI** | La machine migrée dans Azure est automatiquement convertie en machine virtuelle Azure de démarrage du BIOS. Seul un serveur exécutant Windows Server 2012 ou version ultérieure est pris en charge.<br/><br/> Le disque du système d’exploitation doit avoir jusqu’à quatre partitions et les volumes doivent être formatés avec NTFS.
-**Disque cible** | Les machines peuvent être migrées seulement vers des disques managés (disques HDD standard, disques SSD Premium) dans Azure.
-**Taille du disque** | Disque de système d’exploitation de 2 To ; 8 To pour des disques de données.
+**Démarrage UEFI** | Pris en charge. Les machines UEFI seront migrées vers des machines virtuelles Azure de 2e génération.  <br/><br/> Le disque du système d’exploitation doit avoir jusqu’à quatre partitions et les volumes doivent être formatés avec NTFS.
+**UEFI – Démarrage sécurisé**         | Non pris en charge pour la migration.
+**Disque cible** | Les machines peuvent être migrées seulement vers des disques managés (disques HDD standard, disques SSD standard, disques SSD Premium) dans Azure.
+**Taille du disque** | Disque de système d’exploitation de 2 To (démarrage du BIOS) ; disque de système d’exploitation de 4 To (démarrage d’UEFI) ; 8 To pour les disques de données.
 **Limites du disque** |  Jusqu’à 63 disques par machine.
 **Disques/volumes chiffrés** |  Les machines avec des disques/volumes chiffrés ne sont pas prises en charge pour la migration.
 **Cluster de disque partagé** | Non pris en charge.

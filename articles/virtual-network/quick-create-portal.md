@@ -11,12 +11,12 @@ ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 03/05/2020
 ms.author: kumud
-ms.openlocfilehash: 1a1593566b8bdb72f322d64c1ee99c7018f49329
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: dfeb9c6bc3dbe33881fc51ccb08a776b827dfe9c
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79214787"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "86082435"
 ---
 # <a name="quickstart-create-a-virtual-network-using-the-azure-portal"></a>Démarrage rapide : Créer un réseau virtuel au moyen du portail Azure
 
@@ -223,3 +223,6 @@ Lorsque vous avez fini d’utiliser le réseau virtuel et les machines virtuelle
 Pour plus d’informations sur les paramètres de réseau virtuel, consultez [Créer, changer ou supprimer un réseau virtuel](manage-virtual-network.md).
 
 Par défaut, Azure autorise une communication sécurisée entre les machines virtuelles. Azure autorise uniquement les connexions Bureau à distance entrantes d’Internet vers les machines virtuelles Windows. Pour en savoir plus sur les types de communications réseau de machines virtuelles, consultez [Filtrer le trafic réseau](tutorial-filter-network-traffic.md).
+
+> [!NOTE] 
+> Les services Azure coûtent de l’argent. Azure Cost Management vous aide à définir des budgets et à configurer des alertes pour contrôler les dépenses. Analysez, gérez et optimisez vos coûts Azure avec Cost Management. Pour plus d’informations, consultez le [guide de démarrage rapide sur l’analyse des coûts](https://docs.microsoft.com/azure/cost-management-billing/costs/quick-acm-cost-analysis?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).

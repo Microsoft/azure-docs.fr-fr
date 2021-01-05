@@ -11,12 +11,12 @@ metadata:
   ms.subservice: na
   ms.topic: landing-page
   services: active-directory
-  ms.openlocfilehash: 83beffa0c0eb035c9cd5e30ec4644200b940dd6c
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 6176f42bd256ee8ebd65e573a96e760e116bb9c5
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77620904"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91266273"
 landingContent:
 - title: À propos du provisionnement cloud
   linkLists:

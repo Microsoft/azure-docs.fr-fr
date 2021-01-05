@@ -4,14 +4,14 @@ ms.service: azure-cdn
 ms.topic: include
 ms.date: 11/21/2018
 ms.author: mazha
-ms.openlocfilehash: 41f2d4540f665137d34d262546cdc1a2edfbae3a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4967991b0edaa854acbf6b308596859d662311fe
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77608734"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993359"
 ---
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Avant d’écrire le code de gestion CDN, vous devez effectuer certaines tâches de préparation pour permettre à ce code d’interagir avec Azure Resource Manager. Ce travail de préparation implique les opérations suivantes :
 
 * Créez un groupe de ressources destiné à héberger le profil CDN créé dans ce didacticiel.
@@ -26,10 +26,10 @@ Avant d’écrire le code de gestion CDN, vous devez effectuer certaines tâches
     ![Création d’un groupe de ressources](./media/cdn-app-dev-prep/cdn-new-rg-1-include.png)
 3. Attribuez à votre groupe de ressources le nom *CdnConsoleTutorial*.  Sélectionnez votre abonnement et choisissez un emplacement près de chez vous.  Si vous le souhaitez, vous pouvez cocher la case **Épingler au tableau de bord** pour épingler le groupe de ressources au tableau de bord dans le portail.  Une fois épinglé, le groupe sera plus facile à repérer.  Une fois vos sélections effectuées, cliquez sur **Créer**.
 
-    ![Attribution d’un nom au groupe de ressources](./media/cdn-app-dev-prep/cdn-new-rg-2-include.png)
+    ![Capture d’écran de la boîte de dialogue Groupe de ressources.](./media/cdn-app-dev-prep/cdn-new-rg-2-include.png)
 4. Si vous n’avez pas épinglé le groupe de ressources à votre tableau de bord, cliquez sur **Parcourir**, puis sur **Groupes de ressources** pour le rechercher.  Pour ouvrir le groupe de ressources, cliquez sur ce dernier.  Notez votre **ID d’abonnement**. Nous en aurons besoin ultérieurement.
 
-    ![Attribution d’un nom au groupe de ressources](./media/cdn-app-dev-prep/cdn-subscription-id-include.png)
+    ![Capture d’écran de la section Tutoriel de la console CDN.](./media/cdn-app-dev-prep/cdn-subscription-id-include.png)
 
 ### <a name="creating-the-azure-ad-application-and-applying-permissions"></a>Création d’une application Azure AD et application des autorisations
 Il existe deux approches pour authentifier une application avec Azure Active Directory : les utilisateurs individuels ou un principal de service. Un principal de service est similaire à un compte de service dans Windows.  Au lieu d’être octroyées à un utilisateur spécifique, les autorisations d’interagir avec les profils CDN sont accordées au principal de service.  Les principaux de service sont généralement utilisés pour des processus automatisés non interactifs.  Bien que le but de ce didacticiel soit de créer une application console interactive, nous allons nous adopter l’approche du principal de service.

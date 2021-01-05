@@ -7,18 +7,19 @@ author: hermanndms
 manager: juergent
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/10/2018
 ms.author: hermannd
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 023f32fce01ffbd974b182fa89fd604e62332936
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 994130ce2ecb4578a8d34f1f77b310bb558d3c7a
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617208"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967905"
 ---
 # <a name="install-hana-on-sap-hana-on-azure-large-instances"></a>Installation de HANA sur SAP HANA sur Azure (grandes instances)
 

@@ -1,29 +1,24 @@
 ---
-title: 'Didacticiel : Intégration d’Azure Active Directory à SpringCM | Microsoft Docs'
+title: 'Tutoriel : Intégration d’Azure Active Directory à SpringCM | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et SpringCM.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4a42f797-ac58-4aca-a8e6-53bfe5529083
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/08/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: be4edfe3262ab74d903384eb00c0282acc7a3299
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9cfc48e3fdb96ba5b63b28288a801095f7b36f43
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81867425"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97589829"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-springcm"></a>Didacticiel : Intégration d’Azure Active Directory à SpringCM
+# <a name="tutorial-azure-active-directory-integration-with-springcm"></a>Tutoriel : Intégration d’Azure Active Directory à SpringCM
 
 Dans ce didacticiel, vous allez apprendre à intégrer SpringCM à Azure Active Directory (Azure AD).
 L’intégration de SpringCM dans Azure AD offre les avantages suivants :
@@ -32,10 +27,10 @@ L’intégration de SpringCM dans Azure AD offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à SpringCM (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour configurer l’intégration d’Azure AD à SpringCM, vous avez besoin des éléments suivants :
 
@@ -130,19 +125,19 @@ Pour configurer l’authentification unique Azure AD avec SpringCM, effectuez le
 1. Dans une autre fenêtre de navigateur web, connectez-vous au site de votre entreprise **SpringCM** en tant qu’administrateur.
 
 1. Dans le menu en haut, cliquez sur **GO TO**, sur **Preferences** puis, dans la section **Account Preferences**, cliquez sur **SAML SSO**.
-   
+
     ![Authentification unique SAML](./media/spring-cm-tutorial/ic797051.png "SAML SSO")
 
 1. Dans la section Identity Provider Configuration, procédez comme suit :
-   
+
     ![Configuration du fournisseur d’identité](./media/spring-cm-tutorial/ic797052.png "Identity Provider Configuration")
-    
+
     a. Pour charger votre certificat Azure Active Directory téléchargé, cliquez sur **Select Issuer Certificate** ou **Change Issuer Certificate**.
-    
+
     b. Dans la zone de texte **Issuer** (Émetteur), collez l’**Identificateur Azure AD** que vous avez copié à partir du portail Azure.
-    
+
     c. Dans la zone de texte **Service Provider (SP) Initiated Endpoint** (Point de terminaison lancé par le fournisseur de services), collez l’**URL de connexion** que vous avez copiée à partir du portail Azure.
-            
+
     d. Sélectionnez **Enable** pour **SAML Enabled**.
 
     e. Cliquez sur **Enregistrer**.
@@ -164,7 +159,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez `brittasimon@yourcompanydomain.extension`. Par exemple : BrittaSimon@contoso.com
 
     c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
@@ -209,7 +204,7 @@ Pour se connecter à SpringCM, les utilisateurs Azure Active Directory doivent �
 1. Connectez-vous à votre site d’entreprise **SpringCM** en tant qu’administrateur.
 
 1. Cliquez sur **GOTO** puis sur **ADDRESS BOOK**.
-   
+
     ![Create User](./media/spring-cm-tutorial/ic797054.png "Create User") (Créer un utilisateur)
 
 1. Cliquez sur **Créer l’utilisateur**.
@@ -231,13 +226,12 @@ Pour se connecter à SpringCM, les utilisateurs Azure Active Directory doivent �
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette SpringCM dans le panneau d’accès doit vous connecter automatiquement à l’application SpringCM pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette SpringCM dans le panneau d’accès doit vous connecter automatiquement à l’application SpringCM pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

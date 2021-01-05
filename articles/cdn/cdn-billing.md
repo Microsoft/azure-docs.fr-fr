@@ -1,6 +1,6 @@
 ---
 title: Présentation de la facturation d’Azure CDN | Microsoft Docs
-description: Ce FAQ décrit le fonctionnement de la facturation d’Azure CDN.
+description: Découvrez la structure de facturation du contenu hébergé par Azure Content Delivery Network, y compris les régions de facturation, les frais de livraison et la gestion des coûts.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/13/2019
 ms.author: allensu
-ms.openlocfilehash: d3a2dfba98f83d34c3e83ec865e3b692f7dbacd2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: aa2f00a732a3978524fc017481285859c9535387
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81254221"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018679"
 ---
 # <a name="understanding-azure-cdn-billing"></a>Présentation de la facturation du CDN Azure
 
@@ -34,11 +34,11 @@ Une région de facturation est une zone géographique utilisée pour déterminer
 
 - Zone 3 : Amérique du Sud
 
-- Zone 4 : Australie et Nouvelle-Zélande
+- Zone 4 : Australie et Nouvelle Zélande
 
 - Zone 5 : Inde
 
-Pour plus d’informations sur les régions POP, consultez [Emplacements POP du CDN Azure par région](https://docs.microsoft.com/azure/cdn/cdn-pop-locations). Par exemple, un point POP situé au Mexique se trouve dans la région Amérique du Nord et est donc inclus dans la zone 1. 
+Pour plus d’informations sur les régions POP, consultez [Emplacements POP du CDN Azure par région](./cdn-pop-locations.md). Par exemple, un point POP situé au Mexique se trouve dans la région Amérique du Nord et est donc inclus dans la zone 1. 
 
 Pour plus d’informations sur les tarifs d’Azure CDN, consultez [Tarifs Content Delivery Network](https://azure.microsoft.com/pricing/details/cdn/).
 
@@ -114,8 +114,9 @@ Si vous utilisez l’un des services Azure suivants en tant qu’origine de CDN,
 - Azure Cosmos DB
 - Azure Data Lake Store
 - Azure Machine Learning 
-- Base de données Azure SQL
+- Azure SQL Database
+- Azure SQL Managed Instance
 - Cache Azure pour Redis
 
 ## <a name="how-do-i-manage-my-costs-most-effectively"></a>Comment gérer plus efficacement les coûts ?
-Définissez la plus longue durée de vie possible de votre contenu. 
+Définissez la plus longue durée de vie possible de votre contenu.

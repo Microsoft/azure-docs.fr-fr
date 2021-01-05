@@ -1,6 +1,6 @@
 ---
 title: Ajouter une couche de carte thermique à une carte | Microsoft Azure Maps
-description: Dans cet article, vous découvrirez comment ajouter une couche thermique à une carte à l’aide du Kit de développement logiciel (SDK) web Microsoft Azure Maps.
+description: Découvrez comment créer une carte thermique. Découvrez comment utiliser le Kit de développement logiciel (SDK) web Azure Maps pour ajouter une couche thermique à une carte. Découvrez comment personnaliser les couches thermiques.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 07/29/2019
@@ -8,13 +8,13 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: 19765bd28f365cc6f6d5b06646896613dd3e3e87
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: b15ee7091a68f7fcc79c71877c4af28b511b84de
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804552"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97680137"
 ---
 # <a name="add-a-heat-map-layer"></a>Ajouter un calque de carte thermique
 
@@ -31,9 +31,9 @@ Vous pouvez utiliser des cartes thermiques dans de nombreux scénarios, notammen
 > [!TIP]
 > Les couches par défaut de la carte thermique restituent les coordonnées de toutes les données géométriques d’une source de données. Pour limiter la couche afin qu’elle n’affiche que les fonctionnalités de géométrie de point, définissez la propriété `filter` de la couche sur `['==', ['geometry-type'], 'Point']`. Si vous souhaitez également inclure des fonctionnalités MultiPoint, réglez la propriété `filter` de la couche sur `['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']]`.
 
-<br/>
+</br>
 
-<iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Heat-Maps-and-Image-Overlays-in-Azure-Maps/player" width="960" height="540" allowFullScreen frameBorder="0"></iframe>
+>[!VIDEO https://channel9.msdn.com/Shows/Internet-of-Things-Show/Heat-Maps-and-Image-Overlays-in-Azure-Maps/player?format=ny]
 
 ## <a name="add-a-heat-map-layer"></a>Ajouter un calque de carte thermique
 
@@ -60,7 +60,7 @@ Voici l’exemple complet du code précédent.
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Couche de carte thermique simple' src='//codepen.io/azuremaps/embed/gQqdQB/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/gQqdQB/'>Simple Heat Map Layer</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Couche de carte thermique simple' src='//codepen.io/azuremaps/embed/gQqdQB/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/gQqdQB/'>Simple Heat Map Layer</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="customize-the-heat-map-layer"></a>Personnaliser la couche de carte thermique
@@ -89,7 +89,7 @@ Voici un outil permettant de tester les options de couche de carte thermique.
 
 <br/>
 
-<iframe height='700' scrolling='no' title='Options de la couche de carte thermique' src='//codepen.io/azuremaps/embed/WYPaXr/?height=700&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/WYPaXr/'>Heat Map Layer Options</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='700' scrolling='no' title='Options de la couche de carte thermique' src='//codepen.io/azuremaps/embed/WYPaXr/?height=700&theme-id=0&default-tab=result' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/WYPaXr/'>Heat Map Layer Options</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="consistent-zoomable-heat-map"></a>Carte thermique homogène pouvant faire l’objet d’un zoom
@@ -102,7 +102,7 @@ La mise à l’échelle du rayon de sorte qu’il soit multiplié par deux avec 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Carte thermique homogène pouvant faire l’objet d’un zoom" src="//codepen.io/azuremaps/embed/OGyMZr/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Carte thermique homogène pouvant faire l’objet d’un zoom" src="//codepen.io/azuremaps/embed/OGyMZr/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez <a href='https://codepen.io/azuremaps/pen/OGyMZr/'>Consistent zoomable heat map</a> (Carte thermique pouvant faire l’objet d’un zoom) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -120,10 +120,10 @@ Consultez <a href='https://codepen.io/azuremaps/pen/OGyMZr/'>Consistent zoomable
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [HeatMapLayer](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.htmlmarker?view=azure-iot-typescript-latest)
+> [HeatMapLayer](/javascript/api/azure-maps-control/atlas.htmlmarker)
 
 > [!div class="nextstepaction"]
-> [HeatMapLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.heatmaplayeroptions?view=azure-iot-typescript-latest)
+> [HeatMapLayerOptions](/javascript/api/azure-maps-control/atlas.heatmaplayeroptions)
 
 Pour consulter plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 

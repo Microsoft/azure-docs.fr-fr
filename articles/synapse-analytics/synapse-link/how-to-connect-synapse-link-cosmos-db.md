@@ -1,20 +1,20 @@
 ---
-title: Se connecter à Azure Synapse Link pour Azure Cosmos DB
-description: Comment connecter une base de données Azure Cosmos DB à un espace de travail Synapse avec Azure Synapse Link
+title: Se connecter à Azure Synapse Link (préversion) pour Cosmos DB
+description: Découvrez comment connecter une base de données Azure Cosmos DB à un espace de travail Azure Synapse avec Azure Synapse Link
 services: synapse-analytics
 author: ArnoMicrosoft
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: synapse-link
 ms.date: 04/21/2020
 ms.author: acomet
 ms.reviewer: jrasnick
-ms.openlocfilehash: d72d1feda4c267dfa3d5c0dea6928f1b7541b26d
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 0e4bcc13a2eaddbf394d8468b29eeff475119e2d
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83599009"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96459018"
 ---
 # <a name="connect-to-azure-synapse-link-for-azure-cosmos-db"></a>Se connecter à Azure Synapse Link pour Cosmos DB
 
@@ -24,47 +24,50 @@ Cet article explique comment accéder à une base de données Azure Cosmos DB à
 
 Avant de connecter une base de données Azure Cosmos DB à votre espace de travail, les points suivants doivent être respectés :
 
-* Vous avez une base de données Azure Cosmos DB ou vous avez suivi ce [guide de démarrage rapide](https://docs.microsoft.com/azure/cosmos-db/how-to-manage-database-account) pour créer un compte
-* Vous avez un espace de travail Synapse ou vous avez suivi ce [guide de démarrage rapide](https://docs.microsoft.com/azure/synapse-analytics/quickstart-create-workspace) pour créer un espace de travail 
+* Une base de données Azure Cosmos DB existante, ou créez un compte en suivant les étapes de [Démarrage rapide : Gérer un compte Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/how-to-manage-database-account).
+* Un espace de travail Azure Synapse existant, ou créez un espace de travail en suivant les étapes de [Démarrage rapide : Créer un espace de travail Synapse](https://docs.microsoft.com/azure/synapse-analytics/quickstart-create-workspace).
 
-## <a name="enable-azure-cosmos-db-analytical-store"></a>Vous avez activé le magasin analytique Azure Cosmos DB
+> [!IMPORTANT]
+> Azure Synapse Link pour Azure Cosmos DB est actuellement pris en charge pour les espaces de travail pour lesquels un réseau virtuel managé n’est pas activé.
 
-Pour mener des analyses à grande échelle dans Azure Cosmos DB sans affecter vos performances opérationnelles, nous vous recommandons d’activer Synapse Link pour Azure Cosmos DB. Synapse Link apporte une capacité HTAP pour un conteneur et un support intégré dans Azure Synapse.
+## <a name="enable-synapse-link-on-an-azure-cosmos-db-database-account"></a>Activer Synapse Link sur un compte de base de données Azure Cosmos DB
 
-## <a name="navigate-to-synapse-studio"></a>Accéder à Synapse Studio
+Pour effectuer de l’analytique à grande échelle dans Azure Cosmos DB sans affecter vos performances opérationnelles, nous vous recommandons d’activer Synapse Link pour Azure Cosmos DB. Synapse Link apporte une capacité HTAP pour un conteneur et un support intégré dans Azure Synapse.
 
-Dans votre espace de travail Synapse, sélectionnez **Lancer Synapse Studio**. Sur la page d’accueil de Synapse Studio, sélectionnez **Data (Données), ce qui vous permet de vous connecter à **Data Object Explorer** (Explorateur d'objets de données).
+## <a name="go-to-synapse-studio"></a>Accéder à Synapse Studio
 
-## <a name="connect-an-azure-cosmos-db-database-to-a-synapse-workspace"></a>Connecter une base de données Azure Cosmos DB à un espace de travail Synapse
+Dans votre espace de travail Azure Synapse, sélectionnez **Lancer Synapse Studio**. Dans la page d’accueil de Synapse Studio, sélectionnez **Données** pour accéder à l’Explorateur d’objets de données.
 
-La connexion d’une base de données Azure Cosmos DB s’effectue en tant que service lié. Un service lié Cosmos DB permet aux utilisateurs de parcourir et d’explorer les données, de les lire et de les écrire à partir d’Apache Spark pour Azure Synapse Analytics ou SQL dans Azure Cosmos DB.
+## <a name="connect-an-azure-cosmos-db-database-to-an-azure-synapse-workspace"></a>Connecter une base de données Azure Cosmos DB à un espace de travail Azure Synapse
 
-À partir de l’Explorateur d’objets de données, vous pouvez vous connecter directement à une base de données Azure Cosmos DB en procédant comme suit :
+La connexion d’une base de données Azure Cosmos DB s’effectue en tant que service lié. Avec un service lié à Azure Cosmos DB, vous pouvez parcourir et explorer les données, lire et écrire à partir d’Apache Spark pour Azure Synapse Analytics ou SQL dans Azure Cosmos DB.
 
-1. Sélectionnez l’icône ***+*** à proximité de Données
-2. Sélectionnez **Connect to external data** (Se connecter à des sources de données externes)
-3. Sélectionnez l’API à laquelle vous souhaitez vous connecter : API SQL ou API pour MongoDB
-4. Sélectionnez ***Continue*** (Continuer)
-5. Nommez le service lié. Le nom sera affiché dans l’Explorateur d’objets et utilisé par les exécutables Synapse pour se connecter à la base de données et aux conteneurs. Nous vous recommandons d’utiliser un nom convivial.
-6. Sélectionnez le **nom du compte Azure Cosmos DB** et le **nom de la base de données**
-7. (Facultatif) Si aucune région n’est spécifiée, les opérations d’exécution Synapse sont acheminées vers la région la plus proche dans laquelle le magasin analytique est activé. Toutefois, vous pouvez définir manuellement la région dans laquelle vous souhaitez que vos utilisateurs accèdent au magasin analytique Azure Cosmos DB. Sélectionnez **Additional connection properties** (Propriétés de connexion supplémentaires) puis **New** (Nouveau). Sous **Property Name** (Nom de la propriété), tapez ***PreferredRegions*** et définissez **Value** (Valeur) sur la région de votre choix (exemple : WestUS2, sans espace entre les mots et les nombres)
-8. Sélectionnez ***Créer***
+À partir de l’Explorateur d’objets de données, vous pouvez vous connecter directement à une base de données Azure Cosmos DB en suivant ces étapes :
 
-Les bases de données Azure Cosmos DB sont visibles sous l’onglet **Linked** (Lié) dans la section Azure Cosmos DB. Avec Azure Cosmos DB, vous pouvez différencier un conteneur activé par HTAP d’un conteneur limité à l’OLTP en vous reportant aux icônes suivantes :
+1. Sélectionnez l’icône **+** à proximité de **Données**.
+1. Sélectionnez **Se connecter à des données externes**.
+1. Sélectionnez l’API à laquelle vous voulez vous connecter, par exemple **API SQL** ou **API pour MongoDB**.
+1. Sélectionnez **Continuer**.
+1. Utilisez un nom convivial pour nommer le service lié. Le nom apparaît dans l’Explorateur d’objets de données et est utilisé par les runtimes Azure Synapse pour se connecter à la base de données et aux conteneurs.
+1. Sélectionnez le **nom du compte Azure Cosmos DB** et le **nom de la base de données**.
+1. (Facultatif) Si aucune région n’est spécifiée, les opérations du runtime Azure Synapse sont routées vers la région la plus proche où le magasin analytique est activé. Vous pouvez aussi définir manuellement la région que vos utilisateurs doivent utiliser pour accéder au magasin analytique Azure Cosmos DB. Sélectionnez **Propriétés de connexion supplémentaires**, **Nouveau**. Sous **Nom de la propriété**, entrez **PreferredRegions**. Définissez la **Valeur** sur la région de votre choix, par exemple **WestUS2**. (Il n’y a pas d’espace entre les mots et le chiffre.)
+1. Sélectionnez **Créer**.
+
+Les bases de données Azure Cosmos DB apparaissent sous l’onglet **Lié** dans la section **Azure Cosmos DB**. Avec Azure Cosmos DB, vous pouvez différencier un conteneur activé pour HTAP d’un conteneur limité à l’OLTP via les icônes suivantes :
 
 **Conteneur limité à l’OLTP** :
 
-![Conteneur OLTP](../media/quickstart-connect-synapse-link-cosmosdb/oltp-container.png)
+![Visualisation montrant l’icône de conteneur OLTP.](../media/quickstart-connect-synapse-link-cosmosdb/oltp-container.png)
 
-**Conteneur activé par HTAP**:
+**Conteneur activé pour HTAP** :
 
-![Conteneur HTAP](../media/quickstart-connect-synapse-link-cosmosdb/htap-container.png)
+![Visualisation montrant l’icône de conteneur HTAP.](../media/quickstart-connect-synapse-link-cosmosdb/htap-container.png)
 
 ## <a name="quickly-interact-with-code-generated-actions"></a>Interagir rapidement avec des actions générées par le code
 
-Lorsque vous cliquez avec le bouton droit sur un conteneur, vous obtenez une liste des mouvements qui déclencheront une exécution Spark ou SQL. L’écriture de données dans un conteneur aura lieu via le magasin transactionnel d’Azure Cosmos DB et consommera des unités de requête.  
+Quand vous cliquez avec le bouton droit dans un conteneur, vous obtenez une liste des mouvements qui vont déclencher un runtime Spark ou SQL. L’écriture de données dans un conteneur aura lieu via le magasin transactionnel d’Azure Cosmos DB et consommera des unités de requête.  
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Découvrir ce qui est pris en charge entre Synapse et Azure Cosmos DB](./concept-synapse-link-cosmos-db-support.md)
+* [Découvrir ce qui est pris en charge entre Azure Synapse et Azure Cosmos DB](./concept-synapse-link-cosmos-db-support.md)
 * [Découvrir comment interroger un magasin analytique avec Spark](./how-to-query-analytical-store-spark.md)

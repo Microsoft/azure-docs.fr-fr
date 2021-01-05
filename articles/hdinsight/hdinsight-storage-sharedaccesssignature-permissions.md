@@ -1,26 +1,26 @@
 ---
 title: Restreindre l’accès à l’aide de signatures d’accès partagé - Azure HDInsight
-description: Découvrez comment utiliser les signatures d’accès partagé pour limiter l’accès HDInsight aux données stockées dans des objets blob de stockage Azure.
+description: Découvrez comment utiliser les signatures d’accès partagé pour limiter l’accès HDInsight aux données stockées dans Stockage Blob Azure.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,seoapr2020
+ms.topic: how-to
+ms.custom: hdinsightactive,seoapr2020, devx-track-azurecli
 ms.date: 04/28/2020
-ms.openlocfilehash: 77314514ca26997fecd6b5d7c6ba1fc7d14c2584
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 141db7feee987b7fffc578e19c60bd94ad56d239
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82209058"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97511635"
 ---
-# <a name="use-azure-storage-shared-access-signatures-to-restrict-access-to-data-in-hdinsight"></a>Utilisation des signatures d’accès partagé du stockage Azure pour restreindre l’accès aux données dans HDInsight
+# <a name="use-azure-blob-storage-shared-access-signatures-to-restrict-access-to-data-in-hdinsight"></a>Utiliser des signatures d’accès partagé Stockage Blob Azure pour restreindre l’accès aux données dans HDInsight
 
-HDInsight dispose d’un accès total aux données dans les comptes de stockage Azure associés au cluster. Vous pouvez utiliser des signatures d’accès partagé sur le conteneur d’objets blob pour restreindre l’accès aux données. Les signatures d’accès partagé (SAP) sont une fonctionnalité des comptes de stockage Azure qui vous permet de limiter l’accès aux données. Par exemple, en fournissant un accès en lecture seule aux données.
+HDInsight dispose d’un accès total aux données dans les comptes Stockage Blob Azure associés au cluster. Vous pouvez utiliser des signatures d’accès partagé sur le conteneur d’objets blob pour restreindre l’accès aux données. Les signatures d’accès partagé (SAS) sont une fonctionnalité des comptes Stockage Blob Azure qui vous permet de limiter l’accès aux données. Par exemple, en fournissant un accès en lecture seule aux données.
 
 > [!IMPORTANT]  
-> Pour une solution utilisant Apache Ranger, envisagez d’utiliser les clusters HDInsight joints à un domaine. Pour plus d’informations, consultez le document [Configurer des clusters HDInsight joints à un domaine (préversion)](./domain-joined/apache-domain-joined-configure.md).
+> Pour une solution utilisant Apache Ranger, envisagez d’utiliser les clusters HDInsight joints à un domaine. Pour plus d’informations, consultez le document [Configurer des clusters HDInsight joints à un domaine (préversion)](./domain-joined/apache-domain-joined-configure-using-azure-adds.md).
 
 > [!WARNING]  
 > HDInsight doit disposer d’un accès total au stockage par défaut pour le cluster.
@@ -31,15 +31,15 @@ HDInsight dispose d’un accès total aux données dans les comptes de stockage 
 
 * Un [conteneur de stockage](../storage/blobs/storage-quickstart-blobs-portal.md) existant.  
 
-* Si vous utilisez PowerShell, vous aurez besoin du [module Az](https://docs.microsoft.com/powershell/azure/overview).
+* Si vous utilisez PowerShell, vous aurez besoin du [module Az](/powershell/azure/).
 
-* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+* Si vous voulez utiliser Azure CLI et que vous ne l’avez pas encore installé, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 * Si vous utilisez [Python](https://www.python.org/downloads/), version 2.7 ou ultérieure.
 
 * Si vous utilisez le C#, la version de Visual Studio doit être 2013 ou ultérieure.
 
-* Le schéma d’URI pour votre compte de stockage. Ce schéma serait `wasb://` pour Stockage Azure, `abfs://` pour Azure Data Lake Storage Gen2 ou `adl://` pour Azure Data Lake Storage Gen1. Si le transfert sécurisé est activé pour le stockage Azure, l’URI sera `wasbs://`.
+* Le schéma d’URI pour votre compte de stockage. Ce schéma sera `wasb://` pour Stockage Blob Azure, `abfs://` pour Azure Data Lake Storage Gen2 ou `adl://` pour Azure Data Lake Storage Gen1. Si le transfert sécurisé est activé pour Stockage Blob Azure, l’URI sera `wasbs://`.
 
 * Un cluster HDInsight existant auquel ajouter une signature d’accès partagé. Si ce n’est pas le cas, vous pouvez utiliser Azure PowerShell pour créer un cluster et ajouter une signature d’accès partagé lors de la création du cluster.
 
@@ -76,7 +76,7 @@ La différence entre les deux formes est importante pour un scénario clé : la
 
 Nous vous recommandons de toujours utiliser des stratégies d’accès stockées. Lorsque vous utilisez des stratégies stockées, vous pouvez révoquer des signatures ou étendre la date d’expiration, selon vos besoins. Les étapes décrites dans ce document utilisent les stratégies d’accès stockées pour générer des SAP.
 
-Pour plus d’informations sur les SAP, voir [Présentation du modèle SAP](../storage/common/storage-dotnet-shared-access-signature-part-1.md)
+Pour plus d’informations sur les SAP, voir [Présentation du modèle SAP](../storage/common/storage-sas-overview.md)
 
 ## <a name="create-a-stored-policy-and-sas"></a>Créer une stratégie stockée et une SAP
 
@@ -188,7 +188,7 @@ L’utilisation de variables dans cette section est basée sur un environnement 
     az storage container policy list --container-name %AZURE_STORAGE_CONTAINER% --account-key %AZURE_STORAGE_KEY% --account-name %AZURE_STORAGE_ACCOUNT%
 
     # Generate a shared access signature for the container
-    az storage container generate-sas --name myPolicyCLI --account-key %AZURE_STORAGE_KEY% --account-name %AZURE_STORAGE_ACCOUNT%
+    az storage container generate-sas --name %AZURE_STORAGE_CONTAINER% --policy-name myPolicyCLI --account-key %AZURE_STORAGE_KEY% --account-name %AZURE_STORAGE_ACCOUNT%
 
     # Reversal
     # az storage container policy delete --container-name %AZURE_STORAGE_CONTAINER% --name myPolicyCLI --account-key %AZURE_STORAGE_KEY% --account-name %AZURE_STORAGE_ACCOUNT%
@@ -421,7 +421,9 @@ Procédez comme suit pour vérifier que vous pouvez uniquement lire et répertor
 
     Vous recevez un message similaire au texte suivant :
 
-        put: java.io.IOException
+    ```output
+    put: java.io.IOException
+    ```
 
     Cette erreur se produit, car l’emplacement de stockage est en lecture + liste uniquement. Pour placer les données sur le stockage par défaut pour le cluster, accessible en écriture, utilisez la commande suivante :
 

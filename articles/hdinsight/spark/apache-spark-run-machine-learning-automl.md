@@ -5,14 +5,14 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/13/2019
-ms.openlocfilehash: 6fc0d4cfe29e0fb189c44b307576bd08d2da8a31
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e472c65897fa57cdb1e0b09d94c62913e268040
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75638882"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86087467"
 ---
 # <a name="run-azure-machine-learning-workloads-with-automated-machine-learning-on-apache-spark-in-hdinsight"></a>Exécuter des charges de travail Azure Machine Learning avec Machine learning automatisé sur Apache Spark dans HDInsight
 

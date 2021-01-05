@@ -11,14 +11,20 @@ ms.subservice: bing-autosuggest
 ms.topic: quickstart
 ms.date: 04/06/2020
 ms.author: aahi
-ms.openlocfilehash: ea8054c74d90253a0311d05ba63d1d1e6a6ab648
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d8bc9663b54e88a8fa857f92e8d6927f720150c9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80887378"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352761"
 ---
 # <a name="quickstart-use-the-bing-autosuggest-client-library"></a>Démarrage rapide : Utiliser la bibliothèque de client Suggestion automatique Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 ::: zone pivot="programming-language-csharp"
 

@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 09/04/2019
+ms.date: 06/10/2020
 ms.author: jingwang
-ms.openlocfilehash: 495d16efcc26fc336a87c0f2d88f5202ab0b4a3e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: ac9dff4b16d8ba1b346a2827f3b5487dbf97392e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416613"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84669832"
 ---
 # <a name="copy-data-from-sybase-using-azure-data-factory"></a>Copier des données à partir de Sybase à l’aide d’Azure Data Factory
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
@@ -37,8 +37,10 @@ Vous pouvez copier des données d’une base de données Sybase vers tout magasi
 
 Plus précisément, ce connecteur Sybase prend en charge :
 
-- SAP Sybase SQL Anywhere (ASA) **version 16 et versions ultérieures** ; IQ et ASE ne sont pas pris en charge.
+- SAP Sybase SQL Anywhere (ASA) **version 16 et ultérieure**.
 - Copie des données avec l’authentification **De base** ou **Windows**.
+
+Sybase IQ et ASE ne sont pas pris en charge. Vous pouvez utiliser le connecteur ODBC générique avec le pilote Sybase à la place.
 
 ## <a name="prerequisites"></a>Prérequis
 

@@ -5,22 +5,22 @@ ms.date: 03/24/2020
 ms.topic: conceptual
 description: Décrit comment configurer un cluster Azure Kubernetes Service pour Azure Dev Spaces
 keywords: Azure Dev Spaces, Dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs
-ms.openlocfilehash: 00f8262f3008ce9ba82726960f78d18395458a2a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 841e67b96e95aa251fa5bf1ef469b68de30f54d9
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80241343"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91972677"
 ---
 # <a name="how-setting-up-a-cluster-for-azure-dev-spaces-works"></a>Comment configurer un cluster pour Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
 
 Azure Dev Spaces vous offre plusieurs façons de parcourir et de déboguer rapidement des applications Kubernetes et de collaborer avec votre équipe sur un cluster Azure Kubernetes Service (AKS). Une méthode consiste à activer Azure Dev Spaces sur votre cluster AKS afin de pouvoir [exécuter des services directement sur votre cluster][how-it-works-up] et à utiliser des [fonctionnalités de routage et de mise en réseau supplémentaires][how-it-works-routing]. Cet article décrit ce qui se passe lorsque vous préparez votre cluster et activez Azure Dev Spaces.
 
 ## <a name="prepare-your-aks-cluster"></a>Préparer votre cluster AKS
 
-Pour préparer votre cluster AKS pour Azure Dev Spaces, vérifiez que votre cluster AKS se trouve dans une région [prise en charge par Azure Dev Spaces][supported-regions] et que vous exécutez Kubernetes 1.10.3 ou une version ultérieure. Pour activer Azure Dev Spaces sur votre cluster à partir du portail Azure, accédez à votre cluster, cliquez sur *Dev Spaces*, modifiez *Utiliser Dev Spaces* sur *Oui*, puis cliquez sur *Enregistrer*. Vous pouvez également activer Azure Dev Spaces à partir d’Azure CLI en exécutant `az aks use-dev-spaces`.
-
-Pour obtenir un exemple de configuration d’un cluster AKS pour Dev Spaces, consultez le [Guide de démarrage rapide sur le développement en équipe][quickstart-team].
+Pour préparer votre cluster AKS pour Azure Dev Spaces, vérifiez que votre cluster AKS se trouve dans une région [prise en charge par Azure Dev Spaces][supported-regions] et que vous exécutez Kubernetes 1.10.3 ou une version ultérieure. Vous pouvez également activer Azure Dev Spaces à partir d’Azure CLI en exécutant `az aks use-dev-spaces`.
 
 Quand Azure Dev Spaces est activé sur votre cluster AKS, il installe le contrôleur pour votre cluster. Le contrôleur réside à l’extérieur de votre cluster AKS. Il gère le comportement et la communication entre les outils côté client et le cluster AKS. Une fois le contrôleur activé, vous pouvez interagir avec lui à l’aide des outils côté client.
 
@@ -86,16 +86,14 @@ Pendant que votre application est en cours d'exécution, les outils côté clien
 Vous pouvez utiliser les outils côté client depuis la ligne de commande dans le cadre de la commande `azds`. Vous pouvez également utiliser les outils côté client avec :
 
 * Visual Studio Code avec l'[extension Azure Dev Spaces](https://marketplace.visualstudio.com/items?itemName=azuredevspaces.azds).
-* Visual Studio avec [Visual Studio Tools pour Kubernetes](https://aka.ms/get-vsk8stools).
+* Visual Studio avec la charge de travail de développement Azure.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour en savoir plus sur l’utilisation des outils côté client pour préparer et exécuter votre code dans votre espace de développement, consultez [Préparation d’un projet pour Azure Dev Spaces][how-it-works-prep].
 
-Pour commencer à utiliser Azure Dev Spaces pour le développement en équipe, consultez le Guide de démarrage rapide [Développement en équipe dans Azure Dev Spaces][quickstart-team].
 
 [how-it-works-prep]: how-dev-spaces-works-prep.md
 [how-it-works-routing]: how-dev-spaces-works-routing.md
 [how-it-works-up]: how-dev-spaces-works-up.md
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
-[quickstart-team]: quickstart-team-development.md

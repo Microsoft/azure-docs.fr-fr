@@ -3,17 +3,18 @@ title: Envoyer des événements de Stockage Blob Azure à un point de terminaiso
 description: Utilisez Azure Event Grid pour vous abonner à des événements de stockage Blob. Envoyez les événements à un webhook. Gérez les événements dans une application web.
 author: normesta
 ms.author: normesta
-ms.reviewer: cbrooks
+ms.reviewer: dineshm
 ms.date: 03/05/2020
 ms.topic: how-to
 ms.service: storage
 ms.subservice: blobs
-ms.openlocfilehash: ad5662a722db764d09c1ead528a98c09c1d3df7f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: f629ec5ccc1895b83cf7f1e831de8d128c49836d
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80745519"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97702427"
 ---
 # <a name="quickstart-route-storage-events-to-web-endpoint-with-azure-cli"></a>Démarrage rapide : Router des événements de stockage vers un point de terminaison web avec Azure CLI
 
@@ -23,15 +24,13 @@ En règle générale, vous envoyez des événements à un point de terminaison q
 
 En suivant les instructions de cet article, vous voyez que les données d’événement ont été envoyées à l’application web.
 
-![Afficher l’événement d’abonnement](./media/storage-blob-event-quickstart/view-results.png)
+![Capture d’écran de la visionneuse Azure Event Grid qui affiche les données d’événement envoyées à l’application web.](./media/storage-blob-event-quickstart/view-results.png)
 
 [!INCLUDE [quickstarts-free-trial-note.md](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, cet article nécessite l’exécution de la version la plus récente d’Azure CLI (2.0.70 ou ultérieure). Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
-
-Si vous n’utilisez pas Cloud Shell, vous devez d’abord vous connecter à l’aide de `az login`.
+- Cet article nécessite la version 2.0.70 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -70,7 +69,7 @@ Remplacez `<your-site-name>` par un nom unique pour votre application web. Le no
 ```azurecli-interactive
 sitename=<your-site-name>
 
-az group deployment create \
+az deployment group create \
   --resource-group <resource_group_name> \
   --template-uri "https://raw.githubusercontent.com/Azure-Samples/azure-event-grid-viewer/master/azuredeploy.json" \
   --parameters siteName=$sitename hostingPlanName=viewerhost

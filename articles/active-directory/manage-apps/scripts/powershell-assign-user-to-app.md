@@ -2,22 +2,21 @@
 title: Exemple PowerShell - Affecter un utilisateur à une application Proxy d’application
 description: Exemple PowerShell qui attribue un utilisateur à une application Proxy d’application Azure Active Directory (Azure AD).
 services: active-directory
-author: msmimart
+author: kenwith
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: sample
 ms.date: 12/05/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 42667ebdfc37b679d56421e3a82d4a6aaaed8fdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 020909464ca7c271c260dc9662c9e4a18d32f86f
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75476015"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96859369"
 ---
 # <a name="assign-a-user-to-a-specific-azure-ad-application-proxy-application"></a>Affecter un utilisateur à une application Proxy d’application Azure Active Directory
 
@@ -29,7 +28,7 @@ Cet exemple de script PowerShell vous permet d’affecter un utilisateur à une 
 
 [!INCLUDE [cloud-shell-try-it.md](../../../../includes/cloud-shell-try-it.md)]
 
-Cet exemple requiert le [ module AzureAD v2 PowerShell pour Graph](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0) (AzureAD) ou la [version préliminaire du module AzureAD v2 PowerShell pour Graph](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0-preview) (AzureADPreview).
+Cet exemple requiert le [ module AzureAD v2 PowerShell pour Graph](/powershell/azure/active-directory/install-adv2) (AzureAD) ou la [version préliminaire du module AzureAD v2 PowerShell pour Graph](/powershell/azure/active-directory/install-adv2?view=azureadps-2.0-preview) (AzureADPreview).
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -39,10 +38,10 @@ Cet exemple requiert le [ module AzureAD v2 PowerShell pour Graph](https://docs.
 
 | Commande | Notes |
 |---|---|
-| [New-AzureADUserAppRoleAssignment](https://docs.microsoft.com/powershell/module/AzureAD/new-azureaduserapproleassignment?view=azureadps-2.0) | Attribue un utilisateur à un rôle d’application. |
+| [New-AzureADUserAppRoleAssignment](/powershell/module/AzureAD/new-azureaduserapproleassignment) | Attribue un utilisateur à un rôle d’application. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le Module Azure AD PowerShell, consultez [Présentation du Module Azure AD PowerShell](https://docs.microsoft.com/powershell/azure/active-directory/overview?view=azureadps-2.0).
+Pour plus d’informations sur le Module Azure AD PowerShell, consultez [Présentation du Module Azure AD PowerShell](/powershell/azure/active-directory/overview).
 
 Pour d’autres exemples PowerShell pour le proxy d’application, consultez [Exemples Azure AD PowerShell pour le Proxy d’application Azure Active Directory](../application-proxy-powershell-samples.md).

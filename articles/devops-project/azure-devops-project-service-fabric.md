@@ -8,12 +8,12 @@ ms.technology: devops-cicd
 ms.topic: tutorial
 ms.date: 03/24/2020
 author: mlearned
-ms.openlocfilehash: ce35f3af38b98f43ebbd0d3f42136ab8358b19a5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 723f46652643883dc8e718468a9ca9eead50e1aa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233718"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91856022"
 ---
 # <a name="tutorial-deploy-your-aspnet-core-app-to-azure-service-fabric-by-using-azure-devops-starter"></a>Tutoriel : Déployer votre application ASP.NET Core dans Azure Service Fabric à l’aide d’Azure DevOps Starter
 
@@ -45,7 +45,7 @@ DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer 
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Dans la zone de recherche, saisissez puis sélectionnez **DevOps Starter**. Cliquez sur **Ajouter** pour en créer une.
+1. Dans la zone de recherche, tapez, puis sélectionnez **DevOps Starter**. Cliquez sur le **signe +** pour créer une ressource.
 
     ![Tableau de bord DevOps Starter](_img/azure-devops-starter-aks/search-devops-starter.png) 
 
@@ -90,7 +90,7 @@ DevOps Starter configure automatiquement un pipeline CI/CD dans Azure Pipelines.
 
 1. Sous le nom de votre pipeline de build, sélectionnez **Historique**. Ce volet montre une piste d’audit des modifications que vous avez apportées récemment à la build. Azure DevOps suit les modifications apportées au pipeline de build et permet de comparer les versions.
 
-1. Sélectionnez **Déclencheurs**. DevOps Starter crée automatiquement un déclencheur CI, tandis que chaque validation dans le référentiel lance une nouvelle build. Si vous le souhaitez, vous pouvez choisir d’inclure ou d’exclure des branches dans le processus CI.
+1. Sélectionnez **Déclencheurs**. DevOps Starter crée automatiquement un déclencheur CI tandis que chaque validation dans le dépôt lance une nouvelle build. Si vous le souhaitez, vous pouvez choisir d’inclure ou d’exclure des branches dans le processus CI.
 
 1. Sélectionnez **Rétention**. En fonction de votre scénario, vous pouvez spécifier des stratégies pour conserver ou supprimer un certain nombre de builds.
 
@@ -158,4 +158,4 @@ Si vous le souhaitez, vous pouvez modifier le pipeline CI/CD Azure afin qu’il 
 Pour en savoir plus sur Service Fabric et les microservices, voir :
 
 > [!div class="nextstepaction"]
-> [Utiliser une approche de microservices pour la conception d’applications](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Utiliser une approche de microservices pour la conception d’applications](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)

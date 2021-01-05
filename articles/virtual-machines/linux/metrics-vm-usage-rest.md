@@ -5,25 +5,25 @@ author: rloutlaw
 ms.service: virtual-machines
 ms.subservice: monitoring
 ms.custom: REST
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/13/2018
 ms.author: routlaw
-ms.openlocfilehash: 07e91f3d9fd32f01db91415bfd90746cd1aef403
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0a448d4b4538d62c1631cf16d88ec0a7e7f2a399
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78944755"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508031"
 ---
 # <a name="get-virtual-machine-usage-metrics-using-the-rest-api"></a>Obtenir les métriques d’utilisation d’une machine virtuelle à l’aide de l’API REST
 
-Cet exemple montre comment récupérer l’utilisation du processeur pour une [machine virtuelle Linux](https://docs.microsoft.com/azure/virtual-machines/linux/monitor) à l’aide de [l’API REST Azure](/rest/api/azure/).
+Cet exemple montre comment récupérer l’utilisation du processeur pour une machine virtuelle Linux à l’aide de [l’API REST Azure](/rest/api/azure/).
 
 Pour consulter la documentation de référence complète et d’autres exemples avec l’API REST, reportez-vous à [Informations de référence sur l’API REST Azure Monitor](/rest/api/monitor). 
 
 ## <a name="build-the-request"></a>Générer la demande
 
-Utilisez la requête GET suivante pour collecter les métriques [Pourcentage d’UC](/azure/monitoring-and-diagnostics/monitoring-supported-metrics#microsoftcomputevirtualmachines) à partir d’une machine virtuelle.
+Utilisez la requête GET suivante pour collecter les métriques [Pourcentage d’UC](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachines) à partir d’une machine virtuelle.
 
 ```http
 GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmname}/providers/microsoft.insights/metrics?api-version=2018-01-01&metricnames=Percentage%20CPU&timespan=2018-06-05T03:00:00Z/2018-06-07T03:00:00Z
@@ -42,10 +42,10 @@ Les en-têtes suivants sont requis :
 
 | Nom | Description |
 | :--- | :---------- |
-| subscriptionId | L’ID d’abonnement d’un abonnement Azure. Si vous avez plusieurs abonnements, consultez [Utilisation de plusieurs abonnements](https://docs.microsoft.com/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest). |
+| subscriptionId | L’ID d’abonnement d’un abonnement Azure. Si vous avez plusieurs abonnements, consultez [Utilisation de plusieurs abonnements](/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest). |
 | resourceGroupName | Nom du groupe de ressources Azure associé à la ressource. Vous pouvez obtenir cette valeur à partir de l’API Azure Resource Manager, de l’interface CLI ou du portail. |
 | vmname | Nom de la machine virtuelle Azure. |
-| metricnames | Liste des [métriques Load Balancer](/azure/load-balancer/load-balancer-standard-diagnostics) valides, séparées par des virgules. |
+| metricnames | Liste des [métriques Load Balancer](../../load-balancer/load-balancer-standard-diagnostics.md) valides, séparées par des virgules. |
 | api-version | Version de l’API à utiliser pour la requête.<br /><br /> Ce document aborde la version d’API `2018-01-01`, incluse dans l’URL ci-dessus.  |
 | intervalle de temps | Chaîne au format `startDateTime_ISO/endDateTime_ISO` qui définit l’intervalle de temps des métriques retournées. Ce paramètre facultatif est défini pour retourner une journée de données dans l’exemple. |
 | &nbsp; | &nbsp; |

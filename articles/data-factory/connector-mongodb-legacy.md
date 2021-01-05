@@ -1,8 +1,7 @@
 ---
 title: Copier des données à partir de MongoDB
-description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory pour copier des données de MongoDB vers des banques de données réceptrices prises en charge.
+description: Découvrez comment utiliser l’activité de copie dans un pipeline Azure Data Factory hérité pour copier des données de MongoDB vers des banques de données réceptrices prises en charge.
 services: data-factory
-documentationcenter: ''
 author: linda33wj
 ms.author: jingwang
 manager: shwang
@@ -12,14 +11,14 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019; seo-dt-2019
 ms.date: 08/12/2019
-ms.openlocfilehash: 803e34a93e8019cfc2577bfaab3ba13c409c6b01
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 7cf4be078a7bee0bedbeac4326acb9ca290cde88
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418165"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91331979"
 ---
-# <a name="copy-data-from-mongodb-using-azure-data-factory"></a>Déplacer des données de MongoDB à l’aide d’Azure Data Factory
+# <a name="copy-data-from-mongodb-using-azure-data-factory-legacy"></a>Copier des données à partir de MongoDB à l’aide d’Azure Data Factory (hérité)
 
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-on-premises-mongodb-connector.md)
@@ -66,7 +65,7 @@ Les propriétés prises en charge pour le service lié MongoDB sont les suivante
 | username |Compte d’utilisateur pour accéder à MongoDB. |Oui (si l’authentification de base est utilisée). |
 | mot de passe |Mot de passe pour l’utilisateur. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). |Oui (si l’authentification de base est utilisée). |
 | authSource |Nom de la base de données MongoDB que vous souhaitez utiliser pour vérifier vos informations d’identification pour l’authentification. |Non. Par défaut, l’authentification de base utilise le compte d’administrateur et la base de données spécifiés à l’aide de la propriété databaseName. |
-| enableSsl | Indique si les connexions au serveur sont chiffrées à l'aide du protocole TLS. La valeur par défaut est false.  | Non |
+| enableSsl | Indique si les connexions au serveur sont chiffrées à l’aide du protocole TLS. La valeur par défaut est false.  | Non |
 | allowSelfSignedServerCert | Indique si les certificats auto-signés provenant du serveur sont autorisés ou non. La valeur par défaut est false.  | Non |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
 

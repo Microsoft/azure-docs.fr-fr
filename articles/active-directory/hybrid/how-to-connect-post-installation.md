@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/26/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c204029557a73dc3f02015afb92c0fdbf0d4d50e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7d6689b4b67b8462e983ae9b111e0fbc60c422b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230181"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89657120"
 ---
 # <a name="next-steps-and-how-to-manage-azure-ad-connect"></a>Étapes suivantes et gestion d’Azure AD Connect
 Utilisez les procédures opérationnelles dans cet article pour personnaliser Azure Active Directory (Azure AD) Connect pour l’adapter aux besoins et aux spécifications de votre organisation.  
@@ -30,7 +30,7 @@ Utilisez les procédures opérationnelles dans cet article pour personnaliser Az
 Par défaut, seul l’utilisateur qui a effectué l’installation et les administrateurs locaux est en mesure de gérer le moteur de synchronisation installé. Pour que d’autres personnes puissent accéder au moteur de synchronisation et en assurer la gestion, localisez le groupe nommé ADSyncAdmins sur le serveur local et ajoutez ces personnes à ce groupe.
 
 ## <a name="assign-licenses-to-azure-ad-premium-and-enterprise-mobility-suite-users"></a>Attribution des licences aux utilisateurs Azure AD Premium et Enterprise Mobility Suite
-Maintenant que vos utilisateurs ont été synchronisés dans le cloud, vous devez leur attribuer une licence afin qu’ils puissent commencer à utiliser les applications cloud telles qu’Office 365.
+Maintenant que vos utilisateurs ont été synchronisés avec le cloud, vous devez leur attribuer une licence afin qu'ils puissent utiliser des applications cloud telles que Microsoft 365.
 
 ### <a name="to-assign-an-azure-ad-premium-or-enterprise-mobility-suite-license"></a>Pour l’attribution d’une licence Azure AD Premium ou Enterprise Mobility Suite
 

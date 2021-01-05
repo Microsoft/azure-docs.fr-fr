@@ -5,13 +5,13 @@ author: craigshoemaker
 ms.topic: reference
 ms.date: 02/18/2020
 ms.author: cshoe
-ms.custom: cc996988-fb4f-47
-ms.openlocfilehash: dd8442c00e2b7685b0dc1a7bd5150c87f2c27b7c
-ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+ms.custom: devx-track-csharp, cc996988-fb4f-47, devx-track-python
+ms.openlocfilehash: 087073437fe9d6159422799c04ce095c0aae5eca
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82891448"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96001250"
 ---
 # <a name="azure-queue-storage-output-bindings-for-azure-functions"></a>Liaisons de sortie de Stockage File d’attente Azure pour Azure Functions
 
@@ -100,6 +100,24 @@ public static void Run(
 }
 ```
 
+# <a name="java"></a>[Java](#tab/java)
+
+ L’exemple ci-après montre une fonction Java qui crée un message de file d’attente en cas de déclenchement par une requête HTTP.
+
+```java
+@FunctionName("httpToQueue")
+@QueueOutput(name = "item", queueName = "myqueue-items", connection = "MyStorageConnectionAppSetting")
+ public String pushToQueue(
+     @HttpTrigger(name = "request", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS)
+     final String message,
+     @HttpOutput(name = "response") final OutputBinding<String> result) {
+       result.setValue(message + " has been added.");
+       return message;
+ }
+```
+
+Dans la [bibliothèque runtime des fonctions Java](/java/api/overview/azure/functions/runtime), utilisez l’annotation `@QueueOutput` sur les paramètres dont la valeur serait écrite dans Stockage File d’attente.  Le type de paramètre doit être `OutputBinding<T>`, où `T` est n’importe quel type Java natif d’un POJO.
+
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 L’exemple suivant montre une liaison de déclencheur HTTP dans un fichier *function.json*, et une [fonction JavaScript](functions-reference-node.md) qui utilise la liaison. La fonction crée un élément de file d’attente pour chaque requête HTTP reçue.
@@ -149,6 +167,79 @@ module.exports = function(context) {
     context.bindings.myQueueItem = ["message 1","message 2"];
     context.done();
 };
+```
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Les exemples de code suivants montrent comment générer un message de file d’attente à partir d’une fonction déclenchée par le protocole HTTP. La section de configuration avec le `type` `queue` définit la liaison de sortie.
+
+```json
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "Request",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "name": "Msg",
+      "queueName": "outqueue",
+      "connection": "MyStorageConnectionAppSetting"
+    }
+  ]
+}
+```
+
+Avec cette configuration de liaison, une fonction PowerShell peut créer un message de file d’attente à l’aide de `Push-OutputBinding`. Dans cet exemple, un message est créé à partir d’une chaîne de requête ou d’un paramètre de corps.
+
+```powershell
+using namespace System.Net
+
+# Input bindings are passed in via param block.
+param($Request, $TriggerMetadata)
+
+# Write to the Azure Functions log stream.
+Write-Host "PowerShell HTTP trigger function processed a request."
+
+# Interact with query parameters or the body of the request.
+$message = $Request.Query.Message
+Push-OutputBinding -Name Msg -Value $message
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = 200
+    Body = "OK"
+})
+```
+
+Pour envoyer plusieurs messages à la fois, définissez un tableau de messages et utilisez `Push-OutputBinding` pour envoyer des messages à la liaison de sortie de file d’attente.
+
+```powershell
+using namespace System.Net
+
+# Input bindings are passed in via param block.
+param($Request, $TriggerMetadata)
+
+# Write to the Azure Functions log stream.
+Write-Host "PowerShell HTTP trigger function processed a request."
+
+# Interact with query parameters or the body of the request.
+$message = @("message1", "message2")
+Push-OutputBinding -Name Msg -Value $message
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = 200
+    Body = "OK"
+})
 ```
 
 # <a name="python"></a>[Python](#tab/python)
@@ -214,24 +305,6 @@ def main(req: func.HttpRequest, msg: func.Out[typing.List[str]]) -> func.HttpRes
     return 'OK'
 ```
 
-# <a name="java"></a>[Java](#tab/java)
-
- L’exemple ci-après montre une fonction Java qui crée un message de file d’attente en cas de déclenchement par une requête HTTP.
-
-```java
-@FunctionName("httpToQueue")
-@QueueOutput(name = "item", queueName = "myqueue-items", connection = "MyStorageConnectionAppSetting")
- public String pushToQueue(
-     @HttpTrigger(name = "request", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS)
-     final String message,
-     @HttpOutput(name = "response") final OutputBinding<String> result) {
-       result.setValue(message + " has been added.");
-       return message;
- }
-```
-
-Dans la [bibliothèque runtime des fonctions Java](/java/api/overview/azure/functions/runtime), utilisez l’annotation `@QueueOutput` sur les paramètres dont la valeur serait écrite dans Stockage File d’attente.  Le type de paramètre doit être `OutputBinding<T>`, où `T` est n’importe quel type Java natif d’un POJO.
-
 ---
 
 ## <a name="attributes-and-annotations"></a>Attributs et annotations
@@ -270,14 +343,6 @@ Vous pouvez utiliser l’attribut `StorageAccount` pour spécifier le compte de 
 
 Les attributs ne sont pas pris en charge par le script C#.
 
-# <a name="javascript"></a>[JavaScript](#tab/javascript)
-
-Les attributs ne sont pas pris en charge par JavaScript.
-
-# <a name="python"></a>[Python](#tab/python)
-
-Les attributs ne sont pas pris en charge par Python.
-
 # <a name="java"></a>[Java](#tab/java)
 
 L’annotation `QueueOutput` vous permet d’écrire un message de sortie d’une fonction. L’exemple suivant montre une fonction déclenchée par HTTP qui crée un message de file d’attente.
@@ -307,7 +372,19 @@ public class HttpTriggerQueueOutput {
 |`queueName`  | Déclare le nom de la file d’attente dans le compte de stockage. |
 |`connection` | Pointe vers la chaîne de connexion du compte de stockage. |
 
-Le paramètre associé à l’annotation `QueueOutput` est typée en tant qu’instance [OutputBinding\<T\>](https://github.com/Azure/azure-functions-java-library/blob/master/src/main/java/com/microsoft/azure/functions/OutputBinding.java).
+Le paramètre associé à l’annotation `QueueOutput` est tapé en tant qu’instance [OutputBinding\<T\>](https://github.com/Azure/azure-functions-java-library/blob/master/src/main/java/com/microsoft/azure/functions/OutputBinding.java).
+
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+Les attributs ne sont pas pris en charge par JavaScript.
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Les attributs ne sont pas pris en charge par PowerShell.
+
+# <a name="python"></a>[Python](#tab/python)
+
+Les attributs ne sont pas pris en charge par Python.
 
 ---
 
@@ -359,25 +436,29 @@ En C# et Script C#, écrivez plusieurs messages de file d’attente à l’aide 
 * `ICollector<T>` ou `IAsyncCollector<T>`
 * [CloudQueue](/dotnet/api/microsoft.azure.storage.queue.cloudqueue)
 
+# <a name="java"></a>[Java](#tab/java)
+
+Il existe deux options pour produire en sortie un message File d’attente à partir d’une fonction en utilisant l’annotation [QueueOutput](/java/api/com.microsoft.azure.functions.annotation.queueoutput) :
+
+- **Valeur de retour** : En appliquant l’annotation à la fonction elle-même, la valeur renvoyée de la fonction est conservée sous la forme d’un message File d’attente.
+
+- **Impératif** : Pour définir explicitement la valeur du message, appliquez l’annotation à un paramètre spécifique du type [`OutputBinding<T>`](/java/api/com.microsoft.azure.functions.outputbinding), où `T` est un POJO ou n’importe quel type Java natif. Avec cette configuration, le passage d’une valeur à la méthode `setValue` rend la valeur persistante en tant que message File d’attente.
+
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 L’élément de la file d’attente en sortie est disponible via `context.bindings.<NAME>`, où `<NAME>` correspond au nom défini dans *function.json*. Vous pouvez utiliser une chaîne ou un objet sérialisable JSON pour la charge utile de l’élément de file d’attente.
 
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+La sortie dans le message de file d’attente est disponible via `Push-OutputBinding`, où vous transmettez les arguments qui correspondent au nom désigné par le paramètre `name` de la liaison dans le fichier *function.json*.
+
 # <a name="python"></a>[Python](#tab/python)
 
-Il existe deux options pour produire en sortie un message Event Hub à partir d’une fonction :
+Il existe deux options pour produire en sortie un message File d’attente à partir d’une fonction :
 
 - **Valeur de retour** : Définissez la propriété `name` dans *function.json* sur `$return`. Avec cette configuration, la valeur de retour de la fonction est conservée sous la forme d’un message de Stockage File d’attente.
 
-- **Impératif** : Passez une valeur à la méthode [set](https://docs.microsoft.com/python/api/azure-functions/azure.functions.out?view=azure-python#set-val--t-----none) du paramètre déclaré en tant que type [Out](https://docs.microsoft.com/python/api/azure-functions/azure.functions.out?view=azure-python). La valeur passée à `set` est conservée en tant que message de Stockage File d’attente.
-
-# <a name="java"></a>[Java](#tab/java)
-
-Il existe deux options pour produire en sortie un message Event hub à partir d’une fonction en utilisant l’annotation [QueueOutput](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation.queueoutput) :
-
-- **Valeur de retour** : En appliquant l’annotation à la fonction elle-même, la valeur de retour de la fonction est conservée sous la forme d’un message Event Hub.
-
-- **Impératif** : Pour définir explicitement la valeur du message, appliquez l’annotation à un paramètre spécifique du type [`OutputBinding<T>`](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.OutputBinding), où `T` est un POJO ou n’importe quel type Java natif. Avec cette configuration, le passage d’une valeur à la méthode `setValue` rend la valeur persistante en tant que message Event Hub.
+- **Impératif** : Passez une valeur à la méthode [set](/python/api/azure-functions/azure.functions.out?view=azure-python&preserve-view=true#set-val--t-----none) du paramètre déclaré en tant que type [Out](/python/api/azure-functions/azure.functions.out?view=azure-python&preserve-view=true). La valeur passée à `set` est conservée en tant que message de Stockage File d’attente.
 
 ---
 
@@ -385,9 +466,9 @@ Il existe deux options pour produire en sortie un message Event hub à partir d�
 
 | Liaison |  Informations de référence |
 |---|---|
-| File d'attente | [Codes d’erreur de file d’attente](https://docs.microsoft.com/rest/api/storageservices/queue-service-error-codes) |
-| Objet blob, Table, File d’attente | [Codes d’erreur de stockage](https://docs.microsoft.com/rest/api/storageservices/fileservices/common-rest-api-error-codes) |
-| Objet blob, Table, File d’attente |  [Dépannage](https://docs.microsoft.com/rest/api/storageservices/fileservices/troubleshooting-api-operations) |
+| File d'attente | [Codes d’erreur de file d’attente](/rest/api/storageservices/queue-service-error-codes) |
+| Objet blob, Table, File d’attente | [Codes d’erreur de stockage](/rest/api/storageservices/fileservices/common-rest-api-error-codes) |
+| Objet blob, Table, File d’attente |  [Dépannage](/rest/api/storageservices/fileservices/troubleshooting-api-operations) |
 
 <a name="host-json"></a>  
 

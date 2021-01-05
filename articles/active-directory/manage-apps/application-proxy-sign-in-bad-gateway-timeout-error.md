@@ -3,25 +3,25 @@ title: Impossible d’accéder à cette erreur d’application d’entreprise av
 description: Comment résoudre les problèmes d’accès courants avec les applications Proxy d’application Azure AD.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.assetid: ''
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 05/21/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3d61f4b4bce9b8287dc13237f071684ea5d135fa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0339e9f7688555b4d99c2d3255461b5675f642ff
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74275465"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94649549"
 ---
 # <a name="cant-access-this-corporate-application-error-when-using-an-application-proxy-application"></a>Erreur « Impossible d’accéder à cette application d’entreprise » lors de l’utilisation d’une application Proxy d’application
 
@@ -35,7 +35,7 @@ Lorsque vous voyez cette erreur, recherchez le code d’état indiqué dans la p
 - **Passerelle incorrecte** : le connecteur ne peut pas atteindre l’application back-end. Cette erreur peut indiquer une configuration incorrecte de l’application.
 - **Interdit** : l’utilisateur n’est pas autorisé à accéder à l’application. Cette erreur peut se produire si l’utilisateur n’est pas affecté à l’application dans Azure Active Directory ou s’il n’est pas autorisé à accéder à l’application sur le backend.
 
-Pour trouver le code, examinez le champ « Code d’état » situé en bas à gauche du message d’erreur. Recherchez également d’éventuels conseils supplémentaires au bas de la page.
+Pour trouver le code, examinez le champ « Code d’état » situé en bas à gauche du message d’erreur. Recherchez également d’éventuels conseils supplémentaires au bas de la page.
 
 ![Exemple : Erreur liée au dépassement du délai de la passerelle](./media/application-proxy-sign-in-bad-gateway-timeout-error/connection-problem.png)
 
@@ -50,7 +50,7 @@ Un dépassement du délai de la passerelle se produit quand le service ne peut p
 Une passerelle incorrecte indique que le connecteur ne peut pas atteindre l’application back-end. Vérifiez que vous avez publié la bonne l’application. Les erreurs courantes à l’origine de ce problème sont :
 
 - Faute de frappe ou erreur dans l’URL interne
-- Non-publication de la racine de l’application Par exemple, publication de <http://expenses/reimbursement> lors d’une tentative d’accès à <http://expenses>
+- Non-publication de la racine de l’application Par exemple, publication de `http://expenses/reimbursement` lors d’une tentative d’accès à `http://expenses`
 - Problèmes liés à la configuration de la délégation Kerberos contrainte
 - Problèmes liés à l’application back-end
 
@@ -71,23 +71,23 @@ La première chose à faire consiste à vérifier l’URL interne et à la corri
 Pour vérifier que l’application est affectée à un groupe de connecteurs opérationnel :
 
 1. Ouvrez l’application dans le portail. Pour cela, accédez à **Azure Active Directory**, cliquez sur **Applications d’entreprise**, puis sur **Toutes les applications**. Ouvrez l’application, puis sélectionnez **Proxy d’application** dans le menu gauche.
-1. Examinez le champ Groupe de connecteurs. Si le groupe ne comprend aucun connecteur actif, un avertissement s’affiche. Si vous ne voyez aucun avertissement, passez à la vérification de l’autorisation de tous les ports nécessaires.
+1. Examinez le champ Groupe de connecteurs. Si le groupe ne comprend aucun connecteur actif, un avertissement s’affiche. Si vous ne voyez aucun avertissement, passez à la vérification de l’autorisation de tous les [ports nécessaires](application-proxy-add-on-premises-application.md).
 1. Si le mauvais groupe de connecteurs apparaît, utilisez la liste déroulante pour sélectionner le bon groupe et vérifiez l’absence d’avertissements. Si le groupe de connecteurs souhaité apparaît, cliquez sur le message de l’avertissement pour ouvrir la page dans l’outil de gestion des connecteurs.
 1. À partir de là, plusieurs options s’offrent à vous :
 
-   - Déplacer un connecteur actif dans le groupe : si vous avez un connecteur actif qui doit appartenir à ce groupe et qui dispose d’une visibilité directe sur l’application back-end cible, vous pouvez déplacer le connecteur dans le groupe affecté. Pour cela, cliquez sur le connecteur. Dans le champ « Groupe de connecteurs », utilisez la liste déroulante pour sélectionner le groupe approprié, puis cliquez sur Enregistrer.
-   - Télécharger un nouveau connecteur pour ce groupe : cette page contient un lien pour [télécharger un nouveau connecteur](https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/Download). Installez le connecteur sur une machine avec une ligne de vue directe sur l’application backend. En règle générale, le connecteur est installé sur le même serveur que l’application. Utilisez le lien Télécharger le connecteur pour télécharger un connecteur sur l’ordinateur cible. Cliquez ensuite sur le connecteur, puis utilisez la liste déroulante « Groupe de connecteurs » pour vérifier qu’il appartient au bon groupe.
+   - Déplacer un connecteur actif dans le groupe : si vous avez un connecteur actif qui doit appartenir à ce groupe et qui dispose d’une visibilité directe sur l’application back-end cible, vous pouvez déplacer le connecteur dans le groupe affecté. Pour cela, cliquez sur le connecteur. Dans le champ « Groupe de connecteurs », utilisez la liste déroulante pour sélectionner le groupe approprié, puis cliquez sur Enregistrer.
+   - Télécharger un nouveau connecteur pour ce groupe : cette page contient un lien pour [télécharger un nouveau connecteur](https://download.msappproxy.net/Subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/Connector/Download). Installez le connecteur sur une machine avec une ligne de vue directe sur l’application backend. En règle générale, le connecteur est installé sur le même serveur que l’application. Utilisez le lien Télécharger le connecteur pour télécharger un connecteur sur l’ordinateur cible. Cliquez ensuite sur le connecteur, puis utilisez la liste déroulante « Groupe de connecteurs » pour vérifier qu’il appartient au bon groupe.
    - Résoudre le problème d’un connecteur inactif : si un connecteur est répertorié comme étant inactif, il ne peut pas atteindre le service. Cette erreur vient généralement du fait que certains ports nécessaires sont bloqués. Pour résoudre ce problème, passez à la vérification de l’autorisation de tous les ports nécessaires.
 
 Après avoir suivi ces étapes pour vérifier que l’application est affectée à un groupe comprenant des connecteurs opérationnels, retestez l’application. Si elle ne fonctionne toujours pas, passez à la section suivante.
 
 ## <a name="check-all-required-ports-are-open"></a>Vérifier que tous les ports nécessaires sont ouverts
 
-Pour vérifier que tous les ports nécessaires sont ouverts, consultez la documentation sur l’ouverture des ports. Si tous les ports nécessaires sont ouverts, passez à la section suivante.
+Vérifiez que tous les ports nécessaires sont ouverts. Pour connaître les ports obligatoires, consultez la section ports ouverts du [Didacticiel : Ajouter une application locale pour un accès à distance via le service Proxy d’application d’Azure Active Directory](application-proxy-add-on-premises-application.md). Si tous les ports nécessaires sont ouverts, passez à la section suivante.
 
 ## <a name="check-for-other-connector-errors"></a>Rechercher d’autres erreurs liées aux connecteurs
 
-Si aucune des procédures précédentes ne résout le problème, l’étape suivante consiste à rechercher des problèmes ou des erreurs liés au connecteur proprement dit. Certaines erreurs courantes sont répertoriées dans le [document de dépannage](https://docs.microsoft.com/azure/active-directory/active-directory-application-proxy-troubleshoot#connector-errors).
+Si aucune des procédures précédentes ne résout le problème, l’étape suivante consiste à rechercher des problèmes ou des erreurs liés au connecteur proprement dit. Certaines erreurs courantes sont répertoriées dans le [document de dépannage](./application-proxy-troubleshoot.md#connector-errors).
 
 Vous pouvez également consulter directement les journaux d’activité du connecteur pour identifier d’éventuelles erreurs. De nombreux messages d’erreur partagent des recommandations spécifiques pour y remédier. Pour voir les journaux d’activité, consultez la [documentation sur les connecteurs](application-proxy-connectors.md#under-the-hood).
 

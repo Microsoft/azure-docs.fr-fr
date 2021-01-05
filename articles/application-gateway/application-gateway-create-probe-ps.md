@@ -5,15 +5,15 @@ description: Apprenez à créer une sonde personnalisée pour la passerelle Appl
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/14/2019
+ms.topic: how-to
+ms.date: 07/09/2020
 ms.author: victorh
-ms.openlocfilehash: f720a94d3467ce15ea5d58a8ece6de2a669f6258
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 63f4b28915a932398e5417f8ea9be3fe4d68e705
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81312583"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397839"
 ---
 # <a name="create-a-custom-probe-for-azure-application-gateway-by-using-powershell-for-azure-resource-manager"></a>Création d'une sonde personnalisée pour Azure Application Gateway avec PowerShell pour Azure Resource Manager
 
@@ -197,5 +197,4 @@ DnsSettings              : {
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Apprenez à configurer le déchargement TLS en consultant : [Configurer le déchargement TLS](application-gateway-ssl-arm.md)
-
+Apprenez à configurer le déchargement TLS en consultant : [Configurer le déchargement TLS](./tutorial-ssl-powershell.md)

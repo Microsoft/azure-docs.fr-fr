@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 11/13/2019
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: e07fc34c7177e3a1dace34ab298b64dc3aa6a06a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 5731b65892877e5c363220d84a0bddeb5f958cee
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74011363"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93396870"
 ---
 # <a name="tutorial-create-an-application-gateway-that-improves-web-application-access"></a>Tutoriel : Créer une passerelle d'application qui améliore l'accès aux applications web
 
@@ -36,7 +36,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Pour ce didacticiel, vous devez exécuter Azure PowerShell localement. Le module Azure PowerShell 1.0.0 ou version ultérieure doit être installé. Exécutez `Get-Module -ListAvailable Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps). Après avoir vérifié la version PowerShell, exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
+Pour ce didacticiel, vous devez exécuter Azure PowerShell localement. Le module Azure PowerShell 1.0.0 ou version ultérieure doit être installé. Exécutez `Get-Module -ListAvailable Az` pour trouver la version. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-az-ps). Après avoir vérifié la version PowerShell, exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -58,7 +58,7 @@ New-AzResourceGroup -Name $rg -Location $location
 
 ## <a name="create-a-self-signed-certificate"></a>Créer un certificat auto-signé
 
-Dans un environnement de production, vous devez importer un certificat valide signé par un fournisseur approuvé. Pour ce didacticiel, vous créez un certificat auto-signé à l’aide de [New-SelfSignedCertificate](https://docs.microsoft.com/powershell/module/pkiclient/new-selfsignedcertificate). Vous pouvez utiliser [Export-PfxCertificate](https://docs.microsoft.com/powershell/module/pkiclient/export-pfxcertificate) avec l’empreinte numérique qui a été retournée pour exporter un fichier pfx du certificat.
+Dans un environnement de production, vous devez importer un certificat valide signé par un fournisseur approuvé. Pour ce didacticiel, vous créez un certificat auto-signé à l’aide de [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate). Vous pouvez utiliser [Export-PfxCertificate](/powershell/module/pkiclient/export-pfxcertificate) avec l’empreinte numérique qui a été retournée pour exporter un fichier pfx du certificat.
 
 ```powershell
 New-SelfSignedCertificate `

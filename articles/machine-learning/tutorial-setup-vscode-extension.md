@@ -1,22 +1,22 @@
 ---
-title: 'Tutoriel : Configurer l’extension Visual Studio Code'
+title: 'Tutoriel : Configurer l’extension Visual Studio Code (préversion)'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment configurer l’extension Azure Machine Learning de Visual Studio Code.
+description: Découvrez comment installer et exécuter des scripts d’entraînement à l’aide de l’extension Azure Machine Learning de Visual Studio Code.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: tutorial
 author: luisquintanilla
 ms.author: luquinta
-ms.date: 04/13/2020
-ms.openlocfilehash: 731ab18346ac9f100862174312c2c9950026f1eb
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.date: 11/16/2020
+ms.openlocfilehash: f485c12bf82dde798a77175a3fab4d76488150c3
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81272908"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94701199"
 ---
-# <a name="set-up-azure-machine-learning-visual-studio-code-extension"></a>Configurer l’extension Azure Machine Learning de Visual Studio Code
+# <a name="set-up-azure-machine-learning-visual-studio-code-extension-preview"></a>Configurer l’extension Azure Machine Learning de Visual Studio Code (préversion)
 
 Découvrez comment installer et exécuter des scripts à l’aide de l’extension Azure Machine Learning de Visual Studio Code.
 
@@ -69,6 +69,9 @@ Maintenant que vous êtes connecté à Azure avec vos informations d’identific
 
 1. Une fois la palette de commandes développée, suivez les invites.
 
+    > [!NOTE]
+    > Si vous avez déjà provisionné des ressources Azure Machine Learning, consultez [Exécuter des expériences dans le guide VS Code](./how-to-manage-resources-vscode.md#run-experiment).
+
     1. Sélectionnez votre abonnement Azure.
     1. Dans la liste des environnements, sélectionnez **Fichier de dépendances Conda**.
     1. Appuyez sur **Entrée** pour parcourir le fichier de dépendances Conda. Ce fichier contient les dépendances nécessaires pour exécuter votre script. En l’occurrence, le fichier de dépendances est le fichier `env.yml` dans le répertoire `mnist-vscode-docs-sample`.
@@ -78,18 +81,18 @@ Maintenant que vous êtes connecté à Azure avec vos informations d’identific
 
     ```json
     {
-        "workspace": "WS04131142",
-        "resourceGroup": "WS04131142-rg1",
+        "workspace": "WS06271500",
+        "resourceGroup": "WS06271500-rg2",
         "location": "South Central US",
-        "experiment": "WS04131142-exp1",
+        "experiment": "WS06271500-exp1",
         "compute": {
-            "name": "WS04131142-com1",
+            "name": "WS06271500-com1",
             "vmSize": "Standard_D1_v2, Cores: 1; RAM: 3.5GB;"
         },
         "runConfiguration": {
-            "filename": "WS04131142-com1-rc1",
+            "filename": "WS06271500-com1-rc1",
             "environment": {
-                "name": "WS04131142-env1",
+                "name": "WS06271500-env1",
                 "conda_dependencies": [
                     "python=3.6.2",
                     "tensorflow=1.15.0",

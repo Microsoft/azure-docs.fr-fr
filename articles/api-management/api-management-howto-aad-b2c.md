@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: b8215cd852d54283bfc6bd47e77d7d63ee4e2582
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7b586edd7adce8bcea61419005a3ce8cfc814fb3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79475491"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013540"
 ---
 # <a name="how-to-authorize-developer-accounts-by-using-azure-active-directory-b2c-in-azure-api-management"></a>Comment autoriser des comptes de développeurs avec Azure Active Directory B2C dans Gestion des API Azure
 
@@ -182,25 +182,25 @@ Le widget **Formulaire d’inscription : OAuth** représente un formulaire util
 [api-management-groups]: ./media/api-management-howto-aad/api-management-groups.png
 [api-management-edit-group]: ./media/api-management-howto-aad/api-management-edit-group.png
 
-[How to add operations to an API]: api-management-howto-add-operations.md
+[How to add operations to an API]: ./mock-api-responses.md
 [How to add and publish a product]: api-management-howto-add-products.md
 [Monitoring and analytics]: api-management-monitoring.md
 [Add APIs to a product]: api-management-howto-add-products.md#add-apis
 [Publish a product]: api-management-howto-add-products.md#publish-product
 [Get started with Azure API Management]: get-started-create-service-instance.md
-[API Management policy reference]: api-management-policy-reference.md
-[Caching policies]: api-management-policy-reference.md#caching-policies
+[API Management policy reference]: ./api-management-policies.md
+[Caching policies]: ./api-management-policies.md#caching-policies
 [Create an API Management service instance]: get-started-create-service-instance.md
 
 [https://oauth.net/2/]: https://oauth.net/2/
 [WebApp-GraphAPI-DotNet]: https://github.com/AzureADSamples/WebApp-GraphAPI-DotNet
-[Vue d’ensemble d’Azure Active Directory B2C]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-overview
-[Comment autoriser des comptes de développeurs avec Azure Active Directory]: https://docs.microsoft.com/azure/api-management/api-management-howto-aad
-[Azure Active Directory B2C : Structure de stratégie extensible]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-reference-policies
-[Utiliser un compte Microsoft comme fournisseur d’identité dans Azure Active Directory B2C]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-setup-msa-app
-[Utiliser un compte Google comme fournisseur d’identité dans Azure Active Directory B2C]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-setup-goog-app
-[Utiliser un compte Facebook comme fournisseur d’identité dans Azure Active Directory B2C]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-setup-fb-app
-[Utiliser un compte LinkedIn comme fournisseur d’identité dans Azure Active Directory B2C]: https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-setup-li-app
+[Vue d’ensemble d’Azure Active Directory B2C]: ../active-directory-b2c/overview.md
+[Comment autoriser des comptes de développeurs avec Azure Active Directory]: ./api-management-howto-aad.md
+[Azure Active Directory B2C : Structure de stratégie extensible]: ../active-directory-b2c/user-flow-overview.md
+[Utiliser un compte Microsoft comme fournisseur d’identité dans Azure Active Directory B2C]: ../active-directory-b2c/identity-provider-microsoft-account.md
+[Utiliser un compte Google comme fournisseur d’identité dans Azure Active Directory B2C]: ../active-directory-b2c/identity-provider-google.md
+[Utiliser un compte Facebook comme fournisseur d’identité dans Azure Active Directory B2C]: ../active-directory-b2c/identity-provider-facebook.md
+[Utiliser un compte LinkedIn comme fournisseur d’identité dans Azure Active Directory B2C]: ../active-directory-b2c/identity-provider-linkedin.md
 
 [Prerequisites]: #prerequisites
 [Configure an OAuth 2.0 authorization server in API Management]: #step1

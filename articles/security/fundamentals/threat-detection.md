@@ -1,6 +1,6 @@
 ---
 title: Détection avancée des menaces Azure | Microsoft Docs
-description: En savoir plus sur Azure AD Identity Protection et ses fonctionnalités.
+description: Découvrez les fonctionnalités de détection avancée des menaces intégrées pour Azure, telles que le service Azure Active Directory Identity Protection.
 services: security
 documentationcenter: na
 author: UnifyCloud
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2017
 ms.author: TomSh
-ms.openlocfilehash: 43a5360965c13df3227ecbc0c716327346244ebd
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: b9770a43309f5471760dc2482833e4bab45c6f5b
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83653626"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94409924"
 ---
 # <a name="azure-advanced-threat-detection"></a>Détection avancée des menaces Azure
 
@@ -30,7 +30,7 @@ Azure propose un large choix d’options pour configurer et personnaliser la sé
 
 ## <a name="azure-active-directory-identity-protection"></a>Azure Active Directory Identity Protection
 
-[Azure AD Identity Protection](../../active-directory/identity-protection/overview.md) est une fonctionnalité de l'édition [Azure AD Premium P2](../../active-directory/active-directory-whatis.md) qui offre une vue d'ensemble des détections à risque et des vulnérabilités potentielles auxquelles sont exposées les identités de votre organisation. Identity Protection tire parti des fonctionnalités existantes de détection des anomalies d'Azure AD (disponibles via les [rapports d'activités anormales d'Azure AD](../../active-directory/active-directory-reporting-azure-portal.md)) et introduit de nouveaux types de détections à risque capables de repérer les anomalies en temps réel.
+[Azure AD Identity Protection](../../active-directory/identity-protection/overview-identity-protection.md) est une fonctionnalité de l'édition [Azure AD Premium P2](../../active-directory/fundamentals/active-directory-whatis.md) qui offre une vue d'ensemble des détections à risque et des vulnérabilités potentielles auxquelles sont exposées les identités de votre organisation. Identity Protection tire parti des fonctionnalités existantes de détection des anomalies d'Azure AD (disponibles via les [rapports d'activités anormales d'Azure AD](../../active-directory/reports-monitoring/overview-reports.md)) et introduit de nouveaux types de détections à risque capables de repérer les anomalies en temps réel.
 
 ![Diagramme Azure AD Identity Protection](./media/threat-detection/azure-threat-detection-fig1.png)
 
@@ -38,7 +38,7 @@ Identity Protection s'appuie sur des algorithmes d'apprentissage automatique ada
 
 Mais Azure Active Directory Identity Protection est bien plus qu’un outil de surveillance et de création de rapports. Sur la base des détections à risque, Identity Protection calcule le niveau de risque pour chaque utilisateur, ce qui vous permet de configurer des stratégies basées sur les risques afin de protéger automatiquement les identités de votre organisation.
 
-Ces stratégies basées sur les risques, en plus des autres [contrôles d’accès conditionnel](../../active-directory/active-directory-conditional-access-azure-portal.md) fournis par Azure Active Directory et [EMS](../../active-directory/active-directory-conditional-access-azure-portal.md), peuvent automatiquement bloquer l’accès ou appliquer des mesures de correction adaptatives qui incluent des réinitialisations de mot de passe et la mise en œuvre de l’authentification multifacteur.
+Ces stratégies basées sur les risques, en plus des autres [contrôles d’accès conditionnel](../../active-directory/conditional-access/overview.md) fournis par Azure Active Directory et [EMS](../../active-directory/conditional-access/overview.md), peuvent automatiquement bloquer l’accès ou appliquer des mesures de correction adaptatives qui incluent des réinitialisations de mot de passe et la mise en œuvre de l’authentification multifacteur.
 
 ### <a name="identity-protection-capabilities"></a>Fonctionnalités d’Identity Protection
 
@@ -46,31 +46,31 @@ Mais Azure Active Directory Identity Protection est bien plus qu’un outil de s
 
 Exemples de méthodes qu’utilise Azure Identity Protection pour vous aider à sécuriser vos comptes et identités :
 
-[Repérage des détections et des comptes à risque](../../active-directory/identity-protection/overview.md)
+[Repérage des détections et des comptes à risque](../../active-directory/identity-protection/overview-identity-protection.md)
 -   Repérez six types de détections à risque à l'aide de l'apprentissage automatique et des règles heuristiques.
 -   Calculez le niveau de risque des utilisateurs.
 -   Fournissez des recommandations personnalisées visant à améliorer la posture de sécurité globale en mettant en évidence les vulnérabilités.
 
-[Examen des détections à risque](../../active-directory/identity-protection/overview.md)
+[Examen des détections à risque](../../active-directory/identity-protection/overview-identity-protection.md)
 -   Envoyez des notifications pour les détections à risque.
 -   Examinez des détections à risque à l'aide d'informations contextuelles et pertinentes.
 -   Fournissez des workflows de base pour le suivi des investigations.
 -   Fournissez un accès rapide à des mesures de correction telles que la réinitialisation de mot de passe.
 
-[Stratégies d’accès conditionnel en fonction des risques](../../active-directory/identity-protection/overview.md)
+[Stratégies d’accès conditionnel en fonction des risques](../../active-directory/identity-protection/overview-identity-protection.md)
 -   Atténuez les connexions à risque en bloquant les connexions ou en imposant des demandes d’authentification multifacteur.
 -   Bloquez ou sécurisez les comptes d’utilisateurs à risque.
 -   Exigez que les utilisateurs s’inscrivent à l’authentification multifacteur.
 
 ### <a name="azure-ad-privileged-identity-management"></a>Azure AD Privileged Identity Management
 
-Avec [Azure Active Directory Privileged Identity Management (PIM)](../../active-directory/privileged-identity-management/pim-configure.md), vous pouvez gérer, contrôler et surveiller l’accès au sein de votre organisation. Cette fonctionnalité inclut l’accès aux ressources dans Azure AD et d’autres services en ligne Microsoft comme Office 365 ou Microsoft Intune.
+Avec [Azure Active Directory Privileged Identity Management (PIM)](../../active-directory/privileged-identity-management/pim-configure.md), vous pouvez gérer, contrôler et surveiller l’accès au sein de votre organisation. Cette fonctionnalité inclut l'accès aux ressources d'Azure AD et d'autres services en ligne Microsoft comme Microsoft 365 ou Microsoft Intune.
 
 ![Diagramme Azure AD Privileged Identity Management](./media/threat-detection/azure-threat-detection-fig2.png)
 
 PIM vous permet de :
 
--   Recevoir une alerte et un rapport sur les administrateurs Azure AD et de bénéficier d’un accès administratif « juste à temps » aux services Microsoft Online Services comme Office 365 et Intune.
+-   Recevoir une alerte et un rapport sur les administrateurs Azure AD, et de bénéficier d'un accès administratif « juste à temps » (JIT) aux services Microsoft Online Services comme Microsoft 365 et Intune.
 
 -   Obtenir des rapports sur l'historique des accès administrateur et sur les modifications apportées aux affectations de l'administrateur.
 
@@ -80,11 +80,11 @@ PIM vous permet de :
 
 Les [journaux Azure Monitor](../../azure-monitor/index.yml) sont une solution Microsoft de gestion informatique basée sur le cloud qui vous permet de gérer et protéger votre infrastructure locale et cloud. Les journaux Azure Monitor étant implémentés sous la forme d’un service informatique, ils peuvent être opérationnels rapidement, avec un investissement minimal en services d’infrastructure. Les nouvelles fonctionnalités de sécurité sont fournies automatiquement, ce qui vous permet d’économiser sur les coûts de mise à niveau et de maintenance.
 
-En plus de fournir de précieux services de manière autonome, les journaux Azure Monitor peuvent s’intégrer à des composants System Center tels que [System Center Operations Manager](https://blogs.technet.microsoft.com/cbernier/2013/10/23/monitoring-windows-azure-with-system-center-operations-manager-2012-get-me-started/), afin d’étendre dans le cloud vos investissements existants en matière de gestion de la sécurité. System Center et les journaux Azure Monitor peuvent fonctionner ensemble pour fournir une expérience de gestion hybride.
+En plus de fournir de précieux services de manière autonome, les journaux Azure Monitor peuvent s’intégrer à des composants System Center tels que [System Center Operations Manager](/archive/blogs/cbernier/monitoring-windows-azure-with-system-center-operations-manager-2012-get-me-started), afin d’étendre dans le cloud vos investissements existants en matière de gestion de la sécurité. System Center et les journaux Azure Monitor peuvent fonctionner ensemble pour fournir une expérience de gestion hybride.
 
 ### <a name="holistic-security-and-compliance-posture"></a>Approche globale de la sécurité et de la conformité
 
-Le [tableau de bord Log Analytics Security and Audit](../../security-center/security-center-intro.md) offre une vue détaillée de la sécurité informatique de votre organisation. Elle fournit des requêtes de recherche intégrées pour détecter les problèmes importants qui requièrent votre attention. Le tableau de bord Security and Audit est l’écran d’accueil pour tout ce qui se rapporte à la sécurité dans les journaux Azure Monitor. Il fournit un aperçu global de l’état de sécurité de vos ordinateurs. Vous pouvez également voir tous les événements des dernières 24 heures, des 7 derniers jours ou de n’importe quel intervalle de temps personnalisé.
+Le [tableau de bord Log Analytics Security and Audit](../../security-center/security-center-introduction.md) offre une vue détaillée de la sécurité informatique de votre organisation. Elle fournit des requêtes de recherche intégrées pour détecter les problèmes importants qui requièrent votre attention. Le tableau de bord Security and Audit est l’écran d’accueil pour tout ce qui se rapporte à la sécurité dans les journaux Azure Monitor. Il fournit un aperçu global de l’état de sécurité de vos ordinateurs. Vous pouvez également voir tous les événements des dernières 24 heures, des 7 derniers jours ou de n’importe quel intervalle de temps personnalisé.
 
 Les journaux Azure Monitor vous permettent de comprendre rapidement et facilement les conditions de sécurité globales de n’importe quel environnement, dans le contexte des opérations informatiques, notamment : évaluation des mises à jour logicielles, évaluation des logiciels anti-programmes malveillants et référentiels de configuration. Les données des journaux de sécurité sont facilement accessibles afin de rationaliser les processus d’audit de sécurité et de conformité.
 
@@ -92,18 +92,18 @@ Les journaux Azure Monitor vous permettent de comprendre rapidement et facilemen
 
 Le tableau de bord Log Analytics Security and Audit est organisé en quatre catégories principales :
 
--   **Domaines de sécurité** : vous permet d’explorer plus en détail les enregistrements de sécurité au fil du temps, d’accéder à l’évaluation des programmes malveillants, de mettre à jour les évaluations, d’afficher la sécurité du réseau ainsi que les informations d’identité et d’accès, de consulter les ordinateurs présentant des événements de sécurité et d’accéder rapidement au tableau de bord d’Azure Security Center.
+-   **Domaines de sécurité**  : vous permet d’explorer plus en détail les enregistrements de sécurité au fil du temps, d’accéder à l’évaluation des programmes malveillants, de mettre à jour les évaluations, d’afficher la sécurité du réseau ainsi que les informations d’identité et d’accès, de consulter les ordinateurs présentant des événements de sécurité et d’accéder rapidement au tableau de bord d’Azure Security Center.
 
--   **Problèmes importants** : vous permet d’identifier rapidement le nombre de problèmes actifs et leur gravité.
+-   **Problèmes importants**  : vous permet d’identifier rapidement le nombre de problèmes actifs et leur gravité.
 
 -   **Détections (préversion)**  : vous permet d’identifier les modèles d’attaques en affichant les alertes de sécurité au fur et à mesure qu’elles affectent vos ressources.
 
--   **Informations sur les menaces** : vous permet d’identifier les modèles d’attaques en affichant le nombre total de serveurs présentant un trafic IP sortant malveillant, le type de menace malveillante et une carte indiquant l’emplacement de ces adresses IP.
+-   **Informations sur les menaces**  : vous permet d’identifier les modèles d’attaques en affichant le nombre total de serveurs présentant un trafic IP sortant malveillant, le type de menace malveillante et une carte indiquant l’emplacement de ces adresses IP.
 
--   **Requêtes de sécurité courantes** : liste les requêtes de sécurité les plus courantes que vous pouvez utiliser pour superviser votre environnement. Lorsque vous sélectionnez une requête, le volet Recherche s’ouvre et affiche les résultats de cette requête.
+-   **Requêtes de sécurité courantes**  : liste les requêtes de sécurité les plus courantes que vous pouvez utiliser pour superviser votre environnement. Lorsque vous sélectionnez une requête, le volet Recherche s’ouvre et affiche les résultats de cette requête.
 
 ### <a name="insight-and-analytics"></a>Avis et analyses
-Au cœur des [journaux Azure Monitor](../../log-analytics/log-analytics-queries.md) se trouve le référentiel qui est hébergé par Azure.
+Au cœur des [journaux Azure Monitor](../../azure-monitor/log-query/log-query-overview.md) se trouve le référentiel qui est hébergé par Azure.
 
 ![Diagramme Insight et Analytics](./media/threat-detection/azure-threat-detection-fig4.png)
 
@@ -115,9 +115,9 @@ Les sources de données et les solutions créent chacune différents types d'enr
 
 
 La plupart de vos interactions avec les journaux Azure Monitor s’effectuent via le portail Azure qui s’exécute dans un navigateur et vous fournit un accès aux paramètres de configuration et à plusieurs outils pour analyser les données collectées et agir sur celles-ci. À partir du portail, vous pouvez utiliser :
-* [Recherche dans les journaux](../../log-analytics/log-analytics-queries.md) où vous avez élaboré des requêtes pour analyser des données collectées.
+* [Recherche dans les journaux](../../azure-monitor/log-query/log-query-overview.md) où vous avez élaboré des requêtes pour analyser des données collectées.
 * [Tableaux de bord](../../azure-monitor/learn/tutorial-logs-dashboards.md), que vous pouvez personnaliser avec des vues graphiques de vos recherches les plus précieuses.
-* [Solutions](../../monitoring/monitoring-solutions.md), qui fournissent des outils d’analyse et des fonctionnalités supplémentaires.
+* [Solutions](../../azure-monitor/insights/solutions.md), qui fournissent des outils d’analyse et des fonctionnalités supplémentaires.
 
 ![Outils d’analyse](./media/threat-detection/azure-threat-detection-fig6.png)
 
@@ -155,21 +155,21 @@ Azure Security Center emploie des analyses de sécurité avancées allant bien a
 
 Microsoft dispose d’une multitude d’informations en matière de menaces à l’échelle mondiale.
 
-La télémétrie provient de plusieurs sources, telles qu’Azure, Office 365, Microsoft CRM Online, Microsoft Dynamics AX, outlook.com, MSN.com, Microsoft Digital Crimes Unit (DCU) et Microsoft Security Response Center (MSRC).
+La télémétrie provient de plusieurs sources, telles qu’Azure, Microsoft 365, Microsoft CRM Online, Microsoft Dynamics AX, outlook.com, MSN.com, Microsoft Digital Crimes Unit (DCU) et Microsoft Security Response Center (MSRC).
 
 ![Découvertes d’informations sur les menaces](./media/threat-detection/azure-threat-detection-fig10.jpg)
 
 Les chercheurs reçoivent également les informations sur les menaces partagées par les principaux fournisseurs de services cloud et s’abonnent aux flux d’informations sur les menaces provenant de tiers. Azure Security Center peut utiliser ces informations pour vous alerter en cas de menaces provenant d’éléments malveillants connus. Voici quelques exemples :
 
--   **Exploitation de la puissance du machine learning** : Azure Security Center a accès à une grande quantité de données sur l’activité réseau cloud, qui peuvent être utilisées pour détecter les menaces ciblant vos déploiements Azure.
+-   **Exploitation de la puissance du machine learning**  : Azure Security Center a accès à une grande quantité de données sur l’activité réseau cloud, qui peuvent être utilisées pour détecter les menaces ciblant vos déploiements Azure.
 
--   **Détection des attaques par force brute** : Le machine learning permet de créer un modèle historique des tentatives d’accès à distance, qui facilite la détection des attaques par force brute sur les ports SQL, RDP (Remote Desktop Protocole) et SSH (Secure Shell).
+-   **Détection des attaques par force brute**  : Le machine learning permet de créer un modèle historique des tentatives d’accès à distance, qui facilite la détection des attaques par force brute sur les ports SQL, RDP (Remote Desktop Protocole) et SSH (Secure Shell).
 
--   **Détection des attaques DDoS sortantes et des botnets** : les attaques ciblant les ressources cloud visent généralement à utiliser la puissance de calcul de ces ressources pour exécuter d’autres attaques.
+-   **Détection des attaques DDoS sortantes et des botnets**  : les attaques ciblant les ressources cloud visent généralement à utiliser la puissance de calcul de ces ressources pour exécuter d’autres attaques.
 
--   **Nouveaux serveurs d’analyse comportementale et machines virtuelles** : dès lors qu’un serveur ou qu’une machine virtuelle est attaqué(e), les pirates utilisent diverses techniques pour exécuter du code malveillant sur le système ciblé, en évitant la détection, en assurant la persistance des attaques et en contournant les contrôles de sécurité.
+-   **Nouveaux serveurs d’analyse comportementale et machines virtuelles**  : dès lors qu’un serveur ou qu’une machine virtuelle est attaqué(e), les pirates utilisent diverses techniques pour exécuter du code malveillant sur le système ciblé, en évitant la détection, en assurant la persistance des attaques et en contournant les contrôles de sécurité.
 
--   **Détection des menaces sur Azure SQL Database** : la détection des menaces pour Azure SQL Database identifie les activités de base de données anormales qui indiquent les tentatives inhabituelles et potentiellement dangereuses d’accès ou d’exploitation des bases de données.
+-   **Détection des menaces sur Azure SQL Database**  : la détection des menaces pour Azure SQL Database identifie les activités de base de données anormales qui indiquent les tentatives inhabituelles et potentiellement dangereuses d’accès ou d’exploitation des bases de données.
 
 ### <a name="behavioral-analytics"></a>Analyse comportementale
 
@@ -188,9 +188,9 @@ Voici quelques exemples :
 
 -   **Mouvement latéral et reconnaissance interne** : afin de persister dans un réseau compromis et de localiser/récolter des données précieuses, les attaquants tentent souvent de se déplacer latéralement à partir de l’ordinateur compromis vers d’autres ordinateurs au sein du même réseau. Azure Security Center surveille les activités de processus et de connexion afin de détecter les tentatives de développement du pirate au sein du réseau, telles que l’exécution de commande à distance, la détection de réseau et l’énumération de compte.
 
--   **Scripts PowerShell malveillants** : les pirates peuvent utiliser PowerShell pour exécuter du code malveillant sur des machines virtuelles cibles à des fins diverses. Azure Security Center inspecte l’activité PowerShell à la recherche d’activité suspecte.
+-   **Scripts PowerShell malveillants**  : les pirates peuvent utiliser PowerShell pour exécuter du code malveillant sur des machines virtuelles cibles à des fins diverses. Azure Security Center inspecte l’activité PowerShell à la recherche d’activité suspecte.
 
--   **Attaques sortantes** : les pirates ciblent souvent les ressources cloud en vue d’utiliser ces ressources pour lancer d’autres attaques. Les machines virtuelles compromises peuvent, par exemple, servir à lancer des attaques par force brute contre d’autres machines virtuelles, envoyer du courrier indésirable, ou analyser les ports ouverts et autres appareils sur Internet. En appliquant l’apprentissage automatique au trafic réseau, Azure Security Center peut détecter lorsque les communications réseau sortantes dépassent la norme. Lorsque du courrier indésirable est détecté, Azure Security Center met également en corrélation le trafic de messagerie inhabituel avec l’intelligence issue d’Office 365 pour déterminer si le courrier est susceptible d’être mal intentionné ou est le résultat d’une campagne de courrier électronique légitime.
+-   **Attaques sortantes** : les pirates ciblent souvent les ressources cloud en vue d’utiliser ces ressources pour lancer d’autres attaques. Les machines virtuelles compromises peuvent, par exemple, servir à lancer des attaques par force brute contre d’autres machines virtuelles, envoyer du courrier indésirable, ou analyser les ports ouverts et autres appareils sur Internet. En appliquant l’apprentissage automatique au trafic réseau, Azure Security Center peut détecter lorsque les communications réseau sortantes dépassent la norme. Lorsque du courrier indésirable est détecté, Azure Security Center met également en corrélation le trafic de messagerie inhabituel avec l'intelligence issue de Microsoft 365 pour déterminer si le courrier est susceptible d'être mal intentionné ou est le résultat d'une campagne de courrier électronique légitime.
 
 ### <a name="anomaly-detection"></a>Détection des anomalies
 
@@ -230,7 +230,7 @@ Voici les fonctionnalités d’Azure permettant de déployer et activer Microsof
 
 -   **Mises à jour de signatures** : installe automatiquement les dernières signatures de protection (définitions de virus) pour garantir que la protection est à jour d’après une fréquence prédéfinie.
 
--   **Mises à jour du moteur Antimalware** : met automatiquement à jour le moteur Microsoft Antimalware.
+-   **Mises à jour du moteur Antimalware**  : met automatiquement à jour le moteur Microsoft Antimalware.
 
 -   **Mises à jour du logiciel anti-programme malveillant pour la plateforme** : met automatiquement à jour la plateforme Microsoft Antimalware.
 
@@ -262,13 +262,13 @@ Lorsqu’ils reçoivent une notification de détection des menaces par e-mail, l
 
 Les fonctions SQL Database Threat Detector utilisent les méthodes de détection suivantes :
 
--   **Détection déterministe** : détecte les séquences suspectes (à partir de règles) dans les requêtes clientes SQL qui correspondent à des attaques connues. Cette méthodologie offre une haute capacité de détection et génère peu de faux positifs ; elle présente toutefois une couverture assez limitée puisqu’elle relève de la catégorie des « détections atomiques ».
+-   **Détection déterministe**  : détecte les séquences suspectes (à partir de règles) dans les requêtes clientes SQL qui correspondent à des attaques connues. Cette méthodologie offre une haute capacité de détection et génère peu de faux positifs ; elle présente toutefois une couverture assez limitée puisqu’elle relève de la catégorie des « détections atomiques ».
 
--   **Détection comportementale** : détecte les activités anormales, autrement dit les comportements anormaux de la base de données qui n’ont pas été observés au cours des 30 derniers jours. Dans un client SQL, une activité anormale peut, par exemple, se traduire par un pic d’échecs de connexion/requête, par un volume important de données extraites, par des requêtes canoniques inhabituelles ou encore par l’utilisation d’adresses IP inconnues pour accéder à la base de données
+-   **Détection comportementale**  : détecte les activités anormales, autrement dit les comportements anormaux de la base de données qui n’ont pas été observés au cours des 30 derniers jours. Dans un client SQL, une activité anormale peut, par exemple, se traduire par un pic d’échecs de connexion/requête, par un volume important de données extraites, par des requêtes canoniques inhabituelles ou encore par l’utilisation d’adresses IP inconnues pour accéder à la base de données
 
 ### <a name="application-gateway-web-application-firewall"></a>Pare-feu d’applications web sur Application Gateway
 
-Le [pare-feu d’applications web (WAF)](../../app-service/environment/app-service-app-service-environment-web-application-firewall.md) est une fonction de [passerelle Azure Application Gateway](../../application-gateway/application-gateway-web-application-firewall-overview.md) qui offre une protection pour les applications web qui utilisent la passerelle d’application pour les fonctions de [contrôle de remise d’application](https://kemptechnologies.com/in/application-delivery-controllers) standard. Le pare-feu d’applications web le fait en les protégeant contre la plupart des [10 plus courantes vulnérabilités web de l’OWASP (Open Web Application Security Project](https://owasp.org/www-project-top-ten/).
+Le [pare-feu d’applications web (WAF)](../../app-service/environment/app-service-app-service-environment-web-application-firewall.md) est une fonction de [passerelle Azure Application Gateway](../../web-application-firewall/ag/ag-overview.md) qui offre une protection pour les applications web qui utilisent la passerelle d’application pour les fonctions de [contrôle de remise d’application](https://kemptechnologies.com/in/application-delivery-controllers) standard. Le pare-feu d’applications web le fait en les protégeant contre la plupart des [10 plus courantes vulnérabilités web de l’OWASP (Open Web Application Security Project](https://owasp.org/www-project-top-ten/).
 
 ![Diagramme du Pare-feu d’applications web sur Application Gateway](./media/threat-detection/azure-threat-detection-fig13.png)
 
@@ -304,19 +304,19 @@ L’API Anomaly Detection est une API très utile pour détecter une variété d
 
 [L’API Anomaly Detection](../../machine-learning/team-data-science-process/apps-anomaly-detection-api.md) peut détecter les types suivants de schémas anormaux dans les données de séries chronologiques :
 
--   **Pics et creux** : quand vous supervisez le nombre d’échecs de connexion pour un service ou le nombre de validations dans un site de commerce électronique, les pics ou creux d’activité inhabituels peuvent indiquer des attaques de sécurité ou des interruptions de service.
+-   **Pics et creux**  : quand vous supervisez le nombre d’échecs de connexion pour un service ou le nombre de validations dans un site de commerce électronique, les pics ou creux d’activité inhabituels peuvent indiquer des attaques de sécurité ou des interruptions de service.
 
--   **Tendances positives et négatives** : quand vous supervisez l’utilisation de la mémoire en informatique, une taille de mémoire gratuite qui diminue indique une fuite de mémoire potentielle. Pour la surveillance de la longueur d’une file d'attente d’un service, une tendance montante persistante pourrait indiquer un problème logiciel sous-jacent.
+-   **Tendances positives et négatives**  : quand vous supervisez l’utilisation de la mémoire en informatique, une taille de mémoire gratuite qui diminue indique une fuite de mémoire potentielle. Pour la surveillance de la longueur d’une file d'attente d’un service, une tendance montante persistante pourrait indiquer un problème logiciel sous-jacent.
 
--   **Changements de niveau et changements dans la plage dynamique de valeurs** : il peut être intéressant de superviser les changements de niveau de latence d’un service après une mise à niveau du service, ou encore une réduction des niveaux d’exceptions après une mise à niveau.
+-   **Changements de niveau et changements dans la plage dynamique de valeurs**  : il peut être intéressant de superviser les changements de niveau de latence d’un service après une mise à niveau du service, ou encore une réduction des niveaux d’exceptions après une mise à niveau.
 
 L’API de Machine Learning offre les avantages suivants :
 
--   **Détection flexible et fiable** : les modèles de détection d’anomalies permettent aux utilisateurs de configurer les paramètres de sensibilité et de détecter des anomalies entre les jeux de données saisonnières et non saisonnières. Les utilisateurs peuvent ajuster le modèle de détection d’anomalies pour rendre l’API de détection plus ou moins sensible en fonction de leurs besoins. Cela permet de détecter les anomalies plus ou moins visibles au niveau des données, avec et sans schémas saisonniers.
+-   **Détection flexible et fiable**  : les modèles de détection d’anomalies permettent aux utilisateurs de configurer les paramètres de sensibilité et de détecter des anomalies entre les jeux de données saisonnières et non saisonnières. Les utilisateurs peuvent ajuster le modèle de détection d’anomalies pour rendre l’API de détection plus ou moins sensible en fonction de leurs besoins. Cela permet de détecter les anomalies plus ou moins visibles au niveau des données, avec et sans schémas saisonniers.
 
--   **Détection scalable et rapide** : l’approche de supervision traditionnelle, qui repose sur les seuils actuels définis à partir des connaissances d’experts dans le domaine, est coûteuse et ne peut pas être déployée sur des millions de jeux de données qui évoluent de façon dynamique. Les modèles de détection d’anomalies proposés dans cette API s’appuient sur un apprentissage et sont paramétrés automatiquement à partir des données historiques et en temps réel.
+-   **Détection scalable et rapide**  : l’approche de supervision traditionnelle, qui repose sur les seuils actuels définis à partir des connaissances d’experts dans le domaine, est coûteuse et ne peut pas être déployée sur des millions de jeux de données qui évoluent de façon dynamique. Les modèles de détection d’anomalies proposés dans cette API s’appuient sur un apprentissage et sont paramétrés automatiquement à partir des données historiques et en temps réel.
 
--   **Détection proactive et exploitable** : il est possible d’appliquer une détection des lents changements de tendance et de niveau afin d’anticiper les anomalies. Les équipes peuvent utiliser les signaux anormaux rapidement détectés pour étudier et agir sur les aspects problématiques. En outre, il est possible de développer des modèles d’analyse des causes ainsi que des outils d’alerte sur ce service d’API de détection des anomalies.
+-   **Détection proactive et exploitable**  : il est possible d’appliquer une détection des lents changements de tendance et de niveau afin d’anticiper les anomalies. Les équipes peuvent utiliser les signaux anormaux rapidement détectés pour étudier et agir sur les aspects problématiques. En outre, il est possible de développer des modèles d’analyse des causes ainsi que des outils d’alerte sur ce service d’API de détection des anomalies.
 
 L’API de détection des anomalies est une solution efficace pour un large éventail de scénarios, notamment la surveillance de l’intégrité du service et des indicateurs de performance clés, l’IoT, l’analyse des performances et l’analyse du trafic réseau. Voici quelques scénarios courants où cette API peut se révéler utile :
 
@@ -336,18 +336,17 @@ L’API de détection des anomalies est une solution efficace pour un large éve
 
 ### <a name="cloud-app-security"></a>Cloud App Security
 
-[Cloud App Security](https://docs.microsoft.com/cloud-app-security/what-is-cloud-app-security) est un composant essentiel de la pile de sécurité de Microsoft Cloud. Cette solution complète peut aider votre organisation lorsque vous cherchez à tirer pleinement parti des promesses des applications cloud. Elle vous laisse le contrôle grâce à une meilleure visibilité dans l’activité. Elle vous permet également de renforcer la protection des données critiques dans les applications cloud.
+[Cloud App Security](/cloud-app-security/what-is-cloud-app-security) est un composant essentiel de la pile de sécurité de Microsoft Cloud. Cette solution complète peut aider votre organisation lorsque vous cherchez à tirer pleinement parti des promesses des applications cloud. Elle vous laisse le contrôle grâce à une meilleure visibilité dans l’activité. Elle vous permet également de renforcer la protection des données critiques dans les applications cloud.
 
 Grâce à des outils qui vous permettent de détecter le Shadow IT, d’évaluer les risques, d’appliquer des stratégies, d’examiner les activités et d’arrêter les menaces, votre organisation est en mesure de migrer en toute sécurité vers le cloud tout en conservant le contrôle sur ses données critiques.
 
-| | |
-|---|---|
+| Category | Description |
+| -------- | ----------- |
 | Découvrez | Découvrez le Shadow IT grâce à Cloud App Security. Bénéficiez d’une meilleure visibilité grâce à une détection des applications, des activités, des utilisateurs, des données et des fichiers dans votre environnement cloud. Détectez les applications tierces connectées à votre cloud.|
 |Examiner | Examinez vos applications cloud à l’aide d’outils d’investigation cloud conçus pour explorer en profondeur les applications à risque, les utilisateurs spécifiques et les fichiers de votre réseau. Recherchez des modèles parmi les données collectées à partir de votre cloud. Générez des rapports pour surveiller votre cloud. |
 | Control | Limitez les risques en définissant des stratégies et des alertes de manière à accentuer le contrôle sur le trafic réseau cloud. Utilisez Cloud App Security pour migrer vos utilisateurs vers d’autres solutions cloud sécurisées et approuvées. |
 | Protéger | Utilisez Cloud App Security pour approuver ou interdire des applications, appliquer des mesures de prévention des fuites de données, contrôler les autorisations et le partage, et générer des alertes et des rapports personnalisés. |
 | Control | Limitez les risques en définissant des stratégies et des alertes de manière à accentuer le contrôle sur le trafic réseau cloud. Utilisez Cloud App Security pour migrer vos utilisateurs vers d’autres solutions cloud sécurisées et approuvées. |
-| | |
 
 
 ![Diagramme Cloud App Security](./media/threat-detection/azure-threat-detection-fig14.png)

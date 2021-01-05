@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: 843d5da26d6791cea880e5dfb654fe27b74f5d9f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a5764e44db31755110ac99a3e8e8e0984cdf9604
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73936040"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87490572"
 ---
 # <a name="plan-capacity-for-hyper-v-vm-disaster-recovery"></a>Planifier la capacité pour la reprise d’activité de machines virtuelles Hyper-V 
 
@@ -39,7 +39,7 @@ Vous pouvez exécuter l’outil en deux modes :
 ## <a name="before-you-start"></a>Avant de commencer
 
 * Collecter des informations relatives à votre environnement, et notamment les machines virtuelles, le nombre de disques par machine virtuelle, le stockage par disque.
-* Déterminer le taux de modification (l’évolution) quotidienne des données répliquées. Téléchargez l’[outil de planification de la capacité Hyper-V](https://www.microsoft.com/download/details.aspx?id=39057) pour obtenir le taux de modifications. [En savoir plus](site-recovery-capacity-planning-for-hyper-v-replication.md) sur cet outil. Nous vous recommandons d’exécuter cet outil pendant une semaine pour capturer les moyennes.
+* Déterminer le taux de modification (l’évolution) quotidienne des données répliquées. Téléchargez l’[outil de planification de la capacité Hyper-V](https://www.microsoft.com/download/details.aspx?id=39057) pour obtenir le taux de modifications. [En savoir plus](./hyper-v-deployment-planner-overview.md) sur cet outil. Nous vous recommandons d’exécuter cet outil pendant une semaine pour capturer les moyennes.
 
 
 ## <a name="run-the-quick-planner"></a>Exécutez Quick Planner
@@ -47,13 +47,13 @@ Vous pouvez exécuter l’outil en deux modes :
 
 2. Dans la zone de liste **Sélectionner un type de planificateur**, sélectionnez **Quick Planner** (Planificateur rapide).
 
-   ![Bien démarrer](./media/site-recovery-capacity-planner/getting-started.png)
+   ![Capture d’écran de l’option Select a planner type (Sélectionner un type de planificateur), avec l’option Quick Planner (Planificateur rapide) sélectionnée.](./media/site-recovery-capacity-planner/getting-started.png)
 
 3. Dans la feuille de calcul **Capacity Planner** (Planificateur de capacité), saisissez les informations requises. Renseignez tous les champs entourés d’un cercle rouge dans la capture d’écran suivante :
 
    a. Dans **Sélectionner votre scénario**, choisissez **Hyper-V to Azure** (Hyper-V vers Azure) ou **VMware/Physical to Azure** (VMware/Physique vers Azure).
 
-   b. Dans **Average daily data change rate (%)** (Taux de modification de données moyen par jour (%)), entrez les informations que vous recueillez à l’aide de l’[outil de planification de la capacité Hyper-V](site-recovery-capacity-planning-for-hyper-v-replication.md) ou d’[Azure Site Recovery Deployment Planner](./site-recovery-deployment-planner.md).
+   b. Dans **Average daily data change rate (%)** (Taux de modification de données moyen par jour (%)), entrez les informations que vous recueillez à l’aide de l’[outil de planification de la capacité Hyper-V](./hyper-v-deployment-planner-overview.md) ou d’[Azure Site Recovery Deployment Planner](./site-recovery-deployment-planner.md).
 
    c. Le paramètre **Compression** n’est pas utilisé lors de la réplication de machines virtuelles Hyper-V vers Azure. Pour la compression, utilisez une appliance tierce telle que Riverbed.
 
@@ -61,7 +61,7 @@ Vous pouvez exécuter l’outil en deux modes :
 
    e. Dans **Number of hours in which initial replication for the batch of virtual machines should complete** (Nombre d’heures prévu pour la réplication initiale du lot de machines virtuelles) et **Number of virtual machines per initial replication batch** (Nombre de machines virtuelles par lot de réplication initiale), entrez les paramètres de saisie utilisés pour calculer les exigences de réplication initiales. Lors du déploiement de Site Recovery, le jeu entier de données initiales est chargé.
 
-   ![Entrées](./media/site-recovery-capacity-planner/inputs.png)
+   ![Capture d’écran de la feuille de calcul Capacity Planner (Outil de planification de la capacité), montrant les informations d’entrée requises.](./media/site-recovery-capacity-planner/inputs.png)
 
 4. Une fois que vous avez entré les valeurs de l’environnement source, la sortie affichée inclut ce qui suit :
 
@@ -77,7 +77,7 @@ Vous pouvez exécuter l’outil en deux modes :
    * **Nombre de serveurs de traitement supplémentaires requis** : Indique si des serveurs de processus supplémentaires sont nécessaires en plus du serveur de processus qui est exécuté sur le serveur de configuration par défaut.
    * **100 % de stockage supplémentaire sur la source** : Indique si un stockage supplémentaire est nécessaire dans l’emplacement source.
 
-      ![Output](./media/site-recovery-capacity-planner/output.png)
+      ![Capture d’écran de la sortie affichée en fonction de l’entrée fournie.](./media/site-recovery-capacity-planner/output.png)
 
 ## <a name="run-the-detailed-planner"></a>Exécuter Detailed Planner
 
@@ -85,7 +85,7 @@ Vous pouvez exécuter l’outil en deux modes :
 
 2. Dans **Sélectionner un type de planificateur**, sélectionnez **Detailed Planner** dans la liste.
 
-   ![Guide de démarrage](./media/site-recovery-capacity-planner/getting-started-2.png)
+   ![Capture d’écran de l’option Select a planner type (Sélectionner un type de planificateur), avec l’option Detailed Planner (Planificateur détaillé) sélectionnée.](./media/site-recovery-capacity-planner/getting-started-2.png)
 
 3. Dans la feuille de calcul **Workload Qualification**, saisissez les informations obligatoires. Vous devez renseigner tous les champs marqués.
 
@@ -105,7 +105,7 @@ Vous pouvez exécuter l’outil en deux modes :
 
    h. Dans **Mapping Azure VM size** (taille de machine virtuelle Azure pour le mappage), entrez la taille de machine virtuelle Azure que vous souhaitez mapper. Si vous ne souhaitez pas effectuer cette opération manuellement, sélectionnez **Compute IaaS VMs** (Machines virtuelles IaaS de calcul). Si vous entrez un paramètre manuel, puis sélectionnez **Compute IaaS VMs** (Machines virtuelles IaaS de calcul), il se peut que le paramètre manuel soit remplacé. Le processus de calcul identifie automatiquement la meilleure correspondance sur la taille de machine virtuelle Azure.
 
-   ![Feuille de calcul Workload Qualification (Qualification de la charge de travail)](./media/site-recovery-capacity-planner/workload-qualification.png)
+   ![Capture d’écran de la feuille de calcul Workload Qualification (Qualification de la charge de travail), montrant les informations d’entrée requises.](./media/site-recovery-capacity-planner/workload-qualification.png)
 
 4. Si vous sélectionnez **Compute IaaS VMs** (Machines virtuelles IaaS de calcul), les opérations suivantes sont effectuées :
 
@@ -117,12 +117,12 @@ Vous pouvez exécuter l’outil en deux modes :
 
 Les colonnes AA à AE qui sont générées fournissent des informations pour chaque machine virtuelle.
 
-![Colonnes de sortie AA à AE](./media/site-recovery-capacity-planner/workload-qualification-2.png)
+![Capture d’écran montrant les colonnes de sortie AA à AE.](./media/site-recovery-capacity-planner/workload-qualification-2.png)
 
 ### <a name="example"></a>Exemple
 Exemple : pour les six machines virtuelles avec les valeurs indiquées dans le tableau, l’outil calcule et affecte la meilleure correspondance de machine virtuelle Azure, ainsi que les exigences de stockage Azure.
 
-![Affectations de Workload Qualification (Qualification de la charge de travail)](./media/site-recovery-capacity-planner/workload-qualification-3.png)
+![Capture d’écran montrant les affectations de Workload Qualification (Qualification de la charge de travail).](./media/site-recovery-capacity-planner/workload-qualification-3.png)
 
 * Dans l’exemple de résultat, notez les points suivants :
 
@@ -144,7 +144,7 @@ Une fois toutes les informations entrées, sélectionnez **Submit data to the pl
 
 2. Si vous souhaitez apporter des modifications, vous devez modifier la feuille de calcul **Workload Qualification** (Qualification de la charge de travail). Ensuite, sélectionnez de nouveau **Submit data to the planner tool** (Envoyer des données à l’outil planificateur).
 
-   ![Capacity Planner](./media/site-recovery-capacity-planner/capacity-planner.png)
+   ![Capture d’écran montrant les entrées modifiées et les sorties résultantes dans la feuille de calcul Capacity Planner (Outil de planification de la capacité).](./media/site-recovery-capacity-planner/capacity-planner.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
-[Apprenez à exécuter](site-recovery-capacity-planning-for-hyper-v-replication.md) l’outil de planification de la capacité.
+[Apprenez à exécuter](./hyper-v-deployment-planner-overview.md) l’outil de planification de la capacité.

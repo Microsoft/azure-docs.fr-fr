@@ -1,16 +1,14 @@
 ---
 title: Configurer votre cluster Azure Service Fabric autonome
 description: Découvrez comment configurer votre cluster Azure Service Fabric local ou autonome.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 11/12/2018
-ms.author: dekapur
-ms.openlocfilehash: 0f9b625dfbe9c39bea7771dcc5fd58805ce19811
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd93263b38340ce080cca1aecb98f3a599ff1861
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75458376"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91843156"
 ---
 # <a name="configuration-settings-for-a-standalone-windows-cluster"></a>Paramètres de configuration pour un cluster Windows autonome
 Cet article décrit les paramètres de configuration d’un cluster Azure Service Fabric autonome qui peuvent être définis dans le fichier *ClusterConfig.json*. Utilisez ce fichier pour spécifier les informations sur les nœuds de cluster, les configurations de la sécurité ainsi que la topologie du réseau en termes de domaines d’erreur et de mise à niveau.  Après la modification ou l’ajout de paramètres de configuration, vous pouvez [créer un cluster autonome](service-fabric-cluster-creation-for-windows-server.md) ou [mettre à niveau la configuration d’un cluster autonome](service-fabric-cluster-config-upgrade-windows-server.md).
@@ -89,7 +87,7 @@ La section diagnosticsStore vous permet de configurer des paramètres pour activ
 }
 ```
 
-La section metadata est une description du diagnostic de votre cluster et peut être définie selon votre installation. Ces variables vous aident à collecter les journaux d’activité de suivi ETW les vidages sur incident ainsi que les compteurs de performance. Consultez les sections [Tracelog](https://msdn.microsoft.com/library/windows/hardware/ff552994.aspx) (Journal de suivi) et [ETW Tracing](https://msdn.microsoft.com/library/ms751538.aspx) pour plus d’informations sur les journaux d’activité de suivi ETW. Tous les journaux d’activité, notamment les [vidages sur incident](https://blogs.technet.microsoft.com/askperf/2008/01/08/understanding-crash-dump-files/) et les [compteurs de performance](https://msdn.microsoft.com/library/windows/desktop/aa373083.aspx) peuvent être dirigés vers le dossier connectionString sur votre ordinateur. Vous pouvez également utiliser AzureStorage pour stocker les diagnostics. Reportez-vous à l’extrait de code suivant :
+La section metadata est une description du diagnostic de votre cluster et peut être définie selon votre installation. Ces variables vous aident à collecter les journaux d’activité de suivi ETW les vidages sur incident ainsi que les compteurs de performance. Consultez les sections [Tracelog](/windows-hardware/drivers/devtest/tracelog) (Journal de suivi) et [ETW Tracing](/dotnet/framework/wcf/samples/etw-tracing) pour plus d’informations sur les journaux d’activité de suivi ETW. Tous les journaux d’activité, notamment les [vidages sur incident](https://techcommunity.microsoft.com/t5/ask-the-performance-team/bg-p/AskPerf) et les [compteurs de performance](/windows/win32/perfctrs/performance-counters-portal) peuvent être dirigés vers le dossier connectionString sur votre ordinateur. Vous pouvez également utiliser AzureStorage pour stocker les diagnostics. Reportez-vous à l’extrait de code suivant :
 
 ```json
 "diagnosticsStore": {
@@ -193,7 +191,7 @@ Pour configurer des fonctionnalités supplémentaires, définissez la valeur api
     ]
 }
 ```
-Toutes les fonctionnalités de module complémentaire disponibles sont décrites dans les [Informations de référence sur l’API REST de Service Fabric](https://docs.microsoft.com/rest/api/servicefabric/sfrp-model-addonfeatures).
+Toutes les fonctionnalités de module complémentaire disponibles sont décrites dans les [Informations de référence sur l’API REST de Service Fabric](/rest/api/servicefabric/sfrp-model-addonfeatures).
 
 ### <a name="container-support"></a>Support pour les conteneurs
 Pour activer le support pour les conteneurs Windows Server et Hyper-V pour les clusters autonomes, la fonctionnalité supplémentaire DnsService doit être activée.
@@ -204,4 +202,3 @@ Une fois que vous avez configuré un fichier *ClusterConfig.json* complet, adapt
 Si vous avez déployé un cluster autonome, vous pouvez également [mettre à niveau la configuration d’un cluster autonome](service-fabric-cluster-config-upgrade-windows-server.md). 
 
 Découvrez comment [visualiser votre cluster à l’aide de l’outil Service Fabric Explorer](service-fabric-visualizing-your-cluster.md).
-

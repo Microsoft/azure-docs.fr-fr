@@ -8,10 +8,10 @@ ms.date: 05/06/2019
 ms.author: heidist
 ms.custom: include file
 ms.openlocfilehash: ee430241173a6c19e2a32e176f28411631d9cb19
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80272664"
 ---
 Vous pouvez créer plusieurs services au sein d’un abonnement. Chacun peut être approvisionné à un niveau spécifique. Vous êtes uniquement limité par le nombre de services autorisé à chaque niveau. Ainsi, vous pouvez créer jusqu’à 12 services au niveau de base et 12 autres au niveau S1 au sein du même abonnement. Pour en savoir plus sur ces niveaux, consultez [Choisir un niveau tarifaire pour Recherche cognitive Azure](../articles/search/search-sku-tier.md).

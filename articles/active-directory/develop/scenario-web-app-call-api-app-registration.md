@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 05/07/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 8cb7d86bd419563363779c499962c81f0c59e3b6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 863d8d87d5de771293199dd60618128b0ac11bba
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80881874"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442597"
 ---
 # <a name="a-web-app-that-calls-web-apis-app-registration"></a>Application web appelant des API web : Inscription d'application
 
@@ -28,9 +28,8 @@ Cependant, comme l’application web appelle maintenant des API web, elle devien
 
 ## <a name="api-permissions"></a>Autorisations des API
 
-Les applications web appellent des API pour le compte de l’utilisateur connecté. Pour ce faire, elles doivent demander des *autorisations déléguées*. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder aux API web](quickstart-configure-app-access-web-apis.md#add-permissions-to-access-web-apis).
+Les applications web appellent des API pour le compte de l’utilisateur connecté. Pour ce faire, elles doivent demander des *autorisations déléguées*. Pour plus d’informations, consultez [Ajouter des autorisations pour accéder à votre API web](quickstart-configure-app-access-web-apis.md#add-permissions-to-access-your-web-api).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Application web appelant des API web : Configuration de code](scenario-web-app-call-api-app-configuration.md)
+Passez à l’article suivant de ce scénario, [Configuration du code](scenario-web-app-call-api-app-configuration.md).

@@ -1,17 +1,17 @@
 ---
 title: Résoudre les problèmes des projets Azure Migrate
 description: Vous aide à résoudre les problèmes liés à la création et à la gestion de projets Azure Migrate.
-ms.topic: troubleshooting
-author: musa-57
+author: ms-psharma
+ms.author: panshar
 ms.manager: abhemraj
-ms.author: hamusa
+ms.topic: troubleshooting
 ms.date: 01/01/2020
-ms.openlocfilehash: b1fc4bce988b13a9ff76fd961d524ce945876054
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f68a57d3780f388488d48835f322ff04ab7c7187
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535398"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753380"
 ---
 # <a name="troubleshoot-azure-migrate-projects"></a>Résoudre les problèmes des projets Azure Migrate
 
@@ -19,7 +19,7 @@ Cet article vous aide à résoudre les problèmes liés à la création et à la
 
 ## <a name="how-to-add-new-project"></a>Comment ajouter un nouveau projet ?
 
-Vous pouvez avoir plusieurs projets Azure Migrate par abonnement. [Découvrez comment](how-to-add-tool-first-time.md) créer un projet pour la première fois, ou [ajouter d’autres](create-manage-projects.md#create-additional-projects) projets.
+Vous pouvez avoir plusieurs projets Azure Migrate par abonnement. [Découvrez comment](./create-manage-projects.md) créer un projet pour la première fois, ou [ajouter d’autres](create-manage-projects.md#create-additional-projects) projets.
 
 ## <a name="what-azure-permissions-are-needed"></a>Quelles sont les autorisations Azure nécessaires ?
 
@@ -40,7 +40,7 @@ Vous pouvez évaluer jusqu’à 35 000 machines virtuelles VMware ou jusqu’à 
 
 ## <a name="can-i-upgrade-old-project"></a>Puis-je mettre à niveau un ancien projet ?
 
-Les projets de la version précédente d’Azure Migrate ne peuvent pas être mis à jour. Vous devez [créer un nouveau projet](how-to-add-tool-first-time.md) et y ajouter des outils.
+Les projets de la version précédente d’Azure Migrate ne peuvent pas être mis à jour. Vous devez [créer un nouveau projet](./create-manage-projects.md) et y ajouter des outils.
 
 ## <a name="cant-create-a-project"></a>Impossible de créer un projet
 
@@ -52,7 +52,7 @@ Si vous essayez de créer un projet et que vous rencontrez une erreur de déploi
 - Si vous recevez l’erreur « Les requêtes doivent contenir des en-têtes d’identité d’utilisateur », cela peut indiquer que vous n’avez pas accès au locataire Azure Active Directory (Azure AD) de l’organisation. Dans ce cas :
     - Quand vous êtes ajouté à un locataire Azure AD pour la première fois, vous recevez une invitation par e-mail pour rejoindre le locataire.
     - Acceptez l’invitation pour être ajouté au locataire.
-    - Si vous ne voyez pas l’e-mail, contactez un utilisateur disposant d’un accès au locataire et demandez-lui de vous [renvoyer l’invitation](https://docs.microsoft.com/azure/active-directory/b2b/add-users-administrator#resend-invitations-to-guest-users).
+    - Si vous ne voyez pas l’e-mail, contactez un utilisateur disposant d’un accès au locataire et demandez-lui de vous [renvoyer l’invitation](../active-directory/external-identities/add-users-administrator.md#resend-invitations-to-guest-users).
     - Après avoir reçu l’e-mail d’invitation, ouvrez-le et sélectionnez le lien pour accepter l’invitation. Ensuite, déconnectez-vous du Portail Azure et reconnectez-vous. (l’actualisation du navigateur ne fonctionnera pas). Vous pourrez ensuite créer le projet de migration.
 
 ## <a name="how-do-i-delete-a-project"></a>Comment supprimer un projet

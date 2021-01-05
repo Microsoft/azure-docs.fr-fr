@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Confirmit Horizons | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Confirmit Horizons.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4134ee87-a7df-4328-ba09-4c9a729a29ee
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/19/2019
 ms.author: jeedes
-ms.openlocfilehash: 6127f149141db275c4b13c25fd6fbd0241b3e404
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b1c4ab22db3bb9cadc783357bd9963c5de3b6f98
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67105034"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672676"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-confirmit-horizons"></a>Tutoriel : Intégration d’Azure Active Directory à Confirmit Horizons
 
@@ -31,7 +27,7 @@ L’intégration de Confirmit Horizons à Azure AD vous offre les avantages suiv
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Confirmit Horizons (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -69,7 +65,7 @@ Pour configurer l’intégration de Confirmit Horizons à Azure AD, vous devez 
 
 4. Dans la zone de recherche, tapez **Confirmit Horizons**, sélectionnez **Confirmit Horizons** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Confirmit Horizons dans la liste des résultats](common/search-new-app.png)
+    ![Confirmit Horizons dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -105,29 +101,27 @@ Pour configurer l’authentification unique Azure AD avec Confirmit Horizons, e
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans Domaine et URL Confirmit Horizons](common/idp-intiated.png)
+    ![Capture d’écran montrant la section « Basic S A M L Configuration » avec l’action « Save », le champ « Identifier » et le champ « Reply URL » mis en évidence.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<SUBDOMAIN>.confirmit.com/identity/AuthServices/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.com.au/identity/AuthServices/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.ca/identity/AuthServices/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.hk/identity/AuthServices/<UNIQUEID>` |
-    | `https://sso.us.confirmit.com/<UNIQUEID>` |
-    | |
+    ```http
+    https://<SUBDOMAIN>.confirmit.com/identity/AuthServices/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.com.au/identity/AuthServices/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.ca/identity/AuthServices/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.hk/identity/AuthServices/<UNIQUEID>
+    https://sso.us.confirmit.com/<UNIQUEID>
+    ```
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<SUBDOMAIN>.confirmit.com/identity/AuthServices/<UNIQUEID>/acs`|
-    | `https://<SUBDOMAIN>.confirmit.com.au/identity/AuthServices/<UNIQUEID>/acs`|
-    | `https://<SUBDOMAIN>.confirmit.ca/identity/AuthServices/<UNIQUEID>/acs`|
-    | `https://<SUBDOMAIN>.confirmit.hk/identity/AuthServices/<UNIQUEID>/acs`|
-    | `https://sso.us.confirmit.com/<UNIQUEID>/saml/acs` |
-    | |
+    ```http
+    https://<SUBDOMAIN>.confirmit.com/identity/AuthServices/<UNIQUEID>/acs
+    https://<SUBDOMAIN>.confirmit.com.au/identity/AuthServices/<UNIQUEID>/acs
+    https://<SUBDOMAIN>.confirmit.ca/identity/AuthServices/<UNIQUEID>/acs
+    https://<SUBDOMAIN>.confirmit.hk/identity/AuthServices/<UNIQUEID>/acs
+    https://sso.us.confirmit.com/<UNIQUEID>/saml/acs
+    ```
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
@@ -135,14 +129,13 @@ Pour configurer l’authentification unique Azure AD avec Confirmit Horizons, e
 
     Dans la zone de texte **URL d’authentification**, tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<SUBDOMAIN>.confirmit.com/identity/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.com.au/identity/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.ca/identity/<UNIQUEID>` |
-    | `https://<SUBDOMAIN>.confirmit.hk/identity/<UNIQUEID>` |
-    | `https://sso.us.confirmit.com/<UNIQUEID>` |
-    | | 
+    ```http
+    https://<SUBDOMAIN>.confirmit.com/identity/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.com.au/identity/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.ca/identity/<UNIQUEID>
+    https://<SUBDOMAIN>.confirmit.hk/identity/<UNIQUEID>
+    https://sso.us.confirmit.com/<UNIQUEID>
+    ```
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur, l’URL de réponse et l’URL de connexion réels. Pour obtenir ces valeurs, contactez l’[équipe du support technique Confirmit Horizons](mailto:support@confirmit.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
@@ -172,7 +165,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon@yourcompanydomain.extension**  
     Par exemple : BrittaSimon@contoso.com
 
@@ -214,13 +207,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans Confirmi
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Confirmit Horizons dans le volet d’accès, vous devez être connecté automatiquement à l’application Confirmit Horizons pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Confirmit Horizons dans le volet d’accès, vous devez être connecté automatiquement à l’application Confirmit Horizons pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

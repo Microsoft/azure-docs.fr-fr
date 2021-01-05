@@ -3,20 +3,18 @@ title: 'Démarrage rapide : Utiliser l’outil d’URL pour obtenir une répons
 titleSuffix: Azure Cognitive Services
 description: Ce guide de démarrage rapide vous aide à obtenir une réponse de votre base de connaissances à l’aide d’un outil de test d’URL comme cURL ou Postman.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 zone_pivot_groups: URL-test-interface
 ms.topic: quickstart
-ms.date: 04/27/2020
-ms.author: diberry
-ms.openlocfilehash: 1f19337aea8b39bbc8c7dc11fba683bee3c2955a
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 07/16/2020
+ms.openlocfilehash: c934aca046ada07e0d6cda44221cc81a8eb4e57d
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203955"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96345747"
 ---
 # <a name="quickstart-get-an-answer-from-knowledge-base"></a>Démarrage rapide : Obtenir des réponses de la base de connaissances
 
@@ -37,4 +35,8 @@ ms.locfileid: "82203955"
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Base de connaissances de test avec un fichier par lot](batch-testing.md)
+> [Base de connaissances de test avec un fichier par lot](../index.yml)
+
+Découvrez plus en détail les métadonnées :
+* [Création – Ajouter des métadonnées à une paire QnA](../How-To/edit-knowledge-base.md#add-metadata)
+* [Prédiction de requête – Filtrer les réponses par métadonnées](../How-To/metadata-generateanswer-usage.md#use-metadata-to-filter-answers-by-custom-metadata-tags)

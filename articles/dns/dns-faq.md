@@ -7,12 +7,12 @@ ms.service: dns
 ms.topic: article
 ms.date: 6/15/2019
 ms.author: rohink
-ms.openlocfilehash: 76b19cfb3c00a26d81eab81f67d8e156a520f377
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2f7e4eadc25028db4668db8d245803c7ddba8688
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77121719"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968245"
 ---
 # <a name="azure-dns-faq"></a>FAQ Azure DNS
 
@@ -24,7 +24,7 @@ Le système DNS (Domain Name System) traduit, ou résout, un nom de site web ou 
 
 Les domaines DNS dans Azure DNS sont hébergés sur le réseau global Azure de serveurs de noms DNS. Ce système utilise la mise en réseau Anycast afin que chaque requête DNS obtienne une réponse du serveur DNS disponible le plus proche. Azure DNS offre des performances élevées et une haute disponibilité pour votre domaine.
 
-Azure DNS est basé sur Azure Resource Manager. Ce service tire parti de fonctionnalités de Resource Manager comme le contrôle d’accès en fonction du rôle, les journaux d’audit et le verrouillage de ressources. Vous pouvez gérer les domaines et les enregistrements par le biais du portail Azure, des applets de commande Azure PowerShell et de l’interface Azure CLI multiplateforme. Les applications qui nécessitent la gestion DNS automatique peuvent s’intégrer au service par le biais de l’API REST et des SDK.
+Azure DNS est basé sur Azure Resource Manager. Ce service tire parti de fonctionnalités de Resource Manager comme le contrôle d’accès en fonction du rôle Azure, les journaux d’audit et le verrouillage de ressources. Vous pouvez gérer les domaines et les enregistrements par le biais du portail Azure, des applets de commande Azure PowerShell et de l’interface Azure CLI multiplateforme. Les applications qui nécessitent la gestion DNS automatique peuvent s’intégrer au service par le biais de l’API REST et des SDK.
 
 ### <a name="how-much-does-azure-dns-cost"></a>Combien coûte Azure DNS ?
 
@@ -80,7 +80,7 @@ La fonctionnalité DNSSEC est suivie dans le backlog Azure DNS. Utilisez le site
 
 ### <a name="does-azure-dns-support-zone-transfers-axfrixfr"></a>Azure DNS prend-il en charge les transferts de zone (AXFR/IXFR) ?
 
-Non. Azure DNS ne prend actuellement pas en charge les transferts de zone. Les zones DNS peuvent être [importées dans Azure DNS à l’aide de l’interface Azure CLI](dns-import-export.md). Les enregistrements DNS sont gérés par le biais du [portail de gestion Azure DNS](dns-operations-recordsets-portal.md), [l’API REST](https://docs.microsoft.com/powershell/module/az.dns), le [SDK](dns-sdk.md), les [applets de commande PowerShell](dns-operations-recordsets.md) ou [l’outil CLI](dns-operations-recordsets-cli.md).
+Non. Azure DNS ne prend actuellement pas en charge les transferts de zone. Les zones DNS peuvent être [importées dans Azure DNS à l’aide de l’interface Azure CLI](dns-import-export.md). Les enregistrements DNS sont gérés par le biais du [portail de gestion Azure DNS](dns-operations-recordsets-portal.md), [l’API REST](/powershell/module/az.dns), le [SDK](dns-sdk.md), les [applets de commande PowerShell](dns-operations-recordsets.md) ou [l’outil CLI](dns-operations-recordsets-cli.md).
 
 La fonctionnalité de transfert de zone est suivie dans le backlog Azure DNS. Utilisez le site de commentaires pour [inscrire votre support pour cette fonctionnalité](https://feedback.azure.com/forums/217313-networking/suggestions/12925503-extend-azure-dns-to-support-zone-transfers-so-it-c).
 
@@ -149,7 +149,7 @@ Oui. Azure DNS prend en charge le co-hébergement de domaines avec d’autres se
 
 Pour configurer le cohébergement, modifiez les enregistrements NS du domaine pour qu’ils pointent vers les serveurs de noms des deux fournisseurs. Les enregistrements de serveur de noms (NS) déterminent quels fournisseurs reçoivent des requêtes DNS pour le domaine. Vous pouvez modifier ces enregistrements NS dans Azure DNS, dans l’autre fournisseur et dans la zone parente. Cette dernière est généralement configurée par le biais du bureau d’enregistrement de noms de domaine. Pour plus d’informations sur la délégation DNS, consultez [Délégation de domaine DNS](dns-domain-delegation.md).
 
-Vérifiez également que les enregistrements DNS du domaine sont synchronisés entre les deux fournisseurs DNS. Azure DNS ne prend actuellement pas en charge les transferts de zone DNS. Les enregistrements DNS doivent être synchronisés à l’aide du [portail de gestion Azure DNS](dns-operations-recordsets-portal.md), de [l’API REST](https://docs.microsoft.com/rest/api/dns/), du [SDK](dns-sdk.md), des [applets de commande PowerShell](dns-operations-recordsets.md) ou de [l’outil CLI](dns-operations-recordsets-cli.md).
+Vérifiez également que les enregistrements DNS du domaine sont synchronisés entre les deux fournisseurs DNS. Azure DNS ne prend actuellement pas en charge les transferts de zone DNS. Les enregistrements DNS doivent être synchronisés à l’aide du [portail de gestion Azure DNS](dns-operations-recordsets-portal.md), de [l’API REST](/rest/api/dns/), du [SDK](dns-sdk.md), des [applets de commande PowerShell](dns-operations-recordsets.md) ou de [l’outil CLI](dns-operations-recordsets-cli.md).
 
 ### <a name="do-i-have-to-delegate-my-domain-to-all-four-azure-dns-name-servers"></a>Dois-je déléguer mon domaine sur les quatre serveurs de noms Azure DNS ?
 
@@ -177,7 +177,7 @@ Les changements apportés aux enregistrements DNS existants peuvent prendre un p
 
 ### <a name="how-can-i-protect-my-dns-zones-against-accidental-deletion"></a>Comment puis-je protéger mes zones DNS contre une suppression accidentelle ?
 
-Azure DNS est géré à l’aide d’Azure Resource Manager. Ce service tire profit des fonctionnalités de contrôle d’accès proposées par Azure Resource Manager. Le contrôle d’accès en fonction du rôle contrôle les utilisateurs qui disposent d’un accès en lecture ou en écriture aux zones et jeux d’enregistrements DNS. Les verrouillages de ressources empêchent toute modification ou suppression accidentelle de zones et jeux d’enregistrements DNS.
+Azure DNS est géré à l’aide d’Azure Resource Manager. Ce service tire profit des fonctionnalités de contrôle d’accès proposées par Azure Resource Manager. Le contrôle d’accès en fonction du rôle Azure permet de contrôler les utilisateurs disposant d’un accès en lecture ou en écriture aux zones et jeux d’enregistrements DNS. Les verrouillages de ressources empêchent toute modification ou suppression accidentelle de zones et jeux d’enregistrements DNS.
 
 Pour plus d’informations, consultez [Protéger des enregistrements et zones DNS](dns-protect-zones-recordsets.md).
 

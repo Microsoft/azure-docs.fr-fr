@@ -6,13 +6,13 @@ ms.author: mhopkins
 ms.date: 11/20/2018
 ms.service: storage
 ms.subservice: blobs
-ms.topic: conceptual
-ms.openlocfilehash: 54085d602246d38adb970ed02f451241ca7ba19d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: 7fc1b2638c2ab17c4cd58ca8d4508d2e6d244cfa
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68726404"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95996805"
 ---
 # <a name="how-to-use-blob-storage-from-ios"></a>Utilisation du stockage d’objets blob à partir d’iOS
 
@@ -82,7 +82,7 @@ Vous pouvez ensuite importer le fichier d’infrastructure dans votre applicatio
 #import <AZSClient/AZSClient.h>
 ```
 
-Si vous utilisez Swift, vous devez créer un en-tête de pontage et importer \<<AZSClient/AZSClient.h> ici :
+Si vous utilisez Swift, vous devez créer un en-tête de pontage et importer \<AZSClient/AZSClient.h> ici :
 
 1. Créez un fichier d’en-tête `Bridging-Header.h`, puis ajoutez l’instruction import ci-dessus.
 2. Accédez à l’onglet *Paramètre de génération* et recherchez *En-tête de pontage Objective-C*.
@@ -99,7 +99,7 @@ Si vous utilisez Swift, vous devez créer un en-tête de pontage et importer \<<
 
 ## <a name="create-a-container"></a>Créez un conteneur.
 
-Chaque objet blob dans Azure Storage doit résider dans un conteneur. L’exemple suivant montre comment créer un conteneur appelé *newcontainer*dans votre compte de stockage s’il n’existe pas déjà. Lorsque vous choisissez un nom pour votre conteneur, gardez à l’esprit les règles d’affectation de noms mentionnées ci-dessus.
+Chaque objet blob dans Azure Storage doit résider dans un conteneur. L’exemple suivant montre comment créer un conteneur appelé *newcontainer* dans votre compte de stockage s’il n’existe pas déjà. Lorsque vous choisissez un nom pour votre conteneur, gardez à l’esprit les règles d’affectation de noms mentionnées ci-dessus.
 
 ```objc
 -(void)createContainer{
@@ -391,8 +391,8 @@ Maintenant que vous avez appris à utiliser le stockage d’objets blob d’iOS,
 
 - [Bibliothèque cliente d’Azure Storage pour iOS](https://github.com/azure/azure-storage-ios)
 - [Documentation de référence d’Azure Storage pour iOS](https://azure.github.io/azure-storage-ios/)
-- [API REST des services d’Azure Storage](https://msdn.microsoft.com/library/azure/dd179355.aspx)
-- [Blog de l'équipe Azure Storage](https://blogs.msdn.com/b/windowsazurestorage)
+- [API REST des services d’Azure Storage](/rest/api/storageservices/)
+- [Blog de l'équipe Azure Storage](/archive/blogs/windowsazurestorage/)
 
-Si vous avez des questions concernant cette bibliothèque, n’hésitez pas à les publier sur notre [forum MSDN Azure](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=windowsazuredata) ou sur [Stack Overflow](https://stackoverflow.com/questions/tagged/windows-azure-storage+or+windows-azure-storage+or+azure-storage-blobs+or+azure-storage-tables+or+azure-table-storage+or+windows-azure-queues+or+azure-storage-queues+or+azure-storage-emulator+or+azure-storage-files).
+Si vous avez des questions concernant cette bibliothèque, n’hésitez pas à les publier sur notre [Page de questions Microsoft Q&R](/answers/topics/azure-blob-storage.html) ou sur [Stack Overflow](https://stackoverflow.com/questions/tagged/windows-azure-storage+or+windows-azure-storage+or+azure-storage-blobs+or+azure-storage-tables+or+azure-table-storage+or+windows-azure-queues+or+azure-storage-queues+or+azure-storage-emulator+or+azure-storage-files).
 Si vous avez des suggestions de fonctionnalités pour le stockage Azure, envoyez un message sur [Commentaires sur le stockage Azure](https://feedback.azure.com/forums/217298-storage/).

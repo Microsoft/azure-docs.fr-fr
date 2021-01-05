@@ -1,17 +1,17 @@
 ---
 title: Gérer les connexions dans Azure Automation
-description: Les ressources de connexion dans Azure Automation contiennent les informations nécessaires pour se connecter à une application ou un service externe à partir d’un Runbook ou d’une configuration DSC. Cet article présente de façon détaillée les connexions et leur utilisation dans la création textuelle et graphique.
+description: Cet article explique comment gérer les connexions Azure Automation pour des applications ou services externes, et comment les utiliser dans des runbooks.
 services: automation
 ms.subservice: shared-capabilities
 ms.date: 01/13/2020
 ms.topic: conceptual
 ms.custom: has-adal-ref
-ms.openlocfilehash: 1a50c5d3d6e068054cfc8381b220d38471a7eb6c
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.openlocfilehash: 0a3cff616f814b8e5209b15f9d3f7439533452ca
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82996570"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92071759"
 ---
 # <a name="manage-connections-in-azure-automation"></a>Gérer les connexions dans Azure Automation
 
@@ -43,10 +43,10 @@ Les cmdlets du tableau suivant créent et gèrent les connexions Automation avec
 
 |Applet de commande|Description|
 |---|---|
-|[Get-AzAutomationConnection](https://docs.microsoft.com/powershell/module/az.automation/get-azautomationconnection?view=azps-3.7.0)|Récupère des informations sur une connexion.|
-|[New-AzAutomationConnection](https://docs.microsoft.com/powershell/module/az.automation/new-azautomationconnection?view=azps-3.7.0)|Crée une connexion.|
-|[Remove-AzAutomationConnection](https://docs.microsoft.com/powershell/module/Az.Automation/Remove-AzAutomationConnection?view=azps-3.7.0)|Supprime une connexion existante.|
-|[Set-AzAutomationConnectionFieldValue](https://docs.microsoft.com/powershell/module/Az.Automation/Set-AzAutomationConnectionFieldValue?view=azps-3.7.0)|Définit la valeur d’un champ particulier d’une connexion existante.|
+|[Get-AzAutomationConnection](/powershell/module/az.automation/get-azautomationconnection?view=azps-3.7.0)|Récupère des informations sur une connexion.|
+|[New-AzAutomationConnection](/powershell/module/az.automation/new-azautomationconnection?view=azps-3.7.0)|Crée une connexion.|
+|[Remove-AzAutomationConnection](/powershell/module/Az.Automation/Remove-AzAutomationConnection?view=azps-3.7.0)|Supprime une connexion existante.|
+|[Set-AzAutomationConnectionFieldValue](/powershell/module/Az.Automation/Set-AzAutomationConnectionFieldValue?view=azps-3.7.0)|Définit la valeur d’un champ particulier d’une connexion existante.|
 
 ## <a name="internal-cmdlets-to-access-connections"></a>Cmdlets internes pour accéder aux connexions
 
@@ -54,7 +54,7 @@ La cmdlet interne dans le tableau suivant est utilisée pour accéder aux connex
 
 |Cmdlet interne|Description|
 |---|---|
-|`Get-AutomationConnection` | Récupère les valeurs des différents champs de la connexion et les renvoie sous forme de [table de hachage](https://go.microsoft.com/fwlink/?LinkID=324844). Vous pouvez utiliser cette table de hachage avec les commandes appropriées dans le runbook ou la configuration DSC.|
+|`Get-AutomationConnection` | Récupère les valeurs des différents champs de la connexion et les renvoie sous forme de [table de hachage](/powershell/module/microsoft.powershell.core/about/about_hash_tables). Vous pouvez utiliser cette table de hachage avec les commandes appropriées dans le runbook ou la configuration DSC.|
 
 >[!NOTE]
 >Évitez d'utiliser des variables dans le paramètre `Name` de `Get-AutomationConnection`. L’utilisation de variables dans ce cas peut compliquer la détection des dépendances entre les runbooks ou les configurations DSC et les ressources de connexion au moment de la conception.
@@ -141,7 +141,7 @@ Vous pouvez ajouter une activité pour la cmdlet `Get-AutomationConnection` inte
 
 ![ajouter au canevas](media/automation-connections/connection-add-canvas.png)
 
-L’image suivante montre un exemple d’utilisation d’un objet de connexion dans un runbook graphique. Il repose sur les données `Constant value` définies pour l’activité `Get RunAs Connection` qui utilise un objet de connexion pour l’authentification. Un [lien pipeline](automation-graphical-authoring-intro.md#links-and-workflow) est utilisé ici car l'ensemble de paramètres `ServicePrincipalCertificate`attend un seul objet.
+L’image suivante montre un exemple d’utilisation d’un objet de connexion dans un runbook graphique. Il repose sur les données `Constant value` définies pour l’activité `Get RunAs Connection` qui utilise un objet de connexion pour l’authentification. Un [lien pipeline](automation-graphical-authoring-intro.md#use-links-for-workflow) est utilisé ici car l'ensemble de paramètres `ServicePrincipalCertificate`attend un seul objet.
 
 ![obtenir les connexions](media/automation-connections/automation-get-connection-object.png)
 

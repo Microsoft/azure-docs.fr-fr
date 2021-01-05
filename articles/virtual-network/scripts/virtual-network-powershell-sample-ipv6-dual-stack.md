@@ -1,7 +1,7 @@
 ---
 title: Exemple de script Azure PowerShell - Configurer des points de terminaison IPv6
 titlesuffix: Azure Virtual Network
-description: Activer les points de terminaison IPv6 à l’aide de Powershell dans un réseau virtuel Azure
+description: Configurez des points de terminaison IPv6 dans un réseau virtuel à l’aide d’un script Azure PowerShell et trouvez des liens vers la documentation spécifique à la commande afin d’obtenir de l’aide sur l’exemple PowerShell.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -12,14 +12,15 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 07/15/2019
 ms.author: kumud
-ms.openlocfilehash: 5e8102cbf89d601c027e3b969c1c431da8807018
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 829741430f8a94442a0bd4cba300c1bb67b9cee1
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77201362"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95992980"
 ---
-# <a name="configure-ipv6-endpoints-in-virtual-network-script-sample-preview"></a>Exemple de script de configuration de points de terminaison IPv6 dans un réseau virtuel (préversion)
+# <a name="configure-ipv6-endpoints-in-virtual-network-with-azure-powershell-script-sample-preview"></a>Configurer des points de terminaison IPv6 dans le réseau virtuel avec l’exemple de script Azure PowerShell (préversion)
 
 Cet article montre comment déployer dans Azure une application double pile (IPv4 + IPv6) incluant un réseau virtuel double pile avec un sous-réseau double pile, un équilibreur de charge avec des configurations frontales doubles (IPv4 + IPv6), des machines virtuelles dont les cartes réseau ont une configuration double IP, des règles de Groupe de sécurité réseau doubles et des adresses IP publiques doubles.
 
@@ -172,28 +173,28 @@ $nsg = New-AzNetworkSecurityGroup `
 # Create dual stack subnet config
 $subnet = New-AzVirtualNetworkSubnetConfig `
 -Name "dsSubnet" `
--AddressPrefix "10.0.0.0/24","ace:cab:deca:deed::/64"
+-AddressPrefix "10.0.0.0/24","fd00:db8:deca:deed::/64"
 
 # Create the virtual network
 $vnet = New-AzVirtualNetwork `
   -ResourceGroupName $rg.ResourceGroupName `
   -Location $rg.Location  `
   -Name "dsVnet" `
-  -AddressPrefix "10.0.0.0/16","ace:cab:deca::/48"  `
+  -AddressPrefix "10.0.0.0/16","fd00:db8:deca::/48"  `
   -Subnet $subnet
   
   #Create network interfaces (NICs)
-  $Ip4Config=New-AzNetworkInterfaceIpConfig `
-    -Name dsIp4Config `
+  $Ip4Config=New-AzNetworkInterfaceIpConfig `
+    -Name dsIp4Config `
     -Subnet $vnet.subnets[0] `
-    -PrivateIpAddressVersion IPv4 `
+    -PrivateIpAddressVersion IPv4 `
     -LoadBalancerBackendAddressPool $backendPoolv4 `
     -PublicIpAddress  $RdpPublicIP_1
     
-  $Ip6Config=New-AzNetworkInterfaceIpConfig `
-    -Name dsIp6Config `
+  $Ip6Config=New-AzNetworkInterfaceIpConfig `
+    -Name dsIp6Config `
     -Subnet $vnet.subnets[0] `
-    -PrivateIpAddressVersion IPv6 `
+    -PrivateIpAddressVersion IPv6 `
     -LoadBalancerBackendAddressPool $backendPoolv6
     
   $NIC_1 = New-AzNetworkInterface `
@@ -203,10 +204,10 @@ $vnet = New-AzVirtualNetwork `
     -NetworkSecurityGroupId $nsg.Id `
     -IpConfiguration $Ip4Config,$Ip6Config 
     
-  $Ip4Config=New-AzNetworkInterfaceIpConfig `
-    -Name dsIp4Config `
+  $Ip4Config=New-AzNetworkInterfaceIpConfig `
+    -Name dsIp4Config `
     -Subnet $vnet.subnets[0] `
-    -PrivateIpAddressVersion IPv4 `
+    -PrivateIpAddressVersion IPv4 `
     -LoadBalancerBackendAddressPool $backendPoolv4 `
     -PublicIpAddress  $RdpPublicIP_2  
 
@@ -269,6 +270,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
 
 Vous pouvez trouver des exemples supplémentaires de scripts PowerShell de mise en réseau dans la [documentation Vue d’ensemble de la mise en réseau Azure](../powershell-samples.md?toc=%2fazure%2fnetworking%2ftoc.json).

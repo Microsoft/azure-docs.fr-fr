@@ -1,0 +1,158 @@
+items:
+  - name: Documentation Azure Purview
+    href: index.yml
+  - name: Vue d’ensemble
+    items:
+      - name: "Qu’est-ce qu’Azure Purview\_?"
+        href: overview.md
+  - name: Démarrages rapides
+    expanded: true
+    items:
+      - name: Créer un compte Purview - Portail Azure
+        href: create-catalog-portal.md
+      - name: Créer un compte Purview - Azure PowerShell
+        href: create-catalog-powershell.md
+  - name: Tutoriels
+    items:
+      - name: Starter kit
+        items:
+          - name: Analyser les données
+            href: tutorial-scan-data.md
+          - name: Parcourir la page d’accueil et rechercher
+            href: tutorial-asset-search.md
+          - name: Parcourir les éléments et afficher la traçabilité
+            href: tutorial-browse-and-view-lineage.md
+          - name: 'Explorer les jeux de ressources, les éléments, les schémas, les classifications'
+            href: tutorial-schemas-and-classifications.md
+          - name: Créer des termes de glossaire
+            href: tutorial-import-create-glossary-terms.md
+      - name: Inscrire et analyser un serveur SQL local
+        href: register-scan-on-premises-sql-server.md
+      - name: Appeler les API REST pour le catalogue
+        href: tutorial-using-rest-apis.md
+  - name: Concepts
+    items:
+      - name: Utiliser Purview Studio
+        href: use-purview-studio.md
+      - name: Bonnes pratiques de déploiement
+        href: deployment-best-practices.md
+      - name: Limites d’Azure Purview
+        href: how-to-manage-quotas.md
+      - name: Comment les analyses détectent les éléments supprimés
+        href: concept-detect-deleted-assets.md
+      - name: Présentation des jeux de ressources
+        href: concept-resource-sets.md
+      - name: Traçabilité des données
+        href: concept-data-lineage.md
+      - name: Sources de données et types de fichiers pris en charge
+        href: sources-and-scans.md
+      - name: Autorisations du catalogue
+        href: catalog-permissions.md
+      - name: Recherche dans les catalogues
+        href: concept-search.md
+      - name: Glossaire métier
+        href: concept-business-glossary.md
+      - name: Insights sur les données
+        href: concept-insights.md
+      - name: Navigateurs pris en charge
+        href: supported-browsers.md
+      - name: Forum aux questions
+        href: frequently-asked-questions.md
+  - name: Guides pratiques
+    items:
+      - name: Inscrire et analyser
+        items:
+          - name: Gérer les informations d'identification
+            href: manage-credentials.md
+            displayName: Create and manage Credentials
+          - name: Créer un ensemble de règles d’analyse
+            href: create-a-scan-rule-set.md
+          - name: Runtimes d’intégration
+            href: manage-integration-runtimes.md
+          - name: Résoudre les problèmes de connexion
+            href: troubleshoot-connections.md
+          - name: Sources
+            items:
+              - name: Gérer les sources de données
+                href: manage-data-sources.md
+              - name: Vue d’ensemble des connecteurs Purview
+                href: purview-connector-overview.md
+              - name: Stockage Blob Azure
+                href: register-scan-azure-blob-storage-source.md
+                displayName: Register and scan azure blob storage
+              - name: Azure Cosmos DB
+                href: register-scan-azure-cosmos-database.md
+                displayName: Register and scan Azure Cosmos DB
+              - name: Explorateur de données Azure
+                href: register-scan-azure-data-explorer.md
+                displayName: Register and scan Azure Data Explorer Kusto
+              - name: Azure Data Lake Storage Gen 1
+                href: register-scan-adls-gen1.md
+                displayName: Register and scan Azure Data Lake Storage Gen 1 ADLS
+              - name: Azure Data Lake Storage Gen 2
+                href: register-scan-adls-gen2.md
+                displayName: Register and scan Azure Data Lake Storage Gen 2 ADLS
+              - name: Azure SQL Database
+                href: register-scan-azure-sql-database.md
+                displayName: Register and scan Azure SQL DB
+              - name: Azure SQL Database Managed Instance
+                href: register-scan-azure-sql-database-managed-instance.md
+                displayName: Register and scan Azure SQL DB Managed Instance
+              - name: Azure Synapse Analytics
+                href: register-scan-azure-synapse-analytics.md
+              - name: Serveur SQL local
+                href: register-scan-on-premises-sql-server.md
+              - name: "Locataire Power\_BI - Portail"
+                href: register-scan-power-bi-tenant.md
+      - name: Glossaire métier
+        items:
+          - name: 'Créer, importer et exporter des termes de glossaire'
+            href: how-to-create-import-export-glossary.md
+          - name: Gérer les modèles de terme
+            href: how-to-manage-term-templates.md
+          - name: Modifier en bloc des éléments pour affecter des termes de glossaire
+            href: how-to-bulk-edit-assets.md
+      - name: Classer
+        items:
+          - name: Créer une classification et une règle de classification personnalisées
+            href: create-a-custom-classification-and-classification-rule.md
+          - name: Appliquer des classifications
+            href: apply-classifications.md
+          - name: Étiqueter automatiquement votre contenu
+            href: create-sensitivity-label.md
+      - name: Rechercher et parcourir
+        items:
+          - name: Parcourir un catalogue de données
+            href: how-to-browse-catalog.md
+          - name: Rechercher dans un catalogue de données
+            href: how-to-search-catalog.md
+      - name: Lignage
+        items:
+          - name: Guide de l’utilisateur sur la traçabilité
+            href: catalog-lineage-user-guide.md
+          - name: Traçabilité Azure Data Factory
+            href: how-to-link-azure-data-factory.md
+          - name: Traçabilité Azure Data Share
+            href: how-to-link-azure-data-share.md
+      - name: Superviser
+        items:
+          - name: Surveiller avec Azure Monitor
+            href: how-to-monitor-with-azure-monitor.md
+      - name: Insights
+        items:
+          - name: Afficher des insights sur les éléments
+            href: asset-insights.md
+          - name: Afficher des insights sur les glossaires
+            href: glossary-insights.md
+          - name: Afficher des insights sur les analyses
+            href: scan-insights.md
+          - name: Afficher des insights sur les classifications
+            href: classification-insights.md
+          - name: Afficher des insights sur les étiquettes de confidentialité
+            href: sensitivity-insights.md
+          - name: Afficher des insights sur les extensions de fichier
+            href: file-extension-insights.md
+  - name: Informations de référence
+    items:
+      - name: Classifications prises en charge
+        href: supported-classifications.md

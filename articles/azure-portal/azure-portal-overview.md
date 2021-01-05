@@ -1,20 +1,15 @@
 ---
-title: Vue d’ensemble du portail Azure | Microsoft Docs
+title: Présentation du portail Azure
 description: Le portail Azure est une interface utilisateur graphique que vous pouvez utiliser pour gérer vos services Azure. Découvrez comment explorer et rechercher des ressources dans le portail Azure.
-services: azure-portal
 keywords: portail
-author: mgblythe
-ms.author: mblythe
 ms.date: 12/20/2019
-ms.topic: conceptual
-ms.service: azure-portal
-manager: mtillman
-ms.openlocfilehash: c5e02e791185db3713c67b8ff97b8f7eebe9da77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: overview
+ms.openlocfilehash: 1e9cf1a9609b9d4f30e51094f1d0542335ead0e2
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76310728"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745925"
 ---
 # <a name="azure-portal-overview"></a>Présentation du portail Azure
 
@@ -42,7 +37,7 @@ Si vous choisissez le mode ancré pour le menu du portail, il sera toujours visi
 
 En tant que nouvel abonné aux services Azure, la première chose que vous voyez après vous être [connecté au portail](https://portal.azure.com) est la page **Accueil Azure**. Cette page compile les ressources qui vous aideront à tirer le meilleur parti de votre abonnement Azure. Nous avons inclus des liens vers des cours en ligne gratuits, de la documentation, des services essentiels et des sites utiles pour rester à jour et gérer les changements pour votre organisation. Pour un accès simple et rapide au travail en cours, nous montrons également la liste des ressources consultées en dernier. Vous ne pouvez pas personnaliser cette page, mais vous pouvez choisir de voir la page **Accueil Azure** ou **Tableau de bord Azure** comme vue par défaut. La première fois que vous vous connectez, une invite en haut de la page vous permet d’enregistrer votre préférence.
 
-![Capture d’écran montrant le sélecteur de la vue par défaut](./media/azure-portal-overview/azure-portal-default-view.png)
+![Capture d’écran montrant où enregistrer vos préférences.](./media/azure-portal-overview/azure-portal-default-view.png)
 
 Le menu du portail Azure et l’affichage par défaut d’Azure peuvent être modifiés dans **Paramètres du portail**. Si vous modifiez votre sélection, la modification est immédiatement appliquée.
 
@@ -54,7 +49,7 @@ Les tableaux de bord fournissent une vue ciblée des ressources de votre abonnem
 
 ## <a name="getting-around-the-portal"></a>Visite guidée du portail
 
-Il est utile de comprendre la disposition de base du portail et comment interagir avec lui. Ici, nous allons présenter les composants de l’interface utilisateur et certains éléments de la terminologie que nous utilisons pour donner des instructions. Pour une visite guidée plus détaillée du portail, consultez la leçon [Parcourir le portail](https://docs.microsoft.com/learn/modules/tour-azure-portal/3-navigate-the-portal).
+Il est utile de comprendre la disposition de base du portail et comment interagir avec lui. Ici, nous allons présenter les composants de l’interface utilisateur et certains éléments de la terminologie que nous utilisons pour donner des instructions. Pour une visite guidée plus détaillée du portail, consultez la leçon [Parcourir le portail](/learn/modules/tour-azure-portal/3-navigate-the-portal).
 
 Le menu et l’en-tête de page du portail Azure sont des éléments globaux qui sont toujours présents. Ces fonctionnalités persistantes sont « l’interpréteur de commandes » de l’interface utilisateur associée à chaque service ou fonctionnalité, et l’en-tête permet d’accéder à des contrôles globaux. La page de configuration (parfois appelée « panneau ») d’une ressource peut également avoir un menu de ressources qui vous aidera à vous déplacer entre les fonctionnalités.
 

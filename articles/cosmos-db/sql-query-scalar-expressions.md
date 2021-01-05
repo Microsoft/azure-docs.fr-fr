@@ -3,17 +3,19 @@ title: Expressions scalaires dans les requêtes SQL Azure Cosmos DB
 description: Découvrez la syntaxe SQL des expressions scalaires pour Azure Cosmos DB. Cet article explique également comment combiner des expressions scalaires en expressions complexes à l’aide d’opérateurs.
 author: markjbrown
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/17/2019
 ms.author: mjbrown
-ms.openlocfilehash: f8c98915ad3b682af00492acc7bc51672ec874a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 34df2d2f4a2209cca93c3f7ac12dcd203bf4a089
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74870732"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339629"
 ---
 # <a name="scalar-expressions-in-azure-cosmos-db-sql-queries"></a>Expressions scalaires dans les requêtes SQL Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 La [clause SELECT](sql-query-select.md) prend en charge les expressions scalaires. Une expression scalaire est une combinaison de symboles et d’opérateurs qui peut être évaluée pour obtenir une valeur unique. Voici quelques exemples d’expressions scalaires : constantes, références de propriété, références d’élément de tableau, références d’alias ou appels de fonction. Les expressions scalaires peuvent être combinées dans des expressions complexes utilisant des opérateurs.
 
@@ -55,7 +57,7 @@ La [clause SELECT](sql-query-select.md) prend en charge les expressions scalaire
 - `input_alias`  
   
    Représente une valeur définie par le `input_alias` introduit dans la clause `FROM`.  
-  Cette valeur est assurée de ne pas être **Undefined**, car les valeurs **Undefined** dans l’entrée sont ignorées.  
+  Cette valeur est assurée de ne pas être **Undefined** , car les valeurs **Undefined** dans l’entrée sont ignorées.  
   
 - `<scalar_expression>.property_name`  
   

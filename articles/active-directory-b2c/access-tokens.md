@@ -7,15 +7,16 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/12/2020
+ms.date: 10/26/2020
+ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 36027583d64ac91432888d866440932c6e1bdd07
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 937041bbb48f112e2c8ed7d222dc7c7ef7ea8d81
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83635443"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92631391"
 ---
 # <a name="request-an-access-token-in-azure-active-directory-b2c"></a>Demander un jeton d’accès dans Azure Active Directory B2C
 
@@ -29,13 +30,13 @@ Cet article présente comment demander un jeton d’accès pour une application 
 ## <a name="prerequisites"></a>Prérequis
 
 - [Créez un flux d'utilisateurs](tutorial-create-user-flows.md) pour permettre aux utilisateurs de s'inscrire et de se connecter à votre application.
-- Si ce n’est pas déjà fait, [ajoutez une application d’API web à votre locataire Azure Active Directory B2C](add-web-application.md).
+- Si ce n’est pas déjà fait, [ajoutez une application d’API web à votre locataire Azure Active Directory B2C](add-web-api-application.md).
 
 ## <a name="scopes"></a>Étendues
 
-Les étendues permettent de gérer les autorisations d’accès aux ressources protégées. Lorsqu’un jeton d’accès est demandé, l’application cliente doit spécifier les autorisations souhaitées dans le paramètre **d’étendue** de la requête. Par exemple, pour spécifier la **valeur d’étendue** de `read` pour l’API qui a l’**URI ID d’application** de `https://contoso.onmicrosoft.com/api`, l’étendue serait `https://contoso.onmicrosoft.com/api/read`.
+Les étendues permettent de gérer les autorisations d’accès aux ressources protégées. Lorsqu’un jeton d’accès est demandé, l’application cliente doit spécifier les autorisations souhaitées dans le paramètre **d’étendue** de la requête. Par exemple, pour spécifier la **valeur d’étendue** de `read` pour l’API qui a l’ **URI ID d’application** de `https://contoso.onmicrosoft.com/api`, l’étendue serait `https://contoso.onmicrosoft.com/api/read`.
 
-Elles sont utilisées par l’API web pour implémenter le contrôle d’accès basé sur les étendues. Par exemple, les utilisateurs de l’API web peuvent avoir un accès en lecture et en écriture, ou les utilisateurs de l’API web peuvent avoir l’accès en lecture uniquement. Pour acquérir plusieurs autorisations dans la même requête, vous pouvez ajouter plusieurs entrées séparées par des espaces dans le même paramètre d’**étendue** de la requête.
+Elles sont utilisées par l’API web pour implémenter le contrôle d’accès basé sur les étendues. Par exemple, les utilisateurs de l’API web peuvent avoir un accès en lecture et en écriture, ou les utilisateurs de l’API web peuvent avoir l’accès en lecture uniquement. Pour acquérir plusieurs autorisations dans la même requête, vous pouvez ajouter plusieurs entrées séparées par des espaces dans le même paramètre d’ **étendue** de la requête.
 
 L’exemple suivant présente des étendues décodées dans une URL :
 
@@ -49,10 +50,15 @@ L’exemple suivant présente des étendues encodées dans une URL :
 scope=https%3A%2F%2Fcontoso.onmicrosoft.com%2Fapi%2Fread%20openid%20offline_access
 ```
 
-Si vous demandez plus d’étendues que ce qui est autorisé pour votre application cliente, l’appel réussit si au moins une autorisation est accordée. La revendication **scp** du jeton d’accès obtenue est remplie uniquement avec les autorisations qui ont été accordées. Le standard OpenID Connect spécifie plusieurs valeurs spéciales d’étendue. Les étendues suivantes représentent l’autorisation d’accès au profil de l’utilisateur :
+Si vous demandez plus d’étendues que ce qui est autorisé pour votre application cliente, l’appel réussit si au moins une autorisation est accordée. La revendication **scp** du jeton d’accès obtenue est remplie uniquement avec les autorisations qui ont été accordées. 
+
+### <a name="openid-connect-scopes"></a>Étendues OpenId Connect
+
+Le standard OpenID Connect spécifie plusieurs valeurs spéciales d’étendue. Les étendues suivantes représentent l'autorisation d'accès au profil de l'utilisateur :
 
 - **openid** : cette étendue demande un jeton d’ID.
-- **offline_access** : cette étendue demande un jeton d’actualisation à l’aide du [flux de code d’authentification](authorization-code-flow.md).
+- **offline_access**  : cette étendue demande un jeton d’actualisation à l’aide du [flux de code d’authentification](authorization-code-flow.md).
+- **00000000-0000-0000-0000-000000000000** : l’utilisation de l’ID de client comme étendue indique que votre application a besoin d’un jeton d’accès qui peut être utilisé avec votre propre service ou API web, représenté par le même ID de client.
 
 Si le paramètre **response_type** dans une requête `/authorize` inclut `token`, le paramètre **scope** doit inclure au moins l’une des étendues de ressource (autre que `openid` et `offline_access`) qui sera accordée. Sinon, la demande `/authorize` échoue.
 
@@ -67,8 +73,8 @@ Dans l'exemple suivant, vous remplacez ces valeurs :
 - `<application-ID>` - Identificateur de l’application web que vous avez inscrite pour prendre en charge le flux d’utilisateur.
 - `<redirect-uri>` - **URI de redirection** que vous avez entré lorsque vous avez inscrit l'application cliente.
 
-```HTTP
-GET https://<tenant-name>.b2clogin.com/tfp/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/authorize?
+```http
+GET https://<tenant-name>.b2clogin.com/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/authorize?
 client_id=<application-ID>
 &nonce=anyRandomValue
 &redirect_uri=https://jwt.ms
@@ -84,7 +90,7 @@ https://jwt.ms/?code=eyJraWQiOiJjcGltY29yZV8wOTI1MjAxNSIsInZlciI6IjEuMC...
 
 Après avoir reçu le code d’autorisation, vous pouvez l’utiliser pour demander un jeton d’accès :
 
-```HTTP
+```http
 POST <tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/token HTTP/1.1
 Host: <tenant-name>.b2clogin.com
 Content-Type: application/x-www-form-urlencoded
@@ -99,7 +105,7 @@ grant_type=authorization_code
 
 Vous devriez voir quelque chose de similaire à la réponse suivante :
 
-```JSON
+```json
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ilg1ZVhrN...",
     "token_type": "Bearer",
@@ -113,7 +119,7 @@ Vous devriez voir quelque chose de similaire à la réponse suivante :
 
 Lorsque vous utilisez https://jwt.ms pour examiner le jeton d’accès retourné, vous devriez voir quelque chose de similaire à l’exemple suivant :
 
-```JSON
+```json
 {
   "typ": "JWT",
   "alg": "RS256",

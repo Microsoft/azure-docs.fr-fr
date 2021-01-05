@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure CLI - Supprimer des conteneurs par préfixe | Microsoft Docs
-description: Supprimez des conteneurs d’objets blob Stockage Azure selon un préfixe de nom de conteneur.
+description: Supprimez des conteneurs d’objets blob Stockage Azure selon un préfixe de nom de conteneur, puis nettoyez le déploiement. Consultez les liens d’aide pour les commandes utilisées dans l’exemple de script.
 services: storage
 author: tamram
 ms.service: storage
@@ -9,14 +9,15 @@ ms.devlang: cli
 ms.topic: sample
 ms.date: 06/22/2017
 ms.author: tamram
-ms.openlocfilehash: 391cc4c08b7067ef388c2130cb340fb5597c843f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: aeccf255004cd4512fbc591942324341504b20f7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067016"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87901876"
 ---
-# <a name="delete-containers-based-on-container-name-prefix"></a>Supprimer des conteneurs selon un préfixe de nom de conteneur
+# <a name="use-an-azure-cli-script-to-delete-containers-based-on-container-name-prefix"></a>Utiliser un script Azure CLI pour supprimer des conteneurs en fonction d’un préfixe de nom de conteneur
 
 Ce script crée d’abord quelques exemples de conteneurs dans le stockage d’objets blob Azure, puis supprime certains des conteneurs selon un préfixe dans le nom du conteneur.
 

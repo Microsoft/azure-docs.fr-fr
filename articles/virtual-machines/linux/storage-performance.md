@@ -1,23 +1,23 @@
 ---
 title: Optimiser les performances sur les machines virtuelles Azure de la série Lsv2 – Stockage
-description: Découvrez comment optimiser les performances de votre solution sur les machines virtuelles de la série Lsv2.
+description: Découvrez comment optimiser les performances de votre solution sur les machines virtuelles de la série Lsv2 à l’aide d’un exemple Linux.
 services: virtual-machines-linux
 author: laurenhughes
 ms.service: virtual-machines-linux
 ms-subservice: sizes
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 08/05/2019
 ms.author: joelpell
-ms.openlocfilehash: 7a0d5e29097bc9a672e142fcffb0ebe879fe2475
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 650164556223a73a722bc91ecb31491ee98cb8a5
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81757686"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91307099"
 ---
-# <a name="optimize-performance-on-the-lsv2-series-virtual-machines"></a>Optimiser les performances sur les machines virtuelles de la série Lsv2
+# <a name="optimize-performance-on-the-lsv2-series-linux-virtual-machines"></a>Optimiser les performances sur les machines virtuelles Linux de la série Lsv2
 
 Les machines virtuelles de la série Lsv2 prennent en charge diverses charges de travail qui nécessitant des E/S et des débits élevés au niveau du stockage local pour un large éventail d’applications et de secteurs d’activité.  La série Lsv2 est idéale pour le Big Data, SQL, les bases de données NoSQL, l’entreposage de données et les bases de données transactionnelles volumineuses, notamment Cassandra, MongoDB, Cloudera et Redis.
 
@@ -83,7 +83,7 @@ Voici quelques scénarios où les données du client sont effacées par mesure d
 - L’état de la machine virtuelle devient non sain et le service doit être réparé sur un autre nœud en raison d’un problème matériel.
 - Nombre limité d’opérations de maintenance planifiée qui nécessitent la réallocation de la machine virtuelle vers un autre hôte pour la maintenance.
 
-Pour en savoir plus sur les options de sauvegarde des données sur le stockage local, consultez [Sauvegarde et récupération d’urgence pour les disques IaaS Azure](backup-and-disaster-recovery-for-azure-iaas-disks.md).
+Pour en savoir plus sur les options de sauvegarde des données sur le stockage local, consultez [Sauvegarde et récupération d’urgence pour les disques IaaS Azure](../backup-and-disaster-recovery-for-azure-iaas-disks.md).
 
 ## <a name="frequently-asked-questions"></a>Forum aux questions
 
@@ -110,4 +110,4 @@ Pour en savoir plus sur les options de sauvegarde des données sur le stockage l
    
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Consultez les spécifications pour toutes les [machines virtuelles à stockage optimisé](sizes-storage.md) sur Azure
+* Consultez les spécifications pour toutes les [machines virtuelles à stockage optimisé](../sizes-storage.md) sur Azure

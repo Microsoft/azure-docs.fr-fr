@@ -4,20 +4,20 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 02/10/2020
 ms.author: cynthn
-ms.openlocfilehash: 651027ffd63a376ff0b8595636ece4c8f39c86e8
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.openlocfilehash: a9c830025b9ce6c93bf106a8348b0f9dc6521582
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82616114"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95555183"
 ---
 | Ressource | Limite |
 | --- | --- |
-| Machines virtuelles par [abonnement](../articles/billing-buy-sign-up-azure-subscription.md) |25 000<sup>1</sup> par région. |
-| Nombre total de cœurs de machine virtuelle par [abonnement](../articles/billing-buy-sign-up-azure-subscription.md) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
-| Nombre total de cœurs de machine virtuelle Azure Spot par [abonnement](../articles/billing-buy-sign-up-azure-subscription.md) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
-| Machine virtuelle par série, telle que Dv2, et F, cœurs par [abonnement](../articles/billing-buy-sign-up-azure-subscription.md) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
-| [Groupes à haute disponibilité](../articles/virtual-machines/windows/manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy) par abonnement |2 500 par région. |
+| Machines virtuelles par [abonnement](https://azure.microsoft.com/pricing/) |25 000<sup>1</sup> par région. |
+| Nombre total de cœurs de machine virtuelle par [abonnement](https://azure.microsoft.com/pricing/) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
+| Nombre total de cœurs de machine virtuelle Azure Spot par [abonnement](https://azure.microsoft.com/pricing/) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
+| Machine virtuelle par série, telle que Dv2, et F, cœurs par [abonnement](https://azure.microsoft.com/pricing/) |20<sup>1</sup> par région. Contactez le support pour augmenter la limite. |
+| [Groupes à haute disponibilité](../articles/virtual-machines/manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy) par abonnement |2 500 par région. |
 | Machines virtuelles par groupe à haute disponibilité | 200 |
 | Certificats par abonnement |Illimité<sup>2</sup> |
 
@@ -28,4 +28,4 @@ ms.locfileid: "82616114"
 > [!NOTE]
 > Les cœurs de machines virtuelles sont soumis à une limite totale régionale. Ils ont également une limite pour les séries par taille régionales, telles que Dv2 et F. Ces limites sont appliquées séparément. Par exemple, considérons un abonnement dont le nombre total limite de cœurs de machine virtuelle est de 30 pour la région USA Est, de 30 pour la gamme A et de 30 pour la gamme D. Cet abonnement peut déployer 30 machines virtuelles A1, ou 30 machines virtuelles D1, ou encore une combinaison de ces deux types de machines dans la limite de 30 cœurs au total. Par exemple, 10 machines virtuelles A1 et 20 machines virtuelles D1.  
 > <!-- -->
-> 
+>

@@ -3,46 +3,25 @@ title: Utiliser une clé gérée par le client pour chiffrer les disques Azure d
 description: BYOK (Bring Your Own Keys) pour chiffrer les disques de données et de système d’exploitation AKS.
 services: container-service
 ms.topic: article
-ms.date: 01/12/2020
-ms.openlocfilehash: bb6ba5e6dd4ace9e33043079c0f435c10baf5cb2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 09/01/2020
+ms.openlocfilehash: c71052f44f6912006a952bae16fd89ec1dc937db
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77596502"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96607889"
 ---
 # <a name="bring-your-own-keys-byok-with-azure-disks-in-azure-kubernetes-service-aks"></a>BYOK (Bring Your Own Keys) avec des disques Azure dans Azure Kubernetes Service (AKS)
 
-Le stockage Azure chiffre toutes les données dans un compte de stockage au repos. Par défaut, les données sont chiffrées avec des clés managées par Microsoft Pour renforcer le contrôle sur les clés de chiffrement, vous pouvez fournir des [clés managées par le client][customer-managed-keys] à utiliser pour le chiffrement au repos des disques de système d’exploitation et des disques de données pour vos clusters AKS.
+Le stockage Azure chiffre toutes les données dans un compte de stockage au repos. Par défaut, les données sont chiffrées avec des clés managées par Microsoft Pour renforcer le contrôle sur les clés de chiffrement, vous pouvez fournir des clés managées par le client à utiliser pour le chiffrement au repos des disques de système d’exploitation et des disques de données pour vos clusters AKS. En savoir plus sur les clés gérées par le client sur [Linux][customer-managed-keys-linux] et [Windows][customer-managed-keys-windows].
 
-> [!NOTE]
-> Les clusters AKS Windows et Linux BYOK sont disponibles dans les [régions Azure][supported-regions] qui prennent en charge le chiffrement côté serveur des disques managés Azure.
+## <a name="limitations"></a>Limites
+* La prise en charge du chiffrement de disque de données est limitée aux clusters AKS exécutant Kubernetes 1.17 et les versions ultérieures.
+* Le chiffrement du système d’exploitation et du disque de données avec des clés gérées par le client ne peut être activé que lors de la création d’un cluster AKS.
 
-## <a name="before-you-begin"></a>Avant de commencer
-
-* Cet article suppose que vous créez un *cluster AKS*.
-
+## <a name="prerequisites"></a>Prérequis
 * Vous devez activer la suppression réversible et la protection contre le vidage pour *Azure Key Vault* lors de l’utilisation de Key Vault pour chiffrer des disques managés.
-
-* Vous devez disposer d’Azure CLI version 2.0.79 ou ultérieure et de l’extension aks-preview 0.4.26
-
-> [!IMPORTANT]
-> Les fonctionnalités d’évaluation AKS sont en libre-service et font l’objet d’un abonnement. Les versions préliminaires sont fournies « en l’état », « avec toutes les erreurs » et « en fonction des disponibilités », et sont exclues des contrats de niveau de service (sla) et de la garantie limitée. Les versions préliminaires AKS sont partiellement couvertes par le service clientèle sur la base du meilleur effort. En tant que tel, ces fonctionnalités ne sont pas destinées à une utilisation en production. Pour obtenir des informations supplémentaires, veuillez lire les articles de support suivants :
->
-> * [Stratégies de support AKS](support-policies.md)
-> * [FAQ du support Azure](faq.md)
-
-## <a name="install-latest-aks-cli-preview-extension"></a>Installer la dernière extension de la préversion d’AKS CLI
-
-Pour utiliser des clés gérées par le client, vous devez disposer de l’extension CLI *aks-preview* version 0.4.26 ou ultérieure. Installez l’extension Azure CLI *aks-preview* à l’aide de la commande [az extension add][az-extension-add], puis recherchez toutes les mises à jour disponibles à l’aide de la commande [az extension update][az-extension-update] :
-
-```azurecli-interactive
-# Install the aks-preview extension
-az extension add --name aks-preview
-
-# Update the extension to make sure you have the latest version installed
-az extension update --name aks-preview
-```
+* Vous devez disposer d’Azure CLI 2.11.1 ou d’un version ultérieure.
 
 ## <a name="create-an-azure-key-vault-instance"></a>Créer une instance Azure Key Vault
 
@@ -69,10 +48,10 @@ Remplacez *myKeyVaultName* par le nom de votre coffre de clés.  Vous devez éga
     
 ```azurecli-interactive
 # Retrieve the Key Vault Id and store it in a variable
-keyVaultId=$(az keyvault show --name myKeyVaultName --query [id] -o tsv)
+keyVaultId=$(az keyvault show --name myKeyVaultName --query "[id]" -o tsv)
 
 # Retrieve the Key Vault key URL and store it in a variable
-keyVaultKeyUrl=$(az keyvault key show --vault-name myKeyVaultName  --name myKeyName  --query [key.kid] -o tsv)
+keyVaultKeyUrl=$(az keyvault key show --vault-name myKeyVaultName  --name myKeyName  --query "[key.kid]" -o tsv)
 
 # Create a DiskEncryptionSet
 az disk-encryption-set create -n myDiskEncryptionSetName  -l myAzureRegionName  -g myResourceGroup --source-vault $keyVaultId --key-url $keyVaultKeyUrl 
@@ -84,13 +63,10 @@ Utilisez DiskEncryptionSet et les groupes de ressources que vous avez créés lo
 
 ```azurecli-interactive
 # Retrieve the DiskEncryptionSet value and set a variable
-desIdentity=$(az disk-encryption-set show -n myDiskEncryptionSetName  -g myResourceGroup --query [identity.principalId] -o tsv)
+desIdentity=$(az disk-encryption-set show -n myDiskEncryptionSetName  -g myResourceGroup --query "[identity.principalId]" -o tsv)
 
 # Update security policy settings
 az keyvault set-policy -n myKeyVaultName -g myResourceGroup --object-id $desIdentity --key-permissions wrapkey unwrapkey get
-
-# Assign the reader role
-az role assignment create --assignee $desIdentity --role Reader --scope $keyVaultId
 ```
 
 ## <a name="create-a-new-aks-cluster-and-encrypt-the-os-disk"></a>Créer un cluster AKS et chiffrer le disque de système d’exploitation
@@ -102,20 +78,19 @@ Créez un **groupe de ressources** et un cluster AKS, puis utilisez votre clé p
 
 ```azurecli-interactive
 # Retrieve the DiskEncryptionSet value and set a variable
-diskEncryptionSetId=$(az resource show -n mydiskEncryptionSetName -g myResourceGroup --resource-type "Microsoft.Compute/diskEncryptionSets" --query [id] -o tsv)
+diskEncryptionSetId=$(az disk-encryption-set show -n mydiskEncryptionSetName -g myResourceGroup --query "[id]" -o tsv)
 
 # Create a resource group for the AKS cluster
 az group create -n myResourceGroup -l myAzureRegionName
 
 # Create the AKS cluster
-az aks create -n myAKSCluster -g myResourceGroup --node-osdisk-diskencryptionset-id $diskEncryptionSetId --kubernetes-version 1.17.0 --generate-ssh-keys
+az aks create -n myAKSCluster -g myResourceGroup --node-osdisk-diskencryptionset-id $diskEncryptionSetId --kubernetes-version KUBERNETES_VERSION --generate-ssh-keys
 ```
 
 Quand de nouveaux pools de nœuds sont ajoutés au cluster créé ci-dessus, la clé gérée par le client fournie pendant l’opération de création est utilisée pour chiffrer le disque de système d’exploitation.
 
-## <a name="encrypt-your-aks-cluster-data-disk"></a>Chiffrer votre disque de données de cluster AKS
-
-Vous pouvez également chiffrer les disques de données AKS avec vos propres clés.
+## <a name="encrypt-your-aks-cluster-data-diskoptional"></a>Chiffrez votre disque de données de cluster AKS (facultatif)
+La clé de chiffrement du disque du système d’exploitation sera utilisée pour chiffrer le disque de données si la clé n’est pas fournie pour le disque de données à partir de v 1.17.2, et vous pouvez également chiffrer les disques de données AKS avec les autres clés.
 
 > [!IMPORTANT]
 > Vérifiez que vous disposez des informations d’identification AKS appropriées. Le principal du service doit disposer d’un accès de contributeur au groupe de ressources où diskencryptionset est déployé. Sinon, vous obtenez une erreur suggérant que le principal du service ne dispose pas d’autorisations.
@@ -166,15 +141,6 @@ az aks get-credentials --name myAksCluster --resource-group myResourceGroup --ou
 kubectl apply -f byok-azure-disk.yaml
 ```
 
-## <a name="limitations"></a>Limites
-
-* BYOK est disponible uniquement en disponibilité générale et en préversion dans certaines [régions Azure][supported-regions]
-* Chiffrement de disque de système d’exploitation pris en charge avec Kubernetes version 1.17 et versions ultérieures   
-* Disponible uniquement dans les régions où BYOK est pris en charge
-* Le chiffrement avec des clés gérées par le client est actuellement réservé aux nouveaux clusters AKS. Les clusters existants ne peuvent pas être mis à niveau
-* Le cluster AKS utilisant Virtual Machine Scale Sets est nécessaire. Aucune prise en charge de Virtual Machine Availability Sets
-
-
 ## <a name="next-steps"></a>Étapes suivantes
 
 Consulter les [bonnes pratiques relatives à la sécurité des clusters AKS][best-practices-security]
@@ -184,8 +150,9 @@ Consulter les [bonnes pratiques relatives à la sécurité des clusters AKS][bes
 <!-- LINKS - internal -->
 [az-extension-add]: /cli/azure/extension#az-extension-add
 [az-extension-update]: /cli/azure/extension#az-extension-update
-[best-practices-security]: /azure/aks/operator-best-practices-cluster-security
-[byok-azure-portal]: /azure/storage/common/storage-encryption-keys-portal
-[customer-managed-keys]: /azure/virtual-machines/windows/disk-encryption#customer-managed-keys
-[key-vault-generate]: /azure/key-vault/key-vault-manage-with-cli2
-[supported-regions]: /azure/virtual-machines/windows/disk-encryption#supported-regions
+[best-practices-security]: ./operator-best-practices-cluster-security.md
+[byok-azure-portal]: ../storage/common/customer-managed-keys-configure-key-vault.md
+[customer-managed-keys-windows]: ../virtual-machines/disk-encryption.md#customer-managed-keys
+[customer-managed-keys-linux]: ../virtual-machines/disk-encryption.md#customer-managed-keys
+[key-vault-generate]: ../key-vault/general/manage-with-cli2.md
+[supported-regions]: ../virtual-machines/windows/disk-encryption.md#supported-regions

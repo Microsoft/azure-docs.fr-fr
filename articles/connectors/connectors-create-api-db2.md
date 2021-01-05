@@ -5,14 +5,14 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: plarsen, logicappspm
 ms.topic: conceptual
-ms.date: 08/23/2018
+ms.date: 11/19/2020
 tags: connectors
-ms.openlocfilehash: 32b482607827ee4420e39b1936586d64f9ea3139
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 765bb66b572f0c046222cfb617fe4caa80925256
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77651379"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967399"
 ---
 # <a name="access-and-manage-ibm-db2-resources-by-using-azure-logic-apps"></a>Accéder à des ressources IBM DB2 et les gérer à l’aide d’Azure Logic Apps
 
@@ -28,7 +28,7 @@ Le connecteur IBM DB2 prend en charge les plateformes et versions IBM DB2 ci-apr
 
 | Plateforme | Version | 
 |----------|---------|
-| IBM DB2 pour z/OS | 11.1, 10.1 |
+| IBM DB2 pour z/OS | 12, 11.1, 10.1 |
 | IBM DB2 pour i | 7.3, 7.2, 7.1 |
 | IBM DB2 pour LUW | 11, 10.5 |
 |||
@@ -157,7 +157,7 @@ Pour extraire un seul enregistrement d’une table de base de données DB2, util
    | **ID de zone** | Oui | ID de l’enregistrement souhaité, par exemple, « 99999 » ici |
    ||||
 
-   ![Sélectionner une table](./media/connectors-create-api-db2/db2-get-row-action-select-table.png)
+   ![Capture d’écran montrant l’action « Obtenir la ligne (préversion) » avec la liste « Nom de la table » ouverte et la valeur « AREA » sélectionnée.](./media/connectors-create-api-db2/db2-get-row-action-select-table.png)
 
 1. Une fois terminé, dans la barre d’outils du concepteur, choisissez **Enregistrer**.
 
@@ -192,7 +192,7 @@ Pour extraire tous les enregistrements d’une table de base de données DB2, ut
 
 1. Ouvrez la liste **Nom de la table**, puis sélectionnez la table souhaitée, en l’occurrence « AREA » (Zone) :
 
-   ![Sélectionner une table](./media/connectors-create-api-db2/db2-get-rows-action-select-table.png)
+   ![Capture d’écran montrant l’action « Obtenir la ligne (préversion) » avec la valeur « AREA » sélectionnée dans la liste « Nom de la table ».](./media/connectors-create-api-db2/db2-get-rows-action-select-table.png)
 
 1. Pour spécifier un filtre ou une requête pour les résultats, choisissez **Afficher les options avancées**.
 
@@ -241,7 +241,7 @@ Pour ajouter un seul enregistrement à une table de base de données DB2, utilis
 
    Par exemple :
 
-   ![Sélectionner une table](./media/connectors-create-api-db2/db2-insert-row-action-select-table.png)
+   ![Capture d’écran montrant le concepteur d’application logique avec l’action « Insérer une ligne (préversion) » et des exemples de valeurs de propriété.](./media/connectors-create-api-db2/db2-insert-row-action-select-table.png)
 
 1. Une fois terminé, dans la barre d’outils du concepteur, choisissez **Enregistrer**.
 
@@ -289,7 +289,7 @@ Pour mettre à jour un seul enregistrement dans une table de base de données DB
 
    Par exemple :
 
-   ![Sélectionner une table](./media/connectors-create-api-db2/db2-update-row-action-select-table.png)
+   ![Capture d’écran montrant le concepteur d’application logique avec l’action « Mettre à jour la ligne (préversion) » dans laquelle vous sélectionnez une table.](./media/connectors-create-api-db2/db2-update-row-action-select-table.png)
 
 1. Une fois terminé, dans la barre d’outils du concepteur, choisissez **Enregistrer**.
 
@@ -334,7 +334,7 @@ Pour supprimer un seul enregistrement d’une table de base de données DB2, uti
 
    Par exemple :
 
-   ![Sélectionner une table](./media/connectors-create-api-db2/db2-delete-row-action-select-table.png)
+   ![Capture d’écran montrant le concepteur d’application logique avec l’action « Supprimer la ligne (préversion) » dans laquelle vous sélectionnez une table à supprimer.](./media/connectors-create-api-db2/db2-delete-row-action-select-table.png)
 
 1. Une fois terminé, dans la barre d’outils du concepteur, choisissez **Enregistrer**.
 
@@ -359,7 +359,7 @@ Développez l’action **Supprimer la ligne**.
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](https://docs.microsoft.com/connectors/db2/).
+Pour plus d’informations techniques sur ce connecteur, notamment au sujet des déclencheurs, des actions et des limites décrits dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](/connectors/db2/).
 
 > [!NOTE]
 > Pour les applications logiques utilisées dans un [environnement de service d’intégration (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md), la version de ce connecteur avec l’étiquette ISE applique les [limites de messages de l’ISE](../logic-apps/logic-apps-limits-and-config.md#message-size-limits) à la place.
@@ -367,3 +367,4 @@ Pour plus d’informations techniques sur ce connecteur, notamment au sujet des 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les autres [connecteurs d’applications logiques](../connectors/apis-list.md)
+

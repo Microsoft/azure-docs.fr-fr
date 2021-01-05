@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: c7bbf210-7d71-4a37-ba47-9c74567a9ea6
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 02/18/2020
 ms.author: akjosh
-ms.openlocfilehash: 9ddac229fc38a91a8b97b24dc2807080b2295758
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cb1e2337d5a5214c4e748e5b0f45f223b8bcb445
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226877"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967990"
 ---
 # <a name="log-analytics-virtual-machine-extension-for-linux"></a>Extension de machine virtuelle Log Analytics pour Linux
 
@@ -32,17 +33,19 @@ Les journaux Azure Monitor fournissent des fonctionnalités de supervision, d’
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-Pour plus d’informations sur les distributions Linux prises en charge, consultez l’article [Vue d’ensemble de l’agent Log Analytics](../../azure-monitor/platform/log-analytics-agent.md#supported-linux-operating-systems).
+Pour plus d’informations sur les distributions Linux prises en charge, consultez l’article [Vue d’ensemble des agents Azure Monitor](../../azure-monitor/platform/agents-overview.md#supported-operating-systems).
 
 ### <a name="agent-and-vm-extension-version"></a>Version de l’agent et de l’extension de machine virtuelle
 Le tableau ci-après mappe la version de l’extension de machine virtuelle Log Analytics sur la version du bundle de l’agent Log Analytics pour chaque mise en production. Un lien vers les notes de publication pour la version du bundle de l’Agent Log Analytics est inclus. Les notes de version fournissent des détails sur les correctifs de bogues et les nouvelles fonctionnalités disponibles pour une version spécifique de l’agent.  
 
 | Version d’extension de machine virtuelle Linux Log Analytics | Version du bundle de l’Agent Log Analytics | 
 |--------------------------------|--------------------------|
+| 1.13.27 | [1.13.27](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.13.27-0) |
+| 1.13.15 | [1.13.9-0](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.13.9-0) |
 | 1.12.25 | [1.12.15-0](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.12.15-0) |
 | 1.11.15 | [1.11.0-9](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.11.0-9) |
 | 1.10.0 | [1.10.0-1](https://github.com/microsoft/OMS-Agent-for-Linux/releases/tag/OMSAgent_v1.10.0-1) |
@@ -86,7 +89,7 @@ Le JSON suivant illustre le schéma pour l’extension d’agent Log Analytics. 
   "properties": {
     "publisher": "Microsoft.EnterpriseCloud.Monitoring",
     "type": "OmsAgentForLinux",
-    "typeHandlerVersion": "1.7",
+    "typeHandlerVersion": "1.13",
     "autoUpgradeMinorVersion": true,
     "settings": {
       "workspaceId": "myWorkspaceId"
@@ -103,17 +106,20 @@ Le JSON suivant illustre le schéma pour l’extension d’agent Log Analytics. 
 
 ### <a name="property-values"></a>Valeurs de propriétés
 
-| Name | Valeur/Exemple |
+| Nom | Valeur/Exemple |
 | ---- | ---- |
 | apiVersion | 2018-06-01 |
 | publisher | Microsoft.EnterpriseCloud.Monitoring |
 | type | OmsAgentForLinux |
-| typeHandlerVersion | 1.7 |
+| typeHandlerVersion | 1.13 |
 | workspaceId (par exemple) | 6f680a37-00c6-41c7-a93f-1437e3462574 |
 | workspaceKey (par exemple) | z4bU3p1/GrnWpQkky4gdabWXAhbWSTz70hm4m2Xt92XI+rSRgE8qVvRhsGo9TXffbrTahyrwv35W0pOqQAU7uQ== |
 
 
 ## <a name="template-deployment"></a>Déploiement de modèle
+
+>[!NOTE]
+>Certains composants de l’extension de machine virtuelle Log Analytics sont également fournis avec l’[extension de machine virtuelle de diagnostic](./diagnostics-linux.md). En raison de cette architecture, des conflits peuvent survenir si les deux extensions sont instanciées dans le même modèle Resource Manager. Pour éviter ces conflits au moment de l’installation, utilisez la [directive `dependsOn`](../../azure-resource-manager/templates/define-resource-dependency.md#dependson) pour vous assurer que les extensions sont installées de manière séquentielle. Les extensions peuvent être installées dans n’importe quel ordre.
 
 Les extensions de machines virtuelles Azure peuvent être déployées avec des modèles Azure Resource Manager. Les modèles sont particulièrement adaptés lorsque vous déployez une ou plusieurs machines virtuelles nécessitant une configuration post-déploiement, comme l’intégration aux journaux Azure Monitor. Vous trouverez un exemple de modèle Resource Manager qui inclut l’extension de machine virtuelle Agent Log Analytics dans la [Galerie de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/tree/master/201-oms-extension-ubuntu-vm). 
 
@@ -133,7 +139,7 @@ L’exemple suivant suppose que l’extension de machine virtuelle est imbriqué
   "properties": {
     "publisher": "Microsoft.EnterpriseCloud.Monitoring",
     "type": "OmsAgentForLinux",
-    "typeHandlerVersion": "1.7",
+    "typeHandlerVersion": "1.13",
     "settings": {
       "workspaceId": "myWorkspaceId"
     },
@@ -158,7 +164,7 @@ Lorsque vous placez l’extension JSON à la racine du modèle, le nom de ressou
   "properties": {
     "publisher": "Microsoft.EnterpriseCloud.Monitoring",
     "type": "OmsAgentForLinux",
-    "typeHandlerVersion": "1.7",
+    "typeHandlerVersion": "1.13",
     "settings": {
       "workspaceId": "myWorkspaceId"
     },
@@ -179,7 +185,7 @@ az vm extension set \
   --vm-name myVM \
   --name OmsAgentForLinux \
   --publisher Microsoft.EnterpriseCloud.Monitoring \
-  --version 1.10.1 --protected-settings '{"workspaceKey":"myWorkspaceKey"}' \
+  --protected-settings '{"workspaceKey":"myWorkspaceKey"}' \
   --settings '{"workspaceId":"myWorkspaceId"}'
 ```
 
@@ -203,14 +209,16 @@ La sortie de l’exécution de l’extension est enregistrée dans le fichier su
 
 | Code d'erreur | Signification | Action possible |
 | :---: | --- | --- |
-| 9 | Activation appelée prématurément | [Mettez à jour l’agent Azure Linux](https://docs.microsoft.com/azure/virtual-machines/linux/update-agent) à la dernière version disponible. |
+| 9 | Activation appelée prématurément | [Mettez à jour l’agent Azure Linux](./update-linux-agent.md) à la dernière version disponible. |
 | 10 | La machine virtuelle est déjà connectée à un espace de travail Log Analytics | Pour connecter la machine virtuelle à l’espace de travail spécifié dans le schéma d’extension, définissez stopOnMultipleConnections sur la valeur false dans les paramètres publics ou supprimez cette propriété. Cette machine virtuelle est facturée une fois pour chaque espace de travail auquel elle est connectée. |
 | 11 | Configuration non valide fournie à l’extension | Suivez les exemples précédents pour définir toutes les valeurs de propriété du déploiement. |
 | 17 | Échec d’installation du package Log Analytics | 
 | 19 | Échec d’installation du package OMI | 
 | 20 | Échec d’installation du package SCX |
 | 51 | Cette extension n’est pas prise en charge sur le système d’exploitation de la machine virtuelle | |
-| 55 | Impossible de se connecter au service Azure Monitor, car des packages nécessaires sont manquants ou le gestionnaire de package dpkg est verrouillé| Vérifiez que le système dispose d’un accès Internet ou qu’un proxy HTTP valide a été fourni. Ensuite, vérifiez que le bon ID d’espace de travail est utilisé, puis vérifiez que les utilitaires curl et tar sont installés. |
+| 52 | Cette extension a échoué pour cause de dépendance manquante | Pour plus d'informations sur la dépendance manquante, consultez la sortie et les journaux. |
+| 53 | Cette extension a échoué pour cause de paramètres de configuration manquants ou incorrects | Pour plus d'informations sur ce qui s'est passé, consultez la sortie et les journaux. Vérifiez également que l'ID d'espace de travail utilisé est le bon, et assurez-vous que l'ordinateur est connecté à Internet. |
+| 55 | Impossible de se connecter au service Azure Monitor, car des packages nécessaires sont manquants ou le gestionnaire de package dpkg est verrouillé| Vérifiez que le système dispose d'un accès Internet ou qu'un proxy HTTP valide a été fourni. Vérifiez également que l'ID d'espace de travail utilisé est le bon, et assurez-vous que les utilitaires curl et tar sont installés. |
 
 Pour plus d’informations sur la résolution des problèmes, consultez le [guide de résolution des problèmes de l’agent Log Analytics pour Linux](../../azure-monitor/platform/vmext-troubleshoot.md).
 

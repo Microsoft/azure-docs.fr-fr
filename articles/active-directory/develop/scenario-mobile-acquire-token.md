@@ -13,12 +13,12 @@ ms.date: 05/07/2019
 ms.author: jmprieur
 ms.reviewer: brandwe
 ms.custom: aaddev
-ms.openlocfilehash: 2be074c457eaadd1fb6467cbcfdd45a2e7745613
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 85d1880479a514ffb002e4894066734690480457
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82098898"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443124"
 ---
 # <a name="get-a-token-for-a-mobile-app-that-calls-web-apis"></a>Obtenir un jeton pour une application mobile qui appelle des API web
 
@@ -209,7 +209,7 @@ catch(MsalUiRequiredException)
 
 `AcquireTokenInteractive` n'a qu'un seul paramètre obligatoire : `scopes`. Le paramètre `scopes` énumère les chaînes qui définissent les étendues pour lesquelles un jeton est requis. Si le jeton est destiné à Microsoft Graph, vous trouvez les étendues nécessaires dans les informations de référence de chaque API Microsoft Graph. Dans les informations de référence, accédez à la section « Autorisations ».
 
-Par exemple, pour [répertorier les contacts de l'utilisateur](https://docs.microsoft.com/graph/api/user-list-contacts), utilisez les étendues « User.Read », « Contacts.Read ». Pour plus d’informations, consultez la [documentation de référence sur les autorisations Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/permissions_reference).
+Par exemple, pour [répertorier les contacts de l'utilisateur](/graph/api/user-list-contacts), utilisez les étendues « User.Read », « Contacts.Read ». Pour plus d’informations, consultez la [documentation de référence sur les autorisations Microsoft Graph](/graph/permissions-reference).
 
 Sur Android, vous pouvez spécifier l'activité parente lors de la création de l'application à l'aide de `PublicClientApplicationBuilder`. Si vous ne spécifiez pas l'activité parente à ce moment-là, vous pouvez la spécifier ultérieurement à l'aide de `.WithParentActivityOrWindow`, comme dans la section suivante. Si vous spécifiez l'activité parente, le jeton y revient après l'interaction. Si vous ne la spécifiez pas, l'appel `.ExecuteAsync()` renvoie une exception.
 
@@ -221,7 +221,7 @@ Les sections suivantes décrivent les paramètres facultatifs de MSAL.NET.
 
 Le paramètre `WithPrompt()` contrôle l'interactivité avec l'utilisateur en spécifiant une invite.
 
-<img src="https://user-images.githubusercontent.com/13203188/53438042-3fb85700-39ff-11e9-9a9e-1ff9874197b3.png" width="25%" />
+![Image montrant les champs de la structure de l’invite. Ces valeurs de constantes contrôlent l’interactivité avec l’utilisateur en définissant le type d’invite affiché par le paramètre WithPrompt().](https://user-images.githubusercontent.com/13203188/53438042-3fb85700-39ff-11e9-9a9e-1ff9874197b3.png)
 
 La classe définit les constantes suivantes :
 
@@ -234,7 +234,7 @@ La classe définit les constantes suivantes :
 - `ForceLogin` permet au service d'inviter l'utilisateur à entrer ses informations d'identification même si l'invite n'est pas nécessaire.
 
     Cette option peut être utile si l'acquisition du jeton échoue et que vous souhaitez permettre à l'utilisateur de se reconnecter. Dans ce cas, MSAL envoie `prompt=login` au fournisseur d’identité. Vous souhaiterez peut-être utiliser cette option dans les applications axées sur la sécurité pour lesquelles la gouvernance de l'organisation exige que l'utilisateur se connecte chaque fois qu'il accède à des parties spécifiques de l'application.
-- `Never` concerne uniquement .NET 4.5 et Windows Runtime (WinRT). Cette constante n'affichera aucune invite utilisateur, mais elle tentera d'utiliser le cookie stocké dans l'affichage web incorporé masqué. Pour plus d'informations, consultez [Utilisation de navigateurs avec MSAL.NET](https://docs.microsoft.com/azure/active-directory/develop/msal-net-web-browsers).
+- `Never` concerne uniquement .NET 4.5 et Windows Runtime (WinRT). Cette constante n'affichera aucune invite utilisateur, mais elle tentera d'utiliser le cookie stocké dans l'affichage web incorporé masqué. Pour plus d'informations, consultez [Utilisation de navigateurs avec MSAL.NET](./msal-net-web-browsers.md).
 
     Si cette option échoue, `AcquireTokenInteractive` renvoie une exception pour vous informer qu'une interaction avec l'interface utilisateur est nécessaire. Vous devez alors utiliser un autre paramètre `Prompt`.
 - `NoPrompt` n'envoie pas d'invite au fournisseur d'identité.
@@ -294,5 +294,4 @@ client_id=<CLIENT_ID>
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Appel d’une API web](scenario-mobile-call-api.md)
+Passez à l’article suivant de ce scénario, [Appeler une API web](scenario-mobile-call-api.md).

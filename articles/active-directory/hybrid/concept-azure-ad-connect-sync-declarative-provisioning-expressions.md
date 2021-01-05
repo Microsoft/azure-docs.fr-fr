@@ -16,19 +16,19 @@ ms.date: 07/18/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cdc7c9dba49bf37db1f039d43b0450c65884c74b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 02490839a9e35695ae2e8b3f750e139ad7413aa4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60245503"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89280211"
 ---
 # <a name="azure-ad-connect-sync-understanding-declarative-provisioning-expressions"></a>Azure AD Connect Sync : présentation des expressions d’approvisionnement déclaratif
 Azure AD Connect sync s’appuie sur l’approvisionnement déclaratif introduit pour la première fois dans Forefront Identity Manager 2010. Il vous permet d’implémenter toute votre logique métier d’intégration des identités sans avoir à écrire de code compilé.
 
 Le langage d’expression utilisé dans les flux d’attributs constitue une partie essentielle de l’approvisionnement déclaratif. Le langage utilisé est un sous-ensemble de Microsoft® Visual Basic® pour Applications (VBA). Ce langage est utilisé dans Microsoft Office et les utilisateurs qui ont une certaine expérience de VBScript le reconnaîtront également. Le langage d’expression de l’approvisionnement déclaratif utilise uniquement des fonctions. Il ne s’agit pas d’un langage structuré. Il ne contient ni méthodes ni instructions. Les fonctions sont imbriquées pour exprimer le déroulement du programme.
 
-Pour plus d’informations, consultez [Bienvenue dans la référence linguistique Visual Basic pour Applications pour Office 2013](https://msdn.microsoft.com/library/gg264383.aspx).
+Pour plus d’informations, consultez [Bienvenue dans la référence linguistique Visual Basic pour Applications pour Office 2013](/office/vba/api/overview/language-reference).
 
 Les attributs sont fortement typés. Une fonction accepte uniquement les attributs de type correct. Elle respecte également la casse. Les noms des fonctions et les noms des attributs doivent avoir une casse appropriée, sinon une erreur est levée.
 
@@ -100,4 +100,3 @@ Par exemple :
 **Rubriques de référence**
 
 * [Azure AD Connect Sync : Référence aux fonctions](reference-connect-sync-functions-reference.md)
-

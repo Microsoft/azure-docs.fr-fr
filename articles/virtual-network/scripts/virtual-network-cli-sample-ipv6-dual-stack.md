@@ -1,7 +1,7 @@
 ---
 title: Exemple de script Azure CLI - Configuration frontale IPv6
 titlesuffix: Azure Virtual Network
-description: Activer les points de terminaison IPv6 à l’aide d’Azure CLI dans un réseau virtuel Azure
+description: Utilisez un exemple de script Azure CLI pour configurer des points de terminaison IPv6 et déployer une application à double pile (IPv4 + IPv6) dans Azure.
 services: virtual-network
 documentationcenter: na
 author: KumudD
@@ -12,12 +12,13 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 04/23/2019
 ms.author: kumud
-ms.openlocfilehash: 1ef8742bc4f8de2d08d9bb4fc98b3df6f9420737
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 7dbd59e483bd4fbef4bd116367a477fca658a8da
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80235021"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95971145"
 ---
 # <a name="configure-ipv6-endpoints-in-virtual-network-script-sample-preview"></a>Exemple de script de configuration de points de terminaison IPv6 dans un réseau virtuel (préversion)
 
@@ -188,7 +189,7 @@ az network vnet create \
 --name dsVNET \
 --resource-group DsResourceGroup01 \
 --location eastus  \
---address-prefixes "10.0.0.0/16" "ace:cab:deca::/48"
+--address-prefixes "10.0.0.0/16" "fd00:db8:deca::/48"
 
 # Create a single dual stack subnet
 
@@ -197,7 +198,7 @@ az network vnet subnet create \
 --resource-group DsResourceGroup01 \
 --vnet-name dsVNET \
 --address-prefix 10.0.0.0/24 \
---address-prefix "ace:cab:deca:deed::/64" \
+--address-prefix "fd00:db8:deca:deed::/64" \
 --network-security-group dsNSG1
 
 # Create NICs

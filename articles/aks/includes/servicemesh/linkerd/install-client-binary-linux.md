@@ -3,12 +3,12 @@ author: paulbouwer
 ms.topic: include
 ms.date: 10/09/2019
 ms.author: pabouwer
-ms.openlocfilehash: 7a22256c88f9cee3ce62c68a2de4a5974d76f026
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d303def85d66d5c2039b426e48186f90c2b3fff6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77593712"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86277773"
 ---
 ## <a name="download-and-install-the-linkerd-linkerd-client-binary"></a>Télécharger et installer le fichier binaire client linkerd de Linkerd
 
@@ -41,4 +41,4 @@ echo "source ~/completions/linkerd.bash" >> ~/.bashrc
 ```
 
 <!-- LINKS - external -->
-[install-wsl]: https://docs.microsoft.com/windows/wsl/install-win10
+[install-wsl]: /windows/wsl/install-win10

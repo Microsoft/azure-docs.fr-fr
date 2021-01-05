@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer myPolicies pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et supprimer automatiquement des comptes d’utilisateur dans myPolicies.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: f000896d-a78c-4d20-a79c-74c1f9b4961a
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: 353da826b6e339d40a5d85bbf63caac5bf7094f1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 221f63ab9a7eb3f71a4c730a11565dda64c9edc9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77061356"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353582"
 ---
 # <a name="tutorial-configure-mypolicies-for-automatic-user-provisioning"></a>Tutoriel : Configurer myPolicies pour l’approvisionnement automatique d’utilisateurs
 
@@ -87,7 +83,7 @@ Avant de configurer myPolicies pour l’approvisionnement automatique d’utilis
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans myPolicies en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour myPolicies en suivant les instructions fournies dans le [didacticiel sur l’authentification unique myPolicies](mypolicies-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour myPolicies en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour myPolicies](mypolicies-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-mypolicies-in-azure-ad"></a>Pour configurer l’approvisionnement automatique d’utilisateurs myPolicies dans Azure AD :
 
@@ -101,13 +97,13 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section**Informations d’identification de l’administrateur**, entrez `https://<myPoliciesCustomDomain>.mypolicies.com/scim` dans **URL du locataire** où `<myPoliciesCustomDomain>` se trouve votre domaine personnalisé myPolicies. Vous pouvez récupérer votre domaine client myPolicies à partir de votre URL.
+5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<myPoliciesCustomDomain>.mypolicies.com/scim` dans **URL du locataire** où `<myPoliciesCustomDomain>` se trouve votre domaine personnalisé myPolicies. Vous pouvez récupérer votre domaine client myPolicies à partir de votre URL.
 Exemple : `<demo0-qa>`. mypolicies.com.
 
 6. Dans **Jeton secret**, entrez la valeur du jeton que vous avez préalablement récupérée. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à myPolicies. Si la connexion échoue, vérifiez que votre compte myPolicies dispose des autorisations d’administrateur et réessayez.
@@ -122,11 +118,22 @@ Exemple : `<demo0-qa>`. mypolicies.com.
 
 9. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory sur myPolicies**.
 
-    ![Mappages d’utilisateur myPolicies](media/mypolicies-provisioning-tutorial/usermapping.png)
+    :::image type="content" source="media/mypolicies-provisioning-tutorial/usermapping.png" alt-text="Capture d’écran de la section Mappages. Sous Nom, Synchroniser les utilisateurs Azure Active Directory avec customappsso est visible." border="false":::
 
 10. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et myPolicies. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour établir une correspondance avec les comptes d’utilisateur myPolicies en vue de mises à jour ultérieures. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Mappages d’utilisateur myPolicies](media/mypolicies-provisioning-tutorial/userattribute.png)
+   |Attribut|Type|
+   |---|---|
+   |userName|String|
+   |active|Boolean|
+   |emails[type eq "work"].value|String|
+   |name.givenName|String|
+   |name.familyName|String|
+   |name.formatted|String|
+   |externalId|String|
+   |addresses[type eq "work"].country|String|
+   |urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:manager|Informations de référence|
+
 
 11. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 
@@ -148,8 +155,12 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 
 ## <a name="connector-limitations"></a>Limitations du connecteur
 
-* myPolicies requiert toujours le**nom d’utilisateur**, **l’e-mail** et **externalId**.
+* myPolicies requiert toujours le **nom d’utilisateur**, **l’e-mail** et **externalId**.
 * myPolicies ne prend pas en charge les suppressions définitives des attributs utilisateur.
+
+## <a name="change-log"></a>Journal des modifications
+
+* 15/09/2020 : ajout de la prise en charge de l’attribut « country » pour les utilisateurs.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

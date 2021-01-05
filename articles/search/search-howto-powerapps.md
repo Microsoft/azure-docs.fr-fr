@@ -8,13 +8,13 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.devlang: rest-api
 ms.topic: tutorial
-ms.date: 04/25/2020
-ms.openlocfilehash: e4afa3c122fa6e21b29b6ad52a386096b20aa055
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 11/17/2020
+ms.openlocfilehash: e8c16f02cf6b77fa54d2a19abac48e9914aa99bd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82184409"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008563"
 ---
 # <a name="tutorial-query-a-cognitive-search-index-from-power-apps"></a>Tutoriel : Interroger un index Recherche cognitive à partir de Power Apps
 
@@ -23,7 +23,7 @@ Tirez parti de l’environnement de développement rapide d’applications Power
 Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
-> * Vous connecter à la Recherche cognitive Azure
+> * Se connecter à la Recherche cognitive Azure
 > * Configurer une demande de requête
 > * Visualiser les résultats dans une application canevas
 
@@ -31,9 +31,9 @@ Si vous n’avez pas d’abonnement Azure, ouvrez un [compte gratuit](https://az
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Compte Power Apps](http://make.powerapps.com)
+* [Compte Power Apps](https://make.powerapps.com)
 
-* [Index Hotels-sample](search-get-started-portal.md)
+* [Index hotels-sample](search-get-started-portal.md) hébergé dans votre service de recherche
 
 * [Clé d’API de requête](search-security-api-keys.md#find-existing-keys)
 
@@ -41,7 +41,7 @@ Si vous n’avez pas d’abonnement Azure, ouvrez un [compte gratuit](https://az
 
 Dans Power Apps, un connecteur est une connexion de source de données. Dans cette étape, vous allez créer un connecteur personnalisé pour vous connecter à un index de recherche dans le cloud.
 
-1. [Connectez-vous](http://make.powerapps.com) à Power Apps.
+1. [Connectez-vous](https://make.powerapps.com) à Power Apps.
 
 1. À gauche, développez **Données** > **Connecteurs personnalisés**.
  
@@ -74,15 +74,15 @@ Dans Power Apps, un connecteur est une connexion de source de données. Dans cet
 
    * Sélectionnez le verbe `GET`
 
-   * Pour l’URL, entrez un exemple de requête pour votre index de recherche (`search=*` retourne tous les documents, `$select=` vous permet de choisir les champs). La version de l’API est obligatoire. Voici à quoi ressemble une URL entièrement spécifiée : `https://mydemo.search.windows.net/indexes/hotels-sample-index/docs?search=*&$select=HotelName,Description,Address/City&api-version=2019-05-06`
+   * Pour l’URL, entrez un exemple de requête pour votre index de recherche (`search=*` retourne tous les documents, `$select=` vous permet de choisir les champs). La version de l’API est obligatoire. Voici à quoi ressemble une URL entièrement spécifiée : `https://mydemo.search.windows.net/indexes/hotels-sample-index/docs?search=*&$select=HotelName,Description,Address/City&api-version=2020-06-30`
 
-   * Pour En-têtes, tapez `Content-Type`. 
+   * Pour En-têtes, tapez `Content-Type`. Vous définirez la valeur sur `application/json` dans une prochaine étape.
 
-     **Power Apps** utilise la syntaxe pour extraire les paramètres de la requête. Notez que nous avons défini explicitement le champ de recherche. 
+     **Power Apps** utilise la syntaxe de l’URL pour extraire les paramètres de la requête : les paramètres search, select et api-version deviennent configurables à mesure que vous progressez dans l’Assistant.
 
        :::image type="content" source="./media/search-howto-powerapps/1-8-1-import-from-sample.png" alt-text="Importer à partir de l’exemple" border="true":::
 
-1. Cliquez sur **Importer** pour compléter automatiquement la demande. Terminez la configuration des métadonnées de paramètre en cliquant sur le symbole **…** à côté de chacun des paramètres. Cliquez sur **Retour** pour retourner à la page Demande après chaque mise à jour de paramètre.
+1. Cliquez sur **Importer** pour compléter automatiquement la demande. Terminez la définition des métadonnées de paramètre en cliquant sur le symbole **...** en regard de chacun des paramètres. Cliquez sur **Retour** pour retourner à la page Demande après chaque mise à jour de paramètre.
 
    :::image type="content" source="./media/search-howto-powerapps/1-8-2-import-from-sample.png" alt-text="Boîte de dialogue Importer à partir de l’exemple" border="true":::
 
@@ -92,9 +92,9 @@ Dans Power Apps, un connecteur est une connexion de source de données. Dans cet
 
 1. Pour *select* : définissez `HotelName,Description,Address/City` comme **valeur par défaut**, définissez **obligatoire** sur *Faux* et définissez la **visibilité** sur *aucune*.  
 
-    :::image type="content" source="./media/search-howto-powerapps/1-10-4-parameter-metadata-select.png" alt-text="Métadonnées du paramètre Version" border="true":::
+    :::image type="content" source="./media/search-howto-powerapps/1-10-4-parameter-metadata-select.png" alt-text="Sélectionner les métadonnées de paramètre" border="true":::
 
-1. Pour *api-version* : définissez `2019-05-06` comme **valeur par défaut**, définissez **obligatoire** sur *Vrai* et définissez la **visibilité** sur *interne*.  
+1. Pour *api-version* : définissez `2020-06-30` comme **valeur par défaut**, définissez **obligatoire** sur *Vrai* et définissez la **visibilité** sur *interne*.  
 
     :::image type="content" source="./media/search-howto-powerapps/1-10-2-parameter-metadata-version.png" alt-text="Métadonnées du paramètre Version" border="true":::
 
@@ -106,16 +106,16 @@ Dans Power Apps, un connecteur est une connexion de source de données. Dans cet
     parameters:
       - {name: search, in: query, required: false, type: string, default: '*'}
       - {name: $select, in: query, required: false, type: string, default: 'HotelName,Description,Address/City'}
-      - {name: api-version, in: query, required: true, type: string, default: '2019-05-06',
+      - {name: api-version, in: query, required: true, type: string, default: '2020-06-30',
         x-ms-visibility: internal}
       - {name: Content-Type, in: header, required: false, type: string}
     ```
 
-1. Revenez à l’étape **3. Demande** et descendez jusqu’à la section Réponse. Cliquez sur **« Ajouter une réponse par défaut »** . Cela est primordial dans le sens où cela permet à Power Apps de comprendre le schéma de la réponse. 
+1. Revenez à l’Assistant et retournez à l’étape **3. Demande**. Faites défiler vers le bas jusqu’à la section Réponse. Cliquez sur **« Ajouter une réponse par défaut »** . Cela est primordial dans le sens où cela permet à Power Apps de comprendre le schéma de la réponse. 
 
 1. Collez un exemple de réponse. Une façon simple de capturer un exemple de réponse est de passer par l’Explorateur de recherche sur le portail Azure. Dans l’Explorateur de recherche, vous devez entrer la même requête que pour la demande, mais en ajoutant **$top=2** pour limiter les résultats à seulement deux documents : `search=*&$select=HotelName,Description,Address/City&$top=2`. 
 
-   Il suffit de quelques résultats à Power Apps pour détecter le schéma.
+   Il suffit de quelques résultats à Power Apps pour détecter le schéma. Vous pouvez maintenant copier la réponse suivante dans l’Assistant, en supposant que utilisez hotels-sample-index.
 
     ```JSON
     {
@@ -144,7 +144,11 @@ Dans Power Apps, un connecteur est une connexion de source de données. Dans cet
     > [!TIP] 
     > Sachant que vous êtes soumis à une limite de caractères dans la réponse JSON que vous pouvez entrer, vous pouvez simplifier le JSON avant de le coller. Le schéma et le format de la réponse sont plus importants que les valeurs elles-mêmes. Par exemple, le champ Description peut être simplifié à la première phrase.
 
-1. Cliquez sur **Créer un connecteur** en haut à droite.
+1. Cliquez sur **Importer** pour ajouter la réponse par défaut.
+
+1. Cliquez sur **Créer un connecteur** en haut à droite pour enregistrer la définition.
+
+1. Cliquez sur **Fermer** pour fermer le connecteur.
 
 ## <a name="2---test-the-connection"></a>2 – Tester la connexion
 
@@ -154,7 +158,7 @@ Vous aurez besoin d’une [clé d’API de requête](search-security-api-keys.md
 
 1. Tout à gauche, cliquez sur **Connecteurs personnalisés**.
 
-1. Recherchez le connecteur par son nom (dans ce tutoriel, il s’agit de « AzureSearchQuery »).
+1. Trouvez votre connecteur dans la liste (dans ce tutoriel, il s’agit de « AzureSearchQuery »).
 
 1. Sélectionnez le connecteur, développez la liste d’actions, puis sélectionnez **Afficher les propriétés**.
 
@@ -261,5 +265,4 @@ Si vous utilisez un service gratuit, n’oubliez pas que vous êtes limité à t
 Power Apps permet de développer rapidement des applications personnalisées. Maintenant que vous savez comment vous connecter à un index de recherche, apprenez-en davantage sur la création d’une expérience de visualisation enrichie dans une application Power Apps personnalisée.
 
 > [!div class="nextstepaction"]
-> [Catalogue de formations Power Apps](https://docs.microsoft.com/powerapps/learning-catalog/get-started)
-
+> [Catalogue de formations Power Apps](/powerapps/learning-catalog/get-started)

@@ -3,23 +3,25 @@ title: Interroger des conteneurs dans Azure Cosmos DB
 description: Découvrez comment interroger des conteneurs dans Azure Cosmos DB à l’aide de requêtes dans une partition et dans plusieurs partitions
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 3/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: 299980b67caaea85fbfb40cb1a30ee50fa32d0f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0f08ca84597b08b9a236b7bfb0fc9c849423a752
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80131396"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93335889"
 ---
 # <a name="query-an-azure-cosmos-container"></a>Interroger un conteneur Azure Cosmos
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article explique comment interroger un conteneur (collection, graphe ou table) dans Azure Cosmos DB. En particulier, il aborde la façon dont les requêtes de partition et sur plusieurs partitions fonctionnent dans Azure Cosmos DB.
 
 ## <a name="in-partition-query"></a>Requête dans une partition
 
-Quand vous interrogez des données de conteneurs, si un filtre de clé de partition est spécifié dans la requête, Azure Cosmos DB optimise la requête automatiquement. Il route la requête vers les [partitions physiques](partition-data.md#physical-partitions) qui correspondent aux valeurs de clé de partition spécifiées dans le filtre.
+Quand vous interrogez des données de conteneurs, si un filtre de clé de partition est spécifié dans la requête, Azure Cosmos DB optimise la requête automatiquement. Il route la requête vers les [partitions physiques](partitioning-overview.md#physical-partitions) qui correspondent aux valeurs de clé de partition spécifiées dans le filtre.
 
 Par exemple, considérez la requête ci-dessous avec un filtre d’égalité sur `DeviceId`. Si nous exécutons cette requête sur un conteneur partitionné sur `DeviceId`, cette requête filtre sur une seule partition physique.
 
@@ -59,9 +61,9 @@ Vous pouvez gérer l’exécution de requêtes parallèles en réglant les param
 
 - **MaxConcurrency** : définit le nombre maximal de connexions réseau simultanées aux partitions du conteneur. Si vous affectez la valeur `-1` à cette propriété, le kit SDK gère le degré de parallélisme. Si la  `MaxConcurrency` est définie sur `0`, il existe une seule connexion réseau aux partitions du conteneur.
 
-- **MaxBufferedItemCount** : limite la latence des requêtes par rapport à l’utilisation de la mémoire côté client. Si cette option est omise ou si elle a la valeur -1, le kit SDK gère le nombre d’éléments mis en mémoire tampon durant l’exécution de requêtes parallèles.
+- **MaxBufferedItemCount**  : limite la latence des requêtes par rapport à l’utilisation de la mémoire côté client. Si cette option est omise ou si elle a la valeur -1, le kit SDK gère le nombre d’éléments mis en mémoire tampon durant l’exécution de requêtes parallèles.
 
-En raison de la capacité d’Azure Cosmos DB à paralléliser les requêtes entre les partitions, la latence des requêtes est généralement correctement mise à l’échelle lorsque le système ajoute des [partitions physiques](partition-data.md#physical-partitions). Toutefois, les frais de RU augmenteront considérablement avec le nombre total de partitions physiques.
+En raison de la capacité d’Azure Cosmos DB à paralléliser les requêtes entre les partitions, la latence des requêtes est généralement correctement mise à l’échelle lorsque le système ajoute des [partitions physiques](partitioning-overview.md#physical-partitions). Toutefois, les frais de RU augmenteront considérablement avec le nombre total de partitions physiques.
 
 Lorsque vous exécutez une requête sur plusieurs partitions, vous effectuez essentiellement une requête distincte par partition physique individuelle. Même si les requêtes sur plusieurs partitions utilisent l’index, s’il est disponible, elles ne sont toujours pas aussi efficaces que les requêtes dans une seule partition.
 

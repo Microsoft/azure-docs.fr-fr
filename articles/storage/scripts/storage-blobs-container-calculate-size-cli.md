@@ -9,12 +9,13 @@ ms.devlang: cli
 ms.topic: sample
 ms.date: 06/28/2017
 ms.author: tamram
-ms.openlocfilehash: 83ec8c7b3bf5ba9d23d50d8fa1bce563dc56c135
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 45712632ebfb2da4b713038503965ce908c1dfc6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067128"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87498886"
 ---
 # <a name="calculate-the-size-of-a-blob-storage-container"></a>Calculer la taille totale d’un conteneur de stockage d’objets blob
 

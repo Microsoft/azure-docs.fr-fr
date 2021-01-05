@@ -2,19 +2,20 @@
 author: linda33wj
 ms.service: data-factory
 ms.topic: include
-ms.date: 08/12/2019
+ms.date: 07/13/2020
 ms.author: jingwang
-ms.openlocfilehash: 2e90d218aa6dc90746ba0e928fb3393f0bdb5e5a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fbde8bc28f8fc34b7a6a6443950b8733c6dcff45
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68966353"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023174"
 ---
 <!--
     Separate the generic requirement on Self-hosted Integration Runtime set-up from connector articles.
 -->
-Si votre magasin de données est configuré de l’une des manières suivantes, vous devez configurer un [runtime d'intégration auto-hébergé](../articles/data-factory/create-self-hosted-integration-runtime.md) pour pouvoir vous connecter à ce magasin de données :
+Si votre magasin de données se trouve dans un réseau local, un réseau virtuel Azure ou un cloud privé virtuel Amazon, vous devez configurer un [runtime d’intégration auto-hébergé](../articles/data-factory/create-self-hosted-integration-runtime.md) pour vous y connecter.
 
-- Le magasin de données se trouve dans un réseau local, au sein d’un réseau virtuel Azure ou au sein d’un cloud privé virtuel Amazon.
-- Le magasin de données est un service de données cloud managé dans lequel l’accès est limité à la liste verte d’adresses IP dans les règles de pare-feu.
+Si votre magasin de données est un service de données cloud managé, vous pouvez aussi utiliser Azure Integration Runtime. Si l’accès est limité aux adresses IP qui sont approuvées dans les règles de pare-feu, vous pouvez choisir d’ajouter les [adresses IP Azure Integration Runtime](../articles/data-factory/azure-integration-runtime-ip-addresses.md) dans la liste d’autorisation. 
+
+Pour plus d’informations sur les mécanismes de sécurité réseau et les options pris en charge par Data Factory, consultez [Stratégies d’accès aux données](../articles/data-factory/data-access-strategies.md).

@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.workload: identity
 ms.subservice: user-help
 ms.topic: end-user-help
-ms.date: 04/20/2020
+ms.date: 07/29/2020
 ms.author: curtand
-ms.openlocfilehash: 878fbb81e05db058aa015f8b4a7eae42e8cfea2e
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 95947a9350f19f0f0ff45b7c65e14729b66f26cf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83742204"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88798157"
 ---
 # <a name="what-is-the-my-account-portal"></a>Qu’est-ce que le portail Mon compte ?
 
@@ -33,11 +33,11 @@ Vous pouvez accéder au portail **Mon compte** (https://myaccount.microsoft.com)
 ![Portail Mon compte, page Vue d’ensemble](media/my-account-portal/my-account-portal-overview.png)
 
 >[!Important]
->Cet article s’adresse aux utilisateurs qui essaient d’accéder au portail Mon compte pour mettre à jour leurs informations de sécurité, les informations des appareils, le mot de passe, les organisations connectées, la confidentialité ou les informations de connexion précédentes. Si vous êtes administrateur et que vous recherchez des informations sur l’activation de l’authentification et d’autres fonctionnalités d’Azure Active Directory (Azure AD) pour vos employés et d’autres utilisations, consultez la [documentation d’Azure AD pour les administrateurs](https://docs.microsoft.com/azure/active-directory/).
+>Cet article s’adresse aux utilisateurs qui essaient d’accéder au portail Mon compte pour mettre à jour leurs informations de sécurité, les informations des appareils, le mot de passe, les organisations connectées, les paramètres de langue, la confidentialité ou les informations de connexion précédentes. Si vous êtes administrateur et que vous recherchez des informations sur l’activation de l’authentification et d’autres fonctionnalités d’Azure Active Directory (Azure AD) pour vos employés et d’autres utilisations, consultez la [documentation d’Azure AD pour les administrateurs](../index.yml).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Choisir d’afficher ou gérer vos [informations de sécurité](user-help-security-info-overview.md)
+- Choisir d’afficher ou gérer vos [informations de sécurité](./security-info-setup-signin.md)
 
 - Afficher ou gérer vos [appareils](my-account-portal-devices-page.md) connectés
 
@@ -46,6 +46,8 @@ Vous pouvez accéder au portail **Mon compte** (https://myaccount.microsoft.com)
 - Afficher votre [activité de connexion](my-account-portal-sign-ins-page.md)
 
 - Afficher la façon dont votre organisation [utilise vos données relatives à la confidentialité](my-account-portal-privacy-page.md)
+
+- Modifier vos [paramètres du portail Mon compte](my-account-portal-settings.md)
 
 ## <a name="related-microsoft-office-content"></a>Contenu de Microsoft Office associé
 

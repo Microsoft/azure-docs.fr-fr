@@ -1,17 +1,17 @@
 ---
 title: Monter le cluster Avere vFXT - Azure
-description: Guide pratique pour monter des clients avec Avere vFXT pour Azure
+description: Découvrez comment connecter des clients à votre cluster vFXT dans Average vFXT pour Azure et comment équilibrer la charge du trafic client entre les nœuds de votre cluster.
 author: ekpgh
 ms.service: avere-vfxt
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/16/2019
 ms.author: rohogue
-ms.openlocfilehash: b8486b5a33226b1faa5e3874144129dbe7a1a2f2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 44a4e1293bc4c5a54e1e345d5cf95ba307a7b120
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76153409"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88272569"
 ---
 # <a name="mount-the-avere-vfxt-cluster"></a>Monter le cluster Avere vFXT
 
@@ -102,7 +102,7 @@ Pour garantir un montage sans interruption du client, passez les paramètres et 
 
 ``mount -o hard,proto=tcp,mountproto=tcp,retry=30 ${VSERVER_IP_ADDRESS}:/${NAMESPACE_PATH} ${LOCAL_FILESYSTEM_MOUNT_POINT}``
 
-| Paramètres obligatoires | |
+| Paramètres obligatoires | Description |
 --- | ---
 ``hard`` | Les montages conditionnels sur le cluster vFXT sont associés à des échecs d’application et à des pertes de données possibles.
 ``proto=netid`` | Cette option prend en charge la gestion appropriée des erreurs réseau NFS.

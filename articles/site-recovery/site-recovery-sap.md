@@ -5,12 +5,12 @@ author: sideeksh
 manager: rochakm
 ms.topic: how-to
 ms.date: 11/27/2018
-ms.openlocfilehash: 29acd1b00d23e4f1c2f241027dadbbb406e5e049
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 69f0a20bdcba23d947e3d1b573c1a359da245161
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77190794"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92369418"
 ---
 # <a name="set-up-disaster-recovery-for-a-multi-tier-sap-netweaver-app-deployment"></a>Configurer la reprise d’activité pour un déploiement d’application SAP NetWeaver multiniveau
 
@@ -28,9 +28,9 @@ Vous pouvez protéger les déploiements d’applications SAP NetWeaver à l’ai
 
 Avant de commencer, assurez-vous que vous savez accomplir les tâches suivantes :
 
-* [Répliquer une machine virtuelle vers Azure](azure-to-azure-walkthrough-enable-replication.md)
-* [Constituer un réseau de récupération](site-recovery-azure-to-azure-networking-guidance.md)
-* [Effectuer un test de basculement vers Azure](azure-to-azure-walkthrough-test-failover.md)
+* [Répliquer une machine virtuelle vers Azure](./azure-to-azure-tutorial-enable-replication.md)
+* [Constituer un réseau de récupération](./azure-to-azure-about-networking.md)
+* [Effectuer un test de basculement vers Azure](./azure-to-azure-tutorial-dr-drill.md)
 * [Procéder à un basculement vers Azure](site-recovery-failover.md)
 * [Répliquer un contrôleur de domaine](site-recovery-active-directory.md)
 * [Répliquer une instance SQL Server](site-recovery-sql.md)
@@ -39,13 +39,13 @@ Avant de commencer, assurez-vous que vous savez accomplir les tâches suivantes�
 
 Vous pouvez utiliser Site Recovery pour implémenter une solution de reprise d’activité dans les scénarios décrits ici.
 * Vous disposez de systèmes SAP qui s’exécutent dans un centre de données Azure et que vous répliquez dans un autre centre de données Azure (récupération d’urgence Azure vers Azure). 
-   Pour plus d’informations, consultez [Architecture de réplication Azure vers Azure](https://aka.ms/asr-a2a-architecture).
+   Pour plus d’informations, consultez [Architecture de réplication Azure vers Azure](./azure-to-azure-architecture.md).
 * Les systèmes SAP s’exécutent sur des serveurs VMware (ou physiques) locaux. Vous répliquez également les systèmes SAP sur un site de récupération d’urgence dans un centre de centres Azure (récupération d’urgence VMware vers Azure). 
-   Ce scénario nécessite quelques composants supplémentaires. Pour plus d’informations, consultez [Architecture de réplication VMware vers Azure](https://aka.ms/asr-v2a-architecture).
+   Ce scénario nécessite quelques composants supplémentaires. Pour plus d’informations, consultez [Architecture de réplication VMware vers Azure](./vmware-azure-architecture.md).
 * Vous disposez de systèmes SAP s’exécutant sur Hyper-V localement. Vous répliquez également les systèmes SAP sur un site de récupération d’urgence dans un centre de centres Azure (récupération d’urgence Hyper-V vers Azure).
-   Ce scénario nécessite quelques composants supplémentaires. Pour plus d’informations, consultez [Architecture de réplication Hyper-V vers Azure](https://aka.ms/asr-h2a-architecture).
+   Ce scénario nécessite quelques composants supplémentaires. Pour plus d’informations, consultez [Architecture de réplication Hyper-V vers Azure](./hyper-v-azure-architecture.md).
 
-Dans cet article, nous utilisons une scénario de récupération d’urgence **Azure vers Azure**. Le scénario vous montre les fonctionnalités de récupération d’urgence SAP de Site Recovery. La réplication Site Recovery n’étant pas propre à l’application, le processus qui est décrit est censé s’appliquer également à d’autres scénarios.
+Dans cet article, nous utilisons une scénario de récupération d’urgence **Azure vers Azure** . Le scénario vous montre les fonctionnalités de récupération d’urgence SAP de Site Recovery. La réplication Site Recovery n’étant pas propre à l’application, le processus qui est décrit est censé s’appliquer également à d’autres scénarios.
 
 ### <a name="required-foundation-services"></a>Services de base nécessaires
 Dans le scénario que cet article développe, les services de base suivants sont déployés :
@@ -111,7 +111,7 @@ Voici la recommandation pour la récupération d’urgence de chaque niveau util
 
 ## <a name="replicate-virtual-machines"></a>Répliquer des machines virtuelles
 
-Pour commencer la réplication de toutes les machines virtuelles d’application SAP vers le centre de données de reprise d’activité Azure, suivez les instructions dans [Répliquer une machine virtuelle vers Azure](azure-to-azure-walkthrough-enable-replication.md).
+Pour commencer la réplication de toutes les machines virtuelles d’application SAP vers le centre de données de reprise d’activité Azure, suivez les instructions dans [Répliquer une machine virtuelle vers Azure](./azure-to-azure-tutorial-enable-replication.md).
 
 * Pour obtenir des conseils sur la protection d’Active Directory et de DNS, découvrez [comment protéger Active Directory et DNS](site-recovery-active-directory.md).
 
@@ -119,7 +119,7 @@ Pour commencer la réplication de toutes les machines virtuelles d’application
 
 ## <a name="networking-configuration"></a>Configuration de la mise en réseau
 
-Si vous utilisez une adresse IP statique, vous pouvez spécifier l’adresse IP que vous souhaitez attribuer à la machine virtuelle. Pour définir l’adresse IP, accédez à **Paramètres Calcul et réseau** > **Carte d’interface réseau**.
+Si vous utilisez une adresse IP statique, vous pouvez spécifier l’adresse IP que vous souhaitez attribuer à la machine virtuelle. Pour définir l’adresse IP, accédez à **Paramètres Calcul et réseau** > **Carte d’interface réseau** .
 
 ![Capture d’écran qui illustre la définition d’une adresse IP privée dans le volet de carte d’interface réseau de Site Recovery](./media/site-recovery-sap/sap-static-ip.png)
 
@@ -136,7 +136,7 @@ Lors d’un basculement, un plan de récupération prend en charge le séquencem
 ### <a name="add-scripts-to-the-recovery-plan"></a>Ajouter des scripts au plan de récupération
 Afin de vous assurer du bon fonctionnement de vos applications, vous pouvez être amené à effectuer certaines opérations sur les machines virtuelles Azure. Effectuez ces opérations après le basculement ou pendant un test de basculement. Vous pouvez également automatiser certaines opérations après le basculement. Par exemple, mettez à jour l’entrée DNS, puis modifiez les liaisons et les connexions en ajoutant au plan de récupération les scripts correspondants.
 
-Vous pouvez déployer les scripts Site Recovery les plus utilisés dans votre compte Azure Automation en sélectionnant **Déployer dans Azure**. Lorsque vous utilisez un script publié, suivez les instructions du script.
+Vous pouvez déployer les scripts Site Recovery les plus utilisés dans votre compte Azure Automation en sélectionnant **Déployer dans Azure** . Lorsque vous utilisez un script publié, suivez les instructions du script.
 
 [![Déployer sur Azure](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
 
@@ -150,10 +150,10 @@ Vous pouvez déployer les scripts Site Recovery les plus utilisés dans votre co
 
 1. Dans le portail Azure, sélectionnez votre coffre Recovery Services.
 1. Sélectionnez le plan de récupération que vous avez créé pour les applications SAP.
-1. Sélectionnez **Test de basculement**.
+1. Sélectionnez **Test de basculement** .
 1. Pour démarrer le test de basculement, sélectionnez le point de récupération et le réseau virtuel Azure.
 1. Lorsque l’environnement secondaire est opérationnel, procédez aux validations.
-1. Lorsque les validations sont terminées, nettoyez l’environnement de basculement en sélectionnant **Nettoyer le test de basculement**.
+1. Lorsque les validations sont terminées, nettoyez l’environnement de basculement en sélectionnant **Nettoyer le test de basculement** .
 
 Pour plus d’informations, consultez [Tester le basculement vers Azure dans Site Recovery](site-recovery-test-failover-to-azure.md).
 
@@ -161,7 +161,7 @@ Pour plus d’informations, consultez [Tester le basculement vers Azure dans Sit
 
 1. Dans le portail Azure, sélectionnez votre coffre Recovery Services.
 1. Sélectionnez le plan de récupération que vous avez créé pour les applications SAP.
-1. Sélectionnez **Basculement**.
+1. Sélectionnez **Basculement** .
 1. Pour démarrer le processus de basculement, sélectionnez le point de récupération.
 
 Pour plus d’informations, consultez [Basculement dans Site Recovery](site-recovery-failover.md).

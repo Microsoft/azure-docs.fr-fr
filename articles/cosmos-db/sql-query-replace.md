@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : REPLACE'
 description: Découvrez la fonction système SQL REPLACE dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 758ac13530752df481d27e7e253f025f5c8d6430
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c9b7ffdf8395944cf75dabbbf4c42cea0e0c9b3
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78302200"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341618"
 ---
 # <a name="replace-azure-cosmos-db"></a>REPLACE (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Remplace toutes les occurrences d'une valeur de type chaîne spécifiée par une autre valeur de type chaîne.  
   
 ## <a name="syntax"></a>Syntaxe

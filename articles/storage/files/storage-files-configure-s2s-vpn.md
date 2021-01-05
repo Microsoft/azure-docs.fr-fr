@@ -3,16 +3,16 @@ title: Configurer un VPN site à site (S2S) pour une utilisation avec Azure File
 description: Comment configurer un VPN site à site (S2S) pour une utilisation avec Azure Files
 author: roygara
 ms.service: storage
-ms.topic: overview
+ms.topic: how-to
 ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: ae3d38d92990d7a1af4146c25b017286ebd29352
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 0fa3fb8040fd79d68f9260ab520d3b6823ab363d
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80061031"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94629289"
 ---
 # <a name="configure-a-site-to-site-vpn-for-use-with-azure-files"></a>Configurer un VPN site à site pour une utilisation avec Azure Files
 Vous pouvez utiliser une connexion VPN site à site (S2S) pour monter vos partages de fichiers Azure sur SMB à partir de votre réseau local sans ouvrir le port 445. Vous pouvez configurer un VPN site à site à l’aide d’une [Passerelle VPN Azure](../../vpn-gateway/vpn-gateway-about-vpngateways.md) qui est une ressource Azure offrant des services VPN, déployée dans un groupe de ressources, à côté de comptes de stockage ou d’autres ressources Azure.
@@ -30,7 +30,7 @@ L’article décrit en détail la procédure à suivre pour configurer un VPN si
 
 - Une appliance réseau ou un serveur dans votre centre de centres local qui est compatible avec la passerelle VPN Azure. Azure Files est indépendant de l’appliance de réseau local choisie, mais la passerelle VPN Azure gère une [liste d’appareils testés](../../vpn-gateway/vpn-gateway-about-vpn-devices.md). Les diverses appliances réseau offrant différentes fonctionnalités, caractéristiques de performances et fonctionnalités de gestion, vous devez tenir compte de celles-ci lors de la sélection d’une appliance réseau.
 
-    Si vous n’avez pas d’appliance réseau, Windows Server contient un rôle serveur intégré, Routage et accès à distance (RRAS, Routing and Remote Access), utilisable comme appliance de réseau local. Pour en savoir plus sur la configuration du rôle Routage et accès à distance dans Windows Server, voir [Passerelle du serveur d’accès à distance](https://docs.microsoft.com/windows-server/remote/remote-access/ras-gateway/ras-gateway).
+    Si vous n’avez pas d’appliance réseau, Windows Server contient un rôle serveur intégré, Routage et accès à distance (RRAS, Routing and Remote Access), utilisable comme appliance de réseau local. Pour en savoir plus sur la configuration du rôle Routage et accès à distance dans Windows Server, voir [Passerelle du serveur d’accès à distance](/windows-server/remote/remote-access/ras-gateway/ras-gateway).
 
 ## <a name="add-storage-account-to-vnet"></a>Ajouter un compte de stockage à VNet
 Dans le Portail Azure, accédez au compte de stockage contenant le partage de fichiers Azure que vous souhaitez monter localement. Dans la table des matières pour le compte de stockage, sélectionnez l’entrée **Pare-feux et réseaux virtuels**. Si vous n’avez pas ajouté de réseau virtuel à votre compte de stockage lors de sa création, la case d’option **Autoriser l’accès depuis** doit être activée pour **Tous les réseaux** dans le volet qui s’affiche.

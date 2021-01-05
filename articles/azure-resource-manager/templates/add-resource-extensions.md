@@ -5,12 +5,12 @@ author: mumian
 ms.topic: conceptual
 ms.date: 12/14/2018
 ms.author: jgao
-ms.openlocfilehash: b3c4110c8761b3e8daf324d65ac7fa1dcbcdf61f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: be55138a2aa6dc0552c7556438ffd43705687c87
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77023495"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86055043"
 ---
 # <a name="provide-post-deployment-configurations-by-using-extensions"></a>Fournir des configurations de post-déploiement au moyen d’extensions
 
@@ -20,13 +20,13 @@ Les extensions de modèle sont de petites applications permettant d’exécuter 
 
 Les extensions existantes sont :
 
-- [Microsoft.Compute/virtualMachines/extensions](https://docs.microsoft.com/azure/templates/microsoft.compute/2018-10-01/virtualmachines/extensions)
-- [Microsoft.Compute virtualMachineScaleSets/extensions](https://docs.microsoft.com/azure/templates/microsoft.compute/2018-10-01/virtualmachinescalesets/extensions)
-- [Microsoft.HDInsight clusters/extensions](https://docs.microsoft.com/azure/templates/microsoft.hdinsight/2018-06-01-preview/clusters)
-- [Microsoft.Sql servers/databases/extensions](https://docs.microsoft.com/azure/templates/microsoft.sql/2014-04-01/servers/databases/extensions) 
-- [Microsoft.Web/sites/siteextensions](https://docs.microsoft.com/azure/templates/microsoft.web/2016-08-01/sites/siteextensions)
+- [Microsoft.Compute/virtualMachines/extensions](/azure/templates/microsoft.compute/2018-10-01/virtualmachines/extensions)
+- [Microsoft.Compute virtualMachineScaleSets/extensions](/azure/templates/microsoft.compute/2018-10-01/virtualmachinescalesets/extensions)
+- [Microsoft.HDInsight clusters/extensions](/azure/templates/microsoft.hdinsight/2018-06-01-preview/clusters)
+- [Microsoft.Sql servers/databases/extensions](/azure/templates/microsoft.sql/2014-04-01/servers/databases/extensions) 
+- [Microsoft.Web/sites/siteextensions](/azure/templates/microsoft.web/2016-08-01/sites/siteextensions)
 
-Pour connaître les extensions qui sont disponibles, accédez à la [référence de modèle](https://docs.microsoft.com/azure/templates/). Dans **Filtrer par titre**, entrez **extension**.
+Pour connaître les extensions qui sont disponibles, accédez à la [référence de modèle](/azure/templates/). Dans **Filtrer par titre**, entrez **extension**.
 
 Pour savoir comment utiliser ces extensions, consultez :
 

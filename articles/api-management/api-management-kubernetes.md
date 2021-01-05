@@ -12,22 +12,22 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 12/14/2019
 ms.author: apimpm
-ms.openlocfilehash: 1d6773b4daac256234c33bf50fb3736d585ac505
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f8c6fce5b22d67dd1022fbaac763ea5df3b0930f
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75475295"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97505373"
 ---
 # <a name="use-azure-api-management-with-microservices-deployed-in-azure-kubernetes-service"></a>Utiliser Gestion des API Azure avec des microservices déployés dans Azure Kubernetes Service
 
-Les microservices sont idéaux pour la création d’API. Avec [Azure Kubernetes Service](https://azure.microsoft.com/services/kubernetes-service/) (AKS), vous pouvez rapidement déployer et exploiter une [architecture basée sur des microservices](https://docs.microsoft.com/azure/architecture/guide/architecture-styles/microservices) dans le cloud. Vous pouvez ensuite tirer parti de [Gestion des API Azure](https://aka.ms/apimrocks) (Gestion des API) pour publier vos microservices en tant qu’API pour consommation interne et externe. Cet article décrit les options de déploiement de Gestion des API avec AKS. Il suppose une connaissance de base de Kubernetes, de Gestion des API et de la mise en réseau Azure. 
+Les microservices sont idéaux pour la création d’API. Avec [Azure Kubernetes Service](https://azure.microsoft.com/services/kubernetes-service/) (AKS), vous pouvez rapidement déployer et exploiter une [architecture basée sur des microservices](/azure/architecture/guide/architecture-styles/microservices) dans le cloud. Vous pouvez ensuite tirer parti de [Gestion des API Azure](https://aka.ms/apimrocks) (Gestion des API) pour publier vos microservices en tant qu’API pour consommation interne et externe. Cet article décrit les options de déploiement de Gestion des API avec AKS. Il suppose une connaissance de base de Kubernetes, de Gestion des API et de la mise en réseau Azure. 
 
 ## <a name="background"></a>Arrière-plan
 
 Lorsque vous publiez des microservices en tant qu’API pour consommation, il peut être difficile de gérer la communication entre les microservices et les clients qui les consomment. Il existe une multitude de problèmes transversaux tels que l’authentification, l’autorisation, la limitation, la mise en cache, la transformation et la surveillance. Ces problèmes sont valides que les microservices soient exposés ou non à des clients internes ou externes. 
 
-Le modèle de [passerelle API](https://docs.microsoft.com/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern) résout ces problèmes. Une passerelle API sert de porte d’entrée pour les microservices, dissocie les clients de vos microservices, ajoute une couche de sécurité supplémentaire et réduit la complexité de vos microservices en supprimant la charge liée à la gestion des problèmes communs. 
+Le modèle de [passerelle API](/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern) résout ces problèmes. Une passerelle API sert de porte d’entrée pour les microservices, dissocie les clients de vos microservices, ajoute une couche de sécurité supplémentaire et réduit la complexité de vos microservices en supprimant la charge liée à la gestion des problèmes communs. 
 
 [Gestion des API Azure](https://aka.ms/apimrocks) est une solution clé en main pour répondre aux besoins de votre passerelle API. Vous pouvez créer rapidement une passerelle cohérente et moderne pour vos microservices et les publier en tant qu’API. En tant que solution de gestion des API au cycle de vie complet, elle offre également des fonctionnalités supplémentaires, notamment un portail de développement en libre-service pour la découverte d’API, la gestion du cycle de vie des API et l’analytique des API.
 
@@ -53,7 +53,7 @@ Même si un cluster AKS est toujours déployé dans un réseau virtuel (VNet), i
 
 ### <a name="option-1-expose-services-publicly"></a>Option 1 : exposer les services publiquement
 
-Les services d’un cluster AKS peuvent être exposés publiquement à l’aide des [types de service](https://docs.microsoft.com/azure/aks/concepts-network) NodePort, LoadBalancer ou ExternalName. Dans ce cas, les services sont accessibles directement à partir de l’Internet public. Une fois que Gestion des API a été déployée devant le cluster, vous devez vous assurer que tout le trafic entrant passe par Gestion des API en appliquant l’authentification dans les microservices. Par exemple, Gestion des API peut inclure un jeton d’accès dans chaque demande envoyée au cluster. Chaque microservice est chargé de valider le jeton avant de traiter la demande. 
+Les services d’un cluster AKS peuvent être exposés publiquement à l’aide des [types de service](../aks/concepts-network.md) NodePort, LoadBalancer ou ExternalName. Dans ce cas, les services sont accessibles directement à partir de l’Internet public. Une fois que Gestion des API a été déployée devant le cluster, vous devez vous assurer que tout le trafic entrant passe par Gestion des API en appliquant l’authentification dans les microservices. Par exemple, Gestion des API peut inclure un jeton d’accès dans chaque demande envoyée au cluster. Chaque microservice est chargé de valider le jeton avant de traiter la demande. 
 
 
 Il peut s’agir de l’option la plus simple pour déployer Gestion des API devant AKS, en particulier si vous disposez déjà d’une logique d’authentification implémentée dans vos microservices. 
@@ -73,7 +73,7 @@ Inconvénients :
 
 Bien que l’option 1 puisse être plus facile, elle présente des inconvénients notables comme indiqué ci-dessus. Si une instance Gestion des API ne réside pas dans le réseau virtuel du cluster, l’authentification Mutual TLS (mTLS) est un moyen fiable de garantir que le trafic est sécurisé et approuvé dans les deux sens entre une instance Gestion des API et un cluster AKS. 
 
-L’authentification Mutual TLS est [prise en charge en mode natif](https://docs.microsoft.com/azure/api-management/api-management-howto-mutual-certificates) par Gestion des API et peut être activée dans Kubernetes en [installant un contrôleur d’entrée](https://docs.microsoft.com/azure/aks/ingress-own-tls) (Fig. 3). Par conséquent, l’authentification est effectuée dans le contrôleur d’entrée, ce qui simplifie les microservices. En outre, vous pouvez ajouter les adresses IP Gestion des API à la liste autorisée par le contrôleur d’entrée pour vous assurer que seule Gestion des API a accès au cluster.  
+L’authentification Mutual TLS est [prise en charge en mode natif](./api-management-howto-mutual-certificates.md) par Gestion des API et peut être activée dans Kubernetes en [installant un contrôleur d’entrée](../aks/ingress-own-tls.md) (Fig. 3). Par conséquent, l’authentification est effectuée dans le contrôleur d’entrée, ce qui simplifie les microservices. En outre, vous pouvez ajouter les adresses IP Gestion des API à la liste autorisée par le contrôleur d’entrée pour vous assurer que seule Gestion des API a accès au cluster.  
 
  
 ![Publier via un contrôleur d’entrée](./media/api-management-aks/ingress-controller.png)
@@ -97,7 +97,7 @@ Pour obtenir une clé d’abonnement permettant d’accéder aux API, un abonnem
 
 Dans certains cas, les clients ayant des contraintes réglementaires ou des exigences de sécurité strictes peuvent trouver les solutions facultatives 1 et 2 non viables en raison des points de terminaison exposés publiquement. Dans d’autres cas, le cluster AKS et les applications qui consomment les microservices peuvent résider dans le même réseau virtuel, de sorte qu’il n’y a aucune raison d’exposer le cluster publiquement, car tout le trafic de l’API reste dans le réseau virtuel. Pour ces scénarios, vous pouvez déployer Gestion des API dans le réseau virtuel de cluster. [Le niveau Premium de Gestion des API](https://aka.ms/apimpricing) prend en charge le déploiement de réseau virtuel. 
 
-Il existe deux modes de [déploiement de Gestion des API dans un réseau virtuel](https://docs.microsoft.com/azure/api-management/api-management-using-with-vnet) : externe et interne. 
+Il existe deux modes de [déploiement de Gestion des API dans un réseau virtuel](./api-management-using-with-vnet.md) : externe et interne. 
 
 Si les consommateurs d’API ne résident pas dans le réseau virtuel du cluster, le mode externe (Fig. 4) doit être utilisé. Dans ce mode, la passerelle Gestion des API est injectée dans le réseau virtuel de cluster, mais accessible à partir de l’Internet public via un équilibreur de charge externe. Cela permet de masquer complètement le cluster tout en permettant aux clients externes d’utiliser les microservices. En outre, vous pouvez utiliser des fonctionnalités de mise en réseau Azure, telles que les groupes de sécurité réseau pour limiter le trafic réseau.
 
@@ -120,10 +120,5 @@ Inconvénients :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus, consultez [Concepts de réseau pour les applications dans AKS](https://docs.microsoft.com/azure/aks/concepts-network).
-* Pour en savoir plus, consultez [Utilisation de Gestion des API avec des réseaux virtuels](https://docs.microsoft.com/azure/api-management/api-management-using-with-vnet)
-
-
-
-
-
+* Pour en savoir plus, consultez [Concepts de réseau pour les applications dans AKS](../aks/concepts-network.md).
+* Pour en savoir plus, consultez [Utilisation de Gestion des API avec des réseaux virtuels](./api-management-using-with-vnet.md)

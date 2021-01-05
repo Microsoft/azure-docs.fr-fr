@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory avec HRworks Single Sign-On | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et HRworks Single Sign-On.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: c4c5d434-3f8a-411e-83a5-c3d5276ddc0a
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 01/02/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4b20ce5f754333aec78513e32901b0608f8bee3b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d6b23213d9d986c62a227b3e182a22896d128222
+ms.sourcegitcommit: 9b8425300745ffe8d9b7fbe3c04199550d30e003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75638732"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92442539"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-hrworks-single-sign-on"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory avec HRworks Single Sign-On
 
@@ -30,7 +26,7 @@ Ce tutoriel explique comment intégrer HRworks Single Sign-On avec Azure Active 
 * Permettre à vos utilisateurs de se connecter automatiquement à HRworks Single Sign-On avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -160,28 +156,28 @@ Pour permettre aux utilisateurs Azure AD de se connecter à HRworks Single Sign-
 
 1. Cliquez sur **Administrator** > **Persons** > **Persons** > **New person** (Nouvelle personne) sur le côté gauche de la barre de menus.
 
-     ![Configure Single Sign-On](./media/hrworks-single-sign-on-tutorial/configure02.png)
+     ![Capture d’écran montrant la page HRworks avec les Persons et New person sélectionnés.](./media/hrworks-single-sign-on-tutorial/configure02.png)
 
 1. Dans le menu contextuel, cliquez sur **Next** (Suivant).
 
-    ![Configure Single Sign-On](./media/hrworks-single-sign-on-tutorial/configure03.png)
+    ![Capture d’écran montrant une liste de pays que vous pouvez sélectionner pour la personne.](./media/hrworks-single-sign-on-tutorial/configure03.png)
 
 1. Dans la fenêtre contextuelle **Create new person with country for legal terms** (Créer une personne avec un pays pour les conditions juridiques), remplissez les détails respectifs, tels que **First name**(Prénom) et **Last name** (Nom), puis cliquez sur **Create**.
 
-    ![Configure Single Sign-On](./media/hrworks-single-sign-on-tutorial/configure04.png)
+    ![Capture d’écran montrant les zones de texte où vous pouvez entrer le prénom et le nom de la personne.](./media/hrworks-single-sign-on-tutorial/configure04.png)
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette HRworks Single Sign-On dans le volet d’accès, vous devez être connecté automatiquement à l’application HRworks Single Sign-On pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette HRworks Single Sign-On dans le volet d’accès, vous devez être connecté automatiquement à l’application HRworks Single Sign-On pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer HRworks Single Sign-On avec Azure AD](https://aad.portal.azure.com/)

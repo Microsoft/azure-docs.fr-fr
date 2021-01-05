@@ -1,19 +1,9 @@
-- name: Documentation sur le pare-feu Azure
+- name: Documentation du Pare-feu Azure
   href: index.yml
 - name: Vue d’ensemble
   items:
     - name: "Qu’est-ce qu’un pare-feu Azure\_?"
       href: overview.md
-- name: Tutoriels
-  items:
-    - name: Déployer et configurer
-      href: tutorial-firewall-deploy-portal.md
-    - name: Déployer dans un réseau hybride
-      href: tutorial-hybrid-portal.md
-    - name: Filtrer le trafic entrant avec DNAT
-      href: tutorial-firewall-dnat.md
-    - name: Surveiller les journaux de diagnostics
-      href: tutorial-diagnostics.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -26,14 +16,22 @@
     - name: Déployer avec des zones de disponibilité - Modèle ARM
       displayName: Resource Manager
       href: deploy-template.md
+- name: Tutoriels
+  items:
+    - name: Déployer et configurer
+      href: tutorial-firewall-deploy-portal.md
+    - name: Déployer dans un réseau hybride
+      href: tutorial-hybrid-portal.md
+    - name: Filtrer le trafic entrant avec DNAT
+      href: tutorial-firewall-dnat.md
 - name: Exemples
   items:
     - name: Azure PowerShell
       href: sample-powershell.md
-    - name: Journaux d’activité Azure Monitor
-      href: log-analytics-samples.md
 - name: Concepts
   items:
+    - name: Fonctionnalités du Pare-feu Azure
+      href: features.md
     - name: Balises FQDN
       href: fqdn-tags.md
     - name: Noms de domaine complets d’infrastructure
@@ -56,6 +54,10 @@
       href: central-management.md
     - name: Prise en charge du travail à distance
       href: remote-work-support.md
+    - name: FQDN dans les règles de réseau
+      href: fqdn-filtering-network-rules.md
+    - name: Base de référence de la sécurité
+      href: security-baseline.md
 - name: Guides pratiques
   items:
     - name: Déployer avec Azure PowerShell
@@ -78,6 +80,15 @@
       href: create-ip-group.md
     - name: Protéger Windows Virtual Desktop
       href: protect-windows-virtual-desktop.md
+    - name: Protéger Azure Kubernetes Service (AKS)
+      href: protect-azure-kubernetes-service.md
+    - name: Paramètres DNS
+      href: dns-settings.md
+    - name: Surveiller les journaux de diagnostics
+      href: firewall-diagnostics.md
+      displayName: 'Azure CLI, az monitor diagnostic-settings create, monitor diagnostic settings'
+    - name: Classeur du Pare-feu Azure
+      href: firewall-workbook.md
 - name: Informations de référence
   items:
     - name: Azure CLI

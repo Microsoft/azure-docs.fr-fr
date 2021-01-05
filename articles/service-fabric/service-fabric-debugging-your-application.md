@@ -1,16 +1,15 @@
 ---
 title: Déboguer votre application dans Visual Studio
 description: Améliorez la fiabilité et les performances de vos services en les développant et en procédant à leur débogage dans Visual Studio sur un cluster de développement local.
-author: vturecek
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: vturecek
-ms.openlocfilehash: fff8a19d5643f7ce866c9eb9c57486340b6f8a50
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 0b7d08d610c883240abedc66c55abba64a74c8e3
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77624137"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576313"
 ---
 # <a name="debug-your-service-fabric-application-by-using-visual-studio"></a>Débogage de votre application Service Fabric à l’aide de Visual Studio
 > [!div class="op_single_selector"]
@@ -25,7 +24,7 @@ Vous pouvez économiser du temps et de l’argent en déployant et déboguant vo
 1. Démarrez un cluster de développement local en suivant les étapes de la section [Configuration de votre environnement de développement Service Fabric](service-fabric-get-started.md).
 2. Appuyez sur **F5** ou cliquez sur **Déboguer** > **Démarrer le débogage**.
    
-    ![Démarrer le débogage d'une application][startdebugging]
+    ![Capture d'écran qui montre le menu Déboguer.][startdebugging]
 3. Définissez des points d’arrêt dans votre code et parcourez l’application en cliquant sur les commandes du menu **Déboguer** .
    
    > [!NOTE]

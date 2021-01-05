@@ -10,14 +10,19 @@ ms.subservice: bing-video-search
 ms.topic: conceptual
 ms.date: 12/03/2019
 ms.author: aahi
-ms.openlocfilehash: b27aa1409d543c157069d2701c49ef54a097e552
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 78a3c3c2936bfcaf58ea9e46bd3d6a610cdfe436
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79218911"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96341493"
 ---
 # <a name="sending-search-requests-to-the-bing-video-search-api"></a>Envoi de requêtes de recherche à l’API Recherche de vidéos Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Accord Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Cet article décrit les paramètres et attributs des requêtes envoyées à l’API Recherche de vidéos Bing, ainsi que l’objet de réponse JSON qu’elle retourne. 
 
@@ -27,7 +32,7 @@ Cet article décrit les paramètres et attributs des requêtes envoyées à l’
 
 Si vous fournissez une zone de recherche dans laquelle l’utilisateur entre son terme de recherche, utilisez [l’API Suggestion automatique Bing](../../bing-autosuggest/get-suggested-search-terms.md) pour améliorer l’expérience. À mesure que l’utilisateur tape des termes de recherche, l’API suggère des chaînes de requête.
 
-Une fois que l’utilisateur a entré son terme de recherche, encodez-le sous forme d’URL avant de définir le paramètre de requête [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query). Par exemple, si l’utilisateur entre *sailing dinghies*, définissez `q` avec la valeur `sailing+dinghies` ou `sailing%20dinghies`.
+Une fois que l’utilisateur a entré son terme de recherche, encodez-le sous forme d’URL avant de définir le paramètre de requête [q](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query). Par exemple, si l’utilisateur entre *sailing dinghies*, définissez `q` avec la valeur `sailing+dinghies` ou `sailing%20dinghies`.
 
 ## <a name="sending-a-request"></a>Envoi d’une requête
 
@@ -42,18 +47,18 @@ La requête doit utiliser le protocole HTTPS.
 Nous vous recommandons de générer toutes les requêtes à partir d’un serveur. Si vous diffusez la clé dans le cadre d’une application client, vous prenez le risque qu’un tiers malveillant puisse y accéder. Par ailleurs, en appelant l’API à partir d’un serveur, vous disposez d’un unique point de mise à niveau pour les prochaines versions de l’API.
 
   
-La requête doit indiquer le paramètre [q](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête peut également indiquer le paramètre [mkt](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché d’où proviennent les résultats. Pour obtenir la liste des paramètres de requête facultatifs tels que `pricing`, consultez la page [Paramètres de la requête](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query-parameters). Toutes les valeurs de paramètres de requête doivent être codées au format URL.  
+La requête doit indiquer le paramètre [q](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query), qui contient le terme de recherche de l’utilisateur. La requête peut également indiquer le paramètre [mkt](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#mkt) (facultatif), qui vous permet de choisir le marché d’où proviennent les résultats. Pour obtenir la liste des paramètres de requête facultatifs tels que `pricing`, consultez la page [Paramètres de la requête](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#query-parameters). Toutes les valeurs de paramètres de requête doivent être codées au format URL.  
   
-La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :  
+La requête doit indiquer l’en-tête [Ocp-Apim-Subscription-Key](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#subscriptionkey). Nous vous conseillons également d’indiquer les en-têtes suivants (qui sont facultatifs) :  
   
--   [User-Agent](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#useragent)  
--   [X-MSEdge-ClientID](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#clientid)  
--   [X-Search-ClientIP](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#clientip)  
--   [X-Search-Location](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#location)  
+-   [User-Agent](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#useragent)  
+-   [X-MSEdge-ClientID](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#clientid)  
+-   [X-Search-ClientIP](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#clientip)  
+-   [X-Search-Location](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#location)  
 
 Les en-têtes d’emplacement et d’adresse IP client sont importants, car ils permettent de renvoyer du contenu géolocalisé.  
 
-Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#headers).
+Pour obtenir la liste complète des en-têtes de requête et de réponse, consultez la page [En-têtes](/rest/api/cognitiveservices-bingsearch/bing-video-api-v7-reference#headers).
 
 ## <a name="example-search-request"></a>Exemple de requête de recherche
 
@@ -149,8 +154,8 @@ BingAPIs-Market: en-US
 
 Essayez l’API. Accédez à la [console de test de l’API Recherche de vidéos](https://dev.cognitive.microsoft.com/docs/services/56b43f3ccf5ff8098cef3809/operations/58113fe5e31dac0a1ce6b0a8). 
 
-Pour plus d’informations sur la consommation des objets de réponse, consultez [Recherche de vidéos sur le web](../search-the-web.md).
+Pour plus d’informations sur la consommation des objets de réponse, consultez [Recherche de vidéos sur le web](../overview.md).
 
 Pour plus d’informations sur l’obtention d’informations sur une vidéo telles que des recherches connexes, consultez [Video Insights](../video-insights.md) (Informations sur la vidéo).  
   
-Pour plus d’informations sur les vidéos populaires sur les réseaux sociaux, consultez [Vidéos populaires](../trending-videos.md).  
+Pour plus d’informations sur les vidéos populaires sur les réseaux sociaux, consultez [Vidéos populaires](../trending-videos.md).

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/08/2017
 ms.author: alkohli
-ms.openlocfilehash: 01ce952ea774ba852c83d0d6aa3fe38d5dfd677e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d78051c1a5af82a986152c8244d25b68dd65d552
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232241"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968840"
 ---
 # <a name="deploy-and-manage-a-storsimple-cloud-appliance-in-azure-update-3-and-later"></a>Déployer et gérer une appliance cloud StorSimple dans Azure (Update 3 et versions ultérieures)
 
@@ -47,7 +47,7 @@ StorSimple Cloud Appliance est disponible en deux modèles, un 8010 Standard (an
 | **Capacité maximale** |30 To |64 To |
 | **Microsoft Azure** |Standard_A3 (4 cœurs, 7 Go de mémoire)| Standard_DS3 (4 cœurs, 14 Go de mémoire)|
 | **Disponibilité des régions** |Toutes les régions Azure |Régions Azure qui prennent en charge le stockage Premium et les machines virtuelles Azure DS3<br></br>Utilisez [cette liste](https://azure.microsoft.com/regions/services/) afin de déterminer si **Machines virtuelles > Série DS** et **Stockage > Stockage sur disque** sont disponibles dans votre région. |
-| **Type de stockage** |Utilise le stockage Azure Standard pour les disques locaux<br></br> Découvrez comment [créer un compte de stockage Standard](../storage/common/storage-create-storage-account.md) |Utilise le stockage Azure Standard pour les disques locaux<sup>2</sup> <br></br> |
+| **Type de stockage** |Utilise le stockage Azure Standard pour les disques locaux<br></br> Découvrez comment [créer un compte de stockage Standard](../storage/common/storage-account-create.md) |Utilise le stockage Azure Standard pour les disques locaux<sup>2</sup> <br></br> |
 | **Aide relative à la charge de travail** |Récupération au niveau des éléments des fichiers à partir de sauvegardes |Scénarios de développement et de test cloud <br></br>Faible latence et charges de travail aux performances plus élevées<br></br>Appareil secondaire pour la récupération d’urgence |
 
 <sup>1</sup> *Anciennement, le modèle 1100*.
@@ -84,7 +84,7 @@ Avant d’approvisionner l’appliance cloud, vous devez effectuer les préparat
 * Pour l’appliance cloud, [configurez un réseau virtuel sur Azure](../virtual-network/manage-virtual-network.md#create-a-virtual-network). Si vous utilisez le stockage Premium, vous devez créer un réseau virtuel dans une région Azure qui prend en charge le stockage Premium. Les régions de stockage Premium sont des régions qui correspondent à la ligne Stockage sur disque dans la liste des [services Azure par région](https://azure.microsoft.com/regions/services/).
 * Il est recommandé d’utiliser le serveur DNS par défaut fourni par Azure au lieu de spécifier le nom de votre propre serveur DNS. Si le nom de votre serveur DNS n’est pas valide ou si le serveur DNS n’est pas en mesure de résoudre correctement les adresses IP, la création de l’appliance cloud échoue.
 * Les options de point à site et de site à site sont facultatives (non obligatoires). Si vous le souhaitez, vous pouvez configurer ces options pour des scénarios plus avancés.
-* Vous pouvez créer des [Machines virtuelles Azure](../virtual-machines/virtual-machines-windows-quick-create-portal.md) (serveurs hôtes) dans le réseau virtuel qui peut utiliser les volumes exposés par l’appliance cloud. Ces serveurs doivent répondre aux exigences suivantes :
+* Vous pouvez créer des [Machines virtuelles Azure](../virtual-machines/windows/quick-create-portal.md) (serveurs hôtes) dans le réseau virtuel qui peut utiliser les volumes exposés par l’appliance cloud. Ces serveurs doivent répondre aux exigences suivantes :
 
   * Il doit s’agir de machines virtuelles Windows ou Linux sur lesquelles l’initiateur iSCSI est installé.
   * Ils doivent être en cours d’exécution dans le même réseau virtuel que l’appliance cloud.
@@ -96,7 +96,7 @@ Avant d’approvisionner l’appliance cloud, vous devez effectuer les préparat
 Apportez les mises à jour suivantes à votre service StorSimple Device Manager avant de créer une appliance cloud :
 
 * Ajoutez des [enregistrements de contrôle d’accès](storsimple-8000-manage-acrs.md) pour les machines virtuelles qui vont être les serveurs hôtes de votre appliance cloud.
-* Utilisez un [compte de stockage](storsimple-8000-manage-storage-accounts.md#add-a-storage-account) dans la même région que l’appliance cloud. Des comptes de stockage dans différentes régions peuvent entraîner une dégradation des performances. Vous pouvez utiliser un compte de stockage Standard ou Premium avec l’appliance cloud. Informations supplémentaires sur la création d’un [compte de stockage Standard](../storage/common/storage-create-storage-account.md)
+* Utilisez un [compte de stockage](storsimple-8000-manage-storage-accounts.md#add-a-storage-account) dans la même région que l’appliance cloud. Des comptes de stockage dans différentes régions peuvent entraîner une dégradation des performances. Vous pouvez utiliser un compte de stockage Standard ou Premium avec l’appliance cloud. Informations supplémentaires sur la création d’un [compte de stockage Standard](../storage/common/storage-account-create.md)
 * Utilisez un compte de stockage différent pour la création de l’appliance cloud de celui utilisé pour vos données. L’utilisation du même compte de stockage peut entraîner une dégradation des performances.
 
 Assurez-vous de disposer des informations suivantes avant de commencer :
@@ -267,7 +267,7 @@ Pour arrêter tous les frais, vous devez supprimer l’appliance cloud. Pour sup
 ## <a name="troubleshoot-internet-connectivity-errors"></a>Résolution des problèmes de connectivité Internet
 La création d’une appliance cloud échoue si vous ne disposez d’aucune connectivité à Internet. Pour résoudre les problèmes de connectivité Internet, procédez comme suit dans le portail Azure :
 
-1. [Création d’une machine virtuelle Windows dans le portail Azure](https://docs.microsoft.com/azure/virtual-machines/windows/quick-create-portal). Cette machine virtuelle doit utiliser le même compte de stockage, le même réseau virtuel et le même sous-réseau que ceux utilisés par votre appliance cloud. S’il existe déjà un hôte Windows Server dans Azure en utilisant le même compte de stockage, le même réseau virtuel et le même sous-réseau, vous pouvez également l’utiliser pour résoudre vos problèmes de connectivité Internet.
+1. [Création d’une machine virtuelle Windows dans le portail Azure](../virtual-machines/windows/quick-create-portal.md). Cette machine virtuelle doit utiliser le même compte de stockage, le même réseau virtuel et le même sous-réseau que ceux utilisés par votre appliance cloud. S’il existe déjà un hôte Windows Server dans Azure en utilisant le même compte de stockage, le même réseau virtuel et le même sous-réseau, vous pouvez également l’utiliser pour résoudre vos problèmes de connectivité Internet.
 2. Connectez-vous à distance à la machine virtuelle créée à l’étape précédente.
 3. Ouvrez une fenêtre de commande à l’intérieur de la machine virtuelle (Win + R, puis tapez `cmd`).
 4. À l’invite, entrez la commande suivante :

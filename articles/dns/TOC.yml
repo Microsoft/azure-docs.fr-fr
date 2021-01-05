@@ -17,6 +17,9 @@
           href: dns-getstarted-powershell.md
         - name: Créer une zone publique - CLI
           href: dns-getstarted-cli.md
+        - name: Créer une zone publique - Modèle ARM
+          displayName: Resource Manager
+          href: dns-get-started-template.md
     - name: DNS privé
       items:
         - name: Créer une zone privée - portail
@@ -33,6 +36,8 @@
           href: dns-delegate-domain-azure-dns.md
         - name: Créer des enregistrements DNS personnalisés pour une application web
           href: dns-web-sites-custom-domain.md
+        - name: Création d’une zone DNS enfant
+          href: tutorial-public-dns-zones-child.md
         - name: Enregistrements d’alias pour Traffic Manager
           href: tutorial-alias-tm.md
         - name: Enregistrements d’alias pour les adresses IP publiques
@@ -41,6 +46,10 @@
           href: tutorial-alias-rr.md
 - name: Concepts
   items:
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
     - name: DNS public
       items:
         - name: Zones et enregistrements
@@ -71,7 +80,7 @@
           href: ../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md
         - name: Questions fréquentes (FAQ)
           href: dns-faq-private.md
-- name: Procédures
+- name: Guides pratiques
   items:
     - name: DNS public
       items:
@@ -142,7 +151,7 @@
         - name: Ruby
           href: 'https://www.rubydoc.info/gems/azure_mgmt_dns/0.8.0'
         - name: Python
-          href: 'http://azure-sdk-for-python.readthedocs.io/en/latest/sample_azure-mgmt-dns.html'
+          href: 'https://azure.github.io/azure-sdk-for-python/dns.html'
         - name: REST
           href: /rest/api/dns/
         - name: Modèle Resource Manager
@@ -164,7 +173,7 @@
     - name: Demandes de fonctionnalités
       href: 'https://feedback.azure.com/forums/217313-networking/category/77466-domain-name-service-dns-traffic-manager'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/en-us/answers/topics/azure-virtual-network.html'
+      href: /answers/topics/azure-virtual-network.html
     - name: Blog sur la mise en réseau
       href: 'https://azure.microsoft.com/blog/topics/networking'
     - name: Tarifs

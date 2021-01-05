@@ -2,18 +2,17 @@
 title: Guide de démarrage rapide – Déployer un conteneur Docker dans une instance de conteneur – PowerShell
 description: Dans ce guide de démarrage rapide, vous utilisez Azure PowerShell pour déployer rapidement une application web conteneurisée qui s’exécute dans une instance de conteneur Azure isolé.
 services: container-instances
-author: dlepow
 manager: gwallace
 ms.service: container-instances
 ms.topic: quickstart
 ms.date: 03/21/2019
 ms.custom: seodec18, mvc
-ms.openlocfilehash: 9901b3f18973365dc9ceb8c85ff8587b6c2ea894
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: c7002d8a83e58a9089ee3c3840b0397d63e2f198
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74533603"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89565580"
 ---
 # <a name="quickstart-deploy-a-container-instance-in-azure-using-azure-powershell"></a>Démarrage rapide : Déployer une instance de conteneur dans Azure à l’aide d’Azure PowerShell
 

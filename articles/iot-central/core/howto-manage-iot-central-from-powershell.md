@@ -7,19 +7,20 @@ author: dominicbetts
 ms.author: dobett
 ms.date: 03/27/2020
 ms.topic: how-to
+ms.custom: devx-track-azurepowershell
 manager: philmea
-ms.openlocfilehash: 9ca1c8f4a8e92babf65ec049b3784882bd3af689
-ms.sourcegitcommit: 3beb067d5dc3d8895971b1bc18304e004b8a19b3
+ms.openlocfilehash: 832147fd06dbc7439500b911efbbde6d9b1d81fd
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82744976"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92123060"
 ---
 # <a name="manage-iot-central-from-azure-powershell"></a>Gérer IoT Central à partir d’Azure PowerShell
 
 [!INCLUDE [iot-central-selector-manage](../../../includes/iot-central-selector-manage.md)]
 
-Au lieu de créer et de gérer des applications IoT Central dans le site web du [Gestionnaire d’applications Azure IoT Central](https://aka.ms/iotcentral), vous pouvez utiliser [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) pour gérer vos applications.
+Au lieu de créer et de gérer des applications IoT Central dans le site web du [Gestionnaire d’applications Azure IoT Central](https://aka.ms/iotcentral), vous pouvez utiliser [Azure PowerShell](/powershell/azure/) pour gérer vos applications.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -27,14 +28,14 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-Si vous préférez exécuter Azure PowerShell sur votre ordinateur local, consultez [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps). Lorsque vous exécutez Azure PowerShell localement, utilisez l’applet de commande **Connect-AzAccount** pour vous connecter à Azure avant d’essayer les applets de commande de cet article.
+Si vous préférez exécuter Azure PowerShell sur votre ordinateur local, consultez [Installer le module Azure PowerShell](/powershell/azure/install-az-ps). Lorsque vous exécutez Azure PowerShell localement, utilisez l’applet de commande **Connect-AzAccount** pour vous connecter à Azure avant d’essayer les applets de commande de cet article.
 
 > [!TIP]
 > Si vous devez exécuter vos commandes PowerShell dans un autre abonnement Azure, consultez [Modifier l’abonnement actif](/powershell/azure/manage-subscriptions-azureps?view=azps-3.4.0#change-the-active-subscription).
 
 ## <a name="install-the-iot-central-module"></a>Installer le module IoT Central
 
-Exécutez la commande suivante pour vérifier que le [module IoT Central](https://docs.microsoft.com/powershell/module/az.iotcentral/) est bien installé dans votre environnement PowerShell :
+Exécutez la commande suivante pour vérifier que le [module IoT Central](/powershell/module/az.iotcentral/) est bien installé dans votre environnement PowerShell :
 
 ```powershell
 Get-InstalledModule -name Az.I*
@@ -48,7 +49,7 @@ Install-Module Az.IotCentral
 
 ## <a name="create-an-application"></a>Créer une application
 
-Utilisez l’applet de commande [New-AzIotCentralApp](https://docs.microsoft.com/powershell/module/az.iotcentral/New-AzIotCentralApp) pour créer une application IoT Central dans votre abonnement Azure. Par exemple :
+Utilisez l’applet de commande [New-AzIotCentralApp](/powershell/module/az.iotcentral/New-AzIotCentralApp) pour créer une application IoT Central dans votre abonnement Azure. Par exemple :
 
 ```powershell
 # Create a resource group for the IoT Central application
@@ -80,11 +81,11 @@ Le script crée d’abord un groupe de ressources dans la région USA Est pour l
 
 ## <a name="view-your-iot-central-applications"></a>Afficher les applications IoT Central
 
-Utilisez l’applet de commande [Get-AzIotCentralApp](https://docs.microsoft.com/powershell/module/az.iotcentral/Get-AzIotCentralApp) pour lister vos applications IoT Central et afficher les métadonnées.
+Utilisez l’applet de commande [Get-AzIotCentralApp](/powershell/module/az.iotcentral/Get-AzIotCentralApp) pour lister vos applications IoT Central et afficher les métadonnées.
 
 ## <a name="modify-an-application"></a>Modifier une application
 
-Utilisez l’applet de commande [Set-AzIotCentralApp](https://docs.microsoft.com/powershell/module/az.iotcentral/set-aziotcentralapp) pour mettre à jour les métadonnées d’une application IoT Central. Par exemple, pour modifier le nom complet de votre application :
+Utilisez l’applet de commande [Set-AzIotCentralApp](/powershell/module/az.iotcentral/set-aziotcentralapp) pour mettre à jour les métadonnées d’une application IoT Central. Par exemple, pour modifier le nom complet de votre application :
 
 ```powershell
 Set-AzIotCentralApp -Name "myiotcentralapp" `
@@ -94,7 +95,7 @@ Set-AzIotCentralApp -Name "myiotcentralapp" `
 
 ## <a name="remove-an-application"></a>Supprimer une application
 
-Utilisez l’applet de commande [Remove-AzIotCentralApp](https://docs.microsoft.com/powershell/module/az.iotcentral/Remove-AzIotCentralApp) pour supprimer les métadonnées d’une application IoT Central. Par exemple :
+Utilisez l’applet de commande [Remove-AzIotCentralApp](/powershell/module/az.iotcentral/Remove-AzIotCentralApp) pour supprimer les métadonnées d’une application IoT Central. Par exemple :
 
 ```powershell
 Remove-AzIotCentralApp -ResourceGroupName "MyIoTCentralResourceGroup" `

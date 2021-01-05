@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: tutorial
 ms.custom: hdinsightactive
 ms.date: 03/20/2020
-ms.openlocfilehash: 2885fccd95d09149ae496b80a658f34e5b697d0b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7a5982cb96891b3c0724007aa98527a07daba0fe
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80064490"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92532562"
 ---
 # <a name="tutorial-use-apache-kafka-streams-api-in-azure-hdinsight"></a>Tutoriel : Utiliser l’API de flux Apache Kafka - Azure HDInsight
 
@@ -39,7 +39,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 * Effectuez les étapes présentées dans le document [API de producteur et de consommateur Apache Kafka](apache-kafka-producer-consumer-api.md). Les étapes de ce document utilisent l’exemple d’application et les rubriques créés dans ce didacticiel.
 
-* [Kit de développeur Java (JDK) version 8](https://aka.ms/azure-jdks) ou un équivalent, tel qu’OpenJDK.
+* [Kit de développeur Java (JDK) version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) ou un équivalent, tel qu’OpenJDK.
 
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 
@@ -232,19 +232,21 @@ Pour générer et déployer le projet dans votre cluster Kafka sur HDInsight, pr
 
     Le résultat ressemble au texte suivant :
 
-        dwarfs  13635
-        ago     13664
-        snow    13636
-        dwarfs  13636
-        ago     13665
-        a       13803
-        ago     13666
-        a       13804
-        ago     13667
-        ago     13668
-        jumped  13640
-        jumped  13641
-   
+    ```output
+    dwarfs  13635
+    ago     13664
+    snow    13636
+    dwarfs  13636
+    ago     13665
+    a       13803
+    ago     13666
+    a       13804
+    ago     13667
+    ago     13668
+    jumped  13640
+    jumped  13641
+    ```
+
     Le paramètre `--from-beginning` configure le lancement du consommateur au début des enregistrements stockés dans la rubrique. Le nombre est incrémenté chaque fois qu’un mot est rencontré. Par conséquent, la rubrique contient plusieurs entrées pour chaque mot, affichant un nombre croissant.
 
 4. Utilisez __Ctrl + C__ pour quitter le producteur. Continuez à utiliser __Ctrl + C__ pour quitter l’application et le consommateur.

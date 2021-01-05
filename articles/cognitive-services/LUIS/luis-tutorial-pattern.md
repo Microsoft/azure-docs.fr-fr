@@ -1,14 +1,16 @@
 ---
 title: 'Tutoriel : Modèles - LUIS'
 description: Utilisez des modèles pour accroître la prédiction d’intentions et d’entités tout en fournissant moins d’exemples d’énoncés dans ce tutoriel. Le modèle est fourni sous forme d’exemple d’énoncé de modèle, qui comprend la syntaxe pour identifier les entités et le texte pouvant être ignoré.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: tutorial
-ms.date: 05/07/2020
-ms.openlocfilehash: c9bbd521d49d669e8ebd18b29bda9f2add8f7739
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 07/06/2020
+ms.openlocfilehash: 9814304aed4d7a5f307fb2179491b0fa9635fd68
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592914"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91324652"
 ---
 # <a name="tutorial-add-common-pattern-template-utterance-formats-to-improve-predictions"></a>Tutoriel : Ajouter des formats d’énoncé de modèle courants pour améliorer les prédictions
 
@@ -39,12 +41,10 @@ Un modèle appliqué est une correspondance de texte couplée au machine learnin
 
 Utiliser les étapes suivantes :
 
-1.  Téléchargez et enregistrez le [fichier JSON de l’application](https://github.com/Azure-Samples/cognitive-services-language-understanding/blob/master/documentation-samples/tutorials/custom-domain-batchtest-HumanResources.json?raw=true).
+1.  Téléchargez et enregistrez le [fichier JSON de l’application](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/luis/apps/tutorial-fix-unsure-predictions.json?raw=true).
 
 1. Connectez-vous au [portail LUIS](https://www.luis.ai) et sélectionnez vos **abonnement** et **ressource de création** pour voir les applications affectées à cette dernière.
-1. Importez le fichier JSON dans une nouvelle application dans le [portail LUIS](https://www.luis.ai). Dans la page **Mes applications**, sélectionnez **+ Nouvelle application de conversation**, puis choisissez **Importer en tant que JSON**. Sélectionnez le fichier que vous avez téléchargé à l’étape précédente.
-
-1. Dans la section **Gérer**, sous l’onglet **Versions**, sélectionnez la version active, puis **Cloner**. Nommez la version clonée `patterns`. Le clonage est un excellent moyen de manipuler diverses fonctionnalités de LUIS sans affecter la version d’origine. Étant donné que le nom de la version est utilisé dans le cadre de la route d’URL, il ne peut pas contenir de caractères qui ne sont pas valides dans une URL.
+1. Importez le fichier JSON dans une nouvelle application dans le [portail LUIS](https://www.luis.ai). Dans la page **Mes applications**, sélectionnez **+ Nouvelle application de conversation**, puis choisissez **Importer en tant que JSON**. Sélectionnez le fichier que vous avez téléchargé à l’étape précédente, puis nommez l’application `Patterns tutorial`
 
 ## <a name="create-new-intents-and-their-utterances"></a>Créer de nouvelles intentions et leurs énoncés
 
@@ -67,8 +67,6 @@ Les deux intentions localisent les subordonnés directs du ou des managers, en f
     |`Who is John W. Smith's manager?`|
     |`Who does Jill Jones directly report to?`|
     |`Who is Jill Jones supervisor?`|
-
-    Ne vous inquiétez pas si l’entité keyPhrase est étiquetée dans les énoncés de l’intention au lieu de l’entité Employee. Les deux sont correctement prédites dans le volet de test et au point de terminaison.
 
 1. Sélectionnez **Intentions** dans le volet de navigation gauche.
 
@@ -109,50 +107,50 @@ Les deux intentions localisent les subordonnés directs du ou des managers, en f
             "topIntent": "OrgChart-Manager",
             "intents": {
                 "OrgChart-Manager": {
-                    "score": 0.313054234
+                    "score": 0.326605469
                 },
                 "OrgChart-Reports": {
-                    "score": 0.2462688
+                    "score": 0.127583548
                 },
                 "EmployeeFeedback": {
-                    "score": 0.0488328524
-                },
-                "GetJobInformation": {
-                    "score": 0.0156933
+                    "score": 0.0299124215
                 },
                 "MoveEmployee": {
-                    "score": 0.011265873
+                    "score": 0.01159851
                 },
-                "Utilities.StartOver": {
-                    "score": 0.003065792
-                },
-                "Utilities.Stop": {
-                    "score": 0.00300148362
-                },
-                "Utilities.Cancel": {
-                    "score": 0.00271081156
-                },
-                "None": {
-                    "score": 0.00212835032
+                "GetJobInformation": {
+                    "score": 0.0104600191
                 },
                 "ApplyForJob": {
-                    "score": 0.0020669254
+                    "score": 0.007508645
                 },
-                "Utilities.Confirm": {
-                    "score": 0.00200891262
+                "Utilities.StartOver": {
+                    "score": 0.00359402061
+                },
+                "Utilities.Stop": {
+                    "score": 0.00336530479
                 },
                 "FindForm": {
-                    "score": 0.00194145238
+                    "score": 0.002653719
+                },
+                "Utilities.Cancel": {
+                    "score": 0.00263288687
+                },
+                "None": {
+                    "score": 0.00238638581
                 },
                 "Utilities.Help": {
-                    "score": 0.00182301877
+                    "score": 0.00226386427
+                },
+                "Utilities.Confirm": {
+                    "score": 0.00211663754
                 }
             },
             "entities": {
                 "keyPhrase": [
                     "boss of Jill Jones"
                 ],
-                "Employee": [
+                "EmployeeListEntity": [
                     [
                         "Employee-45612"
                     ]
@@ -171,9 +169,9 @@ Les deux intentions localisent les subordonnés directs du ou des managers, en f
                             ]
                         }
                     ],
-                    "Employee": [
+                    "EmployeeListEntity": [
                         {
-                            "type": "Employee",
+                            "type": "EmployeeListEntity",
                             "text": "Jill Jones",
                             "startIndex": 19,
                             "length": 10,
@@ -190,13 +188,9 @@ Les deux intentions localisent les subordonnés directs du ou des managers, en f
     }
     ```
 
-Le score des deux premières intentions sont proches, mais l’intention la plus haute n’est pas très élevée (plus de 60 %) et est trop proche du score de l’intention suivante.
+La bonne intention principale a été prédite (`OrgChart-Manager`). Toutefois, le score n’est pas supérieur à 70 % et n’est pas suffisamment supérieur à l’intention la plus haute suivante. Utiliser des modèles pour augmenter significativement le score de l’intention en pourcentage et l’éloigner du score le plus élevé suivant.
 
-L’entraînement LUIS n’étant pas chaque fois exactement le même (légère variation), ces deux meilleurs scores pourraient s’inverser au prochain cycle d’entraînement. Il en résulte que l’intention erronée pourrait être retournée.
-
-Utiliser des modèles pour augmenter significativement le score de l’intention en pourcentage et l’éloigner du score le plus élevé suivant.
-
-Laissez cette deuxième fenêtre de navigation s’ouvrir. Vous utiliserez cette valeur plus loin dans le didacticiel.
+Laissez cette deuxième fenêtre de navigation s’ouvrir. Vous utiliserez cette valeur plus loin dans le tutoriel.
 
 ## <a name="template-utterances"></a>Modèles d’énoncés
 Du fait de la nature du domaine des ressources humaines, il existe plusieurs façons courantes de poser des questions sur les relations des employés dans les organisations. Par exemple :
@@ -206,16 +200,16 @@ Du fait de la nature du domaine des ressources humaines, il existe plusieurs fa�
 |`Who does Jill Jones report to?`|
 |`Who reports to Jill Jones?`|
 
-Ces énoncés sont trop proches pour permettre de déterminer l’unicité contextuelle de chacun sans fournir trop d’exemples d’énoncé. Si l’on ajoute un modèle pour une intention, LUIS apprend les modèles d’énoncés courants de cette intention avec peu d’exemples d’énoncés.
+Ces énoncés sont trop proches pour permettre de déterminer l’unicité contextuelle de chacun sans fournir _trop_ d’exemples d’énoncés. Si l’on ajoute un modèle pour une intention, LUIS apprend les modèles d’énoncés courants de cette intention sans qu’il soit nécessaire de fournir de nombreux exemples d’énoncés.
 
 Quelques exemples de modèles d’énoncés pour cette intention :
 
 |Exemples de modèles d’énoncés|signification de la syntaxe|
 |--|--|
-|`Who does {Employee} report to[?]`|interchangeable `{Employee}`<br>ignorer `[?]`|
-|`Who reports to {Employee}[?]`|interchangeable `{Employee}`<br>ignorer `[?]`|
+|`Who does {EmployeeListEntity} report to[?]`|interchangeable `{EmployeeListEntity}`<br>ignorer `[?]`|
+|`Who reports to {EmployeeListEntity}[?]`|interchangeable `{EmployeeListEntity}`<br>ignorer `[?]`|
 
-La syntaxe `{Employee}` marque le type et l’emplacement de l’entité dans l’énoncé de modèle. La syntaxe facultative, `[?]`, marque les mots ou la [ponctuation](luis-reference-application-settings.md#punctuation-normalization) facultative. LUIS établit une correspondance avec l’énoncé et ignore le texte facultatif à l’intérieur des crochets.
+La syntaxe `{EmployeeListEntity}` marque le type et l’emplacement de l’entité dans l’énoncé de modèle. La syntaxe facultative, `[?]`, marque les mots ou la [ponctuation](luis-reference-application-settings.md#punctuation-normalization) facultative. LUIS établit une correspondance avec l’énoncé et ignore le texte facultatif à l’intérieur des crochets.
 
 Bien que la syntaxe ressemble à une expression régulière, ce n’en est pas une. Seule la syntaxe d’accolade, `{}`, et de crochet, `[]`, est prise en charge. Ils peuvent être imbriqués jusqu’à deux niveaux.
 
@@ -233,35 +227,35 @@ Pour qu’un modèle corresponde à un énoncé, les entités au sein de l’én
 
     |Modèles d’énoncés|
     |:--|
-    |`Who is {Employee} the subordinate of[?]`|
-    |`Who does {Employee} report to[?]`|
-    |`Who is {Employee}['s] manager[?]`|
-    |`Who does {Employee} directly report to[?]`|
-    |`Who is {Employee}['s] supervisor[?]`|
-    |`Who is the boss of {Employee}[?]`|
+    |`Who is {EmployeeListEntity} the subordinate of[?]`|
+    |`Who does {EmployeeListEntity} report to[?]`|
+    |`Who is {EmployeeListEntity}['s] manager[?]`|
+    |`Who does {EmployeeListEntity} directly report to[?]`|
+    |`Who is {EmployeeListEntity}['s] supervisor[?]`|
+    |`Who is the boss of {EmployeeListEntity}[?]`|
 
-    Ces énoncés de modèle comprennent l’entité **Employee** entre accolades.
+    Ces énoncés de modèle comprennent l’entité **EmployeeListEntity** qui est placée entre accolades.
 
 1. Toujours sur la page Modèles, sélectionnez l’intention **OrgChart-Reports**, puis entrez les modèles d’énoncés suivants :
 
     |Modèles d’énoncés|
     |:--|
-    |`Who are {Employee}['s] subordinates[?]`|
-    |`Who reports to {Employee}[?]`|
-    |`Who does {Employee} manage[?]`|
-    |`Who are {Employee} direct reports[?]`|
-    |`Who does {Employee} supervise[?]`|
-    |`Who does {Employee} boss[?]`|
+    |`Who are {EmployeeListEntity}['s] subordinates[?]`|
+    |`Who reports to {EmployeeListEntity}[?]`|
+    |`Who does {EmployeeListEntity} manage[?]`|
+    |`Who are {EmployeeListEntity} direct reports[?]`|
+    |`Who does {EmployeeListEntity} supervise[?]`|
+    |`Who does {EmployeeListEntity} boss[?]`|
 
 ### <a name="query-endpoint-when-patterns-are-used"></a>Point de terminaison de requête lorsque des modèles sont utilisés
 
-Maintenant que les modèles sont ajoutés à l’application, formez, publiez et interrogez l’application sur le point de terminaison du runtime de prédiction.
+Maintenant que les modèles sont ajoutés à l’application, entraînez, publiez puis interrogez l’application sur le point de terminaison du runtime de prédiction.
 
 1. Sélectionnez **Train** (Entraîner). Une fois l’entraînement terminé, sélectionnez **Publish** (Publier), sélectionnez l’emplacement **Production**, puis **Done** (Terminé).
 
 1. Après avoir effectué la publication, rebasculez vers l’onglet du navigateur où figure l’URL du point de terminaison.
 
-1. Allez à la fin de l’URL dans la barre d’adresses, puis remplacez _YOUR_QUERY_HERE_ par : `Who is the boss of Jill Jones?`
+1. Accédez à la fin de l’URL dans la barre d’adresses pour vérifier que votre requête est toujours `Who is the boss of Jill Jones?`, puis envoyez l’URL pour une nouvelle prédiction.
 
     ```json
     {
@@ -270,50 +264,50 @@ Maintenant que les modèles sont ajoutés à l’application, formez, publiez et
             "topIntent": "OrgChart-Manager",
             "intents": {
                 "OrgChart-Manager": {
-                    "score": 0.999997854
+                    "score": 0.999999046
                 },
                 "OrgChart-Reports": {
-                    "score": 6.13748343E-05
+                    "score": 3.237443E-05
                 },
                 "EmployeeFeedback": {
-                    "score": 8.052567E-06
+                    "score": 4.364242E-06
                 },
                 "GetJobInformation": {
-                    "score": 1.18197136E-06
+                    "score": 1.616159E-06
                 },
                 "MoveEmployee": {
-                    "score": 7.65549657E-07
-                },
-                "None": {
-                    "score": 3.975E-09
-                },
-                "Utilities.StartOver": {
-                    "score": 1.53E-09
-                },
-                "Utilities.Confirm": {
-                    "score": 1.38181822E-09
-                },
-                "Utilities.Help": {
-                    "score": 1.38181822E-09
-                },
-                "Utilities.Stop": {
-                    "score": 1.38181822E-09
-                },
-                "Utilities.Cancel": {
-                    "score": 1.25833333E-09
-                },
-                "FindForm": {
-                    "score": 1.15384613E-09
+                    "score": 7.575752E-07
                 },
                 "ApplyForJob": {
-                    "score": 5.26923061E-10
+                    "score": 5.234157E-07
+                },
+                "None": {
+                    "score": 3.3E-09
+                },
+                "Utilities.StartOver": {
+                    "score": 1.26E-09
+                },
+                "FindForm": {
+                    "score": 1.13636367E-09
+                },
+                "Utilities.Cancel": {
+                    "score": 1.13636367E-09
+                },
+                "Utilities.Confirm": {
+                    "score": 1.13636367E-09
+                },
+                "Utilities.Help": {
+                    "score": 1.13636367E-09
+                },
+                "Utilities.Stop": {
+                    "score": 1.13636367E-09
                 }
             },
             "entities": {
                 "keyPhrase": [
                     "boss of Jill Jones"
                 ],
-                "Employee": [
+                "EmployeeListEntity": [
                     [
                         "Employee-45612"
                     ]
@@ -332,9 +326,9 @@ Maintenant que les modèles sont ajoutés à l’application, formez, publiez et
                             ]
                         }
                     ],
-                    "Employee": [
+                    "EmployeeListEntity": [
                         {
-                            "type": "Employee",
+                            "type": "EmployeeListEntity",
                             "text": "Jill Jones",
                             "startIndex": 19,
                             "length": 10,
@@ -372,8 +366,8 @@ Exemples d’énoncés de modèle pour ces informations facultatives :
 
 |Intentionnel|Exemples d’énoncés avec un texte facultatif et des entités prédéfinies|
 |:--|:--|
-|OrgChart-Manager|`who was {Employee}['s] manager [[on]{datetimeV2}?]`|
-|OrgChart-Manager|`who is {Employee}['s] manager [[on]{datetimeV2}?]`|
+|OrgChart-Manager|`who was {EmployeeListEntity}['s] manager [[on]{datetimeV2}?]`|
+|OrgChart-Manager|`who is {EmployeeListEntity}['s] manager [[on]{datetimeV2}?]`|
 
 
 L’utilisation de la syntaxe facultative des crochets, `[]`, facilite l’ajout d’un énoncé de modèle à ce texte facultatif, ce dernier peut se voir imbriqué à un deuxième niveau, `[[]]`, et peut inclure des entités ou du texte.
@@ -383,19 +377,20 @@ L’utilisation de la syntaxe facultative des crochets, `[]`, facilite l’ajout
 
 **Question : Pourquoi le nombre prédéfini ne fait pas partie de l’énoncé de modèle alors que le 3 mars est prédit à la fois comme un nombre `3` et une date `March 3` ?** L’énoncé de modèle utilise une date en fonction du contexte, soit littéralement comme dans `March 3`, ou de façon abstraite comme dans `in a month`. Une date peut contenir un nombre mais un nombre ne peut pas nécessairement être considéré comme une date. Utilisez toujours l’entité qui représente au mieux le type à retourner dans les résultats JSON de prédiction.
 
-**Question : Qu’en est-il des énoncés incompréhensibles comme `Who will {Employee}['s] manager be on March 3?`.** Les conjugaisons grammaticalement différentes, comme dans le cas où le `will` et le `be` sont séparés, doivent constituer un nouvel énoncé de modèle. L’énoncé de modèle existant ne correspond pas. Bien que l’intention de l’énoncé n’ait pas changé, le placement du mot dans l’énoncé a changé. Cette modification affecte la prédiction dans LUIS. Vous pouvez [regrouper et/ou](#use-the-or-operator-and-groups) les temps des verbes pour combiner ces énoncés.
+**Question : Qu’en est-il des énoncés incompréhensibles comme `Who will {EmployeeListEntity}['s] manager be on March 3?`.** Les conjugaisons grammaticalement différentes, comme dans le cas où le `will` et le `be` sont séparés, doivent constituer un nouvel énoncé de modèle. L’énoncé de modèle existant ne correspond pas. Bien que l’intention de l’énoncé n’ait pas changé, le placement du mot dans l’énoncé a changé. Cette modification affecte la prédiction dans LUIS. Vous pouvez [regrouper et/ou](#use-the-or-operator-and-groups) les temps des verbes pour combiner ces énoncés.
 
-**N’oubliez pas : les entités sont les premières trouvées, le modèle étant ensuite mis en correspondance.**
+> [!CAUTION]
+> **N’oubliez pas : les entités sont les premières trouvées, le modèle étant ensuite mis en correspondance.**
 
 ### <a name="add-new-pattern-template-utterances"></a>Ajouter de nouveaux énoncés de modèle
 
-1. Alors que vous êtes toujours dans la section **Modèles** de**Générer**, ajoutez plusieurs nouveaux énoncés de modèle. Sélectionnez **OrgChart-Manager** dans le menu déroulant d’intentions et entrez chacun des énoncés de modèle suivants :
+1. Alors que vous êtes toujours dans la section **Modèles** de **Générer**, ajoutez plusieurs nouveaux énoncés de modèle. Sélectionnez **OrgChart-Manager** dans le menu déroulant d’intentions et entrez chacun des énoncés de modèle suivants :
 
     |Intentionnel|Exemples d’énoncés avec un texte facultatif et des entités prédéfinies|
     |--|--|
-    |OrgChart-Manager|`who was {Employee}['s] manager [[on]{datetimeV2}?]`|
-    |OrgChart-Manager|`who will be {Employee}['s] manager [[in]{datetimeV2}?]`|
-    |OrgChart-Manager|`who will be {Employee}['s] manager [[on]{datetimeV2}?]`|
+    |OrgChart-Manager|`who was {EmployeeListEntity}['s] manager [[on]{datetimeV2}?]`|
+    |OrgChart-Manager|`who will be {EmployeeListEntity}['s] manager [[in]{datetimeV2}?]`|
+    |OrgChart-Manager|`who will be {EmployeeListEntity}['s] manager [[on]{datetimeV2}?]`|
 
 2. Sélectionnez **Train** (Entraîner) dans la barre de navigation pour entraîner l’application.
 
@@ -403,7 +398,7 @@ L’utilisation de la syntaxe facultative des crochets, `[]`, facilite l’ajout
 
 4. Entrez plusieurs énoncés de test pour vérifier que le modèle est mis en correspondance et que le score de l’intention est très élevé.
 
-    Après avoir entré le premier énoncé, sélectionnez **Inspecter** sous le résultat, afin que vous puissiez voir tous les résultats de prédiction. Chaque énoncé doit avoir l’intention **OrgChart-Manager** et doit extraire les valeurs pour les entités d’Employee et datetimeV2.
+    Après avoir entré le premier énoncé, sélectionnez **Inspecter** sous le résultat, afin que vous puissiez voir tous les résultats de prédiction. Chaque énoncé doit avoir l’intention **OrgChart-Manager** et doit extraire les valeurs des entités `EmployeeListEntity` et `datetimeV2`.
 
     |Énoncé|
     |--|
@@ -425,18 +420,21 @@ Cette utilisation de modèles a fourni :
 
 Plusieurs des énoncés de modèle précédents sont très proches. Utilisez la syntaxe **group** `()` et **OR** `|` pour réduire les énoncés de modèle.
 
-Les 2 modèles suivants peuvent être combinés dans un modèle unique à l’aide de la syntaxe group `()` et OR `|`.
+Les deux modèles suivants peuvent être combinés dans un modèle unique à l’aide de la syntaxe de groupe `()` et OR `|`.
 
 |Intentionnel|Exemples d’énoncés avec un texte facultatif et des entités prédéfinies|
 |--|--|
-|OrgChart-Manager|`who will be {Employee}['s] manager [[in]{datetimeV2}?]`|
-|OrgChart-Manager|`who will be {Employee}['s] manager [[on]{datetimeV2}?]`|
+|OrgChart-Manager|`who will be {EmployeeListEntity}['s] manager [[in]{datetimeV2}?]`|
+|OrgChart-Manager|`who will be {EmployeeListEntity}['s] manager [[on]{datetimeV2}?]`|
 
 Le nouvel énoncé de modèle sera :
 
-`who ( was | is | will be ) {Employee}['s] manager [([in]|[on]){datetimeV2}?]`.
+`who ( was | is | will be ) {EmployeeListEntity}['s] manager [([in]|[on]){datetimeV2}?]`.
 
 Cet exemple utilise un **groupe** autour de la conjugaison du verbe requis `in` et `on` facultatifs avec un canal **ou** entre les deux.
+
+> [!NOTE]
+> Lorsque vous utilisez le symbole _OR_ ou `|` (barre verticale) dans l’exemple de modèle, veillez à ajouter un espace avant et après la barre verticale.
 
 1. Sur la page **Modèles**, sélectionnez le filtre **OrgChart-Manager**. Limitez la liste en recherchant `manager`.
 
@@ -444,7 +442,7 @@ Cet exemple utilise un **groupe** autour de la conjugaison du verbe requis `in` 
 
 1. Modifiez l’énoncé de modèle en :
 
-    `who ( was | is | will be ) {Employee}['s] manager [([in]|[on]){datetimeV2}?]`
+    `who ( was | is | will be ) {EmployeeListEntity}['s] manager [([in]|[on]){datetimeV2}?]`
 
 2. Sélectionnez **Train** (Entraîner) dans la barre de navigation pour entraîner l’application.
 

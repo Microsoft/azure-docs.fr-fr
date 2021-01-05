@@ -1,26 +1,26 @@
 ---
 title: 'Script Azure CLI : Restaurer un serveur Azure Database pour PostgreSQL'
 description: Cet exemple de script Azure CLI montre comment restaurer un serveur Azure Database pour PostgreSQL et ses bases de données à un point antérieur dans le temps.
-author: rachel-msft
-ms.author: raagyema
+author: sr-msft
+ms.author: srranga
 ms.service: postgresql
 ms.devlang: azurecli
 ms.topic: sample
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 02/28/2018
-ms.openlocfilehash: 1f772f710f0146048fcde04d884fbe3458722743
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9af4a3d4a484ef22e147640add455741c533e9b7
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "66154547"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660472"
 ---
 # <a name="restore-an-azure-database-for-postgresql-server-using-azure-cli"></a>Restaurer un serveur Azure Database pour PostgreSQL avec Azure CLI
 Cet exemple de script Azure CLI permet de restaurer un seul serveur Azure Database pour PostgreSQL à un point antérieur dans le temps.
 
-[!INCLUDE [cloud-shell-try-it](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’exécuter l’interface CLI localement, Azure CLI 2.0 ou ultérieur est indispensable pour poursuivre la procédure décrite dans cet article. Pour vérifier la version, exécutez `az --version`. Consultez [Installer Azure CLI]( /cli/azure/install-azure-cli) pour installer ou mettre à niveau votre version d’Azure CLI.
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 Dans cet exemple de script, modifiez les lignes en surbrillance pour mettre à jour le nom d’utilisateur et le mot de passe d’administrateur et utiliser les vôtres. Remplacez l’ID d’abonnement utilisé dans les commandes `az monitor` par votre propre ID d’abonnement.
@@ -42,5 +42,5 @@ Ce script utilise les commandes décrites dans le tableau suivant :
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur Azure CLI : [Documentation d’Azure CLI](/cli/azure)
-- Essayer des scripts supplémentaires : [Exemples Azure CLI pour Base de données Azure pour PostgreSQL](../sample-scripts-azure-cli.md)
+- Essayez d’autres scripts : [Exemples Azure CLI pour base de données pour PostgreSQL](../sample-scripts-azure-cli.md)
 - [Comment sauvegarder et restaurer un serveur Azure Database pour PostgreSQL à l’aide du portail Azure](../howto-restore-server-portal.md)

@@ -1,6 +1,6 @@
 ---
 title: Services cloud et certificats de gestion | Microsoft Docs
-description: Découvrez comment créer et utiliser des certificats avec Microsoft Azure.
+description: Découvrez comment créer et déployer des certificats pour les services cloud et pour l’authentification avec l’API de gestion dans Azure.
 services: cloud-services
 documentationcenter: .net
 author: tgore03
@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 04/19/2017
 ms.author: tagore
-ms.openlocfilehash: cf2106302064df5ede02d18f253436047a5d33d8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8650b8670c61cab15b26163dd5108145b8509434
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82024606"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92072422"
 ---
 # <a name="certificates-overview-for-azure-cloud-services"></a>Vue d’ensemble des certificats pour Azure Cloud Services
 Dans Azure, des certificats sont utilisés pour les services cloud ([certificats de service](#what-are-service-certificates)) et pour l’authentification auprès de l’API de gestion ([certificats de gestion](#what-are-management-certificates)). Cette rubrique offre une vue d’ensemble de ces deux types de certificats et vous explique comment les [créer](#create) et les déployer dans Azure.
@@ -76,7 +76,7 @@ Export-PfxCertificate -Cert $cert -FilePath ".\my-cert-file.pfx" -Password $pass
 > Pour utiliser le certificat avec une adresse IP au lieu d’un domaine, utilisez l’adresse IP dans le paramètre -DnsName.
 
 
-Si vous souhaitez utiliser ce [certificat avec le portail de gestion](../azure-api-management-certs.md), exportez-le vers un fichier **.cer** :
+Si vous souhaitez utiliser ce [certificat avec le portail de gestion](/previous-versions/azure/azure-api-management-certs), exportez-le vers un fichier **.cer** :
 
 ```powershell
 Export-Certificate -Type CERT -Cert $cert -FilePath .\my-cert-file.cer
@@ -91,8 +91,4 @@ De nombreuses pages sur Internet vous expliquent comment procéder avec IIS. [ic
 ## <a name="next-steps"></a>Étapes suivantes
 [Pour télécharger votre certificat de service sur le portail Azure](cloud-services-configure-ssl-certificate-portal.md).
 
-Chargez un [certificat d’API de gestion](../azure-api-management-certs.md) dans le portail Azure.
-
-
-
-
+Chargez un [certificat d’API de gestion](/previous-versions/azure/azure-api-management-certs) dans le portail Azure.

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer OfficeSpace Software pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur OfficeSpace Software.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: f832a0a6-ad0a-453f-a747-9cd717e11181
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 10/02/2019
 ms.author: Zhchia
-ms.openlocfilehash: 3d472b300400cf230773ba01f3f4362988c34e81
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fc67d649e3a7cd094eb2c3d633244077abcab308
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77063401"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94359919"
 ---
 # <a name="tutorial-configure-officespace-software-for-automatic-user-provisioning"></a>Tutoriel : Configurer le provisionnement automatique d’utilisateurs sur OfficeSpace Software
 
@@ -76,7 +72,7 @@ Avant de configurer OfficeSpace Software pour le provisionnement automatique d�
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -84,7 +80,7 @@ Avant de configurer OfficeSpace Software pour le provisionnement automatique d�
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **OfficeSpace Software**, sélectionnez **OfficeSpace Software** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, entrez **OfficeSpace Software** , sélectionnez **OfficeSpace Software** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
     ![OfficeSpace Software dans la liste des résultats](common/search-new-app.png)
 
@@ -93,11 +89,11 @@ Avant de configurer OfficeSpace Software pour le provisionnement automatique d�
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans OfficeSpace Software, en fonction des affectations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique SAML pour OfficeSpace Software en suivant les instructions fournies dans le [Tutoriel sur l’authentification unique OfficeSpace Software](https://docs.microsoft.com/azure/active-directory/saas-apps/officespace-tutorial). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez également choisir d’activer l’authentification unique SAML pour OfficeSpace Software en suivant les instructions fournies dans le [Tutoriel sur l’authentification unique OfficeSpace Software](./officespace-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-officespace-software-in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour OfficeSpace Software dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -107,23 +103,23 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Sous la section **Informations d’identification de l’administrateur**, entrez le format d’URL `https://<subdomain>.officespacesoftware.com/api/scim/v2/` dans **URL de locataire**. Par exemple, `https://contoso.officespacesoftware.com/api/scim/v2/`. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à OfficeSpace Software. Si la connexion échoue, vérifiez que votre compte OfficeSpace Software dispose des autorisations d’administrateur et réessayez.
+5. Sous la section **Informations d’identification de l’administrateur** , entrez le format d’URL `https://<subdomain>.officespacesoftware.com/api/scim/v2/` dans **URL de locataire**. Par exemple, `https://contoso.officespacesoftware.com/api/scim/v2/`. Saisissez la valeur de **Jeton d’authentification SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à OfficeSpace Software. Si la connexion échoue, vérifiez que votre compte OfficeSpace Software dispose des autorisations d’administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-6. Dans le champ **E-mail de notification**, entrez l’adresse e-mail de la personne ou du groupe qui doit recevoir les notifications d’erreur de provisionnement et sélectionnez la case à cocher **Envoyer une notification par e-mail en cas de défaillance**.
+6. Dans le champ **E-mail de notification** , entrez l’adresse e-mail de la personne ou du groupe qui doit recevoir les notifications d’erreur de provisionnement et sélectionnez la case à cocher **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 7. Cliquez sur **Enregistrer**.
 
-8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec OfficeSpace Software**.
+8. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec OfficeSpace Software**.
 
     ![Mappages d’utilisateurs OfficeSpace Software](media/officespace-software-provisioning-tutorial/usermappings.png)
 
@@ -157,4 +153,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

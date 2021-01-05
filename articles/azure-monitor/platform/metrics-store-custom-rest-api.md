@@ -7,19 +7,19 @@ ms.topic: conceptual
 ms.date: 09/24/2018
 ms.author: ancav
 ms.subservice: metrics
-ms.openlocfilehash: 84709c022631543101889f784231158ebb96b6f3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c315cc8c9dfcfa66999ff263fab95f414061e54e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77662262"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87321256"
 ---
 # <a name="send-custom-metrics-for-an-azure-resource-to-the-azure-monitor-metric-store-by-using-a-rest-api"></a>Envoyer les métriques personnalisées d’une ressource Azure à un magasin de métriques Azure Monitor à l’aide d’une API REST
 
 Cet article vous montre comment envoyer des métriques personnalisées pour les ressources Azure au magasin de métriques Azure Monitor par le biais de l’API REST. Une fois que les métriques se trouvent dans Azure Monitor, vous pouvez les utiliser de la même façon que des métriques standard. Par exemple, vous pouvez créer des graphiques et des alertes à partir de ces métriques, ou les router vers d’autres outils externes.  
 
 >[!NOTE]  
->L’API REST autorise uniquement l’envoi de métriques personnalisées pour les ressources Azure. Si vous souhaitez envoyer des métriques pour les ressources dans différents environnements ou en local, vous pouvez utiliser [Application Insights](../../azure-monitor/app/api-custom-events-metrics.md).    
+>L’API REST autorise uniquement l’envoi de métriques personnalisées pour les ressources Azure. Si vous souhaitez envoyer des métriques pour les ressources dans différents environnements ou en local, vous pouvez utiliser [Application Insights](../app/api-custom-events-metrics.md).    
 
 
 ## <a name="create-and-authorize-a-service-principal-to-emit-metrics"></a>Créer et autoriser un principal de service pour émettre des métriques 
@@ -93,7 +93,7 @@ Si vous recevez un message d’erreur lors du processus, tenez compte des inform
 1. Vous ne pouvez pas générer de métriques si un abonnement ou un groupe de ressources est considéré comme votre ressource Azure. 
 1. Vous ne pouvez pas envoyer une métrique datant de plus de 20 minutes au magasin. Le magasin de métriques est optimisé pour la génération d’alertes et la création de graphiques en temps réel. 
 2. Le nombre de noms de dimensions doit correspondre aux valeurs, et inversement. Vérifiez les valeurs. 
-2. Vous générez peut-être des métriques pour une région qui ne prend pas en charge les métriques personnalisées. Consultez [Régions prises en charge](../../azure-monitor/platform/metrics-custom-overview.md#supported-regions). 
+2. Vous générez peut-être des métriques pour une région qui ne prend pas en charge les métriques personnalisées. Consultez [Régions prises en charge](./metrics-custom-overview.md#supported-regions). 
 
 
 
@@ -117,5 +117,5 @@ Si vous recevez un message d’erreur lors du processus, tenez compte des inform
 
  
 ## <a name="next-steps"></a>Étapes suivantes
-- En savoir plus sur les [métriques personnalisées](../../azure-monitor/platform/metrics-custom-overview.md).
+- En savoir plus sur les [métriques personnalisées](./metrics-custom-overview.md).
 

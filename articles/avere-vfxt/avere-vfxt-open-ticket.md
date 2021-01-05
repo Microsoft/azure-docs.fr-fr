@@ -1,17 +1,17 @@
 ---
 title: Guide pratique pour obtenir un support sur Avere vFXT pour Azure
-description: Explique comment ouvrir un ticket de support au sujet d’Avere vFXT pour Azure
+description: Découvrez comment résoudre les problèmes qui peuvent se poser lors du déploiement ou de l’utilisation d’Avere vFXT pour Azure en créant un ticket de support via le portail Azure.
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 01/13/2020
 ms.author: rohogue
-ms.openlocfilehash: b3c604003f78a150067875fb2064ab5eca0600db
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8159d83624cdd474d91030d5376a3db447beffe1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227493"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008427"
 ---
 # <a name="get-help-with-your-system"></a>Obtenir de l’aide avec votre système
 
@@ -57,4 +57,4 @@ Suivez ces étapes pour que votre ticket de support soit étiqueté avec une res
 
 ## <a name="request-a-quota-increase"></a>Demander une augmentation de quota
 
-Pour savoir quels composants sont nécessaires au déploiement d’Avere vFXT pour Azure, lisez [Quota pour le cluster vFXT](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster). Vous pouvez [faire une demande d’augmentation de quota](https://docs.microsoft.com/azure/azure-portal/supportability/resource-manager-core-quotas-request) dans le portail Azure.
+Pour savoir quels composants sont nécessaires au déploiement d’Avere vFXT pour Azure, lisez [Quota pour le cluster vFXT](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster). Vous pouvez [faire une demande d’augmentation de quota](../azure-portal/supportability/resource-manager-core-quotas-request.md) dans le portail Azure.

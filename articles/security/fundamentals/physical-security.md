@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/28/2019
+ms.date: 07/10/2020
 ms.author: terrylan
-ms.openlocfilehash: 634f89b3123902d981ad07dd1404315387104322
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3eac3c9abda74f0414fc97512f011d235d3991f5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68726723"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87076328"
 ---
 # <a name="azure-facilities-premises-and-physical-security"></a>Sécurité locale et physique des centres de données Azure
 Cet article décrit ce que Microsoft fait pour sécuriser l’infrastructure Azure.
@@ -28,9 +28,9 @@ Cet article décrit ce que Microsoft fait pour sécuriser l’infrastructure Azu
 ## <a name="datacenter-infrastructure"></a>Infrastructure de centre de données
 Azure est composé d’une [infrastructure de centres de données distribuée à l’échelle mondiale](https://azure.microsoft.com/global-infrastructure/) qui gère des milliers de services en ligne et couvre plus de 100 installations de haute sécurité dans le monde entier.
 
-L’infrastructure est conçue pour rapprocher les applications des utilisateurs dans le monde entier, en préservant la résidence des données et en offrant aux clients des options complètes de conformité et de résilience. Azure est présent dans 52 régions du monde et disponible dans 140 pays/régions.
+L’infrastructure est conçue pour rapprocher les applications des utilisateurs dans le monde entier, en préservant la résidence des données et en offrant aux clients des options complètes de conformité et de résilience. Azure est présent dans 58 régions du monde et disponible dans 140 pays/régions.
 
-Une région est un ensemble de centres de données qui sont interconnectés dans un réseau massif et résilient. Par défaut, le réseau gère la distribution, l’équilibrage de charge, la redondance et le chiffrement du contenu. En proposant plus de régions dans le monde que les autres fournisseurs de cloud, Azure offre aux clients la possibilité de déployer des applications là où ils en ont besoin.
+Une région est un ensemble de centres de données qui sont interconnectés dans un réseau massif et résilient. Le réseau comprend la distribution de contenu, l’équilibrage de charge, la redondance et le [chiffrement de la couche de liaison de données par défaut](encryption-overview.md#encryption-of-data-in-transit) pour tout le trafic Azure au sein d’une région ou le déplacement entre les régions. En proposant plus de régions dans le monde que les autres fournisseurs de cloud, Azure offre aux clients la possibilité de déployer des applications là où ils en ont besoin.
 
 Les régions Azure sont organisées en zones géographiques. Une zone géographique Azure garantit que les conditions de résidence, de souveraineté, de conformité et de résilience des données sont respectées dans les limites géographiques.
 

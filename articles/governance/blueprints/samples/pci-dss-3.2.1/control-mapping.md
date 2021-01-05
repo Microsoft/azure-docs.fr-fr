@@ -1,14 +1,14 @@
 ---
 title: Exemples de contrôles de blueprint PCI-DSS v3.2.1
-description: Mappage des contrôles de l'exemple de blueprint Payment Card Industry Data Security Standard v3.2.1 vers Azure Policy et RBAC.
-ms.date: 01/29/2020
+description: Mappage des contrôles de l'exemple de blueprint Payment Card Industry Data Security Standard v3.2.1 vers Azure Policy et Azure RBAC.
+ms.date: 08/19/2020
 ms.topic: sample
-ms.openlocfilehash: db21ac9d628e777b6ff2cc86516cfb1497f5a62f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: c634e8cc64f6376251e2cd07725c5c5a643b27c7
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "76905635"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91931425"
 ---
 # <a name="control-mapping-of-the-pci-dss-v321-blueprint-sample"></a>Mappage des contrôles de l’exemple de blueprint PCI-DSS v3.2.1
 
@@ -17,7 +17,7 @@ L’article suivant décrit en détail le mappage de l’exemple de blueprint PC
 Les mappages suivants concernent les contrôles **PCI-DSS v3.2.1:2018**. Utilisez le volet de navigation de droite pour accéder directement à la correspondance d’un contrôle spécifique. De nombreux contrôles mappés sont implémentés avec une initiative [Azure Policy](../../../policy/overview.md). Pour examiner l’initiative complète, ouvrez **Stratégie** dans le portail Azure et sélectionnez la page **Définitions**. Ensuite, recherchez et sélectionnez l’initiative de stratégie intégrée **\[Préversion\] Auditer les contrôles PCI v3.2.1:2018 et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit**.
 
 > [!IMPORTANT]
-> Chaque contrôle ci-dessous est associé à une ou plusieurs définitions [Azure Policy](../../../policy/overview.md). Ces stratégies peuvent vous aider à [évaluer la conformité](../../../policy/how-to/get-compliance-data.md) avec le contrôle ; toutefois, il n’existe pas souvent de correspondance de 1:1 ou parfaite entre un contrôle et une ou plusieurs stratégies. Ainsi, la **conformité** dans Azure Policy fait uniquement référence aux stratégies elles-mêmes ; cela ne garantit pas que vous êtes entièrement conforme à toutes les exigences d’un contrôle. En outre, la norme de conformité comprend des contrôles qui ne sont traités par aucune définition Azure Policy pour l’instant. Par conséquent, la conformité dans Azure Policy n’est qu’une vue partielle de l’état de conformité global. Les associations entre les contrôles et les définitions Azure Policy pour cet exemple de blueprint de conformité peuvent changer au fil du temps. Pour afficher l’historique des changements, consultez l’[historique des validations GitHub](https://github.com/MicrosoftDocs/azure-docs/commits/master/articles/governance/blueprints/samples/pci-dss-3.2.1/control-mapping.md).
+> Chaque contrôle ci-dessous est associé à une ou plusieurs définitions [Azure Policy](../../../policy/overview.md). Ces stratégies peuvent vous aider à [évaluer la conformité](../../../policy/how-to/get-compliance-data.md) avec le contrôle ; toutefois, il n’existe pas souvent de correspondance un-à-un ou parfaite entre un contrôle et une ou plusieurs stratégies. Ainsi, la **conformité** dans Azure Policy fait uniquement référence aux stratégies elles-mêmes ; cela ne garantit pas que vous êtes entièrement conforme à toutes les exigences d’un contrôle. En outre, la norme de conformité comprend des contrôles qui ne sont traités par aucune définition Azure Policy pour l’instant. Par conséquent, la conformité dans Azure Policy n’est qu’une vue partielle de l’état de conformité global. Les associations entre les contrôles et les définitions Azure Policy pour cet exemple de blueprint de conformité peuvent changer au fil du temps. Pour afficher l’historique des changements, consultez l’[historique des validations GitHub](https://github.com/MicrosoftDocs/azure-docs/commits/master/articles/governance/blueprints/samples/pci-dss-3.2.1/control-mapping.md).
 
 ## <a name="132-and-134-boundary-protection"></a>1.3.2 et 1.3.4 Protection de la limite
 
@@ -63,7 +63,7 @@ Le fait d’avoir un seul propriétaire d’abonnement Azure ne permet pas d’a
 
 ## <a name="32-721-831a-and-831b-management-of-privileged-access-rights"></a>3.2, 7.2.1, 8.3.1.a et 8.3.1.b Gestion des droits d’accès privilégié
 
-Ce blueprint vous permet de limiter et de contrôler les droits d’accès privilégié en affectant des définitions [Azure Policy](../../../policy/overview.md) pour auditer les comptes externes avec des autorisations de propriétaire et/ou en écriture et les comptes avec des autorisations de propriétaire et/ou en écriture pour lesquels l’authentification multifacteur n’est pas activée. Azure implémente le contrôle d’accès en fonction du rôle (RBAC) pour gérer qui a accès aux ressources Azure. Ces dernières étant non exemptes d’erreurs, le fait de savoir où elles sont implémentées peut vous aider à déterminer les besoins réels et l’implémentation appropriée. Ce blueprint affecte également des définitions [Azure Policy](../../../policy/overview.md) afin d’auditer l’utilisation de l’authentification Azure Active Directory pour les serveurs SQL. L’utilisation de l’authentification Azure Active Directory simplifie la gestion des autorisations et centralise la gestion centralisée des identités des utilisateurs de bases de données et d’autres services  
+Ce blueprint vous permet de limiter et de contrôler les droits d’accès privilégié en affectant des définitions [Azure Policy](../../../policy/overview.md) pour auditer les comptes externes avec des autorisations de propriétaire et/ou en écriture et les comptes avec des autorisations de propriétaire et/ou en écriture pour lesquels l’authentification multifacteur n’est pas activée. Le contrôle d’accès en fonction du rôle (Azure RBAC) pour gérer qui a accès aux ressources Azure. Ces dernières étant non exemptes d’erreurs, le fait de savoir où elles sont implémentées peut vous aider à déterminer les besoins réels et l’implémentation appropriée. Ce blueprint affecte également des définitions [Azure Policy](../../../policy/overview.md) afin d’auditer l’utilisation de l’authentification Azure Active Directory pour les serveurs SQL. L’utilisation de l’authentification Azure Active Directory simplifie la gestion des autorisations et centralise la gestion centralisée des identités des utilisateurs de bases de données et d’autres services  
 Microsoft.
  
 - Les comptes externes disposant d’autorisations de propriétaire doivent être supprimés de votre abonnement
@@ -77,7 +77,7 @@ Microsoft.
 
 ## <a name="812-and-815-least-privilege-and-review-of-user-access-rights"></a>8.1.2 et 8.1.5 Privilège minimum et Revue des droits d’accès utilisateurs
 
-Azure implémente un contrôle d’accès en fonction du rôle (RBAC) pour vous aider à gérer qui a accès aux ressources dans Azure. À l’aide du portail Azure, vous pouvez passer en revue les utilisateurs ayant accès aux ressources Azure et leurs autorisations. Ce blueprint affecte des définitions [Azure Policy](../../../policy/overview.md) qui permettent de déterminer les comptes devant en priorité faire l’objet d’une revue, notamment les comptes dépréciés et les comptes externes avec des autorisations élevées.
+Le contrôle d’accès en fonction du rôle Azure (Azure RBAC) vous permet de gérer les utilisateurs qui ont accès aux ressources dans Azure. À l’aide du portail Azure, vous pouvez passer en revue les utilisateurs ayant accès aux ressources Azure et leurs autorisations. Ce blueprint affecte des définitions [Azure Policy](../../../policy/overview.md) qui permettent de déterminer les comptes devant en priorité faire l’objet d’une revue, notamment les comptes dépréciés et les comptes externes avec des autorisations élevées.
 
 - Les comptes déconseillés doivent être supprimés de votre abonnement
 - Les comptes dépréciés disposant d’autorisations de propriétaire doivent être supprimés de votre abonnement
@@ -87,7 +87,7 @@ Azure implémente un contrôle d’accès en fonction du rôle (RBAC) pour vous 
 
 ## <a name="813-removal-or-adjustment-of-access-rights"></a>8.1.3 Suppression ou adaptation des droits d’accès
 
-Azure implémente le contrôle d’accès en fonction du rôle (RBAC) pour vous aider à gérer qui a accès aux ressources dans Azure. Grâce à Azure Active Directory et RBAC, vous pouvez mettre à jour les rôles d’utilisateur pour refléter les changements organisationnels. Si nécessaire, vous pouvez empêcher des comptes de se connecter (ou les supprimer). Dans ce cas, les droits d’accès aux ressources Azure sont immédiatement supprimés. Ce blueprint affecte des définitions [Azure Policy](../../../policy/overview.md) pour auditer le compte déprécié dont la suppression doit être envisagée.
+Le contrôle d’accès en fonction du rôle Azure (Azure RBAC) vous permet de gérer les utilisateurs qui ont accès aux ressources dans Azure. Grâce à Azure Active Directory et Azure RBAC, vous pouvez mettre à jour les rôles d’utilisateur pour refléter les changements organisationnels. Si nécessaire, vous pouvez empêcher des comptes de se connecter (ou les supprimer). Dans ce cas, les droits d’accès aux ressources Azure sont immédiatement supprimés. Ce blueprint affecte des définitions [Azure Policy](../../../policy/overview.md) pour auditer le compte déprécié dont la suppression doit être envisagée.
 
 - Les comptes déconseillés doivent être supprimés de votre abonnement
 - Les comptes dépréciés disposant d’autorisations de propriétaire doivent être supprimés de votre abonnement

@@ -1,4 +1,4 @@
-- name: Azure Internet of Things
+- name: Documentation Azure Internet of Things
   href: index.yml
 - name: Vue d’ensemble
   items:

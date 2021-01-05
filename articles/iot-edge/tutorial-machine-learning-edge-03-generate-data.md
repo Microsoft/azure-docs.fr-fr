@@ -1,6 +1,6 @@
 ---
 title: 'Tutoriel : Générer des données d’appareil simulé - Machine Learning sur Azure IoT Edge'
-description: Créez des appareils virtuels qui génèrent des données de télémétrie simulées utilisables par la suite pour entraîner un modèle Machine Learning.
+description: 'Tutoriel : Créer des appareils virtuels qui génèrent des données de télémétrie simulées utilisables par la suite pour entraîner un modèle Machine Learning.'
 author: kgremban
 manager: philmea
 ms.author: kgremban
@@ -8,17 +8,14 @@ ms.date: 1/20/2020
 ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 8f7a971315183e867ae06b58801d5855f90462a1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: eef5e60b06eedb1fb07c57aa2e369dd3830fcad5
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76722367"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932402"
 ---
 # <a name="tutorial-generate-simulated-device-data"></a>Tutoriel : Générer des données d’appareil simulées
-
-> [!NOTE]
-> Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Si vous êtes arrivé directement à cet article, nous vous encourageons à commencer par le [premier article](tutorial-machine-learning-edge-01-intro.md) de la série afin d’obtenir de meilleurs résultats.
 
 Dans cet article, nous utilisons des données d’entraînement de Machine Learning pour simuler un appareil qui envoie des données de télémétrie à Azure IoT Hub. Comme indiqué dans l’introduction, ce tutoriel utilise le [Turbofan engine degradation simulation data set](https://c3.nasa.gov/dashlink/resources/139/) (jeu de données de simulation de dégradation d’un turboréacteur à double flux) pour simuler les données d’un ensemble de moteurs d’avion à des fins d’entraînement et de test.
 
@@ -45,6 +42,18 @@ Le projet DeviceHarness est un projet .NET Core écrit en C# divisé en quatre c
 L’exécution des tâches décrites dans cet article doit prendre environ 20 minutes.
 
 L’équivalent du travail de cette étape dans le monde réel est généralement exécutée par des développeurs d’appareil et des développeurs du cloud.
+
+Dans cette section du tutoriel, vous allez apprendre à :
+
+> [!div class="checklist"]
+>
+> * Intégrer un projet externe à votre environnement de développement.
+> * Utiliser l’exemple de projet DeviceHarness pour générer des données d’appareil IoT simulé.
+> * Examiner les données générées dans votre hub IoT.
+
+## <a name="prerequisites"></a>Prérequis
+
+Cet article fait partie d’une série décrivant l’utilisation d’Azure Machine Learning sur IoT Edge. Chaque article de la série s’appuie sur le travail réalisé dans le cadre de l’article précédent. Si vous êtes tombé directement sur cet article, reportez-vous au [premier article](tutorial-machine-learning-edge-01-intro.md) de la série.
 
 ## <a name="configure-visual-studio-code-and-build-deviceharness-project"></a>Configurer Visual Studio Code et générer le projet DeviceHarness
 
@@ -156,6 +165,10 @@ Les données que nous venons d’envoyer à votre hub IoT ont été routées ver
 1. Les fichiers sont écrits au format [Avro](https://avro.apache.org/). Double-cliquez sur l’un de ces fichiers pour ouvrir un autre onglet de navigateur et afficher partiellement les données. Si vous êtes invité à ouvrir le fichier dans un programme, vous pouvez choisir VS Code pour qu’il s’affiche correctement.
 
 1. Vous n’avez pas besoin d’essayer de lire ou d’interpréter les données pour le moment, ce sera l’objet de l’article suivant.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Ce tutoriel fait partie d’un ensemble où chaque article s’appuie sur le travail effectué dans les articles précédents. Ne nettoyez pas les ressources avant d’avoir terminé le dernier tutoriel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

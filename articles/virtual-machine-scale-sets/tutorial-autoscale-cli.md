@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
 ms.date: 05/18/2018
 ms.reviewer: avverma
-ms.custom: avverma
-ms.openlocfilehash: 3f51c4e50c3c5499c73e18ce40e55de6aeb54472
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: avverma, devx-track-azurecli
+ms.openlocfilehash: 68f311a949d6c7663c5602c444d1b7b9af09dcad
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700888"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016724"
 ---
 # <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-the-azure-cli"></a>Tutoriel : Effectuer une mise à l’échelle automatique d’un groupe de machines virtuelles identiques avec Azure CLI
 
@@ -26,11 +26,11 @@ Lorsque vous créez un groupe identique, vous définissez le nombre d’instance
 > * Effectuer un test de contrainte sur les instances de machine virtuelle et déclencher des règles de mise à l’échelle automatique
 > * Remettre à l’échelle automatiquement en cas de baisse de la demande
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI en local, vous devez exécuter Azure CLI version 2.0.32 ou une version ultérieure pour poursuivre la procédure décrite dans ce didacticiel. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Ce tutoriel nécessite Azure CLI version 2.0.32 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-scale-set"></a>Créer un groupe identique
 
@@ -126,11 +126,12 @@ ssh azureuser@13.92.224.66 -p 50001
 Une fois connecté, installez l’utilitaire **stress**. Démarrez *10* workers de **contrainte** qui génèrent une charge au niveau du processeur. Ces rôles de travail sont exécutés pendant *420* secondes, ce qui est suffisant pour que les règles de mise à l’échelle automatique implémentent l’action souhaitée.
 
 ```console
+sudo apt-get update
 sudo apt-get -y install stress
 sudo stress --cpu 10 --timeout 420 &
 ```
 
-Lorsque **stress** affiche une sortie semblable à *stress: info: [2688] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd*, appuyez sur la touche *Entrée* pour revenir à l’invite de commandes.
+Lorsque **stress** affiche une sortie du type *stress: info: [2688] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd*, appuyez sur la touche *Entrée* pour revenir à l’invite de commandes.
 
 Pour vérifier que **stress** génère une charge d’UC, examinez la charge du système actif avec l’utilitaire **top** :
 
@@ -158,7 +159,7 @@ sudo apt-get -y install stress
 sudo stress --cpu 10 --timeout 420 &
 ```
 
-De nouveau, lorsque **stress** affiche une sortie semblable à *stress: info: [2713] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd*, appuyez sur la touche *Entrée* pour revenir à l’invite de commandes.
+Là encore, si **stress** affiche une sortie semblable à *stress: info: [2713] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd*, appuyez sur la touche *Entrée* pour revenir à l’invite de commandes.
 
 Fermez votre connexion à la deuxième instance de machine virtuelle. **stress** continue de s’exécuter sur l’instance de machine virtuelle.
 

@@ -1,17 +1,15 @@
 ---
 title: Basculer et mettre à l’échelle une application de conteneurs
 description: Dans ce didacticiel, vous apprenez la gestion du basculement dans une application de conteneurs Azure Service Fabric.  Sachez également mettre à l’échelle les conteneurs et les services qui s’exécutent dans un cluster.
-author: suhuruli
 ms.topic: tutorial
 ms.date: 07/22/2019
-ms.author: suhuruli
 ms.custom: mvc
-ms.openlocfilehash: bef1c42712c881296c5ab7b8096deb50fe94ee55
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f51a195f9ad43c7facb7dc413a4da83fc6b202b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75614092"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91531392"
 ---
 # <a name="tutorial-demonstrate-fail-over-and-scaling-of-container-services-with-service-fabric"></a>Didacticiel : Présenter le basculement et la mise à l’échelle de services de conteneur avec Service Fabric
 

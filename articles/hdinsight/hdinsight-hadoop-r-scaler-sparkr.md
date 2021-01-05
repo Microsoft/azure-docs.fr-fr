@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/26/2019
-ms.openlocfilehash: 5989692aeb59c7394299b4cb2474b244818895b2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c12398ceacf8495a05037422a6501dc8138abc10
+ms.sourcegitcommit: 3e8058f0c075f8ce34a6da8db92ae006cc64151a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75500073"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92628692"
 ---
 # <a name="combine-scaler-and-sparkr-in-hdinsight"></a>Combiner ScaleR et SparkR dans HDInsight
 
@@ -25,7 +25,7 @@ Cet exemple a été initialement partagé lors d’une intervention de Mario Inc
 
 Le code a été écrit à l’origine pour ML Server s’exécutant sur Spark dans un cluster HDInsight sur Azure. Mais le concept de l’utilisation combinée de SparkR et de ScaleR dans un seul script est également valide dans le contexte d’environnements locaux.
 
-La procédure décrite dans ce document suppose que vous disposez d’un niveau de connaissances intermédiaire de R et de la bibliothèque [ScaleR](https://msdn.microsoft.com/microsoft-r/scaler-user-guide-introduction) de ML Server. Vous découvrirez également [SparkR](https://spark.apache.org/docs/2.1.0/sparkr.html) tout au long de ce scénario.
+La procédure décrite dans ce document suppose que vous disposez d’un niveau de connaissances intermédiaire de R et de la bibliothèque [ScaleR](/machine-learning-server/r/concept-what-is-revoscaler) de ML Server. Vous découvrirez également [SparkR](https://spark.apache.org/docs/2.1.0/sparkr.html) tout au long de ce scénario.
 
 ## <a name="the-airline-and-weather-datasets"></a>Jeux de données météorologiques et jeux de données des compagnies aériennes
 
@@ -218,7 +218,7 @@ weatherDF <- read.df(sqlContext, weatherPath, source = "com.databricks.spark.csv
 
 ## <a name="data-cleansing-and-transformation"></a>Nettoyage et transformation des données
 
-Ensuite, nous procédons à un nettoyage des données de la compagnie aérienne que nous avons importé pour renommer des colonnes. Nous ne conservons que les variables nécessaires et arrondissons les heures planifiées du départ à l’heure la plus proche pour permettre la fusion avec les dernières données météorologiques au départ :
+Ensuite, nous procédons à un nettoyage des données de la compagnie aérienne que nous avons importées pour renommer des colonnes. Nous ne conservons que les variables nécessaires et arrondissons les heures planifiées du départ à l’heure la plus proche pour permettre la fusion avec les dernières données météorologiques au départ :
 
 ```
 logmsg('clean the airline data') 
@@ -506,7 +506,7 @@ plot(logitRoc)
 
 ## <a name="scoring-elsewhere"></a>Notation depuis un autre emplacement
 
-Nous pouvons également utiliser le modèle pour évaluer les données sur une autre plateforme. En l’enregistrant dans un fichier RDS, puis en transférant et en important ce fichier RDS vers l’environnement de notation de destination, comme les services Microsoft SQL Server R. Lors de cette opération, il est important de vérifier que les niveaux de facteur des données à évaluer correspondent à ceux sur lesquels le modèle a été généré. Pour ce faire, il suffit d’extraire et d’enregistrer les informations des colonnes associées aux données de modélisation via la fonction `rxCreateColInfo()` de ScaleR, puis d’appliquer ces informations de colonnes à la source de données d’entrée pour émettre des prévisions. Dans l’exemple suivant, nous avons enregistré quelques lignes du jeu de données test, puis extrait et utilisé les informations de colonnes à partir de cet exemple dans le script de prévisions :
+Nous pouvons également utiliser le modèle pour évaluer les données sur une autre plateforme. En l’enregistrant dans un fichier RDS, puis en transférant et en important ce fichier RDS vers un environnement de scoring de destination, tel que les services Microsoft SQL Server R Services. Lors de cette opération, il est important de vérifier que les niveaux de facteur des données à évaluer correspondent à ceux sur lesquels le modèle a été généré. Pour ce faire, il suffit d’extraire et d’enregistrer les informations des colonnes associées aux données de modélisation via la fonction `rxCreateColInfo()` de ScaleR, puis d’appliquer ces informations de colonnes à la source de données d’entrée pour émettre des prévisions. Dans l’exemple de code suivant, nous avons enregistré quelques lignes du jeu de données test, puis extrait et utilisé les informations de colonnes à partir de cet exemple dans le script de prédiction :
 
 ```
 # save the model and a sample of the test dataset 
@@ -535,7 +535,7 @@ Dans cet article, nous avons indiqué comment il est possible de combiner l’ut
 
 ## <a name="next-steps-and-more-information"></a>Étapes suivantes et informations supplémentaires
 
-- Pour plus d’informations sur l’utilisation de ML Server sur Apache Spark, consultez le [Guide de prise en main](https://msdn.microsoft.com/microsoft-r/scaler-spark-getting-started).
+- Pour plus d’informations sur l’utilisation de ML Server sur Apache Spark, consultez le [Guide de prise en main](/machine-learning-server/r/how-to-revoscaler-spark).
 
 - Pour obtenir des informations sur ML Services sur HDInsight, consultez [Vue d’ensemble de ML Services sur HDInsight](r-server/r-server-overview.md).
 
@@ -543,4 +543,4 @@ Pour plus d’informations sur l’utilisation de SparkR, consultez les pages su
 
 - [Document Apache SparkR](https://spark.apache.org/docs/2.1.0/sparkr.html)
 
-- [Vue d’ensemble de SparkR](https://docs.databricks.com/spark/latest/sparkr/overview.html) à partir de Databricks
+- [Vue d’ensemble de SparkR](/azure/databricks/spark/latest/sparkr/overview)

@@ -1,20 +1,20 @@
 ---
-title: Interroger des journaux à partir de la solution Start/Stop VMs
-description: Cet article explique comment interroger les données de journal générées par la solution de démarrage/arrêt des machines virtuelles (Start/Stop VMs) à partir d'Azure Monitor.
+title: Journaux de requêtes à partir d’Azure Automation Start/Stop VMs during off-hours
+description: Cet article explique comment interroger les données de journal générées par la solution Start/Stop VMs during off-hours à partir d'Azure Monitor.
 services: automation
 ms.subservice: process-automation
 ms.date: 04/01/2020
 ms.topic: conceptual
-ms.openlocfilehash: 472f3762ca18f71ba95053576daf025d8477fee9
-ms.sourcegitcommit: 5e49f45571aeb1232a3e0bd44725cc17c06d1452
+ms.openlocfilehash: de013b6ccd924f50ffe12fcba1285b121eece5f7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81604723"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83827554"
 ---
-# <a name="how-to-query-logs-from-startstop-vms-solution"></a>Interroger des journaux à partir de la solution Start/Stop VMs
+# <a name="query-logs-from-startstop-vms-during-off-hours"></a>Interroger les journaux à partir de Start/Stop VMs during off-hours
 
-Azure Automation transmet deux types d'enregistrements à l'espace de travail Log Analytics lié : les journaux d'activité des tâches et les flux de tâches. Ces données sont disponibles pour la [requête](../azure-monitor/log-query/log-query-overview.md) dans Azure Monitor.
+Azure Automation transmet deux types d'enregistrements à l'espace de travail Log Analytics lié : les journaux d'activité des tâches et les flux de tâches. Cet article passe en revue les données disponibles pour les [requête](../azure-monitor/log-query/log-query-overview.md) dans Azure Monitor.
 
 ## <a name="job-logs"></a>Journaux d’activité de tâches
 
@@ -60,7 +60,7 @@ Quand vous effectuez une recherche de journal qui retourne des enregistrements d
 
 ## <a name="sample-log-searches"></a>Exemples de recherches dans les journaux
 
-Le tableau suivant fournit des exemples de recherches de journaux pour les enregistrements de tâches collectés par cette solution.
+Le tableau suivant fournit des exemples de recherches de journaux pour les enregistrements de tâches collectés par Start/Stop VMs during off-hours.
 
 |Requête | Description|
 |----------|----------|
@@ -71,4 +71,6 @@ Le tableau suivant fournit des exemples de recherches de journaux pour les enreg
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-La solution **Start/Stop VMs during off-hours** n'inclut aucun ensemble prédéfini d'alertes. Consultez [Créer des alertes de journal](../azure-monitor/platform/alerts-log.md) avec Azure Monitor pour apprendre à créer des alertes d'échec de tâche afin de prendre en charge vos procédures et processus opérationnels ou DevOps.
+* Pour configurer la fonctionnalité, consultez [Configurer Start/Stop VMs during off-hours](automation-solution-vm-management-config.md).
+* Pour plus d’informations sur les alertes de journal pendant le déploiement des fonctionnalités, consultez [créer des alertes de journal avec Azure Monitor](../azure-monitor/platform/alerts-log.md).
+* Pour résoudre les erreurs liées à la fonctionnalité, consultez [Résoudre les problèmes liés à Start/Stop VMs during off-hours](troubleshoot/start-stop-vm.md).

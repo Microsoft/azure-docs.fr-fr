@@ -1,6 +1,6 @@
 ---
 title: Bien démarrer - Outil Microsoft de modélisation des menaces - Azure | Documents Microsoft
-description: Il s’agit d’une vue d’ensemble plus approfondie qui met en évidence l’outil de modélisation des menaces en action.
+description: Découvrez comment commencer à utiliser Threat Modeling Tool. Créez un diagramme, identifiez des menaces, atténuez des menaces et validez chaque atténuation.
 services: security
 documentationcenter: na
 author: jegeib
@@ -15,19 +15,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 08/17/2017
 ms.author: jegeib
-ms.openlocfilehash: 1454826095bcced9b20935405c0befd5a1ed1ddd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 322f5f6a79bdce23706b2211ccc04ef2451675d0
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68728310"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94515725"
 ---
 # <a name="getting-started-with-the-threat-modeling-tool"></a>Bien démarrer avec l’outil de modélisation des menaces
 
 Microsoft Threat Modeling Tool 2018 a été publié par GA en septembre 2018 sous forme de **[téléchargement](https://aka.ms/threatmodelingtool)** gratuit. La modification du mécanisme de livraison nous permet de transmettre les dernières améliorations et correctifs de bogues pour les clients chaque fois qu’ils ouvrent l’outil, rendant ainsi la gestion et l’utilisation plus facile.
 Cet article vous guide tout au long du processus de mise en route avec l’approche de modélisation des menaces SDL Microsoft et vous montre comment utiliser l’outil pour développer d’excellents modèles de menaces comme structure fondamentale de votre processus de sécurité.
 
-Cet article s’appuie sur les connaissances existantes de l’approche de modélisation des menaces SDL. Pour une vérification rapide, reportez-vous à **[Applications Web de la modélisation des menaces](https://msdn.microsoft.com/library/ms978516.aspx)** et une version archivée de l’article MSDN **[Découvrir des failles de sécurité à l’aide de l’approche STRIDE](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxzZWN1cmVwcm9ncmFtbWluZ3xneDo0MTY1MmM0ZDI0ZjQ4ZDMy)** publiée en 2006.
+Cet article s’appuie sur les connaissances existantes de l’approche de modélisation des menaces SDL. Pour une vérification rapide, reportez-vous à **[Applications Web de la modélisation des menaces](/previous-versions/msp-n-p/ff648006(v=pandp.10))** et une version archivée de l’article MSDN **[Découvrir des failles de sécurité à l’aide de l’approche STRIDE](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxzZWN1cmVwcm9ncmFtbWluZ3xneDo0MTY1MmM0ZDI0ZjQ4ZDMy)** publiée en 2006.
 
 En résumé, l’approche implique la création d’un diagramme, l’identification des menaces, leur atténuation et la validation de chaque atténuation. Voici un diagramme qui met en évidence ce processus :
 
@@ -97,11 +97,11 @@ Ricardo commence par sélectionner le premier élément de la liste. Voici ce qu
 
 Tout d’abord, l’interaction entre les deux gabarits est améliorée
 
-![Interaction](./media/threat-modeling-tool-getting-started/interaction.png)
+![La capture d’écran montre deux gabarits et la flèche courbe qui les relie de manière plus prononcée.](./media/threat-modeling-tool-getting-started/interaction.png)
 
 Ensuite, des informations supplémentaires sur les menaces s’affichent dans la fenêtre Propriétés de la menace
 
-![Informations d’interaction](./media/threat-modeling-tool-getting-started/interactioninfo.png)
+![Capture d’écran de la fenêtre Propriétés de la menace, qui contient le titre, la catégorie, la description, l’interaction et la priorité](./media/threat-modeling-tool-getting-started/interactioninfo.png)
 
 La menace générée lui permet de comprendre les failles potentielles de la conception. La catégorisation STRIDE lui donne une idée des vecteurs d’attaque potentiels, tandis que la description supplémentaire lui indique exactement ce qui est incorrect, ainsi que des méthodes possibles pour l’atténuer. Il peut utiliser des champs modifiables pour écrire des commentaires dans les détails de la justification ou modifier des classements de priorité en fonction de la barre de bogues de son organisation.
 
@@ -118,7 +118,7 @@ Les menaces non applicables à la conception en raison des atténuations existan
 
 Ricardo parcourt la liste avec Cristina et ajoute des remarques importantes, des atténuations /justifications, des modifications de la priorité et de l’état, il sélectionne Rapports -> Créer un rapport complet -> Enregistrer le rapport, qui imprime un rapport intéressant pour lui permettre de collaborer avec ses collègues et garantir la mise en œuvre d’un travail correctement sécurisé.
 
-![Informations d’interaction](./media/threat-modeling-tool-feature-overview/report.png)
+![Capture d’écran d’un rapport Threat Modeling représentatif](./media/threat-modeling-tool-feature-overview/report.png)
 
 Si Ricardo souhaite partager le fichier à la place, il peut facilement le faire en enregistrant le compte OneDrive de son organisation. Une fois cela fait, il peut copier le lien du document et le partager avec ses collègues. 
 

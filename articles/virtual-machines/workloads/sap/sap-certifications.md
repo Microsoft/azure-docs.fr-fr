@@ -10,22 +10,23 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 04/21/2020
 ms.author: juergent
 ms.custom: ''
-ms.openlocfilehash: df80113b85153f4e52bcbefa7b33dab9da296173
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 184f01f27023ce5976e5204bed384df54bab82d4
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82084819"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94950429"
 ---
 # <a name="sap-certifications-and-configurations-running-on-microsoft-azure"></a>Certifications et configurations SAP en cours sur Microsoft Azure
 
-SAP et Microsoft ont une longue expérience de collaboration dans le cadre d’un fort partenariat qui présente des avantages mutuels pour leurs clients respectifs. Microsoft met constamment à jour sa plateforme et envoie régulièrement de nouvelles informations sur les certifications pour SAP afin de garantir que Microsoft Azure est la meilleure plateforme pour exécuter vos charges de travail SAP. Les tableaux suivants décrivent nos configurations prises en charge par Azure et la liste toujours plus grande de certifications SAP. Cette liste est une liste de présentation qui peut différer légèrement des listes SAP officielles. L’accès aux données détaillées est documenté dans l’article [Logiciels SAP dont le déploiement est pris en charge sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-supported-product-on-azure)
+SAP et Microsoft ont une longue expérience de collaboration dans le cadre d’un fort partenariat qui présente des avantages mutuels pour leurs clients respectifs. Microsoft met constamment à jour sa plateforme et envoie régulièrement de nouvelles informations sur les certifications pour SAP afin de garantir que Microsoft Azure est la meilleure plateforme pour exécuter vos charges de travail SAP. Les tableaux suivants décrivent nos configurations prises en charge par Azure et la liste toujours plus grande de certifications SAP. Cette liste est une liste de présentation qui peut différer légèrement des listes SAP officielles. L’accès aux données détaillées est documenté dans l’article [Logiciels SAP dont le déploiement est pris en charge sur Azure](./sap-supported-product-on-azure.md)
 
 ## <a name="sap-hana-certifications"></a>Certifications SAP HANA
 Références :

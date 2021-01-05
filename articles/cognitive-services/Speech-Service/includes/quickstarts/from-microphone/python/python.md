@@ -4,12 +4,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/03/2020
 ms.author: trbye
-ms.openlocfilehash: 3613d190ef079d0e477d42b426a224d8e4dda7e6
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: f26f0ab6da398dcdee307f89b27cca780d08af85
+ms.sourcegitcommit: 374d1533ea2f2d9d3f8b6e6a8e65c6a5cd4aea47
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81400634"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85838817"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
@@ -34,7 +34,9 @@ Créez un fichier nommé *quickstart.py* et collez-y le code Python suivant.
 
 ## <a name="build-and-run-app"></a>Générer et exécuter l’application
 
-Vous êtes maintenant prêt à tester l’application et à vérifier la fonctionnalité de reconnaissance vocale à l’aide du service Speech.
+Vous êtes maintenant prêt à tester la reconnaissance vocale à l’aide du service Speech. 
+
+Si vous exécutez cette application sur macOS et qu’il s’agit de la première application Python que vous avez créée qui utilise un microphone, vous aurez probablement besoin d’autoriser l’accès du terminal au microphone. Ouvrez **Paramètres système** et sélectionnez **Sécurité et confidentialité**. Sélectionnez ensuite **Confidentialité** et recherchez **Microphone** dans la liste. Enfin, sélectionnez **Terminal** et enregistrez. 
 
 1. **Démarrer votre application** : à la ligne de commande, tapez :
     ```bash
@@ -45,4 +47,3 @@ Vous êtes maintenant prêt à tester l’application et à vérifier la fonctio
 ## <a name="next-steps"></a>Étapes suivantes
 
 [!INCLUDE [Speech recognition basics](../../speech-to-text-next-steps.md)]
-

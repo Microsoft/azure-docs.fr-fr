@@ -1,20 +1,18 @@
 ---
 title: Configurer l’authentification du client des appels entrants – Azure Event Grid sur IoT Edge | Microsoft Docs
-description: Configurez les protocoles d’API exposés par Event Grid sur IoT Edge.
+description: Découvrez les configurations d’authentification du client possibles pour le module Event Grid.
 author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/03/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 3363db4557dd19e8d72747ccd62bb535abb7b1e2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9525da4204e270d033f0c2354318bd71874eaf54
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76841789"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91290770"
 ---
 # <a name="configure-client-authentication-of-incoming-calls"></a>Configurer l’authentification du client des appels entrants
 

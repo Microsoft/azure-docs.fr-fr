@@ -1,27 +1,22 @@
 ---
 title: Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop - Azure
 description: Comment personnaliser le flux pour les utilisateurs de Windows Virtual Desktop avec des applets de commande PowerShell
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
-ms.date: 08/29/2019
+ms.topic: how-to
+ms.date: 09/14/2019
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 961fadfff0147d8c5258fa5acf31d8b0649ea12a
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: e47486f29537cb948aaae7cf17e97bae14b60700
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612892"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90084292"
 ---
-# <a name="customize-feed-for-windows-virtual-desktop-users"></a>Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop
+# <a name="customize-the-feed-for-windows-virtual-desktop-users"></a>Personnaliser le flux pour les utilisateurs de Windows Virtual Desktop
 
 >[!IMPORTANT]
->Ce contenu s’applique à la mise à jour Printemps 2020 avec des objets Azure Resource Manager Windows Virtual Desktop. Si vous utilisez la version Automne 2019 de Windows Virtual Desktop sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/customize-feed-virtual-desktop-users-2019.md).
->
-> La mise à jour Printemps 2020 de Windows Virtual Desktop est en préversion publique. Cette préversion est fournie sans contrat de niveau de service, et nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. 
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/customize-feed-virtual-desktop-users-2019.md).
 
 Vous pouvez personnaliser le flux pour que les ressources d’application distante et de Bureau à distance apparaissent de façon reconnaissable pour vos utilisateurs.
 
@@ -54,30 +49,30 @@ Get-AzWvdApplication -ResourceGroupName 0301RG -ApplicationGroupName 0301RAG | f
 La sortie ressemblerait à ceci :
 
 ```powershell
-CommandLineArgument : 
-CommandLineSetting  : DoNotAllow 
-Description         : 
-FilePath            : C:\Program Files\Windows NT\Accessories\wordpad.exe 
-FriendlyName        : Microsoft Word 
-IconContent         : {0, 0, 1, 0…} 
-IconHash            : --iom0PS6XLu-EMMlHWVW3F7LLsNt63Zz2K10RE0_64 
-IconIndex           : 0 
-IconPath            : C:\Program Files\Windows NT\Accessories\wordpad.exe 
-Id                  : /subscriptions/<subid>/resourcegroups/0301RG/providers/Microsoft.DesktopVirtualization/applicationgroups/0301RAG/applications/Microsoft Word 
-Name                : 0301RAG/Microsoft Word 
-ShowInPortal        : False 
-Type                : Microsoft.DesktopVirtualization/applicationgroups/applications 
+CommandLineArgument :
+CommandLineSetting  : DoNotAllow
+Description         :
+FilePath            : C:\Program Files\Windows NT\Accessories\wordpad.exe
+FriendlyName        : Microsoft Word
+IconContent         : {0, 0, 1, 0…}
+IconHash            : --iom0PS6XLu-EMMlHWVW3F7LLsNt63Zz2K10RE0_64
+IconIndex           : 0
+IconPath            : C:\Program Files\Windows NT\Accessories\wordpad.exe
+Id                  : /subscriptions/<subid>/resourcegroups/0301RG/providers/Microsoft.DesktopVirtualization/applicationgroups/0301RAG/applications/Microsoft Word
+Name                : 0301RAG/Microsoft Word
+ShowInPortal        : False
+Type                : Microsoft.DesktopVirtualization/applicationgroups/applications
 ```
 Pour mettre à jour le nom convivial, exécutez cette applet de commande :
 
 ```powershell
-Update-AzWvdApplication -GroupName 0301RAG -Name "Microsoft Word" -FriendlyName "WordUpdate" -ResourceGroupName 0301RG -IconIndex 0 -IconPath "C:\Program Files\Windows NT\Accessories\wordpad.exe" -ShowInPortal:$true -CommandLineSetting DoNotallow -FilePath "C:\Program Files\Windows NT\Accessories\wordpad.exe" 
+Update-AzWvdApplication -GroupName 0301RAG -Name "Microsoft Word" -FriendlyName "WordUpdate" -ResourceGroupName 0301RG -IconIndex 0 -IconPath "C:\Program Files\Windows NT\Accessories\wordpad.exe" -ShowInPortal:$true -CommandLineSetting DoNotallow -FilePath "C:\Program Files\Windows NT\Accessories\wordpad.exe"
 ```
 
 Pour vérifier que vous avez correctement mis à jour le nom convivial, exécutez cette applet de commande :
 
 ```powershell
-Get-AzWvdApplication -ResourceGroupName 0301RG -ApplicationGroupName 0301RAG | format-list FriendlyName 
+Get-AzWvdApplication -ResourceGroupName 0301RG -ApplicationGroupName 0301RAG | format-list FriendlyName
 ```
 
 L’applet de commande doit générer la sortie suivante :
@@ -104,28 +99,28 @@ Update-AzWvdDesktop -ResourceGroupName <resourcegroupname> -ApplicationGroupName
 
 ## <a name="customize-a-display-name-in-azure-portal"></a>Personnaliser un nom d’affichage dans le portail Azure
 
-Vous pouvez changer le nom d’affichage pour un Bureau à distance publié en définissant un nom convivial à l’aide du portail Azure. 
+Vous pouvez changer le nom d’affichage pour un Bureau à distance publié en définissant un nom convivial à l’aide du portail Azure.
 
-1. Connectez-vous au portail Azure sur <https://portal.azure.com>. 
+1. Connectez-vous au portail Azure sur <https://portal.azure.com>.
 
 2. Recherchez **Windows Virtual Desktop**.
 
-3. Sous services, sélectionnez **Windows Virtual Desktop**. 
+3. Sous services, sélectionnez **Windows Virtual Desktop**.
 
-4. Dans la page Windows Virtual Desktop, sélectionnez **Groupes d’applications** sur le côté gauche de l’écran, puis sélectionnez le nom du groupe d’applications que vous souhaitez modifier. 
+4. Dans la page Windows Virtual Desktop, sélectionnez **Groupes d’applications** sur le côté gauche de l’écran, puis sélectionnez le nom du groupe d’applications que vous souhaitez modifier. (Par exemple, si vous souhaitez modifier le nom complet du groupe d’applications de bureau, sélectionnez le groupe d’applications nommé **Desktop**.)
 
 5. Sélectionnez **Applications** dans le menu sur le côté gauche de l’écran.
 
-6. Sélectionnez l’application que vous souhaitez mettre à jour, puis entrez un nouveau **Nom d’affichage**. 
+6. Sélectionnez l’application que vous souhaitez mettre à jour, puis entrez un nouveau **Nom d’affichage**.
 
 7. Sélectionnez **Enregistrer**. L’application que vous avez modifiée doit maintenant afficher le nom mis à jour.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Maintenant que vous avez personnalisé le flux pour les utilisateurs, connectez-vous à un client Windows Virtual Desktop pour faire des tests. Pour cela, passez aux rubriques de procédures Se connecter à Windows Virtual Desktop :
-    
- * [Se connecter avec Windows 10 ou Windows 7](connect-windows-7-and-10.md)
- * [Se connecter avec le client web](connect-web.md) 
+
+ * [Se connecter avec Windows 10 ou Windows 7](connect-windows-7-10.md)
+ * [Se connecter avec le client web](connect-web.md)
  * [Se connecter avec le client Android](connect-android.md)
  * [Se connecter avec le client iOS](connect-ios.md)
  * [Se connecter avec le client macOS](connect-macos.md)

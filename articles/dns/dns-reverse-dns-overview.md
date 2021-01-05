@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/29/2017
 ms.author: rohink
-ms.openlocfilehash: bf3da62e989f0e029efdc8e9c70f5f45e0ddd765
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8af9549efc3e8dab54f55dd404346d87201dee2c
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76932295"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965610"
 ---
 # <a name="overview-of-reverse-dns-and-support-in-azure"></a>Vue d’ensemble du DNS inversé et prise en charge dans Azure
 
@@ -89,7 +89,7 @@ Une recherche inversée pour les requêtes de l’adresse IP « 192.0.2.129 »
 
 Le nom d’une zone de recherche inversée IPv6 doit se présenter sous la forme suivante : `<IPv6 network prefix in reverse order>.ip6.arpa`
 
-Par exemple, lorsque vous créez une zone inversée afin d’héberger des enregistrements pour des hôtes dont les adresses IP contiennent le préfixe 2001:db8:1000:abdc::/64, le nom de zone est créé en isolant le préfixe réseau de l’adresse (2001:db8:abdc::). Développez ensuite le préfixe réseau IPv6 pour supprimer [la compression des zéros](https://technet.microsoft.com/library/cc781672(v=ws.10).aspx), s’il a été utilisé pour raccourcir le préfixe d’adresse IPv6 (2001:0db8:abdc:0000::). Inversez l’ordre, à l’aide d’un point comme séparateur entre chaque nombre hexadécimal dans le préfixe, pour générer le préfixe réseau inversé (`0.0.0.0.c.d.b.a.8.b.d.0.1.0.0.2`) et ajouter le suffixe `.ip6.arpa`.
+Par exemple, lorsque vous créez une zone inversée afin d’héberger des enregistrements pour des hôtes dont les adresses IP contiennent le préfixe 2001:db8:1000:abdc::/64, le nom de zone est créé en isolant le préfixe réseau de l’adresse (2001:db8:abdc::). Développez ensuite le préfixe réseau IPv6 pour supprimer [la compression des zéros](/previous-versions/windows/it-pro/windows-server-2003/cc781672(v=ws.10)), s’il a été utilisé pour raccourcir le préfixe d’adresse IPv6 (2001:0db8:abdc:0000::). Inversez l’ordre, à l’aide d’un point comme séparateur entre chaque nombre hexadécimal dans le préfixe, pour générer le préfixe réseau inversé (`0.0.0.0.c.d.b.a.8.b.d.0.1.0.0.2`) et ajouter le suffixe `.ip6.arpa`.
 
 
 |Préfixe réseau  |Préfixe réseau développé et inversé |Suffixe standard |Nom de zone inversé  |
@@ -114,4 +114,3 @@ Pour plus d’informations sur le DNS inversé, consultez [Recherche DNS invers�
 Découvrez comment [héberger la zone de recherche inversée pour la plage d’adresses IP fournie par votre fournisseur de services Internet dans Azure DNS](dns-reverse-dns-for-azure-services.md).
 <br>
 Découvrez comment [gérer des enregistrements DNS inversés pour vos services Azure](dns-reverse-dns-for-azure-services.md).
-

@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 02/06/2020
 ms.author: tomfitz
-ms.openlocfilehash: cb66a2684e0b83f4f0cc01a07cc724f6beab4d68
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 91e3cd0b99825fd72eb342ce7a8555b046455538
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77088953"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87063358"
 ---
 # <a name="microsoftmanagedidentityidentityselector-ui-element"></a>Élément d’interface utilisateur Microsoft.ManagedIdentity.IdentitySelector
 
@@ -20,15 +20,15 @@ Contrôle permettant d’attribuer des [identités managées](../../active-direc
 
 Cette règle se compose des éléments suivants :
 
-![Première étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft.managedidentity.identityselector1.png)
+![Première étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft-managedidentity-identityselector-1.png)
 
 Quand l’utilisateur sélectionne **Ajouter**, le formulaire suivant s’ouvre. L’utilisateur peut sélectionner une ou plusieurs identités attribuées par l’utilisateur pour la ressource.
 
-![Deuxième étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft.managedidentity.identityselector2.png)
+![Deuxième étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft-managedidentity-identityselector-2.png)
 
 Les identités sélectionnées sont affichées dans le tableau. L’utilisateur peut ajouter ou supprimer des éléments de ce tableau.
 
-![Troisième étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft.managedidentity.identityselector3.png)
+![Troisième étape de Microsoft.ManagedIdentity.IdentitySelector](./media/managed-application-elements/microsoft-managedidentity-identityselector-3.png)
 
 ## <a name="schema"></a>schéma
 

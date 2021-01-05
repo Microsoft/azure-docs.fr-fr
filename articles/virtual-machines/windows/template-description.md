@@ -4,19 +4,19 @@ description: En savoir plus sur la manière dont la ressource de machine virtuel
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure
-ms.topic: article
+ms.topic: how-to
 ms.date: 01/03/2019
 ms.author: cynthn
-ms.openlocfilehash: 04dba192488744d1b54b0a0e2d885c0b1766bdc6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 228814db76ea14fa8b74c0c5d634e5afd6d54ac6
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100530"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96483043"
 ---
 # <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Machines virtuelles dans un modèle Azure Resource Manager
 
-Cet article décrit les aspects d’un modèle Azure Resource Manager qui s’appliquent à des machines virtuelles. Cet article ne décrit pas un modèle complet pour la création d’une machine virtuelle ; pour cela, vous avez besoin de définitions de ressource pour des comptes de stockage, d'interfaces réseau, d'adresses IP publiques et de réseaux virtuels. Pour plus d’informations sur la façon dont ces ressources peuvent être définies, consultez le [Guide de création d’un modèle Resource Manager](../../azure-resource-manager/resource-manager-template-walkthrough.md).
+Cet article décrit les aspects d’un modèle Azure Resource Manager qui s’appliquent à des machines virtuelles. Cet article ne décrit pas un modèle complet pour la création d’une machine virtuelle ; pour cela, vous avez besoin de définitions de ressource pour des comptes de stockage, d'interfaces réseau, d'adresses IP publiques et de réseaux virtuels. Pour plus d’informations sur la façon dont ces ressources peuvent être définies, consultez le [Guide de création d’un modèle Resource Manager](../../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md).
 
 Il existe de nombreux [modèles dans la galerie](https://azure.microsoft.com/documentation/templates/?term=VM), qui incluent la ressource de la machine virtuelle. Les éléments qui peuvent être inclus dans un modèle ne sont tous décrits ici.
 
@@ -156,14 +156,14 @@ La version de l'API que vous spécifiez dans votre modèle affecte les propriét
 
 Utilisez ces opportunités pour obtenir les dernières versions de l'API :
 
-- API REST - [Répertorier tous les fournisseurs de ressources](https://docs.microsoft.com/rest/api/resources/providers)
-- PowerShell - [Get-AzResourceProvider](https://docs.microsoft.com/powershell/module/az.resources/get-azresourceprovider)
-- Azure CLI - [az provider show](https://docs.microsoft.com/cli/azure/provider)
+- API REST - [Répertorier tous les fournisseurs de ressources](/rest/api/resources/providers)
+- PowerShell - [Get-AzResourceProvider](/powershell/module/az.resources/get-azresourceprovider)
+- Azure CLI - [az provider show](/cli/azure/provider)
 
 
 ## <a name="parameters-and-variables"></a>Paramètres et variables
 
-Les [paramètres](../../resource-group-authoring-templates.md) vous permettent de spécifier facilement les valeurs du modèle lors de son exécution. Cette section de paramètres est utilisée dans l’exemple :
+Les [paramètres](../../azure-resource-manager/templates/template-syntax.md) vous permettent de spécifier facilement les valeurs du modèle lors de son exécution. Cette section de paramètres est utilisée dans l’exemple :
 
 ```json
 "parameters": {
@@ -175,7 +175,7 @@ Les [paramètres](../../resource-group-authoring-templates.md) vous permettent d
 
 Lorsque vous déployez l’exemple de modèle, vous entrez les valeurs de nom et de mot de passe du compte d’administrateur sur chaque machine virtuelle ainsi que le nombre de machines virtuelles à créer. Vous pouvez spécifier les valeurs de paramètres dans un fichier distinct qui est géré avec le modèle, ou fournir ces valeurs lorsque vous y êtes invité.
 
-Les [variables](../../resource-group-authoring-templates.md) vous permettent de définir facilement les valeurs utilisées à plusieurs reprises tout au long du modèle ou qui peuvent changer au fil du temps. Cette section de variables est utilisée dans l’exemple :
+Les [variables](../../azure-resource-manager/templates/template-syntax.md) vous permettent de définir facilement les valeurs utilisées à plusieurs reprises tout au long du modèle ou qui peuvent changer au fil du temps. Cette section de variables est utilisée dans l’exemple :
 
 ```json
 "variables": { 
@@ -208,7 +208,7 @@ Les [variables](../../resource-group-authoring-templates.md) vous permettent de 
 }, 
 ```
 
-Lorsque vous déployez l'exemple de modèle, les valeurs de variables sont utilisées pour le nom et l’identificateur du compte de stockage créé précédemment. Les variables servent également à fournir les paramètres pour l’extension de diagnostic. Utilisez les [bonnes pratiques relatives à la création de modèles Azure Resource Manager](../../resource-manager-template-best-practices.md) pour choisir comment structurer les paramètres et les variables de votre modèle.
+Lorsque vous déployez l'exemple de modèle, les valeurs de variables sont utilisées pour le nom et l’identificateur du compte de stockage créé précédemment. Les variables servent également à fournir les paramètres pour l’extension de diagnostic. Utilisez les [bonnes pratiques relatives à la création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-best-practices.md) pour choisir comment structurer les paramètres et les variables de votre modèle.
 
 ## <a name="resource-loops"></a>boucles de ressources
 
@@ -247,7 +247,7 @@ N’oubliez pas que pour créer une boucle pour une ressource dans le modèle, v
 
 ## <a name="dependencies"></a>Les dépendances
 
-La plupart des ressources dépendent d’autres ressources pour fonctionner correctement. Les machines virtuelles doivent être associées à un réseau virtuel et pour cela, une interface réseau est requise. L'élément [dependsOn](../../resource-group-define-dependencies.md) permet de vérifier que l’interface réseau est prête à être utilisée avant la création des machines virtuelles :
+La plupart des ressources dépendent d’autres ressources pour fonctionner correctement. Les machines virtuelles doivent être associées à un réseau virtuel et pour cela, une interface réseau est requise. L'élément [dependsOn](../../azure-resource-manager/templates/define-resource-dependency.md) permet de vérifier que l’interface réseau est prête à être utilisée avant la création des machines virtuelles :
 
 ```json
 "dependsOn": [
@@ -274,15 +274,15 @@ Pour définir cette propriété, l’interface réseau doit exister. Vous avez d
 
 Plusieurs éléments de profil sont utilisés lors de la définition d’une ressource de machine virtuelle. Certains sont obligatoires, et d’autres facultatifs. Par exemple, les éléments hardwareProfile, osProfile, storageProfile et networkProfile sont requis, mais diagnosticsProfile est facultatif. Ces profils définissent des paramètres tels que :
    
-- [size](sizes.md)
+- [size](../sizes.md)
 - [nom](/azure/architecture/best-practices/resource-naming) et informations d’identification
 - disque et [paramètres du système d’exploitation](cli-ps-findimage.md)
-- [interface réseau](../../virtual-network/virtual-network-deploy-multinic-classic-ps.md) 
+- [interface réseau](/previous-versions/azure/virtual-network/virtual-network-deploy-multinic-classic-ps) 
 - diagnostics de démarrage
 
 ## <a name="disks-and-images"></a>Disques et images
    
-Dans Azure, les fichiers de disque dur virtuel peuvent représenter [des disques ou des images](managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). Quand le système d’exploitation d’un fichier vhd est spécialisé pour être une machine virtuelle spécifique, il est appelé disque. Quand le système d’exploitation d’un fichier vhd est généralisé pour permettre la création de plusieurs machines virtuelles, il est appelé image.   
+Dans Azure, les fichiers de disque dur virtuel peuvent représenter [des disques ou des images](../managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). Quand le système d’exploitation d’un fichier vhd est spécialisé pour être une machine virtuelle spécifique, il est appelé disque. Quand le système d’exploitation d’un fichier vhd est généralisé pour permettre la création de plusieurs machines virtuelles, il est appelé image.   
     
 ### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>Créer des machines virtuelles et des disques à partir d’une image de plateforme
 
@@ -353,7 +353,7 @@ Si vous souhaitez créer une machine virtuelle à partir d’une image gérée, 
 
 ### <a name="attach-data-disks"></a>Connecter des disques de données
 
-Vous pouvez aussi ajouter des disques de données aux machines virtuelles. Le [nombre de disques](sizes.md) dépend de la taille du disque de système d’exploitation que vous utilisez. Si la taille des machines virtuelles est définie sur Standard_DS1_v2, le nombre maximal de disques de données qui peuvent leur être ajoutés est de deux. Dans l’exemple, un disque de données géré est ajouté à chaque machine virtuelle :
+Vous pouvez aussi ajouter des disques de données aux machines virtuelles. Le [nombre de disques](../sizes.md) dépend de la taille du disque de système d’exploitation que vous utilisez. Si la taille des machines virtuelles est définie sur Standard_DS1_v2, le nombre maximal de disques de données qui peuvent leur être ajoutés est de deux. Dans l’exemple, un disque de données géré est ajouté à chaque machine virtuelle :
 
 ```json
 "dataDisks": [
@@ -369,7 +369,7 @@ Vous pouvez aussi ajouter des disques de données aux machines virtuelles. Le [n
 
 ## <a name="extensions"></a>Extensions
 
-Bien que les [extensions](extensions-features.md) représentent une ressource distincte, elles sont étroitement liées aux machines virtuelles. Les extensions peuvent être ajoutées comme une ressource enfant de la machine virtuelle ou comme une ressource distincte. L’exemple montre l'ajout de l'[extension de diagnostics](extensions-diagnostics-template.md) aux machines virtuelles :
+Bien que les [extensions](../extensions/features-windows.md) représentent une ressource distincte, elles sont étroitement liées aux machines virtuelles. Les extensions peuvent être ajoutées comme une ressource enfant de la machine virtuelle ou comme une ressource distincte. L’exemple montre l'ajout de l'[extension de diagnostics](../extensions/diagnostics-template.md) aux machines virtuelles :
 
 ```json
 { 
@@ -404,7 +404,7 @@ Bien que les [extensions](extensions-features.md) représentent une ressource di
 
 Cette ressource d’extension utilise la variable storageName et les variables de diagnostic pour fournir des valeurs. Si vous souhaitez modifier les données collectées par cette extension, vous pouvez ajouter des compteurs de performances supplémentaires à la variable wadperfcounters. Vous pouvez également choisir placer les données de diagnostic dans un autre compte de stockage que celui où sont stockés les disques de machine virtuelle.
 
-Il existe de nombreuses extensions que vous pouvez installer sur une machine virtuelle, mais l'extension la plus utile est probablement l'[extension de script personnalisé](extensions-customscript.md). Dans l’exemple, un script PowerShell nommé start.ps1 s’exécute sur chaque machine virtuelle au premier démarrage :
+Il existe de nombreuses extensions que vous pouvez installer sur une machine virtuelle, mais l'extension la plus utile est probablement l'[extension de script personnalisé](../extensions/custom-script-windows.md). Dans l’exemple, un script PowerShell nommé start.ps1 s’exécute sur chaque machine virtuelle au premier démarrage :
 
 ```json
 {
@@ -447,11 +447,11 @@ Si vous souhaitez en savoir plus sur l’état des ressources dans le déploieme
 
 ![Obtenir les informations de déploiement](./media/template-description/virtual-machines-deployment-info.png)
     
-Vous pouvez utiliser le même modèle pour créer des ressources ou pour mettre à jour des ressources existantes. Lorsque vous utilisez des commandes pour déployer des modèles, vous avez la possibilité de choisir le [mode](../../resource-group-template-deploy.md) à utiliser. Le mode peut être défini avec la valeur **Complète** ou **Incrémentielle**. La valeur par défaut consiste à effectuer des mises à jour incrémentielles. Soyez prudent lorsque vous utilisez le mode **Complète** car vous risquez de supprimer accidentellement des ressources. Quand vous choisissez le mode **Complète**, Resource Manager supprime toutes les ressources du groupe de ressources qui ne figurent pas dans le modèle.
+Vous pouvez utiliser le même modèle pour créer des ressources ou pour mettre à jour des ressources existantes. Lorsque vous utilisez des commandes pour déployer des modèles, vous avez la possibilité de choisir le [mode](../../azure-resource-manager/templates/deploy-powershell.md) à utiliser. Le mode peut être défini avec la valeur **Complète** ou **Incrémentielle**. La valeur par défaut consiste à effectuer des mises à jour incrémentielles. Soyez prudent lorsque vous utilisez le mode **Complète** car vous risquez de supprimer accidentellement des ressources. Quand vous choisissez le mode **Complète**, Resource Manager supprime toutes les ressources du groupe de ressources qui ne figurent pas dans le modèle.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Créez votre propre modèle à l’aide de la rubrique [Création de modèles Azure Resource Manager](../../resource-group-authoring-templates.md).
+- Créez votre propre modèle à l’aide de la rubrique [Création de modèles Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md).
 - Déployez le modèle que vous avez créé à l'aide de la rubrique [Créer une machine virtuelle Windows avec un modèle Resource Manager](ps-template.md).
 - Découvrez comment gérer les machines virtuelles que vous avez créées en lisant [Créer et gérer des machines virtuelles Windows avec le module Azure PowerShell](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 - Pour connaître la syntaxe JSON et les propriétés des types de ressource dans les modèles, consultez la [référence du modèle Azure Resource Manager](/azure/templates/).

@@ -8,18 +8,18 @@ manager: mtillman
 ms.assetid: 9e225dba-9044-4b13-b573-2f30d77925a9
 ms.service: role-based-access-control
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 01/10/2020
+ms.date: 07/28/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: 1bdf703ac29ce11749de70fa0ef5972ee284401b
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 53f31bca59bf316b6664a6c9daec886c84c1b072
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735706"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94648342"
 ---
 # <a name="list-azure-role-assignments-using-azure-powershell"></a>Lister les attributions de rôle Azure avec Azure PowerShell
 
@@ -32,7 +32,7 @@ ms.locfileid: "82735706"
 
 ## <a name="prerequisites"></a>Prérequis
 
-- [PowerShell dans Azure Cloud Shell](/azure/cloud-shell/overview) ou [Azure PowerShell](/powershell/azure/install-az-ps)
+- [PowerShell dans Azure Cloud Shell](../cloud-shell/overview.md) ou [Azure PowerShell](/powershell/azure/install-az-ps)
 
 ## <a name="list-role-assignments-for-the-current-subscription"></a>Lister les attributions de rôles pour l’abonnement actuel
 
@@ -140,6 +140,26 @@ Get-AzRoleAssignment -Scope /providers/Microsoft.Management/managementGroups/<gr
 
 ```Example
 PS C:\> Get-AzRoleAssignment -Scope /providers/Microsoft.Management/managementGroups/marketing-group
+```
+
+## <a name="list-role-assignments-for-a-resource"></a>Énumération des attributions de rôles d’une ressource
+
+Pour lister les attributions de rôles d’une ressource, utilisez [Get-AzRoleAssignment](/powershell/module/az.resources/get-azroleassignment) et le paramètre `-Scope`. L’étendue sera différente selon la ressource. Pour obtenir l’étendue, vous pouvez exécuter `Get-AzRoleAssignment` sans aucun paramètre afin de lister toutes les attributions de rôles, puis localiser l’étendue souhaitée.
+
+```azurepowershell
+Get-AzRoleAssignment -Scope "/subscriptions/<subscription_id>/resourcegroups/<resource_group_name>/providers/<provider_name>/<resource_type>/<resource>
+```
+
+L’exemple suivant montre comment lister les attributions de rôles d’un compte de stockage. Notez que cette commande recense également les attributions de rôles d’étendue supérieure (par exemple, les groupes de ressources et les abonnements) qui s’appliquent à ce compte de stockage.
+
+```Example
+PS C:\> Get-AzRoleAssignment -Scope "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/storage-test-rg/providers/Microsoft.Storage/storageAccounts/storagetest0122"
+```
+
+Si vous souhaitez ne lister que les attributions de rôles directes d’une ressource, vous pouvez utiliser la commande [Where-Object](/powershell/module/microsoft.powershell.core/where-object) pour filtrer la liste.
+
+```Example
+PS C:\> Get-AzRoleAssignment | Where-Object {$_.Scope -eq "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/storage-test-rg/providers/Microsoft.Storage/storageAccounts/storagetest0122"}
 ```
 
 ## <a name="list-role-assignments-for-classic-service-administrator-and-co-administrators"></a>Répertorier les attributions de rôles pour l’administrateur de service classique et les coadministrateurs

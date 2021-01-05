@@ -1,19 +1,20 @@
 ---
 title: Utiliser le module des services Azure Maps | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à utiliser les services REST de Microsoft Azure Maps à l’aide du module des services Azure Maps.
+description: En savoir plus sur le module de service Azure Maps. Découvrez comment charger et utiliser cette bibliothèque d’assistance pour accéder aux services REST Azure Maps dans des applications web ou Node.js.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 03/25/2019
-ms.topic: conceptual
+ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
 manager: cpendleton
-ms.openlocfilehash: 6e9d1f35d021c3381f9c2887dfb1c150bb720871
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-js
+ms.openlocfilehash: 2e07b614e87ed5dad94cf9bc5994e78071187839
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80804654"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008597"
 ---
 # <a name="use-the-azure-maps-services-module"></a>Utiliser le module des services Azure Maps
 
@@ -159,7 +160,7 @@ Le Kit de développement logiciel (SDK) web Azure Maps fournit un *module des se
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Utilisation du module des services" src="//codepen.io/azuremaps/embed/zbXGMR/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Utilisation du module des services" src="//codepen.io/azuremaps/embed/zbXGMR/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Voir la page <a href='https://codepen.io/azuremaps/pen/zbXGMR/'>Utilisation du module des services</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -190,19 +191,19 @@ Si vous accédez directement aux services REST d’Azure Maps, définissez le do
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [MapsURL](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.mapsurl?view=azure-maps-typescript-latest)
+> [MapsURL](/javascript/api/azure-maps-rest/atlas.service.mapsurl)
 
 > [!div class="nextstepaction"]
-> [SearchURL](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.searchurl?view=azure-maps-typescript-latest)
+> [SearchURL](/javascript/api/azure-maps-rest/atlas.service.searchurl)
 
 > [!div class="nextstepaction"]
-> [RouteURL](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.routeurl?view=azure-maps-typescript-latest)
+> [RouteURL](/javascript/api/azure-maps-rest/atlas.service.routeurl)
 
 > [!div class="nextstepaction"]
-> [SubscriptionKeyCredential](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.subscriptionkeycredential?view=azure-maps-typescript-latest)
+> [SubscriptionKeyCredential](/javascript/api/azure-maps-rest/atlas.service.subscriptionkeycredential)
 
 > [!div class="nextstepaction"]
-> [TokenCredential](https://docs.microsoft.com/javascript/api/azure-maps-rest/atlas.service.tokencredential?view=azure-maps-typescript-latest)
+> [TokenCredential](/javascript/api/azure-maps-rest/atlas.service.tokencredential)
 
 Pour d’autres exemples de code qui utilisent le module des services, voir les articles suivants :
 

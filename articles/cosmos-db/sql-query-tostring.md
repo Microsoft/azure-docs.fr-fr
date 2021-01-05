@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : ToString'
 description: Découvrez la fonction système SQL ToString dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/04/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 293449b1616e7124245d91c647177b958006009e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 85406a1c4a8d5780354d4161581550b02262f36b
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78304257"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340751"
 ---
 # <a name="tostring-azure-cosmos-db"></a>ToString (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une représentation de chaîne d’une expression scalaire. 
   
 ## <a name="syntax"></a>Syntaxe

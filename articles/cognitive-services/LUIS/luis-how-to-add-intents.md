@@ -3,28 +3,26 @@ title: Ajouter des intentions - LUIS
 titleSuffix: Azure Cognitive Services
 description: Ajoutez des intentions à votre application LUIS pour identifier des groupes de questions ou de commandes qui ont les mêmes intentions.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.subservice: language-understanding
-ms.topic: conceptual
-ms.date: 05/07/2020
-ms.author: diberry
+ms.topic: how-to
+ms.date: 05/17/2020
 ms.service: cognitive-services
-ms.openlocfilehash: b2cb7494ae3d26fa14bef906b8f5222b9dbc70e1
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: f2401c032f0fc90024e0049fad5f696b8a184544
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83584965"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95018937"
 ---
 # <a name="add-intents-to-determine-user-intention-of-utterances"></a>Ajouter des intentions pour déterminer l’intention de l’utilisateur des énoncés
 
 Ajoutez des [intentions](luis-concept-intent.md) à votre application LUIS pour identifier des groupes de questions ou de commandes qui ont la même intention.
 
-Les intentions sont gérées à partir du volet gauche **Intents**, accessible en cliquant sur la section **Build** de la barre de navigation supérieure.
+Dans le portail LUIS, les intentions sont gérées à partir du volet gauche **Intents**, accessible en cliquant sur la section **Build** de la barre de navigation supérieure.
 
-## <a name="add-intent"></a>Ajouter une intention
+## <a name="add-an-intent-to-your-app"></a>Ajouter une intention à votre application
 
 1. Connectez-vous au [portail LUIS](https://www.luis.ai) et sélectionnez vos **abonnement** et **ressource de création** pour voir les applications affectées à cette dernière.
 1. Ouvrez votre application en sélectionnant son nom dans la page **My Apps** (Mes applications).
@@ -34,7 +32,7 @@ Les intentions sont gérées à partir du volet gauche **Intents**, accessible e
     > [!div class="mx-imgBorder"]
     > ![Ajouter une intention](./media/luis-how-to-add-intents/Addintent-dialogbox.png)
 
-    L’intention nécessite des exemples d’énoncés.
+    L’intention a besoin d’[exemples d’énoncés](luis-concept-utterance.md) pour prédire les énoncés au niveau du point de terminaison de prédiction publié.
 
 ## <a name="add-an-example-utterance"></a>Ajouter un exemple d’énoncé
 
@@ -51,16 +49,16 @@ Les exemples d’énoncés sont des exemples de texte de questions ou de command
 
 ## <a name="intent-prediction-errors"></a>Erreurs de prédiction de l’intention
 
-Il peut arriver qu’un exemple d’énoncé comporte une erreur de prédiction entre l’intention dans laquelle il se trouve et l’intention déterminée au cours de l’entraînement.
+Une erreur de prédiction d’intention est déterminée quand l’énoncé n’est pas prédit avec l’application entraînée pour l’intention.
 
-Pour trouver et corriger les erreurs de prédiction d’énoncés, utilisez les options **Filtre** des prédictions incorrectes et vagues avec l’option **Vue** **Vue détaillée**.
+1. Pour trouver et corriger les erreurs de prédiction d’énoncés, utilisez les options **Filtre** des prédictions incorrectes et vagues.
 
-![Pour trouver et corriger les erreurs de prédiction d’énoncés, utilisez l’option Filtre.](./media/luis-how-to-add-intents/find-intent-prediction-errors.png)
+    > [!div class="mx-imgBorder"]
+    > ![Pour trouver et corriger les erreurs de prédiction d’énoncés, utilisez l’option Filtre.](./media/luis-how-to-add-intents/find-intent-prediction-errors.png)
 
-Une fois les filtres et la vue appliqués, les exemples d’énoncés comportant des erreurs apparaissent dans la liste avec les problèmes associés.
+1. Pour afficher la valeur du score dans la page de détails de l’intention, sélectionnez **Afficher les scores d’intention détaillés** dans le menu d’options **Affichage**.
 
-> [!div class="mx-imgBorder"]
-> ![![Une fois les filtres et la vue appliqués, les exemples d’énoncés comportant des erreurs apparaissent dans la liste avec les problèmes associés.](./media/luis-how-to-add-intents/find-errors-in-utterances.png)](./media/luis-how-to-add-intents/find-errors-in-utterances.png#lightbox)
+    Une fois les filtres et la vue appliqués, les exemples d’énoncés comportant des erreurs apparaissent dans la liste avec les problèmes associés.
 
 Chaque ligne indique le score de prédiction de l’apprentissage en cours de l’exemple d’énoncé, le score du rival le plus proche et l’évaluation, à savoir la différence entre ces deux scores.
 
@@ -83,4 +81,4 @@ Après avoir ajouté, modifié ou supprimé des intentions, [entraînez](luis-ho
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment ajouter des [exemples d’énoncés](luis-how-to-add-example-utterances.md) avec des entités.
+Découvrez comment ajouter des [exemples d’énoncés](./luis-how-to-add-entities.md) avec des entités.

@@ -13,31 +13,24 @@ ms.date: 05/07/2019
 ms.author: jmprieur
 ms.reviewer: brandwe
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 1f90f7f23fbdf10b91d8dfc7cd00cca83cd32fbc
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: 853ab82ab40cc7ebee1c74feaf6aad87adf39ece
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80882571"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443107"
 ---
 # <a name="scenario-mobile-application-that-calls-web-apis"></a>Scénario : Application mobile appelant des API web
 
 Découvrez comment générer une application mobile qui appelle des API web.
 
-## <a name="prerequisites"></a>Prérequis
-
-[!INCLUDE [Prerequisites](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
-
 ## <a name="getting-started"></a>Prise en main
 
-Créez votre première application mobile et essayez un démarrage rapide.
+Si ce n’est déjà fait, créez votre première application en effectuant un démarrage rapide :
 
-> [!div class="nextstepaction"]
-> [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application Android](./quickstart-v2-android.md)
->
-> [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application iOS](./quickstart-v2-ios.md)
->
-> [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application Xamarin iOS et Android](https://github.com/Azure-Samples/active-directory-xamarin-native-v2)
+- [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application Android](./quickstart-v2-android.md)
+- [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application iOS](./quickstart-v2-ios.md)
+- [Démarrage rapide : Acquérir un jeton et appeler l’API Microsoft Graph à partir d’une application Xamarin iOS et Android](https://github.com/Azure-Samples/active-directory-xamarin-native-v2) (GitHub)
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -60,7 +53,10 @@ Gardez les considérations suivantes à l’esprit lorsque vous générez une ap
 - Sur iOS et Android, la bibliothèque MSAL peut utiliser un navigateur externe pour connecter les utilisateurs. Le navigateur externe peut apparaître en haut de votre application.
 - N’utilisez jamais de clé secrète dans une application mobile. Dans ces applications, les secrets sont accessibles à tous les utilisateurs.
 
+## <a name="recommended-reading"></a>Lectures recommandées
+
+[!INCLUDE [recommended-topics](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](scenario-mobile-app-registration.md)
+Passez à l’article suivant de ce scénario, [Inscription d’application](scenario-mobile-app-registration.md).

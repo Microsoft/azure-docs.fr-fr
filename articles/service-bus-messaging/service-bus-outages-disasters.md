@@ -1,20 +1,14 @@
 ---
 title: Protéger les applications Azure Service Bus contre les pannes et les sinistres
 description: Cet article présente des techniques permettant de protéger les applications contre une éventuelle défaillance d'Azure Service Bus.
-services: service-bus-messaging
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 01/27/2020
-ms.author: aschhab
-ms.openlocfilehash: 29eb0625ceebf4fee75d0c1accef7ae03b5f61b9
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 06/23/2020
+ms.openlocfilehash: 4f3ff89e3ec59ad4445ab0b7ee7eeb45d18fa3b8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208378"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88065622"
 ---
 # <a name="best-practices-for-insulating-applications-against-service-bus-outages-and-disasters"></a>Meilleures pratiques pour protéger les applications contre les pannes de Service Bus et les sinistres
 
@@ -78,7 +72,7 @@ Lorsque vous utilisez la réplication passive, les messages peuvent être perdus
 L’exemple de [géo-réplication avec le niveau Standard de Service Bus][Geo-replication with Service Bus Standard Tier] illustre la réplication passive des entités de messagerie.
 
 ## <a name="protecting-relay-endpoints-against-datacenter-outages-or-disasters"></a>Protection des points de terminaison de relais contre les pannes ou les sinistres du centre de données
-La géo-réplication des points de terminaison d’[Azure Relay](../service-bus-relay/relay-what-is-it.md) permet à un service qui expose un point de terminaison de relais d’être accessible en cas de pannes de Service Bus. Pour obtenir la géo-réplication, le service doit créer deux points de terminaison de relais dans des espaces de noms différents. Les espaces de noms doivent résider dans des centres de données différents et les deux points de terminaison doivent avoir des noms différents. Par exemple, un point de terminaison principal peut être accessible sous **contosoPrimary.servicebus.windows.net/myPrimaryService**, alors que son homologue secondaire peut être accessible sous **contosoSecondary.servicebus.windows.net/mySecondaryService**.
+La géo-réplication des points de terminaison d’[Azure Relay](../azure-relay/relay-what-is-it.md) permet à un service qui expose un point de terminaison de relais d’être accessible en cas de pannes de Service Bus. Pour obtenir la géo-réplication, le service doit créer deux points de terminaison de relais dans des espaces de noms différents. Les espaces de noms doivent résider dans des centres de données différents et les deux points de terminaison doivent avoir des noms différents. Par exemple, un point de terminaison principal peut être accessible sous **contosoPrimary.servicebus.windows.net/myPrimaryService**, alors que son homologue secondaire peut être accessible sous **contosoSecondary.servicebus.windows.net/mySecondaryService**.
 
 Le service écoute alors sur les deux points de terminaison et un client peut appeler le service par le biais de n'importe quel point de terminaison. Une application cliente choisit de façon aléatoire l'un des relais en tant que point de terminaison principal et envoie sa requête au point de terminaison actif. Si l'opération échoue avec un code d'erreur, cette défaillance indique que le point de terminaison de relais n'est pas disponible. L'application ouvre un canal vers le point de terminaison de sauvegarde et soumet la requête à nouveau. À ce stade, les points de terminaison actif et de sauvegarde permutent leurs rôles : l'application cliente considère l'ancien point de terminaison actif comme nouveau point de terminaison de sauvegarde, et l'ancien point de terminaison de sauvegarde comme nouveau point de terminaison actif. Si les deux opérations d'envoi échouent, les rôles des deux entités restent inchangés et une erreur est renvoyée.
 
@@ -95,7 +89,7 @@ Pour plus d'informations sur la récupération d'urgence, consultez les articles
 [BrokeredMessage.MessageId]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
 [BrokeredMessage.Label]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
 [Geo-replication with Service Bus Standard Tier]: https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/GeoReplication
-[Azure SQL Database Business Continuity]: ../sql-database/sql-database-business-continuity.md
+[Azure SQL Database Business Continuity]:../azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview.md
 [Azure resiliency technical guidance]: /azure/architecture/resiliency
 
 [1]: ./media/service-bus-outages-disasters/az.png

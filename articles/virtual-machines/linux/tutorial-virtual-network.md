@@ -13,13 +13,13 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/10/2017
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: 5527fbfc05eb5aadf5c5775fb9987a88d5ba81bb
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 72c7f1dd6652a51a960c80829a697b97fd74f8de
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81460441"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87500025"
 ---
 # <a name="tutorial-create-and-manage-azure-virtual-networks-for-linux-virtual-machines-with-the-azure-cli"></a>Tutoriel : Créer et gérer des réseaux virtuels Azure pour des machines virtuelles Linux avec Azure CLI
 
@@ -32,13 +32,13 @@ Les machines virtuelles Azure utilisent la gestion réseau Azure pour la communi
 > * sécurisent le trafic réseau
 > * Créer une machine virtuelle principale
 
-Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
+Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](../../cloud-shell/overview.md), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce didacticiel nécessite que vous exécutiez Azure CLI version 2.0.30 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
 
 ## <a name="vm-networking-overview"></a>Vue d’ensemble de la mise en réseau de machines virtuelles
 
-Avec les réseaux virtuels Azure, les connexions réseau sont sécurisées entre les machines virtuelles, Internet et d’autres services Azure comme Azure SQL Database. Les réseaux virtuels sont divisés en segments logiques, appelés sous-réseaux. Les sous-réseaux sont utilisés pour contrôler le flux du réseau et comme une limite de sécurité. Quand vous déployez une machine virtuelle, elle inclut généralement une interface de réseau virtuel, qui est attachée à un sous-réseau.
+Avec les réseaux virtuels Azure, les connexions réseau sont sécurisées entre les machines virtuelles, Internet et d’autres services Azure comme Azure SQL Database. Les réseaux virtuels sont divisés en segments logiques, appelés sous-réseaux. Les sous-réseaux sont utilisés pour contrôler le flux du réseau et comme une limite de sécurité. Quand vous déployez une machine virtuelle, elle inclut généralement une interface de réseau virtuel, qui est attachée à un sous-réseau.
 
 Lorsque vous suivez ce didacticiel, les ressources du réseau virtuel suivantes sont créées :
 

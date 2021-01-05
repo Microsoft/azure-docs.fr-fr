@@ -1,19 +1,20 @@
 ---
 title: Déployer un modèle - IntelliJ IDEA
-description: Découvrez comment créer votre premier modèle Azure Resource Manager à l’aide d’IntelliJ IDEA et comment le déployer.
+description: Découvrez comment créer votre premier modèle Azure Resource Manager (modèle ARM) avec IntelliJ IDEA et comment le déployer.
 ms.devlang: java
 ms.date: 08/01/2019
 ms.topic: conceptual
-ms.openlocfilehash: a5015a018f905b4353afd6bf25a48a2d942b3b97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: f0e007fe8930b30cee1c95159d7e964e3792449f
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80153350"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905959"
 ---
 # <a name="create-and-deploy-arm-templates-by-using-the-intellij-idea"></a>Créer et déployer des modèles Resource Manager à l’aide d’IntelliJ IDEA
 
-Découvrez comment déployer un modèle Resource Manager sur Azure à l’aide d’IntelliJ IDEA, ainsi que le modifier et le mettre à jour directement à partir de l’environnement de développement intégré (IDE). Les modèles Resource Manager sont des fichiers JSON qui définissent les ressources nécessaires pour déployer votre solution. Pour comprendre les concepts associés au déploiement et à la gestion de vos solutions Azure, consultez [Vue d’ensemble du déploiement de modèles](overview.md).
+Découvrez comment déployer un modèle Azure Resource Manager (modèle ARM) sur Azure avec IntelliJ IDEA, comment le modifier et comment le mettre à jour directement dans l’environnement de développement intégré (IDE). Les modèles Resource Manager sont des fichiers JSON qui définissent les ressources nécessaires pour déployer votre solution. Pour comprendre les concepts associés au déploiement et à la gestion de vos solutions Azure, consultez [Vue d’ensemble du déploiement de modèles](overview.md).
 
 ![Schéma du portail de modèle Resource Manager](./media/quickstart-create-templates-use-the-portal/azure-resource-manager-export-deploy-template-portal.png)
 
@@ -27,7 +28,7 @@ Pour effectuer ce qui est décrit dans cet article, vous avez besoin des éléme
 
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) Ultimate Edition ou Community Edition
 * Une fois que [Azure Toolkit for IntelliJ](https://plugins.jetbrains.com/plugin/8053) est installé, consultez le [guide de gestion des plug-ins IntelliJ](https://www.jetbrains.com/help/idea/managing-plugins.html) pour plus d’informations.
-* [Être](/java/azure/intellij/azure-toolkit-for-intellij-sign-in-instructions) connecté à votre compte Azure pour Azure Toolkit for IntelliJ
+* [Être](/azure/developer/java/toolkit-for-intellij/sign-in-instructions) connecté à votre compte Azure pour Azure Toolkit for IntelliJ
 
 ## <a name="deploy-a-quickstart-template"></a>Déployer un modèle de démarrage rapide
 
@@ -65,7 +66,7 @@ Au lieu de créer un modèle à partir de zéro, ouvrez un modèle à partir de 
 
 1. Vous pouvez modifier les deux fichiers sur cette page et déployer les modifications dans Azure. Dans le cas présent, nous modifions la valeur de **storageAccountType** dans les fichiers de paramètres en remplaçant `Standard_LRS` par `Standard_GRS`. Ensuite, cliquez sur **Mettre à jour un déploiement** en bas de l’écran, puis confirmez la mise à jour.
 
-    ![Modèle Resource Manager : modifier le déploiement](./media/create-templates-use-intellij/resource-manager-edit-deployment-update.png)
+    ![La capture d’écran montre le modèle Resource Manager avec l’invite de mise à jour du déploiement affichée.](./media/create-templates-use-intellij/resource-manager-edit-deployment-update.png)
 
 1. Une fois le déploiement mis à jour, vous pouvez accéder au portail pour vérifier que le compte de stockage créé est remplacé par `Standard_GRS`.
 
@@ -86,4 +87,4 @@ Le principal objectif de cet article est d’utiliser IntelliJ IDEA pour déploy
 > [Tutoriels pour les débutants](./template-tutorial-create-first-template.md)
 
 > [!div class="nextstepaction"]
-> [Visiter le centre de développement Java sur Azure](https://docs.microsoft.com/azure/java)
+> [Visiter le centre de développement Java sur Azure](/azure/java)

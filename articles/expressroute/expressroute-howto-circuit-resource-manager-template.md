@@ -1,18 +1,18 @@
 ---
 title: 'Modèle Azure ExpressRoute : Création d’un circuit ExpressRoute'
-description: Créez, approvisionnez, supprimez et déprovisionnez un circuit ExpressRoute.
+description: Découvrez comment créer un circuit Azure ExpressRoute en déployant un modèle Azure Resource Manager à l’aide d’Azure PowerShell.
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/13/2019
-ms.author: charwen
-ms.openlocfilehash: ac2fb2f884feb0fbe6fbb1731ebe7c8bdad5114b
-ms.sourcegitcommit: bc738d2986f9d9601921baf9dded778853489b16
+ms.author: duau
+ms.openlocfilehash: 2e9b6ddc9da4467590946af12a47f1473a4ea494
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80616526"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202053"
 ---
 # <a name="create-an-expressroute-circuit-by-using-azure-resource-manager-template"></a>Création d’un circuit ExpressRoute en utilisant le modèle Azure Resource Manager
 
@@ -25,7 +25,7 @@ ms.locfileid: "80616526"
 > * [PowerShell (classique)](expressroute-howto-circuit-classic.md)
 >
 
-Découvrez comment créer un circuit ExpressRoute en déployant un modèle Azure Resource Manager à l’aide d’Azure PowerShell. Pour plus d’informations sur le développement de modèles Resource Manager, consultez la [documentation Resource Manager](/azure/azure-resource-manager/) et les [informations de référence sur les modèles](/azure/templates/microsoft.network/expressroutecircuits).
+Découvrez comment créer un circuit ExpressRoute en déployant un modèle Azure Resource Manager à l’aide d’Azure PowerShell. Pour plus d’informations sur le développement de modèles Resource Manager, consultez la [documentation Resource Manager](../azure-resource-manager/index.yml) et les [informations de référence sur les modèles](/azure/templates/microsoft.network/expressroutecircuits).
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
@@ -63,7 +63,7 @@ Pour créer un circuit ExpressRoute en déployant un modèle :
     Write-Host "Press [ENTER] to continue ..."
     ```
 
-   * Le **niveau SKU** détermine si un circuit ExpressRoute est [Local](expressroute-faqs.md#expressroute-local), Standard ou [Premium](expressroute-faqs.md#expressroute-premium). Vous pouvez spécifier *Local*, *Standard ou *Premium*.
+   * Le **niveau SKU** détermine si un circuit ExpressRoute est [Local](expressroute-faqs.md#expressroute-local), Standard ou [Premium](expressroute-faqs.md#expressroute-premium). Vous pouvez spécifier *Local*, *Standard ou *Premium*. Vous ne pouvez pas remplacer la référence SKU de *Standard/Premium* par celle de *Local*.
    * La **famille de références** détermine le type de facturation. Vous pouvez spécifier *Metereddata* pour définir un forfait de données limité et *Unlimiteddata* pour un forfait de données illimité. Vous pouvez changer le type de facturation de *Metereddata* en *Unlimiteddata*, mais que vous ne pouvez pas le changer de *Unlimiteddata* en *Metereddata*. Un circuit *local* est uniquement *Unlimiteddata*.
    * L’**Emplacement de peering** est l’emplacement physique où vous effectuez le peering auprès de Microsoft.
 

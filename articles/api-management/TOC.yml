@@ -11,10 +11,17 @@
 - name: Démarrages rapides
   expanded: true
   items:
+    - name: Créer une instance - CLI
+      href: get-started-create-service-instance-cli.md
     - name: Créer une instance - Portail
       href: get-started-create-service-instance.md
     - name: Créer une instance - PowerShell
       href: powershell-create-service-instance.md
+    - name: Créer une instance - Visual Studio Code
+      href: vscode-create-service-instance.md
+    - name: Créer une instance - Modèle ARM
+      displayName: Resource Manager
+      href: quickstart-arm-template.md
 - name: Tutoriels
   items:
     - name: 1 - Importer votre première API
@@ -35,10 +42,12 @@
       href: api-management-get-started-publish-versions.md
     - name: 9 - Personnaliser le portail des développeurs
       href: api-management-howto-developer-portal-customize.md
+    - name: 10 - Gérer les API dans Visual Studio Code
+      href: visual-studio-code-tutorial.md
 - name: Exemples
   items:
     - name: Stratégies
-      href: policy-samples.md
+      href: ./policies/index.md
     - name: Azure PowerShell
       href: powershell-samples.md
 - name: Concepts
@@ -51,22 +60,30 @@
           href: api-management-howto-policies.md
         - name: Index de référence de stratégie
           href: api-management-policies.md
+        - name: Gestion des erreurs
+          href: api-management-error-handling-policies.md
     - name: Sécurité
       items:
         - name: Base de référence de la sécurité
           href: security-baseline.md
-        - name: Contrôles de sécurité intégrés
-          href: api-management-security-controls.md
     - name: Abonnements
       href: api-management-subscriptions.md
+    - name: Versions
+      href: api-management-versions.md
+    - name: Révisions
+      href: api-management-revisions.md
     - name: Gérer à l’aide d’Automation
       href: automation-manage-api-management.md
-    - name: Gestion des erreurs
-      href: api-management-error-handling-policies.md
     - name: Restrictions à l’importation des API
       href: api-management-api-import-restrictions.md
     - name: Vue d’ensemble de la passerelle auto-hébergée
       href: self-hosted-gateway-overview.md
+    - name: Observabilité
+      href: observability.md
+    - name: CI/CD avec modèles ARM
+      href: devops-api-development-templates.md
+    - name: Suppression réversible
+      href: soft-delete.md
 - name: Guides pratiques
   items:
     - name: Définir des API
@@ -93,6 +110,8 @@
       items:
         - name: Métrique de capacité
           href: api-management-capacity.md
+        - name: Prévoir et gérer les coûts
+          href: plan-manage-costs.md
         - name: Mise à niveau et mise à l’échelle
           href: upgrade-and-scale.md
         - name: Configurer la mise à l’échelle automatique
@@ -145,6 +164,8 @@
       items:
         - name: Comprendre le portail des développeurs
           href: api-management-howto-developer-portal.md
+        - name: Migrer depuis le portail déprécié vers le nouveau portail des développeurs
+          href: developer-portal-deprecated-migration.md
         - name: S’authentifier avec Azure AD
           href: api-management-howto-aad.md
         - name: S’authentifier avec Azure AD B2C
@@ -155,13 +176,13 @@
           href: api-management-howto-configure-notifications.md
         - name: Activer la prise en charge de la console OAuth
           href: api-management-howto-oauth2.md
-        - name: Portail hérité - personnaliser le portail
+        - name: Portail déprécié - personnaliser le portail
           href: api-management-customize-styles.md
-        - name: Portail hérité - modifier les pages et les dispositions
+        - name: Portail déprécié - modifier les pages et les dispositions
           href: api-management-modify-content-layout.md
-        - name: Portail hérité - personnaliser avec des modèles
+        - name: Portail déprécié - personnaliser avec des modèles
           href: api-management-developer-portal-templates.md
-    - name: Modèles du portail hérité
+    - name: Modèles du portail déprécié
       items:
         - name: Référence du modèle de données
           href: api-management-template-data-model-reference.md
@@ -187,6 +208,8 @@
       items:
         - name: Définir ou modifier des stratégies
           href: set-edit-policies.md
+        - name: Déboguer des stratégies
+          href: api-management-debug-policies.md
         - name: Expressions de stratégie
           href: api-management-policy-expressions.md
         - name: Mise en cache personnalisée
@@ -197,7 +220,7 @@
           href: api-management-sample-flexible-throttling.md
         - name: Utilisation de services externes
           href: api-management-sample-send-request.md
-        - name: Gérer les secrets à l’aide de propriétés
+        - name: Gérer les secrets en utilisant des valeurs nommées
           href: api-management-howto-properties.md
         - name: Stratégies de restriction des accès
           href: api-management-access-restriction-policies.md
@@ -211,6 +234,8 @@
           href: api-management-cross-domain-policies.md
         - name: Stratégies de transformation
           href: api-management-transformation-policies.md
+        - name: Stratégies d’intégration Distributed Application Runtime (Dapr)
+          href: api-management-dapr-policies.md
     - name: Gérer en production
       items:
         - name: Exporter des API vers Power Platform
@@ -219,6 +244,8 @@
           href: api-management-howto-create-groups.md
         - name: Récupérer les adresses IP
           href: api-management-howto-ip-addresses.md
+        - name: Obtenir une analytique des API
+          href: howto-use-analytics.md
         - name: Journaliser les événements dans Azure Event Hubs
           href: api-management-howto-log-event-hubs.md
         - name: Enregistrer des requêtes avec Azure Application Insights
@@ -247,14 +274,21 @@
               href: ../service-fabric/service-fabric-tutorial-deploy-api-management.md
 - name: Informations de référence
   items:
+    - name: Azure CLI
+      href: /cli/azure/apim
     - name: Azure PowerShell
-      href: /powershell/module/az.apimanagement/?view=azps-2.6.0
+      href: /powershell/module/az.apimanagement/
     - name: REST
       href: /rest/api/apimanagement/
     - name: REST (original)
       href: /rest/api/apimanagement/ApiManagementREST/api-management-REST
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.apimanagement/allversions
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
+    - name: Schéma des journaux de ressource
+      href: gateway-log-schema-reference.md
 - name: Ressources
   items:
     - name: Questions fréquentes (FAQ)
@@ -267,15 +301,19 @@
       href: 'https://aka.ms/apimroadmap'
     - name: Demandes de fonctionnalités
       href: 'https://aka.ms/apimwish'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=api-management'
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-api-management.html'
+      href: /answers/topics/azure-api-management.html
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-api-management'
     - name: Guide de conception d’API
-      href: 'https://docs.microsoft.com/azure/architecture/best-practices/api-design?toc=%2Fazure%2Fapi-management%2Ftoc.json'
+      href: /azure/architecture/best-practices/api-design?toc=%2Fazure%2Fapi-management%2Ftoc.json
     - name: Recommandations relatives à l’implémentation de l’API
-      href: 'https://docs.microsoft.com/azure/architecture/best-practices/api-implementation?toc=%2Fazure%2Fapi-management%2Ftoc.json'
-    - name: Résoudre une erreur d’échec de mise à jour de noms d’hôte
-      href: api-management-troubleshoot-cannot-add-custom-domain.md
+      href: /azure/architecture/best-practices/api-implementation?toc=%2Fazure%2Fapi-management%2Ftoc.json
+    - name: Dépannage
+      items:
+        - name: Résoudre une erreur d’échec de mise à jour de noms d’hôte
+          href: api-management-troubleshoot-cannot-add-custom-domain.md
+        - name: Résoudre les erreurs et les délais de réponse
+          href: troubleshoot-response-timeout-and-errors.md

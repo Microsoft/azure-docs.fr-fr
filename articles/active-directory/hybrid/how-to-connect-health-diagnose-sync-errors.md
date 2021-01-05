@@ -11,16 +11,16 @@ ms.subservice: hybrid
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/11/2018
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 48ed9abf3e088e2581a3dd81b7c89e6b99da3ceb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c2bd2e72b05cc01b1a351880d565323662635364
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76897195"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89278681"
 ---
 # <a name="diagnose-and-remediate-duplicated-attribute-sync-errors"></a>Diagnostiquer et corriger les erreurs de synchronisation d’attribut en double
 
@@ -58,7 +58,7 @@ La fonctionnalité de diagnostic prend en charge les objets utilisateur avec les
 | OnPremiseSecurityIdentifier |  AttributeValueMustBeUnique |
 
 >[!IMPORTANT]
-> Pour accéder à cette fonctionnalité, l’autorisation **Administrateur global** ou **Contributeur** dans les paramètres RBAC est nécessaire.
+> Pour accéder à cette fonctionnalité, l’autorisation **Administrateur général** ou **Contributeur** d’Azure RBAC est nécessaire.
 >
 
 Suivez les étapes à partir du portail Azure pour affiner les détails des erreurs de synchronisation et fournir des solutions plus spécifiques :
@@ -133,7 +133,7 @@ Une fois les étapes précédentes effectuées, l’utilisateur peut accéder à
 
 ## <a name="failures-and-error-messages"></a>Échecs et messages d’erreur
 **Un utilisateur avec un attribut en conflit est supprimé temporairement d’Azure Active Directory. Vérifiez que l’utilisateur est définitivement supprimé avant de réessayer.**  
-Un utilisateur avec un attribut en conflit dans Azure AD doit être effacé avant d’appliquer le correctif. Découvrez [comment supprimer définitivement un utilisateur dans Azure AD](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-users-restore) avant de réappliquer le correctif. Par ailleurs, l’utilisateur est automatiquement supprimé définitivement 30 jours après avoir été supprimé temporairement. 
+Un utilisateur avec un attribut en conflit dans Azure AD doit être effacé avant d’appliquer le correctif. Découvrez [comment supprimer définitivement un utilisateur dans Azure AD](../fundamentals/active-directory-users-restore.md) avant de réappliquer le correctif. Par ailleurs, l’utilisateur est automatiquement supprimé définitivement 30 jours après avoir été supprimé temporairement. 
 
 **La mise à jour de l'ancre source vers un utilisateur basé sur le cloud n'est pas prise en charge dans votre client.**  
 Un utilisateur basé sur le cloud dans Azure AD ne doit pas avoir d’ancre source. Dans ce cas, la mise à jour de l’ancre source n’est pas prise en charge. Une correction manuelle doit être effectuée localement. 
@@ -148,7 +148,7 @@ Un utilisateur basé sur le cloud dans Azure AD ne doit pas avoir d’ancre sour
 
 
 **Q.** De quelle autorisation un utilisateur a-t-il besoin pour appliquer le correctif ?  
-**A.** L’**administrateur global** ou le **contributeur** dans les paramètres RBAC est autorisé à accéder au processus de diagnostic et de dépannage.
+**A.** Le rôle **Administrateur général** ou **Contributeur** d’Azure RBAC est autorisé à accéder au processus de diagnostic et de résolution des problèmes.
 
 
 **Q.** Dois-je configurer Azure AD Connect ou mettre à jour l’agent Azure AD Connect Health pour cette fonctionnalité ?  

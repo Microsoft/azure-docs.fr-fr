@@ -1,22 +1,24 @@
 ---
 title: Étiqueter des images dans un projet d’étiquetage
 title.suffix: Azure Machine Learning
-description: Découvrez comment utiliser les outils de marquage des données dans un projet d’étiquetage Azure Machine Learning.
-author: lobrien
-ms.author: laobri
+description: Découvrez comment utiliser les outils d’étiquetage des données afin de préparer les données rapidement dans le cadre d’un projet d’étiquetage Azure Machine Learning.
+author: sdgilley
+ms.author: sgilley
 ms.service: machine-learning
+ms.subservice: core
 ms.topic: tutorial
-ms.date: 04/09/2020
-ms.openlocfilehash: 2c21a8770209871be4d871a08e6355e4ca7ed169
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 07/27/2020
+ms.custom: data4ml
+ms.openlocfilehash: f14e120fb7373cc80b9d6e23f155dd964b37a551
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82204319"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347963"
 ---
-# <a name="tag-images-in-a-labeling-project"></a>Étiqueter des images dans un projet d’étiquetage
+# <a name="tag-images-in-a-labeling-project"></a>Étiqueter des images dans un projet d’étiquetage 
 
-Une fois que votre administrateur de projet a [créé un projet d’étiquetage](https://docs.microsoft.com/azure/machine-learning/how-to-create-labeling-projects#create-a-labeling-project) dans Azure Machine Learning, vous pouvez utiliser l’outil d’étiquetage (préversion publique) pour préparer rapidement les données d’un projet Machine Learning. Cet article aborde les points suivants :
+Une fois que votre administrateur de projet a [créé un projet d’étiquetage](./how-to-create-labeling-projects.md#create-a-labeling-project) dans Azure Machine Learning, vous pouvez utiliser l’outil d’étiquetage pour préparer rapidement les données d’un projet Machine Learning. Cet article aborde les points suivants :
 
 > [!div class="checklist"]
 > * Comment accéder à vos projets d’étiquetage
@@ -36,11 +38,9 @@ Une fois que votre administrateur de projet a [créé un projet d’étiquetage]
 
 1. Sélectionnez **Étiquetage des données** sur le côté gauche pour trouver le projet.  
 
-1. Sélectionnez le nom du projet dans la liste.
-
 ## <a name="understand-the-labeling-task"></a>Comprendre la tâche d’étiquetage
 
-Une fois que vous avez sélectionné le projet, en haut de la page, sélectionnez **Label data** (Étiqueter les données).
+Dans le tableau des projets d’étiquetage de données, sélectionnez **Lien d’étiquette** pour votre projet.
 
 Les instructions qui s’affichent varient en fonction de votre projet. Elles décrivent le type de données auquel vous êtes confronté, indiquent comment prendre vos décisions et fournissent d’autres informations pertinentes. Après avoir lu ces informations, en haut de la page, sélectionnez **Tâches**.  Ou bien, au bas de la page, sélectionnez **Commencer l’étiquetage**.
 
@@ -63,13 +63,19 @@ Lorsque toutes les images de la page sont balisées, Azure active le bouton **En
 
 Une fois que vous avez envoyé les étiquettes relatives aux données disponibles, Azure actualise la page en affichant un nouvel ensemble d’images provenant de la file d’attente de travail.
 
-### <a name="assisted-machine-learning"></a>Machine Learning assisté 
+### <a name="assisted-machine-learning-preview"></a>Machine Learning assisté (préversion) 
 
-Des algorithmes de Machine Learning peuvent être déclenchés au cours d’une tâche de classification multiclasse ou multi-étiquette. Si ces algorithmes sont activés dans votre projet, vous pouvez constater ce qui suit :
+> [!IMPORTANT]
+> L’apprentissage automatique assisté est actuellement en préversion publique.
+> La préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail en production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+Des algorithmes Machine Learning peuvent être déclenchés. Si ces algorithmes sont activés dans votre projet, vous pouvez constater ce qui suit :
 
 * Une fois que certaines de ces images ont été étiquetées,**Tasks clustered** (Tâches regroupées) peut s’afficher en haut de l’écran, en regard du nom du projet.  Cela signifie que les images similaires sont regroupées sur une même page.  Si c’est le cas, basculez vers l’une des vues d’images regroupées pour tirer parti de leur regroupement.  
 
 * Plus tard, **Tasks prelabeled** (Tâches préétiquetées) peut s’afficher en regard du nom du projet.  Les images s’affichent alors avec une suggestion d’étiquette qui provient d’un modèle de classification Machine Learning. Aucun modèle Machine Learning n’est fiable à 100 %. Même si nous utilisons uniquement des images pour lesquelles le modèle est fiable, celles-ci peuvent malgré tout être préétiquetées de façon incorrecte.  Si c’est le cas, corrigez le nom de ces étiquettes avant d’envoyer la page.  
+
+* Pour les modèles de détection d’objets, vous pouvez voir des étiquettes et des cadres englobants déjà présents.  Corrigez ceux qui sont incorrects avant d’envoyer la page.
 
 Au tout début d’un projet d’étiquetage, en particulier, un modèle Machine Learning peut n’être capable de préétiqueter correctement qu’un petit sous-ensemble d’images. Une fois ces images étiquetées, le projet d’étiquetage retourne à l’étiquetage manuel afin de collecter plus de données pour le prochain cycle d’entraînement du modèle. Au fil du temps, le modèle sera davantage fiable pour un plus grand nombre d’images, ce qui augmentera le nombre de tâches de préétiquettage plus tard dans le projet.
 
@@ -106,7 +112,7 @@ Si votre projet est de type « Identification d’objets (cadres englobants) �
 1. Sélectionnez l’outil **Zone rectangulaire**![Outil Zone rectangulaire](./media/how-to-label-images/rectangular-box-tool.png), ou sélectionnez « R ».
 3. Cliquez sur votre cible, puis faites glisser le curseur en diagonale pour créer un cadre englobant approximatif. Pour ajuster le cadre englobant, faites glisser ses bords ou ses angles.
 
-![Capture d’écran qui illustre la création de base d’un cadre englobant.](./media/how-to-label-images/bounding-box-sequence.png)
+![Création de cadre englobant](./media/how-to-label-images/bounding-box-sequence.png)
 
 Pour supprimer un cadre englobant, cliquez sur la cible en forme de X qui apparaît à côté du cadre englobant après sa création.
 
@@ -114,13 +120,35 @@ Vous ne pouvez pas changer l’étiquette d’un cadre englobant. Si vous commet
 
 Par défaut, vous pouvez modifier les cadres englobants existants. L’outil **Verrouiller/déverrouiller des zones**![outil Verrouiller/Déverrouiller des zones](./media/how-to-label-images/lock-bounding-boxes-tool.png), ou « L », permet d’inverser le comportement. Si les zones sont verrouillées, vous pouvez uniquement changer la forme ou l’emplacement d’un nouveau cadre englobant.
 
-L’outil **Manipulation des zones**![outil Manipulation des zones](./media/how-to-label-images/regions-tool.png), ou « M », pour ajuster un rectangle englobant existant. Pour ajuster la forme, faites glisser ses bords ou ses angles. Cliquez à l’intérieur du cadre englobant pour pouvoir le faire glisser entièrement. Si vous ne pouvez pas modifier une zone, c’est que vous avez probablement inversé le comportement de l’outil **Verrouiller/déverrouiller des zones**.
+Utilisez l’outil de **manipulation des régions** ![ Voici l’icône de l’outil de manipulation des régions : quatre flèches pointant vers l’extérieur depuis un point central (vers le haut, vers la droite, vers le bas et vers la gauche).](./media/how-to-label-images/regions-tool.png) ou « M » pour ajuster un cadre englobant existant. Pour ajuster la forme, faites glisser ses bords ou ses angles. Cliquez à l’intérieur du cadre englobant pour pouvoir le faire glisser entièrement. Si vous ne pouvez pas modifier une zone, c’est que vous avez probablement inversé le comportement de l’outil **Verrouiller/déverrouiller des zones**.
 
 L’outil **Zone basée sur un modèle**![Zone basée sur un modèle](./media/how-to-label-images/template-box-tool.png), ou « T », permet de créer plusieurs rectangles englobants de même taille. Si l’image ne contient pas de cadre englobant et si vous activez les cadres basés sur un modèle, l’outil génère des cadres de 50 x 50 pixels. Si vous créez un cadre englobant et si vous activez les cadres basés sur un modèle, les nouveaux cadres englobants ont la taille du dernier cadre créé. Une fois les zones basées sur un modèle placées, vous pouvez les redimensionner. Le redimensionnement d’un cadre basé sur un modèle entraîne uniquement le redimensionnement de ce cadre.
 
 Pour supprimer *tous* les cadres englobants de l’image active, sélectionnez l’outil **Supprimer toutes les zones**![Outil Supprimer toutes les zones](./media/how-to-label-images/delete-regions-tool.png).
 
 Après avoir créé les cadres englobants d’une image, sélectionnez **Envoyer** pour enregistrer votre travail. Sinon, ce dernier ne sera pas enregistré.
+
+## <a name="tag-images-and-specify-polygons-for-image-segmentation"></a>Étiqueter des images et spécifier des polygones pour la segmentation des images 
+
+Si votre projet est de type « Segmentation d’instance (polygone) », vous devez spécifier un ou plusieurs polygones dans l’image et appliquer une étiquette à chacun de ces polygones. Les images peuvent avoir plusieurs polygones englobants, chacun étant associé à une seule étiquette. Pour déterminer si plusieurs polygones englobants sont utilisés dans votre projet, cliquez sur **Voir les instructions détaillées**.
+
+1. Sélectionnez une étiquette pour le polygone que vous prévoyez de créer.
+1. Sélectionnez l’outil **Dessiner une région de polygone** ![Outil Dessiner une région de polygone](./media/how-to-label-images/polygon-tool.png) ou sélectionnez « P ».
+1. Cliquez pour chaque point du polygone.  Lorsque vous avez terminé la forme, double-cliquez pour la valider.
+
+    :::image type="content" source="media/how-to-label-images/polygon.gif" alt-text="Créer des polygones pour le chat et le chien":::
+
+Pour supprimer un polygone, cliquez sur la cible en forme de X qui s’affiche à côté du polygone après sa création.
+
+Si vous souhaitez modifier l’étiquette d’un polygone, sélectionnez l’outil **Déplacer les régions**, cliquez sur le polygone, puis sélectionnez l’étiquette souhaitée.
+
+Vous pouvez modifier les polygones existants. L’outil **Verrouiller/Déverrouiller les régions** ![Outil Verrouiller/Déverrouiller les régions](./media/how-to-label-images/lock-bounding-boxes-tool.png), ou « L », permet de passer du verrouillage au déverrouillage des régions, et inversement. Si les régions sont verrouillées, vous pourrez uniquement changer la forme ou l’emplacement des nouveaux polygones.
+
+Utilisez l’outil **Ajouter ou supprimer des points de polygone** ![Voici l’icône de l’outil Ajouter ou supprimer des points de polygone.](./media/how-to-label-images/add-remove-points-tool.png) ou « U » pour ajuster un polygone existant. Cliquez sur le polygone pour ajouter ou supprimer un point. Si vous ne pouvez pas modifier une zone, c’est que vous avez probablement inversé le comportement de l’outil **Verrouiller/déverrouiller des zones**.
+
+Pour supprimer *tous* les polygones de l’image active, sélectionnez l’outil **Supprimer toutes les régions** ![Outil Supprimer toutes les régions](./media/how-to-label-images/delete-regions-tool.png).
+
+Après avoir créé les polygones d’une image, sélectionnez **Envoyer** pour enregistrer votre travail. Sinon, ce dernier ne sera pas enregistré.
 
 ## <a name="finish-up"></a>Terminer
 
@@ -130,5 +158,6 @@ Une fois l’étiquetage terminé, sélectionnez votre nom dans le coin supérie
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Apprenez à [effectuer l’apprentissage de modèles de classification d’image dans Azure](https://docs.microsoft.com/azure/machine-learning/tutorial-train-models-with-aml)
+* Apprenez à [effectuer l’apprentissage de modèles de classification d’image dans Azure](./tutorial-train-models-with-aml.md)
+
 

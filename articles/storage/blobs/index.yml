@@ -12,12 +12,12 @@ metadata:
   author: normesta
   ms.author: normesta
   ms.date: 08/20/2019
-  ms.openlocfilehash: 9db4921b6f0b8382b69dbac658536b5151bdd653
-  ms.sourcegitcommit: f7d057377d2b1b8ee698579af151bcc0884b32b4
+  ms.openlocfilehash: 38cf63766195c1e91662d725aeb1b21c06257ed9
+  ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/24/2020
-  ms.locfileid: "82117248"
+  ms.lasthandoff: 11/25/2020
+  ms.locfileid: "95912346"
 landingContent:
 - title: À propos du stockage Blob
   linkLists:
@@ -76,7 +76,7 @@ landingContent:
   - linkListType: tutorial
     links:
     - text: Extraire, transformer et charger des données avec Azure Databricks
-      url: ../../azure-databricks/databricks-extract-load-sql-data-warehouse.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+      url: /azure/databricks/scenarios/databricks-extract-load-sql-data-warehouse?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
     - text: Extraire, transformer et charger des données avec Apache Hive sur Azure HDInsight
       url: data-lake-storage-tutorial-extract-transform-load-hive.md
     - text: Insérer des données dans des tables Databricks avec Event Grid
@@ -86,7 +86,7 @@ landingContent:
     - text: Utiliser avec des clusters Azure HDInsight
       url: ../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
     - text: Utiliser avec Power BI
-      url: data-lake-storage-use-power-bi.md
+      url: /power-query/connectors/datalakestorage
 - title: Développer des applications
   linkLists:
   - linkListType: quickstart
@@ -126,8 +126,8 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Accéder aux données blob avec un compte Azure AD
-      url: ../common/storage-access-blobs-queues-portal.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-    - text: Gérer les droits d’accès à l’aide de RBAC
+      url: authorize-data-operations-portal.md
+    - text: Gérer les droits d’accès avec Azure RBAC
       url: ../common/storage-auth-aad-rbac-portal.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
     - text: Utiliser une identité managée pour autoriser l’accès au stockage Blob
       url: ../common/storage-auth-aad-msi.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json

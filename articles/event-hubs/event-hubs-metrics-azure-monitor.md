@@ -1,32 +1,20 @@
 ---
 title: Métriques dans Azure Monitor - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des informations sur l’utilisation d’Azure Monitor pour une surveillance d’Azure Event Hubs.
-services: event-hubs
-documentationcenter: .NET
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.custom: seodec18
-ms.date: 09/18/2019
-ms.author: shvija
-ms.openlocfilehash: 96c346f4359740fda5638dfdbe5735c5bdfce8c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: 7ad570a41fd9dfff01e3a1da6b2d309a7a8464cc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162648"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88931146"
 ---
 # <a name="azure-event-hubs-metrics-in-azure-monitor"></a>Métriques Azure Event Hubs dans Azure Monitor
 
 Les métriques Event Hubs vous donnent l’état de vos ressources Event Hubs dans votre abonnement Azure. Avec un ensemble riche de données de métriques, vous pouvez évaluer l’intégrité globale de vos concentrateurs d’événements au niveau de l’espace de noms, mais également au niveau de l’entité. Ces statistiques peuvent être importantes car elles vous aident à surveiller l’état de vos concentrateurs d’événements. Les métriques peuvent également vous aider à résoudre les problèmes constituant des causes premières sans avoir à contacter le support technique Azure.
 
-Azure Monitor fournit des interfaces utilisateur unifiées pour la surveillance entre divers services Azure. Pour plus d’informations, consultez [Analyse dans Microsoft Azure](../monitoring-and-diagnostics/monitoring-overview.md) et [Récupérer des métriques Azure Monitor avec .NET](https://github.com/Azure-Samples/monitor-dotnet-metrics-api) sur GitHub.
+Azure Monitor fournit des interfaces utilisateur unifiées pour la surveillance entre divers services Azure. Pour plus d’informations, consultez [Analyse dans Microsoft Azure](../azure-monitor/overview.md) et [Récupérer des métriques Azure Monitor avec .NET](https://github.com/Azure-Samples/monitor-dotnet-metrics-api) sur GitHub.
 
 ## <a name="access-metrics"></a>Accéder aux mesures
 
@@ -115,7 +103,7 @@ Azure Event Hubs prend en charge les dimensions suivantes pour les mesures dans 
 Le routage de vos données de surveillance (journaux d’activité, journaux de diagnostic, etc.) vers un Event Hub avec Azure Monitor vous permet d’intégrer facilement les outils Security Information and Event Management (SIEM). Pour plus d’informations, consultez les articles/billets de blog suivants :
 
 - [Diffuser des données de surveillance Azure vers un hub d’événements pour les utiliser dans un outil externe](../azure-monitor/platform/stream-monitoring-data-event-hubs.md)
-- [Présentation d'Azure Log Integration](../security/fundamentals/azure-log-integration-overview.md)
+- [Présentation d'Azure Log Integration](/previous-versions/azure/security/fundamentals/azure-log-integration-overview)
 - [Utiliser Azure Monitor pour opérer une intégration avec des outils de SIEM](https://azure.microsoft.com/blog/use-azure-monitor-to-integrate-with-siem-tools/)
 
 Si un outil SIEM consomme des données de journal à partir d’un Event Hub et que vous ne voyez aucun message entrant ou voyez des messages entrants mais pas de messages sortants dans le graphe des métriques, procédez comme suit :
@@ -126,21 +114,18 @@ Si un outil SIEM consomme des données de journal à partir d’un Event Hub et 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Consultez la [Vue d’ensemble de surveillance Azure](../monitoring-and-diagnostics/monitoring-overview.md).
+* Consultez la [Vue d’ensemble de surveillance Azure](../azure-monitor/overview.md).
 * Exemple [Récupérer les métriques Azure Monitor avec .NET](https://github.com/Azure-Samples/monitor-dotnet-metrics-api) sur GitHub. 
 
 Pour plus d’informations sur les concentrateurs d’événements, accédez aux liens suivants :
 
 - Tutoriel Prise en main d'Event Hubs
-    - [.NET Core](get-started-dotnet-standard-send-v2.md)
-    - [Java](get-started-java-send-v2.md)
-    - [Python](get-started-python-send-v2.md)
-    - [JavaScript](get-started-java-send-v2.md)
+    - [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
+    - [Java](event-hubs-java-get-started-send.md)
+    - [Python](event-hubs-python-get-started-send.md)
+    - [JavaScript](event-hubs-java-get-started-send.md)
 * [FAQ sur les hubs d’événements](event-hubs-faq.md)
 * [Exemples d’application complets qui utilisent des concentrateurs d’événements](https://github.com/Azure/azure-event-hubs/tree/master/samples)
 
 [1]: ./media/event-hubs-metrics-azure-monitor/event-hubs-monitor1.png
 [2]: ./media/event-hubs-metrics-azure-monitor/event-hubs-monitor2.png
-
-
-

@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 15cdaba7d63d72aab25757e7ba6f5eadc48e026a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 259a1324c412dad40d32a8b8e026d84e6f5aa066
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76512247"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85554913"
 ---
 # <a name="hybrid-azure-ad-joined-devices"></a>Appareils joints Azure AD hybrides
 
@@ -29,12 +29,12 @@ En règle générale, les organisations disposant d’empreintes locales s’app
 
 Si votre environnement comporte une empreinte locale AD et vous souhaitez également profiter des fonctionnalités proposées par Azure Active Directory, vous pouvez implémenter les appareils joints Azure AD hybrides. Il s’agit d’appareils joints à votre service Active Directory local et inscrits auprès d’Azure Active Directory.
 
-|   | Jonction Azure AD Hybride |
+| Jonction Azure AD Hybride | Description |
 | --- | --- |
 | **Définition** | Joint aux systèmes AD local et Azure AD nécessitant un compte professionnel pour se connecter à l’appareil |
 | **Public principal** | Convient aux organisations hybrides avec une infrastructure AD locale existante |
 |   | S’applique à tous les utilisateurs d’une organisation |
-| **Appartenance de l’appareil** | Organization |
+| **Appartenance de l’appareil** | Organisation |
 | **Systèmes d’exploitation** | Windows 10, 8.1 et 7 |
 |   | Windows Server 2008/R2, 2012/R2, 2016 et 2019 |
 | **Approvisionnement** | Windows 10, Windows Server 2016/2019 |

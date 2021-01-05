@@ -10,12 +10,12 @@ metadata:
   author: PatAltimore
   ms.author: patricka
   ms.date: 11/04/2019
-  ms.openlocfilehash: 216dbd52531807d471066b01151fba841df308b6
-  ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+  ms.openlocfilehash: 186841ae1bad51fbeee42c97a68f4ab19803f6d4
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/23/2020
-  ms.locfileid: "82084972"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87076963"
 landingContent:
 - title: À propos d’Azure Blockchain Service
   linkLists:
@@ -108,4 +108,4 @@ landingContent:
   - linkListType: reference
     links:
     - text: API REST
-      url: https://docs.microsoft.com/rest/api/blockchain
+      url: /rest/api/blockchain

@@ -10,23 +10,25 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/4/2020
+ms.topic: error-reference
+ms.date: 08/31/2020
 ms.author: inhenkel
-ms.openlocfilehash: e039a240465478e86ce816890219e5dfaa07dfbf
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 13277c3d46d5b68aa5705699f45a2bf9e97a78d8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791049"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89291532"
 ---
 # <a name="media-services-live-event-error-codes"></a>Codes d'erreur des événements en direct Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Les tableaux de cette section répertorient les codes d’erreur [Événement en temps réel](live-events-outputs-concept.md).
 
 ## <a name="liveeventconnectionrejected"></a>LiveEventConnectionRejected
 
-Lorsque vous vous abonnez aux événements [Event Grid](https://docs.microsoft.com/azure/event-grid/) pour un événement en direct, il se peut que vous voyiez l’une des erreurs suivantes de l’événement [LiveEventConnectionRejected](media-services-event-schemas.md#liveeventconnectionrejected).
+Lorsque vous vous abonnez aux événements [Event Grid](../../event-grid/index.yml) pour un événement en direct, il se peut que vous voyiez l’une des erreurs suivantes de l’événement [LiveEventConnectionRejected](media-services-event-schemas.md#liveeventconnectionrejected).
 
 | Code de résultat | Description |
 | ----------- | ----------- |

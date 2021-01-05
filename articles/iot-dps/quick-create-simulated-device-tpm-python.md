@@ -8,15 +8,15 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: python
-ms.custom: mvc
-ms.openlocfilehash: 67206f36d5c9f08a2110b02f1d3681684cda8a66
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-python
+ms.openlocfilehash: 23a2ca3cae92f65786a3d2fb978b1727e18857e8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77605420"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966634"
 ---
-# <a name="quickstart-create-and-provision-a-simulated-tpm-device-using-python-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et approvisionner un appareil TPM simulé auprès du service IoT Hub Device Provisioning à l’aide du Kit de développement logiciel (SDK) d’appareil Python
+# <a name="quickstart-create-and-provision-a-simulated-tpm-device-using-python-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide - Créer et provisionner un appareil X.509 simulé auprès du service IoT Hub Device Provisioning à l’aide du kit Python device SDK.
 
 [!INCLUDE [iot-dps-selector-quick-create-simulated-device-tpm](../../includes/iot-dps-selector-quick-create-simulated-device-tpm.md)]
 
@@ -24,7 +24,7 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil IoT simulé su
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Examen des [concepts de provisionnement automatique](concepts-auto-provisioning.md).
+- Connaissance des concepts liés au [provisionnement](about-iot-dps.md#provisioning-process).
 - Exécution des étapes décrites dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 - Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 - [Visual Studio 2015+](https://visualstudio.microsoft.com/vs/) avec le développement Desktop en C++ .
@@ -64,7 +64,7 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil IoT simulé su
     cmake -Duse_prov_client:BOOL=ON -Duse_tpm_simulator:BOOL=ON ..
     ```
 
-1. Dans une invite de commandes distincte, accédez au dossier du simulateur TPM et exécutez le simulateur [TPM](https://docs.microsoft.com/windows/device-security/tpm/trusted-platform-module-overview) pour en faire le [HSM](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) de l’appareil simulé. Cliquez sur **Autoriser l’accès**. Il écoute un socket sur les ports 2321 et 2322. Ne fermez pas cette fenêtre de commande ; vous devez laisser ce simulateur s’exécuter jusqu’à la fin de ce guide de démarrage rapide. 
+1. Dans une invite de commandes distincte, accédez au dossier du simulateur TPM et exécutez le simulateur [TPM](/windows/device-security/tpm/trusted-platform-module-overview) pour en faire le [HSM](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) de l’appareil simulé. Cliquez sur **Autoriser l’accès**. Il écoute un socket sur les ports 2321 et 2322. Ne fermez pas cette fenêtre de commande ; vous devez laisser ce simulateur s’exécuter jusqu’à la fin de ce guide de démarrage rapide. 
 
     ```cmd/sh
     .\azure-iot-sdk-python\c\provisioning_client\deps\utpm\tools\tpm_simulator\Simulator.exe
@@ -78,13 +78,13 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil IoT simulé su
 Le service Azure IoT Device Provisioning prend en charge deux types d’inscriptions :
 
 - [Groupes d’inscription](concepts-service.md#enrollment-group) : utilisés pour inscrire plusieurs appareils connexes.
-- [Inscriptions individuelles](concepts-service.md#individual-enrollment) : utilisées pour inscrire un seul appareil.
+- [Inscriptions individuelles](concepts-service.md#individual-enrollment) : utilisées pour inscrire un seul appareil.
 
 Cet article présente les inscriptions individuelles.
 
 1. Ouvrez la solution générée dans le dossier *cmake* nommé `azure_iot_sdks.sln` générez-la dans Visual Studio.
 
-1. Cliquez avec le bouton droit sur le projet **tpm_device_provision** et sélectionnez **Définir comme projet de démarrage**. Exécutez la solution. La fenêtre de sortie affiche la **_paire de clés de type EK_** et l’ **_ID d’inscription_** nécessaires à l’inscription de l’appareil. Notez ces valeurs. 
+1. Cliquez avec le bouton droit sur le projet **tpm_device_provision** et sélectionnez **Définir comme projet de démarrage**. Exécutez la solution. La fenêtre de sortie affiche la **_paire de clés de type EK_** et l’**_ID d’inscription_** nécessaires à l’inscription de l’appareil. Notez ces valeurs. 
 
     ![Configuration du module de plateforme sécurisée (TPM)](./media/python-quick-create-simulated-device/tpm-setup.png)
 

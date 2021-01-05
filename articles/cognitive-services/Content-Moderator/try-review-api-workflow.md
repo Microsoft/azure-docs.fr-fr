@@ -10,14 +10,14 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 03/14/2019
 ms.author: pafarley
-ms.openlocfilehash: 3e58be4b94457d95d28cf6528b9151e4be1802cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 79749533d636f4b73ff3bef6b12d9e842ac485ea
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "72754184"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905152"
 ---
-# <a name="define-and-use-moderation-workflows-rest"></a>Définir et utiliser des flux de travail de modération (REST)
+# <a name="define-and-use-moderation-workflows-api-console"></a>Définir et utiliser des flux de travail de modération (console d’API)
 
 Les flux de travail sont des filtres personnalisés basés sur le cloud qui vous permettent de gérer plus efficacement le contenu. Flux de travail peut se connecter à une variété de services pour filtrer le contenu de différentes façons et puis exécutez l’action appropriée. Ce guide vous montre comment utiliser les API REST de flux de travail via la console d’API pour créer et utiliser des flux de travail. Une fois que vous aurez compris la structure des API, vous pourrez facilement déplacer ces appels vers n’importe quelle plateforme compatible avec REST.
 
@@ -27,7 +27,7 @@ Les flux de travail sont des filtres personnalisés basés sur le cloud qui vous
 
 ## <a name="create-a-workflow"></a>Créer un workflow
 
-Pour créer ou mettre à jour un flux de travail, accédez à la page de référence de l’API **[Flux de travail : créer ou mettre à jour](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59)** et sélectionnez le bouton de votre région clé (que vous pouvez trouver dans l’URL de point de terminaison à la page **Informations d’identification** de l’[Outil de révision](https://contentmoderator.cognitive.microsoft.com/)). La console d’API, qui permet de construire et d’exécuter des appels d’API REST, se lance.
+Pour créer ou mettre à jour un flux de travail, accédez à la page de référence de l’API **[Flux de travail : créer ou mettre à jour](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59)** et sélectionnez le bouton de votre région clé. Vous pouvez trouver votre région dans l’URL du point de terminaison dans la page **Informations d’identification** de l’[outil de révision](https://contentmoderator.cognitive.microsoft.com/). La console d’API, qui permet de construire et d’exécuter des appels d’API REST, se lance.
 
 ![Sélection de la région sur la page Flux de travail - Créer ou mettre à jour](images/test-drive-region.png)
 
@@ -37,7 +37,7 @@ Entrez les valeurs de **team**, **workflowname** et **Ocp-Apim-Subscription-Key*
 
 - **team** : ID d’équipe que vous avez créé lors de la configuration de votre compte [Outil de révision](https://contentmoderator.cognitive.microsoft.com/) (dans le champ **Id**, sur l’écran Informations d’identification de votre Outil de révision).
 - **workflowname** : nom d’un nouveau flux de travail à ajouter (ou un nom existant si vous souhaitez mettre à jour un flux de travail existant).
-- **Ocp-Apim-Subscription-Key** : votre clé Content Moderator. Vous la trouverez sous l’onglet **Paramètres** de [l’Outil de révision](https://contentmoderator.cognitive.microsoft.com).
+- **Ocp-Apim-Subscription-Key** : votre clé Content Moderator. Vous la trouverez sous l’onglet **Paramètres** de l’[outil de révision](https://contentmoderator.cognitive.microsoft.com).
 
 ![Paramètres de requête et en-têtes de la console Flux de travail - Créer ou mettre à jour](images/workflow-console-parameters.PNG)
 
@@ -102,7 +102,7 @@ Entrez les paramètres d’appel REST, comme dans la section ci-dessus. Assurez-
 
 ![Obtenir les paramètres de requête et les en-têtes](images/workflow-get-default.PNG)
 
-Sélectionnez **Envoyer**. Si l’opération réussit, l’**État de la réponse** est `200 OK` et la zone **Contenu de la réponse** affiche la définition de flux de travail au format JSON, comme suit :
+Sélectionnez **Envoyer**. Si l’opération réussit, l’**État de la réponse** est `200 OK` et la zone **Contenu de la réponse** affiche la définition de flux de travail au format JSON, comme dans l’exemple qui suit :
 
 ```json
 {

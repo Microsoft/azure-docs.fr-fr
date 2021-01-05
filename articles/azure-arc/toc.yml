@@ -2,26 +2,13 @@
   href: index.yml
 - name: Vue d’ensemble
   items:
-    - name: "Qu’est-ce qu’Azure Arc pour les serveurs\_?"
-      href: ./servers/overview.md
-- name: Guides pratiques
-  items:
-    - name: "Se connecter à Azure\_Arc"
-      items:
-        - name: Vue d’ensemble de l’agent Machine connectée
-          href: ./servers/agent-overview.md
-        - name: Connecter des ordinateurs à Azure Arc depuis le portail Azure
-          href: ./servers/onboard-portal.md
-        - name: Connecter des ordinateurs à grande échelle avec un principal de service
-          href: ./servers/onboard-service-principal.md
-        - name: Connecter des ordinateurs à Azure Arc avec PowerShell DSC
-          href: ./servers/onboard-dsc.md
-    - name: Gérer
-      items:
-        - name: Gérer les agents
-          href: ./servers/manage-agent.md
-- name: Exemples
-  items:
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./servers/policy-samples.md
+    - name: À propos d’Azure Arc
+      href: overview.md
+- name: Serveurs avec Arc >
+  href: ./servers/overview.md
+- name: Kubernetes avec Arc >
+  href: ./kubernetes/overview.md
+- name: Services de données avec Arc (préversion) >
+  href: ./data/overview.md
+- name: SQL Server avec Arc (préversion) >
+  href: 'https://docs.microsoft.com/sql/sql-server/azure-arc/overview'

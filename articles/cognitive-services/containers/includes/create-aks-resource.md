@@ -9,12 +9,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: d01245a76c5210a1843307b543f98d4f1d59d2cc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: e7f5b6f3685a94b5497784360f8f12b22fb95012
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80877816"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017850"
 ---
 ## <a name="create-an-azure-kubernetes-service-cluster-resource"></a>Créer une ressource de cluster Azure Kubernetes Service
 
@@ -24,7 +24,7 @@ ms.locfileid: "80877816"
 
     |Paramètre|Valeur|
     |--|--|
-    |Subscription|Sélectionnez un abonnement approprié.|
+    |Abonnement|Sélectionnez un abonnement approprié.|
     |Resource group|Sélectionnez un groupe de ressources disponible.|
     |Nom du cluster Kubernetes|Entrer un nom (en minuscules).|
     |Région|Sélectionnez un emplacement proche.|
@@ -33,7 +33,7 @@ ms.locfileid: "80877816"
     |Taille du nœud|Standard DS2 v2 :<br>`2 vCPUs`, `7 GB`|
     |Nombre de nœuds|Conservez la valeur par défaut pour le curseur.|
 
-1. Sur l’onglet **Échelle**, conservez les valeurs par défaut définies pour **Nœuds virtuels** et **Groupes identiques de machines virtuelles**.
+1. Sous l’onglet **Pools de nœuds**, conservez les valeurs par défaut définies pour **Nœuds virtuels** et **Groupes de machines virtuelles identiques**.
 1. Sur l’onglet **Authentification**, conservez les valeurs par défaut définies pour **Principal du service** et **Activer RBAC**.
 1. Sur l’onglet **Mise en réseau**, entrez les informations suivantes :
 
@@ -42,7 +42,7 @@ ms.locfileid: "80877816"
     |Routage d’applications HTTP|Non|
     |Configuration de la mise en réseau|De base|
 
-1. Sur l’onglet **Surveillance**, veillez à définir **Activer la surveillance du conteneur** sur **Oui** et conservez la valeur par défaut de **Espace de travail Log Analytics**.
+1. Sous l’onglet **Intégrations**, veillez à définir **Supervision de conteneur** sur **Oui** et laissez **Espace de travail Log Analytics** comme valeur par défaut.
 1. Sur l’onglet **Balises**, laissez les paires nom/valeur vide pour l’instant.
 1. Sélectionnez **Examiner et créer**.
 1. Une fois la validation réussie, sélectionnez **Créer**.

@@ -8,14 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 04/14/2020
+ms.date: 11/12/2020
 ms.author: aahi
-ms.openlocfilehash: 17582244aef173da6ac700c980f7bd7fb0fec307
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a657f43ef2d889cad1608d34e9235b1d5e7cb576
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383077"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95894148"
 ---
 # <a name="speech-service-containers-frequently-asked-questions-faq"></a>Questions fréquentes (FAQ) sur les conteneurs de service Speech
 
@@ -42,14 +43,14 @@ En outre, nous avons des packages de fichiers exécutables pour les machines ave
 Cannot find Scan4_llvm__mcpu_skylake_avx512 in cache, using JIT...
 ```
 
-Enfin, vous pouvez définir le nombre de décodeurs souhaité à l’intérieur d’un *seul* conteneur à l’aide de la variable `DECODER MAX_COUNT`. Donc, fondamentalement, nous devons commencer par votre référence SKU (UC/mémoire), et de là nous pouvons vous suggérer comment en tirer le meilleur. Un excellent point de départ consiste à faire référence aux spécifications de ressources de machine hôte recommandées.
+Vous pouvez définir le nombre de décodeurs souhaités à l’intérieur d’un *seul* conteneur à l’aide de la variable `DECODER MAX_COUNT`. Donc, fondamentalement, nous devons commencer par votre référence SKU (UC/mémoire), et de là nous pouvons vous suggérer comment en tirer le meilleur. Un excellent point de départ consiste à faire référence aux spécifications de ressources de machine hôte recommandées.
 
 <br>
 </details>
 
 <details>
 <summary>
-<b>Pouvez-vous vous aider à planifier la capacité et à estimer les coûts des conteneurs Speech locaux ?</b>
+<b>Pouvez-vous aider à planifier la capacité et à estimer les coûts des conteneurs de reconnaissance vocale locaux ?</b>
 </summary>
 
 **Réponse :** Pour la capacité de conteneur en mode de traitement par lots, chaque décodeur peut gérer x2 à x3 en temps réel, avec deux cœurs de processeur, pour une reconnaissance unique. Nous vous déconseillons de conserver plus de deux reconnaissances simultanées par instance de conteneur, mais vous recommandons d’exécuter davantage d’instances de conteneurs pour des raisons de fiabilité/disponibilité, derrière un équilibreur de charge.
@@ -305,7 +306,7 @@ Pouvez-vous nous aider à remplir les métriques de test suivantes, y compris le
 - Les assertions sont déclenchées par Carbon dans les versions de production (avec arrêt du processus).
 
 La solution de contournement consiste à utiliser la reconnaissance continue dans votre code ou à vous connecter (plus rapidement) aux points de terminaison interactifs ou continus dans le conteneur.
-Pour votre code, définissez le point de terminaison sur <hôte:port>/speech/recognition/interactive/cognitiveservices/v1
+Pour votre code, définissez le point de terminaison sur `host:port`/speech/recognition/interactive/cognitiveservices/v1
 
 Pour les différents modes, consultez les modes Speech, voir ci-dessous :
 
@@ -323,7 +324,7 @@ https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/6805d96bf69d
 <b>Quel mode dois-je utiliser pour différents fichiers audio ?</b>
 </summary>
 
-**Réponse :** Voici un [démarrage rapide avec Python](quickstarts/speech-to-text-from-microphone.md?pivots=programming-language-python). Vous pouvez trouver les autres langages liés sur le site de documentation.
+**Réponse :** Voici un [démarrage rapide avec Python](./get-started-speech-to-text.md?pivots=programming-language-python). Vous pouvez trouver les autres langages liés sur le site de documentation.
 
 Juste pour clarifier l’interactivité, la conversation et la dictée : il s’agit d’un moyen avancé de spécifier la façon dont notre service gère la demande de reconnaissance vocale. Malheureusement, pour les conteneurs locaux, nous devons spécifier l’URI complet (puisqu’il s’agit d’un ordinateur local), donc ces informations sont divulguées lors de l’abstraction. Nous travaillons avec l’équipe du kit de développement logiciel (SDK) pour le rendre plus utilisable à l’avenir.
 
@@ -418,7 +419,7 @@ Combien de requêtes simultanées puis-je gérer avec 4 cœurs et 4 Go de RAM ?
 |-----------------------|---------------------|---------------------|
 | Synthèse vocale personnalisée | 1 cœur, 2 Go de mémoire | 2 cœur, 3 Go de mémoire |
 
-***
+**_
 
 - Chaque cœur doit être cadencé à au moins 2,6 GHz.
 - Pour les fichiers, la limitation sera dans le kit de développement logiciel (SDK) Speech, à x2 (les 5 premières secondes de l’audio ne sont pas limitées).
@@ -437,7 +438,7 @@ Par exemple, pour gérer 1000 heures/24 heures, nous avons essayé de configurer
 <b>Le conteneur Speech prend-il en charge la ponctuation ?</b>
 </summary>
 
-**Réponse :** La mise en majuscules (ITN) est disponible dans le conteneur local. La ponctuation dépend de la langue et n’est pas prise en charge pour certaines langues, dont le chinois et le japonais.
+_ *Réponse :* * Nous voyons que la mise en majuscules (ITN) est disponible dans le conteneur local. La ponctuation dépend de la langue et n’est pas prise en charge pour certaines langues, dont le chinois et le japonais.
 
 Nous *prenons en charge* la ponctuation implicite et de base pour les conteneurs existants, mais elle est définie sur `off` par défaut. Cela signifie que vous pouvez récupérer le caractère `.` dans votre exemple, mais pas le caractère `。`. Pour activer cette logique implicite, voici un exemple de la façon de le faire dans Python à l’aide de notre kit de développement logiciel (SDK) Speech (cela se ferait de façon similaire dans les autres langages) :
 
@@ -479,6 +480,16 @@ Content-Length: 0
 
 **Réponse :** Nous ne prenons pas en charge l’API REST dans un conteneur de reconnaissance vocale, seulement les WebSockets via le kit de développement logiciel (SDK) Speech. Reportez-vous toujours à la documentation officielle. Consultez [Points de terminaison de prédiction de requête](speech-container-howto.md#query-the-containers-prediction-endpoint).
 
+<br>
+</details>
+
+
+<details>
+<summary>
+<b> Pourquoi le conteneur s’exécute-t-il en tant qu’utilisateur non-racine ? Quels sont les problèmes qui peuvent en résulter ?</b>
+</summary>
+
+**Réponse :** Notez que l’utilisateur par défaut à l’intérieur du conteneur est un utilisateur non-racine. Cela fournit une protection contre les processus qui s’échappent du conteneur et obtiennent des réaffectations d’autorisations sur le nœud hôte. Par défaut, certaines plateformes, par exemple OpenShift Container Platform, le font déjà en exécutant des conteneurs à l’aide d’un identifiant utilisateur affecté arbitrairement. Pour ces plateformes, l’utilisateur non-racine doit disposer d’autorisations d’accès en écriture sur les volumes mappés de manière externe qui nécessitent des écritures. Cela s’applique, par exemple, à un dossier de journalisation ou un dossier de téléchargement de modèle personnalisé.
 <br>
 </details>
 
@@ -564,7 +575,7 @@ Dans C#, pour activer la dictée, appelez la fonction `SpeechConfig.EnableDictat
 |----------|:------------|
 | C++ | <a href="https://docs.microsoft.com/en-us/cpp/cognitive-services/speech/speechconfig#fromendpoint" target="_blank">`SpeechConfig::FromEndpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | C# | <a href="https://docs.microsoft.com/dotnet/api/microsoft.cognitiveservices.speech.speechconfig.fromendpoint?view=azure-dotnet" target="_blank">`SpeechConfig.FromEndpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromendpoint?view=azure-java-stable" target="_blank">`SpeechConfig.fromendpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
+| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromendpoint" target="_blank">`SpeechConfig.fromendpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | Objective-C | <a href="https://docs.microsoft.com/en-us/objectivec/cognitive-services/speech/spxspeechconfiguration#initwithendpoint" target="_blank">`SPXSpeechConfiguration:initWithEndpoint;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | Python | <a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig?view=azure-python" target="_blank">`SpeechConfig;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | JavaScript | Non pris en charge actuellement, ni de prise en charge prévue. |
@@ -585,7 +596,7 @@ Dans C#, pour activer la dictée, appelez la fonction `SpeechConfig.EnableDictat
 |--|:-|
 | C# | <a href="https://docs.microsoft.com/dotnet/api/microsoft.cognitiveservices.speech.speechconfig.fromhost?view=azure-dotnet" target="_blank">`SpeechConfig.FromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | C++ | <a href="https://docs.microsoft.com/en-us/cpp/cognitive-services/speech/speechconfig#fromhost" target="_blank">`SpeechConfig::FromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromhost?view=azure-java-stable" target="_blank">`SpeechConfig.fromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
+| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromhost" target="_blank">`SpeechConfig.fromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | Objective-C | <a href="https://docs.microsoft.com/en-us/objectivec/cognitive-services/speech/spxspeechconfiguration#initwithhost" target="_blank">`SPXSpeechConfiguration:initWithHost;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | Python | <a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig?view=azure-python" target="_blank">`SpeechConfig;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
 | JavaScript | Non prise en charge pour le moment |

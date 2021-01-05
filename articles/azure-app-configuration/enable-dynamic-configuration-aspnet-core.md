@@ -4,23 +4,22 @@ titleSuffix: Azure App Configuration
 description: Dans ce tutoriel, vous allez apprendre à mettre à jour dynamiquement les données de configuration pour les applications ASP.NET Core
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.assetid: ''
 ms.service: azure-app-configuration
 ms.workload: tbd
 ms.devlang: csharp
 ms.topic: tutorial
-ms.date: 02/24/2019
-ms.author: lcozzens
-ms.custom: mvc
-ms.openlocfilehash: e9df6d2e7a8219d16e7b60f7c3b8d826a87e6110
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.date: 09/1/2020
+ms.author: alkemper
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 1fd495083f5f9be367dd0f125883b181e3bed27b
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80348851"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930549"
 ---
 # <a name="tutorial-use-dynamic-configuration-in-an-aspnet-core-app"></a>Tutoriel : Utiliser la configuration dynamique dans une application ASP.NET Core
 
@@ -53,10 +52,11 @@ Avant de continuer, terminez d’abord l’étape [Créer une application ASP.NE
 Une *clé Sentinel* est une clé spéciale qui sert à signaler que la configuration a changé. Votre application supervise la clé Sentinel pour détecter les changements. Quand un changement est détecté, toutes les valeurs de configuration sont actualisées. Par rapport à l’approche qui consiste à rechercher les changements dans toutes les clés, celle-ci permet de limiter le nombre global de demandes que votre application adresse à App Configuration.
 
 1. Sur le portail Azure, sélectionnez **Explorateur de configuration > Créer > Clé-valeur**.
-
 1. Pour **Clé**, entrez *TestApp:Settings:Sentinel*. Pour **Valeur**, entrez 1. Laissez **Étiquette** et **Type de contenu** vides.
-
 1. Sélectionnez **Appliquer**.
+
+> [!NOTE]
+> Si vous n’utilisez pas une clé Sentinel, vous devez inscrire manuellement chaque clé que vous souhaitez surveiller.
 
 ## <a name="reload-data-from-app-configuration"></a>Recharger des données à partir d’Azure App Configuration
 
@@ -159,6 +159,8 @@ Une *clé Sentinel* est une clé spéciale qui sert à signaler que la configura
     }
     ```
     ---
+    > [!Tip]
+    > Pour en savoir plus sur le modèle d’options pour la lecture des valeurs de configuration, consultez [Modèles d’options dans ASP.NET Core](/aspnet/core/fundamentals/configuration/options?view=aspnetcore-3.1).
 
 4. Mettez à jour la méthode `Configure`, en ajoutant l’intergiciel (middleware) `UseAzureAppConfiguration` afin de permettre la mise à jour des paramètres de configuration inscrits pour être actualisés pendant que l’application web ASP.NET Core continue de recevoir des requêtes.
 
@@ -218,6 +220,9 @@ Une *clé Sentinel* est une clé spéciale qui sert à signaler que la configura
     ---
     
     L’intergiciel utilise la configuration d’actualisation spécifiée dans la méthode `AddAzureAppConfiguration` de `Program.cs` afin de déclencher une actualisation pour chaque demande reçue par l’application web ASP.NET Core. Pour chaque demande, une opération d’actualisation est déclenchée et la bibliothèque de client vérifie si la valeur mise en cache pour les paramètres de configuration inscrits a expiré. Si elle a expiré, elle est actualisée.
+
+    > [!NOTE]
+    > Pour vous assurer que la configuration est actualisée, ajoutez le middleware dès qu’il convient à votre pipeline de demande afin qu’il ne soit pas court-circuité par un autre middleware dans votre application.
 
 ## <a name="use-the-latest-configuration-data"></a>Utiliser les données de configuration les plus récentes
 
@@ -310,11 +315,16 @@ Une *clé Sentinel* est une clé spéciale qui sert à signaler que la configura
 
 1. Pour générer l’application à l’aide de l’interface CLI .NET Core, exécutez la commande suivante dans l’interpréteur de commandes :
 
+    ```console
         dotnet build
+    ```
 
 1. Une fois la génération correctement terminée, exécutez la commande suivante pour exécuter l’application web localement :
 
+    ```console
         dotnet run
+    ```
+
 1. Ouvrez une fenêtre de navigateur, puis accédez à l’URL figurant dans la sortie de `dotnet run`.
 
     ![Lancement local de l’application du démarrage rapide](./media/quickstarts/aspnet-core-app-launch-local-before.png)

@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur l’activation de la prise
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: 83650e7cf46ec1dede5f25e32114d6469bab24be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c13c4410852d97f0bf4548578f40a5cc560804d7
+ms.sourcegitcommit: 642988f1ac17cfd7a72ad38ce38ed7a5c2926b6c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235913"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94874591"
 ---
 # <a name="enable-multiple-namespace-support-in-an-aks-cluster-with-application-gateway-ingress-controller"></a>Activer la prise en charge de plusieurs espaces de noms dans un cluster AKS avec un contrôleur d’entrée Application Gateway
 
@@ -35,7 +35,7 @@ Une fois déployé avec la possibilité d’observer plusieurs espaces de noms, 
   - répertorier les ressources d’entrée de tous les espaces de noms accessibles
   - filtrer jusqu’aux ressources d’entrée annotées avec `kubernetes.io/ingress.class: azure/application-gateway`
   - composer une [configuration Application Gateway](https://github.com/Azure/azure-sdk-for-go/blob/37f3f4162dfce955ef5225ead57216cf8c1b2c70/services/network/mgmt/2016-06-01/network/models.go#L1710-L1744) combinée
-  - appliquer la configuration à l’Application Gateway associée via [ARM](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview)
+  - appliquer la configuration à l’Application Gateway associée via [ARM](../azure-resource-manager/management/overview.md)
 
 ## <a name="conflicting-configurations"></a>Configurations conflictuelles
 Des [ressources d’entrée](https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource) à plusieurs espaces de noms peuvent demander à AGIC de créer des configurations conflictuelles pour une seule Application Gateway. (Deux entrées revendiquant le même domaine, par exemple.)
@@ -45,6 +45,7 @@ En haut de la hiérarchie : des **écouteurs**  (adresse IP, port et hôte) et
 En bas de la hiérarchie : des chemins d’accès, des pools principaux, des paramètres HTTP et des certificats TLS peuvent être créés par un seul espace de noms et les doublons sont supprimés.
 
 Par exemple, considérez que les ressources d’entrée en double suivantes définissent les espaces de noms `staging` et `production` pour `www.contoso.com` :
+
 ```yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -98,9 +99,10 @@ Par exemple, si vous avez ajouté `staging` en premier, AGIC configurera Applica
 ## <a name="restrict-access-to-namespaces"></a>Limiter l’accès aux espaces de noms
 Par défaut, AGIC configure Application Gateway en fonction de l’entrée annotée dans n’importe quel espace de noms. Si vous souhaitez limiter ce comportement, vous disposez des options suivantes :
   - limitez les espaces de noms en définissant explicitement ceux qu’AGIC doit observer par le biais de la clé YAML `watchNamespace` dans [helm-config.yaml](#sample-helm-config-file)
-  - utilisez [Role/RoleBinding](https://docs.microsoft.com/azure/aks/azure-ad-rbac) pour limiter AGIC à des espaces de noms spécifiques
+  - utilisez [Role/RoleBinding](../aks/azure-ad-rbac.md) pour limiter AGIC à des espaces de noms spécifiques
 
 ## <a name="sample-helm-config-file"></a>Exemple de fichier config Helm
+
 ```yaml
     # This file contains the essential configs for the ingress controller helm chart
 
@@ -145,12 +147,11 @@ Par défaut, AGIC configure Application Gateway en fonction de l’entrée annot
     #    secretJSON: <<Generate this value with: "az ad sp create-for-rbac --subscription <subscription-uuid> --sdk-auth | base64 -w0" >>
     
     ################################################################################
-    # Specify if the cluster is RBAC enabled or not
+    # Specify if the cluster is Kubernetes RBAC enabled or not
     rbac:
         enabled: false # true/false
     
     # Specify aks cluster related information. THIS IS BEING DEPRECATED.
     aksClusterConfiguration:
         apiServerAddress: <aks-api-server-address>
-    ```
-
+```

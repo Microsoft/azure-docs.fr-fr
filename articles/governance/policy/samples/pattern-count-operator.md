@@ -1,14 +1,14 @@
 ---
 title: 'Modèle : Opérateur count dans une définition de stratégie'
 description: Ce modèle Azure Policy fournit un exemple d’utilisation de l’opérateur count dans une définition de stratégie.
-ms.date: 01/31/2020
+ms.date: 10/14/2020
 ms.topic: sample
-ms.openlocfilehash: 88c2d1083a92732ac56ca4d6da7087cc4220d9a5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 1339dff7f8bc92a8e38ec5635690cc2069dd8df4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77170377"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005416"
 ---
 # <a name="azure-policy-pattern-the-count-operator"></a>Modèle Azure Policy : Opérateur count
 

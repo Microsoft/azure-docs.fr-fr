@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 02/26/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: bd26b2b475e293a1fda1b007289ba7c3eef35136
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e175a81efc1ab0950c1fda314efb206ff97a2b7f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78183927"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85385380"
 ---
 # <a name="define-phone-number-claims-transformations-in-azure-ad-b2c"></a>Définir des transformations de revendications de numéro de téléphone dans Azure AD B2C
 
@@ -37,7 +37,7 @@ Convertit un type de données `phoneNumber` en un type de données `string`.
 
 Dans cet exemple, la revendication cellPhoneNumber avec un type de valeur `phoneNumber` est convertie en revendication cellPhone avec un type de valeur `string`.
 
-```XML
+```xml
 <ClaimsTransformation Id="PhoneNumberToString" TransformationMethod="ConvertPhoneNumberClaimToString">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="cellPhoneNumber" TransformationClaimType="phoneNumber" />
@@ -62,7 +62,7 @@ Cette transformation de revendication valide le format du numéro de téléphone
 
 | Élément | TransformationClaimType | Type de données | Notes |
 | ---- | ----------------------- | --------- | ----- |
-| InputClaim | phoneNumberString | string |  Revendication de chaîne pour le numéro de téléphone. Le numéro de téléphone doit être au format international, précédé du signe « + » et d’un indicatif de pays. Si la revendication d’entrée `country` est fournie, le numéro de téléphone est au format local (sans l’indicatif téléphonique international). |
+| InputClaim | phoneNumberString | string |  Revendication de chaîne pour le numéro de téléphone. Le numéro de téléphone doit être au format international, précédé du signe « + » et d’un indicatif de pays/région. Si la revendication d’entrée `country` est fournie, le numéro de téléphone est au format local (sans l’indicatif téléphonique international). |
 | InputClaim | country | string | [Facultatif] Revendication de chaîne pour l’indicatif téléphonique international au format ISO3166 (indicatif téléphonique international ISO-3166 à deux lettres). |
 | OutputClaim | outputClaim | phoneNumber | Résultat de cette transformation de revendications. |
 
@@ -72,7 +72,7 @@ La transformation de revendications **ConvertStringToPhoneNumberClaim** est touj
 
 Vous pouvez utiliser cette transformation de revendications pour vous assurer que la revendication de chaîne fournie est un numéro de téléphone valide. Si ce n’est pas le cas, un message d’erreur est levé. L’exemple suivant vérifie que le type de revendication **phoneString** est effectivement un numéro de téléphone valide, puis renvoie le numéro de téléphone au format Azure AD B2C standard. Si ce n’est pas le cas, un message d’erreur est levé.
 
-```XML
+```xml
 <ClaimsTransformation Id="ConvertStringToPhoneNumber" TransformationMethod="ConvertStringToPhoneNumberClaim">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="phoneString" TransformationClaimType="phoneNumberString" />
@@ -86,7 +86,7 @@ Vous pouvez utiliser cette transformation de revendications pour vous assurer qu
 
 Le profil technique auto-déclaré qui appelle le profil technique de validation contenant cette transformation de revendications peut définir le message d’erreur.
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-LocalAccountSignup-Phone">
   <Metadata>
     <Item Key="UserMessageIfClaimsTransformationInvalidPhoneNumber">Custom error message if the phone number is not valid.</Item>
@@ -113,26 +113,26 @@ Le profil technique auto-déclaré qui appelle le profil technique de validation
 
 ## <a name="getnationalnumberandcountrycodefromphonenumberstring"></a>GetNationalNumberAndCountryCodeFromPhoneNumberString
 
-Cette chaîne extrait l’indicatif du pays et le numéro national de la revendication d’entrée, et lève éventuellement une exception si le numéro de téléphone fourni n’est pas valide.
+Cette chaîne extrait l’indicatif international et le numéro national de la revendication d’entrée, et lève éventuellement une exception si le numéro de téléphone fourni n’est pas valide.
 
 | Élément | TransformationClaimType | Type de données | Notes |
 | ---- | ----------------------- | --------- | ----- |
-| InputClaim | phoneNumber | string | Revendication de chaîne du numéro de téléphone. Le numéro de téléphone doit être au format international, précédé du signe « + » et d’un indicatif de pays. |
+| InputClaim | phoneNumber | string | Revendication de chaîne du numéro de téléphone. Le numéro de téléphone doit être au format international, précédé du signe « + » et d’un indicatif de pays/région. |
 | InputParameter | throwExceptionOnFailure | boolean | [Facultatif] Paramètre indiquant si une exception est levée lorsque le numéro de téléphone n’est pas valide. La valeur par défaut est false. |
-| InputParameter | countryCodeType | string | [Facultatif] Paramètre indiquant le type d’indicatif de pays dans la revendication de sortie. Les valeurs disponibles sont **CallingCode** (le code d’appel international d’un pays, par exemple + 1) ou **ISO3166** (code ISO-3166 de deux lettres du pays). |
+| InputParameter | countryCodeType | string | [Facultatif] Paramètre indiquant le type d’indicatif international dans la revendication de sortie. Les valeurs disponibles sont **CallingCode** (le code d’appel international d’un pays, par exemple + 1) ou **ISO3166** (préfixe international ISO-3166 de deux lettres). |
 | OutputClaim | nationalNumber | string | Revendication de chaîne pour le numéro national du numéro de téléphone. |
-| OutputClaim | countryCode | string | Revendication de chaîne pour l’indicatif de pays du numéro de téléphone. |
+| OutputClaim | countryCode | string | Revendication de chaîne pour le préfixe international du numéro de téléphone. |
 
 
 Si la transformation de revendications **GetNationalNumberAndCountryCodeFromPhoneNumberString** est exécutée à partir d’un [profil technique de validation](validation-technical-profile.md) appelé par un [profil technique auto-déclaré](self-asserted-technical-profile.md) ou une [action de contrôle d’affichage](display-controls.md#display-control-actions), les métadonnées du profil technique auto-déclaré **UserMessageIfPhoneNumberParseFailure** contrôlent le message d’erreur présenté à l’utilisateur.
 
 ![Diagramme du chemin d’exécution du message d’erreur](./media/phone-authentication/assert-execution.png)
 
-Vous pouvez utiliser cette transformation de revendications pour fractionner un numéro de téléphone complet en indicatif de pays et numéro national. Si le numéro de téléphone fourni n’est pas valide, vous pouvez choisir de lever un message d’erreur.
+Vous pouvez utiliser cette transformation de revendications pour fractionner un numéro de téléphone complet en préfixe international et numéro national. Si le numéro de téléphone fourni n’est pas valide, vous pouvez choisir de lever un message d’erreur.
 
-L’exemple suivant tente de fractionner le numéro de téléphone en numéro national et indicatif de pays. Si le numéro de téléphone est valide, il est remplacé par le numéro national. Si le numéro de téléphone n’est pas valide, aucune exception n’est levée et le numéro de téléphone conserve sa valeur d’origine.
+L’exemple suivant tente de fractionner le numéro de téléphone en numéro national et préfixe international. Si le numéro de téléphone est valide, il est remplacé par le numéro national. Si le numéro de téléphone n’est pas valide, aucune exception n’est levée et le numéro de téléphone conserve sa valeur d’origine.
 
-```XML
+```xml
 <ClaimsTransformation Id="GetNationalNumberAndCountryCodeFromPhoneNumberString" TransformationMethod="GetNationalNumberAndCountryCodeFromPhoneNumberString">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="phoneNumber" TransformationClaimType="phoneNumber" />
@@ -150,7 +150,7 @@ L’exemple suivant tente de fractionner le numéro de téléphone en numéro na
 
 Le profil technique auto-déclaré qui appelle le profil technique de validation contenant cette transformation de revendications peut définir le message d’erreur.
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-LocalAccountSignup-Phone">
   <Metadata>
     <Item Key="UserMessageIfPhoneNumberParseFailure">Custom error message if the phone number is not valid.</Item>

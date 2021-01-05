@@ -3,19 +3,20 @@ title: Prise en charge de Stockage Table Azure dans Azure Cosmos DB
 description: Découvrez comment l’API Table Azure Cosmos DB et les tables de stockage Azure fonctionnent ensemble en partageant le même modèle de données de table et les mêmes opérations.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
-ms.topic: overview
-ms.date: 12/02/2019
+ms.topic: how-to
+ms.date: 05/21/2020
 author: sakash279
 ms.author: akshanka
 ms.reviewer: sngun
-ms.openlocfilehash: 65cc378ab5b6fd7d2ed724f56a68bdf989ced48c
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 5e586ae8a6b6a4010419254ce3e380f377d370f2
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611719"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93101084"
 ---
 # <a name="developing-with-azure-cosmos-db-table-api-and-azure-table-storage"></a>Développement avec l’API Table Azure Cosmos DB et Stockage Table Azure
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 L’API Table Azure Cosmos DB et Stockage Table Azure partagent le même modèle de données de table et exposent les mêmes opérations de création, suppression, mise à jour et interrogation par le biais de leurs SDK.
 
@@ -40,7 +41,7 @@ Des informations supplémentaires sur l’utilisation de l’API Table sont disp
 
 Ces Kit de développement logiciel (SDK) sont disponibles pour le développement avec le stockage de tables Azure :
 
-- [Kit de développement logiciel (SDK) WindowsAzure.Storage .NET](https://www.nuget.org/packages/WindowsAzure.Storage/). Cette bibliothèque vous permet de travailler avec le service de Table de stockage.
+- Les bibliothèques [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/), [Microsoft.Azure.Storage.File](https://www.nuget.org/packages/Microsoft.Azure.Storage.File/), [Microsoft.Azure.Storage.Queue](https://www.nuget.org/packages/Microsoft.Azure.Storage.Queue/) et [Microsoft.Azure.Storage.Common](https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/) permettent d’utiliser le service Stockage Table Azure. Si vous utilisez l’API Table dans Azure Cosmos DB, vous pouvez utiliser plutôt la bibliothèque [Microsoft.Azure.CosmosDB.Table](https://www.nuget.org/packages/Microsoft.Azure.CosmosDB.Table/).
 - [Kit de développement logiciel (SDK) Python](https://github.com/Azure/azure-cosmos-table-python). Le SDK Table Azure Cosmos DB pour Python prend en charge le service Stockage Table (parce que le service Stockage Table Azure et l’API Table de Cosmos DB partagent les mêmes caractéristiques et fonctionnalités, et dans le but de factoriser nos efforts de développement de SDK, nous vous recommandons d’utiliser ce SDK).
 - [Kit de développement logiciel (SDK) Stockage Azure pour Java](https://github.com/azure/azure-storage-java). Ce Kit de développement logiciel (SDK) du Stockage Azure fournit une bibliothèque cliente en Java pour consommer le stockage de tables Azure.
 - [Kit de développement logiciel (SDK) Node.js](https://github.com/Azure/azure-storage-node). Ce Kit de développement logiciel (SDK) fournit un package Node.js et une bibliothèque de client compatible avec le navigateur JavaScript afin de consommer le service de Table de stockage.

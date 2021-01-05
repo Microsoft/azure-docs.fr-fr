@@ -9,14 +9,17 @@ ms.devlang: csharp
 ms.topic: conceptual
 ms.date: 12/14/2017
 ms.author: dobett
-ms.openlocfilehash: 6062f8b3992732e0e0f9bbdae9549e69c393f4ff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a092859517ee6ac41e62e55fe95f72b8bfdf87d5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67080482"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011198"
 ---
 # <a name="customize-how-the-connected-factory-solution-displays-data-from-your-opc-ua-servers"></a>Personnaliser la façon dont l’accélérateur de solution Usine connectée présente les données à partir de vos serveurs OPC UA
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 La solution Usine connectée agrège et affiche les données des serveurs OPC UA qui y sont connectés. Vous pouvez parcourir les serveurs OPC UA et leur envoyer des commandes dans votre solution. Pour plus d’informations sur l’UA OPC, consultez les [questions fréquentes (FAQ) relatives à Usine connectée](iot-accelerators-faq-cf.md).
 

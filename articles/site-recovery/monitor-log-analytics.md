@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/15/2019
 ms.author: raynew
-ms.openlocfilehash: 0b3f5963572368cb9c884984418140b4bbc0dea3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e3d3ce8218030bc8ba6c59b26b7360bf2299e02a
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131185"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499813"
 ---
 # <a name="monitor-site-recovery-with-azure-monitor-logs"></a>Superviser Site Recovery avec les journaux Azure Monitor
 
@@ -36,7 +36,7 @@ Voici ce dont vous avez besoin :
 
 - Au moins une machine protégée dans un coffre Recovery Services
 - Un espace de travail Log Analytics pour stocker les journaux Site Recovery. [Découvrez comment configurer un espace de travail](../azure-monitor/learn/quick-create-workspace.md)
-- Des connaissances de base concernant l’écriture, l’exécution et l’analyse des requêtes de journal dans Log Analytics. [Plus d’informations](../azure-monitor/log-query/get-started-portal.md)
+- Des connaissances de base concernant l’écriture, l’exécution et l’analyse des requêtes de journal dans Log Analytics. [Plus d’informations](../azure-monitor/log-query/log-analytics-tutorial.md)
 
 Avant de commencer, il est recommandé de consulter les [questions courantes concernant la supervision](monitoring-common-questions.md).
 
@@ -44,14 +44,14 @@ Avant de commencer, il est recommandé de consulter les [questions courantes con
 
 1. Dans le coffre, cliquez sur **Paramètres de diagnostic** > **Ajouter un paramètre de diagnostic**.
 
-    ![Sélectionner la journalisation de ressources](./media/monitoring-log-analytics/add-diagnostic.png)
+    ![Capture d’écran montrant l’option Ajouter un paramètre de diagnostic.](./media/monitoring-log-analytics/add-diagnostic.png)
 
 2. Dans **Paramètres de diagnostic**, spécifiez un nom, puis cochez la case **Envoyer à Log Analytics**.
 3. Sélectionnez l’abonnement Journaux Azure Monitor et l’espace de travail Log Analytics.
 4. Sélectionnez **Diagnostics Azure** dans le bouton bascule.
 5. Dans la liste des journaux, sélectionnez tous les journaux ayant le préfixe **AzureSiteRecovery**. Cliquez ensuite sur **OK**.
 
-    ![Sélectionner un espace de travail](./media/monitoring-log-analytics/select-workspace.png)
+    ![Capture de l’écran Paramètres des diagnostics.](./media/monitoring-log-analytics/select-workspace.png)
 
 Les journaux Site Recovery commencent à être alimentés dans une table (**AzureDiagnostics**) de l’espace de travail sélectionné.
 
@@ -62,14 +62,14 @@ Vous pouvez capturer les informations relatives au taux d’évolution des donn�
 1. Accédez à l’espace de travail Log Analytics et cliquez sur **Paramètres avancés**.
 2. Cliquez sur la page **Sources connectées**, puis sélectionnez **Serveurs Windows**.
 3. Téléchargez l’agent Windows (64 bits) sur le serveur de processus. 
-4. [Obtenir l’ID et la clé de l’espace de travail](../azure-monitor/platform/agent-windows.md#obtain-workspace-id-and-key)
+4. [Obtenir l’ID et la clé de l’espace de travail](../azure-monitor/platform/log-analytics-agent.md#workspace-id-and-key)
 5. [Configurer l’Agent de façon à utiliser TLS 1.2](../azure-monitor/platform/agent-windows.md#configure-agent-to-use-tls-12)
-6. [Terminez l’installation de l’agent](../azure-monitor/platform/agent-windows.md#install-the-agent-using-setup-wizard) en fournissant l’ID et la clé de l’espace de travail obtenu.
+6. [Terminez l’installation de l’agent](../azure-monitor/platform/agent-windows.md#install-agent-using-setup-wizard) en fournissant l’ID et la clé de l’espace de travail obtenu.
 7. Une fois l’installation terminée, accédez à l’espace de travail Log Analytics, puis cliquez sur **Paramètres avancés**. Accédez à la page **Données**, puis cliquez sur **Compteur de performances Windows**. 
 8. Cliquez sur **« + »** pour ajouter les deux compteurs suivants avec un intervalle d’échantillonnage de 300 secondes :
 
-        ASRAnalytics(*)\SourceVmChurnRate 
-        ASRAnalytics(*)\SourceVmThrpRate 
+    - ASRAnalytics(*)\SourceVmChurnRate
+    - ASRAnalytics(*)\SourceVmThrpRate
 
 Les données de taux d’évolution et de vitesse de chargement vont commencer à alimenter l’espace de travail.
 
@@ -125,7 +125,7 @@ rpoInSeconds_d <= 1800, "15-30Min", ">30Min") 
 | render barchart 
 ```
 
-![Interroger les RPO](./media/monitoring-log-analytics/example1.png)
+![Capture d’écran montrant un graphique à barres des machines virtuelles Azure répliquées avec Site Recovery.](./media/monitoring-log-analytics/example1.png)
 
 ### <a name="query-site-recovery-jobs"></a>Interroger les travaux Azure Site Recovery
 
@@ -190,7 +190,7 @@ AzureDiagnostics  
 | project TimeGenerated, name_s , RPO_in_seconds = rpoInSeconds_d   
 | render timechart 
 ```
-![Interroger les RPO des machines](./media/monitoring-log-analytics/example2.png)
+![Capture d’écran d’un graphique de tendance qui suit le RPO d’une machine virtuelle Azure spécifique.](./media/monitoring-log-analytics/example2.png)
 
 ### <a name="query-data-change-rate-churn-and-upload-rate-for-an-azure-vm"></a>Taux de modification des données de requête (évolution) et vitesse de téléchargement pour une machine virtuelle Azure
 
@@ -207,7 +207,7 @@ Category contains "Upload", "UploadRate", "none") 
 | project TimeGenerated , InstanceWithType , Churn_MBps = todouble(Value_s)/1048576   
 | render timechart  
 ```
-![Interroger le changement des données](./media/monitoring-log-analytics/example3.png)
+![Capture d’écran d’un graphique de tendance pour une machine virtuelle Azure spécifique.](./media/monitoring-log-analytics/example3.png)
 
 ### <a name="query-data-change-rate-churn-and-upload-rate-for-a-vmware-or-physical-machine"></a>Taux de modification des données de requête (évolution) et vitesse de téléchargement pour une machine virtuelle VMware ou une machine physique
 
@@ -252,7 +252,7 @@ AzureDiagnostics 
 
 ## <a name="set-up-alerts---examples"></a>Configurer des alertes - Exemples
 
-Vous pouvez configurer des alertes Site Recovery en fonction des données Azure Monitor. [En savoir plus sur la configuration des alertes de journaux](../azure-monitor/platform/alerts-log.md#managing-log-alerts-from-the-azure-portal) 
+Vous pouvez configurer des alertes Site Recovery en fonction des données Azure Monitor. [En savoir plus sur la configuration des alertes de journaux](../azure-monitor/platform/alerts-log.md#create-a-log-alert-rule-with-the-azure-portal) 
 
 > [!NOTE]
 > Certains de ces exemples utilisent **replicationProviderName_s** avec une valeur de **A2A**. Cela permet de configurer des alertes pour les machines virtuelles Azure qui ont été répliquées dans une région Azure secondaire. Dans ces exemples, vous pouvez remplacer **A2A** par **InMageAzureV2** si vous souhaitez configurer des alertes pour des machines virtuelles VMware locales ou des serveurs physiques ayant été répliqués dans Azure.

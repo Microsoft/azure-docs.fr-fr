@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/07/2019
 ms.author: robb
 ms.custom: include file
-ms.openlocfilehash: 864b37c9e59786546ad2c29faf8457cfc3a21f6b
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: 86c5c6fff06f43bf66427ba1935852fcf97a71c6
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82161157"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96356208"
 ---
 **Volume et rétention de collecte de données** 
 
@@ -54,7 +54,7 @@ ms.locfileid: "82161157"
 | Nombre maximal d’enregistrements retournés dans une requête | 500 000 | |
 | Taille maximale des données retournées | 64 000 000 octets (~ 61 Mio)| |
 | Durée maximale d’exécution de requête | 10 minutes | Consultez [Délais d’expiration](https://dev.loganalytics.io/documentation/Using-the-API/Timeouts) pour plus d’informations.  |
-| Taux maximum de requêtes | 200 requêtes par 30 secondes par utilisateur AAD ou adresse IP du client | Consultez [Limites de taux](https://dev.loganalytics.io/documentation/Using-the-API/Limits) pour plus d’informations. |
+| Taux maximum de requêtes | 200 requêtes par 30 secondes par utilisateur Azure AD ou adresse IP du client | Consultez [Limites de taux](https://dev.loganalytics.io/documentation/Using-the-API/Limits) pour plus d’informations. |
 
 **Limites d’espace de travail général**
 
@@ -64,21 +64,13 @@ ms.locfileid: "82161157"
 | Nombre maximum de caractères pour le nom de colonne | 500 | |
 | Exportation de données | Actuellement non disponible | Utilisez Azure Function ou Logic App pour agréger et exporter des données. | 
 
-**Débit d’ingestion de données**
+**<a name="data-ingestion-volume-rate">Débit d’ingestion de données</a>**
 
+Azure Monitor est un service de données à grande échelle servant des milliers de clients envoyant des téraoctets de données chaque mois à un rythme croissant. La limite du débit de volume vise à isoler les clients Azure Monitor des pics d’ingestion soudains dans un environnement multilocataire. Un seuil de débit de volume d’ingestion par défaut de 500 Mo (compressé) est défini dans les espaces de travail, ce qui se traduit par **6 Go/min** non compressé -- la taille réelle peut varier entre les types de données en fonction de la longueur du journal et du taux de compression. La limite du débit du volume s’applique aux données ingérées à partir des ressources Azure via les [Paramètres de diagnostic](../articles/azure-monitor/platform/diagnostic-settings.md). Lorsque la limite du débit du volume est atteinte, un mécanisme de nouvelle tentative tente d’ingérer les données 4 fois sur une période de 30 minutes et de les supprimer si l’opération échoue. Elle ne s’applique pas aux données ingérées à partir d’[agents](../articles/azure-monitor/platform/agents-overview.md) ou de l’[API du collecteur de données](../articles/azure-monitor/platform/data-collector-api.md).
 
-Azure Monitor est un service de données à grande échelle servant des milliers de clients envoyant des téraoctets de données chaque mois à un rythme croissant. La limite par défaut du débit d’ingestion de données envoyées à partir de ressources Azure à l’aide des [paramètres de diagnostic](../articles/azure-monitor/platform/diagnostic-settings.md) est d’environ **6 Go/min** par espace de travail. Il s’agit d’une valeur approximative dans la mesure où la taille réelle peut varier d’un type de données à l’autre en fonction de la longueur du journal et de son taux de compression. Cette limite ne s’applique pas aux données envoyées à partir d’agents ou de l’[API de collecteur de données](../articles/azure-monitor/platform/data-collector-api.md).
+Quand les données envoyées à un espace de travail sont à un débit supérieur à 80 % du seuil configuré dans votre espace de travail, un événement est envoyé au tableau *Opération* de votre espace de travail toutes les 6 heures tant que le seuil continue d’être dépassé. Quand le débit de volume ingéré est plus élevé que le seuil, des données sont supprimées et un événement est envoyé toutes les 6 heures au tableau *Opération* de votre espace de travail pendant que le seuil continue d’être dépassé. Si votre débit de volume d’ingestion continue de dépasser le seuil ou si vous pensez l’atteindre bientôt, vous pouvez demander de l’augmenter en effectuant une demande de support. 
 
-Si vous envoyez des données vers un espace de travail unique à un débit supérieur, certaines données sont supprimées et un événement est envoyé toutes les 6 heures à la table *Operation* de votre espace de travail tant que le seuil est dépassé. Si votre volume d’ingestion continue de dépasser la limite du débit ou si vous pensez l’atteindre bientôt, vous pouvez demander une augmentation de votre espace de travail en envoyant un e-mail à LAIngestionRate@microsoft.com ou en effectuant une demande de support.
- 
-Pour être averti de la survenue d’un tel événement dans votre espace de travail, créez une [règle d’alerte de journal](../articles/azure-monitor/platform/alerts-log.md) à l’aide de la requête suivante, où la logique d’alerte est basée sur le nombre de résultats supérieurs à zéro.
-
-``` Kusto
-Operation
-|where OperationCategory == "Ingestion"
-|where Detail startswith "The rate of data crossed the threshold"
-``` 
-
+Consultez [Superviser l’intégrité de l’espace de travail Log Analytics dans Azure Monitor](../articles/azure-monitor/platform/monitor-workspace.md) pour créer des règles d’alerte qui vous informeront de manière proactive si vous atteignez les limites d’ingestion.
 
 >[!NOTE]
->En fonction de la durée pendant laquelle vous utilisez Log Analytics, vous pouvez avoir accès aux niveaux de tarification hérités. En savoir plus sur les [niveaux tarifaires hérités de Log Analytics](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#legacy-pricing-tiers). 
+>En fonction de la durée pendant laquelle vous utilisez Log Analytics, vous pouvez avoir accès aux niveaux de tarification hérités. En savoir plus sur les [niveaux tarifaires hérités de Log Analytics](../articles/azure-monitor/platform/manage-cost-storage.md#legacy-pricing-tiers).

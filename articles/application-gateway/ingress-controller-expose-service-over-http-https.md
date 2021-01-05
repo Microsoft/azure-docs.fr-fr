@@ -4,15 +4,15 @@ description: Cet article fournit des informations sur la façon d’exposer un s
 services: application-gateway
 author: caya
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: c664141a8c89ccbdf37bd3f9a19cfa659982a47d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3b816ddc0eccf8c406cfed37d6bfc594e27d3629
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73795574"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85850364"
 ---
 # <a name="expose-an-aks-service-over-http-or-https-using-application-gateway"></a>Exposer un service AKS via HTTP ou HTTPS à l’aide d’Application Gateway 
 
@@ -162,22 +162,22 @@ L’application `guestbook` est désormais disponible sur HTTP et HTTPS uniqueme
 
 L’entrée suivante vous permettra d’ajouter des chemins supplémentaires dans cette entrée et de rediriger ces chemins vers d’autres services :
 
-    ```yaml
-    apiVersion: extensions/v1beta1
-    kind: Ingress
-    metadata:
-      name: guestbook
-      annotations:
-        kubernetes.io/ingress.class: azure/application-gateway
-    spec:
-      rules:
-      - http:
-          paths:
-          - path: </other/*>
-            backend:
-              serviceName: <other-service>
-              servicePort: 80
-          - backend:
-              serviceName: frontend
-              servicePort: 80
-    ```
+```yaml
+apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: guestbook
+    annotations:
+      kubernetes.io/ingress.class: azure/application-gateway
+  spec:
+    rules:
+    - http:
+        paths:
+        - path: </other/*>
+          backend:
+            serviceName: <other-service>
+            servicePort: 80
+        - backend:
+            serviceName: frontend
+            servicePort: 80
+```

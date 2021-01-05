@@ -5,15 +5,15 @@ services: vpn-gateway
 titleSuffix: Azure VPN Gateway
 author: yushwang
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 02/11/2020
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: yushwang
-ms.openlocfilehash: a95cd6ea85a16b0e0bf5f67f5dfc20d57f11463b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 168bb9e06c73ec27ec1304813023889c9549b8e6
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77198091"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94660693"
 ---
 # <a name="add-a-site-to-site-connection-to-a-vnet-with-an-existing-vpn-gateway-connection-classic"></a>Ajouter une connexion de site à site à un réseau virtuel avec une connexion de passerelle VPN existante (Classic)
 
@@ -71,8 +71,8 @@ Si vous avez déjà un VPN de site à site avec une passerelle de routage dynami
 2. Configurez votre nouvelle passerelle et créez votre tunnel VPN. Pour obtenir des instructions, consultez [Spécifier la référence et le type de VPN](vpn-gateway-howto-site-to-site-classic-portal.md#sku). Veillez à spécifier « Dynamique » comme type de routage.
 
 ### <a name="if-you-dont-have-a-site-to-site-virtual-network"></a>Si vous n’avez pas de réseau virtuel de site à site :
-1. Créez votre réseau virtuel de site à site à l’aide des instructions suivantes : [Créer un réseau virtuel avec une connexion VPN de site à site](vpn-gateway-site-to-site-create.md).  
-2. Configurez une passerelle de routage dynamique à l’aide des instructions suivantes : [Configurer une passerelle VPN](vpn-gateway-configure-vpn-gateway-mp.md). Veillez à sélectionner le **routage dynamique** pour le type de passerelle.
+1. Créez votre réseau virtuel de site à site à l’aide des instructions suivantes : [Créer un réseau virtuel avec une connexion VPN de site à site](./vpn-gateway-howto-site-to-site-classic-portal.md).  
+2. Configurez une passerelle de routage dynamique à l’aide des instructions suivantes : [Configurer une passerelle VPN](./vpn-gateway-howto-site-to-site-classic-portal.md). Veillez à sélectionner le **routage dynamique** pour le type de passerelle.
 
 ## <a name="2-export-the-network-configuration-file"></a><a name="export"></a>2. Exporter le fichier de configuration réseau
 
@@ -97,52 +97,54 @@ Get-AzureVNetConfig -ExportToFile C:\AzureNet\NetworkConfig.xml
 ## <a name="3-open-the-network-configuration-file"></a>3. Ouvrir le fichier de configuration réseau
 Ouvrez le fichier de configuration réseau que vous avez téléchargé à l’étape précédente. Utilisez l’éditeur xml de votre choix. Le fichier doit se présenter ainsi :
 
-        <NetworkConfiguration xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
-          <VirtualNetworkConfiguration>
-            <LocalNetworkSites>
-              <LocalNetworkSite name="Site1">
-                <AddressSpace>
-                  <AddressPrefix>10.0.0.0/16</AddressPrefix>
-                  <AddressPrefix>10.1.0.0/16</AddressPrefix>
-                </AddressSpace>
-                <VPNGatewayAddress>131.2.3.4</VPNGatewayAddress>
-              </LocalNetworkSite>
-              <LocalNetworkSite name="Site2">
-                <AddressSpace>
-                  <AddressPrefix>10.2.0.0/16</AddressPrefix>
-                  <AddressPrefix>10.3.0.0/16</AddressPrefix>
-                </AddressSpace>
-                <VPNGatewayAddress>131.4.5.6</VPNGatewayAddress>
-              </LocalNetworkSite>
-            </LocalNetworkSites>
-            <VirtualNetworkSites>
-              <VirtualNetworkSite name="VNet1" AffinityGroup="USWest">
-                <AddressSpace>
-                  <AddressPrefix>10.20.0.0/16</AddressPrefix>
-                  <AddressPrefix>10.21.0.0/16</AddressPrefix>
-                </AddressSpace>
-                <Subnets>
-                  <Subnet name="FE">
-                    <AddressPrefix>10.20.0.0/24</AddressPrefix>
-                  </Subnet>
-                  <Subnet name="BE">
-                    <AddressPrefix>10.20.1.0/24</AddressPrefix>
-                  </Subnet>
-                  <Subnet name="GatewaySubnet">
-                    <AddressPrefix>10.20.2.0/29</AddressPrefix>
-                  </Subnet>
-                </Subnets>
-                <Gateway>
-                  <ConnectionsToLocalNetwork>
-                    <LocalNetworkSiteRef name="Site1">
-                      <Connection type="IPsec" />
-                    </LocalNetworkSiteRef>
-                  </ConnectionsToLocalNetwork>
-                </Gateway>
-              </VirtualNetworkSite>
-            </VirtualNetworkSites>
-          </VirtualNetworkConfiguration>
-        </NetworkConfiguration>
+```xml
+<NetworkConfiguration xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+  <VirtualNetworkConfiguration>
+    <LocalNetworkSites>
+      <LocalNetworkSite name="Site1">
+        <AddressSpace>
+          <AddressPrefix>10.0.0.0/16</AddressPrefix>
+          <AddressPrefix>10.1.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <VPNGatewayAddress>131.2.3.4</VPNGatewayAddress>
+      </LocalNetworkSite>
+      <LocalNetworkSite name="Site2">
+        <AddressSpace>
+          <AddressPrefix>10.2.0.0/16</AddressPrefix>
+          <AddressPrefix>10.3.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <VPNGatewayAddress>131.4.5.6</VPNGatewayAddress>
+      </LocalNetworkSite>
+    </LocalNetworkSites>
+    <VirtualNetworkSites>
+      <VirtualNetworkSite name="VNet1" AffinityGroup="USWest">
+        <AddressSpace>
+          <AddressPrefix>10.20.0.0/16</AddressPrefix>
+          <AddressPrefix>10.21.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="FE">
+            <AddressPrefix>10.20.0.0/24</AddressPrefix>
+          </Subnet>
+          <Subnet name="BE">
+            <AddressPrefix>10.20.1.0/24</AddressPrefix>
+          </Subnet>
+          <Subnet name="GatewaySubnet">
+            <AddressPrefix>10.20.2.0/29</AddressPrefix>
+          </Subnet>
+        </Subnets>
+        <Gateway>
+          <ConnectionsToLocalNetwork>
+            <LocalNetworkSiteRef name="Site1">
+              <Connection type="IPsec" />
+            </LocalNetworkSiteRef>
+          </ConnectionsToLocalNetwork>
+        </Gateway>
+      </VirtualNetworkSite>
+    </VirtualNetworkSites>
+  </VirtualNetworkConfiguration>
+</NetworkConfiguration>
+```
 
 ## <a name="4-add-multiple-site-references"></a>4. Ajouter plusieurs références de site
 Lorsque vous ajoutez ou supprimez les informations de référence de site, des modifications de configuration sont apportées à ConnectionsToLocalNetwork/LocalNetworkSiteRef. À l’ajout d’une nouvelle référence de site local, Azure crée un nouveau tunnel. Dans l’exemple ci-dessous, la configuration du réseau correspond à une connexion de site unique. Enregistrez le fichier une fois que vous avez terminé d’apporter vos modifications.

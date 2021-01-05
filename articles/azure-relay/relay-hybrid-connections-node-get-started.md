@@ -1,25 +1,15 @@
 ---
 title: Connexions hybrides Azure Relay - WebSockets dans Node
 description: Écrire une application console Node.js pour des WebSockets de connexions hybrides Azure Relay
-services: service-bus-relay
-documentationcenter: node
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: e44e4867-3cf3-46be-8f8a-7671e2013bc4
-ms.service: service-bus-relay
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: node
-ms.workload: na
-ms.date: 11/01/2018
-ms.author: spelluru
-ms.openlocfilehash: 818db4db082a441877b573fd52361e63becce374
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.custom: devx-track-js
+ms.openlocfilehash: b362caa6570d4a8e212ff7adf4310a0c63e8b755
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204604"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91263706"
 ---
 # <a name="get-started-with-relay-hybrid-connections-websockets-in-nodejs"></a>Bien démarrer avec les WebSockets de connexions hybrides Relay dans Node.js
 
@@ -62,7 +52,7 @@ Pour envoyer des messages à Relay, écrivez une application console Node.js.
 2. Exécutez l’application cliente : à partir d’un type d’invite de commandes Node.js `node sender.js`, puis entrez du texte.
 3. Vérifiez que la console d’application de serveur renvoie le texte entré dans l’application cliente.
 
-    ![running-applications](./media/relay-hybrid-connections-node-get-started/running-applications.png)
+    ![Fenêtres de console testant les applications serveur et clientes.](./media/relay-hybrid-connections-node-get-started/running-applications.png)
 
 Vous avez créé une application de connexions hybrides complète avec Node.js : félicitations !
 

@@ -1,20 +1,20 @@
 ---
 title: Créer une carte avec Azure Maps | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à afficher une carte dans une page web à l’aide du Kit de développement logiciel (SDK) web Microsoft Azure Maps.
-author: Philmea
-ms.author: philmea
+description: Découvrez comment ajouter des cartes à des pages web à l’aide du kit SDK web Azure Maps. En savoir plus sur les options d’animation, de style, l’appareil photo, les services et les interactions de l’utilisateur.
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 07/26/2019
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: 97eb1ebb61e5ff78ed918fded8107f5775b533c2
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: 833b6413cc5dfde1129075a286e5fe93a06e159f
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124021"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92890919"
 ---
 # <a name="create-a-map"></a>Créer une carte
 
@@ -22,11 +22,11 @@ Cet article vous montre comment créer et animer une carte.
 
 ## <a name="loading-a-map"></a>Chargement d’une carte
 
-Pour charger une carte, créez une nouvelle instance de la [classe Map](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map). Lors de l’initialisation de la carte, transmettez un ID d’élément DIV pour afficher la carte et transmettez un ensemble d’options à utiliser lors du chargement de la carte. Si les informations d’authentification par défaut ne sont pas spécifiées sur l’espace de noms `atlas`, vous devez les spécifier dans les options de carte lors du chargement de la carte. Pour de meilleures performances, la carte charge plusieurs ressources de manière asynchrone. Ainsi, après avoir créé l’instance de carte, attachez un événement `ready` ou `load` à la carte, puis ajoutez tout autre code qui interagit avec la carte dans le gestionnaire d’événements. L’événement `ready` est déclenché dès qu’un nombre suffisant de ressources avec lesquelles interagir de manière programmatique est chargé sur la carte. L’événement `load` est déclenché après la fin du chargement complet de la vue de carte initiale. 
+Pour charger une carte, créez une nouvelle instance de la [classe Map](/javascript/api/azure-maps-control/atlas.map). Lors de l’initialisation de la carte, transmettez un ID d’élément DIV pour afficher la carte et transmettez un ensemble d’options à utiliser lors du chargement de la carte. Si les informations d’authentification par défaut ne sont pas spécifiées sur l’espace de noms `atlas`, vous devez les spécifier dans les options de carte lors du chargement de la carte. Pour de meilleures performances, la carte charge plusieurs ressources de manière asynchrone. Ainsi, après avoir créé l’instance de carte, attachez un événement `ready` ou `load` à la carte, puis ajoutez tout autre code qui interagit avec la carte dans le gestionnaire d’événements. L’événement `ready` est déclenché dès qu’un nombre suffisant de ressources avec lesquelles interagir de manière programmatique est chargé sur la carte. L’événement `load` est déclenché après la fin du chargement complet de la vue de carte initiale. 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Chargement de carte de base" src="//codepen.io/azuremaps/embed/rXdBXx/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Chargement de carte de base" src="//codepen.io/azuremaps/embed/rXdBXx/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez la page <a href='https://codepen.io/azuremaps/pen/rXdBXx/'>Basic map load</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -39,7 +39,7 @@ Lorsque vous effectuer un zoom arrière sur la carte sur un écran étendu, plus
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="renderWorldCopies = false" src="//codepen.io/azuremaps/embed/eqMYpZ/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="renderWorldCopies = false" src="//codepen.io/azuremaps/embed/eqMYpZ/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez la page <a href='https://codepen.io/azuremaps/pen/eqMYpZ/'>renderWorldCopies = false</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -48,10 +48,10 @@ Consultez la page <a href='https://codepen.io/azuremaps/pen/eqMYpZ/'>renderWorld
 
 Lors de la création d’une carte, plusieurs types d’options peuvent être passés pour personnaliser le fonctionnement de la carte, comme indiqué ci-dessous.
 
-- Les options [CameraOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.cameraoptions) et [CameraBoundOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.cameraboundsoptions) sont utilisées pour spécifier la zone que la carte doit s’afficher.
-- L’option [ServiceOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.serviceoptions) permet de spécifier la façon dont la carte doit interagir avec les services qui l’alimentent.
-- L’option [StyleOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.styleoptions) permet de spécifier qu’un style et un rendu doivent être appliqués à la carte.
-- L’option [UserInteractionOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.userinteractionoptions) permet de spécifier la façon dont la carte doit s’afficher lorsque l’utilisateur interagit avec elle. 
+- Les options [CameraOptions](/javascript/api/azure-maps-control/atlas.cameraoptions) et [CameraBoundOptions](/javascript/api/azure-maps-control/atlas.cameraboundsoptions) sont utilisées pour spécifier la zone que la carte doit s’afficher.
+- L’option [ServiceOptions](/javascript/api/azure-maps-control/atlas.serviceoptions) permet de spécifier la façon dont la carte doit interagir avec les services qui l’alimentent.
+- L’option [StyleOptions](/javascript/api/azure-maps-control/atlas.styleoptions) permet de spécifier qu’un style et un rendu doivent être appliqués à la carte.
+- L’option [UserInteractionOptions](/javascript/api/azure-maps-control/atlas.userinteractionoptions) permet de spécifier la façon dont la carte doit s’afficher lorsque l’utilisateur interagit avec elle. 
 
 Ces options peuvent également être mises à jour après le chargement de la carte à l’aide des fonctions `setCamera`, `setServiceOptions`, `setStyle` et `setUserInteraction`. 
 
@@ -81,11 +81,11 @@ map.setCamera({
 });
 ```
 
-Dans le code suivant, un [objet de carte](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map) est créé et les options de centre et de zoom sont définies. Les propriétés de la carte, comme le centre et le niveau de zoom, font partie des [CameraOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.cameraoptions).
+Dans le code suivant, un [objet de carte](/javascript/api/azure-maps-control/atlas.map) est créé et les options de centre et de zoom sont définies. Les propriétés de la carte, comme le centre et le niveau de zoom, font partie des [CameraOptions](/javascript/api/azure-maps-control/atlas.cameraoptions).
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Créer une carte via CameraOptions' src='//codepen.io/azuremaps/embed/qxKBMN/?height=543&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/qxKBMN/'>Create a map via `CameraOptions` (Créer une carte via) </a>d’Azure Location Based Services (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Créer une carte via CameraOptions' src='//codepen.io/azuremaps/embed/qxKBMN/?height=543&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/qxKBMN/'>Create a map via `CameraOptions` (Créer une carte via) </a>d’Azure Location Based Services (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 <a id="setCameraBoundsOptions"></a>
@@ -101,16 +101,16 @@ map.setCamera({
 });
 ```
 
-Dans le code suivant, un [objet de carte](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map) est construit via `new atlas.Map()`. Des propriétés de carte, telles que `CameraBoundsOptions`, peuvent être définies avec la fonction [setCamera](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map) de la classe Map. Les propriétés des marges intérieures et des limites sont définies au moyen de `setCamera`.
+Dans le code suivant, un [objet de carte](/javascript/api/azure-maps-control/atlas.map) est construit via `new atlas.Map()`. Des propriétés de carte, telles que `CameraBoundsOptions`, peuvent être définies avec la fonction [setCamera](/javascript/api/azure-maps-control/atlas.map) de la classe Map. Les propriétés des marges intérieures et des limites sont définies au moyen de `setCamera`.
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Créer une carte via CameraBoundsOptions' src='//codepen.io/azuremaps/embed/ZrRbPg/?height=543&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/ZrRbPg/'>Create a map via `CameraBoundsOptions` </a>d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Créer une carte via CameraBoundsOptions' src='//codepen.io/azuremaps/embed/ZrRbPg/?height=543&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/ZrRbPg/'>Create a map via `CameraBoundsOptions` </a>d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ### <a name="animate-map-view"></a>Animer la vue cartographique
 
-Lorsque vous définissez les options de caméra de la carte, des [options d’animation](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.animationoptions) peuvent également être définies. Ces options spécifient le type d’animation et la durée nécessaire pour déplacer la caméra.
+Lorsque vous définissez les options de caméra de la carte, des [options d’animation](/javascript/api/azure-maps-control/atlas.animationoptions) peuvent également être définies. Ces options spécifient le type d’animation et la durée nécessaire pour déplacer la caméra.
 
 ```javascript
 map.setCamera({
@@ -125,12 +125,53 @@ Dans le code suivant, le premier bloc de code crée une carte et définit les st
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Animer la vue cartographique' src='//codepen.io/azuremaps/embed/WayvbO/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/WayvbO/'>Animer la vue cartographique</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur le site <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Animer la vue cartographique' src='//codepen.io/azuremaps/embed/WayvbO/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page Pen <a href='https://codepen.io/azuremaps/pen/WayvbO/'>Animer la vue cartographique</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur le site <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+## <a name="request-transforms"></a>Demander des transformations
+
+Il est parfois utile de pouvoir modifier les requêtes HTTP effectuées par le contrôle de carte. Par exemple :
+
+- Ajouter des en-têtes supplémentaires aux requêtes de vignette. C’est souvent le cas pour les services protégés par mot de passe.
+- Modifier les URL pour exécuter les requêtes via un service proxy.
+
+Les [options de service](/javascript/api/azure-maps-control/atlas.serviceoptions) de la carte ont un paramètre `transformRequest` qui peut être utilisé pour modifier toutes les requêtes de la carte avant qu’elles ne soient effectuées. L’option `transformRequest` est une fonction qui accepte deux paramètres : une URL de chaîne et une chaîne de type de ressource qui indique à quoi sert la requête. Cette fonction doit retourner un résultat [RequestParameters](/javascript/api/azure-maps-control/atlas.requestparameters).
+
+```JavaScript
+transformRequest: (url: string, resourceType: string) => RequestParameters
+```
+
+L’exemple suivant montre comment l’utiliser pour modifier toutes les requêtes en taille `https://example.com` en ajoutant un nom d’utilisateur et un mot de passe comme en-têtes à la requête.
+
+```JavaScript
+var map = new atlas.Map('myMap', {
+    transformRequest: function (url, resourceType) {
+        //Check to see if the request is to the specified endpoint.
+        if (url.indexOf('https://examples.com') > -1) {
+            //Add custom headers to the request.
+            return {
+                url: url,
+                header: {
+                    username: 'myUsername',
+                    password: 'myPassword'
+                }
+            };
+        }
+
+        //Return the URL unchanged by default.
+        return { url: url };
+    },
+
+    authOptions: {
+        authType: 'subscriptionKey',
+        subscriptionKey: '<Your Azure Maps Key>'
+    }
+});
+```
 
 ## <a name="try-out-the-code"></a>Essayer le code
 
-Examinez les exemples de code. Vous pouvez modifier le code JavaScript dans l’**onglet JS** et observer les modifications apportées à l’affichage cartographique sur l’**onglet Résultats**. Vous pouvez également cliquer sur **Modifier sur CodePen** dans l’angle supérieur droit afin de modifier le code par ce biais.
+Examinez les exemples de code. Vous pouvez modifier le code JavaScript dans l’ **onglet JS** et observer les modifications apportées à l’affichage cartographique sur l’ **onglet Résultats** . Vous pouvez également cliquer sur **Modifier sur CodePen** dans l’angle supérieur droit afin de modifier le code par ce biais.
 
 <a id="relatedReference"></a>
 
@@ -139,7 +180,7 @@ Examinez les exemples de code. Vous pouvez modifier le code JavaScript dans l’
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [Map](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map)
+> [Map](/javascript/api/azure-maps-control/atlas.map)
 
 > [!div class="nextstepaction"]
 > [CameraOptions](/javascript/api/azure-maps-control/atlas.cameraoptions)
@@ -156,4 +197,4 @@ Consultez les exemples de code pour ajouter la fonctionnalité à votre applicat
 > [Ajouter des contrôles à la carte](map-add-controls.md)
 
 > [!div class="nextstepaction"]
-> [Exemples de code](https://docs.microsoft.com/samples/browse/?products=azure-maps)
+> [Exemples de code](/samples/browse/?products=azure-maps)

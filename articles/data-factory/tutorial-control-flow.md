@@ -2,8 +2,8 @@
 title: Création de branches dans un pipeline Azure Data Factory
 description: Découvrez comment contrôler le flux de données dans Azure Data Factory à l’aide d’activités de création de branches et de chaînage.
 services: data-factory
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
 ms.reviewer: maghan
 ms.service: data-factory
@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-lt-2019; seo-dt-2019
 ms.date: 9/27/2019
-ms.openlocfilehash: 77fa8f72d4d4d929d15859fde71f112de1ddd14e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ab7d17ee61d733483b6d3573e9bd69b1628c7940
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81418726"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496940"
 ---
 # <a name="branching-and-chaining-activities-in-a-data-factory-pipeline"></a>Activités de création de branches et chaînage dans un pipeline Azure Data Factory
 
@@ -26,7 +26,7 @@ Dans ce tutoriel, vous allez créer un pipeline Data Factory qui présente certa
 
 Ce graphique fournit une vue d’ensemble du scénario :
 
-![Vue d’ensemble](media/tutorial-control-flow/overview.png)
+![Le diagramme montre le Stockage Blob Azure qui est la cible d’une copie, laquelle, en cas de réussite, envoie un e-mail avec des détails ou, en cas d’échec, envoie un e-mail avec les détails de l’erreur.](media/tutorial-control-flow/overview.png)
 
 Ce tutoriel explique comment effectuer les tâches suivantes :
 
@@ -40,7 +40,7 @@ Ce tutoriel explique comment effectuer les tâches suivantes :
 > * Démarrer une exécution de pipeline
 > * Surveiller les exécutions de pipeline et d’activité
 
-Ce didacticiel utilise le kit .NET SDK. Vous pouvez utiliser d’autres mécanismes pour interagir avec Azure Data Factory. Pour obtenir des guides de démarrage rapide Data Factory, consultez [Démarrages en 5 minutes](/azure/data-factory/quickstart-create-data-factory-portal).
+Ce didacticiel utilise le kit .NET SDK. Vous pouvez utiliser d’autres mécanismes pour interagir avec Azure Data Factory. Pour obtenir des guides de démarrage rapide Data Factory, consultez [Démarrages en 5 minutes](./quickstart-create-data-factory-portal.md).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
@@ -48,13 +48,13 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 * Compte Stockage Azure. Vous utilisez le stockage d’objets blob comme magasin de données source. Si vous ne possédez pas de compte de stockage Azure, voir [Création d’un compte de stockage](../storage/common/storage-account-create.md).
 * Azure Storage Explorer. Pour installer cet outil, consultez [Explorateur Stockage Azure](https://storageexplorer.com/).
-* Azure SQL Database. Vous utilisez la base de données comme magasin de données réceptrice. Si vous n’avez pas de base de données SQL, consultez [Créer une base de données Azure SQL](../sql-database/sql-database-get-started-portal.md).
+* Azure SQL Database. Vous utilisez la base de données comme magasin de données réceptrice. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md).
 * Visual Studio. Cet article utilise Visual Studio 2019.
 * Kit de développement logiciel Microsoft Azure SDK pour .NET. Téléchargez et installez [Azure SDK pour .NET](https://azure.microsoft.com/downloads/).
 
 Pour obtenir la liste des régions Azure dans lesquelles Data Factory est actuellement disponible, consultez [Disponibilité des produits par région](https://azure.microsoft.com/global-infrastructure/services/). Les magasins de données et les calculs peuvent se trouver dans d’autres régions. Les magasins incluent Stockage Azure et Azure SQL Database. Les calculs incluent HDInsight, utilisé par Data Factory.
 
-Créez une application comme décrit dans [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application). Affectez l’application au rôle **Contributeur** en suivant les instructions dans le même article. Vous aurez besoin de plusieurs valeurs pour les parties ultérieures de ce tutoriel, telles qu’**ID d’application (client)** et **ID de l’annuaire (locataire)** .
+Créez une application comme décrit dans [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Affectez l’application au rôle **Contributeur** en suivant les instructions dans le même article. Vous aurez besoin de plusieurs valeurs pour les parties ultérieures de ce tutoriel, telles qu’**ID d’application (client)** et **ID de l’annuaire (locataire)** .
 
 ### <a name="create-a-blob-table"></a>Créer une table d’objets blob
 
@@ -610,7 +610,7 @@ Creating linked service AzureStorageLinkedService...
 {
   "type": "AzureStorage",
   "typeProperties": {
-    "connectionString": "DefaultEndpointsProtocol=https;AccountName=***;AccountKey=***"
+    "connectionString": "DefaultEndpointsProtocol=https;AccountName=***;AccountKey=**_"
   }
 }
 Creating dataset SourceStorageDataset...
@@ -753,7 +753,7 @@ Press any key to exit...
 Vous avez accompli les tâches suivantes dans le cadre de ce tutoriel :
 
 > [!div class="checklist"]
-> * Créer une fabrique de données
+> _ Créer une fabrique de données
 > * Créer un service lié Stockage Azure
 > * Créer un jeu de données d’objet blob Azure
 > * Créer un pipeline qui contient une activité de copie et une activité web

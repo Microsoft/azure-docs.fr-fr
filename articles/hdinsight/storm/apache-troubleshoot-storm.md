@@ -9,12 +9,12 @@ ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 11/08/2019
 ms.custom: seodec18
-ms.openlocfilehash: b51b2c21fd9256c93f6947386a48336af2b75d88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fc08adb2f71c49fad3c8574e9cfd5315f13d7f44
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233453"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95982260"
 ---
 # <a name="troubleshoot-apache-storm-by-using-azure-hdinsight"></a>Résolution de problèmes Apache Storm à l’aide d’Azure HDInsight
 
@@ -95,7 +95,7 @@ Les fichiers binaires Storm de la pile HDP actuelle se trouvent à l’emplaceme
 
 Il peut y avoir plusieurs fichiers binaires pour des versions spécifiques de HDP à l’emplacement /usr/hdp (par exemple, `/usr/hdp/2.5.0.1233/storm`). Un lien symbolique avec le dossier `/usr/hdp/current/storm-client` est créé vers la version la plus récente exécutée sur le cluster.
 
-Pour plus d’informations, consultez [Se connecter à HDInsight (Hadoop) à l’aide de SSH](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-linux-use-ssh-unix) et [Apache Storm](https://storm.apache.org/).
+Pour plus d’informations, consultez [Se connecter à HDInsight (Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md) et [Apache Storm](https://storm.apache.org/).
 
 ## <a name="how-do-i-determine-the-deployment-topology-of-a-storm-cluster"></a>Comment déterminer la topologie de déploiement d’un cluster Storm ?
 
@@ -141,7 +141,7 @@ Pour plus d’informations sur l’utilisation de fichiers .jar de spout EventHu
 
 ### <a name="c-based-topology-mono-on-hdinsight-34-linux-storm-clusters"></a>Topologie basée sur C# (Mono sur les clusters Storm HDInsight 3.4+ Linux)
 
-[Traitement des événements Azure Event Hubs avec Apache Storm sur HDInsight (C#)](https://docs.microsoft.com/azure/hdinsight/hdinsight-storm-develop-csharp-event-hub-topology)
+[Traitement des événements Azure Event Hubs avec Apache Storm sur HDInsight (C#)](./apache-storm-develop-csharp-event-hub-topology.md)
 
 ### <a name="latest-apache-storm-event-hub-spout-binaries-for-hdinsight-35-linux-storm-clusters"></a>Fichiers binaires de spout EventHub Apache Storm les plus récents pour les clusters Storm HDInsight 3.5+ Linux
 
@@ -186,4 +186,4 @@ Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à 
 
 - Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
 
-- Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+- Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).

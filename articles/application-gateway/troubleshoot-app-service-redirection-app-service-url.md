@@ -5,15 +5,15 @@ description: Cet article fournit des informations sur la façon de résoudre les
 services: application-gateway
 author: abshamsft
 ms.service: application-gateway
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 11/14/2019
 ms.author: absha
-ms.openlocfilehash: 961ed17bcef19b445c2546a557725bb6bd8653cb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1cc7df755198461643703cac988c8c31f2ac25db
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80293536"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96182884"
 ---
 # <a name="troubleshoot-app-service-issues-in-application-gateway"></a>Résoudre les problèmes d’App Service dans Application Gateway
 
@@ -23,9 +23,8 @@ Découvrez comment diagnostiquer et résoudre les problèmes que vous pouvez ren
 
 Cet article explique comment résoudre les problèmes suivants :
 
-> [!div class="checklist"]
-> * L’URL d’App Service est exposée dans le navigateur en cas de redirection.
-> * Le domaine du cookie ARRAffinity d’App Service est défini sur nom d’hôte d’App Service (example.azurewebsites.net) au lieu de l’hôte d’origine.
+* L’URL d’App Service est exposée dans le navigateur en cas de redirection.
+* Le domaine du cookie ARRAffinity d’App Service est défini sur nom d’hôte d’App Service (example.azurewebsites.net) au lieu de l’hôte d’origine.
 
 Quand une application back-end envoie une réponse de redirection, vous pouvez souhaiter rediriger le client vers une URL différente de celle spécifiée par l’application back-end. Cela peut être le cas quand un service d’application est hébergé derrière une passerelle d’application et demande au client d’effectuer une redirection vers son chemin relatif. C’est, par exemple, le cas d’une redirection de contoso.azurewebsites.net/path1 vers contoso.azurewebsites.net/path2. 
 
@@ -81,10 +80,10 @@ Dans l’exemple précédent, notez que l’en-tête de réponse a un code d’�
 
 ## <a name="solution-rewrite-the-location-header"></a>Solution : Réécrire l’en-tête d’emplacement
 
-Définissez le nom d’hôte de l’en-tête d’emplacement sur le nom de domaine de la passerelle d’application. Pour ce faire, créez une [règle de réécriture](https://docs.microsoft.com/azure/application-gateway/rewrite-http-headers) avec une condition qui détermine si l’en-tête d’emplacement de la réponse contient azurewebsites.net. Elle doit aussi exécuter une action de façon à réécrire l’en-tête d’emplacement et lui attribuer le nom d’hôte de la passerelle d’application. Pour plus d’informations, voir les instructions de [réécriture de l’en-tête d’emplacement](https://docs.microsoft.com/azure/application-gateway/rewrite-http-headers#modify-a-redirection-url).
+Définissez le nom d’hôte de l’en-tête d’emplacement sur le nom de domaine de la passerelle d’application. Pour ce faire, créez une [règle de réécriture](./rewrite-http-headers.md) avec une condition qui détermine si l’en-tête d’emplacement de la réponse contient azurewebsites.net. Elle doit aussi exécuter une action de façon à réécrire l’en-tête d’emplacement et lui attribuer le nom d’hôte de la passerelle d’application. Pour plus d’informations, voir les instructions de [réécriture de l’en-tête d’emplacement](./rewrite-http-headers.md#modify-a-redirection-url).
 
 > [!NOTE]
-> La prise en charge de la réécriture d’en-tête HTTP n’est disponible que pour les [références (SKU) Standard_v2 et WAF_v2](https://docs.microsoft.com/azure/application-gateway/application-gateway-autoscaling-zone-redundant) d’Application Gateway. Si vous utilisez la référence (SKU) v1, nous vous recommandons de [migrer de v1 vers v2](https://docs.microsoft.com/azure/application-gateway/migrate-v1-v2). Vous pouvez utiliser la réécriture et d’autres [fonctionnalités avancées](https://docs.microsoft.com/azure/application-gateway/application-gateway-autoscaling-zone-redundant#feature-comparison-between-v1-sku-and-v2-sku) disponibles avec la référence (SKU) v2.
+> La prise en charge de la réécriture d’en-tête HTTP n’est disponible que pour les [références (SKU) Standard_v2 et WAF_v2](./application-gateway-autoscaling-zone-redundant.md) d’Application Gateway. Si vous utilisez la référence (SKU) v1, nous vous recommandons de [migrer de v1 vers v2](./migrate-v1-v2.md). Vous pouvez utiliser la réécriture et d’autres [fonctionnalités avancées](./application-gateway-autoscaling-zone-redundant.md#feature-comparison-between-v1-sku-and-v2-sku) disponibles avec la référence (SKU) v2.
 
 ## <a name="alternate-solution-use-a-custom-domain-name"></a>Autre solution : Ajouter un nom de domaine personnalisé
 
@@ -94,7 +93,7 @@ L’App Service effectue ensuite la redirection (le cas échéant) sur le même 
 
 Vous devez posséder un domaine personnalisé et procéder comme suit :
 
-- Enregistrez le domaine dans la liste de domaines personnalisés de l’App Service. Vous devez disposer d’un enregistrement CNAME dans votre domaine personnalisé qui pointe vers le nom de domaine complet de l’App Service. Pour plus d’informations, consultez [Mapper un nom DNS personnalisé existant à Azure App Service](https://docs.microsoft.com//azure/app-service/app-service-web-tutorial-custom-domain).
+- Enregistrez le domaine dans la liste de domaines personnalisés de l’App Service. Vous devez disposer d’un enregistrement CNAME dans votre domaine personnalisé qui pointe vers le nom de domaine complet de l’App Service. Pour plus d’informations, consultez [Mapper un nom DNS personnalisé existant à Azure App Service](../app-service/app-service-web-tutorial-custom-domain.md).
 
     ![Liste de domaines personnalisés d’App Service](./media/troubleshoot-app-service-redirection-app-service-url/appservice-2.png)
 

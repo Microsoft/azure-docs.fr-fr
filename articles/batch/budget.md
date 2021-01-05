@@ -3,12 +3,12 @@ title: Analyse des coûts et budget
 description: Découvrez comment obtenir une analyse des coûts et définir un budget pour les ressources de calcul et licences logicielles sous-jacentes utilisées dans le cadre de l’exécution de vos charges de travail Batch.
 ms.topic: how-to
 ms.date: 07/19/2019
-ms.openlocfilehash: 13c8cc508a4940b5e21570104527c40988879919
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 50ca1ecfd0a973ff39dabfcb62175ce820d0a0d6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83725769"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88654240"
 ---
 # <a name="cost-analysis-and-budgets-for-azure-batch"></a>Analyse des coûts et budgets pour Azure Batch
 
@@ -68,7 +68,7 @@ Pour en savoir plus sur la configuration des machines virtuelles de faible prior
 
 ### <a name="virtual-machine-os-disk-type"></a>Type de disque du système d'exploitation de la machine virtuelle
 
-Il existe plusieurs [types de disque du système d'exploitation de la machine virtuelle](../virtual-machines/windows/disks-types.md). La plupart des machines virtuelles ont des tailles qui prennent en charge le stockage Premium et Standard. Lorsqu'une machine virtuelle de taille ‘s’ est sélectionnée pour un pool, Batch configure des disques SSD Premium pour le système d’exploitation. Lorsque la taille de machine virtuelle ‘non s’ est sélectionnée, un disque dur standard (moins cher) est utilisé. Par exemple, les disques de système d’exploitation SSD Premium sont utilisés pour `Standard_D2s_v3`, et les disques de système d’exploitation de type standard sont utilisés pour `Standard_D2_v3`.
+Il existe plusieurs [types de disque du système d'exploitation de la machine virtuelle](../virtual-machines/disks-types.md). La plupart des machines virtuelles ont des tailles qui prennent en charge le stockage Premium et Standard. Lorsqu'une machine virtuelle de taille ‘s’ est sélectionnée pour un pool, Batch configure des disques SSD Premium pour le système d’exploitation. Lorsque la taille de machine virtuelle ‘non s’ est sélectionnée, un disque dur standard (moins cher) est utilisé. Par exemple, les disques de système d’exploitation SSD Premium sont utilisés pour `Standard_D2s_v3`, et les disques de système d’exploitation de type standard sont utilisés pour `Standard_D2_v3`.
 
 Les disques de système d’exploitation SSD Premium sont plus chers, mais plus performants, et les machines virtuelles équipées de disques Premium peuvent démarrer un peu plus rapidement que celles équipées de disques de système d’exploitation de type standard. Avec Batch, le disque du système d’exploitation est généralement moins utilisé car les applications et les fichiers de tâches sont situés sur le disque SSD temporaire des machines virtuelles. Par conséquent, dans la plupart des cas, il n'est pas nécessaire de payer le surcoût d’un disque SSD provisionné lorsqu'une taille de machine virtuelle ‘s’ est spécifiée.
 

@@ -10,18 +10,18 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 05/01/2020
 ms.author: wellsi
-ms.openlocfilehash: a2652bed6c8e7dec0a6fe8f9471793c3873646bf
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: cf0580c96f5bf78f0444b2bb39088f2a417fd658
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82781744"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95025059"
 ---
 # <a name="how-to-configure-a-microphone-array"></a>Guide pratique pour configurer un réseau de microphones
 
-Dans cet article, vous allez apprendre à configurer un [réseau de microphones](https://aka.ms/sdsdk-microphone). Cela inclut la définition de l’angle de travail et le mode de sélection du microphone utilisé pour le SDK Speech Devices.
+Dans cet article, vous allez apprendre à configurer un [réseau de microphones](./speech-devices-sdk-microphone.md). Cela inclut la définition de l’angle de travail et le mode de sélection du microphone utilisé pour le SDK Speech Devices.
 
-Le fonctionnement du SDK Speech Devices est optimal avec un réseau de microphones conçu conformément à [nos instructions](https://aka.ms/sdsdk-microphone). La configuration d’un réseau de microphones peut être fournie par le système d’exploitation ou obtenue par le biais de l’une des méthodes suivantes.
+Le fonctionnement du SDK Speech Devices est optimal avec un réseau de microphones conçu conformément à [nos instructions](./speech-devices-sdk-microphone.md). La configuration d’un réseau de microphones peut être fournie par le système d’exploitation ou obtenue par le biais de l’une des méthodes suivantes.
 
 Le SDK Speech Devices prenait initialement en charge les réseaux de microphones en sélectionnant une configuration parmi un ensemble fixe de configurations.
 
@@ -49,7 +49,7 @@ Si un réseau de microphones est spécifié à l’aide de `AudioConfig::FromMic
 Dans le SDK Speech Devices, la pile audio Microsoft prend uniquement en charge le sous-échantillonnage des taux d’échantillonnage qui sont des multiples entiers de 16 KHz. De plus, les formats suivants sont pris en charge : valeur float IEEE 32 bits avec primauté des octets de poids faible (Little Endian), entier signé 32 bits avec primauté des octets de poids faible (Little Endian), entier signé 24 bits avec primauté des octets de poids faible (Little Endian), entier signé 16 bits avec primauté des octets de poids faible (Little Endian) et entier signé 8 bits avec primauté des octets de poids faible (Little Endian).
 
 ## <a name="android"></a>Android
-Actuellement, seul [Roobo v1](speech-devices-sdk-android-quickstart.md) est pris en charge par le SDK Speech Devices. Le comportement est identique à celui des versions précédentes, excepté que maintenant, la propriété `MicArrayGeometryConfigFile` peut être utilisée pour spécifier le fichier JSON contenant la plage de formation de faisceaux.
+Actuellement, seul [Roobo v1](./speech-devices-sdk-quickstart.md?pivots=platform-android%253fpivots%253dplatform-android) est pris en charge par le SDK Speech Devices. Le comportement est identique à celui des versions précédentes, excepté que maintenant, la propriété `MicArrayGeometryConfigFile` peut être utilisée pour spécifier le fichier JSON contenant la plage de formation de faisceaux.
 
 ## <a name="microphone-array-configuration-json"></a>Fichier JSON de configuration du réseau de microphones
 

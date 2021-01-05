@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Flock pour l’attribution automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur Flock.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: fb48deae-4653-448a-ba2f-90258edab3a7
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/30/2019
 ms.author: Zhchia
-ms.openlocfilehash: cd7aae05b064657c7b9072402f4bc4d4d7fef7a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 01c3f6429d2a5c8443ac128d763033dc8c53cbc7
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057858"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94359406"
 ---
 # <a name="tutorial-configure-flock-for-automatic-user-provisioning"></a>Tutoriel : Configurer Flock pour l’attribution automatique d’utilisateurs
 
@@ -58,15 +54,15 @@ Avant de configurer Flock pour l’approvisionnement automatique d’utilisateur
 
 1. Connectez-vous à [Flock](https://web.flock.com/?). Cliquez sur **Icône Paramètres** > **Gérer votre équipe**.
 
-    ![Flock](media/flock-provisioning-tutorial/icon.png)
+    :::image type="content" source="media/flock-provisioning-tutorial/icon.png" alt-text="Capture d’écran du site web Flock. L’icône des paramètres est mise en surbrillance et son menu contextuel est visible. Dans ce menu, Gérer votre équipe est mis en surbrillance." border="false":::
 
 2. Sélectionnez **Authentification et approvisionnement**.
 
-    ![Flock](media/Flock-provisioning-tutorial/auth.png)
+    :::image type="content" source="media/Flock-provisioning-tutorial/auth.png" alt-text="Capture d’écran d’un menu sur le site web Flock. L’élément Authentification et provisionnement est mis en surbrillance." border="false":::
 
-3. Copiez le jeton d’API (**API Token**). Vous devrez entrer ces valeurs dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application Flock dans le portail Microsoft Azure.
+3. Copiez le jeton d’API ( **API Token** ). Vous devrez entrer ces valeurs dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application Flock dans le portail Microsoft Azure.
 
-    ![Flock](media/Flock-provisioning-tutorial/provisioning.png)
+    :::image type="content" source="media/Flock-provisioning-tutorial/provisioning.png" alt-text="Capture d’écran d’un onglet Provisionnement sur le site web Flock. Sous Jeton d’API, une valeur est mise en surbrillance. En regard du jeton se trouve un bouton Copier le jeton." border="false":::
 
 
 ## <a name="add-flock--from-the-gallery"></a>Ajouter Flock à partir de la galerie
@@ -79,7 +75,7 @@ Avant de configurer Flock pour le provisionnement automatique d’utilisateurs a
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -87,7 +83,7 @@ Avant de configurer Flock pour le provisionnement automatique d’utilisateurs a
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, entrez **Flock**, sélectionnez **Flock** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, entrez **Flock** , sélectionnez **Flock** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
     ![Flock dans la liste des résultats](common/search-new-app.png)
 
@@ -100,7 +96,7 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 ### <a name="to-configure-automatic-user-provisioning-for-flock--in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour Flock dans Azure AD :
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise**, puis **Toutes les applications**.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Sélectionnez **Applications d’entreprise** , puis **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -110,27 +106,27 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section Informations d’identification de l’administrateur, entrez respectivement les valeurs de `https://api.flock-staging.com/v2/scim` et du **Jeton d’API** récupérées précédemment dans les champs **URL de locataire** et **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Flock. Si la connexion échoue, vérifiez que votre compte Flock dispose des autorisations d’administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
-6. Dans le champ **E-mail de notification**, entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
+6. Dans le champ **E-mail de notification** , entrez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case **Envoyer une notification par e-mail en cas de défaillance**.
 
     ![E-mail de notification](common/provisioning-notification-email.png)
 
 7. Cliquez sur **Enregistrer**.
 
-8. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Flock**.
+8. Dans la section **Mappages** , sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Flock**.
 
     ![Mappages d’utilisateurs Flock](media/flock-provisioning-tutorial/usermapping.png)
 
-9. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Flock. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateurs dans Flock pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
+9. Dans la section **Mappages des attributs** , passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Flock. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateurs dans Flock pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
     ![Attributs utilisateur Flock](media/flock-provisioning-tutorial/userattribute.png)
 

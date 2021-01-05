@@ -9,12 +9,12 @@ ms.subservice: autoscale
 ms.date: 04/18/2019
 ms.reviewer: avverma
 ms.custom: avverma
-ms.openlocfilehash: 69c613de02b9601966cae2d36c13428ca6c7becc
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 37602f7b9a8669ce0e8db984f7f7617cffdd431c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83120995"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87029278"
 ---
 # <a name="vertical-autoscale-with-virtual-machine-scale-sets"></a>Mise à l’échelle verticale avec des groupes de machines virtuelles identiques
 
@@ -39,7 +39,7 @@ Vous pouvez configurer la mise à l’échelle verticale pour qu’elle se décl
 > [!NOTE]
 > En raison de la taille de la première machine virtuelle, les différentes tailles de mise à l’échelle peuvent être limitées en fonction de la disponibilité des autres tailles dans le cluster dans lequel la machine virtuelle actuelle est déployée. Dans les runbooks publiés et utilisés dans cet article, nous nous chargeons de ce cas et appliquons uniquement la mise à l’échelle dans les paires de machines virtuelles suivantes. Cela signifie qu’une machine virtuelle Standard_D1v2 ne peut pas de suite être convertie en Standard_G5 ou Basic_A0. Le scale-up/scale-down des tailles de machines virtuelles contraintes n’est pas pris en charge non plus. Vous pouvez choisir d’effectuer une mise à l’échelle entre les paires de tailles suivantes :
 > 
-> | Paires de mise à l’échelle des machines virtuelles |  |
+> | Membre d’une paire de mise à l’échelle des tailles de machines virtuelles | Membre |
 > | --- | --- |
 > | Basic_A0 |Basic_A4 |
 > | Standard_A0 |Standard_A4 |
@@ -89,7 +89,7 @@ Vous pouvez configurer la mise à l’échelle verticale pour qu’elle se décl
 ## <a name="create-an-azure-automation-account-with-run-as-capability"></a>Créer un compte Azure Automation avec fonctionnalité d’identification
 La première chose à faire est de créer un compte Azure Automation qui héberge les runbooks utilisés pour mettre à l’échelle les instances de groupe de machines virtuelles identiques. Depuis peu, [Azure Automation](https://azure.microsoft.com/services/automation/) dispose de la fonctionnalité « Compte d’identification » qui facilite la configuration du principal du service en vue de l’exécution automatique de runbooks pour le compte d’un utilisateur. Pour plus d'informations, consultez les pages suivantes :
 
-* [Authentifier des Runbooks avec un compte d’identification Azure](../automation/automation-sec-configure-azure-runas-account.md)
+* [Authentifier des Runbooks avec un compte d’identification Azure](../automation/manage-runas-account.md)
 
 ## <a name="import-azure-automation-vertical-scale-runbooks-into-your-subscription"></a>Importer les runbooks de mise à l’échelle verticale Azure Automation dans votre abonnement
 
@@ -118,7 +118,7 @@ Une fois que vous avez importé les runbooks, ajoutez un webhook au runbook afin
 
 ## <a name="add-an-alert-to-your-virtual-machine-scale-set"></a>Ajouter une alerte à votre groupe de machines virtuelles identiques
 
-Voici un script PowerShell qui décrit comment ajouter une alerte dans un groupe de machines virtuelles identiques. Pour obtenir le nom de la métrique déclenchant l’alerte, consultez [Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor](../azure-monitor/platform/autoscale-common-metrics.md).
+Voici un script PowerShell qui décrit comment ajouter une alerte dans un groupe de machines virtuelles identiques. Pour obtenir le nom de la métrique déclenchant l’alerte, voir l’article [Métriques courantes de la mise à l’échelle automatique Azure Monitor](../azure-monitor/platform/autoscale-common-metrics.md).
 
 ```powershell
 $actionEmail = New-AzAlertRuleEmail -CustomEmail user@contoso.com
@@ -153,8 +153,8 @@ Add-AzMetricAlertRule  -Name  $alertName `
 
 Pour plus d’informations sur la création d’alertes, consultez les articles suivants :
 
-* [Exemples de démarrage rapide Azure Monitor PowerShell](../azure-monitor/platform/powershell-quickstart-samples.md)
-* [Exemples de démarrage rapide de l’interface de ligne de commande multiplateforme Azure Monitor](../azure-monitor/platform/cli-samples.md)
+* [Exemples PowerShell Azure Monitor](../azure-monitor/samples/powershell-samples.md)
+* [Exemples CLI multiplateforme Azure Monitor](../azure-monitor/samples/cli-samples.md)
 
 ## <a name="summary"></a>Résumé
 

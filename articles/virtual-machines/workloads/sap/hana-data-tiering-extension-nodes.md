@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 09/04/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: c3553ac9704ac26d0bdaae0f93b89f41a87ac716
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9a1fc1c3b332d033e453db11ce4451cd626c4217
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77617158"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967803"
 ---
 # <a name="use-sap-hana-data-tiering-and-extension-nodes"></a>Utiliser une hiérarchisation des données et des nœuds d’extension SAP HANA
 

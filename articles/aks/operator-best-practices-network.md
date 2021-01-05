@@ -5,12 +5,12 @@ description: Découvrez les meilleures pratiques de l’opérateur pour les ress
 services: container-service
 ms.topic: conceptual
 ms.date: 12/10/2018
-ms.openlocfilehash: 560a832821f5e5ff2fbbc2d66252945951d69511
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 9ec6423a853aacbc8a03cc5472bf1a95a5623b1f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208055"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89482723"
 ---
 # <a name="best-practices-for-network-connectivity-and-security-in-azure-kubernetes-service-aks"></a>Meilleures pratiques pour la connectivité réseau et la sécurité dans Azure Kubernetes Service (AKS)
 
@@ -31,13 +31,15 @@ Cet article porte sur les meilleures pratiques en matière de connectivité rés
 Les réseaux virtuels assurent une connectivité de base pour les nœuds AKS et les clients qui accèdent à vos applications. Il existe deux façons différentes de déployer des clusters AKS dans des réseaux virtuels :
 
 * **Mise en réseau Kubenet** : Azure gère les ressources de réseau virtuel pendant le déploiement du cluster et utilise le plug-in Kubernetes [Kubenet][kubenet].
-* **Mise en réseau Azure CNI** : le déploiement se fait dans un réseau virtuel existant, avec le plug-in Kubernetes [Azure Container Networking Interface (CNI)][cni-networking]. Les pods reçoivent des adresses IP individuelles qui peuvent communiquer avec d’autres services réseau ou ressources locales.
+* **Mise en réseau Azure CNI** : effectue le déploiement dans un réseau virtuel, et utilise le plug-in Kubernetes [Azure Container Networking Interface (CNI)][cni-networking]. Les pods reçoivent des adresses IP individuelles qui peuvent communiquer avec d’autres services réseau ou ressources locales.
 
 L’interface Azure CNI est un protocole indépendant du fournisseur qui permet au runtime du conteneur d’adresser des demandes à un fournisseur de réseau. Elle affecte des adresses IP aux pods et aux nœuds et offre des fonctionnalités de Gestion des adresses IP (IPAM) pour la connexion à des réseaux virtuels Azure existants. Chaque ressource de type nœud ou pod reçoit une adresse IP dans le réseau virtuel Azure, sans qu’aucun routage supplémentaire soit nécessaire pour communiquer avec d’autres ressources ou services.
 
 ![Diagramme représentant 2 nœuds avec des ponts les reliant chacun à un réseau virtuel Azure](media/operator-best-practices-network/advanced-networking-diagram.png)
 
-Pour la plupart des déploiements de production, une mise en réseau Azure CNI est recommandée. Ce modèle de réseau permet de séparer le contrôle et la gestion des ressources. Du point de vue de la sécurité, il est souvent préférable que différentes équipes gèrent et sécurisent ces ressources. Une mise en réseau Azure CNI vous permet de vous connecter directement à des ressources Azure existantes, à des ressources locales ou à d’autres services avec les adresses IP assignées à chacun des pods.
+Pour les déploiements de production, kubenet et Azure CNI sont tous deux des options valides.
+
+Un des avantages notables de la mise en réseau Azure CNI pour la production est que le modèle réseau permet de séparer le contrôle et la gestion des ressources. Du point de vue de la sécurité, il est souvent préférable que différentes équipes gèrent et sécurisent ces ressources. Une mise en réseau Azure CNI vous permet de vous connecter directement à des ressources Azure existantes, à des ressources locales ou à d’autres services avec les adresses IP assignées à chacun des pods.
 
 Avec une mise en réseau Azure CNI, la ressource de réseau virtuel se trouve dans un groupe de ressources distinct du cluster AKS. Déléguez des permissions au principal de service AKS pour qu’il puisse accéder à ces ressources et les gérer. Le principal du service utilisé par le cluster AKS doit disposer au moins des autorisations [Contributeur de réseau](../role-based-access-control/built-in-roles.md#network-contributor) sur le sous-réseau de votre réseau virtuel. Si vous souhaitez définir un [rôle personnalisé](../role-based-access-control/custom-roles.md) au lieu d’utiliser le rôle de contributeur de réseau intégré, les autorisations suivantes sont nécessaires :
   * `Microsoft.Network/virtualNetworks/subnets/join/action`

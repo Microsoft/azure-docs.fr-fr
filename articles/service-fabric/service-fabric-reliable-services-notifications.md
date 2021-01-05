@@ -5,12 +5,13 @@ author: mcoskun
 ms.topic: conceptual
 ms.date: 6/29/2017
 ms.author: mcoskun
-ms.openlocfilehash: 1f3239ea1da252ccd84c6572b562756c8fd1677d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4a336daf9bd7400d049233a22a04d64d561b42c9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639562"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89021950"
 ---
 # <a name="reliable-services-notifications"></a>Notifications Reliable Services
 Les notifications permettent aux clients de suivre les modifications apportées à un objet qui les intéresse. Deux types d’objets prennent en charge les notifications : le *Gestionnaire d’état fiable* et le *Dictionnaire fiable*.
@@ -210,5 +211,4 @@ Voici quelques points à retenir :
 * [Collections fiables](service-fabric-work-with-reliable-collections.md)
 * [Démarrage rapide de Reliable Services](service-fabric-reliable-services-quick-start.md)
 * [Sauvegarde et restauration de Reliable Services (récupération d’urgence)](service-fabric-reliable-services-backup-restore.md)
-* [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
-
+* [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)

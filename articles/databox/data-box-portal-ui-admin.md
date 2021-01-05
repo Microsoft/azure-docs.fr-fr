@@ -1,6 +1,6 @@
 ---
 title: Guide d’administration du portail Azure Data Box Disk | Microsoft Docs
-description: Décrit comment utiliser le portail Azure pour administrer votre Azure Data Box.
+description: Découvrez comment gérer Data Box Disk à l’aide du portail Azure. Gérez les commandes, gérez les disques et suivez l’état d’une commande à mesure qu’elle progresse.
 services: databox
 author: alkohli
 ms.service: databox
@@ -8,12 +8,12 @@ ms.subservice: disk
 ms.topic: how-to
 ms.date: 01/09/2019
 ms.author: alkohli
-ms.openlocfilehash: 01e3ed9f94b575aae4ce0ed12eb63e3cf40d99ce
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 538a650c6063422f89c8ed3d1753981a293693b7
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229773"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94338084"
 ---
 # <a name="use-azure-portal-to-administer-your-data-box-disk"></a>Utiliser le portail Azure pour administrer votre Data Box Disk
 
@@ -29,15 +29,15 @@ Pour annuler une commande, procédez comme suit.
 
 1.  Accédez à **Vue d’ensemble > Annuler**. 
 
-    ![Annulation de commande 1](media/data-box-portal-ui-admin/cancel-order1.png)
+    ![Commande Annuler sous l’onglet Vue d’ensemble d’une commande](media/data-box-portal-ui-admin/portal-ui-admin-cancel-command.png)
 
 2.  Indiquez un motif d’annulation de la commande.  
 
-    ![Annulation de commande 2](media/data-box-portal-ui-admin/cancel-order2.png)
+    ![Raison de l’annulation d’une commande](media/data-box-portal-ui-admin/portal-ui-admin-cancel-order-reason.png)
 
 3.  Une fois que la commande est annulée, le portail met à jour l’état de la commande et l’affiche en tant que **Annulée**.
 
-    ![Annulation de commande 3](media/data-box-portal-ui-admin/cancel-order3.png)
+    ![Commande annulée](media/data-box-portal-ui-admin/portal-ui-admin-canceled-order.png)
 
 Vous ne recevez pas de notification par e-mail lorsque la commande est annulée.
 
@@ -49,13 +49,13 @@ Effectuez les opérations suivantes pour cloner une commande.
 
 1.  Accédez à **Vue d’ensemble > Cloner**. 
 
-    ![Clonage de commande 1](media/data-box-portal-ui-admin/clone-order1.png)
+    ![Commande Cloner sous l’onglet Vue d’ensemble d’une commande](media/data-box-portal-ui-admin/portal-ui-admin-clone-command.png)
 
 2.  Tous les détails de la commande restent inchangés. Le nom de la commande est le nom de la commande d’origine, suivi de *-Clone*. Cochez la case pour confirmer que vous avez lu les informations sur la confidentialité des données. Cliquez sur **Créer**.    
 
 Le clone est créé en quelques minutes et le portail est actualisé pour afficher la nouvelle commande.
 
-[![Clonage de commande 3](media/data-box-portal-ui-admin/clone-order3.png)](media/data-box-portal-ui-admin/clone-order3.png#lightbox) 
+[![Commande clonée](media/data-box-portal-ui-admin/portal-ui-admin-cloned-order.png)](media/data-box-portal-ui-admin/portal-ui-admin-cloned-order.png#lightbox) 
 
 ## <a name="delete-order"></a>Supprimer une commande
 
@@ -65,15 +65,15 @@ Vous pouvez uniquement supprimer des commandes qui sont terminées ou annulées.
 
 1. Sélectionnez **Toutes les ressources**. Recherchez votre commande.
 
-    ![Rechercher les commandes de disques Data Box](media/data-box-portal-ui-admin/search-data-box-disk-orders.png)
+    ![Rechercher des commandes](media/data-box-portal-ui-admin/portal-ui-admin-search-data-box-disk-orders.png)
 
 2. Cliquez sur la commande que vous souhaitez supprimer et accédez à **Vue d’ensemble**. Dans la barre de commandes, cliquez sur **Supprimer**.
 
-    ![Suppression de commande de disque Data Box 1](media/data-box-portal-ui-admin/delete-order1.png)
+    ![Supprimer une commande](media/data-box-portal-ui-admin/portal-ui-admin-delete-command.png)
 
 3. Entrez le nom de la commande lorsque vous êtes invité à confirmer la suppression de la commande. Cliquez sur **Supprimer**.
 
-     ![Suppression de commande de disque Data Box 2](media/data-box-portal-ui-admin/delete-order2.png)
+     ![Confirmer la suppression d’une commande](media/data-box-portal-ui-admin/portal-ui-admin-confirm-deletion.png)
 
 
 ## <a name="download-shipping-label"></a>Télécharger une étiquette d’expédition
@@ -83,11 +83,11 @@ Vous devrez peut-être télécharger l’étiquette d’expédition si l’étiq
 Procédez comme suit pour télécharger une étiquette d’expédition.
 1.  Accédez à **Vue d’ensemble > Télécharger une étiquette d’expédition**. Cette option est disponible uniquement une fois que le disque a été expédié. 
 
-    ![Télécharger une étiquette d’expédition](media/data-box-portal-ui-admin/download-shipping-label.png)
+    ![Télécharger une étiquette d’expédition](media/data-box-portal-ui-admin/portal-ui-admin-download-shipping-label.png)
 
 2.  L’étiquette de retour suivante est alors téléchargée. Enregistrez l’étiquette, imprimez-la et collez-la sur le colis de retour.
 
-    ![Exemple d’étiquette d’expédition](media/data-box-portal-ui-admin/example-shipping-label.png)
+    ![Exemple d’étiquette d’expédition](media/data-box-portal-ui-admin/portal-ui-admin-example-shipping-label.png)
 
 ## <a name="edit-shipping-address"></a>Modifier l’adresse de livraison
 
@@ -97,11 +97,11 @@ Pour modifier la commande, procédez comme suit.
 
 1. Accédez à **Détails de la commande > Modifier l’adresse de livraison**.
 
-    ![Modification de l’adresse de livraison 1](media/data-box-portal-ui-admin/edit-shipping-address1.png)
+    ![Commande Modifier l’adresse d’expédition dans Détails de la commande](media/data-box-portal-ui-admin/portal-ui-admin-edit-shipping-address-command.png)
 
 2. Vous pouvez maintenant modifier l’adresse de livraison et enregistrer les modifications.
 
-    ![Modification de l’adresse de livraison 2](media/data-box-portal-ui-admin/edit-shipping-address2.png)
+    ![Boîte de dialogue Modifier l’adresse d’expédition](media/data-box-portal-ui-admin/portal-ui-admin-edit-shipping-address-dbox.png)
 
 ## <a name="edit-notification-details"></a>Modifier les détails de notification
 
@@ -111,11 +111,11 @@ Pour modifier les détails de modification, procédez comme suit.
 
 1. Accédez à **Détails de la commande > Modifier les détails de notification**.
 
-    ![Modification des détails de notification 1](media/data-box-portal-ui-admin/edit-notification-details1.png)
+    ![Commande Modifier les détails de notification dans Détails de la commande](media/data-box-portal-ui-admin/portal-ui-admin-edit-notification-details-command.png)
 
 2. Vous pouvez maintenant modifier les détails de notification et enregistrer les modifications.
  
-    ![Modification des détails de notification 2](media/data-box-portal-ui-admin/edit-notification-details2.png)
+    ![Boîte de dialogue Modifier les détails de notification](media/data-box-portal-ui-admin/portal-ui-admin-edit-notification-details-dbox.png)
 
 ## <a name="view-order-status"></a>Afficher l’état de la commande
 

@@ -6,10 +6,10 @@ ms.author: edoyle
 ms.date: 10/25/2018
 ms.topic: conceptual
 ms.openlocfilehash: da4eaa34840f14714616b85e24fd62cf65602b84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "76277638"
 ---
 # <a name="service-fabric-mesh-application-secrets"></a>Secrets d’application Service Fabric Mesh

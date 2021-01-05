@@ -9,12 +9,12 @@ ms.topic: reference
 caps.latest.revision: 28
 author: tgore03
 ms.author: tagore
-ms.openlocfilehash: 695ba3acfd5af8797de6e6f7454e493d7863627c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a3f62bb33332e818cc40c5195a1cc2f667f819b4
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79529286"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92072575"
 ---
 # <a name="azure-cloud-services-config-networkconfiguration-schema"></a>Schéma NetworkConfiguration de configuration d’Azure Cloud Services
 
@@ -24,7 +24,7 @@ Vous pouvez consulter les ressources suivantes pour en savoir plus sur les rése
 
 - [Schéma de configuration de services cloud (classique)](schema-cscfg-file.md)
 - [Schéma de définition de services cloud (classique)](schema-csdef-file.md)
-- [Créer un réseau virtuel (classique)](../virtual-network/virtual-networks-create-vnet-classic-pportal.md)
+- [Créer un réseau virtuel (classique)](/previous-versions/azure/virtual-network/virtual-networks-create-vnet-classic-pportal)
 
 ## <a name="networkconfiguration-element"></a>Élément NetworkConfiguration
 L’exemple suivant illustre l’élément `NetworkConfiguration` et ses éléments enfants.

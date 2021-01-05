@@ -2,22 +2,25 @@
 title: 'Azure ExpressRoute : Conception pour la haute disponibilité'
 description: Cette page fournit des conseils sur l’architecture pour la haute disponibilité lors de l’utilisation d’Azure ExpressRoute.
 services: expressroute
-author: rambk
+author: duongau
 ms.service: expressroute
 ms.topic: article
 ms.date: 06/28/2019
-ms.author: rambala
-ms.openlocfilehash: 4c3c6ae5fbdd91e6e44438be7fef2a3a91564a34
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 3602c3944e8731263fbb55f024c276783950329f
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74076677"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "92202359"
 ---
 # <a name="designing-for-high-availability-with-expressroute"></a>Conception pour une haute disponibilité avec ExpressRoute
 
 ExpressRoute est conçu pour la haute disponibilité afin de fournir à l’opérateur une connectivité de réseau privé de qualité aux ressources Microsoft. En d’autres termes, il n’existe aucun point de défaillance unique dans le chemin d’accès ExpressRoute au sein du réseau de Microsoft. Pour optimiser la disponibilité, le client et le segment de fournisseur de service de votre circuit ExpressRoute doivent également être conçus pour la haute disponibilité. Dans cet article, nous allons tout d’abord passer en revue les considérations relatives à l’architecture réseau pour la conception d’une connectivité réseau robuste à l’aide d’ExpressRoute. Nous analyserons ensuite les fonctionnalités qui vous aident à améliorer la haute disponibilité de votre circuit ExpressRoute.
 
+>[!NOTE]
+>Les concepts décrits dans cet article s’appliquent tout autant lorsqu’un circuit ExpressRoute est créé sous Virtual WAN ou à l’extérieur de celui-ci.
+>
 
 ## <a name="architecture-considerations"></a>Considérations relatives à l’architecture
 
@@ -90,12 +93,8 @@ Pour des considérations relatives à la conception de connectivité de réseau 
 
 
 <!--Link References-->
-[zone redundant vgw]: https://docs.microsoft.com/azure/vpn-gateway/about-zone-redundant-vnet-gateways
-[conf zone redundant vgw]: https://docs.microsoft.com/azure/vpn-gateway/create-zone-redundant-vnet-gateway
-[Configure Global Reach]: https://docs.microsoft.com/azure/expressroute/expressroute-howto-set-global-reach
-[BFD]: https://docs.microsoft.com/azure/expressroute/expressroute-bfd
-[DR]: https://docs.microsoft.com/azure/expressroute/designing-for-disaster-recovery-with-expressroute-privatepeering
-
-
-
-
+[zone redundant vgw]: ../vpn-gateway/about-zone-redundant-vnet-gateways.md
+[conf zone redundant vgw]: ../vpn-gateway/create-zone-redundant-vnet-gateway.md
+[Configure Global Reach]: ./expressroute-howto-set-global-reach.md
+[BFD]: ./expressroute-bfd.md
+[DR]: ./designing-for-disaster-recovery-with-expressroute-privatepeering.md

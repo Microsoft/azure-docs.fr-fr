@@ -1,24 +1,25 @@
 ---
-title: Interprétabilité des modèles dans Azure Machine Learning
+title: Interprétabilité des modèles dans le service Azure Machine Learning (version préliminaire)
 titleSuffix: Azure Machine Learning
-description: Découvrez comment expliquer pourquoi votre modèle élabore des prédictions à l’aide du Kit de développement logiciel (SDK) Azure Machine Learning. Il peut être utilisé pendant la formation et l’inférence pour comprendre comment un modèle élabore des prédictions.
+description: Apprenez à comprendre et à expliquer la façon dont votre modèle Machine Learning effectue des prédictions lors de la formation et de l’inférence à l’aide du Kit de développement logiciel (SDK) Python Azure Machine Learning.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
-ms.author: mesameki
-author: mesameki
+ms.custom: how-to
+ms.author: mithigpe
+author: minthigpen
 ms.reviewer: Luis.Quintanilla
-ms.date: 04/02/2020
-ms.openlocfilehash: fcb837af85a54102e8c9eafc33249af9dba6b5ce
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 11/16/2020
+ms.openlocfilehash: dff0aeaf84ce87ed728d333cb68aee3a349bc111
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631425"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94699387"
 ---
-# <a name="model-interpretability-in-azure-machine-learning"></a>Interprétabilité des modèles dans Azure Machine Learning
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+# <a name="model-interpretability-in-azure-machine-learning-preview"></a>Interprétabilité des modèles dans le service Azure Machine Learning (version préliminaire)
+
 
 ## <a name="overview-of-model-interpretability"></a>Vue d’ensemble de l’interprétabilité des modèles
 
@@ -38,22 +39,11 @@ La capacité à expliquer un modèle Machine Learning est importante lors de deu
 
 ## <a name="interpretability-with-azure-machine-learning"></a>Interprétabilité avec Azure Machine Learning
 
-Les classes d’interprétabilité sont accessibles via plusieurs packages de Kit de développement logiciel (SDK) : (En savoir plus sur l’[installation de packages de Kit de développement logiciel (SDK) pour Azure Machine Learning](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py))
+Les classes d’interprétabilité sont accessibles via le package de Kit de développement logiciel (SDK) suivant : (En savoir plus sur l’[installation de packages de Kit de développement logiciel (SDK) pour Azure Machine Learning](/python/api/overview/azure/ml/install?preserve-view=true&view=azure-ml-py))
 
-* `azureml.interpret`, le package principal, qui contient des fonctionnalités prises en charge par Microsoft.
+* `azureml.interpret`, contient des fonctionnalités prises en charge par Microsoft.
 
-* `azureml.contrib.interpret`, fonctionnalités en préversion et expérimentales que vous pouvez essayer.
-
-* `azureml.train.automl.automlexplainer`, package pour l’interprétation des modèles de Machine learning automatisé.
-
-Utilisez `pip install azureml-interpret` et `pip install azureml-interpret-contrib` pour une utilisation générale, et `pip install azureml-interpret-contrib` pour l’utilisation d’AutoML afin d’obtenir les packages d’interprétabilité.
-
-
-> [!IMPORTANT]
-> Le contenu de l’espace de noms `contrib` n’est pas entièrement pris en charge. À mesure que les fonctionnalités expérimentales arriveront à échéance, elles seront progressivement déplacées vers l’espace de noms principal.
-.
-
-
+Utilisez `pip install azureml-interpret` pour une utilisation générale.
 
 ## <a name="how-to-interpret-your-model"></a>Comment interpréter votre modèle
 
@@ -74,17 +64,17 @@ Découvrez les techniques d’interprétabilité, les modèles Machine Learning 
 
 |Technique d’interprétabilité|Description|Type|
 |--|--|--------------------|
-|1. Explicatif d’arborescence SHAP| L’explicatif d’arborescence de [SHAP](https://github.com/slundberg/shap) cible l’algorithme d’estimation de valeur SHAP rapide de temps polynomial spécifique des **arborescences et ensembles d’arborescences**.|Spécifique au modèle|
-|2. Explicatif approfondi SHAP| Selon l’explication proposée par [SHAP](https://github.com/slundberg/shap), l’explicatif approfondi « est un algorithme d’approximation à vitesse élevée de valeurs SHAP dans des modèles de deep learning qui s’appuie sur une connexion avec DeepLIFT décrite dans le [document NIPS de SHAP](https://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions). Les modèles **TensorFlow** et **Keras** utilisant le serveur principal TensorFlow sont pris en charge (une prise en charge préliminaire de PyTorch est également possible) ».|Spécifique au modèle|
-|3. Explicatif linéaire SHAP| L’explicatif linéaire de [SHAP](https://github.com/slundberg/shap) calcule les valeurs SHAP pour un **modèle linéaire**, en prenant éventuellement en compte les corrélations entre les caractéristiques.|Spécifique au modèle|
-|4. Explicatif de noyau SHAP| L’explicatif de noyau de [SHAP](https://github.com/slundberg/shap) utilise une régression linéaire locale spécialement pondérée pour estimer les valeurs SHAP pour **n’importe quel modèle**.|Indépendant du modèle|
-|5. Explicatif d’imitation (substitution globale)| L’explicatif d’imitation repose sur l’idée d’entraînement de [modèles de substitution globaux](https://christophm.github.io/interpretable-ml-book/global.html) sur des modèles de boîte noire d’imitation. Un modèle de substitution global est un modèle intrinsèquement interprétable qui est formé pour estimer les prédictions de **n’importe quel modèle de boîte noire** aussi précisément que possible. Les scientifiques des données peuvent interpréter le modèle de substitution pour déduire des conclusions sur le modèle de boîte noire. Vous pouvez utiliser un des modèles interprétables suivants comme modèle de substitution : LightGBM (LGBMExplainableModel), régression linéaire (LinearExplainableModel), modèle explicable Stochastic Gradient Descent (SGDExplainableModel) et arbre de décision (DecisionTreeExplainableModel).|Indépendant du modèle|
-|6. Explicatif d’importance de fonctionnalité de permutation (PFI)| L’importance de fonctionnalité de permutation est une technique utilisée pour expliquer les modèles de classification et de régression qui s’inspirent du [document relatif aux forêts aléatoires de Breiman](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf) (consultez la section 10). De façon générale, il fonctionne en permutant aléatoirement les données d’une caractéristique à la fois pour l’ensemble du jeu de données et en calculant dans quelle mesure la métrique de performances d’intérêt change. Plus la modification est importante, et plus la fonctionnalité l’est également. La PFI peut expliquer le comportement global de **n’importe quel modèle sous-jacent**, mais n’explique pas les prédictions individuelles. |Indépendant du modèle|
+|Explicatif d’arborescence SHAP| L’explicatif d’arborescence de [SHAP](https://github.com/slundberg/shap) cible l’algorithme d’estimation de valeur SHAP rapide de temps polynomial spécifique des **arborescences et ensembles d’arborescences**.|Spécifique au modèle|
+|Explicatif approfondi SHAP| Selon l’explication proposée par SHAP, l’explicatif approfondi « est un algorithme d’approximation à vitesse élevée de valeurs SHAP dans des modèles de deep learning qui s’appuie sur une connexion avec DeepLIFT décrite dans le [document NIPS de SHAP](https://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions). Les modèles **TensorFlow** et **Keras** utilisant le serveur principal TensorFlow sont pris en charge (une prise en charge préliminaire de PyTorch est également possible) ».|Spécifique au modèle|
+|Explicatif linéaire SHAP| L’explicatif linéaire de SHAP calcule les valeurs SHAP pour un **modèle linéaire**, en prenant éventuellement en compte les corrélations entre les caractéristiques.|Spécifique au modèle|
+|Explicatif de noyau SHAP| L’explicatif de noyau de SHAP utilise une régression linéaire locale spécialement pondérée pour estimer les valeurs SHAP pour **n’importe quel modèle**.|Indépendant du modèle|
+|Explicatif d’imitation (substitution globale)| L’explicatif d’imitation repose sur l’idée d’entraînement de [modèles de substitution globaux](https://christophm.github.io/interpretable-ml-book/global.html) sur des modèles de boîte noire d’imitation. Un modèle de substitution global est un modèle intrinsèquement interprétable qui est formé pour estimer les prédictions de **n’importe quel modèle de boîte noire** aussi précisément que possible. Les scientifiques des données peuvent interpréter le modèle de substitution pour déduire des conclusions sur le modèle de boîte noire. Vous pouvez utiliser un des modèles interprétables suivants comme modèle de substitution : LightGBM (LGBMExplainableModel), régression linéaire (LinearExplainableModel), modèle explicable Stochastic Gradient Descent (SGDExplainableModel) et arbre de décision (DecisionTreeExplainableModel).|Indépendant du modèle|
+|Explicatif d’importance de fonctionnalité de permutation (PFI)| L’importance de fonctionnalité de permutation est une technique utilisée pour expliquer les modèles de classification et de régression qui s’inspirent du [document relatif aux forêts aléatoires de Breiman](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf) (consultez la section 10). De façon générale, il fonctionne en permutant aléatoirement les données d’une caractéristique à la fois pour l’ensemble du jeu de données et en calculant dans quelle mesure la métrique de performances d’intérêt change. Plus la modification est importante, et plus la fonctionnalité l’est également. La PFI peut expliquer le comportement global de **n’importe quel modèle sous-jacent**, mais n’explique pas les prédictions individuelles. |Indépendant du modèle|
 
 
 
 
-Outre les techniques d’interprétabilité décrites ci-dessus, nous prenons en charge un autre [explicatif SHAP](https://github.com/slundberg/shap), appelé `TabularExplainer`. En fonction du modèle, `TabularExplainer` utilise l’un des explicatifs SHAP pris en charge :
+Outre les techniques d’interprétabilité décrites ci-dessus, nous prenons en charge un autre explicatif SHAP, appelé `TabularExplainer`. En fonction du modèle, `TabularExplainer` utilise l’un des explicatifs SHAP pris en charge :
 
 * TreeExplainer pour tous les modèles basés sur une arborescence
 * DeepExplainer pour les modèles DNN
@@ -120,4 +110,6 @@ Vous pouvez exécuter l’explication à distance sur Capacité de calcul Azure 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez le [guide pratique](how-to-machine-learning-interpretability-aml.md) pour bénéficier de l’interprétabilité des modèles entraînés à la fois localement et sur des ressources de calcul distantes Azure Machine Learning. Pour obtenir des scénarios supplémentaires, consultez les [exemples de notebooks](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model).
+- Consultez le [guide pratique](how-to-machine-learning-interpretability-aml.md) pour bénéficier de l’interprétabilité des modèles entraînés à la fois localement et sur des ressources de calcul distantes Azure Machine Learning. 
+- Pour obtenir des scénarios supplémentaires, consultez les [exemples de notebooks](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model). 
+- Si vous êtes intéressé par l’interprétabilité des scénarios de texte, consultez [Interpret-text](https://github.com/interpretml/interpret-text), un référentiel open source associé à [Interpret-Community](https://github.com/interpretml/interpret-community/), pour les techniques d’interprétabilité pour NLP. Le package `azureml.interpret` ne prend pas en charge ces techniques pour l’instant, mais vous pouvez commencer avec un [exemple de bloc-notes sur la classification du texte](https://github.com/interpretml/interpret-text/blob/master/notebooks/text_classification/text_classification_classical_text_explainer.ipynb).

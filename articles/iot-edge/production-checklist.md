@@ -4,19 +4,19 @@ description: Découvrez comment faire passer votre solution Azure IoT Edge du d�
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 4/25/2020
+ms.date: 07/10/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: e818de4885d3859199108d7d88e4cbcb215dc4cc
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: 7cabae837656611813d44017ce2e1112f06066ef
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82780740"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013290"
 ---
 # <a name="prepare-to-deploy-your-iot-edge-solution-in-production"></a>Préparer le déploiement en production d’une solution IoT Edge
 
@@ -38,11 +38,14 @@ Il existe de nombreux types d’appareils IoT Edge : un Raspberry Pi, un portabl
 
 ### <a name="install-production-certificates"></a>Installer les certificats de production
 
-Un certificat d’autorité de certification doit être installé sur chaque appareil IoT Edge en production. Il est ensuite déclaré auprès du runtime IoT Edge dans le fichier config.yaml. Pour faciliter les scénarios de développement et de test, le runtime IoT Edge crée des certificats temporaires si aucun certificat n’est déclaré dans le fichier config.yaml. Toutefois, ces certificats temporaires expirent au bout de trois mois et ne sont pas sécurisés pour les scénarios de production.
+Un certificat d’autorité de certification doit être installé sur chaque appareil IoT Edge en production. Il est ensuite déclaré auprès du runtime IoT Edge dans le fichier config.yaml. Pour faciliter les scénarios de développement et de test, le runtime IoT Edge crée des certificats temporaires si aucun certificat n’est déclaré dans le fichier config.yaml. Toutefois, ces certificats temporaires expirent au bout de trois mois et ne sont pas sécurisés pour les scénarios de production. Dans les scénarios de production, vous devez fournir votre propre certificat d’autorité de certification d’appareil, soit issu d’une autorité de certification auto-signée, soit acheté auprès d’une autorité de certification commerciale.
+
+> [!NOTE]
+> Il existe actuellement dans libiothsm une limitation empêchant l’utilisation de certificats qui expirent le 1er janvier 2038 ou après cette date.
 
 Pour comprendre le rôle du certificat d’autorité de certification d’appareil, voir [Comment Azure IoT Edge utilise les certificats](iot-edge-certs.md).
 
-Pour savoir comment installer des certificats sur un appareil IoT Edge et y faire référence dans le fichier config.yaml, consultez [Installer des certificats de production sur un appareil IoT Edge](how-to-manage-device-certificates.md).
+Pour savoir comment installer des certificats sur un appareil IoT Edge et y faire référence dans le fichier config.yaml, consultez [Gestion d’un certificat sur un appareil IoT Edge](how-to-manage-device-certificates.md).
 
 ### <a name="have-a-device-management-plan"></a>Élaborer un plan de gestion des appareils
 
@@ -227,6 +230,10 @@ Cette liste de vérification est un point de départ pour les règles de pare-fe
 
 Certaines de ces règles de pare-feu sont héritées d’Azure Container Registry. Pour plus d’informations, consultez [Configurer des règles pour accéder à un registre de conteneurs Azure derrière un pare-feu](../container-registry/container-registry-firewall-access-rules.md).
 
+> [!NOTE]
+> Pour fournir un nom de domaine complet (FQDN) cohérent entre les points de terminaison REST et de données, à partir du **15 juin 2020**, le point de terminaison de données Registre de conteneurs Microsoft passe de `*.cdn.mscr.io` à `*.data.mcr.microsoft.com`.  
+> Pour plus d’informations, consultez [Configuration des règles de pare-feu de client du Registre de conteneurs Microsoft](https://github.com/microsoft/containerregistry/blob/master/client-firewall-rules.md).
+
 Si vous ne souhaitez pas configurer votre pare-feu pour autoriser l’accès aux registres de conteneurs publics, vous pouvez stocker les images dans votre registre de conteneurs privé, comme décrit dans [Stocker les conteneurs Runtime dans votre registre privé](#store-runtime-containers-in-your-private-registry).
 
 ### <a name="configure-communication-through-a-proxy"></a>Configurer la communication via un proxy
@@ -314,9 +321,9 @@ Vous pouvez le faire dans **createOptions** au sein de chaque module. Par exempl
 
 ### <a name="consider-tests-and-cicd-pipelines"></a>Prendre en compte les tests et les pipelines CI/CD
 
-Pour maximiser l’efficacité du scénario de déploiement IoT Edge, intégrez votre déploiement de production dans vos pipelines de tests et CI/CD. Azure IoT Edge prend en charge plusieurs plateformes CI/CD, notamment Azure DevOps. Pour plus d’informations, voir [Intégration continue et déploiement continu sur Azure IoT Edge](how-to-ci-cd.md).
+Pour maximiser l’efficacité du scénario de déploiement IoT Edge, intégrez votre déploiement de production dans vos pipelines de tests et CI/CD. Azure IoT Edge prend en charge plusieurs plateformes CI/CD, notamment Azure DevOps. Pour plus d’informations, voir [Intégration continue et déploiement continu sur Azure IoT Edge](how-to-continuous-integration-continuous-deployment.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur le [déploiement automatique IoT Edge](module-deployment-monitoring.md).
-* Découvrez comment IoT Edge prend en charge [l’intégration continue et le déploiement continu](how-to-ci-cd.md).
+* Découvrez comment IoT Edge prend en charge [l’intégration continue et le déploiement continu](how-to-continuous-integration-continuous-deployment.md).

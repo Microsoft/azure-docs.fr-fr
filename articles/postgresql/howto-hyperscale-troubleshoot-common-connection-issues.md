@@ -6,14 +6,14 @@ author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/8/2019
-ms.openlocfilehash: abcc979bb36fe0acb663a511875a1e186c2c0739
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: e1c6825820ae943d10157279dfe93922a7521b75
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583970"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91295615"
 ---
 # <a name="troubleshoot-connection-issues-to-azure-database-for-postgresql---hyperscale-citus"></a>Résoudre les problèmes de connexion à Azure Database pour PostgreSQL - Hyperscale (Citus)
 
@@ -27,7 +27,7 @@ Les problèmes de connexion peuvent avoir plusieurs causes, telles que :
 * Maintenance des services
 * Le nœud coordinateur a basculé sur le nouveau matériel
 
-En général, les problèmes de connexion à Hyperscale peuvent être classés ainsi :
+En général, les problèmes de connexion à Hyperscale (Citus) peuvent être classifiés ainsi :
 
 * Erreurs temporaires (de courte durée ou intermittentes)
 * Erreurs persistantes ou non temporaires (erreurs qui se produisent régulièrement)
@@ -36,7 +36,7 @@ En général, les problèmes de connexion à Hyperscale peuvent être classés a
 
 Les erreurs temporaires se produisent pour plusieurs raisons. Parmi les plus courantes : la maintenance du système, les erreurs liées au matériel ou aux logiciels et les mises à niveau vCore des nœuds coordinateurs.
 
-L’activation de la haute disponibilité pour les nœuds de groupe du serveur Hyperscale peut atténuer automatiquement ces types de problèmes. Toutefois, votre application doit toujours être préparée à perdre brièvement sa connexion. D’autres événements peuvent également prendre plus de temps à s’atténuer, par exemple lorsqu’une transaction volumineuse entraîne une récupération de longue durée.
+L’activation de la haute disponibilité pour les nœuds de groupe de serveurs Hyperscale (Citus) peut atténuer automatiquement ces types de problèmes. Toutefois, votre application doit toujours être préparée à perdre brièvement sa connexion. D’autres événements peuvent également prendre plus de temps à s’atténuer, par exemple lorsqu’une transaction volumineuse entraîne une récupération de longue durée.
 
 ### <a name="steps-to-resolve-transient-connectivity-issues"></a>Étapes pour résoudre les problèmes de connectivité transitoire
 
@@ -49,7 +49,7 @@ L’activation de la haute disponibilité pour les nœuds de groupe du serveur H
 
 Si, à plusieurs reprises, l’application ne parvient pas à se connecter à Hyperscale (Citus), les causes les plus courantes sont un problème de configuration du pare-feu ou une erreur de l’utilisateur.
 
-* Configuration du pare-feu du nœud coordinateur : Assurez-vous que le pare-feu du serveur Hyperscale est configuré pour autoriser les connexions côté client, y compris les serveurs proxy et les passerelles.
+* Configuration du pare-feu du nœud coordinateur : Vérifiez que le pare-feu du serveur Hyperscale (Citus) est configuré pour autoriser les connexions côté client, y compris les serveurs proxy et les passerelles.
 * Configuration du pare-feu côté client : le pare-feu du client doit autoriser les connexions au serveur de base de données. Certains pare-feu nécessitent non seulement l’autorisation d’une application par son nom, mais aussi des adresses IP et des ports du serveur.
 * Erreur utilisateur : Vérifiez la chaîne de connexion. Vous avez peut-être mal saisi des paramètres comme le nom du serveur. Vous pouvez rechercher des chaînes de connexion pour différentes infrastructures de langage et psql dans le Portail Azure. Accédez à la page **Chaînes de connexion** dans votre groupe de serveurs Hyperscale (Citus). Gardez également à l’esprit que les clusters Citus ne possèdent qu’une seule base de données et que son nom prédéfini est **citus**.
 

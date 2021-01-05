@@ -3,12 +3,12 @@ title: Sauvegarder des charges de travail DPM à l’aide de PowerShell
 description: Découvrez comment déployer et gérer Sauvegarde Azure pour Data Protection Manager (DPM) à l’aide de PowerShell
 ms.topic: conceptual
 ms.date: 01/23/2017
-ms.openlocfilehash: 73b6d07c9d74ab7f8af5d91e992bb1ae457f964c
-ms.sourcegitcommit: 1f25aa993c38b37472cf8a0359bc6f0bf97b6784
+ms.openlocfilehash: 176cbffe5152462055c4ffdb2367cf9c0ab97c1f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83848168"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90968302"
 ---
 # <a name="deploy-and-manage-backup-to-azure-for-data-protection-manager-dpm-servers-using-powershell"></a>Déployer et gérer une sauvegarde vers Azure pour des serveurs Data Protection Manager (DPM) à l’aide de PowerShell
 
@@ -51,7 +51,7 @@ Les tâches de configuration et d’inscription ci-après peuvent être automati
 
 Les étapes suivantes vous montrent comment créer un coffre Recovery Services. Un coffre Recovery Services diffère d’un coffre de sauvegarde.
 
-1. Si vous utilisez le service Sauvegarde Azure pour la première fois, vous devez utiliser la cmdlet **Register-AzResourceProvider** pour associer le fournisseur Azure Recovery Service à votre abonnement.
+1. Si vous utilisez Sauvegarde Azure pour la première fois, vous devez utiliser la cmdlet **Register-AzResourceProvider** pour associer le fournisseur Azure Recovery Service à votre abonnement.
 
     ```powershell
     Register-AzResourceProvider -ProviderNamespace "Microsoft.RecoveryServices"
@@ -69,7 +69,7 @@ Les étapes suivantes vous montrent comment créer un coffre Recovery Services. 
     New-AzRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
     ```
 
-4. Spécifiez le type de redondance de stockage à utiliser : [Stockage localement redondant (LRS)](../storage/common/storage-redundancy-lrs.md) ou [Stockage géo-redondant (GRS)](../storage/common/storage-redundancy-grs.md). L’exemple suivant montre que l’option -BackupStorageRedundancy pour testVault a la valeur GeoRedundant.
+4. Spécifiez le type de redondance de stockage à utiliser. Vous pouvez utiliser le [stockage localement redondant (LRS)](../storage/common/storage-redundancy.md#locally-redundant-storage), le [stockage géoredondant (GRS)](../storage/common/storage-redundancy.md#geo-redundant-storage) ou le [stockage redondant interzone (ZRS)](../storage/common/storage-redundancy.md#zone-redundant-storage). L’exemple suivant montre que l’option **BackupStorageRedundancy** pour *testVault* est définie sur **GeoRedundant**.
 
    > [!TIP]
    > De nombreuses applets de commande Azure Backup nécessitent l’objet coffre Recovery Services en tant qu’entrée. Pour cette raison, il est pratique de stocker l’objet coffre Backup Recovery Services dans une variable.
@@ -111,7 +111,7 @@ Pour installer l’agent, exécutez la commande ci-après dans une console Power
 MARSAgentInstaller.exe /q
 ```
 
-Cette opération installe l’agent avec les options par défaut. L’installation s’effectue en arrière-plan et prend quelques minutes. Si vous ne spécifiez pas l’option */nu* , la fenêtre **Windows Update** s’ouvre à la fin de l’installation pour rechercher des mises à jour.
+Cette opération installe l’agent avec les options par défaut. L’installation s’effectue en arrière-plan et prend quelques minutes. Si vous ne spécifiez pas l’option */nu*, la fenêtre **Windows Update** s’ouvre à la fin de l’installation pour rechercher des mises à jour.
 
 L’agent apparaît dans la liste des programmes installés. Pour afficher la liste des programmes installés, cliquez sur **Panneau de configuration** > **Programmes** > **Programmes et fonctionnalités**.
 
@@ -140,7 +140,7 @@ Les options disponibles incluent :
 | /pu |Nom d’utilisateur de l’hôte proxy |- |
 | /pw |Mot de passe du proxy |- |
 
-## <a name="registering-dpm-to-a-recovery-services-vault"></a>Inscription de DPM dans un coffre Recovery Services
+## <a name="registering-dpm-to-a-recovery-services-vault"></a>Inscription de DPM auprès d’un coffre Recovery Services
 
 Une fois que vous avez créé un coffre Recovery Services, téléchargez le dernier agent et les informations d’identification de coffre et stockez-les dans un emplacement pratique comme C:\Téléchargements.
 
@@ -154,7 +154,7 @@ $credsfilename
 C:\downloads\testvault\_Sun Apr 10 2016.VaultCredentials
 ```
 
-Sur le serveur DPM, exécutez l’applet de commande [Start-OBRegistration](https://docs.microsoft.com/powershell/module/msonlinebackup/start-obregistration) pour inscrire l’ordinateur auprès du coffre.
+Sur le serveur DPM, exécutez l’applet de commande [Start-OBRegistration](/powershell/module/msonlinebackup/start-obregistration) pour inscrire l’ordinateur auprès du coffre.
 
 ```powershell
 $cred = $credspath + $credsfilename
@@ -171,13 +171,13 @@ Machine registration succeeded.
 
 ### <a name="initial-configuration-settings"></a>Paramètres de la configuration initiale
 
-Une fois que le serveur DPM est inscrit auprès du coffre Recovery Services, il démarre avec les paramètres d’abonnement par défaut. Ces paramètres d’abonnement incluent la mise en réseau, le chiffrement et la zone intermédiaire. Pour modifier les paramètres d’abonnement, vous devez d’abord obtenir les paramètres (par défaut) existants à l’aide de l’applet de commande [Get-DPMCloudSubscriptionSetting](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmcloudsubscriptionsetting?view=systemcenter-ps-2019) :
+Une fois que le serveur DPM est inscrit auprès du coffre Recovery Services, il démarre avec les paramètres d’abonnement par défaut. Ces paramètres d’abonnement incluent la mise en réseau, le chiffrement et la zone intermédiaire. Pour modifier les paramètres d’abonnement, vous devez d’abord obtenir les paramètres (par défaut) existants à l’aide de l’applet de commande [Get-DPMCloudSubscriptionSetting](/powershell/module/dataprotectionmanager/get-dpmcloudsubscriptionsetting) :
 
 ```powershell
 $setting = Get-DPMCloudSubscriptionSetting -DPMServerName "TestingServer"
 ```
 
-Toutes les modifications sont apportées à cet objet PowerShell local ```$setting```. L’objet complet est ensuite validé vers DPM et la Sauvegarde Azure à des fins d’enregistrement à l’aide de l’applet de commande [Set-DPMCloudSubscriptionSetting](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting?view=systemcenter-ps-2019). Vous devez utiliser l’indicateur ```–Commit``` pour vous assurer que les modifications sont conservées. Les paramètres ne sont pas appliqués ni utilisés par Sauvegarde Azure tant qu’ils ne sont pas validés.
+Toutes les modifications sont apportées à cet objet PowerShell local ```$setting```. L’objet complet est ensuite validé vers DPM et la Sauvegarde Azure à des fins d’enregistrement à l’aide de l’applet de commande [Set-DPMCloudSubscriptionSetting](/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting). Vous devez utiliser l’indicateur ```–Commit``` pour vous assurer que les modifications sont conservées. Les paramètres ne sont pas appliqués ni utilisés par la sauvegarde Azure tant qu’ils ne sont pas validés.
 
 ```powershell
 Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -Commit
@@ -185,7 +185,7 @@ Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSett
 
 ## <a name="networking"></a>Mise en réseau
 
-Si la connectivité entre l’ordinateur DPM et le service Azure Backup sur Internet est établie via un serveur proxy, les paramètres du serveur proxy doivent être fournis pour que les sauvegardes soient réussies. Pour cela, utilisez les paramètres ```-ProxyServer```, ```-ProxyPort```, ```-ProxyUsername``` et ```ProxyPassword``` avec l’applet de commande [DPMCloudSubscriptionSetting](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting?view=systemcenter-ps-2019). Dans cet exemple, il n’y a aucun serveur proxy. Nous effaçons donc explicitement toutes informations concernant un proxy.
+Si la connectivité entre l’ordinateur DPM et le service Azure Backup sur Internet est établie via un serveur proxy, les paramètres du serveur proxy doivent être fournis pour que les sauvegardes soient réussies. Pour cela, utilisez les paramètres ```-ProxyServer```, ```-ProxyPort```, ```-ProxyUsername``` et ```ProxyPassword``` avec l’applet de commande [DPMCloudSubscriptionSetting](/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting). Dans cet exemple, il n’y a aucun serveur proxy. Nous effaçons donc explicitement toutes les informations relatives au proxy.
 
 ```powershell
 Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -NoProxy
@@ -199,7 +199,7 @@ Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSett
 
 ## <a name="configuring-the-staging-area"></a>Configuration de la zone intermédiaire
 
-L’agent de sauvegarde Azure en cours d’exécution sur le serveur DPM a besoin d’un stockage temporaire pour les données restaurées à partir du cloud (zone de transit locale). Configurez la zone intermédiaire à l’aide de l’applet de commande [Set-DPMCloudSubscriptionSetting](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting?view=systemcenter-ps-2019) et du paramètre ```-StagingAreaPath```.
+L’agent de sauvegarde Azure en cours d’exécution sur le serveur DPM a besoin d’un stockage temporaire pour les données restaurées à partir du cloud (zone de transit locale). Configurez la zone intermédiaire à l’aide de l’applet de commande [Set-DPMCloudSubscriptionSetting](/powershell/module/dataprotectionmanager/set-dpmcloudsubscriptionsetting) et du paramètre ```-StagingAreaPath```.
 
 ```powershell
 Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -StagingAreaPath "C:\StagingArea"
@@ -220,7 +220,7 @@ Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSett
 ```
 
 > [!IMPORTANT]
-> Conservez les informations de phrase secrète en lieu sûr après les avoir définies. Vous ne pourrez pas restaurer les données à partir d’Azure sans ce mot de passe.
+> Conservez les informations de phrase secrète en lieu sûr après les avoir définies. Vous ne pouvez pas restaurer les données à partir d’Azure sans cette phrase secrète.
 >
 >
 
@@ -232,22 +232,22 @@ Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSett
 
 ## <a name="protect-data-to-azure-backup"></a>Protection des données dans Sauvegarde Azure
 
-Dans cette section, vous allez ajouter un serveur de production à DPM, puis protéger les données sur le stockage DPM local, et enfin dans Sauvegarde Azure. Dans les exemples, nous vous montrerons comment sauvegarder des fichiers et des dossiers. La logique peut facilement être étendue pour sauvegarder toute source de données DPM prise en charge. Toutes vos sauvegardes DPM sont régies par un groupe de protection constitué de quatre parties :
+Dans cette section, vous allez ajouter un serveur de production à DPM et protéger les données sur le stockage DPM local puis dans Sauvegarde Azure. Dans les exemples, nous vous montrerons comment sauvegarder des fichiers et des dossiers. La logique peut facilement être étendue pour sauvegarder toute source de données DPM prise en charge. Toutes vos sauvegardes DPM sont régies par un groupe de protection constitué de quatre parties :
 
-1. **Membres du groupe** est une liste de tous les objets pouvant être protégés (également appelés *Sources de données* dans DPM) que vous souhaitez protéger dans le même groupe de protection. Par exemple, vous pouvez protéger les machines virtuelles de production dans un groupe de production et les bases de données SQL Server dans un autre groupe de protection, car leurs exigences de sauvegarde peuvent être différentes. Avant de pouvoir sauvegarder une source de données sur un serveur de production, vous devez vérifier que l'agent DPM est installé sur le serveur de production et géré par DPM. Suivez les étapes d’ [installation de l'agent DPM](https://docs.microsoft.com/system-center/dpm/deploy-dpm-protection-agent?view=sc-dpm-2019) et de liaison de celui-ci au serveur DPM approprié.
+1. **Membres du groupe** est une liste de tous les objets pouvant être protégés (également appelés *Sources de données* dans DPM) que vous souhaitez protéger dans le même groupe de protection. Par exemple, vous pouvez protéger les machines virtuelles de production dans un groupe de production et les bases de données SQL Server dans un autre groupe de protection, car leurs exigences de sauvegarde peuvent être différentes. Avant de pouvoir sauvegarder une source de données sur un serveur de production, vous devez vérifier que l'agent DPM est installé sur le serveur de production et géré par DPM. Suivez les étapes d’ [installation de l'agent DPM](/system-center/dpm/deploy-dpm-protection-agent) et de liaison de celui-ci au serveur DPM approprié.
 2. **Méthode de protection des données** spécifie les emplacements de sauvegarde cibles (bande, disque ou cloud). Dans notre exemple, nous protégerons les données sur le disque local et dans le cloud.
 3. Une **planification de sauvegarde** qui spécifie le moment où les sauvegardes doivent être effectuées et la fréquence de synchronisation des données entre le serveur DPM et le serveur de production.
 4. Une **planification de rétention** qui spécifie la durée de rétention des points de récupération dans Azure.
 
 ### <a name="creating-a-protection-group"></a>Création d’un groupe de protection
 
-Commençons par créer un groupe de protection à l’aide de l’applet de commande [New-DPMProtectionGroup](https://docs.microsoft.com/powershell/module/dataprotectionmanager/new-dpmprotectiongroup?view=systemcenter-ps-2019) .
+Commençons par créer un groupe de protection à l’aide de l’applet de commande [New-DPMProtectionGroup](/powershell/module/dataprotectionmanager/new-dpmprotectiongroup) .
 
 ```powershell
 $PG = New-DPMProtectionGroup -DPMServerName " TestingServer " -Name "ProtectGroup01"
 ```
 
-Celle-ci crée un groupe de protection nommé *ProtectGroup01*. Un groupe de protection existant peut également être modifié ultérieurement pour ajouter la sauvegarde vers le cloud Azure. Toutefois, pour apporter des modifications au groupe de protection (nouveau ou existant), nous avons besoin d’obtenir un objet *modifiable* à l'aide de l’applet de commande [Get-DPMModifiableProtectionGroup](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmmodifiableprotectiongroup?view=systemcenter-ps-2019) .
+Celle-ci crée un groupe de protection nommé *ProtectGroup01*. Un groupe de protection existant peut également être modifié ultérieurement pour ajouter la sauvegarde vers le cloud Azure. Toutefois, pour apporter des modifications au groupe de protection (nouveau ou existant), nous avons besoin d’obtenir un objet *modifiable* à l'aide de l’applet de commande [Get-DPMModifiableProtectionGroup](/powershell/module/dataprotectionmanager/get-dpmmodifiableprotectiongroup) .
 
 ```powershell
 $MPG = Get-ModifiableProtectionGroup $PG
@@ -262,13 +262,13 @@ Chaque agent DPM connaît la liste des sources de données sur le serveur sur le
 3. Extrayez une liste de toutes les sources de données sur le serveur.
 4. Choisissez une ou plusieurs sources de données et ajoutez-les au groupe de protection.
 
-Vous pouvez obtenir la liste des serveurs sur lesquels l’agent DPM est installé et géré par le serveur DPM à l'aide de l’applet de commande [Get-DPMProductionServer](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmproductionserver?view=systemcenter-ps-2019) . Dans cet exemple, nous allons filtrer et configurer uniquement PS avec une sauvegarde nommée *productionserver01* .
+Vous pouvez obtenir la liste des serveurs sur lesquels l’agent DPM est installé et géré par le serveur DPM à l'aide de l’applet de commande [Get-DPMProductionServer](/powershell/module/dataprotectionmanager/get-dpmproductionserver) . Dans cet exemple, nous allons filtrer et configurer uniquement PowerShell avec la sauvegarde nommée *productionserver01*.
 
 ```powershell
 $server = Get-ProductionServer -DPMServerName "TestingServer" | Where-Object {($_.servername) –contains "productionserver01"}
 ```
 
-Extrayez à présent la liste des sources de données sur ```$server``` à l’aide de l’applet de commande [Get-DPMDatasource](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmdatasource?view=systemcenter-ps-2019). Dans cet exemple, nous filtrons le volume `D:\` que nous souhaitons configurer pour une sauvegarde. Cette source de données est ensuite ajoutée au groupe de protection à l’aide de l’applet de commande [Add-DPMChildDatasource](https://docs.microsoft.com/powershell/module/dataprotectionmanager/add-dpmchilddatasource?view=systemcenter-ps-2019). N’oubliez pas d’utiliser l’objet de groupe de protection *modifiable*```$MPG``` pour effectuer les ajouts.
+Extrayez à présent la liste des sources de données sur ```$server``` à l’aide de l’applet de commande [Get-DPMDatasource](/powershell/module/dataprotectionmanager/get-dpmdatasource). Dans cet exemple, nous filtrons le volume `D:\` que nous souhaitons configurer pour une sauvegarde. Cette source de données est ensuite ajoutée au groupe de protection à l’aide de l’applet de commande [Add-DPMChildDatasource](/powershell/module/dataprotectionmanager/add-dpmchilddatasource). N’oubliez pas d’utiliser l’objet de groupe de protection *modifiable*```$MPG``` pour effectuer les ajouts.
 
 ```powershell
 $DS = Get-Datasource -ProductionServer $server -Inquire | Where-Object { $_.Name -contains "D:\" }
@@ -276,11 +276,11 @@ $DS = Get-Datasource -ProductionServer $server -Inquire | Where-Object { $_.Name
 Add-DPMChildDatasource -ProtectionGroup $MPG -ChildDatasource $DS
 ```
 
-Répétez cette étape autant de fois que nécessaire, jusqu'à ce que vous ayez ajouté toutes les sources de données choisies au groupe de protection. Vous pouvez également commencer avec une seule source de données, puis terminer le flux de travail de création du groupe de protection, avant d’ajouter ultérieurement d’autres sources de données au groupe de protection.
+Répétez cette étape autant de fois que nécessaire, jusqu’à ce que vous ayez ajouté toutes les sources de données choisies au groupe de protection. Vous pouvez également commencer avec une seule source de données, puis terminer le flux de travail de création du groupe de protection, avant d’ajouter ultérieurement d’autres sources de données au groupe de protection.
 
 ### <a name="selecting-the-data-protection-method"></a>Sélection de la méthode de protection des données
 
-Une fois que les sources de données ont été ajoutées au groupe de protection, l'étape suivante consiste à spécifier la méthode de protection à l'aide de l’applet de commande [Set-DPMProtectionType](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmprotectiontype?view=systemcenter-ps-2019) . Dans cet exemple, le groupe de protection est configuré pour une sauvegarde sur le disque local et dans le cloud. Vous devez également spécifier la source de données que vous souhaitez protéger sur le cloud à l’aide de l’applet de commande [Add-DPMChildDatasource](https://docs.microsoft.com/powershell/module/dataprotectionmanager/add-dpmchilddatasource?view=systemcenter-ps-2019) avec l’indicateur Online.
+Une fois que les sources de données ont été ajoutées au groupe de protection, l'étape suivante consiste à spécifier la méthode de protection à l'aide de l’applet de commande [Set-DPMProtectionType](/powershell/module/dataprotectionmanager/set-dpmprotectiontype) . Dans cet exemple, le groupe de protection est configuré pour une sauvegarde sur le disque local et dans le cloud. Vous devez également spécifier la source de données que vous souhaitez protéger sur le cloud à l’aide de l’applet de commande [Add-DPMChildDatasource](/powershell/module/dataprotectionmanager/add-dpmchilddatasource) avec l’indicateur Online.
 
 ```powershell
 Set-DPMProtectionType -ProtectionGroup $MPG -ShortTerm Disk –LongTerm Online
@@ -289,7 +289,7 @@ Add-DPMChildDatasource -ProtectionGroup $MPG -ChildDatasource $DS –Online
 
 ### <a name="setting-the-retention-range"></a>Définition de la plage de rétention
 
-Définissez la rétention pour les points de sauvegarde à l'aide de l’applet de commande [Set-DPMPolicyObjective](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmpolicyobjective?view=systemcenter-ps-2019) . Bien que cela puisse sembler étrange de définir la rétention avant la planification de sauvegarde, l’utilisation de l’applet de commande ```Set-DPMPolicyObjective``` définit automatiquement une planification de sauvegarde par défaut qui peut ensuite être modifiée. Il est toujours possible de définir la planification de sauvegarde avant la stratégie de rétention.
+Définissez la rétention pour les points de sauvegarde à l'aide de l’applet de commande [Set-DPMPolicyObjective](/powershell/module/dataprotectionmanager/set-dpmpolicyobjective) . Bien que cela puisse sembler étrange de définir la rétention avant la planification de sauvegarde, l’utilisation de l’applet de commande ```Set-DPMPolicyObjective``` définit automatiquement une planification de sauvegarde par défaut qui peut ensuite être modifiée. Il est toujours possible de définir la planification de sauvegarde avant la stratégie de rétention.
 
 Dans l'exemple ci-dessous, l'applet de commande définit les paramètres de rétention pour les sauvegardes sur disque. Cela permet de conserver les sauvegardes pendant 10 jours, et de synchroniser les données toutes les 6 heures entre le serveur de production et le serveur DPM. ```SynchronizationFrequencyMinutes``` ne définit pas la fréquence à laquelle un point de sauvegarde est créé, mais la fréquence de copie des données sur le serveur DPM.  Ce paramètre évite que les sauvegardes soient trop volumineuses.
 
@@ -297,7 +297,7 @@ Dans l'exemple ci-dessous, l'applet de commande définit les paramètres de rét
 Set-DPMPolicyObjective –ProtectionGroup $MPG -RetentionRangeInDays 10 -SynchronizationFrequencyMinutes 360
 ```
 
-Pour les sauvegardes vers Azure (qui sont désignées par « sauvegardes en ligne » dans DPM), les plages de rétention peuvent être configurées pour [une rétention à long terme à l’aide d’un schéma GFS (Grandfather-Father-Son)](backup-azure-backup-cloud-as-tape.md). Autrement dit, vous pouvez définir une stratégie de rétention combinée incluant des stratégies de rétention quotidiennes, hebdomadaires, mensuelles et annuelles. Dans cet exemple, nous créons un tableau qui représente le schéma de rétention complexe souhaité, puis configurons la plage de rétention à l'aide de l’applet de commande [Set-DPMPolicyObjective](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmpolicyobjective?view=systemcenter-ps-2019) .
+Pour les sauvegardes vers Azure (qui sont désignées par « sauvegardes en ligne » dans DPM), les plages de rétention peuvent être configurées pour [une rétention à long terme à l’aide d’un schéma GFS (Grandfather-Father-Son)](backup-azure-backup-cloud-as-tape.md). Autrement dit, vous pouvez définir une stratégie de rétention combinée incluant des stratégies de rétention quotidiennes, hebdomadaires, mensuelles et annuelles. Dans cet exemple, nous créons un tableau qui représente le schéma de rétention complexe souhaité, puis configurons la plage de rétention à l'aide de l’applet de commande [Set-DPMPolicyObjective](/powershell/module/dataprotectionmanager/set-dpmpolicyobjective) .
 
 ```powershell
 $RRlist = @()
@@ -310,7 +310,7 @@ Set-DPMPolicyObjective –ProtectionGroup $MPG -OnlineRetentionRangeList $RRlist
 
 ### <a name="set-the-backup-schedule"></a>Définition de la planification de sauvegarde
 
-DPM définit automatiquement la planification de sauvegarde par défaut si vous spécifiez l'objectif de protection à l'aide de l’applet de commande ```Set-DPMPolicyObjective``` . Pour modifier les planifications par défaut, utilisez l’applet de commande [Get-DPMPolicySchedule](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmpolicyschedule?view=systemcenter-ps-2019) suivie de l’applet de commande [Set-DPMPolicySchedule](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmpolicyschedule?view=systemcenter-ps-2019).
+DPM définit automatiquement la planification de sauvegarde par défaut si vous spécifiez l'objectif de protection à l'aide de l’applet de commande ```Set-DPMPolicyObjective``` . Pour modifier les planifications par défaut, utilisez l’applet de commande [Get-DPMPolicySchedule](/powershell/module/dataprotectionmanager/get-dpmpolicyschedule) suivie de l’applet de commande [Set-DPMPolicySchedule](/powershell/module/dataprotectionmanager/set-dpmpolicyschedule).
 
 ```powershell
 $onlineSch = Get-DPMPolicySchedule -ProtectionGroup $mpg -LongTerm Online
@@ -321,7 +321,7 @@ Set-DPMPolicySchedule -ProtectionGroup $MPG -Schedule $onlineSch[3] -TimesOfDay 
 Set-DPMProtectionGroup -ProtectionGroup $MPG
 ```
 
-Dans l’exemple ci-dessus, ```$onlineSch``` est un tableau constitué de quatre éléments qui contient la planification de protection en ligne existante pour le groupe de protection dans le schéma GFS :
+Dans l'exemple ci-dessus, ```$onlineSch``` est un tableau avec quatre éléments qui contient la planification de protection en ligne existante pour le groupe de protection dans le schéma GFS :
 
 1. ```$onlineSch[0]``` contient la planification quotidienne
 2. ```$onlineSch[1]``` contient la planification hebdomadaire
@@ -332,7 +332,7 @@ Par conséquent, si vous devez modifier la planification hebdomadaire, vous deve
 
 ### <a name="initial-backup"></a>Sauvegarde initiale
 
-Lorsque vous sauvegardez la source de données pour la première fois, DPM doit créer un réplica initial qui crée une copie intégrale de la source de données à protéger sur le volume du réplica DPM. Cette activité peut être planifiée pour une heure spécifique, ou peut être déclenchée manuellement à l’aide de l’applet de commande [Set-DPMReplicaCreationMethod](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmreplicacreationmethod?view=systemcenter-ps-2019) avec le paramètre ```-NOW```.
+Lorsque vous sauvegardez la source de données pour la première fois, DPM doit créer un réplica initial qui crée une copie intégrale de la source de données à protéger sur le volume du réplica DPM. Cette activité peut être planifiée pour une heure spécifique, ou peut être déclenchée manuellement à l’aide de l’applet de commande [Set-DPMReplicaCreationMethod](/powershell/module/dataprotectionmanager/set-dpmreplicacreationmethod) avec le paramètre ```-NOW```.
 
 ```powershell
 Set-DPMReplicaCreationMethod -ProtectionGroup $MPG -NOW
@@ -340,11 +340,11 @@ Set-DPMReplicaCreationMethod -ProtectionGroup $MPG -NOW
 
 ### <a name="changing-the-size-of-dpm-replica--recovery-point-volume"></a>Modification de la taille de réplica DPM et volume du point de récupération
 
-Vous pouvez également modifier la taille du volume de réplica DPM, ainsi que du volume de clichés instantanés à l’aide de l’applet de commande [Set-DPMDatasourceDiskAllocation](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmdatasourcediskallocation?view=systemcenter-ps-2019) comme dans l’exemple suivant : Get-DatasourceDiskAllocation -Datasource $DS Set-DatasourceDiskAllocation -Datasource $DS -ProtectionGroup $MPG -manual -ReplicaArea (2gb) -ShadowCopyArea (2gb)
+Vous pouvez également modifier la taille du volume de réplica DPM, ainsi que du volume de clichés instantanés à l’aide de l’applet de commande [Set-DPMDatasourceDiskAllocation](/powershell/module/dataprotectionmanager/set-dpmdatasourcediskallocation) comme dans l’exemple suivant : Get-DatasourceDiskAllocation -Datasource $DS Set-DatasourceDiskAllocation -Datasource $DS -ProtectionGroup $MPG -manual -ReplicaArea (2gb) -ShadowCopyArea (2gb)
 
 ### <a name="committing-the-changes-to-the-protection-group"></a>Validation des modifications dans le groupe de protection
 
-Pour terminer, les modifications doivent être validées avant que DPM puisse effectuer la sauvegarde conformément à la nouvelle configuration du groupe de protection. Vous pouvez le faire à l’aide de l’applet de commande [Set-DPMProtectionGroup](https://docs.microsoft.com/powershell/module/dataprotectionmanager/set-dpmprotectiongroup?view=systemcenter-ps-2019) .
+Pour terminer, les modifications doivent être validées avant que DPM puisse effectuer la sauvegarde conformément à la nouvelle configuration du groupe de protection. Vous pouvez le faire à l’aide de l’applet de commande [Set-DPMProtectionGroup](/powershell/module/dataprotectionmanager/set-dpmprotectiongroup) .
 
 ```powershell
 Set-DPMProtectionGroup -ProtectionGroup $MPG
@@ -352,7 +352,7 @@ Set-DPMProtectionGroup -ProtectionGroup $MPG
 
 ## <a name="view-the-backup-points"></a>Affichage des points de sauvegarde
 
-Vous pouvez utiliser l’applet de commande [Get-DPMRecoveryPoint](https://docs.microsoft.com/powershell/module/dataprotectionmanager/get-dpmrecoverypoint?view=systemcenter-ps-2019) pour obtenir la liste de tous les points de récupération d’une source de données. Dans cet exemple, nous allons :
+Vous pouvez utiliser l’applet de commande [Get-DPMRecoveryPoint](/powershell/module/dataprotectionmanager/get-dpmrecoverypoint) pour obtenir la liste de tous les points de récupération d’une source de données. Dans cet exemple, nous allons :
 
 * extraire tous les groupes de protection sur le serveur DPM et les stocker dans un tableau ```$PG```
 * obtenir les sources de données correspondant à ```$PG[0]```
@@ -370,7 +370,7 @@ La restauration des données est une combinaison d'un objet ```RecoverableItem``
 
 Dans l'exemple ci-dessous, nous démontrons comment restaurer une machine virtuelle Hyper-V à partir de Sauvegarde Azure en combinant les points de sauvegarde avec la cible pour la récupération. Cet exemple inclut :
 
-* Création d’une option de récupération à l’aide de l’applet de commande [New-DPMRecoveryOption](https://docs.microsoft.com/powershell/module/dataprotectionmanager/new-dpmrecoveryoption?view=systemcenter-ps-2019).
+* Création d’une option de récupération à l’aide de l’applet de commande [New-DPMRecoveryOption](/powershell/module/dataprotectionmanager/new-dpmrecoveryoption).
 * Extraction du tableau de points de sauvegarde à l'aide de l’applet de commande ```Get-DPMRecoveryPoint``` .
 * Choix d’un point de sauvegarde à partir duquel effectuer la restauration.
 

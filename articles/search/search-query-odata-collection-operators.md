@@ -19,12 +19,12 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: 54ddc8222816831b5b436297bbb1b40d03230f0c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4c1243d5d9122539466e94b6bbfdd5ced588e69a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74113239"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88934903"
 ---
 # <a name="odata-collection-operators-in-azure-cognitive-search---any-and-all"></a>Opérateurs de collection OData dans la Recherche cognitive Azure - `any` et `all`
 
@@ -66,23 +66,33 @@ Un **expression lambda** d’un filtre de collection est comme le corps d’une 
 
 Correspondance des documents dont le champ `tags` contient exactement la chaîne « wifi » :
 
-    tags/any(t: t eq 'wifi')
+```text
+tags/any(t: t eq 'wifi')
+```
 
 Correspondance des documents où chaque élément du champ `ratings` se situe entre 3 et 5, y compris :
 
-    ratings/all(r: r ge 3 and r le 5)
+```text
+ratings/all(r: r ge 3 and r le 5)
+```
 
 Correspondance des documents où chaque coordonnée géographique du champ `locations` se trouve dans le polygone donné :
 
-    locations/any(loc: geo.intersects(loc, geography'POLYGON((-122.031577 47.578581, -122.031577 47.678581, -122.131577 47.678581, -122.031577 47.578581))'))
+```text
+locations/any(loc: geo.intersects(loc, geography'POLYGON((-122.031577 47.578581, -122.031577 47.678581, -122.131577 47.678581, -122.031577 47.578581))'))
+```
 
 Correspondance des documents dans lesquels le champ `rooms` est vide :
 
-    not rooms/any()
+```text
+not rooms/any()
+```
 
 Correspondance des documents où pour toutes les salles, le champ `rooms/amenities` contient « tv » et `rooms/baseRate` est inférieur à 100 :
 
-    rooms/all(room: room/amenities/any(a: a eq 'tv') and room/baseRate lt 100.0)
+```text
+rooms/all(room: room/amenities/any(a: a eq 'tv') and room/baseRate lt 100.0)
+```
 
 ## <a name="limitations"></a>Limites
 
@@ -97,4 +107,4 @@ Pour plus d’informations sur ces restrictions et pour obtenir des exemples, co
 - [Filtres dans la Recherche cognitive Azure](search-filters.md)
 - [Vue d’ensemble du langage d’expression OData pour Recherche cognitive Azure](query-odata-filter-orderby-syntax.md)
 - [Informations de référence sur la syntaxe d’expression OData pour Recherche cognitive Azure](search-query-odata-syntax-reference.md)
-- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Rechercher des documents &#40;API REST de la recherche cognitive Azure&#41;](/rest/api/searchservice/Search-Documents)

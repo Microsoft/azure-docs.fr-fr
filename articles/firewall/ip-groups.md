@@ -5,19 +5,16 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: conceptual
-ms.date: 04/06/2020
+ms.date: 07/30/2020
 ms.author: victorh
-ms.openlocfilehash: e0638cbccd5e3bc282dbdd7d3b5918e29081a12b
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: c56298d68bddd326ed2b32215f30a9057fa51e85
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80757164"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94653111"
 ---
-# <a name="ip-groups-preview-in-azure-firewall"></a>Groupes IP (préversion) dans Pare-feu Azure
-
-> [!IMPORTANT]
-> Cette préversion publique est fournie sans contrat de niveau de service et ne doit pas être utilisée pour les charges de travail de production. Certaines fonctionnalités peuvent ne pas être prises en charge, disposer de capacités limitées ou ne pas être disponibles dans tous les emplacements Azure. Consultez les [Conditions d’utilisation supplémentaires des préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+# <a name="ip-groups-in-azure-firewall"></a>Groupes IP dans Pare-feu Azure
 
 Les groupes IP vous permettent de regrouper et de gérer des adresses IP pour les règles de Pare-feu Azure de l’une des manières suivantes :
 
@@ -40,7 +37,7 @@ Les exemples de format d’adresse IPv4 suivants sont valides pour une utilisat
 
 ## <a name="create-an-ip-group"></a>Créer un groupe IP
 
-Un groupe IP peut être créé à l’aide du Portail Azure, d’Azure CLI ou de l’API REST. Pour plus d’informations, consultez [Créer un groupe IP (préversion)](create-ip-group.md).
+Un groupe IP peut être créé à l’aide du Portail Azure, d’Azure CLI ou de l’API REST. Pour plus d’informations, consultez [Créer un groupe IP](create-ip-group.md).
 
 ## <a name="browse-ip-groups"></a>Parcourir les groupes IP
 1. Dans la barre de recherche du Portail Azure, saisissez **Groupes IP** et sélectionnez le résultat. Vous pouvez voir la liste des groupes IP, ou vous pouvez sélectionner **Ajouter** pour créer un groupe IP.
@@ -65,9 +62,6 @@ Vous pouvez voir toutes les adresses IP dans le groupe IP et les règles ou le
 
 Vous pouvez maintenant sélectionner **Groupe IP** comme **Type source** ou **Type de destination** pour les adresses IP lorsque vous créez des règles de DNAT, d’application ou de réseau de Pare-feu Azure.
 
-> [!NOTE]
-> Les groupes IP ne sont pas pris en charge dans la stratégie de pare-feu. Ils ne sont actuellement pris en charge qu’avec les règles de pare-feu traditionnelles.
-
 ![Groupes IP dans Pare-feu](media/ip-groups/fw-ipgroup.png)
 
 ## <a name="region-availability"></a>Disponibilité des régions
@@ -76,55 +70,19 @@ Les groupes IP sont disponibles dans toutes les régions de cloud public.
 
 ## <a name="ip-address-limits"></a>Limites d'adresses IP
 
-Pour 50 groupes IP ou moins : vous pouvez disposer d'un maximum de maximum 5 000 adresses IP individuelles par instance de pare-feu. Pour 51 à 100 groupes IP, vous pouvez disposer de 500 adresses IP individuelles par instance de pare-feu.
-
-### <a name="examples"></a>Exemples
-
-#### <a name="example-1-supported"></a>Exemple 1 : pris en charge
-
-|Groupes IP  |Nombre d'adresses IP  |Notation  |Règle  |
-|---------|---------|---------|---------|
-|IPGroup1 |4096     |10.0.0.0/20  |Rule1|
-|IPGroup2     |3|196.0.0.0 à 196.0.0.2|Rule1|
-|IPGroup3     |1|1.2.3.4|Rule1|
-|     |**Total 4100**|         |         |
-|     |         |         |         |
-
-#### <a name="example-2-supported"></a>Exemple 2 : pris en charge
-
-|Groupes IP  |Nombre d'adresses IP  |Notation  |Règle  |
-|---------|---------|---------|---------|
-|IPGroup1 |4096     |10.0.0.0/20  |Rule1|
-|IPGroup2     |4096|11.0.0.0/20|Rule1|
-|     |**Total 8192**|         |         |
-
-#### <a name="example-3-not-supported"></a>Exemple 3 : non pris en charge
-
-|Groupes IP  |Nombre d'adresses IP  |Notation  |Règle  |
-|---------|---------|---------|---------|
-|IPGroup1 |8 192     |10.0.0.0/20, 11.0.0.0/20  |Rule1|
-|     |**Total 8192**|||
-
-#### <a name="example-4-supported"></a>Exemple 4 : pris en charge
-
-|Groupes IP  |Nombre d'adresses IP  |Notation  |Règle  |
-|---------|---------|---------|---------|
-|IPGroup1 |4096     |10.0.0.0/20  |Rule1|
-|IPGroup2     |4096|11.0.0.0/20|Rule2|
-|     |**Total 8192**|         |         |
-
+Vous pouvez avoir un maximum de 100 groupes d’adresses IP par pare-feu avec un maximum de 5 000 adresses IP ou préfixes IP individuels par groupe d’adresses IP.
 
 ## <a name="related-azure-powershell-cmdlets"></a>Cmdlets Azure PowerShell connexes
 
 Vous pouvez utiliser les cmdlets Azure PowerShell suivantes pour créer et gérer des groupes IP :
 
-- [New-AzIpGroup](https://docs.microsoft.com/powershell/module/az.network/new-azipgroup?view=azps-3.4.0)
-- [Remove-AzIPGroup](https://docs.microsoft.com/powershell/module/az.network/remove-azipgroup?view=azps-3.4.0)
-- [Get-AzIpGroup](https://docs.microsoft.com/powershell/module/az.network/get-azipgroup?view=azps-3.4.0)
-- [Set-AzIpGroup](https://docs.microsoft.com/powershell/module/az.network/set-azipgroup?view=azps-3.4.0)
-- [New-AzFirewallNetworkRule](https://docs.microsoft.com/powershell/module/az.network/new-azfirewallnetworkrule?view=azps-3.4.0)
-- [New-AzFirewallApplicationRule](https://docs.microsoft.com/powershell/module/az.network/new-azfirewallapplicationrule?view=azps-3.4.0)
-- [New-AzFirewallNatRule](https://docs.microsoft.com/powershell/module/az.network/new-azfirewallnatrule?view=azps-3.4.0)
+- [New-AzIpGroup](/powershell/module/az.network/new-azipgroup?view=azps-3.4.0)
+- [Remove-AzIPGroup](/powershell/module/az.network/remove-azipgroup?view=azps-3.4.0)
+- [Get-AzIpGroup](/powershell/module/az.network/get-azipgroup?view=azps-3.4.0)
+- [Set-AzIpGroup](/powershell/module/az.network/set-azipgroup?view=azps-3.4.0)
+- [New-AzFirewallNetworkRule](/powershell/module/az.network/new-azfirewallnetworkrule?view=azps-3.4.0)
+- [New-AzFirewallApplicationRule](/powershell/module/az.network/new-azfirewallapplicationrule?view=azps-3.4.0)
+- [New-AzFirewallNatRule](/powershell/module/az.network/new-azfirewallnatrule?view=azps-3.4.0)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

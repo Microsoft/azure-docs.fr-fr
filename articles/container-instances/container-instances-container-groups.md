@@ -4,12 +4,12 @@ description: Apprenez-en davantage sur les groupes de conteneurs dans Azure Cont
 ms.topic: article
 ms.date: 11/01/2019
 ms.custom: mvc
-ms.openlocfilehash: b5f4f834d44294d846495a59af2fb65b231e4820
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 72ebe6186da179bc5a1effddcc14327455eb7557
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583839"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89612417"
 ---
 # <a name="container-groups-in-azure-container-instances"></a>Groupes de conteneurs dans Azure Container Instances
 
@@ -108,7 +108,7 @@ Découvrez comment déployer un groupe de plusieurs conteneurs avec un modèle A
 
 <!-- LINKS - External -->
 [dcos-pod]: https://dcos.io/docs/1.10/deploying-services/pods/
-[kubernetes-pod]: https://kubernetes.io/docs/concepts/workloads/pods/pod/
+[kubernetes-pod]: https://kubernetes.io/docs/concepts/workloads/pods/
 
 <!-- LINKS - Internal -->
 [resource-manager template]: container-instances-multi-container-group.md

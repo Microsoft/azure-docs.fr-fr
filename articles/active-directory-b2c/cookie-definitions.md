@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 01/23/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: b984b75b3a12606aa0d82c7e7b399d5dce59df33
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5e44e2e1eb37e808e60134a6fba5051552e84029
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78189512"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85389341"
 ---
 # <a name="cookies-definitions-for-azure-ad-b2c"></a>Définitions de cookies pour Azure AD B2C
 

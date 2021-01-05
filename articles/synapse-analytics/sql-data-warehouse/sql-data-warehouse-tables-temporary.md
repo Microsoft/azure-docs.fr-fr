@@ -1,39 +1,41 @@
 ---
 title: tables temporaires ;
-description: Conseils de base pour l’utilisation de tables temporaires dans le pool SQL Synapse mettant en évidence les principes des tables temporaires au niveau de la session.
+description: Conseils de base pour l’utilisation de tables temporaires dans le pool SQL dédié mettant en évidence les principes des tables temporaires au niveau de la session.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/01/2019
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.openlocfilehash: 56d8ab81fcf9200fec2cfb4a741724b8f79db820
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 077782099d6d61982052dc1690d545e58e928d8c
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81408039"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93310676"
 ---
-# <a name="temporary-tables-in-synapse-sql-pool"></a>Tables temporaires dans le pool SQL Synapse
+# <a name="temporary-tables-in-dedicated-sql-pool"></a>Tables temporaires dans le pool SQL dédié
+
 Cet article contient des conseils de base pour l’utilisation des tables temporaires et met en évidence les principes des tables temporaires au niveau de la session. 
 
 L’utilisation des informations de cet article peut vous aider à modulariser votre code, améliorant ainsi sa réutilisabilité et sa facilité de maintenance.
 
 ## <a name="what-are-temporary-tables"></a>Qu’est-ce que les tables temporaires ?
-Les tables temporaires sont utiles lors du traitement des données, notamment lors d’une transformation lorsque les résultats intermédiaires sont temporaires. Dans le pool SQL, les tables temporaires existent au niveau de la session.  
+
+Les tables temporaires sont utiles lors du traitement des données, notamment lors d’une transformation lorsque les résultats intermédiaires sont temporaires. Dans le pool SQL dédié, les tables temporaires existent au niveau de la session.  
 
 Elles sont uniquement visibles pour la session dans laquelle elles ont été créées et sont automatiquement supprimées lorsque cette session se déconnecte.  
 
 Les tables temporaires offrent un gain de performances, car leurs résultats sont écrits en local et non dans un stockage distant.
 
-Les tables temporaires sont utiles lors du traitement des données, notamment lors d’une transformation lorsque les résultats intermédiaires sont temporaires. Avec SQL Analytics, les tables temporaires existent au niveau de la session.  Elles sont visibles uniquement dans la session dans laquelle elles ont été créées. Ainsi, elles sont automatiquement supprimées à la fermeture de cette session. 
+Les tables temporaires sont utiles lors du traitement des données, notamment lors d’une transformation lorsque les résultats intermédiaires sont temporaires. Avec un pool SQL dédié, les tables temporaires existent au niveau de la session.  Elles sont visibles uniquement dans la session dans laquelle elles ont été créées. Ainsi, elles sont automatiquement supprimées à la fermeture de cette session. 
 
-## <a name="temporary-tables-in-sql-pool"></a>Tables temporaires dans le pool SQL
+## <a name="temporary-tables-in-dedicated-sql-pool"></a>Tables temporaires dans le pool SQL dédié
 
-Dans la ressource de pool SQL, les tables temporaires offrent un gain de performances, car leurs résultats sont écrits en local et non dans un stockage distant.
+Dans la ressource de pool SQL dédié, les tables temporaires offrent un gain de performances, car leurs résultats sont écrits en local et non dans un stockage distant.
 
 ### <a name="create-a-temporary-table"></a>Créer une table temporaire
 
@@ -194,7 +196,7 @@ SELECT
     THEN 'UPDATE STATISTICS '+[two_part_name]+'('+[stats_name]+') WITH RESAMPLE;'
     END AS [update_stats_ddl]
 ,   [seq_nmbr]
-FROM    t1
+FROM    #stats_ddl
 ;
 GO
 ```
@@ -205,7 +207,7 @@ Cette procédure stockée abandonne une table #stats_ddl existante pour s’assu
 
 Toutefois, étant donné l’absence de `DROP TABLE` à la fin de la procédure stockée, lorsque la procédure stockée se termine, elle quitte la table créée afin de pouvoir être lue en dehors de la procédure stockée.  
 
-Dans le pool SQL, contrairement à d’autres bases de données SQL, il est possible d’utiliser la table temporaire en dehors de la procédure qui l’a créée.  Les tables temporaires du pool SQL sont utilisables à **n’importe quel point** de la session. Cette fonctionnalité peut optimiser la facilité de gestion et la modularité du code comme dans l’exemple suivant :
+Dans le pool SQL dédié, contrairement à d’autres bases de données SQL Server, il est possible d’utiliser la table temporaire en dehors de la procédure qui l’a créée.  Les tables temporaires du pool SQL dédié sont utilisables à **n’importe quel point** de la session. Cette fonctionnalité peut optimiser la facilité de gestion et la modularité du code comme dans l’exemple suivant :
 
 ```sql
 EXEC [dbo].[prc_sqldw_update_stats] @update_type = 1, @sample_pct = NULL;
@@ -227,11 +229,11 @@ DROP TABLE #stats_ddl;
 ```
 
 ## <a name="temporary-table-limitations"></a>Limitations relatives aux tables temporaires
-Le pool SQL impose quelques restrictions lors de l’implémentation de tables temporaires.  Actuellement, seules les tables temporaires de la session sont prises en charge.  Les tables temporaires globales ne sont pas prises en charge.  
+Le pool SQL dédié impose quelques restrictions lors de l’implémentation de tables temporaires.  Actuellement, seules les tables temporaires de la session sont prises en charge.  Les tables temporaires globales ne sont pas prises en charge.  
 
 Par ailleurs, il n’est pas possible de créer des vues sur des tables temporaires.  Les tables temporaires peuvent être créées uniquement avec une distribution par hachage ou par tourniquet (round robin).  La distribution de tables temporaires répliquées n’est pas prise en charge. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur le développement de tables, consultez l’article [Conception de tables à l’aide des ressources SQL Analytics](sql-data-warehouse-tables-overview.md).
+Pour en savoir plus sur le développement de tables, consultez l’article [Conception de tables à l’aide d’un pool SQL dédié](sql-data-warehouse-tables-overview.md).
 

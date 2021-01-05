@@ -10,10 +10,10 @@ caps.latest.revision: 14
 author: georgewallace
 ms.author: tagore
 ms.openlocfilehash: 6d0e84b6724d9df4162d4be3e06a9952087a53a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "79537344"
 ---
 # <a name="azure-cloud-services-definition-loadbalancerprobe-schema"></a>Schéma LoadBalancerProbe de définition Azure Cloud Services

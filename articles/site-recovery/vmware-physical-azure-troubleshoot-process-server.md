@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: troubleshooting
 ms.date: 09/09/2019
 ms.author: raynew
-ms.openlocfilehash: 812cd0293f9627b7438e9870d8985e71dae1d147
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ad1bec66edaa3fcc6049f4911684f6e6d6c3e366
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228817"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999182"
 ---
 # <a name="troubleshoot-the-process-server"></a>Dépanner le serveur de traitement
 
@@ -54,11 +54,11 @@ Le serveur de traitement génère un certain nombre d’alertes d’intégrité.
 ![Healthy][green] | None  | Le serveur de processus est connecté et sain.
 ![Avertissement][yellow] | Les services spécifiés ne fonctionnent pas. | 1. Vérifiez que les services sont en cours d’exécution.<br/> 2. Si les services fonctionnent comme prévu, suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).
 ![Avertissement][yellow]  | Utilisation du processeur > 80 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines.<br/>2. Vérifiez que le nombre de machines virtuelles utilisant le serveur de traitement correspond aux [limites définies](site-recovery-plan-capacity-vmware.md#capacity-considerations), et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/>3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).
-![Critique][red] |  Utilisation du processeur > 95 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines.<br/>2. Vérifiez que le nombre de machines virtuelles utilisant le serveur de traitement correspond aux [limites définies](site-recovery-plan-capacity-vmware.md#capacity-considerations), et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/>3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 4. Si le problème persiste, exécutez le [Planificateur de déploiement](https://aka.ms/asr-v2a-deployment-planner) pour la réplication VMware ou du serveur physique.
+![Critique][red] |  Utilisation du processeur > 95 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines.<br/>2. Vérifiez que le nombre de machines virtuelles utilisant le serveur de traitement correspond aux [limites définies](site-recovery-plan-capacity-vmware.md#capacity-considerations), et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/>3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 4. Si le problème persiste, exécutez le [Planificateur de déploiement](./site-recovery-deployment-planner.md) pour la réplication VMware ou du serveur physique.
 ![Avertissement][yellow] | Utilisation de la mémoire > 80 % durant les 15 dernières minutes. |  1. N'ajoutez pas de nouvelles machines.<br/>2. Vérifiez que le nombre de machines virtuelles utilisant le serveur de traitement correspond aux [limites définies](site-recovery-plan-capacity-vmware.md#capacity-considerations), et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/>3. Suivez toutes les instructions liées à l'avertissement.<br/> 4. Si le problème persiste, suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).
-![Critique][red] | Utilisation de la mémoire > 95 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/> 2. Suivez toutes les instructions liées à l'avertissement.<br/> 3. 4. Si le problème persiste, suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 4. Si le problème persiste, exécutez le [Planificateur de déploiement](https://aka.ms/asr-v2a-deployment-planner) pour résoudre les problèmes de réplication VMware ou du serveur physique.
+![Critique][red] | Utilisation de la mémoire > 95 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/> 2. Suivez toutes les instructions liées à l'avertissement.<br/> 3. 4. Si le problème persiste, suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 4. Si le problème persiste, exécutez le [Planificateur de déploiement](./site-recovery-deployment-planner.md) pour résoudre les problèmes de réplication VMware ou du serveur physique.
 ![Avertissement][yellow] | Espace libre du dossier cache < 30 % durant les 15 dernières minutes. | 1. N'ajoutez pas de nouvelles machines et installez un [serveur de traitement supplémentaire](vmware-azure-set-up-process-server-scale.md) si nécessaire.<br/>2. Vérifiez que le nombre de machines virtuelles utilisant le serveur de traitement correspond aux [instructions](site-recovery-plan-capacity-vmware.md#capacity-considerations).<br/> 3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).
-![Critique][red] |  Espace libre < 25 % durant les 15 dernières minutes | 1. Suivez les instructions liées à l'avertissement pour ce problème.<br/> 2. 3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 3. Si le problème persiste, exécutez le [Planificateur de déploiement](https://aka.ms/asr-v2a-deployment-planner) pour la réplication VMware ou du serveur physique.
+![Critique][red] |  Espace libre < 25 % durant les 15 dernières minutes | 1. Suivez les instructions liées à l'avertissement pour ce problème.<br/> 2. 3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).<br/> 3. Si le problème persiste, exécutez le [Planificateur de déploiement](./site-recovery-deployment-planner.md) pour la réplication VMware ou du serveur physique.
 ![Critique][red] | Le serveur de traitement n’a émis aucune pulsation pendant 15 minutes ou plus. Le service tmansvs ne communique pas avec le serveur de configuration. | 1) Vérifiez que le serveur de traitement est opérationnel.<br/> 2. Vérifiez que le service tmassvc est en cours d’exécution sur le serveur de traitement.<br/> 3. Suivez les instructions ci-dessous pour [détecter les problèmes de connectivité et de réplication ](#check-connectivity-and-replication).
 
 
@@ -91,12 +91,12 @@ Si le serveur de traitement n’émet aucune pulsation (code d'erreur 806), proc
 
  Les défaillances de réplication initiales et en cours résultent souvent de problèmes de connectivité entre les machines source et le serveur de traitement, ou entre ce dernier et Azure. Ces étapes sont résumées dans le graphique suivant, suivies de procédures pour vous aider à les exécuter.
 
-![Détecter les problèmes de connectivité et de réplication](./media/vmware-physical-azure-troubleshoot-process-server/troubleshoot-connectivity-replication.png)
+![Organigramme présentant les étapes de la résolution des problèmes liés à la connectivité et à la réplication.](./media/vmware-physical-azure-troubleshoot-process-server/troubleshoot-connectivity-replication.png)
 
 
 ## <a name="step-4-verify-time-sync-on-source-machine"></a>Étape 4 : Vérifier la synchronisation de l'heure sur la machine source
 
-Assurez-vous que la date et l’heure système de la machine répliquée sont synchronisées. [En savoir plus](https://docs.microsoft.com/windows-server/networking/windows-time-service/accurate-time)
+Assurez-vous que la date et l’heure système de la machine répliquée sont synchronisées. [En savoir plus](/windows-server/networking/windows-time-service/accurate-time)
 
 ## <a name="step-5-check-anti-virus-software-on-source-machine"></a>Étape 5 : Vérifier le logiciel antivirus de la machine source
 
@@ -105,7 +105,7 @@ Vérifiez qu'aucun logiciel antivirus sur la machine répliquée ne bloque Site 
 ## <a name="step-6-check-connectivity-from-source-machine"></a>Étape 6 : Vérifier la connectivité de la machine source
 
 
-1. Installez le [client Telnet](https://technet.microsoft.com/library/cc771275(v=WS.10).aspx) sur la machine source si nécessaire. N’utilisez pas Ping.
+1. Installez le [client Telnet](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771275(v=ws.10)) sur la machine source si nécessaire. N’utilisez pas Ping.
 2. Depuis la machine source, effectuez un test ping sur le serveur de traitement sur le port HTTPS avec Telnet. Par défaut, le port 9443 est le port HTTPS pour le trafic de réplication.
 
     `telnet <process server IP address> <port>`
@@ -170,7 +170,7 @@ Vérifiez si le serveur de traitement transmet activement des données à Azure.
   2. Sélectionnez l’onglet **Performances** > **Ouvrir le Moniteur de ressources**.
   3. Dans la page **Moniteur de ressources**, sélectionnez l’onglet **Réseau**. Sous **Processus avec activité réseau**, vérifiez si cbengine.exe envoie activement un volume important de données.
 
-       ![Volumes sous Processus avec activité réseau](./media/vmware-physical-azure-troubleshoot-process-server/cbengine.png)
+       ![Capture d’écran montrant un grand nombre de volumes sous des processus avec activité réseau.](./media/vmware-physical-azure-troubleshoot-process-server/cbengine.png)
 
   Si cbengine.exe n’envoie pas un volume important de données, procédez de la manière décrite dans les sections suivantes.
 
@@ -179,7 +179,7 @@ Vérifiez si le serveur de traitement transmet activement des données à Azure.
 1. Dans Moniteur de ressources, sélectionnez **cbengine.exe**.
 2. Sous **Connexions TCP**, vérifiez s’il y a une connectivité du serveur de traitement au Stockage Azure.
 
-  ![Connectivité entre cbengine.exe et l’URL du Stockage Blob Azure](./media/vmware-physical-azure-troubleshoot-process-server/rmonitor.png)
+  ![Capture d’écran montrant la connectivité entre cbengine.exe et l’URL de Stockage Blob Azure.](./media/vmware-physical-azure-troubleshoot-process-server/rmonitor.png)
 
 ### <a name="check-services"></a>Vérifier les services
 
@@ -246,7 +246,7 @@ Augmentez la bande passante entre le serveur de traitement et Azure, puis vérif
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous avez besoin d’aide, publiez votre question sur le [forum Azure Site Recovery](https://social.msdn.microsoft.com/Forums/azure/home?forum=hypervrecovmgr). 
+Si vous avez besoin d’aide supplémentaire, publiez votre question sur la [page de questions Microsoft Q&R sur Azure Site Recovery](/answers/topics/azure-site-recovery.html). 
 
 [green]: ./media/vmware-physical-azure-troubleshoot-process-server/green.png
 [yellow]: ./media/vmware-physical-azure-troubleshoot-process-server/yellow.png

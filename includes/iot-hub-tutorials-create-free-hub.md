@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-hub
 author: dominicbetts
 ms.service: iot-hub
@@ -9,10 +9,10 @@ ms.date: 04/19/2018
 ms.author: dobett
 ms.custom: include file
 ms.openlocfilehash: 367a0b1d17f8d5ebe4f46835ace963b00e75354e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "68229298"
 ---
 Pour créer un hub IoT à l’aide du portail Azure :
@@ -27,10 +27,10 @@ Pour créer un hub IoT à l’aide du portail Azure :
 
     | Paramètre | Valeur |
     | ------- | ----- |
-    | Subscription | Sélectionnez votre abonnement Azure dans la liste déroulante. |
+    | Abonnement | Sélectionnez votre abonnement Azure dans la liste déroulante. |
     | Resource group | Créer. Ce didacticiel utilise le nom **tutorials-iot-hub-rg**. |
     | Région | Ce didacticiel utilise **USA Ouest**. Vous pouvez choisir la région la plus proche. |
-    | Name | La capture d’écran suivante utilise le nom **tutorials-iot-hub**. Vous devez choisir votre propre nom unique quand vous créez ce hub. |
+    | Nom | La capture d’écran suivante utilise le nom **tutorials-iot-hub**. Vous devez choisir votre propre nom unique quand vous créez ce hub. |
 
     ![Paramètres du hub 1](media/iot-hub-tutorials-create-free-hub/hubdefinition-1.png)
 

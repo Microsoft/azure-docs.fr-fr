@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Bime | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Bime.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: bdcf0729-c880-4c95-b739-0f6345b17dd8
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/06/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7774fd55a64df198a9b025a67ce377deebefe8fe
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 3bbd18bc7851d4ccffca4f721f6e2aef45ff3c3d
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74232067"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673715"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-bime"></a>Didacticiel : Intégration d’Azure Active Directory à Bime
 
@@ -32,7 +27,7 @@ L’intégration de Bime dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Bime (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Bime à Azure AD, vous devez ajouter Bime, d
 
 4. Dans la zone de recherche, tapez **Bime**, sélectionnez **Bime** dans le panneau de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Bime dans la liste des résultats](common/search-new-app.png)
+    ![Bime dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -136,11 +131,11 @@ Pour configurer l’authentification unique Azure AD avec Bime, effectuez les é
 1. Dans une autre fenêtre de navigateur web, connectez-vous à votre site d’entreprise Bime en tant qu’administrateur.
 
 2. Dans la barre d’outils, cliquez sur **Admin**, puis sur **Account**.
-  
-    ![Administrateur](./media/bime-tutorial/ic775558.png "Admin")
+
+    ![Capture d’écran montrant l’élément Admin et Account sélectionnés.](./media/bime-tutorial/ic775558.png "Admin")
 
 3. Dans la page de configuration du compte, procédez comme suit :
-  
+
     ![Configurer l’authentification unique](./media/bime-tutorial/ic775559.png "Configure Single Sign-On")
 
     a. Sélectionnez **Activer l’authentification SAML**.
@@ -168,7 +163,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -212,7 +207,7 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Bime, vous devez les
 
 2. Dans la barre d’outils, cliquez sur **Admin**, puis sur **Users**.
 
-    ![Administrateur](./media/bime-tutorial/ic775561.png "Admin")
+    ![Capture d’écran montrant l’élément Admin et Users sélectionnés.](./media/bime-tutorial/ic775561.png "Admin")
 
 3. Dans la **Users List**, cliquez sur **Add New User** (« + »).
 
@@ -237,13 +232,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Bime, vous devez les
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Bime dans le volet d’accès, vous devez être connecté automatiquement à l’application Bime pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Bime dans le volet d’accès, vous devez être connecté automatiquement à l’application Bime pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

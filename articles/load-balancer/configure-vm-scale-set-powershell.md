@@ -4,18 +4,18 @@ description: Découvrez comment configurer un groupe de machines virtuelles iden
 author: asudbring
 ms.author: allensu
 ms.service: load-balancer
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/26/2020
-ms.openlocfilehash: 0db09083a2197ce72e6d6eed2381b0308239586e
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: 919883025075ca38bcef6c23ac744528e7bd5502
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80349992"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88510060"
 ---
 # <a name="configure-a-virtual-machine-scale-set-with-an-existing-azure-load-balancer-using-azure-powershell"></a>Configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant à l’aide d’Azure PowerShell
 
-Dans cet article, vous allez découvrir comment configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant. 
+Dans cet article, vous allez découvrir comment configurer un groupe de machines virtuelles identiques avec un service Azure Load Balancer existant.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -23,7 +23,7 @@ Dans cet article, vous allez découvrir comment configurer un groupe de machines
 - Un équilibreur de charge SKU standard existant dans l’abonnement dans lequel le groupe de machines virtuelles identiques sera déployé.
 - Un réseau virtuel Azure pour le groupe de machines virtuelles identiques.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)] 
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -64,7 +64,7 @@ L’exemple ci-dessous déploie un groupe de machines virtuelles identiques avec
 - Sous-réseau nommé **mySubnet**
 - Groupe de ressources nommé **myResourceGroup**
 
-```azureppowershell-interactive
+```azurepowershell-interactive
 
 $rsg = "myResourceGroup"
 $loc = "East US 2"
@@ -87,4 +87,3 @@ Dans cet article, vous avez déployé un groupe de machines virtuelles identique
 
 - [Qu’est-ce que Azure Load Balancer ?](load-balancer-overview.md)
 - [Que sont les groupes de machines virtuelles identiques ?](../virtual-machine-scale-sets/overview.md)
-                                

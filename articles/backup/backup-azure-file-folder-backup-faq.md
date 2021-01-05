@@ -1,18 +1,18 @@
 ---
-title: Sauvegarde des fichiers et des dossiers - Questions courantes
+title: Agent Microsoft Azure Recovery Services (MARS) – FAQ
 description: Cette section répond aux questions courantes liées à la sauvegarde des fichiers et des dossiers avec Sauvegarde Microsoft Azure.
 ms.topic: conceptual
 ms.date: 07/29/2019
-ms.openlocfilehash: 6e9f265672ff15e40444a46a3e440e73a0051a5b
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 1edfaed99e60409774496c5ae75df8be99a8fe1f
+ms.sourcegitcommit: f6236e0fa28343cf0e478ab630d43e3fd78b9596
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81254748"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94917356"
 ---
-# <a name="common-questions-about-backing-up-files-and-folders"></a>Questions courantes sur la sauvegarde de fichiers et de dossiers
+# <a name="frequently-asked-questions---microsoft-azure-recovery-services-mars-agent"></a>Foire aux questions : agent Microsoft Azure Recovery Services (MARS)
 
-Cet article répond aux questions courantes sur la sauvegarde de fichiers et de dossiers avec l’agent MARS (Microsoft Azure Recovery Services) dans le service [Sauvegarde Microsoft Azure](backup-overview.md).
+Cet article répond aux questions courantes sur la sauvegarde de données à l’aide de l’agent MARS (Microsoft Azure Recovery Services) dans le service [Sauvegarde Microsoft Azure](backup-overview.md).
 
 ## <a name="configure-backups"></a>Configurer des sauvegardes
 
@@ -20,9 +20,19 @@ Cet article répond aux questions courantes sur la sauvegarde de fichiers et de 
 
 Vous pouvez [télécharger ici](https://aka.ms/azurebackup_agent) la dernière version de l’agent MARS utilisé lors de la sauvegarde de machines Windows Server et System Center DPM, et du serveur de Sauvegarde Microsoft Azure.
 
+### <a name="where-can-i-download-the-vault-credentials-file"></a>Où puis-je télécharger le fichier des informations d’identification du coffre ?
+
+Dans le portail Azure, accédez à **Propriétés** pour votre coffre. Sous **Informations d’identification de la sauvegarde**, cochez la case **La dernière version de l’agent Recovery Services est déjà utilisée**. Sélectionnez **Télécharger**.
+
+![Télécharger les informations d’identification](./media/backup-azure-file-folder-backup-faq/download-credentials.png)
+
 ### <a name="how-long-are-vault-credentials-valid"></a>Combien de temps les informations d’identification restent-elles valides ?
 
 Les informations d’identification du coffre expirent au bout de 10 jours. Si le fichier d’informations d’identification arrive à expiration, retéléchargez-le à partir du Portail Microsoft Azure.
+
+### <a name="what-characters-are-allowed-for-the-passphrase"></a>Quels sont les caractères autorisés pour la phrase secrète ?
+
+La phrase secrète doit utiliser des caractères du jeu de caractères ASCII, avec des [valeurs ASCII inférieures ou égales à 127](/office/vba/language/reference/user-interface-help/character-set-0127).
 
 ### <a name="from-what-drives-can-i-back-up-files-and-folders"></a>Sur quels types de lecteurs puis-je sauvegarder des fichiers et des dossiers ?
 
@@ -62,6 +72,10 @@ Oui. Cet agent convertit les données dédupliquées en données normales lorsqu
 
 Oui, l’installation de l’agent MARS et la configuration des sauvegardes à l’aide de la console MARS impliquent que l’utilisateur soit administrateur local sur le serveur protégé.
 
+### <a name="what-is-the-impact-on-mars-agent-backups-of-transferring-the-vault-subscription-to-a-different-azure-ad-directory"></a>Lorsque l'abonnement au coffre est transféré vers une autre instance d'Azure AD Directory, quel est l'impact sur les sauvegardes de l'agent MARS ?
+
+Le changement d'instance d'Azure AD Directory n'a aucun impact sur les sauvegardes de l'agent MARS. 
+
 ## <a name="manage-backups"></a>Gestion des sauvegardes
 
 ### <a name="what-happens-if-i-rename-a-windows-machine-configured-for-backup"></a>Que se passe-t-il si je renomme un ordinateur Windows configuré pour la sauvegarde ?
@@ -74,11 +88,11 @@ Lorsque vous renommez un ordinateur Windows, toutes les sauvegardes actuellement
 
 ### <a name="what-is-the-maximum-file-path-length-for-backup"></a>Quelle est la longueur maximale autorisée pour le chemin d’accès au fichier de sauvegarde ?
 
-L’agent MARS s’appuie sur NTFS et utilise la spécification de longueur de chemin d’accès définie par [l’API Windows](/windows/desktop/FileIO/naming-a-file#fully-qualified-vs-relative-paths). Si les fichiers que vous souhaitez protéger sont plus longs que la valeur autorisée, sauvegardez le dossier parent ou le lecteur de disque.  
+L’agent MARS s’appuie sur NTFS et utilise la spécification de longueur de chemin d’accès définie par [l’API Windows](/windows/win32/FileIO/naming-a-file#fully-qualified-vs-relative-paths). Si les fichiers que vous souhaitez protéger sont plus longs que la valeur autorisée, sauvegardez le dossier parent ou le lecteur de disque.  
 
 ### <a name="what-characters-are-allowed-in-file-paths"></a>Quels sont les caractères autorisés dans les chemins d’accès aux fichiers ?
 
-L’agent MARS s’appuie sur NTFS et autorise les [caractères pris en charge](/windows/desktop/FileIO/naming-a-file#naming-conventions) dans les noms/chemins d’accès aux fichiers.
+L’agent MARS s’appuie sur NTFS et autorise les [caractères pris en charge](/windows/win32/FileIO/naming-a-file#naming-conventions) dans les noms/chemins d’accès aux fichiers.
 
 ### <a name="the-warning-azure-backups-have-not-been-configured-for-this-server-appears"></a>Un avertissement s’affiche, signalant que les sauvegardes Azure n’ont pas été configurées pour ce serveur.
 
@@ -95,7 +109,7 @@ La taille du dossier du cache détermine la quantité de données que vous sauve
 
 * Les volumes de dossier de cache doivent disposer d’un espace disponible correspondant à 5 à 10 % minimum de la taille totale des données de sauvegarde.
 * Si le volume dispose de moins de 5 % de l’espace libre, augmentez la taille du volume, ou déplacez le dossier de cache vers un volume ayant suffisamment d’espace disponible en suivant [ces étapes](#how-do-i-change-the-cache-location-for-the-mars-agent).
-* Si vous sauvegardez l’état du système Windows, il vous faut 30 à 35 Go d’espace disponible de plus sur le volume contenant le dossier du cache.
+* Si vous sauvegardez l’état du système Windows, il vous faut 30 à 35 Go supplémentaires d’espace libre sur le volume contenant le dossier du cache.
 
 ### <a name="how-to-check-if-scratch-folder-is-valid-and-accessible"></a>Comment vérifier si le dossier de travail est valide et accessible ?
 
@@ -112,7 +126,7 @@ La taille du dossier du cache détermine la quantité de données que vous sauve
 1. Pour arrêter le moteur de sauvegarde, exécutez cette commande dans une invite de commandes avec élévation de privilèges :
 
     ```Net stop obengine```
-2. Si vous avez configuré la sauvegarde de l’état du système, ouvrez gestion des disques et démontez le ou les disques avec des noms au format `"CBSSBVol_<ID>"`.
+2. Si vous avez configuré la sauvegarde de l’état du système, ouvrez Gestion des disques et démontez le ou les disques dont le nom est au format `"CBSSBVol_<ID>"`.
 3. Par défaut, le dossier de travail se trouve ici : `\Program Files\Microsoft Azure Recovery Services Agent\Scratch`
 4. Copiez la totalité du dossier `\Scratch` sur un autre lecteur disposant d’un espace suffisant. Assurez-vous que le contenu est copié et non déplacé.
 5. Mettez à jour les entrées de registre suivantes en utilisant le chemin du dossier de travail qui vient d’être déplacé.
@@ -159,17 +173,18 @@ Oui. Vous pouvez utiliser l’option **Modifier les propriétés** de l’agent 
 
 ### <a name="manage"></a>Gérer
 
-**Puis-je effectuer la récupération si j’ai oublié ma phrase secrète ?**
+#### <a name="can-i-recover-if-i-forgot-my-passphrase"></a>Puis-je effectuer la récupération si j’ai oublié ma phrase secrète ?
+
 L’agent de sauvegarde Azure a besoin d’une phrase secrète (que vous avez fournie lors de l’inscription) pour déchiffrer les données sauvegardées lors de la restauration. Passez en revue les scénarios ci-dessous pour comprendre les options de gestion d’une phrase secrète perdue :
 
 | Ordinateur d’origine <br> *(ordinateur source sur lequel les sauvegardes ont été effectuées)* | Passphrase | Options disponibles |
 | --- | --- | --- |
-| Disponible |Perdue |Si votre ordinateur d’origine (où les sauvegardes ont été effectuées) est disponible et toujours inscrit auprès du même coffre Recovery Services, vous pouvez régénérer la phrase secrète en suivant ces [étapes](https://docs.microsoft.com/azure/backup/backup-azure-manage-mars#re-generate-passphrase).  |
+| Disponible |Perdue |Si votre ordinateur d’origine (où les sauvegardes ont été effectuées) est disponible et toujours inscrit auprès du même coffre Recovery Services, vous pouvez régénérer la phrase secrète en suivant ces [étapes](./backup-azure-manage-mars.md#re-generate-passphrase).  |
 | Perdue |Perdue |Impossible de récupérer les données ou les données ne sont pas disponibles |
 
 Tenez compte des conditions suivantes :
 
-* Si vous désinstallez et réinscrivez l’agent sur le même ordinateur d’origine avec
+* Si vous désinstallez puis réinscrivez l’agent sur le même ordinateur d’origine avec
   * la *même phrase secrète*, vous serez en mesure de restaurer vos données sauvegardées.
   * une *phrase secrète différente*, vous ne serez pas en mesure de restaurer vos données sauvegardées.
 * Si vous installez l’agent sur un *autre ordinateur* avec
@@ -177,14 +192,18 @@ Tenez compte des conditions suivantes :
   * une *phrase secrète différente*, vous ne serez pas en mesure de restaurer vos données sauvegardées.
 * Si votre ordinateur d’origine est endommagé (vous empêchant de régénérer la phrase secrète via la console MARS) mais que vous pouvez restaurer le dossier de travail d’origine utilisé par l’agent MARS ou y accéder, vous pourrez peut-être effectuer la restauration (si vous avez oublié le mot de passe). Pour obtenir de l’aide, contactez le service clientèle.
 
-**Comment effectuer la récupération si j’ai perdu mon ordinateur d’origine (sur lequel les sauvegardes ont été effectuées) ?**
+#### <a name="how-do-i-recover-if-i-lost-my-original-machine-where-backups-were-taken"></a>Comment effectuer la récupération si j’ai perdu mon ordinateur d’origine (sur lequel les sauvegardes ont été effectuées) ?
 
 Si vous avez la même phrase secrète (que celle que vous avez fournie lors de l’inscription) de l’ordinateur d’origine, vous pouvez restaurer les données sauvegardées sur un autre ordinateur. Passez en revue les scénarios ci-dessous pour comprendre vos options de restauration.
 
 | Ordinateur d’origine | Passphrase | Options disponibles |
 | --- | --- | --- |
-| Perdue |Disponible |Vous pouvez installer et inscrire l’agent MARS sur un autre ordinateur avec la même phrase secrète que celle que vous avez fournie lors de l’inscription de l’ordinateur d’origine. Choisissez **Option de récupération** > **Autre emplacement** pour effectuer la restauration. Pour plus d’informations, consultez cet [article](https://docs.microsoft.com/azure/backup/backup-azure-restore-windows-server#use-instant-restore-to-restore-data-to-an-alternate-machine).
+| Perdue |Disponible |Vous pouvez installer et inscrire l’agent MARS sur un autre ordinateur avec la même phrase secrète que celle que vous avez fournie lors de l’inscription de l’ordinateur d’origine. Choisissez **Option de récupération** > **Autre emplacement** pour effectuer la restauration. Pour plus d’informations, consultez cet [article](./backup-azure-restore-windows-server.md#use-instant-restore-to-restore-data-to-an-alternate-machine).
 | Perdue |Perdue |Impossible de récupérer les données ou les données ne sont pas disponibles |
+
+### <a name="my-backup-jobs-have-been-failing-or-not-running-for-a-long-time-im-past-the-retention-period-can-i-still-restore"></a>Mes tâches de sauvegarde ont échoué ou n’ont pas été exécutées pendant une longue période. Ma période de rétention a expiré. Puis-je encore à restaurer ?
+
+Par mesure de sécurité, Sauvegarde Azure conserve le point de récupération le plus récent, même s’il est ultérieur à la période de rétention. Une fois que les sauvegardes sont relancées et que les nouveaux points de récupération deviennent disponibles, le point de récupération plus ancien est supprimé conformément à la rétention spécifiée.
 
 ### <a name="what-happens-if-i-cancel-an-ongoing-restore-job"></a>Que se passe-t-il si j’annule un travail de restauration en cours ?
 

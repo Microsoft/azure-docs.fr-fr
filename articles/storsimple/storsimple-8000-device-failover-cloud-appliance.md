@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/03/2017
 ms.author: alkohli
-ms.openlocfilehash: 347b899608d4322a7873b9f80f38ca1c767194d7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 18b34ff466f3935cb5cd18d46e6d26e36e756a9b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77468743"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91774458"
 ---
 # <a name="fail-over-to-your-storsimple-cloud-appliance"></a>Basculer vers votre StorSimple Cloud Appliance
 
@@ -46,15 +46,15 @@ Procédez comme suit pour restaurer l’appareil vers une StorSimple Cloud Appli
     ![Sélectionner l’appareil](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev1.png)
 3. Sélectionnez votre appareil source et cliquez dessus. L’appareil source comprend les conteneurs de volumes que vous souhaitez basculer. Accédez à **Paramètres > Conteneurs de volumes**.
 
-    ![Sélectionnez l’appareil](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev2.png)
+    ![Sélection de l’appareil 2](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev2.png)
     
 4. Sélectionnez un conteneur de volume que vous souhaitez basculer vers un autre appareil. Cliquez sur le conteneur de volume pour afficher la liste des volumes dans ce conteneur. Sélectionnez un volume, cliquez dessus avec le bouton droit, puis cliquez sur **Mettre hors connexion** afin de mettre le volume hors connexion.
 
-    ![Sélectionnez l’appareil](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev5.png)
+    ![Sélection de l'appareil 3](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev5.png)
 
 5. Répétez ce processus pour tous les volumes dans le conteneur de volume.
 
-     ![Sélectionnez l’appareil](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev7.png)
+     ![Sélection de l'appareil 4](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev7.png)
 
 6. Répétez l’étape précédente pour tous les conteneurs de volume que vous souhaitez basculer vers un autre appareil.
 
@@ -81,7 +81,7 @@ Procédez comme suit pour restaurer l’appareil vers une StorSimple Cloud Appli
 
     1. Sélectionnez l’appareil qui a été utilisé en tant que cible pour le basculement.
 
-       ![Sélectionnez l’appareil](./media/storsimple-8000-device-failover-disaster-recovery/failover-phy-dev14.png)
+       ![Sélection de l'appareil 5](./media/storsimple-8000-device-failover-disaster-recovery/failover-phy-dev14.png)
 
     2. Cliquez sur **Conteneurs de volumes**. Tous les conteneurs de volume, ainsi que les volumes de l’ancien appareil, doivent être répertoriés.
 

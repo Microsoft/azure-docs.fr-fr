@@ -14,18 +14,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: e2cbb36158722a47518f575b391340b5e25bd908
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0701e9c6428283d45cf4b4a2e24c8de99d9a286b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74895773"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89265896"
 ---
 # <a name="azure-media-services-telemetry"></a>Télémétrie Azure Media Services  
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Azure Media Services (AMS) vous permet d’accéder aux données de télémétrie/mesure pour ses services. La version actuelle de AMS vous permet de collecter les données de télémétrie pour les entités en temps réel **Channel**, **StreamingEndpoint** et **Archive**. 
 
@@ -51,7 +52,7 @@ La télémétrie est écrite dans une table de stockage Azure dans le compte de 
 
 Vous pouvez utiliser les données de télémétrie ainsi :
 
-- Lire les données à partir d’Azure Table Storage directement (par exemple en utilisant le SDK Storage). Pour obtenir la description des tables de stockage de télémétrie, consultez les **informations sur l’utilisation de la télémétrie** dans [cette](https://msdn.microsoft.com/library/mt742089.aspx) rubrique.
+- Lire les données à partir d’Azure Table Storage directement (par exemple en utilisant le SDK Storage). Pour obtenir la description des tables de stockage de télémétrie, consultez les **informations sur l’utilisation de la télémétrie** dans [cette](/previous-versions/azure/mt742089(v=azure.100)) rubrique.
 
 ou
 

@@ -9,15 +9,15 @@ ms.subservice: template
 ms.date: 04/26/2019
 ms.reviewer: jushiman
 ms.custom: mimckitt
-ms.openlocfilehash: af2f000b9f9a7bf64898c46b3126cf180802b445
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 55c826b4baf38732684aaa0465aeaab6a45564db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198122"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87831496"
 ---
 # <a name="learn-about-virtual-machine-scale-set-templates"></a>En savoir plus sur les modèles de groupes de machines virtuelles identiques
-Les [modèles Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/template-deployment-overview#template-deployment-process) constituent un excellent moyen de déployer des groupes de ressources liées. Cette série de didacticiels montre comment créer un modèle de groupe identique de base et comment modifier ce modèle pour l’adapter à différents scénarios. Tous les exemples proviennent de ce [référentiel GitHub](https://github.com/gatneil/mvss).
+Les [modèles Azure Resource Manager](../azure-resource-manager/templates/overview.md#template-deployment-process) constituent un excellent moyen de déployer des groupes de ressources liées. Cette série de didacticiels montre comment créer un modèle de groupe identique de base et comment modifier ce modèle pour l’adapter à différents scénarios. Tous les exemples proviennent de ce [référentiel GitHub](https://github.com/gatneil/mvss).
 
 Ce modèle est conçu pour être simple. Pour des exemples plus complets de modèles de groupes identiques, consultez le [référentiel Github de modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates) et recherchez les dossiers qui contiennent la chaîne `vmss`.
 
@@ -115,7 +115,7 @@ Dans ce cas, la liste ne contient qu’un seul élément, le réseau virtuel iss
 ## <a name="specify-scale-set-properties"></a>Spécifier les propriétés du groupe identique
 Les groupes identiques disposent de nombreuses propriétés pour personnaliser les machines virtuelles dans le groupe identique. Pour obtenir une liste complète de ces propriétés, consultez la [documentation de référence des modèles](/azure/templates/microsoft.compute/virtualmachinescalesets). Pour ce didacticiel, seules quelques propriétés couramment utilisées sont définies.
 ### <a name="supply-vm-size-and-capacity"></a>Fournir la capacité et la taille de machine virtuelle
-Le groupe identique doit connaître la taille de machine virtuelle à créer (le « nom de la référence (SKU) ») et le nombre de ces machines virtuelles à créer (la « capacité de la référence (SKU) »). Pour voir les tailles de machines virtuelles disponibles, consultez la [documentation sur les tailles de machines virtuelles](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes).
+Le groupe identique doit connaître la taille de machine virtuelle à créer (le « nom de la référence (SKU) ») et le nombre de ces machines virtuelles à créer (la « capacité de la référence (SKU) »). Pour voir les tailles de machines virtuelles disponibles, consultez la [documentation sur les tailles de machines virtuelles](../virtual-machines/sizes.md).
 
 ```json
        "sku": {

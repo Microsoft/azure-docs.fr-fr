@@ -1,22 +1,22 @@
 ---
-title: Résoudre les problèmes de connectivité Azure Synapse Studio (préversion) à l'aide de PowerShell
+title: Résoudre les problèmes de connectivité de Synapse Studio
 description: Résoudre les problèmes de connectivité Azure Synapse Studio à l’aide de PowerShell
-author: julieMSFT
+author: saveenr
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.date: 04/15/2020
-ms.author: jrasnick
+ms.date: 10/30/2020
+ms.author: saveenr
 ms.reviewer: jrasnick
-ms.openlocfilehash: bbc985407a6cb56f4f1b539f514ab092b5f7d0de
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 5f0dc73877d7742d4fc6a0c5b9bcf0529d475e0a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427521"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96445259"
 ---
-# <a name="diagnose-azure-synapse-studio-preview-connectivity-issues-with-powershell-script"></a>Diagnostiquer les problèmes de connectivité Azure Synapse Studio (préversion) à l'aide d'un script PowerShell
+# <a name="troubleshoot-synapse-studio-connectivity-with-powershell"></a>Résoudre les problèmes de connectivité de Synapse Studio à l'aide de PowerShell
 
-Le bon fonctionnement d'Azure Synapse Studio (préversion) s'appuie sur un ensemble de points de terminaison d’API web. Ce guide vous aidera à identifier les causes des problèmes de connectivité lorsque vous :
+Le bon fonctionnement d'Azure Synapse Studio s'appuie sur un ensemble de points de terminaison d'API web. Ce guide vous aidera à identifier les causes des problèmes de connectivité lorsque vous :
 - configurez votre réseau local (réseau derrière un pare-feu d’entreprise, par exemple) pour accéder à Azure Synapse Studio.
 - rencontrez des problèmes de connectivité avec Azure Synapse Studio.
 
@@ -27,13 +27,13 @@ Le bon fonctionnement d'Azure Synapse Studio (préversion) s'appuie sur un ensem
 
 ## <a name="troubleshooting-steps"></a>Étapes de dépannage
 
-Cliquez avec le bouton droit sur le lien suivant, plus cliquez sur « Enregistrer la cible sous » :
+Cliquez avec le bouton droit sur le lien suivant, puis sélectionnez « Enregistrer la cible sous » :
 
 - [Test-AzureSynapse.ps1](https://go.microsoft.com/fwlink/?linkid=2119734)
 
 Vous pouvez aussi ouvrir le lien directement, puis enregistrer le fichier de script ouvert. N’enregistrez pas l’adresse du lien ci-dessus car celle-ci peut être amenée à changer.
 
-Dans l’Explorateur de fichiers, cliquez avec le bouton droit sur le fichier de script téléchargé, puis cliquez sur « Exécuter avec PowerShell ».
+Dans l’Explorateur de fichiers, cliquez avec le bouton droit sur le fichier de script téléchargé, puis sélectionnez « Exécuter avec PowerShell ».
 
 ![Exécuter le fichier de script téléchargé avec PowerShell](media/troubleshooting-synapse-studio-powershell/run-with-powershell.png)
 

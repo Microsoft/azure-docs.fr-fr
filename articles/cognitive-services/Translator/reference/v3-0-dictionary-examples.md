@@ -10,12 +10,12 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 01/21/2020
 ms.author: swmachan
-ms.openlocfilehash: a1d86ac354524cb4d7bf9f9776b8605f244d92f7
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 1fe5a5669173733e3d0cf1b56b9997d15a3ff138
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592506"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95021301"
 ---
 # <a name="translator-30-dictionary-examples"></a>Translator 3.0 : Exemples de dictionnaire
 
@@ -43,7 +43,7 @@ Les en-têtes de demande sont les suivants :
 
 | headers  | Description |
 | ------ | ----------- |
-| En-tête(s) d’authentification <img width=200/>  | **En-tête de demande obligatoire**.<br/>Voir les <a href="https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#authentication">options disponibles pour l’authentification</a>. |
+| En-tête(s) d’authentification <img width=200/>  | **En-tête de demande obligatoire**.<br/>Voir les <a href="/azure/cognitive-services/translator/reference/v3-0-reference#authentication">options disponibles pour l’authentification</a>. |
 | Content-Type | **En-tête de demande obligatoire**.<br/>Spécifie le type de contenu de la charge utile. Les valeurs possibles sont les suivantes : `application/json`. |
 | Content-Length   | **En-tête de demande obligatoire**.<br/>Longueur du corps de la demande. |
 | X-ClientTraceId   | **Facultatif**.<br/>GUID généré par le client pour identifier de façon unique la demande. Vous pouvez omettre cet en-tête si vous incluez l’ID de trace dans la chaîne de requête à l’aide d’un paramètre de requête appelé `ClientTraceId`. |

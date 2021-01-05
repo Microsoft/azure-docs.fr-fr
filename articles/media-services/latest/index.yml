@@ -9,15 +9,15 @@ metadata:
   ms.subservice: 
   ms.topic: landing-page
   ms.collection: collection
-  author: Juliako
-  ms.author: juliako
+  author: IngridAtMicrosoft
+  ms.author: inhenkel
   ms.date: 21/16/2020
-  ms.openlocfilehash: 1cd7e2a4cb4e86e6acfc0ec3d3909bc887a6f943
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 32e5693438240c051175be232b3f442b2242e69f
+  ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "79472116"
+  ms.lasthandoff: 10/14/2020
+  ms.locfileid: "92018914"
 landingContent:
 - title: À propos de Media Services
   linkLists:
@@ -35,7 +35,7 @@ landingContent:
       url: storage-account-concept.md
     - text: Packaging
       url: dynamic-packaging-overview.md
-    - text: Surveillance
+    - text: Supervision
       url: reacting-to-media-services-events.md
     - text: Clients Player
       url: use-azure-media-player.md
@@ -46,9 +46,9 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Créer un compte
-      url: create-account-cli-how-to.md
+      url: ./create-account-howto.md
     - text: Accéder à l’API
-      url: access-api-cli-how-to.md
+      url: ./access-api-howto.md
   - linkListType: download
     links:
     - text: Exemples du kit SDK .NET
@@ -60,13 +60,13 @@ landingContent:
   - linkListType: reference
     links:
     - text: Azure CLI
-      url: https://aka.ms/ams-v3-cli-ref
+      url: /cli/azure/ams
     - text: REST
-      url: https://docs.microsoft.com/rest/api/media/
+      url: /rest/api/media/
     - text: .NET
-      url: https://aka.ms/ams-v3-dotnet-ref
+      url: /dotnet/api/overview/azure/mediaservices/management
     - text: Java
-      url: https://aka.ms/ams-v3-java-ref
+      url: /java/api/overview/azure/mediaservices/management
 - title: Diffuser en direct
   linkLists:
   - linkListType: concept

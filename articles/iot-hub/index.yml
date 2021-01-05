@@ -11,12 +11,12 @@ metadata:
   manager: eliotgra
   ms.date: 03/23/2020
   ms.custom: amqp
-  ms.openlocfilehash: 93f81f444acae9b4b4451de75de018c2a894bcba
-  ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+  ms.openlocfilehash: 665692e1d902dfed8cdab535d0639f356f4e709c
+  ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/21/2020
-  ms.locfileid: "81730766"
+  ms.lasthandoff: 11/19/2020
+  ms.locfileid: "94885918"
 landingContent:
 - title: Mise en route
   linkLists:
@@ -40,12 +40,6 @@ landingContent:
     links:
     - text: Utilisation de jumeaux d’appareil à l’aide de Node.js
       url: iot-hub-node-node-twin-getstarted.md
-    - text: Comprendre les métriques IoT
-      url: iot-hub-metrics.md
-    - text: Journalisation des diagnostics
-      url: iot-hub-monitor-resource-health.md
-    - text: Surveiller, diagnostiquer et résoudre les problèmes de déconnexion avec IoT
-      url: iot-hub-troubleshoot-connectivity.md
 - title: Mettre à l’échelle votre solution
   linkLists:
   - linkListType: concept
@@ -84,6 +78,20 @@ landingContent:
       url: tutorial-routing-config-message-routing-rm-template.md
     - text: Exécuter et afficher les résultats du routage
       url: tutorial-routing-view-message-routing-results.md
+- title: IoT Hub sur Azure Stack Hub (préversion)
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vue d’ensemble pour les opérateurs
+      url: /azure-stack/operator/iot-hub-rp-overview
+    - text: Vue d’ensemble pour les utilisateurs
+      url: /azure-stack/user/iot-hub-overview
+  - linkListType: how-to-guide
+    links:
+    - text: Prérequis pour l’installation
+      url: /azure-stack/operator/iot-hub-rp-prerequisites
+    - text: Guide pratique pour installer IoT Hub sur Azure Stack Hub
+      url: /azure-stack/operator/iot-hub-rp-install
 - title: Utiliser IoT Hub Tools
   linkLists:
   - linkListType: how-to-guide
@@ -91,7 +99,19 @@ landingContent:
     - text: Utilisation d’IoT Tools pour VS Code
       url: iot-hub-create-use-iot-toolkit.md
     - text: IoT Explorer
-      url: ../iot-pnp/howto-install-iot-explorer.md
+      url: ../iot-pnp/howto-use-iot-explorer.md
+- title: Superviser et dépanner IoT Hub
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Superviser avec IoT Hub
+      url: monitor-iot-hub.md
+    - text: Informations de référence sur les données de supervision IoT Hub
+      url: monitor-iot-hub-reference.md
+    - text: Superviser, diagnostiquer et dépanner les déconnexions avec IoT Hub
+      url: iot-hub-troubleshoot-connectivity.md
+    - text: Commander des événements de connexion d’appareils depuis Azure IoT Hub à l’aide d’Azure Cosmos DB
+      url: iot-hub-how-to-order-connection-state-events.md
 - title: Utilisation de certificats de sécurité IoT
   linkLists:
   - linkListType: concept
@@ -104,3 +124,37 @@ landingContent:
       url: iot-hub-security-x509-get-started.md
     - text: Concepts de sécurité des certificats d’autorité de certification X.509
       url: iot-hub-x509ca-concept.md
+- title: Utiliser Azure CLI pour IoT Hub
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Création d’un IoT Hub
+      url: iot-hub-create-using-cli.md
+    - text: Gérer des appareils IoT
+      url: iot-hub-device-management-iot-extension-azure-cli-2-0.md
+    - text: Configurer le routage des messages
+      url: tutorial-routing-config-message-routing-cli.md
+    - text: Configurer le chargement de fichiers
+      url: iot-hub-configure-file-upload-cli.md
+    - text: Envoyer des données de télémétrie et analyser
+      url: quickstart-send-telemetry-cli.md
+  - linkListType: reference
+    links:
+    - text: Références CLI pour IoT
+      url: /cli/azure/azure-cli-reference-for-IoT
+- title: Utiliser PowerShell pour IoT Hub
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Création d’un IoT Hub
+      url: iot-hub-create-using-powershell.md
+    - text: Créer un hub IoT avec un modèle Resource Manager
+      url: iot-hub-rm-template-powershell.md
+    - text: Configurer le routage des messages
+      url: tutorial-routing-config-message-routing-powershell.md
+    - text: Configurer le chargement de fichiers
+      url: iot-hub-configure-file-upload-powershell.md
+  - linkListType: reference
+    links:
+    - text: Références PowerShell pour IoT
+      url: /powershell/module/az.iothub#iothub

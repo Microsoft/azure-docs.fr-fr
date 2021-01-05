@@ -5,11 +5,11 @@ ms.date: 06/25/2019
 ms.service: cognitive-services
 ms.topic: include
 ms.openlocfilehash: 98a0ddd828c3d72fdead0ccc2fb1daabf7548de1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67712536"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001157"
 ---
 Le paramètre `Eula` indique que vous avez accepté la licence pour le conteneur. Vous devez attribuer à ce paramètre de configuration une valeur qui doit être définie sur `accept`.
 

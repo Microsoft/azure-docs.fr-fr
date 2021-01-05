@@ -1,17 +1,17 @@
 ---
 title: Sauvegarde et restauration - Azure Database pour PostgreSQL - Serveur unique
 description: Apprenez-en davantage sur la restauration et les sauvegardes automatiques de votre serveur Azure Database pour PostgreSQL - Single Server.
-author: rachel-msft
-ms.author: raagyema
+author: sr-msft
+ms.author: srranga
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 02/25/2020
-ms.openlocfilehash: 3e6dfd5882e49ad903e8cff6f0ec7f3d6bd4a8b7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b267a97b640c9d069f83223206200fc4814c86b9
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77619623"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92488008"
 ---
 # <a name="backup-and-restore-in-azure-database-for-postgresql---single-server"></a>Sauvegarde et restauration dans Azure Database pour PostgreSQL - Single Server
 
@@ -19,26 +19,43 @@ Azure Database pour PostgreSQL crée automatiquement des sauvegardes de serveur 
 
 ## <a name="backups"></a>Sauvegardes
 
-Azure Database pour PostgreSQL effectue des sauvegardes des fichiers de données et du journal des transactions. Selon la taille de stockage maximale prise en charge, nous prenons en charge des sauvegardes complètes et différentielles (serveurs de stockage de 4 To maximum) ou des sauvegardes d’instantanés (serveurs de stockage jusqu’à 16 To maximum). Celles-ci vous permettent de restaurer un serveur à n’importe quel point dans le temps au sein de votre période de rétention de sauvegarde configurée. La période de rétention de sauvegarde par défaut est de sept jours. Vous pouvez éventuellement la configurer sur 35 jours maximum. Toutes les sauvegardes sont chiffrées à l’aide du chiffrement AES de 256 bits.
+Azure Database pour PostgreSQL effectue des sauvegardes des fichiers de données et du journal des transactions. Selon la taille de stockage maximale prise en charge, nous effectuons des sauvegardes complètes et différentielles (serveurs de stockage de 4 To) ou des sauvegardes de capture instantanée (serveurs de stockage jusqu’à 16 To). Celles-ci vous permettent de restaurer un serveur à n’importe quel point dans le temps au sein de votre période de rétention de sauvegarde configurée. La période de rétention de sauvegarde par défaut est de sept jours. Vous pouvez éventuellement la configurer sur 35 jours maximum. Toutes les sauvegardes sont chiffrées à l’aide du chiffrement AES de 256 bits.
 
-Ces fichiers de sauvegarde ne peuvent pas être exportés. Les sauvegardes sont utilisables uniquement pour les opérations de restauration dans Azure Database pour PostgreSQL. Vous pouvez utiliser [pg_dump](howto-migrate-using-dump-and-restore.md) pour copier une base de données.
+Vous ne pouvez pas exporter ces fichiers de sauvegarde. Les sauvegardes sont utilisables uniquement pour les opérations de restauration dans Azure Database pour PostgreSQL. Vous pouvez utiliser [pg_dump](howto-migrate-using-dump-and-restore.md) pour copier une base de données.
 
 ### <a name="backup-frequency"></a>Fréquence de sauvegarde
 
-En général, les sauvegardes complètes sont effectuées toutes les semaines et les sauvegardes différentielles sont effectuées deux fois par jour pour les serveurs avec un stockage pris en charge maximal de 4 To. Les sauvegardes d’instantanés ont lieu au moins une fois par jour pour les serveurs prenant en charge jusqu’à 16 To de stockage. Dans les deux cas, les sauvegardes des journaux des transactions se produisent toutes les cinq minutes. Le premier instantané de la sauvegarde complète est planifié immédiatement après la création d’un serveur. La sauvegarde complète initiale peut prendre plus de temps sur un serveur restauré volumineux. Le point dans le temps le plus ancien vers lequel un nouveau serveur peut être restauré est le moment où la sauvegarde complète initiale est terminée. Du fait que les instantanés sont immédiats, les serveurs prenant en charge jusqu’à 16 To de stockage peuvent être restaurés jusqu’au moment de la création.
+#### <a name="servers-with-up-to-4-tb-storage"></a>Serveurs avec jusqu’à 4 To de stockage
+
+Pour les serveurs qui prennent en charge jusqu’à 4 To de stockage, les sauvegardes complètes se produisent une fois par semaine. Les sauvegardes différentielles se produisent deux fois par jour. Les sauvegardes des journaux des transactions se produisent toutes les cinq minutes.
+
+
+#### <a name="servers-with-up-to-16-tb-storage"></a>Serveurs avec jusqu’à 16 To de stockage
+
+Dans un sous-ensemble de [régions Azure](./concepts-pricing-tiers.md#storage), tous les serveurs nouvellement approvisionnés peuvent prendre en charge un stockage jusqu’à 16 To de stockage. Les sauvegardes sur ces serveurs de stockage volumineux sont basées sur des captures instantanées. La première sauvegarde de capture instantanée complète est planifiée immédiatement après la création d’un serveur. La première sauvegarde complète de capture instantanée est conservée en tant que sauvegarde de base du serveur. Les sauvegardes de captures instantanées suivantes sont des sauvegardes différentielles uniquement. Les sauvegardes de captures instantanées différentielles ne se produisent pas selon une planification fixe. Dans une journée, trois sauvegardes de captures instantanées différentielles sont effectuées. Les sauvegardes des journaux des transactions se produisent toutes les cinq minutes. 
+
+### <a name="backup-retention"></a>Rétention des sauvegardes
+
+Les sauvegardes sont conservées en fonction du paramètre de période de rétention de sauvegarde sur le serveur. Vous pouvez sélectionner une période de rétention comprise entre 7 et 35 jours. La période de conservation par défaut est 7 jours. Vous pouvez définir la période de rétention lors de la création du serveur ou ultérieurement en mettant à jour la configuration de la sauvegarde à l’aide du [portail Azure](./howto-restore-server-portal.md#set-backup-configuration) ou d’[Azure CLI](./howto-restore-server-cli.md#set-backup-configuration). 
+
+La période de rétention de sauvegarde détermine jusqu’à quelle date une restauration à un point dans le temps peut être récupérée, dans la mesure où elle est basée sur les sauvegardes disponibles. La période de rétention de sauvegarde peut également être traitée comme une fenêtre de récupération du point de vue de la restauration. Toutes les sauvegardes requises pour effectuer une restauration à un instant dans le passé au cours de la période de rétention de sauvegarde sont conservées dans le stockage de sauvegarde. Par exemple, si la période de rétention des sauvegardes est définie sur 7 jours, la fenêtre de récupération est considérée comme les 7 derniers jours. Dans ce scénario, toutes les sauvegardes nécessaires à la restauration du serveur au cours des 7 derniers jours sont conservées. Avec une fenêtre de rétention de sauvegarde de sept jours :
+- Les serveurs avec un stockage jusqu’à 4 To peuvent conserver jusqu’à 2 sauvegardes complètes de base de données, toutes les sauvegardes différentielles et les sauvegardes du journal des transactions effectuées depuis la première sauvegarde complète de la base de données.
+-   Les serveurs avec un stockage jusqu’à 16 To conservent la capture instantanée complète de base de données, toutes les captures instantanées différentielles et les sauvegardes du journal des transactions au cours des 8 derniers jours.
 
 ### <a name="backup-redundancy-options"></a>Options de redondance de sauvegarde
 
-Azure Database pour PostgreSQL offre la possibilité de choisir entre le stockage de sauvegarde géoredondant ou localement redondant dans les niveaux Usage général et À mémoire optimisée. Lorsque les sauvegardes sont conservées dans le stockage de sauvegarde géoredondant, elles ne sont pas uniquement conservées dans la région d’hébergement de votre serveur, mais sont également répliquées dans un [centre de données jumelé](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). Cela permet de bénéficier d’une meilleure protection et de la possibilité de restaurer votre serveur dans une région différente en cas de sinistre. Le niveau De base propose uniquement un stockage de sauvegarde redondant localement.
+Azure Database pour PostgreSQL offre la possibilité de choisir entre le stockage de sauvegarde géoredondant ou localement redondant dans les niveaux Usage général et À mémoire optimisée. Lorsque les sauvegardes sont conservées dans le stockage de sauvegarde géoredondant, elles ne sont pas uniquement conservées dans la région d’hébergement de votre serveur, mais sont également répliquées dans un [centre de données jumelé](../best-practices-availability-paired-regions.md). Cela permet de bénéficier d’une meilleure protection et de la possibilité de restaurer votre serveur dans une région différente en cas de sinistre. Le niveau De base propose uniquement un stockage de sauvegarde redondant localement.
 
 > [!IMPORTANT]
 > La configuration du stockage géoredondant ou redondant localement pour la sauvegarde est uniquement possible lors de la création du serveur. Une fois que le serveur est approvisionné, vous ne pouvez pas modifier l’option de redondance du stockage de sauvegarde.
 
 ### <a name="backup-storage-cost"></a>Coût du stockage de sauvegarde
 
-Azure Database pour PostgreSQL fournit jusqu’à 100 % du stockage de serveur approvisionné pour le stockage de sauvegarde sans coût supplémentaire. En règle générale, cela est adapté pour une rétention de sauvegarde de sept jours. Tous les stockages de sauvegarde supplémentaires utilisés sont facturés en Go par mois.
+Azure Database pour PostgreSQL fournit jusqu’à 100 % du stockage de serveur approvisionné pour le stockage de sauvegarde sans coût supplémentaire. Tous les stockages de sauvegarde supplémentaires utilisés sont facturés en Go par mois. Par exemple, si vous avez configuré un serveur avec 250 Go de stockage, vous disposez de 250 Go de stockage supplémentaire pour les sauvegardes de serveur sans frais supplémentaires. Le stockage utilisé pour les sauvegardes de plus de 250 Go est facturé conformément au [modèle de tarification](https://azure.microsoft.com/pricing/details/postgresql/).
 
-Par exemple, si vous avez approvisionné un serveur avec 250 Go, vous bénéficiez de 250 Go d’espace de stockage de sauvegarde sans coût supplémentaire. Tout stockage au-dessus de 250 Go est facturé.
+Vous pouvez utiliser la métrique [Stockage de sauvegarde utilisé](concepts-monitoring.md) dans Azure MoniTor disponible dans le portail Azure pour surveiller le stockage de sauvegarde consommé par un serveur. La métrique Stockage de sauvegarde utilisé représente le total du stockage consommé par l’ensemble des sauvegardes de base de données complètes, sauvegardes différentielles et sauvegardes de journaux conservées en fonction de la période de rétention de sauvegarde définie pour le serveur. La fréquence des sauvegardes est gérée par le service et expliquée plus haut. Une activité transactionnelle importante sur le serveur peut entraîner une augmentation de l’utilisation du stockage de sauvegarde, quelle que soit la taille totale de la base de données. Pour le stockage géo-redondant, l’utilisation du stockage de sauvegarde est le double de celle du stockage localement redondant. 
+
+Le principal moyen de contrôler le coût fu stockage de sauvegarde consiste à définir la période de rétention de sauvegarde appropriée et à choisir les options de redondance de sauvegarde appropriées pour atteindre les objectifs de récupération souhaités. Vous pouvez sélectionner une période de conservation comprise entre 7 et 35 jours. Les serveurs à usage général et à mémoire optimisée peuvent disposer d’un stockage géoredondant pour les sauvegardes.
 
 ## <a name="restore"></a>Restaurer
 
@@ -52,7 +69,7 @@ Deux types de restauration sont disponibles :
 Le délai estimé de récupération dépend de plusieurs facteurs, notamment du nombre total de bases de données à récupérer dans la même région au même moment, de la taille des bases de données, de la taille du journal des transactions et de la bande passante réseau. Le délai de récupération est généralement inférieur à 12 heures.
 
 > [!IMPORTANT]
-> Il n’est **pas** possible de restaurer des serveurs supprimés. Si vous supprimez le serveur, toutes les bases de données qui appartiennent au serveur sont également supprimées, sans pouvoir être restaurées. À l'issue du déploiement, pour protéger les ressources du serveur d'une suppression accidentelle ou de changements inattendus, les administrateurs peuvent utiliser des [verrous de gestion](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-lock-resources).
+> Il n’est **pas** possible de restaurer des serveurs supprimés. Si vous supprimez le serveur, toutes les bases de données qui appartiennent au serveur sont également supprimées, sans pouvoir être restaurées. À l'issue du déploiement, pour protéger les ressources du serveur d'une suppression accidentelle ou de changements inattendus, les administrateurs peuvent utiliser des [verrous de gestion](../azure-resource-manager/management/lock-resources.md).
 
 ### <a name="point-in-time-restore"></a>Restauration dans le temps
 

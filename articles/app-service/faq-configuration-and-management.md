@@ -8,12 +8,12 @@ ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
 ms.topic: article
 ms.date: 10/30/2018
 ms.author: genli
-ms.openlocfilehash: 867c011cb3086cab736d17501e72bc477d0d2889
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: fb193637525722bf227241a614cd977fbf70c9ac
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159998"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93074180"
 ---
 # <a name="configuration-and-management-faqs-for-web-apps-in-azure"></a>FAQ sur la configuration et la gestion de Web Apps dans Azure
 
@@ -60,16 +60,18 @@ La rubrique [Limitations d’App Service](../azure-resource-manager/management/m
 Pour définir le fuseau horaire du serveur pour votre application web :
 
 1. Dans le portail Azure, dans votre abonnement App Service, accédez au menu **Paramètres de l’application**.
-2. Sous **Paramètres de l’application**, ajoutez le paramètre suivant :
+2. Sous **Paramètres de l’application** , ajoutez le paramètre suivant :
     * Key = WEBSITE_TIME_ZONE
     * Value = *Fuseau horaire de votre choix*
 3. Sélectionnez **Enregistrer**.
 
-Pour les services App Services qui s’exécutent sur Windows, consultez la colonne **Fuseaux horaires** dans l’article [Fuseaux horaires par défaut](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones) pour connaître les valeurs acceptées. Pour les services App Services qui s’exécutent sur Linux, définissez le [nom de la base de données TZ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) comme valeur de fuseau horaire. Voici un exemple de nom de base de données TZ : America/Adak.
+Pour les services d’application qui s’exécutent sur Windows, consultez la sortie de la commande Windows `tzutil /L`. Utilisez la valeur de la deuxième ligne de chaque entrée. Exemple : « Tonga Standard Time ». Certaines de ces valeurs figurent également dans la colonne **TimeZone** de [Fuseaux horaires par défaut](/windows-hardware/manufacture/desktop/default-time-zones).
+
+Pour les services d’application qui s’exécutent sur Linux, définissez une valeur à partir de la [base de données IANA TZ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Exemple : « America/Adak ».
 
 ## <a name="why-do-my-continuous-webjobs-sometimes-fail"></a>Pourquoi mes tâches web continues échouent-elles parfois ?
 
-Par défaut, les applications web sont déchargées si elles restent inactives pendant un laps de temps défini. Cela permet au système d’économiser des ressources. Dans les offres De base et Standard, vous pouvez activer le paramètre **Toujours actif** afin que l’application web reste chargée en permanence. Si votre application web exécute des tâches web en continu, vous devez activer l’option **Toujours actif**, sans quoi les tâches pourraient ne pas s’exécuter de manière fiable. Pour plus d’informations, voir [Création d’une tâche web exécutée en continu](webjobs-create.md#CreateContinuous).
+Par défaut, les applications web sont déchargées si elles restent inactives pendant un laps de temps défini. Cela permet au système d’économiser des ressources. Dans les offres De base et Standard, vous pouvez activer le paramètre **Toujours actif** afin que l’application web reste chargée en permanence. Si votre application web exécute des tâches web en continu, vous devez activer l’option **Toujours actif** , sans quoi les tâches pourraient ne pas s’exécuter de manière fiable. Pour plus d’informations, voir [Création d’une tâche web exécutée en continu](webjobs-create.md#CreateContinuous).
 
 ## <a name="how-do-i-get-the-outbound-ip-address-for-my-web-app"></a>Comment obtenir l’adresse IP sortante pour mon application web ?
 
@@ -147,7 +149,7 @@ L’exception a été provoquée par un problème avec Hybrid Connection Manager
 
 ## <a name="how-do-i-add-a-url-rewrite-rule"></a>Comment ajouter une règle de réécriture d’URL ?
 
-Pour ajouter une règle de réécriture d’URL, créez un fichier web.config avec les entrées de configuration pertinentes dans le dossier **wwwroot**. Pour plus d’informations, consultez [Azure App Services : Présentation de la réécriture d’URL](https://blogs.msdn.microsoft.com/madhurabharadwaj/2018/06/01/azure-app-services-understanding-url-re-write/).
+Pour ajouter une règle de réécriture d’URL, créez un fichier web.config avec les entrées de configuration pertinentes dans le dossier **wwwroot**. Pour plus d’informations, consultez [Azure App Services : Présentation de la réécriture d’URL](/archive/blogs/madhurabharadwaj/azure-app-services-understanding-url-re-write).
 
 ## <a name="how-do-i-control-inbound-traffic-to-app-service"></a>Comment contrôler le trafic entrant dans App Service ?
 
@@ -178,12 +180,12 @@ Pour capturer une trace F12, vous disposez de deux options :
 3. Vérifiez que l’onglet **Réseau** est activé, puis sélectionnez le bouton vert **Lecture**.
 4. Effectuez les étapes reproduisant le problème.
 5. Sélectionnez le bouton rouge **Arrêt**.
-6. Sélectionnez le bouton **Enregistrer** (icône de disque), puis, dans Internet Explorer ou Microsoft Edge, enregistrez le fichier HAR *ou*, dans Chrome, cliquez avec le bouton droit sur celui-ci, puis sélectionnez **Save as HAR with content** (Sauvegarder le contenu au format HAR).
+6. Sélectionnez le bouton **Enregistrer** (icône de disque), puis, dans Internet Explorer ou Microsoft Edge, enregistrez le fichier HAR *ou* , dans Chrome, cliquez avec le bouton droit sur celui-ci, puis sélectionnez **Save as HAR with content** (Sauvegarder le contenu au format HAR).
 
 ### <a name="f12-console-output"></a>Sortie de la console F12
 
 1. Sélectionnez l’onglet **Console**.
-2. Pour chaque onglet contenant au moins un élément, sélectionnez l’onglet (**Erreur**, **Avertissement** ou **Informations**). Si l’onglet n’est pas sélectionné, l’icône d’onglet s’affiche en gris ou noir lorsque vous écartez le curseur de celle-ci.
+2. Pour chaque onglet contenant au moins un élément, sélectionnez l’onglet ( **Erreur** , **Avertissement** ou **Informations** ). Si l’onglet n’est pas sélectionné, l’icône d’onglet s’affiche en gris ou noir lorsque vous écartez le curseur de celle-ci.
 3. Cliquez avec le bouton droit dans la zone de message du volet, puis sélectionnez **Copier tout**.
 4. Collez le texte copié dans un fichier, puis enregistrez celui-ci.
 
@@ -222,7 +224,7 @@ Pour résoudre ce problème, assurez-vous qu’aucune des conditions n’est vra
 * Un groupe de sécurité réseau incorrect n’est pas compatible avec les besoins en connectivité réseau d’un App Service Environment.
 * Le tunneling forcé est activé.
 
-Pour plus d’informations, voir [Problèmes les plus fréquents lors du déploiement (création) d’un nouvel App Service Environment Azure](https://blogs.msdn.microsoft.com/waws/2016/05/13/most-frequent-issues-when-deploying-creating-a-new-azure-app-service-environment-ase/).
+Pour plus d’informations, voir [Problèmes les plus fréquents lors du déploiement (création) d’un nouvel App Service Environment Azure](/archive/blogs/waws/most-frequent-issues-when-deploying-creating-a-new-azure-app-service-environment-ase).
 
 ## <a name="why-cant-i-delete-my-app-service-plan"></a>Pourquoi ne puis-je pas supprimer mon plan App Service ?
 
@@ -286,7 +288,7 @@ Lorsque vous créez un site web à l’aide de Web Apps dans Azure, un domaine *
 
 ## <a name="how-do-i-determine-which-version-of-net-version-is-installed-in-app-service"></a>Comment déterminer la version de .NET installée dans App Service ?
 
-La méthode la plus rapide pour trouver la version de Microsoft .NET installée dans App Service consiste à utiliser la console Kudu. Vous pouvez accéder à la console Kudu à partir du portail ou à l’aide de l’URL de votre application App Service. Pour des instructions détaillées, voir [Comment déterminer la version de .NET installée dans Azure App Services](https://blogs.msdn.microsoft.com/waws/2016/11/02/how-to-determine-the-installed-net-version-in-azure-app-services/).
+La méthode la plus rapide pour trouver la version de Microsoft .NET installée dans App Service consiste à utiliser la console Kudu. Vous pouvez accéder à la console Kudu à partir du portail ou à l’aide de l’URL de votre application App Service. Pour des instructions détaillées, voir [Comment déterminer la version de .NET installée dans Azure App Services](/archive/blogs/waws/how-to-determine-the-installed-net-version-in-azure-app-services).
 
 ## <a name="why-isnt-autoscale-working-as-expected"></a>Pourquoi la mise à l’échelle automatique ne fonctionne-t-elle pas comme prévu ?
 

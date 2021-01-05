@@ -4,15 +4,15 @@ description: Supprimez une passerelle de réseau virtuel avec PowerShell dans le
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.date: 02/07/2019
+ms.date: 09/03/2020
 ms.author: cherylmc
-ms.topic: conceptual
-ms.openlocfilehash: f351f14796ec736bd5525f139a518c9a0dd3d19f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: 48e0998719ea19c0b360b50d8c9171d2b448ad19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162104"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89440760"
 ---
 # <a name="delete-a-virtual-network-gateway-using-powershell"></a>Supprimer une passerelle de réseau virtuel avec PowerShell
 > [!div class="op_single_selector"]
@@ -34,7 +34,7 @@ Deux approches sont possibles afin de supprimer une passerelle de réseau virtue
 
 ### <a name="1-download-the-latest-azure-resource-manager-powershell-cmdlets"></a>1. Téléchargez la dernière version des applets de commande PowerShell Azure Resource Manager.
 
-Téléchargez et installez la dernière version des applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur le téléchargement et l’installation des applets de commande PowerShell, consultez la page [Guide pratique d’installation et de configuration d’Azure PowerShell](/powershell/azure/overview).
+Téléchargez et installez la dernière version des applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur le téléchargement et l’installation des applets de commande PowerShell, consultez la page [Guide pratique d’installation et de configuration d’Azure PowerShell](/powershell/azure/).
 
 ### <a name="2-connect-to-your-azure-account"></a>2. Connectez-vous à votre compte Azure.
 

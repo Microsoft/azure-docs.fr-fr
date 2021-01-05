@@ -4,16 +4,17 @@ description: Découvrez l’authentification SQL dans Azure Synapse Analytics.
 services: synapse-analytics
 author: vvasic-msft
 ms.service: synapse-analytics
+ms.subservice: sql
 ms.topic: overview
 ms.date: 04/15/2020
 ms.author: vvasic
 ms.reviewer: jrasnick
-ms.openlocfilehash: ff29b9ab87b2cd48297f5f1ee195f11fb56b428a
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: efa160eb422658aeeb2eea3ad3c1d305b4b9f8be
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700318"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462401"
 ---
 # <a name="sql-authentication"></a>Authentification SQL
 
@@ -21,10 +22,10 @@ Azure Synapse Analytics compte deux facteurs de forme SQL qui vous permettent de
 
 Pour autoriser l’accès à Synapse SQL, vous pouvez utiliser deux types d’autorisation :
 
-- Autorisation AAD
+- Autorisation Azure Active Directory
 - Autorisation SQL
 
-L’autorisation AAD s’appuie sur Azure Active Directory et vous permet de disposer d’un emplacement unique pour la gestion des utilisateurs. L’autorisation SQL permet aux applications existantes d’utiliser Synapse SQL d’une manière qu’elles connaissent bien.
+Azure Active Directory vous permet de gérer les utilisateurs depuis un seul et même endroit. L’autorisation SQL permet aux applications existantes d’utiliser Synapse SQL d’une manière qu’elles connaissent bien.
 
 ## <a name="administrative-accounts"></a>Comptes d’administration
 
@@ -34,7 +35,7 @@ Il existe deux comptes d’administration (**Administrateur de serveur** et **Ad
 
 - **Administrateur de serveur**
 
-  Lorsque vous créez une instance Azure Synapse Analytics, vous devez désigner une **connexion d’administrateur serveur**. Le serveur SQL crée ce compte comme une connexion dans la base de données MASTER. Ce compte se connecte à l’aide de l’authentification SQL Server (nom d’utilisateur et mot de passe). Un seul de ces comptes peut exister.
+  Lorsque vous créez une instance Azure Synapse Analytics, vous devez nommer une **connexion d’administrateur serveur**. Le serveur SQL crée ce compte comme une connexion dans la base de données MASTER. Ce compte se connecte à l’aide de l’authentification SQL Server (nom d’utilisateur et mot de passe). Un seul de ces comptes peut exister.
 
 - **Administrateur Azure Active Directory**
 
@@ -45,23 +46,23 @@ Les comptes d’**administrateur de serveur** et d’**administrateur Azure AD**
 - Ce sont les seuls comptes pouvant se connecter automatiquement à n’importe quelle base de données SQL sur le serveur. (Pour se connecter à une base de données utilisateur, vous devez disposer d’un compte de propriétaire de la base de données ou d’un compte d’utilisateur dans la base de données utilisateur.)
 - Ces comptes accèdent aux bases de données utilisateur en tant qu’`dbo` utilisateur et possèdent toutes les autorisations dans les bases de données utilisateur. (Le propriétaire d’une base de données utilisateur accède également à la base de données en tant qu’utilisateur `dbo`.)
 - Ces comptes n’ont pas accès à la base de données `master` en tant qu’utilisateur `dbo` et ils ont des autorisations limitées dans MASTER.
-- Ces comptes **ne sont pas** membres du rôle serveur fixe SQL standard `sysadmin`, qui n’est pas disponible dans la base de données SQL.  
+- Ces comptes **ne sont pas** membres du rôle serveur fixe SQL standard `sysadmin`, qui n’est pas disponible dans SQL Database.  
 - Ces comptes peuvent créer, modifier et supprimer des bases de données, des connexions, des utilisateurs de MASTER et des règles de pare-feu IP au niveau du serveur.
 - Ces comptes peuvent ajouter et supprimer des membres aux rôles `dbmanager` et `loginmanager`.
 - Ces comptes peuvent afficher la table système `sys.sql_logins`.
 
-## <a name="sql-on-demand-preview"></a>[SQL à la demande (préversion)](#tab/serverless)
+## <a name="serverless-sql-pool"></a>[Pool SQL serverless](#tab/serverless)
 
-Pour gérer les utilisateurs ayant accès à SQL à la demande, vous pouvez utiliser les instructions ci-dessous.
+Pour gérer les utilisateurs ayant accès au pool SQL serverless, vous pouvez utiliser les instructions ci-dessous.
 
-Pour créer une connexion à SQL à la demande, utilisez la syntaxe suivante :
+Pour créer une connexion à un pool SQL serverless, utilisez la syntaxe suivante :
 
 ```sql
 CREATE LOGIN Mary WITH PASSWORD = '<strong_password>';
 -- or
 CREATE LOGIN Mary@domainname.net FROM EXTERNAL PROVIDER;
 ```
-Une fois la connexion établie, vous pouvez créer des utilisateurs dans les bases de données individuelles, à l’intérieur du point de terminaison SQL à la demande, et accorder les autorisations nécessaires à ces utilisateurs. Pour créer un utilisateur, vous pouvez vous servir de la syntaxe suivante :
+Une fois la connexion établie, vous pouvez créer des utilisateurs dans les bases de données individuelles comprises dans le point de terminaison du pool SQL serverless et accorder les autorisations nécessaires à ces utilisateurs. Pour créer un utilisateur, vous pouvez vous servir de la syntaxe suivante :
 ```sql
 CREATE USER Mary FROM LOGIN Mary;
 -- or
@@ -102,7 +103,7 @@ Pour créer une base de données, l’utilisateur doit être un utilisateur bas�
 
    Pour améliorer les performances, les connexions (principaux au niveau du serveur) sont temporairement mises en cache au niveau de la base de données. Pour actualiser le cache d’authentification, consultez [DBCC FLUSHAUTHCACHE](/sql/t-sql/database-console-commands/dbcc-flushauthcache-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
 
-3. Dans la base de données `master`, créez un utilisateur à l’aide de l’instruction [CREATE USER](/sql/t-sql/statements/create-user-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest). L’utilisateur peut être un utilisateur de base de données autonome de l’authentification Azure Active Directory (si vous avez configuré votre environnement pour l’authentification Azure AD), un utilisateur de base de données autonome de l’authentification SQL Server ou un utilisateur de l’authentification SQL Server basée sur une connexion d’authentification SQL Server (créé à l’étape précédente). Exemples d’instructions :
+3. Créez un utilisateur de base de données à l’aide de l’instruction [CREATE USER](/sql/t-sql/statements/create-user-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest). L’utilisateur peut être un utilisateur de base de données autonome de l’authentification Azure Active Directory (si vous avez configuré votre environnement pour l’authentification Azure AD), un utilisateur de base de données autonome de l’authentification SQL Server ou un utilisateur de l’authentification SQL Server basée sur une connexion d’authentification SQL Server (créé à l’étape précédente). Exemples d’instructions :
 
    ```sql
    CREATE USER [mike@contoso.com] FROM EXTERNAL PROVIDER; -- To create a user with Azure Active Directory
@@ -110,11 +111,11 @@ Pour créer une base de données, l’utilisateur doit être un utilisateur bas�
    CREATE USER Mary FROM LOGIN Mary;  -- To create a SQL Server user based on a SQL Server authentication login
    ```
 
-4. Ajoutez le nouvel utilisateur au rôle de base de données **dbmanager** dans `master` à l’aide de l’instruction [ALTER ROLE](/sql/t-sql/statements/alter-role-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest). Exemples d’instructions :
+4. Ajoutez le nouvel utilisateur au rôle de base de données **dbmanager** dans `master` à l’aide de la procédure [sp_addrolemember](https://docs.microsoft.com/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql?view=azure-sqldw-latest) (notez que l’instruction [ALTER ROLE](/sql/t-sql/statements/alter-role-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) n’est pas prise en charge dans SQL en mode provisionné). Exemples d’instructions :
 
    ```sql
-   ALTER ROLE dbmanager ADD MEMBER Mary;
-   ALTER ROLE dbmanager ADD MEMBER [mike@contoso.com];
+   EXEC sp_addrolemember 'dbmanager', 'Mary'; 
+   EXEC sp_addrolemember 'dbmanager', 'mike@contoso.com]'; 
    ```
 
    > [!NOTE]
@@ -126,13 +127,13 @@ Désormais, l’utilisateur peut se connecter à la base de données `master` et
 
 ### <a name="login-managers"></a>Gestionnaires de connexion
 
-L’autre rôle d’administration est le rôle loginmanager. Les membres de ce rôle peuvent créer des connexions dans la base de données MASTER. Si vous le souhaitez, vous pouvez effectuer les mêmes étapes (créer une connexion et un utilisateur, puis ajouter l’utilisateur au rôle **loginmanager**) pour permettre aux utilisateurs de créer des connexions dans la base de données MASTER. Cela n’est généralement pas nécessaire, car Microsoft recommande d’avoir recours aux utilisateurs de base de données autonome qui s’authentifient au niveau de la base de données plutôt qu’à des utilisateurs basés sur les connexions. Pour plus d’informations, voir [Utilisateurs de base de données autonome - Rendre votre base de données portable](/sql/relational-databases/security/contained-database-users-making-your-database-portable?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+L’autre rôle d’administration est le rôle loginmanager. Les membres de ce rôle peuvent créer des connexions dans la base de données MASTER. Si vous le souhaitez, vous pouvez effectuer les mêmes étapes (créer une connexion et un utilisateur, puis ajouter l’utilisateur au rôle **loginmanager**) pour permettre aux utilisateurs de créer des connexions dans la base de données MASTER. Ce n’est généralement pas nécessaire, car Microsoft recommande d’avoir recours aux utilisateurs de base de données autonome qui s’authentifient au niveau de la base de données plutôt qu’à des utilisateurs basés sur les connexions. Pour plus d’informations, voir [Utilisateurs de base de données autonome - Rendre votre base de données portable](/sql/relational-databases/security/contained-database-users-making-your-database-portable?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
 
 ---
 
 ## <a name="non-administrator-users"></a>Utilisateurs non administrateurs
 
-En règle générale, les comptes non administrateurs n’ont pas besoin d’accéder à la base de données MASTER. Créez des utilisateurs de base de données autonome dans le niveau de base de données à l’aide de l’instruction [CREATE USER (Transact-SQL)](https://msdn.microsoft.com/library/ms173463.aspx). 
+En règle générale, les comptes non-administrateurs n’ont pas besoin d’accéder à la base de données MASTER. Créez des utilisateurs de base de données autonome dans le niveau de base de données à l’aide de l’instruction [CREATE USER (Transact-SQL)](https://msdn.microsoft.com/library/ms173463.aspx). 
 
 L’utilisateur peut être un utilisateur de base de données autonome de l’authentification Azure Active Directory (si vous avez configuré votre environnement pour l’authentification Azure AD), un utilisateur de base de données autonome de l’authentification SQL Server ou un utilisateur de l’authentification SQL Server basée sur une connexion d’authentification SQL Server (créé à l’étape précédente).  
 
@@ -151,22 +152,22 @@ GRANT ALTER ANY USER TO Mary;
 
 Pour donner le contrôle total de la base de données aux utilisateurs supplémentaires, faites-les membres du rôle de base de données fixe **db_owner**.
 
-Dans Azure SQL Database, utilisez l’instruction `ALTER ROLE`.
+Dans Azure SQL Database ou Synapse serverless, utilisez l’instruction `ALTER ROLE`.
 
 ```sql
 ALTER ROLE db_owner ADD MEMBER Mary;
 ```
 
-Dans le pool SQL, utilisez [EXEC sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+Dans un pool SQL dédié, utilisez [EXEC sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
 
 ```sql
 EXEC sp_addrolemember 'db_owner', 'Mary';
 ```
 
 > [!NOTE]
-> L’un des motifs courants de création d’un utilisateur de base de données reposant sur une connexion serveur SQL Database correspond à la nécessité pour les utilisateurs d’accéder à plusieurs bases de données. Étant donné que les utilisateurs de base de données autonome constituent des entités individuelles, chaque base de données gère un utilisateur et un mot de passe qui lui sont propres. Cela risque d’entraîner un surcroît de complexité dans la mesure où l’utilisateur doit mémoriser le mot de passe de chacune des bases de données, cette situation pouvant même devenir intenable lorsqu’il devient nécessaire de modifier plusieurs mots de passe pour un grand nombre de bases de données. Toutefois, en cas d’utilisation des connexions SQL Server et de la haute disponibilité (géoréplication active et groupes de basculement), les connexions SQL Server doivent être définies manuellement sur chaque serveur. Dans le cas contraire, l’utilisateur de base de données ne sera plus mappé sur la connexion serveur après un basculement et ne sera pas en mesure d’accéder à la base de données suite au basculement. 
+> La nécessité pour les utilisateurs d’accéder à plusieurs bases de données représente l’un des motifs courants de création d’un utilisateur de base de données reposant sur une connexion serveur. Étant donné que les utilisateurs de base de données autonome constituent des entités individuelles, chaque base de données gère un utilisateur et un mot de passe qui lui sont propres. Cela risque d’entraîner un surcroît de complexité dans la mesure où l’utilisateur doit mémoriser le mot de passe de chacune des bases de données, cette situation pouvant même devenir intenable lorsqu’il devient nécessaire de modifier plusieurs mots de passe pour un grand nombre de bases de données. Toutefois, en cas d’utilisation des connexions SQL Server et de la haute disponibilité (géoréplication active et groupes de basculement), les connexions SQL Server doivent être définies manuellement sur chaque serveur. Dans le cas contraire, l’utilisateur de base de données ne sera plus mappé sur la connexion serveur après un basculement et ne sera pas en mesure d’accéder à la base de données suite au basculement. 
 
-Pour plus d’informations sur la configuration de connexions pour la géoréplication, consultez [Configurer et gérer la sécurité Azure SQL Database pour la géo-restauration ou le basculement](../../sql-database/sql-database-geo-replication-security-config.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
+Pour plus d’informations sur la configuration de connexions pour la géoréplication, consultez [Configurer et gérer la sécurité Azure SQL Database pour la géo-restauration ou le basculement](../../azure-sql/database/active-geo-replication-security-configure.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
 
 ### <a name="configuring-the-database-level-firewall"></a>Configuration du pare-feu au niveau de la base de données
 

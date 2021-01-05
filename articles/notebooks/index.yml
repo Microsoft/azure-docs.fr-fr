@@ -1,20 +1,20 @@
 ### YamlMime:Landing
 title: Documentation Azure Notebooks (préversion)
-summary: Azure Notebooks (préversion) est un service hébergé gratuit permettant de développer et exécuter des notebooks Jupyter dans le cloud sans aucune installation. Jupyter (anciennement IPython) est un projet open source qui vous permet de combiner facilement du texte Markdown, du code exécutable (Python, R et F#), des données persistantes, des graphiques et des visualisations dans un canevas partageable appelé « notebook ».
+summary: Le 15 janvier 2021, le site en préversion publique d’Azure Notebooks sera retiré et remplacé par des services intégrés de Visual Studio, d’Azure et de GitHub. Apprenez-en davantage sur vos options et les autres expériences Microsoft liées aux notebooks sur la page https://notebooks.azure.com/Content/alternatives.html.
 metadata:
   title: Documentation Azure Notebooks (préversion)
   description: Découvrez comment créer, exécuter et partager des notebooks Jupyter avec le service hébergé Azure Notebooks (préversion).
   ms.service: azure-notebooks
   ms.topic: landing-page
-  author: jasonwhowell
-  ms.author: jasonh
-  ms.date: 12/26/2019
-  ms.openlocfilehash: 5044e3d679827982af7259511777f7119188b00b
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  author: JoshuaPartlow
+  ms.author: joshuapa
+  ms.date: 06/17/2020
+  ms.openlocfilehash: c729e93f48a0b3ef382edd32a9322ec5c0174b3b
+  ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "75659115"
+  ms.lasthandoff: 12/11/2020
+  ms.locfileid: "97109400"
 landingContent:
 - title: À propos d’Azure Notebooks
   linkLists:
@@ -22,47 +22,15 @@ landingContent:
     links:
     - text: Qu’est-ce que le service Azure Notebooks ?
       url: azure-notebooks-overview.md
-  - linkListType: deploy
-    links:
-    - text: Exemples d’Azure Notebooks
-      url: azure-notebooks-samples.md
   - linkListType: get-started
     links:
-    - text: Accéder à vos notebooks Azure
+    - text: Accéder à vos fichiers Azure Notebooks
       url: https://notebooks.azure.com/
 - title: Bien démarrer avec Azure Notebooks
   linkLists:
-  - linkListType: learn
-    links:
-    - text: Analyser les données climatiques avec Azure Notebooks
-      url: /learn/modules/analyze-climate-data-with-azure-notebooks/
-  - linkListType: tutorial
-    links:
-    - text: Créer et exécuter un notebook Jupyter avec Python
-      url: tutorial-create-run-jupyter-notebook.md
   - linkListType: quickstart
     links:
     - text: Se connecter et définir un identifiant utilisateur
       url: quickstart-sign-in-azure-notebooks.md
-    - text: Créer et partager un notebook
-      url: quickstart-create-share-jupyter-notebook.md
-    - text: Cloner un notebook
-      url: quickstart-clone-jupyter-notebook.md
-    - text: Migrer un notebook Jupyter local
-      url: quickstart-migrate-local-jupyter-notebook.md
-    - text: Créer un projet avec un environnement personnalisé
-      url: quickstart-create-jupyter-notebook-project-environment.md
-- title: Principales tâches pour Azure Notebooks
-  linkLists:
-  - linkListType: how-to-guide
-    links:
-    - text: Gérer et configurer des projets
-      url: configure-manage-azure-notebooks-projects.md
-    - text: Utiliser des fichiers de données
-      url: work-with-project-data-files.md
-    - text: Créer et cloner des projets
-      url: create-clone-jupyter-notebooks.md
-    - text: Accéder aux données de cloud dans un notebook
-      url: access-data-resources-jupyter-notebooks.md
-    - text: Installer des packages dans un notebook
-      url: install-packages-jupyter-notebook.md
+    - text: Exporter votre projet
+      url: quickstart-export-jupyter-notebook-project.md

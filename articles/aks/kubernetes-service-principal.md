@@ -3,13 +3,13 @@ title: Principaux de service pour Azure Kubernetes Services (AKS)
 description: Créer et gérer un principal de service Azure Active Directory pour un cluster dans Azure Kubernetes Service (AKS)
 services: container-service
 ms.topic: conceptual
-ms.date: 04/02/2020
-ms.openlocfilehash: 2c792eb4dc060e3f5d7fa2d8f2176bdd51538c43
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 06/16/2020
+ms.openlocfilehash: e95eae3ab8d992bc169e54700e7e31715e72102e
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81392738"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96607821"
 ---
 # <a name="service-principals-with-azure-kubernetes-service-aks"></a>Principaux de service avec Azure Kubernetes Service (AKS)
 
@@ -23,7 +23,7 @@ Pour créer un principal de service Azure AD, vous devez disposer des autorisati
 
 Si vous utilisez le principal du service d’un autre locataire Azure AD, il y a d’autres points à prendre en considération quant aux autorisations disponibles au moment de déployer le cluster. Vous n’avez peut-être pas les autorisations adéquates pour lire et écrire des informations d’annuaire. Pour plus d’informations, consultez [Quelles sont les autorisations utilisateur par défaut dans Azure Active Directory ?][azure-ad-permissions]
 
-Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 ## <a name="automatically-create-and-use-a-service-principal"></a>Créer et utiliser un principal de service automatiquement
 
@@ -87,7 +87,10 @@ Pour déléguer des autorisations, créez une attribution de rôle à l’aide d
 az role assignment create --assignee <appId> --scope <resourceScope> --role Contributor
 ```
 
-L’élément `--scope` d’une ressource doit être un ID de ressource complet, tel que */subscriptions/\<guid\>/resourceGroups/myResourceGroup* ou */subscriptions/\<guid\>/resourceGroups/myResourceGroupVnet/providers/Microsoft.Network/virtualNetworks/myVnet*
+L’élément `--scope` d’une ressource doit être un ID de ressource complet, tel que */subscriptions/\<guid\>/resourceGroups/myResourceGroup* ou  */subscriptions/\<guid\>/resourceGroups/myResourceGroupVnet/providers/Microsoft.Network/virtualNetworks/myVnet*
+
+> [!NOTE]
+> Si vous avez supprimé l’attribution de rôle contributeur du groupe de ressources de nœud, les opérations ci-dessous peuvent échouer.  
 
 Les sections suivantes détaillent les délégations courantes que vous serez peut-être amené à effectuer.
 
@@ -102,10 +105,12 @@ Vous pouvez utiliser un réseau avancé dans lequel le réseau virtuel et le sou
 - Créez un [rôle personnalisé][rbac-custom-role] et définissez les autorisations de rôle suivantes :
   - *Microsoft.Network/virtualNetworks/subnets/join/action*
   - *Microsoft.Network/virtualNetworks/subnets/read*
-  - *Microsoft.Network/virtualNetworks/subnets/write*
   - *Microsoft.Network/publicIPAddresses/join/action*
   - *Microsoft.Network/publicIPAddresses/read*
   - *Microsoft.Network/publicIPAddresses/write*
+  - Si vous utilisez [des tables de routage personnalisées sur des clusters Kubenet](configure-kubenet.md#bring-your-own-subnet-and-route-table-with-kubenet) ajoutez ces autorisations supplémentaires :
+    - *Microsoft.Network/routeTables/write*
+    - *Microsoft.Network/routeTables/read*
 - Ou attribuez le rôle intégré [Contributeur de réseaux][rbac-network-contributor] sur le sous-réseau dans le réseau virtuel
 
 ### <a name="storage"></a>Stockage

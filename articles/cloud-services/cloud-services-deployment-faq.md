@@ -15,10 +15,10 @@ ms.topic: article
 ms.date: 10/31/2018
 ms.author: genli
 ms.openlocfilehash: 63a219078927e9001a8eb4085c722e7ec8d2fac9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75980627"
 ---
 # <a name="deployment-issues-for-azure-cloud-services-frequently-asked-questions-faqs"></a>Problèmes de déploiement pour les services cloud Azure : Forum Aux Questions (FAQ)
@@ -54,7 +54,7 @@ Pour vérifier les tailles disponibles dans votre région, consultez [Microsoft 
 ## <a name="why-does-deploying-a-cloud-service-sometime-fail-due-to-limitsquotasconstraints-on-my-subscription-or-service"></a>Pourquoi le déploiement d’un service cloud échoue-t-il parfois en raison des limites/quotas/contraintes de mon abonnement ou service ?
 Le déploiement d’un service cloud peut échouer si les ressources qui doivent être allouées dépassent la valeur par défaut ou le quota maximal autorisé pour votre service au niveau de la région et/ou du centre de données. Pour plus d’informations, consultez [Limites de services cloud](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-cloud-services-limits).
 
-Vous pouvez aussi suivre l’utilisation et/ou le quota actuel de votre abonnement sur le portail : Portail Azure = > Abonnements = > \<abonnement approprié > = > « Utilisation + quota ».
+Vous pouvez aussi suivre l’utilisation et/ou le quota actuel de votre abonnement sur le portail : Portail Azure => Abonnements => \<appropriate subscription> => « Utilisation + quota ».
 
 Vous pouvez aussi obtenir des informations sur l’utilisation/consommation de ressources via les API de facturation Azure. Consultez [API Azure Resource Usage (version préliminaire)](../cost-management-billing/manage/usage-rate-card-overview.md#azure-resource-usage-api-preview).
 

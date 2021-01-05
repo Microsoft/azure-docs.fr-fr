@@ -1,15 +1,16 @@
 ---
 title: Meilleures pratiques pour la création de votre application LUIS
 description: Découvrez les meilleures pratiques pour obtenir les meilleurs résultats à partir du modèle de votre application LUIS.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 05/06/2020
-ms.author: diberry
-ms.openlocfilehash: 43ca033c98d9997aecaf919b994a89d4e618d49b
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 05/17/2020
+ms.openlocfilehash: fc4475eb64744688e901d2b37e30632d044b0115
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83589803"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95019311"
 ---
 # <a name="best-practices-for-building-a-language-understanding-luis-app"></a>Meilleures pratiques pour la création d’une application LUIS (Language Understanding)
 Suivez le processus de création d’applications pour générer votre application LUIS :
@@ -31,13 +32,27 @@ La liste suivante indique les meilleures pratiques pour les applications LUIS :
 
 |À faire|À ne pas faire|
 |--|--|
-|[Définir des intentions distinctes](#do-define-distinct-intents)<br>[Ajouter des fonctionnalités aux intentions](#do-add-features-to-intents) |[Ajouter de nombreux exemples d’énoncés aux intentions](#dont-add-many-example-utterances-to-intents)<br>[Utiliser peu d’entités ou des entités simples](#dont-use-few-or-simple-entities) |
+|[Planifier votre schéma](#do-plan-your-schema)|[Créer et publier sans plan](#dont-publish-too-quickly)|
+|[Définir des intentions distinctes](#do-define-distinct-intents)<br>[Ajouter des fonctionnalités aux intentions](#do-add-features-to-intents)<br>
+[Utiliser des entités acquises sur ordinateur](#do-use-machine-learned-entities) |[Ajouter de nombreux exemples d’énoncés aux intentions](#dont-add-many-example-utterances-to-intents)<br>[Utiliser peu d’entités ou des entités simples](#dont-use-few-or-simple-entities) |
 |[Trouver l’équilibre idéal, ni trop générique ni trop spécifique, pour chaque intention](#do-find-sweet-spot-for-intents)|[Utiliser LUIS comme plateforme d’apprentissage](#dont-use-luis-as-a-training-platform)|
 |[Générer l’application de manière itérative avec des versions](#do-build-your-app-iteratively-with-versions)<br>[Générer des entités pour la décomposition du modèle](#do-build-for-model-decomposition)|[Ajouter de nombreux exemples d’énoncés du même format, en ignorant les autres formats](#dont-add-many-example-utterances-of-the-same-format-ignoring-other-formats)|
 |[Ajouter des modèles dans les itérations ultérieures](#do-add-patterns-in-later-iterations)|[Mélanger la définition des intentions et des entités](#dont-mix-the-definition-of-intents-and-entities)|
 |[Équilibrer vos énoncés entre toutes les intentions](#balance-your-utterances-across-all-intents), sauf l’intention None.<br>[Ajouter des exemples d’énoncés à l’intention None](#do-add-example-utterances-to-none-intent)|[Créer des listes d’expressions avec toutes les valeurs possibles](#dont-create-phrase-lists-with-all-the-possible-values)|
 |[Tirer parti de la fonctionnalité de suggestion pour l’apprentissage actif](#do-leverage-the-suggest-feature-for-active-learning)|[Ajouter trop de modèles](#dont-add-many-patterns).|
 |[Analyser les performances de l’application avec des tests par lots](#do-monitor-the-performance-of-your-app)|[Effectuer l’apprentissage et publier à chaque ajout d’exemple d’énoncé](#dont-train-and-publish-with-every-single-example-utterance)|
+
+## <a name="do-plan-your-schema"></a>Planifier votre schéma
+
+Avant de commencer à générer le schéma de votre application, vous devez identifier l’emplacement et l’endroit où vous envisagez d’utiliser cette application. Plus votre planification est détaillée et spécifique, plus votre application est performante.
+
+* Rechercher des utilisateurs ciblés
+* Définition de personnages de bout en bout pour représenter votre application : voix, avatar, gestion des problèmes (proactif, réactif)
+* Identifiez les interactions de l’utilisateur (texte, discours) par le biais des canaux, en passant aux solutions existantes ou en créant une nouvelle solution pour cette application
+* Parcours utilisateur de bout en bout
+    * Que faut-il attendre de cette application ? * Quelles sont ses priorités ?
+    * Quels sont les principaux cas d’usage ?
+* Collecte des données : [en savoir plus](data-collection.md) sur la collecte et la préparation des données
 
 ## <a name="do-define-distinct-intents"></a>Définir des intentions distinctes
 Le vocabulaire de chaque intention doit porter uniquement sur cette intention, sans chevauchement avec une autre. Par exemple, si vous souhaitez disposer d’une application qui gère les préparatifs de voyage, comme les vols et les hôtels, vous pouvez choisir de faire de ces domaines des intentions distinctes ou une même intention avec des entités pour les données précises à l’intérieur de l’énoncé.
@@ -60,11 +75,19 @@ Les fonctionnalités décrivent les concepts d’une intention. Une fonctionnali
 ## <a name="do-find-sweet-spot-for-intents"></a>Trouver l’équilibre idéal pour les intentions
 Utilisez les données de prédiction de LUIS pour déterminer si vos intentions se chevauchent, ce qui serait source de confusion pour LUIS. La meilleure intention serait alors trop proche d’une autre intention. Dans la mesure où LUIS n’utilise pas à chaque fois le même chemin d’accès à travers les données pour l’apprentissage, l’intention présentant un recoupement a des chances de finir première ou deuxième lors de l’apprentissage. Pour éviter cela, il faut que le score de l’énoncé de chaque intention soit plus éloigné. Lorsque les intentions sont bien distinctes les unes des autres, la meilleure intention devrait être à chaque fois conforme aux attentes.
 
+## <a name="do-use-machine-learned-entities"></a>Utilisez des entités acquises sur ordinateur
+
+Les entités acquises sur ordinateur sont adaptées à votre application et requièrent un étiquetage pour bien fonctionner. Si vous n’utilisez pas d’entité acquises sur ordinateur, vous utilisez peut-être le mauvais outil.
+
+Les entités acquises sur ordinateur peuvent utiliser d’autres entités en tant que fonctionnalités. Ces entités peuvent être des entités personnalisées, telles que des entités d’expression régulière ou des entités de liste, ou des entités prédéfinies en tant que fonctionnalités.
+
+En savoir plus sur les [entités acquises sur ordinateur efficaces](luis-concept-entity-types.md#effective-machine-learned-entities).
+
 <a name="#do-build-the-app-iteratively"></a>
 
 ## <a name="do-build-your-app-iteratively-with-versions"></a>Générer l’application de manière itérative avec des versions
 
-Chaque cycle de création doit figurer dans une nouvelle [version](luis-concept-version.md), clonée à partir d’une version existante.
+Chaque cycle de création doit figurer dans une nouvelle [version](./luis-concept-app-iteration.md), clonée à partir d’une version existante.
 
 ## <a name="do-build-for-model-decomposition"></a>Générer des entités pour la décomposition du modèle
 
@@ -79,9 +102,9 @@ La décomposition du modèle comprend un processus type :
 
 Une fois que vous avez créé l’intention et ajouté des exemples d’énoncés, l’exemple suivant décrit la décomposition d’entité.
 
-Commencez par identifier les concepts de données complets que vous souhaitez extraire dans un énoncé. Il s’agit de votre entité issue de l’apprentissage automatique. Décomposez ensuite l’expression en ses parties. Cela comprend l’identification des sous-entités et des fonctionnalités.
+Commencez par identifier les concepts de données complets que vous souhaitez extraire dans un énoncé. Il s’agit de votre entité de machine-learning. Décomposez ensuite l’expression en ses parties. Cela comprend l’identification des sous-entités et des fonctionnalités.
 
-Par exemple, si vous souhaitez extraire une adresse, la première entité issue de l’apprentissage automatique peut être appelée `Address`. Lors de la création de l’adresse, identifiez certaines de ses sous-entités, tels que l’adresse postale, la ville, l’État et le code postal.
+Par exemple, si vous souhaitez extraire une adresse, la première entité de machine-learning peut être appelée `Address`. Lors de la création de l’adresse, identifiez certaines de ses sous-entités, tels que l’adresse postale, la ville, l’État et le code postal.
 
 Continuez à décomposer ces éléments en :
 * Ajoutant une fonctionnalité requise du code postal en tant qu’entité d’expression régulière.
@@ -122,13 +145,21 @@ Supervisez la précision des prédictions à l’aide d’un jeu de [tests par l
 
 Conservez un jeu distinct d’énoncés ne servant pas d’[exemples d’énoncés](luis-concept-utterance.md) ou d’énoncés du point de terminaison. Continuez à améliorer l’application pour votre jeu de test. Adaptez celui-ci de façon à refléter les énoncés d’utilisateurs réels. Utilisez ce jeu de test pour évaluer chaque itération ou version de l’application.
 
+## <a name="dont-publish-too-quickly"></a>Ne publiez pas trop rapidement
+
+La publication trop rapide de votre application, sans [planification appropriée](#do-plan-your-schema), peut entraîner plusieurs problèmes, notamment :
+
+* Votre application ne fonctionnera pas dans votre scénario réel à un niveau de performance acceptable.
+* Le schéma (intentions et entités) ne conviendra pas et si vous avez développé une logique d’application cliente qui suit le schéma, vous devrez peut-être la réécrire depuis le début. Cela entraînerait des retards inattendus et un coût supplémentaire pour le projet sur lequel vous travaillez.
+* Les énoncés que vous ajoutez au modèle peuvent entraîner un biais vers l’ensemble d’énoncés en exemple difficile à déboguer et à identifier. Cela complique également la suppression de l’ambiguïté une fois que vous avez validé un certain schéma.
+
 ## <a name="dont-add-many-example-utterances-to-intents"></a>Ne pas ajouter de nombreux exemples d’énoncés aux intentions
 
 Une fois l’application publiée, ajoutez seulement des énoncés à partir de l’apprentissage actif au processus de cycle de développement. S’ils sont trop proches, ajoutez un modèle.
 
 ## <a name="dont-use-few-or-simple-entities"></a>Utiliser peu d’entités ou des entités simples
 
-Des entités sont générées pour l’extraction et la prédiction de données. Il est important que chaque intention comprenne des entités issues de l’apprentissage automatique qui décrivent les données dans l’intention. Cela permet à LUIS de prédire l’intention, même si votre application cliente n’a pas besoin d’utiliser l’entité extraite.
+Des entités sont générées pour l’extraction et la prédiction de données. Il est important que chaque intention contienne des entités de machine-learning qui décrivent les données dans l’intention. Cela permet à LUIS de prédire l’intention, même si votre application cliente n’a pas besoin d’utiliser l’entité extraite.
 
 ## <a name="dont-use-luis-as-a-training-platform"></a>Ne pas utiliser LUIS comme plateforme d’apprentissage
 

@@ -3,12 +3,13 @@ title: Gérer les secrets d’application Azure Service Fabric
 description: Découvrez comment sécuriser des valeurs secrètes dans une application Service Fabric (non dépendante de la plateforme).
 ms.topic: conceptual
 ms.date: 01/04/2019
-ms.openlocfilehash: 18090dd3e4046da2069e3035be4edb4d2f979204
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a11869c3b606ed9e74ce4f598109139fa1bb4164
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583237"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89012821"
 ---
 # <a name="manage-encrypted-secrets-in-service-fabric-applications"></a>Gérer les secrets chiffrés dans les applications Service Fabric
 Ce guide vous guide à travers les étapes de la gestion des secrets dans une application Service Fabric. Les secrets peuvent être des informations sensibles quelconques, notamment des chaînes de connexion de stockage, des mots de passe ou d’autres valeurs qui ne doivent pas être traitées en texte brut.
@@ -99,7 +100,7 @@ Pour remplacer des valeurs dans le fichier Settings.xml, déclarez un paramètre
 
 À présent, la valeur peut être spécifiée en tant que *paramètre d’application* lors de la création d’une instance de l’application. La création d’une instance d’application peut être scriptée à l’aide de PowerShell ou écrite en C# pour faciliter l’intégration dans un processus de génération.
 
-Avec PowerShell, le paramètre est fourni à la commande `New-ServiceFabricApplication` en tant que [table de hachage](https://technet.microsoft.com/library/ee692803.aspx):
+Avec PowerShell, le paramètre est fourni à la commande `New-ServiceFabricApplication` en tant que [table de hachage](/previous-versions/windows/it-pro/windows-powershell-1.0/ee692803(v=technet.10)):
 
 ```powershell
 New-ServiceFabricApplication -ApplicationName fabric:/MyApp -ApplicationTypeName MyAppType -ApplicationTypeVersion 1.0.0 -ApplicationParameter @{"MySecret" = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM="}

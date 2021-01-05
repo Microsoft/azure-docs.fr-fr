@@ -9,18 +9,18 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 63dc18c522a1e2e3b03bdf806945e0be67774b18
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 628824a3d303184e199452b0974c7f99d99a4933
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81870469"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86998950"
 ---
 # <a name="escalate-private-cloud-vcenter-privileges-from-the-cloudsimple-portal"></a>Élever les privilèges de vCenter pour votre cloud privé à partir du portail CloudSimple
 
 Pour un accès administratif au vCenter de votre cloud privé, vous pouvez temporairement élever vos privilèges CloudSimple.  Avec des privilèges élevés, vous pouvez installer des solutions VMware, ajouter des sources d’identité et gérer les utilisateurs.
 
-De nouveaux utilisateurs peuvent être créés sur le domaine d’authentification unique de vCenter et recevoir un accès à vCenter.  Lorsque vous créez de nouveaux utilisateurs, ajoutez-les aux groupes intégrés à CloudSimple pour accéder à vCenter.  Pour plus d’informations, consultez [Modèle d’autorisation de cloud privé CloudSimple de VMware vCenter](https://docs.microsoft.com/azure/vmware-cloudsimple/learn-private-cloud-permissions/).
+De nouveaux utilisateurs peuvent être créés sur le domaine d’authentification unique de vCenter et recevoir un accès à vCenter.  Lorsque vous créez de nouveaux utilisateurs, ajoutez-les aux groupes intégrés à CloudSimple pour accéder à vCenter.  Pour plus d’informations, consultez [Modèle d’autorisation de cloud privé CloudSimple de VMware vCenter](./learn-private-cloud-permissions.md).
 
 > [!CAUTION]
 > Ne modifiez pas la configuration pour les composants de gestion. Les actions effectuées au cours de l’état privilégié élevé peuvent nuire à votre système ou rendre votre système indisponible.
@@ -88,5 +88,5 @@ Une fois que vos tâches administratives sont terminées, vous devez annuler l�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Configurer les sources d’identité vCenter pour utiliser Active Directory](https://docs.microsoft.com/azure/vmware-cloudsimple/set-vcenter-identity/)
-* Installer la solution de sauvegarde pour [sauvegarder des machines virtuelles de charge de travail](https://docs.microsoft.com/azure/vmware-cloudsimple/backup-workloads-veeam/)
+* [Configurer les sources d’identité vCenter pour utiliser Active Directory](./set-vcenter-identity.md)
+* Installer la solution de sauvegarde pour [sauvegarder des machines virtuelles de charge de travail](./backup-workloads-veeam.md)

@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Templafy pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et dé-approvisionner automatiquement des comptes d’utilisateur dans Templafy.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 230877d5-e466-4449-82c8-88cfa42f6501
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: e03bfc1d3ce6490528f795d4ae5a83a59f044b67
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dc4ef937a032a5156164eaee59908c9ee0319fdb
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064208"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350158"
 ---
 # <a name="tutorial-configure-templafy-for-automatic-user-provisioning"></a>Tutoriel : Configurer Templafy pour l’approvisionnement automatique d’utilisateurs
 
@@ -62,11 +58,11 @@ Avant de configurer Templafy pour l’approvisionnement automatique d’utilisat
 
 2. Cliquez sur **Méthode d'authentification**.
 
-    ![Templafy Ajouter SCIM](media/templafy-provisioning-tutorial/image01.png)
+    ![Capture d’écran de la section d’administration Templafy avec l’option Méthode d’authentification en évidence.](media/templafy-provisioning-tutorial/image01.png)
 
 3. Copiez la valeur de la **clé d’API SCIM**. Vous devrez entrer cette valeur dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application Templafy dans le portail Microsoft Azure.
 
-    ![Templafy Ajouter SCIM](media/templafy-provisioning-tutorial/image02.png)
+    ![Capture d’écran de la clé API SCIM.](media/templafy-provisioning-tutorial/image02.png)
 
 ## <a name="add-templafy-from-the-gallery"></a>Ajouter Templafy à partir de la galerie
 
@@ -109,11 +105,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://scim.templafy.com/scim` dans **URL de locataire**. Saisissez la valeur de **Clé d’API SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Templafy. Si la connexion échoue, vérifiez que votre compte Templafy dispose des autorisations d’administrateur, puis réessayez.
 

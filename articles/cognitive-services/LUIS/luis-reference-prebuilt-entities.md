@@ -3,24 +3,30 @@ title: Ensemble des entités prédéfinies – LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des listes des entités prédéfinies qui sont incluses dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 10/03/2019
-ms.author: diberry
-ms.openlocfilehash: a49452653f8ac4bcc62758d801a235be0929d314
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/20/2020
+ms.openlocfilehash: 7a4654b8f389ad18010bb4ad211103f2816a18ee
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79218703"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91542000"
 ---
 # <a name="entities-per-culture-in-your-luis-model"></a>Entités par culture dans votre modèle LUIS
 
-Language Understanding (LUIS) fournit des entités prédéfinies. Quand une entité prédéfinie est incluse dans votre application, LUIS inclut la prédiction d’entité correspondante dans la réponse du point de terminaison. Tous les exemples d’énoncés sont également étiquetés avec l’entité. Le comportement des entités prédéfinies **ne peut pas** être modifié. Sauf indication contraire, les entités prédéfinies sont disponibles dans tous les paramètres régionaux de l’application LUIS (cultures). Le tableau suivant montre les entités prédéfinies qui sont pris en charge pour chaque culture.
+Language Understanding (LUIS) fournit des entités prédéfinies.
+
+## <a name="entity-resolution"></a>Résolution des entités
+Lorsqu’une application comporte une entité prédéfinie, LUIS inclut la résolution d’entité correspondante dans la réponse du point de terminaison. Tous les exemples d’énoncés sont également étiquetés avec l’entité.
+
+Le comportement des entités prédéfinies n’est pas modifiable. Cependant, vous pouvez améliorer la résolution en [ajoutant l’entité prédéfinie en tant que fonctionnalité à une entité ou à une sous-entité de Machine Learning](luis-concept-entity-types.md#effective-prebuilt-entities).
+
+## <a name="availability"></a>Disponibilité
+Sauf indication contraire, les entités prédéfinies sont disponibles dans tous les paramètres régionaux de l’application LUIS (cultures). Le tableau suivant montre les entités prédéfinies qui sont pris en charge pour chaque culture.
 
 |Culture|Sous-cultures|Notes|
 |--|--|--|
@@ -44,8 +50,8 @@ La disponibilité d’une entité prégénérée dans un langage spécifique est
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```zh-CN``` |
-------|:------:|
+| Entité prédéfinie | zh-CN |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -66,8 +72,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```nl-NL``` |
-------|:------:|
+| Entité prédéfinie | nl-NL |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetime](luis-reference-prebuilt-deprecated.md)   |    -   |
@@ -88,8 +94,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```en-US``` |
-------|:------:|
+| Entité prédéfinie | fr-FR |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -110,8 +116,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```fr-FR``` |
-------|:------:|
+| Entité prédéfinie | fr-FR |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -132,8 +138,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```fr-CA``` |
-------|:------:|
+| Entité prédéfinie | fr-CA |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -154,8 +160,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```de-DE``` |
-------|:------:|
+|Entité prédéfinie | de-DE |
+| -------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -178,8 +184,8 @@ _Résolution_ de l’âge prégénéré, de la devise, de la dimension, du nombr
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```it-IT``` |
-------|:------:|
+| Entité prédéfinie | it-IT |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetime](luis-reference-prebuilt-deprecated.md)   |    -   |
@@ -200,8 +206,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```ja-JP``` |
-------|:------:|
+|Entité prédéfinie | ja-JP |
+| -------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, -   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, -   |
 [Datetime](luis-reference-prebuilt-deprecated.md)   |    -   |
@@ -222,8 +228,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```ko-KR``` |
-------|:------:|
+| Entité prédéfinie | ko-KR |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    -   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    -   |
 [Datetime](luis-reference-prebuilt-deprecated.md)   |    -   |
@@ -244,8 +250,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```pt-BR``` |
-------|:------:|
+| Entité prédéfinie | pt-br |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -266,8 +272,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```es-ES``` |
-------|:------:|
+| Entité prédéfinie | es-ES |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    V2, V3   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    V2, V3   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    V2, V3   |
@@ -288,8 +294,8 @@ Les entités suivantes sont prises en charge :
 
 Les entités suivantes sont prises en charge :
 
-|Entité prédéfinie|```es-MX``` |
-------|:------:|
+| Entité prédéfinie | es-MX |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md) :<br>year<br>month<br>week<br>day   |    -   |
 [Devise (monnaie)](luis-reference-prebuilt-currency.md):<br>dollar<br>Unité fractionnelle (par exemple, centime)  |    -   |
 [Datetimev2](luis-reference-prebuilt-datetimev2.md) :<br>Date<br>daterange<br>time<br>plage horaire   |    -   |
@@ -316,8 +322,8 @@ KeyPhrase n’est pas disponible dans toutes les sous-cultures du portugais (Br�
 
 <!--
 
-|Prebuilt entity|```tr-tr``` |
-------|:------:|
+| Prebuilt entity | tr-tr |
+| --------------- | :---: |
 [Age](luis-reference-prebuilt-age.md):<br>year<br>month<br>week<br>day   |    -   |
 [Currency (money)](luis-reference-prebuilt-currency.md):<br>dollar<br>fractional unit (ex: penny)  |    -   |
 [DatetimeV2](luis-reference-prebuilt-datetimev2.md):<br>date<br>daterange<br>time<br>timerange   |    -   |

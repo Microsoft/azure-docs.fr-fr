@@ -9,16 +9,17 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 02/19/2020
+ms.date: 09/09/2020
 ms.author: jingwang
-ms.openlocfilehash: 8467bbe1512e45342b86ff62d51a3f66b3096f03
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 16f7a1481b15f280995bb71fa9e30ed3a129ab6d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81418131"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89612638"
 ---
 # <a name="copy-data-from-mysql-using-azure-data-factory"></a>Copier des données de MySQL à l’aide d’Azure Data Factory
+
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-onprem-mysql-connector.md)
 > * [Version actuelle](connector-mysql.md)
@@ -38,7 +39,7 @@ Ce connecteur MySQL est pris en charge pour les activités suivantes :
 
 Vous pouvez copier des données d’une base de données MySQL vers toute banque de données réceptrice prise en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Plus précisément, ce connecteur MySQL prend en charge MySQL **versions 5.6 et 5.7**.
+Plus précisément, ce connecteur MySQL prend en charge MySQL **versions 5.6, 5.7 et 8.0**.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -66,7 +67,9 @@ Voici un exemple de chaîne de connexion typique : `Server=<server>;Port=<port>;
 
 | Propriété | Description | Options | Obligatoire |
 |:--- |:--- |:--- |:--- |
-| SSLMode | Cette option spécifie si le pilote utilise le chiffrement TLS et la vérification lors de la connexion à MySQL. Par exemple, `SSLMode=<0/1/2/3/4>`| DISABLED (0) / PREFERRED (1) **(par défaut)** / REQUIRED (2) / VERIFY_CA (3) / VERIFY_IDENTITY (4) | Non |
+| SSLMode | Cette option spécifie si le pilote utilise le chiffrement TLS et la vérification lors de la connexion à MySQL. Par exemple, `SSLMode=<0/1/2/3/4>`.| DISABLED (0) / PREFERRED (1) **(par défaut)** / REQUIRED (2) / VERIFY_CA (3) / VERIFY_IDENTITY (4) | Non |
+| SSLCert | Chemin d’accès complet et nom d’un fichier. pem contenant le certificat SSL utilisé pour prouver l’identité du client. <br/> Pour spécifier une clé privée à des fins de chiffrement de ce certificat avant de l’envoyer au serveur, utilisez la propriété `SSLKey`.| | Oui, si vous utilisez la vérification SSL bidirectionnelle. |
+| SSLKey | Chemin d’accès complet et nom d’un fichier contenant la clé privée utilisée pour chiffrer le certificat côté client lors de la vérification SSL bidirectionnelle.|  | Oui, si vous utilisez la vérification SSL bidirectionnelle. |
 | UseSystemTrustStore | Cette option indique s’il faut utiliser un certificat d’autorité de certification provenant du magasin de confiance du système ou d’un fichier PEM spécifié. Par exemple, `UseSystemTrustStore=<0/1>;`| Enabled (1) / Disabled (0) **(par défaut)** | Non |
 
 **Exemple :**

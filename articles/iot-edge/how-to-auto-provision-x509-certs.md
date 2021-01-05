@@ -9,16 +9,16 @@ ms.date: 04/09/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: ccd8d383db265826d8644ee89d7300128fc3a350
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 761b031916dd9ead71f5be6a6887208a1f200f58
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131305"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91966132"
 ---
 # <a name="create-and-provision-an-iot-edge-device-using-x509-certificates"></a>Créer et provisionner un appareil IoT Edge à l’aide de certificats X.509
 
-Avec le [service Azure IoT Hub Device Provisioning (DPS)](../iot-dps/index.yml), vous pouvez provisionner automatiquement des appareils IoT Edge à l’aide de certificats X.509. Si vous ne connaissez pas le processus de provisionnement automatique, révisez les [concepts du provisionnement automatique](../iot-dps/concepts-auto-provisioning.md) avant de poursuivre.
+Avec le [service Azure IoT Hub Device Provisioning (DPS)](../iot-dps/index.yml), vous pouvez provisionner automatiquement des appareils IoT Edge à l’aide de certificats X.509. Si vous ne connaissez pas le processus de provisionnement automatique, révisez la présentation du [provisionnement](../iot-dps/about-iot-dps.md#provisioning-process) avant de poursuivre.
 
 Cet article vous montre comment créer une inscription au service Device Provisioning à l’aide de certificats X.509 sur un appareil IoT Edge, en procédant comme suit :
 
@@ -51,6 +51,9 @@ Les fichiers suivants sont nécessaires pour configurer le provisionnement autom
 * Un certificat de chaîne complète, qui doit comporter au moins l’identité d’appareil et les certificats intermédiaires qu’elle contient. Le certificat de chaîne complète est transmis au runtime IoT Edge.
 * Un certificat d’autorité de certification racine ou intermédiaire issu de la chaîne d’approbation des certificats. Ce certificat est chargé dans DPS si vous créez une inscription de groupe.
 
+> [!NOTE]
+> Il existe actuellement dans libiothsm une limitation empêchant l’utilisation de certificats qui expirent le 1er janvier 2038 ou après cette date.
+
 ### <a name="use-test-certificates"></a>Utiliser des certificats de test
 
 Si vous n’avez pas d’autorité de certification disponible pour créer des certificats d’identité et que vous souhaitez tester ce scénario, le dépôt Git Azure IoT Edge contient des scripts que vous pouvez utiliser pour générer des certificats de test. Ces certificats, conçus uniquement pour les tests de développement, ne doivent pas être utilisés en production.
@@ -80,7 +83,7 @@ Lorsque vous créez une inscription auprès du service Device Provisioning, vous
 Pour plus d’informations sur les inscriptions dans le service Device Provisioning, consultez [Guide pratique pour gérer les inscriptions d’appareils](../iot-dps/how-to-manage-enrollments.md).
 
    > [!TIP]
-   > Dans l’interface de ligne de commande Azure, vous pouvez créer une [inscription](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot/dps/enrollment) ou un [groupe d’inscriptions](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot/dps/enrollment-group) et utiliser l’indicateur **compatible avec Edge** pour spécifier qu’un appareil, ou un groupe d’appareils, est un appareil IoT Edge.
+   > Dans l’interface de ligne de commande Azure, vous pouvez créer une [inscription](/cli/azure/ext/azure-iot/iot/dps/enrollment) ou un [groupe d’inscriptions](/cli/azure/ext/azure-iot/iot/dps/enrollment-group) et utiliser l’indicateur **compatible avec Edge** pour spécifier qu’un appareil, ou un groupe d’appareils, est un appareil IoT Edge.
 
 1. Dans le [Portail Microsoft Azure](https://portal.azure.com), accédez à votre instance du service IoT Hub Device Provisioning.
 
@@ -206,73 +209,76 @@ Maintenant qu’une inscription existe pour cet appareil, le runtime IoT Edge pe
 
 Le runtime IoT Edge est déployé sur tous les appareils IoT Edge. Ses composants s’exécutent dans des conteneurs et vous permettent de déployer des conteneurs supplémentaires sur l’appareil, pour que vous puissiez exécuter du code en périphérie.
 
+Effectuez les étapes décrites dans [Installer le runtime Azure IoT Edge](how-to-install-iot-edge.md), puis revenez au présent article pour provisionner l’appareil.
+
 Le provisionnement X.509 avec le service Device Provisioning est uniquement pris en charge dans IoT Edge version 1.0.9 ou ultérieure.
 
-Vous aurez besoin des informations suivantes lors de l’approvisionnement de votre appareil :
+## <a name="configure-the-device-with-provisioning-information"></a>Configurer l’appareil avec des informations de provisionnement
+
+Une fois que le runtime est installé sur votre appareil, configurez l’appareil avec les informations qu’il utilise pour se connecter au service Device Provisioning (DPS) et à IoT Hub.
+
+Préparez les informations suivantes :
 
 * La valeur **Étendue de l’ID** du service Device Provisioning. Vous pouvez récupérer cette valeur à partir de la page de présentation de votre instance du service Device Provisioning dans le portail Azure.
 * Le fichier de chaîne de certificats d’identité d’appareil sur l’appareil
 * Le fichier de clé d’identité d’appareil sur l’appareil
-* Un ID d’inscription facultatif (extrait du nom commun dans le certificat d’identité d’appareil s’il n’est pas fourni)
+* ID d’inscription facultatif. S’il n’est pas fourni, l’ID est extrait du nom commun dans le certificat d’identité d’appareil.
 
 ### <a name="linux-device"></a>Appareil Linux
 
-Utilisez le lien suivant pour installer le runtime Azure IoT Edge sur votre appareil, à l’aide des commandes appropriées pour l’architecture de votre appareil. Quand vous accédez à la section sur la configuration du démon de sécurité, configurez le runtime IoT Edge pour le provisionnement X.509 automatique, et non manuel. Après avoir effectué les sections précédentes de cet article, vous devez disposer de tous les fichiers d’informations et de certificats nécessaires.
+1. Ouvrez le fichier de configuration sur l’appareil IoT Edge.
 
-[Installer le runtime Azure IoT Edge sur Linux](how-to-install-iot-edge-linux.md)
+   ```bash
+   sudo nano /etc/iotedge/config.yaml
+   ```
 
-Quand vous ajoutez le certificat X.509 et les informations de clé au fichier config.yaml, les chemins doivent être fournis en tant qu’URI de fichier. Par exemple :
+1. Recherchez la section des configurations de provisionnement dans le fichier. Décommentez les lignes du provisionnement avec les clés symétriques du service Device Provisioning et assurez-vous que les autres lignes de provisionnement sont commentées.
 
-* `file:///<path>/identity_certificate_chain.pem`
-* `file:///<path>/identity_key.pem`
+   La ligne `provisioning:` ne doit pas être précédée d’un espace et les éléments imbriqués doivent être en retrait de deux espaces.
 
-La section du fichier de configuration pour le provisionnement automatique X.509 se présente comme suit :
+   ```yml
+   # DPS TPM provisioning configuration
+   provisioning:
+     source: "dps"
+     global_endpoint: "https://global.azure-devices-provisioning.net"
+     scope_id: "<SCOPE_ID>"
+     attestation:
+       method: "x509"
+   #   registration_id: "<OPTIONAL REGISTRATION ID. LEAVE COMMENTED OUT TO REGISTER WITH CN OF identity_cert>"
+       identity_cert: "<REQUIRED URI TO DEVICE IDENTITY CERTIFICATE>"
+       identity_pk: "<REQUIRED URI TO DEVICE IDENTITY PRIVATE KEY>"
+   ```
 
-```yaml
-# DPS X.509 provisioning configuration
-provisioning:
-  source: "dps"
-  global_endpoint: "https://global.azure-devices-provisioning.net"
-  scope_id: "<SCOPE_ID>"
-  attestation:
-    method: "x509"
-#   registration_id: "<OPTIONAL REGISTRATION ID. LEAVE COMMENTED OUT TO REGISTER WITH CN OF identity_cert>"
-    identity_cert: "<REQUIRED URI TO DEVICE IDENTITY CERTIFICATE>"
-    identity_pk: "<REQUIRED URI TO DEVICE IDENTITY PRIVATE KEY>"
-```
+1. Mettez à jour les valeurs de `scope_id`, `identity_cert` et `identity_pk` avec vos informations sur l’appareil et le service Device Provisioning.
 
-Remplacez les valeurs d’espace réservé `scope_id`, `identity_cert` et `identity_pk` par l’ID d’étendue de votre instance DPS et l’URI des emplacements de fichier de clé et de chaîne de certificats sur votre appareil. Fournissez un `registration_id` pour l’appareil si vous le souhaitez, ou laissez cette ligne commentée pour inscrire l’appareil avec le nom commun du certificat d’identité.
+   Quand vous ajoutez le certificat X.509 et les informations de clé au fichier config.yaml, les chemins doivent être fournis en tant qu’URI de fichier. Par exemple :
 
-Redémarrez toujours le démon de sécurité après avoir mis à jour le fichier config.yaml.
+   `file:///<path>/identity_certificate_chain.pem`
+   `file:///<path>/identity_key.pem`
 
-```bash
-sudo systemctl restart iotedge
-```
+1. Fournissez un `registration_id` pour l’appareil si vous le souhaitez, ou laissez cette ligne commentée pour inscrire l’appareil avec le nom commun du certificat d’identité.
+
+1. Redémarrez le runtime IoT Edge afin qu’il récupère toutes les modifications de configuration que vous avez effectuées sur l’appareil.
+
+   ```bash
+   sudo systemctl restart iotedge
+   ```
 
 ### <a name="windows-device"></a>Appareil Windows
 
-Installez le runtime IoT Edge sur l’appareil pour lequel vous avez généré la chaîne de certificats d’identité et la clé d’identité. Vous allez configurer le runtime IoT Edge pour un provisionnement automatique et non manuel.
-
-Pour plus d'informations sur l'installation d'IoT Edge sous Windows, notamment sur les conditions préalables et les instructions relatives aux tâches telles que la gestion des conteneurs et la mise à jour d'IoT Edge, consultez [Installer le runtime Azure IoT Edge sous Windows](how-to-install-iot-edge-windows.md).
-
 1. Ouvrez une fenêtre PowerShell en mode administrateur. Veillez à utiliser une session AMD64 de PowerShell lors de l'installation d'IoT Edge, plutôt que PowerShell (x86).
 
-1. La commande **Deploy-IoTEdge** vérifie que votre ordinateur Windows a une version prise en charge, active la fonctionnalité des conteneurs, avant de télécharger le runtime moby et le runtime IoT Edge. Par défaut, la commande utilise des conteneurs de Windows.
+1. La commande **Initialize-IoTEdge** configure le runtime IoT Edge sur votre ordinateur. La commande opère par défaut un provisionnement manuel avec les conteneurs Windows. Vous devez donc ajouter l’indicateur `-DpsX509` pour utiliser le provisionnement automatique avec l’authentification par certificat X.509.
+
+   Remplacez les valeurs d’espace réservé `{scope_id}`, `{identity cert chain path}` et `{identity key path}` par les valeurs appropriées de votre instance du service Device Provisioning et les chemins des fichiers sur votre appareil.
+
+   Ajoutez la valeur `-RegistrationId {registration_id}` si vous souhaitez définir l’ID d’appareil autrement que par le nom commun du certificat d’identité.
+
+   Ajoutez le paramètre `-ContainerOs Linux` si vous utilisez des conteneurs Linux sur Windows.
 
    ```powershell
    . {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; `
-   Deploy-IoTEdge
-   ```
-
-1. À ce stade, les appareils IoT Core peuvent redémarrer automatiquement. D’autres appareils Windows 10 ou Windows Server peuvent vous inviter à redémarrer. Si c’est le cas, redémarrez votre appareil maintenant. Une fois votre appareil prêt, exécutez à nouveau PowerShell en tant qu’administrateur.
-
-1. La commande **Initialize-IoTEdge** configure le runtime IoT Edge sur votre ordinateur. La commande opère par défaut un provisionnement manuel, sauf si vous utilisez l’indicateur `-Dps` pour utiliser un provisionnement automatique.
-
-   Remplacez les valeurs d’espace réservé `{scope_id}`, `{identity cert chain path}` et `{identity key path}` par les valeurs appropriées de votre instance du service Device Provisioning et les chemins des fichiers sur votre appareil. Si vous souhaitez spécifier l’ID d’inscription, incluez également `-RegistrationId {registration_id}`, en remplaçant l’espace réservé comme il convient.
-
-   ```powershell
-   . {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; `
-   Initialize-IoTEdge -Dps -ScopeId {scope ID} -X509IdentityCertificate {identity cert chain path} -X509IdentityPrivateKey {identity key path}
+   Initialize-IoTEdge -DpsX509 -ScopeId {scope ID} -X509IdentityCertificate {identity cert chain path} -X509IdentityPrivateKey {identity key path}
    ```
 
    >[!TIP]

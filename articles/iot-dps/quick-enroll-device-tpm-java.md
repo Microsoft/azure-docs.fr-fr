@@ -1,5 +1,5 @@
 ---
-title: Inscrire un appareil TPM auprès du service Azure Device Provisioning avec Java
+title: Démarrage rapide – Inscrire un appareil TPM auprès du service Azure Device Provisioning à l’aide de Java
 description: 'Démarrage rapide : Inscrire un appareil TPM auprès du service Azure IoT Hub Device Provisioning (DPS) à l’aide du SDK du service Java. Ce démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: java
-ms.custom: mvc
-ms.openlocfilehash: c199d5be4c103c80a6fcc126af70f48367909f64
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-java
+ms.openlocfilehash: 0a1f4ed46ab9e467a19cfa722a2d345284fdc94a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79290587"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96463057"
 ---
 # <a name="quickstart-enroll-tpm-device-to-iot-hub-device-provisioning-service-using-java-service-sdk"></a>Démarrage rapide : Inscrire un appareil TPM auprès du service IoT Hub Device Provisioning à l’aide du kit Java Service SDK
 
@@ -27,7 +27,7 @@ Dans ce guide de démarrage rapide, vous allez créer programmatiquement une ins
 - Exécution des étapes décrites dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 - Exécution des étapes décrites dans [Lire les clés de chiffrement à partir de l’appareil TPM](quick-create-simulated-device.md#simulatetpm).
 - Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
-- [Java SE Development Kit 8](https://aka.ms/azure-jdks). Ce guide de démarrage rapide installe le kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/service/) ci-dessous. Il fonctionne à la fois sur Windows et Linux. Ce guide de démarrage rapide utilise Windows.
+- [Java SE Development Kit 8](/azure/developer/java/fundamentals/java-jdk-long-term-support). Ce guide de démarrage rapide installe le kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/master/service/) ci-dessous. Il fonctionne à la fois sur Windows et Linux. Ce guide de démarrage rapide utilise Windows.
 - [Maven 3](https://maven.apache.org/download.cgi).
 - [Git](https://git-scm.com/download/).
 
@@ -35,7 +35,7 @@ Dans ce guide de démarrage rapide, vous allez créer programmatiquement une ins
 
 ## <a name="prepare-the-development-environment"></a>Préparer l’environnement de développement 
 
-1. Assurez-vous que le [Java SE Development Kit 8](https://aka.ms/azure-jdks) est bien installé sur votre ordinateur. 
+1. Assurez-vous que le [Java SE Development Kit 8](/azure/developer/java/fundamentals/java-jdk-long-term-support) est bien installé sur votre ordinateur. 
 
 2. Configurez les variables d’environnement pour votre installation Java. La variable `PATH` doit inclure le chemin d’accès complet au répertoire *jdk1.8.x\bin*. S’il s’agit de la première installation de Java sur cet ordinateur, vous devez alors créer une variable d’environnement nommée `JAVA_HOME` et la faire pointer vers le chemin complet du répertoire *jdk1.8.x*. Sur une machine Windows, ce répertoire se trouve dans le dossier *C:\\Program Files\\Java\\* . De plus, vous pouvez créer ou modifier les variables d’environnement en recherchant **Modifier les variables d’environnement du système** dans le **Panneau de configuration** de votre machine Windows. 
 
@@ -62,7 +62,7 @@ Dans ce guide de démarrage rapide, vous allez créer programmatiquement une ins
 
 Cette section montre comment ajouter à l’exemple de code les détails de l’approvisionnement de votre appareil TPM. 
 
-1. Ouvrez une invite de commandes. Clonez le dépôt GitHub pour l’exemple de code d’inscription de l’appareil à l’aide du kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/service/) :
+1. Ouvrez une invite de commandes. Clonez le dépôt GitHub pour l’exemple de code d’inscription de l’appareil à l’aide du kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/master/service/) :
     
     ```cmd\sh
     git clone https://github.com/Azure/azure-iot-sdk-java.git --recursive
@@ -130,7 +130,7 @@ Cette section montre comment ajouter à l’exemple de code les détails de l’
     mvn install -DskipTests
     ```
 
-   Cette commande télécharge le package Maven [`com.microsoft.azure.sdk.iot.provisioning.service`](https://www.mvnrepository.com/artifact/com.microsoft.azure.sdk.iot.provisioning/provisioning-service-client) sur l’ordinateur. Ce package inclut les fichiers binaires du kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/service/) que l’exemple de code doit générer. 
+   Cette commande télécharge le package Maven [`com.microsoft.azure.sdk.iot.provisioning.service`](https://www.mvnrepository.com/artifact/com.microsoft.azure.sdk.iot.provisioning/provisioning-service-client) sur l’ordinateur. Ce package inclut les fichiers binaires du kit [Java Service SDK](https://azure.github.io/azure-iot-sdk-java/master/service/) que l’exemple de code doit générer. 
 
 3. Dans la fenêtre de commande, exécutez l’exemple à l’aide de ces commandes :
 

@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/11/2020
 ms.topic: how-to
-ms.openlocfilehash: b9b72fb9e80c588eb3e6642d0228bffa50b35c6e
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 8169b277dfae918e86ac493259325ff84d0b6a4e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679231"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998530"
 ---
 # <a name="create-an-azure-remote-rendering-account"></a>Créer un compte Azure Remote Rendering
 
@@ -28,20 +28,24 @@ Vous devez effectuer les étapes suivantes afin de créer un compte pour le serv
     1. Sous « Nom de la ressource », spécifiez le nom du compte.
     1. Mettez à jour l’« Abonnement » si nécessaire.
     1. Sous « Groupe de ressources », spécifiez le groupe de ressources de votre choix.
+    1. Sélectionnez une région dans la liste déroulante « Emplacement » dans laquelle cette ressource doit être créée. Consultez les notes sur [les régions de compte](create-an-account.md#account-regions) ci-dessous.
 1. Accédez au compte dès lors que celui-ci est créé, puis effectuez les opérations suivantes :
     1. Dans l’onglet *Vue d’ensemble*, notez l’« ID de compte ».
     1. Dans l’onglet *Paramètres > Clés d’accès*, notez la « Clé primaire », qui est la clé de compte secrète du compte.
+
+### <a name="account-regions"></a>Régions de compte
+L’emplacement spécifié lors de la création d’un compte détermine la région à laquelle la ressource de compte est affectée. Cette valeur ne peut pas être modifiée après la création. Toutefois, le compte peut être utilisé pour se connecter à une session Remote Rendering dans n’importe quelle [région prise en charge](./../reference/regions.md), indépendamment de l’emplacement du compte.
 
 ### <a name="retrieve-the-account-information"></a>Récupérer les informations de compte
 
 Pour accéder aux exemples et tutoriels, vous devez spécifier l’ID de compte et une clé. Par exemple, dans le fichier **arrconfig.json** utilisé pour les exemples de scripts PowerShell :
 
 ```json
-    "accountSettings": {
-        "arrAccountId": "<fill in the account ID from the Azure portal>",
-        "arrAccountKey": "<fill in the account key from the Azure portal>",
-        "region": "<select from available regions>"
-    },
+"accountSettings": {
+    "arrAccountId": "<fill in the account ID from the Azure portal>",
+    "arrAccountKey": "<fill in the account key from the Azure portal>",
+    "region": "<select from available regions>"
+},
 ```
 
 Consultez la [liste des régions disponibles](../reference/regions.md) pour définir l’option de *région*.
@@ -79,19 +83,25 @@ Vous devez effectuer les étapes de ce paragraphe pour chaque compte de stockage
 
  Cliquez sur le bouton **Ajouter** dans la vignette « Ajouter une attribution de rôle » pour ajouter le premier rôle :
 
-![Compte de stockage IAM](./media/azure-add-role-assignment.png)
+![Compte de stockage IAM – Ajouter une attribution de rôle](./media/azure-add-role-assignment.png)
 
-* Le premier rôle à attribuer est **Propriétaire** comme indiqué dans la capture d’écran ci-dessus. 
+* Le premier rôle à attribuer est **Propriétaire** comme indiqué dans la capture d’écran ci-dessus.
 * Sélectionnez **Compte Remote Rendering** dans la liste déroulante ***Attribuer l’accès à**.
 * Sélectionnez votre abonnement et votre compte Remote Rendering dans les dernières listes déroulantes.
 
+> [!WARNING]
+> Si votre Remote Rendering n’est pas répertorié, consultez cette [section pour la résolution de problèmes](../resources/troubleshoot.md#cant-link-storage-account-to-arr-account).
+
 Répétez deux fois la procédure d’ajout de rôles en effectuant les sélections suivantes dans la liste déroulante **Rôle** :
+
 * **Contributeur de compte de stockage**
 * **Contributeur aux données Blob du stockage**
 
 Les sélections dans les autres listes déroulantes correspondent à celles de la première étape.
 
 Si vous avez ajouté les trois rôles, votre compte Azure Remote Rendering a accès à votre compte de stockage avec les identités de service managées affectées par le système.
+> [!IMPORTANT]
+> Les attributions de rôles Azure étant mises en cache par le service Stockage Azure, jusqu’à 30 minutes peuvent s’écouler entre le moment où vous accordez l’accès à votre compte de rendu à distance et le moment où celui-ci peut être utilisé pour accéder à votre compte de stockage. Pour plus d’informations, consultez la [documentation sur le contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/troubleshooting.md#role-assignment-changes-are-not-being-detected).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

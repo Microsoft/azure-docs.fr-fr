@@ -8,12 +8,12 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 04/10/2020
-ms.openlocfilehash: 520699b81024de9491f34263f16872428ddbd487
-ms.sourcegitcommit: eefb0f30426a138366a9d405dacdb61330df65e7
+ms.openlocfilehash: 9d6acdcf9487b2d1a5964d4ec686cd23666275b0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81618030"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88923090"
 ---
 # <a name="azure-cognitive-search---frequently-asked-questions-faq"></a>Recherche cognitive Azure – Questions fréquentes (FAQ)
 
@@ -23,7 +23,7 @@ ms.locfileid: "81618030"
 
 ### <a name="how-is-azure-cognitive-search-different-from-full-text-search-in-my-dbms"></a>En quoi la Recherche cognitive Azure est-elle différente de la recherche en texte intégral de mon système de gestion de base de données (SGBD) ?
 
-La Recherche cognitive Azure comprend les fonctionnalités suivantes : prise en charge de plusieurs sources de données, [analyse linguistique de nombreuses langues](https://docs.microsoft.com/rest/api/searchservice/language-support), [analyse personnalisée des entrées de données intéressantes et inhabituelles](https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search), contrôles de classement des recherches par le biais de [profils de score](https://docs.microsoft.com/rest/api/searchservice/add-scoring-profiles-to-a-search-index), tampon clavier, mise en surbrillance des résultats et navigation par facettes. Elle comprend également d’autres fonctionnalités, telles que les synonymes et une syntaxe de requête riche, toutefois ces fonctionnalités ne lui sont pas propres.
+La Recherche cognitive Azure comprend les fonctionnalités suivantes : prise en charge de plusieurs sources de données, [analyse linguistique de nombreuses langues](/rest/api/searchservice/language-support), [analyse personnalisée des entrées de données intéressantes et inhabituelles](/rest/api/searchservice/custom-analyzers-in-azure-search), contrôles de classement des recherches par le biais de [profils de score](/rest/api/searchservice/add-scoring-profiles-to-a-search-index), tampon clavier, mise en surbrillance des résultats et navigation par facettes. Elle comprend également d’autres fonctionnalités, telles que les synonymes et une syntaxe de requête riche, toutefois ces fonctionnalités ne lui sont pas propres.
 
 ### <a name="can-i-pause-azure-cognitive-search-service-and-stop-billing"></a>Puis-je suspendre le service Recherche cognitive Azure et arrêter la facturation ?
 
@@ -39,7 +39,7 @@ Vous pouvez aussi sauvegarder un instantané d’index dans des fichiers qui peu
 
 Vous pouvez effectuer toutes ces opérations avec l’exemple de code **index-backup-restore** dans cet [exemple de dépôt .NET Recherche cognitive Azure](https://github.com/Azure-Samples/azure-search-dotnet-samples). 
 
-Vous pouvez également [obtenir une définition d’index](https://docs.microsoft.com/rest/api/searchservice/get-index) à tout moment à l’aide de l’API REST Recherche cognitive Azure.
+Vous pouvez également [obtenir une définition d’index](/rest/api/searchservice/get-index) à tout moment à l’aide de l’API REST Recherche cognitive Azure.
 
 Il n’existe aucune fonctionnalité intégrée d’extraction d’index, de capture instantanée ou de restauration de sauvegarde dans le portail Azure. Toutefois, nous envisageons d’ajouter les fonctionnalités de sauvegarde et de restauration dans une version future. Si vous souhaitez soutenir cette fonctionnalité, votez sur [UserVoice](https://feedback.azure.com/forums/263029-azure-search/suggestions/8021610-backup-snapshot-of-index).
 
@@ -53,7 +53,7 @@ Pour recréer un index, vous devez réindexer les données à partir de sources 
 
 Vous pouvez également utiliser l’exemple de code **index-backup-restore** dans cet [exemple de dépôt .NET Recherche cognitive Azure](https://github.com/Azure-Samples/azure-search-dotnet-samples) pour sauvegarder la définition et l’instantané d’un index dans une série de fichiers JSON. Plus tard, vous pourrez utiliser l’outil et les fichiers pour restaurer l’index, si nécessaire.  
 
-### <a name="can-i-index-from-sql-database-replicas-applies-to-azure-sql-database-indexers"></a>Puis-je effectuer une indexation à partir de réplicas de base de données SQL ? (s’applique aux [indexeurs Azure SQL Database](https://docs.microsoft.com/azure/search/search-howto-connecting-azure-sql-database-to-azure-search-using-indexers))
+### <a name="can-i-index-from-sql-database-replicas-applies-to-azure-sql-database-indexers"></a>Puis-je effectuer une indexation à partir de réplicas SQL Database ? (s’applique aux [indexeurs Azure SQL Database](./search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md))
 
 Il n’existe aucune restriction quant à l’utilisation d’un réplica principal ou secondaire comme source de données lorsque vous créez un index à partir de zéro. Toutefois, pour que l’index soit actualisé avec des mises à jour incrémentielles (basées sur les enregistrements modifiés), le réplica principal est nécessaire. Cela vient du fait que SQL Database assure uniquement le suivi des modifications sur les réplicas principaux. Si vous essayez d’utiliser des réplicas secondaires pour une charge de travail d’actualisation d’index, il n’est pas garanti que vous obteniez toutes les données.
 
@@ -65,17 +65,17 @@ Non, cette opération n’est pas prise en charge. La recherche est toujours lim
 
 ### <a name="can-i-restrict-search-index-access-by-user-identity"></a>Puis-je limiter l'accès à l'index de recherche en fonction de l'identité de l'utilisateur ?
 
-Vous pouvez implémenter des [filtres de sécurité](https://docs.microsoft.com/azure/search/search-security-trimming-for-azure-search) avec le filtre `search.in()`. Le filtre s’adapte parfaitement aux [services de gestion d’identité comme Azure Active Directory(AAD)](https://docs.microsoft.com/azure/search/search-security-trimming-for-azure-search-with-aad) afin de réduire les résultats de recherche en fonction de l’appartenance à un groupe d’utilisateurs défini.
+Vous pouvez implémenter des [filtres de sécurité](./search-security-trimming-for-azure-search.md) avec le filtre `search.in()`. Le filtre s’adapte parfaitement aux [services de gestion d’identité comme Azure Active Directory(AAD)](./search-security-trimming-for-azure-search-with-aad.md) afin de réduire les résultats de recherche en fonction de l’appartenance à un groupe d’utilisateurs défini.
 
 ### <a name="why-are-there-zero-matches-on-terms-i-know-to-be-valid"></a>Pourquoi n’ai-je aucun résultat pour des termes dont je sais qu’ils sont valides ?
 
 Dans la plupart des cas, l’utilisateur ne sait pas que chaque type de requête prend en charge des comportements de recherche et des niveaux d’analyse linguistique différents. La recherche en texte intégral, qui représente la principale charge de travail, comprend une phase d’analyse linguistique qui ne conserve que la racine des termes entrés. Cet aspect de l’analyse de requête permet d’élargir le nombre de correspondances possibles, car le terme peut ainsi correspondre à un plus grand nombre de variantes.
 
-Toutefois, les requêtes de caractère générique, les requêtes partielles et les requêtes d’expression régulière ne sont pas analysées comme les requêtes de terme ou d’expression normales et peuvent entraîner un rappel médiocre si la requête ne correspond pas à la forme analysée du mot dans l’index de recherche. Pour plus d’informations sur l’analyse des requêtes et l’analyse lexicale, consultez [l’architecture de requêtes](https://docs.microsoft.com/azure/search/search-lucene-query-architecture).
+Toutefois, les requêtes de caractère générique, les requêtes partielles et les requêtes d’expression régulière ne sont pas analysées comme les requêtes de terme ou d’expression normales et peuvent entraîner un rappel médiocre si la requête ne correspond pas à la forme analysée du mot dans l’index de recherche. Pour plus d’informations sur l’analyse des requêtes et l’analyse lexicale, consultez [l’architecture de requêtes](./search-lucene-query-architecture.md).
 
 ### <a name="my-wildcard-searches-are-slow"></a>Mes recherches de caractère générique sont lentes.
 
-La plupart des requêtes de recherche de caractère générique, comme les requêtes de préfixe, partielle et d’expression régulière, sont réécrites en interne avec des termes correspondants dans l’index de recherche. Ce traitement supplémentaire d’analyse de l’index de recherche augmente la latence. Par ailleurs, les requêtes de recherche large, comme `a*`, qui sont susceptibles d’être réécrites avec de nombreux termes, peuvent être très lentes. Pour des recherches performantes avec caractère générique, définissez un [analyseur personnalisé](https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search).
+La plupart des requêtes de recherche de caractère générique, comme les requêtes de préfixe, partielle et d’expression régulière, sont réécrites en interne avec des termes correspondants dans l’index de recherche. Ce traitement supplémentaire d’analyse de l’index de recherche augmente la latence. Par ailleurs, les requêtes de recherche large, comme `a*`, qui sont susceptibles d’être réécrites avec de nombreux termes, peuvent être très lentes. Pour des recherches performantes avec caractère générique, définissez un [analyseur personnalisé](/rest/api/searchservice/custom-analyzers-in-azure-search).
 
 ### <a name="why-is-the-search-rank-a-constant-or-equal-score-of-10-for-every-hit"></a>Pourquoi le score du classement de recherche est-il systématiquement égal à 1.0 pour tous les résultats ?
 
@@ -95,7 +95,7 @@ En savoir plus sur l’[enrichissement incrémentiel](cognitive-search-increment
 
 ### <a name="what-is-the-best-approach-for-implementing-localized-search"></a>Quelle est la meilleure méthode pour implémenter une recherche localisée ?
 
-La plupart des clients choisissent des champs dédiés plutôt qu’une collection lorsque plusieurs paramètres régionaux (langues) doivent être pris en charge dans un même index. Les champs spécifiques aux paramètres régionaux permettent d’attribuer un analyseur adapté. Par exemple, vous pouvez affecter l’analyseur de français Microsoft à un champ contenant des chaînes en langue française. Cela simplifie également le filtrage. Si vous savez qu’une requête est exécutée sur une page fr-fr, vous pouvez limiter les résultats de la recherche à ce champ. Sinon, vous pouvez aussi créer un [profil de score](https://docs.microsoft.com/rest/api/searchservice/add-scoring-profiles-to-a-search-index) afin de donner au champ un poids plus relatif. Le service Recherche cognitive Azure prend en charge plus de [50 analyseurs de langue](https://docs.microsoft.com/azure/search/search-language-support) sélectionnables.
+La plupart des clients choisissent des champs dédiés plutôt qu’une collection lorsque plusieurs paramètres régionaux (langues) doivent être pris en charge dans un même index. Les champs spécifiques aux paramètres régionaux permettent d’attribuer un analyseur adapté. Par exemple, vous pouvez affecter l’analyseur de français Microsoft à un champ contenant des chaînes en langue française. Cela simplifie également le filtrage. Si vous savez qu’une requête est exécutée sur une page fr-fr, vous pouvez limiter les résultats de la recherche à ce champ. Sinon, vous pouvez aussi créer un [profil de score](/rest/api/searchservice/add-scoring-profiles-to-a-search-index) afin de donner au champ un poids plus relatif. Le service Recherche cognitive Azure prend en charge plus de [50 analyseurs de langue](./search-language-support.md) sélectionnables.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

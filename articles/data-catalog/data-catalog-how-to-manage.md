@@ -4,14 +4,14 @@ description: Cet article explique comment contrôler la visibilité et la propri
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: 9905ed72ec54304bbdb0f7ee607cbb013fc645bb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9d035417b613c81487c493bde90cdcc461f04412
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68736341"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017285"
 ---
 # <a name="manage-data-assets-in-azure-data-catalog"></a>Gérer les ressources de données dans Azure Data Catalog
 ## <a name="introduction"></a>Introduction

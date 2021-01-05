@@ -12,13 +12,13 @@ ms.date: 02/12/2020
 ms.author: marsma
 ms.custom: aaddev
 ms.reviewer: celested
-titleSuffix: Microsoft identity platform
-ms.openlocfilehash: e71f555f7a9cefef3aeada79031db3a07e3db49a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ROBOTS: NOINDEX
+ms.openlocfilehash: a4bb9151e9d4b76507b0c7f8ab5aaa7f5f1820b8
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77201954"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608195"
 ---
 # <a name="azure-active-directory-developer-platform-videos"></a>Vidéos sur la plateforme de développement Azure Active Directory
 
@@ -73,4 +73,4 @@ Découvrez la nouvelle plateforme d’identités Microsoft et la façon de migre
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur la nouvelle [plateforme d’identités Microsoft](https://docs.microsoft.com/azure/active-directory/develop)
+En savoir plus sur la nouvelle [plateforme d’identités Microsoft](../develop/index.yml)

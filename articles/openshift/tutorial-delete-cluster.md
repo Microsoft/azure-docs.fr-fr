@@ -2,16 +2,17 @@
 title: Tutoriel - Supprimer un cluster Azure Red Hat OpenShift
 description: Dans ce tutoriel, découvrez comment supprimer un cluster Azure Red Hat OpenShift à l’aide d’Azure CLI
 author: sakthi-vetrivel
+ms.custom: fasttrack-edit
 ms.author: suvetriv
 ms.topic: tutorial
 ms.service: container-service
 ms.date: 04/24/2020
-ms.openlocfilehash: 2de60b90eb6fb75ef013a2fd8785f1b8b616fba6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 254a9737b805aeeae2008923a8178cd971602132
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232136"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92677755"
 ---
 # <a name="tutorial-delete-an-azure-red-hat-openshift-4-cluster"></a>Tutoriel : Supprimer un cluster Azure Red Hat OpenShift 4
 
@@ -25,7 +26,7 @@ Dans ce tutoriel, en trois parties, un cluster Azure Red Hat OpenShift exécutan
 
 Dans les tutoriels précédents, un cluster Azure Red Hat OpenShift a été créé et rendu accessible au moyen de la console web OpenShift. Si vous n’avez pas effectué ces étapes et que vous souhaitez suivre cette procédure, commencez par le [Tutoriel 1 – Créer un cluster Azure Red Hat OpenShift 4](tutorial-create-cluster.md).
 
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, ce tutoriel exige au minimum la version 2.0.75 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+Si vous choisissez d’installer et d’utiliser l’interface CLI localement, ce tutoriel demande au minimum la version 2.6.0 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -39,11 +40,11 @@ Si vous avez accès à plusieurs abonnements, exécutez `az account set -s {subs
 
 ## <a name="delete-the-cluster"></a>Supprimer le cluster
 
-Dans les tutoriels précédents, les variables suivantes ont été définies. 
+Dans les tutoriels précédents, les variables suivantes ont été définies.
 
 ```bash
 CLUSTER=yourclustername
-RESOURCE_GROUP=yourresourcegroup
+RESOURCEGROUP=yourresourcegroup
 ```
 
 À l’aide de ces valeurs, supprimez votre cluster :

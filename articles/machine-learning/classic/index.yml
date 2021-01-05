@@ -1,0 +1,53 @@
+### YamlMime:Landing
+title: Documentation Azure Machine Learning Studio (classique)
+summary: Machine Learning Studio (classique) est un outil fonctionnant par glisser-déplacer qui vous permet de générer, tester et déployer des solutions d’analytique prédictive.
+metadata:
+  title: Documentation Machine Learning Studio (classique) - Azure
+  description: Machine Learning Studio (classique) est un outil fonctionnant par glisser-déplacer qui vous permet de générer, tester et déployer des solutions d’analytique prédictive.
+  services: machine-learning
+  ms.service: machine-learning
+  ms.subservice: studio
+  ms.topic: landing-page
+  ms.collection: collection
+  author: j-martens
+  ms.author: jmartens
+  ms.date: 03/05/2020
+  ms.openlocfilehash: a7cbc96775b512828d7b3a741834c00942ac2980
+  ms.sourcegitcommit: 9889a3983b88222c30275fd0cfe60807976fd65b
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/20/2020
+  ms.locfileid: "94984632"
+landingContent:
+- title: Bien démarrer avec Studio (classique)
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Qu’est-ce que Studio (classique) ?
+      url: studio-classic-overview.md
+    - text: Créer votre première expérience ML
+      url: create-experiment.md
+    - text: Créer une solution prédictive
+      url: tutorial-part1-credit-risk.md
+- title: Explorer le contenu de référence
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Modules PowerShell
+      url: powershell-module.md
+    - text: Algorithme et modules
+      url: /azure/machine-learning/studio-module-reference/index
+    - text: API de gestion REST
+      url: /rest/api/machinelearning/
+    - text: Codes d’erreur de service web
+      url: web-service-error-codes.md
+- title: Autres technologies Azure ML
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure Machine Learning
+      url: ../index.yml
+    - text: Machine virtuelle de science des données
+      url: ../data-science-virtual-machine/index.yml
+    - text: Comparer nos produits ML
+      url: /azure/architecture/data-guide/technology-choices/data-science-and-machine-learning?context=%2fazure%2fmachine-learning%2fstudio%2fcontext%2fml-context

@@ -4,15 +4,16 @@ description: Apprenez à vous connecter à une machine virtuelle Windows à l'ai
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/26/2018
 ms.author: cynthn
-ms.openlocfilehash: 92f7ba30e2a3c66218974ab65502c35139ab1f8c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 1b29cdda66186587c43471d6d6e819dfbde658e8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82086213"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89075018"
 ---
 # <a name="how-to-connect-and-sign-on-to-an-azure-virtual-machine-running-windows"></a>Connexion à une machine virtuelle Azure exécutant Windows
 Vous utilisez le bouton **Connecter** dans le portail Azure pour démarrer une session Bureau à distance (RDP) depuis un bureau Windows. Tout d'abord, connectez-vous à la machine virtuelle, puis ouvrez une session.
@@ -40,7 +41,7 @@ Pour vous connecter à une machine virtuelle Windows à partir d’un Mac, vous 
 
 
    > [!TIP]
-   > Si le bouton **Connecter** du portail est grisé et que vous n’êtes pas connecté à Azure via une connexion [Express Route](../../expressroute/expressroute-introduction.md) ou [VPN de site à site](../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md), vous devez créer une adresse IP publique et l’attribuer à votre machine virtuelle pour pouvoir utiliser le protocole RDP. Pour plus d’informations, consultez [Adresses IP publiques dans Azure](../../virtual-network/virtual-network-ip-addresses-overview-arm.md).
+   > Si le bouton **Connecter** du portail est grisé et que vous n’êtes pas connecté à Azure via une connexion [Express Route](../../expressroute/expressroute-introduction.md) ou [VPN de site à site](../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md), vous devez créer une adresse IP publique et l’attribuer à votre machine virtuelle pour pouvoir utiliser le protocole RDP. Pour plus d’informations, consultez [Adresses IP publiques dans Azure](../../virtual-network/public-ip-addresses.md).
    > 
    > 
 
@@ -63,5 +64,4 @@ Get-AzRemoteDesktopFile -ResourceGroupName "RgName" -Name "VmName" -LocalPath "C
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-Si vous avez des difficultés à vous connecter, consultez [Résoudre des problèmes de connexion Bureau à distance](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
-
+Si vous avez des difficultés à vous connecter, consultez [Résoudre des problèmes de connexion Bureau à distance](../troubleshooting/troubleshoot-rdp-connection.md?toc=/azure/virtual-machines/windows/toc.json). 

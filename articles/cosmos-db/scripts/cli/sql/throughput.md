@@ -1,30 +1,31 @@
 ---
-title: Mettre à jour les unités de requête/s pour une base de données et un conteneur d’API SQL (Core) pour Azure Cosmos DB
-description: Mettre à jour les unités de requête/s pour une base de données et un conteneur d’API SQL (Core) pour Azure Cosmos DB
+title: Scripts Azure CLI pour les opérations de débit (RU/s) sur des ressources de l’API Core (SQL) Azure Cosmos DB
+description: Scripts Azure CLI pour les opérations de débit (RU/s) sur des ressources de l’API Core (SQL) Azure Cosmos DB
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: sample
-ms.date: 9/25/2019
-ms.openlocfilehash: cde0615a5312372992d2604f32809a983c248a2b
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 10/07/2020
+ms.openlocfilehash: 8310de5ce8fd3f90e422555a5111569fadcca982
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "71274886"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566387"
 ---
-# <a name="update-rus-for-a-sql-core-api-database-and-container-for-azure-cosmos-db-using-azure-cli"></a>Mettre à jour les unités de requête/s pour une base de données et un conteneur d’API SQL (Core) pour Azure Cosmos DB avec Azure CLI
+# <a name="throughput-rus-operations-with-azure-cli-for-a-database-or-container-for-azure-cosmos-db-core-sql-api"></a>Opérations de débit (RU/s) avec Azure CLI sur une base de données ou un conteneur de l’API Core (SQL) Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](../../../includes/appliesto-sql-api.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser localement l’interface de ligne de commande, cette rubrique vous impose d’exécuter Azure CLI version 2.0.73 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.12.1 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 
-Ce script crée une base de données d’API SQL (Core) avec un débit partagé et un conteneur d’API SQL (Core) avec un débit dédié, puis met à jour le débit pour la base de données et le conteneur.
+Ce script crée une base de données d’API Core (SQL) avec un débit partagé et un conteneur d’API Core (SQL) avec un débit dédié, puis met à jour le débit des deux ressources. Le script migre ensuite du débit standard à un débit avec mise à l’échelle automatique, puis lit la valeur de ce débit après sa migration.
 
-[!code-azurecli-interactive[main](../../../../../cli_scripts/cosmosdb/sql/throughput.sh "Update RU/s for a SQL database and container.")]
+[!code-azurecli-interactive[main](../../../../../cli_scripts/cosmosdb/sql/throughput.sh "Throughput operations for a SQL database and container.")]
 
 ## <a name="clean-up-deployment"></a>Nettoyer le déploiement
 
@@ -42,10 +43,12 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 |---|---|
 | [az group create](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
 | [az cosmosdb create](/cli/azure/cosmosdb#az-cosmosdb-create) | Crée un compte Azure Cosmos DB. |
-| [az cosmosdb sql database create](/cli/azure/cosmosdb/sql/database#az-cosmosdb-sql-database-create) | Créez une base de données SQL (Core) Azure Cosmos. |
-| [az cosmosdb sql container create](/cli/azure/cosmosdb/sql/container#az-cosmosdb-sql-container-create) | Créez un conteneur SQL (Core) Azure Cosmos. |
-| [az cosmosdb sql database throughput update](/cli/azure/cosmosdb/sql/database/throughput#az-cosmosdb-sql-database-throughput-update) | Mettez à jour les unités de requête/s pour une base de données SQL (Core) Azure Cosmos. |
-| [az cosmosdb sql container throughput update](/cli/azure/cosmosdb/sql/container/throughput#az-cosmosdb-sql-container-throughput-update) | Mettez à jour les unités de requête/s pour un conteneur SQL (Core) Azure Cosmos. |
+| [az cosmosdb sql database create](/cli/azure/cosmosdb/sql/database#az-cosmosdb-sql-database-create) | Crée une base de données Core (SQL) Azure Cosmos. |
+| [az cosmosdb sql container create](/cli/azure/cosmosdb/sql/container#az-cosmosdb-sql-container-create) | Crée un conteneur Core (SQL) Azure Cosmos. |
+| [az cosmosdb sql database throughput update](/cli/azure/cosmosdb/sql/database/throughput#az-cosmosdb-sql-database-throughput-update) | Met à jour le débit d’une base de données Core (SQL) Azure Cosmos. |
+| [az cosmosdb sql container throughput update](/cli/azure/cosmosdb/sql/container/throughput#az-cosmosdb-sql-container-throughput-update) | Met à jour le débit d’un conteneur Core (SQL) Azure Cosmos. |
+| [az cosmosdb sql database throughput migrate](/cli/azure/cosmosdb/sql/database/throughput#az-cosmosdb-sql-database-throughput-migrate) | Migre le débit d’une base de données Core (SQL) Azure Cosmos. |
+| [az cosmosdb sql container throughput migrate](/cli/azure/cosmosdb/sql/container/throughput#az-cosmosdb-sql-container-throughput-migrate) | Migre le débit d’un conteneur Core (SQL) Azure Cosmos. |
 | [az group delete](/cli/azure/resource#az-resource-delete) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes

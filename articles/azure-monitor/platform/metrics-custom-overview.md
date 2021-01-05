@@ -5,18 +5,18 @@ author: ancav
 ms.author: ancav
 services: azure-monitor
 ms.topic: conceptual
-ms.date: 04/23/2020
+ms.date: 06/01/2020
 ms.subservice: metrics
-ms.openlocfilehash: 4891d7272516caf4944219907d81ee4fb89e0189
-ms.sourcegitcommit: 11572a869ef8dbec8e7c721bc7744e2859b79962
+ms.openlocfilehash: 73c9b2bf8cf88ca5e8576c451c9d9ac5f0eae8a3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82837309"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88639900"
 ---
 # <a name="custom-metrics-in-azure-monitor-preview"></a>Métriques personnalisées dans Azure Monitor (Préversion)
 
-Quand vous déployez des ressources et des applications dans Azure, il est généralement utile de collecter des données de télémétrie pour obtenir des insights sur leurs performances et leur intégrité. Azure met à votre disposition des métriques prêtes à l’emploi. Il s’agit de métriques [standard ou de plateforme](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-supported). Toutefois, ces métriques sont, par leur nature, limitées. 
+Quand vous déployez des ressources et des applications dans Azure, il est généralement utile de collecter des données de télémétrie pour obtenir des insights sur leurs performances et leur intégrité. Azure met à votre disposition des métriques prêtes à l’emploi. Il s’agit de métriques [standard ou de plateforme](./metrics-supported.md). Toutefois, ces métriques sont, par leur nature, limitées. 
 
 Vous pouvez avoir besoin de collecter certains indicateurs de performance personnalisés ou des métriques métier pour obtenir des insights plus approfondis. Ces métriques **personnalisées** peuvent être collectées par le biais des données de télémétrie de votre application, d’un agent s’exécutant sur vos ressources Azure ou même d’un système de supervision d’interaction indirecte, puis soumises directement à Azure Monitor. Après leur publication dans Azure Monitor, vous pouvez parcourir et interroger les métriques personnalisées relatives à vos ressources et applications Azure (et créer des alertes sur ces métriques) parallèlement aux métriques standard émises par Azure.
 
@@ -26,18 +26,19 @@ Les métriques personnalisées d’Azure Monitor sont actuelles en préversion p
 
 Les métriques personnalisées peuvent être envoyées à Azure Monitor à l’aide de plusieurs méthodes :
 - Instrumenter votre application en utilisant le SDK Azure Application Insights et envoyer des données de télémétrie personnalisées à Azure Monitor 
+- Installez Azure Monitor Agent (préversion) sur votre [machine virtuelle Azure Windows ou Linux](azure-monitor-agent-overview.md) et utilisez une [règle de collecte de données](data-collection-rule-azure-monitor-agent.md) pour envoyer des compteurs de performances aux indicateurs de performance Azure Monitor.
 - Installer l’extension Microsoft Azure Diagnostics (WAD) sur votre [machine virtuelle Azure](collect-custom-metrics-guestos-resource-manager-vm.md), votre [groupe de machines virtuelles identiques](collect-custom-metrics-guestos-resource-manager-vmss.md), votre [machine virtuelle classique](collect-custom-metrics-guestos-vm-classic.md) ou votre [instance Cloud Services classique](collect-custom-metrics-guestos-vm-cloud-service-classic.md), et envoyer des compteurs de performances à Azure Monitor 
 - Installer [l’agent InfluxData Telegraf](collect-custom-metrics-linux-telegraf.md) sur votre machine virtuelle Linux Azure et envoyer les métriques à l’aide du plug-in de sortie Azure Monitor
-- Envoyer des métriques personnalisées [directement à l’API REST Azure Monitor](../../azure-monitor/platform/metrics-store-custom-rest-api.md) : `https://<azureregion>.monitoring.azure.com/<AzureResourceID>/metrics`
+- Envoyer des métriques personnalisées [directement à l’API REST Azure Monitor](./metrics-store-custom-rest-api.md) : `https://<azureregion>.monitoring.azure.com/<AzureResourceID>/metrics`
 
-## <a name="pricing-model-and-rentention"></a>Modèle de tarification et rétention
+## <a name="pricing-model-and-retention"></a>Modèle de tarification et rétention
 
 Pour plus d’informations sur l’activation de la facturation des requêtes de métriques personnalisées et des requêtes de métriques, consultez la [page de tarification Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/). Des détails spécifiques sur la grille tarifaire de toutes les métriques, y compris des métriques personnalisées et des requêtes de métriques, sont disponibles sur cette page. En résumé, il n’y a aucun coût d’ingestion pour les métriques standard (métriques de plateforme) dans le magasin de métriques d’Azure Monitor, mais les métriques personnalisées entraînent des coûts lorsqu’elles seront mises en disponibilité générale. Les requêtes d’API de métrique seront facturées.
 
 Les métriques personnalisées sont conservées pendant la [même durée que les métriques de plateforme](data-platform-metrics.md#retention-of-metrics). 
 
 > [!NOTE]  
-> Les métriques envoyées à Azure Monitor via le Kit de développement logiciel (SDK) Application Insights sont facturées en tant que données de journal ingérées. Elles n’entraînent des frais supplémentaires que si la fonctionnalité [Activer les alertes sur les dimensions des métriques personnalisées](https://docs.microsoft.com/azure/azure-monitor/app/pre-aggregated-metrics-log-metrics#custom-metrics-dimensions-and-pre-aggregation) d’Application Insights a été sélectionnée. Cette case à cocher détermine l’envoi de données à la base de données de métriques d’Azure Monitor à l’aide de l’API de métriques personnalisées pour permettre la création d’alertes plus complexes.  En savoir plus sur le [modèle de tarification Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/pricing#pricing-model) et les [prix dans votre région](https://azure.microsoft.com/pricing/details/monitor/).
+> Les métriques envoyées à Azure Monitor via le Kit de développement logiciel (SDK) Application Insights sont facturées en tant que données de journal ingérées. Elles n’entraînent des frais supplémentaires que si la fonctionnalité [Activer les alertes sur les dimensions des métriques personnalisées](../app/pre-aggregated-metrics-log-metrics.md#custom-metrics-dimensions-and-pre-aggregation) d’Application Insights a été sélectionnée. Cette case à cocher détermine l’envoi de données à la base de données de métriques d’Azure Monitor à l’aide de l’API de métriques personnalisées pour permettre la création d’alertes plus complexes.  En savoir plus sur le [modèle de tarification Application Insights](../app/pricing.md#pricing-model) et les [prix dans votre région](https://azure.microsoft.com/pricing/details/monitor/).
 
 
 ## <a name="how-to-send-custom-metrics"></a>Comment envoyer des métriques personnalisées
@@ -46,8 +47,8 @@ Lorsque vous envoyez des métriques personnalisées à Azure Monitor, chaque poi
 
 ### <a name="authentication"></a>Authentification
 Pour soumettre des métriques personnalisées à Azure Monitor, l’entité qui soumet la métrique doit disposer d’un jeton Azure Active Directory (Azure AD) valide, figurant dans l’en-tête **porteur** de la requête. Il existe plusieurs moyens d’acquérir un jeton du porteur valide :
-1. [Identités managées pour les ressources Azure](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview). Donne une identité à une ressource Azure, par exemple, une machine virtuelle. Managed Service Identity (MSI) est conçu pour accorder aux ressources des autorisations permettant d’effectuer certaines opérations. Il peut s’agir, par exemple, d’autoriser une ressource à générer des métriques à propos d’elle-même. Une ressource (ou son MSI) peut recevoir des autorisations **Surveillance de l’éditeur de métriques** pour une autre ressource. Avec cette autorisation, le MSI peut également générer des métriques sur d’autres ressources.
-2. [Principal du service Azure AD](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals). Dans ce scénario, une application (ou service) Azure AD peut se voir accorder les autorisations nécessaires pour générer des métriques concernant une ressource Azure.
+1. [Identités managées pour les ressources Azure](../../active-directory/managed-identities-azure-resources/overview.md). Donne une identité à une ressource Azure, par exemple, une machine virtuelle. Managed Service Identity (MSI) est conçu pour accorder aux ressources des autorisations permettant d’effectuer certaines opérations. Il peut s’agir, par exemple, d’autoriser une ressource à générer des métriques à propos d’elle-même. Une ressource (ou son MSI) peut recevoir des autorisations **Surveillance de l’éditeur de métriques** pour une autre ressource. Avec cette autorisation, le MSI peut également générer des métriques sur d’autres ressources.
+2. [Principal du service Azure AD](../../active-directory/develop/app-objects-and-service-principals.md). Dans ce scénario, une application (ou service) Azure AD peut se voir accorder les autorisations nécessaires pour générer des métriques concernant une ressource Azure.
 Pour authentifier la requête, Azure Monitor valide le jeton d’application à l’aide de clés publiques Azure AD. Le rôle **Surveillance de l’éditeur de métriques** dispose déjà de cette autorisation. Cette autorisation est disponible dans le portail Azure. En fonction des ressources pour lesquelles il émettra des métriques personnalisées, le principal de service peut se voir accorder le rôle **Surveillance de l’éditeur de métriques** selon la portée nécessaire. Il peut s’agir d’un abonnement, d’un groupe de ressources ou d’une ressource.
 
 > [!TIP]  
@@ -78,7 +79,7 @@ Les espaces de noms offrent un moyen de grouper ou classer par catégorie des m�
 **Nom** correspond au nom de la métrique rapportée. Généralement, le nom est suffisamment descriptif pour identifier ce qui est mesuré. Par exemple, il peut s’agir d’une métrique qui mesure le nombre d’octets de mémoire utilisés sur une machine virtuelle donnée. Le nom de cette métrique pourrait être **Memory Bytes In Use** (Octets de mémoire en cours d’utilisation).
 
 ### <a name="dimension-keys"></a>Clés de dimension
-Une dimension est une paire de clés ou de valeurs qui décrivent des caractéristiques supplémentaires concernant la métrique collectée. Ces caractéristiques supplémentaires permettent de collecter plus d’informations sur la métrique, offrant des insights plus approfondis. Par exemple, la métrique **Memory Bytes In Use** peut disposer d’une clé de dimension nommée **Process**, qui capture le nombre d’octets de mémoire consommés par chaque processus sur une machine virtuelle. Cette clé vous permet de filtrer les résultats de cette métrique pour connaître la quantité de mémoire utilisée par certains processus ou pour identifier les cinq processus utilisant le plus de mémoire.
+Une dimension est une paire de clés ou de valeurs qui décrivent des caractéristiques supplémentaires concernant la métrique collectée. Ces caractéristiques supplémentaires permettent de collecter plus d’informations sur la métrique, offrant des insights plus approfondis. Par exemple, la métrique **Memory Bytes In Use** peut disposer d’une clé de dimension nommée **Process**, qui capture le nombre d’octets de mémoire consommés par chaque processus sur une machine virtuelle. Cette clé vous permet de filtrer les résultats de la métrique pour connaître la quantité de mémoire utilisée par certains processus ou identifier les cinq processus utilisant le plus de mémoire.
 Les dimensions sont facultatives ; certaines métriques peuvent ne pas avoir de dimensions. Une métrique personnalisée peut avoir jusqu'à 10 dimensions.
 
 ### <a name="dimension-values"></a>Valeurs de dimension
@@ -189,27 +190,28 @@ Dans la préversion publique, la publication des métriques personnalisées n’
 |Région Azure |Préfixe du point de terminaison régional|
 |---|---|
 | **États-Unis et Canada** | |
-|Centre-USA Ouest | https:\//westcentralus.monitoring.azure.com/ |
-|USA Ouest 2       | https:\//westus2.monitoring.azure.com/ |
+|Centre-USA Ouest | https:\//westcentralus.monitoring.azure.com |
+|USA Ouest 2       | https:\//westus2.monitoring.azure.com |
 |Centre-Nord des États-Unis | https:\//northcentralus.monitoring.azure.com
-|États-Unis - partie centrale méridionale| https:\//southcentralus.monitoring.azure.com/ |
+|États-Unis - partie centrale méridionale| https:\//southcentralus.monitoring.azure.com |
 |USA Centre      | https:\//centralus.monitoring.azure.com |
-|Centre du Canada | https:\//canadacentral.monitoring.azure.comc
-|USA Est| https:\//eastus.monitoring.azure.com/ |
+|Centre du Canada | https:\//canadacentral.monitoring.azure.com |
+|USA Est| https:\//eastus.monitoring.azure.com |
+|USA Est 2 | https:\//eastus2.monitoring.azure.com |
 | **Europe** | |
-|Europe Nord    | https:\//northeurope.monitoring.azure.com/ |
-|Europe Ouest     | https:\//westeurope.monitoring.azure.com/ |
+|Europe Nord    | https:\//northeurope.monitoring.azure.com |
+|Europe Ouest     | https:\//westeurope.monitoring.azure.com |
 |Sud du Royaume-Uni | https:\//uksouth.monitoring.azure.com
 |France Centre | https:\//francecentral.monitoring.azure.com |
 | **Afrique** | |
-|Afrique du Sud Nord | https:\//southafricanorth.monitoring.azure.com
+|Afrique du Sud Nord | https:\//southafricanorth.monitoring.azure.com |
 | **Asie** | |
-|Inde centrale | https:\//centralindia.monitoring.azure.com
-|Australie Est | https:\//australiaeast.monitoring.azure.com
-|Japon Est | https:\//japaneast.monitoring.azure.com
+|Inde centrale | https:\//centralindia.monitoring.azure.com |
+|Australie Est | https:\//australiaeast.monitoring.azure.com |
+|Japon Est | https:\//japaneast.monitoring.azure.com |
 |Asie Sud-Est  | https:\//southeastasia.monitoring.azure.com |
-|Asie Est | https:\//eastasia.monitoring.azure.com
-|Centre de la Corée   | https:\//koreacentral.monitoring.azure.com
+|Asie Est | https:\//eastasia.monitoring.azure.com |
+|Centre de la Corée   | https:\//koreacentral.monitoring.azure.com |
 
 ## <a name="latency-and-storage-retention"></a>Conservation de stockage et latence
 
@@ -234,6 +236,7 @@ Vous pouvez utiliser les métriques personnalisées à partir de différents ser
  - [Groupe de machines virtuelles identiques](collect-custom-metrics-guestos-resource-manager-vmss.md)
  - [Machines virtuelles Azure (Classic)](collect-custom-metrics-guestos-vm-classic.md)
  - [Machine virtuelle Linux utilisant l’agent Telegraf](collect-custom-metrics-linux-telegraf.md)
- - [REST API](../../azure-monitor/platform/metrics-store-custom-rest-api.md)
+ - [REST API](./metrics-store-custom-rest-api.md)
  - [Services cloud (classiques)](collect-custom-metrics-guestos-vm-cloud-service-classic.md)
  
+

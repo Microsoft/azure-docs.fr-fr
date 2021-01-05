@@ -7,12 +7,16 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/24/2017
 ms.author: briz
-ms.openlocfilehash: bdc55af23568b5785a831e81f352400c728c902e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- 'Role: System Architecture'
+ms.openlocfilehash: 9ff8ebeaf7c4a219bc403c81dfea62f4657a1fd8
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60400920"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148333"
 ---
 # <a name="overview-of-device-management-with-iot-hub"></a>Vue d’ensemble de la gestion des appareils avec IoT Hub
 
@@ -74,7 +78,7 @@ Dans chacune de ces cinq étapes, il existe plusieurs conditions destinées à l
   
     *Pour aller plus loin* :
     * [Guide pratique pour utiliser des propriétés de jumeau d’appareil](tutorial-device-twins.md)
-    * [Configurer et surveiller des appareils IoT à grande échelle](iot-hub-auto-device-config.md)
+    * [Configurer et surveiller des appareils IoT à grande échelle](./iot-hub-automatic-device-management.md)
     * [Bonnes pratiques en matière de configuration d’appareil dans une solution IoT](iot-hub-configuration-best-practices.md)
 
 * **Surveillance** : surveiller l’intégrité globale de la collection d’appareils, l’état des opérations en cours et avertir les opérateurs des problèmes susceptibles de nécessiter leur attention.  Appliquez la représentation physique d’appareil pour autoriser les appareils à signaler des conditions de fonctionnement en temps réel et l’état des opérations de mise à jour. Créez des rapports de tableau de bord puissants qui font remonter les problèmes les plus immédiats à l’aide de requêtes sur la représentation physique d’appareil.
@@ -82,7 +86,7 @@ Dans chacune de ces cinq étapes, il existe plusieurs conditions destinées à l
     *Pour aller plus loin* : 
     * [Guide pratique pour utiliser des propriétés de jumeau d’appareil](tutorial-device-twins.md)
     * [Langage de requête IoT Hub pour les jumeaux d’appareil, les travaux et le routage des messages](iot-hub-devguide-query-language.md)
-    * [Configurer et surveiller des appareils IoT à grande échelle](iot-hub-auto-device-config.md)
+    * [Configurer et surveiller des appareils IoT à grande échelle](./iot-hub-automatic-device-management.md)
     * [Bonnes pratiques en matière de configuration d’appareil dans une solution IoT](iot-hub-configuration-best-practices.md)
 
 * **Mise hors service** : remplacer ou retirer des appareils après une défaillance, un cycle de mise à niveau ou à la fin de leur durée de vie.  Utilisez la représentation d’appareil pour conserver les informations sur l’appareil si l’appareil physique est remplacé ou archivé en cas de mise hors service. Utilisez le registre des identités IoT Hub pour la révocation en toute sécurité des informations d’identification et des identités des appareils.

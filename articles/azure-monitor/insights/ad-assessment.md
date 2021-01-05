@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 09/10/2019
-ms.openlocfilehash: 57c474c8391168702154b71e0c454253ab921dc1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3c86b21c5e0533ab6a1a3c64dc601eb8bb573547
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77667225"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87318094"
 ---
 # <a name="optimize-your-active-directory-environment-with-the-active-directory-health-check-solution-in-azure-monitor"></a>Optimiser son environnement Active Directory avec la solution Active Directory Health Check dans Azure Monitor
 
@@ -33,10 +33,10 @@ Une fois la solution ajoutée et le contrôle terminé, le résumé des informat
 
 ![image du tableau de bord AD Health Check](./media/ad-assessment/ad-healthcheck-dashboard-01.png)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * La solution Active Directory Health Check nécessite l’installation d’une version prise en charge du .NET Framework (version 4.6.2 ou ultérieure) sur chaque ordinateur sur lequel est installé l’agent Log Analytics pour Windows (également appelé Microsoft Monitoring Agent (MMA)).  Cet agent est utilisé par System Center 2016 Operations Manager, Operations Manager 2012 R2 et Azure Monitor.
-* La solution prend en charge les contrôleurs de domaine exécutant Windows Server 2008 et 2008 R2, Windows Server 2012 et 2012 R2 et Windows Server 2016.
+* La solution prend en charge les contrôleurs de domaine exécutant Windows Server 2008 et 2008 R2, Windows Server 2012 et 2012 R2, Windows Server 2016 et Windows Server 2019.
 * Un espace de travail Log Analytics pour ajouter la solution Active Directory Health Check à partir de la Place de marché Azure dans le portail Azure. Aucune configuration supplémentaire n'est requise.
 
   > [!NOTE]
@@ -46,9 +46,9 @@ Une fois la solution ajoutée et le contrôle terminé, le résumé des informat
 
 Pour qu’un contrôle d’intégrité soit possible par rapport aux contrôleurs de domaine membres du domaine à évaluer, chaque contrôleur de domaine dans ce domaine a besoin d’un agent et d’une connectivité à Azure Monitor suivant l’une de ces méthodes prises en charge :
 
-1. Installez l’[agent Log Analytics pour Windows](../../azure-monitor/platform/agent-windows.md) si le contrôleur de domaine n’est pas déjà surveillé par System Center 2016 - Operations Manager ou Operations Manager 2012 R2.
+1. Installez l’[agent Log Analytics pour Windows](../platform/agent-windows.md) si le contrôleur de domaine n’est pas déjà surveillé par System Center 2016 - Operations Manager ou Operations Manager 2012 R2.
 2. S’il est surveillé avec System Center 2016 Operations Manager ou Operations Manager 2012 R2 et que le groupe d’administration n’est pas intégré à Azure Monitor, le contrôleur de domaine peut être en hébergement multiple avec Azure Monitor pour collecter des données et les transférer au service, tout en restant surveillé par Operations Manager.  
-3. Sinon, si votre groupe d’administration Operations Manager est intégré au service, vous devez ajouter des contrôleurs de domaine pour la collecte de données par le service en suivant la procédure décrite dans [Ajout d’ordinateurs gérés par des agents](../../azure-monitor/platform/om-agents.md#connecting-operations-manager-to-azure-monitor) après avoir activé la solution dans votre espace de travail.  
+3. Sinon, si votre groupe d’administration Operations Manager est intégré au service, vous devez ajouter des contrôleurs de domaine pour la collecte de données par le service en suivant la procédure décrite dans [Ajout d’ordinateurs gérés par des agents](../platform/om-agents.md#connecting-operations-manager-to-azure-monitor) après avoir activé la solution dans votre espace de travail.  
 
 L’agent présent sur le contrôleur de domaine et rattaché à un groupe d’administration Operations Manager collecte les données et les transfère au serveur d’administration qui lui a été assigné ; ensuite, ce dernier les envoie directement à Azure Monitor.  Les données ne sont pas écrites dans les bases de données Operations Manager.  
 
@@ -216,3 +216,4 @@ Les résultats peuvent ensuite être exportés vers Excel pour être examinés.
 ## <a name="next-steps"></a>Étapes suivantes
 
 Utilisez les [requête de journal Azure Monitor](../log-query/log-query-overview.md) pour apprendre à analyser les données et recommandations détaillées d’AD Health Check.
+

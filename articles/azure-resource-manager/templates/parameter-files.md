@@ -2,13 +2,13 @@
 title: Créer un fichier de paramètres
 description: Créer un fichier de paramètres pour transmettre des valeurs pendant le déploiement d’un modèle d’Azure Resource Manager
 ms.topic: conceptual
-ms.date: 04/20/2020
-ms.openlocfilehash: a1a1f703594f8eaa572ea38ecef88b4cd6ba5a4b
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.date: 09/01/2020
+ms.openlocfilehash: 2b6d942b21594fa608127bb8f403e72295671005
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81682893"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89276641"
 ---
 # <a name="create-resource-manager-parameter-file"></a>Créer un fichier de paramètres Resource Manager
 
@@ -148,6 +148,8 @@ Enfin, examinez les valeurs autorisées et les restrictions telles que la longue
 }
 ```
 
+Votre fichier de paramètres peut contenir uniquement des valeurs pour les paramètres définis dans le modèle. Si votre fichier de paramètres contient des paramètres supplémentaires qui ne correspondent pas à des paramètres définis dans le modèle, une erreur s’affiche.
+
 ## <a name="parameter-type-formats"></a>Formats de types de paramètres
 
 L'exemple suivant indique les formats des différents types de paramètres.
@@ -182,22 +184,49 @@ L'exemple suivant indique les formats des différents types de paramètres.
 }
 ```
 
+## <a name="deploy-template-with-parameter-file"></a>Déployer un modèle avec un fichier de paramètres
+
+Pour passer un fichier de paramètres local avec Azure CLI, utilisez @ et le nom du fichier de paramètres.
+
+```azurecli
+az deployment group create \
+  --name ExampleDeployment \
+  --resource-group ExampleGroup \
+  --template-file storage.json \
+  --parameters @storage.parameters.json
+```
+
+Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles ARM et d’Azure CLI](./deploy-cli.md#parameters).
+
+Pour passer un fichier de paramètres local avec Azure PowerShell, utilisez le paramètre `TemplateParameterFile`.
+
+```azurepowershell
+New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
+  -TemplateFile c:\MyTemplates\azuredeploy.json `
+  -TemplateParameterFile c:\MyTemplates\storage.parameters.json
+```
+
+Pour plus d’informations, consultez [Déployer des ressources à l’aide de modèles ARM et d’Azure PowerShell](./deploy-powershell.md#pass-parameter-values).
+
+> [!NOTE]
+> Il n’est pas possible d’utiliser un fichier de paramètres avec le panneau de modèle personnalisé dans le portail.
+
 ## <a name="file-name"></a>Nom de fichier
 
 Généralement, vous devez ajouter **.parameters** au nom du modèle pour nommer le fichier de paramètres. Par exemple, si votre modèle est nommé **azuredeploy.json**, votre fichier de paramètres est **azuredeploy.parameters.json**. Cette convention d’affectation de noms vous permet de comprendre le lien entre le modèle et les paramètres.
 
 Pour effectuer un déploiement dans différents environnements, créez plusieurs fichiers de paramètres. Lorsque vous nommez le fichier de paramètres, ajoutez un moyen permettant de définir son utilisation. Par exemple, utilisez **azuredeploy.parameters-dev.json** et **azuredeploy.parameters-prod.json**
 
-
 ## <a name="parameter-precedence"></a>Priorité des paramètres
 
 Vous pouvez utiliser des paramètres inline et un fichier de paramètres local pendant la même opération de déploiement. Par exemple, vous pouvez spécifier certaines valeurs dans le fichier de paramètres local et ajouter d’autres valeurs inline pendant le déploiement. Si vous fournissez des valeurs pour un paramètre à la fois dans le fichier de paramètres local et inline, la valeur inline est prioritaire.
 
-Cependant, lorsque vous utilisez un fichier de paramètres externe, vous ne pouvez pas transmettre d’autres valeurs, qu’elles soient inline ou tirées d’un fichier local. Tous les paramètres inline sont ignorés. Fournissez toutes les valeurs de paramètre dans le fichier externe.
+Il est possible d’utiliser un fichier de paramètres externe, en indiquant l’URI du fichier. Quand vous utilisez un fichier de paramètres externe, vous ne pouvez pas transmettre d’autres valeurs, qu’elles soient incluses ou extraites d’un fichier local. Tous les paramètres inline sont ignorés. Fournissez toutes les valeurs de paramètre dans le fichier externe.
 
 ## <a name="parameter-name-conflicts"></a>Conflits de noms de paramètre
 
 Si votre modèle inclut un paramètre utilisant le même nom que l’un des paramètres dans la commande PowerShell, PowerShell présente le paramètre de votre modèle avec le suffixe **FromTemplate**. Par exemple, un paramètre nommé **ResourceGroupName** dans votre modèle est en conflit avec le paramètre **ResourceGroupName** dans la cmdlet [New-AzResourceGroupDeployment](/powershell/module/az.resources/new-azresourcegroupdeployment). Vous êtes invité à fournir une valeur pour **ResourceGroupNameFromTemplate**. Vous pouvez éviter cette confusion en utilisant des noms de paramètres qui ne sont pas utilisés pour les commandes de déploiement.
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

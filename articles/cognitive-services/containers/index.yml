@@ -1,0 +1,90 @@
+### YamlMime:Landing
+title: Conteneurs Azure Cognitive Services
+summary: Azure Cognitive Services offre plusieurs conteneurs pour utiliser l’IA en local. Ces conteneurs vous donnent la possibilité de rapprocher Cognitive Services au plus près de vos données du point de vue de la conformité, de la sécurité et de l’exploitation.
+metadata:
+  title: Conteneurs Azure Cognitive Services
+  titleSuffix: Azure Cognitive Services
+  services: cognitive-services
+  author: aahill
+  manager: nitinme
+  ms.service: cognitive-services
+  ms.topic: landing-page
+  ms.date: 10/27/2020
+  ms.author: aahi
+  ms.openlocfilehash: 28eb8450201280e58e24dd5ad9b8826165b614c3
+  ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 11/04/2020
+  ms.locfileid: "93328070"
+landingContent:
+- title: À propos des conteneurs Azure Cognitive Services
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Que sont les conteneurs Azure Cognitive Services ?
+      url: ../cognitive-services-container-support.md
+    - text: Forum Aux Questions (FAQ)
+      url: container-faq.md
+    - text: Étiquettes des images conteneur
+      url: container-image-tags.md
+- title: Recettes de conteneur
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Recette de réutilisation des conteneurs
+      url: container-reuse-recipe.md
+    - text: Déployer sur Azure Container Instances
+      url: azure-container-instance-recipe.md
+    - text: Déployer sur Kubernetes
+      url: azure-kubernetes-recipe.md
+    - text: Déployer avec Docker compose
+      url: azure-kubernetes-recipe.md
+- title: Conteneurs de vision
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - url: ../computer-vision/computer-vision-how-to-install-containers.md
+      text: Lire OCR
+    - url: ../computer-vision/spatial-analysis-container.md
+      text: Analyse spatiale
+    - url: ../face/face-how-to-install-containers.md
+      text: Face
+    - url: ../form-recognizer/form-recognizer-container-howto.md
+      text: Form Recognizer
+- title: Conteneurs de langues
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - url: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=sentiment
+      text: Analyse des sentiments
+    - url: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=keyphrase
+      text: Extraction d’expressions clés
+    - url: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=language
+      text: Détection de la langue du texte
+    - url: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=healthcare
+      text: Analyse de texte pour la santé
+    - url: ../luis/luis-container-howto.md
+      text: Conteneur LUIS
+- title: Conteneurs Speech
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - url: ../speech-service/speech-container-howto.md?tabs=stt
+      text: Reconnaissance vocale
+    - url: ../speech-service/speech-container-howto.md?tabs=cstt
+      text: Reconnaissance vocale personnalisée
+    - url: ../speech-service/speech-container-howto.md?tabs=tts
+      text: Synthèse vocale
+    - url: ../speech-service/speech-container-howto.md?tabs=ctts
+      text: Synthèse vocale personnalisée
+    - url: ../speech-service/speech-container-howto.md?tabs=ntts
+      text: Synthèse vocale neuronale
+    - url: ../speech-service/speech-container-howto.md?tabs=lid
+      text: Détection de langue vocale
+- title: Conteneur de décisions
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - url: ../anomaly-detector/anomaly-detector-container-howto.md
+      text: Le détecteur d’anomalies

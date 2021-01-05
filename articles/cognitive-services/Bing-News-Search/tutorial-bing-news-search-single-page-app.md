@@ -8,17 +8,22 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-news-search
 ms.topic: tutorial
-ms.date: 03/05/2020
+ms.date: 06/23/2020
 ms.author: aahi
-ms.custom: seodec2018
-ms.openlocfilehash: 801bfcf02174c5dd98d4c7231c674299ef411aff
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: seodec2018, devx-track-js
+ms.openlocfilehash: c3d486a32f4a926ed42f3d67a1fa96d3da397beb
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78943113"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351212"
 ---
 # <a name="tutorial-create-a-single-page-web-app"></a>Tutoriel : Créer une application web monopage
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’actualités Bing vous permet de parcourir le web et d’obtenir des résultats des types d’actualités relatifs à une requête. Dans ce didacticiel, nous allons générer une application web à page unique qui utilise l’API Recherche d’actualités Bing pour afficher les résultats de la recherche sur la page. L’application inclut des composants HTML, CSS et JavaScript. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/Tutorials/BingNewsSearchApp.html).
 
@@ -43,8 +48,10 @@ La page du didacticiel est entièrement autonome. Elle n’utilise pas d’infra
 
 ## <a name="prerequisites"></a>Prérequis
 
-Pour suivre ce tutoriel, vous avez besoin de clés d’abonnement pour l’API Recherche Bing. Si vous n’en avez pas, vous pouvez utiliser une [clé d’essai](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) et une [clé Bing Cartes de base](https://www.microsoft.com/maps/create-a-bing-maps-key).
+Pour suivre ce tutoriel, vous avez besoin de clés d’abonnement pour l’API Recherche Bing. Si vous n’en disposez pas, vous devez les créer :
 
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
 
 ## <a name="app-components"></a>Composants de l’application
 Comme n’importe quelle application web à page unique, cette application du didacticiel comprend trois parties :
@@ -352,7 +359,7 @@ Une fonction de renderer peut accepter les paramètres suivants :
 
 Les paramètres `index` et `count` peuvent être utilisés pour compter les résultats, pour générer un code HTML spécial pour le début ou la fin d’une collection, pour insérer des sauts de ligne après un certain nombre d’éléments et ainsi de suite. Si un renderer n’a pas besoin de cette fonctionnalité, il est inutile d’accepter ces deux paramètres.
 
-Le renderer `news` est indiqué dans l’extrait de code javascript suivant :
+Le renderer `news` apparaît dans l’extrait de code JavaScript suivant :
 ```javascript
     // render news story
     news: function (item) {
@@ -407,15 +414,18 @@ Les stratégies de sécurité de navigateur (CORS) peuvent rendre l’en-tête `
 
 Il est facile d’installer un proxy CORS pour autoriser l’application du didacticiel à accéder à l’en-tête d’ID client. Tout d’abord, [installez Node.js](https://nodejs.org/en/download/) si ce n’est pas déjà fait. Exécutez alors la commande suivante dans une fenêtre de commande :
 
-    npm install -g cors-proxy-server
+```console
+npm install -g cors-proxy-server
+```
 
-Ensuite, remplacez le point de terminaison Recherche Web Bing dans le fichier HTML par :
-
-    http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search
+Ensuite, remplacez le point de terminaison Recherche Web Bing dans le fichier HTML par : \
+`http://localhost:9090/https://api.cognitive.microsoft.com/bing/v7.0/search`
 
 Enfin, lancez le proxy CORS avec la commande suivante :
 
-    cors-proxy-server
+```console
+cors-proxy-server
+```
 
 Laissez la fenêtre de commande ouverte pendant que vous utilisez l’application du tutoriel ; si vous fermez la fenêtre, le proxy s’arrête. Dans la section des en-têtes HTTP (qui peut être développée) sous les résultats de la recherche, vous pouvez maintenant voir l’en-tête `X-MSEdge-ClientID` (entre autres) et vérifier qu’il est identique pour toutes les requêtes.
 

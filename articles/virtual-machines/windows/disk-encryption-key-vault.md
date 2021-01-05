@@ -1,28 +1,31 @@
 ---
 title: Création et configuration d’un coffre de clés pour Azure Disk Encryption
-description: Cet article décrit les étapes de création et de configuration d’un coffre de clés à utiliser avec Azure Disk Encryption.
+description: Cet article décrit les étapes de création et de configuration d’un coffre de clés à utiliser avec Azure Disk Encryption sur une machine virtuelle Windows.
 ms.service: virtual-machines
 ms.subservice: security
-ms.topic: article
+ms.topic: how-to
 author: msmbaldwin
 ms.author: mbaldwin
 ms.date: 08/06/2019
 ms.custom: seodec18
-ms.openlocfilehash: 0348461e2a58bd8e71b8dff10667c512125d7b03
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 9d9d3d8456e0623ea3f1ef17c5f9f7acb28d0ecd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83656707"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015369"
 ---
 # <a name="creating-and-configuring-a-key-vault-for-azure-disk-encryption"></a>Création et configuration d’un coffre de clés pour Azure Disk Encryption
 
-Azure Disk Encryption utilise Azure Key Vault pour contrôler et gérer les clés et les secrets de chiffrement de disque.  Pour plus d’informations sur les coffres de clés, consultez les articles [Prise en main du coffre de clés Azure](../../key-vault/key-vault-get-started.md) et [Sécuriser votre coffre de clés](../../key-vault/general/secure-your-key-vault.md). 
+Azure Disk Encryption utilise Azure Key Vault pour contrôler et gérer les clés et les secrets de chiffrement de disque.  Pour plus d’informations sur les coffres de clés, consultez les articles [Prise en main du coffre de clés Azure](../../key-vault/general/overview.md) et [Sécuriser votre coffre de clés](../../key-vault/general/secure-your-key-vault.md). 
 
 > [!WARNING]
 > - Si vous avez déjà utilisé Azure Disk Encryption avec Azure AD pour chiffrer une machine virtuelle, vous devez continuer à utiliser cette option pour chiffrer votre machine virtuelle. Pour plus d’informations, consultez [Création et configuration d’un coffre de clés pour Azure Disk Encryption avec Azure AD (version précédente)](disk-encryption-key-vault-aad.md).
 
 La création et la configuration d’un coffre de clés à utiliser avec Azure Disk Encryption impliquent trois étapes :
+
+> [!Note]
+> Vous devez sélectionner l’option dans les paramètres de stratégie d’accès Azure Key Vault afin d’activer l’accès à Azure Disk Encryption pour le chiffrement de volume. Si vous avez activé le pare-feu sur le coffre de clés, vous devez accéder à l’onglet Réseau du coffre de clés et activer l’accès aux services de confiance Microsoft. 
 
 1. Création d’un groupe de ressources, si nécessaire
 2. Création d’un coffre de clés 
@@ -40,7 +43,7 @@ Si vous le souhaitez, vous pouvez également générer ou importer une clé de c
 
 ## <a name="install-tools-and-connect-to-azure"></a>Installer les outils et se connecter à Azure
 
-Les étapes décrites dans cet article peuvent être effectuées avec [Azure CLI](/cli/azure/), le [module Az Azure PowerShell](/powershell/azure/overview) ou le [portail Azure](https://portal.azure.com).
+Les étapes décrites dans cet article peuvent être effectuées avec [Azure CLI](/cli/azure/), le [module Az Azure PowerShell](/powershell/azure/) ou le [portail Azure](https://portal.azure.com).
 
 Le portail est accessible par le biais de votre navigateur, alors qu’Azure CLI et Azure PowerShell nécessitent une installation locale. Pour plus d’informations, consultez [Azure Disk Encryption pour Windows : Installer les outils](disk-encryption-windows.md#install-tools-and-connect-to-azure).
 

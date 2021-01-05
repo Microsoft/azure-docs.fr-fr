@@ -1,6 +1,6 @@
 ---
 title: Envoyer des notifications Push vers des applications Android spécifiques à l’aide d’Azure Notification Hubs
-description: Découvrez comment envoyer des notifications Push à des utilisateurs spécifiques à l’aide de Azure Notification Hubs.
+description: Découvrez comment envoyer des notifications Push à des applications Android spécifiques en utilisant Azure Notification Hubs.
 documentationcenter: android
 services: notification-hubs
 author: sethmanheim
@@ -12,17 +12,17 @@ ms.workload: mobile
 ms.tgt_pltfrm: mobile-android
 ms.devlang: java
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-java
 ms.date: 09/11/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 09/11/2019
-ms.openlocfilehash: c2d3789082130cbbc42021a0706249dd3966b9ef
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 870842074bb4a0012a48115586a8ad571275d470
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75531120"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022409"
 ---
 # <a name="tutorial-send-push-notifications-to-specific-android-apps-using-azure-notification-hubs"></a>Tutoriel : Envoyer des notifications Push vers des applications Android spécifiques à l’aide d’Azure Notification Hubs
 
@@ -151,7 +151,7 @@ L’étape suivante consiste à mettre à jour l’application Android créée d
 
     La présentation graphique de votre fichier `main_activity.xml` doit maintenant ressembler à l’image suivante :
 
-    ![][A1]
+    ![Capture d’écran d’un émulateur montrant à quoi ressemble la disposition graphique XML de l’activité principale.][A1]
 3. Créez une classe nommée `RegisterClient` dans le même package que votre classe `MainActivity`. Utilisez le code ci-dessous pour le nouveau fichier de classe.
 
     ```java
@@ -487,7 +487,7 @@ L’étape suivante consiste à mettre à jour l’application Android créée d
 2. Dans l'application Android, entrez un nom d'utilisateur et un mot de passe. Ils doivent représenter la même valeur de chaîne et ne pas contenir d'espaces ou de caractères spéciaux.
 3. Dans l’application Android, cliquez sur **Se connecter**. Attendez que s’affiche un message indiquant **Signed in and registered** (Connecté et inscrit). Le bouton **Send Notification** est alors activé.
 
-    ![][A2]
+    ![Capture d’écran d’un émulateur montrant à quoi ressemble l’application NotificationHubsNotifyUsers après la connexion.][A2]
 4. Cliquez sur les boutons bascule pour activer toutes les plateformes où vous avez exécuté l'application et inscrit un utilisateur.
 5. Entrez le nom de l'utilisateur qui reçoit le message de notification. Cet utilisateur doit être inscrit pour les notifications sur les appareils cibles.
 6. Entrez le message que l'utilisateur recevra sous la forme d'un message de notification Push.

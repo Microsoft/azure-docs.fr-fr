@@ -11,12 +11,12 @@ metadata:
   author: msmbaldwin
   ms.author: mbaldwin
   ms.date: 04/07/2020
-  ms.openlocfilehash: 78963c02d35d93b4756c12f948c5ba214fb23e90
-  ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+  ms.openlocfilehash: 5a716ad70a31342467eb0944b3e6d1f5d80d5166
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81423528"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89000904"
 landingContent:
 - title: Certificats
   linkLists:
@@ -24,6 +24,8 @@ landingContent:
     links:
     - text: Présentation des certificats Key Vault
       url: about-certificates.md
+    - text: Informations importantes sur la suppression réversible
+      url: ../general/soft-delete-change.md
     - text: Prise en main des certificats Key Vault
       url: certificate-scenarios.md
     - text: Méthodes de création de certificats
@@ -44,6 +46,18 @@ landingContent:
       url: quick-create-python.md
     - text: Importer un certificat dans Key Vault
       url: tutorial-import-certificate.md
+- title: Bibliothèques de client pour les certificats Key Vault
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Bibliothèque de client .NET
+      url: /dotnet/api/azure.security.keyvault.certificates?view=azure-dotnet
+    - text: Bibliothèque de client Python
+      url: /python/api/overview/azure/keyvault-certificates-readme?view=azure-python
+    - text: Bibliothèque de client Java
+      url: https://apidocs.chargebee.com/docs/api?lang=java#client_library
+    - text: Bibliothèque de client Node.js
+      url: /javascript/api/@azure/keyvault-certificates/?view=azure-node-latest
 - title: En savoir plus sur Key Vault
   linkLists:
   - linkListType: overview
@@ -53,7 +67,7 @@ landingContent:
     - text: Concepts de base
       url: ../general/basic-concepts.md
     - text: Vue d’ensemble de la suppression réversible
-      url: ../general/overview-soft-delete.md
+      url: ../general/soft-delete-overview.md
     - text: Présentation de la sécurité
       url: ../general/overview-security.md
 - title: Microsoft Learn

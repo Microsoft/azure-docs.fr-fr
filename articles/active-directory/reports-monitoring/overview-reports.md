@@ -13,16 +13,16 @@ ms.topic: overview
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
-ms.date: 11/13/2018
+ms.date: 09/30/2020
 ms.author: markvi
-ms.reviewer: dhanyahk
+ms.reviewer: sarbar
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b655fa2f12eac894e97c61cc931983aa58fff7a9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4f9a51c10a4f390e5627bccf35ab5dc74689e9c6
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74007920"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91566820"
 ---
 # <a name="what-are-azure-active-directory-reports"></a>Présentation des rapports Azure Active Directory
 
@@ -44,9 +44,9 @@ L’architecture de création de rapports s’appuie sur deux axes principaux 
 
 Les rapports de sécurité vous aident à protéger les identités de votre organisation. Il existe deux types de rapports de sécurité :
 
-- **Utilisateurs avec indicateur de risque** : le [rapport de sécurité de ce type](concept-user-at-risk.md) présente une vue d’ensemble des comptes d’utilisateurs qui peuvent avoir été compromis.
+- **Utilisateurs avec indicateur de risque** : le [rapport de sécurité de ce type](../identity-protection/overview-identity-protection.md) présente une vue d’ensemble des comptes d’utilisateurs qui peuvent avoir été compromis.
 
-- **Connexions à risque** : le [rapport de sécurité de ce type](concept-risky-sign-ins.md) contient un indicateur pour les tentatives de connexion susceptibles d’avoir été effectuées par une personne autre que le propriétaire légitime d’un compte d’utilisateur. 
+- **Connexions à risque** : le [rapport de sécurité de ce type](../identity-protection/overview-identity-protection.md) contient un indicateur pour les tentatives de connexion susceptibles d’avoir été effectuées par une personne autre que le propriétaire légitime d’un compte d’utilisateur. 
 
 ### <a name="what-azure-ad-license-do-you-need-to-access-a-security-report"></a>De quelle licence Azure AD avez-vous besoin pour accéder à un rapport de sécurité ?  
 
@@ -68,6 +68,12 @@ Les rapports d’activité vous aident à comprendre le comportement des utilisa
 - **Connexions** : le [rapport d’activité de ce type](concept-sign-ins.md) vous permet d’identifier qui a effectué les tâches signalées par le rapport de journaux d’audit.
 
 
+
+> [!VIDEO https://www.youtube.com/embed/ACVpH6C_NL8]
+
+
+
+
 ### <a name="audit-logs-report"></a>Rapport de journaux d’audit 
 
 Le [rapport de journaux d’audit](concept-audit-logs.md) vous fournit les enregistrements des activités du système relatifs à la conformité. Ces données vous permettent de résoudre des scénarios courants, tels que :
@@ -81,7 +87,7 @@ Le [rapport de journaux d’audit](concept-audit-logs.md) vous fournit les enreg
 
 #### <a name="what-azure-ad-license-do-you-need-to-access-the-audit-logs-report"></a>De quelle licence Azure AD avez-vous besoin pour accéder au rapport de journaux d’audit ?  
 
-Le rapport de journaux d’audit est disponible pour les fonctionnalités dont vous disposez les licences. Si vous possédez une licence pour une fonctionnalité spécifique, vous avez également accès aux informations du journal d’audit correspondantes. Pour plus de détails, consultez [Fonctionnalités Azure Active Directory](https://www.microsoft.com/cloud-platform/azure-active-directory-features).   
+Le rapport de journaux d’audit est disponible pour les fonctionnalités dont vous disposez les licences. Si vous possédez une licence pour une fonctionnalité spécifique, vous avez également accès aux informations du journal d’audit correspondantes. Une comparaison détaillée des fonctionnalités selon les [différents types de licences](../fundamentals/active-directory-whatis.md#what-are-the-azure-ad-licenses) est disponible dans la [page Tarification Azure Active Directory](https://azure.microsoft.com/pricing/details/active-directory/). Pour plus de détails, consultez [Fonctionnalités Azure Active Directory](../fundamentals/active-directory-whatis.md#which-features-work-in-azure-ad).
 
 ### <a name="sign-ins-report"></a>Rapport de connexions
 
@@ -101,6 +107,6 @@ En plus de l’interface utilisateur, Azure AD vous fournit également un [acc�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Rapport sur les connexions à risque](concept-risky-sign-ins.md)
+- [Rapport sur les connexions à risque](../identity-protection/overview-identity-protection.md)
 - [Rapport de journaux d’audit](concept-audit-logs.md)
 - [Rapport de journaux d’activité de connexions](concept-sign-ins.md)

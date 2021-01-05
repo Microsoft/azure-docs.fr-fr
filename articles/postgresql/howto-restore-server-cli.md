@@ -1,33 +1,32 @@
 ---
 title: Sauvegarde et restauration - Azure CLI - Azure Database pour PostgreSQL - Serveur unique
 description: Découvrez comment définir des configurations de sauvegarde et restaurer un serveur dans Azure Database pour PostgreSQL - Serveur unique à l’aide d’Azure CLI.
-author: rachel-msft
-ms.author: raagyema
+author: sr-msft
+ms.author: srranga
 ms.service: postgresql
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/25/2019
-ms.openlocfilehash: f0ea24133d7b6acdc4b099ee21a8711a2d99095d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: ef397eb67c1f60c14fb36bf455236d84b730f611
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74775689"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94659571"
 ---
 # <a name="how-to-back-up-and-restore-a-server-in-azure-database-for-postgresql---single-server-using-the-azure-cli"></a>Comment sauvegarder et restaurer un serveur dans Azure Database pour PostgreSQL avec Azure CLI - Serveur unique à l’aide de l’interface de ligne de commande Azure
 
 Les serveurs Azure Database pour PostgreSQL sont sauvegardés régulièrement pour activer les fonctionnalités de restauration. À l’aide de cette fonctionnalité, vous pouvez restaurer le serveur et toutes ses bases de données à un point dans le temps antérieur, sur un nouveau serveur.
 
 ## <a name="prerequisites"></a>Prérequis
-Pour utiliser ce guide pratique, il vous faut :
-- Un [serveur Azure Database pour PostgreSQL et une base de données](quickstart-create-server-database-azure-cli.md)
+Pour suivre cette procédure :
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+- Vous avez besoin d’un [serveur Azure Database pour PostgreSQL et d’une base de données](quickstart-create-server-database-azure-cli.md).
 
- 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-> [!IMPORTANT]
-> Ce guide de procédures requiert l’utilisation de la version 2.0 Azure CLI ou version ultérieure. Pour vérifier la version, à l’invite de commande de l’interface Azure CLI, entrez `az --version`. Pour installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
+ - Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="set-backup-configuration"></a>Définir la configuration de sauvegarde
 
@@ -68,9 +67,9 @@ az postgres server restore --resource-group myresourcegroup --name mydemoserver-
 
 La commande `az postgres server restore` requiert les paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
-| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur source.  |
+| resource-group |  myResourceGroup |  Groupe de ressources où se trouve le serveur source.  |
 | name | mydemoserver-restored | Nom du serveur créé par la commande de restauration. |
 | restore-point-in-time | 2018-03-13T13:59:00Z | Sélectionnez un état antérieur auquel effectuer la restauration. Elles doivent être comprises dans la période de rétention de la sauvegarde du serveur source. Utilisez le format de date et d’heure ISO8601. Par exemple, vous pouvez utiliser votre fuseau horaire local, comme `2018-03-13T05:59:00-08:00`. Vous pouvez également utiliser le format UTC Zulu, par exemple, `2018-03-13T13:59:00Z`. |
 | source-server | mydemoserver | Nom ou identifiant du serveur source à partir duquel la restauration s’effectuera. |
@@ -108,7 +107,7 @@ az postgres server georestore --resource-group newresourcegroup --name mydemoser
 
 La commande `az postgres server georestore` requiert les paramètres suivants :
 
-| Paramètre | Valeur suggérée | Description  |
+| Paramètre | Valeur suggérée | Description  |
 | --- | --- | --- |
 |resource-group| myResourceGroup | Le nom du groupe de ressources auquel appartient le nouveau serveur.|
 |name | mydemoserver-georestored | Le nom du nouveau serveur. |

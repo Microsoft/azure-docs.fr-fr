@@ -6,19 +6,19 @@ author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 05/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 9b67d3205e95fe7cca6cacaab7e82a1a7e71f3f3
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 4c761404ab5a95bc0189407cc97ce779b66356fe
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82797359"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96460655"
 ---
-# <a name="quickstart-create-a-synapse-sql-pool-workload-classifier-using-the-azure-portal"></a>Démarrage rapide : Créer un classifieur de charge de travail d’un pool SQL Synapse avec le portail Azure
+# <a name="quickstart-create-a-dedicated-sql-pool-workload-classifier-using-the-azure-portal"></a>Démarrage rapide : Créer un classifieur de charge de travail de pool SQL dédié avec le portail Azure
 
 Dans ce guide de démarrage rapide, vous allez créer un [classifieur de charge de travail](sql-data-warehouse-workload-classification.md) pour attribuer des requêtes à un groupe de charge de travail.  Le classifieur attribue les demandes de l’utilisateur SQL `ELTLogin` au groupe de charge de travail `DataLoads`.   Suivez le tutoriel [Démarrage rapide : Configurer l’isolation de la charge de travail](quickstart-configure-workload-isolation-portal.md) pour créer le groupe de charge de travail `DataLoads`.  Ce tutoriel crée un classifieur de charge de travail avec l’option WLM_LABEL pour faciliter la bonne classification des demandes.  Le classifieur attribue également une [importance de charge de travail](sql-data-warehouse-workload-importance.md) `HIGH` à ces demandes.
 
@@ -31,16 +31,16 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 Connectez-vous au [portail Azure](https://portal.azure.com/).
 
 > [!NOTE]
-> La création d’une instance de pool SQL dans Azure Synapse Analytics peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
+> La création d’une instance de pool SQL dédié dans Azure Synapse Analytics peut donner lieu à un nouveau service facturable.  Pour plus d’informations, consultez [Tarification Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/sql-data-warehouse/).
 
 ## <a name="prerequisites"></a>Prérequis
 
-Ce guide de démarrage rapide suppose que vous avez déjà une instance de pool SQL dans SQL Synapse et que vous disposez d’autorisations CONTROL DATABASE. Si vous devez en créer un, utilisez la section [Créer et connecter - Portail](create-data-warehouse-portal.md) pour créer un entrepôt de données nommé **mySampleDataWarehouse**.
+Ce guide de démarrage rapide suppose que vous avez déjà une instance de pool SQL dédié, et que vous disposez d’autorisations CONTROL DATABASE. Si vous devez en créer une, utilisez [Créer et connecter – Portail](create-data-warehouse-portal.md) pour créer un pool SQL dédié nommé **mySampleDataWarehouse**.
 <br><br>
 Un groupe de charge de travail `DataLoads` existe.  Consultez le tutoriel [Démarrage rapide : Configurer l’isolation de la charge de travail](quickstart-configure-workload-isolation-portal.md) pour créer le groupe de charge de travail.
 <br><br>
 >[!IMPORTANT] 
->Votre pool SQL doit être en ligne pour que vous puissiez configurer la gestion de charge de travail. 
+>Votre pool SQL dédié doit être en ligne pour que vous puissiez configurer la gestion de charge de travail. 
 
 
 ## <a name="create-a-login-for-eltlogin"></a>Créer une connexion pour ELTLogin
@@ -72,18 +72,17 @@ END
 La classification vous permet de router les demandes, en fonction d’un ensemble de règles, vers un groupe de charge de travail.  Dans le tutoriel [Démarrage rapide : Configurer l’isolation de la charge de travail](quickstart-configure-workload-isolation-portal.md), nous avons créé le groupe de charge de travail `DataLoads`.  Vous allez maintenant créer un classifieur de charge de travail pour router les requêtes vers le groupe de charges de travail `DataLoads`.
 
 
-1.  Cliquez sur **Azure Synapse Analytics (anciennement SQL DW)** dans la page de gauche du portail Azure.
-2.  Sélectionnez **mySampleDataWarehouse** dans la page **Azure Synapse Analytics (anciennement SQL DW)** . Le pool SQL s’ouvre.
-3.  Cliquez sur **Gestion des charges de travail**.
+1.  Accédez à la page de votre pool SQL dédié **mySampleDataWarehouse**.
+3.  Sélectionnez **Gestion des charges de travail**.
 
     ![Cliquer sur le menu](./media/quickstart-create-a-workload-classifier-portal/menu.png)
 
-4.  Cliquez sur **Paramètres & classifieurs** sur le côté droit du groupe de charge de travail `DataLoads`.
+4.  Sélectionnez **Paramètres & classifieurs** sur le côté droit du groupe de charge de travail `DataLoads`.
 
     ![Cliquez sur Create.](./media/quickstart-create-a-workload-classifier-portal/settings-classifiers.png)
 
-5. Cliquez sur **Classifieurs**.
-6. Cliquez sur **Ajouter un classifieur**.
+5. Sélectionnez **Non configuré** sous la colonne Classifieurs.
+6. Sélectionnez **+ Ajouter un classifieur**.
 
     ![Cliquez sur Ajouter.](./media/quickstart-create-a-workload-classifier-portal/add-wc.png)
 
@@ -91,8 +90,8 @@ La classification vous permet de router les demandes, en fonction d’un ensembl
 8.  Entrez `ELTLogin` pour **Membre**.
 9.  Choisissez `High` pour **Importance de la demande**.  (*Facultatif*) Par défaut, le niveau d’importance est normal.
 10. Entrez `fact_loads` pour **Étiquette**.
-11. Cliquez sur **Add**.
-12. Cliquez sur **Enregistrer**.
+11. Sélectionnez **Ajouter**.
+12. Sélectionnez **Enregistrer**.
 
     ![Cliquer sur Configurer](./media/quickstart-create-a-workload-classifier-portal/config-wc.png)
 
@@ -135,8 +134,6 @@ WHERE [label] = 'fact_loads'
 ORDER BY submit_time DESC
 ```
 
-
-
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Pour supprimer le classifieur de charge de travail `ELTLoginDataLoads` créé dans ce tutoriel :
@@ -152,24 +149,20 @@ Pour supprimer le classifieur de charge de travail `ELTLoginDataLoads` créé da
 
     ![Cliquez sur Enregistrer.](./media/quickstart-create-a-workload-classifier-portal/delete-save-wc.png)
 
-Vous êtes facturé pour les unités d’entrepôt de données et les données stockées dans votre entrepôt de données. Ces ressources de calcul et de stockage sont facturées séparément.
+Vous êtes facturé pour les unités d’entrepôt de données et les données stockées dans votre pool SQL dédié. Ces ressources de calcul et de stockage sont facturées séparément.
 
-- Si vous voulez conserver les données dans le stockage, vous pouvez suspendre le calcul quand vous n’utilisez pas l’entrepôt de données. Quand vous suspendez le calcul, vous êtes facturé uniquement pour le stockage des données. Quand vous êtes prêt à utiliser les données, reprenez le calcul.
-- Si vous voulez éviter des frais futurs, vous pouvez supprimer l’entrepôt de données.
+- Si vous voulez conserver les données dans le stockage, vous pouvez suspendre le calcul quand vous n’utilisez pas votre pool SQL dédié. Quand vous suspendez le calcul, vous êtes facturé uniquement pour le stockage des données. Quand vous êtes prêt à utiliser les données, reprenez le calcul.
+- Si vous voulez éviter des frais à venir, vous pouvez supprimer votre pool SQL dédié.
 
 Suivez ces étapes pour nettoyer les ressources.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com) et sélectionnez votre entrepôt de données.
+1. Connectez-vous au [portail Azure](https://portal.azure.com), puis sélectionnez votre pool SQL dédié.
 
     ![Nettoyer les ressources](./media/load-data-from-azure-blob-storage-using-polybase/clean-up-resources.png)
 
-2. Pour suspendre le calcul, sélectionnez le bouton **Suspendre**. Quand l’entrepôt de données est suspendu, un bouton **Démarrer** est visible.  Pour reprendre le calcul, sélectionnez **Démarrer**.
+2. Pour suspendre le calcul, sélectionnez le bouton **Suspendre**. Quand le pool SQL dédié est suspendu, un bouton **Démarrer** est visible.  Pour reprendre le calcul, sélectionnez **Démarrer**.
 
-3. Pour supprimer l’entrepôt de données afin de ne pas être facturé pour le calcul ou le stockage, sélectionnez **Supprimer**.
-
-4. Pour supprimer le serveur SQL que vous avez créé, sélectionnez **sqlpoolservername.database.windows.net** dans l’image précédente, puis **Supprimer**.  N’oubliez pas que la suppression du serveur supprime également toutes les bases de données qui lui sont attribuées.
-
-5. Pour supprimer le groupe de ressources, sélectionnez **myResourceGroup**, puis **Supprimer le groupe de ressources**.
+3. Pour supprimer votre pool SQL dédié afin de ne pas être facturé pour le calcul ou le stockage, sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

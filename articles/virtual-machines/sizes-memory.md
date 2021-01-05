@@ -11,16 +11,16 @@ keywords: Isolation de machine virtuelle, machine virtuelle isolée, isolation, 
 ms.assetid: ''
 ms.service: virtual-machines
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 02/03/2020
 ms.author: mimckitt
-ms.openlocfilehash: 5a20e9c64b6ef948167333b54b16b34e84dc0e32
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: 1e27ee2c045404d13b10945ac65484281b0cd967
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81273577"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92019713"
 ---
 # <a name="memory-optimized-virtual-machine-sizes"></a>Tailles de machine virtuelle à mémoire optimisée
 
@@ -33,6 +33,10 @@ Les tailles de machine virtuelle à mémoire optimisée offrent un ration mémoi
 - Les [séries Eav4 et Easv4](eav4-easv4-series.md) utilisent le processeur EPYC<sup>TM</sup> 7452 2,35 GHz d’AMD dans une configuration multithread avec un cache L3 jusqu’à 256 Mo, ce qui améliore les options d’exécution de la plupart des charges de travail à mémoire optimisée. Les séries Eav4 et Easv4 ont les mêmes configurations de mémoire et de disque que les séries Ev3 et Esv3.
 
 - Les [séries Ev3 et Esv3](ev3-esv3-series.md) disposent du processeur Intel&reg; Xeon&reg; 8171M 2,1 GHz (Skylake) ou Intel&reg; Xeon&reg; E5-2673 v4 2,3 GHz (Broadwell) dans une configuration hyperthread, ce qui leur permet d’offrir ce qui se fait de mieux pour la plupart des charges de travail à usage général et d’aligner la série Ev3 sur les machines virtuelles à usage général de la plupart des autres clouds. La mémoire a été étendue (de 7 Gio/processeur virtuel à 8 Gio/processeur virtuel) et les limites de disque et de réseau ont été ajustées au niveau du cœur pour s’aligner sur la transition vers l’hyperthreading. La série Ev3 constitue la suite des tailles de machines virtuelles à mémoire haute des familles D/Dv2.
+
+- Les [séries Ev4 et Esv4](ev4-esv4-series.md) s’exécutent sur les processeurs Intel&reg; Xeon&reg; Platinum 8272CL (Cascade Lake) de seconde génération dans une configuration hyper-thread. Elles sont idéales pour diverses applications d’entreprise gourmandes en mémoire et offrent jusqu’à 504 Gio de RAM. Caractéristiques : [technologie Intel&reg; Turbo Boost 2.0](https://www.intel.com/content/www/us/en/architecture-and-technology/turbo-boost/turbo-boost-technology.html), [technologie Intel&reg; Hyper-Threading](https://www.intel.com/content/www/us/en/architecture-and-technology/hyper-threading/hyper-threading-technology.html) et [Intel&reg; Advanced Vector Extensions 512 (Intel AVX-512)](https://www.intel.com/content/www/us/en/architecture-and-technology/avx-512-overview.html). Les séries Ev4 et Esv4 n’incluent pas de disque temporaire local. Pour plus d’informations, consultez [Tailles de machines virtuelles Azure sans disque temporaire local](azure-vms-no-temp-disk.md).
+
+- Les [séries Edv4 et Edsv4](edv4-edsv4-series.md) s’exécutent sur les processeurs Intel&reg; Xeon&reg; Platinum 8272CL (Cascade Lake) de seconde génération. Elle sont idéales pour les très grandes bases de données ou d’autres applications qui bénéficient d’un nombre élevé de processeurs virtuels et de grandes quantités de mémoire. En outre, ces tailles de machines virtuelles incluent un stockage SSD local rapide et plus important pour les applications qui bénéficient ainsi d’un stockage local à faible latence et à haut débit. Caractéristiques : vitesse d’horloge Turbo continue de 3,4 GHz, [technologie Intel&reg; Turbo Boost 2.0](https://www.intel.com/content/www/us/en/architecture-and-technology/turbo-boost/turbo-boost-technology.html), [technologie Intel&reg; Hyper-Threading](https://www.intel.com/content/www/us/en/architecture-and-technology/hyper-threading/hyper-threading-technology.html) et [Intel&reg; Advanced Vector Extensions 512 (Intel AVX-512)](https://www.intel.com/content/www/us/en/architecture-and-technology/avx-512-overview.html).
 
 - La [série M](m-series.md) propose un nombre élevé de processeurs virtuels (jusqu’à 128 processeurs virtuels) et une grande quantité de mémoire (jusqu’à 3,8 Tio). Elle est également idéale pour les très grandes bases de données ou d’autres applications qui bénéficient d’un nombre élevé de processeurs virtuels et de grandes quantités de mémoire.
 
@@ -52,3 +56,5 @@ Le Calcul Azure propose des tailles de machines virtuelles qui sont isolées pou
 ## <a name="next-steps"></a>Étapes suivantes
 
 Lisez-en davantage sur les [Unités de calcul Azure (ACU)](acu.md) pour découvrir comment comparer les performances de calcul entre les références Azure.
+
+Pour plus d’informations sur la façon dont Azure nomme ses machines virtuelles, consultez [Conventions de nommage des tailles de machines virtuelles Azure](./vm-naming-conventions.md).

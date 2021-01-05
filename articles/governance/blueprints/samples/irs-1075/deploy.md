@@ -1,14 +1,14 @@
 ---
 title: Déployer un exemple de blueprint IRS 1075
 description: Étapes de déploiement pour l’exemple de blueprint IRS 1075 (Rev.11-2016) et informations détaillées sur les paramètres d’artefact de blueprint.
-ms.date: 05/13/2020
+ms.date: 08/19/2020
 ms.topic: sample
-ms.openlocfilehash: 7faf1042f695ac43b2fa22d2685149426cb1ed80
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 5f2c58b69519f27f759ddfc79d3333e55ed4eb54
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83653103"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88653730"
 ---
 # <a name="deploy-the-irs-1075-blueprint-sample"></a>Déployer l’exemple de blueprint IRS 1075
 
@@ -94,7 +94,7 @@ Le tableau suivant fournit la liste des paramètres d’artefact de blueprint :
 |Nom de l’artefact|Type d’artefact|Nom du paramètre|Description|
 |-|-|-|-|
 |Auditer les contrôles IRS 1075 (Rev.11-2016) et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|ID de l’espace de travail Log Analytics pour lequel les machines virtuelles doivent être configurées|Il s’agit de l’ID (GUID) de l’espace de travail Log Analytics pour lequel les machines virtuelles doivent être configurées.|
-|Auditer les contrôles IRS 1075 (Rev.11-2016) et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [schémas de journaux de diagnostic Azure Monitor](../../../../azure-monitor/platform/diagnostic-logs-schema.md#supported-log-categories-per-resource-type).|
+|Auditer les contrôles IRS 1075 (Rev.11-2016) et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des types de ressources devant avoir les journaux de diagnostic activés|Liste des types de ressources utilisés pour déterminer si le paramètre de journal de diagnostic n’est pas activé. Les valeurs acceptables sont listées dans les [schémas de journaux de diagnostic Azure Monitor](../../../../azure-monitor/platform/resource-logs-schema.md#service-specific-schemas).|
 |Auditer les contrôles IRS 1075 (Rev.11-2016) et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des utilisateurs qui doivent être exclus du groupe Administrateurs de machines virtuelles Windows|Liste séparée par des points-virgules des membres qui doivent être exclus du groupe Administrateurs local. Exemple : Administrator; myUser1; myUser2|
 |Auditer les contrôles IRS 1075 (Rev.11-2016) et déployer des extensions de machine virtuelle spécifiques pour prendre en charge les exigences d’audit|Affectation de rôle|Liste des utilisateurs qui doivent être inclus dans le groupe Administrateurs de machines virtuelles Windows|Liste séparée par des points-virgules des membres qui doivent être inclus dans le groupe Administrateurs local. Exemple : Administrator; myUser1; myUser2|
 |Déployer Log Analytics Agent pour Linux VM Scale Sets (VMSS)|Affectation de rôle|Espace de travail Log Analytics pour Linux VM Scale Sets (VMSS)|Si cet espace de travail se trouve en dehors de l’étendue de l’affectation, vous devez accorder manuellement des autorisations de « Contributeur Log Analytics » (ou similaires) à l’ID du principal de l’affectation de stratégie.|

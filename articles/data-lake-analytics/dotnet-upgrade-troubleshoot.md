@@ -1,20 +1,16 @@
 ---
 title: Guide pratique pour résoudre les défaillances des travaux U-SQL Azure Data Lake Analytics dues à la mise à niveau vers .NET Framework 4.7.2
 description: Résolvez les défaillances des travaux U-SQL dues à la mise à niveau vers .NET 4.7.2.
-services: data-lake-analytics
-author: guyhay
-ms.author: guyhay
-ms.reviewer: jasonwhowell
+ms.reviewer: jasonh
 ms.service: data-lake-analytics
 ms.topic: troubleshooting
-ms.workload: big-data
 ms.date: 10/11/2019
-ms.openlocfilehash: f909419810cbd837e57b19a13b2df6ae9ad2ee97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ab03ea8a88187289f5dce55f8a396a9d51346a3f
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79213585"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92217675"
 ---
 # <a name="azure-data-lake-analytics-is-upgrading-to-the-net-framework-v472"></a>Azure Data Lake Analytics est mis à niveau vers .NET Framework v4.7.2
 

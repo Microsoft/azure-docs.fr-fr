@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 04/13/2020
   ms.author: trbye
-  ms.openlocfilehash: 5d5c1cdae695b68f45d55b51b76d88c2f93c50d1
-  ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+  ms.openlocfilehash: a54153dc8fc7f3b5ea2f86b3bf03f469aa56cdb3
+  ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81401422"
+  ms.lasthandoff: 11/21/2020
+  ms.locfileid: "95015423"
 landingContent:
 - title: À propos de la traduction vocale
   linkLists:
@@ -25,21 +25,19 @@ landingContent:
     - text: Qu’est-ce que la traduction vocale ?
       url: speech-translation.md
     - text: Bases de la traduction vocale
-      url: speech-translation-basics.md
+      url: ./get-started-speech-translation.md
+    - text: Utiliser l’interface CLI pour convertir la voix sans code
+      url: spx-overview.md
   - linkListType: quickstart
     links:
-    - text: Traduire la voix en texte
-      url: quickstarts/translate-speech-to-text.md
-    - text: Traduire la parole en plusieurs langues cibles
-      url: quickstarts/translate-speech-to-text-multiple-languages.md
-    - text: Traduire la voix en voix
-      url: quickstarts/translate-speech-to-speech.md
+    - text: Démarrer avec la traduction vocale
+      url: get-started-speech-translation.md
 - title: Développer avec la traduction vocale
   linkLists:
   - linkListType: learn
     links:
     - text: Traduction vocale en temps réel
-      url: https://docs.microsoft.com/learn/modules/convert-speech-to-text
+      url: /learn/modules/convert-speech-to-text
   - linkListType: tutorial
     links:
     - text: Traduire et synthétiser du texte avec des API REST
@@ -54,3 +52,9 @@ landingContent:
       url: https://www.microsoft.com/translator/business/faq/
     - text: Tarification de la traduction vocale
       url: https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

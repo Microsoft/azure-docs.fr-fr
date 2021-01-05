@@ -3,25 +3,25 @@ title: Activer l’accès distant à SharePoint – Proxy d’application Azure 
 description: Aborde les notions de base relatives à l’intégration d’un serveur SharePoint local au proxy d’application Azure AD.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/02/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 983470994c103cb25d0d2aff96ae8544080e6288
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c318c539b1c09761ed81e7602808e415fdaf8b80
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79481294"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658177"
 ---
 # <a name="enable-remote-access-to-sharepoint-with-azure-ad-application-proxy"></a>Activer l’accès distant à SharePoint avec le proxy d’application Azure AD
 
@@ -167,7 +167,7 @@ Vous pouvez maintenant accéder au site SharePoint en externe par l’intermédi
 
 ## <a name="step-3-configure-kerberos-constrained-delegation"></a>Étape 3 : Configurer une délégation Kerberos contrainte
 
-Les utilisateurs s’authentifient initialement dans Azure AD, puis dans SharePoint à l’aide de Kerberos via le connecteur de proxy Azure AD. Pour permettre au connecteur d’obtenir un jeton Kerberos pour le compte de l’utilisateur Azure AD, vous devez configurer la délégation Kerberos contrainte (KCD) avec la transition de protocole. Pour en savoir plus sur la KCD, consultez [Présentation de la délégation Kerberos contrainte](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj553400(v=ws.11)).
+Les utilisateurs s’authentifient initialement dans Azure AD, puis dans SharePoint à l’aide de Kerberos via le connecteur de proxy Azure AD. Pour permettre au connecteur d’obtenir un jeton Kerberos pour le compte de l’utilisateur Azure AD, vous devez configurer la délégation Kerberos contrainte (KCD) avec la transition de protocole. Pour en savoir plus sur la KCD, consultez [Présentation de la délégation Kerberos contrainte](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj553400(v=ws.11)).
 
 ### <a name="set-the-spn-for-the-sharepoint-service-account"></a>Définir le SPN pour le compte de service SharePoint
 
@@ -176,7 +176,7 @@ Pour inscrire le SPN `HTTP/sharepoint` pour le compte du pool d’applications S
 
 `setspn -S HTTP/sharepoint Contoso\spapppool`
 
-La commande `Setspn` recherche le SPN avant de l’ajouter. Si le SPN existe déjà, une erreur **Valeur SPN en double** apparaît. Dans ce cas, envisagez de supprimer le SPN existant s’il n’est pas défini sous le compte de pool d’applications correct. Vous pouvez vérifier que le SPN a bien été ajouté en exécutant la commande `Setspn` avec l’option -L. Pour en savoir plus sur cette commande, consultez [Setspn](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc731241(v=ws.11)).
+La commande `Setspn` recherche le SPN avant de l’ajouter. Si le SPN existe déjà, une erreur **Valeur SPN en double** apparaît. Dans ce cas, envisagez de supprimer le SPN existant s’il n’est pas défini sous le compte de pool d’applications correct. Vous pouvez vérifier que le SPN a bien été ajouté en exécutant la commande `Setspn` avec l’option -L. Pour en savoir plus sur cette commande, consultez [Setspn](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc731241(v=ws.11)).
 
 ### <a name="make-sure-the-connector-is-trusted-for-delegation-to-the-spn-that-was-added-to-the-sharepoint-application-pool-account"></a>Vérifiez que le connecteur est approuvé pour la délégation au SPN qui a été ajouté au compte de pool d’applications SharePoint
 

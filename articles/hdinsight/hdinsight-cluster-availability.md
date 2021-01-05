@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 05/01/2020
-ms.openlocfilehash: 4b26128b794a6a667edc578f56ad0bc9fb8303a7
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 5cfc2abad828a3974c04074a4cde062a479f673f
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691148"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533561"
 ---
 # <a name="how-to-monitor-cluster-availability-with-apache-ambari-in-azure-hdinsight"></a>Superviser la disponibilité des clusters avec Apache Ambari dans Azure HDInsight
 
@@ -49,7 +49,7 @@ Ambari offre également plusieurs alertes configurables qui peuvent fournir des 
 
 ![Apache Ambari - Nombre d’alertes actuelles](media/hdinsight-cluster-availability/apache-ambari-alerts.png)
 
-Pour afficher une liste de définitions d’alerte et leurs états, sélectionnez l’onglet **Alertes**, comme ci-dessous.
+Pour afficher une liste de définitions d’alerte et leurs états, sélectionnez l’onglet **Alertes** , comme ci-dessous.
 
 ![Affichage des définitions d’alertes Ambari](media/hdinsight-cluster-availability/ambari-alerts-definitions.png)
 
@@ -62,7 +62,6 @@ Ambari offre de nombreuses alertes prédéfinies relatives à la disponibilité,
 | Percent JournalNodes Available (Pourcentage de JournalNodes disponibles)    | Cette alerte est déclenchée si le nombre de JournalNodes en panne dans le cluster est supérieur au seuil critique configuré. Elle agrège les résultats des vérifications de processus JournalNode. |
 | Percent DataNodes Available (Pourcentage de DataNodes disponibles)       | Cette alerte est déclenchée si le nombre de DataNodes en panne dans le cluster est supérieur au seuil critique configuré. Elle agrège les résultats des vérifications de processus DataNode.|
 
-Une liste complète des alertes Ambari qui permet de surveiller la disponibilité d’un cluster se trouve [ici](https://docs.microsoft.com/azure/hdinsight/hdinsight-high-availability-linux#ambari-web-ui).
 
 Pour afficher les détails d’une alerte ou en modifier les critères, sélectionnez le **nom** de l’alerte. Prenez **DataNode Health Summary** (Récapitulatif d’intégrité DataNode) comme exemple. Vous voyez la description de l’alerte, les critères spécifiques qui déclencheront une alerte de type « avertissement » ou « critique » ainsi que l’intervalle de vérification des critères. Pour modifier la configuration, sélectionnez le bouton **Modifier** dans le coin supérieur droit de la zone Configuration.
 
@@ -76,7 +75,7 @@ Dans cet exemple, vous pouvez faire en sorte que 2 DataNodes non sains déclench
 
 ## <a name="email-notifications"></a>Notifications par e-mail
 
-Vous pouvez également configurer les notifications par e-mail pour les alertes Ambari. Pour ce faire, dans l’onglet **Alertes**, cliquez sur le bouton **Actions** dans le coin supérieur gauche, puis sur **Gérer les modifications**.
+Vous pouvez également configurer les notifications par e-mail pour les alertes Ambari. Pour ce faire, dans l’onglet **Alertes** , cliquez sur le bouton **Actions** dans le coin supérieur gauche, puis sur **Gérer les modifications** .
 
 ![Action de gestion des notifications Ambari](media/hdinsight-cluster-availability/ambari-manage-notifications.png)
 
@@ -87,7 +86,7 @@ Une boîte de dialogue pour la gestion des notifications d’alerte s’ouvre. S
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Availability and reliability of Apache Hadoop clusters in HDInsight](hdinsight-high-availability-linux.md) (Disponibilité et fiabilité des clusters Apache Hadoop dans HDInsight)
+- [Availability and reliability of Apache Hadoop clusters in HDInsight](./hdinsight-business-continuity.md) (Disponibilité et fiabilité des clusters Apache Hadoop dans HDInsight)
 - [Disponibilité des clusters - Journaux Azure Monitor](./cluster-availability-monitor-logs.md)
 - [Utiliser les journaux Azure Monitor](hdinsight-hadoop-oms-log-analytics-tutorial.md)
 - [Notifications par e-mail Apache Ambari](apache-ambari-email.md)

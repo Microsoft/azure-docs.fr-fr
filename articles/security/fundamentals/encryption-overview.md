@@ -1,26 +1,20 @@
 ---
 title: Vue d’ensemble du chiffrement Azure | Documents Microsoft
-description: En savoir plus sur les différentes options de chiffrement dans Azure
+description: Découvrez les options de chiffrement dans Azure. Consultez les informations sur le chiffrement au repos, le chiffrement en déplacement et la gestion des clés avec Azure Key Vault.
 services: security
-documentationcenter: na
-author: Barclayn
-manager: barbkess
-editor: TomShinder
+author: msmbaldwin
 ms.assetid: ''
 ms.service: security
 ms.subservice: security-fundamentals
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 09/20/2018
+ms.date: 07/20/2020
 ms.author: mbaldwin
-ms.openlocfilehash: ce78ade4df3c5bcea9e4e44750c430065cbfc5b0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ff023ad98c7ffa269223b5d0b4a1cecc5fde1feb
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81454643"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94410213"
 ---
 # <a name="azure-encryption-overview"></a>Vue d’ensemble du chiffrement Azure
 
@@ -28,7 +22,7 @@ Cet article fournit une vue d’ensemble de l’utilisation du chiffrement dans 
 
 ## <a name="encryption-of-data-at-rest"></a>Chiffrement des données au repos
 
-Les données au repos incluent des informations qui se trouvent dans un stockage persistant sur un support physique, sous n’importe quel format numérique. Il peut s’agir de fichiers sur un support magnétique ou optique, de données archivées et de sauvegardes de données. Microsoft Azure offre une variété de solutions de stockage de données en fonction des besoins, y compris le stockage sur fichier, disque, objet blob et table. Microsoft fournit également le chiffrement pour protéger [Azure SQL Database](../../sql-database/sql-database-technical-overview.md), [Azure Cosmos DB](../../data-factory/introduction.md) et Azure Data Lake.
+Les données au repos incluent des informations qui se trouvent dans un stockage persistant sur un support physique, sous n’importe quel format numérique. Il peut s’agir de fichiers sur un support magnétique ou optique, de données archivées et de sauvegardes de données. Microsoft Azure offre une variété de solutions de stockage de données en fonction des besoins, y compris le stockage sur fichier, disque, objet blob et table. Microsoft fournit également le chiffrement pour protéger [Azure SQL Database](../../azure-sql/database/sql-database-paas-overview.md), [Azure Cosmos DB](../../data-factory/introduction.md) et Azure Data Lake.
 
 Le chiffrement des données au repos est disponible pour les modèles de cloud SaaS (Software-as-a-Service), PaaS (Platform-as-a-Service) et IaaS (Infrastructure-as-a-Service). Cet article résume et fournit des ressources pour vous aider à utiliser les options de chiffrement Azure.
 
@@ -51,15 +45,15 @@ Avec le chiffrement côté client, les fournisseurs de services cloud n’ont pa
 
 Les trois modèles de chiffrement côté serveur offrent différentes caractéristiques de gestion de clés, que vous pouvez choisir en fonction de vos besoins :
 
-- **Clés gérées par le service** : ce modèle fournit une combinaison de contrôle et de fonctionnalités avec une faible surcharge.
+- **Clés gérées par le service**  : ce modèle fournit une combinaison de contrôle et de fonctionnalités avec une faible surcharge.
 
-- **Clés gérées par le client** : ce modèle vous permet de contrôler les clés, avec notamment la prise en charge de BYOK (Bring Your Own Keys), ou d’en générer de nouvelles.
+- **Clés gérées par le client**  : ce modèle vous permet de contrôler les clés, avec notamment la prise en charge de BYOK (Bring Your Own Keys), ou d’en générer de nouvelles.
 
-- **Clés gérées par le service sur le matériel contrôlé par le client** : ce modèle vous permet de gérer les clés dans votre référentiel propriétaire, en dehors du contrôle de Microsoft. Cette caractéristique est appelée HYOK (Host Your Own Key). Toutefois, la configuration est complexe et la plupart des services Azure ne prennent pas en charge ce modèle.
+- **Clés gérées par le service sur le matériel contrôlé par le client**  : ce modèle vous permet de gérer les clés dans votre référentiel propriétaire, en dehors du contrôle de Microsoft. Cette caractéristique est appelée HYOK (Host Your Own Key). Toutefois, la configuration est complexe et la plupart des services Azure ne prennent pas en charge ce modèle.
 
 ### <a name="azure-disk-encryption"></a>Azure Disk Encryption
 
-Vous pouvez protéger les machines virtuelles Windows et Linux à l’aide de [Azure Disk Encryption](/azure/security/fundamentals/azure-disk-encryption-vms-vmss), qui utilise la technologie [Windows BitLocker](https://technet.microsoft.com/library/cc766295(v=ws.10).aspx) et Linux [DM-Crypt](https://en.wikipedia.org/wiki/Dm-crypt) pour protéger des disques du système d’exploitation et des disques de données avec un chiffrement de volume complet.
+Vous pouvez protéger les machines virtuelles Windows et Linux à l’aide de [Azure Disk Encryption](./azure-disk-encryption-vms-vmss.md), qui utilise la technologie [Windows BitLocker](/previous-versions/windows/it-pro/windows-vista/cc766295(v=ws.10)) et Linux [DM-Crypt](https://en.wikipedia.org/wiki/Dm-crypt) pour protéger des disques du système d’exploitation et des disques de données avec un chiffrement de volume complet.
 
 Les clés de chiffrement et les secrets sont sauvegardés dans votre abonnement [Azure Key Vault](../../key-vault/general/overview.md). À l’aide du service Sauvegarde Azure, vous pouvez sauvegarder et restaurer des machines virtuelles chiffrées qui utilisent la configuration de clé de chiffrement à clé (KEK).
 
@@ -85,17 +79,17 @@ Pour finir, vous pouvez également utiliser la bibliothèque cliente de stockage
 
 ### <a name="encryption-of-data-at-rest-with-azure-sql-database"></a>Chiffrement des données au repos avec Azure SQL Database
 
-[Azure SQL Database](../../sql-database/sql-database-technical-overview.md) est une base de données relationnelle à usage général dans Azure qui prend en charge des structures telles que les données relationnelles, JSON, les données spatiales et XML. SQL Database prend en charge le chiffrement côté serveur grâce à la fonctionnalité de chiffrement transparent des données (TDE) et le chiffrement côté client grâce à la fonction Always Encrypted.
+[Azure SQL Database](../../azure-sql/database/sql-database-paas-overview.md) est une base de données relationnelle à usage général dans Azure qui prend en charge des structures telles que les données relationnelles, JSON, les données spatiales et XML. SQL Database prend en charge le chiffrement côté serveur grâce à la fonctionnalité de chiffrement transparent des données (TDE) et le chiffrement côté client grâce à la fonction Always Encrypted.
 
 #### <a name="transparent-data-encryption"></a>chiffrement transparent des données
 
-[TDE](https://docs.microsoft.com/sql/relational-databases/security/encryption/transparent-data-encryption-tde) est utilisé pour chiffrer les fichiers de données [SQL Server](https://www.microsoft.com/sql-server/sql-server-2016), [Azure SQL Database](../../sql-database/sql-database-technical-overview.md) et [Azure SQL Data Warehouse](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md) en temps réel à l’aide d’une clé de chiffrement de base de données (DEK) stockée dans l’enregistrement de démarrage de la base de données pour une disponibilité lors de la récupération.
+[TDE](/sql/relational-databases/security/encryption/transparent-data-encryption-tde) est utilisé pour chiffrer les fichiers de données [SQL Server](https://www.microsoft.com/sql-server/sql-server-2016), [Azure SQL Database](../../azure-sql/database/sql-database-paas-overview.md) et [Azure Synapse Analytics](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md) en temps réel à l’aide d’une clé de chiffrement de base de données (DEK) stockée dans l’enregistrement de démarrage de la base de données pour être disponible lors de la récupération.
 
 TDE protège les données et les fichiers journaux, à l’aide d’algorithmes de chiffrement AES et 3DES (Triple Data Encryption Standard). Le chiffrement du fichier de base de données est effectué au niveau de la page. Les pages dans une base de données chiffrée sont chiffrées avant d’être écrites sur le disque, et sont déchiffrées quand elles sont lues en mémoire. TDE est désormais activé par défaut sur les nouvelles bases de données Azure SQL.
 
 #### <a name="always-encrypted-feature"></a>Fonctionnalité Always Encrypted
 
-Avec la fonctionnalité [Always Encrypted](https://docs.microsoft.com/sql/relational-databases/security/encryption/always-encrypted-database-engine) dans Azure SQL, vous pouvez chiffrer les données dans les applications clientes avant de les stocker dans Azure SQL Database. Vous pouvez également activer la délégation de l’administration locale de base de données à des tiers, et maintenir la séparation entre ceux qui possèdent et peuvent afficher les données et ceux qui les gèrent, mais qui ne doivent pas pouvoir y accéder.
+Avec la fonctionnalité [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) dans Azure SQL, vous pouvez chiffrer les données dans les applications clientes avant de les stocker dans Azure SQL Database. Vous pouvez également activer la délégation de l’administration locale de base de données à des tiers, et maintenir la séparation entre ceux qui possèdent et peuvent afficher les données et ceux qui les gèrent, mais qui ne doivent pas pouvoir y accéder.
 
 #### <a name="cell-level-or-column-level-encryption"></a>Chiffrement au niveau des cellules ou au niveau des colonnes
 
@@ -117,9 +111,13 @@ Trois types de clés sont utilisées dans le chiffrement et le déchiffrement de
 
 Azure offre plusieurs mécanismes pour protéger la confidentialité des données lorsqu’elles transitent d’un emplacement à un autre.
 
-### <a name="tlsssl-encryption-in-azure"></a>Chiffrement TLS/SSL dans Azure
+### <a name="data-link-layer-encryption-in-azure"></a>Chiffrement de la couche de liaison de données dans Azure
 
-Microsoft utilise le protocole [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) pour protéger les données lorsqu’elles sont en déplacement entre les services cloud et les clients. Les centres de données Microsoft négocient une connexion TLS avec les systèmes clients qui se connectent aux services Azure. TLS fournit une authentification forte, la confidentialité et l’intégrité des messages (activation de la détection de falsification et d’interception des messages), l’interopérabilité, la flexibilité des algorithmes, ainsi que la facilité de déploiement et d’utilisation.
+Chaque fois que le trafic du client Azure s'effectue entre différents centres de données - en dehors des limites physiques non contrôlées par Microsoft (ou pour le compte de Microsoft) - une méthode de chiffrement de la couche de liaison de données utilisant les [normes de sécurité MAC IEEE 802.1AE](https://1.ieee802.org/security/802-1ae/) (également appelées MACsec) est appliquée de point à point sur le matériel réseau sous-jacent. Les paquets sont chiffrés et déchiffrés sur les appareils avant d'être envoyés, ce qui permet d'éviter les attaques physiques de l'intercepteur ou les attaques par snooping/écoutes téléphoniques. Étant donné que cette technologie est intégrée au matériel réseau, elle fournit un chiffrement de débit de ligne sur le matériel réseau sans augmentation mesurable de la latence de la liaison. Ce chiffrement MACsec est activé par défaut pour tout le trafic Azure au sein d’une région ou entre des régions, et aucune intervention des clients n’est nécessaire pour l’activer. 
+
+### <a name="tls-encryption-in-azure"></a>Chiffrement TLS dans Azure
+
+Microsoft permet aux clients d'utiliser le protocole [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security) (TLS) pour protéger les données lorsqu'elles circulent entre les services cloud et les clients. Les centres de données Microsoft négocient une connexion TLS avec les systèmes clients qui se connectent aux services Azure. TLS fournit une authentification forte, la confidentialité et l’intégrité des messages (activation de la détection de falsification et d’interception des messages), l’interopérabilité, la flexibilité des algorithmes, ainsi que la facilité de déploiement et d’utilisation.
 
 [Perfect Forward Secrecy](https://en.wikipedia.org/wiki/Forward_secrecy) (PFS) protège les connexions entre les systèmes clients des clients et les services cloud de Microsoft par des clés uniques. Les connexions utilisent également les longueurs de clés de chiffrement RSA de 2 048 bits. Cette combinaison rend difficile pour une personne l’interception et l’accès aux données en transit.
 
@@ -127,9 +125,9 @@ Microsoft utilise le protocole [Transport Layer Security](https://en.wikipedia.o
 
 Si vous interagissez avec le stockage Azure via le portail Azure, toutes les transactions se produisent via HTTPS. L’API de stockage REST par le biais de HTTPS peut également être utilisée pour interagir avec le stockage Azure. Vous pouvez appliquer l’utilisation du protocole HTTPS quand vous appelez les API REST pour accéder aux objets dans les comptes de stockage en activant le transfert sécurisé requis pour le compte de stockage.
 
-Les signatures d’accès partagé ([SAP](../../storage/common/storage-dotnet-shared-access-signature-part-1.md)), qui peuvent être utilisées pour déléguer l’accès aux objets de stockage Azure, incluent une option pour spécifier que seul le protocole HTTPS est autorisé quand vous utilisez des signatures d’accès partagé. Cette approche garantit que toute personne envoyant des liens avec des jetons SAP utilise le protocole approprié.
+Les signatures d’accès partagé ([SAP](../../storage/common/storage-sas-overview.md)), qui peuvent être utilisées pour déléguer l’accès aux objets de stockage Azure, incluent une option pour spécifier que seul le protocole HTTPS est autorisé quand vous utilisez des signatures d’accès partagé. Cette approche garantit que toute personne envoyant des liens avec des jetons SAP utilise le protocole approprié.
 
-[SMB 3.0](https://technet.microsoft.com/library/dn551363(v=ws.11).aspx#BKMK_SMBEncryption), qui est utilisé pour accéder à Azure File Shares, prend en charge le chiffrement et est disponible dans Windows Server 2012 R2, Windows 8, Windows 8.1 et Windows 10. Cela rend possible l’accès entre les régions et même l’accès sur le bureau.
+[SMB 3.0](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn551363(v=ws.11)#BKMK_SMBEncryption), qui est utilisé pour accéder à Azure File Shares, prend en charge le chiffrement et est disponible dans Windows Server 2012 R2, Windows 8, Windows 8.1 et Windows 10. Cela rend possible l’accès entre les régions et même l’accès sur le bureau.
 
 Le chiffrement côté client chiffre les données avant qu’elles soient envoyées à votre instance Stockage Azure, afin qu’elles soient chiffrées quand elles transitent sur le réseau.
 
@@ -141,11 +139,11 @@ Par défaut, une fois le chiffrement SMB activé pour un partage ou un serveur, 
 
 ## <a name="in-transit-encryption-in-vms"></a>Chiffrement en transit sur des machines virtuelles
 
-Les données en transit vers, à partir de et entre les machines virtuelles exécutant Windows sont chiffrées de différentes manières, en fonction de la nature de la connexion.
+Les données en transit vers, à partir de et entre les machines virtuelles exécutant Windows peuvent être chiffrées de différentes manières, en fonction de la nature de la connexion.
 
 ### <a name="rdp-sessions"></a>Sessions RDP
 
-Vous pouvez vous connecter et ouvrir une session sur une machine virtuelle à l’aide du [protocole RDP (Remote Desktop Protocol)](https://msdn.microsoft.com/library/aa383015(v=vs.85).aspx) à partir d’un ordinateur client Windows ou d’un Mac avec un client RDP installé. Les données en transit sur le réseau dans les sessions RDP peuvent être protégées par le TLS.
+Vous pouvez vous connecter et ouvrir une session sur une machine virtuelle à l’aide du [protocole RDP (Remote Desktop Protocol)](/windows/win32/termserv/remote-desktop-protocol) à partir d’un ordinateur client Windows ou d’un Mac avec un client RDP installé. Les données en transit sur le réseau dans les sessions RDP peuvent être protégées par le TLS.
 
 Vous pouvez également utiliser le Bureau à distance pour vous connecter à une machine virtuelle Linux dans Azure.
 
@@ -165,15 +163,15 @@ Les VPN de site à site utilisent [IPsec](https://en.wikipedia.org/wiki/IPsec) p
 
 ### <a name="point-to-site-vpns"></a>VPN point à site
 
-Les VPN point à site permettent à des ordinateurs clients d’accéder à un réseau virtuel Azure. Le [protocole SSTP (Secure Socket Tunneling Protocol)](https://technet.microsoft.com/library/2007.06.cableguy.aspx) est utilisé pour créer le tunnel VPN. Il peut traverser des pare-feu (le tunnel apparaît en tant que connexion HTTPS). Vous pouvez utiliser votre propre autorité de certification racine interne d’infrastructure à clé publique pour la connectivité point à site.
+Les VPN point à site permettent à des ordinateurs clients d’accéder à un réseau virtuel Azure. Le [protocole SSTP (Secure Socket Tunneling Protocol)](/previous-versions/technet-magazine/cc162322(v=msdn.10)) est utilisé pour créer le tunnel VPN. Il peut traverser des pare-feu (le tunnel apparaît en tant que connexion HTTPS). Vous pouvez utiliser votre propre autorité de certification racine interne d’infrastructure à clé publique pour la connectivité point à site.
 
 Vous pouvez configurer une connexion VPN point à site à un réseau virtuel à l’aide du portail Azure avec l’authentification par certificat ou PowerShell.
 
 Pour en savoir plus sur les connexions VPN de point à site à des réseaux virtuels Azure, consultez :
 
-[Configurer une connexion point à site sur un réseau virtuel à l’aide d’une authentification par certificat Azure native : Portail Azure](../../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md) 
+[Configurer une connexion point à site sur un réseau virtuel à l'aide d'une authentification par certification : Portail Azure](../../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md) 
 
-[Configurer une connexion point à site à un réseau virtuel à l’aide de l’authentification par certificat Azure native : PowerShell](../../vpn-gateway/vpn-gateway-howto-point-to-site-rm-ps.md)
+[Configurer une connexion point à site sur un réseau virtuel à l'aide d'une authentification par certificat : PowerShell](../../vpn-gateway/vpn-gateway-howto-point-to-site-rm-ps.md)
 
 ### <a name="site-to-site-vpns"></a>VPN site à site 
 
@@ -203,9 +201,9 @@ Key Vault soulage les entreprises de la nécessité de configurer, de corriger e
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Vue d’ensemble de la sécurité d’Azure](get-started-overview.md)
+- [Vue d’ensemble de la sécurité d’Azure](./overview.md)
 - [Vue d’ensemble de la sécurité réseau d’Azure](network-overview.md)
-- [Vue d’ensemble de la sécurité des bases de données d’Azure](database-security-overview.md)
+- [Vue d’ensemble de la sécurité des bases de données d’Azure](../../azure-sql/database/security-overview.md)
 - [Vue d’ensemble de la sécurité des machines virtuelles d’Azure](virtual-machines-overview.md)
 - [Chiffrement des données au repos](encryption-atrest.md)
 - [Meilleures pratiques en matière de chiffrement et de sécurité des données](data-encryption-best-practices.md)

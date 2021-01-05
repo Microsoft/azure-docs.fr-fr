@@ -8,12 +8,12 @@ ms.author: klam
 ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 07/25/2016
-ms.openlocfilehash: e2f65f1c52dc7dfb2e4e4bf66f5c7e82f4b802b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ccc7df5bfac327fabf05f210764dbe10658b5015
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74792878"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000315"
 ---
 # <a name="schema-updates-for-azure-logic-apps---june-1-2016"></a>Mises à jour de schéma pour Azure Logic Apps - 1er juin 2016
 
@@ -29,7 +29,7 @@ Pour mettre à niveau vos applications logiques à partir du schéma en version 
 
 ## <a name="scopes"></a>Étendues
 
-Ce schéma comporte des étendues, qui vous permettent de regrouper ou d’imbriquer des actions. Par exemple, une condition peut en contenir une autre. Apprenez-en davantage sur la [syntaxe des étendues](../logic-apps/logic-apps-loops-and-scopes.md), ou examinez l’exemple d’étendue de base ci-dessous :
+Ce schéma comporte des étendues, qui vous permettent de regrouper ou d’imbriquer des actions. Par exemple, une condition peut en contenir une autre. Apprenez-en davantage sur la [syntaxe des étendues](./logic-apps-control-flow-loops.md), ou examinez l’exemple d’étendue de base ci-dessous :
 
 ```json
 {
@@ -55,7 +55,7 @@ Ce schéma comporte des étendues, qui vous permettent de regrouper ou d’imbri
 
 ## <a name="conditions-and-loops-changes"></a>Modifications des conditions et boucles
 
-Dans les versions de schéma précédentes, les conditions et les boucles étaient des paramètres associés avec une seule action. Cette limitation a été levée dans ce schéma, de sorte que les conditions et les boucles sont désormais disponibles sous forme de types d’actions. Apprenez-en davantage sur les [boucles et étendues](../logic-apps/logic-apps-loops-and-scopes.md) et sur les [conditions](../logic-apps/logic-apps-control-flow-conditional-statement.md), ou examinez cet exemple de base qui illustre une action de condition :
+Dans les versions de schéma précédentes, les conditions et les boucles étaient des paramètres associés avec une seule action. Cette limitation a été levée dans ce schéma, de sorte que les conditions et les boucles sont désormais disponibles sous forme de types d’actions. Apprenez-en davantage sur les [boucles et étendues](./logic-apps-control-flow-loops.md) et sur les [conditions](../logic-apps/logic-apps-control-flow-conditional-statement.md), ou examinez cet exemple de base qui illustre une action de condition :
 
 ```json
 {
@@ -131,7 +131,7 @@ Dans la définition mise à niveau, l’outil s’efforce de regrouper les actio
 
 #### <a name="foreach-loop-with-condition"></a>Boucle « foreach » avec condition
 
-Dans le nouveau schéma, vous pouvez utiliser l’action de filtrage pour répliquer le modèle qui utilise une boucle **foreach** avec une condition par élément. Toutefois, la modification se produit automatiquement lorsque vous procédez à la mise à niveau. La condition devient une action de filtrage qui apparaît avant la boucle **foreach**, retournant ainsi uniquement un tableau d’éléments correspondant à cette condition, puis transmettant ce tableau à l’action **Pour chaque**. Pour découvrir un exemple, consultez l’article relatif aux [boucles et étendues](../logic-apps/logic-apps-loops-and-scopes.md).
+Dans le nouveau schéma, vous pouvez utiliser l’action de filtrage pour répliquer le modèle qui utilise une boucle **foreach** avec une condition par élément. Toutefois, la modification se produit automatiquement lorsque vous procédez à la mise à niveau. La condition devient une action de filtrage qui apparaît avant la boucle **foreach**, retournant ainsi uniquement un tableau d’éléments correspondant à cette condition, puis transmettant ce tableau à l’action **Pour chaque**. Pour découvrir un exemple, consultez l’article relatif aux [boucles et étendues](./logic-apps-control-flow-loops.md).
 
 ### <a name="resource-tags"></a>Balises de ressource
 

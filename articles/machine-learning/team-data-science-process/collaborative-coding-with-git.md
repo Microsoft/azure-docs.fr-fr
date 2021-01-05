@@ -10,12 +10,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 0708e395eff90ff5b889c05f0fd5e7a98205c5bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ca24a781f4f3ad5c210813dabbb896de35056ed6
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721895"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588707"
 ---
 # <a name="collaborative-coding-with-git"></a>Développement collaboratif avec Git
 
@@ -29,7 +29,7 @@ Pour connecter un élément de travail à une nouvelle branche, sélectionnez le
 
 ![1](./media/collaborative-coding-with-git/1-sprint-board-view.png)
 
-Dans la boîte de dialogue **Créer une branche**, spécifiez le nom de la nouvelle branche, et le dépôt et la branche Git d’Azure Repos. Le dépôt de base doit se trouver dans le même projet Azure DevOps que l’élément de travail. La branche de base peut être la branche master ou une autre branche existante. Sélectionnez **Créer une branche**. 
+Dans la boîte de dialogue **Créer une branche**, spécifiez le nom de la nouvelle branche, et le dépôt et la branche Git d’Azure Repos. Le dépôt de base doit se trouver dans le même projet Azure DevOps que l’élément de travail. La branche de base peut être n’importe quelle branche existante. Sélectionnez **Créer une branche**. 
 
 ![2](./media/collaborative-coding-with-git/2-create-a-branch.png)
 
@@ -39,7 +39,7 @@ Vous pouvez également créer une branche en utilisant la commande bash Git suiv
 git checkout -b <new branch name> <base branch name>
 
 ```
-Si vous ne spécifiez pas un \<nom de branche de base>, la nouvelle branche est basée sur `master`. 
+Si vous ne spécifiez pas de \<base branch name>, la nouvelle branche est basée sur `main`. 
 
 Pour passer à votre branche de travail, exécutez la commande suivante : 
 
@@ -47,11 +47,11 @@ Pour passer à votre branche de travail, exécutez la commande suivante :
 git checkout <working branch name>
 ```
 
-Une fois que vous avez basculé vers la branche de travail, vous pouvez commencer à développer des artefacts de code ou de documentation pour l’élément de travail. L’exécution de `git checkout master` vous ramène à la branche `master`.
+Une fois que vous avez basculé vers la branche de travail, vous pouvez commencer à développer des artefacts de code ou de documentation pour l’élément de travail. L’exécution de `git checkout main` vous ramène à la branche `main`.
 
 Une bonne pratique est de créer une branche Git pour chaque élément de travail Récit utilisateur. Ensuite, pour chaque élément de travail Tâche, vous pouvez créer une branche basée sur la branche Récit utilisateur. Organisez les branches dans une hiérarchie qui correspond à la relation Récit utilisateur-Tâche quand plusieurs personnes travaillent sur des récits utilisateur différents pour le même projet, ou sur des tâches différentes pour le même récit utilisateur. Vous pouvez réduire les conflits en faisant en sorte que chaque membre de l’équipe travaille sur une branche différente, sur du code différent ou sur d’autres artefacts lors du partage d’une branche. 
 
-Le diagramme suivant montre la stratégie de création de branches recommandée pour TDSP. Vous n’aurez peut-être pas besoin d’autant de branches, en particulier si seulement une ou deux personnes travaillent sur un projet, ou si une seule personne est chargée de l’ensemble des tâches d’un récit utilisateur. La séparation de la branche de développement de la branche master est néanmoins toujours une bonne pratique, qui peut aider à empêcher que la branche de mise en production soit interrompue par des activités de développement. Pour obtenir une description plus complète du modèle des branches Git, consultez [A Successful Git Branching Model](https://nvie.com/posts/a-successful-git-branching-model/).
+Le diagramme suivant montre la stratégie de création de branches recommandée pour TDSP. Vous n’aurez peut-être pas besoin d’autant de branches, en particulier si seulement une ou deux personnes travaillent sur un projet, ou si une seule personne est chargée de l’ensemble des tâches d’un récit utilisateur. La séparation de la branche de développement de la branche principale est néanmoins toujours une bonne pratique, qui peut aider à empêcher que la branche de mise en production soit interrompue par des activités de développement. Pour obtenir une description plus complète du modèle des branches Git, consultez [A Successful Git Branching Model](https://nvie.com/posts/a-successful-git-branching-model/).
 
 ![3](./media/collaborative-coding-with-git/3-git-branches.png)
 
@@ -98,14 +98,14 @@ Vérifiez que la demande est marquée comme **TERMINÉE**.
 
 ![11](./media/collaborative-coding-with-git/11-spring-merge-pullrequest.png)
 
-Quand vous revenez aux **Dépôts** dans le volet de navigation de gauche, vous pouvez voir que vous êtes passé à la branche master, car la branche `script` a été supprimée.
+Quand vous revenez aux **Dépôts** dans le volet de navigation de gauche, vous pouvez voir que vous êtes passé à la branche principale, car la branche `script` a été supprimée.
 
 ![12](./media/collaborative-coding-with-git/12-spring-branch-deleted.png)
 
 Vous pouvez également utiliser les commandes bash Git suivantes pour fusionner la branche de travail `script` avec la branche de base et pour supprimer la branche de travail après la fusion :
 
 ```bash
-git checkout master
+git checkout main
 git merge script
 git branch -d script
 ```

@@ -3,20 +3,18 @@ title: Intentions et entités - LUIS
 titleSuffix: Azure Cognitive Services
 description: Une intention unique représente une tâche ou une action que l’utilisateur souhaite effectuer. Il s’agit d’une finalité ou d’un objectif exprimé dans l’énoncé d’un utilisateur. Définissez un ensemble d’intentions qui correspondent aux actions que les utilisateurs souhaitent effectuer dans votre application.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
 ms.date: 10/10/2019
-ms.author: diberry
-ms.openlocfilehash: f2e4f91dbc03853d6f1a5240f693ea8ff510e8c4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: bf5ab7361c84fb787366c7c361829e52362fe427
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82101074"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95025906"
 ---
 # <a name="intents-in-your-luis-app"></a>Intentions dans votre application LUIS
 
@@ -34,7 +32,7 @@ Intentions de l’application de voyage   |   Exemples d’énoncés   |
 Toutes les applications s’accompagnent de l’intention prédéfinie « [None](#none-intent) », qui correspond à l’intention de secours.
 
 ## <a name="prebuilt-domains-provide-intents"></a>Intentions fournies par les domaines prédéfinis
-En plus des intentions que vous définissez, vous pouvez utiliser les intentions prédéfinies d’un des [domaines prédéfinis](luis-how-to-use-prebuilt-domains.md).
+En plus des intentions que vous définissez, vous pouvez utiliser les intentions prédéfinies d’un des [domaines prédéfinis](./howto-add-prebuilt-models.md).
 
 ## <a name="return-all-intents-scores"></a>Retourner le score de toutes les intentions
 Vous attribuez une seule intention à un énoncé. Lorsque LUIS reçoit un énoncé sur le point de terminaison, il retourne par défaut la meilleure intention pour cet énoncé.
@@ -61,7 +59,7 @@ Créez une intention lorsque le _but_ de l’utilisateur doit déclencher une ac
 
 ## <a name="prebuilt-domain-intents"></a>Intentions de domaine prédéfini
 
-Les [domaines prédéfinis](luis-how-to-use-prebuilt-domains.md) fournissent des intentions avec des énoncés.
+Les [domaines prédéfinis](./howto-add-prebuilt-models.md) fournissent des intentions avec des énoncés.
 
 ## <a name="none-intent"></a>Intention None
 

@@ -3,12 +3,13 @@ title: Développer des tests unitaires pour les services avec état
 description: En savoir plus sur les tests unitaires dans Azure Service Fabric pour les services avec état et sur les considérations spéciales à prendre en compte lors du développement.
 ms.topic: conceptual
 ms.date: 09/04/2018
-ms.openlocfilehash: 9c657bd8295d01a4e0fa4e44e969b33946684bfa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 287c0544daa3c44d91fd336b502c496b9b4bb266
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639834"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89011393"
 ---
 # <a name="create-unit-tests-for-stateful-services"></a>Créer des tests unitaires pour les services avec état
 Les tests unitaires sur les services avec état Service Fabric permettent d’identifier des erreurs courantes qui ne seraient pas forcément interceptées par les tests unitaires conventionnels propres à une application ou à un domaine. Lors du développement des tests unitaires pour les services avec état, vous devez tenir compte de certains points.

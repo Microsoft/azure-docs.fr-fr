@@ -9,10 +9,10 @@ ms.date: 12/03/2018
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 72ddd0b6cd6c3e12417d3698c403f89312b531f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 11/14/2020
 ms.locfileid: "67176884"
 ---
 Le FAQ relatif aux connexions de réseau virtuel à réseau virtuel s’applique aux connexions de passerelle VPN. Pour plus d’informations sur le peering de réseaux virtuels, voir [Peering de réseaux virtuels](../articles/virtual-network/virtual-network-peering-overview.md).

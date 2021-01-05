@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 08/28/2019
-ms.openlocfilehash: 3140c0de6fbe090e3d040202cd581c455f03b6d6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 20d55de7ef0f7b7f49b922409f8cb61874fae0f6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77655254"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008971"
 ---
 # <a name="connect-configuration-manager-to-azure-monitor"></a>Connexion de Configuration Manager à Azure Monitor
 Vous pouvez connecter votre environnement Microsoft Endpoint Configuration Manager à Azure Monitor pour synchroniser les données de regroupement d’appareils et faire référence à ces regroupements dans Azure Monitor et Azure Automation.  
@@ -21,7 +21,7 @@ Vous pouvez connecter votre environnement Microsoft Endpoint Configuration Manag
 Azure Monitor prend en charge Configuration Manager (Current Branch), version 1606 et ultérieure.
 
 >[!NOTE]
->La fonctionnalité de connexion de Configuration Manager à un espace de travail Log Analytics est facultative et n’est pas activée par défaut. Vous devez activer cette fonctionnalité avant de l’utiliser. Pour plus d’informations, consultez [Activation de fonctionnalités facultatives de mises à jour](https://docs.microsoft.com/configmgr/core/servers/manage/install-in-console-updates#bkmk_options).
+>La fonctionnalité de connexion de Configuration Manager à un espace de travail Log Analytics est facultative et n’est pas activée par défaut. Vous devez activer cette fonctionnalité avant de l’utiliser. Pour plus d’informations, consultez [Activation de fonctionnalités facultatives de mises à jour](/configmgr/core/servers/manage/install-in-console-updates#bkmk_options).
 
 ## <a name="configuration-overview"></a>Présentation de la configuration
 
@@ -41,7 +41,7 @@ Les étapes suivantes récapitulent les étapes de configuration de l’intégra
 
 ## <a name="grant-configuration-manager-with-permissions-to-log-analytics"></a>Accorder à Configuration Manager les autorisations d’accès à Log Analytics
 
-Dans la procédure suivante, vous attribuez le rôle *Contributeur* dans votre espace de travail Log Analytics à l’application et au principal de service AD que vous avez créés précédemment pour Configuration Manager. Si vous ne disposez pas déjà d’un espace de travail, consultez [Créer un espace de travail dans Azure Monitor](../../azure-monitor/learn/quick-create-workspace.md) avant de continuer. Cela permet à Configuration Manager de s’authentifier et de se connecter à votre espace de travail Log Analytics.  
+Dans la procédure suivante, vous attribuez le rôle *Contributeur* dans votre espace de travail Log Analytics à l’application et au principal de service AD que vous avez créés précédemment pour Configuration Manager. Si vous ne disposez pas déjà d’un espace de travail, consultez [Créer un espace de travail dans Azure Monitor](../learn/quick-create-workspace.md) avant de continuer. Cela permet à Configuration Manager de s’authentifier et de se connecter à votre espace de travail Log Analytics.  
 
 > [!NOTE]
 > Vous devez spécifier des autorisations dans l’espace de travail Log Analytics pour Configuration Manager. Sinon, vous recevez un message d’erreur quand vous utilisez l’Assistant Configuration dans Configuration Manager.
@@ -66,7 +66,7 @@ Consultez l’article [Connecter des ordinateurs Windows au service Azure Monito
 ## <a name="connect-configuration-manager-to-log-analytics-workspace"></a>Connecter Configuration Manager à l’espace de travail Log Analytics
 
 >[!NOTE]
-> Pour que vous puissiez ajouter une connexion Log Analytics, il faut que votre environnement Configuration Manager ait un [point de connexion de service](https://docs.microsoft.com/configmgr/core/servers/deploy/configure/about-the-service-connection-point) configuré pour le mode en ligne.
+> Pour que vous puissiez ajouter une connexion Log Analytics, il faut que votre environnement Configuration Manager ait un [point de connexion de service](/configmgr/core/servers/deploy/configure/about-the-service-connection-point) configuré pour le mode en ligne.
 
 > [!NOTE]
 > Vous devez connecter le site de niveau supérieur de votre hiérarchie à Azure Monitor. Si vous connectez un site principal autonome à Azure Monitor, puis que vous ajoutez un site d’administration centrale à votre environnement, vous devez supprimer la connexion et la recréer au sein de la nouvelle hiérarchie.
@@ -110,7 +110,7 @@ Consultez l’article [Connecter des ordinateurs Windows au service Azure Monito
 
 8. Dans la page **Configuration**, passez en revue les informations pour vérifier que les champs **Abonnements Azure**, **Groupe de ressources Azure** et **Espace de travail Operations Management Suite** sont préremplis, indiquant que l’application Azure AD dispose des autorisations suffisantes dans le groupe de ressources. Si les champs sont vides, cela signifie que votre application ne dispose pas des droits requis. Sélectionnez les regroupements d’appareils à collecter et à transférer à l’espace de travail, puis sélectionnez **Ajouter**.
 
-9. Passez en revue les options de la page**Confirmer les paramètres**, puis sélectionnez **Suivant** pour commencer à créer et à configurer la connexion.
+9. Passez en revue les options de la page **Confirmer les paramètres**, puis sélectionnez **Suivant** pour commencer à créer et à configurer la connexion.
 
 10. Une fois la configuration terminée, la page **Fin** s’affiche. Sélectionnez **Fermer**. 
 
@@ -135,18 +135,19 @@ Après la configuration initiale de l’importation des regroupements d’appare
 4. Sélectionnez **Groupes d’ordinateurs**, puis **SCCM**.  
 5. Sélectionnez **Importer les appartenances aux regroupements Configuration Manager**, puis cliquez sur **Enregistrer**.  
    
-    ![Groupes d’ordinateurs - Onglet SCCM](./media/collect-sccm/sccm-computer-groups01.png)
+    ![Capture d’écran des paramètres avancés des groupes d’ordinateurs pour SCCM, contenant l’option Importer les appartenances aux regroupements Configuration Manager.](./media/collect-sccm/sccm-computer-groups01.png)
 
 ## <a name="view-data-from-configuration-manager"></a>Afficher les données de Configuration Manager
 
-Après l’ajout d’une connexion Log Analytics à Configuration Manager et l’installation de l’agent sur l’ordinateur exécutant le rôle de système de site de point de connexion de service de Configuration Manager, les données de l’agent sont envoyées à l’espace de travail Log Analytics dans Azure Monitor. Dans Azure Monitor, vos regroupements Configuration Manager apparaissent sous la forme de [groupes d’ordinateurs](../../azure-monitor/platform/computer-groups.md). Vous pouvez afficher les groupes à partir de la page **Configuration Manager**, sous **Paramètres\Groupes d’ordinateurs**.
+Après l’ajout d’une connexion Log Analytics à Configuration Manager et l’installation de l’agent sur l’ordinateur exécutant le rôle de système de site de point de connexion de service de Configuration Manager, les données de l’agent sont envoyées à l’espace de travail Log Analytics dans Azure Monitor. Dans Azure Monitor, vos regroupements Configuration Manager apparaissent sous la forme de [groupes d’ordinateurs](./computer-groups.md). Vous pouvez afficher les groupes à partir de la page **Configuration Manager**, sous **Paramètres\Groupes d’ordinateurs**.
 
 Une fois les regroupements importés, vous pouvez voir combien d’ordinateurs avec des appartenances à des regroupements ont été détectés. Vous pouvez également voir le nombre de regroupements importés.
 
-![Groupes d’ordinateurs - Onglet SCCM](./media/collect-sccm/sccm-computer-groups02.png)
+![Capture d’écran des paramètres avancés des groupes d’ordinateurs pour SCCM, montrant l’option Importer les appartenances aux regroupements Configuration Manager sélectionnée.](./media/collect-sccm/sccm-computer-groups02.png)
 
-Quand vous cliquez sur l’un deux, l’éditeur de requête de journal s’ouvre, affichant tous les groupes importés ou tous les ordinateurs appartenant à chaque groupe. À l’aide de [Recherche dans les journaux](../../azure-monitor/log-query/log-query-overview.md), vous pouvez effectuer une analyse approfondie des données d’appartenance au regroupement.
+Quand vous cliquez sur l’un deux, l’éditeur de requête de journal s’ouvre, affichant tous les groupes importés ou tous les ordinateurs appartenant à chaque groupe. À l’aide de [Recherche dans les journaux](../log-query/log-query-overview.md), vous pouvez effectuer une analyse approfondie des données d’appartenance au regroupement.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Utilisez [Recherche de journal](../../azure-monitor/log-query/log-query-overview.md) pour afficher des informations détaillées sur vos données Configuration Manager.
+Utilisez [Recherche de journal](../log-query/log-query-overview.md) pour afficher des informations détaillées sur vos données Configuration Manager.
+

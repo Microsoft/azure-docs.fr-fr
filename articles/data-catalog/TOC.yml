@@ -1,10 +1,11 @@
-- name: Documentation Data Catalog
+- name: Documentation Azure Data Catalog
   href: index.yml
 - name: Vue d’ensemble
   items:
     - name: Présentation de Data Catalog
       href: overview.md
 - name: Démarrages rapides
+  expanded: true
   items:
     - name: Créer un catalogue de données Azure
       href: data-catalog-get-started.md
@@ -20,11 +21,9 @@
       href: data-catalog-dsr.md
     - name: Adoption d’Azure Data Catalog
       href: data-catalog-adopting-data-catalog.md
-    - name: Prérequis
-      href: data-catalog-prerequisites.md
     - name: Questions fréquentes (FAQ)
       href: data-catalog-frequently-asked-questions.md
-- name: Procédure
+- name: Guides pratiques
   items:
     - name: Inscription des sources de données
       href: data-catalog-how-to-register.md
@@ -69,7 +68,7 @@
     - name: Raccourcis clavier pour Azure Data Catalog
       href: data-catalog-keyboard-shortcuts.md
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-data-catalog.html'
+      href: /answers/topics/azure-data-catalog.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/data-catalog/'
     - name: Calculatrice de prix

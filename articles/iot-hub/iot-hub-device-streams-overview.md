@@ -7,12 +7,16 @@ ms.service: iot-hub
 ms.topic: conceptual
 ms.date: 01/15/2019
 ms.author: robinsh
-ms.openlocfilehash: ff738e56226f7cbb720a754573a9d8607e0e3247
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+- 'Role: Technical Support'
+ms.openlocfilehash: 9487fc562fa099d2650aabc8d15fc1449c7fcb5c
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73890466"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825184"
 ---
 # <a name="iot-hub-device-streams-preview"></a>Flux d'appareils IoT Hub (préversion)
 
@@ -76,7 +80,7 @@ Dans le processus de liaison ci-dessus :
 
 Un flux établi prend fin lorsqu'une des connexions TCP vers la passerelle est déconnectée (par le service ou l'appareil). Cela peut intervenir de manière volontaire, en fermant le WebSocket sur les programmes de l'appareil ou du service, ou de manière involontaire, en cas d'expiration du délai de connectivité réseau ou d'échec du processus. Lorsqu'une connexion de l'appareil ou du service vers le point de terminaison de streaming prend fin, l'autre connexion TCP est également interrompue (de manière forcée), et l'appareil et le service doivent recréer le flux, si besoin.
 
-## <a name="connectivity-requirements"></a>Exigences de connectivité
+## <a name="connectivity-requirements"></a>Connectivité requise
 
 Les côtés appareil et service d'un flux d'appareil doivent tous deux pouvoir établir des connexions TLS à IoT Hub et son point de terminaison de streaming. Cela nécessite une connectivité sortante sur le port 443 vers ces points de terminaison. Le nom d'hôte associé à ces points de terminaison est disponible sous l'onglet *Vue d’ensemble* de IoT Hub, comme illustré dans la figure ci-dessous :
 
@@ -99,7 +103,7 @@ La sortie est un objet JSON de tous les points de terminaison auxquels l’appar
 ```
 
 > [!NOTE]
-> Assurez-vous d’avoir installé Azure CLI version 2.0.57 ou ultérieure. Vous pouvez télécharger la dernière version à partir de la page [Installer l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+> Assurez-vous d’avoir installé Azure CLI version 2.0.57 ou ultérieure. Vous pouvez télécharger la dernière version à partir de la page [Installer l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 >
 
 ## <a name="allow-outbound-connectivity-to-the-device-streaming-endpoints"></a>Autoriser la connectivité sortante aux points de terminaison de flux d’appareils
@@ -115,28 +119,28 @@ az iot hub devicestream show --name <YourIoTHubName>
 ```
 
 > [!NOTE]
-> Assurez-vous d’avoir installé Azure CLI version 2.0.57 ou ultérieure. Vous pouvez télécharger la dernière version à partir de la page [Installer l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+> Assurez-vous d’avoir installé Azure CLI version 2.0.57 ou ultérieure. Vous pouvez télécharger la dernière version à partir de la page [Installer l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 >
 
-## <a name="troubleshoot-via-device-streams-activity-logs"></a>Détecter un problème via les journaux d’activité des flux d’appareils
+## <a name="troubleshoot-via-device-streams-resource-logs"></a>Détecter un problème via les journaux de ressources des flux d’appareils
 
-Vous pouvez configurer les journaux d’activité Azure Monitor de manière à collecter le journal d’activité des flux d’appareils dans votre hub IoT. Ce journal peut s'avérer particulièrement utile à des fins de résolution des problèmes.
+Vous pouvez configurer Azure Monitor de manière à collecter les [journaux de ressources des flux d’appareils](monitor-iot-hub-reference.md#device-streams-preview) émis par votre hub IoT. Ce journal peut s'avérer particulièrement utile à des fins de résolution des problèmes.
 
-Pour configurer les journaux d’activité Azure Monitor pour les activités de flux d’appareils de votre hub IoT, procédez comme suit :
+Pour créer un paramètre de diagnostic et envoyer les journaux de flux d’appareils pour votre hub IoT vers les journaux Azure Monitor :
 
-1. Accédez à l'onglet *Paramètres de diagnostic* dans votre hub IoT, puis cliquez sur le lien *Activer les diagnostics*.
+1. Dans le portail Azure, accédez à votre hub IoT. Dans le volet de gauche, sous **Supervision**, sélectionnez **Paramètres de diagnostic**. Sélectionnez ensuite **Ajouter un paramètre de diagnostic**.
 
-   ![« Activation des journaux de diagnostic »](./media/iot-hub-device-streams-overview/device-streams-diagnostics-settings-pane.png)
+2. Donnez un nom à votre paramètre de diagnostic et sélectionnez **DeviceStreams** dans la liste des journaux. Sélectionnez ensuite **Envoyer à Log Analytics**. Vous serez invité à sélectionner un espace de travail Log Analytics existant ou à en créer un.
 
-2. Entrez un nom pour vos paramètres de diagnostic, puis sélectionnez l'option *Envoyer à Log Analytics*. Vous serez invité à sélectionner une ressource d’espace de travail Log Analytics existante ou à en créer une. Dans la liste, cochez également *DeviceStreams*.
+    :::image type="content" source="media/iot-hub-device-streams-overview/device-streams-configure-diagnostics.png" alt-text="Activer les journaux d’activité des flux d’appareils":::
 
-    ![« Activer les journaux d’activité des flux d’appareils »](./media/iot-hub-device-streams-overview/device-streams-configure-diagnostics.png)
-
-3. Vous pouvez maintenant accéder à vos journaux de flux d’appareils sous l’onglet *Journaux d’activité* de votre portail IoT Hub. Les journaux d’activité des flux d’appareils apparaissent dans la table `AzureDiagnostics` et ont `Category=DeviceStreams`.
+3. Après avoir créé un paramètre de diagnostic pour envoyer les journaux de flux d’appareils à un espace de travail Log Analytics, vous pouvez accéder aux journaux en sélectionnant **Journaux** sous **Supervision** dans le volet de gauche de votre hub IoT sur le portail Azure. Les journaux des flux d’appareils apparaissent dans la table `AzureDiagnostics` et ont `Category=DeviceStreams`. Notez que l’affichage des journaux dans la table peut prendre plusieurs minutes.
 
    Comme indiqué ci-dessous, l’identité de l’appareil cible ainsi que le résultat de l’opération sont également disponibles dans les journaux d’activité.
 
    ![« Accéder aux journaux d’activité des flux d’appareils »](./media/iot-hub-device-streams-overview/device-streams-view-logs.png)
+
+Pour en savoir plus sur d’Azure Monitor avec IoT Hub, consultez [Superviser avec IoT Hub](monitor-iot-hub.md). Pour plus d’informations sur les journaux de ressources, métriques et tables disponibles pour IoT Hub, consultez [Informations de référence sur l’analyse des données Azure IoT Hub](monitor-iot-hub-reference.md).
 
 ## <a name="regional-availability"></a>Disponibilité régionale
 
@@ -152,7 +156,7 @@ Deux côtés de chaque flux (côté appareil et côté service) utilisent le SDK
 
 ## <a name="iot-hub-device-stream-samples"></a>Exemples de flux d’appareils IoT Hub
 
-Deux [exemples de démarrage rapide](/azure/iot-hub) sont disponibles sur la page IoT Hub. Ils illustrent l’utilisation des flux d’appareils par les applications.
+Deux [exemples de démarrage rapide](./index.yml) sont disponibles sur la page IoT Hub. Ils illustrent l’utilisation des flux d’appareils par les applications.
 
 * L’exemple *écho* illustre l’utilisation programmatique des flux d’appareils (en appelant directement les API du SDK).
 

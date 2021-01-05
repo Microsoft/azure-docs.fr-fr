@@ -9,23 +9,23 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 03/26/2018
 ms.author: alkohli
-ms.openlocfilehash: eda134257edb851eea076459b44e02fc59028f46
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3d44fada1eddf2d3f80bec085d8a5bf751197eb1
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60363330"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968806"
 ---
 # <a name="configure-multipath-io-for-your-storsimple-device"></a>Configuration de Multipath I/O pour votre appareil StorSimple
 
 Ce didacticiel décrit les étapes que vous devez suivre pour installer et utiliser la fonctionnalité MPIO (Multipath I/O) sur un hôte exécutant Windows Server 2012 R2 et connecté à un appareil physique StorSimple. Les instructions de cet article s’appliquent uniquement aux appareils physiques de la gamme StorSimple 8000. La fonctionnalité MPIO n’est actuellement pas prise en charge sur StorSimple Cloud Appliance.
 
-Microsoft a créé la prise en charge de la fonctionnalité MPIO (Multipath I/O) dans Windows Server pour vous aider à créer des configurations réseau iSCSI hautement disponibles et tolérantes aux pannes. MPIO utilise les composants de chemin d’accès physique redondants (adaptateurs, câbles et commutateurs) pour créer des chemins d’accès logiques entre le serveur et l’appareil de stockage. En cas de défaillance de composant à l’origine de l’échec du chemin d’accès logique, la logique de gestion multivoie utilise un autre chemin pour l’E/S afin que les applications puissent toujours accéder à leurs données. De plus, selon votre configuration, MPIO peut également améliorer les performances en rééquilibrant la charge sur tous ces chemins d’accès. Pour plus d’informations, consultez [Vue d’ensemble de MPIO](https://technet.microsoft.com/library/cc725907.aspx "Vue d’ensemble et fonctionnalités de MPIO").
+Microsoft a créé la prise en charge de la fonctionnalité MPIO (Multipath I/O) dans Windows Server pour vous aider à créer des configurations réseau iSCSI hautement disponibles et tolérantes aux pannes. MPIO utilise les composants de chemin d’accès physique redondants (adaptateurs, câbles et commutateurs) pour créer des chemins d’accès logiques entre le serveur et l’appareil de stockage. En cas de défaillance de composant à l’origine de l’échec du chemin d’accès logique, la logique de gestion multivoie utilise un autre chemin pour l’E/S afin que les applications puissent toujours accéder à leurs données. De plus, selon votre configuration, MPIO peut également améliorer les performances en rééquilibrant la charge sur tous ces chemins d’accès. Pour plus d’informations, consultez [Vue d’ensemble de MPIO](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725907(v=ws.11) "Vue d’ensemble et fonctionnalités de MPIO").
 
 Pour la haute disponibilité de votre solution StorSimple, MPIO doit être configuré sur votre appareil StorSimple. Lorsque MPIO est installé sur vos serveurs hôtes exécutant Windows Server 2012 R2, les serveurs peuvent tolérer une défaillance de lien, de réseau ou d’interface.
 
@@ -191,4 +191,3 @@ La procédure suivante décrit comment ajouter des sessions lorsqu’un appareil
 ## <a name="next-steps"></a>Étapes suivantes
 
 En savoir plus sur [l’utilisation du service StorSimple Device Manager pour modifier la configuration de votre appareil StorSimple](storsimple-8000-modify-device-config.md).
-

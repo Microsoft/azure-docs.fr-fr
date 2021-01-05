@@ -5,15 +5,15 @@ description: Apprenez à importer et exporter un fichier de zone DNS vers Azure 
 services: dns
 author: rohinkoul
 ms.service: dns
-ms.date: 4/3/2019
+ms.date: 7/30/2020
 ms.author: rohink
-ms.topic: conceptual
-ms.openlocfilehash: a5c2fdde564eba2d95e7f14f4d47e4d381739d5d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: e2b998432f6c4417da0242d86347ed43acb5071a
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79365166"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968228"
 ---
 # <a name="import-and-export-a-dns-zone-file-using-the-azure-cli"></a>Importer et exporter un fichier de zone DNS en utilisant l’interface CLI Azure
 
@@ -82,7 +82,7 @@ Pour importer un fichier de zone pour la zone **contoso.com**.
 1. Si ce n’est déjà fait, vous devez créer un groupe de ressources Azure Resource Manager.
 
     ```azurecli
-    az group create --group myresourcegroup -l westeurope
+    az group create --resource-group myresourcegroup -l westeurope
     ```
 
 2. Pour importer la zone **contoso.com** à partir du fichier **contoso.com.txt** dans une nouvelle zone DNS du groupe de ressources **myresourcegroup**, vous exécutez la commande `az network dns zone import`.<BR>Cette commande charge le fichier de zone et l’analyse. Cette commande exécute une série de commandes sur le service Azure DNS, afin de créer la zone et tous les jeux d’enregistrements associés. Elle rend compte de la progression dans la fenêtre de console et signale les éventuels avertissements ou erreurs. Étant donné que les jeux d’enregistrements sont créés en série, l’importation d’un fichier de zone volumineux peut prendre quelques minutes.
@@ -179,6 +179,6 @@ az network dns zone export -g myresourcegroup -n contoso.com -f contoso.com.txt
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez comment [gérer des jeux d’enregistrements et des enregistrements](dns-getstarted-create-recordset-cli.md) dans votre zone DNS.
+* Découvrez comment [gérer des jeux d’enregistrements et des enregistrements](./dns-getstarted-cli.md) dans votre zone DNS.
 
 * Découvrez comment [déléguer votre domaine à Azure DNS](dns-domain-delegation.md).

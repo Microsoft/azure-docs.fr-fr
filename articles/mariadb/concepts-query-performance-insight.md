@@ -1,17 +1,17 @@
 ---
 title: Query Performance Insight - Azure Database for MariaDB
 description: Cet article décrit la fonctionnalité Query Performance Insight dans Azure Database for MariaDB
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: 88777ee44551ed6abdb7a6c7c909d6bf55db48c0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b643ba3305736480e06d7c10d594b2271839038f
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79527842"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536330"
 ---
 # <a name="query-performance-insight-in-azure-database-for-mariadb"></a>Query Performance Insight dans Azure Database for MariaDB
 

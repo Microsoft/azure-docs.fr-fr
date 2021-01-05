@@ -4,14 +4,14 @@ description: Découvrez comment supprimer type de nœud d’un cluster Service F
 author: inputoutputcode
 manager: sridmad
 ms.topic: conceptual
-ms.date: 02/21/2020
+ms.date: 08/11/2020
 ms.author: chrpap
-ms.openlocfilehash: 330b455a61c45ccdb59e5aef8162fd1b04859a00
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ede999bee9ce1a4a9dd10652a2c52a840d5b24be
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78969401"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88163575"
 ---
 # <a name="how-to-remove-a-service-fabric-node-type"></a>Supprimer un type de nœud Service Fabric
 Cet article décrit comment mettre à l’échelle un cluster Azure Service Fabric en supprimant un type de nœud existant d’un cluster. Un cluster Service Fabric est un groupe de machines virtuelles ou physiques connectées au réseau, sur lequel vos microservices sont déployés et gérés. Une machine ou une machine virtuelle faisant partie d’un cluster est appelée un nœud. Les groupes de machines virtuelles identiques constituent une ressource de calcul Azure que vous utilisez pour déployer et gérer une collection de machines virtuelles en tant que groupe. Chaque type de nœud défini dans un cluster Azure est [ configuré comme un groupe identique distinct](service-fabric-cluster-nodetypes.md). Chaque type de nœud peut alors faire l’objet d’une gestion séparée. Après avoir créé un cluster Service Fabric, vous pouvez faire évoluer un cluster horizontalement en supprimant un type de nœud (groupe de machines virtuelles identiques) et tous ses nœuds.  Une mise à l’échelle peut s’effectuer à tout moment, même lorsque des charges de travail sont en cours d’exécution sur le cluster.  Lorsque vous mettez vos nœuds à l’échelle, vos applications sont automatiquement mises à l’échelle.
@@ -20,7 +20,7 @@ Cet article décrit comment mettre à l’échelle un cluster Azure Service Fabr
 > Nous vous déconseillons d'utiliser cette approche trop fréquemment pour supprimer un type de nœud d'un cluster de production. Il s’agit d’une commande dangereuse, car elle supprime le groupe de machines virtuelles identiques derrière le type de nœud. 
 
 ## <a name="durability-characteristics"></a>Caractéristiques de durabilité
-La sécurité est prioritaire par rapport à la vitesse lors de l’utilisation de Remove-AzServiceFabricNodeType. Le type de nœud doit avoir le [niveau de durabilité](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) Silver ou Gold, car :
+La sécurité est prioritaire par rapport à la vitesse lors de l’utilisation de Remove-AzServiceFabricNodeType. Le type de nœud doit avoir le [niveau de durabilité](./service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster) Silver ou Gold, car :
 - Bronze ne vous accorde aucune garantie sur l’enregistrement des informations d’état.
 - Les niveaux de durabilité Silver et Gold interceptent toutes les modifications du groupe de machines virtuelles identiques.
 - Gold vous permet également de contrôler les mises à jour Azure sous le groupe de machines virtuelles identiques.
@@ -59,7 +59,7 @@ Lorsque vous supprimez un type de nœud de niveau Bronze, tous les nœuds dans l
     - Le cluster est sain.
     - Aucun des nœuds appartenant au type de nœud n'est marqué comme nœud initial.
 
-4. Désactivez les données relatives au type de nœud.
+4. Désactivez chaque nœud dans le type de nœud.
 
     Connectez-vous au cluster à l'aide de PowerShell, puis exécutez l'étape suivante.
     
@@ -98,8 +98,20 @@ Lorsque vous supprimez un type de nœud de niveau Bronze, tous les nœuds dans l
     ```
     
     Attendez que tous les nœuds correspondant au type de nœud soient marqués comme inactifs.
+
+6. Libérer des nœuds dans le groupe de machines virtuelles identiques d’origine
     
-6. Supprimez les données relatives au type de nœud.
+    Connectez-vous à l’abonnement Azure dans lequel le groupe identique a été déployé et supprimez le groupe de machines virtuelles identiques. 
+
+    ```powershell
+    $scaleSetName="myscaleset"
+    $scaleSetResourceType="Microsoft.Compute/virtualMachineScaleSets"
+    
+    Remove-AzResource -ResourceName $scaleSetName -ResourceType $scaleSetResourceType -ResourceGroupName $resourceGroupName -Force
+    ```
+
+    
+7. Supprimez les données relatives au type de nœud.
 
     Connectez-vous au cluster à l'aide de PowerShell, puis exécutez l'étape suivante.
     
@@ -117,7 +129,7 @@ Lorsque vous supprimez un type de nœud de niveau Bronze, tous les nœuds dans l
 
     Attendez que tous les nœuds soient supprimés du cluster. Les nœuds ne doivent pas être affichés dans SFX.
 
-7. Supprimez le type de nœud de la section Service Fabric.
+8. Supprimez le type de nœud de la section Service Fabric.
 
     - Localisez le modèle Azure Resource Manager utilisé pour le déploiement.
     - Recherchez la section relative au type de nœud dans la section Service Fabric.
@@ -165,7 +177,7 @@ Lorsque vous supprimez un type de nœud de niveau Bronze, tous les nœuds dans l
     Puis validez ce qui suit :
     - La ressource Service Fabric est prête sur le portail.
 
-8. Supprimez toutes les références aux ressources relatives au type de nœud.
+9. Supprimez toutes les références aux ressources relatives au type de nœud à partir du modèle Resource Manager.
 
     - Localisez le modèle Azure Resource Manager utilisé pour le déploiement.
     - Supprimez le groupe de machines virtuelles identiques et les autres ressources associées au type de nœud à partir du modèle.
@@ -173,8 +185,15 @@ Lorsque vous supprimez un type de nœud de niveau Bronze, tous les nœuds dans l
 
     Ensuite :
     - Attendez la fin du déploiement.
+    
+10. Supprimez les ressources associées au type de nœud qui ne sont plus utilisées. Exemple de Load Balancer, et IP publique. 
+
+    - Pour supprimer ces ressources, vous pouvez utiliser la même commande PowerShell que celle utilisée à l’étape 6, en spécifiant le type de ressource spécifique et la version de l’API. 
+
+> [!Note]
+> Cette étape est facultative si le Load Balancer et l’adresse IP réutilisés entre les types de nœuds sont les mêmes.
 
 ## <a name="next-steps"></a>Étapes suivantes
-- En savoir plus sur les [caractéristiques de durabilité](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) du cluster.
+- En savoir plus sur les [caractéristiques de durabilité](./service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster) du cluster.
 - En savoir plus les [types de nœud et les groupe de machines virtuelles identiques](service-fabric-cluster-nodetypes.md).
 - En savoir plus sur la [mise à l’échelle du cluster Service Fabric](service-fabric-cluster-scaling.md).

@@ -1,18 +1,17 @@
 ---
 title: Évaluer un grand nombre de machines virtuelles Hyper-V pour la migration vers Azure avec Azure Migrate | Microsoft Docs
 description: Décrit comment évaluer de grands nombres de machines virtuelles Hyper-V pour les migrer vers Azure à l’aide du service Azure Migrate.
-author: rayne-wiselman
-manager: carmonm
-ms.service: azure-migrate
-ms.topic: conceptual
+author: rashi-ms
+ms.author: rajosh
+ms.manager: abhemraj
+ms.topic: how-to
 ms.date: 07/10/2019
-ms.author: raynew
-ms.openlocfilehash: c1ae3a9ed8a775161aaf85ab2c91b1e43113d2e2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 92c275ee3f8e00e71b80e448c9adb94f0b6d21dc
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70279436"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753720"
 ---
 # <a name="assess-large-numbers-of-hyper-v-vms-for-migration-to-azure"></a>Évaluer de grands nombres de machines virtuelles Hyper-V pour les migrer vers Azure
 
@@ -30,7 +29,7 @@ Dans cet article, vous apprendrez comment :
 
 
 > [!NOTE]
-> Si vous voulez tester une preuve de concept afin d’évaluer quelques machines virtuelles avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](tutorial-prepare-hyper-v.md)
+> Si vous voulez tester une preuve de concept afin d’évaluer quelques machines virtuelles avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](./tutorial-discover-hyper-v.md)
 
 ## <a name="plan-for-assessment"></a>Planifier l’évaluation
 
@@ -66,7 +65,7 @@ Préparez Azure et Hyper-V pour l’évaluation des serveurs.
 2. Configurer des autorisations pour permettre à votre compte Azure d’interagir avec Azure Migrate
 3. Préparer les hôtes Hyper-V et les machines virtuelles
 
-Suivez les instructions de [ce tutoriel](tutorial-prepare-hyper-v.md) pour configurer ces paramètres.
+Suivez les instructions de [ce tutoriel](./tutorial-discover-hyper-v.md) pour configurer ces paramètres.
 
 ## <a name="create-a-project"></a>Création d’un projet
 
@@ -75,7 +74,7 @@ Conformément à vos exigences de planification, procédez comme suit :
 1. Créez un projet Azure Migrate.
 2. Ajoutez l’outil Évaluation de serveur Azure Migrate aux projets.
 
-[En savoir plus](how-to-add-tool-first-time.md)
+[En savoir plus](./create-manage-projects.md)
 
 ## <a name="create-and-review-an-assessment"></a>Créer et examiner une évaluation
 

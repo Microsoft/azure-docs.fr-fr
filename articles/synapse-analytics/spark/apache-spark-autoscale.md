@@ -1,5 +1,5 @@
 ---
-title: Mettre automatiquement à l’échelle des instances Apache Spark d’Azure Synapse
+title: Mettre automatiquement à l’échelle des instances Apache Spark
 description: Utilisez la fonctionnalité de mise à l’échelle automatique d’Azure Synapse pour mettre automatiquement à l’échelle des instances Apache Spark
 author: euangMS
 ms.author: euang
@@ -7,13 +7,14 @@ ms.reviewer: euang
 services: synapse-analytics
 ms.service: synapse-analytics
 ms.topic: conceptual
+ms.subservice: spark
 ms.date: 03/31/2020
-ms.openlocfilehash: be7ac79b9429d2fc72c3b6bc2b6d92666b089dfb
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: f34bcfa8b743fbee6ee3b78fc1a042d1df0abfde
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83591962"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93313631"
 ---
 # <a name="automatically-scale-azure-synapse-analytics-apache-spark-pools"></a>Mettre automatiquement à l’échelle des pools Apache Spark d’Azure Synapse Analytics
 
@@ -48,11 +49,11 @@ Pour un scale-down, selon le nombre d’exécuteurs, de maîtres d’application
 
 ## <a name="get-started"></a>Bien démarrer
 
-### <a name="create-a-spark-pool-with-autoscaling"></a>Créer un pool Spark avec mise à l’échelle automatique
+### <a name="create-a-serverless-apache-spark-pool-with-autoscaling"></a>Créer un pool Apache Spark serverless avec mise à l’échelle automatique
 
 Pour activer la fonctionnalité de mise à l’échelle automatique, procédez comme suit dans le cadre du processus normal de création de pool :
 
-1. Sous l’onglet **De base**, cochez la case **Activer la mise à l’échelle automatique**.
+1. Sous l’onglet **De base** , cochez la case **Activer la mise à l’échelle automatique**.
 1. Entrez les valeurs souhaitées pour les propriétés suivantes :  
 
     * Nombre **Minimum** de nœuds.
@@ -66,7 +67,7 @@ Le nombre initial de nœuds est le nombre minimal. Cette valeur définit la tail
 
 Une opération de mise à l’échelle peut prendre entre 1 et 5 minutes.
 
-### <a name="preparation-for-scaling-down"></a>Préparation pour la descente en puissance
+### <a name="prepare-for-scaling-down"></a>Préparation pour la mise  à l’échelle vers le bas
 
 Pendant la mise à l’échelle vers le bas des instances, la mise à l’échelle automatique place les nœuds dans un état de désaffectation afin qu’aucun nouvel exécuteur ne puisse être lancé dessus.
 
@@ -74,4 +75,4 @@ Les travaux en cours d’exécution continueront jusqu’à leur conclusion. Les
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Démarrage rapide pour configurer un nouveau pool Spark [Créer un pool Spark](..\quickstart-create-apache-spark-pool.md)
+Démarrage rapide pour configurer un nouveau pool Spark [Créer un pool Spark](../quickstart-create-apache-spark-pool-portal.md)

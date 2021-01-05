@@ -7,12 +7,12 @@ ms.service: web-application-firewall
 ms.topic: article
 ms.date: 05/05/2020
 ms.author: victorh
-ms.openlocfilehash: 3bc71e10167b21b65616dd20f8edb9a1d902527e
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: 1fbe930780ff026be748bc42104f821ee9e5c443
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83798348"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92785100"
 ---
 # <a name="frequently-asked-questions-for-azure-web-application-firewall-on-application-gateway"></a>Forum aux questions concernant le pare-feu d’applications web Azure sur Application Gateway
 
@@ -58,6 +58,9 @@ Pour plus d’informations, consultez [Les 10 principales vulnérabilités iden
 
 Oui. Vous pouvez activer le service de protection DDoS sur le réseau virtuel sur lequel la passerelle d’application est déployée. Ainsi, le service Azure DDoS Protection protège aussi l’adresse IP virtuelle de la passerelle d’application.
 
+### <a name="does-waf-store-customer-data"></a>Le pare-feu d'applications web stocke-t-il les données client ?
+
+Non, le pare-feu d'applications web ne stocke pas les données client.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

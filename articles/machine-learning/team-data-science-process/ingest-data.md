@@ -11,16 +11,16 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: f8eab59d810fb825dbebf80d01d8efd2dd0a9841
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 46e911ad6bdf5a478d46e425f8700740ece56c6e
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720535"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452662"
 ---
 # <a name="load-data-into-storage-environments-for-analytics"></a>Charger des données dans des environnements de stockage à des fins d’analyse
 
-Le processus TDSP (Team Data Science Process) exige que les données soient ingérées ou chargées de la manière la plus appropriée à chaque étape. Les destinations de données peuvent inclure le Stockage Blob Azure, les bases de données SQL Azure, SQL Server sur une machine virtuelle Azure, HDInsight (Hadoop), Synapse Analytics et Azure Machine Learning. 
+Le processus TDSP (Team Data Science Process) exige que les données soient ingérées ou chargées de la manière la plus appropriée à chaque étape. Les destinations de données peuvent inclure le Stockage Blob Azure, les bases de données SQL Azure, SQL Server sur une machine virtuelle Azure, HDInsight (Hadoop), Azure Synapse Analytics et Azure Machine Learning. 
 
 Les articles suivantes expliquent comment recevoir les données dans les environnements cibles où les données sont stockées et traitées.
 

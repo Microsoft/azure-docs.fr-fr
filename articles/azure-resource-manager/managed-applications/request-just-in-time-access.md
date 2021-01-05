@@ -3,18 +3,18 @@ title: Demander l’accès juste-à-temps
 description: Décrit comment les éditeurs d’applications managées Azure demander l'accès juste à temps à une application managée.
 author: MSEvanhi
 ms.topic: conceptual
-ms.date: 06/03/2019
+ms.date: 09/25/2020
 ms.author: evanhi
-ms.openlocfilehash: 7f475774828bcaecd471e13de994b156041323ed
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f839eb04e0c036b5059e35fac16d9c702646cbd7
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649481"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96435686"
 ---
 # <a name="enable-and-request-just-in-time-access-for-azure-managed-applications"></a>Activer et demander l’accès juste à temps pour les applications managées Azure
 
-Les consommateurs de votre application managée être réticents à vous accorder un accès permanent au groupe de ressources managé. En tant qu'éditeur d'une application managée, vous préférerez peut-être que les consommateurs sachent précisément quand vous avez besoin d'accéder aux ressources managées. Pour renforcer le contrôle des consommateurs sur l’accès aux ressources managées, les applications managées Azure proposent une fonction appelée accès juste-à-temps (JIT), qui est actuellement en cours préversion.
+Les consommateurs de votre application managée être réticents à vous accorder un accès permanent au groupe de ressources managé. En tant qu'éditeur d'une application managée, vous préférerez peut-être que les consommateurs sachent précisément quand vous avez besoin d'accéder aux ressources managées. Pour donner aux consommateurs un plus grand contrôle sur l'octroi de l'accès aux ressources managées, le service Applications managées Azure propose une fonctionnalité appelée accès juste-à-temps (JIT). Actuellement, cette fonctionnalité est uniquement disponible en tant que version préliminaire.
 
 L'accès JIT vous permet de demander un accès élevé aux ressources d'une application managée à des fins de résolution des problèmes ou de maintenance. Vous bénéficiez toujours d'un accès en lecture seule aux ressources, mais pour une durée spécifique, votre accès est étendu.
 
@@ -34,9 +34,7 @@ Le présent article porte sur les mesures prises par les éditeurs pour permettr
 
 ## <a name="add-jit-access-step-to-ui"></a>Ajouter l’étape d’accès JIT à l’interface utilisateur
 
-Votre fichier CreateUiDefinition.json est identique au fichier IU que vous créez à des fins d'accès permanent, mais vous devez inclure une étape qui permet aux consommateurs d’activer l’accès JIT. Pour plus d’informations sur la publication de votre première offre d'application gérée sur la Place de marché Azure, consultez [Applications gérées Azure sur la Place de marché](publish-marketplace-app.md).
-
-Pour prendre en charge la fonctionnalité JIT pour votre offre, ajoutez le contenu suivant à votre fichier CreateUiDefinition.json :
+Dans votre fichier CreateUiDefinition.json, incluez une étape qui permet aux consommateurs d'activer l'accès JIT. Pour prendre en charge la fonctionnalité JIT dans votre offre, ajoutez le contenu suivant à votre fichier CreateUiDefinition.json.
 
 Dans « steps » :
 
@@ -58,7 +56,7 @@ Dans « steps » :
     ]
 }
 ```
- 
+
 Dans « outputs » :
 
 ```json
@@ -70,19 +68,21 @@ Dans « outputs » :
 
 ## <a name="enable-jit-access"></a>Activer l’accès JIT
 
-Lorsque vous définissez votre offre dans la Place de marché, assurez-vous d'activer l’accès JIT.
+Lors de la création de votre offre dans l'Espace partenaires, veillez à activer l'accès JIT.
 
-1. Connectez-vous au [Portail de publication Cloud Partner](https://cloudpartner.azure.com).
+1. Connectez-vous au portail Place de marché commerciale de l'[Espace partenaires](https://partner.microsoft.com/dashboard/commercial-marketplace/overview).
 
-1. Fournissez les valeurs pour publier votre application managée dans la Place de marché. Sélectionnez **Oui** pour **Activer l’accès JIT ?** .
+1. Pour créer une application managée, suivez la procédure décrite dans [Créer une offre d'application Azure](../../marketplace/create-new-azure-apps-offer.md).
 
-   ![Activer l’accès juste-à-temps](./media/request-just-in-time-access/marketplace-enable.png)
+1. Sur la page **Configuration technique**, cochez la case **Activer l'accès juste à temps (JIT)** .
 
-Vous avez ajouté une étape de configuration JIT à votre interface utilisateur et activé l’accès JIT dans l’offre de la Place de marché. Lorsque les consommateurs déploient votre application managée, ils peuvent [activer l’accès JIT pour leur instance](approve-just-in-time-access.md#enable-during-deployment).
+   :::image type="content" source="./media/request-just-in-time-access/enable-just-in-time-access.png" alt-text="Activer l’accès juste-à-temps":::
+
+Vous avez ajouté une étape de configuration JIT à votre interface utilisateur et activé l'accès JIT dans l'offre de la Place de marché commerciale. Lorsque les consommateurs déploient votre application managée, ils peuvent [activer l’accès JIT pour leur instance](approve-just-in-time-access.md#enable-during-deployment).
 
 ## <a name="request-access"></a>Demander l'accès
 
-S'il vous faut accéder aux ressources managées du consommateur, vous envoyez une requête portant sur un rôle, une heure et une durée spécifiques. Le consommateur doit ensuite approuver votre requête.
+Lorsque vous avez besoin d'accéder aux ressources managées du consommateur, vous envoyez une requête portant sur un rôle, une heure et une durée spécifiques. Le consommateur doit ensuite approuver votre requête.
 
 Pour envoyer une requête d’accès JIT :
 

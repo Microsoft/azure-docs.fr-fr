@@ -5,20 +5,21 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 11/19/2019
+ms.date: 05/12/2020
 ms.author: victorh
-ms.openlocfilehash: c291dbe9c1eb37e68174a2353e296a376c7d0896
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e51cc8905a7b4a88bb7f7dabaf24bb30159ff86c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74168674"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83655070"
 ---
 # <a name="azure-firewall-threat-intelligence-based-filtering"></a>Fonctionnalité de filtrage basé sur la Threat Intelligence du Pare-feu Azure
 
-Le filtrage basé sur Threat Intelligence peut être activé pour votre pare-feu pour donner l’alerte et rejeter le trafic depuis ou vers des adresses IP et des domaines malveillants connus. Ces adresses IP et domaines proviennent du flux Microsoft Threat Intelligence. [Intelligent Security Graph](https://www.microsoft.com/en-us/security/operations/intelligence) alimente Microsoft Threat Intelligence et est utilisé par de nombreux services, dont Azure Security Center.
+Le filtrage basé sur Threat Intelligence peut être activé pour votre pare-feu pour donner l’alerte et rejeter le trafic depuis ou vers des adresses IP et des domaines malveillants connus. Ces adresses IP et domaines proviennent du flux Microsoft Threat Intelligence. [Intelligent Security Graph](https://www.microsoft.com/security/operations/intelligence) alimente Microsoft Threat Intelligence et est utilisé par de nombreux services, dont Azure Security Center.<br>
+<br>
 
-![Fonctionnalité de Threat Intelligence du Pare-feu](media/threat-intel/firewall-threat.png)
+:::image type="content" source="media/threat-intel/firewall-threat.png" alt-text="Renseignement sur les menaces du pare-feu" border="false":::
 
 Si vous avez activé le filtrage basé sur la Threat Intelligence, les règles associées sont traitées avant les règles NAT, les règles de réseau ou les règles d’application.
 
@@ -26,7 +27,7 @@ Vous pouvez vous contenter d'enregistrer une alerte lorsqu'une règle est décle
 
 Par défaut, le filtrage basé sur la Threat Intelligence est activé en mode d'alerte. Vous ne pouvez pas désactiver cette fonctionnalité ni changer de mode tant que l'interface du portail n'est pas disponible dans votre région.
 
-![Interface du portail de filtrage basé sur la Threat Intelligence](media/threat-intel/threat-intel-ui.png)
+:::image type="content" source="media/threat-intel/threat-intel-ui.png" alt-text="Renseignement sur les menaces du pare-feu":::
 
 ## <a name="logs"></a>Journaux d’activité
 

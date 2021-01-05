@@ -1,18 +1,18 @@
 ---
 title: Fichier include
 description: fichier
-author: anbene
-ms.author: mingshen
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
-ms.topic: conceptual
+ms.topic: include
+author: mingshen-ms
+ms.author: mingshen
 ms.date: 05/19/2020
-ms.openlocfilehash: d11589e34ac24cafe57d38d0eef25a1b44576b7c
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: b556f23abc54d607a168af256cefd4ba68c4d9d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83698405"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87317714"
 ---
 Pour que la description de votre offre soit plus accrocheuse, utilisez l’éditeur de texte enrichi pour appliquer une mise en forme.
 

@@ -5,14 +5,17 @@ ms.date: 12/10/2019
 ms.topic: conceptual
 description: Découvrez comment configurer Azure Dev Spaces pour utiliser un contrôleur d’entrée traefik personnalisé et configurer HTTPS à l’aide de ce contrôleur d’entrée
 keywords: Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, Helm, service Mesh, routage du service Mesh, kubectl, k8s
-ms.openlocfilehash: fd11b3bbd3f90b75203084ff0753c1485d57a35b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js, devx-track-azurecli
+ms.openlocfilehash: d19dc409f4d57a114b5937e6ce3718315e550a08
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80155427"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96763585"
 ---
 # <a name="use-a-custom-traefik-ingress-controller-and-configure-https"></a>Utiliser un contrôleur d’entrée traefik personnalisé et configurer HTTPS
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 Cet article explique comment configurer Azure Dev Spaces pour utiliser un contrôleur d’entrée traefik personnalisé. Cet article vous montre également comment configurer ce contrôleur d’entrée personnalisé pour utiliser le protocole HTTPS.
 
@@ -44,13 +47,13 @@ aks-nodepool1-12345678-vmssfedcba   Ready    agent   13m    v1.14.1
 Ajoutez le [référentiel Helm stable officiel][helm-stable-repo], qui contient le graphique Helm du contrôleur d’entrée traefik.
 
 ```console
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add stable https://charts.helm.sh/stable
 ```
 
 Créez un espace de noms Kubernetes pour le contrôleur d’entrée traefik et installez-le à l’aide de `helm`.
 
 > [!NOTE]
-> Si RBAC n’est pas activé pour votre cluster AKS, supprimez le paramètre *--set rbac.enabled=true*.
+> Si Kubernetes RBAC n’est pas activé pour votre cluster AKS, supprimez le paramètre *--set rbac.enabled=true*.
 
 ```console
 kubectl create ns traefik
@@ -220,7 +223,7 @@ kubectl apply -f letsencrypt-clusterissuer.yaml --namespace traefik
 Supprimez les éléments *ClusterRole* et *ClusterRoleBinding* *traefik* précédents, puis mettez à niveau traefik pour qu’il utilise HTTPS à l’aide de `helm`.
 
 > [!NOTE]
-> Si RBAC n’est pas activé pour votre cluster AKS, supprimez le paramètre *--set rbac.enabled=true*.
+> Si Kubernetes RBAC n’est pas activé pour votre cluster AKS, supprimez le paramètre *--set rbac.enabled=true*.
 
 ```console
 kubectl delete ClusterRole traefik
@@ -362,21 +365,18 @@ Accédez à l’exemple d’application dans l’espace enfant *dev/azureuser1* 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment Azure Dev Spaces vous aide à développer des applications plus complexes sur plusieurs conteneurs, et comment vous pouvez simplifier le développement collaboratif en utilisant différentes versions ou branches de votre code dans différents espaces.
+Apprenez-en davantage plus sur le fonctionnement d’Azure Dev Spaces.
 
 > [!div class="nextstepaction"]
-> [Développement en équipe dans Azure Dev Spaces][team-development-qs]
+> [Fonctionnement d’Azure Dev Spaces](../how-dev-spaces-works.md)
 
 
 [az-cli]: /cli/azure/install-azure-cli?view=azure-cli-latest
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [az-network-dns-record-set-a-add-record]: /cli/azure/network/dns/record-set/a?view=azure-cli-latest#az-network-dns-record-set-a-add-record
 [az-network-dns-record-set-a-remove-record]: /cli/azure/network/dns/record-set/a?view=azure-cli-latest#az-network-dns-record-set-a-remove-record
-[custom-domain]: ../../app-service/manage-custom-dns-buy-domain.md#buy-the-domain
+[custom-domain]: ../../app-service/manage-custom-dns-buy-domain.md#buy-an-app-service-domain
 [dns-zone]: ../../dns/dns-getstarted-cli.md
-[qs-cli]: ../quickstart-cli.md
-[team-development-qs]: ../quickstart-team-development.md
-
 [azds-yaml]: https://github.com/Azure/dev-spaces/blob/master/samples/BikeSharingApp/BikeSharingWeb/azds.yaml
 [azure-account-create]: https://azure.microsoft.com/free
 [cert-manager]: https://cert-manager.io/

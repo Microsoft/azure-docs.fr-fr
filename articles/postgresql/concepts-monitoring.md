@@ -1,23 +1,23 @@
 ---
 title: Superviser et optimiser - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit les fonctionnalités de supervision et d’optimisation disponibles dans Azure Database pour PostgreSQL - Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: lfittl-msft
+ms.author: lufittl
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 06/19/2019
-ms.openlocfilehash: 99c8d4e7e5263b8a7caf30833a899976d3cc829b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/21/2020
+ms.openlocfilehash: 4d4287b877f5327b7fd485358b26148686b9515b
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133698"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92487923"
 ---
 # <a name="monitor-and-tune-azure-database-for-postgresql---single-server"></a>Superviser et optimiser Azure Database pour PostgreSQL (serveur unique)
 La surveillance des données relatives à vos serveurs vous aide à résoudre les problèmes et à optimiser votre charge de travail. Azure Database pour PostgreSQL propose différentes options de supervision pour fournir un insight sur le comportement de votre serveur.
 
 ## <a name="metrics"></a>Mesures
-Azure Database pour PostgreSQL propose diverses métriques qui donnent des informations sur le comportement des ressources prenant en charge le serveur MySQL. Chaque métrique est émise selon une fréquence d’une minute et est conservée jusqu’à 30 jours dans l’historique. Vous pouvez configurer des alertes basées sur les métriques. Pour des instructions étape par étape, consultez [Configurer des alertes](howto-alert-on-metric.md). Les autres tâches incluent la configuration d’actions automatisées, l’exécution d’analyses avancées et l’archivage de l’historique. Pour plus d’informations, consultez [Vue d’ensemble des mesures dans Microsoft Azure](../monitoring-and-diagnostics/monitoring-overview-metrics.md).
+Azure Database pour PostgreSQL propose diverses métriques qui donnent des informations sur le comportement des ressources prenant en charge le serveur MySQL. Chaque métrique est émise selon une fréquence d’une minute et est conservée jusqu’à [93 jours dans l’historique](../azure-monitor/platform/data-platform-metrics.md#retention-of-metrics). Vous pouvez configurer des alertes basées sur les métriques. Pour des instructions étape par étape, consultez [Configurer des alertes](howto-alert-on-metric.md). Les autres tâches incluent la configuration d’actions automatisées, l’exécution d’analyses avancées et l’archivage de l’historique. Pour plus d’informations, consultez [Vue d’ensemble des mesures dans Microsoft Azure](../azure-monitor/platform/data-platform.md).
 
 ### <a name="list-of-metrics"></a>Liste des métriques
 Les métriques suivantes sont disponibles pour Azure Database pour PostgreSQL :
@@ -26,7 +26,7 @@ Les métriques suivantes sont disponibles pour Azure Database pour PostgreSQL :
 |---|---|---|---|
 |cpu_percent|Pourcentage d’UC|Pourcentage|Pourcentage d’UC en cours d’utilisation.|
 |memory_percent|Pourcentage de mémoire|Pourcentage|Pourcentage de mémoire en cours d’utilisation.|
-|io_consumption_percent|Pourcentage d’E/S|Pourcentage|Pourcentage d’E/S en cours d’utilisation.|
+|io_consumption_percent|Pourcentage d’E/S|Pourcentage|Pourcentage d’E/S en cours d’utilisation. (Non applicable pour les serveurs de niveau De base.)|
 |storage_percent|Pourcentage de stockage|Pourcentage|Pourcentage de stockage utilisé par rapport à la limite maximale du serveur.|
 |storage_used|Stockage utilisé|Octets|Quantité de stockage en cours d’utilisation. Le stockage utilisé par le service peut inclure les fichiers de base de données, les journaux d’activité des transactions et les journaux d’activité du serveur.|
 |storage_limit|Limite de stockage|Octets|Stockage maximal pour ce serveur.|
@@ -34,11 +34,11 @@ Les métriques suivantes sont disponibles pour Azure Database pour PostgreSQL :
 |serverlog_storage_usage|Stockage du journal du serveur utilisé|Octets|Quantité de stockage du journal du serveur en cours d’utilisation.|
 |serverlog_storage_limit|Limite de stockage du journal du serveur|Octets|Stockage du journal du serveur maximal défini pour ce serveur.|
 |active_connections|Connexions actives|Count|Nombre de connexions actives sur le serveur.|
-|connections_failed|Connexions ayant échoué|Count|Nombre de connexions au serveur ayant échoué.|
+|connections_failed|Connexions ayant échoué|Count|Nombre de connexions établies qui ont échoué.|
 |network_bytes_egress|Network Out|Octets|Sortie réseau entre connexions actives.|
 |network_bytes_ingress|Network In|Octets|Entrée réseau entre connexions actives.|
-|backup_storage_used|Stockage de sauvegarde utilisé|Octets|Quantité de stockage de sauvegarde utilisée.|
-|pg_replica_log_delay_in_bytes|Retard maximum entre réplicas|Octets|Retard en octets entre le serveur maître et le réplica le plus en retard. Cette métrique est disponible sur le serveur maître uniquement.|
+|backup_storage_used|Stockage de sauvegarde utilisé|Octets|Quantité de stockage de sauvegarde utilisée. La métrique représente le total du stockage consommé par l’ensemble des sauvegardes de base de données complètes, sauvegardes différentielles et sauvegardes de journaux conservées en fonction de la période de rétention de sauvegarde définie pour le serveur. La fréquence des sauvegardes est gérée par le service et expliquée dans l’[article sur les concepts](concepts-backup.md). Pour le stockage géo-redondant, l’utilisation du stockage de sauvegarde est le double de celle du stockage localement redondant.|
+|pg_replica_log_delay_in_bytes|Retard maximum entre réplicas|Octets|Retard en octets entre le serveur principal et le réplica le plus en retard. Cette métrique est disponible sur le serveur principal uniquement.|
 |pg_replica_log_delay_in_seconds|Retard du réplica|Secondes|Temps écoulé depuis la dernière transaction réexécutée. Cette métrique est disponible pour les serveurs réplicas uniquement.|
 
 ## <a name="server-logs"></a>Journaux d’activité du serveur
@@ -55,28 +55,12 @@ La fonctionnalité [Recommandations sur les performances](concepts-performance-r
 
 ## <a name="planned-maintenance-notification"></a>Notification de maintenance planifiée
 
-Les **notifications de maintenance planifiée** vous permettent de recevoir des alertes concernant la maintenance planifiée à venir sur Azure Database pour PostgreSQL (serveur unique). Ces notifications sont intégrées à la maintenance planifiée de [Service Health](../service-health/overview.md) et vous permettent d’afficher toutes les tâches de maintenance planifiée de vos abonnements dans un même emplacement. Cela permet également d’adapter la notification au public approprié pour divers groupes de ressources, car des contacts différents peuvent être responsables de différentes ressources. Vous recevez la notification concernant la maintenance à venir 72 heures avant l’événement.
+Les [notifications de maintenance planifiée](./concepts-planned-maintenance-notification.md) vous permettent de recevoir des alertes concernant la maintenance planifiée à venir sur Azure Database pour PostgreSQL (serveur unique). Ces notifications sont intégrées à la maintenance planifiée de [Service Health](../service-health/overview.md) et vous permettent d’afficher toutes les tâches de maintenance planifiée de vos abonnements dans un même emplacement. Cela permet également d’adapter la notification au public approprié pour divers groupes de ressources, car des contacts différents peuvent être responsables de différentes ressources. Vous recevez la notification concernant la maintenance à venir 72 heures avant l’événement.
 
-> [!Note]
-> Nous mettons tout en œuvre pour fournir une **notification de maintenance planifiée** avec un préavis de 72 heures pour tous les événements. Toutefois, en cas de correctifs critiques ou de sécurité, des notifications peuvent être envoyées dans un délai plus proche de l’événement ou être omises.
-
-### <a name="to-receive-planned-maintenance-notification"></a>Pour recevoir une notification de maintenance planifiée
-
-1. Dans le [portail](https://portal.azure.com), sélectionnez **Intégrité du service**.
-2. Dans la section **Alertes**, sélectionnez **Alertes d’intégrité**.
-3. Sélectionnez **+ Ajouter une alerte d’intégrité de service** et renseignez les champs.
-4. Renseignez les champs obligatoires. 
-5. Choisissez le **type d’événement**, puis sélectionnez **Maintenance planifiée** ou **Tout sélectionner**.
-6. Dans **Groupes d’actions**, définissez la manière dont vous souhaitez recevoir l’alerte (obtenir un e-mail, déclencher une application logique, etc.).  
-7. Vérifiez que l’activation de la règle lors de la création est définie sur Oui.
-8. Sélectionnez **Créer une règle d’alerte** pour terminer votre alerte.
-
-Pour obtenir des instructions détaillées sur la création d’**alertes d’intégrité de service**, consultez [Créer des alertes de journal d’activité sur les notifications de service](../service-health/alerts-activity-log-service-notifications.md).
-
-> [!IMPORTANT]
-> Les notifications de maintenance planifiée sont en préversion.
+Apprenez-en davantage sur la configuration des notifications dans le document relatif aux [notifications de maintenance planifiée](./concepts-planned-maintenance-notification.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Consultez le [guide pratique pour configurer des alertes](howto-alert-on-metric.md) pour savoir comment créer une alerte sur une métrique.
-- Pour plus d’informations sur la façon d’accéder aux métriques et de les exporter à l’aide du portail Azure, de l’API REST ou de CLI, consultez [Vue d’ensemble des métriques Azure](../monitoring-and-diagnostics/monitoring-overview-metrics.md).
+- Pour plus d’informations sur la façon d’accéder aux métriques et de les exporter à l’aide du portail Azure, de l’API REST ou de CLI, consultez [Vue d’ensemble des métriques Azure](../azure-monitor/platform/data-platform.md).
 - Lisez notre blog sur les [meilleures pratiques de surveillance de votre serveur](https://azure.microsoft.com/blog/best-practices-for-alerting-on-metrics-with-azure-database-for-postgresql-monitoring/).
+- Apprenez-en davantage sur les [notifications de maintenance planifiée](./concepts-planned-maintenance-notification.md) dans Azure Database pour PostgreSQL – Serveur unique.

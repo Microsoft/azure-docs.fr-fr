@@ -10,14 +10,20 @@ ms.subservice: bing-visual-search
 ms.topic: tutorial
 ms.date: 03/31/2020
 ms.author: aahi
-ms.openlocfilehash: ad24a8a194a11c3fd5f7f77ea8c52197d5438edc
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a9005082148803423ac20b4f18dd974bb5b43b80
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477908"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96486859"
 ---
 # <a name="tutorial-find-similar-images-from-previous-searches-using-an-image-insights-token"></a>Tutoriel : Rechercher des images similaires dans des recherches précédentes à l’aide d’un jeton d’insights d’image
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 La bibliothèque de client Recherche visuelle Bing vous permet de rechercher des images en ligne à partir de recherches précédentes qui retournent un `ImageInsightsToken`. Cette application obtient un `ImageInsightsToken` et utilise le jeton dans une recherche ultérieure. Elle envoie alors le `ImageInsightsToken` à Bing, puis retourne des résultats qui incluent les URL de recherche Bing et les URL des images similaires disponibles en ligne.
 
@@ -38,7 +44,7 @@ Le code source complet de ce didacticiel est disponible sur [GitHub](https://git
 
 ## <a name="get-the-imageinsightstoken-from-the-bing-image-search-client-library"></a>Obtenir le jeton ImageInsightsToken à partir de la bibliothèque de client Recherche d’images Bing
 
-Cette application utilise un `ImageInsightsToken` obtenu par l’intermédiaire de la [bibliothèque de client Recherche d’images Bing](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/image-search-sdk-quickstart). Dans une nouvelle application console C#, créez un client pour appeler l’API en utilisant `ImageSearchClient()`. Utilisez ensuite `SearchAsync()` avec votre requête :
+Cette application utilise un `ImageInsightsToken` obtenu par l’intermédiaire de la [bibliothèque de client Recherche d’images Bing](../bing-image-search/quickstarts/client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp). Dans une nouvelle application console C#, créez un client pour appeler l’API en utilisant `ImageSearchClient()`. Utilisez ensuite `SearchAsync()` avec votre requête :
 
 ```csharp
 var client = new ImageSearchClient(new Microsoft.Azure.CognitiveServices.Search.ImageSearch.ApiKeyServiceClientCredentials(subKey));
@@ -123,14 +129,14 @@ L’obtention des URL des images réelles à partir de types d’action nécessi
     }
 ```
 
-Pour plus d’informations sur ces types de données, consultez [Images : Recherche visuelle](https://docs.microsoft.com/rest/api/cognitiveservices/bingvisualsearch/images/visualsearch).
+Pour plus d’informations sur ces types de données, consultez [Images : Recherche visuelle](/rest/api/cognitiveservices/bingvisualsearch/images/visualsearch).
 
 ## <a name="returned-urls"></a>URL retournées
 
 L’application complète retourne les URL suivantes :
 
-|ActionType  |URL  | |
-|---------|---------|---------|
+|ActionType  |URL  |
+|---------|---------|
 |MoreSizes -> WebSearchUrl     |         |
 |VisualSearch -> WebSearchUrl     |         |
 |ImageById -> WebSearchUrl    |         |

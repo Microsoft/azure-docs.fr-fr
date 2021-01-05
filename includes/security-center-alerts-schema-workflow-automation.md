@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/10/2020
 ms.author: memildin
 ms.custom: include file
-ms.openlocfilehash: 0b6864c3304b86e80549297fc073a2e387000d64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 55390a3eb2a074729b4a0868416a95e208325b76
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80272640"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91400935"
 ---
 ```json
 {
@@ -70,7 +70,7 @@ ms.locfileid: "80272640"
 |**Intention**|Enum|Intention de la chaîne de destruction derrière l’alerte. Pour obtenir la liste des valeurs prises en charge, ainsi que des explications sur les intentions de chaîne de destruction prises en charge par Azure Security Center, consultez [Intentions](../articles/security-center/alerts-reference.md#intentions).<br/>Ce champ peut avoir plusieurs valeurs (séparées par des virgules).|
 |**IsIncident**|Bool|Ce champ détermine si l’alerte est un incident (regroupement composé de plusieurs alertes) ou une alerte unique. La valeur par défaut du champ est « false » (ce qui signifie qu’il s’agit d’une alerte unique).|
 |**ProcessingEndTime**|DateTime|Heure à laquelle l’alerte a été accessible à l’utilisateur final dans le produit d’origine contenant l’alerte.|
-|**ProductName**|String|Nom du produit qui a publié cette alerte (Azure Security Center, Azure ATP, Microsoft Defender ATP, O365 ATP, MCAS, etc.).|
+|**ProductName**|String|Nom du produit qui a publié cette alerte (Azure Security Center, Azure ATP, Microsoft Defender ATP, MCAS, etc.).|
 |**RemediationSteps**|Liste <String>|Éléments d’action manuelle à mettre à jour pour corriger l’alerte.|
 |**ResourceIdentifiers**|Liste (identificateurs de ressource)|Identificateurs de ressource pour cette alerte qui peuvent être utilisés pour diriger l’alerte vers le groupe approprié d’exposition au produit (locataire, espace de travail, abonnement, etc.). Il peut y avoir plusieurs identificateurs de type différent par alerte.|
 |**Niveau de gravité**|Enum|Gravité de l’alerte telle qu’elle est signalée par le fournisseur. Valeurs possibles : informatif, faible, moyen et élevé.|

@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à Adaptive Insights | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Adaptive Insights.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 13af9d00-116a-41b8-8ca0-4870b31e224c
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 07/19/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: bf05fc30a2b111a12c0b8e131db5117ec784075b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 70c59e4352d41070c22b0e268ef1cf5cfa1c7211
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74232122"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92313336"
 ---
 # <a name="tutorial-integrate-adaptive-insights-with-azure-active-directory"></a>Tutoriel : Intégrer Adaptive Insights à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer Adaptive Insights à A
 * Permettre à vos utilisateurs de se connecter automatiquement à Adaptive Insights avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -104,7 +99,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 2. Accédez à **Administration**.
 
-    ![Administrateur](./media/adaptivesuite-tutorial/ic805644.png "Admin")
+    ![Capture d’écran mettant en évidence Administration dans le volet de navigation.](./media/adaptivesuite-tutorial/ic805644.png "Admin")
 
 3. Dans la section **Utilisateurs et rôles**, cliquez sur **Gérer les paramètres d’authentification unique SAML**.
 
@@ -201,13 +196,12 @@ Pour permettre aux utilisateurs Azure AD de se connecter à Adaptive Insights, v
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Lorsque vous cliquez sur la mosaïque Adaptive Insights dans le volet d’accès, vous devez être connecté automatiquement à l’application Adaptive Insights pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Lorsque vous cliquez sur la mosaïque Adaptive Insights dans le volet d’accès, vous devez être connecté automatiquement à l’application Adaptive Insights pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

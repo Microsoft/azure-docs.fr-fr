@@ -10,15 +10,15 @@ ms.service: azure-netapp-files
 ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
-ms.date: 11/08/2019
+ms.topic: how-to
+ms.date: 10/14/2020
 ms.author: b-juche
-ms.openlocfilehash: 77178a23206eadae941794c92b8dd99fe2ca1e05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c3c853190d5f63bbe9012727d8b7b7ac91da135f
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73906248"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92072150"
 ---
 # <a name="configure-nfsv41-default-domain-for-azure-netapp-files"></a>Configurer le domaine par défaut NFSv4.1 pour Azure NetApp Files
 
@@ -26,11 +26,11 @@ NFSv4 introduit le concept de domaine d’authentification. Azure NetApp Files p
 
 ## <a name="default-behavior-of-usergroup-mapping"></a>Comportement par défaut du mappage de l’utilisateur/groupe
 
-Par défaut, le mappage racine est réglé sur l’utilisateur `nobody`, car le domaine NFSv4 est défini sur `localdomain`. Quand vous montez un volume Azure NetApp Files NFSv4.1 en tant que racine, vous voyez des autorisations de fichiers comme suit :  
+Par défaut, le mappage racine est réglé sur l’utilisateur `nobody`, car le domaine NFSv4 est défini sur `localdomain` par défaut. Quand vous montez un volume Azure NetApp Files NFSv4.1 en tant que racine, vous voyez des autorisations de fichiers comme suit :  
 
 ![Comportement par défaut du mappage de l’utilisateur/groupe pour NFSv4.1](../media/azure-netapp-files/azure-netapp-files-nfsv41-default-behavior-user-group-mapping.png)
 
-Comme le montre l’exemple ci-dessus, l’utilisateur de `file1` doit être `root`, mais il est mappé à `nobody` par défaut.  Cet article explique comment définir l’utilisateur `file1` sur `root`.  
+Comme le montre l’exemple ci-dessus, l’utilisateur de `file1` doit être `root`, mais il est mappé à `nobody` par défaut.  Cet article explique comment définir l’utilisateur `file1` sur `root` en modifiant le paramètre `idmap Domain` sur `defaultv4iddomain.com`.  
 
 ## <a name="steps"></a>Étapes 
 
@@ -54,7 +54,7 @@ Comme le montre l’exemple ci-dessus, l’utilisateur de `file1` doit être `ro
 
 L’exemple suivant illustre la modification de l’utilisateur/groupe obtenue : 
 
-![Configuration résultante pour NFSv4.1](../media/azure-netapp-files/azure-netapp-files-nfsv41-resulting-config.png)
+![Capture d’écran montrant un exemple de la modification de groupe/d’utilisateur obtenue.](../media/azure-netapp-files/azure-netapp-files-nfsv41-resulting-config.png)
 
 Comme le montre l’exemple, l’utilisateur/groupe est désormais passé de `nobody` à `root`.
 
@@ -64,7 +64,7 @@ Azure NetApp Files prend en charge les utilisateurs locaux (utilisateurs créés
 
 Dans l’exemple suivant, `Host1` a trois comptes d’utilisateur de test existants (`testuser01`, `testuser02`, `testuser03`) : 
 
-![Configuration résultante pour NFSv4.1](../media/azure-netapp-files/azure-netapp-files-nfsv41-host1-users.png)
+![Capture d’écran montrant que Host1 a trois comptes d’utilisateur de test.](../media/azure-netapp-files/azure-netapp-files-nfsv41-host1-users.png)
 
 Sur `Host2`, notez que les comptes d’utilisateur de test n’ont pas été créés, mais que le même volume est monté sur les deux hôtes :
 
